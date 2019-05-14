@@ -2,84 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 950461C1F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 07:40:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCBFD1C34F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 08:36:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hQQAU-0007VW-FF; Tue, 14 May 2019 05:40:02 +0000
+	id 1hQR3M-0002SR-0f; Tue, 14 May 2019 06:36:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <qkrwngud825@gmail.com>) id 1hQQAS-0007VA-LO
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 05:40:00 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hQR3K-0002SF-Ov
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 06:36:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LX0XaYHmt6JczsEsNVrSRTTBxFWPZ8BYZiJCI1WPlfs=; b=Pzqttt35MzxItkwxiWwfdakf7S
- 0e8QrACAUC2wQS0WiGz+7Gj7Asnj3RSznQmFdEcmFw3NfNq8+EQfO7gmxEh5TVSNu1lBnPABxxMN9
- HsXl06hEgDdfWVr1xLuQNOYN5oKlq0Axg9kKhHPNQK/6j7n7tqXWm3qQuRCRet6KS2fo=;
+ bh=E8XzTsUoeBYik5CPnRoGc5rHIaaysxAqExM1aGHFAlc=; b=W+mp2h2lnn/9fPIs0iT2IQNVdN
+ tmMljo9yrHN6bFLCpbIikWMWhC23nRzspRM3iMz5BLbRnpv7pAyYdkPfiBE9bXH89zYnU2cnFzPFO
+ gpLwVgIrvfAMG5d+8x2kVHpaWMXwlYg/psFqLOW9spwK569nVWFrP0fELMXxwUps44Sg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LX0XaYHmt6JczsEsNVrSRTTBxFWPZ8BYZiJCI1WPlfs=; b=RbWJJvwtwgvZsn0izBBY5keatp
- Cmvz27lnKSyoMOaqEbYYD0cbssn2vA1teaNU2/g5ISu6yxd9Ndw/hJsGJwJi9CL3QWe58lgiZElAL
- uqSkp3xVppysLiVNvLSeivP3sm4L+Xa1/GIjPivLy4TwrC3jPFF/c9Bv9j5KeR7luUcg=;
-Received: from mail-qt1-f194.google.com ([209.85.160.194])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=E8XzTsUoeBYik5CPnRoGc5rHIaaysxAqExM1aGHFAlc=; b=l
+ 6hUZH4VRQ/6T3JmkzGAYH6K5ePuL1g5KyjM5mRRU92tXbY64FbyGldm4iIW1jeYgbZIiyHA2PVmHg
+ MbQchVlkTWTnaRPRKidDuM823IETiCOFfrsKm6n5f81YYF/IoQgWetwBbClwfrNeiZFI27P2o6iSc
+ yupvKNP3fMX2FnMQ=;
+Received: from mail-pg1-f193.google.com ([209.85.215.193])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hQQAQ-00GCb9-NZ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 05:40:00 +0000
-Received: by mail-qt1-f194.google.com with SMTP id f24so13189041qtk.11
+ id 1hQR3J-00FmwV-FS
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 06:36:42 +0000
+Received: by mail-pg1-f193.google.com with SMTP id w22so8076600pgi.6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 13 May 2019 22:39:58 -0700 (PDT)
+ Mon, 13 May 2019 23:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LX0XaYHmt6JczsEsNVrSRTTBxFWPZ8BYZiJCI1WPlfs=;
- b=Gekg/ImeDsjdwbPk3/9Rec4Nz+REdcTbuknK61Hxcqut8GFddxQb8OhftCzpwpFmzx
- SLqT9+k7QiUXSoifO0lm/QfE2jSK94dfcZgdaAM9mYzow8Ie+evrF/C4+bhC+QxdEK+g
- RtwGV6qJSY3Det823v7PxQf3yt31hBY7GSxVt7ziPaoS7hNoQ4+9+4XCPMNSeBcJXXhS
- WDqCHNsD9juiWMQFGLajowPD8rNgf6+EJNzXcblGHVU1BK3vjalBgcWebTmxMus4WD7U
- w9PPt6y39A+fAGPB9imEHReWkn+8GrmuSIghIZ/UlQLw1/PDuyKZO+WVg4EeUF+GUF3O
- 1aVw==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=E8XzTsUoeBYik5CPnRoGc5rHIaaysxAqExM1aGHFAlc=;
+ b=mVnFsoY8IgVaatdta6T6OScsoTRvKkpZcpJ3s7ATKvOBRB7NT6OGlZoJJHBYXUAacz
+ U6B8SiggXoKEQPa/TtQ/BBKD9HzItvAggrXyyc3l6ag0RyhnPGB1Oe9Cnh8izcHy6nG1
+ uhwzVjlgJwhWHfLqG+JwWgj+hL1Hbpq327IAn9VVXeX/4ANoeyQbDE5BRHAk3HAGM6Mb
+ QEUiM1J6yvWu8I8nPNy69mZU3PAmSrjuCYYblw9NSMwISE7Q3rCsOsaojJ99kHtAtvXc
+ 5pAUs8GUghV9haW3FugAXVO79nP5MV5l3TSvagzfKWKK/o5cO2FsSJfpGtf6WJZ57vkO
+ KdmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LX0XaYHmt6JczsEsNVrSRTTBxFWPZ8BYZiJCI1WPlfs=;
- b=LMYp2J7bN5wY5QxL79lUJ0mCz05RwBitdDB9t5UDSnQffsZYtjio7yT3edttr/jKDD
- TuhExczRkf3i2a2ej0fIqy00IchA4uyQOocZpOCEMZdU2JlDmsHZKazvOA1wWv+wIi1i
- m1vOt+sYuAEVG5mUkhYq/psPMJn2pWjjkNpj9XFNQjj4stHZyQhFygL0+smSI0Qirmam
- J6rEciooVBd1MZ1XaNvAFYivIAaztNI8zMi0gSuwF7vWVqj2OTV1Sjk1Cdjm+wjCPmRX
- vlce5osCfYsdSKs2Fmw1t6xgn07O31hA4bVfDUbYN8Iza20BTCA+ME2RfbLwvzpnQOUZ
- mWvw==
-X-Gm-Message-State: APjAAAVfpQTDfpLWCC6a5FDApqQeT4iNbVOMre4th0KJY2iMqQBzVZtg
- iR+qhMEfC8EVXmZvnxiGACc1fY7zAqLYalYeRHgOYFbf
-X-Google-Smtp-Source: APXvYqxoQmjPOX4z5nn8aA71WQnVuMX6mmygZa/Jn16QvBTxak3EDI/Irrk3FF8KmKluSoI68DkTq3eLvSlzUS57szg=
-X-Received: by 2002:a0c:ee28:: with SMTP id l8mr26055818qvs.67.1557812392608; 
- Mon, 13 May 2019 22:39:52 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=E8XzTsUoeBYik5CPnRoGc5rHIaaysxAqExM1aGHFAlc=;
+ b=rHkIwWQ86T66m85EF5Y5o2dUmQF+BKCbUX6izXPsrQZgCGLvgOEO5sgSJ43+IEUCDe
+ x9RwHnGLWapvG3aouZ+zuwlCw7B7LLhBrOhouVG2+vz8KYe/E6oj4gNSIYU3pLE+UCKW
+ 2mbDd5VJjLEMoJGD6VFk+b/Z3ITXsrYL8sNO616YSMn1M9Qkhfm/FhskPTDJCIyvVomu
+ Q5ggoBsBRGgmXKkMSc1rDiSWzij/DmzMXGccL7PPl8EExNfKrwUvPUCYrtDKgbGrNB/K
+ CLD9RLltSN9cKEzSS2BH4sCqQIZHLQ/fkXi5u0LJdDXu52LUhsynMohUmxqaMjYCZe5e
+ SFvA==
+X-Gm-Message-State: APjAAAVkBDqkTiV/HLW+2m8reuyZJizgpte6k9ioQSzjfnyXgUXfZ91I
+ lXHXDQ4uWIkh/TXZsp5ZHFzg7uy7gtXxpQ==
+X-Google-Smtp-Source: APXvYqyNSYN8DpKRQfkx2wvwl6HxJ5w7frUAAeu0bhkXLgOiBHzPsTfRlosEA6QJRBMl+sMtMc1ppw==
+X-Received: by 2002:a62:8245:: with SMTP id w66mr38497239pfd.58.1557815795385; 
+ Mon, 13 May 2019 23:36:35 -0700 (PDT)
+Received: from localhost.localdomain ([121.170.223.70])
+ by smtp.gmail.com with ESMTPSA id 19sm19767285pfz.84.2019.05.13.23.36.33
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 13 May 2019 23:36:34 -0700 (PDT)
+From: Park Ju Hyung <qkrwngud825@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 14 May 2019 15:36:21 +0900
+Message-Id: <20190514063623.57162-1-qkrwngud825@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20180529205048.39694-1-jaegeuk@kernel.org>
-In-Reply-To: <20180529205048.39694-1-jaegeuk@kernel.org>
-From: Ju Hyung Park <qkrwngud825@gmail.com>
-Date: Tue, 14 May 2019 14:39:41 +0900
-Message-ID: <CAD14+f154_t1-TbbSDb9xV_ikDAWfF+8H7aOSK4VF8UmqWRDAQ@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (qkrwngud825[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.193 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.194 listed in wl.mailspike.net]
+ [209.85.215.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit (qkrwngud825[at]gmail.com)
@@ -88,12 +94,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.160.194 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1hQQAQ-00GCb9-NZ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: issue discard commands proactively in
- high fs utilization
+X-Headers-End: 1hQR3J-00FmwV-FS
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: remove sleep_time under gc_urgent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,36 +108,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, May 30, 2018 at 5:51 AM Jaegeuk Kim <jaegeuk@kernel.org> wrote:
->
-> In the high utilization like over 80%, we don't expect huge # of large discard
-> commands, but do many small pending discards which affects FTL GCs a lot.
-> Let's issue them in that case.
->
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 6e40e536dae0..8c1f7a6bf178 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -915,6 +915,38 @@ static void __check_sit_bitmap(struct f2fs_sb_info *sbi,
-> +                       dpolicy->max_interval = DEF_MIN_DISCARD_ISSUE_TIME;
+gc_urgent is meant to be a hint from the user to force f2fs to run GC
+aggressively, which means they are willing to take the hit on increased
+latency during gc_urgent. It's meaningless to sleep between each GC under
+gc_urgent, Not to mention that the default value of 500 ms makes gc_urgent
+super ineffective.
 
-Isn't this way too aggressive?
+Remove urgent_sleep_time entirely and allow GC to be finished much faster.
 
-Discard thread will wake up on 50ms interval just because the user has
-used 80% of space.
-60,000ms vs 50ms is too much of a stark difference.
+Use 1 for wait_ms instead of 0 to prevent possible CPU hoggings.
 
-I feel something like 10 seconds(10,000ms) could be a much more
-reasonable choice than this.
+Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+---
+ fs/f2fs/gc.c    | 3 +--
+ fs/f2fs/gc.h    | 2 --
+ fs/f2fs/sysfs.c | 3 ---
+ 3 files changed, 1 insertion(+), 7 deletions(-)
 
-Thanks.
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 963fb4571fd9..9c3ed89c8c5b 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -77,7 +77,7 @@ static int gc_thread_func(void *data)
+ 		 * So, I'd like to wait some time to collect dirty segments.
+ 		 */
+ 		if (sbi->gc_mode == GC_URGENT) {
+-			wait_ms = gc_th->urgent_sleep_time;
++			wait_ms = 1;
+ 			mutex_lock(&sbi->gc_mutex);
+ 			goto do_gc;
+ 		}
+@@ -129,7 +129,6 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 		goto out;
+ 	}
+ 
+-	gc_th->urgent_sleep_time = DEF_GC_THREAD_URGENT_SLEEP_TIME;
+ 	gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME;
+ 	gc_th->max_sleep_time = DEF_GC_THREAD_MAX_SLEEP_TIME;
+ 	gc_th->no_gc_sleep_time = DEF_GC_THREAD_NOGC_SLEEP_TIME;
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index bbac9d3787bd..de79a867837e 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -10,7 +10,6 @@
+ 						 * whether IO subsystem is idle
+ 						 * or not
+ 						 */
+-#define DEF_GC_THREAD_URGENT_SLEEP_TIME	500	/* 500 ms */
+ #define DEF_GC_THREAD_MIN_SLEEP_TIME	30000	/* milliseconds */
+ #define DEF_GC_THREAD_MAX_SLEEP_TIME	60000
+ #define DEF_GC_THREAD_NOGC_SLEEP_TIME	300000	/* wait 5 min */
+@@ -27,7 +26,6 @@ struct f2fs_gc_kthread {
+ 	wait_queue_head_t gc_wait_queue_head;
+ 
+ 	/* for gc sleep time */
+-	unsigned int urgent_sleep_time;
+ 	unsigned int min_sleep_time;
+ 	unsigned int max_sleep_time;
+ 	unsigned int no_gc_sleep_time;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 729f46a3c9ee..0165431e83e5 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -397,8 +397,6 @@ static struct f2fs_attr f2fs_attr_##_name = {			\
+ 	.id	= _id,						\
+ }
+ 
+-F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_urgent_sleep_time,
+-							urgent_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_min_sleep_time, min_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_max_sleep_time, max_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_no_gc_sleep_time, no_gc_sleep_time);
+@@ -459,7 +457,6 @@ F2FS_FEATURE_RO_ATTR(sb_checksum, FEAT_SB_CHECKSUM);
+ 
+ #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+ static struct attribute *f2fs_attrs[] = {
+-	ATTR_LIST(gc_urgent_sleep_time),
+ 	ATTR_LIST(gc_min_sleep_time),
+ 	ATTR_LIST(gc_max_sleep_time),
+ 	ATTR_LIST(gc_no_gc_sleep_time),
+-- 
+2.21.0
+
 
 
 _______________________________________________
