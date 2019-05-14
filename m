@@ -2,104 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D024D1C7D3
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 13:30:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hQVdk-0008A3-PA; Tue, 14 May 2019 11:30:36 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <qkrwngud825@gmail.com>) id 1hQVdi-00089v-Ty
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 11:30:34 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 040D31C85A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 14:16:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:In-Reply-To:
+	References:To:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=vs/L64grMhVzjXlpdrtfBjCFkxs6XED/pgLudZdSiFc=; b=Ot3TCvffcDlbCQKqlqM1AYAsL4
+	KtfPZXbA0/Nn0HGe9/lBBK7ZHOBRwL4tSBQ0Yj9kDsNIH54xfdKy+V5lcCjqHUf0SRUVCsYlJqP+A
+	CWCz+iEjr8yGwwJDfNncSTAEA6gpCStB0V+mBadq8o1LjufJCFot6hx2HFayxmbqrM/k=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1hQWM3-0008K1-Au; Tue, 14 May 2019 12:16:23 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <zhaowuyun@wingtech.com>) id 1hQWLz-0008Iu-Ur
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:16:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=82gBYUg0Q9zvN8BFETtKShYk93y/tqU5T7Ky5uxnMeU=; b=edm82gIi3P1nvGZs08wvwB9Qlg
- ZC233Iv8h1fIJ0TanDmvite1G1Y1bjGEJYFW+PNlKzM0+CSSKIgVZZO/1Z3oSmVdZq766cnzMKA2s
- o+faDaJrEhR/g2RauXz+1P7TIENTWvClwCAGgprvYzFadhEmJYpk3yToCaOX7UqjKV8I=;
+ bh=BnOpgjgSJmY/KUTEMb1w36Xj7zoh6174VE9qyIbP7NE=; b=XyZtd4hY5dXDqR1lPZcUrdrgbl
+ 09pCD9TKdYyMIcXuptSgM2673fz2CtW+oaXl2z6exWdnDKKSoJc72bjalMWlbj3YWYVzZyBC8+kFt
+ Wc6zTkB26jQESwwT9LBrY8tsJBAhlWTuNV0KARZmaH3KYWZlcNbl5izPTj5wCEiOUYn0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=82gBYUg0Q9zvN8BFETtKShYk93y/tqU5T7Ky5uxnMeU=; b=aE3GreqNqLHfKc3AXWzcAP5JPM
- mirPdegniFCoV8A8NYf/J67iWKPl3Cw5u02rAnn5ukNitax/d+I/1jhhk8LNgTJfXImSyX7X+U+Rm
- xP4A1m/0EAqrCUC7726lgZ0LKRD63S7r1I6MrCo9Hhy18stgPS68/6xiXKMdEIR8ym7c=;
-Received: from mail-qk1-f194.google.com ([209.85.222.194])
+ bh=BnOpgjgSJmY/KUTEMb1w36Xj7zoh6174VE9qyIbP7NE=; b=DJ5Q9nR8UE3qDRQxZ0/KRQSqNm
+ bLQMRjsKFCZAjcGnCSdi8YZkdl8klUJRGVHTsbuCTU37LCpT5wIXiKgpwWhMdamYdg/XlaH2hO8vK
+ EUY/lQtNxzX5MC5SUiQ9YSHBElSbVvrGp/SNYHW14PYcnct10izKQBfFsaP94UBOg2YM=;
+Received: from mail.wingtech.com ([180.166.216.14])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hQVdh-00GV0M-I6
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 11:30:34 +0000
-Received: by mail-qk1-f194.google.com with SMTP id z128so10009072qkb.6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 14 May 2019 04:30:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=82gBYUg0Q9zvN8BFETtKShYk93y/tqU5T7Ky5uxnMeU=;
- b=XHQ23WcvhAqxm0TqEG5lpWppngctR3+8ulR7ArsBpJ1/o42gCSpXomngtmB/APIkds
- Ou8LK98M/V00SSd8I2xbUF+L1BOp/AhlxZDl4jrWEtltxstryEFZrmjNpxhuD24xwg0X
- J4Psa0jEimFejBChHgzLmhRfSKkWdUJwdNAmatqTiavsRFH77MqReG1LQqVRcBl+TiKX
- +vsrc3/OLB8PIcXlULPZ/Q0dZvwE0rYXWMkuy8iHjDk8MRu02LRTANLer3lyEQ+OlWTh
- 2Gp9j6kqkbh37JlZxFSUd2jrTaQofBj+6cUhXDm9tVDmmsd8tKy1kVQ2WMZdILWYbubi
- hdeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=82gBYUg0Q9zvN8BFETtKShYk93y/tqU5T7Ky5uxnMeU=;
- b=kigppRZdwRghFMTO7c81MVl09CFUAsVphc/ilE+4GzVoTj4DPsAEut3zo14Vp9LD4E
- aasPIVMUvPJ8gJJJfsDSm03aBQGhuH/EO4fhzEP5pFpVurO4qp+3uHx9Kn4F59FuUyk9
- bzXhz/qQotNHFW3TMoiIfH0h/ju4OsxkI7PAlTQ5SaoDYMbLbCxw3dldNl1ZWf+u7Kvu
- Mguu9x5WHW/VJzfHaZ1tGe8342bc64sgxWh5Ks2/nND1WqhYnYhuegRklt2L5oMweSBX
- lbv4jH1UyxL9xev8VjIbJTbkDN5bbty7d8Ruc5KidMkL2qLXI0xYE04Kn7bwq+iy1c3I
- kDOQ==
-X-Gm-Message-State: APjAAAUrR53uuS9c6gS8Fbf/OMGKPsrTaOyyn7btHf+xk/V12JEunsk0
- ptdDK/zilaqWl9VNCmdVoDfDIaEDdZ/8QUVlceI=
-X-Google-Smtp-Source: APXvYqxoll+KHgC6xrLWuid2EkLEBz+V6WvBz4mUTYfA8mc74+i+Ae83DkWhY2syf2npg0O7UQ33kowDHPG3o1uL8hQ=
-X-Received: by 2002:a37:a705:: with SMTP id q5mr26543989qke.123.1557833427078; 
- Tue, 14 May 2019 04:30:27 -0700 (PDT)
+ (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.90_1) id 1hQWLw-00GXJ2-Rp
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:16:19 +0000
+Received: from zhaowuyun ([192.168.50.243]) (user=zhaowuyun mech=LOGIN bits=0)
+ by mail.wingtech.com  with ESMTP id x4ECG3Yc001265-x4ECG3Yd001265;
+ Tue, 14 May 2019 20:16:03 +0800
+To: "'Chao Yu'" <yuchao0@huawei.com>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20190505074505.103127-1-yuchao0@huawei.com>
+In-Reply-To: <20190505074505.103127-1-yuchao0@huawei.com>
+Date: Tue, 14 May 2019 20:16:03 +0800
+Message-ID: <000001d50a4e$cc819970$6584cc50$@wingtech.com>
 MIME-Version: 1.0
-References: <20190514063623.57162-1-qkrwngud825@gmail.com>
- <81acd624-8698-a584-f298-7e64ad77752d@huawei.com>
- <CAD14+f0Zia3oAi+QO+wCBrbV_=csp1SWB4BE7yN0h+=paZpg=w@mail.gmail.com>
- <8cd6214c-d15d-d6c6-224e-69ad7936605d@huawei.com>
-In-Reply-To: <8cd6214c-d15d-d6c6-224e-69ad7936605d@huawei.com>
-From: Ju Hyung Park <qkrwngud825@gmail.com>
-Date: Tue, 14 May 2019 20:30:16 +0900
-Message-ID: <CAD14+f2G5M7qqEvztd7nC=MNvSbLtkRKzNA89zGdYSb1FgP6LQ@mail.gmail.com>
-To: Chao Yu <yuchao0@huawei.com>
-X-Spam-Score: 1.1 (+)
+X-Mailer: Microsoft Outlook 15.0
+Thread-Index: AQJXmHV72LbJqQSDjtM9l0jrEhDGBKVlbG3Q
+Content-Language: zh-cn
+X-FEAS-AUTH-USER: zhaowuyun
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (qkrwngud825[at]gmail.com)
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.194 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.194 listed in wl.mailspike.net]
+ trust [180.166.216.14 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (qkrwngud825[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hQVdh-00GV0M-I6
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: remove sleep_time under gc_urgent
+X-Headers-End: 1hQWLw-00GXJ2-Rp
+Subject: [f2fs-dev] =?utf-8?b?562U5aSNOiBbUEFUQ0ggdjIgMS8yXSBta2ZzLmYyZnM6?=
+	=?utf-8?q?_write_fill_chunk_in_sparse_file_for_zeroed_block?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,46 +82,252 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+From: zhaowuyun via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: zhaowuyun <zhaowuyun@wingtech.com>
+Cc: jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hi Chao,
 
-On Tue, May 14, 2019 at 8:19 PM Chao Yu <yuchao0@huawei.com> wrote:
-> > I've been using this(with a slightly different code) for years and yet to notice
-> > any spikes in lags/slowdowns. Worst scenario, I'd just have to deal with an
-> > added split second(100ms max?) delay in screen wake-up.
->
-> I'm not sure about why this happened... maybe you need to do some test to
-> analyse the root cause of it, filesystem/device fragment? too many undiscard
-> space? or non-storage issue?
+using the same steps, 
+make the userdata partition dirty and fastboot-flash userdata.img to see the mount is successful or not
 
-Um, I'm not sure you understood what I said.
-What I meant is that I haven't found any issues with using an approach
-like this(gc_urgent with 1ms sleep intervals) for years on various
-Android devices.
+to test the patch, confirm that issue is fixed by this patch.
+Hope to see it accepted.
 
-> I agreed that it should done as soon as possible, but it needs to consider IO
-> race in between Apps after screen wake-up and BGGC to avoid potential ANR.
+Best Wishes,
+Zac (zhaowuyun@wingtech.com)
 
-I actually need to check whether vold turns off gc_urgent immediately
-after screen turns itself back on.
-I don't think we need to take potential ANR in to account *if* vold
-stops gc_urgent right after screen-on. What do you think?
+> 
+> As zhaowuyun reported:
+> 
+> we met one problem of f2fs, and found one issue of make_f2fs, so I write
+> this email to search for your help to confirm this issue.
+> 
+> The issue was found on one of Android projects. We use f2fs as the
+> filesystem of userdata, and make sparse userdata.img using following
+> command, which invoked in script mkf2fsuserimg.sh make_f2fs -S $SIZE -f -O
+> encrypt -O quota -O verity $MKFS_OPTS $OUTPUT_FILE
+> 
+> use fastboot to flash this userdata.img to device, and it encountered f2fs
+> problem and leading to the mount fail of data partition.
+> 
+> we can make this issue 100% persent reproduced by making the data
+> partition dirty before flashing userdata.img.
+> 
+> suspect that issue is caused by the dirty data in the data partition.
+> so we checked that source code of make_f2fs in f2fs-tool, found that when
+> making f2fs, it use dev_fill to do some process:
+> 
+> ...
+> 
+> we change code to the following, and the issue is gone.
+> 
+> if (c.sparse_mode)
+>        return dev_write(buf, offset, len);
+> 
+> Chao Yu:
+> >
+> > After checking the codes, IIUC, I guess the problem here is, unlike
+> > img2simg, mkfs.f2fs won't record zeroed block in sparse image, so
+> > during transforming to normal image, some critical region like
+> > NAT/SIT/CP.payload area weren't be zeroed correctly, later kernel may
+> > load obsoleting data from those region.
+> >
+> > Also, The way you provide will obviously increase the size of sparse
+> > file, since with it we need to write all zeroed blocks of
+> > NAT/SIT/CP.payload to sparse file, it's not needed.
+> >
+> > Not sure, maybe we should use sparse_file_add_fill() to record zeroed
+> > blocks, so that this will make formatted image more like img2simged one.
+> 
+> Jaegeuk:
+> > We have to call sparse_file_add_fill() for dev_fill().
+> 
+> This patch fixes to support writing fill chunk sparse file for those zeroed
+> blocks in mkfs.f2fs.
+> 
+> Reported-by: zhaowuyun <zhaowuyun@wingtech.com>
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> v2:
+> - don't return -EEXIST if block[x] has non-zeroed data.
+>  lib/libf2fs_io.c | 84 +++++++++++++++++++++++++++++++++++++++-------
+> --
+>  1 file changed, 69 insertions(+), 15 deletions(-)
+> 
+> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c index f848510..4d0ea0d 100644
+> --- a/lib/libf2fs_io.c
+> +++ b/lib/libf2fs_io.c
+> @@ -36,6 +36,7 @@ struct f2fs_configuration c;  struct sparse_file
+> *f2fs_sparse_file;  static char **blocks;  u_int64_t blocks_count;
+> +static char *zeroed_block;
+>  #endif
+> 
+>  static int __get_device_fd(__u64 *offset) @@ -103,6 +104,8 @@ static int
+> sparse_write_blk(__u64 block, int count, const void *buf)
+> 
+>  	for (i = 0; i < count; ++i) {
+>  		cur_block = block + i;
+> +		if (blocks[cur_block] == zeroed_block)
+> +			blocks[cur_block] = NULL;
+>  		if (!blocks[cur_block]) {
+>  			blocks[cur_block] = calloc(1, F2FS_BLKSIZE);
+>  			if (!blocks[cur_block])
+> @@ -114,6 +117,20 @@ static int sparse_write_blk(__u64 block, int count,
+> const void *buf)
+>  	return 0;
+>  }
+> 
+> +static int sparse_write_zeroed_blk(__u64 block, int count) {
+> +	int i;
+> +	__u64 cur_block;
+> +
+> +	for (i = 0; i < count; ++i) {
+> +		cur_block = block + i;
+> +		if (blocks[cur_block])
+> +			continue;
+> +		blocks[cur_block] = zeroed_block;
+> +	}
+> +	return 0;
+> +}
+> +
+>  #ifdef SPARSE_CALLBACK_USES_SIZE_T
+>  static int sparse_import_segment(void *UNUSED(priv), const void *data,
+>  		size_t len, unsigned int block, unsigned int nr_blocks) @@ -
+> 129,11 +146,17 @@ static int sparse_import_segment(void *UNUSED(priv),
+> const void *data, int len,
+>  	return sparse_write_blk(block, nr_blocks, data);  }
+> 
+> -static int sparse_merge_blocks(uint64_t start, uint64_t num)
+> +static int sparse_merge_blocks(uint64_t start, uint64_t num, int zero)
+>  {
+>  	char *buf;
+>  	uint64_t i;
+> 
+> +	if (zero) {
+> +		blocks[start] = NULL;
+> +		return sparse_file_add_fill(f2fs_sparse_file, 0x0,
+> +					F2FS_BLKSIZE * num, start);
+> +	}
+> +
+>  	buf = calloc(num, F2FS_BLKSIZE);
+>  	if (!buf) {
+>  		fprintf(stderr, "failed to alloc %llu\n", @@ -156,6 +179,7 @@
+> static int sparse_merge_blocks(uint64_t start, uint64_t num)  #else  static int
+> sparse_read_blk(__u64 block, int count, void *buf) { return 0; }  static int
+> sparse_write_blk(__u64 block, int count, const void *buf) { return 0; }
+> +static int sparse_write_zeroed_blk(__u64 block, int count) { return 0;
+> +}
+>  #endif
+> 
+>  int dev_read(void *buf, __u64 offset, size_t len) @@ -235,7 +259,8 @@ int
+> dev_fill(void *buf, __u64 offset, size_t len)
+>  	int fd;
+> 
+>  	if (c.sparse_mode)
+> -		return 0;
+> +		return sparse_write_zeroed_blk(offset / F2FS_BLKSIZE,
+> +						len / F2FS_BLKSIZE);
+> 
+>  	fd = __get_device_fd(&offset);
+>  	if (fd < 0)
+> @@ -307,6 +332,12 @@ int f2fs_init_sparse_file(void)
+>  		return -1;
+>  	}
+> 
+> +	zeroed_block = calloc(1, F2FS_BLKSIZE);
+> +	if (!zeroed_block) {
+> +		MSG(0, "\tError: Calloc Failed for zeroed block!!!\n");
+> +		return -1;
+> +	}
+> +
+>  	return sparse_file_foreach_chunk(f2fs_sparse_file, true, false,
+>  				sparse_import_segment, NULL);
+>  #else
+> @@ -315,7 +346,8 @@ int f2fs_init_sparse_file(void)  #endif  }
+> 
+> -#define MAX_CHUNK_SIZE (1 * 1024 * 1024 * 1024ULL)
+> +#define MAX_CHUNK_SIZE		(1 * 1024 * 1024 * 1024ULL)
+> +#define MAX_CHUNK_COUNT		(MAX_CHUNK_SIZE /
+> F2FS_BLKSIZE)
+>  int f2fs_finalize_device(void)
+>  {
+>  	int i;
+> @@ -336,24 +368,44 @@ int f2fs_finalize_device(void)
+>  		}
+> 
+>  		for (j = 0; j < blocks_count; ++j) {
+> -			if (!blocks[j] && chunk_start != -1) {
+> -				ret = sparse_merge_blocks(chunk_start,
+> -							j - chunk_start);
+> -				chunk_start = -1;
+> -			} else if (blocks[j] && chunk_start == -1) {
+> -				chunk_start = j;
+> -			} else if (blocks[j] && (chunk_start != -1) &&
+> -				 (j + 1 - chunk_start >=
+> -					(MAX_CHUNK_SIZE / F2FS_BLKSIZE)))
+> {
+> +			if (chunk_start != -1) {
+> +				if (j - chunk_start >= MAX_CHUNK_COUNT) {
+> +					ret =
+> sparse_merge_blocks(chunk_start,
+> +							j - chunk_start, 0);
+> +					ASSERT(!ret);
+> +					chunk_start = -1;
+> +				}
+> +			}
+> +
+> +			if (chunk_start == -1) {
+> +				if (!blocks[j])
+> +					continue;
+> +
+> +				if (blocks[j] == zeroed_block) {
+> +					ret = sparse_merge_blocks(j, 1, 1);
+> +					ASSERT(!ret);
+> +				} else {
+> +					chunk_start = j;
+> +				}
+> +			} else {
+> +				if (blocks[j] && blocks[j] != zeroed_block)
+> +					continue;
+> +
+>  				ret = sparse_merge_blocks(chunk_start,
+> -							  j + 1 - chunk_start);
+> +						j - chunk_start, 0);
+> +				ASSERT(!ret);
+> +
+> +				if (blocks[j] == zeroed_block) {
+> +					ret = sparse_merge_blocks(j, 1, 1);
+> +					ASSERT(!ret);
+> +				}
+> +
+>  				chunk_start = -1;
+>  			}
+> -			ASSERT(!ret);
+>  		}
+>  		if (chunk_start != -1) {
+>  			ret = sparse_merge_blocks(chunk_start,
+> -						blocks_count - chunk_start);
+> +						blocks_count - chunk_start,
+> 0);
+>  			ASSERT(!ret);
+>  		}
+> 
+> @@ -365,6 +417,8 @@ int f2fs_finalize_device(void)
+>  			free(blocks[j]);
+>  		free(blocks);
+>  		blocks = NULL;
+> +		free(zeroed_block);
+> +		zeroed_block = NULL;
+>  		f2fs_sparse_file = NULL;
+>  	}
+>  #endif
+> --
+> 2.18.0.rc1
 
-> It's userspace strategy, we can change both of them
-> (vold_wait_time/gc_urgent_sleep_time) in userspace if current value doesn't make
-> any sense.
-
-Even the user can set the tunables themselves, the default should be
-sensical imo.
-An "urgent" GC that only GCs up-to 2 segments per second doesn't sound
-that "urgent" :p
-
-Thanks.
 
 
 _______________________________________________
