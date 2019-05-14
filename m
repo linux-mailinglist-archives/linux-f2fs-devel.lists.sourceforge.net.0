@@ -2,72 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2E771BFE0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 01:38:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30B611C08B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 04:21:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hQKWc-0000Sw-Aw; Mon, 13 May 2019 23:38:30 +0000
+	id 1hQN3r-0003uF-PJ; Tue, 14 May 2019 02:20:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hQKWb-0000Sq-CC
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 May 2019 23:38:29 +0000
+ (envelope-from <guaneryu@gmail.com>) id 1hQN3r-0003u2-2Q
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 02:20:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8GOj/Ovp2WU+NZVYOeeHTKgWGkAuPTN3/xrCKuPptWw=; b=XVx4EwFxgb4cWGCsuE+74W4cKR
- EIItm0Ll2fI+YzijFIaBgDVx1SFPxgYDEMLJLY5zDGnD15FWvqy9RHFswJXZR9uSn7H6m0zf4T0TZ
- 5yV/Ws58+DdrJbJE5FiAiajsE1Tmnb5lEeKj6HvhwoZ0tVSfGbl4jKfrgk8QPuaUotYw=;
+ bh=Pp9TXTB0i7hj2m3Uf4rQUkxh2ShQtY3xKqp9vjDgHDs=; b=REG9pdParpoNzKdh7cjFY0Lbay
+ ZWnojP8IK0a0tVqGHz6WFBzEtog8oeqTkVvAi7LnsukZwkskhY2iZbbtchq5AXDa88l14wGvcFqPE
+ FW+scodTtpXg6DC7kQU+8BqvfuCvNcTa727Wwu4KEq6oWVgwc5GpLP8dhgQYYPpw1+0w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=8GOj/Ovp2WU+NZVYOeeHTKgWGkAuPTN3/xrCKuPptWw=; b=U
- vWUhCRhCSHv8t8XPTU/kZm0F1oGqhV8Rufc3RRZocJFDczjFhsKZ9eBA2oZJiDUVUY5EsWDmL6ZgN
- OC+e17M7yJW7S7CD3GlL6m3MvkcA9LOWvc8IvFBcl6e4CTNFL3kfWeH5xhIRUdwW2KTaoCJQqOqGB
- QYpKG7IAoR8gwQ/g=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hQKWa-00FTkh-5z
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 May 2019 23:38:29 +0000
-Received: from localhost (unknown [104.132.1.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 34AA820879;
- Mon, 13 May 2019 23:38:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1557790699;
- bh=KHo/8VO1q8PL3nZybC3R+kGEoBbsv8Y0Pf5QPxbCbzc=;
- h=Date:From:To:Cc:Subject:From;
- b=gBNHMtoCfSVHnVCV2d0qIt792RO4t/cNNMbhD2pP5rfMubxxghzk65jcy8rBUXY/h
- okAK8lDC6SiKq4pVzMhJS2SIsA4S+O7GQmbciN5EEWmU1dBWMu3Jrl7w472epO3fA/
- HDXE9FOrJsZWoh4E+ea9BH3r/q5WuJf2uS7EsqLA=
-Date: Mon, 13 May 2019 16:38:18 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20190513233818.GA33287@jaegeuk-macbookpro.roam.corp.google.com>
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Pp9TXTB0i7hj2m3Uf4rQUkxh2ShQtY3xKqp9vjDgHDs=; b=LW/0xSXGw8EMZ+yxag7GX2dbZF
+ jnfd49L4aIqzNjaeAlhsoFFuQ6mf7lsY2GTM4Xa/TepE5sxtKEUZA7oS6HhK0Nw2b1+mCuzzGKNrX
+ waZZiDcQfmY4322wQA4CdnOILotOhuygY3qoYgt/aIN6uNLwPlDcu/P3GthfrNmp+644=;
+Received: from mail-pl1-f196.google.com ([209.85.214.196])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hQN3o-002qKG-NX
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 02:20:59 +0000
+Received: by mail-pl1-f196.google.com with SMTP id a5so7400578pls.12
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 13 May 2019 19:20:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=Pp9TXTB0i7hj2m3Uf4rQUkxh2ShQtY3xKqp9vjDgHDs=;
+ b=Wu8/9UnUV3BA0ooglD0X5JmYaJJMMIcCwUPyHk7B+9cnBhor18GeQjyVS7l+G46yTC
+ EkB17R6cKF7yS+6/ViDrlfitxc71ygr9jvrBovyw49zMwILT+0fLSuxhklV02WKHrIBN
+ 0evuQ54yYLs6F0O49A6SEV2isT7DA96+1KgZa6zUPNqSXEU+oM2kAZG/PrZBxlDOpQTN
+ ohxvPeMyKFJt6erPJ7DRcgsPJ/3nytbV8SNW7lF7Hiymhgi25E1CgGDwxuEgPtU6dFHA
+ Sl+ai3dS7KxEvOmuQqaTBYQxZI0ibAsT5sP85pCRwqcc5sYYyl3KrI8PK1G5AJ/s19RB
+ 3QsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=Pp9TXTB0i7hj2m3Uf4rQUkxh2ShQtY3xKqp9vjDgHDs=;
+ b=oTYbck2YECst7mjkl3MI1k9KovKibqnQ69I39l5MH0z7R3BmLmfVM4Ap1YJsjZAWKh
+ lxvjEGL4V6X2r3ZK1uDcmga1GuWDrKJ4Af5xOvIwXI6Pp3bgO2uE57uDbf8UjQn0ZN8u
+ rPkmu3ZoUbbhi/7BVspkluDVZpq69MXsbzdKR8F5ZkO+rCG6YOqTscIvjycljKEbgT8h
+ 7gBqOqMtSElxvtRI8H9KYrFzDTsJ+TjggtmHT+M0j7Tl3gQJX6CsPu5CsGuryZea10SA
+ Rwkw2WxU8defiNeAcJHQuN3CJNDhvhBeMiYEyaa2PsChwgyaDI3azXiv7dafotT/HBdG
+ DZPQ==
+X-Gm-Message-State: APjAAAU5GMAf05e6OeDwprzNT6/UKsQIN7E6UOF8R89X2u9TUbSq5YWL
+ Z/gobUpzQMioJKIJp2dT1sHHEkc6vvg=
+X-Google-Smtp-Source: APXvYqzTiSqTTWQ9PZy1goFbxVypnSrz9+OGYy+npJ5RJSjeNCmUsoAk2XeotQFaK3NlWIs3xt7b4w==
+X-Received: by 2002:a17:902:7b8d:: with SMTP id
+ w13mr34247471pll.252.1557800450807; 
+ Mon, 13 May 2019 19:20:50 -0700 (PDT)
+Received: from localhost ([128.199.137.77])
+ by smtp.gmail.com with ESMTPSA id i15sm26994103pfj.167.2019.05.13.19.20.48
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 13 May 2019 19:20:49 -0700 (PDT)
+Date: Tue, 14 May 2019 10:20:44 +0800
+From: Eryu Guan <guaneryu@gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20190514022044.GL15846@desktop>
+References: <20190426204153.101861-1-ebiggers@kernel.org>
+ <20190426204153.101861-5-ebiggers@kernel.org>
+ <20190512122703.GJ15846@desktop>
+ <20190513191204.GA142816@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-User-Agent: Mutt/1.8.2 (2017-04-18)
+In-Reply-To: <20190513191204.GA142816@gmail.com>
+User-Agent: Mutt/1.11.3 (2019-02-01)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (guaneryu[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: marc.info]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.214.196 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hQKWa-00FTkh-5z
-Subject: [f2fs-dev] [GIT PULL] f2fs-for-5.2
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1hQN3o-002qKG-NX
+Subject: Re: [f2fs-dev] [RFC PATCH 4/7] common/encrypt: add helper for
+ ciphertext verification tests
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,132 +117,180 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+On Mon, May 13, 2019 at 12:12:05PM -0700, Eric Biggers wrote:
+> Hi Eryu,
+> 
+> On Sun, May 12, 2019 at 08:27:03PM +0800, Eryu Guan wrote:
+> > > +# Retrieve the filename stored on-disk for the given file.
+> > > +# The name is printed to stdout in binary.
+> > > +_get_on_disk_filename()
+> > > +{
+> > > +	local device=$1
+> > > +	local inode=$2
+> > > +	local dir_inode=$3
+> > > +
+> > > +	case $FSTYP in
+> > > +	ext4)
+> > > +		# Extract the filename from the debugfs output line like:
+> > > +		#
+> > > +		#  131075  100644 (1)      0      0       0 22-Apr-2019 16:54 \xa2\x85\xb0z\x13\xe9\x09\x86R\xed\xdc\xce\xad\x14d\x19
+> > > +		#
+> > > +		$DEBUGFS_PROG $device -R "ls -l -r <$dir_inode>" \
+> > > +					2>>$seqres.full | perl -ne '
+> > > +			next if not /^\s*'$inode'\s+/;
+> > > +			s/.*?\d\d:\d\d //;
+> > > +			chomp;
+> > > +			s/\\x([[:xdigit:]]{2})/chr hex $1/eg;
+> > > +			print;'
+> > > +		;;
+> > > +	f2fs)
+> > > +		# Extract the filename from the dump.f2fs output line like:
+> > > +		#
+> > > +		#  i_name                        		[UpkzIPuts9by1oDmE+Ivfw]
+> > > +		#
+> > > +		# The name is base64-encoded, so we have to decode it here.
+> > > +		#
+> > > +		$DUMP_F2FS_PROG $device -i $inode | perl -ne '
+> > > +			next if not /^i_name\s+\[([A-Za-z0-9+,]+)\]/;
+> > > +			chomp $1;
+> > > +			my @chars = split //, $1;
+> > > +			my $ac = 0;
+> > > +			my $bits = 0;
+> > > +			my $table = join "", (A..Z, a..z, 0..9, "+", ",");
+> > > +			foreach (@chars) {
+> > > +				$ac += index($table, $_) << $bits;
+> > > +				$bits += 6;
+> > > +				if ($bits >= 8) {
+> > > +					print chr($ac & 0xff);
+> > > +					$ac >>= 8;
+> > > +					$bits -= 8;
+> > > +				}
+> > > +			}
+> > > +			if ($ac != 0) {
+> > > +				print STDERR "Invalid base64-encoded string!\n";
+> > > +			}'
+> > > +		;;
+> > > +	*)
+> > > +		_notrun "_get_on_disk_filename() isn't implemented on $FSTYP"
+> > 
+> > And looks like this function has nothing to do with fs encryption, move it to
+> > common/rc?
+> 
+> For ext4 that's true, but for f2fs the name is assumed to be base64-encoded,
+> which f2fs-tools only does for encrypted filenames.  I'll update the comment to
+> clarify that the function assumes the directory is encrypted.
+> 
+> > 
+> > > +		;;
+> > > +	esac
+> > > +}
+> > > +
+> > > +# Require support for _get_on_disk_filename()
+> > > +_require_get_on_disk_filename_support()
+> > > +{
+> > > +	echo "Checking for _get_on_disk_filename() support for $FSTYP" >> $seqres.full
+> > > +	case $FSTYP in
+> > > +	ext4)
+> > > +		# Verify that the "ls -l -r" debugfs command is supported and
+> > > +		# hex-encodes non-ASCII characters, rather than using an
+> > > +		# ambiguous escaping method.  This requires the e2fsprogs patch
+> > > +		# "debugfs: avoid ambiguity when printing filenames"
+> > > +		# (https://marc.info/?l=linux-ext4&m=155596495624232&w=2).
+> > > +		# TODO: once merged, list the minimum e2fsprogs version here.
+> > > +		_require_command "$DEBUGFS_PROG" debugfs
+> > > +		_scratch_mount
+> > > +		touch $SCRATCH_MNT/$'\xc1'
+> > > +		_scratch_unmount
+> > > +		if ! $DEBUGFS_PROG $SCRATCH_DEV -R "ls -l -r /" 2>&1 \
+> > > +			| tee -a $seqres.full | grep -E -q '\s+\\xc1\s*$'; then
+> > > +			_notrun "debugfs (e2fsprogs) is too old; doesn't support showing unambiguous on-disk filenames"
+> > > +		fi
+> > > +		;;
+> > > +	f2fs)
+> > > +		# Verify that dump.f2fs shows encrypted filenames in full.  This
+> > > +		# requires the patch "f2fs-tools: improve filename printing"
+> > > +		# (https://sourceforge.net/p/linux-f2fs/mailman/message/36648641/).
+> > > +		# TODO: once merged, list the minimum f2fs-tools version here.
+> > > +
+> > > +		_require_command "$DUMP_F2FS_PROG" dump.f2fs
+> > > +		_require_command "$KEYCTL_PROG" keyctl
+> > > +		_scratch_mount
+> > > +		_new_session_keyring
+> > > +
+> > > +		local keydesc=$(_generate_encryption_key)
+> > > +		local dir=$SCRATCH_MNT/test.${FUNCNAME[0]}
+> > > +		local file=$dir/$(perl -e 'print "A" x 255')
+> > > +		mkdir $dir
+> > > +		_set_encpolicy $dir $keydesc
+> > > +		touch $file
+> > > +		local inode=$(stat -c %i $file)
+> > > +
+> > > +		_scratch_unmount
+> > > +		$KEYCTL_PROG clear @s
+> > > +
+> > > +		# 255-character filename should result in 340 base64 characters.
+> > > +		if ! $DUMP_F2FS_PROG -i $inode $SCRATCH_DEV \
+> > > +			| grep -E -q '^i_name[[:space:]]+\[[A-Za-z0-9+,]{340}\]'; then
+> > > +			_notrun "dump.f2fs (f2fs-tools) is too old; doesn't support showing unambiguous on-disk filenames"
+> > > +		fi
+> > > +		;;
+> > > +	*)
+> > > +		_notrun "_get_on_disk_filename() isn't implemented on $FSTYP"
+> > > +		;;
+> > > +	esac
+> > > +}
+> > > +
+> > > +# Get the file's list of on-disk blocks as a comma-separated list of block
+> > > +# offsets from the start of the device.  "Blocks" are 512 bytes each here.
+> > > +_get_file_block_list()
+> > > +{
+> > > +	local file=$1
+> > > +
+> > > +	sync
+> > > +	$XFS_IO_PROG -c fiemap $file | perl -ne '
+> > > +		next if not /^\s*\d+: \[\d+\.\.\d+\]: (\d+)\.\.(\d+)/;
+> > > +		print $_ . "," foreach $1..$2;' | sed 's/,$//'
+> > > +}
+> > > +
+> > > +# Dump a block list that was previously saved by _get_file_block_list().
+> > > +_dump_file_blocks()
+> > > +{
+> > > +	local device=$1
+> > > +	local blocklist=$2
+> > > +	local block
+> > > +
+> > > +	for block in $(tr ',' ' ' <<< $blocklist); do
+> > > +		dd if=$device bs=512 count=1 skip=$block status=none
+> > > +	done
+> > > +}
+> > 
+> > Above two functions seem generic enough to be moved to common/rc
+> 
+> I feel that would be premature because common/rc is kind of bloated, and there's
+> a good chance these functions will only ever be used for encryption tests.
+> Normally, xfstests only test for user-visible behavior, so tests just 'cat' the
+> file contents, or 'ls' the filenames.  The encryption tests are somewhat special
+> in that they really care about what's *actually* stored on-disk.
+> 
+> So I think that common/encrypt is the most logical location for now.  But I
 
-Could you please consider this pull request?
+Yeah, that makes sense to me. Perhaps the functions should be renamed to
+reflect that they're encryption-related?
 
-Thanks as lways,
+Thanks,
+Eryu
 
-The following changes since commit 8ed86627f715eacbd6db6862f9499d6d96ea4ad6:
-
-  Merge branch 'for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/hid/hid (2019-04-03 06:11:12 -1000)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-v5.2-rc1
-
-for you to fetch changes up to 2777e654371dd4207a3a7f4fb5fa39550053a080:
-
-  f2fs: fix to avoid accessing xattr across the boundary (2019-05-09 09:43:29 -0700)
-
-----------------------------------------------------------------
-f2fs-for-5.2-rc1
-
-Another round of various bug fixes came in. Damien improved SMR drive support a
-bit, and Chao replaced BUG_ON() with reporting errors to user since we've not
-hit from users but did hit from crafted images. We've found a disk layout bug
-in large_nat_bits feature which supports very large NAT entries enabled at mkfs.
-If the feature is enabled, it will give a notice to run fsck to correct the
-on-disk layout.
-
-Enhancement:
- - reduce memory consumption for SMR drive
- - better discard handling for multiple partitions
- - tracepoints for f2fs_file_write_iter/f2fs_filemap_fault
- - allow to change CP_CHKSUM_OFFSET
- - detect wrong layout of large_nat_bitmap feature
- - enhance checking valid data indices
-
-Bug fix:
- - Multiple partition support for SMR drive
- - deadlock problem in f2fs_balance_fs_bg
- - add boundary checks to fix abnormal behaviors on fuzzed images
- - inline_xattr space calculations
- - replace f2fs_bug_on with errors
-
-In addition, this series contains various memory boundary check and sanity check
-of on-disk consistency.
-
-----------------------------------------------------------------
-Chao Yu (31):
-      f2fs: fix potential recursive call when enabling data_flush
-      f2fs: add comment for conditional compilation statement
-      f2fs: add tracepoint for f2fs_file_write_iter()
-      f2fs: fix to avoid deadloop in foreground GC
-      f2fs: fix error path of recovery
-      f2fs: fix to retrieve inline xattr space
-      f2fs: fix to use inline space only if inline_xattr is enable
-      f2fs: fix to avoid panic in dec_valid_block_count()
-      f2fs: fix to avoid panic in dec_valid_node_count()
-      f2fs: fix wrong __is_meta_io() macro
-      f2fs: remove new blank line of f2fs kernel message
-      f2fs: fix to clear dirty inode in error path of f2fs_iget()
-      f2fs: fix to avoid panic in f2fs_remove_inode_page()
-      f2fs: fix to do checksum even if inode page is uptodate
-      f2fs: fix to do sanity check on free nid
-      f2fs: fix to avoid panic in do_recover_data()
-      f2fs: fix to do sanity check on valid node/block count
-      f2fs: fix to do sanity check on valid block count of segment
-      f2fs: fix to avoid panic in f2fs_inplace_write_data()
-      f2fs: fix to set FI_UPDATE_WRITE correctly
-      f2fs: introduce f2fs_read_single_page() for cleanup
-      f2fs: allow address pointer number of dnode aligning to specified size
-      f2fs: allow unfixed f2fs_checkpoint.checksum_offset
-      f2fs: relocate chksum_offset for large_nat_bitmap feature
-      f2fs: fix to consider multiple device for readonly check
-      f2fs: fix to skip recovery on readonly device
-      f2fs: fix to be aware of readonly device in write_checkpoint()
-      f2fs: fix to handle error in f2fs_disable_checkpoint()
-      f2fs: introduce DATA_GENERIC_ENHANCE
-      f2fs: add tracepoint for f2fs_filemap_fault()
-      f2fs: fix to avoid potential race on sbi->unusable_block_count access/update
-
-Chengguang Xu (1):
-      f2fs: remove redundant check in f2fs_file_write_iter()
-
-Damien Le Moal (3):
-      f2fs: Fix use of number of devices
-      f2fs: Reduce zoned block device memory usage
-      f2fs: improve discard handling with multi-device volumes
-
-Hariprasad Kelam (1):
-      f2fs: data: fix warning Using plain integer as NULL pointer
-
-Park Ju Hyung (1):
-      f2fs: mark is_extension_exist() inline
-
-Randall Huang (1):
-      f2fs: fix to avoid accessing xattr across the boundary
-
-Youngjun Yoo (2):
-      f2fs: insert space before the open parenthesis '('
-      f2fs: Replace spaces with tab
-
- fs/f2fs/acl.c               |   4 +-
- fs/f2fs/checkpoint.c        | 108 +++++++++++++----
- fs/f2fs/data.c              | 285 +++++++++++++++++++++++++-------------------
- fs/f2fs/f2fs.h              | 127 +++++++++++++++-----
- fs/f2fs/file.c              |  76 +++++++-----
- fs/f2fs/gc.c                |  16 ++-
- fs/f2fs/inline.c            |  17 +++
- fs/f2fs/inode.c             |  12 +-
- fs/f2fs/namei.c             |   2 +-
- fs/f2fs/node.c              |  43 +++++--
- fs/f2fs/recovery.c          |  37 +++++-
- fs/f2fs/segment.c           |  71 ++++++-----
- fs/f2fs/segment.h           |  16 +--
- fs/f2fs/super.c             |  70 ++++++++---
- fs/f2fs/xattr.c             |  36 ++++--
- fs/f2fs/xattr.h             |   2 +
- include/linux/f2fs_fs.h     |  11 +-
- include/trace/events/f2fs.h |  57 +++++++++
- 18 files changed, 688 insertions(+), 302 deletions(-)
+> don't feel too strongly, and I can move it if you prefer.
+> 
+> Thanks for the review!
+> 
+> - Eric
 
 
 _______________________________________________
