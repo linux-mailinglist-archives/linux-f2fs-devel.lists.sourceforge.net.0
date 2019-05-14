@@ -2,58 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B80961C86C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 14:22:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC51C1C86E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 May 2019 14:23:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=wsbGI/k0X3LWzckV29piN6VMAOPMSmyPsOfT6eNL4vI=; b=HSVRjNfGDtcrtTr/Q5MTJ+HgKJ
-	lQYNAjCNF8gtRraH9q1reaiHxYE8Pm2GJQkfW+cxdZS0xlz8vwGrPjKj+2wboyiaiQNBGh3H4p7ku
-	X2+ALGWdzGf9NKp6/URa8f3z/F8yb5bpFxZtF5FXsLORzqYiFfgP8JTefOnW9SXwrGaU=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	bh=WzvsT6uXyHzDp7K7Htayq0KsLE5NOF4z7Beq45hpVrU=; b=hl1MI/+j1/IBAZisc3n/+WoiDU
+	1iFcpNG1DBDc24tpp+bW4Qcrla6xhNcTvj2ZPYb0X81eziuIy3Kq8x5YvFBggpk6fk6ALFZyQ0bgl
+	9VZfjYsXcDvVLhfeFuhzKWXVYEULQdp8D+vukL1/1UagRhblRFP7t2/YSzn1JpGC+wH4=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hQWRt-0000yc-VZ; Tue, 14 May 2019 12:22:25 +0000
+	id 1hQWSS-00021N-9R; Tue, 14 May 2019 12:23:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <zhaowuyun@wingtech.com>) id 1hQWRt-0000yR-5e
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:22:25 +0000
+ (envelope-from <zhaowuyun@wingtech.com>) id 1hQWSR-00021D-Ax
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:22:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hgYLsx9yYN8Ypu9fcKLx9ixhPx+OFgvtqOubhJlFAaU=; b=ZLluQBl55H0wZSHcHu5TZPxfvn
- YvYZk4VAOgcAHYBsM3TJ7H/gKUrDMo2AQT1eCCHBvtjelcIq1CyzCW4axuf0HiJ82Fph5rkyn9pT4
- YWcOT2mWAl5v3DOYlDgWqGdE0qMS87pVNCbno8hkrHBn4y/yiARaO0dB2VIUi8pPR3bY=;
+ bh=Z6TLUbPPpbZXKp5llBVwXTXTTwErMm4jqaNfogtul3U=; b=YWLgmD9IiuD9Jxtn8cRpdBxwS3
+ msjN+yjTa8F0F9q//HSLTj4Dcm2J6Cto+oBLM70pvkUYfc5dO45wxPjjPz+hkENi50L3kFVbUwuqX
+ ny5hqxHKYmjvJ8JvtC1hbJGiUW4B3eS0tKLiBHumYPXIvPomJeoPN1qsWRALQMguxc14=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hgYLsx9yYN8Ypu9fcKLx9ixhPx+OFgvtqOubhJlFAaU=; b=k
- 3KGszT2vtzeFP9Td48TldyCDL26IYe/pMXoMYAwojQ2pJAS9qV84k9eokIFtaeowvZ6xaAJiUHh1G
- nsfnxc3KWqdPzXWrY+H2QD7uReKobHOqqI+RhTJN3MbdRPY8ditirYwZxRSYPQsv5WPWErKuJx30q
- eDYSV77sUPBSDtUE=;
+ List-Owner:List-Archive; bh=Z6TLUbPPpbZXKp5llBVwXTXTTwErMm4jqaNfogtul3U=; b=L
+ 00qRFF+v946juzGjsG8dHK6IdhhxIK50JLqSbmRMbfmWcT39xmiQdELY2BiGkiBGH6lkNq2dE2qWc
+ ulJRkLhzQtsvoRo5jLO9niIuEzIzkMrD0adfiWPxOOui+t/V2ao3k0EikVIfJKlBYFgrHUB9wjoRe
+ RDLR6L/KX5qEYcXA=;
 Received: from mail.wingtech.com ([180.166.216.14])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.90_1) id 1hQWRr-00GXlu-BJ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:22:25 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.90_1) id 1hQWSP-003PvA-ST
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 May 2019 12:22:59 +0000
 Received: from zhaowuyun ([192.168.50.243]) (user=zhaowuyun mech=LOGIN bits=0)
- by mail.wingtech.com  with ESMTP id x4ECMD1F003880-x4ECMD1G003880;
- Tue, 14 May 2019 20:22:13 +0800
+ by mail.wingtech.com  with ESMTP id x4ECMmTs004190-x4ECMmTt004190;
+ Tue, 14 May 2019 20:22:48 +0800
 To: "'Chao Yu'" <yuchao0@huawei.com>, <linux-f2fs-devel@lists.sourceforge.net>
-Date: Tue, 14 May 2019 20:22:13 +0800
-Message-ID: <000801d50a4f$a957dee0$fc079ca0$@wingtech.com>
+Date: Tue, 14 May 2019 20:22:48 +0800
+Message-ID: <000901d50a4f$be344b50$3a9ce1f0$@wingtech.com>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AdUKT6jh/Fr3/ob2RMSQgX26h0ZflA==
+Thread-Index: AdUKT7367qWyHTL3Rs+qHGz23grDhQ==
 Content-Language: zh-cn
 X-FEAS-AUTH-USER: zhaowuyun
 X-Spam-Score: 0.0 (/)
@@ -62,13 +62,13 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: wingtech.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
  trust [180.166.216.14 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hQWRr-00GXlu-BJ
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] mkfs.f2fs: write fill chunk in sparse
- file for zeroed block
+X-Headers-End: 1hQWSP-003PvA-ST
+Subject: Re: [f2fs-dev] [PATCH v4 2/2] sload.f2fs: introduce
+ f2fs_sparse_initialize_meta()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,230 +101,125 @@ Best Wishes,
 Zac (zhaowuyun@wingtech.com)
 
 > 
-> As zhaowuyun reported:
+> This patch fixes to initialize NAT/SIT/CP.payload region in sparse file mode for
+> sload.
 > 
-> we met one problem of f2fs, and found one issue of make_f2fs, so I write
-> this email to search for your help to confirm this issue.
-> 
-> The issue was found on one of Android projects. We use f2fs as the
-> filesystem of userdata, and make sparse userdata.img using following
-> command, which invoked in script mkf2fsuserimg.sh make_f2fs -S $SIZE -f -O
-> encrypt -O quota -O verity $MKFS_OPTS $OUTPUT_FILE
-> 
-> use fastboot to flash this userdata.img to device, and it encountered f2fs
-> problem and leading to the mount fail of data partition.
-> 
-> we can make this issue 100% persent reproduced by making the data
-> partition dirty before flashing userdata.img.
-> 
-> suspect that issue is caused by the dirty data in the data partition.
-> so we checked that source code of make_f2fs in f2fs-tool, found that when
-> making f2fs, it use dev_fill to do some process:
-> 
-> ...
-> 
-> we change code to the following, and the issue is gone.
-> 
-> if (c.sparse_mode)
->        return dev_write(buf, offset, len);
-> 
-> Chao Yu:
-> >
-> > After checking the codes, IIUC, I guess the problem here is, unlike
-> > img2simg, mkfs.f2fs won't record zeroed block in sparse image, so
-> > during transforming to normal image, some critical region like
-> > NAT/SIT/CP.payload area weren't be zeroed correctly, later kernel may
-> > load obsoleting data from those region.
-> >
-> > Also, The way you provide will obviously increase the size of sparse
-> > file, since with it we need to write all zeroed blocks of
-> > NAT/SIT/CP.payload to sparse file, it's not needed.
-> >
-> > Not sure, maybe we should use sparse_file_add_fill() to record zeroed
-> > blocks, so that this will make formatted image more like img2simged one.
-> 
-> Jaegeuk:
-> > We have to call sparse_file_add_fill() for dev_fill().
-> 
-> This patch fixes to support writing fill chunk sparse file for those zeroed
-> blocks in mkfs.f2fs.
-> 
-> Reported-by: zhaowuyun <zhaowuyun@wingtech.com>
 > Signed-off-by: Chao Yu <yuchao0@huawei.com>
 > ---
-> v2:
-> - don't return -EEXIST if block[x] has non-zeroed data.
->  lib/libf2fs_io.c | 84 +++++++++++++++++++++++++++++++++++++++-------
-> --
->  1 file changed, 69 insertions(+), 15 deletions(-)
+> - move initialize_meta() before do_umount().
+>  fsck/fsck.h  |  1 +
+>  fsck/main.c  |  4 +++
+>  fsck/mount.c | 70
+> ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 75 insertions(+)
 > 
-> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c index f848510..4d0ea0d 100644
-> --- a/lib/libf2fs_io.c
-> +++ b/lib/libf2fs_io.c
-> @@ -36,6 +36,7 @@ struct f2fs_configuration c;  struct sparse_file
-> *f2fs_sparse_file;  static char **blocks;  u_int64_t blocks_count;
-> +static char *zeroed_block;
->  #endif
+> diff --git a/fsck/fsck.h b/fsck/fsck.h
+> index dd831de..4db14af 100644
+> --- a/fsck/fsck.h
+> +++ b/fsck/fsck.h
+> @@ -181,6 +181,7 @@ extern int fsck_verify(struct f2fs_sb_info *);  extern
+> void fsck_free(struct f2fs_sb_info *);  extern int f2fs_do_mount(struct
+> f2fs_sb_info *);  extern void f2fs_do_umount(struct f2fs_sb_info *);
+> +extern int f2fs_sparse_initialize_meta(struct f2fs_sb_info *);
 > 
->  static int __get_device_fd(__u64 *offset) @@ -103,6 +104,8 @@ static int
-> sparse_write_blk(__u64 block, int count, const void *buf)
+>  extern void flush_journal_entries(struct f2fs_sb_info *);  extern void
+> zero_journal_entries(struct f2fs_sb_info *); diff --git a/fsck/main.c
+> b/fsck/main.c index afdfec9..d844820 100644
+> --- a/fsck/main.c
+> +++ b/fsck/main.c
+> @@ -813,6 +813,10 @@ fsck_again:
+>  		if (do_sload(sbi))
+>  			goto out_err;
 > 
->  	for (i = 0; i < count; ++i) {
->  		cur_block = block + i;
-> +		if (blocks[cur_block] == zeroed_block)
-> +			blocks[cur_block] = NULL;
->  		if (!blocks[cur_block]) {
->  			blocks[cur_block] = calloc(1, F2FS_BLKSIZE);
->  			if (!blocks[cur_block])
-> @@ -114,6 +117,20 @@ static int sparse_write_blk(__u64 block, int count,
-> const void *buf)
->  	return 0;
+> +		ret = f2fs_sparse_initialize_meta(sbi);
+> +		if (ret < 0)
+> +			goto out_err;
+> +
+>  		f2fs_do_umount(sbi);
+> 
+>  		/* fsck to fix missing quota */
+> diff --git a/fsck/mount.c b/fsck/mount.c index 843742e..230f330 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2721,3 +2721,73 @@ void f2fs_do_umount(struct f2fs_sb_info *sbi)
+>  	free(sbi->ckpt);
+>  	free(sbi->raw_super);
 >  }
-> 
-> +static int sparse_write_zeroed_blk(__u64 block, int count) {
-> +	int i;
-> +	__u64 cur_block;
 > +
-> +	for (i = 0; i < count; ++i) {
-> +		cur_block = block + i;
-> +		if (blocks[cur_block])
-> +			continue;
-> +		blocks[cur_block] = zeroed_block;
-> +	}
-> +	return 0;
-> +}
+> +#ifdef WITH_ANDROID
+> +int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi) {
+> +	struct f2fs_super_block *sb = sbi->raw_super;
+> +	u_int32_t sit_seg_count, sit_size;
+> +	u_int32_t nat_seg_count, nat_size;
+> +	u_int64_t sit_seg_addr, nat_seg_addr, payload_addr;
+> +	u_int32_t seg_size = 1 << get_sb(log_blocks_per_seg);
+> +	int ret;
 > +
->  #ifdef SPARSE_CALLBACK_USES_SIZE_T
->  static int sparse_import_segment(void *UNUSED(priv), const void *data,
->  		size_t len, unsigned int block, unsigned int nr_blocks) @@ -
-> 129,11 +146,17 @@ static int sparse_import_segment(void *UNUSED(priv),
-> const void *data, int len,
->  	return sparse_write_blk(block, nr_blocks, data);  }
-> 
-> -static int sparse_merge_blocks(uint64_t start, uint64_t num)
-> +static int sparse_merge_blocks(uint64_t start, uint64_t num, int zero)
->  {
->  	char *buf;
->  	uint64_t i;
-> 
-> +	if (zero) {
-> +		blocks[start] = NULL;
-> +		return sparse_file_add_fill(f2fs_sparse_file, 0x0,
-> +					F2FS_BLKSIZE * num, start);
-> +	}
+> +	if (!c.sparse_mode)
+> +		return 0;
 > +
->  	buf = calloc(num, F2FS_BLKSIZE);
->  	if (!buf) {
->  		fprintf(stderr, "failed to alloc %llu\n", @@ -156,6 +179,7 @@
-> static int sparse_merge_blocks(uint64_t start, uint64_t num)  #else  static int
-> sparse_read_blk(__u64 block, int count, void *buf) { return 0; }  static int
-> sparse_write_blk(__u64 block, int count, const void *buf) { return 0; }
-> +static int sparse_write_zeroed_blk(__u64 block, int count) { return 0;
-> +}
->  #endif
-> 
->  int dev_read(void *buf, __u64 offset, size_t len) @@ -235,7 +259,8 @@ int
-> dev_fill(void *buf, __u64 offset, size_t len)
->  	int fd;
-> 
->  	if (c.sparse_mode)
-> -		return 0;
-> +		return sparse_write_zeroed_blk(offset / F2FS_BLKSIZE,
-> +						len / F2FS_BLKSIZE);
-> 
->  	fd = __get_device_fd(&offset);
->  	if (fd < 0)
-> @@ -307,6 +332,12 @@ int f2fs_init_sparse_file(void)
->  		return -1;
->  	}
-> 
-> +	zeroed_block = calloc(1, F2FS_BLKSIZE);
-> +	if (!zeroed_block) {
-> +		MSG(0, "\tError: Calloc Failed for zeroed block!!!\n");
+> +	sit_seg_addr = get_sb(sit_blkaddr);
+> +	sit_seg_count = get_sb(segment_count_sit);
+> +	sit_size = sit_seg_count * seg_size;
+> +
+> +	DBG(1, "\tSparse: filling sit area at block offset: 0x%08"PRIx64"
+> len: %u\n",
+> +							sit_seg_addr,
+> sit_size);
+> +	ret = dev_fill(NULL, sit_seg_addr * F2FS_BLKSIZE,
+> +					sit_size * F2FS_BLKSIZE);
+> +	if (ret) {
+> +		MSG(1, "\tError: While zeroing out the sit area "
+> +				"on disk!!!\n");
 > +		return -1;
 > +	}
 > +
->  	return sparse_file_foreach_chunk(f2fs_sparse_file, true, false,
->  				sparse_import_segment, NULL);
->  #else
-> @@ -315,7 +346,8 @@ int f2fs_init_sparse_file(void)  #endif  }
-> 
-> -#define MAX_CHUNK_SIZE (1 * 1024 * 1024 * 1024ULL)
-> +#define MAX_CHUNK_SIZE		(1 * 1024 * 1024 * 1024ULL)
-> +#define MAX_CHUNK_COUNT		(MAX_CHUNK_SIZE /
-> F2FS_BLKSIZE)
->  int f2fs_finalize_device(void)
->  {
->  	int i;
-> @@ -336,24 +368,44 @@ int f2fs_finalize_device(void)
->  		}
-> 
->  		for (j = 0; j < blocks_count; ++j) {
-> -			if (!blocks[j] && chunk_start != -1) {
-> -				ret = sparse_merge_blocks(chunk_start,
-> -							j - chunk_start);
-> -				chunk_start = -1;
-> -			} else if (blocks[j] && chunk_start == -1) {
-> -				chunk_start = j;
-> -			} else if (blocks[j] && (chunk_start != -1) &&
-> -				 (j + 1 - chunk_start >=
-> -					(MAX_CHUNK_SIZE / F2FS_BLKSIZE)))
-> {
-> +			if (chunk_start != -1) {
-> +				if (j - chunk_start >= MAX_CHUNK_COUNT) {
-> +					ret =
-> sparse_merge_blocks(chunk_start,
-> +							j - chunk_start, 0);
-> +					ASSERT(!ret);
-> +					chunk_start = -1;
-> +				}
-> +			}
+> +	nat_seg_addr = get_sb(nat_blkaddr);
+> +	nat_seg_count = get_sb(segment_count_nat);
+> +	nat_size = nat_seg_count * seg_size;
 > +
-> +			if (chunk_start == -1) {
-> +				if (!blocks[j])
-> +					continue;
+> +	DBG(1, "\tSparse: filling nat area at block offset 0x%08"PRIx64"
+> len: %u\n",
+> +							nat_seg_addr,
+> nat_size);
+> +	ret = dev_fill(NULL, nat_seg_addr * F2FS_BLKSIZE,
+> +					nat_size * F2FS_BLKSIZE);
+> +	if (ret) {
+> +		MSG(1, "\tError: While zeroing out the nat area "
+> +				"on disk!!!\n");
+> +		return -1;
+> +	}
 > +
-> +				if (blocks[j] == zeroed_block) {
-> +					ret = sparse_merge_blocks(j, 1, 1);
-> +					ASSERT(!ret);
-> +				} else {
-> +					chunk_start = j;
-> +				}
-> +			} else {
-> +				if (blocks[j] && blocks[j] != zeroed_block)
-> +					continue;
+> +	payload_addr = get_sb(segment0_blkaddr) + 1;
 > +
->  				ret = sparse_merge_blocks(chunk_start,
-> -							  j + 1 - chunk_start);
-> +						j - chunk_start, 0);
-> +				ASSERT(!ret);
+> +	DBG(1, "\tSparse: filling bitmap area at block offset 0x%08"PRIx64"
+> len: %u\n",
+> +					payload_addr, get_sb(cp_payload));
+> +	ret = dev_fill(NULL, payload_addr * F2FS_BLKSIZE,
+> +					get_sb(cp_payload) * F2FS_BLKSIZE);
+> +	if (ret) {
+> +		MSG(1, "\tError: While zeroing out the nat/sit bitmap area "
+> +				"on disk!!!\n");
+> +		return -1;
+> +	}
 > +
-> +				if (blocks[j] == zeroed_block) {
-> +					ret = sparse_merge_blocks(j, 1, 1);
-> +					ASSERT(!ret);
-> +				}
+> +	payload_addr += seg_size;
 > +
->  				chunk_start = -1;
->  			}
-> -			ASSERT(!ret);
->  		}
->  		if (chunk_start != -1) {
->  			ret = sparse_merge_blocks(chunk_start,
-> -						blocks_count - chunk_start);
-> +						blocks_count - chunk_start,
-> 0);
->  			ASSERT(!ret);
->  		}
-> 
-> @@ -365,6 +417,8 @@ int f2fs_finalize_device(void)
->  			free(blocks[j]);
->  		free(blocks);
->  		blocks = NULL;
-> +		free(zeroed_block);
-> +		zeroed_block = NULL;
->  		f2fs_sparse_file = NULL;
->  	}
->  #endif
+> +	DBG(1, "\tSparse: filling bitmap area at block offset 0x%08"PRIx64"
+> len: %u\n",
+> +					payload_addr, get_sb(cp_payload));
+> +	ret = dev_fill(NULL, payload_addr * F2FS_BLKSIZE,
+> +					get_sb(cp_payload) * F2FS_BLKSIZE);
+> +	if (ret) {
+> +		MSG(1, "\tError: While zeroing out the nat/sit bitmap area "
+> +				"on disk!!!\n");
+> +		return -1;
+> +	}
+> +	return 0;
+> +}
+> +#else
+> +int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi) { return 0; }
+> +#endif
 > --
 > 2.18.0.rc1
 
