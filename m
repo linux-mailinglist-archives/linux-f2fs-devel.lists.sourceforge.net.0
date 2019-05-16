@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56F2B20930
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 May 2019 16:10:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B92A20933
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 May 2019 16:10:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hRH5G-0006oD-TT; Thu, 16 May 2019 14:10:10 +0000
+	id 1hRH5T-0007cJ-U9; Thu, 16 May 2019 14:10:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hRH5F-0006o1-RD
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:10:09 +0000
+ id 1hRH5S-0007cD-TI
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:10:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v7bNXUwrcbvuBro1gToxksc9N1aT7esmgprCpLwwvTk=; b=OW2Bx/4Ynvs5jW/mlw6EopP+4w
- 1aZAoxvEDD0tUSb7d190jF9hjhEoOcZ5ch/x1taFSAcUTFbY4KqcgkbJj/d7H+D9TWiOPe4/Odd66
- 54A1s7xanwTVMVJFUD8cegCII+WiQDWXs5IP5tn+aGGnSsQwLPxf7wdAeVLh9SiOKKfw=;
+ bh=Hd0kj84eEvUSFVAE0ZoEq3gcen4t53qecRjrmWGL/1Q=; b=Bn8zg7eNOuK8NuxjMelAC7CVLS
+ /XbMrDUD5eDhS84jWZdUD9XGf9wvmPeekDm6s3VO96ZsPGR+rHJ+vnUzqKocsDYDQCi5I1lFAmExX
+ bt2b6i3Mvgw9dCaCwrG/ux4Tb8Nb8O5JoRZpJFwmqw31s4W04wpxMb023ESEayYJvDKk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=v7bNXUwrcbvuBro1gToxksc9N1aT7esmgprCpLwwvTk=; b=c6HFwjWzrnazs3juekQxHdrBLR
- T1J5t1+6K4xZ6WjIh5wy837EwisIim4DjJU1/tcFraOec3nWbd/caEQpJFOROvtf9VncE9VV1I0kA
- wAJDqtYu155VgdjtylASPVUm3Mxv1DdY/bzeFq0b15j/BTxCRhd5uSGxP7ozC7V33OsE=;
+ bh=Hd0kj84eEvUSFVAE0ZoEq3gcen4t53qecRjrmWGL/1Q=; b=btHbnBByd31kq060+GdqnleKt6
+ 6wmStMbFuivMAzZppbDBh163UNa7N+D9p+I+rdafd5Kq8RcaB/huzdpvpKmVvpYYUPOQ1WuAGr789
+ qEFRW8Fg25h+vPcKndQlDHAlXQeHPun61C005KS6iGyhgcbCB82p+b48ID5E/V51F2oY=;
 Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hRH5E-001OWR-Hh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:10:09 +0000
+ id 1hRH5R-000vst-L9
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:10:22 +0000
 Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id E2608268AE
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id F222628AFD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 16 May 2019 14:10:02 +0000 (UTC)
+ Thu, 16 May 2019 14:10:15 +0000 (UTC)
 Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id D20B928691; Thu, 16 May 2019 14:10:02 +0000 (UTC)
+ id F08DF28B51; Thu, 16 May 2019 14:10:15 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
  pdx-wl-mail.web.codeaurora.org
 X-Spam-Level: 
@@ -51,7 +51,7 @@ X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
  NO_RELAYS autolearn=ham version=3.3.1
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 16 May 2019 14:10:02 +0000
+Date: Thu, 16 May 2019 14:10:15 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -67,9 +67,9 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-203217-202145-aqOJRp4WqK@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-203217-202145@https.bugzilla.kernel.org/>
-References: <bug-203217-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-203219-202145-ndXm375H6o@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-203219-202145@https.bugzilla.kernel.org/>
+References: <bug-203219-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -84,8 +84,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hRH5E-001OWR-Hh
-Subject: [f2fs-dev] [Bug 203217] kernel BUG at fs/f2fs/inode.c:707! and hangs
+X-Headers-End: 1hRH5R-000vst-L9
+Subject: [f2fs-dev] [Bug 203219] kernel BUG at fs/f2fs/node.c:1183! and
+ hangs on sync
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,7 +102,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203217
+https://bugzilla.kernel.org/show_bug.cgi?id=203219
 
 Jungyeon (jungyeon@gatech.edu) changed:
 
