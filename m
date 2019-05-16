@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3ED220925
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 May 2019 16:09:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D4CC20929
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 May 2019 16:09:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hRH4P-0007Xw-O1; Thu, 16 May 2019 14:09:17 +0000
+	id 1hRH4j-0006lo-Q8; Thu, 16 May 2019 14:09:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hRH4N-0007Xo-ST
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:09:15 +0000
+ id 1hRH4i-0006la-Ke
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:09:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T/PIyPtM+xSNNIlT7b7YnmfeCon7fG4RwMhbTPehl3M=; b=XNx6H8PJWOtYfFKxVv9car0Xk2
- 8C2CW8/YdPSQ5pIaeOSCsyFd3gna9t/49phxCu76CPLGk6eFER1+yOdm6nn3hDB7djHeEKkhA9gQh
- Gm0DQnUKgbd8+oqHx2h/ucFYEpj7IUVdTB8sY/8cayzdK/dmYnWSFZWhXiATkM1wsuks=;
+ bh=A2mwd9G5QNWgTE6smAIpVdX3hlYJr0Jg69qo/1TNNj8=; b=AA1YhZPFdOUD3+wNw3fIeLTr/v
+ K7geLlkFGrxEZZNq8HdT8+x6tAwGwQN+4qjn58HJ4xlRSJD82Wa9rKGEcreqQCL8SZkhXmKPGUQS6
+ obnkafjtCWFHpd1n6bOvGTZkNuWF+Iedw2C0IjfI2mOJe+mQCnVn8pgMfdsqOaTGbrk8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T/PIyPtM+xSNNIlT7b7YnmfeCon7fG4RwMhbTPehl3M=; b=QpQTXK7j6inmwZx3AkHL4+RYBu
- SVzrxMoa1gD4GcU54+Wx0yBLrDmFmdLa5Ley2RpS4JV+CuNbOWoLDRFaatUixlbeq4FjeiDkdK6Fb
- ll8XQOSMFMV0bXFONAaM/P62c1lx6NzrNs7Ia9pcs7jNZ8D+MZSHLolHxpYVEMrXTf6U=;
+ bh=A2mwd9G5QNWgTE6smAIpVdX3hlYJr0Jg69qo/1TNNj8=; b=eHXbE6zv+ZqYsjlgMaGP0cfft3
+ ykmyRjNwZO6KLjrvjeqCJ+XkrV8HbI4XTknyg9Cmg/kYudJot11mnwhccHvHkHmLalqiGU/oNCPlg
+ Gfn/FtH73I1vzhFvgRDoVGoXegziZ9/pV19GBu4BubFniGRR8zFf3L1ybt+R+fQ6KHhM=;
 Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hRH4M-001OSZ-Jk
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:09:15 +0000
+ id 1hRH4g-001OU9-Pe
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 May 2019 14:09:35 +0000
 Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 27A3828628
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 2A7D3286A7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 16 May 2019 14:09:08 +0000 (UTC)
+ Thu, 16 May 2019 14:09:29 +0000 (UTC)
 Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id 1BB2E289BD; Thu, 16 May 2019 14:09:08 +0000 (UTC)
+ id 1EA1828A7A; Thu, 16 May 2019 14:09:29 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
  pdx-wl-mail.web.codeaurora.org
 X-Spam-Level: 
@@ -51,7 +51,7 @@ X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
  NO_RELAYS autolearn=ham version=3.3.1
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 16 May 2019 14:09:07 +0000
+Date: Thu, 16 May 2019 14:09:28 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -67,9 +67,9 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-203209-202145-fb3mz37cHI@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-203209-202145@https.bugzilla.kernel.org/>
-References: <bug-203209-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-203211-202145-kcU5NyKMWk@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-203211-202145@https.bugzilla.kernel.org/>
+References: <bug-203211-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -82,10 +82,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: gatech.edu]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hRH4M-001OSZ-Jk
-Subject: [f2fs-dev] [Bug 203209] crash at f2fs_is_valid_blkaddr
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hRH4g-001OU9-Pe
+Subject: [f2fs-dev] [Bug 203211] Infinite error messages on mounting crafted
+ image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,13 +101,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203209
+https://bugzilla.kernel.org/show_bug.cgi?id=203211
 
 Jungyeon (jungyeon@gatech.edu) changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
+             Status|ASSIGNED                    |RESOLVED
          Resolution|---                         |CODE_FIX
 
 -- 
