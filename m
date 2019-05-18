@@ -2,78 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A65EB22103
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 18 May 2019 02:48:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1DB122107
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 18 May 2019 02:53:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hRnW6-0005Zk-0g; Sat, 18 May 2019 00:48:02 +0000
+	id 1hRnbR-0005lw-GZ; Sat, 18 May 2019 00:53:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hRnW4-0005ZT-KD
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 18 May 2019 00:48:00 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hRnbP-0005lg-O0
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 18 May 2019 00:53:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pxkATC5MxB+EtBw5KoSVPNyfnkA6S8i8JHFcV7Toya8=; b=e5NN3TqQdtBQBShxk6v9JRBrnH
- /O/P+ijXMkEoMxtyopedr51ph2AhTpDn7vWNpbVRAejshX1eM2LjROIN02+8YSUN3x07JIEhi1W9k
- AKXtZrQGRjcD7keaIuZnQl6VtlnjyvP4MZH4rMJIktCr2KA+NlfkjqxhcXue02453MqQ=;
+ bh=qNLvuryqp9tgxaeuN6XAVOj/cP3uQ/hAm9n0wIpvvFE=; b=IiHBJrwJtMT5uuYyhiKz+tUr8J
+ oi7BEcQnZpB/RiNzWPBwshiEdw862HLYzaJWDj/J1jjsJpmfjbZYPWd38Y7/cDJTUFon/kRk4JSRB
+ Y2onKjILebFLSiN5zQVbhI0AN+JJa8QoaA5LJVX0LOzDTBUWDPfMHdoCkM7Ts+YYEUc0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=pxkATC5MxB+EtBw5KoSVPNyfnkA6S8i8JHFcV7Toya8=; b=O
- YQPjBlAs9urVFs9A2BF+g4jlOPpNISKZK61Hjd3ZIrKiykZMEJRcV4gRDUqAAVadnhpfLvO0h8K4d
- hcJ+NICcdfxOh62ARPf7WXXVlP9jd+PHkNsPBHA8WRquvdmLEvVaTHkhrAm8bCK+ZIrsrfdv7SABF
- 7/h4HmxvQDr61QIA=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=qNLvuryqp9tgxaeuN6XAVOj/cP3uQ/hAm9n0wIpvvFE=; b=JHZg2jQ4hP6Z0Sv2a4kY3cu/qn
+ aP8J+vJnP5BsUSCBkGVKO7sUZTEES0nGWfl/w21dxperl0VyKHWMiPHo6ZiTjamivf8C2YTT9PuN9
+ j00UTspZFyxkIr7D0VF1WfnTXXEUG9OHUa4gctsKsJryqiZB0yfvuVzuYh+piYr7FKfg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hRnW3-004Xx2-4Y
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 18 May 2019 00:48:00 +0000
+ id 1hRnb4-00464T-Uy
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 18 May 2019 00:53:31 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 47DA721883;
- Sat, 18 May 2019 00:47:53 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4764C20848;
+ Sat, 18 May 2019 00:53:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558140473;
- bh=wcJMmid3eNX1fzqE7KShQj339cvq5JIkzCDTKY+6qnQ=;
- h=From:To:Cc:Subject:Date:From;
- b=lLvPLBZDUqi9n30KQHvC+B/mdzOF1Y5E0ax4t8Cu08ZULeWcxxATpwO7pB8BB55/9
- FsB2b1Hjo1kC5w47jpPiqFtz+zJ3zJC2xE0sVxZbLKmCIsRW5t2wkwkQcFeSCycBje
- AhjCZOZ0fjeCPVI+PSkJ8d2nQuzArr8fiL1/HAUw=
+ s=default; t=1558140785;
+ bh=66iQAXpgOcprZCr8CiOqoxBvjn/OVWnQ1zBgY9TaV+E=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OXxweGuLs1atpXSvvpx9TysllOW6kS4Rq9gj3QnFCAaqCfxgPNYHVDFlbLmQKuQmd
+ 3/+efhufGSfnFwam8ZVNq6KBq/7cw5gUVXITBhfBzkV2q23fZ9X9Y6GDbbOW31Q2Ch
+ d2cCLQSFLJvJYh2G2FvySqW12IbKsc51CDSkUxfw=
+Date: Fri, 17 May 2019 17:53:04 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 17 May 2019 17:47:51 -0700
-Message-Id: <20190518004751.18962-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190518004751.18962-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20190518004751.18962-1-jaegeuk@kernel.org>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: acm.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hRnW3-004Xx2-4Y
-Subject: [f2fs-dev] [PATCH] loop: avoid EAGAIN,
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1hRnb4-00464T-Uy
+Subject: Re: [f2fs-dev] [PATCH v2] loop: avoid EAGAIN,
  if offset or block_size are changed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -86,9 +80,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-block@vger.kernel.org, Bart Van Assche <bvanassche@acm.org>,
- stable@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
+ Bart Van Assche <bvanassche@acm.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -107,11 +100,14 @@ Reported-by: Gwendal Grignou <gwendal@chromium.org>
 Reported-by: grygorii tertychnyi <gtertych@cisco.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- drivers/block/loop.c | 44 +++++++++++++++++---------------------------
- 1 file changed, 17 insertions(+), 27 deletions(-)
+v2 from v1:
+ - remove obsolete jump
+
+ drivers/block/loop.c | 45 +++++++++++++++++---------------------------
+ 1 file changed, 17 insertions(+), 28 deletions(-)
 
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 102d79575895..7c7d2d9c47d0 100644
+index 102d79575895..42994de2dd12 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
 @@ -1212,6 +1212,7 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
@@ -171,7 +167,7 @@ index 102d79575895..7c7d2d9c47d0 100644
  	int err = 0;
  
  	if (lo->lo_state != Lo_bound)
-@@ -1506,23 +1504,10 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+@@ -1506,30 +1504,21 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
  	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
  		return -EINVAL;
  
@@ -197,8 +193,8 @@ index 102d79575895..7c7d2d9c47d0 100644
  	blk_queue_logical_block_size(lo->lo_queue, arg);
  	blk_queue_physical_block_size(lo->lo_queue, arg);
  	blk_queue_io_min(lo->lo_queue, arg);
-@@ -1530,6 +1515,11 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- out_unfreeze:
+ 	loop_update_dio(lo);
+-out_unfreeze:
  	blk_mq_unfreeze_queue(lo->lo_queue);
  
 +	/* truncate stale pages cached by previous operations */
