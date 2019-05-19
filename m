@@ -2,90 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BD6622714
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 May 2019 17:09:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07982227BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 May 2019 19:32:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hSNRI-0006k1-ES; Sun, 19 May 2019 15:09:28 +0000
+	id 1hSPfN-0003Bp-ET; Sun, 19 May 2019 17:32:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hSNRH-0006jY-3V
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 May 2019 15:09:27 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hSPfM-0003Bb-4F
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 May 2019 17:32:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EDOwbDn0kj29XKa7opYGUMJNATILq8DaeqK6Y/rb5Kk=; b=MVgVPu6zRSp5KllXXzoCkwEnp/
- UtWqOANV6zq8CyVxq/Abrae6/hsxs8N89A9KAA1b0q9TL1otaA9TfQ7rUUg0gCl2oVL/SO4EwQQO+
- snrwczluKnSs3RfK5v6n3K2XWU2weEOQDS/WGBaeNK1+UPzTiBYOrY+jxTo1GgsB35U0=;
+ bh=Xd/j2bFTFqvTkhoe0dY27U0vgyUtV1T98XiRQZuV78o=; b=Q9jL68mkeMEvW/rZQIqghBbQ2b
+ a09jycHwXqgyd97lghe3R/1CFBmk/hVI9oj0j3wcDdkiCfa3bG6YnkvwuxGfjdC+aJJeAD9+D8MCJ
+ CqqYvO0946fAej394E+o5VtKcSuiHegSa+gt0vK1KaYqHUWHaOzn9S9vwkBWWiVRD7zY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EDOwbDn0kj29XKa7opYGUMJNATILq8DaeqK6Y/rb5Kk=; b=YHY9Pa/uyzChdLsRDLeJwG+3TK
- jxXiSOMwCzNOC6cmy/ZDEqRSj6Zos5Zz803H3WGbZIrfb2qzVkFbMttBWPt6LoQqV81ogdXKKYXd8
- kYbq0vOkvKjo1hcfkadB0kZqFhdng5I44lnQ1JeyvDqzFHIP5ZD28kuhYchhkHs0gtFg=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=Xd/j2bFTFqvTkhoe0dY27U0vgyUtV1T98XiRQZuV78o=; b=b4eO6PmeCg0C/TxpVGorLxruwP
+ OieDrj1r+YxUPkd4gNTxcNijHIZPAaB6NGVAXzTESXzdxlfJdfzRdKjKxDhOvebfmke63bl6LNdYs
+ 18l6e58JbsyBlPx5HQXYJGAHbfj+cS1FStMUOVTefD8jzc/Y6ISC7KwJXrbMczEuB8+c=;
+Received: from mail-qt1-f196.google.com ([209.85.160.196])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hSNRE-008is6-9v
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 May 2019 15:09:27 +0000
-Received: from [192.168.0.101] (unknown [49.74.66.164])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9F64B21872;
- Sun, 19 May 2019 15:09:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558278557;
- bh=/GBfnyn1CEFpEIn1zVTJiMwmaKrwBTJn0x+pzEI/q20=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=yXbDLRC9kKwmhI5kfHow6UWvLOY9MPwHXZwnHdFC8HWwxDXWpJRTYmYpFfOJw98wI
- jNiTb7loaGJEQO7F9j9JGpL/sP+KDDyIO6yYLnvx96q/9PzkGAnGghS+no+OYM1iyb
- fC8IpLIZmEMLGXp/yw0WQ1jDF/7W7nZzZ747Bgf4=
-To: Ju Hyung Park <qkrwngud825@gmail.com>
-References: <20190514093340.40217-1-yuchao0@huawei.com>
- <20190514093340.40217-2-yuchao0@huawei.com>
- <CAD14+f2ckNUv9n-Zb9UL_ojX8=24tYBhT-SsrcpVNogqee2tkA@mail.gmail.com>
- <6bcbb5e8-55ad-49c1-bb77-f7f677ceb526@huawei.com>
- <CAD14+f3NHosrL=5UOBSMbFxQ91x-AuWOj_w=JYkJSnmfDgTkvA@mail.gmail.com>
- <CAD14+f0ZTmmLBXtmHF_Kz23JLSJy+UzpNxwSMV4rvSCse3y7EA@mail.gmail.com>
- <7e1bfa07-5ee8-a276-fe6a-6d79bd9270c3@huawei.com>
- <CAD14+f1+puy4M6rL_SbGt9vej=7LgK+qEjq71_878=oqSvjJ2Q@mail.gmail.com>
- <0f89b0b6-5cc5-6618-72e5-8a2f81947161@kernel.org>
- <CAD14+f1xgYKAnzqLb-ZpzbeskZegGHXbrJ+vEHZe19_Jp3pBTQ@mail.gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <e3303318-758e-b263-f6ed-d55e98bdea78@kernel.org>
-Date: Sun, 19 May 2019 23:09:13 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hSPfK-008z9r-GS
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 May 2019 17:32:08 +0000
+Received: by mail-qt1-f196.google.com with SMTP id y22so13725170qtn.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 19 May 2019 10:32:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Xd/j2bFTFqvTkhoe0dY27U0vgyUtV1T98XiRQZuV78o=;
+ b=X1tfe5A90x6J5V4+wVqHQimvtvECfIyQ1m7PveGOvsG/VqCe+kmo27BWVjB58gA+Wt
+ UU6QiA5sVlMIie9hU0PZfiEbYBsTAw3RiuusnjaHar3uOtbL4co7CwVmGY/LsvVZPc0x
+ fdrbpulN85v4u+GKt+e+O/uB4hJO3CE6ICCWCr9EXK2+qajhYxWXZM7O6AL1WzI3v31k
+ H5F2EB2iVCCmDmB4q62TrrKC1QmmH6QUajYzafenWm5+ZZBhz6OQwcO1GQunln94GJ+O
+ aKiI83p7G21ObFabwIj4UKmi5QZcr85FT7nf3os45NkWsOj7M1FkcMq2g/sGMyn3xNsZ
+ SO3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Xd/j2bFTFqvTkhoe0dY27U0vgyUtV1T98XiRQZuV78o=;
+ b=bx5IRHVirrol60EBvOKDNkhKY7GbGFwILLC7MWebZ2ArxaRMFyBGhUmBGUTU1y4TUL
+ sEWFRtTcFkOFsZTrTuoqG3mFLY/vnYMBjn8nBGEnSNPLkEianxqOVb4yky8PMw/NLRk8
+ GeXXKelaoT/c3a7o8buDoocGOAzxSDmIe2w2Jy4PDTKPLLGOuPWb5EPP/limbUP6j8QN
+ RWl35iFZvqWXxRQ6+R2NCmsF0BpIxAvd3UZkINvMVoXdPSNEGQ2I2B8JKSaJeNIPtzak
+ r3yFa8cnzB5QdOvBXPAVgAaMFLjL5zRFZuANUu++8qPeZgV4XMAApjiOpsGnKh0my82i
+ Fe9w==
+X-Gm-Message-State: APjAAAUp6JG1tPyYmqAG/wcdaVusIaZdmHNFkbR93R2bAhUB1PAI1q8r
+ 5RuVVCPX55+OMWUrDB6G8ci6AiO9axZNxhc3joI=
+X-Google-Smtp-Source: APXvYqzXDx3NLiybo6NRxAHAzaM+6GWVTQUIcE1VaLVGLZadSNyE9hmcJBInctQqW26CkCTb4sli09T8U1Zii3P+SJU=
+X-Received: by 2002:ac8:3862:: with SMTP id r31mr58971037qtb.26.1558287120129; 
+ Sun, 19 May 2019 10:32:00 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAD14+f1xgYKAnzqLb-ZpzbeskZegGHXbrJ+vEHZe19_Jp3pBTQ@mail.gmail.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+References: <20190426022554.56393-1-yuchao0@huawei.com>
+In-Reply-To: <20190426022554.56393-1-yuchao0@huawei.com>
+From: Ju Hyung Park <qkrwngud825@gmail.com>
+Date: Mon, 20 May 2019 02:31:49 +0900
+Message-ID: <CAD14+f0f9fKMmzNYXzoPD9W5CrECwvmGLi2a8EphfyZhTPjvnA@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (qkrwngud825[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.160.196 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: arter97.com]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (qkrwngud825[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: arter97.com]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hSNRE-008is6-9v
-Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs-tools: relocate chksum_offset
- for large_nat_bitmap feature
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hSPfK-008z9r-GS
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: relocate chksum_offset for
+ large_nat_bitmap feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,42 +111,166 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Ju Hyung,
+Hi Jaegeuk and Chao,
 
-On 2019-5-19 17:19, Ju Hyung Park wrote:
-> Hi Chao,
-> 
-> On Sun, May 19, 2019 at 2:09 PM Chao Yu <chao@kernel.org> wrote:
->> I've found one bug when repairing cp_payload blocks, could you try it?
->>
->> [PATCH] fsck.f2fs: fix to repair cp_loads blocks at correct position
-> 
-> http://arter97.com/f2fs/v3__cp
-> 
-> After the patch, 2nd, 3rd and the 4th run all returns the same output.
-> I think now fsck only needs to run once :)
+I was semi-forced today to use the new kernel and test f2fs.
 
-Thanks for quick test. :)
+My Ubuntu initramfs got a bit wonky and I had to boot into live CD and
+fix some stuffs. The live CD was using 4.15 kernel, and just mounting
+the f2fs partition there corrupted f2fs and my 4.19(with 5.1-rc1-4.19
+f2fs-stable merged) refused to mount with "SIT is corrupted node"
+message.
 
-> 
-> Final question though, is it expected that the first run to print 62MB
-> worth of logs?
+I used the latest f2fs-tools sent by Chao including "fsck.f2fs: fix to
+repair cp_loads blocks at correct position"
 
-I think last bug which above patch tries to fix really crashes sit version
-bitmap area.. result in wrong sit block use and showing so many error messages
-in fsck, that should only happen when the image is badly corrupted, I think it
-is worth to show enough information which can be used for better troubleshoot later.
+It spit out 140M worth of output, but at least I didn't have to run it
+twice. Everything returned "Ok" in the 2nd run.
+The new log is at
+http://arter97.com/f2fs/final
 
-Thanks,
+After fixing the image, I used my 4.19 kernel with 5.2-rc1-4.19
+f2fs-stable merged and it mounted.
 
-> 
-> Thanks.
-> 
+But, I got this:
+[    1.047791] F2FS-fs (nvme0n1p3): layout of large_nat_bitmap is
+deprecated, run fsck to repair, chksum_offset: 4092
+[    1.081307] F2FS-fs (nvme0n1p3): Found nat_bits in checkpoint
+[    1.161520] F2FS-fs (nvme0n1p3): recover fsync data on readonly fs
+[    1.162418] F2FS-fs (nvme0n1p3): Mounted with checkpoint version = 761c7e00
+
+But after doing a reboot, the message is gone:
+[    1.098423] F2FS-fs (nvme0n1p3): Found nat_bits in checkpoint
+[    1.177771] F2FS-fs (nvme0n1p3): recover fsync data on readonly fs
+[    1.178365] F2FS-fs (nvme0n1p3): Mounted with checkpoint version = 761c7eda
+
+I'm not exactly sure why the kernel detected that I'm still using the
+old layout on the first boot. Maybe fsck didn't fix it properly, or
+the check from the kernel is improper.
+
+I also noticed that Jaegeuk sent v1 of this patch to upstream. (Maybe
+that's why the kernel detected old layout?) Please send v2 to upstream
+soon, as running older fsck will cause much more headaches.
+
+Thanks.
+
+
+On Fri, Apr 26, 2019 at 11:26 AM Chao Yu <yuchao0@huawei.com> wrote:
+>
+> For large_nat_bitmap feature, there is a design flaw:
+>
+> Previous:
+>
+> struct f2fs_checkpoint layout:
+> +--------------------------+  0x0000
+> | checkpoint_ver           |
+> | ......                   |
+> | checksum_offset          |------+
+> | ......                   |      |
+> | sit_nat_version_bitmap[] |<-----|-------+
+> | ......                   |      |       |
+> | checksum_value           |<-----+       |
+> +--------------------------+  0x1000      |
+> |                          |      nat_bitmap + sit_bitmap
+> | payload blocks           |              |
+> |                          |              |
+> +--------------------------|<-------------+
+>
+> Obviously, if nat_bitmap size + sit_bitmap size is larger than
+> MAX_BITMAP_SIZE_IN_CKPT, nat_bitmap or sit_bitmap may overlap
+> checkpoint checksum's position, once checkpoint() is triggered
+> from kernel, nat or sit bitmap will be damaged by checksum field.
+>
+> In order to fix this, let's relocate checksum_value's position
+> to the head of sit_nat_version_bitmap as below, then nat/sit
+> bitmap and chksum value update will become safe.
+>
+> After:
+>
+> struct f2fs_checkpoint layout:
+> +--------------------------+  0x0000
+> | checkpoint_ver           |
+> | ......                   |
+> | checksum_offset          |------+
+> | ......                   |      |
+> | sit_nat_version_bitmap[] |<-----+
+> | ......                   |<-------------+
+> |                          |              |
+> +--------------------------+  0x1000      |
+> |                          |      nat_bitmap + sit_bitmap
+> | payload blocks           |              |
+> |                          |              |
+> +--------------------------|<-------------+
+>
+> Related report and discussion:
+>
+> https://sourceforge.net/p/linux-f2fs/mailman/message/36642346/
+>
+> Reported-by: Park Ju Hyung <qkrwngud825@gmail.com>
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> v2:
+> - improve hint message suggested by Ju Hyung.
+> - move verification to f2fs_sanity_check_ckpt().
+>  fs/f2fs/f2fs.h  |  4 +++-
+>  fs/f2fs/super.c | 13 +++++++++++++
+>  2 files changed, 16 insertions(+), 1 deletion(-)
+>
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 119bc5a9783e..aa71c1aa9eaa 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1909,9 +1909,11 @@ static inline void *__bitmap_ptr(struct f2fs_sb_info *sbi, int flag)
+>         int offset;
+>
+>         if (is_set_ckpt_flags(sbi, CP_LARGE_NAT_BITMAP_FLAG)) {
+> +               unsigned int chksum_size = sizeof(__le32);
+> +
+>                 offset = (flag == SIT_BITMAP) ?
+>                         le32_to_cpu(ckpt->nat_ver_bitmap_bytesize) : 0;
+> -               return &ckpt->sit_nat_version_bitmap + offset;
+> +               return &ckpt->sit_nat_version_bitmap + offset + chksum_size;
+>         }
+>
+>         if (__cp_payload(sbi) > 0) {
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index fefc8cc6e756..22241bb866df 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -2714,6 +2714,19 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
+>                 return 1;
+>         }
+>
+> +       if (__is_set_ckpt_flags(ckpt, CP_LARGE_NAT_BITMAP_FLAG)) {
+> +               unsigned int chksum_offset;
+> +
+> +               chksum_offset = le32_to_cpu(ckpt->checksum_offset);
+> +               if (chksum_offset != CP_MIN_CHKSUM_OFFSET) {
+> +                       f2fs_msg(sbi->sb, KERN_WARNING,
+> +                               "using deprecated layout of large_nat_bitmap, "
+> +                               "please run fsck v1.13.0 or higher to repair, "
+> +                               "chksum_offset: %u", chksum_offset);
+> +                       return 1;
+> +               }
+> +       }
+> +
+>         if (unlikely(f2fs_cp_error(sbi))) {
+>                 f2fs_msg(sbi->sb, KERN_ERR, "A bug case: need to run fsck");
+>                 return 1;
+> --
+> 2.18.0.rc1
+>
+>
+>
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
