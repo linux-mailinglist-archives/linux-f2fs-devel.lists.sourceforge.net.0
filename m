@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76E7A23D6F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2019 18:30:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C585523D6A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2019 18:30:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hSlBS-0001Yk-3w; Mon, 20 May 2019 16:30:42 +0000
+	id 1hSlBQ-0004q7-Eu; Mon, 20 May 2019 16:30:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hSlBP-0001Xr-Ne
+ (envelope-from <ebiggers@kernel.org>) id 1hSlBP-0004pW-Nj
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 May 2019 16:30:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dGrHvUsuSE7IoVSjVFZqvAeWaLWDncEjkW1a/5Cxa24=; b=f0rhZm6a4zEEDvK8o/CD9dHKQX
- 7Z08+lLrs7UNtR50+anhZC+05inDbkOinfTW7ZN4OS/+hei58MOM8+EhCrlqcznfn3HI8uvWnTEOH
- ePEeHJBWuUMVU1ejUNnW+CtHHUzS/3C8Ly9OO+BTnRJq8m9BpDh4/VIsk7ZZv337knoo=;
+ bh=0lPCQhBtlt7bBczJxvi6auLb0qrF7tvZ8OeVR6w8dbc=; b=QYZNzk1PZl2J7FkmrTPz981hDa
+ BYKdIQg5nhsBg6Oja2ZJdAIh0EtaiY/S3xI/fMOTfRtyw24ww04BG010KJ0olfswnddM4N4tkSNFb
+ 1/VLn4Fi7+9XDqoAzsoiG5Soy2/eJl9TveTBPCITHPwpA1o5arsQ01JU+VUnAYUXXcPE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dGrHvUsuSE7IoVSjVFZqvAeWaLWDncEjkW1a/5Cxa24=; b=EPOdhsXHTr7WnDLA++bcVHzEBo
- kbd+M33+5X26cLd54GI9uIxpGMaG/JJwXzBsQkOea8i1yU1WTzKyztf/ojsnB1bjnAb1sOdDcV7sF
- sl4M/IXlaNk8jfCCRdc8e6iJ//fkjFWLvFGiF3iIt0l80PM5ze+0dcOpguBSc42GDezY=;
+ bh=0lPCQhBtlt7bBczJxvi6auLb0qrF7tvZ8OeVR6w8dbc=; b=Ns2p8SMa/WfMmtzHOaLh2rNRKE
+ obZEeGXxX2nlfGdbr/WFg4FiRGDWVMhutQ1c4YamXo3fpeXUBw3EicXtqensSGQVhJYBU80/33IWo
+ ru/LRBFgRvRAKXCrcS7PVyE5JbKppxN7tbff0KGJINw2saWHVbBsfX7iQUNijjFGuNBA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hSlBO-0005Je-3G
+ id 1hSlBO-00BNhc-2Y
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 May 2019 16:30:39 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 253F2217D7;
+ by mail.kernel.org (Postfix) with ESMTPSA id 75FAB217D8;
  Mon, 20 May 2019 16:30:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1558369825;
- bh=bNfXVLtoITf8LG1OztsuiNKS3cmbu3tuokayi1NgBvg=;
+ bh=nukFlueEKdgNJgzso/AFsN3Mr+EdXgyUtrGGf/8u+g8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ICE9E/nKHvk1KzmTsv7NT0zAmnnMv0GrRE2cFsDrCO79Pr0l3xR0tSZLRKaQVfww+
- F04rJTlzFdv6lvY0pRaVYsuTSOPIoF++p0FCAK1lDPym0h4D0leBHCyOc51fQtejoy
- koS9Idc5jJ0aNk3g4RQTFT+39LtMR4UmJSSj47mg=
+ b=L1Vz3x+6nxyFBaE2h8BSCuzL5qFe0UHFxvGgBIrdA8tW7WyZbF/6R2LpBd+1TkCzr
+ pB4VpfNErXPtOKrXOnjcA6qsOyyIUIO3CgBChitVl3yi1JSURZCiGD6g6S4l1QcvOE
+ 4ZUU82xl6pdJqBCczP5WFk45xzIteoWph7h/RoPM=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Mon, 20 May 2019 09:29:51 -0700
-Message-Id: <20190520162952.156212-14-ebiggers@kernel.org>
+Date: Mon, 20 May 2019 09:29:52 -0700
+Message-Id: <20190520162952.156212-15-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.21.0.1020.gf2820cf01a-goog
 In-Reply-To: <20190520162952.156212-1-ebiggers@kernel.org>
 References: <20190520162952.156212-1-ebiggers@kernel.org>
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hSlBO-0005Je-3G
-Subject: [f2fs-dev] [PATCH v2 13/14] ext4: decrypt only the needed block in
- __ext4_block_zero_page_range()
+X-Headers-End: 1hSlBO-00BNhc-2Y
+Subject: [f2fs-dev] [PATCH v2 14/14] ext4: encrypt only up to last block in
+ ext4_bio_write_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,38 +91,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chandan Rajendra <chandan@linux.ibm.com>
+From: Eric Biggers <ebiggers@google.com>
 
-In __ext4_block_zero_page_range(), only decrypt the block that actually
-needs to be decrypted, rather than assuming blocksize == PAGE_SIZE and
-decrypting the whole page.
+As an optimization, don't encrypt blocks fully beyond i_size, since
+those definitely won't need to be written out.  Also add a comment.
 
 This is in preparation for allowing encryption on ext4 filesystems with
 blocksize != PAGE_SIZE.
 
-Signed-off-by: Chandan Rajendra <chandan@linux.ibm.com>
-(EB: rebase onto previous changes, improve the commit message, and use
- bh_offset())
+This is based on work by Chandan Rajendra.
+
+Reviewed-by: Chandan Rajendra <chandan@linux.ibm.com>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/inode.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/ext4/page-io.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 8b3ea9c8ac988..77c43c50e4580 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -4075,9 +4075,8 @@ static int __ext4_block_zero_page_range(handle_t *handle,
- 		if (S_ISREG(inode->i_mode) && IS_ENCRYPTED(inode)) {
- 			/* We expect the key to be set. */
- 			BUG_ON(!fscrypt_has_encryption_key(inode));
--			BUG_ON(blocksize != PAGE_SIZE);
- 			WARN_ON_ONCE(fscrypt_decrypt_pagecache_blocks(
--						page, PAGE_SIZE, 0));
-+					page, blocksize, bh_offset(bh)));
- 		}
- 	}
- 	if (ext4_should_journal_data(inode)) {
+diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
+index 40ee33df57649..a18a47a2a1d1a 100644
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -467,11 +467,19 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
+ 
+ 	bh = head = page_buffers(page);
+ 
++	/*
++	 * If any blocks are being written to an encrypted file, encrypt them
++	 * into a bounce page.  For simplicity, just encrypt until the last
++	 * block which might be needed.  This may cause some unneeded blocks
++	 * (e.g. holes) to be unnecessarily encrypted, but this is rare and
++	 * can't happen in the common case of blocksize == PAGE_SIZE.
++	 */
+ 	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode) && nr_to_submit) {
+ 		gfp_t gfp_flags = GFP_NOFS;
++		unsigned int enc_bytes = round_up(len, i_blocksize(inode));
+ 
+ 	retry_encrypt:
+-		bounce_page = fscrypt_encrypt_pagecache_blocks(page, PAGE_SIZE,
++		bounce_page = fscrypt_encrypt_pagecache_blocks(page, enc_bytes,
+ 							       0, gfp_flags);
+ 		if (IS_ERR(bounce_page)) {
+ 			ret = PTR_ERR(bounce_page);
 -- 
 2.21.0.1020.gf2820cf01a-goog
 
