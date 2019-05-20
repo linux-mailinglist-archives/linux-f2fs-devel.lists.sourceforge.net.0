@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A202F23EDC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2019 19:29:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3FDB23ED5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2019 19:29:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hSm6L-0007jy-ST; Mon, 20 May 2019 17:29:29 +0000
+	id 1hSm6J-0001yw-Dg; Mon, 20 May 2019 17:29:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hSm6H-0007jB-JU
+ (envelope-from <ebiggers@kernel.org>) id 1hSm6H-0001yJ-Le
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 May 2019 17:29:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=myz+WPer89YqVqXzzWJI0iEycP0f8b5iILpQymUPe3A=; b=JB7JR/uT2uqgglyrq6rx/umCnw
- DsupjIw8cZT+puL2YrENu40aeWgMmDMDJB0mR7DxOZL8FiLlR7QFtEtFwJJS3Ywx976+/3XzGAkvI
- gugvYQUPfLmi0QgWw5jPEuRZkP4csWSuYicsHjaS9tXxY496PqEsI/PLTulprSH8dYt0=;
+ bh=+VIZcfcFrJk7dJXdYtEIu31//UvKP9w/XijnXH5vx+A=; b=l816yCeF5VO6HWkeWwE2t0Ayi3
+ h0DXkvZ9FOnPGimQYGuSzPelzIrx1eGJJb5N3RdH/419nK1Hhw4cMhhJN/44jaUQJAkKcsIDUsrcg
+ 8hOHcZKjOy0bMPfW/3oWWoKdqNytstGd5eaIBHMaZXRznXv13ZdFrAk8dGZpSi14Ly50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=myz+WPer89YqVqXzzWJI0iEycP0f8b5iILpQymUPe3A=; b=EtP+xbeNProjqLpmZSdl09/wwl
- rOZttrBCoAOZv/CYDAaeE8oH0HPJVaVaq3KDo5WPWZH2/1wm/Tx6ad6yJvENRVdt8xU8pyXxr+U7A
- 2+aOtqKsvXXBhzev7Ozu0O2eijLeRt9ueyUa2MXm++0tAU6Yto5+nRvKirCIxthXldfo=;
+ bh=+VIZcfcFrJk7dJXdYtEIu31//UvKP9w/XijnXH5vx+A=; b=bGIxGBbgH3Fa3rbvOhoyrRMb8T
+ 3BCvf9s7DF9/89q+riNb4hOd49eR82DsrqkI0Ju+1de5yFDaNOotDT4HxmylSOt/56Xn2g23yIsnV
+ 7TC+xdVWi3QAcejcs/hHPfJR59o3Hg5N+UmqZaSjSJPSmsSavwyzjiTilpLMXuaYPRlc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hSm6G-000FcG-AH
+ id 1hSm6G-00Bx1R-As
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 May 2019 17:29:25 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A86D921773;
- Mon, 20 May 2019 17:28:51 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2A399217D4;
+ Mon, 20 May 2019 17:28:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1558373332;
- bh=FsG24jU0LTyF9jCc11tEibd4vjJAAx7ywXo0TbfgDk8=;
+ bh=qVob3nr8jHo1l6KeXzwXTXqn1MD2B4dKwyJ/ETAW3OY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SZ5APFl67ZlfN6b5e/rqIF4Q1g67KGWa7yFiueYGd8yw0GcGJYaf/6ebl/NrJwPKj
- 3EmQzpltTxXdXo4iTqIeta3usr02wEI0LENpPjhTWtzfAE7dIO6o8+XXie7v1szbgJ
- 53j8+W/BYCd0nGK5+yWToNEJmfiSfKlOTgj1GJs4=
+ b=R2Zpy0kxTbXOPenL1Xxbn5zV1RH1q2AuVMsEURpCjLRwdlxD+iA2rRtllfC0IISvJ
+ 4UiQHqbBA76SfAyHe6harrutth1Upk5/di6mqqsCHIyfQtFfJP26FfsDcVEigdbeyk
+ uH0d/cKKW0I8lLNGDHINJEsYy0Ah/jQa7qwDZdLw=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Mon, 20 May 2019 10:25:49 -0700
-Message-Id: <20190520172552.217253-14-ebiggers@kernel.org>
+Date: Mon, 20 May 2019 10:25:50 -0700
+Message-Id: <20190520172552.217253-15-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.21.0.1020.gf2820cf01a-goog
 In-Reply-To: <20190520172552.217253-1-ebiggers@kernel.org>
 References: <20190520172552.217253-1-ebiggers@kernel.org>
@@ -70,8 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.9 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hSm6G-000FcG-AH
-Subject: [f2fs-dev] [PATCH v6 13/16] ext4: wire up new fscrypt ioctls
+X-Headers-End: 1hSm6G-00Bx1R-As
+Subject: [f2fs-dev] [PATCH v6 14/16] f2fs: wire up new fscrypt ioctls
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,7 +97,7 @@ From: Eric Biggers <ebiggers@google.com>
 Wire up the new ioctls for adding and removing fscrypt keys to/from the
 filesystem, and the new ioctl for retrieving v2 encryption policies.
 
-FS_IOC_REMOVE_ENCRYPTION_KEY also required making ext4_drop_inode() call
+FS_IOC_REMOVE_ENCRYPTION_KEY also required making f2fs_drop_inode() call
 fscrypt_drop_inode().
 
 For more details see Documentation/filesystems/fscrypt.rst and the
@@ -105,65 +105,93 @@ fscrypt patches that added the implementation of these ioctls.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/ioctl.c | 24 ++++++++++++++++++++++++
- fs/ext4/super.c |  3 +++
- 2 files changed, 27 insertions(+)
+ fs/f2fs/file.c  | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/super.c |  2 ++
+ 2 files changed, 48 insertions(+)
 
-diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
-index e486e49b31ed7..b51b6384045b8 100644
---- a/fs/ext4/ioctl.c
-+++ b/fs/ext4/ioctl.c
-@@ -1092,6 +1092,26 @@ long ext4_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 	case EXT4_IOC_GET_ENCRYPTION_POLICY:
- 		return fscrypt_ioctl_get_policy(filp, (void __user *)arg);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 45b45f37d347e..d88b77a41117c 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2107,6 +2107,40 @@ static int f2fs_ioc_get_encryption_pwsalt(struct file *filp, unsigned long arg)
+ 	return err;
+ }
  
-+	case FS_IOC_GET_ENCRYPTION_POLICY_EX:
-+		if (!ext4_has_feature_encrypt(sb))
-+			return -EOPNOTSUPP;
-+		return fscrypt_ioctl_get_policy_ex(filp, (void __user *)arg);
++static int f2fs_ioc_get_encryption_policy_ex(struct file *filp,
++					     unsigned long arg)
++{
++	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
++		return -EOPNOTSUPP;
 +
-+	case FS_IOC_ADD_ENCRYPTION_KEY:
-+		if (!ext4_has_feature_encrypt(sb))
-+			return -EOPNOTSUPP;
-+		return fscrypt_ioctl_add_key(filp, (void __user *)arg);
++	return fscrypt_ioctl_get_policy_ex(filp, (void __user *)arg);
++}
 +
-+	case FS_IOC_REMOVE_ENCRYPTION_KEY:
-+		if (!ext4_has_feature_encrypt(sb))
-+			return -EOPNOTSUPP;
-+		return fscrypt_ioctl_remove_key(filp, (const void __user *)arg);
++static int f2fs_ioc_add_encryption_key(struct file *filp, unsigned long arg)
++{
++	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
++		return -EOPNOTSUPP;
 +
-+	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
-+		if (!ext4_has_feature_encrypt(sb))
-+			return -EOPNOTSUPP;
-+		return fscrypt_ioctl_get_key_status(filp, (void __user *)arg);
++	return fscrypt_ioctl_add_key(filp, (void __user *)arg);
++}
 +
- 	case EXT4_IOC_FSGETXATTR:
- 	{
- 		struct fsxattr fa;
-@@ -1210,6 +1230,10 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case EXT4_IOC_SET_ENCRYPTION_POLICY:
- 	case EXT4_IOC_GET_ENCRYPTION_PWSALT:
- 	case EXT4_IOC_GET_ENCRYPTION_POLICY:
-+	case FS_IOC_GET_ENCRYPTION_POLICY_EX:
-+	case FS_IOC_ADD_ENCRYPTION_KEY:
-+	case FS_IOC_REMOVE_ENCRYPTION_KEY:
-+	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
- 	case EXT4_IOC_SHUTDOWN:
- 	case FS_IOC_GETFSMAP:
- 		break;
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 4079605d437ae..757819139b8f7 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -1107,6 +1107,9 @@ static int ext4_drop_inode(struct inode *inode)
++static int f2fs_ioc_remove_encryption_key(struct file *filp, unsigned long arg)
++{
++	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
++		return -EOPNOTSUPP;
++
++	return fscrypt_ioctl_remove_key(filp, (const void __user *)arg);
++}
++
++static int f2fs_ioc_get_encryption_key_status(struct file *filp,
++					      unsigned long arg)
++{
++	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
++		return -EOPNOTSUPP;
++
++	return fscrypt_ioctl_get_key_status(filp, (void __user *)arg);
++}
++
+ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
  {
- 	int drop = generic_drop_inode(inode);
- 
-+	if (!drop)
-+		drop = fscrypt_drop_inode(inode);
-+
- 	trace_ext4_drop_inode(inode, drop);
- 	return drop;
+ 	struct inode *inode = file_inode(filp);
+@@ -3012,6 +3046,14 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ 		return f2fs_ioc_get_encryption_policy(filp, arg);
+ 	case F2FS_IOC_GET_ENCRYPTION_PWSALT:
+ 		return f2fs_ioc_get_encryption_pwsalt(filp, arg);
++	case FS_IOC_GET_ENCRYPTION_POLICY_EX:
++		return f2fs_ioc_get_encryption_policy_ex(filp, arg);
++	case FS_IOC_ADD_ENCRYPTION_KEY:
++		return f2fs_ioc_add_encryption_key(filp, arg);
++	case FS_IOC_REMOVE_ENCRYPTION_KEY:
++		return f2fs_ioc_remove_encryption_key(filp, arg);
++	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
++		return f2fs_ioc_get_encryption_key_status(filp, arg);
+ 	case F2FS_IOC_GARBAGE_COLLECT:
+ 		return f2fs_ioc_gc(filp, arg);
+ 	case F2FS_IOC_GARBAGE_COLLECT_RANGE:
+@@ -3137,6 +3179,10 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 	case F2FS_IOC_SET_ENCRYPTION_POLICY:
+ 	case F2FS_IOC_GET_ENCRYPTION_PWSALT:
+ 	case F2FS_IOC_GET_ENCRYPTION_POLICY:
++	case FS_IOC_GET_ENCRYPTION_POLICY_EX:
++	case FS_IOC_ADD_ENCRYPTION_KEY:
++	case FS_IOC_REMOVE_ENCRYPTION_KEY:
++	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
+ 	case F2FS_IOC_GARBAGE_COLLECT:
+ 	case F2FS_IOC_GARBAGE_COLLECT_RANGE:
+ 	case F2FS_IOC_WRITE_CHECKPOINT:
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 6b959bbb336a3..e3bf604e0d58f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -934,6 +934,8 @@ static int f2fs_drop_inode(struct inode *inode)
+ 		return 0;
+ 	}
+ 	ret = generic_drop_inode(inode);
++	if (!ret)
++		ret = fscrypt_drop_inode(inode);
+ 	trace_f2fs_drop_inode(inode, ret);
+ 	return ret;
  }
 -- 
 2.21.0.1020.gf2820cf01a-goog
