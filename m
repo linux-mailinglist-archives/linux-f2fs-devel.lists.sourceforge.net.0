@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A00E7263D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 May 2019 14:29:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50218263E7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 May 2019 14:33:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hTQNB-0007Ki-8H; Wed, 22 May 2019 12:29:33 +0000
+	id 1hTQQe-0000qR-TB; Wed, 22 May 2019 12:33:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hTQN9-0007KU-HW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 12:29:31 +0000
+ (envelope-from <chao@kernel.org>) id 1hTQQd-0000qJ-8t
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 12:33:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eD9swnpgzU09oy8QbmHLU+ZgDlxKTOnileR3ZPD24Hs=; b=fjh84pdDf2QmkEF9XelYo76ihC
- jOKmPQu6Pq48p+7mV0l65pfecEEHjcEruAJ6oVEQgijCspR4f0fd/kaKicsguWsfHiFxyMcKaNr7u
- 3DLWoL2q6XYa2nMU+hE6rtT4peOB4QsDPrS6BWAYAAGimbOr8uyHyMVLVJ3bBqvWUuRI=;
+ bh=tIymDYDU3QN59haYyeN5lQkZ7eppFRaweDzC5o10/Jc=; b=m8lxiZhx7DcItYXsdS0dS1AfCn
+ pyVgvZUYEZz6SzDtvNLPNHySe4S6BJQxvLOU6aBsfRX7SuQGmfO9jaqCEUBGce9JupCQEpiocvxYv
+ zAJsKqDkDne9/rxaZYGyg2wjN9CkjS1+1VdyxftsUp70NvdKYNvMQF6CwoYkLY1+QObE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,50 +29,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eD9swnpgzU09oy8QbmHLU+ZgDlxKTOnileR3ZPD24Hs=; b=GmqQQj7P0QDR93tXzadmhzGVhN
- Q1E+hN63nqCQl2d92Jlum8Pzi2e155gf5utSQxMXFygZeToAVCAO9w20JQTXFerNMgr/qe6PtW0el
- +cEqD26JzIo62VnbPp/G3yFObq9FMSwUqf6V23nlJpt776eG4+PNa5xpEbdm998J3NGo=;
+ bh=tIymDYDU3QN59haYyeN5lQkZ7eppFRaweDzC5o10/Jc=; b=YeSLCKiaknK4Y8OgUrmXYtva0G
+ hmum2QqPC6hEjyvsJF5h7ywsP4sUViw8ylFiHTVZy10Doz61MdrTETOaMk5b+wz1urPxBhkZl6Hxe
+ 4xIOpzlrE8EzcRnDLRNy4ie0gOAbyHpvmX+5SR852Pg1INk4rvbGhBJ/NM1b/Pme7B6g=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hTQMu-00H22G-Cb
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 12:29:31 +0000
+ id 1hTQQc-00H2Xq-4g
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 12:33:07 +0000
 Received: from [192.168.0.101] (unknown [49.77.233.32])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 30B0C2173C;
- Wed, 22 May 2019 12:29:10 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D7A992173C;
+ Wed, 22 May 2019 12:32:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558528150;
- bh=upmsRZdkQq8h/PyD9HJOtFErgwAT7ktBsV7srF/AT70=;
+ s=default; t=1558528380;
+ bh=7Zt5mFnKGpFUyLLmEh/OXRYTSOMLrj8rJD3n8swXUfc=;
  h=Subject:To:References:From:Date:In-Reply-To:From;
- b=bJfD+mjFb6YdomL+VqHfR6L1H6ztDKFP/+OfrymNyi4djSftXdHR/bx4GkO4OY7Q9
- K96jNO+km9Hcjda9UHQtxiEo3bNKrIdrK3Apk0sWuAsjCaSOLQMQfohPVdtpBvVnQP
- M54ptaNLWAaA8y/o/ba0aZEzLh4ixvb3hJgemL/A=
+ b=yzHOC2O3R3OLQEJrB35Gcz5qtnVVlhR47yFsPcd3k7fR5yL45kUjGxl3MHQS5iDXH
+ uloVw3UG3yfi3Lw/d+McYNFtiWcmoXaPQFfxIuTAD9dPF94q7UstM+gMvJLO3qrzCM
+ BGx6VhaB0BJap+z14TJDaTUAdAhanwaS8DjKZMaM=
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20190521180625.10562-1-jaegeuk@kernel.org>
+ <20190521180625.10562-2-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <8e9a4cac-c81b-11ce-0a5a-c6f5caf716c4@kernel.org>
-Date: Wed, 22 May 2019 20:29:04 +0800
+Message-ID: <add17fa8-f381-844b-abf2-17182a00232a@kernel.org>
+Date: Wed, 22 May 2019 20:32:54 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190521180625.10562-1-jaegeuk@kernel.org>
+In-Reply-To: <20190521180625.10562-2-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1hTQMu-00H22G-Cb
-Subject: Re: [f2fs-dev] [PATCH 1/2] Revert "f2fs: don't clear
- CP_QUOTA_NEED_FSCK_FLAG"
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hTQQc-00H2Xq-4g
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: allow ssr block allocation during
+ checkpoint=disable period
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,42 +96,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2019-5-22 2:06, Jaegeuk Kim wrote:
-> This reverts commit fb40d618b03978b7cc5820697894461f4a2af98b.
-> 
-> The original patch introduced # of fsck triggers.
-
-How about pointing out the old issue has been fixed with below patch:
-
-f2fs-tools: fix to check total valid block count before block allocation
-
-Otherwise, user should keep kernel commit "f2fs: don't clear
-CP_QUOTA_NEED_FSCK_FLAG".
-
-Thanks,
-
+> This patch allows to use ssr during checkpoint is disabled.
 > 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 > ---
->  fs/f2fs/checkpoint.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
+>  fs/f2fs/gc.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> index d0539ddad6e2..89825261d474 100644
-> --- a/fs/f2fs/checkpoint.c
-> +++ b/fs/f2fs/checkpoint.c
-> @@ -1317,10 +1317,8 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->  
->  	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH))
->  		__set_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
-> -	/*
-> -	 * TODO: we count on fsck.f2fs to clear this flag until we figure out
-> -	 * missing cases which clear it incorrectly.
-> -	 */
-> +	else
-> +		__clear_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
->  
->  	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR))
->  		__set_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 963fb4571fd9..1e029da26053 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -387,7 +387,8 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+>  			goto next;
+>  		/* Don't touch checkpointed data */
+>  		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
+> -					get_ckpt_valid_blocks(sbi, segno)))
+> +					get_ckpt_valid_blocks(sbi, segno) &&
+> +					p.alloc_mode != SSR))
+
+p.alloc_mode == LFS will be more straightforward. :)
+
+Anyway,
+
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+
+Thanks,
+
+>  			goto next;
+>  		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+>  			goto next;
 > 
 
 
