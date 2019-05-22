@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F5A5266AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 May 2019 17:10:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5052A26951
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 May 2019 19:45:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hTSsc-0005LR-4k; Wed, 22 May 2019 15:10:10 +0000
+	id 1hTVIk-0003HE-1p; Wed, 22 May 2019 17:45:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1hTSsa-0005LI-DW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 15:10:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hTVIi-0003H0-Mf
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 17:45:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FEpLTp6t9Bj8cEZnHYwVHtekMHW40hqnqkWrqhgRy+w=; b=mkuoSDE9CEBnJsAlnDs565CLrM
- Sqa82IzGCoq+w/KdjwKB4uJ38va4KofRANQ5rBei5NEp1OpynifMcIUVbtEzbpW8N7zmF88dEny9W
- qfDnsiNKQsOEro3WYVxhW7QR3lf1IAiXZTL7Mck0CkVUGpopgKAUE3VP/z0kkbHOeR3g=;
+ bh=xB6Kn83xjohfkxVRB1RECUGTWlxzGcd932Hg4np7QjA=; b=AYWUuroGFUa32GA3A3wXAIHeeR
+ QZjCkPScw0Kcln6EVAejtQi3sH190kfPfxQTap+Ly1tXVrIEDtjuVGEp+bg7GJ04NuJ1yRptT9F2f
+ spyXMhcJxdbbcKGFiQBm7QxnpgHiyeZXy2weLE0sIkpf1vXe7GC59+mecqj3R2uBr1MI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FEpLTp6t9Bj8cEZnHYwVHtekMHW40hqnqkWrqhgRy+w=; b=RUN2Nz04lKP+wDyPTh2sfdZpM1
- /EUidTnGVn1wICAUeJFnWqkgPqsKYgTJ15SHuHRX+QGJ84278Vq9HMejlXMLRE+FeKsSZcqrj9JVH
- mpaZ9Cwvn+xrvXgzeCrShoD5xeAoxhl6MUk/yuhXUaz6bW+BR7nzBV25AJfiBjNn0kaQ=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=xB6Kn83xjohfkxVRB1RECUGTWlxzGcd932Hg4np7QjA=; b=T3G9h/8+vhRmUkq3E3wEwewEsh
+ DWsp20Ow926EXqSJVq1XkMkdo7M6YE68M0ja6dn/KxJEOAQZJt2FzdfIVgP8+usfNQdGayaHoBj0W
+ 8mKGLhQiW+g4wcZPTgiT1Mo8JOGIqBzkPXdkJehgAzBubHVP8HEUkBfwFsdjNP6Xlewo=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hTSsY-00HKYC-4I
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 15:10:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FEpLTp6t9Bj8cEZnHYwVHtekMHW40hqnqkWrqhgRy+w=; b=QEF+xA3x6vvUPujuP05sXLntB
- 0qvtE9Bn/WTayOl8HqiYAfphd/jJWWP6QKE4USd2xYeKvHr6Le15YeRKNcFL3uJzvIs6WGZn//JRY
- gLKB3mBWGGOX3jaREH1K5eGZuh7PjnWIC5qtY7HQwwHR7yP6YXNdoQWG8jtR5z7vwZvy6gij8LEez
- q3b8aeHNn0hnobvFBvVaDwYJukRnXn21FwfvhSCe3tF+QPqkpYA2DDWZui9PUmGAyf69QU1fVfhyA
- z25C8ODYNMWQaPQndCv19GIigt28GmabipvGE28egqs5SMCZ2CzEQU7vvPKPalvnYkg+2AgQtCvh3
- Me2W2fjlw==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.90_1 #2 (Red
- Hat Linux)) id 1hTSsQ-00058J-7f; Wed, 22 May 2019 15:09:58 +0000
-Date: Wed, 22 May 2019 08:09:58 -0700
-From: Matthew Wilcox <willy@infradead.org>
-To: sunqiuyang <sunqiuyang@huawei.com>
-Message-ID: <20190522150958.GC6738@bombadil.infradead.org>
-References: <20190522040530.37886-1-sunqiuyang@huawei.com>
+ id 1hTVIO-000S5E-Fv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 May 2019 17:45:16 +0000
+Received: from localhost (unknown [104.132.1.68])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id CC5C121019;
+ Wed, 22 May 2019 17:44:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1558547090;
+ bh=WGpxkLS3O1W5xJkPVT6OtlO6L0fjxSCDqpvjxfdM6e8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=SzL7buq0bAzafVDhOU8P3wAUmBGyHpJpmx/A+Wg9G+RBjrePwONfrzYdaLTQ6n0ke
+ xz8NKrRO3GWrfZTLu5+xIfiqvqPnf6DQ0cVkiooeJc32eSX+rfY8IFuTtOPMSTssKH
+ 1IWqBJr6jhO9FgvLdW5ERpUg+ZbExknEYZH5aPHs=
+Date: Wed, 22 May 2019 10:44:48 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20190522174448.GA81051@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190521180625.10562-1-jaegeuk@kernel.org>
+ <8e9a4cac-c81b-11ce-0a5a-c6f5caf716c4@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190522040530.37886-1-sunqiuyang@huawei.com>
-User-Agent: Mutt/1.9.2 (2017-12-15)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <8e9a4cac-c81b-11ce-0a5a-c6f5caf716c4@kernel.org>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1hTSsY-00HKYC-4I
-Subject: Re: [f2fs-dev] [PATCH v4 1/1] f2fs: ioctl for removing a range from
- F2FS
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1hTVIO-000S5E-Fv
+Subject: Re: [f2fs-dev] [PATCH 1/2] Revert "f2fs: don't clear
+ CP_QUOTA_NEED_FSCK_FLAG"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,29 +77,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, May 22, 2019 at 12:05:30PM +0800, sunqiuyang wrote:
-> +static int f2fs_ioc_resize_fs(struct file *filp, unsigned long arg)
-> +{
-> +	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(filp));
-> +	__u64 block_count;
-> +	int ret;
-> +
-> +	if (!capable(CAP_SYS_ADMIN))
-> +		return -EPERM;
-> +
-> +	if (f2fs_readonly(sbi->sb))
-> +		return -EROFS;
-> +
-> +	if (copy_from_user(&block_count, (__u64 __user *)arg, sizeof(__u64)))
-> +		return -EFAULT;
+On 05/22, Chao Yu wrote:
+> On 2019-5-22 2:06, Jaegeuk Kim wrote:
+> > This reverts commit fb40d618b03978b7cc5820697894461f4a2af98b.
+> > 
+> > The original patch introduced # of fsck triggers.
+> 
+> How about pointing out the old issue has been fixed with below patch:
+> 
+> f2fs-tools: fix to check total valid block count before block allocation
+> 
+> Otherwise, user should keep kernel commit "f2fs: don't clear
+> CP_QUOTA_NEED_FSCK_FLAG".
 
-You can just call get_user() here.
+Actually, that didn't fix my testing issue, but I found we were not using
+error control for quota_sysfile. Now I've seen no issue with the below patch.
+
+From e1b7de7050fd87b7c20e033b062b1cc6505679d3 Mon Sep 17 00:00:00 2001
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Mon, 20 May 2019 16:17:56 -0700
+Subject: [PATCH] f2fs: link f2fs quota ops for sysfile
+
+This patch reverts:
+commit fb40d618b039 ("f2fs: don't clear CP_QUOTA_NEED_FSCK_FLAG").
+
+We were missing error handlers used in f2fs quota ops.
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/checkpoint.c | 6 ++----
+ fs/f2fs/super.c      | 5 +----
+ 2 files changed, 3 insertions(+), 8 deletions(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index d0539ddad6e2..89825261d474 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1317,10 +1317,8 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH))
+ 		__set_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
+-	/*
+-	 * TODO: we count on fsck.f2fs to clear this flag until we figure out
+-	 * missing cases which clear it incorrectly.
+-	 */
++	else
++		__clear_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
+ 
+ 	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR))
+ 		__set_ckpt_flags(ckpt, CP_QUOTA_NEED_FSCK_FLAG);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 856f9081c599..34f2adf191ed 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3169,10 +3169,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 
+ #ifdef CONFIG_QUOTA
+ 	sb->dq_op = &f2fs_quota_operations;
+-	if (f2fs_sb_has_quota_ino(sbi))
+-		sb->s_qcop = &dquot_quotactl_sysfile_ops;
+-	else
+-		sb->s_qcop = &f2fs_quotactl_ops;
++	sb->s_qcop = &f2fs_quotactl_ops;
+ 	sb->s_quota_types = QTYPE_MASK_USR | QTYPE_MASK_GRP | QTYPE_MASK_PRJ;
+ 
+ 	if (f2fs_sb_has_quota_ino(sbi)) {
+-- 
+2.19.0.605.g01d371f741-goog
 
 
 
