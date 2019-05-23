@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97B31282DC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 May 2019 18:20:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CFA7282DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 May 2019 18:20:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hTqSb-0000cU-9N; Thu, 23 May 2019 16:20:53 +0000
+	id 1hTqSZ-0002CD-Ul; Thu, 23 May 2019 16:20:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hTqSZ-0000bZ-2s
+ (envelope-from <ebiggers@kernel.org>) id 1hTqSZ-0002Bj-Fa
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 16:20:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PoyU5cYRjPWmNIZTn/N+eDbgEwJB4v+GkURTX4g91oY=; b=B9t2MAH4DCR06MXAIHMc26Ub+9
- NrAttBgOCW4R0/ESNGLWaSZZ5ugPszrHouG8qD4poTu9lOGdqPcXFscljieE6zMI37LQUNh6mErqN
- 13tDFdu2wqLDOHLVZXzo/YMmtz/0gATAegMQ1Eubck7kikGBW5QEQLGNCYogziFpF8xg=;
+ bh=uRsH7kJvqW297taDsoJD6ZNDEy6i2WrQLEXx+XmF03M=; b=Lrm63dwpifWMhF1JDNlXa8lUhN
+ XwIIOFbUr11Tuvz/G4howCwYskX5C4WLcUi3PcfmJzLMQ5cyDGc05s6sJ41OlR2aLzGnqtl9noNT6
+ aliLV0HBbLypOGwEW6UfLpbfPmWpp6ROYGrjhvH+A8rC/eKSXp4ttJ9VobnWvFOM8J1s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PoyU5cYRjPWmNIZTn/N+eDbgEwJB4v+GkURTX4g91oY=; b=TUneFJ3fq/ehyk2VUIm9GuadZZ
- KbEPehqcgdDzJxL2+Y63VLhRy0+ppkt391dOBoULoFmTG9FIL75qRP0MZuNnP8AtRIKiJD/taSgfN
- odfHYyD9rzgBP1w2gQCn5fTRb2LqGsYUaiP3fCezJgs+ftjXbEb3zdTqkG16w+arqV+k=;
+ bh=uRsH7kJvqW297taDsoJD6ZNDEy6i2WrQLEXx+XmF03M=; b=hSET2FVoKFerLYoHA8Yf2xREMd
+ T12HNiqa/fmgFH6NOaY8Dx9Ld4xOL7fzie59rS/k9lBCi3Smwzg2iL/fWlv66EH4fc2flrGbKVANA
+ RDyUZsHxhEDgPhV8VX+uHYSM4SRKJYfbRnsOsU4ZyDydnUZeVBO5/4uNmYX6Vr+Xpvyg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hTqSX-009b47-Mb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 16:20:50 +0000
+ id 1hTqSY-00355V-10
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 16:20:51 +0000
 Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
  [24.5.143.220])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9E5A421855;
- Thu, 23 May 2019 16:20:38 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0DEC821850;
+ Thu, 23 May 2019 16:20:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558628438;
- bh=IypddWdgpGQW98s/1LmMIKN+E0awwoanRr5vpkgTF8c=;
+ s=default; t=1558628439;
+ bh=orQpc2Xz3R2tuxw4FKZyiEuFe+qzuslAy4KaeYFzr7I=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MAMyc0xNHquD9YW6+5HzRcneZT9WqRTjjzjI/g+EHazOH1ftZvl6WWXnNGuV6TMgf
- G7uqtVpqRLIDLms9VIw+gzOAJ1/8v7DHS4tbXBOtnCzAkCVcq6ca9rYJe4ipVvXCBD
- /vKRsIibnwrgWLcqcBwMZuWWqXRiBHwUh6kMdku8=
+ b=hKEKBAB2icXk/CpAjSKNQJ/ncdh5G54YzhlgI4NQqI0gqAblH25O3TlmivM8xJwxx
+ fA0yqRSEgfLnM9vIC9o8k1NDkv0eBvR13c48kWmfxSyBIDtDWfP5sCW+2ixuuT1Bil
+ E43bUOTdnnMbjLsoDU1xdPLDoximMrdYOmDBpwbU=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Thu, 23 May 2019 09:18:06 -0700
-Message-Id: <20190523161811.6259-11-ebiggers@kernel.org>
+Date: Thu, 23 May 2019 09:18:07 -0700
+Message-Id: <20190523161811.6259-12-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190523161811.6259-1-ebiggers@kernel.org>
 References: <20190523161811.6259-1-ebiggers@kernel.org>
@@ -70,9 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hTqSX-009b47-Mb
-Subject: [f2fs-dev] [PATCH v3 10/15] fs-verity: implement
- FS_IOC_MEASURE_VERITY ioctl
+X-Headers-End: 1hTqSY-00355V-10
+Subject: [f2fs-dev] [PATCH v3 11/15] fs-verity: add SHA-512 support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,126 +93,59 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Add a function for filesystems to call to implement the
-FS_IOC_MEASURE_VERITY ioctl.  This ioctl retrieves the file measurement
-that fs-verity calculated for the given file and is enforcing for reads;
-i.e., reads that don't match this hash will fail.  This ioctl can be
-used for authentication or logging of file measurements in userspace.
-
-See the "FS_IOC_MEASURE_VERITY" section of
-Documentation/filesystems/fsverity.rst for the documentation.
+Add SHA-512 support to fs-verity.  This is primarily a demonstration of
+the trivial changes needed to support a new hash algorithm in fs-verity;
+most users will still use SHA-256, due to the smaller space required to
+store the hashes.  But some users may prefer SHA-512.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/verity/Makefile       |  1 +
- fs/verity/measure.c      | 57 ++++++++++++++++++++++++++++++++++++++++
- include/linux/fsverity.h | 11 ++++++++
- 3 files changed, 69 insertions(+)
- create mode 100644 fs/verity/measure.c
+ fs/verity/fsverity_private.h  | 2 +-
+ fs/verity/hash_algs.c         | 5 +++++
+ include/uapi/linux/fsverity.h | 1 +
+ 3 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/fs/verity/Makefile b/fs/verity/Makefile
-index 04b37475fd280..6f7675ae0a311 100644
---- a/fs/verity/Makefile
-+++ b/fs/verity/Makefile
-@@ -3,5 +3,6 @@
- obj-$(CONFIG_FS_VERITY) += enable.o \
- 			   hash_algs.o \
- 			   init.o \
-+			   measure.o \
- 			   open.o \
- 			   verify.o
-diff --git a/fs/verity/measure.c b/fs/verity/measure.c
-new file mode 100644
-index 0000000000000..f29557c0ee3da
---- /dev/null
-+++ b/fs/verity/measure.c
-@@ -0,0 +1,57 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * fs/verity/measure.c: ioctl to get a verity file's measurement
-+ *
-+ * Copyright 2019 Google LLC
-+ */
-+
-+#include "fsverity_private.h"
-+
-+#include <linux/uaccess.h>
-+
-+/**
-+ * fsverity_ioctl_measure() - get a verity file's measurement
-+ *
-+ * Retrieve the file measurement that the kernel is enforcing for reads from a
-+ * verity file.  See the "FS_IOC_MEASURE_VERITY" section of
-+ * Documentation/filesystems/fsverity.rst for the documentation.
-+ *
-+ * Return: 0 on success, -errno on failure
-+ */
-+int fsverity_ioctl_measure(struct file *filp, void __user *_uarg)
-+{
-+	const struct inode *inode = file_inode(filp);
-+	struct fsverity_digest __user *uarg = _uarg;
-+	const struct fsverity_info *vi;
-+	const struct fsverity_hash_alg *hash_alg;
-+	struct fsverity_digest arg;
-+
-+	vi = get_verity_info(inode);
-+	if (!vi)
-+		return -ENODATA; /* not a verity file */
-+	hash_alg = vi->tree_params.hash_alg;
-+
-+	/*
-+	 * The user specifies the digest_size their buffer has space for; we can
-+	 * return the digest if it fits in the available space.  We write back
-+	 * the actual size, which may be shorter than the user-specified size.
-+	 */
-+
-+	if (get_user(arg.digest_size, &uarg->digest_size))
-+		return -EFAULT;
-+	if (arg.digest_size < hash_alg->digest_size)
-+		return -EOVERFLOW;
-+
-+	memset(&arg, 0, sizeof(arg));
-+	arg.digest_algorithm = hash_alg - fsverity_hash_algs;
-+	arg.digest_size = hash_alg->digest_size;
-+
-+	if (copy_to_user(uarg, &arg, sizeof(arg)))
-+		return -EFAULT;
-+
-+	if (copy_to_user(uarg->digest, vi->measurement, hash_alg->digest_size))
-+		return -EFAULT;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(fsverity_ioctl_measure);
-diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index 9a84fe4bcfc88..df0b620c6897f 100644
---- a/include/linux/fsverity.h
-+++ b/include/linux/fsverity.h
-@@ -110,6 +110,10 @@ struct fsverity_operations {
+diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
+index 9db64f4d178c7..f5c616f4d4c04 100644
+--- a/fs/verity/fsverity_private.h
++++ b/fs/verity/fsverity_private.h
+@@ -31,7 +31,7 @@ struct ahash_request;
+  * Largest digest size among all hash algorithms supported by fs-verity.
+  * Currently assumed to be <= size of fsverity_descriptor::root_hash.
+  */
+-#define FS_VERITY_MAX_DIGEST_SIZE	SHA256_DIGEST_SIZE
++#define FS_VERITY_MAX_DIGEST_SIZE	SHA512_DIGEST_SIZE
  
- extern int fsverity_ioctl_enable(struct file *filp, const void __user *arg);
+ /* A hash algorithm supported by fs-verity */
+ struct fsverity_hash_alg {
+diff --git a/fs/verity/hash_algs.c b/fs/verity/hash_algs.c
+index 1d7dcd3cec406..4561022e0261d 100644
+--- a/fs/verity/hash_algs.c
++++ b/fs/verity/hash_algs.c
+@@ -17,6 +17,11 @@ struct fsverity_hash_alg fsverity_hash_algs[] = {
+ 		.digest_size = SHA256_DIGEST_SIZE,
+ 		.block_size = SHA256_BLOCK_SIZE,
+ 	},
++	[FS_VERITY_HASH_ALG_SHA512] = {
++		.name = "sha512",
++		.digest_size = SHA512_DIGEST_SIZE,
++		.block_size = SHA512_BLOCK_SIZE,
++	},
+ };
  
-+/* measure.c */
-+
-+extern int fsverity_ioctl_measure(struct file *filp, void __user *arg);
-+
- /* open.c */
+ /**
+diff --git a/include/uapi/linux/fsverity.h b/include/uapi/linux/fsverity.h
+index 57d1d7fc0c345..da0daf6c193b4 100644
+--- a/include/uapi/linux/fsverity.h
++++ b/include/uapi/linux/fsverity.h
+@@ -14,6 +14,7 @@
+ #include <linux/types.h>
  
- extern int fsverity_file_open(struct inode *inode, struct file *filp);
-@@ -132,6 +136,13 @@ static inline int fsverity_ioctl_enable(struct file *filp,
- 	return -EOPNOTSUPP;
- }
+ #define FS_VERITY_HASH_ALG_SHA256	1
++#define FS_VERITY_HASH_ALG_SHA512	2
  
-+/* measure.c */
-+
-+static inline int fsverity_ioctl_measure(struct file *filp, void __user *arg)
-+{
-+	return -EOPNOTSUPP;
-+}
-+
- /* open.c */
- 
- static inline int fsverity_file_open(struct inode *inode, struct file *filp)
+ struct fsverity_enable_arg {
+ 	__u32 version;
 -- 
 2.21.0
 
