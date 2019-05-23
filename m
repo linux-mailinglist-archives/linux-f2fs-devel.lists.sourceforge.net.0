@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E12C27538
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 May 2019 06:36:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6C9C27542
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 May 2019 06:44:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hTfSW-0003t2-K8; Thu, 23 May 2019 04:36:04 +0000
+	id 1hTfaM-0007Hr-HZ; Thu, 23 May 2019 04:44:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stummala@codeaurora.org>) id 1hTfSV-0003sn-4F
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 04:36:03 +0000
+ (envelope-from <stummala@codeaurora.org>) id 1hTfaL-0007Hk-F7
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 04:44:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YPatqqcHpTqeUaoYijKsz+5lMpuv87ry0xwT2u6xeqM=; b=CRGGWwch3NkHgFsJsOTLRWi5Df
- ZqxQptAGwIitpYWb5KDd0x//+bcImhv9H7K/fuoPcW4yckS+yV7e5Y5/tAcgRc6FknVQB0CXuFCBL
- P/7Qe/oI/O8562V8A6y1RaMxLoLtv15LfYdqqCyRNFcYxZdCseE70s0xo05nwqg3i+QA=;
+ bh=ccjglLszF9yzNOjTex9ScunebpuUEoyg+cs5efwbbhY=; b=DRtGyNSWH33M5SlS7iI1HVZQrZ
+ IvRjusyGnWgZ9mXBjwbEHBbDB3hrbwx9OOJOx5u2AUMeCQ/vUliO80pF51k+UUNs1eMS4322csKXG
+ ikgmYWS+ZVmFNpRgmwKxr1xtcTgoUHcvDglinHnEG4A8RreqkNG/Pc7B7uC0MgPmZaUA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
@@ -29,23 +29,23 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YPatqqcHpTqeUaoYijKsz+5lMpuv87ry0xwT2u6xeqM=; b=GRc/Abb7k4ThISKcMy2LWaE0zP
- PNjxZxdCOoDK8CQb1ToFcMcPR7S7X+JLAwaC1D6NlqJZfUPuu63+VyC7TYqB+S01gZFqWpyEqYgSt
- Q/Ta1+vmjd/28lmCfXzF/YLoulV5757wawi3lZogbq9euPD7awbZRpGAuOvOj6LwN+ig=;
+ bh=ccjglLszF9yzNOjTex9ScunebpuUEoyg+cs5efwbbhY=; b=ZrVv1mbSfp9nNzYIylOibXwRFg
+ MnsYBT8NKCKmhVlpF4FSscP9ZoTOZnu9G01pf42qTIKwc/vtG+Kg8vzjImP6d2BYpMBQBJgxC//Wf
+ YIdkgVNJtl6wgG8LYv7gCcEtrNn3cC06L3h1/vr78rOp+5KY7Q22oJhjeAY6WL3goqQg=;
 Received: from smtp.codeaurora.org ([198.145.29.96])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hTfSQ-001Lk4-UT
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 04:36:03 +0000
+ id 1hTfaF-0089xM-Kj
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 May 2019 04:44:09 +0000
 Received: by smtp.codeaurora.org (Postfix, from userid 1000)
- id 0198C600C1; Thu, 23 May 2019 04:19:55 +0000 (UTC)
+ id 291D360591; Thu, 23 May 2019 04:43:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1558585196;
- bh=fcgjdJ/PJA3qLLQdtDzwInWMZt4bLcUj3OyOsUB08Sc=;
+ s=default; t=1558586638;
+ bh=hnbx3AX8C2pejL15wUhAHLQkIpyCGqzIO1Vv8xEgIb8=;
  h=From:To:Cc:Subject:Date:From;
- b=PpC3lN8BDTY+iUn2gZfoMDqpZAXxrahmq7Q7FmmeQnn3wCocxqiiA0zAz5s3L5ncD
- NlXBJuDbMgWQRsyPXVQF1uFVmhJr0TfFiqsfrcyWaO3TaTqMC0VX21gTkTomXGwdYi
- 54zt2GqjVZ8f/BgUXlg8xSoZoA21vK7Z/7OzjWqQ=
+ b=JiLs0C4pVjlCJfTDPUHjaQq33G//aucx1Zjq9jFYFXGQ53C7APhWnuhsRNQm9JCDv
+ yPEm8HsyEDNA8zifw9ZGWR1oIpGE8nHZ9LZ+ZF2MmAmRyomCbXzAXYUG1vI4LlAsM5
+ Wyc5ErccBFid6arxIBJZei5lNBeuHKXdIapyOX1A=
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
  pdx-caf-mail.web.codeaurora.org
 X-Spam-Level: 
@@ -57,16 +57,16 @@ Received: from codeaurora.org
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: stummala@smtp.codeaurora.org)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 9DF656030E;
- Thu, 23 May 2019 04:19:53 +0000 (UTC)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 0B86F60591;
+ Thu, 23 May 2019 04:43:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1558585195;
- bh=fcgjdJ/PJA3qLLQdtDzwInWMZt4bLcUj3OyOsUB08Sc=;
+ s=default; t=1558586637;
+ bh=hnbx3AX8C2pejL15wUhAHLQkIpyCGqzIO1Vv8xEgIb8=;
  h=From:To:Cc:Subject:Date:From;
- b=HpUEeHGTGyVc3ys5xm/2+psHewPGfZYJp3grZUcmAKFX3YEx4k1DLFHGtQ10m+MsP
- yc1iierAqa+6FvyeIJ9Rw8dakWGTS5heqtRLDYwPA0GlbW1eLbc/oUMRzm7fSazAEO
- YPAMNYQr8ai0O7fWkDxXl5HxqofkEyRBMBbYqj3g=
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 9DF656030E
+ b=GZNgTSU+2neId9PBtVe2N7f7MF22x2q4/wMtRE6nDLi/0JJy6LLvZIq2a5a6witiT
+ PPiYFmqQqOuJ4OWrwjQYHhCcQQlUsJG/BMlm2qaO6USI+O5f/GvOd21E2rGSPEoyZt
+ VIUYfHKXrBY/4qwSxnCe+VfU3TudoeHQtSjz8920=
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 0B86F60591
 Authentication-Results: pdx-caf-mail.web.codeaurora.org;
  dmarc=none (p=none dis=none) header.from=codeaurora.org
 Authentication-Results: pdx-caf-mail.web.codeaurora.org;
@@ -74,12 +74,16 @@ Authentication-Results: pdx-caf-mail.web.codeaurora.org;
 From: Sahitya Tummala <stummala@codeaurora.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 23 May 2019 09:49:17 +0530
-Message-Id: <1558585157-9349-1-git-send-email-stummala@codeaurora.org>
+Date: Thu, 23 May 2019 10:13:47 +0530
+Message-Id: <1558586627-19784-1-git-send-email-stummala@codeaurora.org>
 X-Mailer: git-send-email 1.9.1
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: codeaurora.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -87,13 +91,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
-X-Headers-End: 1hTfSQ-001Lk4-UT
-Subject: [f2fs-dev] [PATCH] f2fs: add error prints for debugging mount
- failure
+X-Headers-End: 1hTfaF-0089xM-Kj
+Subject: [f2fs-dev] [PATCH] fsck.f2fs: Fix up nat journal corruption with -a
+ (auto-fix) option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,58 +105,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add error prints to get more details on the mount failure.
+Build segment manager and node manager always to catch and auto-fix
+invalid NAT entries found in the NAT journal.
 
 Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
 ---
- fs/f2fs/segment.c | 6 +++++-
- fs/f2fs/super.c   | 4 ++--
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ fsck/mount.c | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 4896443..bdc6956 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3567,8 +3567,12 @@ static int restore_curseg_summaries(struct f2fs_sb_info *sbi)
+diff --git a/fsck/mount.c b/fsck/mount.c
+index ec22783..46d62ee 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -943,6 +943,8 @@ static int f2fs_init_nid_bitmap(struct f2fs_sb_info *sbi)
+ 			"NAT_JOURNAL_ENTRIES(%lu)\n",
+ 			nats_in_cursum(journal), NAT_JOURNAL_ENTRIES);
+ 		journal->n_nats = cpu_to_le16(NAT_JOURNAL_ENTRIES);
++		c.auto_fix = 0;
++		c.fix_on = 1;
+ 	}
  
- 	/* sanity check for summary blocks */
- 	if (nats_in_cursum(nat_j) > NAT_JOURNAL_ENTRIES ||
--			sits_in_cursum(sit_j) > SIT_JOURNAL_ENTRIES)
-+			sits_in_cursum(sit_j) > SIT_JOURNAL_ENTRIES) {
-+		f2fs_msg(sbi->sb, KERN_ERR,
-+			"invalid journal entries nats %u sits %u\n",
-+			nats_in_cursum(nat_j), sits_in_cursum(sit_j));
- 		return -EINVAL;
+ 	for (i = 0; i < nats_in_cursum(journal); i++) {
+@@ -2363,19 +2365,6 @@ int f2fs_do_mount(struct f2fs_sb_info *sbi)
+ 
+ 	print_ckpt_info(sbi);
+ 
+-	if (c.auto_fix || c.preen_mode) {
+-		u32 flag = get_cp(ckpt_flags);
+-
+-		if (flag & CP_FSCK_FLAG ||
+-			(exist_qf_ino(sb) && (!(flag & CP_UMOUNT_FLAG) ||
+-						flag & CP_ERROR_FLAG))) {
+-			c.fix_on = 1;
+-		} else if (!c.preen_mode) {
+-			print_cp_state(flag);
+-			return 1;
+-		}
+-	}
+-
+ 	c.bug_on = 0;
+ 	c.feature = sb->feature;
+ 
+@@ -2400,6 +2389,19 @@ int f2fs_do_mount(struct f2fs_sb_info *sbi)
+ 		return -1;
+ 	}
+ 
++	if (c.auto_fix || c.preen_mode) {
++		u32 flag = get_cp(ckpt_flags);
++
++		if (flag & CP_FSCK_FLAG ||
++			(exist_qf_ino(sb) && (!(flag & CP_UMOUNT_FLAG) ||
++						flag & CP_ERROR_FLAG))) {
++			c.fix_on = 1;
++		} else if (!c.preen_mode) {
++			print_cp_state(flag);
++			return 1;
++		}
 +	}
- 
- 	return 0;
- }
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 52f1497..2c9d4f7 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3413,13 +3413,13 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	err = f2fs_build_segment_manager(sbi);
- 	if (err) {
- 		f2fs_msg(sb, KERN_ERR,
--			"Failed to initialize F2FS segment manager");
-+			"Failed to initialize F2FS segment manager (%d)", err);
- 		goto free_sm;
- 	}
- 	err = f2fs_build_node_manager(sbi);
- 	if (err) {
- 		f2fs_msg(sb, KERN_ERR,
--			"Failed to initialize F2FS node manager");
-+			"Failed to initialize F2FS node manager (%d)", err);
- 		goto free_nm;
- 	}
- 
++
+ 	/* Check nat_bits */
+ 	if (c.func != DUMP && is_set_ckpt_flags(cp, CP_NAT_BITS_FLAG)) {
+ 		u_int32_t nat_bits_bytes, nat_bits_blocks;
 -- 
 Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
 Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
