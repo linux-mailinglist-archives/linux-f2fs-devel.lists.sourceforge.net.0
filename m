@@ -2,78 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8476129379
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 May 2019 10:54:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 429FB29439
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 May 2019 11:09:02 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hU5xh-0000hS-0w; Fri, 24 May 2019 08:54:01 +0000
+	id 1hU6CB-0001Yp-Qs; Fri, 24 May 2019 09:08:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hU5xg-0000hK-2L
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 08:54:00 +0000
+ (envelope-from <stummala@codeaurora.org>) id 1hU6CA-0001Yh-9l
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 09:08:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0sxw5vHJKtNhCKidxViBYrmYEW8paMttDmh6Zfkfcz0=; b=G0ZpkrgbgLy8dgdLVWVH1Toexb
- 4mzn/xf2+pMnruygzspqackwmM5yeFBWKbmfliTx5kDJvCt/ArLjdu9FT/I8ev0IfLjlisxHZnvfs
- Q+Qgsa8VsEi3njBNA+wsDdyawBY9lyf9qxEq8MhtRyW+JJmZU/kDDt9JZYArkqTuYA4M=;
+ bh=JMwunaZ5WGstTqn/whCGlcS9bRM72ZiZsf6zdoNlWAQ=; b=hFadCgp1iBFNFHdk/Oocjw0owh
+ i3ogWgCj/i/YimUAJXn1esRIJA/ou8fDIQslhwDvW1yqlHJv3701/RMn9Fu0qLhiS4UxQ2l10s0uR
+ J7SBeINzTu+dLdxWVEvulMTRz8NVs8TBTNgxshmav5Cw+VoqVCn++qOeX7NzZqk7z1TE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0sxw5vHJKtNhCKidxViBYrmYEW8paMttDmh6Zfkfcz0=; b=HTg7y3+jw2jrX5FtN/MHQ2y1Oe
- HYE9h/6gjEcyBRi2HTxWWYqKBgfZ+kYSKPmpP6LippqFIOpIlJbMDvBupGp1CiNCQ3AZV+ITBjkwO
- m4dWP18Uq4wGp0hoBOH64WT9fC0S9VNXWq4mpr5uz3iBa3PJy0oEXK2gxfyCExeG37ls=;
-Received: from szxga01-in.huawei.com ([45.249.212.187] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=JMwunaZ5WGstTqn/whCGlcS9bRM72ZiZsf6zdoNlWAQ=; b=MyFhBaHQnmqj+k9J5TovCtjsSz
+ 9ef1BD4rEEc6lvPhZpwb+4iwWiROUwLhP6Ad0oKm/KLwXd+oXzc9R/R6SlOAARuBFyr170eO0g/cO
+ jcYsBGHVMzaQ/atfXAQk+qkz+No7/NpE2yghZYEBbpVFKwIBwZVHS1WLZRPOd09hcQKs=;
+Received: from smtp.codeaurora.org ([198.145.29.96])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hU5xe-00Cuh8-6A
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 08:54:00 +0000
-Received: from DGGEMM403-HUB.china.huawei.com (unknown [172.30.72.56])
- by Forcepoint Email with ESMTP id 573C0C18181D2513B190;
- Fri, 24 May 2019 16:53:51 +0800 (CST)
-Received: from dggeme763-chm.china.huawei.com (10.3.19.109) by
- DGGEMM403-HUB.china.huawei.com (10.3.20.211) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Fri, 24 May 2019 16:53:51 +0800
-Received: from [10.134.22.195] (10.134.22.195) by
- dggeme763-chm.china.huawei.com (10.3.19.109) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Fri, 24 May 2019 16:53:50 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>, Jaegeuk Kim
- <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <1558678187-13145-1-git-send-email-stummala@codeaurora.org>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <e6a31bc6-e707-a1be-3fd9-e8c219bfd80d@huawei.com>
-Date: Fri, 24 May 2019 16:54:01 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <1558678187-13145-1-git-send-email-stummala@codeaurora.org>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-ClientProxiedBy: dggeme720-chm.china.huawei.com (10.1.199.116) To
- dggeme763-chm.china.huawei.com (10.3.19.109)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ id 1hU6C7-005wRH-Hs
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 09:08:58 +0000
+Received: by smtp.codeaurora.org (Postfix, from userid 1000)
+ id 09546609CD; Fri, 24 May 2019 09:08:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+ s=default; t=1558688930;
+ bh=igHrawF1Hx5/t3YXD5o3/vFat11DDmRNhqFNnJql4as=;
+ h=From:To:Cc:Subject:Date:From;
+ b=TDj+ZOzLhIx/2GheIqpqr6PLkTiXqQWMosQ4HcLKTdqN5RHoGMePe1aO3kSZC1Usl
+ Vz+47bnGp/2fO1EZEo202KG6aSKfWzbRD79JTxWaYhr20vYjj7MZ9I7ySL3v5YJQmm
+ T9eWK2/drzicWlMkE7Cbpy8auRCKihANkk/2EwqY=
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ pdx-caf-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+ DKIM_INVALID,DKIM_SIGNED,SPF_NONE autolearn=no autolearn_force=no
+ version=3.4.0
+Received: from codeaurora.org
+ (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: stummala@smtp.codeaurora.org)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 3C5B1605FC;
+ Fri, 24 May 2019 09:08:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+ s=default; t=1558688929;
+ bh=igHrawF1Hx5/t3YXD5o3/vFat11DDmRNhqFNnJql4as=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OVeYHX0PwxRU44++vsWaFR/tQi5BR+PuNbFD5LR5ixE768ee8bwrNuZdGA7xkl6g1
+ ueZhFvgTMasVknQsmmkdF3KPYfdO4PQotq7JGNO8wzuGfuiuWbY/dOOC1PwP9UZC/Z
+ mfYtmKKuLrNnIOefVTkVFMhtcmqs8y7Ho2YJmIjo=
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 3C5B1605FC
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ spf=none smtp.mailfrom=stummala@codeaurora.org
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 24 May 2019 14:38:39 +0530
+Message-Id: <1558688919-561-1-git-send-email-stummala@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ for more information. [URIs: codeaurora.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hU5xe-00Cuh8-6A
-Subject: Re: [f2fs-dev] [PATCH v2] fsck.f2fs: Fix up nat journal corruption
- with -a (auto-fix) option
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1hU6C7-005wRH-Hs
+Subject: [f2fs-dev] [PATCH] f2fs: fix f2fs_show_options to show nodiscard
+ mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,19 +105,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/5/24 14:09, Sahitya Tummala wrote:
-> Build segment manager and node manager always to catch and auto-fix
-> invalid NAT entries found in the NAT journal.
-> 
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Fix f2fs_show_options to show nodiscard mount option.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+---
+ fs/f2fs/super.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 2c9d4f7..353feda 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1410,6 +1410,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ 		seq_puts(seq, ",disable_roll_forward");
+ 	if (test_opt(sbi, DISCARD))
+ 		seq_puts(seq, ",discard");
++	else
++		seq_puts(seq, ",nodiscard");
+ 	if (test_opt(sbi, NOHEAP))
+ 		seq_puts(seq, ",no_heap");
+ 	else
+-- 
+Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+
 
 
 _______________________________________________
