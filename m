@@ -2,72 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC05B297DF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 May 2019 14:14:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CEC72A0EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 25 May 2019 00:04:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hU95N-0001iY-EM; Fri, 24 May 2019 12:14:09 +0000
+	id 1hUIJ0-0001ZD-QS; Fri, 24 May 2019 22:04:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hU95L-0001iQ-Mp
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 12:14:07 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hUIIz-0001Z0-Kd
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 22:04:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=emIEVw2hvEWuzV8uAdPdY/bGC8rbHJNPB8RJkxo8hCY=; b=cTHOzYPQz5yHd7EYrtKkaB9opu
- 2iJ/mpt+GNwzPBHBei5JJdKweCP7FYpfVtxBA6FZsoKd5+t9WYpd7ZU8fV57lBsWSvg0wPp11DyGJ
- 3op5LPr/V3MhCAG641i1NYXsaC/KGwmH4y9g78nGL9Gtys0cez5JbJz2URNaLGMC6+Ag=;
+ bh=m6hRKqsKTWfZHs7VM9oGvBX8/8Fh5WP6i7q5xNkR0Pc=; b=kxvqoZsVuENoX1KytITEHJHDM/
+ YHtvJ8yCo3CX7ILl5nWzSdkMw1CD7Qs8WWcov1/mibZ70HYhhvIRQiuwssb0UjRYdysLG87VIbiyr
+ AVifctKUweWEeIiTTWptsNyW0XYylBr4nPi5YAgUZJWTeJsvAT/aqXu9bfZrSj2I8F18=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=emIEVw2hvEWuzV8uAdPdY/bGC8rbHJNPB8RJkxo8hCY=; b=PV8ZtIQafN9yXMbYQthm4CHgTP
- Kbl+GJSxysTF5vc1ixsdjJhFnPTT2Z6ZVnBxomC/GVJ390PIzeeF9TduZNhz8leZ6Zyu+Qg+/dEGt
- C4DL2xKiHsI8FE94/aa7+gr0NW03keEicfzQrRVVSxIijgk/O5aJHwasIBuj90sOBNwo=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=m6hRKqsKTWfZHs7VM9oGvBX8/8Fh5WP6i7q5xNkR0Pc=; b=k
+ u3gyBp2kCFZdHZp0GPtmUOwrGvIwgQ5yBqeTLMGAK84/zdhs7b3E9VSkyKYBM/n4CpTQtH08Tplcb
+ 4DadbzumJd+8cSK4Pch1uEeFuEaCQcqR6e6Ve7n9cq+SgSyWVTiLY1Q0MoftXW607Nj4Un4T4TWXr
+ 5oHJWJE3rujyOmsc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hU95K-006Ry6-Aa
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 12:14:07 +0000
-Received: from [192.168.0.101] (unknown [58.212.135.189])
+ id 1hUIIy-00EpED-0q
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 May 2019 22:04:49 +0000
+Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
+ [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D8082081C;
- Fri, 24 May 2019 12:13:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 59C3A217F9;
+ Fri, 24 May 2019 22:04:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1558700040;
- bh=lQa2ZD0AkGmwV+cXHfxks/LzhDAp6FE+dRNET0zMXcw=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=JDcueTUfpVJ8P+nuqY9xSq9C4boM6sqhbXXlEP9rwRzS8Ni9pxQEBlzVYdDKjHHNq
- JMtKa//wOioC9KirtDr/BJlTIqnuC7OvEovx5fpcT796lQy/yWuA1DcSfraYIKBeT9
- sYmkNoEpoSkmCnMnfJyAy/3gmi8lNiJj8JJ59fPw=
-To: Sahitya Tummala <stummala@codeaurora.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-References: <1558694631-12481-1-git-send-email-stummala@codeaurora.org>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <6a4ce8cb-d9ec-1923-8304-6b8956283e85@kernel.org>
-Date: Fri, 24 May 2019 20:13:50 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ s=default; t=1558735481;
+ bh=ZxgHKvU763F27jYNcNQ89B6QO75hoW7PKOE4wcdlm+4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dD/pt71ghmJqxKMWRcvdhgMX5jo9ovFhPqyjGx7KVc+wmhbfr6/3XJVqtZGJH48ZZ
+ et9WN6uflvv7DmkuceihproLGhJF+H4mkifQbI0CaLAHs2cElw3nKN55vcVscSOY07
+ OvbKnvq7nWvfnBIvxALb7P6O1ZwDb1f5MJH8Z8jU=
+From: Eric Biggers <ebiggers@kernel.org>
+To: fstests@vger.kernel.org
+Date: Fri, 24 May 2019 15:04:18 -0700
+Message-Id: <20190524220425.201170-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.22.0.rc1.257.g3120a18244-goog
 MIME-Version: 1.0
-In-Reply-To: <1558694631-12481-1-git-send-email-stummala@codeaurora.org>
-Content-Language: en-US
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -76,8 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hU95K-006Ry6-Aa
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add errors=panic mount option
+X-Headers-End: 1hUIIy-00EpED-0q
+Subject: [f2fs-dev] [PATCH v2 0/7] xfstests: verify fscrypt-encrypted
+ contents and filenames
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,115 +81,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019-5-24 18:43, Sahitya Tummala wrote:
-> Add errors=panic mount option for debugging purpose. It can be
-> set dynamically when the config option CONFIG_F2FS_CHECK_FS
-> is not enabled.
+Hello,
 
-Sahitya,
+This series adds xfstests which verify that encrypted contents and
+filenames on ext4 and f2fs are actually correct, i.e. that the
+encryption uses the correct algorithms, keys, IVs, and padding amounts.
+The new tests work by creating encrypted files, unmounting the
+filesystem, reading the ciphertext from disk using dd and debugfs or
+dump.f2fs, and then comparing it against ciphertext computed
+independently by a new test program that implements the same algorithms.
 
-I remember Yunlei has a similar patch for this, could you rebase your code on
-that patch, if Yunlei agrees, we can add Signed-off of him.
+These tests are important because:
 
-FYI
+- The whole point of file encryption is that the files are actually
+  encrypted correctly on-disk.  Except for generic/399, current xfstests
+  only tests the filesystem semantics, not the actual encryption.
+  generic/399 only tests for incompressibility of encrypted file
+  contents using one particular encryption setting, which isn't much.
 
-https://sourceforge.net/p/linux-f2fs/mailman/linux-f2fs-devel/thread/f6a0b1c3-4057-8b64-a419-4b2914d48394%40kernel.org/#msg36376331
+- fscrypt now supports 4 main combinations of encryption settings,
+  rather than 1 as it did originally.  This may be doubled to 8 soon
+  (https://patchwork.kernel.org/patch/10952059/), and support for ext4
+  encryption with sub-page blocks is in progress too.  We should test
+  all settings.  And without tests, even if the initial implementation
+  is correct, breakage in one specific setting could go undetected.
 
-Thanks,
+- Though Linux's crypto API has self-tests, these only test the
+  algorithms themselves, not how they are used, e.g. by fscrypt.
 
-> 
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> ---
->  fs/f2fs/f2fs.h  |  9 +++++++--
->  fs/f2fs/super.c | 21 +++++++++++++++++++++
->  2 files changed, 28 insertions(+), 2 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9b3d997..95adedb 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -32,8 +32,12 @@
->  #define f2fs_bug_on(sbi, condition)					\
->  	do {								\
->  		if (unlikely(condition)) {				\
-> -			WARN_ON(1);					\
-> -			set_sbi_flag(sbi, SBI_NEED_FSCK);		\
-> +			if (test_opt(sbi, ERRORS_PANIC)) {		\
-> +				BUG_ON(condition);			\
-> +			} else {					\
-> +				WARN_ON(1);				\
-> +				set_sbi_flag(sbi, SBI_NEED_FSCK);	\
-> +			}						\
->  		}							\
->  	} while (0)
->  #endif
-> @@ -99,6 +103,7 @@ struct f2fs_fault_info {
->  #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
->  #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
->  #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
-> +#define F2FS_MOUNT_ERRORS_PANIC		0x04000000
->  
->  #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
->  #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 912e261..7d6d96a 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -137,6 +137,7 @@ enum {
->  	Opt_fsync,
->  	Opt_test_dummy_encryption,
->  	Opt_checkpoint,
-> +	Opt_errors,
->  	Opt_err,
->  };
->  
-> @@ -196,6 +197,7 @@ enum {
->  	{Opt_fsync, "fsync_mode=%s"},
->  	{Opt_test_dummy_encryption, "test_dummy_encryption"},
->  	{Opt_checkpoint, "checkpoint=%s"},
-> +	{Opt_errors, "errors=%s"},
->  	{Opt_err, NULL},
->  };
->  
-> @@ -788,6 +790,23 @@ static int parse_options(struct super_block *sb, char *options)
->  			}
->  			kvfree(name);
->  			break;
-> +		case Opt_errors:
-> +#ifndef CONFIG_F2FS_CHECK_FS
-> +			name = match_strdup(&args[0]);
-> +			if (!name)
-> +				return -ENOMEM;
-> +
-> +			if (strlen(name) == 5 && !strncmp(name, "panic", 5)) {
-> +				set_opt(sbi, ERRORS_PANIC);
-> +			} else {
-> +				kvfree(name);
-> +				return -EINVAL;
-> +			}
-> +			kvfree(name);
-> +			f2fs_msg(sb, KERN_INFO,
-> +				"debug mode errors=panic enabled\n");
-> +#endif
-> +			break;
->  		default:
->  			f2fs_msg(sb, KERN_ERR,
->  				"Unrecognized mount option \"%s\" or missing value",
-> @@ -1417,6 +1436,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->  		seq_printf(seq, ",fsync_mode=%s", "strict");
->  	else if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_NOBARRIER)
->  		seq_printf(seq, ",fsync_mode=%s", "nobarrier");
-> +	if (test_opt(sbi, ERRORS_PANIC))
-> +		seq_printf(seq, ",errors=%s", "panic");
->  	return 0;
->  }
->  
-> 
+Patch 1 is a cleanup patch.  Patches 2-4 add the common helpers for
+ciphertext verification tests.  Patches 5-7 add the actual tests.
+
+For ext4 these tests require e2fsprogs v1.45.1 or later, for a recent
+debugfs fix.  For f2fs they require f2fs-tools built from the "dev"
+branch (which should eventually become v1.13.0), for a dump.f2fs fix.
+The tests check for the presence of these fixes before they run.
+
+This series can also be retrieved from git at
+https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/xfstests-dev.git
+branch "ciphertext-verification".
+
+I also have patches on top of this series which verify the ciphertext
+produced from v2 encryption policies, which are proposed by my kernel
+patch series "fscrypt: key management improvements"
+(https://patchwork.kernel.org/cover/10951999/).  v2 encryption policies
+will use a different key derivation function, and thus their ciphertext
+will be different.  These additional patches can be found at branch
+"fscrypt-key-mgmt-improvements" of my git repo above.  But I've arranged
+things such that this shorter series can be applied earlier, to test
+what's in the kernel now.
+
+Changed since v1:
+
+  - Drop the _require_get_encpolicy() helper function.
+  - Rename some functions:
+  	- _get_on_disk_filename() => _get_ciphertext_filename()
+	- _get_file_block_list() => _get_ciphertext_block_list()
+	- _dump_file_blocks() => _dump_ciphertext_blocks()
+  - Mention minimum e2fsprogs and f2fs-tools versions in comments.
+  - Use _fail() instead of _notrun() when support was already checked.
+  - Minor cleanups to fscrypt-crypt-util.
+
+Eric Biggers (7):
+  common/encrypt: introduce helpers for set_encpolicy and get_encpolicy
+  fscrypt-crypt-util: add utility for reproducing fscrypt encrypted data
+  common/encrypt: support requiring other encryption settings
+  common/encrypt: add helper for ciphertext verification tests
+  generic: verify ciphertext of v1 encryption policies with AES-256
+  generic: verify ciphertext of v1 encryption policies with AES-128
+  generic: verify ciphertext of v1 encryption policies with Adiantum
+
+ .gitignore               |    1 +
+ common/encrypt           |  479 ++++++++++-
+ src/Makefile             |    3 +-
+ src/fscrypt-crypt-util.c | 1633 ++++++++++++++++++++++++++++++++++++++
+ tests/ext4/024           |    3 +-
+ tests/generic/395        |   26 +-
+ tests/generic/395.out    |    2 +-
+ tests/generic/396        |   15 +-
+ tests/generic/397        |    3 +-
+ tests/generic/398        |    5 +-
+ tests/generic/399        |    3 +-
+ tests/generic/419        |    3 +-
+ tests/generic/421        |    3 +-
+ tests/generic/429        |    3 +-
+ tests/generic/435        |    3 +-
+ tests/generic/440        |    5 +-
+ tests/generic/700        |   41 +
+ tests/generic/700.out    |    5 +
+ tests/generic/701        |   41 +
+ tests/generic/701.out    |    5 +
+ tests/generic/702        |   43 +
+ tests/generic/702.out    |   10 +
+ tests/generic/group      |    3 +
+ 23 files changed, 2292 insertions(+), 46 deletions(-)
+ create mode 100644 src/fscrypt-crypt-util.c
+ create mode 100755 tests/generic/700
+ create mode 100644 tests/generic/700.out
+ create mode 100755 tests/generic/701
+ create mode 100644 tests/generic/701.out
+ create mode 100755 tests/generic/702
+ create mode 100644 tests/generic/702.out
+
+-- 
+2.22.0.rc1.257.g3120a18244-goog
+
 
 
 _______________________________________________
