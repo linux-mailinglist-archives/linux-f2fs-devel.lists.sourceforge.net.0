@@ -2,68 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73C7F2C425
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 May 2019 12:19:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC88B2C43E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 May 2019 12:29:05 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hVZCu-0007XD-GH; Tue, 28 May 2019 10:19:48 +0000
+	id 1hVZLq-0007vN-3q; Tue, 28 May 2019 10:29:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hVZCs-0007X4-NI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 May 2019 10:19:46 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hVZLo-0007v0-9o
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 May 2019 10:29:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wMNNsxUf9IoUtzpC900HtqsEMd5LWnTSP25fWDmw7S8=; b=Q2/Pi4o+dGc5rFqxDRgLFX6LJG
- 2BqdQWrCYDqPdqVVr5NiI8V4y0lL+6WIL3yVv5zwKrjcC2ETLN+Pz5Z9WN40f9BHUFKAGUx+NFDbG
- X2af05pN4ILfAxgz/c+w/BJIVSumfiGRi9cu6/9xAMZqPT/VFfhMKAYx623kIYfjMmDo=;
+ bh=UyHn0RE0aiLnNwnTLnusG082I0St5QJtdWvemhhSvGk=; b=I68SDNF7IOVC4zJUEA43wAWLdD
+ cx1dhJ44wNVXa5upNMw+ke9nKaEBnVnWnMyIWmlblmIx5lRFyFZb2JmO4Kcr2NP60O4Bel+5C3bpb
+ 5fjYhPfAb6V+Bnkk+GAduOkEqNAxFzQa0+jIV4AFsKGJnJ9C/zBVzO4A/WVre+U9niuw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wMNNsxUf9IoUtzpC900HtqsEMd5LWnTSP25fWDmw7S8=; b=c1+iaS71PhHs6E+2hfJQGkpjUO
- cpVk25dUvpkNpGoiHHckTTOtY6ZsUnc/Z//7fztaOnYHm+YvpT0gu+BtnDA7JIQDOjNUV73RP5taB
- 8Mglf0EQYD59Q+PbC3DyFerVZViOaGjxGeG1ROOwrSymBLHiGR814yorwogFLoIVdMq4=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hVZCo-008403-8j
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 May 2019 10:19:46 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id B16A4265C54F174D69EA
+ bh=UyHn0RE0aiLnNwnTLnusG082I0St5QJtdWvemhhSvGk=; b=YOHcIbawzq1xoAplFH0G4tZ9+O
+ MRJabG6c16zHlMBEwjk5F0iVwiGjpUq47X5xN/f6IIklZs9fAnHNpuYVdCDv5Z/inh3A27lxRfZ3E
+ cW9i6CTmXB/kFkRGIxdZczFhEJPAaZFmLdTjQQTkb8pd1ZBF3WdGBFE5MDkMMPyTcKY4=;
+Received: from mail-qk1-f196.google.com ([209.85.222.196])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hVZLn-000hTq-2T
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 May 2019 10:29:00 +0000
+Received: by mail-qk1-f196.google.com with SMTP id t64so21514955qkh.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 28 May 2019 18:19:33 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 28 May
- 2019 18:19:29 +0800
-To: Park Ju Hyung <qkrwngud825@gmail.com>,
- <linux-f2fs-devel@lists.sourceforge.net>
+ Tue, 28 May 2019 03:28:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UyHn0RE0aiLnNwnTLnusG082I0St5QJtdWvemhhSvGk=;
+ b=fKxqz3PKBWQqg301kJcPVGzXYW07Kb+hM3cO0JWFCQbfR8zQHifcOxLL5jYKEXfABX
+ AHLffuJ8e6+b3By/uOhSBN2zqL/PyvcvXc3J8KVqfRQ8Qokq8scMQ/pgABtukwZgyiia
+ dqA04EwVn5pRPx+wquS2dn1z3tDF2M16kjpL12zD8HEa5naFNX25uC3rMmPmh0mgy3qI
+ 5jyBRkFJLA3QbUHle+DQMAqlSOMMmJX4uin3G4ASFUlDfjCvPBmnatehzVv1T5Ck7Ktq
+ W/z1OiMSofLU8dO8ReeY1mePyl4owyxdABJgW0jeTS2XkHf+Zd8EgChAD4Ju6IIZMPz+
+ MJhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UyHn0RE0aiLnNwnTLnusG082I0St5QJtdWvemhhSvGk=;
+ b=N2xsPpXA2gIDVU9IEAF4N0ahhZ0nxs5uZsc2siHh4oFxKAQHkava+P2ae/OqFW38Gw
+ rlrdh7i15Rmyord1CRnHLCL+wR7ZDPdyxMT9InU6eFvhvqgqG2fbK5N0PFigzG9YWEjz
+ kbu58SI64JyOlIJBfHssRaUhTU41zj8ba0M0gu4yZWjjOxROuyOPJhK37q9MByI0COm4
+ 8jwFlHM0PJYgUbM8n3gVkpjhVNpKlBmqvXEY9FMrmFkyobr0P7blZ6BO5dBQH7s+M6YX
+ DiRZY7igV6LSh83iaxdKVt8rr1aWj/4Nmo0bEEqeODEjf0D45v3/mKWFKr+5UJZN+kmr
+ lYyA==
+X-Gm-Message-State: APjAAAXy4gJqEIAkKznDeKpT2bdL3fKO669UFHeCJCcPC9MnYorxA9TL
+ CScZ75WuUT2IcFf7vzXCoF3r0lzObZHSbJYUzpvQPC/z
+X-Google-Smtp-Source: APXvYqwWb7rhHFRaAaXH95yyiG3VL8vulGLcCETA7oP2hGua3VjTxTQEGXCw/GWNG+s/AJwk85ic9qgaqheopyB+UJg=
+X-Received: by 2002:a0c:b621:: with SMTP id f33mr65018298qve.199.1559039332856; 
+ Tue, 28 May 2019 03:28:52 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190416064355.29712-1-qkrwngud825@gmail.com>
  <20190416064355.29712-2-qkrwngud825@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <afdf2ade-6cb7-a335-3584-22bd2681e502@huawei.com>
-Date: Tue, 28 May 2019 18:19:45 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20190416064355.29712-2-qkrwngud825@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ <afdf2ade-6cb7-a335-3584-22bd2681e502@huawei.com>
+In-Reply-To: <afdf2ade-6cb7-a335-3584-22bd2681e502@huawei.com>
+From: Ju Hyung Park <qkrwngud825@gmail.com>
+Date: Tue, 28 May 2019 19:28:40 +0900
+Message-ID: <CAD14+f0F0aeqaJMFqoQTBY7wjqAF2H98+Ruvsd3Xd_Wuua8mkw@mail.gmail.com>
+To: Chao Yu <yuchao0@huawei.com>
+X-Spam-Score: 1.5 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.196 listed in list.dnswl.org]
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (qkrwngud825[at]gmail.com)
+ -0.3 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hVZCo-008403-8j
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (qkrwngud825[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1hVZLn-000hTq-2T
 Subject: Re: [f2fs-dev] [PATCH 2/2] mkfs.f2fs: make the default extensions
  list much more sensical
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -77,150 +108,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/4/16 14:43, Park Ju Hyung wrote:
-> Following extensions are removed:
->  - divx: deprecated video format and it's usually wrapped with avi
->  - asf: deprecated streaming format
->  - asx: redirecting file to asf(small)
->  - wmx: redirecting file to wma/wmv(small)
->  - rm: deprecated media container
->  - video: unused
->  - wv: unpopular audio format from 1998
-> 
-> The extensions list is limited to 64 and those don't deserve to be
-> on this space-precious list.
-> 
-> Common prefixes are introduced and are checked with
-> https://en.wikipedia.org/wiki/List_of_filename_extensions
-> to avoid treating possible hot files as cold:
->  - mp: covers mp3, mp4, mpeg, mpg
->  - wm: covers wma, wmb, wmv
->  - og: covers oga, ogg, ogm, ogv
->  - jp: covers jpg, jpeg, jp2
-> 
-> Following extensions are added:
->  - webm: extremely popular free media container format from Google
->          VP8/VP9/AV1 and Vorbis/Opus is often wrapped with this container
->  - wav: uncompressed audio format, commonly used with voice recorders
->  - svg: vector image format commonly used in web
->  - webp: free lossy image format commonly used in web
->  - jar: Java archive file
->  - deb: Debian software package
->  - iso: disk image file
->  - gz: gzip compressed file, unable to randomly update
->  - xz: xz compressed file, unable to randomly update
->  - zst: zstd compressed file, unable to randomly update
->  - pdf: PDF document
->  - pyc: Python bytecode automatically generated when
->         executing python to run .py files
->  - ttc, ttf: font files
->  - cnt: image alias files commonly used in Android apps
->  - exo: EXO player's cache files, commonly used in Android's YouTube app
->  - odex, vdex: Android RunTime files found in /data/app/*/oat
-> 
-> Total entries on the list changed from 34 to 36.
-> 
-> Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
-> ---
->  mkfs/f2fs_format.c | 50 ++++++++++++++++++++++++++--------------------
->  1 file changed, 28 insertions(+), 22 deletions(-)
-> 
-> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-> index 0ae0df3..4560611 100644
-> --- a/mkfs/f2fs_format.c
-> +++ b/mkfs/f2fs_format.c
-> @@ -38,48 +38,54 @@ struct f2fs_checkpoint *cp;
->  static unsigned int quotatype_bits = 0;
->  
->  const char *media_ext_lists[] = {
-> +	/* common prefix */
-> +	"mp", // Covers mp3, mp4, mpeg, mpg
-> +	"wm", // Covers wma, wmb, wmv
-> +	"og", // Covers oga, ogg, ogm, ogv
-> +	"jp", // Covers jpg, jpeg, jp2
-> +
->  	/* video */
->  	"avi",
-> -	"divx",
->  	"m4v",
->  	"m4p",
-> -	"mp4",
-> -	"wmv",
-> -	"mpeg",
->  	"mkv",
->  	"mov",
-> -	"asx",
-> -	"asf",
-> -	"wmx",
-> -	"svi",
-> -	"wvx",
-> -	"wm",
-> -	"mpg",
-> -	"mpe",
-> -	"rm",
-> -	"video",
-> +	"webm",
->  
->  	/* audio */
-> +	"wav",
->  	"m4a",
-> -	"mp3",
->  	"3gp",
-> -	"wma",
-> -	"wv",
-> -	"ogg",
->  	"opus",
->  	"flac",
->  
->  	/* image */
-> -	"jpeg",
-> -	"jpg",
->  	"gif",
->  	"png",
-> -
-> -	/* other */
-> +	"svg",
-> +	"webp",
-> +
-> +	/* archives */
-> +	"jar",
-> +	"deb",
-> +	"iso",
-> +	"gz",
-> +	"xz",
-> +	"zst",
+Hi Chao,
 
-How about adding below extensions:
+On Tue, May 28, 2019 at 7:19 PM Chao Yu <yuchao0@huawei.com> wrote:
+> How about adding below extensions:
+>
+>         "zip",
+>         "bin",
+>         "dat",
+>         "txt",
 
-	"zip",
-	"bin",
-	"dat",
-	"txt",
+zip is capable of random updates. I didn't add bz2 for the same reason.
+But I do agree that most users won't be constantly updating zip files.
 
-Thanks,
+I personally use my Android device with zip treated as cold, but I'm
+not sure if it makes good sense to make it as the default that's
+supposed to run under various scenarios.
 
-> +
-> +	/* others */
-> +	"pdf",
-> +	"pyc", // Python bytecode
-> +	"ttc",
-> +	"ttf",
->  	"exe",
->  
->  	/* android */
->  	"apk",
-> +	"cnt", // Image alias
-> +	"exo", // YouTube
-> +	"odex", // Android RunTime
-> +	"vdex", // Android RunTime
->  	"so",
->  
->  	NULL
-> 
+How much different is the random write performance from cold to hot?
+
+But I'm against the idea of adding the rest 3 extensions.
+"bin" and "dat" is way too generic. You wouldn't know if a program
+happens to heavily update files named .bin/.dat.
+
+For txt, it won't be uncommon for a user to update it frequently.
+Moreover, most txt size is pretty small anyways.
+
+And finally, circling back to your original concern, we should be more
+careful adding extensions as there's a limit.
+
+Thanks.
 
 
 _______________________________________________
