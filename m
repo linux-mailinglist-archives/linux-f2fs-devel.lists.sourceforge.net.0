@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80E2131CD3
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:24:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8029831CD4
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:24:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX40C-0003pu-6A; Sat, 01 Jun 2019 13:24:52 +0000
+	id 1hX40F-0003qQ-9D; Sat, 01 Jun 2019 13:24:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX40B-0003po-Ir
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:51 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX40C-0003qB-Ii
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hRID4Uf2ITtdDCjX0TdB/Y4YZ/uQR9TQztGgJ8purPI=; b=f6iT8O9N9cMYa7AQXsdjFb/lO+
- VfU5IQ4FIhjesN9pEt5v4oWOhAs4bpkS7jDKjjGkqcff+ek3keTIEQntIzNnzUt2KTAogROFPZMTj
- fJhqTXTj8LoAIe5sZt3U2V6OK6IPk0CUhVhoYsg4iP2L12SZc7OERtTpfZOcJ8n0EYqI=;
+ bh=uRQHsJwqihtgKJK3BTVX5D/PmZ0Iv89TGluSWxKvjAw=; b=HdgvqVAsESqcj+fn4oPCeKKw/k
+ B+bzD9DwR4RVUpORRYppwmMQe6JBawdqpwwR4ArXRUmcrqPmzN1QgGdYNMUSf0rA2ptl1j5Sw/mTI
+ 5VNGhEcVp+dDa4qtPYM48bk1VNH8xnzzIvIDFftkQl1517KS9cNAi2R3H/ZNstFGSpio=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hRID4Uf2ITtdDCjX0TdB/Y4YZ/uQR9TQztGgJ8purPI=; b=JbIpHdrV812S9mIfq7Ew/4MTA3
- DyVxLMNsamZytvWNzf8VadcTdqgaKWlMSZFwFZj0N/MoJCIyigwacygwfjGPqzxxQ13y/PJmH/IST
- Dn7nFZCYaF0XBRPaL52ttTV0WRYcJ+Ia2yca3QBnU1lDBkCXu4nZIH7Gizx1gA0XLkJk=;
+ bh=uRQHsJwqihtgKJK3BTVX5D/PmZ0Iv89TGluSWxKvjAw=; b=FVevB4thi5FsDSYTQM8edpdORN
+ fpGcNmC84Rxiv3AvJAWBlE9mBFM+6Q59Ja5Lo3FG4HJSyV8BytA3imy4FoNmijLgiWpHuHdRu+mGg
+ FwbhDSANbUbubNnXkpFrzvKJDCoxXYbfdQbV211H2irgPFfRXSEbLBaRQz6OV59UBcyg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX40A-00ECkm-6c
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:51 +0000
+ id 1hX40B-00EcZn-8m
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:52 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0618D27355;
- Sat,  1 Jun 2019 13:24:43 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0D94427368;
+ Sat,  1 Jun 2019 13:24:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395484;
- bh=AkOn2ipxa+P1naMqDjVhF/at0UJoRCL8+OY8kflwL6A=;
+ s=default; t=1559395485;
+ bh=3Cb9EYjDPwjlUA8KGh5mw7Rh0N8a1JSxCVzAWla/ENM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=FId1KReKVKNj1Hxq10LrvwYJqnKdeus+gvuafTloB1o/VabdDpImYE0HdmIPb6wAM
- FwNQ4NsCgzkMTy+P7vfAXFxXGuyC/UrmlN/GKxiiH4foIAoQEbsdRELURLnSPnhLgU
- 4mqfrymXDjE1CHoaTE4JIITfmt93Bwg1SbbB9Of0=
+ b=fW1ATmFxc/dRj/MZSgx1UfLRZlRaKNrt+p4OmLgFgHT7MMR4QixElGBEwLQu1JcGv
+ eonKoDnlz3anAgkN/TVC3GWrBeuV4e3abSFQPdeIODfHYXZW4WlfhCtaRXW+Gm/3Dw
+ wCd2PNEl0svvBAVsD7tLFmrU1TPHaenKet38C4TU=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:22:36 -0400
-Message-Id: <20190601132346.26558-29-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:22:37 -0400
+Message-Id: <20190601132346.26558-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601132346.26558-1-sashal@kernel.org>
 References: <20190601132346.26558-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX40A-00ECkm-6c
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 29/99] f2fs: fix to avoid panic in
- dec_valid_block_count()
+X-Headers-End: 1hX40B-00EcZn-8m
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 30/99] f2fs: fix to do sanity check
+ on valid block count of segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,88 +99,91 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 5e159cd349bf3a31fb7e35c23a93308eb30f4f71 ]
+[ Upstream commit e95bcdb2fefa129f37bd9035af1d234ca92ee4ef ]
 
 As Jungyeon reported in bugzilla:
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203209
+https://bugzilla.kernel.org/show_bug.cgi?id=203233
 
 - Overview
-When mounting the attached crafted image and running program, I got this error.
-Additionally, it hangs on sync after the this script.
+When mounting the attached crafted image and running program, following errors are reported.
+Additionally, it hangs on sync after running program.
 
-The image is intentionally fuzzed from a normal f2fs image for testing and I enabled option CONFIG_F2FS_CHECK_FS on.
+The image is intentionally fuzzed from a normal f2fs image for testing.
+Compile options for F2FS are as follows.
+CONFIG_F2FS_FS=y
+CONFIG_F2FS_STAT_FS=y
+CONFIG_F2FS_FS_XATTR=y
+CONFIG_F2FS_FS_POSIX_ACL=y
+CONFIG_F2FS_CHECK_FS=y
 
 - Reproduces
-cc poc_01.c
-./run.sh f2fs
+cc poc_13.c
+mkdir test
+mount -t f2fs tmp.img test
+cp a.out test
+cd test
+sudo ./a.out
 sync
 
- kernel BUG at fs/f2fs/f2fs.h:1788!
- RIP: 0010:f2fs_truncate_data_blocks_range+0x342/0x350
+- Kernel messages
+ F2FS-fs (sdb): Bitmap was wrongly set, blk:4608
+ kernel BUG at fs/f2fs/segment.c:2102!
+ RIP: 0010:update_sit_entry+0x394/0x410
  Call Trace:
-  f2fs_truncate_blocks+0x36d/0x3c0
-  f2fs_truncate+0x88/0x110
-  f2fs_setattr+0x3e1/0x460
-  notify_change+0x2da/0x400
-  do_truncate+0x6d/0xb0
-  do_sys_ftruncate+0xf1/0x160
+  f2fs_allocate_data_block+0x16f/0x660
+  do_write_page+0x62/0x170
+  f2fs_do_write_node_page+0x33/0xa0
+  __write_node_page+0x270/0x4e0
+  f2fs_sync_node_pages+0x5df/0x670
+  f2fs_write_checkpoint+0x372/0x1400
+  f2fs_sync_fs+0xa3/0x130
+  f2fs_do_sync_file+0x1a6/0x810
+  do_fsync+0x33/0x60
+  __x64_sys_fsync+0xb/0x10
   do_syscall_64+0x43/0xf0
   entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-The reason is dec_valid_block_count() will trigger kernel panic due to
-inconsistent count in between inode.i_blocks and actual block.
+sit.vblocks and sum valid block count in sit.valid_map may be
+inconsistent, segment w/ zero vblocks will be treated as free
+segment, while allocating in free segment, we may allocate a
+free block, if its bitmap is valid previously, it can cause
+kernel crash due to bitmap verification failure.
 
-To avoid panic, let's just print debug message and set SBI_NEED_FSCK to
-give a hint to fsck for latter repairing.
+Anyway, to avoid further serious metadata inconsistence and
+corruption, it is necessary and worth to detect SIT
+inconsistence. So let's enable check_block_count() to verify
+vblocks and valid_map all the time rather than do it only
+CONFIG_F2FS_CHECK_FS is enabled.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
-[Jaegeuk Kim: fix build warning and add unlikely]
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ fs/f2fs/segment.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 634165fb64f15..daa136ec3b1ec 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1539,6 +1539,7 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 	return -ENOSPC;
- }
- 
-+void f2fs_msg(struct super_block *sb, const char *level, const char *fmt, ...);
- static inline void dec_valid_block_count(struct f2fs_sb_info *sbi,
- 						struct inode *inode,
- 						block_t count)
-@@ -1547,9 +1548,17 @@ static inline void dec_valid_block_count(struct f2fs_sb_info *sbi,
- 
- 	spin_lock(&sbi->stat_lock);
- 	f2fs_bug_on(sbi, sbi->total_valid_block_count < (block_t) count);
--	f2fs_bug_on(sbi, inode->i_blocks < sectors);
- 	sbi->total_valid_block_count -= (block_t)count;
- 	spin_unlock(&sbi->stat_lock);
-+	if (unlikely(inode->i_blocks < sectors)) {
-+		f2fs_msg(sbi->sb, KERN_WARNING,
-+			"Inconsistent i_blocks, ino:%lu, iblocks:%llu, sectors:%llu",
-+			inode->i_ino,
-+			(unsigned long long)inode->i_blocks,
-+			(unsigned long long)sectors);
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		return;
-+	}
- 	f2fs_i_blocks_write(inode, count, false, true);
- }
- 
-@@ -2371,7 +2380,6 @@ static inline void f2fs_update_iostat(struct f2fs_sb_info *sbi,
- 
- bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type);
--void f2fs_msg(struct super_block *sb, const char *level, const char *fmt, ...);
- static inline void verify_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type)
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 47348d98165b2..e3d8826c5113d 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -641,7 +641,6 @@ static inline void verify_block_addr(struct f2fs_io_info *fio, block_t blk_addr)
+ static inline int check_block_count(struct f2fs_sb_info *sbi,
+ 		int segno, struct f2fs_sit_entry *raw_sit)
  {
+-#ifdef CONFIG_F2FS_CHECK_FS
+ 	bool is_valid  = test_bit_le(0, raw_sit->valid_map) ? true : false;
+ 	int valid_blocks = 0;
+ 	int cur_pos = 0, next_pos;
+@@ -668,7 +667,7 @@ static inline int check_block_count(struct f2fs_sb_info *sbi,
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		return -EINVAL;
+ 	}
+-#endif
++
+ 	/* check segment usage, and check boundary of a given segment number */
+ 	if (unlikely(GET_SIT_VBLOCKS(raw_sit) > sbi->blocks_per_seg
+ 					|| segno > TOTAL_SEGS(sbi) - 1)) {
 -- 
 2.20.1
 
