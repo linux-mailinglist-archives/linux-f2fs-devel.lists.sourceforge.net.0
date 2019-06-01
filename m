@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25F5331CA2
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:23:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 239E531CA3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:23:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX3yj-0001CW-M6; Sat, 01 Jun 2019 13:23:21 +0000
+	id 1hX3yk-0001Cw-QC; Sat, 01 Jun 2019 13:23:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX3yi-0001CL-QB
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:20 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX3yk-0001Cn-6p
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H0o2rUXTLK9xCr7kRODlnMhBDulDZTEgmY1ValsvDbY=; b=lvEQUv5ToLsx6fPKpXNDFeKDpZ
- Nnju127mCji99Dq5+ED9SpuPi2a846+GU9gPNxtiJ1ZTXOCMDLAt6Ka9yvOJCMm0LmZZzYR+VtrJf
- D2+s9B/CSeNndjbWlvZqT0dsTVMWxbvz/uFb/mSSOyoftmJ7liw8ZvbymUov9hyz1/p0=;
+ bh=3qvU0KnuohhL5okwfkC2ADSzCKlnKYYQAmSC+t/3G2c=; b=l1/+9OdHr6oeL1ZP45LCPJ27JW
+ ZhqKjQAGeKrL961X6Dkyk1N1QxD0auXmgu14p3OlcHKFYrjdGQ3R1JNOD+OFkmroXKjNP5MHsTDf3
+ qWvJvQ56D0tKZrRVqKU9N993kORgOmJpdWSFS23Ifr3Y1yuwUPx3QA4YtSre8yct/14o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H0o2rUXTLK9xCr7kRODlnMhBDulDZTEgmY1ValsvDbY=; b=Nnu8uuL+2scMKnxuLca7HRCjYK
- nXtgfcm8eXVXqoBeQXe2m+kmDLejqfbmfyIILyGS9hhKhPbhqjBls8GmYAX2HBVgiymijj8yQQaQh
- QPFmqSf3p0S45jscY+66uzhHjtjI4zW5oeNF65ar+3bju2fWePYi8dnesb6dMJ5UgLdM=;
+ bh=3qvU0KnuohhL5okwfkC2ADSzCKlnKYYQAmSC+t/3G2c=; b=ZZ41zRU6mAL1tAgHqCVok/iO6Q
+ 1gRJPsPnlrbCuc2XMo9KNbeO+4QuqW+i6kgcyAA3nqdEQ0fivtt9BpT6+5mVuceMrj3HnFMPQWNwM
+ iZFg5AqbjzWQr9rqaMz6CxVtm/caWeorrCQ2GrSexfYE8RZI5kM0Ha7TjIEK7WQRa8T4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX3yh-00EcRf-EI
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:20 +0000
+ id 1hX3yi-00ECYR-Gv
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:22 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 355B7240F2;
- Sat,  1 Jun 2019 13:23:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 42E61264C3;
+ Sat,  1 Jun 2019 13:23:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395393;
- bh=aNSg5XVsGkBPZbEvDCg1nv+Z663UXtIi0ywaorvDbkA=;
+ s=default; t=1559395394;
+ bh=xAMMKPlauOVMx2rhB8Ve/LxOeVxEzDtCxF1bwqyK1Jo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CV5DdqUA+M98GMRPRR2cD36XQOvWrP8Qsqy1WT2HLhrIKfIUwPXTn2vku1J9G6Ibq
- MPKoqTLR0vT0ipV0OQ2kXl2VDSSozos/Z1aW7GIzf8KtEwlP2pL3XZy9Gly93cdunQ
- z1NifRyiFZ4+Iv1Kk5uIK25Pv34cO+vLsVfp415E=
+ b=gmgr5HyIPdyTUb3XgJAsaqfTfV3CoGw+Fv648YG0AlXz+pX+s4afl1ka2kbZy5HA7
+ 2xTN3mvhUx7ixzbVKUU35eoibECRlTgA50k26lamp13eqGwwr3uRtl2abWx5tFbV2R
+ sKnXZ9uBue62azpfppPzSkC4M3uJAvCN9Tixai4E=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:20:10 -0400
-Message-Id: <20190601132158.25821-34-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:20:11 -0400
+Message-Id: <20190601132158.25821-35-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601132158.25821-1-sashal@kernel.org>
 References: <20190601132158.25821-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX3yh-00EcRf-EI
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 034/141] f2fs: fix to avoid panic in
- do_recover_data()
+X-Headers-End: 1hX3yi-00ECYR-Gv
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 035/141] f2fs: fix to avoid panic in
+ f2fs_inplace_write_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,15 +99,15 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 22d61e286e2d9097dae36f75ed48801056b77cac ]
+[ Upstream commit 05573d6ccf702df549a7bdeabef31e4753df1a90 ]
 
 As Jungyeon reported in bugzilla:
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203227
+https://bugzilla.kernel.org/show_bug.cgi?id=203239
 
 - Overview
-When mounting the attached crafted image, following errors are reported.
-Additionally, it hangs on sync after trying to mount it.
+When mounting the attached crafted image and running program, following errors are reported.
+Additionally, it hangs on sync after running program.
 
 The image is intentionally fuzzed from a normal f2fs image for testing.
 Compile options for F2FS are as follows.
@@ -118,57 +118,66 @@ CONFIG_F2FS_FS_POSIX_ACL=y
 CONFIG_F2FS_CHECK_FS=y
 
 - Reproduces
-mkdir test
-mount -t f2fs tmp.img test
+cc poc_15.c
+./run.sh f2fs
 sync
 
-- Messages
- kernel BUG at fs/f2fs/recovery.c:549!
- RIP: 0010:recover_data+0x167a/0x1780
+- Kernel messages
+ ------------[ cut here ]------------
+ kernel BUG at fs/f2fs/segment.c:3162!
+ RIP: 0010:f2fs_inplace_write_data+0x12d/0x160
  Call Trace:
-  f2fs_recover_fsync_data+0x613/0x710
-  f2fs_fill_super+0x1043/0x1aa0
-  mount_bdev+0x16d/0x1a0
-  mount_fs+0x4a/0x170
-  vfs_kern_mount+0x5d/0x100
-  do_mount+0x200/0xcf0
-  ksys_mount+0x79/0xc0
-  __x64_sys_mount+0x1c/0x20
+  f2fs_do_write_data_page+0x3c1/0x820
+  __write_data_page+0x156/0x720
+  f2fs_write_cache_pages+0x20d/0x460
+  f2fs_write_data_pages+0x1b4/0x300
+  do_writepages+0x15/0x60
+  __filemap_fdatawrite_range+0x7c/0xb0
+  file_write_and_wait_range+0x2c/0x80
+  f2fs_do_sync_file+0x102/0x810
+  do_fsync+0x33/0x60
+  __x64_sys_fsync+0xb/0x10
   do_syscall_64+0x43/0xf0
   entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-During recovery, if ofs_of_node is inconsistent in between recovered
-node page and original checkpointed node page, let's just fail recovery
-instead of making kernel panic.
+The reason is f2fs_inplace_write_data() will trigger kernel panic due
+to data block locates in node type segment.
+
+To avoid panic, let's just return error code and set SBI_NEED_FSCK to
+give a hint to fsck for latter repairing.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/recovery.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ fs/f2fs/segment.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index ae0e5f2e67b4a..bf5c5f4fa77ea 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -485,7 +485,15 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 		goto err;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index ac038563273de..4c6406bbe01e8 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3068,13 +3068,18 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+ {
+ 	int err;
+ 	struct f2fs_sb_info *sbi = fio->sbi;
++	unsigned int segno;
  
- 	f2fs_bug_on(sbi, ni.ino != ino_of_node(page));
--	f2fs_bug_on(sbi, ofs_of_node(dn.node_page) != ofs_of_node(page));
+ 	fio->new_blkaddr = fio->old_blkaddr;
+ 	/* i/o temperature is needed for passing down write hints */
+ 	__get_segment_type(fio);
+ 
+-	f2fs_bug_on(sbi, !IS_DATASEG(get_seg_entry(sbi,
+-			GET_SEGNO(sbi, fio->new_blkaddr))->type));
++	segno = GET_SEGNO(sbi, fio->new_blkaddr);
 +
-+	if (ofs_of_node(dn.node_page) != ofs_of_node(page)) {
-+		f2fs_msg(sbi->sb, KERN_WARNING,
-+			"Inconsistent ofs_of_node, ino:%lu, ofs:%u, %u",
-+			inode->i_ino, ofs_of_node(dn.node_page),
-+			ofs_of_node(page));
-+		err = -EFAULT;
-+		goto err;
++	if (!IS_DATASEG(get_seg_entry(sbi, segno)->type)) {
++		set_sbi_flag(sbi, SBI_NEED_FSCK);
++		return -EFAULT;
 +	}
  
- 	for (; start < end; start++, dn.ofs_in_node++) {
- 		block_t src, dest;
+ 	stat_inc_inplace_blocks(fio->sbi);
+ 
 -- 
 2.20.1
 
