@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23DB431C5F
+	by mail.lfdr.de (Postfix) with ESMTPS id EDE0431C61
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:21:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX3wr-00010X-Py; Sat, 01 Jun 2019 13:21:25 +0000
+	id 1hX3ws-00011E-KW; Sat, 01 Jun 2019 13:21:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX3wq-00010D-Kz
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:24 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX3wr-000116-Ed
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t7UX95jx11THNa1pOj7vN0vE9OaHxNXTUowBgZSEZRM=; b=EmXShzUZjLLMD1pv9ytbUpE/Zd
- pUUKzi/ZUHudLfdYmUSRwufLpNGwat9IHIVBBq5347cceRDB8YWf7KBOhF5y5Yezw+WSTDlACUCgJ
- s+aFN/GYCp+I9p1z7lN5IfsCpoAHE3Rdsf06K6dKVsOzqJ4rdHkvwPCmODi/dWv/BkJ0=;
+ bh=QIkTEoBJmKsQ9//HWEe8WkDMYp2ERTZxJPygrgkXXbw=; b=fuOseAyyjl8I0maQZ0DFVMY9O5
+ Rp/h7bKNYvnk2Qe2ta1qunY98JnIvqEwSLsE+DXHPTFsu5hp9OIVfrIxGguhyX6cUUa23IwSUACpI
+ bLhJXRQN5QnSl7n2ETzzN3bGlrsdUae2+2wFuOiHsI5u4L8ql0hK4zJ5/6If8h4ktrUI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t7UX95jx11THNa1pOj7vN0vE9OaHxNXTUowBgZSEZRM=; b=azr9jbtXxX/chNWK8GzOJutJlU
- fYCJ+ZkCJwIndgjVUN1U4N94IT5cyr2qliirEA2GaGUZ7ZH21C0SKGA5/tWvcD6rugBf1xCG9QbJJ
- 1nirJaXM/F3BXqlFgH1bMsozKiyD1xUuJC0VgZ5K/koW2SQeIsY5lqPc3wxIxabcvQnc=;
+ bh=QIkTEoBJmKsQ9//HWEe8WkDMYp2ERTZxJPygrgkXXbw=; b=bXvl0sytdMe68OoTICGpprZc91
+ P1uwtlGAe5OdJhiOqQW03wb7ilPEpWNHVWzEovLraACr8cE9/5Y8qLKuO59AI6sRk2M4qlVSvz0wi
+ cUQZB7bErbQTPVu8D68cmWJGzbBqUc3IKW79f3i7+nBPTfN+qETYEHUtlGEBcNzXLgAQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX3wp-0058I5-7s
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:24 +0000
+ id 1hX3wq-00EcG6-AP
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:25 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0BFDC27306;
- Sat,  1 Jun 2019 13:21:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 18B9D272F6;
+ Sat,  1 Jun 2019 13:21:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395277;
- bh=lto4uKj0I1kt3M2FNnSTn8NQADKxrJcUxNIx3W2cx/U=;
+ s=default; t=1559395278;
+ bh=KyJQPpQA3t/kHSchWa3aIy96jwgQX46ZurVe8ZfdpHk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=M1sbpqkvTDub9T6L5LbTeiR9EHq5zKGL2ivr12y2ST02BYi+DZ8hRsmEGB8mZKJO9
- wE25hzSqWmNaY9eHnSjIg4EGyQaJpFsMnfWeCPGFupK0hnB2PXH9nTRUuTpbg27h91
- rHfwns2E20bcgt5jyvRm4e2bOvoL4hX4kyMQE1oo=
+ b=ow1fWcHKgSB2mq5ntdSS8dz4MwkZiJuEH3VlN812O60LQtG4Uy81wDZ/fAf+bDfvO
+ D8oFJYD+K5RByUh11HuOolOVLkUtnyxlcB5e3Ot0odCV29QJlaV2lRvuMF8poJCGHi
+ ApYo6DTzuksxJObf9yijAOh8k4yl4HVHBO8Vnxro=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:17:13 -0400
-Message-Id: <20190601131934.25053-41-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:17:14 -0400
+Message-Id: <20190601131934.25053-42-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601131934.25053-1-sashal@kernel.org>
 References: <20190601131934.25053-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX3wp-0058I5-7s
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 041/173] f2fs: fix to avoid panic in
- f2fs_inplace_write_data()
+X-Headers-End: 1hX3wq-00EcG6-AP
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 042/173] f2fs: fix error path of
+ recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,85 +99,82 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 05573d6ccf702df549a7bdeabef31e4753df1a90 ]
+[ Upstream commit 988385795c7f46b231982d54750587f204bd558b ]
 
-As Jungyeon reported in bugzilla:
-
-https://bugzilla.kernel.org/show_bug.cgi?id=203239
-
-- Overview
-When mounting the attached crafted image and running program, following errors are reported.
-Additionally, it hangs on sync after running program.
-
-The image is intentionally fuzzed from a normal f2fs image for testing.
-Compile options for F2FS are as follows.
-CONFIG_F2FS_FS=y
-CONFIG_F2FS_STAT_FS=y
-CONFIG_F2FS_FS_XATTR=y
-CONFIG_F2FS_FS_POSIX_ACL=y
-CONFIG_F2FS_CHECK_FS=y
-
-- Reproduces
-cc poc_15.c
-./run.sh f2fs
-sync
-
-- Kernel messages
- ------------[ cut here ]------------
- kernel BUG at fs/f2fs/segment.c:3162!
- RIP: 0010:f2fs_inplace_write_data+0x12d/0x160
- Call Trace:
-  f2fs_do_write_data_page+0x3c1/0x820
-  __write_data_page+0x156/0x720
-  f2fs_write_cache_pages+0x20d/0x460
-  f2fs_write_data_pages+0x1b4/0x300
-  do_writepages+0x15/0x60
-  __filemap_fdatawrite_range+0x7c/0xb0
-  file_write_and_wait_range+0x2c/0x80
-  f2fs_do_sync_file+0x102/0x810
-  do_fsync+0x33/0x60
-  __x64_sys_fsync+0xb/0x10
-  do_syscall_64+0x43/0xf0
-  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-
-The reason is f2fs_inplace_write_data() will trigger kernel panic due
-to data block locates in node type segment.
-
-To avoid panic, let's just return error code and set SBI_NEED_FSCK to
-give a hint to fsck for latter repairing.
+There are some places in where we missed to unlock page or unlock page
+incorrectly, fix them.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ fs/f2fs/recovery.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 2b809b54d81bb..b3f1f75af05cc 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3170,13 +3170,18 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
- {
- 	int err;
- 	struct f2fs_sb_info *sbi = fio->sbi;
-+	unsigned int segno;
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 73338c432e7e4..b14c718139a96 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -325,8 +325,10 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 			break;
+ 		}
  
- 	fio->new_blkaddr = fio->old_blkaddr;
- 	/* i/o temperature is needed for passing down write hints */
- 	__get_segment_type(fio);
+-		if (!is_recoverable_dnode(page))
++		if (!is_recoverable_dnode(page)) {
++			f2fs_put_page(page, 1);
+ 			break;
++		}
  
--	f2fs_bug_on(sbi, !IS_DATASEG(get_seg_entry(sbi,
--			GET_SEGNO(sbi, fio->new_blkaddr))->type));
-+	segno = GET_SEGNO(sbi, fio->new_blkaddr);
-+
-+	if (!IS_DATASEG(get_seg_entry(sbi, segno)->type)) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		return -EFAULT;
-+	}
+ 		if (!is_fsync_dnode(page))
+ 			goto next;
+@@ -338,8 +340,10 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 			if (!check_only &&
+ 					IS_INODE(page) && is_dent_dnode(page)) {
+ 				err = f2fs_recover_inode_page(sbi, page);
+-				if (err)
++				if (err) {
++					f2fs_put_page(page, 1);
+ 					break;
++				}
+ 				quota_inode = true;
+ 			}
  
- 	stat_inc_inplace_blocks(fio->sbi);
+@@ -355,6 +359,7 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 					err = 0;
+ 					goto next;
+ 				}
++				f2fs_put_page(page, 1);
+ 				break;
+ 			}
+ 		}
+@@ -370,6 +375,7 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 				"%s: detect looped node chain, "
+ 				"blkaddr:%u, next:%u",
+ 				__func__, blkaddr, next_blkaddr_of_node(page));
++			f2fs_put_page(page, 1);
+ 			err = -EINVAL;
+ 			break;
+ 		}
+@@ -380,7 +386,6 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
  
+ 		f2fs_ra_meta_pages_cond(sbi, blkaddr);
+ 	}
+-	f2fs_put_page(page, 1);
+ 	return err;
+ }
+ 
+@@ -674,8 +679,10 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+ 		 */
+ 		if (IS_INODE(page)) {
+ 			err = recover_inode(entry->inode, page);
+-			if (err)
++			if (err) {
++				f2fs_put_page(page, 1);
+ 				break;
++			}
+ 		}
+ 		if (entry->last_dentry == blkaddr) {
+ 			err = recover_dentry(entry->inode, page, dir_list);
 -- 
 2.20.1
 
