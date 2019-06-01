@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B00931C68
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:21:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7813C31C70
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:21:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX3wz-000137-S7; Sat, 01 Jun 2019 13:21:33 +0000
+	id 1hX3x7-00014g-2D; Sat, 01 Jun 2019 13:21:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX3wz-00012l-1t
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:33 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX3x0-00013S-8H
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fNz7Xlu7I56ahLslYmd6Q1K+qqEWFkIxjg1Z3hTtu0A=; b=dFGVME6Fnt3QpLrr/zW4sNwHbs
- eeDy0mPEa67CvAzayUvyKIa4xi4SzCBqctc8c72IdwbLv9AqnsMXki71vlI2TZLsHIZIvjNsKDlK8
- zAf3cswsUcF+7a9ME2pk7wL3yh5nVAQ+hnWLA8VTAFBDpSoKRCiNoyTW2UF6zQhk63hs=;
+ bh=bj6GgIhv9NlFJ7znEhD8dZYh5vCKsZFZzeO+k9KVzWY=; b=DbDVGRTHKED6hwNGA7x0n7QddI
+ Lp4ZObBWBwRKBHFOssL7bqLE/UJKtVEUcMHp4AI3f3iiA/DunmHOcGh2Ims8uWsg6R5IUvuIJDcl7
+ imM5kQiivIZBXNT2IscIwaANV4Baxq4ouJ0Gn0nlApVSGoHkL6sUIwo3wbojaLQMfDz8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fNz7Xlu7I56ahLslYmd6Q1K+qqEWFkIxjg1Z3hTtu0A=; b=IbBCn6jeN1D3gUkdFpsiek2qYb
- /greqDYikejOK1PYy32GgxOdxGQG0aJ0geZwzLouCx15wRJxKkYDap8wxIcUJpF8+JF21FKrJbtE1
- +sY90Ah88kN2oTl71rMhJh6b4gnfGbWPJIa8VoQ9cgbLR1p8P4mCX0EjrTFxRrgjlTiI=;
+ bh=bj6GgIhv9NlFJ7znEhD8dZYh5vCKsZFZzeO+k9KVzWY=; b=Bu2WZU5laDVUb2VoeqEEON/OMp
+ ijF41iTDmGRYmJXyeHcTk/AL7yWbxanDcfkEFjxlW2lOL1vTqZeG4TpxWJwrRaYpi3WAOlM6mOOCP
+ 4bS6iSInj4f3MHxAgyDeQRcYasIF0g/PRYtsu3hJm71tbJrT5cW1Xe6/PsaKgYm09x7A=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX3wx-0058J2-Ll
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:32 +0000
+ id 1hX3wy-00ECLq-Mn
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:34 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6D1FC272F6;
- Sat,  1 Jun 2019 13:21:25 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7BE1F272E9;
+ Sat,  1 Jun 2019 13:21:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395286;
- bh=x2rfPktW9Ulf7+FWQ0RDol+RaLdakR/YPP8j7eDSA6o=;
+ s=default; t=1559395287;
+ bh=DQFifoSnA4WTPRNM7L36Gt4t6w84wHh5lhn7kpd4ZEs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Igi4MbsO6d8PlzDjON9GTLvV1BvYOovCHrm4XZjuLORa9H9cx4NLwT1laBjxoAJ/t
- CxyKyNRpcze06XLHZpI+DNX9C561dB7Gxb8+FNj7XPwPA5Os2/ZojnDPbROP6Jr9Cb
- XT1xDmS6o7XCQOZODMSclXIOxwhzDd/Fyeg4G7qI=
+ b=scHtrKB04We12SdBKkcG+Meqe8d9OFoyLcR+n47iRnLiRio+qgpFSkfnJS856PnBw
+ IjP7+SXdDbixpxBfrtAHK7wtszzD4NGrVMq/4GEfWDb8/teD0K76h/piPdse9zxij5
+ zSvSo1daSYvZJ57dRHvapWvPVrMdvyKzpY52XRek=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:17:21 -0400
-Message-Id: <20190601131934.25053-49-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:17:22 -0400
+Message-Id: <20190601131934.25053-50-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601131934.25053-1-sashal@kernel.org>
 References: <20190601131934.25053-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX3wx-0058J2-Ll
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 049/173] f2fs: fix to do sanity check
- on valid block count of segment
+X-Headers-End: 1hX3wy-00ECLq-Mn
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 050/173] f2fs: fix to avoid deadloop
+ in foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,91 +99,82 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit e95bcdb2fefa129f37bd9035af1d234ca92ee4ef ]
+[ Upstream commit 793ab1c8a792f8bccd7ae4c5be02bd275410b3af ]
 
 As Jungyeon reported in bugzilla:
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203233
+https://bugzilla.kernel.org/show_bug.cgi?id=203211
 
 - Overview
-When mounting the attached crafted image and running program, following errors are reported.
-Additionally, it hangs on sync after running program.
+When mounting the attached crafted image and making a new file, I got this error and the error messages keep repeating.
 
-The image is intentionally fuzzed from a normal f2fs image for testing.
-Compile options for F2FS are as follows.
-CONFIG_F2FS_FS=y
-CONFIG_F2FS_STAT_FS=y
-CONFIG_F2FS_FS_XATTR=y
-CONFIG_F2FS_FS_POSIX_ACL=y
-CONFIG_F2FS_CHECK_FS=y
+The image is intentionally fuzzed from a normal f2fs image for testing and I run with option CONFIG_F2FS_CHECK_FS on.
 
 - Reproduces
-cc poc_13.c
 mkdir test
 mount -t f2fs tmp.img test
-cp a.out test
 cd test
-sudo ./a.out
-sync
+touch t
 
-- Kernel messages
- F2FS-fs (sdb): Bitmap was wrongly set, blk:4608
- kernel BUG at fs/f2fs/segment.c:2102!
- RIP: 0010:update_sit_entry+0x394/0x410
- Call Trace:
-  f2fs_allocate_data_block+0x16f/0x660
-  do_write_page+0x62/0x170
-  f2fs_do_write_node_page+0x33/0xa0
-  __write_node_page+0x270/0x4e0
-  f2fs_sync_node_pages+0x5df/0x670
-  f2fs_write_checkpoint+0x372/0x1400
-  f2fs_sync_fs+0xa3/0x130
-  f2fs_do_sync_file+0x1a6/0x810
-  do_fsync+0x33/0x60
-  __x64_sys_fsync+0xb/0x10
-  do_syscall_64+0x43/0xf0
-  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+- Messages
+[   58.820451] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.821485] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.822530] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.823571] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.824616] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.825640] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.826663] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.827698] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.828719] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.829759] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.830783] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.831828] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.832869] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.833888] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.834945] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.835996] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.837028] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.838051] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.839072] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.840100] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.841147] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.842186] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.843214] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.844267] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.845282] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.846305] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+[   58.847341] F2FS-fs (sdb): Inconsistent segment (1) type [1, 0] in SSA and SIT
+... (repeating)
 
-sit.vblocks and sum valid block count in sit.valid_map may be
-inconsistent, segment w/ zero vblocks will be treated as free
-segment, while allocating in free segment, we may allocate a
-free block, if its bitmap is valid previously, it can cause
-kernel crash due to bitmap verification failure.
+During GC, if segment type stored in SSA and SIT is inconsistent, we just
+skip migrating current segment directly, since we need to know the exact
+type to decide the migration function we use.
 
-Anyway, to avoid further serious metadata inconsistence and
-corruption, it is necessary and worth to detect SIT
-inconsistence. So let's enable check_block_count() to verify
-vblocks and valid_map all the time rather than do it only
-CONFIG_F2FS_CHECK_FS is enabled.
+So in foreground GC, we will easily run into a infinite loop as we may
+select the same victim segment which has inconsistent type due to greedy
+policy. In order to end up this, we choose to shutdown filesystem. For
+backgrond GC, we need to do that as well, so that we can avoid latter
+potential infinite looped foreground GC.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.h | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/f2fs/gc.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index a77f76f528b61..5af21e53ecf58 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -672,7 +672,6 @@ static inline void verify_block_addr(struct f2fs_io_info *fio, block_t blk_addr)
- static inline int check_block_count(struct f2fs_sb_info *sbi,
- 		int segno, struct f2fs_sit_entry *raw_sit)
- {
--#ifdef CONFIG_F2FS_CHECK_FS
- 	bool is_valid  = test_bit_le(0, raw_sit->valid_map) ? true : false;
- 	int valid_blocks = 0;
- 	int cur_pos = 0, next_pos;
-@@ -699,7 +698,7 @@ static inline int check_block_count(struct f2fs_sb_info *sbi,
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		return -EINVAL;
- 	}
--#endif
-+
- 	/* check segment usage, and check boundary of a given segment number */
- 	if (unlikely(GET_SIT_VBLOCKS(raw_sit) > sbi->blocks_per_seg
- 					|| segno > TOTAL_SEGS(sbi) - 1)) {
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index ab764bd106de1..a66a8752e5f65 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1175,6 +1175,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+ 				"type [%d, %d] in SSA and SIT",
+ 				segno, type, GET_SUM_TYPE((&sum->footer)));
+ 			set_sbi_flag(sbi, SBI_NEED_FSCK);
++			f2fs_stop_checkpoint(sbi, false);
+ 			goto skip;
+ 		}
+ 
 -- 
 2.20.1
 
