@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 309FD31CA7
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:23:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5097831CAA
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:23:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX3yq-0001Dt-T0; Sat, 01 Jun 2019 13:23:28 +0000
+	id 1hX3yt-0001Eg-0E; Sat, 01 Jun 2019 13:23:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX3yp-0001Dg-CZ
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:27 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX3yr-0001EG-Bv
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m3KpwA0S9Kpag2yRABm5wg+RQujTIZC0jDFEf9sCHos=; b=TSlkbC9vXtsbg1zG60pu7j26wk
- venKPmakKLsTlVVIvXtB+vyFYEugqPm8+zSL6jJxsLa2GqGdjw2A8yi63/Zv/I6NPoCW43sbLQOOR
- 6vyNLgwu8S0en/U60ClPSjFubmko+gEb+TlIXuKBUkrjq2IjBFZLaxpfC2mpHVJAXLg8=;
+ bh=UeNtLSfOWo6JU2/HcxMFrkO3Op/uOUMkfK3rN/w6NPI=; b=XzmHFidMbJzxFzm4C7Kl2hRUtw
+ I1EsneDq02ecEq7sL3XJrM88hCVOGCnRVdsIxbzztomvkQfnw2vKs+SFEgzdzuM9G5VDq5JxcoLPU
+ lnEYCN5AbJkZUBbhc+OP7hISwu0rXBryu9f9bBrJU/zI5/n+cQCuzYPgibwred1ly4/4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=m3KpwA0S9Kpag2yRABm5wg+RQujTIZC0jDFEf9sCHos=; b=dYrb3UYJkA+2KIoUYQDg2OIwWU
- VU9Qetf489Qxa3tiOAmFrQYA8NQNM63S994IVSmaOtVkVT/ZMcRiwNRS30D/o233JM5yn7MUd7Qmw
- gt8qK5hz1uiDaEFNH5xWyecKVZRFM6pcPZHlqIdB5EQdJ29mm/ZX2Ci39tjHpU0RE7ks=;
+ bh=UeNtLSfOWo6JU2/HcxMFrkO3Op/uOUMkfK3rN/w6NPI=; b=hA2RmXGzTtX+lGj+uk7Oojetge
+ e5HARjk7TRmRa/2JBfW5pqpdfllvYSBahD+etatib26T5rvbcRMATIuPvHVwfmNTKwaGR6SdOCNK0
+ jqvLS2uBpkkMGLTcZAl9lPxELZ7sV55uJKqAzJ99hMh0PKdmTNA1i7wkXDthJhTj8xLw=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX3yo-00ECZ2-6b
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:27 +0000
+ id 1hX3yp-00EcSP-LX
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:23:28 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8F58A27357;
- Sat,  1 Jun 2019 13:23:19 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9E8F827359;
+ Sat,  1 Jun 2019 13:23:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395400;
- bh=Alw0lthfCLmtbgTfq7jRYqausoeIl0hgDtrnSur8zhs=;
+ s=default; t=1559395401;
+ bh=IJgCsnCscmaIOUw0lpzQ4vvjmabqAz71RYqBpOX1BwY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hp4cRQ1NB9mu2T2Pg8OFkplQ8dUVNqVzbo7aCFURKMW5ZqnJ6LoNFBO7G908HfgGY
- PfCWF6XpSQxdczDYRkpgJLNpriK43TTvClXb3B1ORhvgBXFIdeugM1Jrw+sGnNmoCv
- nScT5/E0JZcrJJ0dOtRnpypV2nsP0DCtx+FyNd4c=
+ b=IKsB+gV0bft1YBQ6Mk+MdmQwT3USMdMVy4VpDxK4arhL/80k4ThetaFxsSGynvk5p
+ h1XLAEw1pUNvDqk36Ii8zCbv5f0mMDO7NtLINsGvzBqrAoQoTp1mdP4qxWyFHiDTXH
+ 1rZs++QlBrG+XLDLZBy7Q4CIX9VWzyQ6DH3NwXnM=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:20:16 -0400
-Message-Id: <20190601132158.25821-40-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:20:17 -0400
+Message-Id: <20190601132158.25821-41-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601132158.25821-1-sashal@kernel.org>
 References: <20190601132158.25821-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX3yo-00ECZ2-6b
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 040/141] f2fs: fix to use inline
- space only if inline_xattr is enable
+X-Headers-End: 1hX3yp-00EcSP-LX
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 041/141] f2fs: fix to do sanity
+ check on valid block count of segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,54 +99,91 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 622927f3b8809206f6da54a6a7ed4df1a7770fce ]
+[ Upstream commit e95bcdb2fefa129f37bd9035af1d234ca92ee4ef ]
 
-With below mkfs and mount option:
+As Jungyeon reported in bugzilla:
 
-MKFS_OPTIONS  -- -O extra_attr -O project_quota -O inode_checksum -O flexible_inline_xattr -O inode_crtime -f
-MOUNT_OPTIONS -- -o noinline_xattr
+https://bugzilla.kernel.org/show_bug.cgi?id=203233
 
-We may miss xattr data with below testcase:
-- mkdir dir
-- setfattr -n "user.name" -v 0 dir
-- for ((i = 0; i < 190; i++)) do touch dir/$i; done
-- umount
-- mount
-- getfattr -n "user.name" dir
+- Overview
+When mounting the attached crafted image and running program, following errors are reported.
+Additionally, it hangs on sync after running program.
 
-user.name: No such attribute
+The image is intentionally fuzzed from a normal f2fs image for testing.
+Compile options for F2FS are as follows.
+CONFIG_F2FS_FS=y
+CONFIG_F2FS_STAT_FS=y
+CONFIG_F2FS_FS_XATTR=y
+CONFIG_F2FS_FS_POSIX_ACL=y
+CONFIG_F2FS_CHECK_FS=y
 
-The root cause is that we persist xattr data into reserved inline xattr
-space, even if inline_xattr is not enable in inline directory inode, after
-inline dentry conversion, reserved space no longer exists, so that xattr
-data missed.
+- Reproduces
+cc poc_13.c
+mkdir test
+mount -t f2fs tmp.img test
+cp a.out test
+cd test
+sudo ./a.out
+sync
 
-Let's use inline xattr space only if inline_xattr flag is set on inode
-to fix this iusse.
+- Kernel messages
+ F2FS-fs (sdb): Bitmap was wrongly set, blk:4608
+ kernel BUG at fs/f2fs/segment.c:2102!
+ RIP: 0010:update_sit_entry+0x394/0x410
+ Call Trace:
+  f2fs_allocate_data_block+0x16f/0x660
+  do_write_page+0x62/0x170
+  f2fs_do_write_node_page+0x33/0xa0
+  __write_node_page+0x270/0x4e0
+  f2fs_sync_node_pages+0x5df/0x670
+  f2fs_write_checkpoint+0x372/0x1400
+  f2fs_sync_fs+0xa3/0x130
+  f2fs_do_sync_file+0x1a6/0x810
+  do_fsync+0x33/0x60
+  __x64_sys_fsync+0xb/0x10
+  do_syscall_64+0x43/0xf0
+  entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-Fixes: 6afc662e68b5 ("f2fs: support flexible inline xattr size")
+sit.vblocks and sum valid block count in sit.valid_map may be
+inconsistent, segment w/ zero vblocks will be treated as free
+segment, while allocating in free segment, we may allocate a
+free block, if its bitmap is valid previously, it can cause
+kernel crash due to bitmap verification failure.
+
+Anyway, to avoid further serious metadata inconsistence and
+corruption, it is necessary and worth to detect SIT
+inconsistence. So let's enable check_block_count() to verify
+vblocks and valid_map all the time rather than do it only
+CONFIG_F2FS_CHECK_FS is enabled.
+
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ fs/f2fs/segment.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 1f3bf039a90e8..51eea636719a2 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2486,7 +2486,9 @@ static inline void *inline_xattr_addr(struct inode *inode, struct page *page)
- 
- static inline int inline_xattr_size(struct inode *inode)
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index b3d9e317ff0c1..5079532cb176b 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -660,7 +660,6 @@ static inline void verify_block_addr(struct f2fs_io_info *fio, block_t blk_addr)
+ static inline int check_block_count(struct f2fs_sb_info *sbi,
+ 		int segno, struct f2fs_sit_entry *raw_sit)
  {
--	return get_inline_xattr_addrs(inode) * sizeof(__le32);
-+	if (f2fs_has_inline_xattr(inode))
-+		return get_inline_xattr_addrs(inode) * sizeof(__le32);
-+	return 0;
- }
- 
- static inline int f2fs_has_inline_data(struct inode *inode)
+-#ifdef CONFIG_F2FS_CHECK_FS
+ 	bool is_valid  = test_bit_le(0, raw_sit->valid_map) ? true : false;
+ 	int valid_blocks = 0;
+ 	int cur_pos = 0, next_pos;
+@@ -687,7 +686,7 @@ static inline int check_block_count(struct f2fs_sb_info *sbi,
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		return -EINVAL;
+ 	}
+-#endif
++
+ 	/* check segment usage, and check boundary of a given segment number */
+ 	if (unlikely(GET_SIT_VBLOCKS(raw_sit) > sbi->blocks_per_seg
+ 					|| segno > TOTAL_SEGS(sbi) - 1)) {
 -- 
 2.20.1
 
