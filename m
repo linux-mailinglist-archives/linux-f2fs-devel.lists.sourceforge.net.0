@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DF2B31C69
+	by mail.lfdr.de (Postfix) with ESMTPS id B0E0431C6A
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:21:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX3x5-0003cn-7X; Sat, 01 Jun 2019 13:21:39 +0000
+	id 1hX3x5-0003cz-By; Sat, 01 Jun 2019 13:21:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX3x3-0003c5-Q6
+ (envelope-from <sashal@kernel.org>) id 1hX3x3-0003cE-Qg
  for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FssXPld6atEd6aqXNFwVuSCqgxih33Kl4LCdH7C3S18=; b=IQ4doy9K7tuQ47xt+ldEkUy4XG
- 2W6fg/RPiPWVsgy4JsSvcSQl5VUZF6gweojzHFFpDKW8FaZkIidQOZm3u0DOVUB0V+zX36n2juC95
- fD2StnBtHjkUNfbqR0eKBymggWumgT66z+waZgsfseo8prlSMqvRqR5vS+H5aP68Wq9M=;
+ bh=N9bKorZD++1KN8+LKYOB0y8ys7DlPu5L8uCRUa9x0Lk=; b=W6l8XkC5dAsslZlPw8GbDuk1cy
+ 4TEzorlnpSRxknh5AFFTEIFNQaZW3+hacMzZEIB6FaKrjttXNPDzq4rPiNXfYtBuhqJAZBVJgD3BP
+ 2MIS4OLZD+k3r0pyRtQEGGTMBEbRhaln06uGPUKHFSZTnOs6gbBHNya9AswO8IKyPyqM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FssXPld6atEd6aqXNFwVuSCqgxih33Kl4LCdH7C3S18=; b=e2ok51zkNYn2fa5wKSbSuO/N+X
- yYV3PXUk/duk/0fN7jAeCYlRuqmMX3wtjY/WDx34n3VmCdgDt5Mck4s4DaJFSoT+5BaBQ2JRoHcwH
- ehdF6N4I/aKxnPHja1cm23JuTd5eXWcvfd95m8CpS2FFVkOVSm3bZ1NofLC9++lMyle8=;
+ bh=N9bKorZD++1KN8+LKYOB0y8ys7DlPu5L8uCRUa9x0Lk=; b=ei1qsGS3T08N5HZfQFIqWUIuNz
+ YsBAQ1wF36AaX1q7tDMoeuxsqAMh0ibGUprNivBQgPnxug9Yv/0NMzDzfeMls7rO0R3pcQ0xIt44k
+ R/XaNWNzx1gYQn8xiG6bMjGWm9X5JMi6cwf8UkLjJ4xnKPw62bknPJppBhKDwkpW02Wg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX3wz-0058JH-OU
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:34 +0000
+ id 1hX3x0-00EcHH-Sx
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:21:36 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 89D2A2730A;
- Sat,  1 Jun 2019 13:21:27 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id A17C8272F3;
+ Sat,  1 Jun 2019 13:21:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395288;
- bh=JSSfZj/akRgGV2osQ4QGkulYa61lv7tk4SA7Mrkrpog=;
+ s=default; t=1559395289;
+ bh=QlXIHikvXIYteNVMeavySQDatlybYcwTP55rPq29LTE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jCDg/26Py9gc5gJmHM/miv3ZgjnHuBpt9OP2FZ0/4xUQ5sTkG1TEcI7Tzjv+1YGsU
- kEkcyZqm2L5qKfsQqRJEsXMDwW5ifByVVdehTAVcbhowObg38BwMi40cQze+0HEBff
- 6XH7t+0hT6Tt1aVZTitGjygIm/xiNW8RVWavGA6c=
+ b=Y2J9+ONMv7oIsB9dgdVqsZzSXvdto6CSM/9116b/CpAvtli1/4Fwbs4dUcnUoegF7
+ qWxAQ7ET1AU/Nn0FOX/dIvb084aNhWxBw9WUbZLSbtcIXIh1jtrpUmBiSGlzNepGib
+ MgL+zglUdfxZqG6mdA5KXS8yu3RVWkV3p1uRChPM=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:17:23 -0400
-Message-Id: <20190601131934.25053-51-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:17:24 -0400
+Message-Id: <20190601131934.25053-52-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190601131934.25053-1-sashal@kernel.org>
 References: <20190601131934.25053-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX3wz-0058JH-OU
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 051/173] f2fs: fix to retrieve inline
- xattr space
+X-Headers-End: 1hX3x0-00EcHH-Sx
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.0 052/173] f2fs: fix to do checksum
+ even if inode page is uptodate
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,73 +99,95 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 45a746881576977f85504c21a75547f10c5c0a8e ]
+[ Upstream commit b42b179bda9ff11075a6fc2bac4d9e400513679a ]
 
-With below mkfs and mount option, generic/339 of fstest will report that
-scratch image becomes corrupted.
+As Jungyeon reported in bugzilla:
 
-MKFS_OPTIONS  -- -O extra_attr -O project_quota -O inode_checksum -O flexible_inline_xattr -O inode_crtime -f /dev/zram1
-MOUNT_OPTIONS -- -o acl,user_xattr -o discard,noinline_xattr /dev/zram1 /mnt/scratch_f2fs
+https://bugzilla.kernel.org/show_bug.cgi?id=203221
 
-[ASSERT] (f2fs_check_dirent_position:1315)  --> Wrong position of dirent pino:1970, name: (...)
-level:8, dir_level:0, pgofs:951, correct range:[900, 901]
+- Overview
+When mounting the attached crafted image and running program, this error is reported.
 
-In old kernel, inline data and directory always reserved 200 bytes in
-inode layout, even if inline_xattr is disabled, then new kernel tries
-to retrieve that space for non-inline xattr inode, but for inline dentry,
-its layout size should be fixed, so we just keep that reserved space.
+The image is intentionally fuzzed from a normal f2fs image for testing and I enabled option CONFIG_F2FS_CHECK_FS on.
 
-But the problem here is that, after inline dentry conversion, inline
-dentry layout no longer exists, if we still reserve inline xattr space,
-after dents updates, there will be a hole in inline xattr space, which
-can break hierarchy hash directory structure.
+- Reproduces
+cc poc_07.c
+mkdir test
+mount -t f2fs tmp.img test
+cp a.out test
+cd test
+sudo ./a.out
 
-This patch fixes this issue by retrieving inline xattr space after
-inline dentry conversion.
+- Messages
+ kernel BUG at fs/f2fs/node.c:1279!
+ RIP: 0010:read_node_page+0xcf/0xf0
+ Call Trace:
+  __get_node_page+0x6b/0x2f0
+  f2fs_iget+0x8f/0xdf0
+  f2fs_lookup+0x136/0x320
+  __lookup_slow+0x92/0x140
+  lookup_slow+0x30/0x50
+  walk_component+0x1c1/0x350
+  path_lookupat+0x62/0x200
+  filename_lookup+0xb3/0x1a0
+  do_fchmodat+0x3e/0xa0
+  __x64_sys_chmod+0x12/0x20
+  do_syscall_64+0x43/0xf0
+  entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-Fixes: 6afc662e68b5 ("f2fs: support flexible inline xattr size")
+On below paths, we can have opportunity to readahead inode page
+- gc_node_segment -> f2fs_ra_node_page
+- gc_data_segment -> f2fs_ra_node_page
+- f2fs_fill_dentries -> f2fs_ra_node_page
+
+Unlike synchronized read, on readahead path, we can set page uptodate
+before verifying page's checksum, then read_node_page() will trigger
+kernel panic once it encounters a uptodated page w/ incorrect checksum.
+
+So considering readahead scenario, we have to do checksum each time
+when loading inode page even if it is uptodated.
+
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/inline.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ fs/f2fs/inode.c | 4 ++--
+ fs/f2fs/node.c  | 7 ++++---
+ 2 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index aacbb864ec1ed..0c2251d595ec8 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -420,6 +420,14 @@ static int f2fs_move_inline_dirents(struct inode *dir, struct page *ipage,
- 	stat_dec_inline_dir(dir);
- 	clear_inode_flag(dir, FI_INLINE_DENTRY);
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 8c8d40e07ebaf..24c81703ec56f 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -176,8 +176,8 @@ bool f2fs_inode_chksum_verify(struct f2fs_sb_info *sbi, struct page *page)
  
-+	/*
-+	 * should retrieve reserved space which was used to keep
-+	 * inline_dentry's structure for backward compatibility.
-+	 */
-+	if (!f2fs_sb_has_flexible_inline_xattr(F2FS_I_SB(dir)) &&
-+			!f2fs_has_inline_xattr(dir))
-+		F2FS_I(dir)->i_inline_xattr_size = 0;
-+
- 	f2fs_i_depth_write(dir, 1);
- 	if (i_size_read(dir) < PAGE_SIZE)
- 		f2fs_i_size_write(dir, PAGE_SIZE);
-@@ -501,6 +509,15 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct page *ipage,
+ 	if (provided != calculated)
+ 		f2fs_msg(sbi->sb, KERN_WARNING,
+-			"checksum invalid, ino = %x, %x vs. %x",
+-			ino_of_node(page), provided, calculated);
++			"checksum invalid, nid = %lu, ino_of_node = %x, %x vs. %x",
++			page->index, ino_of_node(page), provided, calculated);
  
- 	stat_dec_inline_dir(dir);
- 	clear_inode_flag(dir, FI_INLINE_DENTRY);
-+
-+	/*
-+	 * should retrieve reserved space which was used to keep
-+	 * inline_dentry's structure for backward compatibility.
-+	 */
-+	if (!f2fs_sb_has_flexible_inline_xattr(F2FS_I_SB(dir)) &&
-+			!f2fs_has_inline_xattr(dir))
-+		F2FS_I(dir)->i_inline_xattr_size = 0;
-+
- 	kvfree(backup_dentry);
- 	return 0;
- recover:
+ 	return provided == calculated;
+ }
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 63bb6134d39ae..e29d5f6735ae9 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1281,9 +1281,10 @@ static int read_node_page(struct page *page, int op_flags)
+ 	int err;
+ 
+ 	if (PageUptodate(page)) {
+-#ifdef CONFIG_F2FS_CHECK_FS
+-		f2fs_bug_on(sbi, !f2fs_inode_chksum_verify(sbi, page));
+-#endif
++		if (!f2fs_inode_chksum_verify(sbi, page)) {
++			ClearPageUptodate(page);
++			return -EBADMSG;
++		}
+ 		return LOCKED_PAGE;
+ 	}
+ 
 -- 
 2.20.1
 
