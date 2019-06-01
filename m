@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8029831CD4
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:24:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEC1931CD8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Jun 2019 15:25:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hX40F-0003qQ-9D; Sat, 01 Jun 2019 13:24:55 +0000
+	id 1hX41D-0002hC-9I; Sat, 01 Jun 2019 13:25:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hX40C-0003qB-Ii
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:52 +0000
+ (envelope-from <sashal@kernel.org>) id 1hX41B-0002gi-E2
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:25:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uRQHsJwqihtgKJK3BTVX5D/PmZ0Iv89TGluSWxKvjAw=; b=HdgvqVAsESqcj+fn4oPCeKKw/k
- B+bzD9DwR4RVUpORRYppwmMQe6JBawdqpwwR4ArXRUmcrqPmzN1QgGdYNMUSf0rA2ptl1j5Sw/mTI
- 5VNGhEcVp+dDa4qtPYM48bk1VNH8xnzzIvIDFftkQl1517KS9cNAi2R3H/ZNstFGSpio=;
+ bh=VPqxRWzkP+gAId6u9lakAy9ltL1EMZrUwz9gCEEJemg=; b=Iqb9gsGZ5bYQUe0g+Reg4TbXJp
+ pQJ7tyQUQAwYjsxQMyzIf0BsGutFk78fLQVROocPM5M8FEDuFrg9TfnuLwU3fG4Uo57Bv92Z5/nhj
+ ZCGenkciXpWhYCwQsmTa2svhoxg+HrARu1zPa9HdWdY58IxkoapujTXGdoEoGz6T3kD0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uRQHsJwqihtgKJK3BTVX5D/PmZ0Iv89TGluSWxKvjAw=; b=FVevB4thi5FsDSYTQM8edpdORN
- fpGcNmC84Rxiv3AvJAWBlE9mBFM+6Q59Ja5Lo3FG4HJSyV8BytA3imy4FoNmijLgiWpHuHdRu+mGg
- FwbhDSANbUbubNnXkpFrzvKJDCoxXYbfdQbV211H2irgPFfRXSEbLBaRQz6OV59UBcyg=;
+ bh=VPqxRWzkP+gAId6u9lakAy9ltL1EMZrUwz9gCEEJemg=; b=bqCCtesumBovp0alO1sx2oOMqW
+ Znwj1pgGhJNAA+yDsQGKAdDhQ7wXG4mnC/C7CZ425ny1Eeb63Ny6NJZy6MucEjIBewAdhohGnOfYK
+ G1xQqqxQ/5LARrF/+xGIfTYTYRs1VxGO/hf5pJNb+pwLDfh/bkbIGmws9+z2goxGAitY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hX40B-00EcZn-8m
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:24:52 +0000
+ id 1hX41A-00Ecfz-68
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Jun 2019 13:25:53 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D94427368;
- Sat,  1 Jun 2019 13:24:44 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id E2A4327375;
+ Sat,  1 Jun 2019 13:25:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559395485;
- bh=3Cb9EYjDPwjlUA8KGh5mw7Rh0N8a1JSxCVzAWla/ENM=;
+ s=default; t=1559395546;
+ bh=8V8QfzxQrR/IOInXNwg7FdmiR7yDP2YnBkeR/E9IEKE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fW1ATmFxc/dRj/MZSgx1UfLRZlRaKNrt+p4OmLgFgHT7MMR4QixElGBEwLQu1JcGv
- eonKoDnlz3anAgkN/TVC3GWrBeuV4e3abSFQPdeIODfHYXZW4WlfhCtaRXW+Gm/3Dw
- wCd2PNEl0svvBAVsD7tLFmrU1TPHaenKet38C4TU=
+ b=G7y6lI46MmIoBr3BfN9W2ws7j2Zhk1ffXzKQ8AaF76ZtNpSAz1wtGfvqMxDT9wcGT
+ fWx1JVzTKpV7WSdONp0RpaKe35en2K4aYHhZo0fr7IFao80EZaHasU4Cw1adDtrvc+
+ tvTlK+R2mm+XQkMGh4t7uD+JMb5JdSBxY1Cew+9g=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat,  1 Jun 2019 09:22:37 -0400
-Message-Id: <20190601132346.26558-30-sashal@kernel.org>
+Date: Sat,  1 Jun 2019 09:24:09 -0400
+Message-Id: <20190601132501.27021-22-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190601132346.26558-1-sashal@kernel.org>
-References: <20190601132346.26558-1-sashal@kernel.org>
+In-Reply-To: <20190601132501.27021-1-sashal@kernel.org>
+References: <20190601132501.27021-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hX40B-00EcZn-8m
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 30/99] f2fs: fix to do sanity check
- on valid block count of segment
+X-Headers-End: 1hX41A-00Ecfz-68
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.9 22/74] f2fs: fix to avoid panic in
+ do_recover_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,15 +99,15 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit e95bcdb2fefa129f37bd9035af1d234ca92ee4ef ]
+[ Upstream commit 22d61e286e2d9097dae36f75ed48801056b77cac ]
 
 As Jungyeon reported in bugzilla:
 
-https://bugzilla.kernel.org/show_bug.cgi?id=203233
+https://bugzilla.kernel.org/show_bug.cgi?id=203227
 
 - Overview
-When mounting the attached crafted image and running program, following errors are reported.
-Additionally, it hangs on sync after running program.
+When mounting the attached crafted image, following errors are reported.
+Additionally, it hangs on sync after trying to mount it.
 
 The image is intentionally fuzzed from a normal f2fs image for testing.
 Compile options for F2FS are as follows.
@@ -118,72 +118,57 @@ CONFIG_F2FS_FS_POSIX_ACL=y
 CONFIG_F2FS_CHECK_FS=y
 
 - Reproduces
-cc poc_13.c
 mkdir test
 mount -t f2fs tmp.img test
-cp a.out test
-cd test
-sudo ./a.out
 sync
 
-- Kernel messages
- F2FS-fs (sdb): Bitmap was wrongly set, blk:4608
- kernel BUG at fs/f2fs/segment.c:2102!
- RIP: 0010:update_sit_entry+0x394/0x410
+- Messages
+ kernel BUG at fs/f2fs/recovery.c:549!
+ RIP: 0010:recover_data+0x167a/0x1780
  Call Trace:
-  f2fs_allocate_data_block+0x16f/0x660
-  do_write_page+0x62/0x170
-  f2fs_do_write_node_page+0x33/0xa0
-  __write_node_page+0x270/0x4e0
-  f2fs_sync_node_pages+0x5df/0x670
-  f2fs_write_checkpoint+0x372/0x1400
-  f2fs_sync_fs+0xa3/0x130
-  f2fs_do_sync_file+0x1a6/0x810
-  do_fsync+0x33/0x60
-  __x64_sys_fsync+0xb/0x10
+  f2fs_recover_fsync_data+0x613/0x710
+  f2fs_fill_super+0x1043/0x1aa0
+  mount_bdev+0x16d/0x1a0
+  mount_fs+0x4a/0x170
+  vfs_kern_mount+0x5d/0x100
+  do_mount+0x200/0xcf0
+  ksys_mount+0x79/0xc0
+  __x64_sys_mount+0x1c/0x20
   do_syscall_64+0x43/0xf0
   entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-sit.vblocks and sum valid block count in sit.valid_map may be
-inconsistent, segment w/ zero vblocks will be treated as free
-segment, while allocating in free segment, we may allocate a
-free block, if its bitmap is valid previously, it can cause
-kernel crash due to bitmap verification failure.
-
-Anyway, to avoid further serious metadata inconsistence and
-corruption, it is necessary and worth to detect SIT
-inconsistence. So let's enable check_block_count() to verify
-vblocks and valid_map all the time rather than do it only
-CONFIG_F2FS_CHECK_FS is enabled.
+During recovery, if ofs_of_node is inconsistent in between recovered
+node page and original checkpointed node page, let's just fail recovery
+instead of making kernel panic.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.h | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/f2fs/recovery.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 47348d98165b2..e3d8826c5113d 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -641,7 +641,6 @@ static inline void verify_block_addr(struct f2fs_io_info *fio, block_t blk_addr)
- static inline int check_block_count(struct f2fs_sb_info *sbi,
- 		int segno, struct f2fs_sit_entry *raw_sit)
- {
--#ifdef CONFIG_F2FS_CHECK_FS
- 	bool is_valid  = test_bit_le(0, raw_sit->valid_map) ? true : false;
- 	int valid_blocks = 0;
- 	int cur_pos = 0, next_pos;
-@@ -668,7 +667,7 @@ static inline int check_block_count(struct f2fs_sb_info *sbi,
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		return -EINVAL;
- 	}
--#endif
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index e59eeaf02eaa7..9de1480a86bd3 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -407,7 +407,15 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
+ 
+ 	get_node_info(sbi, dn.nid, &ni);
+ 	f2fs_bug_on(sbi, ni.ino != ino_of_node(page));
+-	f2fs_bug_on(sbi, ofs_of_node(dn.node_page) != ofs_of_node(page));
 +
- 	/* check segment usage, and check boundary of a given segment number */
- 	if (unlikely(GET_SIT_VBLOCKS(raw_sit) > sbi->blocks_per_seg
- 					|| segno > TOTAL_SEGS(sbi) - 1)) {
++	if (ofs_of_node(dn.node_page) != ofs_of_node(page)) {
++		f2fs_msg(sbi->sb, KERN_WARNING,
++			"Inconsistent ofs_of_node, ino:%lu, ofs:%u, %u",
++			inode->i_ino, ofs_of_node(dn.node_page),
++			ofs_of_node(page));
++		err = -EFAULT;
++		goto err;
++	}
+ 
+ 	for (; start < end; start++, dn.ofs_in_node++) {
+ 		block_t src, dest;
 -- 
 2.20.1
 
