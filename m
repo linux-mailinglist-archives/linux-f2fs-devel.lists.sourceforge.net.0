@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6C5F32DBA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Jun 2019 12:33:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2296732DBE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Jun 2019 12:34:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hXkHm-0003jB-NU; Mon, 03 Jun 2019 10:33:50 +0000
+	id 1hXkId-0003be-9H; Mon, 03 Jun 2019 10:34:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hXkHl-0003j3-HV
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 10:33:49 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hXkIc-0003bK-9W
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 10:34:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LirmImDDRaqrXGdKFJts0GZij5g3j2qdYN+tNyUK9Jc=; b=NFUY+g6E8wRQT+RPjiZBiWA6kY
- cUbxMLjopdrlwqWbPsKdx/mxLyh6z3ZoBdJt/Hhq7U9dRya6xCtqkvb0hiFxWRjPfDA/NP1kBx9XX
- uom35hYHugftXOz6aLDsO562EgRS6fs60Y6+9DJkAYPpqWLlDdsIIeixYhmRNjmucvSg=;
+ bh=+fmM+PlDXC+Sd1khZBB3OxsseXAF9mqbUMw9qBu2rjM=; b=R73Kg8IkScuhDf7ADivnyG7V2F
+ wjWthoG2RBnGsutsGSiCmyeHZDS2vPH6zB7GuakDRADvo8hPXSUA3QXo1zK0MH5nt80wfoRkQdqjb
+ ZckuRL7oARmoKx9dD6eyeCeN9B6PAVi7ZnjWsLA3udexH9wwutpwuiAH+5t/VyGooNwY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LirmImDDRaqrXGdKFJts0GZij5g3j2qdYN+tNyUK9Jc=; b=ZtuV+t1vWUhUtZaPa2EjJSUUUv
- gjUaqgTGH954j6ZER9+ARRT8/zC7mkWQTc9ezwABxyMr+Nr71e0IIM50hXn9bdQQs8H0Uj2B6D+le
- TZAswwyq67jzzM5RyFzGC04EHDDUnQZ+J6x6WhvadV8LOvjZLey9zJWG8K8ROBe1522E=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=+fmM+PlDXC+Sd1khZBB3OxsseXAF9mqbUMw9qBu2rjM=; b=F0WwGn1zctwdN/BE+hNVdgJZYL
+ vGclFUV05eSVDstgd/yequt+7YrsdCy339GEWDpOfK3C1leJ9aPwFkfE0vss1CgalDIXIh1NDAWM0
+ AIQjv+J9LgAbIsORhrkvYxOWag4ti3yJtx2K3ROxkJEFE7LXq+DX/fvCpGnw1qrqCeSA=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hXkHj-003A9y-HY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 10:33:49 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 6AC133B6A349DDDE4E72;
- Mon,  3 Jun 2019 18:33:35 +0800 (CST)
+ id 1hXkIa-003ZSB-3g
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 10:34:42 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id B8A478589F240428C33B;
+ Mon,  3 Jun 2019 18:34:32 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 3 Jun 2019
- 18:33:31 +0800
+ (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 3 Jun 2019
+ 18:34:29 +0800
 To: Daniel Rosenberg <drosen@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
  Jonathan Corbet <corbet@lwn.net>, <linux-f2fs-devel@lists.sourceforge.net>
 References: <20190530004906.261170-1-drosen@google.com>
- <20190530004906.261170-2-drosen@google.com>
+ <20190530004906.261170-3-drosen@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <1246dcc9-800a-ef0e-7cd0-199a0a6d77d4@huawei.com>
-Date: Mon, 3 Jun 2019 18:33:30 +0800
+Message-ID: <d7ec7432-a66f-395a-0779-17f6d05b45d1@huawei.com>
+Date: Mon, 3 Jun 2019 18:34:28 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190530004906.261170-2-drosen@google.com>
+In-Reply-To: <20190530004906.261170-3-drosen@google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -66,9 +66,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hXkHj-003A9y-HY
-Subject: Re: [f2fs-dev] [PATCH v3 1/4] f2fs: Lower threshold for
- disable_cp_again
+X-Headers-End: 1hXkIa-003ZSB-3g
+Subject: Re: [f2fs-dev] [PATCH v3 2/4] f2fs: Fix root reserved on remount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,34 +86,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2019/5/30 8:49, Daniel Rosenberg wrote:
-> The existing threshold for allowable holes at checkpoint=disable time is
-> too high. The OVP space contains reserved segments, which are always in
-> the form of free segments. These must be subtracted from the OVP value.
-> 
-> The current threshold is meant to be the maximum value of holes of a
-> single type we can have and still guarantee that we can fill the disk
-> without failing to find space for a block of a given type.
-> 
-> If the disk is full, ignoring current reserved, which only helps us,
-> the amount of unused blocks is equal to the OVP area. Of that, there
-> are reserved segments, which must be free segments, and the rest of the
-> ovp area, which can come from either free segments or holes. The maximum
-> possible amount of holes is OVP-reserved.
-> 
-> Now, consider the disk when mounting with checkpoint=disable.
-> We must be able to fill all available free space with either data or
-> node blocks. When we start with checkpoint=disable, holes are locked to
-> their current type. Say we have H of one type of hole, and H+X of the
-> other. We can fill H of that space with arbitrary typed blocks via SSR.
-> For the remaining H+X blocks, we may not have any of a given block type
-> left at all. For instance, if we were to fill the disk entirely with
-> blocks of the type with fewer holes, the H+X blocks of the opposite type
-> would not be used. If H+X > OVP-reserved, there would be more holes than
-> could possibly exist, and we would have failed to find a suitable block
-> earlier on, leading to a crash in update_sit_entry.
-> 
-> If H+X <= OVP-reserved, then the holes end up effectively masked by the OVP
-> region in this case.
+> On a remount, you can currently set root reserved if it was not
+> previously set. This can cause an underflow if reserved has been set to
+> a very high value, since then root reserved + current reserved could be
+> greater than user_block_count. inc_valid_block_count later subtracts out
+> these values from user_block_count, causing an underflow.
 > 
 > Signed-off-by: Daniel Rosenberg <drosen@google.com>
 
