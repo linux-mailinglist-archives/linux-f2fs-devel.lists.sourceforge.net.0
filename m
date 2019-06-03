@@ -2,84 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8105433344
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Jun 2019 17:16:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59DFD3336F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Jun 2019 17:24:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hXogn-0001vJ-4Y; Mon, 03 Jun 2019 15:15:57 +0000
+	id 1hXooj-0007dD-OH; Mon, 03 Jun 2019 15:24:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hXogm-0001v5-2i
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 15:15:56 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hXooi-0007d6-Ox
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 15:24:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YBZvUdvT+YIUX3gm0WGiCiu+uP6hI+3Mjn6Ujup+utc=; b=D1kfxxFhAJYhlTZe6Qhe1ba6J/
- jQFRuJUjSkztKC8nyFFtvsw7wIgSvHG+7nQzl50LnoDhDl8EUpwF9mv9Dbg2U9p//570OGIwPuDFq
- jZyKejac6PCR8Nw/SGdQerTrMEen9fjzrFy2mc/pF7EtMHxzX4UdJARFcTseTpi4SAfY=;
+ d=sourceforge.net; s=x; h=Content-Type:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Cc:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=OpLOP+yNY8/Xf/Jff87IxnoykVmFLiGYy8omPmcZ4vc=; b=Dkt98jd93AwQZKOieaI77jfno
+ KWHiba3GTKPToGckFFBzlFT4qSwClCYV+YnwxN5Fu+OFIJLvtORre3y/7oGfcILAkQ90jzqqXfaP1
+ 6WGV+dfFUTlwzOMKS4TyZKVyUL1aq33o9ihZD0l4GjNQY1jWeDdLZ9k/N48+NUlF9SZ6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YBZvUdvT+YIUX3gm0WGiCiu+uP6hI+3Mjn6Ujup+utc=; b=dTwhSGp9zdOA7FDw8nJ89LJApk
- sdxru2DKhJ1s7tkWGQD7Eh+odezs/gn7WFyFZo2ciZiej5Gd9MjT7mwIx5fbBE4zPVw+KCoCwCRbc
- lKE9D40tDrsuX2ykNRYBgFEpbMkvdSHkUlThSJsRDMt7MEZPJuc1NhkZq+xgHLu6zClE=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hXogk-0045Zr-T8
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 15:15:55 +0000
-Received: from [192.168.0.101] (unknown [58.212.135.189])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 296B524CF1;
- Mon,  3 Jun 2019 15:15:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559574949;
- bh=54oATYsXXJ8P2M14fItKq+XktmeWUBPg/oIseVIgycE=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=TpgLbiVsdpdF49lOLEgS3pAq5qsVYM50r0Mf7QmMNRzjzT8t79qh6m4Fskm/t1uYo
- r1bBMKVQe/rmg2KBYIAKSwupUWc1XTvQ+PDNJhfTfzkQpaI1dEC/Plups1LVSK0PPR
- dZ1+o65toz9AvGiaT+4WjOIPD47zO+vVeIiX0Bc4=
-To: Daniel Rosenberg <drosen@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <yuchao0@huawei.com>, Jonathan Corbet <corbet@lwn.net>,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20190530004906.261170-1-drosen@google.com>
- <20190530004906.261170-5-drosen@google.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <cbd6e561-66c3-da63-d5b4-e81da990bd15@kernel.org>
-Date: Mon, 3 Jun 2019 23:15:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=OpLOP+yNY8/Xf/Jff87IxnoykVmFLiGYy8omPmcZ4vc=; b=Jbz8lJmTo0BVh+iL3CGDVtr68Z
+ V4Rb3jCLZk8ySrJ5CO1JO/0QOD1YsMd0LplF/21LOPqh7AdZRrNvVjgFWcGdVY0XWFWsZMjpEFDJI
+ /WJ3qLEa2BEuyO8E3HJMoMfWx5UmIL2i2Wirbas6mRdrhZ5m52if2vQ6ul9ZZ7hcPYGk=;
+Received: from mail-qk1-f195.google.com ([209.85.222.195])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hXoog-003hp1-Is
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 Jun 2019 15:24:08 +0000
+Received: by mail-qk1-f195.google.com with SMTP id c11so647298qkk.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 03 Jun 2019 08:24:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=OpLOP+yNY8/Xf/Jff87IxnoykVmFLiGYy8omPmcZ4vc=;
+ b=TiUhgJY8MMNQ10IK3lCPTvtZRPuMjlwFgXSo0dM9oRIyBkHMeJV9FHCvWmlbWspAEM
+ 6SEhhi9wxYrNIt9ex100SWxbthnW/xHasTRo+0TQpAtDT/Ew/JrJVWnl6T9Vn1E8zAzQ
+ CGmQSepfsl9aOtd3xUSb3fw0t2WfpVyTc/L6HtiTxbtV+Apntp15Eh97iFTbY/Oz+Ei3
+ V24zTojWOiV5BaliX6iKEXlwTC2EsamMxgamDQu+LEZLJE1cbElZmqlFkz+py98KxzTg
+ ev1hdgaDCDRtRxNBuAQ1ZbYyxKe/SGEsKHDlssWgwwZEa6X1Z72zpGpUl1ppAFhXTh4I
+ 2nAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=OpLOP+yNY8/Xf/Jff87IxnoykVmFLiGYy8omPmcZ4vc=;
+ b=AF+gdoB5HpcO3lSr913FRgNG3sL89sY4y/VKXcEU7bsa1ApB5big4aDxudTRn6vmYB
+ aJWpiGAa2xZphScTTZ56XQIxnUnGm7LYfZvhmjHuwebu90K3JT7pf0TOUCpeHgQ8KWiV
+ bs1a7nQe83PAVlDZpELNTIocekvuHrbGjJ2C8Xf/Jwc1sn2OalSVo7MWsl3FP8Bz+qvS
+ JbK4sw7TUTWokt0ZVzlLq9pVhYuqkNQ6OUccPZAesxCR5eXa9FXa7lO5Z3lqrHVYvZNC
+ vl4SDHulLXh8mOFHBqsRIYU3lvIKKbuWWjfHhFepnyietdtBa76HJZPRwNxW9BKk1PoE
+ DJeA==
+X-Gm-Message-State: APjAAAU0RiSQLd7oNY8WbWkaVUqHu8w6loS/ilQYyRPCMvqjoje1H4HO
+ fzdIyhtU0sShRkFGdPHjGV9xk63D9kaEHDlV8qLIRdmt
+X-Google-Smtp-Source: APXvYqztzz7+EbEAJ/mG8shhnHA0qpF2WWFzUS3ZtkUyYKXhC3oYFOcpWCwXUCmF4Qa0cIu35+yLqjgySpaZtz1uDsE=
+X-Received: by 2002:a37:a5d5:: with SMTP id
+ o204mr22171204qke.155.1559575439817; 
+ Mon, 03 Jun 2019 08:23:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190530004906.261170-5-drosen@google.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+References: <20190514093340.40217-1-yuchao0@huawei.com>
+ <20190514093340.40217-2-yuchao0@huawei.com>
+ <CAD14+f2ckNUv9n-Zb9UL_ojX8=24tYBhT-SsrcpVNogqee2tkA@mail.gmail.com>
+ <6bcbb5e8-55ad-49c1-bb77-f7f677ceb526@huawei.com>
+ <CAD14+f3NHosrL=5UOBSMbFxQ91x-AuWOj_w=JYkJSnmfDgTkvA@mail.gmail.com>
+ <CAD14+f0ZTmmLBXtmHF_Kz23JLSJy+UzpNxwSMV4rvSCse3y7EA@mail.gmail.com>
+ <7e1bfa07-5ee8-a276-fe6a-6d79bd9270c3@huawei.com>
+ <CAD14+f1+puy4M6rL_SbGt9vej=7LgK+qEjq71_878=oqSvjJ2Q@mail.gmail.com>
+ <0f89b0b6-5cc5-6618-72e5-8a2f81947161@kernel.org>
+ <CAD14+f1xgYKAnzqLb-ZpzbeskZegGHXbrJ+vEHZe19_Jp3pBTQ@mail.gmail.com>
+ <e3303318-758e-b263-f6ed-d55e98bdea78@kernel.org>
+In-Reply-To: <e3303318-758e-b263-f6ed-d55e98bdea78@kernel.org>
+From: Ju Hyung Park <qkrwngud825@gmail.com>
+Date: Tue, 4 Jun 2019 00:23:48 +0900
+Message-ID: <CAD14+f2XWeWvYXTjKbReJa7uZROvnp_-V419sBkpmWFp5L5BtA@mail.gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: 1.2 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (qkrwngud825[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (qkrwngud825[at]gmail.com)
+ -0.8 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.195 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hXogk-0045Zr-T8
-Subject: Re: [f2fs-dev] [PATCH v3 4/4] f2fs: Add option to limit required GC
- for checkpoint=disable
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.195 listed in list.dnswl.org]
+ 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hXoog-003hp1-Is
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs-tools: relocate chksum_offset
+ for large_nat_bitmap feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,29 +118,19 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019-5-30 8:49, Daniel Rosenberg via Linux-f2fs-devel wrote:
-> This extends the checkpoint option to allow checkpoint=disable:%u[%]
-> This allows you to specify what how much of the disk you are willing
-> to lose access to while mounting with checkpoint=disable. If the amount
-> lost would be higher, the mount will return -EAGAIN. This can be given
-> as a percent of total space, or in blocks.
-> 
-> Currently, we need to run garbage collection until the amount of holes
-> is smaller than the OVP space. With the new option, f2fs can mark
-> space as unusable up front instead of requiring garbage collection until
-> the number of holes is small enough.
-> 
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+Hi Jaegeuk and Chao,
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+A little update I thought I might share.
 
-Thanks,
+Just went through migrating my laptop to another SSD and I've setup
+f2fs from the beginning with mkfs -i from the master branch.
+No issue as of yet and the kernel is working fine as expected :)
+
+Thanks.
 
 
 _______________________________________________
