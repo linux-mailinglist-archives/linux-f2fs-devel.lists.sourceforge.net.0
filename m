@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE8B633CD6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jun 2019 03:47:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27FD333CD8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jun 2019 03:48:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hXyXV-00030d-8i; Tue, 04 Jun 2019 01:47:01 +0000
+	id 1hXyYl-0004CU-OE; Tue, 04 Jun 2019 01:48:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hXyXT-00030V-HI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 01:46:59 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hXyYk-0004CN-NC
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 01:48:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=njQambdgqMUgo9RPlRofwu+llXN0JyVJ2jEL5EUQFko=; b=dpTOKqxAeSUUdqXt8SNfEEkVkS
- DUTJqnxJF4Y9d95fvT6hdn96heb2pOYEnej01wPBWg68WYgpEeb3Xta4r6jeAJIU+be4BEUbMBaLw
- xBdOiWo2KxEtlhzkDc14QulU4X8b4AA/nqhbF14n5f0bBCYta/zYkcqP34RbQ/5Vbn1E=;
+ bh=BuTTkiivSnX8V/LZcMO7Fen+gpY+kuxR3X2pXNK44sI=; b=Hz9ki1i/+FTDzeALW2VCFqLwAV
+ Xi0B6+mECPBJWw+YF2pMtzfb1OM+ou1gqUyguOZkCq2g3KvdNlT3cyCyGzblgD7+x4z/a/sg4OmW4
+ o1IIKRShQHgvMZik6O+fcaEs1uR7S2uDRGzOR4JxuQ9Nrq9q5rOwrG0iE2McjW1utxfE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,32 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=njQambdgqMUgo9RPlRofwu+llXN0JyVJ2jEL5EUQFko=; b=fRYAUmtK7Tssdkhh4WNp3xG0wK
- H5sHrGJ2eSU98VQbTQBi6zrCgzHk6g2WJ1H3qDEU2gATGftgn9BooEPrqN4dgXi/hE50RKvnHSxHJ
- uFiS3u7liV7GbgLJmZhPhUDs/ezJHE4p8i6Jqmc/MRt70SKqtayZySvNRumW3talA/a4=;
+ bh=BuTTkiivSnX8V/LZcMO7Fen+gpY+kuxR3X2pXNK44sI=; b=BioaCCl98L8m6xQ19PbWNuligf
+ pQwWp2tCpQWNESTICpA8oshn7C6TQHeywcVCTGLZI/lHdsgeLIEkJSV5TIQBICTGJu1wdRIPUIoHL
+ xcrTjMNEU4eKIO/JqSD86S5eKgc0AKnUcgGl3uCxRt1ngCkUw9lHpgyMo3+uaea94FdA=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hXyXR-004vaC-Fq
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 01:46:59 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 7BA1C55AF8D62E01697B;
- Tue,  4 Jun 2019 09:46:47 +0800 (CST)
+ id 1hXyYi-005KOT-T8
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 01:48:18 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 9FEB9DB958B9D3B74781;
+ Tue,  4 Jun 2019 09:48:08 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 4 Jun 2019
- 09:46:44 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190530004906.261170-1-drosen@google.com>
- <20190530004906.261170-4-drosen@google.com>
- <c99079bd-99e1-e100-08f6-1e8adae5e722@huawei.com>
- <20190603202630.GB34729@jaegeuk-macbookpro.roam.corp.google.com>
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 4 Jun 2019
+ 09:48:05 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Ju Hyung Park <qkrwngud825@gmail.com>
+References: <CAD14+f2ckNUv9n-Zb9UL_ojX8=24tYBhT-SsrcpVNogqee2tkA@mail.gmail.com>
+ <6bcbb5e8-55ad-49c1-bb77-f7f677ceb526@huawei.com>
+ <CAD14+f3NHosrL=5UOBSMbFxQ91x-AuWOj_w=JYkJSnmfDgTkvA@mail.gmail.com>
+ <CAD14+f0ZTmmLBXtmHF_Kz23JLSJy+UzpNxwSMV4rvSCse3y7EA@mail.gmail.com>
+ <7e1bfa07-5ee8-a276-fe6a-6d79bd9270c3@huawei.com>
+ <CAD14+f1+puy4M6rL_SbGt9vej=7LgK+qEjq71_878=oqSvjJ2Q@mail.gmail.com>
+ <0f89b0b6-5cc5-6618-72e5-8a2f81947161@kernel.org>
+ <CAD14+f1xgYKAnzqLb-ZpzbeskZegGHXbrJ+vEHZe19_Jp3pBTQ@mail.gmail.com>
+ <e3303318-758e-b263-f6ed-d55e98bdea78@kernel.org>
+ <CAD14+f2XWeWvYXTjKbReJa7uZROvnp_-V419sBkpmWFp5L5BtA@mail.gmail.com>
+ <20190603202719.GC34729@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <2fbeda5b-50d6-a8c2-06a9-dddf5d466de8@huawei.com>
-Date: Tue, 4 Jun 2019 09:46:43 +0800
+Message-ID: <249aff47-cb24-291b-37f7-6ed2d854a207@huawei.com>
+Date: Tue, 4 Jun 2019 09:48:03 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190603202630.GB34729@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20190603202719.GC34729@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -63,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hXyXR-004vaC-Fq
-Subject: Re: [f2fs-dev] [PATCH v3 3/4] f2fs: Fix accounting for unusable
- blocks
+X-Headers-End: 1hXyYi-005KOT-T8
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs-tools: relocate chksum_offset
+ for large_nat_bitmap feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,87 +84,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Rosenberg <drosen@google.com>, linux-doc@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- kernel-team@android.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/6/4 4:26, Jaegeuk Kim wrote:
-> On 06/03, Chao Yu wrote:
->> On 2019/5/30 8:49, Daniel Rosenberg wrote:
->>> Fixes possible underflows when dealing with unusable blocks.
->>>
->>> Signed-off-by: Daniel Rosenberg <drosen@google.com>
->>> ---
->>>  fs/f2fs/f2fs.h | 15 ++++++++++-----
->>>  1 file changed, 10 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>> index 9b3d9977cd1ef..a39cc4ffeb4b1 100644
->>> --- a/fs/f2fs/f2fs.h
->>> +++ b/fs/f2fs/f2fs.h
->>> @@ -1769,8 +1769,12 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
->>>  
->>>  	if (!__allow_reserved_blocks(sbi, inode, true))
->>>  		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
->>> -	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
->>> -		avail_user_block_count -= sbi->unusable_block_count;
->>> +	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
->>> +		if (avail_user_block_count > sbi->unusable_block_count)
->>> +			avail_user_block_count = 0;
+On 2019/6/4 4:27, Jaegeuk Kim wrote:
+> On 06/04, Ju Hyung Park wrote:
+>> Hi Jaegeuk and Chao,
 >>
->> avail_user_block_count -= sbi->unusable_block_count;
+>> A little update I thought I might share.
 >>
->>> +		else
->>> +			avail_user_block_count -= sbi->unusable_block_count;
->>
->> avail_user_block_count = 0;
->>
+>> Just went through migrating my laptop to another SSD and I've setup
+>> f2fs from the beginning with mkfs -i from the master branch.
+>> No issue as of yet and the kernel is working fine as expected :)
 > 
-> I fixed this.
+> Cool, thanks for your test. :)
 
-Okay, if there is no v4, please add
-
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Great, thanks for the continuous test and report. :)
 
 Thanks,
 
 > 
-> Thanks,
-> 
->> Thanks,
 >>
->>> +	}
->>>  	if (unlikely(sbi->total_valid_block_count > avail_user_block_count)) {
->>>  		diff = sbi->total_valid_block_count - avail_user_block_count;
->>>  		if (diff > *count)
->>> @@ -1970,7 +1974,7 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
->>>  					struct inode *inode, bool is_inode)
->>>  {
->>>  	block_t	valid_block_count;
->>> -	unsigned int valid_node_count;
->>> +	unsigned int valid_node_count, user_block_count;
->>>  	int err;
->>>  
->>>  	if (is_inode) {
->>> @@ -1997,10 +2001,11 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
->>>  
->>>  	if (!__allow_reserved_blocks(sbi, inode, false))
->>>  		valid_block_count += F2FS_OPTION(sbi).root_reserved_blocks;
->>> +	user_block_count = sbi->user_block_count;
->>>  	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
->>> -		valid_block_count += sbi->unusable_block_count;
->>> +		user_block_count -= sbi->unusable_block_count;
->>>  
->>> -	if (unlikely(valid_block_count > sbi->user_block_count)) {
->>> +	if (unlikely(valid_block_count > user_block_count)) {
->>>  		spin_unlock(&sbi->stat_lock);
->>>  		goto enospc;
->>>  	}
->>>
+>> Thanks.
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 > .
 > 
 
