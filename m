@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C91835311
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2019 01:22:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E52D3533C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2019 01:24:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hYIlK-0005XM-14; Tue, 04 Jun 2019 23:22:38 +0000
+	id 1hYImf-0003DH-05; Tue, 04 Jun 2019 23:24:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hYIlI-0005X6-TF
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 23:22:36 +0000
+ (envelope-from <sashal@kernel.org>) id 1hYImd-0003D3-J5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 23:23:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9orRl5ZhLYHZ4lXN8/P6E3TdJ/vqru8aiHECyhSyPnE=; b=lvhxwfoNk5iYdUd+S3V3LhiNLW
- IlKgzGiBiK54hAD/gPMo42wKGy4jX41B5Lel7zoGqQ17tedq28EbjqmeeasoBthW3uP+ex8cd3Lys
- EMpmeantyNeJCF8zRxYKzW3wMJM7m6I03j/Tj61HLfzLN2BmXI4c4QEM7kc7zyYNeFJA=;
+ bh=uypePsHyg+pogPgUW+U7oBJdz7wfoGTkt8pyG/7PfVA=; b=bQLt9d/r2FtktRNXmDkxwuEEDm
+ 5nrXSYaAdSAhNDpqAmyNAKZHTZXRvA5VmO2x5c568ue70PD4JYGGc5cAqRlWJq9aA/7wh6XAx2+GU
+ YUV3UqH9U2ZYEwX32+yWmzHjxcA0tc7MIKbmG01FMmjp8UUFNbu8smFjBKeSJLHVEEAY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,39 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9orRl5ZhLYHZ4lXN8/P6E3TdJ/vqru8aiHECyhSyPnE=; b=nBWn20cjhnUzhEbNl978f1+yUL
- 2ULZxNDC1iN8WeLPuu6diTr3wV0KBrGnoNTvqa98Xbz9tqIXlQjyHlRHu76A6BEYHLw1Y/p88GYbp
- wWqNGneN2AoqD6iZ+jGGHFJSH+luolHz3w4CrmETgZLbOsCkYPNpL1g+F4njxRJDo8s8=;
+ bh=uypePsHyg+pogPgUW+U7oBJdz7wfoGTkt8pyG/7PfVA=; b=esxaXGZ2jQXSBFdZZBnkZuMIxC
+ Df7KHYvmB0bNFJoQCFO1b0NDYAnGIvUNicXjyI3NXqmCPbNx0esgpSI/bCZgSPpclKcOV/7Q8neVu
+ W7x/2Sr6Ju4wQ+Xlmf5MhXYGJ0EK/TfWzq9p6SWOUdHrD9igz4rSv66eRsh4OhQE7N0E=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hYIlH-007v4d-G7
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 23:22:36 +0000
+ id 1hYImc-007Wib-7x
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jun 2019 23:23:59 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2306320859;
- Tue,  4 Jun 2019 23:22:29 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2243820883;
+ Tue,  4 Jun 2019 23:23:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1559690549;
- bh=vKSDM8HFvb6IY35qAnnFxHJgFa9N+7LSmfeGddcwvIY=;
+ s=default; t=1559690631;
+ bh=rQCNb2gspZ+etgf2d1QDpIaNxFm51oQVO5wNrRBMW8w=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jecJtypOqD2WRu+HrfuhsJC7LkgY5UVzqgxk+GGb2PfblqgJLJha69CTF4Iw2i0zp
- UOxxzDMIKmAb8LwVc7IK0FxVB7toPXUymRhYXUQfDyUEwfPjA4GXZReA14Uptpf+yS
- x5/NrdtNaFH2eoA9wWE1Bq3fY7dz2uGNc/dK2xIA=
+ b=fHOwyNIZBFvqL0/KMQP1/mRT2nrsvwe+EAshVRQQxcQxiss5gXJ9jJJp20Vy6IQSe
+ InYwbrhy28F51w9W2bY4KOByn+v3eeeRsPCEcU7mRk9JO3ovebW1ZIDpdj8Qg1lqMm
+ 6ri7y9TfhOUdJNQO2t7l+oMyrUgG247jpXUKSI2A=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue,  4 Jun 2019 19:21:19 -0400
-Message-Id: <20190604232212.6753-9-sashal@kernel.org>
+Date: Tue,  4 Jun 2019 19:23:05 -0400
+Message-Id: <20190604232333.7185-10-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190604232212.6753-1-sashal@kernel.org>
-References: <20190604232212.6753-1-sashal@kernel.org>
+In-Reply-To: <20190604232333.7185-1-sashal@kernel.org>
+References: <20190604232333.7185-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -72,8 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hYIlH-007v4d-G7
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 09/60] f2fs: fix to avoid accessing
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hYImc-007Wib-7x
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 10/36] f2fs: fix to avoid accessing
  xattr across the boundary
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -138,10 +139,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 29 insertions(+), 9 deletions(-)
 
 diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 848a785abe25..e791741d193b 100644
+index 409a637f7a92..88e30f7cf9e1 100644
 --- a/fs/f2fs/xattr.c
 +++ b/fs/f2fs/xattr.c
-@@ -202,12 +202,17 @@ static inline const struct xattr_handler *f2fs_xattr_handler(int index)
+@@ -205,12 +205,17 @@ static inline const struct xattr_handler *f2fs_xattr_handler(int index)
  	return handler;
  }
  
@@ -161,7 +162,7 @@ index 848a785abe25..e791741d193b 100644
  		if (entry->e_name_index != index)
  			continue;
  		if (entry->e_name_len != len)
-@@ -297,20 +302,22 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+@@ -300,20 +305,22 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
  				const char *name, struct f2fs_xattr_entry **xe,
  				void **base_addr, int *base_size)
  {
@@ -188,7 +189,7 @@ index 848a785abe25..e791741d193b 100644
  	/* read from inline xattr */
  	if (inline_size) {
  		err = read_inline_xattr(inode, ipage, txattr_addr);
-@@ -337,7 +344,11 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+@@ -340,7 +347,11 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
  	else
  		cur_addr = txattr_addr;
  
@@ -201,7 +202,7 @@ index 848a785abe25..e791741d193b 100644
  check:
  	if (IS_XATTR_LAST_ENTRY(*xe)) {
  		err = -ENODATA;
-@@ -581,7 +592,8 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+@@ -584,7 +595,8 @@ static int __f2fs_setxattr(struct inode *inode, int index,
  			struct page *ipage, int flags)
  {
  	struct f2fs_xattr_entry *here, *last;
@@ -211,7 +212,7 @@ index 848a785abe25..e791741d193b 100644
  	int found, newsize;
  	size_t len;
  	__u32 new_hsize;
-@@ -605,8 +617,14 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+@@ -608,8 +620,14 @@ static int __f2fs_setxattr(struct inode *inode, int index,
  	if (error)
  		return error;
  
@@ -228,10 +229,10 @@ index 848a785abe25..e791741d193b 100644
  	found = IS_XATTR_LAST_ENTRY(here) ? 0 : 1;
  
 diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
-index 9172ee082ca8..a90920e2f949 100644
+index dbcd1d16e669..2a4ecaf338ea 100644
 --- a/fs/f2fs/xattr.h
 +++ b/fs/f2fs/xattr.h
-@@ -71,6 +71,8 @@ struct f2fs_xattr_entry {
+@@ -74,6 +74,8 @@ struct f2fs_xattr_entry {
  				entry = XATTR_NEXT_ENTRY(entry))
  #define VALID_XATTR_BLOCK_SIZE	(PAGE_SIZE - sizeof(struct node_footer))
  #define XATTR_PADDING_SIZE	(sizeof(__u32))
