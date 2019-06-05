@@ -2,63 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EA4F35594
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2019 05:16:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E686935681
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2019 08:00:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hYMPT-0007ac-Oh; Wed, 05 Jun 2019 03:16:19 +0000
+	id 1hYOy7-0005Js-63; Wed, 05 Jun 2019 06:00:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sunqiuyang@huawei.com>) id 1hYMPS-0007aU-EN
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 03:16:18 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hYOy6-0005Jk-DD
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 06:00:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fkNCtTz9icwlf0skf4I3VJ818HOWR7SkSFpvdvwiSpk=; b=fh0CALcgG2fAUQuTjaZWWNKslm
- VBQ9OhM54pxOv7/GtmGLGCy64w8jPGCPX2Gbdx1hZh7qkgURuQLVuQFRIy83IMhPx222BTwjv2HjP
- uGuA62LxSxNLjULODTrg/5D1pUQf7GDdpomiEDN72u5+oLqmwDN+RvH0U+mobiicOhRo=;
+ bh=FLVi2dg03nSMNWGIRnC/Kj4PASlA4lZXJ7yj8c2uHk0=; b=a5wKVWUx6bCtE9RWxVqJbjnjP6
+ bA/MDPp+QAZvmtu09zuBIJFb4aThUrLfIxNMhpgSa7fQUps5b6NCcl17K5VqM81+1q0dDBAsR5Qjr
+ 0IParyB629wBNCOLoSxDuNVZ0HQiVfe4Gpgza2IbAzsksqrqWEntiZrNEoz8stQFJNmU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fkNCtTz9icwlf0skf4I3VJ818HOWR7SkSFpvdvwiSpk=; b=i
- AmdE4hmNCcD5mUMh0XNdiDVZ+Rq9g9kzTuB9e7+QMI7i/4Sq1J89+KPPqRebzf8g9wA1FibOVt5jq
- lviFeUg7LfPZ5ttwtrTWKPWw6vqGiPuuVC0AilaH1eWVSgaFPMguOgSSWbVbIvWHzvwN0LRmToOLP
- MPneF2JKBiwb886c=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=FLVi2dg03nSMNWGIRnC/Kj4PASlA4lZXJ7yj8c2uHk0=; b=F
+ rTdFoN92NDuZloI6ZK+7TSdMmFQl+teEAfmrGTzcBNFdUgn/Vn8QJG8UhQgWHb7so0xDDzuG1LdNP
+ mizizmFYBF+u/SNtfV4IPOz0gOaqalGHRaJ2G+Q+3TVPSaMZUzcVPqnuI/ClDIqedfFtrokjEH8Xd
+ CY1sOKMdLWYSVRUs=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hYMPP-0080rg-U4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 03:16:18 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 9E89C647FC47ACCC1DE9;
- Wed,  5 Jun 2019 11:16:08 +0800 (CST)
-Received: from huawei.com (10.175.124.28) by DGGEMS412-HUB.china.huawei.com
- (10.3.19.212) with Microsoft SMTP Server id 14.3.439.0; Wed, 5 Jun 2019
- 11:15:59 +0800
-From: sunqiuyang <sunqiuyang@huawei.com>
-To: <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-Date: Wed, 5 Jun 2019 11:33:25 +0800
-Message-ID: <20190605033325.47628-1-sunqiuyang@huawei.com>
-X-Mailer: git-send-email 2.17.2
+ id 1hYOy4-008jIh-S4
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 06:00:14 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id B5F3A20866;
+ Wed,  5 Jun 2019 06:00:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1559714404;
+ bh=KegJwvpAQSXmPZk0kg4gegp77j4A68ieVMNI7AfwMkA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=fIF6OWMo8P4cPJ2ZBogaQnZlxuPoF6EqNSP8s3o1+JGioaiL8O0Sy8XHAj03sEloj
+ 0If/ar1OqgwNTORFY/anMzXOdL6xyf1P6/Yhdr0rqVIU7PExC3r7XY99ly5zAwCDkH
+ NiuoikupierTvlkWHQoKzOmCOukp/IIgPxE5qveg=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue,  4 Jun 2019 22:59:04 -0700
+Message-Id: <20190605055904.4039-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.175.124.28]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hYMPP-0080rg-U4
-Subject: [f2fs-dev] [PATCH v8 1/1] f2fs: ioctl for removing a range from F2FS
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hYOy4-008jIh-S4
+Subject: [f2fs-dev] [PATCH] f2fs: separate f2fs i_flags from fs_flags and
+ ext4 i_flags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,495 +81,450 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, sunqiuyang@huawei.com
+Cc: linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Qiuyang Sun <sunqiuyang@huawei.com>
+From: Eric Biggers <ebiggers@google.com>
 
-This ioctl shrinks a given length (aligned to sections) from end of the
-main area. Any cursegs and valid blocks will be moved out before
-invalidating the range.
+f2fs copied all the on-disk i_flags from ext4, and along with it the
+assumption that the on-disk i_flags are the same as the bits used by
+FS_IOC_GETFLAGS and FS_IOC_SETFLAGS.  This is problematic because
+reserving an on-disk inode flag in either filesystem's i_flags or in
+these ioctls effectively reserves it in all the other places too.  In
+fact, most of the "f2fs i_flags" are not used by f2fs at all.
 
-This feature can be used for adjusting partition sizes online.
---
-Changlog v1 ==> v2:
+Fix this by separating f2fs's i_flags from the ioctl bits and ext4's
+i_flags.
 
-Sahitya Tummala:
- - Add this ioctl for f2fs_compat_ioctl() as well.
- - Fix debugfs status to reflect the online resize changes.
- - Fix potential race between online resize path and allocate new data
-   block path or gc path.
+In the process, un-reserve all "f2fs i_flags" that aren't actually
+supported by f2fs.  This included various flags that were not settable
+at all, as well as various flags that were settable by FS_IOC_SETFLAGS
+but didn't actually do anything.
 
-Others:
- - Rename some identifiers.
- - Add some error handling branches.
- - Clear sbi->next_victim_seg[BG_GC/FG_GC] in shrinking range.
---
-Changelog v2 ==> v3:
-Implement this interface as ext4's, and change the parameter from shrunk
-bytes to new block count of F2FS.
---
-Changelog v3 ==> v4:
- - During resizing, force to empty sit_journal and forbid adding new
-   entries to it, in order to avoid invalid segno in journal after resize.
- - Reduce sbi->user_block_count before resize starts.
- - Commit the updated superblock first, and then update in-memory metadata
-   only when the former succeeds.
- - Target block count must align to sections.
---
-Changelog v4 ==> v5:
-Write checkpoint before and after committing the new superblock, w/o
-CP_FSCK_FLAG respectively, so that the FS can be fixed by fsck even if
-resize fails after the new superblock is committed.
---
-Changelog v5 ==> v6:
- - In free_segment_range(), reduce granularity of gc_mutex.
- - Add protection on curseg migration.
---
-Changelog v6 ==> v7:
- - Add freeze_bdev() and thaw_bdev() for resize fs.
- - Remove CUR_MAIN_SECS and use MAIN_SECS directly for allocation.
- - Recover super_block and FS metadata when resize fails.
---
-Changelog v7 ==> v8:
- - No need to clear CP_FSCK_FLAG in update_ckpt_flags().
- - Clean up the sb and fs metadata update functions for resize_fs.
+There's a slight chance we'll need to add some flag(s) back to
+FS_IOC_SETFLAGS in order to avoid breaking users who expect f2fs to
+accept some random flag(s).  But hopefully such users don't exist.
 
-Signed-off-by: Qiuyang Sun <sunqiuyang@huawei.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/checkpoint.c |   3 +-
- fs/f2fs/debug.c      |   7 ++
- fs/f2fs/f2fs.h       |   6 ++
- fs/f2fs/file.c       |  23 +++++++
- fs/f2fs/gc.c         | 180 ++++++++++++++++++++++++++++++++++++++++++++++++++-
- fs/f2fs/segment.c    |  39 ++++++++++-
- fs/f2fs/super.c      |   4 ++
- 7 files changed, 257 insertions(+), 5 deletions(-)
+ fs/f2fs/f2fs.h |  42 +--------
+ fs/f2fs/file.c | 239 ++++++++++++++++++++++++++++++++-----------------
+ 2 files changed, 163 insertions(+), 118 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index ed70b68..b57bc2c 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1313,7 +1313,8 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 	else
- 		__clear_ckpt_flags(ckpt, CP_ORPHAN_PRESENT_FLAG);
- 
--	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
-+	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK) ||
-+		is_sbi_flag_set(sbi, SBI_IS_RESIZEFS))
- 		__set_ckpt_flags(ckpt, CP_FSCK_FLAG);
- 
- 	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED))
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index 99e9a5c..7706049 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -27,8 +27,15 @@
- static void update_general_status(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_stat_info *si = F2FS_STAT(sbi);
-+	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
- 	int i;
- 
-+	/* these will be changed if online resize is done */
-+	si->main_area_segs = le32_to_cpu(raw_super->segment_count_main);
-+	si->main_area_sections = le32_to_cpu(raw_super->section_count);
-+	si->main_area_zones = si->main_area_sections /
-+				le32_to_cpu(raw_super->secs_per_zone);
-+
- 	/* validation check of the segment numbers */
- 	si->hit_largest = atomic64_read(&sbi->read_hit_largest);
- 	si->hit_cached = atomic64_read(&sbi->read_hit_cached);
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index a205d4d..387ec9a 100644
+index 9bd2bf0f559b6..4fc297c263adc 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -423,6 +423,7 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
- #define F2FS_IOC_SET_PIN_FILE		_IOW(F2FS_IOCTL_MAGIC, 13, __u32)
- #define F2FS_IOC_GET_PIN_FILE		_IOR(F2FS_IOCTL_MAGIC, 14, __u32)
- #define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
-+#define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
- 
- #define F2FS_IOC_SET_ENCRYPTION_POLICY	FS_IOC_SET_ENCRYPTION_POLICY
- #define F2FS_IOC_GET_ENCRYPTION_POLICY	FS_IOC_GET_ENCRYPTION_POLICY
-@@ -1130,6 +1131,7 @@ enum {
- 	SBI_QUOTA_NEED_FLUSH,			/* need to flush quota info in CP */
- 	SBI_QUOTA_SKIP_FLUSH,			/* skip flushing quota in current CP */
- 	SBI_QUOTA_NEED_REPAIR,			/* quota file may be corrupted */
-+	SBI_IS_RESIZEFS,			/* resizefs is in process */
- };
- 
- enum {
-@@ -1309,6 +1311,7 @@ struct f2fs_sb_info {
- 	unsigned int segs_per_sec;		/* segments per section */
- 	unsigned int secs_per_zone;		/* sections per zone */
- 	unsigned int total_sections;		/* total section count */
-+	struct mutex resize_mutex;		/* for resize exclusion */
- 	unsigned int total_node_count;		/* total node block count */
- 	unsigned int total_valid_node_count;	/* valid node block count */
- 	loff_t max_file_blocks;			/* max block index of file */
-@@ -3175,6 +3178,8 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
- void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
- int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
-+void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+					unsigned int start, unsigned int end);
- void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
- int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
- bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
-@@ -3318,6 +3323,7 @@ int f2fs_migrate_page(struct address_space *mapping, struct page *newpage,
- int f2fs_gc(struct f2fs_sb_info *sbi, bool sync, bool background,
- 			unsigned int segno);
- void f2fs_build_gc_manager(struct f2fs_sb_info *sbi);
-+int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count);
+@@ -2335,57 +2335,23 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
+ }
  
  /*
-  * recovery.c
+- * Inode flags
++ * On-disk inode flags (f2fs_inode::i_flags)
+  */
+-#define F2FS_SECRM_FL			0x00000001 /* Secure deletion */
+-#define F2FS_UNRM_FL			0x00000002 /* Undelete */
+-#define F2FS_COMPR_FL			0x00000004 /* Compress file */
+ #define F2FS_SYNC_FL			0x00000008 /* Synchronous updates */
+ #define F2FS_IMMUTABLE_FL		0x00000010 /* Immutable file */
+ #define F2FS_APPEND_FL			0x00000020 /* writes to file may only append */
+ #define F2FS_NODUMP_FL			0x00000040 /* do not dump file */
+ #define F2FS_NOATIME_FL			0x00000080 /* do not update atime */
+-/* Reserved for compression usage... */
+-#define F2FS_DIRTY_FL			0x00000100
+-#define F2FS_COMPRBLK_FL		0x00000200 /* One or more compressed clusters */
+-#define F2FS_NOCOMPR_FL			0x00000400 /* Don't compress */
+-#define F2FS_ENCRYPT_FL			0x00000800 /* encrypted file */
+-/* End compression flags --- maybe not all used */
+ #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
+-#define F2FS_IMAGIC_FL			0x00002000 /* AFS directory */
+-#define F2FS_JOURNAL_DATA_FL		0x00004000 /* file data should be journaled */
+-#define F2FS_NOTAIL_FL			0x00008000 /* file tail should not be merged */
+ #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
+-#define F2FS_TOPDIR_FL			0x00020000 /* Top of directory hierarchies*/
+-#define F2FS_HUGE_FILE_FL               0x00040000 /* Set to each huge file */
+-#define F2FS_EXTENTS_FL			0x00080000 /* Inode uses extents */
+-#define F2FS_EA_INODE_FL	        0x00200000 /* Inode used for large EA */
+-#define F2FS_EOFBLOCKS_FL		0x00400000 /* Blocks allocated beyond EOF */
+-#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
+-#define F2FS_INLINE_DATA_FL		0x10000000 /* Inode has inline data. */
+ #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
+-#define F2FS_RESERVED_FL		0x80000000 /* reserved for ext4 lib */
+-
+-#define F2FS_FL_USER_VISIBLE		0x30CBDFFF /* User visible flags */
+-#define F2FS_FL_USER_MODIFIABLE		0x204BC0FF /* User modifiable flags */
+-
+-/* Flags we can manipulate with through F2FS_IOC_FSSETXATTR */
+-#define F2FS_FL_XFLAG_VISIBLE		(F2FS_SYNC_FL | \
+-					 F2FS_IMMUTABLE_FL | \
+-					 F2FS_APPEND_FL | \
+-					 F2FS_NODUMP_FL | \
+-					 F2FS_NOATIME_FL | \
+-					 F2FS_PROJINHERIT_FL)
+ 
+ /* Flags that should be inherited by new inodes from their parent. */
+-#define F2FS_FL_INHERITED (F2FS_SECRM_FL | F2FS_UNRM_FL | F2FS_COMPR_FL |\
+-			   F2FS_SYNC_FL | F2FS_NODUMP_FL | F2FS_NOATIME_FL |\
+-			   F2FS_NOCOMPR_FL | F2FS_JOURNAL_DATA_FL |\
+-			   F2FS_NOTAIL_FL | F2FS_DIRSYNC_FL |\
+-			   F2FS_PROJINHERIT_FL)
++#define F2FS_FL_INHERITED (F2FS_SYNC_FL | F2FS_NODUMP_FL | F2FS_NOATIME_FL | \
++			   F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL)
+ 
+ /* Flags that are appropriate for regular files (all but dir-specific ones). */
+-#define F2FS_REG_FLMASK		(~(F2FS_DIRSYNC_FL | F2FS_TOPDIR_FL))
++#define F2FS_REG_FLMASK		(~F2FS_DIRSYNC_FL)
+ 
+ /* Flags that are appropriate for non-directories/regular files. */
+ #define F2FS_OTHER_FLMASK	(F2FS_NODUMP_FL | F2FS_NOATIME_FL)
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index d05ac21..4a7ee7a 100644
+index 45b45f37d347e..efdafa8865106 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -3013,6 +3013,26 @@ static int f2fs_ioc_precache_extents(struct file *filp, unsigned long arg)
- 	return f2fs_precache_extents(file_inode(filp));
+@@ -707,11 +707,9 @@ int f2fs_getattr(const struct path *path, struct kstat *stat,
+ 		stat->btime.tv_nsec = fi->i_crtime.tv_nsec;
+ 	}
+ 
+-	flags = fi->i_flags & F2FS_FL_USER_VISIBLE;
++	flags = fi->i_flags;
+ 	if (flags & F2FS_APPEND_FL)
+ 		stat->attributes |= STATX_ATTR_APPEND;
+-	if (flags & F2FS_COMPR_FL)
+-		stat->attributes |= STATX_ATTR_COMPRESSED;
+ 	if (IS_ENCRYPTED(inode))
+ 		stat->attributes |= STATX_ATTR_ENCRYPTED;
+ 	if (flags & F2FS_IMMUTABLE_FL)
+@@ -720,7 +718,6 @@ int f2fs_getattr(const struct path *path, struct kstat *stat,
+ 		stat->attributes |= STATX_ATTR_NODUMP;
+ 
+ 	stat->attributes_mask |= (STATX_ATTR_APPEND |
+-				  STATX_ATTR_COMPRESSED |
+ 				  STATX_ATTR_ENCRYPTED |
+ 				  STATX_ATTR_IMMUTABLE |
+ 				  STATX_ATTR_NODUMP);
+@@ -1648,44 +1645,22 @@ static int f2fs_file_flush(struct file *file, fl_owner_t id)
+ 	return 0;
  }
  
-+static int f2fs_ioc_resize_fs(struct file *filp, unsigned long arg)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(filp));
-+	__u64 block_count;
-+	int ret;
-+
-+	if (!capable(CAP_SYS_ADMIN))
-+		return -EPERM;
-+
-+	if (f2fs_readonly(sbi->sb))
-+		return -EROFS;
-+
-+	if (get_user(block_count, (__u64 __user *)arg))
-+		return -EFAULT;
-+
-+	ret = f2fs_resize_fs(sbi, block_count);
-+
-+	return ret;
-+}
-+
- long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+-static int f2fs_ioc_getflags(struct file *filp, unsigned long arg)
+-{
+-	struct inode *inode = file_inode(filp);
+-	struct f2fs_inode_info *fi = F2FS_I(inode);
+-	unsigned int flags = fi->i_flags;
+-
+-	if (IS_ENCRYPTED(inode))
+-		flags |= F2FS_ENCRYPT_FL;
+-	if (f2fs_has_inline_data(inode) || f2fs_has_inline_dentry(inode))
+-		flags |= F2FS_INLINE_DATA_FL;
+-	if (is_inode_flag_set(inode, FI_PIN_FILE))
+-		flags |= F2FS_NOCOW_FL;
+-
+-	flags &= F2FS_FL_USER_VISIBLE;
+-
+-	return put_user(flags, (int __user *)arg);
+-}
+-
+-static int __f2fs_ioc_setflags(struct inode *inode, unsigned int flags)
++static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
  {
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
-@@ -3069,6 +3089,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 		return f2fs_ioc_set_pin_file(filp, arg);
- 	case F2FS_IOC_PRECACHE_EXTENTS:
- 		return f2fs_ioc_precache_extents(filp, arg);
-+	case F2FS_IOC_RESIZE_FS:
-+		return f2fs_ioc_resize_fs(filp, arg);
- 	default:
- 		return -ENOTTY;
- 	}
-@@ -3182,6 +3204,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case F2FS_IOC_GET_PIN_FILE:
- 	case F2FS_IOC_SET_PIN_FILE:
- 	case F2FS_IOC_PRECACHE_EXTENTS:
-+	case F2FS_IOC_RESIZE_FS:
- 		break;
- 	default:
- 		return -ENOIOCTLCMD;
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 963fb45..bb84921 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -311,10 +311,11 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
- 	struct sit_info *sm = SIT_I(sbi);
- 	struct victim_sel_policy p;
- 	unsigned int secno, last_victim;
--	unsigned int last_segment = MAIN_SEGS(sbi);
-+	unsigned int last_segment;
- 	unsigned int nsearched = 0;
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
+-	unsigned int oldflags;
++	u32 oldflags;
  
- 	mutex_lock(&dirty_i->seglist_lock);
-+	last_segment = MAIN_SECS(sbi) * sbi->segs_per_sec;
+ 	/* Is it quota file? Do not allow user to mess with it */
+ 	if (IS_NOQUOTA(inode))
+ 		return -EPERM;
  
- 	p.alloc_mode = alloc_mode;
- 	select_policy(sbi, gc_type, type, &p);
-@@ -404,7 +405,8 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
- 				sm->last_victim[p.gc_mode] = last_victim + 1;
- 			else
- 				sm->last_victim[p.gc_mode] = segno + 1;
--			sm->last_victim[p.gc_mode] %= MAIN_SEGS(sbi);
-+			sm->last_victim[p.gc_mode] %=
-+				(MAIN_SECS(sbi) * sbi->segs_per_sec);
- 			break;
- 		}
- 	}
-@@ -1360,3 +1362,177 @@ void f2fs_build_gc_manager(struct f2fs_sb_info *sbi)
- 		SIT_I(sbi)->last_victim[ALLOC_NEXT] =
- 				GET_SEGNO(sbi, FDEV(0).end_blk) + 1;
- }
-+
-+static int free_segment_range(struct f2fs_sb_info *sbi, unsigned int start,
-+							unsigned int end)
-+{
-+	int type;
-+	unsigned int segno, next_inuse;
-+	int err = 0;
-+
-+	/* Move out cursegs from the target range */
-+	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_TYPE; type++)
-+		allocate_segment_for_resize(sbi, type, start, end);
-+
-+	/* do GC to move out valid blocks in the range */
-+	for (segno = start; segno <= end; segno += sbi->segs_per_sec) {
-+		struct gc_inode_list gc_list = {
-+			.ilist = LIST_HEAD_INIT(gc_list.ilist),
-+			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
-+		};
-+
-+		mutex_lock(&sbi->gc_mutex);
-+		do_garbage_collect(sbi, segno, &gc_list, FG_GC);
-+		mutex_unlock(&sbi->gc_mutex);
-+		put_gc_inode(&gc_list);
-+
-+		if (get_valid_blocks(sbi, segno, true))
-+			return -EAGAIN;
-+	}
-+
-+	err = f2fs_sync_fs(sbi->sb, 1);
-+	if (err)
-+		return err;
-+
-+	next_inuse = find_next_inuse(FREE_I(sbi), end + 1, start);
-+	if (next_inuse <= end) {
-+		f2fs_msg(sbi->sb, KERN_ERR,
-+			"segno %u should be free but still inuse!", next_inuse);
-+		f2fs_bug_on(sbi, 1);
-+	}
-+	return err;
-+}
-+
-+static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
-+{
-+	struct f2fs_super_block *raw_sb = F2FS_RAW_SUPER(sbi);
-+	int section_count = le32_to_cpu(raw_sb->section_count);
-+	int segment_count = le32_to_cpu(raw_sb->segment_count);
-+	int segment_count_main = le32_to_cpu(raw_sb->segment_count_main);
-+	long long block_count = le64_to_cpu(raw_sb->block_count);
-+	int segs = secs * sbi->segs_per_sec;
-+
-+	raw_sb->section_count = cpu_to_le32(section_count + secs);
-+	raw_sb->segment_count = cpu_to_le32(segment_count + segs);
-+	raw_sb->segment_count_main = cpu_to_le32(segment_count_main + segs);
-+	raw_sb->block_count = cpu_to_le64(block_count +
-+					(long long)segs * sbi->blocks_per_seg);
-+}
-+
-+static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
-+{
-+	int segs = secs * sbi->segs_per_sec;
-+	long long user_block_count =
-+				le64_to_cpu(F2FS_CKPT(sbi)->user_block_count);
-+
-+	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
-+	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
-+	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
-+	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
-+	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count +
-+					(long long)segs * sbi->blocks_per_seg);
-+}
-+
-+int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
-+{
-+	__u64 old_block_count, shrunk_blocks;
-+	unsigned int secs;
-+	int gc_mode, gc_type;
-+	int err = 0;
-+
-+	old_block_count = le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count);
-+	if (block_count > old_block_count)
-+		return -EINVAL;
-+
-+	/* new fs size should align to section size */
-+	if (block_count % BLKS_PER_SEC(sbi))
-+		return -EINVAL;
-+
-+	if (block_count == old_block_count)
-+		return 0;
-+
-+	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK)) {
-+		f2fs_msg(sbi->sb, KERN_ERR,
-+			"Should run fsck to repair first.");
-+		return -EINVAL;
-+	}
-+
-+	if (test_opt(sbi, DISABLE_CHECKPOINT)) {
-+		f2fs_msg(sbi->sb, KERN_ERR,
-+			"Checkpoint should be enabled.");
-+		return -EINVAL;
-+	}
-+
-+	freeze_bdev(sbi->sb->s_bdev);
-+
-+	shrunk_blocks = old_block_count - block_count;
-+	secs = shrunk_blocks / BLKS_PER_SEC(sbi);
-+	spin_lock(&sbi->stat_lock);
-+	if (shrunk_blocks + valid_user_blocks(sbi) +
-+		sbi->current_reserved_blocks + sbi->unusable_block_count +
-+		F2FS_OPTION(sbi).root_reserved_blocks > sbi->user_block_count)
-+		err = -ENOSPC;
-+	else
-+		sbi->user_block_count -= shrunk_blocks;
-+	spin_unlock(&sbi->stat_lock);
-+	if (err) {
-+		thaw_bdev(sbi->sb->s_bdev, sbi->sb);
-+		return err;
-+	}
-+
-+	mutex_lock(&sbi->resize_mutex);
-+	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
-+
-+	mutex_lock(&DIRTY_I(sbi)->seglist_lock);
-+
-+	MAIN_SECS(sbi) -= secs;
-+
-+	for (gc_mode = 0; gc_mode < MAX_GC_POLICY; gc_mode++)
-+		if (SIT_I(sbi)->last_victim[gc_mode] >=
-+					MAIN_SECS(sbi) * sbi->segs_per_sec)
-+			SIT_I(sbi)->last_victim[gc_mode] = 0;
-+
-+	for (gc_type = BG_GC; gc_type <= FG_GC; gc_type++)
-+		if (sbi->next_victim_seg[gc_type] >=
-+					MAIN_SECS(sbi) * sbi->segs_per_sec)
-+			sbi->next_victim_seg[gc_type] = NULL_SEGNO;
-+
-+	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
-+
-+	err = free_segment_range(sbi, MAIN_SECS(sbi) * sbi->segs_per_sec,
-+			MAIN_SEGS(sbi) - 1);
-+	if (err)
-+		goto out;
-+
-+	update_sb_metadata(sbi, -secs);
-+
-+	err = f2fs_commit_super(sbi, false);
-+	if (err) {
-+		update_sb_metadata(sbi, secs);
-+		goto out;
-+	}
-+
-+	update_fs_metadata(sbi, -secs);
-+	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
-+	err = f2fs_sync_fs(sbi->sb, 1);
-+	if (err) {
-+		update_fs_metadata(sbi, secs);
-+		update_sb_metadata(sbi, secs);
-+		f2fs_commit_super(sbi, false);
-+	}
-+out:
-+	if (err) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		f2fs_msg(sbi->sb, KERN_ERR,
-+				"resize_fs failed, should run fsck to repair!");
-+
-+		MAIN_SECS(sbi) += secs;
-+		spin_lock(&sbi->stat_lock);
-+		sbi->user_block_count += shrunk_blocks;
-+		spin_unlock(&sbi->stat_lock);
-+	}
-+	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
-+	mutex_unlock(&sbi->resize_mutex);
-+	thaw_bdev(sbi->sb->s_bdev, sbi->sb);
-+	return err;
-+}
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 07e9235..00a3572 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2651,6 +2651,40 @@ static void allocate_segment_by_default(struct f2fs_sb_info *sbi,
- 	stat_inc_seg_type(sbi, curseg);
+-	flags = f2fs_mask_flags(inode->i_mode, flags);
+-
+ 	oldflags = fi->i_flags;
+ 
+-	if ((flags ^ oldflags) & (F2FS_APPEND_FL | F2FS_IMMUTABLE_FL))
++	if ((iflags ^ oldflags) & (F2FS_APPEND_FL | F2FS_IMMUTABLE_FL))
+ 		if (!capable(CAP_LINUX_IMMUTABLE))
+ 			return -EPERM;
+ 
+-	flags = flags & F2FS_FL_USER_MODIFIABLE;
+-	flags |= oldflags & ~F2FS_FL_USER_MODIFIABLE;
+-	fi->i_flags = flags;
++	fi->i_flags = iflags | (oldflags & ~mask);
+ 
+ 	if (fi->i_flags & F2FS_PROJINHERIT_FL)
+ 		set_inode_flag(inode, FI_PROJ_INHERIT);
+@@ -1698,26 +1673,124 @@ static int __f2fs_ioc_setflags(struct inode *inode, unsigned int flags)
+ 	return 0;
  }
  
-+void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+					unsigned int start, unsigned int end)
++/* FS_IOC_GETFLAGS and FS_IOC_SETFLAGS support */
++
++/*
++ * To make a new on-disk f2fs i_flag gettable via FS_IOC_GETFLAGS, add an entry
++ * for it to f2fs_fsflags_map[], and add its FS_*_FL equivalent to
++ * F2FS_GETTABLE_FS_FL.  To also make it settable via FS_IOC_SETFLAGS, also add
++ * its FS_*_FL equivalent to F2FS_SETTABLE_FS_FL.
++ */
++
++static const struct {
++	u32 iflag;
++	u32 fsflag;
++} f2fs_fsflags_map[] = {
++	{ F2FS_SYNC_FL,		FS_SYNC_FL },
++	{ F2FS_IMMUTABLE_FL,	FS_IMMUTABLE_FL },
++	{ F2FS_APPEND_FL,	FS_APPEND_FL },
++	{ F2FS_NODUMP_FL,	FS_NODUMP_FL },
++	{ F2FS_NOATIME_FL,	FS_NOATIME_FL },
++	{ F2FS_INDEX_FL,	FS_INDEX_FL },
++	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
++	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
++};
++
++#define F2FS_GETTABLE_FS_FL (		\
++		FS_SYNC_FL |		\
++		FS_IMMUTABLE_FL |	\
++		FS_APPEND_FL |		\
++		FS_NODUMP_FL |		\
++		FS_NOATIME_FL |		\
++		FS_INDEX_FL |		\
++		FS_DIRSYNC_FL |		\
++		FS_PROJINHERIT_FL |	\
++		FS_ENCRYPT_FL |		\
++		FS_INLINE_DATA_FL |	\
++		FS_NOCOW_FL)
++
++#define F2FS_SETTABLE_FS_FL (		\
++		FS_SYNC_FL |		\
++		FS_IMMUTABLE_FL |	\
++		FS_APPEND_FL |		\
++		FS_NODUMP_FL |		\
++		FS_NOATIME_FL |		\
++		FS_DIRSYNC_FL |		\
++		FS_PROJINHERIT_FL)
++
++/* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
++static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
 +{
-+	struct curseg_info *curseg = CURSEG_I(sbi, type);
-+	unsigned int segno;
++	u32 fsflags = 0;
++	int i;
 +
-+	down_read(&SM_I(sbi)->curseg_lock);
-+	mutex_lock(&curseg->curseg_mutex);
-+	down_write(&SIT_I(sbi)->sentry_lock);
++	for (i = 0; i < ARRAY_SIZE(f2fs_fsflags_map); i++)
++		if (iflags & f2fs_fsflags_map[i].iflag)
++			fsflags |= f2fs_fsflags_map[i].fsflag;
 +
-+	segno = CURSEG_I(sbi, type)->segno;
-+	if (segno < start || segno > end)
-+		goto unlock;
-+
-+	if (f2fs_need_SSR(sbi) && get_ssr_segment(sbi, type))
-+		change_curseg(sbi, type);
-+	else
-+		new_curseg(sbi, type, true);
-+
-+	stat_inc_seg_type(sbi, curseg);
-+
-+	locate_dirty_segment(sbi, segno);
-+unlock:
-+	up_write(&SIT_I(sbi)->sentry_lock);
-+
-+	if (segno != curseg->segno)
-+		f2fs_msg(sbi->sb, KERN_NOTICE,
-+			"For resize: curseg of type %d: %u ==> %u",
-+			type, segno, curseg->segno);
-+
-+	mutex_unlock(&curseg->curseg_mutex);
-+	up_read(&SM_I(sbi)->curseg_lock);
++	return fsflags;
 +}
 +
- void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
++/* Convert FS_IOC_{GET,SET}FLAGS flags to f2fs on-disk i_flags */
++static inline u32 f2fs_fsflags_to_iflags(u32 fsflags)
++{
++	u32 iflags = 0;
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(f2fs_fsflags_map); i++)
++		if (fsflags & f2fs_fsflags_map[i].fsflag)
++			iflags |= f2fs_fsflags_map[i].iflag;
++
++	return iflags;
++}
++
++static int f2fs_ioc_getflags(struct file *filp, unsigned long arg)
++{
++	struct inode *inode = file_inode(filp);
++	struct f2fs_inode_info *fi = F2FS_I(inode);
++	u32 fsflags = f2fs_iflags_to_fsflags(fi->i_flags);
++
++	if (IS_ENCRYPTED(inode))
++		fsflags |= FS_ENCRYPT_FL;
++	if (f2fs_has_inline_data(inode) || f2fs_has_inline_dentry(inode))
++		fsflags |= FS_INLINE_DATA_FL;
++	if (is_inode_flag_set(inode, FI_PIN_FILE))
++		fsflags |= FS_NOCOW_FL;
++
++	fsflags &= F2FS_GETTABLE_FS_FL;
++
++	return put_user(fsflags, (int __user *)arg);
++}
++
+ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
  {
- 	struct curseg_info *curseg;
-@@ -3774,7 +3808,7 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 	struct f2fs_journal *journal = curseg->journal;
- 	struct sit_entry_set *ses, *tmp;
- 	struct list_head *head = &SM_I(sbi)->sit_entry_set;
--	bool to_journal = true;
-+	bool to_journal = !is_sbi_flag_set(sbi, SBI_IS_RESIZEFS);
- 	struct seg_entry *se;
+ 	struct inode *inode = file_inode(filp);
+-	unsigned int flags;
++	u32 fsflags;
++	u32 iflags;
+ 	int ret;
  
- 	down_write(&sit_i->sentry_lock);
-@@ -3793,7 +3827,8 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 	 * entries, remove all entries from journal and add and account
- 	 * them in sit entry set.
- 	 */
--	if (!__has_cursum_space(journal, sit_i->dirty_sentries, SIT_JOURNAL))
-+	if (!__has_cursum_space(journal, sit_i->dirty_sentries, SIT_JOURNAL) ||
-+								!to_journal)
- 		remove_sits_in_journal(sbi);
+ 	if (!inode_owner_or_capable(inode))
+ 		return -EACCES;
  
- 	/*
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 1f581f0..23cedff 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3296,6 +3296,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	mutex_init(&sbi->gc_mutex);
- 	mutex_init(&sbi->writepages);
- 	mutex_init(&sbi->cp_mutex);
-+	mutex_init(&sbi->resize_mutex);
- 	init_rwsem(&sbi->node_write);
- 	init_rwsem(&sbi->node_change);
+-	if (get_user(flags, (int __user *)arg))
++	if (get_user(fsflags, (int __user *)arg))
+ 		return -EFAULT;
  
-@@ -3368,6 +3369,9 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		sbi->interval_time[DISABLE_TIME] = DEF_DISABLE_QUICK_INTERVAL;
- 	}
- 
-+	if (__is_set_ckpt_flags(F2FS_CKPT(sbi), CP_FSCK_FLAG))
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
++	if (fsflags & ~F2FS_GETTABLE_FS_FL)
++		return -EOPNOTSUPP;
++	fsflags &= F2FS_SETTABLE_FS_FL;
 +
- 	/* Initialize device list */
- 	err = f2fs_scan_devices(sbi);
- 	if (err) {
++	iflags = f2fs_fsflags_to_iflags(fsflags);
++	if (f2fs_mask_flags(inode->i_mode, iflags) != iflags)
++		return -EOPNOTSUPP;
++
+ 	ret = mnt_want_write_file(filp);
+ 	if (ret)
+ 		return ret;
+ 
+ 	inode_lock(inode);
+ 
+-	ret = __f2fs_ioc_setflags(inode, flags);
+-
++	ret = f2fs_setflags_common(inode, iflags,
++			f2fs_fsflags_to_iflags(F2FS_SETTABLE_FS_FL));
+ 	inode_unlock(inode);
+ 	mnt_drop_write_file(filp);
+ 	return ret;
+@@ -2727,47 +2800,56 @@ static int f2fs_ioc_setproject(struct file *filp, __u32 projid)
+ }
+ #endif
+ 
+-/* Transfer internal flags to xflags */
+-static inline __u32 f2fs_iflags_to_xflags(unsigned long iflags)
+-{
+-	__u32 xflags = 0;
+-
+-	if (iflags & F2FS_SYNC_FL)
+-		xflags |= FS_XFLAG_SYNC;
+-	if (iflags & F2FS_IMMUTABLE_FL)
+-		xflags |= FS_XFLAG_IMMUTABLE;
+-	if (iflags & F2FS_APPEND_FL)
+-		xflags |= FS_XFLAG_APPEND;
+-	if (iflags & F2FS_NODUMP_FL)
+-		xflags |= FS_XFLAG_NODUMP;
+-	if (iflags & F2FS_NOATIME_FL)
+-		xflags |= FS_XFLAG_NOATIME;
+-	if (iflags & F2FS_PROJINHERIT_FL)
+-		xflags |= FS_XFLAG_PROJINHERIT;
++/* FS_IOC_FSGETXATTR and FS_IOC_FSSETXATTR support */
++
++/*
++ * To make a new on-disk f2fs i_flag gettable via FS_IOC_FSGETXATTR and settable
++ * via FS_IOC_FSSETXATTR, add an entry for it to f2fs_xflags_map[], and add its
++ * FS_XFLAG_* equivalent to F2FS_SUPPORTED_XFLAGS.
++ */
++
++static const struct {
++	u32 iflag;
++	u32 xflag;
++} f2fs_xflags_map[] = {
++	{ F2FS_SYNC_FL,		FS_XFLAG_SYNC },
++	{ F2FS_IMMUTABLE_FL,	FS_XFLAG_IMMUTABLE },
++	{ F2FS_APPEND_FL,	FS_XFLAG_APPEND },
++	{ F2FS_NODUMP_FL,	FS_XFLAG_NODUMP },
++	{ F2FS_NOATIME_FL,	FS_XFLAG_NOATIME },
++	{ F2FS_PROJINHERIT_FL,	FS_XFLAG_PROJINHERIT },
++};
++
++#define F2FS_SUPPORTED_XFLAGS (		\
++		FS_XFLAG_SYNC |		\
++		FS_XFLAG_IMMUTABLE |	\
++		FS_XFLAG_APPEND |	\
++		FS_XFLAG_NODUMP |	\
++		FS_XFLAG_NOATIME |	\
++		FS_XFLAG_PROJINHERIT)
++
++/* Convert f2fs on-disk i_flags to FS_IOC_FS{GET,SET}XATTR flags */
++static inline u32 f2fs_iflags_to_xflags(u32 iflags)
++{
++	u32 xflags = 0;
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(f2fs_xflags_map); i++)
++		if (iflags & f2fs_xflags_map[i].iflag)
++			xflags |= f2fs_xflags_map[i].xflag;
++
+ 	return xflags;
+ }
+ 
+-#define F2FS_SUPPORTED_FS_XFLAGS (FS_XFLAG_SYNC | FS_XFLAG_IMMUTABLE | \
+-				  FS_XFLAG_APPEND | FS_XFLAG_NODUMP | \
+-				  FS_XFLAG_NOATIME | FS_XFLAG_PROJINHERIT)
+-
+-/* Transfer xflags flags to internal */
+-static inline unsigned long f2fs_xflags_to_iflags(__u32 xflags)
++/* Convert FS_IOC_FS{GET,SET}XATTR flags to f2fs on-disk i_flags */
++static inline u32 f2fs_xflags_to_iflags(u32 xflags)
+ {
+-	unsigned long iflags = 0;
++	u32 iflags = 0;
++	int i;
+ 
+-	if (xflags & FS_XFLAG_SYNC)
+-		iflags |= F2FS_SYNC_FL;
+-	if (xflags & FS_XFLAG_IMMUTABLE)
+-		iflags |= F2FS_IMMUTABLE_FL;
+-	if (xflags & FS_XFLAG_APPEND)
+-		iflags |= F2FS_APPEND_FL;
+-	if (xflags & FS_XFLAG_NODUMP)
+-		iflags |= F2FS_NODUMP_FL;
+-	if (xflags & FS_XFLAG_NOATIME)
+-		iflags |= F2FS_NOATIME_FL;
+-	if (xflags & FS_XFLAG_PROJINHERIT)
+-		iflags |= F2FS_PROJINHERIT_FL;
++	for (i = 0; i < ARRAY_SIZE(f2fs_xflags_map); i++)
++		if (xflags & f2fs_xflags_map[i].xflag)
++			iflags |= f2fs_xflags_map[i].iflag;
+ 
+ 	return iflags;
+ }
+@@ -2779,8 +2861,7 @@ static int f2fs_ioc_fsgetxattr(struct file *filp, unsigned long arg)
+ 	struct fsxattr fa;
+ 
+ 	memset(&fa, 0, sizeof(struct fsxattr));
+-	fa.fsx_xflags = f2fs_iflags_to_xflags(fi->i_flags &
+-				F2FS_FL_USER_VISIBLE);
++	fa.fsx_xflags = f2fs_iflags_to_xflags(fi->i_flags);
+ 
+ 	if (f2fs_sb_has_project_quota(F2FS_I_SB(inode)))
+ 		fa.fsx_projid = (__u32)from_kprojid(&init_user_ns,
+@@ -2818,9 +2899,8 @@ static int f2fs_ioctl_check_project(struct inode *inode, struct fsxattr *fa)
+ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
+ {
+ 	struct inode *inode = file_inode(filp);
+-	struct f2fs_inode_info *fi = F2FS_I(inode);
+ 	struct fsxattr fa;
+-	unsigned int flags;
++	u32 iflags;
+ 	int err;
+ 
+ 	if (copy_from_user(&fa, (struct fsxattr __user *)arg, sizeof(fa)))
+@@ -2830,11 +2910,11 @@ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
+ 	if (!inode_owner_or_capable(inode))
+ 		return -EACCES;
+ 
+-	if (fa.fsx_xflags & ~F2FS_SUPPORTED_FS_XFLAGS)
++	if (fa.fsx_xflags & ~F2FS_SUPPORTED_XFLAGS)
+ 		return -EOPNOTSUPP;
+ 
+-	flags = f2fs_xflags_to_iflags(fa.fsx_xflags);
+-	if (f2fs_mask_flags(inode->i_mode, flags) != flags)
++	iflags = f2fs_xflags_to_iflags(fa.fsx_xflags);
++	if (f2fs_mask_flags(inode->i_mode, iflags) != iflags)
+ 		return -EOPNOTSUPP;
+ 
+ 	err = mnt_want_write_file(filp);
+@@ -2845,9 +2925,8 @@ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
+ 	err = f2fs_ioctl_check_project(inode, &fa);
+ 	if (err)
+ 		goto out;
+-	flags = (fi->i_flags & ~F2FS_FL_XFLAG_VISIBLE) |
+-				(flags & F2FS_FL_XFLAG_VISIBLE);
+-	err = __f2fs_ioc_setflags(inode, flags);
++	err = f2fs_setflags_common(inode, iflags,
++			f2fs_xflags_to_iflags(F2FS_SUPPORTED_XFLAGS));
+ 	if (err)
+ 		goto out;
+ 
 -- 
-1.8.3.1
+2.21.0
 
 
 
