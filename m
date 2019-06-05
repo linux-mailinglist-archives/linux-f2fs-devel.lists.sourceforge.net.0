@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD4AC36877
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2019 01:58:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 305EA36858
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2019 01:52:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
 	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=xkM7TVJSGj18XGrdjKCcAfUiLJ+IL8WVv7ZZCf9bH5w=; b=JmJXqIU28sYA2KAIVeQopzpli
-	DD3xsDCU3Uixbqz6SNUi08r/3tjorMqji2c9moBbdtIzkKTggFVFCdKO7eacZkDmItoVgQVBfiB8X
-	bz89ksdy6QdtbJ8ggkH+9Ewadytv3cbwQagr0OQjll1oECFrbwUc/bBFGejDjxeQEqVsI=;
+	 bh=ldalq5F8dyTQ1l1soMdX7Yx5P/RGGwDCU5DMLnPfaFQ=; b=bh3RSW2v8ZDyQd+ivcNmkBwvi
+	zkQ3pHq42egzzteIMlvCZcleCFBzZHWZGl7gfktkuy0L4QO+dxEf8hi6En11S6bCX7GB1Y6prr653
+	JqgmQtlW75kqN7lPIptU30UwqSsSB6jNlV8aL/TM62srkbQ5bQQoeG+K/sLwcWyIpyvmA=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hYfnD-0007eb-QE; Wed, 05 Jun 2019 23:58:07 +0000
+	id 1hYfhG-0007OH-5U; Wed, 05 Jun 2019 23:51:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3QFD4XAYKAK8hPinPiVddVaT.Rdb@flex--satyat.bounces.google.com>)
- id 1hYfnB-0007eJ-Hw
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 23:58:05 +0000
+ (envelope-from <3Q1D4XAYKALIkSlqSlYggYdW.Uge@flex--satyat.bounces.google.com>)
+ id 1hYfhE-0007O9-Kt
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 23:51:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
  Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=g59Z2pJDpjx0iOGjFBxnzdfuaNuQJt/JKIioIBNHw/U=; b=ZOBVStToJF3vhPDwz/6ML24l2
- XeGHN5b1tbR+l/LqIMhDhCWS5ff4wYtgbB9AQcqi0rqP5UnrlY0hueScU0N0UzjaE+XQfiZ/VUYhk
- YshGfX3GAvHiedJOmuicHo9QgHbhrpybviWvHbto+oEcbuXZNRpiggJIeapMwnmywBa08=;
+ bh=9iPa/dKLIP2EDAzFnZVaBr58koQCAgltn68F2kS9+QY=; b=js/TNYp/rdumAn6aikarGMbK6
+ GhP/cOZEL685WbNjjZJVyR2rJKkvT1zaZg5X52MD3OwiceYinSMOn1cw+jf6KEZ3pNOT8bdsczJxP
+ ipjwyUnDJTx9c9QPmBdfXt64b2Dz9Lb400j8ZoUx/N0l0Jk+T1h7UX90dU5ZwS0fXhPAA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
@@ -39,45 +39,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=g59Z2pJDpjx0iOGjFBxnzdfuaNuQJt/JKIioIBNHw/U=; b=j1GQTXjfl/pFrRQsLaiHDbJhJG
- NgZAKJ1YVKJq6obK7C6FDTpPKLAIvxZKE2rJQx+SMKr5aVsApuhIPUGryAB8OIqQCuqw4xQR03Ww2
- lIT7KEv0qlQa2Ac7EqPTc2WSGTZAYnVcBMJYcgUfGhyFoXiWIcvlLDLzvv+o44txfNVo=;
-Received: from mail-pl1-f201.google.com ([209.85.214.201])
+ bh=9iPa/dKLIP2EDAzFnZVaBr58koQCAgltn68F2kS9+QY=; b=RDtU4tjmWiz2dCQPukbkp/OrCs
+ 9DSU/oait0MxpdQIEiNuknUzV1oWVIUV3vVdTOo7Nil11wIzOKylLN/m6ZB+pIzwdRdygVVNOm0T8
+ RrnX8lMv7YUzU4+A3pvG4kcbk8DiH34fDvrmjSGGf0r6vcgPC6cxkPeF8wndDTZwNlYs=;
+Received: from mail-pg1-f201.google.com ([209.85.215.201])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hYfn9-002bMI-Oq
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 23:58:05 +0000
-Received: by mail-pl1-f201.google.com with SMTP id bc12so360571plb.0
+ id 1hYfh1-002aFM-5J
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jun 2019 23:51:56 +0000
+Received: by mail-pg1-f201.google.com with SMTP id y187so295332pgd.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Jun 2019 16:58:03 -0700 (PDT)
+ Wed, 05 Jun 2019 16:51:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:in-reply-to:message-id:mime-version:references:subject:from:to
- :cc; bh=g59Z2pJDpjx0iOGjFBxnzdfuaNuQJt/JKIioIBNHw/U=;
- b=gMQlqlOSRMuiU56qvSdP+QLmvIfuRnh/69fSN0IsjmXoTSNHzIZC6WoJ2nynpPSfkG
- 3NNgzZ6Sse04jj2PT/d6vBmiLEQrPiAi2uRQ/CMZJwJq4BeUK5ynfFo0kEKzMn92yVoV
- waEO+KzC512mbre5IITo+qM3xfphnbeoIuY4gpehlCWn6AHNrMDGwRLl8CXu6urC1Wy0
- omQIgLo7g+aFRJs+Xprk4Z4w+u24Hvbnvdd4uXSzuLDOT+pAVItFD8cPK43bSRkwWlWl
- DGr48nKYH1wdscVy3dfUjuYr6l00/0+HK4WiAbZnZST61ZjFsvfCcX9z4SOJdvj4N7K4
- Guvg==
+ :cc; bh=9iPa/dKLIP2EDAzFnZVaBr58koQCAgltn68F2kS9+QY=;
+ b=sQJgD9ORAeohABHaoS+dPPXBBl+ACtIAUSx3NCpUKAqdSIiaJs4KRoHYxI6cSK2XBw
+ PTPFLbDA0/SlYOHK3pGgQPdd7d6P0tIQdq3UR9hyyNIymlIyf2q9rpvMrWuyI3w2p4UP
+ NolfK+/5LWXjGJ1mimcih0Q72YiT0Dr+bGcFKaIzFtG0hx8UrUjF8VBKGnehkYkHc5wI
+ dVXnrF2F2j1VC0yha/qyPczWcJcX9y3OKY/1i/isa09Kdp6OwJ3jDGATBgmr1BncFLCZ
+ ZSfgsLT8SeTmAPwOVLiDG5J9kUO1vFQTqcE7OfaHQV9wffRLA1jweV7l2j4bnhCN+Lbi
+ 7Sgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:in-reply-to:message-id:mime-version
  :references:subject:from:to:cc;
- bh=g59Z2pJDpjx0iOGjFBxnzdfuaNuQJt/JKIioIBNHw/U=;
- b=orn6AmsFH1teku+0+fHZh+I9dC0JRePW39xjkARMwhIc3A+EEdQxVizs3lCLkG6BT9
- ZcMi1B/nMklqCV2wiG5jvDQ9LI9FsRDVzF4wL6RBqzV/xvTZc1Bgt/0Uah5KiA/kGjlq
- YqkCoiqL9BJ03tQA0OHSCyIgCthuB7twlyl7ZKDCLRsFBEHEnSwB5/6Kbv3S6A32y0fb
- /6YTsueOENR2GxjrHGw/MEwsdrqQFdzNN5VzMqXFKZrGJr8hs0vypcZKNs8w9xcjYZzK
- uUhG334bUgtlMfR4ZMqhdnDqvgF3vkAcEoaqCG0tbxalMa7+T0rfIouSlneqxncnOqDX
- +vpw==
-X-Gm-Message-State: APjAAAU3uLms3IJgh1MnaXTezA7iP9keUDN1xBoMO0k7oKDFrR15HER6
- mhILvIPuuwbiPl5vCcxxfDpSW9vEIrM=
-X-Google-Smtp-Source: APXvYqwsd99bPbIM52k3KduTtwG1sY2tLR9JfLZcotvVmNQBnhhr6t58xs5P5Actw7UngE7pfDJQewjAJdc=
-X-Received: by 2002:a63:d008:: with SMTP id z8mr358036pgf.335.1559777344469;
- Wed, 05 Jun 2019 16:29:04 -0700 (PDT)
-Date: Wed,  5 Jun 2019 16:28:35 -0700
+ bh=9iPa/dKLIP2EDAzFnZVaBr58koQCAgltn68F2kS9+QY=;
+ b=WDjCvIERe+ubTZo/Fp/ggSFqzWLsWHPYN0he8Mo6siFh2JhcUr0k82NF39uZ0ABAmQ
+ en0c9x5WgtuO85WO+CmNWqz1NaXP4FsS4bjQ7x8KIzSwQWe+BNEzB3EooWA8bODAbOhS
+ /AtN33IDXTzo7r8ogATcvgF8fn7HWoV+qArWCrq26MS6LdP5kHOvHLbfb7/3+DUHc6Ot
+ EV1r6Hu9XKZ0Dk1Pk8WIzN7xEffCOlh37KEiVTdn3pkpkghqzAyvdidqaxW57kdKQi0R
+ RwbuQN/LlLpxb6AM9e0w9j9+Uj1x/GsMPY/znOgVShe51DOwCF4eRS9GKlxILFMeCcFP
+ 38ug==
+X-Gm-Message-State: APjAAAWSdvYUss9UmKs6Tj8H2FBJ0EwrwmZI3u5yYAVAg5FR0bthv2L2
+ 5reMgpYW5vZ8hFALuHW0z5ZYfEwht0k=
+X-Google-Smtp-Source: APXvYqyNUkkwwEDUF3iDoKZACfBUGTds2Y3iI1rxkOKBMBm0NRB4mqJKNDkkQ+sEx79g29jRtnE8KUY74Bw=
+X-Received: by 2002:a63:3008:: with SMTP id w8mr377549pgw.11.1559777347427;
+ Wed, 05 Jun 2019 16:29:07 -0700 (PDT)
+Date: Wed,  5 Jun 2019 16:28:36 -0700
 In-Reply-To: <20190605232837.31545-1-satyat@google.com>
-Message-Id: <20190605232837.31545-7-satyat@google.com>
+Message-Id: <20190605232837.31545-8-satyat@google.com>
 Mime-Version: 1.0
 References: <20190605232837.31545-1-satyat@google.com>
 X-Mailer: git-send-email 2.22.0.rc1.311.g5d7573a151-goog
@@ -87,8 +87,6 @@ To: linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.214.201 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -97,11 +95,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 T_DKIMWL_WL_MED        DKIMwl.org - Medium sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hYfn9-002bMI-Oq
-Subject: [f2fs-dev] [RFC PATCH v2 6/8] scsi: ufs: Add inline encryption
- support to UFS
+X-Headers-End: 1hYfh1-002aFM-5J
+Subject: [f2fs-dev] [RFC PATCH v2 7/8] fscrypt: wire up fscrypt to use
+ blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,249 +121,659 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Wire up ufshcd.c with the UFS Crypto API, the block layer inline
-encryption additions and the keyslot manager.
+Introduce fscrypt_set_bio_crypt_ctx for filesystems to call to set up
+encryption contexts in bios, and fscrypt_evict_crypt_key to evict
+the encryption context associated with an inode.
+
+Inline encryption is controlled by a policy flag in the fscrypt_info
+in the inode, and filesystems may check if an inode should use inline
+encryption by calling fscrypt_inode_is_hw_encrypted. Files can be marked
+as inline encrypted from userspace by appropriately modifying the flags
+(OR-ing FS_POLICY_FLAGS_HW_ENCRYPTION to it) in the fscrypt_policy
+passed to fscrypt_ioctl_set_policy.
+
+To test inline encryption with the fscrypt dummy context, add
+ctx.flags |= FS_POLICY_FLAGS_HW_ENCRYPTION
+when setting up the dummy context in fs/crypto/keyinfo.c.
+
+Note that blk-crypto will fall back to software en/decryption in the
+absence of inline crypto hardware, so setting up the ctx.flags in the
+dummy context without inline crypto hardware serves as a test for
+the software fallback in blk-crypto.
 
 Signed-off-by: Satya Tangirala <satyat@google.com>
 ---
- drivers/scsi/ufs/ufshcd.c | 84 ++++++++++++++++++++++++++++++++++++---
- drivers/scsi/ufs/ufshcd.h | 18 +++++++++
- 2 files changed, 97 insertions(+), 5 deletions(-)
+ block/blk-crypto.c          |   1 -
+ fs/crypto/Kconfig           |   7 ++
+ fs/crypto/bio.c             | 159 +++++++++++++++++++++++++++++++-----
+ fs/crypto/crypto.c          |   9 ++
+ fs/crypto/fscrypt_private.h |  10 +++
+ fs/crypto/keyinfo.c         |  69 +++++++++++-----
+ fs/crypto/policy.c          |  10 +++
+ include/linux/fscrypt.h     |  64 +++++++++++++++
+ include/uapi/linux/fs.h     |  12 ++-
+ 9 files changed, 296 insertions(+), 45 deletions(-)
 
-diff --git a/drivers/scsi/ufs/ufshcd.c b/drivers/scsi/ufs/ufshcd.c
-index 8c1c551f2b42..c5ba141ce0cf 100644
---- a/drivers/scsi/ufs/ufshcd.c
-+++ b/drivers/scsi/ufs/ufshcd.c
-@@ -47,6 +47,7 @@
- #include "unipro.h"
- #include "ufs-sysfs.h"
- #include "ufs_bsg.h"
-+#include "ufshcd-crypto.h"
+diff --git a/block/blk-crypto.c b/block/blk-crypto.c
+index 5adb5251ae7e..7e98acd2b963 100644
+--- a/block/blk-crypto.c
++++ b/block/blk-crypto.c
+@@ -82,7 +82,6 @@ static int blk_crypto_keyslot_program(void *priv, const u8 *key,
+ 		slotp->tfm = tfm;
+ 	}
  
- #define CREATE_TRACE_POINTS
- #include <trace/events/ufs.h>
-@@ -855,7 +856,14 @@ static void ufshcd_enable_run_stop_reg(struct ufs_hba *hba)
-  */
- static inline void ufshcd_hba_start(struct ufs_hba *hba)
+-
+ 	err = crypto_skcipher_setkey(tfm, key, keysize);
+ 
+ 	if (err) {
+diff --git a/fs/crypto/Kconfig b/fs/crypto/Kconfig
+index 24ed99e2eca0..aa5b2bc6c8dd 100644
+--- a/fs/crypto/Kconfig
++++ b/fs/crypto/Kconfig
+@@ -15,3 +15,10 @@ config FS_ENCRYPTION
+ 	  efficient since it avoids caching the encrypted and
+ 	  decrypted pages in the page cache.  Currently Ext4,
+ 	  F2FS and UBIFS make use of this feature.
++
++config FS_ENCRYPTION_HW_CRYPT
++	tristate "Enable fscrypt to use inline crypto"
++	default n
++	depends on FS_ENCRYPTION && BLK_INLINE_ENCRYPTION
++	help
++	  Enables fscrypt to use inline crypto hardware if available.
+diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
+index b46021ebde85..b06b1a2be99b 100644
+--- a/fs/crypto/bio.c
++++ b/fs/crypto/bio.c
+@@ -24,17 +24,24 @@
+ #include <linux/module.h>
+ #include <linux/bio.h>
+ #include <linux/namei.h>
++#include <linux/keyslot-manager.h>
++#include <linux/blkdev.h>
++#include <crypto/algapi.h>
+ #include "fscrypt_private.h"
+ 
+-static void __fscrypt_decrypt_bio(struct bio *bio, bool done)
++static void __fscrypt_decrypt_bio(struct bio *bio, bool done, bool decrypt)
  {
--	ufshcd_writel(hba, CONTROLLER_ENABLE, REG_CONTROLLER_ENABLE);
-+	u32 val = CONTROLLER_ENABLE;
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
+ 
+ 	bio_for_each_segment_all(bv, bio, iter_all) {
+ 		struct page *page = bv->bv_page;
+-		int ret = fscrypt_decrypt_page(page->mapping->host, page,
+-				PAGE_SIZE, 0, page->index);
++		int ret = 0;
 +
-+	if (ufshcd_hba_is_crypto_supported(hba)) {
-+		ufshcd_crypto_enable(hba);
-+		val |= CRYPTO_GENERAL_ENABLE;
-+	}
-+
-+	ufshcd_writel(hba, val, REG_CONTROLLER_ENABLE);
++		if (decrypt) {
++			ret = fscrypt_decrypt_page(page->mapping->host, page,
++						   PAGE_SIZE, 0, page->index);
++		}
+ 
+ 		if (ret)
+ 			SetPageError(page);
+@@ -47,7 +54,7 @@ static void __fscrypt_decrypt_bio(struct bio *bio, bool done)
+ 
+ void fscrypt_decrypt_bio(struct bio *bio)
+ {
+-	__fscrypt_decrypt_bio(bio, false);
++	__fscrypt_decrypt_bio(bio, false, true);
  }
+ EXPORT_SYMBOL(fscrypt_decrypt_bio);
  
- /**
-@@ -2208,9 +2216,21 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
- 		dword_0 |= UTP_REQ_DESC_INT_CMD;
+@@ -57,16 +64,27 @@ static void completion_pages(struct work_struct *work)
+ 		container_of(work, struct fscrypt_ctx, r.work);
+ 	struct bio *bio = ctx->r.bio;
  
- 	/* Transfer request descriptor header fields */
-+	if (lrbp->crypto_enable) {
-+		dword_0 |= UTP_REQ_DESC_CRYPTO_ENABLE_CMD;
-+		dword_0 |= lrbp->crypto_key_slot;
-+		req_desc->header.dword_1 =
-+			cpu_to_le32((u32)lrbp->data_unit_num);
-+		req_desc->header.dword_3 =
-+			cpu_to_le32((u32)(lrbp->data_unit_num >> 32));
-+	} else {
-+		/* dword_1 and dword_3 are reserved, hence they are set to 0 */
-+		req_desc->header.dword_1 = 0;
-+		req_desc->header.dword_3 = 0;
-+	}
+-	__fscrypt_decrypt_bio(bio, true);
++	__fscrypt_decrypt_bio(bio, true, true);
++	fscrypt_release_ctx(ctx);
++	bio_put(bio);
++}
 +
- 	req_desc->header.dword_0 = cpu_to_le32(dword_0);
--	/* dword_1 is reserved, hence it is set to 0 */
--	req_desc->header.dword_1 = 0;
-+
- 	/*
- 	 * assigning invalid value for command status. Controller
- 	 * updates OCS on command completion, with the command
-@@ -2218,8 +2238,6 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
- 	 */
- 	req_desc->header.dword_2 =
- 		cpu_to_le32(OCS_INVALID_COMMAND_STATUS);
--	/* dword_3 is reserved, hence it is set to 0 */
--	req_desc->header.dword_3 = 0;
- 
- 	req_desc->prd_table_length = 0;
- }
-@@ -2379,6 +2397,37 @@ static inline u16 ufshcd_upiu_wlun_to_scsi_wlun(u8 upiu_wlun_id)
- 	return (upiu_wlun_id & ~UFS_UPIU_WLUN_ID) | SCSI_W_LUN_BASE;
- }
- 
-+static inline int ufshcd_prepare_lrbp_crypto(struct ufs_hba *hba,
-+					     struct scsi_cmnd *cmd,
-+					     struct ufshcd_lrb *lrbp)
++static void decrypt_bio_hwcrypt(struct fscrypt_ctx *ctx, struct bio *bio)
 +{
-+	int key_slot;
++	__fscrypt_decrypt_bio(bio, true, false);
+ 	fscrypt_release_ctx(ctx);
+ 	bio_put(bio);
+ }
+ 
+ void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx, struct bio *bio)
+ {
+-	INIT_WORK(&ctx->r.work, completion_pages);
+-	ctx->r.bio = bio;
+-	fscrypt_enqueue_decrypt_work(&ctx->r.work);
++	if (bio_is_encrypted(bio)) {
++		decrypt_bio_hwcrypt(ctx, bio);
++	} else {
++		INIT_WORK(&ctx->r.work, completion_pages);
++		ctx->r.bio = bio;
++		fscrypt_enqueue_decrypt_work(&ctx->r.work);
++	}
+ }
+ EXPORT_SYMBOL(fscrypt_enqueue_decrypt_bio);
+ 
+@@ -94,29 +112,33 @@ EXPORT_SYMBOL(fscrypt_pullback_bio_page);
+ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 				sector_t pblk, unsigned int len)
+ {
+-	struct fscrypt_ctx *ctx;
++	struct fscrypt_ctx *ctx = NULL;
+ 	struct page *ciphertext_page = NULL;
+ 	struct bio *bio;
+ 	int ret, err = 0;
+ 
+ 	BUG_ON(inode->i_sb->s_blocksize != PAGE_SIZE);
+ 
+-	ctx = fscrypt_get_ctx(GFP_NOFS);
+-	if (IS_ERR(ctx))
+-		return PTR_ERR(ctx);
++	if (!fscrypt_inode_is_hw_encrypted(inode)) {
++		ctx = fscrypt_get_ctx(GFP_NOFS);
++		if (IS_ERR(ctx))
++			return PTR_ERR(ctx);
+ 
+-	ciphertext_page = fscrypt_alloc_bounce_page(ctx, GFP_NOWAIT);
+-	if (IS_ERR(ciphertext_page)) {
+-		err = PTR_ERR(ciphertext_page);
+-		goto errout;
++		ciphertext_page = fscrypt_alloc_bounce_page(ctx, GFP_NOWAIT);
++		if (IS_ERR(ciphertext_page)) {
++			err = PTR_ERR(ciphertext_page);
++			goto errout;
++		}
+ 	}
+ 
+ 	while (len--) {
+-		err = fscrypt_do_page_crypto(inode, FS_ENCRYPT, lblk,
++		if (!fscrypt_inode_is_hw_encrypted(inode)) {
++			err = fscrypt_do_page_crypto(inode, FS_ENCRYPT, lblk,
+ 					     ZERO_PAGE(0), ciphertext_page,
+ 					     PAGE_SIZE, 0, GFP_NOFS);
+-		if (err)
+-			goto errout;
++			if (err)
++				goto errout;
++		}
+ 
+ 		bio = bio_alloc(GFP_NOWAIT, 1);
+ 		if (!bio) {
+@@ -127,8 +149,14 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 		bio->bi_iter.bi_sector =
+ 			pblk << (inode->i_sb->s_blocksize_bits - 9);
+ 		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
+-		ret = bio_add_page(bio, ciphertext_page,
+-					inode->i_sb->s_blocksize, 0);
++		if (!fscrypt_inode_is_hw_encrypted(inode)) {
++			ret = bio_add_page(bio, ciphertext_page,
++						inode->i_sb->s_blocksize, 0);
++		} else {
++			ret = bio_add_page(bio, ZERO_PAGE(0),
++						inode->i_sb->s_blocksize, 0);
++		}
 +
-+	if (!bio_crypt_should_process(cmd->request->bio,
-+					cmd->request->q)) {
-+		lrbp->crypto_enable = false;
+ 		if (ret != inode->i_sb->s_blocksize) {
+ 			/* should never happen! */
+ 			WARN_ON(1);
+@@ -136,6 +164,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 			err = -EIO;
+ 			goto errout;
+ 		}
++		fscrypt_set_bio_crypt_ctx(inode, bio, pblk);
+ 		err = submit_bio_wait(bio);
+ 		if (err == 0 && bio->bi_status)
+ 			err = -EIO;
+@@ -147,7 +176,93 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 	}
+ 	err = 0;
+ errout:
+-	fscrypt_release_ctx(ctx);
++	if (!fscrypt_inode_is_hw_encrypted(inode))
++		fscrypt_release_ctx(ctx);
+ 	return err;
+ }
+ EXPORT_SYMBOL(fscrypt_zeroout_range);
++
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++static enum blk_crypt_mode_num
++get_blk_crypto_alg_for_fscryptalg(u8 fscrypt_alg)
++{
++	switch (fscrypt_alg) {
++	case FS_ENCRYPTION_MODE_AES_256_XTS:
++		return BLK_ENCRYPTION_MODE_AES_256_XTS;
++	default: return -EINVAL;
++	}
++}
++
++int fscrypt_set_bio_crypt_ctx(const struct inode *inode,
++				 struct bio *bio, u64 data_unit_num)
++{
++	struct fscrypt_info *ci = inode->i_crypt_info;
++
++	/* If inode is not hw encrypted, nothing to do. */
++	if (!fscrypt_inode_is_hw_encrypted(inode))
++		return 0;
++
++	return bio_crypt_set_ctx(bio, ci->ci_master_key->mk_raw,
++			get_blk_crypto_alg_for_fscryptalg(ci->ci_data_mode),
++			data_unit_num,
++			PAGE_SHIFT);
++}
++EXPORT_SYMBOL(fscrypt_set_bio_crypt_ctx);
++
++void fscrypt_unset_bio_crypt_ctx(struct bio *bio)
++{
++	bio_crypt_free_ctx(bio);
++}
++EXPORT_SYMBOL(fscrypt_unset_bio_crypt_ctx);
++
++int fscrypt_evict_crypt_key(struct inode *inode)
++{
++	struct request_queue *q;
++	struct fscrypt_info *ci;
++
++	if (!inode)
++		return 0;
++
++	q = inode->i_sb->s_bdev->bd_queue;
++	ci = inode->i_crypt_info;
++
++	if (!q || !q->ksm || !ci ||
++	    !fscrypt_inode_is_hw_encrypted(inode)) {
 +		return 0;
 +	}
 +
-+	if (WARN_ON(!ufshcd_is_crypto_enabled(hba))) {
-+		/*
-+		 * Upper layer asked us to do inline encryption
-+		 * but that isn't enabled, so we fail this request.
-+		 */
-+		return -EINVAL;
-+	}
-+	key_slot = bio_crypt_get_slot(cmd->request->bio);
-+	if (!ufshcd_keyslot_valid(hba, key_slot))
-+		return -EINVAL;
-+
-+	lrbp->crypto_enable = true;
-+	lrbp->crypto_key_slot = key_slot;
-+	lrbp->data_unit_num = bio_crypt_data_unit_num(cmd->request->bio);
-+
-+	return 0;
++	return keyslot_manager_evict_key(q->ksm,
++					 ci->ci_master_key->mk_raw,
++					 get_blk_crypto_alg_for_fscryptalg(
++						ci->ci_data_mode),
++					 PAGE_SIZE);
 +}
++EXPORT_SYMBOL(fscrypt_evict_crypt_key);
 +
++bool fscrypt_inode_crypt_mergeable(const struct inode *inode_1,
++				   const struct inode *inode_2)
++{
++	struct fscrypt_info *ci_1, *ci_2;
++	bool enc_1 = fscrypt_inode_is_hw_encrypted(inode_1);
++	bool enc_2 = fscrypt_inode_is_hw_encrypted(inode_2);
 +
- /**
-  * ufshcd_queuecommand - main entry point for SCSI requests
-  * @host: SCSI host pointer
-@@ -2466,6 +2515,13 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
- 	lrbp->task_tag = tag;
- 	lrbp->lun = ufshcd_scsi_to_upiu_lun(cmd->device->lun);
- 	lrbp->intr_cmd = !ufshcd_is_intr_aggr_allowed(hba) ? true : false;
++	if (enc_1 != enc_2)
++		return false;
 +
-+	err = ufshcd_prepare_lrbp_crypto(hba, cmd, lrbp);
-+	if (err) {
-+		lrbp->cmd = NULL;
-+		clear_bit_unlock(tag, &hba->lrb_in_use);
-+		goto out;
++	if (!enc_1)
++		return true;
++
++	if (inode_1 == inode_2)
++		return true;
++
++	ci_1 = inode_1->i_crypt_info;
++	ci_2 = inode_2->i_crypt_info;
++
++	return ci_1->ci_data_mode == ci_2->ci_data_mode &&
++	       crypto_memneq(ci_1->ci_master_key->mk_raw,
++			     ci_2->ci_master_key->mk_raw,
++			     ci_1->ci_master_key->mk_mode->keysize) == 0;
++}
++EXPORT_SYMBOL(fscrypt_inode_crypt_mergeable);
++
++#endif /* FS_ENCRYPTION_HW_CRYPT */
+diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
+index 335a362ee446..1bf195ef82c8 100644
+--- a/fs/crypto/crypto.c
++++ b/fs/crypto/crypto.c
+@@ -240,6 +240,11 @@ struct page *fscrypt_encrypt_page(const struct inode *inode,
+ 
+ 	BUG_ON(len % FS_CRYPTO_BLOCK_SIZE != 0);
+ 
++	/* If HW encryption, then pretend we did in place encryption */
++	if (fscrypt_inode_is_hw_encrypted(inode)) {
++		return ciphertext_page;
 +	}
- 	lrbp->req_abort_skip = false;
++
+ 	if (inode->i_sb->s_cop->flags & FS_CFLG_OWN_PAGES) {
+ 		/* with inplace-encryption we just encrypt the page */
+ 		err = fscrypt_do_page_crypto(inode, FS_ENCRYPT, lblk_num, page,
+@@ -302,6 +307,10 @@ int fscrypt_decrypt_page(const struct inode *inode, struct page *page,
+ 	if (!(inode->i_sb->s_cop->flags & FS_CFLG_OWN_PAGES))
+ 		BUG_ON(!PageLocked(page));
  
- 	ufshcd_comp_scsi_upiu(hba, lrbp);
-@@ -2499,6 +2555,7 @@ static int ufshcd_compose_dev_cmd(struct ufs_hba *hba,
- 	lrbp->task_tag = tag;
- 	lrbp->lun = 0; /* device management cmd is not specific to any LUN */
- 	lrbp->intr_cmd = true; /* No interrupt aggregation */
-+	lrbp->crypto_enable = false; /* No crypto operations */
- 	hba->dev_cmd.type = cmd_type;
++	/* If we have HW encryption, then this page is already decrypted */
++	if (fscrypt_inode_is_hw_encrypted(inode))
++		return 0;
++
+ 	return fscrypt_do_page_crypto(inode, FS_DECRYPT, lblk_num, page, page,
+ 				      len, offs, GFP_NOFS);
+ }
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index 7da276159593..d6d65c88a629 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -49,6 +49,16 @@ struct fscrypt_symlink_data {
+ 	char encrypted_path[1];
+ } __packed;
  
- 	return ufshcd_comp_devman_upiu(hba, lrbp);
-@@ -4191,6 +4248,8 @@ static inline void ufshcd_hba_stop(struct ufs_hba *hba, bool can_sleep)
++/* Master key referenced by FS_POLICY_FLAG_DIRECT_KEY policy */
++struct fscrypt_master_key {
++	struct hlist_node mk_node;
++	refcount_t mk_refcount;
++	const struct fscrypt_mode *mk_mode;
++	struct crypto_skcipher *mk_ctfm;
++	u8 mk_descriptor[FS_KEY_DESCRIPTOR_SIZE];
++	u8 mk_raw[FS_MAX_KEY_SIZE];
++};
++
+ /*
+  * fscrypt_info - the "encryption key" for an inode
+  *
+diff --git a/fs/crypto/keyinfo.c b/fs/crypto/keyinfo.c
+index dcd91a3fbe49..c00d986799d5 100644
+--- a/fs/crypto/keyinfo.c
++++ b/fs/crypto/keyinfo.c
+@@ -25,6 +25,21 @@ static struct crypto_shash *essiv_hash_tfm;
+ static DEFINE_HASHTABLE(fscrypt_master_keys, 6); /* 6 bits = 64 buckets */
+ static DEFINE_SPINLOCK(fscrypt_master_keys_lock);
+ 
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++static inline bool __flags_hw_encrypted(u8 flags,
++					const struct inode *inode)
++{
++	return inode && (flags & FS_POLICY_FLAGS_HW_ENCRYPTION) &&
++	       S_ISREG(inode->i_mode);
++}
++#else
++static inline bool __flags_hw_encrypted(u8 flags,
++					const struct inode *inode)
++{
++	return false;
++}
++#endif /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
++
+ /*
+  * Key derivation function.  This generates the derived key by encrypting the
+  * master key with AES-128-ECB using the inode's nonce as the AES key.
+@@ -220,6 +235,9 @@ static int find_and_derive_key(const struct inode *inode,
+ 			memcpy(derived_key, payload->raw, mode->keysize);
+ 			err = 0;
+ 		}
++	} else if (__flags_hw_encrypted(ctx->flags, inode)) {
++		memcpy(derived_key, payload->raw, mode->keysize);
++		err = 0;
+ 	} else {
+ 		err = derive_key_aes(payload->raw, ctx, derived_key,
+ 				     mode->keysize);
+@@ -269,16 +287,6 @@ allocate_skcipher_for_mode(struct fscrypt_mode *mode, const u8 *raw_key,
+ 	return ERR_PTR(err);
+ }
+ 
+-/* Master key referenced by FS_POLICY_FLAG_DIRECT_KEY policy */
+-struct fscrypt_master_key {
+-	struct hlist_node mk_node;
+-	refcount_t mk_refcount;
+-	const struct fscrypt_mode *mk_mode;
+-	struct crypto_skcipher *mk_ctfm;
+-	u8 mk_descriptor[FS_KEY_DESCRIPTOR_SIZE];
+-	u8 mk_raw[FS_MAX_KEY_SIZE];
+-};
+-
+ static void free_master_key(struct fscrypt_master_key *mk)
  {
+ 	if (mk) {
+@@ -287,13 +295,15 @@ static void free_master_key(struct fscrypt_master_key *mk)
+ 	}
+ }
+ 
+-static void put_master_key(struct fscrypt_master_key *mk)
++static void put_master_key(struct fscrypt_master_key *mk,
++			   struct inode *inode)
+ {
+ 	if (!refcount_dec_and_lock(&mk->mk_refcount, &fscrypt_master_keys_lock))
+ 		return;
+ 	hash_del(&mk->mk_node);
+ 	spin_unlock(&fscrypt_master_keys_lock);
+ 
++	fscrypt_evict_crypt_key(inode);
+ 	free_master_key(mk);
+ }
+ 
+@@ -360,11 +370,13 @@ fscrypt_get_master_key(const struct fscrypt_info *ci, struct fscrypt_mode *mode,
+ 		return ERR_PTR(-ENOMEM);
+ 	refcount_set(&mk->mk_refcount, 1);
+ 	mk->mk_mode = mode;
+-	mk->mk_ctfm = allocate_skcipher_for_mode(mode, raw_key, inode);
+-	if (IS_ERR(mk->mk_ctfm)) {
+-		err = PTR_ERR(mk->mk_ctfm);
+-		mk->mk_ctfm = NULL;
+-		goto err_free_mk;
++	if (!__flags_hw_encrypted(ci->ci_flags, inode)) {
++		mk->mk_ctfm = allocate_skcipher_for_mode(mode, raw_key, inode);
++		if (IS_ERR(mk->mk_ctfm)) {
++			err = PTR_ERR(mk->mk_ctfm);
++			mk->mk_ctfm = NULL;
++			goto err_free_mk;
++		}
+ 	}
+ 	memcpy(mk->mk_descriptor, ci->ci_master_key_descriptor,
+ 	       FS_KEY_DESCRIPTOR_SIZE);
+@@ -456,7 +468,8 @@ static int setup_crypto_transform(struct fscrypt_info *ci,
+ 	struct crypto_skcipher *ctfm;
  	int err;
  
-+	ufshcd_crypto_disable(hba);
-+
- 	ufshcd_writel(hba, CONTROLLER_DISABLE,  REG_CONTROLLER_ENABLE);
- 	err = ufshcd_wait_for_register(hba, REG_CONTROLLER_ENABLE,
- 					CONTROLLER_ENABLE, CONTROLLER_DISABLE,
-@@ -4584,10 +4643,13 @@ static int ufshcd_change_queue_depth(struct scsi_device *sdev, int depth)
- static int ufshcd_slave_configure(struct scsi_device *sdev)
- {
- 	struct request_queue *q = sdev->request_queue;
-+	struct ufs_hba *hba = shost_priv(sdev->host);
- 
- 	blk_queue_update_dma_pad(q, PRDT_DATA_BYTE_COUNT_PAD - 1);
- 	blk_queue_max_segment_size(q, PRDT_DATA_BYTE_COUNT_MAX);
- 
-+	ufshcd_crypto_setup_rq_keyslot_manager(hba, q);
-+
+-	if (ci->ci_flags & FS_POLICY_FLAG_DIRECT_KEY) {
++	if ((ci->ci_flags & FS_POLICY_FLAG_DIRECT_KEY) ||
++	    __flags_hw_encrypted(ci->ci_flags, inode)) {
+ 		mk = fscrypt_get_master_key(ci, mode, raw_key, inode);
+ 		if (IS_ERR(mk))
+ 			return PTR_ERR(mk);
+@@ -486,13 +499,13 @@ static int setup_crypto_transform(struct fscrypt_info *ci,
  	return 0;
  }
  
-@@ -4598,6 +4660,7 @@ static int ufshcd_slave_configure(struct scsi_device *sdev)
- static void ufshcd_slave_destroy(struct scsi_device *sdev)
+-static void put_crypt_info(struct fscrypt_info *ci)
++static void put_crypt_info(struct fscrypt_info *ci, struct inode *inode)
  {
- 	struct ufs_hba *hba;
-+	struct request_queue *q = sdev->request_queue;
+ 	if (!ci)
+ 		return;
  
- 	hba = shost_priv(sdev->host);
- 	/* Drop the reference as it won't be needed anymore */
-@@ -4608,6 +4671,8 @@ static void ufshcd_slave_destroy(struct scsi_device *sdev)
- 		hba->sdev_ufs_device = NULL;
- 		spin_unlock_irqrestore(hba->host->host_lock, flags);
+ 	if (ci->ci_master_key) {
+-		put_master_key(ci->ci_master_key);
++		put_master_key(ci->ci_master_key, inode);
+ 	} else {
+ 		crypto_free_skcipher(ci->ci_ctfm);
+ 		crypto_free_cipher(ci->ci_essiv_tfm);
+@@ -577,7 +590,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
+ out:
+ 	if (res == -ENOKEY)
+ 		res = 0;
+-	put_crypt_info(crypt_info);
++	put_crypt_info(crypt_info, NULL);
+ 	kzfree(raw_key);
+ 	return res;
+ }
+@@ -591,7 +604,7 @@ EXPORT_SYMBOL(fscrypt_get_encryption_info);
+  */
+ void fscrypt_put_encryption_info(struct inode *inode)
+ {
+-	put_crypt_info(inode->i_crypt_info);
++	put_crypt_info(inode->i_crypt_info, inode);
+ 	inode->i_crypt_info = NULL;
+ }
+ EXPORT_SYMBOL(fscrypt_put_encryption_info);
+@@ -610,3 +623,17 @@ void fscrypt_free_inode(struct inode *inode)
  	}
+ }
+ EXPORT_SYMBOL(fscrypt_free_inode);
 +
-+	ufshcd_crypto_destroy_rq_keyslot_manager(q);
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++bool fscrypt_inode_is_hw_encrypted(const struct inode *inode)
++{
++	struct fscrypt_info *ci;
++
++	if (!inode)
++		return false;
++	ci = inode->i_crypt_info;
++
++	return ci && __flags_hw_encrypted(ci->ci_flags, inode);
++}
++EXPORT_SYMBOL(fscrypt_inode_is_hw_encrypted);
++#endif /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
+diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
+index d536889ac31b..556e9da7a427 100644
+--- a/fs/crypto/policy.c
++++ b/fs/crypto/policy.c
+@@ -36,6 +36,7 @@ static int create_encryption_context_from_policy(struct inode *inode,
+ 	struct fscrypt_context ctx;
+ 
+ 	ctx.format = FS_ENCRYPTION_CONTEXT_FORMAT_V1;
++
+ 	memcpy(ctx.master_key_descriptor, policy->master_key_descriptor,
+ 					FS_KEY_DESCRIPTOR_SIZE);
+ 
+@@ -46,8 +47,17 @@ static int create_encryption_context_from_policy(struct inode *inode,
+ 	if (policy->flags & ~FS_POLICY_FLAGS_VALID)
+ 		return -EINVAL;
+ 
++	/*
++	 * TODO: expose HW encryption via some toggleable knob
++	 * instead of as a policy?
++	 */
++	if (!inode->i_sb->s_cop->hw_crypt_supp &&
++	    (policy->flags & FS_POLICY_FLAGS_HW_ENCRYPTION))
++		return -EINVAL;
++
+ 	ctx.contents_encryption_mode = policy->contents_encryption_mode;
+ 	ctx.filenames_encryption_mode = policy->filenames_encryption_mode;
++
+ 	ctx.flags = policy->flags;
+ 	BUILD_BUG_ON(sizeof(ctx.nonce) != FS_KEY_DERIVATION_NONCE_SIZE);
+ 	get_random_bytes(ctx.nonce, FS_KEY_DERIVATION_NONCE_SIZE);
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index f7680ef1abd2..f0e1589f32bd 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -61,6 +61,7 @@ struct fscrypt_operations {
+ 	bool (*dummy_context)(struct inode *);
+ 	bool (*empty_dir)(struct inode *);
+ 	unsigned int max_namelen;
++	bool hw_crypt_supp;
+ };
+ 
+ struct fscrypt_ctx {
+@@ -130,6 +131,22 @@ extern int fscrypt_get_encryption_info(struct inode *);
+ extern void fscrypt_put_encryption_info(struct inode *);
+ extern void fscrypt_free_inode(struct inode *);
+ 
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++extern bool fscrypt_inode_is_hw_encrypted(const struct inode *inode);
++extern bool fscrypt_inode_crypt_mergeable(const struct inode *inode_1,
++					  const struct inode *inode_2);
++#else
++static inline bool fscrypt_inode_is_hw_encrypted(const struct inode *inode)
++{
++	return false;
++}
++static inline bool fscrypt_inode_crypt_mergeable(const struct inode *inode_1,
++						 const struct inode *inode_2)
++{
++	return true;
++}
++#endif /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
++
+ /* fname.c */
+ extern int fscrypt_setup_filename(struct inode *, const struct qstr *,
+ 				int lookup, struct fscrypt_name *);
+@@ -226,6 +243,25 @@ extern void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx,
+ extern void fscrypt_pullback_bio_page(struct page **, bool);
+ extern int fscrypt_zeroout_range(const struct inode *, pgoff_t, sector_t,
+ 				 unsigned int);
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++extern int fscrypt_set_bio_crypt_ctx(const struct inode *inode,
++				     struct bio *bio, u64 data_unit_num);
++extern void fscrypt_unset_bio_crypt_ctx(struct bio *bio);
++extern int fscrypt_evict_crypt_key(struct inode *inode);
++#else
++static inline int fscrypt_set_bio_crypt_ctx(const struct inode *inode,
++					    struct bio *bio, u64 data_unit_num)
++{
++	return 0;
++}
++
++static inline void fscrypt_unset_bio_crypt_ctx(struct bio *bio) { }
++
++static inline int fscrypt_evict_crypt_key(struct inode *inode)
++{
++	return 0;
++}
++#endif
+ 
+ /* hooks.c */
+ extern int fscrypt_file_open(struct inode *inode, struct file *filp);
+@@ -351,6 +387,17 @@ static inline void fscrypt_free_inode(struct inode *inode)
+ {
  }
  
- /**
-@@ -4723,6 +4788,8 @@ ufshcd_transfer_rsp_status(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
- 	case OCS_MISMATCH_RESP_UPIU_SIZE:
- 	case OCS_PEER_COMM_FAILURE:
- 	case OCS_FATAL_ERROR:
-+	case OCS_INVALID_CRYPTO_CONFIG:
-+	case OCS_GENERAL_CRYPTO_ERROR:
- 	default:
- 		result |= DID_ERROR << 16;
- 		dev_err(hba->dev,
-@@ -8290,6 +8357,13 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
- 		goto exit_gating;
- 	}
- 
-+	/* Init crypto */
-+	err = ufshcd_hba_init_crypto(hba);
-+	if (err) {
-+		dev_err(hba->dev, "crypto setup failed\n");
-+		goto out_remove_scsi_host;
-+	}
++static inline bool fscrypt_inode_is_hw_encrypted(const struct inode *inode)
++{
++	return false;
++}
 +
- 	/* Host controller enable */
- 	err = ufshcd_hba_enable(hba);
- 	if (err) {
-diff --git a/drivers/scsi/ufs/ufshcd.h b/drivers/scsi/ufs/ufshcd.h
-index d3b6a6b57a37..283014e0924f 100644
---- a/drivers/scsi/ufs/ufshcd.h
-+++ b/drivers/scsi/ufs/ufshcd.h
-@@ -167,6 +167,9 @@ struct ufs_pm_lvl_states {
-  * @intr_cmd: Interrupt command (doesn't participate in interrupt aggregation)
-  * @issue_time_stamp: time stamp for debug purposes
-  * @compl_time_stamp: time stamp for statistics
-+ * @crypto_enable: whether or not the request needs inline crypto operations
-+ * @crypto_key_slot: the key slot to use for inline crypto
-+ * @data_unit_num: the data unit number for the first block for inline crypto
-  * @req_abort_skip: skip request abort task flag
-  */
- struct ufshcd_lrb {
-@@ -191,6 +194,9 @@ struct ufshcd_lrb {
- 	bool intr_cmd;
- 	ktime_t issue_time_stamp;
- 	ktime_t compl_time_stamp;
-+	bool crypto_enable;
-+	u8 crypto_key_slot;
-+	u64 data_unit_num;
- 
- 	bool req_abort_skip;
- };
-@@ -501,6 +507,10 @@ struct ufs_stats {
-  * @is_urgent_bkops_lvl_checked: keeps track if the urgent bkops level for
-  *  device is known or not.
-  * @scsi_block_reqs_cnt: reference counting for scsi block requests
-+ * @crypto_capabilities: Content of crypto capabilities register (0x100)
-+ * @crypto_cap_array: Array of crypto capabilities
-+ * @crypto_cfg_register: Start of the crypto cfg array
-+ * @crypto_cfgs: Array of crypto configurations (i.e. config for each slot)
-  */
- struct ufs_hba {
- 	void __iomem *mmio_base;
-@@ -711,6 +721,14 @@ struct ufs_hba {
- 
- 	struct device		bsg_dev;
- 	struct request_queue	*bsg_queue;
++static inline bool fscrypt_inode_crypt_mergeable(const struct inode *inode_1,
++						 const struct inode *inode_2)
++{
++	return true;
++}
 +
-+#ifdef CONFIG_SCSI_UFS_CRYPTO
-+	/* crypto */
-+	union ufs_crypto_capabilities crypto_capabilities;
-+	union ufs_crypto_cap_entry *crypto_cap_array;
-+	u32 crypto_cfg_register;
-+	union ufs_crypto_cfg_entry *crypto_cfgs;
-+#endif /* CONFIG_SCSI_UFS_CRYPTO */
- };
+  /* fname.c */
+ static inline int fscrypt_setup_filename(struct inode *dir,
+ 					 const struct qstr *iname,
+@@ -421,6 +468,23 @@ static inline int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 	return -EOPNOTSUPP;
+ }
  
- /* Returns true if clocks can be gated. Otherwise false */
++static inline int fscrypt_set_bio_crypt_ctx(const struct inode *inode,
++					    struct bio *bio,
++					    u64 data_unit_num)
++{
++	return -EOPNOTSUPP;
++}
++
++static inline void fscrypt_unset_bio_crypt_ctx(struct bio *bio)
++{
++	return -EOPNOTSUPP;
++}
++
++static inline int fscrypt_evict_crypt_key(struct inode *inode)
++{
++	return 0;
++}
++
+ /* hooks.c */
+ 
+ static inline int fscrypt_file_open(struct inode *inode, struct file *filp)
+diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+index 59c71fa8c553..e8bbdaea4a49 100644
+--- a/include/uapi/linux/fs.h
++++ b/include/uapi/linux/fs.h
+@@ -224,7 +224,17 @@ struct fsxattr {
+ #define FS_POLICY_FLAGS_PAD_32		0x03
+ #define FS_POLICY_FLAGS_PAD_MASK	0x03
+ #define FS_POLICY_FLAG_DIRECT_KEY	0x04	/* use master key directly */
+-#define FS_POLICY_FLAGS_VALID		0x07
++#define FS_POLICY_FLAGS_VALID_BASE	0x07
++
++#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
++#define FS_POLICY_FLAGS_HW_ENCRYPTION	0x08
++#else
++#define FS_POLICY_FLAGS_HW_ENCRYPTION	0x00
++#endif
++
++
++#define FS_POLICY_FLAGS_VALID (FS_POLICY_FLAGS_VALID_BASE | \
++			       FS_POLICY_FLAGS_HW_ENCRYPTION)
+ 
+ /* Encryption algorithms */
+ #define FS_ENCRYPTION_MODE_INVALID		0
 -- 
 2.22.0.rc1.311.g5d7573a151-goog
 
