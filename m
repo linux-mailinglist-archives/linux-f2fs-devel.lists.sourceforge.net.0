@@ -2,93 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E3E43701C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2019 11:38:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21163377E3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2019 17:30:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hYoqu-0000Z5-Rx; Thu, 06 Jun 2019 09:38:32 +0000
+	id 1hYuLi-0000os-E3; Thu, 06 Jun 2019 15:30:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stummala@codeaurora.org>) id 1hYoqt-0000Yu-NY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Jun 2019 09:38:32 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1hYuLh-0000oe-5t
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Jun 2019 15:30:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EpM0hncBhCbNW87vPgxFlMl8MkRRWcXptJbG+FdULdA=; b=HFfSgkyOux1kYLyK1mg/C7OQif
- bnh9KOIVCNAQoJdIMRxxVzjgPJKPFHWjLiiNcMk7UqmjjkKtK7YaxV6JQZ8bjICqZ4Rmy55j+P6V/
- RTEnLsUgql/5caK6Hlcf2eerfsM+kswwyjgMDufPAeLiGtvlrMgsty6aMKIYE1H5zWCw=;
+ bh=F9Pe8iiITRC+INv7Pb3oZ7h6kOB6KWbAP6291TG+Zps=; b=ds5BcHozR8G8lbe6BbbulamZD+
+ Lex2JWAdrqbdE3ayluRUg2x2A5VdZ8V890f7zxD171XNmtKB8BNYwhqMwv3Q1A/YJvL6zOv3vyiCM
+ UUoyVtstXo26h+7HvIP3DSVCj5Zt66B1j2TS2Bqb6i7PiwzM18DjplfqmadDvaz6E6nU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EpM0hncBhCbNW87vPgxFlMl8MkRRWcXptJbG+FdULdA=; b=BauJC9FFXY9HvaMQ3qktlvIZM+
- s9z3O+YZVnsUX8OB6J9FwNQqjewOIj997lARwrt+8DnTXvPla5GgIyCF4QI+Y0D2RnRHq3pzx5G+S
- OuZZmwV4c8rEC6w2n125KsjN0vyJTTyUCDB8nBBSKKoeHReD8anfN8zkuV440YWGPNpI=;
-Received: from smtp.codeaurora.org ([198.145.29.96])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=F9Pe8iiITRC+INv7Pb3oZ7h6kOB6KWbAP6291TG+Zps=; b=KX1tHKQIwc3GAw372O8zX3JnpV
+ x7HvBLajQTM2poxVyoaxT47Bt3QiGGk0xVcxCaHH2/dF7aRb64oxd85G45ApteZHnyzEQ1Yvfk/ki
+ oHKDkJX04Y4Tqd0cySiPguNp3AYJhSEba7Hy0Ewlffnrld9UIkbNLRnxbD4GgYj0JZcU=;
+Received: from aserp2130.oracle.com ([141.146.126.79])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hYoqs-00CvXw-Gd
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Jun 2019 09:38:31 +0000
-Received: by smtp.codeaurora.org (Postfix, from userid 1000)
- id 8F3836044E; Thu,  6 Jun 2019 09:38:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1559813904;
- bh=tsqL//XVJSyHPsn4WnbGr5Qz0DMSjGS8jSJVKedC0gA=;
- h=From:To:Cc:Subject:Date:From;
- b=g7fnb/zhTz/exA2ecO/+qVG4B7WFy4UzhxYZr3rIkg6w9Nn3h7mfU4NSYmFlH16D6
- eLBg6HARf3cEifaVGm5kv9fU5ZnbAjNvJSS/l2RX0JTwh4iO/0RXIBGC0EGL19rFKh
- J0cZg9qFglVCw/uurYFaJf5FObBPn0R/4UD8USN0=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- pdx-caf-mail.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_INVALID,DKIM_SIGNED,SPF_NONE autolearn=no autolearn_force=no
- version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: stummala@smtp.codeaurora.org)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id E43CF60255;
- Thu,  6 Jun 2019 09:38:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1559813903;
- bh=tsqL//XVJSyHPsn4WnbGr5Qz0DMSjGS8jSJVKedC0gA=;
- h=From:To:Cc:Subject:Date:From;
- b=HZaFc5gRGbuyS+uPsJOXHvLIc16i7lWVrelWKdHiOZCIZaJ4IaH5XQmk2kk0ESAPW
- U+3D/41cvMHrA6AUO1xd2+JccF7soEZuOWpO6yUNgcetn9eBp4GSHHLtMFujXvIc5i
- HI5X7MWbx0zNSxgpjkLk03sMqLf1mXFd5is10zpc=
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org E43CF60255
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  6 Jun 2019 15:08:13 +0530
-Message-Id: <1559813893-23452-1-git-send-email-stummala@codeaurora.org>
-X-Mailer: git-send-email 1.9.1
+ id 1hYuLe-005MGd-Ag
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Jun 2019 15:30:40 +0000
+Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
+ by aserp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x56FSllQ173914;
+ Thu, 6 Jun 2019 15:30:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2018-07-02;
+ bh=F9Pe8iiITRC+INv7Pb3oZ7h6kOB6KWbAP6291TG+Zps=;
+ b=woOcfrQufGMFhDFP1y2RTDa8qUN6eNckHuSAFHtdE26srtOt4qwqJPE//u5Pe/aQ7fXU
+ bkobW/2YdeqgCFqkeX2bu74Ebm9h14iWXDCWVA9No3CqnPeaYRHM1RFpdUGfnLBo0Zkk
+ Pnp7OgOVY4gpO9KBEyWkfSlGz7Ym8DNL5+WKIGG1hbVuA9N110w9x8hY8m/KKPM+6MZu
+ QQMR+zsS64u8AQB+Xf6oogPTnDXzIS0p6F3+IBDC0pz47ReV33SX4HW83RiGjrjb9sJm
+ 9oK/sL9/Qj1elqbpYh8a6fzRHeWKph10G7AgtIEgthb7919AMfjJ9gpHOVe2ay9sZ6Wf AQ== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by aserp2130.oracle.com with ESMTP id 2suevdsfxa-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 06 Jun 2019 15:30:26 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x56FT4ex139851;
+ Thu, 6 Jun 2019 15:30:25 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by userp3030.oracle.com with ESMTP id 2swngmjmnn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 06 Jun 2019 15:30:25 +0000
+Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x56FUOAI023747;
+ Thu, 6 Jun 2019 15:30:24 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Thu, 06 Jun 2019 08:30:24 -0700
+Date: Thu, 6 Jun 2019 08:30:21 -0700
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: Wang Shilong <wangshilong1991@gmail.com>
+Message-ID: <20190606153021.GA1700170@magnolia>
+References: <1559795545-17290-1-git-send-email-wshilong1991@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <1559795545-17290-1-git-send-email-wshilong1991@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9280
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1810050000 definitions=main-1906060105
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9280
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906060106
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1hYoqs-00CvXw-Gd
-Subject: [f2fs-dev] [PATCH] f2fs: fix is_idle() check for discard type
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ -0.0 T_DKIMWL_WL_HIGH       DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hYuLe-005MGd-Ag
+Subject: Re: [f2fs-dev] [PATCH 1/2] ext4: only set project inherit bit for
+ directory
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,62 +117,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
-MIME-Version: 1.0
+Cc: Andreas Dilger <adilger@dilger.ca>, linux-ext4@vger.kernel.org,
+ Wang Shilong <wshilong@ddn.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The discard thread should issue upto dpolicy->max_requests at once
-and wait for all those discard requests at once it reaches
-dpolicy->max_requests. It should then sleep for dpolicy->min_interval
-timeout before issuing the next batch of discard requests. But in the
-current code of is_idle(), it checks for dcc_info->queued_discard and
-aborts issuing the discard batch of max_requests. This
-dcc_info->queued_discard will be true always once one discard command
-is issued.
+On Thu, Jun 06, 2019 at 01:32:24PM +0900, Wang Shilong wrote:
+> From: Wang Shilong <wshilong@ddn.com>
+> 
+> It doesn't make any sense to have project inherit bits
+> for regular files, even though this won't cause any
+> problem, but it is better fix this.
+> 
+> Cc: Andreas Dilger <adilger@dilger.ca>
+> Signed-off-by: Wang Shilong <wshilong@ddn.com>
 
-It is thus resulting into this type of discard request pattern -
+It's good to be maintaining consistent behavior with XFS.
 
-- Issue discard request#1
-- is_idle() returns false, discard thread waits for request#1 and then
-  sleeps for min_interval 50ms.
-- Issue discard request#2
-- is_idle() returns false, discard thread waits for request#2 and then
-  sleeps for min_interval 50ms.
-- and so on for all other discard requests, assuming f2fs is idle w.r.t
-  other conditions.
+Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
 
-With this fix, the pattern will look like this -
+(applies to both ext4 & f2fs patches)
 
-- Issue discard request#1
-- Issue discard request#2
-  and so on upto max_requests of 8
-- Issue discard request#8
-- wait for min_interval 50ms.
+--D
 
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
----
- fs/f2fs/f2fs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 95adedb..ea34fef 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2209,7 +2209,7 @@ static inline bool is_idle(struct f2fs_sb_info *sbi, int type)
- 		get_pages(sbi, F2FS_DIO_WRITE))
- 		return false;
- 
--	if (SM_I(sbi) && SM_I(sbi)->dcc_info &&
-+	if (type != DISCARD_TIME && SM_I(sbi) && SM_I(sbi)->dcc_info &&
- 			atomic_read(&SM_I(sbi)->dcc_info->queued_discard))
- 		return false;
- 
--- 
-Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
-
+> ---
+>  fs/ext4/ext4.h | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
+> index 1cb67859e051..ceb74093e138 100644
+> --- a/fs/ext4/ext4.h
+> +++ b/fs/ext4/ext4.h
+> @@ -421,7 +421,8 @@ struct flex_groups {
+>  			   EXT4_PROJINHERIT_FL | EXT4_CASEFOLD_FL)
+>  
+>  /* Flags that are appropriate for regular files (all but dir-specific ones). */
+> -#define EXT4_REG_FLMASK (~(EXT4_DIRSYNC_FL | EXT4_TOPDIR_FL | EXT4_CASEFOLD_FL))
+> +#define EXT4_REG_FLMASK (~(EXT4_DIRSYNC_FL | EXT4_TOPDIR_FL | EXT4_CASEFOLD_FL |\
+> +			   EXT4_PROJINHERIT_FL))
+>  
+>  /* Flags that are appropriate for non-directories/regular files. */
+>  #define EXT4_OTHER_FLMASK (EXT4_NODUMP_FL | EXT4_NOATIME_FL)
+> -- 
+> 2.21.0
+> 
 
 
 _______________________________________________
