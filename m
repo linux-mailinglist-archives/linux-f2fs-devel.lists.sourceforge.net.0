@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 341DB46FF6
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 15 Jun 2019 14:41:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 274234700F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 15 Jun 2019 14:57:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hc7zV-0007wC-GL; Sat, 15 Jun 2019 12:41:05 +0000
+	id 1hc8Ff-0002UQ-Sn; Sat, 15 Jun 2019 12:57:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hc7zU-0007vv-Ll
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Jun 2019 12:41:04 +0000
+ (envelope-from <tytso@mit.edu>) id 1hc8Fe-0002UH-ET
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Jun 2019 12:57:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6oHWWYJIlqMoCUi8v72ntGpRXxXOTpwjNDuTBEbaxdw=; b=cRVf8yW1tYjY41BQHQE6ifp9ms
- BXa0KpIJ6Egsot3dlv10tJ6vvEnuCSyZN9jL4CNwPTVtOLHiO/gjQN7uQKcqqVs2e4SljWdoekFMy
- yYsYJP2LQs0DGXjWnbrvjoQbjq+WJSN2/hk8y7uBWzhHoZ+OsWwv7+h8D+AVbDlI2xrw=;
+ bh=6QcU/umXcetbwZjIIBHnh75TA30pZfdg6hUgtoFwrcA=; b=G46fWvr9Gx4cO661SRF2B9R5h4
+ IQnoJAScVIh9A2k5Ev/PpxtHlfCJUjEWCKD1EqiwIDEPjOLCVOWm30X84NRva5YeTj/6fT1PWCV1f
+ oFH/x2kE0Ta6a6ZKUeh0DmvTzvtARlaChAGT0VJzFy3HSoc8983JmlWgtN2o+NN7RUnQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,40 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6oHWWYJIlqMoCUi8v72ntGpRXxXOTpwjNDuTBEbaxdw=; b=mdcFnK+GzsJTa3Ub029aMdbTiJ
- /+y3WDWRpm1bmzAZIcpRHbsR9IghqoOUn0B3+8h4Q4DxCsmNEQu+N/I4dmweoKUZgVzoWRXw3mbpb
- jxEiRJ3ixFIxE0cd708Ky7Q1gHD+tdRniI0Yu0XHvc0FVPmiHnvPkPrDLP6Fd3GHHtr0=;
+ bh=6QcU/umXcetbwZjIIBHnh75TA30pZfdg6hUgtoFwrcA=; b=LU43LQCG4w9ioeRRi+6PbTjPfn
+ xqmSUg7aR8lIz8UNGFvoYOCNQ5wdGg7aOWqYQSaOqlobYEf5nPlN+iSwCZOI+O2F/PRtXnUZFObaE
+ kIcVAPbrp1tMwBTLEOIHNXoatyn2HnQRTZ1Sz7iL6T2vahZSS+/gg+A6RPRWRh9ZkzkI=;
 Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hc7zS-00FJcD-22
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Jun 2019 12:41:03 +0000
+ id 1hc8Fd-00EwpE-67
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Jun 2019 12:57:46 +0000
 Received: from callcc.thunk.org (rrcs-74-87-88-165.west.biz.rr.com
  [74.87.88.165]) (authenticated bits=0)
  (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x5FCemMs031646
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x5FCvWOZ003473
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sat, 15 Jun 2019 08:40:49 -0400
+ Sat, 15 Jun 2019 08:57:33 -0400
 Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 94DF5420484; Sat, 15 Jun 2019 08:40:48 -0400 (EDT)
-Date: Sat, 15 Jun 2019 08:40:48 -0400
+ id 0D4F8420484; Sat, 15 Jun 2019 08:57:32 -0400 (EDT)
+Date: Sat, 15 Jun 2019 08:57:31 -0400
 From: "Theodore Ts'o" <tytso@mit.edu>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190615124048.GE6142@mit.edu>
+Message-ID: <20190615125731.GF6142@mit.edu>
 References: <20190606155205.2872-1-ebiggers@kernel.org>
- <20190606155205.2872-5-ebiggers@kernel.org>
+ <20190606155205.2872-6-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190606155205.2872-5-ebiggers@kernel.org>
+In-Reply-To: <20190606155205.2872-6-ebiggers@kernel.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hc7zS-00FJcD-22
-Subject: Re: [f2fs-dev] [PATCH v4 04/16] fs: uapi: define verity bit for
- FS_IOC_GETFLAGS
+X-Headers-End: 1hc8Fd-00EwpE-67
+Subject: Re: [f2fs-dev] [PATCH v4 05/16] fs-verity: add Kconfig and the
+ helper functions for hashing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,22 +84,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 06, 2019 at 08:51:53AM -0700, Eric Biggers wrote:
+On Thu, Jun 06, 2019 at 08:51:54AM -0700, Eric Biggers wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Add FS_VERITY_FL to the flags for FS_IOC_GETFLAGS, so that applications
-> can easily determine whether a file is a verity file at the same time as
-> they're checking other file flags.  This flag will be gettable only;
-> FS_IOC_SETFLAGS won't allow setting it, since an ioctl must be used
-> instead to provide more parameters.
-> 
-> This flag matches the on-disk bit that was already allocated for ext4.
+> Add the beginnings of the fs/verity/ support layer, including the
+> Kconfig option and various helper functions for hashing.  To start, only
+> SHA-256 is supported, but other hash algorithms can easily be added.
 > 
 > Signed-off-by: Eric Biggers <ebiggers@google.com>
 
 Looks good; you can add:
 
 Reviewed-off-by: Theodore Ts'o <tytso@mit.edu>
+
+One thought for consideration below...
+
+
+> +
+> +/*
+> + * Maximum depth of the Merkle tree.  Up to 64 levels are theoretically possible
+> + * with a very small block size, but we'd like to limit stack usage during
+> + * verification, and in practice this is plenty.  E.g., with SHA-256 and 4K
+> + * blocks, a file with size UINT64_MAX bytes needs just 8 levels.
+> + */
+> +#define FS_VERITY_MAX_LEVELS		16
+
+Maybe we should make FS_VERITY_MAX_LEVELS 8 for now?  This is an
+implementation-level restriction, and currently we don't support any
+architectures that have a page size < 4k.  We can always bump this
+number up in the future if it ever becomes necessary, and limiting max
+levels to 8 saves almost 100 bytes of stack space in verify_page().
 
 						- Ted
 
