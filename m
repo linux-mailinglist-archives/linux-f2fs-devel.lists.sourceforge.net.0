@@ -2,104 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C212497BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2019 05:20:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:Date:Message-ID:To:Sender:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=GuBJ6Qstncl6AXEnpzXCZHYf4WRypVgr8uSwjGSaJxw=; b=L/PMpbllj0ItezGPzFUO78Fa+A
-	N5LSUq3S+cOFrdGj7gUf7opJWul5CRFNas7frFmOcQ+ivJcBcsDeqfpE1VVLYVjPW2qB575BrTLY9
-	F6yFYib7Kvhd5QfRyHKzUKWlSaDz9+niAMYkg5fJ9LHkpfknM1N56EWiLaUbREadwwk0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D8EE4996D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2019 08:53:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hd4fI-0002wK-5j; Tue, 18 Jun 2019 03:20:08 +0000
+	id 1hd7zT-0003pC-Ba; Tue, 18 Jun 2019 06:53:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <fbm@hotelpromenade.co.id>) id 1hd4fD-0002vh-NX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 03:20:03 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hd7zS-0003p5-B2
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 06:53:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:Date:
- Message-ID:Subject:To:From:Sender:Reply-To:Cc:MIME-Version:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=; b=JJDw8/zodFAL//kMKT/jNdAYX4
- Q6jqCfNxAuxVoVtZ0vsHeNdsxLrYHvyhHpxrdvkfgaTw+u5Rvinp0sE2gCRzsdIaDT4J8xtMDSJaG
- Uu0cPQ2unaDaw/Oo3u2br2VYvNGvzD+JWXufgfSOWlQSMB6IOVVZDf6fHxL2sGYexUIM=;
+ bh=mKAJ8bs3SK4ZiaPsCeqkhwf3lgDCpgqRGcVYmBCbjSs=; b=R5Vfp3up3ELAZAEqGoSIerdWJp
+ Fa/zNAJNLqqvQi+UU0FPCBXr8bA7HkCt33F/XyvPZvM3EX6MQK78YiVo/DsMHOozwF66NqXlfqgky
+ SvXJiMrgpbTqGB0/bYGK2b6EGS2MKmoz4HEwQcyYhEpqLjFlLt83Xt5lcbGjDs/cUXyQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:Date:Message-ID:Subject:To:From:
- Sender:Reply-To:Cc:MIME-Version:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=; b=H
- H4nzq14EpOAsZVTUtzxbFoH+lfDncBqxSVttjBR1G9Sj6OWrWeSH+mOa2SFol6d0h9loQL63INBjt
- frU3nfOF64m4MukZuA1UH42+Qv9jt90qjAd5VU/mUqdRtSAxyqv21Ays2ACqH3sEUk7bYPUQ27lvv
- 8EDUdTpKOoMidHkg=;
-Received: from mail.hotelpromenade.co.id ([139.255.78.134])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=mKAJ8bs3SK4ZiaPsCeqkhwf3lgDCpgqRGcVYmBCbjSs=; b=YDoMwuLXLjqnhKWlC09I5uAv76
+ hhh8Q+AkTVHDy53yI4FMLj0BbTSfaO2XOn2ic8o1aFDwitGCfFxICBCH+fQP+ngez5yTz3XbWigpu
+ Tq0MXdfJ4bsLUQW8iUIlG7wx4Fbhezlz9hHNk67oxOCLvRpo+ZS4k5IUFTQaaN+SHLqE=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hd4f2-002bE9-Nm
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 03:20:01 +0000
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.hotelpromenade.co.id (Postfix) with ESMTP id 44E46388D33
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
-Received: from mail.hotelpromenade.co.id ([127.0.0.1])
- by localhost (mail.hotelpromenade.co.id [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id bMOcUzBSwEwW
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.hotelpromenade.co.id (Postfix) with ESMTP id 151C8388D34
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.hotelpromenade.co.id 151C8388D34
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hotelpromenade.co.id; s=A6760A4A-457D-11E8-A230-5E06A42B8C43;
- t=1560827098; bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=;
- h=From:To:Message-ID:Date;
- b=BRD8KlxtCaxiX3nR/Gk53mehvB36Nby36CJwwtHeKH2p0i9rb1WN25xOE0RBbEaU0
- KUKpF23GTjlLNQmDTM8uWoQrGeWj5iPcEmLy4Nwp0IBxrUjnxdjP2tTTau/NIOtz9B
- lMrsHiloWOU4iWCoMBWPoMIWQ40wxnlrBrYY0rXxRsvRZzlQ1rUBlKNLMp/es6d45g
- bnDSd8ZWWFL7SBceo2tLGC4sq0GO4309MZIpxhxKxsmivWbA4v3NNqk6Q1oO0GP0eC
- aV0A2+rhJ/Vy1A3q3Zugm/ANOemG/kUJZkmudtPgW2q0uUXsYrmcklEa9SWQONz6tv
- UZ/trFNEyRMTQ==
-X-Virus-Scanned: amavisd-new at mail.hotelpromenade.co.id
-Received: from mail.hotelpromenade.co.id ([127.0.0.1])
- by localhost (mail.hotelpromenade.co.id [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id E6ErRPrBgOUc
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
-Received: from [127.0.0.1] (197-76-100-131.internetcentral.com.br
- [131.100.76.197])
- by mail.hotelpromenade.co.id (Postfix) with ESMTPSA id E4E7A388D32
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jun 2019 10:04:54 +0700 (WIB)
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <1A6A7692.D2AC4690F5895D20@hotelpromenade.co.id>
-X-Priority: 3
-Importance: Normal
-Date: Tue, 18 Jun 2019 06:02:59 +0300
-X-Mailer: Infraware POLARIS Mobile Mailer v2.5
-X-Spam-Score: 2.9 (++)
+ id 1hd7zL-002TOL-CO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 06:53:07 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id E923A710DB5D263C6E86;
+ Tue, 18 Jun 2019 14:52:55 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 18 Jun
+ 2019 14:52:53 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20190530033115.16853-1-jaegeuk@kernel.org>
+ <20190530175714.GB28719@jaegeuk-macbookpro.roam.corp.google.com>
+ <20190604183619.GA8507@jaegeuk-macbookpro.roam.corp.google.com>
+ <2afe0416-fe2d-8ba8-7625-0246aca9eba6@huawei.com>
+ <20190614024655.GA18113@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <6f70ae56-45eb-666d-ae55-48eb0cc96f32@huawei.com>
+Date: Tue, 18 Jun 2019 14:52:52 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20190614024655.GA18113@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 3.0 BITCOIN_DEADLINE       BitCoin with a deadline
-X-Headers-End: 1hd4f2-002bE9-Nm
-Subject: [f2fs-dev] Security Notice. Someone have access to your system.
+X-Headers-End: 1hd7zL-002TOL-CO
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add a rw_sem to cover quota flag
+ changes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,49 +78,281 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: fbm--- via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: fbm@hotelpromenade.co.id
-MIME-Version: 1.0
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello!
+On 2019/6/14 10:46, Jaegeuk Kim wrote:
+> On 06/11, Chao Yu wrote:
+>> On 2019/6/5 2:36, Jaegeuk Kim wrote:
+>>> Two paths to update quota and f2fs_lock_op:
+>>>
+>>> 1.
+>>>  - lock_op
+>>>  |  - quota_update
+>>>  `- unlock_op
+>>>
+>>> 2.
+>>>  - quota_update
+>>>  - lock_op
+>>>  `- unlock_op
+>>>
+>>> But, we need to make a transaction on quota_update + lock_op in #2 case.
+>>> So, this patch introduces:
+>>> 1. lock_op
+>>> 2. down_write
+>>> 3. check __need_flush
+>>> 4. up_write
+>>> 5. if there is dirty quota entries, flush them
+>>> 6. otherwise, good to go
+>>>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>>
+>>> v3 from v2:
+>>>  - refactor to fix quota corruption issue
+>>>   : it seems that the previous scenario is not real and no deadlock case was
+>>>     encountered.
+>>
+>> - f2fs_dquot_commit
+>>  - down_read(&sbi->quota_sem)
+>> 					- block_operation
+>> 					 - f2fs_lock_all
+>> 					  - need_flush_quota
+>> 					   - down_write(&sbi->quota_sem)
+>>   - f2fs_quota_write
+>>    - f2fs_lock_op
+>>
+>> Why can't this happen?
+>>
+>> Once more question, should we hold quota_sem during checkpoint to avoid further
+>> quota update? f2fs_lock_op can do this job as well?
+> 
+> I couldn't find write_dquot() call to make this happen, and f2fs_lock_op was not
 
-I am a hacker who has access to your operating system.
-I also have full access to your account.
+- f2fs_dquot_commit
+ - dquot_commit
+  ->commit_dqblk (v2_write_dquot)
+   - qtree_write_dquot
+    ->quota_write (f2fs_quota_write)
+     - f2fs_lock_op
 
-I've been watching you for a few months now.
-The fact is that you were infected with malware through an adult site that you visited.
+Do you mean there is no such way that calling f2fs_lock_op() from
+f2fs_quota_write()? So that deadlock condition is not existing?
 
-If you are not familiar with this, I will explain.
-Trojan Virus gives me full access and control over a computer or other device.
-This means that I can see everything on your screen, turn on the camera and microphone, but you do not know about it.
+Thanks,
 
-I also have access to all your contacts and all your correspondence.
-
-Why your antivirus did not detect malware?
-Answer: My malware uses the driver, I update its signatures every 4 hours so that your antivirus is silent.
-
-I made a video showing how you satisfy yourself in the left half of the screen, and in the right half you see the video that you watched.
-With one click of the mouse, I can send this video to all your emails and contacts on social networks.
-I can also post access to all your e-mail correspondence and messengers that you use.
-
-If you want to prevent this,
-transfer the amount of $600 to my bitcoin address (if you do not know how to do this, write to Google: "Buy Bitcoin").
-
-My bitcoin address (BTC Wallet) is:  39U4zmmjLCedwJBv8eLbjqJLzqXTKNp3qD
-
-After receiving the payment, I will delete the video and you will never hear me again.
-I give you 50 hours (more than 2 days) to pay.
-I have a notice reading this letter, and the timer will work when you see this letter.
-
-Filing a complaint somewhere does not make sense because this email cannot be tracked like my bitcoin address.
-I do not make any mistakes.
-
-If I find that you have shared this message with someone else, the video will be immediately distributed.
-
-Best regards!
+> enough to cover quota updates. Current stress & power-cut tests are running for
+> several days without problem with this patch.
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>>  fs/f2fs/checkpoint.c | 41 +++++++++++++++++++----------------------
+>>>  fs/f2fs/f2fs.h       |  1 +
+>>>  fs/f2fs/super.c      | 26 +++++++++++++++++++++-----
+>>>  3 files changed, 41 insertions(+), 27 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>>> index 89825261d474..43f65f0962e5 100644
+>>> --- a/fs/f2fs/checkpoint.c
+>>> +++ b/fs/f2fs/checkpoint.c
+>>> @@ -1131,17 +1131,24 @@ static void __prepare_cp_block(struct f2fs_sb_info *sbi)
+>>>  
+>>>  static bool __need_flush_quota(struct f2fs_sb_info *sbi)
+>>>  {
+>>> +	bool ret = false;
+>>> +
+>>>  	if (!is_journalled_quota(sbi))
+>>>  		return false;
+>>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH))
+>>> -		return false;
+>>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR))
+>>> -		return false;
+>>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_FLUSH))
+>>> -		return true;
+>>> -	if (get_pages(sbi, F2FS_DIRTY_QDATA))
+>>> -		return true;
+>>> -	return false;
+>>> +
+>>> +	down_write(&sbi->quota_sem);
+>>> +	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH)) {
+>>> +		ret = false;
+>>> +	} else if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR)) {
+>>> +		ret = false;
+>>> +	} else if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_FLUSH)) {
+>>> +		clear_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+>>> +		ret = true;
+>>> +	} else if (get_pages(sbi, F2FS_DIRTY_QDATA)) {
+>>> +		ret = true;
+>>> +	}
+>>> +	up_write(&sbi->quota_sem);
+>>> +	return ret;
+>>>  }
+>>>  
+>>>  /*
+>>> @@ -1160,26 +1167,22 @@ static int block_operations(struct f2fs_sb_info *sbi)
+>>>  	blk_start_plug(&plug);
+>>>  
+>>>  retry_flush_quotas:
+>>> +	f2fs_lock_all(sbi);
+>>>  	if (__need_flush_quota(sbi)) {
+>>>  		int locked;
+>>>  
+>>>  		if (++cnt > DEFAULT_RETRY_QUOTA_FLUSH_COUNT) {
+>>>  			set_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH);
+>>> -			f2fs_lock_all(sbi);
+>>> +			set_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+>>>  			goto retry_flush_dents;
+>>>  		}
+>>> -		clear_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+>>> +		f2fs_unlock_all(sbi);
+>>>  
+>>>  		/* only failed during mount/umount/freeze/quotactl */
+>>>  		locked = down_read_trylock(&sbi->sb->s_umount);
+>>>  		f2fs_quota_sync(sbi->sb, -1);
+>>>  		if (locked)
+>>>  			up_read(&sbi->sb->s_umount);
+>>> -	}
+>>> -
+>>> -	f2fs_lock_all(sbi);
+>>> -	if (__need_flush_quota(sbi)) {
+>>> -		f2fs_unlock_all(sbi);
+>>>  		cond_resched();
+>>>  		goto retry_flush_quotas;
+>>>  	}
+>>> @@ -1201,12 +1204,6 @@ static int block_operations(struct f2fs_sb_info *sbi)
+>>>  	 */
+>>>  	down_write(&sbi->node_change);
+>>>  
+>>> -	if (__need_flush_quota(sbi)) {
+>>> -		up_write(&sbi->node_change);
+>>> -		f2fs_unlock_all(sbi);
+>>> -		goto retry_flush_quotas;
+>>> -	}
+>>> -
+>>>  	if (get_pages(sbi, F2FS_DIRTY_IMETA)) {
+>>>  		up_write(&sbi->node_change);
+>>>  		f2fs_unlock_all(sbi);
+>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>> index 9674a85154b2..9bd2bf0f559b 100644
+>>> --- a/fs/f2fs/f2fs.h
+>>> +++ b/fs/f2fs/f2fs.h
+>>> @@ -1253,6 +1253,7 @@ struct f2fs_sb_info {
+>>>  	block_t unusable_block_count;		/* # of blocks saved by last cp */
+>>>  
+>>>  	unsigned int nquota_files;		/* # of quota sysfile */
+>>> +	struct rw_semaphore quota_sem;		/* blocking cp for flags */
+>>>  
+>>>  	/* # of pages, see count_type */
+>>>  	atomic_t nr_pages[NR_COUNT_TYPE];
+>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>> index 15d7e30bfc72..5a318399a2fa 100644
+>>> --- a/fs/f2fs/super.c
+>>> +++ b/fs/f2fs/super.c
+>>> @@ -1964,6 +1964,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
+>>>  	int cnt;
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_writeback_dquots(sb, type);
+>>>  	if (ret)
+>>>  		goto out;
+>>> @@ -2001,6 +2002,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
+>>>  out:
+>>>  	if (ret)
+>>>  		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>> @@ -2094,32 +2096,40 @@ static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
+>>>  
+>>>  static int f2fs_dquot_commit(struct dquot *dquot)
+>>>  {
+>>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_commit(dquot);
+>>>  	if (ret < 0)
+>>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+>>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>>  static int f2fs_dquot_acquire(struct dquot *dquot)
+>>>  {
+>>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_acquire(dquot);
+>>>  	if (ret < 0)
+>>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+>>> -
+>>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>>  static int f2fs_dquot_release(struct dquot *dquot)
+>>>  {
+>>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_release(dquot);
+>>>  	if (ret < 0)
+>>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+>>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>> @@ -2129,22 +2139,27 @@ static int f2fs_dquot_mark_dquot_dirty(struct dquot *dquot)
+>>>  	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_mark_dquot_dirty(dquot);
+>>>  
+>>>  	/* if we are using journalled quota */
+>>>  	if (is_journalled_quota(sbi))
+>>>  		set_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+>>>  
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>>  static int f2fs_dquot_commit_info(struct super_block *sb, int type)
+>>>  {
+>>> +	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+>>>  	int ret;
+>>>  
+>>> +	down_read(&sbi->quota_sem);
+>>>  	ret = dquot_commit_info(sb, type);
+>>>  	if (ret < 0)
+>>> -		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+>>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+>>> +	up_read(&sbi->quota_sem);
+>>>  	return ret;
+>>>  }
+>>>  
+>>> @@ -3253,6 +3268,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>>>  	}
+>>>  
+>>>  	init_rwsem(&sbi->cp_rwsem);
+>>> +	init_rwsem(&sbi->quota_sem);
+>>>  	init_waitqueue_head(&sbi->cp_wait);
+>>>  	init_sb_info(sbi);
+>>>  
+>>>
+> .
+> 
 
 
 _______________________________________________
