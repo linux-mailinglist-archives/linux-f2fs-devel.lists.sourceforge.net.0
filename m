@@ -2,64 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDB7D491F8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jun 2019 23:09:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C212497BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2019 05:20:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:Date:Message-ID:To:Sender:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=GuBJ6Qstncl6AXEnpzXCZHYf4WRypVgr8uSwjGSaJxw=; b=L/PMpbllj0ItezGPzFUO78Fa+A
+	N5LSUq3S+cOFrdGj7gUf7opJWul5CRFNas7frFmOcQ+ivJcBcsDeqfpE1VVLYVjPW2qB575BrTLY9
+	F6yFYib7Kvhd5QfRyHKzUKWlSaDz9+niAMYkg5fJ9LHkpfknM1N56EWiLaUbREadwwk0=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hcys7-0003h2-Em; Mon, 17 Jun 2019 21:08:59 +0000
+	id 1hd4fI-0002wK-5j; Tue, 18 Jun 2019 03:20:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hcys6-0003gv-84
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Jun 2019 21:08:58 +0000
+ (envelope-from <fbm@hotelpromenade.co.id>) id 1hd4fD-0002vh-NX
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 03:20:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:Date:
+ Message-ID:Subject:To:From:Sender:Reply-To:Cc:MIME-Version:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/9b7wXVelhjGhniMNY4h33cEeghhCIlSnIEemgxanTM=; b=jhQi6EoJ/zZk3gsBSG7xi1AmPZ
- zwo5CY4B1Gmr2vuic8q7SR5G+c/Xenpfwehj7cYphJ7ReeGIyaCv4L6RxC11tF8moBRMGThnOc7JD
- ebRaHFRAsdpwgJ6UvXJsy46HVmP+0o29g50UZ6m4tNWCDpqDfITIQRNey1AE8coJ3Zl4=;
+ bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=; b=JJDw8/zodFAL//kMKT/jNdAYX4
+ Q6jqCfNxAuxVoVtZ0vsHeNdsxLrYHvyhHpxrdvkfgaTw+u5Rvinp0sE2gCRzsdIaDT4J8xtMDSJaG
+ Uu0cPQ2unaDaw/Oo3u2br2VYvNGvzD+JWXufgfSOWlQSMB6IOVVZDf6fHxL2sGYexUIM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/9b7wXVelhjGhniMNY4h33cEeghhCIlSnIEemgxanTM=; b=enJAGINJGaj9SL73Qwn+nC3FTK
- zPmLuTvXf/l/tP2TG0SlY8Z0QNa+xDT9DNGREJj250LQnl55Y3+Y4Tl10bXMQx27PI8p39jz1Dijg
- vJ5ZN+Ams4ISWM4gh9Nc+26EFDfvP/V0shRSfo93CCdatBwqPxOojdYcrK9rrLa/dw40=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:Date:Message-ID:Subject:To:From:
+ Sender:Reply-To:Cc:MIME-Version:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=; b=H
+ H4nzq14EpOAsZVTUtzxbFoH+lfDncBqxSVttjBR1G9Sj6OWrWeSH+mOa2SFol6d0h9loQL63INBjt
+ frU3nfOF64m4MukZuA1UH42+Qv9jt90qjAd5VU/mUqdRtSAxyqv21Ays2ACqH3sEUk7bYPUQ27lvv
+ 8EDUdTpKOoMidHkg=;
+Received: from mail.hotelpromenade.co.id ([139.255.78.134])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hcys3-001jw2-31
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Jun 2019 21:08:58 +0000
-Received: from localhost (unknown [104.132.1.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 11D5220861;
- Mon, 17 Jun 2019 21:08:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1560805729;
- bh=6w8yrWjqkeTzBpJ7KVJUZlACUNkm5omGdqQehZb4gN8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZnEWK6U1mwJYufDZy7rIPD9pbHmJfim2W495iQX2+WxMR31nYtsHaNBKjW34ZtRot
- +DdWvqpp4vDhCUFl65AmV5plp3YKBLVjdflqSaMjFojgKuHqsfl4IXofLsH1m3us5F
- iZ8z7Qb0fcLm0mdkpSJbZdV078HcjsRTIAjEhxzI=
-Date: Mon, 17 Jun 2019 14:08:48 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20190617210848.GB57907@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190518004751.18962-1-jaegeuk@kernel.org>
- <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
-User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.1 (/)
+ id 1hd4f2-002bE9-Nm
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 03:20:01 +0000
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.hotelpromenade.co.id (Postfix) with ESMTP id 44E46388D33
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
+Received: from mail.hotelpromenade.co.id ([127.0.0.1])
+ by localhost (mail.hotelpromenade.co.id [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id bMOcUzBSwEwW
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.hotelpromenade.co.id (Postfix) with ESMTP id 151C8388D34
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.hotelpromenade.co.id 151C8388D34
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=hotelpromenade.co.id; s=A6760A4A-457D-11E8-A230-5E06A42B8C43;
+ t=1560827098; bh=qconJxnsFOvKw9VaPgv7hA3XyW7S9e4LCo76+iXmffY=;
+ h=From:To:Message-ID:Date;
+ b=BRD8KlxtCaxiX3nR/Gk53mehvB36Nby36CJwwtHeKH2p0i9rb1WN25xOE0RBbEaU0
+ KUKpF23GTjlLNQmDTM8uWoQrGeWj5iPcEmLy4Nwp0IBxrUjnxdjP2tTTau/NIOtz9B
+ lMrsHiloWOU4iWCoMBWPoMIWQ40wxnlrBrYY0rXxRsvRZzlQ1rUBlKNLMp/es6d45g
+ bnDSd8ZWWFL7SBceo2tLGC4sq0GO4309MZIpxhxKxsmivWbA4v3NNqk6Q1oO0GP0eC
+ aV0A2+rhJ/Vy1A3q3Zugm/ANOemG/kUJZkmudtPgW2q0uUXsYrmcklEa9SWQONz6tv
+ UZ/trFNEyRMTQ==
+X-Virus-Scanned: amavisd-new at mail.hotelpromenade.co.id
+Received: from mail.hotelpromenade.co.id ([127.0.0.1])
+ by localhost (mail.hotelpromenade.co.id [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id E6ErRPrBgOUc
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 10:04:58 +0700 (WIB)
+Received: from [127.0.0.1] (197-76-100-131.internetcentral.com.br
+ [131.100.76.197])
+ by mail.hotelpromenade.co.id (Postfix) with ESMTPSA id E4E7A388D32
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 10:04:54 +0700 (WIB)
+To: linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <1A6A7692.D2AC4690F5895D20@hotelpromenade.co.id>
+X-Priority: 3
+Importance: Normal
+Date: Tue, 18 Jun 2019 06:02:59 +0300
+X-Mailer: Infraware POLARIS Mobile Mailer v2.5
+X-Spam-Score: 2.9 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,10 +97,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hcys3-001jw2-31
-Subject: Re: [f2fs-dev] [PATCH v2] loop: avoid EAGAIN,
- if offset or block_size are changed
+ 3.0 BITCOIN_DEADLINE       BitCoin with a deadline
+X-Headers-End: 1hd4f2-002bE9-Nm
+Subject: [f2fs-dev] Security Notice. Someone have access to your system.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,150 +111,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- Bart Van Assche <bvanassche@acm.org>, stable@vger.kernel.org
+From: fbm--- via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: fbm@hotelpromenade.co.id
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jens,
+Hello!
 
-Any chance to get a review for this?
+I am a hacker who has access to your operating system.
+I also have full access to your account.
 
-(Added Tested-by:)
+I've been watching you for a few months now.
+The fact is that you were infected with malware through an adult site that you visited.
 
-On 05/17, Jaegeuk Kim wrote:
-> This patch tries to avoid EAGAIN due to nrpages!=0 that was originally trying
-> to drop stale pages resulting in wrong data access.
-> 
-> Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
-> 
-> Cc: <stable@vger.kernel.org>
-> Cc: Jens Axboe <axboe@kernel.dk>
-> Cc: linux-block@vger.kernel.org
-> Cc: Bart Van Assche <bvanassche@acm.org>
-> Fixes: 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
-> Reported-by: Gwendal Grignou <gwendal@chromium.org>
-> Reported-by: grygorii tertychnyi <gtertych@cisco.com>
+If you are not familiar with this, I will explain.
+Trojan Virus gives me full access and control over a computer or other device.
+This means that I can see everything on your screen, turn on the camera and microphone, but you do not know about it.
 
-Tested-by: Francesco Ruggeri <fruggeri@arista.com>
+I also have access to all your contacts and all your correspondence.
 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
-> v2 from v1:
->  - remove obsolete jump
-> 
->  drivers/block/loop.c | 45 +++++++++++++++++---------------------------
->  1 file changed, 17 insertions(+), 28 deletions(-)
-> 
-> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-> index 102d79575895..42994de2dd12 100644
-> --- a/drivers/block/loop.c
-> +++ b/drivers/block/loop.c
-> @@ -1212,6 +1212,7 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  	kuid_t uid = current_uid();
->  	struct block_device *bdev;
->  	bool partscan = false;
-> +	bool drop_caches = false;
->  
->  	err = mutex_lock_killable(&loop_ctl_mutex);
->  	if (err)
-> @@ -1232,10 +1233,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  	}
->  
->  	if (lo->lo_offset != info->lo_offset ||
-> -	    lo->lo_sizelimit != info->lo_sizelimit) {
-> -		sync_blockdev(lo->lo_device);
-> -		kill_bdev(lo->lo_device);
-> -	}
-> +	    lo->lo_sizelimit != info->lo_sizelimit)
-> +		drop_caches = true;
->  
->  	/* I/O need to be drained during transfer transition */
->  	blk_mq_freeze_queue(lo->lo_queue);
-> @@ -1265,14 +1264,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  
->  	if (lo->lo_offset != info->lo_offset ||
->  	    lo->lo_sizelimit != info->lo_sizelimit) {
-> -		/* kill_bdev should have truncated all the pages */
-> -		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
-> -			err = -EAGAIN;
-> -			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
-> -				__func__, lo->lo_number, lo->lo_file_name,
-> -				lo->lo_device->bd_inode->i_mapping->nrpages);
-> -			goto out_unfreeze;
-> -		}
->  		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
->  			err = -EFBIG;
->  			goto out_unfreeze;
-> @@ -1317,6 +1308,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  		bdev = lo->lo_device;
->  		partscan = true;
->  	}
-> +
-> +	/* truncate stale pages cached by previous operations */
-> +	if (!err && drop_caches) {
-> +		sync_blockdev(lo->lo_device);
-> +		kill_bdev(lo->lo_device);
-> +	}
->  out_unlock:
->  	mutex_unlock(&loop_ctl_mutex);
->  	if (partscan)
-> @@ -1498,6 +1495,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
->  
->  static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
->  {
-> +	bool drop_caches = false;
->  	int err = 0;
->  
->  	if (lo->lo_state != Lo_bound)
-> @@ -1506,30 +1504,21 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
->  	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
->  		return -EINVAL;
->  
-> -	if (lo->lo_queue->limits.logical_block_size != arg) {
-> -		sync_blockdev(lo->lo_device);
-> -		kill_bdev(lo->lo_device);
-> -	}
-> +	if (lo->lo_queue->limits.logical_block_size != arg)
-> +		drop_caches = true;
->  
->  	blk_mq_freeze_queue(lo->lo_queue);
-> -
-> -	/* kill_bdev should have truncated all the pages */
-> -	if (lo->lo_queue->limits.logical_block_size != arg &&
-> -			lo->lo_device->bd_inode->i_mapping->nrpages) {
-> -		err = -EAGAIN;
-> -		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
-> -			__func__, lo->lo_number, lo->lo_file_name,
-> -			lo->lo_device->bd_inode->i_mapping->nrpages);
-> -		goto out_unfreeze;
-> -	}
-> -
->  	blk_queue_logical_block_size(lo->lo_queue, arg);
->  	blk_queue_physical_block_size(lo->lo_queue, arg);
->  	blk_queue_io_min(lo->lo_queue, arg);
->  	loop_update_dio(lo);
-> -out_unfreeze:
->  	blk_mq_unfreeze_queue(lo->lo_queue);
->  
-> +	/* truncate stale pages cached by previous operations */
-> +	if (drop_caches) {
-> +		sync_blockdev(lo->lo_device);
-> +		kill_bdev(lo->lo_device);
-> +	}
->  	return err;
->  }
->  
-> -- 
-> 2.19.0.605.g01d371f741-goog
-> 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Why your antivirus did not detect malware?
+Answer: My malware uses the driver, I update its signatures every 4 hours so that your antivirus is silent.
+
+I made a video showing how you satisfy yourself in the left half of the screen, and in the right half you see the video that you watched.
+With one click of the mouse, I can send this video to all your emails and contacts on social networks.
+I can also post access to all your e-mail correspondence and messengers that you use.
+
+If you want to prevent this,
+transfer the amount of $600 to my bitcoin address (if you do not know how to do this, write to Google: "Buy Bitcoin").
+
+My bitcoin address (BTC Wallet) is:  39U4zmmjLCedwJBv8eLbjqJLzqXTKNp3qD
+
+After receiving the payment, I will delete the video and you will never hear me again.
+I give you 50 hours (more than 2 days) to pay.
+I have a notice reading this letter, and the timer will work when you see this letter.
+
+Filing a complaint somewhere does not make sense because this email cannot be tracked like my bitcoin address.
+I do not make any mistakes.
+
+If I find that you have shared this message with someone else, the video will be immediately distributed.
+
+Best regards!
 
 
 _______________________________________________
