@@ -2,80 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDCBB4AECD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Jun 2019 01:41:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB6534AF78
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Jun 2019 03:28:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hdNjZ-00079L-9A; Tue, 18 Jun 2019 23:41:49 +0000
+	id 1hdPP8-0000fx-Pq; Wed, 19 Jun 2019 01:28:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hdNjX-00079D-FD
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 23:41:47 +0000
+ (envelope-from <kassey1216@gmail.com>) id 1hdPP7-0000fi-IR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 01:28:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:Subject:Message-ID:Date:From:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3ZpRHdZbj/YSjofA1ykjqa7zath8AHHGOaBpe9ZI2KU=; b=N1BqRWgWlzuDqYV7ZuhaVbKS9f
- B8uWnRBgjaxD5HmV6fxBQfxyHayl+8/5Es91lS9lPjUsruAIorg5Xis4tZoIsryDDQn8ZFWoBqEs3
- RFM7j1smAOBVvhXoC3oYSP62hYUa4cRDYX3Spt5c8R+fE4KGLAnDhg8Xg79ooRQJTxIU=;
+ bh=96RvJEfG+k8hrSiE8jkURjf6ZeK+2iz7GDHsoqd+9MM=; b=MYARlPfmNUFNBVBzcfH9XDJG+D
+ u7LuowyS0CKI3dwqB1WPukW7Gk4HROk5AvKKi2fNl8cPnm7F/lLBf/MtJC+4n3eqGMhoZ50EiXAYW
+ /BrHfqBnWmQoZe5hiISkPAIMmt/PW/Zy4z2/fEUjkbK+5h+pe6H7rImvtetzRzOnNpW4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=3ZpRHdZbj/YSjofA1ykjqa7zath8AHHGOaBpe9ZI2KU=; b=Ct+8+n9CT8RFHUOtWJL4tnwrNz
- Qd6sxryr8huuQ63wrN35Kpg2zeWyW9yNWYV1qLrciwMVXv0axtZQvwHtMc8u9h7+xc/hh6RvJ1Wft
- rEXtPRKsm1ZXxDBUNwlbHqaBXm5jw0cpDqgmGWr69if9CHgE8oGW0HnvHvCVjSsqGztk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hdNjT-003jFU-Bc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Jun 2019 23:41:44 +0000
-Received: from gmail.com (unknown [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 73DD02080C;
- Tue, 18 Jun 2019 23:41:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1560901296;
- bh=JUDJyewBHmFtJkoI2vLr2zAbbPh3Fi6hkTWf+B7Ew6k=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZbYloxi7MOCwuUvW/nmSNQZQ4Yhb20pBMzG/c2xaN6MJitN9K2us5Gw4T3cJw3X1U
- xKnS6g1e8Cs7JWs0JdapN0ScnIMO+xV2wC5UiIyCkPxIGeuGoU3/c0RZDuRi6CptYJ
- x5eKyG+F+TZX/hs0+P92wWoWZFqhpXb876Nl1Y94=
-Date: Tue, 18 Jun 2019 16:41:34 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Theodore Ts'o <tytso@mit.edu>
-Message-ID: <20190618234133.GL184520@gmail.com>
-References: <20190606155205.2872-1-ebiggers@kernel.org>
- <20190606155205.2872-15-ebiggers@kernel.org>
- <20190615153112.GO6142@mit.edu> <20190618175117.GF184520@gmail.com>
- <20190618224615.GB4576@mit.edu>
+ h=Content-Type:To:Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=96RvJEfG+k8hrSiE8jkURjf6ZeK+2iz7GDHsoqd+9MM=; b=a
+ BT0WCsQizPRhavt0+K7vZIXHrEQ2auwO5DGVeERaj44ZKzA1/1yxsnmkwb9/WDq3jVyKoiXKIr5Xn
+ Tws8Ph6kbiYj9D0E8e/xv95gWnFBB2hpkM6BlaMdSufOX845VayMaATmlp8qWGWd0BH3VyIIEMvu6
+ Vk9OhU7XHqy69gSs=;
+Received: from mail-ot1-f48.google.com ([209.85.210.48])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hdPP3-004E7E-Ed
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 01:28:49 +0000
+Received: by mail-ot1-f48.google.com with SMTP id i8so17541483oth.10
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Jun 2019 18:28:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=96RvJEfG+k8hrSiE8jkURjf6ZeK+2iz7GDHsoqd+9MM=;
+ b=OTDOJpyQ5KxKnhjOtSdRd3Ipg2OczCiCfCzpeHdxaQbtC50/mRsAkeb1nYm/CLxxxx
+ BJTWqZu0shCRlaIPGeVxdL2GFPkuOJG9aI5TZbpua2SPwLT+X37J8yLka9HLGDZrH21d
+ DLzov62/vOahZyJy2Qg/ctrE0uABB1uof353uKpw/NEWdenH03LHz3lqr81+ao+Y2Whn
+ vI3GPRQQc9ZUBp919TNXQCg3mJnOLUg67td+QVJvsFOOdHigQmXgn1a+exQ7IYKc8mrV
+ xwSsHzfTNIqSncMRGKSFQ2p90Fq9InMG7RiSXjdpgicvJa9ULnCM2pRUAf8Y2ypwqaQ3
+ CDDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=96RvJEfG+k8hrSiE8jkURjf6ZeK+2iz7GDHsoqd+9MM=;
+ b=dBBn50Pq3IMKJo0mtYm1QGmawqMuSyI3/VqOiq3a2TS+PsfZU7fq0r/gZRUDSD7tDi
+ y2PA8Zx4neAKfGi72wKaaAnkm1WUXenK6BZRQkELFvf0ovNWtG99NySwYFrF4G7bHt6s
+ ph45l41MG+YNFKm/41l8D5GluWLfkoDZbKDPY8EMv0KQm/6tLS3HvMfUzVTKv3kM8rnd
+ kBPlW+AqCvyQUyYL0sYC8K1gsUyyXBdDBLBpWbYx5zbxwB/RLJPLxxkx/fvATkV+N5a6
+ mKcJqjZvkEV6bdBSRtmRfQy7oxaoak+7yegQ9r/RL7Q6/EZDkgBpP87/VVxZco8F4kCw
+ nKnw==
+X-Gm-Message-State: APjAAAVW7tBV+KBr+SJ6f6O81qXXygybI1M8Tzp/Szv6Fb760MDYk+J2
+ 8j76bkVvCQE60BATHDIUggCqq3xhsl3T/ZZSCrOfF0X4
+X-Google-Smtp-Source: APXvYqwJFemHOZ6951TYnRmlzCgGcGJAhqynQ2dpOcgqEZcG4siRCIlLCOKryaaFM5IBQfb6TyUf3aCIniui1kpJEnM=
+X-Received: by 2002:a9d:66c8:: with SMTP id t8mr9895921otm.94.1560907719530;
+ Tue, 18 Jun 2019 18:28:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190618224615.GB4576@mit.edu>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 3.7 (+++)
+From: Kassey <kassey1216@gmail.com>
+Date: Wed, 19 Jun 2019 09:28:28 +0800
+Message-ID: <CAKwPUoyvn6mjEw=DfPTpLBZy-NQvtd8fpjfpwRRGMvqshB5gxw@mail.gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net, Chao Yu <yuchao0@huawei.com>, 
+ Jaegeuk Kim <jaegeuk@kernel.org>, kassey@126.com
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 3.8 FSL_HELO_FAKE          No description available.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (kassey1216[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.48 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (kassey1216[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hdNjT-003jFU-Bc
-Subject: Re: [f2fs-dev] [PATCH v4 14/16] ext4: add basic fs-verity support
+X-Headers-End: 1hdPP3-004E7E-Ed
+Subject: [f2fs-dev] f2fs: wait_on_all_pages_writeback 4.4 kernel
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,130 +99,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J . Wong" <darrick.wong@oracle.com>, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-integrity@vger.kernel.org,
- linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
- Christoph Hellwig <hch@lst.de>, Victor Hsieh <victorhsieh@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 18, 2019 at 06:46:15PM -0400, Theodore Ts'o wrote:
-> On Tue, Jun 18, 2019 at 10:51:18AM -0700, Eric Biggers wrote:
-> > On Sat, Jun 15, 2019 at 11:31:12AM -0400, Theodore Ts'o wrote:
-> > > On Thu, Jun 06, 2019 at 08:52:03AM -0700, Eric Biggers wrote:
-> > > > +/*
-> > > > + * Format of ext4 verity xattr.  This points to the location of the verity
-> > > > + * descriptor within the file data rather than containing it directly because
-> > > > + * the verity descriptor *must* be encrypted when ext4 encryption is used.  But,
-> > > > + * ext4 encryption does not encrypt xattrs.
-> > > > + */
-> > > > +struct fsverity_descriptor_location {
-> > > > +	__le32 version;
-> > > > +	__le32 size;
-> > > > +	__le64 pos;
-> > > > +};
-> > > 
-> > > What's the benefit of storing the location in an xattr as opposed to
-> > > just keying it off the end of i_size, rounded up to next page size (or
-> > > 64k) as I had suggested earlier?
-> > > 
-> > > Using an xattr burns xattr space, which is a limited resource, and it
-> > > adds some additional code complexity.  Does the benefits outweigh the
-> > > added complexity?
-> > > 
-> > > 						- Ted
-> > 
-> > It means that only the fs/verity/ support layer has to be aware of the format of
-> > the fsverity_descriptor, and the filesystem can just treat it an as opaque blob.
-> > 
-> > Otherwise the filesystem would need to read the first 'sizeof(struct
-> > fsverity_descriptor)' bytes and use those to calculate the size as
-> > 'sizeof(struct fsverity_descriptor) + le32_to_cpu(desc.sig_size)', then read the
-> > rest.  Is this what you have in mind?
-> 
-> So right now, the way enable_verity() works is that it appends the
-> Merkle tree to the data file, rounding up to the next page (but we
-> might change so we round up to the next 64k boundary).  Then it calls
-> end_enable_verity(), which is a file system specific function, passing
-> in the descriptor and the descriptor size.
-> 
-> Today ext4 and f2fs appends the descriptor after the Merkle, and then
-> sets the xattr containing the fsverity_descriptor_location.  Correct?
+hi, Chao and team:
+   we got dump on arm64 that showing a task is sleep on
+wait_on_all_pages_writeback
+  by checking the sbi->nr_pages, we can see that the value is negative
+for F2FS_WB_CP_DATA
+  caused the problem to wait .
 
-That's all correct, except that enable_verity() itself doesn't know or care that
-the Merkle tree is being appended to the file.  That's up to the
-->write_merkle_tree_block() and ->read_merkle_tree_page() methods which are
-filesystem-specific.
+  can you help to suggest if any reasaon that we are seeing negative
+value here  ?
 
-> 
-> What I'm suggesting that ext4 do instead is that it appends the
-> descriptor to the Merkle tree, and then assuming that there is the
-> (descriptor size % block_size) is less than PAGE_SIZE-4, we can write
-> the descriptor size into the last 4 bytes of the last block in the
-> file.  If there is not enough space at the end of the descriptor, then
-> we append a block to the file, and then write the descriptor_size into
-> last 4 bytes of that block.
-> 
-> When ext4 needs to find the descriptor, it simply reads the last block
-> from the file, reads it into the page cache, reads the last 4 bytes
-> from that block to fetch the descriptor size, and it can use the
-> logical offset of the last block and the descriptor size to calculate
-> the beginning offset of the descriptor size.
-> 
-> We can then fake up the fsverity_descriptor_location structure, and
-> pass that into fsverity.
-> 
-> It does add a bit of extra complexity, but 99.9% of the time, it
-> requires no extra space.  The last 0.098% of the time, the file size
-> will grow by 4k, but if we can avoid spilling over to an external
-> xattr block, it will all be worth it.
-> 
-> And in the V1 version of the fsverity code, I had already written the
-> code to descend the extent tree to find the last logical block in the
-> extent tree.
-> 
+nr_pages = (
+        (counter = 0),
+        (counter = 30005),
+        (counter = 0),
+        (counter = 79),
+        (counter = 0),
+        (counter = 0),
+        (counter = 9),
+        (counter = -6),
+        (counter = 6)),
 
-I don't think your proposed solution is so simple.  By definition the last
-extent ends on a filesystem block boundary, while the Merkle tree ends on a
-Merkle tree block boundary.  In the future we might support the case where these
-differ, so we don't want to preclude that in the on-disk format we choose now.
-Therefore, just storing the desc_size isn't enough; we'd actually have to store
-(desc_pos, desc_size), like I'm doing in the xattr.
 
-Also, using ext4_find_extent() to find the last mapped block (as the v1 and v2
-patchsets did) assumes the file actually uses extents.  So we'd have to forbid
-non-extents based files as a special case, as the v2 patchset did.  We'd also
-have to find a way to implement the same functionality on f2fs (which should be
-possible, but it seems it would require some new code; there's nothing like
-f2fs_get_extent()) unless we did something different for f2fs.
+-000|__switch_to(prev = 0xFFFFFFF74A1F8EC0, next = 0xFFFFFFF8B2C21D80)
+-001|__schedule(preempt = FALSE)
+-002|need_resched(inline)
+-002|schedule()
+-003|schedule_timeout(?)
+-004|get_current(inline)
+-004|io_schedule_timeout(timeout = 0x01F4)
+-005|get_pages(inline)
+-005|wait_on_all_pages_writeback(sbi = 0xFFFFFFF7A7323000)
+-006|do_checkpoint(sbi = 0xFFFFFFF7A7323000, cpc = 0xFFFFFFF760C43C28)
+-007|f2fs_write_checkpoint(sbi = 0xFFFFFFF7A7323000, cpc = 0xFFFFFFF760C43C28)
+-008|f2fs_sync_fs(sb = 0xFFFFFFF887139800, ?)
+-009|f2fs_do_sync_file(?, ?, ?, datasync = 0x0, atomic = TRUE)
+-010|is_inode_flag_set(inline)
+-010|f2fs_is_atomic_file(inline)
+-010|f2fs_ioc_commit_atomic_write(inline)
+-010|f2fs_ioctl(filp = 0xFFFFFFF811E4E3C0, ?, ?)
+-011|f2fs_compat_ioctl(file = 0xFFFFFFF811E4E3C0, ?, ?)
+-012|compat_sys_ioctl(fd = 0xA7, cmd = 0xF502, ?)
+-013|oppo_root_check(asm)
+-014|__sys_trace(asm)
+-015|NSX:0xFFFFFFBFFE7FC7C0(asm)
+ -->|exception
+-016|NUR:0xEDD8236C(asm)
+ ---|end of frame
 
-Note that on Android devices (the motivating use case for fs-verity), the xattrs
-of user data files on ext4 already spill into an external xattr block, due to
-the fscrypt and SELinux xattrs.  If/when people actually start caring about
-this, they'll need to increase the inode size to 512 bytes anyway, in which case
-there will be plenty of space for a few more in-line xattrs.  So I don't think
-we should jump through too many hoops to avoid using an xattr.
 
-> > It's also somewhat nice to have the version number in the xattr, in case we ever
-> > introduce a new fs-verity format for ext4 or f2fs.
-> 
-> We already have a version number in the fsverity descriptor.  Surely
-> that is what we would bump if we need to itnroduce a new fs-verity
-> format?
-> 
 
-I'm talking about if we ever wanted to make a filesystem-specific change to
-where the verity metadata is stored.  That's what the version number in the
-filesystem-specific xattr is for.  The version number in the fsverity_descriptor
-is different: that's for if we made a change to fs-verity for *all* filesystems.
-We hopefully won't ever need the filesystem-specific version number, but as long
-as we have to store the (desc_pos, desc_size) anyway, I think it's wise to add a
-version number just in case; it doesn't really cost anything.
 
-- Eric
+
+-- 
+Best regards
+Kassey
 
 
 _______________________________________________
