@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1DE54B050
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Jun 2019 05:05:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29FCC4BF9D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Jun 2019 19:27:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hdQuu-00072m-P8; Wed, 19 Jun 2019 03:05:44 +0000
+	id 1hdeMQ-0003pW-9c; Wed, 19 Jun 2019 17:27:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hdQut-00072f-5i
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 03:05:43 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hdeMP-0003pQ-Uy
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 17:27:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kfOJNKn5L42t6JV/uOUUWCnuOchSOhTE4YESkrP06JI=; b=QD33TCnboaEzhrm4y+bPrWtzi8
- 1mABEn+gOrV5pqeWQipV17EQwoOCUAQLZ7nuhsfP248Vyh3peAgeirE0ON2pAaK5rpFHqj+ruvQjB
- BbfOSXNdG8wHwDTvPHfC6Yl7Ecwwcb0ZeHJNkTEwbi4wIY3efgDg8h5jQ7SBPnDMibJ8=;
+ bh=qg7vqqEu5wx1+h20Eu5gEMTrEXfkOdiO5QAOr4fib+Y=; b=GUSxEU/QxRZ5dHyYC7RuX3uwYJ
+ 4V6dQGHqST+MpkkYcz33kGw9/WI23tGfuGpYqRTTGSUyILvwwtypAC8Gjh4jByH0cN7XIdUaP4qSo
+ f2txxZHNrIVWEsWq4/OjDEytO1mq+vfF3z+LB9Myg64STxdrj16mQp7aBeAzyBcie9Ps=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,40 +29,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kfOJNKn5L42t6JV/uOUUWCnuOchSOhTE4YESkrP06JI=; b=ejxrOcaZFDhW/o9k74eS289HMo
- /AHWnWGxa6+m6IS4pHvbuxJ1Dqbxz81WIjLW0LlOXv3YCC53ySiwio73K1FFecM/bR9lHE/fH7SpK
- /g00QUkpplGJQQV+5KGgmYQJAoeVM9vfja7b8h4NYDYnkLMZxCAc/LoNTv9YQ6TjLBiQ=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=qg7vqqEu5wx1+h20Eu5gEMTrEXfkOdiO5QAOr4fib+Y=; b=PvSxG98ex6scgM1Bbf7dIPGSFN
+ yNb9Zxkr1ZxNQhwhNyk24oy41id4GYE9T8Bt2B4QX/VUwPI+zul4YowQTE3I3E5cjJHaiavGttX14
+ Wwvd27KGD8+bLhMCKlG+diZf/NijFQ1qoehBJd3tr0FTVMx4JXXUr0hscns0gPcmPJyo=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hdQur-004MnX-86
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 03:05:42 +0000
-Received: from callcc.thunk.org ([66.31.38.53]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x5J35NPK021631
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Jun 2019 23:05:24 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id C0BD1420484; Tue, 18 Jun 2019 23:05:22 -0400 (EDT)
-Date: Tue, 18 Jun 2019 23:05:22 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190619030522.GA28351@mit.edu>
-References: <20190606155205.2872-1-ebiggers@kernel.org>
- <20190606155205.2872-15-ebiggers@kernel.org>
- <20190615153112.GO6142@mit.edu> <20190618175117.GF184520@gmail.com>
- <20190618224615.GB4576@mit.edu> <20190618234133.GL184520@gmail.com>
+ id 1hdeML-005Q8O-UY
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Jun 2019 17:27:02 +0000
+Received: from localhost (unknown [104.132.1.68])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 37DFF206E0;
+ Wed, 19 Jun 2019 17:26:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1560965212;
+ bh=8bh3w2Vs1+YZlthHXqB+I4yIpLr4PFrBIvFc48ukKQc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=p8T34l1qzNRxaBLG6S2x53nqOxkBTEZrqDasiAL3Ybhh/rIYj3hz75iQiwqAC7M4c
+ 9xxr+wpinzQId/anSUudoFMIuBrxV+OTgFM30rBgVnTuP5cIDkVTTsQ2Bk+hwUp0pK
+ UNKXV91/RZudPY7Pq2f5Fg9M6OJQB9QdirUM/gx8=
+Date: Wed, 19 Jun 2019 10:26:51 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190619172651.GB57884@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190530033115.16853-1-jaegeuk@kernel.org>
+ <20190530175714.GB28719@jaegeuk-macbookpro.roam.corp.google.com>
+ <20190604183619.GA8507@jaegeuk-macbookpro.roam.corp.google.com>
+ <2afe0416-fe2d-8ba8-7625-0246aca9eba6@huawei.com>
+ <20190614024655.GA18113@jaegeuk-macbookpro.roam.corp.google.com>
+ <6f70ae56-45eb-666d-ae55-48eb0cc96f32@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190618234133.GL184520@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <6f70ae56-45eb-666d-ae55-48eb0cc96f32@huawei.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hdQur-004MnX-86
-Subject: Re: [f2fs-dev] [PATCH v4 14/16] ext4: add basic fs-verity support
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hdeML-005Q8O-UY
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add a rw_sem to cover quota flag
+ changes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,80 +88,286 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J . Wong" <darrick.wong@oracle.com>, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-integrity@vger.kernel.org,
- linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
- Christoph Hellwig <hch@lst.de>, Victor Hsieh <victorhsieh@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 18, 2019 at 04:41:34PM -0700, Eric Biggers wrote:
+On 06/18, Chao Yu wrote:
+> On 2019/6/14 10:46, Jaegeuk Kim wrote:
+> > On 06/11, Chao Yu wrote:
+> >> On 2019/6/5 2:36, Jaegeuk Kim wrote:
+> >>> Two paths to update quota and f2fs_lock_op:
+> >>>
+> >>> 1.
+> >>>  - lock_op
+> >>>  |  - quota_update
+> >>>  `- unlock_op
+> >>>
+> >>> 2.
+> >>>  - quota_update
+> >>>  - lock_op
+> >>>  `- unlock_op
+> >>>
+> >>> But, we need to make a transaction on quota_update + lock_op in #2 case.
+> >>> So, this patch introduces:
+> >>> 1. lock_op
+> >>> 2. down_write
+> >>> 3. check __need_flush
+> >>> 4. up_write
+> >>> 5. if there is dirty quota entries, flush them
+> >>> 6. otherwise, good to go
+> >>>
+> >>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> >>> ---
+> >>>
+> >>> v3 from v2:
+> >>>  - refactor to fix quota corruption issue
+> >>>   : it seems that the previous scenario is not real and no deadlock case was
+> >>>     encountered.
+> >>
+> >> - f2fs_dquot_commit
+> >>  - down_read(&sbi->quota_sem)
+> >> 					- block_operation
+> >> 					 - f2fs_lock_all
+> >> 					  - need_flush_quota
+> >> 					   - down_write(&sbi->quota_sem)
+> >>   - f2fs_quota_write
+> >>    - f2fs_lock_op
+> >>
+> >> Why can't this happen?
+> >>
+> >> Once more question, should we hold quota_sem during checkpoint to avoid further
+> >> quota update? f2fs_lock_op can do this job as well?
+> > 
+> > I couldn't find write_dquot() call to make this happen, and f2fs_lock_op was not
 > 
-> I don't think your proposed solution is so simple.  By definition the last
-> extent ends on a filesystem block boundary, while the Merkle tree ends on a
-> Merkle tree block boundary.  In the future we might support the case where these
-> differ, so we don't want to preclude that in the on-disk format we choose now.
-> Therefore, just storing the desc_size isn't enough; we'd actually have to store
-> (desc_pos, desc_size), like I'm doing in the xattr.
+> - f2fs_dquot_commit
+>  - dquot_commit
+>   ->commit_dqblk (v2_write_dquot)
+>    - qtree_write_dquot
+>     ->quota_write (f2fs_quota_write)
+>      - f2fs_lock_op
+> 
+> Do you mean there is no such way that calling f2fs_lock_op() from
+> f2fs_quota_write()? So that deadlock condition is not existing?
 
-I don't think any of this matters much, since what you're describing
-above is all about the Merkle tree, and that doesn't affect how we
-find the fsverity descriptor information.  We can just say that
-fsverity descriptor block begins on the next file system block
-boundary after the Merkle tree.  And in the case where say, the Merkle
-tree is 4k and the file system block size is 64k, that's fine --- the
-fs descriptor would just begin at the next 64k (fs blocksize)
-boundary.
+I mean write_dquot->f2fs_dquot_commit and block_operation seems not racing
+together.
 
-> Also, using ext4_find_extent() to find the last mapped block (as the v1 and v2
-> patchsets did) assumes the file actually uses extents.  So we'd have to forbid
-> non-extents based files as a special case, as the v2 patchset did.  We'd also
-> have to find a way to implement the same functionality on f2fs (which should be
-> possible, but it seems it would require some new code; there's nothing like
-> f2fs_get_extent()) unless we did something different for f2fs.
-
-So first, if f2fs wants to continue using the xattr, that's fine.  The
-code to write and fetch the fsverity descriptor is in file system
-specific code, and so this is something I'm happy to support just for
-ext4, and it shouldn't require any special changes in the common
-fsverity code at all.  Secondly, I suspect it's not *that* hard to
-find the last logical block mapping in f2fs, but I'll let Jaeguk
-comment on that.
-
-Finally, it's not that hard to find the last mapped block for indirect
-blocks, if we really care about supporting that combination.  (There
-are enough other things --- like fallocate --- which don't work with
-indirect mapped files, so I don't feel especially bad forbidding that
-combination.  A quick check in enable_verity() to return EOPNOTSUPP if
-the EXTENTS_FL flag is not present is not all that different from what
-we do with fallocate today.)
-
-But if we *did* want to support it, it's actually quite easy to find
-the last mapped block for an indirect mapped inode.  I just didn't
-bother to write the code, but it requires at most 3 block reads if
-there is a triple indirection block.  Otherwise, if there is a double
-indirection block in the inode, it requires at most 2 block reads, and
-otherwise, at most a single block read.
-
-> Note that on Android devices (the motivating use case for fs-verity), the xattrs
-> of user data files on ext4 already spill into an external xattr block, due to
-> the fscrypt and SELinux xattrs.  If/when people actually start caring about
-> this, they'll need to increase the inode size to 512 bytes anyway, in which case
-> there will be plenty of space for a few more in-line xattrs.  So I don't think
-> we should jump through too many hoops to avoid using an xattr.
-
-I'm thinking about other cases where we might not be using fscrypt,
-but where we might still be using fsverity and SELinux --- or maybe
-cases where the file systems are using 128 byte inodes, and where only
-fsverity is required.  (There are a *vast* number of production file
-systems using 128 byte inodes.)
-
-Cheers,
-
-						- Ted
+> 
+> Thanks,
+> 
+> > enough to cover quota updates. Current stress & power-cut tests are running for
+> > several days without problem with this patch.
+> > 
+> >>
+> >> Thanks,
+> >>
+> >>>
+> >>>  fs/f2fs/checkpoint.c | 41 +++++++++++++++++++----------------------
+> >>>  fs/f2fs/f2fs.h       |  1 +
+> >>>  fs/f2fs/super.c      | 26 +++++++++++++++++++++-----
+> >>>  3 files changed, 41 insertions(+), 27 deletions(-)
+> >>>
+> >>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> >>> index 89825261d474..43f65f0962e5 100644
+> >>> --- a/fs/f2fs/checkpoint.c
+> >>> +++ b/fs/f2fs/checkpoint.c
+> >>> @@ -1131,17 +1131,24 @@ static void __prepare_cp_block(struct f2fs_sb_info *sbi)
+> >>>  
+> >>>  static bool __need_flush_quota(struct f2fs_sb_info *sbi)
+> >>>  {
+> >>> +	bool ret = false;
+> >>> +
+> >>>  	if (!is_journalled_quota(sbi))
+> >>>  		return false;
+> >>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH))
+> >>> -		return false;
+> >>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR))
+> >>> -		return false;
+> >>> -	if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_FLUSH))
+> >>> -		return true;
+> >>> -	if (get_pages(sbi, F2FS_DIRTY_QDATA))
+> >>> -		return true;
+> >>> -	return false;
+> >>> +
+> >>> +	down_write(&sbi->quota_sem);
+> >>> +	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH)) {
+> >>> +		ret = false;
+> >>> +	} else if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR)) {
+> >>> +		ret = false;
+> >>> +	} else if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_FLUSH)) {
+> >>> +		clear_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+> >>> +		ret = true;
+> >>> +	} else if (get_pages(sbi, F2FS_DIRTY_QDATA)) {
+> >>> +		ret = true;
+> >>> +	}
+> >>> +	up_write(&sbi->quota_sem);
+> >>> +	return ret;
+> >>>  }
+> >>>  
+> >>>  /*
+> >>> @@ -1160,26 +1167,22 @@ static int block_operations(struct f2fs_sb_info *sbi)
+> >>>  	blk_start_plug(&plug);
+> >>>  
+> >>>  retry_flush_quotas:
+> >>> +	f2fs_lock_all(sbi);
+> >>>  	if (__need_flush_quota(sbi)) {
+> >>>  		int locked;
+> >>>  
+> >>>  		if (++cnt > DEFAULT_RETRY_QUOTA_FLUSH_COUNT) {
+> >>>  			set_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH);
+> >>> -			f2fs_lock_all(sbi);
+> >>> +			set_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+> >>>  			goto retry_flush_dents;
+> >>>  		}
+> >>> -		clear_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+> >>> +		f2fs_unlock_all(sbi);
+> >>>  
+> >>>  		/* only failed during mount/umount/freeze/quotactl */
+> >>>  		locked = down_read_trylock(&sbi->sb->s_umount);
+> >>>  		f2fs_quota_sync(sbi->sb, -1);
+> >>>  		if (locked)
+> >>>  			up_read(&sbi->sb->s_umount);
+> >>> -	}
+> >>> -
+> >>> -	f2fs_lock_all(sbi);
+> >>> -	if (__need_flush_quota(sbi)) {
+> >>> -		f2fs_unlock_all(sbi);
+> >>>  		cond_resched();
+> >>>  		goto retry_flush_quotas;
+> >>>  	}
+> >>> @@ -1201,12 +1204,6 @@ static int block_operations(struct f2fs_sb_info *sbi)
+> >>>  	 */
+> >>>  	down_write(&sbi->node_change);
+> >>>  
+> >>> -	if (__need_flush_quota(sbi)) {
+> >>> -		up_write(&sbi->node_change);
+> >>> -		f2fs_unlock_all(sbi);
+> >>> -		goto retry_flush_quotas;
+> >>> -	}
+> >>> -
+> >>>  	if (get_pages(sbi, F2FS_DIRTY_IMETA)) {
+> >>>  		up_write(&sbi->node_change);
+> >>>  		f2fs_unlock_all(sbi);
+> >>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> >>> index 9674a85154b2..9bd2bf0f559b 100644
+> >>> --- a/fs/f2fs/f2fs.h
+> >>> +++ b/fs/f2fs/f2fs.h
+> >>> @@ -1253,6 +1253,7 @@ struct f2fs_sb_info {
+> >>>  	block_t unusable_block_count;		/* # of blocks saved by last cp */
+> >>>  
+> >>>  	unsigned int nquota_files;		/* # of quota sysfile */
+> >>> +	struct rw_semaphore quota_sem;		/* blocking cp for flags */
+> >>>  
+> >>>  	/* # of pages, see count_type */
+> >>>  	atomic_t nr_pages[NR_COUNT_TYPE];
+> >>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> >>> index 15d7e30bfc72..5a318399a2fa 100644
+> >>> --- a/fs/f2fs/super.c
+> >>> +++ b/fs/f2fs/super.c
+> >>> @@ -1964,6 +1964,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
+> >>>  	int cnt;
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_writeback_dquots(sb, type);
+> >>>  	if (ret)
+> >>>  		goto out;
+> >>> @@ -2001,6 +2002,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
+> >>>  out:
+> >>>  	if (ret)
+> >>>  		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>> @@ -2094,32 +2096,40 @@ static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
+> >>>  
+> >>>  static int f2fs_dquot_commit(struct dquot *dquot)
+> >>>  {
+> >>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_commit(dquot);
+> >>>  	if (ret < 0)
+> >>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+> >>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>>  static int f2fs_dquot_acquire(struct dquot *dquot)
+> >>>  {
+> >>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_acquire(dquot);
+> >>>  	if (ret < 0)
+> >>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+> >>> -
+> >>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>>  static int f2fs_dquot_release(struct dquot *dquot)
+> >>>  {
+> >>> +	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_release(dquot);
+> >>>  	if (ret < 0)
+> >>> -		set_sbi_flag(F2FS_SB(dquot->dq_sb), SBI_QUOTA_NEED_REPAIR);
+> >>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>> @@ -2129,22 +2139,27 @@ static int f2fs_dquot_mark_dquot_dirty(struct dquot *dquot)
+> >>>  	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_mark_dquot_dirty(dquot);
+> >>>  
+> >>>  	/* if we are using journalled quota */
+> >>>  	if (is_journalled_quota(sbi))
+> >>>  		set_sbi_flag(sbi, SBI_QUOTA_NEED_FLUSH);
+> >>>  
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>>  static int f2fs_dquot_commit_info(struct super_block *sb, int type)
+> >>>  {
+> >>> +	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> >>>  	int ret;
+> >>>  
+> >>> +	down_read(&sbi->quota_sem);
+> >>>  	ret = dquot_commit_info(sb, type);
+> >>>  	if (ret < 0)
+> >>> -		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+> >>> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> >>> +	up_read(&sbi->quota_sem);
+> >>>  	return ret;
+> >>>  }
+> >>>  
+> >>> @@ -3253,6 +3268,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+> >>>  	}
+> >>>  
+> >>>  	init_rwsem(&sbi->cp_rwsem);
+> >>> +	init_rwsem(&sbi->quota_sem);
+> >>>  	init_waitqueue_head(&sbi->cp_wait);
+> >>>  	init_sb_info(sbi);
+> >>>  
+> >>>
+> > .
+> > 
 
 
 _______________________________________________
