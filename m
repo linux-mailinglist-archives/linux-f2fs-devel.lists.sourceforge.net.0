@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13C764DCCB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2019 23:38:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1E434DCCA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2019 23:38:55 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1he4lg-0007ct-5b; Thu, 20 Jun 2019 21:38:52 +0000
+	id 1he4lg-0007cg-2i; Thu, 20 Jun 2019 21:38:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1he4lc-0007cD-Uv
+ (envelope-from <ebiggers@kernel.org>) id 1he4lc-0007c5-Ne
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jun 2019 21:38:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KSCqt7+1ZMtXMYGYqaGOnjDESjavvpMtiVaXOo0XVMo=; b=KDMVeJxT/PuhUZq33JPvT+ylEM
- DtxFwpOIFNcwL9cFEddkzvOL7hvG5CpEH8xKigZSdR38lHdJ9nXLi2IXkY5EYgTuMQJQFfpSyBdGj
- hT9Xgh/BSB2u9x0bCYHGHpeBF/MwFYR847oHroEUd4TKB5Q8kMk/GulyAV5coW1YakqI=;
+ bh=5tpFNgymtdd0t/szPGsWbXomEaQl2A2vxTP24KawZSA=; b=Phoh64ipuQ1E3R7umUx8gVz6Ra
+ DNC5rzV4Cexnjm/zIMOFqYdCW7i1ntoXYkL/YzlDVvK/Ijv7lE7MjsiB+A0YQr1mqA/SHaI/mkNHk
+ vg8xORv2Z3ETC3MSHpl58ghbW6z+6EHVfZMBYr71Kq79Dr6lFVSTFGYVhuGcV5G8rFs4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KSCqt7+1ZMtXMYGYqaGOnjDESjavvpMtiVaXOo0XVMo=; b=UWn5MXAEIVzdXLMh2nqUyxQ0XX
- 89HJuR4BbJW0IMrbzdTCBnNRmp4Fe5S8+QxCunhYqNo+J9F6T1G9oq+dgPcLuDPPKSBFXB+eAcs1d
- PoBBto9N7oG+DRJ0KKLSuJEjQebq3jw0t30Z2GKEM2HVEQTS1oKNWC76SqLwX3aSuvwk=;
+ bh=5tpFNgymtdd0t/szPGsWbXomEaQl2A2vxTP24KawZSA=; b=iTgzS9jULlsL3LEq7evCnNd5xI
+ XacAM3jANZ56H1jqobCOBotZP5f1CzNbSkhrDbtRjWlt6f+QbJlB1maZQ2QDNclOZI+/m3TG/1JZm
+ po+D2bOPZcVUMqqwaQi1Ts+28MpicwZysvnokDGvJXCMkDdjI9OGjJb7BV5AZR0noC3U=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1he4le-006yPn-3O
+ id 1he4le-006aPk-29
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jun 2019 21:38:51 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BD29820B1F;
- Thu, 20 Jun 2019 21:38:38 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 27522215EA;
+ Thu, 20 Jun 2019 21:38:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1561066719;
- bh=d27p70Gr0QEAejavj4m8KjtHSwoT83LH9uhHi+Iuvmw=;
+ bh=5CM983t566SpUFL1OYw+Q9AJLEmW5fX4XcdwmQ5M32Y=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uhj3bYfZOl448KVcMoiYVX4H+lxzjWdO1NvnxLgW1UhgvdhtKr4YYli2lj0vt7vF+
- vhrGZWOTzYW+H+4O0/2w+J/ftirIAiZzZYsqMDNoZhKQJQmMDdqn97NsnKjkECKh9l
- IFPEwTK+6Iug/tSEFZPNWqMB3lPD5QWoOeZRaXR4=
+ b=F0AW4GOhOUWI7+lfy2qlw36rAS9/dND8eokd1WdzuWs5AjH60tQcPWmvp12koGVk8
+ h72mVFhWcqc2BthwBYyKdPcPeD91ECdKmAjcTEfX0Cl5m1fTvx5h+ADyh6dNW9ZBf9
+ NE+mBDSEiRSOkrLu4VL3jgZAYs7lJsHaQA+b4sho=
 From: Eric Biggers <ebiggers@kernel.org>
 To: fstests@vger.kernel.org
-Date: Thu, 20 Jun 2019 14:36:11 -0700
-Message-Id: <20190620213614.113685-6-ebiggers@kernel.org>
+Date: Thu, 20 Jun 2019 14:36:12 -0700
+Message-Id: <20190620213614.113685-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
 In-Reply-To: <20190620213614.113685-1-ebiggers@kernel.org>
 References: <20190620213614.113685-1-ebiggers@kernel.org>
@@ -70,8 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1he4le-006yPn-3O
-Subject: [f2fs-dev] [RFC PATCH v2 5/8] generic: test corrupting verity files
+X-Headers-End: 1he4le-006aPk-29
+Subject: [f2fs-dev] [RFC PATCH v2 6/8] generic: test that fs-verity is using
+ the correct measurement values
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,36 +93,33 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-This test corrupts various parts of the contents of a verity file, or
-parts of its Merkle tree, by writing directly to the block device.  It
-verifies that this causes I/O errors when the relevant part of the
-contents is later read by any means.
+This test verifies that fs-verity is doing its Merkle tree-based hashing
+correctly, i.e. that it hasn't been broken by a change.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- tests/generic/902     | 154 ++++++++++++++++++++++++++++++++++++++++++
- tests/generic/902.out |  91 +++++++++++++++++++++++++
+ tests/generic/903     | 112 ++++++++++++++++++++++++++++++++++++++++++
+ tests/generic/903.out |   5 ++
  tests/generic/group   |   1 +
- 3 files changed, 246 insertions(+)
- create mode 100755 tests/generic/902
- create mode 100644 tests/generic/902.out
+ 3 files changed, 118 insertions(+)
+ create mode 100755 tests/generic/903
+ create mode 100644 tests/generic/903.out
 
-diff --git a/tests/generic/902 b/tests/generic/902
+diff --git a/tests/generic/903 b/tests/generic/903
 new file mode 100755
-index 00000000..5ef2cca1
+index 00000000..55f4a3ba
 --- /dev/null
-+++ b/tests/generic/902
-@@ -0,0 +1,154 @@
++++ b/tests/generic/903
+@@ -0,0 +1,112 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0
 +# Copyright 2018 Google LLC
 +#
-+# FS QA Test generic/902
++# FS QA Test generic/903
 +#
-+# Test corrupting verity files.  This test corrupts various parts of the
-+# contents of a verity file, or parts of its Merkle tree, by writing directly to
-+# the block device.  It verifies that this causes I/O errors when the relevant
-+# part of the contents is later read by any means.
++# Test that fs-verity is using the correct measurement values.  This test
++# verifies that fs-verity is doing its Merkle tree-based hashing correctly,
++# i.e. that it hasn't been broken by a change.
 +#
 +seq=`basename $0`
 +seqres=$RESULT_DIR/$seq
@@ -150,228 +148,101 @@ index 00000000..5ef2cca1
 +_supported_fs generic
 +_supported_os Linux
 +_require_scratch_verity
++if [ $FSV_BLOCK_SIZE != 4096 ]; then
++	_notrun "4096-byte verity block size not supported on this platform"
++fi
 +
 +_scratch_mkfs_verity &>> $seqres.full
 +_scratch_mount
 +fsv_orig_file=$SCRATCH_MNT/file
 +fsv_file=$SCRATCH_MNT/file.fsv
 +
-+setup_zeroed_file()
-+{
-+	local len=$1
-+	local sparse=$2
++algs=(sha256 sha512)
 +
-+	if $sparse; then
-+		dd if=/dev/zero of=$fsv_orig_file bs=1 count=0 seek=$len \
-+			status=none
-+	else
-+		head -c $len /dev/zero > $fsv_orig_file
++# Try files with 0, 1, and multiple Merkle tree levels.
++file_sizes=(0 4096 65536 65536 100000000)
++
++# Try both unsalted and salted, and check that empty salt is the same as no salt
++salts=('' '' '' '--salt=' '--salt=f3c93fa6fb828c0e1587e5714ecf6f56')
++
++# The expected file measurements are here rather than in the expected output
++# file because not all hash algorithms may be available.
++sha256_vals=(
++sha256:3d248ca542a24fc62d1c43b916eae5016878e2533c88238480b26128a1f1af95
++sha256:babc284ee4ffe7f449377fbf6692715b43aec7bc39c094a95878904d34bac97e
++sha256:011e3f2b1dc89b75d78cddcc2a1b85cd8a64b2883e5f20f277ae4c0617e0404f
++sha256:011e3f2b1dc89b75d78cddcc2a1b85cd8a64b2883e5f20f277ae4c0617e0404f
++sha256:9d33cab743468fcbe4edab91a275b30dd543c12dd5e6ce6f2f737f66a1558f06
++)
++sha512_vals=(
++sha512:ccf9e5aea1c2a64efa2f2354a6024b90dffde6bbc017825045dce374474e13d10adb9dadcc6ca8e17a3c075fbd31336e8f266ae6fa93a6c3bed66f9e784e5abf
++sha512:928922686c4caf32175f5236a7f964e9925d10a74dc6d8344a8bd08b23c228ff5792573987d7895f628f39c4f4ebe39a7367d7aeb16aaa0cd324ac1d53664e61
++sha512:eab7224ce374a0a4babcb2db25e24836247f38b87806ad9be9e5ba4daac2f5b814fc0cbdfd9f1f8499b3c9a6c1b38fe08974cce49883ab4ccd04462fd2f9507f
++sha512:eab7224ce374a0a4babcb2db25e24836247f38b87806ad9be9e5ba4daac2f5b814fc0cbdfd9f1f8499b3c9a6c1b38fe08974cce49883ab4ccd04462fd2f9507f
++sha512:f7083a38644880d25539488313e9e5b41a4d431a0e383945129ad2c36e3c1d0f28928a424641bb1363c12b6e770578102566acea73baf1ce8ee15336f5ba2446
++)
++
++test_alg()
++{
++	local alg=$1
++	local -n vals=${alg}_vals
++	local i
++	local file_size
++	local expected actual salt_arg
++
++	_fsv_scratch_begin_subtest "Check for expected measurement values ($alg)"
++
++	if ! _fsv_have_hash_algorithm $alg $fsv_file; then
++		if [ "$alg" = sha256 ]; then
++			_fail "Something is wrong - sha256 hash should always be available"
++		fi
++		return 0
 +	fi
-+	cp $fsv_orig_file $fsv_file
-+	_fsv_enable $fsv_file
-+	md5sum $fsv_file |& _filter_scratch
++
++	for i in ${!file_sizes[@]}; do
++		file_size=${file_sizes[$i]}
++		expected=${vals[$i]}
++		salt_arg=${salts[$i]}
++
++		head -c $file_size /dev/zero > $fsv_orig_file
++		cp $fsv_orig_file $fsv_file
++		_fsv_enable --hash-alg=$alg $salt_arg $fsv_file
++		actual=$(_fsv_measure $fsv_file)
++		if [ "$actual" != "$expected" ]; then
++			echo "Mismatch: expected $expected, kernel calculated $actual (file_size=$file_size)"
++		fi
++		cmp $fsv_orig_file $fsv_file
++		rm -f $fsv_file
++	done
 +}
 +
-+filter_sigbus()
-+{
-+	sed -e 's/.*Bus error.*/Bus error/'
-+}
-+
-+round_up_to_page_boundary()
-+{
-+	local n=$1
-+	local page_size=$(get_page_size)
-+
-+	echo $(( (n + page_size - 1) & ~(page_size - 1) ))
-+}
-+
-+corruption_test()
-+{
-+	local file_len=$1
-+	local zap_offset=$2
-+	local zap_len=$3
-+	local is_merkle_tree=${4:-false} # if true, zap tree instead of data
-+	local use_sparse_file=${5:-false}
-+	local page_aligned_eof=$(round_up_to_page_boundary $file_len)
-+	local measurement
-+
-+	if $is_merkle_tree; then
-+		local corrupt_func=_fsv_scratch_corrupt_merkle_tree
-+	else
-+		local corrupt_func=_fsv_scratch_corrupt_bytes
-+	fi
-+
-+	local msg="Corruption test:"
-+	msg+=" file_len=$file_len"
-+	if $use_sparse_file; then
-+		msg+=" (sparse)"
-+	fi
-+	msg+=" zap_offset=$zap_offset"
-+	if $is_merkle_tree; then
-+		msg+=" (in Merkle tree)"
-+	fi
-+	msg+=" zap_len=$zap_len"
-+
-+	_fsv_scratch_begin_subtest "$msg"
-+	setup_zeroed_file $file_len $use_sparse_file
-+	cmp $fsv_file $fsv_orig_file
-+	echo "Corrupting bytes..."
-+	head -c $zap_len /dev/zero | tr '\0' X \
-+		| $corrupt_func $fsv_file $zap_offset
-+
-+	echo "Validating corruption (reading full file)..."
-+	_scratch_cycle_mount
-+	md5sum $fsv_file |& _filter_scratch
-+
-+	echo "Validating corruption (direct I/O)..."
-+	_scratch_cycle_mount
-+	dd if=$fsv_file bs=$FSV_BLOCK_SIZE iflag=direct status=none \
-+		of=/dev/null |& _filter_scratch
-+
-+	if ! $is_merkle_tree; then
-+		echo "Validating corruption (reading just corrupted part)..."
-+		dd if=$fsv_file bs=1 skip=$zap_offset count=$zap_len \
-+			of=/dev/null status=none |& _filter_scratch
-+	fi
-+
-+	echo "Validating corruption (reading full file via mmap)..."
-+	bash -c "trap '' SIGBUS; $XFS_IO_PROG -r $fsv_file \
-+		-c 'mmap -r 0 $page_aligned_eof' \
-+		-c 'mread 0 $file_len'" |& filter_sigbus
-+
-+	if ! $is_merkle_tree; then
-+		echo "Validating corruption (reading just corrupted part via mmap)..."
-+		bash -c "trap '' SIGBUS; $XFS_IO_PROG -r $fsv_file \
-+			-c 'mmap -r 0 $page_aligned_eof' \
-+			-c 'mread $zap_offset $zap_len'" |& filter_sigbus
-+	fi
-+}
-+
-+corruption_test 131072 0 1
-+corruption_test 131072 4095 1
-+corruption_test 131072 65536 65536
-+corruption_test 131072 131071 1
-+
-+# Non-zeroed bytes in the final partial block beyond EOF should cause reads to
-+# fail too.  Such bytes would be visible via mmap().
-+corruption_test 130999 131000 72
-+
-+# Merkle tree corruption.
-+corruption_test 200000 100 10 true
-+
-+# Sparse file.  Corrupting the Merkle tree should still cause reads to fail,
-+# i.e. the filesystem must verify holes.
-+corruption_test 200000 100 10 true true
++for alg in ${algs[@]}; do
++	test_alg $alg
++done
 +
 +# success, all done
 +status=0
 +exit
-diff --git a/tests/generic/902.out b/tests/generic/902.out
+diff --git a/tests/generic/903.out b/tests/generic/903.out
 new file mode 100644
-index 00000000..15fe691e
+index 00000000..02508828
 --- /dev/null
-+++ b/tests/generic/902.out
-@@ -0,0 +1,91 @@
-+QA output created by 902
++++ b/tests/generic/903.out
+@@ -0,0 +1,5 @@
++QA output created by 903
 +
-+# Corruption test: file_len=131072 zap_offset=0 zap_len=1
-+0dfbe8aa4c20b52e1b8bf3cb6cbdf193  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading just corrupted part)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+Validating corruption (reading just corrupted part via mmap)...
-+Bus error
++# Check for expected measurement values (sha256)
 +
-+# Corruption test: file_len=131072 zap_offset=4095 zap_len=1
-+0dfbe8aa4c20b52e1b8bf3cb6cbdf193  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading just corrupted part)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+Validating corruption (reading just corrupted part via mmap)...
-+Bus error
-+
-+# Corruption test: file_len=131072 zap_offset=65536 zap_len=65536
-+0dfbe8aa4c20b52e1b8bf3cb6cbdf193  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading just corrupted part)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+Validating corruption (reading just corrupted part via mmap)...
-+Bus error
-+
-+# Corruption test: file_len=131072 zap_offset=131071 zap_len=1
-+0dfbe8aa4c20b52e1b8bf3cb6cbdf193  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading just corrupted part)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+Validating corruption (reading just corrupted part via mmap)...
-+Bus error
-+
-+# Corruption test: file_len=130999 zap_offset=131000 zap_len=72
-+f5cca0d7fbb8b02bc6118a9954d5d306  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading just corrupted part)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+Validating corruption (reading just corrupted part via mmap)...
-+Bus error
-+
-+# Corruption test: file_len=200000 zap_offset=100 (in Merkle tree) zap_len=10
-+4a1e4325031b13f933ac4f1db9ecb63f  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
-+
-+# Corruption test: file_len=200000 (sparse) zap_offset=100 (in Merkle tree) zap_len=10
-+4a1e4325031b13f933ac4f1db9ecb63f  SCRATCH_MNT/file.fsv
-+Corrupting bytes...
-+Validating corruption (reading full file)...
-+md5sum: SCRATCH_MNT/file.fsv: Input/output error
-+Validating corruption (direct I/O)...
-+dd: error reading 'SCRATCH_MNT/file.fsv': Input/output error
-+Validating corruption (reading full file via mmap)...
-+Bus error
++# Check for expected measurement values (sha512)
 diff --git a/tests/generic/group b/tests/generic/group
-index 003fbff4..ffdc7640 100644
+index ffdc7640..3927f779 100644
 --- a/tests/generic/group
 +++ b/tests/generic/group
-@@ -561,3 +561,4 @@
- 556 auto quick casefold
+@@ -562,3 +562,4 @@
  900 auto quick verity
  901 auto quick verity
-+902 auto quick verity
+ 902 auto quick verity
++903 auto quick verity
 -- 
 2.22.0.410.gd8fdbe21b5-goog
 
