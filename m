@@ -2,70 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 872B24EE2C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 19:51:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 533C14EE4C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 20:01:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1heNhO-0005OE-MD; Fri, 21 Jun 2019 17:51:42 +0000
+	id 1heNqv-0007mp-It; Fri, 21 Jun 2019 18:01:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1heNhN-0005O1-EF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 17:51:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1heNqu-0007mj-J0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:01:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xeNRrxlJXX7Udcles47S5Xfl7tvx4hiD8l8hcmdoC2I=; b=Kr2ompyUedN3rEtG+v85ynNSWq
- hhTl2OfpcSxe7tqtRXj4i26ntEvtIMInnPs+Zf2rM3Bi6LYrbSyI2cSQ+9uZTBjDuR4uuKlCwyomj
- ylr6B/gIUnhWSedz8ETI17F3YQaHRQ/6nN10dv0tydr0kUVPai8v46n7Nt7Z42oOwQw4=;
+ bh=IuCOCvhMf7PtM3jrx8INuIIPic0rNACtb/SiTwoluRI=; b=X0gC0Xx8AuxIRNtgWtUBWPVSKh
+ wbqnws7DCR3s/ZHOSOs5xWjkGEG+KrV9cNCxwyEGoTtIi8dICX1RBKqJYD/XuPgg+/B3xXMqYZPXh
+ lLuQALs/U5djNDrUei3n+2lOEYl0XNHQlH+Mr1tCoWRrNTnBbjQcTiYmtNkhMl0LGiPA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=xeNRrxlJXX7Udcles47S5Xfl7tvx4hiD8l8hcmdoC2I=; b=jLwPvi0j6Jr4pgGrSTQLgFaSYa
- vQA/WV9aRe4+sub1VJWp4XAdPjeQy6imv9glAmbBAT7dKGuoQAO171xiIIGH4iESu6pZ4ssM//M46
- AjO3MQxSP6oW8hzZuYO3QpoFddJ5kViKfi1nzumcyhZphb6MCg24PDxT6sndgM4WmQ7A=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IuCOCvhMf7PtM3jrx8INuIIPic0rNACtb/SiTwoluRI=; b=g
+ p6HjuwA91J2aZcUJ6BOlKm6suIAsaGxZkljCw7564L7kgh+u89FQutQj4L7mItNpjUrpccLoZ5QIH
+ SQ0mJu08fkHk5wapREP09wSumdj4O6OO73D4HgUzjsDD7QTPviBNV0Wwiur9qJP7utvLBZieAamTb
+ k5vT3abjxivtCpJU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1heNhP-003BYG-FZ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 17:51:45 +0000
+ id 1heNqt-0081Ln-WE
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:01:34 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E919A2083B;
- Fri, 21 Jun 2019 17:51:36 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4B4EA2070B;
+ Fri, 21 Jun 2019 18:01:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1561139497;
- bh=jJvdZMIzFOYihq8G0IJrmVGkbRXISz28GVQ1tYAdqJU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nnaUpFyFaR4Da7YBwNkpjsNestIElhyOrBDDr608Zr8kSijiqr2uR2FZc3SwWk2DW
- SvtkpUSrpPOcl6rUXUMzlGuHPk6wIZRkMmoa9GXK9EMq7T3wu0lH/TQWrz9fKySJdb
- sRKaWS3b0OQ0lma6rAalWgVLJklKJE4BuI2jo2A8=
-Date: Fri, 21 Jun 2019 10:51:35 -0700
+ s=default; t=1561140086;
+ bh=kk0SwYShH0N5Cjl23BV6nWVdm/thRR90X/WPRMwddZ4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QPDHhuTV5Lp4adKPf7x76+t0LCtvI1RqmFPdfswkG3drnYym8M3wtlFv1OVLZNiv5
+ 5gft3KQUZ0ZvAkOqYBbWm6gvXN72ZtYmCWqHHDumwMCoPBfzhqbQE9JjCkXQYbCtsd
+ MQpA5kBcnidNDMJR88lWU12LI2vUyLbQ/XKN/7Lg=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190621175135.GC79502@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190530033115.16853-1-jaegeuk@kernel.org>
- <20190530175714.GB28719@jaegeuk-macbookpro.roam.corp.google.com>
- <20190604183619.GA8507@jaegeuk-macbookpro.roam.corp.google.com>
- <2afe0416-fe2d-8ba8-7625-0246aca9eba6@huawei.com>
- <20190614024655.GA18113@jaegeuk-macbookpro.roam.corp.google.com>
- <6f70ae56-45eb-666d-ae55-48eb0cc96f32@huawei.com>
- <20190619172651.GB57884@jaegeuk-macbookpro.roam.corp.google.com>
- <ba6555c9-b864-d0cc-1c65-4077e7f15175@huawei.com>
- <20190621173807.GB79502@jaegeuk-macbookpro.roam.corp.google.com>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 21 Jun 2019 11:01:24 -0700
+Message-Id: <20190621180124.82842-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190621173807.GB79502@jaegeuk-macbookpro.roam.corp.google.com>
-User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -78,9 +68,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1heNhP-003BYG-FZ
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add a rw_sem to cover quota flag
- changes
+X-Headers-End: 1heNqt-0081Ln-WE
+Subject: [f2fs-dev] [PATCH] f2fs: add wsync_mode for sysfs entry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,125 +81,133 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/21, Jaegeuk Kim wrote:
-> On 06/20, Chao Yu wrote:
-> > On 2019/6/20 1:26, Jaegeuk Kim wrote:
-> > > On 06/18, Chao Yu wrote:
-> > >> On 2019/6/14 10:46, Jaegeuk Kim wrote:
-> > >>> On 06/11, Chao Yu wrote:
-> > >>>> On 2019/6/5 2:36, Jaegeuk Kim wrote:
-> > >>>>> Two paths to update quota and f2fs_lock_op:
-> > >>>>>
-> > >>>>> 1.
-> > >>>>>  - lock_op
-> > >>>>>  |  - quota_update
-> > >>>>>  `- unlock_op
-> > >>>>>
-> > >>>>> 2.
-> > >>>>>  - quota_update
-> > >>>>>  - lock_op
-> > >>>>>  `- unlock_op
-> > >>>>>
-> > >>>>> But, we need to make a transaction on quota_update + lock_op in #2 case.
-> > >>>>> So, this patch introduces:
-> > >>>>> 1. lock_op
-> > >>>>> 2. down_write
-> > >>>>> 3. check __need_flush
-> > >>>>> 4. up_write
-> > >>>>> 5. if there is dirty quota entries, flush them
-> > >>>>> 6. otherwise, good to go
-> > >>>>>
-> > >>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > >>>>> ---
-> > >>>>>
-> > >>>>> v3 from v2:
-> > >>>>>  - refactor to fix quota corruption issue
-> > >>>>>   : it seems that the previous scenario is not real and no deadlock case was
-> > >>>>>     encountered.
-> > >>>>
-> > >>>> - f2fs_dquot_commit
-> > >>>>  - down_read(&sbi->quota_sem)
-> > >>>> 					- block_operation
-> > >>>> 					 - f2fs_lock_all
-> > >>>> 					  - need_flush_quota
-> > >>>> 					   - down_write(&sbi->quota_sem)
-> > >>>>   - f2fs_quota_write
-> > >>>>    - f2fs_lock_op
-> > >>>>
-> > >>>> Why can't this happen?
-> > >>>>
-> > >>>> Once more question, should we hold quota_sem during checkpoint to avoid further
-> > >>>> quota update? f2fs_lock_op can do this job as well?
-> > >>>
-> > >>> I couldn't find write_dquot() call to make this happen, and f2fs_lock_op was not
-> > >>
-> > >> - f2fs_dquot_commit
-> > >>  - dquot_commit
-> > >>   ->commit_dqblk (v2_write_dquot)
-> > >>    - qtree_write_dquot
-> > >>     ->quota_write (f2fs_quota_write)
-> > >>      - f2fs_lock_op
-> > >>
-> > >> Do you mean there is no such way that calling f2fs_lock_op() from
-> > >> f2fs_quota_write()? So that deadlock condition is not existing?
-> > > 
-> > > I mean write_dquot->f2fs_dquot_commit and block_operation seems not racing
-> > > together.
-> > 
-> > quota ioctl has the path calling write_dquot->f2fs_dquot_commit as below, which
-> > can race with checkpoint().
-> > 
-> > - do_quotactl
-> >  - sb->s_qcop->quota_sync (f2fs_quota_sync)
-> >   - down_read(&sbi->quota_sem);      ----  First
-> >    - dquot_writeback_dquots
-> >     - sb->dq_op->write_dquot (f2fs_dquot_commit)
-> > 							- block_operation can race here
-> >      - down_read(&sbi->quota_sem);   ----  Second
-> 
-> Adding f2fs_lock_op() in f2fs_quota_sync() should be fine?
+From: Jaegeuk Kim <jaegeuk@google.com>
 
-Something like this?
+This add one sysfs entry to control REQ_SYNC/REQ_BACKGROUND for write bios
+for data page writes.
 
+Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
 ---
- fs/f2fs/super.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++++++
+ Documentation/filesystems/f2fs.txt      |  4 ++++
+ fs/f2fs/data.c                          |  3 +--
+ fs/f2fs/f2fs.h                          | 12 ++++++++++++
+ fs/f2fs/sysfs.c                         |  2 ++
+ 5 files changed, 26 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 7f2829b1192e..1d33ca1a8c09 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1919,6 +1919,17 @@ int f2fs_quota_sync(struct super_block *sb, int type)
- 	int cnt;
- 	int ret;
- 
-+	/*
-+	 * do_quotactl
-+	 *  f2fs_quota_sync
-+	 *  down_read(quota_sem)
-+	 *  dquot_writeback_dquots()
-+	 *  f2fs_dquot_commit
-+	 *                            block_operation
-+	 *                            down_read(quota_sem)
-+	 */
-+	f2fs_lock_op(sbi);
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index dca326e0ee3e..d3eca3eb3214 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -251,3 +251,10 @@ Description:
+ 		If checkpoint=disable, it displays the number of blocks that are unusable.
+                 If checkpoint=enable it displays the enumber of blocks that would be unusable
+                 if checkpoint=disable were to be set.
 +
- 	down_read(&sbi->quota_sem);
- 	ret = dquot_writeback_dquots(sb, type);
- 	if (ret)
-@@ -1958,6 +1969,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
- 	if (ret)
- 		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
- 	up_read(&sbi->quota_sem);
-+	f2fs_unlock_op(sbi);
- 	return ret;
++What:		/sys/fs/f2fs/<disk>/wsync_mode
++Date		June 2019
++Contact:	"Jaegeuk Kim" <jaegeuk.kim@kernel.org>
++Description:
++		0 gives no change. 1 assigns all the data writes with REQ_SYNC.
++                2 does REQ_BACKGROUND instead.
+diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
+index bebd1be3ba49..81c529801a88 100644
+--- a/Documentation/filesystems/f2fs.txt
++++ b/Documentation/filesystems/f2fs.txt
+@@ -413,6 +413,10 @@ Files in /sys/fs/f2fs/<devname>
+                               that would be unusable if checkpoint=disable were
+                               to be set.
+ 
++ wsync_mode                   0 is by default. 1 gives REQ_SYNC for all the data
++                              writes. 2 gives REQ_BACKGROUND for all. This can
++                              used for the performance tuning purpose.
++
+ ================================================================================
+ USAGE
+ ================================================================================
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index f4e1672bd96e..18c73a1fdef3 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -9,7 +9,6 @@
+ #include <linux/f2fs_fs.h>
+ #include <linux/buffer_head.h>
+ #include <linux/mpage.h>
+-#include <linux/writeback.h>
+ #include <linux/backing-dev.h>
+ #include <linux/pagevec.h>
+ #include <linux/blkdev.h>
+@@ -2021,7 +2020,7 @@ static int __write_data_page(struct page *page, bool *submitted,
+ 		.ino = inode->i_ino,
+ 		.type = DATA,
+ 		.op = REQ_OP_WRITE,
+-		.op_flags = wbc_to_write_flags(wbc),
++		.op_flags = f2fs_wbc_to_write_flags(sbi, wbc),
+ 		.old_blkaddr = NULL_ADDR,
+ 		.page = page,
+ 		.encrypted_page = NULL,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 2be2b16573c3..1cc46a6dc340 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -12,6 +12,7 @@
+ #include <linux/types.h>
+ #include <linux/page-flags.h>
+ #include <linux/buffer_head.h>
++#include <linux/writeback.h>
+ #include <linux/slab.h>
+ #include <linux/crc32.h>
+ #include <linux/magic.h>
+@@ -1264,6 +1265,7 @@ struct f2fs_sb_info {
+ 
+ 	/* writeback control */
+ 	atomic_t wb_sync_req[META];	/* count # of WB_SYNC threads */
++	int wsync_mode;			/* write mode */
+ 
+ 	/* valid inode count */
+ 	struct percpu_counter total_valid_inode_count;
+@@ -3631,6 +3633,16 @@ static inline void set_opt_mode(struct f2fs_sb_info *sbi, unsigned int mt)
+ 	}
  }
  
++static inline int f2fs_wbc_to_write_flags(struct f2fs_sb_info *sbi,
++				struct writeback_control *wbc)
++{
++	if (sbi->wsync_mode == 1)
++		return REQ_SYNC;
++	if (sbi->wsync_mode == 2)
++		return REQ_BACKGROUND;
++	return wbc_to_write_flags(wbc);
++}
++
+ static inline bool f2fs_may_encrypt(struct inode *inode)
+ {
+ #ifdef CONFIG_FS_ENCRYPTION
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 3aeacd0aacfd..e3c164d921a1 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -455,6 +455,7 @@ F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+ F2FS_GENERAL_RO_ATTR(features);
+ F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+ F2FS_GENERAL_RO_ATTR(unusable);
++F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, wsync_mode, wsync_mode);
+ 
+ #ifdef CONFIG_FS_ENCRYPTION
+ F2FS_FEATURE_RO_ATTR(encryption, FEAT_CRYPTO);
+@@ -515,6 +516,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(features),
+ 	ATTR_LIST(reserved_blocks),
+ 	ATTR_LIST(current_reserved_blocks),
++	ATTR_LIST(wsync_mode),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
 -- 
 2.19.0.605.g01d371f741-goog
 
