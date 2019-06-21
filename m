@@ -2,78 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 216C84DF4C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 05:17:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5927D4E50A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 11:55:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1heA3c-0002B5-UX; Fri, 21 Jun 2019 03:17:44 +0000
+	id 1heGFy-0007hm-Gr; Fri, 21 Jun 2019 09:54:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1heA3a-0002Ay-Ts
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 03:17:42 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1heGFx-0007hO-BD
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 09:54:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yovFZbmPJo2JMJ84aJ92Qsbw+aZvdcSM9qXOwPLSpuU=; b=C9DUtyZmh7hHJoD5JQTrR13lMq
- LlaPKKjTpykqrMs0uTBXIPQsPg/M4l4sv7BNNW7+WiMWyPdog9Ex8WUeop+L+KDkEhA+vZ7Saiwf6
- YCfrY8KrfcXiN9i7uFvoHvneOkH/ayfmyqEnpnQUEiMdCREv8jK7FOFLrE35oQTqZBvo=;
+ bh=xDev0r7o29mgtF+85WipHnZ7mNl/oLfOiQLKM/gad6o=; b=PjMQwQ+MMCDYzKrMqM55tGOPN0
+ zHlwSbhcGM8XDDnBc9GLUuEDwCT18rBwVxeNi5tj/6sV4nQkgwRDDZDkE7v5xb0skPn50KzyfHITv
+ eykoylpvsUTZ4vjyc/BMhvyPbm0TAjLqF5UcxYdnrMcZNZMo8J4VcHKUyg+sGlWKN1sU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yovFZbmPJo2JMJ84aJ92Qsbw+aZvdcSM9qXOwPLSpuU=; b=YoTVjjCvZOdPkqkNQBJzNVdlYT
- Qs3KMQDakXq5ZV2CuMBJhwOmGgwFUKxDafbzlrP/hswSLnr47ffELVJn8vQzCZq2ruL1xpSikOstP
- fwKVrajZVhjMIqGwLkLlAWKTfWadVFbVc+3jzJGemaVO5aQjoLIgXidmJ8oy8qxFA6tk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=xDev0r7o29mgtF+85WipHnZ7mNl/oLfOiQLKM/gad6o=; b=RUwACQ5J28lNHjRG6wFxVodRgu
+ fIkh4A051TfcWcwOuEemASRBz/Hnlr/ZkO5imVrLRnSmfqB49XqaMXTxpCdxf/x8D7oVkOmx9xR4k
+ HHk6jmn4m+Ko1+ChygTCQme7sM2CguIjiM17z1KESMZ6BH9dIpQRWWL524WMRvmYfkOM=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1heA3b-006r68-RF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 03:17:45 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BBC9020679;
- Fri, 21 Jun 2019 03:17:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1561087058;
- bh=8upGiMNBTtWDElF9gjCLmVIbeZJwV8B0qLNbePNiBiU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=i7NAHT3Z7Kbuc4XrtwXOF81T38DWmrfYNGoBYndscZEb0luoJO0t/EdZKKvzbOvX0
- ndbZtCx8sjRpIUemKoBxuF9qRXD3gVk9mg4H3uF3Xx1mOpmgmVa2tgoCOCaVDe5DIG
- xBvf1lzHH0jscgF3GCUVG9dpoP8HuP1RtKSkB8qc=
-Date: Thu, 20 Jun 2019 20:17:36 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Message-ID: <20190621031736.GA742@sol.localdomain>
-References: <20190620205043.64350-1-ebiggers@kernel.org>
- <20190620205043.64350-15-ebiggers@kernel.org>
- <20190620235938.GE5375@magnolia>
+ id 1heGFy-007b9v-Gp
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 09:54:56 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id CE75F25CFA34DA6EF421;
+ Fri, 21 Jun 2019 17:54:46 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun
+ 2019 17:54:39 +0800
+To: Geert Uytterhoeven <geert@linux-m68k.org>, Qiuyang Sun
+ <sunqiuyang@huawei.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20190620143800.20640-1-geert@linux-m68k.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <dd980fec-d507-6969-cd86-971bafb401c2@huawei.com>
+Date: Fri, 21 Jun 2019 17:54:24 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190620235938.GE5375@magnolia>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20190620143800.20640-1-geert@linux-m68k.org>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linux-m68k.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1heA3b-006r68-RF
-Subject: Re: [f2fs-dev] [PATCH v5 14/16] ext4: add basic fs-verity support
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1heGFy-007b9v-Gp
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: Use div_u64*() for 64-bit
+ divisions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,140 +80,80 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Theodore Y . Ts'o" <tytso@mit.edu>, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-integrity@vger.kernel.org,
- linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
- Christoph Hellwig <hch@lst.de>, Victor Hsieh <victorhsieh@google.com>
+Cc: linux-next@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Darrick,
+Hi Geert,
 
-On Thu, Jun 20, 2019 at 04:59:38PM -0700, Darrick J. Wong wrote:
-> > diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-> > index 1cb67859e0518b..5a1deea3fb3e37 100644
-> > --- a/fs/ext4/ext4.h
-> > +++ b/fs/ext4/ext4.h
-> > @@ -41,6 +41,7 @@
-> >  #endif
-> >  
-> >  #include <linux/fscrypt.h>
-> > +#include <linux/fsverity.h>
-> >  
-> >  #include <linux/compiler.h>
-> >  
-> > @@ -395,6 +396,7 @@ struct flex_groups {
-> >  #define EXT4_TOPDIR_FL			0x00020000 /* Top of directory hierarchies*/
-> >  #define EXT4_HUGE_FILE_FL               0x00040000 /* Set to each huge file */
-> >  #define EXT4_EXTENTS_FL			0x00080000 /* Inode uses extents */
-> > +#define EXT4_VERITY_FL			0x00100000 /* Verity protected inode */
+Since the original patch hasn't been merged to upstream, I think we can merge
+this into original patch, how do you think?
+
+On 2019/6/20 22:38, Geert Uytterhoeven wrote:
+> On 32-bit (e.g. m68k):
 > 
-> Hmm, a new inode flag, superblock rocompat feature flag, and
-> (presumably) the Merkle tree has some sort of well defined format which
-> starts at the next 64k boundary past EOF.
+>     fs/f2fs/gc.o: In function `f2fs_resize_fs':
+>     gc.c:(.text+0x3056): undefined reference to `__umoddi3'
+>     gc.c:(.text+0x30c4): undefined reference to `__udivdi3'
 > 
-> Would you mind updating the relevant parts of the ondisk format
-> documentation in Documentation/filesystems/ext4/, please?
+> Fix this by using div_u64_rem() and div_u64() for 64-by-32 modulo resp.
+> division operations.
 > 
-> I saw that the Merkle tree and verity descriptor formats themselves are
-> documented in the first patch, so you could simply link the ext4
-> documentation to it.
+> Reported-by: noreply@ellerman.id.au
+> Fixes: d2ae7494d043bfaf ("f2fs: ioctl for removing a range from F2FS")
+> Signed-off-by: Geert Uytterhoeven <geert@linux-m68k.org>
+> ---
+> This assumes BLKS_PER_SEC(sbi) is 32-bit.
 > 
-
-Sure, I'll update the ext4 documentation.
-
-> > +/*
-> > + * Read some verity metadata from the inode.  __vfs_read() can't be used because
-> > + * we need to read beyond i_size.
-> > + */
-> > +static int pagecache_read(struct inode *inode, void *buf, size_t count,
-> > +			  loff_t pos)
-> > +{
-> > +	while (count) {
-> > +		size_t n = min_t(size_t, count,
-> > +				 PAGE_SIZE - offset_in_page(pos));
-> > +		struct page *page;
-> > +		void *addr;
-> > +
-> > +		page = read_mapping_page(inode->i_mapping, pos >> PAGE_SHIFT,
-> > +					 NULL);
-> > +		if (IS_ERR(page))
-> > +			return PTR_ERR(page);
-> > +
-> > +		addr = kmap_atomic(page);
-> > +		memcpy(buf, addr + offset_in_page(pos), n);
-> > +		kunmap_atomic(addr);
-> > +
-> > +		put_page(page);
-> > +
-> > +		buf += n;
-> > +		pos += n;
-> > +		count -= n;
-> > +	}
-> > +	return 0;
-> > +}
-> > +
-> > +/*
-> > + * Write some verity metadata to the inode for FS_IOC_ENABLE_VERITY.
-> > + * kernel_write() can't be used because the file descriptor is readonly.
-> > + */
-> > +static int pagecache_write(struct inode *inode, const void *buf, size_t count,
-> > +			   loff_t pos)
-> > +{
-> > +	while (count) {
-> > +		size_t n = min_t(size_t, count,
-> > +				 PAGE_SIZE - offset_in_page(pos));
-> > +		struct page *page;
-> > +		void *fsdata;
-> > +		void *addr;
-> > +		int res;
-> > +
-> > +		res = pagecache_write_begin(NULL, inode->i_mapping, pos, n, 0,
-> > +					    &page, &fsdata);
-> > +		if (res)
-> > +			return res;
-> > +
-> > +		addr = kmap_atomic(page);
-> > +		memcpy(addr + offset_in_page(pos), buf, n);
-> > +		kunmap_atomic(addr);
-> > +
-> > +		res = pagecache_write_end(NULL, inode->i_mapping, pos, n, n,
-> > +					  page, fsdata);
-> > +		if (res < 0)
-> > +			return res;
-> > +		if (res != n)
-> > +			return -EIO;
-> > +
-> > +		buf += n;
-> > +		pos += n;
-> > +		count -= n;
-> > +	}
-> > +	return 0;
-> > +}
+>     #define BLKS_PER_SEC(sbi)                                       \
+> 	    ((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
 > 
-> This same code is duplicated in the f2fs patch.  Is there a reason why
-> they don't share this common code?  Even if you have to hide it under
-> fs/verity/ ?
+> Notes:
+>   1. f2fs_sb_info.segs_per_sec and f2fs_sb_info.blocks_per_seg are both
+>      unsigned int,
+>   2. The multiplication is done in 32-bit arithmetic, hence the result
+>      is of type unsigned int.
+>   3. Is it guaranteed that the result will always fit in 32-bit, or can
+>      this overflow?
+>   4. fs/f2fs/debug.c:update_sit_info() assigns BLKS_PER_SEC(sbi) to
+>      unsigned long long blks_per_sec, anticipating a 64-bit value.
+> ---
+>  fs/f2fs/gc.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 > 
-
-Yes, pagecache_read() and pagecache_write() are identical between ext4 and f2fs.
-I didn't put them in fs/verity/ because the "metadata past EOF" approach is a
-choice of ext4 and f2fs and not intrinsic to the fs-verity feature itself, so to
-avoid confusion I made the fs/verity/ support layer be completely clean of any
-assumption that that's the way filesystems implement fs-verity.
-
-Also, making the fsverity_operations call back into fs/verity/ adds a little
-extra conceptual complexity about what belongs where, since then we'd have a
-call stack of filesystem => fs/verity/ => filesystem => fs/verity/.
-
-But if people would rather that ext4 and f2fs share these two functions anyway,
-then sure, we could move them into fs/verity/, and other filesystems (if they
-take a different approach to fs-verity) simply won't use them.
-
-- Eric
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 5b1076505ade9f84..c65f87f11de029f4 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1438,13 +1438,15 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+>  	unsigned int secs;
+>  	int gc_mode, gc_type;
+>  	int err = 0;
+> +	__u32 rem;
+>  
+>  	old_block_count = le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count);
+>  	if (block_count > old_block_count)
+>  		return -EINVAL;
+>  
+>  	/* new fs size should align to section size */
+> -	if (block_count % BLKS_PER_SEC(sbi))
+> +	div_u64_rem(block_count, BLKS_PER_SEC(sbi), &rem);
+> +	if (rem)
+>  		return -EINVAL;
+>  
+>  	if (block_count == old_block_count)
+> @@ -1463,7 +1465,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+>  	freeze_bdev(sbi->sb->s_bdev);
+>  
+>  	shrunk_blocks = old_block_count - block_count;
+> -	secs = shrunk_blocks / BLKS_PER_SEC(sbi);
+> +	secs = div_u64(shrunk_blocks, BLKS_PER_SEC(sbi));
+>  	spin_lock(&sbi->stat_lock);
+>  	if (shrunk_blocks + valid_user_blocks(sbi) +
+>  		sbi->current_reserved_blocks + sbi->unusable_block_count +
+> 
 
 
 _______________________________________________
