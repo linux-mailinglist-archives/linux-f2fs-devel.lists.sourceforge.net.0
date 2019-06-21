@@ -2,74 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 533C14EE4C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 20:01:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B74A14EE4F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 20:02:26 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1heNqv-0007mp-It; Fri, 21 Jun 2019 18:01:33 +0000
+	id 1heNrZ-0007pc-Mn; Fri, 21 Jun 2019 18:02:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1heNqu-0007mj-J0
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:01:32 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1heNrY-0007pU-3B
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:02:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IuCOCvhMf7PtM3jrx8INuIIPic0rNACtb/SiTwoluRI=; b=X0gC0Xx8AuxIRNtgWtUBWPVSKh
- wbqnws7DCR3s/ZHOSOs5xWjkGEG+KrV9cNCxwyEGoTtIi8dICX1RBKqJYD/XuPgg+/B3xXMqYZPXh
- lLuQALs/U5djNDrUei3n+2lOEYl0XNHQlH+Mr1tCoWRrNTnBbjQcTiYmtNkhMl0LGiPA=;
+ bh=KrN/4zvbMDNzNKRbUOzOL3VD5uHXWiiSKaTL/UiG/NY=; b=WZD5IdPSFKS9O4raLU/SNxrln3
+ 4Hj0PyiECjQ9ZeeHM6KQUK5KdICN3br6tQZT3JMnIg7pNx+1kOdk6rvhPa9mexcRopM/k/q737z76
+ rPAnAsgTltgV0Rl58HFi2PszdGzIo4V60bzgtgfm16HyzifskJUYvbg7uAMpg4BteiD8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=IuCOCvhMf7PtM3jrx8INuIIPic0rNACtb/SiTwoluRI=; b=g
- p6HjuwA91J2aZcUJ6BOlKm6suIAsaGxZkljCw7564L7kgh+u89FQutQj4L7mItNpjUrpccLoZ5QIH
- SQ0mJu08fkHk5wapREP09wSumdj4O6OO73D4HgUzjsDD7QTPviBNV0Wwiur9qJP7utvLBZieAamTb
- k5vT3abjxivtCpJU=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KrN/4zvbMDNzNKRbUOzOL3VD5uHXWiiSKaTL/UiG/NY=; b=FG48j9ne18vrMwRnGfIGxY2tv2
+ G8sFIS0a+MxE9826Ah0Sp2VWCnQ6tqxYilLM4yxYUnUxzwEwSxKs0nl39Iv/boM05a2+p0bJO9t4G
+ FVwap9gjQFiFRz++7oqiBf/8HClxQPg9KsYBxg64U1NZXKk2XAt5PIAR4SCwsafNnoOI=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1heNqt-0081Ln-WE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:01:34 +0000
+ id 1heNrY-0081NH-F7
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 18:02:13 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4B4EA2070B;
- Fri, 21 Jun 2019 18:01:26 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C1BA22070B;
+ Fri, 21 Jun 2019 18:02:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1561140086;
- bh=kk0SwYShH0N5Cjl23BV6nWVdm/thRR90X/WPRMwddZ4=;
- h=From:To:Cc:Subject:Date:From;
- b=QPDHhuTV5Lp4adKPf7x76+t0LCtvI1RqmFPdfswkG3drnYym8M3wtlFv1OVLZNiv5
- 5gft3KQUZ0ZvAkOqYBbWm6gvXN72ZtYmCWqHHDumwMCoPBfzhqbQE9JjCkXQYbCtsd
- MQpA5kBcnidNDMJR88lWU12LI2vUyLbQ/XKN/7Lg=
+ s=default; t=1561140126;
+ bh=g79cNV6mf95ZmNPYnM1FB01DX5LPgZqiGUD7akF6G6E=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Ox4m1w+PS7vUV8r9TxOITAt1Szi7NPEgyksJHkf2lyp999RYb4j+gqL+htr6gvvTW
+ QazJsF8LbXmELHinQXJOlt0BjQSv+FOidYA2eimQ2cMJWFn7R/Qa6tTaSNx+f4o0tA
+ wDn4Za7mziYVpYox27i7qI7VGqf3WHjWxwylpif8=
+Date: Fri, 21 Jun 2019 11:02:06 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 21 Jun 2019 11:01:24 -0700
-Message-Id: <20190621180124.82842-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Message-ID: <20190621180206.GD79502@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190620143800.20640-1-geert@linux-m68k.org>
+ <dd980fec-d507-6969-cd86-971bafb401c2@huawei.com>
+ <CAMuHMdUHi3z5xmLyut2XqOPf9XFMF3AJiTnkwOAL-GQ6Ck_1ow@mail.gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAMuHMdUHi3z5xmLyut2XqOPf9XFMF3AJiTnkwOAL-GQ6Ck_1ow@mail.gmail.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1heNqt-0081Ln-WE
-Subject: [f2fs-dev] [PATCH] f2fs: add wsync_mode for sysfs entry
+X-Headers-End: 1heNrY-0081NH-F7
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: Use div_u64*() for 64-bit
+ divisions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,136 +89,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@google.com>
+Cc: Linux-Next <linux-next@vger.kernel.org>,
+ Qiuyang Sun <sunqiuyang@huawei.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@google.com>
+On 06/21, Geert Uytterhoeven wrote:
+> Hi Chao,
+> 
+> On Fri, Jun 21, 2019 at 11:54 AM Chao Yu <yuchao0@huawei.com> wrote:
+> > Since the original patch hasn't been merged to upstream, I think we can merge
+> > this into original patch, how do you think?
+> 
+> Thanks, that's fine for me.
 
-This add one sysfs entry to control REQ_SYNC/REQ_BACKGROUND for write bios
-for data page writes.
+Merged the fix.
+Thank you so much.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
----
- Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++++++
- Documentation/filesystems/f2fs.txt      |  4 ++++
- fs/f2fs/data.c                          |  3 +--
- fs/f2fs/f2fs.h                          | 12 ++++++++++++
- fs/f2fs/sysfs.c                         |  2 ++
- 5 files changed, 26 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index dca326e0ee3e..d3eca3eb3214 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -251,3 +251,10 @@ Description:
- 		If checkpoint=disable, it displays the number of blocks that are unusable.
-                 If checkpoint=enable it displays the enumber of blocks that would be unusable
-                 if checkpoint=disable were to be set.
-+
-+What:		/sys/fs/f2fs/<disk>/wsync_mode
-+Date		June 2019
-+Contact:	"Jaegeuk Kim" <jaegeuk.kim@kernel.org>
-+Description:
-+		0 gives no change. 1 assigns all the data writes with REQ_SYNC.
-+                2 does REQ_BACKGROUND instead.
-diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-index bebd1be3ba49..81c529801a88 100644
---- a/Documentation/filesystems/f2fs.txt
-+++ b/Documentation/filesystems/f2fs.txt
-@@ -413,6 +413,10 @@ Files in /sys/fs/f2fs/<devname>
-                               that would be unusable if checkpoint=disable were
-                               to be set.
- 
-+ wsync_mode                   0 is by default. 1 gives REQ_SYNC for all the data
-+                              writes. 2 gives REQ_BACKGROUND for all. This can
-+                              used for the performance tuning purpose.
-+
- ================================================================================
- USAGE
- ================================================================================
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index f4e1672bd96e..18c73a1fdef3 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -9,7 +9,6 @@
- #include <linux/f2fs_fs.h>
- #include <linux/buffer_head.h>
- #include <linux/mpage.h>
--#include <linux/writeback.h>
- #include <linux/backing-dev.h>
- #include <linux/pagevec.h>
- #include <linux/blkdev.h>
-@@ -2021,7 +2020,7 @@ static int __write_data_page(struct page *page, bool *submitted,
- 		.ino = inode->i_ino,
- 		.type = DATA,
- 		.op = REQ_OP_WRITE,
--		.op_flags = wbc_to_write_flags(wbc),
-+		.op_flags = f2fs_wbc_to_write_flags(sbi, wbc),
- 		.old_blkaddr = NULL_ADDR,
- 		.page = page,
- 		.encrypted_page = NULL,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 2be2b16573c3..1cc46a6dc340 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -12,6 +12,7 @@
- #include <linux/types.h>
- #include <linux/page-flags.h>
- #include <linux/buffer_head.h>
-+#include <linux/writeback.h>
- #include <linux/slab.h>
- #include <linux/crc32.h>
- #include <linux/magic.h>
-@@ -1264,6 +1265,7 @@ struct f2fs_sb_info {
- 
- 	/* writeback control */
- 	atomic_t wb_sync_req[META];	/* count # of WB_SYNC threads */
-+	int wsync_mode;			/* write mode */
- 
- 	/* valid inode count */
- 	struct percpu_counter total_valid_inode_count;
-@@ -3631,6 +3633,16 @@ static inline void set_opt_mode(struct f2fs_sb_info *sbi, unsigned int mt)
- 	}
- }
- 
-+static inline int f2fs_wbc_to_write_flags(struct f2fs_sb_info *sbi,
-+				struct writeback_control *wbc)
-+{
-+	if (sbi->wsync_mode == 1)
-+		return REQ_SYNC;
-+	if (sbi->wsync_mode == 2)
-+		return REQ_BACKGROUND;
-+	return wbc_to_write_flags(wbc);
-+}
-+
- static inline bool f2fs_may_encrypt(struct inode *inode)
- {
- #ifdef CONFIG_FS_ENCRYPTION
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 3aeacd0aacfd..e3c164d921a1 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -455,6 +455,7 @@ F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
- F2FS_GENERAL_RO_ATTR(features);
- F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
- F2FS_GENERAL_RO_ATTR(unusable);
-+F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, wsync_mode, wsync_mode);
- 
- #ifdef CONFIG_FS_ENCRYPTION
- F2FS_FEATURE_RO_ATTR(encryption, FEAT_CRYPTO);
-@@ -515,6 +516,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(features),
- 	ATTR_LIST(reserved_blocks),
- 	ATTR_LIST(current_reserved_blocks),
-+	ATTR_LIST(wsync_mode),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs);
--- 
-2.19.0.605.g01d371f741-goog
-
+> 
+> > On 2019/6/20 22:38, Geert Uytterhoeven wrote:
+> > > On 32-bit (e.g. m68k):
+> > >
+> > >     fs/f2fs/gc.o: In function `f2fs_resize_fs':
+> > >     gc.c:(.text+0x3056): undefined reference to `__umoddi3'
+> > >     gc.c:(.text+0x30c4): undefined reference to `__udivdi3'
+> > >
+> > > Fix this by using div_u64_rem() and div_u64() for 64-by-32 modulo resp.
+> > > division operations.
+> > >
+> > > Reported-by: noreply@ellerman.id.au
+> > > Fixes: d2ae7494d043bfaf ("f2fs: ioctl for removing a range from F2FS")
+> > > Signed-off-by: Geert Uytterhoeven <geert@linux-m68k.org>
+> > > ---
+> > > This assumes BLKS_PER_SEC(sbi) is 32-bit.
+> > >
+> > >     #define BLKS_PER_SEC(sbi)                                       \
+> > >           ((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
+> > >
+> > > Notes:
+> > >   1. f2fs_sb_info.segs_per_sec and f2fs_sb_info.blocks_per_seg are both
+> > >      unsigned int,
+> > >   2. The multiplication is done in 32-bit arithmetic, hence the result
+> > >      is of type unsigned int.
+> > >   3. Is it guaranteed that the result will always fit in 32-bit, or can
+> > >      this overflow?
+> > >   4. fs/f2fs/debug.c:update_sit_info() assigns BLKS_PER_SEC(sbi) to
+> > >      unsigned long long blks_per_sec, anticipating a 64-bit value.
+> > > ---
+> > >  fs/f2fs/gc.c | 6 ++++--
+> > >  1 file changed, 4 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> > > index 5b1076505ade9f84..c65f87f11de029f4 100644
+> > > --- a/fs/f2fs/gc.c
+> > > +++ b/fs/f2fs/gc.c
+> > > @@ -1438,13 +1438,15 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+> > >       unsigned int secs;
+> > >       int gc_mode, gc_type;
+> > >       int err = 0;
+> > > +     __u32 rem;
+> > >
+> > >       old_block_count = le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count);
+> > >       if (block_count > old_block_count)
+> > >               return -EINVAL;
+> > >
+> > >       /* new fs size should align to section size */
+> > > -     if (block_count % BLKS_PER_SEC(sbi))
+> > > +     div_u64_rem(block_count, BLKS_PER_SEC(sbi), &rem);
+> > > +     if (rem)
+> > >               return -EINVAL;
+> > >
+> > >       if (block_count == old_block_count)
+> > > @@ -1463,7 +1465,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+> > >       freeze_bdev(sbi->sb->s_bdev);
+> > >
+> > >       shrunk_blocks = old_block_count - block_count;
+> > > -     secs = shrunk_blocks / BLKS_PER_SEC(sbi);
+> > > +     secs = div_u64(shrunk_blocks, BLKS_PER_SEC(sbi));
+> > >       spin_lock(&sbi->stat_lock);
+> > >       if (shrunk_blocks + valid_user_blocks(sbi) +
+> > >               sbi->current_reserved_blocks + sbi->unusable_block_count +
+> 
+> Gr{oetje,eeting}s,
+> 
+>                         Geert
+> 
+> -- 
+> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+> 
+> In personal conversations with technical people, I call myself a hacker. But
+> when I'm talking to journalists I just say "programmer" or something like that.
+>                                 -- Linus Torvalds
 
 
 _______________________________________________
