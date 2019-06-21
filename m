@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B50C64F047
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 23:08:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB6364F061
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2019 23:15:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1heQlV-0008IK-1G; Fri, 21 Jun 2019 21:08:09 +0000
+	id 1heQsA-0000ar-7I; Fri, 21 Jun 2019 21:15:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1heQlT-0008I6-KQ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 21:08:07 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1heQs8-0000aI-QY
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 21:15:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zKuf+V1+RbXQKcq1H6et5TR7SOKbWr48zARofednqvs=; b=lyRcvOOh+Mld67sCCzxahiIJ3e
- vf8jpj9oc0cc6oy1E5zv2FbfFBfmyXWk8ZT3id+XZh101wBcaOy1CeTdq6t5TdPy6s7fm72Wy0nTK
- A+NQY4vn7oEhDvaHja21uyRcMCDL1Fll6P+bRsJWAAIy5/m+9BL1cK2BGAcX5Ui4jzso=;
+ bh=HtzJasL8gBS8kZ7UuL9gM+A/DUZKv8o6sZNJfXr+A0U=; b=g749IbbSrRmCqd4it1AWF4Fl3F
+ Cmmnezb2kxcrYecW1oUrQtT71lfUiFtuSJpco4jXrSaCDVNTIHtv7wW0G5JN0MxylYE/qZO2mINYE
+ q+PE/4usnIacTvnC2H6Ex1Y1V6dhRT+KL4kbwnhM/0uk3YXVQ/laJnYs4zfDrT3EiihU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zKuf+V1+RbXQKcq1H6et5TR7SOKbWr48zARofednqvs=; b=dFFMMFlzQqMIGWLMP6iD3NDKuW
- uh/5Ffh4Fo174TQ5OG7/7U72mgUlXALsyZu3HYAUU78V/ktkURsP5K3uJoUXGpU+Xc/GlogEjd1H1
- X7yfeFgF+EVdIYJFxrdTrAIGTpgJyKnOv8+cl9m8323xVDEIlBODkpKOHfCbO5fqmdi0=;
+ bh=HtzJasL8gBS8kZ7UuL9gM+A/DUZKv8o6sZNJfXr+A0U=; b=P1dDOTzyRh9hDWlkK/LLnsa6e6
+ DZ4t9Yb1CwlgUU6ASfS9U4sIm3b1CdT+Uac/JR+elIHJILpCqrd0QEG9su5LE7k4A8+gpLoqWvHV4
+ WMqTWxiR/Ew2aYPVqUluSAsh7XTFu0Tf7ihrQ8iyAoYBpCxo4dsYsqJcgSiBoMLKbE40=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1heQlU-007ktN-Lb
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 21:08:10 +0000
+ id 1heQsB-007lDh-3e
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jun 2019 21:15:04 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id ACFC82089E;
- Fri, 21 Jun 2019 21:08:02 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3077F205C9;
+ Fri, 21 Jun 2019 21:14:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1561151283;
- bh=gtxyIpbIl3ETbSi7Kx86WqNdwAWvLeSvlwgQZO3onNk=;
+ s=default; t=1561151697;
+ bh=+A5ovqJOpzLcVONMQRqVKOitIoP9VN9sjk5zTETdR4Q=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ig94Vct/bFpcMbbtJnrwjzepAgoGkVSAr4Ne+FIqK3oAoVBfFLtc/BEmzHFWz+JZM
- tZ3hNgfFAe5asAXZqr3rMC8NoZ7Kn2c7zvK/8XELkvOht6zvZhokBYJ7nuB3Lmd94h
- VcaBBHf2d3Qj3Qa6pAneczJm3kRiWnGVTVqhtm5A=
-Date: Fri, 21 Jun 2019 14:08:01 -0700
+ b=j9DfiZ1uUH08EceCSIPbtAHoj+1iKMIXKrynwMLsOWtqLgEvj48Zi/fotz29tZEY+
+ tCYq1rAzXvfnE+5rfL6YujS5izY4ah+/Y9ndYmG1Hqs3rbscRdy5Dcw0/GVUAW7vts
+ 4zcql4EErO0CmjrdcxzOSjskFJq4jMSCuFI+hxms=
+Date: Fri, 21 Jun 2019 14:14:55 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Chandan Rajendra <chandan@linux.ibm.com>
-Message-ID: <20190621210800.GB167064@gmail.com>
+Message-ID: <20190621211454.GC167064@gmail.com>
 References: <20190616160813.24464-1-chandan@linux.ibm.com>
- <20190616160813.24464-3-chandan@linux.ibm.com>
+ <20190616160813.24464-5-chandan@linux.ibm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190616160813.24464-3-chandan@linux.ibm.com>
+In-Reply-To: <20190616160813.24464-5-chandan@linux.ibm.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 2.3 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -72,9 +72,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -1.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1heQlU-007ktN-Lb
-Subject: Re: [f2fs-dev] [PATCH V3 2/7] Integrate read callbacks into Ext4
- and F2FS
+X-Headers-End: 1heQsB-007lDh-3e
+Subject: Re: [f2fs-dev] [PATCH V3 4/7] fs/mpage.c: Integrate read callbacks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,112 +92,65 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Chandan,
-
-On Sun, Jun 16, 2019 at 09:38:08PM +0530, Chandan Rajendra wrote:
-> This commit gets Ext4 and F2FS to make use of read callbacks API to
-> perform decryption of file data read from the disk.
-> ---
->  fs/crypto/bio.c             |  30 +--------
->  fs/crypto/crypto.c          |   1 +
->  fs/crypto/fscrypt_private.h |   3 +
->  fs/ext4/readpage.c          |  29 +++------
->  fs/f2fs/data.c              | 124 +++++++-----------------------------
->  fs/f2fs/super.c             |   9 +--
->  fs/read_callbacks.c         |   1 -
->  include/linux/fscrypt.h     |  18 ------
->  8 files changed, 40 insertions(+), 175 deletions(-)
+On Sun, Jun 16, 2019 at 09:38:10PM +0530, Chandan Rajendra wrote:
+> This commit adds code to make do_mpage_readpage() to be "read callbacks"
+> aware i.e. for files requiring decryption, do_mpage_readpage() now
+> sets up the read callbacks state machine when allocating a bio and later
+> starts execution of the state machine after file data is read from the
+> underlying disk.
 > 
+> Signed-off-by: Chandan Rajendra <chandan@linux.ibm.com>
+> ---
+>  fs/mpage.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/mpage.c b/fs/mpage.c
+> index 436a85260394..611ad122fc92 100644
+> --- a/fs/mpage.c
+> +++ b/fs/mpage.c
+> @@ -30,6 +30,7 @@
+>  #include <linux/backing-dev.h>
+>  #include <linux/pagevec.h>
+>  #include <linux/cleancache.h>
+> +#include <linux/read_callbacks.h>
+>  #include "internal.h"
+>  
+>  /*
+> @@ -49,6 +50,8 @@ static void mpage_end_io(struct bio *bio)
+>  	struct bio_vec *bv;
+>  	struct bvec_iter_all iter_all;
+>  
+> +	if (read_callbacks_end_bio(bio))
+> +		return;
+>  	bio_for_each_segment_all(bv, bio, iter_all) {
+>  		struct page *page = bv->bv_page;
+>  		page_endio(page, bio_op(bio),
+> @@ -309,6 +312,12 @@ static struct bio *do_mpage_readpage(struct mpage_readpage_args *args)
+>  					gfp);
+>  		if (args->bio == NULL)
+>  			goto confused;
+> +
+> +		if (read_callbacks_setup(inode, args->bio, NULL)) {
+> +			bio_put(args->bio);
+> +			args->bio = NULL;
+> +			goto confused;
+> +		}
+>  	}
+>  
+>  	length = first_hole << blkbits;
+> @@ -330,7 +339,7 @@ static struct bio *do_mpage_readpage(struct mpage_readpage_args *args)
+>  confused:
+>  	if (args->bio)
+>  		args->bio = mpage_bio_submit(REQ_OP_READ, op_flags, args->bio);
+> -	if (!PageUptodate(page))
+> +	if (!PageUptodate(page) && !PageError(page))
+>  		block_read_full_page(page, args->get_block);
+>  	else
+>  		unlock_page(page);
+> -- 
+> 2.19.1
 
-This patch changes many different components.  It would be much easier to
-review, and might get more attention from the other ext4 and f2fs developers, if
-it were split into 3 patches:
-
-a. Convert ext4 to use read_callbacks.
-b. Convert f2fs to use read_callbacks.
-c. Remove the functions from fs/crypto/ that became unused as a result of
-   patches (a) and (b).  (Actually, this part probably should be merged with the
-   patch that removes the fscrypt_ctx, and the patch renamed to something like
-   "fscrypt: remove decryption I/O path helpers")
-
-Any reason why this wouldn't work?  AFAICS, you couldn't do it only because you
-made this patch change fscrypt_enqueue_decrypt_work() to be responsible for
-initializing the work function.  But as per my comments on patch 1, I don't
-think we should do that, since it would make much more sense to put the work
-function in read_callbacks.c.
-
-However, since you're converting ext4 to use mpage_readpages() anyway, I don't
-think we should bother with the intermediate change to ext4_mpage_readpages().
-It's useless, and that intermediate state of the ext4 code inevitably won't get
-tested very well.  So perhaps order the whole series as:
-
-- fs: introduce read_callbacks
-- fs/mpage.c: add decryption support via read_callbacks
-- fs/buffer.c: add decryption support via read_callbacks
-- f2fs: convert to use read_callbacks
-- ext4: convert to use mpage_readpages[s]
-- ext4: support encryption with subpage-sized blocks
-- fscrypt: remove decryption I/O path helpers
-
-That order would also give the flexibility to possibly apply the fs/ changes
-first, without having to update both ext4 and f2fs simultaneously with them.
-
-> @@ -557,8 +511,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
->  {
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->  	struct bio *bio;
-> -	struct bio_post_read_ctx *ctx;
-> -	unsigned int post_read_steps = 0;
-> +	int ret;
-
-Nit: 'err' rather than 'ret', since this is 0 or a -errno value.
-
-> -int __init f2fs_init_post_read_processing(void)
-> -{
-> -	bio_post_read_ctx_cache = KMEM_CACHE(bio_post_read_ctx, 0);
-> -	if (!bio_post_read_ctx_cache)
-> -		goto fail;
-> -	bio_post_read_ctx_pool =
-> -		mempool_create_slab_pool(NUM_PREALLOC_POST_READ_CTXS,
-> -					 bio_post_read_ctx_cache);
-> -	if (!bio_post_read_ctx_pool)
-> -		goto fail_free_cache;
-> -	return 0;
-> -
-> -fail_free_cache:
-> -	kmem_cache_destroy(bio_post_read_ctx_cache);
-> -fail:
-> -	return -ENOMEM;
-> -}
-> -
-> -void __exit f2fs_destroy_post_read_processing(void)
-> -{
-> -	mempool_destroy(bio_post_read_ctx_pool);
-> -	kmem_cache_destroy(bio_post_read_ctx_cache);
-> -}
-
-Need to remove the declarations of these functions from fs/f2fs/f2fs.h to.
-
-> diff --git a/fs/read_callbacks.c b/fs/read_callbacks.c
-> index a4196e3de05f..4b7fc2a349cd 100644
-> --- a/fs/read_callbacks.c
-> +++ b/fs/read_callbacks.c
-> @@ -76,7 +76,6 @@ void read_callbacks(struct read_callbacks_ctx *ctx)
->  	switch (++ctx->cur_step) {
->  	case STEP_DECRYPT:
->  		if (ctx->enabled_steps & (1 << STEP_DECRYPT)) {
-> -			INIT_WORK(&ctx->work, fscrypt_decrypt_work);
->  			fscrypt_enqueue_decrypt_work(&ctx->work);
->  			return;
->  		}
-
-Again, I think the work initialization should remain here as:
-
-	INIT_WORK(&ctx->work, decrypt_work);
-
-rather than moving it to fs/crypto/.
-
-Thanks!
+Why is the !PageError() check needed here?
 
 - Eric
 
