@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C4274F872
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 23 Jun 2019 00:11:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AEBF4F878
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 23 Jun 2019 00:12:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1heoEY-0006FF-5O; Sat, 22 Jun 2019 22:11:42 +0000
+	id 1heoEn-0005RN-O0; Sat, 22 Jun 2019 22:11:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1heoEV-0006Ek-WF
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Jun 2019 22:11:40 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1heoEm-0005RC-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Jun 2019 22:11:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JfufioqoUbYS7OG5xOKu/k5dzFlwZAUcGDxvG4NtRMY=; b=KJsqz/3od6ptblhZ6oKF6KQ0EV
- eYY08h8xUoooEd+OFRokfEvVN37vbaBUr60FVCIH0VJpmMenV8lrVR1Wbbzk311Bzp0ryxi7e44d9
- nQval9EjONpDy9aPpYamWgtFllVt85RFipMbN2Tm+Y2H5FEXl97n67im9w9b07UZICns=;
+ bh=1FTOqtF7Qt5reGj9DEKao2Hsw1IOJBZncyW1LRZQ6HA=; b=k5xAS+K8U0BFceq15b7DcrXPqM
+ SCE3Qeb7REb2PGuwcIFziXZHH35+Ba45j/V15QlXQgZWC4+VB27ouK52VRkSDSYd5macaPBMycaiF
+ OWDhlKOU/nysQOPQpq2+gSrJ+jJR5jUVtZoAyCcSdrHjRuGg8ufKNdwXEFyUOssKH9eY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JfufioqoUbYS7OG5xOKu/k5dzFlwZAUcGDxvG4NtRMY=; b=bCYrbrgZAHf9Ssvejfg36WO23G
- pxdHPDnBlHof04pB9NSjHp5pR4GSHE+4UDZuc5r2R1dVqBDqIKX2Jz8N2D5W7DYpmI8cMD8Ot2Ye7
- 9aMVUSn8OXglzMnfRFu40uCmgSZm7didIhSvtSRdBXG/vztNU/iwxPELm0KLxHt9+dqM=;
+ bh=1FTOqtF7Qt5reGj9DEKao2Hsw1IOJBZncyW1LRZQ6HA=; b=ZFnnCovkdYBD6OkSq1sg9dvkXE
+ VtNS92mRwOGTROM2uVWYDyYXO73YQwVfhrfiGSsM+w7X7zFSkk5QUQva07f3mMBC3I7Zb2wtSPgbk
+ +yxQ6eesvRli8SN1b50BvBdZ6GBJEzHkQGaHQFdb8Md8gitIXdRnnj2zWD4W8hdF3ehw=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1heoEY-009b0E-Tu
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Jun 2019 22:11:44 +0000
+ id 1heoEn-005Ol2-IU
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Jun 2019 22:11:58 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 34C3120862;
- Sat, 22 Jun 2019 22:11:37 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D9FA320862;
+ Sat, 22 Jun 2019 22:11:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1561241497;
- bh=UNW2ihZinuy71YqpXq2iIU53Glk0HBws/GqjfYmygj4=;
+ s=default; t=1561241511;
+ bh=pWoXCpB1qxcWe85YQz2OZPYh2L7dHQZAU4vlFFwBHyo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nssxLDzxoLPgRVQIlKQrkCTqpZmIgPEermLY+Ak/hHUUta860YqAXqE7hozR1ad2w
- 3PraRHU/peJCcXbryrIgxCTLdobJw38CE4oSHfNBA8p7FGYDcUkV8ALCvkTgUb1Dti
- 3BGQ2uoP0sgFNl+NmhSgsLX80FjX12rK+Ji/0uP4=
-Date: Sat, 22 Jun 2019 15:11:36 -0700
+ b=M/P6vgSdRCBAMVbjQGvKFCW1dEY9AZV09wQ53yTq0DU408NCkXFSAICQV6jn1+MTG
+ fX0UFSeVoTMJO67DFqUgnyjLkmU2YZuH1bOoOyIBdiE+WDzG4OALjrPOL8YO/JCnct
+ gcGg+0Aua0/NdNr7VBu6WeJliataKEavETqinIn0=
+Date: Sat, 22 Jun 2019 15:11:51 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190622221136.GC19686@jaegeuk-macbookpro.roam.corp.google.com>
+Message-ID: <20190622221151.GD19686@jaegeuk-macbookpro.roam.corp.google.com>
 References: <20190620205043.64350-1-ebiggers@kernel.org>
- <20190620205043.64350-4-ebiggers@kernel.org>
+ <20190620205043.64350-5-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190620205043.64350-4-ebiggers@kernel.org>
+In-Reply-To: <20190620205043.64350-5-ebiggers@kernel.org>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -71,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1heoEY-009b0E-Tu
-Subject: Re: [f2fs-dev] [PATCH v5 03/16] fs-verity: add UAPI header
+X-Headers-End: 1heoEn-005Ol2-IU
+Subject: Re: [f2fs-dev] [PATCH v5 04/16] fs: uapi: define verity bit for
+ FS_IOC_GETFLAGS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,19 +99,13 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 06/20, Eric Biggers wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Add the UAPI header for fs-verity, including two ioctls:
+> Add FS_VERITY_FL to the flags for FS_IOC_GETFLAGS, so that applications
+> can easily determine whether a file is a verity file at the same time as
+> they're checking other file flags.  This flag will be gettable only;
+> FS_IOC_SETFLAGS won't allow setting it, since an ioctl must be used
+> instead to provide more parameters.
 > 
-> - FS_IOC_ENABLE_VERITY
-> - FS_IOC_MEASURE_VERITY
-> 
-> These ioctls are documented in the "User API" section of
-> Documentation/filesystems/fsverity.rst.
-> 
-> Examples of using these ioctls can be found in fsverity-utils
-> (https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/fsverity-utils.git).
-> 
-> I've also written xfstests that test these ioctls
-> (https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/xfstests-dev.git/log/?h=fsverity).
+> This flag matches the on-disk bit that was already allocated for ext4.
 > 
 > Reviewed-by: Theodore Ts'o <tytso@mit.edu>
 
@@ -118,68 +113,21 @@ Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 > Signed-off-by: Eric Biggers <ebiggers@google.com>
 > ---
->  Documentation/ioctl/ioctl-number.txt |  1 +
->  include/uapi/linux/fsverity.h        | 39 ++++++++++++++++++++++++++++
->  2 files changed, 40 insertions(+)
->  create mode 100644 include/uapi/linux/fsverity.h
+>  include/uapi/linux/fs.h | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/Documentation/ioctl/ioctl-number.txt b/Documentation/ioctl/ioctl-number.txt
-> index c9558146ac5896..21767c81e86d58 100644
-> --- a/Documentation/ioctl/ioctl-number.txt
-> +++ b/Documentation/ioctl/ioctl-number.txt
-> @@ -225,6 +225,7 @@ Code  Seq#(hex)	Include File		Comments
->  'f'	00-0F	fs/ext4/ext4.h		conflict!
->  'f'	00-0F	linux/fs.h		conflict!
->  'f'	00-0F	fs/ocfs2/ocfs2_fs.h	conflict!
-> +'f'	81-8F	linux/fsverity.h
->  'g'	00-0F	linux/usb/gadgetfs.h
->  'g'	20-2F	linux/usb/g_printer.h
->  'h'	00-7F				conflict! Charon filesystem
-> diff --git a/include/uapi/linux/fsverity.h b/include/uapi/linux/fsverity.h
-> new file mode 100644
-> index 00000000000000..57d1d7fc0c345a
-> --- /dev/null
-> +++ b/include/uapi/linux/fsverity.h
-> @@ -0,0 +1,39 @@
-> +/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-> +/*
-> + * fs-verity user API
-> + *
-> + * These ioctls can be used on filesystems that support fs-verity.  See the
-> + * "User API" section of Documentation/filesystems/fsverity.rst.
-> + *
-> + * Copyright 2019 Google LLC
-> + */
-> +#ifndef _UAPI_LINUX_FSVERITY_H
-> +#define _UAPI_LINUX_FSVERITY_H
-> +
-> +#include <linux/ioctl.h>
-> +#include <linux/types.h>
-> +
-> +#define FS_VERITY_HASH_ALG_SHA256	1
-> +
-> +struct fsverity_enable_arg {
-> +	__u32 version;
-> +	__u32 hash_algorithm;
-> +	__u32 block_size;
-> +	__u32 salt_size;
-> +	__u64 salt_ptr;
-> +	__u32 sig_size;
-> +	__u32 __reserved1;
-> +	__u64 sig_ptr;
-> +	__u64 __reserved2[11];
-> +};
-> +
-> +struct fsverity_digest {
-> +	__u16 digest_algorithm;
-> +	__u16 digest_size; /* input/output */
-> +	__u8 digest[];
-> +};
-> +
-> +#define FS_IOC_ENABLE_VERITY	_IOW('f', 133, struct fsverity_enable_arg)
-> +#define FS_IOC_MEASURE_VERITY	_IOWR('f', 134, struct fsverity_digest)
-> +
-> +#endif /* _UAPI_LINUX_FSVERITY_H */
+> diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+> index 59c71fa8c553a3..df261b7e0587ed 100644
+> --- a/include/uapi/linux/fs.h
+> +++ b/include/uapi/linux/fs.h
+> @@ -306,6 +306,7 @@ struct fscrypt_key {
+>  #define FS_TOPDIR_FL			0x00020000 /* Top of directory hierarchies*/
+>  #define FS_HUGE_FILE_FL			0x00040000 /* Reserved for ext4 */
+>  #define FS_EXTENT_FL			0x00080000 /* Extents */
+> +#define FS_VERITY_FL			0x00100000 /* Verity protected inode */
+>  #define FS_EA_INODE_FL			0x00200000 /* Inode used for large EA */
+>  #define FS_EOFBLOCKS_FL			0x00400000 /* Reserved for ext4 */
+>  #define FS_NOCOW_FL			0x00800000 /* Do not cow file */
 > -- 
 > 2.22.0.410.gd8fdbe21b5-goog
 
