@@ -2,70 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7ECAB4FF4E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2019 04:24:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B38E350989
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2019 13:14:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfEej-0001kp-FP; Mon, 24 Jun 2019 02:24:29 +0000
+	id 1hfMv6-0007uA-J7; Mon, 24 Jun 2019 11:13:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hfEed-0001kd-Mf
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 02:24:23 +0000
+ (envelope-from <jack@suse.cz>) id 1hfMv5-0007u1-Uc
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 11:13:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nlS5BSfux5TqRkSPOBeEPXpDZeLO1Jnk7IyBAvfkCjo=; b=YxhE/0SPFIUCNhlSZ9rAEvO8b+
- kZW4/bNzsrLHLhcHwWBwurKsPvlT9Tx0sd4zWbYxLIi+iAjY1X8AGEpMf8lwVQ8mF3/EZSEQt+xVZ
- aPO7ERRzU8R8Z93xoKRKovCzIoZtuzYUdZ/NUxgR3ak2/g2iCeQ1HzprXq43abDO0J2c=;
+ bh=4ohSn2mg7XvN0khmY8SV975QiTEy30oR4Ocu/GECpYg=; b=XzxLXYZbGZQNsVE4hMDYGs5txW
+ HJ2lo03COvxhWo6N4yZP/KSECQ3UFsT7PeIETI1Ph0NtuPMUz9Vc6xPl21JsAICC14qL5ro/99quK
+ upkrn2d+v8zGbSslqwjz42lVs3hgnkMjSXZcrYvUJ1eTbVM/qNI8ZM/L9jGJAzaRz0Xg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nlS5BSfux5TqRkSPOBeEPXpDZeLO1Jnk7IyBAvfkCjo=; b=dumQsssXgQ3h3PPZ6rOH5Pe3t/
- QS0JpzZERTDzpETNTdmspyRgNsDORpeaOqGm4qmMiHal9RcCUwY957kt2WQLhmiuj+Ku0qiUOcsp9
- P7zQSVsksCo+lzkC9xy7bGrfodHkG/ma0jWE25wNfEJ48wl1odKkbDgnUtbb19blSEXs=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ bh=4ohSn2mg7XvN0khmY8SV975QiTEy30oR4Ocu/GECpYg=; b=Z+3O98aoD/1I1qSdalgCJRdyZA
+ QGPDC++RQLZgx+43PJIYV1rkebJvhKiYbfiXn40WH1GFylDWoTt/mh0iRj+z9LrG762RoVWY2VI9g
+ Agld6JyZiN5qHwGC/43adSi/CfbV5E/wz77geFssAPLk114wFxaGV3l5w/BnHvDBDHcY=;
+Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfEee-007AlD-KI
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 02:24:27 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 80C8598C0B34F8BF9E2E;
- Mon, 24 Jun 2019 10:24:17 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 24 Jun
- 2019 10:24:14 +0800
-To: guo weichao <guoweichao@msn.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190524075627.107151-1-yuchao0@huawei.com>
- <20190622214656.GA18429@jaegeuk-macbookpro.roam.corp.google.com>
- <MWHPR02MB26710762B08C9EAB74BB2FABC6E00@MWHPR02MB2671.namprd02.prod.outlook.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <efdf67e2-74d4-bc6d-2ad3-f9b2d308fcff@huawei.com>
-Date: Mon, 24 Jun 2019 10:24:16 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1hfMvA-007i1g-3m
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 11:14:02 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id EE700AC20;
+ Mon, 24 Jun 2019 11:13:51 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id 6211D1E2F23; Mon, 24 Jun 2019 13:13:49 +0200 (CEST)
+Date: Mon, 24 Jun 2019 13:13:49 +0200
+From: Jan Kara <jack@suse.cz>
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Message-ID: <20190624111349.GF32376@quack2.suse.cz>
+References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+ <156116141836.1664939.12249697737780481978.stgit@magnolia>
 MIME-Version: 1.0
-In-Reply-To: <MWHPR02MB26710762B08C9EAB74BB2FABC6E00@MWHPR02MB2671.namprd02.prod.outlook.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <156116141836.1664939.12249697737780481978.stgit@magnolia>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hfEee-007AlD-KI
-Subject: Re: [f2fs-dev] =?utf-8?b?5Zue5aSNOiAgW1BBVENIXSBmc2NrLmYyZnM6IHdy?=
- =?utf-8?q?ite_checkpoint_with_OPU_mode?=
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1hfMvA-007i1g-3m
+Subject: Re: [f2fs-dev] [PATCH 1/7] mm/fs: don't allow writes to immutable
+ files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,115 +72,148 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-mm@kvack.org,
+ clm@fb.com, adilger.kernel@dilger.ca, matthew.garrett@nebula.com,
+ linux-nilfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, josef@toxicpanda.com, reiserfs-devel@vger.kernel.org,
+ viro@zeniv.linux.org.uk, dsterba@suse.com, jaegeuk@kernel.org, tytso@mit.edu,
+ ard.biesheuvel@linaro.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ jk@ozlabs.org, jack@suse.com, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkgSmFlZ2V1aywKCkkgcGlja2VkIHVwIFdlaWNoYW8ncyBwYXRjaCBzaW5jZSBJJ20gbm90IHN1
-cmUgd2hldGhlciBXZWljaGFvIHN0aWxsIGhhcyB0aW1lCndvcmtpbmcgb24gaXQuCgpPbiAyMDE5
-LzYvMjQgOToyMywgZ3VvIHdlaWNoYW8gd3JvdGU6Cj4gSGkgSmFlZ2V1aywKPiAKPiBJIHRoaW5r
-IGl0J3MgYmV0dGVyIHRvIGNvcHkgQ1AgQSB0byBDUCBCIHBvc2l0aW9uIGZpcnN0LCB3aGljaCBj
-YW4gbWFrZSBzdXJlIHdlCj4gaGF2ZSBhIGZzY2stbm90LXRvdWNoZWQgY29ycmVjdCBjaGVja3Bv
-aW50LiAKCkphZWdldWssIFdlaWNoYW8sCgpJIHRoaW5rIGl0J3Mgb2theSwgbGV0IG1lIHVwZGF0
-ZSB0aGUgcGF0Y2guIDopCgo+IAo+IFAuUzogZGlkIHlvdSB3YW50IHRvIGRpc2N1c3MgaXQgd2l0
-aCBDaGFvIFl1PyA677yJSEFIQQoKV2VpY2hhbywgaXQncyBnbGFkIHRvIHNlZSB5b3VyIGFjdGl2
-aXR5IGFnYWluLiA7KQoKVGhhbmtzLAoKPiAKPiBCUiwKPiBXZWljaGFvCj4gLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KPiAq5Y+R5Lu25Lq6OiogSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9y
-Zz4KPiAq5Y+R6YCB5pe26Ze0OiogMjAxOeW5tDbmnIgyM+aXpSA1OjQ2Cj4gKuaUtuS7tuS6ujoq
-IENoYW8gWXUKPiAq5oqE6YCBOiogbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
-ZXQKPiAq5Li76aKYOiogUmU6IFtmMmZzLWRldl0gW1BBVENIXSBmc2NrLmYyZnM6IHdyaXRlIGNo
-ZWNrcG9pbnQgd2l0aCBPUFUgbW9kZQo+IMKgCj4gSGkgV2VpY2hhbywKPiAKPiBUaGlzIHBhdGNo
-IGJyZWFrcyB0aGUgaW1hZ2UgZm91bmQgYnkgbXkgbG9jYWwgcG93ZXItY3V0IHRlc3RzLgo+IAo+
-IE9uIDA1LzI0LCBDaGFvIFl1IHdyb3RlOgo+PiBUaGlzIG9yaWdpbmFsIHBhdGNoIHdhcyBmcm9t
-IFdlaWNoYW8gR3VvLgo+PiAKPj4gV2UgbWF5IGVuY291bnRlciBib3RoIGNoZWNrcG9pbnRzIGlu
-dmFsaWQgaW4gc3VjaCBhIGNhc2U6Cj4+IDEuIGtlcm5lbCB3cml0ZXMgQ1AgQTsKPj4gMi4gcG93
-ZXItY3V0IHdoZW4ga2VybmVsIHdyaXRlcyBDUCBCLCB0aGVuIENQIEIgaXMgY29ycnVwdGVkOwo+
-PiAzLiBmc2NrOiBsb2FkIENQIEEsIGZpeCBtZXRhL2RhdGE7Cj4gCj4gV291bGQgaXQgYmUgYmV0
-dGVyIHRvIGNvcHkgQ1AgQSB0byBDUCBCIHBvc2l0aW9uIGZpcnN0Pwo+IAo+IFRoYW5rcywKPiAK
-Pj4gNC4gcG93ZXItY3V0IHdoZW4gZnNjayB3cml0ZXMgQ1AgQSBpbi1wbGFjZSwgdGhlbiBDUCBB
-IGlzIGNvcnJ1cHRlZCB0b287Cj4+IAo+PiBUbyBhdm9pZCBib3RoIGNoZWNrcG9pbnRzIGJlaW5n
-IGludmFsaWQsIHRoaXMgcGF0Y2ggY2hhbmdlcyB0byBlbmFibGVzCj4+IGZzY2sgdG8gd3JpdGUg
-Y2hlY2twb2ludCB3aXRoIG91dC1wbGFjZS11cGRhdGUgbWV0aG9kIGZpcnN0LCBhbmQgdGhlbgo+
-PiB3cml0ZSBjaGVja3BvaW50IGluIG9yaWdpbmFsIHBsYWNlLgo+PiAKPj4gVGhpcyBjYW4gbWFr
-ZSBzdXJlIGR1cmluZyBmc2NrIHJlcGFpcmluZywgZXZlbiB0aGVyZSBpcyBzdWRkZW4gcG93ZXIt
-Y3V0LAo+PiBmaWxlc3lzdGVtIHdpbGwgc3RpbGwgaGF2ZSBhdCBsZWFzdCBvbmUgdmFsaWQgY2hl
-Y2twb2ludC4KPj4gCj4+IFNpZ25lZC1vZmYtYnk6IFdlaWNoYW8gR3VvIDxndW93ZWljaGFvQGh1
-YXdlaS5jb20+Cj4+IFNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT4K
-Pj4gLS0tCj4+IHYyOgo+PiAtIGNsZWFuIHVwIGNvZGVzCj4+IC0gY292ZXIgZmx1c2hfam91cm5h
-bF9lbnRyaWVzKCkgY2FzZQo+PiAtIHVwZGF0ZSBjb21tZXQgbWVzc2FnZQo+PsKgIGZzY2svZnNj
-ay5jwqAgfCAxNyArKysrKysrKysrKysrKystLQo+PsKgIGZzY2svZnNjay5owqAgfMKgIDEgKwo+
-PsKgIGZzY2svbW91bnQuYyB8IDE1ICsrKysrKysrKysrKysrLQo+PsKgIDMgZmlsZXMgY2hhbmdl
-ZCwgMzAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKPj4gCj4+IGRpZmYgLS1naXQgYS9m
-c2NrL2ZzY2suYyBiL2ZzY2svZnNjay5jCj4+IGluZGV4IDZmMGYyNjIuLjZhZWQ1MWQgMTAwNjQ0
-Cj4+IC0tLSBhL2ZzY2svZnNjay5jCj4+ICsrKyBiL2ZzY2svZnNjay5jCj4+IEBAIC0yMTIxLDYg
-KzIxMjEsMTkgQEAgc3RhdGljIHZvaWQgZml4X2NoZWNrcG9pbnQoc3RydWN0IGYyZnNfc2JfaW5m
-byAqc2JpKQo+PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9uYXRfYml0cyhz
-YmksIHNiLCBjcCwgc2JpLT5jdXJfY3ApOwo+PsKgIH0KPj7CoCAKPj4gK3N0YXRpYyB2b2lkIGZp
-eF9jaGVja3BvaW50cyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+ICt7Cj4+ICvCoMKgwqDC
-oCBpbnQgaSwgcmV0Owo+PiArCj4+ICvCoMKgwqDCoCBmb3IgKGkgPSAwOyBpIDwgMjsgaSsrKSB7
-Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLyogd3JpdGUgY2hlY2twb2ludCBvdXQgb2Yg
-cGxhY2UgZmlyc3QgKi8KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzYmktPmN1cl9jcCA9
-IHNiaS0+Y3VyX2NwICUgMiArIDE7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2No
-ZWNrcG9pbnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXQgPSBmMmZzX2Zz
-eW5jX2RldmljZSgpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEFTU0VSVChyZXQgPj0g
-MCk7Cj4+ICvCoMKgwqDCoCB9Cj4+ICt9Cj4+ICsKPj7CoCBpbnQgY2hlY2tfY3Vyc2VnX29mZnNl
-dChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGludCB0eXBlKQo+PsKgIHsKPj7CoMKgwqDCoMKg
-wqDCoCBzdHJ1Y3QgY3Vyc2VnX2luZm8gKmN1cnNlZyA9IENVUlNFR19JKHNiaSwgdHlwZSk7Cj4+
-IEBAIC0yNzcxLDEwICsyNzg0LDEwIEBAIGludCBmc2NrX3ZlcmlmeShzdHJ1Y3QgZjJmc19zYl9p
-bmZvICpzYmkpCj4+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCByZXdyaXRlX3NpdF9hcmVhX2JpdG1hcChzYmkpOwo+PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2N1cnNlZ19pbmZvKHNiaSk7Cj4+wqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaXhfY2hlY2tzdW0oc2JpKTsK
-Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2NoZWNrcG9p
-bnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4
-X2NoZWNrcG9pbnRzKHNiaSk7Cj4+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxz
-ZSBpZiAoaXNfc2V0X2NrcHRfZmxhZ3MoY3AsIENQX0ZTQ0tfRkxBRykgfHwKPj7CoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlzX3NldF9ja3B0X2ZsYWdzKGNw
-LCBDUF9RVU9UQV9ORUVEX0ZTQ0tfRkxBRykpIHsKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgd3JpdGVfY2hlY2twb2ludChzYmkpOwo+PiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9jaGVja3BvaW50cyhzYmkpOwo+PsKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+wqDCoMKgwqDCoMKgwqAgfQo+PsKgwqDC
-oMKgwqDCoMKgIHJldHVybiByZXQ7Cj4+IGRpZmYgLS1naXQgYS9mc2NrL2ZzY2suaCBiL2ZzY2sv
-ZnNjay5oCj4+IGluZGV4IGQzOGU4ZGUuLjhmZTVkYjEgMTAwNjQ0Cj4+IC0tLSBhL2ZzY2svZnNj
-ay5oCj4+ICsrKyBiL2ZzY2svZnNjay5oCj4+IEBAIC0xOTIsNiArMTkyLDcgQEAgZXh0ZXJuIHZv
-aWQgbW92ZV9jdXJzZWdfaW5mbyhzdHJ1Y3QgZjJmc19zYl9pbmZvICosIHU2NCwgaW50KTsKPj7C
-oCBleHRlcm4gdm9pZCB3cml0ZV9jdXJzZWdfaW5mbyhzdHJ1Y3QgZjJmc19zYl9pbmZvICopOwo+
-PsKgIGV4dGVybiBpbnQgZmluZF9uZXh0X2ZyZWVfYmxvY2soc3RydWN0IGYyZnNfc2JfaW5mbyAq
-LCB1NjQgKiwgaW50LCBpbnQpOwo+PsKgIGV4dGVybiB2b2lkIHdyaXRlX2NoZWNrcG9pbnQoc3Ry
-dWN0IGYyZnNfc2JfaW5mbyAqKTsKPj4gK2V4dGVybiB2b2lkIHdyaXRlX2NoZWNrcG9pbnRzKHN0
-cnVjdCBmMmZzX3NiX2luZm8gKik7Cj4+wqAgZXh0ZXJuIHZvaWQgdXBkYXRlX3N1cGVyYmxvY2so
-c3RydWN0IGYyZnNfc3VwZXJfYmxvY2sgKiwgaW50KTsKPj7CoCBleHRlcm4gdm9pZCB1cGRhdGVf
-ZGF0YV9ibGthZGRyKHN0cnVjdCBmMmZzX3NiX2luZm8gKiwgbmlkX3QsIHUxNiwgYmxvY2tfdCk7
-Cj4+wqAgZXh0ZXJuIHZvaWQgdXBkYXRlX25hdF9ibGthZGRyKHN0cnVjdCBmMmZzX3NiX2luZm8g
-KiwgbmlkX3QsIG5pZF90LCBibG9ja190KTsKPj4gZGlmZiAtLWdpdCBhL2ZzY2svbW91bnQuYyBi
-L2ZzY2svbW91bnQuYwo+PiBpbmRleCAxYzVjZDkzLi5iYmIxYWY3IDEwMDY0NAo+PiAtLS0gYS9m
-c2NrL21vdW50LmMKPj4gKysrIGIvZnNjay9tb3VudC5jCj4+IEBAIC0yMTI3LDcgKzIxMjcsNyBA
-QCB2b2lkIGZsdXNoX2pvdXJuYWxfZW50cmllcyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+
-wqDCoMKgwqDCoMKgwqAgaW50IG5fc2l0cyA9IGZsdXNoX3NpdF9qb3VybmFsX2VudHJpZXMoc2Jp
-KTsKPj7CoCAKPj7CoMKgwqDCoMKgwqDCoCBpZiAobl9uYXRzIHx8IG5fc2l0cykKPj4gLcKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9jaGVja3BvaW50KHNiaSk7Cj4+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgd3JpdGVfY2hlY2twb2ludHMoc2JpKTsKPj7CoCB9Cj4+wqAgCj4+wqAg
-dm9pZCBmbHVzaF9zaXRfZW50cmllcyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+IEBAIC0y
-NDUyLDYgKzI0NTIsMTkgQEAgdm9pZCB3cml0ZV9jaGVja3BvaW50KHN0cnVjdCBmMmZzX3NiX2lu
-Zm8gKnNiaSkKPj7CoMKgwqDCoMKgwqDCoCBBU1NFUlQocmV0ID49IDApOwo+PsKgIH0KPj7CoCAK
-Pj4gK3ZvaWQgd3JpdGVfY2hlY2twb2ludHMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+PiAr
-ewo+PiArwqDCoMKgwqAgaW50IGksIHJldDsKPj4gKwo+PiArwqDCoMKgwqAgZm9yIChpID0gMDsg
-aSA8IDI7IGkrKykgewo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8qIHdyaXRlIGNoZWNr
-cG9pbnQgb3V0IG9mIHBsYWNlIGZpcnN0ICovCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-c2JpLT5jdXJfY3AgPSBzYmktPmN1cl9jcCAlIDIgKyAxOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHdyaXRlX2NoZWNrcG9pbnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCByZXQgPSBmMmZzX2ZzeW5jX2RldmljZSgpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IEFTU0VSVChyZXQgPj0gMCk7Cj4+ICvCoMKgwqDCoCB9Cj4+ICt9Cj4+ICsKPj7CoCB2b2lkIGJ1
-aWxkX25hdF9hcmVhX2JpdG1hcChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+wqAgewo+PsKg
-wqDCoMKgwqDCoMKgIHN0cnVjdCBjdXJzZWdfaW5mbyAqY3Vyc2VnID0gQ1VSU0VHX0koc2JpLCBD
-VVJTRUdfSE9UX0RBVEEpOwo+PiAtLSAKPj4gMi4xOC4wLnJjMQo+IAo+IAo+IF9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBt
-YWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0
-dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2
-ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51
-eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZv
-cmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51
-eC1mMmZzLWRldmVsCg==
+On Fri 21-06-19 16:56:58, Darrick J. Wong wrote:
+> From: Darrick J. Wong <darrick.wong@oracle.com>
+> 
+> The chattr manpage has this to say about immutable files:
+> 
+> "A file with the 'i' attribute cannot be modified: it cannot be deleted
+> or renamed, no link can be created to this file, most of the file's
+> metadata can not be modified, and the file can not be opened in write
+> mode."
+> 
+> Once the flag is set, it is enforced for quite a few file operations,
+> such as fallocate, fpunch, fzero, rm, touch, open, etc.  However, we
+> don't check for immutability when doing a write(), a PROT_WRITE mmap(),
+> a truncate(), or a write to a previously established mmap.
+> 
+> If a program has an open write fd to a file that the administrator
+> subsequently marks immutable, the program still can change the file
+> contents.  Weird!
+> 
+> The ability to write to an immutable file does not follow the manpage
+> promise that immutable files cannot be modified.  Worse yet it's
+> inconsistent with the behavior of other syscalls which don't allow
+> modifications of immutable files.
+> 
+> Therefore, add the necessary checks to make the write, mmap, and
+> truncate behavior consistent with what the manpage says and consistent
+> with other syscalls on filesystems which support IMMUTABLE.
+> 
+> Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
+
+Looks good to me. You can add:
+
+Reviewed-by: Jan Kara <jack@suse.cz>
+
+								Honza
+
+> ---
+>  fs/attr.c    |   13 ++++++-------
+>  mm/filemap.c |    3 +++
+>  mm/memory.c  |    3 +++
+>  mm/mmap.c    |    8 ++++++--
+>  4 files changed, 18 insertions(+), 9 deletions(-)
+> 
+> 
+> diff --git a/fs/attr.c b/fs/attr.c
+> index d22e8187477f..1fcfdcc5b367 100644
+> --- a/fs/attr.c
+> +++ b/fs/attr.c
+> @@ -233,19 +233,18 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
+>  
+>  	WARN_ON_ONCE(!inode_is_locked(inode));
+>  
+> -	if (ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID | ATTR_TIMES_SET)) {
+> -		if (IS_IMMUTABLE(inode) || IS_APPEND(inode))
+> -			return -EPERM;
+> -	}
+> +	if (IS_IMMUTABLE(inode))
+> +		return -EPERM;
+> +
+> +	if ((ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID | ATTR_TIMES_SET)) &&
+> +	    IS_APPEND(inode))
+> +		return -EPERM;
+>  
+>  	/*
+>  	 * If utimes(2) and friends are called with times == NULL (or both
+>  	 * times are UTIME_NOW), then we need to check for write permission
+>  	 */
+>  	if (ia_valid & ATTR_TOUCH) {
+> -		if (IS_IMMUTABLE(inode))
+> -			return -EPERM;
+> -
+>  		if (!inode_owner_or_capable(inode)) {
+>  			error = inode_permission(inode, MAY_WRITE);
+>  			if (error)
+> diff --git a/mm/filemap.c b/mm/filemap.c
+> index aac71aef4c61..dad85e10f5f8 100644
+> --- a/mm/filemap.c
+> +++ b/mm/filemap.c
+> @@ -2935,6 +2935,9 @@ inline ssize_t generic_write_checks(struct kiocb *iocb, struct iov_iter *from)
+>  	loff_t count;
+>  	int ret;
+>  
+> +	if (IS_IMMUTABLE(inode))
+> +		return -EPERM;
+> +
+>  	if (!iov_iter_count(from))
+>  		return 0;
+>  
+> diff --git a/mm/memory.c b/mm/memory.c
+> index ddf20bd0c317..4311cfdade90 100644
+> --- a/mm/memory.c
+> +++ b/mm/memory.c
+> @@ -2235,6 +2235,9 @@ static vm_fault_t do_page_mkwrite(struct vm_fault *vmf)
+>  
+>  	vmf->flags = FAULT_FLAG_WRITE|FAULT_FLAG_MKWRITE;
+>  
+> +	if (vmf->vma->vm_file && IS_IMMUTABLE(file_inode(vmf->vma->vm_file)))
+> +		return VM_FAULT_SIGBUS;
+> +
+>  	ret = vmf->vma->vm_ops->page_mkwrite(vmf);
+>  	/* Restore original flags so that caller is not surprised */
+>  	vmf->flags = old_flags;
+> diff --git a/mm/mmap.c b/mm/mmap.c
+> index 7e8c3e8ae75f..ac1e32205237 100644
+> --- a/mm/mmap.c
+> +++ b/mm/mmap.c
+> @@ -1483,8 +1483,12 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
+>  		case MAP_SHARED_VALIDATE:
+>  			if (flags & ~flags_mask)
+>  				return -EOPNOTSUPP;
+> -			if ((prot&PROT_WRITE) && !(file->f_mode&FMODE_WRITE))
+> -				return -EACCES;
+> +			if (prot & PROT_WRITE) {
+> +				if (!(file->f_mode & FMODE_WRITE))
+> +					return -EACCES;
+> +				if (IS_IMMUTABLE(file_inode(file)))
+> +					return -EPERM;
+> +			}
+>  
+>  			/*
+>  			 * Make sure we don't allow writing to an append-only
+> 
+> 
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
