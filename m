@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE6014FE94
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2019 03:46:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ECAB4FF4E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2019 04:24:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfE4F-0008Vr-2W; Mon, 24 Jun 2019 01:46:47 +0000
+	id 1hfEej-0001kp-FP; Mon, 24 Jun 2019 02:24:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hfE47-0008VE-Gf
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 01:46:39 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hfEed-0001kd-Mf
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 02:24:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4cX92e1S8mSnk2mXxZjV+4uPrzuRsHvmP4pc6SM7hZw=; b=UueIACNRNDKqbuOl+6hMTzCgzK
- 3gqHaWrs62aQpbKcoPXYpsXH/UpwDhuVvddoykj2AHEinG1upff9DzOhTElyp41IOvI+OD/Djl3nV
- ouFcjWakN2TQdV2zw3KoycVnHFCl2P5qYtUi6MpHZgfAnd5ZTuuwbTxJVBt+s9c8D/LM=;
+ bh=nlS5BSfux5TqRkSPOBeEPXpDZeLO1Jnk7IyBAvfkCjo=; b=YxhE/0SPFIUCNhlSZ9rAEvO8b+
+ kZW4/bNzsrLHLhcHwWBwurKsPvlT9Tx0sd4zWbYxLIi+iAjY1X8AGEpMf8lwVQ8mF3/EZSEQt+xVZ
+ aPO7ERRzU8R8Z93xoKRKovCzIoZtuzYUdZ/NUxgR3ak2/g2iCeQ1HzprXq43abDO0J2c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,30 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4cX92e1S8mSnk2mXxZjV+4uPrzuRsHvmP4pc6SM7hZw=; b=h2ennsQwkJ0isi2puZP20lzYQU
- vXmKHC+TgJ02AA3uZCL/2Ioe65W9UZM0bhCmtiGJdmA10Tnr1r7EMqOxQeV/2E+G7GtodenW4JnOb
- ytOBOi0wo8BxWRPxee4F82eFJoEF4bmNkunDGtObj7JCDNUDvb6hrrrSrKI+wXcawOo4=;
+ bh=nlS5BSfux5TqRkSPOBeEPXpDZeLO1Jnk7IyBAvfkCjo=; b=dumQsssXgQ3h3PPZ6rOH5Pe3t/
+ QS0JpzZERTDzpETNTdmspyRgNsDORpeaOqGm4qmMiHal9RcCUwY957kt2WQLhmiuj+Ku0qiUOcsp9
+ P7zQSVsksCo+lzkC9xy7bGrfodHkG/ma0jWE25wNfEJ48wl1odKkbDgnUtbb19blSEXs=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfE45-0078do-5o
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 01:46:39 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id E68BE3218E86D03620B8;
- Mon, 24 Jun 2019 09:46:29 +0800 (CST)
+ id 1hfEee-007AlD-KI
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jun 2019 02:24:27 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 80C8598C0B34F8BF9E2E;
+ Mon, 24 Jun 2019 10:24:17 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
  (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 24 Jun
- 2019 09:46:26 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20190621180124.82842-1-jaegeuk@kernel.org>
+ 2019 10:24:14 +0800
+To: guo weichao <guoweichao@msn.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20190524075627.107151-1-yuchao0@huawei.com>
+ <20190622214656.GA18429@jaegeuk-macbookpro.roam.corp.google.com>
+ <MWHPR02MB26710762B08C9EAB74BB2FABC6E00@MWHPR02MB2671.namprd02.prod.outlook.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <622f5e04-3781-d49a-d65d-a7c244389cb3@huawei.com>
-Date: Mon, 24 Jun 2019 09:46:26 +0800
+Message-ID: <efdf67e2-74d4-bc6d-2ad3-f9b2d308fcff@huawei.com>
+Date: Mon, 24 Jun 2019 10:24:16 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190621180124.82842-1-jaegeuk@kernel.org>
+In-Reply-To: <MWHPR02MB26710762B08C9EAB74BB2FABC6E00@MWHPR02MB2671.namprd02.prod.outlook.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -62,8 +63,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hfE45-0078do-5o
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add wsync_mode for sysfs entry
+X-Headers-End: 1hfEee-007AlD-KI
+Subject: Re: [f2fs-dev] =?utf-8?b?5Zue5aSNOiAgW1BBVENIXSBmc2NrLmYyZnM6IHdy?=
+ =?utf-8?q?ite_checkpoint_with_OPU_mode?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,149 +77,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/6/22 2:01, Jaegeuk Kim wrote:
-> From: Jaegeuk Kim <jaegeuk@google.com>
-> 
-> This add one sysfs entry to control REQ_SYNC/REQ_BACKGROUND for write bios
-> for data page writes.
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++++++
->  Documentation/filesystems/f2fs.txt      |  4 ++++
->  fs/f2fs/data.c                          |  3 +--
->  fs/f2fs/f2fs.h                          | 12 ++++++++++++
->  fs/f2fs/sysfs.c                         |  2 ++
->  5 files changed, 26 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index dca326e0ee3e..d3eca3eb3214 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -251,3 +251,10 @@ Description:
->  		If checkpoint=disable, it displays the number of blocks that are unusable.
->                  If checkpoint=enable it displays the enumber of blocks that would be unusable
->                  if checkpoint=disable were to be set.
-> +
-> +What:		/sys/fs/f2fs/<disk>/wsync_mode
-> +Date		June 2019
-> +Contact:	"Jaegeuk Kim" <jaegeuk.kim@kernel.org>
-
-jaegeuk@kernel.org ?
-
-> +Description:
-> +		0 gives no change. 1 assigns all the data writes with REQ_SYNC.
-> +                2 does REQ_BACKGROUND instead.
-> diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-> index bebd1be3ba49..81c529801a88 100644
-> --- a/Documentation/filesystems/f2fs.txt
-> +++ b/Documentation/filesystems/f2fs.txt
-> @@ -413,6 +413,10 @@ Files in /sys/fs/f2fs/<devname>
->                                that would be unusable if checkpoint=disable were
->                                to be set.
->  
-> + wsync_mode                   0 is by default. 1 gives REQ_SYNC for all the data
-> +                              writes. 2 gives REQ_BACKGROUND for all. This can
-> +                              used for the performance tuning purpose.
-
-It looks so hacking. :P
-
-Could you please explain more about this idea, I'm confused in which scenario it
-can improve performance.
-
-Thanks,
-
-> +
->  ================================================================================
->  USAGE
->  ================================================================================
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index f4e1672bd96e..18c73a1fdef3 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -9,7 +9,6 @@
->  #include <linux/f2fs_fs.h>
->  #include <linux/buffer_head.h>
->  #include <linux/mpage.h>
-> -#include <linux/writeback.h>
->  #include <linux/backing-dev.h>
->  #include <linux/pagevec.h>
->  #include <linux/blkdev.h>
-> @@ -2021,7 +2020,7 @@ static int __write_data_page(struct page *page, bool *submitted,
->  		.ino = inode->i_ino,
->  		.type = DATA,
->  		.op = REQ_OP_WRITE,
-> -		.op_flags = wbc_to_write_flags(wbc),
-> +		.op_flags = f2fs_wbc_to_write_flags(sbi, wbc),
->  		.old_blkaddr = NULL_ADDR,
->  		.page = page,
->  		.encrypted_page = NULL,
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 2be2b16573c3..1cc46a6dc340 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -12,6 +12,7 @@
->  #include <linux/types.h>
->  #include <linux/page-flags.h>
->  #include <linux/buffer_head.h>
-> +#include <linux/writeback.h>
->  #include <linux/slab.h>
->  #include <linux/crc32.h>
->  #include <linux/magic.h>
-> @@ -1264,6 +1265,7 @@ struct f2fs_sb_info {
->  
->  	/* writeback control */
->  	atomic_t wb_sync_req[META];	/* count # of WB_SYNC threads */
-> +	int wsync_mode;			/* write mode */
->  
->  	/* valid inode count */
->  	struct percpu_counter total_valid_inode_count;
-> @@ -3631,6 +3633,16 @@ static inline void set_opt_mode(struct f2fs_sb_info *sbi, unsigned int mt)
->  	}
->  }
->  
-> +static inline int f2fs_wbc_to_write_flags(struct f2fs_sb_info *sbi,
-> +				struct writeback_control *wbc)
-> +{
-> +	if (sbi->wsync_mode == 1)
-> +		return REQ_SYNC;
-> +	if (sbi->wsync_mode == 2)
-> +		return REQ_BACKGROUND;
-> +	return wbc_to_write_flags(wbc);
-> +}
-> +
->  static inline bool f2fs_may_encrypt(struct inode *inode)
->  {
->  #ifdef CONFIG_FS_ENCRYPTION
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index 3aeacd0aacfd..e3c164d921a1 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -455,6 +455,7 @@ F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
->  F2FS_GENERAL_RO_ATTR(features);
->  F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
->  F2FS_GENERAL_RO_ATTR(unusable);
-> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, wsync_mode, wsync_mode);
->  
->  #ifdef CONFIG_FS_ENCRYPTION
->  F2FS_FEATURE_RO_ATTR(encryption, FEAT_CRYPTO);
-> @@ -515,6 +516,7 @@ static struct attribute *f2fs_attrs[] = {
->  	ATTR_LIST(features),
->  	ATTR_LIST(reserved_blocks),
->  	ATTR_LIST(current_reserved_blocks),
-> +	ATTR_LIST(wsync_mode),
->  	NULL,
->  };
->  ATTRIBUTE_GROUPS(f2fs);
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgSmFlZ2V1aywKCkkgcGlja2VkIHVwIFdlaWNoYW8ncyBwYXRjaCBzaW5jZSBJJ20gbm90IHN1
+cmUgd2hldGhlciBXZWljaGFvIHN0aWxsIGhhcyB0aW1lCndvcmtpbmcgb24gaXQuCgpPbiAyMDE5
+LzYvMjQgOToyMywgZ3VvIHdlaWNoYW8gd3JvdGU6Cj4gSGkgSmFlZ2V1aywKPiAKPiBJIHRoaW5r
+IGl0J3MgYmV0dGVyIHRvIGNvcHkgQ1AgQSB0byBDUCBCIHBvc2l0aW9uIGZpcnN0LCB3aGljaCBj
+YW4gbWFrZSBzdXJlIHdlCj4gaGF2ZSBhIGZzY2stbm90LXRvdWNoZWQgY29ycmVjdCBjaGVja3Bv
+aW50LiAKCkphZWdldWssIFdlaWNoYW8sCgpJIHRoaW5rIGl0J3Mgb2theSwgbGV0IG1lIHVwZGF0
+ZSB0aGUgcGF0Y2guIDopCgo+IAo+IFAuUzogZGlkIHlvdSB3YW50IHRvIGRpc2N1c3MgaXQgd2l0
+aCBDaGFvIFl1PyA677yJSEFIQQoKV2VpY2hhbywgaXQncyBnbGFkIHRvIHNlZSB5b3VyIGFjdGl2
+aXR5IGFnYWluLiA7KQoKVGhhbmtzLAoKPiAKPiBCUiwKPiBXZWljaGFvCj4gLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KPiAq5Y+R5Lu25Lq6OiogSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9y
+Zz4KPiAq5Y+R6YCB5pe26Ze0OiogMjAxOeW5tDbmnIgyM+aXpSA1OjQ2Cj4gKuaUtuS7tuS6ujoq
+IENoYW8gWXUKPiAq5oqE6YCBOiogbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQKPiAq5Li76aKYOiogUmU6IFtmMmZzLWRldl0gW1BBVENIXSBmc2NrLmYyZnM6IHdyaXRlIGNo
+ZWNrcG9pbnQgd2l0aCBPUFUgbW9kZQo+IMKgCj4gSGkgV2VpY2hhbywKPiAKPiBUaGlzIHBhdGNo
+IGJyZWFrcyB0aGUgaW1hZ2UgZm91bmQgYnkgbXkgbG9jYWwgcG93ZXItY3V0IHRlc3RzLgo+IAo+
+IE9uIDA1LzI0LCBDaGFvIFl1IHdyb3RlOgo+PiBUaGlzIG9yaWdpbmFsIHBhdGNoIHdhcyBmcm9t
+IFdlaWNoYW8gR3VvLgo+PiAKPj4gV2UgbWF5IGVuY291bnRlciBib3RoIGNoZWNrcG9pbnRzIGlu
+dmFsaWQgaW4gc3VjaCBhIGNhc2U6Cj4+IDEuIGtlcm5lbCB3cml0ZXMgQ1AgQTsKPj4gMi4gcG93
+ZXItY3V0IHdoZW4ga2VybmVsIHdyaXRlcyBDUCBCLCB0aGVuIENQIEIgaXMgY29ycnVwdGVkOwo+
+PiAzLiBmc2NrOiBsb2FkIENQIEEsIGZpeCBtZXRhL2RhdGE7Cj4gCj4gV291bGQgaXQgYmUgYmV0
+dGVyIHRvIGNvcHkgQ1AgQSB0byBDUCBCIHBvc2l0aW9uIGZpcnN0Pwo+IAo+IFRoYW5rcywKPiAK
+Pj4gNC4gcG93ZXItY3V0IHdoZW4gZnNjayB3cml0ZXMgQ1AgQSBpbi1wbGFjZSwgdGhlbiBDUCBB
+IGlzIGNvcnJ1cHRlZCB0b287Cj4+IAo+PiBUbyBhdm9pZCBib3RoIGNoZWNrcG9pbnRzIGJlaW5n
+IGludmFsaWQsIHRoaXMgcGF0Y2ggY2hhbmdlcyB0byBlbmFibGVzCj4+IGZzY2sgdG8gd3JpdGUg
+Y2hlY2twb2ludCB3aXRoIG91dC1wbGFjZS11cGRhdGUgbWV0aG9kIGZpcnN0LCBhbmQgdGhlbgo+
+PiB3cml0ZSBjaGVja3BvaW50IGluIG9yaWdpbmFsIHBsYWNlLgo+PiAKPj4gVGhpcyBjYW4gbWFr
+ZSBzdXJlIGR1cmluZyBmc2NrIHJlcGFpcmluZywgZXZlbiB0aGVyZSBpcyBzdWRkZW4gcG93ZXIt
+Y3V0LAo+PiBmaWxlc3lzdGVtIHdpbGwgc3RpbGwgaGF2ZSBhdCBsZWFzdCBvbmUgdmFsaWQgY2hl
+Y2twb2ludC4KPj4gCj4+IFNpZ25lZC1vZmYtYnk6IFdlaWNoYW8gR3VvIDxndW93ZWljaGFvQGh1
+YXdlaS5jb20+Cj4+IFNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT4K
+Pj4gLS0tCj4+IHYyOgo+PiAtIGNsZWFuIHVwIGNvZGVzCj4+IC0gY292ZXIgZmx1c2hfam91cm5h
+bF9lbnRyaWVzKCkgY2FzZQo+PiAtIHVwZGF0ZSBjb21tZXQgbWVzc2FnZQo+PsKgIGZzY2svZnNj
+ay5jwqAgfCAxNyArKysrKysrKysrKysrKystLQo+PsKgIGZzY2svZnNjay5owqAgfMKgIDEgKwo+
+PsKgIGZzY2svbW91bnQuYyB8IDE1ICsrKysrKysrKysrKysrLQo+PsKgIDMgZmlsZXMgY2hhbmdl
+ZCwgMzAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKPj4gCj4+IGRpZmYgLS1naXQgYS9m
+c2NrL2ZzY2suYyBiL2ZzY2svZnNjay5jCj4+IGluZGV4IDZmMGYyNjIuLjZhZWQ1MWQgMTAwNjQ0
+Cj4+IC0tLSBhL2ZzY2svZnNjay5jCj4+ICsrKyBiL2ZzY2svZnNjay5jCj4+IEBAIC0yMTIxLDYg
+KzIxMjEsMTkgQEAgc3RhdGljIHZvaWQgZml4X2NoZWNrcG9pbnQoc3RydWN0IGYyZnNfc2JfaW5m
+byAqc2JpKQo+PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9uYXRfYml0cyhz
+YmksIHNiLCBjcCwgc2JpLT5jdXJfY3ApOwo+PsKgIH0KPj7CoCAKPj4gK3N0YXRpYyB2b2lkIGZp
+eF9jaGVja3BvaW50cyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+ICt7Cj4+ICvCoMKgwqDC
+oCBpbnQgaSwgcmV0Owo+PiArCj4+ICvCoMKgwqDCoCBmb3IgKGkgPSAwOyBpIDwgMjsgaSsrKSB7
+Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLyogd3JpdGUgY2hlY2twb2ludCBvdXQgb2Yg
+cGxhY2UgZmlyc3QgKi8KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzYmktPmN1cl9jcCA9
+IHNiaS0+Y3VyX2NwICUgMiArIDE7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2No
+ZWNrcG9pbnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXQgPSBmMmZzX2Zz
+eW5jX2RldmljZSgpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEFTU0VSVChyZXQgPj0g
+MCk7Cj4+ICvCoMKgwqDCoCB9Cj4+ICt9Cj4+ICsKPj7CoCBpbnQgY2hlY2tfY3Vyc2VnX29mZnNl
+dChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGludCB0eXBlKQo+PsKgIHsKPj7CoMKgwqDCoMKg
+wqDCoCBzdHJ1Y3QgY3Vyc2VnX2luZm8gKmN1cnNlZyA9IENVUlNFR19JKHNiaSwgdHlwZSk7Cj4+
+IEBAIC0yNzcxLDEwICsyNzg0LDEwIEBAIGludCBmc2NrX3ZlcmlmeShzdHJ1Y3QgZjJmc19zYl9p
+bmZvICpzYmkpCj4+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCByZXdyaXRlX3NpdF9hcmVhX2JpdG1hcChzYmkpOwo+PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2N1cnNlZ19pbmZvKHNiaSk7Cj4+wqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaXhfY2hlY2tzdW0oc2JpKTsK
+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4X2NoZWNrcG9p
+bnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZml4
+X2NoZWNrcG9pbnRzKHNiaSk7Cj4+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxz
+ZSBpZiAoaXNfc2V0X2NrcHRfZmxhZ3MoY3AsIENQX0ZTQ0tfRkxBRykgfHwKPj7CoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlzX3NldF9ja3B0X2ZsYWdzKGNw
+LCBDUF9RVU9UQV9ORUVEX0ZTQ0tfRkxBRykpIHsKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgd3JpdGVfY2hlY2twb2ludChzYmkpOwo+PiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9jaGVja3BvaW50cyhzYmkpOwo+PsKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+wqDCoMKgwqDCoMKgwqAgfQo+PsKgwqDC
+oMKgwqDCoMKgIHJldHVybiByZXQ7Cj4+IGRpZmYgLS1naXQgYS9mc2NrL2ZzY2suaCBiL2ZzY2sv
+ZnNjay5oCj4+IGluZGV4IGQzOGU4ZGUuLjhmZTVkYjEgMTAwNjQ0Cj4+IC0tLSBhL2ZzY2svZnNj
+ay5oCj4+ICsrKyBiL2ZzY2svZnNjay5oCj4+IEBAIC0xOTIsNiArMTkyLDcgQEAgZXh0ZXJuIHZv
+aWQgbW92ZV9jdXJzZWdfaW5mbyhzdHJ1Y3QgZjJmc19zYl9pbmZvICosIHU2NCwgaW50KTsKPj7C
+oCBleHRlcm4gdm9pZCB3cml0ZV9jdXJzZWdfaW5mbyhzdHJ1Y3QgZjJmc19zYl9pbmZvICopOwo+
+PsKgIGV4dGVybiBpbnQgZmluZF9uZXh0X2ZyZWVfYmxvY2soc3RydWN0IGYyZnNfc2JfaW5mbyAq
+LCB1NjQgKiwgaW50LCBpbnQpOwo+PsKgIGV4dGVybiB2b2lkIHdyaXRlX2NoZWNrcG9pbnQoc3Ry
+dWN0IGYyZnNfc2JfaW5mbyAqKTsKPj4gK2V4dGVybiB2b2lkIHdyaXRlX2NoZWNrcG9pbnRzKHN0
+cnVjdCBmMmZzX3NiX2luZm8gKik7Cj4+wqAgZXh0ZXJuIHZvaWQgdXBkYXRlX3N1cGVyYmxvY2so
+c3RydWN0IGYyZnNfc3VwZXJfYmxvY2sgKiwgaW50KTsKPj7CoCBleHRlcm4gdm9pZCB1cGRhdGVf
+ZGF0YV9ibGthZGRyKHN0cnVjdCBmMmZzX3NiX2luZm8gKiwgbmlkX3QsIHUxNiwgYmxvY2tfdCk7
+Cj4+wqAgZXh0ZXJuIHZvaWQgdXBkYXRlX25hdF9ibGthZGRyKHN0cnVjdCBmMmZzX3NiX2luZm8g
+KiwgbmlkX3QsIG5pZF90LCBibG9ja190KTsKPj4gZGlmZiAtLWdpdCBhL2ZzY2svbW91bnQuYyBi
+L2ZzY2svbW91bnQuYwo+PiBpbmRleCAxYzVjZDkzLi5iYmIxYWY3IDEwMDY0NAo+PiAtLS0gYS9m
+c2NrL21vdW50LmMKPj4gKysrIGIvZnNjay9tb3VudC5jCj4+IEBAIC0yMTI3LDcgKzIxMjcsNyBA
+QCB2b2lkIGZsdXNoX2pvdXJuYWxfZW50cmllcyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+
+wqDCoMKgwqDCoMKgwqAgaW50IG5fc2l0cyA9IGZsdXNoX3NpdF9qb3VybmFsX2VudHJpZXMoc2Jp
+KTsKPj7CoCAKPj7CoMKgwqDCoMKgwqDCoCBpZiAobl9uYXRzIHx8IG5fc2l0cykKPj4gLcKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9jaGVja3BvaW50KHNiaSk7Cj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgd3JpdGVfY2hlY2twb2ludHMoc2JpKTsKPj7CoCB9Cj4+wqAgCj4+wqAg
+dm9pZCBmbHVzaF9zaXRfZW50cmllcyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+IEBAIC0y
+NDUyLDYgKzI0NTIsMTkgQEAgdm9pZCB3cml0ZV9jaGVja3BvaW50KHN0cnVjdCBmMmZzX3NiX2lu
+Zm8gKnNiaSkKPj7CoMKgwqDCoMKgwqDCoCBBU1NFUlQocmV0ID49IDApOwo+PsKgIH0KPj7CoCAK
+Pj4gK3ZvaWQgd3JpdGVfY2hlY2twb2ludHMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+PiAr
+ewo+PiArwqDCoMKgwqAgaW50IGksIHJldDsKPj4gKwo+PiArwqDCoMKgwqAgZm9yIChpID0gMDsg
+aSA8IDI7IGkrKykgewo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8qIHdyaXRlIGNoZWNr
+cG9pbnQgb3V0IG9mIHBsYWNlIGZpcnN0ICovCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+c2JpLT5jdXJfY3AgPSBzYmktPmN1cl9jcCAlIDIgKyAxOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHdyaXRlX2NoZWNrcG9pbnQoc2JpKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCByZXQgPSBmMmZzX2ZzeW5jX2RldmljZSgpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IEFTU0VSVChyZXQgPj0gMCk7Cj4+ICvCoMKgwqDCoCB9Cj4+ICt9Cj4+ICsKPj7CoCB2b2lkIGJ1
+aWxkX25hdF9hcmVhX2JpdG1hcChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+wqAgewo+PsKg
+wqDCoMKgwqDCoMKgIHN0cnVjdCBjdXJzZWdfaW5mbyAqY3Vyc2VnID0gQ1VSU0VHX0koc2JpLCBD
+VVJTRUdfSE9UX0RBVEEpOwo+PiAtLSAKPj4gMi4xOC4wLnJjMQo+IAo+IAo+IF9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBt
+YWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0
+dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2
+ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51
+eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZv
+cmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51
+eC1mMmZzLWRldmVsCg==
