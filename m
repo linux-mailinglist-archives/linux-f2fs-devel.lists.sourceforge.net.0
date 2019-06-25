@@ -2,76 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CFA452080
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 03:59:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E38CD520DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 05:06:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfajq-0004e5-4s; Tue, 25 Jun 2019 01:59:14 +0000
+	id 1hfbmS-000887-5N; Tue, 25 Jun 2019 03:06:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hfajo-0004dr-UR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 01:59:12 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1hfbmO-00087v-5E
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 03:05:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a40dRCus/Y2283TPCuAUnwD7qz0dkRMd1S+7QC15i3s=; b=k7dfLG/AlqaCPJHT9iwM0r4SGy
- ore1GoWSjdutM5xCR9oxQpYBOSdLFGTHEPjqgKlmfYqd5yx0xQReTNx0xJeJUAXeSkEfXypR8yMNn
- L8CvS3f0T1sGJ0wsU9A3xhklAZONRrkiBmgRmlDaF/BY6ZWH40lOTLKTI/h8+HMb2CYg=;
+ bh=y1nTqvm5zm2oVuuxHsrGpbU4gEqHpmqSXspC8Bne9NM=; b=OzFQiJVKTrDBtpF4E+VgoazXxq
+ dq1oGlHieez+zaSDhu5JTs4+svfXzZbOzqiF+/O/2s286shU7ZRiSkw+BJA/0fAEgJEmCXrnYI87p
+ 57x6maELRdHO/N+EAcSit4ViaxY3fX5p9NfL7T/Wt4yxeU3Qgz/gDFitmvKoZmPWxZec=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=a40dRCus/Y2283TPCuAUnwD7qz0dkRMd1S+7QC15i3s=; b=acBh6aRXmD+gXG7xA+jLL4RsG4
- Yk8M15zVSeHzsKjKuSCNq42f8F3dPf68L43KR//C0pPXYifhDKpHRMjXOwm3Dp6S9eVkJUHzt6N+G
- Uq8Og1w1DEC0IPrBEhD6Wtxt1vevEIroqMF9vynY1rEp9oRdJwdI5h1ZcTl44Q4l5N8Q=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ bh=y1nTqvm5zm2oVuuxHsrGpbU4gEqHpmqSXspC8Bne9NM=; b=f/Ik2+5CSeozKXkpadiZiK3Snh
+ QHpBZzE6/6ir4E+BeBILRDgbwlyW9zmBhtqJgopf+g8EgP/RSPs9VFqY/9Vovvc5MvAQ9rPPOdvVD
+ rPesqdSM3bMP/rXvd1qCBPFnpeU+IKmrQ4JJu9RgjRHJveP7DHhWUARC0vxc7YczcJAE=;
+Received: from userp2130.oracle.com ([156.151.31.86])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfaju-008k6y-7C
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 01:59:22 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id BEEB412AF789C213C402;
- Tue, 25 Jun 2019 09:59:10 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 25 Jun
- 2019 09:59:08 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-References: <20190524075627.107151-1-yuchao0@huawei.com>
- <20190622214656.GA18429@jaegeuk-macbookpro.roam.corp.google.com>
- <MWHPR02MB26710762B08C9EAB74BB2FABC6E00@MWHPR02MB2671.namprd02.prod.outlook.com>
- <efdf67e2-74d4-bc6d-2ad3-f9b2d308fcff@huawei.com>
- <637ce454-0ca9-77db-fb63-1577762ddc79@kernel.org>
- <20190624160200.GA88431@jaegeuk-macbookpro.roam.corp.google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <7e8f48c6-5cc8-ec9d-766b-ad573d0e30e1@huawei.com>
-Date: Tue, 25 Jun 2019 09:59:16 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1hfbmT-008oJ1-7k
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 03:06:03 +0000
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5P2xZkP183824;
+ Tue, 25 Jun 2019 03:04:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2018-07-02;
+ bh=y1nTqvm5zm2oVuuxHsrGpbU4gEqHpmqSXspC8Bne9NM=;
+ b=BXJlUqAKvMETApXDcsKgEZiNdrmlXkQGnY88kMW3AMxNKcXyyaE6UXAlpYECy+ntv7pH
+ 6uhEP1tj4tycY9LMVwQSwCJ1OFoN8XiURaWWP5MgMDhRGeWBYKJ5F+hDMXeWyXvzw09Y
+ W93kGqDhXdEUxHJGprg0ZqzGMSQuXc6a6uPIBselde0/QnSPFrNudLSF4JrDCRjZHlSe
+ PtPwNFzZ3qhrAqfZeA252/OTt3UOJ6W5XclgLFaB43nqCHJq7hk5QCcLKtksxGRz16et
+ vcWpg2Ca0sMBi64yleW6uVf2BPJY2qw2eabFh6Nu+9cNmwvp3CwrP4l2harCRSOmeEeb 1g== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 2t9brt1hg7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Jun 2019 03:04:56 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5P34h96101926;
+ Tue, 25 Jun 2019 03:04:55 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 2t9p6tx2qw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 25 Jun 2019 03:04:55 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5P34tbP102400;
+ Tue, 25 Jun 2019 03:04:55 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3020.oracle.com with ESMTP id 2t9p6tx2qp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Jun 2019 03:04:54 +0000
+Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5P34gx0001788;
+ Tue, 25 Jun 2019 03:04:42 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Mon, 24 Jun 2019 20:04:41 -0700
+Date: Mon, 24 Jun 2019 20:04:39 -0700
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20190625030439.GA5379@magnolia>
+References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+ <156116142734.1664939.5074567130774423066.stgit@magnolia>
+ <20190624113737.GG32376@quack2.suse.cz>
+ <20190624215817.GE1611011@magnolia>
 MIME-Version: 1.0
-In-Reply-To: <20190624160200.GA88431@jaegeuk-macbookpro.roam.corp.google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20190624215817.GE1611011@magnolia>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9298
+ signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1906250023
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hfaju-008k6y-7C
-Subject: Re: [f2fs-dev] =?utf-8?b?5Zue5aSNOiBbUEFUQ0hdIGZzY2suZjJmczogd3Jp?=
- =?utf-8?q?te_checkpoint_with_OPU_mode?=
+ for more information. [URIs: suse.com]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hfbmT-008oJ1-7k
+Subject: Re: [f2fs-dev] [Ocfs2-devel] [PATCH 2/7] vfs: flush and wait for io
+ when setting the immutable flag via SETFLAGS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,142 +124,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-efi@vger.kernel.org, linux-mm@kvack.org, clm@fb.com,
+ adilger.kernel@dilger.ca, ocfs2-devel@oss.oracle.com,
+ matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org, josef@toxicpanda.com,
+ reiserfs-devel@vger.kernel.org, viro@zeniv.linux.org.uk, dsterba@suse.com,
+ jaegeuk@kernel.org, tytso@mit.edu, ard.biesheuvel@linaro.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, jk@ozlabs.org, jack@suse.com,
+ linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAxOS82LzI1IDA6MDIsIEphZWdldWsgS2ltIHdyb3RlOgo+IE9uIDA2LzI0LCBDaGFvIFl1
-IHdyb3RlOgo+PiBIaSBhbGwsCj4+Cj4+IE9uZSBtb3JlIGNvbmNlcm4gaXMgdGhhdCwgaWYgY2hl
-Y2twb2ludCBBIGlzIGNvcnJ1cHRlZCwgYW5kIGNoZWNrcG9pbnQgQiBpcwo+PiB2YWxpZCwgd2Ug
-bWF5IGNvcHkgQ1AgQiB0byBDUCBBLCBhbmQgdGhlbiB3cml0ZWJhY2sgZml4ZWQgQ1AgQiB3aXRo
-IHRoZSBzYW1lCj4+IGNwX3ZlciwgdGhlbiBrZXJuZWwgd2lsbCBsb2FkIENQIEEgaWYgdHdvIENQ
-IGhhcyB0aGUgc2FtZSBjcF92ZXIsIHJlc3VsdCBpbgo+PiBsb2FkaW5nIHdyb25nIENQLCByaWdo
-dD8KPiAKPiBZdXAsIHdlIG5lZWQgdG8gaGFuZGxlIHRoYXQuIFdoZW4gY29weWluZyB0aGUgY2hl
-Y2twb2ludCwgd2UgbWF5IG5lZWQgdG8gY29weQo+IHdob2xlIHNlZ21lbnQgdy8gdmVyc2lvbiAt
-IDEuCgpZZXMsIGJ1dCBzYWRseSBpZiBDUCBCIGJlY29tZXMgY29ycnVwdGVkIGR1cmluZyBmc2Nr
-LCBDUCBBIHdpdGggdmVyc2lvbiAtIDEgd2lsbApiZSBsb2FkZWQsIGJ1dCB0aGUgY3BfdmVyIGlu
-IENQIGlzIG5vdCBtYXRjaGluZyB3aXRoIGNwX3ZlciBvZiBub2RlIGluIGRub2RlCmxpc3QsIHNv
-IHdlIG1heSBmYWlsIHRvIHJlY292ZXJ5IGZzeW5jZWQgZmlsZSBsYXRlci4KCkhvdyBhYm91dCB0
-aGlzOgoxLiBjb3B5IHZhbGlkIENQIHRvIG1pcnJvciBwb3NpdGlvbgoyLiByZXBhaXIgY3VycmVu
-dCBDUCBhbmQgd3JpdGViYWNrIGl0IHRvIENQICMwIHBvc2l0aW9uCgpUaGFua3MsCgo+IAo+Pgo+
-PiBUaGFua3MsCj4+Cj4+IE9uIDIwMTktNi0yNCAxMDoyNCwgQ2hhbyBZdSB3cm90ZToKPj4+IEhp
-IEphZWdldWssCj4+Pgo+Pj4gSSBwaWNrZWQgdXAgV2VpY2hhbydzIHBhdGNoIHNpbmNlIEknbSBu
-b3Qgc3VyZSB3aGV0aGVyIFdlaWNoYW8gc3RpbGwgaGFzIHRpbWUKPj4+IHdvcmtpbmcgb24gaXQu
-Cj4+Pgo+Pj4gT24gMjAxOS82LzI0IDk6MjMsIGd1byB3ZWljaGFvIHdyb3RlOgo+Pj4+IEhpIEph
-ZWdldWssCj4+Pj4KPj4+PiBJIHRoaW5rIGl0J3MgYmV0dGVyIHRvIGNvcHkgQ1AgQSB0byBDUCBC
-IHBvc2l0aW9uIGZpcnN0LCB3aGljaCBjYW4gbWFrZSBzdXJlIHdlCj4+Pj4gaGF2ZSBhIGZzY2st
-bm90LXRvdWNoZWQgY29ycmVjdCBjaGVja3BvaW50LiAKPj4+Cj4+PiBKYWVnZXVrLCBXZWljaGFv
-LAo+Pj4KPj4+IEkgdGhpbmsgaXQncyBva2F5LCBsZXQgbWUgdXBkYXRlIHRoZSBwYXRjaC4gOikK
-Pj4+Cj4+Pj4KPj4+PiBQLlM6IGRpZCB5b3Ugd2FudCB0byBkaXNjdXNzIGl0IHdpdGggQ2hhbyBZ
-dT8gOu+8iUhBSEEKPj4+Cj4+PiBXZWljaGFvLCBpdCdzIGdsYWQgdG8gc2VlIHlvdXIgYWN0aXZp
-dHkgYWdhaW4uIDspCj4+Pgo+Pj4gVGhhbmtzLAo+Pj4KPj4+Pgo+Pj4+IEJSLAo+Pj4+IFdlaWNo
-YW8KPj4+PiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+Pj4+ICrlj5Hku7bkuro6KiBKYWVnZXVr
-IEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+Pj4+ICrlj5HpgIHml7bpl7Q6KiAyMDE55bm0Nuac
-iDIz5pelIDU6NDYKPj4+PiAq5pS25Lu25Lq6OiogQ2hhbyBZdQo+Pj4+ICrmioTpgIE6KiBsaW51
-eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+Pj4+ICrkuLvpopg6KiBSZTogW2Yy
-ZnMtZGV2XSBbUEFUQ0hdIGZzY2suZjJmczogd3JpdGUgY2hlY2twb2ludCB3aXRoIE9QVSBtb2Rl
-Cj4+Pj4gwqAKPj4+PiBIaSBXZWljaGFvLAo+Pj4+Cj4+Pj4gVGhpcyBwYXRjaCBicmVha3MgdGhl
-IGltYWdlIGZvdW5kIGJ5IG15IGxvY2FsIHBvd2VyLWN1dCB0ZXN0cy4KPj4+Pgo+Pj4+IE9uIDA1
-LzI0LCBDaGFvIFl1IHdyb3RlOgo+Pj4+PiBUaGlzIG9yaWdpbmFsIHBhdGNoIHdhcyBmcm9tIFdl
-aWNoYW8gR3VvLgo+Pj4+Pgo+Pj4+PiBXZSBtYXkgZW5jb3VudGVyIGJvdGggY2hlY2twb2ludHMg
-aW52YWxpZCBpbiBzdWNoIGEgY2FzZToKPj4+Pj4gMS4ga2VybmVsIHdyaXRlcyBDUCBBOwo+Pj4+
-PiAyLiBwb3dlci1jdXQgd2hlbiBrZXJuZWwgd3JpdGVzIENQIEIsIHRoZW4gQ1AgQiBpcyBjb3Jy
-dXB0ZWQ7Cj4+Pj4+IDMuIGZzY2s6IGxvYWQgQ1AgQSwgZml4IG1ldGEvZGF0YTsKPj4+Pgo+Pj4+
-IFdvdWxkIGl0IGJlIGJldHRlciB0byBjb3B5IENQIEEgdG8gQ1AgQiBwb3NpdGlvbiBmaXJzdD8K
-Pj4+Pgo+Pj4+IFRoYW5rcywKPj4+Pgo+Pj4+PiA0LiBwb3dlci1jdXQgd2hlbiBmc2NrIHdyaXRl
-cyBDUCBBIGluLXBsYWNlLCB0aGVuIENQIEEgaXMgY29ycnVwdGVkIHRvbzsKPj4+Pj4KPj4+Pj4g
-VG8gYXZvaWQgYm90aCBjaGVja3BvaW50cyBiZWluZyBpbnZhbGlkLCB0aGlzIHBhdGNoIGNoYW5n
-ZXMgdG8gZW5hYmxlcwo+Pj4+PiBmc2NrIHRvIHdyaXRlIGNoZWNrcG9pbnQgd2l0aCBvdXQtcGxh
-Y2UtdXBkYXRlIG1ldGhvZCBmaXJzdCwgYW5kIHRoZW4KPj4+Pj4gd3JpdGUgY2hlY2twb2ludCBp
-biBvcmlnaW5hbCBwbGFjZS4KPj4+Pj4KPj4+Pj4gVGhpcyBjYW4gbWFrZSBzdXJlIGR1cmluZyBm
-c2NrIHJlcGFpcmluZywgZXZlbiB0aGVyZSBpcyBzdWRkZW4gcG93ZXItY3V0LAo+Pj4+PiBmaWxl
-c3lzdGVtIHdpbGwgc3RpbGwgaGF2ZSBhdCBsZWFzdCBvbmUgdmFsaWQgY2hlY2twb2ludC4KPj4+
-Pj4KPj4+Pj4gU2lnbmVkLW9mZi1ieTogV2VpY2hhbyBHdW8gPGd1b3dlaWNoYW9AaHVhd2VpLmNv
-bT4KPj4+Pj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8eXVjaGFvMEBodWF3ZWkuY29tPgo+Pj4+
-PiAtLS0KPj4+Pj4gdjI6Cj4+Pj4+IC0gY2xlYW4gdXAgY29kZXMKPj4+Pj4gLSBjb3ZlciBmbHVz
-aF9qb3VybmFsX2VudHJpZXMoKSBjYXNlCj4+Pj4+IC0gdXBkYXRlIGNvbW1ldCBtZXNzYWdlCj4+
-Pj4+IMKgIGZzY2svZnNjay5jwqAgfCAxNyArKysrKysrKysrKysrKystLQo+Pj4+PiDCoCBmc2Nr
-L2ZzY2suaMKgIHzCoCAxICsKPj4+Pj4gwqAgZnNjay9tb3VudC5jIHwgMTUgKysrKysrKysrKysr
-KystCj4+Pj4+IMKgIDMgZmlsZXMgY2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlv
-bnMoLSkKPj4+Pj4KPj4+Pj4gZGlmZiAtLWdpdCBhL2ZzY2svZnNjay5jIGIvZnNjay9mc2NrLmMK
-Pj4+Pj4gaW5kZXggNmYwZjI2Mi4uNmFlZDUxZCAxMDA2NDQKPj4+Pj4gLS0tIGEvZnNjay9mc2Nr
-LmMKPj4+Pj4gKysrIGIvZnNjay9mc2NrLmMKPj4+Pj4gQEAgLTIxMjEsNiArMjEyMSwxOSBAQCBz
-dGF0aWMgdm9pZCBmaXhfY2hlY2twb2ludChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+Pj4+
-IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZV9uYXRfYml0cyhzYmksIHNiLCBj
-cCwgc2JpLT5jdXJfY3ApOwo+Pj4+PiDCoCB9Cj4+Pj4+IMKgIAo+Pj4+PiArc3RhdGljIHZvaWQg
-Zml4X2NoZWNrcG9pbnRzKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSkKPj4+Pj4gK3sKPj4+Pj4g
-K8KgwqDCoMKgIGludCBpLCByZXQ7Cj4+Pj4+ICsKPj4+Pj4gK8KgwqDCoMKgIGZvciAoaSA9IDA7
-IGkgPCAyOyBpKyspIHsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiB3cml0ZSBj
-aGVja3BvaW50IG91dCBvZiBwbGFjZSBmaXJzdCAqLwo+Pj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHNiaS0+Y3VyX2NwID0gc2JpLT5jdXJfY3AgJSAyICsgMTsKPj4+Pj4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBmaXhfY2hlY2twb2ludChzYmkpOwo+Pj4+PiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldCA9IGYyZnNfZnN5bmNfZGV2aWNlKCk7Cj4+Pj4+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgQVNTRVJUKHJldCA+PSAwKTsKPj4+Pj4gK8KgwqDCoMKgIH0KPj4+Pj4g
-K30KPj4+Pj4gKwo+Pj4+PiDCoCBpbnQgY2hlY2tfY3Vyc2VnX29mZnNldChzdHJ1Y3QgZjJmc19z
-Yl9pbmZvICpzYmksIGludCB0eXBlKQo+Pj4+PiDCoCB7Cj4+Pj4+IMKgwqDCoMKgwqDCoMKgIHN0
-cnVjdCBjdXJzZWdfaW5mbyAqY3Vyc2VnID0gQ1VSU0VHX0koc2JpLCB0eXBlKTsKPj4+Pj4gQEAg
-LTI3NzEsMTAgKzI3ODQsMTAgQEAgaW50IGZzY2tfdmVyaWZ5KHN0cnVjdCBmMmZzX3NiX2luZm8g
-KnNiaSkKPj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCByZXdyaXRlX3NpdF9hcmVhX2JpdG1hcChzYmkpOwo+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZpeF9jdXJzZWdfaW5mbyhzYmkpOwo+Pj4+PiDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZpeF9jaGVja3N1
-bShzYmkpOwo+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBm
-aXhfY2hlY2twb2ludChzYmkpOwo+Pj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBmaXhfY2hlY2twb2ludHMoc2JpKTsKPj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIH0gZWxzZSBpZiAoaXNfc2V0X2NrcHRfZmxhZ3MoY3AsIENQX0ZTQ0tfRkxB
-RykgfHwKPj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBpc19zZXRfY2twdF9mbGFncyhjcCwgQ1BfUVVPVEFfTkVFRF9GU0NLX0ZMQUcpKSB7Cj4+Pj4+
-IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHdyaXRlX2NoZWNrcG9p
-bnQoc2JpKTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-d3JpdGVfY2hlY2twb2ludHMoc2JpKTsKPj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIH0KPj4+Pj4gwqDCoMKgwqDCoMKgwqAgfQo+Pj4+PiDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
-cmV0Owo+Pj4+PiBkaWZmIC0tZ2l0IGEvZnNjay9mc2NrLmggYi9mc2NrL2ZzY2suaAo+Pj4+PiBp
-bmRleCBkMzhlOGRlLi44ZmU1ZGIxIDEwMDY0NAo+Pj4+PiAtLS0gYS9mc2NrL2ZzY2suaAo+Pj4+
-PiArKysgYi9mc2NrL2ZzY2suaAo+Pj4+PiBAQCAtMTkyLDYgKzE5Miw3IEBAIGV4dGVybiB2b2lk
-IG1vdmVfY3Vyc2VnX2luZm8oc3RydWN0IGYyZnNfc2JfaW5mbyAqLCB1NjQsIGludCk7Cj4+Pj4+
-IMKgIGV4dGVybiB2b2lkIHdyaXRlX2N1cnNlZ19pbmZvKHN0cnVjdCBmMmZzX3NiX2luZm8gKik7
-Cj4+Pj4+IMKgIGV4dGVybiBpbnQgZmluZF9uZXh0X2ZyZWVfYmxvY2soc3RydWN0IGYyZnNfc2Jf
-aW5mbyAqLCB1NjQgKiwgaW50LCBpbnQpOwo+Pj4+PiDCoCBleHRlcm4gdm9pZCB3cml0ZV9jaGVj
-a3BvaW50KHN0cnVjdCBmMmZzX3NiX2luZm8gKik7Cj4+Pj4+ICtleHRlcm4gdm9pZCB3cml0ZV9j
-aGVja3BvaW50cyhzdHJ1Y3QgZjJmc19zYl9pbmZvICopOwo+Pj4+PiDCoCBleHRlcm4gdm9pZCB1
-cGRhdGVfc3VwZXJibG9jayhzdHJ1Y3QgZjJmc19zdXBlcl9ibG9jayAqLCBpbnQpOwo+Pj4+PiDC
-oCBleHRlcm4gdm9pZCB1cGRhdGVfZGF0YV9ibGthZGRyKHN0cnVjdCBmMmZzX3NiX2luZm8gKiwg
-bmlkX3QsIHUxNiwgYmxvY2tfdCk7Cj4+Pj4+IMKgIGV4dGVybiB2b2lkIHVwZGF0ZV9uYXRfYmxr
-YWRkcihzdHJ1Y3QgZjJmc19zYl9pbmZvICosIG5pZF90LCBuaWRfdCwgYmxvY2tfdCk7Cj4+Pj4+
-IGRpZmYgLS1naXQgYS9mc2NrL21vdW50LmMgYi9mc2NrL21vdW50LmMKPj4+Pj4gaW5kZXggMWM1
-Y2Q5My4uYmJiMWFmNyAxMDA2NDQKPj4+Pj4gLS0tIGEvZnNjay9tb3VudC5jCj4+Pj4+ICsrKyBi
-L2ZzY2svbW91bnQuYwo+Pj4+PiBAQCAtMjEyNyw3ICsyMTI3LDcgQEAgdm9pZCBmbHVzaF9qb3Vy
-bmFsX2VudHJpZXMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+Pj4+PiDCoMKgwqDCoMKgwqDC
-oCBpbnQgbl9zaXRzID0gZmx1c2hfc2l0X2pvdXJuYWxfZW50cmllcyhzYmkpOwo+Pj4+PiDCoCAK
-Pj4+Pj4gwqDCoMKgwqDCoMKgwqAgaWYgKG5fbmF0cyB8fCBuX3NpdHMpCj4+Pj4+IC3CoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgd3JpdGVfY2hlY2twb2ludChzYmkpOwo+Pj4+PiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHdyaXRlX2NoZWNrcG9pbnRzKHNiaSk7Cj4+Pj4+IMKgIH0KPj4+Pj4g
-wqAgCj4+Pj4+IMKgIHZvaWQgZmx1c2hfc2l0X2VudHJpZXMoc3RydWN0IGYyZnNfc2JfaW5mbyAq
-c2JpKQo+Pj4+PiBAQCAtMjQ1Miw2ICsyNDUyLDE5IEBAIHZvaWQgd3JpdGVfY2hlY2twb2ludChz
-dHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+Pj4+IMKgwqDCoMKgwqDCoMKgIEFTU0VSVChyZXQg
-Pj0gMCk7Cj4+Pj4+IMKgIH0KPj4+Pj4gwqAgCj4+Pj4+ICt2b2lkIHdyaXRlX2NoZWNrcG9pbnRz
-KHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSkKPj4+Pj4gK3sKPj4+Pj4gK8KgwqDCoMKgIGludCBp
-LCByZXQ7Cj4+Pj4+ICsKPj4+Pj4gK8KgwqDCoMKgIGZvciAoaSA9IDA7IGkgPCAyOyBpKyspIHsK
-Pj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiB3cml0ZSBjaGVja3BvaW50IG91dCBv
-ZiBwbGFjZSBmaXJzdCAqLwo+Pj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNiaS0+Y3Vy
-X2NwID0gc2JpLT5jdXJfY3AgJSAyICsgMTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCB3cml0ZV9jaGVja3BvaW50KHNiaSk7Cj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-cmV0ID0gZjJmc19mc3luY19kZXZpY2UoKTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBBU1NFUlQocmV0ID49IDApOwo+Pj4+PiArwqDCoMKgwqAgfQo+Pj4+PiArfQo+Pj4+PiArCj4+
-Pj4+IMKgIHZvaWQgYnVpbGRfbmF0X2FyZWFfYml0bWFwKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNi
-aSkKPj4+Pj4gwqAgewo+Pj4+PiDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgY3Vyc2VnX2luZm8gKmN1
-cnNlZyA9IENVUlNFR19JKHNiaSwgQ1VSU0VHX0hPVF9EQVRBKTsKPj4+Pj4gLS0gCj4+Pj4+IDIu
-MTguMC5yYzEKPj4+Pgo+Pj4+Cj4+Pj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KPj4+PiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+Pj4+IExp
-bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cj4+Pj4gaHR0cHM6Ly9saXN0cy5z
-b3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo+Pj4KPj4+Cj4+
-PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+Pj4gTGlu
-dXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPj4+IExpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291
-cmNlZm9yZ2UubmV0Cj4+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0
-aW5mby9saW51eC1mMmZzLWRldmVsCj4+Pgo+IC4KPiAKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
-aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
-ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On Mon, Jun 24, 2019 at 02:58:17PM -0700, Darrick J. Wong wrote:
+> On Mon, Jun 24, 2019 at 01:37:37PM +0200, Jan Kara wrote:
+> > On Fri 21-06-19 16:57:07, Darrick J. Wong wrote:
+> > > From: Darrick J. Wong <darrick.wong@oracle.com>
+> > > 
+> > > When we're using FS_IOC_SETFLAGS to set the immutable flag on a file, we
+> > > need to ensure that userspace can't continue to write the file after the
+> > > file becomes immutable.  To make that happen, we have to flush all the
+> > > dirty pagecache pages to disk to ensure that we can fail a page fault on
+> > > a mmap'd region, wait for pending directio to complete, and hope the
+> > > caller locked out any new writes by holding the inode lock.
+> > > 
+> > > Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
+> > 
+> > Seeing the way this worked out, is there a reason to have separate
+> > vfs_ioc_setflags_flush_data() instead of folding the functionality in
+> > vfs_ioc_setflags_check() (possibly renaming it to
+> > vfs_ioc_setflags_prepare() to indicate it does already some changes)? I
+> > don't see any place that would need these two separated...
+> 
+> XFS needs them to be separated.
+> 
+> If we even /think/ that we're going to be setting the immutable flag
+> then we need to grab the IOLOCK and the MMAPLOCK to prevent further
+> writes while we drain all the directio writes and dirty data.  IO
+> completions for the write draining can take the ILOCK, which means that
+> we can't have grabbed it yet.
+> 
+> Next, we grab the ILOCK so we can check the new flags against the inode
+> and then update the inode core.
+> 
+> For most filesystems I think it suffices to inode_lock and then do both,
+> though.
+
+Heh, lol, that applies to fssetxattr, not to setflags, because xfs
+setflags implementation open-codes the relevant fssetxattr pieces.
+So for setflags we can combine both parts into a single _prepare
+function.
+
+--D
+
+> > > +/*
+> > > + * Flush all pending IO and dirty mappings before setting S_IMMUTABLE on an
+> > > + * inode via FS_IOC_SETFLAGS.  If the flush fails we'll clear the flag before
+> > > + * returning error.
+> > > + *
+> > > + * Note: the caller should be holding i_mutex, or else be sure that
+> > > + * they have exclusive access to the inode structure.
+> > > + */
+> > > +static inline int vfs_ioc_setflags_flush_data(struct inode *inode, int flags)
+> > > +{
+> > > +	int ret;
+> > > +
+> > > +	if (!vfs_ioc_setflags_need_flush(inode, flags))
+> > > +		return 0;
+> > > +
+> > > +	inode_set_flags(inode, S_IMMUTABLE, S_IMMUTABLE);
+> > > +	ret = inode_flush_data(inode);
+> > > +	if (ret)
+> > > +		inode_set_flags(inode, 0, S_IMMUTABLE);
+> > > +	return ret;
+> > > +}
+> > 
+> > Also this sets S_IMMUTABLE whenever vfs_ioc_setflags_need_flush() returns
+> > true. That is currently the right thing but seems like a landmine waiting
+> > to trip? So I'd just drop the vfs_ioc_setflags_need_flush() abstraction to
+> > make it clear what's going on.
+> 
+> Ok.
+> 
+> --D
+> 
+> > 
+> > 								Honza
+> > -- 
+> > Jan Kara <jack@suse.com>
+> > SUSE Labs, CR
+> 
+> _______________________________________________
+> Ocfs2-devel mailing list
+> Ocfs2-devel@oss.oracle.com
+> https://oss.oracle.com/mailman/listinfo/ocfs2-devel
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
