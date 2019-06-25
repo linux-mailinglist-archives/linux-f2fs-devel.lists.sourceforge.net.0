@@ -2,67 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AADC5258D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 09:56:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C408353045
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 12:37:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfgJC-0003ue-SH; Tue, 25 Jun 2019 07:56:06 +0000
+	id 1hfipb-00050y-KB; Tue, 25 Jun 2019 10:37:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hfgJA-0003u1-KM
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 07:56:04 +0000
+ (envelope-from
+ <BATV+c5155a46dc30cc8634d8+5784+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1hfipZ-00050p-DC
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 10:37:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7QxID8fNGW6n9kiIwQwKyOc/MdT7eQo2az12BOj+qns=; b=Wi79jrs+94OcngHyIQ042xVHqj
- Ha7zsUpnlVXI5I/9ROgXkE46f0Tedi0IE/gHVcZptsvJjG6YtsmWzP1SKxRMpEO0PhlMYi9bjhOmO
- qSBTDwvH1754awQm4f+u7V/kDqwNZ2kVj+QgOSzdgsr0+yNaDlVJKUBQIuh1CTzOhJFM=;
+ bh=1VNqATdiMZjRjBl/SX9aDfK/cY5ROrczskzh7bEhyqQ=; b=EtmgylMpgkRloittS2tBhz45yl
+ kCpQxz4/MKGXzSL5NxgVXR+ufF2+t/uwqbLEujAaNPdS3KaiyglVXc2TC0efbiM6Kk7x/NTLJpluL
+ Zko2Q0qF2ooV1vxWXgVEhwyEBwKxBL5f3gvaIFVm2aF6l+3kHLP03Ii/4EGUHZ/Rbiig=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7QxID8fNGW6n9kiIwQwKyOc/MdT7eQo2az12BOj+qns=; b=ArYv0EKQhUsCp3t1+nxE8twovM
- JUYGBK0TNraf/ip57XLnVAGXy8qo1N6vt6Wm+aCebhUt0Br1kVf1yAOZcY72V0Bl8eegqp44p5Vwv
- Z26ZRAGqv8p2MBKowJUmjK4pqvEmn7+aiCMWYBTUcqLC+f0PADCy8Hh97rqq5ctIHXMQ=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=1VNqATdiMZjRjBl/SX9aDfK/cY5ROrczskzh7bEhyqQ=; b=EzQ0DbMsYAUYaHpzIuStEs0iyt
+ ajmPxdxe2DBlOpP0lcgxEmdiUuIcO5QDQgOGL60555EVup3eRgZ6FODHW7g1xV3nMMnSLH6eEDH0i
+ mQv2M6ofiIfUeHrzchWuwFwlF7UqREHXYU9mIrF+RdAoLiCxFPcGhvTqxdhgWUqmus80=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfgJH-00D9x4-1l
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 07:56:14 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 3AEB77001CAEBEF3AD3F;
- Tue, 25 Jun 2019 15:56:03 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 25 Jun
- 2019 15:55:58 +0800
-To: Eric Biggers <ebiggers@kernel.org>, <linux-fscrypt@vger.kernel.org>
-References: <20190620205043.64350-1-ebiggers@kernel.org>
- <20190620205043.64350-17-ebiggers@kernel.org>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <90495fb1-72eb-ca42-8457-ef8e969eda51@huawei.com>
-Date: Tue, 25 Jun 2019 15:55:57 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1hfipb-009Ib3-U7
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jun 2019 10:37:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=1VNqATdiMZjRjBl/SX9aDfK/cY5ROrczskzh7bEhyqQ=; b=ZpriNPniMtQfF3PzrXrZFLu9+
+ swp27pwzGA3dKtOql8ByZMlmC5XAUIK6Dd+GMHjf0qKANtiVkMY+kP24emwMCRR8Bd7PMgTyLe9QA
+ 5OqMw/nvM9U3sRjirT+3roDKm/2t058rf3DiyN7fkLSlwMZ0SYle68bvh+fdV+mCDEdE0F8PxUYpO
+ 6uADPC1wdetL3m6crno/ECGMbIBw4GF5RRX2ugGr6ltI3bjWVADicfMYipFtp/ocudq1CWBwDRZB8
+ y8f1S9n0qHQVZzv6yurSepPmJiIiCIwpzAKGBbc00350emRHfZhiQtGnClIv9oYZsJs4CbEdnWkcx
+ MCg3FRwHw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
+ Linux)) id 1hfioR-0001Ln-BN; Tue, 25 Jun 2019 10:36:31 +0000
+Date: Tue, 25 Jun 2019 03:36:31 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Message-ID: <20190625103631.GB30156@infradead.org>
+References: <156116141046.1664939.11424021489724835645.stgit@magnolia>
 MIME-Version: 1.0
-In-Reply-To: <20190620205043.64350-17-ebiggers@kernel.org>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <156116141046.1664939.11424021489724835645.stgit@magnolia>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hfgJH-00D9x4-1l
-Subject: Re: [f2fs-dev] [PATCH v5 16/16] f2fs: add fs-verity support
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1hfipb-009Ib3-U7
+Subject: Re: [f2fs-dev] [PATCH v4 0/7] vfs: make immutable files actually
+ immutable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,48 +88,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Theodore Y . Ts'o" <tytso@mit.edu>,
- "Darrick J . Wong" <darrick.wong@oracle.com>, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-integrity@vger.kernel.org, linux-ext4@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>, Christoph Hellwig <hch@lst.de>,
- Victor Hsieh <victorhsieh@google.com>
+Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-mm@kvack.org,
+ clm@fb.com, adilger.kernel@dilger.ca, matthew.garrett@nebula.com,
+ linux-nilfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, josef@toxicpanda.com, reiserfs-devel@vger.kernel.org,
+ viro@zeniv.linux.org.uk, dsterba@suse.com, jaegeuk@kernel.org, tytso@mit.edu,
+ ard.biesheuvel@linaro.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ jk@ozlabs.org, jack@suse.com, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Eric,
+On Fri, Jun 21, 2019 at 04:56:50PM -0700, Darrick J. Wong wrote:
+> Hi all,
+> 
+> The chattr(1) manpage has this to say about the immutable bit that
+> system administrators can set on files:
+> 
+> "A file with the 'i' attribute cannot be modified: it cannot be deleted
+> or renamed, no link can be created to this file, most of the file's
+> metadata can not be modified, and the file can not be opened in write
+> mode."
+> 
+> Given the clause about how the file 'cannot be modified', it is
+> surprising that programs holding writable file descriptors can continue
+> to write to and truncate files after the immutable flag has been set,
+> but they cannot call other things such as utimes, fallocate, unlink,
+> link, setxattr, or reflink.
 
-On 2019/6/21 4:50, Eric Biggers wrote:
-> +static int f2fs_begin_enable_verity(struct file *filp)
-> +{
-> +	struct inode *inode = file_inode(filp);
-> +	int err;
-> +
+I still think living code beats documentation.  And as far as I can
+tell the immutable bit never behaved as documented or implemented
+in this series on Linux, and it originated on Linux.
 
-I think we'd better add condition here (under inode lock) to disallow enabling
-verity on atomic/volatile inode, as we may fail to write merkle tree data due to
-atomic/volatile inode's special writeback method.
-
-> +	err = f2fs_convert_inline_inode(inode);
-> +	if (err)
-> +		return err;
-> +
-> +	err = dquot_initialize(inode);
-> +	if (err)
-> +		return err;
-
-We can get rid of dquot_initialize() here, since f2fs_file_open() ->
-dquot_file_open() should has initialized quota entry previously, right?
-
-Thanks,
-
-> +
-> +	set_inode_flag(inode, FI_VERITY_IN_PROGRESS);
-> +	return 0;
-> +}
-> +
+If you want  hard cut off style immutable flag it should really be a
+new API, but I don't really see the point.  It isn't like the usual
+workload is to set the flag on a file actively in use.
 
 
 _______________________________________________
