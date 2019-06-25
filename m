@@ -2,84 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35A1F54D05
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 12:59:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A70A75555A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 19:02:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfjAK-0000L9-8p; Tue, 25 Jun 2019 10:59:08 +0000
+	id 1hfopZ-0002Nn-Ov; Tue, 25 Jun 2019 17:02:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+c5155a46dc30cc8634d8+5784+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1hfjAI-0000KM-Lv; Tue, 25 Jun 2019 10:59:06 +0000
+ (envelope-from <dsterba@suse.cz>)
+ id 1hfopY-0002NK-N8; Tue, 25 Jun 2019 17:02:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=UDaoTgsHWJ30QTg1yg6xU3ygFs
- 9snwV0bW69kmkZiGheVwYbVoObPNvKpYvI0MaFI/lLwDU0wGEt32F8zJZqc5lSINrj0WiLdvKFPos
- mFlOQUmPTLKBS6VbtSSIqPKu2g9QK4p2sXRochjB6UiOt+z/evvIT/Tn6FEoJ0g9AjII=;
+ bh=O0wVMKCdpcRpftyd/3UcHxYMU9duMxvsKM5smNO9SvU=; b=g0YoqwrZKQCi5J8Gp6Jiu8d6vl
+ hLQXSPlt1z4ThDqeblauqpO/LcZHBsiA5QGo4CeHSz9efifkTqYkBYoRRvUbRF+D4oNNpflpcFTTB
+ P+C9LsOaYJ/x+oPaNkDtTgBP6FGNQ4qigoWmPKLynMbE9oIvvgX13hAl1OfJps34yE5w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=HoHkDFjInGE1+euIbiRNzIlcpV
- PMyTCTkYkGYSNpRm36EFPgrK1zXQXqf6HNkpQA1wQXjopMBa/966JqynI6o2dIoiTjY8Kjr+Fxf3C
- USkee26EU4XYI2GdJ/3RtrZ28MJahZLNKNgfkbCu1k4HluZcU7ExWnMtvqE+FRsyNH7M=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=O0wVMKCdpcRpftyd/3UcHxYMU9duMxvsKM5smNO9SvU=; b=X7Z6KgM5Fl/TROWN5zRi4XDmc2
+ IjE+d3+O+KVvSltc4Zb1R0cxIEQcJadJF9WtCTcazCK8BAX3FS5Y3SXkqSCPZNhEhT0s5e+RZu0uQ
+ o5xcQfHNOBkTrT0LlljlJBfgkHSfvBBuwkBiuEo+GrGKiBZT3jH/wxPLsJUTnHdPSuP8=;
+Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfjAR-00DNeG-Ru; Tue, 25 Jun 2019 10:59:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=UwU0highZEA/FGERbHhOX+NGj
- wbOEOfYCrykn4i/NMFvP0XQWLaO76P5pTHVLBqJkG76euT9OEwHgRthOqNy2+bpGfoQffYe+VSjUn
- QLbNyICQ73+5wpZ67NnuWDRQEVMjMQ9n+ScMYd+VXjhbz8KGNZJ7arzmVhIfPVZ6AqQzv7e6MuDSa
- aGu3nC2IVp/W+ZNu5JgLyHLadtwk9OKFT74gLui/zAk4qpMo1UK4kcsXrMvY0K5yWKTJkGWyq3w6u
- d68URRrxr9HRoeZ3xU0m2oIIkykZy8SnVCCE4rPDUJESqTKtzeQYumA5/zO5K0UZUKNm4pEvUaMY8
- Hwh6CeXHA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
- Linux)) id 1hfjA7-0000tm-GM; Tue, 25 Jun 2019 10:58:55 +0000
-Date: Tue, 25 Jun 2019 03:58:55 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Message-ID: <20190625105855.GD26085@infradead.org>
+ id 1hfopf-00Dl0S-Ip; Tue, 25 Jun 2019 17:02:15 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 75B9FAF7A;
+ Tue, 25 Jun 2019 17:02:04 +0000 (UTC)
+Received: by ds.suse.cz (Postfix, from userid 10065)
+ id DA730DA8F6; Tue, 25 Jun 2019 19:02:48 +0200 (CEST)
+Date: Tue, 25 Jun 2019 19:02:48 +0200
+From: David Sterba <dsterba@suse.cz>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20190625170248.GS8917@twin.jikos.cz>
+Mail-Followup-To: dsterba@suse.cz, Christoph Hellwig <hch@infradead.org>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>,
+ matthew.garrett@nebula.com, yuchao0@huawei.com, tytso@mit.edu,
+ shaggy@kernel.org, ard.biesheuvel@linaro.org, josef@toxicpanda.com,
+ clm@fb.com, adilger.kernel@dilger.ca, jk@ozlabs.org, jack@suse.com,
+ dsterba@suse.com, jaegeuk@kernel.org, viro@zeniv.linux.org.uk,
+ cluster-devel@redhat.com, jfs-discussion@lists.sourceforge.net,
+ linux-efi@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ reiserfs-devel@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-mtd@lists.infradead.org,
+ ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
 References: <156116136742.1664814.17093419199766834123.stgit@magnolia>
- <156116140570.1664814.4607468365269898575.stgit@magnolia>
+ <156116138952.1664814.16552129914959122837.stgit@magnolia>
+ <20190625105725.GB26085@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <156116140570.1664814.4607468365269898575.stgit@magnolia>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20190625105725.GB26085@infradead.org>
+User-Agent: Mutt/1.5.23.1 (2014-03-12)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: suse.cz]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1hfjAR-00DNeG-Ru
-Subject: Re: [f2fs-dev] [PATCH 4/4] vfs: teach vfs_ioc_fssetxattr_check to
- check extent size hints
+X-Headers-End: 1hfopf-00Dl0S-Ip
+Subject: Re: [f2fs-dev] [PATCH 2/4] vfs: create a generic checking function
+ for FS_IOC_FSSETXATTR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,11 +89,13 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Reply-To: dsterba@suse.cz
 Cc: shaggy@kernel.org, jfs-discussion@lists.sourceforge.net,
  linux-efi@vger.kernel.org, Jan Kara <jack@suse.cz>,
  linux-btrfs@vger.kernel.org, clm@fb.com, adilger.kernel@dilger.ca,
  matthew.garrett@nebula.com, linux-nilfs@vger.kernel.org,
- cluster-devel@redhat.com, linux-ext4@vger.kernel.org, josef@toxicpanda.com,
+ "Darrick J. Wong" <darrick.wong@oracle.com>, cluster-devel@redhat.com,
+ linux-ext4@vger.kernel.org, josef@toxicpanda.com,
  reiserfs-devel@vger.kernel.org, viro@zeniv.linux.org.uk, dsterba@suse.com,
  jaegeuk@kernel.org, tytso@mit.edu, ard.biesheuvel@linaro.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
@@ -106,17 +106,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 21, 2019 at 04:56:45PM -0700, Darrick J. Wong wrote:
-> From: Darrick J. Wong <darrick.wong@oracle.com>
+On Tue, Jun 25, 2019 at 03:57:25AM -0700, Christoph Hellwig wrote:
+> On Fri, Jun 21, 2019 at 04:56:29PM -0700, Darrick J. Wong wrote:
+> > From: Darrick J. Wong <darrick.wong@oracle.com>
+> > 
+> > Create a generic checking function for the incoming FS_IOC_FSSETXATTR
+> > fsxattr values so that we can standardize some of the implementation
+> > behaviors.
+> > 
+> > Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
+> > Reviewed-by: Jan Kara <jack@suse.cz>
+> > ---
+> >  fs/btrfs/ioctl.c   |   21 +++++++++-------
+> >  fs/ext4/ioctl.c    |   27 ++++++++++++++------
+> >  fs/f2fs/file.c     |   26 ++++++++++++++-----
+> >  fs/inode.c         |   17 +++++++++++++
+> >  fs/xfs/xfs_ioctl.c |   70 ++++++++++++++++++++++++++++++----------------------
+> >  include/linux/fs.h |    3 ++
+> >  6 files changed, 111 insertions(+), 53 deletions(-)
+> > 
+> > 
+> > diff --git a/fs/btrfs/ioctl.c b/fs/btrfs/ioctl.c
+> > index f408aa93b0cf..7ddda5b4b6a6 100644
+> > --- a/fs/btrfs/ioctl.c
+> > +++ b/fs/btrfs/ioctl.c
+> > @@ -366,6 +366,13 @@ static int check_xflags(unsigned int flags)
+> >  	return 0;
+> >  }
+> >  
+> > +static void __btrfs_ioctl_fsgetxattr(struct btrfs_inode *binode,
+> > +				     struct fsxattr *fa)
+> > +{
+> > +	memset(fa, 0, sizeof(*fa));
+> > +	fa->fsx_xflags = btrfs_inode_flags_to_xflags(binode->flags);
 > 
-> Move the extent size hint checks that aren't xfs-specific to the vfs.
+> Is there really much of a point in this helper? Epeciall as
+> the zeroing could easily be done in the variable declaration
+> line using
 > 
-> Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
-> Reviewed-by: Jan Kara <jack@suse.cz>
+> 	struct fsxattr fa = { };
 
-Looks good,
-
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+Agreed, not counting the initialization the wrapper is merely another
+name for btrfs_inode_flags_to_xflags. I also find it slightly confusing
+that __btrfs_ioctl_fsgetxattr name is too close to the ioctl callback
+implementation btrfs_ioctl_fsgetxattr but only does some initialization.
 
 
 _______________________________________________
