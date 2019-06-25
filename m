@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3507A54CE9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 12:58:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A1F54D05
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2019 12:59:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hfj9S-0005xk-Le; Tue, 25 Jun 2019 10:58:14 +0000
+	id 1hfjAK-0000L9-8p; Tue, 25 Jun 2019 10:59:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+c5155a46dc30cc8634d8+5784+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1hfj9Q-0005xG-Hl; Tue, 25 Jun 2019 10:58:12 +0000
+ id 1hfjAI-0000KM-Lv; Tue, 25 Jun 2019 10:59:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UJywj4dmbBUIjM9KRzGfK/M/IWNbxgrcJGrfNTjSVYA=; b=bewp9Sx9HOVzgOWf9jP6d//UZ/
- zyQt/IACNHr2AhYS4hMO4us4iG3xux8SqgIu5DPce1WlQJGtZtCVSzF0mVQF9oI+ZWH9fqfWuRCSE
- MT0BdOnnztMgkW+IFigTPCtxVArVrAB3ZwLznWYmAgxgH4TvvUPl59DB1auGtMIn5I+c=;
+ bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=UDaoTgsHWJ30QTg1yg6xU3ygFs
+ 9snwV0bW69kmkZiGheVwYbVoObPNvKpYvI0MaFI/lLwDU0wGEt32F8zJZqc5lSINrj0WiLdvKFPos
+ mFlOQUmPTLKBS6VbtSSIqPKu2g9QK4p2sXRochjB6UiOt+z/evvIT/Tn6FEoJ0g9AjII=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,36 +30,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UJywj4dmbBUIjM9KRzGfK/M/IWNbxgrcJGrfNTjSVYA=; b=gBtUAlpyvDtuz4C1VaM/t8df1h
- hgqidBDCxQQxBMwizLclz+ASgAKQkLxtBlNSPfCS2rVCcKOqyTUzlvbUkk1SJnJ9a3RQaFeOxsDiK
- WN26kFMN1qQZfc2h8u8htGnGbbAPAxyGHm8CvM0X/J//s4rw+RuyMdWPb+ixgxk/EPmw=;
+ bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=HoHkDFjInGE1+euIbiRNzIlcpV
+ PMyTCTkYkGYSNpRm36EFPgrK1zXQXqf6HNkpQA1wQXjopMBa/966JqynI6o2dIoiTjY8Kjr+Fxf3C
+ USkee26EU4XYI2GdJ/3RtrZ28MJahZLNKNgfkbCu1k4HluZcU7ExWnMtvqE+FRsyNH7M=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hfj9T-00D0Jt-Od; Tue, 25 Jun 2019 10:58:16 +0000
+ id 1hfjAR-00DNeG-Ru; Tue, 25 Jun 2019 10:59:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UJywj4dmbBUIjM9KRzGfK/M/IWNbxgrcJGrfNTjSVYA=; b=hAuohrTvGLP6Fl8WucHgsiiYk
- pRPSD76dqMlbHjLUVqXXoLvkJKzdRfhFwSjBZ/XIptDokFJu0wjxVfWgkJhHgJRS27D1KVZdhhiZu
- rHLLG1rEBH8+DGfYgqGc3d4Q8Bl9WxXxLQdXSEjPLDqb+2bIn/SjHh9sy3PlHKD7+HX1/2OMgHH/z
- AyWmVhJPqTSc7bUt+8ggOxR77cuury5a5+5Vf98ussIcuguN1hIOXmQkQDgG/KnicDiu8Sbr8OoPE
- CYNHqQb6ooYQHw4NbKx/pp8r+7WsTCYeS2ahDNR66Ce+p2PEwRJcBCix2dA9jEYbMTZs/2rHnvviA
- O8WX9lGoA==;
+ bh=Wwjd99RoXuSnHJKoAHqWgUdarmES3VQyay6SQK/R1Zo=; b=UwU0highZEA/FGERbHhOX+NGj
+ wbOEOfYCrykn4i/NMFvP0XQWLaO76P5pTHVLBqJkG76euT9OEwHgRthOqNy2+bpGfoQffYe+VSjUn
+ QLbNyICQ73+5wpZ67NnuWDRQEVMjMQ9n+ScMYd+VXjhbz8KGNZJ7arzmVhIfPVZ6AqQzv7e6MuDSa
+ aGu3nC2IVp/W+ZNu5JgLyHLadtwk9OKFT74gLui/zAk4qpMo1UK4kcsXrMvY0K5yWKTJkGWyq3w6u
+ d68URRrxr9HRoeZ3xU0m2oIIkykZy8SnVCCE4rPDUJESqTKtzeQYumA5/zO5K0UZUKNm4pEvUaMY8
+ Hwh6CeXHA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
- Linux)) id 1hfj98-0000XB-Fb; Tue, 25 Jun 2019 10:57:54 +0000
-Date: Tue, 25 Jun 2019 03:57:54 -0700
+ Linux)) id 1hfjA7-0000tm-GM; Tue, 25 Jun 2019 10:58:55 +0000
+Date: Tue, 25 Jun 2019 03:58:55 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Message-ID: <20190625105754.GC26085@infradead.org>
+Message-ID: <20190625105855.GD26085@infradead.org>
 References: <156116136742.1664814.17093419199766834123.stgit@magnolia>
- <156116139763.1664814.8565619516886294289.stgit@magnolia>
+ <156116140570.1664814.4607468365269898575.stgit@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <156116139763.1664814.8565619516886294289.stgit@magnolia>
+In-Reply-To: <156116140570.1664814.4607468365269898575.stgit@magnolia>
 User-Agent: Mutt/1.11.4 (2019-03-13)
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
@@ -69,7 +69,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
+ for more information. [URIs: suse.cz]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,10 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hfj9T-00D0Jt-Od
-Subject: Re: [f2fs-dev] [PATCH 3/4] fs: teach vfs_ioc_fssetxattr_check to
- check project id info
+X-Headers-End: 1hfjAR-00DNeG-Ru
+Subject: Re: [f2fs-dev] [PATCH 4/4] vfs: teach vfs_ioc_fssetxattr_check to
+ check extent size hints
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,10 +106,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 21, 2019 at 04:56:37PM -0700, Darrick J. Wong wrote:
+On Fri, Jun 21, 2019 at 04:56:45PM -0700, Darrick J. Wong wrote:
 > From: Darrick J. Wong <darrick.wong@oracle.com>
 > 
-> Standardize the project id checks for FSSETXATTR.
+> Move the extent size hint checks that aren't xfs-specific to the vfs.
 > 
 > Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
 > Reviewed-by: Jan Kara <jack@suse.cz>
