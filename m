@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 787EA56ECF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jun 2019 18:32:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00FB657081
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jun 2019 20:21:55 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hgApp-0000el-4p; Wed, 26 Jun 2019 16:31:49 +0000
+	id 1hgCY9-0005W9-UC; Wed, 26 Jun 2019 18:21:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <darrick.wong@oracle.com>) id 1hgApn-0000ed-Kv
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Jun 2019 16:31:47 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hgCY8-0005W0-98
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Jun 2019 18:21:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mz7em8B5BcTHywkzCrR8lugIdy2ootcWo4w3RRWBYaM=; b=KoZAY6UMqS/kX82lcWKr089Dkp
- xPwW1u/UDGk2MZB8wyRBewCrv3vH0kqkqchh3TPzs3sxqzdy+Rf9vT0aCkufe9K+bYxhJQkHLvoom
- YkdcdUJQVoUkXGds9tpj+EtQsSpvaM24reiVup3rgLlM8mID3dwS95TEBMGwu4mvRALQ=;
+ bh=SJg9Z8lr7+qHsmp1IM9Y+LJIE+gVqdIJrj7R3BQcgOA=; b=YeDca3GbLjUospGgLVD6Gtn/Ej
+ eWjqETr6wWNWuhUh7oNsvRkUb3ffq+JSY3g0mnM3r58eWs/wG0dBdKha5WRYolH8rmfdKeuoAA0oG
+ F6QT6yCKucgYjLGpjEdL1LjA4P222xgTDYq0F1jiEPCO2Z1p3cJayNhgSon3tr7GzBUo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,85 +29,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Mz7em8B5BcTHywkzCrR8lugIdy2ootcWo4w3RRWBYaM=; b=IzXpjwAi4wRyoKzG7SMgEwK0kg
- CXdtsmp2110LT6kFknUbgoOY6xcJpPGbZbhOam86T0LzoFk6+MSOzE/cOkNNQotl3uwldG5Wp1Q1T
- Bxfj3fMPRjPgNixH0uwaLYx1FTt67/ynqJuM8Lk1Y1EX58FWg2El0ijaVZDyfUK0Sz8A=;
-Received: from userp2130.oracle.com ([156.151.31.86])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=SJg9Z8lr7+qHsmp1IM9Y+LJIE+gVqdIJrj7R3BQcgOA=; b=O5ZEnOR+UWKPEahQvgO8sOm9bl
+ ae+SeUbezOrRdSz71nB0ylGKTvzmJZ5lPll7u4btksUOCLc4Z0Tg+CLoP+Wib4Wb0wfDu0ep47euQ
+ AVNL0FldKUKDYoEWD59K8oFcKlQAzrusSLV+WihNYNREDm4xygf5PlJWiZ9Me32JxqEY=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hgApv-00B7pa-7U
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Jun 2019 16:31:56 +0000
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5QGU4Wg004218;
- Wed, 26 Jun 2019 16:30:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2018-07-02;
- bh=Mz7em8B5BcTHywkzCrR8lugIdy2ootcWo4w3RRWBYaM=;
- b=N/a93ebuSSKM+1UIO0buPOjR9AvCbLsHhw01AwBMp/XW9BUb98JLnzoJbLgwOZFWmGyw
- hJdpkR7HkvPCAWlWLDnQsdQatbUdssqmn37SwPrTcAyE+/9x/iin4aJ6YtVFtP1GNmmr
- W4gQLbQG2SBcdOy5QNpDSE2/3fIVqQVrn7mZXub6KhldCj8Zzx/yQQ7a5EH7pzSZXmup
- IrJvp7zWK9kXgRoeoC8dGqS2tKAzLiR74Ta5S5LQWYLQBZWpbM10fUskgAys8/96vQdr
- G26RY/thy8CrA4lCa0mPtRoigi2YSG7nQksiKL4VCeGiPZV6yAFAimBMe+B5DQlWGUUd ig== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2130.oracle.com with ESMTP id 2t9brtbf85-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 26 Jun 2019 16:30:39 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5QGRxdd192423;
- Wed, 26 Jun 2019 16:28:38 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by aserp3020.oracle.com with ESMTP id 2t9p6uvctr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 26 Jun 2019 16:28:38 +0000
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5QGScxQ193859;
- Wed, 26 Jun 2019 16:28:38 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 2t9p6uvctj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 26 Jun 2019 16:28:38 +0000
-Received: from abhmp0004.oracle.com (abhmp0004.oracle.com [141.146.116.10])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5QGSZWS032167;
- Wed, 26 Jun 2019 16:28:35 GMT
-Received: from localhost (/10.159.137.246)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Wed, 26 Jun 2019 09:28:35 -0700
-Date: Wed, 26 Jun 2019 09:28:31 -0700
-From: "Darrick J. Wong" <darrick.wong@oracle.com>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Message-ID: <20190626162831.GF5171@magnolia>
-References: <156151637248.2283603.8458727861336380714.stgit@magnolia>
- <156151641177.2283603.7806026378321236401.stgit@magnolia>
- <20190626035151.GA10613@ZenIV.linux.org.uk>
+ id 1hgCYF-00Ekmg-9h
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Jun 2019 18:21:49 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 07DA221726;
+ Wed, 26 Jun 2019 18:21:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1561573301;
+ bh=pNDy9ibt9Htg2aMIkROB6dLLyxI5mmHvZKejgIZn7Oc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TuI1lc8jAO4MB0RfvPP/3xjShwRJ5zX3E3hM3QnXjDNiYK2hkpbKcuEqrrq4t9f3Y
+ HFbcTFROptxFb6vvrHInrM7dcrlL86yIu0vDiQ9n7kCmvyRn/xKjMfwDx6VqIJcthL
+ KS8lIu7/J75DGlTa501xa6kZdnbnaUIMVJWVth/M=
+Date: Wed, 26 Jun 2019 11:21:39 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190626182138.GA30296@gmail.com>
+References: <20190620205043.64350-1-ebiggers@kernel.org>
+ <20190620205043.64350-17-ebiggers@kernel.org>
+ <90495fb1-72eb-ca42-8457-ef8e969eda51@huawei.com>
+ <20190625175225.GC81914@gmail.com>
+ <68c5a15f-f6a8-75e2-b485-0f1b51471995@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190626035151.GA10613@ZenIV.linux.org.uk>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9300
- signatures=668687
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1906260193
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <68c5a15f-f6a8-75e2-b485-0f1b51471995@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 3.1 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 3.2 FSL_HELO_FAKE          No description available.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hgApv-00B7pa-7U
-Subject: Re: [f2fs-dev] [PATCH 5/5] vfs: don't allow writes to swap files
+X-Headers-End: 1hgCYF-00Ekmg-9h
+Subject: Re: [f2fs-dev] [PATCH v5 16/16] f2fs: add fs-verity support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,73 +88,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-mm@kvack.org,
- clm@fb.com, adilger.kernel@dilger.ca, matthew.garrett@nebula.com,
- linux-nilfs@vger.kernel.org, hch@infradead.org, linux-ext4@vger.kernel.org,
- devel@lists.orangefs.org, josef@toxicpanda.com, reiserfs-devel@vger.kernel.org,
- dsterba@suse.com, jaegeuk@kernel.org, tytso@mit.edu, ard.biesheuvel@linaro.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, jk@ozlabs.org, jack@suse.com,
- linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
- ocfs2-devel@oss.oracle.com
+Cc: "Theodore Y . Ts'o" <tytso@mit.edu>,
+ "Darrick J . Wong" <darrick.wong@oracle.com>, linux-api@vger.kernel.org,
+ Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-integrity@vger.kernel.org,
+ linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ Christoph Hellwig <hch@lst.de>, Victor Hsieh <victorhsieh@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jun 26, 2019 at 04:51:51AM +0100, Al Viro wrote:
-> On Tue, Jun 25, 2019 at 07:33:31PM -0700, Darrick J. Wong wrote:
-> > --- a/fs/attr.c
-> > +++ b/fs/attr.c
-> > @@ -236,6 +236,9 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
-> >  	if (IS_IMMUTABLE(inode))
-> >  		return -EPERM;
-> >  
-> > +	if (IS_SWAPFILE(inode))
-> > +		return -ETXTBSY;
-> > +
-> >  	if ((ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID | ATTR_TIMES_SET)) &&
-> >  	    IS_APPEND(inode))
-> >  		return -EPERM;
+On Wed, Jun 26, 2019 at 03:34:35PM +0800, Chao Yu wrote:
+> >>> +	err = f2fs_convert_inline_inode(inode);
+> >>> +	if (err)
+> >>> +		return err;
+> >>> +
+> >>> +	err = dquot_initialize(inode);
+> >>> +	if (err)
+> >>> +		return err;
+> >>
+> >> We can get rid of dquot_initialize() here, since f2fs_file_open() ->
+> >> dquot_file_open() should has initialized quota entry previously, right?
+> > 
+> > We still need it because dquot_file_open() only calls dquot_initialize() if the
+> > file is being opened for writing.  But here the file descriptor is readonly.
+> > I'll add a comment explaining this here and in the ext4 equivalent.
 > 
-> Er...  So why exactly is e.g. chmod(2) forbidden for swapfiles?  Or touch(1),
-> for that matter...
-
-Oops, that check is overly broad; I think the only attribute change we
-need to filter here is ATTR_SIZE.... which we could do unconditionally
-in inode_newsize_ok.
-
-What's the use case for allowing userspace to increase the size of an
-active swapfile?  I don't see any; the kernel has a permanent lease on
-the file space mapping (at least until swapoff)...
-
-> > diff --git a/mm/swapfile.c b/mm/swapfile.c
-> > index 596ac98051c5..1ca4ee8c2d60 100644
-> > --- a/mm/swapfile.c
-> > +++ b/mm/swapfile.c
-> > @@ -3165,6 +3165,19 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
-> >  	if (error)
-> >  		goto bad_swap;
-> >  
-> > +	/*
-> > +	 * Flush any pending IO and dirty mappings before we start using this
-> > +	 * swap file.
-> > +	 */
-> > +	if (S_ISREG(inode->i_mode)) {
-> > +		inode->i_flags |= S_SWAPFILE;
-> > +		error = inode_drain_writes(inode);
-> > +		if (error) {
-> > +			inode->i_flags &= ~S_SWAPFILE;
-> > +			goto bad_swap;
-> > +		}
-> > +	}
+> Ah, you're right.
 > 
-> Why are swap partitions any less worthy of protection?
+> f2fs_convert_inline_inode() may grab one more block during conversion, so we
+> need to call dquot_initialize() before inline conversion?
+> 
+> Thanks,
+> 
 
-Hmm, yeah, S_SWAPFILE should apply to block devices too.  I figured that
-the mantra of "sane tools will open block devices with O_EXCL" should
-have sufficed, but there's really no reason to allow that either.
+Good point.  I'll fix that here and in ext4.
 
---D
+- Eric
 
 
 _______________________________________________
