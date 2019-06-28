@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 381475A403
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jun 2019 20:36:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B957C5A43D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jun 2019 20:38:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hgvj5-0006f5-4a; Fri, 28 Jun 2019 18:35:59 +0000
+	id 1hgvlB-0007df-1F; Fri, 28 Jun 2019 18:38:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <darrick.wong@oracle.com>) id 1hgvj4-0006eu-Jf
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jun 2019 18:35:58 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1hgvl9-0007dT-7a
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jun 2019 18:38:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hDvAuKrMfSUW7AbzqNfZSt/8R1aeCpTe5TGF8T8lRYc=; b=IauZUB8Ox9TehXlxUZif1VCr6i
- QlmmKCaC6YKShqFBoDVM4Fbuwq9Q0eqC3K5ZFAqDQUhpJtJysd0c+Z5RGKgY6rRTvr3bXsnnnRRkX
- pA5h5SZP+abQ3T+G8QX4gHAwWyyrSA+Ryr/ihAmjqn8QBdgLxpZ8ASFwBeo/awuvj2Sc=;
+ bh=O3xegD6OiDT7CYvuWXxJjj2lv59PMA3CjktcEglMT6c=; b=O/p2JQ98BUNUmzlbTwoRb9Fpe7
+ nwRFvrx/oYVLT9zpgPk/7uXou8akq2RbRB9S30pINet+0/tN7TAkt8380raco5zChHBU+iVrffopC
+ H40tOmiadWnbs621Hcqs3AVMRyWgUU6lxKEI9dtlL9+RRCkHnluq5sdpx9i5iixrZDYI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -29,59 +29,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hDvAuKrMfSUW7AbzqNfZSt/8R1aeCpTe5TGF8T8lRYc=; b=V3zXS54no6Mdbp7a3y32qOz6qs
- kIPM6fIlEynywASyeiCD6iy9+7Fg6VGcCXlQ2PaxHh67hbAGGysXai3FiNaDKD+QzExVyp1A58f18
- m10qmiTtQh/d9oxPMrzZKJ9+dfvNepx36I8YwSg/kM2Qh8fRkx4iKSFoMYfnfRnZpe+0=;
-Received: from userp2130.oracle.com ([156.151.31.86])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=O3xegD6OiDT7CYvuWXxJjj2lv59PMA3CjktcEglMT6c=; b=HB8qqJA4S3OKqLtgi64U1APR7a
+ 9BCPFh1WaQFYfvnNKpxY+xTVGBLcq+WsY/w8bdGSIUjRwu4LkNz+ITbp5jtv8++ZZud1qFAFP52oJ
+ 9CiQ5V3KgmHbYBV3/pTSX6TmyAswZRt5shcPoQOxgmCHogdFJKZqDMrY3NGJfljokgaQ=;
+Received: from userp2120.oracle.com ([156.151.31.85])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hgvjH-000gir-2j
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jun 2019 18:36:14 +0000
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5SIYQRG108883;
- Fri, 28 Jun 2019 18:34:57 GMT
+ id 1hgvlH-0012rr-Pz
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jun 2019 18:38:18 +0000
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5SIZrgg116051;
+ Fri, 28 Jun 2019 18:37:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=subject : from : to :
  cc : date : message-id : in-reply-to : references : mime-version :
  content-type : content-transfer-encoding; s=corp-2018-07-02;
- bh=hDvAuKrMfSUW7AbzqNfZSt/8R1aeCpTe5TGF8T8lRYc=;
- b=jRRaM6/cr2s1fN3nJa8yFGdPIm650NetSXoqzer/0L2yCpma7vUORBQ7mNoB6zegt3yV
- 2WaPx92M+xx36rc1eyqskvJFn7teZ2EjeHlgbNGpAU6lHKWmerm/E2KLpNPo+wGArDa1
- K8c2RTjP5b+vZvA0NI05COGDHcOesafa6zvfR7n2l6a4vNBTxFEAFBe9kju/lSpjuOFA
- sfZS2IZRGf2rVNN8QJ4XjaPhFu7Dg9WBD5nM9iuWr+1Q8xXsS4BvM2zQ5vYY9tZSIFZD
- S1ts7ni4Y8CuHWQnPN6AP834iFHazwJqlHUIP93kvyf0vy/iHyKGjVX9sQiIRpp9eMnJ xw== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by userp2130.oracle.com with ESMTP id 2t9brtq3hf-1
+ bh=O3xegD6OiDT7CYvuWXxJjj2lv59PMA3CjktcEglMT6c=;
+ b=pBjv0y1SN47tvWrJ59lGt95PbfTTcZyMo9tTZrwAQL+MKNQI4cQR1e3KUF4ZjX6TmQXZ
+ 7fjAp5KNwNlrmQE8bFZ5Mtp6Ur83C4iOF3g41nLAjrgtjNTT9OMudTKl25Pzx5EC6Sp/
+ VxGLjm8WAc/tteHJnZ565nHN8j5W0lueTaPVyfE1fK2HAHC0cvuGLTA/Uxt/ht5MjO0z
+ jNNOa/AMQsWH9qGigPS4x+VIrXc0q1GoaD59PUQetqOon/6SHWDztzFuxDWr7fJOVHCm
+ MRUq+5/EFMA4sIYD7vqAXm0IVx7/aanhJbJ8Sl2GQu5MJjUMqHRiuVbkgORgpat3rs1Y 6g== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2120.oracle.com with ESMTP id 2t9cyqxyse-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 28 Jun 2019 18:34:57 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5SIXXPt000897;
- Fri, 28 Jun 2019 18:34:56 GMT
+ Fri, 28 Jun 2019 18:37:06 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x5SIYqWe152199;
+ Fri, 28 Jun 2019 18:35:05 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
- by userp3020.oracle.com with ESMTP id 2tat7e3gab-1
+ by aserp3020.oracle.com with ESMTP id 2t9p6w235t-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 28 Jun 2019 18:34:56 +0000
-Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5SIYuM8003117;
- Fri, 28 Jun 2019 18:34:56 GMT
+ Fri, 28 Jun 2019 18:35:05 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x5SIZ4ue152605;
+ Fri, 28 Jun 2019 18:35:04 GMT
 Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3020.oracle.com with ESMTP id 2tat7e3ga7-1
+ by aserp3020.oracle.com with ESMTP id 2t9p6w2359-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 28 Jun 2019 18:34:56 +0000
-Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5SIYsCq029052;
- Fri, 28 Jun 2019 18:34:54 GMT
+ Fri, 28 Jun 2019 18:35:04 +0000
+Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5SIZ2qU029171;
+ Fri, 28 Jun 2019 18:35:02 GMT
 Received: from localhost (/67.169.218.210)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Fri, 28 Jun 2019 11:34:54 -0700
+ with ESMTP ; Fri, 28 Jun 2019 11:35:02 -0700
 From: "Darrick J. Wong" <darrick.wong@oracle.com>
 To: matthew.garrett@nebula.com, yuchao0@huawei.com, tytso@mit.edu,
  darrick.wong@oracle.com, ard.biesheuvel@linaro.org,
  josef@toxicpanda.com, hch@infradead.org, clm@fb.com,
  adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk, jack@suse.com,
  dsterba@suse.com, jaegeuk@kernel.org, jk@ozlabs.org
-Date: Fri, 28 Jun 2019 11:34:51 -0700
-Message-ID: <156174689192.1557469.17945809794748607270.stgit@magnolia>
+Date: Fri, 28 Jun 2019 11:34:59 -0700
+Message-ID: <156174689965.1557469.9018924813461417576.stgit@magnolia>
 In-Reply-To: <156174687561.1557469.7505651950825460767.stgit@magnolia>
 References: <156174687561.1557469.7505651950825460767.stgit@magnolia>
 User-Agent: StGit/0.17.1-dirty
@@ -90,8 +90,8 @@ X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9302
  signatures=668688
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
  priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=753 adultscore=0
+ suspectscore=2 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
  definitions=main-1906280210
 X-Spam-Score: -0.1 (/)
@@ -106,10 +106,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hgvjH-000gir-2j
-Subject: [f2fs-dev] [PATCH 2/4] vfs: flush and wait for io when setting the
- immutable flag via SETFLAGS
+X-Headers-End: 1hgvlH-0012rr-Pz
+Subject: [f2fs-dev] [PATCH 3/4] vfs: flush and wait for io when setting the
+ immutable flag via FSSETXATTR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,56 +132,96 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Darrick J. Wong <darrick.wong@oracle.com>
 
-When we're using FS_IOC_SETFLAGS to set the immutable flag on a file, we
-need to ensure that userspace can't continue to write the file after the
-file becomes immutable.  To make that happen, we have to flush all the
-dirty pagecache pages to disk to ensure that we can fail a page fault on
-a mmap'd region, wait for pending directio to complete, and hope the
-caller locked out any new writes by holding the inode lock.
+When we're using FS_IOC_FSSETXATTR to set the immutable flag on a file,
+we need to ensure that userspace can't continue to write the file after
+the file becomes immutable.  To make that happen, we have to flush all
+the dirty pagecache pages to disk to ensure that we can fail a page
+fault on a mmap'd region, wait for pending directio to complete, and
+hope the caller locked out any new writes by holding the inode lock.
+
+XFS has more complex locking than other FSSETXATTR implementations so we
+have to keep the checking and preparation code in different functions.
 
 Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
 ---
- fs/inode.c         |   21 +++++++++++++++++++--
- include/linux/fs.h |   11 +++++++++++
- 2 files changed, 30 insertions(+), 2 deletions(-)
+ fs/btrfs/ioctl.c   |    2 +
+ fs/ext4/ioctl.c    |    2 +
+ fs/f2fs/file.c     |    2 +
+ fs/inode.c         |   31 +++++++++++++++++++++++
+ fs/xfs/xfs_ioctl.c |   71 +++++++++++++++++++++++++++++++++++++++-------------
+ include/linux/fs.h |    3 ++
+ 6 files changed, 90 insertions(+), 21 deletions(-)
 
 
+diff --git a/fs/btrfs/ioctl.c b/fs/btrfs/ioctl.c
+index 3cd66efdb99d..aeffe3fd99c4 100644
+--- a/fs/btrfs/ioctl.c
++++ b/fs/btrfs/ioctl.c
+@@ -420,7 +420,7 @@ static int btrfs_ioctl_fssetxattr(struct file *file, void __user *arg)
+ 
+ 	simple_fill_fsxattr(&old_fa,
+ 			    btrfs_inode_flags_to_xflags(binode->flags));
+-	ret = vfs_ioc_fssetxattr_check(inode, &old_fa, &fa);
++	ret = vfs_ioc_fssetxattr_prepare(inode, &old_fa, &fa);
+ 	if (ret)
+ 		goto out_unlock;
+ 
+diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
+index 566dfac28b3f..69810e59f89a 100644
+--- a/fs/ext4/ioctl.c
++++ b/fs/ext4/ioctl.c
+@@ -1109,7 +1109,7 @@ long ext4_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ 
+ 		inode_lock(inode);
+ 		ext4_fill_fsxattr(inode, &old_fa);
+-		err = vfs_ioc_fssetxattr_check(inode, &old_fa, &fa);
++		err = vfs_ioc_fssetxattr_prepare(inode, &old_fa, &fa);
+ 		if (err)
+ 			goto out;
+ 		flags = (ei->i_flags & ~EXT4_FL_XFLAG_VISIBLE) |
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 8799468724f9..b47f22eb483e 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2825,7 +2825,7 @@ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
+ 	inode_lock(inode);
+ 
+ 	f2fs_fill_fsxattr(inode, &old_fa);
+-	err = vfs_ioc_fssetxattr_check(inode, &old_fa, &fa);
++	err = vfs_ioc_fssetxattr_prepare(inode, &old_fa, &fa);
+ 	if (err)
+ 		goto out;
+ 	flags = (fi->i_flags & ~F2FS_FL_XFLAG_VISIBLE) |
 diff --git a/fs/inode.c b/fs/inode.c
-index f08711b34341..65a412af3ffb 100644
+index 65a412af3ffb..cf07378e5731 100644
 --- a/fs/inode.c
 +++ b/fs/inode.c
-@@ -2193,7 +2193,8 @@ EXPORT_SYMBOL(current_time);
- 
- /*
-  * Generic function to check FS_IOC_SETFLAGS values and reject any invalid
-- * configurations.
-+ * configurations.  Once we're done, prepare the inode for whatever changes
-+ * are coming down the pipeline.
-  *
-  * Note: the caller should be holding i_mutex, or else be sure that they have
-  * exclusive access to the inode structure.
-@@ -2201,6 +2202,8 @@ EXPORT_SYMBOL(current_time);
- int vfs_ioc_setflags_prepare(struct inode *inode, unsigned int oldflags,
- 			     unsigned int flags)
- {
+@@ -2293,3 +2293,34 @@ int vfs_ioc_fssetxattr_check(struct inode *inode, const struct fsxattr *old_fa,
+ 	return 0;
+ }
+ EXPORT_SYMBOL(vfs_ioc_fssetxattr_check);
++
++/*
++ * Generic function to check FS_IOC_FSSETXATTR values and reject any invalid
++ * configurations.  If none are found, flush all pending IO and dirty mappings
++ * before setting S_IMMUTABLE on an inode.  If the flush fails we'll clear the
++ * flag before returning error.
++ *
++ * Note: the caller must hold whatever locks are necessary to block any other
++ * threads from starting a write to the file.
++ */
++int vfs_ioc_fssetxattr_prepare(struct inode *inode,
++			       const struct fsxattr *old_fa,
++			       struct fsxattr *fa)
++{
 +	int ret;
 +
- 	/*
- 	 * The IMMUTABLE and APPEND_ONLY flags can only be changed by
- 	 * the relevant capability.
-@@ -2211,7 +2214,21 @@ int vfs_ioc_setflags_prepare(struct inode *inode, unsigned int oldflags,
- 	    !capable(CAP_LINUX_IMMUTABLE))
- 		return -EPERM;
- 
--	return 0;
-+	/*
-+	 * Now that we're done checking the new flags, flush all pending IO and
-+	 * dirty mappings before setting S_IMMUTABLE on an inode via
-+	 * FS_IOC_SETFLAGS.  If the flush fails we'll clear the flag before
-+	 * returning error.
-+	 */
++	ret = vfs_ioc_fssetxattr_check(inode, old_fa, fa);
++	if (ret)
++		return ret;
++
 +	if (!S_ISREG(inode->i_mode) || IS_IMMUTABLE(inode) ||
-+	    !(flags & FS_IMMUTABLE_FL))
++	    !(fa->fsx_xflags & FS_XFLAG_IMMUTABLE))
 +		return 0;
 +
 +	inode_set_flags(inode, S_IMMUTABLE, S_IMMUTABLE);
@@ -190,29 +229,156 @@ index f08711b34341..65a412af3ffb 100644
 +	if (ret)
 +		inode_set_flags(inode, 0, S_IMMUTABLE);
 +	return ret;
- }
- EXPORT_SYMBOL(vfs_ioc_setflags_prepare);
- 
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 91482ab4556a..0efe749de577 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -3567,4 +3567,15 @@ static inline void simple_fill_fsxattr(struct fsxattr *fa, __u32 xflags)
- 	fa->fsx_xflags = xflags;
++}
++EXPORT_SYMBOL(vfs_ioc_fssetxattr_prepare);
+diff --git a/fs/xfs/xfs_ioctl.c b/fs/xfs/xfs_ioctl.c
+index fe29aa61293c..552f18554c48 100644
+--- a/fs/xfs/xfs_ioctl.c
++++ b/fs/xfs/xfs_ioctl.c
+@@ -1057,6 +1057,30 @@ xfs_ioctl_setattr_xflags(
+ 	return 0;
  }
  
 +/*
-+ * Flush file data before changing attributes.  Caller must hold any locks
-+ * required to prevent further writes to this file until we're done setting
-+ * flags.
++ * If we're setting immutable on a regular file, we need to prevent new writes.
++ * Once we've done that, we must wait for all the other writes to complete.
++ *
++ * The caller must use @join_flags to release the locks which are held on @ip
++ * regardless of return value.
 + */
-+static inline int inode_drain_writes(struct inode *inode)
++static int
++xfs_ioctl_setattr_drain_writes(
++	struct xfs_inode	*ip,
++	const struct fsxattr	*fa,
++	int			*join_flags)
 +{
-+	inode_dio_wait(inode);
-+	return filemap_write_and_wait(inode->i_mapping);
++	struct inode		*inode = VFS_I(ip);
++
++	if (!S_ISREG(inode->i_mode) || !(fa->fsx_xflags & FS_XFLAG_IMMUTABLE))
++		return 0;
++
++	*join_flags = XFS_IOLOCK_EXCL | XFS_MMAPLOCK_EXCL;
++	xfs_ilock(ip, *join_flags);
++
++	return inode_drain_writes(inode);
 +}
 +
- #endif /* _LINUX_FS_H */
+ /*
+  * If we are changing DAX flags, we have to ensure the file is clean and any
+  * cached objects in the address space are invalidated and removed. This
+@@ -1064,6 +1088,9 @@ xfs_ioctl_setattr_xflags(
+  * operation. The locks need to be held until the transaction has been committed
+  * so that the cache invalidation is atomic with respect to the DAX flag
+  * manipulation.
++ *
++ * The caller must use @join_flags to release the locks which are held on @ip
++ * regardless of return value.
+  */
+ static int
+ xfs_ioctl_setattr_dax_invalidate(
+@@ -1075,8 +1102,6 @@ xfs_ioctl_setattr_dax_invalidate(
+ 	struct super_block	*sb = inode->i_sb;
+ 	int			error;
+ 
+-	*join_flags = 0;
+-
+ 	/*
+ 	 * It is only valid to set the DAX flag on regular files and
+ 	 * directories on filesystems where the block size is equal to the page
+@@ -1102,21 +1127,15 @@ xfs_ioctl_setattr_dax_invalidate(
+ 		return 0;
+ 
+ 	/* lock, flush and invalidate mapping in preparation for flag change */
+-	xfs_ilock(ip, XFS_MMAPLOCK_EXCL | XFS_IOLOCK_EXCL);
+-	error = filemap_write_and_wait(inode->i_mapping);
+-	if (error)
+-		goto out_unlock;
+-	error = invalidate_inode_pages2(inode->i_mapping);
+-	if (error)
+-		goto out_unlock;
+-
+-	*join_flags = XFS_MMAPLOCK_EXCL | XFS_IOLOCK_EXCL;
+-	return 0;
+-
+-out_unlock:
+-	xfs_iunlock(ip, XFS_MMAPLOCK_EXCL | XFS_IOLOCK_EXCL);
+-	return error;
++	if (*join_flags == 0) {
++		*join_flags = XFS_MMAPLOCK_EXCL | XFS_IOLOCK_EXCL;
++		xfs_ilock(ip, *join_flags);
++		error = filemap_write_and_wait(inode->i_mapping);
++		if (error)
++			return error;
++	}
+ 
++	return invalidate_inode_pages2(inode->i_mapping);
+ }
+ 
+ /*
+@@ -1325,6 +1344,12 @@ xfs_ioctl_setattr(
+ 			return code;
+ 	}
+ 
++	code = xfs_ioctl_setattr_drain_writes(ip, fa, &join_flags);
++	if (code) {
++		xfs_iunlock(ip, join_flags);
++		goto error_free_dquots;
++	}
++
+ 	/*
+ 	 * Changing DAX config may require inode locking for mapping
+ 	 * invalidation. These need to be held all the way to transaction commit
+@@ -1333,8 +1358,10 @@ xfs_ioctl_setattr(
+ 	 * appropriately.
+ 	 */
+ 	code = xfs_ioctl_setattr_dax_invalidate(ip, fa, &join_flags);
+-	if (code)
++	if (code) {
++		xfs_iunlock(ip, join_flags);
+ 		goto error_free_dquots;
++	}
+ 
+ 	tp = xfs_ioctl_setattr_get_trans(ip, join_flags);
+ 	if (IS_ERR(tp)) {
+@@ -1484,6 +1511,12 @@ xfs_ioc_setxflags(
+ 	if (error)
+ 		return error;
+ 
++	error = xfs_ioctl_setattr_drain_writes(ip, &fa, &join_flags);
++	if (error) {
++		xfs_iunlock(ip, join_flags);
++		goto out_drop_write;
++	}
++
+ 	/*
+ 	 * Changing DAX config may require inode locking for mapping
+ 	 * invalidation. These need to be held all the way to transaction commit
+@@ -1492,8 +1525,10 @@ xfs_ioc_setxflags(
+ 	 * appropriately.
+ 	 */
+ 	error = xfs_ioctl_setattr_dax_invalidate(ip, &fa, &join_flags);
+-	if (error)
++	if (error) {
++		xfs_iunlock(ip, join_flags);
+ 		goto out_drop_write;
++	}
+ 
+ 	tp = xfs_ioctl_setattr_get_trans(ip, join_flags);
+ 	if (IS_ERR(tp)) {
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index 0efe749de577..73a8bd789e36 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -3560,6 +3560,9 @@ int vfs_ioc_setflags_prepare(struct inode *inode, unsigned int oldflags,
+ 
+ int vfs_ioc_fssetxattr_check(struct inode *inode, const struct fsxattr *old_fa,
+ 			     struct fsxattr *fa);
++int vfs_ioc_fssetxattr_prepare(struct inode *inode,
++			       const struct fsxattr *old_fa,
++			       struct fsxattr *fa);
+ 
+ static inline void simple_fill_fsxattr(struct fsxattr *fa, __u32 xflags)
+ {
 
 
 
