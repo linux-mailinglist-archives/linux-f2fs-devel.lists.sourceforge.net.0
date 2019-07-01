@@ -2,81 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F0755B3E5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jul 2019 07:25:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D8315B3E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jul 2019 07:25:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hhonz-0000kG-S7; Mon, 01 Jul 2019 05:24:43 +0000
+	id 1hhooB-0006aR-44; Mon, 01 Jul 2019 05:24:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=078492c59=damien.lemoal@wdc.com>)
- id 1hhony-0000jo-E1
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 05:24:42 +0000
+ id 1hhoo9-0006Zf-Bp
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 05:24:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7WaT4y715sO3oTcR31btfpAytCLroZcaPVeev8exvBA=; b=Di0bIPCm4jJhRT+1xw4dyl4/mR
- uoDSxxRiWBc2UZ4wWWJ9rFmZCv5m8o3ynEo2kA4xD61jnqj+FOxih+aszttZmz/8dWRu9RMIjxJ/g
- uro2Ux2hBf4YYmCpls6DbXMRaVemOOrDjMus2iEtWGY5a7T7amHnByKbDCyy1NVezu+M=;
+ bh=UdePb14iwpIhTECPZqoEnffGJFfl+7aazz8VG0SNlvQ=; b=bWG5c1LL1yW1lgnroz1t3mUqIg
+ YJLw875vB/7oHvfTnRjO/6fExDdc9+djWhmwWfdnU+keT/3xoVgsq3ak0eekz1pSFEMwLu1lvagpp
+ 3OzLz+Y9Fc+seDIjjamXXDr9w5woUNM4e+3XWZ/BSUtTI3rUfEk2Htwo0khZ+1tq4HTk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7WaT4y715sO3oTcR31btfpAytCLroZcaPVeev8exvBA=; b=Q
- QLph4FEs5ks1DEBygfO3M+O2tJ6F9pp+4sMi8vCkwfzfneqDo8LSKZph+VGcvLjAn2AiG/EaB3z29
- WDT5Ufum3CUYSOGMDrDfWPZsoeSk56aM9ULviHOXtIH1kvddmooBAfl1JAPbDMd0tRbTPpLsZpvPI
- hgznqq2ZJtXQHfNM=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=UdePb14iwpIhTECPZqoEnffGJFfl+7aazz8VG0SNlvQ=; b=Et+t7YGaBgPehcyfhUKBF9lWZP
+ bZ1CtyAwdWEQeiYt6A9hTc2oqFrxfJdYn4hsWIw+UyP4sk6EsG9uRESH1dG9rHir+a1+479FFwnF/
+ FQ/PTbrr80n3Zhd8l1fppNHRtKG/JEuhW4y12Lbw7WuWzCkq4ac3Qfy6rQALsbU4D104=;
 Received: from esa4.hgst.iphmx.com ([216.71.154.42])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hhooA-0037dv-Jx
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 05:24:56 +0000
+ id 1hhooC-0037dv-JA
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 05:24:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1561958695; x=1593494695;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=qEEVG/GleY2IhHFbty0HJ0pJ2y5UIrI3mATRE7IF8Kc=;
- b=cubeXtOkvZI9Z5293TeRohSflozt8dkTZjZ9NeU5FrYOCgSGAmyFrWMr
- wk2VZuXkWrviviwymVgNznrP4WR9XzmdRvdrSUBpB2p4quFxR8vxYKMpW
- 5ovoP97HnfdIsB0mnxawaYSEa/lvn4Jxsen17Q671Qd3Dj/btRyPZja/b
- UMbmAYTZFX5CF15ukRGvOdyWEN9t6uaPZ2jvoiGZvxuzehQhHpc8cwQLM
- JNcj4Y7loc1dEsSCB5ll6ULkTxsT1W7YhOm6iLk2F4gUreBNZr702F5me
- YtvNBljW14fVVC1dHu828zhTbE9T73M0hNB1JrjvNXmV5oUV20uzB4wOd g==;
-X-IronPort-AV: E=Sophos;i="5.63,437,1557158400"; d="scan'208";a="111921710"
+ t=1561958697; x=1593494697;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=eKp5BWbm2czEOH0r/etBmUeYCDH36g7dJVTVIL5yAqs=;
+ b=KsWG9+WoMLmrxagivsSCQ160kXbMR2Efzdaq5dr8mQaV/nQLJWUtOcFs
+ pvEL6Lk56XsZnZc5h8BJy3uhWedDOlD5x27uLnWMc6pAXkbgufSOn6uJW
+ rINUzNiYutSMNUUayj7rC0DIj0YqHIVc8404LuNUV8DEOjt/zwRhoUAxY
+ CpKivvXDekte4nfSc8HDiQUTE5AzVUwjxUqjRL++tu6NuRgjXjRUYc++u
+ opv2L3SCyJxKLHkNclPwMoMGlP7MgdwgwDSJZ0pAGmfqYItVtxCO+IDEw
+ XsW1gUVFxnPLYCGXHTs8A78R+VbuGbg1GTpA6ZQs2ghGiJqEFd9Lu4qum g==;
+X-IronPort-AV: E=Sophos;i="5.63,437,1557158400"; d="scan'208";a="111921718"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Jul 2019 13:09:20 +0800
-IronPort-SDR: p3rFoGSWN+4sc48z3oKVV7zLse/YVI7pT/EA9EEIFvkbX9yJsm9v4X5yX91NikIr2vbWrVqMx2
- swjMlJGnEXoDztUdhjAb/bd2Eu6iaRf1AWwclk/67r0jAzeFjIOO6GpNvIshl7CI3IHWJKT40z
- vAmS3l9MP97Iv9zIVuB0rhOxmLJUEjoPjkqgqb9AnX0xEim+D4Dy6TIeeu8KONzDDNXycvHODp
- obmyB+DxvI8pm7Jw/b2HwAgFH+T8YbFu2PF+J/OV8c0sIphIx/YUkydQG4VeIAjwM1lIQ5OO+/
- RLO38uVGkyDHWtrOjdQgxuQn
+ by ob1.hgst.iphmx.com with ESMTP; 01 Jul 2019 13:09:22 +0800
+IronPort-SDR: Aoxa4p66OliqP2ruWlqLZd3N9DHtU7sa8SsZpN51J7aHwluZhc5A12OBOPlBmTa7/50EeRn1nz
+ Mw2yO8DNppeicsZnloFPdxO32raNRGpO1orc43S7chiQAgTUOblZGO/SzevnrQVWfchwQjSXdZ
+ Ra0JI2Qtra/GosY+wAetafUKVb4lwjy34/Py5vUoZOD9LXv5fs0csUc0Nu/VEGWWi+H3W/doLh
+ jSZwx8K2lt67CtEVPkguziZScyFznbwnu3N6kdAjx2Cx8iY9ncG/s73Lj3Z7xhUc7RnNgO6Ih/
+ KmivXJNeiumA1SBBiIR5PJ6L
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP; 30 Jun 2019 22:08:21 -0700
-IronPort-SDR: 5Q1/wtgNC7LQxTyrkYhLPNIik4AI54eskNVOntHzv7mffxKlteo9NrYKdCUn8bKYhw4isvZJ5g
- SPdVCloutID4n2c79mxSiUfb8JH8Z2Rket2Ka84Uno0LYrzN3jOtW/sXX6u8cp6ZTjGVry6aiJ
- Gc/2K7ZuhS/EQ4B35E28wEXte+jOZls35SdbunSPMbrjyus3Emt6VMM9Dakm7MbdAcItebyKxU
- qCXawUZNo+M7LvMfE8Mz4LdqTlekC2voQqegup+Sjma7hhN3izjmqYYrdmvhMeP/iTKRhZj74/
- KSU=
+ by uls-op-cesaep01.wdc.com with ESMTP; 30 Jun 2019 22:08:23 -0700
+IronPort-SDR: d3MFX2II8ZNJ3WoQ6jf1YRJkftAnMXltUI6f3zNTDR7smaUTcGCaiVMXkff/WYVUpF5UXvSQ9E
+ a/Xx9pkPY8Jll6aM0CCdWyyGcpxCah3A3NHprd3rphkQd1CVLYFz3SJ4VZlHfz3GmRoipQ3kO+
+ oc120j1L4eJ7aNYk3dvXqJHvKObKVAvUZclqkYqVqKLlhx3GUQQyj+6qnhsAy5uUrMsHbJqLOI
+ voUuUVTHXJ+yJm+BqQVdNBq7PlvJ67HHN91n+aWBuLnVH8Xk791uWDw+5cl2pfqQAVtZhqfX6r
+ t2w=
 Received: from washi.fujisawa.hgst.com ([10.149.53.254])
- by uls-op-cesaip02.wdc.com with ESMTP; 30 Jun 2019 22:09:19 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 30 Jun 2019 22:09:21 -0700
 From: Damien Le Moal <damien.lemoal@wdc.com>
 To: linux-scsi@vger.kernel.org,
  "Martin K . Petersen" <martin.petersen@oracle.com>,
  linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
  dm-devel@redhat.com, Mike Snitzer <snitzer@redhat.com>,
  linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Mon,  1 Jul 2019 14:09:14 +0900
-Message-Id: <20190701050918.27511-1-damien.lemoal@wdc.com>
+Date: Mon,  1 Jul 2019 14:09:15 +0900
+Message-Id: <20190701050918.27511-2-damien.lemoal@wdc.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190701050918.27511-1-damien.lemoal@wdc.com>
+References: <20190701050918.27511-1-damien.lemoal@wdc.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -88,9 +90,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1hhooA-0037dv-Jx
-Subject: [f2fs-dev] [PATCH V6 0/4] Fix zone revalidation memory allocation
- failures
+X-Headers-End: 1hhooC-0037dv-JA
+Subject: [f2fs-dev] [PATCH V6 1/4] block: Allow mapping of vmalloc-ed buffers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,71 +108,101 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This series addresses a reccuring problem with zone revalidation
-failures observed during extensive testing with memory constrained
-system and device hot-plugging.
+To allow the SCSI subsystem scsi_execute_req() function to issue
+requests using large buffers that are better allocated with vmalloc()
+rather than kmalloc(), modify bio_map_kern() to allow passing a buffer
+allocated with vmalloc().
 
-The problem source is failure to allocate large memory areas with
-alloc_pages() or kmalloc() in blk_revalidate_disk_zones() to store the
-disk array of zones (struct blk_zone) or in sd_zbc_report_zones() for
-the report zones command reply buffer.
+To do so, detect vmalloc-ed buffers using is_vmalloc_addr(). For
+vmalloc-ed buffers, flush the buffer using flush_kernel_vmap_range(),
+use vmalloc_to_page() instead of virt_to_page() to obtain the pages of
+the buffer, and invalidate the buffer addresses with
+invalidate_kernel_vmap_range() on completion of read BIOs. This last
+point is executed using the function bio_invalidate_vmalloc_pages()
+which is defined only if the architecture defines
+ARCH_HAS_FLUSH_KERNEL_DCACHE_PAGE, that is, if the architecture
+actually needs the invalidation done.
 
-The solution proposed here is to:
-1) limit the number of zones to be reported with a single report zones
-command execution, and
-2) Use vmalloc to allocate large-ish arrays and buffers in place of
-alloc_pages() or kmalloc().
+Fixes: 515ce6061312 ("scsi: sd_zbc: Fix sd_zbc_report_zones() buffer allocation")
+Fixes: e76239a3748c ("block: add a report_zones method")
+Cc: stable@vger.kernel.org
+Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
+Reviewed-by: Ming Lei <ming.lei@redhat.com>
+---
+ block/bio.c | 28 +++++++++++++++++++++++++++-
+ 1 file changed, 27 insertions(+), 1 deletion(-)
 
-With these changes, tests do not show any zone revalidation failures
-while not impacting the time taken for a disk zone inspection during
-device scan and revalidation.
-
-Changes from v5:
-* Remove the gfp_t argument from blkdev_report_zones() function and
-  device report zones method, relying instead on
-  memalloc_noio_save/restore() where GFP_NOIO was used.
-
-Changes from v4:
-* bio_copy_kern does not use the vmalloc buffer for IO so does not
-  need flush/invalidate_kernel_vmap_range() of the buffer.
-
-Changes from v3:
-* Reworked use of flush_kernel_vmap_range() and
-  invalidate_kernel_vmap_range() to contain the calls within bio.c,
-  transparently to the user of bio_map_kern().
-* Add similar support to bio_copy_kern().
-
-Changes from v2:
-* Move invalidate_kernel_vmap_range() of vmalloc-ed buffer to sd_zbc.c
-  in patch 2, after completion of scsi_execute_req().
-* In patch 2, add flush_kernel_vmap_range() before scsi_execute_req().
-
-Changes from V1:
-* Added call to invalidate_kernel_vmap_range() for vmalloc-ed buffers
-  in patch 1.
-* Fixed patch 2 compilation error with Sparc64 (kbuild robot)
-
-Damien Le Moal (4):
-  block: Allow mapping of vmalloc-ed buffers
-  block: Kill gfp_t argument of blkdev_report_zones()
-  sd_zbc: Fix report zones buffer allocation
-  block: Limit zone array allocation size
-
- block/bio.c                    |  28 ++++++++-
- block/blk-zoned.c              |  67 +++++++++++---------
- drivers/block/null_blk.h       |   3 +-
- drivers/block/null_blk_zoned.c |   3 +-
- drivers/md/dm-flakey.c         |   5 +-
- drivers/md/dm-linear.c         |   5 +-
- drivers/md/dm-zoned-metadata.c |  16 +++--
- drivers/md/dm.c                |   6 +-
- drivers/scsi/sd.h              |   3 +-
- drivers/scsi/sd_zbc.c          | 108 +++++++++++++++++++++++----------
- fs/f2fs/super.c                |   4 +-
- include/linux/blkdev.h         |  10 ++-
- include/linux/device-mapper.h  |   3 +-
- 13 files changed, 172 insertions(+), 89 deletions(-)
-
+diff --git a/block/bio.c b/block/bio.c
+index 2050bb4aacb5..3b6e35f73fd7 100644
+--- a/block/bio.c
++++ b/block/bio.c
+@@ -16,6 +16,7 @@
+ #include <linux/workqueue.h>
+ #include <linux/cgroup.h>
+ #include <linux/blk-cgroup.h>
++#include <linux/highmem.h>
+ 
+ #include <trace/events/block.h>
+ #include "blk.h"
+@@ -1479,8 +1480,22 @@ void bio_unmap_user(struct bio *bio)
+ 	bio_put(bio);
+ }
+ 
++static void bio_invalidate_vmalloc_pages(struct bio *bio)
++{
++#ifdef ARCH_HAS_FLUSH_KERNEL_DCACHE_PAGE
++	if (bio->bi_private && !op_is_write(bio_op(bio))) {
++		unsigned long i, len = 0;
++
++		for (i = 0; i < bio->bi_vcnt; i++)
++			len += bio->bi_io_vec[i].bv_len;
++		invalidate_kernel_vmap_range(bio->bi_private, len);
++	}
++#endif
++}
++
+ static void bio_map_kern_endio(struct bio *bio)
+ {
++	bio_invalidate_vmalloc_pages(bio);
+ 	bio_put(bio);
+ }
+ 
+@@ -1501,6 +1516,8 @@ struct bio *bio_map_kern(struct request_queue *q, void *data, unsigned int len,
+ 	unsigned long end = (kaddr + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
+ 	unsigned long start = kaddr >> PAGE_SHIFT;
+ 	const int nr_pages = end - start;
++	bool is_vmalloc = is_vmalloc_addr(data);
++	struct page *page;
+ 	int offset, i;
+ 	struct bio *bio;
+ 
+@@ -1508,6 +1525,11 @@ struct bio *bio_map_kern(struct request_queue *q, void *data, unsigned int len,
+ 	if (!bio)
+ 		return ERR_PTR(-ENOMEM);
+ 
++	if (is_vmalloc) {
++		flush_kernel_vmap_range(data, len);
++		bio->bi_private = data;
++	}
++
+ 	offset = offset_in_page(kaddr);
+ 	for (i = 0; i < nr_pages; i++) {
+ 		unsigned int bytes = PAGE_SIZE - offset;
+@@ -1518,7 +1540,11 @@ struct bio *bio_map_kern(struct request_queue *q, void *data, unsigned int len,
+ 		if (bytes > len)
+ 			bytes = len;
+ 
+-		if (bio_add_pc_page(q, bio, virt_to_page(data), bytes,
++		if (!is_vmalloc)
++			page = virt_to_page(data);
++		else
++			page = vmalloc_to_page(data);
++		if (bio_add_pc_page(q, bio, page, bytes,
+ 				    offset) < bytes) {
+ 			/* we don't support partial mappings */
+ 			bio_put(bio);
 -- 
 2.21.0
 
