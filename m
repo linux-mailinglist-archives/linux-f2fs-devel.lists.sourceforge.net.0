@@ -2,61 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871025C450
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jul 2019 22:26:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2F005C453
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jul 2019 22:27:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hi2sr-0006dQ-F1; Mon, 01 Jul 2019 20:26:41 +0000
+	id 1hi2tF-0006Xi-20; Mon, 01 Jul 2019 20:27:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hi2sq-0006dJ-7u
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:26:40 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hi2t9-0006Wm-OL
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:27:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=314NgkE3luLEE9CBIb+pShDmju7u+6t4OmzRIumPZxo=; b=GM8Z9hC3Xhh26R6xIKHGnYfqok
- /B08iMQCsE6E0ZRcN2XK9u6/y3ru8neB2SCIth2EWgVWF7t9hleyCAEYdsy6N9bZcnk0tGVtIN+q+
- HOt+WydwiHlm8qmYBg5G+uZPybNJTNtqFjAJ1MQ8l59EuYJDWnI6rvVLLrid/ORaCRNE=;
+ bh=vztb2LnauJi+dYyVQVqkWAfTVewmA3geSisYW/kKKac=; b=leER7KSFiiSCu35si+Ux382iJB
+ jRXHnJPhrybPnADR5dTBpNOlD4BLLwaL0el/NICwPmayI6YSIawPNK19cJ5rENQT8PJUQaJNeyh+X
+ hnFQkBVYZme3iisBy96iYuAj3g2jEG0MYHLzmlHV5K0msCCYZFPT3BqXjvjmr5U5HIdg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=314NgkE3luLEE9CBIb+pShDmju7u+6t4OmzRIumPZxo=; b=e
- rPRg4er4zYssMnKEDnbcOyjbn3aH7IRtMnMQi+WUsJOaevVmOb+I/7XcROmaiOI2rf9YfOoFRFvLy
- +1Scc3jKCCdc1fA+ZuD2iVmWuCMy110694mYbGqbzK6oklnpryaAIshof49qcLMLYEwjoK2A3mLEe
- 6Uu+rwMcKS8ioDb8=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vztb2LnauJi+dYyVQVqkWAfTVewmA3geSisYW/kKKac=; b=Rb+wsSLSlEepdL6RPmyfd+ZU87
+ wMYyfh87gya+jyDgG/IcHSuTWdkF3pIZRiHjgPbduEB5uTmPcF4kHMvnh+22F+ldpEV7rHR5h7cYV
+ 29Og+2wi2R7RDwm9OivGmDnzgPvmQt7nzr4HgDRz5CIzYujmXSqo+seovS95Au2fiW74=;
+Received: from [198.145.29.99] (helo=mail.kernel.org)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hi2t3-000yxK-Og
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:26:55 +0000
+ id 1hi2tE-003mbH-2f
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:27:05 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E65EA20B7C;
- Mon,  1 Jul 2019 20:26:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 419022173E;
+ Mon,  1 Jul 2019 20:26:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1562012808;
- bh=bHXVVLIgc6WfqlmFZzYaV90ylrhq4JfZ8EnmuXsM1vM=;
- h=From:To:Cc:Subject:Date:From;
- b=OSpbrUwWPr0XVE/7R0/wA16gYkmjSek15Tqav6ajumHVktyFYoEoorUuZQF+gflA4
- 84F055Vx3NQftnhPrev4FSE19+whHobVMOFxeN4CJyKBcQqhWVncSNbipYtNqAprpc
- VnbcSOFO5cSX4XOoH65e53wf4vd8lDttaWBoyZXQ=
+ bh=TJXiGDpQyPo3Am55DXSOjkswMDHlO5HT8Li7G7X071Q=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=CT/tkyuNgPvVOMOdhW295OKt46He+y0hcknm37HcP5rN0BhSxu3YBUwtHuMOKFNaL
+ dw7MDFt2hEv11NkKp/LPABGZ94TCwNuTIWqWhMhZaXDwo7olGZzJE//iGVzDgByv8h
+ OGXDy201TyCOpTCEivxHFJ9BDhmFBQ/DgZmujDGA=
 From: Eric Biggers <ebiggers@kernel.org>
 To: "Darrick J . Wong" <darrick.wong@oracle.com>
-Date: Mon,  1 Jul 2019 13:26:27 -0700
-Message-Id: <20190701202630.43776-1-ebiggers@kernel.org>
+Date: Mon,  1 Jul 2019 13:26:28 -0700
+Message-Id: <20190701202630.43776-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
+In-Reply-To: <20190701202630.43776-1-ebiggers@kernel.org>
+References: <20190701202630.43776-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -66,10 +68,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hi2t3-000yxK-Og
-Subject: [f2fs-dev] [PATCH 0/3] f2fs: use generic helpers for
- FS_IOC_{SETFLAGS, FSSETXATTR}
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hi2tE-003mbH-2f
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: use generic checking and prep function
+ for FS_IOC_SETFLAGS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,27 +91,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This series converts f2fs to use the new VFS helper functions that check
-the parameters of the FS_IOC_SETFLAGS and FS_IOC_FSSETXATTR ioctls.
+From: Eric Biggers <ebiggers@google.com>
 
-This applies to the merge of the f2fs/dev and xfs/vfs-for-next branches:
+Make the f2fs implementation of FS_IOC_SETFLAGS use the new VFS helper
+function vfs_ioc_setflags_prepare().
 
-	https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev
-	https://git.kernel.org/pub/scm/fs/xfs/xfs-linux.git/log/?h=vfs-for-next
+This is based on a patch from Darrick Wong, but reworked to apply after
+commit 360985573b55 ("f2fs: separate f2fs i_flags from fs_flags and ext4
+i_flags").
 
-i.e., this series will apply to mainline after these two branches get
-merged into it for 5.3.  Don't apply it to the f2fs tree by itself yet.
+Originally-from: Darrick J. Wong <darrick.wong@oracle.com>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/file.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-See: https://lore.kernel.org/lkml/20190701110603.5abcbb2c@canb.auug.org.au/T/#u
-
-Eric Biggers (3):
-  f2fs: use generic checking and prep function for FS_IOC_SETFLAGS
-  f2fs: use generic checking function for FS_IOC_FSSETXATTR
-  f2fs: remove redundant check from f2fs_setflags_common()
-
- fs/f2fs/file.c | 63 ++++++++++++++++++--------------------------------
- 1 file changed, 23 insertions(+), 40 deletions(-)
-
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index e7c368db81851f..b5b941e6448657 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1765,7 +1765,8 @@ static int f2fs_ioc_getflags(struct file *filp, unsigned long arg)
+ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
+ {
+ 	struct inode *inode = file_inode(filp);
+-	u32 fsflags;
++	struct f2fs_inode_info *fi = F2FS_I(inode);
++	u32 fsflags, old_fsflags;
+ 	u32 iflags;
+ 	int ret;
+ 
+@@ -1789,8 +1790,14 @@ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
+ 
+ 	inode_lock(inode);
+ 
++	old_fsflags = f2fs_iflags_to_fsflags(fi->i_flags);
++	ret = vfs_ioc_setflags_prepare(inode, old_fsflags, fsflags);
++	if (ret)
++		goto out;
++
+ 	ret = f2fs_setflags_common(inode, iflags,
+ 			f2fs_fsflags_to_iflags(F2FS_SETTABLE_FS_FL));
++out:
+ 	inode_unlock(inode);
+ 	mnt_drop_write_file(filp);
+ 	return ret;
 -- 
 2.22.0.410.gd8fdbe21b5-goog
 
