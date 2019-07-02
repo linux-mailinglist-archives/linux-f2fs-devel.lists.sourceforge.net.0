@@ -2,78 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C25DF5C454
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jul 2019 22:27:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hi2tE-000413-Qu; Mon, 01 Jul 2019 20:27:04 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hi2tB-00040c-Iw
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:27:01 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 939115CA07
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Jul 2019 09:39:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=SkOBizpS0RI8Ora4fbHMoTODRk4gz89hNp2h49DaAf0=; b=hyHE/wQjc0JmYe/YnR7EiLX1tJ
+	S05KOX3ekA7jneKCdPrKJn9V0XxL9/xH6a4ZMzpXTAoWj8JfgOsJz/pl8hwvJcQzO0ZhYvWYxFcPt
+	7krEAJCwd3wUKyCLgHDZ3BKboLhCpmR1iHmUV/rleEPb5Bd59Bu+I17RSRYfJk+95E2Q=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1hiDNc-0000qb-0X; Tue, 02 Jul 2019 07:39:08 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from
+ <3hgQbXQkKAOkZNPLYNSPYRZZRWP.NZX@flex--oceanchen.bounces.google.com>)
+ id 1hiDNa-0000qU-6V
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 07:39:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4UyunLJH8W03sO9mLqXejosf+oxVWrjHBsH8h7Yf1Os=; b=TJ3BtsyJSEQpnsuJSOXdhqlgy8
- a0tgI8lRJ7/BcQVkyFgSx75X5sBIgZ5FoRVp+mIhjFYwH53UIU0qpziixErDFQA6jZfxsjp98UIP1
- AOLhBiXvU53XdEE8PTimrg4Kpm6igc1SSJeJ8lHYD8WWajATEy19NvnefBUjpuigKFkU=;
+ bh=K8Aexb7ljwnjo43LTD84KFxt2yaGUlciYewUGizxqp8=; b=QEkoVaHV2Yd0ID4xzQ1oSXXd1l
+ j5a0YpD/2Tp40PX84hE31o1Rf92BKdXw99LDVJsJJ2ihw/PrJirySKkmevnqZ05iO55sUDAfKaOmT
+ ghDQIUnd3gFeCO8Xoy38wDrYggYT8EneX1F9s+EAXANEARuvlwwbfatMEaUctjRHr73A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=4UyunLJH8W03sO9mLqXejosf+oxVWrjHBsH8h7Yf1Os=; b=mcHKQgpBogu2fLcr4BjeLwZpfr
- Qe+i7uzpGbmbZNvT4PbRTyPzIB1WtEmeaAJ4FzepS+LIp+VnND1Sv0CFMf8r1rb00Dq4db3uqkr2B
- n/veGx5ptYKV1ODG8fcncltewX9YpU2fWlJnWgLL7BgHzjJWHiGLJlIUDOH28c4M6JYA=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hi2tE-003mbI-2c
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jul 2019 20:27:05 +0000
-Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
- [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D6BD621841;
- Mon,  1 Jul 2019 20:26:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1562012809;
- bh=fH1qBz8bc9aMV/qeircw6YrBU3Zw3ZRFu8JyT+UZkO4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JPUIMVpM68daxj+LoCTaRcevYYhGNPlgAi5g0Bq52xfRB2hM168VM074YtK0J50mJ
- k73xI0YrsY0ompp9Zk/pCtCeNflGCwtz0ye/4oqgPG0HKb/s6bhHyhutEfqCLFhRwj
- TkeivbS+6hH90iOoYJ/Tp7zrixjaRy6ujstcFHFg=
-From: Eric Biggers <ebiggers@kernel.org>
-To: "Darrick J . Wong" <darrick.wong@oracle.com>
-Date: Mon,  1 Jul 2019 13:26:30 -0700
-Message-Id: <20190701202630.43776-4-ebiggers@kernel.org>
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=K8Aexb7ljwnjo43LTD84KFxt2yaGUlciYewUGizxqp8=; b=R
+ ctr8X8NqA8JoIfwqDxO7N8kPWwbnzekYeIvgiVEo5KbeYNa+QId3xNw1RwsivSFeTfj2cTnRJLpnE
+ pxlro77Vicwjk7ieUKYBNs2MvV0npTApsxaAO0LcOfaSAIudplCky4bBEWaxxJQudC3jZ1eMsVJjD
+ xLnTfndHnJ2L5FYA=;
+Received: from mail-ua1-f73.google.com ([209.85.222.73])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hiDNm-001ahM-Pz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 07:39:21 +0000
+Received: by mail-ua1-f73.google.com with SMTP id q23so2921147uam.9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 02 Jul 2019 00:39:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=K8Aexb7ljwnjo43LTD84KFxt2yaGUlciYewUGizxqp8=;
+ b=I8u313E8FBDrYJbHjZTqlq9VFU2xsZDW/+q0ovmtc6t5f9akeBUHu4ahrsM5qqlBxU
+ +wqic6S14w0ZfSbKtCZYxIRdeM3SNZscRHz6YumpcCn+qA7gKfM6ZLvRQTljOuNl/7dY
+ 0vogG0ZPjZvUecplrxHpwaDiB4qufA2wonaIZUY1hq7CrZc1BsWNwOsvN0XgOEPInKA/
+ a3sAOB5ExVdMRqQJZ9PMTxtKQavFNSontACIoGATuBaO4n3/BAN4e7YwXZHaz/bCnoWW
+ Bdb0IPtLchhv0XEsSS70YRGodKiO+AwwnwC1HYxrKSw4nco/9zIkbV7n5viarectEKop
+ 6b/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=K8Aexb7ljwnjo43LTD84KFxt2yaGUlciYewUGizxqp8=;
+ b=dPS3rRlSgn3fUd4VEHFRTGIYtx/i8X5BxcjYorGP1H7+ZzcP1ILnNvnGOW+BZ+WEec
+ j4aQXK14oDAiH207QH171GdtTEdp1NZ0LnafHCJ+k030bAAD7auaa6XfGgJTjjDrq1D1
+ gdPyIp0B9Mfivr4iCZt/vSzZxuJmUzTsotymbso0XB7zPeN/hgqVt0GAp+gMjCJkpY1k
+ H2UyvVe0/n1T9WsxhOtHjJ774u0e8WUa8Xq0IS/VIlK+CmMolb6plV78wQyg3AFiKHtr
+ MKsG3NMDrcejzkLV7rF3P3CUSxgYvPW+U1mmV/sW4DQvQy3tHDkeQwAW3NKchnCP3s5e
+ eKLw==
+X-Gm-Message-State: APjAAAX/XqDBbmupqxGtFN69PA0UZCbMkwdVdLBoL1iQI0TiY51b/3hB
+ 0ZCnQQ8Aa2B+u/7IG7t8OjDWSHBuW5lWakE=
+X-Google-Smtp-Source: APXvYqyNbkUWK4ZjMisvx3QNm+os2jiG+ShivAJCx8Dft26tvmFVMGPVIfe17cJhkyVPwEZgQqTehJX9HdetKU0=
+X-Received: by 2002:a63:60cc:: with SMTP id u195mr28865210pgb.13.1562051718453; 
+ Tue, 02 Jul 2019 00:15:18 -0700 (PDT)
+Date: Tue,  2 Jul 2019 15:15:10 +0800
+Message-Id: <20190702071510.158351-1-oceanchen@google.com>
+Mime-Version: 1.0
 X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
-In-Reply-To: <20190701202630.43776-1-ebiggers@kernel.org>
-References: <20190701202630.43776-1-ebiggers@kernel.org>
-MIME-Version: 1.0
-X-Spam-Score: 0.6 (/)
+To: jaegeuk@kernel.org, yuchao0@huawei.com, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.73 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hi2tE-003mbI-2c
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: remove redundant check from
- f2fs_setflags_common()
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1hiDNm-001ahM-Pz
+Subject: [f2fs-dev] [PATCH] f2fs: avoid out-of-range memory access
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,54 +108,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+From: Ocean Chen via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Ocean Chen <oceanchen@google.com>
+Cc: oceanchen@google.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+blk_off might over 512 due to fs corrupt.
+Use ENTRIES_IN_SUM to protect invalid memory access.
 
-Now that f2fs_ioc_setflags() and f2fs_ioc_fssetxattr() call the VFS
-helper functions which check for permission to change the immutable and
-append-only flags, it's no longer needed to do this check in
-f2fs_setflags_common() too.  So remove it.
-
-This is based on a patch from Darrick Wong, but reworked to apply after
-commit 360985573b55 ("f2fs: separate f2fs i_flags from fs_flags and ext4
-i_flags").
-
-Originally-from: Darrick J. Wong <darrick.wong@oracle.com>
-Signed-off-by: Eric Biggers <ebiggers@google.com>
+Signed-off-by: Ocean Chen <oceanchen@google.com>
 ---
- fs/f2fs/file.c | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ fs/f2fs/segment.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index ae1a54ecc9fccc..e8b81f6f5c2b15 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1648,19 +1648,12 @@ static int f2fs_file_flush(struct file *file, fl_owner_t id)
- static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- {
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
--	u32 oldflags;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 8dee063c833f..b83c23ebae1f 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3403,6 +3403,8 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
  
- 	/* Is it quota file? Do not allow user to mess with it */
- 	if (IS_NOQUOTA(inode))
- 		return -EPERM;
- 
--	oldflags = fi->i_flags;
--
--	if ((iflags ^ oldflags) & (F2FS_APPEND_FL | F2FS_IMMUTABLE_FL))
--		if (!capable(CAP_LINUX_IMMUTABLE))
--			return -EPERM;
--
--	fi->i_flags = iflags | (oldflags & ~mask);
-+	fi->i_flags = iflags | (fi->i_flags & ~mask);
- 
- 	if (fi->i_flags & F2FS_PROJINHERIT_FL)
- 		set_inode_flag(inode, FI_PROJ_INHERIT);
+ 		for (j = 0; j < blk_off; j++) {
+ 			struct f2fs_summary *s;
++			if (blk_off >= ENTRIES_IN_SUM)
++				return -EFAULT;
+ 			s = (struct f2fs_summary *)(kaddr + offset);
+ 			seg_i->sum_blk->entries[j] = *s;
+ 			offset += SUMMARY_SIZE;
 -- 
 2.22.0.410.gd8fdbe21b5-goog
 
