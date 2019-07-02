@@ -2,101 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E9FC5CB30
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Jul 2019 10:12:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=v2evgfUoUWIavlxD38m5tcnNvDJCIlJnFEgY+M1TGSM=; b=RyMsSP+zeZGaye3nNASish7m6g
-	0XQe8jkW1uWv/1qXtysmoVZF14IIorIyzaEKCmblP/J5Hff/LAUdda5lYzz217F74OSbOaCigtFcv
-	S7DVJ6TuxvrWR4qHKjlKLRDPyTN7bO0SY51Ud2pdXiKnfsPacfKmYS2bBe4M9oNYG2R8=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BDA85CCA4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Jul 2019 11:27:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hiDtI-0007XT-9p; Tue, 02 Jul 2019 08:11:52 +0000
+	id 1hiF42-00039P-Qb; Tue, 02 Jul 2019 09:27:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <3NhAbXQkKALEfTVReTYVeXffXcV.Tfd@flex--oceanchen.bounces.google.com>)
- id 1hiDtH-0007XH-Rk
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 08:11:51 +0000
+ (envelope-from <ceo@teo-en-ming-corp.com>) id 1hiF41-000398-FW
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 09:27:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NEsgFhBOsHO1SUu/GnNK2DPDOJTChWsbzIPYkeXfosU=; b=nO0VsFNoMxFmR7LrfiPSpTxtgu
- AjFHZV6D/8KwdxbPuVkamuvKVugnXh9D08dPcp9MW2Zd8bELkQ7oHsFqWV/dffLnma/H6CsqYsdfY
- KL+nZrM2QtBIpmg0GCvBuLW4LlSUWZ4On6bobED3AiGqM4tU/40HO/c7GUWBGxskR0aE=;
+ bh=z2U7lkdeiHwkGFbiC6ybM0mMKyqidLBvMygpnJH/1Yo=; b=AxpS4jN3xpIfGMWozG7BwwuCNX
+ egwFWMO0nTw9eXj35paObEyS/FG0bOgrqRq2j5egug+UFMIjGRFrMxmbT8WRidOcDUq+5T8nrX8zl
+ aFqpCx6GGra5ONfmqJ7oRH6bm5x+Fgn7qSWCVJ46Iy42GnxO/h5HD7xgiDot0CtA+tD8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NEsgFhBOsHO1SUu/GnNK2DPDOJTChWsbzIPYkeXfosU=; b=Z
- Xg0hrR9J33BNeouYqeUoQf8tmS2LMezDTZWvW08xC2Tye50hyXFxzzwMyAGNdflHW6JfQ9Sh/ZzBr
- Rtp9lhtu95JinWDGOUa7kwytnX+FWPezoNOVJhkxs45HrkfovTDNpL6xJbmHEHvKcDxdiz2YsI4rH
- 4NtwJUo9eRyN5V10=;
-Received: from mail-qk1-f202.google.com ([209.85.222.202])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hiDtM-00409j-Qc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 08:11:58 +0000
-Received: by mail-qk1-f202.google.com with SMTP id n77so15927860qke.17
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 02 Jul 2019 01:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:message-id:mime-version:subject:from:to:cc;
- bh=NEsgFhBOsHO1SUu/GnNK2DPDOJTChWsbzIPYkeXfosU=;
- b=SUuiCpEyaak5XfddxqDhgd8CZLbHmyS+aWA9tOcpJKwvJ+lmczEa4pAv2doIL/MNAx
- oxbvwgOT7JP95TVpHvEKVEhqSCkHTaAIJ2qYLYjYX/sM5EVQ/ehuStA1RZaAx9WKHIu2
- HOMEvp+RFG18HWtxgTcDEihisRNtMoN4fr51BGqd0Y1aNZ9EUIBxSnArjNTNPZj0qKeC
- 7lDfBfPvpuhQ5dGD+qwIbY14OOVkD/4L9H5Ax829EjB1ByMvbQVVg8/LyR1nThS/JZpC
- sGyguTYXTlq79AT/k0ECihTxoUZa47U8PBCFXFAtW0FYIKiTXq8syA+AF8rl0mZfO7q0
- 9njw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
- bh=NEsgFhBOsHO1SUu/GnNK2DPDOJTChWsbzIPYkeXfosU=;
- b=Mfl+3sEqKSZkkCmOtUAv904lvzp7spMPlYAEcRC8ins3F0+GdmbnIdb6FZVVE+JzE+
- rCvpxtndcMMQP0XcikA/Tv0q0D1LiunCb5SQl7O3p32hURIkpd2aB9Qi5ycuGak+Y9Qk
- 3oB5rR4o+9KrJLmpRNYuj4486dv5/Yta2dmd04qrpZUAUD23F0i3ellGt0UTB79YIzxO
- d0nphbRUQaGHOoS4at8nW5R+JB8PlvxwnWDJ08BXnnXZvk07REjF6ZWR30t5Yf5ZL94K
- sYMT9T8CFGEmVrZz/DiT5TDkqLpJaMFD6QpsGXPhnKou7BEKflVK0ztqN2YK04RWeO5F
- BzHw==
-X-Gm-Message-State: APjAAAUeCbixDap+Q0lb88+/W6OUj3pFvVCTiSR5n0H7vG/c3uB8J4Iq
- faidylgjCTbrjgst0eKG393uF5yny5kVO8w=
-X-Google-Smtp-Source: APXvYqwrXvbk11TVxxDHQCIkdbAtLKP9A2wasQz4c5X/idjoID/jWMQN/mQNqcB/Hw6wGFCTefiRv8WenyeupcE=
-X-Received: by 2002:a37:ac0a:: with SMTP id e10mr24972711qkm.168.1562054710600; 
- Tue, 02 Jul 2019 01:05:10 -0700 (PDT)
-Date: Tue,  2 Jul 2019 16:05:03 +0800
-Message-Id: <20190702080503.175149-1-oceanchen@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
-To: jaegeuk@kernel.org, yuchao0@huawei.com, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-X-Spam-Score: -7.6 (-------)
+ List-Owner:List-Archive; bh=z2U7lkdeiHwkGFbiC6ybM0mMKyqidLBvMygpnJH/1Yo=; b=k
+ a8sGCmXyynpeRPBuzojd1Eznp923Z8UPIVIpdquSi1R/HovQTNMN+30pAwvyQxqGkVzswYjow2btv
+ huXn9+JUyqonDBqujHl48DIQIgssmInogVeu63gaHx8rueVYV9Nnl+Om0bY3/VDkjOxMXFuEgiA5d
+ WBmx9d1j37Ixi6IM=;
+Received: from mail-eopbgr1320089.outbound.protection.outlook.com
+ ([40.107.132.89] helo=APC01-PU1-obe.outbound.protection.outlook.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.90_1)
+ id 1hiF47-004a12-VN
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Jul 2019 09:27:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=teoenmingcorp.onmicrosoft.com; s=selector1-teoenmingcorp-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z2U7lkdeiHwkGFbiC6ybM0mMKyqidLBvMygpnJH/1Yo=;
+ b=vXxm64h4yOpDRF4WRMYqpEIzdesbeZ2Wju84WOpTLu7ymj1fnKLoOMY8gZdj30MT76s8S7e1bzswQ+DbieIE9UuzEpfWEwfqJ8cOF3ZNpLRxBFNggQeMMzu9TiC3znWUg8mjywKG7OcyuSQ0W291QC0cgQuHWj/3das1NFz5CbY=
+Received: from SG2PR01MB2141.apcprd01.prod.exchangelabs.com (10.170.143.19) by
+ SG2PR01MB1936.apcprd01.prod.exchangelabs.com (10.170.141.145) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2032.18; Tue, 2 Jul 2019 08:54:00 +0000
+Received: from SG2PR01MB2141.apcprd01.prod.exchangelabs.com
+ ([fe80::d503:3d71:ce06:19d2]) by SG2PR01MB2141.apcprd01.prod.exchangelabs.com
+ ([fe80::d503:3d71:ce06:19d2%6]) with mapi id 15.20.2032.019; Tue, 2 Jul 2019
+ 08:54:00 +0000
+From: Turritopsis Dohrnii Teo En Ming <ceo@teo-en-ming-corp.com>
+To: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Thread-Topic: Is F2FS (Samsung's Flash-Friendly File System) faster than EXT4
+ for Android 9.0 (Pie) and Android 10.0 Smartphones?
+Thread-Index: AdUwszAzLnUFlkYyQr+JHBr9SXB+0Q==
+Date: Tue, 2 Jul 2019 08:54:00 +0000
+Message-ID: <SG2PR01MB214119220D5EB8ABA23803EE87F80@SG2PR01MB2141.apcprd01.prod.exchangelabs.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=ceo@teo-en-ming-corp.com; 
+x-originating-ip: [118.189.211.120]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 1ad4dd87-30a2-42fa-6608-08d6fecad38b
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:SG2PR01MB1936; 
+x-ms-traffictypediagnostic: SG2PR01MB1936:
+x-ms-exchange-purlcount: 4
+x-microsoft-antispam-prvs: <SG2PR01MB193689F447C6322D5F0F70AB87F80@SG2PR01MB1936.apcprd01.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-forefront-prvs: 008663486A
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(346002)(376002)(39830400003)(396003)(366004)(136003)(199004)(189003)(8936002)(102836004)(81156014)(81166006)(8676002)(2501003)(486006)(66476007)(476003)(66556008)(2906002)(508600001)(6506007)(74316002)(66946007)(52536014)(64756008)(66446008)(76116006)(73956011)(33656002)(66066001)(14454004)(5640700003)(25786009)(9686003)(186003)(4326008)(6306002)(26005)(107886003)(7696005)(99286004)(6436002)(53936002)(68736007)(5660300002)(55016002)(71190400001)(71200400001)(316002)(2351001)(86362001)(3846002)(305945005)(966005)(7736002)(6116002)(256004)(6916009);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:SG2PR01MB1936;
+ H:SG2PR01MB2141.apcprd01.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: teo-en-ming-corp.com does not
+ designate permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: M0YrXANou5sxKuO5A33/ISphNLDEpfcS8vRe0B0vnZnUBdY0bDQcS1zXRZFJzbawN6Jk3pF9ApAkPjYMjPQ+nAbznm7tdeZkqVN9G3iS673Qkk8TIUSmna1dyJC0BoALD9XWTBZSyDHakZJKlMXRDPFrE8G3iMLKkDHMmjcFMmjrLZmrfGDryiP6rAJi3mqGpvyxTx+KcHWK42d5xhxnUEDFc2UDxqMROGRajhIxfM2Yi8P5BRPGsn9NM59jIDm0AAIuPyQ5nHPYHMgr8p9WydWjVbhNttyTXrgqaAg5LcknjXot0ijANZcg51TGNvxECMo8Gly3twLHeWUXcOy+d8NBpvbCQ5qMdnvGO0IJGcu1MOHErC24wpUIF556+8WvwddebTXdEVNUk3fjTYr7JbqyD8LW+Pfb3vmJXxHPWeQ=
+MIME-Version: 1.0
+X-OriginatorOrg: teo-en-ming-corp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ad4dd87-30a2-42fa-6608-08d6fecad38b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jul 2019 08:54:00.4541 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 23b3f6ae-c453-4b93-aec9-f17508e5885c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ceo@teo-en-ming-corp.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR01MB1936
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: blogspot.sg]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.202 listed in list.dnswl.org]
+ trust [40.107.132.89 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
-X-Headers-End: 1hiDtM-00409j-Qc
-Subject: [f2fs-dev] [PATCH v2] f2fs: avoid out-of-range memory access
+X-Headers-End: 1hiF47-004a12-VN
+Subject: [f2fs-dev] Is F2FS (Samsung's Flash-Friendly File System) faster
+ than EXT4 for Android 9.0 (Pie) and Android 10.0 Smartphones?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,38 +123,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Ocean Chen via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Ocean Chen <oceanchen@google.com>
-Cc: oceanchen@google.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-blk_off might over 512 due to fs corrupt.
-Use ENTRIES_IN_SUM to protect invalid memory access.
+Good afternoon from Singapore,
 
-v2:
-- fix typo
-Signed-off-by: Ocean Chen <oceanchen@google.com>
----
- fs/f2fs/segment.c | 2 ++
- 1 file changed, 2 insertions(+)
+Is F2FS (Samsung's Flash-Friendly File System) faster than EXT4 for Android 9.0 (Pie) and Android 10.0 Smartphones?
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 8dee063c833f..a5e8af0bd62e 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3403,6 +3403,8 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
- 
- 		for (j = 0; j < blk_off; j++) {
- 			struct f2fs_summary *s;
-+			if (j >= ENTRIES_IN_SUM)
-+				return -EFAULT;
- 			s = (struct f2fs_summary *)(kaddr + offset);
- 			seg_i->sum_blk->entries[j] = *s;
- 			offset += SUMMARY_SIZE;
--- 
-2.22.0.410.gd8fdbe21b5-goog
+Android 9.0 (Pie) has Linux kernel versions 4.4.107, 4.9.84, and 4.14.42, and was initially released on 6 August 2018.
+
+Android "Q" or Android 10.0  is the upcoming tenth major release and the 17th version of the Android mobile operating system. The final release of Android Q is scheduled for release in the third quarter of 2019.
+
+Thank you.
+
+
+
+-----BEGIN EMAIL SIGNATURE-----
+
+The Gospel for all Targeted Individuals (TIs):
+
+[The New York Times] Microwave Weapons Are Prime Suspect in Ills of
+U.S. Embassy Workers
+
+Link: https://www.nytimes.com/2018/09/01/science/sonic-attack-cuba-microwave.html
+
+********************************************************************************************
+
+Singaporean Mr. Turritopsis Dohrnii Teo En Ming's Academic
+Qualifications as at 14 Feb 2019
+
+[1] https://tdtemcerts.wordpress.com/
+
+[2] https://tdtemcerts.blogspot.sg/
+
+[3] https://www.scribd.com/user/270125049/Teo-En-Ming
+
+-----END EMAIL SIGNATURE-----
 
 
 
