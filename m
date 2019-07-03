@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2F985DB3D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Jul 2019 03:58:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15AB15DB3F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Jul 2019 03:58:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hiUXN-0007cy-8s; Wed, 03 Jul 2019 01:58:21 +0000
+	id 1hiUXg-0007sj-G7; Wed, 03 Jul 2019 01:58:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hiUXM-0007cq-2G
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jul 2019 01:58:20 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hiUXf-0007sY-Gq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jul 2019 01:58:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vIthR0nl+SqRFvUiTjUUcdCQLtkfql1wOtgKpr4MX3Q=; b=DiVNwNAn1/RUB2y6tJW+lNEYBh
- 5iJp64lINJRc0vog4IyBdR8tt5FzJRhAVO27WqVidoTQk0zXboW52Gjq1u4syiFK5t7IsIq0VjgBa
- 4JfNpoYv7bI30E52pKqFRiZIAkrOIxKnS8c0G3yG38ddz4v+e/qEvwSPYKD0GvGFvy1c=;
+ bh=LLE3BiFK4ZEjSis3SpBEMKibq3BbsL8HssiVZ3+iV7M=; b=dBKyuVe+mxnRnynS5yuUyEt3kY
+ 6N806CxtZ7UU9GMK1XhPNF1S+GjKu8rY2sJMvFcgycvlPF7Q+SRWrw6fHIt1lS152h6DPC/4NefZm
+ rz+KK8mSPISrmnJYARrU8RgFvryKNkTCmGzdBY7xTzvogeXp5QYRMB54cmWkE7OWAP3A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vIthR0nl+SqRFvUiTjUUcdCQLtkfql1wOtgKpr4MX3Q=; b=UjCyaNy0UNL2XadDWmEhKaJlBK
- svdWRCO9oqWj56QklPcM5uUReKAPQp/3dLD+POQYn4XDNtc0f4oyPc0z5C7zjc0ZkMQeAcmfQwEW1
- lWwWscRZRP8HkpvlT7KELHxDUdBa82acMH3IziK2/D1StfY8c5/dCqgDt5SQyhZB89nw=;
+ bh=LLE3BiFK4ZEjSis3SpBEMKibq3BbsL8HssiVZ3+iV7M=; b=XNeWb99VJO48LQwo9M9bfoEi9u
+ lG+FVjAMoOg4UTzyOLJZn7g/tWdpyqKFCNjuQOy8b0yTj/+94ChLBW7zqzwuLTUZLCibo42550et+
+ 12o13zhXDVANFau4u6Ms+WiX/eBIzL8xJfVOEO4HFM4ga2F7O8/RgyEJF0FIxgxZv6nI=;
 Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hiUXb-005j3C-3R
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jul 2019 01:58:36 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 3DBA81A9F18DCBF70E1B;
- Wed,  3 Jul 2019 09:58:22 +0800 (CST)
+ id 1hiUXl-003XLy-Fc
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jul 2019 01:58:46 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id A5D847DF120CA430255B;
+ Wed,  3 Jul 2019 09:58:37 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 3 Jul 2019
- 09:58:18 +0800
+ (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 3 Jul 2019
+ 09:58:36 +0800
 To: Eric Biggers <ebiggers@kernel.org>, "Darrick J . Wong"
  <darrick.wong@oracle.com>
 References: <20190701202630.43776-1-ebiggers@kernel.org>
- <20190701202630.43776-3-ebiggers@kernel.org>
+ <20190701202630.43776-4-ebiggers@kernel.org>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <8aaeddfb-8148-0708-9106-c7f45a4827cd@huawei.com>
-Date: Wed, 3 Jul 2019 09:58:27 +0800
+Message-ID: <94c2e0c6-c5cf-6f9c-eb24-7f347727d51d@huawei.com>
+Date: Wed, 3 Jul 2019 09:58:45 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190701202630.43776-3-ebiggers@kernel.org>
+In-Reply-To: <20190701202630.43776-4-ebiggers@kernel.org>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -66,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hiUXb-005j3C-3R
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: use generic checking function for
- FS_IOC_FSSETXATTR
+X-Headers-End: 1hiUXl-003XLy-Fc
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: remove redundant check from
+ f2fs_setflags_common()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,9 +89,10 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 2019/7/2 4:26, Eric Biggers wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Make the f2fs implementation of FS_IOC_FSSETXATTR use the new VFS helper
-> function vfs_ioc_fssetxattr_check(), and remove the project quota check
-> since it's now done by the helper function.
+> Now that f2fs_ioc_setflags() and f2fs_ioc_fssetxattr() call the VFS
+> helper functions which check for permission to change the immutable and
+> append-only flags, it's no longer needed to do this check in
+> f2fs_setflags_common() too.  So remove it.
 > 
 > This is based on a patch from Darrick Wong, but reworked to apply after
 > commit 360985573b55 ("f2fs: separate f2fs i_flags from fs_flags and ext4
