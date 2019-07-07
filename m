@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D65F56177A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  7 Jul 2019 22:43:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6301261776
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  7 Jul 2019 22:42:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hkE0D-00061U-VV; Sun, 07 Jul 2019 20:43:17 +0000
+	id 1hkDyc-0008Gg-8q; Sun, 07 Jul 2019 20:41:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <darrick.wong@oracle.com>) id 1hkE0C-00061F-Dr
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jul 2019 20:43:16 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1hkDya-0008GZ-Vh
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jul 2019 20:41:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6hBxH4XrKftdFNOpQ7bLkx+ErCc58NpfzAi14wvQyhY=; b=N6G1rZTSjCz6e8Nne6icofeVJ7
- Ld6N+VqvdGELkBj9olBehbUnMM2ZQvCI2lMhYtyLuOwnwZF3NfnP2hUFZ93t6t+VfGXh3gEelNn5N
- N3ERX3USB6eoXveB3pFyDIPM6SsgjBB8wLXlIgjiUo/tLpFwfOXSVqYE/lL0mlnC1uAQ=;
+ bh=tFrWHg/aAE67pxauKL0omt7gMkY1t0PbRirUnZNOjFA=; b=LE1t0x8xiG6x9ox+VDwD42Nojg
+ wpn+xPHkjwbbxaIQz+Ly3nfpruYhfvLls5o2RGJSC2Ir7yUMlRHSOB5/KMP9M8fLU8eMbRF8U2vAc
+ Uqq+R0hcOG3BO2dujGozyahM3CeY3by705q7uB2SYmFOsfUxh4oahoMnn65yX1N/As9g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,53 +29,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6hBxH4XrKftdFNOpQ7bLkx+ErCc58NpfzAi14wvQyhY=; b=WKOcU+GZuFQelcoFF/4PPi4f42
- rCJZMz61H2lg4vGs/NtXIm5ZSkH3Pwv3cRmlscimS7WLmc45y7pAw1fHlAQqLI5sJz0LhcQz7THMP
- KKF/+tgFw84WAiTXN5jaZi5+/Hx0fZ3oXicAr/27XNPyLdgEMELjsKN7/lz9PUsDKpoU=;
-Received: from userp2130.oracle.com ([156.151.31.86])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=tFrWHg/aAE67pxauKL0omt7gMkY1t0PbRirUnZNOjFA=; b=HxehURwzYOyMaPkn3pI8bArVlf
+ zThUlPn3tkk+alJ40SQMZfxr9zDmP2mq0JHV2qdrqDAiA0jvQElNEd/+Rt8RjWwh5FApMebq+ILHe
+ 7n7ahHMhDbS+Eib54GVJH0DUAXamEiYdVWwticKhTquM1XOygheZqdV3mW/7R8KBrJkk=;
+Received: from userp2120.oracle.com ([156.151.31.85])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hkE0Q-00B3Nt-O5
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jul 2019 20:43:31 +0000
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x67KctMx027492;
- Sun, 7 Jul 2019 20:43:23 GMT
+ id 1hkDyr-009PGQ-ML
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jul 2019 20:41:58 +0000
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x67Kdg6j040664;
+ Sun, 7 Jul 2019 20:41:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=date : from : to : cc
  : subject : message-id : references : mime-version : content-type :
  in-reply-to; s=corp-2018-07-02;
- bh=6hBxH4XrKftdFNOpQ7bLkx+ErCc58NpfzAi14wvQyhY=;
- b=VEynfwpc7+wB4HF/DBjTgJbx/P2SauiSzAtBpAFVXI3bMoAnD/XvBp/CHOW72CUZyYMo
- oXnH9zM/UxK2qt5CJueeCRSl/BJ7zc6YoPv+QnNQ6rwFgeP33G5TKbjZRowpPrisw5Td
- 41Dwg+qPaOAJuQbo4kPKOraddp2Nkqt1XUdIZRpy/p3nvN9wrprl7OBxMbgwSwFOfDyo
- BkaWujbckq0pOLnzgxFjJFjpBhNJ4lc5GgvUl/e00gWX+Sm7zcGP9n+J8ss7Sg9Nnp3a
- r0fy0HqrzxDx0maDR8qlMi38lwX8jS+rZ9SPsc6vnERgORUgUDHJCflPVUZ+nmmeo3eU MQ== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2130.oracle.com with ESMTP id 2tjk2tbaax-1
+ bh=tFrWHg/aAE67pxauKL0omt7gMkY1t0PbRirUnZNOjFA=;
+ b=BFEbX3npPed4HkYp+Np8xDXCIBvbU4jZUtYeTUf4rGO4CCrpJn8aMtXHx2qnWARtQwj9
+ qk83CNMM/r2f10EVrcytEf96lHRdz1o6++hrMKFFGB/ey+aBdknesc9PWBfAC8Rngemt
+ ZCV9wQ+k0ZpxY+KbQuexV+j/OP30UN5bm9loeCLOZuTTJDIO6/6i2LL5K1OLn6st/Y8n
+ Ss4qtasRWvPWx37PZbSPFlgaNl77uma1leMPoBl5LoLo0ChXhV1TWbidOr3m/VX7Okhw
+ l6pIDMnIctEFgjlmlKQYHL8wUoZcnkV3VbcxkZBa+8vbwUxD6U48M1qHKwx7qdAYoG2D xg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2120.oracle.com with ESMTP id 2tjm9qb80k-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 07 Jul 2019 20:43:23 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x67KcK2Z145282;
- Sun, 7 Jul 2019 20:41:22 GMT
+ Sun, 07 Jul 2019 20:41:44 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x67KcIiB014195;
+ Sun, 7 Jul 2019 20:41:44 GMT
 Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3030.oracle.com with ESMTP id 2tjgrt7mh7-1
+ by userp3020.oracle.com with ESMTP id 2tjjyjx0mw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 07 Jul 2019 20:41:22 +0000
-Received: from abhmp0013.oracle.com (abhmp0013.oracle.com [141.146.116.19])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x67KfLjp018277;
- Sun, 7 Jul 2019 20:41:21 GMT
+ Sun, 07 Jul 2019 20:41:44 +0000
+Received: from abhmp0016.oracle.com (abhmp0016.oracle.com [141.146.116.22])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x67Kfh0C018360;
+ Sun, 7 Jul 2019 20:41:43 GMT
 Received: from localhost (/67.169.218.210)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Sun, 07 Jul 2019 13:41:21 -0700
-Date: Sun, 7 Jul 2019 13:41:17 -0700
+ with ESMTP ; Sun, 07 Jul 2019 13:41:43 -0700
+Date: Sun, 7 Jul 2019 13:41:39 -0700
 From: "Darrick J. Wong" <darrick.wong@oracle.com>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190707204117.GI1654093@magnolia>
+Message-ID: <20190707204139.GJ1654093@magnolia>
 References: <20190701202630.43776-1-ebiggers@kernel.org>
- <20190701202630.43776-2-ebiggers@kernel.org>
+ <20190701202630.43776-3-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190701202630.43776-2-ebiggers@kernel.org>
+In-Reply-To: <20190701202630.43776-3-ebiggers@kernel.org>
 User-Agent: Mutt/1.9.4 (2018-02-28)
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9311
  signatures=668688
@@ -104,9 +104,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hkE0Q-00B3Nt-O5
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: use generic checking and prep
- function for FS_IOC_SETFLAGS
+X-Headers-End: 1hkDyr-009PGQ-ML
+Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: use generic checking function for
+ FS_IOC_FSSETXATTR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,11 +124,12 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jul 01, 2019 at 01:26:28PM -0700, Eric Biggers wrote:
+On Mon, Jul 01, 2019 at 01:26:29PM -0700, Eric Biggers wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Make the f2fs implementation of FS_IOC_SETFLAGS use the new VFS helper
-> function vfs_ioc_setflags_prepare().
+> Make the f2fs implementation of FS_IOC_FSSETXATTR use the new VFS helper
+> function vfs_ioc_fssetxattr_check(), and remove the project quota check
+> since it's now done by the helper function.
 > 
 > This is based on a patch from Darrick Wong, but reworked to apply after
 > commit 360985573b55 ("f2fs: separate f2fs i_flags from fs_flags and ext4
@@ -137,44 +138,96 @@ On Mon, Jul 01, 2019 at 01:26:28PM -0700, Eric Biggers wrote:
 > Originally-from: Darrick J. Wong <darrick.wong@oracle.com>
 > Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-LGTM,
+Looks ok,
 Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
 
 --D
 
 > ---
->  fs/f2fs/file.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+>  fs/f2fs/file.c | 45 ++++++++++++++-------------------------------
+>  1 file changed, 14 insertions(+), 31 deletions(-)
 > 
 > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index e7c368db81851f..b5b941e6448657 100644
+> index b5b941e6448657..ae1a54ecc9fccc 100644
 > --- a/fs/f2fs/file.c
 > +++ b/fs/f2fs/file.c
-> @@ -1765,7 +1765,8 @@ static int f2fs_ioc_getflags(struct file *filp, unsigned long arg)
->  static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
+> @@ -2857,52 +2857,32 @@ static inline u32 f2fs_xflags_to_iflags(u32 xflags)
+>  	return iflags;
+>  }
+>  
+> -static int f2fs_ioc_fsgetxattr(struct file *filp, unsigned long arg)
+> +static void f2fs_fill_fsxattr(struct inode *inode, struct fsxattr *fa)
+>  {
+> -	struct inode *inode = file_inode(filp);
+>  	struct f2fs_inode_info *fi = F2FS_I(inode);
+> -	struct fsxattr fa;
+>  
+> -	memset(&fa, 0, sizeof(struct fsxattr));
+> -	fa.fsx_xflags = f2fs_iflags_to_xflags(fi->i_flags);
+> +	simple_fill_fsxattr(fa, f2fs_iflags_to_xflags(fi->i_flags));
+>  
+>  	if (f2fs_sb_has_project_quota(F2FS_I_SB(inode)))
+> -		fa.fsx_projid = (__u32)from_kprojid(&init_user_ns,
+> -							fi->i_projid);
+> -
+> -	if (copy_to_user((struct fsxattr __user *)arg, &fa, sizeof(fa)))
+> -		return -EFAULT;
+> -	return 0;
+> +		fa->fsx_projid = from_kprojid(&init_user_ns, fi->i_projid);
+>  }
+>  
+> -static int f2fs_ioctl_check_project(struct inode *inode, struct fsxattr *fa)
+> +static int f2fs_ioc_fsgetxattr(struct file *filp, unsigned long arg)
+>  {
+> -	/*
+> -	 * Project Quota ID state is only allowed to change from within the init
+> -	 * namespace. Enforce that restriction only if we are trying to change
+> -	 * the quota ID state. Everything else is allowed in user namespaces.
+> -	 */
+> -	if (current_user_ns() == &init_user_ns)
+> -		return 0;
+> -
+> -	if (__kprojid_val(F2FS_I(inode)->i_projid) != fa->fsx_projid)
+> -		return -EINVAL;
+> +	struct inode *inode = file_inode(filp);
+> +	struct fsxattr fa;
+>  
+> -	if (F2FS_I(inode)->i_flags & F2FS_PROJINHERIT_FL) {
+> -		if (!(fa->fsx_xflags & FS_XFLAG_PROJINHERIT))
+> -			return -EINVAL;
+> -	} else {
+> -		if (fa->fsx_xflags & FS_XFLAG_PROJINHERIT)
+> -			return -EINVAL;
+> -	}
+> +	f2fs_fill_fsxattr(inode, &fa);
+>  
+> +	if (copy_to_user((struct fsxattr __user *)arg, &fa, sizeof(fa)))
+> +		return -EFAULT;
+>  	return 0;
+>  }
+>  
+>  static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
 >  {
 >  	struct inode *inode = file_inode(filp);
-> -	u32 fsflags;
-> +	struct f2fs_inode_info *fi = F2FS_I(inode);
-> +	u32 fsflags, old_fsflags;
+> -	struct fsxattr fa;
+> +	struct fsxattr fa, old_fa;
 >  	u32 iflags;
->  	int ret;
+>  	int err;
 >  
-> @@ -1789,8 +1790,14 @@ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
+> @@ -2925,9 +2905,12 @@ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
+>  		return err;
 >  
 >  	inode_lock(inode);
->  
-> +	old_fsflags = f2fs_iflags_to_fsflags(fi->i_flags);
-> +	ret = vfs_ioc_setflags_prepare(inode, old_fsflags, fsflags);
-> +	if (ret)
-> +		goto out;
+> -	err = f2fs_ioctl_check_project(inode, &fa);
 > +
->  	ret = f2fs_setflags_common(inode, iflags,
->  			f2fs_fsflags_to_iflags(F2FS_SETTABLE_FS_FL));
-> +out:
->  	inode_unlock(inode);
->  	mnt_drop_write_file(filp);
->  	return ret;
+> +	f2fs_fill_fsxattr(inode, &old_fa);
+> +	err = vfs_ioc_fssetxattr_check(inode, &old_fa, &fa);
+>  	if (err)
+>  		goto out;
+> +
+>  	err = f2fs_setflags_common(inode, iflags,
+>  			f2fs_xflags_to_iflags(F2FS_SUPPORTED_XFLAGS));
+>  	if (err)
 > -- 
 > 2.22.0.410.gd8fdbe21b5-goog
 > 
