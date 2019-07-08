@@ -2,135 +2,120 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A28861944
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Jul 2019 04:17:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hkJDh-000371-V7; Mon, 08 Jul 2019 02:17:33 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=085e64fe2=Damien.LeMoal@wdc.com>)
- id 1hkJDg-00036q-Th
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jul 2019 02:17:32 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id E6ACE61979
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Jul 2019 05:21:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=BGDeY+zlLSp7GS4w+VT/28nHkIC/JX6Vt25ofV9Y5xg=; b=CPjdQiR4Dug4S/0/kntQHruSl
+	wEn6jkPhtuy0TF0EslLwR4GSC1Xr50ZjLmha8Frt/8YqZxolsNxCjt5mhmaRVXSpXB3qziVREWT3S
+	18ExVvFIs3gE4xGTVJ9Ilcg9y1Fx+lz4bN1HqT3mz7V+w9cDi/O/AVmHudL2labaDKmjU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1hkKDO-00022k-O6; Mon, 08 Jul 2019 03:21:18 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <oceanchen@google.com>) id 1hkKDN-00022d-LG
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jul 2019 03:21:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dywAFDrj0MfAgVkHqaTVZ9P6BjevwEczcnCxLBSf4Sg=; b=CSozjPuGKPHfOWHDYlx9Z8/OPK
- kzu3u853X8T7ESQAsKZgPpAy9ux0hxKzzcrFhynBV+CV9S1VWOav0vh7UI/OOglYrRFBqv/fww6XX
- 4K9CmHyvsM4tmDyGJxbNaBrp2G2oWQLlr7PZwsarLuHqom/vRwKrzg4jqirmFDQoIlsU=;
+ bh=yriNKsJYe60EiNop3TWpMryY2FxcQ0ThW6Sm/XJwlR8=; b=Oc09embVz/jy8LWurOwFWKLQpu
+ mdAMxxGNIR67LlhKXxZJfOgfREIA1o+tSXKaU9TgNuCX9ICLHHgstyzQHOmBLxJMhB5uVsiyWMYCq
+ bkJo3z2kic0DW0WmLjG51PJfIjCD29opQuTRIxJP/fZZzDuQxiUwU3MwshCUADEEYTKc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:Message-ID
- :Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=dywAFDrj0MfAgVkHqaTVZ9P6BjevwEczcnCxLBSf4Sg=; b=Y
- Eb5fvD7pnGbM2YybEaYztlVOLlVXZl/kUoNnzBExM/6WDoC3iEM3H9jwO7EYiZkdZZfIjqtcutNuK
- +Cje4xWq2+KyFZWNYb88nr6rqyaPx+umh93J3IaSQf1iJtkrfSsKlN+DLj7yxdwcRyf6EBruuzzXe
- C/cS4QHYNNKP089Y=;
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yriNKsJYe60EiNop3TWpMryY2FxcQ0ThW6Sm/XJwlR8=; b=TlKnp6Q6G2A7i0NfYaSnAYB2KU
+ OvhB3ZB6udlJ0lWPQvBh8m2I4DD3jJPuq75YfONUqn8tPzGnwCWBkC+Gb2t4WuPotiot7PrhP2Xr9
+ v7JYBYYFlWPsG6KNRdlwZ6rjYKeNQUvrR04mdo5o6GBaRPKQ7l9GJ2nvf8iNiHy23SYc=;
+Received: from mail-pl1-f193.google.com ([209.85.214.193])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hkJDu-00ArQ2-Ea
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jul 2019 02:17:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1562552267; x=1594088267;
- h=from:to:cc:subject:date:message-id:references:
- content-transfer-encoding:mime-version;
- bh=dywAFDrj0MfAgVkHqaTVZ9P6BjevwEczcnCxLBSf4Sg=;
- b=BJd6suigPO+alQkC5xFzAVBNJAlyQdxuvQzP1e3GOPvpDByS73kNt84i
- xJDEgwGTwgioSy8OIEhe3rNepwOgTY8xlRXInayccVopgXIAZnyPA3NCb
- 4aBzT4HDJiP+t5FK+ANdwpaRZrB2Hhp25WF6VwHPn12wFtKpfxSOc2E8q
- oDWgXDP2zh+M2LbRB2HPmscZef+4BLPlAORF3oVnLQf6B8V3Qy+huHBua
- enIxYWdN80sZjBvrvwnvi0cPNJhQe3DpdikHZzrjBpLcIhPUMw8IBhn4N
- /AokxdidTAsfLlF1dOb/cmriY9wBdCoPVERfMmRyz/t4f+H7WNw1Ivcwn A==;
-IronPort-SDR: Nuwvt1vSYB9AK/4EaB3/mkm2iSck6iVQOHpsJiylSYGGHgRdPHP5Fxa0U2uM6JwiHfYX2RqS4d
- nnDW/tm6lxfDOo2cXQaD0epQwVdqoVhAQGnRuwzENrRquLXqYwb8EgVfUwN4ciwFg/QEPbaxag
- NRs43ByCufgghDlalQK7TTqVT2iDll2WEVAgLPRmB116un+dbVqzZpsp15wohvyKL5fmipJU7h
- /p61xz+iaZbEHBPQWWD0qE2m/mSYH0I+5M20M69aXQK/xU0ZPK2zhSF1edxTIOhDBb7csuTkO8
- LXA=
-X-IronPort-AV: E=Sophos;i="5.63,464,1557158400"; d="scan'208";a="113580885"
-Received: from mail-sn1nam02lp2052.outbound.protection.outlook.com (HELO
- NAM02-SN1-obe.outbound.protection.outlook.com) ([104.47.36.52])
- by ob1.hgst.iphmx.com with ESMTP; 08 Jul 2019 10:02:08 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dywAFDrj0MfAgVkHqaTVZ9P6BjevwEczcnCxLBSf4Sg=;
- b=ee4LqQuprJ1WGiHqfCiM/XbQeJ6M9xrEiDBXoHTs4BtNAjQlyNRDtFSkJ3tARCZBC79kIsJL2gq/TUQ1kkiYfTUB3IkzSnKFJxaORzudzWA84Ps+PYeCRJ85e3ATbtOrzqT/Yz7FnqxkdxmZkV7nydEZGIyO8MJe1DUC99u4lEg=
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com (20.179.58.207) by
- BYAPR04MB5864.namprd04.prod.outlook.com (20.179.59.82) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2052.18; Mon, 8 Jul 2019 02:02:07 +0000
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::65a9:db0a:646d:eb1e]) by BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::65a9:db0a:646d:eb1e%6]) with mapi id 15.20.2052.020; Mon, 8 Jul 2019
- 02:02:07 +0000
-From: Damien Le Moal <Damien.LeMoal@wdc.com>
-To: "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>, "Martin K .
- Petersen" <martin.petersen@oracle.com>, "linux-block@vger.kernel.org"
- <linux-block@vger.kernel.org>, Jens Axboe <axboe@kernel.dk>,
- "dm-devel@redhat.com" <dm-devel@redhat.com>, Mike Snitzer
- <snitzer@redhat.com>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, Jaegeuk Kim <jaegeuk@kernel.org>
-Thread-Topic: [PATCH V6 0/4] Fix zone revalidation memory allocation failures
-Thread-Index: AQHVL8ssJYyertgVkky0I6r2FZ0yYw==
-Date: Mon, 8 Jul 2019 02:02:06 +0000
-Message-ID: <BYAPR04MB5816BC7EC358F5785AEE1EA9E7F60@BYAPR04MB5816.namprd04.prod.outlook.com>
-References: <20190701050918.27511-1-damien.lemoal@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Damien.LeMoal@wdc.com; 
-x-originating-ip: [199.255.47.6]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1d0f2b04-9a7e-408b-18e0-08d7034847a5
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:BYAPR04MB5864; 
-x-ms-traffictypediagnostic: BYAPR04MB5864:
-x-microsoft-antispam-prvs: <BYAPR04MB58643D8DB32AAB7739ED6344E7F60@BYAPR04MB5864.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:1186;
-x-forefront-prvs: 00922518D8
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(39860400002)(346002)(366004)(396003)(136003)(376002)(189003)(199004)(2501003)(486006)(26005)(6436002)(54906003)(53546011)(9686003)(316002)(53936002)(7416002)(476003)(446003)(55016002)(102836004)(76176011)(186003)(86362001)(6506007)(110136005)(7696005)(229853002)(8936002)(14444005)(2906002)(33656002)(81166006)(72206003)(99286004)(3846002)(81156014)(256004)(8676002)(478600001)(6246003)(66066001)(4744005)(71200400001)(7736002)(25786009)(71190400001)(4326008)(73956011)(66946007)(76116006)(91956017)(52536014)(68736007)(74316002)(6116002)(14454004)(5660300002)(66556008)(66446008)(305945005)(64756008)(66476007);
- DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB5864;
- H:BYAPR04MB5816.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: XSdjz4wqQe6MIde04G1uCKnIysFNjimO+WZUG9lZ03I1rJ/w0p2lygjCoM4s73jCaKXmbNBRsIAgDRUcBx7NqvSreO5D3xjEqm/UnyAVj7qhv1fnyDKkYLU1egwO+WWy/8TrPuK2VaptGKvc7dWdbQB7S5UBKYfA1bkySRe5TFTvVH3b7fqvkSs4l2YEITS7DbKdyMHa9AIBq9Ot+TnTLAIl+7uz8DArxvTnuF7vDuoCFHbpak5YRBh0HvCtFz5rHoi3OzsqUZhoGO+MQh3dlAZWvKVTuG70PZgE3kKCGfhIvVgsmf0OwFQjMwjDgEUiARuU+kpeJdcf/XT8cVcTcUfXsaaiLymGoJzcP2W2r00IWSKuuECUc5ebXtVuwkoMISfQE6QbxYSTY6izR5fOfVMLy6ooHwCH4IND8JJdm64=
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hkKDW-00AuR1-Ro
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jul 2019 03:21:30 +0000
+Received: by mail-pl1-f193.google.com with SMTP id b7so7495895pls.6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 07 Jul 2019 20:21:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:to:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=yriNKsJYe60EiNop3TWpMryY2FxcQ0ThW6Sm/XJwlR8=;
+ b=EjuZ1ANbtWBdFoLUBhJy9NtMg1EBYm4JHMHrGolEeqgphFf/tPZ52cOdUyqWITuNVo
+ SIwGW+m80mSfKEHOxu72UX1mqNLUffbdTxTux4L0WTdT6xtq+8Mso7YqAS1onxOwcrTU
+ BTxCSxzp5soMmiH+XApJ/ROmWhsX99p/B46sXTR/1SIJOYZRu0C4hQxojEm7laFCffyD
+ nCLvrrLDCza0BlqijaL2JnzpdvQGL+aAj8AdPQbo7rOs+0v9ucBbeaQsydsCGXX3lP+a
+ c4bXY0l7ULFAVwiEjbqU6Ft0u6Wg6L6VXRjiOSTsmOVejix0h4h01hqZ97SHMz3KT2+L
+ eEwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=yriNKsJYe60EiNop3TWpMryY2FxcQ0ThW6Sm/XJwlR8=;
+ b=iTESo9AmzL/Rnn/vroi+EAlJf+T2T7XKkGT3BfePTqL0rAVCfxlyJVaokyVU6EuyDp
+ ZIr5KHDEI7x6i2slbBNBXIeh/eBeVmRHo7c5zN56O76JY7ShlVorTfj3SC0gd1t0Obmz
+ kebCFbyv/+CfZFtrGaM4I30Pp3T3cxyxs6709XtDnU6o+XKvSSqxPSvXX31BbDQOI9dI
+ zqOOSQKW+WtLccMhu7vHnS494GxWgrD3DP7zVSfElJWNGctzPTZqu0ciPdp9L81C/qU/
+ yVAFoMvekrrI2h3uVGf+W6owj1o+FqTgJyjOd75jdHvt22ZcXXj1gYAQV05+MfsQFnl5
+ 85Xw==
+X-Gm-Message-State: APjAAAXNi/z2uY4IaconhBq7zVg0DPTLtOk6xGCR+OuqM0U9i3sydWEI
+ tVhQ+otM97nih1P55CGe6fLIWg==
+X-Google-Smtp-Source: APXvYqy9tBhinJ/jH5hpam8xPIBRos92/McvenDYvqMZ3bPkT9zPSd6TglCFr+WR+TOqD/5Mar2odg==
+X-Received: by 2002:a17:902:2a27:: with SMTP id
+ i36mr21205885plb.161.1562556079749; 
+ Sun, 07 Jul 2019 20:21:19 -0700 (PDT)
+Received: from google.com ([2401:fa00:fd:2:3217:6d96:9ca7:b98b])
+ by smtp.gmail.com with ESMTPSA id r1sm17346719pfq.100.2019.07.07.20.21.18
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Sun, 07 Jul 2019 20:21:19 -0700 (PDT)
+Date: Mon, 8 Jul 2019 11:21:11 +0800
+To: yuchao0@huawei.com, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Message-ID: <20190708032111.GA189070@google.com>
+References: <20190702080503.175149-1-oceanchen@google.com>
+ <cfcd3737-3b03-87fe-39e8-566e545cab3a@huawei.com>
+ <20190703150355.GA182283@google.com>
+ <65e4ad7b-ffbc-d5c9-9a0f-0532f4c4f5a9@huawei.com>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d0f2b04-9a7e-408b-18e0-08d7034847a5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jul 2019 02:02:06.8556 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Damien.LeMoal@wdc.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5864
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <65e4ad7b-ffbc-d5c9-9a0f-0532f4c4f5a9@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -11.4 (-----------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 3.2 FSL_HELO_FAKE          No description available.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.214.193 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1hkJDu-00ArQ2-Ea
-Subject: Re: [f2fs-dev] [PATCH V6 0/4] Fix zone revalidation memory
- allocation failures
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 1.3 PDS_NO_HELO_DNS        High profile HELO but no A record
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hkKDW-00AuR1-Ro
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid out-of-range memory access
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,25 +127,91 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christoph Hellwig <hch@lst.de>, Bart Van Assche <bvanassche@acm.org>
+From: Ocean Chen via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Ocean Chen <oceanchen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/07/01 14:09, Damien Le Moal wrote:
-> This series addresses a recuring problem with zone revalidation
-> failures observed during extensive testing with memory constrained
-> system and device hot-plugging.
+Hi YuChao,
 
-Jens, Martin,
+  Yes, we got externel researcher reports this security vulnerability.
 
-Any comment regarding this series ?
+And dump info is better when blk_off is invalid. I'll prepare the next
+patch for it.
 
-Best regards.
-
--- 
-Damien Le Moal
-Western Digital Research
+On Thu, Jul 04, 2019 at 03:11:27PM +0800, Chao Yu wrote:
+> Hi Ocean,
+> 
+> On 2019/7/3 23:03, Ocean Chen wrote:
+> > Hi Yu Chao,
+> > 
+> > The cur_data_segno only was checked in mount process. In terms of
+> > security concern, it's better to check value before using it. I know the
+> 
+> Could you explain more about security concern.. Do you get any report from user
+> or tools that complaining f2fs issue/codes?
+> 
+> I'm not against sanity check for basic core data of filesystem in run-time, but,
+> in order to troubleshoot root cause of this issue we can trigger panic directly
+> to dump more info under F2FS_CHECK_FS macro.
+> 
+> So, maybe we can change as below?
+> 
+> blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
+> +if (blk_off > ENTRIES_IN_SUM) {
+> +	f2fs_bug_on(1);
+> +	f2fs_put_page(page, 1);
+> +	return -EFAULT;
+> +}
+> 
+> Thanks,
+> 
+> > risk is low. IMHO, it can be safer.
+> > BTW, I found we can only check blk_off before for loop instead of
+> > checking 'j' in each iteratoin.
+> > 
+> > On Wed, Jul 03, 2019 at 10:07:11AM +0800, Chao Yu wrote:
+> >> Hi Ocean,
+> >>
+> >> If filesystem is corrupted, it should fail mount due to below check in
+> >> f2fs_sanity_check_ckpt(), so we are safe in read_compacted_summaries() to access
+> >> entries[0,blk_off], right?
+> >>
+> >> 	for (i = 0; i < NR_CURSEG_DATA_TYPE; i++) {
+> >> 		if (le32_to_cpu(ckpt->cur_data_segno[i]) >= main_segs ||
+> >> 			le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg)
+> >> 			return 1;
+> >>
+> >> Thanks,
+> >>
+> >> On 2019/7/2 16:05, Ocean Chen wrote:
+> >>> blk_off might over 512 due to fs corrupt.
+> >>> Use ENTRIES_IN_SUM to protect invalid memory access.
+> >>>
+> >>> v2:
+> >>> - fix typo
+> >>> Signed-off-by: Ocean Chen <oceanchen@google.com>
+> >>> ---
+> >>>  fs/f2fs/segment.c | 2 ++
+> >>>  1 file changed, 2 insertions(+)
+> >>>
+> >>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> >>> index 8dee063c833f..a5e8af0bd62e 100644
+> >>> --- a/fs/f2fs/segment.c
+> >>> +++ b/fs/f2fs/segment.c
+> >>> @@ -3403,6 +3403,8 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
+> >>>  
+> >>>  		for (j = 0; j < blk_off; j++) {
+> >>>  			struct f2fs_summary *s;
+> >>> +			if (j >= ENTRIES_IN_SUM)
+> >>> +				return -EFAULT;
+> >>>  			s = (struct f2fs_summary *)(kaddr + offset);
+> >>>  			seg_i->sum_blk->entries[j] = *s;
+> >>>  			offset += SUMMARY_SIZE;
+> >>>
+> > .
+> > 
 
 
 _______________________________________________
