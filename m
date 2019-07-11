@@ -2,62 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E4B865E2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jul 2019 19:07:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09CB865E46
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jul 2019 19:13:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hlcX6-0005Zo-0t; Thu, 11 Jul 2019 17:07:00 +0000
+	id 1hlcdd-0000wm-Hw; Thu, 11 Jul 2019 17:13:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hlcX4-0005Zg-PK
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 17:06:58 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hlcdc-0000wf-AM
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 17:13:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mibbf2HcgQa7HsX2qFQcE3uKZXtNskgUDvtkIIr61Uk=; b=F3dCNrFPPAk4Hp90BFS6iNmLgL
- rjmFAQwugz76xgr0GU5x1QVFIg60vSrNml9zRXaD4YHMYH7cMdet428ALHXrRyFohl2b5ggVqMhBz
- HegA84pj9fn4VrA3Di0tuZ13kOhxwJW91IY6p3fUXwhUDxmR2LgpxjcCgPHI31mhmF1w=;
+ bh=9ltUKjxI4P3vAkDjFa2tt1UCWMprBt/FXvc+x5OcnOQ=; b=c0yJViMo23gesOeBtugA0v9UZa
+ JWrYm4FlHKxPI5qx3MwzvbyFzi0VlvEOO7R9CG9ZXpmIOnle/PAipI4tR1tk/jZSXy2TXfEYU3MtP
+ TGFayPBDpVcb31BiOxpOh8j6aPlJUQgmjhLShVcJQQnrCQMoNt/3PR9DrWxfrUmnZlPc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Mibbf2HcgQa7HsX2qFQcE3uKZXtNskgUDvtkIIr61Uk=; b=bK2wpP7mtO4owGQAIgVrFWyWj8
- vpgu0Mlffeh2w6SxKqGCjEnnWpywp87c4N/BoZdwIf1/Y791DvX2AsR4l6uVep5My+Wb+hbdSzQ1B
- zCYKpgF0SgnQWL8Bvttx5iMPxv5s9S12ve/Wt8nvBzU3u84ATx2Zq+hVUMsmDi799f2A=;
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9ltUKjxI4P3vAkDjFa2tt1UCWMprBt/FXvc+x5OcnOQ=; b=V
+ xJ1qFGYssbiUImt8fXlnTc6IEnsfqn184w6XLCePPUvY+HxRkbtQxxA9J/2j5ecDbc1kxh7jORDjl
+ Y2b5Zp9zHklGoTZKB78mqU1Iy2r+y+zN1tRCsv+8a8R+MrSWwkeYlrxFAK72RAz6rK8uTdEbKwzOL
+ fQ9ZOUfaqdMIPkKY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hlcX1-00FOeo-Hk
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 17:06:58 +0000
+ id 1hlcdb-00FP9T-2C
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 17:13:44 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DF9F12084B;
- Thu, 11 Jul 2019 17:06:49 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7453C20872;
+ Thu, 11 Jul 2019 17:13:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1562864810;
- bh=oQdDYrfRZcly3MKtrpuIGslW0qjClMveQ4492eu8my8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nxtnK/mlq2ex/Ho1qtYzpg3QPmWwzBd21Cns8e11VzNN+FU0SLhP5IdfMV1hnaeWT
- fGycnprYrXfNWze/bLf5/PVSiBXP0Ehi8NOeWys3xcSbO6E6mVuEDvDNMp5dgdNmXZ
- nyqpPHeDheaxA1Vsj+GM4D6I8JZ50ODGyp8sP4N8=
-Date: Thu, 11 Jul 2019 10:06:47 -0700
+ s=default; t=1562865217;
+ bh=bvCqdNXA0lNVRHiKVn7GV3+2W08VEttCRx0QEFub0cs=;
+ h=Date:From:To:Cc:Subject:From;
+ b=0TqnHc8qfAgJztGG94YdRuN4xG2kZaS6sbf1z74YUdhdwMk2kV4Stu438wlgeKV8L
+ oh3vC96kARmmtfPmwIhzbWFROiLU1zK2h36Bc/YzMJEobAdVQGMHqA8iWxDsHuoFlw
+ sJBgH8E0onMZ8EOj+HQItpmYf2qEOsOwt7zk0lAw=
+Date: Thu, 11 Jul 2019 10:13:36 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Ju Hyung Park <qkrwngud825@gmail.com>
-Message-ID: <20190711170647.GA65508@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190711150617.124660-1-qkrwngud825@gmail.com>
- <CAD14+f3pxEqC-Kqt0-9+Xb_+Jwr_=NjQmsVoLXz9YTAZJo12zg@mail.gmail.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20190711171336.GA66396@jaegeuk-macbookpro.roam.corp.google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAD14+f3pxEqC-Kqt0-9+Xb_+Jwr_=NjQmsVoLXz9YTAZJo12zg@mail.gmail.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -70,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hlcX1-00FOeo-Hk
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use kmem_cache pool during xattr
- lookups
+X-Headers-End: 1hlcdb-00FP9T-2C
+Subject: [f2fs-dev] [GIT PULL] f2fs for 5.3
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,207 +80,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/12, Ju Hyung Park wrote:
-> Hi everyone.
-> 
-> This is a RFC patch.
-> 
-> This patch introduces an even bigger problem, which is forcing all
-> xattr lookup memory allocations to be made in 4076B, when in reality,
-> 4076B allocations are only made during initial mounts and the rests
-> are made in 204B, unnecessarily wasting memory.
-> 
-> In my testing, 4076B allocations are only done 4 times during mount
-> and the rests(millions) are in 204B.
-> 
-> I'd like to ask the maintainers to suggest some bright ideas on how to
-> tackle this correctly.
-> (e.g. Use kmem pool only for 204B allocations and fallback to regular
-> kzalloc() if (*base_size != 204)?)
+Hi Linus,
 
-How about adding two paths? One is kzalloc() for normal case, and the other
-is slab alloc for inline_xattr case?
+Could you please consider this pull request?
 
-> 
-> Thanks.
-> 
-> On Fri, Jul 12, 2019 at 12:06 AM Park Ju Hyung <qkrwngud825@gmail.com> wrote:
-> >
-> > It's been observed that kzalloc() on lookup_all_xattrs() are called millions
-> > of times on Android, quickly becoming the top abuser of slub memory allocator.
-> >
-> > Use a dedicated kmem cache pool for xattr lookups to mitigate this.
-> >
-> > Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
-> > ---
-> >  fs/f2fs/f2fs.h  |  6 ++++++
-> >  fs/f2fs/super.c |  8 +++++++-
-> >  fs/f2fs/xattr.c | 33 ++++++++++++++++++++++++---------
-> >  3 files changed, 37 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index 9c6388253c9d2..3046ca2ebd121 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -3510,6 +3510,12 @@ void f2fs_exit_sysfs(void);
-> >  int f2fs_register_sysfs(struct f2fs_sb_info *sbi);
-> >  void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi);
-> >
-> > +/*
-> > + * xattr.c
-> > + */
-> > +int __init f2fs_init_xattr_caches(void);
-> > +void f2fs_destroy_xattr_caches(void);
-> > +
-> >  /*
-> >   * crypto support
-> >   */
-> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > index 6d262d13251cf..abb59d9e25848 100644
-> > --- a/fs/f2fs/super.c
-> > +++ b/fs/f2fs/super.c
-> > @@ -3614,9 +3614,12 @@ static int __init init_f2fs_fs(void)
-> >         err = init_inodecache();
-> >         if (err)
-> >                 goto fail;
-> > -       err = f2fs_create_node_manager_caches();
-> > +       err = f2fs_init_xattr_caches();
-> >         if (err)
-> >                 goto free_inodecache;
-> > +       err = f2fs_create_node_manager_caches();
-> > +       if (err)
-> > +               goto fail_xattr_caches;
-> >         err = f2fs_create_segment_manager_caches();
-> >         if (err)
-> >                 goto free_node_manager_caches;
-> > @@ -3656,6 +3659,8 @@ static int __init init_f2fs_fs(void)
-> >         f2fs_destroy_segment_manager_caches();
-> >  free_node_manager_caches:
-> >         f2fs_destroy_node_manager_caches();
-> > +fail_xattr_caches:
-> > +       f2fs_destroy_xattr_caches();
-> >  free_inodecache:
-> >         destroy_inodecache();
-> >  fail:
-> > @@ -3673,6 +3678,7 @@ static void __exit exit_f2fs_fs(void)
-> >         f2fs_destroy_checkpoint_caches();
-> >         f2fs_destroy_segment_manager_caches();
-> >         f2fs_destroy_node_manager_caches();
-> > +       f2fs_destroy_xattr_caches();
-> >         destroy_inodecache();
-> >         f2fs_destroy_trace_ios();
-> >  }
-> > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-> > index e791741d193b8..635b50ea3e5e8 100644
-> > --- a/fs/f2fs/xattr.c
-> > +++ b/fs/f2fs/xattr.c
-> > @@ -22,6 +22,23 @@
-> >  #include "f2fs.h"
-> >  #include "xattr.h"
-> >
-> > +static struct kmem_cache *f2fs_xattr_cachep;
-> > +
-> > +int __init f2fs_init_xattr_caches(void)
-> > +{
-> > +       f2fs_xattr_cachep = f2fs_kmem_cache_create("xattr_entry",
-> > +                       VALID_XATTR_BLOCK_SIZE + XATTR_PADDING_SIZE);
-> > +       if (!f2fs_xattr_cachep)
-> > +               return -ENOMEM;
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +void f2fs_destroy_xattr_caches(void)
-> > +{
-> > +       kmem_cache_destroy(f2fs_xattr_cachep);
-> > +}
-> > +
-> >  static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
-> >                 struct dentry *unused, struct inode *inode,
-> >                 const char *name, void *buffer, size_t size)
-> > @@ -312,7 +329,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
-> >                 return -ENODATA;
-> >
-> >         *base_size = XATTR_SIZE(xnid, inode) + XATTR_PADDING_SIZE;
-> > -       txattr_addr = f2fs_kzalloc(F2FS_I_SB(inode), *base_size, GFP_NOFS);
-> > +       txattr_addr = kmem_cache_zalloc(f2fs_xattr_cachep, GFP_NOFS);
-> >         if (!txattr_addr)
-> >                 return -ENOMEM;
-> >
-> > @@ -358,7 +375,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
-> >         *base_addr = txattr_addr;
-> >         return 0;
-> >  out:
-> > -       kvfree(txattr_addr);
-> > +       kmem_cache_free(f2fs_xattr_cachep, txattr_addr);
-> >         return err;
-> >  }
-> >
-> > @@ -367,13 +384,11 @@ static int read_all_xattrs(struct inode *inode, struct page *ipage,
-> >  {
-> >         struct f2fs_xattr_header *header;
-> >         nid_t xnid = F2FS_I(inode)->i_xattr_nid;
-> > -       unsigned int size = VALID_XATTR_BLOCK_SIZE;
-> >         unsigned int inline_size = inline_xattr_size(inode);
-> >         void *txattr_addr;
-> >         int err;
-> >
-> > -       txattr_addr = f2fs_kzalloc(F2FS_I_SB(inode),
-> > -                       inline_size + size + XATTR_PADDING_SIZE, GFP_NOFS);
-> > +       txattr_addr = kmem_cache_zalloc(f2fs_xattr_cachep, GFP_NOFS);
-> >         if (!txattr_addr)
-> >                 return -ENOMEM;
-> >
-> > @@ -401,7 +416,7 @@ static int read_all_xattrs(struct inode *inode, struct page *ipage,
-> >         *base_addr = txattr_addr;
-> >         return 0;
-> >  fail:
-> > -       kvfree(txattr_addr);
-> > +       kmem_cache_free(f2fs_xattr_cachep, txattr_addr);
-> >         return err;
-> >  }
-> >
-> > @@ -528,7 +543,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
-> >         }
-> >         error = size;
-> >  out:
-> > -       kvfree(base_addr);
-> > +       kmem_cache_free(f2fs_xattr_cachep, base_addr);
-> >         return error;
-> >  }
-> >
-> > @@ -574,7 +589,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
-> >         }
-> >         error = buffer_size - rest;
-> >  cleanup:
-> > -       kvfree(base_addr);
-> > +       kmem_cache_free(f2fs_xattr_cachep, base_addr);
-> >         return error;
-> >  }
-> >
-> > @@ -712,7 +727,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
-> >         if (!error && S_ISDIR(inode->i_mode))
-> >                 set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
-> >  exit:
-> > -       kvfree(base_addr);
-> > +       kmem_cache_free(f2fs_xattr_cachep, base_addr);
-> >         return error;
-> >  }
-> >
-> > --
-> > 2.21.0
-> >
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Thanks,
+
+The following changes since commit e0654264c4806dc436b291294a0fbf9be7571ab6:
+
+  Merge tag 'backlight-next-5.2' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/backlight (2019-05-14 10:45:03 -0700)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.3
+
+for you to fetch changes up to 2d008835ec2fcf6eef3285e41e62a5eabd1fe76b:
+
+  f2fs: improve print log in f2fs_sanity_check_ckpt() (2019-07-10 18:44:47 -0700)
+
+----------------------------------------------------------------
+f2fs-for-5.3-rc1
+
+In this round, we've introduced native swap file support which can exploit DIO,
+enhanced existing checkpoint=disable feature with additional mount option to
+tune the triggering condition, and allowed user to preallocate physical blocks
+in a pinned file which will be useful to avoid f2fs fragmentation in append-only
+workloads. In addition, we've fixed subtle quota corruption issue.
+
+Enhancement:
+ - add swap file support which uses DIO
+ - allocate blocks for pinned file
+ - allow SSR and mount option to enhance checkpoint=disable
+ - enhance IPU IOs
+ - add more sanity checks such as memory boundary access
+
+Bug fix:
+ - quota corruption in very corner case of error-injected SPO case
+ - fix root_reserved on remount and some wrong counts
+ - add missing fsck flag
+
+Some patches were also introduced to clean up ambiguous i_flags and debugging
+messages codes.
+
+----------------------------------------------------------------
+Chao Yu (10):
+      f2fs: fix to check layout on last valid checkpoint park
+      f2fs: add bio cache for IPU
+      f2fs: fix to avoid deadloop if data_flush is on
+      f2fs: fix to do sanity check on segment bitmap of LFS curseg
+      f2fs: fix sparse warning
+      f2fs: avoid get_valid_blocks() for cleanup
+      f2fs: print kernel message if filesystem is inconsistent
+      f2fs: use generic EFSBADCRC/EFSCORRUPTED
+      f2fs: set SBI_NEED_FSCK for xattr corruption case
+      f2fs: improve print log in f2fs_sanity_check_ckpt()
+
+Daniel Rosenberg (4):
+      f2fs: Lower threshold for disable_cp_again
+      f2fs: Fix root reserved on remount
+      f2fs: Fix accounting for unusable blocks
+      f2fs: Add option to limit required GC for checkpoint=disable
+
+Eric Biggers (1):
+      f2fs: separate f2fs i_flags from fs_flags and ext4 i_flags
+
+Geert Uytterhoeven (1):
+      f2fs: Use DIV_ROUND_UP() instead of open-coding
+
+Heng Xiao (1):
+      f2fs: fix to avoid long latency during umount
+
+Jaegeuk Kim (7):
+      f2fs: link f2fs quota ops for sysfile
+      f2fs: allow ssr block allocation during checkpoint=disable period
+      f2fs: add missing sysfs entries in documentation
+      f2fs: add a rw_sem to cover quota flag changes
+      f2fs: allocate blocks for pinned file
+      f2fs: support swap file w/ DIO
+      f2fs: allow all the users to pin a file
+
+Joe Perches (1):
+      f2fs: introduce f2fs_<level> macros to wrap f2fs_printk()
+
+Kimberly Brown (1):
+      f2fs: replace ktype default_attrs with default_groups
+
+Ocean Chen (1):
+      f2fs: avoid out-of-range memory access
+
+Park Ju Hyung (1):
+      f2fs: always assume that the device is idle under gc_urgent
+
+Qiuyang Sun (1):
+      f2fs: ioctl for removing a range from F2FS
+
+Sahitya Tummala (3):
+      f2fs: add error prints for debugging mount failure
+      f2fs: fix f2fs_show_options to show nodiscard mount option
+      f2fs: fix is_idle() check for discard type
+
+Wang Shilong (1):
+      f2fs: only set project inherit bit for directory
+
+ Documentation/ABI/testing/sysfs-fs-f2fs |   8 +
+ Documentation/filesystems/f2fs.txt      | 133 ++++++-
+ fs/f2fs/checkpoint.c                    | 107 +++---
+ fs/f2fs/data.c                          | 249 +++++++++++--
+ fs/f2fs/debug.c                         |   7 +
+ fs/f2fs/dir.c                           |  16 +-
+ fs/f2fs/extent_cache.c                  |   7 +-
+ fs/f2fs/f2fs.h                          | 129 +++----
+ fs/f2fs/file.c                          | 302 ++++++++++------
+ fs/f2fs/gc.c                            | 196 +++++++++-
+ fs/f2fs/inline.c                        |  16 +-
+ fs/f2fs/inode.c                         |  78 ++--
+ fs/f2fs/namei.c                         |  10 +-
+ fs/f2fs/node.c                          |  38 +-
+ fs/f2fs/recovery.c                      |  43 +--
+ fs/f2fs/segment.c                       | 170 +++++++--
+ fs/f2fs/segment.h                       |  16 +-
+ fs/f2fs/super.c                         | 610 +++++++++++++++-----------------
+ fs/f2fs/sysfs.c                         |  28 +-
+ fs/f2fs/xattr.c                         |  10 +-
+ include/trace/events/f2fs.h             |  11 +-
+ 21 files changed, 1409 insertions(+), 775 deletions(-)
 
 
 _______________________________________________
