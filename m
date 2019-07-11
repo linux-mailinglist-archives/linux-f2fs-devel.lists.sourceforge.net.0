@@ -2,82 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A71D651BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jul 2019 08:15:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBDFF65253
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jul 2019 09:18:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hlSMW-0005NN-VC; Thu, 11 Jul 2019 06:15:24 +0000
+	id 1hlTLX-0007wm-36; Thu, 11 Jul 2019 07:18:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <rdunlap@infradead.org>) id 1hlSMU-0005NE-Fh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 06:15:22 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1hlTLL-0007wJ-KP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 07:18:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yLVbE+XFgjMoAumwgvc4hXQJYFBFqwZNbZCj546Cjyo=; b=YQU93XkMBN9DVOW/i/grl/7eNK
- Iqi3MZTs/HqSTQepQrNspudDGWX3/NsWp/dDxaAbscHJ4oaBL3o4K9luehENvwFvMEgcZi8tfo+a3
- QVNvlwWEloWixp2PrLGwQpIjBRBJe8gAct51mHMsohWrK8HUSYwbjJXkRea83CQdMq/E=;
+ bh=8+28dHjQjQAOZVLFUBQ5IEjruGFyct3ydrAAfE9H7Qk=; b=Z/oIX9qCdGKusV+T4Lrq4SblrM
+ VIHdOLm4Ggs1YRF7ElP069XaZBpua1IC9e8uE040zfSJkMvShZb/rovAp6cv0bT1vlo1PWzss7Bju
+ De2XTu8aJB5QTyezbB/YPMejEXNOgKH0wJKQEVlt3TbEn4XabjRC8qwtJoEB26xhzbY8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=yLVbE+XFgjMoAumwgvc4hXQJYFBFqwZNbZCj546Cjyo=; b=j7ySMUs/t9RZ+9K/X8ulQQ93Zz
- BZkVO1DKnihDtUYS378TZ7HPkq1AkURP9TmH+O1dHYYLaxdCG0wGkUAPBQXpPHGhELMazCfZm8ItU
- vF08ApxvG1F+nQQSlSLY8r8UAKPJ83FwE/FYC8YbZd6T6bZziMbkYRvPbO4QSVINzIk8=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8+28dHjQjQAOZVLFUBQ5IEjruGFyct3ydrAAfE9H7Qk=; b=b
+ MN43mCPG3/nVofC3m6Q4lhjsSB1j8K2UkYAM8QFQvQ7UY8G+QbLvHNzLN2zTFXC6mAMKevtkOCFY2
+ X6EWBmGrjVWHuE3lkAWpUNz3LELUXmvfLDRlaNlFrvH47/OEiYw5vYw5g+zizixhCsUkkQs8ECsjl
+ 65XzT1KFsH5TOM+U=;
+Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hlSMP-00Fitn-L3
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 06:15:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
- Subject:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yLVbE+XFgjMoAumwgvc4hXQJYFBFqwZNbZCj546Cjyo=; b=RRjFSuCzZVxgZ3pgfmbDXDIDu
- 209L8xZf4KWUAW4vhMavJAP455U9x3P3PShbgKAL9jV1ERWs2tvaYPC3mMPoB7M2bl44pDs/d6nwW
- LAiAbZcTIYnu972UvmOzwyvnQBeMDHaBJt2kn4Di5mg+hIRIhpLZyF4aBNyJvE3Ji0cSygM5fwlJX
- yGge9m7BOx2IW/iq2/YDUmRHgAs+/b7CQMcdr2+7EG/w+smVBMFLRna1k0aEPLdRo35rJgG6O/Kwk
- wGwlBrTGu2+FAFEHv6JkvtaO6ys6dtx1kAabdBA4EsGmICACQMlnsBcpGoYPfpyRPGcycMwi3RqRK
- CUA7UquYQ==;
-Received: from static-50-53-52-16.bvtn.or.frontiernet.net ([50.53.52.16]
- helo=dragon.dunlab)
- by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hlRvw-00018H-Dm; Thu, 11 Jul 2019 05:47:56 +0000
-To: Satya Tangirala <satyat@google.com>, linux-block@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-References: <20190710225609.192252-1-satyat@google.com>
- <20190710225609.192252-4-satyat@google.com>
-From: Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <e1066ded-af22-6a8c-e198-8d123adeca9e@infradead.org>
-Date: Wed, 10 Jul 2019 22:47:54 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ id 1hlTLK-00Er2w-06
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jul 2019 07:18:15 +0000
+Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 605202882C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 11 Jul 2019 07:18:07 +0000 (UTC)
+Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
+ id 513A428A0B; Thu, 11 Jul 2019 07:18:07 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+ pdx-wl-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
+ NO_RELAYS autolearn=ham version=3.3.1
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 11 Jul 2019 07:18:06 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: midwinter1993@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression
+Message-ID: <bug-204135-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20190710225609.192252-4-satyat@google.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1hlSMP-00Fitn-L3
-Subject: Re: [f2fs-dev] [PATCH 3/8] block: blk-crypto for Inline Encryption
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hlTLK-00Er2w-06
+Subject: [f2fs-dev] [Bug 204135] New: F2FS: BUG: KASAN: null-ptr-deref in
+ mempool_alloc+0xd8/0x2e0
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,203 +94,254 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Kuohong Wang <kuohong.wang@mediatek.com>,
- Ladvine D Almeida <ladvine.dalmeida@synopsys.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Parshuram Raju Thombare <pthombar@cadence.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGksCgpEb2N1bWVudGF0aW9uIG5pdHMsIHR5cG9zLiBxdWVzdGlvbnMuLi4KCk9uIDcvMTAvMTkg
-Mzo1NiBQTSwgU2F0eWEgVGFuZ2lyYWxhIHdyb3RlOgo+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0
-aW9uL2Jsb2NrL2lubGluZS1lbmNyeXB0aW9uLnR4dCBiL0RvY3VtZW50YXRpb24vYmxvY2svaW5s
-aW5lLWVuY3J5cHRpb24udHh0Cj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCAwMDAwMDAw
-MDAwMDAuLjk2YTc5ODNhMTE3ZAo+IC0tLSAvZGV2L251bGwKPiArKysgYi9Eb2N1bWVudGF0aW9u
-L2Jsb2NrL2lubGluZS1lbmNyeXB0aW9uLnR4dAo+IEBAIC0wLDAgKzEsMTg1IEBACj4gK0JMSy1D
-UllQVE8gYW5kIEtFWVNMT1QgTUFOQUdFUgo+ICs9PT09PT09PT09PT09PT09PT09PT09PT09PT0K
-PiArCj4gK0NPTlRFTlRTCj4gKzEuIE9iamVjdGl2ZQo+ICsyLiBDb25zdHJhaW50cyBhbmQgbm90
-ZXMKPiArMy4gRGVzaWduCj4gKzQuIEJsay1jcnlwdG8KPiArIDQtMSBXaGF0IGRvZXMgYmxrLWNy
-eXB0byBkbyBvbiBiaW8gc3VibWlzc2lvbgo+ICs1LiBMYXllcmVkIERldmljZXMKPiArNi4gRnV0
-dXJlIG9wdGltaXphdGlvbnMgZm9yIGxheWVyZWQgZGV2aWNlcwo+ICsKPiArMS4gT2JqZWN0aXZl
-Cj4gKz09PT09PT09PT09PQo+ICsKPiArV2Ugd2FudCB0byBzdXBwb3J0IGlubGluZSBlbmNyeXB0
-aW9uIChJRSkgaW4gdGhlIGtlcm5lbC4KPiArVG8gYWxsb3cgZm9yIHRlc3RpbmcsIHdlIGFsc28g
-d2FudCBhIHNvZnR3YXJlIGZhbGxiYWNrIHdoZW4gYWN0dWFsCj4gK0lFIGhhcmR3YXJlIGlzIGFi
-c2VudC4gV2UgYWxzbyB3YW50IElFIHRvIHdvcmsgd2l0aCBsYXllcmVkIGRldmljZXMKPiArbGlr
-ZSBkbSBhbmQgbG9vcGJhY2sgKGkuZS4gd2Ugd2FudCB0byBiZSBhYmxlIHRvIHVzZSB0aGUgSUUg
-aGFyZHdhcmUKPiArb2YgdGhlIHVuZGVybHlpbmcgZGV2aWNlcyBpZiBwcmVzZW50LCBvciBlbHNl
-IGZhbGwgYmFjayB0byBzb2Z0d2FyZQo+ICtlbi9kZWNyeXB0aW9uKS4KPiArCj4gKwo+ICsyLiBD
-b25zdHJhaW50cyBhbmQgbm90ZXMKPiArPT09PT09PT09PT09PT09PT09PT09PT09Cj4gKwo+ICsx
-KSBJRSBoYXJkd2FyZSBoYXZlIGEgbGltaXRlZCBudW1iZXIgb2Yg4oCca2V5c2xvdHPigJ0gdGhh
-dCBjYW4gYmUgcHJvZ3JhbW1lZAo+ICt3aXRoIGFuIGVuY3J5cHRpb24gY29udGV4dCAoa2V5LCBh
-bGdvcml0aG0sIGRhdGEgdW5pdCBzaXplLCBldGMuKSBhdCBhbnkgdGltZS4KPiArT25lIGNhbiBz
-cGVjaWZ5IGEga2V5c2xvdCBpbiBhIGRhdGEgcmVxdWVzdCBtYWRlIHRvIHRoZSBkZXZpY2UsIGFu
-ZCB0aGUKPiArZGV2aWNlIHdpbGwgZW4vZGVjcnlwdCB0aGUgZGF0YSB1c2luZyB0aGUgZW5jcnlw
-dGlvbiBjb250ZXh0IHByb2dyYW1tZWQgaW50bwo+ICt0aGF0IHNwZWNpZmllZCBrZXlzbG90LiBX
-aGVuIHBvc3NpYmxlLCB3ZSB3YW50IHRvIG1ha2UgbXVsdGlwbGUgcmVxdWVzdHMgd2l0aAo+ICt0
-aGUgc2FtZSBlbmNyeXB0aW9uIGNvbnRleHQgc2hhcmUgdGhlIHNhbWUga2V5c2xvdC4KPiArCj4g
-KzIpIFdlIG5lZWQgYSB3YXkgZm9yIGZpbGVzeXN0ZW1zIHRvIHNwZWNpZnkgYW4gZW5jcnlwdGlv
-biBjb250ZXh0IHRvIHVzZSBmb3IKPiArZW4vZGVjcnlwdGluZyBhIHN0cnVjdCBiaW8sIGFuZCBh
-IGRldmljZSBkcml2ZXIgKGxpa2UgVUZTKSBuZWVkcyB0byBiZSBhYmxlCj4gK3RvIHVzZSB0aGF0
-IGVuY3J5cHRpb24gY29udGV4dCB3aGVuIGl0IHByb2Nlc3NlcyB0aGUgYmlvLgo+ICsKPiArMykg
-V2UgbmVlZCBhIHdheSBmb3IgZGV2aWNlIGRyaXZlcnMgdG8gZXhwb3NlIHRoZWlyIGNhcGFiaWxp
-dGllcyBpbiBhIHVuaWZpZWQKPiArd2F5IHRvIHRoZSB1cHBlciBsYXllcnMuCj4gKwo+ICsKPiAr
-My4gRGVzaWduCj4gKz09PT09PT09PQo+ICsKPiArV2UgYWRkIGEgc3RydWN0IGJpb19jcnlwdF9j
-b250ZXh0IHRvIHN0cnVjdCBiaW8gdGhhdCBjYW4gcmVwcmVzZW50IGFuCgogICAgICAgICBpcyB0
-aGlzICAgYmlfY3J5cHRfY29udGV4dCA/PwoKPiArZW5jcnlwdGlvbiBjb250ZXh0LCBiZWNhdXNl
-IHdlIG5lZWQgdG8gYWJsZSB0byBwYXNzIHRoaXMgZW5jcnlwdGlvbiBjb250ZXh0CgogICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0byBiZSBhYmxlCgo+ICtmcm9tIHRoZSBG
-UyBsYXllciB0byB0aGUgZGV2aWNlIGRyaXZlciB0byBhY3QgdXBvbi4KPiArCj4gK1doaWxlIElF
-IGhhcmR3YXJlIHdvcmtzIG9uIHRoZSBub3Rpb24gb2Yga2V5c2xvdHMsIHRoZSBGUyBsYXllciBo
-YXMgbm8KPiAra25vd2xlZGdlIG9mIGtleXNsb3RzIC0gaXQgc2ltcGx5IHdhbnRzIHRvIHNwZWNp
-ZnkgYW4gZW5jcnlwdGlvbiBjb250ZXh0IHRvCj4gK3VzZSB3aGlsZSBlbi9kZWNyeXB0aW5nIGEg
-YmlvLgo+ICsKPiArV2UgaW50cm9kdWNlIGEga2V5c2xvdCBtYW5hZ2VyIChLU00pIHRoYXQgaGFu
-ZGxlcyB0aGUgdHJhbnNsYXRpb24gZnJvbQo+ICtlbmNyeXB0aW9uIGNvbnRleHRzIHNwZWNpZmll
-ZCBieSB0aGUgRlMgdG8ga2V5c2xvdHMgb24gdGhlIElFIGhhcmR3YXJlLgo+ICtUaGlzIEtTTSBh
-bHNvIHNlcnZlcyBhcyB0aGUgd2F5IElFIGhhcmR3YXJlIGNhbiBleHBvc2UgdGhlaXIgY2FwYWJp
-bGl0aWVzIHRvCj4gK3VwcGVyIGxheWVycy4gVGhlIGdlbmVyaWMgbW9kZSBvZiBvcGVyYXRpb24g
-aXM6IGVhY2ggZGV2aWNlIGRyaXZlciB0aGF0IHdhbnRzCj4gK3RvIHN1cHBvcnQgSUUgd2lsbCBj
-b25zdHJ1Y3QgYSBLU00gYW5kIHNldCBpdCB1cCBpbiBpdHMgc3RydWN0IHJlcXVlc3RfcXVldWUu
-Cj4gK1VwcGVyIGxheWVycyB0aGF0IHdhbnQgdG8gdXNlIElFIG9uIHRoaXMgZGV2aWNlIGNhbiB0
-aGVuIHVzZSB0aGlzIEtTTSBpbgo+ICt0aGUgZGV2aWNl4oCZcyBzdHJ1Y3QgcmVxdWVzdF9xdWV1
-ZSB0byB0cmFuc2xhdGUgYW4gZW5jcnlwdGlvbiBjb250ZXh0IGludG8KPiArYSBrZXlzbG90LiBU
-aGUgcHJlc2VuY2Ugb2YgdGhlIEtTTSBpbiB0aGUgcmVxdWVzdCBxdWV1ZSBzaGFsbCBiZSB1c2Vk
-IHRvIG1lYW4KPiArdGhhdCB0aGUgZGV2aWNlIHN1cHBvcnRzIElFLgo+ICsKPiArT24gdGhlIGRl
-dmljZSBkcml2ZXIgZW5kIG9mIHRoZSBpbnRlcmZhY2UsIHRoZSBkZXZpY2UgZHJpdmVyIG5lZWRz
-IHRvIHRlbGwgdGhlCj4gK0tTTSBob3cgdG8gYWN0dWFsbHkgbWFuaXB1bGF0ZSB0aGUgSUUgaGFy
-ZHdhcmUgaW4gdGhlIGRldmljZSB0byBkbyB0aGluZ3MgbGlrZQo+ICtwcm9ncmFtbWluZyB0aGUg
-Y3J5cHRvIGtleSBpbnRvIHRoZSBJRSBoYXJkd2FyZSBpbnRvIGEgcGFydGljdWxhciBrZXlzbG90
-LiBBbGwKPiArdGhpcyBpcyBhY2hpZXZlZCB0aHJvdWdoIHRoZSBzdHJ1Y3Qga2V5c2xvdF9tZ210
-X2xsX29wcyB0aGF0IHRoZSBkZXZpY2UgZHJpdmVyCj4gK3Bhc3NlcyB0byB0aGUgS1NNIHdoZW4g
-Y3JlYXRpbmcgaXQuCj4gKwo+ICtJdCB1c2VzIHJlZmNvdW50cyB0byB0cmFjayB3aGljaCBrZXlz
-bG90cyBhcmUgaWRsZSAoZWl0aGVyIHRoZXkgaGF2ZSBubwo+ICtlbmNyeXB0aW9uIGNvbnRleHQg
-cHJvZ3JhbW1lZCwgb3IgdGhlcmUgYXJlIG5vIGluIGZsaWdodCBzdHJ1Y3QgYmlvcwoKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbi1mbGlnaHQKCj4g
-K3JlZmVyZW5jaW5nIHRoYXQga2V5c2xvdCkuIFdoZW4gYSBuZXcgZW5jcnlwdGlvbiBjb250ZXh0
-IG5lZWRzIGEga2V5c2xvdCwgaXQKPiArdHJpZXMgdG8gZmluZCBhIGtleXNsb3QgdGhhdCBoYXMg
-YWxyZWFkeSBiZWVuIHByb2dyYW1tZWQgd2l0aCB0aGUgc2FtZQo+ICtlbmNyeXB0aW9uIGNvbnRl
-eHQsIGFuZCBpZiB0aGVyZSBpcyBubyBzdWNoIGtleXNsb3QsIGl0IGV2aWN0cyB0aGUgbGVhc3QK
-PiArcmVjZW50bHkgdXNlZCBpZGxlIGtleXNsb3QgYW5kIHByb2dyYW1zIHRoZSBuZXcgZW5jcnlw
-dGlvbiBjb250ZXh0IGludG8gdGhhdAo+ICtvbmUuIElmIG5vIGlkbGUga2V5c2xvdHMgYXJlIGF2
-YWlsYWJsZSwgdGhlbiB0aGUgY2FsbGVyIHdpbGwgc2xlZXAgdW50aWwgdGhlcmUKPiAraXMgYXQg
-bGVhc3Qgb25lLgo+ICsKPiArCj4gKzQuIEJsay1jcnlwdG8KPiArPT09PT09PT09PT09PQo+ICsK
-PiArVGhlIGFib3ZlIGlzIHN1ZmZpY2llbnQgZm9yIHNpbXBsZSBjYXNlcywgYnV0IGRvZXMgbm90
-IHdvcmsgaWYgdGhlcmUgaXMgYQo+ICtuZWVkIGZvciBhIHNvZnR3YXJlIGZhbGxiYWNrLCBvciBp
-ZiB3ZSBhcmUgd2FudCB0byB1c2UgSUUgd2l0aCBsYXllcmVkIGRldmljZXMuCj4gK1RvIHRoZXNl
-IGVuZHMsIHdlIGludHJvZHVjZSBibGstY3J5cHRvLiBCbGstY3J5cHRvIGFsbG93cyB1cyB0byBw
-cmVzZW50IGEKPiArdW5pZmllZCB2aWV3IG9mIGVuY3J5cHRpb24gdG8gdGhlIEZTIChzbyBGUyBv
-bmx5IG5lZWRzIHRvIHNwZWNpZnkgYW4KPiArZW5jcnlwdGlvbiBjb250ZXh0IGFuZCBub3Qgd29y
-cnkgYWJvdXQga2V5c2xvdHMgYXQgYWxsKSwgYW5kIGJsay1jcnlwdG8gY2FuCj4gK2RlY2lkZSB3
-aGV0aGVyIHRvIGRlbGVnYXRlIHRoZSBlbi9kZWNyeXB0aW9uIHRvIElFIGhhcmR3YXJlIG9yIHRv
-IHNvZnR3YXJlCj4gKyhpLmUuIHRvIHRoZSBrZXJuZWwgY3J5cHRvIEFQSSkuIEJsay1jcnlwdG8g
-bWFpbnRhaW5zIGFuIGludGVybmFsIEtTTSB0aGF0Cj4gK3NlcnZlcyBhcyB0aGUgc29mdHdhcmUg
-ZmFsbGJhY2sgdG8gdGhlIGtlcm5lbCBjcnlwdG8gQVBJLgo+ICsKPiArQmxrLWNyeXB0byBuZWVk
-cyB0byBlbnN1cmUgdGhhdCB0aGUgZW5jcnlwdGlvbiBjb250ZXh0IGlzIHByb2dyYW1tZWQgaW50
-byB0aGUKPiArImNvcnJlY3QiIGtleXNsb3QgbWFuYWdlciBmb3IgSUUuIElmIGEgYmlvIGlzIHN1
-Ym1pdHRlZCB0byBhIGxheWVyZWQgZGV2aWNlCj4gK3RoYXQgZXZlbnR1YWxseSBwYXNzZXMgdGhl
-IGJpbyBkb3duIHRvIGEgZGV2aWNlIHRoYXQgcmVhbGx5IGRvZXMgc3VwcG9ydCBJRSwgd2UKPiAr
-d2FudCB0aGUgZW5jcnlwdGlvbiBjb250ZXh0IHRvIGJlIHByb2dyYW1tZWQgaW50byBhIGtleXNs
-b3QgZm9yIHRoZSBLU00gb2YgdGhlCj4gK2RldmljZSB3aXRoIElFIHN1cHBvcnQuIEhvd2V2ZXIs
-IGJsay1jcnlwdG8gZG9lcyBub3Qga25vdyBhIHByaW9yaSB3aGV0aGVyIGEKPiArcGFydGljdWxh
-ciBkZXZpY2UgaXMgdGhlIGZpbmFsIGRldmljZSBpbiB0aGUgbGF5ZXJpbmcgc3RydWN0dXJlIGZv
-ciBhIGJpbyBvcgo+ICtub3QuIFNvIGluIHRoZSBjYXNlIHRoYXQgYSBwYXJ0aWN1bGFyIGRldmlj
-ZSBkb2VzIG5vdCBzdXBwb3J0IElFLCBzaW5jZSBpdCBpcwo+ICtwb3NzaWJseSB0aGUgZmluYWwg
-ZGVzdGluYXRpb24gZGV2aWNlIGZvciB0aGUgYmlvLCBpZiB0aGUgYmlvIHJlcXVpcmVzCj4gK2Vu
-Y3J5cHRpb24gKGkuZS4gdGhlIGJpbyBpcyBkb2luZyBhIHdyaXRlIG9wZXJhdGlvbiksIGJsay1j
-cnlwdG8gbXVzdCBmYWxsYmFjawo+ICt0byBzb2Z0d2FyZSAqYmVmb3JlKiBzZW5kaW5nIHRoZSBi
-aW8gdG8gdGhlIGRldmljZS4KPiArCj4gK0Jsay1jcnlwdG8gZW5zdXJlcyB0aGF0Cj4gKzEpIFRo
-ZSBiaW/igJlzIGVuY3J5cHRpb24gY29udGV4dCBpcyBwcm9ncmFtbWVkIGludG8gYSBrZXlzbG90
-IGluIHRoZSBLU00gb2YgdGhlCj4gK3JlcXVlc3QgcXVldWUgdGhhdCB0aGUgYmlvIGlzIGJlaW5n
-IHN1Ym1pdHRlZCB0byAob3IgdGhlIHNvZnR3YXJlIGZhbGxiYWNrIEtTTQo+ICtpZiB0aGUgcmVx
-dWVzdCBxdWV1ZSBkb2VzbuKAmXQgaGF2ZSBhIEtTTSksIGFuZCB0aGF0IHRoZSBwcm9jZXNzaW5n
-X2tzbSBpbiB0aGUKPiArYmlfY3J5cHRfY29udGV4dCBpcyBzZXQgdG8gdGhpcyBLU00KPiArCj4g
-KzIpIFRoYXQgdGhlIGJpbyBoYXMgaXRzIG93biBpbmRpdmlkdWFsIHJlZmVyZW5jZSB0byB0aGUg
-a2V5c2xvdCBpbiB0aGlzIEtTTS4KPiArT25jZSB0aGUgYmlvIHBhc3NlcyB0aHJvdWdoIGJsay1j
-cnlwdG8sIGl0cyBlbmNyeXB0aW9uIGNvbnRleHQgaXMgcHJvZ3JhbW1lZAo+ICtpbiBzb21lIEtT
-TS4gVGhlIOKAnGl0cyBvd24gaW5kaXZpZHVhbCByZWZlcmVuY2UgdG8gdGhlIGtleXNsb3TigJ0g
-ZW5zdXJlcyB0aGF0Cj4gK2tleXNsb3RzIGNhbiBiZSByZWxlYXNlZCBieSBlYWNoIGJpbyBpbmRl
-cGVuZGVudGx5IG9mIG90aGVyIGJpb3Mgd2hpbGUgZW5zdXJpbmcKPiArdGhhdCB0aGUgYmlvIGhh
-cyBhIHZhbGlkIHJlZmVyZW5jZSB0byB0aGUga2V5c2xvdCB3aGVuLCBmb3IgZS5nLiwgdGhlIHNv
-ZnR3YXJlCj4gK2ZhbGxiYWNrIEtTTSBpbiBibGstY3J5cHRvIHBlcmZvcm1zIGNyeXB0byBmb3Ig
-b24gdGhlIGRldmljZeKAmXMgYmVoYWxmLiBUaGUKPiAraW5kaXZpZHVhbCByZWZlcmVuY2VzIGFy
-ZSBlbnN1cmVkIGJ5IGluY3JlYXNpbmcgdGhlIHJlZmNvdW50IGZvciB0aGUga2V5c2xvdCBpbgo+
-ICt0aGUgcHJvY2Vzc2luZ19rc20gd2hlbiBhIGJpbyB3aXRoIGEgcHJvZ3JhbW1lZCBlbmNyeXB0
-aW9uIGNvbnRleHQgaXMgY2xvbmVkLgo+ICsKPiArCj4gKzQtMS4gV2hhdCBibGstY3J5cHRvIGRv
-ZXMgb24gYmlvIHN1Ym1pc3Npb24KPiArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQo+ICsKPiArQ2FzZSAxOiBibGstY3J5cHRvIGlzIGdpdmVuIGEgYmlvIHdpdGgg
-b25seSBhbiBlbmNyeXB0aW9uIGNvbnRleHQgdGhhdCBoYXNu4oCZdAo+ICtiZWVuIHByb2dyYW1t
-ZWQgaW50byBhbnkga2V5c2xvdCBpbiBhbnkgS1NNIChmb3IgZS5nLiBhIGJpbyBmcm9tIHRoZSBG
-UykuIEluCj4gK3RoaXMgY2FzZSwgYmxrLWNyeXB0byB3aWxsIHByb2dyYW0gdGhlIGVuY3J5cHRp
-b24gY29udGV4dCBpbnRvIHRoZSBLU00gb2YgdGhlCj4gK3JlcXVlc3QgcXVldWUgdGhlIGJpbyBp
-cyBiZWluZyBzdWJtaXR0ZWQgdG8gKGFuZCBpZiB0aGlzIEtTTSBkb2VzIG5vdCBleGlzdCwKPiAr
-dGhlbiBpdCB3aWxsIHByb2dyYW0gaXQgaW50byBibGstY3J5cHRv4oCZcyBpbnRlcm5hbCBLU00g
-Zm9yIHNvZnR3YXJlIGZhbGxiYWNrKS4KPiArVGhlIEtTTSB0aGF0IHRoaXMgZW5jcnlwdGlvbiBj
-b250ZXh0IHdhcyBwcm9ncmFtbWVkIGludG8gaXMgc3RvcmVkIGFzIHRoZQo+ICtwcm9jZXNzaW5n
-X2tzbSBpbiB0aGUgYmlv4oCZcyBiaV9jcnlwdF9jb250ZXh0Lgo+ICsKPiArQ2FzZSAyOiBibGst
-Y3J5cHRvIGlzIGdpdmVuIGEgYmlvIHdob3NlIGVuY3J5cHRpb24gY29udGV4dCBoYXMgYWxyZWFk
-eSBiZWVuCj4gK3Byb2dyYW1tZWQgaW50byBhIGtleXNsb3QgaW4gdGhlICpzb2Z0d2FyZSBmYWxs
-YmFjayBLU00qLiBJbiB0aGlzIGNhc2UsCj4gK2Jsay1jcnlwdG8gZG9lcyBub3RoaW5nOyBpdCB0
-cmVhdHMgdGhlIGJpbyBhcyBub3QgaGF2aW5nIHNwZWNpZmllZCBhbgo+ICtlbmNyeXB0aW9uIGNv
-bnRleHQuIE5vdGUgdGhhdCB3ZSBjYW5ub3QgZG8gd2hhdCB3ZSB3aWxsIGRvIGluIENhc2UgMyBo
-ZXJlCgogICAgICAgICAgICAgICAgICAgICAgIE5vdGUgdGhhdCB3ZSBjYW5ub3QgZG8gaGVyZSB3
-aGF0IHdlIHdpbGwgZG8gaW4gQ2FzZSAzCgo+ICtiZWNhdXNlIHdlIHdvdWxkIGhhdmUgYWxyZWFk
-eSBlbmNyeXB0ZWQgdGhlIGJpbyBpbiBzb2Z0d2FyZSBieSB0aGlzIHBvaW50Lgo+ICsKPiArQ2Fz
-ZSAzOiBibGstY3J5cHRvIGlzIGdpdmVuIGEgYmlvIHdob3NlIGVuY3J5cHRpb24gY29udGV4dCBo
-YXMgYWxyZWFkeSBiZWVuCj4gK3Byb2dyYW1tZWQgaW50byBhIGtleXNsb3QgaW4gc29tZSBLU00g
-KHRoYXQgaXMgKm5vdCogdGhlIHNvZnR3YXJlIGZhbGxiYWNrCj4gK0tTTSkuIEluIHRoaXMgY2Fz
-ZSwgYmxrLWNyeXB0byBmaXJzdCByZWxlYXNlcyB0aGF0IGtleXNsb3QgZnJvbSB0aGF0IEtTTSBh
-bmQKPiArdGhlbiB0cmVhdHMgdGhlIGJpbyBhcyBpbiBDYXNlIDEuCj4gKwo+ICtUaGlzIHdheSwg
-d2hlbiBhIGRldmljZSBkcml2ZXIgaXMgcHJvY2Vzc2luZyBhIGJpbywgaXQgY2FuIGJlIHN1cmUg
-dGhhdAo+ICt0aGUgYmlv4oCZcyBlbmNyeXB0aW9uIGNvbnRleHQgaGFzIGJlZW4gcHJvZ3JhbW1l
-ZCBpbnRvIHNvbWUgS1NNIChlaXRoZXIgdGhlCj4gK2RldmljZSBkcml2ZXLigJlzIHJlcXVlc3Qg
-cXVldWXigJlzIEtTTSwgb3IgYmxrLWNyeXB0b+KAmXMgc29mdHdhcmUgZmFsbGJhY2sgS1NNKS4K
-PiArSXQgdGhlbiBzaW1wbHkgbmVlZHMgdG8gY2hlY2sgaWYgdGhlIGJpb+KAmXMgcHJvY2Vzc2lu
-Z19rc20gaXMgdGhlIGRldmljZeKAmXMKPiArcmVxdWVzdCBxdWV1ZeKAmXMgS1NNLiBJZiBzbywg
-dGhlbiBpdCBzaG91bGQgcHJvY2VlZCB3aXRoIElFLiBJZiBub3QsIGl0IHNob3VsZAo+ICtzaW1w
-bHkgZG8gbm90aGluZyB3aXRoIHJlc3BlY3QgdG8gY3J5cHRvLCBiZWNhdXNlIHNvbWUgb3RoZXIg
-S1NNIChwZXJoYXBzIHRoZQo+ICtibGstY3J5cHRvIHNvZnR3YXJlIGZhbGxiYWNrIEtTTSkgaXMg
-aGFuZGxpbmcgdGhlIGVuL2RlY3J5cHRpb24uCj4gKwo+ICtCbGstY3J5cHRvIHdpbGwgcmVsZWFz
-ZSB0aGUga2V5c2xvdCB0aGF0IGlzIGJlaW5nIGhlbGQgYnkgdGhlIGJpbyAoYW5kIGFsc28KPiAr
-ZGVjcnlwdCBpdCBpZiB0aGUgYmlvIGlzIHVzaW5nIHRoZSBzb2Z0d2FyZSBmYWxsYmFjayBLU00p
-IG9uY2UKPiArYmlvX3JlbWFpbmluZ19kb25lIHJldHVybnMgdHJ1ZSBmb3IgdGhlIGJpby4KPiAr
-Cj4gKwo+ICs1LiBMYXllcmVkIERldmljZXMKPiArPT09PT09PT09PT09PT09PT09Cj4gKwo+ICtM
-YXllcmVkIGRldmljZXMgdGhhdCB3aXNoIHRvIHN1cHBvcnQgSUUgbmVlZCB0byBjcmVhdGUgdGhl
-aXIgb3duIGtleXNsb3QKPiArbWFuYWdlciBmb3IgdGhlaXIgcmVxdWVzdCBxdWV1ZSwgYW5kIGV4
-cG9zZSB3aGF0ZXZlciBmdW5jdGlvbmFsaXR5IHRoZXkgY2hvb3NlLgo+ICtXaGVuIGEgbGF5ZXJl
-ZCBkZXZpY2Ugd2FudHMgdG8gcGFzcyBhIGJpbyB0byBhbm90aGVyIGxheWVyIChlaXRoZXIgYnkK
-PiArcmVzdWJtaXR0aW5nIHRoZSBzYW1lIGJpbywgb3IgYnkgc3VibWl0dGluZyBhIGNsb25lKSwg
-aXQgZG9lc27igJl0IG5lZWQgdG8gZG8KPiArYW55dGhpbmcgc3BlY2lhbCBiZWNhdXNlIHRoZSBi
-aW8gKG9yIHRoZSBjbG9uZSkgd2lsbCBvbmNlIGFnYWluIHBhc3MgdGhyb3VnaAo+ICtibGstY3J5
-cHRvLCB3aGljaCB3aWxsIHdvcmsgYXMgZGVzY3JpYmVkIGluIENhc2UgMy4gSWYgYSBsYXllcmVk
-IGRldmljZSB3YW50cwo+ICtmb3Igc29tZSByZWFzb24gdG8gZG8gdGhlIElPIGJ5IGl0c2VsZiBp
-bnN0ZWFkIG9mIHBhc3NpbmcgaXQgb24gdG8gYSBjaGlsZAo+ICtkZXZpY2UsIGJ1dCBpdCBhbHNv
-IGNob3NlIHRvIGV4cG9zZSBJRSBjYXBhYmlsaXRpZXMgYnkgc2V0dGluZyB1cCBhIEtTTSBpbiBp
-dHMKPiArcmVxdWVzdCBxdWV1ZSwgaXQgaXMgdGhlbiByZXNwb25zaWJsZSBmb3IgZW4vZGVjcnlw
-dGluZyB0aGUgZGF0YSBpdHNlbGYuIEluCj4gK3N1Y2ggY2FzZXMsIHRoZSBkZXZpY2UgY2FuIGNo
-b29zZSB0byBjYWxsIHRoZSBibGstY3J5cHRvIGZ1bmN0aW9uCj4gK2Jsa19jcnlwdG9fZmFsbGJh
-Y2tfdG9fc29mdHdhcmUgKFRPRE86IE5vdCB5ZXQgaW1wbGVtZW50ZWQpLCB3aGljaCB3aWxsCj4g
-K2NhdXNlIHRoZSBlbi9kZWNyeXB0aW9uIHRvIGJlIGRvbmUgdmlhIHNvZnR3YXJlIGZhbGxiYWNr
-Lgo+ICsKPiArCj4gKzYuIEZ1dHVyZSBPcHRpbWl6YXRpb25zIGZvciBsYXllcmVkIGRldmljZXMK
-PiArPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQo+ICsKPiArQ3Jl
-YXRpbmcgYSBrZXlzbG90IG1hbmFnZXIgZm9yIHRoZSBsYXllcmVkIGRldmljZSB1c2VzIHVwIG1l
-bW9yeSBmb3IgZWFjaAo+ICtrZXlzbG90LCBhbmQgaW4gZ2VuZXJhbCwgYSBsYXllcmVkIGRldmlj
-ZSAobGlrZSBkbS1saW5lYXIpIG1lcmVseSBwYXNzZXMgdGhlCj4gK3JlcXVlc3Qgb24gdG8gYSDi
-gJxjaGlsZOKAnSBkZXZpY2UsIHNvIHRoZSBrZXlzbG90cyBpbiB0aGUgbGF5ZXJlZCBkZXZpY2Ug
-aXRzZWxmCj4gK21pZ2h0IGJlIGNvbXBsZXRlbHkgdW51c2VkLiBXZSBjYW4gaW5zdGVhZCBkZWZp
-bmUgYSBuZXcgdHlwZSBvZiBLU007IHRoZQo+ICvigJxwYXNzdGhyb3VnaCBLU03igJ0sIHRoYXQg
-bGF5ZXJlZCBkZXZpY2VzIGNhbiB1c2UgdG8gbGV0IGJsay1jcnlwdG8ga25vdyB0aGF0Cj4gK3Ro
-aXMgbGF5ZXJlZCBkZXZpY2UgKndpbGwqIHBhc3MgdGhlIGJpbyB0byBzb21lIGNoaWxkIGRldmlj
-ZSAoYW5kIGhlbmNlCj4gK3Rocm91Z2ggYmxrLWNyeXB0byBhZ2FpbiwgYXQgd2hpY2ggcG9pbnQg
-YmxrLWNyeXB0byBjYW4gcHJvZ3JhbSB0aGUgZW5jcnlwdGlvbgo+ICtjb250ZXh0LCBpbnN0ZWFk
-IG9mIHByb2dyYW1taW5nIGl0IGludG8gdGhlIGxheWVyZWQgZGV2aWNl4oCZcyBLU00pLiBBZ2Fp
-biwgaWYKPiArdGhlIGRldmljZSDigJxsaWVz4oCdIGFuZCBkZWNpZGVzIHRvIGRvIHRoZSBJTyBp
-dHNlbGYgaW5zdGVhZCBvZiBwYXNzaW5nIGl0IG9uIHRvCj4gK2EgY2hpbGQgZGV2aWNlLCBpdCBp
-cyByZXNwb25zaWJsZSBmb3IgZG9pbmcgdGhlIGVuL2RlY3J5cHRpb24gKGFuZCBjYW4gY2hvb3Nl
-Cj4gK3RvIGNhbGwgYmxrX2NyeXB0b19mYWxsYmFja190b19zb2Z0d2FyZSkuIEFub3RoZXIgdXNl
-IGNhc2UgZm9yIHRoZQo+ICsicGFzc3Rocm91Z2ggS1NNIiBpcyBmb3IgSUUgZGV2aWNlcyB0aGF0
-IHdhbnQgdG8gbWFuYWdlIHRoZWlyIG93biBrZXlzbG90cy9kbwo+ICtub3QgaGF2ZSBhIGxpbWl0
-ZWQgbnVtYmVyIG9mIGtleXNsb3RzLgoKCi0tIAp+UmFuZHkKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+https://bugzilla.kernel.org/show_bug.cgi?id=204135
+
+            Bug ID: 204135
+           Summary: F2FS: BUG: KASAN: null-ptr-deref in
+                    mempool_alloc+0xd8/0x2e0
+           Product: File System
+           Version: 2.5
+    Kernel Version: 5.1.3
+          Hardware: All
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: normal
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: midwinter1993@gmail.com
+        Regression: No
+
+The following script triggers a KASAN null pointer dereference in f2fs file
+system.
+
+I tested under kernel 5.1.3 using Qemu; this bug may not happen every time but
+according to my tries, it almost happens deterministically.
+
+```
+#!/bin/bash
+
+MOUNT_DIR=/root/mnt
+DISK=xx.img
+
+dd if=/dev/zero of=$DISK bs=1M count=192
+mkfs.f2fs -a 0 -o 19 -t 1 -z 3 -f -q $DISK
+
+
+mkdir -pv $MOUNT_DIR
+
+mount $DISK $MOUNT_DIR -o "noextent_cache"
+
+mkdir $MOUNT_DIR/Umfoo_28
+
+mount $DISK $MOUNT_DIR -o "remount,noextent_cache,mode=lfs,io_bits=7" # BUG
+OCCURS
+
+umount $MOUNT_DIR
+```
+
+
+--- Core dump ---
+[   35.256703]
+==================================================================
+[   35.257772] BUG: KASAN: null-ptr-deref in mempool_alloc+0xd8/0x2e0
+[   35.258646] Read of size 8 at addr 0000000000000020 by task umount/2161
+[   35.259591] 
+[   35.259833] CPU: 0 PID: 2161 Comm: umount Not tainted 5.1.3 #8
+[   35.260646] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS
+Ubuntu-1.8.2-1ubuntu1 04/01/2014
+[   35.261953] Call Trace:
+[   35.262315]  dump_stack+0x8a/0xce
+[   35.262787]  ? mempool_alloc+0xd8/0x2e0
+[   35.263330]  ? mempool_alloc+0xd8/0x2e0
+[   35.263819]  kasan_report.cold+0x5/0x32
+[   35.264199]  ? mempool_alloc+0xd8/0x2e0
+[   35.264678]  mempool_alloc+0xd8/0x2e0
+[   35.265197]  ? mempool_resize+0x410/0x410
+[   35.265760]  ? blk_init_request_from_bio+0xd0/0xd0
+[   35.266439]  ? __write_data_page+0x4c9/0x1140
+[   35.267063]  __submit_merged_bio+0x519/0x8c0
+[   35.267671]  __submit_merged_write_cond+0x41a/0x520
+[   35.268373]  f2fs_write_cache_pages+0xb08/0xb40
+[   35.269021]  ? __write_data_page+0x1140/0x1140
+[   35.269658]  ? update_group_capacity+0x340/0x340
+[   35.270320]  f2fs_write_data_pages+0x796/0x8b0
+[   35.270962]  ? f2fs_write_cache_pages+0xb40/0xb40
+[   35.271631]  ? deref_stack_reg+0x84/0xd0
+[   35.272195]  ? __read_once_size_nocheck.constprop.0+0x10/0x10
+[   35.273005]  ? __orc_find+0x63/0xc0
+[   35.273499]  ? unwind_next_frame+0x8a8/0x9b0
+[   35.274104]  ? f2fs_write_cache_pages+0xb40/0xb40
+[   35.274767]  do_writepages+0xbb/0x1e0
+[   35.275287]  ? page_writeback_cpu_online+0x10/0x10
+[   35.275970]  ? __orc_find+0x63/0xc0
+[   35.276464]  ? stack_access_ok+0x35/0x90
+[   35.277039]  ? unwind_next_frame+0x8a8/0x9b0
+[   35.277644]  ? __update_load_avg_cfs_rq+0x2f/0x4a0
+[   35.278340]  ? rb_next+0x33/0x80
+[   35.278800]  __filemap_fdatawrite_range+0x142/0x1d0
+[   35.279488]  ? delete_from_page_cache_batch+0x650/0x650
+[   35.280239]  ? _raw_spin_lock_irq+0xd0/0xd0
+[   35.280833]  f2fs_sync_dirty_inodes+0x167/0x490
+[   35.281475]  f2fs_write_checkpoint+0x462/0x2f70
+[   35.282115]  ? __schedule+0x481/0xc80
+[   35.282633]  ? update_cfs_group+0x1d/0x1a0
+[   35.283213]  ? __enqueue_entity+0xae/0xe0
+[   35.283786]  ? pci_mmcfg_check_reserved+0x130/0x130
+[   35.284478]  ? _raw_spin_lock_irq+0x76/0xd0
+[   35.285073]  ? f2fs_wait_on_all_pages_writeback+0x1a0/0x1a0
+[   35.285859]  ? try_to_wake_up+0xa4/0x750
+[   35.286416]  ? bit_wait_io_timeout+0xc0/0xc0
+[   35.287021]  ? __migrate_task.isra.0+0xa0/0xa0
+[   35.287650]  ? pin_kill+0x121/0x260
+[   35.288152]  ? pin_insert+0x30/0x30
+[   35.288648]  ? kthread_stop+0x11b/0x260
+[   35.289191]  kill_f2fs_super+0x1e7/0x210
+[   35.289746]  ? __f2fs_commit_super+0xc0/0xc0
+[   35.290347]  ? xas_start+0xbf/0x1c0
+[   35.290846]  ? unregister_shrinker+0x9e/0xc0
+[   35.291446]  ? kfree+0x9b/0x1c0
+[   35.291899]  deactivate_locked_super+0x69/0xc0
+[   35.292525]  deactivate_super+0x14e/0x160
+[   35.293094]  ? iterate_supers_type+0x1c0/0x1c0
+[   35.293723]  cleanup_mnt+0x71/0xc0
+[   35.294207]  task_work_run+0x100/0x120
+[   35.294663]  exit_to_usermode_loop+0x175/0x180
+[   35.295149]  do_syscall_64+0x1f1/0x230
+[   35.295560]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[   35.296114] RIP: 0033:0x7fe8e01f6d77
+[   35.296509] Code: 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00
+31 f6 e9 09 00 00 00 66 0f 1f 84 00 00 00 00 00 b8 a6 00 00 00 0f 05 <48> 3d 01
+f0 ff ff 73 01 c3 48 8b 0d f1 00 2b 00 f7 d8 64 89 01 48
+[   35.298601] RSP: 002b:00007ffff47cec68 EFLAGS: 00000246 ORIG_RAX:
+00000000000000a6
+[   35.299401] RAX: 0000000000000000 RBX: 000055f947ec7080 RCX:
+00007fe8e01f6d77
+[   35.300151] RDX: 0000000000000001 RSI: 0000000000000000 RDI:
+000055f947ec7260
+[   35.300950] RBP: 000055f947ec7260 R08: 000055f947ec7280 R09:
+0000000000000014
+[   35.301707] R10: 00000000000006b4 R11: 0000000000000246 R12:
+00007fe8e06f8e64
+[   35.302455] R13: 0000000000000000 R14: 0000000000000000 R15:
+00007ffff47ceef0
+[   35.303258]
+==================================================================
+[   35.304025] Disabling lock debugging due to kernel taint
+[   35.305229] BUG: unable to handle kernel NULL pointer dereference at
+0000000000000020
+[   35.306356] #PF error: [normal kernel read fault]
+[   35.307004] PGD 0 P4D 0 
+[   35.307364] Oops: 0000 [#1] SMP KASAN PTI
+[   35.307914] CPU: 1 PID: 2161 Comm: umount Tainted: G    B             5.1.3
+#8
+[   35.308879] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS
+Ubuntu-1.8.2-1ubuntu1 04/01/2014
+[   35.310142] RIP: 0010:mempool_alloc+0xd8/0x2e0
+[   35.310749] Code: 81 cb 00 20 09 00 4d 8d 74 24 18 89 44 24 08 65 48 8b 04
+25 40 dd 01 00 48 89 44 24 10 e8 20 d9 f5 ff 4c 89 ff e8 d8 14 0c 00 <49> 8b 44
+24 20 4c 89 f7 48 89 04 24 e8 c7 14 0c 00 49 8b 74 24 18
+[   35.313330] RSP: 0018:ffff8881129af3a0 EFLAGS: 00010286
+[   35.314034] RAX: 0000000000000000 RBX: 000000000009a800 RCX:
+ffffffff9694c53d
+[   35.314959] RDX: 1ffffffff30c1557 RSI: 0000000000000246 RDI:
+ffffffff9860aab8
+[   35.315914] RBP: 1ffff11022535e79 R08: 000000000000002c R09:
+ffffed1022e03c9b
+[   35.316865] R10: ffffed1022e03c9a R11: ffff88811701e4d7 R12:
+0000000000000000
+[   35.317811] R13: 0000000000000400 R14: 0000000000000018 R15:
+0000000000000020
+[   35.318759] FS:  00007fe8e0914e40(0000) GS:ffff888117100000(0000)
+knlGS:0000000000000000
+[   35.319845] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   35.320620] CR2: 00007f2f50033048 CR3: 00000001137d6000 CR4:
+00000000000006e0
+[   35.321568] Call Trace:
+[   35.321914]  ? mempool_resize+0x410/0x410
+[   35.322460]  ? blk_init_request_from_bio+0xd0/0xd0
+[   35.323108]  ? __write_data_page+0x4c9/0x1140
+[   35.323701]  __submit_merged_bio+0x519/0x8c0
+[   35.324287]  __submit_merged_write_cond+0x41a/0x520
+[   35.325004]  f2fs_write_cache_pages+0xb08/0xb40
+[   35.325621]  ? __write_data_page+0x1140/0x1140
+[   35.326226]  ? update_group_capacity+0x340/0x340
+[   35.326853]  f2fs_write_data_pages+0x796/0x8b0
+[   35.327459]  ? f2fs_write_cache_pages+0xb40/0xb40
+[   35.328101]  ? deref_stack_reg+0x84/0xd0
+[   35.328635]  ? __read_once_size_nocheck.constprop.0+0x10/0x10
+[   35.329404]  ? __orc_find+0x63/0xc0
+[   35.329879]  ? unwind_next_frame+0x8a8/0x9b0
+[   35.330458]  ? f2fs_write_cache_pages+0xb40/0xb40
+[   35.331092]  do_writepages+0xbb/0x1e0
+[   35.331592]  ? page_writeback_cpu_online+0x10/0x10
+[   35.332249]  ? __orc_find+0x63/0xc0
+[   35.332730]  ? stack_access_ok+0x35/0x90
+[   35.333270]  ? unwind_next_frame+0x8a8/0x9b0
+[   35.333855]  ? __update_load_avg_cfs_rq+0x2f/0x4a0
+[   35.334508]  ? rb_next+0x33/0x80
+[   35.334958]  __filemap_fdatawrite_range+0x142/0x1d0
+[   35.335622]  ? delete_from_page_cache_batch+0x650/0x650
+[   35.336330]  ? _raw_spin_lock_irq+0xd0/0xd0
+[   35.336898]  f2fs_sync_dirty_inodes+0x167/0x490
+[   35.337509]  f2fs_write_checkpoint+0x462/0x2f70
+[   35.338123]  ? __schedule+0x481/0xc80
+[   35.338622]  ? update_cfs_group+0x1d/0x1a0
+[   35.339176]  ? __enqueue_entity+0xae/0xe0
+[   35.339721]  ? pci_mmcfg_check_reserved+0x130/0x130
+[   35.340390]  ? _raw_spin_lock_irq+0x76/0xd0
+[   35.340967]  ? f2fs_wait_on_all_pages_writeback+0x1a0/0x1a0
+[   35.341726]  ? try_to_wake_up+0xa4/0x750
+[   35.342267]  ? bit_wait_io_timeout+0xc0/0xc0
+[   35.342854]  ? __migrate_task.isra.0+0xa0/0xa0
+[   35.343465]  ? pin_kill+0x121/0x260
+[   35.343953]  ? pin_insert+0x30/0x30
+[   35.344438]  ? kthread_stop+0x11b/0x260
+[   35.344967]  kill_f2fs_super+0x1e7/0x210
+[   35.345509]  ? __f2fs_commit_super+0xc0/0xc0
+[   35.346095]  ? xas_start+0xbf/0x1c0
+[   35.346579]  ? unregister_shrinker+0x9e/0xc0
+[   35.347165]  ? kfree+0x9b/0x1c0
+[   35.347601]  deactivate_locked_super+0x69/0xc0
+[   35.348189]  deactivate_super+0x14e/0x160
+[   35.348740]  ? iterate_supers_type+0x1c0/0x1c0
+[   35.349351]  cleanup_mnt+0x71/0xc0
+[   35.349824]  task_work_run+0x100/0x120
+[   35.350342]  exit_to_usermode_loop+0x175/0x180
+[   35.350954]  do_syscall_64+0x1f1/0x230
+[   35.351472]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[   35.352165] RIP: 0033:0x7fe8e01f6d77
+[   35.352659] Code: 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00
+31 f6 e9 09 00 00 00 66 0f 1f 84 00 00 00 00 00 b8 a6 00 00 00 0f 05 <48> 3d 01
+f0 ff ff 73 01 c3 48 8b 0d f1 00 2b 00 f7 d8 64 89 01 48
+[   35.355180] RSP: 002b:00007ffff47cec68 EFLAGS: 00000246 ORIG_RAX:
+00000000000000a6
+[   35.356208] RAX: 0000000000000000 RBX: 000055f947ec7080 RCX:
+00007fe8e01f6d77
+[   35.357171] RDX: 0000000000000001 RSI: 0000000000000000 RDI:
+000055f947ec7260
+[   35.358134] RBP: 000055f947ec7260 R08: 000055f947ec7280 R09:
+0000000000000014
+[   35.359097] R10: 00000000000006b4 R11: 0000000000000246 R12:
+00007fe8e06f8e64
+[   35.360062] R13: 0000000000000000 R14: 0000000000000000 R15:
+00007ffff47ceef0
+[   35.361021] Modules linked in:
+[   35.361446] Dumping ftrace buffer:
+[   35.361914]    (ftrace buffer empty)
+[   35.362406] CR2: 0000000000000020
+[   35.363006] ---[ end trace d88b774adc80a9fc ]---
+
+-- 
+You are receiving this mail because:
+You are watching the assignee of the bug.
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
