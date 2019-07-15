@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E96868486
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jul 2019 09:40:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C903E684DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jul 2019 10:08:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hmval-0007Lz-VS; Mon, 15 Jul 2019 07:40:11 +0000
+	id 1hmw2B-0001XT-U8; Mon, 15 Jul 2019 08:08:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hmvad-0007LO-Fk
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jul 2019 07:40:03 +0000
+ id 1hmw22-0001WE-Km
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jul 2019 08:08:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R4L4cjMnp5K7ynQDIIwTWW5tQ8AolaL89cxEibsY5cQ=; b=ScCJcMXheDAYAZ7eULzpsP+lXt
- PHGDBiothIiEphfx9xkORFqt3Hn4dX3ZvXRcuVim8M+q56w+VVoaOCHqs+0lIj89VkbSuyO02OXQE
- bUIFySogX9d3lg/mBO6Az7K0IfDyDCzIM5/Ct6Su/5lrxTdv5wol7kZBHKItYOzYqIb0=;
+ bh=nNVUfQtudBDDrLIqHd++JlgorUHdePqajY+kqtZP/cQ=; b=RzRTrSb0neqnGLxLG5bDt8bIMf
+ uv7Zw4mLrTjqMbeC+SroK92Mm39xqRf8E6J3KdSQLWLDA6xiKjPWFmGoLGnsx+DvYHQQUfkaJy/ag
+ OaV2GnePs071Q+h5zl/V6mOpVgORX8FEwxq4E0iLIV9637OhIdu06aJklxJhuvNcoFhY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=R4L4cjMnp5K7ynQDIIwTWW5tQ8AolaL89cxEibsY5cQ=; b=kFKA0FecGVykSoa4vIPkrmi4iF
- 5Z+6ZEpDDLKyeG5YgklE63rdcUHeyKNDwtXU1xdQQY9YQ5FF+1nHH01CKygCRI98W+raz5gkVH/jD
- VC5OzwwekYrxOVxBicPASqQ+6NCC4CLePO0Z7nYU5GyzviN/L+t+4nTf679LXOjRL37w=;
+ bh=nNVUfQtudBDDrLIqHd++JlgorUHdePqajY+kqtZP/cQ=; b=hefL0u2eh4QirRMd6eiLF+keID
+ /Mc55TZ1/PPgVuYM7JQY3p7kiXtL7HLaHh+5y0s9tO8kLoJsQBULP0A2wwMqOSXzPS4s1igNVM/PC
+ hFJWNYYL1lhGFOX9JMn2j55y+4YOLvmyAYvG7VQ7xqHyB/0rqO5HZNBIDGbTfiIqWSk8=;
 Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hmvab-001gMf-LW
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jul 2019 07:40:02 +0000
+ id 1hmw1z-002032-Mf
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jul 2019 08:08:22 +0000
 Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id ED8A7205A4
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 1CD0626B39
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 15 Jul 2019 07:39:54 +0000 (UTC)
+ Mon, 15 Jul 2019 08:08:14 +0000 (UTC)
 Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id E1B85223C7; Mon, 15 Jul 2019 07:39:54 +0000 (UTC)
+ id 115CB27480; Mon, 15 Jul 2019 08:08:14 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
  pdx-wl-mail.web.codeaurora.org
 X-Spam-Level: 
@@ -51,7 +51,7 @@ X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
  NO_RELAYS autolearn=ham version=3.3.1
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 15 Jul 2019 07:39:52 +0000
+Date: Mon, 15 Jul 2019 08:08:13 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -60,14 +60,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: seulbae@gatech.edu
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: CODE_FIX
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-203861-202145-RxqEIX2XUj@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-203861-202145-lxbJapOdd3@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-203861-202145@https.bugzilla.kernel.org/>
 References: <bug-203861-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -80,7 +80,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hmvab-001gMf-LW
+X-Headers-End: 1hmw1z-002032-Mf
 Subject: [f2fs-dev] [Bug 203861] Division by zero error in fsck.f2fs when
  fixing a corrupted image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -100,9 +100,15 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=203861
 
---- Comment #2 from Seulbae Kim (seulbae@gatech.edu) ---
-No problem. I checked that the bug is fixed through the patch.
-Thank you!
+Chao Yu (chao@kernel.org) changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|ASSIGNED                    |RESOLVED
+         Resolution|---                         |CODE_FIX
+
+--- Comment #3 from Chao Yu (chao@kernel.org) ---
+Thanks for confirming that! :)
 
 -- 
 You are receiving this mail because:
