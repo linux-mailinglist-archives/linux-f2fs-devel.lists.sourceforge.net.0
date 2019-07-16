@@ -2,76 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 996C56A614
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 12:02:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8C8A6AA93
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 16:26:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hnKIA-000122-Ol; Tue, 16 Jul 2019 10:02:38 +0000
+	id 1hnOPJ-00069k-Ao; Tue, 16 Jul 2019 14:26:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hnKI8-00011U-VV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 10:02:36 +0000
+ (envelope-from <chao@kernel.org>) id 1hnOPI-00069O-2a
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 14:26:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BSUY5qRxni8VHmSKhxtavKVobNaqXM0nNcFnMM0ZEGc=; b=lS8njZ60QeNxYQhL4daK1A0hll
- UxsmKayFMnZbW5I1o1phYbmnTieSdlZixqpkG28I9ApNjtB1/Dyd95b5/uCsCYBEu4Kz2+E9Eo9nD
- ZL47aWDq2ygPQocHaCOftsdqMxuAhlsC3wyusxKb3hRQ5W6K3+CKftZ9Ul4j5d5WrJ9c=;
+ bh=fug01HsDuCPPxMd4KJktNqrsMNgCZ7QnW1iCBuoiqWQ=; b=OsGb0zwTS0AWhqu33Yj9qbWIE3
+ 75JTxfNmuUTvNuwZsmtqWDWZ7bCOQaDfs6d+kefTpZrulEm2f9Y+GMw/m0i7dNa0jSLZp8iPRbPXN
+ omdC3y0mATSXXyzB8hI6S4qAQyplvz9AWK/37mr2w7gQvTL4HJhKp3l5M5yViHRPtXuI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BSUY5qRxni8VHmSKhxtavKVobNaqXM0nNcFnMM0ZEGc=; b=T9eopngepXQE/Yxr0pzmgxM5i8
- xz+36eWfe1yBHi7YmznNsqkphV3aZHoPjAHptT8BcJhVMAv/AY3uygIkNgMQYVXFp9pezX9WTMsAz
- +9lGdZClw8xxTVYgcbWunsgMO1lD3SPQ+vqWQtke65oZG07sMHj+VMKlTxdaXS+f4ef8=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=fug01HsDuCPPxMd4KJktNqrsMNgCZ7QnW1iCBuoiqWQ=; b=ih0A4U/s60dkZUqo+wlSq1wtfW
+ kU4u1pqywsJyO7NWHgolVTTi2qfjQE5Y0aGd3ZzrPHQjnUdIZkhS3x/oQs1yOJ62xJyXyIfGrzhVH
+ T9DUpWI8Q88yClH3jRJSzoHupD+13iZ+y7ZCqESECIL3Csyb5yuI2NXG/Oa69pdvxO0k=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hnKI6-002we0-RF
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 10:02:36 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id C042B4E321EA8CF8BCE8;
- Tue, 16 Jul 2019 18:02:26 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 16 Jul
- 2019 18:02:23 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-References: <20190424094850.118323-1-yuchao0@huawei.com>
- <20190428133802.GB37346@jaegeuk-macbookpro.roam.corp.google.com>
- <373f4633-d331-5cf3-74b7-e982072bc4b4@kernel.org>
- <20190501032242.GA84420@jaegeuk-macbookpro.roam.corp.google.com>
- <3f170d86-e556-13ae-ce19-3bba3944f5fa@huawei.com>
- <192bae92-2193-570f-7b50-00334271bd2e@huawei.com>
-Message-ID: <a16a0c1c-16c6-5fe8-bfc4-7cc0e0866c77@huawei.com>
-Date: Tue, 16 Jul 2019 18:02:21 +0800
+ id 1hnOPF-003YZq-Sz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 14:26:16 +0000
+Received: from [192.168.0.101] (unknown [49.65.245.180])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4471D2173B;
+ Tue, 16 Jul 2019 14:26:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1563287167;
+ bh=sdkcSEaModcaYzfPDVZ05UHTYTfGMwgi3Y4K974him8=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=riFxOnJzDUHVJR+2QEwx31iQlJH11fQ2A/ayJnFSjsyNQSLVkdI10MvwcR6ulC5c1
+ S5ykJdIOYCqXyIclyXea/OOLPG+fpAnec28ydC9xQJ14/6w5fIsF1GQW8Co9BL9plR
+ DER6BCWNGVdlXQfZU3ZFX05MPSczP+UjRvT3pS+U=
+To: Chao Yu <yuchao0@huawei.com>, linux-f2fs-devel@lists.sourceforge.net
+References: <20190626094813.40517-1-yuchao0@huawei.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <7a2e35af-50ce-689d-218a-44b106408d5b@kernel.org>
+Date: Tue, 16 Jul 2019 22:25:57 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <192bae92-2193-570f-7b50-00334271bd2e@huawei.com>
+In-Reply-To: <20190626094813.40517-1-yuchao0@huawei.com>
 Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
-X-Headers-End: 1hnKI6-002we0-RF
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to do sanity with enabled features
- in image
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hnOPF-003YZq-Sz
+Subject: Re: [f2fs-dev] [PATCH v2] fsck.f2fs: write checkpoint with OPU mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,143 +87,177 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jaegeuk,
+Ping,
 
-On 2019/5/9 9:15, Chao Yu wrote:
-> On 2019/5/5 10:51, Chao Yu wrote:
->> On 2019/5/1 11:22, Jaegeuk Kim wrote:
->>> On 04/29, Chao Yu wrote:
->>>> On 2019-4-28 21:38, Jaegeuk Kim wrote:
->>>>> On 04/24, Chao Yu wrote:
->>>>>> This patch fixes to do sanity with enabled features in image, if
->>>>>> there are features kernel can not recognize, just fail the mount.
->>>>>
->>>>> We need to figure out per-feature-based rejection, since some of them can
->>>>> be set without layout change.
-
-What about adding one field in superblock for compatible features in future?
-
-sb.feature(F2FS_FEATURE_LAST, max] stores uncompatible features
-sb.compatible_feature stores compatible features
-
-If we follow above rule when adding one feature, then, we can fail the mount if
-sb.feature(F2FS_FEATURE_LAST, max] is valid.
-
-Thanks,
-
->>>>
->>>> So any suggestion on how to implement this?
->>>
->>> Which features do we need to disallow? When we introduce new features, they
->>
->> I guess it should be the new features.
->>
->>> didn't hurt the previous flow by checking f2fs_sb_has_###().
->>
->> Yes, but new features may use new disk layout, if old kernel handled it with old
->> disk layout, there must be problematic.
->>
->> e.g. format image with -O extra_attr, and mount it with kernel who don't
->> recognize new inode layout.
+On 2019-6-26 17:48, Chao Yu wrote:
+> This original patch was from Weichao Guo.
 > 
-> Jaegeuk,
+> We may encounter both checkpoints invalid in such a case:
+> 1. kernel writes CP A;
+> 2. power-cut when kernel writes CP B, then CP B is corrupted;
+> 3. fsck: load CP A, fix meta/data;
+> 4. power-cut when fsck writes CP A in-place, then CP A is corrupted too;
 > 
-> Any thoughts?
+> To avoid both checkpoints being invalid, this patch changes to duplicate
+> valid checkpoint to mirror position first, and then, write fixed checkpoint
+> to CP #0 position.
 > 
-> Thanks,
+> This can make sure that, while fsck repairing, even there is sudden
+> power-cut, last valid checkpoint can be kept in CP #1 position.
 > 
->>
->> Thanks,
->>
->>>
->>>>
->>>> Maybe:
->>>>
->>>> if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 0))
->>>> 	check 4.14+ features
->>>> else if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 9, 0))
->>>> 	check 4.9+ features
->>>> else if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 4, 0))
->>>> 	check 4.4+ features
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>> ---
->>>>>>  fs/f2fs/f2fs.h  | 13 +++++++++++++
->>>>>>  fs/f2fs/super.c |  9 +++++++++
->>>>>>  2 files changed, 22 insertions(+)
->>>>>>
->>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>> index f5ffc09705eb..15b640967e12 100644
->>>>>> --- a/fs/f2fs/f2fs.h
->>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>> @@ -151,6 +151,19 @@ struct f2fs_mount_info {
->>>>>>  #define F2FS_FEATURE_VERITY		0x0400	/* reserved */
->>>>>>  #define F2FS_FEATURE_SB_CHKSUM		0x0800
->>>>>>  
->>>>>> +#define F2FS_ALL_FEATURES	(F2FS_FEATURE_ENCRYPT |			\
->>>>>> +				F2FS_FEATURE_BLKZONED |			\
->>>>>> +				F2FS_FEATURE_ATOMIC_WRITE |		\
->>>>>> +				F2FS_FEATURE_EXTRA_ATTR |		\
->>>>>> +				F2FS_FEATURE_PRJQUOTA |			\
->>>>>> +				F2FS_FEATURE_INODE_CHKSUM |		\
->>>>>> +				F2FS_FEATURE_FLEXIBLE_INLINE_XATTR |	\
->>>>>> +				F2FS_FEATURE_QUOTA_INO |		\
->>>>>> +				F2FS_FEATURE_INODE_CRTIME |		\
->>>>>> +				F2FS_FEATURE_LOST_FOUND |		\
->>>>>> +				F2FS_FEATURE_VERITY |			\
->>>>>> +				F2FS_FEATURE_SB_CHKSUM)
->>>>>> +
->>>>>>  #define __F2FS_HAS_FEATURE(raw_super, mask)				\
->>>>>>  	((raw_super->feature & cpu_to_le32(mask)) != 0)
->>>>>>  #define F2FS_HAS_FEATURE(sbi, mask)	__F2FS_HAS_FEATURE(sbi->raw_super, mask)
->>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>>>> index 4f8e9ab48b26..57f2fc6d14ba 100644
->>>>>> --- a/fs/f2fs/super.c
->>>>>> +++ b/fs/f2fs/super.c
->>>>>> @@ -2573,6 +2573,15 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
->>>>>>  		return 1;
->>>>>>  	}
->>>>>>  
->>>>>> +	/* check whether kernel supports all features */
->>>>>> +	if (le32_to_cpu(raw_super->feature) & (~F2FS_ALL_FEATURES)) {
->>>>>> +		f2fs_msg(sb, KERN_INFO,
->>>>>> +			"Unsupported feature:%u: supported:%u",
->>>>>> +			le32_to_cpu(raw_super->feature),
->>>>>> +			F2FS_ALL_FEATURES);
->>>>>> +		return 1;
->>>>>> +	}
->>>>>> +
->>>>>>  	/* check CP/SIT/NAT/SSA/MAIN_AREA area boundary */
->>>>>>  	if (sanity_check_area_boundary(sbi, bh))
->>>>>>  		return 1;
->>>>>> -- 
->>>>>> 2.18.0.rc1
->>> .
->>>
->>
->>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->> .
->>
+> Signed-off-by: Weichao Guo <guoweichao@huawei.com>
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> v2:
+> - duplicate valid CP to mirror position, update CP on #0 position.
+>  fsck/f2fs.h  |  2 ++
+>  fsck/fsck.c  | 14 ++++++++++++--
+>  fsck/fsck.h  |  2 ++
+>  fsck/mount.c | 51 ++++++++++++++++++++++++++++++++++++++++++++++++++-
+>  4 files changed, 66 insertions(+), 3 deletions(-)
 > 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
+> diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+> index 4dc6698..52e68ec 100644
+> --- a/fsck/f2fs.h
+> +++ b/fsck/f2fs.h
+> @@ -195,6 +195,8 @@ struct f2fs_sb_info {
+>  
+>  	unsigned int cur_victim_sec;            /* current victim section num */
+>  	u32 free_segments;
+> +
+> +	int cp_backuped;			/* backup valid checkpoint */
+>  };
+>  
+>  static inline struct f2fs_super_block *F2FS_RAW_SUPER(struct f2fs_sb_info *sbi)
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index 8953ca1..aee45d9 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -2127,6 +2127,16 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+>  	ASSERT(ret >= 0);
+>  }
+>  
+> +static void fix_checkpoints(struct f2fs_sb_info *sbi)
+> +{
+> +	/* copy valid checkpoint to its mirror position */
+> +	duplicate_checkpoint(sbi);
+> +
+> +	/* repair checkpoint at CP #0 position */
+> +	sbi->cur_cp = 1;
+> +	fix_checkpoint(sbi);
+> +}
+> +
+>  int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
+>  {
+>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+> @@ -2777,10 +2787,10 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+>  			rewrite_sit_area_bitmap(sbi);
+>  			fix_curseg_info(sbi);
+>  			fix_checksum(sbi);
+> -			fix_checkpoint(sbi);
+> +			fix_checkpoints(sbi);
+>  		} else if (is_set_ckpt_flags(cp, CP_FSCK_FLAG) ||
+>  			is_set_ckpt_flags(cp, CP_QUOTA_NEED_FSCK_FLAG)) {
+> -			write_checkpoint(sbi);
+> +			write_checkpoints(sbi);
+>  		}
+>  	}
+>  	return ret;
+> diff --git a/fsck/fsck.h b/fsck/fsck.h
+> index d38e8de..3699b35 100644
+> --- a/fsck/fsck.h
+> +++ b/fsck/fsck.h
+> @@ -191,7 +191,9 @@ extern void flush_sit_entries(struct f2fs_sb_info *);
+>  extern void move_curseg_info(struct f2fs_sb_info *, u64, int);
+>  extern void write_curseg_info(struct f2fs_sb_info *);
+>  extern int find_next_free_block(struct f2fs_sb_info *, u64 *, int, int);
+> +extern void duplicate_checkpoint(struct f2fs_sb_info *);
+>  extern void write_checkpoint(struct f2fs_sb_info *);
+> +extern void write_checkpoints(struct f2fs_sb_info *);
+>  extern void update_superblock(struct f2fs_super_block *, int);
+>  extern void update_data_blkaddr(struct f2fs_sb_info *, nid_t, u16, block_t);
+>  extern void update_nat_blkaddr(struct f2fs_sb_info *, nid_t, nid_t, block_t);
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index 60e0e4a..89f538b 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2229,7 +2229,7 @@ void flush_journal_entries(struct f2fs_sb_info *sbi)
+>  	int n_sits = flush_sit_journal_entries(sbi);
+>  
+>  	if (n_nats || n_sits)
+> -		write_checkpoint(sbi);
+> +		write_checkpoints(sbi);
+>  }
+>  
+>  void flush_sit_entries(struct f2fs_sb_info *sbi)
+> @@ -2478,6 +2478,45 @@ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+>  	free(nat_block);
+>  }
+>  
+> +void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+> +{
+> +	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+> +	unsigned long long dst, src;
+> +	void *buf;
+> +	unsigned int seg_size = 1 << get_sb(log_blocks_per_seg);
+> +	int ret;
+> +
+> +	if (sbi->cp_backuped)
+> +		return;
+> +
+> +	buf = malloc(F2FS_BLKSIZE * seg_size);
+> +	ASSERT(buf);
+> +
+> +	if (sbi->cur_cp == 1) {
+> +		src = get_sb(cp_blkaddr);
+> +		dst = src + seg_size;
+> +	} else {
+> +		dst = get_sb(cp_blkaddr);
+> +		src = dst + seg_size;
+> +	}
+> +
+> +	ret = dev_read(buf, src << F2FS_BLKSIZE_BITS, seg_size);
+> +	ASSERT(ret >= 0);
+> +
+> +	ret = dev_write(buf, dst << F2FS_BLKSIZE_BITS, seg_size);
+> +	ASSERT(ret >= 0);
+> +
+> +	free(buf);
+> +
+> +	ret = f2fs_fsync_device();
+> +	ASSERT(ret >= 0);
+> +
+> +	sbi->cp_backuped = 1;
+> +
+> +	MSG(0, "Info: Duplicate valid checkpoint to mirror position "
+> +		"%llu -> %llu\n", src, dst);
+> +}
+> +
+>  void write_checkpoint(struct f2fs_sb_info *sbi)
+>  {
+>  	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
+> @@ -2557,6 +2596,16 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+>  	ASSERT(ret >= 0);
+>  }
+>  
+> +void write_checkpoints(struct f2fs_sb_info *sbi)
+> +{
+> +	/* copy valid checkpoint to its mirror position */
+> +	duplicate_checkpoint(sbi);
+> +
+> +	/* repair checkpoint at CP #0 position */
+> +	sbi->cur_cp = 1;
+> +	write_checkpoint(sbi);
+> +}
+> +
+>  void build_nat_area_bitmap(struct f2fs_sb_info *sbi)
+>  {
+>  	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
 > 
 
 
