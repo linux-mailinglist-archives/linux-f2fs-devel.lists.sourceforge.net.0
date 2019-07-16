@@ -2,87 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96CFC6A496
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 11:09:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 996C56A614
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 12:02:41 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hnJSh-0000wm-AW; Tue, 16 Jul 2019 09:09:27 +0000
+	id 1hnKIA-000122-Ol; Tue, 16 Jul 2019 10:02:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hnJSg-0000vZ-0v
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 09:09:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hnKI8-00011U-VV
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 10:02:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7T0DXogVJVAgttdfP2X6FTQ7UFPq7aOWEUDbd3JhAII=; b=PeBXfBXuq+9Y2nF3Nj9n3FeO2v
- pamfjjX/LtFUyYIo5+PF5VncWQyyy0yI+IUDXCrFrXmw84Z9W1Uc2zMoldllKNjamD6mPTzgG+I04
- uc4Wm5M6Jw1rc9ha9EFu0pjIQyCJDaHSh8PzGELVeT5n6EoPFjT4BIiixYB41SSdZA7Q=;
+ bh=BSUY5qRxni8VHmSKhxtavKVobNaqXM0nNcFnMM0ZEGc=; b=lS8njZ60QeNxYQhL4daK1A0hll
+ UxsmKayFMnZbW5I1o1phYbmnTieSdlZixqpkG28I9ApNjtB1/Dyd95b5/uCsCYBEu4Kz2+E9Eo9nD
+ ZL47aWDq2ygPQocHaCOftsdqMxuAhlsC3wyusxKb3hRQ5W6K3+CKftZ9Ul4j5d5WrJ9c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7T0DXogVJVAgttdfP2X6FTQ7UFPq7aOWEUDbd3JhAII=; b=MpJdulX2eaqjBzAz8lfs87yx63
- 8ubSBYOWCeU2OP4fAqsX6A88QOhvaKPpGP0FHVa6j5QHqwrk5MvTzHlJ7xivXIesenHp+SHmr0I3O
- pbQLIMBVgpcqch/DiqZdOLc3ds0tr5lfk7Kd/tQtlOpAToZlE/wgMShL5CEHcqmhFWFE=;
-Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=BSUY5qRxni8VHmSKhxtavKVobNaqXM0nNcFnMM0ZEGc=; b=T9eopngepXQE/Yxr0pzmgxM5i8
+ xz+36eWfe1yBHi7YmznNsqkphV3aZHoPjAHptT8BcJhVMAv/AY3uygIkNgMQYVXFp9pezX9WTMsAz
+ +9lGdZClw8xxTVYgcbWunsgMO1lD3SPQ+vqWQtke65oZG07sMHj+VMKlTxdaXS+f4ef8=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hnJSc-003Fb0-O1
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 09:09:25 +0000
-Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 56500285B5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 16 Jul 2019 09:09:16 +0000 (UTC)
-Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id 4745428538; Tue, 16 Jul 2019 09:09:16 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
- pdx-wl-mail.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
- NO_RELAYS autolearn=ham version=3.3.1
-From: bugzilla-daemon@bugzilla.kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 16 Jul 2019 09:09:15 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-204135-202145-CD8dAnxWdd@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-204135-202145@https.bugzilla.kernel.org/>
-References: <bug-204135-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1hnKI6-002we0-RF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 10:02:36 +0000
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id C042B4E321EA8CF8BCE8;
+ Tue, 16 Jul 2019 18:02:26 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 16 Jul
+ 2019 18:02:23 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+References: <20190424094850.118323-1-yuchao0@huawei.com>
+ <20190428133802.GB37346@jaegeuk-macbookpro.roam.corp.google.com>
+ <373f4633-d331-5cf3-74b7-e982072bc4b4@kernel.org>
+ <20190501032242.GA84420@jaegeuk-macbookpro.roam.corp.google.com>
+ <3f170d86-e556-13ae-ce19-3bba3944f5fa@huawei.com>
+ <192bae92-2193-570f-7b50-00334271bd2e@huawei.com>
+Message-ID: <a16a0c1c-16c6-5fe8-bfc4-7cc0e0866c77@huawei.com>
+Date: Tue, 16 Jul 2019 18:02:21 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <192bae92-2193-570f-7b50-00334271bd2e@huawei.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hnJSc-003Fb0-O1
-Subject: [f2fs-dev] [Bug 204135] F2FS: BUG: KASAN: null-ptr-deref in
- mempool_alloc+0xd8/0x2e0
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+X-Headers-End: 1hnKI6-002we0-RF
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to do sanity with enabled features
+ in image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,28 +83,145 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=204135
+Hi Jaegeuk,
 
-Chao Yu (chao@kernel.org) changed:
+On 2019/5/9 9:15, Chao Yu wrote:
+> On 2019/5/5 10:51, Chao Yu wrote:
+>> On 2019/5/1 11:22, Jaegeuk Kim wrote:
+>>> On 04/29, Chao Yu wrote:
+>>>> On 2019-4-28 21:38, Jaegeuk Kim wrote:
+>>>>> On 04/24, Chao Yu wrote:
+>>>>>> This patch fixes to do sanity with enabled features in image, if
+>>>>>> there are features kernel can not recognize, just fail the mount.
+>>>>>
+>>>>> We need to figure out per-feature-based rejection, since some of them can
+>>>>> be set without layout change.
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |ASSIGNED
-                 CC|                            |chao@kernel.org
+What about adding one field in superblock for compatible features in future?
 
---- Comment #1 from Chao Yu (chao@kernel.org) ---
-I've sent one patch to fix this issue, just simply refusing remount w/ io_bits
-change, could you have a try?
+sb.feature(F2FS_FEATURE_LAST, max] stores uncompatible features
+sb.compatible_feature stores compatible features
 
-https://lore.kernel.org/linux-f2fs-devel/20190712085700.4239-1-yuchao0@huawei.com/T/#u
+If we follow above rule when adding one feature, then, we can fail the mount if
+sb.feature(F2FS_FEATURE_LAST, max] is valid.
 
--- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+Thanks,
+
+>>>>
+>>>> So any suggestion on how to implement this?
+>>>
+>>> Which features do we need to disallow? When we introduce new features, they
+>>
+>> I guess it should be the new features.
+>>
+>>> didn't hurt the previous flow by checking f2fs_sb_has_###().
+>>
+>> Yes, but new features may use new disk layout, if old kernel handled it with old
+>> disk layout, there must be problematic.
+>>
+>> e.g. format image with -O extra_attr, and mount it with kernel who don't
+>> recognize new inode layout.
+> 
+> Jaegeuk,
+> 
+> Any thoughts?
+> 
+> Thanks,
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Maybe:
+>>>>
+>>>> if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 0))
+>>>> 	check 4.14+ features
+>>>> else if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 9, 0))
+>>>> 	check 4.9+ features
+>>>> else if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 4, 0))
+>>>> 	check 4.4+ features
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>>>
+>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>> ---
+>>>>>>  fs/f2fs/f2fs.h  | 13 +++++++++++++
+>>>>>>  fs/f2fs/super.c |  9 +++++++++
+>>>>>>  2 files changed, 22 insertions(+)
+>>>>>>
+>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>>>> index f5ffc09705eb..15b640967e12 100644
+>>>>>> --- a/fs/f2fs/f2fs.h
+>>>>>> +++ b/fs/f2fs/f2fs.h
+>>>>>> @@ -151,6 +151,19 @@ struct f2fs_mount_info {
+>>>>>>  #define F2FS_FEATURE_VERITY		0x0400	/* reserved */
+>>>>>>  #define F2FS_FEATURE_SB_CHKSUM		0x0800
+>>>>>>  
+>>>>>> +#define F2FS_ALL_FEATURES	(F2FS_FEATURE_ENCRYPT |			\
+>>>>>> +				F2FS_FEATURE_BLKZONED |			\
+>>>>>> +				F2FS_FEATURE_ATOMIC_WRITE |		\
+>>>>>> +				F2FS_FEATURE_EXTRA_ATTR |		\
+>>>>>> +				F2FS_FEATURE_PRJQUOTA |			\
+>>>>>> +				F2FS_FEATURE_INODE_CHKSUM |		\
+>>>>>> +				F2FS_FEATURE_FLEXIBLE_INLINE_XATTR |	\
+>>>>>> +				F2FS_FEATURE_QUOTA_INO |		\
+>>>>>> +				F2FS_FEATURE_INODE_CRTIME |		\
+>>>>>> +				F2FS_FEATURE_LOST_FOUND |		\
+>>>>>> +				F2FS_FEATURE_VERITY |			\
+>>>>>> +				F2FS_FEATURE_SB_CHKSUM)
+>>>>>> +
+>>>>>>  #define __F2FS_HAS_FEATURE(raw_super, mask)				\
+>>>>>>  	((raw_super->feature & cpu_to_le32(mask)) != 0)
+>>>>>>  #define F2FS_HAS_FEATURE(sbi, mask)	__F2FS_HAS_FEATURE(sbi->raw_super, mask)
+>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>>> index 4f8e9ab48b26..57f2fc6d14ba 100644
+>>>>>> --- a/fs/f2fs/super.c
+>>>>>> +++ b/fs/f2fs/super.c
+>>>>>> @@ -2573,6 +2573,15 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
+>>>>>>  		return 1;
+>>>>>>  	}
+>>>>>>  
+>>>>>> +	/* check whether kernel supports all features */
+>>>>>> +	if (le32_to_cpu(raw_super->feature) & (~F2FS_ALL_FEATURES)) {
+>>>>>> +		f2fs_msg(sb, KERN_INFO,
+>>>>>> +			"Unsupported feature:%u: supported:%u",
+>>>>>> +			le32_to_cpu(raw_super->feature),
+>>>>>> +			F2FS_ALL_FEATURES);
+>>>>>> +		return 1;
+>>>>>> +	}
+>>>>>> +
+>>>>>>  	/* check CP/SIT/NAT/SSA/MAIN_AREA area boundary */
+>>>>>>  	if (sanity_check_area_boundary(sbi, bh))
+>>>>>>  		return 1;
+>>>>>> -- 
+>>>>>> 2.18.0.rc1
+>>> .
+>>>
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+>> .
+>>
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
+> 
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
