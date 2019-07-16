@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9722F6B097
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 22:46:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A9876B0C1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jul 2019 23:09:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hnULW-0006m3-5x; Tue, 16 Jul 2019 20:46:46 +0000
+	id 1hnUhD-0004eo-A3; Tue, 16 Jul 2019 21:09:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hnULV-0006lw-FC
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 20:46:45 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hnUh7-0004e4-NJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 21:09:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Of563W2gOUa6YeUVitbXM1FRja4ju4wwMgmeuQ+Udtw=; b=d9tztg8//UrIULwW89G5X1AVSF
- F2SqaUnbgW6xf2/IGqbFMl2M6OSgOTdgT4DxJdwI1bpfYkN8W23xk/zFmEE5RQyd/Zsy6w8req80X
- mdwJVVehqhiTD4EpYvFsMmOTWu0wt3nw/YMppS/pQJZ0iWVarKPwfyuUmm9DbzqZDfP8=;
+ bh=faqyzfYwiPdijwO2YfEvosOqCDTMljFU3hnZFx2wQRA=; b=FxU/JyG5dYg2lbxN4ghTvAhwi2
+ xF2Gv/PCb1OHv0HcRTViO2CpNZJh0ZiHnghSXUq8Xp/iDNvlU8No1cCLHlnhbsFo0FGXCKFGrux5K
+ yWTPP3M3TAlxzr9TP4rwcOF7CbZx3WpfhCtE19wKHLnTGptcY/SKSLyJwTKUXQ3twp1s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,49 +29,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Of563W2gOUa6YeUVitbXM1FRja4ju4wwMgmeuQ+Udtw=; b=inpwE4nf2mwDFCC/iZgj3TvUE8
- l55o+Nz+M92T8kDpOvzEUQsqKp9UbwwmXtqdpoGGxB8FU6XO+048OvkrQwX4nK4yHe9TKnmBpravG
- KKoUax+SFsM2UrGU9u6PxTupb7n4ZQAsr76sDUdst0GtLTNm1m4kFvZW/v9hNWbdzxf8=;
+ bh=faqyzfYwiPdijwO2YfEvosOqCDTMljFU3hnZFx2wQRA=; b=YRdMEzip7BhvEmPspYcBZKWN2d
+ CKipoEyNAAy/E0tA2bXzlcIXDTO2tF7IBGZOLyn5Y68a4OWlCTOL7dfzd+249oSFb+AmdXKImZVwk
+ YBZQL+p7R1hZ6G+1KPskFfqy/hi33k9HlogySVrinQwB/avKOPwiS3ACHpbBXJNmZfs8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hnULQ-004DgG-OK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 20:46:45 +0000
+ id 1hnUh6-004F7q-Dq
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Jul 2019 21:09:05 +0000
 Received: from localhost (unknown [104.132.1.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EFE272145D;
- Tue, 16 Jul 2019 20:46:34 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B8E4220659;
+ Tue, 16 Jul 2019 21:08:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1563309995;
- bh=hf1kHilRo2b86FKLdptr/FM84ElXk/6EL+6g3vp0Hjg=;
+ s=default; t=1563311338;
+ bh=7KNSonGOd9H7F3nw4Zc8EUTvjNPIsZ0hB+GL18EMIsQ=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RRTxJiHNC+o/fh1xF0OFHblVJbQAxWfGn2Wd23Cj+bdMMwzaUlxNJ+PDUZaHsDfMG
- xOU2DsQcoVXmqjc96P5VB1FRo8b5cMJdrxjFh8smu4X7GUdGtANYCuaoAR2/XsCP76
- 6AWgXNkNkpVr9qBRwoON4W+Sol6kLtmV71Q1QUrY=
-Date: Tue, 16 Jul 2019 13:46:34 -0700
+ b=PEjOXv/90EMYS/CPlFFxAxNR8cCe+sFoXehhoU2/uHfSNGqpD/Xwd2a+ZoHAXGJHe
+ CF53Z58lXOJZEK/a7Nw2qm6vgtnpqQodRnVPPzywm2DvM6QYO2VovOFjql/t6xEr7B
+ gIN56W0iLCG9kU+kjA+KhTnWAICyVV3TIW0s0BgE=
+Date: Tue, 16 Jul 2019 14:08:57 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20190716204634.GB99092@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190711204556.120381-1-drosen@google.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20190716210857.GA5347@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190626094813.40517-1-yuchao0@huawei.com>
+ <7a2e35af-50ce-689d-218a-44b106408d5b@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190711204556.120381-1-drosen@google.com>
+In-Reply-To: <7a2e35af-50ce-689d-218a-44b106408d5b@kernel.org>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hnULQ-004DgG-OK
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: include charset encoding
- information in the superblock
+X-Headers-End: 1hnUh6-004F7q-Dq
+Subject: Re: [f2fs-dev] [PATCH v2] fsck.f2fs: write checkpoint with OPU mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,240 +87,183 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, kernel-team@android.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Daniel,
+On 07/16, Chao Yu wrote:
+> Ping,
 
-Could you please rebase you patch set?
-e.g., f2fs_msg() was replaced with f2fs_err|info|...
+It seems this is still breaking the tests. At some point on fault/power tests,
+I hit fsck is stopped since it's missing one NAT node.
 
-On 07/11, Daniel Rosenberg wrote:
-> Add charset encoding to f2fs to support casefolding. It is modeled after
-> the same feature introduced in commit c83ad55eaa91 ("ext4: include charset
-> encoding information in the superblock")
 > 
-> Currently this is not compatible with encryption, similar to the current
-> ext4 imlpementation. This will change in the future.
-> 
-> >From the ext4 patch:
-> """
-> The s_encoding field stores a magic number indicating the encoding
-> format and version used globally by file and directory names in the
-> filesystem.  The s_encoding_flags defines policies for using the charset
-> encoding, like how to handle invalid sequences.  The magic number is
-> mapped to the exact charset table, but the mapping is specific to ext4.
-> Since we don't have any commitment to support old encodings, the only
-> encoding I am supporting right now is utf8-12.1.0.
-> 
-> The current implementation prevents the user from enabling encoding and
-> per-directory encryption on the same filesystem at the same time.  The
-> incompatibility between these features lies in how we do efficient
-> directory searches when we cannot be sure the encryption of the user
-> provided fname will match the actual hash stored in the disk without
-> decrypting every directory entry, because of normalization cases.  My
-> quickest solution is to simply block the concurrent use of these
-> features for now, and enable it later, once we have a better solution.
-> """
-> 
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> ---
->  fs/f2fs/f2fs.h          |  6 +++
->  fs/f2fs/super.c         | 81 +++++++++++++++++++++++++++++++++++++++++
->  include/linux/f2fs_fs.h |  9 ++++-
->  3 files changed, 95 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 06b89a9862ab2..0e101f699eccd 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -150,6 +150,7 @@ struct f2fs_mount_info {
->  #define F2FS_FEATURE_LOST_FOUND		0x0200
->  #define F2FS_FEATURE_VERITY		0x0400	/* reserved */
->  #define F2FS_FEATURE_SB_CHKSUM		0x0800
-> +#define F2FS_FEATURE_CASEFOLD		0x1000
->  
->  #define __F2FS_HAS_FEATURE(raw_super, mask)				\
->  	((raw_super->feature & cpu_to_le32(mask)) != 0)
-> @@ -1162,6 +1163,10 @@ struct f2fs_sb_info {
->  	int valid_super_block;			/* valid super block no */
->  	unsigned long s_flag;				/* flags for sbi */
->  	struct mutex writepages;		/* mutex for writepages() */
-> +#ifdef CONFIG_UNICODE
-> +	struct unicode_map *s_encoding;
-> +	__u16 s_encoding_flags;
-> +#endif
->  
->  #ifdef CONFIG_BLK_DEV_ZONED
->  	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
-> @@ -3565,6 +3570,7 @@ F2FS_FEATURE_FUNCS(quota_ino, QUOTA_INO);
->  F2FS_FEATURE_FUNCS(inode_crtime, INODE_CRTIME);
->  F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
->  F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
-> +F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
->  
->  #ifdef CONFIG_BLK_DEV_ZONED
->  static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 6b959bbb336a3..a346f5a01370b 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -23,6 +23,7 @@
->  #include <linux/f2fs_fs.h>
->  #include <linux/sysfs.h>
->  #include <linux/quota.h>
-> +#include <linux/unicode.h>
->  
->  #include "f2fs.h"
->  #include "node.h"
-> @@ -211,6 +212,36 @@ void f2fs_msg(struct super_block *sb, const char *level, const char *fmt, ...)
->  	va_end(args);
->  }
->  
-> +#ifdef CONFIG_UNICODE
-> +static const struct f2fs_sb_encodings {
-> +	__u16 magic;
-> +	char *name;
-> +	char *version;
-> +} f2fs_sb_encoding_map[] = {
-> +	{F2FS_ENC_UTF8_12_1, "utf8", "12.1.0"},
-> +};
-> +
-> +static int f2fs_sb_read_encoding(const struct f2fs_super_block *sb,
-> +				 const struct f2fs_sb_encodings **encoding,
-> +				 __u16 *flags)
-> +{
-> +	__u16 magic = le16_to_cpu(sb->s_encoding);
-> +	int i;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(f2fs_sb_encoding_map); i++)
-> +		if (magic == f2fs_sb_encoding_map[i].magic)
-> +			break;
-> +
-> +	if (i >= ARRAY_SIZE(f2fs_sb_encoding_map))
-> +		return -EINVAL;
-> +
-> +	*encoding = &f2fs_sb_encoding_map[i];
-> +	*flags = le16_to_cpu(sb->s_encoding_flags);
-> +
-> +	return 0;
-> +}
-> +#endif
-> +
->  static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
->  {
->  	block_t limit = (sbi->user_block_count << 1) / 1000;
-> @@ -812,6 +843,13 @@ static int parse_options(struct super_block *sb, char *options)
->  		return -EINVAL;
->  	}
->  #endif
-> +#ifndef CONFIG_UNICODE
-> +	if (f2fs_sb_has_casefold(sbi)) {
-> +		f2fs_msg(sb, KERN_ERR,
-> +			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
-> +		return -EINVAL;
-> +	}
-> +#endif
->  
->  	if (F2FS_IO_SIZE_BITS(sbi) && !test_opt(sbi, LFS)) {
->  		f2fs_msg(sb, KERN_ERR,
-> @@ -1110,6 +1148,9 @@ static void f2fs_put_super(struct super_block *sb)
->  	destroy_percpu_info(sbi);
->  	for (i = 0; i < NR_PAGE_TYPE; i++)
->  		kvfree(sbi->write_io[i]);
-> +#ifdef CONFIG_UNICODE
-> +	utf8_unload(sbi->s_encoding);
-> +#endif
->  	kvfree(sbi);
->  }
->  
-> @@ -3157,6 +3198,42 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
->  	sb->s_maxbytes = sbi->max_file_blocks <<
->  				le32_to_cpu(raw_super->log_blocksize);
->  	sb->s_max_links = F2FS_LINK_MAX;
-> +#ifdef CONFIG_UNICODE
-> +	if (f2fs_sb_has_casefold(sbi) && !sbi->s_encoding) {
-> +		const struct f2fs_sb_encodings *encoding_info;
-> +		struct unicode_map *encoding;
-> +		__u16 encoding_flags;
-> +
-> +		if (f2fs_sb_has_encrypt(sbi)) {
-> +			f2fs_msg(sb, KERN_ERR,
-> +				 "Can't mount with encoding and encryption");
-> +			goto free_options;
-> +		}
-> +
-> +		if (f2fs_sb_read_encoding(raw_super, &encoding_info,
-> +					  &encoding_flags)) {
-> +			f2fs_msg(sb, KERN_ERR,
-> +				 "Encoding requested by superblock is unknown");
-> +			goto free_options;
-> +		}
-> +
-> +		encoding = utf8_load(encoding_info->version);
-> +		if (IS_ERR(encoding)) {
-> +			f2fs_msg(sb, KERN_ERR,
-> +				 "can't mount with superblock charset: %s-%s "
-> +				 "not supported by the kernel. flags: 0x%x.",
-> +				 encoding_info->name, encoding_info->version,
-> +				 encoding_flags);
-> +			goto free_options;
-> +		}
-> +		f2fs_msg(sb, KERN_INFO, "Using encoding defined by superblock: "
-> +			 "%s-%s with flags 0x%hx", encoding_info->name,
-> +			 encoding_info->version?:"\b", encoding_flags);
-> +
-> +		sbi->s_encoding = encoding;
-> +		sbi->s_encoding_flags = encoding_flags;
-> +	}
-> +#endif
->  
->  #ifdef CONFIG_QUOTA
->  	sb->dq_op = &f2fs_quota_operations;
-> @@ -3511,6 +3588,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
->  free_bio_info:
->  	for (i = 0; i < NR_PAGE_TYPE; i++)
->  		kvfree(sbi->write_io[i]);
-> +
-> +#ifdef CONFIG_UNICODE
-> +	utf8_unload(sbi->s_encoding);
-> +#endif
->  free_options:
->  #ifdef CONFIG_QUOTA
->  	for (i = 0; i < MAXQUOTAS; i++)
-> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-> index 65559900d4d76..b7c9c7f721339 100644
-> --- a/include/linux/f2fs_fs.h
-> +++ b/include/linux/f2fs_fs.h
-> @@ -36,6 +36,11 @@
->  
->  #define F2FS_MAX_QUOTAS		3
->  
-> +#define F2FS_ENC_UTF8_12_1	1
-> +#define F2FS_ENC_STRICT_MODE_FL	(1 << 0)
-> +#define f2fs_has_strict_mode(sbi) \
-> +	(sbi->s_encoding_flags & F2FS_ENC_STRICT_MODE_FL)
-> +
->  #define F2FS_IO_SIZE(sbi)	(1 << F2FS_OPTION(sbi).write_io_size_bits) /* Blocks */
->  #define F2FS_IO_SIZE_KB(sbi)	(1 << (F2FS_OPTION(sbi).write_io_size_bits + 2)) /* KB */
->  #define F2FS_IO_SIZE_BYTES(sbi)	(1 << (F2FS_OPTION(sbi).write_io_size_bits + 12)) /* B */
-> @@ -109,7 +114,9 @@ struct f2fs_super_block {
->  	struct f2fs_device devs[MAX_DEVICES];	/* device list */
->  	__le32 qf_ino[F2FS_MAX_QUOTAS];	/* quota inode numbers */
->  	__u8 hot_ext_count;		/* # of hot file extension */
-> -	__u8 reserved[310];		/* valid reserved region */
-> +	__le16  s_encoding;		/* Filename charset encoding */
-> +	__le16  s_encoding_flags;	/* Filename charset encoding flags */
-> +	__u8 reserved[306];		/* valid reserved region */
->  	__le32 crc;			/* checksum of superblock */
->  } __packed;
->  
-> -- 
-> 2.22.0.410.gd8fdbe21b5-goog
+> On 2019-6-26 17:48, Chao Yu wrote:
+> > This original patch was from Weichao Guo.
+> > 
+> > We may encounter both checkpoints invalid in such a case:
+> > 1. kernel writes CP A;
+> > 2. power-cut when kernel writes CP B, then CP B is corrupted;
+> > 3. fsck: load CP A, fix meta/data;
+> > 4. power-cut when fsck writes CP A in-place, then CP A is corrupted too;
+> > 
+> > To avoid both checkpoints being invalid, this patch changes to duplicate
+> > valid checkpoint to mirror position first, and then, write fixed checkpoint
+> > to CP #0 position.
+> > 
+> > This can make sure that, while fsck repairing, even there is sudden
+> > power-cut, last valid checkpoint can be kept in CP #1 position.
+> > 
+> > Signed-off-by: Weichao Guo <guoweichao@huawei.com>
+> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > ---
+> > v2:
+> > - duplicate valid CP to mirror position, update CP on #0 position.
+> >  fsck/f2fs.h  |  2 ++
+> >  fsck/fsck.c  | 14 ++++++++++++--
+> >  fsck/fsck.h  |  2 ++
+> >  fsck/mount.c | 51 ++++++++++++++++++++++++++++++++++++++++++++++++++-
+> >  4 files changed, 66 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+> > index 4dc6698..52e68ec 100644
+> > --- a/fsck/f2fs.h
+> > +++ b/fsck/f2fs.h
+> > @@ -195,6 +195,8 @@ struct f2fs_sb_info {
+> >  
+> >  	unsigned int cur_victim_sec;            /* current victim section num */
+> >  	u32 free_segments;
+> > +
+> > +	int cp_backuped;			/* backup valid checkpoint */
+> >  };
+> >  
+> >  static inline struct f2fs_super_block *F2FS_RAW_SUPER(struct f2fs_sb_info *sbi)
+> > diff --git a/fsck/fsck.c b/fsck/fsck.c
+> > index 8953ca1..aee45d9 100644
+> > --- a/fsck/fsck.c
+> > +++ b/fsck/fsck.c
+> > @@ -2127,6 +2127,16 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+> >  	ASSERT(ret >= 0);
+> >  }
+> >  
+> > +static void fix_checkpoints(struct f2fs_sb_info *sbi)
+> > +{
+> > +	/* copy valid checkpoint to its mirror position */
+> > +	duplicate_checkpoint(sbi);
+> > +
+> > +	/* repair checkpoint at CP #0 position */
+> > +	sbi->cur_cp = 1;
+> > +	fix_checkpoint(sbi);
+> > +}
+> > +
+> >  int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
+> >  {
+> >  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+> > @@ -2777,10 +2787,10 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+> >  			rewrite_sit_area_bitmap(sbi);
+> >  			fix_curseg_info(sbi);
+> >  			fix_checksum(sbi);
+> > -			fix_checkpoint(sbi);
+> > +			fix_checkpoints(sbi);
+> >  		} else if (is_set_ckpt_flags(cp, CP_FSCK_FLAG) ||
+> >  			is_set_ckpt_flags(cp, CP_QUOTA_NEED_FSCK_FLAG)) {
+> > -			write_checkpoint(sbi);
+> > +			write_checkpoints(sbi);
+> >  		}
+> >  	}
+> >  	return ret;
+> > diff --git a/fsck/fsck.h b/fsck/fsck.h
+> > index d38e8de..3699b35 100644
+> > --- a/fsck/fsck.h
+> > +++ b/fsck/fsck.h
+> > @@ -191,7 +191,9 @@ extern void flush_sit_entries(struct f2fs_sb_info *);
+> >  extern void move_curseg_info(struct f2fs_sb_info *, u64, int);
+> >  extern void write_curseg_info(struct f2fs_sb_info *);
+> >  extern int find_next_free_block(struct f2fs_sb_info *, u64 *, int, int);
+> > +extern void duplicate_checkpoint(struct f2fs_sb_info *);
+> >  extern void write_checkpoint(struct f2fs_sb_info *);
+> > +extern void write_checkpoints(struct f2fs_sb_info *);
+> >  extern void update_superblock(struct f2fs_super_block *, int);
+> >  extern void update_data_blkaddr(struct f2fs_sb_info *, nid_t, u16, block_t);
+> >  extern void update_nat_blkaddr(struct f2fs_sb_info *, nid_t, nid_t, block_t);
+> > diff --git a/fsck/mount.c b/fsck/mount.c
+> > index 60e0e4a..89f538b 100644
+> > --- a/fsck/mount.c
+> > +++ b/fsck/mount.c
+> > @@ -2229,7 +2229,7 @@ void flush_journal_entries(struct f2fs_sb_info *sbi)
+> >  	int n_sits = flush_sit_journal_entries(sbi);
+> >  
+> >  	if (n_nats || n_sits)
+> > -		write_checkpoint(sbi);
+> > +		write_checkpoints(sbi);
+> >  }
+> >  
+> >  void flush_sit_entries(struct f2fs_sb_info *sbi)
+> > @@ -2478,6 +2478,45 @@ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+> >  	free(nat_block);
+> >  }
+> >  
+> > +void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+> > +{
+> > +	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+> > +	unsigned long long dst, src;
+> > +	void *buf;
+> > +	unsigned int seg_size = 1 << get_sb(log_blocks_per_seg);
+> > +	int ret;
+> > +
+> > +	if (sbi->cp_backuped)
+> > +		return;
+> > +
+> > +	buf = malloc(F2FS_BLKSIZE * seg_size);
+> > +	ASSERT(buf);
+> > +
+> > +	if (sbi->cur_cp == 1) {
+> > +		src = get_sb(cp_blkaddr);
+> > +		dst = src + seg_size;
+> > +	} else {
+> > +		dst = get_sb(cp_blkaddr);
+> > +		src = dst + seg_size;
+> > +	}
+> > +
+> > +	ret = dev_read(buf, src << F2FS_BLKSIZE_BITS, seg_size);
+> > +	ASSERT(ret >= 0);
+> > +
+> > +	ret = dev_write(buf, dst << F2FS_BLKSIZE_BITS, seg_size);
+> > +	ASSERT(ret >= 0);
+> > +
+> > +	free(buf);
+> > +
+> > +	ret = f2fs_fsync_device();
+> > +	ASSERT(ret >= 0);
+> > +
+> > +	sbi->cp_backuped = 1;
+> > +
+> > +	MSG(0, "Info: Duplicate valid checkpoint to mirror position "
+> > +		"%llu -> %llu\n", src, dst);
+> > +}
+> > +
+> >  void write_checkpoint(struct f2fs_sb_info *sbi)
+> >  {
+> >  	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
+> > @@ -2557,6 +2596,16 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+> >  	ASSERT(ret >= 0);
+> >  }
+> >  
+> > +void write_checkpoints(struct f2fs_sb_info *sbi)
+> > +{
+> > +	/* copy valid checkpoint to its mirror position */
+> > +	duplicate_checkpoint(sbi);
+> > +
+> > +	/* repair checkpoint at CP #0 position */
+> > +	sbi->cur_cp = 1;
+> > +	write_checkpoint(sbi);
+> > +}
+> > +
+> >  void build_nat_area_bitmap(struct f2fs_sb_info *sbi)
+> >  {
+> >  	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
+> > 
 
 
 _______________________________________________
