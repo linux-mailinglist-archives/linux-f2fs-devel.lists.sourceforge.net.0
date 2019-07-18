@@ -2,87 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCB5A6C4B7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jul 2019 03:50:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE57F6C4FE
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jul 2019 04:39:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hnvYa-0005Jb-5i; Thu, 18 Jul 2019 01:50:04 +0000
+	id 1hnwKe-0007Uu-5D; Thu, 18 Jul 2019 02:39:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hnvYY-0005J6-Ge
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 01:50:02 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hnwKd-0007Ug-8q
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:39:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C1Lo7jSktOrnYDUNIRV83Z087w8gCLwA1orPLYFPYX8=; b=lhDV5YHfaA0/D/8fQ0BIGF3MF6
- sZ/BsVGWQq9lBX4OCUJxD2NhstrVUNL+y6FzcocBp6wBGKT8saBvZNglS2TL6eCS51viTMJQmAQap
- PiyNkM9KzvXJJ/5X6cWuoOdBXOC3CQJgk4n7R4Ujq76lB3kVpTH6EReH7fHrd4si8N24=;
+ bh=mIvSl0sY5UwcyAKOjxHdbya04QcuevMW9VQAkslc/R4=; b=H9MKLnTOGQIS4fmiIYYdRdUVIx
+ 1u6WuINfAwQ2FWnV5INScGfUmWLRSQqJoCAV9rDEhR2aIUkjYziSnrVJQ/idiVyIHtMPGMWJFxbX4
+ qF1CnZkGJ/DOCVXEU0KShZ8gjkhsXtP4ZD7fwTM0wr78gph6aEfYaOE3GnzBRCeJb5pA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C1Lo7jSktOrnYDUNIRV83Z087w8gCLwA1orPLYFPYX8=; b=Ii9sKhCMOs7aqdqWUoD8xQLYdX
- YnuSdH+4ZbhDFjKJgToJcgHQXhdemFHfRAwJ7HUYyPjFxX+CwIqDVXTnJj8kilkLQTVS7Ht2c/NQ2
- AVDzpRvOxhuBP9/bdErHY2Lntznok1KWapJRH7gQvYyMncRMiwaiQwNkzCUcAMWpcUEA=;
-Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=mIvSl0sY5UwcyAKOjxHdbya04QcuevMW9VQAkslc/R4=; b=g+0orxdkDe4wiwy2KqteDdtbf9
+ HThi6KG0uoW8Ma4BttKuNOH0chWBL2qGr/m/ZN1jUuacIARbCKSr0JKQYU3FlRvAFo1u00E4dr6J1
+ yzBy1qxU5stCxPP24epshOynkkLIZ7yqNT9a/enove1/WsjSWGdW3A226zhLOYyJ3/K8=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hnvYX-004tll-5l
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 01:50:02 +0000
-Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 86E6C28753
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 18 Jul 2019 01:49:55 +0000 (UTC)
-Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id 7A2DA287A0; Thu, 18 Jul 2019 01:49:55 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
- pdx-wl-mail.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
- NO_RELAYS autolearn=ham version=3.3.1
-From: bugzilla-daemon@bugzilla.kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 18 Jul 2019 01:49:54 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: midwinter1993@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-204193-202145-xxQ765rybK@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-204193-202145@https.bugzilla.kernel.org/>
-References: <bug-204193-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1hnwKa-005pOD-Lz
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:39:43 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 9EE5BB0F0EA6FD46A821;
+ Thu, 18 Jul 2019 10:39:33 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 18 Jul
+ 2019 10:39:30 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>
+References: <20190718013718.70335-1-jaegeuk@kernel.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <8049131e-4200-83c8-516a-8fa03a238e29@huawei.com>
+Date: Thu, 18 Jul 2019 10:39:27 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20190718013718.70335-1-jaegeuk@kernel.org>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hnvYX-004tll-5l
-Subject: [f2fs-dev] [Bug 204193] BUG: KASAN: null-ptr-deref in
- f2fs_write_end_io+0x215/0x650
+X-Headers-End: 1hnwKa-005pOD-Lz
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to read source block before
+ invalidating it
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,62 +79,122 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=204193
+On 2019/7/18 9:37, Jaegeuk Kim wrote:
+> f2fs_allocate_data_block() invalidates old block address and enable new block
+> address. Then, if we try to read old block by f2fs_submit_page_bio(), it will
+> give WARN due to reading invalid blocks.
+> 
+> Let's make the order sanely back.
+> 
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  fs/f2fs/gc.c | 57 ++++++++++++++++++++++++++++------------------------
+>  1 file changed, 31 insertions(+), 26 deletions(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 6691f526fa40..35c5453ab874 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -740,6 +740,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	block_t newaddr;
+>  	int err = 0;
+>  	bool lfs_mode = test_opt(fio.sbi, LFS);
+> +	bool submitted = false;
+>  
+>  	/* do not read out */
+>  	page = f2fs_grab_cache_page(inode->i_mapping, bidx, false);
+> @@ -796,6 +797,20 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	if (lfs_mode)
+>  		down_write(&fio.sbi->io_order_lock);
+>  
+> +	mpage = f2fs_grab_cache_page(META_MAPPING(fio.sbi),
+> +			fio.old_blkaddr, false);
+> +	if (!mpage)
+> +		goto put_out;
 
---- Comment #2 from midwinter1993@gmail.com ---
-(In reply to Chao Yu from comment #1)
-> How to reproduce this, remount to change io_bits option?
+Needs to release io_order_lock.
 
-It's not triggered by remount, the following script manifests it (note that
-this bug does not occur deterministically, you may execute it repeatedly):
+> +
+> +	if (!PageUptodate(mpage)) {
+> +		err = f2fs_submit_page_bio(&fio);
+> +		if (err) {
+> +			f2fs_put_page(mpage, 1);
+> +			goto put_out;
 
+Ditto.
 
-```
-#!/bin/bash
+Thanks,
 
-DISK=bingo.img
-MOUNT_DIR=/root/mnt
+> +		}
+> +		submitted = true;
+> +	}
+> +
+>  	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
+>  					&sum, CURSEG_COLD_DATA, NULL, false);
+>  
+> @@ -803,44 +818,34 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
+>  	if (!fio.encrypted_page) {
+>  		err = -ENOMEM;
+> -		goto recover_block;
+> -	}
+> -
+> -	mpage = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
+> -					fio.old_blkaddr, FGP_LOCK, GFP_NOFS);
+> -	if (mpage) {
+> -		bool updated = false;
+> -
+> -		if (PageUptodate(mpage)) {
+> -			memcpy(page_address(fio.encrypted_page),
+> -					page_address(mpage), PAGE_SIZE);
+> -			updated = true;
+> -		}
+>  		f2fs_put_page(mpage, 1);
+> -		invalidate_mapping_pages(META_MAPPING(fio.sbi),
+> -					fio.old_blkaddr, fio.old_blkaddr);
+> -		if (updated)
+> -			goto write_page;
+> +		goto recover_block;
+>  	}
+>  
+> -	err = f2fs_submit_page_bio(&fio);
+> -	if (err)
+> -		goto put_page_out;
+> -
+> -	/* write page */
+> -	lock_page(fio.encrypted_page);
+> +	if (!submitted)
+> +		goto write_page;
+>  
+> -	if (unlikely(fio.encrypted_page->mapping != META_MAPPING(fio.sbi))) {
+> +	/* read source block */
+> +	lock_page(mpage);
+> +	if (unlikely(mpage->mapping != META_MAPPING(fio.sbi))) {
+>  		err = -EIO;
+> +		f2fs_put_page(mpage, 1);
+>  		goto put_page_out;
+>  	}
+> -	if (unlikely(!PageUptodate(fio.encrypted_page))) {
+> +	if (unlikely(!PageUptodate(mpage))) {
+>  		err = -EIO;
+> +		f2fs_put_page(mpage, 1);
+>  		goto put_page_out;
+>  	}
+> -
+>  write_page:
+> +	/* write target block */
+>  	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
+> +	memcpy(page_address(fio.encrypted_page),
+> +				page_address(mpage), PAGE_SIZE);
+> +	f2fs_put_page(mpage, 1);
+> +	invalidate_mapping_pages(META_MAPPING(fio.sbi),
+> +				fio.old_blkaddr, fio.old_blkaddr);
+> +
+>  	set_page_dirty(fio.encrypted_page);
+>  	if (clear_page_dirty_for_io(fio.encrypted_page))
+>  		dec_page_count(fio.sbi, F2FS_DIRTY_META);
+> 
 
-dd if=/dev/zero of=$DISK bs=1M count=180
-mkfs.f2fs -a 1 -o 9 -t 0 -z 10 -f -q $DISK
-
-
-mkdir -pv $MOUNT_DIR
-
-# A little bit long options, I have not reduced it yet.
-mount $DISK $MOUNT_DIR -o
-"background_gc=on,disable_roll_forward,no_heap,nouser_xattr,active_logs=2,disable_ext_identify,inline_dentry,noinline_dentry,flush_merge,nobarrier,noextent_cache,noinline_data,checkpoint=disable,usrquota,grpquota,quota,noquota,alloc_mode=reuse,fsync_mode=posix"
-
-mkdir -pv $MOUNT_DIR/a
-
-new_dir="$MOUNT_DIR/a"
-for (( i = 0; i < 512; i++ )); do
-    name=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 1`
-    new_dir="$new_dir/$name"
-    mkdir $new_dir
-done
-
-
-mv "$MOUNT_DIR/a" "$MOUNT_DIR/b1"
-
-mkdir -pv "$MOUNT_DIR/b1/b2/b3/b4/b5"
-
-sync
-
-for (( i = 0; i < 4096; i++ )); do
-    name=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10`
-    mkdir $MOUNT_DIR/b1/b2/b3/b4/b5/$name
-done
-
-umount $MOUNT_DIR
-```
-
-Sorry that I didn't provide the script before because it's tedious for me to
-reduce it. :(
-
--- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
