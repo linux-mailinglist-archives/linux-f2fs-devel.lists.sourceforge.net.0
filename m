@@ -2,57 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE57F6C4FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jul 2019 04:39:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F09E6C513
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jul 2019 04:52:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hnwKe-0007Uu-5D; Thu, 18 Jul 2019 02:39:44 +0000
+	id 1hnwWm-0001Dd-6q; Thu, 18 Jul 2019 02:52:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hnwKd-0007Ug-8q
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:39:43 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hnwWl-0001DW-Em
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:52:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ MIME-Version:Date:Message-ID:References:To:From:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mIvSl0sY5UwcyAKOjxHdbya04QcuevMW9VQAkslc/R4=; b=H9MKLnTOGQIS4fmiIYYdRdUVIx
- 1u6WuINfAwQ2FWnV5INScGfUmWLRSQqJoCAV9rDEhR2aIUkjYziSnrVJQ/idiVyIHtMPGMWJFxbX4
- qF1CnZkGJ/DOCVXEU0KShZ8gjkhsXtP4ZD7fwTM0wr78gph6aEfYaOE3GnzBRCeJb5pA=;
+ bh=rz9vPjA2bu/yq9pZKKpF3zDy57hA9nCMyo+HOXPIVdc=; b=J7AJACpk4pEhIzonEL2STg80DI
+ 78jA4SwlafzcdaaFe92KdBrNpJqISL9MhBz4KjccmgSsCQPCV2LYD1Xotbj6eu1thiPG+99sjG9xy
+ VUKrBG+0WkjjtaNt/rKrq2SdnB+F63FG2NdWn5Er/A9ziFNVrLT38QMxH4gOdmSj+YL0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Message-ID:References:To:From:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mIvSl0sY5UwcyAKOjxHdbya04QcuevMW9VQAkslc/R4=; b=g+0orxdkDe4wiwy2KqteDdtbf9
- HThi6KG0uoW8Ma4BttKuNOH0chWBL2qGr/m/ZN1jUuacIARbCKSr0JKQYU3FlRvAFo1u00E4dr6J1
- yzBy1qxU5stCxPP24epshOynkkLIZ7yqNT9a/enove1/WsjSWGdW3A226zhLOYyJ3/K8=;
+ bh=rz9vPjA2bu/yq9pZKKpF3zDy57hA9nCMyo+HOXPIVdc=; b=DxGbF/XHB40r3DuSlAArmiEbJw
+ onJlTaSbJUPPterrohVKMsTxNN63skteGRUNTsDe89rHlaGB+GmzuXSGagMtJCgUSdC37UVOTVRGi
+ 3HV1yl2IBy96JRBG3zACPU8flZQM1KhMIBmijlVASAE3RaozPBYwTIUlAq1XD1jjaeKc=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hnwKa-005pOD-Lz
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:39:43 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 9EE5BB0F0EA6FD46A821;
- Thu, 18 Jul 2019 10:39:33 +0800 (CST)
+ id 1hnwWj-004vKT-5C
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jul 2019 02:52:15 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 1425861DD87321735634;
+ Thu, 18 Jul 2019 10:52:05 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 18 Jul
- 2019 10:39:30 +0800
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 18 Jul
+ 2019 10:52:00 +0800
+From: Chao Yu <yuchao0@huawei.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
  <linux-f2fs-devel@lists.sourceforge.net>
 References: <20190718013718.70335-1-jaegeuk@kernel.org>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <8049131e-4200-83c8-516a-8fa03a238e29@huawei.com>
-Date: Thu, 18 Jul 2019 10:39:27 +0800
+ <8049131e-4200-83c8-516a-8fa03a238e29@huawei.com>
+Message-ID: <c4c9cf7d-dfe7-09fa-1d62-ac6719cc623c@huawei.com>
+Date: Thu, 18 Jul 2019 10:51:57 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190718013718.70335-1-jaegeuk@kernel.org>
+In-Reply-To: <8049131e-4200-83c8-516a-8fa03a238e29@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -61,7 +62,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hnwKa-005pOD-Lz
+X-Headers-End: 1hnwWj-004vKT-5C
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to read source block before
  invalidating it
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -79,120 +80,134 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/7/18 9:37, Jaegeuk Kim wrote:
-> f2fs_allocate_data_block() invalidates old block address and enable new block
-> address. Then, if we try to read old block by f2fs_submit_page_bio(), it will
-> give WARN due to reading invalid blocks.
+On 2019/7/18 10:39, Chao Yu wrote:
+> On 2019/7/18 9:37, Jaegeuk Kim wrote:
+>> f2fs_allocate_data_block() invalidates old block address and enable new block
+>> address. Then, if we try to read old block by f2fs_submit_page_bio(), it will
+>> give WARN due to reading invalid blocks.
+>>
+>> Let's make the order sanely back.
+>>
+>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>> ---
+>>  fs/f2fs/gc.c | 57 ++++++++++++++++++++++++++++------------------------
+>>  1 file changed, 31 insertions(+), 26 deletions(-)
+>>
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index 6691f526fa40..35c5453ab874 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -740,6 +740,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>>  	block_t newaddr;
+>>  	int err = 0;
+>>  	bool lfs_mode = test_opt(fio.sbi, LFS);
+>> +	bool submitted = false;
+>>  
+>>  	/* do not read out */
+>>  	page = f2fs_grab_cache_page(inode->i_mapping, bidx, false);
+>> @@ -796,6 +797,20 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>>  	if (lfs_mode)
+>>  		down_write(&fio.sbi->io_order_lock);
+>>  
+>> +	mpage = f2fs_grab_cache_page(META_MAPPING(fio.sbi),
+>> +			fio.old_blkaddr, false);
+>> +	if (!mpage)
+>> +		goto put_out;
 > 
-> Let's make the order sanely back.
+> Needs to release io_order_lock.
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->  fs/f2fs/gc.c | 57 ++++++++++++++++++++++++++++------------------------
->  1 file changed, 31 insertions(+), 26 deletions(-)
-> 
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 6691f526fa40..35c5453ab874 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -740,6 +740,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
->  	block_t newaddr;
->  	int err = 0;
->  	bool lfs_mode = test_opt(fio.sbi, LFS);
-> +	bool submitted = false;
->  
->  	/* do not read out */
->  	page = f2fs_grab_cache_page(inode->i_mapping, bidx, false);
-> @@ -796,6 +797,20 @@ static int move_data_block(struct inode *inode, block_t bidx,
->  	if (lfs_mode)
->  		down_write(&fio.sbi->io_order_lock);
->  
-> +	mpage = f2fs_grab_cache_page(META_MAPPING(fio.sbi),
-> +			fio.old_blkaddr, false);
-> +	if (!mpage)
-> +		goto put_out;
+>> +
+>> +	if (!PageUptodate(mpage)) {
+>> +		err = f2fs_submit_page_bio(&fio);
 
-Needs to release io_order_lock.
-
-> +
-> +	if (!PageUptodate(mpage)) {
-> +		err = f2fs_submit_page_bio(&fio);
-> +		if (err) {
-> +			f2fs_put_page(mpage, 1);
-> +			goto put_out;
-
-Ditto.
+It will load ciphertext into fio.page, looks not correct.
 
 Thanks,
 
-> +		}
-> +		submitted = true;
-> +	}
-> +
->  	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
->  					&sum, CURSEG_COLD_DATA, NULL, false);
->  
-> @@ -803,44 +818,34 @@ static int move_data_block(struct inode *inode, block_t bidx,
->  				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
->  	if (!fio.encrypted_page) {
->  		err = -ENOMEM;
-> -		goto recover_block;
-> -	}
-> -
-> -	mpage = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
-> -					fio.old_blkaddr, FGP_LOCK, GFP_NOFS);
-> -	if (mpage) {
-> -		bool updated = false;
-> -
-> -		if (PageUptodate(mpage)) {
-> -			memcpy(page_address(fio.encrypted_page),
-> -					page_address(mpage), PAGE_SIZE);
-> -			updated = true;
-> -		}
->  		f2fs_put_page(mpage, 1);
-> -		invalidate_mapping_pages(META_MAPPING(fio.sbi),
-> -					fio.old_blkaddr, fio.old_blkaddr);
-> -		if (updated)
-> -			goto write_page;
-> +		goto recover_block;
->  	}
->  
-> -	err = f2fs_submit_page_bio(&fio);
-> -	if (err)
-> -		goto put_page_out;
-> -
-> -	/* write page */
-> -	lock_page(fio.encrypted_page);
-> +	if (!submitted)
-> +		goto write_page;
->  
-> -	if (unlikely(fio.encrypted_page->mapping != META_MAPPING(fio.sbi))) {
-> +	/* read source block */
-> +	lock_page(mpage);
-> +	if (unlikely(mpage->mapping != META_MAPPING(fio.sbi))) {
->  		err = -EIO;
-> +		f2fs_put_page(mpage, 1);
->  		goto put_page_out;
->  	}
-> -	if (unlikely(!PageUptodate(fio.encrypted_page))) {
-> +	if (unlikely(!PageUptodate(mpage))) {
->  		err = -EIO;
-> +		f2fs_put_page(mpage, 1);
->  		goto put_page_out;
->  	}
-> -
->  write_page:
-> +	/* write target block */
->  	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
-> +	memcpy(page_address(fio.encrypted_page),
-> +				page_address(mpage), PAGE_SIZE);
-> +	f2fs_put_page(mpage, 1);
-> +	invalidate_mapping_pages(META_MAPPING(fio.sbi),
-> +				fio.old_blkaddr, fio.old_blkaddr);
-> +
->  	set_page_dirty(fio.encrypted_page);
->  	if (clear_page_dirty_for_io(fio.encrypted_page))
->  		dec_page_count(fio.sbi, F2FS_DIRTY_META);
+>> +		if (err) {
+>> +			f2fs_put_page(mpage, 1);
+>> +			goto put_out;
+> 
+> Ditto.
+> 
+> Thanks,
+> 
+>> +		}
+>> +		submitted = true;
+>> +	}
+>> +
+>>  	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
+>>  					&sum, CURSEG_COLD_DATA, NULL, false);
+>>  
+>> @@ -803,44 +818,34 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>>  				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
+>>  	if (!fio.encrypted_page) {
+>>  		err = -ENOMEM;
+>> -		goto recover_block;
+>> -	}
+>> -
+>> -	mpage = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
+>> -					fio.old_blkaddr, FGP_LOCK, GFP_NOFS);
+>> -	if (mpage) {
+>> -		bool updated = false;
+>> -
+>> -		if (PageUptodate(mpage)) {
+>> -			memcpy(page_address(fio.encrypted_page),
+>> -					page_address(mpage), PAGE_SIZE);
+>> -			updated = true;
+>> -		}
+>>  		f2fs_put_page(mpage, 1);
+>> -		invalidate_mapping_pages(META_MAPPING(fio.sbi),
+>> -					fio.old_blkaddr, fio.old_blkaddr);
+>> -		if (updated)
+>> -			goto write_page;
+>> +		goto recover_block;
+>>  	}
+>>  
+>> -	err = f2fs_submit_page_bio(&fio);
+>> -	if (err)
+>> -		goto put_page_out;
+>> -
+>> -	/* write page */
+>> -	lock_page(fio.encrypted_page);
+>> +	if (!submitted)
+>> +		goto write_page;
+>>  
+>> -	if (unlikely(fio.encrypted_page->mapping != META_MAPPING(fio.sbi))) {
+>> +	/* read source block */
+>> +	lock_page(mpage);
+>> +	if (unlikely(mpage->mapping != META_MAPPING(fio.sbi))) {
+>>  		err = -EIO;
+>> +		f2fs_put_page(mpage, 1);
+>>  		goto put_page_out;
+>>  	}
+>> -	if (unlikely(!PageUptodate(fio.encrypted_page))) {
+>> +	if (unlikely(!PageUptodate(mpage))) {
+>>  		err = -EIO;
+>> +		f2fs_put_page(mpage, 1);
+>>  		goto put_page_out;
+>>  	}
+>> -
+>>  write_page:
+>> +	/* write target block */
+>>  	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
+>> +	memcpy(page_address(fio.encrypted_page),
+>> +				page_address(mpage), PAGE_SIZE);
+>> +	f2fs_put_page(mpage, 1);
+>> +	invalidate_mapping_pages(META_MAPPING(fio.sbi),
+>> +				fio.old_blkaddr, fio.old_blkaddr);
+>> +
+>>  	set_page_dirty(fio.encrypted_page);
+>>  	if (clear_page_dirty_for_io(fio.encrypted_page))
+>>  		dec_page_count(fio.sbi, F2FS_DIRTY_META);
+>>
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
 > 
 
 
