@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 342686DAB1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:03:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A1D26DAB3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:04:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hoK7f-0002qQ-Vp; Fri, 19 Jul 2019 04:03:55 +0000
+	id 1hoK7j-0002jZ-Su; Fri, 19 Jul 2019 04:03:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hoK7f-0002qE-2b
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:03:55 +0000
+ (envelope-from <sashal@kernel.org>) id 1hoK7h-0002jJ-Du
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:03:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GSFcd+jQ2UeJAmOpsBzqpR5G9IiFO+cFAS/NUnO8RHA=; b=Ikqe5szB+kMj37y7xmq5BnMqB/
- xNIgUfEa09jfMIklruWjpfG25d0xhA5TLza0VYoTgm3+gzYhN0+uhYYzKQvnyAUe8EAH53utKabGZ
- 4t21RCpyTluAi17rr+Ewag+LQmQ5O7onb4IGOo53Mrh5C2JAiTp8TlqpSYRg0CHYN87I=;
+ bh=Hje7GY3MD9kSj47egMuG+7c7i5qtc4xNW5xSSrUiLf4=; b=JiqP/RX2DCyhiMeO8qjQ5ND9sz
+ jFpLjtw69kbtYBncPz2ZUj8oM7i9agduLIyzKIGjZZ4F9IryjQRuyJcW9NNnZYdpBeDHvRX++UeYx
+ N1bWPQLhrCjCL3NMgcH0w2HNoufEy+cR5UpT0H7WIXSirvH5xL7mnQn/8G8eEXg0qVWA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GSFcd+jQ2UeJAmOpsBzqpR5G9IiFO+cFAS/NUnO8RHA=; b=E0GQtNpxknfzlg/alsYPF2J+oF
- DngaSFvVU+XyXEm5U9pp9X1X8+ymE8IoBZx/pNxKxuVW1Y7SwgpsFBBjyCsuOgQYSmHgqoIF19W7D
- 5bJRpqhMaPin6g6Z8QFp9l0crm/FYyJEMhq7xDnVixvIYgR3+mzZf0SG9XymHl+xNx5Q=;
+ bh=Hje7GY3MD9kSj47egMuG+7c7i5qtc4xNW5xSSrUiLf4=; b=ejY33gJeDT1wTCxHAFATnuyYvY
+ FeF/DmOZgbdAjYnlLLk5RN0Tmj8uh13vD07Hj/nbzahN06RaR0mxyQLq2NC/Sm1gxaFVb/2Mx3o6M
+ SVeqOuBBaUzLVgKiF9cqlvdJgzc3cL9szzrAOqgkM5DzGGO9gpVrDl5cD+QDxKhp3P2o=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hoK7d-006ziP-Va
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:03:55 +0000
+ id 1hoK7f-007kd2-4w
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:03:56 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id AA24A21873;
- Fri, 19 Jul 2019 04:03:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D5EF321852;
+ Fri, 19 Jul 2019 04:03:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1563509028;
- bh=6t3CAgcV6XpPNrDoO83vKqpOcFu/CSfxU4by1Tzh9ak=;
+ s=default; t=1563509029;
+ bh=xJWM+tZIoapFv4GSwx0sVFSPmPqZfVRBUqtRa8P7R8M=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=C67vdf5t9Z+5JwrG1y3twhkSetpI6EVw3xCtdQmcE7Trf5CVxTneLRZoB6rkxkBQb
- HbtdGkEetDPQavYNjmcM6kj+tABVi6YLfjBrIGUVKoKxPLXRVb+9bk/m+VrsWiWZxT
- k0zOabNveYOB2fr8BZ66m8dgPHd+oveUrvAOrLWc=
+ b=HApRB9/gQQkXuywsTkwBsZnXrZn/zcLA7WzWUhPBXG6nhIJpWiPcUAQB1WMspeWeL
+ SDbjvgDytLfwEClJCRhR3udON5KQk5f9MepyTJZYesWQ1G6OazZEkTbKjHpUe2204x
+ WUoOKoX2KiZv4KT0LO40ONybMwPGIwYRFDjjXukA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 19 Jul 2019 00:00:53 -0400
-Message-Id: <20190719040246.15945-28-sashal@kernel.org>
+Date: Fri, 19 Jul 2019 00:00:54 -0400
+Message-Id: <20190719040246.15945-29-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190719040246.15945-1-sashal@kernel.org>
 References: <20190719040246.15945-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hoK7d-006ziP-Va
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 028/141] f2fs: Fix accounting for
- unusable blocks
+X-Headers-End: 1hoK7f-007kd2-4w
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 029/141] f2fs: Lower threshold for
+ disable_cp_again
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,60 +99,73 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daniel Rosenberg <drosen@google.com>
 
-[ Upstream commit a4c3ecaaadac5693f555cfef1c9eecf4c39df818 ]
+[ Upstream commit ae4ad7ea09d32ff1b6fb908ff12f8c1bd5241b29 ]
 
-Fixes possible underflows when dealing with unusable blocks.
+The existing threshold for allowable holes at checkpoint=disable time is
+too high. The OVP space contains reserved segments, which are always in
+the form of free segments. These must be subtracted from the OVP value.
+
+The current threshold is meant to be the maximum value of holes of a
+single type we can have and still guarantee that we can fill the disk
+without failing to find space for a block of a given type.
+
+If the disk is full, ignoring current reserved, which only helps us,
+the amount of unused blocks is equal to the OVP area. Of that, there
+are reserved segments, which must be free segments, and the rest of the
+ovp area, which can come from either free segments or holes. The maximum
+possible amount of holes is OVP-reserved.
+
+Now, consider the disk when mounting with checkpoint=disable.
+We must be able to fill all available free space with either data or
+node blocks. When we start with checkpoint=disable, holes are locked to
+their current type. Say we have H of one type of hole, and H+X of the
+other. We can fill H of that space with arbitrary typed blocks via SSR.
+For the remaining H+X blocks, we may not have any of a given block type
+left at all. For instance, if we were to fill the disk entirely with
+blocks of the type with fewer holes, the H+X blocks of the opposite type
+would not be used. If H+X > OVP-reserved, there would be more holes than
+could possibly exist, and we would have failed to find a suitable block
+earlier on, leading to a crash in update_sit_entry.
+
+If H+X <= OVP-reserved, then the holes end up effectively masked by the OVP
+region in this case.
 
 Signed-off-by: Daniel Rosenberg <drosen@google.com>
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+ fs/f2fs/segment.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 2ba2478d0663..f1157d5c62bb 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1761,8 +1761,12 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 
- 	if (!__allow_reserved_blocks(sbi, inode, true))
- 		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
--	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
--		avail_user_block_count -= sbi->unusable_block_count;
-+	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-+		if (avail_user_block_count > sbi->unusable_block_count)
-+			avail_user_block_count -= sbi->unusable_block_count;
-+		else
-+			avail_user_block_count = 0;
-+	}
- 	if (unlikely(sbi->total_valid_block_count > avail_user_block_count)) {
- 		diff = sbi->total_valid_block_count - avail_user_block_count;
- 		if (diff > *count)
-@@ -1958,7 +1962,7 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
- 					struct inode *inode, bool is_inode)
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index e9778f06ac0b..60373930b1b7 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -876,7 +876,9 @@ void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi)
+ int f2fs_disable_cp_again(struct f2fs_sb_info *sbi)
  {
- 	block_t	valid_block_count;
--	unsigned int valid_node_count;
-+	unsigned int valid_node_count, user_block_count;
- 	int err;
- 
- 	if (is_inode) {
-@@ -1985,10 +1989,11 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
- 
- 	if (!__allow_reserved_blocks(sbi, inode, false))
- 		valid_block_count += F2FS_OPTION(sbi).root_reserved_blocks;
-+	user_block_count = sbi->user_block_count;
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
--		valid_block_count += sbi->unusable_block_count;
-+		user_block_count -= sbi->unusable_block_count;
- 
--	if (unlikely(valid_block_count > sbi->user_block_count)) {
-+	if (unlikely(valid_block_count > user_block_count)) {
- 		spin_unlock(&sbi->stat_lock);
- 		goto enospc;
+ 	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+-	block_t ovp = overprovision_segments(sbi) << sbi->log_blocks_per_seg;
++	int ovp_hole_segs =
++		(overprovision_segments(sbi) - reserved_segments(sbi));
++	block_t ovp_holes = ovp_hole_segs << sbi->log_blocks_per_seg;
+ 	block_t holes[2] = {0, 0};	/* DATA and NODE */
+ 	struct seg_entry *se;
+ 	unsigned int segno;
+@@ -891,10 +893,10 @@ int f2fs_disable_cp_again(struct f2fs_sb_info *sbi)
  	}
+ 	mutex_unlock(&dirty_i->seglist_lock);
+ 
+-	if (holes[DATA] > ovp || holes[NODE] > ovp)
++	if (holes[DATA] > ovp_holes || holes[NODE] > ovp_holes)
+ 		return -EAGAIN;
+ 	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED_QUICK) &&
+-		dirty_segments(sbi) > overprovision_segments(sbi))
++		dirty_segments(sbi) > ovp_hole_segs)
+ 		return -EAGAIN;
+ 	return 0;
+ }
 -- 
 2.20.1
 
