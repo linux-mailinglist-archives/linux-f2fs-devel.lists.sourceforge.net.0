@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D10BB6DAF1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:05:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32EC26DB14
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:06:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hoK99-0008D1-Ir; Fri, 19 Jul 2019 04:05:27 +0000
+	id 1hoKAG-0008H0-Or; Fri, 19 Jul 2019 04:06:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hoK98-0008Cu-Dz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:05:26 +0000
+ (envelope-from <sashal@kernel.org>) id 1hoKAF-0008Gs-F1
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:06:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t2gDgLWdotCFPTeDrawShwxm5/TqR5Gm7tpJIDz/X1o=; b=AnFhgDNms/4D+uMBGiktyEivWC
- WhqVjbA4OMpSxL2qyHMOozpQ0qopAizRU8Ad2AG0dtjpX8Cf6AW7KqwhtBSt8khTCJYvbnEFIIf6b
- xaWRT8BIlgNWidTAY1TnNXAPF4jrRKWZUCT0XBalFycVxcNjJ5fSeLqeiZbNFKe+tGvQ=;
+ bh=c/bqk0grNqXXUQl63kCIIwmpyO3mUQFONk3/e0PLCFs=; b=g8tWxgdCB9TPWvuuLAchwU4F2a
+ RqC/1jWc4/3Eo1wUWDYLEASqZybdt5m8TTGQr9ClQz7sLaBE9vn12Pfpb0uJJyZfaVHG/4N6ddTnY
+ I7RiuelDNzsndhPg6fH+IoQcdq0a3v4uXlV4mpnwfc86HdpkTKKKcklhVcvhvRk1A6Rs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t2gDgLWdotCFPTeDrawShwxm5/TqR5Gm7tpJIDz/X1o=; b=nHHn7ZY0cPum8xnwvA2l1x8Wkv
- Bj1R83YBYROTfIUSdPkHD5zZBHZgKf7fVt/JPkF+osJLPs36MYaowRuuMNxHcwz3/cywjNndIR5kk
- XoKpIAs9icS9COx62HHA+Mctlxu3WQG8TIErIjulzNvcmnag0QdUBW7qPir5tduUFxxI=;
+ bh=c/bqk0grNqXXUQl63kCIIwmpyO3mUQFONk3/e0PLCFs=; b=O8LDo65fpzyws1/HgYzGeupyxm
+ 0qOrLqOKGazX5fR3/tHeX263s4QzPmpZ64KY/p62jLUGt4ilHRnm88UpG4M9tbmKfqYcSuQKB3mxh
+ xdcAe6wjxCzOH0jesOQ8Eq0ihHz+0h/vEGSun67wv06Q0bBKxtpCTIbz/VPKNvO8F+Gc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hoK97-006cZe-85
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:05:26 +0000
+ id 1hoKAD-00701x-BX
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:06:35 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E3B5E218CA;
- Fri, 19 Jul 2019 04:05:18 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id E93D921873;
+ Fri, 19 Jul 2019 04:06:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1563509119;
- bh=kTlVAKLl0+iFmqj6xmLlcr3dlE6UW351pmPpSTZw25A=;
+ s=default; t=1563509187;
+ bh=VGy6lFesie5Y2wks7bI2KLQoH8zZh2Rm3W0CgeLR/6M=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jCn2UPA3rJi0QutSO16criIbxuE5h53c1qd7lZ787j0XhOXnuU5KbRL7Q4UZaZjKY
- arkWMINlJO/tLI9KwPzFfiDP03JwGdrLW1yh7vBtozu3Tgq1J80T8EMyh/RDWnpM19
- pkeENTMGl9ggLKSWv9kmbqedt5oa0El8NoyQaHy8=
+ b=2Ket/Juho05GQWXx7KuKFjHAXmdFXFHAn29y931GimmurdIwF3GT1TeeV5WbqTI8E
+ ruo3RYImATVM8mjxkhkhQICER/1/OUxPyweOucasEGEoA1RosDmiCc/tlCK2M0nRgZ
+ +VQ3G4h1+bNjGf9Pi3n58zQpLjYKJZZ96EH78W8M=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 19 Jul 2019 00:01:45 -0400
-Message-Id: <20190719040246.15945-80-sashal@kernel.org>
+Date: Fri, 19 Jul 2019 00:02:20 -0400
+Message-Id: <20190719040246.15945-115-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190719040246.15945-1-sashal@kernel.org>
 References: <20190719040246.15945-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hoK97-006cZe-85
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 080/141] f2fs: fix is_idle() check
- for discard type
+X-Headers-End: 1hoKAD-00701x-BX
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 115/141] f2fs: fix to avoid long
+ latency during umount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,64 +92,43 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net, Heng Xiao <heng.xiao@unisoc.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Sahitya Tummala <stummala@codeaurora.org>
+From: Heng Xiao <heng.xiao@unisoc.com>
 
-[ Upstream commit 56659ce838456c6f2315ce8a4bd686ac4b23e9d1 ]
+[ Upstream commit 6e0cd4a9dd4df1a0afcb454f1e654b5c80685913 ]
 
-The discard thread should issue upto dpolicy->max_requests at once
-and wait for all those discard requests at once it reaches
-dpolicy->max_requests. It should then sleep for dpolicy->min_interval
-timeout before issuing the next batch of discard requests. But in the
-current code of is_idle(), it checks for dcc_info->queued_discard and
-aborts issuing the discard batch of max_requests. This
-dcc_info->queued_discard will be true always once one discard command
-is issued.
+In umount, we give an constand time to handle pending discard, previously,
+in __issue_discard_cmd() we missed to check timeout condition in loop,
+result in delaying long time, fix it.
 
-It is thus resulting into this type of discard request pattern -
-
-- Issue discard request#1
-- is_idle() returns false, discard thread waits for request#1 and then
-  sleeps for min_interval 50ms.
-- Issue discard request#2
-- is_idle() returns false, discard thread waits for request#2 and then
-  sleeps for min_interval 50ms.
-- and so on for all other discard requests, assuming f2fs is idle w.r.t
-  other conditions.
-
-With this fix, the pattern will look like this -
-
-- Issue discard request#1
-- Issue discard request#2
-  and so on upto max_requests of 8
-- Issue discard request#8
-- wait for min_interval 50ms.
-
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Heng Xiao <heng.xiao@unisoc.com>
+[Chao Yu: add commit message]
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/segment.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f1157d5c62bb..1024550ad11a 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2194,7 +2194,7 @@ static inline bool is_idle(struct f2fs_sb_info *sbi, int type)
- 		get_pages(sbi, F2FS_DIO_WRITE))
- 		return false;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 60373930b1b7..c7ed3022c4e7 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1483,6 +1483,10 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+ 		list_for_each_entry_safe(dc, tmp, pend_list, list) {
+ 			f2fs_bug_on(sbi, dc->state != D_PREP);
  
--	if (SM_I(sbi) && SM_I(sbi)->dcc_info &&
-+	if (type != DISCARD_TIME && SM_I(sbi) && SM_I(sbi)->dcc_info &&
- 			atomic_read(&SM_I(sbi)->dcc_info->queued_discard))
- 		return false;
- 
++			if (dpolicy->timeout != 0 &&
++				f2fs_time_over(sbi, dpolicy->timeout))
++				break;
++
+ 			if (dpolicy->io_aware && i < dpolicy->io_aware_gran &&
+ 						!is_idle(sbi, DISCARD_TIME)) {
+ 				io_interrupted = true;
 -- 
 2.20.1
 
