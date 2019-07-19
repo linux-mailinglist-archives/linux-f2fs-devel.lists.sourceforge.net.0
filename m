@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32EC26DB14
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:06:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D6516DB15
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jul 2019 06:06:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hoKAG-0008H0-Or; Fri, 19 Jul 2019 04:06:36 +0000
+	id 1hoKAH-0003BS-QD; Fri, 19 Jul 2019 04:06:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hoKAF-0008Gs-F1
+ (envelope-from <sashal@kernel.org>) id 1hoKAF-0003BA-SK
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:06:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c/bqk0grNqXXUQl63kCIIwmpyO3mUQFONk3/e0PLCFs=; b=g8tWxgdCB9TPWvuuLAchwU4F2a
- RqC/1jWc4/3Eo1wUWDYLEASqZybdt5m8TTGQr9ClQz7sLaBE9vn12Pfpb0uJJyZfaVHG/4N6ddTnY
- I7RiuelDNzsndhPg6fH+IoQcdq0a3v4uXlV4mpnwfc86HdpkTKKKcklhVcvhvRk1A6Rs=;
+ bh=8cVkqywCai9EAjWZzaYG8d6Q5AtZJ9am82LrKZUwiOg=; b=TC6IAhBaeR3vzMOYrWy67ryesi
+ XoqkbDDBURAszNYR4cw6KZ3h6DjJCCD+Jb1mqUbthvdFRO/rOyxctC7MUgZ2i/JLUrXCVAarD2sH3
+ xghd1SHTVjhSsq9ItdovCMkRUlY6mQbZEohhotEkgk6iQCCJR38FtL8xY28QV8WTW1zc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c/bqk0grNqXXUQl63kCIIwmpyO3mUQFONk3/e0PLCFs=; b=O8LDo65fpzyws1/HgYzGeupyxm
- 0qOrLqOKGazX5fR3/tHeX263s4QzPmpZ64KY/p62jLUGt4ilHRnm88UpG4M9tbmKfqYcSuQKB3mxh
- xdcAe6wjxCzOH0jesOQ8Eq0ihHz+0h/vEGSun67wv06Q0bBKxtpCTIbz/VPKNvO8F+Gc=;
+ bh=8cVkqywCai9EAjWZzaYG8d6Q5AtZJ9am82LrKZUwiOg=; b=OZEj48JzgWDuWK3D7sow8u7p0n
+ lXZ8B97Bue0vjLvv+Lh7vMWJ2y22tvlkhsghzY1I8ynI0Kip7qaMecUdeinoe6Vu966Xx+azGO7Yx
+ V0Y1ygBftnpZ06YpTElHkN0vBuoWvHh+UattVJ2wXjjBKVf+X7IA3k0hPGHkpI1/IlkA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hoKAD-00701x-BX
+ id 1hoKAE-00702P-Eg
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jul 2019 04:06:35 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E93D921873;
- Fri, 19 Jul 2019 04:06:26 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 18F9D218B8;
+ Fri, 19 Jul 2019 04:06:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1563509187;
- bh=VGy6lFesie5Y2wks7bI2KLQoH8zZh2Rm3W0CgeLR/6M=;
+ s=default; t=1563509188;
+ bh=85WetMsxMRpZcfNMBz29cDCFeMiP1qHlRMMJCarKnCg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=2Ket/Juho05GQWXx7KuKFjHAXmdFXFHAn29y931GimmurdIwF3GT1TeeV5WbqTI8E
- ruo3RYImATVM8mjxkhkhQICER/1/OUxPyweOucasEGEoA1RosDmiCc/tlCK2M0nRgZ
- +VQ3G4h1+bNjGf9Pi3n58zQpLjYKJZZ96EH78W8M=
+ b=KCw7OngrNZ5wDz/yIIqXw3GQoI4ib1fBM7buyIiYaxPBJEiXS7b3AsFuTvtkd1KR7
+ nXgRE6M+uFRCSKoMAzFqtfTEv05f3enUCQl8s/EyRRu1q7xYG46kl98DD8PnrWtM3q
+ zc85PKPBaMhmFGFVVIDNUJrKQ+Mm7bRaeAj2IbLM=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 19 Jul 2019 00:02:20 -0400
-Message-Id: <20190719040246.15945-115-sashal@kernel.org>
+Date: Fri, 19 Jul 2019 00:02:21 -0400
+Message-Id: <20190719040246.15945-116-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190719040246.15945-1-sashal@kernel.org>
 References: <20190719040246.15945-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hoKAD-00701x-BX
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 115/141] f2fs: fix to avoid long
- latency during umount
+X-Headers-End: 1hoKAE-00702P-Eg
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.1 116/141] f2fs: avoid out-of-range
+ memory access
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,43 +92,44 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Heng Xiao <heng.xiao@unisoc.com>
+ Ocean Chen <oceanchen@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Heng Xiao <heng.xiao@unisoc.com>
+From: Ocean Chen <oceanchen@google.com>
 
-[ Upstream commit 6e0cd4a9dd4df1a0afcb454f1e654b5c80685913 ]
+[ Upstream commit 56f3ce675103e3fb9e631cfb4131fc768bc23e9a ]
 
-In umount, we give an constand time to handle pending discard, previously,
-in __issue_discard_cmd() we missed to check timeout condition in loop,
-result in delaying long time, fix it.
+blkoff_off might over 512 due to fs corrupt or security
+vulnerability. That should be checked before being using.
 
-Signed-off-by: Heng Xiao <heng.xiao@unisoc.com>
-[Chao Yu: add commit message]
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Use ENTRIES_IN_SUM to protect invalid value in cur_data_blkoff.
+
+Signed-off-by: Ocean Chen <oceanchen@google.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ fs/f2fs/segment.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 60373930b1b7..c7ed3022c4e7 100644
+index c7ed3022c4e7..798e33720c74 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -1483,6 +1483,10 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
- 		list_for_each_entry_safe(dc, tmp, pend_list, list) {
- 			f2fs_bug_on(sbi, dc->state != D_PREP);
- 
-+			if (dpolicy->timeout != 0 &&
-+				f2fs_time_over(sbi, dpolicy->timeout))
-+				break;
-+
- 			if (dpolicy->io_aware && i < dpolicy->io_aware_gran &&
- 						!is_idle(sbi, DISCARD_TIME)) {
- 				io_interrupted = true;
+@@ -3404,6 +3404,11 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
+ 		seg_i = CURSEG_I(sbi, i);
+ 		segno = le32_to_cpu(ckpt->cur_data_segno[i]);
+ 		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
++		if (blk_off > ENTRIES_IN_SUM) {
++			f2fs_bug_on(sbi, 1);
++			f2fs_put_page(page, 1);
++			return -EFAULT;
++		}
+ 		seg_i->next_segno = segno;
+ 		reset_curseg(sbi, i, 0);
+ 		seg_i->alloc_type = ckpt->alloc_type[i];
 -- 
 2.20.1
 
