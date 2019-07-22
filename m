@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871B86FD46
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DC866FD47
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2019 11:58:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hpV52-00057L-BH; Mon, 22 Jul 2019 09:58:04 +0000
+	id 1hpV51-0005Rw-Bt; Mon, 22 Jul 2019 09:58:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hpV50-00057D-4p
+ (envelope-from <yuchao0@huawei.com>) id 1hpV50-0005Rd-1f
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 09:58:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WlL4wWjAIP4ygV+b8Az62jsv6aA7ixY8EQ0NYItRpeQ=; b=Vf6FKvMlvxHZex6I5Sy9Rwzq+w
- +AFoPgvN49vtSaeywk03xadXT1gNB+wHlRjb64SEfQYnJz122twsuUJustCfFVJgoEbUlD0DzTDV1
- c05MTJxLjW/FJlysM0mri4sM21QEXJfgS1IDNbdRarDpIQwXHdPT4JNBBYv0c9sZ9Zp4=;
+ bh=WObpde/49ejd4CNPkcqwVcQaf7hHK5xzvJrtV2GUNLE=; b=H7NnAiylsSJedI/qvTyhWb8AUx
+ lP8N7GpvtjU5qt8p2E8ZGz+8jUnw3nHvmGaSxFvQDyvyTD3EoOmEOjhvYts5sKKw/G6/Qk2vd92Uh
+ 4pxRmfp1dcmfPogjXA5C/fEI/VNxecU/jRQ5aIm0VgYrqGtfl2kQQUMYLYh/upRZeEOQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=WlL4wWjAIP4ygV+b8Az62jsv6aA7ixY8EQ0NYItRpeQ=; b=C
- SZMxAVRT90RCCiMUs5KwzIZhmgPmrbNXkNTZ+LO7l7gerOzBJpzCy4j+N5swvNkSIzLAC5ELqcMgM
- DdR69ntQIEVSL7WziReCrHAHZBdJW9wzac4+TW3M7AEiqbZg1i0kmSrzNMi89vrJqo815I1tO3dFD
- U8zphTCNRcYBKJDc=;
+ h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=WObpde/49ejd4CNPkcqwVcQaf7hHK5xzvJrtV2GUNLE=; b=PpRbtkTGiVsYC0ZsBOnhE8zy/G
+ H+REtkedNQFul4kLcygHMsQVMXlWmWixaPV5GDUgoAU7W11YwAS5wEvbet7xF6w/pMelJ/CKcBw+j
+ T9movHzG6kXVLEhLOAWdJAjDe/mdbEwyHGhc0spn+XFr5lRiEOqxB0rgGuklUwt3Rdn4=;
 Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hpV4y-00AaCp-6Z
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 09:58:02 +0000
+ id 1hpV4y-00C0y7-4Q
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 09:58:01 +0000
 Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 2301ABC8BDB3F9827B7E;
+ by Forcepoint Email with ESMTP id 1E0733DEEFCCD6DE3289;
  Mon, 22 Jul 2019 17:57:53 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
- 14.3.439.0; Mon, 22 Jul 2019 17:57:45 +0800
+ 14.3.439.0; Mon, 22 Jul 2019 17:57:46 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Mon, 22 Jul 2019 17:57:05 +0800
-Message-ID: <20190722095706.116545-1-yuchao0@huawei.com>
+Date: Mon, 22 Jul 2019 17:57:06 +0800
+Message-ID: <20190722095706.116545-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
+In-Reply-To: <20190722095706.116545-1-yuchao0@huawei.com>
+References: <20190722095706.116545-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -60,9 +62,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hpV4y-00AaCp-6Z
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to spread
- f2fs_is_checkpoint_ready()
+X-Headers-End: 1hpV4y-00C0y7-4Q
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to detect cp error in
+ f2fs_setxattr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,94 +82,25 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We missed to call f2fs_is_checkpoint_ready() in several places, it may
-allow space allocation even when free space was exhausted during
-checkpoint is disabled, fix to add them.
+It needs to return -EIO if filesystem has been shutdown, fix the
+miss case in f2fs_setxattr().
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/file.c  | 11 +++++++++++
- fs/f2fs/namei.c |  4 ++++
- fs/f2fs/xattr.c |  5 +++++
- 3 files changed, 20 insertions(+)
+ fs/f2fs/xattr.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index ae0fec54cac6..43d878f3db0f 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -57,6 +57,9 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 		err = -EIO;
- 		goto err;
- 	}
-+	err = f2fs_is_checkpoint_ready(sbi);
-+	if (err)
-+		goto err;
- 
- 	sb_start_pagefault(inode->i_sb);
- 
-@@ -1568,6 +1571,9 @@ static long f2fs_fallocate(struct file *file, int mode,
- 
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
- 		return -EIO;
-+	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(inode));
-+	if (ret)
-+		return ret;
- 
- 	/* f2fs only support ->fallocate for regular file */
- 	if (!S_ISREG(inode->i_mode))
-@@ -3150,8 +3156,13 @@ static int f2fs_set_volume_name(struct file *filp, unsigned long arg)
- 
- long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- {
-+	int ret;
-+
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
- 		return -EIO;
-+	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp)));
-+	if (ret)
-+		return ret;
- 
- 	switch (cmd) {
- 	case F2FS_IOC_GETFLAGS:
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index c5b99042e6f2..09fb4f31576e 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -801,9 +801,13 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
- static int f2fs_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
-+	int ret;
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
-+	ret = f2fs_is_checkpoint_ready(sbi);
-+	if (ret)
-+		return ret;
- 
- 	if (IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi)) {
- 		int err = fscrypt_get_encryption_info(dir);
 diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index b32c45621679..3c92f4122044 100644
+index 3c92f4122044..f85c810e33ca 100644
 --- a/fs/f2fs/xattr.c
 +++ b/fs/f2fs/xattr.c
-@@ -21,6 +21,7 @@
- #include <linux/posix_acl_xattr.h>
- #include "f2fs.h"
- #include "xattr.h"
-+#include "segment.h"
- 
- static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
- 		struct dentry *unused, struct inode *inode,
-@@ -729,6 +730,10 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
+@@ -730,6 +730,8 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
  	int err;
  
-+	err = f2fs_is_checkpoint_ready(sbi);
-+	if (err)
-+		return err;
-+
- 	err = dquot_initialize(inode);
++	if (unlikely(f2fs_cp_error(sbi)))
++		return -EIO;
+ 	err = f2fs_is_checkpoint_ready(sbi);
  	if (err)
  		return err;
 -- 
