@@ -2,86 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A2CF6FAA4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2019 09:47:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 871B86FD46
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2019 11:58:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hpT2e-0007VA-J4; Mon, 22 Jul 2019 07:47:28 +0000
+	id 1hpV52-00057L-BH; Mon, 22 Jul 2019 09:58:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hpT2c-0007Ux-J4
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 07:47:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hpV50-00057D-4p
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 09:58:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pDszCqOIxVAP7k06jBE0ohjZDC3lywYi76UGp9EXlS4=; b=ad3rOwkKqBOVOsrmiaTx+yixjd
- snDLQI7ewQopiMy9eWZU8xYkkbdN6IgyMmKbbBDpPWXvZiTdEkaH1ZRLDzHXkA0pA26ao/6ciRnyL
- uWJF6RPqnBd8uEtcCl+dLjrLyWNWvni4x24JjzhBVRdmOO1R9rGYY/R4meREUb0GN06I=;
+ bh=WlL4wWjAIP4ygV+b8Az62jsv6aA7ixY8EQ0NYItRpeQ=; b=Vf6FKvMlvxHZex6I5Sy9Rwzq+w
+ +AFoPgvN49vtSaeywk03xadXT1gNB+wHlRjb64SEfQYnJz122twsuUJustCfFVJgoEbUlD0DzTDV1
+ c05MTJxLjW/FJlysM0mri4sM21QEXJfgS1IDNbdRarDpIQwXHdPT4JNBBYv0c9sZ9Zp4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pDszCqOIxVAP7k06jBE0ohjZDC3lywYi76UGp9EXlS4=; b=Sa6ZTXtY3OH/JnhaMdG2rMN90J
- XLMDkHoIhFDGve65nheYlebSHiDmA02ykg+3oIoOyK1R0fWGUlv+3bg2YdGgMqvWRbGzAmvtEOJ86
- b43pqr5Veh1sWtGdRe86LSGcGI1qE1LIUqx5pYgZ7X1v82pHc41o4d7D2q4/TOgeF27s=;
-Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=WlL4wWjAIP4ygV+b8Az62jsv6aA7ixY8EQ0NYItRpeQ=; b=C
+ SZMxAVRT90RCCiMUs5KwzIZhmgPmrbNXkNTZ+LO7l7gerOzBJpzCy4j+N5swvNkSIzLAC5ELqcMgM
+ DdR69ntQIEVSL7WziReCrHAHZBdJW9wzac4+TW3M7AEiqbZg1i0kmSrzNMi89vrJqo815I1tO3dFD
+ U8zphTCNRcYBKJDc=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hpT2a-00A3eD-1O
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 07:47:25 +0000
-Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id CA72027FAC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 22 Jul 2019 07:47:15 +0000 (UTC)
-Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id BEC39284D4; Mon, 22 Jul 2019 07:47:15 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
- pdx-wl-mail.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
- NO_RELAYS autolearn=ham version=3.3.1
-From: bugzilla-daemon@bugzilla.kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 22 Jul 2019 07:47:15 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-204197-202145-1zxQIZIeLq@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-204197-202145@https.bugzilla.kernel.org/>
-References: <bug-204197-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1hpV4y-00AaCp-6Z
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 09:58:02 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 2301ABC8BDB3F9827B7E;
+ Mon, 22 Jul 2019 17:57:53 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
+ 14.3.439.0; Mon, 22 Jul 2019 17:57:45 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Mon, 22 Jul 2019 17:57:05 +0800
+Message-ID: <20190722095706.116545-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hpT2a-00A3eD-1O
-Subject: [f2fs-dev] [Bug 204197] F2FS: kernel BUG at fs/f2fs/inode.c:722!
+X-Headers-End: 1hpV4y-00AaCp-6Z
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to spread
+ f2fs_is_checkpoint_ready()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,25 +74,106 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, drosen@google.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=204197
+We missed to call f2fs_is_checkpoint_ready() in several places, it may
+allow space allocation even when free space was exhausted during
+checkpoint is disabled, fix to add them.
 
-Chao Yu (chao@kernel.org) changed:
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/file.c  | 11 +++++++++++
+ fs/f2fs/namei.c |  4 ++++
+ fs/f2fs/xattr.c |  5 +++++
+ 3 files changed, 20 insertions(+)
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |ASSIGNED
-                 CC|                            |chao@kernel.org
-
---- Comment #1 from Chao Yu (chao@kernel.org) ---
-Could you please update the script?
-
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index ae0fec54cac6..43d878f3db0f 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -57,6 +57,9 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 		err = -EIO;
+ 		goto err;
+ 	}
++	err = f2fs_is_checkpoint_ready(sbi);
++	if (err)
++		goto err;
+ 
+ 	sb_start_pagefault(inode->i_sb);
+ 
+@@ -1568,6 +1571,9 @@ static long f2fs_fallocate(struct file *file, int mode,
+ 
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+ 		return -EIO;
++	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(inode));
++	if (ret)
++		return ret;
+ 
+ 	/* f2fs only support ->fallocate for regular file */
+ 	if (!S_ISREG(inode->i_mode))
+@@ -3150,8 +3156,13 @@ static int f2fs_set_volume_name(struct file *filp, unsigned long arg)
+ 
+ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ {
++	int ret;
++
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
+ 		return -EIO;
++	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp)));
++	if (ret)
++		return ret;
+ 
+ 	switch (cmd) {
+ 	case F2FS_IOC_GETFLAGS:
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index c5b99042e6f2..09fb4f31576e 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -801,9 +801,13 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
+ static int f2fs_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
++	int ret;
+ 
+ 	if (unlikely(f2fs_cp_error(sbi)))
+ 		return -EIO;
++	ret = f2fs_is_checkpoint_ready(sbi);
++	if (ret)
++		return ret;
+ 
+ 	if (IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi)) {
+ 		int err = fscrypt_get_encryption_info(dir);
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index b32c45621679..3c92f4122044 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -21,6 +21,7 @@
+ #include <linux/posix_acl_xattr.h>
+ #include "f2fs.h"
+ #include "xattr.h"
++#include "segment.h"
+ 
+ static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
+ 		struct dentry *unused, struct inode *inode,
+@@ -729,6 +730,10 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	int err;
+ 
++	err = f2fs_is_checkpoint_ready(sbi);
++	if (err)
++		return err;
++
+ 	err = dquot_initialize(inode);
+ 	if (err)
+ 		return err;
 -- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+2.18.0.rc1
+
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
