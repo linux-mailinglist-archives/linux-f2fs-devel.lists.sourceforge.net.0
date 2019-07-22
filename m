@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0E2B6F81E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2019 05:49:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AC9B6F965
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2019 08:18:26 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hpPKO-0007Af-Mr; Mon, 22 Jul 2019 03:49:32 +0000
+	id 1hpReP-00050O-40; Mon, 22 Jul 2019 06:18:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1hpPKN-0007AX-59
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 03:49:31 +0000
+ id 1hpReN-00050F-3k
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 06:18:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+bfIdcEPCGpFj0BXgFhUmhAQ7XJorRp5xbJEMiepgOs=; b=kRIOZco2hbdlu6sgkA1nOaKyhM
- aep2M2jV2sBktwvFUvkVePPVPtZQ+AUS6gOW6t35kRZP3TEMwng9ZOQb6t12Yu7uLbYvc2cF8ZxSo
- YimZCXbxcaaWoKOlasRqeewCKxa74fS6wtcyiWiUz/O/6nxB4CXm6FBfs5HP3GD4leQc=;
+ bh=N5O0FyBHzW441rtlzBHXgi21LDrQtHUzIciNd/i32xI=; b=SiJo7PwEaCKDa+twwRCEmzV+By
+ f/DieZKCztDwfUxFrXlaIUSuFdDCwbn7QM/405Ls/GfIoII1V5LgTdUi74K+EWJ2TAWeiXU/N8lsF
+ meMZi2ap4gJ9W8LckV3yluVoS4B4UOpzeV906HvDS6fWffIUUTPsFsPWKAXcdKgLHp0I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+bfIdcEPCGpFj0BXgFhUmhAQ7XJorRp5xbJEMiepgOs=; b=cAziTXFrnS6hGNXSine2z74qFt
- PXkWAN4LgekkD2dugJVFLXiPPdQOxr8wNctUGSM+tF+zKD4rnGEOEm6+zeAOGEYjChg7+cLWpK0D5
- hQi+haKTZVGx7uZcGcqsggMS6bJX+AMyXCViSixE2WR92OD5Hp0IjC0ByFCSH+EK8w5k=;
+ bh=N5O0FyBHzW441rtlzBHXgi21LDrQtHUzIciNd/i32xI=; b=aWTdtCkQFNCtPLCU7Ih5alS+Qm
+ jFIdvJmloASLqAHTeSfC5u56aBPomkgQhU9KYCB7kX1VNG3bMoeGjfzP8fke5BHbxqPl3W3Y4fwZM
+ 1yS8G3x7Ul7RdTXsNEZG/U0woO7qrtF2iXDWL9LVIxCCxZ2j7NbkpA+lPuDze6ua/GTQ=;
 Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hpPKL-009rV7-V2
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 03:49:31 +0000
+ id 1hpReL-009ysI-2w
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jul 2019 06:18:19 +0000
 Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
- by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 9442A284E9
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 1171427F2B
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 22 Jul 2019 03:49:23 +0000 (UTC)
+ Mon, 22 Jul 2019 06:18:09 +0000 (UTC)
 Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
- id 8792028508; Mon, 22 Jul 2019 03:49:23 +0000 (UTC)
+ id 021FA28511; Mon, 22 Jul 2019 06:18:08 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
  pdx-wl-mail.web.codeaurora.org
 X-Spam-Level: 
@@ -51,7 +51,7 @@ X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
  NO_RELAYS autolearn=ham version=3.3.1
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 22 Jul 2019 03:49:23 +0000
+Date: Mon, 22 Jul 2019 06:18:08 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -67,9 +67,9 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-204135-202145-PeEN7gBpYL@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-204135-202145@https.bugzilla.kernel.org/>
-References: <bug-204135-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-204043-202145-UyZbxf1p0a@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-204043-202145@https.bugzilla.kernel.org/>
+References: <bug-204043-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -80,9 +80,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hpPKL-009rV7-V2
-Subject: [f2fs-dev] [Bug 204135] F2FS: BUG: KASAN: null-ptr-deref in
- mempool_alloc+0xd8/0x2e0
+X-Headers-End: 1hpReL-009ysI-2w
+Subject: [f2fs-dev] [Bug 204043] F2fs kernel BUG at fs/f2fs/data.c:317!
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,16 +97,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=204135
+https://bugzilla.kernel.org/show_bug.cgi?id=204043
 
---- Comment #5 from Chao Yu (chao@kernel.org) ---
-Sorry, I meant I made the two fix patches based Jaegeuk's git repo, however
-Jaegeuk hasn't merge the two patches in his branch.
-
-So you can do the merge by yourself, or you can use below codes in my repo,
-I've update the all fixes on it.
-
-https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/log/?h=dev
+--- Comment #9 from Chao Yu (chao@kernel.org) ---
+BTW, to avoid panic in new_curseg(), you'd better to expand image size.
 
 -- 
 You are receiving this mail because:
