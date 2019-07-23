@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A4D871500
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jul 2019 11:26:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F0417150A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jul 2019 11:26:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hpr3X-000070-Np; Tue, 23 Jul 2019 09:25:59 +0000
+	id 1hpr3k-0005cI-RV; Tue, 23 Jul 2019 09:26:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hpr3V-00006s-Oc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jul 2019 09:25:57 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hpr3k-0005c8-2e
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jul 2019 09:26:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KEI98Ub49rHsOY78C+nCtti6P/qLVHcMJOnFcDWvX6U=; b=AwffbBqkQMnrec+usjZ7ix/Mrz
- DjHPt8jPcKRYRi/bE1fMLsVM+xSw7Tx37+u59U6wXqZWBPjCF6tqRyYCTJzqZ8Sx3oOdFCCDIRDMg
- TkijbtgkHmMv6Bcq7DMDRnPslZaf/csJrStO7mqWu4J1LCKqOm22p2S0qJXCrAsePi/8=;
+ bh=AkiElZs+5LD/wuVb2BEYB3yryrN2Oi0E37Bb+FYDwnI=; b=NOXmefv5HhdP8qvNtgZ7ZTD6lO
+ yOwvcz6RUEnDOGAFRii3R5dR+eZVAfTEcl2PKmY+Tm1vT15OsMwM2el+XAJL/aRYK0HbZKmynS0j2
+ 975eg1QaHa5t2QzpO79pJX3gzH7DNGvHiX4KZwzm3CF1yO3AN9HjxSOnlbDnp/cEcEzA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KEI98Ub49rHsOY78C+nCtti6P/qLVHcMJOnFcDWvX6U=; b=Z
- 8t0/sGTqfekHOVOu6SfNgOqcVvbxh4dwZhpb8AxX2ZGk0cQ5r0x2kZ4/guBjW23X8Bqu7prJRnrv2
- o3iuO+LffPmLUedCaHdxVkrnh29gCa1tvF4tr5xi6I1eWQjt9JXSs1NtEB8GiaGc/6pSMVZYTVAwj
- o4jGLvId8fBy5vro=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=AkiElZs+5LD/wuVb2BEYB3yryrN2Oi0E37Bb+FYDwnI=; b=XcfSI6nQN1vGC8magEMLGF4LlI
+ g4ikRUqPBzZFd63sBYDReJLeux4MFIlgDTbtB7IOyKpQCRzaxfpvu9hOwN/W203uHj12nfxSPQV7s
+ 3MiQ3Fp/oK08zInafOGEzlGU7wID1RJD7w/xo1K+gkuHsxeB8UEUnBddU5o902m0cr7g=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hpr3S-00E3Ql-6j
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jul 2019 09:25:57 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 56DCFE290D39BCEC26F5;
- Tue, 23 Jul 2019 17:25:46 +0800 (CST)
+ id 1hpr3g-00E3RU-16
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jul 2019 09:26:12 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 6D662C290FC82737B9F7;
+ Tue, 23 Jul 2019 17:25:51 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
  14.3.439.0; Tue, 23 Jul 2019 17:25:40 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <guaneryu@gmail.com>
-Date: Tue, 23 Jul 2019 17:25:27 +0800
-Message-ID: <20190723092529.112426-1-yuchao0@huawei.com>
+Date: Tue, 23 Jul 2019 17:25:28 +0800
+Message-ID: <20190723092529.112426-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
+In-Reply-To: <20190723092529.112426-1-yuchao0@huawei.com>
+References: <20190723092529.112426-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -60,9 +62,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hpr3S-00E3Ql-6j
-Subject: [f2fs-dev] [PATCH 1/3] generic/38[3456]: adjust to check prjquota
- before mount
+X-Headers-End: 1hpr3g-00E3RU-16
+Subject: [f2fs-dev] [PATCH 2/3] common/quota: support f2fs in
+ _require_quota() and _check_quota_usage()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,86 +82,35 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Move _require_prjquota() to front of _qmount() since we do the
-check on device directly instead of mountpoint, it can avoid
-potential failure if filesystem utils needs exclusive open on
-device.
+This can let f2fs pass the check of quota testcases.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- tests/generic/383 | 2 +-
- tests/generic/384 | 2 +-
- tests/generic/385 | 2 +-
- tests/generic/386 | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ common/quota | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tests/generic/383 b/tests/generic/383
-index 2c8c5923..cf5ac255 100755
---- a/tests/generic/383
-+++ b/tests/generic/383
-@@ -39,6 +39,7 @@ _require_xfs_quota_foreign
+diff --git a/common/quota b/common/quota
+index f19f81a1..9af280a2 100644
+--- a/common/quota
++++ b/common/quota
+@@ -12,7 +12,7 @@ _require_quota()
+     [ -n "$QUOTA_PROG" ] || _notrun "Quota user tools not installed"
  
- _scratch_mkfs >/dev/null 2>&1
- _scratch_enable_pquota
-+_require_prjquota $SCRATCH_DEV
+     case $FSTYP in
+-    ext2|ext3|ext4|ext4dev|reiserfs)
++    ext2|ext3|ext4|ext4dev|f2fs|reiserfs)
+ 	if [ ! -d /proc/sys/fs/quota ]; then
+ 	    _notrun "Installed kernel does not support quotas"
+ 	fi
+@@ -257,7 +257,7 @@ _check_quota_usage()
  
- do_project_test()
- {
-@@ -76,7 +77,6 @@ EOF
- # Test project
- _qmount_option "usrquota,prjquota"
- _qmount
--_require_prjquota $SCRATCH_DEV
- do_project_test
- 
- # success, all done
-diff --git a/tests/generic/384 b/tests/generic/384
-index b7c940d7..2c0cd00b 100755
---- a/tests/generic/384
-+++ b/tests/generic/384
-@@ -57,10 +57,10 @@ chmod a+rwx $seqres.full	# arbitrary users will write here
- _require_scratch
- _scratch_mkfs >/dev/null 2>&1
- _scratch_enable_pquota
-+_require_prjquota $SCRATCH_DEV
- 
- _qmount_option "prjquota"
- _qmount
--_require_prjquota $SCRATCH_DEV
- 
- report_quota()
- {
-diff --git a/tests/generic/385 b/tests/generic/385
-index 937131a9..56ce6eb0 100755
---- a/tests/generic/385
-+++ b/tests/generic/385
-@@ -56,9 +56,9 @@ quota_cmd="$XFS_QUOTA_PROG -D $tmp.projects -P $tmp.projid"
- 
- _scratch_mkfs >/dev/null 2>&1
- _scratch_enable_pquota
-+_require_prjquota $SCRATCH_DEV
- _qmount_option "prjquota"
- _qmount
--_require_prjquota $SCRATCH_DEV
- 
- #
- # Create the project root
-diff --git a/tests/generic/386 b/tests/generic/386
-index 462c5869..e4f7d23b 100755
---- a/tests/generic/386
-+++ b/tests/generic/386
-@@ -112,10 +112,10 @@ echo $proj_num:$proj_dir > "$my_projects"
- 
- _scratch_mkfs					>> "$seqres.full" 2>&1
- _scratch_enable_pquota
-+_require_prjquota $SCRATCH_DEV
- 
- _qmount_option "prjquota"
- _qmount
--_require_prjquota $SCRATCH_DEV
- 
- mkdir -p "${proj_dir}"
- 
+ 	VFS_QUOTA=0
+ 	case $FSTYP in
+-	ext2|ext3|ext4|ext4dev|reiserfs|gfs2)
++	ext2|ext3|ext4|ext4dev|f2fs|reiserfs|gfs2)
+ 		VFS_QUOTA=1
+ 		quotaon -f -u -g $SCRATCH_MNT 2>/dev/null
+ 		;;
 -- 
 2.18.0.rc1
 
