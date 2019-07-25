@@ -2,58 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C070743C2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2019 05:15:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E44DB749F5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2019 11:34:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hqUDx-0002Vz-2m; Thu, 25 Jul 2019 03:15:21 +0000
+	id 1hqa8c-0007y4-Az; Thu, 25 Jul 2019 09:34:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hqUDt-0002Vp-AS
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jul 2019 03:15:17 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hqa8a-0007xw-Pp
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jul 2019 09:34:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zI3Vl3M1UoMRtsnKYnK2EWdXr3rDeU3lZrWSz3HhI3U=; b=FqhL9G8NpbYVOfQdJX+wCMSHLD
- jRwQxNXkb428qHsxyOHzw5QuBEANN7PfCgAu587/b7qbMYwrqYNzbRqV/FJb4cGgelYRu8G6rhLiY
- Iuwyz+5nZrfzoCy56DiglW5fCl3DPo70LZhjx9/uCfMNhUcPYMEBnaF2GL9vlbtjnZo0=;
+ bh=hEvkwVV86HzvppkeV5/lkxNQ1IzE22sxCYx+cZ0cxDo=; b=YSYSzt43Bxc2IKrh2RgIy25NeH
+ Fjah7TgLGn4UMlKgVSSLrjvW2T+WywxEmdfzNGqAtF+ghqYpt2eW+ve9eiwOq5UtdS92bKLvmJcJ4
+ 9JQ6xH83Jfr2eJ0GT7stYvQVLfsuOWayei/ZBt8H6Aw60YOkwGld9ra+QtaBtUFcMj1k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=zI3Vl3M1UoMRtsnKYnK2EWdXr3rDeU3lZrWSz3HhI3U=; b=IB2CmuMN+HLWxyBf8rKbjI6QCv
- I7fSj8bjFM2zQIZMgktUorXKmYW4912iEzEM0DqOPizeirBHzvswmKBHr32YGmfWDSAq593+ER0gG
- 7jwbPJFbW88vZkaDWJsLXhcdnkkbGM3vW8kMpCFoNvdsaZYMaanFcQoUOAlfKoEf67Zo=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=hEvkwVV86HzvppkeV5/lkxNQ1IzE22sxCYx+cZ0cxDo=; b=d
+ 7SmFZYkUzyWo+Caf5nqZQ1c8MuFuwtFZt7sZDgEIuF1v8g3RBFYW6NhgZIsad4odCn+AnErn4flbX
+ FftNUrFfD3QRpWBvFIKZ9yezB/7M6tFjAfyb/oCtlHd6EG+/VbNyGrSGl9T0+tlYUKQDwkVO2iNFL
+ L+fukV/dr48dj1D4=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hqUDr-00EXTk-0e
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jul 2019 03:15:17 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id CFDA1E13BD828B343EFF;
- Thu, 25 Jul 2019 11:15:07 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 25 Jul
- 2019 11:15:02 +0800
-To: Icenowy Zheng <icenowy@aosc.io>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190725030852.33161-1-icenowy@aosc.io>
+ id 1hqa8X-0009jZ-1J
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jul 2019 09:34:12 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id A5C5D3CF4F397CE816FD;
+ Thu, 25 Jul 2019 17:33:58 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.439.0; Thu, 25 Jul 2019 17:33:50 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <07060e23-bc6f-5d35-a7f3-e75c8ebb3b65@huawei.com>
-Date: Thu, 25 Jul 2019 11:15:01 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Thu, 25 Jul 2019 17:33:37 +0800
+Message-ID: <20190725093337.123063-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20190725030852.33161-1-icenowy@aosc.io>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -61,12 +57,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: aosc.io]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hqUDr-00EXTk-0e
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: use EINVAL for superblock with
- invalid magic
+X-Headers-End: 1hqa8X-0009jZ-1J
+Subject: [f2fs-dev] [PATCH] f2fs: fix to handle quota_{on,off} correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,29 +78,88 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/7/25 11:08, Icenowy Zheng wrote:
-> The kernel mount_block_root() function expects -EACESS or -EINVAL for a
-> unmountable filesystem when trying to mount the root with different
-> filesystem types.
-> 
-> However, in 5.3-rc1 the behavior when F2FS code cannot find valid block
-> changed to return -EFSCORRUPTED(-EUCLEAN), and this error code makes
-> mount_block_root() fail when trying to probe F2FS.
-> 
-> When the magic number of the superblock mismatches, it has a high
-> probability that it's just not a F2FS. In this case return -EINVAL seems
-> to be a better result, and this return value can make mount_block_root()
-> probing work again.
-> 
-> Return -EINVAL when the superblock has magic mismatch, -EFSCORRUPTED in
-> other cases (the magic matches but the superblock cannot be recognized).
-> 
-> Fixes: 10f966bbf521 ("f2fs: use generic EFSBADCRC/EFSCORRUPTED")
-> Signed-off-by: Icenowy Zheng <icenowy@aosc.io>
+With quota_ino feature on, generic/232 reports an inconsistence issue
+on the image.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+The root cause is that the testcase tries to:
+- use quotactl to shutdown journalled quota based on sysfile;
+- and then use quotactl to enable/turn on quota based on specific file
+(aquota.user or aquota.group).
 
-Thanks,
+Eventually, quota sysfile will be out-of-update due to following specific
+file creation.
+
+Change as below to fix this issue:
+- deny enabling quota based on specific file if quota sysfile exists.
+- set SBI_QUOTA_NEED_REPAIR once sysfile based quota shutdowns via
+ioctl.
+
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/super.c | 27 +++++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index e5cae67935f6..c28d2b864975 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2000,6 +2000,12 @@ static int f2fs_quota_on(struct super_block *sb, int type, int format_id,
+ 	struct inode *inode;
+ 	int err;
+ 
++	/* if quota sysfile exists, deny enabling quota with specific file */
++	if (f2fs_sb_has_quota_ino(F2FS_SB(sb))) {
++		f2fs_err(F2FS_SB(sb), "quota sysfile already exists");
++		return -EBUSY;
++	}
++
+ 	err = f2fs_quota_sync(sb, type);
+ 	if (err)
+ 		return err;
+@@ -2019,7 +2025,7 @@ static int f2fs_quota_on(struct super_block *sb, int type, int format_id,
+ 	return 0;
+ }
+ 
+-static int f2fs_quota_off(struct super_block *sb, int type)
++static int __f2fs_quota_off(struct super_block *sb, int type)
+ {
+ 	struct inode *inode = sb_dqopt(sb)->files[type];
+ 	int err;
+@@ -2045,13 +2051,30 @@ static int f2fs_quota_off(struct super_block *sb, int type)
+ 	return err;
+ }
+ 
++static int f2fs_quota_off(struct super_block *sb, int type)
++{
++	struct f2fs_sb_info *sbi = F2FS_SB(sb);
++	int err;
++
++	err = __f2fs_quota_off(sb, type);
++
++	/*
++	 * quotactl can shutdown journalled quota, result in inconsistence
++	 * between quota record and fs data by following updates, tag the
++	 * flag to let fsck be aware of it.
++	 */
++	if (is_journalled_quota(sbi))
++		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
++	return err;
++}
++
+ void f2fs_quota_off_umount(struct super_block *sb)
+ {
+ 	int type;
+ 	int err;
+ 
+ 	for (type = 0; type < MAXQUOTAS; type++) {
+-		err = f2fs_quota_off(sb, type);
++		err = __f2fs_quota_off(sb, type);
+ 		if (err) {
+ 			int ret = dquot_quota_off(sb, type);
+ 
+-- 
+2.18.0.rc1
+
 
 
 _______________________________________________
