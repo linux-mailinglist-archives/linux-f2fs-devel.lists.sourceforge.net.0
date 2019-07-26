@@ -2,96 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A9F75D81
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jul 2019 05:39:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8FCD75D87
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jul 2019 05:45:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hqr4Z-0007dp-KJ; Fri, 26 Jul 2019 03:39:11 +0000
+	id 1hqrAg-00070c-9e; Fri, 26 Jul 2019 03:45:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <baijiaju1990@gmail.com>) id 1hqr4Y-0007de-VB
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jul 2019 03:39:10 +0000
+ (envelope-from <baijiaju1990@gmail.com>) id 1hqrAf-00070U-5V
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jul 2019 03:45:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x9jpkKsawqv16UAcPnvGSGklT2l7v1L3clQy/LaazSE=; b=JPGgKYODzZn9lqVLJNTtZpfSy1
- 1337eNSVeY56TrqDFJW58tVJUl3paT7yM1YhMubbB6P3Dozi8RbXNnMnnr911nXJvwbR8/Dz5L7vO
- iKUGpnRZfZaNlvhli6khWJGGjLBaEQKhI2VcC5BxB+WAqWnEZyYoUSikUokQ4qXOjq4g=;
+ bh=YEUR6IT4rKzLiHfE3iSnA+a3aUhdaLkp75DC5jJ9iFE=; b=TzLeYbiCGzpmghC7DkSieXn/lz
+ LzDqtMek/STaodS2a1AZFZ5yHQJvoRyfrhZBSMcn7GF/7UcNF7aK1raIcHVancId823f02eUOHMBC
+ oTpuKbBjHF5T/EH7CkCwXI06iWbF9b29euKUJ1+DvQ8pO5qubtSUirghCcqmmiuV9HUY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=x9jpkKsawqv16UAcPnvGSGklT2l7v1L3clQy/LaazSE=; b=bkGXEnlkB6ZP+zjSiBa75DCVPp
- 3617LL3y+H6/XDByzIfO9mxjGCgSPQ8A6WqUPRngx5Sl5d3NAp31R33/djcL6LkdQNPDqFofZ0Ko2
- n4NZwBY4/mnHYI/ugPZMIqohoATUqFG26Sc3XakA3wB/j0PEoQghnEQtLGt7Vtdp0Lyw=;
-Received: from mail-pf1-f176.google.com ([209.85.210.176])
+ bh=YEUR6IT4rKzLiHfE3iSnA+a3aUhdaLkp75DC5jJ9iFE=; b=O9fUJhohTuLBwP5S0Wqq8q7LO5
+ 94k0xK6IN5ARVtSFvomkn9J1Q9atX4jSQUDqUO3K3M0NJ/mT0kP0hNVLCSyNVJ9tkqPPgeyEYkQUD
+ exL+vC/ZDDXo127OWtUzsyZt9OYlB2TI5jRmPAd3SOv8fR60ZmHs4bn4vIP+B/og7YEI=;
+Received: from mail-pf1-f194.google.com ([209.85.210.194])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hqr4X-00GYKd-Mv
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jul 2019 03:39:10 +0000
-Received: by mail-pf1-f176.google.com with SMTP id c3so650153pfa.13
+ id 1hqrAa-00GYcx-H7
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jul 2019 03:45:29 +0000
+Received: by mail-pf1-f194.google.com with SMTP id r7so23794152pfl.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 25 Jul 2019 20:39:09 -0700 (PDT)
+ Thu, 25 Jul 2019 20:45:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=x9jpkKsawqv16UAcPnvGSGklT2l7v1L3clQy/LaazSE=;
- b=ti/+4SPYRcJdC2ON+0rZow0dnLBewWtmxUej4Wq/2hSnhBHk+w8ww0NY40o1Nq6Umw
- R5R2HRP/xPjYmsSQsz/9Jve182Fb+hs1UwWtKgzlEbZzKOsq4xDSG8kjtoi37ePmMCB2
- u1fT4GquAsRIFlT7cwVVBWnUgFnQiZfRshv3o/isLQIrVV9m5prAQWi9kKM59DL0CSrD
- Ldonv6rqPwcmaWTRK6WQnDg3Xlc5GS1uDVjmB5+t5rPOHZixbd12SKCy6GltDcf6PUGz
- 1olB+ArkOlSzGYoQFiOsD4JqvTRiq9cdwAA3nFireAhbVgL60n8nY1hpwTT7u98/l5XK
- 8hkQ==
+ h=from:to:cc:subject:date:message-id;
+ bh=YEUR6IT4rKzLiHfE3iSnA+a3aUhdaLkp75DC5jJ9iFE=;
+ b=j00M4OC8PCI2W3vPzRtVOnSDPCCvzDTcxlq4/I3ykR9QO7U9HQoARCPZwLTYj57IMR
+ pESEkpWw+aZ3pl0j7yM0TuZgDnu+5C5cyBnjvmURhhvic0YztcSgmvWZZA+MUV83pdzj
+ 80nczhpBXjXna9OeLX9hoM8qUMSHABNlvR9PPWfPdWxH0SkhAeXYoPiasjd83GcHcXaU
+ dUtEZ09LDnPesZK4OsnajvAHrnFjiMXbaDooJMdI/OSxVY4lFFhy9qsyd2yE+JXNHzPZ
+ fG8lF5mPHWlwzoiCCrtoD1F5fr/zi8keUkyoR68ajaAmhDSNGDpwy/w88VKDzXvQ0Jo3
+ pvIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=x9jpkKsawqv16UAcPnvGSGklT2l7v1L3clQy/LaazSE=;
- b=hIdECir+xhxeHe7etSQuGmKeU5zZLMK2kw5U2YVup7E+F/WLgJukyMIFY8mOrupI3I
- FHWijf0w7nUPaDRZEWd6thpBIcnTWnyMDuMW68P/0UyJdIT7ykAhfsmXiGHxfAKpYzIs
- pSBprH0+r78Ray+iPwOLyT7mQ0GwNj/Y2guu552AIN01horMCsHcUB9EvMdRgn/DWnad
- XwPXx6CjSqoAQfgU6xtS52/ShUXmZZCxMCuCD1yRyHYKH31Nwr4SBAivLmOKdEaXZ9R+
- CstuQv+X7vRfHmRpX2aHIouSlDAbPH3yizW1kNHGarz6x1L0HLLJDlAbig/ikuOPyZ72
- dM7Q==
-X-Gm-Message-State: APjAAAU47Zfm7/ti+VFlNs0t6Lcvv5T8Gh3A4ZNnt+eOBXfDmJokz/K7
- Oo9P7c7aRmNx6B9BOvjfXyk=
-X-Google-Smtp-Source: APXvYqxpsRY5Whl2UjMjKGugceyF3SN4a4ogN5X4rWtnKPZe3r9lhDFkJplLVyd20xUrazvJFRxtng==
-X-Received: by 2002:a17:90a:372a:: with SMTP id
- u39mr95911266pjb.2.1564112344038; 
- Thu, 25 Jul 2019 20:39:04 -0700 (PDT)
-Received: from ?IPv6:2402:f000:4:72:808::177e? ([2402:f000:4:72:808::177e])
- by smtp.gmail.com with ESMTPSA id d14sm63212225pfo.154.2019.07.25.20.39.02
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=YEUR6IT4rKzLiHfE3iSnA+a3aUhdaLkp75DC5jJ9iFE=;
+ b=WV8Dtx+cq3BT1C1mL+xTIVQH1uBUzNb4rglmwmIhTwXL/J5grAwNqYMYQvqXDATePO
+ sE9RYz/EuRO85S6C1rlSotzQ1B1RFNrZvGv4tZ1uB9W4SGD4xEAnsw+A3aZO57EMXld/
+ uYkhkSxXHu+nlWRY9i3+duwa331XXDbXXX/sZ0S3H6MPgCUVUmINdPNE+vxxcQJwP7Qq
+ P5X5BHcHd7ocxsAQxeHNKhKuVDgpmByFBYeWU+43vN5vVoUCL2ARFTpngJja78LlqVxA
+ hyQnbZGKfn5mtpyeTHZpUrEQWZt9RTGZWgezNd96mCfiXNcvElonCaYU0slQGimTET5O
+ mQMg==
+X-Gm-Message-State: APjAAAXOFNWURKl10ooCJxrRIfqo8i6B8v0Rg/aVSSKzRoTPoBFHtAn2
+ hpXj9BMGTmuWkg/VfVtF4NI=
+X-Google-Smtp-Source: APXvYqyaJNHvmFnHtNTPgSf190jGCxD+R5RowGCCh5Euoe7WJmX+F0fbeguiW+l6reIVXxiRujt4ug==
+X-Received: by 2002:a17:90a:37ac:: with SMTP id
+ v41mr91718590pjb.6.1564112718669; 
+ Thu, 25 Jul 2019 20:45:18 -0700 (PDT)
+Received: from oslab.tsinghua.edu.cn ([2402:f000:4:72:808::3ca])
+ by smtp.gmail.com with ESMTPSA id h129sm48228710pfb.110.2019.07.25.20.45.16
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 25 Jul 2019 20:39:03 -0700 (PDT)
-To: Chao Yu <yuchao0@huawei.com>, jaegeuk@kernel.org
-References: <f577be2f-fc2f-9ef8-2c6c-9c247123b1ad@gmail.com>
- <2d66cd56-eccf-9086-c5db-118acce717a6@huawei.com>
+ Thu, 25 Jul 2019 20:45:18 -0700 (PDT)
 From: Jia-Ju Bai <baijiaju1990@gmail.com>
-Message-ID: <889d8107-a122-cc15-ed08-959b34dcf248@gmail.com>
-Date: Fri, 26 Jul 2019 11:39:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <2d66cd56-eccf-9086-c5db-118acce717a6@huawei.com>
-Content-Language: en-US
+To: jaegeuk@kernel.org,
+	yuchao0@huawei.com
+Date: Fri, 26 Jul 2019 11:45:12 +0800
+Message-Id: <20190726034512.32478-1-baijiaju1990@gmail.com>
+X-Mailer: git-send-email 2.17.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (baijiaju1990[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.176 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.194 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.176 listed in list.dnswl.org]
+ trust [209.85.210.194 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
@@ -101,9 +93,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hqr4X-00GYKd-Mv
-Subject: Re: [f2fs-dev] [BUG] fs: f2fs: Possible null-pointer dereferences
+X-Headers-End: 1hqrAa-00GYcx-H7
+Subject: [f2fs-dev] [PATCH] fs: f2fs: Remove unnecessary checks of SM_I(sbi)
  in update_general_status()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -116,27 +109,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jia-Ju Bai <baijiaju1990@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+In fill_super() and put_super(), f2fs_destroy_stats() is called 
+in prior to f2fs_destroy_segment_manager(), so if current
+sbi can still be visited in global stat list, SM_I(sbi) should be
+released yet.
+For this reason, SM_I(sbi) does not need to be checked in
+update_general_status().
+Thank Chao Yu for advice.
 
+Signed-off-by: Jia-Ju Bai <baijiaju1990@gmail.com>
+---
+ fs/f2fs/debug.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 2019/7/26 11:19, Chao Yu wrote:
-> Hi Jiaju,
->
-> Thanks for the report, I checked the code, and found it doesn't need to check
-> SM_I(sbi) pointer, this is because in fill_super() and put_super(), we will call
-> f2fs_destroy_stats() in prior to f2fs_destroy_segment_manager(), so if current
-> sbi can still be visited in global stat list, SM_I(sbi) should be released yet.
-> So anyway, let's remove unneeded check in line 70/78. :)
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index 7706049d23bf..9b0bedd82581 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -67,7 +67,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+ 	si->nr_rd_data = get_pages(sbi, F2FS_RD_DATA);
+ 	si->nr_rd_node = get_pages(sbi, F2FS_RD_NODE);
+ 	si->nr_rd_meta = get_pages(sbi, F2FS_RD_META);
+-	if (SM_I(sbi) && SM_I(sbi)->fcc_info) {
++	if (SM_I(sbi)->fcc_info) {
+ 		si->nr_flushed =
+ 			atomic_read(&SM_I(sbi)->fcc_info->issued_flush);
+ 		si->nr_flushing =
+@@ -75,7 +75,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+ 		si->flush_list_empty =
+ 			llist_empty(&SM_I(sbi)->fcc_info->issue_list);
+ 	}
+-	if (SM_I(sbi) && SM_I(sbi)->dcc_info) {
++	if (SM_I(sbi)->dcc_info) {
+ 		si->nr_discarded =
+ 			atomic_read(&SM_I(sbi)->dcc_info->issued_discard);
+ 		si->nr_discarding =
+-- 
+2.17.0
 
-Okay, I will send a patch to remove unneeded checks.
-
-
-Best wishes,
-Jia-Ju Bai
 
 
 _______________________________________________
