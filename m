@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14881781BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jul 2019 23:18:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF565781BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jul 2019 23:22:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hrqYM-0002O5-U3; Sun, 28 Jul 2019 21:18:02 +0000
+	id 1hrqcx-0002Z6-AR; Sun, 28 Jul 2019 21:22:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hrqYL-0002Nx-Af
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jul 2019 21:18:01 +0000
+ (envelope-from <tytso@mit.edu>) id 1hrqcv-0002Yt-6h
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jul 2019 21:22:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5MQJuhga+CEM7c3/oOmHRtXoH8YD940+53nub2YEGNA=; b=akLc4GBP7jfR1GFhalU0bsE5Xb
- o1f6qZzTxPdZ/eWipj8W/V03iy1iyT/mKs0X66MwlCHgt8WtGhX85lpXln4SWxhGquk2kcL4PjqQi
- n/nnwnkM0QoKPRvlgCwBg+gEpbA4AFkAYeRI3xefM1poMH6VbgPCq1OM3Eod6bPLYQiU=;
+ bh=BrXCpbwpFHXORs4OhAY744eAoP4l7QXnK7Yu8buxj7s=; b=Sl/TIo/xvWI+hmb57pDTKp1J7E
+ 3JTbzSXgm+tm1TxICiDUUEle6XqsrEMTxm8TS8YJKESPtnIap5IN7EwE5nUcwjGK2IOTORCGMWYre
+ hWrSkhEee51KnYRNHnIzE8FvMwk0vz2rZNhReeZP//CD1PgkAow7GNtuumJX36BrT1ug=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,40 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5MQJuhga+CEM7c3/oOmHRtXoH8YD940+53nub2YEGNA=; b=ClUoHE3OkDOU4EFouMTCWPbOFG
- 6ab1249vfwkcqgLTfxxtXRWEBvT7C5z+2h+PLZLlwBSR1JeJmJg5wG/kxW60KAO3O3L/RJCrJD/xO
- nyG9kqFhBFCaeMm5KAF19+nSk7/5amqgyGUPAsiTk/xr9JKTZXlji1L/G+6lqLVCJfb4=;
+ bh=BrXCpbwpFHXORs4OhAY744eAoP4l7QXnK7Yu8buxj7s=; b=kNkVEDIRKdP5daDX08CyHKCN+f
+ 1yzzbYYLteSmfx7xP+SQYMpnVfJmzFDGsDJO66V10YJBULL98XwTcJS8umaOTFLkl2nnsLLekMY6f
+ ivCK9GG7zKuNEHJrF5iGD7oLqIWBIXK6ONS8YjnEegboG2vNtYZNut2BBXiF8uFFhkUE=;
 Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hrqYJ-002hMQ-8m
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jul 2019 21:18:01 +0000
+ id 1hrqct-00BnX5-Ed
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jul 2019 21:22:45 +0000
 Received: from callcc.thunk.org (96-72-102-169-static.hfc.comcastbusiness.net
  [96.72.102.169] (may be forged)) (authenticated bits=0)
  (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x6SLHVFd011138
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x6SLMSdP012995
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sun, 28 Jul 2019 17:17:32 -0400
+ Sun, 28 Jul 2019 17:22:29 -0400
 Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 5DD5D4202F5; Sun, 28 Jul 2019 17:17:30 -0400 (EDT)
-Date: Sun, 28 Jul 2019 17:17:30 -0400
+ id F22684202F5; Sun, 28 Jul 2019 17:22:26 -0400 (EDT)
+Date: Sun, 28 Jul 2019 17:22:26 -0400
 From: "Theodore Y. Ts'o" <tytso@mit.edu>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190728211730.GK6088@mit.edu>
+Message-ID: <20190728212226.GL6088@mit.edu>
 References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-11-ebiggers@kernel.org>
+ <20190726224141.14044-12-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190726224141.14044-11-ebiggers@kernel.org>
+In-Reply-To: <20190726224141.14044-12-ebiggers@kernel.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hrqYJ-002hMQ-8m
-Subject: Re: [f2fs-dev] [PATCH v7 10/16] fscrypt: v2 encryption policy
- support
+X-Headers-End: 1hrqct-00BnX5-Ed
+Subject: Re: [f2fs-dev] [PATCH v7 11/16] fscrypt: allow unprivileged users
+ to add/remove keys for v2 policies
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,45 +83,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 26, 2019 at 03:41:35PM -0700, Eric Biggers wrote:
-> @@ -319,6 +329,31 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
->  	if (!capable(CAP_SYS_ADMIN))
->  		goto out_wipe_secret;
->  
-> +	if (arg.key_spec.type != FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR) {
+On Fri, Jul 26, 2019 at 03:41:36PM -0700, Eric Biggers wrote:
+> diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
+> index 56e085c2ed8c6..307533d4d7c51 100644
+> --- a/fs/crypto/keyring.c
+> +++ b/fs/crypto/keyring.c
+> +		if (mk->mk_users->keys.nr_leaves_on_tree != 0) {
+> +			/*
+> +			 * Other users have still added the key too.  We removed
+> +			 * the current user's usage of the key if there was one,
+> +			 * but we still can't remove the key itself.
+> +			 */
+> +			err = -EUSERS;
+> +			up_write(&key->sem);
+> +			goto out_put_key;
 
-This should be "== FSCRYPT_KEY_SPEC_TYPE_INDENTIFIER" instead.  That's
-because you use the identifier part of the union:
+I commented about this on an earlier patch, but I'm not convinced we
+should be returning EUSERS here.  Returning success might be a better
+choice.
 
-> +		/* Calculate the key identifier and return it to userspace. */
-> +		err = fscrypt_hkdf_expand(&secret.hkdf,
-> +					  HKDF_CONTEXT_KEY_IDENTIFIER,
-> +					  NULL, 0, arg.key_spec.u.identifier,
-
-If we ever add a new key specifier type, and alternative in the union,
-this is going to come back to bite us.
-
-> +	if (policy->version == FSCRYPT_POLICY_V1) {
-> +		/*
-> +		 * The original encryption policy version provided no way of
-> +		 * verifying that the correct master key was supplied, which was
-> +		 * insecure in scenarios where multiple users have access to the
-> +		 * same encrypted files (even just read-only access).
-
-Which scenario do you have in mind?  With read-only access, Alice can
-fetch the encryption policy for a directory, and introduce a key with
-the same descriptor, but the "wrong" key, but that's only going to
-affect Alice's use of the key.  It won't affect what key is used by
-Bob, since Alice doesn't have write access to Bob's keyrings.
-
-If what you mean is the risk when there is a single global
-filesystem-specific keyring, where Alice could introduce a "wrong" key
-identified with a specific descriptor, then sure, Alice could trick
-Bob into encrypting his data with the wrong key (one known to Alice).
-But we don't allow keys usable by V1 policies to be used in the
-filesystem-specific keyring, do we?
-
-						- Ted
+					- Ted
 
 
 _______________________________________________
