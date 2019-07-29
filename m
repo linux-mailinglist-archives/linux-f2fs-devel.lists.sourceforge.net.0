@@ -2,57 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D35F578EAB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 17:04:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C91178F90
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 17:40:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hs7Ca-0003Fc-EO; Mon, 29 Jul 2019 15:04:40 +0000
+	id 1hs7lJ-000519-RL; Mon, 29 Jul 2019 15:40:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hs7CZ-0003FV-A7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:04:39 +0000
+ (envelope-from <chao@kernel.org>) id 1hs7lI-000510-Fk
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:40:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UAZx6nftTql1aqEdgqnyC1ff8Z/VwXfneWHWV9A/U2o=; b=STnYBpKWMJ2vJYj/Z/3wERzrVA
- 1yijkE2mCO/Hd9YCeB5IcyA89gk5aR7xDQJqvDIu4att302pjgXfDSQeoYkHiH8+moIlju9aRh292
- rPeE42KVPUcVQELyt4dOnXERafQEqaN2Knxerqlf3HH/DsZoNd4oCAgvos9k5IvENlcY=;
+ bh=NSK3KOkd3bNlVwSlAt3o7HS4W4u6VRFSW+BVH8MyBM4=; b=gldtpLQvPW/tTpKjVHKTXhjfko
+ R5wla/cnlXysz03b/tSDyXwbMgbNJEzpZZnep4NvvwHQZyPnsEM1ttD4hjw42nQoXjQ0JnN41K7QO
+ GgStjJGRxryGsaD5INZvtw8fReT0++KONP00qRNf9dyh536vDpytd4kUwl+xsE5NoIa8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=UAZx6nftTql1aqEdgqnyC1ff8Z/VwXfneWHWV9A/U2o=; b=e
- DUO+gYN50sB6jybZcKXSetBSFBtv+VyFqQNt2fk7CTv0Jhj7o+uUTsAOWInl6MBtdUzTvi+5ZxkCk
- Bq1tK7Xvcizdccr06xnaT80khy+s+/BmsNowopvZaEmOvIbJCKeJCYzENNgedKwpmM0jq8ZLt3mXU
- uUOuSnFo9WlKeT6g=;
+ List-Owner:List-Archive; bh=NSK3KOkd3bNlVwSlAt3o7HS4W4u6VRFSW+BVH8MyBM4=; b=Y
+ 4ZEGlv3SE7IL+IFO0soC82ioI1+rZUbMYl8ivqNawUNxd6HVtueDXxTQIkY3mFYQYYxTMa8UrbDzS
+ qoYh6VEX2fzVJeFE4hUVrJhVqxiRBnsdhJErncQoDj/V/Qbz9PH4FiTETvGAz09pzz/QmHxY1pZel
+ DxPeBih64pRiu/NA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hs7CX-00EgMF-0P
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:04:39 +0000
+ id 1hs7lD-003Chj-Rs
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:40:32 +0000
 Received: from localhost.localdomain (unknown [180.111.32.87])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 481482067D;
- Mon, 29 Jul 2019 15:04:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5546F2067D;
+ Mon, 29 Jul 2019 15:40:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564412671;
- bh=ZJaCH6/EG+GnwaN6bqP7F/RqkgpTASOAGcigZFAnIpA=;
+ s=default; t=1564414822;
+ bh=yi6+T7g7yldlTb8eoXuPvBmVnfCMbjM8FkkAJahJagk=;
  h=From:To:Cc:Subject:Date:From;
- b=g0MSFz+7OMkPIZ47mW81FpS9ruO3sSfKpaef/30p3Z6MGVRdKqFaraBrtSZq3Nhle
- Aep6OaQqNL6CZCAVhiTN0usFYDoVGDZiDgqNitz4eFgApTAZp2ApjiOFibdA4WtkMa
- Lt/DWlMfcMovyrZDTQalLLQnAQhkdrvOkr/XAw50=
+ b=VmoMjlBKfjQMxmtpek8BdKts3soYxIS5T1i2hKA6GlLnoK+2qowoqT03XS7ujCsr9
+ 8ybm6xGsgpxT6uKmDMMScjSDrEaUmoQi7Ksa9iAynzQuKRgGQtdPjVlfjhGTNUJ5HY
+ rGh0qmnnrNlvGvvOT18UjG9Ohp3pKxIye0SdOhzA=
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon, 29 Jul 2019 23:03:51 +0800
-Message-Id: <20190729150351.12223-1-chao@kernel.org>
+Date: Mon, 29 Jul 2019 23:39:36 +0800
+Message-Id: <20190729153936.15438-1-chao@kernel.org>
 X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
 X-Spam-Score: -0.0 (/)
@@ -67,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hs7CX-00EgMF-0P
-Subject: [f2fs-dev] [PATCH v3 RESEND] f2fs: introduce sb.required_features
- to store incompatible features
+X-Headers-End: 1hs7lD-003Chj-Rs
+Subject: [f2fs-dev] [PATCH] dump.f2fs: allow to dump data on mounted device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,99 +80,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-Later after this patch was merged, all new incompatible feature's
-bit should be added into sb.required_features field, and define new
-feature function with F2FS_INCOMPAT_FEATURE_FUNCS() macro.
+In generic/38[3456], we use quotactl(2) to check if prjquota is
+enabled on the given device (src/feature -P $dev in _require_prjquota),
+and quotactl(2) requires the given device is a mounted device.
 
-Then during mount, we will do sanity check with enabled features in
-image, if there are features in sb.required_features that kernel can
-not recognize, just fail the mount.
+So it requires dump.f2fs to list/check enabled features on a mounted
+device, let's relieve to allow such operation.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
-v3:
-- change commit title.
-- fix wrong macro name.
- fs/f2fs/f2fs.h          | 15 +++++++++++++++
- fs/f2fs/super.c         | 10 ++++++++++
- include/linux/f2fs_fs.h |  3 ++-
- 3 files changed, 27 insertions(+), 1 deletion(-)
+ lib/libf2fs.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index a6eb828af57f..b8e17d4ddb8d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -163,6 +163,15 @@ struct f2fs_mount_info {
- #define F2FS_CLEAR_FEATURE(sbi, mask)					\
- 	(sbi->raw_super->feature &= ~cpu_to_le32(mask))
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 5ac07c1..7b65fa0 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -845,7 +845,7 @@ void get_kernel_uname_version(__u8 *version)
+ #ifndef ANDROID_WINDOWS_HOST
+ static int open_check_fs(char *path, int flag)
+ {
+-	if (c.func != FSCK || c.fix_on || c.auto_fix)
++	if (c.func != DUMP && (c.func != FSCK || c.fix_on || c.auto_fix))
+ 		return -1;
  
-+#define F2FS_INCOMPAT_FEATURES		0
-+
-+#define F2FS_HAS_INCOMPAT_FEATURE(sbi, mask)				\
-+	((sbi->raw_super->required_features & cpu_to_le32(mask)) != 0)
-+#define F2FS_SET_INCOMPAT_FEATURE(sbi, mask)				\
-+	(sbi->raw_super->required_features |= cpu_to_le32(mask))
-+#define F2FS_CLEAR_INCOMPAT_FEATURE(sbi, mask)				\
-+	(sbi->raw_super->required_features &= ~cpu_to_le32(mask))
-+
- /*
-  * Default values for user and/or group using reserved blocks
-  */
-@@ -3585,6 +3594,12 @@ F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
- F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
- F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
+ 	/* allow to open ro */
+@@ -891,7 +891,7 @@ int get_device_info(int i)
+ 			return -1;
+ 		}
  
-+#define F2FS_INCOMPAT_FEATURE_FUNCS(name, flagname) \
-+static inline int f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
-+{ \
-+	return F2FS_HAS_INCOMPAT_FEATURE(sbi, F2FS_FEATURE_##flagname); \
-+}
-+
- #ifdef CONFIG_BLK_DEV_ZONED
- static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
- 				    block_t blkaddr)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5540fee0fe3f..3701dcce90e6 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2513,6 +2513,16 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 		return -EINVAL;
- 	}
- 
-+	/* check whether current kernel supports all features on image */
-+	if (le32_to_cpu(raw_super->required_features) &
-+			~F2FS_INCOMPAT_FEATURES) {
-+		f2fs_info(sbi, "Unsupported feature: %x: supported: %x",
-+			  le32_to_cpu(raw_super->required_features) ^
-+			  F2FS_INCOMPAT_FEATURES,
-+			  F2FS_INCOMPAT_FEATURES);
-+		return -EINVAL;
-+	}
-+
- 	/* Check checksum_offset and crc in superblock */
- 	if (__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_SB_CHKSUM)) {
- 		crc_offset = le32_to_cpu(raw_super->checksum_offset);
-diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-index a2b36b2e286f..4141be3f219c 100644
---- a/include/linux/f2fs_fs.h
-+++ b/include/linux/f2fs_fs.h
-@@ -117,7 +117,8 @@ struct f2fs_super_block {
- 	__u8 hot_ext_count;		/* # of hot file extension */
- 	__le16	s_encoding;		/* Filename charset encoding */
- 	__le16	s_encoding_flags;	/* Filename charset encoding flags */
--	__u8 reserved[306];		/* valid reserved region */
-+	__le32 required_features;       /* incompatible features to old kernel */
-+	__u8 reserved[302];		/* valid reserved region */
- 	__le32 crc;			/* checksum of superblock */
- } __packed;
- 
+-		if (S_ISBLK(stat_buf->st_mode) && !c.force) {
++		if (S_ISBLK(stat_buf->st_mode) && !c.force && c.func != DUMP) {
+ 			fd = open(dev->path, O_RDWR | O_EXCL);
+ 			if (fd < 0)
+ 				fd = open_check_fs(dev->path, O_EXCL);
 -- 
 2.22.0
 
