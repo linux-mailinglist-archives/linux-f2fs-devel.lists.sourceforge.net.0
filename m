@@ -2,59 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C91178F90
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 17:40:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87C457902A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 18:01:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hs7lJ-000519-RL; Mon, 29 Jul 2019 15:40:33 +0000
+	id 1hs85M-00018T-7J; Mon, 29 Jul 2019 16:01:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1hs7lI-000510-Fk
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:40:32 +0000
+ (envelope-from <chao@kernel.org>) id 1hs85K-00018M-RG
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 16:01:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NSK3KOkd3bNlVwSlAt3o7HS4W4u6VRFSW+BVH8MyBM4=; b=gldtpLQvPW/tTpKjVHKTXhjfko
- R5wla/cnlXysz03b/tSDyXwbMgbNJEzpZZnep4NvvwHQZyPnsEM1ttD4hjw42nQoXjQ0JnN41K7QO
- GgStjJGRxryGsaD5INZvtw8fReT0++KONP00qRNf9dyh536vDpytd4kUwl+xsE5NoIa8=;
+ bh=XKHXPDxRecsQtRl+aiRsfHYdNoifPh6ZP5S7KkpQm0A=; b=C0HkGddTAfjmykzmpOf/Sz1tIp
+ /hcXeMGRRAq5V5/LT0PvBPedhO0TBx9cn/k/+fIF4lXL2ywX8vahykgfzq7r2QOINBoWAbAnWH9lS
+ VVn/c2Bkr6kNv410n8oHGw8dg2FxMiVmm8d/qTBO/ogrG4ozEpiw6ftqSQT3YKUAN0CA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NSK3KOkd3bNlVwSlAt3o7HS4W4u6VRFSW+BVH8MyBM4=; b=Y
- 4ZEGlv3SE7IL+IFO0soC82ioI1+rZUbMYl8ivqNawUNxd6HVtueDXxTQIkY3mFYQYYxTMa8UrbDzS
- qoYh6VEX2fzVJeFE4hUVrJhVqxiRBnsdhJErncQoDj/V/Qbz9PH4FiTETvGAz09pzz/QmHxY1pZel
- DxPeBih64pRiu/NA=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XKHXPDxRecsQtRl+aiRsfHYdNoifPh6ZP5S7KkpQm0A=; b=ElIJg2G9mTMFAMRPSqDHb5xmFC
+ 5dd4ydSakyLk+obtcrJ4UgWZb4aXTVzSFZYYvR0wCmXRXrnbWtmuxzVM+fEK9XBEhO5ooTnSC5xpI
+ OWBvzUlD5sh/pAEtqTar4iVDSajouPwzlz63cSAaBdD+uHRahJrZyRhtVsVy/XplcZyE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hs7lD-003Chj-Rs
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 15:40:32 +0000
-Received: from localhost.localdomain (unknown [180.111.32.87])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ id 1hs85J-003die-MP
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 16:01:14 +0000
+Received: from [192.168.0.101] (unknown [180.111.32.87])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5546F2067D;
- Mon, 29 Jul 2019 15:40:20 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DEDE121773;
+ Mon, 29 Jul 2019 16:01:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564414822;
- bh=yi6+T7g7yldlTb8eoXuPvBmVnfCMbjM8FkkAJahJagk=;
- h=From:To:Cc:Subject:Date:From;
- b=VmoMjlBKfjQMxmtpek8BdKts3soYxIS5T1i2hKA6GlLnoK+2qowoqT03XS7ujCsr9
- 8ybm6xGsgpxT6uKmDMMScjSDrEaUmoQi7Ksa9iAynzQuKRgGQtdPjVlfjhGTNUJ5HY
- rGh0qmnnrNlvGvvOT18UjG9Ohp3pKxIye0SdOhzA=
+ s=default; t=1564416065;
+ bh=zsjK32URpw9E8xLWXuq6yO1piXT5U7FJRiPetxczkY8=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=o8LQ/PbTkEysPkQh7s5MVgRkrgiRvXMDYlm8omA3B0CBInsniNIHXTNJ2PZJsNi1Z
+ JueR51t44xI69CjyVNWrfVCorx+hK+Dn0qG5uc666cyg8aS3049O10gSFQDYEdpotu
+ owo+G2PTA73CG0Z0jbYWREIAYkSdj950MAFQl9b0=
+To: Sahitya Tummala <stummala@codeaurora.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <1564377626-12898-1-git-send-email-stummala@codeaurora.org>
 From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Mon, 29 Jul 2019 23:39:36 +0800
-Message-Id: <20190729153936.15438-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.0
+Message-ID: <a5acb5cb-2e77-902f-0a5e-063f7cbd0643@kernel.org>
+Date: Tue, 30 Jul 2019 00:00:45 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
+In-Reply-To: <1564377626-12898-1-git-send-email-stummala@codeaurora.org>
+Content-Language: en-US
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -67,8 +73,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hs7lD-003Chj-Rs
-Subject: [f2fs-dev] [PATCH] dump.f2fs: allow to dump data on mounted device
+X-Headers-End: 1hs85J-003die-MP
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix indefinite loop in f2fs_gc()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,50 +86,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+Hi Sahitya,
 
-In generic/38[3456], we use quotactl(2) to check if prjquota is
-enabled on the given device (src/feature -P $dev in _require_prjquota),
-and quotactl(2) requires the given device is a mounted device.
+On 2019-7-29 13:20, Sahitya Tummala wrote:
+> Policy - foreground GC, LFS mode and greedy GC mode.
+> 
+> Under this policy, f2fs_gc() loops forever to GC as it doesn't have
+> enough free segements to proceed and thus it keeps calling gc_more
+> for the same victim segment.  This can happen if the selected victim
+> segment could not be GC'd due to failed blkaddr validity check i.e.
+> is_alive() returns false for the blocks set in current validity map.
+> 
+> Fix this by not resetting the sbi->cur_victim_sec to NULL_SEGNO, when
+> the segment selected could not be GC'd. This helps to select another
+> segment for GC and thus helps to proceed forward with GC.
+> 
+> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> ---
+>  fs/f2fs/gc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 8974672..7bbcc4a 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1303,7 +1303,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>  		round++;
+>  	}
+>  
+> -	if (gc_type == FG_GC)
+> +	if (gc_type == FG_GC && seg_freed)
+>  		sbi->cur_victim_sec = NULL_SEGNO;
 
-So it requires dump.f2fs to list/check enabled features on a mounted
-device, let's relieve to allow such operation.
+In some cases, we may remain last victim in sbi->cur_victim_sec, and jump out of
+GC cycle, then SSR can skip the last victim due to sec_usage_check()...
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- lib/libf2fs.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks,
 
-diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index 5ac07c1..7b65fa0 100644
---- a/lib/libf2fs.c
-+++ b/lib/libf2fs.c
-@@ -845,7 +845,7 @@ void get_kernel_uname_version(__u8 *version)
- #ifndef ANDROID_WINDOWS_HOST
- static int open_check_fs(char *path, int flag)
- {
--	if (c.func != FSCK || c.fix_on || c.auto_fix)
-+	if (c.func != DUMP && (c.func != FSCK || c.fix_on || c.auto_fix))
- 		return -1;
- 
- 	/* allow to open ro */
-@@ -891,7 +891,7 @@ int get_device_info(int i)
- 			return -1;
- 		}
- 
--		if (S_ISBLK(stat_buf->st_mode) && !c.force) {
-+		if (S_ISBLK(stat_buf->st_mode) && !c.force && c.func != DUMP) {
- 			fd = open(dev->path, O_RDWR | O_EXCL);
- 			if (fd < 0)
- 				fd = open_check_fs(dev->path, O_EXCL);
--- 
-2.22.0
-
+>  
+>  	if (sync)
+> 
 
 
 _______________________________________________
