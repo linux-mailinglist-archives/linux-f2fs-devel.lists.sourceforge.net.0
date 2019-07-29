@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0EA1795D0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 21:46:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3F937972A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 21:58:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsBbk-00076J-1E; Mon, 29 Jul 2019 19:46:56 +0000
+	id 1hsBn4-0007Zy-OQ; Mon, 29 Jul 2019 19:58:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hsBbi-00076B-MK
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 19:46:54 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hsBn2-0007Zq-QC
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 19:58:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6jO1YozPRUBmhPuSmQA0oshSqy+ZodGK4wjHoFQjjWc=; b=krxTy0FFk7v5qnMvsCwsS1AR/+
- B7EE1En5Z8bXuTz3godGmi5VP3vxq6700og487KcfOXThPsIoeVqmBfFv0jFAkF4q1SzGrfXZD0p1
- nSs3OQv6mr4wzfdKrSoxoaLvGHXvkl1TceG5XclFZSwOUxcW86KSTVO++GWDi4hz/LoQ=;
+ bh=TemuNyqTE+vVwd7aOVDDMXfXCX5fiMkqUQN5PPij8Cg=; b=eisp5xYHvHXFnqlK+Q1jRN77oH
+ aVPbfUTMzUKuOFcXKe/XwBMehZTYrBG1HNeQ4lQRpZdXWLHxFDqFwylkLzpCgGoAtmO7M9Bxt96Qk
+ 3sxduMpMPRikFuVC402AiD0j4LV+9Urus98z127wAXGZnkJJXeIkZPYLRjqzIsDV//eg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6jO1YozPRUBmhPuSmQA0oshSqy+ZodGK4wjHoFQjjWc=; b=WUgI94wL+WamaVR6dn/o79PqFZ
- /tO+OTRdHWuozT806wwYYGtdi2QjYRLMRyvrguPDsA+HH459IyM7wB0Gk0BHPdZlBdkLe30xnoJE6
- 3gudr1B/562sJkq/niOcQdJAI7lMSH0FwpCVNj5pSUM5HikMnIG5KGZjtKalQ14OdZFE=;
+ bh=TemuNyqTE+vVwd7aOVDDMXfXCX5fiMkqUQN5PPij8Cg=; b=QnxmgKI95SQ0sejYNHZk7DoBBL
+ uD79u5dQs7E3Myx+FFafDT7nWgUoT4Cg/WrkXN2H1Eclk7yjYAKiBmCDlmdGLFwhraoNLcmSUQ4HL
+ pHOIMWEpn3S6vn0uPAU60iVfPfyNReKO4n0naqLUNzxOzFaJc6EcNF/FYvAvpJqiIgrk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsBbg-0042NS-MX
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 19:46:54 +0000
+ id 1hsBn1-00FmR9-LX
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 19:58:36 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C031C205F4;
- Mon, 29 Jul 2019 19:46:46 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B93BB204EC;
+ Mon, 29 Jul 2019 19:58:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564429607;
- bh=8Slb/dcgJuOY+mm6dVYYikaN4v+qkAQ5N+ZwtSce/eI=;
+ s=default; t=1564430310;
+ bh=MUgzS0F8d9HlQcIKk/AeINedk5YvM3Io6WjGyuY8L/w=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=r/QgV/Aa24jZcj1+VmNkDQtk9eYteOJ3HaDEJxXWAnq67HBQqoCgM4v64bpEo3cnW
- d1fLgk4VdQ6kcWFSM/MvQYxGQ2fT7ccgYrDTaxOtNdJ8pNCRzoXEdrLqM1gGUs5W5i
- cYniPprJp6BlXGrbGMSEofsXk1WX4mUaAEFckltY=
-Date: Mon, 29 Jul 2019 12:46:45 -0700
+ b=iS8QBHsmz86M34KZIw9nisCR2fm0L+w7kPLmRgKBgKMY9InqdG7s5arcER6e70Hiv
+ 1m2j+mTH3W8YpqEW3EcAFnbX72omhY6EUmca5vAe644L7pPOodpSDNlZw9817U4/I8
+ NeTf0yKRDUJxPPPBQRoViELwNkQzTSRuae1WjtFI=
+Date: Mon, 29 Jul 2019 12:58:28 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20190729194644.GE169027@gmail.com>
+Message-ID: <20190729195827.GF169027@gmail.com>
 Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
  linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
@@ -61,11 +61,11 @@ Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
  Paul Crowley <paulcrowley@google.com>,
  Satya Tangirala <satyat@google.com>
 References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-7-ebiggers@kernel.org>
- <20190728185003.GF6088@mit.edu>
+ <20190726224141.14044-8-ebiggers@kernel.org>
+ <20190728192417.GG6088@mit.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190728185003.GF6088@mit.edu>
+In-Reply-To: <20190728192417.GG6088@mit.edu>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 3.4 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -79,9 +79,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hsBbg-0042NS-MX
-Subject: Re: [f2fs-dev] [PATCH v7 06/16] fscrypt: add
- FS_IOC_ADD_ENCRYPTION_KEY ioctl
+X-Headers-End: 1hsBn1-00FmR9-LX
+Subject: Re: [f2fs-dev] [PATCH v7 07/16] fscrypt: add
+ FS_IOC_REMOVE_ENCRYPTION_KEY ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,62 +102,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Jul 28, 2019 at 02:50:03PM -0400, Theodore Y. Ts'o wrote:
-> On Fri, Jul 26, 2019 at 03:41:31PM -0700, Eric Biggers wrote:
-> > From: Eric Biggers <ebiggers@google.com>
-> > 
-> > Add a new fscrypt ioctl, FS_IOC_ADD_ENCRYPTION_KEY.  This ioctl adds an
-> > encryption key to the filesystem's fscrypt keyring ->s_master_keys,
-> > making any files encrypted with that key appear "unlocked".
-> 
-> Note: it think it's going to be useful to make the keyring id
-> available someplace like /sys/fs/<fs>/<blkdev>/keyring, or preferably
-> in the new fsinfo system call.  Yes, the system administrator can paw
-> through /proc/keys and try to figure it out, but it will be nicer if
-> there's a direct way to do that.
-> 
-> For that matter, we could just add a new ioctl which returns the file
-> system's keyring id.  That way an application program won't have to
-> try to figure out what a file's underlying sb->s_id happens to be.
-> (Especially if things like overlayfs are involved.)
-
-Keep in mind that the new ioctls (FS_IOC_ADD_ENCRYPTION_KEY,
-FS_IOC_REMOVE_ENCRYPTION_KEY, FS_IOC_GET_ENCRYPTION_KEY_STATUS) don't take the
-keyring ID as a parameter, since it's already known from the filesystem the
-ioctl is executed on.  So there actually isn't much that can be done with the
-keyring ID.  But sure, if it's needed later we can add an API to get it.
-
-> 
-> > diff --git a/include/uapi/linux/fscrypt.h b/include/uapi/linux/fscrypt.h
-> > index 29a945d165def..93d6eabaa7de4 100644
-> > --- a/include/uapi/linux/fscrypt.h
-> > +++ b/include/uapi/linux/fscrypt.h
+On Sun, Jul 28, 2019 at 03:24:17PM -0400, Theodore Y. Ts'o wrote:
 > > +
-> > +struct fscrypt_key_specifier {
-> > +#define FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR	1
-> > +	__u32 type;
-> > +	__u32 __reserved;
+> > +/*
+> > + * Try to remove an fscrypt master encryption key.  If other users have also
+> > + * added the key, we'll remove the current user's usage of the key, then return
+> > + * -EUSERS.  Otherwise we'll continue on and try to actually remove the key.
 > 
-> Can you move the definition of FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR
-> outside of the structure definition, and then add a comment about what
-> is a "descriptor" key spec?  (And then in a later patch, please add a
-> comment about what is an "identifier" key type.)  There's an
-> explanation in Documentation/filesystems/fscrypt.rst, I know, but a
-> one or two line comment plus a pointer to
-> Documentation/filesystems/fscrypt.rst in the header file would be
-> really helpful.
+> Nit: this should be moved to patch #11
+> 
+> Also, perror(EUSERS) will display "Too many users" which is going to
+> be confusing.  I understand why you chose this; we would like to
+> distinguish between there are still inodes using this key, and there
+> are other users using this key.
+> 
+> Do we really need to return EUSERS in this case?  It's actually not an
+> *error* that other users are using the key.  After all, the unlink(2)
+> system call doesn't return an advisory error when you delete a file
+> which has other hard links.  And an application which does care about
+> this detail can always call FS_IOC_ENCRYPTION_KEY_STATUS() and check
+> user_count.
+> 
 
-I'll add a brief comment that explains the key specifier.
+Returning 0 when the key wasn't fully removed might also be confusing.  But I
+guess you're right that returning an error doesn't match how syscalls usually
+work.  It did remove the current user's usage of the key, after all, rather than
+completely fail.  And as you point out, if someone cares about other users
+having added the key, they can use FS_IOC_GET_ENCRYPTION_KEY_STATUS.
 
-I've already added a pointer to Documentation/filesystems/fscrypt.rst at the top
-of the header (this was one of the cleanups in v6 => v7):
+So I guess I'll change it to 0.
 
-/*
- * fscrypt user API
- *
- * These ioctls can be used on filesystems that support fscrypt.  See the
- * "User API" section of Documentation/filesystems/fscrypt.rst.
- */
+Thanks!
 
 - Eric
 
