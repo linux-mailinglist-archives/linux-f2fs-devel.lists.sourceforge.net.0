@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 205B8799F8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 22:30:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E73CD79A37
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2019 22:46:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsCHS-0000Y4-2C; Mon, 29 Jul 2019 20:30:02 +0000
+	id 1hsCXX-0004zu-TD; Mon, 29 Jul 2019 20:46:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hsCHQ-0000Xl-VX
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 20:30:00 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hsCXV-0004zl-8f
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 20:46:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ByJiHPJNYBI2ORziCi8B1eL/dGIYT86p+Gi5vc1wQEU=; b=A/0As5px+56Gyc38TCPLyj/yLS
- TiIs3GJqgR8elhP9UPhD3Yu+bOl3B+jJMheeASuRmD0pj2kHvI2wCUZkth66zOXogs8YE0AGB8tVc
- LmycSKabhStxiURcjotr5KF2lpw1BQAofjPCk0CKcarIkUZqllifweBCTJzcK82+oLKQ=;
+ bh=pf5AMvh1xxgs/Bq5LKamHgjq2spjhAoE1QhEizd9KJc=; b=iijxRG4vBXmyp8aPN8dy3b9rpD
+ mMd8rG4KcsN5Uan9Fov+pu4deQh/364UoPwaJxMbvjXcEAllxh828xm4SDF0YzdyX4GS1pEE0syZ7
+ vvROYbQQkvlK6sVr3rnJwM3toVnvS5wXaMjV5c9JYvX686Fb3WJMNmBAQmoezye86KMo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ByJiHPJNYBI2ORziCi8B1eL/dGIYT86p+Gi5vc1wQEU=; b=Y4uAFJujJWD3PhRLb3OdCLw/8u
- RAUc/ort2fYWRWKspnAyVlp4kvAhPu6SxUbPTt/9qymiVSWem9Sl3QuF0GvjkjZre568jh4EOZWkV
- QsWySfCv2AKyJVq71dR+l026qGmus86Q0kx1M5FjO4iHFTekTW5pWLaAGnnUI+fD6X7I=;
+ bh=pf5AMvh1xxgs/Bq5LKamHgjq2spjhAoE1QhEizd9KJc=; b=m+gaAHcHdgqY+Vap/LHeDeNdGl
+ Zq9AL0PLUQq/oQtXf6kNtzWLjgJpsFMU4NqYg1ZQ8LgSwGagaQgOFcqbPBlOb6w4zjJzhYb/+R3zP
+ UeRkrXxPNwP4oiaRS74y0U7bjZvUWCSsy426+OCC94FKfMUN68wJbXx+sp5iYIrSnvgA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsCHP-00FvJi-Jm
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 20:30:00 +0000
+ id 1hsCXU-003hzu-3k
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jul 2019 20:46:37 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B2FB620679;
- Mon, 29 Jul 2019 20:29:53 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2D6B0206A2;
+ Mon, 29 Jul 2019 20:46:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564432194;
- bh=7LK4u/xXVtAq5xQMkemCjB4sBIVdQGteWvKYNQ+TBCY=;
+ s=default; t=1564433190;
+ bh=DNMh2YRc0dQISTUq/gkVxZiJ3MfUwE+LBvvMLd0sx0w=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DPew4TPf3PkKUXWtCLWWIQsryuZDmRsZW9HWBPCFmul6GOPKrMhWsOP2j0s6E1587
- pPpWGjXg0oLEblY9YgIrbRyuoJDVlQC0LdMHo0X3YE5xtPBbo3Oz6TZzJnytmQbINO
- 1di8FZ/AmOwFvTEDEuqxMDphn/LIvGf9Grr0aIA8=
-Date: Mon, 29 Jul 2019 13:29:52 -0700
+ b=K79oGysDbp1R9KcVqj1mKpfGB23D0dx9KzJwL1URFJI/8PotFaTXB1QXv/9jPmJ5e
+ cd4dzd2ixOf8QsiHSDEd5r1iJBny2qYoC0vd1z0wpsTIbfCpr52p94FTMkHI78oJ2t
+ NisulN2mchZN4cYXAX27Nu925MXHkVW50WusaYRo=
+Date: Mon, 29 Jul 2019 13:46:28 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20190729202951.GG169027@gmail.com>
+Message-ID: <20190729204627.GH169027@gmail.com>
 Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
  linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
@@ -61,11 +61,11 @@ Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
  Paul Crowley <paulcrowley@google.com>,
  Satya Tangirala <satyat@google.com>
 References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-10-ebiggers@kernel.org>
- <20190728193949.GI6088@mit.edu>
+ <20190726224141.14044-11-ebiggers@kernel.org>
+ <20190728211730.GK6088@mit.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190728193949.GI6088@mit.edu>
+In-Reply-To: <20190728211730.GK6088@mit.edu>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 3.4 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -79,9 +79,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hsCHP-00FvJi-Jm
-Subject: Re: [f2fs-dev] [PATCH v7 09/16] fscrypt: add an HKDF-SHA512
- implementation
+X-Headers-End: 1hsCXU-003hzu-3k
+Subject: Re: [f2fs-dev] [PATCH v7 10/16] fscrypt: v2 encryption policy
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,65 +102,77 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Jul 28, 2019 at 03:39:49PM -0400, Theodore Y. Ts'o wrote:
-> On Fri, Jul 26, 2019 at 03:41:34PM -0700, Eric Biggers wrote:
-> > From: Eric Biggers <ebiggers@google.com>
-> > 
-> > Add an implementation of HKDF (RFC 5869) to fscrypt, for the purpose of
-> > deriving additional key material from the fscrypt master keys for v2
-> > encryption policies.  HKDF is a key derivation function built on top of
-> > HMAC.  We choose SHA-512 for the underlying unkeyed hash, and use an
-> > "hmac(sha512)" transform allocated from the crypto API.
-> > 
-> > We'll be using this to replace the AES-ECB based KDF currently used to
-> > derive the per-file encryption keys.  While the AES-ECB based KDF is
-> > believed to meet the original security requirements, it is nonstandard
-> > and has problems that don't exist in modern KDFs such as HKDF:
-> > 
-> > 1. It's reversible.  Given a derived key and nonce, an attacker can
-> >    easily compute the master key.  This is okay if the master key and
-> >    derived keys are equally hard to compromise, but now we'd like to be
-> >    more robust against threats such as a derived key being compromised
-> >    through a timing attack, or a derived key for an in-use file being
-> >    compromised after the master key has already been removed.
-> > 
-> > 2. It doesn't evenly distribute the entropy from the master key; each 16
-> >    input bytes only affects the corresponding 16 output bytes.
-> > 
-> > 3. It isn't easily extensible to deriving other values or keys, such as
-> >    a public hash for securely identifying the key, or per-mode keys.
-> >    Per-mode keys will be immediately useful for Adiantum encryption, for
-> >    which fscrypt currently uses the master key directly, introducing
-> >    unnecessary usage constraints.  Per-mode keys will also be useful for
-> >    hardware inline encryption, which is currently being worked on.
-> > 
-> > HKDF solves all the above problems.
-> > 
-> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+On Sun, Jul 28, 2019 at 05:17:30PM -0400, Theodore Y. Ts'o wrote:
+> On Fri, Jul 26, 2019 at 03:41:35PM -0700, Eric Biggers wrote:
+> > @@ -319,6 +329,31 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
+> >  	if (!capable(CAP_SYS_ADMIN))
+> >  		goto out_wipe_secret;
+> >  
+> > +	if (arg.key_spec.type != FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR) {
 > 
-> Unless I missed something there's nothing here which is fscrypt
-> specific.  Granted that it's somewhat unlikely that someone would want
-> to implement (the very bloated) IKE from IPSEC in the kernel, I wonder
-> if there might be other users of HKDF, and whether this would be
-> better placed in lib/ or crypto/ instead of fs/crypto?
+> This should be "== FSCRYPT_KEY_SPEC_TYPE_INDENTIFIER" instead.  That's
+> because you use the identifier part of the union:
+> 
+> > +		/* Calculate the key identifier and return it to userspace. */
+> > +		err = fscrypt_hkdf_expand(&secret.hkdf,
+> > +					  HKDF_CONTEXT_KEY_IDENTIFIER,
+> > +					  NULL, 0, arg.key_spec.u.identifier,
+> 
+> If we ever add a new key specifier type, and alternative in the union,
+> this is going to come back to bite us.
+
+Well, I did it this way because the next patch changes the code to:
+
+	if (arg.key_spec.type == FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR) {
+		...
+	} else {
+		...
+	}
+
+We already validated that it's either TYPE_DESCRIPTOR or TYPE_IDENTIFIER.
+
+But I guess to be more clear I'll just make it handle the default case again.
+
+	switch (arg.key_spec.type) {
+	case FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR:
+		...
+		break;
+	case FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER:
+		...
+		break;
+	default:
+		err = -EINVAL;
+		break;
+	}
+
+> 
+> > +	if (policy->version == FSCRYPT_POLICY_V1) {
+> > +		/*
+> > +		 * The original encryption policy version provided no way of
+> > +		 * verifying that the correct master key was supplied, which was
+> > +		 * insecure in scenarios where multiple users have access to the
+> > +		 * same encrypted files (even just read-only access).
+> 
+> Which scenario do you have in mind?  With read-only access, Alice can
+> fetch the encryption policy for a directory, and introduce a key with
+> the same descriptor, but the "wrong" key, but that's only going to
+> affect Alice's use of the key.  It won't affect what key is used by
+> Bob, since Alice doesn't have write access to Bob's keyrings.
+> 
+> If what you mean is the risk when there is a single global
+> filesystem-specific keyring, where Alice could introduce a "wrong" key
+> identified with a specific descriptor, then sure, Alice could trick
+> Bob into encrypting his data with the wrong key (one known to Alice).
+> But we don't allow keys usable by V1 policies to be used in the
+> filesystem-specific keyring, do we?
 > 
 
-This is standard HKDF-SHA512; only the choice of parameters is fscrypt-specific.
-So it could indeed use a common implementation of HKDF if one were available.
+The scenario is that Alice lists the directory with the wrong key, then Bob
+lists the directory too and gets the wrong filenames.  This happens because the
+inode, fscrypt_info, dentry cache, page cache, etc. are the same for everyone.
+Bob's key is never looked up because the inode already has a key cached.
 
-However, I don't think there are any other HKDF users in the kernel currently.
-Also, while there was a patch to support HKDF via the crypto_rng API, there was
-no consensus about whether this was actually the best way to add KDF support:
-https://lore.kernel.org/linux-crypto/2423373.Zd5ThvQH5g@positron.chronox.de
-
-So for now, to avoid unnecessarily blocking this patchset I think we should just
-go with this implementation in fs/crypto/.  It can always be changed later, once
-we decide on the best way to add KDFs to the crypto API.
-
-[To be clear: this patch already uses "hmac(sha512)" from the crypto API.  It's
-only the actual HKDF part that we're talking about here.
-
-Also, its correctness is tested by the ciphertext verification xfstests.]
+This also applies to regular files and symlinks.
 
 - Eric
 
