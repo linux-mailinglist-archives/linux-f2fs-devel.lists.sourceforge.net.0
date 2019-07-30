@@ -2,101 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3F0C7A00F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 06:36:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 233997A140
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 08:26:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsJsT-0002K1-Cq; Tue, 30 Jul 2019 04:36:45 +0000
+	id 1hsLaH-0008R9-Sw; Tue, 30 Jul 2019 06:26:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stummala@codeaurora.org>) id 1hsJsQ-0002Jg-WB
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 04:36:43 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1hsLaG-0008R1-Lz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 06:26:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CZOc0O/UielP4GF8ZNlYbpU4ZsGMAmhD58W0GFCGJME=; b=PHDEjxqIpal3abLA7imf9FIsnJ
- eC8Zh1JgPy/wo6AT0lfL29JjWVW7Z8LwBX4Zw43zr0MhpvYS13HKtJIqmZWnO5RVYfMopqL+BvOSF
- GlER38D0PSY8Gclql0tD1NcNzVxE4weJJ5TZ7HkXibzrN0JqCAlAfv8Jv1+jXRZhaxtE=;
+ bh=xMD+l9fypUCH6urBbsmXNeOL2msvbcbp7Ymsz8eAf6Y=; b=WW9xor9PHpXAvyAkMeJJUSaLHR
+ asOo7tLBmhvfthNzVm6JkmOGcoInQ0WWP8u/F7T4WfjmVFcNqHIBRhv4aC7kBwnDniWKWx8tzmyny
+ r+6FpFuzHWc2f7oJOZg51JUtVnmxGYGWKOixE9kYRqLb2sc1o4Og4dc4kqY1QUIoC3qs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CZOc0O/UielP4GF8ZNlYbpU4ZsGMAmhD58W0GFCGJME=; b=D2gadHcU83pSS0ZI/+rHUSCHyC
- 4VzvDrezS2414BPmHk6nTsSe4fXdvw98fWA6RvOY8hMqv8NvHgquao/9wsUZEn5XadftdBdrY/ReB
- o/i1QHwDJWoHcn8XMw4bGmPXXVF4teJL0+x+e2qJcMgUj8GkzPrjNgDdQxXnyXTvo4c8=;
-Received: from smtp.codeaurora.org ([198.145.29.96])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=xMD+l9fypUCH6urBbsmXNeOL2msvbcbp7Ymsz8eAf6Y=; b=KA5RnvjYfWLCkuMMd5RsLV1b2m
+ cYTAJFnO4M+frOrNsV8CJnqXvdgkpiNqYG2F4ynESMTcSPvExiYJQZ7K1SqPss8jwWKYxEY33i8oE
+ qrwrDg1EJoUOefE1Lcee77a1TVrpgOTs3tRRSLAwTmH8meAClJd23LnTDZnNjcwBbLZ4=;
+Received: from mail.wl.linuxfoundation.org ([198.145.29.98])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsJsP-00H4Qv-PA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 04:36:42 +0000
-Received: by smtp.codeaurora.org (Postfix, from userid 1000)
- id 32BF260592; Tue, 30 Jul 2019 04:36:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1564461396;
- bh=AgW8T/aFOLgGFp497+tsPv5AXD39QeiyHoimN2WKVE4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dPVIznaXzpPkaXTocG74aVUxQ+XzM8yeP4kHYLzdBIK8lDZHEks99KCvfqTP8hUsL
- /JGqh72utOqTcB1oXL12CIqx5loQTe/4vPUfan60lARz7epIIUJSWHOKIQJhBtNLeX
- WPcpRrqKQFwBc6jH0L8PRJpfK4TFbG5mMgyN4r4Y=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- pdx-caf-mail.web.codeaurora.org
+ id 1hsLaE-004TBj-Nb
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 06:26:04 +0000
+Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
+ by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 4BDCD28455
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 Jul 2019 06:25:56 +0000 (UTC)
+Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
+ id 3C25328385; Tue, 30 Jul 2019 06:25:56 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+ pdx-wl-mail.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_INVALID,DKIM_SIGNED,SPF_NONE autolearn=no autolearn_force=no
- version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher DHE-RSA-AES128-SHA (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: stummala@smtp.codeaurora.org)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 924966021A;
- Tue, 30 Jul 2019 04:36:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1564461395;
- bh=AgW8T/aFOLgGFp497+tsPv5AXD39QeiyHoimN2WKVE4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PlMzf4+nENUjFBIdUJU/p4cI6jhCwMJrLbp1LhEC/33eZ20pfcEnFWFMxYEAnRdKJ
- C6NWipbd1AmXdfMYzUyq3ktTmIvfZdzg/UWbC4PUpDT9gov1CDvSue4qvu1YusM/y2
- novZAhzDXI9bMsMGuuzKPthOh44gOTwDv4CmuU1M=
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 924966021A
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-Date: Tue, 30 Jul 2019 10:06:30 +0530
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20190730043630.GG8289@codeaurora.org>
-References: <1564377626-12898-1-git-send-email-stummala@codeaurora.org>
- <a5acb5cb-2e77-902f-0a5e-063f7cbd0643@kernel.org>
+X-Spam-Status: No, score=-1.9 required=2.0 tests=BAYES_00,NO_RECEIVED,
+ NO_RELAYS autolearn=ham version=3.3.1
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 30 Jul 2019 06:25:55 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: CODE_FIX
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-204135-202145-YWWjTVStlv@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-204135-202145@https.bugzilla.kernel.org/>
+References: <bug-204135-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <a5acb5cb-2e77-902f-0a5e-063f7cbd0643@kernel.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1hsJsP-00H4Qv-PA
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix indefinite loop in f2fs_gc()
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hsLaE-004TBj-Nb
+Subject: [f2fs-dev] [Bug 204135] F2FS: BUG: KASAN: null-ptr-deref in
+ mempool_alloc+0xd8/0x2e0
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,78 +94,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Chao,
+https://bugzilla.kernel.org/show_bug.cgi?id=204135
 
-On Tue, Jul 30, 2019 at 12:00:45AM +0800, Chao Yu wrote:
-> Hi Sahitya,
-> 
-> On 2019-7-29 13:20, Sahitya Tummala wrote:
-> > Policy - foreground GC, LFS mode and greedy GC mode.
-> > 
-> > Under this policy, f2fs_gc() loops forever to GC as it doesn't have
-> > enough free segements to proceed and thus it keeps calling gc_more
-> > for the same victim segment.  This can happen if the selected victim
-> > segment could not be GC'd due to failed blkaddr validity check i.e.
-> > is_alive() returns false for the blocks set in current validity map.
-> > 
-> > Fix this by not resetting the sbi->cur_victim_sec to NULL_SEGNO, when
-> > the segment selected could not be GC'd. This helps to select another
-> > segment for GC and thus helps to proceed forward with GC.
-> > 
-> > Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> > ---
-> >  fs/f2fs/gc.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> > index 8974672..7bbcc4a 100644
-> > --- a/fs/f2fs/gc.c
-> > +++ b/fs/f2fs/gc.c
-> > @@ -1303,7 +1303,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
-> >  		round++;
-> >  	}
-> >  
-> > -	if (gc_type == FG_GC)
-> > +	if (gc_type == FG_GC && seg_freed)
-> >  		sbi->cur_victim_sec = NULL_SEGNO;
-> 
-> In some cases, we may remain last victim in sbi->cur_victim_sec, and jump out of
-> GC cycle, then SSR can skip the last victim due to sec_usage_check()...
-> 
+Chao Yu (chao@kernel.org) changed:
 
-I see. I have a few questions on how to fix this issue. Please share your
-comments.
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|ASSIGNED                    |RESOLVED
+         Resolution|---                         |CODE_FIX
 
-1. Do you think the scenario described is valid? It happens rarely, not very
-easy to reproduce.  From the dumps, I see that only block is set as valid in
-the sentry->cur_valid_map for which I see that summary block check is_alive()
-could return false. As only one block is set as valid, chances are there it
-can be always selected as the victim by get_victim_by_default() under FG_GC.
-
-2. What are the possible scenarios where summary block check is_alive() could
-fail for a segment?
-
-3. How does GC handle such segments?
-
-Thanks,
-
-> Thanks,
-> 
-> >  
-> >  	if (sync)
-> > 
+--- Comment #7 from Chao Yu (chao@kernel.org) ---
+Thanks for the test, let me close this track. :)
 
 -- 
---
-Sent by a consultant of the Qualcomm Innovation Center, Inc.
-The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
