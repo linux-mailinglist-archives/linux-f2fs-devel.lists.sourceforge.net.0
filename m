@@ -2,73 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4CC47B13F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 20:05:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18C757B466
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 22:40:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsWVY-0005dz-Gg; Tue, 30 Jul 2019 18:05:56 +0000
+	id 1hsYv8-0003yJ-Hc; Tue, 30 Jul 2019 20:40:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hsWVX-0005do-94
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 18:05:55 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1hsYv6-0003yB-JE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 20:40:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KMz9UZfY5NrVye3vYuGh37L5iEyCDY9riDXZ47Y5pSw=; b=M8mZIwUWHCjXNoKrfv9pw0UQNY
- SOatuSM2jGmTLS4KWrF6nLKSDCAmd0K+0cPtKMUxkmeYvWJrNkxU5J/PPhhCVbBLZ+j5nkkRUx0q6
- olQ7PNcmIsnKbnPoxkiBKppv/lI/8E60wPpOf2hG+JJAkPgtzdCxPg++/FvdxVJxoa+c=;
+ bh=g5OBQC5fvjXqcFlY/yJ+dNTSh6COiJYheFMclYiT6t0=; b=ZbTILJPtvO8aaiACwAjJcRX51a
+ z0mnH+bgB4VwEeqi52kKvaqpQe1Uf9haW+g0iBjyG9QxrSA6lBosGPprluo8mZY+CRO5Dl6sqlC6D
+ r3Fg/KXJxlxpnvmwN/axnTjVP1E5JQ/M1A2k7jr7s/cxuHejXhOxEFBDDwFAu4vOfG0g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KMz9UZfY5NrVye3vYuGh37L5iEyCDY9riDXZ47Y5pSw=; b=W7t1HoQ2w1x/Ihb2xTgyNKXKsZ
- TSvCVDbkGsZZSG3D0a29K+SkgbKAKhYXjDyanScDUOLvxwkdXliC5nEu/HQlit7shUmTbJzJ9jpqv
- DlEEF1LgSgt9P7ynQSUV9DRJROfCzhM9+TmvkWwIMcjFyT7JJILbsu2ZLWIATskc1Ev8=;
+ bh=g5OBQC5fvjXqcFlY/yJ+dNTSh6COiJYheFMclYiT6t0=; b=AZMdVLxzH+aajV1xo9AbAJHI2a
+ 6AAeQVN+RHFYMa0BrgKil9WVHPUXziEDsZGzVl2J+2vsNn5wMz3woK9sItckHM5ylKBF31zW5h9FA
+ urIPeAYiDa7f0JX3azjawOP6aewLkUDm+r+juu4vxnb/WrOnTcyCxg35f68yRxiA0ja4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsWVU-004ZbQ-W5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 18:05:55 +0000
-Received: from localhost (unknown [104.132.0.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 21E23206A2;
- Tue, 30 Jul 2019 18:05:46 +0000 (UTC)
+ id 1hsYv5-001Vfl-7D
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 20:40:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564509947;
- bh=JiPzFNptGZecEI72AnXbmIRhLTfjmexxpWzCIrWo9KA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=q7s8xYEuWjMsuH0Cpk+qeVqq/jG+9bBqHCCxZ/YECHcBKSM5bRzoN0NTWeUyLBwrp
- L34fRL0sFjMwH0zXw2VvGtjjIQc83/xbKx1Xdyumg0X2wcUiYli9t81Xyp7MkuN52V
- nkR3shtIxTgZl4sJDyczAdEhP5zcyS1wqmiNbjW4=
-Date: Tue, 30 Jul 2019 11:05:46 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Ju Hyung Park <qkrwngud825@gmail.com>
-Message-ID: <20190730180546.GC76478@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190711150617.124660-1-qkrwngud825@gmail.com>
- <CAD14+f3pxEqC-Kqt0-9+Xb_+Jwr_=NjQmsVoLXz9YTAZJo12zg@mail.gmail.com>
- <20190711170647.GA65508@jaegeuk-macbookpro.roam.corp.google.com>
- <24f7940d-325c-c2b3-608e-ce311db2dc7d@huawei.com>
- <CAD14+f3ZGaY5jM+A5Bv=cSZNUeYaY=hywaG44SsotMNVz=D09g@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD14+f3ZGaY5jM+A5Bv=cSZNUeYaY=hywaG44SsotMNVz=D09g@mail.gmail.com>
-User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.1 (/)
+ s=default; t=1564519221;
+ bh=ugWXpsFhigfjuYJ4dltnK0ERMdeDSNvAi6z+BURK244=;
+ h=From:In-Reply-To:References:Date:To:Cc:From;
+ b=ZibkTTH+jISGoqZ2U9iBBmZy2zBTY3VYqfjjEQvkvTc+nWgPhdQSfhV5+hZqo4m+0
+ tddt/6HH5/HbJbMwAuSYCJT6CjdkdqWdSjMAeoOhDVo/yN0kmRc8bFQU8e73POhhV4
+ DNriAnArnvWrHxpo2PA2K4AlcYfViy9iC4ecOJtc=
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.4-rc3
+X-PR-Tracked-Commit-Id: 38fb6d0ea34299d97b031ed64fe994158b6f8eb3
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 0572d7668a58794059030b88945f78dfb94e3325
+Message-Id: <156451922159.18459.4858636766003450241.pr-tracker-bot@kernel.org>
+Date: Tue, 30 Jul 2019 20:40:21 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,10 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hsWVU-004ZbQ-W5
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use kmem_cache pool during xattr
- lookups
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hsYv5-001Vfl-7D
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs-for-5.4-rc3
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,43 +83,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/29, Ju Hyung Park wrote:
-> Hi Chao and Jaegeuk,
-> 
-> I have no idea how that patch got merged.
-> 
-> We(me and Yaro) were supposed to work on doing some finishing touches
-> to the patch before sending it to upstream.
-> 
-> I'll personally check with Yaro.
-> 
-> Jaegeuk, please remove the patch.
-> That patch has numerous issues, biggest one being hardcoded size(SZ_256).
+The pull request you sent on Tue, 30 Jul 2019 10:46:53 -0700:
 
-That branch is for testing purpose and kinda TODO list for me. :)
-Anyway, I'll remove it, so please post it later with better shape.
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.4-rc3
 
-Thanks,
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/0572d7668a58794059030b88945f78dfb94e3325
 
-> 
-> Also, I need to figure out how to allocate kmem cache per mounts.
-> 
-> Thanks.
-> 
-> On Mon, Jul 29, 2019 at 4:28 PM Chao Yu <yuchao0@huawei.com> wrote:
-> >
-> > Hi Jaegeuk, Ju Hyung, Yaroslav,
-> >
-> > I can see "f2fs: xattr: reserve cache for xattr allocations" has been merged in
-> > dev-test branch, however, it doesn't exist in f2fs mailing list, so I can not
-> > comment on it.... Can anyone send it to the list?
-> >
-> > Thanks,
+Thank you!
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.wiki.kernel.org/userdoc/prtracker
 
 
 _______________________________________________
