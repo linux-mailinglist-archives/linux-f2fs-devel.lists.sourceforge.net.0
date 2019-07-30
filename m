@@ -2,87 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FBC77AFD1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 19:26:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 710F97B0CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 19:47:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsVta-0000HC-PY; Tue, 30 Jul 2019 17:26:42 +0000
+	id 1hsWDJ-000175-AM; Tue, 30 Jul 2019 17:47:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <deepa.kernel@gmail.com>)
- id 1hsVtZ-0000H3-Py; Tue, 30 Jul 2019 17:26:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hsWDH-00016w-Vq
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 17:47:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tsLPrLOcclqm31GATo5KG4DgL5WcwoSIYZV9oMmibkM=; b=U6vLi0c0fW5sUCGk+DDDrJjrOU
- QolgPkFL7HHeNjfWAOJwGClGOi/rVhgMsr/AdE21WIK2S37BfTed/Sds9bwe+UUXOhLOk0hAmHrpj
- jn8h/jwL+t3YPcH91RHzqmAABPrjeACDSM9O870QUI32jMoe5YJ8x8RL9Enk780ZB6q4=;
+ bh=sR23nmHyiVe22Hgxpe7nZb8Q3HO3fuRCtnTRyT9NPxo=; b=SQ+wWsc9ciJyfVDfms3IcypkmS
+ cX3h1WI+ot9NoEm7jtJkSrFIc3+QdJUZlkixZx7i4/wmdaBST7nk/3r5HqMIKGV8He3+xGjRYL/O5
+ D4hXZ1Bpk/PVbgogpdEP82Hbm1PMsnRr/6d4XCnphuLr1NfIMkp3OW2Y6TijU95/k0i8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tsLPrLOcclqm31GATo5KG4DgL5WcwoSIYZV9oMmibkM=; b=jpwVnFWlTWdBZEajxsTs5P0mwf
- NW30kHHIWFTRRieucXZD37zKCdsSdy3aa6wSbQs6FC2ps6vbVcWYJ65oMySxRE0Ds67yutQs6vKBe
- CdNgKR8YVEhxevtGIeBY5VC9yKKWXG6Gnnybdzptn/EhBbrYtmHCtS2409+T92yegaeE=;
-Received: from mail-io1-f67.google.com ([209.85.166.67])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hsVtY-004wRV-3A; Tue, 30 Jul 2019 17:26:41 +0000
-Received: by mail-io1-f67.google.com with SMTP id h6so4767255iom.7;
- Tue, 30 Jul 2019 10:26:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tsLPrLOcclqm31GATo5KG4DgL5WcwoSIYZV9oMmibkM=;
- b=LUamGemkbRqnOVHbq7CXnlGi/lEYqOEEySiKtSrwXqEp6shA4gxXuseHjOaOiH3aa7
- q4CF5Eum/dqTa4wC00EDfSR4wSTPClq6Y3O6fnjnuTa8UISAGRv24/2prGpJP4yj+/5K
- pp6QgCoaOkGX8YfVQJvI0ldkf7g5Qtz5YPjBIm1MafS1QJbnmne2KPhWiFiOFjpLhpua
- 9zkTIHWrBNLvn7Si20xo61CMzJCVm2tyy8IPzybo7iqfWECXz7HiHXR7qDV7Zs/ri977
- AjNYEbpGf5FVBSgWnRjBEI6oRswJ4WN7oBSH2Oh+cBt5ZquUgXtZtN3ILEA184MLtXtW
- bQ/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tsLPrLOcclqm31GATo5KG4DgL5WcwoSIYZV9oMmibkM=;
- b=OKY9WoGMacLXMe7hQlnQbWQVdTYK2E1Jnz1BPLCJ1GmJ151ytgIF6IIThaCz4//DcC
- xrJk4Ydxwwi/UMTTMOvfqPviCxr+mj5Qoz9t63jTLHIt5JAfuCIoYQcfxw1VwsTZb5AF
- U3iHPz9dsDmQC0/8z0OGTQ9CqaCGR7Kybh6MQc6ZFAwt9AAOP81yAFEFYFSHcvVinW39
- lM8YKikWGMCkMGcGcWRGHrO2PvlnvO0A+QjFU7LbWTp5bkiAcsWaidCpUOdlHy+0am7n
- 4iQDBSD7JmsBmPVlrysRCvEPEca+X0p5o0NYO78E1l+9GVY4O+KcdpsQ/sTqLc6TiFgG
- OnoA==
-X-Gm-Message-State: APjAAAUfGhpy1K8CegU0DgFyzR9NKSZ65MEw7s1dWyUgeal1JjCRX1ZF
- MGjFpybEE34MPeGQVKaU8WLO4q781rJWTXuRP0M=
-X-Google-Smtp-Source: APXvYqy+9zDOTHm2OHuBLA2soclNQ3YwB8p18dgCUYzErzvrXdSDbEEW8GCwNV3FQCvXOrwwAN9MF+uqzNXPUM4I49E=
-X-Received: by 2002:a5e:8210:: with SMTP id l16mr81558885iom.240.1564507594217; 
- Tue, 30 Jul 2019 10:26:34 -0700 (PDT)
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=sR23nmHyiVe22Hgxpe7nZb8Q3HO3fuRCtnTRyT9NPxo=; b=M
+ L/GW1YZeQ3lhNPopk3IZAS5bkm7cu0f/Dqr36JQ+8Ed6WiJlYbuq7e0JCt/KflRMUR1KrD09ieXvz
+ 4lahtgHBCTmvikDH51tJIJw8f7Vw/TO+70vBXdkRfx108qk91MKKlv2HYN8IlZl02V5B30iP+6Ijr
+ tX84Vk9qHaKBMSVw=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ id 1hsWDG-004Yx8-Rk
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 17:47:03 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id C08F7216C8;
+ Tue, 30 Jul 2019 17:46:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1564508814;
+ bh=XxM24s4XSayOjNPRJ7HKhR4zMsXlLabaIKs2PVhefD8=;
+ h=Date:From:To:Cc:Subject:From;
+ b=N4R7R1vSfUZLkDaIYHS0DO5SLEgIBeQOk438LX7yu37suVf2Jn0AUR3JAwfiNM3Qv
+ T3iiAAYpjH4xY+QbnGNdHtQZHeEjR9H+808iWwuvRR+tc9qr7u/b22DPLmdbbuypGJ
+ egKR8Ry3or+UFcVy5zczFkQU/VS0wFgpvHcyR884=
+Date: Tue, 30 Jul 2019 10:46:53 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
 MIME-Version: 1.0
-References: <20190730014924.2193-1-deepa.kernel@gmail.com>
- <20190730014924.2193-4-deepa.kernel@gmail.com>
- <87d0hsapwr.fsf@mail.parknet.co.jp>
-In-Reply-To: <87d0hsapwr.fsf@mail.parknet.co.jp>
-From: Deepa Dinamani <deepa.kernel@gmail.com>
-Date: Tue, 30 Jul 2019 10:26:22 -0700
-Message-ID: <CABeXuvqgaxDSR8N_D1Tdw06g_5PGinZS--6nx-bPtAWP4v+mwg@mail.gmail.com>
-To: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
+Content-Disposition: inline
+User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.67 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (deepa.kernel[at]gmail.com)
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lkml.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -90,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1hsVtY-004wRV-3A
-Subject: Re: [f2fs-dev] [PATCH 03/20] timestamp_truncate: Replace users of
- timespec64_trunc
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hsWDG-004Yx8-Rk
+Subject: [f2fs-dev] [GIT PULL] f2fs-for-5.4-rc3
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,53 +80,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Arnd Bergmann <arnd@arndb.de>, Artem Bityutskiy <dedekind1@gmail.com>,
- y2038 Mailman List <y2038@lists.linaro.org>,
- Greg KH <gregkh@linuxfoundation.org>, Adrian Hunter <adrian.hunter@intel.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Tejun Heo <tj@kernel.org>, linux-mtd <linux-mtd@lists.infradead.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, Richard Weinberger <richard@nod.at>,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>, "Linux F2FS DEV,
- Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- linux-ntfs-dev@lists.sourceforge.net, stoph Hellwig <hch@lst.de>,
- anton@tuxera.com, Joel Becker <jlbec@evilplan.org>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jul 30, 2019 at 1:27 AM OGAWA Hirofumi
-<hirofumi@mail.parknet.co.jp> wrote:
->
-> Deepa Dinamani <deepa.kernel@gmail.com> writes:
->
-> > diff --git a/fs/fat/misc.c b/fs/fat/misc.c
-> > index 1e08bd54c5fb..53bb7c6bf993 100644
-> > --- a/fs/fat/misc.c
-> > +++ b/fs/fat/misc.c
-> > @@ -307,8 +307,9 @@ int fat_truncate_time(struct inode *inode, struct timespec64 *now, int flags)
-> >               inode->i_atime = (struct timespec64){ seconds, 0 };
-> >       }
-> >       if (flags & S_CTIME) {
-> > -             if (sbi->options.isvfat)
-> > -                     inode->i_ctime = timespec64_trunc(*now, 10000000);
-> > +             if (sbi->options.isvfat) {
-> > +                     inode->i_ctime = timestamp_truncate(*now, inode);
-> > +             }
-> >               else
-> >                       inode->i_ctime = fat_timespec64_trunc_2secs(*now);
-> >       }
->
-> Looks like broken. It changed to sb->s_time_gran from 10000000, and
-> changed coding style.
+Hi Linus,
 
-This is using a new api: timestamp_truncate(). granularity is gotten
-by inode->sb->s_time_gran. See Patch [2/20]:
-https://lkml.org/lkml/2019/7/29/1853
+Could you please merge this to address some fixes introduced in 5.4-rc1?
 
-So this is not broken if fat is filling in the right granularity in the sb.
+Thanks,
 
--Deepa
+The following changes since commit 964a4eacef67503a1154f7e0a75f52fbdce52022:
+
+  Merge tag 'dlm-5.3' of git://git.kernel.org/pub/scm/linux/kernel/git/teigland/linux-dlm (2019-07-12 17:37:53 -0700)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.4-rc3
+
+for you to fetch changes up to 38fb6d0ea34299d97b031ed64fe994158b6f8eb3:
+
+  f2fs: use EINVAL for superblock with invalid magic (2019-07-28 22:59:14 -0700)
+
+----------------------------------------------------------------
+f2fs-for-5.4-rc3
+
+This set of patches adjust to follow recent setflags changes and fix two
+regression introduced since 5.4-rc1.
+
+----------------------------------------------------------------
+Eric Biggers (3):
+      f2fs: use generic checking and prep function for FS_IOC_SETFLAGS
+      f2fs: use generic checking function for FS_IOC_FSSETXATTR
+      f2fs: remove redundant check from f2fs_setflags_common()
+
+Icenowy Zheng (1):
+      f2fs: use EINVAL for superblock with invalid magic
+
+Jaegeuk Kim (1):
+      f2fs: fix to read source block before invalidating it
+
+ fs/f2fs/file.c  | 63 +++++++++++++++++++--------------------------------
+ fs/f2fs/gc.c    | 70 ++++++++++++++++++++++++++++-----------------------------
+ fs/f2fs/super.c | 48 +++++++++++++++++++--------------------
+ 3 files changed, 81 insertions(+), 100 deletions(-)
 
 
 _______________________________________________
