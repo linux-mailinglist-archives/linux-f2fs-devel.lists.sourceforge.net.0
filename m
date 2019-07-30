@@ -2,95 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADD897B5D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 00:42:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF73D7B62C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 01:19:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsaoq-0005tc-6l; Tue, 30 Jul 2019 22:42:08 +0000
+	id 1hsbOY-0007Wj-ON; Tue, 30 Jul 2019 23:19:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <anton@tuxera.com>)
- id 1hsaoo-0005tN-Rb; Tue, 30 Jul 2019 22:42:06 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hsbOX-0007WY-LX
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 23:19:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=urmhA2y+GwgCsLzGj5ttvXejlOMHZLIWs5q1TOQVmXo=; b=ExJvCp65PjyI0kYez3ImJmT54x
- udygM+Y1Ot0bVX2rmwMdyjA/KVmPbGkl34FWn1aGNlu0FOxpx4lOtp12W4RhgtMFTttnvy8pn/Rv+
- dSwzoSidyFNE37WUUUs28K8+6K1En58zREKxsVV0gkDjEM2pZ5+wAsz8k6jM5cAmD1NE=;
+ bh=riaOQPcwy1mtmObwaJHumw7lWuk0RIQsJvIz38FDRt8=; b=ZnDyzEWrwyfy6EXINPwzfnLh5d
+ WDeOW1wTwLFwWLASx18NkJzIxjJsDttK0r1BXH82Sm2apIbn4uiHM4nLNsvWdfw7PwLr9Kh78jnfd
+ YHKMp+Kd3ObxOi6USkZhXeH/q+xllntaWTtXiEyNUxABN/LzfquHUIZcBhpHjbQXv96c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=urmhA2y+GwgCsLzGj5ttvXejlOMHZLIWs5q1TOQVmXo=; b=P0AwAEzD8QnY3PkJnlixgo5tkv
- wp3aOPr4+dX6NFJDgwYeBt4OJql5Skc2fdM5k6pWjRASc0DJMPlJA4dJ6vjp5Aa8zlHw1R6VhpyBH
- rYV/qbA6NE88nAU+DxkRv+JLL+2MFvm4x00QZ463SIaIMSGe3ADYnZvt5jqcYK89DN08=;
-Received: from mgw-02.mpynet.fi ([82.197.21.91])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=riaOQPcwy1mtmObwaJHumw7lWuk0RIQsJvIz38FDRt8=; b=YooxmWh7kRPMdZTlcAUlq05oSr
+ /eYVS6aELTRkT2qm5OVGDV//lLt+r0VIIUuPJXcktduwb4R4qrFT0+PpbRLExKq8v8umpf8QbWzQf
+ F2brhLSNxiJV3U3NGW4kyv8y6jSjrLCqALvR+xWOfzYPVwPdSCA/HDRhUSZq2Tq0ejrY=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsaok-001jPb-Si; Tue, 30 Jul 2019 22:42:06 +0000
-Received: from pps.filterd (mgw-02.mpynet.fi [127.0.0.1])
- by mgw-02.mpynet.fi (8.16.0.27/8.16.0.27) with SMTP id x6UMSZio119596;
- Wed, 31 Jul 2019 01:28:35 +0300
-Received: from ex13.tuxera.com (ex13.tuxera.com [178.16.184.72])
- by mgw-02.mpynet.fi with ESMTP id 2u0a9uvs4r-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Wed, 31 Jul 2019 01:28:34 +0300
-Received: from tuxera-exch.ad.tuxera.com (10.20.48.11) by
- tuxera-exch.ad.tuxera.com (10.20.48.11) with Microsoft SMTP Server (TLS) id
- 15.0.1395.4; Wed, 31 Jul 2019 01:28:34 +0300
-Received: from tuxera-exch.ad.tuxera.com ([fe80::552a:f9f0:68c3:d789]) by
- tuxera-exch.ad.tuxera.com ([fe80::552a:f9f0:68c3:d789%12]) with mapi id
- 15.00.1395.000; Wed, 31 Jul 2019 01:28:34 +0300
-From: Anton Altaparmakov <anton@tuxera.com>
-To: Deepa Dinamani <deepa.kernel@gmail.com>
-Thread-Topic: [PATCH 03/20] timestamp_truncate: Replace users of
- timespec64_trunc
-Thread-Index: AQHVRrCO7mUMDQahbUu7RSH43rBZCqbjOCQAgABUboA=
-Date: Tue, 30 Jul 2019 22:28:33 +0000
-Message-ID: <5340224D-5625-48A6-909E-70B24D2084BC@tuxera.com>
-References: <20190730014924.2193-1-deepa.kernel@gmail.com>
- <20190730014924.2193-4-deepa.kernel@gmail.com>
- <87d0hsapwr.fsf@mail.parknet.co.jp>
- <CABeXuvqgaxDSR8N_D1Tdw06g_5PGinZS--6nx-bPtAWP4v+mwg@mail.gmail.com>
-In-Reply-To: <CABeXuvqgaxDSR8N_D1Tdw06g_5PGinZS--6nx-bPtAWP4v+mwg@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [86.151.122.143]
-Content-ID: <92684FF0F17B42478243313B03823A34@tuxera.com>
+ id 1hsbOS-005Am9-Td
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 23:19:01 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 37328206A2;
+ Tue, 30 Jul 2019 23:18:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1564528731;
+ bh=6xmGYc6TH8AweXfIvI1TfQpeRJZVleWQJq3+Osoyc+w=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=awpi5r6cyEwrlHtECjfeR/LWADesJ0wZFr0r3vwlfULUQAC9B6AZyKXxl9NTmJbXA
+ 2Faz2LxzoKOmEUVyilxVvmLFHv5kdvAZVeJANlt5tzrBVjcpTDX4Q0xh+sHYsMF5MN
+ z6uB82Zhf4fvV361NBWaKCvFUl8Xbjzmj63WwTbw=
+Date: Tue, 30 Jul 2019 16:18:50 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20190730231850.GA7097@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190729150351.12223-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-30_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=800
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1906280000 definitions=main-1907300224
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20190729150351.12223-1-chao@kernel.org>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: tuxera.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [82.197.21.91 listed in list.dnswl.org]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hsaok-001jPb-Si
-Subject: Re: [f2fs-dev] [PATCH 03/20] timestamp_truncate: Replace users of
- timespec64_trunc
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hsbOS-005Am9-Td
+Subject: Re: [f2fs-dev] [PATCH v3 RESEND] f2fs: introduce
+ sb.required_features to store incompatible features
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,73 +87,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Arnd Bergmann <arnd@arndb.de>, Artem Bityutskiy <dedekind1@gmail.com>,
- y2038
- Mailman List <y2038@lists.linaro.org>, Greg KH <gregkh@linuxfoundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Adrian Hunter <adrian.hunter@intel.com>, Tejun Heo <tj@kernel.org>,
- linux-mtd <linux-mtd@lists.infradead.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, Richard Weinberger <richard@nod.at>,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>, "Linux F2FS DEV,
- Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-ntfs-dev@lists.sourceforge.net" <linux-ntfs-dev@lists.sourceforge.net>,
- stoph Hellwig <hch@lst.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Joel Becker <jlbec@evilplan.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Deepa,
-
-> On 30 Jul 2019, at 18:26, Deepa Dinamani <deepa.kernel@gmail.com> wrote:
+On 07/29, Chao Yu wrote:
+> From: Chao Yu <yuchao0@huawei.com>
 > 
-> On Tue, Jul 30, 2019 at 1:27 AM OGAWA Hirofumi
-> <hirofumi@mail.parknet.co.jp> wrote:
->> 
->> Deepa Dinamani <deepa.kernel@gmail.com> writes:
->> 
->>> diff --git a/fs/fat/misc.c b/fs/fat/misc.c
->>> index 1e08bd54c5fb..53bb7c6bf993 100644
->>> --- a/fs/fat/misc.c
->>> +++ b/fs/fat/misc.c
->>> @@ -307,8 +307,9 @@ int fat_truncate_time(struct inode *inode, struct timespec64 *now, int flags)
->>>              inode->i_atime = (struct timespec64){ seconds, 0 };
->>>      }
->>>      if (flags & S_CTIME) {
->>> -             if (sbi->options.isvfat)
->>> -                     inode->i_ctime = timespec64_trunc(*now, 10000000);
->>> +             if (sbi->options.isvfat) {
->>> +                     inode->i_ctime = timestamp_truncate(*now, inode);
->>> +             }
->>>              else
->>>                      inode->i_ctime = fat_timespec64_trunc_2secs(*now);
->>>      }
->> 
->> Looks like broken. It changed to sb->s_time_gran from 10000000, and
->> changed coding style.
+> Later after this patch was merged, all new incompatible feature's
+> bit should be added into sb.required_features field, and define new
+> feature function with F2FS_INCOMPAT_FEATURE_FUNCS() macro.
 > 
-> This is using a new api: timestamp_truncate(). granularity is gotten
-> by inode->sb->s_time_gran. See Patch [2/20]:
-> https://lkml.org/lkml/2019/7/29/1853
+> Then during mount, we will do sanity check with enabled features in
+> image, if there are features in sb.required_features that kernel can
+> not recognize, just fail the mount.
 > 
-> So this is not broken if fat is filling in the right granularity in the sb.
-
-It is broken for FAT because FAT has different granularities for different timestamps so it cannot put the correct value in the sb as that only allows one granularity.  Your patch is totally broken for fat as it would be immediately obvious if you spent a few minutes looking at the code...
-
-Best regards,
-
-	Anton
-
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> v3:
+> - change commit title.
+> - fix wrong macro name.
+>  fs/f2fs/f2fs.h          | 15 +++++++++++++++
+>  fs/f2fs/super.c         | 10 ++++++++++
+>  include/linux/f2fs_fs.h |  3 ++-
+>  3 files changed, 27 insertions(+), 1 deletion(-)
 > 
-> -Deepa
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index a6eb828af57f..b8e17d4ddb8d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -163,6 +163,15 @@ struct f2fs_mount_info {
+>  #define F2FS_CLEAR_FEATURE(sbi, mask)					\
+>  	(sbi->raw_super->feature &= ~cpu_to_le32(mask))
+>  
+> +#define F2FS_INCOMPAT_FEATURES		0
+> +
+> +#define F2FS_HAS_INCOMPAT_FEATURE(sbi, mask)				\
+> +	((sbi->raw_super->required_features & cpu_to_le32(mask)) != 0)
+> +#define F2FS_SET_INCOMPAT_FEATURE(sbi, mask)				\
+> +	(sbi->raw_super->required_features |= cpu_to_le32(mask))
+> +#define F2FS_CLEAR_INCOMPAT_FEATURE(sbi, mask)				\
+> +	(sbi->raw_super->required_features &= ~cpu_to_le32(mask))
+> +
+>  /*
+>   * Default values for user and/or group using reserved blocks
+>   */
+> @@ -3585,6 +3594,12 @@ F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
+>  F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
+>  F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
+>  
+> +#define F2FS_INCOMPAT_FEATURE_FUNCS(name, flagname) \
+> +static inline int f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
+> +{ \
+> +	return F2FS_HAS_INCOMPAT_FEATURE(sbi, F2FS_FEATURE_##flagname); \
+> +}
+> +
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
+>  				    block_t blkaddr)
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 5540fee0fe3f..3701dcce90e6 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -2513,6 +2513,16 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
+>  		return -EINVAL;
+>  	}
+>  
+> +	/* check whether current kernel supports all features on image */
+> +	if (le32_to_cpu(raw_super->required_features) &
+
+...
+#define F2FS_FEATURE_VERITY	0x0400	/* reserved */
+...
+#define F2FS_FEATURE_CASEFOLD	0x1000
+#define F2FS_FEATURE_SUPPORT	0x1BFF
+
+	if (le32_to_cpu(raw_super->required_features) & ~F2FS_FEATURE_SUPPORT) {
+		...
+		return -EINVAL;
+	}
 
 
--- 
-Anton Altaparmakov <anton at tuxera.com> (replace at with @)
-Lead in File System Development, Tuxera Inc., http://www.tuxera.com/
-Linux NTFS maintainer
-
+> +			~F2FS_INCOMPAT_FEATURES) {
+> +		f2fs_info(sbi, "Unsupported feature: %x: supported: %x",
+> +			  le32_to_cpu(raw_super->required_features) ^
+> +			  F2FS_INCOMPAT_FEATURES,
+> +			  F2FS_INCOMPAT_FEATURES);
+> +		return -EINVAL;
+> +	}
+> +
+>  	/* Check checksum_offset and crc in superblock */
+>  	if (__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_SB_CHKSUM)) {
+>  		crc_offset = le32_to_cpu(raw_super->checksum_offset);
+> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+> index a2b36b2e286f..4141be3f219c 100644
+> --- a/include/linux/f2fs_fs.h
+> +++ b/include/linux/f2fs_fs.h
+> @@ -117,7 +117,8 @@ struct f2fs_super_block {
+>  	__u8 hot_ext_count;		/* # of hot file extension */
+>  	__le16	s_encoding;		/* Filename charset encoding */
+>  	__le16	s_encoding_flags;	/* Filename charset encoding flags */
+> -	__u8 reserved[306];		/* valid reserved region */
+> +	__le32 required_features;       /* incompatible features to old kernel */
+> +	__u8 reserved[302];		/* valid reserved region */
+>  	__le32 crc;			/* checksum of superblock */
+>  } __packed;
+>  
+> -- 
+> 2.22.0
 
 
 _______________________________________________
