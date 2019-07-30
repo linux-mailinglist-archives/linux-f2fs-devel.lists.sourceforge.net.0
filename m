@@ -2,76 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18C757B466
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jul 2019 22:40:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADD897B5D5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 00:42:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsYv8-0003yJ-Hc; Tue, 30 Jul 2019 20:40:30 +0000
+	id 1hsaoq-0005tc-6l; Tue, 30 Jul 2019 22:42:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1hsYv6-0003yB-JE
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 20:40:28 +0000
+ (envelope-from <anton@tuxera.com>)
+ id 1hsaoo-0005tN-Rb; Tue, 30 Jul 2019 22:42:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=g5OBQC5fvjXqcFlY/yJ+dNTSh6COiJYheFMclYiT6t0=; b=ZbTILJPtvO8aaiACwAjJcRX51a
- z0mnH+bgB4VwEeqi52kKvaqpQe1Uf9haW+g0iBjyG9QxrSA6lBosGPprluo8mZY+CRO5Dl6sqlC6D
- r3Fg/KXJxlxpnvmwN/axnTjVP1E5JQ/M1A2k7jr7s/cxuHejXhOxEFBDDwFAu4vOfG0g=;
+ bh=urmhA2y+GwgCsLzGj5ttvXejlOMHZLIWs5q1TOQVmXo=; b=ExJvCp65PjyI0kYez3ImJmT54x
+ udygM+Y1Ot0bVX2rmwMdyjA/KVmPbGkl34FWn1aGNlu0FOxpx4lOtp12W4RhgtMFTttnvy8pn/Rv+
+ dSwzoSidyFNE37WUUUs28K8+6K1En58zREKxsVV0gkDjEM2pZ5+wAsz8k6jM5cAmD1NE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=g5OBQC5fvjXqcFlY/yJ+dNTSh6COiJYheFMclYiT6t0=; b=AZMdVLxzH+aajV1xo9AbAJHI2a
- 6AAeQVN+RHFYMa0BrgKil9WVHPUXziEDsZGzVl2J+2vsNn5wMz3woK9sItckHM5ylKBF31zW5h9FA
- urIPeAYiDa7f0JX3azjawOP6aewLkUDm+r+juu4vxnb/WrOnTcyCxg35f68yRxiA0ja4=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=urmhA2y+GwgCsLzGj5ttvXejlOMHZLIWs5q1TOQVmXo=; b=P0AwAEzD8QnY3PkJnlixgo5tkv
+ wp3aOPr4+dX6NFJDgwYeBt4OJql5Skc2fdM5k6pWjRASc0DJMPlJA4dJ6vjp5Aa8zlHw1R6VhpyBH
+ rYV/qbA6NE88nAU+DxkRv+JLL+2MFvm4x00QZ463SIaIMSGe3ADYnZvt5jqcYK89DN08=;
+Received: from mgw-02.mpynet.fi ([82.197.21.91])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsYv5-001Vfl-7D
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jul 2019 20:40:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564519221;
- bh=ugWXpsFhigfjuYJ4dltnK0ERMdeDSNvAi6z+BURK244=;
- h=From:In-Reply-To:References:Date:To:Cc:From;
- b=ZibkTTH+jISGoqZ2U9iBBmZy2zBTY3VYqfjjEQvkvTc+nWgPhdQSfhV5+hZqo4m+0
- tddt/6HH5/HbJbMwAuSYCJT6CjdkdqWdSjMAeoOhDVo/yN0kmRc8bFQU8e73POhhV4
- DNriAnArnvWrHxpo2PA2K4AlcYfViy9iC4ecOJtc=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20190730174653.GA76478@jaegeuk-macbookpro.roam.corp.google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-5.4-rc3
-X-PR-Tracked-Commit-Id: 38fb6d0ea34299d97b031ed64fe994158b6f8eb3
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 0572d7668a58794059030b88945f78dfb94e3325
-Message-Id: <156451922159.18459.4858636766003450241.pr-tracker-bot@kernel.org>
-Date: Tue, 30 Jul 2019 20:40:21 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -0.4 (/)
+ id 1hsaok-001jPb-Si; Tue, 30 Jul 2019 22:42:06 +0000
+Received: from pps.filterd (mgw-02.mpynet.fi [127.0.0.1])
+ by mgw-02.mpynet.fi (8.16.0.27/8.16.0.27) with SMTP id x6UMSZio119596;
+ Wed, 31 Jul 2019 01:28:35 +0300
+Received: from ex13.tuxera.com (ex13.tuxera.com [178.16.184.72])
+ by mgw-02.mpynet.fi with ESMTP id 2u0a9uvs4r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+ Wed, 31 Jul 2019 01:28:34 +0300
+Received: from tuxera-exch.ad.tuxera.com (10.20.48.11) by
+ tuxera-exch.ad.tuxera.com (10.20.48.11) with Microsoft SMTP Server (TLS) id
+ 15.0.1395.4; Wed, 31 Jul 2019 01:28:34 +0300
+Received: from tuxera-exch.ad.tuxera.com ([fe80::552a:f9f0:68c3:d789]) by
+ tuxera-exch.ad.tuxera.com ([fe80::552a:f9f0:68c3:d789%12]) with mapi id
+ 15.00.1395.000; Wed, 31 Jul 2019 01:28:34 +0300
+From: Anton Altaparmakov <anton@tuxera.com>
+To: Deepa Dinamani <deepa.kernel@gmail.com>
+Thread-Topic: [PATCH 03/20] timestamp_truncate: Replace users of
+ timespec64_trunc
+Thread-Index: AQHVRrCO7mUMDQahbUu7RSH43rBZCqbjOCQAgABUboA=
+Date: Tue, 30 Jul 2019 22:28:33 +0000
+Message-ID: <5340224D-5625-48A6-909E-70B24D2084BC@tuxera.com>
+References: <20190730014924.2193-1-deepa.kernel@gmail.com>
+ <20190730014924.2193-4-deepa.kernel@gmail.com>
+ <87d0hsapwr.fsf@mail.parknet.co.jp>
+ <CABeXuvqgaxDSR8N_D1Tdw06g_5PGinZS--6nx-bPtAWP4v+mwg@mail.gmail.com>
+In-Reply-To: <CABeXuvqgaxDSR8N_D1Tdw06g_5PGinZS--6nx-bPtAWP4v+mwg@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [86.151.122.143]
+Content-ID: <92684FF0F17B42478243313B03823A34@tuxera.com>
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-07-30_10:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=800
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1906280000 definitions=main-1907300224
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: tuxera.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [82.197.21.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hsYv5-001Vfl-7D
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs-for-5.4-rc3
+X-Headers-End: 1hsaok-001jPb-Si
+Subject: Re: [f2fs-dev] [PATCH 03/20] timestamp_truncate: Replace users of
+ timespec64_trunc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,26 +102,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+Cc: Arnd Bergmann <arnd@arndb.de>, Artem Bityutskiy <dedekind1@gmail.com>,
+ y2038
+ Mailman List <y2038@lists.linaro.org>, Greg KH <gregkh@linuxfoundation.org>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
+ Adrian Hunter <adrian.hunter@intel.com>, Tejun Heo <tj@kernel.org>,
+ linux-mtd <linux-mtd@lists.infradead.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Richard Weinberger <richard@nod.at>,
+ Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, "Linux F2FS DEV,
+ Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-ntfs-dev@lists.sourceforge.net" <linux-ntfs-dev@lists.sourceforge.net>,
+ stoph Hellwig <hch@lst.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Tue, 30 Jul 2019 10:46:53 -0700:
+Hi Deepa,
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.4-rc3
+> On 30 Jul 2019, at 18:26, Deepa Dinamani <deepa.kernel@gmail.com> wrote:
+> 
+> On Tue, Jul 30, 2019 at 1:27 AM OGAWA Hirofumi
+> <hirofumi@mail.parknet.co.jp> wrote:
+>> 
+>> Deepa Dinamani <deepa.kernel@gmail.com> writes:
+>> 
+>>> diff --git a/fs/fat/misc.c b/fs/fat/misc.c
+>>> index 1e08bd54c5fb..53bb7c6bf993 100644
+>>> --- a/fs/fat/misc.c
+>>> +++ b/fs/fat/misc.c
+>>> @@ -307,8 +307,9 @@ int fat_truncate_time(struct inode *inode, struct timespec64 *now, int flags)
+>>>              inode->i_atime = (struct timespec64){ seconds, 0 };
+>>>      }
+>>>      if (flags & S_CTIME) {
+>>> -             if (sbi->options.isvfat)
+>>> -                     inode->i_ctime = timespec64_trunc(*now, 10000000);
+>>> +             if (sbi->options.isvfat) {
+>>> +                     inode->i_ctime = timestamp_truncate(*now, inode);
+>>> +             }
+>>>              else
+>>>                      inode->i_ctime = fat_timespec64_trunc_2secs(*now);
+>>>      }
+>> 
+>> Looks like broken. It changed to sb->s_time_gran from 10000000, and
+>> changed coding style.
+> 
+> This is using a new api: timestamp_truncate(). granularity is gotten
+> by inode->sb->s_time_gran. See Patch [2/20]:
+> https://lkml.org/lkml/2019/7/29/1853
+> 
+> So this is not broken if fat is filling in the right granularity in the sb.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/0572d7668a58794059030b88945f78dfb94e3325
+It is broken for FAT because FAT has different granularities for different timestamps so it cannot put the correct value in the sb as that only allows one granularity.  Your patch is totally broken for fat as it would be immediately obvious if you spent a few minutes looking at the code...
 
-Thank you!
+Best regards,
+
+	Anton
+
+> 
+> -Deepa
+
 
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.wiki.kernel.org/userdoc/prtracker
+Anton Altaparmakov <anton at tuxera.com> (replace at with @)
+Lead in File System Development, Tuxera Inc., http://www.tuxera.com/
+Linux NTFS maintainer
+
 
 
 _______________________________________________
