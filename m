@@ -2,62 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E06EC7BE76
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 12:34:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB40C7C291
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 15:01:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hslwE-0003Pw-N2; Wed, 31 Jul 2019 10:34:30 +0000
+	id 1hsoEG-0001JK-CP; Wed, 31 Jul 2019 13:01:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hslwD-0003Pd-LD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 10:34:29 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hsoEF-0001JC-64
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 13:01:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m62lC0bs6yEsLquVEAtHyAkWERHBFGBLWyioivzoCO4=; b=Anp6djKvw0OgR1iLzPPZR6wi4p
- luWs6SgrrLogYEVNLWtZasV1olXASyZB4osbiHb7kql8JPLluECRhgO1kBuME8YYXTN7h44/KxBtZ
- rwaM0QGa0pQgLbXVKYPJJ4a9blRsfMU+nGECHp/tGqXVvkS/FxXBGAcAe7d7QL/rXvqc=;
+ bh=DrAI0KJlJgHFd3p9cHQwqtCz6pl7UqBU4V70QG/S6io=; b=S1de547NWIe2pdNUJb7ylcNHok
+ +F5e7Cj+bY87djC6TGiuNaiII+2S/Jfjw+OVzn+PU8jB/zjfRblyFqy0bkMZHPQA1FRg/Q+v5N62D
+ QLbNjAduODi/jv/nlN5SXIA9324nt6/vyn3vDaupAzlQ4XvKLjalOdqwR5GZecwJBgGc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=m62lC0bs6yEsLquVEAtHyAkWERHBFGBLWyioivzoCO4=; b=YMGmiGaG76+kwXVXeu5kWohQNu
- /yMAwJWAnFzinVZc9JSGdRKoHwRjX3SuC3MelPfuUxKjjRn3CTJUJsJ4+qWqvKG4E295eyK7sdlLU
- JRoMhRELlzniPbKOQC3pEfppU16XD8XjECU7Y5zhpTffhJE95W1DAZrUhyRBXnXKgyZU=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=DrAI0KJlJgHFd3p9cHQwqtCz6pl7UqBU4V70QG/S6io=; b=L
+ Y57/C5iGDIEVtOMKHVk4leq8e8aU0ubfIjQHAQjjS2ThSpTjx86MU9Th0hfHOuDyWlBllzUOglXaz
+ uTVphuFu3vQjJc2Ymxl6BbBAuUhsusgdvph764eAfkofs2pgr/TJN8xphXkUzhTP7uAyVse5/3Dmh
+ 1d1ha4D4/B2IWJtc=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hslwC-005C0t-2b
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 10:34:29 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id D53D883A38C8AFE22C2B;
- Wed, 31 Jul 2019 18:34:15 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 31 Jul
- 2019 18:34:12 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>
-References: <1564377626-12898-1-git-send-email-stummala@codeaurora.org>
- <a5acb5cb-2e77-902f-0a5e-063f7cbd0643@kernel.org>
- <20190730043630.GG8289@codeaurora.org>
- <609a502b-1e7f-c9b2-e864-421ffeda298b@huawei.com>
- <20190731034159.GH8289@codeaurora.org>
+ id 1hsoEA-003E5c-Rw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 13:01:15 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 198CB6ED926F25143B5C;
+ Wed, 31 Jul 2019 21:01:02 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS405-HUB.china.huawei.com (10.3.19.205) with Microsoft SMTP Server id
+ 14.3.439.0; Wed, 31 Jul 2019 21:00:52 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <7288dcd4-b168-7656-d1af-7e2cafa4f720@huawei.com>
-Date: Wed, 31 Jul 2019 18:34:12 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <linux-f2fs-devel@lists.sourceforge.net>
+Date: Wed, 31 Jul 2019 21:00:45 +0800
+Message-ID: <20190731130045.55760-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20190731034159.GH8289@codeaurora.org>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -65,11 +57,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hslwC-005C0t-2b
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix indefinite loop in f2fs_gc()
+X-Headers-End: 1hsoEA-003E5c-Rw
+Subject: [f2fs-dev] [PATCH] sload.f2fs: fix to set temperature during sload
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,123 +73,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Sahitya,
+This patch enable to set file's temperature while loading files
+to image.
 
-On 2019/7/31 11:41, Sahitya Tummala wrote:
-> Hi Chao,
-> 
-> On Tue, Jul 30, 2019 at 08:35:46PM +0800, Chao Yu wrote:
->> Hi Sahitya,
->>
->> On 2019/7/30 12:36, Sahitya Tummala wrote:
->>> Hi Chao,
->>>
->>> On Tue, Jul 30, 2019 at 12:00:45AM +0800, Chao Yu wrote:
->>>> Hi Sahitya,
->>>>
->>>> On 2019-7-29 13:20, Sahitya Tummala wrote:
->>>>> Policy - foreground GC, LFS mode and greedy GC mode.
->>>>>
->>>>> Under this policy, f2fs_gc() loops forever to GC as it doesn't have
->>>>> enough free segements to proceed and thus it keeps calling gc_more
->>>>> for the same victim segment.  This can happen if the selected victim
->>>>> segment could not be GC'd due to failed blkaddr validity check i.e.
->>>>> is_alive() returns false for the blocks set in current validity map.
->>>>>
->>>>> Fix this by not resetting the sbi->cur_victim_sec to NULL_SEGNO, when
->>>>> the segment selected could not be GC'd. This helps to select another
->>>>> segment for GC and thus helps to proceed forward with GC.
->>>>>
->>>>> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
->>>>> ---
->>>>>  fs/f2fs/gc.c | 2 +-
->>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>>>> index 8974672..7bbcc4a 100644
->>>>> --- a/fs/f2fs/gc.c
->>>>> +++ b/fs/f2fs/gc.c
->>>>> @@ -1303,7 +1303,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
->>>>>  		round++;
->>>>>  	}
->>>>>  
->>>>> -	if (gc_type == FG_GC)
->>>>> +	if (gc_type == FG_GC && seg_freed)
->>>>>  		sbi->cur_victim_sec = NULL_SEGNO;
->>>>
->>>> In some cases, we may remain last victim in sbi->cur_victim_sec, and jump out of
->>>> GC cycle, then SSR can skip the last victim due to sec_usage_check()...
->>>>
->>>
->>> I see. I have a few questions on how to fix this issue. Please share your
->>> comments.
->>>
->>> 1. Do you think the scenario described is valid? It happens rarely, not very
->>
->> IIRC, we suffered endless gc loop due to there is valid block belong to an
->> opened atomic write file. (because we will skip directly once we hit atomic file)
->>
->> For your case, I'm not sure that would happen, did you look into is_alive(), why
->> will it fail? block address not match? If so, it looks like summary info and
->> dnode block and nat entry are inconsistent.
-> 
-> Yes, from the ramdumps, I could see that block address is not matching and
-> hence, is_alive() could fail in the issue scenario. Have you observed any such
-> cases before? What could be the reason for this mismatch?
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fsck/dir.c         | 51 ++++++++++++++++++++++++++++++++++++++++++++++
+ include/f2fs_fs.h  |  1 +
+ mkfs/f2fs_format.c |  2 +-
+ 3 files changed, 53 insertions(+), 1 deletion(-)
 
-Alright, I didn't suffer such case before...
+diff --git a/fsck/dir.c b/fsck/dir.c
+index b3957d6..92d7e05 100644
+--- a/fsck/dir.c
++++ b/fsck/dir.c
+@@ -409,6 +409,55 @@ static void page_symlink(struct f2fs_sb_info *sbi, struct f2fs_node *inode,
+ 	free(data_blk);
+ }
+ 
++static inline int is_extension_exist(const char *s,
++					const char *sub)
++{
++	unsigned int slen = strlen(s);
++	unsigned int  sublen = strlen(sub);
++	int i;
++
++	/*
++	 * filename format of multimedia file should be defined as:
++	 * "filename + '.' + extension + (optional: '.' + temp extension)".
++	 */
++	if (slen < sublen + 2)
++		return 0;
++
++	for (i = 1; i < slen - sublen; i++) {
++		if (s[i] != '.')
++			continue;
++		if (!strncasecmp(s + i + 1, sub, sublen))
++			return 1;
++	}
++
++	return 0;
++}
++
++static void set_file_temperature(struct f2fs_sb_info *sbi,
++				struct f2fs_node *node_blk,
++				const unsigned char *name)
++{
++	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
++	int i, cold_count, hot_count;
++
++	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
++	hot_count = sbi->raw_super->hot_ext_count;
++
++	for (i = 0; i < cold_count + hot_count; i++) {
++		if (is_extension_exist((const char *)name,
++					(const char *)extlist[i]))
++			break;
++	}
++
++	if (i == cold_count + hot_count)
++		return;
++
++	if (i < cold_count)
++		node_blk->i.i_advise |= FADVISE_COLD_BIT;
++	else
++		node_blk->i.i_advise |= FADVISE_HOT_BIT;
++}
++
+ static void init_inode_block(struct f2fs_sb_info *sbi,
+ 		struct f2fs_node *node_blk, struct dentry *de)
+ {
+@@ -467,6 +516,8 @@ static void init_inode_block(struct f2fs_sb_info *sbi,
+ 		node_blk->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
+ 	}
+ 
++	set_file_temperature(sbi, node_blk, de->name);
++
+ 	node_blk->footer.ino = cpu_to_le32(de->ino);
+ 	node_blk->footer.nid = cpu_to_le32(de->ino);
+ 	node_blk->footer.flag = 0;
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 9f7717e..2dda901 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -550,6 +550,7 @@ enum {
+ #define F2FS_MAX_LOG_SECTOR_SIZE	12	/* 12 bits for 4096 bytes */
+ #define F2FS_BLKSIZE			4096	/* support only 4KB block */
+ #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
++#define F2FS_EXTENSION_LEN		8	/* max size of extension */
+ #define F2FS_BLK_ALIGN(x)	(((x) + F2FS_BLKSIZE - 1) / F2FS_BLKSIZE)
+ 
+ #define NULL_ADDR		0x0U
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index c9c4fe5..9402619 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -146,7 +146,7 @@ static void cure_extension_list(void)
+ 		ue = strtok(ext_str, ", ");
+ 		while (ue != NULL) {
+ 			name_len = strlen(ue);
+-			if (name_len >= 8) {
++			if (name_len >= F2FS_EXTENSION_LEN) {
+ 				MSG(0, "\tWarn: Extension name (%s) is too long\n", ue);
+ 				goto next;
+ 			}
+-- 
+2.18.0.rc1
 
-I don't know, too few clues to find the root cause. I guess maybe:
-- random data caused by emmc/ufs firmware bugs
-- bit-flip or memory overflow
-- f2fs bugs
-
-So, for the solution, I suggest to detect such inconsistency, and tag in
-somewhere to just get rid of selecting the corrupted section.
-
-BTW, do you try fsck on that image? what's the result?
-
-Thanks,
-
-> 
-> Thanks,
-> 
->>
->>> easy to reproduce.  From the dumps, I see that only block is set as valid in
->>> the sentry->cur_valid_map for which I see that summary block check is_alive()
->>> could return false. As only one block is set as valid, chances are there it
->>> can be always selected as the victim by get_victim_by_default() under FG_GC.
->>>
->>> 2. What are the possible scenarios where summary block check is_alive() could
->>> fail for a segment?
->>
->> I guess, maybe after check_valid_map(), the block is been truncated before
->> is_alive(). If so the victim should be prefree directly instead of being
->> selected again...
->>
->>>
->>> 3. How does GC handle such segments?
->>
->> I think that's not a normal case, or I'm missing something.
->>
->> Thanks,
->>
->>>
->>> Thanks,
->>>
->>>> Thanks,
->>>>
->>>>>  
->>>>>  	if (sync)
->>>>>
->>>
-> 
 
 
 _______________________________________________
