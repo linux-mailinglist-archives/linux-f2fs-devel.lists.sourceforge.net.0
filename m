@@ -2,77 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A54327CC1E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 20:38:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 257C67CEF7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 22:44:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hstUO-0000Wj-Pj; Wed, 31 Jul 2019 18:38:16 +0000
+	id 1hsvS9-0000rV-I9; Wed, 31 Jul 2019 20:44:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hstUL-0000WE-MQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:13 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hsvS7-0000rE-LF
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 20:44:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZTyyaQSfDBzn7dcqkzIQbhS6e0ReRkFnEBWleDYf7Kg=; b=fa6ah2boOuj1hYNExCnew13c3Q
- 4vB5UMz5PLFx60vBIH/IYCqtgwJzckdrzQ6oJDXJBozmsP6Luh3BqavnbYK+RMlqc8TsW8CRxpJsA
- f2VSvTqQKTmas+0aWbCpOof5Sii9IP02K6Rai6wktZ4ISsKEf5fjKa65wu2pOt9CdmNM=;
+ bh=ghhxL9ZIP+IGtfy+lcLWAWto9CYpvXTQy6H6qffeDz0=; b=Zs8MyS4NdDe7muEXBWDzSUEynr
+ 5vFsxs8zZj0CsT6eRP6WMtVX1fI0wCDB74yVorSn9pSiHQN3YrLt1kch8/JuOFpi/jbrARC3qpQS2
+ pR6QwwstzogWnE6R5Dx3WbuO+2xpbqOU2hB3HOYBFMKSZ1X9SfKUHOyt0CQG4wqN2lqY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ZTyyaQSfDBzn7dcqkzIQbhS6e0ReRkFnEBWleDYf7Kg=; b=CfaWagucONOCXwNUhHPagoSTq7
- LXqgUmtE7gzjPYFVViAOBP5fWVA/uMQkP2Kkd15yZdzxHe9eIAj3+H+B1DCB5nxdOb+Hkjr0vdK65
- o09YcuRTGD4rE5P8J0YUzQAoKCgoOZw2qVXzuS2L6kTivSbVtX78/biXlomEcdp4T4MI=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ghhxL9ZIP+IGtfy+lcLWAWto9CYpvXTQy6H6qffeDz0=; b=Y
+ g5TlWkN7KkQU3+CVRsZ+GvxHzGWSSCBuVlVCeZw9CNqAIblCmNgIFIVuNzTJf+ViL49YfZcV87HvQ
+ cIlJ1vNpfqFaMDhL0EfhMWVM8RReDsqr6w22QDokDwE8727FH487YVCAoC4inNB7OxeQLx+lS80ll
+ ROPvddAisGPAoXn0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hstUI-005XU2-SI
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:12 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
+ id 1hsvS5-005dXI-Cp
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 20:44:03 +0000
+Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 196BF206A3;
- Wed, 31 Jul 2019 18:38:04 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BAA3E20659;
+ Wed, 31 Jul 2019 20:43:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564598284;
- bh=mwf/L4kawPnA1+kq4IqMkos0fqY4xHcvedV1SVvmgr4=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=0SBhBqvGEFIUO9Q+X1GiRxRfAhxkriFVan66HT0bGDPhuMdNTX8kCHLadzRChzP4O
- OKShL0aapWqVZ6CtauvlQDheMoSsBzO54aB87yx0xEz7IKpbCUA8GYPua8suG6ultw
- koL6k+O0wO1Ftp9+M/dFACaiJQwyP8yBpRpTOjac=
-Date: Wed, 31 Jul 2019 11:38:02 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
- linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>, Satya Tangirala <satyat@google.com>
-Message-ID: <20190731183802.GA687@sol.localdomain>
-Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
- linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>,
- Satya Tangirala <satyat@google.com>
-References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-8-ebiggers@kernel.org>
- <20190728192417.GG6088@mit.edu> <20190729195827.GF169027@gmail.com>
+ s=default; t=1564605835;
+ bh=gD9RpDnMmrZvN3MAeeKsnZtmfLwzp6SDLMO8X0spRww=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ygEk5xZc0PN4SZE7yA22ZauWL7SJvnRQ4TD7y8IbtikMcsbXi0PSbbDhKFXf12TZ+
+ hEZFRzDKr3k8pMnYMrJ4i2t8AvVSzRM59DAIbYfVGciA2ASktUnMiiUekc1OtS/LSV
+ gPJ2b3H+r8P6t8VI1og/txOs7dPq60NFDRdqax8A=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 31 Jul 2019 13:43:53 -0700
+Message-Id: <20190731204353.62056-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190729195827.GF169027@gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -84,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hstUI-005XU2-SI
-Subject: Re: [f2fs-dev] [PATCH v7 07/16] fscrypt: add
- FS_IOC_REMOVE_ENCRYPTION_KEY ioctl
+X-Headers-End: 1hsvS5-005dXI-Cp
+Subject: [f2fs-dev] [PATCH] f2fs: fix livelock in swapfile writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,75 +80,64 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jul 29, 2019 at 12:58:28PM -0700, Eric Biggers wrote:
-> On Sun, Jul 28, 2019 at 03:24:17PM -0400, Theodore Y. Ts'o wrote:
-> > > +
-> > > +/*
-> > > + * Try to remove an fscrypt master encryption key.  If other users have also
-> > > + * added the key, we'll remove the current user's usage of the key, then return
-> > > + * -EUSERS.  Otherwise we'll continue on and try to actually remove the key.
-> > 
-> > Nit: this should be moved to patch #11
-> > 
-> > Also, perror(EUSERS) will display "Too many users" which is going to
-> > be confusing.  I understand why you chose this; we would like to
-> > distinguish between there are still inodes using this key, and there
-> > are other users using this key.
-> > 
-> > Do we really need to return EUSERS in this case?  It's actually not an
-> > *error* that other users are using the key.  After all, the unlink(2)
-> > system call doesn't return an advisory error when you delete a file
-> > which has other hard links.  And an application which does care about
-> > this detail can always call FS_IOC_ENCRYPTION_KEY_STATUS() and check
-> > user_count.
-> > 
-> 
-> Returning 0 when the key wasn't fully removed might also be confusing.  But I
-> guess you're right that returning an error doesn't match how syscalls usually
-> work.  It did remove the current user's usage of the key, after all, rather than
-> completely fail.  And as you point out, if someone cares about other users
-> having added the key, they can use FS_IOC_GET_ENCRYPTION_KEY_STATUS.
-> 
-> So I guess I'll change it to 0.
-> 
+This patch fixes livelock in the below call path when writing swap pages.
 
-So after making this change and thinking about it some more, I'm not sure it's
-actually an improvement.
+[46374.617256] c2    701  __switch_to+0xe4/0x100
+[46374.617265] c2    701  __schedule+0x80c/0xbc4
+[46374.617273] c2    701  schedule+0x74/0x98
+[46374.617281] c2    701  rwsem_down_read_failed+0x190/0x234
+[46374.617291] c2    701  down_read+0x58/0x5c
+[46374.617300] c2    701  f2fs_map_blocks+0x138/0x9a8
+[46374.617310] c2    701  get_data_block_dio_write+0x74/0x104
+[46374.617320] c2    701  __blockdev_direct_IO+0x1350/0x3930
+[46374.617331] c2    701  f2fs_direct_IO+0x55c/0x8bc
+[46374.617341] c2    701  __swap_writepage+0x1d0/0x3e8
+[46374.617351] c2    701  swap_writepage+0x44/0x54
+[46374.617360] c2    701  shrink_page_list+0x140/0xe80
+[46374.617371] c2    701  shrink_inactive_list+0x510/0x918
+[46374.617381] c2    701  shrink_node_memcg+0x2d4/0x804
+[46374.617391] c2    701  shrink_node+0x10c/0x2f8
+[46374.617400] c2    701  do_try_to_free_pages+0x178/0x38c
+[46374.617410] c2    701  try_to_free_pages+0x348/0x4b8
+[46374.617419] c2    701  __alloc_pages_nodemask+0x7f8/0x1014
+[46374.617429] c2    701  pagecache_get_page+0x184/0x2cc
+[46374.617438] c2    701  f2fs_new_node_page+0x60/0x41c
+[46374.617449] c2    701  f2fs_new_inode_page+0x50/0x7c
+[46374.617460] c2    701  f2fs_init_inode_metadata+0x128/0x530
+[46374.617472] c2    701  f2fs_add_inline_entry+0x138/0xd64
+[46374.617480] c2    701  f2fs_do_add_link+0xf4/0x178
+[46374.617488] c2    701  f2fs_create+0x1e4/0x3ac
+[46374.617497] c2    701  path_openat+0xdc0/0x1308
+[46374.617507] c2    701  do_filp_open+0x78/0x124
+[46374.617516] c2    701  do_sys_open+0x134/0x248
+[46374.617525] c2    701  SyS_openat+0x14/0x20
 
-The normal use case for this ioctl is to "lock" some encrypted directory(s).  If
-it returns 0 and doesn't lock the directory(s), that's unexpected.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/data.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This is perhaps different from what users expect from unlink().  It's well known
-that unlink() just deletes the filename, not the file itself if it's still open
-or has other links.  And unlink() by itself isn't meant for use cases where the
-file absolutely must be securely erased.  But FS_IOC_REMOVE_ENCRYPTION_KEY
-really is meant primarily for that sort of thing.
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index abbf14e9bd72..f49f243fd54f 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1372,7 +1372,7 @@ static int get_data_block_dio_write(struct inode *inode, sector_t iblock,
+ 	return __get_data_block(inode, iblock, bh_result, create,
+ 				F2FS_GET_BLOCK_DIO, NULL,
+ 				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
+-				true);
++				IS_SWAPFILE(inode) ? false : true);
+ }
+ 
+ static int get_data_block_dio(struct inode *inode, sector_t iblock,
+-- 
+2.19.0.605.g01d371f741-goog
 
-To give a concrete example: my patch for the userspace tool
-https://github.com/google/fscrypt adds a command 'fscrypt lock' which locks an
-encrypted directory.  If, say, someone runs 'fscrypt unlock' as uid 0 and then
-'fscrypt lock' as uid 1000, then FS_IOC_REMOVE_ENCRYPTION_KEY can't actually
-remove the key.  I need to make the tool show a proper error message in this
-case.  To do so, it would help to get a unique error code (e.g. EUSERS) from
-FS_IOC_REMOVE_ENCRYPTION_KEY, rather than get the ambiguous error code ENOKEY
-and have to call FS_IOC_GET_ENCRYPTION_KEY_STATUS to get the real status.
-
-Also, we already have the EBUSY case.  This means that the ioctl removed the
-master key secret itself; however, some files were still in-use, so the key
-remains in the "incompletely removed" state.  If we were actually going for
-unlink() semantics, then for consistency this case really ought to return 0 and
-unlink the key object, and people who care about in-use files would need to use
-FS_IOC_GET_ENCRYPTION_KEY_STATUS.  But most people *will* care about this, and
-may even want to retry the ioctl later, which isn't something you can do with
-pure unlink() semantics.
-
-So I'm leaning towards keeping the EUSERS and EBUSY errors.
-
-- Eric
 
 
 _______________________________________________
