@@ -2,91 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB8817CB20
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 19:58:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A54327CC1E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jul 2019 20:38:19 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hssrV-0006hk-Gf; Wed, 31 Jul 2019 17:58:05 +0000
+	id 1hstUO-0000Wj-Pj; Wed, 31 Jul 2019 18:38:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <natechancellor@gmail.com>) id 1hssrS-0006hI-QN
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 17:58:02 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hstUL-0000WE-MQ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T31WwXYsxgU8fO97C5XG4W+sh6cfy84Mun+fk+tA2/o=; b=a1Fz4nBl7wCmd88nfcdtgeqwMi
- seOa+vnh9Ou598ZRP5vCfp0bXJbL9wWLgMzRV5O9Bq+O41XU1TWYbZWYGud4TTVZ37eAJsBRAu34y
- CW0TV1B2aIryysOEvp8NDSg48kMz3ixzmAw/DB5gwd1PkZ/sdT15nKY3BPS3hnD29ybc=;
+ bh=ZTyyaQSfDBzn7dcqkzIQbhS6e0ReRkFnEBWleDYf7Kg=; b=fa6ah2boOuj1hYNExCnew13c3Q
+ 4vB5UMz5PLFx60vBIH/IYCqtgwJzckdrzQ6oJDXJBozmsP6Luh3BqavnbYK+RMlqc8TsW8CRxpJsA
+ f2VSvTqQKTmas+0aWbCpOof5Sii9IP02K6Rai6wktZ4ISsKEf5fjKa65wu2pOt9CdmNM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T31WwXYsxgU8fO97C5XG4W+sh6cfy84Mun+fk+tA2/o=; b=QgisN++5WwSMFpXH4cxz6y4HIa
- XrA1ISAHWNhtajABAhTkjdn/Ep7oR5gI78gYs4XtKqXYb4GgZMUTWYlfX0dks+wyctBome1h0p8zy
- qiZrELJ1aVeCREqVa8JiAZNMdSlDWPyXItXUGaoDBqkwRkzDZV1kYUL8djGyFdi7541Y=;
-Received: from mail-wm1-f65.google.com ([209.85.128.65])
+ bh=ZTyyaQSfDBzn7dcqkzIQbhS6e0ReRkFnEBWleDYf7Kg=; b=CfaWagucONOCXwNUhHPagoSTq7
+ LXqgUmtE7gzjPYFVViAOBP5fWVA/uMQkP2Kkd15yZdzxHe9eIAj3+H+B1DCB5nxdOb+Hkjr0vdK65
+ o09YcuRTGD4rE5P8J0YUzQAoKCgoOZw2qVXzuS2L6kTivSbVtX78/biXlomEcdp4T4MI=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hssrN-005VY6-Vd
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 17:58:01 +0000
-Received: by mail-wm1-f65.google.com with SMTP id a15so61761682wmj.5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 31 Jul 2019 10:57:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=T31WwXYsxgU8fO97C5XG4W+sh6cfy84Mun+fk+tA2/o=;
- b=sX/iidQk0dUvgAG6y3YxYqtNQUGhiSU4kesR+IvEkmGd43zb5yH6iziI4AciHJLuB8
- jq27iR560vhwkgZCmbqw2Je1yW+Glpfp0dKwf5KLywXz2ZSn8Li2tBGqOqePW+xGWTT9
- 9zRVLdAq1jm2GwIvZDS6GGhcZ4E66o84q9qvMCvAkS7epxWPvj9ObnL1irGDJ5nSAuSD
- b/ugzxNL8zkMW5ROxvQLKq3Ijn6bhJJUPFv/M3qXMItq8ZqEPNdPSP05qYSRkm46NAXH
- ZbgOwyH25TbHMsHaiGcmUGz54DBcaBKXGptYzB76c6vs524bh+5aO3gkpwluOh9QpN6/
- b7qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=T31WwXYsxgU8fO97C5XG4W+sh6cfy84Mun+fk+tA2/o=;
- b=Xno8PdMsp7WbpE4t7qHeLCHZlOEouRstv1Ak2S94lUUZ7aOjPFckak56QowQlhNr27
- w86ppdpgQOVCE2EF18CU66WLVJFVS1PdO/YWQ1i93lxVZNZG/Avh63B4UeY7R6+guDwz
- 8de4K5EVJxzYPX7SbF2FUGOXmuutBqqWVbVIZ2iJsbjGp1OGOlm5Wda+epdS55JHpflA
- P3ml2KbVu/RIwMd2ozgq7ddyznJt9gyuffJCV5hzOnnezuwahwoV0+oaYiyl1Ah2xfXs
- w/grpKKPsOgrFSW3f92uu3N2b+wDpgNpKKgHtBZ9fDmE+tTkf3YWuVOnzusNrF2P0IYg
- kyTw==
-X-Gm-Message-State: APjAAAWMSMgtMKRtyA6lhcFmwhueao+eEyQ3lu4r+hPJwcjgOGi087Os
- XUyPFLdR7mu4xQHSyCflWW2rQSYjgF692w==
-X-Google-Smtp-Source: APXvYqws+uruLILu52nsmChy6L/7Y5vDVpAORnwVLHjBO84u5ZfNuvY1CLOr83vx9GkjBUtLI/QOlw==
-X-Received: by 2002:a7b:c081:: with SMTP id r1mr62622176wmh.76.1564595871090; 
- Wed, 31 Jul 2019 10:57:51 -0700 (PDT)
-Received: from archlinux-threadripper ([2a01:4f8:222:2f1b::2])
- by smtp.gmail.com with ESMTPSA id c6sm70486993wma.25.2019.07.31.10.57.50
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 31 Jul 2019 10:57:50 -0700 (PDT)
-Date: Wed, 31 Jul 2019 10:57:48 -0700
-From: Nathan Chancellor <natechancellor@gmail.com>
-To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20190731175748.GA48637@archlinux-threadripper>
-References: <20190723230529.251659-1-drosen@google.com>
- <20190723230529.251659-4-drosen@google.com>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ id 1hstUI-005XU2-SI
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 18:38:12 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 196BF206A3;
+ Wed, 31 Jul 2019 18:38:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1564598284;
+ bh=mwf/L4kawPnA1+kq4IqMkos0fqY4xHcvedV1SVvmgr4=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=0SBhBqvGEFIUO9Q+X1GiRxRfAhxkriFVan66HT0bGDPhuMdNTX8kCHLadzRChzP4O
+ OKShL0aapWqVZ6CtauvlQDheMoSsBzO54aB87yx0xEz7IKpbCUA8GYPua8suG6ultw
+ koL6k+O0wO1Ftp9+M/dFACaiJQwyP8yBpRpTOjac=
+Date: Wed, 31 Jul 2019 11:38:02 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: "Theodore Y. Ts'o" <tytso@mit.edu>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
+ linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>, Satya Tangirala <satyat@google.com>
+Message-ID: <20190731183802.GA687@sol.localdomain>
+Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
+ linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>,
+ Satya Tangirala <satyat@google.com>
+References: <20190726224141.14044-1-ebiggers@kernel.org>
+ <20190726224141.14044-8-ebiggers@kernel.org>
+ <20190728192417.GG6088@mit.edu> <20190729195827.GF169027@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190723230529.251659-4-drosen@google.com>
+In-Reply-To: <20190729195827.GF169027@gmail.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (natechancellor[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.128.65 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,9 +83,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1hssrN-005VY6-Vd
-Subject: Re: [f2fs-dev] [PATCH v4 3/3] f2fs: Support case-insensitive file
- name lookups
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hstUI-005XU2-SI
+Subject: Re: [f2fs-dev] [PATCH v7 07/16] fscrypt: add
+ FS_IOC_REMOVE_ENCRYPTION_KEY ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,92 +98,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi all,
+On Mon, Jul 29, 2019 at 12:58:28PM -0700, Eric Biggers wrote:
+> On Sun, Jul 28, 2019 at 03:24:17PM -0400, Theodore Y. Ts'o wrote:
+> > > +
+> > > +/*
+> > > + * Try to remove an fscrypt master encryption key.  If other users have also
+> > > + * added the key, we'll remove the current user's usage of the key, then return
+> > > + * -EUSERS.  Otherwise we'll continue on and try to actually remove the key.
+> > 
+> > Nit: this should be moved to patch #11
+> > 
+> > Also, perror(EUSERS) will display "Too many users" which is going to
+> > be confusing.  I understand why you chose this; we would like to
+> > distinguish between there are still inodes using this key, and there
+> > are other users using this key.
+> > 
+> > Do we really need to return EUSERS in this case?  It's actually not an
+> > *error* that other users are using the key.  After all, the unlink(2)
+> > system call doesn't return an advisory error when you delete a file
+> > which has other hard links.  And an application which does care about
+> > this detail can always call FS_IOC_ENCRYPTION_KEY_STATUS() and check
+> > user_count.
+> > 
+> 
+> Returning 0 when the key wasn't fully removed might also be confusing.  But I
+> guess you're right that returning an error doesn't match how syscalls usually
+> work.  It did remove the current user's usage of the key, after all, rather than
+> completely fail.  And as you point out, if someone cares about other users
+> having added the key, they can use FS_IOC_GET_ENCRYPTION_KEY_STATUS.
+> 
+> So I guess I'll change it to 0.
+> 
 
-<snip>
+So after making this change and thinking about it some more, I'm not sure it's
+actually an improvement.
 
-> diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
-> index cc82f142f811f..99e79934f5088 100644
-> --- a/fs/f2fs/hash.c
-> +++ b/fs/f2fs/hash.c
-> @@ -14,6 +14,7 @@
->  #include <linux/f2fs_fs.h>
->  #include <linux/cryptohash.h>
->  #include <linux/pagemap.h>
-> +#include <linux/unicode.h>
->  
->  #include "f2fs.h"
->  
-> @@ -67,7 +68,7 @@ static void str2hashbuf(const unsigned char *msg, size_t len,
->  		*buf++ = pad;
->  }
->  
-> -f2fs_hash_t f2fs_dentry_hash(const struct qstr *name_info,
-> +static f2fs_hash_t __f2fs_dentry_hash(const struct qstr *name_info,
->  				struct fscrypt_name *fname)
->  {
->  	__u32 hash;
-> @@ -103,3 +104,35 @@ f2fs_hash_t f2fs_dentry_hash(const struct qstr *name_info,
->  	f2fs_hash = cpu_to_le32(hash & ~F2FS_HASH_COL_BIT);
->  	return f2fs_hash;
->  }
-> +
-> +f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
-> +		const struct qstr *name_info, struct fscrypt_name *fname)
-> +{
-> +#ifdef CONFIG_UNICODE
-> +	struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
-> +	const struct unicode_map *um = sbi->s_encoding;
-> +	int r, dlen;
-> +	unsigned char *buff;
-> +	struct qstr *folded;
-> +
-> +	if (name_info->len && IS_CASEFOLDED(dir)) {
-> +		buff = f2fs_kzalloc(sbi, sizeof(char) * PATH_MAX, GFP_KERNEL);
-> +		if (!buff)
-> +			return -ENOMEM;
-> +
-> +		dlen = utf8_casefold(um, name_info, buff, PATH_MAX);
-> +		if (dlen < 0) {
-> +			kvfree(buff);
-> +			goto opaque_seq;
-> +		}
-> +		folded->name = buff;
-> +		folded->len = dlen;
-> +		r = __f2fs_dentry_hash(folded, fname);
-> +
-> +		kvfree(buff);
-> +		return r;
-> +	}
-> +opaque_seq:
-> +#endif
-> +	return __f2fs_dentry_hash(name_info, fname);
-> +}
+The normal use case for this ioctl is to "lock" some encrypted directory(s).  If
+it returns 0 and doesn't lock the directory(s), that's unexpected.
 
-Clang now warns:
+This is perhaps different from what users expect from unlink().  It's well known
+that unlink() just deletes the filename, not the file itself if it's still open
+or has other links.  And unlink() by itself isn't meant for use cases where the
+file absolutely must be securely erased.  But FS_IOC_REMOVE_ENCRYPTION_KEY
+really is meant primarily for that sort of thing.
 
-fs/f2fs/hash.c:128:3: warning: variable 'folded' is uninitialized when used here [-Wuninitialized]
-                folded->name = buff;
-                ^~~~~~
-fs/f2fs/hash.c:116:21: note: initialize the variable 'folded' to silence this warning
-        struct qstr *folded;
-                           ^
-                            = NULL
-1 warning generated.
+To give a concrete example: my patch for the userspace tool
+https://github.com/google/fscrypt adds a command 'fscrypt lock' which locks an
+encrypted directory.  If, say, someone runs 'fscrypt unlock' as uid 0 and then
+'fscrypt lock' as uid 1000, then FS_IOC_REMOVE_ENCRYPTION_KEY can't actually
+remove the key.  I need to make the tool show a proper error message in this
+case.  To do so, it would help to get a unique error code (e.g. EUSERS) from
+FS_IOC_REMOVE_ENCRYPTION_KEY, rather than get the ambiguous error code ENOKEY
+and have to call FS_IOC_GET_ENCRYPTION_KEY_STATUS to get the real status.
 
-I assume that it wants to be initialized with f2fs_kzalloc as well but
-I am not familiar with this code and what it expects to do.
+Also, we already have the EBUSY case.  This means that the ioctl removed the
+master key secret itself; however, some files were still in-use, so the key
+remains in the "incompletely removed" state.  If we were actually going for
+unlink() semantics, then for consistency this case really ought to return 0 and
+unlink the key object, and people who care about in-use files would need to use
+FS_IOC_GET_ENCRYPTION_KEY_STATUS.  But most people *will* care about this, and
+may even want to retry the ioctl later, which isn't something you can do with
+pure unlink() semantics.
 
-Please look into this when you get a chance!
-Nathan
+So I'm leaning towards keeping the EUSERS and EBUSY errors.
+
+- Eric
 
 
 _______________________________________________
