@@ -2,73 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D29007D207
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Aug 2019 01:39:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D54DF7D295
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Aug 2019 03:11:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hsyBS-00013h-LD; Wed, 31 Jul 2019 23:39:02 +0000
+	id 1hszcw-0003Ou-6V; Thu, 01 Aug 2019 01:11:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hsyBS-00013W-2J
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 23:39:02 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hszcu-0003Ol-Fr
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Aug 2019 01:11:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CL5lJ5fDavnTAR09k6Pp4JtfrVuN+aNIUOfdUZWF0Xw=; b=S86Bsgi+mqqJgcjuGeHa1qYC7W
- wqtesaclf7TKGhWChMLuGW3C1GW35+h/ybP0L4ILI41Y7POIb02jQg6D5qy4XD7TwKb30ywmRWW0o
- +RUqcf1d10L8t0DV3b4T65Xan39rUxrXzLVr061HCiT7phq/yC9DIkch5yjmJixNLofg=;
+ bh=MREHOePjFMfnRBHCI0OzSzUxtSSTXCkFdpCVM8RUFbg=; b=fFYfzy7zgrU1l0Jml/xHOH7skS
+ HulvOazePdDHIOjTtxwrLUY49GYN8a43gAttbYU5nJYuMjTjokp8ChWcFiR0FSfY2n260KPnyqT11
+ qQ+yZnpB7J8w3Wg1bTyqYkKx6pe+qqi3RKWZz94sGYOSuqoZFK3Pq9uVYhBv6g+XCAeo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CL5lJ5fDavnTAR09k6Pp4JtfrVuN+aNIUOfdUZWF0Xw=; b=BPRkmQdpV0Od9CHcECbe5FkAQ0
- 4oTCmnZOWj2W+loPFNBcPNpVYhZYXsJV9YyI3LRUYuLbqFbRqNEoP/ubeXOBsp+gy12mCxe/RObiV
- zonBJ+hzSjeqw2PBZQhEAor5cMgDpIZsG0VuYkt79TwFNghoq0YK58hQHBITI2trbSu0=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=MREHOePjFMfnRBHCI0OzSzUxtSSTXCkFdpCVM8RUFbg=; b=e/eb3WisV6VXiZhySBdhcywUSj
+ npJD3S3B2ybmLAFNsBMBiAh9SpKdq5zwLrgKB1jHwy2hl7jAxa2uMbnzwjo3dUSUgvlmVHjUxaUtF
+ UZdgv6dqiBzJ3GnRCNcChbGnN4Qhrlt1Pcltjan/mYltEerhT1NvSPsI+9ZcibzIUMWs=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hsyBN-005oh4-Ae
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Jul 2019 23:39:02 +0000
-Received: from callcc.thunk.org (96-72-102-169-static.hfc.comcastbusiness.net
- [96.72.102.169] (may be forged)) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x6VNchZY000330
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 31 Jul 2019 19:38:44 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 3EE374202F5; Wed, 31 Jul 2019 19:38:43 -0400 (EDT)
-Date: Wed, 31 Jul 2019 19:38:43 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
- linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>, Satya Tangirala <satyat@google.com>
-Message-ID: <20190731233843.GA2769@mit.edu>
-References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-8-ebiggers@kernel.org>
- <20190728192417.GG6088@mit.edu> <20190729195827.GF169027@gmail.com>
- <20190731183802.GA687@sol.localdomain>
+ id 1hszcs-005vAr-BW
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Aug 2019 01:11:28 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 6295B2C0F960B1BEB31C;
+ Thu,  1 Aug 2019 09:11:19 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 1 Aug 2019
+ 09:11:14 +0800
+To: Nathan Chancellor <natechancellor@gmail.com>, Daniel Rosenberg
+ <drosen@google.com>
+References: <20190723230529.251659-1-drosen@google.com>
+ <20190723230529.251659-4-drosen@google.com>
+ <20190731175748.GA48637@archlinux-threadripper>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <5d6c5da8-ad1e-26e2-0a3d-84949cd4e9aa@huawei.com>
+Date: Thu, 1 Aug 2019 09:11:13 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190731183802.GA687@sol.localdomain>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20190731175748.GA48637@archlinux-threadripper>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hsyBN-005oh4-Ae
-Subject: Re: [f2fs-dev] [PATCH v7 07/16] fscrypt: add
- FS_IOC_REMOVE_ENCRYPTION_KEY ioctl
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1hszcs-005vAr-BW
+Subject: Re: [f2fs-dev] [PATCH v4 3/3] f2fs: Support case-insensitive file
+ name lookups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,70 +77,107 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-doc@vger.kernel.org, linux-api@vger.kernel.org,
+ Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jul 31, 2019 at 11:38:02AM -0700, Eric Biggers wrote:
+Hi Nathan,
+
+Thanks for the report! :)
+
+On 2019/8/1 1:57, Nathan Chancellor wrote:
+> Hi all,
 > 
-> This is perhaps different from what users expect from unlink().  It's well known
-> that unlink() just deletes the filename, not the file itself if it's still open
-> or has other links.  And unlink() by itself isn't meant for use cases where the
-> file absolutely must be securely erased.  But FS_IOC_REMOVE_ENCRYPTION_KEY
-> really is meant primarily for that sort of thing.
+> <snip>
+> 
+>> diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
+>> index cc82f142f811f..99e79934f5088 100644
+>> --- a/fs/f2fs/hash.c
+>> +++ b/fs/f2fs/hash.c
+>> @@ -14,6 +14,7 @@
+>>  #include <linux/f2fs_fs.h>
+>>  #include <linux/cryptohash.h>
+>>  #include <linux/pagemap.h>
+>> +#include <linux/unicode.h>
+>>  
+>>  #include "f2fs.h"
+>>  
+>> @@ -67,7 +68,7 @@ static void str2hashbuf(const unsigned char *msg, size_t len,
+>>  		*buf++ = pad;
+>>  }
+>>  
+>> -f2fs_hash_t f2fs_dentry_hash(const struct qstr *name_info,
+>> +static f2fs_hash_t __f2fs_dentry_hash(const struct qstr *name_info,
+>>  				struct fscrypt_name *fname)
+>>  {
+>>  	__u32 hash;
+>> @@ -103,3 +104,35 @@ f2fs_hash_t f2fs_dentry_hash(const struct qstr *name_info,
+>>  	f2fs_hash = cpu_to_le32(hash & ~F2FS_HASH_COL_BIT);
+>>  	return f2fs_hash;
+>>  }
+>> +
+>> +f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
+>> +		const struct qstr *name_info, struct fscrypt_name *fname)
+>> +{
+>> +#ifdef CONFIG_UNICODE
+>> +	struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
+>> +	const struct unicode_map *um = sbi->s_encoding;
+>> +	int r, dlen;
+>> +	unsigned char *buff;
+>> +	struct qstr *folded;
+>> +
+>> +	if (name_info->len && IS_CASEFOLDED(dir)) {
+>> +		buff = f2fs_kzalloc(sbi, sizeof(char) * PATH_MAX, GFP_KERNEL);
+>> +		if (!buff)
+>> +			return -ENOMEM;
+>> +
+>> +		dlen = utf8_casefold(um, name_info, buff, PATH_MAX);
+>> +		if (dlen < 0) {
+>> +			kvfree(buff);
+>> +			goto opaque_seq;
+>> +		}
+>> +		folded->name = buff;
+>> +		folded->len = dlen;
+>> +		r = __f2fs_dentry_hash(folded, fname);
+>> +
+>> +		kvfree(buff);
+>> +		return r;
+>> +	}
+>> +opaque_seq:
+>> +#endif
+>> +	return __f2fs_dentry_hash(name_info, fname);
+>> +}
+> 
+> Clang now warns:
+> 
+> fs/f2fs/hash.c:128:3: warning: variable 'folded' is uninitialized when used here [-Wuninitialized]
+>                 folded->name = buff;
+>                 ^~~~~~
+> fs/f2fs/hash.c:116:21: note: initialize the variable 'folded' to silence this warning
+>         struct qstr *folded;
+>                            ^
+>                             = NULL
+> 1 warning generated.
+> 
+> I assume that it wants to be initialized with f2fs_kzalloc as well but
+> I am not familiar with this code and what it expects to do.
+> 
+> Please look into this when you get a chance!
 
-Seems to me that part of the confusion is FS_IOC_REMOVE_ENCRYPTION_KEY
-does two things.  One is "remove the user's handle on the key".  The
-other is "purge all keys" (which requires root).  So it does two
-different things with one ioctl.
+That should be a bug, it needs to define a struct qstr type variable rather than
+a pointer there.
 
-> To give a concrete example: my patch for the userspace tool
-> https://github.com/google/fscrypt adds a command 'fscrypt lock' which locks an
-> encrypted directory.  If, say, someone runs 'fscrypt unlock' as uid 0 and then
-> 'fscrypt lock' as uid 1000, then FS_IOC_REMOVE_ENCRYPTION_KEY can't actually
-> remove the key.  I need to make the tool show a proper error message in this
-> case.  To do so, it would help to get a unique error code (e.g. EUSERS) from
-> FS_IOC_REMOVE_ENCRYPTION_KEY, rather than get the ambiguous error code ENOKEY
-> and have to call FS_IOC_GET_ENCRYPTION_KEY_STATUS to get the real status.
+Jaegeuk, could you fix this in you branch?
 
-What about having "fscrypt lock" call FS_IOC_GET_ENCRYPTION_KEY_STATUS
-and print a warning message saying, "we can't lock it because N other
-users who have registered a key".  I'd argue fscrypt should do this
-regardless of whether or not FS_IOC_REMOVE_ENCRYPTION_KEY returns
-EUSERS or not.
+Thanks,
 
-> Also, we already have the EBUSY case.  This means that the ioctl removed the
-> master key secret itself; however, some files were still in-use, so the key
-> remains in the "incompletely removed" state.  If we were actually going for
-> unlink() semantics, then for consistency this case really ought to return 0 and
-> unlink the key object, and people who care about in-use files would need to use
-> FS_IOC_GET_ENCRYPTION_KEY_STATUS.  But most people *will* care about this, and
-> may even want to retry the ioctl later, which isn't something youh can do with
-> pure unlink() semantics.
-
-It seems to me that the EBUSY and EUSERS errors should be status bits
-which gets returned to the user in a bitfield --- and if the key has
-been removed, or the user's claim on the key's existence has been
-removed, the ioctl returns success.
-
-That way we don't have to deal with the semantic disconnect where some
-errors don't actually change system state, and other errors that *do*
-change system state (as in, the key gets removed, or the user's claim
-on the key gets removed), but still returns than error.
-
-We could also add a flag which indicates where if there are files that
-are still busy, or there are other users keeping a key in use, the
-ioctl fails hard and returns an error.  At least that way we keep
-consistency where an error means, "nothing has changed".
-
-	    	     	   	  	   - Ted
-
-P.S.  BTW, one of the comments which I didn't make was the
-documentation didn't adequately explain which error codes means,
-"success but with a caveat", and which errors means, "we failed and
-didn't do anything".  But since I was arguing for changing the
-behavior, I decided not to complain about the documentation.
-
+> Nathan
+> .
+> 
 
 
 _______________________________________________
