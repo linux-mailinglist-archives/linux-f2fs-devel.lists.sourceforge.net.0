@@ -2,66 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74C4F7F4D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Aug 2019 12:16:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12F387FFAB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Aug 2019 19:32:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1htUbu-0004On-13; Fri, 02 Aug 2019 10:16:30 +0000
+	id 1htbPN-0000TA-GJ; Fri, 02 Aug 2019 17:32:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1htUbs-0004Od-SI
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 10:16:28 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1htbPL-0000T1-Po
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 17:31:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=b8jH7eAf3IghUEiBSQKnRzd6QNQiMXWWCa8itWyzRuY=; b=gLNGGdE91HDXclLaJwsUGYOpfU
- tpar1BGIe0TIxENOlp/m/AI9LNiVchw3tAtfymgRK8EIdyiB+K6CFm8wYb/cdvP7qTvC7Gv2FcPj5
- Bqbn6JAtFdCIxN/yLMxqVsIftbqJMRAEiSdcw5P1s4Armb9aZ1F2QbI8lXG+Chcx+x0M=;
+ bh=Yte0UDJB23zu/WxwyOZTwfCnjB/BtHTLGlSpj8csq/I=; b=imntZo9+cKTZGCtvaNy+UUrSGf
+ QR/Qq9i9i1na3twbqNoEHlvFDGQvMU/4e7dmlSd6qZ0Sz+y+ll35z2N9zBJrjeJcAoBKSAREczJLJ
+ QfL193391q33rRin5P1Ru9pxn9IbBg5ApcVStxJUv21O+a9y8dwfzS5J/1PXOMlGEnSY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=b8jH7eAf3IghUEiBSQKnRzd6QNQiMXWWCa8itWyzRuY=; b=M
- 19Yj3DRgoa4V6bWkBTM4EJLZK7Rhy4rBOlUAHiOGttSR/i/D1wqzlSdln5U45OYzi6kxpGRqREUes
- OrmHWAvDjr5RW+/CNcAtJBloiz9AjzXMxNpxNKfhtzZGYF/OFNNuSW8/csnO2OEpeZMD30zrfuYkU
- dIMJz4h/WWJ58aAQ=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Yte0UDJB23zu/WxwyOZTwfCnjB/BtHTLGlSpj8csq/I=; b=Bg+Di9EaNw0qbebpPy5/VwatmI
+ yMcmZYHb/f/L/zaR7Ofv7zmosiZmyrxBmEd+QpioyUYZ4gsL7PXcB7jD2C8AeTax3iphZtmPRTTu2
+ 0n6zxw5tFpJJO9JgWq6b22u7FIMQDHSXtmvDnsWJ9C9BoZgeoBFSJpynV3gzPtpBMcds=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1htUbq-007z3r-Ms
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 10:16:28 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id F15548CA8EEC0A7AC45B;
- Fri,  2 Aug 2019 18:16:15 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 2 Aug 2019 18:16:05 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Fri, 2 Aug 2019 18:15:48 +0800
-Message-ID: <20190802101548.96543-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+ id 1htbPJ-007uhT-63
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 17:31:59 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 31C1B2173E;
+ Fri,  2 Aug 2019 17:31:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1564767111;
+ bh=p28pesjeaFELdMWXTRb2eE2TRQRtp76oeifvbyCl/RI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ZcqdJ1sHgA4eHoVKYSn8SpVn+pAUEpj9uFNNG8Yop5svyGIeSKgDaCG0hU7/1xGe+
+ YH6wiSFmAifvQSIcT5ECPJSv2MxBpI4U1tOb0SI7k4tFkU4lU056T/wtL7OaDANFff
+ AXFhYpVcepiXq7WKPEIqg6WGV1t6hc/k/rdkPvQU=
+Date: Fri, 2 Aug 2019 10:31:49 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190802173148.GA51937@gmail.com>
+Mail-Followup-To: Chao Yu <yuchao0@huawei.com>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
+ linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>,
+ Satya Tangirala <satyat@google.com>
+References: <20190726224141.14044-1-ebiggers@kernel.org>
+ <20190726224141.14044-15-ebiggers@kernel.org>
+ <e3cf53a7-faf2-0321-22de-07d2e2783752@huawei.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <e3cf53a7-faf2-0321-22de-07d2e2783752@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 3.4 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 3.5 FSL_HELO_FAKE          No description available.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1htUbq-007z3r-Ms
-Subject: [f2fs-dev] [PATCH] Revert "f2fs: avoid out-of-range memory access"
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1htbPJ-007uhT-63
+Subject: Re: [f2fs-dev] [PATCH v7 14/16] f2fs: wire up new fscrypt ioctls
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,61 +96,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Satya Tangirala <satyat@google.com>, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As Pavel Machek reported:
+On Fri, Aug 02, 2019 at 04:10:15PM +0800, Chao Yu wrote:
+> Hi Eric,
+> 
+> On 2019/7/27 6:41, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > Wire up the new ioctls for adding and removing fscrypt keys to/from the
+> > filesystem, and the new ioctl for retrieving v2 encryption policies.
+> > 
+> > FS_IOC_REMOVE_ENCRYPTION_KEY also required making f2fs_drop_inode() call
+> > fscrypt_drop_inode().
+> > 
+> > For more details see Documentation/filesystems/fscrypt.rst and the
+> > fscrypt patches that added the implementation of these ioctls.
+> > 
+> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+> 
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
+> 
+> BTW, do you think it needs to make xxfs_has_support_encrypt() function be a
+> common interface defined in struct fscrypt_operations, as I see all
+> fscrypt_ioctl_*() needs to check with it, tho such cleanup is minor...
+> 
 
-"We normally use -EUCLEAN to signal filesystem corruption. Plus, it is
-good idea to report it to the syslog and mark filesystem as "needing
-fsck" if filesystem can do that."
+Maybe.  It would work nicely for ext4 and f2fs, but ubifs does things
+differently since it automatically enables the encryption feature if needed.
+So we'd have to make the callback optional.
 
-Still we need improve the original patch with:
-- use unlikely keyword
-- add message print
-- return EUCLEAN
+In any case, I think this should be separate from this patchset.
 
-However, after rethink this patch, I don't think we should add such
-condition check here as below reasons:
-- We have already checked the field in f2fs_sanity_check_ckpt(),
-- If there is fs corrupt or security vulnerability, there is nothing
-to guarantee the field is integrated after the check, unless we do
-the check before each of its use, however no filesystem does that.
-- We only have similar check for bitmap, which was added due to there
-is bitmap corruption happened on f2fs' runtime in product.
-- There are so many key fields in SB/CP/NAT did have such check
-after f2fs_sanity_check_{sb,cp,..}.
-
-So I propose to revert this unneeded check.
-
-This reverts commit 56f3ce675103e3fb9e631cfb4131fc768bc23e9a.
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/segment.c | 5 -----
- 1 file changed, 5 deletions(-)
-
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 9693fa4c8971..2eff9c008ae0 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3492,11 +3492,6 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
- 		seg_i = CURSEG_I(sbi, i);
- 		segno = le32_to_cpu(ckpt->cur_data_segno[i]);
- 		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
--		if (blk_off > ENTRIES_IN_SUM) {
--			f2fs_bug_on(sbi, 1);
--			f2fs_put_page(page, 1);
--			return -EFAULT;
--		}
- 		seg_i->next_segno = segno;
- 		reset_curseg(sbi, i, 0);
- 		seg_i->alloc_type = ckpt->alloc_type[i];
--- 
-2.18.0.rc1
-
+- Eric
 
 
 _______________________________________________
