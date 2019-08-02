@@ -2,95 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D0027EB94
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Aug 2019 06:39:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ECF47EE14
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Aug 2019 09:54:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1htPLI-00021x-0B; Fri, 02 Aug 2019 04:39:00 +0000
+	id 1htSOJ-0005yK-9K; Fri, 02 Aug 2019 07:54:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1htPLG-00021j-JW
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 04:38:58 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1htSOH-0005yC-Ih
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 07:54:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KNe0/LHpHEt+BB7MO94YgeJ3a8xkZknlESGiip1gFgI=; b=F1/P/AwYMvc6ZdPsxQluY5AkqZ
- IEXG/pl7ajFdCB/5JhklYx97Jg4x7dzxLL6Sc//e100ZJuGMilIurdpGgbFJac5/ObCXRufhKhCdG
- l9JkESt9LL6PZrTpCh+l1d8NOK2N5kTwc61O1slUgcbBbMuk8IikmxksIbVDi+vkdQVU=;
+ bh=ErTOrouAwHP8JYBIaqYklw6sJ4u872ztiGT0wnBQs7c=; b=EfMyDOlkf5tryRUyCdt3Wb+vqG
+ wTOsFthLdJzd9AdWp0RvPeQ0k3Is9OtCJRtH4efODO91OHMbigVkbNDLRjSKPb3NyKsdfx0gIFe9Z
+ V8kR5X4CuubnAB/oD+HhNDdPkMFRih2dXceSqOalONcWyGsXZqeoJvVGcFFC2eGB77Tc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KNe0/LHpHEt+BB7MO94YgeJ3a8xkZknlESGiip1gFgI=; b=SNAS1M/nqIr9d83L36gyIzIhvg
- RG594UwsEkOO/QMNPSCHwVe+DmhMRqD9qWcy1s9lM/+J/aHnmAIbaQZf03z0EJjUv9eg33pbWhL6N
- 6saDfQJp+Y6CDJbEahjtONDcfw7UVp4ibc+8UR4HxxPq+thWDDsoZ3QV+cDKEIll9kmw=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=ErTOrouAwHP8JYBIaqYklw6sJ4u872ztiGT0wnBQs7c=; b=B2z5P/dG/azqcOD8h5LgSvOyqv
+ TjPW71vo/lOCbMSuFL44dLKaBhKgFkZMBOfo6OkeZ9WWhArXVH7aOcl+rJOWJiV87KmoeH9FIdBqR
+ qZc19Ws5iEIlz5u4RDS2a31f9+4yfhbXvWdYGBiXys7bvoHJ6HJOCtRgoIWtBve7DNpQ=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1htPLE-007k1Z-9u
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 04:38:58 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CB732206A3;
- Fri,  2 Aug 2019 04:38:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564720729;
- bh=22Gl8jbJ+JI3LFRMtZwmwjWZb40cKJpBWHsqVgRxQp8=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=hGdJLfJGhfUoeVGRhqaMe25mzQV8+btFmFcQAymp1w48W8DhGqDxUogaRUuHwpPfY
- +cL7kiOkSFEO3QtYlgDX7yYFbPHeJ+zVsFpqPjC/oR21Rt7gPWXjKjZOupPxnzApRu
- kgX+HTDwGCprkebtEPG0MszX50T5fnuUh/zsb+88=
-Date: Thu, 1 Aug 2019 21:38:27 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
- linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>, Satya Tangirala <satyat@google.com>
-Message-ID: <20190802043827.GA19201@sol.localdomain>
-Mail-Followup-To: "Theodore Y. Ts'o" <tytso@mit.edu>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, linux-api@vger.kernel.org,
- linux-crypto@vger.kernel.org, keyrings@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>,
- Satya Tangirala <satyat@google.com>
-References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-8-ebiggers@kernel.org>
- <20190728192417.GG6088@mit.edu> <20190729195827.GF169027@gmail.com>
- <20190731183802.GA687@sol.localdomain>
- <20190731233843.GA2769@mit.edu>
- <20190801011140.GB687@sol.localdomain>
- <20190801053108.GD2769@mit.edu> <20190801220432.GC223822@gmail.com>
+ id 1htSOD-006sEf-94
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Aug 2019 07:54:17 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id F03FD61C8903D48421A4;
+ Fri,  2 Aug 2019 15:54:05 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019
+ 15:54:02 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20190729150351.12223-1-chao@kernel.org>
+ <20190730231850.GA7097@jaegeuk-macbookpro.roam.corp.google.com>
+ <c7232d80-a4d8-88ae-2eca-01290dd0e56a@huawei.com>
+ <20190801042215.GC84433@jaegeuk-macbookpro.roam.corp.google.com>
+ <345c55ea-01c2-a9d1-4367-716dbd08ae9d@huawei.com>
+ <20190801223509.GB27597@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <8e906ddb-81d8-b63e-0c19-1ee9fc7f5cbf@huawei.com>
+Date: Fri, 2 Aug 2019 15:54:00 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190801220432.GC223822@gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20190801223509.GB27597@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1htPLE-007k1Z-9u
-Subject: Re: [f2fs-dev] [PATCH v7 07/16] fscrypt: add
- FS_IOC_REMOVE_ENCRYPTION_KEY ioctl
+X-Headers-End: 1htSOD-006sEf-94
+Subject: Re: [f2fs-dev] [PATCH v3 RESEND] f2fs: introduce
+ sb.required_features to store incompatible features
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,154 +83,230 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Aug 01, 2019 at 03:04:34PM -0700, Eric Biggers wrote:
-> On Thu, Aug 01, 2019 at 01:31:08AM -0400, Theodore Y. Ts'o wrote:
-> > On Wed, Jul 31, 2019 at 06:11:40PM -0700, Eric Biggers wrote:
-> > > 
-> > > Well, it's either
-> > > 
-> > > 1a. Remove the user's handle.
-> > > 	OR 
-> > > 1b. Remove all users' handles.  (FSCRYPT_REMOVE_KEY_FLAG_ALL_USERS)
-> > > 
-> > > Then
-> > > 
-> > > 2. If no handles remain, try to evict all inodes that use the key.
-> > > 
-> > > By "purge all keys" do you mean step (2)?  Note that it doesn't require root by
-> > > itself; root is only required to remove other users' handles (1b).
-> > 
-> > No, I was talking about 1b.  I'd argue that 1a and 1b should be
-> > different ioctl.  1b requires root, and 1a doesn't.
-> > 
-> [...]
-> > > 
-> > > Do you mean use a positive return value, or do you mean add an output field to
-> > > the struct passed to the ioctl?
-> > 
-> > I meant adding an output field.  I see EBUSY and EUSERS as status bits
-> > which *some* use cases might find useful.
+On 2019/8/2 6:35, Jaegeuk Kim wrote:
+> On 08/01, Chao Yu wrote:
+>> On 2019/8/1 12:22, Jaegeuk Kim wrote:
+>>> On 07/31, Chao Yu wrote:
+>>>> On 2019/7/31 7:18, Jaegeuk Kim wrote:
+>>>>> On 07/29, Chao Yu wrote:
+>>>>>> From: Chao Yu <yuchao0@huawei.com>
+>>>>>>
+>>>>>> Later after this patch was merged, all new incompatible feature's
+>>>>>> bit should be added into sb.required_features field, and define new
+>>>>>> feature function with F2FS_INCOMPAT_FEATURE_FUNCS() macro.
+>>>>>>
+>>>>>> Then during mount, we will do sanity check with enabled features in
+>>>>>> image, if there are features in sb.required_features that kernel can
+>>>>>> not recognize, just fail the mount.
+>>>>>>
+>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>> ---
+>>>>>> v3:
+>>>>>> - change commit title.
+>>>>>> - fix wrong macro name.
+>>>>>>  fs/f2fs/f2fs.h          | 15 +++++++++++++++
+>>>>>>  fs/f2fs/super.c         | 10 ++++++++++
+>>>>>>  include/linux/f2fs_fs.h |  3 ++-
+>>>>>>  3 files changed, 27 insertions(+), 1 deletion(-)
+>>>>>>
+>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>>>> index a6eb828af57f..b8e17d4ddb8d 100644
+>>>>>> --- a/fs/f2fs/f2fs.h
+>>>>>> +++ b/fs/f2fs/f2fs.h
+>>>>>> @@ -163,6 +163,15 @@ struct f2fs_mount_info {
+>>>>>>  #define F2FS_CLEAR_FEATURE(sbi, mask)					\
+>>>>>>  	(sbi->raw_super->feature &= ~cpu_to_le32(mask))
+>>>>>>  
+>>>>>> +#define F2FS_INCOMPAT_FEATURES		0
+>>>>>> +
+>>>>>> +#define F2FS_HAS_INCOMPAT_FEATURE(sbi, mask)				\
+>>>>>> +	((sbi->raw_super->required_features & cpu_to_le32(mask)) != 0)
+>>>>>> +#define F2FS_SET_INCOMPAT_FEATURE(sbi, mask)				\
+>>>>>> +	(sbi->raw_super->required_features |= cpu_to_le32(mask))
+>>>>>> +#define F2FS_CLEAR_INCOMPAT_FEATURE(sbi, mask)				\
+>>>>>> +	(sbi->raw_super->required_features &= ~cpu_to_le32(mask))
+>>>>>> +
+>>>>>>  /*
+>>>>>>   * Default values for user and/or group using reserved blocks
+>>>>>>   */
+>>>>>> @@ -3585,6 +3594,12 @@ F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
+>>>>>>  F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
+>>>>>>  F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
+>>>>>>  
+>>>>>> +#define F2FS_INCOMPAT_FEATURE_FUNCS(name, flagname) \
+>>>>>> +static inline int f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
+>>>>>> +{ \
+>>>>>> +	return F2FS_HAS_INCOMPAT_FEATURE(sbi, F2FS_FEATURE_##flagname); \
+>>>>>> +}
+>>>>>> +
+>>>>>>  #ifdef CONFIG_BLK_DEV_ZONED
+>>>>>>  static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
+>>>>>>  				    block_t blkaddr)
+>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>>> index 5540fee0fe3f..3701dcce90e6 100644
+>>>>>> --- a/fs/f2fs/super.c
+>>>>>> +++ b/fs/f2fs/super.c
+>>>>>> @@ -2513,6 +2513,16 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
+>>>>>>  		return -EINVAL;
+>>>>>>  	}
+>>>>>>  
+>>>>>> +	/* check whether current kernel supports all features on image */
+>>>>>> +	if (le32_to_cpu(raw_super->required_features) &
+>>>>>
+>>>>> ...
+>>>>> #define F2FS_FEATURE_VERITY	0x0400	/* reserved */
+>>>>> ...
+>>>>> #define F2FS_FEATURE_CASEFOLD	0x1000
+>>>>> #define F2FS_FEATURE_SUPPORT	0x1BFF
+>>>>>
+>>>>> 	if (le32_to_cpu(raw_super->required_features) & ~F2FS_FEATURE_SUPPORT) {
+>>>>> 		...
+>>>>> 		return -EINVAL;
+>>>>> 	}
+>>>>
+>>>> Um, I thought .required_features are used to store new feature flags from 0x0.
+>>>>
+>>>> All 'F2FS_FEATURE_SUPPORT' bits should be stored in sb.feature instead of
+>>>> sb.required_features, I'm confused...
+>>>
+>>> I'm thinking,
+>>>
+>>> f2fs-tools     sb->required_features     f2fs    F2FS_FEATURE_SUPPORT
+>>> v0             0                         v0      no_check -> ok
+>>> v1             0x1BFF                    v0      no_check -> ok
+>>> v0             0                         v1      0x1BFF -> ok
+>>> v1             0x1BFF                    v1      0x1BFF -> ok
+>>> v2             0x3BFF                    v1      0x1BFF -> fail
+>>> v1             0x1BFF                    v2      0x3BFF -> ok
+>>> v2             0x3BFF                    v2      0x3BFF -> ok
+>>
+>> I see, it's a bit waste for 0x1FFF low bits in sb->required_features. Why not
+>> leaving 0x0FFF in sb->feature w/o sanity check. And make all new incompatible
+>> features (including casefold) adding into sb->required_features.
 > 
-> Ted, would you be happy with the following API?
+> I don't think we can define like this, and we still have 32bits feature filed.
+> This would give another confusion to understand. VERITY is reserved only now.
 > 
+> #define F2FS_FEATURE_CASEFOLD		0x0001
 
-Here's a slightly updated version (I missed removing some stale text):
+Oops, so you want to make .required_features being almost a mirror of .feature,
+and do sanity check on it... I can see now. :P
 
-Removing keys
--------------
+If so, why not just use .feature:
 
-Two ioctls are available for removing a key that was added by
-`FS_IOC_ADD_ENCRYPTION_KEY`_:
+kernel	tool
+v5.2 .. 1.12
+#define	F2FS_FEATURE_SUPPORT		0x0BFF
 
-- `FS_IOC_REMOVE_ENCRYPTION_KEY`_
-- `FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS`_
+v5.3 .. 1.13
+#define F2FS_FEATURE_CASEFOLD		0x1000
+#define	F2FS_FEATURE_SUPPORT		0x1BFF
 
-These two ioctls differ only in cases where v2 policy keys are added
-or removed by non-root users.
+v5.4 .. 1.14
+#define F2FS_FEATURE_CASEFOLD		0x1000
+#define F2FS_FEATURE_COMPRESS		0x2000
+#define	F2FS_FEATURE_SUPPORT		0x3BFF
 
-These ioctls don't work on keys that were added via the legacy
-process-subscribed keyrings mechanism.
+f2fs-tools	sb->feature		f2fs	F2FS_FEATURE_SUPPORT
 
-Before using these ioctls, read the `Kernel memory compromise`_
-section for a discussion of the security goals and limitations of
-these ioctls.
+[enable all features in tools]
+v1.12		0x0BFF			v5.2	no_check -> ok
+v1.12		0x0BFF			v5.3	0x1BFF -> ok
+v1.12		0x0BFF			v5.4	0x3BFF -> ok
 
-FS_IOC_REMOVE_ENCRYPTION_KEY
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+v1.13		0x1BFF			v5.2	that's issue we need to fix
+v1.13		0x1BFF			v5.3	0x1BFF -> ok
+v1.13		0x1BFF			v5.4	0x3BFF -> ok
 
-The FS_IOC_REMOVE_ENCRYPTION_KEY ioctl removes a claim to a master
-encryption key from the filesystem, and possibly removes the key
-itself.  It can be executed on any file or directory on the target
-filesystem, but using the filesystem's root directory is recommended.
-It takes in a pointer to a :c:type:`struct fscrypt_remove_key_arg`,
-defined as follows::
+v1.14		0x3BFF			v5.2	that's issue we need to fix
+v1.14		0x3BFF			v5.3	0x1BFF -> fail
+v1.14		0x3BFF			v5.4	0x3BFF -> ok
 
-    struct fscrypt_remove_key_arg {
-            struct fscrypt_key_specifier key_spec;
-    #define FSCRYPT_KEY_REMOVAL_STATUS_FLAG_FILES_BUSY      0x00000001
-    #define FSCRYPT_KEY_REMOVAL_STATUS_FLAG_OTHER_USERS     0x00000002
-            __u32 removal_status_flags;     /* output */
-            __u32 __reserved[5];
-    };
+Or am I missing something?
 
-This structure must be zeroed, then initialized as follows:
+Thanks,
 
-- The key to remove is specified by ``key_spec``:
-
-    - To remove a key used by v1 encryption policies, set
-      ``key_spec.type`` to FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR and fill
-      in ``key_spec.u.descriptor``.  To remove this type of key, the
-      calling process must have the CAP_SYS_ADMIN capability in the
-      initial user namespace.
-
-    - To remove a key used by v2 encryption policies, set
-      ``key_spec.type`` to FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER and fill
-      in ``key_spec.u.identifier``.
-
-For v2 policy keys, this ioctl is usable by non-root users.  However,
-to make this possible, it actually just removes the current user's
-claim to the key, undoing a single call to FS_IOC_ADD_ENCRYPTION_KEY.
-Only after all claims are removed is the key really removed.
-
-For example, if FS_IOC_ADD_ENCRYPTION_KEY was called with uid 1000,
-then the key will be "claimed" by uid 1000, and
-FS_IOC_REMOVE_ENCRYPTION_KEY will only succeed as uid 1000.  Or, if
-both uids 1000 and 2000 added the key, then for each uid
-FS_IOC_REMOVE_ENCRYPTION_KEY will only remove their own claim.  Only
-once *both* are removed is the key really removed.  (Think of it like
-unlinking a file that may have hard links.)
-
-If FS_IOC_REMOVE_ENCRYPTION_KEY really removes the key, it will also
-try to "lock" all files that had been unlocked with the key.  It won't
-lock files that are still in-use, so this ioctl is expected to be used
-in cooperation with userspace ensuring that none of the files are
-still open.  However, if necessary, the ioctl can be executed again
-later to retry locking any remaining files.
-
-FS_IOC_REMOVE_ENCRYPTION_KEY returns 0 if either the key was removed
-(but may still have files remaining to be locked), the user's claim to
-the key was removed, or the key was already removed but had files
-remaining to be the locked so the ioctl retried locking them.  In any
-of these cases, ``removal_status_flags`` is filled in with the
-following informational status flags:
-
-- ``FSCRYPT_KEY_REMOVAL_STATUS_FLAG_FILES_BUSY``: set if some file(s)
-  are still in-use.  Not guaranteed to be set in the case where only
-  the user's claim to the key was removed.
-- ``FSCRYPT_KEY_REMOVAL_STATUS_FLAG_OTHER_USERS``: set if only the
-  user's claim to the key was removed, not the key itself
-
-FS_IOC_REMOVE_ENCRYPTION_KEY can fail with the following errors:
-
-- ``EACCES``: The FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR key specifier type
-  was specified, but the caller does not have the CAP_SYS_ADMIN
-  capability in the initial user namespace
-- ``EINVAL``: invalid key specifier type, or reserved bits were set
-- ``ENOKEY``: the key object was not found at all, i.e. it was never
-  added in the first place or was already fully removed including all
-  files locked; or, the user does not have a claim to the key.
-- ``ENOTTY``: this type of filesystem does not implement encryption
-- ``EOPNOTSUPP``: the kernel was not configured with encryption
-  support for this filesystem, or the filesystem superblock has not
-  had encryption enabled on it
-
-FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS is exactly the same as
-`FS_IOC_REMOVE_ENCRYPTION_KEY`_, except that for v2 policy keys, the
-ALL_USERS version of the ioctl will remove all users' claims to the
-key, not just the current user's.  I.e., the key itself will always be
-removed, no matter how many users have added it.  This difference is
-only meaningful if non-root users are adding and removing keys.
-
-Because of this, FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS also requires
-"root", namely the CAP_SYS_ADMIN capability in the initial user
-namespace.  Otherwise it will fail with ``EACCES``.
+> 
+>>
+>> Then that would be:
+>>
+>> kernel	tool
+>> v5.2 .. 1.12
+>> #define	F2FS_FEATURE_SUPPORT		0x0000
+>>
+>> v5.3 .. 1.13
+>> #define F2FS_FEATURE_CASEFOLD		0x0001
+>> #define	F2FS_FEATURE_SUPPORT		0x0001
+>>
+>> v5.4 .. 1.14
+>> #define F2FS_FEATURE_CASEFOLD		0x0001
+>> #define F2FS_FEATURE_COMPRESS		0x0002
+>> #define	F2FS_FEATURE_SUPPORT		0x0003
+>>
+>> f2fs-tools	sb->required_features	f2fs	F2FS_FEATURE_SUPPORT
+>>
+>> v1.12		0x0000			v5.2	no_check -> ok
+>> v1.12		0x0000			v5.3	0x0001 -> ok
+>> v1.12		0x0000			v5.4	0x0003 -> ok
+>>
+>> v1.13		0x0001			v5.2	that's issue we need to fix
+>> v1.13		0x0001			v5.3	0x0001 -> ok
+>> v1.13		0x0001			v5.4	0x0003 -> ok
+>>
+>> v1.14		0x0003			v5.2	that's issue we need to fix
+>> v1.14		0x0003			v5.3	0x0001 -> fail
+>> v1.14		0x0003			v5.4	0x0003 -> ok
+>>
+>> And all compatible features can be added into sb->feature[_VERITY, ....].
+>>
+>> Would that okay to you?
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>>
+>>>>>> +			~F2FS_INCOMPAT_FEATURES) {
+>>>>>> +		f2fs_info(sbi, "Unsupported feature: %x: supported: %x",
+>>>>>> +			  le32_to_cpu(raw_super->required_features) ^
+>>>>>> +			  F2FS_INCOMPAT_FEATURES,
+>>>>>> +			  F2FS_INCOMPAT_FEATURES);
+>>>>>> +		return -EINVAL;
+>>>>>> +	}
+>>>>>> +
+>>>>>>  	/* Check checksum_offset and crc in superblock */
+>>>>>>  	if (__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_SB_CHKSUM)) {
+>>>>>>  		crc_offset = le32_to_cpu(raw_super->checksum_offset);
+>>>>>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+>>>>>> index a2b36b2e286f..4141be3f219c 100644
+>>>>>> --- a/include/linux/f2fs_fs.h
+>>>>>> +++ b/include/linux/f2fs_fs.h
+>>>>>> @@ -117,7 +117,8 @@ struct f2fs_super_block {
+>>>>>>  	__u8 hot_ext_count;		/* # of hot file extension */
+>>>>>>  	__le16	s_encoding;		/* Filename charset encoding */
+>>>>>>  	__le16	s_encoding_flags;	/* Filename charset encoding flags */
+>>>>>> -	__u8 reserved[306];		/* valid reserved region */
+>>>>>> +	__le32 required_features;       /* incompatible features to old kernel */
+>>>>>> +	__u8 reserved[302];		/* valid reserved region */
+>>>>>>  	__le32 crc;			/* checksum of superblock */
+>>>>>>  } __packed;
+>>>>>>  
+>>>>>> -- 
+>>>>>> 2.22.0
+>>>>> .
+>>>>>
+>>> .
+>>>
+> .
+> 
 
 
 _______________________________________________
