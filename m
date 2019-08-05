@@ -2,88 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D121780A2A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  4 Aug 2019 11:42:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E93218100C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  5 Aug 2019 03:45:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1huD22-0001Id-2H; Sun, 04 Aug 2019 09:42:26 +0000
+	id 1huS45-00034l-2i; Mon, 05 Aug 2019 01:45:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1huD20-0001I4-Kj
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 04 Aug 2019 09:42:24 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1huS43-00034W-KN
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Aug 2019 01:45:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:To:Subject:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mhd+TPejH0ZwuzLBF+zhD6S+XogKMOYxxWKzTVUdGYY=; b=FsZk804A8ZOn+9rY2bxPhnSl04
- MCSbzI2SjCQ2b1AoxEizDLVfe0TpH0d6oR/Fm1JBqKnppJWSLExcbu9HcGJDKUFlc4/9jjmMEXuHX
- SVBYwUwoxJX8aWDiDPZrHVqeJYpSebBgxkcAVuWqrzS7I3Nrok9al5ULCIJ3lY2Tly98=;
+ bh=IyUD6f/36jx4ASl1y37og27Ptk2RuewytUREIqEcXLA=; b=JhJJEdg5UwTr8Z3SURzihB46mA
+ iyI4WGSamIAI2d1fw7e6mSSkkTwLP18orDI1kLZktRbXjq+H5flijoBy+2xYpwRK/aSF2XXosyo3U
+ 3dJmnUwC10Cb4Iq/DKEH7zGR8vSw3ZdOgDVIRvAO4oIhDAn73blOQ4F7tIweOkq66DqM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:To:Subject:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=mhd+TPejH0ZwuzLBF+zhD6S+XogKMOYxxWKzTVUdGYY=; b=Twb1LrJzAeR2+bkJmghzkO2d/U
- BUYNtD1/IZW+D5dNrULD6LAGk54kH5SFt0jDHgvDJrYdQ95gIVFQQDj8oMuRDGGQeQoYTljc/AWjZ
- ukAtoBRNKDyMSV8SPm5FRTodFycPjmYbtecMIlwVGEC2Lz03Dt6dUXkgQ4lVVVA8binc=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IyUD6f/36jx4ASl1y37og27Ptk2RuewytUREIqEcXLA=; b=S
+ OkCj8bWK3XhEQlYyRn/k3ZLam8matzpeAjvzazQHPOs1n7VRJ0dEsZQa8bnZf0rkzeTzrpU82PNCD
+ Qu5ikg/ECuZKbRtWn64ZJx+NaiNdxbZhex4/Gidh0d9HbYANLW6l12ZnT8akGNmwC1RyXaK11XGpQ
+ EeRV9M10Em+Z4m2U=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1huD1z-009vxb-3D
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 04 Aug 2019 09:42:24 +0000
-Received: from [192.168.0.101] (unknown [180.111.32.87])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4A5C02070D;
- Sun,  4 Aug 2019 09:42:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1564911736;
- bh=eHZ3LbVmL56YmqVlqrvOvSSJqzheWzSMhiY9l05NP2o=;
- h=From:Subject:To:References:Date:In-Reply-To:From;
- b=cLRH8T6ZTkrZK5qS1nnzFT8DjeL2x+uywKyjzjXJH2irPLsvRPe4dqQc6Tk1XuxHC
- 6Y7KEfgh9+Y+tAVpgnfmZoe7NCQJeOKo/g4Y1DJ1F/afQry2WGDSwmae1pj6bLGNCO
- QJsggE08iTcD2KYJ7TcVNyDvJjt5HHfWLe/X0wDI=
-From: Chao Yu <chao@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
- linux-api@vger.kernel.org, linux-crypto@vger.kernel.org,
- keyrings@vger.kernel.org, Paul Crowley <paulcrowley@google.com>,
- Satya Tangirala <satyat@google.com>
-References: <20190726224141.14044-1-ebiggers@kernel.org>
- <20190726224141.14044-15-ebiggers@kernel.org>
- <e3cf53a7-faf2-0321-22de-07d2e2783752@huawei.com>
- <20190802173148.GA51937@gmail.com>
-Message-ID: <88479efb-6625-8778-f802-e159ec60a374@kernel.org>
-Date: Sun, 4 Aug 2019 17:42:11 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1huS41-00AbyE-IU
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Aug 2019 01:45:31 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 2045DD54890DAE4DEEB4;
+ Mon,  5 Aug 2019 09:45:22 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
+ 14.3.439.0; Mon, 5 Aug 2019 09:45:11 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Mon, 5 Aug 2019 09:44:57 +0800
+Message-ID: <20190805014459.119305-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20190802173148.GA51937@gmail.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1huD1z-009vxb-3D
-Subject: [f2fs-dev]  [PATCH v7 14/16] f2fs: wire up new fscrypt ioctls
+X-Headers-End: 1huS41-00AbyE-IU
+Subject: [f2fs-dev] [PATCH 1/3] sload.f2fs: fix memory leak in
+ build_directory
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,57 +70,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Xiaojun Wang <wangxiaojun11@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019-8-3 1:31, Eric Biggers wrote:
-> On Fri, Aug 02, 2019 at 04:10:15PM +0800, Chao Yu wrote:
->> Hi Eric,
->>
->> On 2019/7/27 6:41, Eric Biggers wrote:
->>> From: Eric Biggers <ebiggers@google.com>
->>>
->>> Wire up the new ioctls for adding and removing fscrypt keys to/from the
->>> filesystem, and the new ioctl for retrieving v2 encryption policies.
->>>
->>> FS_IOC_REMOVE_ENCRYPTION_KEY also required making f2fs_drop_inode() call
->>> fscrypt_drop_inode().
->>>
->>> For more details see Documentation/filesystems/fscrypt.rst and the
->>> fscrypt patches that added the implementation of these ioctls.
->>>
->>> Signed-off-by: Eric Biggers <ebiggers@google.com>
->>
->> Reviewed-by: Chao Yu <yuchao0@huawei.com>
->>
->> BTW, do you think it needs to make xxfs_has_support_encrypt() function be a
->> common interface defined in struct fscrypt_operations, as I see all
->> fscrypt_ioctl_*() needs to check with it, tho such cleanup is minor...
->>
-> 
-> Maybe.  It would work nicely for ext4 and f2fs, but ubifs does things
-> differently since it automatically enables the encryption feature if needed.
-> So we'd have to make the callback optional.
+From: Xiaojun Wang <wangxiaojun11@huawei.com>
 
-Correct, ubifs can leave the callback as NULL function pointer.
+This patch fix bug that variable dentries going out of scope leaks
+the storage it points to.
 
-> 
-> In any case, I think this should be separate from this patchset.
+Signed-off-by: Xiaojun Wang <wangxiaojun11@huawei.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+---
+ fsck/sload.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-Yup, it can be done in a separated patch if need.
+diff --git a/fsck/sload.c b/fsck/sload.c
+index f5a4651..940da5c 100644
+--- a/fsck/sload.c
++++ b/fsck/sload.c
+@@ -240,12 +240,18 @@ static int build_directory(struct f2fs_sb_info *sbi, const char *full_path,
+ 		ret = set_selinux_xattr(sbi, dentries[i].path,
+ 					dentries[i].ino, dentries[i].mode);
+ 		if (ret)
+-			return ret;
++			goto out_free;
+ 
+ 		free(dentries[i].path);
+ 		free(dentries[i].full_path);
+ 		free((void *)dentries[i].name);
+ 	}
++out_free:
++	for (; i < entries; i++) {
++		free(dentries[i].path);
++		free(dentries[i].full_path);
++		free((void *)dentries[i].name);
++	}
+ 
+ 	free(dentries);
+ 	return 0;
+-- 
+2.18.0.rc1
 
-Thanks,
-
-> 
-> - Eric
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> 
 
 
 _______________________________________________
