@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8383828C8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 02:42:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29A96828D1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 02:47:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hunYX-0006RS-0e; Tue, 06 Aug 2019 00:42:25 +0000
+	id 1hundn-0006fv-95; Tue, 06 Aug 2019 00:47:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hunYV-0006RL-AK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 00:42:23 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1hundl-0006fo-O5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 00:47:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YpeWnnd5iHMun4SlXPBkN5OHsCwsnP3/i9mHocFrTtA=; b=dR+d5E3HfAPuKgIvoWkoxOQOhk
- L5TGyPWlLShyFZWNQvxKXArALYW2Mihr74WudboluvtStPJ0Q2pdrPF2RF+K6igmRQO7Fz5yie29V
- fO54eSjIHejUk0wpRnR1ifuKa65bnHxmXxh6Tv8VcT+To4jWB9BeDcHQ1/WGHQI1hHWc=;
+ bh=Y6IIQupsmKPIt/+AtfUlcK5B97fQYAbWB426AfrMytY=; b=iLaHGbt62gqojd18UduCnD/k4N
+ 2YnqM74B6sCztP4JMwpyN6edScMNW7+TA/ZH+tXNCv6hsf7Bv7T1H1IBuE6qrDkHZJVAjIADnmp4z
+ h+hiph7062m8Kw7zNiRvEd3i78cfCc2/QySVZNPKhtaxbTgRn2E+WPlMgdKcx0X/EdQQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YpeWnnd5iHMun4SlXPBkN5OHsCwsnP3/i9mHocFrTtA=; b=EB8xohgXrKyBiggmWyhMwkjfxK
- Nm4+Yho44pXE6NOTDLFZsOdDY6sWZ2gZUCdnmQzY1fdX6YWtHeBX6x8F8PLRhvg0/ckvcJfMwlHKE
- iGimn5aau6nQP6pQdb+vGSqFOUM5JKRKVJRlHIZgBFgXJRd0qtADqOmX6Zr4AknWnAts=;
+ bh=Y6IIQupsmKPIt/+AtfUlcK5B97fQYAbWB426AfrMytY=; b=Pq2ukLlor2nLHcXd/4ePgqw1WY
+ VNEvJXcdMQyYdMHw4DPqAnBOKdRayfx+pRlvrdVqMC5CkgUDHA1B4s2xVPpcMexcXRGmS001Tq1tW
+ EIiZWdFBp9QaJpOUxt3uVxCTIUpoYv+LoRik96hgQEzmqYQ3HEAwzoQZ45IcGygRrWcM=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hunYU-00CJ0s-2S
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 00:42:23 +0000
+ id 1hundk-00CJLC-LE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 00:47:49 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6F09D2147A;
- Tue,  6 Aug 2019 00:42:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id F05ED2147A;
+ Tue,  6 Aug 2019 00:47:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565052136;
- bh=eZwQBDcR/MKYEfWG81eygG4AefN+C5bI0r2OySbuQH0=;
+ s=default; t=1565052463;
+ bh=ZD4vORsgnPaIsOHKR8v3GrQbcKOsIaN9uQO0Isv1v4Q=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hZTdUh7m+TxBSmTs1N9DcHxM8FaEQOdounaDItLqslNEzK+yF2IKj+bbhmz8mgVMJ
- /dN79jv0RBiOXWzAmzAamqFYi8tzCE66mk+DmHzlpQtB2jFWpFcM16V4/wIJgzwdLx
- v/S0twBm+UcvLi7A5PnuHNeL+2s37gvWfMf3XW58=
-Date: Mon, 5 Aug 2019 17:42:15 -0700
+ b=MitRhXXiQA/Zwk4ocmHFV+5HZS+nPwXbA3VgzGJla/98B0spBgUFJk0YRBP+EhpBy
+ 9oJl0n/g8Wc/lf6fKC5Sxo9ufYgrHBiCsdNYVIlIondWGMWhZHJ9Z78l46bjQWlx87
+ zq2FiCRh3LQ9hBWvu0RpSUPq8dzxMacypW4X0gq8=
+Date: Mon, 5 Aug 2019 17:47:42 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190806004215.GC98101@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190802101548.96543-1-yuchao0@huawei.com>
+Message-ID: <20190806004742.GD98101@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20181002020223.76087-1-jaegeuk@kernel.org>
+ <bece1226-ae59-d9be-a5b0-be836ba04e69@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190802101548.96543-1-yuchao0@huawei.com>
+In-Reply-To: <bece1226-ae59-d9be-a5b0-be836ba04e69@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -73,9 +70,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hunYU-00CJ0s-2S
-Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: avoid out-of-range memory
- access"
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hundk-00CJLC-LE
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: don't allocate new blocks on
+ unclean shutdown
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,66 +85,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/02, Chao Yu wrote:
-> As Pavel Machek reported:
+On 08/05, Chao Yu wrote:
+> Hi Jaegeuk,
 > 
-> "We normally use -EUCLEAN to signal filesystem corruption. Plus, it is
-> good idea to report it to the syslog and mark filesystem as "needing
-> fsck" if filesystem can do that."
+> On 2018/10/2 10:02, Jaegeuk Kim wrote:
+> > +	if (!is_set_ckpt_flags(cp, CP_UMOUNT_FLAG)) {
+> > +		c.alloc_failed = 1;
+> > +		return -EINVAL;
+> > +	}
 > 
-> Still we need improve the original patch with:
-> - use unlikely keyword
-> - add message print
-> - return EUCLEAN
+> When I test por_fsstress case w/ quota feature enabled, I suffer below error
+> during repair:
 > 
-> However, after rethink this patch, I don't think we should add such
-> condition check here as below reasons:
-> - We have already checked the field in f2fs_sanity_check_ckpt(),
-> - If there is fs corrupt or security vulnerability, there is nothing
-> to guarantee the field is integrated after the check, unless we do
-> the check before each of its use, however no filesystem does that.
-> - We only have similar check for bitmap, which was added due to there
-> is bitmap corruption happened on f2fs' runtime in product.
-> - There are so many key fields in SB/CP/NAT did have such check
-> after f2fs_sanity_check_{sb,cp,..}.
+> Info: superblock features = f8 :  extra_attr project_quota inode_checksum
+> flexible_inline_xattr quota_ino
+> Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
+> Info: total FS sectors = 2097152 (8192 MB)
+> Info: CKPT version = 452b7568
+> Info: checkpoint state = 846 :  quota_need_fsck crc compacted_summary
+> orphan_inodes sudden-power-off
+> [fsck_chk_quota_files:1784] Fixing Quota file ([  0] ino [0x4])
+> [ERROR] quotaio_tree.c:83:write_blk:: Cannot write block (7188): Inappropriate
+> ioctl for device
+> [ERROR] quotaio_tree.c:110:get_free_dqblk:: Cannot allocate new quota block (out
+> of disk space).
 > 
-> So I propose to revert this unneeded check.
+> I found new_data_block() will reject block allocation on an unclean umounted
+> image, result in quota file repair failure.
+> 
+> With current implementation, I think we should mount that image again for
+> recovery, then umount and run fsck on it again to repair quota file.
 
-IIRC, this came from security vulnerability report which can access
-out-of-boundary memory region. Could you write another patch to address the
-above issues?
+Yes.
 
 > 
-> This reverts commit 56f3ce675103e3fb9e631cfb4131fc768bc23e9a.
+> However, user didn't be noticed that how to fix this... I know there is no such
+> report tho, I think we'd better fix this case in fsck, any thoughts? let
+> allocation skip fsynced datas?
+
+Actually, that was my TODO, but I had no time to fix it, but had to stop it to
+avoid further corruption.
+
 > 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/segment.c | 5 -----
->  1 file changed, 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 9693fa4c8971..2eff9c008ae0 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3492,11 +3492,6 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
->  		seg_i = CURSEG_I(sbi, i);
->  		segno = le32_to_cpu(ckpt->cur_data_segno[i]);
->  		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
-> -		if (blk_off > ENTRIES_IN_SUM) {
-> -			f2fs_bug_on(sbi, 1);
-> -			f2fs_put_page(page, 1);
-> -			return -EFAULT;
-> -		}
->  		seg_i->next_segno = segno;
->  		reset_curseg(sbi, i, 0);
->  		seg_i->alloc_type = ckpt->alloc_type[i];
-> -- 
-> 2.18.0.rc1
+> Thanks,
 
 
 _______________________________________________
