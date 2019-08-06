@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8172E82928
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:26:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1F8A8292B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:28:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1huoF2-0008Lp-2N; Tue, 06 Aug 2019 01:26:20 +0000
+	id 1huoHS-0008Rh-G7; Tue, 06 Aug 2019 01:28:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1huoEz-0008Lf-JA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:26:17 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1huoHQ-0008RZ-9C
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:28:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ORLkKORHQS3k7q10UaIzmFI4p54TDmVUVhNQXjMelo=; b=G1vC68dN7OQCUkhyDgIWdrcloD
- LrMVRZmzTnGykVFMU0BzkwG4iOM9jdeBBnhUtAP4sqjB20z+JCGdPAFaPHn9obRSZEArEuZxcFuFk
- oYbs5iZSz8KOemvIw8dVAk61QmslZrTpEbfL4vIxVEOZIyWbAr28O0b9JtdvzbhxASIc=;
+ bh=/4pKhNM1qxwQtZwQn4HMMmutYZyMMDDvn7eEiJKfGI4=; b=Lh8tlXJULf9Fu+2/UoVIDdfMte
+ 0aISWUUoLcnuZKI+2G4BaDnTyypx3P4SBezfSf1rCom+nr31bDATHzx7yREUxh3MzQ7+0n50d+uf1
+ bAs8oFrWjmAYydaadGFy8rDMD3pkOrid5MtzF2zT2PoT7fVJhilqQkK3uznGP9KUmZYw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0ORLkKORHQS3k7q10UaIzmFI4p54TDmVUVhNQXjMelo=; b=iJBpdkb2FsKFet1kZtAizFZCNq
- WyvJQmHIzPTxrYB6VSw3B5+wQVsWckSEXUVfaWr3jQjKTRlka6TOtTipYvvpYn/c2+dsXH8X+L9t6
- 4sfEOXo06QPV5LmbFa/Vcgo5t7uzOQBIfiDkyz8+qSBC3KN4NhoUL7VZNTb7QlH+lJXA=;
+ bh=/4pKhNM1qxwQtZwQn4HMMmutYZyMMDDvn7eEiJKfGI4=; b=Kg5smyntcJMfGsCCQTu+Ab0zug
+ 9fGRQ0ctSGEo+JQz4d0MU+FqxvZvYhxUC58zaZqCRTfWIh3bYleZs+/1nHrAnmPJs2qhpRRXF9Zn/
+ f5HjiW35+pyIYSbUUXAPJvxi0loXvW7Zn7OpwaZUBlgrjqr17PtH9KgxY4jDfJkmsh6Q=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1huoEx-00CLEA-0V
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:26:16 +0000
+ id 1huoHN-00CCNC-H8
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:28:48 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 671F42147A;
- Tue,  6 Aug 2019 01:26:09 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id CCC592147A;
+ Tue,  6 Aug 2019 01:28:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565054769;
- bh=2r2dojN0+obCTkqJmHix8I/F/giOsUnKxOU30/+g64k=;
+ s=default; t=1565054919;
+ bh=KnLY1sAJ7ObFvAXL3EPBllmg22XMnePEwMFus9ls9Uc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=1Vm4ii7iX4yWh7Ufx4lKDprk4q0lghqC8OoCefKiJHsVl+NGHUdGMI/kCDbwNNqsc
- COkrVZJtgYRv2o8ywlkcQVR+nqimzOsZOOuLPBaAmhTdII2MxexQYASSD5DL1qm14C
- c2zFGLpfmrc+v9JnX+InHM5apYVzYcVh8uEWecm0=
-Date: Mon, 5 Aug 2019 18:26:08 -0700
+ b=0zWqr68TcP+9F8cFVvHxfxnP2RZnRTkMHBKP/fAw2rF14+rdMrRy3hBa8l1iq5lkX
+ JvUoidCCMZemeRklpULqGSnW3yoR7gWkN5fqYyWGb5VMuH4B9D9QLFPJDjO3BQ+jRw
+ lzVQ67jhsbsFGxg3vtHFUmQ9mYGw0R9Lien6XcoU=
+Date: Mon, 5 Aug 2019 18:28:39 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190806012608.GC1029@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190727154434.5946-1-chao@kernel.org>
- <b3010d4f-11c8-58e8-96fe-578d58278e28@huawei.com>
+Message-ID: <20190806012839.GD1029@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190802101548.96543-1-yuchao0@huawei.com>
+ <20190806004215.GC98101@jaegeuk-macbookpro.roam.corp.google.com>
+ <dd284020-77b0-1627-2fc2-bc51745adfd3@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <b3010d4f-11c8-58e8-96fe-578d58278e28@huawei.com>
+In-Reply-To: <dd284020-77b0-1627-2fc2-bc51745adfd3@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -75,8 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1huoEx-00CLEA-0V
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs_io: support defrag_file
+X-Headers-End: 1huoHN-00CCNC-H8
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: avoid out-of-range memory
+ access"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,97 +90,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 08/06, Chao Yu wrote:
-> On 2019/7/27 23:44, Chao Yu wrote:
-> > From: Chao Yu <yuchao0@huawei.com>
+> On 2019/8/6 8:42, Jaegeuk Kim wrote:
+> > On 08/02, Chao Yu wrote:
+> >> As Pavel Machek reported:
+> >>
+> >> "We normally use -EUCLEAN to signal filesystem corruption. Plus, it is
+> >> good idea to report it to the syslog and mark filesystem as "needing
+> >> fsck" if filesystem can do that."
+> >>
+> >> Still we need improve the original patch with:
+> >> - use unlikely keyword
+> >> - add message print
+> >> - return EUCLEAN
+> >>
+> >> However, after rethink this patch, I don't think we should add such
+> >> condition check here as below reasons:
+> >> - We have already checked the field in f2fs_sanity_check_ckpt(),
+> >> - If there is fs corrupt or security vulnerability, there is nothing
+> >> to guarantee the field is integrated after the check, unless we do
+> >> the check before each of its use, however no filesystem does that.
+> >> - We only have similar check for bitmap, which was added due to there
+> >> is bitmap corruption happened on f2fs' runtime in product.
+> >> - There are so many key fields in SB/CP/NAT did have such check
+> >> after f2fs_sanity_check_{sb,cp,..}.
+> >>
+> >> So I propose to revert this unneeded check.
 > > 
-> > Support 'defrag_file' sub command to trigger file based defragment via
-> > ioctl in f2fs.
-> > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> > v2:
-> > - remove unneeded debug info.
-> > - fix compile warning.
+> > IIRC, this came from security vulnerability report which can access
 > 
-> Sorry I sent the old one...
-> 
-> I add -v option, but w/o implement the details, because I just see generic/018
-> want this, also other filesystem utils have this option, not sure we should
-> remove this option... any thoughts?
+> I don't think that's correct report, since we have checked validation of that
+> field during mount, if it can be ruined after that, any variables can't be trusted.
 
-Ah, we don't need this option.
+I assumed this was reproduced with a fuzzed image.
+I'll check it with Ocean.
 
 > 
-> "f2fs_io defrag_file [start] [length] [-v] [file_path]\n\n"	
+> Now we just check bitmaps at real-time, because we have encountered such bitmap
+> corruption in product.
 > 
-> >  tools/f2fs_io/f2fs_io.c | 41 +++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 41 insertions(+)
+> Thanks,
+> 
+> > out-of-boundary memory region. Could you write another patch to address the
+> > above issues?
 > > 
-> > diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-> > index f087da4..59ef8a7 100644
-> > --- a/tools/f2fs_io/f2fs_io.c
-> > +++ b/tools/f2fs_io/f2fs_io.c
-> > @@ -442,6 +442,46 @@ static void do_gc_urgent(int argc, char **argv, const struct cmd_desc *cmd)
-> >  	}
-> >  }
-> >  
-> > +#define defrag_file_desc "do defragment on file"
-> > +#define defrag_file_help						\
-> > +"f2fs_io defrag_file [start] [length] [-v] [file_path]\n\n"		\
-> > +"  start     : start offset of defragment region, unit: bytes\n"	\
-> > +"  length    : bytes number of defragment region\n"			\
-> > +"  -v        : be verbose\n"						\
-> > +
-> > +static void do_defrag_file(int argc, char **argv, const struct cmd_desc *cmd)
-> > +{
-> > +	struct f2fs_defragment df;
-> > +	u64 len;
-> > +	int ret, fd;
-> > +
-> > +	if (argc != 5) {
-> > +		fputs("Excess arguments\n\n", stderr);
-> > +		fputs(cmd->cmd_help, stderr);
-> > +		exit(1);
-> > +	}
-> > +
-> > +	df.start = atoll(argv[1]);
-> > +	df.len = len = atoll(argv[2]);
-> > +
-> > +	fd = open(argv[4], O_RDWR);
-> > +	if (fd == -1) {
-> > +		fputs("Open failed\n\n", stderr);
-> > +		fputs(cmd->cmd_help, stderr);
-> > +		exit(1);
-> > +	}
-> > +printf("%lu, %lu\n", df.start, df.len);
-> > +	ret = ioctl(fd, F2FS_IOC_DEFRAGMENT, &df);
-> > +	if (ret < 0) {
-> > +		perror("F2FS_IOC_DEFRAGMENT");
-> > +		exit(1);
-> > +	}
-> > +	printf("defrag %s in region[%lu, %lu]\n", argv[3],
-> > +				df.start, df.start + len);
-> > +	exit(0);
-> > +}
-> > +
-> > +
-> >  #define CMD_HIDDEN 	0x0001
-> >  #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
-> >  #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
-> > @@ -456,6 +496,7 @@ const struct cmd_desc cmd_list[] = {
-> >  	CMD(read),
-> >  	CMD(fiemap),
-> >  	CMD(gc_urgent),
-> > +	CMD(defrag_file),
-> >  	{ NULL, NULL, NULL, NULL, 0 }
-> >  };
-> >  
+> >>
+> >> This reverts commit 56f3ce675103e3fb9e631cfb4131fc768bc23e9a.
+> >>
+> >> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> >> ---
+> >>  fs/f2fs/segment.c | 5 -----
+> >>  1 file changed, 5 deletions(-)
+> >>
+> >> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> >> index 9693fa4c8971..2eff9c008ae0 100644
+> >> --- a/fs/f2fs/segment.c
+> >> +++ b/fs/f2fs/segment.c
+> >> @@ -3492,11 +3492,6 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
+> >>  		seg_i = CURSEG_I(sbi, i);
+> >>  		segno = le32_to_cpu(ckpt->cur_data_segno[i]);
+> >>  		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
+> >> -		if (blk_off > ENTRIES_IN_SUM) {
+> >> -			f2fs_bug_on(sbi, 1);
+> >> -			f2fs_put_page(page, 1);
+> >> -			return -EFAULT;
+> >> -		}
+> >>  		seg_i->next_segno = segno;
+> >>  		reset_curseg(sbi, i, 0);
+> >>  		seg_i->alloc_type = ckpt->alloc_type[i];
+> >> -- 
+> >> 2.18.0.rc1
+> > .
 > > 
 
 
