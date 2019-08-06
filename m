@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9B782927
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:24:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8172E82928
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:26:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1huoD6-0005kY-Ht; Tue, 06 Aug 2019 01:24:20 +0000
+	id 1huoF2-0008Lp-2N; Tue, 06 Aug 2019 01:26:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1huoD3-0005kD-U4
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:24:17 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1huoEz-0008Lf-JA
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:26:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G4q1DIYEbsbFKvcRUU4mChhJpu48L+aNO7dM+j6db2o=; b=eDn8uA+1e3DhymUHh827oiRlkF
- s0D9QwMSEriRXw4xtXJsLPzKc+Fusz6Q0TEU5q27YvFMFJes85GwobevqeXJRpdB26MBcfHsCFp/L
- +5uero/RnFaC994Hj1ZM4ptcS2N4LO7B+MzP3VVLoAz+C3NJAHB52wuNKfGRkWnGwiC0=;
+ bh=0ORLkKORHQS3k7q10UaIzmFI4p54TDmVUVhNQXjMelo=; b=G1vC68dN7OQCUkhyDgIWdrcloD
+ LrMVRZmzTnGykVFMU0BzkwG4iOM9jdeBBnhUtAP4sqjB20z+JCGdPAFaPHn9obRSZEArEuZxcFuFk
+ oYbs5iZSz8KOemvIw8dVAk61QmslZrTpEbfL4vIxVEOZIyWbAr28O0b9JtdvzbhxASIc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G4q1DIYEbsbFKvcRUU4mChhJpu48L+aNO7dM+j6db2o=; b=BwF7PVLX2CxUO1IX6I6yloOY79
- lySGLeLSY5IH0aUYiV1dNaRE+1zxpynlbuTI27EK2A+uGIarcaz3j1xYtzDxgS55UbB84qk98xa5p
- FsNiS5X1/UWSrx/YWqXTkCBlHOL0K5/HOERxq1Dqm+PnasleA4awOqL1ZhQZZ1lAQWgw=;
+ bh=0ORLkKORHQS3k7q10UaIzmFI4p54TDmVUVhNQXjMelo=; b=iJBpdkb2FsKFet1kZtAizFZCNq
+ WyvJQmHIzPTxrYB6VSw3B5+wQVsWckSEXUVfaWr3jQjKTRlka6TOtTipYvvpYn/c2+dsXH8X+L9t6
+ 4sfEOXo06QPV5LmbFa/Vcgo5t7uzOQBIfiDkyz8+qSBC3KN4NhoUL7VZNTb7QlH+lJXA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1huoD0-00Bksu-0J
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:24:17 +0000
+ id 1huoEx-00CLEA-0V
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:26:16 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 51ED52147A;
- Tue,  6 Aug 2019 01:24:08 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 671F42147A;
+ Tue,  6 Aug 2019 01:26:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565054648;
- bh=7xEVZax8GRkpG0ovDRUKOUOOJGcClMu5Lo3WasYZr6I=;
+ s=default; t=1565054769;
+ bh=2r2dojN0+obCTkqJmHix8I/F/giOsUnKxOU30/+g64k=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=fO16KVB0aKGlfNdCnf3Zrc74uFr3E/0sfXocDOfBGxaSjZbCQ3I3+vgxhKtqDjZUb
- S9AGhGSMGDgOYlqGY7aruxXCfrZ6g9q7EeBYRqpTmaGaNCJqf6KrqBT9GkRAoExXMD
- xhbG28lpi5NxD1FVBetbeK5Vnm3Pp9xz/a7Xhbno=
-Date: Mon, 5 Aug 2019 18:24:07 -0700
+ b=1Vm4ii7iX4yWh7Ufx4lKDprk4q0lghqC8OoCefKiJHsVl+NGHUdGMI/kCDbwNNqsc
+ COkrVZJtgYRv2o8ywlkcQVR+nqimzOsZOOuLPBaAmhTdII2MxexQYASSD5DL1qm14C
+ c2zFGLpfmrc+v9JnX+InHM5apYVzYcVh8uEWecm0=
+Date: Mon, 5 Aug 2019 18:26:08 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190806012407.GB1029@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190729150351.12223-1-chao@kernel.org>
- <20190730231850.GA7097@jaegeuk-macbookpro.roam.corp.google.com>
- <c7232d80-a4d8-88ae-2eca-01290dd0e56a@huawei.com>
- <20190801042215.GC84433@jaegeuk-macbookpro.roam.corp.google.com>
- <345c55ea-01c2-a9d1-4367-716dbd08ae9d@huawei.com>
- <20190801223509.GB27597@jaegeuk-macbookpro.roam.corp.google.com>
- <8e906ddb-81d8-b63e-0c19-1ee9fc7f5cbf@huawei.com>
- <20190806003522.GA98101@jaegeuk-macbookpro.roam.corp.google.com>
- <e48514d5-0f3f-8dd7-06ab-b7faf71101ba@huawei.com>
+Message-ID: <20190806012608.GC1029@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190727154434.5946-1-chao@kernel.org>
+ <b3010d4f-11c8-58e8-96fe-578d58278e28@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <e48514d5-0f3f-8dd7-06ab-b7faf71101ba@huawei.com>
+In-Reply-To: <b3010d4f-11c8-58e8-96fe-578d58278e28@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -81,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1huoD0-00Bksu-0J
-Subject: Re: [f2fs-dev] [PATCH v3 RESEND] f2fs: introduce
- sb.required_features to store incompatible features
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1huoEx-00CLEA-0V
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs_io: support defrag_file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,251 +88,97 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 08/06, Chao Yu wrote:
-> On 2019/8/6 8:35, Jaegeuk Kim wrote:
-> > On 08/02, Chao Yu wrote:
-> >> On 2019/8/2 6:35, Jaegeuk Kim wrote:
-> >>> On 08/01, Chao Yu wrote:
-> >>>> On 2019/8/1 12:22, Jaegeuk Kim wrote:
-> >>>>> On 07/31, Chao Yu wrote:
-> >>>>>> On 2019/7/31 7:18, Jaegeuk Kim wrote:
-> >>>>>>> On 07/29, Chao Yu wrote:
-> >>>>>>>> From: Chao Yu <yuchao0@huawei.com>
-> >>>>>>>>
-> >>>>>>>> Later after this patch was merged, all new incompatible feature's
-> >>>>>>>> bit should be added into sb.required_features field, and define new
-> >>>>>>>> feature function with F2FS_INCOMPAT_FEATURE_FUNCS() macro.
-> >>>>>>>>
-> >>>>>>>> Then during mount, we will do sanity check with enabled features in
-> >>>>>>>> image, if there are features in sb.required_features that kernel can
-> >>>>>>>> not recognize, just fail the mount.
-> >>>>>>>>
-> >>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> >>>>>>>> ---
-> >>>>>>>> v3:
-> >>>>>>>> - change commit title.
-> >>>>>>>> - fix wrong macro name.
-> >>>>>>>>  fs/f2fs/f2fs.h          | 15 +++++++++++++++
-> >>>>>>>>  fs/f2fs/super.c         | 10 ++++++++++
-> >>>>>>>>  include/linux/f2fs_fs.h |  3 ++-
-> >>>>>>>>  3 files changed, 27 insertions(+), 1 deletion(-)
-> >>>>>>>>
-> >>>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> >>>>>>>> index a6eb828af57f..b8e17d4ddb8d 100644
-> >>>>>>>> --- a/fs/f2fs/f2fs.h
-> >>>>>>>> +++ b/fs/f2fs/f2fs.h
-> >>>>>>>> @@ -163,6 +163,15 @@ struct f2fs_mount_info {
-> >>>>>>>>  #define F2FS_CLEAR_FEATURE(sbi, mask)					\
-> >>>>>>>>  	(sbi->raw_super->feature &= ~cpu_to_le32(mask))
-> >>>>>>>>  
-> >>>>>>>> +#define F2FS_INCOMPAT_FEATURES		0
-> >>>>>>>> +
-> >>>>>>>> +#define F2FS_HAS_INCOMPAT_FEATURE(sbi, mask)				\
-> >>>>>>>> +	((sbi->raw_super->required_features & cpu_to_le32(mask)) != 0)
-> >>>>>>>> +#define F2FS_SET_INCOMPAT_FEATURE(sbi, mask)				\
-> >>>>>>>> +	(sbi->raw_super->required_features |= cpu_to_le32(mask))
-> >>>>>>>> +#define F2FS_CLEAR_INCOMPAT_FEATURE(sbi, mask)				\
-> >>>>>>>> +	(sbi->raw_super->required_features &= ~cpu_to_le32(mask))
-> >>>>>>>> +
-> >>>>>>>>  /*
-> >>>>>>>>   * Default values for user and/or group using reserved blocks
-> >>>>>>>>   */
-> >>>>>>>> @@ -3585,6 +3594,12 @@ F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
-> >>>>>>>>  F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
-> >>>>>>>>  F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
-> >>>>>>>>  
-> >>>>>>>> +#define F2FS_INCOMPAT_FEATURE_FUNCS(name, flagname) \
-> >>>>>>>> +static inline int f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
-> >>>>>>>> +{ \
-> >>>>>>>> +	return F2FS_HAS_INCOMPAT_FEATURE(sbi, F2FS_FEATURE_##flagname); \
-> >>>>>>>> +}
-> >>>>>>>> +
-> >>>>>>>>  #ifdef CONFIG_BLK_DEV_ZONED
-> >>>>>>>>  static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-> >>>>>>>>  				    block_t blkaddr)
-> >>>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> >>>>>>>> index 5540fee0fe3f..3701dcce90e6 100644
-> >>>>>>>> --- a/fs/f2fs/super.c
-> >>>>>>>> +++ b/fs/f2fs/super.c
-> >>>>>>>> @@ -2513,6 +2513,16 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
-> >>>>>>>>  		return -EINVAL;
-> >>>>>>>>  	}
-> >>>>>>>>  
-> >>>>>>>> +	/* check whether current kernel supports all features on image */
-> >>>>>>>> +	if (le32_to_cpu(raw_super->required_features) &
-> >>>>>>>
-> >>>>>>> ...
-> >>>>>>> #define F2FS_FEATURE_VERITY	0x0400	/* reserved */
-> >>>>>>> ...
-> >>>>>>> #define F2FS_FEATURE_CASEFOLD	0x1000
-> >>>>>>> #define F2FS_FEATURE_SUPPORT	0x1BFF
-> >>>>>>>
-> >>>>>>> 	if (le32_to_cpu(raw_super->required_features) & ~F2FS_FEATURE_SUPPORT) {
-> >>>>>>> 		...
-> >>>>>>> 		return -EINVAL;
-> >>>>>>> 	}
-> >>>>>>
-> >>>>>> Um, I thought .required_features are used to store new feature flags from 0x0.
-> >>>>>>
-> >>>>>> All 'F2FS_FEATURE_SUPPORT' bits should be stored in sb.feature instead of
-> >>>>>> sb.required_features, I'm confused...
-> >>>>>
-> >>>>> I'm thinking,
-> >>>>>
-> >>>>> f2fs-tools     sb->required_features     f2fs    F2FS_FEATURE_SUPPORT
-> >>>>> v0             0                         v0      no_check -> ok
-> >>>>> v1             0x1BFF                    v0      no_check -> ok
-> >>>>> v0             0                         v1      0x1BFF -> ok
-> >>>>> v1             0x1BFF                    v1      0x1BFF -> ok
-> >>>>> v2             0x3BFF                    v1      0x1BFF -> fail
-> >>>>> v1             0x1BFF                    v2      0x3BFF -> ok
-> >>>>> v2             0x3BFF                    v2      0x3BFF -> ok
-> >>>>
-> >>>> I see, it's a bit waste for 0x1FFF low bits in sb->required_features. Why not
-> >>>> leaving 0x0FFF in sb->feature w/o sanity check. And make all new incompatible
-> >>>> features (including casefold) adding into sb->required_features.
-> >>>
-> >>> I don't think we can define like this, and we still have 32bits feature filed.
-> >>> This would give another confusion to understand. VERITY is reserved only now.
-> >>>
-> >>> #define F2FS_FEATURE_CASEFOLD		0x0001
-> >>
-> >> Oops, so you want to make .required_features being almost a mirror of .feature,
-> >> and do sanity check on it... I can see now. :P
-> >>
-> >> If so, why not just use .feature:
+> On 2019/7/27 23:44, Chao Yu wrote:
+> > From: Chao Yu <yuchao0@huawei.com>
 > > 
-> > Sometimes, we don't need to set the flag, but not required at some point.
-> > (e.g., verify)
+> > Support 'defrag_file' sub command to trigger file based defragment via
+> > ioctl in f2fs.
+> > 
+> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > ---
+> > v2:
+> > - remove unneeded debug info.
+> > - fix compile warning.
 > 
-> Sorry, I'm not sure whether I have understood your point... :(
+> Sorry I sent the old one...
 > 
-> IIUC of your point, we have defined F2FS_FEATURE_SUPPORT (0x0BFF) which excludes
-> F2FS_FEATURE_VERITY (0x0400) feature bit, then once verity feature merged in
-> kernel, we can add it into F2FS_FEATURE_SUPPORT, any problem we may face here?
+> I add -v option, but w/o implement the details, because I just see generic/018
+> want this, also other filesystem utils have this option, not sure we should
+> remove this option... any thoughts?
 
-I was thinking the cases like "don't care features" made by mkfs. For example,
-mkfs can set F2FS_FEATURE_BLKZONED, which doesn't need f2fs being supported.
+Ah, we don't need this option.
 
 > 
-> Thanks
+> "f2fs_io defrag_file [start] [length] [-v] [file_path]\n\n"	
 > 
+> >  tools/f2fs_io/f2fs_io.c | 41 +++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 41 insertions(+)
 > > 
-> >>
-> >> kernel	tool
-> >> v5.2 .. 1.12
-> >> #define	F2FS_FEATURE_SUPPORT		0x0BFF
-> >>
-> >> v5.3 .. 1.13
-> >> #define F2FS_FEATURE_CASEFOLD		0x1000
-> >> #define	F2FS_FEATURE_SUPPORT		0x1BFF
-> >>
-> >> v5.4 .. 1.14
-> >> #define F2FS_FEATURE_CASEFOLD		0x1000
-> >> #define F2FS_FEATURE_COMPRESS		0x2000
-> >> #define	F2FS_FEATURE_SUPPORT		0x3BFF
-> >>
-> >> f2fs-tools	sb->feature		f2fs	F2FS_FEATURE_SUPPORT
-> >>
-> >> [enable all features in tools]
-> >> v1.12		0x0BFF			v5.2	no_check -> ok
-> >> v1.12		0x0BFF			v5.3	0x1BFF -> ok
-> >> v1.12		0x0BFF			v5.4	0x3BFF -> ok
-> >>
-> >> v1.13		0x1BFF			v5.2	that's issue we need to fix
-> >> v1.13		0x1BFF			v5.3	0x1BFF -> ok
-> >> v1.13		0x1BFF			v5.4	0x3BFF -> ok
-> >>
-> >> v1.14		0x3BFF			v5.2	that's issue we need to fix
-> >> v1.14		0x3BFF			v5.3	0x1BFF -> fail
-> >> v1.14		0x3BFF			v5.4	0x3BFF -> ok
-> >>
-> >> Or am I missing something?
-> >>
-> >> Thanks,
-> >>
-> >>>
-> >>>>
-> >>>> Then that would be:
-> >>>>
-> >>>> kernel	tool
-> >>>> v5.2 .. 1.12
-> >>>> #define	F2FS_FEATURE_SUPPORT		0x0000
-> >>>>
-> >>>> v5.3 .. 1.13
-> >>>> #define F2FS_FEATURE_CASEFOLD		0x0001
-> >>>> #define	F2FS_FEATURE_SUPPORT		0x0001
-> >>>>
-> >>>> v5.4 .. 1.14
-> >>>> #define F2FS_FEATURE_CASEFOLD		0x0001
-> >>>> #define F2FS_FEATURE_COMPRESS		0x0002
-> >>>> #define	F2FS_FEATURE_SUPPORT		0x0003
-> >>>>
-> >>>> f2fs-tools	sb->required_features	f2fs	F2FS_FEATURE_SUPPORT
-> >>>>
-> >>>> v1.12		0x0000			v5.2	no_check -> ok
-> >>>> v1.12		0x0000			v5.3	0x0001 -> ok
-> >>>> v1.12		0x0000			v5.4	0x0003 -> ok
-> >>>>
-> >>>> v1.13		0x0001			v5.2	that's issue we need to fix
-> >>>> v1.13		0x0001			v5.3	0x0001 -> ok
-> >>>> v1.13		0x0001			v5.4	0x0003 -> ok
-> >>>>
-> >>>> v1.14		0x0003			v5.2	that's issue we need to fix
-> >>>> v1.14		0x0003			v5.3	0x0001 -> fail
-> >>>> v1.14		0x0003			v5.4	0x0003 -> ok
-> >>>>
-> >>>> And all compatible features can be added into sb->feature[_VERITY, ....].
-> >>>>
-> >>>> Would that okay to you?
-> >>>>
-> >>>> Thanks,
-> >>>>
-> >>>>>
-> >>>>>>
-> >>>>>> Thanks,
-> >>>>>>
-> >>>>>>>
-> >>>>>>>
-> >>>>>>>> +			~F2FS_INCOMPAT_FEATURES) {
-> >>>>>>>> +		f2fs_info(sbi, "Unsupported feature: %x: supported: %x",
-> >>>>>>>> +			  le32_to_cpu(raw_super->required_features) ^
-> >>>>>>>> +			  F2FS_INCOMPAT_FEATURES,
-> >>>>>>>> +			  F2FS_INCOMPAT_FEATURES);
-> >>>>>>>> +		return -EINVAL;
-> >>>>>>>> +	}
-> >>>>>>>> +
-> >>>>>>>>  	/* Check checksum_offset and crc in superblock */
-> >>>>>>>>  	if (__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_SB_CHKSUM)) {
-> >>>>>>>>  		crc_offset = le32_to_cpu(raw_super->checksum_offset);
-> >>>>>>>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-> >>>>>>>> index a2b36b2e286f..4141be3f219c 100644
-> >>>>>>>> --- a/include/linux/f2fs_fs.h
-> >>>>>>>> +++ b/include/linux/f2fs_fs.h
-> >>>>>>>> @@ -117,7 +117,8 @@ struct f2fs_super_block {
-> >>>>>>>>  	__u8 hot_ext_count;		/* # of hot file extension */
-> >>>>>>>>  	__le16	s_encoding;		/* Filename charset encoding */
-> >>>>>>>>  	__le16	s_encoding_flags;	/* Filename charset encoding flags */
-> >>>>>>>> -	__u8 reserved[306];		/* valid reserved region */
-> >>>>>>>> +	__le32 required_features;       /* incompatible features to old kernel */
-> >>>>>>>> +	__u8 reserved[302];		/* valid reserved region */
-> >>>>>>>>  	__le32 crc;			/* checksum of superblock */
-> >>>>>>>>  } __packed;
-> >>>>>>>>  
-> >>>>>>>> -- 
-> >>>>>>>> 2.22.0
-> >>>>>>> .
-> >>>>>>>
-> >>>>> .
-> >>>>>
-> >>> .
-> >>>
-> > .
+> > diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> > index f087da4..59ef8a7 100644
+> > --- a/tools/f2fs_io/f2fs_io.c
+> > +++ b/tools/f2fs_io/f2fs_io.c
+> > @@ -442,6 +442,46 @@ static void do_gc_urgent(int argc, char **argv, const struct cmd_desc *cmd)
+> >  	}
+> >  }
+> >  
+> > +#define defrag_file_desc "do defragment on file"
+> > +#define defrag_file_help						\
+> > +"f2fs_io defrag_file [start] [length] [-v] [file_path]\n\n"		\
+> > +"  start     : start offset of defragment region, unit: bytes\n"	\
+> > +"  length    : bytes number of defragment region\n"			\
+> > +"  -v        : be verbose\n"						\
+> > +
+> > +static void do_defrag_file(int argc, char **argv, const struct cmd_desc *cmd)
+> > +{
+> > +	struct f2fs_defragment df;
+> > +	u64 len;
+> > +	int ret, fd;
+> > +
+> > +	if (argc != 5) {
+> > +		fputs("Excess arguments\n\n", stderr);
+> > +		fputs(cmd->cmd_help, stderr);
+> > +		exit(1);
+> > +	}
+> > +
+> > +	df.start = atoll(argv[1]);
+> > +	df.len = len = atoll(argv[2]);
+> > +
+> > +	fd = open(argv[4], O_RDWR);
+> > +	if (fd == -1) {
+> > +		fputs("Open failed\n\n", stderr);
+> > +		fputs(cmd->cmd_help, stderr);
+> > +		exit(1);
+> > +	}
+> > +printf("%lu, %lu\n", df.start, df.len);
+> > +	ret = ioctl(fd, F2FS_IOC_DEFRAGMENT, &df);
+> > +	if (ret < 0) {
+> > +		perror("F2FS_IOC_DEFRAGMENT");
+> > +		exit(1);
+> > +	}
+> > +	printf("defrag %s in region[%lu, %lu]\n", argv[3],
+> > +				df.start, df.start + len);
+> > +	exit(0);
+> > +}
+> > +
+> > +
+> >  #define CMD_HIDDEN 	0x0001
+> >  #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+> >  #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+> > @@ -456,6 +496,7 @@ const struct cmd_desc cmd_list[] = {
+> >  	CMD(read),
+> >  	CMD(fiemap),
+> >  	CMD(gc_urgent),
+> > +	CMD(defrag_file),
+> >  	{ NULL, NULL, NULL, NULL, 0 }
+> >  };
+> >  
 > > 
 
 
