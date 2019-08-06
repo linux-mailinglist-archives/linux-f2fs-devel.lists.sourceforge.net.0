@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B09B82946
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:36:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4737C82953
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 03:42:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1huoOo-0007Ij-Kx; Tue, 06 Aug 2019 01:36:26 +0000
+	id 1huoUc-0000aI-Fh; Tue, 06 Aug 2019 01:42:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1huoOn-0007IV-6w
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:36:25 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1huoUb-0000aB-CF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:42:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4KumpxvFtiAOsQboiBcpXZ2cTGWUCPg7iqEIt8B78Mk=; b=P77eap6fwBdBATbB2OQ3TntfWd
- P3U+L6y1MxbV1GET0vDftF7m2bQsRiCGA3HuwoVKQV4NQ/Ax0UImbdXoOaaEt+KCKDCbCr83DHR3l
- eT6K5O3NEyXw85zB0ZrCc1sWU6QsZdbRLYz1zmOdj0p4YOo5J2GB934jrQSBSB1B+e9A=;
+ bh=WTaBuDVqnmY3BEPCPi2XyfBJHhOyKESztRJP15rIGoU=; b=iqbASl1TyRXKf6AWitQGXiK7rz
+ lQVnbXGXIn/8zweE9h7qBiwC/sQx47rkgxx0WUHHP+Pc930Vq1V1a7XbAGCQBMexx+nW9leDKdd+B
+ zSUMNozBgd2RwYxW9vv3wNkB4OcWk9tx7jsfSfJGsmb9Rn9mR9SD9Q+WJWSCJnrLL7RA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,53 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4KumpxvFtiAOsQboiBcpXZ2cTGWUCPg7iqEIt8B78Mk=; b=nA9GluAyQE7l1Gft3/25qhNggY
- 3ndCy8Etf26qoviO6XVmpCX60QIti03HnwwgRLyWwHqB1P7s4mKwsb80cjHItVeGIfKpLUzWZesjo
- OUYU15oWw6Mswki9YhL59wLFpQvjnQ0WwZnB/K6IthEpreNrkbkT0mWkHVePPKv+FfQ0=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=WTaBuDVqnmY3BEPCPi2XyfBJHhOyKESztRJP15rIGoU=; b=Ya9mIIiTf9+upg8FtR8hwFJ66h
+ fFtReZEVrAYSAMx/JHuZkyjMQc8WuZr3NUCqEoXMrXftSSYsINbUvujJBKUC4+/WNjlyFFs6ffloF
+ F1UTcO3RBA3JGkHs3YDZGqitq8m8/kx1ciQGou6YUA+zxlRbKFYC0WJNvvkaGqOfCeE8=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1huoOk-00Blfj-Qz
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:36:25 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id EEEE4F0AE15A92C4CDFA;
- Tue,  6 Aug 2019 09:36:15 +0800 (CST)
+ id 1huoUZ-00CMe5-OF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 01:42:25 +0000
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id C005B14AC473876108DB;
+ Tue,  6 Aug 2019 09:42:16 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 6 Aug 2019
- 09:36:14 +0800
+ (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 6 Aug 2019
+ 09:42:13 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190723023640.GC60778@jaegeuk-macbookpro.roam.corp.google.com>
- <d4d064a2-2b3c-3536-6488-39e7cfdb1ea4@huawei.com>
- <20190729055738.GA95664@jaegeuk-macbookpro.roam.corp.google.com>
- <07cd3aba-3516-9ba5-286e-277abb98e244@huawei.com>
- <20190730180231.GB76478@jaegeuk-macbookpro.roam.corp.google.com>
- <00e70eb1-c4fa-a6c9-69d7-71ff995c7d6c@huawei.com>
- <20190801041435.GB84433@jaegeuk-macbookpro.roam.corp.google.com>
- <d35d5ad7-5622-fbf5-5853-e541f8c26670@huawei.com>
- <20190801222746.GA27597@jaegeuk-macbookpro.roam.corp.google.com>
- <5d566fce-4412-65b2-e9d9-279b648f7551@huawei.com>
- <20190806003749.GB98101@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20181002020223.76087-1-jaegeuk@kernel.org>
+ <bece1226-ae59-d9be-a5b0-be836ba04e69@huawei.com>
+ <20190806004742.GD98101@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <b5549a88-6805-99a8-4b0a-3bbf49da794c@huawei.com>
-Date: Tue, 6 Aug 2019 09:36:36 +0800
+Message-ID: <be4ad896-31bd-a6cf-4089-9f3761305c78@huawei.com>
+Date: Tue, 6 Aug 2019 09:42:43 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190806003749.GB98101@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20190806004742.GD98101@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1huoOk-00Blfj-Qz
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: separate NOCoW and pinfile semantics
+X-Headers-End: 1huoUZ-00CMe5-OF
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: don't allocate new blocks on
+ unclean shutdown
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,266 +76,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/8/6 8:37, Jaegeuk Kim wrote:
-> On 08/02, Chao Yu wrote:
->> On 2019/8/2 6:27, Jaegeuk Kim wrote:
->>> On 08/01, Chao Yu wrote:
->>>> On 2019/8/1 12:14, Jaegeuk Kim wrote:
->>>>> On 07/31, Chao Yu wrote:
->>>>>> On 2019/7/31 2:02, Jaegeuk Kim wrote:
->>>>>>> On 07/29, Chao Yu wrote:
->>>>>>>> On 2019/7/29 13:57, Jaegeuk Kim wrote:
->>>>>>>>> On 07/23, Chao Yu wrote:
->>>>>>>>>> On 2019/7/23 10:36, Jaegeuk Kim wrote:
->>>>>>>>>>> On 07/19, Chao Yu wrote:
->>>>>>>>>>>> Pinning a file is heavy, because skipping pinned files make GC
->>>>>>>>>>>> running with heavy load or no effect.
->>>>>>>>>>>
->>>>>>>>>>> Pinned file is a part of NOCOW files, so I don't think we can simply drop it
->>>>>>>>>>> for backward compatibility.
->>>>>>>>>>
->>>>>>>>>> Yes,
->>>>>>>>>>
->>>>>>>>>> But what I concerned is that pin file is too heavy, so in order to satisfy below
->>>>>>>>>> demand, how about introducing pin_file_2 flag to triggering IPU only during
->>>>>>>>>> flush/writeback.
->>>>>>>>>
->>>>>>>>> That can be done by cold files?
->>>>>>>>
->>>>>>>> Then it may inherit property of cold type file, e.g. a) goes into cold area; b)
->>>>>>>> update with very low frequency.
->>>>>>>>
->>>>>>>> Actually pin_file_2 could be used by db-wal/log file, which are updated
->>>>>>>> frequently, and should go to hot/warm area, it does not match above two property.
->>>>>>>
->>>>>>> How about considering another name like "IPU-only mode"?
->>>>>>>
->>>>>>>               fallocate         write    Flag         GC
->>>>>>> Pin_file:     preallocate       IPU      FS_NOCOW_FL  Not allowed
->>>>>>> IPU_file:     Not preallocate   IPU      N/A          Default by temperature
->>>>>>
->>>>>> One question, do we need preallocate physical block address for IPU_file as
->>>>>> Pin_file? since it can enhance db file's sequential read performance, not sure,
->>>>>> db can handle random data in preallocated blocks.
->>>>>
->>>>> db file will do atomic writes, which can not be used with this. -wal may be able
->>>>
->>>> Now WAL mode were set by default in Android, so most of db file are -wal type now.
->>>
->>> Will be back again tho.
+On 2019/8/6 8:47, Jaegeuk Kim wrote:
+> On 08/05, Chao Yu wrote:
+>> Hi Jaegeuk,
 >>
->> R?
+>> On 2018/10/2 10:02, Jaegeuk Kim wrote:
+>>> +	if (!is_set_ckpt_flags(cp, CP_UMOUNT_FLAG)) {
+>>> +		c.alloc_failed = 1;
+>>> +		return -EINVAL;
+>>> +	}
+>>
+>> When I test por_fsstress case w/ quota feature enabled, I suffer below error
+>> during repair:
+>>
+>> Info: superblock features = f8 :  extra_attr project_quota inode_checksum
+>> flexible_inline_xattr quota_ino
+>> Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
+>> Info: total FS sectors = 2097152 (8192 MB)
+>> Info: CKPT version = 452b7568
+>> Info: checkpoint state = 846 :  quota_need_fsck crc compacted_summary
+>> orphan_inodes sudden-power-off
+>> [fsck_chk_quota_files:1784] Fixing Quota file ([  0] ino [0x4])
+>> [ERROR] quotaio_tree.c:83:write_blk:: Cannot write block (7188): Inappropriate
+>> ioctl for device
+>> [ERROR] quotaio_tree.c:110:get_free_dqblk:: Cannot allocate new quota block (out
+>> of disk space).
+>>
+>> I found new_data_block() will reject block allocation on an unclean umounted
+>> image, result in quota file repair failure.
+>>
+>> With current implementation, I think we should mount that image again for
+>> recovery, then umount and run fsck on it again to repair quota file.
 > 
-> Q.
+> Yes.
 > 
 >>
->>>
->>>>
->>>>> to preallocate blocks, but it can eat disk space unnecessarily.
->>>>
->>>> I meant .db-wal file rather than .db.
->>>>
->>>> Yes, that's ext4 style, that would bring better performance due to less holes in
->>>> block distribution.
->>>>
->>>> I don't think we need to worry about space issue for db-wal file. I tracked
->>>> .db-wal file's update before:
->>>> - there are very frequently truncation and deletion, that means the preallocated
->>>> blocks won't exist for long time.
->>>> - and also there are very frequently append writes, I suspect there almost very
->>>> few preallocate block are not written.
->>>> - total db-wal file number is less.
->>>
->>> Sometimes it can be large enough for system.
->>
->> For this, it's trade off:
->> - lose a few disk space at the very begin of db-wal lifecycle Or
->> - face fragment and read performance degradation.
->>
->>> If it's from user apps and short lived, why do we need preallocation?
->>
->> It triggers sequential read on db-wal file during checkpoint, though it's short
->> lived, still it can affect performance.
->>
->> What do you think of doing some performance test on WAL file to decide the
->> preallocation policy?
+>> However, user didn't be noticed that how to fix this... I know there is no such
+>> report tho, I think we'd better fix this case in fsck, any thoughts? let
+>> allocation skip fsynced datas?
 > 
-> Good idea. Can we?
+> Actually, that was my TODO, but I had no time to fix it, but had to stop it to
+> avoid further corruption.
 
-Let me test for numbers later.
+Copied, maybe I can help to fix it. It looks it will be easy to skip fsyned
+datas during block allocation than porting recovery flow from kernel to tools.
 
 Thanks,
 
 > 
 >>
 >> Thanks,
->>
->>>
->>>>
->>>>>
->>>>>>
->>>>>> Other behaviors looks good to me. :)
->>>>>>
->>>>>> I plan to use last bit in inode.i_inline to store this flag.
->>>>>
->>>>> Why not using i_flag like FS_NOCOW_FL?
->>>>
->>>> Oops, as you listed in last email, I can see you don't want to break
->>>> FS_NOCOW_FL's semantics for backward compatibility.
->>>>
->>>> 			Flag
->>>> IPU_file		N/A			
->>>>
->>>> If we plan to use FS_NOCOW_FL, that's what this patch has already did, you can
->>>> merge it directly... :P
->>>>
->>>>>
->>>>>>
->>>>>>> Cold_file:    Not preallocate   IPU      N/A          Move in cold area
->>>>>>> Hot_file:     Not preallocate   IPU/OPU  N/A          Move in hot area
->>>>>>
->>>>>> Should hot file be gced to hot area? That would mix new hot data with old 'hot'
->>>>>> data which actually become cold.
->>>>>
->>>>> But, user explicitly specified this is hot.
->>>>
->>>> With current implementation, GC will migrate data from hot/warm/cold area to
->>>> cold area.
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>>
->>>>>>>>
->>>>>>>> Thank,
->>>>>>>>
->>>>>>>>>
->>>>>>>>>>
->>>>>>>>>>>
->>>>>>>>>>>>
->>>>>>>>>>>> So that this patch propose to separate nocow and pinfile semantics:
->>>>>>>>>>>> - NOCoW flag can only be set on regular file.
->>>>>>>>>>>> - NOCoW file will only trigger IPU at common writeback/flush.
->>>>>>>>>>>> - NOCow file will do OPU during GC.
->>>>>>>>>>>>
->>>>>>>>>>>> For the demand of 1) avoid fragment of file's physical block and
->>>>>>>>>>>> 2) userspace don't care about file's specific physical address,
->>>>>>>>>>>> tagging file as NOCoW will be cheaper than pinned one.
->>>>>>>>>>
->>>>>>>>>> ^^^
->>>>>>>>>>
->>>>>>>>>> Thanks,
->>>>>>>>>>
->>>>>>>>>>>>
->>>>>>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>>>>>>>> ---
->>>>>>>>>>>> v2:
->>>>>>>>>>>> - rebase code to fix compile error.
->>>>>>>>>>>>  fs/f2fs/data.c |  3 ++-
->>>>>>>>>>>>  fs/f2fs/f2fs.h |  1 +
->>>>>>>>>>>>  fs/f2fs/file.c | 22 +++++++++++++++++++---
->>>>>>>>>>>>  3 files changed, 22 insertions(+), 4 deletions(-)
->>>>>>>>>>>>
->>>>>>>>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>>>>>>>> index a2a28bb269bf..15fb8954c363 100644
->>>>>>>>>>>> --- a/fs/f2fs/data.c
->>>>>>>>>>>> +++ b/fs/f2fs/data.c
->>>>>>>>>>>> @@ -1884,7 +1884,8 @@ static inline bool check_inplace_update_policy(struct inode *inode,
->>>>>>>>>>>>  
->>>>>>>>>>>>  bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
->>>>>>>>>>>>  {
->>>>>>>>>>>> -	if (f2fs_is_pinned_file(inode))
->>>>>>>>>>>> +	if (f2fs_is_pinned_file(inode) ||
->>>>>>>>>>>> +			F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
->>>>>>>>>>>>  		return true;
->>>>>>>>>>>>  
->>>>>>>>>>>>  	/* if this is cold file, we should overwrite to avoid fragmentation */
->>>>>>>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>>>>>>>> index 596ab3e1dd7b..f6c5a3d2e659 100644
->>>>>>>>>>>> --- a/fs/f2fs/f2fs.h
->>>>>>>>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>>>>>>>> @@ -2374,6 +2374,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
->>>>>>>>>>>>  #define F2FS_NOATIME_FL			0x00000080 /* do not update atime */
->>>>>>>>>>>>  #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
->>>>>>>>>>>>  #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
->>>>>>>>>>>> +#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
->>>>>>>>>>>>  #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
->>>>>>>>>>>>  
->>>>>>>>>>>>  /* Flags that should be inherited by new inodes from their parent. */
->>>>>>>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>>>>>>>> index 7ca545874060..ae0fec54cac6 100644
->>>>>>>>>>>> --- a/fs/f2fs/file.c
->>>>>>>>>>>> +++ b/fs/f2fs/file.c
->>>>>>>>>>>> @@ -1692,6 +1692,7 @@ static const struct {
->>>>>>>>>>>>  	{ F2FS_NOATIME_FL,	FS_NOATIME_FL },
->>>>>>>>>>>>  	{ F2FS_INDEX_FL,	FS_INDEX_FL },
->>>>>>>>>>>>  	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
->>>>>>>>>>>> +	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
->>>>>>>>>>>>  	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
->>>>>>>>>>>>  };
->>>>>>>>>>>>  
->>>>>>>>>>>> @@ -1715,7 +1716,8 @@ static const struct {
->>>>>>>>>>>>  		FS_NODUMP_FL |		\
->>>>>>>>>>>>  		FS_NOATIME_FL |		\
->>>>>>>>>>>>  		FS_DIRSYNC_FL |		\
->>>>>>>>>>>> -		FS_PROJINHERIT_FL)
->>>>>>>>>>>> +		FS_PROJINHERIT_FL |	\
->>>>>>>>>>>> +		FS_NOCOW_FL)
->>>>>>>>>>>>  
->>>>>>>>>>>>  /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
->>>>>>>>>>>>  static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
->>>>>>>>>>>> @@ -1753,8 +1755,6 @@ static int f2fs_ioc_getflags(struct file *filp, unsigned long arg)
->>>>>>>>>>>>  		fsflags |= FS_ENCRYPT_FL;
->>>>>>>>>>>>  	if (f2fs_has_inline_data(inode) || f2fs_has_inline_dentry(inode))
->>>>>>>>>>>>  		fsflags |= FS_INLINE_DATA_FL;
->>>>>>>>>>>> -	if (is_inode_flag_set(inode, FI_PIN_FILE))
->>>>>>>>>>>> -		fsflags |= FS_NOCOW_FL;
->>>>>>>>>>>>  
->>>>>>>>>>>>  	fsflags &= F2FS_GETTABLE_FS_FL;
->>>>>>>>>>>>  
->>>>>>>>>>>> @@ -1794,6 +1794,22 @@ static int f2fs_ioc_setflags(struct file *filp, unsigned long arg)
->>>>>>>>>>>>  	if (ret)
->>>>>>>>>>>>  		goto out;
->>>>>>>>>>>>  
->>>>>>>>>>>> +	if ((fsflags ^ old_fsflags) & FS_NOCOW_FL) {
->>>>>>>>>>>> +		if (!S_ISREG(inode->i_mode)) {
->>>>>>>>>>>> +			ret = -EINVAL;
->>>>>>>>>>>> +			goto out;
->>>>>>>>>>>> +		}
->>>>>>>>>>>> +
->>>>>>>>>>>> +		if (f2fs_should_update_outplace(inode, NULL)) {
->>>>>>>>>>>> +			ret = -EINVAL;
->>>>>>>>>>>> +			goto out;
->>>>>>>>>>>> +		}
->>>>>>>>>>>> +
->>>>>>>>>>>> +		ret = f2fs_convert_inline_inode(inode);
->>>>>>>>>>>> +		if (ret)
->>>>>>>>>>>> +			goto out;
->>>>>>>>>>>> +	}
->>>>>>>>>>>> +
->>>>>>>>>>>>  	ret = f2fs_setflags_common(inode, iflags,
->>>>>>>>>>>>  			f2fs_fsflags_to_iflags(F2FS_SETTABLE_FS_FL));
->>>>>>>>>>>>  out:
->>>>>>>>>>>> -- 
->>>>>>>>>>>> 2.18.0.rc1
->>>>>>>>>>> .
->>>>>>>>>>>
->>>>>>>>> .
->>>>>>>>>
->>>>>>> .
->>>>>>>
->>>>> .
->>>>>
->>> .
->>>
 > .
 > 
 
