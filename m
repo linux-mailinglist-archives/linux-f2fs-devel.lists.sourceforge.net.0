@@ -2,83 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A225683B31
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2019 23:33:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 619A38420E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Aug 2019 04:04:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hv75X-0004U5-0u; Tue, 06 Aug 2019 21:33:47 +0000
+	id 1hvBJK-0006YB-Kw; Wed, 07 Aug 2019 02:04:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1hv75V-0004Tp-Eb
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 21:33:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hvBJJ-0006Y3-PZ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Aug 2019 02:04:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mBOcax6fp/YvdpxHC9TfXaal+XhYVyv1/8PZ/1Xlccg=; b=e7/Wg+zHeR3ipJviEPAQT011yp
- y8pm3aulF+lOQVUS0A5tvsNKCtqk8xvVNPxselvhhkYQkyV2ZwCOjML8sZFzORn0ksqOlRP2tAXKB
- mu71czAA1sdMfkc8VAO9vCqtAljAwzLzrOItbnVofmy67FqeLSTu5cBffDuAfCnqiXCA=;
+ bh=7ltUjr1xpukAtloKlnJy93ln/BuGdxJhRxWTdAF7qqw=; b=NRu9+wRYU1NAkdv76dnfPFA64Y
+ r2xY6agoi9UX59jwp5eNnYwApOXVJy7xztSWp5qvDzqMg4PzhMRZ0EwatbicZNV8uHGWzxFKQshCA
+ osbdZBEwLhUDEDlBEbXcSgh/a8IAXE+3B3AzEs9e4zzHPwcu05FKoMz5w5xzAjSCAbG4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mBOcax6fp/YvdpxHC9TfXaal+XhYVyv1/8PZ/1Xlccg=; b=LGB5DlrzeS74ZV/BIQiMW50Llr
- ZBWVjwOEHNLtemF3X/2md8XC6aakEzTzWG+kxW0VMCZi0robN8woHnLZYCa85zpgTDQPOMP3v6dwX
- BoRo/5ApbGzH/1SxBkO4cvTK/UhkPRiHWA/iAEEItDvcvhLz22qPRGhKW6K4tjZz7l88=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=7ltUjr1xpukAtloKlnJy93ln/BuGdxJhRxWTdAF7qqw=; b=ioHxIbJjddVjaUA7cGIy9+awk0
+ wiIAGCbUvmXGmYlfK/2a35OGTTenV8DM5WXN5cIGL3N+yfhn90zClKmxK/j+cNJ41fRdvCoExAmXY
+ Xuts3CmjFDuh/FZgnjDZvtnvREs3v1uZUl4nqP692CTMynBeWPN/dHndDftsijgIrYHw=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hv75T-00CenT-5K
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Aug 2019 21:33:45 +0000
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E5D0B21881;
- Tue,  6 Aug 2019 21:33:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565127217;
- bh=gx8SFavgzOTEOESs7rzfvsJIXbtJJ880k7HdXMQfhM4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=u6G51MKZHQ57aE2syMLXLyUoPCsf3qQorT7zMGnm6BXenRoej37TS8p+Ytss2MMnR
- iFnQzDrerYR+h3QKYZMKyLQtz3W91Nxisvl9vCd8oYvO4KjED+9CpAo0eclIYgw0Gf
- iCudtjEcXerCI0L9ncIT2Hnb9npcDG8WSzptXDVU=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Tue,  6 Aug 2019 17:32:34 -0400
-Message-Id: <20190806213319.19203-14-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190806213319.19203-1-sashal@kernel.org>
-References: <20190806213319.19203-1-sashal@kernel.org>
+ id 1hvBJF-00DQIe-Sg
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Aug 2019 02:04:17 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id DC2CF9F66E5EC9A6F118;
+ Wed,  7 Aug 2019 10:04:06 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 7 Aug 2019
+ 10:04:04 +0800
+To: Sahitya Tummala <stummala@codeaurora.org>, Jaegeuk Kim
+ <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <1565090396-7263-1-git-send-email-stummala@codeaurora.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <8766875c-1e35-22dc-48d2-45b6776e4f38@huawei.com>
+Date: Wed, 7 Aug 2019 10:04:16 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <1565090396-7263-1-git-send-email-stummala@codeaurora.org>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: codeaurora.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hv75T-00CenT-5K
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.2 14/59] f2fs: fix to read source block
- before invalidating it
+X-Headers-End: 1hvBJF-00DQIe-Sg
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Fix indefinite loop in f2fs_gc()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,134 +78,140 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+Hi Sahitya,
 
-[ Upstream commit 543b8c468f55f27f3c0178a22a91a51aabbbc428 ]
+On 2019/8/6 19:19, Sahitya Tummala wrote:
+> Policy - Foreground GC, LFS and greedy GC mode.
+> 
+> Under this policy, f2fs_gc() loops forever to GC as it doesn't have
+> enough free segements to proceed and thus it keeps calling gc_more
+> for the same victim segment.  This can happen if the selected victim
+> segment could not be GC'd due to failed blkaddr validity check i.e.
+> is_alive() returns false for the blocks set in current validity map.
+> 
+> Fix this by keeping track of such invalid segments and skip those
+> segments for selection in get_victim_by_default() to avoid endless
+> GC loop under such error scenarios.
+> 
+> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> ---
+> v2: fix as per Chao's suggestion to handle this error case
+> 
+>  fs/f2fs/gc.c      | 15 ++++++++++++++-
+>  fs/f2fs/segment.c |  5 +++++
+>  fs/f2fs/segment.h |  3 +++
+>  3 files changed, 22 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 8974672..321a78a 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -382,6 +382,14 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+>  			nsearched++;
+>  		}
+>  
+> +		/*
+> +		 * skip selecting the invalid segno (that is failed due to block
+> +		 * validity check failed during GC) to avoid endless GC loop in
+> +		 * such cases.
+> +		 */
+> +		if (test_bit(segno, sm->invalid_segmap))
+> +			goto next;
+> +
+>  		secno = GET_SEC_FROM_SEG(sbi, segno);
+>  
+>  		if (sec_usage_check(sbi, secno))
+> @@ -975,6 +983,7 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>  	int off;
+>  	int phase = 0;
+>  	int submitted = 0;
+> +	struct sit_info *sit_i = SIT_I(sbi);
+>  
+>  	start_addr = START_BLOCK(sbi, segno);
+>  
+> @@ -1008,8 +1017,12 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>  		}
+>  
+>  		/* Get an inode by ino with checking validity */
+> -		if (!is_alive(sbi, entry, &dni, start_addr + off, &nofs))
+> +		if (!is_alive(sbi, entry, &dni, start_addr + off, &nofs)) {
+> +			if (!test_and_set_bit(segno, sit_i->invalid_segmap))
+> +				f2fs_err(sbi, "invalid blkaddr %u in seg %u is found\n",
+> +						start_addr + off, segno);
 
-f2fs_allocate_data_block() invalidates old block address and enable new block
-address. Then, if we try to read old block by f2fs_submit_page_bio(), it will
-give WARN due to reading invalid blocks.
+Oh, there is some normal cases in is_alive(), such as f2fs_get_node_page() or
+f2fs_get_node_info() failure due to no memory, we should bypass such cases. I
+guess something like this:
 
-Let's make the order sanely back.
+if (source_blkaddr != blkaddr) {
+	if (unlikely(check_valid_map(sbi, segno, off))) {
+		if (!test_and_set_bit(segno, sit_i->invalid_segmap)) {
+			f2fs_err(sbi, "invalid blkaddr %u in seg %u is found\n",
+				start_addr + off, segno);
+			set_sbi_flag(sbi, SBI_NEED_FSCK);
+		}
+	}
+	return false;
+}
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- fs/f2fs/gc.c | 70 +++++++++++++++++++++++++---------------------------
- 1 file changed, 34 insertions(+), 36 deletions(-)
+I think this will be safe to call check_valid_map(), because there should be no
+race in between is_alive() and update_sit_entry() from all paths due to node
+page lock dependence.
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 963fb4571fd98..bb6fd5a506d39 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -794,6 +794,29 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 	if (lfs_mode)
- 		down_write(&fio.sbi->io_order_lock);
- 
-+	mpage = f2fs_grab_cache_page(META_MAPPING(fio.sbi),
-+					fio.old_blkaddr, false);
-+	if (!mpage)
-+		goto up_out;
-+
-+	fio.encrypted_page = mpage;
-+
-+	/* read source block in mpage */
-+	if (!PageUptodate(mpage)) {
-+		err = f2fs_submit_page_bio(&fio);
-+		if (err) {
-+			f2fs_put_page(mpage, 1);
-+			goto up_out;
-+		}
-+		lock_page(mpage);
-+		if (unlikely(mpage->mapping != META_MAPPING(fio.sbi) ||
-+						!PageUptodate(mpage))) {
-+			err = -EIO;
-+			f2fs_put_page(mpage, 1);
-+			goto up_out;
-+		}
-+	}
-+
- 	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
- 					&sum, CURSEG_COLD_DATA, NULL, false);
- 
-@@ -801,44 +824,18 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
- 	if (!fio.encrypted_page) {
- 		err = -ENOMEM;
--		goto recover_block;
--	}
--
--	mpage = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
--					fio.old_blkaddr, FGP_LOCK, GFP_NOFS);
--	if (mpage) {
--		bool updated = false;
--
--		if (PageUptodate(mpage)) {
--			memcpy(page_address(fio.encrypted_page),
--					page_address(mpage), PAGE_SIZE);
--			updated = true;
--		}
- 		f2fs_put_page(mpage, 1);
--		invalidate_mapping_pages(META_MAPPING(fio.sbi),
--					fio.old_blkaddr, fio.old_blkaddr);
--		if (updated)
--			goto write_page;
--	}
--
--	err = f2fs_submit_page_bio(&fio);
--	if (err)
--		goto put_page_out;
--
--	/* write page */
--	lock_page(fio.encrypted_page);
--
--	if (unlikely(fio.encrypted_page->mapping != META_MAPPING(fio.sbi))) {
--		err = -EIO;
--		goto put_page_out;
--	}
--	if (unlikely(!PageUptodate(fio.encrypted_page))) {
--		err = -EIO;
--		goto put_page_out;
-+		goto recover_block;
- 	}
- 
--write_page:
-+	/* write target block */
- 	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
-+	memcpy(page_address(fio.encrypted_page),
-+				page_address(mpage), PAGE_SIZE);
-+	f2fs_put_page(mpage, 1);
-+	invalidate_mapping_pages(META_MAPPING(fio.sbi),
-+				fio.old_blkaddr, fio.old_blkaddr);
-+
- 	set_page_dirty(fio.encrypted_page);
- 	if (clear_page_dirty_for_io(fio.encrypted_page))
- 		dec_page_count(fio.sbi, F2FS_DIRTY_META);
-@@ -869,11 +866,12 @@ static int move_data_block(struct inode *inode, block_t bidx,
- put_page_out:
- 	f2fs_put_page(fio.encrypted_page, 1);
- recover_block:
--	if (lfs_mode)
--		up_write(&fio.sbi->io_order_lock);
- 	if (err)
- 		f2fs_do_replace_block(fio.sbi, &sum, newaddr, fio.old_blkaddr,
- 								true, true);
-+up_out:
-+	if (lfs_mode)
-+		up_write(&fio.sbi->io_order_lock);
- put_out:
- 	f2fs_put_dnode(&dn);
- out:
--- 
-2.20.1
+One more concern is should we use this under CONFIG_F2FS_CHECK_FS? If there is
+actually such a bug can cause data inconsistency, we'd better find the root
+cause in debug version.
 
+Thanks,
+
+>  			continue;
+> +		}
+>  
+>  		if (phase == 2) {
+>  			f2fs_ra_node_page(sbi, dni.ino);
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index a661ac3..d45a1d3 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -4017,6 +4017,10 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+>  		return -ENOMEM;
+>  #endif
+>  
+> +	sit_i->invalid_segmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+> +	if (!sit_i->invalid_segmap)
+> +		return -ENOMEM;
+> +
+>  	/* init SIT information */
+>  	sit_i->s_ops = &default_salloc_ops;
+>  
+> @@ -4518,6 +4522,7 @@ static void destroy_sit_info(struct f2fs_sb_info *sbi)
+>  #ifdef CONFIG_F2FS_CHECK_FS
+>  	kvfree(sit_i->sit_bitmap_mir);
+>  #endif
+> +	kvfree(sit_i->invalid_segmap);
+>  	kvfree(sit_i);
+>  }
+>  
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index b746028..bc5dbe8 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -246,6 +246,9 @@ struct sit_info {
+>  	unsigned long long min_mtime;		/* min. modification time */
+>  	unsigned long long max_mtime;		/* max. modification time */
+>  
+> +	/* list of segments to be ignored by GC in case of errors */
+> +	unsigned long *invalid_segmap;
+> +
+>  	unsigned int last_victim[MAX_GC_POLICY]; /* last victim segment # */
+>  };
+>  
+> 
 
 
 _______________________________________________
