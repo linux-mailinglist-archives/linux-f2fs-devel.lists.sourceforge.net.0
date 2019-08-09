@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD81C877D2
+	by mail.lfdr.de (Postfix) with ESMTPS id CB05B877D4
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Aug 2019 12:53:31 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hw2WW-0003rq-Jk; Fri, 09 Aug 2019 10:53:28 +0000
+	id 1hw2WW-0003rz-P0; Fri, 09 Aug 2019 10:53:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hw2WV-0003rd-QN
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Aug 2019 10:53:27 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hw2WW-0003rj-46
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Aug 2019 10:53:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
  Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XS+Y7DTVWikZWe0+AZi1VgaQS08HNEQ8dfFbPtF6bhM=; b=PVU2dOZcA8GQRLFG0YI+hrkyiE
- 7DjjoznW3rIbAWq8AthQcRrqWEGoPxk9bEOVp8UwAae0syUVOI8FaJvWQVCuXgbaA1DO4V4MiNftV
- oKLRoKPNBgLdLSym9OvvQbxALhXc+fiXezfl0C6QEazHFTLo/5qJA8ADekVqZ158HAQA=;
+ bh=3D6begZLYkO/j5vRb0Wbx4tYr0lqDgdVVE+Q5lI+kOc=; b=SRzZ435NC2vq29L+i54W5CSPgl
+ HsWXSFmLhPSDRy8zk2EiHmAY/4KbtgEXVMtABzlReYCNlYHA+LDcviSHb4osFCj6okpO7cSHMEywR
+ kQTat9l7m3dYnWtUy0uKk9/5wL+/54pfjxErBFe/tpwWOY7BKX0tm9tzmhKXB/foE1YQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
@@ -29,24 +29,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XS+Y7DTVWikZWe0+AZi1VgaQS08HNEQ8dfFbPtF6bhM=; b=Dz1mw+5O2rxbwb1AsLZbLJQ7Og
- 4aq6oPdPFQd7vSOAHMxuPl3OUiUmyB//OGqrw+L/44L/1NllV48Kt5oTQHBbc5biNnx3FkYnxb3Z6
- WOjdIS1DjSBGjcE5HOFOberBsG01S2+ZnRbOAhXa7uWEbNqWL7bgLVzmYvEkNayQ0eLs=;
+ bh=3D6begZLYkO/j5vRb0Wbx4tYr0lqDgdVVE+Q5lI+kOc=; b=JjQWOgukAQ0uexmyHXa/Ee+yrh
+ 6g4sMT/h7OONZoyHPCj+OX9xV9JwGh4uLnsDmjZbsV1PAQOgyOV8N/eChKfd6pOXaKnl/ivkaBu7c
+ sMHuf73v0NHS/8Gt9+1QNc6Y2pfaIYWz8WX2t/zlpVmuzfrtlcFxfFeCuBLerihunnHI=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hw2WT-00HEey-MY
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Aug 2019 10:53:27 +0000
+ id 1hw2WU-00Frqz-Mu
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Aug 2019 10:53:28 +0000
 Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 032981E164D2ACB37670;
- Fri,  9 Aug 2019 18:53:19 +0800 (CST)
+ by Forcepoint Email with ESMTP id EA680EEF0DCC6576348C;
+ Fri,  9 Aug 2019 18:53:18 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS405-HUB.china.huawei.com (10.3.19.205) with Microsoft SMTP Server id
  14.3.439.0; Fri, 9 Aug 2019 18:53:12 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 9 Aug 2019 18:52:55 +0800
-Message-ID: <20190809105302.79876-3-yuchao0@huawei.com>
+Date: Fri, 9 Aug 2019 18:52:56 +0800
+Message-ID: <20190809105302.79876-4-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 In-Reply-To: <20190809105302.79876-1-yuchao0@huawei.com>
 References: <20190809105302.79876-1-yuchao0@huawei.com>
@@ -62,9 +62,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hw2WT-00HEey-MY
-Subject: [f2fs-dev] [PATCH 03/10] f2fs-tools: allocate memory in batch in
- build_sit_info()
+X-Headers-End: 1hw2WU-00Frqz-Mu
+Subject: [f2fs-dev] [PATCH 04/10] fsck.f2fs: introduce current_sit_addr()
+ for cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,89 +81,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Like we did in kernel, allocating memory in batch will be more
-efficient.
+Just clean up, no logic change.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fsck/f2fs.h  |  1 +
- fsck/mount.c | 28 ++++++++++++++++------------
- 2 files changed, 17 insertions(+), 12 deletions(-)
+ fsck/mount.c | 28 +++++++++++++---------------
+ 1 file changed, 13 insertions(+), 15 deletions(-)
 
-diff --git a/fsck/f2fs.h b/fsck/f2fs.h
-index a52b5d4..6fc0bf3 100644
---- a/fsck/f2fs.h
-+++ b/fsck/f2fs.h
-@@ -82,6 +82,7 @@ struct sit_info {
- 	block_t sit_base_addr;          /* start block address of SIT area */
- 	block_t sit_blocks;             /* # of blocks used by SIT area */
- 	block_t written_valid_blocks;   /* # of valid blocks in main area */
-+	unsigned char *bitmap;		/* all bitmaps pointer */
- 	char *sit_bitmap;               /* SIT bitmap pointer */
- 	unsigned int bitmap_size;       /* SIT bitmap size */
- 
 diff --git a/fsck/mount.c b/fsck/mount.c
-index af7149e..bed22d5 100644
+index bed22d5..eed27bf 100644
 --- a/fsck/mount.c
 +++ b/fsck/mount.c
-@@ -1404,6 +1404,7 @@ int build_sit_info(struct f2fs_sb_info *sbi)
- 	unsigned int sit_segs;
- 	int start;
- 	char *src_bitmap, *dst_bitmap;
-+	unsigned char *bitmap;
- 	unsigned int bitmap_size;
+@@ -1700,13 +1700,12 @@ static inline void check_seg_range(struct f2fs_sb_info *sbi, unsigned int segno)
+ 	ASSERT(segno <= end_segno);
+ }
  
- 	sit_i = malloc(sizeof(struct sit_info));
-@@ -1420,13 +1421,19 @@ int build_sit_info(struct f2fs_sb_info *sbi)
- 		goto free_sit_info;
- 	}
+-void get_current_sit_page(struct f2fs_sb_info *sbi,
+-			unsigned int segno, struct f2fs_sit_block *sit_blk)
++static inline block_t current_sit_addr(struct f2fs_sb_info *sbi,
++						unsigned int segno)
+ {
+ 	struct sit_info *sit_i = SIT_I(sbi);
+ 	unsigned int offset = SIT_BLOCK_OFFSET(sit_i, segno);
+ 	block_t blk_addr = sit_i->sit_base_addr + offset;
+-	int ret;
  
-+	bitmap_size = TOTAL_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE;
+ 	check_seg_range(sbi, segno);
+ 
+@@ -1714,24 +1713,23 @@ void get_current_sit_page(struct f2fs_sb_info *sbi,
+ 	if (f2fs_test_bit(offset, sit_i->sit_bitmap))
+ 		blk_addr += sit_i->sit_blocks;
+ 
+-	ret = dev_read_block(sit_blk, blk_addr);
+-	ASSERT(ret >= 0);
++	return blk_addr;
+ }
+ 
+-void rewrite_current_sit_page(struct f2fs_sb_info *sbi,
++void get_current_sit_page(struct f2fs_sb_info *sbi,
+ 			unsigned int segno, struct f2fs_sit_block *sit_blk)
+ {
+-	struct sit_info *sit_i = SIT_I(sbi);
+-	unsigned int offset = SIT_BLOCK_OFFSET(sit_i, segno);
+-	block_t blk_addr = sit_i->sit_base_addr + offset;
+-	int ret;
++	block_t blk_addr = current_sit_addr(sbi, segno);
+ 
+-	/* calculate sit block address */
+-	if (f2fs_test_bit(offset, sit_i->sit_bitmap))
+-		blk_addr += sit_i->sit_blocks;
++	ASSERT(dev_read_block(sit_blk, blk_addr) >= 0);
++}
+ 
+-	ret = dev_write_block(sit_blk, blk_addr);
+-	ASSERT(ret >= 0);
++void rewrite_current_sit_page(struct f2fs_sb_info *sbi,
++			unsigned int segno, struct f2fs_sit_block *sit_blk)
++{
++	block_t blk_addr = current_sit_addr(sbi, segno);
 +
-+	sit_i->bitmap = calloc(bitmap_size, 1);
-+	if (!sit_i->bitmap) {
-+		MSG(1, "\tError: Calloc failed for build_sit_info!!\n");
-+		goto free_sentries;
-+	}
-+
-+	bitmap = sit_i->bitmap;
-+
- 	for (start = 0; start < TOTAL_SEGS(sbi); start++) {
--		sit_i->sentries[start].cur_valid_map
--			= calloc(SIT_VBLOCK_MAP_SIZE, 1);
--		if (!sit_i->sentries[start].cur_valid_map) {
--			MSG(1, "\tError: Calloc failed for build_sit_info!!\n");
--			goto free_validity_maps;
--		}
-+		sit_i->sentries[start].cur_valid_map = bitmap;
-+		bitmap += SIT_VBLOCK_MAP_SIZE;
- 	}
++	ASSERT(dev_write_block(sit_blk, blk_addr) >= 0);
+ }
  
- 	sit_segs = get_sb(segment_count_sit) >> 1;
-@@ -1452,10 +1459,9 @@ int build_sit_info(struct f2fs_sb_info *sbi)
- 	return 0;
- 
- free_validity_maps:
--	for (--start ; start >= 0; --start)
--		free(sit_i->sentries[start].cur_valid_map);
-+	free(sit_i->bitmap);
-+free_sentries:
- 	free(sit_i->sentries);
--
- free_sit_info:
- 	free(sit_i);
- 
-@@ -2913,9 +2919,7 @@ void f2fs_do_umount(struct f2fs_sb_info *sbi)
- 	free(sbi->nm_info);
- 
- 	/* free sit_info */
--	for (i = 0; i < TOTAL_SEGS(sbi); i++)
--		free(sit_i->sentries[i].cur_valid_map);
--
-+	free(sit_i->bitmap);
- 	free(sit_i->sit_bitmap);
- 	free(sit_i->sentries);
- 	free(sm_i->sit_info);
+ void check_block_count(struct f2fs_sb_info *sbi,
 -- 
 2.18.0.rc1
 
