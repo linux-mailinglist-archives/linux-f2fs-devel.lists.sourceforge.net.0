@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 935D28AAC6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2019 00:54:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3689D8AAE0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2019 00:59:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hxJCZ-00062A-By; Mon, 12 Aug 2019 22:54:07 +0000
+	id 1hxJHK-00083A-OY; Mon, 12 Aug 2019 22:59:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hxJCY-00061w-4L
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:54:06 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hxJHJ-00082o-34
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:59:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zrLtMIyG2Rrv+HaxtTaWYj3euSV46awiDu0dGEuHYHQ=; b=FkKAsh+LBEO3w+rDDbD4PYpbVf
- Kd0nuZWa+FA5EBTdpgsKfBtB+ABrHLjzzHt0wVjsRIVMWKlYf7O2Jjg0G/wVxOODUZPiCwDI/07OR
- SrcQ41X8JUrnqNn0BMbuo+tq4pb2Ooh8ADRY8h8ffKM1m4N0ChseqLKmnfPQ3WHlQxto=;
+ bh=hK9vNLGU8e4a6MF3S6Rujx/7CaaHA90NTgESYSahhrM=; b=HSCMonqMBSawATpd6Mkw6GE+tF
+ 7fEfZJmtAL+PNB1yygVYeHrKZZsskzZaWALq3hzYqmTtf8DCk/v7lws7uHxOlgjFY8/7QzfGzfTsE
+ x6z9y1MdSTbXPnwBKbidfzVkPq9CCFti/ZAdmJ9h5IcYqTHswKoK2n+cdOB9jaAB9Yw0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,40 +29,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zrLtMIyG2Rrv+HaxtTaWYj3euSV46awiDu0dGEuHYHQ=; b=hXhxb/XSHXTXqLL+ULXFSp5CoX
- W1FpRjj560fgM7AEU0t+E9I7+bEEugPnJYAbfyVdcMfLa63FeJ62AQ48Cgbx8wS5lYXHmalAfgm6x
- 4bpIbIcixpc4lzd207jvGKAAa98WdG0yh/cK2rPcJ/yKyxuFrnJD14/lUBWHxRYfyVCo=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=hK9vNLGU8e4a6MF3S6Rujx/7CaaHA90NTgESYSahhrM=; b=hxbsgPpoHgwTPxW+NTy6EnNEnT
+ +5xRMqJdlXS8EVZDueep9aVW9DuOQMKwsGimyMb7HcCRvmdB6sZRZ4sHEnCdpqGYBYI5KSZsrpr0b
+ pW37Oz/lTuXjpADPsFItovs/oX6RDOIKrmWE7/XfLyhvQzhw44SAqxOhFkVHUwkFahcs=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hxJCW-001Z2H-Ta
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:54:06 +0000
-Received: from callcc.thunk.org (guestnat-104-133-9-109.corp.google.com
- [104.133.9.109] (may be forged)) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x7CMrqLF021769
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Aug 2019 18:53:53 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id BD3374218EF; Mon, 12 Aug 2019 18:53:51 -0400 (EDT)
-Date: Mon, 12 Aug 2019 18:53:51 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190812225351.GG28705@mit.edu>
-References: <20190805162521.90882-1-ebiggers@kernel.org>
- <20190805162521.90882-9-ebiggers@kernel.org>
+ id 1hxJHG-003Hgm-Kq
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:59:01 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4DC06206A2;
+ Mon, 12 Aug 2019 22:58:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1565650731;
+ bh=Ron4sxTEpdo3+tpd+CjwxdTV+/gJhLyorORoDwJgP+Y=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=paZ4tvByJADBX3s27FaJRrB5Ej2g8FmLvUxijggpEnAqzN/w4/EHi3nLjltk5O7ac
+ 34S/LLZzrFMatbOCPVVfEvQgfRT0oOd/9Da1W1dmXXDYBmTco5QM2ITb/lKh7b5/ZQ
+ XZ0B4OmQnZ1PxsCIS/KHU9xEfZS0QCiia6NLmDPM=
+Date: Mon, 12 Aug 2019 15:58:49 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190812225848.GA175194@gmail.com>
+Mail-Followup-To: Chao Yu <yuchao0@huawei.com>,
+ linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20190811213557.1970-1-ebiggers@kernel.org>
+ <20190811213557.1970-4-ebiggers@kernel.org>
+ <e5d57ee4-f022-12ca-7f09-e4b8ef86c6b6@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190805162521.90882-9-ebiggers@kernel.org>
+In-Reply-To: <e5d57ee4-f022-12ca-7f09-e4b8ef86c6b6@huawei.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 3.0 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 3.1 FSL_HELO_FAKE          No description available.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hxJCW-001Z2H-Ta
-Subject: Re: [f2fs-dev] [PATCH v8 08/20] fscrypt: rename keyinfo.c to
- keysetup.c
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1hxJHG-003Hgm-Kq
+Subject: Re: [f2fs-dev] [PATCH 3/6] f2fs: skip truncate when verity in
+ progress in ->write_begin()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,28 +89,64 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyat@google.com>, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 05, 2019 at 09:25:09AM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+Hi Chao,
+
+On Mon, Aug 12, 2019 at 08:25:33PM +0800, Chao Yu wrote:
+> Hi Eric,
 > 
-> Rename keyinfo.c to keysetup.c since this better describes what the file
-> does (sets up the key), and it matches the new file keysetup_v1.c.
+> On 2019/8/12 5:35, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > When an error (e.g. ENOSPC) occurs during f2fs_write_begin() when called
+> > from f2fs_write_merkle_tree_block(), skip truncating the file.  i_size
+> > is not meaningful in this case, and the truncation is handled by
+> > f2fs_end_enable_verity() instead.
+> > 
+> > Fixes: 60d7bf0f790f ("f2fs: add fs-verity support")
+> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+> > ---
+> >  fs/f2fs/data.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > index 3f525f8a3a5fa..00b03fb87bd9b 100644
+> > --- a/fs/f2fs/data.c
+> > +++ b/fs/f2fs/data.c
+> > @@ -2476,7 +2476,7 @@ static void f2fs_write_failed(struct address_space *mapping, loff_t to)
+> >  	struct inode *inode = mapping->host;
+> >  	loff_t i_size = i_size_read(inode);
+> >  
+> > -	if (to > i_size) {
 > 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Maybe adding one single line comment to mention that it's redundant/unnecessary
+> truncation here is better, if I didn't misunderstand this.
+> 
+> Thanks,
+> 
+> > +	if (to > i_size && !f2fs_verity_in_progress(inode)) {
+> >  		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+> >  		down_write(&F2FS_I(inode)->i_mmap_sem);
+> >  
 
-Looks good, you can add:
+Do you mean add a comment instead of the !f2fs_verity_in_progress() check, or in
+addition to it?  ->write_begin(), ->writepages(), and ->write_end() are all
+supposed to ignore i_size when verity is in progress, so I don't think this
+particular part should be different, even if technically it's still correct to
+truncate twice.  Also, ext4 needs this check in its ->write_begin() for locking
+reasons; we should keep f2fs similar.
 
-Reviewed-by: Theodore Ts'o <tytso@mit.edu>
+How about having both a comment and the check, like:
 
+        /* In the fs-verity case, f2fs_end_enable_verity() does the truncate */
+        if (to > i_size && !f2fs_verity_in_progress(inode)) {
+
+- Eric
 
 
 _______________________________________________
