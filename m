@@ -2,67 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 585B98AA87
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2019 00:38:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FB8F8AABA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2019 00:52:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hxIxb-0000Av-VI; Mon, 12 Aug 2019 22:38:39 +0000
+	id 1hxJAy-0007kO-2e; Mon, 12 Aug 2019 22:52:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1hxIxZ-0000Ai-JT
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:38:37 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hxJAx-0007kI-76
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:52:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rpfI1909AfYKU9u6KTmt2BYImMU0DeKq7ervapu0KxI=; b=l9QUoKWOiKttA8qVYdrSkRUq8j
- BbicB4Q2ENvsyVVlwLHsrq5UfKc7aHquxnoS1+vpoxj8Uq0cArOviezw68yD6rRk404XkByV9x9K7
- mSAd9MzM0nxeCLYQL3rXoFw56vBiEUpt7SFHclS+eQuAve9szz8DxgDHXfpHmqRtiNj4=;
+ bh=EsBRCgj8xPiNfwQEIamFghoZjfLPK/XhqQqGeJWjv1U=; b=mocD3Be9IStz+jWa6+yBcfbHWE
+ d60p51KNHT/7VEsrTNmK6bbOAmYXx0Olp+EZjy4WlibJrDKTvPjm9H2P5b+XLgRW5lu08YAHdmOhw
+ /Ad8S+Kdg7q8tMobKBSfsX17nXrMs7aW2BH2NwlX7rP0sFkaCGqkDF4AqwClXXHbeybM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rpfI1909AfYKU9u6KTmt2BYImMU0DeKq7ervapu0KxI=; b=V/ZN+yysnGwm9II6FBul0RcLjU
- yW5WvwmNJgbqfldIiOZWHlJWpwI71ABClx6PqEGybBXI6vslM3praeDNax+PVk+gLyijFstkDn8OV
- lR1C9yEYoteOwPxfsQxZYHMtdRj4SgxOmalfecRjPS0Rb95KKV1BupJKgDYLi4Zs2tRo=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hxIxX-003F5Q-WB
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:38:37 +0000
-Received: from callcc.thunk.org (guestnat-104-133-9-109.corp.google.com
- [104.133.9.109] (may be forged)) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x7CMcMZY016957
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Aug 2019 18:38:24 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 227D14218EF; Mon, 12 Aug 2019 18:38:22 -0400 (EDT)
-Date: Mon, 12 Aug 2019 18:38:22 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20190812223822.GE28705@mit.edu>
-References: <20190805162521.90882-1-ebiggers@kernel.org>
- <20190805162521.90882-7-ebiggers@kernel.org>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EsBRCgj8xPiNfwQEIamFghoZjfLPK/XhqQqGeJWjv1U=; b=F
+ 4R+edLsMrB7x9euVQUOeVF77QDOulXT7rLb38c9Hw9mO8aFbrP8lJjhgdCRBblUYuGDRsT5hMk6Z+
+ pP8cPO3W5sUJoB5VtRHi0qmC6ap7G0r2Vps87spLDd+nUqd4qnB47e7zsYoZXSOo/cdee4vKX+94t
+ ycxn4ZLmev1fnQIk=;
+Received: from mail-pg1-f177.google.com ([209.85.215.177])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1hxJAw-001Ynt-1K
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Aug 2019 22:52:27 +0000
+Received: by mail-pg1-f177.google.com with SMTP id n9so43991520pgc.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Aug 2019 15:52:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EsBRCgj8xPiNfwQEIamFghoZjfLPK/XhqQqGeJWjv1U=;
+ b=doFSVmaLg7naxQOABaXVuu6dl0hZk4eoajvQ9OsInydXu+g8Pb3dGaL0bcqUjk9RTO
+ hgKYj62fF3c15lGwZ5dySNNA+RtMFFhhLrkNZI1HEg2lkY2zPuQRbSykiIhXb0V5bm2T
+ yesn2CETqddWmg5fe/SHXCWHGrU7YrzpGJHwloduluR+rWyaOBaPbtTrAAzxC/rOWD+d
+ IASmfSkvJT1U0wOF+HtmkftczVrn7dhBCa6v5TcmLUaXI6z9BgRpjDCHPpfcwilqRMvg
+ lmE2+ay8r089b66HTJsXWEiqimQzUn5qoh9e7LLCqpqo7+8boGrpfYPgiMD0jpZ/Ajnl
+ pwSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EsBRCgj8xPiNfwQEIamFghoZjfLPK/XhqQqGeJWjv1U=;
+ b=J1EXd/+SFP41Wiq63kFQAjfiDS2cHXgn9PWRg4MbkGaFUM2w5qKw9yxx7CrUKbMf4v
+ 7XeV9K6nUPoDjRMg7VuSDufycfxNnO9YhYiwex2DPQ2Y4QiaMxs0EGI4cTdfzRfLPULz
+ 2H80pytKh9G7mTuLIsIe3RREMhVWbPoP+eHIsTnnLNWJNQlfox4xjJylXoAXRH9ATffi
+ RckkV7a06NtOxsJ72YMKBEJ8MhLtRV1lB6BGzfzW8MwrXIkfUl+xuCqdHZ6zXSfw4eLf
+ +Gu8jLMr4z9eO7wfZxzdZHVa49W/LWVoif3LTJHafMOtQ1lXcZcMrdoxz5MG2856rWgW
+ F/YA==
+X-Gm-Message-State: APjAAAVUOf5W2ETLyUPwuTlJjYo00SUlb3MtnOo/kT1ptUFQMSpO4ldE
+ HVLE7zXLPymZoOISDJ56D5tFBrHLCT1Azw==
+X-Google-Smtp-Source: APXvYqwGcphskT8FTlv6+2263Y3GJEAFR4v9Re6lfDBTXTo9OicBDgGOLe+2qKu+q1xFa4ETs1ynRA==
+X-Received: by 2002:a17:90a:aa98:: with SMTP id
+ l24mr451879pjq.64.1565650339737; 
+ Mon, 12 Aug 2019 15:52:19 -0700 (PDT)
+Received: from localhost.localdomain ([165.246.149.139])
+ by smtp.gmail.com with ESMTPSA id 5sm45698246pgh.93.2019.08.12.15.52.17
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 12 Aug 2019 15:52:19 -0700 (PDT)
+From: Park Ju Hyung <qkrwngud825@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 13 Aug 2019 07:52:10 +0900
+Message-Id: <20190812225211.1737-1-qkrwngud825@gmail.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190805162521.90882-7-ebiggers@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 1.8 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.177 listed in list.dnswl.org]
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (qkrwngud825[at]gmail.com)
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hxIxX-003F5Q-WB
-Subject: Re: [f2fs-dev] [PATCH v8 06/20] fscrypt: refactor key setup code in
- preparation for v2 policies
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (qkrwngud825[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1hxJAw-001Ynt-1K
+Subject: [f2fs-dev] [PATCH 1/2] mkfs.f2fs: add "zip" to cold data types
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,44 +108,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyat@google.com>, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 05, 2019 at 09:25:07AM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Do some more refactoring of the key setup code, in preparation for
-> introducing a filesystem-level keyring and v2 encryption policies:
-> 
-> - Now that ci_inode exists, don't pass around the inode unnecessarily.
-> 
-> - Define a function setup_file_encryption_key() which handles the crypto
->   key setup given an under-construction fscrypt_info.  Don't pass the
->   fscrypt_context, since everything is in the fscrypt_info.
->   [This will be extended for v2 policies and the fs-level keyring.]
-> 
-> - Define a function fscrypt_set_derived_key() which sets the per-file
->   key, without depending on anything specific to v1 policies.
->   [This will also be used for v2 policies.]
-> 
-> - Define a function fscrypt_setup_v1_file_key() which takes the raw
->   master key, thus separating finding the key from using it.
->   [This will also be used if the key is found in the fs-level keyring.]
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+A lot of Linux users have big, cold "zip" files.
 
-Looks good, you can add:
+Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+---
+ mkfs/f2fs_format.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Reviewed-by: Theodore Ts'o <tytso@mit.edu>
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 9402619..37d82c3 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -66,6 +66,7 @@ const char *media_ext_lists[] = {
+ 	"webp",
+ 
+ 	/* archives */
++	"zip",
+ 	"jar",
+ 	"deb",
+ 	"iso",
+-- 
+2.22.0
 
-						- Ted
 
 
 _______________________________________________
