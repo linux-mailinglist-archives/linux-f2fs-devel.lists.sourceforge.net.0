@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACB368CF2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2019 11:20:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AEA08CF43
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2019 11:22:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hxpSS-0003fF-Gi; Wed, 14 Aug 2019 09:20:40 +0000
+	id 1hxpUL-0003l5-PE; Wed, 14 Aug 2019 09:22:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <qkrwngud825@gmail.com>) id 1hxpSQ-0003ez-U3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Aug 2019 09:20:38 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1hxpUK-0003kw-78
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Aug 2019 09:22:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NXYOJ+mkeZ2MjDipWZ7HUnPL3a7h6niHMKvoFbEw1jQ=; b=MiRngVvzq0MVRWMmme7b7rC2Y+
- GsxGSxLRWsBYH93hdPCQTWjr1JZjgp6rHZFWOdbJB5C8wqe7rcWAlDybfAdQawWDatG199og6s3yG
- 8JceVNOp2lSIZLsqWnz7kibffic60+5C/O6YPzfzUrcEe4D7TQCVT6q6DjV2fY+DMJSs=;
+ bh=SAr1vcmf8/odyrGaz5y9j+yYPNLhagxFitwrgIM924E=; b=A9CgjURpk6U1D1Jd/7/ZNIz0MS
+ fvo7YA2hhRsNSppfUFc5K4cXbJRgFb+kj2i5mL4MmhYZxAWSYl7hNvkPN7EnZrpQozeHDofR1aM33
+ 3v0N9iivb7+oLU7u/gMGRp8+kkvCJGzNAue9ANissDe4XoRb4iUrS1p2aLkSlc3W+Bio=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -29,59 +29,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NXYOJ+mkeZ2MjDipWZ7HUnPL3a7h6niHMKvoFbEw1jQ=; b=dhzsFnj6GYmRJDkxm0g9ohJbm2
- K1bPj/MAi8iPRVtS1cXjWRojL4gw1fnAQX24279oyTY9dkrz4Rf5Dpkah1LoVKmRxvMIMIuevs6pK
- lW4Z2lsO0mUHt+s9/jNcP4w0NriEbb2cjPm0uAq9Vz/8Bh8kg6VWmu2PDLbX7IZO9Zsc=;
-Received: from mail-ua1-f67.google.com ([209.85.222.67])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=SAr1vcmf8/odyrGaz5y9j+yYPNLhagxFitwrgIM924E=; b=amH4RaQM8wlcyXy5YH1sGVEYDR
+ wjXe326freh1SgovncN2327KhjJi3S9UKNEaNS8ohIq+3Dov+eoiA7LTmip3Y1/iu73Chr+qAjAxY
+ 8GeaI7SGGNfxlKjuCGbJONC2p4uo+Bw/ury5pKCsWNI5rJVbN5qJ3ayw6rLhZM/ZVX8E=;
+Received: from mail-ua1-f65.google.com ([209.85.222.65])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1hxpSN-003jD1-0a
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Aug 2019 09:20:38 +0000
-Received: by mail-ua1-f67.google.com with SMTP id 34so4808830uar.8
+ id 1hxpUI-003KLg-VZ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Aug 2019 09:22:36 +0000
+Received: by mail-ua1-f65.google.com with SMTP id o2so517935uae.10
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 14 Aug 2019 02:20:34 -0700 (PDT)
+ Wed, 14 Aug 2019 02:22:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NXYOJ+mkeZ2MjDipWZ7HUnPL3a7h6niHMKvoFbEw1jQ=;
- b=ahmVr8Sfnn7Hltidvby6BwHqwkep4J5DiPnN6CUmd0BpqMoHGgMTY0M4WyxS0XNPEQ
- kTsVTpnXx+4Wfkflxp/FC40U8UY8DeJzaW3eDWryEBRbfpJq5n9JsfoArhg6OTUreQ+q
- 02F0GQyq47IrSR6yKwpWY4tSPF/p0d1Qk6TE69VtkmVr1LUOjYB3RhEHl6LfderbO+IM
- jCO1FEmn0ZMscLfWPdaHh8ma2mBomtRg8AikxUbvq1oEJi22S1X0uqtHSxSjbgtaTt3E
- bGjqxGuBTSGrmdwNh7jpSh/mo2OaM84iMiPdj9Rx5NgDSGHBM/ms1rphp0GLlzc6XrCI
- xE/w==
+ :cc; bh=SAr1vcmf8/odyrGaz5y9j+yYPNLhagxFitwrgIM924E=;
+ b=OUJ8PNsrF2CyfDJGFlbj8zuXyBbvYp+8I+5kcWwq5eYEEifrEbHaGlztfNLR6KD+db
+ c5KmXVzBFX2BsK9aLZt/bFSyBfJ1rEvQ/qb29P0NsncQCgNkDlXTeH4HUCo0UV998AHG
+ dH4U1wNqgd5io8X3HDOTAFEsxs93obVEeNAbgVL/qAgyRHhDr6BVIMEl47UbdrtvqZx5
+ yodTRUmpCyTzUSDncoyVYZDXoPYlRhU8CywIqYHeToZOmdR7Az0fA5/tDqxOt9tBwfD3
+ +eAyZHFs2GeJl2Og8HCQnA7xVkIEEdcw25H2dnvbsACe6d/aot8vPZreu3LzOeo1y+qe
+ 6yeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NXYOJ+mkeZ2MjDipWZ7HUnPL3a7h6niHMKvoFbEw1jQ=;
- b=SML1V5yvMGrY2vY/1Bx1vJu1E+ncl3Qb2QjWIrZxesdNbAo0xLTNJ1KbJFOGeA16D4
- FUeIsfcm7QiZKL0fUi/qqEYoon2kR6uv1LxxTHLEeJaOIeuXxwxKJ0DkB+RgLks0tuYA
- 9znGIr0UMq39RDjo8q9Gd+WNgftuO7fLtv8LzZImM3MrEcJhZyFCCmQ+t4/VxEn57ahf
- QYZhJWyI6eWAN2+oNCRJbL0IhbumTtr9yU9wmoE9X/Nlm5S7yJUW8i5Xn/Mqvlz477b2
- WTQldQXlROTMSSDp/pgCNYxwoAVppswbh6fxmTF9DGuQ/bP8a7AT9vnQskRNmKNPWxTl
- riGw==
-X-Gm-Message-State: APjAAAXZ27OaaWLjy4uj+O75GPd4DD9/1SSAm80tj3oQ94jCAK4NexI0
- qfDp/I1ZXum3PykHIzkew9JxJBIErnQMFDmxpB0=
-X-Google-Smtp-Source: APXvYqymtqNPUc2nLV9RY8Jd+nIJmu2sFjdateBDbU11OkOqR540yAuQVKX3hsGLYXUNt2TXP7/mV8jk6Hywx50cp38=
-X-Received: by 2002:ab0:240c:: with SMTP id f12mr1047737uan.97.1565774428733; 
- Wed, 14 Aug 2019 02:20:28 -0700 (PDT)
+ bh=SAr1vcmf8/odyrGaz5y9j+yYPNLhagxFitwrgIM924E=;
+ b=gZgjyIRmHFZpJQl9vw792TZCtgjKo1HFYUf61hIzULRDs2cLFllGuxv67mkZpdxS6s
+ ynVWYFXwBJJfZFBXVUklDz+W0DOuVVEHYp6nmYrioaEcK2UqvqmLT9i+X+gHKaYpOCU7
+ aDkNjbS+sMiBxF3euL9U2+SuWgD93SF/uVmiKW3vsnrPHIop4jqUy43PU0Y1kEr+zW92
+ VHcNbr0GnIJkD8jXdiTm3FQZ4YzkfV8+1ad+qxaKn1bk642jvtnsU6ZnVKHQ1wDfkieT
+ sYuQrJR1GkivYG+vVyC5EIHJ0j2T6MlRw6PIVsKPiWZli/EI4LjIF2ybMmN74J5NkY9e
+ bsfw==
+X-Gm-Message-State: APjAAAXd4t3At6L6zu80knbGLHBgR+DT28Dx/CbQlt+ckIoLN3urHza6
+ 0vQ03VbgXO8bh38rlLRzbnvtd9OSqLLyF3DbzYg=
+X-Google-Smtp-Source: APXvYqwwD7Wde2I/B4TfdbFD276/X/5k/rT0dSj3vimz3P2EgzOL3gQewi2gMprXmYqzBxtgKlfbswmvvsWqvoJI9Tg=
+X-Received: by 2002:ab0:3359:: with SMTP id h25mr1103908uap.132.1565774548883; 
+ Wed, 14 Aug 2019 02:22:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190812225211.1737-1-qkrwngud825@gmail.com>
- <c5fbcb16-c7b2-988d-2110-8ce53a6137f6@huawei.com>
-In-Reply-To: <c5fbcb16-c7b2-988d-2110-8ce53a6137f6@huawei.com>
+ <20190812225211.1737-2-qkrwngud825@gmail.com>
+ <5761733a-ae6a-2bab-4a68-7f91823e775d@huawei.com>
+In-Reply-To: <5761733a-ae6a-2bab-4a68-7f91823e775d@huawei.com>
 From: Ju Hyung Park <qkrwngud825@gmail.com>
-Date: Wed, 14 Aug 2019 18:20:17 +0900
-Message-ID: <CAD14+f3bu8WqCE5jAqR968p=DvUqronR8QCg_EhgFD9x2PJQeA@mail.gmail.com>
+Date: Wed, 14 Aug 2019 18:22:18 +0900
+Message-ID: <CAD14+f1cTyUrj0a-vFaubR+309YUXQeSVNmOqDj9jjjbduEW3w@mail.gmail.com>
 To: Chao Yu <yuchao0@huawei.com>
 X-Spam-Score: 1.4 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  1.0 HK_RANDOM_FROM         From username looks random
  0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (qkrwngud825[at]gmail.com)
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.222.67 listed in list.dnswl.org]
+ trust [209.85.222.65 listed in list.dnswl.org]
+ -0.4 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
@@ -91,14 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.4 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.67 listed in wl.mailspike.net]
-X-Headers-End: 1hxpSN-003jD1-0a
-Subject: Re: [f2fs-dev] [PATCH 1/2] mkfs.f2fs: add "zip" to cold data types
+X-Headers-End: 1hxpUI-003KLg-VZ
+Subject: Re: [f2fs-dev] [PATCH 2/2] mkfs.f2fs: add VM disk files to hot data
+ types
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,29 +119,50 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hi Chao,
 
-On Wed, Aug 14, 2019 at 10:47 AM Chao Yu <yuchao0@huawei.com> wrote:
-> In android, as I see, most zip file is small-sized log type, and will be removed
-> after a roll-back, such as:
+You're right and Android will never use those types.
+
+But then again, what's the point of separating the list?
+I haven't encountered an Android user or an OEM that wants to
+customize this list by passing an argument to mkfs.f2fs.
+
+If an OEM want to customize this list, directly modifying the code for
+mkfs.f2fs sounds better anyways.
+
+Thanks.
+
+On Wed, Aug 14, 2019 at 10:51 AM Chao Yu <yuchao0@huawei.com> wrote:
 >
-> time1: create log1.zip
-> time2: create log2.zip
-> time3: create log3.zip
-> time4: remove log1.zip, rename log2.zip -> log1.zip; rename log3.zip ->
-> log2.zip; create log3.zip
+> On 2019/8/13 6:52, Park Ju Hyung wrote:
+> > Similar to .db files, these are randomly updated extremely frequently.
 >
-> I suggest we can keep zip type in android as warm type with IPU mode to avoid
-> fragmentation caused by small holes in cold area. In linux distro, I agreed to
-> treat zip as cold type.
-
-I actually thought your original suggestion of adding "zip" was to
-handle big zip files under /sdcard(/data/media).
-
-The one case you've mentioned will be entirely dependent on which apps
-user's using.
-In case of mine, I don't have any zip files under /data that's
-seemingly used for logs.
-
-Thanks,
+> It looks android doesn't need this, how about adding them under "#ifndef
+> WITH_ANDROID"?
+>
+> Thanks,
+>
+> >
+> > Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+> > ---
+> >  mkfs/f2fs_format.c | 5 +++++
+> >  1 file changed, 5 insertions(+)
+> >
+> > diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> > index 37d82c3..1c08e3e 100644
+> > --- a/mkfs/f2fs_format.c
+> > +++ b/mkfs/f2fs_format.c
+> > @@ -94,6 +94,11 @@ const char *media_ext_lists[] = {
+> >
+> >  const char *hot_ext_lists[] = {
+> >       "db",
+> > +
+> > +     /* Virtual machines */
+> > +     "vmdk", // VMware or VirtualBox
+> > +     "vdi", // VirtualBox
+> > +     "qcow2", // QEMU
+> >       NULL
+> >  };
+> >
+> >
 
 
 _______________________________________________
