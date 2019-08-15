@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE89B8E30B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Aug 2019 05:04:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C44A8E4E3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Aug 2019 08:24:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hy63z-0007WB-H8; Thu, 15 Aug 2019 03:04:31 +0000
+	id 1hy9B1-0003yT-K0; Thu, 15 Aug 2019 06:23:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hy63y-0007W5-Di
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 03:04:30 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hy9B0-0003yE-6g
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 06:23:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GKZ32krMdZ1ax7iLCN+81iV5rYzIPM/kf4k7cM44qQg=; b=EA2zaqBRVJ2d0ujODMz4GLCHRG
- zBFO6b2UxmCgKt+TjZZdTyGyru/v/YPEB/bBi9GsmEnG8a7bZyx8SJamtlISk7WEIvcVdNygjkpMo
- FKXwam/r2ZEqjfBF14An3T3NCiF+4pSZuPDOd0r2vAyN8WOYF9RSBm65ilExblgx3WaE=;
+ bh=L22Qnr1bGZz8tWfBG/B0A8cTth5r5mEOgMWN4Y5+VBk=; b=kAQtK5KoTeG6y/9+LzVH2DqLd8
+ jcfTqXmHG++yQBT7jGK9Ncx2i9PrrQpyhDFuA7LxHB1G4RU9BxQeCqa5TgafIEeTgnBCQUr1HDDj0
+ JMdXzO9duR2haQPlM/WigBtynNsiZSy5oYWWw8rYxBTaZyKx06eeMzS2p7sQyEiGrvSY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,34 +29,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GKZ32krMdZ1ax7iLCN+81iV5rYzIPM/kf4k7cM44qQg=; b=V2bjIrUtZPsR1zioX0zh2SFE+d
- 4HSvpbMjSOzdvPpb4t0qL7Bu0hQmOR+F9ibTpLUxMnW2WCHXCma0QXTWgCY/HUuQRxqHQ4OBEihJ+
- g8eLKPnIUPBkg61p0ZiY2oA9ZsqS10O8n7XUYcpYX8bTCoezTuBufetY3wRh17NL+s3k=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=L22Qnr1bGZz8tWfBG/B0A8cTth5r5mEOgMWN4Y5+VBk=; b=lKRAziwkYEcH3JYiGCMNlZyduA
+ tUqdX53y0HmAuZhsWdrJQT1pomt3VHmiwUVQJaPOCmRRKTh74HRD1nzjI3LR8Vr7f0BVqerFdiOij
+ 0fNDx90lHL9QXUoYt/KA4LeN6/eBn5hJ6c3TwQhiuQwoQBGjllkkEjXBUe5bfZ1d1Hsw=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hy63u-0042Ev-U9
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 03:04:30 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id B79CDAFF1B5CACDCA75A
+ id 1hy9Ax-004ZVA-TG
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 06:23:58 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 5935CD5FC3AB30AE690A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 15 Aug 2019 11:04:19 +0800 (CST)
+ Thu, 15 Aug 2019 14:23:47 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 15 Aug
- 2019 11:04:15 +0800
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 15 Aug
+ 2019 14:23:42 +0800
 To: Ju Hyung Park <qkrwngud825@gmail.com>
 References: <20190812225211.1737-1-qkrwngud825@gmail.com>
- <c5fbcb16-c7b2-988d-2110-8ce53a6137f6@huawei.com>
- <CAD14+f3bu8WqCE5jAqR968p=DvUqronR8QCg_EhgFD9x2PJQeA@mail.gmail.com>
- <aea1a700-7d31-9b39-8f30-b6acf1fd8a21@huawei.com>
- <CAD14+f0PkiuFkg04eGVJQkeeG+JjFdas6hWCc_FazGK5VQh0KA@mail.gmail.com>
+ <20190812225211.1737-2-qkrwngud825@gmail.com>
+ <5761733a-ae6a-2bab-4a68-7f91823e775d@huawei.com>
+ <CAD14+f1cTyUrj0a-vFaubR+309YUXQeSVNmOqDj9jjjbduEW3w@mail.gmail.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <a8f420d3-178b-9200-b4a6-cccf11c420db@huawei.com>
-Date: Thu, 15 Aug 2019 11:04:15 +0800
+Message-ID: <fc7813d8-83f8-1416-2df2-ba8f91b7838e@huawei.com>
+Date: Thu, 15 Aug 2019 14:23:46 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <CAD14+f0PkiuFkg04eGVJQkeeG+JjFdas6hWCc_FazGK5VQh0KA@mail.gmail.com>
+In-Reply-To: <CAD14+f1cTyUrj0a-vFaubR+309YUXQeSVNmOqDj9jjjbduEW3w@mail.gmail.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -69,8 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hy63u-0042Ev-U9
-Subject: Re: [f2fs-dev] [PATCH 1/2] mkfs.f2fs: add "zip" to cold data types
+X-Headers-End: 1hy9Ax-004ZVA-TG
+Subject: Re: [f2fs-dev] [PATCH 2/2] mkfs.f2fs: add VM disk files to hot data
+ types
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,67 +89,69 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hi Ju Hyung,
 
-On 2019/8/14 22:10, Ju Hyung Park wrote:
+On 2019/8/14 17:22, Ju Hyung Park wrote:
 > Hi Chao,
 > 
-> /data/log isn't even here.
-> I think it must be specific to EMUI.
+> You're right and Android will never use those types.
+> 
+> But then again, what's the point of separating the list?
 
-Alright, at least in EMUI, it looks not proper to me to set cold flag on zip
-file according to result of hot/cold separation investigation recently.
+I'm just thinking to use extension list space more efficiently to avoid free
+slot exhaustion.
 
-IMO, it will be more common to store large stable zip/rar file in Linux
-desktop/server or Window OS...
+And in android, let f2fs_create() always to compare nonexistent extension name
+is unneeded, right?
+
+> I haven't encountered an Android user or an OEM that wants to
+> customize this list by passing an argument to mkfs.f2fs.
+
+That sounds sad for this interface's low use frequency, except Google and
+Huawei, it looks f2fs needs more stable users first, now vendor like Huawei,
+just use default list (had upstreamed .db as hot type as default yet). :(
+
+> 
+> If an OEM want to customize this list, directly modifying the code for
+> mkfs.f2fs sounds better anyways.
+
+Yes, also we support adding/deleting extensions via sys node.
 
 Thanks,
 
 > 
 > Thanks.
 > 
-> On Wed, Aug 14, 2019 at 6:48 PM Chao Yu <yuchao0@huawei.com> wrote:
+> On Wed, Aug 14, 2019 at 10:51 AM Chao Yu <yuchao0@huawei.com> wrote:
 >>
->> Hi Ju Hyung,
+>> On 2019/8/13 6:52, Park Ju Hyung wrote:
+>>> Similar to .db files, these are randomly updated extremely frequently.
 >>
->> On 2019/8/14 17:20, Ju Hyung Park wrote:
->>> Hi Chao,
->>>
->>> On Wed, Aug 14, 2019 at 10:47 AM Chao Yu <yuchao0@huawei.com> wrote:
->>>> In android, as I see, most zip file is small-sized log type, and will be removed
->>>> after a roll-back, such as:
->>>>
->>>> time1: create log1.zip
->>>> time2: create log2.zip
->>>> time3: create log3.zip
->>>> time4: remove log1.zip, rename log2.zip -> log1.zip; rename log3.zip ->
->>>> log2.zip; create log3.zip
->>>>
->>>> I suggest we can keep zip type in android as warm type with IPU mode to avoid
->>>> fragmentation caused by small holes in cold area. In linux distro, I agreed to
->>>> treat zip as cold type.
->>>
->>> I actually thought your original suggestion of adding "zip" was to
->>> handle big zip files under /sdcard(/data/media).
->>>
->>> The one case you've mentioned will be entirely dependent on which apps
->>> user's using.
->>
->> Yeah, actually, now I didn't see much large zip file in my external storage,
->> most of them are xxxKB or xMB, some of them looks very old tho. :)
->>
->>> In case of mine, I don't have any zip files under /data that's
->>> seemingly used for logs.
->>
->> Huawei cell phone has log file with .zip/.gz type locating in /data/log/... can
->> you search that directory?
->>
->> If we relocate them into cold area, they will make holes in cold area crazily,
->> as they have small size and will be created/unlinked frequently.
+>> It looks android doesn't need this, how about adding them under "#ifndef
+>> WITH_ANDROID"?
 >>
 >> Thanks,
 >>
 >>>
->>> Thanks,
->>> .
+>>> Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+>>> ---
+>>>  mkfs/f2fs_format.c | 5 +++++
+>>>  1 file changed, 5 insertions(+)
+>>>
+>>> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+>>> index 37d82c3..1c08e3e 100644
+>>> --- a/mkfs/f2fs_format.c
+>>> +++ b/mkfs/f2fs_format.c
+>>> @@ -94,6 +94,11 @@ const char *media_ext_lists[] = {
+>>>
+>>>  const char *hot_ext_lists[] = {
+>>>       "db",
+>>> +
+>>> +     /* Virtual machines */
+>>> +     "vmdk", // VMware or VirtualBox
+>>> +     "vdi", // VirtualBox
+>>> +     "qcow2", // QEMU
+>>>       NULL
+>>>  };
+>>>
 >>>
 > .
 > 
