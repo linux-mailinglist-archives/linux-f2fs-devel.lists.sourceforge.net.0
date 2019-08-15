@@ -2,62 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CCEA8F5B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Aug 2019 22:23:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C2278F5E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Aug 2019 22:43:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hyMHG-0003uv-0U; Thu, 15 Aug 2019 20:23:18 +0000
+	id 1hyMau-000483-RO; Thu, 15 Aug 2019 20:43:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jmorris@namei.org>)
- id 1hyMHE-0003uc-6V; Thu, 15 Aug 2019 20:23:16 +0000
+ (envelope-from <gregkh@linuxfoundation.org>)
+ id 1hyMat-00047f-7g; Thu, 15 Aug 2019 20:43:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:Message-ID:
- In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2eL823Jqvx1j1kcFLhAmk6F9wnIxhnSdO5FaHYmKU8I=; b=kKdSuMeCtGJMIwqDHVdCwsoIIK
- C1ZGYmrl3fruLpQgoBRGhHR5imX44U78R5GYdn9hlV30cV/Pd78DdLKoQEGP27NSBeOVMNQJR30pL
- OFveD3Ipopk2wqfm8ECiQ8RJKDvsF+MoxXj5uGzHwHBnTzuBkFEkJ2GbDygcAcPJg/eA=;
+ bh=CwQ/0EejkrmNJB3s/c5x0QrEieuuLi6e5/NeZ6sCt6E=; b=Sg9OLSrN7lGuu2SNDeytZwpCVO
+ gb98Lae6ysK2dlYgueaDNDuHLz0osPJ72ncQbtwF45GY044tflKDIuwkNQx9Hwtlmuy1fD1VWDnrT
+ nCP6EDbIVlYqfc2pCjjEaz4906nC5BOA/3WC+B3vFnSamGvQJJzJjRstJ0RUBMOXNZso=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:Message-ID:In-Reply-To:Subject:cc:To
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2eL823Jqvx1j1kcFLhAmk6F9wnIxhnSdO5FaHYmKU8I=; b=a2fg5L5fdFC72Rua/cY3wPVh2Z
- dAMLgFqAiUvNYEbsdRRK3FM727iYPoqW6KW9m5Isp0MGuSN7Yu3SL5aIFhJn2fdw114VJd+YIisTR
- rVe+T3VYlO9/M9tlSgmFu4tNGFYPBP5JCBryq7lVoKHiP7FcwN0+Fkq8VuWrf5Zg2PFw=;
-Received: from namei.org ([65.99.196.166])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=CwQ/0EejkrmNJB3s/c5x0QrEieuuLi6e5/NeZ6sCt6E=; b=IAqYmaNBIsLazj8FsB59MTzmvq
+ YXSrhllSdbdyzMKMwJ/5NuxV5B17daQCYVfS34lCONb7zlxAqu5soCSCtILN3iHQ00vsdehOUkcYb
+ za9FWbXoPVsPsAIqaqfUmsktCLxPUpKEPLqsM0lv4hlWJCmSqi2ZN8zj5Rl6iY+yl/SI=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hyMHB-004mCm-2G; Thu, 15 Aug 2019 20:23:16 +0000
-Received: from localhost (localhost [127.0.0.1])
- by namei.org (8.14.4/8.14.4) with ESMTP id x7FJKa6b013630;
- Thu, 15 Aug 2019 19:20:36 GMT
-Date: Fri, 16 Aug 2019 05:20:36 +1000 (AEST)
-From: James Morris <jmorris@namei.org>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-In-Reply-To: <20190813084801.GA972@kroah.com>
-Message-ID: <alpine.LRH.2.21.1908160515130.12729@namei.org>
+ id 1hyMap-005ByL-84; Thu, 15 Aug 2019 20:43:35 +0000
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5BB2B2083B;
+ Thu, 15 Aug 2019 20:43:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1565901805;
+ bh=4MUbuhxyjB/Z/I0+KEuHYyPv1fvr/qroc0kojX6LQUI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=rmevilO9FFuTpF1TkeHr9rMjq0tx8UWAlZu1cW/zsMuDRMCXNIqbtamv/Bh9PWjxr
+ uMcyMcUqmrlEz/U6ipnvwnFJksubQpe8uhV+mxBP/PuZfI7m0SnpKLNF/GD9rIRrXm
+ 9i2PofIAyA1t7LZj0WwS4y+NrRc1E+LScCfI1k7c=
+Date: Thu, 15 Aug 2019 22:43:22 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: James Morris <jmorris@namei.org>
+Message-ID: <20190815204322.GB6782@kroah.com>
 References: <20190812193320.200472-1-salyzyn@android.com>
  <20190813084801.GA972@kroah.com>
-User-Agent: Alpine 2.21 (LRH 202 2017-01-01)
+ <alpine.LRH.2.21.1908160515130.12729@namei.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <alpine.LRH.2.21.1908160515130.12729@namei.org>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: namei.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hyMHB-004mCm-2G
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1hyMap-005ByL-84
 Subject: Re: [f2fs-dev] [PATCH] Add flags option to get xattr method paired
  to __vfs_getxattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -84,7 +97,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  Sage Weil <sage@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
  Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
  Hugh Dickins <hughd@google.com>,
- =?ISO-8859-15?Q?Ernesto_A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
+ Ernesto =?iso-8859-1?Q?A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
  cluster-devel@redhat.com, selinux@vger.kernel.org,
  Vyacheslav Dubeyko <slava@dubeyko.com>,
  Casey Schaufler <casey@schaufler-ca.com>, v9fs-developer@lists.sourceforge.net,
@@ -115,54 +128,59 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, 13 Aug 2019, Greg Kroah-Hartman wrote:
-
-> On Mon, Aug 12, 2019 at 12:32:49PM -0700, Mark Salyzyn wrote:
-> > --- a/include/linux/xattr.h
-> > +++ b/include/linux/xattr.h
-> > @@ -30,10 +30,10 @@ struct xattr_handler {
-> >  	const char *prefix;
-> >  	int flags;      /* fs private flags */
-> >  	bool (*list)(struct dentry *dentry);
-> > -	int (*get)(const struct xattr_handler *, struct dentry *dentry,
-> > +	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
-> >  		   struct inode *inode, const char *name, void *buffer,
-> > -		   size_t size);
-> > -	int (*set)(const struct xattr_handler *, struct dentry *dentry,
-> > +		   size_t size, int flags);
-> > +	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
-> >  		   struct inode *inode, const char *name, const void *buffer,
-> >  		   size_t size, int flags);
+On Fri, Aug 16, 2019 at 05:20:36AM +1000, James Morris wrote:
+> On Tue, 13 Aug 2019, Greg Kroah-Hartman wrote:
 > 
-> Wow, 7 arguments.  Isn't there some nice rule of thumb that says once
-> you get more then 5, a function becomes impossible to understand?
+> > On Mon, Aug 12, 2019 at 12:32:49PM -0700, Mark Salyzyn wrote:
+> > > --- a/include/linux/xattr.h
+> > > +++ b/include/linux/xattr.h
+> > > @@ -30,10 +30,10 @@ struct xattr_handler {
+> > >  	const char *prefix;
+> > >  	int flags;      /* fs private flags */
+> > >  	bool (*list)(struct dentry *dentry);
+> > > -	int (*get)(const struct xattr_handler *, struct dentry *dentry,
+> > > +	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
+> > >  		   struct inode *inode, const char *name, void *buffer,
+> > > -		   size_t size);
+> > > -	int (*set)(const struct xattr_handler *, struct dentry *dentry,
+> > > +		   size_t size, int flags);
+> > > +	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
+> > >  		   struct inode *inode, const char *name, const void *buffer,
+> > >  		   size_t size, int flags);
+> > 
+> > Wow, 7 arguments.  Isn't there some nice rule of thumb that says once
+> > you get more then 5, a function becomes impossible to understand?
+> > 
+> > Surely this could be a structure passed in here somehow, that way when
+> > you add the 8th argument in the future, you don't have to change
+> > everything yet again?  :)
+> > 
+> > I don't have anything concrete to offer as a replacement fix for this,
+> > but to me this just feels really wrong...
 > 
-> Surely this could be a structure passed in here somehow, that way when
-> you add the 8th argument in the future, you don't have to change
-> everything yet again?  :)
+> How about something like:
 > 
-> I don't have anything concrete to offer as a replacement fix for this,
-> but to me this just feels really wrong...
+> struct xattr_gs_args {
+> 	struct dentry *dentry;
+> 	struct inode *inode;
 
-How about something like:
+As he said in a later message, dentry and inode is redundant, only 1 is
+needed (dentry I think?)
 
-struct xattr_gs_args {
-	struct dentry *dentry;
-	struct inode *inode;
-	const char *name;
-	const void *buffer;
-	size_t size;
-	int flags;
-};
+> 	const char *name;
+> 	const void *buffer;
+> 	size_t size;
+> 	int flags;
+> };
+> 
+> int (*get)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+> int (*set)(const struct xattr_handler *handler, struct xattr_gs_args *args);
 
-int (*get)(const struct xattr_handler *handler, struct xattr_gs_args *args);
-int (*set)(const struct xattr_handler *handler, struct xattr_gs_args *args);
+But yes, that would be much much better.
 
+thanks,
 
--- 
-James Morris
-<jmorris@namei.org>
-
+greg k-h
 
 
 _______________________________________________
