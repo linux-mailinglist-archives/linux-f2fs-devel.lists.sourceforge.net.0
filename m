@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E478F862
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 03:20:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C57B8F865
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 03:23:42 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hyQv8-0007rf-JK; Fri, 16 Aug 2019 01:20:46 +0000
+	id 1hyQxw-0007zC-V5; Fri, 16 Aug 2019 01:23:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hyQv7-0007rT-1s
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:20:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hyQxu-0007z4-3c
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:23:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kT0Kq6K2p0+Jjx05CWKtiq5z1gmoMaHr4jKS32E6si4=; b=iCGJMVlBhn5OrZBpsbK1nf1G4Q
- +FpWOZLkDHSAAJGBYZusSsINtbQLO1ZfG/XB91Lx2CyHdLsAeZnyeEsMm0QIl0lUKANTY4wHcbfBA
- DIGdSK2aa3zZh1Y3+aZJK//h4Y0yzwxUg/+5UR94rQzE3suyLydsQVa9X3VtT34DeaP8=;
+ bh=EYdVNgeW79PDYuP8LUrGuenrMV2eVFVVQSg6uvX/qgs=; b=Yvo1z7IPGIZ2i+02KKCQI6qm70
+ pzNc7Ct8lc1vsMzJqEz23gm/gv1qaIpinFASznRKbRKUJSPISw32zRyKykniAA8nmv+wM+x8CC4uO
+ xFVAy5sZy0SrQUruJM0U0VU5Nuk3paFqkz63Hw/ItXlAEAIGxarAMnWScHgWf3sTrur8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,46 +29,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kT0Kq6K2p0+Jjx05CWKtiq5z1gmoMaHr4jKS32E6si4=; b=HRlzHoW8Ipe2BIP2CK/uj8Ux5t
- rU7YXpEJcRvGk2QXOydqAZkZRkWX+iCFKd9rqHsecqnvsOu7K+wjW70L9Ki3pSViP7bfiixGysISX
- Ebw27fZDwx5jR+SKnUS81SIas6UA0euoNTkKlTdql1MCacSEU/KywvQuaKx6Hda93HZk=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=EYdVNgeW79PDYuP8LUrGuenrMV2eVFVVQSg6uvX/qgs=; b=eeANAF4Bf8eVGUd6npxaRWBlBc
+ pNdueopPHUl31wbD/5h2D8IH/e21smKabz8an+shCCbQSm4g3273MUknoxSUFxZ0AVCoj+EiRTZV2
+ ac2hflj19VgBQF70Nk0PrX+txpQKMnwnQymG5V5pDjuTTib+3/plGEFnrA0lzcG6xEnA=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hyQuz-005MJ1-6v
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:20:44 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id A9C19166B6DF9E923170;
- Fri, 16 Aug 2019 09:20:29 +0800 (CST)
+ id 1hyQxp-007jgS-BW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:23:37 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 481E64B62475EE0BA189;
+ Fri, 16 Aug 2019 09:23:26 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 16 Aug
- 2019 09:20:25 +0800
+ (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 16 Aug
+ 2019 09:23:22 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190812114527.34613-1-yuchao0@huawei.com>
- <20190812114527.34613-2-yuchao0@huawei.com>
- <20190816010636.GB66488@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190808231108.75599-1-jaegeuk@kernel.org>
+ <20190809151253.GA93481@jaegeuk-macbookpro.roam.corp.google.com>
+ <9e3ccdf8-6280-ac8d-30b7-e89d54f5b6c9@huawei.com>
+ <20190815222127.GA60095@jaegeuk-macbookpro.roam.corp.google.com>
+ <635c9a57-da04-c215-0bd1-2e76118b99dc@huawei.com>
+ <20190816010230.GB65786@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <b5146728-e771-1c79-a8d3-bdc5f2ac67fa@huawei.com>
-Date: Fri, 16 Aug 2019 09:20:25 +0800
+Message-ID: <e577a123-c132-ec72-89d0-142f2f05ee86@huawei.com>
+Date: Fri, 16 Aug 2019 09:23:22 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190816010636.GB66488@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20190816010230.GB65786@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1hyQuz-005MJ1-6v
-Subject: Re: [f2fs-dev] [PATCH 2/4] fsck.f2fs: fix to check c.fix_on before
- repair
+X-Headers-End: 1hyQxp-007jgS-BW
+Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: check zeros in first 16MB for
+ Android
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,234 +84,135 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/8/16 9:06, Jaegeuk Kim wrote:
-> On 08/12, Chao Yu wrote:
->> We should always set c.bug_on whenever found a bug, then fix them
->> if c.fix_on is on, otherwise, some bugs won't be shown unless we
->> enable debug log.
+On 2019/8/16 9:02, Jaegeuk Kim wrote:
+> On 08/16, Chao Yu wrote:
+>> On 2019/8/16 6:21, Jaegeuk Kim wrote:
+>>> On 08/12, Chao Yu wrote:
+>>>> On 2019/8/9 23:12, Jaegeuk Kim wrote:
+>>>>> We actually don't need to issue trim on entire disk by checking first
+>>>>> blocks having zeros.
+>>>>
+>>>> In heap mode, we locate node log header to tail end of device, should we
+>>>> consider to check block contain according to heap option?
+>>>
+>>> I wanted to check F2FS metadata mainly.
 >>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  fsck/fsck.c | 137 +++++++++++++++++++++++++++++++---------------------
->>  1 file changed, 83 insertions(+), 54 deletions(-)
+>> Oh, I thought you mean main area. :P
 >>
->> diff --git a/fsck/fsck.c b/fsck/fsck.c
->> index 7eb599d..91ddd49 100644
->> --- a/fsck/fsck.c
->> +++ b/fsck/fsck.c
->> @@ -712,12 +712,13 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  	fsck_reada_node_block(sbi, le32_to_cpu(node_blk->i.i_xattr_nid));
->>  
->>  	if (fsck_chk_xattr_blk(sbi, nid,
->> -			le32_to_cpu(node_blk->i.i_xattr_nid), blk_cnt) &&
->> -			c.fix_on) {
->> -		node_blk->i.i_xattr_nid = 0;
->> -		need_fix = 1;
->> -		FIX_MSG("Remove xattr block: 0x%x, x_nid = 0x%x",
->> -				nid, le32_to_cpu(node_blk->i.i_xattr_nid));
->> +			le32_to_cpu(node_blk->i.i_xattr_nid), blk_cnt)) {
->> +		if (c.fix_on) {
->> +			node_blk->i.i_xattr_nid = 0;
->> +			need_fix = 1;
->> +			FIX_MSG("Remove xattr block: 0x%x, x_nid = 0x%x",
->> +					nid, le32_to_cpu(node_blk->i.i_xattr_nid));
->> +		}
+>>>
+>>>>
+>>>> BTW, if we changed cp_ver whenever mkfs, why should we still issue trim to
+>>>> obsolete old data in node remained in image?
+>>>
+>>> For simplicity. :P
+>>
+>> I didn't get why we can assume all metadata are zeroed if first 16MB are all zero...
+>>
+>> BTW, if first 16MB are non-zero, why not just trim F2FS metadata rather than
+>> whole area?
 > 
-> Why do we need this change?
+> Trim the entire space so that we can skip discard in runtime by the flag, right?
 
-Actually, it's not necessary, but just cleanup to keep the same style. :P
+You're right, thanks helping recall. ;)
 
 Thanks,
 
 > 
->>  	}
->>  
->>  	if (ftype == F2FS_FT_CHRDEV || ftype == F2FS_FT_BLKDEV ||
->> @@ -730,24 +731,32 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  
->>  	if (f2fs_has_extra_isize(&node_blk->i)) {
->>  		if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
->> -			if (node_blk->i.i_extra_isize >
->> -				cpu_to_le16(F2FS_TOTAL_EXTRA_ATTR_SIZE)) {
->> -				FIX_MSG("ino[0x%x] recover i_extra_isize "
->> -					"from %u to %u",
->> -					nid,
->> -					le16_to_cpu(node_blk->i.i_extra_isize),
->> -					calc_extra_isize());
->> -				node_blk->i.i_extra_isize =
->> -					cpu_to_le16(calc_extra_isize());
->> -				need_fix = 1;
->> +			unsigned int isize =
->> +				le16_to_cpu(node_blk->i.i_extra_isize);
->> +
->> +			if (isize > F2FS_TOTAL_EXTRA_ATTR_SIZE) {
->> +				ASSERT_MSG("[0x%x] wrong i_extra_isize=0x%x",
->> +						nid, isize);
->> +				if (c.fix_on) {
->> +					FIX_MSG("ino[0x%x] recover i_extra_isize "
->> +						"from %u to %u",
->> +						nid, isize,
->> +						calc_extra_isize());
->> +					node_blk->i.i_extra_isize =
->> +						cpu_to_le16(calc_extra_isize());
->> +					need_fix = 1;
->> +				}
->>  			}
->>  		} else {
->> -			FIX_MSG("ino[0x%x] remove F2FS_EXTRA_ATTR "
->> -				"flag in i_inline:%u",
->> -				nid, node_blk->i.i_inline);
->> -			/* we don't support tuning F2FS_FEATURE_EXTRA_ATTR now */
->> -			node_blk->i.i_inline &= ~F2FS_EXTRA_ATTR;
->> -			need_fix = 1;
->> +			ASSERT_MSG("[0x%x] wrong extra_attr flag", nid);
->> +			if (c.fix_on) {
->> +				FIX_MSG("ino[0x%x] remove F2FS_EXTRA_ATTR "
->> +					"flag in i_inline:%u",
->> +					nid, node_blk->i.i_inline);
->> +				/* we don't support tuning F2FS_FEATURE_EXTRA_ATTR now */
->> +				node_blk->i.i_inline &= ~F2FS_EXTRA_ATTR;
->> +				need_fix = 1;
->> +			}
->>  		}
->>  
->>  		if ((c.feature &
->> @@ -758,13 +767,17 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  
->>  			if (!inline_size ||
->>  					inline_size > MAX_INLINE_XATTR_SIZE) {
->> -				FIX_MSG("ino[0x%x] recover inline xattr size "
->> -					"from %u to %u",
->> -					nid, inline_size,
->> -					DEFAULT_INLINE_XATTR_ADDRS);
->> -				node_blk->i.i_inline_xattr_size =
->> -					cpu_to_le16(DEFAULT_INLINE_XATTR_ADDRS);
->> -				need_fix = 1;
->> +				ASSERT_MSG("[0x%x] wrong inline_xattr_size:%u",
->> +						nid, inline_size);
->> +				if (c.fix_on) {
->> +					FIX_MSG("ino[0x%x] recover inline xattr size "
->> +						"from %u to %u",
->> +						nid, inline_size,
->> +						DEFAULT_INLINE_XATTR_ADDRS);
->> +					node_blk->i.i_inline_xattr_size =
->> +						cpu_to_le16(DEFAULT_INLINE_XATTR_ADDRS);
->> +					need_fix = 1;
->> +				}
->>  			}
->>  		}
->>  	}
->> @@ -772,20 +785,28 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  
->>  	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
->>  		unsigned int inline_size = MAX_INLINE_DATA(node_blk);
->> +		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
->>  
->> -		if (le32_to_cpu(node_blk->i.i_addr[ofs]) != 0) {
->> -			/* should fix this bug all the time */
->> -			FIX_MSG("inline_data has wrong 0'th block = %x",
->> -					le32_to_cpu(node_blk->i.i_addr[ofs]));
->> -			node_blk->i.i_addr[ofs] = 0;
->> -			node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
->> -			need_fix = 1;
->> +		if (blkaddr != 0) {
->> +			ASSERT_MSG("[0x%x] wrong inline reserve blkaddr:%u",
->> +					nid, blkaddr);
->> +			if (c.fix_on) {
->> +				FIX_MSG("inline_data has wrong 0'th block = %x",
->> +								blkaddr);
->> +				node_blk->i.i_addr[ofs] = 0;
->> +				node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
->> +				need_fix = 1;
->> +			}
->>  		}
->>  		if (!i_size || i_size > inline_size) {
->> -			node_blk->i.i_size = cpu_to_le64(inline_size);
->> -			FIX_MSG("inline_data has wrong i_size %lu",
->> -						(unsigned long)i_size);
->> -			need_fix = 1;
->> +			ASSERT_MSG("[0x%x] wrong inline size:%lu",
->> +					nid, (unsigned long)i_size);
->> +			if (c.fix_on) {
->> +				node_blk->i.i_size = cpu_to_le64(inline_size);
->> +				FIX_MSG("inline_data has wrong i_size %lu",
->> +							(unsigned long)i_size);
->> +				need_fix = 1;
->> +			}
->>  		}
->>  		if (!(node_blk->i.i_inline & F2FS_DATA_EXIST)) {
->>  			char buf[MAX_INLINE_DATA(node_blk)];
->> @@ -793,9 +814,12 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  
->>  			if (memcmp(buf, inline_data_addr(node_blk),
->>  						MAX_INLINE_DATA(node_blk))) {
->> -				FIX_MSG("inline_data has DATA_EXIST");
->> -				node_blk->i.i_inline |= F2FS_DATA_EXIST;
->> -				need_fix = 1;
->> +				ASSERT_MSG("[0x%x] junk inline data", nid);
->> +				if (c.fix_on) {
->> +					FIX_MSG("inline_data has DATA_EXIST");
->> +					node_blk->i.i_inline |= F2FS_DATA_EXIST;
->> +					need_fix = 1;
->> +				}
->>  			}
->>  		}
->>  		DBG(3, "ino[0x%x] has inline data!\n", nid);
->> @@ -804,20 +828,25 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->>  	}
->>  
->>  	if ((node_blk->i.i_inline & F2FS_INLINE_DENTRY)) {
->> +		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
->> +
->>  		DBG(3, "ino[0x%x] has inline dentry!\n", nid);
->> -		if (le32_to_cpu(node_blk->i.i_addr[ofs]) != 0) {
->> -			/* should fix this bug all the time */
->> -			FIX_MSG("inline_dentry has wrong 0'th block = %x",
->> -					le32_to_cpu(node_blk->i.i_addr[ofs]));
->> -			node_blk->i.i_addr[ofs] = 0;
->> -			node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
->> -			need_fix = 1;
->> +		if (blkaddr != 0) {
->> +			ASSERT_MSG("[0x%x] wrong inline reserve blkaddr:%u",
->> +								nid, blkaddr);
->> +			if (c.fix_on) {
->> +				FIX_MSG("inline_dentry has wrong 0'th block = %x",
->> +								blkaddr);
->> +				node_blk->i.i_addr[ofs] = 0;
->> +				node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
->> +				need_fix = 1;
->> +			}
->>  		}
->>  
->>  		ret = fsck_chk_inline_dentries(sbi, node_blk, &child);
->>  		if (ret < 0) {
->> -			/* should fix this bug all the time */
->> -			need_fix = 1;
->> +			if (c.fix_on)
->> +				need_fix = 1;
->>  		}
->>  		child.state |= FSCK_INLINE_INODE;
->>  		goto check;
->> @@ -999,7 +1028,7 @@ skip_blkcnt_fix:
->>  	free(en);
->>  
->>  	if (ftype == F2FS_FT_SYMLINK && i_blocks && i_size == 0) {
->> -		DBG(1, "ino: 0x%x i_blocks: %lu with zero i_size",
->> +		ASSERT_MSG("ino: 0x%x i_blocks: %lu with zero i_size\n",
->>  						nid, (unsigned long)i_blocks);
->>  		if (c.fix_on) {
->>  			u64 i_size = i_blocks * F2FS_BLKSIZE;
->> @@ -1012,7 +1041,7 @@ skip_blkcnt_fix:
->>  	}
->>  
->>  	if (ftype == F2FS_FT_ORPHAN && i_links) {
->> -		MSG(0, "ino: 0x%x is orphan inode, but has i_links: %u",
->> +		ASSERT_MSG("ino: 0x%x is orphan inode, but has i_links: %u",
->>  				nid, i_links);
->>  		if (c.fix_on) {
->>  			node_blk->i.i_links = 0;
->> -- 
->> 2.18.0.rc1
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>>> ---
+>>>>> v2 from v1:
+>>>>>  - clean up
+>>>>>
+>>>>>  mkfs/f2fs_format_utils.c | 53 ++++++++++++++++++++++++++++++++++++++--
+>>>>>  1 file changed, 51 insertions(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/mkfs/f2fs_format_utils.c b/mkfs/f2fs_format_utils.c
+>>>>> index 8bf128c..f2d55ad 100644
+>>>>> --- a/mkfs/f2fs_format_utils.c
+>>>>> +++ b/mkfs/f2fs_format_utils.c
+>>>>> @@ -25,6 +25,7 @@
+>>>>>  #include <stdio.h>
+>>>>>  #include <unistd.h>
+>>>>>  #include <stdlib.h>
+>>>>> +#include <stdbool.h>
+>>>>>  #ifndef ANDROID_WINDOWS_HOST
+>>>>>  #include <sys/ioctl.h>
+>>>>>  #endif
+>>>>> @@ -110,13 +111,61 @@ static int trim_device(int i)
+>>>>>  	return 0;
+>>>>>  }
+>>>>>  
+>>>>> +static bool is_wiped_device(int i)
+>>>>> +{
+>>>>> +#ifdef WITH_ANDROID
+>>>>> +	struct device_info *dev = c.devices + i;
+>>>>> +	int fd = dev->fd;
+>>>>> +	char *buf, *zero_buf;
+>>>>> +	bool wiped = true;
+>>>>> +	int nblocks = 4096;	/* 16MB size */
+>>>>> +	int j;
+>>>>> +
+>>>>> +	buf = malloc(F2FS_BLKSIZE);
+>>>>> +	if (buf == NULL) {
+>>>>> +		MSG(1, "\tError: Malloc Failed for buf!!!\n");
+>>>>> +		return false;
+>>>>> +	}
+>>>>> +	zero_buf = calloc(1, F2FS_BLKSIZE);
+>>>>> +	if (zero_buf == NULL) {
+>>>>> +		MSG(1, "\tError: Calloc Failed for zero buf!!!\n");
+>>>>> +		free(buf);
+>>>>> +		return false;
+>>>>> +	}
+>>>>> +
+>>>>> +	if (lseek(fd, 0, SEEK_SET) < 0) {
+>>>>> +		free(zero_buf);
+>>>>> +		free(buf);
+>>>>> +		return false;
+>>>>> +	}
+>>>>> +
+>>>>> +	/* check first n blocks */
+>>>>> +	for (j = 0; j < nblocks; j++) {
+>>>>> +		if (read(fd, buf, F2FS_BLKSIZE) != F2FS_BLKSIZE ||
+>>>>> +				memcmp(buf, zero_buf, F2FS_BLKSIZE)) {
+>>>>> +			wiped = false;
+>>>>> +			break;
+>>>>> +		}
+>>>>> +	}
+>>>>> +	free(zero_buf);
+>>>>> +	free(buf);
+>>>>> +
+>>>>> +	if (wiped)
+>>>>> +		MSG(0, "Info: Found all zeros in first %d blocks\n", nblocks);
+>>>>> +	return wiped;
+>>>>> +#else
+>>>>> +	return false;
+>>>>> +#endif
+>>>>> +}
+>>>>> +
+>>>>>  int f2fs_trim_devices(void)
+>>>>>  {
+>>>>>  	int i;
+>>>>>  
+>>>>> -	for (i = 0; i < c.ndevs; i++)
+>>>>> -		if (trim_device(i))
+>>>>> +	for (i = 0; i < c.ndevs; i++) {
+>>>>> +		if (!is_wiped_device(i) && trim_device(i))
+>>>>>  			return -1;
+>>>>> +	}
+>>>>>  	c.trimmed = 1;
+>>>>>  	return 0;
+>>>>>  }
+>>>>>
+>>> .
+>>>
 > .
 > 
 
