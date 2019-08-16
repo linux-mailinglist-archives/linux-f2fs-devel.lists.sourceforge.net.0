@@ -2,80 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E0C88F716
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 00:39:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B1768F840
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 03:01:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hyOPL-0007zD-3h; Thu, 15 Aug 2019 22:39:47 +0000
+	id 1hyQbu-00073e-Nu; Fri, 16 Aug 2019 01:00:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1hyOPJ-0007z4-56
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 22:39:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hyQbt-00073Q-Lq
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:00:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A6hzJN/d/5+XNLsWnlYhGueD9f58B5ZY05l7yKVgPmU=; b=OiO9EPQO3YUzpzLJ1pzcsqjSRp
- lNbvfThTeS9e3LOXeMt2ZU2X0JRoD3EfTggJLi+LuUTnrxu+u+D5lHQtDGMqrFv9ePFfxmlvIHXqf
- jpm5EpBUwyhFrxWEZSLyYtyiuae1982fJLo5snm+RmNuL/9oFaVtt0ArU3CG0Tn+FkX0=;
+ bh=1va/n+PppnGl6gqgWRPeQnCSUfFCIqWgoMfeRlceab0=; b=ejRgLbXeI42aCqKwNnyo5NGAVd
+ ScKo9RqLE1U30p8LdzEEPv2vmodyrUotHDgZL5cbseuO9DQ7kwkDhVQ8UTnMES/XHEhUO3hDSE1Ki
+ 9q8grMofQigtH+5o+7S+ZIxbgqhdgYf2avgrFimH9HiAp4H3JYXc+8bzTX5ZFCQjLb1w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=A6hzJN/d/5+XNLsWnlYhGueD9f58B5ZY05l7yKVgPmU=; b=Vfy7okmqB++wPeXGo2JjOLDuEq
- 2N3qibBmUSFK448+xHaTI9d/88v8820/GB88XBazyP+KnF3S0W9T614ulJb2HKSF6BQmz3wFItgD9
- 6S5m/QrAMsPbe/RnwWcoK2zh8yjWyXLe3wZqXXe4jg08iZ4QgUPhFfvIWDtdlKkaZ5Qw=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=1va/n+PppnGl6gqgWRPeQnCSUfFCIqWgoMfeRlceab0=; b=JijyFTnUpSvbmnyveNe9fcU4hC
+ 8ls2GlNO5iBx3IJQ62fWxEtvnaJ1JWyCi5/Mxr1oHCLG6EadR2VbRnYxc35UnxwNRP6PCJaYJKx/N
+ LZsK9rtK+lE63iuE6E7ofqaelX02LEWwvrNK8XSImuMugMOBhhvXAJXM1EiGnpVe+1Qo=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hyOPF-005GZg-Ds
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Aug 2019 22:39:45 +0000
-Received: from localhost (unknown [104.132.0.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E1F9A206C2;
- Thu, 15 Aug 2019 22:39:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565908775;
- bh=XH7InoLvMitS53QBc2hhZwwXeDKuSMq5FcitF+3v5Ho=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PPpjxhrrsfBpVSUdAdbPR+/xanuXWS3EBGiQB7GcxHIwv3I5Sv2OPJey3QqS7fIhM
- VgXvptAxxQdBWp7paGUbkgue7zXvJRdTSZsMhQiWL/x9zb0JbXaQxLi18QRTtK8Lvx
- 2qMaUJQ1IiwFnNcBlB4aqXirMWphQzGrd8layBrE=
-Date: Thu, 15 Aug 2019 15:39:34 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190815223934.GB61672@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190812114527.34613-1-yuchao0@huawei.com>
+ id 1hyQbn-007igK-CG
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 01:00:53 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 6B8F961765D0D46A0E43;
+ Fri, 16 Aug 2019 09:00:40 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 16 Aug
+ 2019 09:00:37 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20190808231108.75599-1-jaegeuk@kernel.org>
+ <20190809151253.GA93481@jaegeuk-macbookpro.roam.corp.google.com>
+ <9e3ccdf8-6280-ac8d-30b7-e89d54f5b6c9@huawei.com>
+ <20190815222127.GA60095@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <635c9a57-da04-c215-0bd1-2e76118b99dc@huawei.com>
+Date: Fri, 16 Aug 2019 09:00:36 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190812114527.34613-1-yuchao0@huawei.com>
-User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20190815222127.GA60095@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1hyOPF-005GZg-Ds
-Subject: Re: [f2fs-dev] [PATCH 1/4] fsck.f2fs: fix to recover out-of-border
- inline size
+X-Headers-End: 1hyQbn-007igK-CG
+Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: check zeros in first 16MB for
+ Android
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,45 +82,125 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/12, Chao Yu wrote:
-> It tries to let fsck be noticed wrong inline size, and do the fix.
+On 2019/8/16 6:21, Jaegeuk Kim wrote:
+> On 08/12, Chao Yu wrote:
+>> On 2019/8/9 23:12, Jaegeuk Kim wrote:
+>>> We actually don't need to issue trim on entire disk by checking first
+>>> blocks having zeros.
+>>
+>> In heap mode, we locate node log header to tail end of device, should we
+>> consider to check block contain according to heap option?
 > 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fsck/fsck.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+> I wanted to check F2FS metadata mainly.
+
+Oh, I thought you mean main area. :P
+
 > 
-> diff --git a/fsck/fsck.c b/fsck/fsck.c
-> index d53317c..7eb599d 100644
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -771,6 +771,8 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  	ofs = get_extra_isize(node_blk);
->  
->  	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
-> +		unsigned int inline_size = MAX_INLINE_DATA(node_blk);
-> +
->  		if (le32_to_cpu(node_blk->i.i_addr[ofs]) != 0) {
->  			/* should fix this bug all the time */
->  			FIX_MSG("inline_data has wrong 0'th block = %x",
-> @@ -779,6 +781,12 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  			node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
->  			need_fix = 1;
->  		}
-> +		if (!i_size || i_size > inline_size) {
+>>
+>> BTW, if we changed cp_ver whenever mkfs, why should we still issue trim to
+>> obsolete old data in node remained in image?
+> 
+> For simplicity. :P
 
-i_size=0 should be fine?
+I didn't get why we can assume all metadata are zeroed if first 16MB are all zero...
 
-> +			node_blk->i.i_size = cpu_to_le64(inline_size);
-> +			FIX_MSG("inline_data has wrong i_size %lu",
-> +						(unsigned long)i_size);
-> +			need_fix = 1;
-> +		}
->  		if (!(node_blk->i.i_inline & F2FS_DATA_EXIST)) {
->  			char buf[MAX_INLINE_DATA(node_blk)];
->  			memset(buf, 0, MAX_INLINE_DATA(node_blk));
-> -- 
-> 2.18.0.rc1
+BTW, if first 16MB are non-zero, why not just trim F2FS metadata rather than
+whole area?
+
+Thanks,
+
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>> v2 from v1:
+>>>  - clean up
+>>>
+>>>  mkfs/f2fs_format_utils.c | 53 ++++++++++++++++++++++++++++++++++++++--
+>>>  1 file changed, 51 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/mkfs/f2fs_format_utils.c b/mkfs/f2fs_format_utils.c
+>>> index 8bf128c..f2d55ad 100644
+>>> --- a/mkfs/f2fs_format_utils.c
+>>> +++ b/mkfs/f2fs_format_utils.c
+>>> @@ -25,6 +25,7 @@
+>>>  #include <stdio.h>
+>>>  #include <unistd.h>
+>>>  #include <stdlib.h>
+>>> +#include <stdbool.h>
+>>>  #ifndef ANDROID_WINDOWS_HOST
+>>>  #include <sys/ioctl.h>
+>>>  #endif
+>>> @@ -110,13 +111,61 @@ static int trim_device(int i)
+>>>  	return 0;
+>>>  }
+>>>  
+>>> +static bool is_wiped_device(int i)
+>>> +{
+>>> +#ifdef WITH_ANDROID
+>>> +	struct device_info *dev = c.devices + i;
+>>> +	int fd = dev->fd;
+>>> +	char *buf, *zero_buf;
+>>> +	bool wiped = true;
+>>> +	int nblocks = 4096;	/* 16MB size */
+>>> +	int j;
+>>> +
+>>> +	buf = malloc(F2FS_BLKSIZE);
+>>> +	if (buf == NULL) {
+>>> +		MSG(1, "\tError: Malloc Failed for buf!!!\n");
+>>> +		return false;
+>>> +	}
+>>> +	zero_buf = calloc(1, F2FS_BLKSIZE);
+>>> +	if (zero_buf == NULL) {
+>>> +		MSG(1, "\tError: Calloc Failed for zero buf!!!\n");
+>>> +		free(buf);
+>>> +		return false;
+>>> +	}
+>>> +
+>>> +	if (lseek(fd, 0, SEEK_SET) < 0) {
+>>> +		free(zero_buf);
+>>> +		free(buf);
+>>> +		return false;
+>>> +	}
+>>> +
+>>> +	/* check first n blocks */
+>>> +	for (j = 0; j < nblocks; j++) {
+>>> +		if (read(fd, buf, F2FS_BLKSIZE) != F2FS_BLKSIZE ||
+>>> +				memcmp(buf, zero_buf, F2FS_BLKSIZE)) {
+>>> +			wiped = false;
+>>> +			break;
+>>> +		}
+>>> +	}
+>>> +	free(zero_buf);
+>>> +	free(buf);
+>>> +
+>>> +	if (wiped)
+>>> +		MSG(0, "Info: Found all zeros in first %d blocks\n", nblocks);
+>>> +	return wiped;
+>>> +#else
+>>> +	return false;
+>>> +#endif
+>>> +}
+>>> +
+>>>  int f2fs_trim_devices(void)
+>>>  {
+>>>  	int i;
+>>>  
+>>> -	for (i = 0; i < c.ndevs; i++)
+>>> -		if (trim_device(i))
+>>> +	for (i = 0; i < c.ndevs; i++) {
+>>> +		if (!is_wiped_device(i) && trim_device(i))
+>>>  			return -1;
+>>> +	}
+>>>  	c.trimmed = 1;
+>>>  	return 0;
+>>>  }
+>>>
+> .
+> 
 
 
 _______________________________________________
