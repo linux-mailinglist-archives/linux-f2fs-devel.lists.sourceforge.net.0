@@ -2,60 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 223838FA8C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 07:56:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33FAD8FA8B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Aug 2019 07:56:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hyVEP-0000ci-RD; Fri, 16 Aug 2019 05:56:57 +0000
+	id 1hyVEJ-0002GW-5F; Fri, 16 Aug 2019 05:56:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1hyVEO-0000cR-Ph
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 05:56:56 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1hyVEI-0002GP-AC
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 05:56:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y1gjkw6tPJFwk3U5ZzCQHJwUgMfaG/bb3IZCEdyAEhY=; b=LuAHIAAYiVulxa+Z2LQh4O8LC9
- 6NzYbPk9+yXYAy+s0vs1Q3ae7Wmw6seZHsT+tMsuGTVU1AUogHzeXTOe9fRtFwMjn2HDgKCJnTw7c
- FLxCkes8YpQVmh/Pty0tZAjD4KWRwb1Nbn6QxEk41MNXbB3oytURIRwAx1AYJk8STkVk=;
+ bh=JjuURzPCN38irn/PVSTdROCE+Fuyt8hvQwWUhSnEHo0=; b=lYb8uLdFxqvrRkPmGFeJK97w87
+ lW9/4Si/dlkFcGf+Bt8Kpv47sboL+kxW/wUJax0y6etlEMBoCNIuJP7DLQlowNud+oHd7kIi7yrPG
+ SeWHlq1otcwdcSUHiqMdek7nz3eZw3+pk6z+Gz/TGGlgoISC2mgBCslIPLz+krqRjR5Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
- Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Y1gjkw6tPJFwk3U5ZzCQHJwUgMfaG/bb3IZCEdyAEhY=; b=f
- nnt6hez3d91OPwwARaF+K4fVmng/tmhliGVRbMBLcRGY7QXDPQ/3DvQ0xITq0QRa06Aah2bkhCwNx
- wxeSVAmJvs8jABHOx94kPey0RMLyqUxc7kpT8mPd2QoZ8y31MrvWch5uzryRrQFO8icrgzNzGOEQw
- Ufd6YgE/h1E9gplk=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JjuURzPCN38irn/PVSTdROCE+Fuyt8hvQwWUhSnEHo0=; b=GPHznl6+RJUw54YsuKuOIfqVf5
+ IHJrgD3SjDKFDBvUnlwoaz/To8LWAsss4CDrgy8n+f681N05sGJ/wtfjrHQumX806YR7/Ij0ZUExO
+ OaxXdi9ckmS9OKGnMQ4UqFxV26H1FYmYSp661G2ppvG+NwLefA+p+rbDVXy4Gw4JVWW0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hyVEE-005XTH-Ox
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 05:56:56 +0000
+ id 1hyVEG-007xJe-BO
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Aug 2019 05:56:50 +0000
 Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
  [24.5.143.220])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0373520644
+ by mail.kernel.org (Postfix) with ESMTPSA id B5C312064A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 16 Aug 2019 05:56:40 +0000 (UTC)
+ Fri, 16 Aug 2019 05:56:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1565935001;
- bh=h/c1tbLABiIIFnhxnUUwUSPbxMDGcE66LQMBIfWv2CE=;
- h=From:To:Subject:Date:From;
- b=DZkH7PvklU7TPZv1s8Ke1GR6n5RFwP9+WJtOvBao76z6sJHCwPVDDjepLLeBsaoG1
- g28WuLJH+rAj9wnu2nLOS04QCrF7qWfmtQhnMqMFvTXo4oFj1B63OiC9ckgmH7VQvs
- 5ihxTbqDmljpqUJG3E0FS0deP44bqogP7uqswOn4=
+ s=default; t=1565935002;
+ bh=l/GbltjBRn9pVcB/bU3jK0Y2TdVWlgpp24wjDO2j0OI=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=biE0xC2DufQvp3+NAwIO5w4jW0akOURNoBybKUbt8akk9FDoEeIVz+QsBpcLYGo/k
+ aav1Wb0WuMVLtXB0jYq5ojYh9akc47wQNZp5rfEYcJ+aWWGLKDvxERanrdeTmMfBa4
+ PZo8krkNdmROGXURgAqFFauI+kUd//d1oQXx4puc=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 15 Aug 2019 22:55:36 -0700
-Message-Id: <20190816055539.30420-1-ebiggers@kernel.org>
+Date: Thu, 15 Aug 2019 22:55:37 -0700
+Message-Id: <20190816055539.30420-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <20190816055539.30420-1-ebiggers@kernel.org>
+References: <20190816055539.30420-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -68,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hyVEE-005XTH-Ox
-Subject: [f2fs-dev] [PATCH 0/3] f2fs: fixes for FS_IOC_{GET,SET}FSLABEL
+X-Headers-End: 1hyVEG-007xJe-BO
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: fix buffer overruns in FS_IOC_{GET,
+ SET}FSLABEL
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,17 +88,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Fix some bugs in the f2fs implementation of the FS_IOC_GETFSLABEL and
-FS_IOC_SETFSLABEL ioctls.
+From: Eric Biggers <ebiggers@google.com>
 
-Eric Biggers (3):
-  f2fs: fix buffer overruns in FS_IOC_{GET,SET}FSLABEL
-  f2fs: fix copying too many bytes in FS_IOC_SETFSLABEL
-  f2fs: add missing authorization check in FS_IOC_SETFSLABEL
+utf16s_to_utf8s() and utf8s_to_utf16s() take the number of characters,
+not the number of bytes.
 
- fs/f2fs/file.c | 27 +++++++++------------------
- 1 file changed, 9 insertions(+), 18 deletions(-)
+Fixes: 61a3da4d5ef8 ("f2fs: support FS_IOC_{GET,SET}FSLABEL")
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/file.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index eb1aa9b75eda..d521a582d94d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3094,7 +3094,7 @@ static int f2fs_get_volume_name(struct file *filp, unsigned long arg)
+ 
+ 	down_read(&sbi->sb_lock);
+ 	count = utf16s_to_utf8s(sbi->raw_super->volume_name,
+-			sizeof(sbi->raw_super->volume_name),
++			ARRAY_SIZE(sbi->raw_super->volume_name),
+ 			UTF16_LITTLE_ENDIAN, vbuf, MAX_VOLUME_NAME);
+ 	up_read(&sbi->sb_lock);
+ 
+@@ -3139,7 +3139,7 @@ static int f2fs_set_volume_name(struct file *filp, unsigned long arg)
+ 			sizeof(sbi->raw_super->volume_name));
+ 	utf8s_to_utf16s(vbuf, MAX_VOLUME_NAME, UTF16_LITTLE_ENDIAN,
+ 			sbi->raw_super->volume_name,
+-			sizeof(sbi->raw_super->volume_name));
++			ARRAY_SIZE(sbi->raw_super->volume_name));
+ 
+ 	err = f2fs_commit_super(sbi, false);
+ 
 -- 
 2.22.0
 
