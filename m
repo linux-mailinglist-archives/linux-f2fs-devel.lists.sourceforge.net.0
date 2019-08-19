@@ -2,68 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78E1891D13
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 08:30:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C44491EED
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 10:30:49 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hzbBW-00024c-5L; Mon, 19 Aug 2019 06:30:30 +0000
+	id 1hzd3t-0007VX-1v; Mon, 19 Aug 2019 08:30:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hzbBT-00024U-Im
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 06:30:27 +0000
+ (envelope-from <prvs=127c8b87f=shinichiro.kawasaki@wdc.com>)
+ id 1hzd3r-0007VQ-DW
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 08:30:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p21ypM+5BNSWS4TrNryo7BPOzVcumu8IQdA+Go1fRPM=; b=ZskeIbAr6lXt5M89v6Zk4Pn8sc
- eCHOXxqAKYmEBt9edTJ+NVFk9gKzPxSmX5H+POwcrptR9HlcxLkC6onhRT8oGsHpK3AD0md10dkzJ
- qKHWVkfhQ8CWEEoBuVh+Bpm+iLJdKGiW23eA3JeLuK6ms8lZtXB1258sV+zhXOQkIahA=;
+ bh=2VAN8nj6Op59/o9BBOZGvD64L4OrjcM5RCj83YUqNFs=; b=WwglPWpzMgWL6FWgeCjrt9KQzm
+ rKvXmSfUUAQueimjlgczpWSwWWIwhzox7Akg7yZxrQ+duHp+eH/sdlGqTwfX1MMglA9/YJ1cYQq/1
+ 3UpC02zZgYRIOdbnhRpZompdo6rrXei8jo1ySGVYvhbK6y/B+tbS44PC3CkAiZYzcOpo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=p21ypM+5BNSWS4TrNryo7BPOzVcumu8IQdA+Go1fRPM=; b=F+DXK065wmWSpK8sqFo9ewdF5i
- BoZPLuymnZ/pP4njOFNjdT9o9jOrGvZNEn1GGjp/r1KUlKn+aU4g7n8VgaKU5l3KvQ3nZkr8ZDwZ5
- lLXh2hZ6vt2+4/NWIqHkO/psKTrY3CXRrlP/buT3WFiHENHafqirJYasD5oBKICs0+Ac=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=2VAN8nj6Op59/o9BBOZGvD64L4OrjcM5RCj83YUqNFs=; b=L
+ htFI0s6bsmcqBl8qGm9U/x4Iu8guaklTvvZciLE7hHLWItAcsdczbM7vv06w/Sp+Pc2TorGR6+vlC
+ N50T2IVM5BiyUMYRlS39kjoNRlCwDxLFr5pAs5qOMAnAbGqJh3N3DiR3c395DinAgiXrpeVGCZOpp
+ qyKIpia9LHBKiDjU=;
+Received: from esa2.hgst.iphmx.com ([68.232.143.124])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hzbBR-007x3K-Fi
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 06:30:27 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 434CF35303F54581EDF2;
- Mon, 19 Aug 2019 14:30:17 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 19 Aug
- 2019 14:30:13 +0800
-To: <jaegeuk@kernel.org>
-References: <20190816030334.81035-1-yuchao0@huawei.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <3349ceea-85ac-173a-81a4-1188ce3804ca@huawei.com>
-Date: Mon, 19 Aug 2019 14:30:12 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1hzd3p-008W8j-HQ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 08:30:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1566203457; x=1597739457;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=C8LVN5orpWAg/Anfq4yBRnD6DhO2H0WjYSjwwwG6Xns=;
+ b=arzhaYuiSilUk9fv/DF6vLTPbicDznnCFAHJ9PQQkFMQArCPcGBpaRlr
+ YjW9bWg2rrmYsg7pEOCw6OMO3GZ0/FkskSEiUAsw46sGRey9m/nSoEt2b
+ cgiPK4fka5bWO1twCy1TSoC14wWvef+WRqy9zvHnA2zvEBh1pyAPNOtqz
+ XEP+9s0uuIjgt4nfwP2kcs3eJs7i5SQOOKV62k1wUaYEGsn2fa/qzw1p6
+ Q48i47SZbMiINBOzOIkVXsiekJVxlWTr13NnXCl0LibcW+OaGat638lLX
+ Nx8bA80q0Jf46mRmjyQ8vLpcrCmmwZB4vp579f0bMzvCODFPL+sCSIEdb Q==;
+IronPort-SDR: exWkdzIGXJ5uCJB0VMpyqzZGcW8c0eEnhBGD05wP4xjTJ9Aq43wO6Rfn/ydqbkuyn5Nsfwb9tx
+ S1RoWFOJi47jYi8ETNCuOH7k0suoyI1iegIBRbLdIehalGkK/t7wk75YNBZR4mrN9bGEEaD0XB
+ l2FXSjIGYwMTg4C3HZu2+ZDSwCLqHYDbCCaCTICVcq4bmaoDsFHWUb/3ssUgTZjSI4BxB0TzMw
+ 7T3O/RV4rYXKwNlQ2vmJZOm7m49gL7obwjXC2A6fQsSwroVl6n0H/BBob1erBQgSjqt2OPmglp
+ slY=
+X-IronPort-AV: E=Sophos;i="5.64,403,1559491200"; d="scan'208";a="216517043"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 19 Aug 2019 16:30:49 +0800
+IronPort-SDR: kGXXgKZsWSBEw13qMEU+UMyELcLCscJrJ+/DvKGhRBVib12GczbBbMqBgkl2A/yHKSVaQl88tN
+ sepeJwme59Hi6mWI8VkUUYqlUvCZBNUXuxu2P2ydN6qILl8HfWqEk06Ut7x6mqsOMeWHPg02x5
+ 665JrM2CmpglDq5S/C+SMo19eMS5wVAKLOheQTiIBaEVwjwMhf1aGRRxvHz9p/AO6PqaHlIlaI
+ kOslT49orttdMEGPLktbKUaO6WKvQBf3tLKdnVQnxH+czpeMk3rYN4KV/MsKzJ04c9oPA/eCMX
+ CP3ZMn027121nUU/AKPCtf8R
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Aug 2019 01:28:01 -0700
+IronPort-SDR: qNSI9UHdGrmV2uF+geK5K21sHsjS6pdh+dN8hrs2wjyd25hy2ucrPmjUZS+3ZYoduT6+tQR2u+
+ qB8B2t096c5rmfX6Rbyft4uqsRgO1L8fdg1K02i0IU3MP6emYVc9PAx+UtB91PJDINUQoy/aTh
+ pvaIV+lL2EJjfmoqdpQU1YJ7huRoloOmqnzCzDo44qUaDWWAy2qjqRh1KcH/K10768OStyo+b9
+ VqJM23HGnprlHeYGCDd9K2MXHQGYUkT8sYG7W0mBMGHI1ZVC1MzcNiFbVlXYs3YfobksbqJpF5
+ D+M=
+Received: from shinexp.dhcp.fujisawa.hgst.com ([10.149.53.85])
+ by uls-op-cesaip01.wdc.com with ESMTP; 19 Aug 2019 01:30:35 -0700
+From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 19 Aug 2019 17:30:30 +0900
+Message-Id: <20190819083034.18218-1-shinichiro.kawasaki@wdc.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190816030334.81035-1-yuchao0@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hzbBR-007x3K-Fi
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid data corruption by
- forbidding SSR overwrite
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1hzd3p-008W8j-HQ
+Subject: [f2fs-dev] [PATCH 0/4] fsck: Check write pointers of zoned block
+ devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,67 +105,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Damien Le Moal <Damien.LeMoal@wdc.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/8/16 11:03, Chao Yu wrote:
-> There is one case can cause data corruption.
-> 
-> - write 4k to fileA
-> - fsync fileA, 4k data is writebacked to lbaA
-> - write 4k to fileA
-> - kworker flushs 4k to lbaB; dnode contain lbaB didn't be persisted yet
-> - write 4k to fileB
-> - kworker flush 4k to lbaA due to SSR
-> - SPOR -> dnode with lbaA will be recovered, however lbaA contains fileB's
-> data
-> 
-> One solution is tracking all fsynced file's block history, and disallow
-> SSR overwrite on newly invalidated block on that file.
-> 
-> However, during recovery, no matter the dnode is flushed or fsynced, all
-> previous dnodes until last fsynced one in node chain can be recovered,
-> that means we need to record all block change in flushed dnode, which
-> will cause heavy cost, so let's just use simple fix by forbidding SSR
-> overwrite directly.
-> 
+On sudden f2fs shutdown, zoned block device status and f2fs meta data can be
+inconsistent. When f2fs shutdown happens during write operations, write pointers
+on the device go forward but the f2fs meta data does not reflect write pointer
+progress. This inconsistency will eventually cause "Unaligned write command"
+error when restarting write operation after the next mount. This error can be
+observed with xfstests test case generic/388, which enforces sudden shutdown
+during write operation and checks the file system recovery. Once the error
+happens because of the inconsistency, the file system requires fix. However,
+fsck.f2fs does not have a feature to check and fix it.
 
-Jaegeuk,
+This patch series adds a new feature to fsck.f2fs to check and fix the
+inconsistency. First and second patches add two functions which helps fsck to
+call report zone and reset zone commands to zoned block devices. Third patch
+checks write pointers of zones that current segments recorded in meta data point
+to. This covers the failure symptom observed with xfstests. The last patch
+checks write pointers of zones that current segments do not point to, which
+covers a potential failure scenario.
 
-Please help to add below missed tag to keep this patch being merged in stable
-kernel.
+This patch series depends on other patches for zoned block devices, then it
+conflicts with the master branch in f2fs-tools.git as of Aug/19/2019. It can be
+applied without conflict to dev and dev-test branch tips.
 
-Fixes: 5b6c6be2d878 ("f2fs: use SSR for warm node as well")
+Shin'ichiro Kawasaki (4):
+  libf2fs_zoned: Introduce f2fs_report_zones() helper function
+  libf2fs_zoned: Introduce f2fs_reset_zone() function
+  fsck.f2fs: Check write pointer consistency with current segments
+  fsck.f2fs: Check write pointer consistency with valid blocks count
 
-Thanks,
+ fsck/fsck.c         | 161 ++++++++++++++++++++++++++++++++++++++++++++
+ fsck/fsck.h         |   3 +
+ fsck/main.c         |   2 +
+ include/f2fs_fs.h   |   3 +
+ lib/libf2fs_zoned.c |  81 ++++++++++++++++++++++
+ 5 files changed, 250 insertions(+)
 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/segment.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 9d9d9a050d59..69b3b553ee6b 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2205,9 +2205,11 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
->  		if (!f2fs_test_and_set_bit(offset, se->discard_map))
->  			sbi->discard_blks--;
->  
-> -		/* don't overwrite by SSR to keep node chain */
-> -		if (IS_NODESEG(se->type) &&
-> -				!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
-> +		/*
-> +		 * SSR should never reuse block which is checkpointed
-> +		 * or newly invalidated.
-> +		 */
-> +		if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
->  			if (!f2fs_test_and_set_bit(offset, se->ckpt_valid_map))
->  				se->ckpt_valid_blocks++;
->  		}
-> 
+-- 
+2.21.0
+
 
 
 _______________________________________________
