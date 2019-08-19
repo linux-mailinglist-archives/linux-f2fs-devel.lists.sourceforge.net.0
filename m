@@ -2,62 +2,56 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7A4A91B73
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 05:25:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78E1891D13
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 08:30:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hzYHv-0007qA-RQ; Mon, 19 Aug 2019 03:24:55 +0000
+	id 1hzbBW-00024c-5L; Mon, 19 Aug 2019 06:30:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hzYHu-0007q1-Bj
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 03:24:54 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hzbBT-00024U-Im
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 06:30:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:CC:From:References:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pwLsVYQColRKjjToNNdiFwcBAbrGJhZpm0VgAaAy6lk=; b=RqgwN+ldHhDlojjZUr+VUUeL4K
- hwWEhFPBw0A15bhkyVc/9lBr0it/vt6OAyFqWEn8IRGS6QoKdBWB6nCEhj2knx9eW0FQCgKsCHENO
- lC/FPoWHwH1zG5cuH5S0acv/9iRveQo3eAX1KqzjUj0GLcUMOe/SAF/cvjAY2xGo1ihc=;
+ bh=p21ypM+5BNSWS4TrNryo7BPOzVcumu8IQdA+Go1fRPM=; b=ZskeIbAr6lXt5M89v6Zk4Pn8sc
+ eCHOXxqAKYmEBt9edTJ+NVFk9gKzPxSmX5H+POwcrptR9HlcxLkC6onhRT8oGsHpK3AD0md10dkzJ
+ qKHWVkfhQ8CWEEoBuVh+Bpm+iLJdKGiW23eA3JeLuK6ms8lZtXB1258sV+zhXOQkIahA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:CC:From:References:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pwLsVYQColRKjjToNNdiFwcBAbrGJhZpm0VgAaAy6lk=; b=MYixJyyXrvFPDnPxcBLbpYDLc2
- oVg1L6jkAfwoDhR45VU+8asxt0XuDqcj9nDeKMaQT9ZUO/DY1gsSuoMKr+BZFDg5sY5/n+crvDY6i
- mHCaME0GFY1lul36FwlLhfWyJPJ1FcW9YJbw9aqWs8l3FfqQQHGlF1XI+78KSttr4CU0=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ bh=p21ypM+5BNSWS4TrNryo7BPOzVcumu8IQdA+Go1fRPM=; b=F+DXK065wmWSpK8sqFo9ewdF5i
+ BoZPLuymnZ/pP4njOFNjdT9o9jOrGvZNEn1GGjp/r1KUlKn+aU4g7n8VgaKU5l3KvQ3nZkr8ZDwZ5
+ lLXh2hZ6vt2+4/NWIqHkO/psKTrY3CXRrlP/buT3WFiHENHafqirJYasD5oBKICs0+Ac=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hzYHr-007pmE-HE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 03:24:54 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 4D37C695DE7C59D35AA4;
- Mon, 19 Aug 2019 11:24:43 +0800 (CST)
+ id 1hzbBR-007x3K-Fi
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 06:30:27 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 434CF35303F54581EDF2;
+ Mon, 19 Aug 2019 14:30:17 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 19 Aug
- 2019 11:24:41 +0800
-To: Eric Biggers <ebiggers@kernel.org>
-References: <20190816055539.30420-1-ebiggers@kernel.org>
- <20190816055539.30420-3-ebiggers@kernel.org>
- <d6022f8b-2d75-4e9d-882e-038551684c37@huawei.com>
- <20190818154138.GA1118@sol.localdomain>
- <3f3fa304-2ce0-7773-7335-30f8e3c5b5d5@huawei.com>
- <808dc7d9-01c3-7883-431a-8f3532adec09@huawei.com>
- <20190819025545.GA1223@zzz.localdomain>
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 19 Aug
+ 2019 14:30:13 +0800
+To: <jaegeuk@kernel.org>
+References: <20190816030334.81035-1-yuchao0@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <02e2590d-a3f9-7d7b-c43a-e9bda1bee455@huawei.com>
-Date: Mon, 19 Aug 2019 11:24:41 +0800
+Message-ID: <3349ceea-85ac-173a-81a4-1188ce3804ca@huawei.com>
+Date: Mon, 19 Aug 2019 14:30:12 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20190819025545.GA1223@zzz.localdomain>
+In-Reply-To: <20190816030334.81035-1-yuchao0@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -67,9 +61,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hzYHr-007pmE-HE
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: fix copying too many bytes in
- FS_IOC_SETFSLABEL
+X-Headers-End: 1hzbBR-007x3K-Fi
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid data corruption by
+ forbidding SSR overwrite
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,106 +75,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/8/19 10:55, Eric Biggers wrote:
-> On Mon, Aug 19, 2019 at 09:58:30AM +0800, Chao Yu wrote:
->> On 2019/8/19 9:33, Chao Yu wrote:
->>> On 2019/8/18 23:41, Eric Biggers wrote:
->>>> On Fri, Aug 16, 2019 at 02:59:37PM +0800, Chao Yu wrote:
->>>>> On 2019/8/16 13:55, Eric Biggers wrote:
->>>>>> From: Eric Biggers <ebiggers@google.com>
->>>>>>
->>>>>> Userspace provides a null-terminated string, so don't assume that the
->>>>>> full FSLABEL_MAX bytes can always be copied.>
->>>>>> Fixes: 61a3da4d5ef8 ("f2fs: support FS_IOC_{GET,SET}FSLABEL")
->>>>>
->>>>> It may only copy redundant zero bytes, and will not hit security issue, it
->>>>> doesn't look like a bug fix?
->>>>>
->>>>>> Signed-off-by: Eric Biggers <ebiggers@google.com>
->>>>>
->>>>> Anyway, it makes sense to me.
->>>>>
->>>>> Reviewed-by: Chao Yu <yuchao0@huawei.com>
->>>>>
->>>>
->>>> It's not clear that userspace is guaranteed to provide a full FSLABEL_MAX bytes
->>>> in the buffer.  E.g. it could provide "foo\0" followed by an unmapped page.
->>>
->>> You're right, thanks for your explanation.
->>
->> One more question, there is no validation check on length of user passed buffer,
->>
->> So in most ioctl interfaces, user can pass a buffer which has less size than we
->> defined intentionally/unintentionally.
->>
->> E.g.
->>
->> user space:
->>
->> struct f2fs_defragment_user {
->> 	unsigned long long start;
->> //	unsigned long long len;
->> };
->>
->> main()
->> {
->> 	struct f2fs_defragment_user *df;
->>
->> 	df = malloc();
->> 	
->> 	ioctl(fd, F2FS_IOC_DEFRAGMENT, df);
->> }
->>
->> kernel:
->>
->> f2fs_ioc_defragment()
->> {
->> ...
->> 	if (copy_from_user(&range, (struct f2fs_defragment __user *)arg,
->> 							sizeof(range)))
->> 		return -EFAULT;
->> }
->>
->> Is that a common issue?
->>
+On 2019/8/16 11:03, Chao Yu wrote:
+> There is one case can cause data corruption.
 > 
-> No, but that's different because that only involves a fixed-length struct.
+> - write 4k to fileA
+> - fsync fileA, 4k data is writebacked to lbaA
+> - write 4k to fileA
+> - kworker flushs 4k to lbaB; dnode contain lbaB didn't be persisted yet
+> - write 4k to fileB
+> - kworker flush 4k to lbaA due to SSR
+> - SPOR -> dnode with lbaA will be recovered, however lbaA contains fileB's
+> data
 > 
-> My concern was that since FS_IOC_SETFSLABEL takes in a string, users might do:
+> One solution is tracking all fsynced file's block history, and disallow
+> SSR overwrite on newly invalidated block on that file.
 > 
-> 	ioctl(fd, FS_IOC_SETFSLABEL, "foo");
+> However, during recovery, no matter the dnode is flushed or fsynced, all
+> previous dnodes until last fsynced one in node chain can be recovered,
+> that means we need to record all block change in flushed dnode, which
+> will cause heavy cost, so let's just use simple fix by forbidding SSR
+> overwrite directly.
+> 
 
-Yes, I can understand your concern, since in this case, user's behavior is normal.
+Jaegeuk,
 
-But what I'm trying to say is, from the result aspect, when user pass a buffer
-which has less size intentionally/unintentionally (even kernel defines a
-fix-sized struture, but there is no rules that users can not reconstruct it or
-change its size as their wish), kernel may access unmapped page follows to
-user's buffer potentially. It needs to be fixed if that's a real problem.
+Please help to add below missed tag to keep this patch being merged in stable
+kernel.
+
+Fixes: 5b6c6be2d878 ("f2fs: use SSR for warm node as well")
 
 Thanks,
 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/segment.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 > 
-> Rather than:
-> 
-> 	char label[FSLABEL_MAX] = "foo";
-> 
-> 	ioctl(fd, FS_IOC_SETFSLABEL, label);
-> 
-> At least that's how I understand the ioctl; AFAICS it does not have a man page,
-> so I'm not sure what was intended.  Assuming the buffer is always FSLABEL_MAX
-> bytes seems like a really bad idea though, since if users pass a conventional
-> string (as is the natural thing to do; open() doesn't require a buffer of length
-> PATH_MAX, for example...) it will succeed/fail at random depending on whether
-> the following page is mapped or not.
-> 
-> - Eric
-> .
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 9d9d9a050d59..69b3b553ee6b 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2205,9 +2205,11 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
+>  		if (!f2fs_test_and_set_bit(offset, se->discard_map))
+>  			sbi->discard_blks--;
+>  
+> -		/* don't overwrite by SSR to keep node chain */
+> -		if (IS_NODESEG(se->type) &&
+> -				!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+> +		/*
+> +		 * SSR should never reuse block which is checkpointed
+> +		 * or newly invalidated.
+> +		 */
+> +		if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+>  			if (!f2fs_test_and_set_bit(offset, se->ckpt_valid_map))
+>  				se->ckpt_valid_blocks++;
+>  		}
 > 
 
 
