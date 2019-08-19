@@ -2,100 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 218BC91EEE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 10:30:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA0809250B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 15:32:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hzd3x-0003qo-RI; Mon, 19 Aug 2019 08:30:49 +0000
+	id 1hzhlT-0000Dh-UC; Mon, 19 Aug 2019 13:32:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=127c8b87f=shinichiro.kawasaki@wdc.com>)
- id 1hzd3w-0003qf-8Z
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 08:30:48 +0000
+ (envelope-from <chandan@linux.ibm.com>) id 1hzhlS-0000DO-1v
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 13:32:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Message-Id:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iHxQdovTj2CHBqmGTZW0ZX4uOUCcilu4K16MehxNcUg=; b=EDdUxvq7uEyq10MjBBfpfC+NKi
- 8cXZq3pv9SVFCOXg83wssZEwC+0U0tMqFymTMIIb5h6rohAkY3ZEUlIloI6fw5y+EgJh/IDLxJxAk
- qTS1VLoaky4OfZqCYE9tw73jLu01I6nhdcNwsZAP4K3JnGO/QOPPPa1uhZEn9IYic20Q=;
+ bh=X+0QZWsGGSUpi75JEBTjkLf/4Kv3eae4E/kzkG/Syc0=; b=AdFskC4SvkZEH6mJUwROrBdZX/
+ XxJSo00l0ehL/oB3PDBW5zVoI/UjQhwIZkXiW904JtKFTwXSBUi8hhR7fVN6phdj04Xlrxf452tsF
+ zQDq0qU/aCyAtVThZtmz/FrmwwAW3lL1RdQ8hevV/+zANCp3/IDwiy1M9/9imktMdzQE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Message-Id:Content-Type:Content-Transfer-Encoding:MIME-Version:References
+ :In-Reply-To:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iHxQdovTj2CHBqmGTZW0ZX4uOUCcilu4K16MehxNcUg=; b=BsI8qGpAqr9CtPSy4ImrGj2Psn
- o7V3EmtwiDMNMl9LG1uRnTUAl+uyNyIgUUPTAgg1aiDtHlmWe8nb8622ntSYq05tt4yLWSkBwfcmg
- 2AeTbMQJQkb+ajufFR/IRVJ1x6hcoXb2u0UnbRg5Tw2reCvkdZv7kL0guawvUbJMECzQ=;
-Received: from esa2.hgst.iphmx.com ([68.232.143.124])
+ bh=X+0QZWsGGSUpi75JEBTjkLf/4Kv3eae4E/kzkG/Syc0=; b=STBCuY4eTGAgHLf+gGg0fuo7MX
+ SsYJQbWC2TyCBNq1v3Fv4vf5LYm4Wez5cGm545O8EIDzgYI7Dp0o+7Jod9eeP2cSkRmOOBtscqWzl
+ d7rQfWUAnib6IEY1wI3YhhQy8wJ2JhZoLua8GCKJd4weII0R1TROBDapamT3hZcs+QP8=;
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]
+ helo=mx0a-001b2d01.pphosted.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hzd3v-008W8j-0B
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 08:30:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566203465; x=1597739465;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=6VB3DCsthsLl2jsX+WpWsxW2QKrDE3eueJNa+NmiC1s=;
- b=hSzKkT3KuShwcDb9bwGMHMfALPfkbX4+w4qhDbeqG6peYT2meTPSFf2P
- 84lgednko7mU6pB0JZyTNT3GAxVBWBWeRr3vb6bFp0lIh8SKm9IuIy0Av
- PNZmTL1sxYeyrQsS+qBFLZRISTRZwf7kEJYyg+sHID2CnSI/W+6sDRE/+
- igdH7QUgmRFDDbyNm5+Cwe2ORpTM+NrCEpUSrtL0jkMmAepBI1L5TvLqv
- wnELUEOZzVejcjisyQ3m2BXeFzbROi41iAbdO3dWgig/2Oeo6edssp8uO
- MK28B/tTItKMhE/nljiPMAIgtNy8tbippPOk+WzUZx7Wu2i13edL6Injw Q==;
-IronPort-SDR: l86cJVRUjydpUL9i3ChFKtUeNcj+Al1qrKH6x7GK/8/YQN0ncEl8/LlC1sBTLD8HCChwowk1vV
- 3RG2mbx+ZV3HP02mhJ0nB4yoEfo5bi9fVspSxpyBfHACQvOe9RMzRMrRZC/ywiT0B2Hdx2dGGG
- SKwDtmi18X0z3fKg/hn1MVKFTmLTo9pFnX60O4lBcNNQV7oEfDQrGDDyAR6oxpSXoAtuh0j/vn
- XRJgWJglNB0bo9wEGhGo/DBT6dfV6Il3xbdUWOp4nCs1l+Wz5crLmBMF9e44ybR0Euuw3NezJB
- 9oY=
-X-IronPort-AV: E=Sophos;i="5.64,403,1559491200"; d="scan'208";a="216517048"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 19 Aug 2019 16:30:55 +0800
-IronPort-SDR: MIXcPdDgiDC+Ox5aAyP6ttNVh7YeO23NXhVJzC0dffjT1K/gwiNFt0TfKldctGnTmUgB6WfPUv
- 0Mjv1qB/Su6x3CDuLViqapV/yf8fDtHO5TZ/NU+QfgROPp500oSYqEdPRG392oZ4nnzsY/0NWe
- P0YBZX8sChyw37FCuFJFNPoL7sozgM2ZE3Em0v7f3aJ1KQhUJtTFXlwK5iNpSv/m10fiBicGm1
- //AnMvlKOzG/xXIDGLHUKPkNbkjZF6J+Bf2W1uD+ZqZRnqNryuoYSmchAFzi9TEWYKSEWa1HFU
- 9Gb4h3cA9K/y/zRwJoV6iuhy
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Aug 2019 01:28:05 -0700
-IronPort-SDR: zy/Wz9CS16cW07z6mISQLpjIHfyWU35YaytkbgCwMT7+U62BUYG34OtE1eHY3kurM4rX58NZTh
- 5NueAp4KySeS5P1wq3EA4ANNV9mWFP8Og6H2e8k3YcAwupLSj2PLdebFxLBSgzbp/hAsVLhiz+
- 2iqqqUYZ71sBZrwQmTnROwAWXEAFYslL9k55Nw4a0Z9STN35PhLSrgtOoQuDQc5quHR4Xnt83y
- 4EC2jFIXX2xUOiReHZVl6VrwfKd6QHb8qsVENBbu4Zg4xQEDMNpFD5XMAv0dDWzZsdtsJgTleG
- 9Mo=
-Received: from shinexp.dhcp.fujisawa.hgst.com ([10.149.53.85])
- by uls-op-cesaip01.wdc.com with ESMTP; 19 Aug 2019 01:30:39 -0700
-From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 19 Aug 2019 17:30:34 +0900
-Message-Id: <20190819083034.18218-5-shinichiro.kawasaki@wdc.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190819083034.18218-1-shinichiro.kawasaki@wdc.com>
-References: <20190819083034.18218-1-shinichiro.kawasaki@wdc.com>
+ id 1hzhlO-008m1M-Nc
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 13:32:01 +0000
+Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x7JDTnuj137909
+ for <linux-f2fs-devel@lists.sourceforge.net>; Mon, 19 Aug 2019 09:31:52 -0400
+Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 2ufu10chcp-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <linux-f2fs-devel@lists.sourceforge.net>; Mon, 19 Aug 2019 09:31:52 -0400
+Received: from localhost
+ by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <linux-f2fs-devel@lists.sourceforge.net> from <chandan@linux.ibm.com>;
+ Mon, 19 Aug 2019 14:31:50 +0100
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+ by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Mon, 19 Aug 2019 14:31:46 +0100
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+ [9.149.105.58])
+ by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ x7JDVjd655574772
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 19 Aug 2019 13:31:45 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 00B214C040;
+ Mon, 19 Aug 2019 13:31:45 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 804964C044;
+ Mon, 19 Aug 2019 13:31:42 +0000 (GMT)
+Received: from localhost.localdomain (unknown [9.85.69.146])
+ by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Mon, 19 Aug 2019 13:31:42 +0000 (GMT)
+From: Chandan Rajendra <chandan@linux.ibm.com>
+To: Chao Yu <chao@kernel.org>
+Date: Mon, 19 Aug 2019 19:03:23 +0530
+Organization: IBM
+In-Reply-To: <bb3dc624-1249-2418-f9da-93da8c11e7f5@kernel.org>
+References: <20190816061804.14840-1-chandan@linux.ibm.com>
+ <20190816061804.14840-6-chandan@linux.ibm.com>
+ <bb3dc624-1249-2418-f9da-93da8c11e7f5@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-TM-AS-GCONF: 00
+x-cbid: 19081913-0020-0000-0000-000003615D4C
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19081913-0021-0000-0000-000021B6895A
+Message-Id: <20104514.oSSJcvNEEM@localhost.localdomain>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-08-19_03:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.0.1-1906280000 definitions=main-1908190153
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1hzd3v-008W8j-0B
-Subject: [f2fs-dev] [PATCH 4/4] fsck.f2fs: Check write pointer consistency
- with valid blocks count
+X-Headers-End: 1hzhlO-008m1M-Nc
+Subject: Re: [f2fs-dev] [PATCH V4 5/8] f2fs: Use read_callbacks for
+ decrypting file data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,85 +112,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Damien Le Moal <Damien.LeMoal@wdc.com>
+Cc: ebiggers@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
+ hch@infradead.org, linux-fscrypt@vger.kernel.org, adilger.kernel@dilger.ca,
+ chandanrmail@gmail.com, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When sudden f2fs shutdown happens on zoned block devices, write
-pointers can be inconsistent with valid blocks counts in meta data.
-The failure scenario is as follows:
+On Sunday, August 18, 2019 7:15:42 PM IST Chao Yu wrote:
+> Hi Chandan,
+> 
+> On 2019-8-16 14:18, Chandan Rajendra wrote:
+> > F2FS has a copy of "post read processing" code using which encrypted
+> > file data is decrypted. This commit replaces it to make use of the
+> > generic read_callbacks facility.
+> 
+> I remember that previously Jaegeuk had mentioned f2fs will support compression
+> later, and it needs to reuse 'post read processing' fwk.
+> 
+> There is very initial version of compression feature in below link:
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/log/?h=compression
+> 
+> So my concern is how can we uplift the most common parts of this fwk into vfs,
+> and meanwhile keeping the ability and flexibility when introducing private
+> feature/step in specified filesytem(now f2fs)?
+> 
+> According to current f2fs compression's requirement, maybe we can expand to
+> 
+> - support callback to let filesystem set the function for the flow in
+> decompression/verity/decryption step.
+> - support to use individual/common workqueue according the parameter.
+> 
+> Any thoughts?
+>
 
-- Just before a sudden shutdown, a new segment in a new zone is selected
-  for a current segment. Write commands were executed to the segment.
-  and the zone has a write pointer not at zone start.
-- Before the write commands complete, shutdown happens. Meta data is
-  not updated and still keeps zero valid blocks count for the zone.
-- After next mount of the file system, the zone is selected for the next
-  write target because it has zero valid blocks count. However, it has
-  the write pointer not at zone start. Then "Unaligned write command"
-  error happens.
+Hi,
 
-To avoid this potential error path, reset write pointers if the zone
-does not have a current segment, the write pointer is not at the zone
-start and the zone has no valid blocks.
+F2FS can be made to use fscrypt's queue for decryption and hence can reuse
+"read callbacks" code for decrypting data.
 
-Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
----
- fsck/fsck.c | 30 +++++++++++++++++++++++++++++-
- 1 file changed, 29 insertions(+), 1 deletion(-)
+For decompression, we could have a STEP_MISC where we invoke a FS provided
+callback function for FS specific post read processing? 
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 6beac5a..14bc804 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -2622,6 +2622,7 @@ static int fsck_chk_write_pointer(int i, struct blk_zone *blkz, void *opaque)
- 	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- 	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
- 	void *zero_blk;
-+	block_t	zone_valid_blocks = 0;
- 
- 	if (blk_zone_conv(blkz))
- 		return 0;
-@@ -2642,8 +2643,35 @@ static int fsck_chk_write_pointer(int i, struct blk_zone *blkz, void *opaque)
- 			break;
- 	}
- 
--	if (cs_index >= NR_CURSEG_TYPE)
-+	if (cs_index >= NR_CURSEG_TYPE) {
-+		for (b = zone_block; b < zone_block + c.zone_blocks &&
-+			     b < MAX_BLKADDR(sbi); b += c.blks_per_seg) {
-+			se = get_seg_entry(sbi, GET_SEGNO(sbi, b));
-+			zone_valid_blocks += se->valid_blocks;
-+		}
-+		if (wp_block == zone_block || zone_valid_blocks)
-+			return 0;
-+
-+		/*
-+		 * The write pointer is not at zone start but there is no valid
-+		 * block in the zone. Segments in the zone can be selected for
-+		 * next write. Need to reset the write pointer to avoid
-+		 * unaligned write command error.
-+		 */
-+		if (c.fix_on) {
-+			FIX_MSG("Reset write pointer at segment 0x%x",
-+				zone_segno);
-+			ret = f2fs_reset_zone(dev, blkz);
-+			if (ret)
-+				return ret;
-+			fsck->chk.wp_fixed_zones++;
-+		} else {
-+			MSG(0, "Inconsistent write pointer at segment 0x%x\n",
-+			    zone_segno);
-+			fsck->chk.wp_inconsistent_zones++;
-+		}
- 		return 0;
-+	}
- 
- 	/* check write pointer consistency with the curseg in the zone */
- 	cs_block = START_BLOCK(sbi, cs->segno) + cs->next_blkoff;
+Something like the following can be implemented in read_callbacks(),
+	  case STEP_MISC:
+		  if (ctx->enabled_steps & (1 << STEP_MISC)) {
+			  /*
+			    ctx->fs_misc() must process bio in a workqueue
+			    and later invoke read_callbacks() with
+			    bio->bi_private's value as an argument.
+			  */
+			  ctx->fs_misc(ctx->bio);
+			  return;
+		  }
+		  ctx->cur_step++;
+
+The fs_misc() callback can be passed in by the filesystem when invoking
+read_callbacks_setup_bio().
+
 -- 
-2.21.0
+chandan
+
+
 
 
 
