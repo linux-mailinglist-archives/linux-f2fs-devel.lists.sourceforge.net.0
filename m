@@ -2,60 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 888CF91AE7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 03:58:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C97191B30
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2019 04:54:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hzWwe-0007wX-6W; Mon, 19 Aug 2019 01:58:52 +0000
+	id 1hzXog-0001au-Bp; Mon, 19 Aug 2019 02:54:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1hzWwY-0007wK-Mq
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 01:58:46 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1hzXob-0001aj-4E
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 02:54:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RnKvmQm75hVNbRqvH5EklqYTQw6zrTut5qn4tfvEYu4=; b=Z67lXkLrVUrPx2CzO4dbNLIkQL
- q5euatwC+WcjFam0NgU7ipGPDKGf+uwBGWlUcMlRgb36TLzgyVvL82QldAz1LNsKLPvSlSjpAa14c
- 23fITgL55x14T+nxBh6R2zv0W4aViEv8Pz6nGaGli3S0eVTy3Jees8c3qWDwW9iu8/WQ=;
+ bh=/UOUp6IKuxRCSNZDpupPvoFs4C4S46NJY82P9KaVgTA=; b=b++lxu09Ng10OV/8huZHW+jBuW
+ j9yBy0wciYxnDqFAjDkm32dCyM9G/49RuIPAXCfDSsjBVz0+cRZrm4oehdWtQefnYuDpE8b7DEqqV
+ E9+etUDP340k6UUJV4c7wsWIddEy1ILUf2adzAKKuC8MCSslXgsjJHZ/cQpPeN7dGvRo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RnKvmQm75hVNbRqvH5EklqYTQw6zrTut5qn4tfvEYu4=; b=EkY35f9kVi3nzbpOEj4sRL6q/3
- YcQcWz5GHQwBHGBWvuq/uRr94rYvuAXS83SraGzesGTWWoN2tV/0m3NA45e2hPAnJpj345C2zX8Nz
- iPePvptSpFGFuAAFEl/JVeP+mWtJ5zGPDdlQed/1PGCKdjCmR91D7DeB3Kz7zdViM+M0=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ bh=/UOUp6IKuxRCSNZDpupPvoFs4C4S46NJY82P9KaVgTA=; b=LVeONpBTgWtgr8DIfFNboh1ORi
+ Tv7UnccEKYqBM62wgmQSZ1AuBj1fy/GFj5QN4mi3U8xvJv5XAqNTE/Dv7xO4aguxxQDVhepPUAS3K
+ UKdzfqQxJXy57HjtgE9L/gmJomOKSNpkr/p0xo/uDMOAKk+J85haGxbuyZDr+DuxdYzc=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hzWwW-00BFBA-JW
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 01:58:46 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 0C9D62332331882FFBA6;
- Mon, 19 Aug 2019 09:58:37 +0800 (CST)
+ id 1hzXoZ-00BHk0-9N
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Aug 2019 02:54:37 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 6833DEF5181FF1FB73;
+ Mon, 19 Aug 2019 10:54:28 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 19 Aug
- 2019 09:58:31 +0800
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 19 Aug
+ 2019 10:54:27 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20190809152328.94814-1-jaegeuk@kernel.org>
+ <20190816024157.GC73510@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: Eric Biggers <ebiggers@kernel.org>
-References: <20190816055539.30420-1-ebiggers@kernel.org>
- <20190816055539.30420-3-ebiggers@kernel.org>
- <d6022f8b-2d75-4e9d-882e-038551684c37@huawei.com>
- <20190818154138.GA1118@sol.localdomain>
- <3f3fa304-2ce0-7773-7335-30f8e3c5b5d5@huawei.com>
-Message-ID: <808dc7d9-01c3-7883-431a-8f3532adec09@huawei.com>
-Date: Mon, 19 Aug 2019 09:58:30 +0800
+Message-ID: <e6937e2a-cbcc-3b78-b21b-75e3717ae393@huawei.com>
+Date: Mon, 19 Aug 2019 10:54:27 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <3f3fa304-2ce0-7773-7335-30f8e3c5b5d5@huawei.com>
+In-Reply-To: <20190816024157.GC73510@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -65,9 +62,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1hzWwW-00BFBA-JW
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: fix copying too many bytes in
- FS_IOC_SETFSLABEL
+X-Headers-End: 1hzXoZ-00BHk0-9N
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs_io: add get/setflags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,88 +75,17 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/8/19 9:33, Chao Yu wrote:
-> On 2019/8/18 23:41, Eric Biggers wrote:
->> On Fri, Aug 16, 2019 at 02:59:37PM +0800, Chao Yu wrote:
->>> On 2019/8/16 13:55, Eric Biggers wrote:
->>>> From: Eric Biggers <ebiggers@google.com>
->>>>
->>>> Userspace provides a null-terminated string, so don't assume that the
->>>> full FSLABEL_MAX bytes can always be copied.>
->>>> Fixes: 61a3da4d5ef8 ("f2fs: support FS_IOC_{GET,SET}FSLABEL")
->>>
->>> It may only copy redundant zero bytes, and will not hit security issue, it
->>> doesn't look like a bug fix?
->>>
->>>> Signed-off-by: Eric Biggers <ebiggers@google.com>
->>>
->>> Anyway, it makes sense to me.
->>>
->>> Reviewed-by: Chao Yu <yuchao0@huawei.com>
->>>
->>
->> It's not clear that userspace is guaranteed to provide a full FSLABEL_MAX bytes
->> in the buffer.  E.g. it could provide "foo\0" followed by an unmapped page.
-> 
-> You're right, thanks for your explanation.
+On 2019/8/16 10:41, Jaegeuk Kim wrote:
+> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
 
-One more question, there is no validation check on length of user passed buffer,
-
-So in most ioctl interfaces, user can pass a buffer which has less size than we
-defined intentionally/unintentionally.
-
-E.g.
-
-user space:
-
-struct f2fs_defragment_user {
-	unsigned long long start;
-//	unsigned long long len;
-};
-
-main()
-{
-	struct f2fs_defragment_user *df;
-
-	df = malloc();
-	
-	ioctl(fd, F2FS_IOC_DEFRAGMENT, df);
-}
-
-kernel:
-
-f2fs_ioc_defragment()
-{
-...
-	if (copy_from_user(&range, (struct f2fs_defragment __user *)arg,
-							sizeof(range)))
-		return -EFAULT;
-}
-
-Is that a common issue?
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
-
-> 
-> Thanks,
-> 
->>
->> - Eric
->> .
->>
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
 
 
 _______________________________________________
