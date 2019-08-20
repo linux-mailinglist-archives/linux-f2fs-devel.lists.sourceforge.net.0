@@ -2,102 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 279CB95663
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2019 07:04:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20F7B95690
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2019 07:13:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1hzwJW-0006Wa-U5; Tue, 20 Aug 2019 05:04:10 +0000
+	id 1hzwSg-0003rj-Hb; Tue, 20 Aug 2019 05:13:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chandan@linux.ibm.com>) id 1hzwJV-0006WS-M3
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 05:04:09 +0000
+ (envelope-from <gaoxiang25@huawei.com>) id 1hzwSf-0003rY-AU
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 05:13:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Content-Type:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:CC:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L3zhRs+p+so5AA0MBRHfJqElib8LYeeS1qWPatUvea0=; b=XiJUSDBuOmJuJQzmmQ7WxrmfPP
- rCcSqO3vtGhciE+VlaZ5ZQqPzdKIeyIyxdwzxD1Sa69c0HkIsqOaXPvcTqHroCS4VDgBS5j0yAA58
- 5Boot7kbwtrRTW0BchnNEEj2tMCBo3b4ARVQX8pla+SJCNr0Z9vObQpDX/dCfPU+WvYY=;
+ bh=UXlC6+DG13IOlVWaSThwgREZIBM71FMQSPutHMCpLxE=; b=kJWxA8a5cS54uYQR/BHpWjfzNr
+ 7wIwUgMvlgwbS1wQmyK63IK7f7ZVkH3NrnWIPRKLaQWaKrWT8SzZu30kKjmKBFKmzWQYs5jS00MwS
+ QweEE+2FxmZeeo1492/O7ZZfohF08glu1tpxokt1rbPFnRj8wlkPNqY3yhAfAwMc/ECE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Content-Type:Content-Transfer-Encoding:MIME-Version:References
- :In-Reply-To:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:CC:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L3zhRs+p+so5AA0MBRHfJqElib8LYeeS1qWPatUvea0=; b=YGSzcptxyklhKZZCwQgW9yu9j0
- rw3s7pXWosWdVCUJcwBty7e7N+Q6fVFMwcG7XRhTOGcUdmLAsjgQmonV/MkE3xzMY04YRK9hGyg5m
- YTDpQDKSdSqjYYdzdEMX4MCaNl+YH5cA0Fu3ogv//eibmJY7Ati8K4XqGFGwZsbMLDp8=;
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]
- helo=mx0a-001b2d01.pphosted.com)
+ bh=UXlC6+DG13IOlVWaSThwgREZIBM71FMQSPutHMCpLxE=; b=T/MXJ36Hh42PqeG1ga+iPwQZPN
+ 3lAnIT32XvXRCLBiOX7y6DW95ALpJaC+0NbGiaX7YtQuPdwJtD1Vvy9yfhpGW40c3Kzzq9jQjOTMZ
+ 2ob6AaJKwDEJ5jKVJzcQY0SQU1KwV9T3fBBKTq4VYXk4i3qULRxtvQxUBtuJpWAmU2oM=;
+Received: from szxga03-in.huawei.com ([45.249.212.189] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1hzwJT-009Uiw-R6
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 05:04:09 +0000
-Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x7K52NGw103309
- for <linux-f2fs-devel@lists.sourceforge.net>; Tue, 20 Aug 2019 01:03:58 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2ug666879e-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linux-f2fs-devel@lists.sourceforge.net>; Tue, 20 Aug 2019 01:03:58 -0400
-Received: from localhost
- by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <linux-f2fs-devel@lists.sourceforge.net> from <chandan@linux.ibm.com>;
- Tue, 20 Aug 2019 06:03:56 +0100
-Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
- by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Tue, 20 Aug 2019 06:03:51 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id x7K53U6o39322076
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 20 Aug 2019 05:03:30 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CE4E4A4040;
- Tue, 20 Aug 2019 05:03:50 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6610FA4055;
- Tue, 20 Aug 2019 05:03:48 +0000 (GMT)
-Received: from localhost.localdomain (unknown [9.199.62.92])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 20 Aug 2019 05:03:48 +0000 (GMT)
-From: Chandan Rajendra <chandan@linux.ibm.com>
-To: tytso@mit.edu, ebiggers@kernel.org
-Date: Tue, 20 Aug 2019 10:35:29 +0530
-Organization: IBM
-In-Reply-To: <20190816061804.14840-6-chandan@linux.ibm.com>
+ id 1hzwSc-009V9C-Ni
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 05:13:37 +0000
+Received: from DGGEMM402-HUB.china.huawei.com (unknown [172.30.72.54])
+ by Forcepoint Email with ESMTP id 30C0D55AD62F7D7E5F5A;
+ Tue, 20 Aug 2019 13:13:16 +0800 (CST)
+Received: from dggeme762-chm.china.huawei.com (10.3.19.108) by
+ DGGEMM402-HUB.china.huawei.com (10.3.20.210) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Tue, 20 Aug 2019 13:13:15 +0800
+Received: from architecture4 (10.140.130.215) by
+ dggeme762-chm.china.huawei.com (10.3.19.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Tue, 20 Aug 2019 13:13:15 +0800
+Date: Tue, 20 Aug 2019 13:12:36 +0800
+From: Gao Xiang <gaoxiang25@huawei.com>
+To: Chandan Rajendra <chandan@linux.ibm.com>
+Message-ID: <20190820051236.GE159846@architecture4>
 References: <20190816061804.14840-1-chandan@linux.ibm.com>
  <20190816061804.14840-6-chandan@linux.ibm.com>
+ <1652707.8YmLLlegLt@localhost.localdomain>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19082005-0012-0000-0000-000003409143
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19082005-0013-0000-0000-0000217AB39E
-Message-Id: <1652707.8YmLLlegLt@localhost.localdomain>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-08-20_01:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 suspectscore=1 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=836 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1906280000 definitions=main-1908200052
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <1652707.8YmLLlegLt@localhost.localdomain>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Originating-IP: [10.140.130.215]
+X-ClientProxiedBy: dggeme715-chm.china.huawei.com (10.1.199.111) To
+ dggeme762-chm.china.huawei.com (10.3.19.108)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1hzwJT-009Uiw-R6
+X-Headers-End: 1hzwSc-009V9C-Ni
 Subject: Re: [f2fs-dev] [PATCH V4 5/8] f2fs: Use read_callbacks for
  decrypting file data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -111,40 +81,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, hch@infradead.org,
- linux-fscrypt@vger.kernel.org, adilger.kernel@dilger.ca,
+Cc: hch@infradead.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
+ ebiggers@kernel.org, linux-fscrypt@vger.kernel.org, adilger.kernel@dilger.ca,
  chandanrmail@gmail.com, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
  linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Friday, August 16, 2019 11:48 AM Chandan Rajendra wrote:
-> F2FS has a copy of "post read processing" code using which encrypted
-> file data is decrypted. This commit replaces it to make use of the
-> generic read_callbacks facility.
+Hi Chandan,
+
+On Tue, Aug 20, 2019 at 10:35:29AM +0530, Chandan Rajendra wrote:
+> On Friday, August 16, 2019 11:48 AM Chandan Rajendra wrote:
+> > F2FS has a copy of "post read processing" code using which encrypted
+> > file data is decrypted. This commit replaces it to make use of the
+> > generic read_callbacks facility.
+> > 
+> > Signed-off-by: Chandan Rajendra <chandan@linux.ibm.com>
 > 
-> Signed-off-by: Chandan Rajendra <chandan@linux.ibm.com>
+> Hi Eric and Ted,
+> 
+> Looks like F2FS requires a lot more flexiblity than what can be offered by
+> read callbacks i.e.
+> 
+> 1. F2FS wants to make use of its own workqueue for decryption, verity and
+>    decompression.
+> 2. F2FS' decompression code is not an FS independent entity like fscrypt and
+>    fsverity. Hence they would need Filesystem specific callback functions to
+>    be invoked from "read callbacks". 
+> 
+> Hence I would suggest that we should drop F2FS changes made in this
+> patchset. Please let me know your thoughts on this.
 
-Hi Eric and Ted,
+Add a word, I have some little concern about post read procession order
+a bit as I mentioned before, because I'd like to move common EROFS
+decompression code out in the future as well for other fses to use
+after we think it's mature enough.
 
-Looks like F2FS requires a lot more flexiblity than what can be offered by
-read callbacks i.e.
+It seems the current code mainly addresses eliminating duplicated code,
+therefore I have no idea about that...
 
-1. F2FS wants to make use of its own workqueue for decryption, verity and
-   decompression.
-2. F2FS' decompression code is not an FS independent entity like fscrypt and
-   fsverity. Hence they would need Filesystem specific callback functions to
-   be invoked from "read callbacks". 
+Thanks,
+Gao Xiang
 
-Hence I would suggest that we should drop F2FS changes made in this
-patchset. Please let me know your thoughts on this.
-
--- 
-chandan
-
-
-
+> 
+> -- 
+> chandan
+> 
+> 
+> 
 
 
 _______________________________________________
