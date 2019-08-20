@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E9469679D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2019 19:31:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A258E967B7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2019 19:41:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i07yf-0005nc-T9; Tue, 20 Aug 2019 17:31:25 +0000
+	id 1i088R-0006ZJ-3Z; Tue, 20 Aug 2019 17:41:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1i07yd-0005nU-Nt
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 17:31:23 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1i088P-0006Z4-Q4
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 17:41:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D/olYTfWk0wRjQA6NxD2hVBCAmBQq69yH3eqzSV6vEY=; b=cE+C4Nr4UUOCt4UUHQ9LCn58nC
- r5g0rKoj6HB9qgNcNq3oVg8VCrgCMg10j3r2Fr7FK9jWr2CJ3X5HVPjpCDo8XKoafqHxR6HH2kNNT
- 1Y0oPpFg36TFlWaR7spJtQ8dITJJnmZEExSYoPg7kojUIk511XrZVUA0Ujra9ctRHDK4=;
+ bh=Q6WX7RD7JkFPMZ096ddZwwMCJQ2QX/pXKZjnOUBiEpg=; b=XSjmwQKtaAJXEt/w5zWgiTWHYI
+ 6JsvAM8HXR/UM4/f5m05vjm1KWbaU7L9xibt8fX9ogdQ5+8sfu5L7m/QSXp1pCeeznVSaJjUFTsZy
+ /Hvv7+eARC/vqhjMYm3oNXbQPjaUZf9ZPmAc2W9+hX9zp9YvM6njC8ZrL2rZwiiGj+kI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,41 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=D/olYTfWk0wRjQA6NxD2hVBCAmBQq69yH3eqzSV6vEY=; b=CY8+D+hMJ2i5waG0UbqSjsrtaC
- S0u7WW4imsHHEsfy2DB2PfcXgZlMLI5/tIsaFuBroyPpy3K9pktdBvjssuCmMh1UEAR9MPV3ENnrs
- y4YyhjvdGvSrr920nVIWYtAoftG6F5uiIk7wCaPZjlg95FSXg1W9OW0472YiS9r7dxvc=;
+ bh=Q6WX7RD7JkFPMZ096ddZwwMCJQ2QX/pXKZjnOUBiEpg=; b=RZvBKWJLY8fVVc+9mmZKrIlbO0
+ I+JMXORmmIlAN7Sz/1clIKjPaiL73QKxL9/PW/niSQC2QntBBUYg4tEn/mwm+QM9h9fenfmoIxd+9
+ 8gCipMHTK0GC24dHmZcli50lJyJL45Cm7GlWtivG2wpNdwC2OI9GUFuxYehaHagcJOg4=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i07yc-009jWv-H0
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 17:31:23 +0000
+ id 1i088N-009k0F-SF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Aug 2019 17:41:29 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CA7F9206DF;
- Tue, 20 Aug 2019 17:31:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3E8F722DBF;
+ Tue, 20 Aug 2019 17:41:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1566322276;
- bh=xchQBhCrLDaryEtWVa7H/buI3AaIEZHu2PtVlis3tCo=;
+ s=default; t=1566322882;
+ bh=FWVnJU/734BjtZUeoOiF/IC901HwXFICLvTYoWO93WI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=EALnhDjg14LpO0z6cXs41pGJl7VFZngK162MACYic3kP6I//VLW2CmWhxhuzm0c6H
- wcvyfirgB/snkOQx4T15wm1bmb9l4uIsgtgzjBZ+9/uEO0LGb8H/igXp4ZS938r7Xf
- hjpdWBYQLCRV1iQNAm+ZeItii52405uPaddS2Xug=
-Date: Tue, 20 Aug 2019 10:31:16 -0700
+ b=IAvojfdq/UJu9x+Exg4sCzdRb/jZtg0ZqF3jcxVtXiDp4ovHPGZC5MXfRM1naC/6V
+ btJmrXmNCLK3D9YH8DIwP3Ef7iwZ0LFGWfYwtfRr65cHLXB6PTm3vx+C/eiWs6cMXc
+ pbwaCeOo9VDp7H5doRdSvZL1riZc2Sha9YDDogDA=
+Date: Tue, 20 Aug 2019 10:41:21 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20190820173116.GA58214@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190816061804.14840-1-chandan@linux.ibm.com>
- <20190816061804.14840-6-chandan@linux.ibm.com>
- <1652707.8YmLLlegLt@localhost.localdomain>
- <20190820163837.GD10232@mit.edu>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190820174121.GB58214@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190726074120.3278-1-yuchao0@huawei.com>
+ <20190819202007.GA23891@jaegeuk-macbookpro.roam.corp.google.com>
+ <99a2713a-50d2-8a77-87d9-661ab7ed3a0c@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190820163837.GD10232@mit.edu>
+In-Reply-To: <99a2713a-50d2-8a77-87d9-661ab7ed3a0c@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -72,10 +75,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i07yc-009jWv-H0
-Subject: Re: [f2fs-dev] [PATCH V4 5/8] f2fs: Use read_callbacks for
- decrypting file data
+X-Headers-End: 1i088N-009k0F-SF
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: allocate memory in batch in
+ build_sit_info()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,68 +89,157 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hch@infradead.org, linux-f2fs-devel@lists.sourceforge.net,
- ebiggers@kernel.org, linux-fscrypt@vger.kernel.org,
- Chandan Rajendra <chandan@linux.ibm.com>, adilger.kernel@dilger.ca,
- chandanrmail@gmail.com, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Chandan,
-
-On 08/20, Theodore Y. Ts'o wrote:
-> On Tue, Aug 20, 2019 at 10:35:29AM +0530, Chandan Rajendra wrote:
-> > Looks like F2FS requires a lot more flexiblity than what can be offered by
-> > read callbacks i.e.
+On 08/20, Chao Yu wrote:
+> On 2019/8/20 4:20, Jaegeuk Kim wrote:
+> > On 07/26, Chao Yu wrote:
+> >> build_sit_info() allocate all bitmaps for each segment one by one,
+> >> it's quite low efficiency, this pach changes to allocate large
+> >> continuous memory at a time, and divide it and assign for each bitmaps
+> >> of segment. For large size image, it can expect improving its mount
+> >> speed.
 > > 
-> > 1. F2FS wants to make use of its own workqueue for decryption, verity and
-> >    decompression.
-> > 2. F2FS' decompression code is not an FS independent entity like fscrypt and
-> >    fsverity. Hence they would need Filesystem specific callback functions to
-> >    be invoked from "read callbacks". 
+> > Hmm, I hit a kernel panic when mounting a partition during fault injection test:
 > > 
-> > Hence I would suggest that we should drop F2FS changes made in this
-> > patchset. Please let me know your thoughts on this.
+> > 726 #ifdef CONFIG_F2FS_CHECK_FS
+> > 727         if (f2fs_test_bit(offset, sit_i->sit_bitmap) !=
+> > 728                         f2fs_test_bit(offset, sit_i->sit_bitmap_mir))
+> > 729                 f2fs_bug_on(sbi, 1);
+> > 730 #endif
 > 
-> That's probably the best way to go for now.  My one concern is that it
-> means that only ext4 will be using your framework.  I could imagine
-> that some people might argue that should just move the callback scheme
-> into ext4 code as opposed to leaving it in fscrypt --- at least until
-> we can find other file systems where we can show that it will be
-> useful for those other file systems.
+> We didn't change anything about sit_i->sit_bitmap{_mir,}, it's so wired we panic
+> here... :(
+> 
+> I double check the change, but find nothing suspicious, btw, my fault injection
+> testcase shows normal.
+> 
+> Jaegeuk, do you have any idea about this issue?
 
-I also have to raise a flag on this. Doesn't this patch series try to get rid
-of redundant work? What'd be the rationale, if it only supports ext4?
-
-How about generalizing the framework to support generic_post_read and per-fs
-post_read for fscrypt/fsverity/... selectively?
-
-Thanks,
+I'm bisecting. :P
 
 > 
-> (Perhaps a useful experiment would be to have someone implement patches
-> to support fscrypt and fsverity in ext2 --- the patch might or might
-> not be accepted for upstream inclusion, but it would be useful to
-> demonstrate how easy it is to add fscrypt and fsverity.)
+> Thanks,
 > 
-> The other thing to consider is that there has been some discussion
-> about adding generalized support for I/O submission to the iomap
-> library.  It might be that if that work is accepted, support for
-> fscrypt and fsverity would be a requirement for ext4 to use that
-> portion of iomap's functionality.  So in that eventuality, it might be
-> that we'll want to move your read callbacks code into iomap, or we'll
-> need to rework the read callbacks code so it can work with iomap.
-> 
-> But this is all work for the future.  I'm a firm believe that the
-> perfect should not be the enemy of the good, and that none of this
-> should be a fundamental obstacle in having your code upstream.
-> 
-> Cheers,
-> 
-> 					- Ted
-> 
+> > 
+> > For your information, I'm testing without this patch.
+> > 
+> > Thanks,
+> > 
+> >>
+> >> Signed-off-by: Chen Gong <gongchen4@huawei.com>
+> >> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> >> ---
+> >> v2:
+> >> - fix warning triggered in kmalloc() if requested memory size exceeds 4MB.
+> >>  fs/f2fs/segment.c | 51 +++++++++++++++++++++--------------------------
+> >>  fs/f2fs/segment.h |  1 +
+> >>  2 files changed, 24 insertions(+), 28 deletions(-)
+> >>
+> >> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> >> index a661ac32e829..d720eacd9c57 100644
+> >> --- a/fs/f2fs/segment.c
+> >> +++ b/fs/f2fs/segment.c
+> >> @@ -3941,7 +3941,7 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+> >>  	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+> >>  	struct sit_info *sit_i;
+> >>  	unsigned int sit_segs, start;
+> >> -	char *src_bitmap;
+> >> +	char *src_bitmap, *bitmap;
+> >>  	unsigned int bitmap_size;
+> >>  
+> >>  	/* allocate memory for SIT information */
+> >> @@ -3964,27 +3964,31 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+> >>  	if (!sit_i->dirty_sentries_bitmap)
+> >>  		return -ENOMEM;
+> >>  
+> >> +#ifdef CONFIG_F2FS_CHECK_FS
+> >> +	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * 4;
+> >> +#else
+> >> +	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * 3;
+> >> +#endif
+> >> +	sit_i->bitmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+> >> +	if (!sit_i->bitmap)
+> >> +		return -ENOMEM;
+> >> +
+> >> +	bitmap = sit_i->bitmap;
+> >> +
+> >>  	for (start = 0; start < MAIN_SEGS(sbi); start++) {
+> >> -		sit_i->sentries[start].cur_valid_map
+> >> -			= f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
+> >> -		sit_i->sentries[start].ckpt_valid_map
+> >> -			= f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
+> >> -		if (!sit_i->sentries[start].cur_valid_map ||
+> >> -				!sit_i->sentries[start].ckpt_valid_map)
+> >> -			return -ENOMEM;
+> >> +		sit_i->sentries[start].cur_valid_map = bitmap;
+> >> +		bitmap += SIT_VBLOCK_MAP_SIZE;
+> >> +
+> >> +		sit_i->sentries[start].ckpt_valid_map = bitmap;
+> >> +		bitmap += SIT_VBLOCK_MAP_SIZE;
+> >>  
+> >>  #ifdef CONFIG_F2FS_CHECK_FS
+> >> -		sit_i->sentries[start].cur_valid_map_mir
+> >> -			= f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
+> >> -		if (!sit_i->sentries[start].cur_valid_map_mir)
+> >> -			return -ENOMEM;
+> >> +		sit_i->sentries[start].cur_valid_map_mir = bitmap;
+> >> +		bitmap += SIT_VBLOCK_MAP_SIZE;
+> >>  #endif
+> >>  
+> >> -		sit_i->sentries[start].discard_map
+> >> -			= f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE,
+> >> -							GFP_KERNEL);
+> >> -		if (!sit_i->sentries[start].discard_map)
+> >> -			return -ENOMEM;
+> >> +		sit_i->sentries[start].discard_map = bitmap;
+> >> +		bitmap += SIT_VBLOCK_MAP_SIZE;
+> >>  	}
+> >>  
+> >>  	sit_i->tmp_map = f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
+> >> @@ -4492,21 +4496,12 @@ static void destroy_free_segmap(struct f2fs_sb_info *sbi)
+> >>  static void destroy_sit_info(struct f2fs_sb_info *sbi)
+> >>  {
+> >>  	struct sit_info *sit_i = SIT_I(sbi);
+> >> -	unsigned int start;
+> >>  
+> >>  	if (!sit_i)
+> >>  		return;
+> >>  
+> >> -	if (sit_i->sentries) {
+> >> -		for (start = 0; start < MAIN_SEGS(sbi); start++) {
+> >> -			kvfree(sit_i->sentries[start].cur_valid_map);
+> >> -#ifdef CONFIG_F2FS_CHECK_FS
+> >> -			kvfree(sit_i->sentries[start].cur_valid_map_mir);
+> >> -#endif
+> >> -			kvfree(sit_i->sentries[start].ckpt_valid_map);
+> >> -			kvfree(sit_i->sentries[start].discard_map);
+> >> -		}
+> >> -	}
+> >> +	if (sit_i->sentries)
+> >> +		kvfree(sit_i->bitmap);
+> >>  	kvfree(sit_i->tmp_map);
+> >>  
+> >>  	kvfree(sit_i->sentries);
+> >> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> >> index b74602813a05..ec4d568fd58c 100644
+> >> --- a/fs/f2fs/segment.h
+> >> +++ b/fs/f2fs/segment.h
+> >> @@ -226,6 +226,7 @@ struct sit_info {
+> >>  	block_t sit_base_addr;		/* start block address of SIT area */
+> >>  	block_t sit_blocks;		/* # of blocks used by SIT area */
+> >>  	block_t written_valid_blocks;	/* # of valid blocks in main area */
+> >> +	char *bitmap;			/* all bitmaps pointer */
+> >>  	char *sit_bitmap;		/* SIT bitmap pointer */
+> >>  #ifdef CONFIG_F2FS_CHECK_FS
+> >>  	char *sit_bitmap_mir;		/* SIT bitmap mirror */
+> >> -- 
+> >> 2.18.0.rc1
+> > .
+> > 
 
 
 _______________________________________________
