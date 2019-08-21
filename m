@@ -2,138 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D03ED972A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 08:42:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE8AC97401
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 09:54:50 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0KKg-0006uS-JG; Wed, 21 Aug 2019 06:42:58 +0000
+	id 1i0LSB-0008VL-SB; Wed, 21 Aug 2019 07:54:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <boojin.kim@samsung.com>) id 1i0KKf-0006uH-VY
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 06:42:58 +0000
+ (envelope-from <boojin.kim@samsung.com>) id 1i0LSA-0008V5-7w
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:54:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5IRlHuEkcQOCy+sESryaGK2Vl6raRZeU9YxYhLk96AY=; b=F8JsjLgRjWhQO9mGPSFxYwm7JU
- HPOBjpOKGFUan821a0INeY1bH/JIl4u5SukO5IPbY8MGUYq+AcfzgMeG0A88R7Ieox82gwk9h7VVV
- iVaT3hh5mjyDDU+gVzQan72nzkv4pohfATg5I/9sTV+Yugqs6InHtRDfb3UnHSGzkCPU=;
+ bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=; b=R0Qw6ixe5YbqyMRt3eDakF9sQA
+ PLXLFLo6T7DAwz5ClgRJjkYhhFub8MXE0/+5aGKfGAPaU7Ljmj3sJky2ycR5+ZSw2zSNbVJUU3LzH
+ BtDbbWWjqP7yjTgBMphe40/+bN0jT6XSNg/82ObR5Rmfvb+excQpKJcDMudGaaWS6bTQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
  :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=5IRlHuEkcQOCy+sESryaGK2Vl6raRZeU9YxYhLk96AY=; b=d
- V2JJJsAqXuWA+Yzk/ls6Vb3lbxzV0Nx8UPKPZuwP4eDlid4gWCb0nYn5quEl8B8XpW4QKz7aTDQzi
- aexcZ5HmB/0KJFmv/ZKWTB8koFPo09RIG9bXWXB/YKfnl/Peqo/WXDZB0k9X3eWhG//bTBORXlCCn
- 4OwFUKoI7eBtpDr0=;
+ List-Owner:List-Archive; bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=; b=f
+ LtZETz/pgWtH9REvmm+KZxA5xVA9vZACu4cszggUrTV9G1Gt6QP3l/cp9EeyIQ+/cqp3E2ylZjhHg
+ Y3FTFuJNb4PseGYOZ2ZRymJl+l0WSZm/bVqx3xcb8UtfGZZcoXNY8qHzBs17Kb5AVZidj+NjBYtvi
+ doo/NHdht6f4eu9A=;
 Received: from mailout1.samsung.com ([203.254.224.24])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0KKd-00Aj22-Jy
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 06:42:57 +0000
+ id 1i0LS7-00AIU2-Vj
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:54:46 +0000
 Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
  by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20190821064246epoutp01c966c5d2f0f4882d22cee04564bce5c2~83QEBRkaM1005410054epoutp01f
+ 20190821075436epoutp011a18db4b57402d98ffe823a9bfc7b6be~84OxaR3oK1951019510epoutp01-
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 21 Aug 2019 06:42:46 +0000 (GMT)
+ Wed, 21 Aug 2019 07:54:36 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20190821064246epoutp01c966c5d2f0f4882d22cee04564bce5c2~83QEBRkaM1005410054epoutp01f
+ 20190821075436epoutp011a18db4b57402d98ffe823a9bfc7b6be~84OxaR3oK1951019510epoutp01-
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1566369766;
- bh=5IRlHuEkcQOCy+sESryaGK2Vl6raRZeU9YxYhLk96AY=;
+ s=mail20170921; t=1566374076;
+ bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=;
  h=From:To:Cc:Subject:Date:References:From;
- b=TVv8ux+xnM0kzSu9X5T+yL6124jIoIZhVT908IdSRYCpRjPYXl2fk0Bj7h7uTDBhc
- PlUPwkm3fhUR/DK7QcL6f28c+CAh6IrqMYEKTdNsmM3VR5hCTXIfETB6Vffx7cIS/W
- h93zUelUxLBuQwgmbOisxoaJZMq96xBqAzSILO2Q=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTP id
- 20190821064246epcas2p46aa2363c453d0816b5eae31671ceaab1~83QDXRLKm1664716647epcas2p44;
- Wed, 21 Aug 2019 06:42:46 +0000 (GMT)
-Received: from epsmges2p4.samsung.com (unknown [182.195.40.181]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 46CylS647jzMqYkb; Wed, 21 Aug
- 2019 06:42:44 +0000 (GMT)
+ b=B5jxDUEk9/Wv2ZsXCfJ0XkAJm9DIHY27cqGo72ZywbwCE+aVOvTsvyScwL4p6sybM
+ owql64lYHWS43PFd/HInQdLPv83SRaGXip0WkjESDr2vLz6mjff1A3/7j7+O7TOWyK
+ 7NAk6jkpVH93RiwuqnuxfGH0LViWO/nOoUaD+g4w=
+Received: from epsnrtp5.localdomain (unknown [182.195.42.166]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTP id
+ 20190821075435epcas2p2329ac0d31488e7667c632810cc878449~84Ow2IQSF1069310693epcas2p2D;
+ Wed, 21 Aug 2019 07:54:35 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.40.182]) by
+ epsnrtp5.localdomain (Postfix) with ESMTP id 46D0LK1qCszMqYkr; Wed, 21 Aug
+ 2019 07:54:33 +0000 (GMT)
 Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
  epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 93.3F.04112.4E7EC5D5; Wed, 21 Aug 2019 15:42:44 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTPA id
- 20190821064244epcas2p1e3d77667eed99670611d9353cf365f8b~83QB6TTuq0242202422epcas2p1e;
- Wed, 21 Aug 2019 06:42:44 +0000 (GMT)
+ D2.06.04112.9B8FC5D5; Wed, 21 Aug 2019 16:54:33 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9~84OuTKtNR3087030870epcas2p3N;
+ Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
 Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20190821064244epsmtrp29678be437d037ce9caa184fdd262a64c~83QB5MerG2242122421epsmtrp2o;
- Wed, 21 Aug 2019 06:42:44 +0000 (GMT)
-X-AuditID: b6c32a48-f1fff70000001010-de-5d5ce7e49cf8
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20190821075432epsmtrp11638c73e7bcdf5c06195a2218aa9d41f~84OuR59zE2895328953epsmtrp1D;
+ Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
+X-AuditID: b6c32a48-f37ff70000001010-86-5d5cf8b9dcde
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
  epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 17.12.03706.4E7EC5D5; Wed, 21 Aug 2019 15:42:44 +0900 (KST)
-Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip1.samsung.com
+ D3.79.03706.8B8FC5D5; Wed, 21 Aug 2019 16:54:32 +0900 (KST)
+Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20190821064243epsmtip1e5ee582abd1b9fa164ad5cc11fb9592e~83QBWXge90467104671epsmtip1E;
- Wed, 21 Aug 2019 06:42:43 +0000 (GMT)
+ 20190821075432epsmtip253f2d9c05d500f90970ebcdc57e310bc~84Ot-od_T3239432394epsmtip2r;
+ Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
 From: "boojin.kim" <boojin.kim@samsung.com>
-To: "'Jaegeuk Kim'" <jaegeuk@kernel.org>, "'Chao Yu'" <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>,
- <linux-fsdevel@vger.kernel.org>
-Date: Wed, 21 Aug 2019 15:42:43 +0900
-Message-ID: <004501d557eb$a31dd4f0$e9597ed0$@samsung.com>
+To: "'Mike Snitzer'" <snitzer@redhat.com>
+Date: Wed, 21 Aug 2019 16:54:32 +0900
+Message-ID: <001a01d557f5$ab0a4a40$011edec0$@samsung.com>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AdVX6LxzK3qdVI3wS/yWqol0XSZg9A==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA02TfUwbdRjH/d1d7465mluH+lt9qzeJbpPS6yj+MGO+ke3itojxjykb4oWe
- lHh9Sa/FsahjZnSAxG4mYtsVsuA0W80EC2LdKCFdXTMEayQssKBzAdGxwUwZxM1NbXss8t/n
- efJ8n+f55slD45oApaVrbC7RaRMkllxB9J5Zh/Knft9dYfCeNaCF640E6hw8i6MvfvaS6PuP
- hzEUTB4gUHTuiAqd7LuFow9mHkRTnQEcjd30qJB38gqOkskuCoUnz6tQ9MIGdPGXGxjyt0+Q
- 6KeOrWimfZFAfdFzBBo5FSRR/F8vQL5kP4Y8Xy0A1NByg0KJkzufXcP3nBjH+APdb/O9A3n8
- yLCbD4eaSH7ifB/Jdx/bx58+Oo/x7w99h/PX+kdJ/sOeEODnww+XrSyXNllEwSw6daKtym6u
- sVWXsNteqXyh0lRk4PK5YvQUq7MJVrGELd1elr+lRkp7Z3W1guROp8oEWWYLNm9y2t0uUWex
- y64SVnSYJQfHOfSyYJXdtmp9ld36NGcwGE3pyjcky+TVi8ARf2bPYEOHqh7MbGwGOTRkCuHk
- 6I+gGaygNUwEwOZEw1KQAjA2348rwSKAvtBV4o4kmPSTGdYwUQAXw1qFLwMYP1GbYZLZALsT
- oWynXKYXwIH9o0QmwJl/KDiVimU7rWY4eKi9PssEkwe/jXVhGVYzxfDv4ACh8Cp4zj+VZZx5
- BH4zG8SVLXQwMnwFZDiX0cPOnjim1OTCI02e7NqQ2U/D2YNNS4JS+Ov1SyqFV8OZRA+lsBbO
- z0VJhffB0c8/pRRxC4BDNz1LRRthYPpgehqdnrAOdp4qyCBk1sL4haXd7oGNZ25TSloNGz0a
- RfgYbEuNYEpaC/9seU9J8/DWJ73gEHg0sMxkYJnJwDIzgf/HHgVECNwnOmRrtSgbHYXLjx0G
- 2b9Yz0fAwA/bY4ChAbtSHRnfVaFRCbVynTUGII2zueo9wfIKjdos1O0VnfZKp1sS5RgwpW9w
- GNfeW2VPf5nNVcmZjEVFhmITMhUZEXu/Onz3+G4NUy24xLdE0SE67+gwOkdbD3aqce/ruo5W
- O+Ur3TGWNO3Fy9800nGtPvlR/9w79gJ5hzS4NpKcmE7dHupY89Clx6Uq77acxHHQ5p7b6p5d
- 5Q8eX9gy3faZ47D0ZGnhc1+2YiaKvusP21+pJy57TrcOtXzNbH6Xu/Yi43v1eX1X3kuW+G/8
- 2GvGB3y7zP6Xjw3WsYRsEbj1uFMW/gMNo7CALQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNIsWRmVeSWpSXmKPExsWy7bCSnO6T5zGxBnM/iFl8/dLBYrH+1DFm
+Thread-Index: AdVX9QyEG4+5qw7KRk2/gqnMxtuMUA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0xTVxT29r2+9wBLrhXntZrZvWkWJGCLll0WmVt0+jJNrNkSo4LdC7wA
+ WX+tr3WwZJNtWBGadZopUruGuWm0C0ELCigYRzs7hl11qJOquEXiIvhrKAR/jbV9mPHfOd/5
+ vnvOd08OQyjraRVTbrYLNjNvZKlU8kQwE2d3jBcWaRqHUvHooxoSN/96lsA/XndTuHdPRIa9
+ 0WoSd93bL8dNnc8IXDc0Dw82ewh85YlTjt03hwkcjR6lceDmZTnuimXhGwOPZbjBd43Cvx9Y
+ jYd8YyTu7Oohcd9JL4VDE26A90VPy7Dz2CjA212PaRxu2vDWHK71SL+Mq275mDtxZiHXF3Fw
+ Af9Oirt2uZPiWn7Yxp1qfCjjvjj3M8HdP32J4r5q9QPuYeBl/fRNxmVlAl8i2NSCudhSUm4u
+ LWDXvGdYYdDlabTZ2nz8Oqs28yahgF25Vp+9qtwY986qt/JGRxzS86LILn5zmc3isAvqMoto
+ L2AFa4nRqtVac0TeJDrMpTnFFtMbWo0mVxdnfmAsi9XVU9Z9TIXzSoCoAiGqFqQwCC5F4RsB
+ UAtSGSVsB8gd9E8mIwBVj18nEywlHAMoun12LWCSir0PUiVOF0C7XbspKbkN0K3zz5ICCmah
+ lnDipRQmA2aiX65+I0+QCPgvjQZHupOkmVCHBkJ1yTlIuBAd/Pt+PKYZBcxHA4YEqoAzUE/D
+ YJJNwPmo7a6XkKZWo/bIMJDwDLR/p5OQWuWgCx2PyEQrBD9n0E/hKloSrESH97pkUjwTDYVb
+ J3EVuu12Tsbb0KVD39OS2AXQuScvCkuQ59YOkHBPxM00n1wsfcSrKBSbnC0d1QSf0xKsQDVO
+ pSRcgL4d6ZNJsAo9cH0mwRy62DtOfg1e8Uwx6Zli0jPFmOf/to2A9IOXBKtoKhXEXOvSqZsO
+ gORRLOLawZnf1nYDyAB2uqK9f3ORUs5vFStN3QAxBJuhqPBuKlIqSvjKTwSbxWBzGAWxG+ji
+ G9hFqGYVW+InZrYbtLrcvDxNvg7r8nIxO1sRSOsvVMJS3i58KAhWwfZCJ2NSVFXg+LyNF1t7
+ vcsVc97u2LyhPgidT6/Oivas2LOmAjR9dzyYJYxX3gG+daubjvlnLFHb/3QMn/0y8sdcIT1t
+ 7N77Wy483XX+VKT5n/mFfemv8b627Mwdbe8uyPRNlK9/Z9rdjZ+G//poeb0exg6v00+7g7wT
+ oVhaAxyDwVDWKLeq4kAnzZJiGa9dRNhE/j+QRa7/KgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrBIsWRmVeSWpSXmKPExsWy7bCSvO6OHzGxBjNXaFh8/dLBYrH+1DFm
  i9V3+9ksTk89y2Qx53wLi8Xed7NZLdbu+cNs0f1KxuLJ+lnMFjd+tbFa9D9+zWxx/vwGdotN
  j6+xWuy9pW1x/95PJouZ8+6wWVxa5G7xat43Fos9e0+yWFzeNYfN4sj/fkaLGef3MVm0bfzK
  aNHa85Pd4vjacAdJjy0rbzJ5tGwu99h2QNXj8tlSj02rOtk87lzbw+axeUm9x+4Fn5k8ms4c
- ZfZ4v+8qm0ffllWMHp83yQXwRHHZpKTmZJalFunbJXBlPH5zn7HgiH3FqdZFrA2Mr4y7GDk5
- JARMJOacn8nWxcjFISSwm1Fi9f4fzBAJKYmt7XugbGGJ+y1HWEFsIYHnjBLH+rJBbDYBbYnN
- x1cxgjSLCOxilDi6s5sNJMEsMI1DYtcHcRBbWMBQYsK8BhYQm0VAVWLnoQ1MIDavgKXE7zkH
- WCBsQYmTM58A2RxAvXoSbRsZIcbIS2x/OwfqBgWJHWdfg8VFgErWbznCBFEjIjG7s415AqPg
- LCSTZiFMmoVk0iwkHQsYWVYxSqYWFOem5xYbFhjmpZbrFSfmFpfmpesl5+duYgQnAS3NHYyX
- l8QfYhTgYFTi4d1xMzpWiDWxrLgy9xCjBAezkghvxZyoWCHelMTKqtSi/Pii0pzU4kOM0hws
- SuK8T/OORQoJpCeWpGanphakFsFkmTg4pRoYp387Uzvve4emXIrU/YToF0zq/051vg7NYSlT
- qDRWr9TJELWe3mih13/ukJJZ7tJ7F4/ULTpzQTQx2k6lwXqnwonfE3Jz77o1Vrh+PvldI6Z3
- 890tbEEzXHPM73Y9+LDtwcxJv3/xWehoTf8wr53ZaWpYn2CZ1cQrAr/mbTr9/efZBct+z5Pc
- o8RSnJFoqMVcVJwIAG6nrC7+AgAA
-X-CMS-MailID: 20190821064244epcas2p1e3d77667eed99670611d9353cf365f8b
+ ZfZ4v+8qm0ffllWMHp83yQXwRHHZpKTmZJalFunbJXBl3OqezlYwg6Oi7cYm5gbGI2xdjBwc
+ EgImEtM+cHUxcnEICexmlFg16QZjFyMnUFxKYmv7HmYIW1jifssRVoii54wSD39eBUuwCWhL
+ bD6+CqxBREBT4sTtKawgNrPANA6JXR/EQWxhAVOJe0e62UBsFgFViaXP3wPZ7By8ApYS9+JB
+ orwCghInZz5hATmHWUBPom0jI8QQeYntb+dAXaAgsePsa6i4iMTszjZmiKV6Ehd3fmGZwCg4
+ C8mkWQiTZiGZNAtJ9wJGllWMkqkFxbnpucWGBYZ5qeV6xYm5xaV56XrJ+bmbGMHxr6W5g/Hy
+ kvhDjAIcjEo8vDtuRscKsSaWFVfmHmKU4GBWEuGtmBMVK8SbklhZlVqUH19UmpNafIhRmoNF
+ SZz3ad6xSCGB9MSS1OzU1ILUIpgsEwenVANjcVNZnlGXxD0pT0sbo+QV7PNEp90NOvP9wOXl
+ ubMDp85MW/HfyaitQ3zr5d+zitTdAy4m308+t/jIDR2XdxHl6Z+vt8UuT9421zd+h6Nl/q0M
+ kb2LZ/13SKt+cPrVkmu7X2bIhQV+j9rfcVJoQtHaO/kTVjnKxt+va+/TC6x/3Pk19WTu8yNT
+ lFiKMxINtZiLihMBBGnmbfsCAAA=
+X-CMS-MailID: 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9
 X-Msg-Generator: CA
 X-Sendblock-Type: AUTO_CONFIDENTIAL
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20190821064244epcas2p1e3d77667eed99670611d9353cf365f8b
-References: <CGME20190821064244epcas2p1e3d77667eed99670611d9353cf365f8b@epcas2p1.samsung.com>
+X-CMS-RootMailID: 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9
+References: <CGME20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9@epcas2p3.samsung.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -143,8 +137,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i0KKd-00Aj22-Jy
-Subject: [f2fs-dev] [PATCH 9/9] fs: f2fs: support diskcipher
+X-Headers-End: 1i0LS7-00AIU2-Vj
+Subject: Re: [f2fs-dev] [PATCH 6/9] dm crypt: support diskcipher
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -174,275 +168,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-F2FS checks the crypto properties of the inode, and if it is a diskcipher,
-sets it to BIO before submitting the BIO.
-When using diskcipher, F2FS does not encrypt the data before submitting
-the bio and decrypt the data on complete of the BIO.
+On Wed, Aug 21, 2019 at 09:13:36AM +0200, Milan Broz wrote: 
+>
+> NACK.
+> 
+> The whole principle of dm-crypt target is that it NEVER EVER submits
+> plaintext data down the stack in bio.
+> 
+> If you want to do some lower/higher layer encryption, use key management
+> on a different layer.
+> So here, just setup encryption for fs, do not stack it with dm-crypt.
+> 
+> Also, dm-crypt is software-independent solution
+> (software-based full disk encryption), it must not depend on
+> any underlying hardware.
+> Hardware can be of course used used for acceleration, but then
+> just implement proper crypto API module that accelerates particular
+cipher.
 
-F2FS uses DUN(device unit number) as the IV(initial vector)
-for cryptographic operations.
-DUN can support the Garbage collection of f2fs.
-Even if a data is moved in the storage device by garbage collection,
-the data has same DUN, so that the data can be decrypted.
-F2FS calculates DUN of data and sets it to BIO.
+I'm sorry for breaking the basic rules of dm-crypt. 
+But, if I want to use the H/W crypto accelerator running in storage
+controller,
+I have to drop plaintext to bio.
+I think the "proper crypto API module" that you mentioned is diskcipher
+because diskcipher isn't only for FMP.
+Diskcipher is a crypto API that supports encryption on storage controllers.
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Chao Yu <chao@kernel.org>
-Signed-off-by: Boojin Kim <boojin.kim@samsung.com>
----
- fs/f2fs/data.c | 98
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
- fs/f2fs/f2fs.h |  2 +-
- 2 files changed, 97 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 3dfefab..c8252bf 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -85,6 +85,52 @@ struct bio_post_read_ctx {
- 	unsigned int enabled_steps;
- };
- 
-+/* device unit number for iv sector */
-+#define PG_DUN(i, p)	\
-+	((((i)->i_ino & 0xffffffff) << 32) | (p & 0xffffffff))
-+
-+static inline bool f2fs_may_encrypt_bio(struct inode *inode,
-+		struct f2fs_io_info *fio)
-+{
-+#ifdef CONFIG_CRYPTO_DISKCIPHER
-+	if (fio && (fio->type != DATA || fio->encrypted_page))
-+		return false;
-+
-+	return (f2fs_encrypted_file(inode) &&
-+			fscrypt_disk_encrypted(inode));
-+#else
-+	return false;
-+#endif
-+}
-+
-+static inline bool f2fs_bio_disk_encrypted(unsigned int bi_opf)
-+{
-+	if (bi_opf & REQ_CRYPT)
-+		return true;
-+	else
-+		return false;
-+}
-+
-+static bool f2fs_mergeable_bio(struct bio *bio, u64 dun, void *ci,
-+				bool bio_encrypted)
-+{
-+#ifdef CONFIG_CRYPTO_DISKCIPHER
-+	if (!bio)
-+		return true;
-+
-+	/* if both of them are not encrypted, no further check is needed */
-+	if (!f2fs_bio_disk_encrypted(bio->bi_opf) && !bio_encrypted)
-+		return true;
-+
-+	if (bio->bi_aux_private == ci)
-+		return bio_end_dun(bio) == dun;
-+	else
-+		return false;
-+#else
-+	return true;
-+#endif
-+}
-+
- static void __read_end_io(struct bio *bio)
- {
- 	struct page *page;
-@@ -174,6 +220,9 @@ static void f2fs_read_end_io(struct bio *bio)
- 		bio->bi_status = BLK_STS_IOERR;
- 	}
- 
-+	if (f2fs_bio_disk_encrypted(bio->bi_opf))
-+		goto end_io;
-+
- 	if (f2fs_bio_post_read_required(bio)) {
- 		struct bio_post_read_ctx *ctx = bio->bi_private;
- 
-@@ -182,6 +231,7 @@ static void f2fs_read_end_io(struct bio *bio)
- 		return;
- 	}
- 
-+end_io:
- 	__read_end_io(bio);
- }
- 
-@@ -362,7 +412,10 @@ static void __submit_merged_bio(struct f2fs_bio_info
-*io)
- 	if (!io->bio)
- 		return;
- 
--	bio_set_op_attrs(io->bio, fio->op, fio->op_flags);
-+	if (f2fs_bio_disk_encrypted(io->bio->bi_opf))
-+		bio_set_op_attrs(io->bio, fio->op, fio->op_flags |
-REQ_CRYPT);
-+	else
-+		bio_set_op_attrs(io->bio, fio->op, fio->op_flags);
- 
- 	if (is_read_io(fio->op))
- 		trace_f2fs_prepare_read_bio(io->sbi->sb, fio->type,
-io->bio);
-@@ -476,6 +529,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 	struct bio *bio;
- 	struct page *page = fio->encrypted_page ?
- 			fio->encrypted_page : fio->page;
-+	struct inode *inode = fio->page->mapping->host;
- 
- 	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
- 			fio->is_por ? META_POR : (__is_meta_io(fio) ?
-@@ -502,6 +556,9 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
- 			__read_io_type(page): WB_DATA_TYPE(fio->page));
- 
-+	if (f2fs_may_encrypt_bio(inode, fio))
-+		fscrypt_set_bio(inode, bio, PG_DUN(inode,
-fio->page->index));
-+
- 	__submit_bio(fio->sbi, bio, fio->type);
- 	return 0;
- }
-@@ -604,6 +661,9 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	enum page_type btype = PAGE_TYPE_OF_BIO(fio->type);
- 	struct f2fs_bio_info *io = sbi->write_io[btype] + fio->temp;
- 	struct page *bio_page;
-+	struct inode *inode;
-+	bool bio_encrypted;
-+	u64 dun;
- 
- 	f2fs_bug_on(sbi, is_read_io(fio->op));
- 
-@@ -624,6 +684,9 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	verify_fio_blkaddr(fio);
- 
- 	bio_page = fio->encrypted_page ? fio->encrypted_page : fio->page;
-+	inode = fio->page->mapping->host;
-+	dun = PG_DUN(inode, fio->page->index);
-+	bio_encrypted = f2fs_may_encrypt_bio(inode, fio);
- 
- 	/* set submitted = true as a return value */
- 	fio->submitted = true;
-@@ -633,6 +696,10 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	if (io->bio && !io_is_mergeable(sbi, io->bio, io, fio,
- 			io->last_block_in_bio, fio->new_blkaddr))
- 		__submit_merged_bio(io);
-+
-+	if (!f2fs_mergeable_bio(io->bio, dun,
-+			fscrypt_get_diskcipher(inode), bio_encrypted))
-+		__submit_merged_bio(io);
- alloc_new:
- 	if (io->bio == NULL) {
- 		if ((fio->type == DATA || fio->type == NODE) &&
-@@ -644,6 +711,9 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 		io->bio = __bio_alloc(sbi, fio->new_blkaddr, fio->io_wbc,
- 						BIO_MAX_PAGES, false,
- 						fio->type, fio->temp);
-+		if (bio_encrypted)
-+			fscrypt_set_bio(inode, io->bio, dun);
-+
- 		io->fio = *fio;
- 	}
- 
-@@ -691,7 +761,7 @@ static struct bio *f2fs_grab_read_bio(struct inode
-*inode, block_t blkaddr,
- 	bio->bi_end_io = f2fs_read_end_io;
- 	bio_set_op_attrs(bio, REQ_OP_READ, op_flag);
- 
--	if (f2fs_encrypted_file(inode))
-+	if (f2fs_encrypted_file(inode) && !fscrypt_disk_encrypted(inode))
- 		post_read_steps |= 1 << STEP_DECRYPT;
- 
- 	if (f2fs_need_verity(inode, first_idx))
-@@ -731,6 +801,10 @@ static int f2fs_submit_page_read(struct inode *inode,
-struct page *page,
- 	}
- 	ClearPageError(page);
- 	inc_page_count(sbi, F2FS_RD_DATA);
-+
-+	if (f2fs_may_encrypt_bio(inode, NULL))
-+		fscrypt_set_bio(inode, bio, PG_DUN(inode, page->index));
-+
- 	__submit_bio(sbi, bio, DATA);
- 	return 0;
- }
-@@ -1665,6 +1739,8 @@ static int f2fs_read_single_page(struct inode *inode,
-struct page *page,
- 	sector_t last_block_in_file;
- 	sector_t block_nr;
- 	int ret = 0;
-+	bool bio_encrypted;
-+	u64 dun;
- 
- 	block_in_file = (sector_t)page_index(page);
- 	last_block = block_in_file + nr_pages;
-@@ -1734,6 +1810,15 @@ static int f2fs_read_single_page(struct inode *inode,
-struct page *page,
- 		__submit_bio(F2FS_I_SB(inode), bio, DATA);
- 		bio = NULL;
- 	}
-+
-+	dun = PG_DUN(inode, page->index);
-+	bio_encrypted = f2fs_may_encrypt_bio(inode, NULL);
-+	if (!f2fs_mergeable_bio(bio, dun, fscrypt_get_diskcipher(inode),
-+				bio_encrypted)) {
-+		__submit_bio(F2FS_I_SB(inode), bio, DATA);
-+		bio = NULL;
-+	}
-+
- 	if (bio == NULL) {
- 		bio = f2fs_grab_read_bio(inode, block_nr, nr_pages,
- 				is_readahead ? REQ_RAHEAD : 0, page->index);
-@@ -1742,6 +1827,8 @@ static int f2fs_read_single_page(struct inode *inode,
-struct page *page,
- 			bio = NULL;
- 			goto out;
- 		}
-+		if (f2fs_may_encrypt_bio(inode, NULL))
-+			fscrypt_set_bio(inode, bio, dun);
- 	}
- 
- 	/*
-@@ -1870,6 +1957,9 @@ static int encrypt_one_page(struct f2fs_io_info *fio)
- 	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
- 
- retry_encrypt:
-+	if (fscrypt_disk_encrypted(inode))
-+		return 0;
-+
- 	fio->encrypted_page = fscrypt_encrypt_pagecache_blocks(fio->page,
- 							       PAGE_SIZE, 0,
- 							       gfp_flags);
-@@ -2804,6 +2894,10 @@ static void f2fs_dio_submit_bio(struct bio *bio,
-struct inode *inode,
- 	if (!dio)
- 		goto out;
- 
-+	if (dio->inode && fscrypt_has_encryption_key(dio->inode))
-+		fscrypt_set_bio(inode, bio, PG_DUN(inode,
-+				file_offset >> PAGE_SHIFT));
-+
- 	dio->inode = inode;
- 	dio->orig_end_io = bio->bi_end_io;
- 	dio->orig_private = bio->bi_private;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0cbf1d4..8447542 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3706,7 +3706,7 @@ static inline bool f2fs_force_buffered_io(struct inode
-*inode,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	int rw = iov_iter_rw(iter);
- 
--	if (f2fs_post_read_required(inode))
-+	if (f2fs_post_read_required(inode) &&
-!fscrypt_disk_encrypted(inode))
- 		return true;
- 	if (f2fs_is_multi_device(sbi))
- 		return true;
--- 
-2.7.4
+Thanks
+Boojin Kim
 
 
 
