@@ -2,147 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCB539741B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 09:57:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0LVG-0000T0-95; Wed, 21 Aug 2019 07:57:58 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <boojin.kim@samsung.com>) id 1i0LVE-0000Sg-Op
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:57:56 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F2CB974E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 10:26:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=SvfanO3+HtvwAqloFumtM9PbsY2/vIkO958Crl1hqKI=; b=dE0kxZqKFWSpsFvS8LN8dntEIW
+	fpJUaCoQO03SaD1cZbgRp0BCI6ypc6na2w0lwrEXaMM/VW3UeseBYNJC+0mF4QCxe8LKMnfoPlhul
+	PmazcbSz+Ur0C6G5sup0HmCUHatRXPLCebsq0EyQaDeNoGg/metNvq5X09Wm3I1fHr+I=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1i0LwU-0001h4-81; Wed, 21 Aug 2019 08:26:06 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <3XvlcXQYKALUnVotVobjjbgZ.Xjh@flex--satyat.bounces.google.com>)
+ id 1i0LwS-0001gl-5y
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 08:26:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=; b=V61x6f3NDZr33yAvh3WaCt2vka
- 2nmIItFcyl7cM04yd0//bppzxtxnvBOTPrj2/aReKFlAb8Q/EKEXQHpYlqba8D2MV9UqPokWbFxg+
- P2dexysqsISSiK2PDVQ6UwgyOUlZF35qUt2Bte7iTaYOvC6EnF4ILYLh8bXxpMJRsgoM=;
+ bh=qBYw6rmUbKKC3VdJzzhZFbO54DY8EqjVVgF8hqQ2BVM=; b=HW1+KF1ub/uLYn3IQRS8QHOhUh
+ PLMEb+w+Ou/jUWlpAX6tXt9sYd4Ux8VKki62xYS1xXUQkdFM8Okh4HYhVwc8RW+Zz7h4bVXfqPUMP
+ q2jibBNpTAyvVPis0yQXqkGf1uaocpxzRjuiXsJ3BbAWKLhZVlxHiWvQ2suZhdyq02e0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
- :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=; b=e
- qaxT6yWtlbLNqYg0cVY7dqcth3c1IoNsNzTANqLJR7YgHsCMxVzpZ6hH16eQUgPF3rirpNELa3P1J
- 6xT6ymfTYTdM3Evet8sA2+YRj5ZAy+r6UqAR8BrwnibczVgZkpxlkpLxdXbINH6SOkL0u25QGUheP
- REQQCO8mWI2WQaKY=;
-Received: from mailout3.samsung.com ([203.254.224.33])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0LVC-00EFfa-FC
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:57:56 +0000
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20190821075746epoutp030ea7b2e780dc74a13eacf677f5945874~84Rir7_0o2721127211epoutp03i
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qBYw6rmUbKKC3VdJzzhZFbO54DY8EqjVVgF8hqQ2BVM=; b=R
+ 6I8hS64VfpVmdEsWPFGZD0KKCSg+8in9J2LacI/oG38i5lbOAVXSC62JXRVfWqgi7BhWratCvclj8
+ qBOpKRf47bE68/ucGsrWvYGV8XtmUcHqsGXqkshd5wFtuNRFFoBQQZJES8RoMOCarROY7IT4+KoyO
+ 8+KNlonG7UZyHbTs=;
+Received: from mail-qt1-f202.google.com ([209.85.160.202])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
+ id 1i0LwI-00AL7n-Cg
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 08:26:04 +0000
+Received: by mail-qt1-f202.google.com with SMTP id z15so1827328qts.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 21 Aug 2019 07:57:46 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20190821075746epoutp030ea7b2e780dc74a13eacf677f5945874~84Rir7_0o2721127211epoutp03i
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1566374266;
- bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=;
- h=From:To:Cc:Subject:Date:References:From;
- b=Te7AorPt/qgkuEhu7rtZoJJ/4J2N3dZgeKLWGsbDPOWoh6Pd9U47Q+WaQqJ7H44k4
- Z51RruAKWu+b+jize4UCFr2NATWriMVJhGDms/0EnUmnOnpOW8JELIj4/XTJYrj/66
- lIJT/Lu2kn95Mo304e74T9fzUwCtTtD4EGZh+/iM=
-Received: from epsnrtp5.localdomain (unknown [182.195.42.166]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20190821075745epcas2p23a902d93d70a249b07900f5ff2742fad~84RhyryS60392603926epcas2p2K;
- Wed, 21 Aug 2019 07:57:45 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.40.183]) by
- epsnrtp5.localdomain (Postfix) with ESMTP id 46D0Pz1WwGzMqYkj; Wed, 21 Aug
- 2019 07:57:43 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 80.76.04156.779FC5D5; Wed, 21 Aug 2019 16:57:43 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
- 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9~84RfNOmwq0945209452epcas2p4w;
- Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20190821075742epsmtrp1c0bda618eef3e376a7e2738bb69573b3~84RfMAFUf3112831128epsmtrp1X;
- Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
-X-AuditID: b6c32a45-ddfff7000000103c-b1-5d5cf977fb70
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 8D.C9.03706.679FC5D5; Wed, 21 Aug 2019 16:57:42 +0900 (KST)
-Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20190821075742epsmtip1a675fb73939b515803f3ca44f0e6b4ec~84Re0K2Zg1561515615epsmtip1q;
- Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
-From: "boojin.kim" <boojin.kim@samsung.com>
-To: "'Herbert Xu'" <herbert@gondor.apana.org.au>
-Date: Wed, 21 Aug 2019 16:57:41 +0900
-Message-ID: <001b01d557f6$1c49fd40$54ddf7c0$@samsung.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Content-Language: ko
-Thread-Index: AdVX9gnaDYeXFhMoSci3o9XSTfBUaA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0xbZRTN1/f6XrdR89Yx/WyM1KfEbQzWVls+DBgjqE+3GJLNzBCa7oW+
- ALG/7GvHpsnGcHZlNC0zMULXTdItJnYio7CV8WObhUpAkLgK2XBjU/BHQZ0Cw3VuatsHkf/O
- PfeenHtycyWYzEfKJdVmO2czs0aaWIuf79+sya1JlOuUM0MkurPowlHb8JcYOnPDS6CvPhwV
- If/YYRz1/X5cjFp772OoYfYxNNPmw9DVe04x8k7PYWhs7CyJQtMTYtQ3mYNuTiVEqPnkdQJd
- CbyCZk8u4ai3bwhHsW4/gQb+9QLUNHZRhJztdwB6350g0WDr7hceZTo/vSZiDnfUMOcvZzOx
- UQcTCtYTzPWJXoLpOH2Q6WlZEDF1I1GMuX1xnGA8nUHALIQeL80oMxZWcayBsyk4c4XFUG2u
- LKK379QX6zVapSpXVYDyaYWZNXFFdMmO0tyXq43J7LRiL2t0JKlSlufpbc8X2iwOO6eosvD2
- IpqzGoxWlcqax7Mm3mGuzKuwmJ5TKZVqTXJyj7Hqwt2Y2Poetq83OkHUgm7RUbBGAqlnYbT/
- Y3AUrJXIqC4Aw8fuY0IxD6A37MaFYgnAc79cEq9I5hbqyBSWUX0ANn5hFobiAC56mtJDBJUD
- OwaDIIUzKSUMh/5Oe2DUPyScmY/gqcYGSgOnBhqIFMapbBhzB9ICKVUA464psYDXw6HmmfQ8
- RmXB8G9+TNhCAbtG54DAZ8Lj9U5MMMuDN0ai4pQZpB6QcLz/DCkISuCfk4PL4g1wdrBzmZfD
- uNe5jA/C8U9OkYLYDeDIvZXGM9D305GkmyTpthm2dW9LQUg9CQcml3d7CLr6H5ACLYUup0wQ
- PgVPzMdEAi2Hf7gPCDQDb9cdwhrBE75VIX2rQvpWBfP9b9sC8CB4mLPypkqOV1tVq48dAum/
- 2PJSF2j6ekcEUBJAZ0gT5eU6mZjdy+83RQCUYHSmdJ+/TCeTGtj973A2i97mMHJ8BGiSNziG
- yTdWWJJfZrbrVRq1Vqss0CCNVo3oR6Qd666Vy6hK1s69xXFWzraiE0nWyGvBgWm1pdblS/x6
- pLh+djLn9e28/9tg/uUr45tCb7TtvHrztVvZLecWnlZEPvjhm4jB4zldF4993p6/6cfG1u+z
- 9BeK49/1GP+6FQgfyuqpKbm7GKh5sf1EA7ZbO/x22XDhq5cUgXd/tnwm+ehNT6dcEV03iumW
- dMpdwz1bMzaKGl1S2EzjfBWr2oLZePY/dew/Ay0EAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNIsWRmVeSWpSXmKPExsWy7bCSnG7Zz5hYg1edmhZfv3SwWKw/dYzZ
- YvXdfjaL01PPMlnMOd/CYrH33WxWi7V7/jBbdL+SsXiyfhazxY1fbawW/Y9fM1ucP7+B3WLT
- 42usFntvaVvcv/eTyWLmvDtsFpcWuVu8mveNxWLP3pMsFpd3zWGzOPK/n9Fixvl9TBZtG78y
- WrT2/GS3OL423EHSY8vKm0weLZvLPbYdUPW4fLbUY9OqTjaPO9f2sHlsXlLvsXvBZyaPpjNH
- mT3e77vK5tG3ZRWjx+dNcgE8UVw2Kak5mWWpRfp2CVwZO39cZi1oZq7Yc/QaWwPjLqYuRk4O
- CQETidefm9i7GLk4hAR2M0qsvbyLBSIhJbG1fQ8zhC0scb/lCCtE0XNGifPrD4F1swloS2w+
- vooRxBYRMJDYvuk3mM0sMI1DYtcHcRBbWMBU4t6RbjYQm0VAVeJyzyKwGl4BS4mXHfdYIWxB
- iZMznwAt5gDq1ZNo2wg1Rl5i+9s5UDcoSOw4+xoqLiIxu7ONGWKtnsTdM0dZJzAKzkIyaRbC
- pFlIJs1C0r2AkWUVo2RqQXFuem6xYYFhXmq5XnFibnFpXrpecn7uJkZwEtDS3MF4eUn8IUYB
- DkYlHt4dN6NjhVgTy4orcw8xSnAwK4nwVsyJihXiTUmsrEotyo8vKs1JLT7EKM3BoiTO+zTv
- WKSQQHpiSWp2ampBahFMlomDU6qBsbrk4svrTNERm2+ttP3R+VVg/8oXjwW/e6o+W62+5Nun
- Cp2guesvXr+QdiuAM+zKUw69JmlLjbWFzOIbHOOf9SrkP1i2xm/F6o1PfgkfqvCbv0Cs+Mjd
- 5/Pnznw488rq9maZA3925rPqSzDMem3n4Phz0pOmPZqLD23W1/JRnvpqjv8aTvbrrDOVWIoz
- Eg21mIuKEwH4Sucq/gIAAA==
-X-CMS-MailID: 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9
-X-Msg-Generator: CA
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9
-References: <CGME20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9@epcas2p4.samsung.com>
-X-Spam-Score: -0.1 (/)
+ Wed, 21 Aug 2019 01:25:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=qBYw6rmUbKKC3VdJzzhZFbO54DY8EqjVVgF8hqQ2BVM=;
+ b=m1XurgtoPK+fka2z8sNyW0/MqfW9/U9hjy3nSxr5IPDOY+nWylWHuogp9jrVH5zFCF
+ GRsgogC4tQFk3Yzt2zQT9kLISOv5wsMBdy297GHb/QuCYDrRmyg2JdtW+8NtfbPKafxi
+ MoLg4eK/kitx8SnWOv3uhXpr8bDQGHHsBReb86MT16AaTYiI4ybrwjzBQhOsUVclUYKi
+ h2r8/Dd7NUpMxrwKnp57d20sNxfcj6ISWEOSO/xFG1m1dMw4JodcZVcOlV72zDWzTlT4
+ 5wuG+eNl+GhXM1Qy3JjnLN/UwBFCyLiLUmtCEd4Xvs+uLqtP4gboeKPIJ038cFUHYTcZ
+ v+NQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=qBYw6rmUbKKC3VdJzzhZFbO54DY8EqjVVgF8hqQ2BVM=;
+ b=QYp5xbeznwvNGHWW+UcdIwyvSdM6uX2P1WxNt9SO6VPU5J91odBadQHuq++0KxvYbq
+ OrgEjVI4r6XJQ//aw1oz/KmZ8Oyl1vNVxTC12wRGbNdUsuPqEbsBQNh8mRcRKscnkxg3
+ bZKhyO6IdO1/PDHkoy6VtEM94FOEVpIcBjFJiH6fCLK3y3M1+bhkuBScZ/R9KI7JJDYr
+ 3XgMOY2LIbhGWhnHUWipbLLHy+Mh6+1HqOWD+f9SYRZRlfSDWzhKvfFl4kqshJumMshR
+ LPK6sGqG0V8WHfE5KIgxZsKT+q15D5V+cvDlpD1K7Jt/MNGbax/bDZKNPKgX2wkJ0XoE
+ +z9Q==
+X-Gm-Message-State: APjAAAVTX8bcg64SqZfn92DsLfttYg1zHbFrI/426WLVgaJTocCe4RxM
+ smzvTOubFPDq//qPXkrhm5YUqI71dig=
+X-Google-Smtp-Source: APXvYqyYG592CW3rXQWgTZpbKT/mH3YUzFok7GJ5iJ9kysnTWjWo+ii3lu2lURgc1SAlWfNK2GglwL02dCI=
+X-Received: by 2002:a65:4507:: with SMTP id n7mr27027863pgq.86.1566374238228; 
+ Wed, 21 Aug 2019 00:57:18 -0700 (PDT)
+Date: Wed, 21 Aug 2019 00:57:06 -0700
+Message-Id: <20190821075714.65140-1-satyat@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.23.0.rc1.153.gdeed80330f-goog
+To: linux-block@vger.kernel.org, linux-scsi@vger.kernel.org, 
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linaro.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i0LVC-00EFfa-FC
-Subject: Re: [f2fs-dev] [PATCH 6/9] dm crypt: support diskcipher
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.160.202 listed in list.dnswl.org]
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1i0LwI-00AL7n-Cg
+Subject: [f2fs-dev] [PATCH v4 0/8] Inline Encryption Support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,34 +109,167 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: 'Ulf
- Hansson' <ulf.hansson@linaro.org>, 'Mike Snitzer' <snitzer@redhat.com>,
- dm-devel@redhat.com, 'Andreas Dilger' <adilger.kernel@dilger.ca>,
- 'Alasdair Kergon' <agk@redhat.com>, 'Eric Biggers' <ebiggers@kernel.org>,
- linux-samsung-soc@vger.kernel.org, 'Herbert Xu' <herbert@gondor.apana.org.au>,
- 'Krzysztof Kozlowski' <krzk@kernel.org>,
- 'Jaehoon Chung' <jh80.chung@samsung.com>, 'Kukjin Kim' <kgene@kernel.org>,
- linux-ext4@vger.kernel.org, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, 'Jaegeuk Kim' <jaegeuk@kernel.org>,
- linux-arm-kernel@lists.infradead.org, 'Jens Axboe' <axboe@kernel.dk>,
- 'Theodore Ts'o' <tytso@mit.edu>, linux-mmc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- "'David S. Miller'" <davem@davemloft.net>
+From: Satya Tangirala via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Satya Tangirala <satyat@google.com>
+Cc: Kuohong Wang <kuohong.wang@mediatek.com>,
+ Satya Tangirala <satyat@google.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Kim Boojin <boojin.kim@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Aug 21, 2019 at 09:35:36AM +0200, Herbert Xu Herbert wrote:
+This patch series adds support for Inline Encryption to the block layer,
+UFS, fscrypt and f2fs.
 
-> I agree.  Please take a look at the recent ESSIV patches on
-> linux-crypto and build multi-block operations on top of them
-> which can then be implemented by the hardware.
->
-> Cheers,
+Inline Encryption hardware allows software to specify an encryption context
+(an encryption key, crypto algorithm, data unit num, data unit size, etc.)
+along with a data transfer request to a storage device, and the inline
+encryption hardware will use that context to en/decrypt the data. The
+inline encryption hardware is part of the storage device, and it
+conceptually sits on the data path between system memory and the storage
+device. Inline Encryption hardware has become increasingly common, and we
+want to support it in the kernel.
 
-Can you tell me which patch you mentioned? Is this?
-https://patches.linaro.org/project/linux-crypto/list/?series=22762
+Inline Encryption hardware implementations often function around the
+concept of a limited number of "keyslots", which can hold an encryption
+context each. The storage device can be directed to en/decrypt any
+particular request with the encryption context stored in any particular
+keyslot.
+
+Patch 1 introduces a Keyslot Manager to efficiently manage keyslots.
+The keyslot manager also functions as the interface that blk-crypto
+(introduced in Path 3), will use to program keys into inline encryption
+hardware. For more information on the Keyslot Manager, refer to
+documentation found in block/keyslot-manager.c and linux/keyslot-manager.h.
+
+Patch 2 introduces struct bio_crypt_ctx, and a ptr to one in struct bio,
+which allows struct bio to represent an encryption context that can be
+passed down the storage stack from the filesystem layer to the storage
+driver.
+
+Patch 3 introduces blk-crypto. Blk-crypto delegates crypto operations to
+inline encryption hardware when available, and also contains a software
+fallback to the kernel crypto API. Blk-crypto also makes it possible for
+layered devices like device mapper to make use of inline encryption
+hardware. Given that blk-crypto works as a software fallback, we are
+considering removing file content en/decryption from fscrypt and simply
+using blk-crypto in a future patch. For more details on blk-crypto, refer
+to Documentation/block/blk-crypto.txt.
+
+Patches 4-6 add support for inline encryption into the UFS driver according
+to the JEDEC UFS HCI v2.1 specification. Inline encryption support for
+other drivers (like eMMC) may be added in the same way - the device driver
+should set up a Keyslot Manager in the device's request_queue (refer to
+the UFS crypto additions in ufshcd-crypto.c and ufshcd.c for an example).
+
+Patches 7 and 8 add support to fscrypt and f2fs, so that we have
+a complete stack that can make use of inline encryption.
+
+There have been a few patch sets addressing Inline Encryption Support in
+the past. Briefly, this patch set differs from those as follows:
+
+1) "crypto: qce: ice: Add support for Inline Crypto Engine"
+is specific to certain hardware, while our patch set's Inline
+Encryption support for UFS is implemented according to the JEDEC UFS
+specification.
+
+2) "scsi: ufs: UFS Host Controller crypto changes" registers inline
+encryption support as a kernel crypto algorithm. Our patch views inline
+encryption as being fundamentally different from a generic crypto
+provider (in that inline encryption is tied to a device), and so does
+not use the kernel crypto API to represent inline encryption hardware.
+
+3) "scsi: ufs: add real time/inline crypto support to UFS HCD" requires
+the device mapper to work - our patch does not.
+
+Changes v3 => v4:
+ - Fixed the issue with allocating crypto_skcipher in
+   blk_crypto_keyslot_program.
+ - bio_crypto_alloc_ctx is now mempool backed.
+ - In f2fs, a bio's bi_crypt_context is now set up when the
+   bio is allocated, rather than just before the bio is
+   submitted - this fixes bugs in certain cases, like when an
+   encrypted block is being moved without decryption.
+ - Lots of refactoring and cleanup of blk-crypto - thanks Eric!
+
+Changes v2 => v3:
+ - Overhauled keyslot manager's get keyslot logic and optimized LRU.
+ - Block crypto en/decryption fallback now supports data unit sizes
+   that divide the bvec length (instead of requiring each bvec's length
+   to be the same as the data unit size).
+ - fscrypt master key is now keyed additionally by super_block and
+   ci_ctfm != NULL.
+ - all references of "hw encryption" are replaced by inline encryption.
+ - address various other review comments from Eric.
+
+Changes v1 => v2:
+ - Block layer and UFS changes are split into 3 patches each.
+ - We now only have a ptr to a struct bio_crypt_ctx in struct bio, instead
+   of the struct itself.
+ - struct bio_crypt_ctx no longer has flags.
+ - blk-crypto now correctly handles the case when it fails to init
+   (because of insufficient memory), but kernel continues to boot.
+ - ufshcd-crypto now works on big endian cpus.
+ - Many cleanups.
+
+Satya Tangirala (8):
+  block: Keyslot Manager for Inline Encryption
+  block: Add encryption context to struct bio
+  block: blk-crypto for Inline Encryption
+  scsi: ufs: UFS driver v2.1 spec crypto additions
+  scsi: ufs: UFS crypto API
+  scsi: ufs: Add inline encryption support to UFS
+  fscrypt: wire up fscrypt to use blk-crypto
+  f2fs: Wire up f2fs to use inline encryption via fscrypt
+
+ Documentation/block/inline-encryption.txt | 186 ++++++
+ block/Kconfig                             |  10 +
+ block/Makefile                            |   2 +
+ block/bio-crypt-ctx.c                     | 142 +++++
+ block/bio.c                               |  23 +-
+ block/blk-core.c                          |  14 +-
+ block/blk-crypto.c                        | 737 ++++++++++++++++++++++
+ block/blk-merge.c                         |  35 +-
+ block/bounce.c                            |  15 +-
+ block/keyslot-manager.c                   | 351 +++++++++++
+ drivers/md/dm.c                           |  15 +-
+ drivers/scsi/ufs/Kconfig                  |  10 +
+ drivers/scsi/ufs/Makefile                 |   1 +
+ drivers/scsi/ufs/ufshcd-crypto.c          | 429 +++++++++++++
+ drivers/scsi/ufs/ufshcd-crypto.h          |  86 +++
+ drivers/scsi/ufs/ufshcd.c                 |  85 ++-
+ drivers/scsi/ufs/ufshcd.h                 |  29 +
+ drivers/scsi/ufs/ufshci.h                 |  67 +-
+ fs/crypto/Kconfig                         |   6 +
+ fs/crypto/bio.c                           | 137 +++-
+ fs/crypto/fscrypt_private.h               |  23 +
+ fs/crypto/keyinfo.c                       | 107 +++-
+ fs/crypto/policy.c                        |   6 +
+ fs/f2fs/data.c                            | 127 +++-
+ fs/f2fs/super.c                           |  15 +-
+ include/linux/bio-crypt-ctx.h             | 233 +++++++
+ include/linux/bio.h                       |   1 +
+ include/linux/blk-crypto.h                |  47 ++
+ include/linux/blk_types.h                 |   6 +
+ include/linux/blkdev.h                    |   6 +
+ include/linux/fscrypt.h                   |  72 +++
+ include/linux/keyslot-manager.h           |  94 +++
+ include/uapi/linux/fs.h                   |   3 +-
+ 33 files changed, 3034 insertions(+), 86 deletions(-)
+ create mode 100644 Documentation/block/inline-encryption.txt
+ create mode 100644 block/bio-crypt-ctx.c
+ create mode 100644 block/blk-crypto.c
+ create mode 100644 block/keyslot-manager.c
+ create mode 100644 drivers/scsi/ufs/ufshcd-crypto.c
+ create mode 100644 drivers/scsi/ufs/ufshcd-crypto.h
+ create mode 100644 include/linux/bio-crypt-ctx.h
+ create mode 100644 include/linux/blk-crypto.h
+ create mode 100644 include/linux/keyslot-manager.h
+
+-- 
+2.23.0.rc1.153.gdeed80330f-goog
 
 
 
