@@ -2,132 +2,136 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE8AC97401
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 09:54:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCB539741B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 09:57:59 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0LSB-0008VL-SB; Wed, 21 Aug 2019 07:54:47 +0000
+	id 1i0LVG-0000T0-95; Wed, 21 Aug 2019 07:57:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <boojin.kim@samsung.com>) id 1i0LSA-0008V5-7w
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:54:46 +0000
+ (envelope-from <boojin.kim@samsung.com>) id 1i0LVE-0000Sg-Op
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:57:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=; b=R0Qw6ixe5YbqyMRt3eDakF9sQA
- PLXLFLo6T7DAwz5ClgRJjkYhhFub8MXE0/+5aGKfGAPaU7Ljmj3sJky2ycR5+ZSw2zSNbVJUU3LzH
- BtDbbWWjqP7yjTgBMphe40/+bN0jT6XSNg/82ObR5Rmfvb+excQpKJcDMudGaaWS6bTQ=;
+ bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=; b=V61x6f3NDZr33yAvh3WaCt2vka
+ 2nmIItFcyl7cM04yd0//bppzxtxnvBOTPrj2/aReKFlAb8Q/EKEXQHpYlqba8D2MV9UqPokWbFxg+
+ P2dexysqsISSiK2PDVQ6UwgyOUlZF35qUt2Bte7iTaYOvC6EnF4ILYLh8bXxpMJRsgoM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
  :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=; b=f
- LtZETz/pgWtH9REvmm+KZxA5xVA9vZACu4cszggUrTV9G1Gt6QP3l/cp9EeyIQ+/cqp3E2ylZjhHg
- Y3FTFuJNb4PseGYOZ2ZRymJl+l0WSZm/bVqx3xcb8UtfGZZcoXNY8qHzBs17Kb5AVZidj+NjBYtvi
- doo/NHdht6f4eu9A=;
-Received: from mailout1.samsung.com ([203.254.224.24])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=; b=e
+ qaxT6yWtlbLNqYg0cVY7dqcth3c1IoNsNzTANqLJR7YgHsCMxVzpZ6hH16eQUgPF3rirpNELa3P1J
+ 6xT6ymfTYTdM3Evet8sA2+YRj5ZAy+r6UqAR8BrwnibczVgZkpxlkpLxdXbINH6SOkL0u25QGUheP
+ REQQCO8mWI2WQaKY=;
+Received: from mailout3.samsung.com ([203.254.224.33])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0LS7-00AIU2-Vj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:54:46 +0000
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20190821075436epoutp011a18db4b57402d98ffe823a9bfc7b6be~84OxaR3oK1951019510epoutp01-
+ id 1i0LVC-00EFfa-FC
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 07:57:56 +0000
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20190821075746epoutp030ea7b2e780dc74a13eacf677f5945874~84Rir7_0o2721127211epoutp03i
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 21 Aug 2019 07:54:36 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20190821075436epoutp011a18db4b57402d98ffe823a9bfc7b6be~84OxaR3oK1951019510epoutp01-
+ Wed, 21 Aug 2019 07:57:46 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20190821075746epoutp030ea7b2e780dc74a13eacf677f5945874~84Rir7_0o2721127211epoutp03i
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1566374076;
- bh=HTqJmzQb78c+WqBPB/TdiHvNXR8CCp1GserLHPcAGAM=;
+ s=mail20170921; t=1566374266;
+ bh=ozhdgcpKWdJ9STHx0/l4UukvGXSFa8gUQOw9uROJorw=;
  h=From:To:Cc:Subject:Date:References:From;
- b=B5jxDUEk9/Wv2ZsXCfJ0XkAJm9DIHY27cqGo72ZywbwCE+aVOvTsvyScwL4p6sybM
- owql64lYHWS43PFd/HInQdLPv83SRaGXip0WkjESDr2vLz6mjff1A3/7j7+O7TOWyK
- 7NAk6jkpVH93RiwuqnuxfGH0LViWO/nOoUaD+g4w=
+ b=Te7AorPt/qgkuEhu7rtZoJJ/4J2N3dZgeKLWGsbDPOWoh6Pd9U47Q+WaQqJ7H44k4
+ Z51RruAKWu+b+jize4UCFr2NATWriMVJhGDms/0EnUmnOnpOW8JELIj4/XTJYrj/66
+ lIJT/Lu2kn95Mo304e74T9fzUwCtTtD4EGZh+/iM=
 Received: from epsnrtp5.localdomain (unknown [182.195.42.166]) by
  epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20190821075435epcas2p2329ac0d31488e7667c632810cc878449~84Ow2IQSF1069310693epcas2p2D;
- Wed, 21 Aug 2019 07:54:35 +0000 (GMT)
-Received: from epsmges2p4.samsung.com (unknown [182.195.40.182]) by
- epsnrtp5.localdomain (Postfix) with ESMTP id 46D0LK1qCszMqYkr; Wed, 21 Aug
- 2019 07:54:33 +0000 (GMT)
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- D2.06.04112.9B8FC5D5; Wed, 21 Aug 2019 16:54:33 +0900 (KST)
+ 20190821075745epcas2p23a902d93d70a249b07900f5ff2742fad~84RhyryS60392603926epcas2p2K;
+ Wed, 21 Aug 2019 07:57:45 +0000 (GMT)
+Received: from epsmges2p1.samsung.com (unknown [182.195.40.183]) by
+ epsnrtp5.localdomain (Postfix) with ESMTP id 46D0Pz1WwGzMqYkj; Wed, 21 Aug
+ 2019 07:57:43 +0000 (GMT)
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
+ epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 80.76.04156.779FC5D5; Wed, 21 Aug 2019 16:57:43 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9~84OuTKtNR3087030870epcas2p3N;
- Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
+ epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9~84RfNOmwq0945209452epcas2p4w;
+ Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
 Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20190821075432epsmtrp11638c73e7bcdf5c06195a2218aa9d41f~84OuR59zE2895328953epsmtrp1D;
- Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
-X-AuditID: b6c32a48-f37ff70000001010-86-5d5cf8b9dcde
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ 20190821075742epsmtrp1c0bda618eef3e376a7e2738bb69573b3~84RfMAFUf3112831128epsmtrp1X;
+ Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
+X-AuditID: b6c32a45-ddfff7000000103c-b1-5d5cf977fb70
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D3.79.03706.8B8FC5D5; Wed, 21 Aug 2019 16:54:32 +0900 (KST)
-Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip2.samsung.com
+ 8D.C9.03706.679FC5D5; Wed, 21 Aug 2019 16:57:42 +0900 (KST)
+Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20190821075432epsmtip253f2d9c05d500f90970ebcdc57e310bc~84Ot-od_T3239432394epsmtip2r;
- Wed, 21 Aug 2019 07:54:32 +0000 (GMT)
+ 20190821075742epsmtip1a675fb73939b515803f3ca44f0e6b4ec~84Re0K2Zg1561515615epsmtip1q;
+ Wed, 21 Aug 2019 07:57:42 +0000 (GMT)
 From: "boojin.kim" <boojin.kim@samsung.com>
-To: "'Mike Snitzer'" <snitzer@redhat.com>
-Date: Wed, 21 Aug 2019 16:54:32 +0900
-Message-ID: <001a01d557f5$ab0a4a40$011edec0$@samsung.com>
+To: "'Herbert Xu'" <herbert@gondor.apana.org.au>
+Date: Wed, 21 Aug 2019 16:57:41 +0900
+Message-ID: <001b01d557f6$1c49fd40$54ddf7c0$@samsung.com>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 14.0
 Content-Language: ko
-Thread-Index: AdVX9QyEG4+5qw7KRk2/gqnMxtuMUA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0xTVxT29r2+9wBLrhXntZrZvWkWJGCLll0WmVt0+jJNrNkSo4LdC7wA
- WX+tr3WwZJNtWBGadZopUruGuWm0C0ELCigYRzs7hl11qJOquEXiIvhrKAR/jbV9mPHfOd/5
- vnvOd08OQyjraRVTbrYLNjNvZKlU8kQwE2d3jBcWaRqHUvHooxoSN/96lsA/XndTuHdPRIa9
- 0WoSd93bL8dNnc8IXDc0Dw82ewh85YlTjt03hwkcjR6lceDmZTnuimXhGwOPZbjBd43Cvx9Y
- jYd8YyTu7Oohcd9JL4VDE26A90VPy7Dz2CjA212PaRxu2vDWHK71SL+Mq275mDtxZiHXF3Fw
- Af9Oirt2uZPiWn7Yxp1qfCjjvjj3M8HdP32J4r5q9QPuYeBl/fRNxmVlAl8i2NSCudhSUm4u
- LWDXvGdYYdDlabTZ2nz8Oqs28yahgF25Vp+9qtwY986qt/JGRxzS86LILn5zmc3isAvqMoto
- L2AFa4nRqtVac0TeJDrMpTnFFtMbWo0mVxdnfmAsi9XVU9Z9TIXzSoCoAiGqFqQwCC5F4RsB
- UAtSGSVsB8gd9E8mIwBVj18nEywlHAMoun12LWCSir0PUiVOF0C7XbspKbkN0K3zz5ICCmah
- lnDipRQmA2aiX65+I0+QCPgvjQZHupOkmVCHBkJ1yTlIuBAd/Pt+PKYZBcxHA4YEqoAzUE/D
- YJJNwPmo7a6XkKZWo/bIMJDwDLR/p5OQWuWgCx2PyEQrBD9n0E/hKloSrESH97pkUjwTDYVb
- J3EVuu12Tsbb0KVD39OS2AXQuScvCkuQ59YOkHBPxM00n1wsfcSrKBSbnC0d1QSf0xKsQDVO
- pSRcgL4d6ZNJsAo9cH0mwRy62DtOfg1e8Uwx6Zli0jPFmOf/to2A9IOXBKtoKhXEXOvSqZsO
- gORRLOLawZnf1nYDyAB2uqK9f3ORUs5vFStN3QAxBJuhqPBuKlIqSvjKTwSbxWBzGAWxG+ji
- G9hFqGYVW+InZrYbtLrcvDxNvg7r8nIxO1sRSOsvVMJS3i58KAhWwfZCJ2NSVFXg+LyNF1t7
- vcsVc97u2LyhPgidT6/Oivas2LOmAjR9dzyYJYxX3gG+daubjvlnLFHb/3QMn/0y8sdcIT1t
- 7N77Wy483XX+VKT5n/mFfemv8b627Mwdbe8uyPRNlK9/Z9rdjZ+G//poeb0exg6v00+7g7wT
- oVhaAxyDwVDWKLeq4kAnzZJiGa9dRNhE/j+QRa7/KgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrBIsWRmVeSWpSXmKPExsWy7bCSvO6OHzGxBjNXaFh8/dLBYrH+1DFm
- i9V3+9ksTk89y2Qx53wLi8Xed7NZLdbu+cNs0f1KxuLJ+lnMFjd+tbFa9D9+zWxx/vwGdotN
- j6+xWuy9pW1x/95PJouZ8+6wWVxa5G7xat43Fos9e0+yWFzeNYfN4sj/fkaLGef3MVm0bfzK
- aNHa85Pd4vjacAdJjy0rbzJ5tGwu99h2QNXj8tlSj02rOtk87lzbw+axeUm9x+4Fn5k8ms4c
- ZfZ4v+8qm0ffllWMHp83yQXwRHHZpKTmZJalFunbJXBl3OqezlYwg6Oi7cYm5gbGI2xdjBwc
- EgImEtM+cHUxcnEICexmlFg16QZjFyMnUFxKYmv7HmYIW1jifssRVoii54wSD39eBUuwCWhL
- bD6+CqxBREBT4sTtKawgNrPANA6JXR/EQWxhAVOJe0e62UBsFgFViaXP3wPZ7By8ApYS9+JB
- orwCghInZz5hATmHWUBPom0jI8QQeYntb+dAXaAgsePsa6i4iMTszjZmiKV6Ehd3fmGZwCg4
- C8mkWQiTZiGZNAtJ9wJGllWMkqkFxbnpucWGBYZ5qeV6xYm5xaV56XrJ+bmbGMHxr6W5g/Hy
- kvhDjAIcjEo8vDtuRscKsSaWFVfmHmKU4GBWEuGtmBMVK8SbklhZlVqUH19UmpNafIhRmoNF
- SZz3ad6xSCGB9MSS1OzU1ILUIpgsEwenVANjcVNZnlGXxD0pT0sbo+QV7PNEp90NOvP9wOXl
- ubMDp85MW/HfyaitQ3zr5d+zitTdAy4m308+t/jIDR2XdxHl6Z+vt8UuT9421zd+h6Nl/q0M
- kb2LZ/13SKt+cPrVkmu7X2bIhQV+j9rfcVJoQtHaO/kTVjnKxt+va+/TC6x/3Pk19WTu8yNT
- lFiKMxINtZiLihMBBGnmbfsCAAA=
-X-CMS-MailID: 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9
+Thread-Index: AdVX9gnaDYeXFhMoSci3o9XSTfBUaA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0xbZRTN1/f6XrdR89Yx/WyM1KfEbQzWVls+DBgjqE+3GJLNzBCa7oW+
+ ALG/7GvHpsnGcHZlNC0zMULXTdItJnYio7CV8WObhUpAkLgK2XBjU/BHQZ0Cw3VuatsHkf/O
+ PfeenHtycyWYzEfKJdVmO2czs0aaWIuf79+sya1JlOuUM0MkurPowlHb8JcYOnPDS6CvPhwV
+ If/YYRz1/X5cjFp772OoYfYxNNPmw9DVe04x8k7PYWhs7CyJQtMTYtQ3mYNuTiVEqPnkdQJd
+ CbyCZk8u4ai3bwhHsW4/gQb+9QLUNHZRhJztdwB6350g0WDr7hceZTo/vSZiDnfUMOcvZzOx
+ UQcTCtYTzPWJXoLpOH2Q6WlZEDF1I1GMuX1xnGA8nUHALIQeL80oMxZWcayBsyk4c4XFUG2u
+ LKK379QX6zVapSpXVYDyaYWZNXFFdMmO0tyXq43J7LRiL2t0JKlSlufpbc8X2iwOO6eosvD2
+ IpqzGoxWlcqax7Mm3mGuzKuwmJ5TKZVqTXJyj7Hqwt2Y2Poetq83OkHUgm7RUbBGAqlnYbT/
+ Y3AUrJXIqC4Aw8fuY0IxD6A37MaFYgnAc79cEq9I5hbqyBSWUX0ANn5hFobiAC56mtJDBJUD
+ OwaDIIUzKSUMh/5Oe2DUPyScmY/gqcYGSgOnBhqIFMapbBhzB9ICKVUA464psYDXw6HmmfQ8
+ RmXB8G9+TNhCAbtG54DAZ8Lj9U5MMMuDN0ai4pQZpB6QcLz/DCkISuCfk4PL4g1wdrBzmZfD
+ uNe5jA/C8U9OkYLYDeDIvZXGM9D305GkmyTpthm2dW9LQUg9CQcml3d7CLr6H5ACLYUup0wQ
+ PgVPzMdEAi2Hf7gPCDQDb9cdwhrBE75VIX2rQvpWBfP9b9sC8CB4mLPypkqOV1tVq48dAum/
+ 2PJSF2j6ekcEUBJAZ0gT5eU6mZjdy+83RQCUYHSmdJ+/TCeTGtj973A2i97mMHJ8BGiSNziG
+ yTdWWJJfZrbrVRq1Vqss0CCNVo3oR6Qd666Vy6hK1s69xXFWzraiE0nWyGvBgWm1pdblS/x6
+ pLh+djLn9e28/9tg/uUr45tCb7TtvHrztVvZLecWnlZEPvjhm4jB4zldF4993p6/6cfG1u+z
+ 9BeK49/1GP+6FQgfyuqpKbm7GKh5sf1EA7ZbO/x22XDhq5cUgXd/tnwm+ehNT6dcEV03iumW
+ dMpdwz1bMzaKGl1S2EzjfBWr2oLZePY/dew/Ay0EAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNIsWRmVeSWpSXmKPExsWy7bCSnG7Zz5hYg1edmhZfv3SwWKw/dYzZ
+ YvXdfjaL01PPMlnMOd/CYrH33WxWi7V7/jBbdL+SsXiyfhazxY1fbawW/Y9fM1ucP7+B3WLT
+ 42usFntvaVvcv/eTyWLmvDtsFpcWuVu8mveNxWLP3pMsFpd3zWGzOPK/n9Fixvl9TBZtG78y
+ WrT2/GS3OL423EHSY8vKm0weLZvLPbYdUPW4fLbUY9OqTjaPO9f2sHlsXlLvsXvBZyaPpjNH
+ mT3e77vK5tG3ZRWjx+dNcgE8UVw2Kak5mWWpRfp2CVwZO39cZi1oZq7Yc/QaWwPjLqYuRk4O
+ CQETidefm9i7GLk4hAR2M0qsvbyLBSIhJbG1fQ8zhC0scb/lCCtE0XNGifPrD4F1swloS2w+
+ vooRxBYRMJDYvuk3mM0sMI1DYtcHcRBbWMBU4t6RbjYQm0VAVeJyzyKwGl4BS4mXHfdYIWxB
+ iZMznwAt5gDq1ZNo2wg1Rl5i+9s5UDcoSOw4+xoqLiIxu7ONGWKtnsTdM0dZJzAKzkIyaRbC
+ pFlIJs1C0r2AkWUVo2RqQXFuem6xYYFhXmq5XnFibnFpXrpecn7uJkZwEtDS3MF4eUn8IUYB
+ DkYlHt4dN6NjhVgTy4orcw8xSnAwK4nwVsyJihXiTUmsrEotyo8vKs1JLT7EKM3BoiTO+zTv
+ WKSQQHpiSWp2ampBahFMlomDU6qBsbrk4svrTNERm2+ttP3R+VVg/8oXjwW/e6o+W62+5Nun
+ Cp2guesvXr+QdiuAM+zKUw69JmlLjbWFzOIbHOOf9SrkP1i2xm/F6o1PfgkfqvCbv0Cs+Mjd
+ 5/Pnznw488rq9maZA3925rPqSzDMem3n4Phz0pOmPZqLD23W1/JRnvpqjv8aTvbrrDOVWIoz
+ Eg21mIuKEwH4Sucq/gIAAA==
+X-CMS-MailID: 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9
 X-Msg-Generator: CA
 X-Sendblock-Type: AUTO_CONFIDENTIAL
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9
-References: <CGME20190821075432epcas2p3758bf7b07f209fb4094d79bf46c8f4e9@epcas2p3.samsung.com>
+X-CMS-RootMailID: 20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9
+References: <CGME20190821075742epcas2p4b9104e8249067c048d4050f2888da0a9@epcas2p4.samsung.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linaro.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -137,7 +141,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i0LS7-00AIU2-Vj
+X-Headers-End: 1i0LVC-00EFfa-FC
 Subject: Re: [f2fs-dev] [PATCH 6/9] dm crypt: support diskcipher
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -168,34 +172,16 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Aug 21, 2019 at 09:13:36AM +0200, Milan Broz wrote: 
+On Wed, Aug 21, 2019 at 09:35:36AM +0200, Herbert Xu Herbert wrote:
+
+> I agree.  Please take a look at the recent ESSIV patches on
+> linux-crypto and build multi-block operations on top of them
+> which can then be implemented by the hardware.
 >
-> NACK.
-> 
-> The whole principle of dm-crypt target is that it NEVER EVER submits
-> plaintext data down the stack in bio.
-> 
-> If you want to do some lower/higher layer encryption, use key management
-> on a different layer.
-> So here, just setup encryption for fs, do not stack it with dm-crypt.
-> 
-> Also, dm-crypt is software-independent solution
-> (software-based full disk encryption), it must not depend on
-> any underlying hardware.
-> Hardware can be of course used used for acceleration, but then
-> just implement proper crypto API module that accelerates particular
-cipher.
+> Cheers,
 
-I'm sorry for breaking the basic rules of dm-crypt. 
-But, if I want to use the H/W crypto accelerator running in storage
-controller,
-I have to drop plaintext to bio.
-I think the "proper crypto API module" that you mentioned is diskcipher
-because diskcipher isn't only for FMP.
-Diskcipher is a crypto API that supports encryption on storage controllers.
-
-Thanks
-Boojin Kim
+Can you tell me which patch you mentioned? Is this?
+https://patches.linaro.org/project/linux-crypto/list/?series=22762
 
 
 
