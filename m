@@ -2,105 +2,156 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E63697144
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 06:48:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A122997281
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Aug 2019 08:42:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0IXh-0000K6-Sw; Wed, 21 Aug 2019 04:48:17 +0000
+	id 1i0KKA-0006nz-6D; Wed, 21 Aug 2019 06:42:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=1294c0c7a=shinichiro.kawasaki@wdc.com>)
- id 1i0IXg-0000Ju-85
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 04:48:16 +0000
+ (envelope-from <boojin.kim@samsung.com>) id 1i0KK8-0006ni-HI
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 06:42:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FYpRR7Jg9kyfb6iJsflJwRYi5nMJ+3Re/f+YRd7OC7E=; b=SSktccvJfrmeJg35Dwntmf3RWX
- m+9zBSwfFQL/uJDsXOL59cMA4eSXCqyAN6qxAYX0WR19gsRoMYUz/H/w3SqPildEk5q9Co40CyM7R
- Bd7TyH6besAmDSurfag0c+1yOR42k9NRIEIQZwlFFJULHuIDlHvetzt4QsIvSvx5Bz7g=;
+ bh=6nvViRArjV4omK6peQr/VJEo362MQawOvuOjWNtcvUc=; b=bJXwf1cDE3wE9jcAngdAy1eL27
+ vBR3kitGmkhsjY/D08/aRJWFaHcTVJMDcwozc2lCCgofXtUyeusEBhfdlykcBgUvgjhEr4/hfj7Xp
+ qVAPU55Lt0wZLCU+Cnrsx8/dEq8ZO43ikg11kQA/bxVLOpWXlB81MBs/9FEo5uk7Bcl0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=FYpRR7Jg9kyfb6iJsflJwRYi5nMJ+3Re/f+YRd7OC7E=; b=KVAxOePlw3PNNEnhANlFQj0pB7
- 7I0xHb4UcI6rl905XmW/vgSs6y9blzFK8OYMGK4JQtnM86leS3wXPFgMh9yMO5Eo8DiLzO4sugJr7
- JWqpi7tpmZEK37WEovjpCs8AHqFAHgm+UN1OvA4G/cgjAwcyV3bXBzG99dBjf1qjg8fQ=;
-Received: from esa1.hgst.iphmx.com ([68.232.141.245])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
+ :Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=6nvViRArjV4omK6peQr/VJEo362MQawOvuOjWNtcvUc=; b=k
+ sSg95/LKVDyEDg5/+MB9mGEXSFKM6VXvw8w5P64Y1r/SQJQJMUeG6/gOzFE2qg7o4b9aC3WeY/mhY
+ J+KXetXt7WV8d+KRdyiwzogEIphC7P7SfQKkhxSyQ9o+hv5Ylc4kCUh7AhpyCJabQJ4HHID31Szul
+ aa20Ek/zDHpc8NO8=;
+Received: from mailout3.samsung.com ([203.254.224.33])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0IXf-00AeS0-2p
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 04:48:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566362895; x=1597898895;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=/SwGx/Kiq8YyWPkq0AE2vKQQ0k8vIQvs+P87UcX3NTc=;
- b=Ul4tGfv6ZWLNH1Cl9HUrX5OUbQo9NlxY+i9tcQOwwaAJFp5g7QHja62G
- Zllc04y9KrYYwSRIyuOQd/kyLURHLogoJ/+PauYAQ68tF/mZLfyKUJETt
- +/nbAUytjxhWFfKddgNd7oCrAQS9lI08Yoke9n8dVsrCx4hSIoV1nwjGn
- ECLF/fMUr8KEJL/E8db/2DmCTs//jcQQOjA/EWd069jJwPsjrEDsKyCaq
- UPdm+tkJye3fEFYSUGiOxjiiFf0dcJejdxNAxttbFSGyyKia5JSJUB3bn
- e5szIoEWid115xX5K9UBiy41EJ36U009gj3ZIDYzHjRftlfyxNP/QPe86 Q==;
-IronPort-SDR: inUhUoaOHck0qZG+FJ/GPgI4FlehFjYxQTnYi4VmxJdcxyUeRkZsHu5EK+FFFBYYx3xQ11S7sT
- XtofqeurwvxfX+/IkhsOcVCE44wfQuDFJTccpJf3JJlNNy1r6ev1it48i6KlHoCtxPtH1qwOx2
- LqRwjsaJojV0Ck19jrSKJF3j+an5s+P8L2DG16VIwIT5CijCVe5nN+p4/9Q4LxhS/P7WtYOn5j
- mcX9GKiIG4RJhWJN6P9akCTMMm/bs2EjMrRftHy4frt2nuu0H7sx+KDsoBn+NTk2HNjtyhPsks
- XM8=
-X-IronPort-AV: E=Sophos;i="5.64,410,1559491200"; d="scan'208";a="222876208"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 21 Aug 2019 12:48:08 +0800
-IronPort-SDR: Rw6uXMwh5h3XS8VEljTiLgJMneoWWUGw2Vg2HBaNZf2NnkXmvM7SzB5FFT4V5BHkhSi+/8ezYj
- +VSAzCI2JB6Bfc3bBdnghrBzg+GbXQuf4uQAmsb3sqMXI87Kt8D4vgOY5WsIrb9Xui+5Bvdq2q
- RVlTNsszENlmpIIe9aLfc5KDehI/zWsziBc+Bu6bmhn7jNW3YwcMSiw60/r5RVKKZda8F1U6Sd
- sDb74ZVCy3C5pMXn3a+AnR2HzIUwvKoRBygnEY9ijW6YEEd+vphsOI59KFxHOC4ghATWwJt+bE
- /KDHn+RdJMLIdBig2muO4Jjs
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Aug 2019 21:45:29 -0700
-IronPort-SDR: q8kiSZNpK6q3NqU9fBM+MjKoHjpkyFEnOj7yORkgSWTDPEquiCw+kX/zufgQPzcAO2oo3nOXiX
- wX79khF6VrUxJaQaelKajZTODNCa/rqCBSpn6iInIw9QvSX8F8UiJmghjjMrkcyaMu6+KINMvm
- sAfod2KeCrlJQkU0raXpZJshPErfYXVr71F/3TcJKDzgbLv6swL98/3gvTXQYzWUYTDCMPIond
- dsuqm7sD2sZ6zuIJstJkMuhg6ML/wEaeGwAvVp7x6XHcWut3yvUJv3ViLT2HslinvqH0S84ap/
- gCE=
-WDCIronportException: Internal
-Received: from shinexp.dhcp.fujisawa.hgst.com ([10.149.53.85])
- by uls-op-cesaip02.wdc.com with ESMTP; 20 Aug 2019 21:48:07 -0700
-From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 21 Aug 2019 13:48:02 +0900
-Message-Id: <20190821044802.29702-5-shinichiro.kawasaki@wdc.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190821044802.29702-1-shinichiro.kawasaki@wdc.com>
-References: <20190821044802.29702-1-shinichiro.kawasaki@wdc.com>
+ id 1i0KK3-00AEnQ-41
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Aug 2019 06:42:24 +0000
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20190821064211epoutp03caec178b6a677f71eef27b38d0b95b0d~83Pi3QWIo1344413444epoutp03R
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 21 Aug 2019 06:42:11 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20190821064211epoutp03caec178b6a677f71eef27b38d0b95b0d~83Pi3QWIo1344413444epoutp03R
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1566369731;
+ bh=6nvViRArjV4omK6peQr/VJEo362MQawOvuOjWNtcvUc=;
+ h=From:To:Subject:Date:References:From;
+ b=KgvXEC03C4r1U97r7bQ5DRRMTIXhvVfcvuv//kqB9AfekkM1a6r6AlK/dwkzmj1/j
+ 6Da8kMqM2aSH3vsPYueOGpcP367QkCqp/Un1AsgIkKYcR0YdMlJuZ47ea/iHjqaU9V
+ dzZJioeQWALlclkJ5xlW0pzJ4Wntvqon2nNSykqw=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTP id
+ 20190821064210epcas2p2b0753f2c58b6ebb1f39566c7be44018c~83PiaFvVa1369213692epcas2p22;
+ Wed, 21 Aug 2019 06:42:10 +0000 (GMT)
+Received: from epsmges2p1.samsung.com (unknown [182.195.40.184]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 46Cykl2yFmzMqYkV; Wed, 21 Aug
+ 2019 06:42:07 +0000 (GMT)
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 3F.AD.04156.FB7EC5D5; Wed, 21 Aug 2019 15:42:07 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20190821064206epcas2p1d1bcaae142416506bcedb3201d9a6658~83PeydRUI2328923289epcas2p1F;
+ Wed, 21 Aug 2019 06:42:06 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20190821064206epsmtrp2200b095c38c04c7c0825b9bbdffaf76e~83PesuNc52242122421epsmtrp2E;
+ Wed, 21 Aug 2019 06:42:06 +0000 (GMT)
+X-AuditID: b6c32a45-df7ff7000000103c-24-5d5ce7bf38af
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ EF.C2.03638.EB7EC5D5; Wed, 21 Aug 2019 15:42:06 +0900 (KST)
+Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20190821064206epsmtip198eaffa6242c7b1b17cfbe143230c99b~83PeSZEq23087530875epsmtip17;
+ Wed, 21 Aug 2019 06:42:06 +0000 (GMT)
+From: "boojin.kim" <boojin.kim@samsung.com>
+To: "'Herbert Xu'" <herbert@gondor.apana.org.au>, "'David S. Miller'"
+ <davem@davemloft.net>, "'Eric Biggers'" <ebiggers@kernel.org>, "'Theodore Y.
+ Ts'o'" <tytso@mit.edu>, "'Chao Yu'" <chao@kernel.org>, "'Jaegeuk Kim'"
+ <jaegeuk@kernel.org>, "'Andreas Dilger'" <adilger.kernel@dilger.ca>,
+ "'Theodore Ts'o'" <tytso@mit.edu>, <dm-devel@redhat.com>, "'Mike Snitzer'"
+ <snitzer@redhat.com>, "'Alasdair Kergon'" <agk@redhat.com>, "'Jens Axboe'"
+ <axboe@kernel.dk>, "'Krzysztof Kozlowski'" <krzk@kernel.org>, "'Kukjin Kim'"
+ <kgene@kernel.org>, "'Jaehoon Chung'" <jh80.chung@samsung.com>, "'Ulf
+ Hansson'" <ulf.hansson@linaro.org>, <linux-crypto@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-fscrypt@vger.kernel.org>,
+ <linux-mmc@vger.kernel.org>, <linux-samsung-soc@vger.kernel.org>,
+ <linux-block@vger.kernel.org>, <linux-ext4@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+ <linux-fsdevel@vger.kernel.org>
+Date: Wed, 21 Aug 2019 15:42:06 +0900
+Message-ID: <003c01d557eb$8ca76790$a5f636b0$@samsung.com>
 MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdVX55ZGLpDJ2oWzRvaIZpriXB0iug==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf2wTZRjOd9e765DK2VX9qEbq4Yh0rrRlnd+EGhIRzsgfM8Qgc828rJdu
+ sb/Sa2HTRFC37ofT6YgySjcGEpCNMrbVucA6cPwozNVFl+JAnIThkE4n7gdJB4i93Yz773nf
+ 93nyPc/35pXjygZKLS9xenmPk7Mz5CJZ15mVKOvUzQKL/tjRdDQzXSVDbf3ncdT6Sx2Jvvs8
+ hqHgYLkMRSb2EijUcw9HHyWeRDfaAjganvUTqG50HEeDg8cp1DF6iUCRK5no15EkhvY0XSXR
+ jwc2okTTHRnqiVyUoaETQRKdfVAHUMNgL4b87TMAVdQmKRQNbVm3lA0fuYyx5Z3b2a7TGexQ
+ zMd2tFST7NVLPSTbeXAHe7J5CmM/GDiHs3/1xkn2k3ALYKc6nspbnG9fW8xzVt6j4Z1FLmuJ
+ 02ZmXt1c+FKhKUdvyDLkoucZjZNz8GZm/aa8rA0l9lR2RrONs/tSrTxOEJhVL671uHxeXlPs
+ Erxmhndb7W6Dwa0TOIfgc9p0RS7HCwa93mhKMd+yFw8nGgj3cW3p7n0fEztBYlkNSJNDOhv2
+ V8aJGrBIrqS7ATwai+NSMQlgW3zffHEHwK7yC2QNkM9JIjGdqFbSEQCH2ldInFsAhn+YBuKA
+ pDNhZ7QFiAMV/Q8Fd19rwsVBOr0aVtTeJkQsozPgofq/MREr6Fx4IRgjJfwIvLjnhkzEOL0M
+ fvNnEJe8amB3bHzuARWtg/XfjhASRwX3VvvnOUkKvh+0SHg93NU3jkk4HSaiYUrCajg1ESEl
+ vAPGD31JiUYhXQvgwKx/nrQaBsYqgZgYp1fCthOrpPDL4dkr89YehlVn7lNSWwGr/EpJ+Axs
+ nBzCpLYa3q59T2qzsL4xiknfZoHRUzeJT4EmsCBvYEHewIJcgf8tNANZC3iMdwsOGy8Y3YaF
+ q+4Ac1ehfbkbNHy/qQ/QcsAsViQLCixKgtsmlDn6AJTjjEpRGsy3KBVWruwd3uMq9PjsvNAH
+ TKl1fIarHy1ypW7M6S00mIw5OfpcEzLlGBHzuKLzocsFStrGefm3ed7Ne/7TYfI09U5QTa3J
+ sD7R/AcfMs90TWjH/EvXNfKv478fO7B9VJs2AkvDoa8P02P5jtYt1w1jd835/Tbd/jW7nE3d
+ 2ZWZ0x9u5OKHt664db56Sbbm2k+/Ddz7ufnkF61bqbLJ5P2vjhhVT9v50Onrr8lf2XxOeKB8
+ 82DF9HPe4SW976bdfbbyjfYN0VlGJhRzBi3uEbh/ASwhXbYrBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHIsWRmVeSWpSXmKPExsWy7bCSnO6+5zGxBrfnaFh8/dLBYrH+1DFm
+ i9V3+9ksTk89y2Qx53wLi8Xed7NZLdbu+cNs0f1KxuLJ+lnMFjd+tbFa9D9+zWxx/vwGdotN
+ j6+xWuy9pW1x/95PJouZ8+6wWVxa5G7xat43Fos9e0+yWFzeNYfN4sj/fkaLGef3MVm0bfzK
+ aNHa85Pd4vjacAdJjy0rbzJ5tGwu99h2QNXj8tlSj02rOtk87lzbw+axeUm9x+4Fn5k8ms4c
+ ZfZ4v+8qm0ffllWMHp83yQXwRHHZpKTmZJalFunbJXBl3Hg1g7Vgg1bF9Pm9rA2Mr+S7GDk4
+ JARMJPae1eti5OQQEtjNKHHriTyILSEgJbG1fQ8zhC0scb/lCGsXIxdQzXNGiW9LXrKAJNgE
+ tCU2H1/FCJIQEZjGIfGjdTZYQljAWKK15wMriM0ioCqxbNJHJhCbV8BS4sScs2wQtqDEyZlP
+ WECOYBbQk2jbyAgSZhaQl9j+dg7UYgWJHWdfg8VFgEomHbzHClEjIjG7s415AqPALCSTZiFM
+ moVk0iwkHQsYWVYxSqYWFOem5xYbFhjlpZbrFSfmFpfmpesl5+duYgTHupbWDsYTJ+IPMQpw
+ MCrx8O64GR0rxJpYVlyZe4hRgoNZSYS3Yk5UrBBvSmJlVWpRfnxRaU5q8SFGaQ4WJXFe+fxj
+ kUIC6YklqdmpqQWpRTBZJg5OqQZG1zfv+6S1qyQq73im+HoYzs6IOW60odkhWaVaybJ9is3n
+ 1qNBR77Omempbhj+TMxljtS71x7zdyhdcPiw4NoxrVZvt9xrd+8e2yKtFd7Q2u3XKdN8tv29
+ 0TmNfee6c5/bHPG8IVXi3jMjbM7z+FgDx1ddvDXbLl87fbDoqW2QFK/Vt1+L9SOUWIozEg21
+ mIuKEwHPOnoc8QIAAA==
+X-CMS-MailID: 20190821064206epcas2p1d1bcaae142416506bcedb3201d9a6658
+X-Msg-Generator: CA
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20190821064206epcas2p1d1bcaae142416506bcedb3201d9a6658
+References: <CGME20190821064206epcas2p1d1bcaae142416506bcedb3201d9a6658@epcas2p1.samsung.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: wdc.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1i0IXf-00AeS0-2p
-Subject: [f2fs-dev] [PATCH v2 4/4] fsck.f2fs: Check write pointer
- consistency with valid blocks count
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1i0KK3-00AEnQ-41
+Subject: [f2fs-dev] [PATCH 0/9] Flash Memory Protector Support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,85 +163,128 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Damien Le Moal <Damien.LeMoal@wdc.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When sudden f2fs shutdown happens on zoned block devices, write
-pointers can be inconsistent with valid blocks counts in meta data.
-The failure scenario is as follows:
+Exynos has a H/W block called FMP (Flash Memory Protector) to protect data
+stored on storage device.
+FMP interworks with the storage controller to encrypt a data before writing
+to the storage device and decrypt the data after reading from storage
+device.
+FMP is a kind of ICE (inline crypto engines), which is generally known
+as being used for the above role.
 
-- Just before a sudden shutdown, a new segment in a new zone is selected
-  for a current segment. Write commands were executed to the segment.
-  and the zone has a write pointer not at zone start.
-- Before the write commands complete, shutdown happens. Meta data is
-  not updated and still keeps zero valid blocks count for the zone.
-- After next mount of the file system, the zone is selected for the next
-  write target because it has zero valid blocks count. However, it has
-  the write pointer not at zone start. Then "Unaligned write command"
-  error happens.
+To use FMP, the modification of various layers such as Fscrypt, ext4, f2fs,
+DM-crypt, storage controller driver and block is required.
+FMP solution introduces a new diskcipher similar to the existing skcipher
+in crypo API in order to minimize the modification of these layers and
+to improve the code readability.
 
-To avoid this potential error path, reset write pointers if the zone
-does not have a current segment, the write pointer is not at the zone
-start and the zone has no valid blocks.
+This patchset includes the following for using FMP:
+- Diskcipher and FMP are added to crypto API.
+- The crypto users such as dm-crypt and fscrypt are modified to support
+  diskcipher.
+- The bio submitters such as f2fs, ext4, dm-crypt are modified to support
+  diskcipher.
+- Block layer is modified to pass diskcipher to storage controller driver.
+- Storage controller driver is modified to support crypto operation.
 
-Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
----
- fsck/fsck.c | 30 +++++++++++++++++++++++++++++-
- 1 file changed, 29 insertions(+), 1 deletion(-)
+Exynos FMP solution consists of Diskcipher and FMP driver.
+Diskcipher is a symmetric key cipher of crypto API that supports inline
+crypto engine like FMP.
+FMP driver is a cipher algorithm running on diskcipher.
+FMP driver registers 'cbc(aes)-disk' and 'xts(aes)-disk' algorithms to
+crypto API.
+FMP can be tested with various test vectors in testmgr of crypto API.
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 21a06ac..cc9bbc0 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -2595,6 +2595,7 @@ static int fsck_chk_write_pointer(int i, struct blk_zone *blkz, void *opaque)
- 	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- 	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
- 	void *zero_blk;
-+	block_t	zone_valid_blocks = 0;
- 
- 	if (blk_zone_conv(blkz))
- 		return 0;
-@@ -2615,8 +2616,35 @@ static int fsck_chk_write_pointer(int i, struct blk_zone *blkz, void *opaque)
- 			break;
- 	}
- 
--	if (cs_index >= NR_CURSEG_TYPE)
-+	if (cs_index >= NR_CURSEG_TYPE) {
-+		for (b = zone_block; b < zone_block + c.zone_blocks &&
-+			     IS_VALID_BLK_ADDR(sbi, b); b += c.blks_per_seg) {
-+			se = get_seg_entry(sbi, GET_SEGNO(sbi, b));
-+			zone_valid_blocks += se->valid_blocks;
-+		}
-+		if (wp_block == zone_block || zone_valid_blocks)
-+			return 0;
-+
-+		/*
-+		 * The write pointer is not at zone start but there is no valid
-+		 * block in the zone. Segments in the zone can be selected for
-+		 * next write. Need to reset the write pointer to avoid
-+		 * unaligned write command error.
-+		 */
-+		if (c.fix_on) {
-+			FIX_MSG("Reset write pointer at segment 0x%x",
-+				zone_segno);
-+			ret = f2fs_reset_zone(dev, blkz);
-+			if (ret)
-+				return ret;
-+			fsck->chk.wp_fixed_zones++;
-+		} else {
-+			MSG(0, "Inconsistent write pointer at segment 0x%x\n",
-+			    zone_segno);
-+			fsck->chk.wp_inconsistent_zones++;
-+		}
- 		return 0;
-+	}
- 
- 	/* check write pointer consistency with the curseg in the zone */
- 	cs_block = START_BLOCK(sbi, cs->segno) + cs->next_blkoff;
+When encrypting using FMP, additional control is required to deliver and
+manage encryption information between encryption users (fscrypt, DM-crypt)
+and FMP drivers. Diskcipher provides this control.
+
+The encryption using FMP is made up of 4 steps.
+The first step is to assign a password and set a key.
+Encryption users such as Fscrypt or DM-crypt assign diskcipher, and set key
+to the diskcipher.
+The second step is to deliver diskcipher that has crypto information to
+storage drivers such as UFS and MMC. BIO is used to this delivery.
+The BIO submitters, such as ext4, f2fs and DM-crypt, checks if there is
+diskcipher in crypto configuration before issuing BIO. If there are
+diskcipher, the submitter sets it to BIO.
+In addition, the BIO submitter skips the task of encrypting data before BIO
+and decrypting data after BIO is completed.
+In the third step, the storage driver gets the diskcipher from the BIO and
+requests the FMP to encrypt.
+In the final step, the FMP extracts crypto information from the diskcipher
+and writes it in the descriptor area allocated for FMP H/W.
+The FMP H/W uses the descriptor of the storage controller to contain crypto
+information. So the descriptor of storage controller should be expanded
+for FMP.
+
+Boojin Kim (9):
+  crypt: Add diskcipher
+  crypto: fmp: add Flash Memory Protector driver
+  mmc: dw_mmc: support crypto operation
+  mmc: dw_mmc-exynos: support FMP
+  block: support diskcipher
+  dm crypt: support diskcipher
+  fscrypt: support diskcipher
+  fs: ext4: support diskcipher
+  fs: f2fs: support diskcipher
+
+ block/bio.c                      |   1 +
+ block/blk-merge.c                |  19 +-
+ block/bounce.c                   |   5 +-
+ crypto/Kconfig                   |   9 +
+ crypto/Makefile                  |   1 +
+ crypto/diskcipher.c              | 349 +++++++++++++++++++++++
+ crypto/testmgr.c                 | 157 +++++++++++
+ drivers/crypto/Kconfig           |   2 +
+ drivers/crypto/Makefile          |   1 +
+ drivers/crypto/fmp/Kconfig       |  13 +
+ drivers/crypto/fmp/Makefile      |   1 +
+ drivers/crypto/fmp/fmp.c         | 595
++++++++++++++++++++++++++++++++++++++++
+ drivers/crypto/fmp/fmp_crypt.c   | 243 ++++++++++++++++
+ drivers/crypto/fmp/fmp_test.c    | 310 ++++++++++++++++++++
+ drivers/crypto/fmp/fmp_test.h    |  30 ++
+ drivers/md/dm-crypt.c            | 112 +++++++-
+ drivers/mmc/host/Kconfig         |   8 +
+ drivers/mmc/host/dw_mmc-exynos.c |  62 ++++
+ drivers/mmc/host/dw_mmc.c        |  48 +++-
+ drivers/mmc/host/dw_mmc.h        |   6 +
+ fs/buffer.c                      |   2 +
+ fs/crypto/bio.c                  |  43 ++-
+ fs/crypto/fscrypt_private.h      |  28 +-
+ fs/crypto/keysetup.c             |  60 +++-
+ fs/crypto/keysetup_v1.c          |   2 +-
+ fs/ext4/inode.c                  |  39 ++-
+ fs/ext4/page-io.c                |   8 +-
+ fs/ext4/readpage.c               |   7 +
+ fs/f2fs/data.c                   |  98 ++++++-
+ fs/f2fs/f2fs.h                   |   2 +-
+ include/crypto/diskcipher.h      | 245 ++++++++++++++++
+ include/crypto/fmp.h             | 324 +++++++++++++++++++++
+ include/linux/bio.h              |  10 +
+ include/linux/blk_types.h        |   4 +
+ include/linux/bvec.h             |   3 +
+ include/linux/crypto.h           |   1 +
+ include/linux/fscrypt.h          |  19 ++
+ include/uapi/linux/fscrypt.h     |   2 +
+ tools/include/uapi/linux/fs.h    |   1 +
+ 39 files changed, 2837 insertions(+), 33 deletions(-)
+ create mode 100644 crypto/diskcipher.c
+ create mode 100644 drivers/crypto/fmp/Kconfig
+ create mode 100644 drivers/crypto/fmp/Makefile
+ create mode 100644 drivers/crypto/fmp/fmp.c
+ create mode 100644 drivers/crypto/fmp/fmp_crypt.c
+ create mode 100644 drivers/crypto/fmp/fmp_test.c
+ create mode 100644 drivers/crypto/fmp/fmp_test.h
+ create mode 100644 include/crypto/diskcipher.h
+ create mode 100644 include/crypto/fmp.h
+
 -- 
-2.21.0
+2.7.4
 
 
 
