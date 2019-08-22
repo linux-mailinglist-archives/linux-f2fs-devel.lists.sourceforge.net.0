@@ -2,144 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1860988C3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2019 02:55:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B1AB98D9B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2019 10:27:03 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0bNT-0002iD-3b; Thu, 22 Aug 2019 00:54:59 +0000
+	id 1i0iQt-00053T-0F; Thu, 22 Aug 2019 08:26:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <boojin.kim@samsung.com>) id 1i0bNR-0002i5-Rx
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Aug 2019 00:54:57 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1i0iQr-00053L-HW
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Aug 2019 08:26:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zkZXU4UgR2xVWaur+CPkoWa/h3dr00YRZlhWS9MWMAc=; b=WOjXS8cf5qPYBsCVoT9ntEizKi
- o2HPRgqrLgIg34IaUfvoMYSo8T2AFwZUsbKl+QPm97FBjJrUEdxbqILfLbUEGjUYbkVT8/aqFhynV
- CD6Dz1WfkEAh5zFq5MnH4XgOu4LtsFk0jJZxkiTNSTQhACKXKz6hpQu7jqKRekDZaAD0=;
+ bh=R7UCDAsmfL0Mq//j8xIz6yLYb5CP2B7JsTxuh11yTRM=; b=VLICu8/rsHu067muOXgn7FWiYI
+ NiBwNEY1ZRsGlq2/1pR4VOwfMVdCp96K8D5A8OalsIa5e9uJekKMERDfo4ZHm+saQPggqdrBbawRl
+ xpvAmKKEhsNDV+Cc/cOvUnVbtlk9D/VRmwlIDNS/Q96I2fTNzDctYd2ACJRPFXv8/y5g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
- :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zkZXU4UgR2xVWaur+CPkoWa/h3dr00YRZlhWS9MWMAc=; b=K
- 9eQosMUbk5jTe3N+/CoSf8W3sFEdVbQl+37CMr1VOrm3dIpF/zFgbYGuGmsiXkyxYlUVUPTVw39x+
- M9e9j+OQR88HIeXU43wSaPEIsvWG1uGOawckP+K5VYaLqp2UAWEmVH9X26zQ7aOQkyufN5sCS1sGO
- xQOYkUqkuLglq/3k=;
-Received: from mailout4.samsung.com ([203.254.224.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=R7UCDAsmfL0Mq//j8xIz6yLYb5CP2B7JsTxuh11yTRM=; b=V
+ B3DlBlV2Ht6scdrGRdd1cLuQg55qDmPxCBOp6aeHlMsZPmTQ5INeFTwk9PyEj/smKpZfAEQOCkwmk
+ tRCexKPTGOOZpg2HTEvYFfchML4Ayv7TEghKMmYJfRbwTimL7aydwW3ACwHRNJcIOZl7sLs7qxB3W
+ ASZTRkEw2knfv1Wo=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0bNM-00F8qI-Vu
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Aug 2019 00:54:57 +0000
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20190822005444epoutp04e038fa2d2d5cd9dc24d9f4d2b94d38ff~9GJdyIftm0362503625epoutp04j
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 22 Aug 2019 00:54:44 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20190822005444epoutp04e038fa2d2d5cd9dc24d9f4d2b94d38ff~9GJdyIftm0362503625epoutp04j
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1566435284;
- bh=zkZXU4UgR2xVWaur+CPkoWa/h3dr00YRZlhWS9MWMAc=;
- h=From:To:Cc:Subject:Date:References:From;
- b=LgsqbT+hYIIBvCF5mcNpSLjX71VwNOW3ECNKiy2AW9M3uUPWM77Adx70KiCIl9S6g
- 8BCo8Y4qWPQ92CXApOiUFoMXdJsXwcahI1N312DIPZXn1iuJDjZsyN95Wn0XJ9GJwM
- pcZJtA6x5sXzKBtI4w7edPjs3L/3X5MzcmqT9uaY=
-Received: from epsnrtp5.localdomain (unknown [182.195.42.166]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20190822005443epcas2p12f0b23d4dfaf0bb9b991b29ddfea4ff8~9GJdH1To80306303063epcas2p1A;
- Thu, 22 Aug 2019 00:54:43 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.40.186]) by
- epsnrtp5.localdomain (Postfix) with ESMTP id 46DQzP0PDKzMqYkc; Thu, 22 Aug
- 2019 00:54:41 +0000 (GMT)
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 20.1F.04156.FC7ED5D5; Thu, 22 Aug 2019 09:54:39 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20190822005438epcas2p337aba06b328cdcdd1549395f0bbcfdbc~9GJY5qmwx3233232332epcas2p3f;
- Thu, 22 Aug 2019 00:54:38 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20190822005438epsmtrp223bcbfc1f01624cd3dc41a63517cface~9GJY4itJ50123901239epsmtrp2Q;
- Thu, 22 Aug 2019 00:54:38 +0000 (GMT)
-X-AuditID: b6c32a45-df7ff7000000103c-ab-5d5de7cf581d
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 69.D2.03706.EC7ED5D5; Thu, 22 Aug 2019 09:54:38 +0900 (KST)
-Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20190822005438epsmtip27b8ec42598e05dbe2605a805a7b78b25~9GJYp2w_l0938509385epsmtip2B;
- Thu, 22 Aug 2019 00:54:38 +0000 (GMT)
-From: "boojin.kim" <boojin.kim@samsung.com>
-To: <axboe@kernel.dk>, <linux-block@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Date: Thu, 22 Aug 2019 09:54:38 +0900
-Message-ID: <017901d55884$2cbc8f60$8635ae20$@samsung.com>
+ id 1i0iQp-00BMAd-NV
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Aug 2019 08:26:57 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 755146564DC22136C22C;
+ Thu, 22 Aug 2019 16:26:47 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.439.0; Thu, 22 Aug 2019 16:26:37 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Thu, 22 Aug 2019 16:26:26 +0800
+Message-ID: <20190822082626.13888-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Content-Language: ko
-Thread-Index: AdVYhCtkBjnnAwgAQWGl61cO3+ZKhw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0wTdxTf9+56V5TOszL9rllcvQ0TNdS2W9kXIsuS6bxE/sCZjcRZ8QKX
- QmyvTa9F3JIpTiogEd3iIi06f7KVTrtRqIiUOUA7N1nNWHEyx2KAbZappJ0E2BxrOcz47/M+
- 733e5728PDmu9FAqeZng4O0CZ2bIBUSwZxXKivxuNGp9NTR69Fc1gfzfXsOR75d6En13tA9D
- jZH9BAo98MjQ+c5/cHQw9hwa8btx9NO0S4bqh8dwFIl8QaGW4QEZCg2uQb8OTWGo4cQdEv1w
- eiOKnZggUGfoOoH6OxpJ1DtTD9CxSBeGXF8+AqiqbopC4fOFrz3LtnpvY+z+wC42eCWT7e9z
- si3NNSR7Z6CTZANn97CXTyYwdt+Nqzj7sCtKsodamwGbaFlekL7VvK6U50p4u5oXiq0lZYIp
- j9m0pej1IkO2Vpely0GvMGqBs/B5zPr8gqw3yszJ3Rl1OWd2JqkCThSZta+us1udDl5dahUd
- eQxvKzHbdDqbRuQsolMwaYqtllydVqs3JCt3mEsHPmigbKNkxf3pSXIvuCSrBWlySL8M6891
- 4LVggVxJtwPYuS9OSkEcwMdBPyUFEwCOzNzFn0guBD1ziRCAp9p6ZVJwD8Daq0dmG5P0GhgI
- N4MUzqDfhp/cmiFSRTgdouChtsrZxBJaD6tqD2IpTNCZ8MdgYtZCQedAX6xKJuHF8HrDCJHC
- OP08vHi/cW4MNWzvGwMSnwE9NS5cMtPA/s+HQMoM0pVy6ImOAkmwHp76rAmT8BIYC7dSElbB
- xIMQKeE9MNp0hpLEdQDemHbNFb0E3b8dSDaSJ91WQX/H2hSE9Auwd3Butqdhdc9jSqIVsNql
- lIQvwuPxfkyiVXC87n2JZuHPg23gMFjhnreke96S7nmLuf+3PQmIZrCUt4kWEy/qbbr5124B
- s4+xekM7OPZ9fjeg5YBJVxzOMhqVMq5c3G3pBlCOMxmKisatRqWihNv9Lm+3FtmdZl7sBobk
- DY7gqmeKrck3ExxFOoM+O1ubY0CGbD1ilikCC29vU9ImzsHv5Hkbb3+iw+Rpqr3AEz/rzf3j
- 4/GxycJtkYEP0y487Ap/0+QNe24lKkSDb/zmgZ18+cjCtMylny7fBePvLK56j5q4sjL3zS1O
- IXN0yiv4e/5Fmrei3uHqXj93eVNg0VddlT4m8Hd+eqyQuftUlNbcO527aMi+wnTGcnTDyo1f
- T577c3Ng+7Kyyc03M659xBBiKadbjdtF7j9ZtnA9LgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrDIsWRmVeSWpSXmKPExsWy7bCSvO6557GxBj+36Ft8/dLBYrH+1DFm
- i9V3+9ksTk89y2Qx53wLi8Xed7NZLdbu+cNs0f1KxuLJ+lnMFjd+tbFa9D9+zWxx/vwGdotN
- j6+xWuy9pW1x/95PJouZ8+6wWVxa5G7xat43Fos9e0+yWFzeNYfN4sj/fkaLGef3MVm0bfzK
- aNHa85Pd4vjacAdJjy0rbzJ5tGwu99h2QNXj8tlSj02rOtk87lzbw+axeUm9x+4Fn5k8ms4c
- ZfZ4v+8qm0ffllWMHp83yQXwRHHZpKTmZJalFunbJXBlXGueyV7wlK3i7a8fbA2MO1m7GDk5
- JARMJNZtm83excjFISSwm1HicesPqISUxNb2PcwQtrDE/ZYjrBBFzxklWi89YgdJsAloS2w+
- vooRxBYRiJD4vKmZDaSIWeAyu8Svvg9sIAlhASOJ1q5uJhCbRUBV4sq2z2BTeQUsJVa/amWF
- sAUlTs58wtLFyAHUrCfRthFsJrOAvMT2t3OgjlCQ2HH2NVRcRGJ2ZxszxF49ictr7jFOYBSc
- hWTSLIRJs5BMmoWkewEjyypGydSC4tz03GLDAsO81HK94sTc4tK8dL3k/NxNjOA0oKW5g/Hy
- kvhDjAIcjEo8vBN0Y2OFWBPLiitzDzFKcDArifBWzImKFeJNSaysSi3Kjy8qzUktPsQozcGi
- JM77NO9YpJBAemJJanZqakFqEUyWiYNTqoHR/3xjomm+UuNza36XT/syBRcuDdj2pvvHHj7v
- Co5+z/JqscvTsoNWmN98Ul6ye8f1Q09rHkpuep167iuXgXjuERnen0//OhpvrD5pwGOoorWs
- Qv6H8ONV3yZvv3Rx9qGtTFMtWAWc9u6duYqxsO17cllw0/bX93kWxe++rFG1xkdnd3HZOi0X
- JZbijERDLeai4kQAbRpSev8CAAA=
-X-CMS-MailID: 20190822005438epcas2p337aba06b328cdcdd1549395f0bbcfdbc
-X-Msg-Generator: CA
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20190822005438epcas2p337aba06b328cdcdd1549395f0bbcfdbc
-References: <CGME20190822005438epcas2p337aba06b328cdcdd1549395f0bbcfdbc@epcas2p3.samsung.com>
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i0bNM-00F8qI-Vu
-Subject: Re: [f2fs-dev] [PATCH 5/9] block: support diskcipher
+X-Headers-End: 1i0iQp-00BMAd-NV
+Subject: [f2fs-dev] [PATCH] f2fs: fix to writeout dirty inode during node
+ flush
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,44 +75,135 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: 'Ulf
- Hansson' <ulf.hansson@linaro.org>, 'Mike Snitzer' <snitzer@redhat.com>,
- dm-devel@redhat.com, 'Andreas Dilger' <adilger.kernel@dilger.ca>,
- 'Alasdair Kergon' <agk@redhat.com>, 'Eric Biggers' <ebiggers@kernel.org>,
- linux-samsung-soc@vger.kernel.org, 'Herbert Xu' <herbert@gondor.apana.org.au>,
- 'Krzysztof Kozlowski' <krzk@kernel.org>,
- 'Jaehoon Chung' <jh80.chung@samsung.com>, 'Kukjin Kim' <kgene@kernel.org>,
- linux-ext4@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- 'Jaegeuk Kim' <jaegeuk@kernel.org>, linux-arm-kernel@lists.infradead.org,
- 'Jens Axboe' <axboe@kernel.dk>, 'Theodore Ts'o' <tytso@mit.edu>,
- linux-mmc@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- "'David S. Miller'" <davem@davemloft.net>
+Cc: ebiggers@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/21/19 21:09 AM, Jens Axboe wrote:
-> This isn't going to happen. With this, and the inline encryption
-> proposed by Google, we'll bloat the bio even more. At least the Google
-> approach didn't include bio iter changes as well.
+As Eric reported:
 
-> Please work it out between yourselves so we can have a single, clean
-> abstraction that works for both.
+On xfstest generic/204 on f2fs, I'm getting a kernel BUG.
 
-I'm looking at inline encryption by Google. 
-I will find compatibility with inline encryption to avoid conflicts
-in BIO/F2FS.
-And changing bio iter has a benefit for diskcipher.
-Without changing bio iter, diskcipher should control(alloc/free) a buffer
-to hold a 'bi_dun' variable for every bio.
-But changing bio iter is difficult to accept for block layer,
-I will modify the diskcipher.
-And, as you mentioned, inline encryption by Google has this control.
-So I might be able to use it.
+ allocate_segment_by_default+0x9d/0x100 [f2fs]
+ f2fs_allocate_data_block+0x3c0/0x5c0 [f2fs]
+ do_write_page+0x62/0x110 [f2fs]
+ f2fs_do_write_node_page+0x2b/0xa0 [f2fs]
+ __write_node_page+0x2ec/0x590 [f2fs]
+ f2fs_sync_node_pages+0x756/0x7e0 [f2fs]
+ block_operations+0x25b/0x350 [f2fs]
+ f2fs_write_checkpoint+0x104/0x1150 [f2fs]
+ f2fs_sync_fs+0xa2/0x120 [f2fs]
+ f2fs_balance_fs_bg+0x33c/0x390 [f2fs]
+ f2fs_write_node_pages+0x4c/0x1f0 [f2fs]
+ do_writepages+0x1c/0x70
+ __writeback_single_inode+0x45/0x320
+ writeback_sb_inodes+0x273/0x5c0
+ wb_writeback+0xff/0x2e0
+ wb_workfn+0xa1/0x370
+ process_one_work+0x138/0x350
+ worker_thread+0x4d/0x3d0
+ kthread+0x109/0x140
 
-Thanks.
-Boojin Kim.
+The root cause of this issue is, in a very small partition, e.g.
+in generic/204 testcase of fstest suit, filesystem's free space
+is 50MB, so at most we can write 12800 inline inode with command:
+`echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX > $SCRATCH_MNT/$i`,
+then filesystem will have:
+- 12800 dirty inline data page
+- 12800 dirty inode page
+- and 12800 dirty imeta (dirty inode)
+
+When we flush node-inode's page cache, we can also flush inline
+data with each inode page, however it will run out-of-free-space
+in device, then once it triggers checkpoint, there is no room for
+huge number of imeta, at this time, GC is useless, as there is no
+dirty segment at all.
+
+In order to fix this, we try to recognize inode page during
+node_inode's page flushing, and update inode page from dirty inode,
+so that later another imeta (dirty inode) flush can be avoided.
+
+Reported-by: Eric Biggers <ebiggers@kernel.org>
+Signed-off-byi Chao Yu <yuchao0@huawei.com>
+
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/node.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index d9ba1db2d01e..aacf80dfc754 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1762,6 +1762,43 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+ 	return ret ? -EIO: 0;
+ }
+ 
++static int f2fs_match_ino(struct inode *inode, unsigned long ino, void *data)
++{
++	if (inode->i_ino != ino)
++		return 0;
++
++	inode = igrab(inode);
++	if (!inode)
++		return 0;
++	return 1;
++}
++
++static bool flush_dirty_inode(struct page *page)
++{
++	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
++	struct inode *inode;
++	nid_t ino = ino_of_node(page);
++	int ret;
++
++	inode = find_inode_nowait(sbi->sb, ino, f2fs_match_ino, NULL);
++	if (!inode)
++		return false;
++
++	spin_lock(&sbi->inode_lock[DIRTY_META]);
++	ret = list_empty(&F2FS_I(inode)->gdirty_list);
++	spin_unlock(&sbi->inode_lock[DIRTY_META]);
++	if (ret) {
++		iput(inode);
++		return false;
++	}
++
++	f2fs_update_inode(inode, page);
++	unlock_page(page);
++
++	iput(inode);
++	return true;
++}
++
+ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 				struct writeback_control *wbc,
+ 				bool do_balance, enum iostat_type io_type)
+@@ -1785,6 +1822,7 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 		for (i = 0; i < nr_pages; i++) {
+ 			struct page *page = pvec.pages[i];
+ 			bool submitted = false;
++			bool may_dirty = true;
+ 
+ 			/* give a priority to WB_SYNC threads */
+ 			if (atomic_read(&sbi->wb_sync_req[NODE]) &&
+@@ -1832,6 +1870,13 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 				goto lock_node;
+ 			}
+ 
++			/* flush dirty inode */
++			if (IS_INODE(page) && may_dirty) {
++				may_dirty = false;
++				if (flush_dirty_inode(page))
++					goto lock_node;
++			}
++
+ 			f2fs_wait_on_page_writeback(page, NODE, true, true);
+ 
+ 			if (!clear_page_dirty_for_io(page))
+-- 
+2.18.0.rc1
 
 
 
