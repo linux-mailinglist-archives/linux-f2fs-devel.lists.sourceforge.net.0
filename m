@@ -2,70 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E28299AC47
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 11:59:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 696AD9B066
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 15:09:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i16LT-000601-Uo; Fri, 23 Aug 2019 09:58:59 +0000
+	id 1i19K4-0004QY-2p; Fri, 23 Aug 2019 13:09:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1i16LS-0005zk-HW
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 09:58:58 +0000
+ (envelope-from <chao@kernel.org>) id 1i19K2-0004QN-95
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 13:09:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eJ4AT+ZSRitL4UUAOhMRsgY+R9U8kkAVWhkePNUJUpU=; b=Mig7tQLJf3xtLHfwno97Scdm+e
- 3ikw4KJ1eI4IJSQcgdFkIAEiawGuHJ79cnWQrNmiYXTCmvKw7PsskdRzTRB6t6JXCISxhsz7YBfA6
- +7FV9pT9EAap5wg6qI2p3oaTNpoi9hC8VHRqNrNyx7SdQp6IR4ZnH9V56gScSBdhFWdg=;
+ bh=uTsBC79HFMWB0GutKcVH+GKMgPAnSDZSXt4H4Z1cZgU=; b=Fgl7c35M+Y0LIV70pAO6rMyt6j
+ uZE63+sy/UliOc/NWFvcHrWKd57by3Z8VzfFibE16bVrkhvMzSEiM+oYH0EfKYb2pjOVFdvTKP7GI
+ MPjX8TLfEw4bRR5F+Zgd0H+w+UZMuQqNA2fhUTRStaXj9qEkOXj0HSY5tRdHxEsynNfw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eJ4AT+ZSRitL4UUAOhMRsgY+R9U8kkAVWhkePNUJUpU=; b=fSBFBfgahQIxb3s9XTTisK6Jko
- 2p7FPM9xM520a0e6tHfygLhzNMBtYkUlgfwqKp3vR46Nz7O9cfBIlaXyibr2Jgak/tlxIDqvWnZbf
- ji1JDWG5UfaiXSk0X8BzYbkTl1zRLTC78vi5iObokOn2ua6WsLvnm4Xil1Ezgl12X4Ys=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=uTsBC79HFMWB0GutKcVH+GKMgPAnSDZSXt4H4Z1cZgU=; b=RVLm4X/YH1YS2am3iBtzUUDpxm
+ cOpd2IGmKwPkqoleOcg4wBJe4kFoR3pcs4HhdnsaRYblEOPn6pVeJm7FwYvNg2nS/9nuyjUUGlpJq
+ ALJaCKS0scZplw4xvlh+01OfohlBkETccVqOBc22lU6CfkVsWSnhTVdqHQAhJmqnDZbk=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i16LO-00Cr6b-RF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 09:58:58 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id ADB76A3E56D603C648FA;
- Fri, 23 Aug 2019 17:58:46 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 23 Aug 2019 17:58:39 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Fri, 23 Aug 2019 17:58:36 +0800
-Message-ID: <20190823095836.28569-3-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
-In-Reply-To: <20190823095836.28569-1-yuchao0@huawei.com>
-References: <20190823095836.28569-1-yuchao0@huawei.com>
+ id 1i19Jx-00HQTg-Ma
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 13:09:42 +0000
+Received: from [192.168.0.101] (unknown [180.111.132.43])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4F02F21848;
+ Fri, 23 Aug 2019 13:09:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1566565772;
+ bh=12Ge5j75b9s5rRNxijeffCOODw8p97MJxgB+uU+409A=;
+ h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
+ b=T4bRJWvNjhpQSyHiwkiAahWqVE/dplxO1oFtLfCDssFX5WtAd6tTb7uRrMjoFVtKD
+ joMy4hroIIshvo0sQIuwFcYcY+dxFb4yUyNnGfD1l1e1JvSG3Kv5XbnMYUODGg3ji/
+ MANbwhSPMXOTuojpSmI/b7SIsEcpTiEye23UvY5g=
+To: Damien Le Moal <Damien.LeMoal@wdc.com>
+References: <20190821044802.29702-1-shinichiro.kawasaki@wdc.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <51daaa42-58b0-85dd-dcda-13185afe5b63@kernel.org>
+Date: Fri, 23 Aug 2019 21:09:19 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+In-Reply-To: <20190821044802.29702-1-shinichiro.kawasaki@wdc.com>
+Content-Language: en-US
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i16LO-00Cr6b-RF
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: enhance f2fs_is_checkpoint_ready()'s
- readability
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1i19Jx-00HQTg-Ma
+Subject: Re: [f2fs-dev] [PATCH v2 0/4] fsck: Check write pointers of zoned
+ block devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,268 +84,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch changes sematics of f2fs_is_checkpoint_ready()'s return
-value as: return true when checkpoint is ready, other return false,
-it can improve readability of below conditions.
+Hi Damien,
 
-f2fs_submit_page_write()
-...
-	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
-				!f2fs_is_checkpoint_ready(sbi))
-		__submit_merged_bio(io);
+Do you have time to take a look at this patch set, and add a reviewed-by if it
+is okay to you. :)
 
-f2fs_balance_fs()
-...
-	if (!f2fs_is_checkpoint_ready(sbi))
-		return;
+Thanks,
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/data.c    |  7 ++++---
- fs/f2fs/file.c    | 18 ++++++++----------
- fs/f2fs/inode.c   |  2 +-
- fs/f2fs/namei.c   | 36 ++++++++++++++----------------------
- fs/f2fs/segment.c |  2 +-
- fs/f2fs/segment.h |  8 ++++----
- fs/f2fs/xattr.c   |  5 ++---
- 7 files changed, 34 insertions(+), 44 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 769c548e955a..bf648c8c50ad 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -634,7 +634,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 		goto next;
- out:
- 	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
--				f2fs_is_checkpoint_ready(sbi))
-+				!f2fs_is_checkpoint_ready(sbi))
- 		__submit_merged_bio(io);
- 	up_write(&io->io_rwsem);
- }
-@@ -2571,9 +2571,10 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
- 
- 	trace_f2fs_write_begin(inode, pos, len, flags);
- 
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
-+	if (!f2fs_is_checkpoint_ready(sbi)) {
-+		err = -ENOSPC;
- 		goto fail;
-+	}
- 
- 	if ((f2fs_is_atomic_file(inode) &&
- 			!f2fs_available_free_memory(sbi, INMEM_PAGES)) ||
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 05d60082da3a..97038a9a91e3 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -57,9 +57,11 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 		err = -EIO;
- 		goto err;
- 	}
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
-+
-+	if (!f2fs_is_checkpoint_ready(sbi)) {
-+		err = -ENOSPC;
- 		goto err;
-+	}
- 
- 	sb_start_pagefault(inode->i_sb);
- 
-@@ -1575,9 +1577,8 @@ static long f2fs_fallocate(struct file *file, int mode,
- 
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
- 		return -EIO;
--	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(inode));
--	if (ret)
--		return ret;
-+	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
-+		return -ENOSPC;
- 
- 	/* f2fs only support ->fallocate for regular file */
- 	if (!S_ISREG(inode->i_mode))
-@@ -3162,13 +3163,10 @@ static int f2fs_set_volume_name(struct file *filp, unsigned long arg)
- 
- long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- {
--	int ret;
--
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
- 		return -EIO;
--	ret = f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp)));
--	if (ret)
--		return ret;
-+	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp))))
-+		return -ENOSPC;
- 
- 	switch (cmd) {
- 	case F2FS_IOC_GETFLAGS:
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 88af85e0db62..87214414936b 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -616,7 +616,7 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
- 	if (!is_inode_flag_set(inode, FI_DIRTY_INODE))
- 		return 0;
- 
--	if (f2fs_is_checkpoint_ready(sbi))
-+	if (!f2fs_is_checkpoint_ready(sbi))
- 		return -ENOSPC;
- 
- 	/*
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 7a2d43a9f1a6..8b02c69df199 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -272,9 +272,8 @@ static int f2fs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	err = dquot_initialize(dir);
- 	if (err)
-@@ -321,9 +320,8 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	err = fscrypt_prepare_link(old_dentry, dir, dentry);
- 	if (err)
-@@ -592,9 +590,8 @@ static int f2fs_symlink(struct inode *dir, struct dentry *dentry,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	err = fscrypt_prepare_symlink(dir, symname, len, dir->i_sb->s_blocksize,
- 				      &disk_link);
-@@ -724,9 +721,8 @@ static int f2fs_mknod(struct inode *dir, struct dentry *dentry,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	err = dquot_initialize(dir);
- 	if (err)
-@@ -822,13 +818,11 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
- static int f2fs_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
--	int ret;
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	ret = f2fs_is_checkpoint_ready(sbi);
--	if (ret)
--		return ret;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	if (IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi)) {
- 		int err = fscrypt_get_encryption_info(dir);
-@@ -865,9 +859,8 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	if (is_inode_flag_set(new_dir, FI_PROJ_INHERIT) &&
- 			(!projid_eq(F2FS_I(new_dir)->i_projid,
-@@ -1060,9 +1053,8 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	if ((is_inode_flag_set(new_dir, FI_PROJ_INHERIT) &&
- 			!projid_eq(F2FS_I(new_dir)->i_projid,
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index b6f838c055d7..ccee5fb69479 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -501,7 +501,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
- 	if (need && excess_cached_nats(sbi))
- 		f2fs_balance_fs_bg(sbi);
- 
--	if (f2fs_is_checkpoint_ready(sbi))
-+	if (!f2fs_is_checkpoint_ready(sbi))
- 		return;
- 
- 	/*
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 38ae95301169..bdcce35be077 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -593,13 +593,13 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
- 		reserved_sections(sbi) + needed);
- }
- 
--static inline int f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
-+static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
- {
- 	if (likely(!is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
--		return 0;
-+		return true;
- 	if (likely(!has_not_enough_free_secs(sbi, 0, 0)))
--		return 0;
--	return -ENOSPC;
-+		return true;
-+	return false;
- }
- 
- static inline bool excess_prefree_segs(struct f2fs_sb_info *sbi)
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index f85c810e33ca..181900af2576 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -732,9 +732,8 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
--	err = f2fs_is_checkpoint_ready(sbi);
--	if (err)
--		return err;
-+	if (!f2fs_is_checkpoint_ready(sbi))
-+		return -ENOSPC;
- 
- 	err = dquot_initialize(inode);
- 	if (err)
--- 
-2.18.0.rc1
-
+On 2019-8-21 12:47, Shin'ichiro Kawasaki wrote:
+> On sudden f2fs shutdown, zoned block device status and f2fs meta data can be
+> inconsistent. When f2fs shutdown happens during write operations, write pointers
+> on the device go forward but the f2fs meta data does not reflect write pointer
+> progress. This inconsistency will eventually cause "Unaligned write command"
+> error when restarting write operation after the next mount. This error can be
+> observed with xfstests test case generic/388, which enforces sudden shutdown
+> during write operation and checks the file system recovery. Once the error
+> happens because of the inconsistency, the file system requires fix. However,
+> fsck.f2fs does not have a feature to check and fix it.
+> 
+> This patch series adds a new feature to fsck.f2fs to check and fix the
+> inconsistency. First and second patches add two functions which helps fsck to
+> call report zone and reset zone commands to zoned block devices. Third patch
+> checks write pointers of zones that current segments recorded in meta data point
+> to. This covers the failure symptom observed with xfstests. The last patch
+> checks write pointers of zones that current segments do not point to, which
+> covers a potential failure scenario.
+> 
+> This patch series depends on other patches for zoned block devices, then it
+> conflicts with the master branch in f2fs-tools.git as of Aug/19/2019. It can be
+> applied without conflict to dev and dev-test branch tips.
+> 
+> Changes from v1:
+> * Fixed build failure on dev branch
+> 
+> Shin'ichiro Kawasaki (4):
+>   libf2fs_zoned: Introduce f2fs_report_zones() helper function
+>   libf2fs_zoned: Introduce f2fs_reset_zone() function
+>   fsck.f2fs: Check write pointer consistency with current segments
+>   fsck.f2fs: Check write pointer consistency with valid blocks count
+> 
+>  fsck/fsck.c         | 161 ++++++++++++++++++++++++++++++++++++++++++++
+>  fsck/fsck.h         |   3 +
+>  fsck/main.c         |   2 +
+>  include/f2fs_fs.h   |   3 +
+>  lib/libf2fs_zoned.c |  81 ++++++++++++++++++++++
+>  5 files changed, 250 insertions(+)
+> 
 
 
 _______________________________________________
