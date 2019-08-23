@@ -2,72 +2,147 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 511BC9A5E1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 05:02:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC71D9A68A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 06:20:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i0zqq-0004ud-4a; Fri, 23 Aug 2019 03:02:56 +0000
+	id 1i114H-0006mT-Pb; Fri, 23 Aug 2019 04:20:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1i0zqo-0004uP-0J
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 03:02:54 +0000
+ (envelope-from <boojin.kim@samsung.com>) id 1i114G-0006mM-3q
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 04:20:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Scpxi+9kyAUoGtB6rJxTx4ratCG3a+h9bAvxM13wcus=; b=kiayWk8r6gigjFJZX2hnaZIDgh
- cSP38g/CoH1p2fzs9/v6/eoC16DDtDbj/Gz3hYYrkcaHpfUQ9BGHu0Nrv6Fus+as/cgQVhuLSSkT+
- 4hhmzRqNT0KAP2LGhDHlu1NRAhA+FMYghV9lRTAWsjcq4BdMji1DleWd16NFi9rgEJdQ=;
+ bh=U9CQGfPf7Zxphg8CE4vj2CGEfHozLAw9BdLrulJXIpQ=; b=fkBAXzOLTV7WdeIqBwpht6zmba
+ EeOvvJk0bS2B40VjiKETxi0TmKo4Quld0txwr4HtR9lIhatlzpaSU89w0W+4N7I4Gu32B4qihYZms
+ w7++HeY9aV1BEOZ9SF3QqQOSiHNg+0yCvExLOhWO5fPdYAjUrbdByt8O0M9EUfohH5ec=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Scpxi+9kyAUoGtB6rJxTx4ratCG3a+h9bAvxM13wcus=; b=LRQIWJSv40doYv/9SiSg6ZyAfK
- 2ZaOpv2KiXO7X9sovz9FedSv70y5Zc0EdYfWum/wNAZC6VZmjMrHf3PyFN4XY/qH3HfiTax1lQqMb
- eRGR49eQbwCOeAjn0XgI9CB0DNOaDhRZ1EDkLBFyVPm++l3Rk0/BY2lDS0n+rZBKFM8k=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
+ :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=U9CQGfPf7Zxphg8CE4vj2CGEfHozLAw9BdLrulJXIpQ=; b=U
+ J4jJiqe/kUDRQtRBilekEtqVnLPwKm+moEIJcLQeO60bsLldoeuPN6mM0W15nAj8ExM6MQphpHOVs
+ 6VlhcAXLEZxY41DvKHjHrfsHttc9XYAuGEPjOHw7+n2lHQnKX9nwIBHPkqQsFxSaflUyD+12pPlE+
+ tSdkSsWIfSSeSYA0=;
+Received: from mailout4.samsung.com ([203.254.224.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i0zqm-00Gna9-6M
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 03:02:53 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id E9570F33A7B7D70DA2DC;
- Fri, 23 Aug 2019 11:02:44 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 23 Aug
- 2019 11:02:42 +0800
-To: <jaegeuk@kernel.org>
-References: <20190712085542.4068-1-yuchao0@huawei.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <28424a84-67aa-c8e9-99c3-475be89206ac@huawei.com>
-Date: Fri, 23 Aug 2019 11:02:41 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1i114C-00GsG6-Jb
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 04:20:52 +0000
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20190823042041epoutp045fcc1db08abca912e3d7e108e3d2a709~9cmkm7kNp2503225032epoutp04p
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 23 Aug 2019 04:20:41 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20190823042041epoutp045fcc1db08abca912e3d7e108e3d2a709~9cmkm7kNp2503225032epoutp04p
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1566534041;
+ bh=U9CQGfPf7Zxphg8CE4vj2CGEfHozLAw9BdLrulJXIpQ=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=QhzQ99Q+s7OJyjefXhpYoDvAsW3DK7/LFIU21EA7b4+6nh13DmSti3lqMKcmGAKWO
+ lzD+8En9ocjh3hZIFpZ81fbsnqaYkA5jsajtaBr/CI/RjF1UQLRbTd9OwkMga6N/8V
+ xC6VaLUUqY9vM+HB9jVKYNeeRf7T5kz4Cxj0x1l8=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20190823042040epcas2p17215f2c69bfbe74bf1dd25f056d546a5~9cmkK5AaC1326813268epcas2p1e;
+ Fri, 23 Aug 2019 04:20:40 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.40.186]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 46F7VZ6Kj9zMqYkl; Fri, 23 Aug
+ 2019 04:20:38 +0000 (GMT)
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 49.3F.04068.6996F5D5; Fri, 23 Aug 2019 13:20:38 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20190823042038epcas2p2000738f3ca7f5f3d92ea1c32de2bcf99~9cmh6hZPJ2766127661epcas2p2u;
+ Fri, 23 Aug 2019 04:20:38 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20190823042038epsmtrp1c49a7bd6aa12bbb926aaf66ce98445cf~9cmh5Y2xO1457414574epsmtrp1Y;
+ Fri, 23 Aug 2019 04:20:38 +0000 (GMT)
+X-AuditID: b6c32a47-5a1ff70000000fe4-76-5d5f6996ca5e
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 41.DA.03638.6996F5D5; Fri, 23 Aug 2019 13:20:38 +0900 (KST)
+Received: from KORDO035251 (unknown [12.36.165.204]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20190823042038epsmtip202663c369e2490843c132f4082264787~9cmhs-2qz3185331853epsmtip2_;
+ Fri, 23 Aug 2019 04:20:38 +0000 (GMT)
+From: "boojin.kim" <boojin.kim@samsung.com>
+To: "'Herbert Xu'" <herbert@gondor.apana.org.au>
+Date: Fri, 23 Aug 2019 13:20:37 +0900
+Message-ID: <017901d5596a$1df3a590$59daf0b0$@samsung.com>
 MIME-Version: 1.0
-In-Reply-To: <20190712085542.4068-1-yuchao0@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdVZag9UHlxLlVT+SOip4zSP4KGOkw==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf0wTZxjOd3e9qz+6nRX1s1m27oZ/qAFa8LoPAwtjTC/OP0imWdx09VIu
+ Be2v9FoGJhMnrivIKPwxlcoMKjFaZbBCEB1ls7IhE4SIuEGcU2mWFaIYWEmqxa3tYcZ/z/u8
+ z5Pvfb43rxxXNlAqeYnFIdgtvIkhlxKd19fr0o6V6Pdoqh5pUOQfN4Faf/0FRxf/8JDo5jeD
+ GGocOkKgwJOTMtTSHcPR0cnXUKjVi6Pfn7lkyDMxhaOhoTYK+SfuylBgfCP6834UQw2n7pHo
+ 9pmtaPLUHIG6A/0EGrnaSKLefz0AnRjqwZDr+whAX9ZEKdTX8lHeWq7jwhjGHWn/jOv8aR03
+ Mujk/L4qkrt3t5vk2psruB+aZjHu8MDPODfdM0pytR0+wM36Xy9c/rEpp1jgiwS7WrAYrEUl
+ FmMu88GH+vf0rE6jTdNmo7cZtYU3C7lMwfbCtC0lpnh2Rl3Km5xxqpAXRSbjnRy71ekQ1MVW
+ 0ZHLCLYik02rtaWLvFl0WozpBqt5s1ajyWTjyr2m4vovLlE2F1UWGBmQHQLDsmqwRA7pTfBY
+ 7QO8GiyVK+kuAKPtNwipmAHw5umzWEKlpOcAnLtRUQ3kScfxW0pJEwAwGI0AqQgDOFxZSSYM
+ JL0Rtvf5QAKn0Bp42f88KcLpFxQMzQSJRGMlzcL7vUeTBoJeByN143gCK+hsGIr1AgmvgP0N
+ oaQep9+Alx834tLcatg1OLXwQDpscdXhkiYFnqxyJfNAep6C1+YfAclQAJ9MP10IvRJO9nVQ
+ ElbBsMe1gCvg6LmzlGSuAXDg2ctGFvT+9RVI5Mfp9bD1aob0FW/B3vGF2V6B7uvzlEQroNul
+ lIyp8NuZEUyiVfBpzUGJ5mCsthGrA296F4X0LgrpXRTG+/+zTYDwgdWCTTQbBTHTlrV4136Q
+ PIsNW7tA563tQUDLAbNcYXN/ukcp40vFcnMQQDnOpChK6+OUoogvPyDYrXq70ySIQcDGd1CP
+ q1YZrPEjszj0WjZTp9Nks4jVZSJmjcK/bGy3kjbyDmG/INgE+0sfJl+iOgTa0qbqm/V9jtVf
+ Z53v3rUv9mOVO/zQb9j/fojKM/szUtnjO9JbI7R9H/XJeHN5bvnE7RVOLv9M0528fo/Rmk37
+ rtxZdW1L5eiuVw/4luGzhbETBZvCZWNthwV273QPp3qQvzOwO+U7w+f5D09Hr2zjU3c6h8uY
+ /hfhd9fk/P3b8yBDiMW8dgNuF/n/AHcjOXksBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrFIsWRmVeSWpSXmKPExsWy7bCSvO60zPhYg5vd4hZfv3SwWKw/dYzZ
+ YvXdfjaL01PPMlnMOd/CYrH33WxWi7V7/jBbdL+SsXiyfhazxY1fbawW/Y9fM1ucP7+B3WLT
+ 42usFntvaVvcv/eTyWLmvDtsFpcWuVu8mveNxWLP3pMsFpd3zWGzOPK/n9Fixvl9TBZtG78y
+ WrT2/GS3OL423EHSY8vKm0weLZvLPbYdUPW4fLbUY9OqTjaPO9f2sHlsXlLvsXvBZyaPpjNH
+ mT3e77vK5tG3ZRWjx+dNcgE8UVw2Kak5mWWpRfp2CVwZExvXsBe0sVfsvXyGtYHxAmsXIweH
+ hICJxPRzQl2MXBxCArsZJfZt2goU5wSKS0lsbd/DDGELS9xvOcIKUfScUaJ5wlYmkASbgLbE
+ 5uOrGEFsEQEDie2bfoPZzALTOCR2fRAHsYUFTCXuHelmA7FZBFQlvk64BTaUV8BS4smfI4wQ
+ tqDEyZlPWEAOYhbQk2jbCDVGXmL72zlQNyhI7Dj7GmqVnsTatgnMEDUiErM725gnMArOQjJp
+ FsKkWUgmzULSsYCRZRWjZGpBcW56brFhgVFearlecWJucWleul5yfu4mRnAK0NLawXjiRPwh
+ RgEORiUe3oKOuFgh1sSy4srcQ4wSHMxKIrxlE4FCvCmJlVWpRfnxRaU5qcWHGKU5WJTEeeXz
+ j0UKCaQnlqRmp6YWpBbBZJk4OKUaGJleBy6rntzmuGvaFQ/TC0tPxR1V2Lv0/O0JJTxHt4iq
+ PW/OX3fnooDzAs+gmqwVK5juHXgRWVM+MbmyWHaWdmiF5pRFR3sX/+qpvK/L7ugiasB35P8l
+ BRYdxbOKQgI+W66KntnNPbVk0132vqUn7/1Z+4+jPnjLzQahq/ZME2X+cSm0zQy9bKDEUpyR
+ aKjFXFScCADJMiVD/QIAAA==
+X-CMS-MailID: 20190823042038epcas2p2000738f3ca7f5f3d92ea1c32de2bcf99
+X-Msg-Generator: CA
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-CMS-RootMailID: 20190823042038epcas2p2000738f3ca7f5f3d92ea1c32de2bcf99
+References: <CGME20190823042038epcas2p2000738f3ca7f5f3d92ea1c32de2bcf99@epcas2p2.samsung.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: linaro.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1i0zqm-00Gna9-6M
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: introduce {page,
- io}_is_mergeable() for readability
+X-Headers-End: 1i114C-00GsG6-Jb
+Subject: Re: [f2fs-dev] [PATCH 6/9] dm crypt: support diskcipher
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,103 +154,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: 'Ulf
+ Hansson' <ulf.hansson@linaro.org>, 'Mike Snitzer' <snitzer@redhat.com>,
+ dm-devel@redhat.com, 'Andreas Dilger' <adilger.kernel@dilger.ca>,
+ 'Alasdair Kergon' <agk@redhat.com>, 'Eric Biggers' <ebiggers@kernel.org>,
+ linux-samsung-soc@vger.kernel.org, 'Herbert Xu' <herbert@gondor.apana.org.au>,
+ 'Krzysztof Kozlowski' <krzk@kernel.org>,
+ 'Jaehoon Chung' <jh80.chung@samsung.com>, 'Kukjin Kim' <kgene@kernel.org>,
+ linux-ext4@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, 'Jaegeuk Kim' <jaegeuk@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, 'Jens Axboe' <axboe@kernel.dk>,
+ 'Theodore Ts'o' <tytso@mit.edu>, linux-mmc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ "'David S. Miller'" <davem@davemloft.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/7/12 16:55, Chao Yu wrote:
-> Wrap merge condition into function for readability, no logic change.
-> 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
-> v2: remove bio validation check in page_is_mergeable().
->  fs/f2fs/data.c | 40 +++++++++++++++++++++++++++++++++-------
->  1 file changed, 33 insertions(+), 7 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 6a8db4abdf5f..f1e401f9fc13 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -482,6 +482,33 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
->  	return 0;
->  }
->  
-> +static bool page_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
-> +				block_t last_blkaddr, block_t cur_blkaddr)
-> +{
-> +	if (last_blkaddr != cur_blkaddr)
+On Wed, Aug 21, 2019 at 17:19:41PM +0900, Herbert Xu wrote:
 
-if (last_blkaddr + 1 != cur_blkaddr)
+> On Wed, Aug 21, 2019 at 04:57:41PM +0900, boojin.kim wrote:
+> >
+> > Can you tell me which patch you mentioned? Is this?
+> > https://patches.linaro.org/project/linux-crypto/list/?series=22762
+> >
+>
+> Yes this is the one.
+>
+> Cheers,
 
-Merge condition is wrong here.
+I looked at ESSIV patch-set.
+Can you please confirm that you mean:
+'Register FMP as the template of skcipher instead of diskcipher,
+and simplify the interface for FMP user'
 
-> +		return false;
-> +	return __same_bdev(sbi, cur_blkaddr, bio);
-> +}
-> +
-> +static bool io_type_is_mergeable(struct f2fs_bio_info *io,
-> +						struct f2fs_io_info *fio)
-> +{
-> +	if (io->fio.op != fio->op)
-> +		return false;
-> +	return io->fio.op_flags == fio->op_flags;
-> +}
-> +
-> +static bool io_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
-> +					struct f2fs_bio_info *io,
-> +					struct f2fs_io_info *fio,
-> +					block_t last_blkaddr,
-> +					block_t cur_blkaddr)
-> +{
-> +	if (!page_is_mergeable(sbi, bio, last_blkaddr, cur_blkaddr))
-> +		return false;
-> +	return io_type_is_mergeable(io, fio);
-> +}
-> +
->  int f2fs_merge_page_bio(struct f2fs_io_info *fio)
->  {
->  	struct bio *bio = *fio->bio;
-> @@ -495,8 +522,8 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
->  	trace_f2fs_submit_page_bio(page, fio);
->  	f2fs_trace_ios(fio, 0);
->  
-> -	if (bio && (*fio->last_block + 1 != fio->new_blkaddr ||
-> -			!__same_bdev(fio->sbi, fio->new_blkaddr, bio))) {
-> +	if (bio && !page_is_mergeable(fio->sbi, bio, *fio->last_block,
-> +						fio->new_blkaddr)) {
->  		__submit_bio(fio->sbi, bio, fio->type);
->  		bio = NULL;
->  	}
-> @@ -569,9 +596,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
->  
->  	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
->  
-> -	if (io->bio && (io->last_block_in_bio != fio->new_blkaddr - 1 ||
-> -	    (io->fio.op != fio->op || io->fio.op_flags != fio->op_flags) ||
-> -			!__same_bdev(sbi, fio->new_blkaddr, io->bio)))
-> +	if (io->bio && !io_is_mergeable(sbi, io->bio, io, fio,
-> +			io->last_block_in_bio, fio->new_blkaddr))
->  		__submit_merged_bio(io);
->  alloc_new:
->  	if (io->bio == NULL) {
-> @@ -1643,8 +1669,8 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
->  	 * This page will go to BIO.  Do we need to send this
->  	 * BIO off first?
->  	 */
-> -	if (bio && (*last_block_in_bio != block_nr - 1 ||
-> -		!__same_bdev(F2FS_I_SB(inode), block_nr, bio))) {
-> +	if (bio && !page_is_mergeable(F2FS_I_SB(inode), bio,
-> +				*last_block_in_bio, block_nr - 1)) {
+If yes, I think the following API needs to be added to skcipher:  
+- _set(): BIO submitter (dm-crypt, f2fs, ext4) sets cipher to BIO.
+- _mergeable(): Block layer checks if two BIOs have the same cipher.
+- _get(): Storage driver gets cipher from BIO.
+- _set_crypt(): Storage driver gets crypto information from cipher and 
+writes it on the descriptor of Storage controller.
+Is it acceptable to skcipher ?
 
-*last_block_in_bio, block_nr)
 
-Sorry, anyway, let me send v2.
-
->  submit_and_realloc:
->  		__submit_bio(F2FS_I_SB(inode), bio, DATA);
->  		bio = NULL;
-> 
 
 
 _______________________________________________
