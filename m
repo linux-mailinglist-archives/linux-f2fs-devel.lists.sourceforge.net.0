@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 697E09B2CF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 16:57:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04AFA9B2F2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Aug 2019 17:04:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i1B0d-000269-Vu; Fri, 23 Aug 2019 14:57:47 +0000
+	id 1i1B7P-0001D0-14; Fri, 23 Aug 2019 15:04:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1i1B0c-000261-GL
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 14:57:46 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1i1B7N-0001Cr-9A
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 15:04:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+WsmhZfCA2XpWjQThfiUvWh9yNCwurD2aJSdDdDlMpc=; b=c1mvLSmCqz5HS14ggcjWbPita4
- bDTVHjQKspZB5mKVhQCSjRUwSwQ1G8rrQ0GLJc/2QZTk7sxh2j2mIl9dh0ubU+GS+ep/Y5zvh5nZe
- OXW5vY2NAvxBXSs3BammNuf45mnDYb5+SxFlJi0IiVJp7v31Qu1jmwZhFy1wwPANNhMI=;
+ bh=jrRVpj0CgyoVOoivgeCvrk1DvOi33KPZyMTcMqkiaZs=; b=kAyzaTFcw7yXruTrb3z3FxTNKC
+ O8igkGHLORtJrhDrdKf66YTp/QEyqKu0IkuzzGXLracSkuMHR4oNhdfhPJAQNAU0yT0M2zVGRpsNj
+ ydcid9SQZjCN1PwZlHxR5ykO9yudhMmSBR4hn7kmbqQumfbmRB3VDL6fKs1nOXemojmM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,43 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+WsmhZfCA2XpWjQThfiUvWh9yNCwurD2aJSdDdDlMpc=; b=AyUmXNbZOg8R8sp9H5GwSabMrI
- xM5j02tvkrJ9k7RVnPiaW76Zuuoa5w+/cvB6Zt/3B1O1t4A5oVBbAi0Rt3FSndeCLro5fALLA28sr
- Vs0ddlxmdqZPT9joqFa+epQIzHiG3qj2TrfFA4ZQMc4aSf3F+FdyqdoDYn+EIam5p6/M=;
+ bh=jrRVpj0CgyoVOoivgeCvrk1DvOi33KPZyMTcMqkiaZs=; b=KKmGFTIdg6S9CSVhPS2XPdsvlT
+ YjBS/loJgIZIvtAPeKvWEVmGlXpc+uat4NUuYSiQYcsFqTXK3/ds5aylZYQ4d4NPuNgYhI/DkJptP
+ qUHp6K5LHe6v4Tb73HvZ2fvTTxEW/PGJeTO60jfjxQSzIBWPD/xOvyd3Tp9GmooosaYM=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i1B0a-00D5yN-N8
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 14:57:46 +0000
+ id 1i1B7M-00HXC2-0N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 23 Aug 2019 15:04:45 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0C57922CEC;
- Fri, 23 Aug 2019 14:57:39 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 64D652133F;
+ Fri, 23 Aug 2019 15:04:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1566572259;
- bh=lUZVzj62LY1E4yZhmdisUFDLbkNHl2Ewg/KwzQn5eck=;
+ s=default; t=1566572678;
+ bh=S7IRiPTB+mcbMOQ4u/zMRvy0kBdgByp4jelGLBzh1j0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=D55i0IXM4OYqcIZA6lxzHWwEBKjkxSBCkpBSixu0Osu7AcKt9NYWzKCUlRTCVroJ6
- VyZnUwoSgGFsrpK0FSnfmUuU2UuZP/JSUDEHc7Wh0LhnUaIDLpTFYvzmPWubmp3p9A
- p6X8oji0CLLMdSblC0oVI9Im0hxsT90NNA/xfUO8=
-Date: Fri, 23 Aug 2019 07:57:38 -0700
+ b=Fw84Td+SU6YfZiIvi7txGszFYVWeLQp/J5bSJE4bbr1L7ytEDpvo3HEWfuNGeF7de
+ cgv+TFdeFr+p7jgWVG2sk39M7aLxAl7vfXoDtoyApeqtVOUKXORXlrcP+SOqkI74/d
+ BliiNAgOIjqYyI15zSP0llVxdawF/0OkcOsF5ch0=
+Date: Fri, 23 Aug 2019 08:04:37 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20190823145738.GA35310@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190712085542.4068-1-yuchao0@huawei.com>
- <28424a84-67aa-c8e9-99c3-475be89206ac@huawei.com>
+Message-ID: <20190823150437.GB35310@jaegeuk-macbookpro.roam.corp.google.com>
+References: <3bc8584e-651c-9578-c25a-40c60b5cfbdb@huawei.com>
+ <dfd847fe-0c6d-f2a1-db50-d637a685d13b@huawei.com>
+ <20190822194915.GB99916@jaegeuk-macbookpro.roam.corp.google.com>
+ <ca722330-d7f4-4e6b-8129-ae48357db85a@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <28424a84-67aa-c8e9-99c3-475be89206ac@huawei.com>
+In-Reply-To: <ca722330-d7f4-4e6b-8129-ae48357db85a@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -74,9 +72,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1i1B0a-00D5yN-N8
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: introduce {page,
- io}_is_mergeable() for readability
+X-Headers-End: 1i1B7M-00HXC2-0N
+Subject: Re: [f2fs-dev] f2fs_symlink bug
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,106 +85,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 08/23, Chao Yu wrote:
-> On 2019/7/12 16:55, Chao Yu wrote:
-> > Wrap merge condition into function for readability, no logic change.
+> On 2019/8/23 3:49, Jaegeuk Kim wrote:
+> > On 08/21, Chao Yu wrote:
+> >> Ping,
+> >>
+> >> On 2019/8/12 20:01, Chao Yu wrote:
+> >>> Hi Jaegeuk,
+> >>>
+> >>> In por_fsstress testcase, fsck reports below inconsistent status, I found one
+> >>> path can cause this case.
+> >>>
+> >>> [FIX] (fsck_chk_inode_blk:1002)  --> Symlink: recover 0x1425 with i_size=4096
+> >>> [ASSERT] (fsck_chk_inode_blk:1030)  --> ino: 0x1425 chksum:0x6983d47, but
+> >>> calculated one is: 0xdb284b35
+> >>> [FIX] (fsck_chk_inode_blk:1036)  --> ino: 0x1425 recover, i_inode_checksum=
+> >>> 0x6983d47 -> 0xdb284b35
+> >>>
+> >>> - f2fs_symlink
+> >>>  - page_symlink failed -> f2fs_write_failed() will truncate size to zero
+> >>>   - f2fs_unlink failed -> symlink inode w/o data will remain in fs
+> >>>
+> >>> Not sure, but one choice of fix is to treat symlink as fs meta like we did for
+> >>> directory, so that checkpoint can take care of all data/node of symlink, any
+> >>> thoughts?
 > > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> > v2: remove bio validation check in page_is_mergeable().
-> >  fs/f2fs/data.c | 40 +++++++++++++++++++++++++++++++++-------
-> >  1 file changed, 33 insertions(+), 7 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 6a8db4abdf5f..f1e401f9fc13 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -482,6 +482,33 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
-> >  	return 0;
-> >  }
-> >  
-> > +static bool page_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
-> > +				block_t last_blkaddr, block_t cur_blkaddr)
-> > +{
-> > +	if (last_blkaddr != cur_blkaddr)
+> > Hmm, how's the possible to get very long path name requiring another data block?
 > 
-> if (last_blkaddr + 1 != cur_blkaddr)
+> It can with below script, which is actually existed case in fsstress.
 > 
-> Merge condition is wrong here.
+> #!/bin/bash
 > 
-> > +		return false;
-> > +	return __same_bdev(sbi, cur_blkaddr, bio);
-> > +}
-> > +
-> > +static bool io_type_is_mergeable(struct f2fs_bio_info *io,
-> > +						struct f2fs_io_info *fio)
-> > +{
-> > +	if (io->fio.op != fio->op)
-> > +		return false;
-> > +	return io->fio.op_flags == fio->op_flags;
-> > +}
-> > +
-> > +static bool io_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
-> > +					struct f2fs_bio_info *io,
-> > +					struct f2fs_io_info *fio,
-> > +					block_t last_blkaddr,
-> > +					block_t cur_blkaddr)
-> > +{
-> > +	if (!page_is_mergeable(sbi, bio, last_blkaddr, cur_blkaddr))
-> > +		return false;
-> > +	return io_type_is_mergeable(io, fio);
-> > +}
-> > +
-> >  int f2fs_merge_page_bio(struct f2fs_io_info *fio)
-> >  {
-> >  	struct bio *bio = *fio->bio;
-> > @@ -495,8 +522,8 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
-> >  	trace_f2fs_submit_page_bio(page, fio);
-> >  	f2fs_trace_ios(fio, 0);
-> >  
-> > -	if (bio && (*fio->last_block + 1 != fio->new_blkaddr ||
-> > -			!__same_bdev(fio->sbi, fio->new_blkaddr, bio))) {
-> > +	if (bio && !page_is_mergeable(fio->sbi, bio, *fio->last_block,
-> > +						fio->new_blkaddr)) {
-> >  		__submit_bio(fio->sbi, bio, fio->type);
-> >  		bio = NULL;
-> >  	}
-> > @@ -569,9 +596,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
-> >  
-> >  	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
-> >  
-> > -	if (io->bio && (io->last_block_in_bio != fio->new_blkaddr - 1 ||
-> > -	    (io->fio.op != fio->op || io->fio.op_flags != fio->op_flags) ||
-> > -			!__same_bdev(sbi, fio->new_blkaddr, io->bio)))
-> > +	if (io->bio && !io_is_mergeable(sbi, io->bio, io, fio,
-> > +			io->last_block_in_bio, fio->new_blkaddr))
-> >  		__submit_merged_bio(io);
-> >  alloc_new:
-> >  	if (io->bio == NULL) {
-> > @@ -1643,8 +1669,8 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
-> >  	 * This page will go to BIO.  Do we need to send this
-> >  	 * BIO off first?
-> >  	 */
-> > -	if (bio && (*last_block_in_bio != block_nr - 1 ||
-> > -		!__same_bdev(F2FS_I_SB(inode), block_nr, bio))) {
-> > +	if (bio && !page_is_mergeable(F2FS_I_SB(inode), bio,
-> > +				*last_block_in_bio, block_nr - 1)) {
+> for (( i = 0; i < 4095; i++ )); do
+>         if [ $((i % 255)) -eq 0 ]
+>         then
+>                 filename=$filename"/"
+>         else
+>                 filename=$filename"0"
+>         fi
+> done
 > 
-> *last_block_in_bio, block_nr)
+> ln -s $filename /f2fs_mount_point/symlink
 > 
-> Sorry, anyway, let me send v2.
+> > If it's fitted in inline_data, it's more easy to guarantee that, right?
+> 
+> If the length of symlink is 4095, not sure inline space is enough even we can
+> compress symlink...
 
-Fixed, thanks,
+I meant real usecases larger than 3.5KB. There's no posix rule to guarantee
+this. IOWs, it's known behavior across filesystems.
 
 > 
-> >  submit_and_realloc:
-> >  		__submit_bio(F2FS_I_SB(inode), bio, DATA);
-> >  		bio = NULL;
+> Thanks,
+> 
+> > 
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Linux-f2fs-devel mailing list
+> >>> Linux-f2fs-devel@lists.sourceforge.net
+> >>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> >>> .
+> >>>
+> > .
 > > 
 
 
