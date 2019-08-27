@@ -2,133 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABB279F12C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2019 19:07:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B22D9F4D9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2019 23:15:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i2evq-0005vO-L8; Tue, 27 Aug 2019 17:06:58 +0000
+	id 1i2ioJ-0000D4-He; Tue, 27 Aug 2019 21:15:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dsterba@suse.cz>)
- id 1i2evn-0005v0-GU; Tue, 27 Aug 2019 17:06:55 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1i2ioH-0000Cn-Uf
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 21:15:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CwBwJQptCuHABBiHqWjHEuVRxpHn6ZdzRWug18r3P1A=; b=VCFpj9Sbe9j6XlPljjQqyhwWWc
- Lfyo4G7aLlzOr34Y+rxxEMBuGUInj8E4DjeNwwZUrzu41Yc6kW+sGDZOX/LOXRR4Y0wORV87TJbpH
- eLLLf1M70SN04402e6TYd3SLDOGXg1Jdtxv7m0QZxcbEfq1isEocuSIYbQeBT47gOL0w=;
+ bh=7QpFY1JUaH0NSyLhtobuFUKEXptxAJNTG2856eA8+qc=; b=TxlWkBSo9uH5YW/ipQIYPVeTUZ
+ Vx0XVrOwnQ9Zxa/XuKTjnIwSERwWob9M/m2XxAAcqIAOvlOZtGopry2QVQe8DmqBjBuIlW6wCFFbS
+ CdMtTWWJcSSkxVK6usqT33+VZPHmXINJ9/3aXDLl7IKUKETfu0hDyb4hZNeYG5/u+dcI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
- Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CwBwJQptCuHABBiHqWjHEuVRxpHn6ZdzRWug18r3P1A=; b=DDRfx/qGYEOUMjJHyFt+wLNWtC
- ZO8D40bqTFJodW2bjZMPqTJuXlbYtQIv4Osnv68ouSB5uAETb1tPEXnEXr7QAKZ7MoK1iw9aXYgCA
- kGueHiPY0R9lCWz77i11JUis6Tj/7BcVCebN+r+OxnFSSWQ78eZid5qnbJ4OLXbqntjc=;
-Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
+ bh=7QpFY1JUaH0NSyLhtobuFUKEXptxAJNTG2856eA8+qc=; b=ldTTVkGlNBt/Ny98ippJvYCuA3
+ pHh6BqkqyDjxzRb0naT6rk7Q8QxW6dUuXkflfGMmKQpBTDLVA1CFSDQ+DLARfg6ZpWiGQpRO1nAnR
+ bzKpn+wVsgzTul0LwV0nyk8y7oMew/fCQVDwXieCPNG0WufOCeEmP+3hRCWpmNHSu91g=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i2evl-000Mj3-JP; Tue, 27 Aug 2019 17:06:55 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 6C032B03C;
- Tue, 27 Aug 2019 17:06:41 +0000 (UTC)
-Received: by ds.suse.cz (Postfix, from userid 10065)
- id D57F2DA809; Tue, 27 Aug 2019 19:07:00 +0200 (CEST)
-Date: Tue, 27 Aug 2019 19:07:00 +0200
-From: David Sterba <dsterba@suse.cz>
-To: Mark Salyzyn <salyzyn@android.com>
-Message-ID: <20190827170700.GW2752@suse.cz>
-Mail-Followup-To: dsterba@suse.cz, Mark Salyzyn <salyzyn@android.com>,
- linux-kernel@vger.kernel.org, kernel-team@android.com,
- Tyler Hicks <tyhicks@canonical.com>,
- Dominique Martinet <asmadeus@codewreck.org>,
- "David S. Miller" <davem@davemloft.net>,
- Mathieu Malaterre <malat@debian.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- devel@driverdev.osuosl.org, Vyacheslav Dubeyko <slava@dubeyko.com>,
- Joel Becker <jlbec@evilplan.org>, Mark Fasheh <mark@fasheh.com>,
- Chris Mason <clm@fb.com>, Artem Bityutskiy <dedekind1@gmail.com>,
- Eric Van Hensbergen <ericvh@gmail.com>,
- Ilya Dryomov <idryomov@gmail.com>,
- Bharath Vedartham <linux.bhar@gmail.com>,
- Eric Biggers <ebiggers@google.com>, Hugh Dickins <hughd@google.com>,
- Jann Horn <jannh@google.com>, Serge Hallyn <serge@hallyn.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Gao Xiang <gaoxiang25@huawei.com>, Chao Yu <yuchao0@huawei.com>,
- David Woodhouse <dwmw2@infradead.org>,
- Adrian Hunter <adrian.hunter@intel.com>,
- Latchesar Ionkov <lucho@ionkov.net>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Jeff Layton <jlayton@kernel.org>,
- Dave Kleikamp <shaggy@kernel.org>, Tejun Heo <tj@kernel.org>,
- linux-mm@kvack.org, Andrew Morton <akpm@linux-foundation.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Mimi Zohar <zohar@linux.ibm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- linux-afs@lists.infradead.org, linux-mtd@lists.infradead.org,
- devel@lists.orangefs.org, linux-erofs@lists.ozlabs.org,
- samba-technical@lists.samba.org,
- jfs-discussion@lists.sourceforge.net,
+ id 1i2ioG-000eHI-ET
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 21:15:25 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7B34B2077B;
+ Tue, 27 Aug 2019 21:15:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1566940518;
+ bh=iaghhaDV8j8qORBSTzVchX5sytlV1GHoa0Q1lTkIpvA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=wFoC+cRDLCAASnXGhd5PexBhEEu0p3YaKDSvyT2OPqNuInaZrpfDuvYEa85/JD+1f
+ JBydFcxKT/lBlaowRQ3FOu6aDiDZaeKn/y6mgofYnw2svZ8V49yzFvnKbx1nq1C0I/
+ HYbprNd0CUsUJoG2q2JahCf73LJuGaGOLprmhD9E=
+Date: Tue, 27 Aug 2019 14:15:17 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20190827211515.GB27166@gmail.com>
+Mail-Followup-To: Satya Tangirala <satyat@google.com>,
+ linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net,
- v9fs-developer@lists.sourceforge.net,
- Jonathan Corbet <corbet@lwn.net>, Theodore Ts'o <tytso@mit.edu>,
- James Morris <jmorris@namei.org>,
- Anna Schumaker <anna.schumaker@netapp.com>,
- Richard Weinberger <richard@nod.at>,
- Mike Marshall <hubcap@omnibond.com>,
- Martin Brandenburg <martin@omnibond.com>,
- Allison Henderson <allison.henderson@oracle.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- ocfs2-devel@oss.oracle.com, Eric Paris <eparis@parisplace.org>,
- Paul Moore <paul@paul-moore.com>,
- Andreas Gruenbacher <agruenba@redhat.com>,
- Benjamin Coddington <bcodding@redhat.com>,
- "J. Bruce Fields" <bfields@redhat.com>,
- Brian Foster <bfoster@redhat.com>, cluster-devel@redhat.com,
- Dave Chinner <dchinner@redhat.com>,
- David Howells <dhowells@redhat.com>,
- Bob Peterson <rpeterso@redhat.com>, Sage Weil <sage@redhat.com>,
- Steve French <sfrench@samba.org>,
- Eric Sandeen <sandeen@sandeen.net>,
- Casey Schaufler <casey@schaufler-ca.com>,
- Phillip Lougher <phillip@squashfs.org.uk>,
- David Sterba <dsterba@suse.com>, Jan Kara <jack@suse.com>,
- Jan Kara <jack@suse.cz>, Miklos Szeredi <miklos@szeredi.hu>,
- Josef Bacik <josef@toxicpanda.com>,
- Stephen Smalley <sds@tycho.nsa.gov>, ceph-devel@vger.kernel.org,
- ecryptfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-cifs@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-integrity@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-security-module@vger.kernel.org,
- linux-unionfs@vger.kernel.org, linux-xfs@vger.kernel.org,
- netdev@vger.kernel.org, reiserfs-devel@vger.kernel.org,
- selinux@vger.kernel.org, stable@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>
-References: <20190827150544.151031-1-salyzyn@android.com>
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Kim Boojin <boojin.kim@samsung.com>
+References: <20190821075714.65140-1-satyat@google.com>
+ <20190821075714.65140-2-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190827150544.151031-1-salyzyn@android.com>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20190821075714.65140-2-satyat@google.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 3.1 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.cz]
+ 3.2 FSL_HELO_FAKE          No description available.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1i2evl-000Mj3-JP
-Subject: Re: [f2fs-dev] [PATCH v8] Add flags option to get xattr method
- paired to __vfs_getxattr
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1i2ioG-000eHI-ET
+Subject: Re: [f2fs-dev] [PATCH v4 1/8] block: Keyslot Manager for Inline
+ Encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,133 +92,289 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: dsterba@suse.cz
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Eric Sandeen <sandeen@sandeen.net>,
- Mike Marshall <hubcap@omnibond.com>, James Morris <jmorris@namei.org>,
- devel@lists.orangefs.org, Eric Van Hensbergen <ericvh@gmail.com>,
- Joel Becker <jlbec@evilplan.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- Jan Kara <jack@suse.com>, Casey Schaufler <casey@schaufler-ca.com>,
- Andrew Morton <akpm@linux-foundation.org>, Dave Kleikamp <shaggy@kernel.org>,
- linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
- Mimi Zohar <zohar@linux.ibm.com>, "David S. Miller" <davem@davemloft.net>,
- linux-cifs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Hugh Dickins <hughd@google.com>,
- kernel-team@android.com, selinux@vger.kernel.org,
- Brian Foster <bfoster@redhat.com>, reiserfs-devel@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, Miklos Szeredi <miklos@szeredi.hu>,
- linux-f2fs-devel@lists.sourceforge.net,
- Benjamin Coddington <bcodding@redhat.com>, linux-integrity@vger.kernel.org,
- Martin Brandenburg <martin@omnibond.com>, Chris Mason <clm@fb.com>,
- linux-mtd@lists.infradead.org, linux-afs@lists.infradead.org,
- Jonathan Corbet <corbet@lwn.net>, Vyacheslav Dubeyko <slava@dubeyko.com>,
- Allison Henderson <allison.henderson@oracle.com>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- Stephen Smalley <sds@tycho.nsa.gov>, Serge Hallyn <serge@hallyn.com>,
- Eric Paris <eparis@parisplace.org>, ceph-devel@vger.kernel.org,
- linux-nfs@vger.kernel.org, Joseph Qi <joseph.qi@linux.alibaba.com>,
- samba-technical@lists.samba.org, linux-xfs@vger.kernel.org,
- Bob Peterson <rpeterso@redhat.com>, Tejun Heo <tj@kernel.org>,
- linux-erofs@lists.ozlabs.org, Anna Schumaker <anna.schumaker@netapp.com>,
- ocfs2-devel@oss.oracle.com, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, Eric Biggers <ebiggers@google.com>,
- Dominique Martinet <asmadeus@codewreck.org>, linux-unionfs@vger.kernel.org,
- David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
- Andreas Dilger <adilger.kernel@dilger.ca>, devel@driverdev.osuosl.org,
- "J. Bruce Fields" <bfields@redhat.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- cluster-devel@redhat.com, Steve French <sfrench@samba.org>,
- v9fs-developer@lists.sourceforge.net, Bharath Vedartham <linux.bhar@gmail.com>,
- Jann Horn <jannh@google.com>, ecryptfs@vger.kernel.org,
- Josef Bacik <josef@toxicpanda.com>, Dave Chinner <dchinner@redhat.com>,
- David Sterba <dsterba@suse.com>, Artem Bityutskiy <dedekind1@gmail.com>,
- netdev@vger.kernel.org, Adrian Hunter <adrian.hunter@intel.com>,
- stable@vger.kernel.org, Tyler Hicks <tyhicks@canonical.com>,
- linux-security-module@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- David Woodhouse <dwmw2@infradead.org>, linux-btrfs@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 27, 2019 at 08:05:15AM -0700, Mark Salyzyn wrote:
-> Replace arguments for get and set xattr methods, and __vfs_getxattr
-> and __vfs_setaxtr functions with a reference to the following now
-> common argument structure:
-> 
-> struct xattr_gs_args {
-> 	struct dentry *dentry;
-> 	struct inode *inode;
-> 	const char *name;
-> 	union {
-> 		void *buffer;
-> 		const void *value;
-> 	};
-> 	size_t size;
-> 	int flags;
-> };
-> 
-> Which in effect adds a flags option to the get method and
-> __vfs_getxattr function.
-> 
-> Add a flag option to get xattr method that has bit flag of
-> XATTR_NOSECURITY passed to it.  XATTR_NOSECURITY is generally then
-> set in the __vfs_getxattr path when called by security
-> infrastructure.
-> 
-> This handles the case of a union filesystem driver that is being
-> requested by the security layer to report back the xattr data.
-> 
-> For the use case where access is to be blocked by the security layer.
-> 
-> The path then could be security(dentry) ->
-> __vfs_getxattr({dentry...XATTR_NOSECURITY}) ->
-> handler->get({dentry...XATTR_NOSECURITY}) ->
-> __vfs_getxattr({lower_dentry...XATTR_NOSECURITY}) ->
-> lower_handler->get({lower_dentry...XATTR_NOSECURITY})
-> which would report back through the chain data and success as
-> expected, the logging security layer at the top would have the
-> data to determine the access permissions and report back the target
-> context that was blocked.
-> 
-> Without the get handler flag, the path on a union filesystem would be
-> the errant security(dentry) -> __vfs_getxattr(dentry) ->
-> handler->get(dentry) -> vfs_getxattr(lower_dentry) -> nested ->
-> security(lower_dentry, log off) -> lower_handler->get(lower_dentry)
-> which would report back through the chain no data, and -EACCES.
-> 
-> For selinux for both cases, this would translate to a correctly
-> determined blocked access. In the first case with this change a correct avc
-> log would be reported, in the second legacy case an incorrect avc log
-> would be reported against an uninitialized u:object_r:unlabeled:s0
-> context making the logs cosmetically useless for audit2allow.
-> 
-> This patch series is inert and is the wide-spread addition of the
-> flags option for xattr functions, and a replacement of __vfs_getxattr
-> with __vfs_getxattr({...XATTR_NOSECURITY}).
-> 
-> Signed-off-by: Mark Salyzyn <salyzyn@android.com>
-> Reviewed-by: Jan Kara <jack@suse.cz>
-> Cc: Stephen Smalley <sds@tycho.nsa.gov>
-> Cc: linux-kernel@vger.kernel.org
-> Cc: kernel-team@android.com
-> Cc: linux-security-module@vger.kernel.org
-> Cc: stable@vger.kernel.org # 4.4, 4.9, 4.14 & 4.19
-> ---
-> v8:
-> - Documentation reported 'struct xattr_gs_flags' rather than
->   'struct xattr_gs_flags *args' as argument to get and set methods.
+Hi Satya, a few more minor comments:
 
-For btrfs
+On Wed, Aug 21, 2019 at 12:57:07AM -0700, Satya Tangirala wrote:
+> +/**
+> + * keyslot_manager_create() - Create a keyslot manager
+> + * @num_slots: The number of key slots to manage.
+> + * @ksm_ll_ops: The struct keyslot_mgmt_ll_ops for the device that this keyslot
+> + *		manager will use to perform operations like programming and
+> + *		evicting keys.
+> + * @ll_priv_data: Private data passed as is to the functions in ksm_ll_ops.
+> + *
+> + * Allocate memory for and initialize a keyslot manager. Called by for e.g.
+> + * storage drivers to set up a keyslot manager in their request_queue.
 
->  fs/btrfs/xattr.c                  |  36 +++++-----
+The word "for" in "Called by for e.g." shouldn't be there.
 
-Acked-by: David Sterba <dsterba@suse.com>
+> + *
+> + * Context: May sleep
+> + * Return: Pointer to constructed keyslot manager or NULL on error.
+> + */
+> +struct keyslot_manager *keyslot_manager_create(unsigned int num_slots,
+> +				const struct keyslot_mgmt_ll_ops *ksm_ll_ops,
+> +				void *ll_priv_data)
+> +{
+> +	struct keyslot_manager *ksm;
+> +	int slot;
+> +
+> +	if (num_slots == 0)
+> +		return NULL;
+> +
+> +	/* Check that all ops are specified */
+> +	if (ksm_ll_ops->keyslot_program == NULL ||
+> +	    ksm_ll_ops->keyslot_evict == NULL ||
+> +	    ksm_ll_ops->crypto_mode_supported == NULL ||
+> +	    ksm_ll_ops->keyslot_find == NULL)
+> +		return NULL;
+> +
+> +	ksm = kvzalloc(struct_size(ksm, slots, num_slots), GFP_KERNEL);
+> +	if (!ksm)
+> +		return NULL;
+> +
+> +	ksm->num_slots = num_slots;
+> +	atomic_set(&ksm->num_idle_slots, num_slots);
+> +	ksm->ksm_ll_ops = *ksm_ll_ops;
+> +	ksm->ll_priv_data = ll_priv_data;
+> +
+> +	init_rwsem(&ksm->lock);
+> +
+> +	init_waitqueue_head(&ksm->idle_slots_wait_queue);
+> +	INIT_LIST_HEAD(&ksm->idle_slots);
+> +
+> +	for (slot = 0; slot < num_slots; slot++)
+> +		list_add(&ksm->slots[slot].idle_slot_node, &ksm->idle_slots);
+> +
+
+Since the keyslots are allocated from the head of the list, it might be more
+logical to use list_add_tail() here, so that the keyslots get allocated in the
+order 0, 1, 2, ... rather than in the order num_slots-1, num_slots-2, ...
+
+It doesn't really matter, but the ascending order seems more natural.
+
+> +static int find_and_grab_keyslot(struct keyslot_manager *ksm, const u8 *key,
+> +				 enum blk_crypto_mode_num crypto_mode,
+> +				 unsigned int data_unit_size)
+> +{
+> +	int slot;
+> +	unsigned long flags;
+> +
+> +	slot = ksm->ksm_ll_ops.keyslot_find(ksm->ll_priv_data, key,
+> +					    crypto_mode, data_unit_size);
+> +	if (slot < 0)
+> +		return slot;
+> +	if (WARN_ON(slot >= ksm->num_slots))
+> +		return -EINVAL;
+> +	if (atomic_inc_return(&ksm->slots[slot].slot_refs) == 1) {
+> +		/* Took first reference to this slot; remove it from LRU list */
+> +		spin_lock_irqsave(&ksm->idle_slots_lock, flags);
+> +		list_del(&ksm->slots[slot].idle_slot_node);
+> +		spin_unlock_irqrestore(&ksm->idle_slots_lock, flags);
+> +		atomic_dec(&ksm->num_idle_slots);
+> +	}
+> +	return slot;
+> +}
+
+The code to remove a slot from the LRU list is duplicated both in
+find_and_grab_keyslot() and in keyslot_manager_get_slot_for_key().
+How about making them both call a helper function:
+
+static void remove_slot_from_lru_list(struct keyslot_manager *ksm, int slot)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&ksm->idle_slots_lock, flags);
+	list_del(&ksm->slots[slot].idle_slot_node);
+	spin_unlock_irqrestore(&ksm->idle_slots_lock, flags);
+
+	atomic_dec(&ksm->num_idle_slots);
+}
+
+> +
+> +/**
+> + * keyslot_manager_get_slot_for_key() - Program a key into a keyslot.
+> + * @ksm: The keyslot manager to program the key into.
+> + * @key: Pointer to the bytes of the key to program. Must be the correct length
+> + *      for the chosen @crypto_mode; see blk_crypto_modes in blk-crypto.c.
+> + * @crypto_mode: Identifier for the encryption algorithm to use.
+> + * @data_unit_size: The data unit size to use for en/decryption.
+> + *
+> + * Get a keyslot that's been programmed with the specified key, crypto_mode, and
+> + * data_unit_size.  If one already exists, return it with incremented refcount.
+> + * Otherwise, wait for a keyslot to become idle and program it.
+> + *
+> + * Context: Process context. Takes and releases ksm->lock.
+> + * Return: The keyslot on success, else a -errno value.
+> + */
+> +int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
+> +				     const u8 *key,
+> +				     enum blk_crypto_mode_num crypto_mode,
+> +				     unsigned int data_unit_size)
+> +{
+> +	int slot;
+> +	int err;
+> +	struct keyslot *idle_slot;
+> +	unsigned long flags;
+> +
+> +	down_read(&ksm->lock);
+> +	slot = find_and_grab_keyslot(ksm, key, crypto_mode, data_unit_size);
+> +	up_read(&ksm->lock);
+> +	if (slot != -ENOKEY)
+> +		return slot;
+> +
+> +	while (true) {
+
+Nit: in kernel code it's more common to use 'for (;;)'
+
+> +		down_write(&ksm->lock);
+> +		slot = find_and_grab_keyslot(ksm, key, crypto_mode,
+> +					     data_unit_size);
+> +		if (slot != -ENOKEY) {
+> +			up_write(&ksm->lock);
+> +			return slot;
+> +		}
+> +
+> +		/*
+> +		 * If we're here, that means there wasn't a slot that was
+> +		 * already programmed with the key. So try to program it.
+> +		 */
+> +		if (atomic_read(&ksm->num_idle_slots) > 0)
+> +			break;
+> +
+> +		up_write(&ksm->lock);
+> +		wait_event(ksm->idle_slots_wait_queue,
+> +			(atomic_read(&ksm->num_idle_slots) > 0));
+> +	}
+> +
+> +	idle_slot = list_first_entry(&ksm->idle_slots, struct keyslot,
+> +					     idle_slot_node);
+> +	slot = idle_slot - ksm->slots;
+> +
+> +	err = ksm->ksm_ll_ops.keyslot_program(ksm->ll_priv_data, key,
+> +					      crypto_mode,
+> +					      data_unit_size,
+> +					      slot);
+> +
+> +	if (err) {
+> +		wake_up(&ksm->idle_slots_wait_queue);
+> +		up_write(&ksm->lock);
+> +		return err;
+> +	}
+> +
+> +	atomic_inc(&ksm->slots[slot].slot_refs);
+
+This could be optimized to:
+
+	atomic_set(&ksm->slots[slot].slot_refs, 1);
+
+... since no one else can be incrementing it from 0 here.
+
+> +/**
+> + * keyslot_manager_put_slot() - Release a reference to a slot
+> + * @ksm: The keyslot manager to release the reference from.
+> + * @slot: The slot to release the reference from.
+> + *
+> + * Context: Any context.
+> + */
+> +void keyslot_manager_put_slot(struct keyslot_manager *ksm, unsigned int slot)
+> +{
+> +	unsigned long flags;
+> +
+> +	if (WARN_ON(slot >= ksm->num_slots))
+> +		return;
+> +
+> +	spin_lock_irqsave(&ksm->idle_slots_lock, flags);
+> +	if (atomic_dec_and_test(&ksm->slots[slot].slot_refs)) {
+> +		list_add_tail(&ksm->slots[slot].idle_slot_node,
+> +			      &ksm->idle_slots);
+> +		spin_unlock_irqrestore(&ksm->idle_slots_lock, flags);
+> +		atomic_inc(&ksm->num_idle_slots);
+> +		wake_up(&ksm->idle_slots_wait_queue);
+> +	} else {
+> +		spin_unlock_irqrestore(&ksm->idle_slots_lock, flags);
+> +	}
+> +}
+> +EXPORT_SYMBOL(keyslot_manager_put_slot);
+
+This should use atomic_dec_and_lock_irqsave(), since the spinlock only needs to
+be taken if the reference count went to 0.
+
+Separately: list_add_tail() is returning the keyslot to the end of the list.
+Therefore, the allocator will cycle through all the keyslots before allocating
+this one again.  I wonder if it should return it to the beginning of the list
+instead (list_add())?  Again it shouldn't matter, but it might be more logical.
+Or is it intentional that it cycles through the keyslots?
+
+> +void keyslot_manager_destroy(struct keyslot_manager *ksm)
+> +{
+> +	if (!ksm)
+> +		return;
+> +	kvfree(ksm);
+> +}
+> +EXPORT_SYMBOL(keyslot_manager_destroy);
+
+No need to check for NULL before calling kvfree().
+
+> +enum blk_crypto_mode_num {
+> +	BLK_ENCRYPTION_MODE_INVALID	= -1,
+> +	BLK_ENCRYPTION_MODE_AES_256_XTS	= 0,
+> +	/*
+> +	 * TODO: Support these too
+> +	 * BLK_ENCRYPTION_MODE_AES_256_CTS	= 1,
+> +	 * BLK_ENCRYPTION_MODE_AES_128_CBC	= 2,
+> +	 * BLK_ENCRYPTION_MODE_AES_128_CTS	= 3,
+> +	 * BLK_ENCRYPTION_MODE_ADIANTUM		= 4,
+> +	 */
+> +};
+
+I assume the list in this TODO comment came from available_modes[] in
+fs/crypto/keyinfo.c.  But it doesn't make sense for CTS to be here because it's
+used for filenames encryption only, not file contents encryption.  CTS isn't
+something that really makes sense for disk encryption.  Also, CBC in fs/crypto/
+is really CBC-ESSIV, not plain CBC; if we added it to blk-crypto we'd probably
+want to put ESSIV in the name.
+
+I suggest just removing this comment for now, to avoid these considerations.
+
+> diff --git a/include/linux/keyslot-manager.h b/include/linux/keyslot-manager.h
+> new file mode 100644
+> index 000000000000..284f53973271
+> --- /dev/null
+> +++ b/include/linux/keyslot-manager.h
+> @@ -0,0 +1,94 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Copyright 2019 Google LLC
+> + */
+> +
+> +#include <linux/bio.h>
+> +
+> +#ifndef __LINUX_KEYSLOT_MANAGER_H
+> +#define __LINUX_KEYSLOT_MANAGER_H
+> +
+> +/**
+> + * struct keyslot_mgmt_ll_ops - functions to manage keyslots in hardware
+> + * @keyslot_program:	Program the specified key and algorithm into the
+> + *			specified slot in the inline encryption hardware.
+> + * @keyslot_evict:	Evict key from the specified keyslot in the hardware.
+> + *			The key, crypto_mode and data_unit_size are also passed
+> + *			down so that for e.g. dm layers can evict keys from
+> + *			the devices that they map over.
+> + *			Returns 0 on success, -errno otherwise.
+
+The word "for" in "so that for e.g. dm layers" shouldn't be there.
+
+- Eric
 
 
 _______________________________________________
