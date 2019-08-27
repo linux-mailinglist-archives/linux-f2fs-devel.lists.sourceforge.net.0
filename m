@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B1B79E59B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2019 12:24:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DF8F9E59C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2019 12:24:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i2Yee-0003Og-6V; Tue, 27 Aug 2019 10:24:48 +0000
+	id 1i2Yeg-0004OU-R1; Tue, 27 Aug 2019 10:24:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1i2Yec-0003Hw-NB
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 10:24:46 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1i2Yef-0004OL-KA
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 10:24:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MvW5lSPy+32pK5wtaxSt9DiFoH/b+ZEn98tExhabL4U=; b=JkJBKfD7m16NFyVgOCvJLEpqBP
- g8bJd2jnPsdqErYi7yeIPAVCT7Y3s91y9eNsomv4g2Bk0GbCCOgshknktfSYVyHrX8gfY1sdJ/tFB
- NELjSLr7I0thycp7KD/wTJBrER4Wa+UP5dMjNrv6VDAJFpBEeiPs1I8QAThadPGFEWl4=;
+ bh=gIY7Wh79mVj8GXIxrsFWLXJ6W9YqySaHm+2HfSNmX9U=; b=P1yWMpVWk1mFlZeQ6u3cvAWhsq
+ qgdPQa7obglEgXczdZp6dcVLViObmUXgrh5W59cP0DRhuUz+nawEXLJgXiDwkFxOGhfax7kmA7LJi
+ ZUX6+3KcKidh26U2SK0r+F7iaicppGhjEtDYWItt42+v1NI1eRr0BtLq5nYMpPqF4GtM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=MvW5lSPy+32pK5wtaxSt9DiFoH/b+ZEn98tExhabL4U=; b=S
- 9bv2zM3VL5+8FqXxiSAl508g1HOktwWVmlvkgGAjJeR7bXEyzxq7qwZfb+vF4sicOKhQKALAc3MJQ
- hxiQRIZB0KbmcaN8X2wU86nrHllPZFvcHUftxZGo5vsj7CArJ0UeMe6R55ajneMgMZY8oTh6Lg3nk
- J4aIokGDToZ4rJUg=;
+ h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=gIY7Wh79mVj8GXIxrsFWLXJ6W9YqySaHm+2HfSNmX9U=; b=bHm5XLd1Augx43lqarAJpDfuZc
+ emvofOFm5HrWrsxmsDAvM5fEzrcrBsofzN6LeW7i1zv1fyMXYIrtoUxeGRVKWJ4T49MjyyyiJQbHO
+ LJowYurlyKbPcZpU7jz4OlWFq4Ie4eOF0nOli9k8q/YPQPWQqVkXMrfhczlJ0BkQnjk4=;
 Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i2Yea-00HYlg-Ov
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 10:24:46 +0000
+ id 1i2Yed-004ezu-7A
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Aug 2019 10:24:49 +0000
 Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id CA05F9AD2FBE58188BD3;
+ by Forcepoint Email with ESMTP id CEBBCB941559D00A119D;
  Tue, 27 Aug 2019 18:24:36 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.439.0; Tue, 27 Aug 2019 18:24:27 +0800
+ 14.3.439.0; Tue, 27 Aug 2019 18:24:28 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Tue, 27 Aug 2019 18:24:24 +0800
-Message-ID: <20190827102425.29607-1-yuchao0@huawei.com>
+Date: Tue, 27 Aug 2019 18:24:25 +0800
+Message-ID: <20190827102425.29607-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
+In-Reply-To: <20190827102425.29607-1-yuchao0@huawei.com>
+References: <20190827102425.29607-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -60,9 +62,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1i2Yea-00HYlg-Ov
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: introduce get_available_block_count()
- for cleanup
+X-Headers-End: 1i2Yed-004ezu-7A
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to reserve space for IO align
+ feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,100 +81,188 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There are very similar codes in inc_valid_block_count() and
-inc_valid_node_count() which is used for available user block
-count calculation.
+https://bugzilla.kernel.org/show_bug.cgi?id=204137
 
-This patch introduces a new helper get_available_block_count()
-to include those common codes, and used it instead for cleanup.
+With below script, we will hit panic during new segment allocation:
 
+DISK=bingo.img
+MOUNT_DIR=/mnt/f2fs
+
+dd if=/dev/zero of=$DISK bs=1M count=105
+mkfs.f2fe -a 1 -o 19 -t 1 -z 1 -f -q $DISK
+
+mount -t f2fs $DISK $MOUNT_DIR -o "noinline_dentry,flush_merge,noextent_cache,mode=lfs,io_bits=7,fsync_mode=strict"
+
+for (( i = 0; i < 4096; i++ )); do
+	name=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10`
+	mkdir $MOUNT_DIR/$name
+done
+
+umount $MOUNT_DIR
+rm $DISK
+
+--- Core dump ---
+Call Trace:
+ allocate_segment_by_default+0x9d/0x100 [f2fs]
+ f2fs_allocate_data_block+0x3c0/0x5c0 [f2fs]
+ do_write_page+0x62/0x110 [f2fs]
+ f2fs_outplace_write_data+0x43/0xc0 [f2fs]
+ f2fs_do_write_data_page+0x386/0x560 [f2fs]
+ __write_data_page+0x706/0x850 [f2fs]
+ f2fs_write_cache_pages+0x267/0x6a0 [f2fs]
+ f2fs_write_data_pages+0x19c/0x2e0 [f2fs]
+ do_writepages+0x1c/0x70
+ __filemap_fdatawrite_range+0xaa/0xe0
+ filemap_fdatawrite+0x1f/0x30
+ f2fs_sync_dirty_inodes+0x74/0x1f0 [f2fs]
+ block_operations+0xdc/0x350 [f2fs]
+ f2fs_write_checkpoint+0x104/0x1150 [f2fs]
+ f2fs_sync_fs+0xa2/0x120 [f2fs]
+ f2fs_balance_fs_bg+0x33c/0x390 [f2fs]
+ f2fs_write_node_pages+0x4c/0x1f0 [f2fs]
+ do_writepages+0x1c/0x70
+ __writeback_single_inode+0x45/0x320
+ writeback_sb_inodes+0x273/0x5c0
+ wb_writeback+0xff/0x2e0
+ wb_workfn+0xa1/0x370
+ process_one_work+0x138/0x350
+ worker_thread+0x4d/0x3d0
+ kthread+0x109/0x140
+ ret_from_fork+0x25/0x30
+
+The root cause here is, with IO alignment feature enables, in worst
+case, we need F2FS_IO_SIZE() free blocks space for single one 4k write
+due to filling dummy pages to make IO being aligned.
+
+So we will easily run out of free segments during non-inline directory's
+data writeback, even in process of foreground GC.
+
+In order to fix this issue, I just propose to reserve additional free
+space for IO alignment feature to handle worst case of free space usage
+ratio during FGGC.
+
+Fixes: 0a595ebaaa6b ("f2fs: support IO alignment for DATA and NODE writes")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/f2fs.h | 48 ++++++++++++++++++++++++++++--------------------
- 1 file changed, 28 insertions(+), 20 deletions(-)
+ fs/f2fs/f2fs.h    |  5 +++++
+ fs/f2fs/segment.h |  3 ++-
+ fs/f2fs/super.c   | 43 +++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/sysfs.c   |  4 +++-
+ 4 files changed, 53 insertions(+), 2 deletions(-)
 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index aafd9ff30f9e..c7b2b68c8c85 100644
+index c7b2b68c8c85..4b21ac42d44e 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -1765,6 +1765,28 @@ static inline bool __allow_reserved_blocks(struct f2fs_sb_info *sbi,
- 	return false;
+@@ -929,6 +929,7 @@ struct f2fs_sm_info {
+ 	unsigned int segment_count;	/* total # of segments */
+ 	unsigned int main_segments;	/* # of segments in main area */
+ 	unsigned int reserved_segments;	/* # of reserved segments */
++	unsigned int additional_reserved_segments;/* reserved segs for IO align feature */
+ 	unsigned int ovp_segments;	/* # of overprovision segments */
+ 
+ 	/* a threshold to reclaim prefree segments */
+@@ -1777,6 +1778,10 @@ static inline unsigned int get_available_block_count(struct inode *inode,
+ 	if (!__allow_reserved_blocks(sbi, inode, cap))
+ 		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
+ 
++	if (F2FS_IO_ALIGNED(sbi))
++		avail_user_block_count -= sbi->blocks_per_seg *
++				SM_I(sbi)->additional_reserved_segments;
++
+ 	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
+ 		if (avail_user_block_count > sbi->unusable_block_count)
+ 			avail_user_block_count -= sbi->unusable_block_count;
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 325781a1ae4d..78d0f7b4c47a 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -508,7 +508,8 @@ static inline unsigned int free_segments(struct f2fs_sb_info *sbi)
+ 
+ static inline int reserved_segments(struct f2fs_sb_info *sbi)
+ {
+-	return SM_I(sbi)->reserved_segments;
++	return SM_I(sbi)->reserved_segments +
++			SM_I(sbi)->additional_reserved_segments;
  }
  
-+static inline unsigned int get_available_block_count(struct inode *inode,
-+								bool cap)
+ static inline unsigned int free_sections(struct f2fs_sb_info *sbi)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index bf642d1f25fc..c98f2db76cf8 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -277,6 +277,45 @@ static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
+ 					   F2FS_OPTION(sbi).s_resgid));
+ }
+ 
++static inline int adjust_reserved_segment(struct f2fs_sb_info *sbi)
 +{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
++	unsigned int sec_blks = sbi->blocks_per_seg * sbi->segs_per_sec;
++	unsigned int avg_vblocks;
++	unsigned int wanted_reserved_segments;
 +	block_t avail_user_block_count;
 +
++	if (!F2FS_IO_ALIGNED(sbi))
++		return 0;
++
++	/* average valid block count in section in worst case */
++	avg_vblocks = sec_blks / F2FS_IO_SIZE(sbi);
++
++	/*
++	 * we need enough free space when migrating one section in worst case
++	 */
++	wanted_reserved_segments = (F2FS_IO_SIZE(sbi) / avg_vblocks) *
++						reserved_segments(sbi);
++	wanted_reserved_segments -= reserved_segments(sbi);
++
 +	avail_user_block_count = sbi->user_block_count -
-+					sbi->current_reserved_blocks;
++				sbi->current_reserved_blocks -
++				F2FS_OPTION(sbi).root_reserved_blocks;
 +
-+	if (!__allow_reserved_blocks(sbi, inode, cap))
-+		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
-+
-+	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-+		if (avail_user_block_count > sbi->unusable_block_count)
-+			avail_user_block_count -= sbi->unusable_block_count;
-+		else
-+			avail_user_block_count = 0;
++	if (wanted_reserved_segments * sbi->blocks_per_seg >
++					avail_user_block_count) {
++		f2fs_err(sbi, "IO align feature can't grab additional reserved segment: %u",
++				 wanted_reserved_segments);
++		return -ENOSPC;
 +	}
 +
-+	return avail_user_block_count;
++	SM_I(sbi)->additional_reserved_segments = wanted_reserved_segments;
++
++	f2fs_info(sbi, "IO align feature needs additional reserved segment: %u",
++			 wanted_reserved_segments);
++
++	return 0;
 +}
 +
- static inline void f2fs_i_blocks_write(struct inode *, block_t, bool, bool);
- static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 				 struct inode *inode, blkcnt_t *count)
-@@ -1791,17 +1813,8 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 
- 	spin_lock(&sbi->stat_lock);
- 	sbi->total_valid_block_count += (block_t)(*count);
--	avail_user_block_count = sbi->user_block_count -
--					sbi->current_reserved_blocks;
-+	avail_user_block_count = get_available_block_count(inode, true);
- 
--	if (!__allow_reserved_blocks(sbi, inode, true))
--		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
--	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
--		if (avail_user_block_count > sbi->unusable_block_count)
--			avail_user_block_count -= sbi->unusable_block_count;
--		else
--			avail_user_block_count = 0;
--	}
- 	if (unlikely(sbi->total_valid_block_count > avail_user_block_count)) {
- 		diff = sbi->total_valid_block_count - avail_user_block_count;
- 		if (diff > *count)
-@@ -2014,7 +2027,8 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
- 					struct inode *inode, bool is_inode)
+ static void init_once(void *foo)
  {
- 	block_t	valid_block_count;
--	unsigned int valid_node_count, user_block_count;
-+	unsigned int valid_node_count;
-+	unsigned int avail_user_block_count;
- 	int err;
- 
- 	if (is_inode) {
-@@ -2036,16 +2050,10 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
- 
- 	spin_lock(&sbi->stat_lock);
- 
--	valid_block_count = sbi->total_valid_block_count +
--					sbi->current_reserved_blocks + 1;
--
--	if (!__allow_reserved_blocks(sbi, inode, false))
--		valid_block_count += F2FS_OPTION(sbi).root_reserved_blocks;
--	user_block_count = sbi->user_block_count;
--	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
--		user_block_count -= sbi->unusable_block_count;
-+	valid_block_count = sbi->total_valid_block_count + 1;
-+	avail_user_block_count = get_available_block_count(inode, false);
- 
--	if (unlikely(valid_block_count > user_block_count)) {
-+	if (unlikely(valid_block_count > avail_user_block_count)) {
- 		spin_unlock(&sbi->stat_lock);
- 		goto enospc;
+ 	struct f2fs_inode_info *fi = (struct f2fs_inode_info *) foo;
+@@ -3424,6 +3463,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		goto free_nm;
  	}
+ 
++	err = adjust_reserved_segment(sbi);
++	if (err)
++		goto free_nm;
++
+ 	/* For write statistics */
+ 	if (sb->s_bdev->bd_part)
+ 		sbi->sectors_written_start =
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index f9fcca695db9..1824114d739c 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -259,7 +259,9 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 	if (a->struct_type == RESERVED_BLOCKS) {
+ 		spin_lock(&sbi->stat_lock);
+ 		if (t > (unsigned long)(sbi->user_block_count -
+-				F2FS_OPTION(sbi).root_reserved_blocks)) {
++				F2FS_OPTION(sbi).root_reserved_blocks -
++				sbi->blocks_per_seg *
++				SM_I(sbi)->additional_reserved_segments)) {
+ 			spin_unlock(&sbi->stat_lock);
+ 			return -EINVAL;
+ 		}
 -- 
 2.18.0.rc1
 
