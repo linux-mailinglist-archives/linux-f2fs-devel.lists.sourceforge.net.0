@@ -2,81 +2,142 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31910A1082
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Aug 2019 06:38:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0528EA1088
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Aug 2019 06:42:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i3CCX-00065n-Kg; Thu, 29 Aug 2019 04:38:25 +0000
+	id 1i3CG4-0006H2-HU; Thu, 29 Aug 2019 04:42:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <deepa.kernel@gmail.com>)
- id 1i3CCW-00065U-VI; Thu, 29 Aug 2019 04:38:24 +0000
+ (envelope-from <prvs=137b9bc1e=shinichiro.kawasaki@wdc.com>)
+ id 1i3CG2-0006Gv-MZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Aug 2019 04:42:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ph2TDX0t8VD1IALiSLotxXSH3Hc7LzlyzCWrbeW7KEM=; b=iCpuZvCWWgeWsKUQTQxROFwiFG
- qyCshIwcVooSx7YoqDiEHxjN+dqpQu5OUZ7TbSbPqI+fLFA5tITh4LHyQxtOD/1+wc45deW4LjDco
- zcZaZCNq4Kj5xyD6EkVMa211/Dj/RNR+BC36vyGgTDCFmDQX0IhpGjaLGLb1Vc2ua638=;
+ bh=VoQJpspFVSSnVFqu3yFzfxnCQ6yjEN9mCALH/mLYgzo=; b=jeEbNlnU1Pf2V5Hs1HJsySctEv
+ G+2XBqAIMcQYlteLYiOo3scfuNM69jmm/npw8Cco+nBD/0zaivKmTCU4GO0h3emDFhkThi+CGEHng
+ Gmq23S18MK0M6ABTNmyeqmNct+Fgw3vCt1QYNsw6g1W+8yWMVt3ermcqFyrLCF7LwyWo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ph2TDX0t8VD1IALiSLotxXSH3Hc7LzlyzCWrbeW7KEM=; b=Q7KNMbrwulgf77lG8ArKpaeYNw
- bls7F3qTVsK9d0DVdG+CVSuDxD++X2D6rnQOqDgKJxn2HV/BtOykJyiZ7DSeRRg7TTEGgRvfMUJii
- andvr6M29TTVCSNktulK286kIAW7LZzn7moaZ5bSgRuLrtQ4iWJ6BH8AAhJYmYuGABhQ=;
-Received: from mail-io1-f65.google.com ([209.85.166.65])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.90_1)
- id 1i3CCT-001oI6-GW; Thu, 29 Aug 2019 04:38:24 +0000
-Received: by mail-io1-f65.google.com with SMTP id u185so417222iod.10;
- Wed, 28 Aug 2019 21:38:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ph2TDX0t8VD1IALiSLotxXSH3Hc7LzlyzCWrbeW7KEM=;
- b=Ad4yH+QK5ygrblSOoyxD0tbvjV1ue9nzyr8wf1rjkD8nTQtAUxNZJKQHZoLxHgRk2B
- TEAoeI524dxNfHCqzBGvK8fuiw+bAamqjZzPjGzpO4q1JaVUUDD9ax94jSI09AwQIEcQ
- WVE9Kk/mYHro0Fu7Hu8WrE90Mi3tlpvW3ZwrAo0k7GoHIwwQC60Y8Y9lhWHQ2x0r9tnz
- jSaqwnIO0Z4sBYO3fglWtXsmzhw2k5YPG8bbqxvl5SmNtQPBiiKKdIu9pdlVPfuYLf7e
- 1REmXyzixgNc7NV2Y7fqiRSpx+wDxIJjwki+5Yj33Yn9bHcHOqns04S9V/iNntVln4qf
- JFkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ph2TDX0t8VD1IALiSLotxXSH3Hc7LzlyzCWrbeW7KEM=;
- b=FpbaScNh8g1QeFoJRuO4qZlvH5GiHJKNM5JZ0IfMtjIXGhYkxkI06ImTYaccmsRtBg
- GUK4GHRkiLHX3RpRUMu2TXSoQNRToK4ke7FzEX0AMwMusu97ml3mWF3VgOUnH1Rzy6ls
- mYSuWlCG8x4Zn7kNmgf+2aIQZjwi5czXKv7/4uY0pY//8EvW8ONrELgzNQGOnzL2/SbL
- vcJb+bgnQ+B8vjAEOgplXFzJFVxd/VyRODz0iHZ7SwpHLDNIFkwaJF3W4gubCceNbT73
- xBVLbj0rNsaA8S6nZQib974CYA9A/BunnXcY/jaVO/UTzNUNz2WBVwl+Hm29+sPbRI21
- g7XQ==
-X-Gm-Message-State: APjAAAU42PJB9OimBI5K+L25e/dYmRFB7RZi8aqRsSV4lMeLjjIgnaJk
- WbeZcLf6hcJhaY5csI2SJA/r5XgHcCI3pwfFtFM=
-X-Google-Smtp-Source: APXvYqxGcrhx04qhhiztO9h7tEg9eaTJ/omReFf3uThdfVv9L98okzDLYj6+TF/LNCwbU0Ps8hWzB+I1empnbI4Uys0=
-X-Received: by 2002:a02:23cc:: with SMTP id u195mr8401832jau.136.1567053495481; 
- Wed, 28 Aug 2019 21:38:15 -0700 (PDT)
+ bh=VoQJpspFVSSnVFqu3yFzfxnCQ6yjEN9mCALH/mLYgzo=; b=AR69MbLP9NZnOegPjcbJ8HJprv
+ ydYnea+GX4dovHNL3EN7NBeMka0qJR5bjSG1FueGLa/Pl1qvogiqO2oprv/hGVE07sADd3J46zbe+
+ I30oOUnXDYQ1zP7uL7P69cfc/b2Q65w0XdMDa99KbBw7ApSDPjVoq3afF1cYcGCxLKBc=;
+Received: from esa3.hgst.iphmx.com ([216.71.153.141])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ id 1i3CG0-002LW3-TY
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Aug 2019 04:42:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1567053721; x=1598589721;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=lr87j4QvPeSSWcEzUaJsJYiQ0anQVMbQsO0+snTdg6w=;
+ b=KxahSfy9ZN6thtJGjNoStGE0FLvIChGTP/Bo6LJ6nSI41rD6o3j7FNKO
+ nAPcU8bjDIHH5gGR4lTBmaCGH6KkGIoJqvDw+pQOkPZMWc5N7wT1NVmY7
+ e3vON3Ua65J/yYGCB5PwjoBOUFTXhkUGprT6Fk2LglBRLZLZX4Z3cvx4x
+ 5ZMk2MRyt0RFqX3Bml3JuoRJUV7RMAkdub2DCgVUqxY/WpZtcRoDnSVT9
+ fKDyjMO9BmzcRGH3g5xeUtNIqd6wFmHEuwghKKGVIOQiEQe5jwQTjBhye
+ iBelbhFM+5voSnOJqkFetreyM3ad12DvRLu3ADCcFex5uh8/k+Bso/H7m g==;
+IronPort-SDR: jKnO9uyrWtlbS6J3M34ruZZhTVI2aEE9loL0wC5a9tijMASEiIzcgU7Sd3YeaCmwy380LGEZrE
+ PE4FldAQEmPG5xfr7Q5sUg03dOnMSntxCOb4qNPL/zGSDZ4M8oQ4DMhcK63J+4z77OxDx4CKsU
+ 00LonSBKjf0VIWOBzh1W+mQPqtkD4FgXhlcLTnOvl0RPP0EJ7mkHVa1zZBapNgvJzvQCnldEII
+ K1hUeCALKHSMCmB2ey49rqQabkEl8tjQYTrMKgwgePJhyKiP1x52aF0nZUdgYEa/HPvQY/PvMI
+ uWA=
+X-IronPort-AV: E=Sophos;i="5.64,442,1559491200"; d="scan'208";a="121494120"
+Received: from mail-sn1nam01lp2050.outbound.protection.outlook.com (HELO
+ NAM01-SN1-obe.outbound.protection.outlook.com) ([104.47.32.50])
+ by ob1.hgst.iphmx.com with ESMTP; 29 Aug 2019 12:41:55 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nuDJafLKj34PmT9JtTaV8avzLm977GpolyvQjwfLT/fGan6I1uuqwS6dlqF19PgpdFHlHYnRpe0Eo+ibDYNsMJZha/nvnQQ78JB8fONUscWwfkrVsiW270NlUBcB4nrbkLu1CjKkvunazArEIlGMhKyXcohZrx+0chsRkokaKHvxFj5CxMymRDt32BXozD/n5eIFbyb3GWS4YQH7Amz6rSGaD4oDVRgVgrtUvXKwc8QFBySFiZJ+0K+AVDSBQna/JneGqKdGlm+T5By6u0EBewjzQNYaN6XvTZhtCgm/GCAtVP0wkCicdHDOazToiZyT3csa4b/Pi/c4rnJhz9F83g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VoQJpspFVSSnVFqu3yFzfxnCQ6yjEN9mCALH/mLYgzo=;
+ b=U2csqaO1blX32sOrW9kLb/vfc6zYYgfGilGi6eMkUo+OIPXVKluSTcJfbf3yegKykqoLJF5USt0k9M/6zwApEU2esQok00DVWrNLU5PRxWkvwnthJ3xlDZf/WbTTRtV+yoVB9rEYZP8OSMd9KCHu2OF5e0ImfUtDdTWb14ZhSoqh3obwtMQb9fhdlHJdELw97ToArws5JkemyzZdOau/V9PwllxkzNfdElrxdL9d1noiXYyd6SgqcY9yr1FOcBSzYPbRsCj+5bO/LdPyrNclTHBY0WFfrlwVSXWpAcWBkT3h0EsiJDS0Sp8p+jt0CL/B9Jz1o+UJE5b0zOWGD8+LVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VoQJpspFVSSnVFqu3yFzfxnCQ6yjEN9mCALH/mLYgzo=;
+ b=mDl2VHxUtt1Cc0JXOskxezp0P5BXLmlaYqolimONe1SRckQhu7RzP+oDHolvvzCeKnxjPxaMxge0lPlIhvHHOU37WLu87gMXnrCRhILWLNODwJNJLXLMorK3kOmHodIWTEjCQqUiMRG67e96jQavruHSfbLJiX6w/U/lWfNH/+E=
+Received: from CY1PR04MB2268.namprd04.prod.outlook.com (10.167.10.135) by
+ CY1PR04MB2363.namprd04.prod.outlook.com (10.167.8.141) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2220.16; Thu, 29 Aug 2019 04:41:54 +0000
+Received: from CY1PR04MB2268.namprd04.prod.outlook.com
+ ([fe80::31aa:d179:ec71:4a66]) by CY1PR04MB2268.namprd04.prod.outlook.com
+ ([fe80::31aa:d179:ec71:4a66%9]) with mapi id 15.20.2199.021; Thu, 29 Aug 2019
+ 04:41:54 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Chao Yu <yuchao0@huawei.com>
+Thread-Topic: [f2fs-dev] [PATCH v2 3/4] fsck.f2fs: Check write pointer
+ consistency with current segments
+Thread-Index: AQHVV9ulahiX4ajcmUej43z5UqHBAqcORuGAgAADd4CAA04WgA==
+Date: Thu, 29 Aug 2019 04:41:53 +0000
+Message-ID: <20190829044151.z6fz7n6jxlpoqhcq@shindev>
+References: <20190821044802.29702-1-shinichiro.kawasaki@wdc.com>
+ <20190821044802.29702-4-shinichiro.kawasaki@wdc.com>
+ <930cac20-bd40-9516-2eae-68754b685f72@huawei.com>
+ <74e04591-c5b8-f52d-3b47-8616bca977c4@huawei.com>
+In-Reply-To: <74e04591-c5b8-f52d-3b47-8616bca977c4@huawei.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: NeoMutt/20180716
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=shinichiro.kawasaki@wdc.com; 
+x-originating-ip: [199.255.47.11]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 11a08a19-d9f1-4579-a64a-08d72c3b3762
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:CY1PR04MB2363; 
+x-ms-traffictypediagnostic: CY1PR04MB2363:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <CY1PR04MB2363058D3D3F74035C251225EDA20@CY1PR04MB2363.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-forefront-prvs: 0144B30E41
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(7916004)(396003)(366004)(346002)(136003)(39860400002)(376002)(199004)(189003)(6916009)(4326008)(6486002)(256004)(14454004)(1076003)(26005)(66066001)(102836004)(81156014)(81166006)(6506007)(53546011)(316002)(305945005)(86362001)(229853002)(14444005)(186003)(7736002)(58126008)(478600001)(71190400001)(8676002)(6512007)(71200400001)(64756008)(54906003)(76116006)(66946007)(91956017)(2906002)(3846002)(66446008)(8936002)(66476007)(6116002)(66556008)(76176011)(99286004)(446003)(44832011)(486006)(6246003)(11346002)(53936002)(476003)(6436002)(5660300002)(25786009)(9686003)(33716001);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR04MB2363;
+ H:CY1PR04MB2268.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: A1PtrFhEpoPz7WB0fSVVCya1vTEiRMkh4H6OMtnYLPy4sxNCQ6BqSEZOyC8T+f5KC6v20OtwezzPzOC7ZDR86NCQ4qvp2A3vY2lsmrhhJpw26FjTpHQk11yx7lO9Y4E/7F7wE0woA8fakMlE5WBtuzNTbAJvOMTcgU2860V0xmVRdncz2pnz8osTJ187QOrl3PlVPG3IuAJ/P1ZV6t6jJZHYSnh/SKvQO7GmMKPVBMpTqji9wTE5OG6j8CcRXRfO3JmzMNX8wFG9t1oXaoB+MT/5ITz0bXhWd/2ldGyCflikjIUDBEzhg8nCBAXUBCYcmj/fBCsVVi2BdBGBccB4GlY0OwFMJAnZjPM7xZvZEijKw2jtYYJgLFm3PAA5CSnCoe74izF6MARTSe1gqL12UV/x56D4MAlNUh72Qjy/NBo=
+Content-ID: <5158EF461EB26341B00A3D443DEA769C@namprd04.prod.outlook.com>
 MIME-Version: 1.0
-References: <20190829041132.26677-1-deepa.kernel@gmail.com>
-In-Reply-To: <20190829041132.26677-1-deepa.kernel@gmail.com>
-From: Deepa Dinamani <deepa.kernel@gmail.com>
-Date: Wed, 28 Aug 2019 21:38:03 -0700
-Message-ID: <CABeXuvoKD83B7iUqE33Y9E2OVtf61DKv-swZr-N=ozz-cMmGOA@mail.gmail.com>
-To: Alexander Viro <viro@zeniv.linux.org.uk>, Arnd Bergmann <arnd@arndb.de>
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11a08a19-d9f1-4579-a64a-08d72c3b3762
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2019 04:41:53.6980 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: YI4ZvIHTxKnQNbkXGtIRAhQU/KKxiqSoMbT5Xv4T60LYUr3Kg6yMvruHMs9ZO5eDrxt5FDm/8mQ9LMMRlT9Se5ZXVd8pF8dgYHQVb+Vd7nA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR04MB2363
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.65 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (deepa.kernel[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -84,8 +145,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1i3CCT-001oI6-GW
-Subject: Re: [f2fs-dev] [GIT PULL] vfs: Add support for timestamp limits
+X-Headers-End: 1i3CG0-002LW3-TY
+Subject: Re: [f2fs-dev] [PATCH v2 3/4] fsck.f2fs: Check write pointer
+ consistency with current segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,145 +159,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, martin@omnibond.com,
- jfs-discussion@lists.sourceforge.net, Dave Kleikamp <shaggy@kernel.org>,
- al@alarsen.net, Bob Copeland <me@bobcopeland.com>,
- Adrian Hunter <adrian.hunter@intel.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, mikulas@artax.karlin.mff.cuni.cz,
- stoph Hellwig <hch@lst.de>, nico@fluxnic.net,
- Mike Marshall <hubcap@omnibond.com>, linux-cifs@vger.kernel.org, "Yan,
- Zheng" <zyan@redhat.com>, Sage Weil <sage@redhat.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- y2038 Mailman List <y2038@lists.linaro.org>,
- Richard Weinberger <richard@nod.at>, Steve French <sfrench@samba.org>,
- Anton Vorontsov <anton@enomsg.org>, linux@armlinux.org.uk,
- codalist@coda.cs.cmu.edu, Christoph Hellwig <hch@infradead.org>,
- coda@cs.cmu.edu, V9FS Developers <v9fs-developer@lists.sourceforge.net>,
- Ilya Dryomov <idryomov@gmail.com>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>, salah.triki@gmail.com,
- asmadeus@codewreck.org, devel@lists.orangefs.org,
- Evgeniy Dushistov <dushistov@mail.ru>, Kees Cook <keescook@chromium.org>,
- Eric Van Hensbergen <ericvh@gmail.com>, Jan Kara <jack@suse.com>,
- reiserfs-devel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
- Joel Becker <jlbec@evilplan.org>, aivazian.tigran@gmail.com,
- phillip@squashfs.org.uk, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel <ceph-devel@vger.kernel.org>,
- trond.myklebust@hammerspace.com, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Dilger <adilger@dilger.ca>, Jan Harkes <jaharkes@cs.cmu.edu>,
- Linux NFS Mailing List <linux-nfs@vger.kernel.org>,
- Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
- luisbg@kernel.org, Artem Bityutskiy <dedekind1@gmail.com>,
- linux-ntfs-dev@lists.sourceforge.net, Greg KH <gregkh@linuxfoundation.org>,
- linux-karma-devel@lists.sourceforge.net, jlayton@kernel.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, "Linux F2FS DEV,
- Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- linux-xfs@vger.kernel.org, Colin Cross <ccross@android.com>,
- Linux FS-devel Mailing List <linux-fsdevel@vger.kernel.org>,
- linux-mtd <linux-mtd@lists.infradead.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Anna Schumaker <anna.schumaker@netapp.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Damien Le Moal <Damien.LeMoal@wdc.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Adding the others who were on original cc, just in case.
-- Deepa
+On Aug 27, 2019 / 10:13, Chao Yu wrote:
+> On 2019/8/27 10:01, Chao Yu wrote:
+> > On 2019/8/21 12:48, Shin'ichiro Kawasaki wrote:
+> >> On sudden f2fs shutdown, zoned block device status and f2fs current
+> >> segment positions in meta data can be inconsistent. When f2fs shutdown
+> >> happens before write operations completes, write pointers of zoned block
+> >> devices can go further but f2fs meta data keeps current segments at
+> >> positions before the write operations. After remounting the f2fs, the
+> >> inconsistency causes write operations not at write pointers and
+> >> "Unaligned write command" error is reported. This error was observed when
+> >> xfstests test case generic/388 was run with f2fs on a zoned block device.
+> >>
+> >> To avoid the error, have f2fs.fsck check consistency between each current
+> >> segment's position and the write pointer of the zone the current segment
+> >> points to. If the write pointer goes advance from the current segment,
+> >> fix the current segment position setting at same as the write pointer
+> >> position. In case the write pointer is behind the current segment, write
+> >> zero data at the write pointer position to make write pointer position at
+> >> same as the current segment.
+> >>
+> >> When inconsistencies are found, turn on c.bug_on flag in fsck_verify() to
+> >> ask users to fix them or not. When inconsistencies get fixed, turn on
+> >> 'force' flag in fsck_verify() to enforce fixes in following checks. This
+> >> position fix is done at the beginning of do_fsck() function so that other
+> >> checks reflect the current segment modification.
+> >>
+> >> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+> >> ---
+> >>  fsck/fsck.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+> >>  fsck/fsck.h |   3 ++
+> >>  fsck/main.c |   2 +
+> >>  3 files changed, 138 insertions(+)
+> >>
+> >> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> >> index 8953ca1..21a06ac 100644
+> >> --- a/fsck/fsck.c
+> >> +++ b/fsck/fsck.c
+> >> @@ -2574,6 +2574,125 @@ out:
+> >>  	return cnt;
+> >>  }
+> >>  
+> >> +struct write_pointer_check_data {
+> >> +	struct f2fs_sb_info *sbi;
+> >> +	struct device_info *dev;
+> >> +};
+> >> +
+> >> +#define SECTOR_SHIFT 9
+> >> +
+> >> +static int fsck_chk_write_pointer(int i, struct blk_zone *blkz, void *opaque)
+> >> +{
+> >> +	struct write_pointer_check_data *wpd = opaque;
+> >> +	struct f2fs_sb_info *sbi = wpd->sbi;
+> >> +	struct device_info *dev = wpd->dev;
+> >> +	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+> >> +	block_t zone_block, wp_block, wp_blkoff, cs_block, b;
+> >> +	unsigned int zone_segno, wp_segno;
+> >> +	struct seg_entry *se;
+> >> +	struct curseg_info *cs;
+> >> +	int cs_index, ret;
+> >> +	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
+> >> +	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
+> >> +	void *zero_blk;
+> >> +
+> >> +	if (blk_zone_conv(blkz))
+> >> +		return 0;
+> >> +
+> >> +	zone_block = dev->start_blkaddr
+> >> +		+ (blk_zone_sector(blkz) >> log_sectors_per_block);
+> >> +	zone_segno = GET_SEGNO(sbi, zone_block);
+> >> +	wp_block = dev->start_blkaddr
+> >> +		+ (blk_zone_wp_sector(blkz) >> log_sectors_per_block);
+> >> +	wp_segno = GET_SEGNO(sbi, wp_block);
+> >> +	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
+> >> +
+> >> +	/* find the curseg which points to the zone */
+> >> +	for (cs_index = 0; cs_index < NO_CHECK_TYPE; cs_index++) {
+> >> +		cs = &SM_I(sbi)->curseg_array[cs_index];
+> >> +		if (zone_segno <= cs->segno &&
+> >> +		    cs->segno < zone_segno + segs_per_zone)
+> >> +			break;
+> >> +	}
+> > 
+> > Will this happen?
+> > 
+> > - write checkpoint
+> > - curseg points zone A
+> > - write large number of data
+> > - curseg points zone B, write pointer > 0
+> > - sudden power cut, curseg will be reset to zone A
+> > 
+> > zone B's write pointer won't be verified due to curseg points to zone A?
+> 
+> IIUC, we are trying fix such condition in a separated PATCH 4/4.
+> 
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-On Wed, Aug 28, 2019 at 9:12 PM Deepa Dinamani <deepa.kernel@gmail.com> wrote:
->
-> Hi Al, Arnd,
->
-> This is a pull request for filling in min and max timestamps for filesystems.
-> I've added all the acks, and dropped the adfs patch. That will be merged through
-> Russell's tree.
->
-> Thanks,
-> Deepa
->
-> The following changes since commit 5d18cb62218608a1388858880ad3ec76d6cb0d3b:
->
->   Add linux-next specific files for 20190828 (2019-08-28 19:59:14 +1000)
->
-> are available in the Git repository at:
->
->   https://github.com/deepa-hub/vfs limits
->
-> for you to fetch changes up to f0f216afa4c7e4dee9121fde52ccf57f76119188:
->
->   isofs: Initialize filesystem timestamp ranges (2019-08-28 19:19:36 -0700)
->
-> ----------------------------------------------------------------
-> Deepa Dinamani (19):
->       vfs: Add file timestamp range support
->       vfs: Add timestamp_truncate() api
->       timestamp_truncate: Replace users of timespec64_trunc
->       mount: Add mount warning for impending timestamp expiry
->       utimes: Clamp the timestamps before update
->       fs: Fill in max and min timestamps in superblock
->       9p: Fill min and max timestamps in sb
->       ext4: Initialize timestamps limits
->       fs: nfs: Initialize filesystem timestamp ranges
->       fs: cifs: Initialize filesystem timestamp ranges
->       fs: fat: Initialize filesystem timestamp ranges
->       fs: affs: Initialize filesystem timestamp ranges
->       fs: sysv: Initialize filesystem timestamp ranges
->       fs: ceph: Initialize filesystem timestamp ranges
->       fs: orangefs: Initialize filesystem timestamp ranges
->       fs: hpfs: Initialize filesystem timestamp ranges
->       fs: omfs: Initialize filesystem timestamp ranges
->       pstore: fs superblock limits
->       isofs: Initialize filesystem timestamp ranges
->
->  fs/9p/vfs_super.c        |  6 +++++-
->  fs/affs/amigaffs.c       |  2 +-
->  fs/affs/amigaffs.h       |  3 +++
->  fs/affs/inode.c          |  4 ++--
->  fs/affs/super.c          |  4 ++++
->  fs/attr.c                | 21 ++++++++++++---------
->  fs/befs/linuxvfs.c       |  2 ++
->  fs/bfs/inode.c           |  2 ++
->  fs/ceph/super.c          |  2 ++
->  fs/cifs/cifsfs.c         | 22 ++++++++++++++++++++++
->  fs/cifs/netmisc.c        | 14 +++++++-------
->  fs/coda/inode.c          |  3 +++
->  fs/configfs/inode.c      | 12 ++++++------
->  fs/cramfs/inode.c        |  2 ++
->  fs/efs/super.c           |  2 ++
->  fs/ext2/super.c          |  2 ++
->  fs/ext4/ext4.h           | 10 +++++++++-
->  fs/ext4/super.c          | 17 +++++++++++++++--
->  fs/f2fs/file.c           | 21 ++++++++++++---------
->  fs/fat/inode.c           | 12 ++++++++++++
->  fs/freevxfs/vxfs_super.c |  2 ++
->  fs/hpfs/hpfs_fn.h        |  6 ++----
->  fs/hpfs/super.c          |  2 ++
->  fs/inode.c               | 33 ++++++++++++++++++++++++++++++++-
->  fs/isofs/inode.c         |  7 +++++++
->  fs/jffs2/fs.c            |  3 +++
->  fs/jfs/super.c           |  2 ++
->  fs/kernfs/inode.c        |  7 +++----
->  fs/minix/inode.c         |  2 ++
->  fs/namespace.c           | 33 ++++++++++++++++++++++++++++++++-
->  fs/nfs/super.c           | 20 +++++++++++++++++++-
->  fs/ntfs/inode.c          | 21 ++++++++++++---------
->  fs/omfs/inode.c          |  4 ++++
->  fs/orangefs/super.c      |  2 ++
->  fs/pstore/ram.c          |  2 ++
->  fs/qnx4/inode.c          |  2 ++
->  fs/qnx6/inode.c          |  2 ++
->  fs/reiserfs/super.c      |  3 +++
->  fs/romfs/super.c         |  2 ++
->  fs/squashfs/super.c      |  2 ++
->  fs/super.c               |  2 ++
->  fs/sysv/super.c          |  5 ++++-
->  fs/ubifs/file.c          | 21 ++++++++++++---------
->  fs/ufs/super.c           |  7 +++++++
->  fs/utimes.c              |  6 ++----
->  fs/xfs/xfs_super.c       |  2 ++
->  include/linux/fs.h       |  5 +++++
->  include/linux/time64.h   |  2 ++
->  48 files changed, 298 insertions(+), 72 deletions(-)
+Yes, that's the failure scenario that PATCH 4/4 tried to address. As I
+responded separately, I would like to drop PATCH 4/4 at this moment.
 
+Will add your reviewed-by tag to this PATCH 3/4 in the next version.
+Thanks!
+
+--
+Best Regards,
+Shin'ichiro Kawasaki
 
 _______________________________________________
 Linux-f2fs-devel mailing list
