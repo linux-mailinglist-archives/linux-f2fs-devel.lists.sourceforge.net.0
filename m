@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D058BAC2D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Sep 2019 01:10:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 674CDAC35D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Sep 2019 01:48:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1i6NNI-0000SW-AD; Fri, 06 Sep 2019 23:10:40 +0000
+	id 1i6Nxj-0001sR-Ld; Fri, 06 Sep 2019 23:48:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1i6NNH-0000SP-4F
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Sep 2019 23:10:39 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1i6Nxi-0001sJ-63
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Sep 2019 23:48:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qtM8np69bsmqkNyitg1BGkQu58BaFVt0Y5Hny3xwr98=; b=XMRfo9Ke0a9EsgIm/GjSjqcD7h
- FyY7BQJoFvzHtx6TMEmd/s5rzqz2ya/C4sPMAs/plJbZ+TdYWgYAF/zqfmZjxtueDMJ3TVN0B0oWb
- Y0FFWIgzgqf3zN0eobg+sIPSyKEGtppPkciGfFzh6F0o7KpzM/TOLnzTp1/bC7OzX6eo=;
+ bh=p0dbbQMzg3UN6wOX3ZMQsfBU/LObXb+iC7X9vpXy1S0=; b=N4HMzquDf0ZCSCtn5lh/mNk5fq
+ 07JPngodyCZC3jgeVPxjr42gZ+RGDOrcOP3jwGoNfGA986ExgNGckMprVK/JuRbgPIsAo4pMoG4ga
+ u3K5oeQPyVcaynPpHYxgI5idDcl+MaY57O2CGs/CgZq/QOZd6lzV4+hPNdG4CpWVR1W0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,55 +29,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qtM8np69bsmqkNyitg1BGkQu58BaFVt0Y5Hny3xwr98=; b=N5W60dK/6LyBTgSm59Xebl5wCA
- HxUaumDSInOX8GsCTQt9RH2eynJeUuFjEAPo7BkKPMLVlwG4qluGn2DJk/zK3qyCuDqCyxhR7J6bt
- YnXFHmA/j3z/Fthm2YzS+nw+38lbErVcoEFajxkkXQpoIVZyvrMXQsosNvjVI1IQ7dCk=;
+ bh=p0dbbQMzg3UN6wOX3ZMQsfBU/LObXb+iC7X9vpXy1S0=; b=fpbOZ1CTaTnlKXq3f0LyyfeN35
+ SCYQ4svgv/JIPZ+vJ6nCa/3CI/eC2QFAPG3S4sH3cIvbuFplazLLShAHFaQBw5zYZoFtxUGMuCgx8
+ mz3EmcBLO6XldNODtxvan7TlsbWvv1/1pFFgO3Mrues+sVJPUpfSvAwMHWus+Orau6yo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1i6NND-00CWdx-D3
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Sep 2019 23:10:39 +0000
+ id 1i6Nxg-00D27E-Vt
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Sep 2019 23:48:18 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1873D207FC;
- Fri,  6 Sep 2019 23:10:28 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8D1C620842;
+ Fri,  6 Sep 2019 23:48:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1567811428;
- bh=DWOUzOtNS02FNCJ7dP2lQJ0JmC8h3u5IYwib+4bFMaU=;
+ s=default; t=1567813689;
+ bh=YaTVDRKaWZp6RtZVWL7bD2dch2Eb2d4uXQ0xopsEZSk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xsNcr0BYg/a3FJLdpndzLhE/qAjADYwt3EYa+zhXyJM2wPJSQ3GfbLZJ7fdPa9TRL
- Dkd4LUua+0K817a2PHJ3b48FMYI0KHhIJaGXlhIThlEeSSHAi6P3L917Yu2NElTsuP
- g+2y/UeX9CgU44Y5IqD7PfpVJh3L5SkzODiClCW0=
-Date: Fri, 6 Sep 2019 16:10:27 -0700
+ b=lKG6gBsYXRoodg6TXLwPJ0ERZ57ieDDf0M0hfRwkNClvG6iJDRgcUtfI+nZfsJhem
+ bUj5rEwZHZIMACq3HZmc/H3689dIyRdJyRBaC3JCjg4msPyOqKreuOHo4K7oApOp9p
+ odNdszgFPA3IoHoi/PePG68AQu64WPepnxTwH9CQ=
+Date: Fri, 6 Sep 2019 16:48:08 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20190906231027.GB71848@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190831095401.8142-1-yuchao0@huawei.com>
- <20190902225413.GC71929@jaegeuk-macbookpro.roam.corp.google.com>
- <6c5da795-4929-3bb6-fdbf-e103a2bcd431@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190906234808.GC71848@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190906105426.109151-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <6c5da795-4929-3bb6-fdbf-e103a2bcd431@kernel.org>
+In-Reply-To: <20190906105426.109151-1-yuchao0@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1i6NND-00CWdx-D3
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: introduce
- get_available_block_count() for cleanup
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1i6Nxg-00D27E-Vt
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid accessing uninitialized
+ field of inode page in is_alive()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,119 +93,42 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/03, Chao Yu wrote:
-> On 2019-9-3 6:54, Jaegeuk Kim wrote:
-> > On 08/31, Chao Yu wrote:
-> >> There are very similar codes in inc_valid_block_count() and
-> >> inc_valid_node_count() which is used for available user block
-> >> count calculation.
-> >>
-> >> This patch introduces a new helper get_available_block_count()
-> >> to include those common codes, and used it instead for cleanup.
-> >>
-> >> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> >> ---
-> >> v2:
-> >> - fix panic during recovery
-> >>  fs/f2fs/f2fs.h | 47 +++++++++++++++++++++++++++--------------------
-> >>  1 file changed, 27 insertions(+), 20 deletions(-)
-> >>
-> >> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> >> index a89ad8cab821..9c010e6cba5c 100644
-> >> --- a/fs/f2fs/f2fs.h
-> >> +++ b/fs/f2fs/f2fs.h
-> >> @@ -1756,6 +1756,27 @@ static inline bool __allow_reserved_blocks(struct f2fs_sb_info *sbi,
-> >>  	return false;
-> >>  }
-> >>  
-> >> +static inline unsigned int get_available_block_count(struct f2fs_sb_info *sbi,
-> >> +						struct inode *inode, bool cap)
-> >> +{
-> >> +	block_t avail_user_block_count;
-> >> +
-> >> +	avail_user_block_count = sbi->user_block_count -
-> >> +					sbi->current_reserved_blocks;
-> >> +
-> >> +	if (!__allow_reserved_blocks(sbi, inode, cap))
-> >> +		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
-> >> +
-> >> +	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-> >> +		if (avail_user_block_count > sbi->unusable_block_count)
-> >> +			avail_user_block_count -= sbi->unusable_block_count;
-> >> +		else
-> >> +			avail_user_block_count = 0;
-> >> +	}
-> >> +
-> >> +	return avail_user_block_count;
-> >> +}
-> >> +
-> >>  static inline void f2fs_i_blocks_write(struct inode *, block_t, bool, bool);
-> >>  static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
-> >>  				 struct inode *inode, blkcnt_t *count)
-> >> @@ -1782,17 +1803,8 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
-> >>  
-> >>  	spin_lock(&sbi->stat_lock);
-> >>  	sbi->total_valid_block_count += (block_t)(*count);
-> >> -	avail_user_block_count = sbi->user_block_count -
-> >> -					sbi->current_reserved_blocks;
-> >> +	avail_user_block_count = get_available_block_count(sbi, inode, true);
-> >>  
-> >> -	if (!__allow_reserved_blocks(sbi, inode, true))
-> >> -		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
-> >> -	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-> >> -		if (avail_user_block_count > sbi->unusable_block_count)
-> >> -			avail_user_block_count -= sbi->unusable_block_count;
-> >> -		else
-> >> -			avail_user_block_count = 0;
-> >> -	}
-> >>  	if (unlikely(sbi->total_valid_block_count > avail_user_block_count)) {
-> >>  		diff = sbi->total_valid_block_count - avail_user_block_count;
-> >>  		if (diff > *count)
-> >> @@ -2005,7 +2017,8 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
-> >>  					struct inode *inode, bool is_inode)
-> >>  {
-> >>  	block_t	valid_block_count;
-> >> -	unsigned int valid_node_count, user_block_count;
-> >> +	unsigned int valid_node_count;
-> >> +	unsigned int avail_user_block_count;
-> >>  	int err;
-> >>  
-> >>  	if (is_inode) {
-> >> @@ -2027,16 +2040,10 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
-> >>  
-> >>  	spin_lock(&sbi->stat_lock);
-> >>  
-> >> -	valid_block_count = sbi->total_valid_block_count +
-> >> -					sbi->current_reserved_blocks + 1;
-> >> -
-> >> -	if (!__allow_reserved_blocks(sbi, inode, false))
-> >> -		valid_block_count += F2FS_OPTION(sbi).root_reserved_blocks;
-> >> -	user_block_count = sbi->user_block_count;
-> >> -	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
-> >> -		user_block_count -= sbi->unusable_block_count;
-> >> +	valid_block_count = sbi->total_valid_block_count + 1;
-> >> +	avail_user_block_count = get_available_block_count(sbi, inode, false);
-> > 
-> > This doesn't look like same?
-> 
-> Actually, calculations of block count in inc_valid_node_count() and
-> inc_valid_block_count() should be the same, I've no idea why we use different
-> policy for reserved block for root user.
+On 09/06, Chao Yu wrote:
+> If inode is newly created, inode page may not synchronize with inode cache,
+> so fields like .i_inline or .i_extra_isize could be wrong, in below call
+> path, we may access such wrong fields, result in failing to migrate valid
+> target block.
 
-Hmm, for now, let's defer to discuss this.
+If data is valid, how can we get new inode page?
 
 > 
-> Thanks,
+> - gc_data_segment
+>  - is_alive
+>   - datablock_addr
+>    - offset_in_addr
 > 
-> > 
-> >>  
-> >> -	if (unlikely(valid_block_count > user_block_count)) {
-> >> +	if (unlikely(valid_block_count > avail_user_block_count)) {
-> >>  		spin_unlock(&sbi->stat_lock);
-> >>  		goto enospc;
-> >>  	}
-> >> -- 
-> >> 2.18.0.rc1
+> Fixes: 7a2af766af15 ("f2fs: enhance on-disk inode structure scalability")
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/dir.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+> index 765f13354d3f..b1840852967e 100644
+> --- a/fs/f2fs/dir.c
+> +++ b/fs/f2fs/dir.c
+> @@ -479,6 +479,9 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
+>  		if (IS_ERR(page))
+>  			return page;
+>  
+> +		/* synchronize inode page's data from inode cache */
+> +		f2fs_update_inode(inode, page);
+> +
+>  		if (S_ISDIR(inode->i_mode)) {
+>  			/* in order to handle error case */
+>  			get_page(page);
+> -- 
+> 2.18.0.rc1
 
 
 _______________________________________________
