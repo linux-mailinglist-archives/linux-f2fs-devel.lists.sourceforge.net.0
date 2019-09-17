@@ -2,73 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86C36B4790
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Sep 2019 08:36:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12BCFB5739
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Sep 2019 22:55:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iA75t-0008V1-Go; Tue, 17 Sep 2019 06:36:09 +0000
+	id 1iAKVF-0007BU-9c; Tue, 17 Sep 2019 20:55:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iA75s-0008Ur-Mp
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 06:36:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1iAKVE-0007BN-FM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 20:55:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7DK0dg13dMQDV5C1oRl/KqvamoSgZ+1d63ArxyA/XI0=; b=dxOAyPLPrYUbIXk4n+uq9NVqnM
- V6yY6MS0rKnxnyX2qCra7Pkv8x4dBkl8aYYRbYJeJp1ZoT8Nz7GzH6g7LDbPo/LfKqBMWhoDcVAE4
- xjNEA43D9uvOBksdiS4xiTA+o5gVWeHFvs2+t3rU20pUZ8++81VndZktvSo11zecEqUo=;
+ bh=Jg5elSsLQJuP6lhzth2PEl7KFeFn3G9vglcSPy7sERk=; b=YbgsPR8RO7rnHr9fLXp3+8Aqp7
+ crQ44BcWCIiSJ+sCAxoFFrAiUqzxaOJXFREgk/3tSH3fYPIXiZUegTmgU4erGPddvBYwIzuX+PdAv
+ Z3ObfIiEv/kyaqyB/64Og1S1S5o4cxSArgi1ebiz0t1HIVtY/yysUJo5D3KVbg7PCgzk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7DK0dg13dMQDV5C1oRl/KqvamoSgZ+1d63ArxyA/XI0=; b=WtGSnGmai0cDugkSH0+TRhG91z
- /GBKpQSMcd7e3hPb5E1RA1JBsqMY1YbKqrVSvfqV9uDzV3t50iYAg2KmdkLq7C9x8muEfz+6UqpE2
- qOr3uRjsR/Iz9ZzqFBOuzvQnJxPp+wwroQsl8Ugc1+mx7W/EyEngDJkTL5AXKlbUJnHQ=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ bh=Jg5elSsLQJuP6lhzth2PEl7KFeFn3G9vglcSPy7sERk=; b=XaiLYwItAPpgrI77vShbvbPBuC
+ WroMnazCXee9831JJhFbGhsKfeTmSylTNV1432UVHNNk+q9wA6YQCClQgatbaVl/ZO1JF7dgU58nq
+ qABUSTOe6UYwE1XuX24mYd9yN/8UAtSB+YvfkQdWxo2ldx//Be2RDDqKnZuQH1bD5XQs=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1iA75o-000sDg-Us
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 06:36:08 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 6B0B68EA14269BD79CBB;
- Tue, 17 Sep 2019 14:35:56 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 17 Sep
- 2019 14:35:53 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>
-References: <1565185232-11506-1-git-send-email-stummala@codeaurora.org>
- <2b8f7a88-5204-a4ea-9f80-1056abb30d98@kernel.org>
- <355d24c1-b07c-f8ff-1ab9-3f85653ced60@huawei.com>
- <20190917053316.GB12730@codeaurora.org>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <447ade2b-0199-6b02-c1cf-8835851bbd00@huawei.com>
-Date: Tue, 17 Sep 2019 14:35:52 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1iAKVA-001esC-RE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 20:55:12 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 61CFD214AF;
+ Tue, 17 Sep 2019 20:55:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1568753702;
+ bh=CpxsDxUjfYJQ4KuEuGgfHSNgs7HIa645JgYtKRt6fxQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=tyxlsROx96EDroZ6JcZfRUqu8CMa8eEa8qHeXLMo17uCk/I05UWRhR98tbMQk7bx0
+ 9oD8VzulHRg2o5/4u/x65fGB00cZdbU1TIp8OmLZh61fOdhw73oUyPG4D+Fw1PLEQv
+ XOG+7hvJ6u9Lzc5CWqjvHYVBvGxanHl3MgheVdX4=
+Date: Tue, 17 Sep 2019 13:55:01 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20190917205501.GA60683@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190909012532.20454-1-jaegeuk@kernel.org>
+ <69933b7f-48cc-47f9-ba6f-b5ca8f733cba@huawei.com>
+ <20190909080654.GD21625@jaegeuk-macbookpro.roam.corp.google.com>
+ <97237da2-897a-8420-94de-812e94aa751f@huawei.com>
+ <20190909120443.GA31108@jaegeuk-macbookpro.roam.corp.google.com>
+ <27725e65-53fe-5731-0201-9959b8ef6b49@huawei.com>
+ <20190916153736.GA2493@jaegeuk-macbookpro.roam.corp.google.com>
+ <ab9561c9-db27-2967-e6fc-accd9bc58747@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <20190917053316.GB12730@codeaurora.org>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <ab9561c9-db27-2967-e6fc-accd9bc58747@huawei.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iA75o-000sDg-Us
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: Fix indefinite loop in f2fs_gc()
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iAKVA-001esC-RE
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: do not select same victim right
+ again
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,196 +90,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Sahitya,
+On 09/17, Chao Yu wrote:
+> On 2019/9/16 23:37, Jaegeuk Kim wrote:
+> > On 09/16, Chao Yu wrote:
+> >> On 2019/9/9 20:04, Jaegeuk Kim wrote:
+> >>> On 09/09, Chao Yu wrote:
+> >>>> On 2019/9/9 16:06, Jaegeuk Kim wrote:
+> >>>>> On 09/09, Chao Yu wrote:
+> >>>>>> On 2019/9/9 9:25, Jaegeuk Kim wrote:
+> >>>>>>> GC must avoid select the same victim again.
+> >>>>>>
+> >>>>>> Blocks in previous victim will occupy addition free segment, I doubt after this
+> >>>>>> change, FGGC may encounter out-of-free space issue more frequently.
+> >>>>>
+> >>>>> Hmm, actually this change seems wrong by sec_usage_check().
+> >>>>> We may be able to avoid this only in the suspicious loop?
+> >>>>>
+> >>>>> ---
+> >>>>>  fs/f2fs/gc.c | 2 +-
+> >>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> >>>>> index e88f98ddf396..5877bd729689 100644
+> >>>>> --- a/fs/f2fs/gc.c
+> >>>>> +++ b/fs/f2fs/gc.c
+> >>>>> @@ -1326,7 +1326,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+> >>>>>  		round++;
+> >>>>>  	}
+> >>>>>  
+> >>>>> -	if (gc_type == FG_GC)
+> >>>>> +	if (gc_type == FG_GC && seg_freed)
+> >>>>
+> >>>> That's original solution Sahitya provided to avoid infinite loop of GC, but I
+> >>>> suggest to find the root cause first, then we added .invalid_segmap for that
+> >>>> purpose.
+> >>>
+> >>> I've checked the Sahitya's patch. So, it seems the problem can happen due to
+> >>> is_alive or atomic_file.
+> >>
+> >> For some conditions, this doesn't help, for example, two sections contain the
+> >> same fewest valid blocks, it will cause to loop selecting them if it fails to
+> >> migrate blocks.
+> >>
+> >> How about keeping it as it is to find potential bug.
+> > 
+> > I think it'd be fine to merge this. Could you check the above scenario in more
+> > detail?
+> 
+> I haven't saw this in real scenario yet.
+> 
+> What I mean is if there is a bug (maybe in is_alive()) failing us to GC on one
+> section, when that bug happens in two candidates, there could be the same
+> condition that GC will run into loop (select A, fail to migrate; select B, fail
+> to migrate, select A...).
+> 
+> But I guess the benefit of this change is, if FGGC fails to migrate block due to
+> i_gc_rwsem race, selecting another section and later retrying previous one may
+> avoid lock race, right?
 
-On 2019/9/17 13:33, Sahitya Tummala wrote:
-> Hi Chao,
-> 
-> On Fri, Sep 06, 2019 at 07:00:32PM +0800, Chao Yu wrote:
->> Hi Sahitya,
->>
->> Luckily, I can reproduce this issue with generic/269, and have sent another
->> patch for the issue, could you please check that one?
->>
-> 
-> Thanks for the fix. The issue could not get reproduced yet, so could not make
-> much progress on the customer case.
-
-Alright, let me know if you get any clue or make progress on this issue.
-
-Thanks,
+In any case, I think this can avoid potenial GC loop. At least to me, it'd be
+quite risky, if we remain this just for debugging purpose only.
 
 > 
-> thanks,
+> Thanks,
 > 
->> Thanks,
->>
->> On 2019/8/7 22:06, Chao Yu wrote:
->>> On 2019-8-7 21:40, Sahitya Tummala wrote:
->>>> Policy - Foreground GC, LFS and greedy GC mode.
->>>>
->>>> Under this policy, f2fs_gc() loops forever to GC as it doesn't have
->>>> enough free segements to proceed and thus it keeps calling gc_more
->>>> for the same victim segment.  This can happen if the selected victim
->>>> segment could not be GC'd due to failed blkaddr validity check i.e.
->>>> is_alive() returns false for the blocks set in current validity map.
->>>>
->>>> Fix this by keeping track of such invalid segments and skip those
->>>> segments for selection in get_victim_by_default() to avoid endless
->>>> GC loop under such error scenarios. Currently, add this logic under
->>>> CONFIG_F2FS_CHECK_FS to be able to root cause the issue in debug
->>>> version.
->>>>
->>>> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
->>>> ---
->>>> v4: Cover all logic with CONFIG_F2FS_CHECK_FS
->>>>
->>>>  fs/f2fs/gc.c      | 31 +++++++++++++++++++++++++++++--
->>>>  fs/f2fs/segment.c | 14 +++++++++++++-
->>>>  fs/f2fs/segment.h |  3 +++
->>>>  3 files changed, 45 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>>> index 8974672..cbcacbd 100644
->>>> --- a/fs/f2fs/gc.c
->>>> +++ b/fs/f2fs/gc.c
->>>> @@ -382,6 +382,16 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->>>>  			nsearched++;
->>>>  		}
->>>>  
->>>> +#ifdef CONFIG_F2FS_CHECK_FS
->>>> +		/*
->>>> +		 * skip selecting the invalid segno (that is failed due to block
->>>> +		 * validity check failure during GC) to avoid endless GC loop in
->>>> +		 * such cases.
->>>> +		 */
->>>> +		if (test_bit(segno, sm->invalid_segmap))
->>>> +			goto next;
->>>> +#endif
->>>> +
->>>>  		secno = GET_SEC_FROM_SEG(sbi, segno);
->>>>  
->>>>  		if (sec_usage_check(sbi, secno))
->>>> @@ -602,8 +612,15 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
->>>>  {
->>>>  	struct page *node_page;
->>>>  	nid_t nid;
->>>> -	unsigned int ofs_in_node;
->>>> +	unsigned int ofs_in_node, segno;
->>>>  	block_t source_blkaddr;
->>>> +	unsigned long offset;
->>>> +#ifdef CONFIG_F2FS_CHECK_FS
->>>> +	struct sit_info *sit_i = SIT_I(sbi);
->>>> +#endif
->>>> +
->>>> +	segno = GET_SEGNO(sbi, blkaddr);
->>>> +	offset = GET_BLKOFF_FROM_SEG0(sbi, blkaddr);
->>>>  
->>>>  	nid = le32_to_cpu(sum->nid);
->>>>  	ofs_in_node = le16_to_cpu(sum->ofs_in_node);
->>>> @@ -627,8 +644,18 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
->>>>  	source_blkaddr = datablock_addr(NULL, node_page, ofs_in_node);
->>>>  	f2fs_put_page(node_page, 1);
->>>>  
->>>> -	if (source_blkaddr != blkaddr)
->>>> +	if (source_blkaddr != blkaddr) {
->>>> +#ifdef CONFIG_F2FS_CHECK_FS
->>>
->>> 		unsigned int segno = GET_SEGNO(sbi, blkaddr);
->>> 		unsigned int offset = GET_BLKOFF_FROM_SEG0(sbi, blkaddr);
->>>
->>> Should be local, otherwise it looks good to me, I think Jaegeuk can help to fix
->>> this while merging.
->>>
->>> Reviewed-by: Chao Yu <yuchao0@huawei.com>
->>>
->>> Thanks,
->>>
->>>> +		if (unlikely(check_valid_map(sbi, segno, offset))) {
->>>> +			if (!test_and_set_bit(segno, sit_i->invalid_segmap)) {
->>>> +				f2fs_err(sbi, "mismatched blkaddr %u (source_blkaddr %u) in seg %u\n",
->>>> +						blkaddr, source_blkaddr, segno);
->>>> +				f2fs_bug_on(sbi, 1);
->>>> +			}
->>>> +		}
->>>> +#endif
->>>>  		return false;
->>>> +	}
->>>>  	return true;
->>>>  }
->>>>  
->>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>> index a661ac3..ee795b1 100644
->>>> --- a/fs/f2fs/segment.c
->>>> +++ b/fs/f2fs/segment.c
->>>> @@ -806,6 +806,9 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->>>>  		enum dirty_type dirty_type)
->>>>  {
->>>>  	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
->>>> +#ifdef CONFIG_F2FS_CHECK_FS
->>>> +	struct sit_info *sit_i = SIT_I(sbi);
->>>> +#endif
->>>>  
->>>>  	if (test_and_clear_bit(segno, dirty_i->dirty_segmap[dirty_type]))
->>>>  		dirty_i->nr_dirty[dirty_type]--;
->>>> @@ -817,9 +820,13 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->>>>  		if (test_and_clear_bit(segno, dirty_i->dirty_segmap[t]))
->>>>  			dirty_i->nr_dirty[t]--;
->>>>  
->>>> -		if (get_valid_blocks(sbi, segno, true) == 0)
->>>> +		if (get_valid_blocks(sbi, segno, true) == 0) {
->>>>  			clear_bit(GET_SEC_FROM_SEG(sbi, segno),
->>>>  						dirty_i->victim_secmap);
->>>> +#ifdef CONFIG_F2FS_CHECK_FS
->>>> +			clear_bit(segno, sit_i->invalid_segmap);
->>>> +#endif
->>>> +		}
->>>>  	}
->>>>  }
->>>>  
->>>> @@ -4015,6 +4022,10 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
->>>>  	sit_i->sit_bitmap_mir = kmemdup(src_bitmap, bitmap_size, GFP_KERNEL);
->>>>  	if (!sit_i->sit_bitmap_mir)
->>>>  		return -ENOMEM;
->>>> +
->>>> +	sit_i->invalid_segmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
->>>> +	if (!sit_i->invalid_segmap)
->>>> +		return -ENOMEM;
->>>>  #endif
->>>>  
->>>>  	/* init SIT information */
->>>> @@ -4517,6 +4528,7 @@ static void destroy_sit_info(struct f2fs_sb_info *sbi)
->>>>  	kvfree(sit_i->sit_bitmap);
->>>>  #ifdef CONFIG_F2FS_CHECK_FS
->>>>  	kvfree(sit_i->sit_bitmap_mir);
->>>> +	kvfree(sit_i->invalid_segmap);
->>>>  #endif
->>>>  	kvfree(sit_i);
->>>>  }
->>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
->>>> index b746028..9370d53 100644
->>>> --- a/fs/f2fs/segment.h
->>>> +++ b/fs/f2fs/segment.h
->>>> @@ -229,6 +229,9 @@ struct sit_info {
->>>>  	char *sit_bitmap;		/* SIT bitmap pointer */
->>>>  #ifdef CONFIG_F2FS_CHECK_FS
->>>>  	char *sit_bitmap_mir;		/* SIT bitmap mirror */
->>>> +
->>>> +	/* bitmap of segments to be ignored by GC in case of errors */
->>>> +	unsigned long *invalid_segmap;
->>>>  #endif
->>>>  	unsigned int bitmap_size;	/* SIT bitmap size */
->>>>  
->>>>
->>> .
->>>
-> 
+> > 
+> > Thanks,
+> > 
+> >>
+> >> Thanks,
+> >>
+> >>>
+> >>>>
+> >>>> Thanks,
+> >>>>
+> >>>>>  		sbi->cur_victim_sec = NULL_SEGNO;
+> >>>>>  
+> >>>>>  	if (sync)
+> >>>>>
+> >>> .
+> >>>
+> > .
+> > 
 
 
 _______________________________________________
