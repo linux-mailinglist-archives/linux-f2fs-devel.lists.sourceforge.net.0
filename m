@@ -2,73 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA032B454D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Sep 2019 03:42:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C7CEB46B7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Sep 2019 07:06:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iA2Vw-0006wB-PF; Tue, 17 Sep 2019 01:42:44 +0000
+	id 1iA5gi-00039C-PZ; Tue, 17 Sep 2019 05:06:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iA2Vu-0006w4-Vr
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 01:42:42 +0000
+ (envelope-from <stummala@codeaurora.org>) id 1iA5gh-00038y-F0
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 05:06:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MOp8lD6PqppcpemLwr7LftJTUKqcsWrYliH5KGEA75Q=; b=mQ1BYI0PjIe9+KOvI8WO64GDvD
- 98ldOPU1fiZkAsimh4OB4K2VWfBZhT/ojwZGbmTq7BjBt0s3SexNooTZFBaULbqoPdXwO08bUn6sf
- RpLPvyKuzKjipoUDrqFf0vAm73nulrcA+X2mf1+Is/EriEdBbiQ4nTXkOljU70mOgXsI=;
+ bh=1b+v902xF3F2S3WsG77WLRDJqyG4QblvhPp1C01qEFo=; b=J5N/JgX49MtZyftKXwGhb46VMn
+ 2OPdYJ2Qhq3Z1bJmOaj9SZzx4Ungb47CYii4pCMXA+QQ146dEM5/Koem82r2ZOHh7nOExPnU4J5ct
+ MntAoPjrGIZt5aeDzhmGonn8IpueqLoJ3u3Yjokni+71v2BvFqr7uj/8rDb821bdFLA8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MOp8lD6PqppcpemLwr7LftJTUKqcsWrYliH5KGEA75Q=; b=LbGerFAsYUacbjuMQCuF/E8Mo0
- ZuCrWbsnZblarVfJ19HQ3kqHuCOLSbCEmwpvPzZMed8hF3rRK4wqvZVfbLg2MYs0Ake5xKsBpsnGW
- VCrDgqasJAjNHnwJ/SWeSHJ6cuqCOPrRwgmxyEAMZ/aX9ly7KRhAPm0K8PCb1YSKJmEI=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=1b+v902xF3F2S3WsG77WLRDJqyG4QblvhPp1C01qEFo=; b=bg3CP2ZZuBaQ0KvmZzMv/SU1NH
+ ID7NXGlL7Mf28iX1+hk3idDONt+y9uFKkJ6OxAQ6QzqyLtJ7C61dUefzFpzZPgxzXcKZQDdvYGzbG
+ IU2gxvXEzHOPawa5pHQ0jBq+InRKQ0EMgIqwvQ1ckeO5enSmn9cyHF7ti+6CrqVcojO8=;
+Received: from smtp.codeaurora.org ([198.145.29.96])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- id 1iA2Vt-008JiT-3Q
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 01:42:42 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 2CBF6CCC4611D44823A1;
- Tue, 17 Sep 2019 09:42:34 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 17 Sep
- 2019 09:42:33 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190909012532.20454-1-jaegeuk@kernel.org>
- <69933b7f-48cc-47f9-ba6f-b5ca8f733cba@huawei.com>
- <20190909080654.GD21625@jaegeuk-macbookpro.roam.corp.google.com>
- <97237da2-897a-8420-94de-812e94aa751f@huawei.com>
- <20190909120443.GA31108@jaegeuk-macbookpro.roam.corp.google.com>
- <27725e65-53fe-5731-0201-9959b8ef6b49@huawei.com>
- <20190916153736.GA2493@jaegeuk-macbookpro.roam.corp.google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <ab9561c9-db27-2967-e6fc-accd9bc58747@huawei.com>
-Date: Tue, 17 Sep 2019 09:42:32 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20190916153736.GA2493@jaegeuk-macbookpro.roam.corp.google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ id 1iA5ge-007u2M-0h
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Sep 2019 05:06:03 +0000
+Received: by smtp.codeaurora.org (Postfix, from userid 1000)
+ id 2ABBC6133A; Tue, 17 Sep 2019 04:49:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+ s=default; t=1568695793;
+ bh=9DAhlffFQLmyiQ/NBcdB+CPjXZvxyNPw99SVt6x2WNI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QhM2JojkQfrWeNPMh1yBFMab870y0RI92asD564PBlf5BXDy91uU3A5HlT04w7spr
+ OD43qEvbA3KHi7nCTY14juqsjxqAEipjGCzVla9tS+meWujUkynjvOjN5J/RCe6sW0
+ 0Vh65Gd/Rg+QLfARCCcpJljtz60msbyMHJGOjdU8=
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ pdx-caf-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+ DKIM_INVALID,DKIM_SIGNED,SPF_NONE autolearn=no autolearn_force=no
+ version=3.4.0
+Received: from codeaurora.org
+ (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: stummala@smtp.codeaurora.org)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 8AD46607C3;
+ Tue, 17 Sep 2019 04:49:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+ s=default; t=1568695792;
+ bh=9DAhlffFQLmyiQ/NBcdB+CPjXZvxyNPw99SVt6x2WNI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=hSgSYEJzeXsrKDUNDKTmqyprObM9NX0u+TRioBXgAlgSauRz+qWM67cc3HWUpq+q/
+ nP1yc38DAsIlmltF4GoHU+FizSaSZS8prTDeMrsqMUCuvQ85CeaVXHtK6s8V8/vSjM
+ kxs6owP5qD/oNwm8dWCd1QX4E+e/WOS4NK48n4UE=
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 8AD46607C3
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ spf=none smtp.mailfrom=stummala@codeaurora.org
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 17 Sep 2019 10:19:23 +0530
+Message-Id: <1568695763-29343-1-git-send-email-stummala@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iA2Vt-008JiT-3Q
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: do not select same victim right
- again
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: codeaurora.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1iA5ge-007u2M-0h
+Subject: [f2fs-dev] [PATCH] f2fs: add a condition to detect overflow in
+ f2fs_ioc_gc_range()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,88 +105,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/9/16 23:37, Jaegeuk Kim wrote:
-> On 09/16, Chao Yu wrote:
->> On 2019/9/9 20:04, Jaegeuk Kim wrote:
->>> On 09/09, Chao Yu wrote:
->>>> On 2019/9/9 16:06, Jaegeuk Kim wrote:
->>>>> On 09/09, Chao Yu wrote:
->>>>>> On 2019/9/9 9:25, Jaegeuk Kim wrote:
->>>>>>> GC must avoid select the same victim again.
->>>>>>
->>>>>> Blocks in previous victim will occupy addition free segment, I doubt after this
->>>>>> change, FGGC may encounter out-of-free space issue more frequently.
->>>>>
->>>>> Hmm, actually this change seems wrong by sec_usage_check().
->>>>> We may be able to avoid this only in the suspicious loop?
->>>>>
->>>>> ---
->>>>>  fs/f2fs/gc.c | 2 +-
->>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>>>> index e88f98ddf396..5877bd729689 100644
->>>>> --- a/fs/f2fs/gc.c
->>>>> +++ b/fs/f2fs/gc.c
->>>>> @@ -1326,7 +1326,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
->>>>>  		round++;
->>>>>  	}
->>>>>  
->>>>> -	if (gc_type == FG_GC)
->>>>> +	if (gc_type == FG_GC && seg_freed)
->>>>
->>>> That's original solution Sahitya provided to avoid infinite loop of GC, but I
->>>> suggest to find the root cause first, then we added .invalid_segmap for that
->>>> purpose.
->>>
->>> I've checked the Sahitya's patch. So, it seems the problem can happen due to
->>> is_alive or atomic_file.
->>
->> For some conditions, this doesn't help, for example, two sections contain the
->> same fewest valid blocks, it will cause to loop selecting them if it fails to
->> migrate blocks.
->>
->> How about keeping it as it is to find potential bug.
-> 
-> I think it'd be fine to merge this. Could you check the above scenario in more
-> detail?
+end = range.start + range.len;
 
-I haven't saw this in real scenario yet.
+If the range.start/range.len is a very large value, then end can overflow
+in this operation. It results into a crash in get_valid_blocks() when
+accessing the invalid range.start segno.
 
-What I mean is if there is a bug (maybe in is_alive()) failing us to GC on one
-section, when that bug happens in two candidates, there could be the same
-condition that GC will run into loop (select A, fail to migrate; select B, fail
-to migrate, select A...).
+This issue is reported in ioctl fuzz testing.
 
-But I guess the benefit of this change is, if FGGC fails to migrate block due to
-i_gc_rwsem race, selecting another section and later retrying previous one may
-avoid lock race, right?
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+---
+ fs/f2fs/file.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Thanks,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5474aaa..c2b4767 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2123,9 +2123,8 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
+ 		return -EROFS;
+ 
+ 	end = range.start + range.len;
+-	if (range.start < MAIN_BLKADDR(sbi) || end >= MAX_BLKADDR(sbi)) {
++	if (end < range.start || range.start < MAIN_BLKADDR(sbi) || end >= MAX_BLKADDR(sbi))
+ 		return -EINVAL;
+-	}
+ 
+ 	ret = mnt_want_write_file(filp);
+ 	if (ret)
+-- 
+Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
 
-> 
-> Thanks,
-> 
->>
->> Thanks,
->>
->>>
->>>>
->>>> Thanks,
->>>>
->>>>>  		sbi->cur_victim_sec = NULL_SEGNO;
->>>>>  
->>>>>  	if (sync)
->>>>>
->>> .
->>>
-> .
-> 
 
 
 _______________________________________________
