@@ -2,73 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE1ECB9831
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Sep 2019 22:01:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C161FB9D2E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Sep 2019 11:42:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iBP5o-0002ya-AG; Fri, 20 Sep 2019 20:01:24 +0000
+	id 1iBbuV-0005QP-61; Sat, 21 Sep 2019 09:42:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1iBP5m-0002yK-Mq
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Sep 2019 20:01:22 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iBbuT-0005QH-A7
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Sep 2019 09:42:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uYq9I+nHJEyu+IeSMTakMDuiGxf0d0onzMCzIlKyQPY=; b=GDwhDz+DW7vST1pdrETv+b8+KC
- /SYKtQW3BvUkwOkVz3rQssPxi4550H34eNu5helMXqqccA5sAAZUwEw+0pjvqAN+H4Wlvk5duKIVS
- Ki1HC5/bPtaurun7KsStshzedGKvbwUHXolv3RkM0CklVI1Vgn9E4jXlNMHDC/F6Bh3I=;
+ bh=nduTgPGf1f7MBFdIiENY2YkW12t7dNv5Rc4+lJuSsNo=; b=JQYmDsO0fKZtKRl1VowY11UFXa
+ FcqBDg8/xx3nJACFGWds9ayPI6JnWo3E8UK1PHVEVPhf74iKQW62uqdAJhjOfenGvqyJaqRV32hKc
+ vEBC1yczLkRPfIB5d7amm0e6uLuKZOpelXOxnkP3eSdWe6CpiiLb3s+0izuaDYao4ynE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uYq9I+nHJEyu+IeSMTakMDuiGxf0d0onzMCzIlKyQPY=; b=U
- lMZ8JBfTegPN2SHJUQNcnWTVvzV4+oitNLdXBMIJoRUZsuv9kHPjAOuM3l4WQZmFWX1YGZdIHps/j
- b7QKAT61XABk6i9a3uBPwdpwsKt3vPg9avVJ2icJmkF5MLU9OaI9cjfI4vo7t+JD9bGeKSazpPea1
- Y7o7v8f72zs6Aj6Q=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=nduTgPGf1f7MBFdIiENY2YkW12t7dNv5Rc4+lJuSsNo=; b=PXbJ9QhHYkR5cK1ZACz/WkaSyQ
+ 6eA8+oGT0Zwwi+eFFByBlCk8tJfqQxoj/gq4JQsyaB4qSedtRUG3Ini2i3nPhuNKxqBa0xX96dgnq
+ SwCSZl0asjZpZ99cAOex87nbk//09H+GsL8AdqiavkhYGOOX62weeLvB5seNJwZ4gj+o=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iBP5i-000wmT-VI
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Sep 2019 20:01:22 +0000
-Received: from localhost (unknown [104.132.0.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5C7172067B;
- Fri, 20 Sep 2019 20:01:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569009668;
- bh=TsCzroLgNhThVbiMnKL3twJK9UDWIJ/baZ2ndbvC/48=;
- h=Date:From:To:Cc:Subject:From;
- b=EYzlsHPnMiXEP5uyD+JbM3WVPWRGzmWz0BJWxQsgScoeFW9URPVwA8XQ7CAklo8ec
- gUiIGAlmLTpACLLZt4fqvbHeXxhMc9WPjepLeZQjSLGiPvk3tRtjTI6Hp8vXsXEvhk
- wjOplBOwy0/KxZ/y6V3opNfJTHmA9llxn2YTswE8=
-Date: Fri, 20 Sep 2019 13:01:07 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20190920200107.GA57911@jaegeuk-macbookpro.roam.corp.google.com>
+ id 1iBbuP-001xcn-81
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Sep 2019 09:42:33 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 3F6728D02B93E50072EC;
+ Sat, 21 Sep 2019 17:42:22 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 21 Sep
+ 2019 17:42:19 +0800
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+References: <20190830101936.32265-3-shinichiro.kawasaki@wdc.com>
+ <486550b2-bb47-d725-79a9-4fb3a4ba28e3@huawei.com>
+ <20190903083704.kmc5bwfdpeinzfle@shindev>
+ <7e13140d-f031-9eda-3544-747f80880df9@huawei.com>
+ <20190906083114.jmjzczqzp4m3kxex@shindev>
+ <e209cee9-2d91-e15a-0d30-4b388d463f08@huawei.com>
+ <20190910081010.uwubhhwenuex7vhx@shindev.dhcp.fujisawa.hgst.com>
+ <45f1d3e8-ae50-879f-3cfc-2e6786afb28f@huawei.com>
+ <20190912081648.wq2wi447hpold4t6@shindev.dhcp.fujisawa.hgst.com>
+ <dd935f8f-276e-fa7b-e202-2a8722be60e0@huawei.com>
+ <20190918030712.hko3pjm65glncqap@shindev.dhcp.fujisawa.hgst.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <6b6552a0-333b-872b-37b8-67e6bf0c1311@huawei.com>
+Date: Sat, 21 Sep 2019 17:42:11 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20190918030712.hko3pjm65glncqap@shindev.dhcp.fujisawa.hgst.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iBP5i-000wmT-VI
-Subject: [f2fs-dev] [GIT PULL] f2fs for 5.4
+X-Headers-End: 1iBbuP-001xcn-81
+Subject: Re: [f2fs-dev] [PATCH v4 2/2] fsck.f2fs: Check write pointer
+ consistency with current segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,143 +84,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Damien Le Moal <Damien.LeMoal@wdc.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+On 2019/9/18 11:07, Shinichiro Kawasaki wrote:
+> Thanks for the comments. I read f2fs code further, and think still the
+> SIT vs write pointer check can be implemented and meaningful.
+> 
+> F2fs ensures consistency of SIT using two CP areas, two SIT areas and
+> sit_bitmap in CP. These metadata are in the conventional zone that not
+> affected by write pointer control logic. My current scope is to ensure
+> write pointer control logic correctness for zoned block device. From this
+> scope and the f2fs SIT consistency feature, I would like to assume that
+> SIT entries built in kernel after f2fs mount is correct for the write
+> pointer position check.
 
-Could you please consider this pull request?
+SIT may be broken due to software bug or hardware flaw, we'd better not consider
+it as a consistent metadata.
 
-The following changes since commit b7e7c85dc7b0ea5ff821756c331489e3b151eed1:
+> 
+> Fsck does additional SIT consistency check in fsck_chk_meta(). It would be
+> good to do the write pointer position check at the end of fsck_chk_meta().
 
-  Merge tag 'arm64-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux (2019-08-16 10:51:47 -0700)
+SIT can be changed later? e.g. SIT bitmap says one block address is valid,
+however fsck found there is no entry can link to it, then it needs to be
+deleted? it may affect write_pointer repair, right?
 
-are available in the Git repository at:
+So we'd better look into all SIT update cases in fsck.
 
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.4
+> 
+>> - need to consider fsynced block in SIT
+> 
+> As far as I read fsync logic, fsync results in do_write_page() call which
+> does both of SIT entry update and write bio submit. In other words, SIT
+> update and write pointer move are expected for fsync also. Then I think
+> the write pointer consistency check with last valid block obtained from
+> SIT is meaningful, when I take fsynced blocks into account.
 
-for you to fetch changes up to fbbf779989d2ef9a51daaa4e53c0b2ecc8c55c4e:
+Yup, :)
 
-  f2fs: add a condition to detect overflow in f2fs_ioc_gc_range() (2019-09-17 13:56:15 -0700)
+Thanks,
 
-----------------------------------------------------------------
-f2fs-for-5.4-rc1
-
-In this round, we introduced casefolding support in f2fs, and fixed various bugs
-in individual features such as IO alignment, checkpoint=disable, quota, and
-swapfile.
-
-Enhancement:
- - support casefolding w/ enhancement in ext4
- - support fiemap for directory
- - support FS_IO_GET|SET_FSLABEL
-
-Bug fix:
- - fix IO stuck during checkpoint=disable
- - avoid infinite GC loop
- - fix panic/overflow related to IO alignment feature
- - fix livelock in swap file
- - fix discard command leak
- - disallow dio for atomic_write
-
-----------------------------------------------------------------
-Chao Yu (34):
-      f2fs: introduce {page,io}_is_mergeable() for readability
-      f2fs: fix panic of IO alignment feature
-      f2fs: disallow switching io_bits option during remount
-      f2fs: fix to drop meta/node pages during umount
-      f2fs: fix to avoid tagging SBI_QUOTA_NEED_REPAIR incorrectly
-      f2fs: fix to avoid discard command leak
-      f2fs: support fiemap() for directory inode
-      f2fs: fix to spread f2fs_is_checkpoint_ready()
-      f2fs: fix to detect cp error in f2fs_setxattr()
-      f2fs: fix to handle quota_{on,off} correctly
-      f2fs: disallow direct IO in atomic write
-      f2fs: fix to avoid call kvfree under spinlock
-      f2fs: use wrapped IS_SWAPFILE()
-      f2fs: fix to use more generic EOPNOTSUPP
-      f2fs: use wrapped f2fs_cp_error()
-      f2fs: fix to migrate blocks correctly during defragment
-      f2fs: fix wrong available node count calculation
-      Revert "f2fs: avoid out-of-range memory access"
-      f2fs: fix to avoid data corruption by forbidding SSR overwrite
-      f2fs: support FS_IOC_{GET,SET}FSLABEL
-      f2fs: allocate memory in batch in build_sit_info()
-      f2fs: introduce f2fs_match_name() for cleanup
-      f2fs: optimize case-insensitive lookups
-      f2fs: fix to writeout dirty inode during node flush
-      f2fs: fix wrong error injection path in inc_valid_block_count()
-      f2fs: clean up __bio_alloc()'s parameter
-      f2fs: enhance f2fs_is_checkpoint_ready()'s readability
-      f2fs: add missing documents of reserve_root/resuid/resgid
-      f2fs: fix error path of f2fs_convert_inline_page()
-      f2fs: fix to avoid accessing uninitialized field of inode page in is_alive()
-      f2fs: fix extent corrupotion during directIO in LFS mode
-      f2fs: fix to handle error path correctly in f2fs_map_blocks
-      f2fs: fix to fallback to buffered IO in IO aligned mode
-      f2fs: fix to add missing F2FS_IO_ALIGNED() condition
-
-Daniel Rosenberg (3):
-      fs: Reserve flag for casefolding
-      f2fs: include charset encoding information in the superblock
-      f2fs: Support case-insensitive file name lookups
-
-Goldwyn Rodrigues (1):
-      f2fs: fix inode rwsem regression
-
-Jaegeuk Kim (4):
-      f2fs: fix livelock in swapfile writes
-      f2fs: fix flushing node pages when checkpoint is disabled
-      f2fs: convert inline_data in prior to i_size_write
-      f2fs: avoid infinite GC loop due to stale atomic files
-
-Jia-Ju Bai (1):
-      fs: f2fs: Remove unnecessary checks of SM_I(sbi) in update_general_status()
-
-Lihong Kou (2):
-      f2fs: remove duplicate code in f2fs_file_write_iter
-      f2fs: cleanup the code in build_sit_entries.
-
-Lockywolf (1):
-      f2fs: Add a small clarification to CONFIG_FS_F2FS_FS_SECURITY
-
-Sahitya Tummala (3):
-      f2fs: Fix indefinite loop in f2fs_gc()
-      f2fs: Fix indefinite loop in f2fs_gc()
-      f2fs: add a condition to detect overflow in f2fs_ioc_gc_range()
-
-Surbhi Palande (1):
-      f2fs: check all the data segments against all node ones
-
-YueHaibing (1):
-      f2fs: Fix build error while CONFIG_NLS=m
-
- Documentation/ABI/testing/sysfs-fs-f2fs |   7 ++
- Documentation/filesystems/f2fs.txt      |   8 ++
- fs/f2fs/Kconfig                         |   5 +-
- fs/f2fs/data.c                          | 104 ++++++++++++------
- fs/f2fs/debug.c                         |   4 +-
- fs/f2fs/dir.c                           | 184 ++++++++++++++++++++++++++++++--
- fs/f2fs/f2fs.h                          |  47 ++++++--
- fs/f2fs/file.c                          | 162 ++++++++++++++++++++++------
- fs/f2fs/gc.c                            |  27 ++++-
- fs/f2fs/hash.c                          |  37 ++++++-
- fs/f2fs/inline.c                        |  18 +++-
- fs/f2fs/inode.c                         |  11 +-
- fs/f2fs/namei.c                         |  54 ++++++----
- fs/f2fs/node.c                          |  57 +++++++++-
- fs/f2fs/segment.c                       | 135 ++++++++++++-----------
- fs/f2fs/segment.h                       |  12 ++-
- fs/f2fs/super.c                         | 156 +++++++++++++++++++++++++--
- fs/f2fs/sysfs.c                         |  23 ++++
- fs/f2fs/xattr.c                         |   6 ++
- include/linux/f2fs_fs.h                 |  10 +-
- include/uapi/linux/fs.h                 |   1 +
- tools/include/uapi/linux/fs.h           |   1 +
- 22 files changed, 865 insertions(+), 204 deletions(-)
 
 
 _______________________________________________
