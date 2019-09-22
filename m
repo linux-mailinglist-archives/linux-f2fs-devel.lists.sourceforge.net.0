@@ -2,65 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01231B9FD0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Sep 2019 23:50:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83B10BA3A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Sep 2019 20:41:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iBnH6-0005tQ-K3; Sat, 21 Sep 2019 21:50:40 +0000
+	id 1iC6na-0004C8-6w; Sun, 22 Sep 2019 18:41:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1iBnH5-0005tC-BQ
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Sep 2019 21:50:39 +0000
+ (envelope-from <fontaine.fabrice@gmail.com>) id 1iC6nY-0004Bz-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Sep 2019 18:41:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RGVr6Ie6FJ61+KIkQy65ve0StinipEho78pYZkl53RY=; b=K4Wh1S1YWZqFs5TrnkNfz2N049
- hCWknljxsn7uLgxjLrotNuiCCvfuaaDlVg16LwWYLBd/NqM+MpAf+V1TF2NqhoZUaArcO9kT/MZXr
- KuvWE9Er4m5JhMtYiyQt38Gre0j/TF6ljc6wXDb0F6WFduhhaLibSJ/djQzaJw77s7j4=;
+ bh=xxLcc+A6jg/nsFW0l2PRbSX4vkYQyLt33kCnnXXqicg=; b=JsM5mKeJAZ5ZNsQyargFjtuZko
+ DawSLL6bUrhRC13+FXvhCiGycVWkyO13ZB1ejBr8WJ7jNiNntr9jiwm+QZx7wPOYG2HnTlfIwV3WD
+ 4UOmQ1S8eCfrFK1LhOzlz1fC5mrplABPWHiV2rZCbNAd95gbIBzLxPO1YP64GUIQIx4o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=RGVr6Ie6FJ61+KIkQy65ve0StinipEho78pYZkl53RY=; b=aayXgRk6ZPrKlaSZbDGuHvGhmP
- FeL8k1lttgi1E0ILlAZx7c286WMqq9WLXYqftaTSCLntUx/RK6fi5E2v3EO2QcqHl1MDlxZFlZcRf
- GQhg4NmxKrTSpTDeGAUE3xIFoY9rGWsrUnbw0Na9e7vAzwEoPnVjL4FTVGe0ef7DB6h0=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iBnH4-0024eg-14
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Sep 2019 21:50:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569102625;
- bh=FRICCBxIG2+cPRdX2HnJLSb/E67b62xdt0okJO51rDM=;
- h=From:In-Reply-To:References:Date:To:Cc:From;
- b=cRVf04bjPWLl4HyRtHXj7Xntp0uRsP0voDE5HUkNbon4Cqt1gWiQAXBqn3lUCfAqE
- SkufjRkdXR5Aer1JNvzNuH/tTE8Wz3mTuy0cOgiNDsbJz5qgkggSaXbq7Jy3kTM245
- 3zaFKnSoYheMT0ZQLH/rG1sE02N9AVknEMuPfggU=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20190920200107.GA57911@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20190920200107.GA57911@jaegeuk-macbookpro.roam.corp.google.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20190920200107.GA57911@jaegeuk-macbookpro.roam.corp.google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-5.4
-X-PR-Tracked-Commit-Id: fbbf779989d2ef9a51daaa4e53c0b2ecc8c55c4e
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: fbc246a12aac27f7b25a37f9398bb3bc552cec92
-Message-Id: <156910262496.18589.7479409845792193143.pr-tracker-bot@kernel.org>
-Date: Sat, 21 Sep 2019 21:50:24 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -0.2 (/)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=xxLcc+A6jg/nsFW0l2PRbSX4vkYQyLt33kCnnXXqicg=; b=T
+ FpqO7/tUqvY6KnzAbDNg8Oc+sOpcomI7IQzy/+YEcmVWBdeBibGVZPUMtzxLBoiYJmAEBeMcgHFU4
+ wz4tgFE7A8JtFo0fkqhjLpwrkC1hzDMBQa79m/mnmHaVJU21EbsutBMWWtSmi4Cmy9wF3TVl//vj2
+ RZBYWGzi80WR51F4=;
+Received: from mail-wm1-f67.google.com ([209.85.128.67])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1iC6nW-0030jG-8f
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Sep 2019 18:41:28 +0000
+Received: by mail-wm1-f67.google.com with SMTP id a6so7419012wma.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 22 Sep 2019 11:41:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=xxLcc+A6jg/nsFW0l2PRbSX4vkYQyLt33kCnnXXqicg=;
+ b=RwOVVOp3zzQ6vwaKdxsG4nw5rQwkCxc+NBxttpG/sPWm6et2DoTtO8Qq/ql2kB/WI+
+ mhMWIVgP2PruoN7vy0/YFhVOhMoJaOoUngDneRiP4eht4O3u5RAsjDcmprnwiMtmUCRN
+ iM/kvwkv435DC/I/NqqrMVV3aKJALN2hBjnl9VFxIIRRKYSNGcoU1Zh8ykGNxHPGUvk1
+ eCOZ5XOaDGOYU14YEe+Njcn5Y8hfBasC4R6fUk9/j24vpLVqvHV+lOKZcYpL3wp5veIq
+ EOyFYA5kDcx6u6UX30i251jF/Uy/hfogxQfiC0nmM/y3mkepdiyCVE/UeFHohDuBN+fA
+ hJcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=xxLcc+A6jg/nsFW0l2PRbSX4vkYQyLt33kCnnXXqicg=;
+ b=FNjsIdA7GqadHl16K66ZQROdx4N9yGtld32/bfI5QaKpz0BObYw71tc5XiLxNLHJLY
+ TIAzZyw8PbNqNmaJ8FogNP0F2Ir6eD2Wlc71EvHuo7MGlHzlBiXYsWSwuevnBAxdutHC
+ I6iwRrSu7HOxSijySY7VBHAEn8EkgzwGRNzh6UbJdOuFz4/UYyEmyh8feIOIanqgw1QF
+ g4CjTu2qIyQKMScLaEN2V/mzbgzxS+6LC2wINZ4Irrx2CkSfIUsEiab8K6sQJivl1m8U
+ mDZI0z8TeaO1qP8FcAZl4WF0tob+ZrXYYz7RPewPFokA38YAwhBJfgCIOJWgkkOdk1a2
+ f9BA==
+X-Gm-Message-State: APjAAAVudfFOUWNePiw1FJUYbTNnUR0pCld6/ECChpEwZKXaAKsEQr9C
+ VQexDpNOKHoQrmWeO2aWQyOHmp0+YqI=
+X-Google-Smtp-Source: APXvYqxgtH8l9AIH7V0HfRs7Vo6zicc3VgFE1UUYEmIP2YmFkX4idHIGrzsbbMoQuDNizcD4KODRLg==
+X-Received: by 2002:a1c:4e01:: with SMTP id g1mr10213794wmh.134.1569177679490; 
+ Sun, 22 Sep 2019 11:41:19 -0700 (PDT)
+Received: from kali.home (lfbn-ren-1-605-248.w81-53.abo.wanadoo.fr.
+ [81.53.181.248])
+ by smtp.gmail.com with ESMTPSA id b186sm327009wmd.16.2019.09.22.11.41.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 22 Sep 2019 11:41:18 -0700 (PDT)
+From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 22 Sep 2019 20:41:37 +0200
+Message-Id: <20190922184137.28947-1-fontaine.fabrice@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (fontaine.fabrice[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.67 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: libf2fs_format.la]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -68,10 +97,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iBnH4-0024eg-14
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.4
+X-Headers-End: 1iC6nW-0030jG-8f
+Subject: [f2fs-dev] [PATCH] mkfs/Makefile.am: fix build without blkid
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,26 +110,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
+Cc: Fabrice Fontaine <fontaine.fabrice@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Fri, 20 Sep 2019 13:01:07 -0700:
+Commit d56232bc1640e2a3ffc412faff42cd8e77dbb8dd hardcoded -lblkid in
+libf2fs_format_la_LDFLAGS which breaks the build with --without-blkid
+option so use ${libblkid_LIBS} instead
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.4
+Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+---
+ mkfs/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/fbc246a12aac27f7b25a37f9398bb3bc552cec92
-
-Thank you!
-
+diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
+index cae2f93..83e2389 100644
+--- a/mkfs/Makefile.am
++++ b/mkfs/Makefile.am
+@@ -12,7 +12,7 @@ lib_LTLIBRARIES = libf2fs_format.la
+ libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
+ libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD
+ libf2fs_format_la_CPPFLAGS = -I$(top_srcdir)/include
+-libf2fs_format_la_LDFLAGS = -lblkid -luuid -L$(top_builddir)/lib -lf2fs \
++libf2fs_format_la_LDFLAGS = ${libblkid_LIBS} -luuid -L$(top_builddir)/lib -lf2fs \
+ 	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
+ 
+ install-exec-hook:
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.wiki.kernel.org/userdoc/prtracker
+2.23.0
+
 
 
 _______________________________________________
