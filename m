@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADF1AC288D
+	by mail.lfdr.de (Postfix) with ESMTPS id 76CCCC288C
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 Sep 2019 23:19:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iF355-0000kG-Fo; Mon, 30 Sep 2019 21:19:43 +0000
+	id 1iF355-0007C1-8X; Mon, 30 Sep 2019 21:19:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iF353-0000fa-IJ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Sep 2019 21:19:41 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iF354-0007Bp-7y
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Sep 2019 21:19:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=31PIpmVfWaTPPToNCtDTm2o4dMwGnW0IW4GZ4HYu6eM=; b=b+6QC0hP9x/UiKRto8n60ESnLh
- OQ8HETavBjDiGzDDUb6hiigp+h9SQEt5OJGgfqKy6NTmmkzL3aCM3PwgGISswWMyu8DFrSUBkUTZ3
- H/sbvHCqAX+uLNbSFgJ/I2OYW246nQqhxjv+hcr3uZcCn8K2NAFq+JfPt5aO6nAECk3c=;
+ bh=SKbdy9VU8BoKfHBdwv7MSnu762lkmJrBQGCLC6eFdks=; b=gESD7Am3vkhAlp9/nq895NF3fQ
+ UG2xN4BiI86P9zLJZrZyitkhs5ZE6I5BeFCaVdMpXgDF97642K7AhgULema5Jmv5BuJ9NySjw7J7d
+ c9qgj7Dei7U2/p+uSWz7KewnTYsmd6w4qwuFb4KT/dQW0BlYVqDVZMbY2rTTYGRSYNlQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=31PIpmVfWaTPPToNCtDTm2o4dMwGnW0IW4GZ4HYu6eM=; b=HONgXx5PIdPvpNuBCbhCS4JdYF
- LLG1qvCG61NTRcI7v85ZdXkoQHZ8TZBaaTyTsYi1ufCEwip+WrAIEQ/H3xEFS8RmyOiPfM94WhUBT
- N7SR3O9jiRIE51id+U9MhkNqRaJU8ZoNWxQvRZButZtCSN6ViIeBCRwpf2uYXwogeUTM=;
+ bh=SKbdy9VU8BoKfHBdwv7MSnu762lkmJrBQGCLC6eFdks=; b=GAzuCZST+U2VvdGt53IRA+Oryq
+ 3GcAaDwlYoFcDw8S8VRimoKDbFI73A0YbqfuWI2wgtC8hgDECRNXnb+R9xq5DgDyfRR6LT6kx8wfo
+ 8qa9WscGHFCkFX8oWiBs/1AAlyYOUM/W70+psxvHodctiFNdz4ZdkfeMTuzMjdv8IrUg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iF350-00G4vP-4D
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Sep 2019 21:19:41 +0000
+ id 1iF350-00C1QS-PX
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Sep 2019 21:19:42 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 51AC121D82;
+ by mail.kernel.org (Postfix) with ESMTPSA id A837D21924;
  Mon, 30 Sep 2019 21:19:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1569878367;
- bh=MoLkKFDi6H3PkhE7APy4ytIKLYmhd3II2QQd3Uz9NpY=;
+ bh=/nijVK2X95EdSUBcvPcGNqMcXm+CeLTfUBbQWRKzFtY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ijRStMnLlOcvdbBxDyhecOBD1imTvYa80M4IUOQAfo84g9FL066EBs4d78XmEef90
- CAZzjifxrR4/xXnGdi/QkAYBIZ9nqWpe3EfICLFwGFwugpnq/KE4WT49TC8FkNisps
- Fd8EOa01Tct2SDZaOhnKcYGKh29ajHV2SXKdcS/s=
+ b=rugqRfXLtRKIwDASm1yNdKfcC1tlIOjeF8g3C5wwUkheaXJg3dvI6MIOLQp7vV9Ib
+ wCAOqvknvaftHA4YFkuJQYK0Gekn9S2ifGAEuu+ZDuVB+M5Bw/9NY+qCaRtyQt48VN
+ iAeMIugbBX/DTf5tP2oQ/sH7a2LQHyizYtKavZU0=
 From: Eric Biggers <ebiggers@kernel.org>
 To: fstests@vger.kernel.org
-Date: Mon, 30 Sep 2019 14:15:51 -0700
-Message-Id: <20190930211553.64208-7-ebiggers@kernel.org>
+Date: Mon, 30 Sep 2019 14:15:52 -0700
+Message-Id: <20190930211553.64208-8-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.23.0.444.g18eeb5a265-goog
 In-Reply-To: <20190930211553.64208-1-ebiggers@kernel.org>
 References: <20190930211553.64208-1-ebiggers@kernel.org>
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iF350-00G4vP-4D
-Subject: [f2fs-dev] [PATCH v4 6/8] generic: test that fs-verity is using the
- correct measurement values
+X-Headers-End: 1iF350-00C1QS-PX
+Subject: [f2fs-dev] [PATCH v4 7/8] generic: test using fs-verity and fscrypt
+ simultaneously
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,33 +93,32 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-This test verifies that fs-verity is doing its Merkle tree-based hashing
-correctly, i.e. that it hasn't been broken by a change.
+This primarily verifies correct ordering of the hooks for each feature:
+fscrypt needs to be first.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- tests/generic/903     | 112 ++++++++++++++++++++++++++++++++++++++++++
- tests/generic/903.out |   5 ++
- tests/generic/group   |   1 +
- 3 files changed, 118 insertions(+)
- create mode 100755 tests/generic/903
- create mode 100644 tests/generic/903.out
+ tests/generic/904     | 80 +++++++++++++++++++++++++++++++++++++++++++
+ tests/generic/904.out | 12 +++++++
+ tests/generic/group   |  1 +
+ 3 files changed, 93 insertions(+)
+ create mode 100755 tests/generic/904
+ create mode 100644 tests/generic/904.out
 
-diff --git a/tests/generic/903 b/tests/generic/903
+diff --git a/tests/generic/904 b/tests/generic/904
 new file mode 100755
-index 00000000..55f4a3ba
+index 00000000..61bdae22
 --- /dev/null
-+++ b/tests/generic/903
-@@ -0,0 +1,112 @@
++++ b/tests/generic/904
+@@ -0,0 +1,80 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0
 +# Copyright 2018 Google LLC
 +#
-+# FS QA Test generic/903
++# FS QA Test generic/904
 +#
-+# Test that fs-verity is using the correct measurement values.  This test
-+# verifies that fs-verity is doing its Merkle tree-based hashing correctly,
-+# i.e. that it hasn't been broken by a change.
++# Test using fs-verity and fscrypt simultaneously.  This primarily verifies
++# correct ordering of the hooks for each feature: fscrypt needs to be first.
 +#
 +seq=`basename $0`
 +seqres=$RESULT_DIR/$seq
@@ -140,6 +139,7 @@ index 00000000..55f4a3ba
 +. ./common/rc
 +. ./common/filter
 +. ./common/verity
++. ./common/encrypt
 +
 +# remove previous $seqres.full before test
 +rm -f $seqres.full
@@ -148,101 +148,76 @@ index 00000000..55f4a3ba
 +_supported_fs generic
 +_supported_os Linux
 +_require_scratch_verity
-+if [ $FSV_BLOCK_SIZE != 4096 ]; then
-+	_notrun "4096-byte verity block size not supported on this platform"
-+fi
++_require_scratch_encryption
++_require_command "$KEYCTL_PROG" keyctl
 +
-+_scratch_mkfs_verity &>> $seqres.full
++_scratch_mkfs_encrypted_verity &>> $seqres.full
 +_scratch_mount
-+fsv_orig_file=$SCRATCH_MNT/file
-+fsv_file=$SCRATCH_MNT/file.fsv
 +
-+algs=(sha256 sha512)
++fsv_orig_file=$tmp.file
++edir=$SCRATCH_MNT/edir
++fsv_file=$edir/file.fsv
 +
-+# Try files with 0, 1, and multiple Merkle tree levels.
-+file_sizes=(0 4096 65536 65536 100000000)
++# Set up an encrypted directory.
++_new_session_keyring
++keydesc=$(_generate_encryption_key)
++mkdir $edir
++_set_encpolicy $edir $keydesc
 +
-+# Try both unsalted and salted, and check that empty salt is the same as no salt
-+salts=('' '' '' '--salt=' '--salt=f3c93fa6fb828c0e1587e5714ecf6f56')
++# Create a file within the encrypted directory and enable verity on it.
++# Then check that it has an encryption policy as well.
++head -c 100000 /dev/zero > $fsv_orig_file
++cp $fsv_orig_file $fsv_file
++_fsv_enable $fsv_file
++echo
++$XFS_IO_PROG -r -c "get_encpolicy" $fsv_file | _filter_scratch \
++	| sed 's/Master key descriptor:.*/Master key descriptor: 0000000000000000/'
++echo
 +
-+# The expected file measurements are here rather than in the expected output
-+# file because not all hash algorithms may be available.
-+sha256_vals=(
-+sha256:3d248ca542a24fc62d1c43b916eae5016878e2533c88238480b26128a1f1af95
-+sha256:babc284ee4ffe7f449377fbf6692715b43aec7bc39c094a95878904d34bac97e
-+sha256:011e3f2b1dc89b75d78cddcc2a1b85cd8a64b2883e5f20f277ae4c0617e0404f
-+sha256:011e3f2b1dc89b75d78cddcc2a1b85cd8a64b2883e5f20f277ae4c0617e0404f
-+sha256:9d33cab743468fcbe4edab91a275b30dd543c12dd5e6ce6f2f737f66a1558f06
-+)
-+sha512_vals=(
-+sha512:ccf9e5aea1c2a64efa2f2354a6024b90dffde6bbc017825045dce374474e13d10adb9dadcc6ca8e17a3c075fbd31336e8f266ae6fa93a6c3bed66f9e784e5abf
-+sha512:928922686c4caf32175f5236a7f964e9925d10a74dc6d8344a8bd08b23c228ff5792573987d7895f628f39c4f4ebe39a7367d7aeb16aaa0cd324ac1d53664e61
-+sha512:eab7224ce374a0a4babcb2db25e24836247f38b87806ad9be9e5ba4daac2f5b814fc0cbdfd9f1f8499b3c9a6c1b38fe08974cce49883ab4ccd04462fd2f9507f
-+sha512:eab7224ce374a0a4babcb2db25e24836247f38b87806ad9be9e5ba4daac2f5b814fc0cbdfd9f1f8499b3c9a6c1b38fe08974cce49883ab4ccd04462fd2f9507f
-+sha512:f7083a38644880d25539488313e9e5b41a4d431a0e383945129ad2c36e3c1d0f28928a424641bb1363c12b6e770578102566acea73baf1ce8ee15336f5ba2446
-+)
++# Verify that the file contents are as expected.  This should be going through
++# both the decryption and verity I/O paths.
++cmp $fsv_orig_file $fsv_file && echo "Files matched"
 +
-+test_alg()
-+{
-+	local alg=$1
-+	local -n vals=${alg}_vals
-+	local i
-+	local file_size
-+	local expected actual salt_arg
++# Just in case, try again after a mount cycle to empty the page cache.
++_scratch_cycle_mount
++cmp $fsv_orig_file $fsv_file && echo "Files matched"
 +
-+	_fsv_scratch_begin_subtest "Check for expected measurement values ($alg)"
-+
-+	if ! _fsv_have_hash_algorithm $alg $fsv_file; then
-+		if [ "$alg" = sha256 ]; then
-+			_fail "Something is wrong - sha256 hash should always be available"
-+		fi
-+		return 0
-+	fi
-+
-+	for i in ${!file_sizes[@]}; do
-+		file_size=${file_sizes[$i]}
-+		expected=${vals[$i]}
-+		salt_arg=${salts[$i]}
-+
-+		head -c $file_size /dev/zero > $fsv_orig_file
-+		cp $fsv_orig_file $fsv_file
-+		_fsv_enable --hash-alg=$alg $salt_arg $fsv_file
-+		actual=$(_fsv_measure $fsv_file)
-+		if [ "$actual" != "$expected" ]; then
-+			echo "Mismatch: expected $expected, kernel calculated $actual (file_size=$file_size)"
-+		fi
-+		cmp $fsv_orig_file $fsv_file
-+		rm -f $fsv_file
-+	done
-+}
-+
-+for alg in ${algs[@]}; do
-+	test_alg $alg
-+done
++# Corrupt some bytes as a sanity check that fs-verity is really working.
++# This also verifies that the data on-disk is really encrypted, since otherwise
++# the data being written here would be identical to the old data.
++head -c 1000 /dev/zero | _fsv_scratch_corrupt_bytes $fsv_file 50000
++md5sum $fsv_file |& _filter_scratch
 +
 +# success, all done
 +status=0
 +exit
-diff --git a/tests/generic/903.out b/tests/generic/903.out
+diff --git a/tests/generic/904.out b/tests/generic/904.out
 new file mode 100644
-index 00000000..02508828
+index 00000000..5f4e249a
 --- /dev/null
-+++ b/tests/generic/903.out
-@@ -0,0 +1,5 @@
-+QA output created by 903
++++ b/tests/generic/904.out
+@@ -0,0 +1,12 @@
++QA output created by 904
 +
-+# Check for expected measurement values (sha256)
++Encryption policy for SCRATCH_MNT/edir/file.fsv:
++	Policy version: 0
++	Master key descriptor: 0000000000000000
++	Contents encryption mode: 1 (AES-256-XTS)
++	Filenames encryption mode: 4 (AES-256-CTS)
++	Flags: 0x02
 +
-+# Check for expected measurement values (sha512)
++Files matched
++Files matched
++md5sum: SCRATCH_MNT/edir/file.fsv: Input/output error
 diff --git a/tests/generic/group b/tests/generic/group
-index 22df626f..864bab46 100644
+index 864bab46..c996542a 100644
 --- a/tests/generic/group
 +++ b/tests/generic/group
-@@ -573,3 +573,4 @@
- 900 auto quick verity
+@@ -574,3 +574,4 @@
  901 auto quick verity
  902 auto quick verity
-+903 auto quick verity
+ 903 auto quick verity
++904 auto quick verity encrypt
 -- 
 2.23.0.444.g18eeb5a265-goog
 
