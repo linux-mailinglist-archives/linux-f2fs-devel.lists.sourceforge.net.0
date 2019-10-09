@@ -2,105 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A74BD0C60
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Oct 2019 12:15:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=YUeld1b8wDWHVC5HMvXQdpl0VGA/I78Cxva5g6kxQmU=; b=Awcdd5GI7RclR4rDJIn7jmlvSM
-	kJA9rvgl05eB5ENMYzyHNy3L+lgl5HdaJDhFLeI4ypSwtCujE1n28tBQNq7mUDC+H2l5w8ceiak0v
-	THzlEyCMh4kCz9ZuHjd6bJNAVcxm2vt03H0M91HeBki8+UTA+VSWAjIR85WRjyFlXqm4=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 988CFD18B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Oct 2019 21:25:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iI90M-0006Tl-JA; Wed, 09 Oct 2019 10:15:38 +0000
+	id 1iIHa2-0004pg-Ob; Wed, 09 Oct 2019 19:25:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <3-VGdXQwKAAYn0gtmxgtjgrrmuumrk.ius@flex--huangrandall.bounces.google.com>)
- id 1iI90K-0006TI-Md
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 10:15:36 +0000
+ (envelope-from <arnd@arndb.de>) id 1iIHa0-0004ot-DS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 19:25:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=//5Om/XvJWZ+udEKS9YxOJkf+X7Db3sKLHkQ/lC+RWM=; b=W+1clj9rUF89DJOE4X+Bb8YtGz
- +HF6PhhMP5CZRyOVvhEV9/2fHnrobOCHZhy4l5DHOszAL9KEfx6ov7WDy3t8F9ZH3cHq0aUcKTpuI
- Ybh6mW2iuvN8HEmPciYiag17es3eMt0IRneav3ucE2jlfckIWlnGM5pfOTr9ikofQAWM=;
+ bh=Dxs1u7c2bciEzprx2dHjq2PEf8lekbaefd+HGVmBGbg=; b=AyvmVOI3dzf+NtETPQMhlX5vw1
+ /mi1j9arOju9OH/bhm2Loqnqh6G8lm2Cd3qYbjxCj+mTR0Gtjx7vTdNUfXm42vTLJwtHs3BYtk/UH
+ BWF4PUD82wJY/GXd+qgDAETTdVQuwQlhxS0VIPv2XKluK++nLCZEDOcCABeizkPiedJs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=//5Om/XvJWZ+udEKS9YxOJkf+X7Db3sKLHkQ/lC+RWM=; b=B
- igrFyBn8KMOce8eA5ZvPR+1vmCdqzIgfwQAYVDyGiFaJIQ2NNrd1+ZQbH9HDZsVFW5ooPVxOKodis
- dVD4WxON4JlTPy5//JRDBpfRj7vPQAi26MCT/Bpm6ocmS3uXmqjXckK2Cb3F8mmCxND3XOFcDPYg9
- DtOc9rWjgxT64qpk=;
-Received: from mail-io1-f73.google.com ([209.85.166.73])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Dxs1u7c2bciEzprx2dHjq2PEf8lekbaefd+HGVmBGbg=; b=HFpnyx1vhjxb8Kg+2vgA4gHfKZ
+ Ej2nnw0si9XzeS9PTSTjBT8acAEXk+OeBEV2252/9cQsUnAXPOL8D7fmJYGa2WQu68wpY+2Fko2An
+ PGbHbYUtCZOMxF1l4AU/lOW5tTG1YmrIYCPj4MKiH7YCWO3myZ3/8qieN0+1S9irrQw0=;
+Received: from mout.kundenserver.de ([212.227.126.135])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iI90I-003mv6-K9
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 10:15:36 +0000
-Received: by mail-io1-f73.google.com with SMTP id r13so3744645ioj.22
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 09 Oct 2019 03:15:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:message-id:mime-version:subject:from:to:cc;
- bh=//5Om/XvJWZ+udEKS9YxOJkf+X7Db3sKLHkQ/lC+RWM=;
- b=o54gf+5aWdKfvI+AHUNpNBXeNjtTe200eLPmyr6FlwG3dJE2vLTfRwjsOBV8E1/65K
- IwO6CN5sWE3V73+pnV123sFvgITRCD26mt+DHCXnWKuj5heDgJDIHnjBAv6AL+z9Py3X
- 4OMQvnkpWMPCLzbKKyoxRJLLWMrjZ9UjGJCPMyugBqfTDjS0hQ89G7O+474TB+UAA2NZ
- 3soNbJs2d7npdXHKIhj93Qugh9DEbg7pdjH99OWrgaJY+GGkRDRKfAnWnlZVsmgeMne8
- cIDHvfZPbuyO+MhUyOrCSJLwv6MA1yJZXyy9SiyZUsqUPb3/m/srQcmTAYb1/xoSGuPq
- mytA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
- bh=//5Om/XvJWZ+udEKS9YxOJkf+X7Db3sKLHkQ/lC+RWM=;
- b=d5++ygukDqNGySNU4nyQC17RZafNmsynnsD4Dn2hUtembJAb52W72EXAseCvBcqEcZ
- eHnwgeE8h8QlJha/7gcHAZ7r9e3Hl4xXrzXhX3rSrAJ0qWx2UOTY+JV17VOZ2dEHWetG
- LUEd4Ct1GNPXtOZsa42RObbxsPCtnvhzZG2Xlo6CafdZ1DgDqxWfcNdJA9J6Il5hKlX2
- /q2HSqcrga9+XjFwU8Yq2MlPbsSExSEyxGQG0Mhs+osfN1jOlyJrTgrwSJaYUKj5Fru8
- iDc5TAhonMmBTmP7+6bLkGKpheC3CZ3WJoYNrRFWhhi4dz/ZIdqTnbtuh4gFsz2jnSKN
- 3KBQ==
-X-Gm-Message-State: APjAAAWzbBMZ2+WJuJu1gc4gc5nM5DxEnJDJC9eLTlDsX+RU7pvPQI7E
- CyOysdRjhVvfaMO997JLfx042dNzoB/A85asQ1s=
-X-Google-Smtp-Source: APXvYqxX6Bw7jJd8SeEqXgmezuewciPrpKwID/S4IXEyDLLyKeZpW5yRhwJ1SU2B+wrojPsFSueCrn1hxoyFqMenH/o=
-X-Received: by 2002:a63:495b:: with SMTP id y27mr1959951pgk.438.1570591225171; 
- Tue, 08 Oct 2019 20:20:25 -0700 (PDT)
-Date: Wed,  9 Oct 2019 11:20:19 +0800
-Message-Id: <20191009032019.6954-1-huangrandall@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.23.0.581.g78d2f28ef7-goog
-To: jaegeuk@kernel.org, yuchao0@huawei.com, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-X-Spam-Score: -6.5 (------)
+ id 1iIHZy-00BilP-A9
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 19:25:00 +0000
+Received: from threadripper.lan ([149.172.19.189]) by mrelayeu.kundenserver.de
+ (mreue011 [212.227.15.129]) with ESMTPA (Nemesis) id
+ 1Mbzdn-1hfexe4BV1-00dXse; Wed, 09 Oct 2019 21:11:18 +0200
+From: Arnd Bergmann <arnd@arndb.de>
+To: Al Viro <viro@zeniv.linux.org.uk>
+Date: Wed,  9 Oct 2019 21:10:31 +0200
+Message-Id: <20191009191044.308087-31-arnd@arndb.de>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20191009190853.245077-1-arnd@arndb.de>
+References: <20191009190853.245077-1-arnd@arndb.de>
+MIME-Version: 1.0
+X-Provags-ID: V03:K1:Yt5Qym2EiThPkdPiZuVWsOArs8kXwnMpYv8e8jcFHq6aBlEUl35
+ 2IN5+k0io/Ejnt6hQYqU5PeavuhijMbDbcKRb1ZxQ/6UItKgQqaET9+WeQFtRybNXL/7Evn
+ QrMfvNL1I0AWYpCpt9cUDrfru1T2gMRukpp+x7ARQhmEKsY4PWg2oSrpD+oymHu2Kj+/KUc
+ T+MrdQgXOJZMCEpqnSOug==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:1nBtJNjPBvo=:7mjC6L+65MWbtPrIb9xgMZ
+ XR2uLfxAmtsgMEIv+GmsJ5L8gFv1uGKjkQFvRONgUO3TVzaOJyvSAh/HWQnFdHJOb+yM9vn4W
+ wk2hzPlnxtWQuo1TiLugynrY3D8efoLcoPrL5eSeCsRVc1NgyQ9E1hnDoqho2YMdg0t0Dv6bR
+ PVO+azFlpLuyoeGnSXNSMcXz7ka7EDF6Fjta5Z7F+S4fYVxwEwFWpQg8tU7iBPcOwRcRztMHq
+ QABwaWZExa1uwCZxZJFeXjReNJTruY/9eTgufxHpdvp6Ttf/6fDoXeobYbSKopCk7a76YC3Mc
+ +Vb5/gcrGB9nzd9FVvzSMO7CTDanomaWDBVwDuQAReozG0LpYvVSEzPikOGV5O1dCh2K5LDLk
+ 5+kb5Chpgo0N48POcyzNwG2WrSpLUbFa0cSeSf18XCoIx4q64a13A6Nhwa01jNa0zyCNIs6ga
+ 8TvxUhbCAA9gshLC3niQrl1NMLqnSP+yqtmcF+nBl54QQsS+2u2rUlcIjHQSVu3UMy3QpXUx8
+ 2M345BpVjO54I+fe8H43f4gT0kc7VNbLlhxH3Gu+OmQhcAyFTBRzx5scgllRNC0MyXWBcBYAr
+ urbzBHlxf5505DYuGKUi8zLgfb04TiuJzb7zvvXEcdodWf+hXzuhlXxhD3r5zrPxWpoyDgCBL
+ Ohpot80Xif/fV5lpoHIy5LGXpIv7R92s1VpPUCjCE8ckARnohNXaskimHlsnnpz0ed59XljT+
+ N61rSbfPJ8bVYPpYo0ZyF76hTQ3fuTdtPskCy78P/ll2iljokIxb392PMZ7/BuF4XZnQnjtVS
+ PYE9PJb2WIrJhD+pspnjg6/wy5zDFAARYkMvP1xEUEk8zsbBf7o3GIWtnShbGJ5uofbLshYtw
+ DP1fYpteGDR4McHRuYQw==
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: arndb.de]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.73 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.73 listed in wl.mailspike.net]
- 1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ trust [212.227.126.135 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
-X-Headers-End: 1iI90I-003mv6-K9
-Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid memory leakage in
- f2fs_listxattr
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iIHZy-00BilP-A9
+Subject: [f2fs-dev] [PATCH v6 30/43] fs: compat_ioctl: move FITRIM emulation
+ into file systems
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,65 +93,134 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Randall Huang via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Randall Huang <huangrandall@google.com>
+Cc: linux-nilfs@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+ y2038@lists.linaro.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In f2fs_listxattr, there is no boundary check before
-memcpy e_name to buffer.
-If the e_name_len is corrupted,
-unexpected memory contents may be returned to the buffer.
+Remove the special case for FITRIM, and make file systems
+handle that like all other ioctl commands with their own
+handlers.
 
-Signed-off-by: Randall Huang <huangrandall@google.com>
+Cc: linux-ext4@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>
+Cc: linux-nilfs@vger.kernel.org
+Cc: ocfs2-devel@oss.oracle.com
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 ---
- fs/f2fs/xattr.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ fs/compat_ioctl.c  | 2 --
+ fs/ecryptfs/file.c | 1 +
+ fs/ext4/ioctl.c    | 1 +
+ fs/f2fs/file.c     | 1 +
+ fs/hpfs/dir.c      | 1 +
+ fs/hpfs/file.c     | 1 +
+ fs/nilfs2/ioctl.c  | 1 +
+ fs/ocfs2/ioctl.c   | 1 +
+ 8 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index b32c45621679..acc3663970cd 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -538,8 +538,9 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- {
- 	struct inode *inode = d_inode(dentry);
-+	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
- 	struct f2fs_xattr_entry *entry;
--	void *base_addr;
-+	void *base_addr, *last_base_addr;
- 	int error = 0;
- 	size_t rest = buffer_size;
+diff --git a/fs/compat_ioctl.c b/fs/compat_ioctl.c
+index 1e740f4406d3..b20228c19ccd 100644
+--- a/fs/compat_ioctl.c
++++ b/fs/compat_ioctl.c
+@@ -345,8 +345,6 @@ static int ppp_scompress(struct file *file, unsigned int cmd,
+ static unsigned int ioctl_pointer[] = {
+ /* Little t */
+ COMPATIBLE_IOCTL(TIOCOUTQ)
+-/* 'X' - originally XFS but some now in the VFS */
+-COMPATIBLE_IOCTL(FITRIM)
+ #ifdef CONFIG_BLOCK
+ /* Big S */
+ COMPATIBLE_IOCTL(SCSI_IOCTL_GET_IDLUN)
+diff --git a/fs/ecryptfs/file.c b/fs/ecryptfs/file.c
+index feecb57defa7..5fb45d865ce5 100644
+--- a/fs/ecryptfs/file.c
++++ b/fs/ecryptfs/file.c
+@@ -378,6 +378,7 @@ ecryptfs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 		return rc;
  
-@@ -549,6 +550,8 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 	if (error)
- 		return error;
+ 	switch (cmd) {
++	case FITRIM:
+ 	case FS_IOC32_GETFLAGS:
+ 	case FS_IOC32_SETFLAGS:
+ 	case FS_IOC32_GETVERSION:
+diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
+index 0b7f316fd30f..e8870fff8224 100644
+--- a/fs/ext4/ioctl.c
++++ b/fs/ext4/ioctl.c
+@@ -1360,6 +1360,7 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 	}
+ 	case EXT4_IOC_MOVE_EXT:
+ 	case EXT4_IOC_RESIZE_FS:
++	case FITRIM:
+ 	case EXT4_IOC_PRECACHE_EXTENTS:
+ 	case EXT4_IOC_SET_ENCRYPTION_POLICY:
+ 	case EXT4_IOC_GET_ENCRYPTION_PWSALT:
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 29bc0a542759..57d82f2d2ebd 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3403,6 +3403,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 	case F2FS_IOC_RELEASE_VOLATILE_WRITE:
+ 	case F2FS_IOC_ABORT_VOLATILE_WRITE:
+ 	case F2FS_IOC_SHUTDOWN:
++	case FITRIM:
+ 	case F2FS_IOC_SET_ENCRYPTION_POLICY:
+ 	case F2FS_IOC_GET_ENCRYPTION_PWSALT:
+ 	case F2FS_IOC_GET_ENCRYPTION_POLICY:
+diff --git a/fs/hpfs/dir.c b/fs/hpfs/dir.c
+index d85230c84ef2..f32f15669996 100644
+--- a/fs/hpfs/dir.c
++++ b/fs/hpfs/dir.c
+@@ -325,4 +325,5 @@ const struct file_operations hpfs_dir_ops =
+ 	.release	= hpfs_dir_release,
+ 	.fsync		= hpfs_file_fsync,
+ 	.unlocked_ioctl	= hpfs_ioctl,
++	.compat_ioctl	= compat_ptr_ioctl,
+ };
+diff --git a/fs/hpfs/file.c b/fs/hpfs/file.c
+index 1ecec124e76f..b36abf9cb345 100644
+--- a/fs/hpfs/file.c
++++ b/fs/hpfs/file.c
+@@ -215,6 +215,7 @@ const struct file_operations hpfs_file_ops =
+ 	.fsync		= hpfs_file_fsync,
+ 	.splice_read	= generic_file_splice_read,
+ 	.unlocked_ioctl	= hpfs_ioctl,
++	.compat_ioctl	= compat_ptr_ioctl,
+ };
  
-+	last_base_addr = (void *)base_addr + XATTR_SIZE(xnid, inode);
-+
- 	list_for_each_xattr(entry, base_addr) {
- 		const struct xattr_handler *handler =
- 			f2fs_xattr_handler(entry->e_name_index);
-@@ -559,6 +562,15 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 		if (!handler || (handler->list && !handler->list(dentry)))
- 			continue;
+ const struct inode_operations hpfs_file_iops =
+diff --git a/fs/nilfs2/ioctl.c b/fs/nilfs2/ioctl.c
+index 91b9dac6b2cc..4ba73dbf3e8d 100644
+--- a/fs/nilfs2/ioctl.c
++++ b/fs/nilfs2/ioctl.c
+@@ -1354,6 +1354,7 @@ long nilfs_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ 	case NILFS_IOCTL_SYNC:
+ 	case NILFS_IOCTL_RESIZE:
+ 	case NILFS_IOCTL_SET_ALLOC_RANGE:
++	case FITRIM:
+ 		break;
+ 	default:
+ 		return -ENOIOCTLCMD;
+diff --git a/fs/ocfs2/ioctl.c b/fs/ocfs2/ioctl.c
+index d6f7b299eb23..2d517b5ec6ac 100644
+--- a/fs/ocfs2/ioctl.c
++++ b/fs/ocfs2/ioctl.c
+@@ -985,6 +985,7 @@ long ocfs2_compat_ioctl(struct file *file, unsigned cmd, unsigned long arg)
+ 			return -EFAULT;
  
-+		if ((void *)(entry) + sizeof(__u32) > last_base_addr ||
-+			(void *)XATTR_NEXT_ENTRY(entry) > last_base_addr) {
-+			f2fs_err(F2FS_I_SB(inode), "inode (%lu) has corrupted xattr",
-+						inode->i_ino);
-+			set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
-+			error = -EFSCORRUPTED;
-+			goto cleanup;
-+		}
-+
- 		prefix = xattr_prefix(handler);
- 		prefix_len = strlen(prefix);
- 		size = prefix_len + entry->e_name_len + 1;
+ 		return ocfs2_info_handle(inode, &info, 1);
++	case FITRIM:
+ 	case OCFS2_IOC_MOVE_EXT:
+ 		break;
+ 	default:
 -- 
-2.23.0.581.g78d2f28ef7-goog
+2.20.0
 
 
 
