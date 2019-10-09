@@ -2,86 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 988CFD18B3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Oct 2019 21:25:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD46AD1CF5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Oct 2019 01:42:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iIHa2-0004pg-Ob; Wed, 09 Oct 2019 19:25:02 +0000
+	id 1iILbG-0001XD-6A; Wed, 09 Oct 2019 23:42:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <arnd@arndb.de>) id 1iIHa0-0004ot-DS
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 19:25:00 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iILbE-0001X1-8s
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 23:42:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dxs1u7c2bciEzprx2dHjq2PEf8lekbaefd+HGVmBGbg=; b=AyvmVOI3dzf+NtETPQMhlX5vw1
- /mi1j9arOju9OH/bhm2Loqnqh6G8lm2Cd3qYbjxCj+mTR0Gtjx7vTdNUfXm42vTLJwtHs3BYtk/UH
- BWF4PUD82wJY/GXd+qgDAETTdVQuwQlhxS0VIPv2XKluK++nLCZEDOcCABeizkPiedJs=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Dxs1u7c2bciEzprx2dHjq2PEf8lekbaefd+HGVmBGbg=; b=HFpnyx1vhjxb8Kg+2vgA4gHfKZ
- Ej2nnw0si9XzeS9PTSTjBT8acAEXk+OeBEV2252/9cQsUnAXPOL8D7fmJYGa2WQu68wpY+2Fko2An
- PGbHbYUtCZOMxF1l4AU/lOW5tTG1YmrIYCPj4MKiH7YCWO3myZ3/8qieN0+1S9irrQw0=;
-Received: from mout.kundenserver.de ([212.227.126.135])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=e+r1tkomRSrrYWP62pX40M6Y4v/a0anpen0tFO+T24s=; b=VWvNBzBnBOAWkBFOsf1Dsi7DTH
+ jQ1ogrSB4Iy54C+O5UUXcnXPjbPUwvHphhRWEG2sGjQ/UIgD/0Nt2lUqsGktGk3CpRPY9bBwYz4Lu
+ RPSuMZhX/BObSoTVAzCQ1xqqmpEmN7tEEte5BNxiJGslYwYTeJ89f9womy2NQrNoB/P0=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=e+r1tkomRSrrYWP62pX40M6Y4v/a0anpen0tFO+T24s=; b=A
+ ar5B5IdXnSEbimOfGP7vUVtbvqosFedluGDhDUsW9o6mIJeg54TtVojQ7puxcz00APSBUnqU8Kw5q
+ tliFmmDa2dPXvU2AyR8cSj6DLHH2AsZBDNakh/EWmosSx7biuNokUJB2MuSEDY2fFKCxyztCEaTBV
+ T3SvfmKqj6Aua0/Q=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iIHZy-00BilP-A9
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 19:25:00 +0000
-Received: from threadripper.lan ([149.172.19.189]) by mrelayeu.kundenserver.de
- (mreue011 [212.227.15.129]) with ESMTPA (Nemesis) id
- 1Mbzdn-1hfexe4BV1-00dXse; Wed, 09 Oct 2019 21:11:18 +0200
-From: Arnd Bergmann <arnd@arndb.de>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Date: Wed,  9 Oct 2019 21:10:31 +0200
-Message-Id: <20191009191044.308087-31-arnd@arndb.de>
-X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20191009190853.245077-1-arnd@arndb.de>
-References: <20191009190853.245077-1-arnd@arndb.de>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iILbB-00C2HR-Dp
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Oct 2019 23:42:32 +0000
+Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
+ [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id AB71420659;
+ Wed,  9 Oct 2019 23:42:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1570664538;
+ bh=flJUjeWsBitYEJJv/geZb6UQNxzbDxZ6BcCxvKBO15M=;
+ h=From:To:Cc:Subject:Date:From;
+ b=TYJsb0NiidEvrAgMLvnesz/lyUWJZ9+LFGeHu3uSDEawPCWHL2ybwf1QR5P/CAviS
+ J8mk/Jhz5/1Um6POHJQha57USijRrKmz/MKaYgvEEpiwoBeJa8jXioxyKMjXL3/O7u
+ Thw3TtVD1sQgwT8nKKgUTFLBFMpEytiA8FOICJIY=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Wed,  9 Oct 2019 16:40:38 -0700
+Message-Id: <20191009234038.224587-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.23.0.581.g78d2f28ef7-goog
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:Yt5Qym2EiThPkdPiZuVWsOArs8kXwnMpYv8e8jcFHq6aBlEUl35
- 2IN5+k0io/Ejnt6hQYqU5PeavuhijMbDbcKRb1ZxQ/6UItKgQqaET9+WeQFtRybNXL/7Evn
- QrMfvNL1I0AWYpCpt9cUDrfru1T2gMRukpp+x7ARQhmEKsY4PWg2oSrpD+oymHu2Kj+/KUc
- T+MrdQgXOJZMCEpqnSOug==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:1nBtJNjPBvo=:7mjC6L+65MWbtPrIb9xgMZ
- XR2uLfxAmtsgMEIv+GmsJ5L8gFv1uGKjkQFvRONgUO3TVzaOJyvSAh/HWQnFdHJOb+yM9vn4W
- wk2hzPlnxtWQuo1TiLugynrY3D8efoLcoPrL5eSeCsRVc1NgyQ9E1hnDoqho2YMdg0t0Dv6bR
- PVO+azFlpLuyoeGnSXNSMcXz7ka7EDF6Fjta5Z7F+S4fYVxwEwFWpQg8tU7iBPcOwRcRztMHq
- QABwaWZExa1uwCZxZJFeXjReNJTruY/9eTgufxHpdvp6Ttf/6fDoXeobYbSKopCk7a76YC3Mc
- +Vb5/gcrGB9nzd9FVvzSMO7CTDanomaWDBVwDuQAReozG0LpYvVSEzPikOGV5O1dCh2K5LDLk
- 5+kb5Chpgo0N48POcyzNwG2WrSpLUbFa0cSeSf18XCoIx4q64a13A6Nhwa01jNa0zyCNIs6ga
- 8TvxUhbCAA9gshLC3niQrl1NMLqnSP+yqtmcF+nBl54QQsS+2u2rUlcIjHQSVu3UMy3QpXUx8
- 2M345BpVjO54I+fe8H43f4gT0kc7VNbLlhxH3Gu+OmQhcAyFTBRzx5scgllRNC0MyXWBcBYAr
- urbzBHlxf5505DYuGKUi8zLgfb04TiuJzb7zvvXEcdodWf+hXzuhlXxhD3r5zrPxWpoyDgCBL
- Ohpot80Xif/fV5lpoHIy5LGXpIv7R92s1VpPUCjCE8ckARnohNXaskimHlsnnpz0ed59XljT+
- N61rSbfPJ8bVYPpYo0ZyF76hTQ3fuTdtPskCy78P/ll2iljokIxb392PMZ7/BuF4XZnQnjtVS
- PYE9PJb2WIrJhD+pspnjg6/wy5zDFAARYkMvP1xEUEk8zsbBf7o3GIWtnShbGJ5uofbLshYtw
- DP1fYpteGDR4McHRuYQw==
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: arndb.de]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [212.227.126.135 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iIHZy-00BilP-A9
-Subject: [f2fs-dev] [PATCH v6 30/43] fs: compat_ioctl: move FITRIM emulation
- into file systems
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iILbB-00C2HR-Dp
+Subject: [f2fs-dev] [PATCH] fscrypt: remove struct fscrypt_ctx
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,134 +81,361 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-nilfs@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
- y2038@lists.linaro.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- ocfs2-devel@oss.oracle.com
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ "Theodore Y . Ts'o" <tytso@mit.edu>, Chandan Rajendra <chandan@linux.ibm.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Remove the special case for FITRIM, and make file systems
-handle that like all other ioctl commands with their own
-handlers.
+From: Eric Biggers <ebiggers@google.com>
 
-Cc: linux-ext4@vger.kernel.org
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Cc: Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>
-Cc: linux-nilfs@vger.kernel.org
-Cc: ocfs2-devel@oss.oracle.com
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+Now that ext4 and f2fs implement their own post-read workflow that
+supports both fscrypt and fsverity, the fscrypt-only workflow based
+around struct fscrypt_ctx is no longer used.  So remove the unused code.
+
+This is based on a patch from Chandan Rajendra's "Consolidate FS read
+I/O callbacks code" patchset, but rebased onto the latest kernel, folded
+__fscrypt_decrypt_bio() into fscrypt_decrypt_bio(), cleaned up
+fscrypt_initialize(), and updated the commit message.
+
+Originally-from: Chandan Rajendra <chandan@linux.ibm.com>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/compat_ioctl.c  | 2 --
- fs/ecryptfs/file.c | 1 +
- fs/ext4/ioctl.c    | 1 +
- fs/f2fs/file.c     | 1 +
- fs/hpfs/dir.c      | 1 +
- fs/hpfs/file.c     | 1 +
- fs/nilfs2/ioctl.c  | 1 +
- fs/ocfs2/ioctl.c   | 1 +
- 8 files changed, 7 insertions(+), 2 deletions(-)
+ fs/crypto/bio.c             |  29 +---------
+ fs/crypto/crypto.c          | 110 +++---------------------------------
+ fs/crypto/fscrypt_private.h |   2 -
+ include/linux/fscrypt.h     |  32 -----------
+ 4 files changed, 10 insertions(+), 163 deletions(-)
 
-diff --git a/fs/compat_ioctl.c b/fs/compat_ioctl.c
-index 1e740f4406d3..b20228c19ccd 100644
---- a/fs/compat_ioctl.c
-+++ b/fs/compat_ioctl.c
-@@ -345,8 +345,6 @@ static int ppp_scompress(struct file *file, unsigned int cmd,
- static unsigned int ioctl_pointer[] = {
- /* Little t */
- COMPATIBLE_IOCTL(TIOCOUTQ)
--/* 'X' - originally XFS but some now in the VFS */
--COMPATIBLE_IOCTL(FITRIM)
- #ifdef CONFIG_BLOCK
- /* Big S */
- COMPATIBLE_IOCTL(SCSI_IOCTL_GET_IDLUN)
-diff --git a/fs/ecryptfs/file.c b/fs/ecryptfs/file.c
-index feecb57defa7..5fb45d865ce5 100644
---- a/fs/ecryptfs/file.c
-+++ b/fs/ecryptfs/file.c
-@@ -378,6 +378,7 @@ ecryptfs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 		return rc;
+diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
+index 82da2510721f6..1f4b8a2770606 100644
+--- a/fs/crypto/bio.c
++++ b/fs/crypto/bio.c
+@@ -26,7 +26,7 @@
+ #include <linux/namei.h>
+ #include "fscrypt_private.h"
  
- 	switch (cmd) {
-+	case FITRIM:
- 	case FS_IOC32_GETFLAGS:
- 	case FS_IOC32_SETFLAGS:
- 	case FS_IOC32_GETVERSION:
-diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
-index 0b7f316fd30f..e8870fff8224 100644
---- a/fs/ext4/ioctl.c
-+++ b/fs/ext4/ioctl.c
-@@ -1360,6 +1360,7 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+-static void __fscrypt_decrypt_bio(struct bio *bio, bool done)
++void fscrypt_decrypt_bio(struct bio *bio)
+ {
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
+@@ -37,37 +37,10 @@ static void __fscrypt_decrypt_bio(struct bio *bio, bool done)
+ 							   bv->bv_offset);
+ 		if (ret)
+ 			SetPageError(page);
+-		else if (done)
+-			SetPageUptodate(page);
+-		if (done)
+-			unlock_page(page);
  	}
- 	case EXT4_IOC_MOVE_EXT:
- 	case EXT4_IOC_RESIZE_FS:
-+	case FITRIM:
- 	case EXT4_IOC_PRECACHE_EXTENTS:
- 	case EXT4_IOC_SET_ENCRYPTION_POLICY:
- 	case EXT4_IOC_GET_ENCRYPTION_PWSALT:
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 29bc0a542759..57d82f2d2ebd 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3403,6 +3403,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case F2FS_IOC_RELEASE_VOLATILE_WRITE:
- 	case F2FS_IOC_ABORT_VOLATILE_WRITE:
- 	case F2FS_IOC_SHUTDOWN:
-+	case FITRIM:
- 	case F2FS_IOC_SET_ENCRYPTION_POLICY:
- 	case F2FS_IOC_GET_ENCRYPTION_PWSALT:
- 	case F2FS_IOC_GET_ENCRYPTION_POLICY:
-diff --git a/fs/hpfs/dir.c b/fs/hpfs/dir.c
-index d85230c84ef2..f32f15669996 100644
---- a/fs/hpfs/dir.c
-+++ b/fs/hpfs/dir.c
-@@ -325,4 +325,5 @@ const struct file_operations hpfs_dir_ops =
- 	.release	= hpfs_dir_release,
- 	.fsync		= hpfs_file_fsync,
- 	.unlocked_ioctl	= hpfs_ioctl,
-+	.compat_ioctl	= compat_ptr_ioctl,
- };
-diff --git a/fs/hpfs/file.c b/fs/hpfs/file.c
-index 1ecec124e76f..b36abf9cb345 100644
---- a/fs/hpfs/file.c
-+++ b/fs/hpfs/file.c
-@@ -215,6 +215,7 @@ const struct file_operations hpfs_file_ops =
- 	.fsync		= hpfs_file_fsync,
- 	.splice_read	= generic_file_splice_read,
- 	.unlocked_ioctl	= hpfs_ioctl,
-+	.compat_ioctl	= compat_ptr_ioctl,
+ }
+-
+-void fscrypt_decrypt_bio(struct bio *bio)
+-{
+-	__fscrypt_decrypt_bio(bio, false);
+-}
+ EXPORT_SYMBOL(fscrypt_decrypt_bio);
+ 
+-static void completion_pages(struct work_struct *work)
+-{
+-	struct fscrypt_ctx *ctx = container_of(work, struct fscrypt_ctx, work);
+-	struct bio *bio = ctx->bio;
+-
+-	__fscrypt_decrypt_bio(bio, true);
+-	fscrypt_release_ctx(ctx);
+-	bio_put(bio);
+-}
+-
+-void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx, struct bio *bio)
+-{
+-	INIT_WORK(&ctx->work, completion_pages);
+-	ctx->bio = bio;
+-	fscrypt_enqueue_decrypt_work(&ctx->work);
+-}
+-EXPORT_SYMBOL(fscrypt_enqueue_decrypt_bio);
+-
+ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 				sector_t pblk, unsigned int len)
+ {
+diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
+index 6bc3e4f1e657e..ced8ad9f2d019 100644
+--- a/fs/crypto/crypto.c
++++ b/fs/crypto/crypto.c
+@@ -31,24 +31,16 @@
+ #include "fscrypt_private.h"
+ 
+ static unsigned int num_prealloc_crypto_pages = 32;
+-static unsigned int num_prealloc_crypto_ctxs = 128;
+ 
+ module_param(num_prealloc_crypto_pages, uint, 0444);
+ MODULE_PARM_DESC(num_prealloc_crypto_pages,
+ 		"Number of crypto pages to preallocate");
+-module_param(num_prealloc_crypto_ctxs, uint, 0444);
+-MODULE_PARM_DESC(num_prealloc_crypto_ctxs,
+-		"Number of crypto contexts to preallocate");
+ 
+ static mempool_t *fscrypt_bounce_page_pool = NULL;
+ 
+-static LIST_HEAD(fscrypt_free_ctxs);
+-static DEFINE_SPINLOCK(fscrypt_ctx_lock);
+-
+ static struct workqueue_struct *fscrypt_read_workqueue;
+ static DEFINE_MUTEX(fscrypt_init_mutex);
+ 
+-static struct kmem_cache *fscrypt_ctx_cachep;
+ struct kmem_cache *fscrypt_info_cachep;
+ 
+ void fscrypt_enqueue_decrypt_work(struct work_struct *work)
+@@ -57,62 +49,6 @@ void fscrypt_enqueue_decrypt_work(struct work_struct *work)
+ }
+ EXPORT_SYMBOL(fscrypt_enqueue_decrypt_work);
+ 
+-/**
+- * fscrypt_release_ctx() - Release a decryption context
+- * @ctx: The decryption context to release.
+- *
+- * If the decryption context was allocated from the pre-allocated pool, return
+- * it to that pool.  Else, free it.
+- */
+-void fscrypt_release_ctx(struct fscrypt_ctx *ctx)
+-{
+-	unsigned long flags;
+-
+-	if (ctx->flags & FS_CTX_REQUIRES_FREE_ENCRYPT_FL) {
+-		kmem_cache_free(fscrypt_ctx_cachep, ctx);
+-	} else {
+-		spin_lock_irqsave(&fscrypt_ctx_lock, flags);
+-		list_add(&ctx->free_list, &fscrypt_free_ctxs);
+-		spin_unlock_irqrestore(&fscrypt_ctx_lock, flags);
+-	}
+-}
+-EXPORT_SYMBOL(fscrypt_release_ctx);
+-
+-/**
+- * fscrypt_get_ctx() - Get a decryption context
+- * @gfp_flags:   The gfp flag for memory allocation
+- *
+- * Allocate and initialize a decryption context.
+- *
+- * Return: A new decryption context on success; an ERR_PTR() otherwise.
+- */
+-struct fscrypt_ctx *fscrypt_get_ctx(gfp_t gfp_flags)
+-{
+-	struct fscrypt_ctx *ctx;
+-	unsigned long flags;
+-
+-	/*
+-	 * First try getting a ctx from the free list so that we don't have to
+-	 * call into the slab allocator.
+-	 */
+-	spin_lock_irqsave(&fscrypt_ctx_lock, flags);
+-	ctx = list_first_entry_or_null(&fscrypt_free_ctxs,
+-					struct fscrypt_ctx, free_list);
+-	if (ctx)
+-		list_del(&ctx->free_list);
+-	spin_unlock_irqrestore(&fscrypt_ctx_lock, flags);
+-	if (!ctx) {
+-		ctx = kmem_cache_zalloc(fscrypt_ctx_cachep, gfp_flags);
+-		if (!ctx)
+-			return ERR_PTR(-ENOMEM);
+-		ctx->flags |= FS_CTX_REQUIRES_FREE_ENCRYPT_FL;
+-	} else {
+-		ctx->flags &= ~FS_CTX_REQUIRES_FREE_ENCRYPT_FL;
+-	}
+-	return ctx;
+-}
+-EXPORT_SYMBOL(fscrypt_get_ctx);
+-
+ struct page *fscrypt_alloc_bounce_page(gfp_t gfp_flags)
+ {
+ 	return mempool_alloc(fscrypt_bounce_page_pool, gfp_flags);
+@@ -392,17 +328,6 @@ const struct dentry_operations fscrypt_d_ops = {
+ 	.d_revalidate = fscrypt_d_revalidate,
  };
  
- const struct inode_operations hpfs_file_iops =
-diff --git a/fs/nilfs2/ioctl.c b/fs/nilfs2/ioctl.c
-index 91b9dac6b2cc..4ba73dbf3e8d 100644
---- a/fs/nilfs2/ioctl.c
-+++ b/fs/nilfs2/ioctl.c
-@@ -1354,6 +1354,7 @@ long nilfs_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 	case NILFS_IOCTL_SYNC:
- 	case NILFS_IOCTL_RESIZE:
- 	case NILFS_IOCTL_SET_ALLOC_RANGE:
-+	case FITRIM:
- 		break;
- 	default:
- 		return -ENOIOCTLCMD;
-diff --git a/fs/ocfs2/ioctl.c b/fs/ocfs2/ioctl.c
-index d6f7b299eb23..2d517b5ec6ac 100644
---- a/fs/ocfs2/ioctl.c
-+++ b/fs/ocfs2/ioctl.c
-@@ -985,6 +985,7 @@ long ocfs2_compat_ioctl(struct file *file, unsigned cmd, unsigned long arg)
- 			return -EFAULT;
+-static void fscrypt_destroy(void)
+-{
+-	struct fscrypt_ctx *pos, *n;
+-
+-	list_for_each_entry_safe(pos, n, &fscrypt_free_ctxs, free_list)
+-		kmem_cache_free(fscrypt_ctx_cachep, pos);
+-	INIT_LIST_HEAD(&fscrypt_free_ctxs);
+-	mempool_destroy(fscrypt_bounce_page_pool);
+-	fscrypt_bounce_page_pool = NULL;
+-}
+-
+ /**
+  * fscrypt_initialize() - allocate major buffers for fs encryption.
+  * @cop_flags:  fscrypt operations flags
+@@ -410,11 +335,11 @@ static void fscrypt_destroy(void)
+  * We only call this when we start accessing encrypted files, since it
+  * results in memory getting allocated that wouldn't otherwise be used.
+  *
+- * Return: Zero on success, non-zero otherwise.
++ * Return: 0 on success; -errno on failure
+  */
+ int fscrypt_initialize(unsigned int cop_flags)
+ {
+-	int i, res = -ENOMEM;
++	int err = 0;
  
- 		return ocfs2_info_handle(inode, &info, 1);
-+	case FITRIM:
- 	case OCFS2_IOC_MOVE_EXT:
- 		break;
- 	default:
+ 	/* No need to allocate a bounce page pool if this FS won't use it. */
+ 	if (cop_flags & FS_CFLG_OWN_PAGES)
+@@ -422,29 +347,18 @@ int fscrypt_initialize(unsigned int cop_flags)
+ 
+ 	mutex_lock(&fscrypt_init_mutex);
+ 	if (fscrypt_bounce_page_pool)
+-		goto already_initialized;
+-
+-	for (i = 0; i < num_prealloc_crypto_ctxs; i++) {
+-		struct fscrypt_ctx *ctx;
+-
+-		ctx = kmem_cache_zalloc(fscrypt_ctx_cachep, GFP_NOFS);
+-		if (!ctx)
+-			goto fail;
+-		list_add(&ctx->free_list, &fscrypt_free_ctxs);
+-	}
++		goto out_unlock;
+ 
++	err = -ENOMEM;
+ 	fscrypt_bounce_page_pool =
+ 		mempool_create_page_pool(num_prealloc_crypto_pages, 0);
+ 	if (!fscrypt_bounce_page_pool)
+-		goto fail;
++		goto out_unlock;
+ 
+-already_initialized:
+-	mutex_unlock(&fscrypt_init_mutex);
+-	return 0;
+-fail:
+-	fscrypt_destroy();
++	err = 0;
++out_unlock:
+ 	mutex_unlock(&fscrypt_init_mutex);
+-	return res;
++	return err;
+ }
+ 
+ void fscrypt_msg(const struct inode *inode, const char *level,
+@@ -490,13 +404,9 @@ static int __init fscrypt_init(void)
+ 	if (!fscrypt_read_workqueue)
+ 		goto fail;
+ 
+-	fscrypt_ctx_cachep = KMEM_CACHE(fscrypt_ctx, SLAB_RECLAIM_ACCOUNT);
+-	if (!fscrypt_ctx_cachep)
+-		goto fail_free_queue;
+-
+ 	fscrypt_info_cachep = KMEM_CACHE(fscrypt_info, SLAB_RECLAIM_ACCOUNT);
+ 	if (!fscrypt_info_cachep)
+-		goto fail_free_ctx;
++		goto fail_free_queue;
+ 
+ 	err = fscrypt_init_keyring();
+ 	if (err)
+@@ -506,8 +416,6 @@ static int __init fscrypt_init(void)
+ 
+ fail_free_info:
+ 	kmem_cache_destroy(fscrypt_info_cachep);
+-fail_free_ctx:
+-	kmem_cache_destroy(fscrypt_ctx_cachep);
+ fail_free_queue:
+ 	destroy_workqueue(fscrypt_read_workqueue);
+ fail:
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index 76c64297ce187..dacf8fcbac3be 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -203,8 +203,6 @@ typedef enum {
+ 	FS_ENCRYPT,
+ } fscrypt_direction_t;
+ 
+-#define FS_CTX_REQUIRES_FREE_ENCRYPT_FL		0x00000001
+-
+ static inline bool fscrypt_valid_enc_modes(u32 contents_mode,
+ 					   u32 filenames_mode)
+ {
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index f622f7460ed8c..04f5ed6284454 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -20,7 +20,6 @@
+ 
+ #define FS_CRYPTO_BLOCK_SIZE		16
+ 
+-struct fscrypt_ctx;
+ struct fscrypt_info;
+ 
+ struct fscrypt_str {
+@@ -64,18 +63,6 @@ struct fscrypt_operations {
+ 	unsigned int max_namelen;
+ };
+ 
+-/* Decryption work */
+-struct fscrypt_ctx {
+-	union {
+-		struct {
+-			struct bio *bio;
+-			struct work_struct work;
+-		};
+-		struct list_head free_list;	/* Free list */
+-	};
+-	u8 flags;				/* Flags */
+-};
+-
+ static inline bool fscrypt_has_encryption_key(const struct inode *inode)
+ {
+ 	/* pairs with cmpxchg_release() in fscrypt_get_encryption_info() */
+@@ -102,8 +89,6 @@ static inline void fscrypt_handle_d_move(struct dentry *dentry)
+ 
+ /* crypto.c */
+ extern void fscrypt_enqueue_decrypt_work(struct work_struct *);
+-extern struct fscrypt_ctx *fscrypt_get_ctx(gfp_t);
+-extern void fscrypt_release_ctx(struct fscrypt_ctx *);
+ 
+ extern struct page *fscrypt_encrypt_pagecache_blocks(struct page *page,
+ 						     unsigned int len,
+@@ -244,8 +229,6 @@ static inline bool fscrypt_match_name(const struct fscrypt_name *fname,
+ 
+ /* bio.c */
+ extern void fscrypt_decrypt_bio(struct bio *);
+-extern void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx,
+-					struct bio *bio);
+ extern int fscrypt_zeroout_range(const struct inode *, pgoff_t, sector_t,
+ 				 unsigned int);
+ 
+@@ -295,16 +278,6 @@ static inline void fscrypt_enqueue_decrypt_work(struct work_struct *work)
+ {
+ }
+ 
+-static inline struct fscrypt_ctx *fscrypt_get_ctx(gfp_t gfp_flags)
+-{
+-	return ERR_PTR(-EOPNOTSUPP);
+-}
+-
+-static inline void fscrypt_release_ctx(struct fscrypt_ctx *ctx)
+-{
+-	return;
+-}
+-
+ static inline struct page *fscrypt_encrypt_pagecache_blocks(struct page *page,
+ 							    unsigned int len,
+ 							    unsigned int offs,
+@@ -484,11 +457,6 @@ static inline void fscrypt_decrypt_bio(struct bio *bio)
+ {
+ }
+ 
+-static inline void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx,
+-					       struct bio *bio)
+-{
+-}
+-
+ static inline int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+ 					sector_t pblk, unsigned int len)
+ {
 -- 
-2.20.0
+2.23.0.581.g78d2f28ef7-goog
 
 
 
