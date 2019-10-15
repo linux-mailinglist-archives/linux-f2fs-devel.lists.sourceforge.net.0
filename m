@@ -2,67 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5835D72A2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2019 11:55:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D76FD72D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2019 12:10:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iKJYO-0003fQ-4X; Tue, 15 Oct 2019 09:55:44 +0000
+	id 1iKJmR-0003s9-JY; Tue, 15 Oct 2019 10:10:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iKJYM-0003f1-Lt
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 09:55:42 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iKJmP-0003s1-UL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 10:10:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9EINJMDZVIO+4/TeT44QkSsaJ3SbvfPZiHmKw0UMZ40=; b=PneP+Eo29LgeQmCpulIS15XYQb
- s8ehdLuTrsNvmuzW+tViVt9cTEtLG1/ey0VkHr5Pjjt376QirgpLoC9fS4n+qPDiKY6ZtIb/pbhMT
- EAExP51KKsi6oWM8q8zx4kxWgYcwudRLFee524YLkcN2pzXYgiRsVLG0Hbu4ALP8mCKE=;
+ bh=gph7sd5Sj2I6Iwm2k/7sSSGJnFgPZVXP/20QF+8emgo=; b=EksDoQnW3V6FIubTTVoow3Qns8
+ zhkWpq4UINNqKj8rIaWaNxnyjlL/G5W0t3MT1gwfItLOLMNfHLPelZNubAOaibPcujVRPjfnvLY6Y
+ RTBwii9ItOqw0rZ8z9j1ghi0JEPXnRor4WO1tMWQbWDyXeJjfYPh8zHRWWisAWiUPui8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9EINJMDZVIO+4/TeT44QkSsaJ3SbvfPZiHmKw0UMZ40=; b=XYDcH9cCmr6VqJfCZWCD+tzpD9
- oYnU7ZjchJA2272Fv0dsw+dqWFdLm8fGy5tQlHyKeaKvvvHyjTGkkZqM53VI6DYtx44ttSYxran3c
- XD76QwVmXezY29LctsJWmNeUZyupJIbGq5aj5jy9z2z7zFOKvBP5dy6TxbcpZoej7Luw=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=gph7sd5Sj2I6Iwm2k/7sSSGJnFgPZVXP/20QF+8emgo=; b=k
+ uV/UzwWnyqHRLEKMKAFarOsRnGhqwLhC4gdrvUcQ7DL+7i8ocZLJDrwey9BH5vCI0xO69R43Tw+f1
+ rBB7SffADLkuXSSewa3aG3lX90nWzeMXLNY8/IS0WwpZohCdgRpaxTNZ4XtFSUzHBzUBAGEOWWNOO
+ /giJh4VJ+fVDWB9A=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iKJYK-001wRn-GN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 09:55:42 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 1AA6D4119A4F3074B5BC;
- Tue, 15 Oct 2019 17:55:32 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 15 Oct
- 2019 17:55:29 +0800
-To: Eryu Guan <guaneryu@gmail.com>
-References: <20190927100742.9266-1-yuchao0@huawei.com>
- <20191002110200.GA2622@desktop>
+ id 1iKJmM-009yAB-Bd
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 10:10:13 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 59D5769221E3251C0F2B;
+ Tue, 15 Oct 2019 18:10:03 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.439.0; Tue, 15 Oct 2019 18:09:57 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <e984d031-cc67-e8db-51f1-64f534622ad0@huawei.com>
-Date: Tue, 15 Oct 2019 17:55:29 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <guaneryu@gmail.com>
+Date: Tue, 15 Oct 2019 18:09:37 +0800
+Message-ID: <20191015100938.123519-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20191002110200.GA2622@desktop>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iKJYK-001wRn-GN
-Subject: Re: [f2fs-dev] [PATCH] common/rc: generalize _get_filesize()
+X-Headers-End: 1iKJmM-009yAB-Bd
+Subject: [f2fs-dev] [PATCH v2 1/2] common/defrag: support f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,112 +74,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/10/2 19:02, Eryu Guan wrote:
-> On Fri, Sep 27, 2019 at 06:07:42PM +0800, Chao Yu wrote:
->> There are some testcases use below command to get file size, generalize
->> it as global function _get_filesize()
->>
->> ls -l $1 | $AWK_PROG '{print $5}'
->>
->> - adjust common/defrag, generic/275 and generic/315 to use it
->> - remove unused _filesize in generic/013
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  common/defrag     | 2 +-
->>  common/rc         | 5 +++++
->>  tests/generic/013 | 5 -----
->>  tests/generic/275 | 2 +-
->>  tests/generic/315 | 2 +-
->>  5 files changed, 8 insertions(+), 8 deletions(-)
->>
->> diff --git a/common/defrag b/common/defrag
->> index 9866d3da..50596f70 100644
->> --- a/common/defrag
->> +++ b/common/defrag
->> @@ -145,7 +145,7 @@ _defrag()
->>  	STAT_BEFORE=`stat -c "a: %x m: %y c: %z" $1`
->>  
->>  	if [ $FSTYP == "f2fs" ]; then
->> -		_filesize=`ls -l $1 | $AWK_PROG '{print $5}'`
->> +		_filesize=`_get_filesize $1`
->>  		$DEFRAG_PROG 0 $_filesize $1 >> $seqres.full 2>&1
->>  	else
->>  		$DEFRAG_PROG -v $1 >> $seqres.full 2>&1
->> diff --git a/common/rc b/common/rc
->> index 66c7fd4d..69735ae6 100644
->> --- a/common/rc
->> +++ b/common/rc
->> @@ -165,6 +165,11 @@ if [ ! -z "$REPORT_LIST" ]; then
->>  	_assert_report_list
->>  fi
->>  
->> +_get_filesize()
->> +{
->> +    echo `ls -l $1 | $AWK_PROG '{print $5}'`
-> 
-> Ah, you could update _get_filesize to use "stat -c %s" version then.
+F2FS supports defragment based on file granularity, adjust test suit
+to support f2fs.
 
-Copied. :)
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v2:
+- use local variable in function
+ common/config |  2 ++
+ common/defrag | 11 ++++++++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
 
-Thanks,
+diff --git a/common/config b/common/config
+index a0d58bde..22592cec 100644
+--- a/common/config
++++ b/common/config
+@@ -176,6 +176,7 @@ export XFS_COPY_PROG="$(type -P xfs_copy)"
+ export FSTRIM_PROG="$(type -P fstrim)"
+ export DUMPE2FS_PROG="$(type -P dumpe2fs)"
+ export RESIZE2FS_PROG="$(type -P resize2fs)"
++export F2FS_IO_PROG="$(type -P f2fs_io)"
+ export FIO_PROG="$(type -P fio)"
+ export FILEFRAG_PROG="$(type -P filefrag)"
+ export E4DEFRAG_PROG="$(type -P e4defrag)"
+@@ -242,6 +243,7 @@ case "$HOSTOS" in
+ 	export MKFS_BTRFS_PROG=$(set_mkfs_prog_path_with_opts btrfs)
+ 	export MKFS_F2FS_PROG=$(set_mkfs_prog_path_with_opts f2fs)
+ 	export DUMP_F2FS_PROG=$(type -P dump.f2fs)
++	export F2FS_IO_PROG=$(type -P f2fs_io)
+ 	export BTRFS_UTIL_PROG=$(type -P btrfs)
+ 	export BTRFS_SHOW_SUPER_PROG=$(type -P btrfs-show-super)
+ 	export BTRFS_CONVERT_PROG=$(type -P btrfs-convert)
+diff --git a/common/defrag b/common/defrag
+index 2bd739c0..1381a4dd 100644
+--- a/common/defrag
++++ b/common/defrag
+@@ -27,6 +27,9 @@ _require_defrag()
+ 	rm -f $testfile $donorfile 2>&1 > /dev/null
+ 	DEFRAG_PROG="$E4DEFRAG_PROG"
+ 	;;
++    f2fs)
++	DEFRAG_PROG="$F2FS_IO_PROG defrag_file"
++	;;
+     btrfs)
+ 	DEFRAG_PROG="$BTRFS_UTIL_PROG filesystem defragment"
+ 	;;
+@@ -140,7 +143,13 @@ _defrag()
+ 
+ 	[ ! -z $csum ] && CSUM_BEFORE=`md5sum $1`
+ 	STAT_BEFORE=`stat -c "a: %x m: %y c: %z" $1`
+-	$DEFRAG_PROG -v $1 >> $seqres.full 2>&1
++
++	if [ $FSTYP == "f2fs" ]; then
++		local filesize=`ls -l $1 | $AWK_PROG '{print $5}'`
++		$DEFRAG_PROG 0 $filesize $1 >> $seqres.full 2>&1
++	else
++		$DEFRAG_PROG -v $1 >> $seqres.full 2>&1
++	fi
+ 
+ 	_scratch_cycle_mount
+ 	STAT_AFTER=`stat -c "a: %x m: %y c: %z" $1`
+-- 
+2.18.0.rc1
 
-> 
-> Thanks,
-> Eryu
-> 
->> +}
->> +
->>  _mount()
->>  {
->>      $MOUNT_PROG `_mount_ops_filter $*`
->> diff --git a/tests/generic/013 b/tests/generic/013
->> index 9e533ee8..bc596102 100755
->> --- a/tests/generic/013
->> +++ b/tests/generic/013
->> @@ -24,11 +24,6 @@ _cleanup()
->>      rm -rf $TEST_DIR/fsstress.$$.*
->>  }
->>  
->> -_filesize()
->> -{
->> -    ls -l $1 | $AWK_PROG '{print "    filesize = " $5}'
->> -}
->> -
->>  # get standard environment, filters and checks
->>  . ./common/rc
->>  . ./common/filter
->> diff --git a/tests/generic/275 b/tests/generic/275
->> index a934c19c..adc82856 100755
->> --- a/tests/generic/275
->> +++ b/tests/generic/275
->> @@ -73,7 +73,7 @@ echo "Bytes written until ENOSPC:" >>$seqres.full
->>  du $SCRATCH_MNT/tmp1 >>$seqres.full
->>  
->>  # And at least some of it should succeed.
->> -_filesize=`ls -l $SCRATCH_MNT/tmp1 | awk '{print $5}'`
->> +_filesize=`_get_filesize $SCRATCH_MNT/tmp1`
->>  [ $_filesize -lt $((128 * 1024)) ] && \
->>  	_fail "Partial write until enospc failed; wrote $_filesize bytes."
->>  
->> diff --git a/tests/generic/315 b/tests/generic/315
->> index fd49b579..808d7d74 100755
->> --- a/tests/generic/315
->> +++ b/tests/generic/315
->> @@ -52,7 +52,7 @@ $XFS_IO_PROG -f -c 'falloc -k 0 $(($avail_begin/2))' \
->>  	$TEST_DIR/testfile.$seq >>$seqres.full 2>&1
->>  
->>  # Verify the file size, it should keep unchanged as 0 in this case
->> -fsize=`ls -l $TEST_DIR/testfile.$seq | awk '{print $5}'`
->> +fsize=`_get_filesize $TEST_DIR/testfile.$seq`
->>  [ "$fsize" -eq 0 ] || _fail "File size is changed to ($fsize Bytes)"
->>  
->>  # Truncate the file size back to 0
->> -- 
->> 2.18.0.rc1
->>
-> .
-> 
 
 
 _______________________________________________
