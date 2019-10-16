@@ -2,77 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 513EFD7EDE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2019 20:25:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F212AD8605
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Oct 2019 04:48:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iKRW1-0005Ok-I7; Tue, 15 Oct 2019 18:25:49 +0000
+	id 1iKZMa-00010e-1Z; Wed, 16 Oct 2019 02:48:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <SRS0=uAX6=YI=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1iKRW0-0005Od-Jv
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 18:25:48 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iKZMO-000109-4o
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Oct 2019 02:48:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sLrAxxX+NECMgLJzOy1atmC9boGDWFsvkXXCf6KllmE=; b=lY9NvKSChq8Ds5dfykvkKLXAea
- Eq1Xw+3Ej+VUxJO+t6SGuvRKBiqmmDKM8zctg/1PpMLn4OUopvBv5Nt8sNGkO7H5a0dwjgk8g1IOk
- GJypAdcvyL9NM3sBYJNcgygvYcAaRHOp7qoekSZgFBVQHZz8lottLdjDDaoN4E+PNYZQ=;
+ bh=0VwRYHh1kpYNBb0CqC5nd69nKkp3nMA9wPnltkW93y8=; b=DwHblRfjZ2wB2iirDM2/1sOoji
+ Ea6+sIjusq4gxBnVLMQhLD1DOoLN/Bes/4T6jpWfZ9kL/70SeuqB1fEgKj9Fua1A9PW8f8nwn1bXY
+ QlfbvVt6sNfN3F+xLnvOzyECyrjcDYTWW4s+UV/c6gbx10/YSavbWGQZD5KWNmhzIi9k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sLrAxxX+NECMgLJzOy1atmC9boGDWFsvkXXCf6KllmE=; b=F
- vdwM8dSdoqKDhUochS9OQmRtdDTqKI81T8NfZi5mtnoYNwCgASyHMKRXixYQ/HPViNcvfk02DWaOW
- woPScaGJjhHbMrY6Y+cUZXnRNkVnt1G81rN0eX6paH/m7Q1LhLQ9zbIBZBseKXS5SYaGDC9IMRpr7
- 8HYP1/MaX1MOOTaY=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=0VwRYHh1kpYNBb0CqC5nd69nKkp3nMA9wPnltkW93y8=; b=A
+ X89AUfKiZetW8nmeTr2M1DW0MBLlKRz9f+u4LE+xN5NvXtgPu1SQoCyNcdMg0JrCw+j8gtDp54qXT
+ EJoGCJyIVRWKCHL+T0i2nOmx3sL9OHaGto7wLGoux2NNZFWcPc1FD5p/RhTIRsjZ8U4rQRO9i+HoT
+ JmSLtB0hOrBcBVaY=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iKRVy-002Yeo-Q9
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Oct 2019 18:25:48 +0000
-From: bugzilla-daemon@bugzilla.kernel.org
-Authentication-Results: mail.kernel.org;
- dkim=permerror (bad message/signature format)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 15 Oct 2019 18:25:36 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: low
-X-Bugzilla-Who: yfdyh000@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-205203-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1iKZMK-00AwB4-04
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Oct 2019 02:48:24 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 014A7DDAC1AC89411609;
+ Wed, 16 Oct 2019 10:48:12 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
+ 14.3.439.0; Wed, 16 Oct 2019 10:48:05 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <guaneryu@gmail.com>, <darrick.wong@oracle.com>
+Date: Wed, 16 Oct 2019 10:48:03 +0800
+Message-ID: <20191016024803.12028-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iKRVy-002Yeo-Q9
-Subject: [f2fs-dev] [Bug 205203] New: ram_thresh default (DEF_RAM_THRESHOLD)
- is wrong (outdated) in f2fs document
+X-Headers-End: 1iKZMK-00AwB4-04
+Subject: [f2fs-dev] [PATCH v3] common/rc: generalize _get_filesize()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,31 +69,109 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-aHR0cHM6Ly9idWd6aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMDUyMDMKCiAgICAg
-ICAgICAgIEJ1ZyBJRDogMjA1MjAzCiAgICAgICAgICAgU3VtbWFyeTogcmFtX3RocmVzaCBkZWZh
-dWx0IChERUZfUkFNX1RIUkVTSE9MRCkgaXMgd3JvbmcKICAgICAgICAgICAgICAgICAgICAob3V0
-ZGF0ZWQpIGluIGYyZnMgZG9jdW1lbnQKICAgICAgICAgICBQcm9kdWN0OiBGaWxlIFN5c3RlbQog
-ICAgICAgICAgIFZlcnNpb246IDIuNQogICAgS2VybmVsIFZlcnNpb246IGFsbAogICAgICAgICAg
-SGFyZHdhcmU6IEFsbAogICAgICAgICAgICAgICAgT1M6IExpbnV4CiAgICAgICAgICAgICAgVHJl
-ZTogTWFpbmxpbmUKICAgICAgICAgICAgU3RhdHVzOiBORVcKICAgICAgICAgIFNldmVyaXR5OiBs
-b3cKICAgICAgICAgIFByaW9yaXR5OiBQMQogICAgICAgICBDb21wb25lbnQ6IGYyZnMKICAgICAg
-ICAgIEFzc2lnbmVlOiBmaWxlc3lzdGVtX2YyZnNAa2VybmVsLWJ1Z3Mua2VybmVsLm9yZwogICAg
-ICAgICAgUmVwb3J0ZXI6IHlmZHloMDAwQGdtYWlsLmNvbQogICAgICAgIFJlZ3Jlc3Npb246IE5v
-CgpUaGUgZGVmYXVsdCB2YWx1ZSBhcHBlYXJzIHRvIGhhdmUgYmVlbiBjb3JyZWN0ZWQgYnkgImYy
-ZnM6IGZpeCB3cm9uZwpwZXJjZW50YWdlIiBjb21taXRbMV0sIGJ1dCBzdGlsbCB0aGUgb2xkIHZh
-bHVlcyDigIvigItpbiB0aGUgZjJmcyBkb2N1bWVudFsyXS4KCgpyZWY6CjE6Cmh0dHBzOi8vZ2l0
-aHViLmNvbS90b3J2YWxkcy9saW51eC9jb21taXQvMjk3MTBiY2Y5NDI2Yzg0YmI2YTliMWQ5NDMx
-Njg5NWVkNjE0MzgxMwoyOiBodHRwczovL3d3dy5rZXJuZWwub3JnL2RvYy9Eb2N1bWVudGF0aW9u
-L2ZpbGVzeXN0ZW1zL2YyZnMudHh0CgppbnRyb2R1Y2VzIHJhbV90aHJlc2g6IGh0dHBzOi8vbG9y
-ZS5rZXJuZWwub3JnL3BhdGNod29yay9wYXRjaC80NTA0NzYvCgpkZWZpbmUgREVGX1JBTV9USFJF
-U0hPTEQgICAgICAgIDE6Cmh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJu
-ZWwvZ2l0L2phZWdldWsvZjJmcy1zdGFibGUuZ2l0L3RyZWUvZnMvZjJmcy9ub2RlLmg/aD1saW51
-eC00LjE5LnkjbjIzCgotLSAKWW91IGFyZSByZWNlaXZpbmcgdGhpcyBtYWlsIGJlY2F1c2U6Cllv
-dSBhcmUgd2F0Y2hpbmcgdGhlIGFzc2lnbmVlIG9mIHRoZSBidWcuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcg
-bGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3Rz
-LnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+There are some testcases use below command to get file size, generalize
+it as global function _get_filesize()
+
+ls -l $1 | $AWK_PROG '{print $5}'
+
+And in addition, using more simple command "stat -c %s" instead.
+
+- adjust common/defrag, generic/275 and generic/315 to use it
+- remove unused _filesize in generic/013
+
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v3:
+- avoid unneeded echo command in _get_filesize() pointed out by Darrick.
+ common/defrag     | 2 +-
+ common/rc         | 5 +++++
+ tests/generic/013 | 5 -----
+ tests/generic/275 | 2 +-
+ tests/generic/315 | 2 +-
+ 5 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/common/defrag b/common/defrag
+index 1381a4dd..1769013b 100644
+--- a/common/defrag
++++ b/common/defrag
+@@ -145,7 +145,7 @@ _defrag()
+ 	STAT_BEFORE=`stat -c "a: %x m: %y c: %z" $1`
+ 
+ 	if [ $FSTYP == "f2fs" ]; then
+-		local filesize=`ls -l $1 | $AWK_PROG '{print $5}'`
++		local filesize=`_get_filesize $1`
+ 		$DEFRAG_PROG 0 $filesize $1 >> $seqres.full 2>&1
+ 	else
+ 		$DEFRAG_PROG -v $1 >> $seqres.full 2>&1
+diff --git a/common/rc b/common/rc
+index cfaabf10..8cdb7a9b 100644
+--- a/common/rc
++++ b/common/rc
+@@ -165,6 +165,11 @@ if [ ! -z "$REPORT_LIST" ]; then
+ 	_assert_report_list
+ fi
+ 
++_get_filesize()
++{
++    stat -c %s "$1"
++}
++
+ _mount()
+ {
+     $MOUNT_PROG `_mount_ops_filter $*`
+diff --git a/tests/generic/013 b/tests/generic/013
+index 9e533ee8..bc596102 100755
+--- a/tests/generic/013
++++ b/tests/generic/013
+@@ -24,11 +24,6 @@ _cleanup()
+     rm -rf $TEST_DIR/fsstress.$$.*
+ }
+ 
+-_filesize()
+-{
+-    ls -l $1 | $AWK_PROG '{print "    filesize = " $5}'
+-}
+-
+ # get standard environment, filters and checks
+ . ./common/rc
+ . ./common/filter
+diff --git a/tests/generic/275 b/tests/generic/275
+index a934c19c..adc82856 100755
+--- a/tests/generic/275
++++ b/tests/generic/275
+@@ -73,7 +73,7 @@ echo "Bytes written until ENOSPC:" >>$seqres.full
+ du $SCRATCH_MNT/tmp1 >>$seqres.full
+ 
+ # And at least some of it should succeed.
+-_filesize=`ls -l $SCRATCH_MNT/tmp1 | awk '{print $5}'`
++_filesize=`_get_filesize $SCRATCH_MNT/tmp1`
+ [ $_filesize -lt $((128 * 1024)) ] && \
+ 	_fail "Partial write until enospc failed; wrote $_filesize bytes."
+ 
+diff --git a/tests/generic/315 b/tests/generic/315
+index fd49b579..808d7d74 100755
+--- a/tests/generic/315
++++ b/tests/generic/315
+@@ -52,7 +52,7 @@ $XFS_IO_PROG -f -c 'falloc -k 0 $(($avail_begin/2))' \
+ 	$TEST_DIR/testfile.$seq >>$seqres.full 2>&1
+ 
+ # Verify the file size, it should keep unchanged as 0 in this case
+-fsize=`ls -l $TEST_DIR/testfile.$seq | awk '{print $5}'`
++fsize=`_get_filesize $TEST_DIR/testfile.$seq`
+ [ "$fsize" -eq 0 ] || _fail "File size is changed to ($fsize Bytes)"
+ 
+ # Truncate the file size back to 0
+-- 
+2.18.0.rc1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
