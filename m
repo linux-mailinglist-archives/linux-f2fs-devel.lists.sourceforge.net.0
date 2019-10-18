@@ -2,105 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F636DBE40
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Oct 2019 09:23:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
-	In-Reply-To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=7RRfZYMnpWzT0Ng2DYUwe3Nm3jULgywCbyIpRQARzKA=; b=byZkV0C4G6ZFEJNDQ1+ujMwSd
-	Kn7lwqKpaXvIYK5UXj2V6EED4KeCp0Dlj7klS8UaXFt//q+S8AESC+t8BEc3Kp/+pBCr+p8aOsR54
-	W5T8bcbAZ2L4oMQL9zw/FyAGNy33UAD76FAATJUBRbBzOPmANRYj1EoMrveo35h+zZcOs=;
+	by mail.lfdr.de (Postfix) with ESMTPS id C40C1DD1B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 19 Oct 2019 00:05:46 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iLMbD-0007q1-IA; Fri, 18 Oct 2019 07:22:59 +0000
+	id 1iLaNU-000557-0g; Fri, 18 Oct 2019 22:05:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <3G2KpXQwKAHgdqWjcnWjZWhhckkcha.Yki@flex--huangrandall.bounces.google.com>)
- id 1iLMbC-0007pq-Dz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 07:22:58 +0000
+ (envelope-from <sashal@kernel.org>) id 1iLaNS-00054r-BJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
- Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+hsKPqici8eyIvgx8GToH+3aueA0ocUnG9yKN+h0H1M=; b=B5HO9vpHX32cdM6SPc2JP1nw3
- D/QnBOqsXCRUHZxQQApovDJL+He1HrAWtpLHGuArHiiPCXPzOpZi6LSw9SbrL5AA0UTDWLhtBzhu/
- gAe3VUZ/2opPnzwOqzU6xe6xSc8++5KnuVzH7zjImfhVVh9EWn6s7Asqj2LzwyPHJ7TZ8=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=p3JvQDSJka3BvcCOO4L5XMPLwF5QM1E9fQcybrUMk5A=; b=MN36kThWMoe1blivqLEAWznQEJ
+ oC15/ofx/5OyK9cMN6Acj3MeD2bJlDQp9Qz8m010V3GCK5yYDzr5q19KEEruDlVeupvNWqjlcbSUX
+ bp/H928hnEJAHDH4JcEoPpcyfR0rf8tq+l3OSBFczihTYWA/NAlZy6ogxzOap69Wl9Js=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+hsKPqici8eyIvgx8GToH+3aueA0ocUnG9yKN+h0H1M=; b=A+YLwvwZVT12zeCBaKmVijPLko
- y9GhKNw/mUnKihcz8Acbi6LZhTZldwCIKBpH12KE00FwW6fEOXSmPfK7AnTQ+J9bU2QFyCKZ/77k6
- bnN3BYZf6DzbPeah3sLXRhqweckaQYb+AMyV/+fdZ3qa7wbDOK4bjTyOdLiB20uC6TX8=;
-Received: from mail-il1-f202.google.com ([209.85.166.202])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iLMbA-00DEBR-5H
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 07:22:58 +0000
-Received: by mail-il1-f202.google.com with SMTP id y7so1498298ilb.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 18 Oct 2019 00:22:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:in-reply-to:message-id:mime-version:references:subject:from:to
- :cc; bh=+hsKPqici8eyIvgx8GToH+3aueA0ocUnG9yKN+h0H1M=;
- b=LxUzoaPX3paNCqiXE/0YvBQccH5ed0EWkDanj8GsnmLBBWbmab6RoWYtLwmMjXY4CZ
- ++4BhhGOHwLDs+jbzfvDGq+TlGnqpFOG0Qtl/MNvOHu4QiF/cpW3tMqZWuctGHPBYQuX
- vYXLoWeNOmDmluU36fmo9YhL9jRnS+/CO4Nnu7HHLHAjJVwhIk/l/hgc3k1QUM0jZVmm
- Il0DZi+ZO3VUpxGfUf8hlKNety7xz25oYt8khO8/VTQXWCJnx69RBGXZRUA7EtfRZIZf
- SK1QEtCJe6hgnpVycW/dxEcU1e1pxzdeHgdl45IFr3Z0kQgrg+hIkpSHdcH15+xxqtLg
- kBSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:in-reply-to:message-id:mime-version
- :references:subject:from:to:cc;
- bh=+hsKPqici8eyIvgx8GToH+3aueA0ocUnG9yKN+h0H1M=;
- b=MJCTq79W62MgLp53ZaKdHOb0M3M514ioAcYQKvyHYDAagmLeXQvxxwRUTpKi+w4QnU
- M9LaX3j1kg4l1jg+TsToYw77ae1z5AcnirwoG1Nwwb3oKoLPbN/3E9nyLOh4yN5SIcLp
- nbNDac4aG7sJ0d4+TBPuYZR9X28JDAKp1x0z76ryKT//aHLGIr0PDUldYuVVqWX6AYPS
- dIvVboyLwi1opU2Rap4PjOvxDeQdkIZyyatIhPB4OrHojbm6DuEf3ga9q62/tQoZ7wMP
- qkEaG/H8wZiboCO48jX1TDoEE0/HqUDIYWe7qR6DFPwjLe8+HS1mLtjMODywYFr+/Woq
- WPVQ==
-X-Gm-Message-State: APjAAAVouysrjfplI4S4XjfP2EiAQYDLyy04p6zU+NJD1QIn8KQgtsCs
- NBKoqmj5xPCrAVOuc9UuPp/+M2p3QOFw4VffvLI=
-X-Google-Smtp-Source: APXvYqxacPck+QvS1cCpIRpnt4Qx7Ru8kfEkf9dhMJu3nG6odMRdImehsxFznI3l8VEtmkAVkr0stp06+uN4fQr/CYE=
-X-Received: by 2002:a63:f743:: with SMTP id f3mr8628044pgk.410.1571381787920; 
- Thu, 17 Oct 2019 23:56:27 -0700 (PDT)
-Date: Fri, 18 Oct 2019 14:56:22 +0800
-In-Reply-To: <efddfbc3-bd31-b9fb-48de-decb01d01001@huawei.com>
-Message-Id: <20191018065622.66404-1-huangrandall@google.com>
-Mime-Version: 1.0
-References: <efddfbc3-bd31-b9fb-48de-decb01d01001@huawei.com>
-X-Mailer: git-send-email 2.23.0.866.gb869b98d4c-goog
-To: jaegeuk@kernel.org, yuchao0@huawei.com, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-X-Spam-Score: -7.6 (-------)
+ bh=p3JvQDSJka3BvcCOO4L5XMPLwF5QM1E9fQcybrUMk5A=; b=epLjPlAhOCh6eW3n3KmLt6gQIf
+ vTZ4/5RqFUzzoeyNayO8ajvXzCqdFUBga2S5jRtTUzK93W2UUEshNhnWvVthPcO2fa1iT3+URdm5G
+ N8yu8QdKdbIpGRirPIqRsw4uiex0/+lS6KGdz+ie6fE8q16hR5ha1vxrtpLRQrnJPNA4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iLaNO-00DpEN-Gv
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:42 +0000
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 75099222D1;
+ Fri, 18 Oct 2019 22:05:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1571436328;
+ bh=AJVWB7TLbX40U29Q4POdrtB+H1Pg+a1SVyDpypxpocM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=DhLagNsWHIMX1ilIwr/bQyX0uur6IuYHg8oLiqE9qXS4cPmbPfKaLKphKYooKCR+E
+ dIQgQbn9GDgqPh97cYlcQUYUxU3fRankx02iza1Dv5ZWpv25LjzKwqjQTjYaAuE3N4
+ 278RhS3/1waJcqV7wibhiOKA/2MOTSR/XZQQkaaU=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri, 18 Oct 2019 18:03:47 -0400
+Message-Id: <20191018220525.9042-2-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191018220525.9042-1-sashal@kernel.org>
+References: <20191018220525.9042-1-sashal@kernel.org>
+MIME-Version: 1.0
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.202 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
-X-Headers-End: 1iLMbA-00DEBR-5H
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix to avoid memory leakage in
- f2fs_listxattr
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iLaNO-00DpEN-Gv
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 002/100] f2fs: flush quota blocks
+ after turnning it off
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,68 +87,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Randall Huang via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Randall Huang <huangrandall@google.com>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In f2fs_listxattr, there is no boundary check before
-memcpy e_name to buffer.
-If the e_name_len is corrupted,
-unexpected memory contents may be returned to the buffer.
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Signed-off-by: Randall Huang <huangrandall@google.com>
----
-v2:
-relocate sanity check
----
- fs/f2fs/xattr.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+[ Upstream commit 0e0667b625cf64243df83171bff61f9d350b9ca5 ]
 
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 181900af2576..296b3189448a 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -539,8 +539,9 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- {
- 	struct inode *inode = d_inode(dentry);
-+	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
- 	struct f2fs_xattr_entry *entry;
--	void *base_addr;
-+	void *base_addr, *last_base_addr;
- 	int error = 0;
- 	size_t rest = buffer_size;
+After quota_off, we'll get some dirty blocks. If put_super don't have a chance
+to flush them by checkpoint, it causes NULL pointer exception in end_io after
+iput(node_inode). (e.g., by checkpoint=disable)
+
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ fs/f2fs/super.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index fdafcfd8b20e2..4ec57d538c15c 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1886,6 +1886,12 @@ void f2fs_quota_off_umount(struct super_block *sb)
+ 			set_sbi_flag(F2FS_SB(sb), SBI_NEED_FSCK);
+ 		}
+ 	}
++	/*
++	 * In case of checkpoint=disable, we must flush quota blocks.
++	 * This can cause NULL exception for node_inode in end_io, since
++	 * put_super already dropped it.
++	 */
++	sync_filesystem(sb);
+ }
  
-@@ -550,6 +551,8 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 	if (error)
- 		return error;
- 
-+	last_base_addr = (void *)base_addr + XATTR_SIZE(xnid, inode);
-+
- 	list_for_each_xattr(entry, base_addr) {
- 		const struct xattr_handler *handler =
- 			f2fs_xattr_handler(entry->e_name_index);
-@@ -557,6 +560,15 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 		size_t prefix_len;
- 		size_t size;
- 
-+		if ((void *)(entry) + sizeof(__u32) > last_base_addr ||
-+			(void *)XATTR_NEXT_ENTRY(entry) > last_base_addr) {
-+			f2fs_err(F2FS_I_SB(inode), "inode (%lu) has corrupted xattr",
-+						inode->i_ino);
-+			set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
-+			error = -EFSCORRUPTED;
-+			goto cleanup;
-+		}
-+
- 		if (!handler || (handler->list && !handler->list(dentry)))
- 			continue;
- 
+ static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
 -- 
-2.23.0.866.gb869b98d4c-goog
+2.20.1
 
 
 
