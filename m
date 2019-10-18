@@ -2,62 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 882EADD1BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 19 Oct 2019 00:05:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 930C1DD1F0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 19 Oct 2019 00:08:08 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iLaNc-0005gx-Cy; Fri, 18 Oct 2019 22:05:52 +0000
+	id 1iLaPj-0005n2-Jr; Fri, 18 Oct 2019 22:08:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1iLaNb-0005gH-0z
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:51 +0000
+ (envelope-from <sashal@kernel.org>) id 1iLaPh-0005mv-TN
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:08:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iwYf+Bp2TPzYBSsSwmivwBOfArOuj4L4iMJ6uU7WMbA=; b=VZzXzZHskw3LdzliyRx2x33Agn
- vz+3/5i8ruSzZlKXaaVMvkudwcrvYlKWpfXxe/+V9g98q8z/6b/SCVfE8rTbaU2orOmGUnLGRQxXw
- NBcDm4foJ4tAuqyiGRCRT9IOc8s7ZEIAviozkNwj7yg0YPtPQMkfwJhnKKIiJAITxEys=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=iwYf+Bp2TPzYBSsSwmivwBOfArOuj4L4iMJ6uU7WMbA=; b=egtY4s+pQletJtbQuR9r5pujkl
- 7DZ24N6KfIIcXHHVIOmmc1k0b7wVD3Mgrmd7Xfjt5CQAyYB1GU3xjTf/XfMi0H47SmnBtsD9ruhG7
- 1VCXBFNJ039dxuiEDI0IGcfGWH2sSDaqfrTLtIR+7mimA93Hg6V9j4O7cmkeVzbn0Cig=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=uVDl4bkeh6bHzqaisqdzgp+jIaJAcgU5keP5ZmVJR5g=; b=R1G4SxPO4IESDntHyimoFwC5ga
+ 6mLNsqqi2X2P5FWYyWiZsl8hzxuWRyXAwQAiP8kRth4weVSCr08MO/fRHTALnrOCT+H4FqH9XYK4J
+ LRP1GIsYfrxofD0NNKfNZA2yjt/3OLuyECR4pqTYN4CXFMqFXj7Lg0uEhNi30TWeeIbM=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=uVDl4bkeh6bHzqaisqdzgp+jIaJAcgU5keP5ZmVJR5g=; b=P
+ o7mP+Bpa9trPLp2+HgeIuRjhUeXXj7tIqv2cI2R/NwYfPCf8afojiAlaOglHkVEjEZ5C8rPEGfFoY
+ 5j8J2UxaVIYoD87jEMeEre60b0P4CsoogEioGzyAdxGM8gPUqYBg4vSg6fuA9M9gF7Uk2m5KwjO/v
+ jPXdIyHCh3qK/56Q=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iLaNW-00DrXq-Th
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:50 +0000
+ id 1iLaPg-007CrQ-Os
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:08:01 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 95D2B2245D;
- Fri, 18 Oct 2019 22:05:35 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6AE12205F4;
+ Fri, 18 Oct 2019 22:07:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1571436336;
- bh=iSuchusAehub8/OSSTazSzsq4ZRiyFsHmrWUsdoSclw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=laPB7R6wUcwUOPXyfRB/T8Q5RNFXyYsfYoQYs0gPEVsSQziQtKOmUnfRtBhlMoVUR
- i3DXhlM6AJ9pXfuCOyQM/c+Yps1waat+LlttuVysz1KsMnK4mbDazPHIMciLzzBw31
- nP5wr7JdkI11NaCxSyVUg5gdGnycStS+XgDO7Pdg=
+ s=default; t=1571436475;
+ bh=WHX65/AoIFRyii84i/q6+u2Bw9cdOY7501KBf1Lu+rQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=aRVyiRteedN3fziJZ/CIECe9t3VOs3k8b9v0TxGLG4Q5cDI0MC8+0z9AFNFZMAF2N
+ owZGaTkf+pG97RnBVJNh4Crzzf21LVGD58imoMF9Gpvguv6Xbkae+Y5MrF0/NcBZmH
+ 2HsRF9cxCN9F0m8s5rOJNdPTOlaO8uWyT2p3moi0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 18 Oct 2019 18:03:52 -0400
-Message-Id: <20191018220525.9042-7-sashal@kernel.org>
+Date: Fri, 18 Oct 2019 18:06:58 -0400
+Message-Id: <20191018220753.10002-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191018220525.9042-1-sashal@kernel.org>
-References: <20191018220525.9042-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -73,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iLaNW-00DrXq-Th
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 007/100] f2fs: fix to recover
- inode->i_flags of inode block during POR
+X-Headers-End: 1iLaPg-007CrQ-Os
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 01/56] f2fs: flush quota blocks
+ after turnning it off
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,49 +91,38 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-[ Upstream commit 0c093b590efb5c1ccdc835868dc2ae94bd2e14dc ]
+[ Upstream commit 0e0667b625cf64243df83171bff61f9d350b9ca5 ]
 
-Testcase to reproduce this bug:
-1. mkfs.f2fs /dev/sdd
-2. mount -t f2fs /dev/sdd /mnt/f2fs
-3. touch /mnt/f2fs/file
-4. sync
-5. chattr +a /mnt/f2fs/file
-6. xfs_io -a /mnt/f2fs/file -c "fsync"
-7. godown /mnt/f2fs
-8. umount /mnt/f2fs
-9. mount -t f2fs /dev/sdd /mnt/f2fs
-10. xfs_io /mnt/f2fs/file
+After quota_off, we'll get some dirty blocks. If put_super don't have a chance
+to flush them by checkpoint, it causes NULL pointer exception in end_io after
+iput(node_inode). (e.g., by checkpoint=disable)
 
-There is no error when opening this file w/o O_APPEND, but actually,
-we expect the correct result should be:
-
-/mnt/f2fs/file: Operation not permitted
-
-The root cause is, in recover_inode(), we recover inode->i_flags more
-than F2FS_I(inode)->i_flags, so fix it.
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/recovery.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/f2fs/super.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 281ba46b5b359..2c3be4c3c626f 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -226,6 +226,7 @@ static void recover_inode(struct inode *inode, struct page *page)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 344aa861774bd..1ff0659d53d01 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1523,6 +1523,12 @@ void f2fs_quota_off_umount(struct super_block *sb)
+ 			set_sbi_flag(F2FS_SB(sb), SBI_NEED_FSCK);
+ 		}
+ 	}
++	/*
++	 * In case of checkpoint=disable, we must flush quota blocks.
++	 * This can cause NULL exception for node_inode in end_io, since
++	 * put_super already dropped it.
++	 */
++	sync_filesystem(sb);
+ }
  
- 	F2FS_I(inode)->i_advise = raw->i_advise;
- 	F2FS_I(inode)->i_flags = le32_to_cpu(raw->i_flags);
-+	f2fs_set_inode_flags(inode);
- 	F2FS_I(inode)->i_gc_failures[GC_FAILURE_PIN] =
- 				le16_to_cpu(raw->i_gc_failures);
- 
+ int f2fs_get_projid(struct inode *inode, kprojid_t *projid)
 -- 
 2.20.1
 
