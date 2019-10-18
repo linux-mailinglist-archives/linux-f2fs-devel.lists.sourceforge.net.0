@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C40C1DD1B6
+	by mail.lfdr.de (Postfix) with ESMTPS id E827EDD1B7
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 19 Oct 2019 00:05:46 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iLaNU-000557-0g; Fri, 18 Oct 2019 22:05:44 +0000
+	id 1iLaNT-00054z-UX; Fri, 18 Oct 2019 22:05:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1iLaNS-00054r-BJ
+ (envelope-from <sashal@kernel.org>) id 1iLaNR-00054g-WF
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p3JvQDSJka3BvcCOO4L5XMPLwF5QM1E9fQcybrUMk5A=; b=MN36kThWMoe1blivqLEAWznQEJ
- oC15/ofx/5OyK9cMN6Acj3MeD2bJlDQp9Qz8m010V3GCK5yYDzr5q19KEEruDlVeupvNWqjlcbSUX
- bp/H928hnEJAHDH4JcEoPpcyfR0rf8tq+l3OSBFczihTYWA/NAlZy6ogxzOap69Wl9Js=;
+ bh=MXEaBXUEWeUN+elnG+ozC8RjnNvirxnU403nM7gbA7o=; b=BVKx9A8bjbzMeph9uXqdWTTLFc
+ q05shKjyaJpyagIEtDUTeTiLYPDbBgP+tWV2C4NmJmYE/YhoC9po05VzvvISst/Udg8s/w+L3ucBK
+ 1CEThf3/Jtfya49DRMhBrCy8JAPJuEIN/YJxUYJRg1LccVbd17TdBVdsEoA3DzERlYpw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,39 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=p3JvQDSJka3BvcCOO4L5XMPLwF5QM1E9fQcybrUMk5A=; b=epLjPlAhOCh6eW3n3KmLt6gQIf
- vTZ4/5RqFUzzoeyNayO8ajvXzCqdFUBga2S5jRtTUzK93W2UUEshNhnWvVthPcO2fa1iT3+URdm5G
- N8yu8QdKdbIpGRirPIqRsw4uiex0/+lS6KGdz+ie6fE8q16hR5ha1vxrtpLRQrnJPNA4=;
+ bh=MXEaBXUEWeUN+elnG+ozC8RjnNvirxnU403nM7gbA7o=; b=ez3K1Rj7aWpgshPwpzv7Rq6fpw
+ 7kSZX2LpP/Z1MA8pS+gddrXcPAjywUf7y2WV4MShLJYjfe2TV/aJWC7Poac2sHyi1c+IDpOiu3A9U
+ wcaMMEZ/LRYPD0os8kQWqoDGHyR47OaPRFAsdHi1VAI8pNuU6r1Ii0cBj5sa5Kx2q6Eo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iLaNO-00DpEN-Gv
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:42 +0000
+ id 1iLaNQ-007C86-QV
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Oct 2019 22:05:41 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 75099222D1;
- Fri, 18 Oct 2019 22:05:27 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8F832222C6;
+ Fri, 18 Oct 2019 22:05:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1571436328;
- bh=AJVWB7TLbX40U29Q4POdrtB+H1Pg+a1SVyDpypxpocM=;
+ s=default; t=1571436335;
+ bh=zVWc36t1YQ5i5dLYsdN3Ycb+XDGeIMymeTrjmDPd9qc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DhLagNsWHIMX1ilIwr/bQyX0uur6IuYHg8oLiqE9qXS4cPmbPfKaLKphKYooKCR+E
- dIQgQbn9GDgqPh97cYlcQUYUxU3fRankx02iza1Dv5ZWpv25LjzKwqjQTjYaAuE3N4
- 278RhS3/1waJcqV7wibhiOKA/2MOTSR/XZQQkaaU=
+ b=KotNSeiVwdL1tKPDukF8dL37DjA+exJpTmBPibNkp2qctkNj97vihqPOTfZ3QPkhe
+ ij0u3PK8sxcgSWGBDG/pFjsrwnJsp3fP67JtgwyUsZz+yFKRA/juJPw/7KAUMdXlDh
+ /ADhEs00sYwilzbdT8b0EB+LGrgsQlHOmYQq7bpk=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 18 Oct 2019 18:03:47 -0400
-Message-Id: <20191018220525.9042-2-sashal@kernel.org>
+Date: Fri, 18 Oct 2019 18:03:51 -0400
+Message-Id: <20191018220525.9042-6-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20191018220525.9042-1-sashal@kernel.org>
 References: <20191018220525.9042-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.5 (/)
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -72,10 +72,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iLaNO-00DpEN-Gv
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 002/100] f2fs: flush quota blocks
- after turnning it off
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iLaNQ-007C86-QV
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 006/100] f2fs: fix to recover
+ inode's i_gc_failures during POR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,38 +93,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 0e0667b625cf64243df83171bff61f9d350b9ca5 ]
+[ Upstream commit 7de36cf3e4087207f42a88992f8cb615a1bd902e ]
 
-After quota_off, we'll get some dirty blocks. If put_super don't have a chance
-to flush them by checkpoint, it causes NULL pointer exception in end_io after
-iput(node_inode). (e.g., by checkpoint=disable)
+inode.i_gc_failures is used to indicate that skip count of migrating
+on blocks of inode, we should guarantee it can be recovered in sudden
+power-off case.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/super.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/f2fs/recovery.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index fdafcfd8b20e2..4ec57d538c15c 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1886,6 +1886,12 @@ void f2fs_quota_off_umount(struct super_block *sb)
- 			set_sbi_flag(F2FS_SB(sb), SBI_NEED_FSCK);
- 		}
- 	}
-+	/*
-+	 * In case of checkpoint=disable, we must flush quota blocks.
-+	 * This can cause NULL exception for node_inode in end_io, since
-+	 * put_super already dropped it.
-+	 */
-+	sync_filesystem(sb);
- }
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 0b224f4a4a656..281ba46b5b359 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -226,6 +226,8 @@ static void recover_inode(struct inode *inode, struct page *page)
  
- static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
+ 	F2FS_I(inode)->i_advise = raw->i_advise;
+ 	F2FS_I(inode)->i_flags = le32_to_cpu(raw->i_flags);
++	F2FS_I(inode)->i_gc_failures[GC_FAILURE_PIN] =
++				le16_to_cpu(raw->i_gc_failures);
+ 
+ 	recover_inline_flags(inode, raw);
+ 
 -- 
 2.20.1
 
