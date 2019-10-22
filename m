@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0FCDDFD1C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2019 07:27:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CA9EDFD64
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2019 08:00:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iMmhY-0008Pi-53; Tue, 22 Oct 2019 05:27:24 +0000
+	id 1iMnDS-00082L-AP; Tue, 22 Oct 2019 06:00:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1iMmhX-0008Pb-KQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 05:27:23 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iMnDQ-000826-OY
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 06:00:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i338/Py5PICs9dJcJFQqyvQ3vTLCgBjcZGAJYAjuHIM=; b=F9eBwnErPob3MKfLNFmf0PSN+K
- A26eflw+4H8phcn0YviaNy64efGPlXlg5DnzDzvv2jaOO9XQ3apcq+OvS9lZwqkXp0D33jZIG6ymx
- +7t8CUXedheIPExSb+ETI533ccN9RyQCMdKDFzRhiHR1U1Q0kMttLTjzVhTFfV5qOo4c=;
+ bh=rPXtgV8Vk6dAg9a8yA5TeKe3kEdEnUALArUqljqGVOo=; b=lE3P2LekGYd4rsNt0me/w63vgO
+ mhesopzMrp1ukpHazMn2wf2UqG1jEUrh6m1NTyOZW1HU+K6Qn7axeq08d8EL7nGexKXPxMXrWbQG3
+ II6MbDwn9WsmHhp0bA75m2t9QzPlhyTYPsgAg4UpijdYPIQ5aZ/l6EoX9lXfgav+puLQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,48 +29,58 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i338/Py5PICs9dJcJFQqyvQ3vTLCgBjcZGAJYAjuHIM=; b=U+JEf8YOjVVtdVtBbYuldIKZKO
- DnOChh6cUTDppgSC4RfWfWbDDVB1fwZ21GrwNPss8pw2/eXetIWNLMV6EJE0l3/BrKgRjYIVc44LG
- EYvC/XU0kFpeJ6uIMVVfuTrW+R8TgIYCGowCLUzLABKEDRYU9BY0H4AxKSQshfQO/PXg=;
-Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1iMmhV-00GR9b-Mg
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 05:27:23 +0000
-Received: from dread.disaster.area (pa49-180-40-48.pa.nsw.optusnet.com.au
- [49.180.40.48])
- by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 95C8A43ED8B;
- Tue, 22 Oct 2019 16:27:14 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1iMmhM-0000ft-TN; Tue, 22 Oct 2019 16:27:12 +1100
-Date: Tue, 22 Oct 2019 16:27:12 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20191022052712.GA2083@dread.disaster.area>
+ bh=rPXtgV8Vk6dAg9a8yA5TeKe3kEdEnUALArUqljqGVOo=; b=Y3aad99pXiz1bVHvry1L6sRXu+
+ FoFISyrU78Ala03S5kUm2IvsJIjX1y+q1ly2vzwWv+3wFhivAKJPWGE4R9VPJj/+BuNvizI+cY4j8
+ EVFEPMU3oHtKjUX0fQCc6JRlXmKiAtVvfJJND0kmTpM+GCkpPXz+hJObzaFvTIVTQNAg=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iMnDN-00GS4T-2h
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 06:00:20 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 578F92089E;
+ Tue, 22 Oct 2019 06:00:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1571724006;
+ bh=IV+O29anGZ56O62huhHa4OXym9e0Xnv7gAZOs76+eK4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=q3YwoQVs7bPCIFItl4itSXlw7LYeUrnwtcXhnDi1R1G97a4bw3wQtQO50DPxp8JPZ
+ Qe97F9ZDTVfkx0fPuafbZUD/ny2xzKwsOz5gLgjYbpAkOC15pCe8e5FI4Juuxj/XNf
+ QZiILELJNEMdNqBqi3bjjKdN+Bzgif+iVsCmzOwg=
+Date: Mon, 21 Oct 2019 23:00:04 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Dave Chinner <david@fromorbit.com>
+Message-ID: <20191022060004.GA333751@sol.localdomain>
+Mail-Followup-To: Dave Chinner <david@fromorbit.com>,
+ linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-fsdevel@vger.kernel.org, Satya Tangirala <satyat@google.com>,
+ Paul Crowley <paulcrowley@google.com>,
+ Paul Lawrence <paullawrence@google.com>,
+ "Theodore Y . Ts'o" <tytso@mit.edu>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20191021230355.23136-1-ebiggers@kernel.org>
  <20191021230355.23136-2-ebiggers@kernel.org>
+ <20191022052712.GA2083@dread.disaster.area>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191021230355.23136-2-ebiggers@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.2 cv=D+Q3ErZj c=1 sm=1 tr=0
- a=y881pOMu+B+mZdf5UrsJdA==:117 a=y881pOMu+B+mZdf5UrsJdA==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=XobE76Q3jBoA:10
- a=1XWaLZrsAAAA:8 a=7-415B0cAAAA:8 a=u2WIiwEpneD56I5pijMA:9
- a=5WK52ldy0EvilltI:21 a=YrdWnVge8_36jD4u:21 a=CjuIK1q_8ugA:10
- a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.4 (/)
+In-Reply-To: <20191022052712.GA2083@dread.disaster.area>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fromorbit.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iMmhV-00GR9b-Mg
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iMnDN-00GS4T-2h
 Subject: Re: [f2fs-dev] [PATCH 1/3] fscrypt: add support for
  inline-encryption-optimized policies
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -93,45 +103,63 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Oct 21, 2019 at 04:03:53PM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On Tue, Oct 22, 2019 at 04:27:12PM +1100, Dave Chinner wrote:
+> On Mon, Oct 21, 2019 at 04:03:53PM -0700, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > Some inline encryption hardware has only a small number of keyslots,
+> > which would make it inefficient to use the traditional fscrypt per-file
+> > keys.  The existing DIRECT_KEY encryption policy flag doesn't solve this
+> > because it assumes that file contents and names are encrypted by the
+> > same algorithm and that IVs are at least 24 bytes.
+> > 
+> > Therefore, add a new encryption policy flag INLINE_CRYPT_OPTIMIZED which
+> > causes the encryption to modified as follows:
+> > 
+> > - The key for file contents encryption is derived from the values
+> >   (master_key, mode_num, filesystem_uuid).  The per-file nonce is not
+> >   included, so many files may share the same contents encryption key.
+> > 
+> > - The IV for encrypting each block of file contents is built as
+> >   (inode_number << 32) | file_logical_block_num.
+> > 
+> > Including the inode number in the IVs ensures that data in different
+> > files is encrypted differently, despite per-file keys not being used.
+> > Limiting the inode and block numbers to 32 bits and putting the block
+> > number in the low bits is needed to be compatible with inline encryption
+> > hardware which only supports specifying a 64-bit data unit number which
+> > is auto-incremented; this is what the UFS and EMMC standards support.
 > 
-> Some inline encryption hardware has only a small number of keyslots,
-> which would make it inefficient to use the traditional fscrypt per-file
-> keys.  The existing DIRECT_KEY encryption policy flag doesn't solve this
-> because it assumes that file contents and names are encrypted by the
-> same algorithm and that IVs are at least 24 bytes.
+> These 32 bit size limits seem arbitrary and rules out implementing
+> this on larger filesystems. Why not just hash the 64 bit inode, file
+> offset and block numbers into a single 64 bit value? It is still
+> unique enough for the stated use (i.e. unique IV for each file
+> block) but it doesn't limit what filesystem configurations can
+> actually make use of this functionality....
 > 
-> Therefore, add a new encryption policy flag INLINE_CRYPT_OPTIMIZED which
-> causes the encryption to modified as follows:
-> 
-> - The key for file contents encryption is derived from the values
->   (master_key, mode_num, filesystem_uuid).  The per-file nonce is not
->   included, so many files may share the same contents encryption key.
-> 
-> - The IV for encrypting each block of file contents is built as
->   (inode_number << 32) | file_logical_block_num.
-> 
-> Including the inode number in the IVs ensures that data in different
-> files is encrypted differently, despite per-file keys not being used.
-> Limiting the inode and block numbers to 32 bits and putting the block
-> number in the low bits is needed to be compatible with inline encryption
-> hardware which only supports specifying a 64-bit data unit number which
-> is auto-incremented; this is what the UFS and EMMC standards support.
 
-These 32 bit size limits seem arbitrary and rules out implementing
-this on larger filesystems. Why not just hash the 64 bit inode, file
-offset and block numbers into a single 64 bit value? It is still
-unique enough for the stated use (i.e. unique IV for each file
-block) but it doesn't limit what filesystem configurations can
-actually make use of this functionality....
+That won't work because we need consecutive file blocks to have consecutive IVs
+as often as possible.  The crypto support in the UFS and EMMC standards takes
+only a single 64-bit "data unit number" (DUN) per request, which the hardware
+uses as the first 64 bits of the IV and automatically increments for each data
+unit (i.e. for each filesystem block, in this case).
 
-Cheers,
+If every block had some random DUN, we'd have to submit a separate bio for every
+single block.  And they wouldn't be mergable, so each one would cause a separate
+disk request.  That would be really terrible for performance.
 
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+Also, a 64 bit hash value isn't sufficiently safe against hash collisions.
+
+An alternative which would work nicely on ext4 and xfs (if xfs supported
+fscrypt) would be to pass the physical block number as the DUN.  However, that
+wouldn't work at all on f2fs because f2fs moves data blocks around.  And since
+most people who want to use this are using f2fs, f2fs support is essential.
+
+Also keep in mind that the proposed format can still be used on a specific
+filesystem instance with fewer than 2^32 inodes and blocks, even if that type of
+filesystem can support more inodes and blocks in general.
+
+- Eric
 
 
 _______________________________________________
