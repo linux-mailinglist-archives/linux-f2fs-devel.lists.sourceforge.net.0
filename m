@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CD7FE0009
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2019 10:54:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4C0AE002A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2019 10:59:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iMpvX-0000jG-E9; Tue, 22 Oct 2019 08:54:03 +0000
+	id 1iMq0w-0004uu-Eu; Tue, 22 Oct 2019 08:59:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iMpvW-0000j9-9B
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 08:54:02 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iMq0v-0004un-9n
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 08:59:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4Upm5FlBzV5StS2iyblHBXa/cQ4JNvfClG4LeDAfKTo=; b=VCrY3Ta0Dc8bTco+PtJNiUADse
- ta+Ca65xr/WDyy+507nYlW+swGhDviSew2SSlHBzX6Jq/24p9yJzmuWYQUJ3H6bY3oApvgjmHTN/m
- n4JLgkPz+JciwaUE7AS+/n86HRqe033lmVgC3f9b5+NjjnfsrdiK0XNMef/jiFtgTUU8=;
+ bh=RSI/CGX5Hz0VN5y8qrAQfE6Y+06k8Av5IcRMtGoGzh0=; b=Rm714G9bEr+k+3w5g85x4Jy1ET
+ wItIj/x3JgX8IGR4pfMmPCZW9/CrlYK3CCmTsDN6nLlZ0j+c8Tr9VBDxUW7zzE8h5Yq/Op6DgftCU
+ eWGBXzd0N54afOxuUBsamxVYG2Ck0xd7yT6dWS6oAeI9dMzaNXQ6iOB0rghUKu1kLu1Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4Upm5FlBzV5StS2iyblHBXa/cQ4JNvfClG4LeDAfKTo=; b=MC1q3MUJCRz0PQUTVu8bDNzYhB
- 2rPGeiVyt9tdG2jgsMkiNOrlNFVUZRCKvuAtBwcRm8gsSZ4xL7ZZHqvukcjTRfIp5zwgjVdQnQpbo
- BSO3gGGoaQo1+CU96YG5o58lByAAI+KZFM3X701NGLmANz1ctSrEUYySby/XQqq5EpcQ=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=RSI/CGX5Hz0VN5y8qrAQfE6Y+06k8Av5IcRMtGoGzh0=; b=DbsYzxRFssxtRHLA6YwlJnXsJT
+ 6W555J3Dj5R+3+NsgC8l0u2WS1IUTtGlgjhY7/jVtXWffEKTIVGTGUaw7nPWUOmEhIw3XfN5yTuR0
+ DRX7HlrmiCCfoG7R4ZSJLjTBdWW/d9hZ9w5Us1/ESaAn3Aftyj4Xh+h0TcR9QmWcD9wI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iMpvS-00BF94-QQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 08:54:02 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id C3558B352AC8A67F1DBD;
- Tue, 22 Oct 2019 16:53:50 +0800 (CST)
+ id 1iMq0s-00GckB-9g
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Oct 2019 08:59:37 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id A872EF018A39653E649C;
+ Tue, 22 Oct 2019 16:59:27 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 22 Oct
- 2019 16:53:47 +0800
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 22 Oct
+ 2019 16:59:26 +0800
 To: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>, Jaegeuk Kim
  <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
 References: <20191018063740.2746-1-shinichiro.kawasaki@wdc.com>
- <20191018063740.2746-3-shinichiro.kawasaki@wdc.com>
+ <20191018063740.2746-4-shinichiro.kawasaki@wdc.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <9b7f09b7-386c-4943-b98d-e4fb7330409b@huawei.com>
-Date: Tue, 22 Oct 2019 16:53:45 +0800
+Message-ID: <f83595f2-38b4-037e-1854-58dbb000be3a@huawei.com>
+Date: Tue, 22 Oct 2019 16:59:25 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191018063740.2746-3-shinichiro.kawasaki@wdc.com>
+In-Reply-To: <20191018063740.2746-4-shinichiro.kawasaki@wdc.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -63,12 +63,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: wdc.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iMpvS-00BF94-QQ
-Subject: Re: [f2fs-dev] [PATCH v5 2/8] libf2fs_zoned: Introduce
- f2fs_report_zone() helper function
+X-Headers-End: 1iMq0s-00GckB-9g
+Subject: Re: [f2fs-dev] [PATCH v5 3/8] libf2fs_zoned: Introduce
+ f2fs_reset_zone() helper function
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,16 +86,88 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2019/10/18 14:37, Shin'ichiro Kawasaki wrote:
-> To prepare for write pointer consistency check by fsck, add
-> f2fs_report_zone() helper function which calls REPORT ZONE command to
-> get write pointer status of a single zone. The function is added to
-> lib/libf2fs_zoned which gathers zoned block device related functions.
+> To prepare for write pointer consistency fix by fsck, add
+> f2fs_reset_zone() helper function which calls RESET ZONE command. The
+> function is added to lib/libf2fs_zoned which gathers zoned block device
+> related functions.
 > 
 > Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+> ---
+>  include/f2fs_fs.h   |  1 +
+>  lib/libf2fs_zoned.c | 26 ++++++++++++++++++++++++++
+>  2 files changed, 27 insertions(+)
+> 
+> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> index 1f7ef05..a36927b 100644
+> --- a/include/f2fs_fs.h
+> +++ b/include/f2fs_fs.h
+> @@ -1303,6 +1303,7 @@ extern int f2fs_report_zone(int, u_int64_t, void *);
+>  typedef int (report_zones_cb_t)(int i, void *, void *);
+>  extern int f2fs_report_zones(int, report_zones_cb_t *, void *);
+>  extern int f2fs_check_zones(int);
+> +int f2fs_reset_zone(int, void *);
+>  extern int f2fs_reset_zones(int);
+>  
+>  #define SIZE_ALIGN(val, size)	((val) + (size) - 1) / (size)
+> diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
+> index 10d6d0b..1335038 100644
+> --- a/lib/libf2fs_zoned.c
+> +++ b/lib/libf2fs_zoned.c
+> @@ -388,6 +388,26 @@ out:
+>  	return ret;
+>  }
+>  
+> +int f2fs_reset_zone(int i, void *blkzone)
+> +{
+> +	struct blk_zone *blkz = (struct blk_zone *)blkzone;
+> +	struct device_info *dev = c.devices + i;
+> +	struct blk_zone_range range;
+> +	int ret;
+> +
+> +	if (!blk_zone_seq(blkz) || blk_zone_empty(blkz))
+> +		return 0;
+> +
+> +	/* Non empty sequential zone: reset */
+> +	range.sector = blk_zone_sector(blkz);
+> +	range.nr_sectors = blk_zone_length(blkz);
+> +	ret = ioctl(dev->fd, BLKRESETZONE, &range);
+> +	if (ret != 0)
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+As you did in other zoned block device code, errno would be preferred as return
+value?
+
+> +		ERR_MSG("ioctl BLKRESETZONE failed\n");
+> +
+> +	return ret;
+> +}
+> +
+>  int f2fs_reset_zones(int j)
+>  {
+>  	struct device_info *dev = c.devices + j;
+> @@ -491,6 +511,12 @@ int f2fs_check_zones(int i)
+>  	return -1;
+>  }
+>  
+> +int f2fs_reset_zone(int i, void *blkzone)
+> +{
+> +	ERR_MSG("%d: Zoned block devices are not supported\n", i);
+
+Minor thing:
+
+"device is"?
+
+> +	return -1;
+> +}
+> +
+>  int f2fs_reset_zones(int i)
+>  {
+>  	ERR_MSG("%d: Zoned block devices are not supported\n", i);
+
+"device is"?
 
 Thanks,
+
+> 
 
 
 _______________________________________________
