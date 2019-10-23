@@ -2,88 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11209E16BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 11:55:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E564AE1B7A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 14:57:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iNDMe-0000FL-CI; Wed, 23 Oct 2019 09:55:36 +0000
+	id 1iNGCi-00054J-PY; Wed, 23 Oct 2019 12:57:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+9c86d9a8f0f754250c00+5904+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1iNDMc-0000ET-7s
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 09:55:34 +0000
+ (envelope-from <tytso@mit.edu>) id 1iNGCh-00054C-G4
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 12:57:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uGan0qkqY3Baf+Gu4EO36oLW37gG3cinwDiYCMyfjkw=; b=IFtuzLP3Dj7rdLIQNPG/TZfQx0
- hovLtDqfqddRyDcDWBVLmeO6OwLuYWKffX10inqugsUcytGZehzwptUM62Y8vW0RZRuLk8Ix+Nk4a
- 0XNV4v4/FQ9zLQSLWKfv9VySiGFMmnJ341HfqiBwvT6CB0qxSGw8GCOrbydtkbQpGMg4=;
+ bh=l2cQJDoUTRUcJk4WJHtfIvuEu/pcOoRpz7qkEPnP9rM=; b=Riy4e/znNSsuZXISHM0cb7qF2C
+ gzJYnFpd4RumH7VOHI5BiDQRqwSbVCJ3huLV1dLtpQ28gFe1x3pa9oJ44WdQyLkUPU18ds9rKX6z0
+ vSlh6Cw0pw0pIWHWu28K8k6RTcHS58MOYK8hiLyrB/hiT4du30N2iOCtHO7viPam1PIk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uGan0qkqY3Baf+Gu4EO36oLW37gG3cinwDiYCMyfjkw=; b=h6HcWiT9GRdyE56H/+op0E6Sy7
- yA3cbDLMaKjmdd5ijQWrB3ZVAsNjHQ9yjkkDyJvN+Zbsa10AU1hQopCMojDdw8S+PziOaRGKBQi6x
- fofg7h8kBb4vpk2v/7HURQev/WddGenrIP1NPaTe8Qy5Aa8zdD16koo7HfdtORCk5sXc=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=l2cQJDoUTRUcJk4WJHtfIvuEu/pcOoRpz7qkEPnP9rM=; b=B3KS/hs0BPDVVoifLtbZ3GbS0q
+ pMaC4897oJv1XqVCPHuzJkjCYsvIa0YooYiJGXJrHO4PLXY7KL9TGT19fgpkjtWB/p83pxELGL8eX
+ L9Evp7qhRfZIeBlwsM5YxdZ8AkPWlbJZoNFiZYa6q2d7kZGwD8qbXyM7ScCHfvbP/qvo=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iNDMa-00Conp-Gh
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 09:55:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uGan0qkqY3Baf+Gu4EO36oLW37gG3cinwDiYCMyfjkw=; b=IPtlkSVbKd9G6jeWwzkZUcoqb
- 4NVDb3fhL/u7bjVcexVJA80NrHgxO0mhThUzgtgQ543HR7W6XGJZ4U6xWi7m8tXDkiye2nX4Iy7tq
- Zo8VGdc+FuZ3+dVi4dGltCQJIux+pcP5Mo/CMVpWbGcV5khHPpEs5vjDiDjrMP+ulqaZ3VcJZF97N
- dAZzJ09V2tAZ/iMf+YsGSFaAE9+Tl7a945g6zchy+gJ2bgjSs4tcNAP2LdWu4lCPXVuvnaOXCGl4Y
- Ye4lqxGDjhYoyNu2MP1lc/2/gtxhSm01HlvGYUrbZ6jO0kCf8idq7xB+sAkRHsdaddi1xkOVxJY81
- gpahDH58A==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iNCwC-0007Zj-C9; Wed, 23 Oct 2019 09:28:16 +0000
-Date: Wed, 23 Oct 2019 02:28:16 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Dave Chinner <david@fromorbit.com>, linux-fscrypt@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, Satya Tangirala <satyat@google.com>,
- Paul Crowley <paulcrowley@google.com>,
- Paul Lawrence <paullawrence@google.com>,
- "Theodore Y . Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20191023092816.GB23274@infradead.org>
+ id 1iNGCf-000JHl-Hs
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 12:57:31 +0000
+Received: from callcc.thunk.org (guestnat-104-133-0-98.corp.google.com
+ [104.133.0.98] (may be forged)) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id x9NCv1VA016128
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 23 Oct 2019 08:57:02 -0400
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+ id 3FF4B420456; Wed, 23 Oct 2019 08:57:01 -0400 (EDT)
+Date: Wed, 23 Oct 2019 08:57:01 -0400
+From: "Theodore Y. Ts'o" <tytso@mit.edu>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20191023125701.GA2460@mit.edu>
 References: <20191021230355.23136-1-ebiggers@kernel.org>
  <20191021230355.23136-2-ebiggers@kernel.org>
  <20191022052712.GA2083@dread.disaster.area>
  <20191022060004.GA333751@sol.localdomain>
+ <20191022133001.GA23268@mit.edu>
+ <20191023092718.GA23274@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191022060004.GA333751@sol.localdomain>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20191023092718.GA23274@infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 MAY_BE_FORGED          Relay IP's reverse DNS does not resolve to IP
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iNDMa-00Conp-Gh
+X-Headers-End: 1iNGCf-000JHl-Hs
 Subject: Re: [f2fs-dev] [PATCH 1/3] fscrypt: add support for
  inline-encryption-optimized policies
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -97,17 +80,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-f2fs-devel@lists.sourceforge.net, Dave Chinner <david@fromorbit.com>,
+ Satya Tangirala <satyat@google.com>, Paul Lawrence <paullawrence@google.com>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Oct 21, 2019 at 11:00:04PM -0700, Eric Biggers wrote:
-> An alternative which would work nicely on ext4 and xfs (if xfs supported
-> fscrypt) would be to pass the physical block number as the DUN.  However, that
-> wouldn't work at all on f2fs because f2fs moves data blocks around.
+On Wed, Oct 23, 2019 at 02:27:18AM -0700, Christoph Hellwig wrote:
+> On Tue, Oct 22, 2019 at 09:30:01AM -0400, Theodore Y. Ts'o wrote:
+> > If and when we actually get inline crypto support for server-class
+> > systems, hopefully they will support 128-bit DUN's, and/or they will
+> > have sufficiently fast key load times such that we can use per-file
+> > keying.
+> 
+> NVMe is working on a key per I/O feature.  So at very least the naming
+> of this option should be "crappy_underwhelming_embedded_inline_crypto"
 
-XFS can also move data blocks around.  Even ext4 can do that for limited
-cases (defrag).
+If and when the vaporware shows up in real hardware, and assuming that
+fscrypt is useful for this hardware, we can name it
+"super_duper_fancy_inline_crypto".  :-)
+
+Remember that fscrypt only encrypts the data and the file name.  It
+doesn't encrypt the metadata.  It has very specific use cases for
+Android and ChromeOS where you have multiple users that need to use
+different keys, and in the case of ChromeOS, we want to be able to
+efficiently use the space so that while user A is logged in, we can
+delete files in user B's cache directory without user B's keys being
+present.  (This is why we can't use fixed per-user partitions with
+dm-crypt; that solution was considered and rejected before we started
+work on fscrypt.)
+
+If you aren't working under tight space and cost constraints, it's
+actually better to encrypt the whole partition, so that all of the
+metadata can be protected.  fscrypt is deployed in millions and
+millions of devices, and is solving real world problems.  However, it
+never claimed to be the only way to address encryption in the storage
+stack --- and it's not at all clear fscrypt is the way that makes the
+most amount of sense for NVMe devices.  So let's cross that bridge
+when we get to it.
+
+Cheers,
+
+	       	   	      	       	      - Ted
 
 
 _______________________________________________
