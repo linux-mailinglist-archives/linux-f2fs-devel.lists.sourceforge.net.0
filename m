@@ -2,141 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7756DE10BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 06:10:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B283E118E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 07:25:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iN7yy-0003ej-0j; Wed, 23 Oct 2019 04:10:48 +0000
+	id 1iN98p-000200-Ie; Wed, 23 Oct 2019 05:25:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=19241ea77=shinichiro.kawasaki@wdc.com>)
- id 1iN7yw-0003eb-Ui
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 04:10:47 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iN98n-0001zj-T1
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 05:25:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+DtpGK2X1S7cOsqpmLK9PNuAmSiheUSZfneHPh9nxH0=; b=NH+CTgsk2Ya1a2FZbnEkqm0D24
- BRMbJNP0KA3mzQKTuB3oreSGPrdgpE9oBx1rH5DFCJInzRQHEz9jyRkA9AQRu6+YnWjSv6j9V+b0I
- SZGtVEvEpop8fiGAQv7n+OJ+/qkwy3Yb7LRBcSHxULN5H+4nnC6TC1Ob7u4+idTNVQmI=;
+ bh=ZvBrs+fxUqobPSC5CYyZltGEs7tubmJ5PUfkzUIbjNU=; b=R6QAB1qknE0MxwisCRgQmY74C3
+ HAJuDXoU8ZDseqTEzlmGOxHg9OFgpiDCiCNROotekOxkcLjvoKcvYSZ5Kuggd3K3MPKp2ZMbOMIVC
+ 7R4EreKps9hDGm9YLl/dlsx4jzAfUte1j/hkGflZaP0tsyub40Q87eaLAwwrFp8/rwf0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+DtpGK2X1S7cOsqpmLK9PNuAmSiheUSZfneHPh9nxH0=; b=UmG0nmY9V1feONyCR9DT2MMPIz
- dwZpGzxdQi89gfI4eYKYgLMcQlYFVXgQ7XnLBSQ/XnjNRsDWSGHv8ID7JXv8LxWVgOhBx5zinCZ0b
- hKF705g0OnqUD1oiWQYYrYj316Dt+8/1kOQ0vCWkZcIXH0OHFqBJI3tasqgfesFPqE7g=;
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=ZvBrs+fxUqobPSC5CYyZltGEs7tubmJ5PUfkzUIbjNU=; b=d8zeAIBWqkDjOIZl3LbcaRTz9L
+ YS1XG88pxVA0HhAMS+dR95atSFLQIz4TMmFGgwAAzJZXwEQ9JtEVrUCe2sp2LZPVefZ0SVD+uqLWn
+ i3215HnxtCFi+RH7Dk2UJTTqg11VjuAGhnDOBqEHLJ/Q47KEG8nrWZNc8Fas/u1L5PNI=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iN7yq-00HV9U-JB
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 04:10:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1571803841; x=1603339841;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=Ksxm6Jk43zBm0iQzghAiQVqVRtxXfpdsmnZ8svBCGhc=;
- b=I316rMP3qt2RMGQdXHUuCu1cFnCW4YmRDvO/hasVGg/ry2Hi/vLWPJhA
- NGm3hx3INnejlShafeaiba1plP2Q20UUaqrnQfteeliFhSRFK6butZu/h
- kfjoyIftnyjjfnOY8SFGZLfxnC2VCTvTte5N8ub6IQrqX7T8NNGThHt5B
- oGk7ZnyrCXVowxxENOnQywJtPvxJGlieAW+MOA5CVRy8VkYEG9LFsHnfJ
- TcT9Rwzfaoa1qbQ69SMjhOmPhfvKiZqKHBQ7qXGW90AElC169LuQ8Uisx
- 3p9ZCpmUG2fg1VQECjmQwKd7Yl64EkTi6kI83QVBxotmhxSqphOh7a2mn Q==;
-IronPort-SDR: UX451AtLpn/9gsd9EKni+mhIVhn09JhNPQfHzqZ3brE5q3XmPd4aSp+mHGECss1tlSUUPz1Rbl
- JXIMWXOg7qw4Yd8/VlJRZKHIMy5NHC6u22aL+c8jSpWsxloXxz+XH6k58mJGwwZRM3YcBPNlIn
- 7s4eOiySBZvwEFFMC+bfVzuB5lSGpfYioXpwTzQzl2yrilHaqU91uajeGtmUFDUKl4S96Y842F
- qCseJ1gWwxUj7fBXG6DpTyUxsltV/F0jsJb7ZVdkko0JibXU3jy7Wov4Dr3bbILiqzk1yCf5ak
- ov0=
-X-IronPort-AV: E=Sophos;i="5.68,219,1569254400"; d="scan'208";a="121890465"
-Received: from mail-dm3nam03lp2058.outbound.protection.outlook.com (HELO
- NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.58])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2019 12:10:29 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZCSRpYhOtH6W9lKmy2IpBRXdUuhO4o8NvIW9SrbDHk0XS+7KgNicwzDrUzYucN4ZenebPpF/t3TdH0YNNjLpKG5oDHT1UWf9U++ZrOhN8M/olFga2Yzfw5f6LW4HE3d8dUyJRJVHkj/sHjaK4Ta06Wnpo6kxo1uDF49aMkLnk9gGe7M37YA7aAkxT7U7O5LJzPmG8B72eBK8K+ro1QFxAqzGfRg3dwZ0jfpTgceyegiQirg6OpoRRT/eaUCuSymW1J1gK0D1ZF+y3g4pPoTmhmqlketl0NTGJP8YzK2WHOB6RqBIK//pbgeLRP7019rPNqX65dRhijUjdf2s5C6J/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+DtpGK2X1S7cOsqpmLK9PNuAmSiheUSZfneHPh9nxH0=;
- b=MUHZWkJ6FUnCEWVswrd5oxo38hklMe9rKMG2JepSsk/43Zy6FnXfsZl6zuAHMDHT2OvxpD3xz7Wg1ZZD4AbUB7C0Mfrn6M9vu41X3wkH+KGBHB6m4N49E5LgRRS2/VqULE4teLfBTdOscG8PTyy0knNZ5uEdqQu/iyfeVio82hVE6mS4CjxEJ3MGLwo4Tk0XUGp5qUcI5sQqyMGZ/f+kfxdRECzBx33cCwstM3Dd3TsKan58y2OUh/xdVxaDyB75uGcqWnno0Tuzv6erdFekMqmYqHwSoD563gy8gfOs7u89q8ffwbmAlviPHmjO7j9kUm2DSRPh9Ce4/fCUgcw45g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+DtpGK2X1S7cOsqpmLK9PNuAmSiheUSZfneHPh9nxH0=;
- b=Gox+YQ73AAtWWraIeUGNwNmNlqDy9RLPj3Kh/4Avheb1VvMWlEpJwN8gXPPWE/tDqB4vw3nv+3GWIOL2ewmVWbykHEUMJbvqcrRgugSmYLJSk3xneZJwMvCL/lJcp20wNTkb+vSZTaYh+EIj5I1nf36JHyZFc2yg2zYktV107wg=
-Received: from CY1PR04MB2268.namprd04.prod.outlook.com (10.167.10.135) by
- CY1PR04MB2315.namprd04.prod.outlook.com (10.167.17.14) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2367.24; Wed, 23 Oct 2019 04:10:27 +0000
-Received: from CY1PR04MB2268.namprd04.prod.outlook.com
- ([fe80::353a:c2f5:de72:cc7]) by CY1PR04MB2268.namprd04.prod.outlook.com
- ([fe80::353a:c2f5:de72:cc7%9]) with mapi id 15.20.2367.025; Wed, 23 Oct 2019
- 04:10:27 +0000
-From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: Chao Yu <yuchao0@huawei.com>
-Thread-Topic: [PATCH v5 3/8] libf2fs_zoned: Introduce f2fs_reset_zone() helper
- function
-Thread-Index: AQHVhX6RBrzr/U/GJUe2iQmUaWuWdqdmaewAgAE6roA=
-Date: Wed, 23 Oct 2019 04:10:27 +0000
-Message-ID: <20191023041025.pvk653egqgzeiccr@shindev.dhcp.fujisawa.hgst.com>
-References: <20191018063740.2746-1-shinichiro.kawasaki@wdc.com>
- <20191018063740.2746-4-shinichiro.kawasaki@wdc.com>
- <f83595f2-38b4-037e-1854-58dbb000be3a@huawei.com>
- <BYAPR04MB5816DA3BF24489E360E9E969E7680@BYAPR04MB5816.namprd04.prod.outlook.com>
- <44355087-2e78-2d26-3d8b-fd17be43c181@huawei.com>
-In-Reply-To: <44355087-2e78-2d26-3d8b-fd17be43c181@huawei.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: NeoMutt/20180716
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=shinichiro.kawasaki@wdc.com; 
-x-originating-ip: [199.255.47.11]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 9ca5bfe6-5b76-4827-3fe0-08d7576eefb2
-x-ms-traffictypediagnostic: CY1PR04MB2315:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <CY1PR04MB2315B67F5311183743FFF005ED6B0@CY1PR04MB2315.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-forefront-prvs: 019919A9E4
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(376002)(366004)(396003)(39860400002)(136003)(346002)(199004)(189003)(4326008)(99286004)(86362001)(6246003)(6916009)(486006)(476003)(44832011)(11346002)(446003)(6506007)(102836004)(76176011)(26005)(6116002)(53546011)(186003)(3846002)(71200400001)(8936002)(6436002)(71190400001)(6486002)(229853002)(7736002)(305945005)(8676002)(256004)(2906002)(81166006)(81156014)(9686003)(6512007)(14454004)(478600001)(25786009)(76116006)(54906003)(5660300002)(66066001)(66556008)(66476007)(64756008)(66446008)(66946007)(316002)(91956017)(1076003)(58126008);
- DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR04MB2315;
- H:CY1PR04MB2268.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: q3lLKCs5Rhla1V44imu2xUxBcdDFS44vtZn2r30D8a0iWz7KLRywnBRwQY2OnqDbvSgdhR181vooD58AAANA6+pd/mMvZwDDxCOW4MfnFv47tDdUJybY3ZMZuaAc2KVkagEwM+KRAm5MbnCUq+jNi5vneupqgUP7y3+pTP3Eg4F/ibkL0qaPpZD3lPog4cJ/LWU6yJUGvsm6VWZI4xVmhQwamtN/BFPS3a3yF4cTKfyaxj3/PtG2wCwiVVifFamPfNbLrurwSIORMo81q9V/zKOpg2LavlmcumcVio3BSgQFzzCiHkadruvOncrLGkVnQZbXButXFmDH3yrmwzWDtBemDk2vUO8PldxjkwIyTA8FE792TT3gEptqz6MXlFyfObYBzewb8VpuutEY90Yb4avJIh6new4vcqyJlJmMDzlzczRGd3tL+kH94+qp9QJl
-Content-ID: <6FF14F0976FC4446A42F96E3688A6A9E@namprd04.prod.outlook.com>
+ id 1iN98l-00CVVm-Bi
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 05:25:01 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D5B422084C;
+ Wed, 23 Oct 2019 05:24:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1571808289;
+ bh=57AjTpVsEK2wLpxNbMuuV5YOyVG4VhHtsDkkObll51w=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UICWj69EvHL7qJROQbwFyC32PbAmLlgn0g+8aYY+MduRc6bkLxGcpQ9VEEN64ME/V
+ 3mpJqMz+tdMs+l6+y3Z0zIwGbzn7twstjf6NJbWWfaa7KqdIVwTO+r9hH+iaRLB/oW
+ //F6PF7luiCJAwzzyjAtkvYyLVM3aPHkwggU4WCk=
+Date: Tue, 22 Oct 2019 22:24:47 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20191023052447.GD361298@sol.localdomain>
+Mail-Followup-To: Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20191022171602.93637-1-jaegeuk@kernel.org>
+ <20191022171602.93637-2-jaegeuk@kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ca5bfe6-5b76-4827-3fe0-08d7576eefb2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2019 04:10:27.4460 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /XRvEGokxiW5hh/rvXaCLXVrHKKxKPFCqPzxRv8nVzeUDm9P1j6WTfFib0vv6w3KeqCRJUjQKPtlmQstlB2ax7594o7o3+z1xqXeh3sIFmQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR04MB2315
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20191022171602.93637-2-jaegeuk@kernel.org>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: wdc.com]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -144,9 +77,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iN7yq-00HV9U-JB
-Subject: Re: [f2fs-dev] [PATCH v5 3/8] libf2fs_zoned: Introduce
- f2fs_reset_zone() helper function
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iN98l-00CVVm-Bi
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -158,132 +92,189 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Damien Le Moal <Damien.LeMoal@wdc.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Oct 22, 2019 / 17:24, Chao Yu wrote:
-> On 2019/10/22 17:10, Damien Le Moal wrote:
-> > On 2019/10/22 17:59, Chao Yu wrote:
-> >> On 2019/10/18 14:37, Shin'ichiro Kawasaki wrote:
-> >>> To prepare for write pointer consistency fix by fsck, add
-> >>> f2fs_reset_zone() helper function which calls RESET ZONE command. The
-> >>> function is added to lib/libf2fs_zoned which gathers zoned block device
-> >>> related functions.
-> >>>
-> >>> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-> >>> ---
-> >>>  include/f2fs_fs.h   |  1 +
-> >>>  lib/libf2fs_zoned.c | 26 ++++++++++++++++++++++++++
-> >>>  2 files changed, 27 insertions(+)
-> >>>
-> >>> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-> >>> index 1f7ef05..a36927b 100644
-> >>> --- a/include/f2fs_fs.h
-> >>> +++ b/include/f2fs_fs.h
-> >>> @@ -1303,6 +1303,7 @@ extern int f2fs_report_zone(int, u_int64_t, void *);
-> >>>  typedef int (report_zones_cb_t)(int i, void *, void *);
-> >>>  extern int f2fs_report_zones(int, report_zones_cb_t *, void *);
-> >>>  extern int f2fs_check_zones(int);
-> >>> +int f2fs_reset_zone(int, void *);
-> >>>  extern int f2fs_reset_zones(int);
-> >>>  
-> >>>  #define SIZE_ALIGN(val, size)	((val) + (size) - 1) / (size)
-> >>> diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
-> >>> index 10d6d0b..1335038 100644
-> >>> --- a/lib/libf2fs_zoned.c
-> >>> +++ b/lib/libf2fs_zoned.c
-> >>> @@ -388,6 +388,26 @@ out:
-> >>>  	return ret;
-> >>>  }
-> >>>  
-> >>> +int f2fs_reset_zone(int i, void *blkzone)
-> >>> +{
-> >>> +	struct blk_zone *blkz = (struct blk_zone *)blkzone;
-> >>> +	struct device_info *dev = c.devices + i;
-> >>> +	struct blk_zone_range range;
-> >>> +	int ret;
-> >>> +
-> >>> +	if (!blk_zone_seq(blkz) || blk_zone_empty(blkz))
-> >>> +		return 0;
-> >>> +
-> >>> +	/* Non empty sequential zone: reset */
-> >>> +	range.sector = blk_zone_sector(blkz);
-> >>> +	range.nr_sectors = blk_zone_length(blkz);
-> >>> +	ret = ioctl(dev->fd, BLKRESETZONE, &range);
-> >>> +	if (ret != 0)
-> >>
-> >> As you did in other zoned block device code, errno would be preferred as return
-> >> value?
-
-Yes, should return -errno. This made me think that it's the better to print
-errno in ERR_MSG below. Will reflect these changes in the next version.
-
-> >>
-> >>> +		ERR_MSG("ioctl BLKRESETZONE failed\n");
-> >>> +
-> >>> +	return ret;
-> >>> +}
-> >>> +
-> >>>  int f2fs_reset_zones(int j)
-> >>>  {
-> >>>  	struct device_info *dev = c.devices + j;
-> >>> @@ -491,6 +511,12 @@ int f2fs_check_zones(int i)
-> >>>  	return -1;
-> >>>  }
-> >>>  
-> >>> +int f2fs_reset_zone(int i, void *blkzone)
-> >>> +{
-> >>> +	ERR_MSG("%d: Zoned block devices are not supported\n", i);
-> >>
-> >> Minor thing:
-> >>
-> >> "device is"?
-> > 
-> > 	ERR_MSG("%d: Unsupported zoned block device\n", i);
-> > 
-> > may be better.
+On Tue, Oct 22, 2019 at 10:16:02AM -0700, Jaegeuk Kim wrote:
+> From: Chao Yu <yuchao0@huawei.com>
 > 
-> Looks better.
-
-Thanks. Will reflect in the next version. Same change will be applied to
-1st and 2nd patches for f2fs_report_zones() and f2fs_report_zone().
-
+> This patch tries to support compression in f2fs.
 > 
-> > 
-> > Note that we should never hit this anyway since the validity of the set
-> > of devices used should have been checked way before we start resetting
-> > zones.
+> - New term named cluster is defined as basic unit of compression, file can
+> be divided into multiple clusters logically. One cluster includes 4 << n
+> (n >= 0) logical pages, compression size is also cluster size, each of
+> cluster can be compressed or not.
 > 
-> Yup.
+> - In cluster metadata layout, one special flag is used to indicate cluster
+> is compressed one or normal one, for compressed cluster, following metadata
+> maps cluster to [1, 4 << n - 1] physical blocks, in where f2fs stores
+> data including compress header and compressed data.
 > 
-> Thanks,
+> - In order to eliminate write amplification during overwrite, F2FS only
+> support compression on write-once file, data can be compressed only when
+> all logical blocks in file are valid and cluster compress ratio is lower
+> than specified threshold.
 > 
-> > 
-> >>
-> >>> +	return -1;
-> >>> +}
-> >>> +
-> >>>  int f2fs_reset_zones(int i)
-> >>>  {
-> >>>  	ERR_MSG("%d: Zoned block devices are not supported\n", i);
-> >>
-> >> "device is"?
-> > 
-> > Same as above.
+> - To enable compression on regular inode, there are three ways:
+> * chattr +c file
+> * chattr +c dir; touch dir/file
+> * mount w/ -o compress_extension=ext; touch file.ext
+> 
+> Compress metadata layout:
+>                              [Dnode Structure]
+>              +-----------------------------------------------+
+>              | cluster 1 | cluster 2 | ......... | cluster N |
+>              +-----------------------------------------------+
+>              .           .                       .           .
+>        .                       .                .                      .
+>   .         Compressed Cluster       .        .        Normal Cluster            .
+> +----------+---------+---------+---------+  +---------+---------+---------+---------+
+> |compr flag| block 1 | block 2 | block 3 |  | block 1 | block 2 | block 3 | block 4 |
+> +----------+---------+---------+---------+  +---------+---------+---------+---------+
+>            .                             .
+>          .                                           .
+>        .                                                           .
+>       +-------------+-------------+----------+----------------------------+
+>       | data length | data chksum | reserved |      compressed data       |
+>       +-------------+-------------+----------+----------------------------+
+> 
+> Changelog:
+> 
+> 20190326:
+> - fix error handling of read_end_io().
+> - remove unneeded comments in f2fs_encrypt_one_page().
+> 
+> 20190327:
+> - fix wrong use of f2fs_cluster_is_full() in f2fs_mpage_readpages().
+> - don't jump into loop directly to avoid uninitialized variables.
+> - add TODO tag in error path of f2fs_write_cache_pages().
+> 
+> 20190328:
+> - fix wrong merge condition in f2fs_read_multi_pages().
+> - check compressed file in f2fs_post_read_required().
+> 
+> 20190401
+> - allow overwrite on non-compressed cluster.
+> - check cluster meta before writing compressed data.
+> 
+> 20190402
+> - don't preallocate blocks for compressed file.
+> 
+> - add lz4 compress algorithm
+> - process multiple post read works in one workqueue
+>   Now f2fs supports processing post read work in multiple workqueue,
+>   it shows low performance due to schedule overhead of multiple
+>   workqueue executing orderly.
+> 
+> - compress: support buffered overwrite
+> C: compress cluster flag
+> V: valid block address
+> N: NEW_ADDR
+> 
+> One cluster contain 4 blocks
+> 
+>  before overwrite   after overwrite
+> 
+> - VVVV		->	CVNN
+> - CVNN		->	VVVV
+> 
+> - CVNN		->	CVNN
+> - CVNN		->	CVVV
+> 
+> - CVVV		->	CVNN
+> - CVVV		->	CVVV
+> 
+> [Jaegeuk Kim]
+> - add tracepoint for f2fs_{,de}compress_pages()
+> - fix many bugs and add some compression stats
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Not only f2fs_reset_zones() but also f2fs_check_zones() have the same
-ERR_MSG string. I will replace the message string of these functions
-with suggested one in this 3rd patch.
+How was this tested?  Shouldn't there a mount option analogous to
+test_dummy_encryption that causes all files to be auto-compressed, so that a
+full run of xfstests can be done with compression?  I see "compress_extension",
+but apparently it's only for a file extension?  Also, since reads can involve
+any combination of decryption, compression, and verity, it's important to test
+as many combinations as possible, including all at once.  Has that been done?
 
-Thanks!
+I also tried running the fs-verity xfstests on this with
+'kvm-xfstests -c f2fs -g verity', but the kernel immediately crashes:
 
---
-Best Regards,
-Shin'ichiro Kawasaki
+BUG: kernel NULL pointer dereference, address: 0000000000000182
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 0 P4D 0 
+Oops: 0000 [#1] SMP
+CPU: 1 PID: 0 Comm: swapper/1 Not tainted 5.4.0-rc1-00119-g60f351f4c50f #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ?-20191013_105130-anatol 04/01/2014
+RIP: 0010:__queue_work+0x3e/0x5f0 kernel/workqueue.c:1409
+Code: d4 53 48 83 ec 18 89 7d d4 8b 3d c1 bf 2a 01 85 ff 74 17 65 48 8b 04 25 80 5d 01 00 8b b0 0c 07 00 00 85 f6 0f 84 1
+RSP: 0018:ffffc900000a8db0 EFLAGS: 00010046
+RAX: ffff88807d94e340 RBX: 0000000000000246 RCX: 0000000000000000
+RDX: ffff88807d9e0be8 RSI: 0000000000000000 RDI: 0000000000000001
+RBP: ffffc900000a8df0 R08: 0000000000000000 R09: 0000000000000001
+R10: ffff888075f2bc68 R11: 0000000000000000 R12: ffff88807d9e0be8
+R13: 0000000000000000 R14: 0000000000000030 R15: ffff88807c2c6780
+FS:  0000000000000000(0000) GS:ffff88807fd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000182 CR3: 00000000757e3000 CR4: 00000000003406e0
+Call Trace:
+ <IRQ>
+ queue_work_on+0x67/0x70 kernel/workqueue.c:1518
+ queue_work include/linux/workqueue.h:494 [inline]
+ f2fs_enqueue_post_read_work fs/f2fs/data.c:166 [inline]
+ bio_post_read_processing fs/f2fs/data.c:173 [inline]
+ f2fs_read_end_io+0xcb/0xe0 fs/f2fs/data.c:195
+ bio_endio+0xa4/0x1a0 block/bio.c:1818
+ req_bio_endio block/blk-core.c:242 [inline]
+ blk_update_request+0xf6/0x310 block/blk-core.c:1462
+ blk_mq_end_request+0x1c/0x130 block/blk-mq.c:568
+ virtblk_request_done+0x32/0x80 drivers/block/virtio_blk.c:226
+ blk_done_softirq+0x98/0xc0 block/blk-softirq.c:37
+ __do_softirq+0xc1/0x40d kernel/softirq.c:292
+ invoke_softirq kernel/softirq.c:373 [inline]
+ irq_exit+0xb3/0xc0 kernel/softirq.c:413
+ exiting_irq arch/x86/include/asm/apic.h:536 [inline]
+ do_IRQ+0x5b/0x110 arch/x86/kernel/irq.c:263
+ common_interrupt+0xf/0xf arch/x86/entry/entry_64.S:607
+ </IRQ>
+RIP: 0010:native_safe_halt arch/x86/include/asm/irqflags.h:60 [inline]
+RIP: 0010:arch_safe_halt arch/x86/include/asm/irqflags.h:103 [inline]
+RIP: 0010:default_idle+0x29/0x160 arch/x86/kernel/process.c:580
+Code: 90 55 48 89 e5 41 55 41 54 65 44 8b 25 70 64 76 7e 53 0f 1f 44 00 00 e8 95 13 88 ff e9 07 00 00 00 0f 00 2d 8b c0 b
+RSP: 0018:ffffc90000073e78 EFLAGS: 00000202 ORIG_RAX: ffffffffffffffdc
+RAX: ffff88807d94e340 RBX: 0000000000000001 RCX: 0000000000000000
+RDX: 0000000000000046 RSI: 0000000000000006 RDI: ffff88807d94e340
+RBP: ffffc90000073e90 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000001
+R13: ffff88807d94e340 R14: 0000000000000000 R15: 0000000000000000
+ arch_cpu_idle+0xa/0x10 arch/x86/kernel/process.c:571
+ default_idle_call+0x1e/0x30 kernel/sched/idle.c:94
+ cpuidle_idle_call kernel/sched/idle.c:154 [inline]
+ do_idle+0x1e4/0x210 kernel/sched/idle.c:263
+ cpu_startup_entry+0x1b/0x20 kernel/sched/idle.c:355
+ start_secondary+0x151/0x1a0 arch/x86/kernel/smpboot.c:264
+ secondary_startup_64+0xa4/0xb0 arch/x86/kernel/head_64.S:241
+CR2: 0000000000000182
+---[ end trace 86328090a3179142 ]---
+RIP: 0010:__queue_work+0x3e/0x5f0 kernel/workqueue.c:1409
+Code: d4 53 48 83 ec 18 89 7d d4 8b 3d c1 bf 2a 01 85 ff 74 17 65 48 8b 04 25 80 5d 01 00 8b b0 0c 07 00 00 85 f6 0f 84 1
+RSP: 0018:ffffc900000a8db0 EFLAGS: 00010046
+RAX: ffff88807d94e340 RBX: 0000000000000246 RCX: 0000000000000000
+RDX: ffff88807d9e0be8 RSI: 0000000000000000 RDI: 0000000000000001
+RBP: ffffc900000a8df0 R08: 0000000000000000 R09: 0000000000000001
+R10: ffff888075f2bc68 R11: 0000000000000000 R12: ffff88807d9e0be8
+R13: 0000000000000000 R14: 0000000000000030 R15: ffff88807c2c6780
+FS:  0000000000000000(0000) GS:ffff88807fd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000182 CR3: 00000000757e3000 CR4: 00000000003406e0
+Kernel panic - not syncing: Fatal exception in interrupt
+Kernel Offset: disabled
+Rebooting in 5 seconds..
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
