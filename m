@@ -2,124 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9D3E1EBF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 17:01:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26B3CE21BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2019 19:28:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iNI8E-00077W-OQ; Wed, 23 Oct 2019 15:01:02 +0000
+	id 1iNKQo-0002vc-K0; Wed, 23 Oct 2019 17:28:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <alexandru.Ardelean@analog.com>) id 1iNI8C-000779-Tt
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 15:01:01 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1iNKQm-0002vK-RD
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 17:28:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VzqalHzmrqYpXfFsIZ3suL0aRGtxgzLQqQ06XnGsf3I=; b=lC0tjx/b1hebQZwxZ4htvrRjXY
- VysYkZxY4Nrakvr/3PikHS6U6du83s8joLg4RvcWA6k0wsWLHgoW22hKE4fAQYpECvrhecUGG3cMv
- XWA+hLYXjaKC4PoCRMYWdcyvHHl28coaBLpHRr6bxhd88uGgwgls2JqmyXHcpiiIIhN0=;
+ bh=kbl5iQyENrglvvwDF8dq5WCHOdLhyPonWnGSa5lOSPU=; b=OjJF/cgtAaEbTl62UfSlIiwOuV
+ yZDeMANwLwhaZlG7n7ZcQQy/pyyhz9KZvbAdoE0M/0g9eygoVVsjZUEOjYHXZG/9mfYDg3aofKDbE
+ QwCP0HkL0AE+tEM17UCfDYTdgheTkUPrVoU5Th+fMm3O1cLFnR+XKgcF0MK5GwCBZqUU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:Message-ID
- :Date:Subject:CC:To:From:Sender:Reply-To:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VzqalHzmrqYpXfFsIZ3suL0aRGtxgzLQqQ06XnGsf3I=; b=I
- cYY1LRZqVjuwjIQnVJ6i9P4jwJUax1E34UXK4bCpzw80cE8hTD3EWnIoDMMf9I9AHK7256nat2Kc7
- 42FvCDoz63RWW4kGUgbkJfa+1AXzrXi/A00VJnPk4QiGOFZ+FHoG2ba2xT4oSYkSIzEwNla2aaMnr
- 1M/Gq3SPRooxm6/M=;
-Received: from mx0b-00128a01.pphosted.com ([148.163.139.77])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=kbl5iQyENrglvvwDF8dq5WCHOdLhyPonWnGSa5lOSPU=; b=mb6WGcNaObE5F8bOBSJPNTEJXN
+ vijsFKpPIJ9uSSx+ppDI5yyhm4bdrRl4bOQgB8AxhvmzagNPcAFVv9VQ2DLMdz0nz6BrOn2Ur47Ta
+ YK20ZTaB9IFqim0kEEXFKgGW1cg7qkhocllXCsWyZZMP44R8etYUqTMcgjf2ZBGgRh/8=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iNI8A-000QV4-JY
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 15:01:00 +0000
-Received: from pps.filterd (m0167090.ppops.net [127.0.0.1])
- by mx0b-00128a01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9NDwgkl019478; Wed, 23 Oct 2019 10:02:38 -0400
-Received: from nam04-sn1-obe.outbound.protection.outlook.com
- (mail-sn1nam04lp2059.outbound.protection.outlook.com [104.47.44.59])
- by mx0b-00128a01.pphosted.com with ESMTP id 2vt9t22md6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 23 Oct 2019 10:02:38 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kWEIUMIyQzgwP/1HvdHki53312irh1kSHET9wekBDiiz9oXTynKLPlKBkalnchtLP9aMASsY9eocFTICLmOIaMVGwwQ3pjhjcpva6ukBEnBn1g8taRnYk//hLkNe71KwQYx4Fz37g72C6aAee8rLImb/og4ewrX31jYMBguFhlSRyfHXdvs49yBAYcWZHmWfrWpLfynNSK15bOJCjqDBju0DdrNaPdWmMV8UrKXahx80cuXaKAatE1fz1B6Tdxw4TbOcamqmYyXTG9ANwe8gKKzDbWqOArumfDxsYd/15dxgfGr4tpveAFWBPVB3LPD/QBbsslIaG2YwbMCZ5fLh5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VzqalHzmrqYpXfFsIZ3suL0aRGtxgzLQqQ06XnGsf3I=;
- b=Du08SSd+/0HStzT8IUgSFeHbiU1htXfI8y9EPz6Mklc05qwmBvXd88ht+XWLBHiPBbxz6Y1gLNehr3ju2XLrMqBHGOnrCWkXhhSTdVHnEFFELGJoBiMkUmNjhbDYabKurMEuxcIgqvpXuW8e9YxcBh1iWgZQO5PXdnYWx4mddgydwMxWOJJgXkaxeHRtL5mRjF4vcSY7k2pn94n9fE2No9jtw2aUz2npxGQsVt8Pp8QlRK/u5cEepvLXdM5HbQVqSMi58lYiARWmt7a2JiY39VijVBKKqJSxtZGOg4uTjDRSqIgb6erR0Ni3zuyPpNzWY4CWDqrGy1a5/EwBnckrrA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=analog.com; dmarc=pass action=none header.from=analog.com;
- dkim=pass header.d=analog.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=analog.onmicrosoft.com; s=selector2-analog-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VzqalHzmrqYpXfFsIZ3suL0aRGtxgzLQqQ06XnGsf3I=;
- b=xRqqz+vmDKq3URrtKfTbzQ7sNXxORg+A727z3aCCkr+u2DfjCbrmmQpOvhoTNkKAWQy5DkVxs+8raaOmqtxcmMljYGccKapqUw0VoB7YDrxXuQuwxkLjsoBbTAKyE03Qxs9TulsLPwNJ12JXZPofHh77V1ZxQsR5NERm8QY2+CM=
-Received: from CH2PR03MB5192.namprd03.prod.outlook.com (20.180.12.152) by
- CH2PR03MB5254.namprd03.prod.outlook.com (20.180.4.11) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2367.24; Wed, 23 Oct 2019 14:02:30 +0000
-Received: from CH2PR03MB5192.namprd03.prod.outlook.com
- ([fe80::99:71f2:a588:977c]) by CH2PR03MB5192.namprd03.prod.outlook.com
- ([fe80::99:71f2:a588:977c%3]) with mapi id 15.20.2367.022; Wed, 23 Oct 2019
- 14:02:30 +0000
-From: "Ardelean, Alexandru" <alexandru.Ardelean@analog.com>
-To: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-Thread-Topic: =?utf-8?B?W2J1ZyByZXBvcnRdIGNvbXBpbGVyIHdhcm5pbmc6ICBmcy9mMmZzL25vZGUu?=
- =?utf-8?B?YzogSW4gZnVuY3Rpb24g4oCYX19zZXRfbmF0X2NhY2hlX2RpcnR54oCZOiA=?=
- =?utf-8?B?4oCYaGVhZOKAmSBtYXkgYmUgdXNlZCB1bmluaXRpYWxpemVk?=
-Thread-Index: AQHViaqCPk0KQeLWIEWJ5KCTuOj7kA==
-Date: Wed, 23 Oct 2019 14:02:30 +0000
-Message-ID: <fc71f3b73116115f78bcee2753e7bb3d5331731e.camel@analog.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.71.226.54]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: c82bacef-e9d0-4654-7f59-08d757c1a529
-x-ms-traffictypediagnostic: CH2PR03MB5254:
-x-microsoft-antispam-prvs: <CH2PR03MB5254FDF69B3FDFB2642355E6F96B0@CH2PR03MB5254.namprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:120;
-x-forefront-prvs: 019919A9E4
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(39860400002)(376002)(366004)(136003)(346002)(396003)(199004)(189003)(186003)(256004)(102836004)(81156014)(6506007)(118296001)(86362001)(81166006)(14454004)(316002)(476003)(486006)(14444005)(26005)(71190400001)(71200400001)(8936002)(25786009)(2616005)(110136005)(54906003)(66066001)(6486002)(64756008)(6436002)(305945005)(76116006)(66476007)(66556008)(6512007)(66446008)(2906002)(66946007)(7736002)(4326008)(99286004)(3846002)(6116002)(36756003)(5660300002)(478600001)(2501003);
- DIR:OUT; SFP:1101; SCL:1; SRVR:CH2PR03MB5254;
- H:CH2PR03MB5192.namprd03.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: analog.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: TN2NPYwMEi8JT2n48ir6Bbxpu+hHBYSyYE8iZs7pW3Q4llgecVzZk2uDp0TGNTj9K3R40qjVct3Io4bhSTPBBgjJc9F+lSQt2GKBvJNniqXRrRmnQ6rd3Qrgp5tDhEIVEEpZkTddyCCcIN2kCsYRVLAv3z2smLvkJpWNqJiA0rFUcOEr9MqaoWAUCJndvNYY150aANMGP+JpfbnM6xEna4hi9X+lN+Upc4PYoq8YRQB4iyeMokaf2zHRvw7rZxqZ/v9gnMZn3zFAWclvRgcQYFVE6eRfLXYhyfby7CnxCEINjx2uCiKQ3hWIQiSot6fstUm/M/pI267nUIvF4FnY3DAEOtyPf6m4bPYI/mQA6lI+R6xQnRMWjh+yrSciMhNOXUBwIJsbDJsJDFjqNKbDL74yRlnWfYimgMN0VT1BV7LHqz0136apBnN7udIaVN5k
-x-ms-exchange-transport-forked: True
-Content-ID: <2590B0140D4E6E40807DBB307C0047DE@namprd03.prod.outlook.com>
+ id 1iNKQk-00DLbg-EG
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Oct 2019 17:28:20 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D3FED21872;
+ Wed, 23 Oct 2019 17:28:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1571851687;
+ bh=5pgWB4AkehuWd0cfv4A/b1IFZsyYusfiPRz17cePncs=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=OWFT3gE6ccyQz2r3n9mQVAaG7rJDOKP8MU6yf2is0l5OG60rTBToazya3uXg90hAL
+ MC3ETtBjtGo0d0z5fshUsHzywa7dGbRHxEyvu6KKJvcw31zPhELmcSVxt/rFXVQBse
+ gHSGDvBLs5gxe6IGxUV2XMCD6tNMX2HIO6ggcB5s=
+Date: Wed, 23 Oct 2019 10:28:07 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <20191023172807.GA37885@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20191022171602.93637-1-jaegeuk@kernel.org>
+ <20191022171602.93637-2-jaegeuk@kernel.org>
+ <20191023052447.GD361298@sol.localdomain>
 MIME-Version: 1.0
-X-OriginatorOrg: analog.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c82bacef-e9d0-4654-7f59-08d757c1a529
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2019 14:02:30.5129 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: eaa689b4-8f87-40e0-9c6f-7228de4d754a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4qYohvCraT2imIXWOGqKneE5sZhHMxpLryNjCNBbjy7vT71/fxLUnC1XlnxrabJrKLjG8lZdUSvlJBIvy4mYaI4cqRDssHjR5794qna8qYk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5254
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
- definitions=2019-10-23_03:2019-10-23,2019-10-23 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- priorityscore=1501 suspectscore=0 mlxlogscore=852 phishscore=0
- impostorscore=0 clxscore=1011 malwarescore=0 spamscore=0 bulkscore=0
- mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-1908290000 definitions=main-1910230141
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20191023052447.GD361298@sol.localdomain>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -128,13 +69,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iNI8A-000QV4-JY
-Subject: [f2fs-dev] =?utf-8?q?=5Bbug_report=5D_compiler_warning=3A__fs/f2f?=
- =?utf-8?b?cy9ub2RlLmM6IEluIGZ1bmN0aW9uIOKAmF9fc2V0X25hdF9jYWNoZV9kaXJ0?=
- =?utf-8?b?eeKAmTog4oCYaGVhZOKAmSBtYXkgYmUgdXNlZCB1bmluaXRpYWxpemVk?=
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iNKQk-00DLbg-EG
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,39 +89,208 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-U2VlbXMgdG8gaGF2ZSBiZWVuIGludHJvZHVjZWQgdmlhOg0KDQotLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCmNvbW1pdCA3
-ODBkZTQ3Y2Y2Y2I1ZjUyNGNkOThlYzhmZmJmZmMzZGE1Njk2ZTE3DQpBdXRob3I6IENoYW8gWXUg
-PHl1Y2hhbzBAaHVhd2VpLmNvbT4NCkRhdGU6ICAgVHVlIE1hciAyMCAyMzowODozMCAyMDE4ICsw
-ODAwDQoNCiAgICBmMmZzOiBkb24ndCB0cmFjayBuZXcgbmF0IGVudHJ5IGluIG5hdCBzZXQNCiAg
-ICANCiAgICBOYXQgZW50cnkgc2V0IGlzIHVzZWQgb25seSBpbiBjaGVja3BvaW50KCksIGFuZCBk
-dXJpbmcgY2hlY2twb2ludCgpIHdlDQogICAgd29uJ3QgZmx1c2ggbmV3IG5hdCBlbnRyeSB3aXRo
-IHVuYWxsb2NhdGVkIGFkZHJlc3MsIHNvIHdlIGRvbid0IG5lZWQgdG8NCiAgICBhZGQgbmV3IG5h
-dCBlbnRyeSBpbnRvIG5hdCBzZXQsIHRoZW4gbmF0X2VudHJ5X3NldDo6ZW50cnlfY250IGNhbg0K
-ICAgIGluZGljYXRlIGFjdHVhbCBlbnRyeSBjb3VudCB3ZSBuZWVkIHRvIGZsdXNoIGluIGNoZWNr
-cG9pbnQoKS4NCiAgICANCiAgICBTaWduZWQtb2ZmLWJ5OiBZdW5sZWkgSGUgPGhleXVubGVpQGh1
-YXdlaS5jb20+DQogICAgU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8eXVjaGFvMEBodWF3ZWkuY29t
-Pg0KICAgIFNpZ25lZC1vZmYtYnk6IEphZWdldWsgS2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+DQot
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tDQoNCkNvbXBpbGVyIHdhcm5pbmcgaXM6DQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiAgQ0MgICAgICBmcy9m
-MmZzL25vZGUubw0KSW4gZmlsZSBpbmNsdWRlZCBmcm9tIC4vaW5jbHVkZS9saW51eC93YWl0Lmg6
-NzowLA0KICAgICAgICAgICAgICAgICBmcm9tIC4vaW5jbHVkZS9saW51eC93YWl0X2JpdC5oOjgs
-DQogICAgICAgICAgICAgICAgIGZyb20gLi9pbmNsdWRlL2xpbnV4L2ZzLmg6NiwNCiAgICAgICAg
-ICAgICAgICAgZnJvbSBmcy9mMmZzL25vZGUuYzoxMToNCmZzL2YyZnMvbm9kZS5jOiBJbiBmdW5j
-dGlvbiDigJhfX3NldF9uYXRfY2FjaGVfZGlydHnigJk6DQouL2luY2x1ZGUvbGludXgvbGlzdC5o
-OjYzOjEzOiBlcnJvcjog4oCYaGVhZOKAmSBtYXkgYmUgdXNlZCB1bmluaXRpYWxpemVkIGluDQp0
-aGlzIGZ1bmN0aW9uIFstV2Vycm9yPW1heWJlLXVuaW5pdGlhbGl6ZWRdDQogIG5leHQtPnByZXYg
-PSBuZXc7DQogICAgICAgICAgICAgXg0KZnMvZjJmcy9ub2RlLmM6MjM4OjI0OiBub3RlOiDigJho
-ZWFk4oCZIHdhcyBkZWNsYXJlZCBoZXJlDQogIHN0cnVjdCBuYXRfZW50cnlfc2V0ICpoZWFkOw0K
-ICAgICAgICAgICAgICAgICAgICAgICAgXg0KY2MxOiBhbGwgd2FybmluZ3MgYmVpbmcgdHJlYXRl
-ZCBhcyBlcnJvcnMNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KVGhhbmtzDQpBbGV4DQoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxp
-c3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5z
-b3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 10/22, Eric Biggers wrote:
+> On Tue, Oct 22, 2019 at 10:16:02AM -0700, Jaegeuk Kim wrote:
+> > From: Chao Yu <yuchao0@huawei.com>
+> > 
+> > This patch tries to support compression in f2fs.
+> > 
+> > - New term named cluster is defined as basic unit of compression, file can
+> > be divided into multiple clusters logically. One cluster includes 4 << n
+> > (n >= 0) logical pages, compression size is also cluster size, each of
+> > cluster can be compressed or not.
+> > 
+> > - In cluster metadata layout, one special flag is used to indicate cluster
+> > is compressed one or normal one, for compressed cluster, following metadata
+> > maps cluster to [1, 4 << n - 1] physical blocks, in where f2fs stores
+> > data including compress header and compressed data.
+> > 
+> > - In order to eliminate write amplification during overwrite, F2FS only
+> > support compression on write-once file, data can be compressed only when
+> > all logical blocks in file are valid and cluster compress ratio is lower
+> > than specified threshold.
+> > 
+> > - To enable compression on regular inode, there are three ways:
+> > * chattr +c file
+> > * chattr +c dir; touch dir/file
+> > * mount w/ -o compress_extension=ext; touch file.ext
+> > 
+> > Compress metadata layout:
+> >                              [Dnode Structure]
+> >              +-----------------------------------------------+
+> >              | cluster 1 | cluster 2 | ......... | cluster N |
+> >              +-----------------------------------------------+
+> >              .           .                       .           .
+> >        .                       .                .                      .
+> >   .         Compressed Cluster       .        .        Normal Cluster            .
+> > +----------+---------+---------+---------+  +---------+---------+---------+---------+
+> > |compr flag| block 1 | block 2 | block 3 |  | block 1 | block 2 | block 3 | block 4 |
+> > +----------+---------+---------+---------+  +---------+---------+---------+---------+
+> >            .                             .
+> >          .                                           .
+> >        .                                                           .
+> >       +-------------+-------------+----------+----------------------------+
+> >       | data length | data chksum | reserved |      compressed data       |
+> >       +-------------+-------------+----------+----------------------------+
+> > 
+> > Changelog:
+> > 
+> > 20190326:
+> > - fix error handling of read_end_io().
+> > - remove unneeded comments in f2fs_encrypt_one_page().
+> > 
+> > 20190327:
+> > - fix wrong use of f2fs_cluster_is_full() in f2fs_mpage_readpages().
+> > - don't jump into loop directly to avoid uninitialized variables.
+> > - add TODO tag in error path of f2fs_write_cache_pages().
+> > 
+> > 20190328:
+> > - fix wrong merge condition in f2fs_read_multi_pages().
+> > - check compressed file in f2fs_post_read_required().
+> > 
+> > 20190401
+> > - allow overwrite on non-compressed cluster.
+> > - check cluster meta before writing compressed data.
+> > 
+> > 20190402
+> > - don't preallocate blocks for compressed file.
+> > 
+> > - add lz4 compress algorithm
+> > - process multiple post read works in one workqueue
+> >   Now f2fs supports processing post read work in multiple workqueue,
+> >   it shows low performance due to schedule overhead of multiple
+> >   workqueue executing orderly.
+> > 
+> > - compress: support buffered overwrite
+> > C: compress cluster flag
+> > V: valid block address
+> > N: NEW_ADDR
+> > 
+> > One cluster contain 4 blocks
+> > 
+> >  before overwrite   after overwrite
+> > 
+> > - VVVV		->	CVNN
+> > - CVNN		->	VVVV
+> > 
+> > - CVNN		->	CVNN
+> > - CVNN		->	CVVV
+> > 
+> > - CVVV		->	CVNN
+> > - CVVV		->	CVVV
+> > 
+> > [Jaegeuk Kim]
+> > - add tracepoint for f2fs_{,de}compress_pages()
+> > - fix many bugs and add some compression stats
+> > 
+> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> 
+> How was this tested?  Shouldn't there a mount option analogous to
+> test_dummy_encryption that causes all files to be auto-compressed, so that a
+> full run of xfstests can be done with compression?  I see "compress_extension",
+> but apparently it's only for a file extension?  Also, since reads can involve
+> any combination of decryption, compression, and verity, it's important to test
+> as many combinations as possible, including all at once.  Has that been done?
+
+This patch should be RFC which requires as many tests as possible. I posted it
+quite early in order to get some reviews and feedback as well.
+
+What I've done so far would look like:
+- mkfs.f2fs -f -O encrypt -O quota -O compression -O extra_attr /dev/sdb1
+- mount -t f2fs /dev/sdb1 /mnt/test
+- mkdir /mnt/test/comp_dir
+- f2fs_io setflags compression /mnt/test/comp_dir
+- cd /mnt/test/comp_dir
+- git clone kernel.git
+- compile kernel
+- or, fsstress on top of it
+
+> 
+> I also tried running the fs-verity xfstests on this with
+> 'kvm-xfstests -c f2fs -g verity', but the kernel immediately crashes:
+
+I didn't check verity yet. I'll take a look at this soon.
+
+> 
+> BUG: kernel NULL pointer dereference, address: 0000000000000182
+> #PF: supervisor read access in kernel mode
+> #PF: error_code(0x0000) - not-present page
+> PGD 0 P4D 0 
+> Oops: 0000 [#1] SMP
+> CPU: 1 PID: 0 Comm: swapper/1 Not tainted 5.4.0-rc1-00119-g60f351f4c50f #3
+> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ?-20191013_105130-anatol 04/01/2014
+> RIP: 0010:__queue_work+0x3e/0x5f0 kernel/workqueue.c:1409
+> Code: d4 53 48 83 ec 18 89 7d d4 8b 3d c1 bf 2a 01 85 ff 74 17 65 48 8b 04 25 80 5d 01 00 8b b0 0c 07 00 00 85 f6 0f 84 1
+> RSP: 0018:ffffc900000a8db0 EFLAGS: 00010046
+> RAX: ffff88807d94e340 RBX: 0000000000000246 RCX: 0000000000000000
+> RDX: ffff88807d9e0be8 RSI: 0000000000000000 RDI: 0000000000000001
+> RBP: ffffc900000a8df0 R08: 0000000000000000 R09: 0000000000000001
+> R10: ffff888075f2bc68 R11: 0000000000000000 R12: ffff88807d9e0be8
+> R13: 0000000000000000 R14: 0000000000000030 R15: ffff88807c2c6780
+> FS:  0000000000000000(0000) GS:ffff88807fd00000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000000000182 CR3: 00000000757e3000 CR4: 00000000003406e0
+> Call Trace:
+>  <IRQ>
+>  queue_work_on+0x67/0x70 kernel/workqueue.c:1518
+>  queue_work include/linux/workqueue.h:494 [inline]
+>  f2fs_enqueue_post_read_work fs/f2fs/data.c:166 [inline]
+>  bio_post_read_processing fs/f2fs/data.c:173 [inline]
+>  f2fs_read_end_io+0xcb/0xe0 fs/f2fs/data.c:195
+>  bio_endio+0xa4/0x1a0 block/bio.c:1818
+>  req_bio_endio block/blk-core.c:242 [inline]
+>  blk_update_request+0xf6/0x310 block/blk-core.c:1462
+>  blk_mq_end_request+0x1c/0x130 block/blk-mq.c:568
+>  virtblk_request_done+0x32/0x80 drivers/block/virtio_blk.c:226
+>  blk_done_softirq+0x98/0xc0 block/blk-softirq.c:37
+>  __do_softirq+0xc1/0x40d kernel/softirq.c:292
+>  invoke_softirq kernel/softirq.c:373 [inline]
+>  irq_exit+0xb3/0xc0 kernel/softirq.c:413
+>  exiting_irq arch/x86/include/asm/apic.h:536 [inline]
+>  do_IRQ+0x5b/0x110 arch/x86/kernel/irq.c:263
+>  common_interrupt+0xf/0xf arch/x86/entry/entry_64.S:607
+>  </IRQ>
+> RIP: 0010:native_safe_halt arch/x86/include/asm/irqflags.h:60 [inline]
+> RIP: 0010:arch_safe_halt arch/x86/include/asm/irqflags.h:103 [inline]
+> RIP: 0010:default_idle+0x29/0x160 arch/x86/kernel/process.c:580
+> Code: 90 55 48 89 e5 41 55 41 54 65 44 8b 25 70 64 76 7e 53 0f 1f 44 00 00 e8 95 13 88 ff e9 07 00 00 00 0f 00 2d 8b c0 b
+> RSP: 0018:ffffc90000073e78 EFLAGS: 00000202 ORIG_RAX: ffffffffffffffdc
+> RAX: ffff88807d94e340 RBX: 0000000000000001 RCX: 0000000000000000
+> RDX: 0000000000000046 RSI: 0000000000000006 RDI: ffff88807d94e340
+> RBP: ffffc90000073e90 R08: 0000000000000000 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000001
+> R13: ffff88807d94e340 R14: 0000000000000000 R15: 0000000000000000
+>  arch_cpu_idle+0xa/0x10 arch/x86/kernel/process.c:571
+>  default_idle_call+0x1e/0x30 kernel/sched/idle.c:94
+>  cpuidle_idle_call kernel/sched/idle.c:154 [inline]
+>  do_idle+0x1e4/0x210 kernel/sched/idle.c:263
+>  cpu_startup_entry+0x1b/0x20 kernel/sched/idle.c:355
+>  start_secondary+0x151/0x1a0 arch/x86/kernel/smpboot.c:264
+>  secondary_startup_64+0xa4/0xb0 arch/x86/kernel/head_64.S:241
+> CR2: 0000000000000182
+> ---[ end trace 86328090a3179142 ]---
+> RIP: 0010:__queue_work+0x3e/0x5f0 kernel/workqueue.c:1409
+> Code: d4 53 48 83 ec 18 89 7d d4 8b 3d c1 bf 2a 01 85 ff 74 17 65 48 8b 04 25 80 5d 01 00 8b b0 0c 07 00 00 85 f6 0f 84 1
+> RSP: 0018:ffffc900000a8db0 EFLAGS: 00010046
+> RAX: ffff88807d94e340 RBX: 0000000000000246 RCX: 0000000000000000
+> RDX: ffff88807d9e0be8 RSI: 0000000000000000 RDI: 0000000000000001
+> RBP: ffffc900000a8df0 R08: 0000000000000000 R09: 0000000000000001
+> R10: ffff888075f2bc68 R11: 0000000000000000 R12: ffff88807d9e0be8
+> R13: 0000000000000000 R14: 0000000000000030 R15: ffff88807c2c6780
+> FS:  0000000000000000(0000) GS:ffff88807fd00000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000000000182 CR3: 00000000757e3000 CR4: 00000000003406e0
+> Kernel panic - not syncing: Fatal exception in interrupt
+> Kernel Offset: disabled
+> Rebooting in 5 seconds..
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
