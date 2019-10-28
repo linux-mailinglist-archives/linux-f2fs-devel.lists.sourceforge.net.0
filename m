@@ -2,88 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F7DCE6C91
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2019 07:55:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C3AE6C98
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2019 07:58:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iOywJ-000447-TE; Mon, 28 Oct 2019 06:55:43 +0000
+	id 1iOyym-0004dF-53; Mon, 28 Oct 2019 06:58:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=1975423da=shinichiro.kawasaki@wdc.com>)
- id 1iOywI-00043x-I5
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Oct 2019 06:55:42 +0000
+ id 1iOyyk-0004cj-79
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Oct 2019 06:58:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qrIdwLK97Y7D2CiR8DcFv9F3PakptFnEcHp8s+1O4dk=; b=GZORnKQO/1ZPmxRSDgBD41diMT
- h+l093wtCaQVhmzBzne2vsm6qm8HUZmvJfI7608hybjFBjhtPn9AUZvu1pjkS5NeegMz/vj8h6MZj
- 3H87ZIZ6IGwZCFMMWhgUmfgZ31nsZRNv1exuV1p7fbHGAt4tiOBc3KVy9qD2wU52Zrdk=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=qrIdwLK97Y7D2CiR8DcFv9F3PakptFnEcHp8s+1O4dk=; b=FShnXzuHbbqJ6gKUdPvAB316ig
- T6OgaGkobNYzSl6j+2+f/sM4IWJ0G0cr+dvom6X3dIz0gMoSaJZxKyc3B9EdMGrBNwWUU6weYFm6+
- uyFqgTO0Oz/iJxhY0wCWf0a+NNvOmHgkqTralfmbJ0U5oxzZ+tgLXiiSS7uH6C8Fied0=;
-Received: from esa3.hgst.iphmx.com ([216.71.153.141])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=KFNGX33NcbYHqMMkbJu0gdgIK68UyGIB14K2y0Z7Ta0=; b=c4JDFtNbdWottuyva2Wuj7c+yW
+ 1fG8uC1OxXm8zTK8S1O6uji47NriBccXKZzDuM9e9fxl9QJNNYKD+MYN5y64gVcs3ABVOYqh+htwL
+ dQGClFKghHe8NkP+aK2h+kOsRAkM4ehxIzkv2oUFZQgTSeE6zoItEUSVpLaMatcDLpYk=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=KFNGX33NcbYHqMMkbJu0gdgIK68UyGIB14K2y0Z7Ta0=; b=O
+ hcztP53ZCr9g45EpDVb+W57KCczOaSIdjNVXyQPtCCokr86ej2if/kud9w760Fx3IXheeqn3eLZ5V
+ DnkeTvTJGWNDvWn7h8XQ0rtZpGUnqxkzHMYVd/lPO2r1JFDyGgzCzT1o15Ol1ArTlkiHYQ9hoMxhW
+ o3sy7BZSJL1TZR/c=;
+Received: from esa2.hgst.iphmx.com ([68.232.143.124])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iOywF-0067BT-4u
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Oct 2019 06:55:42 +0000
+ id 1iOyyg-0031Si-DR
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Oct 2019 06:58:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572245740; x=1603781740;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=/Mywkvn8jA36sjb3tpXF3lTLYLwnaruRY3VzYO+Dp4A=;
- b=X3gRSYGylwKke5cyfLg3DAju9pIiQMnK3cgTW8G7oudRdPtahT8HdKz5
- iUoC68XSC8iQbZ0LD4n5x6vV1g/skcvnhtgJOBJm56EOemMiq7lLmuW/7
- GpqxNqObnwqbEHj9lLetMT8rSpZ0B4ITLgsde1VykKr7zMzV5en2ZIxih
- /Rhuo/sZNrdxfFJUJ+CNwVNxfVCPC16KagcFVvYqGxPrO7Ek/7EeG8Qtz
- BrVnaDHvwEVcxk7gF5pjfryLqxzmyva4VpAH+gBTSEpDHfWZJWeGIscO0
- p6XD5EoTYNwsZcgRqgoZH2NLAS5GmluVKulfgJSB1UMgqvWOMnRe1KkUb w==;
-IronPort-SDR: TdRW7VxoQw+midH/9dzmHEmbEncZYE14r5fj8fKB2Cghs1wzHOcsToq/eFzooUoEFYMmsJ88Kb
- XM5Me+uv6TVpG7P6/NlknBqTZdeiZIZAU29SZOQw2uX1mAENTSdpQneDjxQ+k8InR/Q3chFIFJ
- odGZJerz2k4zhfrKnmdVYw98MTTAJxGBmkI4yqebEqkxJpOIoRmN7K0ugGGMzTxrrZwAB8zNio
- H1fBdMN4EXp3Yj+DNkotUQ3rWqqeaEZ9+z+mdLDBxqCVezoY50oW16oVC5QDtePAO6FqhRr9Pu
- 6+s=
-X-IronPort-AV: E=Sophos;i="5.68,239,1569254400"; d="scan'208";a="125879640"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2019 14:55:28 +0800
-IronPort-SDR: v0D7C5g2XmPHqVrrXFIjqXErcdDdMB/JmOzY6muY6/kdrsHBQxnuUTdVkTMZdLfcmUN2BwkUnk
- l4p+VemIcZpcNADK7Zau3NckGCW5jrzjKo8FX+FmR3J3s7WyWl9uU3QaorSIqfH0Lr8MlyQeOl
- e/TyQ8OmG8dE6inVOjwsJ9qlfvEe/Uonp73Ap1QGuk3qa6BkEcneodWdr4BLwjsflkvVEVNT5H
- su4RauDtPrswB4EqkHXAVFYhS9Yghvg2hJVa37Ph7QYvSsN7pEh+a8jyqzTjj7UztV8eXlG9T/
- 0+SuKS+HgxGkME0EF0asHw+I
+ t=1572245917; x=1603781917;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=1N9mBro7ebcdoJeQcM4EfXA9Rdq8b8Wd5jSTSSars1A=;
+ b=GvOU2cG/gYGdnTpoAPGThE6CykDndLWNkRSJ6k3lYX1t4UV4VKBcr6pk
+ YD02wb8ksc9+7I1RV3Un3SD0ZO+xEA5FR7Slx55UfVIdTwa8Q3YUWfc4M
+ NwdNYccGnK2Fvbuh1pyo9nw18c/3sLrCq0yV0D1CeqfMJ73qDLK0Ntno2
+ xh+ol6c7axrz7/h010AIlicyZJQHiVnouCDJiQhv9Gib/9151VcyImbCP
+ JcJ8BvzvHeuySnzDNN7Qacp2M/H3Ie4dwrhVpB8jgnHRlz/Tx3L2kkt0N
+ qqukmokLALG2ZEEvDulhMheoZdlwov0NpBhEil1H2SRZYImgMlMbQ9UqI w==;
+IronPort-SDR: xnkEJQP+2mDJdxQsxSdqiwvRLcVsPqpPtaK2wLpJteccZ2Iue4oCL6AumM+icrUisEIEDhXyNJ
+ yGbqdIKjxtsXnpt2g5vL5eqgoggCzlV2RiXEk+JyBYCMbvpG35uMe6K7jBVvQk+uzNA0AwTnVj
+ /Bw/nkvvjmyYxyOw5tKufNQ8l3XdRBMkdS8SHIlWl+h0+8FIplBrj65RBWwBM/QHTsf1tZfV6v
+ t486/kSQjeI6/OAmYuSFwCct+Zr3TplNJfUWyq1FRsPHbqPpZlkwZUm++iQqCT/WZzUcvj7468
+ qD8=
+X-IronPort-AV: E=Sophos;i="5.68,239,1569254400"; d="scan'208";a="222612149"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2019 14:58:29 +0800
+IronPort-SDR: hu1w6y/8FQOURmZ9rgpu7QMqY0PuH1yZhkHVsbRwBLbgtjdgwfqAwdfJu8S180IQokixASv6MJ
+ RHQYlQhAI7ik5UP2GdoyOlpgc9w0IAM+oORFQDO+Tw0pcJKjT3gUPEDHeZxcMYjgEbK+nxbkIe
+ 4N0o1P9OyDuciD3li4KO8PTi5W01vSzZf8Ih9vqbqU/a9VdXeiRGee0ez3+xidt61MofJcMaMD
+ 1/8vPq4+z47lSZj3Px/XcqrPyGRGt2R72ZDogJTH7LrQYqEH0Kq3O5EgMjnYpHUedawOhslpX1
+ HA4X3UCBt27cmQ2ddvWgv4CY
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Oct 2019 23:50:49 -0700
-IronPort-SDR: xi1n9X/v1bCORQNpBssAHJxxPPl75kO046dgOT4Ok5DchSnQ1E/otKnmzcqKH+Oy05kIQXyU6T
- 7qVZUjGTEIjKC+wMD2vsNM7ZnkdMtZRTq2KKn4KTkXUzNTqmro2/wB3Je5f0yoxSgMmkIyhoRJ
- iDcsqQreP7+/A6Z2xJMe7M92WcLFA+3G15LKi42PnuBt9T8Jj32AWaI8Jf30ZsGDgLu5sDNrXP
- gC5DiSkSp4PJksF0udz2wuVo1vMsM9urgnYoyxPB2UDcgr680l4TWdTqd0KAsEPEhEHy2A1qLq
- qXs=
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Oct 2019 23:53:32 -0700
+IronPort-SDR: aoQZi3prEtvJ5ivbaao0SeJyoaOxe3323v+wMgNfsd+QmpkySWP1oyLT05gOH+iXF56KhBkO02
+ ih1nyXNYVJq+hVyClsVH0JglOcHTrpWcEE9SeRPtdRjPj04OJoFU/FUAOnXRvKexKJFCEk+iUZ
+ MgLH7ds+oSBKRBbg9R4yUcPeCYZXmZMo27glvzc+vHJrYmpypj8gYX8bvFDocHh4cMCMoZN2u7
+ ysCFCtK/8cJubuXEZGkmOY4NZkn6xRciATLdE3nE18KsSMckGulimlXbPloVg/oflQhcDVLp4D
+ 29A=
 WDCIronportException: Internal
 Received: from shindev.dhcp.fujisawa.hgst.com (HELO shindev.fujisawa.hgst.com)
  ([10.149.52.166])
- by uls-op-cesaip01.wdc.com with ESMTP; 27 Oct 2019 23:55:27 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 27 Oct 2019 23:58:04 -0700
 From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 28 Oct 2019 15:55:12 +0900
-Message-Id: <20191028065512.27876-9-shinichiro.kawasaki@wdc.com>
+Date: Mon, 28 Oct 2019 15:57:59 +0900
+Message-Id: <20191028065801.28220-1-shinichiro.kawasaki@wdc.com>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191028065512.27876-1-shinichiro.kawasaki@wdc.com>
-References: <20191028065512.27876-1-shinichiro.kawasaki@wdc.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -95,10 +93,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iOywF-0067BT-4u
-Subject: [f2fs-dev] [PATCH v6 8/8] fsck: Check write pointer consistency of
- non-open zones
+X-Headers-End: 1iOyyg-0031Si-DR
+Subject: [f2fs-dev] [PATCH v2 0/2] f2fs: Check write pointers of zoned block
+ devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,177 +112,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-To catch f2fs bug in write pointer handling code for zoned block devices,
-have fsck check consistency of write pointers of non-open zones, that
-current segments do not point to. Check two items comparing write pointer
-positions with valid block maps in SIT.
+On sudden f2fs shutdown, zoned block device status and f2fs meta data can be
+inconsistent. When f2fs shutdown happens during write operations, write pointers
+on the device go forward but the f2fs meta data does not reflect the write
+pointer progress. This inconsistency will eventually cause "Unaligned write
+command" error when restarting write operation after the next mount.
 
-The first item is check for zones with no valid blocks. When there is no
-valid blocks in a zone, the write pointer should be at the start of the
-zone. If not, next write operation to the zone will cause unaligned write
-error. If write pointer is not at the zone start, reset the zone to move
-the write pointer to the zone start.
+This error is observed with xfstests test case generic/388, which enforces
+sudden shutdown during write operation and checks the file system recovery.
 
-The second item is check between write pointer position and the last
-valid block in the zone. It is unexpected that the last valid block
-position is beyond the write pointer. In such a case, report as the bug.
-Fix is not required for such zone, because the zone is not selected for
-next write operation until the zone get discarded.
+This patch series adds a feature to f2fs to check and fix the write pointer
+consistency when zoned block devices get mounted. Per discussion on the list,
+implement two checks: a check for open zones and a check for non-open zones.
 
-In the same manner as the consistency check for current segments, do the
-check and fix twice: at the beginning of do_fsck() to avoid unaligned
-write error during fsck, and at fsck_verify() to reflect meta data
-updates by fsck.
+The first patch add the check for open zones that current segments point to.
+Check write pointer consistency with current segment positions recorded in CP,
+and if they are inconsistent, assign a new zone to the current segment. When
+fsync data exists, check and fix the consistency after fsync data recovery.
 
-Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
----
- fsck/fsck.c | 119 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 119 insertions(+)
+The second patch adds the check for non-open zones that current segments do not
+point to. Compare write pointers with valid block maps in SIT, and if they are
+inconsistent, report the failure. Even if fixes are required, do not have kernel
+fix because SIT consistency with CP is not guaranteed because of hardware
+failure or software bug possibility. In such check failure cases, fail the mount
+to ask users to run fsck. Corresponding patch series is being posted for
+fsck.f2fs to add the write pointer consistency check feature.
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index e0eda4e..8400929 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -2751,6 +2751,122 @@ out:
- 	return cnt;
- }
- 
-+#ifdef HAVE_LINUX_BLKZONED_H
-+
-+struct write_pointer_check_data {
-+	struct f2fs_sb_info *sbi;
-+	int dev_index;
-+};
-+
-+static int chk_and_fix_wp_with_sit(int i, void *blkzone, void *opaque)
-+{
-+	struct blk_zone *blkz = (struct blk_zone *)blkzone;
-+	struct write_pointer_check_data *wpd = opaque;
-+	struct f2fs_sb_info *sbi = wpd->sbi;
-+	struct device_info *dev = c.devices + wpd->dev_index;
-+	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
-+	block_t zone_block, wp_block, wp_blkoff;
-+	unsigned int zone_segno, wp_segno;
-+	struct curseg_info *cs;
-+	int cs_index, ret, last_valid_blkoff;
-+	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
-+	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
-+
-+	if (blk_zone_conv(blkz))
-+		return 0;
-+
-+	zone_block = dev->start_blkaddr
-+		+ (blk_zone_sector(blkz) >> log_sectors_per_block);
-+	zone_segno = GET_SEGNO(sbi, zone_block);
-+	if (zone_segno >= MAIN_SEGS(sbi))
-+		return 0;
-+
-+	wp_block = dev->start_blkaddr
-+		+ (blk_zone_wp_sector(blkz) >> log_sectors_per_block);
-+	wp_segno = GET_SEGNO(sbi, wp_block);
-+	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
-+
-+	/* if a curseg points to the zone, skip the check */
-+	for (cs_index = 0; cs_index < NO_CHECK_TYPE; cs_index++) {
-+		cs = &SM_I(sbi)->curseg_array[cs_index];
-+		if (zone_segno <= cs->segno &&
-+		    cs->segno < zone_segno + segs_per_zone)
-+			return 0;
-+	}
-+
-+	last_valid_blkoff = last_vblk_off_in_zone(sbi, zone_segno);
-+
-+	/*
-+	 * When there is no valid block in the zone, check write pointer is
-+	 * at zone start. If not, reset the write pointer.
-+	 */
-+	if (last_valid_blkoff < 0 &&
-+	    blk_zone_wp_sector(blkz) != blk_zone_sector(blkz)) {
-+		if (!c.fix_on) {
-+			MSG(0, "Inconsistent write pointer: wp[0x%x,0x%x]\n",
-+			    wp_segno, wp_blkoff);
-+			fsck->chk.wp_inconsistent_zones++;
-+			return 0;
-+		}
-+
-+		FIX_MSG("Reset write pointer of zone at segment 0x%x",
-+			zone_segno);
-+		ret = f2fs_reset_zone(wpd->dev_index, blkz);
-+		if (ret) {
-+			printf("[FSCK] Write pointer reset failed: %s\n",
-+			       dev->path);
-+			return ret;
-+		}
-+		fsck->chk.wp_fixed = 1;
-+		return 0;
-+	}
-+
-+	/*
-+	 * If valid blocks exist in the zone beyond the write pointer, it
-+	 * is a f2fs bug. No need to fix because the zone is not selected
-+	 * for the write. Just report it.
-+	 */
-+	if (last_valid_blkoff + zone_block > wp_block) {
-+		MSG(0, "Unexpected invalid write pointer: wp[0x%x,0x%x]\n",
-+		    wp_segno, wp_blkoff);
-+		return 0;
-+	}
-+
-+	return 0;
-+}
-+
-+static void fix_wp_sit_alignment(struct f2fs_sb_info *sbi)
-+{
-+	unsigned int i;
-+	struct write_pointer_check_data wpd = {	sbi, 0 };
-+
-+	if (c.zoned_model != F2FS_ZONED_HM)
-+		return;
-+
-+	for (i = 0; i < MAX_DEVICES; i++) {
-+		if (!c.devices[i].path)
-+			break;
-+		if (c.devices[i].zoned_model != F2FS_ZONED_HM)
-+			break;
-+
-+		wpd.dev_index = i;
-+		if (f2fs_report_zones(i, chk_and_fix_wp_with_sit, &wpd)) {
-+			printf("[FSCK] Write pointer check failed: %s\n",
-+			       c.devices[i].path);
-+			return;
-+		}
-+	}
-+}
-+
-+#else
-+
-+static void fix_wp_sit_alignment(struct f2fs_sb_info *sbi)
-+{
-+	return;
-+}
-+
-+#endif
-+
- /*
-  * Check and fix consistency with write pointers at the beginning of
-  * fsck so that following writes by fsck do not fail.
-@@ -2766,6 +2882,8 @@ void fsck_chk_and_fix_write_pointers(struct f2fs_sb_info *sbi)
- 		fix_curseg_info(sbi);
- 		fsck->chk.wp_fixed = 1;
- 	}
-+
-+	fix_wp_sit_alignment(sbi);
- }
- 
- int fsck_chk_curseg_info(struct f2fs_sb_info *sbi)
-@@ -2984,6 +3102,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 			fix_hard_links(sbi);
- 			fix_nat_entries(sbi);
- 			rewrite_sit_area_bitmap(sbi);
-+			fix_wp_sit_alignment(sbi);
- 			fix_curseg_info(sbi);
- 			fix_checksum(sbi);
- 			fix_checkpoints(sbi);
+Thank goes to Chao Yu for the detailed discussion on the list.
+
+Changes from v1:
+* 2nd patch: Added check to ensure zones are in main segments
+
+Shin'ichiro Kawasaki (2):
+  f2fs: Check write pointer consistency of open zones
+  f2fs: Check write pointer consistency of non-open zones
+
+ fs/f2fs/f2fs.h     |   4 +
+ fs/f2fs/recovery.c |   6 +
+ fs/f2fs/segment.c  | 274 +++++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/super.c    |  17 ++-
+ 4 files changed, 298 insertions(+), 3 deletions(-)
+
 -- 
 2.21.0
 
