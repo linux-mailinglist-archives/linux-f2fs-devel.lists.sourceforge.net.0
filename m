@@ -2,116 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73D17E7D7F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 01:27:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D71F0E82F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 09:08:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Yh4iNxc3DIWgOA2eqLghKS9IFPCteQyEn17N/XG/ako=; b=VOzjm9sR7Mpx+STo7FW9Q0JDIq
-	7R2cdIm9FtSoO2w+pAtfYt6/Wq9pgHyr9qiO0ST9W0h+q2nr1/iM+npd/VCFblp6wTuIYypWGbAlo
-	TITYAmZwR1VmkT2SH8yGBCrGytRvWvq9cjvR0LAX71InEAHoui5CkImKS7rosaMftTjA=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=tXL9KTMhg+BubQSiRiTQwR/yHNr5o0Qm12XZzR/X1E4=; b=GeINS+cBlx6yFOUcuWrzxpAkrk
+	2nPlfiLaYQM1InvDf4SoUx/N0nMxWebVnNkWl2LPWqpYjyywWCYhUa8/SXAuoGTEntIsaUo1+HZbU
+	Cmg3xXl6K14OTha7hlGx3uCaAZdoZNxMHIxOU5eOeTIQM2RAawl4uLlbgZAO9Uw3F8jw=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPFMA-0006wB-Us; Tue, 29 Oct 2019 00:27:30 +0000
+	id 1iPMYc-0000bl-6F; Tue, 29 Oct 2019 08:08:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hridya@google.com>) id 1iPFMA-0006w4-5p
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 00:27:30 +0000
+ (envelope-from
+ <3e-63XQgKACwZWJQVPacOWWOTM.KWU@flex--robinhsu.bounces.google.com>)
+ id 1iPMYa-0000a9-OV
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:08:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EFG/NUMsi6FfdyRZ+1e8lH7DWnn/2sbhoHTkW1LTspQ=; b=lr3LtW1fLG9Rsdth9v3RkQ/dxg
- nsRNUJPhvTue6hv0zBvGM+7n8FP7MyBkCg46kTEOutYcdVUBsAgKujLqhOY7/pOQFwobJYRUWPrB2
- VEodJu+ndcaO11encyf472ek2HMcgtd8q6AWFdJaO7tpWCo2pCarEr8cFxxioG0V+7/4=;
+ bh=coTE+MJajFctVQLNyVBBx0dRF4V5QAJNpm9Z15UXxk4=; b=gigWFdMGsks9sH3ydpOqSKwA6Z
+ o/MTU18eJiloon5zB/Vnmsr9fxpc9VeO4qqSb5mhQ5izymbik3HsKr8aiETNkULpLdUqsNaWhjjW9
+ 6yhb9S001FYs8AHMY+viXjGzz6ivfsDt5QCNXmGqXUWkZY6nR9K3kxRHIXwaQMnAjfWs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=EFG/NUMsi6FfdyRZ+1e8lH7DWnn/2sbhoHTkW1LTspQ=; b=Y1gZZMONbcnpMUN71B+aORD0ih
- XCJ5xAo2ehfDsb/bizn5OLVLUwJ2d0Bum92wew0dpCl8z+otZ1y0YrrufhgonkZsDLGrXvN8WPWSP
- teKQ7YGPBZ8u6BGCzFDq7YM3o1C3R1Wi9auZjkUUAqjkYoyhBGo6DffJ9bECVCJiHa44=;
-Received: from mail-ot1-f67.google.com ([209.85.210.67])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=coTE+MJajFctVQLNyVBBx0dRF4V5QAJNpm9Z15UXxk4=; b=X
+ xgTLi4fstI7hOuWj+1NU5Qi6bPfW8IxJ8ajBEoRiLRqBk3svuiIkbphDeVV9XeFoWOQjjWiY+JYZy
+ UNxL527HqZFVJQFCmRP3mzb/Hh48wh/wPrn5sYQItNoZjmrgHAWk+KrWwMVlrIjbGXIpS5cC+EmUl
+ z8ey9f1+vu2FZAYs=;
+Received: from mail-qt1-f202.google.com ([209.85.160.202])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPFM8-004lkS-Of
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 00:27:30 +0000
-Received: by mail-ot1-f67.google.com with SMTP id b19so5934225otq.10
+ id 1iPMYY-00886W-SU
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:08:48 +0000
+Received: by mail-qt1-f202.google.com with SMTP id v92so13558991qtd.18
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Oct 2019 17:27:28 -0700 (PDT)
+ Tue, 29 Oct 2019 01:08:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EFG/NUMsi6FfdyRZ+1e8lH7DWnn/2sbhoHTkW1LTspQ=;
- b=N549/5eirfYiMcEkpgmhVSSpEyVRHSOgPEz645xTJulyOKXBFmbS+kttzA1bI4775t
- KEB4cnQ8CSDgEaf3xORF5wcjxQN4e+EJo3f0Vm0GOg/j+Ahj2Dk1sSIozG/tGExY4mmZ
- KhHByJXLiNKUABr8oFs+9R4n4hLJs7TWoSpR0lCSSWO8XFfPKqYjYdevQPekSBIPqxA3
- HvsjCa7jokmArh/ClM6pBzyipGOeaECa9E50bk2n6MCgYC8hn9dVW/OmmX25MFTC7gjG
- xTo47H1OBR74DUU0lbosTDLdnRM84NtxVrWeadlk+AwZH22SaGHJUA/R32VBcK01dqt0
- VAJQ==
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=coTE+MJajFctVQLNyVBBx0dRF4V5QAJNpm9Z15UXxk4=;
+ b=J3Pd9Wcsnx0fAFx+SuaJ/2ISyWHr/iOR+MyAqpulWQSKfN/L5GWFqWQ36Xk0my72EP
+ aoHhIkRhqf1zoyv3Ivb3FJDRimdgkDZkn63ulG6N6Kx4yzc+QMNSxz5xS7KaUzOvSmya
+ 5RBkAhgPy0ZBcHerSvW6id1YOnmRaDWly0RVgYKfPK6bD/1+C+Z7f84BdGdLjZ4Tqyfi
+ a09ZEnH3ORvmN/v/g0gXmsSvAcpeb++Toqc9tvQwN1hxSCibDEZn/Ew29O8LArDVHNF6
+ Z3QwrVT08LPjudalRd1OTD2AkJzB4aT26ZfA9qJF8K8gnpDFeuFblPPhK9AlAS9PzSy7
+ 3rjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EFG/NUMsi6FfdyRZ+1e8lH7DWnn/2sbhoHTkW1LTspQ=;
- b=J1HeIaK8NnvxnOU2KYk60q59159+ys5o8llQIDMQZJdIMhAlvvHGc6rQs3EipnVJwk
- 7/pe9bLrsnAX6E6qKJsAVdpMmDTs7cKqRe0bklrlZFr/PzYkfF2SCdpzs+1rjTe8i49/
- uyS38wsTz6Tzcq9uRwZ6c0jz/NDC7AeYS7eyAsqV6VS5JqrqLHpVImaQppiSRS/WEB2r
- JJmhrAB/tZ1mzOy52S8llz0sRRWpUqmKi3LaxwHpvUn3siSVRwvARuFc64QJWZwN5eI0
- sT3cOS+0LF9JQ5DxkoSQSSTGmDDMc5+CY3pLglCMScAs3xnk18KGxELJanlqX0tcVcjv
- 2j1Q==
-X-Gm-Message-State: APjAAAUO5E4mXpa6vll4ZRqs8c9spCqIhohUhn1SOGIW9BwtwPNa5YEG
- gGHYeq3DIqEUAKFCKUJzPrw3QG31ahK9DYgSyEtbSw==
-X-Google-Smtp-Source: APXvYqyyMmC6akibUD0ctyx6cZAI+MIQu4fGSJOdVD9ulOLlox6OONUlRS6Dqd0X3Ff0CgmITcC9+WmmkjuDol9LmWE=
-X-Received: by 2002:a05:6830:1bea:: with SMTP id
- k10mr11448680otb.190.1572308842618; 
- Mon, 28 Oct 2019 17:27:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <20191023214821.107615-1-hridya@google.com>
- <20191023214821.107615-2-hridya@google.com>
- <e61510b8-c8d7-349f-b297-9df367c26a9f@huawei.com>
- <CA+wgaPNas7ixNtepJE_6e7b6Dcutb9a1Who4WrUfKSw1ZnQhTA@mail.gmail.com>
- <96f89e7c-d91e-e263-99f7-16998cc443a7@huawei.com>
- <20191025182229.GB24183@jaegeuk-macbookpro.roam.corp.google.com>
- <eb08716f-2f56-30bb-d71d-28125b3b0608@huawei.com>
-In-Reply-To: <eb08716f-2f56-30bb-d71d-28125b3b0608@huawei.com>
-Date: Mon, 28 Oct 2019 17:26:46 -0700
-Message-ID: <CA+wgaPMcJWqwiQwt9z0+C5AFMbAB7wSuNeE9wvp3PDOYF_6kew@mail.gmail.com>
-To: Chao Yu <yuchao0@huawei.com>
-X-Spam-Score: -15.6 (---------------)
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=coTE+MJajFctVQLNyVBBx0dRF4V5QAJNpm9Z15UXxk4=;
+ b=OqnFj+fypK0YR7YCp0cMtng5EfdOfLAwvCROJPsm/g3u7XY/l6CKklmKHB5bNOIOpv
+ A/owcBdT8Hqz1J5eKyUJW3IXj7Y4wRBT5BwpdHjJSSVd1hEXJSbHjLwdMQwFC9/Bgpd5
+ gPbuKrMTK0KlDQDbsThur0Ubb70/4XxwFOl3voI6fG8rTn1C6ZVjahvY11b1zVS4+REB
+ RH4JteKBcZgeW1Phg2d2R+YgY4/IUVqAOa8eY0XuAS3CCfL12oaXlcgYWD+QYb2BgE9y
+ PLGROc8LI98x0BXJUuXotfPbcG4K/f5+vHcSIO2X8F8fatsUhId/kviks7cjmnt6CduH
+ 3Hqg==
+X-Gm-Message-State: APjAAAX1yF/T1gXjtC4J48wCW5TbLPKHeGjcMjZJdTWspn2XoldZIoBI
+ QmIKtpvKp4nWiHBI/g3w6UC7d2F+Voptaw==
+X-Google-Smtp-Source: APXvYqxAx77Hh7nRevnvS8GpEcqHxWVZ3ZyQfkshEcYxuX+dw7rCCqEojhxQf1zbnDr1L8+5sm0iDYY7D+Pedw==
+X-Received: by 2002:ac8:2ccc:: with SMTP id 12mr2844193qtx.49.1572335227156;
+ Tue, 29 Oct 2019 00:47:07 -0700 (PDT)
+Date: Tue, 29 Oct 2019 15:46:59 +0800
+Message-Id: <20191029074659.165884-1-robinhsu@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.24.0.rc0.303.g954a862665-goog
+To: jaegeuk@kernel.org, yuchao0@huawei.com, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.67 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.67 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ trust [209.85.160.202 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.202 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
-X-Headers-End: 1iPFM8-004lkS-Of
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: Add f2fs stats to sysfs
+X-Headers-End: 1iPMYY-00886W-SU
+Subject: [f2fs-dev] [PATCH 0/2] f2fs-tools: Introduce cache to speed up fsck
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,70 +111,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Hridya Valsaraju via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Hridya Valsaraju <hridya@google.com>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>,
- Android Kernel Team <kernel-team@android.com>,
- LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+From: Robin Hsu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Robin Hsu <robinhsu@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Oct 25, 2019 at 6:38 PM Chao Yu <yuchao0@huawei.com> wrote:
->
-> On 2019/10/26 2:22, Jaegeuk Kim wrote:
-> > On 10/25, Chao Yu wrote:
-> >> On 2019/10/25 11:51, Hridya Valsaraju wrote:
-> >>> On Thu, Oct 24, 2019 at 2:26 AM Chao Yu <yuchao0@huawei.com> wrote:
-> >>>>
-> >>>> On 2019/10/24 5:48, Hridya Valsaraju wrote:
-> >>>>> Currently f2fs stats are only available from /d/f2fs/status. This patch
-> >>>>> adds some of the f2fs stats to sysfs so that they are accessible even
-> >>>>> when debugfs is not mounted.
-> >>>>
-> >>>> Why don't we mount debugfs first?
-> >>>
-> >>> Thank you for taking a look at the patch Chao. We will not be mounting
-> >>> debugfs for security reasons.
-> >>
-> >> Hi, Hridya,
-> >>
-> >> May I ask is there any use case for those new entries?
-> >>
-> >> So many sysfs entries exist, if there is real use case, how about backuping
-> >> entire /d/f2fs/status entry into /proc/fs/f2fs/<dev>/ directory rather than
-> >> adding some of stats as a single entry in sysfs directory?
-> >
-> > These will be useful to keep a track on f2fs health status by one value
-> > per entry, which doesn't require user-land parsing stuff. Of course, Android
-> > can exploit them by IdleMaint, rollback feature, and so on.
->
-> Alright, I suggest to add a sub-directory for those statistic entries, we can
-> manage them more easily isolated from those existed switch entries.
+Implemented cache and related command line options.
 
-Thank you Chao and Jaegeuk. I will make this change and send out a new version.
+Robin Hsu (2):
+  libf2fs_io: Add user-space cache
+  fsck.f2fs: Enable user-space cache
 
-Regards,
-Hridya
+ fsck/main.c       |  27 +++-
+ include/f2fs_fs.h |  20 +++
+ lib/libf2fs_io.c  | 317 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 362 insertions(+), 2 deletions(-)
 
->
-> Thanks,
->
-> >
-> >>
-> >> Thanks,
-> >>
-> >>>
-> >>> Regards,
-> >>> Hridya
-> >>>
-> >>>>
-> >>>> Thanks,
-> >>> .
-> >>>
-> > .
-> >
+-- 
+2.24.0.rc0.303.g954a862665-goog
+
 
 
 _______________________________________________
