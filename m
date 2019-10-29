@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09C1CE9106
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 21:44:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A04EE9107
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 21:44:10 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPYLX-0000cK-RJ; Tue, 29 Oct 2019 20:44:07 +0000
+	id 1iPYLY-0000cd-Vd; Tue, 29 Oct 2019 20:44:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iPYLW-0000c4-HR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:06 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPYLX-0000c5-6K
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZoqXEVoMd/Zb8073EJGrjHX6xvE7y80eM5XUcJCac1E=; b=Hhb14SQ/0xmXBcNQ7tWBRwbqsu
- Qkq5ERxUE0Ir8twYJXmwagjl4ze88hO0Uf5v+KMmRlrZIhI6z+QLBEGVFLNGcU9z1PPHA8A1kEkVI
- +ejI/eTma6nqjQaCdP1JvN0rBaYwxmd76c/NrwP/phLBlHvdnhxCaiZtosddidXYn+sg=;
+ bh=tcQcF9S5dHKsbdggN3MMR94n1wcavt5c+/DXZzC7Bt4=; b=eP2+Gc0jQPC93D3kJrcvBoxtYl
+ dCqB2Yc4dqEsDzL7h9d4lGTrvrKuFMuX351Juao1n65lNVgyKHW8merId6IGfYzHftfVx++SJlduO
+ R4zrU8F84ihZz1ZzX5EpUmYfKb7zslt+Tywf4G8+xv5Cg+7sjCpz8DEybe5tnfXHSbNQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZoqXEVoMd/Zb8073EJGrjHX6xvE7y80eM5XUcJCac1E=; b=eVs0xX0vZ5AP5gOJrJInN9oKVI
- WV+iSSrVbfNmlP3TUJlU+WEKCUSshLUMEAT81LCCOdPOePlyz7MffEivDXAVhE8Jc5ZovtNT+xUKv
- Ywh1kHqp1NcOa9owZkRfTNvku/HOuAak5ES5upwtXDrEC5ye7LFS/cFumTZ7Y2J5SokQ=;
+ bh=tcQcF9S5dHKsbdggN3MMR94n1wcavt5c+/DXZzC7Bt4=; b=QXLkUZY1Cud4i8q0jh1Ah0XBDx
+ 6U/wL9SUJiLRGmI6wIgmVvr3k3ELO0XAmyG7e/mcGCYzJOwcB7NVE9ToQ5MLpE1wNAFMORbAV92EF
+ IVi9SzxfBR/rsx4taoYMOTlpDudzth/JgmeFZBs3kLcYthvnii4yGtjEjHlq9ajGQ1E4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iPYLR-006wyn-Gn
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:06 +0000
+ id 1iPYLS-009PKN-7l
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:05 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 928D521479;
+ by mail.kernel.org (Postfix) with ESMTPSA id 05878217D9;
  Tue, 29 Oct 2019 20:43:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1572381835;
- bh=6uKinpfPcLRaz3evDg6XWZp9GRM69VU/7RKl098ZYrc=;
+ s=default; t=1572381836;
+ bh=QJkibpFmPY+L1l0BTOxPJ+ZzOzC9a95hZioeK/4QcCU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=F1vqZRv2eFon0GtBrubS3F8e3n4v3lX+Jc7jDQg+EZxKCGfEixUVBHBkysbExqltN
- roBhndZO2TwSgAGdgGQDvkeehTBKaAmzZ3De6S2jApC8pcFCkEdmVptT1PczW0qk0K
- jbi9gPsqlqJrizoOxtRc9vp5wHXzAHRlP9oxJ79A=
+ b=BLmEHvRFOhMawxj8dbjPdVj9lV+aMT03HEGnZryulKlISNzap/aO3XJvYfT3EcjCg
+ 7c5nbYz5/ntLx21/L1gFiBGlM9TW4Vxz9Wb37hrufKVX2YRPelOvT2mdzbi15r15h+
+ 7HuRJZ9V1Cwe2775DkNf1dof2WmVtaUw181Ynp64=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 29 Oct 2019 13:41:39 -0700
-Message-Id: <20191029204141.145309-3-ebiggers@kernel.org>
+Date: Tue, 29 Oct 2019 13:41:40 -0700
+Message-Id: <20191029204141.145309-4-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.24.0.rc1.363.gb1bccd3e3d-goog
 In-Reply-To: <20191029204141.145309-1-ebiggers@kernel.org>
 References: <20191029204141.145309-1-ebiggers@kernel.org>
@@ -69,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iPYLR-006wyn-Gn
-Subject: [f2fs-dev] [PATCH 2/4] ext4: support STATX_ATTR_VERITY
+X-Headers-End: 1iPYLS-009PKN-7l
+Subject: [f2fs-dev] [PATCH 3/4] f2fs: support STATX_ATTR_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,26 +93,25 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 From: Eric Biggers <ebiggers@google.com>
 
 Set the STATX_ATTR_VERITY bit when the statx() system call is used on a
-verity file on ext4.
+verity file on f2fs.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/inode.c | 5 ++++-
+ fs/f2fs/file.c | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 516faa280ceda8..a7ca6517798008 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -5717,12 +5717,15 @@ int ext4_getattr(const struct path *path, struct kstat *stat,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 29bc0a542759a2..6a2e5b7d8fc74c 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -726,11 +726,14 @@ int f2fs_getattr(const struct path *path, struct kstat *stat,
  		stat->attributes |= STATX_ATTR_IMMUTABLE;
- 	if (flags & EXT4_NODUMP_FL)
+ 	if (flags & F2FS_NODUMP_FL)
  		stat->attributes |= STATX_ATTR_NODUMP;
-+	if (flags & EXT4_VERITY_FL)
++	if (IS_VERITY(inode))
 +		stat->attributes |= STATX_ATTR_VERITY;
  
  	stat->attributes_mask |= (STATX_ATTR_APPEND |
- 				  STATX_ATTR_COMPRESSED |
  				  STATX_ATTR_ENCRYPTED |
  				  STATX_ATTR_IMMUTABLE |
 -				  STATX_ATTR_NODUMP);
@@ -120,7 +119,7 @@ index 516faa280ceda8..a7ca6517798008 100644
 +				  STATX_ATTR_VERITY);
  
  	generic_fillattr(inode, stat);
- 	return 0;
+ 
 -- 
 2.24.0.rc1.363.gb1bccd3e3d-goog
 
