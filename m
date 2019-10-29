@@ -2,59 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9083E9105
+	by mail.lfdr.de (Postfix) with ESMTPS id E1621E9103
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 21:44:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPYLW-00058A-11; Tue, 29 Oct 2019 20:44:06 +0000
+	id 1iPYLU-0000bn-Od; Tue, 29 Oct 2019 20:44:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iPYLV-000584-Io
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:05 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPYLT-0000bc-Es
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7dOYlwTNkThCNBR0mYXXIfpN2e6mQHKxm3rZI4qR+lo=; b=dfdJATocyjRxv1zeWMGj8Xbd2O
- s53AlrrOYTX24P5DVNS8kSmmtqSMsxUS1SWYi48S96baJSCVRnefr0yiGJGyMSmTUIssXixyf/tS4
- fkIV8uJOfRiubAs7o80Q8KOYUkzSm0hNSkR8gsYtbEMVjzcSmABIRDQKCXTcZrX/8CX4=;
+ bh=H99sQMG7es/EvE8xYo7i/A1BavLKhqiOXiXHNzdeh34=; b=PeuY7K5xJnjeemXnESjAJihONd
+ 4I7zhjVRVCWcDWtKs4vuiK/XCl8ttHAV1+lhNyLx7KPgpgF6F9WMlGir+6xaKNGVzLoEKxqSqBPvn
+ kTSr2RYsRat+V6fkj4O2HHZc8fLnRvgrpdk7qzK+kZK4RYShtXhAk6zzxNoYW/m8PV7U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7dOYlwTNkThCNBR0mYXXIfpN2e6mQHKxm3rZI4qR+lo=; b=R
- 7Il0BsX0Bbr9RmiPqXSBWygJrisVIFGFdDoyEHGoTvkMFsozz3Jf9Mg7b0ti9P1wWH+Z5pv3NDPvd
- xbjAs6zlXQoLu/28VX2XqD37aBPVVmiE9tHsXgksUTGpbAr7bOSaPVhV11Vd0Llv/yHed8WMlHXm0
- qc78/2HE6NP1mFJY=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=H99sQMG7es/EvE8xYo7i/A1BavLKhqiOXiXHNzdeh34=; b=OIinE0eMevjA7MzYQgAnC/eh6l
+ bXCkDdDx26zi6Ohbwj1ps3syXrggG1O4fqSzvVaiYzKEaOaWyGgFjp5KfIUrDH1mzDITybYkQ76Qs
+ 3f1KqeGkFaGrlz2BAvxDJxX0uCTj0NTl8qGF+gXxeoUqX10WXzZiHyA9u0QGUoFfI+ag=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iPYLT-009LgS-2g
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:05 +0000
+ id 1iPYLR-009PKD-6W
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:02 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B1E132087F;
- Tue, 29 Oct 2019 20:43:54 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 27ABC21721;
+ Tue, 29 Oct 2019 20:43:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1572381835;
- bh=PO9FWnMviEuNb31RBWbFM6qoAGbqLACtBOE0D5G9jSY=;
- h=From:To:Cc:Subject:Date:From;
- b=tXVpNGPBJfZ2HxnE4AwO/rpSHRictz/rj27j8Txw6/U7VlJMoTBH9fL5Cn/eP4RI8
- vfqiLz4derg9gYJzw1E4PMXNQf9Tp3CgrcCbyjjmlqTxM9+zOp6SUzKO+QPaJYrhTd
- 32TVj4HxDWc0jneJIVgxG8SvQxHdfjPbW9H5Eg34=
+ bh=bA1Nt9TWZvija+pWQm/jvZD5pLPHccs35Yz1RfF2GZA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=rd7PXg6zwRW6AzBcDukG70kVXPnDFY/Yp1M1Yi465IxdRteBn/mWEGk2RcSAX0bx9
+ zel1es+30DpGpOmI1ko07QXwQLI0WJLYWrVJ486au+twTpg7V/PgIwyKBDURx3jDP4
+ 2oMAidPnxs9Tw9ec8wOtrlajmDWE6C9PK+eKYyUs=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 29 Oct 2019 13:41:37 -0700
-Message-Id: <20191029204141.145309-1-ebiggers@kernel.org>
+Date: Tue, 29 Oct 2019 13:41:38 -0700
+Message-Id: <20191029204141.145309-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.24.0.rc1.363.gb1bccd3e3d-goog
+In-Reply-To: <20191029204141.145309-1-ebiggers@kernel.org>
+References: <20191029204141.145309-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -67,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iPYLT-009LgS-2g
-Subject: [f2fs-dev] [PATCH 0/4] statx: expose the fs-verity bit
+X-Headers-End: 1iPYLR-009PKD-6W
+Subject: [f2fs-dev] [PATCH 1/4] statx: define STATX_ATTR_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,7 +90,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patchset exposes the verity bit (a.k.a. FS_VERITY_FL) via statx().
+From: Eric Biggers <ebiggers@google.com>
+
+Add a statx attribute bit STATX_ATTR_VERITY which will be set if the
+file has fs-verity enabled.  This is the statx() equivalent of
+FS_VERITY_FL which is returned by FS_IOC_GETFLAGS.
 
 This is useful because it allows applications to check whether a file is
 a verity file without opening it.  Opening a verity file can be
@@ -98,21 +104,40 @@ parsing metadata and optionally verifying a cryptographic signature.
 This is analogous to how various other bits are exposed through both
 FS_IOC_GETFLAGS and statx(), e.g. the encrypt bit.
 
-This patchset applies to v5.4-rc5.
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ include/linux/stat.h      | 3 ++-
+ include/uapi/linux/stat.h | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-Eric Biggers (4):
-  statx: define STATX_ATTR_VERITY
-  ext4: support STATX_ATTR_VERITY
-  f2fs: support STATX_ATTR_VERITY
-  docs: fs-verity: mention statx() support
-
- Documentation/filesystems/fsverity.rst | 8 ++++++++
- fs/ext4/inode.c                        | 5 ++++-
- fs/f2fs/file.c                         | 5 ++++-
- include/linux/stat.h                   | 3 ++-
- include/uapi/linux/stat.h              | 2 +-
- 5 files changed, 19 insertions(+), 4 deletions(-)
-
+diff --git a/include/linux/stat.h b/include/linux/stat.h
+index 765573dc17d659..528c4baad09146 100644
+--- a/include/linux/stat.h
++++ b/include/linux/stat.h
+@@ -33,7 +33,8 @@ struct kstat {
+ 	 STATX_ATTR_IMMUTABLE |				\
+ 	 STATX_ATTR_APPEND |				\
+ 	 STATX_ATTR_NODUMP |				\
+-	 STATX_ATTR_ENCRYPTED				\
++	 STATX_ATTR_ENCRYPTED |				\
++	 STATX_ATTR_VERITY				\
+ 	 )/* Attrs corresponding to FS_*_FL flags */
+ 	u64		ino;
+ 	dev_t		dev;
+diff --git a/include/uapi/linux/stat.h b/include/uapi/linux/stat.h
+index 7b35e98d3c58b1..ad80a5c885d598 100644
+--- a/include/uapi/linux/stat.h
++++ b/include/uapi/linux/stat.h
+@@ -167,8 +167,8 @@ struct statx {
+ #define STATX_ATTR_APPEND		0x00000020 /* [I] File is append-only */
+ #define STATX_ATTR_NODUMP		0x00000040 /* [I] File is not to be dumped */
+ #define STATX_ATTR_ENCRYPTED		0x00000800 /* [I] File requires key to decrypt in fs */
+-
+ #define STATX_ATTR_AUTOMOUNT		0x00001000 /* Dir: Automount trigger */
++#define STATX_ATTR_VERITY		0x00100000 /* [I] Verity protected file */
+ 
+ 
+ #endif /* _UAPI_LINUX_STAT_H */
 -- 
 2.24.0.rc1.363.gb1bccd3e3d-goog
 
