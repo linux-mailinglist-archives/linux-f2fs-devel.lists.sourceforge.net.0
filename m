@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1621E9103
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 21:44:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09C1CE9106
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 21:44:09 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPYLU-0000bn-Od; Tue, 29 Oct 2019 20:44:04 +0000
+	id 1iPYLX-0000cK-RJ; Tue, 29 Oct 2019 20:44:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iPYLT-0000bc-Es
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:03 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPYLW-0000c4-HR
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H99sQMG7es/EvE8xYo7i/A1BavLKhqiOXiXHNzdeh34=; b=PeuY7K5xJnjeemXnESjAJihONd
- 4I7zhjVRVCWcDWtKs4vuiK/XCl8ttHAV1+lhNyLx7KPgpgF6F9WMlGir+6xaKNGVzLoEKxqSqBPvn
- kTSr2RYsRat+V6fkj4O2HHZc8fLnRvgrpdk7qzK+kZK4RYShtXhAk6zzxNoYW/m8PV7U=;
+ bh=ZoqXEVoMd/Zb8073EJGrjHX6xvE7y80eM5XUcJCac1E=; b=Hhb14SQ/0xmXBcNQ7tWBRwbqsu
+ Qkq5ERxUE0Ir8twYJXmwagjl4ze88hO0Uf5v+KMmRlrZIhI6z+QLBEGVFLNGcU9z1PPHA8A1kEkVI
+ +ejI/eTma6nqjQaCdP1JvN0rBaYwxmd76c/NrwP/phLBlHvdnhxCaiZtosddidXYn+sg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H99sQMG7es/EvE8xYo7i/A1BavLKhqiOXiXHNzdeh34=; b=OIinE0eMevjA7MzYQgAnC/eh6l
- bXCkDdDx26zi6Ohbwj1ps3syXrggG1O4fqSzvVaiYzKEaOaWyGgFjp5KfIUrDH1mzDITybYkQ76Qs
- 3f1KqeGkFaGrlz2BAvxDJxX0uCTj0NTl8qGF+gXxeoUqX10WXzZiHyA9u0QGUoFfI+ag=;
+ bh=ZoqXEVoMd/Zb8073EJGrjHX6xvE7y80eM5XUcJCac1E=; b=eVs0xX0vZ5AP5gOJrJInN9oKVI
+ WV+iSSrVbfNmlP3TUJlU+WEKCUSshLUMEAT81LCCOdPOePlyz7MffEivDXAVhE8Jc5ZovtNT+xUKv
+ Ywh1kHqp1NcOa9owZkRfTNvku/HOuAak5ES5upwtXDrEC5ye7LFS/cFumTZ7Y2J5SokQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iPYLR-009PKD-6W
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:02 +0000
+ id 1iPYLR-006wyn-Gn
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 20:44:06 +0000
 Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
  [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 27ABC21721;
+ by mail.kernel.org (Postfix) with ESMTPSA id 928D521479;
  Tue, 29 Oct 2019 20:43:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1572381835;
- bh=bA1Nt9TWZvija+pWQm/jvZD5pLPHccs35Yz1RfF2GZA=;
+ bh=6uKinpfPcLRaz3evDg6XWZp9GRM69VU/7RKl098ZYrc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=rd7PXg6zwRW6AzBcDukG70kVXPnDFY/Yp1M1Yi465IxdRteBn/mWEGk2RcSAX0bx9
- zel1es+30DpGpOmI1ko07QXwQLI0WJLYWrVJ486au+twTpg7V/PgIwyKBDURx3jDP4
- 2oMAidPnxs9Tw9ec8wOtrlajmDWE6C9PK+eKYyUs=
+ b=F1vqZRv2eFon0GtBrubS3F8e3n4v3lX+Jc7jDQg+EZxKCGfEixUVBHBkysbExqltN
+ roBhndZO2TwSgAGdgGQDvkeehTBKaAmzZ3De6S2jApC8pcFCkEdmVptT1PczW0qk0K
+ jbi9gPsqlqJrizoOxtRc9vp5wHXzAHRlP9oxJ79A=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 29 Oct 2019 13:41:38 -0700
-Message-Id: <20191029204141.145309-2-ebiggers@kernel.org>
+Date: Tue, 29 Oct 2019 13:41:39 -0700
+Message-Id: <20191029204141.145309-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.24.0.rc1.363.gb1bccd3e3d-goog
 In-Reply-To: <20191029204141.145309-1-ebiggers@kernel.org>
 References: <20191029204141.145309-1-ebiggers@kernel.org>
@@ -69,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iPYLR-009PKD-6W
-Subject: [f2fs-dev] [PATCH 1/4] statx: define STATX_ATTR_VERITY
+X-Headers-End: 1iPYLR-006wyn-Gn
+Subject: [f2fs-dev] [PATCH 2/4] ext4: support STATX_ATTR_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,52 +92,35 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Add a statx attribute bit STATX_ATTR_VERITY which will be set if the
-file has fs-verity enabled.  This is the statx() equivalent of
-FS_VERITY_FL which is returned by FS_IOC_GETFLAGS.
-
-This is useful because it allows applications to check whether a file is
-a verity file without opening it.  Opening a verity file can be
-expensive because the fsverity_info is set up on open, which involves
-parsing metadata and optionally verifying a cryptographic signature.
-
-This is analogous to how various other bits are exposed through both
-FS_IOC_GETFLAGS and statx(), e.g. the encrypt bit.
+Set the STATX_ATTR_VERITY bit when the statx() system call is used on a
+verity file on ext4.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- include/linux/stat.h      | 3 ++-
- include/uapi/linux/stat.h | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ fs/ext4/inode.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/stat.h b/include/linux/stat.h
-index 765573dc17d659..528c4baad09146 100644
---- a/include/linux/stat.h
-+++ b/include/linux/stat.h
-@@ -33,7 +33,8 @@ struct kstat {
- 	 STATX_ATTR_IMMUTABLE |				\
- 	 STATX_ATTR_APPEND |				\
- 	 STATX_ATTR_NODUMP |				\
--	 STATX_ATTR_ENCRYPTED				\
-+	 STATX_ATTR_ENCRYPTED |				\
-+	 STATX_ATTR_VERITY				\
- 	 )/* Attrs corresponding to FS_*_FL flags */
- 	u64		ino;
- 	dev_t		dev;
-diff --git a/include/uapi/linux/stat.h b/include/uapi/linux/stat.h
-index 7b35e98d3c58b1..ad80a5c885d598 100644
---- a/include/uapi/linux/stat.h
-+++ b/include/uapi/linux/stat.h
-@@ -167,8 +167,8 @@ struct statx {
- #define STATX_ATTR_APPEND		0x00000020 /* [I] File is append-only */
- #define STATX_ATTR_NODUMP		0x00000040 /* [I] File is not to be dumped */
- #define STATX_ATTR_ENCRYPTED		0x00000800 /* [I] File requires key to decrypt in fs */
--
- #define STATX_ATTR_AUTOMOUNT		0x00001000 /* Dir: Automount trigger */
-+#define STATX_ATTR_VERITY		0x00100000 /* [I] Verity protected file */
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index 516faa280ceda8..a7ca6517798008 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -5717,12 +5717,15 @@ int ext4_getattr(const struct path *path, struct kstat *stat,
+ 		stat->attributes |= STATX_ATTR_IMMUTABLE;
+ 	if (flags & EXT4_NODUMP_FL)
+ 		stat->attributes |= STATX_ATTR_NODUMP;
++	if (flags & EXT4_VERITY_FL)
++		stat->attributes |= STATX_ATTR_VERITY;
  
+ 	stat->attributes_mask |= (STATX_ATTR_APPEND |
+ 				  STATX_ATTR_COMPRESSED |
+ 				  STATX_ATTR_ENCRYPTED |
+ 				  STATX_ATTR_IMMUTABLE |
+-				  STATX_ATTR_NODUMP);
++				  STATX_ATTR_NODUMP |
++				  STATX_ATTR_VERITY);
  
- #endif /* _UAPI_LINUX_STAT_H */
+ 	generic_fillattr(inode, stat);
+ 	return 0;
 -- 
 2.24.0.rc1.363.gb1bccd3e3d-goog
 
