@@ -2,109 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17854E8309
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 09:16:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=pMrkfMJMRnRiLNpYSkOIijpyYV+YxSUC5MFfMDJkvXg=; b=e6rRHay/e7lPO37bhnNQNFa/aD
-	HdD/j6b1Yb8WaZp1UY4J0JR3yR+ijpFa1b7c+kDVEEzjHUzDj5f76q75G/OTY7LUag7Q4An/A55gE
-	KFdSUJk3n52rmG37kgCYX5TGnhP4dFbHF3c5qBXacxpGaOpO1/1t7/znRoODfyhyz7iA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC32FE8343
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Oct 2019 09:33:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPMgJ-0006y3-Nq; Tue, 29 Oct 2019 08:16:47 +0000
+	id 1iPMwn-0007nG-Al; Tue, 29 Oct 2019 08:33:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <3sO63XQgKAGEQNAHMGRTFNNFKD.BNL@flex--robinhsu.bounces.google.com>)
- id 1iPMgI-0006xD-Gl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:16:46 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iPMwm-0007n9-9G
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:33:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:CC:References:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uQ+VfXHw941Qt2IfQmDs/KJlks9L5fWtJCzf+hKT0sI=; b=iMU/TZDkWM99rDf3cdkWHoNLmI
- BHZr6DAVVzh6HMIJyu2ZxfYvPfEv/fUdWrPmtwqYRMInYZ7eVkBZmoliH5D/usWLHBPMBV38DiFWI
- W28s+UC6BJp0dzyqDke6BSSlZmdHdqTUK+oX0xGe34hT7mUszqiadPBuxMrsOQpJJrYs=;
+ bh=mH6pK/rOhxBhjgc4K6FGs1SxoD2ukUh1nvkjPxJWjSI=; b=bcZlz9U8/rL6Rg8p9/DfbT8dKl
+ y2seooPHy2FthNPC2vnH7RbpcLCBgXwJeaYYDATBinGLCIuYviIHe7BnhIb76lqNBBcHZaRLjQLht
+ ZORgRbiyp65ZO5uk++l2CyaCSnIp7iG1CiXigSE/Dwr5zRIcOaO3ItnLnfDrLZKU0mMI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uQ+VfXHw941Qt2IfQmDs/KJlks9L5fWtJCzf+hKT0sI=; b=O
- Zv81jDCaaW2cls/gJ4pJU1jjihF2aE3FWe3kJzwlG+y7OnXwEa/Gx72OYNAbY9o3gwfi7/AlzhYAs
- DpBk4XyIqHOqFmeo2EZWYDNnKkXWUJrzyw7WmRC7N80BuTsu+ZM/21SD3ktpBWheFJCeQvY9EAKiO
- /p0kNO3HbogNQVBM=;
-Received: from mail-qt1-f202.google.com ([209.85.160.202])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPMgH-005Y11-4R
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:16:46 +0000
-Received: by mail-qt1-f202.google.com with SMTP id t16so13576176qtp.11
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 29 Oct 2019 01:16:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:message-id:mime-version:subject:from:to:cc;
- bh=uQ+VfXHw941Qt2IfQmDs/KJlks9L5fWtJCzf+hKT0sI=;
- b=G0l8sOkPbXyLHwlpxt/7VvImboSKd37p3QVbKBMlD1gHAGMSiesF8bmcktjirjGAHB
- 7EL0LB2ino9xrhh37iHiK6YRNl+ApaXD++c0mLkl9U2fE7aU6QrAOFjg89+5W2O7ENaJ
- 8QnGtmULflOr+n1uLqYWZK/+mUZSxnQ0xuu1KBsWWi4vBXEUcSbBhDV133rCfyz1UEaf
- fO8nhpfvzpsXuJQiPsLiGNbE363p+nk34BvafLMM2QkZbbsb4xUw8Um4cDsbuW8JvmzO
- 26hRmWxR+U9oD+hHqbIHm/tuo3rq0+aGXiNBzMZ33MVwIVWa0PjBVgq2cKsUrGXJ9TrX
- wMLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
- bh=uQ+VfXHw941Qt2IfQmDs/KJlks9L5fWtJCzf+hKT0sI=;
- b=M5g4WtE5s2AW7uV0eYR4kCmV3xh2mdbDZm+pSP+E/SaGjQPkmVd1wu4His72jROlTi
- tpQ6Wub9BjqqydZuuO/vX4XlTnD7djuNUK9WWEXjg+kZCBHWIGgbbBHHqVpMSuG2x73Z
- Fml0JmHl3zx2HS/uVOgPqreaFjQ5bRAtH1uXKHEDyt0Mi6RxvG/0PpM7ySzMfgAMeOlX
- +RtfQ3bcC6SeJ8c9NFhzMyK9I2fAUOWmYIiOeu1Hre566ws7qZKP6qAvq542y4GH6rP3
- jy8WBTLSCJ+IsWw9UY5PBLVrI/yMvW7qreQPqnCKgPRw3iragKbBzerJYVoRIFBRdFdd
- K3ow==
-X-Gm-Message-State: APjAAAVZKMMAUOO9/ZyJXYWta7WdR6SHZPib555d7O8ArUf3ympg2BO1
- bTW994bxTtj1HP1fmCSXASnc7iwm7jWqtw==
-X-Google-Smtp-Source: APXvYqxQy7hRtHS5Lcr98ntXyTn9K7vgNSIKEqbmJMojZpOokoGl8xhDQrtuKPHmetvnD2QCrD5hw/qS2cW1wQ==
-X-Received: by 2002:a63:1812:: with SMTP id y18mr10982593pgl.302.1572335280130; 
- Tue, 29 Oct 2019 00:48:00 -0700 (PDT)
-Date: Tue, 29 Oct 2019 15:47:53 +0800
-Message-Id: <20191029074753.173665-1-robinhsu@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.24.0.rc0.303.g954a862665-goog
-To: jaegeuk@kernel.org, yuchao0@huawei.com, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-X-Spam-Score: -7.6 (-------)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:CC:References:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=mH6pK/rOhxBhjgc4K6FGs1SxoD2ukUh1nvkjPxJWjSI=; b=hU/DPl9H5miAx6ZL2ty/2cRMRS
+ UC8bvu++qZXA1WPvkZObKt2h6WLfqp+kDyeEx2qO7Wevyks5kZeVqAIodO+YtyKq5B99/xw2CIkKu
+ qY+06Xu0k/0Z6hLP46JvCxROpZfT7+5zKckvwLA6NttsJoSHavvJCoTqvIhVqP6jm+v8=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iPMwj-008BOr-SA
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Oct 2019 08:33:48 +0000
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 91BC5391D03CB94728A5;
+ Tue, 29 Oct 2019 16:33:38 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 29 Oct
+ 2019 16:33:37 +0800
+To: Eric Biggers <ebiggers@kernel.org>
+References: <20191022171602.93637-1-jaegeuk@kernel.org>
+ <20191022171602.93637-2-jaegeuk@kernel.org>
+ <20191027225006.GA321938@sol.localdomain>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <da214cdc-0074-b7bf-7761-d4c4ad3d4f6a@huawei.com>
+Date: Tue, 29 Oct 2019 16:33:36 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20191027225006.GA321938@sol.localdomain>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.160.202 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.202 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iPMgH-005Y11-4R
-Subject: [f2fs-dev] [PATCH 2/2] fsck.f2fs: Enable user-space cache
+X-Headers-End: 1iPMwj-008BOr-SA
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,108 +75,208 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Robin Hsu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Robin Hsu <robinhsu@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Added command line options -c <num_cache_entry> and -m <max_hash_collision>
-to activate cache for fsck.  It may significantly speed up fsck.
+On 2019/10/28 6:50, Eric Biggers wrote:
+>> +bool f2fs_is_compressed_page(struct page *page)
+>> +{
+>> +	if (!page_private(page))
+>> +		return false;
+>> +	if (IS_ATOMIC_WRITTEN_PAGE(page) || IS_DUMMY_WRITTEN_PAGE(page))
+>> +		return false;
+>> +	return *((u32 *)page_private(page)) == F2FS_COMPRESSED_PAGE_MAGIC;
+>> +}
+> 
+> This code implies that there can be multiple page private structures each of
+> which has a different magic number.  But I only see F2FS_COMPRESSED_PAGE_MAGIC.
+> Where in the code is the other one(s)?
 
-Signed-off-by: Robin Hsu <robinhsu@google.com>
----
- fsck/main.c | 27 +++++++++++++++++++++++++--
- 1 file changed, 25 insertions(+), 2 deletions(-)
+I'm not sure I understood you correctly, did you mean it needs to introduce
+f2fs_is_atomic_written_page() and f2fs_is_dummy_written_page() like
+f2fs_is_compressed_page()?
 
-diff --git a/fsck/main.c b/fsck/main.c
-index 8c62a14..8edb177 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -10,6 +10,9 @@
-  *   Liu Shuoran <liushuoran@huawei.com>
-  *   Jaegeuk Kim <jaegeuk@kernel.org>
-  *  : add sload.f2fs
-+ * Copyright (c) 2019 Google Inc.
-+ *   Robin Hsu <robinhsu@google.com>
-+ *  : add cache layer
-  *
-  * This program is free software; you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License version 2 as
-@@ -20,6 +23,7 @@
- #include <ctype.h>
- #include <time.h>
- #include <getopt.h>
-+#include <stdbool.h>
- #include "quotaio.h"
- 
- struct f2fs_fsck gfsck;
-@@ -54,7 +58,12 @@ void fsck_usage()
- 	MSG(0, "\nUsage: fsck.f2fs [options] device\n");
- 	MSG(0, "[options]:\n");
- 	MSG(0, "  -a check/fix potential corruption, reported by f2fs\n");
--	MSG(0, "  -C encoding[:flag1,flag2] Set options for enabling casefolding\n");
-+	MSG(0, "  -c <num-cache-entry>  set number of cache entries"
-+			" (default 0)\n");
-+	MSG(0, "  -m <max-hash-collision>  set max cache hash collision"
-+			" (default 16)\n");
-+	MSG(0, "  -C encoding[:flag1,flag2] Set options for enabling"
-+			" casefolding\n");
- 	MSG(0, "  -d debug level [default:0]\n");
- 	MSG(0, "  -f check/fix entire partition\n");
- 	MSG(0, "  -g add default options\n");
-@@ -66,6 +75,7 @@ void fsck_usage()
- 	MSG(0, "  -y fix all the time\n");
- 	MSG(0, "  -V print the version number and exit\n");
- 	MSG(0, "  --dry-run do not really fix corruptions\n");
-+	MSG(0, "  --debug-cache to debug cache when -c is used\n");
- 	exit(1);
- }
- 
-@@ -187,15 +197,18 @@ void f2fs_parse_options(int argc, char *argv[])
- 	}
- 
- 	if (!strcmp("fsck.f2fs", prog)) {
--		const char *option_string = ":aC:d:fg:O:p:q:StyV";
-+		const char *option_string = ":aC:c:m:d:fg:O:p:q:StyV";
- 		int opt = 0, val;
- 		char *token;
- 		struct option long_opt[] = {
- 			{"dry-run", no_argument, 0, 1},
-+			{"debug-cache", no_argument, 0, 2},
- 			{0, 0, 0, 0}
- 		};
- 
- 		c.func = FSCK;
-+		c.cache_config.max_hash_collision = 16;
-+		c.cache_config.dbg_en = false;
- 		while ((option = getopt_long(argc, argv, option_string,
- 						long_opt, &opt)) != EOF) {
- 			switch (option) {
-@@ -203,10 +216,20 @@ void f2fs_parse_options(int argc, char *argv[])
- 				c.dry_run = 1;
- 				MSG(0, "Info: Dry run\n");
- 				break;
-+			case 2:
-+				c.cache_config.dbg_en = true;
-+				break;
- 			case 'a':
- 				c.auto_fix = 1;
- 				MSG(0, "Info: Fix the reported corruption.\n");
- 				break;
-+			case 'c':
-+				c.cache_config.num_cache_entry = atoi(optarg);
-+				break;
-+			case 'm':
-+				c.cache_config.max_hash_collision =
-+						atoi(optarg);
-+				break;
- 			case 'g':
- 				if (!strcmp(optarg, "android"))
- 					c.defset = CONF_ANDROID;
--- 
-2.24.0.rc0.303.g954a862665-goog
+> 
+>> +
+>> +static void f2fs_set_compressed_page(struct page *page,
+>> +		struct inode *inode, pgoff_t index, void *data, refcount_t *r)
+>> +{
+>> +	SetPagePrivate(page);
+>> +	set_page_private(page, (unsigned long)data);
+>> +
+>> +	/* i_crypto_info and iv index */
+>> +	page->index = index;
+>> +	page->mapping = inode->i_mapping;
+>> +	if (r)
+>> +		refcount_inc(r);
+>> +}
+> 
+> It isn't really appropriate to create fake pagecache pages like this.  Did you
+> consider changing f2fs to use fscrypt_decrypt_block_inplace() instead?
 
+We need to store i_crypto_info and iv index somewhere, in order to pass them to
+fscrypt_decrypt_block_inplace(), where did you suggest to store them?
+
+>> +
+>> +void f2fs_destroy_compress_ctx(struct compress_ctx *cc)
+>> +{
+>> +	kvfree(cc->rpages);
+>> +}
+> 
+> The memory is allocated with kzalloc(), so why is it freed with kvfree() and not
+> just kfree()?
+
+It was allocated by f2fs_*alloc() which will fallback to kvmalloc() once
+kmalloc() failed.
+
+>> +static int lzo_compress_pages(struct compress_ctx *cc)
+>> +{
+>> +	int ret;
+>> +
+>> +	ret = lzo1x_1_compress(cc->rbuf, cc->rlen, cc->cbuf->cdata,
+>> +					&cc->clen, cc->private);
+>> +	if (ret != LZO_E_OK) {
+>> +		printk_ratelimited("%sF2FS-fs: lzo compress failed, ret:%d\n",
+>> +								KERN_ERR, ret);
+>> +		return -EIO;
+>> +	}
+>> +	return 0;
+>> +}
+> 
+> Why not using f2fs_err()?  Same in lots of other places.
+
+We use printk_ratelimited at some points where we can afford to lose logs,
+otherwise we use f2fs_{err,warn...} to record info as much as possible for
+troubleshoot.
+
+>> +
+>> +	ret = cops->compress_pages(cc);
+>> +	if (ret)
+>> +		goto out_vunmap_cbuf;
+>> +
+>> +	max_len = PAGE_SIZE * (cc->cluster_size - 1) - COMPRESS_HEADER_SIZE;
+>> +
+>> +	if (cc->clen > max_len) {
+>> +		ret = -EAGAIN;
+>> +		goto out_vunmap_cbuf;
+>> +	}
+> 
+> Since we already know the max length we're willing to compress to (the max
+> length for any space to be saved), why is more space than that being allocated?
+> LZ4_compress_default() will return an error if there isn't enough space, so that
+> error could just be used as the indication to store the data uncompressed.
+
+AFAIK, there is no such common error code returned from all compression
+algorithms indicating there is no room for limited target size, however we need
+that information to fallback to write raw pages. Any better idea?
+
+> 
+>> +
+>> +	cc->cbuf->clen = cpu_to_le32(cc->clen);
+>> +	cc->cbuf->chksum = 0;
+> 
+> What is the point of the chksum field?  It's always set to 0 and never checked.
+
+When I written initial codes, I doubt that I may lose to check some SPO corner
+cases, in where we missed to write whole cluster, so I added that to help to
+recall that case, however I didn't have time to cover those cases, resulting
+leaving unfinished code there... :(, I'm okay to delete it in a formal version.
+
+BTW, for data checksum feature, I guess we need to reconstruct dnode layout to
+cover both compressed/non-compressed data.
+
+> 
+>> +
+>> +static bool __cluster_may_compress(struct compress_ctx *cc)
+>> +{
+>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(cc->inode);
+>> +	loff_t i_size = i_size_read(cc->inode);
+>> +	const pgoff_t end_index = ((unsigned long long)i_size)
+>> +					>> PAGE_SHIFT;
+>> +	unsigned offset;
+>> +	int i;
+>> +
+>> +	for (i = 0; i < cc->cluster_size; i++) {
+>> +		struct page *page = cc->rpages[i];
+>> +
+>> +		f2fs_bug_on(sbi, !page);
+>> +
+>> +		if (unlikely(f2fs_cp_error(sbi)))
+>> +			return false;
+>> +		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+>> +			return false;
+>> +		if (f2fs_is_drop_cache(cc->inode))
+>> +			return false;
+>> +		if (f2fs_is_volatile_file(cc->inode))
+>> +			return false;
+>> +
+>> +		offset = i_size & (PAGE_SIZE - 1);
+>> +		if ((page->index > end_index) ||
+>> +			(page->index == end_index && !offset))
+>> +			return false;
+> 
+> No need to have a special case for when i_size is a multiple of the page size.
+> Just replace end_index with 'nr_pages = DIV_ROUND_UP(i_size, PAGE_SIZE)' and
+> check for page->index >= nr_pages.
+
+That is copied from f2fs_write_data_page(), let's clean up in a separated patch.
+
+> 
+>> +out_fail:
+>> +	/* TODO: revoke partially updated block addresses */
+>> +	for (i += 1; i < cc->cluster_size; i++) {
+>> +		if (!cc->rpages[i])
+>> +			continue;
+>> +		redirty_page_for_writepage(wbc, cc->rpages[i]);
+>> +		unlock_page(cc->rpages[i]);
+>> +	}
+>> +	return err;
+> 
+> Un-addressed TODO.
+
+Will fix a little later.
+
+>>  static void bio_post_read_processing(struct bio_post_read_ctx *ctx)
+>>  {
+>> -	/*
+>> -	 * We use different work queues for decryption and for verity because
+>> -	 * verity may require reading metadata pages that need decryption, and
+>> -	 * we shouldn't recurse to the same workqueue.
+>> -	 */
+> 
+> Why is it okay (i.e., no deadlocks) to no longer use different work queues for
+> decryption and for verity?  See the comment above which is being deleted.
+
+Could you explain more about how deadlock happen? or share me a link address if
+you have described that case somewhere?
+
+> 
+>> +	/* TODO: cluster can be compressed due to race with .writepage */
+>> +
+> 
+> Another un-addressed TODO.
+
+Will fix a little later.
+
+> 
+>> +int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi)
+>> +{
+>> +	if (!f2fs_sb_has_encrypt(sbi) &&
+>> +		!f2fs_sb_has_compression(sbi))
+>> +		return 0;
+>> +
+>> +	sbi->post_read_wq = alloc_workqueue("f2fs_post_read_wq",
+>> +						 WQ_UNBOUND | WQ_HIGHPRI,
+>> +						 num_online_cpus());
+> 
+> post_read_wq is also needed if verity is enabled.
+
+Yes, we missed this as verity was not merged when implementing this....
+
+Thanks,
 
 
 _______________________________________________
