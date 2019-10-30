@@ -2,100 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87C93EA5DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 22:59:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C46C2EA616
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 23:20:32 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPw02-0001Ur-Od; Wed, 30 Oct 2019 21:59:30 +0000
+	id 1iPwKM-0004St-MV; Wed, 30 Oct 2019 22:20:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1iPw01-0001Uc-1f
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 21:59:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPwKI-0004SQ-LG
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 22:20:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S7mK3Uoiwaws9OYl+5bVE084OvHB6LGX6Sfc0eSAjwc=; b=eDgMgrGRkERnKAamPW6qjlKJ8k
- 6/8/h1x9F5Yq21RkszrpBEFViIrSZ7D1PWzyLamPYc/w9yultnIGKXL75Lg9ekQUAfER+nUHsXu+i
- qXXXVLeIMt+c1CQVr1Puhs5oTV3KmbGdSTeoOHKOqkhSqFnE8QrqGt3cdBmGg2q6Vcok=;
+ bh=LM48eP9E1pNdGWsAcEiW0KshrCCGwTeR7ddxCeXpmOs=; b=K8ZgAf5cw4PxIV4dM71VV3x+77
+ u57+sIR1nfQPVKkcfVicVrUJ5cQxnGsx/Jo1mzPEG9GHpC2glhmTq+Q0xGIcuCOiZpuk2loU2rPHw
+ zH5ID/dq45ooc/sKuh8MOqJzkP91IuFXaibNaWJ1psUz/bf13MUj0fxnISLMo8xoFygc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=S7mK3Uoiwaws9OYl+5bVE084OvHB6LGX6Sfc0eSAjwc=; b=Zp11WwMXfsA2MnFi1vxnXoO0cO
- Jm99rfXhjQCV8kR8GpJMhAZPwPgyJt6SE10LNbXdE5zwAVuU1NeA8yH/MWKkMLgLrrNlw7lFLpxZy
- DEIP8JoBPCNiKkqYSLpWzkLKsjPFgu8/I6sud3HnXS6BMb7cex/WlFQfXdxYs3CTfYqY=;
-Received: from mail-il1-f195.google.com ([209.85.166.195])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=LM48eP9E1pNdGWsAcEiW0KshrCCGwTeR7ddxCeXpmOs=; b=T
+ 6dPIeMyxaZuLnCoRxyCA7Hkc/HKlBo1mIDuYq3Uc9imA+niFEM5/TNG2H+9xg4EE5dWP7xMkrSKEH
+ Fz9uTxwZp/jfU0nsHOActjFvKrr+VY28ZghYtsK+kJUti9oO9fVn5FPS00opBlZqHW8y2ohzq0i62
+ Ga8YwMIP7G/3HkHc=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPvzv-00BXCv-E7
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 21:59:28 +0000
-Received: by mail-il1-f195.google.com with SMTP id t9so1279073ils.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 30 Oct 2019 14:59:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=S7mK3Uoiwaws9OYl+5bVE084OvHB6LGX6Sfc0eSAjwc=;
- b=aKsZ4bdZUSBifwnA9EI/sfdmKnP62vGSwIqzhbMUiTCUkHM2p7iqF53Jzgdv5kXvv6
- GBFkJoqdRYLQIybUp5uZd8C9F7L2xM/7BvH0VitcMonLl80SQX9+/8cxz1Pb55faR4eW
- W84909D8+2Y2GxJriYNmqjYg9MaPiledZHFQg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=S7mK3Uoiwaws9OYl+5bVE084OvHB6LGX6Sfc0eSAjwc=;
- b=c49Jy/QEiBZbvgzlVG04t8zV8LM8NK5fQax0/oc0q8+Py+TOPik411zNCAQLFNZ9le
- PxTe2mrSP7iqqa2knhFwImopnFaKQaLhhY1TpJaAsLBrSD1Qz9N4eXdt+e3VsoZ7Ph7n
- pOXnqo+yYBGT3r9FxmgeyQLhDkf9aeK9ti7zQhBrohLy7XZlmFBmwdJc1xfiRvyN0TaB
- k3VviwqeBjUdpVenrK+JqkPszIY9ZJ3ZJR8DkQDCJX8FWsyvSEAfb1DXiwJiXRU+WyuC
- lQQUPkaZKIhKdJybK0KaWNYsKC0hDGp2FQhZQUxCemCCaVFfgk8vnU3t2I9k3B6CvII4
- XHlQ==
-X-Gm-Message-State: APjAAAU9x95+mt5PNhEVmMY3cG0DwgFoHmTLmp6WAwqXItCHt8GGXg5k
- LLzPy6ARkY3RZ6GzO7qoSvTj+VE70vQ=
-X-Google-Smtp-Source: APXvYqzSWyi9pcYh1BCnE+Ar+QMIudVy8zLiwN9RXdqXMYTNd7Idy6t156J3l8SoNDpXv6LE69Pbpw==
-X-Received: by 2002:a92:7f0f:: with SMTP id a15mr2434309ild.116.1572472757508; 
- Wed, 30 Oct 2019 14:59:17 -0700 (PDT)
-Received: from mail-il1-f173.google.com (mail-il1-f173.google.com.
- [209.85.166.173])
- by smtp.gmail.com with ESMTPSA id c73sm213142ila.9.2019.10.30.14.59.15
- for <linux-f2fs-devel@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Oct 2019 14:59:15 -0700 (PDT)
-Received: by mail-il1-f173.google.com with SMTP id s75so3562430ilc.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 30 Oct 2019 14:59:15 -0700 (PDT)
-X-Received: by 2002:a92:ba1b:: with SMTP id o27mr2484026ili.269.1572472754921; 
- Wed, 30 Oct 2019 14:59:14 -0700 (PDT)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iPwKC-00BYvi-4S
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 22:20:26 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id CDC0420873;
+ Wed, 30 Oct 2019 22:20:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1572474013;
+ bh=39tlinMi/mwa6K8bh+AvUrEqnvDUmchorz6iz1Vb2MI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dsqYm+NoUlZpxlsre8/ninHtAsLPpuA5GeG76ceKYSruhHR62LS0vHKwBN0Fvt84W
+ qrMaQU64T9FsPIpaBXxnIAX/h1IFURq5gGBcOcZ6HOKl5zTKAebB/mlyH2hRJQ2vYP
+ 2zR6VBycETR8KzV2WlJR6qHxF7CCiOXHDBdNFllo=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Wed, 30 Oct 2019 15:19:15 -0700
+Message-Id: <20191030221915.229858-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <20191030100618.1.Ibf7a996e4a58e84f11eec910938cfc3f9159c5de@changeid>
- <20191030173758.GC693@sol.localdomain>
- <CAD=FV=Uzma+eSGG1S1Aq6s3QdMNh4J-c=g-5uhB=0XBtkAawcA@mail.gmail.com>
- <20191030190226.GD693@sol.localdomain>
- <20191030205745.GA216218@sol.localdomain>
-In-Reply-To: <20191030205745.GA216218@sol.localdomain>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 30 Oct 2019 14:59:03 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=X6Q3QZaND-tfYr9mf-KYMeKFmJDca3ee-i9roWj+GHsQ@mail.gmail.com>
-Message-ID: <CAD=FV=X6Q3QZaND-tfYr9mf-KYMeKFmJDca3ee-i9roWj+GHsQ@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: googlesource.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.195 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.195 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -104,9 +67,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iPvzv-00BXCv-E7
-Subject: Re: [f2fs-dev] [PATCH] Revert "ext4 crypto: fix to check feature
- status before get policy"
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iPwKC-00BYvi-4S
+Subject: [f2fs-dev] [PATCH] docs: fs-verity: document first supported kernel
+ version
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,36 +82,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, Gwendal Grignou <gwendal@chromium.org>,
- linux-ext4@vger.kernel.org, Ryo Hashimoto <hashimoto@chromium.org>,
- linux-doc@vger.kernel.org, Vadim Sukhomlinov <sukhomlinov@google.com>,
- linux-f2fs-devel@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Guenter Roeck <groeck@chromium.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, apronin@chromium.org
+Cc: linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+From: Eric Biggers <ebiggers@google.com>
 
-On Wed, Oct 30, 2019 at 1:57 PM Eric Biggers <ebiggers@kernel.org> wrote:
->
-> FWIW, from reading the Chrome OS code, I think the code you linked to isn't
-> where the breakage actually is.  I think it's actually at
-> https://chromium.googlesource.com/chromiumos/platform2/+/refs/heads/master/chromeos-common-script/share/chromeos-common.sh#375
-> ... where an init script is using the error message printed by 'e4crypt
-> get_policy' to decide whether to add -O encrypt to the filesystem or not.
->
-> It really should check instead:
->
->         [ -e /sys/fs/ext4/features/encryption ]
+I had meant to replace these TODOs with the actual version when applying
+the patches, but forgot to do so.  Do it now.
 
-OK, I filed <https://crbug.com/1019939> and CCed all the people listed
-in the cryptohome "OWNERS" file.  Hopefully one of them can pick this
-up as a general cleanup.  Thanks!
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ Documentation/filesystems/fsverity.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
--Doug
+diff --git a/Documentation/filesystems/fsverity.rst b/Documentation/filesystems/fsverity.rst
+index 3355377a2439..a95536b6443c 100644
+--- a/Documentation/filesystems/fsverity.rst
++++ b/Documentation/filesystems/fsverity.rst
+@@ -406,7 +406,7 @@ pages have been read into the pagecache.  (See `Verifying data`_.)
+ ext4
+ ----
+ 
+-ext4 supports fs-verity since Linux TODO and e2fsprogs v1.45.2.
++ext4 supports fs-verity since Linux v5.4 and e2fsprogs v1.45.2.
+ 
+ To create verity files on an ext4 filesystem, the filesystem must have
+ been formatted with ``-O verity`` or had ``tune2fs -O verity`` run on
+@@ -442,7 +442,7 @@ also only supports extent-based files.
+ f2fs
+ ----
+ 
+-f2fs supports fs-verity since Linux TODO and f2fs-tools v1.11.0.
++f2fs supports fs-verity since Linux v5.4 and f2fs-tools v1.11.0.
+ 
+ To create verity files on an f2fs filesystem, the filesystem must have
+ been formatted with ``-O verity``.
+-- 
+2.23.0
+
 
 
 _______________________________________________
