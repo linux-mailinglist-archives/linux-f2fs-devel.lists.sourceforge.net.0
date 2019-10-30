@@ -2,26 +2,35 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D4AEEA20E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 17:51:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC13AEA26B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:23:26 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=tarwXS0zmNv8pze02F/FPIhlZWqm3er8yGZ9N4x3VRE=; b=L68i9y80J4EqUt+kfkER0Yazw
+	bH1nbJpWFhfaBQq1e6Nqjic9j8ohGK364Q76y62ruxGgcM+oZvXHNn/UQQDGbfhAsi5pPa9aGE2mE
+	zDB3n1Oz0pcFw+iX1Xd5chc6142S42qzyzAj58omMYFvFvJ9oxUyk6oVR9YbNV3sGZNrQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPrBb-0000in-5s; Wed, 30 Oct 2019 16:51:07 +0000
+	id 1iPrgr-0004eX-Db; Wed, 30 Oct 2019 17:23:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iPrBZ-0000ia-TI
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 16:51:05 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iPrgq-0004eL-Bb
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:23:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SUrNpZkJA9/KI5H0vcjVuotrPtOjU1obQHyazMfjeKU=; b=B7ZMR4zV543orAUd6jVsqHBjuC
- KfK9qjUZkaA3DONVgusm2vOgIXcslPvZjEfxXzomNaYuYogaR7nEgIcdFpUjgXeKALdwKIVaMa0sN
- xueDzsTba7GZdzZZedHRcevI7LI0Js0S+SOQVEUY2crJBEC+w+8Rp37JPSdtTGRak4vg=;
+ bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=; b=lNSz2/792LLImaB9C7eZELsToK
+ vATXWa10itbhxqi2Z2wsDpU2c85us+/POdLssm040QzyfZ0rawsUsuWXspecFBybt+5PJYDImYsCT
+ YB7hK3qbQR4qO03ygcSuEa92vVx9SiWTcRpjc96Ujg1VVKROHMIZ5/5GIt0BI4zjuAks=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,47 +38,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SUrNpZkJA9/KI5H0vcjVuotrPtOjU1obQHyazMfjeKU=; b=MFxXrgOav8oRnPku/Ou9vxoBpJ
- EQxeGx/k3HCDze7w29HLTrwoEvTGz84LYrHsWu3ZwKPz8liMsT8LB6lp4L0kZ2RUBqsfrAi5oGgC9
- d0/WdRHqBdIPoJ1XdkoDhQPX2BoTz3423gKKL93JFR6w6Jpp48LUU7yJ9C2PE/t1w5k4=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iPrBY-0091e4-2i
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 16:51:05 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 54FCC2087E;
- Wed, 30 Oct 2019 16:50:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1572454258;
- bh=CMyj9JS64TkQEn5oYuEpuitWEBfnmYxUiD5H5F70wK8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gXugWpub/ulkuSiZxR9DmWXlRxXOSRFu+dZJ+wj2IwewoPzKNa+qUcFM6CLl8awFB
- KhCjIAqEikgZICZQLtK4nkVbB2PkHCZoUxVow0WnBEzAqup+HYJm0Hp2JIzeVlX+Cr
- 9OcaKKowoGdoKQXA3aFFb51maBcbDZCr97tiXumY=
-Date: Wed, 30 Oct 2019 09:50:56 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20191030165056.GA693@sol.localdomain>
-Mail-Followup-To: Chao Yu <yuchao0@huawei.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20191022171602.93637-1-jaegeuk@kernel.org>
- <20191022171602.93637-2-jaegeuk@kernel.org>
- <20191027225006.GA321938@sol.localdomain>
- <da214cdc-0074-b7bf-7761-d4c4ad3d4f6a@huawei.com>
- <20191030025512.GA4791@sol.localdomain>
- <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
+ bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=; b=c/DcdHg13qp1OlW98Dp2UezNoA
+ rsxpG/BsHrfelPnm+sEg3G6TbJiG5gxuTlRNBn5HHusKfI+wBwZTMRktyshkFE4H9nZqRY2EeKzvu
+ kw366yf4qS6DPg6gN1D4nEcZOKandSonE592oCMUtiqfjrj/O+Iu+YoBngCcdhQPQlBs=;
+Received: from sonic309-21.consmr.mail.gq1.yahoo.com ([98.137.65.147])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1iPrgo-00BBm3-G7
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:23:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
+ t=1572456195; bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
+ b=Duk7hpBdiOqpC1IidlLNvmQqw/i7x28kW0r3M1nFXhlHQM5xWkSO37X3ViW8GFj10LdRhik/sYbrqvW396qR4eURlNPoSLDpQS+ar6ki80bKUFmIJ3J47lG9L9VMGHjzZNyM4fmCLzHQcXffMFycosJPdYkWi1NQog1BJ7wJPXfS2MxnZGca2Mcr5QxE5h2GhkuZQHjT3hXFxUmzuFJEFIJU0fU8pqUu60G3TTm41eXBSwYl0SyuOgzhanQx14A2lLBnnpd11JWnDjm2og0ObJWZ1QJfosinsP9QzImmsqWL5b2oeE1QXA5rn8jdlh496wswCpkQDz1xl2w/whuh9A==
+X-YMail-OSG: xAMhXSYVM1mVFgtK0BldmKPUfzfYfyQA7hXB0tqZ1buoDcpRFjK1KOkXE2vDdku
+ mS0_DTHl7uNhwfTABLCGEqL0IzWLVKrf4CUovUZqk_NWxgKv_DlmP1XifeCvCZF2LpzqOhcTJGLG
+ Dm0nzWMyRflAODUEl3e1bTwZYU0gufWn0iiy6Mtgdbpk0qdOPePbPvw5N3tN7DdpZWo07zh6BO1y
+ TjwZehv6xDg0ar1LvNVUVE5Vibo0FLKAkatJ3mudnOArjxx9NmenrkXhs0OgrW06HjLVB1cA4YcS
+ dB3oZTncNajnuHRwgAtKhqUa7K9Dx2ccbwRZExzSkpx105I8Tp2CVVSxKoKt2MBUJj82GCpdkjcn
+ DIye3PaZol8nQqKL7Du8XlYaxAcvsFT3SQaqoLsskRtHgspkORXw1V3_lRGMcac0_Rekl7Erv1J9
+ 3CMm8Q3WuUb7iR7j6nyUNIABWH1yGQpCl.jQPLqq6f6qV0DYOxE6My06TxLwFRtYYtfDe7JhrM9j
+ 25FLduRwdsIrD4KgiYcPWYYJoNFQf.BeFOgwv3o2cifm.cfBTc79EF.3oTdqIoe1JWVYYO0IH0A1
+ qCSKEjKY0JucuM587EMpbHcqy8JNQO5QmN.T1QVJMkwizewftDr7gUb_PjbRDNSf0WzV3M69WlW1
+ _CWKDPVagVJoKK6s2XF53muDbOUBeUgHtQzqAb3pXh5g3QqrLDLMrQ0fBjAoXknjMOICQsd9M2dB
+ pLc.N8I8_AWdHq8cSRkD2CeG4EnCn8LcVg3WWCgu8XAVk14.y2OxNAv2lLJfEgD3nrS26a.jPx7n
+ nwfm_9QWYpFLaa8TscbhLuaE4i5sizemvJdP01KTo8pTOr7z4CfEyuOgBdd50xVXe1ITLt_EnlnC
+ PMZ6IcUhcsrnhWafvutq7ok7dm53F2W.OijwDHLFVLLoAXUbogEjmQo0NbP2GM4e__KItwdj70Xl
+ YmioWc0K_w5kfxl7gc8BwHi.srO_qIWrt.jx7aXZlIQot0JHYGoydcghy15YQSOQPABZUG9FU5vk
+ CMpwhvECKPzeXTMEWiWfg7c.isOMiHeo9Ut7tfP.45DFVu1X8EER3C.OSa9PjucAfi_x_9wLKFms
+ khTO7eFSl1b5AeD.N.c9WXtTT5K2Xxlua04EWhh0jE5LFtPvBW9Heq7BaXqculhHYF.6GeTC0UrF
+ rWR.0_ZRCe.EoZWHFtbzMMLRQW2.jbk4lB.3vf8BawbgJLTKbVf1Gy8EOTzL.ESFrVqX8RyHZX_s
+ uKB.XmOE0VuIVL_7FOO8LgMjaWoRqUvoK0sPvriMxHLt3fORBmxUscWrrcsIhNbjOiZVLB84aX88
+ jkCrYESXAJHZgynhHlaZ2sgKfG11MaPuSP8aTkufW7h8zg3aX4.wBJNRH7nAvgtiQa3Fzpg5bw2t
+ e2a49yjXnEg--
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic309.consmr.mail.gq1.yahoo.com with HTTP; Wed, 30 Oct 2019 17:23:15 +0000
+Received: by smtp408.mail.ir2.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
+ ID 39a6ce8385eb3b927ad40666caf4f5e7; 
+ Wed, 30 Oct 2019 16:52:46 +0000 (UTC)
+Date: Thu, 31 Oct 2019 00:52:39 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20191030165226.GC3953@hsiangkao-HP-ZHAN-66-Pro-G1>
+References: <20191030035518.65477-1-gaoxiang25@huawei.com>
+ <20aa40bd-280d-d223-9f73-d9ed7dbe4f29@huawei.com>
+ <20191030091542.GA24976@architecture4>
+ <19a417e6-8f0e-564e-bc36-59bfc883ec16@huawei.com>
+ <20191030104345.GB170703@architecture4>
+ <20191030151444.GC16197@mit.edu>
+ <20191030155020.GA3953@hsiangkao-HP-ZHAN-66-Pro-G1>
+ <20191030162243.GA18729@mit.edu>
+ <20191030163313.GB34056@jaegeuk-macbookpro.roam.corp.google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20191030163313.GB34056@jaegeuk-macbookpro.roam.corp.google.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Mailer: WebService/1.1.14593 hermes Apache-HttpAsyncClient/4.1.4
+ (Java/1.8.0_181)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (hsiangkao[at]aol.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [98.137.65.147 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,9 +107,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iPrBY-0091e4-2i
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iPrgo-00BBm3-G7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: bio_alloc should never fail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,117 +121,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Gao Xiang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Gao Xiang <hsiangkao@aol.com>
+Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ "Theodore Y. Ts'o" <tytso@mit.edu>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 30, 2019 at 04:43:52PM +0800, Chao Yu wrote:
-> On 2019/10/30 10:55, Eric Biggers wrote:
-> > On Tue, Oct 29, 2019 at 04:33:36PM +0800, Chao Yu wrote:
-> >> On 2019/10/28 6:50, Eric Biggers wrote:
-> >>>> +bool f2fs_is_compressed_page(struct page *page)
-> >>>> +{
-> >>>> +	if (!page_private(page))
-> >>>> +		return false;
-> >>>> +	if (IS_ATOMIC_WRITTEN_PAGE(page) || IS_DUMMY_WRITTEN_PAGE(page))
-> >>>> +		return false;
-> >>>> +	return *((u32 *)page_private(page)) == F2FS_COMPRESSED_PAGE_MAGIC;
-> >>>> +}
-> >>>
-> >>> This code implies that there can be multiple page private structures each of
-> >>> which has a different magic number.  But I only see F2FS_COMPRESSED_PAGE_MAGIC.
-> >>> Where in the code is the other one(s)?
-> >>
-> >> I'm not sure I understood you correctly, did you mean it needs to introduce
-> >> f2fs_is_atomic_written_page() and f2fs_is_dummy_written_page() like
-> >> f2fs_is_compressed_page()?
-> >>
+On Wed, Oct 30, 2019 at 09:33:13AM -0700, Jaegeuk Kim wrote:
+> On 10/30, Theodore Y. Ts'o wrote:
+> > On Wed, Oct 30, 2019 at 11:50:37PM +0800, Gao Xiang wrote:
+> > > 
+> > > So I'm curious about the original issue in commit 740432f83560
+> > > ("f2fs: handle failed bio allocation"). Since f2fs manages multiple write
+> > > bios with its internal fio but it seems the commit is not helpful to
+> > > resolve potential mempool deadlock (I'm confused since no calltrace,
+> > > maybe I'm wrong)...
 > > 
-> > No, I'm asking what is the case where the line
-> > 
-> > 	*((u32 *)page_private(page)) == F2FS_COMPRESSED_PAGE_MAGIC
-> > 
-> > returns false?
+> > Two possibilities come to mind.  (a) It may be that on older kernels
+> > (when f2fs is backported to older Board Support Package kernels from
+> > the SOC vendors) didn't have the bio_alloc() guarantee, so it was
+> > necessary on older kernels, but not on upstream, or (b) it wasn't
+> > *actually* possible for bio_alloc() to fail and someone added the
+> > error handling in 740432f83560 out of paranoia.
 > 
-> Should be this?
-> 
-> if (!page_private(page))
-> 	return false;
-> f2fs_bug_on(*((u32 *)page_private(page)) != F2FS_COMPRESSED_PAGE_MAGIC)
-> return true;
+> Yup, I was checking old device kernels but just stopped digging it out.
+> Instead, I hesitate to apply this patch since I can't get why we need to
+> get rid of this code for clean-up purpose. This may be able to bring
+> some hassles when backporting to android/device kernels.
 
-Yes, that makes more sense, unless there are other cases.
+Yes, got you concern. As I said in other patches for many times, since
+you're the maintainer of f2fs, it's all up to you (I'm not paranoia).
+However, I think there are 2 valid reasons:
+
+ 1) As a newbie of Linux filesystem. When I study or work on f2fs,
+    and I saw these misleading code, I think I will produce similar
+    code in the future (not everyone refers comments above bio_alloc),
+    so such usage will spread (since one could refer some sample code
+    from exist code);
+
+ 2) Since it's upstream, I personally think appropriate cleanup is ok (anyway
+    it kills net 20+ line dead code), and this patch I think isn't so harmful
+    for backporting.
+
+Thanks,
+Gao Xiang
 
 > 
 > > 
-> >>>
-> >>>> +
-> >>>> +static void f2fs_set_compressed_page(struct page *page,
-> >>>> +		struct inode *inode, pgoff_t index, void *data, refcount_t *r)
-> >>>> +{
-> >>>> +	SetPagePrivate(page);
-> >>>> +	set_page_private(page, (unsigned long)data);
-> >>>> +
-> >>>> +	/* i_crypto_info and iv index */
-> >>>> +	page->index = index;
-> >>>> +	page->mapping = inode->i_mapping;
-> >>>> +	if (r)
-> >>>> +		refcount_inc(r);
-> >>>> +}
-> >>>
-> >>> It isn't really appropriate to create fake pagecache pages like this.  Did you
-> >>> consider changing f2fs to use fscrypt_decrypt_block_inplace() instead?
-> >>
-> >> We need to store i_crypto_info and iv index somewhere, in order to pass them to
-> >> fscrypt_decrypt_block_inplace(), where did you suggest to store them?
-> >>
+> > (Hence my suggestion that in the ext4 version of the patch, we add a
+> > code comment justifying why there was no error checking, to make it
+> > clear that this was a deliberate choice.  :-)
 > > 
-> > The same place where the pages are stored.
-> 
-> Still we need allocate space for those fields, any strong reason to do so?
-> 
-
-page->mapping set implies that the page is a pagecache page.  Faking it could
-cause problems with code elsewhere.
-
-> > 
-> >>>> +
-> >>>> +void f2fs_destroy_compress_ctx(struct compress_ctx *cc)
-> >>>> +{
-> >>>> +	kvfree(cc->rpages);
-> >>>> +}
-> >>>
-> >>> The memory is allocated with kzalloc(), so why is it freed with kvfree() and not
-> >>> just kfree()?
-> >>
-> >> It was allocated by f2fs_*alloc() which will fallback to kvmalloc() once
-> >> kmalloc() failed.
-> > 
-> > This seems to be a bug in f2fs_kmalloc() -- it inappropriately falls back to
-> > kvmalloc().  As per its name, it should only use kmalloc().  f2fs_kvmalloc()
-> > already exists, so it can be used when the fallback is wanted.
-> 
-> We can introduce f2fs_memalloc() to wrap f2fs_kmalloc() and f2fs_kvmalloc() as
-> below:
-> 
-> f2fs_memalloc()
-> {
-> 	mem = f2fs_kmalloc();
-> 	if (mem)
-> 		return mem;
-> 	return f2fs_kvmalloc();
-> }
-> 
-> It can be used in specified place where we really need it, like the place
-> descirbied in 5222595d093e ("f2fs: use kvmalloc, if kmalloc is failed") in where
-> we introduced original logic.
-
-No, just use kvmalloc().  The whole point of kvmalloc() is that it tries
-kmalloc() and then falls back to vmalloc() if it fails.
-
-- Eric
+> > 						- Ted
 
 
 _______________________________________________
