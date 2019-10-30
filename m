@@ -2,72 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 661C9EA2BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:47:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A939AEA3BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 20:02:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPs4A-0000Hc-F1; Wed, 30 Oct 2019 17:47:30 +0000
+	id 1iPtEw-0002D4-DO; Wed, 30 Oct 2019 19:02:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1iPs49-0000HK-0t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:47:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPtEu-0002Cn-HB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 19:02:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+iiXv8M9Suc+ehqvAs0gM0SbNLQiqYJf/bW8qd4koKs=; b=ZsCd9Ln6toUnND40Y8up8mYdX/
- wVbpvZhY5g5C5OgpsIOZ+eW7Trdff6djMnadJsU4F2tlFYNK7RHVDiU+0hB7XnCxcK8jcS8MDql+A
- Jog2lo2VCB6+AjxfsyYLWwppVCOCjexAVa1L+imIehUzEdr6q4vgVBZIwhM3P2v1VKNo=;
+ bh=ucPXVUTi62TeO94YzEVn6g4tdxWeWSDyUCBZzd1si18=; b=JlmSP3ke0hqKX/2cuHkw4kncUZ
+ vsiCE5OMoKvrBDaZL3TeF4av4ScXK9Tebi16Q/Sdo8GLOQgzzqSDr167Np3UmjhYIX8zuLp6Z3cqR
+ HXT62Az9bX08OolCepapEoaPKrCdmyyepwF9WFHQlGtKe8+0EZLOAa6sfq+6kvqCMAyo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+iiXv8M9Suc+ehqvAs0gM0SbNLQiqYJf/bW8qd4koKs=; b=faYaLByLXVqwDOhh/ZOKhtGEAB
- N9BdKBaMdTTjxz6QlrvcCoC67TsIT8ISDWNpuaK9Y3oeBY9YRwwJY/sA+zcohk2U7Er8Kz+VYNYfm
- EPYHUg5ZBOOt0pI+p8b0SMhI2k2sXulnNdOLLzuMwke/89fU7e0ocAO6NAIHCYL3VyTg=;
+ bh=ucPXVUTi62TeO94YzEVn6g4tdxWeWSDyUCBZzd1si18=; b=gXZyR42nu3zFa05LPBWpMIt7PL
+ wdI4kAi41rnzRwsoGa6Kux2dvEj6Ajb+ctuVs1nvUsQX6dkA5bYdUkLzLMvyq+/lwKXH0835RBHYF
+ LGPBextjy3ZsHs3ppFh5Tkb5tVBNmeNYXwNJ83PHCMtLhrBg5i9h+4+dYZHDC1uoFNa0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iPs42-00BACL-Te
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:47:28 +0000
-Received: from localhost (unknown [104.132.0.81])
+ id 1iPtEo-00BJry-7l
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 19:02:40 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9DB3820659;
- Wed, 30 Oct 2019 17:47:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 18F9E20659;
+ Wed, 30 Oct 2019 19:02:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1572457635;
- bh=sjprPqg2PbaiKLXjdDkpF8WMp02FewdHM7IhqCH/KBY=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=qvf5Q3NhTT110wh2br44Y/15LJDDHIw6tTyaIc8WfsAp9TgtRSJZq1Mq29zfD47I5
- Bgnzk6Iyez0hE4pGF4Iy/UfvI8iffKZxEG3+J1wiKpGuajR11oficmHqOe2eYmZDjH
- GA2kpzpig2Q225fjWLu+HBSsUUk0UnkPOJfub28Y=
-Date: Wed, 30 Oct 2019 10:47:14 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20191030174714.GA36729@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20191022171602.93637-1-jaegeuk@kernel.org>
- <20191022171602.93637-2-jaegeuk@kernel.org>
- <20191027225006.GA321938@sol.localdomain>
- <da214cdc-0074-b7bf-7761-d4c4ad3d4f6a@huawei.com>
- <20191030025512.GA4791@sol.localdomain>
- <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
- <20191030165056.GA693@sol.localdomain>
+ s=default; t=1572462148;
+ bh=+38YM8UwTn3h5SiOhEnqRmj1g6UwoAQkEny6ADnAC2g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Nwkttn5SwTfS+1q2HWx6QJVDTYOCBvf2EjiRsXaYaIFS8vvQAzvYv6MkCGYIbUhD/
+ CnS987j70vJ43qeaabhjXanWTeQRdyv4ykISU3401Kpc1FqlsxgpyWa25Bx76QvaR7
+ 99+flFPnlIgN8xxk4c/F8D6jd3ly1bzzQeyJo1qs=
+Date: Wed, 30 Oct 2019 12:02:26 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <20191030190226.GD693@sol.localdomain>
+Mail-Followup-To: Doug Anderson <dianders@chromium.org>,
+ Gwendal Grignou <gwendal@chromium.org>, Chao Yu <chao@kernel.org>,
+ Ryo Hashimoto <hashimoto@chromium.org>,
+ Vadim Sukhomlinov <sukhomlinov@google.com>,
+ Guenter Roeck <groeck@chromium.org>, apronin@chromium.org,
+ linux-doc@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ "Theodore Y. Ts'o" <tytso@mit.edu>,
+ Jonathan Corbet <corbet@lwn.net>,
+ LKML <linux-kernel@vger.kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+References: <20191030100618.1.Ibf7a996e4a58e84f11eec910938cfc3f9159c5de@changeid>
+ <20191030173758.GC693@sol.localdomain>
+ <CAD=FV=Uzma+eSGG1S1Aq6s3QdMNh4J-c=g-5uhB=0XBtkAawcA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191030165056.GA693@sol.localdomain>
-User-Agent: Mutt/1.8.2 (2017-04-18)
+In-Reply-To: <CAD=FV=Uzma+eSGG1S1Aq6s3QdMNh4J-c=g-5uhB=0XBtkAawcA@mail.gmail.com>
+User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: chromium.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,8 +89,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iPs42-00BACL-Te
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
+X-Headers-End: 1iPtEo-00BJry-7l
+Subject: Re: [f2fs-dev] [PATCH] Revert "ext4 crypto: fix to check feature
+ status before get policy"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,120 +103,144 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jonathan Corbet <corbet@lwn.net>, Gwendal Grignou <gwendal@chromium.org>,
+ linux-ext4@vger.kernel.org, Ryo Hashimoto <hashimoto@chromium.org>,
+ linux-doc@vger.kernel.org, Vadim Sukhomlinov <sukhomlinov@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
+ linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Guenter Roeck <groeck@chromium.org>,
+ "Theodore Y. Ts'o" <tytso@mit.edu>, apronin@chromium.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/30, Eric Biggers wrote:
-> On Wed, Oct 30, 2019 at 04:43:52PM +0800, Chao Yu wrote:
-> > On 2019/10/30 10:55, Eric Biggers wrote:
-> > > On Tue, Oct 29, 2019 at 04:33:36PM +0800, Chao Yu wrote:
-> > >> On 2019/10/28 6:50, Eric Biggers wrote:
-> > >>>> +bool f2fs_is_compressed_page(struct page *page)
-> > >>>> +{
-> > >>>> +	if (!page_private(page))
-> > >>>> +		return false;
-> > >>>> +	if (IS_ATOMIC_WRITTEN_PAGE(page) || IS_DUMMY_WRITTEN_PAGE(page))
-> > >>>> +		return false;
-> > >>>> +	return *((u32 *)page_private(page)) == F2FS_COMPRESSED_PAGE_MAGIC;
-> > >>>> +}
-> > >>>
-> > >>> This code implies that there can be multiple page private structures each of
-> > >>> which has a different magic number.  But I only see F2FS_COMPRESSED_PAGE_MAGIC.
-> > >>> Where in the code is the other one(s)?
-> > >>
-> > >> I'm not sure I understood you correctly, did you mean it needs to introduce
-> > >> f2fs_is_atomic_written_page() and f2fs_is_dummy_written_page() like
-> > >> f2fs_is_compressed_page()?
-> > >>
-> > > 
-> > > No, I'm asking what is the case where the line
-> > > 
-> > > 	*((u32 *)page_private(page)) == F2FS_COMPRESSED_PAGE_MAGIC
-> > > 
-> > > returns false?
-> > 
-> > Should be this?
-> > 
-> > if (!page_private(page))
-> > 	return false;
-> > f2fs_bug_on(*((u32 *)page_private(page)) != F2FS_COMPRESSED_PAGE_MAGIC)
-> > return true;
+On Wed, Oct 30, 2019 at 10:51:20AM -0700, Doug Anderson wrote:
+> Hi,
 > 
-> Yes, that makes more sense, unless there are other cases.
+> On Wed, Oct 30, 2019 at 10:38 AM Eric Biggers <ebiggers@kernel.org> wrote:
+> >
+> > Hi Douglas,
+> >
+> > On Wed, Oct 30, 2019 at 10:06:25AM -0700, Douglas Anderson wrote:
+> > > This reverts commit 0642ea2409f3 ("ext4 crypto: fix to check feature
+> > > status before get policy").
+> > >
+> > > The commit made a clear and documented ABI change that is not backward
+> > > compatible.  There exists userspace code [1] that relied on the old
+> > > behavior and is now broken.
+> > >
+> > > While we could entertain the idea of updating the userspace code to
+> > > handle the ABI change, it's my understanding that in general ABI
+> > > changes that break userspace are frowned upon (to put it nicely).
+> > >
+> > > NOTE: if we for some reason do decide to entertain the idea of
+> > > allowing the ABI change and updating userspace, I'd appreciate any
+> > > help on how we should make the change.  Specifically the old code
+> > > relied on the different return values to differentiate between
+> > > "KeyState::NO_KEY" and "KeyState::NOT_SUPPORTED".  I'm no expert on
+> > > the ext4 encryption APIs (I just ended up here tracking down the
+> > > regression [2]) so I'd need a bit of handholding from someone.
+> > >
+> > > [1] https://chromium.googlesource.com/chromiumos/platform2/+/refs/heads/master/cryptohome/dircrypto_util.cc#73
+> > > [2] https://crbug.com/1018265
+> > >
+> > > Fixes: 0642ea2409f3 ("ext4 crypto: fix to check feature status before get policy")
+> > > Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> > > ---
+> > >
+> > >  Documentation/filesystems/fscrypt.rst | 3 +--
+> > >  fs/ext4/ioctl.c                       | 2 --
+> > >  2 files changed, 1 insertion(+), 4 deletions(-)
+> > >
+> > > diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
+> > > index 8a0700af9596..4289c29d7c5a 100644
+> > > --- a/Documentation/filesystems/fscrypt.rst
+> > > +++ b/Documentation/filesystems/fscrypt.rst
+> > > @@ -562,8 +562,7 @@ FS_IOC_GET_ENCRYPTION_POLICY_EX can fail with the following errors:
+> > >    or this kernel is too old to support FS_IOC_GET_ENCRYPTION_POLICY_EX
+> > >    (try FS_IOC_GET_ENCRYPTION_POLICY instead)
+> > >  - ``EOPNOTSUPP``: the kernel was not configured with encryption
+> > > -  support for this filesystem, or the filesystem superblock has not
+> > > -  had encryption enabled on it
+> > > +  support for this filesystem
+> > >  - ``EOVERFLOW``: the file is encrypted and uses a recognized
+> > >    encryption policy version, but the policy struct does not fit into
+> > >    the provided buffer
+> > > diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
+> > > index 0b7f316fd30f..13d97fb797b4 100644
+> > > --- a/fs/ext4/ioctl.c
+> > > +++ b/fs/ext4/ioctl.c
+> > > @@ -1181,8 +1181,6 @@ long ext4_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+> > >  #endif
+> > >       }
+> > >       case EXT4_IOC_GET_ENCRYPTION_POLICY:
+> > > -             if (!ext4_has_feature_encrypt(sb))
+> > > -                     return -EOPNOTSUPP;
+> > >               return fscrypt_ioctl_get_policy(filp, (void __user *)arg);
+> > >
+> >
+> > Thanks for reporting this.  Can you elaborate on exactly why returning
+> > EOPNOTSUPP breaks things in the Chrome OS code?  Since encryption is indeed not
+> > supported, why isn't "KeyState::NOT_SUPPORTED" correct?
 > 
-> > 
-> > > 
-> > >>>
-> > >>>> +
-> > >>>> +static void f2fs_set_compressed_page(struct page *page,
-> > >>>> +		struct inode *inode, pgoff_t index, void *data, refcount_t *r)
-> > >>>> +{
-> > >>>> +	SetPagePrivate(page);
-> > >>>> +	set_page_private(page, (unsigned long)data);
-> > >>>> +
-> > >>>> +	/* i_crypto_info and iv index */
-> > >>>> +	page->index = index;
-> > >>>> +	page->mapping = inode->i_mapping;
-> > >>>> +	if (r)
-> > >>>> +		refcount_inc(r);
-> > >>>> +}
-> > >>>
-> > >>> It isn't really appropriate to create fake pagecache pages like this.  Did you
-> > >>> consider changing f2fs to use fscrypt_decrypt_block_inplace() instead?
-> > >>
-> > >> We need to store i_crypto_info and iv index somewhere, in order to pass them to
-> > >> fscrypt_decrypt_block_inplace(), where did you suggest to store them?
-> > >>
-> > > 
-> > > The same place where the pages are stored.
-> > 
-> > Still we need allocate space for those fields, any strong reason to do so?
-> > 
+> I guess all I know is from the cryptohome source code I sent a link
+> to, which I'm not a super expert in.  Did you get a chance to take a
+> look at that?  As far as I can tell the code is doing something like
+> this:
 > 
-> page->mapping set implies that the page is a pagecache page.  Faking it could
-> cause problems with code elsewhere.
+> 1. If I see EOPNOTSUPP then this must be a kernel without ext4 crypto.
+> Fallback to using the old-style ecryptfs.
+> 
+> 2. If I see ENODATA then this is a kernel with ext4 crypto but there's
+> no key yet.  We should set a key and (if necessarily) enable crypto on
+> the filesystem.
+> 
+> 3. If I see no error then we're already good.
+> 
+> > Note that the state after this revert will be:
+> >
+> > - FS_IOC_GET_ENCRYPTION_POLICY on ext4 => ENODATA
+> > - FS_IOC_GET_ENCRYPTION_POLICY on f2fs => EOPNOTSUPP
+> > - FS_IOC_GET_ENCRYPTION_POLICY_EX on ext4 => EOPNOTSUPP
+> > - FS_IOC_GET_ENCRYPTION_POLICY_EX on f2fs => EOPNOTSUPP
+> >
+> > So if this code change is made, the documentation would need to be updated to
+> > explain that the error code from FS_IOC_GET_ENCRYPTION_POLICY is
+> > filesystem-specific (which we'd really like to avoid...), and that
+> > FS_IOC_GET_ENCRYPTION_POLICY_EX handles this case differently.  Or else the
+> > other three would need to be changed to ENODATA -- which for
+> > FS_IOC_GET_ENCRYPTION_POLICY on f2fs would be an ABI break in its own right,
+> > though it's possible that no one would notice.
+> >
+> > Is your proposal to keep the error filesystem-specific for now?
+> 
+> I guess I'd have to leave it up to the people who know this better.
+> Mostly I just saw this as an ABI change breaking userspace which to me
+> means revert.  I have very little background here to make good
+> decisions about the right way to move forward.
+> 
 
-I've checked it with minchan, and it seems to be fine that filesystem uses
-this page internally only, not in pagecache.
+Okay, that makes sense -- cryptohome assumes that ENODATA means the kernel
+supports encryption, even if the encrypt ext4 feature flag isn't set yet.
 
-> 
-> > > 
-> > >>>> +
-> > >>>> +void f2fs_destroy_compress_ctx(struct compress_ctx *cc)
-> > >>>> +{
-> > >>>> +	kvfree(cc->rpages);
-> > >>>> +}
-> > >>>
-> > >>> The memory is allocated with kzalloc(), so why is it freed with kvfree() and not
-> > >>> just kfree()?
-> > >>
-> > >> It was allocated by f2fs_*alloc() which will fallback to kvmalloc() once
-> > >> kmalloc() failed.
-> > > 
-> > > This seems to be a bug in f2fs_kmalloc() -- it inappropriately falls back to
-> > > kvmalloc().  As per its name, it should only use kmalloc().  f2fs_kvmalloc()
-> > > already exists, so it can be used when the fallback is wanted.
-> > 
-> > We can introduce f2fs_memalloc() to wrap f2fs_kmalloc() and f2fs_kvmalloc() as
-> > below:
-> > 
-> > f2fs_memalloc()
-> > {
-> > 	mem = f2fs_kmalloc();
-> > 	if (mem)
-> > 		return mem;
-> > 	return f2fs_kvmalloc();
-> > }
-> > 
-> > It can be used in specified place where we really need it, like the place
-> > descirbied in 5222595d093e ("f2fs: use kvmalloc, if kmalloc is failed") in where
-> > we introduced original logic.
-> 
-> No, just use kvmalloc().  The whole point of kvmalloc() is that it tries
-> kmalloc() and then falls back to vmalloc() if it fails.
-> 
-> - Eric
+The way it's really supposed to work (IMO) is that all fscrypt ioctls
+consistently return EOPNOTSUPP if the feature is off, and then if userspace
+really needs to know if encryption can nevertheless still be enabled and used on
+the filesystem, it can check for the presence of
+/sys/fs/ext4/features/encryption (or /sys/fs/f2fs/features/encryption).  Or the
+feature flag can just be set by configuration before any of the fscrypt ioctls
+are attempted (this is what Android does).
+
+I guess we're stuck with the existing ext4 FS_IOC_GET_ENCRYPTION_POLICY behavior
+though, so we need to take this revert for 5.4.
+
+For 5.5 I think we should try to make things slightly more sane by removing the
+same check from f2fs and fixing the documentation, so that at least each ioctl
+will behave consistently across filesystems and be correctly documented.
+
+Ted, Jaegeuk, Chao, do you agree?
+
+- Eric
 
 
 _______________________________________________
