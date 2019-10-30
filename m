@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC13AEA26B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:23:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEEFBEA23D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:03:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -13,15 +13,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	 bh=tarwXS0zmNv8pze02F/FPIhlZWqm3er8yGZ9N4x3VRE=; b=L68i9y80J4EqUt+kfkER0Yazw
 	bH1nbJpWFhfaBQq1e6Nqjic9j8ohGK364Q76y62ruxGgcM+oZvXHNn/UQQDGbfhAsi5pPa9aGE2mE
 	zDB3n1Oz0pcFw+iX1Xd5chc6142S42qzyzAj58omMYFvFvJ9oxUyk6oVR9YbNV3sGZNrQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPrgr-0004eX-Db; Wed, 30 Oct 2019 17:23:25 +0000
+	id 1iPrND-0007bA-3A; Wed, 30 Oct 2019 17:03:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iPrgq-0004eL-Bb
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:23:24 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iPrNB-0007b3-NA
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:03:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -41,15 +41,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=; b=c/DcdHg13qp1OlW98Dp2UezNoA
  rsxpG/BsHrfelPnm+sEg3G6TbJiG5gxuTlRNBn5HHusKfI+wBwZTMRktyshkFE4H9nZqRY2EeKzvu
  kw366yf4qS6DPg6gN1D4nEcZOKandSonE592oCMUtiqfjrj/O+Iu+YoBngCcdhQPQlBs=;
-Received: from sonic309-21.consmr.mail.gq1.yahoo.com ([98.137.65.147])
+Received: from sonic312-24.consmr.mail.gq1.yahoo.com ([98.137.69.205])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPrgo-00BBm3-G7
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:23:23 +0000
+ id 1iPrN8-00BABf-Qv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:03:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1572456195; bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=;
+ t=1572454977; bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
- b=Duk7hpBdiOqpC1IidlLNvmQqw/i7x28kW0r3M1nFXhlHQM5xWkSO37X3ViW8GFj10LdRhik/sYbrqvW396qR4eURlNPoSLDpQS+ar6ki80bKUFmIJ3J47lG9L9VMGHjzZNyM4fmCLzHQcXffMFycosJPdYkWi1NQog1BJ7wJPXfS2MxnZGca2Mcr5QxE5h2GhkuZQHjT3hXFxUmzuFJEFIJU0fU8pqUu60G3TTm41eXBSwYl0SyuOgzhanQx14A2lLBnnpd11JWnDjm2og0ObJWZ1QJfosinsP9QzImmsqWL5b2oeE1QXA5rn8jdlh496wswCpkQDz1xl2w/whuh9A==
+ b=QaTibODeT0QYR4zIRHr/bGvFMurkXoD1uzsTpwSNMTV4FeTgvrpvqNPvgDKpV93VtMcKZs7jeh10DI1MHvs0NErQevBKov+G9fIw+hmA4+VfgXqYo73o712APtFLKA+dcBp85wdLJKJcKeI+38HJjs0tZoNX0S5Hv9+hODDwdSLKNLbe/ysYEin9Ns4POZfMzMM7TDj7lPMOr5fQwLufZNFhjVl3qj2WbwgYJijVzbGFGIChiTDityLzzZkWAdrM93b1qnm+cCOpra57pr8eEwGo0GApiiWoTwW8B1ZfK4aG6LjKDbXCNbORJ/m79YlQtTzAyspgKmEM1lCbn2CfzQ==
 X-YMail-OSG: xAMhXSYVM1mVFgtK0BldmKPUfzfYfyQA7hXB0tqZ1buoDcpRFjK1KOkXE2vDdku
  mS0_DTHl7uNhwfTABLCGEqL0IzWLVKrf4CUovUZqk_NWxgKv_DlmP1XifeCvCZF2LpzqOhcTJGLG
  Dm0nzWMyRflAODUEl3e1bTwZYU0gufWn0iiy6Mtgdbpk0qdOPePbPvw5N3tN7DdpZWo07zh6BO1y
@@ -71,7 +71,7 @@ X-YMail-OSG: xAMhXSYVM1mVFgtK0BldmKPUfzfYfyQA7hXB0tqZ1buoDcpRFjK1KOkXE2vDdku
  jkCrYESXAJHZgynhHlaZ2sgKfG11MaPuSP8aTkufW7h8zg3aX4.wBJNRH7nAvgtiQa3Fzpg5bw2t
  e2a49yjXnEg--
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.gq1.yahoo.com with HTTP; Wed, 30 Oct 2019 17:23:15 +0000
+ sonic312.consmr.mail.gq1.yahoo.com with HTTP; Wed, 30 Oct 2019 17:02:57 +0000
 Received: by smtp408.mail.ir2.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
  ID 39a6ce8385eb3b927ad40666caf4f5e7; 
  Wed, 30 Oct 2019 16:52:46 +0000 (UTC)
@@ -93,13 +93,15 @@ In-Reply-To: <20191030163313.GB34056@jaegeuk-macbookpro.roam.corp.google.com>
 User-Agent: Mutt/1.9.4 (2018-02-28)
 X-Mailer: WebService/1.1.14593 hermes Apache-HttpAsyncClient/4.1.4
  (Java/1.8.0_181)
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (hsiangkao[at]aol.com)
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [98.137.69.205 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [98.137.65.147 listed in list.dnswl.org]
+ trust [98.137.69.205 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -107,8 +109,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iPrgo-00BBm3-G7
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iPrN8-00BABf-Qv
 Subject: Re: [f2fs-dev] [PATCH] f2fs: bio_alloc should never fail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
