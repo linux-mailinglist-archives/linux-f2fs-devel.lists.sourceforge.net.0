@@ -2,35 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEEFBEA23D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:03:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=tarwXS0zmNv8pze02F/FPIhlZWqm3er8yGZ9N4x3VRE=; b=L68i9y80J4EqUt+kfkER0Yazw
-	bH1nbJpWFhfaBQq1e6Nqjic9j8ohGK364Q76y62ruxGgcM+oZvXHNn/UQQDGbfhAsi5pPa9aGE2mE
-	zDB3n1Oz0pcFw+iX1Xd5chc6142S42qzyzAj58omMYFvFvJ9oxUyk6oVR9YbNV3sGZNrQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 582F0EA23C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 18:03:05 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPrND-0007bA-3A; Wed, 30 Oct 2019 17:03:07 +0000
+	id 1iPrN6-00021h-4I; Wed, 30 Oct 2019 17:03:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iPrNB-0007b3-NA
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:03:05 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iPrN4-00021T-Lr
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:02:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=; b=lNSz2/792LLImaB9C7eZELsToK
- vATXWa10itbhxqi2Z2wsDpU2c85us+/POdLssm040QzyfZ0rawsUsuWXspecFBybt+5PJYDImYsCT
- YB7hK3qbQR4qO03ygcSuEa92vVx9SiWTcRpjc96Ujg1VVKROHMIZ5/5GIt0BI4zjuAks=;
+ bh=fvyvxoRwDboaoj51ITGUwr/ZtYUfTwPK1LoJUkOwM6I=; b=jl955BV+qAzIEp8FmZ3Wd47yB2
+ 0i5KRpJk4i97va1QcIhWXo45mPxst3gaRIEAwjHEPObcKAGfJAV3XqICZi3/SbJ6mF5H+qRRz0IaT
+ gPjn6tLxpobIV2C5gMDXqQB8dSoQS0o3onjq3JddU8fHIOL/w3Er349r4OHzS4SDCbc0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -38,70 +29,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=; b=c/DcdHg13qp1OlW98Dp2UezNoA
- rsxpG/BsHrfelPnm+sEg3G6TbJiG5gxuTlRNBn5HHusKfI+wBwZTMRktyshkFE4H9nZqRY2EeKzvu
- kw366yf4qS6DPg6gN1D4nEcZOKandSonE592oCMUtiqfjrj/O+Iu+YoBngCcdhQPQlBs=;
-Received: from sonic312-24.consmr.mail.gq1.yahoo.com ([98.137.69.205])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPrN8-00BABf-Qv
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:03:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1572454977; bh=a1fHgbV2gsxc/qTJLuC1KwVssDo9JDASf8CqQzhRyLw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
- b=QaTibODeT0QYR4zIRHr/bGvFMurkXoD1uzsTpwSNMTV4FeTgvrpvqNPvgDKpV93VtMcKZs7jeh10DI1MHvs0NErQevBKov+G9fIw+hmA4+VfgXqYo73o712APtFLKA+dcBp85wdLJKJcKeI+38HJjs0tZoNX0S5Hv9+hODDwdSLKNLbe/ysYEin9Ns4POZfMzMM7TDj7lPMOr5fQwLufZNFhjVl3qj2WbwgYJijVzbGFGIChiTDityLzzZkWAdrM93b1qnm+cCOpra57pr8eEwGo0GApiiWoTwW8B1ZfK4aG6LjKDbXCNbORJ/m79YlQtTzAyspgKmEM1lCbn2CfzQ==
-X-YMail-OSG: xAMhXSYVM1mVFgtK0BldmKPUfzfYfyQA7hXB0tqZ1buoDcpRFjK1KOkXE2vDdku
- mS0_DTHl7uNhwfTABLCGEqL0IzWLVKrf4CUovUZqk_NWxgKv_DlmP1XifeCvCZF2LpzqOhcTJGLG
- Dm0nzWMyRflAODUEl3e1bTwZYU0gufWn0iiy6Mtgdbpk0qdOPePbPvw5N3tN7DdpZWo07zh6BO1y
- TjwZehv6xDg0ar1LvNVUVE5Vibo0FLKAkatJ3mudnOArjxx9NmenrkXhs0OgrW06HjLVB1cA4YcS
- dB3oZTncNajnuHRwgAtKhqUa7K9Dx2ccbwRZExzSkpx105I8Tp2CVVSxKoKt2MBUJj82GCpdkjcn
- DIye3PaZol8nQqKL7Du8XlYaxAcvsFT3SQaqoLsskRtHgspkORXw1V3_lRGMcac0_Rekl7Erv1J9
- 3CMm8Q3WuUb7iR7j6nyUNIABWH1yGQpCl.jQPLqq6f6qV0DYOxE6My06TxLwFRtYYtfDe7JhrM9j
- 25FLduRwdsIrD4KgiYcPWYYJoNFQf.BeFOgwv3o2cifm.cfBTc79EF.3oTdqIoe1JWVYYO0IH0A1
- qCSKEjKY0JucuM587EMpbHcqy8JNQO5QmN.T1QVJMkwizewftDr7gUb_PjbRDNSf0WzV3M69WlW1
- _CWKDPVagVJoKK6s2XF53muDbOUBeUgHtQzqAb3pXh5g3QqrLDLMrQ0fBjAoXknjMOICQsd9M2dB
- pLc.N8I8_AWdHq8cSRkD2CeG4EnCn8LcVg3WWCgu8XAVk14.y2OxNAv2lLJfEgD3nrS26a.jPx7n
- nwfm_9QWYpFLaa8TscbhLuaE4i5sizemvJdP01KTo8pTOr7z4CfEyuOgBdd50xVXe1ITLt_EnlnC
- PMZ6IcUhcsrnhWafvutq7ok7dm53F2W.OijwDHLFVLLoAXUbogEjmQo0NbP2GM4e__KItwdj70Xl
- YmioWc0K_w5kfxl7gc8BwHi.srO_qIWrt.jx7aXZlIQot0JHYGoydcghy15YQSOQPABZUG9FU5vk
- CMpwhvECKPzeXTMEWiWfg7c.isOMiHeo9Ut7tfP.45DFVu1X8EER3C.OSa9PjucAfi_x_9wLKFms
- khTO7eFSl1b5AeD.N.c9WXtTT5K2Xxlua04EWhh0jE5LFtPvBW9Heq7BaXqculhHYF.6GeTC0UrF
- rWR.0_ZRCe.EoZWHFtbzMMLRQW2.jbk4lB.3vf8BawbgJLTKbVf1Gy8EOTzL.ESFrVqX8RyHZX_s
- uKB.XmOE0VuIVL_7FOO8LgMjaWoRqUvoK0sPvriMxHLt3fORBmxUscWrrcsIhNbjOiZVLB84aX88
- jkCrYESXAJHZgynhHlaZ2sgKfG11MaPuSP8aTkufW7h8zg3aX4.wBJNRH7nAvgtiQa3Fzpg5bw2t
- e2a49yjXnEg--
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic312.consmr.mail.gq1.yahoo.com with HTTP; Wed, 30 Oct 2019 17:02:57 +0000
-Received: by smtp408.mail.ir2.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
- ID 39a6ce8385eb3b927ad40666caf4f5e7; 
- Wed, 30 Oct 2019 16:52:46 +0000 (UTC)
-Date: Thu, 31 Oct 2019 00:52:39 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20191030165226.GC3953@hsiangkao-HP-ZHAN-66-Pro-G1>
-References: <20191030035518.65477-1-gaoxiang25@huawei.com>
- <20aa40bd-280d-d223-9f73-d9ed7dbe4f29@huawei.com>
- <20191030091542.GA24976@architecture4>
- <19a417e6-8f0e-564e-bc36-59bfc883ec16@huawei.com>
- <20191030104345.GB170703@architecture4>
- <20191030151444.GC16197@mit.edu>
- <20191030155020.GA3953@hsiangkao-HP-ZHAN-66-Pro-G1>
- <20191030162243.GA18729@mit.edu>
- <20191030163313.GB34056@jaegeuk-macbookpro.roam.corp.google.com>
+ bh=fvyvxoRwDboaoj51ITGUwr/ZtYUfTwPK1LoJUkOwM6I=; b=E9mTcr3sUEGXsMpTsGNFZR8j5C
+ quBM4p1Tz1fzetqSt7Ol2n/nMOy9Q32zIbDVSotp4rj7rTDCzSTOEm0WS528QgOafRAQJUEhmVfaZ
+ sfaspGvlKjG0sYCkrYKB1u6P27JDGOXnVbfFUjqGoP2yebyQY7JZKMROWYg4dWQoRF7I=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iPrN2-00B6jB-JS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 17:02:58 +0000
+Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
+ [24.5.143.220])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6A82020650;
+ Wed, 30 Oct 2019 17:02:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1572454968;
+ bh=pDmWHhgixxSGSlKcG7JAEENyJI4HshThaEn6KOyP4vo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Qlid3cbSHifQ5VBTBwWCswcADBqOYlpYNTDwf18VN+2n0WwB98+Zk2NE12TtkO7VZ
+ RchFjNgMFSiOxgytvgE1gHS8eoJ3KsezXMVzIY3ylNRKv/nww7t/trpPdz5rgY1je/
+ OjWRmIQCVFBnYSuVgOMHOUMuDJqxFspxdMM4fUak=
+Date: Wed, 30 Oct 2019 10:02:46 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20191030170246.GB693@sol.localdomain>
+Mail-Followup-To: Chao Yu <yuchao0@huawei.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20191022171602.93637-1-jaegeuk@kernel.org>
+ <20191022171602.93637-2-jaegeuk@kernel.org>
+ <20191027225006.GA321938@sol.localdomain>
+ <da214cdc-0074-b7bf-7761-d4c4ad3d4f6a@huawei.com>
+ <20191030025512.GA4791@sol.localdomain>
+ <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191030163313.GB34056@jaegeuk-macbookpro.roam.corp.google.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Mailer: WebService/1.1.14593 hermes Apache-HttpAsyncClient/4.1.4
- (Java/1.8.0_181)
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (hsiangkao[at]aol.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [98.137.69.205 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [98.137.69.205 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -109,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iPrN8-00BABf-Qv
-Subject: Re: [f2fs-dev] [PATCH] f2fs: bio_alloc should never fail
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iPrN2-00B6jB-JS
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,61 +91,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Gao Xiang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Gao Xiang <hsiangkao@aol.com>
-Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- "Theodore Y. Ts'o" <tytso@mit.edu>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 30, 2019 at 09:33:13AM -0700, Jaegeuk Kim wrote:
-> On 10/30, Theodore Y. Ts'o wrote:
-> > On Wed, Oct 30, 2019 at 11:50:37PM +0800, Gao Xiang wrote:
-> > > 
-> > > So I'm curious about the original issue in commit 740432f83560
-> > > ("f2fs: handle failed bio allocation"). Since f2fs manages multiple write
-> > > bios with its internal fio but it seems the commit is not helpful to
-> > > resolve potential mempool deadlock (I'm confused since no calltrace,
-> > > maybe I'm wrong)...
+On Wed, Oct 30, 2019 at 04:43:52PM +0800, Chao Yu wrote:
+> >>>>  static void bio_post_read_processing(struct bio_post_read_ctx *ctx)
+> >>>>  {
+> >>>> -	/*
+> >>>> -	 * We use different work queues for decryption and for verity because
+> >>>> -	 * verity may require reading metadata pages that need decryption, and
+> >>>> -	 * we shouldn't recurse to the same workqueue.
+> >>>> -	 */
+> >>>
+> >>> Why is it okay (i.e., no deadlocks) to no longer use different work queues for
+> >>> decryption and for verity?  See the comment above which is being deleted.
+> >>
+> >> Could you explain more about how deadlock happen? or share me a link address if
+> >> you have described that case somewhere?
+> >>
 > > 
-> > Two possibilities come to mind.  (a) It may be that on older kernels
-> > (when f2fs is backported to older Board Support Package kernels from
-> > the SOC vendors) didn't have the bio_alloc() guarantee, so it was
-> > necessary on older kernels, but not on upstream, or (b) it wasn't
-> > *actually* possible for bio_alloc() to fail and someone added the
-> > error handling in 740432f83560 out of paranoia.
+> > The verity work can read pages from the file which require decryption.  I'm
+> > concerned that it could deadlock if the work is scheduled on the same workqueue.
 > 
-> Yup, I was checking old device kernels but just stopped digging it out.
-> Instead, I hesitate to apply this patch since I can't get why we need to
-> get rid of this code for clean-up purpose. This may be able to bring
-> some hassles when backporting to android/device kernels.
-
-Yes, got you concern. As I said in other patches for many times, since
-you're the maintainer of f2fs, it's all up to you (I'm not paranoia).
-However, I think there are 2 valid reasons:
-
- 1) As a newbie of Linux filesystem. When I study or work on f2fs,
-    and I saw these misleading code, I think I will produce similar
-    code in the future (not everyone refers comments above bio_alloc),
-    so such usage will spread (since one could refer some sample code
-    from exist code);
-
- 2) Since it's upstream, I personally think appropriate cleanup is ok (anyway
-    it kills net 20+ line dead code), and this patch I think isn't so harmful
-    for backporting.
-
-Thanks,
-Gao Xiang
-
+> I assume you've tried one workqueue, and suffered deadlock..
 > 
-> > 
-> > (Hence my suggestion that in the ext4 version of the patch, we add a
-> > code comment justifying why there was no error checking, to make it
-> > clear that this was a deliberate choice.  :-)
-> > 
-> > 						- Ted
+> > Granted, I'm not an expert in Linux workqueues, so if you've investigated this
+> > and determined that it's safe, can you explain why?
+> 
+> I'm not familiar with workqueue...  I guess it may not safe that if the work is
+> scheduled to the same cpu in where verity was waiting for data? if the work is
+> scheduled to other cpu, it may be safe.
+> 
+> I can check that before splitting the workqueue for verity and decrypt/decompress.
+> 
+
+Yes this is a real problem, try 'kvm-xfstests -c f2fs/encrypt generic/579'.
+The worker thread gets deadlocked in f2fs_read_merkle_tree_page() waiting for
+the Merkle tree page to be decrypted.  This is with the v2 compression patch;
+it works fine on current mainline.
+
+INFO: task kworker/u5:0:61 blocked for more than 30 seconds.
+      Not tainted 5.4.0-rc1-00119-g464e31ba60d0 #13
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+kworker/u5:0    D    0    61      2 0x80004000
+Workqueue: f2fs_post_read_wq f2fs_post_read_work
+Call Trace:
+ context_switch kernel/sched/core.c:3384 [inline]
+ __schedule+0x299/0x6c0 kernel/sched/core.c:4069
+ schedule+0x44/0xd0 kernel/sched/core.c:4136
+ io_schedule+0x11/0x40 kernel/sched/core.c:5780
+ wait_on_page_bit_common mm/filemap.c:1174 [inline]
+ wait_on_page_bit mm/filemap.c:1223 [inline]
+ wait_on_page_locked include/linux/pagemap.h:527 [inline]
+ wait_on_page_locked include/linux/pagemap.h:524 [inline]
+ wait_on_page_read mm/filemap.c:2767 [inline]
+ do_read_cache_page+0x407/0x660 mm/filemap.c:2810
+ read_cache_page+0xd/0x10 mm/filemap.c:2894
+ f2fs_read_merkle_tree_page+0x2e/0x30 include/linux/pagemap.h:396
+ verify_page+0x110/0x560 fs/verity/verify.c:120
+ fsverity_verify_bio+0xe6/0x1a0 fs/verity/verify.c:239
+ verity_work fs/f2fs/data.c:142 [inline]
+ f2fs_post_read_work+0x36/0x50 fs/f2fs/data.c:160
+ process_one_work+0x225/0x550 kernel/workqueue.c:2269
+ worker_thread+0x4b/0x3c0 kernel/workqueue.c:2415
+ kthread+0x125/0x140 kernel/kthread.c:255
+ ret_from_fork+0x24/0x30 arch/x86/entry/entry_64.S:352
+INFO: task kworker/u5:1:1140 blocked for more than 30 seconds.
+      Not tainted 5.4.0-rc1-00119-g464e31ba60d0 #13
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+kworker/u5:1    D    0  1140      2 0x80004000
+Workqueue: f2fs_post_read_wq f2fs_post_read_work
+Call Trace:
+ context_switch kernel/sched/core.c:3384 [inline]
+ __schedule+0x299/0x6c0 kernel/sched/core.c:4069
+ schedule+0x44/0xd0 kernel/sched/core.c:4136
+ io_schedule+0x11/0x40 kernel/sched/core.c:5780
+ wait_on_page_bit_common mm/filemap.c:1174 [inline]
+ wait_on_page_bit mm/filemap.c:1223 [inline]
+ wait_on_page_locked include/linux/pagemap.h:527 [inline]
+ wait_on_page_locked include/linux/pagemap.h:524 [inline]
+ wait_on_page_read mm/filemap.c:2767 [inline]
+ do_read_cache_page+0x407/0x660 mm/filemap.c:2810
+ read_cache_page+0xd/0x10 mm/filemap.c:2894
+ f2fs_read_merkle_tree_page+0x2e/0x30 include/linux/pagemap.h:396
+ verify_page+0x110/0x560 fs/verity/verify.c:120
+ fsverity_verify_bio+0xe6/0x1a0 fs/verity/verify.c:239
+ verity_work fs/f2fs/data.c:142 [inline]
+ f2fs_post_read_work+0x36/0x50 fs/f2fs/data.c:160
+ process_one_work+0x225/0x550 kernel/workqueue.c:2269
+ worker_thread+0x4b/0x3c0 kernel/workqueue.c:2415
+ kthread+0x125/0x140 kernel/kthread.c:255
+ ret_from_fork+0x24/0x30 arch/x86/entry/entry_64.S:352
+
+Showing all locks held in the system:
+1 lock held by khungtaskd/21:
+ #0: ffffffff82250520 (rcu_read_lock){....}, at: rcu_lock_acquire.constprop.0+0x0/0x30 include/trace/events/lock.h:13
+2 locks held by kworker/u5:0/61:
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
+ #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
+ #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
+ #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
+2 locks held by kworker/u5:1/1140:
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
+ #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
+ #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
+ #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
+ #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
 
 
 _______________________________________________
