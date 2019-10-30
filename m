@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98304E9F81
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 16:51:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 973A0E9F80
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2019 16:51:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -16,12 +16,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iPqFP-0006Zw-Un; Wed, 30 Oct 2019 15:50:59 +0000
+	id 1iPqFQ-0006a7-1a; Wed, 30 Oct 2019 15:51:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iPqFN-0006ZN-U4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 15:50:57 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iPqFO-0006ZW-5y
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 15:50:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -42,10 +42,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  cpFS2yLoo6xBA9gxxT/33BZNbJeXxsSPadfDdkEPEo2m+lxD5dS3pW2pFz5EMe7EF41Tx/hysPqmJ
  W5ux/hIs+2UO13OhwtgtOjikWEry1epWNZk9+NP6eVbxeYbjhJZ58S5B8I5CQBS+xhBs=;
 Received: from sonic308-55.consmr.mail.gq1.yahoo.com ([98.137.68.31])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iPqFM-00B1Nt-6x
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 15:50:57 +0000
+ id 1iPqFM-008w5z-Gs
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Oct 2019 15:50:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
  t=1572450650; bh=tlzW+EHXjriGMcNx2q7rBODiO5QJOtbDYR9mIItAx7c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
@@ -104,7 +104,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iPqFM-00B1Nt-6x
+X-Headers-End: 1iPqFM-008w5z-Gs
 Subject: Re: [f2fs-dev] [PATCH] f2fs: bio_alloc should never fail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
