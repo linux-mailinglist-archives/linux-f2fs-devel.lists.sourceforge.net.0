@@ -2,112 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89418EB666
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 18:52:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B360AEB67C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 18:57:27 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iQEcl-0000FN-GA; Thu, 31 Oct 2019 17:52:43 +0000
+	id 1iQEhK-0004Pn-6Y; Thu, 31 Oct 2019 17:57:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dianders@chromium.org>) id 1iQEck-0000FB-L7
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 17:52:42 +0000
+ (envelope-from
+ <BATV+4fa4615b85c97fbb822c+5912+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1iQEhI-0004Pe-Lm
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 17:57:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mxV+2q76TOXqdkYGmWgrFX3noerT+2XT5stD2pDGxy4=; b=YfFrA7w5GLW1PiG41clKitue/g
- NEuRpCKrLby6pRpWGIBLFphp4y59HumJJtcwoajAvmODN9mUuxodcB5FjrsZ2XF2YWugrsKf1grHu
- I0/zY1gcYPBDjVCAZHKc8W5hcu6pWoC7cgipGJSe1rjt/tS0CzFSFCvXRYEPqMWSwpIc=;
+ bh=NThx6lFDqYVUr8TtZn2As6WtB1ixtvpCPRZvtqpGcXA=; b=DJLZofYWTFLtNOWSgEH6u77xDD
+ hXaomfR/0uJoRDUaJ7YRHCmN7KjFa/Xs0LV2BECe1uXrg443PS+0+oHJFHYjyDiQFwc9A3stA8fF1
+ OTGQrcC3YiPKAj6XTArTb3X0SQGYbA1zWAdwL8KzqlubIySaTeeSRdhlFE+g2SRj2400=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mxV+2q76TOXqdkYGmWgrFX3noerT+2XT5stD2pDGxy4=; b=LcLv2aAdhIfVTdKRxoTbD2AALd
- Moo9nhWq/wHo4ZslZTUBu6tgyh7I23JsvuYwSXMUrT8I6dPaulqsb2nSB8ZbN20SoOcDOFHv444UC
- vZBAS8KdQs1yd0aWkHy2ilAIVa3VquYvFDd2Q4mm/eKtD3gE/nK/p+cZBT3sy5Ui4RwA=;
-Received: from mail-io1-f66.google.com ([209.85.166.66])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iQEci-00Cr8Y-4C
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 17:52:42 +0000
-Received: by mail-io1-f66.google.com with SMTP id c11so7681605iom.10
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 31 Oct 2019 10:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mxV+2q76TOXqdkYGmWgrFX3noerT+2XT5stD2pDGxy4=;
- b=D6C1yVuRrDhf4QkrhECxb4poSSgofQd6d8y3lwuDnDDo8D10nO6Ax5FRjL4ps/cBH2
- kibSwzCfBDl1f7CMhlXY1kciz6oFkW7LsIrytUSfdoT6ANPyz6PU14U40ImfzEl2fu5d
- 06UoCcfFhGpPMpgbOenFHbl2nIwNSPRnbySfc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=mxV+2q76TOXqdkYGmWgrFX3noerT+2XT5stD2pDGxy4=;
- b=oI8AOcaSRaRxnWonYWPPg3LURQ851+MRkU/oR8t4CgDgQ7XIsAkkmSS9A6l9TQQHzv
- /CyG3/cPDTVN0EdhZ0rq446WPvkft0BV6FAufpUCf31JND3roPlOuvNYMu391QoYcFgA
- 8f1Um7kmfouIAcw/DaztXZ1Sss7R+1MWt3sRuk1QL5DuTGeAjimY0mp47Ah2BOvaFwBH
- iwx2/ERuh+xObs8d/hNELKaymnQ4Zmc3V8+EZckPPmwINm5ACj8ix6He2GtpFecYmOB5
- 1KqknAcX4MmxaTl0duiqqNCfUTo4I+HHXGYz6peoruXtBL2hDmJ15KqmEC0RGKY7LU9I
- 3bnQ==
-X-Gm-Message-State: APjAAAXmNgYGgJ+lF0GjiKJdFAO9fTT5oR/3iNMrOHHguL+nqZLKlUHr
- XhNpJVkRowIRRICtDEOFNdC/skHsxEE=
-X-Google-Smtp-Source: APXvYqwDSm6YdKvmDnT3kuz1jGw4uM4ixN79/6ee4Lai5tysdlcznr+X8FT62UCqd9QEhL4ICDSqUw==
-X-Received: by 2002:a5d:9b0f:: with SMTP id y15mr5950018ion.35.1572544354050; 
- Thu, 31 Oct 2019 10:52:34 -0700 (PDT)
-Received: from mail-il1-f177.google.com (mail-il1-f177.google.com.
- [209.85.166.177])
- by smtp.gmail.com with ESMTPSA id d197sm359860iog.15.2019.10.31.10.52.32
- for <linux-f2fs-devel@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Oct 2019 10:52:33 -0700 (PDT)
-Received: by mail-il1-f177.google.com with SMTP id t9so3899722ils.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 31 Oct 2019 10:52:32 -0700 (PDT)
-X-Received: by 2002:a92:ba1b:: with SMTP id o27mr7815343ili.269.1572544351933; 
- Thu, 31 Oct 2019 10:52:31 -0700 (PDT)
+ bh=NThx6lFDqYVUr8TtZn2As6WtB1ixtvpCPRZvtqpGcXA=; b=TVUcf+CubiUELuwsDxByl7x+8r
+ PlzZufwb9OzzBtOmyVcTroHrSdmQazQMo4omUm+q74SaqLs+H260xFLFI+p9dWbchrhTJM14knN5L
+ uVg0hboLup+9U7Y3QufrTo30xlKHtmqrf5S1CBo42vI4A7miZxMC4c5rUdWmCnrnNEF0=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iQEhH-00Cndd-A0
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 17:57:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=NThx6lFDqYVUr8TtZn2As6WtB1ixtvpCPRZvtqpGcXA=; b=ADMS9XgHFzJN0W1JfbZOHcYuL
+ WiwTGHuVjC1n+3eMJNmhdIbz8gFKURJs9caDViGVRC0/LRLSAewysAzmbCbE857kBBaMHhzx169aJ
+ qLVbcdRAhHa1rcpAp2ewHvzqCXabKXLwgyfrepFLq8VTTAOhE3m0T46SK5oR8Y2o0CAsSqIO/2BKU
+ wiY6jiotsGlPpJggeBS9wju445XW8VNja6QIoyRCk6tTnhevhPK2D8XaO8haqs3725gL36ew0vYi2
+ E3bM9R3Kj6G1dgV7xgy5Q7/X8GJyzzRhn6qgsq0jtC7RZv9o44Wvk4792saRO1BMlwMJzslEYo12K
+ o7wccmCzg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1iQEh7-0007t1-1b; Thu, 31 Oct 2019 17:57:13 +0000
+Date: Thu, 31 Oct 2019 10:57:13 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20191031175713.GA23601@infradead.org>
+References: <20191028072032.6911-1-satyat@google.com>
+ <20191028072032.6911-4-satyat@google.com>
 MIME-Version: 1.0
-References: <20191030100618.1.Ibf7a996e4a58e84f11eec910938cfc3f9159c5de@changeid>
- <20191030173758.GC693@sol.localdomain>
- <CAD=FV=Uzma+eSGG1S1Aq6s3QdMNh4J-c=g-5uhB=0XBtkAawcA@mail.gmail.com>
- <20191030190226.GD693@sol.localdomain>
- <20191030205745.GA216218@sol.localdomain>
- <CAD=FV=X6Q3QZaND-tfYr9mf-KYMeKFmJDca3ee-i9roWj+GHsQ@mail.gmail.com>
-In-Reply-To: <CAD=FV=X6Q3QZaND-tfYr9mf-KYMeKFmJDca3ee-i9roWj+GHsQ@mail.gmail.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Thu, 31 Oct 2019 10:52:19 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=URZX4t-TB2Ne8y5ZfeBGoyhsPZhcncQ0yPe3cRXi=1gw@mail.gmail.com>
-Message-ID: <CAD=FV=URZX4t-TB2Ne8y5ZfeBGoyhsPZhcncQ0yPe3cRXi=1gw@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20191028072032.6911-4-satyat@google.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chromium.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.66 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.66 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iQEci-00Cr8Y-4C
-Subject: Re: [f2fs-dev] [PATCH] Revert "ext4 crypto: fix to check feature
- status before get policy"
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iQEhH-00Cndd-A0
+Subject: Re: [f2fs-dev] [PATCH v5 3/9] block: blk-crypto for Inline
+ Encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,66 +90,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, Gwendal Grignou <gwendal@chromium.org>,
- linux-ext4@vger.kernel.org, Ryo Hashimoto <hashimoto@chromium.org>,
- linux-doc@vger.kernel.org, Vadim Sukhomlinov <sukhomlinov@google.com>,
- linux-f2fs-devel@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Guenter Roeck <groeck@chromium.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, apronin@chromium.org
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+On Mon, Oct 28, 2019 at 12:20:26AM -0700, Satya Tangirala wrote:
+> We introduce blk-crypto, which manages programming keyslots for struct
+> bios. With blk-crypto, filesystems only need to call bio_crypt_set_ctx with
+> the encryption key, algorithm and data_unit_num; they don't have to worry
+> about getting a keyslot for each encryption context, as blk-crypto handles
+> that. Blk-crypto also makes it possible for layered devices like device
+> mapper to make use of inline encryption hardware.
+> 
+> Blk-crypto delegates crypto operations to inline encryption hardware when
+> available, and also contains a software fallback to the kernel crypto API.
+> For more details, refer to Documentation/block/inline-encryption.rst.
 
-On Wed, Oct 30, 2019 at 2:59 PM Doug Anderson <dianders@chromium.org> wrote:
->
-> Hi,
->
-> On Wed, Oct 30, 2019 at 1:57 PM Eric Biggers <ebiggers@kernel.org> wrote:
-> >
-> > FWIW, from reading the Chrome OS code, I think the code you linked to isn't
-> > where the breakage actually is.  I think it's actually at
-> > https://chromium.googlesource.com/chromiumos/platform2/+/refs/heads/master/chromeos-common-script/share/chromeos-common.sh#375
-> > ... where an init script is using the error message printed by 'e4crypt
-> > get_policy' to decide whether to add -O encrypt to the filesystem or not.
-> >
-> > It really should check instead:
-> >
-> >         [ -e /sys/fs/ext4/features/encryption ]
->
-> OK, I filed <https://crbug.com/1019939> and CCed all the people listed
-> in the cryptohome "OWNERS" file.  Hopefully one of them can pick this
-> up as a general cleanup.  Thanks!
-
-Just to follow-up: I did a quick test here to see if I could fix
-"chromeos-common.sh" as you suggested.  Then I got rid of the Revert
-and tried to login.  No joy.
-
-Digging a little deeper, the ext4_dir_encryption_supported() function
-is called in two places:
-* chromeos-install
-* chromeos_startup
-
-In my test case I had a machine that I'd already logged into (on a
-previous kernel version) and I was trying to log into it a second
-time.  Thus there's no way that chromeos-install could be involved.
-Looking at chromeos_startup:
-
-https://chromium.googlesource.com/chromiumos/platform2/+/refs/heads/master/init/chromeos_startup
-
-...the function is only used for setting up the "encrypted stateful"
-partition.  That wasn't where my failure was.  My failure was with
-logging in AKA with cryptohome.  Thus I think it's plausible that my
-original commit message pointing at cryptohome may have been correct.
-It's possible that there were _also_ problems with encrypted stateful
-that I wasn't noticing, but if so they were not the only problems.
-
-It still may be wise to make Chrome OS use different tests, but it
-might not be quite as simple as hoped...
-
--Doug
+Can you explain why we need this software fallback that basically just
+duplicates logic already in fscrypt?  As far as I can tell this fallback
+logic actually is more code than the actual inline encryption, and nasty
+code at that, e.g. the whole crypt_iter thing.
 
 
 _______________________________________________
