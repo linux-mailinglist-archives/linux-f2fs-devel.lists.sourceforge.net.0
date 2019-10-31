@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95EBDEB6DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 19:23:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92FEAEB6E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 19:26:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iQF6R-0005gp-R4; Thu, 31 Oct 2019 18:23:23 +0000
+	id 1iQF9g-0001ie-1p; Thu, 31 Oct 2019 18:26:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+4fa4615b85c97fbb822c+5912+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1iQF6Q-0005gi-Jf
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 18:23:22 +0000
+ id 1iQF9e-0001iS-Cw
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 18:26:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bxpUhY/qtwNaeue6qcQlTx7BDSxYIRC42kFrjayFps0=; b=MbdDas5wE/VssNSTn7snTVV17b
- qVoZNDuOEOTb21/g9aqn0thylerFjC9jVkAsOiIHOsQm96GAB+Ahkcms2bR6O7AoQ0vBTLTsgHAX5
- bHUG2coejk9MhUvIykA4dJN79jas6mqiVOi5jMKMHHr6QhRbSUg9F6qYCb+MAhcesa2M=;
+ bh=xGKoferNKfspRbnIISs596AcbXhd0qJEbsy99cjQW1s=; b=eWxEqUmsLSaK0By+EmqYf/AWNm
+ YGW+9xKis46wqKHiGSMJndZEVu4OYroXDj+XyZ+p9H/+HgHNJ6IzyuDxfL20V8Y1Hwz+bvbqDR8+U
+ kAl8nqPXmLby97/jRAQBiYfO8rcLopIOAodFC69UO8TdwwmtIWYsehWF2CmqsltEYNjM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,37 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bxpUhY/qtwNaeue6qcQlTx7BDSxYIRC42kFrjayFps0=; b=VqbOCNpaPU6TsCgFoddSWQn56m
- 9zexc4sjAD4yY70YOZIs6vwyjsmTWpeUErH77Dmvz9ZiTEY1CoXl0PVjnVc+bIwsR6CIrJqKBC7RM
- jYyJBKtB6WlBFEemAi3GmdBA4mGOZqM3iQtqVzxDuLCODj7P7UN35oMEqzQ7dAoLkf4c=;
+ bh=xGKoferNKfspRbnIISs596AcbXhd0qJEbsy99cjQW1s=; b=BWJODXaLuzAmCdtnX7rXjMQKAO
+ kNFUCr6l1/2H2cY/O1EK0+G4vLon8YC5AbAz7TnZtfEBvk3edjXaStF5B6Vo6SozV7Z+LeP25pDyc
+ 2DwpKtxAGCaqMvGTqG1mvvp/IFpjcJBrJhYGgk4SRWY8oOHABPJbGZxZdBsKfXZBWH/U=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iQF6P-00Ct3j-Dk
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 18:23:22 +0000
+ id 1iQF9d-00BBcF-Bc
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 18:26:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bxpUhY/qtwNaeue6qcQlTx7BDSxYIRC42kFrjayFps0=; b=r4ujFx2c+gNY+WxneSRVK4m9w
- H0qa02Od7ZaBJosxTMd2wNBMdyNOGkMAcwWD6iZGHkr82+AiJjxoYyyr8BU5ao1JrK3GUdgbOYO2G
- 7+UV3QhIfrG2GV0ezl3f2ItkPqnazxDdRNrT5lmS7aF51M1KkRx1MQSrez6mI+/8y48vtz6H5COMB
- IeGuhUxt5oLlOReFvjh+GipT8sQfL3gZEJS2ewrhIAM7GLs+jgEOHebsY2Q5aqTWGK1skLgIElgOq
- pClq7/xatxK8uqc6+copbj6jtcl7bk7qV12Qi1zBNQ7KjgIujYB9qwLKEvqvQCDgqlEtQu/yPd5wr
- fUpF2Uh6g==;
+ bh=xGKoferNKfspRbnIISs596AcbXhd0qJEbsy99cjQW1s=; b=ibOAU5TmxrFii45Kim/G2t/2E
+ SDu1BNQ2603yUpmstCvG9YOw9+45EfSx6bxgKgmWFummCnqG9qVS+aamDLoccHltMk7s/UmEm4i4R
+ yOYAMeDbHe5btNNkCL46bf/ncTNnj915yc6uNmS51gpFVym5Pj+xkMXxYacyckfiaP34cL4ub3OQU
+ X/LDZrHu+Zk7USfXuHNCTwKrt3qYjS+UVopJbcmZ67xospYg7al5CBPmLV2Afi6Yk5ROp0sHLcflG
+ YhhXLHP8OoARskk8vxmv9sLQVU/2mdsYCYeHD1FU3woCN6gu2D+lgtSQ2b3RKwFoyZRRxIcztfn/q
+ SPWu+FafA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iQF6I-0001rc-B6; Thu, 31 Oct 2019 18:23:14 +0000
-Date: Thu, 31 Oct 2019 11:23:14 -0700
+ Hat Linux)) id 1iQF9R-0003Ro-PR; Thu, 31 Oct 2019 18:26:29 +0000
+Date: Thu, 31 Oct 2019 11:26:29 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20191031182314.GD23601@infradead.org>
+Message-ID: <20191031182629.GE23601@infradead.org>
 References: <20191028072032.6911-1-satyat@google.com>
- <20191028072032.6911-6-satyat@google.com>
+ <20191028072032.6911-7-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191028072032.6911-6-satyat@google.com>
+In-Reply-To: <20191028072032.6911-7-satyat@google.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
@@ -76,8 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iQF6P-00Ct3j-Dk
-Subject: Re: [f2fs-dev] [PATCH v5 5/9] scsi: ufs: UFS crypto API
+X-Headers-End: 1iQF9d-00BBcF-Bc
+Subject: Re: [f2fs-dev] [PATCH v5 6/9] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,77 +99,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> +static size_t get_keysize_bytes(enum ufs_crypto_key_size size)
+>  	/* Transfer request descriptor header fields */
+> +	if (lrbp->crypto_enable) {
+
+Maybe we want a little inline function so that we can use IS_ENABLED
+to make sure the compiler eliminates the dead code if crypt config
+option is not set.
+
+ a) don't have to define the crypto_enable if the config options are
+    not set
+
+> +		dword_0 |= UTP_REQ_DESC_CRYPTO_ENABLE_CMD;
+> +		dword_0 |= lrbp->crypto_key_slot;
+> +		req_desc->header.dword_1 =
+> +			cpu_to_le32((u32)lrbp->data_unit_num);
+> +		req_desc->header.dword_3 =
+> +			cpu_to_le32((u32)(lrbp->data_unit_num >> 32));
+
+This should use ther upper_32_bits / lower_32_bits helpers.
+
+> +static inline int ufshcd_prepare_lrbp_crypto(struct ufs_hba *hba,
+> +					     struct scsi_cmnd *cmd,
+> +					     struct ufshcd_lrb *lrbp)
 > +{
-> +	switch (size) {
-> +	case UFS_CRYPTO_KEY_SIZE_128: return 16;
-> +	case UFS_CRYPTO_KEY_SIZE_192: return 24;
-> +	case UFS_CRYPTO_KEY_SIZE_256: return 32;
-> +	case UFS_CRYPTO_KEY_SIZE_512: return 64;
-> +	default: return 0;
-> +	}
-> +}
-
-Please fix the indentation and move all the returns to their own
-lines.  There are various more spots that will need to be fixed
-like this as well later in the patch.
-
+> +	int key_slot;
 > +
-> +static int ufshcd_crypto_cap_find(void *hba_p,
-> +			   enum blk_crypto_mode_num crypto_mode,
-> +			   unsigned int data_unit_size)
-> +{
-> +	struct ufs_hba *hba = hba_p;
-
-Please properly type the first argument.
-
-> +	case UFS_CRYPTO_ALG_BITLOCKER_AES_CBC: // fallthrough
-
-Please don't use // comments.
-
-> +static void program_key(struct ufs_hba *hba,
-> +			const union ufs_crypto_cfg_entry *cfg,
-> +			int slot)
-
-The function name needs a ufshcd prefix.
-
-> +	wmb();
-> +	for (i = 0; i < 16; i++) {
-> +		ufshcd_writel(hba, le32_to_cpu(cfg->reg_val[i]),
-> +			      slot_offset + i * sizeof(cfg->reg_val[0]));
-> +		/* Spec says each dword in key must be written sequentially */
-> +		wmb();
+> +	if (!cmd->request->bio ||
+> +	    !bio_crypt_should_process(cmd->request->bio, cmd->request->q)) {
+> +		lrbp->crypto_enable = false;
+> +		return 0;
 > +	}
-> +	/* Write dword 17 */
-> +	ufshcd_writel(hba, le32_to_cpu(cfg->reg_val[17]),
-> +		      slot_offset + 17 * sizeof(cfg->reg_val[0]));
-> +	/* Dword 16 must be written last */
-> +	wmb();
-> +	/* Write dword 16 */
-> +	ufshcd_writel(hba, le32_to_cpu(cfg->reg_val[16]),
-> +		      slot_offset + 16 * sizeof(cfg->reg_val[0]));
-> +	wmb();
+> +
+> +	if (WARN_ON(!ufshcd_is_crypto_enabled(hba))) {
+> +		/*
+> +		 * Upper layer asked us to do inline encryption
+> +		 * but that isn't enabled, so we fail this request.
+> +		 */
+> +		return -EINVAL;
+> +	}
+> +	key_slot = bio_crypt_get_keyslot(cmd->request->bio);
+> +	if (!ufshcd_keyslot_valid(hba, key_slot))
+> +		return -EINVAL;
+> +
+> +	lrbp->crypto_enable = true;
+> +	lrbp->crypto_key_slot = key_slot;
+> +	lrbp->data_unit_num = bio_crypt_data_unit_num(cmd->request->bio);
+> +
+> +	return 0;
 
-wmb() has no meaning for MMIO operations, something looks very fishy
-here.
-
-> +static int ufshcd_crypto_keyslot_program(void *hba_p, const u8 *key,
-> +					 enum blk_crypto_mode_num crypto_mode,
-> +					 unsigned int data_unit_size,
-> +					 unsigned int slot)
-> +{
-> +	struct ufs_hba *hba = hba_p;
-
-This is not a very type safe API.  I think the proper thing to do
-would be to allocte the struct keyslot_manager in the driver (ufshcd)
-as part of the containing structure (ufs_hba) and then just have
-a keyslot_manager_init that initializes the field.  Then pass the
-struct keyslot_manager to the methods, which can use container_of
-to get the containing structure.
-
-> +#define NUM_KEYSLOTS(hba) (hba->crypto_capabilities.config_count + 1)
-
-Please make this an inline function.
+I think this should go into ufshcd-crypto.c so that it can be stubbed
+out for non-crypto builds.  That also means we can remove various
+stubs for the block layer helpers and just dereference the fields
+directly, helping with code readability.
 
 
 _______________________________________________
