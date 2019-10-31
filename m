@@ -2,63 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A916EA938
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 03:21:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20CECEA93C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 31 Oct 2019 03:27:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iQ05c-0002Fw-M0; Thu, 31 Oct 2019 02:21:32 +0000
+	id 1iQ0BX-0005Ae-Oe; Thu, 31 Oct 2019 02:27:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iQ05b-0002Fi-1V
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 02:21:31 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iQ0BW-0005AP-5B
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 02:27:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vSKYhu2uHli6FeH0PL1g2yI1phj/k2y6Ngo5LUIb8Tc=; b=N44HM4Grf3wKay0HpEheLINt6q
- O7nbl1Jknv0ZeyteabJJD2z0/2ATAuWmDLH7dNOhzs+uNkKujlPlCzUn4x5oMiARKhvtmzfLP594m
- TybQzbZe1ofmTV+ZeUsyBvAxUAxP2MjmjoLb8VDqEwECLKE/1y3QcWkWWizjEMGIQGOI=;
+ bh=1GPkHSsdhvFw9md2qRt7zAosRbq+SW2xw6Hsr8lTY+8=; b=kGZaehVwuyOzT/A/yYhcxlUCJW
+ EIzNW04asWi3sCP610B0ld1VNVRY7VcOaUcPhyHrRd9X7jnjSjjUC/GMwQi9CbWzXL1vMmYDQcq/N
+ /8AfLwkjcno6Y/nFwI0FxGIAVOn3NcwOA7mKBrieI2RLTnyATOye0zqWpGpiQkfOUl5I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vSKYhu2uHli6FeH0PL1g2yI1phj/k2y6Ngo5LUIb8Tc=; b=kwg/xYRybrK6xhMr7QokIRNK9d
- l+7LJTbOfM0k/5KgwK3iHb/5x5vw6Cz4sruYrFf1qoWgr67iFHkqmE3ypBBkCd7eDdsHsC/V3Tfhz
- APu/dZjPQme1mGwNU7W7R+mYTBzAnmvLZ4+mLsURAIjiaa6k/EfgohLxetFCk/TsZCDs=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=1GPkHSsdhvFw9md2qRt7zAosRbq+SW2xw6Hsr8lTY+8=; b=LUdYmTbsDhT+k9RbjYqI01+pyv
+ uHGeunEz+o6hnKHShwJ6Mzyub2JSRrIpxpa8SyysbEFI4k7LOFrBg3p1BxdcSLhTetT92sHkORcRA
+ IMDE04rvNRA+uyeVdEhnxNRa+reR7RwP5Ql2GcgSrtCHqvKUbE69oMZFafAkAySTrtGM=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iQ05Y-009q4W-Hy
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 02:21:31 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 990323473B9ACFDD1725;
- Thu, 31 Oct 2019 10:21:18 +0800 (CST)
+ id 1iQ0BT-00BkmH-UM
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Oct 2019 02:27:38 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 340C2F6892E2D8DCD829;
+ Thu, 31 Oct 2019 10:27:26 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 31 Oct
- 2019 10:21:13 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 31 Oct
+ 2019 10:27:24 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20191022171602.93637-1-jaegeuk@kernel.org>
- <20191022171602.93637-2-jaegeuk@kernel.org>
- <20191027225006.GA321938@sol.localdomain>
- <da214cdc-0074-b7bf-7761-d4c4ad3d4f6a@huawei.com>
- <20191030025512.GA4791@sol.localdomain>
- <97c33fa1-15af-b319-29a1-22f254a26c0a@huawei.com>
- <20191030170246.GB693@sol.localdomain>
+ <c916c749-0abe-a7b7-e748-f0c4d5599e4a@huawei.com>
+ <20191025181820.GA24183@jaegeuk-macbookpro.roam.corp.google.com>
+ <8cfef676-e81f-6069-3b0b-7005fbf8e0bb@huawei.com>
+ <20191030160942.GA34056@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <55f1c893-09c5-5a8e-d493-8cae51b9e2a6@huawei.com>
-Date: Thu, 31 Oct 2019 10:21:13 +0800
+Message-ID: <1d747677-86c3-d1ad-b343-cf786e77da37@huawei.com>
+Date: Thu, 31 Oct 2019 10:27:23 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191030170246.GB693@sol.localdomain>
+In-Reply-To: <20191030160942.GA34056@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -67,8 +64,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iQ05Y-009q4W-Hy
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: support data compression
+X-Headers-End: 1iQ0BT-00BkmH-UM
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: support aligned pinned file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,124 +77,268 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/10/31 1:02, Eric Biggers wrote:
-> On Wed, Oct 30, 2019 at 04:43:52PM +0800, Chao Yu wrote:
->>>>>>  static void bio_post_read_processing(struct bio_post_read_ctx *ctx)
->>>>>>  {
->>>>>> -	/*
->>>>>> -	 * We use different work queues for decryption and for verity because
->>>>>> -	 * verity may require reading metadata pages that need decryption, and
->>>>>> -	 * we shouldn't recurse to the same workqueue.
->>>>>> -	 */
+On 2019/10/31 0:09, Jaegeuk Kim wrote:
+> On 10/26, Chao Yu wrote:
+>> On 2019/10/26 2:18, Jaegeuk Kim wrote:
+>>> On 10/24, Chao Yu wrote:
+>>>> Hi Jaegeuk,
+>>>>
+>>>> On 2019/10/23 1:16, Jaegeuk Kim wrote:
+>>>>> This patch supports 2MB-aligned pinned file, which can guarantee no GC at all
+>>>>> by allocating fully valid 2MB segment.
 >>>>>
->>>>> Why is it okay (i.e., no deadlocks) to no longer use different work queues for
->>>>> decryption and for verity?  See the comment above which is being deleted.
+>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>>> ---
+>>>>>  fs/f2fs/f2fs.h     |  4 +++-
+>>>>>  fs/f2fs/file.c     | 39 ++++++++++++++++++++++++++++++++++-----
+>>>>>  fs/f2fs/recovery.c |  2 +-
+>>>>>  fs/f2fs/segment.c  | 21 ++++++++++++++++++++-
+>>>>>  fs/f2fs/segment.h  |  2 ++
+>>>>>  fs/f2fs/super.c    |  1 +
+>>>>>  fs/f2fs/sysfs.c    |  2 ++
+>>>>>  7 files changed, 63 insertions(+), 8 deletions(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>>> index ca342f4c7db1..c681f51e351b 100644
+>>>>> --- a/fs/f2fs/f2fs.h
+>>>>> +++ b/fs/f2fs/f2fs.h
+>>>>> @@ -890,6 +890,7 @@ enum {
+>>>>>  	CURSEG_WARM_NODE,	/* direct node blocks of normal files */
+>>>>>  	CURSEG_COLD_NODE,	/* indirect node blocks */
+>>>>>  	NO_CHECK_TYPE,
+>>>>> +	CURSEG_COLD_DATA_PINNED,/* cold data for pinned file */
+>>>>>  };
+>>>>>  
+>>>>>  struct flush_cmd {
+>>>>> @@ -1301,6 +1302,7 @@ struct f2fs_sb_info {
+>>>>>  
+>>>>>  	/* threshold for gc trials on pinned files */
+>>>>>  	u64 gc_pin_file_threshold;
+>>>>> +	struct rw_semaphore pin_sem;
+>>>>>  
+>>>>>  	/* maximum # of trials to find a victim segment for SSR and GC */
+>>>>>  	unsigned int max_victim_search;
+>>>>> @@ -3116,7 +3118,7 @@ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
+>>>>>  int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
+>>>>>  void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+>>>>>  					unsigned int start, unsigned int end);
+>>>>> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
+>>>>> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type);
+>>>>>  int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
+>>>>>  bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
+>>>>>  					struct cp_control *cpc);
+>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>>>>> index 29bc0a542759..f6c038e8a6a7 100644
+>>>>> --- a/fs/f2fs/file.c
+>>>>> +++ b/fs/f2fs/file.c
+>>>>> @@ -1545,12 +1545,41 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+>>>>>  	if (off_end)
+>>>>>  		map.m_len++;
+>>>>>  
+>>>>> -	if (f2fs_is_pinned_file(inode))
+>>>>> -		map.m_seg_type = CURSEG_COLD_DATA;
+>>>>> +	if (!map.m_len)
+>>>>> +		return 0;
+>>>>> +
+>>>>> +	if (f2fs_is_pinned_file(inode)) {
+>>>>> +		block_t len = (map.m_len >> sbi->log_blocks_per_seg) <<
+>>>>> +					sbi->log_blocks_per_seg;
+>>>>> +		block_t done = 0;
+>>>>> +
+>>>>> +		if (map.m_len % sbi->blocks_per_seg)
+>>>>> +			len += sbi->blocks_per_seg;
+>>>>>  
+>>>>> -	err = f2fs_map_blocks(inode, &map, 1, (f2fs_is_pinned_file(inode) ?
+>>>>> -						F2FS_GET_BLOCK_PRE_DIO :
+>>>>> -						F2FS_GET_BLOCK_PRE_AIO));
+>>>>> +		map.m_len = sbi->blocks_per_seg;
+>>>>> +next_alloc:
+>>>>> +		mutex_lock(&sbi->gc_mutex);
+>>>>> +		err = f2fs_gc(sbi, true, false, NULL_SEGNO);
+>>>>> +		if (err && err != -ENODATA && err != -EAGAIN)
+>>>>> +			goto out_err;
 >>>>
->>>> Could you explain more about how deadlock happen? or share me a link address if
->>>> you have described that case somewhere?
+>>>> To grab enough free space?
 >>>>
+>>>> Shouldn't we call
+>>>>
+>>>> 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+>>>> 		mutex_lock(&sbi->gc_mutex);
+>>>> 		f2fs_gc(sbi, false, false, NULL_SEGNO);
+>>>> 	}
 >>>
->>> The verity work can read pages from the file which require decryption.  I'm
->>> concerned that it could deadlock if the work is scheduled on the same workqueue.
+>>> The above calls gc all the time. Do we need this?
 >>
->> I assume you've tried one workqueue, and suffered deadlock..
->>
->>> Granted, I'm not an expert in Linux workqueues, so if you've investigated this
->>> and determined that it's safe, can you explain why?
->>
->> I'm not familiar with workqueue...  I guess it may not safe that if the work is
->> scheduled to the same cpu in where verity was waiting for data? if the work is
->> scheduled to other cpu, it may be safe.
->>
->> I can check that before splitting the workqueue for verity and decrypt/decompress.
->>
+>> Hmmm... my concern is why we need to run foreground GC even if there is enough
+>> free space..
 > 
-> Yes this is a real problem, try 'kvm-xfstests -c f2fs/encrypt generic/579'.
-> The worker thread gets deadlocked in f2fs_read_merkle_tree_page() waiting for
-> the Merkle tree page to be decrypted.  This is with the v2 compression patch;
-> it works fine on current mainline.
+> In order to get the free segment easily?
 
-Oh, alright...
-
-Let me split them, thanks very much for all the comments and test anyway.
+However, I doubt arbitrary foreground GC with greedy algorithm will ruin
+hot/cold data separation, actually, for sufficient free segment case, it's
+unnecessary to call FGGC.
 
 Thanks,
 
 > 
-> INFO: task kworker/u5:0:61 blocked for more than 30 seconds.
->       Not tainted 5.4.0-rc1-00119-g464e31ba60d0 #13
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> kworker/u5:0    D    0    61      2 0x80004000
-> Workqueue: f2fs_post_read_wq f2fs_post_read_work
-> Call Trace:
->  context_switch kernel/sched/core.c:3384 [inline]
->  __schedule+0x299/0x6c0 kernel/sched/core.c:4069
->  schedule+0x44/0xd0 kernel/sched/core.c:4136
->  io_schedule+0x11/0x40 kernel/sched/core.c:5780
->  wait_on_page_bit_common mm/filemap.c:1174 [inline]
->  wait_on_page_bit mm/filemap.c:1223 [inline]
->  wait_on_page_locked include/linux/pagemap.h:527 [inline]
->  wait_on_page_locked include/linux/pagemap.h:524 [inline]
->  wait_on_page_read mm/filemap.c:2767 [inline]
->  do_read_cache_page+0x407/0x660 mm/filemap.c:2810
->  read_cache_page+0xd/0x10 mm/filemap.c:2894
->  f2fs_read_merkle_tree_page+0x2e/0x30 include/linux/pagemap.h:396
->  verify_page+0x110/0x560 fs/verity/verify.c:120
->  fsverity_verify_bio+0xe6/0x1a0 fs/verity/verify.c:239
->  verity_work fs/f2fs/data.c:142 [inline]
->  f2fs_post_read_work+0x36/0x50 fs/f2fs/data.c:160
->  process_one_work+0x225/0x550 kernel/workqueue.c:2269
->  worker_thread+0x4b/0x3c0 kernel/workqueue.c:2415
->  kthread+0x125/0x140 kernel/kthread.c:255
->  ret_from_fork+0x24/0x30 arch/x86/entry/entry_64.S:352
-> INFO: task kworker/u5:1:1140 blocked for more than 30 seconds.
->       Not tainted 5.4.0-rc1-00119-g464e31ba60d0 #13
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> kworker/u5:1    D    0  1140      2 0x80004000
-> Workqueue: f2fs_post_read_wq f2fs_post_read_work
-> Call Trace:
->  context_switch kernel/sched/core.c:3384 [inline]
->  __schedule+0x299/0x6c0 kernel/sched/core.c:4069
->  schedule+0x44/0xd0 kernel/sched/core.c:4136
->  io_schedule+0x11/0x40 kernel/sched/core.c:5780
->  wait_on_page_bit_common mm/filemap.c:1174 [inline]
->  wait_on_page_bit mm/filemap.c:1223 [inline]
->  wait_on_page_locked include/linux/pagemap.h:527 [inline]
->  wait_on_page_locked include/linux/pagemap.h:524 [inline]
->  wait_on_page_read mm/filemap.c:2767 [inline]
->  do_read_cache_page+0x407/0x660 mm/filemap.c:2810
->  read_cache_page+0xd/0x10 mm/filemap.c:2894
->  f2fs_read_merkle_tree_page+0x2e/0x30 include/linux/pagemap.h:396
->  verify_page+0x110/0x560 fs/verity/verify.c:120
->  fsverity_verify_bio+0xe6/0x1a0 fs/verity/verify.c:239
->  verity_work fs/f2fs/data.c:142 [inline]
->  f2fs_post_read_work+0x36/0x50 fs/f2fs/data.c:160
->  process_one_work+0x225/0x550 kernel/workqueue.c:2269
->  worker_thread+0x4b/0x3c0 kernel/workqueue.c:2415
->  kthread+0x125/0x140 kernel/kthread.c:255
->  ret_from_fork+0x24/0x30 arch/x86/entry/entry_64.S:352
-> 
-> Showing all locks held in the system:
-> 1 lock held by khungtaskd/21:
->  #0: ffffffff82250520 (rcu_read_lock){....}, at: rcu_lock_acquire.constprop.0+0x0/0x30 include/trace/events/lock.h:13
-> 2 locks held by kworker/u5:0/61:
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
->  #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
->  #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
->  #1: ffffc90000253e50 ((work_completion)(&ctx->work)){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
-> 2 locks held by kworker/u5:1/1140:
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
->  #0: ffff88807b78eb28 ((wq_completion)f2fs_post_read_wq){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
->  #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_data kernel/workqueue.c:619 [inline]
->  #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: set_work_pool_and_clear_pending kernel/workqueue.c:647 [inline]
->  #1: ffffc9000174be50 ((work_completion)(&ctx->work)){+.+.}, at: process_one_work+0x1ad/0x550 kernel/workqueue.c:2240
+>>
+>>>
+>>>>
+>>>>> +
+>>>>> +		down_write(&sbi->pin_sem);
+>>>>> +		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+>>>>> +		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
+>>>>> +		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
+>>>>> +		up_write(&sbi->pin_sem);
+>>>>> +
+>>>>> +		done += map.m_len;
+>>>>> +		len -= map.m_len;
+>>>>> +		map.m_lblk += map.m_len;
+>>>>> +		if (!err && len)
+>>>>> +			goto next_alloc;
+>>>>> +
+>>>>> +		map.m_len = done;
+>>>>> +	} else {
+>>>>> +		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_AIO);
+>>>>> +	}
+>>>>> +out_err:
+>>>>>  	if (err) {
+>>>>>  		pgoff_t last_off;
+>>>>>  
+>>>>> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+>>>>> index 783773e4560d..76477f71d4ee 100644
+>>>>> --- a/fs/f2fs/recovery.c
+>>>>> +++ b/fs/f2fs/recovery.c
+>>>>> @@ -711,7 +711,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+>>>>>  		f2fs_put_page(page, 1);
+>>>>>  	}
+>>>>>  	if (!err)
+>>>>> -		f2fs_allocate_new_segments(sbi);
+>>>>> +		f2fs_allocate_new_segments(sbi, NO_CHECK_TYPE);
+>>>>>  	return err;
+>>>>>  }
+>>>>>  
+>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>>>> index 25c750cd0272..253d72c2663c 100644
+>>>>> --- a/fs/f2fs/segment.c
+>>>>> +++ b/fs/f2fs/segment.c
+>>>>> @@ -2690,7 +2690,7 @@ void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+>>>>>  	up_read(&SM_I(sbi)->curseg_lock);
+>>>>>  }
+>>>>>  
+>>>>> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
+>>>>> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type)
+>>>>>  {
+>>>>>  	struct curseg_info *curseg;
+>>>>>  	unsigned int old_segno;
+>>>>> @@ -2699,6 +2699,9 @@ void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
+>>>>>  	down_write(&SIT_I(sbi)->sentry_lock);
+>>>>>  
+>>>>>  	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
+>>>>> +		if (type != NO_CHECK_TYPE && i != type)
+>>>>> +			continue;
+>>>>> +
+>>>>>  		curseg = CURSEG_I(sbi, i);
+>>>>>  		old_segno = curseg->segno;
+>>>>>  		SIT_I(sbi)->s_ops->allocate_segment(sbi, i, true);
+>>>>> @@ -3068,6 +3071,19 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>>>>>  {
+>>>>>  	struct sit_info *sit_i = SIT_I(sbi);
+>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+>>>>> +	bool put_pin_sem = false;
+>>>>> +
+>>>>> +	if (type == CURSEG_COLD_DATA) {
+>>>>> +		/* GC during CURSEG_COLD_DATA_PINNED allocation */
+>>>>> +		if (down_read_trylock(&sbi->pin_sem)) {
+>>>>> +			put_pin_sem = true;
+>>>>> +		} else {
+>>>>> +			type = CURSEG_WARM_DATA;
+>>>>> +			curseg = CURSEG_I(sbi, type);
+>>>>
+>>>> It will mix pending cold data into warm area... rather than recovering curseg to
+>>>> write pointer of last cold segment?
+>>>>
+>>>> I know maybe that fallocate aligned address could be corner case, but I guess
+>>>> there should be some better solutions can handle race case more effectively.
+>>>>
+>>>> One solution could be: allocating a virtual log header to select free segment as
+>>>> 2m-aligned space target.
+>>>
+>>> I thought about that, but concluded to avoid too much changes.
+>>
+>> We have an unupstreamed feature which is based on virtual log header, I can
+>> introduce that basic virtual log fwk, which can be used for aligned allocation
+>> and later new features, would you like to check that?
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>> +		}
+>>>>> +	} else if (type == CURSEG_COLD_DATA_PINNED) {
+>>>>> +		type = CURSEG_COLD_DATA;
+>>>>> +	}
+>>>>>  
+>>>>>  	down_read(&SM_I(sbi)->curseg_lock);
+>>>>>  
+>>>>> @@ -3133,6 +3149,9 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>>>>>  	mutex_unlock(&curseg->curseg_mutex);
+>>>>>  
+>>>>>  	up_read(&SM_I(sbi)->curseg_lock);
+>>>>> +
+>>>>> +	if (put_pin_sem)
+>>>>> +		up_read(&sbi->pin_sem);
+>>>>>  }
+>>>>>  
+>>>>>  static void update_device_state(struct f2fs_io_info *fio)
+>>>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+>>>>> index 325781a1ae4d..a95467b202ea 100644
+>>>>> --- a/fs/f2fs/segment.h
+>>>>> +++ b/fs/f2fs/segment.h
+>>>>> @@ -313,6 +313,8 @@ struct sit_entry_set {
+>>>>>   */
+>>>>>  static inline struct curseg_info *CURSEG_I(struct f2fs_sb_info *sbi, int type)
+>>>>>  {
+>>>>> +	if (type == CURSEG_COLD_DATA_PINNED)
+>>>>> +		type = CURSEG_COLD_DATA;
+>>>>>  	return (struct curseg_info *)(SM_I(sbi)->curseg_array + type);
+>>>>>  }
+>>>>>  
+>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>> index f320fd11db48..c02a47ce551b 100644
+>>>>> --- a/fs/f2fs/super.c
+>>>>> +++ b/fs/f2fs/super.c
+>>>>> @@ -2853,6 +2853,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+>>>>>  	spin_lock_init(&sbi->dev_lock);
+>>>>>  
+>>>>>  	init_rwsem(&sbi->sb_lock);
+>>>>> +	init_rwsem(&sbi->pin_sem);
+>>>>>  }
+>>>>>  
+>>>>>  static int init_percpu_info(struct f2fs_sb_info *sbi)
+>>>>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+>>>>> index b558b64a4c9c..f164959e4224 100644
+>>>>> --- a/fs/f2fs/sysfs.c
+>>>>> +++ b/fs/f2fs/sysfs.c
+>>>>> @@ -154,6 +154,8 @@ static ssize_t features_show(struct f2fs_attr *a,
+>>>>>  	if (f2fs_sb_has_casefold(sbi))
+>>>>>  		len += snprintf(buf + len, PAGE_SIZE - len, "%s%s",
+>>>>>  				len ? ", " : "", "casefold");
+>>>>> +	len += snprintf(buf + len, PAGE_SIZE - len, "%s%s",
+>>>>> +				len ? ", " : "", "pin_file");
+>>>>>  	len += snprintf(buf + len, PAGE_SIZE - len, "\n");
+>>>>>  	return len;
+>>>>>  }
+>>>>>
+>>> .
+>>>
 > .
 > 
 
