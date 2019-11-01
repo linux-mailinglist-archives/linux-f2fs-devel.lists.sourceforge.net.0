@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6520EEC0DF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Nov 2019 10:54:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF53CEC0DD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Nov 2019 10:54:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iQTdG-0007EJ-KP; Fri, 01 Nov 2019 09:54:14 +0000
+	id 1iQTdE-0002Wl-Ip; Fri, 01 Nov 2019 09:54:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iQTdD-0007Dq-Ar
+ (envelope-from <yuchao0@huawei.com>) id 1iQTdC-0002Wd-Vu
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 01 Nov 2019 09:54:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ez1JZCutZI4HEshv4ZdhZpZPTWn2If2guGosDhY3Pfw=; b=QcWLzLvEmeFkCwK2y6/3Ks4O3c
- pdxGD0dKZ7XEh20EQzm+opoxtlXix/VKt4h9bwN2qzdZVlBmGHFZ1fFIA+X9mS0B6iDX9MBvBw6IL
- Fgn5l+5pv48MsLJiqJj2WO01t/oXE1NSy/CH4dn6TR6cicN9moOiTrmND+7F/yxOOgRs=;
+ bh=2BoJAtvBdm6FddBhsftDlv5OX//xBv2XceNIdEkSm0E=; b=bP0SkTcEk88Rr5hvXaIzFBWmld
+ N2nuE2lgP90Ayb1EKV4+xd9K5T8m1EO0oTPMekUuLlKgOmx/c8vkGso0k4xrisS8CG1YPjdtRIU42
+ sCSIPyCqIfzSp5T+BFATQbvHJr5IljjzmiQzavaXm3MTZ4yP1pbiZoC4WOUdewq1Kj5Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
@@ -29,24 +29,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ez1JZCutZI4HEshv4ZdhZpZPTWn2If2guGosDhY3Pfw=; b=bDwmWFjjOrpBoWp8mDA/K2VomP
- c9UYvHoYhUkmUG0b5JRrbn9/ulV1iQjaUJ8MrKEUxJoho3uDGCehZrp+45FZ/cqsdlRaGaBLR3uon
- ysYzqDBruk0BQUPB9lsP+W4P9GIiXZEJ29NSxji1DJ1H5SCgsPs7IzulIELblC+hlS20=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=2BoJAtvBdm6FddBhsftDlv5OX//xBv2XceNIdEkSm0E=; b=BEMz2L3TBlpGCZvY9ZVX13BaC4
+ QEICBHYfWnRWU7kQ8ghMDh2R3WQgsifSqHZdi9dtaM3buD8EQhrKF7oDNrhMiKqJ/ZWxUBr2a5bst
+ b/n4VH2BP8j6kFQ3ThYX8Cv9jUybkJxTgSUMaVj7yFR8HSxP+zz+a/3cH8rQ0kX7w3Og=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iQTd9-00DiPg-RE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 01 Nov 2019 09:54:11 +0000
+ id 1iQTdA-00CKQH-Ao
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 01 Nov 2019 09:54:10 +0000
 Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 30EE6A0A1A06B8B505F8;
+ by Forcepoint Email with ESMTP id 5A2F23AC2167A1491F17;
  Fri,  1 Nov 2019 17:53:59 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 1 Nov 2019 17:53:49 +0800
+ 14.3.439.0; Fri, 1 Nov 2019 17:53:50 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 1 Nov 2019 17:53:23 +0800
-Message-ID: <20191101095324.9902-2-yuchao0@huawei.com>
+Date: Fri, 1 Nov 2019 17:53:24 +0800
+Message-ID: <20191101095324.9902-3-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 In-Reply-To: <20191101095324.9902-1-yuchao0@huawei.com>
 References: <20191101095324.9902-1-yuchao0@huawei.com>
@@ -62,9 +62,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iQTd9-00DiPg-RE
-Subject: [f2fs-dev] [PATCH 2/3] f2fs: show f2fs instance in
- printk_ratelimited
+X-Headers-End: 1iQTdA-00CKQH-Ao
+Subject: [f2fs-dev] [PATCH 3/3] Revert "f2fs: use kvmalloc,
+ if kmalloc is failed"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,266 +81,680 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As Eric mentioned, bare printk{,_ratelimited} won't show which
-filesystem instance these message is coming from, this patch tries
-to show fs instance with sb->s_id field in all places we missed
-before.
+This reverts commit 5222595d093ebe80329d38d255d14316257afb3e.
+
+As discussed with Eric, as kvmalloc() will try kmalloc() first, so
+when we need allocate large size memory, it'd better to use
+f2fs_kvmalloc() directly rather than adding additional fallback
+logic to call kvmalloc() after we failed in f2fs_kmalloc().
+
+In order to avoid allocation failure described in original commit,
+I change to use f2fs_kvmalloc() for .free_nid_bitmap bitmap memory.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
+ fs/f2fs/acl.c        |  6 ++---
  fs/f2fs/checkpoint.c |  2 +-
- fs/f2fs/data.c       |  9 +++++----
- fs/f2fs/dir.c        |  7 ++++---
- fs/f2fs/f2fs.h       | 24 +++++++++++++-----------
+ fs/f2fs/data.c       |  2 +-
+ fs/f2fs/debug.c      |  2 +-
+ fs/f2fs/dir.c        |  6 ++---
+ fs/f2fs/f2fs.h       | 10 ++-----
  fs/f2fs/file.c       |  2 +-
- fs/f2fs/gc.c         |  2 +-
- fs/f2fs/inode.c      |  2 +-
- fs/f2fs/node.c       |  2 +-
- fs/f2fs/segment.c    |  9 +++++----
- 9 files changed, 32 insertions(+), 27 deletions(-)
+ fs/f2fs/gc.c         |  4 +--
+ fs/f2fs/hash.c       |  4 +--
+ fs/f2fs/inline.c     |  4 +--
+ fs/f2fs/namei.c      |  2 +-
+ fs/f2fs/node.c       | 10 +++----
+ fs/f2fs/segment.c    | 28 +++++++++----------
+ fs/f2fs/super.c      | 64 ++++++++++++++++++++++----------------------
+ fs/f2fs/xattr.c      | 10 +++----
+ 15 files changed, 75 insertions(+), 81 deletions(-)
 
+diff --git a/fs/f2fs/acl.c b/fs/f2fs/acl.c
+index 217b290ae3a5..306413589827 100644
+--- a/fs/f2fs/acl.c
++++ b/fs/f2fs/acl.c
+@@ -160,7 +160,7 @@ static void *f2fs_acl_to_disk(struct f2fs_sb_info *sbi,
+ 	return (void *)f2fs_acl;
+ 
+ fail:
+-	kvfree(f2fs_acl);
++	kfree(f2fs_acl);
+ 	return ERR_PTR(-EINVAL);
+ }
+ 
+@@ -190,7 +190,7 @@ static struct posix_acl *__f2fs_get_acl(struct inode *inode, int type,
+ 		acl = NULL;
+ 	else
+ 		acl = ERR_PTR(retval);
+-	kvfree(value);
++	kfree(value);
+ 
+ 	return acl;
+ }
+@@ -240,7 +240,7 @@ static int __f2fs_set_acl(struct inode *inode, int type,
+ 
+ 	error = f2fs_setxattr(inode, name_index, "", value, size, ipage, 0);
+ 
+-	kvfree(value);
++	kfree(value);
+ 	if (!error)
+ 		set_cached_acl(inode, type, acl);
+ 
 diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index a0eef95b9e0e..ffdaba0c55d2 100644
+index ffdaba0c55d2..b33779822a2c 100644
 --- a/fs/f2fs/checkpoint.c
 +++ b/fs/f2fs/checkpoint.c
-@@ -581,7 +581,7 @@ int f2fs_acquire_orphan_inode(struct f2fs_sb_info *sbi)
- 
- 	if (time_to_inject(sbi, FAULT_ORPHAN)) {
- 		spin_unlock(&im->ino_lock);
--		f2fs_show_injection_info(FAULT_ORPHAN);
-+		f2fs_show_injection_info(sbi, FAULT_ORPHAN);
- 		return -ENOSPC;
- 	}
+@@ -965,7 +965,7 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
+ 	f2fs_put_page(cp1, 1);
+ 	f2fs_put_page(cp2, 1);
+ fail_no_cp:
+-	kvfree(sbi->ckpt);
++	kfree(sbi->ckpt);
+ 	return err;
+ }
  
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index ca7161e38d1f..0bcb28d70894 100644
+index 0bcb28d70894..58f4bade6c2b 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -168,9 +168,10 @@ static bool f2fs_bio_post_read_required(struct bio *bio)
+@@ -2889,7 +2889,7 @@ static void f2fs_dio_end_io(struct bio *bio)
+ 	bio->bi_private = dio->orig_private;
+ 	bio->bi_end_io = dio->orig_end_io;
  
- static void f2fs_read_end_io(struct bio *bio)
- {
--	if (time_to_inject(F2FS_P_SB(bio_first_page_all(bio)),
--						FAULT_READ_IO)) {
--		f2fs_show_injection_info(FAULT_READ_IO);
-+	struct f2fs_sb_info *sbi = F2FS_P_SB(bio_first_page_all(bio));
-+
-+	if (time_to_inject(sbi, FAULT_READ_IO)) {
-+		f2fs_show_injection_info(sbi, FAULT_READ_IO);
- 		bio->bi_status = BLK_STS_IOERR;
- 	}
+-	kvfree(dio);
++	kfree(dio);
  
-@@ -192,7 +193,7 @@ static void f2fs_write_end_io(struct bio *bio)
- 	struct bvec_iter_all iter_all;
+ 	bio_endio(bio);
+ }
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index 9b0bedd82581..5abd1d67d8b2 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -515,7 +515,7 @@ void f2fs_destroy_stats(struct f2fs_sb_info *sbi)
+ 	list_del(&si->stat_list);
+ 	mutex_unlock(&f2fs_stat_mutex);
  
- 	if (time_to_inject(sbi, FAULT_WRITE_IO)) {
--		f2fs_show_injection_info(FAULT_WRITE_IO);
-+		f2fs_show_injection_info(sbi, FAULT_WRITE_IO);
- 		bio->bi_status = BLK_STS_IOERR;
- 	}
+-	kvfree(si);
++	kfree(si);
+ }
  
+ void __init f2fs_create_root_stats(void)
 diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 4033778bcbbf..c967cacf979e 100644
+index c967cacf979e..83ca3b721015 100644
 --- a/fs/f2fs/dir.c
 +++ b/fs/f2fs/dir.c
-@@ -628,7 +628,7 @@ int f2fs_add_regular_entry(struct inode *dir, const struct qstr *new_name,
- 
- start:
- 	if (time_to_inject(F2FS_I_SB(dir), FAULT_DIR_DEPTH)) {
--		f2fs_show_injection_info(FAULT_DIR_DEPTH);
-+		f2fs_show_injection_info(F2FS_I_SB(dir), FAULT_DIR_DEPTH);
- 		return -ENOSPC;
+@@ -158,7 +158,7 @@ static void f2fs_fname_setup_ci_filename(struct inode *dir,
+ 					iname, cf_name->name,
+ 					F2FS_NAME_LEN);
+ 	if ((int)cf_name->len <= 0) {
+-		kvfree(cf_name->name);
++		kfree(cf_name->name);
+ 		cf_name->name = NULL;
  	}
+ }
+@@ -245,7 +245,7 @@ struct f2fs_dir_entry *f2fs_find_target_dentry(struct fscrypt_name *fname,
+ 		*max_slots = max_len;
  
-@@ -919,8 +919,9 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
- 			bit_pos++;
- 			ctx->pos = start_pos + bit_pos;
- 			printk_ratelimited(
--				"%s, invalid namelen(0), ino:%u, run fsck to fix.",
--				KERN_WARNING, le32_to_cpu(de->ino));
-+				"%sF2FS-fs (%s): invalid namelen(0), ino:%u, run fsck to fix.",
-+				KERN_WARNING, sbi->sb->s_id,
-+				le32_to_cpu(de->ino));
- 			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			continue;
- 		}
+ #ifdef CONFIG_UNICODE
+-	kvfree(cf_str.name);
++	kfree(cf_str.name);
+ #endif
+ 	return de;
+ }
+@@ -1101,7 +1101,7 @@ static int f2fs_d_hash(const struct dentry *dentry, struct qstr *str)
+ 	}
+ 	str->hash = full_name_hash(dentry, norm, len);
+ out:
+-	kvfree(norm);
++	kfree(norm);
+ 	return ret;
+ }
+ 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c681f51e351b..3f6204202788 100644
+index 3f6204202788..8833e9d32f9d 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -1374,9 +1374,10 @@ struct f2fs_private_dio {
- };
+@@ -1677,7 +1677,7 @@ static inline void disable_nat_bits(struct f2fs_sb_info *sbi, bool lock)
+ 	if (lock)
+ 		spin_unlock_irqrestore(&sbi->cp_lock, flags);
  
- #ifdef CONFIG_F2FS_FAULT_INJECTION
--#define f2fs_show_injection_info(type)					\
--	printk_ratelimited("%sF2FS-fs : inject %s in %s of %pS\n",	\
--		KERN_INFO, f2fs_fault_name[type],			\
-+#define f2fs_show_injection_info(sbi, type)					\
-+	printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",	\
-+		KERN_INFO, sbi->sb->s_id,				\
-+		f2fs_fault_name[type],					\
- 		__func__, __builtin_return_address(0))
- static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
- {
-@@ -1396,7 +1397,7 @@ static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
- 	return false;
+-	kvfree(nat_bits);
++	kfree(nat_bits);
  }
- #else
--#define f2fs_show_injection_info(type) do { } while (0)
-+#define f2fs_show_injection_info(sbi, type) do { } while (0)
- static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
- {
- 	return false;
-@@ -1781,7 +1782,7 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 		return ret;
  
- 	if (time_to_inject(sbi, FAULT_BLOCK)) {
--		f2fs_show_injection_info(FAULT_BLOCK);
-+		f2fs_show_injection_info(sbi, FAULT_BLOCK);
- 		release = *count;
- 		goto release_quota;
- 	}
-@@ -2033,7 +2034,7 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
- 	}
- 
- 	if (time_to_inject(sbi, FAULT_BLOCK)) {
--		f2fs_show_injection_info(FAULT_BLOCK);
-+		f2fs_show_injection_info(sbi, FAULT_BLOCK);
- 		goto enospc;
- 	}
- 
-@@ -2148,7 +2149,8 @@ static inline struct page *f2fs_grab_cache_page(struct address_space *mapping,
- 			return page;
- 
- 		if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_ALLOC)) {
--			f2fs_show_injection_info(FAULT_PAGE_ALLOC);
-+			f2fs_show_injection_info(F2FS_M_SB(mapping),
-+							FAULT_PAGE_ALLOC);
- 			return NULL;
- 		}
- 	}
-@@ -2163,7 +2165,7 @@ static inline struct page *f2fs_pagecache_get_page(
- 				int fgp_flags, gfp_t gfp_mask)
- {
- 	if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_GET)) {
--		f2fs_show_injection_info(FAULT_PAGE_GET);
-+		f2fs_show_injection_info(F2FS_M_SB(mapping), FAULT_PAGE_GET);
- 		return NULL;
- 	}
- 
-@@ -2232,7 +2234,7 @@ static inline struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi,
- 		return bio;
- 	}
- 	if (time_to_inject(sbi, FAULT_ALLOC_BIO)) {
--		f2fs_show_injection_info(FAULT_ALLOC_BIO);
-+		f2fs_show_injection_info(sbi, FAULT_ALLOC_BIO);
- 		return NULL;
- 	}
- 
-@@ -2799,7 +2801,7 @@ static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
- 	void *ret;
- 
- 	if (time_to_inject(sbi, FAULT_KMALLOC)) {
--		f2fs_show_injection_info(FAULT_KMALLOC);
-+		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
- 		return NULL;
- 	}
- 
-@@ -2820,7 +2822,7 @@ static inline void *f2fs_kvmalloc(struct f2fs_sb_info *sbi,
+ static inline bool enabled_nat_bits(struct f2fs_sb_info *sbi,
+@@ -2798,18 +2798,12 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
+ static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
  					size_t size, gfp_t flags)
  {
- 	if (time_to_inject(sbi, FAULT_KVMALLOC)) {
--		f2fs_show_injection_info(FAULT_KVMALLOC);
-+		f2fs_show_injection_info(sbi, FAULT_KVMALLOC);
+-	void *ret;
+-
+ 	if (time_to_inject(sbi, FAULT_KMALLOC)) {
+ 		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
  		return NULL;
  	}
  
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index f6c038e8a6a7..e5ce697c0544 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -681,7 +681,7 @@ int f2fs_truncate(struct inode *inode)
- 	trace_f2fs_truncate(inode);
- 
- 	if (time_to_inject(F2FS_I_SB(inode), FAULT_TRUNCATE)) {
--		f2fs_show_injection_info(FAULT_TRUNCATE);
-+		f2fs_show_injection_info(F2FS_I_SB(inode), FAULT_TRUNCATE);
- 		return -EIO;
- 	}
- 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index ef7686a82722..24a3b6b52210 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -54,7 +54,7 @@ static int gc_thread_func(void *data)
- 		}
- 
- 		if (time_to_inject(sbi, FAULT_CHECKPOINT)) {
--			f2fs_show_injection_info(FAULT_CHECKPOINT);
-+			f2fs_show_injection_info(sbi, FAULT_CHECKPOINT);
- 			f2fs_stop_checkpoint(sbi, false);
- 		}
- 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 386ad54c13c3..502bd491336a 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -681,7 +681,7 @@ void f2fs_evict_inode(struct inode *inode)
- 		err = f2fs_truncate(inode);
- 
- 	if (time_to_inject(sbi, FAULT_EVICT_INODE)) {
--		f2fs_show_injection_info(FAULT_EVICT_INODE);
-+		f2fs_show_injection_info(sbi, FAULT_EVICT_INODE);
- 		err = -EIO;
- 	}
- 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 8b66bc4c004b..6912faba811e 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2399,7 +2399,7 @@ bool f2fs_alloc_nid(struct f2fs_sb_info *sbi, nid_t *nid)
- 	struct free_nid *i = NULL;
- retry:
- 	if (time_to_inject(sbi, FAULT_ALLOC_NID)) {
--		f2fs_show_injection_info(FAULT_ALLOC_NID);
-+		f2fs_show_injection_info(sbi, FAULT_ALLOC_NID);
- 		return false;
- 	}
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 253d72c2663c..c525d8c87ddf 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -480,7 +480,7 @@ int f2fs_commit_inmem_pages(struct inode *inode)
- void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
- {
- 	if (time_to_inject(sbi, FAULT_CHECKPOINT)) {
--		f2fs_show_injection_info(FAULT_CHECKPOINT);
-+		f2fs_show_injection_info(sbi, FAULT_CHECKPOINT);
- 		f2fs_stop_checkpoint(sbi, false);
- 	}
- 
-@@ -1008,8 +1008,9 @@ static void __remove_discard_cmd(struct f2fs_sb_info *sbi,
- 
- 	if (dc->error)
- 		printk_ratelimited(
--			"%sF2FS-fs: Issue discard(%u, %u, %u) failed, ret: %d",
--			KERN_INFO, dc->lstart, dc->start, dc->len, dc->error);
-+			"%sF2FS-fs (%s): Issue discard(%u, %u, %u) failed, ret: %d",
-+			KERN_INFO, sbi->sb->s_id,
-+			dc->lstart, dc->start, dc->len, dc->error);
- 	__detach_discard_cmd(dcc, dc);
+-	ret = kmalloc(size, flags);
+-	if (ret)
+-		return ret;
+-
+-	return kvmalloc(size, flags);
++	return kmalloc(size, flags);
  }
  
-@@ -1149,7 +1150,7 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
- 		dc->len += len;
+ static inline void *f2fs_kzalloc(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index e5ce697c0544..a7d855efc294 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3220,7 +3220,7 @@ static int f2fs_get_volume_name(struct file *filp, unsigned long arg)
+ 				min(FSLABEL_MAX, count)))
+ 		err = -EFAULT;
  
- 		if (time_to_inject(sbi, FAULT_DISCARD)) {
--			f2fs_show_injection_info(FAULT_DISCARD);
-+			f2fs_show_injection_info(sbi, FAULT_DISCARD);
- 			err = -EIO;
- 			goto submit;
+-	kvfree(vbuf);
++	kfree(vbuf);
+ 	return err;
+ }
+ 
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 24a3b6b52210..80b8da471286 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -142,7 +142,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 			"f2fs_gc-%u:%u", MAJOR(dev), MINOR(dev));
+ 	if (IS_ERR(gc_th->f2fs_gc_task)) {
+ 		err = PTR_ERR(gc_th->f2fs_gc_task);
+-		kvfree(gc_th);
++		kfree(gc_th);
+ 		sbi->gc_thread = NULL;
+ 	}
+ out:
+@@ -155,7 +155,7 @@ void f2fs_stop_gc_thread(struct f2fs_sb_info *sbi)
+ 	if (!gc_th)
+ 		return;
+ 	kthread_stop(gc_th->f2fs_gc_task);
+-	kvfree(gc_th);
++	kfree(gc_th);
+ 	sbi->gc_thread = NULL;
+ }
+ 
+diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
+index 5bc4dcd8fc03..7d1cc0e3d72c 100644
+--- a/fs/f2fs/hash.c
++++ b/fs/f2fs/hash.c
+@@ -124,14 +124,14 @@ f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
+ 
+ 	dlen = utf8_casefold(um, name_info, buff, PATH_MAX);
+ 	if (dlen < 0) {
+-		kvfree(buff);
++		kfree(buff);
+ 		goto opaque_seq;
+ 	}
+ 	folded.name = buff;
+ 	folded.len = dlen;
+ 	r = __f2fs_dentry_hash(&folded, fname);
+ 
+-	kvfree(buff);
++	kfree(buff);
+ 	return r;
+ 
+ opaque_seq:
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 896db0416f0e..b132568b751d 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -515,7 +515,7 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct page *ipage,
+ 			!f2fs_has_inline_xattr(dir))
+ 		F2FS_I(dir)->i_inline_xattr_size = 0;
+ 
+-	kvfree(backup_dentry);
++	kfree(backup_dentry);
+ 	return 0;
+ recover:
+ 	lock_page(ipage);
+@@ -526,7 +526,7 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct page *ipage,
+ 	set_page_dirty(ipage);
+ 	f2fs_put_page(ipage, 1);
+ 
+-	kvfree(backup_dentry);
++	kfree(backup_dentry);
+ 	return err;
+ }
+ 
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 4faf06e8bf89..d8ca896e109b 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -655,7 +655,7 @@ static int f2fs_symlink(struct inode *dir, struct dentry *dentry,
+ 	f2fs_handle_failed_inode(inode);
+ out_free_encrypted_link:
+ 	if (disk_link.name != (unsigned char *)symname)
+-		kvfree(disk_link.name);
++		kfree(disk_link.name);
+ 	return err;
+ }
+ 
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 6912faba811e..261798b9a9f7 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -3065,7 +3065,7 @@ static int init_free_nid_cache(struct f2fs_sb_info *sbi)
+ 	int i;
+ 
+ 	nm_i->free_nid_bitmap =
+-		f2fs_kzalloc(sbi, array_size(sizeof(unsigned char *),
++		f2fs_kvzalloc(sbi, array_size(sizeof(unsigned char *),
+ 					     nm_i->nat_blocks),
+ 			     GFP_KERNEL);
+ 	if (!nm_i->free_nid_bitmap)
+@@ -3183,13 +3183,13 @@ void f2fs_destroy_node_manager(struct f2fs_sb_info *sbi)
+ 	}
+ 	kvfree(nm_i->free_nid_count);
+ 
+-	kvfree(nm_i->nat_bitmap);
+-	kvfree(nm_i->nat_bits);
++	kfree(nm_i->nat_bitmap);
++	kfree(nm_i->nat_bits);
+ #ifdef CONFIG_F2FS_CHECK_FS
+-	kvfree(nm_i->nat_bitmap_mir);
++	kfree(nm_i->nat_bitmap_mir);
+ #endif
+ 	sbi->nm_info = NULL;
+-	kvfree(nm_i);
++	kfree(nm_i);
+ }
+ 
+ int __init f2fs_create_node_manager_caches(void)
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index c525d8c87ddf..8c96d6008e20 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -718,7 +718,7 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
+ 				"f2fs_flush-%u:%u", MAJOR(dev), MINOR(dev));
+ 	if (IS_ERR(fcc->f2fs_issue_flush)) {
+ 		err = PTR_ERR(fcc->f2fs_issue_flush);
+-		kvfree(fcc);
++		kfree(fcc);
+ 		SM_I(sbi)->fcc_info = NULL;
+ 		return err;
+ 	}
+@@ -737,7 +737,7 @@ void f2fs_destroy_flush_cmd_control(struct f2fs_sb_info *sbi, bool free)
+ 		kthread_stop(flush_thread);
+ 	}
+ 	if (free) {
+-		kvfree(fcc);
++		kfree(fcc);
+ 		SM_I(sbi)->fcc_info = NULL;
+ 	}
+ }
+@@ -2059,7 +2059,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+ 				"f2fs_discard-%u:%u", MAJOR(dev), MINOR(dev));
+ 	if (IS_ERR(dcc->f2fs_issue_discard)) {
+ 		err = PTR_ERR(dcc->f2fs_issue_discard);
+-		kvfree(dcc);
++		kfree(dcc);
+ 		SM_I(sbi)->dcc_info = NULL;
+ 		return err;
+ 	}
+@@ -2083,7 +2083,7 @@ static void destroy_discard_cmd_control(struct f2fs_sb_info *sbi)
+ 	if (unlikely(atomic_read(&dcc->discard_cmd_cnt)))
+ 		f2fs_issue_discard_timeout(sbi);
+ 
+-	kvfree(dcc);
++	kfree(dcc);
+ 	SM_I(sbi)->dcc_info = NULL;
+ }
+ 
+@@ -4488,7 +4488,7 @@ static void destroy_dirty_segmap(struct f2fs_sb_info *sbi)
+ 
+ 	destroy_victim_secmap(sbi);
+ 	SM_I(sbi)->dirty_info = NULL;
+-	kvfree(dirty_i);
++	kfree(dirty_i);
+ }
+ 
+ static void destroy_curseg(struct f2fs_sb_info *sbi)
+@@ -4500,10 +4500,10 @@ static void destroy_curseg(struct f2fs_sb_info *sbi)
+ 		return;
+ 	SM_I(sbi)->curseg_array = NULL;
+ 	for (i = 0; i < NR_CURSEG_TYPE; i++) {
+-		kvfree(array[i].sum_blk);
+-		kvfree(array[i].journal);
++		kfree(array[i].sum_blk);
++		kfree(array[i].journal);
+ 	}
+-	kvfree(array);
++	kfree(array);
+ }
+ 
+ static void destroy_free_segmap(struct f2fs_sb_info *sbi)
+@@ -4514,7 +4514,7 @@ static void destroy_free_segmap(struct f2fs_sb_info *sbi)
+ 	SM_I(sbi)->free_info = NULL;
+ 	kvfree(free_i->free_segmap);
+ 	kvfree(free_i->free_secmap);
+-	kvfree(free_i);
++	kfree(free_i);
+ }
+ 
+ static void destroy_sit_info(struct f2fs_sb_info *sbi)
+@@ -4526,19 +4526,19 @@ static void destroy_sit_info(struct f2fs_sb_info *sbi)
+ 
+ 	if (sit_i->sentries)
+ 		kvfree(sit_i->bitmap);
+-	kvfree(sit_i->tmp_map);
++	kfree(sit_i->tmp_map);
+ 
+ 	kvfree(sit_i->sentries);
+ 	kvfree(sit_i->sec_entries);
+ 	kvfree(sit_i->dirty_sentries_bitmap);
+ 
+ 	SM_I(sbi)->sit_info = NULL;
+-	kvfree(sit_i->sit_bitmap);
++	kfree(sit_i->sit_bitmap);
+ #ifdef CONFIG_F2FS_CHECK_FS
+-	kvfree(sit_i->sit_bitmap_mir);
++	kfree(sit_i->sit_bitmap_mir);
+ 	kvfree(sit_i->invalid_segmap);
+ #endif
+-	kvfree(sit_i);
++	kfree(sit_i);
+ }
+ 
+ void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi)
+@@ -4554,7 +4554,7 @@ void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi)
+ 	destroy_free_segmap(sbi);
+ 	destroy_sit_info(sbi);
+ 	sbi->sm_info = NULL;
+-	kvfree(sm_info);
++	kfree(sm_info);
+ }
+ 
+ int __init f2fs_create_segment_manager_caches(void)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index c02a47ce551b..b72d071aedd8 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -324,7 +324,7 @@ static int f2fs_set_qf_name(struct super_block *sb, int qtype,
+ 	set_opt(sbi, QUOTA);
+ 	return 0;
+ errout:
+-	kvfree(qname);
++	kfree(qname);
+ 	return ret;
+ }
+ 
+@@ -336,7 +336,7 @@ static int f2fs_clear_qf_name(struct super_block *sb, int qtype)
+ 		f2fs_err(sbi, "Cannot change journaled quota options when quota turned on");
+ 		return -EINVAL;
+ 	}
+-	kvfree(F2FS_OPTION(sbi).s_qf_names[qtype]);
++	kfree(F2FS_OPTION(sbi).s_qf_names[qtype]);
+ 	F2FS_OPTION(sbi).s_qf_names[qtype] = NULL;
+ 	return 0;
+ }
+@@ -429,10 +429,10 @@ static int parse_options(struct super_block *sb, char *options)
+ 				set_opt(sbi, BG_GC);
+ 				set_opt(sbi, FORCE_FG_GC);
+ 			} else {
+-				kvfree(name);
++				kfree(name);
+ 				return -EINVAL;
+ 			}
+-			kvfree(name);
++			kfree(name);
+ 			break;
+ 		case Opt_disable_roll_forward:
+ 			set_opt(sbi, DISABLE_ROLL_FORWARD);
+@@ -590,7 +590,7 @@ static int parse_options(struct super_block *sb, char *options)
+ 					!strncmp(name, "adaptive", 8)) {
+ 				if (f2fs_sb_has_blkzoned(sbi)) {
+ 					f2fs_warn(sbi, "adaptive mode is not allowed with zoned block device feature");
+-					kvfree(name);
++					kfree(name);
+ 					return -EINVAL;
+ 				}
+ 				set_opt_mode(sbi, F2FS_MOUNT_ADAPTIVE);
+@@ -598,10 +598,10 @@ static int parse_options(struct super_block *sb, char *options)
+ 					!strncmp(name, "lfs", 3)) {
+ 				set_opt_mode(sbi, F2FS_MOUNT_LFS);
+ 			} else {
+-				kvfree(name);
++				kfree(name);
+ 				return -EINVAL;
+ 			}
+-			kvfree(name);
++			kfree(name);
+ 			break;
+ 		case Opt_io_size_bits:
+ 			if (args->from && match_int(args, &arg))
+@@ -730,10 +730,10 @@ static int parse_options(struct super_block *sb, char *options)
+ 					!strncmp(name, "fs-based", 8)) {
+ 				F2FS_OPTION(sbi).whint_mode = WHINT_MODE_FS;
+ 			} else {
+-				kvfree(name);
++				kfree(name);
+ 				return -EINVAL;
+ 			}
+-			kvfree(name);
++			kfree(name);
+ 			break;
+ 		case Opt_alloc:
+ 			name = match_strdup(&args[0]);
+@@ -747,10 +747,10 @@ static int parse_options(struct super_block *sb, char *options)
+ 					!strncmp(name, "reuse", 5)) {
+ 				F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_REUSE;
+ 			} else {
+-				kvfree(name);
++				kfree(name);
+ 				return -EINVAL;
+ 			}
+-			kvfree(name);
++			kfree(name);
+ 			break;
+ 		case Opt_fsync:
+ 			name = match_strdup(&args[0]);
+@@ -767,10 +767,10 @@ static int parse_options(struct super_block *sb, char *options)
+ 				F2FS_OPTION(sbi).fsync_mode =
+ 							FSYNC_MODE_NOBARRIER;
+ 			} else {
+-				kvfree(name);
++				kfree(name);
+ 				return -EINVAL;
+ 			}
+-			kvfree(name);
++			kfree(name);
+ 			break;
+ 		case Opt_test_dummy_encryption:
+ #ifdef CONFIG_FS_ENCRYPTION
+@@ -1052,10 +1052,10 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
+ 	for (i = 0; i < sbi->s_ndevs; i++) {
+ 		blkdev_put(FDEV(i).bdev, FMODE_EXCL);
+ #ifdef CONFIG_BLK_DEV_ZONED
+-		kvfree(FDEV(i).blkz_seq);
++		kfree(FDEV(i).blkz_type);
+ #endif
+ 	}
+-	kvfree(sbi->devs);
++	kfree(sbi->devs);
+ }
+ 
+ static void f2fs_put_super(struct super_block *sb)
+@@ -1125,28 +1125,28 @@ static void f2fs_put_super(struct super_block *sb)
+ 	f2fs_destroy_node_manager(sbi);
+ 	f2fs_destroy_segment_manager(sbi);
+ 
+-	kvfree(sbi->ckpt);
++	kfree(sbi->ckpt);
+ 
+ 	f2fs_unregister_sysfs(sbi);
+ 
+ 	sb->s_fs_info = NULL;
+ 	if (sbi->s_chksum_driver)
+ 		crypto_free_shash(sbi->s_chksum_driver);
+-	kvfree(sbi->raw_super);
++	kfree(sbi->raw_super);
+ 
+ 	destroy_device_list(sbi);
+ 	mempool_destroy(sbi->write_io_dummy);
+ #ifdef CONFIG_QUOTA
+ 	for (i = 0; i < MAXQUOTAS; i++)
+-		kvfree(F2FS_OPTION(sbi).s_qf_names[i]);
++		kfree(F2FS_OPTION(sbi).s_qf_names[i]);
+ #endif
+ 	destroy_percpu_info(sbi);
+ 	for (i = 0; i < NR_PAGE_TYPE; i++)
+-		kvfree(sbi->write_io[i]);
++		kfree(sbi->write_io[i]);
+ #ifdef CONFIG_UNICODE
+ 	utf8_unload(sbi->s_encoding);
+ #endif
+-	kvfree(sbi);
++	kfree(sbi);
+ }
+ 
+ int f2fs_sync_fs(struct super_block *sb, int sync)
+@@ -1600,7 +1600,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 				GFP_KERNEL);
+ 			if (!org_mount_opt.s_qf_names[i]) {
+ 				for (j = 0; j < i; j++)
+-					kvfree(org_mount_opt.s_qf_names[j]);
++					kfree(org_mount_opt.s_qf_names[j]);
+ 				return -ENOMEM;
+ 			}
+ 		} else {
+@@ -1724,7 +1724,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ #ifdef CONFIG_QUOTA
+ 	/* Release old quota file names */
+ 	for (i = 0; i < MAXQUOTAS; i++)
+-		kvfree(org_mount_opt.s_qf_names[i]);
++		kfree(org_mount_opt.s_qf_names[i]);
+ #endif
+ 	/* Update the POSIXACL Flag */
+ 	sb->s_flags = (sb->s_flags & ~SB_POSIXACL) |
+@@ -1744,7 +1744,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ #ifdef CONFIG_QUOTA
+ 	F2FS_OPTION(sbi).s_jquota_fmt = org_mount_opt.s_jquota_fmt;
+ 	for (i = 0; i < MAXQUOTAS; i++) {
+-		kvfree(F2FS_OPTION(sbi).s_qf_names[i]);
++		kfree(F2FS_OPTION(sbi).s_qf_names[i]);
+ 		F2FS_OPTION(sbi).s_qf_names[i] = org_mount_opt.s_qf_names[i];
+ 	}
+ #endif
+@@ -2935,7 +2935,7 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
  		}
+ 	}
+ 
+-	kvfree(zones);
++	kfree(zones);
+ 
+ 	return err;
+ }
+@@ -2992,7 +2992,7 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
+ 
+ 	/* No valid superblock */
+ 	if (!*raw_super)
+-		kvfree(super);
++		kfree(super);
+ 	else
+ 		err = 0;
+ 
+@@ -3563,7 +3563,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		if (err)
+ 			goto sync_free_meta;
+ 	}
+-	kvfree(options);
++	kfree(options);
+ 
+ 	/* recover broken superblock */
+ 	if (recovery) {
+@@ -3620,7 +3620,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	f2fs_destroy_segment_manager(sbi);
+ free_devices:
+ 	destroy_device_list(sbi);
+-	kvfree(sbi->ckpt);
++	kfree(sbi->ckpt);
+ free_meta_inode:
+ 	make_bad_inode(sbi->meta_inode);
+ 	iput(sbi->meta_inode);
+@@ -3631,7 +3631,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	destroy_percpu_info(sbi);
+ free_bio_info:
+ 	for (i = 0; i < NR_PAGE_TYPE; i++)
+-		kvfree(sbi->write_io[i]);
++		kfree(sbi->write_io[i]);
+ 
+ #ifdef CONFIG_UNICODE
+ 	utf8_unload(sbi->s_encoding);
+@@ -3639,15 +3639,15 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ free_options:
+ #ifdef CONFIG_QUOTA
+ 	for (i = 0; i < MAXQUOTAS; i++)
+-		kvfree(F2FS_OPTION(sbi).s_qf_names[i]);
++		kfree(F2FS_OPTION(sbi).s_qf_names[i]);
+ #endif
+-	kvfree(options);
++	kfree(options);
+ free_sb_buf:
+-	kvfree(raw_super);
++	kfree(raw_super);
+ free_sbi:
+ 	if (sbi->s_chksum_driver)
+ 		crypto_free_shash(sbi->s_chksum_driver);
+-	kvfree(sbi);
++	kfree(sbi);
+ 
+ 	/* give only one another chance */
+ 	if (retry_cnt > 0 && skip_recovery) {
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index 296b3189448a..ff2455b4ad14 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -362,7 +362,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+ 	*base_addr = txattr_addr;
+ 	return 0;
+ out:
+-	kvfree(txattr_addr);
++	kfree(txattr_addr);
+ 	return err;
+ }
+ 
+@@ -405,7 +405,7 @@ static int read_all_xattrs(struct inode *inode, struct page *ipage,
+ 	*base_addr = txattr_addr;
+ 	return 0;
+ fail:
+-	kvfree(txattr_addr);
++	kfree(txattr_addr);
+ 	return err;
+ }
+ 
+@@ -532,7 +532,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 	}
+ 	error = size;
+ out:
+-	kvfree(base_addr);
++	kfree(base_addr);
+ 	return error;
+ }
+ 
+@@ -590,7 +590,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
+ 	}
+ 	error = buffer_size - rest;
+ cleanup:
+-	kvfree(base_addr);
++	kfree(base_addr);
+ 	return error;
+ }
+ 
+@@ -731,7 +731,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+ 	if (!error && S_ISDIR(inode->i_mode))
+ 		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+ exit:
+-	kvfree(base_addr);
++	kfree(base_addr);
+ 	return error;
+ }
+ 
 -- 
 2.18.0.rc1
 
