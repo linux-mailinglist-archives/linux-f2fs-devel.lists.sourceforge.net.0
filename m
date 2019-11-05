@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D31F5EF423
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 04:40:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FA33EF428
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 04:43:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iRphS-0006x0-RB; Tue, 05 Nov 2019 03:40:10 +0000
+	id 1iRpkn-0001wa-7z; Tue, 05 Nov 2019 03:43:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iRphQ-0006wt-Va
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 03:40:08 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iRpkm-0001wN-2t
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 03:43:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PbAEOpyMjRvV2MUvlitDxCiFgceJ24Swzi3wFkvaYYQ=; b=Ttkxb9Fp8dccLyBsSQmpIwrKMq
- 1yASbsD1JrFKFxLVzoUwtxB3+fVZg5hBo8EXaequlDKVfAvFY7/Co7A0Ejv7eVnAtEaobNTKDSV9I
- pybRnZm3GsSvrDgVgGxDOf0+azbDI0gPZMI1dUO5iRKScBADfxnOKHOoHvKF6D2uu3lI=;
+ bh=VHzs2pdtqzfRDZuUieTe3KncXH8frdm9eRaqsqfdVcU=; b=W9b9wgk0f9+H76cQOSWFnm3baj
+ 8ZecX07CKyQa3WJeavwSQyl6kJQKPhDv/Onr6I0PPN4as2tZVc/n0gCHW4jAZGF6JO0FWPFfRzLEc
+ gLzpzwIdHt/FHevn5EPc/hcEw+MoNh0PZ8tq9njCKzkWMIqB1dGsay9rUzNd8Fhg15Wc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,35 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PbAEOpyMjRvV2MUvlitDxCiFgceJ24Swzi3wFkvaYYQ=; b=lNbnJVecdSSh42H8T24Eu5TgC/
- PTUq3CLax0/3WPaZ2oSr2AUWwnzDmf/GhvCQjR/EeIe1QNFPPKNDPmcnbqCseZ9+JvBgN1EuAFdn5
- YnRGLLGHz/NM8s46mU2XxcgiItdtHFf2IebQ1FV9zPRHymD8AvoNIqzLmButy0W0EZwY=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=VHzs2pdtqzfRDZuUieTe3KncXH8frdm9eRaqsqfdVcU=; b=FC9GfzKCRYyD/aC+rFHzor4+U4
+ JKoopXtAukCA+/XwJE0g3v0yUmP5r6aWTysbVuiWZyW3/iEq5Scr/pEuQ7NQtSlsvjiRd+/SlQ4Z3
+ NcgsgDe7hysX+9oDr8oGrkTR21y+XRKGtBhDLUBazSC/0+L2ZVdf5YapzziLwa71/tr4=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iRphM-000aJQ-BJ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 03:40:08 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id B9066640CB8CB8FEC434;
- Tue,  5 Nov 2019 11:39:56 +0800 (CST)
+ id 1iRpki-000POC-Fi
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 03:43:36 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 800408998B034BFB165D;
+ Tue,  5 Nov 2019 11:43:25 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 5 Nov 2019
- 11:39:53 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20191022171602.93637-1-jaegeuk@kernel.org>
- <c916c749-0abe-a7b7-e748-f0c4d5599e4a@huawei.com>
- <20191025181820.GA24183@jaegeuk-macbookpro.roam.corp.google.com>
- <8cfef676-e81f-6069-3b0b-7005fbf8e0bb@huawei.com>
- <20191030160942.GA34056@jaegeuk-macbookpro.roam.corp.google.com>
- <1d747677-86c3-d1ad-b343-cf786e77da37@huawei.com>
- <20191031152930.GA60005@jaegeuk-macbookpro.roam.corp.google.com>
+ (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 5 Nov 2019
+ 11:43:20 +0800
+To: Valdis Kletnieks <valdis.kletnieks@vt.edu>
+References: <20191104014510.102356-1-Valdis.Kletnieks@vt.edu>
+ <20191104014510.102356-11-Valdis.Kletnieks@vt.edu>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <53b12ae4-092f-eae0-676b-b35eeb5a5a0c@huawei.com>
-Date: Tue, 5 Nov 2019 11:39:52 +0800
+Message-ID: <5c441427-7e65-fcae-3518-eb37cea5f875@huawei.com>
+Date: Tue, 5 Nov 2019 11:43:18 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191031152930.GA60005@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20191104014510.102356-11-Valdis.Kletnieks@vt.edu>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -66,8 +61,13 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1iRphM-000aJQ-BJ
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: support aligned pinned file
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: vt.edu]
+X-Headers-End: 1iRpki-000POC-Fi
+Subject: Re: [f2fs-dev] [PATCH 10/10] errno.h: Provide EFSCORRUPTED for
+ everybody
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,333 +79,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: devel@driverdev.osuosl.org, linux-arch@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Arnd Bergmann <arnd@arndb.de>,
+ "Darrick J . Wong" <darrick.wong@oracle.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, Jan Kara <jack@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/10/31 23:29, Jaegeuk Kim wrote:
-> On 10/31, Chao Yu wrote:
->> On 2019/10/31 0:09, Jaegeuk Kim wrote:
->>> On 10/26, Chao Yu wrote:
->>>> On 2019/10/26 2:18, Jaegeuk Kim wrote:
->>>>> On 10/24, Chao Yu wrote:
->>>>>> Hi Jaegeuk,
->>>>>>
->>>>>> On 2019/10/23 1:16, Jaegeuk Kim wrote:
->>>>>>> This patch supports 2MB-aligned pinned file, which can guarantee no GC at all
->>>>>>> by allocating fully valid 2MB segment.
->>>>>>>
->>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>>>>> ---
->>>>>>>  fs/f2fs/f2fs.h     |  4 +++-
->>>>>>>  fs/f2fs/file.c     | 39 ++++++++++++++++++++++++++++++++++-----
->>>>>>>  fs/f2fs/recovery.c |  2 +-
->>>>>>>  fs/f2fs/segment.c  | 21 ++++++++++++++++++++-
->>>>>>>  fs/f2fs/segment.h  |  2 ++
->>>>>>>  fs/f2fs/super.c    |  1 +
->>>>>>>  fs/f2fs/sysfs.c    |  2 ++
->>>>>>>  7 files changed, 63 insertions(+), 8 deletions(-)
->>>>>>>
->>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>>> index ca342f4c7db1..c681f51e351b 100644
->>>>>>> --- a/fs/f2fs/f2fs.h
->>>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>>> @@ -890,6 +890,7 @@ enum {
->>>>>>>  	CURSEG_WARM_NODE,	/* direct node blocks of normal files */
->>>>>>>  	CURSEG_COLD_NODE,	/* indirect node blocks */
->>>>>>>  	NO_CHECK_TYPE,
->>>>>>> +	CURSEG_COLD_DATA_PINNED,/* cold data for pinned file */
->>>>>>>  };
->>>>>>>  
->>>>>>>  struct flush_cmd {
->>>>>>> @@ -1301,6 +1302,7 @@ struct f2fs_sb_info {
->>>>>>>  
->>>>>>>  	/* threshold for gc trials on pinned files */
->>>>>>>  	u64 gc_pin_file_threshold;
->>>>>>> +	struct rw_semaphore pin_sem;
->>>>>>>  
->>>>>>>  	/* maximum # of trials to find a victim segment for SSR and GC */
->>>>>>>  	unsigned int max_victim_search;
->>>>>>> @@ -3116,7 +3118,7 @@ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
->>>>>>>  int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
->>>>>>>  void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
->>>>>>>  					unsigned int start, unsigned int end);
->>>>>>> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
->>>>>>> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type);
->>>>>>>  int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
->>>>>>>  bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
->>>>>>>  					struct cp_control *cpc);
->>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>>> index 29bc0a542759..f6c038e8a6a7 100644
->>>>>>> --- a/fs/f2fs/file.c
->>>>>>> +++ b/fs/f2fs/file.c
->>>>>>> @@ -1545,12 +1545,41 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
->>>>>>>  	if (off_end)
->>>>>>>  		map.m_len++;
->>>>>>>  
->>>>>>> -	if (f2fs_is_pinned_file(inode))
->>>>>>> -		map.m_seg_type = CURSEG_COLD_DATA;
->>>>>>> +	if (!map.m_len)
->>>>>>> +		return 0;
->>>>>>> +
->>>>>>> +	if (f2fs_is_pinned_file(inode)) {
->>>>>>> +		block_t len = (map.m_len >> sbi->log_blocks_per_seg) <<
->>>>>>> +					sbi->log_blocks_per_seg;
->>>>>>> +		block_t done = 0;
->>>>>>> +
->>>>>>> +		if (map.m_len % sbi->blocks_per_seg)
->>>>>>> +			len += sbi->blocks_per_seg;
->>>>>>>  
->>>>>>> -	err = f2fs_map_blocks(inode, &map, 1, (f2fs_is_pinned_file(inode) ?
->>>>>>> -						F2FS_GET_BLOCK_PRE_DIO :
->>>>>>> -						F2FS_GET_BLOCK_PRE_AIO));
->>>>>>> +		map.m_len = sbi->blocks_per_seg;
->>>>>>> +next_alloc:
->>>>>>> +		mutex_lock(&sbi->gc_mutex);
->>>>>>> +		err = f2fs_gc(sbi, true, false, NULL_SEGNO);
->>>>>>> +		if (err && err != -ENODATA && err != -EAGAIN)
->>>>>>> +			goto out_err;
->>>>>>
->>>>>> To grab enough free space?
->>>>>>
->>>>>> Shouldn't we call
->>>>>>
->>>>>> 	if (has_not_enough_free_secs(sbi, 0, 0)) {
->>>>>> 		mutex_lock(&sbi->gc_mutex);
->>>>>> 		f2fs_gc(sbi, false, false, NULL_SEGNO);
->>>>>> 	}
->>>>>
->>>>> The above calls gc all the time. Do we need this?
->>>>
->>>> Hmmm... my concern is why we need to run foreground GC even if there is enough
->>>> free space..
->>>
->>> In order to get the free segment easily?
->>
->> However, I doubt arbitrary foreground GC with greedy algorithm will ruin
->> hot/cold data separation, actually, for sufficient free segment case, it's
->> unnecessary to call FGGC.
+On 2019/11/4 9:45, Valdis Kletnieks wrote:
+> There's currently 6 filesystems that have the same #define. Move it
+> into errno.h so it's defined in just one place.
 > 
-> Two things here; 1) I do worry much about when hitting boundary on
-> has_not_enough_free_secs() which calculates # of free segments based on # of
-> dirty pages. In this case, we just jump to allocate another free segment so
-> I think it increases the possiblity of no free segment panic. 2) Even if we
+> Signed-off-by: Valdis Kletnieks <Valdis.Kletnieks@vt.edu>
+> Acked-by: Darrick J. Wong <darrick.wong@oracle.com>
+> Reviewed-by: Jan Kara <jack@suse.cz>
+> Acked-by: Theodore Ts'o <tytso@mit.edu>
 
-Yup, I guess for other places, if there is thousand of threads allocating space
-concurrently, we may have small probability to hit run out-of-free-space issue,
-probability can increase if partition size decreases.
+>  fs/erofs/internal.h              | 2 --
 
-So I think the right way to fix all out-of-free-space issues is to use
-reservation mechanism in our interface,  e.g.
+>  fs/f2fs/f2fs.h                   | 1 -
 
-f2fs_create()
-{
-	int reserved_block = 1 + 1;
-	/*
-	 * reserved blocks we may dirty/allocate in create flow:
-	 * 1 block: new inode block;
-	 * 1 block: parent's dent block;
-	 */
-
-	f2fs_get_budget(reserved_block); //sbi->reserved_block += 2;
-
-	f2fs_balance_fs(sbi); //has_not_enough_free_secs(): reserved_secs += get_secs(,
-sbi->reserved_block);
-
-	f2fs_add_link();
-	/* inode meta is dirty; dent block is dirty */
-
-	f2fs_release_budget(reserved_block); //sbi->reserved_block -= 2;
-}
-
-expand_inode_data() can switch to use this mechanism to avoid that issue.
-
-> do call FGGC a lot, I don't think it will *ruin* the hot/cold data separation
-> a lot. Putting hot/warm blocks together into cold log will make another hot
-> segment which was being used as cold log. IOWs, we don't need to keep hot data
-> in hot log at all, but should be fine to split hot and cold data in different
-
-With below codes, we are trying to mix cold data into warm data log with block
-granularity, rather than segment granularity.
-
-	if (type == CURSEG_COLD_DATA) {
-		/* GC during CURSEG_COLD_DATA_PINNED allocation */
-		if (down_read_trylock(&sbi->pin_sem)) {
-			put_pin_sem = true;
-		} else {
-			type = CURSEG_WARM_DATA;
-			curseg = CURSEG_I(sbi, type);
-		}
-
-This could cause more GC cycles on such mixed segments, or am I missing something?
+Acked-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
-
-> segments. So, I chose to go safer way since this is eating free segments
-> directly.
-> 
->>
->> Thanks,
->>
->>>
->>>>
->>>>>
->>>>>>
->>>>>>> +
->>>>>>> +		down_write(&sbi->pin_sem);
->>>>>>> +		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
->>>>>>> +		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
->>>>>>> +		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
->>>>>>> +		up_write(&sbi->pin_sem);
->>>>>>> +
->>>>>>> +		done += map.m_len;
->>>>>>> +		len -= map.m_len;
->>>>>>> +		map.m_lblk += map.m_len;
->>>>>>> +		if (!err && len)
->>>>>>> +			goto next_alloc;
->>>>>>> +
->>>>>>> +		map.m_len = done;
->>>>>>> +	} else {
->>>>>>> +		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_AIO);
->>>>>>> +	}
->>>>>>> +out_err:
->>>>>>>  	if (err) {
->>>>>>>  		pgoff_t last_off;
->>>>>>>  
->>>>>>> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
->>>>>>> index 783773e4560d..76477f71d4ee 100644
->>>>>>> --- a/fs/f2fs/recovery.c
->>>>>>> +++ b/fs/f2fs/recovery.c
->>>>>>> @@ -711,7 +711,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
->>>>>>>  		f2fs_put_page(page, 1);
->>>>>>>  	}
->>>>>>>  	if (!err)
->>>>>>> -		f2fs_allocate_new_segments(sbi);
->>>>>>> +		f2fs_allocate_new_segments(sbi, NO_CHECK_TYPE);
->>>>>>>  	return err;
->>>>>>>  }
->>>>>>>  
->>>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>>>>> index 25c750cd0272..253d72c2663c 100644
->>>>>>> --- a/fs/f2fs/segment.c
->>>>>>> +++ b/fs/f2fs/segment.c
->>>>>>> @@ -2690,7 +2690,7 @@ void allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
->>>>>>>  	up_read(&SM_I(sbi)->curseg_lock);
->>>>>>>  }
->>>>>>>  
->>>>>>> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
->>>>>>> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type)
->>>>>>>  {
->>>>>>>  	struct curseg_info *curseg;
->>>>>>>  	unsigned int old_segno;
->>>>>>> @@ -2699,6 +2699,9 @@ void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
->>>>>>>  	down_write(&SIT_I(sbi)->sentry_lock);
->>>>>>>  
->>>>>>>  	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
->>>>>>> +		if (type != NO_CHECK_TYPE && i != type)
->>>>>>> +			continue;
->>>>>>> +
->>>>>>>  		curseg = CURSEG_I(sbi, i);
->>>>>>>  		old_segno = curseg->segno;
->>>>>>>  		SIT_I(sbi)->s_ops->allocate_segment(sbi, i, true);
->>>>>>> @@ -3068,6 +3071,19 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>>  {
->>>>>>>  	struct sit_info *sit_i = SIT_I(sbi);
->>>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>>> +	bool put_pin_sem = false;
->>>>>>> +
->>>>>>> +	if (type == CURSEG_COLD_DATA) {
->>>>>>> +		/* GC during CURSEG_COLD_DATA_PINNED allocation */
->>>>>>> +		if (down_read_trylock(&sbi->pin_sem)) {
->>>>>>> +			put_pin_sem = true;
->>>>>>> +		} else {
->>>>>>> +			type = CURSEG_WARM_DATA;
->>>>>>> +			curseg = CURSEG_I(sbi, type);
->>>>>>
->>>>>> It will mix pending cold data into warm area... rather than recovering curseg to
->>>>>> write pointer of last cold segment?
->>>>>>
->>>>>> I know maybe that fallocate aligned address could be corner case, but I guess
->>>>>> there should be some better solutions can handle race case more effectively.
->>>>>>
->>>>>> One solution could be: allocating a virtual log header to select free segment as
->>>>>> 2m-aligned space target.
->>>>>
->>>>> I thought about that, but concluded to avoid too much changes.
->>>>
->>>> We have an unupstreamed feature which is based on virtual log header, I can
->>>> introduce that basic virtual log fwk, which can be used for aligned allocation
->>>> and later new features, would you like to check that?
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>> +		}
->>>>>>> +	} else if (type == CURSEG_COLD_DATA_PINNED) {
->>>>>>> +		type = CURSEG_COLD_DATA;
->>>>>>> +	}
->>>>>>>  
->>>>>>>  	down_read(&SM_I(sbi)->curseg_lock);
->>>>>>>  
->>>>>>> @@ -3133,6 +3149,9 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>>  	mutex_unlock(&curseg->curseg_mutex);
->>>>>>>  
->>>>>>>  	up_read(&SM_I(sbi)->curseg_lock);
->>>>>>> +
->>>>>>> +	if (put_pin_sem)
->>>>>>> +		up_read(&sbi->pin_sem);
->>>>>>>  }
->>>>>>>  
->>>>>>>  static void update_device_state(struct f2fs_io_info *fio)
->>>>>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
->>>>>>> index 325781a1ae4d..a95467b202ea 100644
->>>>>>> --- a/fs/f2fs/segment.h
->>>>>>> +++ b/fs/f2fs/segment.h
->>>>>>> @@ -313,6 +313,8 @@ struct sit_entry_set {
->>>>>>>   */
->>>>>>>  static inline struct curseg_info *CURSEG_I(struct f2fs_sb_info *sbi, int type)
->>>>>>>  {
->>>>>>> +	if (type == CURSEG_COLD_DATA_PINNED)
->>>>>>> +		type = CURSEG_COLD_DATA;
->>>>>>>  	return (struct curseg_info *)(SM_I(sbi)->curseg_array + type);
->>>>>>>  }
->>>>>>>  
->>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>>>>> index f320fd11db48..c02a47ce551b 100644
->>>>>>> --- a/fs/f2fs/super.c
->>>>>>> +++ b/fs/f2fs/super.c
->>>>>>> @@ -2853,6 +2853,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
->>>>>>>  	spin_lock_init(&sbi->dev_lock);
->>>>>>>  
->>>>>>>  	init_rwsem(&sbi->sb_lock);
->>>>>>> +	init_rwsem(&sbi->pin_sem);
->>>>>>>  }
->>>>>>>  
->>>>>>>  static int init_percpu_info(struct f2fs_sb_info *sbi)
->>>>>>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
->>>>>>> index b558b64a4c9c..f164959e4224 100644
->>>>>>> --- a/fs/f2fs/sysfs.c
->>>>>>> +++ b/fs/f2fs/sysfs.c
->>>>>>> @@ -154,6 +154,8 @@ static ssize_t features_show(struct f2fs_attr *a,
->>>>>>>  	if (f2fs_sb_has_casefold(sbi))
->>>>>>>  		len += snprintf(buf + len, PAGE_SIZE - len, "%s%s",
->>>>>>>  				len ? ", " : "", "casefold");
->>>>>>> +	len += snprintf(buf + len, PAGE_SIZE - len, "%s%s",
->>>>>>> +				len ? ", " : "", "pin_file");
->>>>>>>  	len += snprintf(buf + len, PAGE_SIZE - len, "\n");
->>>>>>>  	return len;
->>>>>>>  }
->>>>>>>
->>>>> .
->>>>>
->>> .
->>>
-> .
-> 
 
 
 _______________________________________________
