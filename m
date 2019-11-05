@@ -2,94 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55F26F01AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 16:40:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 011BBF06A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 21:07:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iS0wI-000765-Af; Tue, 05 Nov 2019 15:40:14 +0000
+	id 1iS57K-0004Yq-HC; Tue, 05 Nov 2019 20:07:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+7c6de30aaaef4530855f+5917+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1iS0wG-00075X-Ds
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 15:40:12 +0000
+ (envelope-from <david@fromorbit.com>) id 1iS57I-0004Uw-Hc
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 20:07:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XQdcZ/rCMxPfhUJE8nbWkRrJsdxA+Vm56qg50/+E1Cw=; b=Scw/GKXgi48SBguib3TeKOFxu6
- N5em3N4TAry0IrSyT6NHfN+vfOxsPT2eRb0VdG5F09iqXM0SVfpPOa8IKkyun8g06s9DA7qkc4+LY
- CTDrskjXA10sBGavU8uzlRyWf3mvX3QR8tVov/cNr5i+SYT+TGzFjp/m7r+UaKKUOut0=;
+ bh=J8cnArdoB8OwMZKu/WOxMCg9/xiqpch1Hdzk9fZwbHk=; b=f97s62u3/WEAcqdJ4nazHG1ouZ
+ UqisurYpmviZgS1kJ6Kar4BL7X1mnAHH0/rcTKR3vxm5ztSpfISz4/r9S3q4YgX8OHbm6sS/QGpTt
+ 8rNRoL41id5I2+rBqGx2Ja8STUI94WI66PxvOz3AOy5QxdSgey4jx36h3OWxkXF6KK+Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XQdcZ/rCMxPfhUJE8nbWkRrJsdxA+Vm56qg50/+E1Cw=; b=gH5oos6o9Eggwp8OZUHJ1zOLZV
- TtyxkM/arTYhUBu9CfEBGgIbzIfKZi4+EFB2Fa30g+KpYysCEIIRtqGIjHZQdpU8aAQ/SKm+Xhd0n
- TXXvXlQQX+MKuGFPi4s0nc40iAJbHqvz/ZQ9rMdI0aBn7K3hwFuPX1/W88rAHSldj0Ug=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iS0wE-000zDY-DT
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 15:40:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XQdcZ/rCMxPfhUJE8nbWkRrJsdxA+Vm56qg50/+E1Cw=; b=Ocp9xiaKzYOCoNB+oT3sxZPTQ
- GZZmpeZz1Pkbx3hL5igN2A9nnxgJeh5ZX0h0RFq6u88ua22HGxw6tlKR923/wrmQM4d9cJFXkqmXz
- 7p6KUsYbiy3UTrhyHmOUjEl4g1vqoBwf3i4ju5z28ZkYAEfqGXc4DjckNzm91NOiLwHOAtuFuuhfP
- /u+IK73URb7cxkeIV7/gM5hFZ3aGu6h+2cn2G7ik8OqisFdebxIl9EiPUqch0yc5uCTcNG4K9OCbX
- VW4f/V+e6xpqbfC64GJBGkXaIedjYx1UzWAGjYoerE2gtLIaBhKqYngoD0iVUT+cjBXJ4SKNeqg0x
- wuaWM8E5g==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iS0w1-0000HC-RP; Tue, 05 Nov 2019 15:39:57 +0000
-Date: Tue, 5 Nov 2019 07:39:57 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Christoph Hellwig <hch@infradead.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, linux-block@vger.kernel.org,
- linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Satya Tangirala <satyat@google.com>, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20191105153957.GA29320@infradead.org>
-References: <20191028072032.6911-1-satyat@google.com>
- <20191028072032.6911-4-satyat@google.com>
- <20191031175713.GA23601@infradead.org>
- <20191031205045.GG16197@mit.edu>
- <20191031212234.GA32262@infradead.org>
- <20191105015411.GB692@sol.localdomain>
+ bh=J8cnArdoB8OwMZKu/WOxMCg9/xiqpch1Hdzk9fZwbHk=; b=BTEPzlh/H3rj0du8kVQE8VAnHD
+ NhX8iKc9mSsZQ+F6JNbb4MEOO+9WaL5Lo+1eaqoi0+09ygZUjYvWyP78Y+ZlP8zYdLEy85aGvky3H
+ mX9uEPE/y1tMJfC0+N7s2WruzJrXLKXOG++8xpUXx7j3xdNP249ylWxVaIKxiyGArdQ8=;
+Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1iS57F-001jqR-6l
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 20:07:52 +0000
+Received: from dread.disaster.area (pa49-180-67-183.pa.nsw.optusnet.com.au
+ [49.180.67.183])
+ by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 340A77E7AB3;
+ Wed,  6 Nov 2019 07:07:40 +1100 (AEDT)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1iS574-0006S9-TG; Wed, 06 Nov 2019 07:07:38 +1100
+Date: Wed, 6 Nov 2019 07:07:38 +1100
+From: Dave Chinner <david@fromorbit.com>
+To: Valdis Kletnieks <valdis.kletnieks@vt.edu>
+Message-ID: <20191105200045.GD4614@dread.disaster.area>
+References: <20191105024618.194134-1-Valdis.Kletnieks@vt.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191105015411.GB692@sol.localdomain>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20191105024618.194134-1-Valdis.Kletnieks@vt.edu>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.2 cv=G6BsK5s5 c=1 sm=1 tr=0
+ a=3wLbm4YUAFX2xaPZIabsgw==:117 a=3wLbm4YUAFX2xaPZIabsgw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=MeAgGD-zjQ4A:10
+ a=7-415B0cAAAA:8 a=rJHQ1rk6g6_wif3L1mMA:9 a=CjuIK1q_8ugA:10
+ a=biEYGPWJfzWAr4FL6Ov7:22
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: vt.edu]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.1 RATWARE_EFROM          Bulk email fingerprint (envfrom) found
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iS0wE-000zDY-DT
-Subject: Re: [f2fs-dev] [PATCH v5 3/9] block: blk-crypto for Inline
- Encryption
+X-Headers-End: 1iS57F-001jqR-6l
+Subject: Re: [f2fs-dev] [PATCH 1/1] errno.h: Provide EFSBADCRC for everybody
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,39 +80,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-arch@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ Arnd Bergmann <arnd@arndb.de>, "Darrick J. Wong" <darrick.wong@oracle.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 04, 2019 at 06:01:17PM -0800, Eric Biggers wrote:
-> I think that "Severely bloating the per-I/O data structure" is an exaggeration,
-> since that it's only 32 bytes, and it isn't in struct bio directly but rather in
-> struct bio_crypt_ctx...
+On Mon, Nov 04, 2019 at 09:46:14PM -0500, Valdis Kletnieks wrote:
+> Four filesystems have their own defines for this. Move it
+> into errno.h so it's defined in just one place.
+> 
+> Signed-off-by: Valdis Kletnieks <Valdis.Kletnieks@vt.edu>
 
-Yes, and none of that is needed for the real inline crypto.  And I think
-we can further reduce the overhead of bio_crypt_ctx once we have the
-basiscs sorted out.  If we want to gain more traction we need to reduce
-the I/O to a minimum.
+Looks good, minor nit below:
 
-> In any case, Satya, it might be a good idea to reorganize this patchset so that
-> it first adds all logic that's needed for "real" inline encryption support
-> (including the needed parts of blk-crypto.c), then adds the crypto API fallback
-> as a separate patch.  That would separate the concerns more cleanly and make the
-> patchset easier to review, and make it easier to make the fallback
-> de-configurable or even remove it entirely if that turns out to be needed.
+> diff --git a/include/uapi/asm-generic/errno.h b/include/uapi/asm-generic/errno.h
+> index 1d5ffdf54cb0..e4cae9a9ae79 100644
+> --- a/include/uapi/asm-generic/errno.h
+> +++ b/include/uapi/asm-generic/errno.h
+> @@ -55,6 +55,7 @@
+>  #define	EMULTIHOP	72	/* Multihop attempted */
+>  #define	EDOTDOT		73	/* RFS specific error */
+>  #define	EBADMSG		74	/* Not a data message */
+> +#define EFSBADCRC	EBADMSG	/* Bad CRC detected */
 
-Yes, that is a good idea.  Not just in terms of patch, but also in terms
-of code organization.  The current structure is pretty weird with 3
-files that are mostly tighly integrated, except that one also has the
-software implementations.  So what I think we need at a minimum is:
+Inconsistent whitespace here. When you get tab vs space after
+#define wrong it only shows up in patches. :/
 
- - reoranizize that we have say block/blk-crypt.c for all the inline
-   crypto infrastructure, and block/blk-crypy-sw.c for the actual
-   software crypto implementation.
- - remove all the fields only needed for software crypto from
-   bio_crypt_ctx, and instead clone the bio into a bioset with the
-   additional fields only when we use the software implementation, so
-   that there is no overhead for the hardware path.
+Cheers,
+
+Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
