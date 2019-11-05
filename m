@@ -2,84 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AA0AEF396
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 03:39:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FDADEF3A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 03:46:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iRok6-00018h-48; Tue, 05 Nov 2019 02:38:50 +0000
+	id 1iRoru-0004gP-Kc; Tue, 05 Nov 2019 02:46:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iRok4-00018T-V9
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 02:38:48 +0000
+ (envelope-from <valdis@vt.edu>) id 1iRort-0004gI-5m
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 02:46:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IeloNK7GdkjVhqko4X31kdk2ctProezbgaImEviBcuA=; b=YfrQNX2fxJ841397JH+mgk1d9f
- DFKEr1HQXAMeEbH3ukdhD9k2rTVglWFWLhDxVOvr28KZecfrFN9s62OvcjvPHyAvDlyXrubwOAwIh
- ENjtxPNwv2/E+CcUdvwI7es3YuIc+MVY65Ty7FwROp2RAY3b8guTb6jugj2uM3V7EAZI=;
+ bh=RZNcm7tJHE7PJ/B2fVNd5i/u7+ifnx25OIt2h3zpLOo=; b=FRsAoD9qnMss71TSjkoZo8/X8u
+ LtKyw/Uw72at9PjEHqWL7t8owGOMGlXyVdv4RG1mB/sjinl2BubrJrbCrJ5Lm0ERGwn01IftjwDHP
+ F8GhhR4pUXrbXthu7gBVqrKbqreoMotaKTYP9RYHXmy0N9v4gKfCToIJE25izz1mR2CQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IeloNK7GdkjVhqko4X31kdk2ctProezbgaImEviBcuA=; b=VuzM1jqkzGTmz39AnLymuHz96W
- +GpceXqc0E1n3R+KMLZI4KMXdtmO0OFJ1p6BwZYX4usQs0RHzhGJ3x143l+qzYb83oo91uuq/pL1j
- Q4fAuDZ7VwQIdcQtfpyMd9KD4wNWOTiy9ejrknqivR28weIUryoNJieWWCA8M0qcJH1o=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=RZNcm7tJHE7PJ/B2fVNd5i/u7+ifnx25OIt2h3zpLOo=; b=U
+ PHZIIxldGqbTitt8EBi0jzvjWXeYUCiFNRtzGZzo9fbAp2L/g/X4nWjN89NYZxMY5D4c4VuxFVswk
+ P1ws3QkIgPlu3RgzlpJz6s3AEFFWi6pAb6oSY6MUc809DH3NN7/bDHhCfpgk8jqDyqXdbJVfFsBbq
+ WEnVZGDgOoSQGM5o=;
+Received: from outbound.smtp.vt.edu ([198.82.183.121] helo=omr2.cc.vt.edu)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iRojz-000WIc-1Y
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 02:38:48 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A3C33214D8;
- Tue,  5 Nov 2019 02:38:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1572921516;
- bh=AO5GUw4uAQW7SjlfIGhGgEAuiI6q1O8trlvLX3b/MnE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DhOIaSgg4PyeAcIv/11SHw83YohNkY+3PEl9C++E070AEg22bhyJOvAFZbG46GpDK
- Uz5ET1GLWnqSqOuiYrmnlCqUp6q+Bw40PITQWHqOjqYNWAMJ9sWU/4r07RWwIv8W0m
- 0LIkohafg+2shuXJOSTN+UAjbuzhYtQFj6tBOxg8=
-Date: Mon, 4 Nov 2019 18:38:35 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20191105023835.GD692@sol.localdomain>
-Mail-Followup-To: Chao Yu <yuchao0@huawei.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20191101095324.9902-1-yuchao0@huawei.com>
- <20191101095324.9902-3-yuchao0@huawei.com>
- <20191105000249.GA46956@jaegeuk-macbookpro.roam.corp.google.com>
- <40d0df3f-cc55-d31a-474b-76f57d96bd89@huawei.com>
+ id 1iRorp-000Mh9-Cx
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 02:46:53 +0000
+Received: from mr2.cc.vt.edu (junk.cc.ipv6.vt.edu
+ [IPv6:2607:b400:92:9:0:9d:8fcb:4116])
+ by omr2.cc.vt.edu (8.14.4/8.14.4) with ESMTP id xA52kb3G027470
+ for <linux-f2fs-devel@lists.sourceforge.net>; Mon, 4 Nov 2019 21:46:37 -0500
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mr2.cc.vt.edu (8.14.7/8.14.7) with ESMTP id xA52kWXX024907
+ for <linux-f2fs-devel@lists.sourceforge.net>; Mon, 4 Nov 2019 21:46:37 -0500
+Received: by mail-qt1-f199.google.com with SMTP id r12so12381035qtp.21
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 04 Nov 2019 18:46:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=RZNcm7tJHE7PJ/B2fVNd5i/u7+ifnx25OIt2h3zpLOo=;
+ b=J0ekCa5PrGR2C5fy/d7I8FWVL2OXKMQB+FJn76W73Mplf++tHNR5tjUIyy9v/EkSSu
+ 4dKuaYRJNGypmwJgwbyLZiMkf48MUSofZZ8kwvz+JdDqdamcFSTn5MxKwMiIlcLnywqL
+ s6CECHMpdVB9Rsi+UIQTJLRTA9bfP29G1wZ+2tUfMMKLtwt1G+z0iW16+77zmvp2YUyW
+ 9NaMO4PQOURbk21KZo6yfU5T7XzlV/Ul+ASEJ6EqvnHUaTfVZONzdbRqaX5nAp/1ptwm
+ 2uSVYkmW6dsbnPwi50wJyFGnWKpNFVDV7M5geBLK4UJV8Y5JF4Nzwg75/mEWqutdj5z0
+ iJ+Q==
+X-Gm-Message-State: APjAAAWTvo2Oir9VXqvzbKA/Bgktm6vRbRvlhwuYjhx/wDeE+nyauTjY
+ tUQ5/PM7ZWjNgPAUbnK7ham/+YHXTe3Ld8GnhzmaQCI27iPfo5RDwmAq6gLO0hcZRV0jUOnMmaF
+ I1sO/paHvV/r+D0HCSlTKN2+cCqfim/KdDXl73vOQ0r6yNWz3
+X-Received: by 2002:ad4:5349:: with SMTP id v9mr23621298qvs.55.1572921992482; 
+ Mon, 04 Nov 2019 18:46:32 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyXzA6HviTv6QlEgIOFkTmQMi16KNYqK2sd8+KO7QEzhWvkSciXAH9zdUWTp/6s496+Fl8aKA==
+X-Received: by 2002:ad4:5349:: with SMTP id v9mr23621285qvs.55.1572921992189; 
+ Mon, 04 Nov 2019 18:46:32 -0800 (PST)
+Received: from turing-police.lan ([2601:5c0:c001:c9e1::359])
+ by smtp.gmail.com with ESMTPSA id s21sm12156815qtc.12.2019.11.04.18.46.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Nov 2019 18:46:30 -0800 (PST)
+From: Valdis Kletnieks <valdis.kletnieks@vt.edu>
+X-Google-Original-From: Valdis Kletnieks <Valdis.Kletnieks@vt.edu>
+To: 
+Date: Mon,  4 Nov 2019 21:46:14 -0500
+Message-Id: <20191105024618.194134-1-Valdis.Kletnieks@vt.edu>
+X-Mailer: git-send-email 2.24.0.rc1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <40d0df3f-cc55-d31a-474b-76f57d96bd89@huawei.com>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: vt.edu]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iRojz-000WIc-1Y
-Subject: Re: [f2fs-dev] [PATCH 3/3] Revert "f2fs: use kvmalloc,
- if kmalloc is failed"
+X-Headers-End: 1iRorp-000Mh9-Cx
+Subject: [f2fs-dev] [PATCH 1/1] errno.h: Provide EFSBADCRC for everybody
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,40 +101,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-arch@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ Arnd Bergmann <arnd@arndb.de>, "Darrick J. Wong" <darrick.wong@oracle.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Valdis Kletnieks <Valdis.Kletnieks@vt.edu>,
+ linux-ext4@vger.kernel.org, Jan Kara <jack@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Nov 05, 2019 at 10:17:41AM +0800, Chao Yu wrote:
-> On 2019/11/5 8:02, Jaegeuk Kim wrote:
-> > On 11/01, Chao Yu wrote:
-> >> This reverts commit 5222595d093ebe80329d38d255d14316257afb3e.
-> >>
-> >> As discussed with Eric, as kvmalloc() will try kmalloc() first, so
-> >> when we need allocate large size memory, it'd better to use
-> >> f2fs_kvmalloc() directly rather than adding additional fallback
-> >> logic to call kvmalloc() after we failed in f2fs_kmalloc().
-> >>
-> >> In order to avoid allocation failure described in original commit,
-> >> I change to use f2fs_kvmalloc() for .free_nid_bitmap bitmap memory.
-> > 
-> > Is there any problem in the previous flow?
-> 
-> No existing problem, however, it's redundant to introduce fallback flow in
-> f2fs_kmalloc() like vmalloc() did, since we can call f2fs_vmalloc() directly in
-> places where we need large memory.
-> 
-> Thanks,
-> 
+Four filesystems have their own defines for this. Move it
+into errno.h so it's defined in just one place.
 
-f2fs_kmalloc() also violated the naming convention used everywhere else in the
-kernel since it could return both kmalloc and vmalloc memory, not just kmalloc
-memory.  That's really error-prone since people would naturally assume it's safe
-to free the *_kmalloc()-ed memory with kfree().
+Signed-off-by: Valdis Kletnieks <Valdis.Kletnieks@vt.edu>
+---
+ fs/ext4/ext4.h                   | 2 --
+ fs/f2fs/f2fs.h                   | 2 --
+ fs/xfs/xfs_linux.h               | 1 -
+ include/linux/jbd2.h             | 2 --
+ include/uapi/asm-generic/errno.h | 1 +
+ 5 files changed, 1 insertion(+), 7 deletions(-)
 
-- Eric
+diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
+index a86c2585457d..79b3fd8291ab 100644
+--- a/fs/ext4/ext4.h
++++ b/fs/ext4/ext4.h
+@@ -3395,6 +3395,4 @@ static inline int ext4_buffer_uptodate(struct buffer_head *bh)
+ 
+ #endif	/* __KERNEL__ */
+ 
+-#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+-
+ #endif	/* _EXT4_H */
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 04ebe77569a3..ba23fd18d44a 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3751,6 +3751,4 @@ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
+ 	return false;
+ }
+ 
+-#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+-
+ #endif /* _LINUX_F2FS_H */
+diff --git a/fs/xfs/xfs_linux.h b/fs/xfs/xfs_linux.h
+index 3409d02a7d21..abdfc506618d 100644
+--- a/fs/xfs/xfs_linux.h
++++ b/fs/xfs/xfs_linux.h
+@@ -123,7 +123,6 @@ typedef __u32			xfs_nlink_t;
+ 
+ #define ENOATTR		ENODATA		/* Attribute not found */
+ #define EWRONGFS	EINVAL		/* Mount with wrong filesystem type */
+-#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+ 
+ #define SYNCHRONIZE()	barrier()
+ #define __return_address __builtin_return_address(0)
+diff --git a/include/linux/jbd2.h b/include/linux/jbd2.h
+index 69411d7e0431..e07692fe6f20 100644
+--- a/include/linux/jbd2.h
++++ b/include/linux/jbd2.h
+@@ -1656,6 +1656,4 @@ static inline tid_t  jbd2_get_latest_transaction(journal_t *journal)
+ 
+ #endif	/* __KERNEL__ */
+ 
+-#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+-
+ #endif	/* _LINUX_JBD2_H */
+diff --git a/include/uapi/asm-generic/errno.h b/include/uapi/asm-generic/errno.h
+index 1d5ffdf54cb0..e4cae9a9ae79 100644
+--- a/include/uapi/asm-generic/errno.h
++++ b/include/uapi/asm-generic/errno.h
+@@ -55,6 +55,7 @@
+ #define	EMULTIHOP	72	/* Multihop attempted */
+ #define	EDOTDOT		73	/* RFS specific error */
+ #define	EBADMSG		74	/* Not a data message */
++#define EFSBADCRC	EBADMSG	/* Bad CRC detected */
+ #define	EOVERFLOW	75	/* Value too large for defined data type */
+ #define	ENOTUNIQ	76	/* Name not unique on network */
+ #define	EBADFD		77	/* File descriptor in bad state */
+-- 
+2.24.0.rc1
+
 
 
 _______________________________________________
