@@ -2,70 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A2CDF08D4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 22:56:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E3D5F0D00
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Nov 2019 04:26:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iS6ob-0003vb-Dp; Tue, 05 Nov 2019 21:56:41 +0000
+	id 1iSBxw-0001w5-B6; Wed, 06 Nov 2019 03:26:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <robertmatare200@email.com>) id 1iS6oa-0003vH-8y
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 21:56:40 +0000
+ (envelope-from <tytso@mit.edu>) id 1iSBxu-0001vx-CH
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Nov 2019 03:26:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/nSnVDrwyw3RCWQ5yYXBgjh4EhVxvdoUhsx8sTUl81o=; b=BP7EB6mZTn117l40gCnzG6akyc
- Ft/6HbZoCvY41KO6HCHy7Aa6lXMl86tqMNzPApQgESc0CDg97OkuCSxcnshB2VUh47kg7erZL/Pnt
- /wRPdoNhVP2opxwufli29iAcpbmQv8tYV65mJI+uXm8RQeUfizkafYMdiK1u8guKb4ac=;
+ bh=eXbTkeLLTPq/is4OmaGJiGnD1qywzbvGYR1C77mghk8=; b=NpqFoU35eXEonOzqPA3btRrsfM
+ KUqYszDvBG1NaCmRHQF6eZvQgyc+LP0A2/VJgCZwsdiwjz0h955g6KeFiA629KsUy5lTAl2wNaehq
+ 8EP5LJyzK+JlPg0xeNYVVv3NxCelMEjxB2gKwHjQa9RGtoWTW8FRbElTUTZH8g4LhEgs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/nSnVDrwyw3RCWQ5yYXBgjh4EhVxvdoUhsx8sTUl81o=; b=Z
- 0lpoinounnD07qwdMzxZesW3RnMI+dv2tB9pXZk8LmYUYwQSGrSbdy/Cmgk9Y/udver4utPX0B5Ns
- rhSgsLJUoGuakWfSypQX+OdAWX9TBs10zk33vMauoa0KNPF1nmRjYRfDZdoCyojbaQCb4Pi+utMWZ
- i37jhdBLEpcZsjQU=;
-Received: from [104.168.52.104] (helo=host.colocrossing.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1iS6oY-001Ot2-SB
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 21:56:40 +0000
-Received: from email.com (unknown [23.249.167.181])
- by host.colocrossing.com (Postfix) with ESMTPA id A4FED2BD73
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  5 Nov 2019 16:42:40 -0500 (EST)
-From: Robert <robertmatare200@email.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: 05 Nov 2019 20:43:40 -0800
-Message-ID: <20191105204340.E0717839A287F9C9@email.com>
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=eXbTkeLLTPq/is4OmaGJiGnD1qywzbvGYR1C77mghk8=; b=C39KwedCcxvBSBshWX5zCOZQ1B
+ /3nN6wzzp71xkjChLsjDcCW6bQGoSyziAHNqTA15OfgDvonSSt+NQcy2hajVk7n/XRFdmfV5F9XX+
+ RDAydiK9AtMVpQ2y9/0RF1YKFfZvQVdgOBFl+bfeAB7YQ/f3Y8j3Q033/Y0CRgBLWbCc=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iSBxq-002GyT-DX
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Nov 2019 03:26:38 +0000
+Received: from callcc.thunk.org (ip-12-2-52-196.nyc.us.northamericancoax.com
+ [196.52.2.12]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id xA63QMGp027897
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 5 Nov 2019 22:26:23 -0500
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+ id 4AC21420311; Tue,  5 Nov 2019 22:26:20 -0500 (EST)
+Date: Tue, 5 Nov 2019 22:26:20 -0500
+From: "Theodore Y. Ts'o" <tytso@mit.edu>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20191106032620.GF26959@mit.edu>
+References: <20191024215438.138489-1-ebiggers@kernel.org>
+ <20191024215438.138489-3-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 5.5 (+++++)
+Content-Disposition: inline
+In-Reply-To: <20191024215438.138489-3-ebiggers@kernel.org>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 1.5 RCVD_IN_PSBL           RBL: Received via a relay in PSBL
- [23.249.167.181 listed in psbl.surriel.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (robertmatare200[at]email.com)
- 0.0 DATE_IN_FUTURE_06_12   Date: is 6 to 12 hours after Received: date
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.9 SPF_FAIL               SPF: sender does not match SPF record (fail)
- [SPF failed: Please see http://www.openspf.net/Why?s=mfrom;
- id=robertmatare200%40email.com; ip=104.168.52.104;
- r=util-malware-1.v13.lw.sourceforge.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (robertmatare200[at]email.com)
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
- 0.0 SPOOFED_FREEMAIL_NO_RDNS From SPOOFED_FREEMAIL and no rDNS
- 2.0 SPOOFED_FREEMAIL       No description available.
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iS6oY-001Ot2-SB
-Subject: [f2fs-dev] Please Read Carefully
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iSBxq-002GyT-DX
+Subject: Re: [f2fs-dev] [PATCH v2 2/3] ext4: add support for IV_INO_LBLK_64
+ encryption policies
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,37 +75,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: robertmatare200@secsuremail.com
+Cc: linux-f2fs-devel@lists.sourceforge.net, Satya Tangirala <satyat@google.com>,
+ Paul Lawrence <paullawrence@google.com>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org, Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello there, I got your contact from an online directory and I 
-have a proposition that may be of interest to you. I am a 
-Personal Assistant to a former minister in the South African 
-government cabinet. During my bosses time as a minister, he used 
-his position as a minister to amass to amass lots of wealth 
-through kickbacks from deliberate over-invoicing of  oil and 
-aviation contracts done through his ministry. He is currently 
-being investigated by the Government and all his assets have been 
-seized locally. He has also been restricted from traveling 
-abroad.
+On Thu, Oct 24, 2019 at 02:54:37PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> IV_INO_LBLK_64 encryption policies have special requirements from the
+> filesystem beyond those of the existing encryption policies:
+> 
+> - Inode numbers must never change, even if the filesystem is resized.
+> - Inode numbers must be <= 32 bits.
+> - File logical block numbers must be <= 32 bits.
+> 
+> ext4 has 32-bit inode and file logical block numbers.  However,
+> resize2fs can re-number inodes when shrinking an ext4 filesystem.
+> 
+> However, typically the people who would want to use this format don't
+> care about filesystem shrinking.  They'd be fine with a solution that
+> just prevents the filesystem from being shrunk.
+> 
+> Therefore, add a new feature flag EXT4_FEATURE_COMPAT_STABLE_INODES that
+> will do exactly that.  Then wire up the fscrypt_operations to expose
+> this flag to fs/crypto/, so that it allows IV_INO_LBLK_64 policies when
+> this flag is set.
+>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-Fortunately for him, he has a high value financial asset in 
-Europe that has not been seized yet and he wants this asset moved 
-and secured ASAP. This asset is very safe at the moment as he did 
-not declare it and he used a proxy to help him deposit the asset. 
-Unfortunately, the proxy has passed away and my boss now needs 
-the help of a foreigner that can help him secure this asset 
-discretely and invest it in a stable business in their country. I 
-am contacting you with the intention of collaborating with you on 
-this project. Should you decide to help, you will be generously 
-compensated for your efforts. Please let me know if you are 
-interested so that I can give you more details.
+LGTM
 
-Regards,
+Acked-by: Theodore Ts'o <tytso@mit.edu>
 
-Robert.
+						- Ted
 
 
 _______________________________________________
