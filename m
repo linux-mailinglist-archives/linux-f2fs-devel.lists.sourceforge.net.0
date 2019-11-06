@@ -2,73 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 011BBF06A2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 21:07:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A2CDF08D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2019 22:56:44 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iS57K-0004Yq-HC; Tue, 05 Nov 2019 20:07:54 +0000
+	id 1iS6ob-0003vb-Dp; Tue, 05 Nov 2019 21:56:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1iS57I-0004Uw-Hc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 20:07:52 +0000
+ (envelope-from <robertmatare200@email.com>) id 1iS6oa-0003vH-8y
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 21:56:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=J8cnArdoB8OwMZKu/WOxMCg9/xiqpch1Hdzk9fZwbHk=; b=f97s62u3/WEAcqdJ4nazHG1ouZ
- UqisurYpmviZgS1kJ6Kar4BL7X1mnAHH0/rcTKR3vxm5ztSpfISz4/r9S3q4YgX8OHbm6sS/QGpTt
- 8rNRoL41id5I2+rBqGx2Ja8STUI94WI66PxvOz3AOy5QxdSgey4jx36h3OWxkXF6KK+Q=;
+ bh=/nSnVDrwyw3RCWQ5yYXBgjh4EhVxvdoUhsx8sTUl81o=; b=BP7EB6mZTn117l40gCnzG6akyc
+ Ft/6HbZoCvY41KO6HCHy7Aa6lXMl86tqMNzPApQgESc0CDg97OkuCSxcnshB2VUh47kg7erZL/Pnt
+ /wRPdoNhVP2opxwufli29iAcpbmQv8tYV65mJI+uXm8RQeUfizkafYMdiK1u8guKb4ac=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=J8cnArdoB8OwMZKu/WOxMCg9/xiqpch1Hdzk9fZwbHk=; b=BTEPzlh/H3rj0du8kVQE8VAnHD
- NhX8iKc9mSsZQ+F6JNbb4MEOO+9WaL5Lo+1eaqoi0+09ygZUjYvWyP78Y+ZlP8zYdLEy85aGvky3H
- mX9uEPE/y1tMJfC0+N7s2WruzJrXLKXOG++8xpUXx7j3xdNP249ylWxVaIKxiyGArdQ8=;
-Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1iS57F-001jqR-6l
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 20:07:52 +0000
-Received: from dread.disaster.area (pa49-180-67-183.pa.nsw.optusnet.com.au
- [49.180.67.183])
- by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 340A77E7AB3;
- Wed,  6 Nov 2019 07:07:40 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1iS574-0006S9-TG; Wed, 06 Nov 2019 07:07:38 +1100
-Date: Wed, 6 Nov 2019 07:07:38 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Valdis Kletnieks <valdis.kletnieks@vt.edu>
-Message-ID: <20191105200045.GD4614@dread.disaster.area>
-References: <20191105024618.194134-1-Valdis.Kletnieks@vt.edu>
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=/nSnVDrwyw3RCWQ5yYXBgjh4EhVxvdoUhsx8sTUl81o=; b=Z
+ 0lpoinounnD07qwdMzxZesW3RnMI+dv2tB9pXZk8LmYUYwQSGrSbdy/Cmgk9Y/udver4utPX0B5Ns
+ rhSgsLJUoGuakWfSypQX+OdAWX9TBs10zk33vMauoa0KNPF1nmRjYRfDZdoCyojbaQCb4Pi+utMWZ
+ i37jhdBLEpcZsjQU=;
+Received: from [104.168.52.104] (helo=host.colocrossing.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1iS6oY-001Ot2-SB
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Nov 2019 21:56:40 +0000
+Received: from email.com (unknown [23.249.167.181])
+ by host.colocrossing.com (Postfix) with ESMTPA id A4FED2BD73
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  5 Nov 2019 16:42:40 -0500 (EST)
+From: Robert <robertmatare200@email.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: 05 Nov 2019 20:43:40 -0800
+Message-ID: <20191105204340.E0717839A287F9C9@email.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191105024618.194134-1-Valdis.Kletnieks@vt.edu>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.2 cv=G6BsK5s5 c=1 sm=1 tr=0
- a=3wLbm4YUAFX2xaPZIabsgw==:117 a=3wLbm4YUAFX2xaPZIabsgw==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=MeAgGD-zjQ4A:10
- a=7-415B0cAAAA:8 a=rJHQ1rk6g6_wif3L1mMA:9 a=CjuIK1q_8ugA:10
- a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 5.5 (+++++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: vt.edu]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1iS57F-001jqR-6l
-Subject: Re: [f2fs-dev] [PATCH 1/1] errno.h: Provide EFSBADCRC for everybody
+ 1.5 RCVD_IN_PSBL           RBL: Received via a relay in PSBL
+ [23.249.167.181 listed in psbl.surriel.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (robertmatare200[at]email.com)
+ 0.0 DATE_IN_FUTURE_06_12   Date: is 6 to 12 hours after Received: date
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.9 SPF_FAIL               SPF: sender does not match SPF record (fail)
+ [SPF failed: Please see http://www.openspf.net/Why?s=mfrom;
+ id=robertmatare200%40email.com; ip=104.168.52.104;
+ r=util-malware-1.v13.lw.sourceforge.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (robertmatare200[at]email.com)
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ 0.0 SPOOFED_FREEMAIL_NO_RDNS From SPOOFED_FREEMAIL and no rDNS
+ 2.0 SPOOFED_FREEMAIL       No description available.
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iS6oY-001Ot2-SB
+Subject: [f2fs-dev] Please Read Carefully
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,43 +77,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-arch@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- Arnd Bergmann <arnd@arndb.de>, "Darrick J. Wong" <darrick.wong@oracle.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org
+Reply-To: robertmatare200@secsuremail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 04, 2019 at 09:46:14PM -0500, Valdis Kletnieks wrote:
-> Four filesystems have their own defines for this. Move it
-> into errno.h so it's defined in just one place.
-> 
-> Signed-off-by: Valdis Kletnieks <Valdis.Kletnieks@vt.edu>
+Hello there, I got your contact from an online directory and I 
+have a proposition that may be of interest to you. I am a 
+Personal Assistant to a former minister in the South African 
+government cabinet. During my bosses time as a minister, he used 
+his position as a minister to amass to amass lots of wealth 
+through kickbacks from deliberate over-invoicing of  oil and 
+aviation contracts done through his ministry. He is currently 
+being investigated by the Government and all his assets have been 
+seized locally. He has also been restricted from traveling 
+abroad.
 
-Looks good, minor nit below:
+Fortunately for him, he has a high value financial asset in 
+Europe that has not been seized yet and he wants this asset moved 
+and secured ASAP. This asset is very safe at the moment as he did 
+not declare it and he used a proxy to help him deposit the asset. 
+Unfortunately, the proxy has passed away and my boss now needs 
+the help of a foreigner that can help him secure this asset 
+discretely and invest it in a stable business in their country. I 
+am contacting you with the intention of collaborating with you on 
+this project. Should you decide to help, you will be generously 
+compensated for your efforts. Please let me know if you are 
+interested so that I can give you more details.
 
-> diff --git a/include/uapi/asm-generic/errno.h b/include/uapi/asm-generic/errno.h
-> index 1d5ffdf54cb0..e4cae9a9ae79 100644
-> --- a/include/uapi/asm-generic/errno.h
-> +++ b/include/uapi/asm-generic/errno.h
-> @@ -55,6 +55,7 @@
->  #define	EMULTIHOP	72	/* Multihop attempted */
->  #define	EDOTDOT		73	/* RFS specific error */
->  #define	EBADMSG		74	/* Not a data message */
-> +#define EFSBADCRC	EBADMSG	/* Bad CRC detected */
+Regards,
 
-Inconsistent whitespace here. When you get tab vs space after
-#define wrong it only shows up in patches. :/
-
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+Robert.
 
 
 _______________________________________________
