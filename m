@@ -2,73 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C4FAF2589
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Nov 2019 03:49:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53008F2787
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Nov 2019 07:12:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iSXrd-0000VX-S9; Thu, 07 Nov 2019 02:49:37 +0000
+	id 1iSb26-00052v-2M; Thu, 07 Nov 2019 06:12:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1iSXrb-0000VG-Tc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 02:49:35 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iSb24-00052k-Jx
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 06:12:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lvOc3mHpCw0OMRDiJ3FGdQqEeZNVl81FbmsoO/XI/Zs=; b=H7+4UxY38vWwePcSOddrIQK9g3
- 2a3VjKFAYrzK5x2P+Q7Zx/brIiRUl5Ih9AuQYdHRfAWr/0+dvKt3ZX7RXOCLHhnPnkxgDuU/Gvu97
- kqy28SagZ5l5WP3tkuuFburEaiWT7479nwMpNfeS6mBjehVwYh2nRDQmJz3wIs2ac8Uc=;
+ bh=LaD7zu3vy1hvVjC1/Sl3UQvqF51X9JdTOuwtrDatvPo=; b=OZDL8ellklGVBgN5Z14AbQwnQc
+ uqlNQ4tswi5uw87/B1rSroBsoTWci94YpjpQlEom+m4hFo/Hu0zlTi+J1W1b94hEnaciXl2esYQ01
+ KxnVzzXHCzN4mGwv24U7r9Nyy0F6VW/ye+vp4UAErSAiNehpGGFZTgN2Ee66ZLNq5Oto=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=lvOc3mHpCw0OMRDiJ3FGdQqEeZNVl81FbmsoO/XI/Zs=; b=cnzjSlJ3DTSLKume9y40K5XsE4
- PAOO1ONwLwWEzvDC8nWaB5cbj/Oy7K68G8WkdXhx0ku8aJ6Hcz0TGWbqdrO33p7HD6TygsUSDhiuC
- XMsHY2CXQvRIR83WVq5Wj140hAVoPyox/kt4X0HZ64C4HBW53LLFroIq7P/YqfrcZ1P0=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=LaD7zu3vy1hvVjC1/Sl3UQvqF51X9JdTOuwtrDatvPo=; b=G
+ nqCaROGA7AQ+QEV1AbEKyGLc1/OgXbOpRch2I97u1BfV9blEhHFOMzQXSXV2Q/2uvKFzKo+CGwlWh
+ y/aDF8tgvcQplK1y+SgOwNAnXRuANBAa+M0yLPfuRBfWJ/yqw20whWolB6RyBVIAtnE3f9DUBmpHf
+ tT5HtB3kv6F+x3s4=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iSXrZ-0031n6-Sl
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 02:49:35 +0000
-Received: from callcc.thunk.org (ip-12-2-52-196.nyc.us.northamericancoax.com
- [196.52.2.12]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id xA72nLni011638
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 6 Nov 2019 21:49:22 -0500
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 799C4420311; Wed,  6 Nov 2019 21:49:19 -0500 (EST)
-Date: Wed, 6 Nov 2019 21:49:19 -0500
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Satya Tangirala <satyat@google.com>, Paul Crowley <paulcrowley@google.com>,
- Paul Lawrence <paullawrence@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20191107024919.GH26959@mit.edu>
-References: <20191024215438.138489-1-ebiggers@kernel.org>
- <20191024215438.138489-2-ebiggers@kernel.org>
- <20191106033544.GG26959@mit.edu>
- <20191106040519.GA705@sol.localdomain>
+ id 1iSb21-003DEp-6W
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 06:12:36 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 89D4ACF001A7AC68CC88;
+ Thu,  7 Nov 2019 14:12:24 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
+ 14.3.439.0; Thu, 7 Nov 2019 14:12:18 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Thu, 7 Nov 2019 14:12:05 +0800
+Message-ID: <20191107061205.120972-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191106040519.GA705@sol.localdomain>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iSXrZ-0031n6-Sl
-Subject: Re: [f2fs-dev] [PATCH v2 1/3] fscrypt: add support for
- IV_INO_LBLK_64 policies
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iSb21-003DEp-6W
+Subject: [f2fs-dev] [PATCH] f2fs: fix to update dir's i_pino during
+ cross_rename
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,24 +75,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Nov 05, 2019 at 08:05:19PM -0800, Eric Biggers wrote:
-> If we really wanted to optimize fscrypt_get_encryption_info(), I think we
-> probably shouldn't try to microoptimize fscrypt_supported_policy(), but rather
-> take advantage of the fact that fscrypt_has_permitted_context() already ran.
-> E.g., we could cache the xattr, or skip both the keyring lookup and
-> fscrypt_supported_policy() by grabbing them from the parent directory.
+As Eric reported:
 
-Yes, good point.  Certainly, if the parent is encrypted, given that we
-force files to have the same policy as the containing directory,
-there's no point calling fscrypt_supported_policy.  And if we're using
-a policy which isn't using per-inode keys, then we can certainly just
-grab the key from the parent directory.
+RENAME_EXCHANGE support was just added to fsstress in xfstests:
 
-				- Ted
+	commit 65dfd40a97b6bbbd2a22538977bab355c5bc0f06
+	Author: kaixuxia <xiakaixu1987@gmail.com>
+	Date:   Thu Oct 31 14:41:48 2019 +0800
+
+	    fsstress: add EXCHANGE renameat2 support
+
+This is causing xfstest generic/579 to fail due to fsck.f2fs reporting errors.
+I'm not sure what the problem is, but it still happens even with all the
+fs-verity stuff in the test commented out, so that the test just runs fsstress.
+
+generic/579 23s ... 	[10:02:25]
+[    7.745370] run fstests generic/579 at 2019-11-04 10:02:25
+_check_generic_filesystem: filesystem on /dev/vdc is inconsistent
+(see /results/f2fs/results-default/generic/579.full for details)
+ [10:02:47]
+Ran: generic/579
+Failures: generic/579
+Failed 1 of 1 tests
+Xunit report: /results/f2fs/results-default/result.xml
+
+Here's the contents of 579.full:
+
+_check_generic_filesystem: filesystem on /dev/vdc is inconsistent
+*** fsck.f2fs output ***
+[ASSERT] (__chk_dots_dentries:1378)  --> Bad inode number[0x24] for '..', parent parent ino is [0xd10]
+
+The root cause is that we forgot to update directory's i_pino during
+cross_rename, fix it.
+
+Fixes: 32f9bc25cbda0 ("f2fs: support ->rename2()")
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/namei.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 4faf06e8bf89..a1c507b0b4ac 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -981,7 +981,8 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 	if (!old_dir_entry || whiteout)
+ 		file_lost_pino(old_inode);
+ 	else
+-		F2FS_I(old_inode)->i_pino = new_dir->i_ino;
++		/* adjust dir's i_pino to pass fsck check */
++		f2fs_i_pino_write(old_inode, new_dir->i_ino);
+ 	up_write(&F2FS_I(old_inode)->i_sem);
+ 
+ 	old_inode->i_ctime = current_time(old_inode);
+@@ -1141,7 +1142,11 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 	f2fs_set_link(old_dir, old_entry, old_page, new_inode);
+ 
+ 	down_write(&F2FS_I(old_inode)->i_sem);
+-	file_lost_pino(old_inode);
++	if (!old_dir_entry)
++		file_lost_pino(old_inode);
++	else
++		/* adjust dir's i_pino to pass fsck check */
++		f2fs_i_pino_write(old_inode, new_dir->i_ino);
+ 	up_write(&F2FS_I(old_inode)->i_sem);
+ 
+ 	old_dir->i_ctime = current_time(old_dir);
+@@ -1156,7 +1161,11 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 	f2fs_set_link(new_dir, new_entry, new_page, old_inode);
+ 
+ 	down_write(&F2FS_I(new_inode)->i_sem);
+-	file_lost_pino(new_inode);
++	if (!new_dir_entry)
++		file_lost_pino(new_inode);
++	else
++		/* adjust dir's i_pino to pass fsck check */
++		f2fs_i_pino_write(new_inode, old_dir->i_ino);
+ 	up_write(&F2FS_I(new_inode)->i_sem);
+ 
+ 	new_dir->i_ctime = current_time(new_dir);
+-- 
+2.18.0.rc1
+
 
 
 _______________________________________________
