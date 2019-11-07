@@ -2,75 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF300F2337
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Nov 2019 01:19:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D084F2470
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Nov 2019 02:44:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iSVWc-0004Ii-CY; Thu, 07 Nov 2019 00:19:46 +0000
+	id 1iSWql-0001GG-47; Thu, 07 Nov 2019 01:44:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iSVWb-0004B1-1K
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 00:19:45 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1iSWqk-0001G9-EH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 01:44:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AyjULJhHzaVSd4DTdgQLdQmlNjZ2AqWEHc2WbI/tVnU=; b=GkkjF2GDng8fih4rSRt+ueqkhK
- SHxd0NgCLNef1QT43EHAhalouugM0XSZdbIQmOcq/OFX+FEMGZmIt1Lc85V/kTRwiBfQgCAgc3D0q
- l4iPbxy6nOIepLaurcJ0b7osvGV3l+5i8Tk3qbM2LnKA4FOaiGIzYKBS+344XELf8Xx8=;
+ bh=cn3zXXUmFy7Cq1yV6SlWOhU6ypKw5aRvkQdQRCJrNA8=; b=SQY2B+IClqPB+adJF02Ks1uXgG
+ VK7oh0T3+7LEEjM9CaCk8FQL1VAminY3DaYBqr0wTNqmBLB1qcLnJ49cYCr7Y9avySLUGFBrEKGEu
+ 2XHrvimDaq+okM3vjfk00CuVNMRnFHTVmBlNXlMhWFPnMNCkn26dcKvPp9XfjxO4EUXQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=AyjULJhHzaVSd4DTdgQLdQmlNjZ2AqWEHc2WbI/tVnU=; b=N
- O0x0lCeq2Yio7GaC7lG2yelraVlUKZf9YpTQZIFMZ3A9XLihmxjYGCrTdlhY/Wy6SJ4hF0SoVv6+n
- /FmMkIgzyfegg0qE1PSnnF9v3Ml2ML5LomyRvEqN+q/VzvSlRF5tnDNYinzSkXHxzrSuqQxcKkxAs
- /e7tO3kUBCLvFsP8=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cn3zXXUmFy7Cq1yV6SlWOhU6ypKw5aRvkQdQRCJrNA8=; b=Xrr/QCHfT0ZVr/8L3h+57Z9oRF
+ tpmked85RyzY4bGIu8j7IrtsVB0PGf6j6pe+j3Y2UsOIu0f/uBwEStbG4l4mU42T4/2lrLV7M1vpr
+ 8hokVv1FyhQAd53hZc5jdnfEqIHcBoxDRA9KILoX7CZ9QUm3H2eGmtn/vDq4r2qg3dpo=;
+Received: from userp2120.oracle.com ([156.151.31.85])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iSVWU-003tf6-IB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 00:19:44 +0000
-Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
- [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5CE81206DF;
- Thu,  7 Nov 2019 00:19:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573085972;
- bh=YMDTgdOflPLgJH1D35yGz6DRx3cfarYpAjq/z5+q5ZY=;
- h=From:To:Cc:Subject:Date:From;
- b=DQIJcGP+LSfuhVVczRlJY5IFRxLt7y1XfBaVPp9PWkIfH23ZkM3Csu/WUafZB3tg/
- s0nGK6pYbhV67rO1S60HRGNdcKH/CTBo/fSJSrNTprRdOyU5QM7mEN7dvvoBaP+JCk
- tIQjkCVFcqt0mo5PDR8Z1Eq40DBL2aKUp2CFuh/o=
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Wed,  6 Nov 2019 16:12:59 -0800
-Message-Id: <20191107001259.115018-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.24.0.rc1.363.gb1bccd3e3d-goog
+ id 1iSWqj-0032Jw-8C
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Nov 2019 01:44:38 +0000
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xA71iQwD165492;
+ Thu, 7 Nov 2019 01:44:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2019-08-05;
+ bh=cn3zXXUmFy7Cq1yV6SlWOhU6ypKw5aRvkQdQRCJrNA8=;
+ b=cVgenG4vrO3Qek66gbPNIxj/jnAJPSV4YSh0gepnHx9pBtFJQhfleqMjXysxLngDxX8u
+ bRCOmYIJ9GS02/Gp2U8wlZHcHlBFAwKNjvyVLV7IjgkWJYAH0OlivRcWaGaNGufxMd9k
+ Dxz+v1RI/JfK7/c0hWZ8faDvGMizLdR0LPcJwVzml+fO95MlpKkawi+7V+IwiqrFvTMQ
+ bUKRaSzOJJn65qyxQEoZvwj7CAJyfaLkZ6pxO+VG/g2DNP6r6EKMDNVPADqQDu3oJdPJ
+ Z2SRSCg2/4a8+3KGqOJLUdRgSsCPgoSVe6ftbbkzaxhQP/vLVxGjQwEKYhtLgbMRSzUP kA== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2120.oracle.com with ESMTP id 2w41w0trny-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 07 Nov 2019 01:44:26 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xA71ctDO146722;
+ Thu, 7 Nov 2019 01:44:26 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3020.oracle.com with ESMTP id 2w41wfw4hn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 07 Nov 2019 01:44:26 +0000
+Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xA71iMee018191;
+ Thu, 7 Nov 2019 01:44:23 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 06 Nov 2019 17:44:22 -0800
+Date: Wed, 6 Nov 2019 17:44:20 -0800
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20191107014420.GD15212@magnolia>
+References: <20191029204141.145309-1-ebiggers@kernel.org>
+ <20191029204141.145309-2-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 1.1 (+)
+Content-Disposition: inline
+In-Reply-To: <20191029204141.145309-2-ebiggers@kernel.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9433
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1910280000 definitions=main-1911070016
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9433
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1910280000
+ definitions=main-1911070017
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 1.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iSVWU-003tf6-IB
-Subject: [f2fs-dev] [PATCH] fscrypt: support passing a keyring key to
- FS_IOC_ADD_ENCRYPTION_KEY
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iSWqj-0032Jw-8C
+Subject: Re: [f2fs-dev] [PATCH 1/4] statx: define STATX_ATTR_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,324 +118,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: David Howells <dhowells@redhat.com>, "Theodore Y . Ts'o" <tytso@mit.edu>,
- Ondrej Mosnacek <omosnace@redhat.com>,
- Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
- linux-f2fs-devel@lists.sourceforge.net,
- Paul Lawrence <paullawrence@google.com>, keyrings@vger.kernel.org,
- linux-mtd@lists.infradead.org, Ondrej Kozina <okozina@redhat.com>,
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, David Howells <dhowells@redhat.com>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>
+ Victor Hsieh <victorhsieh@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Tue, Oct 29, 2019 at 01:41:38PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> Add a statx attribute bit STATX_ATTR_VERITY which will be set if the
+> file has fs-verity enabled.  This is the statx() equivalent of
+> FS_VERITY_FL which is returned by FS_IOC_GETFLAGS.
+> 
+> This is useful because it allows applications to check whether a file is
+> a verity file without opening it.  Opening a verity file can be
+> expensive because the fsverity_info is set up on open, which involves
+> parsing metadata and optionally verifying a cryptographic signature.
+> 
+> This is analogous to how various other bits are exposed through both
+> FS_IOC_GETFLAGS and statx(), e.g. the encrypt bit.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  include/linux/stat.h      | 3 ++-
+>  include/uapi/linux/stat.h | 2 +-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/linux/stat.h b/include/linux/stat.h
+> index 765573dc17d659..528c4baad09146 100644
+> --- a/include/linux/stat.h
+> +++ b/include/linux/stat.h
+> @@ -33,7 +33,8 @@ struct kstat {
+>  	 STATX_ATTR_IMMUTABLE |				\
+>  	 STATX_ATTR_APPEND |				\
+>  	 STATX_ATTR_NODUMP |				\
+> -	 STATX_ATTR_ENCRYPTED				\
+> +	 STATX_ATTR_ENCRYPTED |				\
+> +	 STATX_ATTR_VERITY				\
+>  	 )/* Attrs corresponding to FS_*_FL flags */
+>  	u64		ino;
+>  	dev_t		dev;
+> diff --git a/include/uapi/linux/stat.h b/include/uapi/linux/stat.h
+> index 7b35e98d3c58b1..ad80a5c885d598 100644
+> --- a/include/uapi/linux/stat.h
+> +++ b/include/uapi/linux/stat.h
+> @@ -167,8 +167,8 @@ struct statx {
+>  #define STATX_ATTR_APPEND		0x00000020 /* [I] File is append-only */
+>  #define STATX_ATTR_NODUMP		0x00000040 /* [I] File is not to be dumped */
+>  #define STATX_ATTR_ENCRYPTED		0x00000800 /* [I] File requires key to decrypt in fs */
+> -
+>  #define STATX_ATTR_AUTOMOUNT		0x00001000 /* Dir: Automount trigger */
+> +#define STATX_ATTR_VERITY		0x00100000 /* [I] Verity protected file */
 
-Extend the FS_IOC_ADD_ENCRYPTION_KEY ioctl to allow the raw key to be
-specified by a Linux keyring key, rather than specified directly.
+Any reason why this wasn't 0x2000?
 
-This is useful because fscrypt keys belong to a particular filesystem
-instance, so they are destroyed when that filesystem is unmounted.
-Usually this is desired.  But in some cases, userspace may need to
-unmount and re-mount the filesystem while keeping the keys, e.g. during
-a system update.  This requires keeping the keys somewhere else too.
+If there's a manpage update that goes with this, then...
+Acked-by: Darrick J. Wong <darrick.wong@oracle.com>
 
-The keys could be kept in memory in a userspace daemon.  But depending
-on the security architecture and assumptions, it can be preferable to
-keep them only in kernel memory, where they are unreadable by userspace.
+--D
 
-We also can't solve this by going back to the original fscrypt API
-(where for each file, the master key was looked up in the process's
-keyring hierarchy) because that caused lots of problems of its own.
-
-Therefore, add the ability for FS_IOC_ADD_ENCRYPTION_KEY to accept a
-Linux keyring key.  This solves the problem by allowing userspace to (if
-needed) save the keys securely in a Linux keyring for re-provisioning,
-while still using the new fscrypt key management ioctls.
-
-This is analogous to how dm-crypt accepts a Linux keyring key, but the
-key is then stored internally in the dm-crypt data structures rather
-than being looked up again each time the dm-crypt device is accessed.
-
-Use a custom key type "fscrypt-provisioning" rather than one of the
-existing key types such as "logon".  This is strongly desired because it
-enforces that these keys are only usable for a particular purpose: for
-fscrypt as input to a particular KDF.  Otherwise, the keys could also be
-passed to any kernel API that accepts a "logon" key with any service
-prefix, e.g. dm-crypt, UBIFS, or (recently proposed) AF_ALG.  This would
-risk leaking information about the raw key despite it ostensibly being
-unreadable.  Of course, this mistake has already been made for multiple
-kernel APIs; but since this is a new API, let's do it right.
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- Documentation/filesystems/fscrypt.rst |  35 ++++++-
- fs/crypto/keyring.c                   | 126 ++++++++++++++++++++++++--
- include/uapi/linux/fscrypt.h          |  13 ++-
- 3 files changed, 162 insertions(+), 12 deletions(-)
-
-diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
-index 471a511c75088d..4d15dda36402e0 100644
---- a/Documentation/filesystems/fscrypt.rst
-+++ b/Documentation/filesystems/fscrypt.rst
-@@ -638,7 +638,8 @@ follows::
-     struct fscrypt_add_key_arg {
-             struct fscrypt_key_specifier key_spec;
-             __u32 raw_size;
--            __u32 __reserved[9];
-+            __u32 key_id;
-+            __u32 __reserved[8];
-             __u8 raw[];
-     };
- 
-@@ -655,6 +656,12 @@ follows::
-             } u;
-     };
- 
-+    struct fscrypt_key_provisioning_payload {
-+            __u32 type;
-+            __u32 __reserved;
-+            __u8 raw[];
-+    };
-+
- :c:type:`struct fscrypt_add_key_arg` must be zeroed, then initialized
- as follows:
- 
-@@ -677,9 +684,26 @@ as follows:
-   ``Documentation/security/keys/core.rst``).
- 
- - ``raw_size`` must be the size of the ``raw`` key provided, in bytes.
-+  Alternatively, if ``key_id`` is nonzero, this field must be 0, since
-+  in that case the size is implied by the specified Linux keyring key.
-+
-+- ``key_id`` is 0 if the raw key is given directly in the ``raw``
-+  field.  Otherwise ``key_id`` is the ID of a Linux keyring key of
-+  type "fscrypt-provisioning" whose payload is a ``struct
-+  fscrypt_key_provisioning_payload`` whose ``raw`` field contains the
-+  raw key and whose ``type`` field matches ``key_spec.type``.  Since
-+  ``raw`` is variable-length, the total size of this key's payload
-+  must be ``sizeof(struct fscrypt_key_provisioning_payload)`` plus the
-+  raw key size.  The process must have Search permission on this key.
-+
-+  Most users should leave this 0 and specify the raw key directly.
-+  The support for specifying a Linux keyring key is intended mainly to
-+  allow re-adding keys after a filesystem is unmounted and re-mounted,
-+  without having to store the raw keys in userspace memory.
- 
- - ``raw`` is a variable-length field which must contain the actual
--  key, ``raw_size`` bytes long.
-+  key, ``raw_size`` bytes long.  Alternatively, if ``key_id`` is
-+  nonzero, then this field is unused.
- 
- For v2 policy keys, the kernel keeps track of which user (identified
- by effective user ID) added the key, and only allows the key to be
-@@ -701,11 +725,16 @@ FS_IOC_ADD_ENCRYPTION_KEY can fail with the following errors:
- 
- - ``EACCES``: FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR was specified, but the
-   caller does not have the CAP_SYS_ADMIN capability in the initial
--  user namespace
-+  user namespace; or the raw key was specified by Linux key ID but the
-+  process lacks Search permission on the key.
- - ``EDQUOT``: the key quota for this user would be exceeded by adding
-   the key
- - ``EINVAL``: invalid key size or key specifier type, or reserved bits
-   were set
-+- ``EKEYREJECTED``: the raw key was specified by Linux key ID, but the
-+  key has the wrong type
-+- ``ENOKEY``: the raw key was specified by Linux key ID, but no key
-+  exists with that ID
- - ``ENOTTY``: this type of filesystem does not implement encryption
- - ``EOPNOTSUPP``: the kernel was not configured with encryption
-   support for this filesystem, or the filesystem superblock has not
-diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
-index 040df1f5e1c8b1..ef5b171c0f1d64 100644
---- a/fs/crypto/keyring.c
-+++ b/fs/crypto/keyring.c
-@@ -465,6 +465,103 @@ static int add_master_key(struct super_block *sb,
- 	return err;
- }
- 
-+static int fscrypt_provisioning_key_preparse(struct key_preparsed_payload *prep)
-+{
-+	const struct fscrypt_key_provisioning_payload *payload = prep->data;
-+
-+	if (prep->datalen < sizeof(*payload) + FSCRYPT_MIN_KEY_SIZE ||
-+	    prep->datalen > sizeof(*payload) + FSCRYPT_MAX_KEY_SIZE)
-+		return -EINVAL;
-+	if (payload->type != FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR &&
-+	    payload->type != FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER)
-+		return -EINVAL;
-+	if (payload->__reserved)
-+		return -EINVAL;
-+	prep->payload.data[0] = kmemdup(payload, prep->datalen, GFP_KERNEL);
-+	if (!prep->payload.data[0])
-+		return -ENOMEM;
-+	prep->quotalen = prep->datalen;
-+	return 0;
-+}
-+
-+static void fscrypt_provisioning_key_free_preparse(
-+					struct key_preparsed_payload *prep)
-+{
-+	kzfree(prep->payload.data[0]);
-+}
-+
-+static void fscrypt_provisioning_key_describe(const struct key *key,
-+					      struct seq_file *m)
-+{
-+	seq_puts(m, key->description);
-+	if (key_is_positive(key)) {
-+		const struct fscrypt_key_provisioning_payload *payload =
-+			key->payload.data[0];
-+
-+		seq_printf(m, ": %u [%u]", key->datalen, payload->type);
-+	}
-+}
-+
-+static void fscrypt_provisioning_key_destroy(struct key *key)
-+{
-+	kzfree(key->payload.data[0]);
-+}
-+
-+static struct key_type key_type_fscrypt_provisioning = {
-+	.name			= "fscrypt-provisioning",
-+	.preparse		= fscrypt_provisioning_key_preparse,
-+	.free_preparse		= fscrypt_provisioning_key_free_preparse,
-+	.instantiate		= generic_key_instantiate,
-+	.describe		= fscrypt_provisioning_key_describe,
-+	.destroy		= fscrypt_provisioning_key_destroy,
-+};
-+
-+/*
-+ * Retrieve the raw key from the Linux keyring key specified by 'key_id', and
-+ * store it into 'secret'.
-+ *
-+ * The key must be of type "fscrypt-provisioning" and must have the field
-+ * fscrypt_key_provisioning_payload::type set to 'type', indicating that it's
-+ * only usable with fscrypt with the particular KDF version identified by
-+ * 'type'.  We don't use the "logon" key type because there's no way to
-+ * completely restrict the use of such keys; they can be used by any kernel API
-+ * that accepts "logon" keys and doesn't require a specific service prefix.
-+ *
-+ * The ability to specify the key via Linux keyring key is intended for cases
-+ * where userspace needs to re-add keys after the filesystem is unmounted and
-+ * re-mounted.  Most users should just provide the raw key directly instead.
-+ */
-+static int get_keyring_key(u32 key_id, u32 type,
-+			   struct fscrypt_master_key_secret *secret)
-+{
-+	key_ref_t ref;
-+	struct key *key;
-+	const struct fscrypt_key_provisioning_payload *payload;
-+	int err;
-+
-+	ref = lookup_user_key(key_id, 0, KEY_NEED_SEARCH);
-+	if (IS_ERR(ref))
-+		return PTR_ERR(ref);
-+	key = key_ref_to_ptr(ref);
-+	if (key->type != &key_type_fscrypt_provisioning)
-+		goto bad_key;
-+	payload = key->payload.data[0];
-+
-+	/* Don't allow fscrypt v1 keys to be used as v2 keys and vice versa. */
-+	if (payload->type != type)
-+		goto bad_key;
-+
-+	secret->size = key->datalen - sizeof(*payload);
-+	memcpy(secret->raw, payload->raw, secret->size);
-+	err = 0;
-+	goto out_put;
-+bad_key:
-+	err = -EKEYREJECTED;
-+out_put:
-+	key_ref_put(ref);
-+	return err;
-+}
-+
- /*
-  * Add a master encryption key to the filesystem, causing all files which were
-  * encrypted with it to appear "unlocked" (decrypted) when accessed.
-@@ -503,18 +600,25 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
- 	if (!valid_key_spec(&arg.key_spec))
- 		return -EINVAL;
- 
--	if (arg.raw_size < FSCRYPT_MIN_KEY_SIZE ||
--	    arg.raw_size > FSCRYPT_MAX_KEY_SIZE)
--		return -EINVAL;
--
- 	if (memchr_inv(arg.__reserved, 0, sizeof(arg.__reserved)))
- 		return -EINVAL;
- 
- 	memset(&secret, 0, sizeof(secret));
--	secret.size = arg.raw_size;
--	err = -EFAULT;
--	if (copy_from_user(secret.raw, uarg->raw, secret.size))
--		goto out_wipe_secret;
-+	if (arg.key_id) {
-+		if (arg.raw_size != 0)
-+			return -EINVAL;
-+		err = get_keyring_key(arg.key_id, arg.key_spec.type, &secret);
-+		if (err)
-+			goto out_wipe_secret;
-+	} else {
-+		if (arg.raw_size < FSCRYPT_MIN_KEY_SIZE ||
-+		    arg.raw_size > FSCRYPT_MAX_KEY_SIZE)
-+			return -EINVAL;
-+		secret.size = arg.raw_size;
-+		err = -EFAULT;
-+		if (copy_from_user(secret.raw, uarg->raw, secret.size))
-+			goto out_wipe_secret;
-+	}
- 
- 	switch (arg.key_spec.type) {
- 	case FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR:
-@@ -978,8 +1082,14 @@ int __init fscrypt_init_keyring(void)
- 	if (err)
- 		goto err_unregister_fscrypt;
- 
-+	err = register_key_type(&key_type_fscrypt_provisioning);
-+	if (err)
-+		goto err_unregister_fscrypt_user;
-+
- 	return 0;
- 
-+err_unregister_fscrypt_user:
-+	unregister_key_type(&key_type_fscrypt_user);
- err_unregister_fscrypt:
- 	unregister_key_type(&key_type_fscrypt);
- 	return err;
-diff --git a/include/uapi/linux/fscrypt.h b/include/uapi/linux/fscrypt.h
-index 1beb174ad95056..605dde7343a4e4 100644
---- a/include/uapi/linux/fscrypt.h
-+++ b/include/uapi/linux/fscrypt.h
-@@ -109,11 +109,22 @@ struct fscrypt_key_specifier {
- 	} u;
- };
- 
-+/*
-+ * Payload for Linux keyring key of type "fscrypt-provisioning", referenced by
-+ * fscrypt_add_key_arg::key_id as an alternative to fscrypt_add_key_arg::raw.
-+ */
-+struct fscrypt_key_provisioning_payload {
-+	__u32 type;
-+	__u32 __reserved;
-+	__u8 raw[];
-+};
-+
- /* Struct passed to FS_IOC_ADD_ENCRYPTION_KEY */
- struct fscrypt_add_key_arg {
- 	struct fscrypt_key_specifier key_spec;
- 	__u32 raw_size;
--	__u32 __reserved[9];
-+	__u32 key_id;
-+	__u32 __reserved[8];
- 	__u8 raw[];
- };
- 
--- 
-2.24.0.rc1.363.gb1bccd3e3d-goog
-
+>  
+>  
+>  #endif /* _UAPI_LINUX_STAT_H */
+> -- 
+> 2.24.0.rc1.363.gb1bccd3e3d-goog
+> 
 
 
 _______________________________________________
