@@ -2,86 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92B32F53BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 19:48:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8C28F53C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 19:50:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iT9JU-0008IU-0R; Fri, 08 Nov 2019 18:48:52 +0000
+	id 1iT9LB-0008Nt-7s; Fri, 08 Nov 2019 18:50:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=20831143c=Chaitanya.Kulkarni@wdc.com>)
- id 1iT9JT-0008IN-2R
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 18:48:51 +0000
+ id 1iT9LA-0008Ni-0A
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 18:50:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=elElmSSq9ePZiggQdGed8+mTorb4xR/RDrYzsT3WQ1w=; b=ZDiumzHXZ9Id7MUF5xYSsGFwGz
- Swn4xSB/w4v2Qqny8lk9MNCacIhIeV6f6HEeSyjilfN+6zTzE3KChZFxcGGaZBRtpHVClW9thWtil
- bQZAChBXvAb4A3bkNpnQSgxddkor7FoD5fZ/TtF1fFoyQ1DlxEp7oCD2oVobgWBScP3k=;
+ bh=l9878wIrxKKWXUHm58f2RklIM4TRXT/ZEmsge8xZ00g=; b=Q80EVY6XyT7XyIdfntpTY5VMGq
+ RL7cviBiwYNDdvDgZR4fZCA5dEFeF1zzuLVU0URtHz81dW5k820GkIbmE6RXE9ns3EXMSmU0wE28d
+ iLd7dW5fQG8VGTPyxeq+4B6exyWG9b2maG8uIrTs0jKadqk5NIsbu+iojx9Pl6RoxyTY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:Message-ID
  :Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=elElmSSq9ePZiggQdGed8+mTorb4xR/RDrYzsT3WQ1w=; b=f
- mSORgGofQQ/CeZhMTL1Cs0jxLD5mOXqcIxG5/FFtMjoPXyla6ZQ2k+4Idk+T4/lJn9mphGeA9fsqr
- Ixn145JwY8mMIfbVu6q+kVIAQV4mvSpgu6QIPNp5B83qm3H2mW3TCIrbXa38pmXWgToLVCW8t3sgD
- ppGT/IZAoLL5nHlQ=;
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=l9878wIrxKKWXUHm58f2RklIM4TRXT/ZEmsge8xZ00g=; b=Z
+ LsbYGfr1FOAoZTteM5bKOWyUg6Wy9sQA/50fha275L9h3Yfu/UTLDGK34QAWKmpkFYE6wEzOsRXLh
+ 2Nb7GdxaqOweANp9m+YG+a7ssm/p1+aJ4a8/cUiFeLhzDd48/l3aMfc8PpPWd4qveSBDvMGQgpHsR
+ DNCuLHnsFoTSZ/Ys=;
+Received: from esa3.hgst.iphmx.com ([216.71.153.141])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iT9JR-005nCj-UV
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 18:48:51 +0000
+ id 1iT9L8-005jwE-Ge
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 18:50:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1573238930; x=1604774930;
+ t=1573239035; x=1604775035;
  h=from:to:subject:date:message-id:references:
  content-transfer-encoding:mime-version;
- bh=elElmSSq9ePZiggQdGed8+mTorb4xR/RDrYzsT3WQ1w=;
- b=dUVjykmf15IAr6iekn6OI4DuOjTyjoUWtHm0J+IQ/10cw98cYAEsEn3h
- ut0EDUB6+lwGL2RPkPoEeUolJsFOepauvhpCcNy+NiQ8ShJc5RVt1scKe
- 2anircYxWQlU6jEd0XCpMSVc64aN80iuYr5luuQHuGzZpOOLSX7dyHFvh
- DTkzn6SglxyJ+waU6f1ydV0q/VrCohShNGexinV+ZJ7Iz8rP0PH4Eqk5y
- 0I00SopFOmLmBMTJJyD3zreLHvIWMH1hy9TIfe68rB3atDQU1ne6cuNmO
- NLTt/u7xbN6YyrTRcfrjT5MUOG4v/i3+VdcUAflFX0HX8rjpyV/4GRbUl Q==;
-IronPort-SDR: h9LLTtQYtzPsgUxk0j5oTdJxze6cW31jFiv2uqsYxN+fE1wm9cKU16j4B1vqr+wlWVV22q8F3r
- a75+spcSd4eO5mUvbU5+0jgfyna0ITyu7H0OhpNPphcAxDWFLOYIM+b82+ki6pUDUvj+vUJaVE
- TXCEko+xhW8QZ05sc9tLuINPOK60HO5Kj8+zMKc7etBGbvQ09GhDkMjH02COoOVKsupfSST2h9
- OsDcYPVU2YPeMr+H/AKyM5b/HCylClseb1Rn8siEHx7PQZyoV5+NUZipdSqM8MZocWEAV5nT3i
- Gu8=
-X-IronPort-AV: E=Sophos;i="5.68,282,1569254400"; d="scan'208";a="124136728"
-Received: from mail-sn1nam01lp2055.outbound.protection.outlook.com (HELO
- NAM01-SN1-obe.outbound.protection.outlook.com) ([104.47.32.55])
- by ob1.hgst.iphmx.com with ESMTP; 09 Nov 2019 02:48:44 +0800
+ bh=MMT8oK6f80z3AxJMhfh17WJXlM/067bjRtHO3CL6iBc=;
+ b=T7VPrVep36wJWCmWKkJpA5JrvebnFy5BM4TORlZD9k2WalLk1ymtK+TE
+ NzcZZH0NDuU9grOpBTwgJfnL/akUNPcR72URGw6gU79z0j5XZ3yDioVAX
+ 3Od4eVAxbfdV9s9oN0BizMs5wFnwoMuEKbQ7jxuYr8zrVN4M84e0dTTFQ
+ 6w6ueLee0/MCG/T8z9mKzQmVZQvUBx2bfYacCkmtUuD/s54k476c3ebKG
+ Dw43QhqdsrmUzdSgIilMgWWgFdzUX8xc+R3JWJUmrXsVa4rEIAU79yd/P
+ Eo7tVt7J0ZGkMMI15YYMQJ5Wf3E9KdEILUO2pugud7wrAeNv+T2p3Qq5h w==;
+IronPort-SDR: OxAJnPtem5ArCNNmgAVdLDOppM+BK5Tb9NnJsuKeGM8R5R4Y3a0T7nCp6T54Md7PGlVNLpLk1t
+ lcKJJRshIyytgz+REu0JZ3KU+HneXrpzBAiWc2xz/nLrT29p4Ym7r+W6uyNwiIQfX7bzm1TiIA
+ NitoxPqaHsDdEoVA4/ITi+aaYiwrakwCDBc4fKLjAJU9quLVe8HT8ddxmikm3G+0g7yc1ZIOi9
+ Rr3h4CVapQ46nbsCazkoO+ZQkXu4IP0uXXjK+M1Gdrsbo5I/xt/AcotqSbuHxsOLSF74BPhRqT
+ E3E=
+X-IronPort-AV: E=Sophos;i="5.68,282,1569254400"; d="scan'208";a="126961447"
+Received: from mail-cys01nam02lp2056.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.56])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Nov 2019 02:50:24 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PWL6/+2926gLtOcRenKZPeY9O99rnQO5+cqJReFC9bMUNYM7uePVK7nWSjjRl0OUKJSquTgE6gIww259gl62so8sQr4fla1XBnKXGR0tXaSfwVgEB7n8J1RaJ5gN1uQ+pwA6BPS7PrDffL82fD8uHh22bD+6XhR6zAcAqxOv5nldvlgcHDpGwJkuhl+SA/fpGZwpvvdbcy+x0TK1o+CIPwyfuWjz/Fi//gAGWTrsb8NdeBQajuBjf9OwjvYDwaqMRb/ZQK82/DyCkn+TFCNsTrsd7H6hepkH+KHKUV1do8a4W4ZLUfNUzSwcCp/SZWcU5uitajBhBGLOXjcjJ1u2xA==
+ b=WTwE3aFfP+gppccZDMRR5XzZv22htUxNJz/XkZUPK5OIPPiQHZ54RK0QdlCDtEtD9BlRO8XWWyq7JXI/3gzAEGRQorRqkUkzaYNH8MgKMB2rJ0gP+YQtM2FOOPoISGawIOzSe/hN4n7F/z4OQgGcdGGeLLiIHPX8bBzC23IyZ1IjrsIipDlARP8Unk56ZB6fhAfk9bdrnJsDa12ZyKVXJSUojUjVviGcJmWb07OhXHfPomsLkmUwJqchRkitj+8UeUvokRq6iby+823kkfSyKNlY+9iR0QA/mzFCt4k2YjetoLL0JCE+vG/xT5qpBYLK+LqOF+i6eWljwYtU3BLl9g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=elElmSSq9ePZiggQdGed8+mTorb4xR/RDrYzsT3WQ1w=;
- b=K0aJrkT4PhQi4qMyAYBvhO8cTJBYBcRNUEFuwNW0/qxjjxDVz5y2X9IPjC4aV+4KPtc/++3HVvoF0sQXI83WfBGDQo0eku03kiCeVG4iuU+LJIhBAU43r4McbZuMGlfBpUVdH7igKEEMqt9l8RvfFENATTcTU7I0Lb2G2z16/ksPz0y9C2XL6eOJguYFTs10p5cNiIhHQV3IxV2HLqCAXYtJyJgmo+mnoDJCz7vI57jAWC632r19bQ8YBeTpYRSuPC6F8BN4h4qIaYbcQ3Bp3NtUSM/tkX5XvDcJTJrwxYzUqbDdlzf5nn3Baez9dNWuzNY5398uJ9AqtFKOsN3MLQ==
+ bh=l9878wIrxKKWXUHm58f2RklIM4TRXT/ZEmsge8xZ00g=;
+ b=e5R0MIzkHJBLqmf88IlUk+zgUHnAP9yqDNl2vQ0mqew2drMUX0oB1bnTyUlJcfKcq9mOoPk6V2RUwKZJjJmJdZkXVwKDRIqV5DaecomoL1zW9ZrfXt9kG8WgYoucRnaZaFG6IjKMLtsV052HKunBFB1Jbb+9dGbeFACHovQ/Y5Y7+33+w6Pd21pRuwZvgnfZ4oi99I995LMOAjVNG7w8SV0CduobcxzIllcWnIbvJ0FyK31B5N+604L8pHduTRO+BBxaF+T46SaBkcut0WJePIWwrlaMeksCRH4ZQGrOhORdkHdkDW1p2Yq6pPI2wyLolmifD7ke/zbHlkLkosfutQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=elElmSSq9ePZiggQdGed8+mTorb4xR/RDrYzsT3WQ1w=;
- b=PfO5fdIophYPQvY2dT3ziTGyPEmFVMAhQTfKbNecKzUfbEHe4/gWEplcp3tXEQPLa48aF5H8fyaL37VU0S8BTno/F0I5XQkVQ51DxNGa/GdZtK9sz/wGvwVyUymCE0xfKs2vPyaU6EuQqAleOVmQIgSDblH/Uv0+7oFYLoJLyRs=
+ bh=l9878wIrxKKWXUHm58f2RklIM4TRXT/ZEmsge8xZ00g=;
+ b=PiMgTMIcDaV701I0ppo+y45FHF2nKsIl//72iIvXcJrxmASimMWSf1v5forjDhnZfZ5ABUPy3jxL3CVktnIqFUAm4TjCkOM9WQvik0UQvx3hoMcV/Sjv3MtIli/+fiAHB1yu/bWsN488kZRdyLhSgqViUIrqxYGHwKMruJoBME4=
 Received: from DM6PR04MB5754.namprd04.prod.outlook.com (20.179.52.22) by
- DM6PR04MB3993.namprd04.prod.outlook.com (20.176.87.26) with Microsoft SMTP
+ DM6PR04MB4042.namprd04.prod.outlook.com (20.176.87.12) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2408.24; Fri, 8 Nov 2019 18:48:43 +0000
+ 15.20.2430.25; Fri, 8 Nov 2019 18:50:22 +0000
 Received: from DM6PR04MB5754.namprd04.prod.outlook.com
  ([fe80::65c4:52fd:1454:4b04]) by DM6PR04MB5754.namprd04.prod.outlook.com
  ([fe80::65c4:52fd:1454:4b04%7]) with mapi id 15.20.2430.020; Fri, 8 Nov 2019
- 18:48:43 +0000
+ 18:50:22 +0000
 From: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>
 To: Damien Le Moal <Damien.LeMoal@wdc.com>, "linux-block@vger.kernel.org"
  <linux-block@vger.kernel.org>, Jens Axboe <axboe@kernel.dk>,
@@ -91,12 +91,13 @@ To: Damien Le Moal <Damien.LeMoal@wdc.com>, "linux-block@vger.kernel.org"
  "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <yuchao0@huawei.com>
-Thread-Topic: [PATCH 7/9] null_blk: Add zone_nr_conv to features
-Thread-Index: AQHVldfeADQIZN8MvkW12chh05+aBg==
-Date: Fri, 8 Nov 2019 18:48:43 +0000
-Message-ID: <DM6PR04MB5754124089E14F2575C8412B867B0@DM6PR04MB5754.namprd04.prod.outlook.com>
+Thread-Topic: [PATCH 2/9] block: cleanup the !zoned case in
+ blk_revalidate_disk_zones
+Thread-Index: AQHVldfc9s3RcjAaAUWO67LxGbcSfg==
+Date: Fri, 8 Nov 2019 18:50:22 +0000
+Message-ID: <DM6PR04MB5754E84538F2E0AC9C3FD797867B0@DM6PR04MB5754.namprd04.prod.outlook.com>
 References: <20191108015702.233102-1-damien.lemoal@wdc.com>
- <20191108015702.233102-8-damien.lemoal@wdc.com>
+ <20191108015702.233102-3-damien.lemoal@wdc.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -106,30 +107,30 @@ authentication-results: spf=none (sender IP is )
 x-originating-ip: [199.255.45.62]
 x-ms-publictraffictype: Email
 x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 69678c29-0853-48cb-72cd-08d7647c4750
-x-ms-traffictypediagnostic: DM6PR04MB3993:
+x-ms-office365-filtering-correlation-id: 335b990a-eac9-4400-7934-08d7647c8272
+x-ms-traffictypediagnostic: DM6PR04MB4042:
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <DM6PR04MB3993BABC096940C00E202208867B0@DM6PR04MB3993.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <DM6PR04MB4042D948C540A667C897611B867B0@DM6PR04MB4042.namprd04.prod.outlook.com>
 wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:6108;
+x-ms-oob-tlc-oobclassifiers: OLM:2512;
 x-forefront-prvs: 0215D7173F
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(396003)(136003)(376002)(346002)(39860400002)(366004)(189003)(199004)(71200400001)(55016002)(26005)(446003)(9686003)(102836004)(86362001)(53546011)(2906002)(3846002)(52536014)(66476007)(256004)(76116006)(5660300002)(64756008)(305945005)(91956017)(76176011)(6246003)(7736002)(99286004)(6506007)(6436002)(4744005)(2501003)(7696005)(6116002)(186003)(14454004)(110136005)(74316002)(478600001)(8936002)(66066001)(33656002)(66556008)(66946007)(66446008)(81156014)(486006)(8676002)(476003)(229853002)(316002)(81166006)(71190400001)(25786009)(921003)(1121003);
- DIR:OUT; SFP:1102; SCL:1; SRVR:DM6PR04MB3993;
+ SFS:(10019020)(4636009)(366004)(396003)(39860400002)(376002)(136003)(346002)(189003)(199004)(81156014)(229853002)(99286004)(14454004)(66946007)(6246003)(86362001)(102836004)(4744005)(8936002)(305945005)(14444005)(486006)(76176011)(5660300002)(66446008)(7736002)(446003)(74316002)(81166006)(478600001)(66476007)(66556008)(64756008)(33656002)(9686003)(55016002)(186003)(52536014)(6436002)(476003)(110136005)(26005)(91956017)(2501003)(25786009)(316002)(256004)(7696005)(71200400001)(3846002)(6116002)(53546011)(6506007)(71190400001)(66066001)(76116006)(2906002)(8676002)(921003)(1121003);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:DM6PR04MB4042;
  H:DM6PR04MB5754.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: KdZl+9ZAS3k06TQANsrW0In9tCnbakjnHijaznydDPPfmjVy/dSy1ciq6hGNZu1x67E1CPN2sWrQKB2trWx/dkrWnsPiwomw7YttiryNIXezyaGiq0RkAHvbkhnMAdOGv8EHZfUNppQGTEEG29y2Imia+5YnSy5H9dDG4yzSuzgnk+GxEfoAqWpK1zN56p4ceXRxJuq10DCa4Wzk3jGhpaKJvgxIs/hSmU7Pl1RdIFbBeF1GDs2Wffc1VH4JiIyM5bIlABAlCR+8x2iCv8j93VGl/JBgzhglhFNmVkEXVMCQat+KeHfzOSb1PumxerHFCqWjKIHIgB+2Kyxf5Ygh9h/AZASfMohUhY3t1WmjMJB1uFjeajkZXujD+aLc4PTVYwmaB3+eUicHslm9D5sqcDFC3vXh0XuF/UxtiHIQhqhcbcIVkCrYQTovF0SwMaUv
+x-microsoft-antispam-message-info: 1VefVcdWrIleAOQ3p2ujBxXhf7nDGY/mWMgl1miqXRiNkPRH/3yNKUPdqBrZFONYt2zIPOgHuCsVfE5pxxb2sVFF5Ewp+7y8iwrHpzK0PBYNJYgQDhIZ0FXBPkehb4cH6bilx+s1CW71yZaHnralPe0ae492BqAzF2Y4AN49KZfLoxihP/+wru6mDrQMu1fcNpw5irXx0ipAn9QY2EXq5I4KtuBJoz0bo2Jls57xHv+EC6JdIf41VZDDycWPN0DhpeyDDC25jwpiaLdIzAqji3Akh7s1UaQzz+Wn0Y2iliNxSrtkR3bjF7JZ6cR5zY3MZlKLBMeVzYbkWfeX9WKyUGh8IvzL2yVz5jp9EQnY2D3EkULohxfqgpWmx8zGA8MMZNUbmgTxI/hifHw25Oba4iFGkLEdjkRiRtkYdpMKWmo4zvZgW/1vgReWpGBFmjY6
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69678c29-0853-48cb-72cd-08d7647c4750
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2019 18:48:43.0252 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 335b990a-eac9-4400-7934-08d7647c8272
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2019 18:50:22.1658 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: zxHr0NCf8vZJFcYIBdC6kL2UJxDIkbOSxFGjCHeMOY9OXUCPPAl0gOgk1hZvTb2xXlS67q0HzikANMNEu5gmXGaEfXQpYcbKhDSVNsgi8RA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB3993
+X-MS-Exchange-CrossTenant-userprincipalname: +/mqLsfKPN3fR+TDy77ZwhjMImDOwK/kri/RvC4q0GO80xZhwyDiqmL1NWs7qnBqBzYH6yUBd8F/q1coVcm/pTrSxdRZINhHJecRK7nqAHc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4042
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -145,8 +146,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iT9JR-005nCj-UV
-Subject: Re: [f2fs-dev] [PATCH 7/9] null_blk: Add zone_nr_conv to features
+X-Headers-End: 1iT9L8-005jwE-Ge
+Subject: Re: [f2fs-dev] [PATCH 2/9] block: cleanup the !zoned case in
+ blk_revalidate_disk_zones
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,11 +169,14 @@ Looks good to me.
 Reviewed-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 
 On 11/07/2019 05:57 PM, Damien Le Moal wrote:
-> For a null_blk device with zoned mode enabled, the number of
-> conventional zones can be configured through configfs with the
-> zone_nr_conv parameter. Add this missing parameter in the features
-> string.
+> From: Christoph Hellwig<hch@lst.de>
 >
+> blk_revalidate_disk_zones is never called for non-zoned devices.  Just
+> return early and warn instead of trying to handle this case.
+>
+> Signed-off-by: Christoph Hellwig<hch@lst.de>
+> Signed-off-by: Damien Le Moal<damien.lemoal@wdc.com>
+> ---
 
 
 
