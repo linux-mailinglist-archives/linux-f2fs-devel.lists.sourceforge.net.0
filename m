@@ -2,98 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82E0EF45B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 12:31:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2065F4620
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 12:40:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iT2U7-0006ma-BA; Fri, 08 Nov 2019 11:31:23 +0000
+	id 1iT2ck-0005y7-B3; Fri, 08 Nov 2019 11:40:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stummala@codeaurora.org>) id 1iT2U6-0006mG-2K
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 11:31:22 +0000
+ (envelope-from <sashal@kernel.org>) id 1iT2cg-0005xa-Om
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 11:40:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZzNNsQ5c9TM7d+IZjGjTXCYk41ZZBnW8X6NIN3je2cI=; b=YsOD5QX069S/oihYQ/j6YcvIe4
- NhXOUWEQTm30SRHblKkV52RcY0rSc2w9UY+QDggzjTxd/OFAMh6UqI6BkdtfAIu59pkJWo3FbHqf1
- LSbdXE1INPZw5Yx4krSkhQr53HZRFY/FsJgU7USCou2/F+t0fks9knAhXsDFrZ03wgEo=;
+ bh=1hA3zR0ptoCgSAYShsVa3weLLVnoSbJzucGpDfl0CbM=; b=C4E3SeacREC0EavfDmjo/nI/cA
+ 3Vdk0wDwbiWbQokPvpO2dSmmEghUDe6Y917gUfR5Hmp1aW9lTzNH5zn34vCIVYq7pMxpuP/LLxDBb
+ hJsTA/JBuWokkr88qeozHHYLUNIrDFmdjwy/MzT2uDgnC56M50L60IwjS/X2eHU+Xf6o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZzNNsQ5c9TM7d+IZjGjTXCYk41ZZBnW8X6NIN3je2cI=; b=JTALGFbkV/yASvJJKhGgGOAFKl
- Np+/QivpvvDerW/2bK7IqARJBPIfKc2RHb1NAVc1A97XmSkGeXGXQpSGPKrlVYqNbicFMiSttlnD9
- FNOEEHl4EowdUzwB7APkaj1Z0Gwrt2r2gpZTFxAP/IJBxKhuPTcX448XT4fwSfvcJhYQ=;
-Received: from smtp.codeaurora.org ([198.145.29.96])
+ bh=1hA3zR0ptoCgSAYShsVa3weLLVnoSbJzucGpDfl0CbM=; b=TOZboABptFa0G/ROod18AKiG8/
+ Nqg9g2BUPRtbPGw2mSLYdoU/0yA1dODcwphbXSckGXkVJrx7eXXDr8CHzgCUFPYSAjGbfop35XjE4
+ gBnC+/NhiRbRS7sfTBJUyJD4uuLg5sXy1frqwyYTS1G7W2mT8CO6+ggwNsOTRVhedH08=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iT2U3-006Tka-Ow
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 11:31:22 +0000
-Received: by smtp.codeaurora.org (Postfix, from userid 1000)
- id 687A7602BD; Fri,  8 Nov 2019 11:04:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1573211052;
- bh=d85PiEzTKZnD4rW8ooec1lt7MpOUj9J4ixcs+n0zX9I=;
- h=From:To:Cc:Subject:Date:From;
- b=A8NLIWCigNLq8rWL3fhGp8qYpPpfNAQsUDH6Hvor1IKXBZPHwGOhrOidC9+NaUj3Y
- wm8NMY5+5Doi+ApMxd+ZACQjGn4gi08HpKJL/PHWzLWQmPyIbomje1uYeUcuB94hX/
- ESnVYf4t9g/3qAMHPly5aFHlg6d2cAQitpaGXSRE=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- pdx-caf-mail.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_INVALID,DKIM_SIGNED,SPF_NONE autolearn=no autolearn_force=no
- version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ id 1iT2cd-006UHb-6r
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 11:40:13 +0000
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: stummala@smtp.codeaurora.org)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 5021A602BD;
- Fri,  8 Nov 2019 11:04:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
- s=default; t=1573211050;
- bh=d85PiEzTKZnD4rW8ooec1lt7MpOUj9J4ixcs+n0zX9I=;
- h=From:To:Cc:Subject:Date:From;
- b=GfWqVwQoV9Amr3ZDWp0foiRawDLhM6EebifTzZYdkktLhfYQGun36efBNw3/s58BF
- Y2X2HnRxr7fjM1Yh+rax2UK3bW0Q09eAZPIQ56QOCTlWR9dm5RmZVfnOYeZUin5WYt
- Dm7rjxmKbcgR36Ig1Tg597wOO7kCvFKb7Vt6idyk=
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 5021A602BD
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Fri,  8 Nov 2019 16:33:47 +0530
-Message-Id: <1573211027-30785-1-git-send-email-stummala@codeaurora.org>
-X-Mailer: git-send-email 1.9.1
+ by mail.kernel.org (Postfix) with ESMTPSA id E85E3222CB;
+ Fri,  8 Nov 2019 11:40:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1573213205;
+ bh=vhKnsVvdS3bhGTQPSXRiTcKVgFkmQF7EkajVkSUKU9w=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=cuT0LSJRWH9BxciCOiyfBkBQ8Q8lfEQRsflirBUAORibrVmaTXqvQAu1ZTMXHch2Z
+ dIqIUZ3lzO1cGMPg+g6Q3qFSz57+cDIXTMi2mfKPSA32t+tApOBXgfxChFDsTE6H64
+ Lel5QzVLRIdJdNoGA17zSdJ6+68EXUsl1IEzy940=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri,  8 Nov 2019 06:35:55 -0500
+Message-Id: <20191108113752.12502-88-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191108113752.12502-1-sashal@kernel.org>
+References: <20191108113752.12502-1-sashal@kernel.org>
+MIME-Version: 1.0
+X-stable: review
+X-Patchwork-Hint: Ignore
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iT2U3-006Tka-Ow
-Subject: [f2fs-dev] [PATCH] f2fs: Fix deadlock under storage almost
- full/dirty condition
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iT2cd-006UHb-6r
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 088/205] f2fs: avoid wrong decrypted
+ data from disk
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,56 +90,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
-MIME-Version: 1.0
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There could be a potential deadlock when the storage capacity
-is almost full and theren't enough free segments available, due
-to which FG_GC is needed in the atomic commit ioctl as shown in
-the below callstack -
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-schedule_timeout
-io_schedule_timeout
-congestion_wait
-f2fs_drop_inmem_pages_all
-f2fs_gc
-f2fs_balance_fs
-__write_node_page
-f2fs_fsync_node_pages
-f2fs_do_sync_file
-f2fs_ioctl
+[ Upstream commit 0ded69f632bb717be9aeea3ae74e29050fcb060c ]
 
-If this inode doesn't have i_gc_failures[GC_FAILURE_ATOMIC] set,
-then it waits forever in f2fs_drop_inmem_pages_all(), for this
-atomic inode to be dropped. And the rest of the system is stuck
-waiting for sbi->gc_mutex lock, which is acquired by f2fs_balance_fs()
-in the stack above.
+1. Create a file in an encrypted directory
+2. Do GC & drop caches
+3. Read stale data before its bio for metapage was not issued yet
 
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ fs/f2fs/data.c    | 18 ++++++++++--------
+ fs/f2fs/f2fs.h    |  2 +-
+ fs/f2fs/file.c    |  3 +--
+ fs/f2fs/segment.c |  6 +++++-
+ 4 files changed, 17 insertions(+), 12 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 9511466bc7857..c61beaedf0789 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -575,9 +575,6 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+ 		ctx->bio = bio;
+ 		ctx->enabled_steps = post_read_steps;
+ 		bio->bi_private = ctx;
+-
+-		/* wait the page to be moved by cleaning */
+-		f2fs_wait_on_block_writeback(sbi, blkaddr);
+ 	}
+ 
+ 	return bio;
+@@ -592,6 +589,9 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+ 	if (IS_ERR(bio))
+ 		return PTR_ERR(bio);
+ 
++	/* wait for GCed page writeback via META_MAPPING */
++	f2fs_wait_on_block_writeback(inode, blkaddr);
++
+ 	if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE) {
+ 		bio_put(bio);
+ 		return -EFAULT;
+@@ -1569,6 +1569,12 @@ submit_and_realloc:
+ 			}
+ 		}
+ 
++		/*
++		 * If the page is under writeback, we need to wait for
++		 * its completion to see the correct decrypted data.
++		 */
++		f2fs_wait_on_block_writeback(inode, block_nr);
++
+ 		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
+ 			goto submit_and_realloc;
+ 
+@@ -1637,7 +1643,7 @@ static int encrypt_one_page(struct f2fs_io_info *fio)
+ 		return 0;
+ 
+ 	/* wait for GCed page writeback via META_MAPPING */
+-	f2fs_wait_on_block_writeback(fio->sbi, fio->old_blkaddr);
++	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
+ 
+ retry_encrypt:
+ 	fio->encrypted_page = fscrypt_encrypt_page(inode, fio->page,
+@@ -2402,10 +2408,6 @@ repeat:
+ 
+ 	f2fs_wait_on_page_writeback(page, DATA, false);
+ 
+-	/* wait for GCed page writeback via META_MAPPING */
+-	if (f2fs_post_read_required(inode))
+-		f2fs_wait_on_block_writeback(sbi, blkaddr);
+-
+ 	if (len == PAGE_SIZE || PageUptodate(page))
+ 		return 0;
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index fb216488d67a9..6d361c8c61306 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2973,7 +2973,7 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+ 			struct f2fs_io_info *fio, bool add_list);
+ void f2fs_wait_on_page_writeback(struct page *page,
+ 			enum page_type type, bool ordered);
+-void f2fs_wait_on_block_writeback(struct f2fs_sb_info *sbi, block_t blkaddr);
++void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
+ void f2fs_write_data_summaries(struct f2fs_sb_info *sbi, block_t start_blk);
+ void f2fs_write_node_summaries(struct f2fs_sb_info *sbi, block_t start_blk);
+ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 8d1eb8dec6058..6972c6d7c3893 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -112,8 +112,7 @@ mapped:
+ 	f2fs_wait_on_page_writeback(page, DATA, false);
+ 
+ 	/* wait for GCed page writeback via META_MAPPING */
+-	if (f2fs_post_read_required(inode))
+-		f2fs_wait_on_block_writeback(sbi, dn.data_blkaddr);
++	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+ 
+ out_sem:
+ 	up_read(&F2FS_I(inode)->i_mmap_sem);
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index da830fc..335ec09 100644
+index 10d5dcdb34be6..d78009694f3fd 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -300,7 +300,8 @@ void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
+@@ -3214,10 +3214,14 @@ void f2fs_wait_on_page_writeback(struct page *page,
+ 	}
+ }
  
- 	if (inode) {
- 		if (gc_failure) {
--			if (fi->i_gc_failures[GC_FAILURE_ATOMIC])
-+			if (fi->i_gc_failures[GC_FAILURE_ATOMIC] ||
-+				F2FS_I(inode)->inmem_task == current)
- 				goto drop;
- 			goto skip;
- 		}
+-void f2fs_wait_on_block_writeback(struct f2fs_sb_info *sbi, block_t blkaddr)
++void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr)
+ {
++	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct page *cpage;
+ 
++	if (!f2fs_post_read_required(inode))
++		return;
++
+ 	if (!is_valid_data_blkaddr(sbi, blkaddr))
+ 		return;
+ 
 -- 
-Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+2.20.1
 
 
 
