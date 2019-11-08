@@ -2,92 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F7F0F3DBB
+	by mail.lfdr.de (Postfix) with ESMTPS id 61330F3DBC
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 02:57:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iStWb-00069N-P7; Fri, 08 Nov 2019 01:57:21 +0000
+	id 1iStWd-0006lO-U9; Fri, 08 Nov 2019 01:57:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=208d19533=damien.lemoal@wdc.com>)
- id 1iStWa-00069F-IQ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:20 +0000
+ id 1iStWc-0006lF-9L
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5U+DSHTOtXcHduArhDWoWMGBZt7hJQFmjC22uG7z02o=; b=ZtL0jzHQSAhnF5V8cmCbVRc/oN
- 9RnNLV50E9so4IwFyplfG21w9akykMajrYkA9CPE/9azrV6vVFS8dq2o/QoXLDJ8HkpNdPKSVCsvX
- hexszuKwkPn8dlfn4CU8zayhymk4t8CJghLhukrqpqalbzD2Y0PSkekUejCfd+a7Mr8w=;
+ bh=CgNwGNv0+0oV1ZwUY6+tEx9C7o1HVEPL/S5H7LC3hXg=; b=QbeTHZQWPMPP7pjUY4rpWB+PMA
+ rffJh+oEWeWFZQgGggGgVEmQBWlRC9pUA3nfbDSC1mEm3P7L2Z7wRVCkXP2/nTY6yUcNrFIT9kIPN
+ nSNUOHVdn+Y3VbV0jQ2BIzVgbSxCgWx+PbvMPV1pczUvIcsT46zlkabNUSYdKq7vR+xM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
- Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=5U+DSHTOtXcHduArhDWoWMGBZt7hJQFmjC22uG7z02o=; b=K
- 4uwpCy2Z354pf0XsHxNVyCfbuvIR8TsBsSgAhtm+ZAYrvAWCS6osEizwh6jbtF//rSVYhySlBGDlj
- vmm3x15unqVi1jGONZG3a216gCACl6XUTJJ5MXZSW4JtwtnM++tgf+ZYVCccaoj2LMOi6bf3BCin7
- SF8DnGctadCprr+g=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=CgNwGNv0+0oV1ZwUY6+tEx9C7o1HVEPL/S5H7LC3hXg=; b=GMvslTJsWCNdVCmb0GyEFd8fJl
+ O7auVL3iB/XxSpo4F89CmCS2Ax/luDY9sHPUZgX5fKHsLlgZBy/YdxUq5vT6uq/cBU7gmcSgjxV9c
+ RS9zdoW7ZhSqCA8rgRFdgWNAUPHcaoyXx4sx4wvoH0IEhU4a5wHz+6UP9tbfVI7/qvZE=;
 Received: from esa2.hgst.iphmx.com ([68.232.143.124])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iStWX-005k3N-1O
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:20 +0000
+ id 1iStWa-005k3N-Hg
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1573178274; x=1604714274;
- h=from:to:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=vM/KrJ+HIa8siNY2n9F5icqhovX3v2IUN4Yn9XIWjuU=;
- b=Kdj9EVebAoSgv6iYOns3bY1IXc2Pk+hbNTV4aC7xkET681yiD7bjrg7p
- N5y785/0vIQSE9bdLJdnxctAIJs+sEmayueyttkgfzZhjEm06PcBidQoS
- 4RdimeXk/xTwZau5sEHAXL6wUt+s3P2pnHLERgTUfomv3ifWkCyAHZ/Wh
- igVgzhRIXXv1oYUsDALS1eWWfspUQQp7TfTptiauTfqd/IZiixs4s2mod
- A9u92BdtmXY6yhg1djgl5i/XBpZhQv7Q/hXXvOvGuhvcNyCkLhUMn2xXQ
- k/UO4y40f5wMndRGxI/a+tCFoJ2iCpSkRh9wnmSubjg6JO6QPnSeszTJi g==;
-IronPort-SDR: Z/Lu4bc0lk+05V1IaE3OyhBNZC77lcol8n34l3Fk382jjKqDsShYWZ1ata7FRYM6HtPnImPAJk
- 10JunTKVXPP/Abc9K8lc4qFQQgJrxJpqtghKNByF3LFh/aCvDoww34pNIoT+yAgd4s5+GcuJr5
- Eaif8eaDrzmmI3lIlKh+zcB9eW3OWtmtxGVzDfaMTxMBUOd8H3dDH6656grrLo66qL1fzOHCCM
- CFc8gEAT1rKVqK7Q7s+4NCzf7hjPyvLRIdQMnbWTd8h46rJbbrEQLBYxVVpQzxhZBF4D4Ag0kp
- c2Q=
-X-IronPort-AV: E=Sophos;i="5.68,279,1569254400"; d="scan'208";a="223636895"
+ t=1573178280; x=1604714280;
+ h=from:to:subject:date:message-id:in-reply-to:references:
+ mime-version:content-transfer-encoding;
+ bh=hl3wa4IvIKAImcwfJZsrIF3fMZALm4J5qABmMKDF6Gc=;
+ b=OAraXI8B9vm7YBkH9OxzWn9Br4YmLUYuy6nAnN1d00QqbJewF2KCG4V6
+ O+Gg0JEWmmFNgDu+ITWZ6PAZWomoGonjkRxjRNrqjGqsjp3yuGV2OtwuM
+ W11kfMCAlsNw6Ao+92obR2Wzn2BcMzlv8v9d2v5JaKrEXDbFND3orQXhI
+ BuaLfTm/YbcXhbuXar+Z0fsV2ECjs8Y78JcA33Wr60izAeQLSyeh/KMMy
+ UF+jQr2NQDyvbQJ4JvReF0s4B77wfluDerfrswkzkvmU1REtM/LGyQ5TD
+ eJk6MQpzxlhg3hSm24zrJY4V4oY83P+W9gdAbAQZ2kwk8S7LQ6uAnOwdV Q==;
+IronPort-SDR: mJzeS+qykOxi0KngrjD059bhgxpsI5pGjxIDVmy0PoPICe8V0SPbgDQuHg9FM90d67nUzvyqty
+ Mj/QJsxR4WSyJKIzgiDar1q8tLk5Jtayia7U1ka/B1yp4oy+nnyFjf0TuIQPaXuYZGiKD/7+oE
+ NGYqUkkTzqYdjgQBzw5rZ5MH5N10ckT4v+POFLHPPOsI7kZz2TCTPFI4jsVy3hBVEoVubdGw23
+ wDVljnJA79TzLCNlBE9S+FmwxJf2NMYP3y4hbMk6x7O/y/aquc+vEX4tE4P6G9V09NvZdUk/MW
+ dSs=
+X-IronPort-AV: E=Sophos;i="5.68,279,1569254400"; d="scan'208";a="223636898"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 08 Nov 2019 09:57:36 +0800
-IronPort-SDR: SI1cbBt5OYhk63OpV/Njzcfl5z1VR1XmTnbiwIVz+6m65AshaaYmW8TVXmKICjGTb6p2xeT+ll
- owoQdPNTQBPmte9KGAGFsaAiTgM7odVAikkGXWfWRqkpUjd/aeDQIjB25XYDtD6PC4sYzFBQFO
- G4ttmIx932Zp0V+xP5YgO3D+K8fG5KDJUt2Um1mlkZQh2jl81Ipm31WJAl8zVit6ERpUv3ge7+
- UyP+In9pBPhispE3hG4/4lJPkJxl+Lvk6tFU2CKZLYrMss5qIj4u8d9y0o40kcPsNyP2vYwa8R
- 80bgio3UA8WY3OxqrpnpvV0v
+ by ob1.hgst.iphmx.com with ESMTP; 08 Nov 2019 09:57:39 +0800
+IronPort-SDR: 2d9zvpyd/fotrzLSEAtQ0AHBDmv2u3S9QBUfzITR048cBp1f7Wil68J2BmfGOfMA0BeDvP92hD
+ sb3W5rGZeKKSoD1wd5bk5+xKYPuakvMfjBHGifIiIIR/Gcht3Pw9fGIy9tRvbLC/KezWAjVxWz
+ R7ZtBEPjLVXaPJL2DaZPFJIuuwy9aDGd4Bgz5okFvo5N/zCg149nfRTir0qXEMv+R9kzx4gVwK
+ Nfr5C5kF7UwzeYanPTdZZJp+R4HNQQ/sObgzHcugzhv2kcK2M7vX2HKFK66eLDerlGm9jvRddm
+ qBmzwLK73HLLfhcPRpiWUXm4
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Nov 2019 17:52:14 -0800
-IronPort-SDR: n1JB/r/HWWN2B17V0qOnL+HfFwacsPp5S7iKAhVZGZsNZezmTrmkpdg7au+KUF22Zv4gjzyhb7
- NHHxOniZM35NXgyv3T+t/RUTLj9+ZkQSbX7SIgY7GZHWE8zXAyV+VCl3tx8wJpZ3D0qpEbNLAK
- 7lTAk0GlfNVg6qBZeCDlW+7HFz5ZLDgOHAwhAZhqjj2Nv6zn+b7OuaTwd/ou9i+FLBk4tB18CH
- gz93U1hqWBN1NMh1oiqBwxd5rlbxaIZgAFJxbbCE5WrcvT0uWh4c9ostOi3q4RjsklKO86XJSy
- ZTE=
+ 07 Nov 2019 17:52:16 -0800
+IronPort-SDR: iiaszOVciPno9xnjy33lj7sH4PgaoQdB3jPpGiMgLenRCfImDU4YYX0adNq4qa/MasUS3AxMrG
+ uNeUtRHfluKWCkZFZFCcX1EmFfh1AIP5URDztp45H8RZo8wrCl9lh0EFagxBCmZcc444TGKvxI
+ p9GLCOEgh44Eof/YyehiZLLaHt/VVS1vfW8IqCfbjGyml25nMLcAFWWi4WOAdN1yBCBOhIXY2U
+ QWWthrHDCP9OxZ/bdq+0HlwSllhipRT+xyo2RLTMqPl6Q3xrXzbV0v8mvlzYapZYyvGi6S6ap/
+ 7bY=
 WDCIronportException: Internal
 Received: from washi.fujisawa.hgst.com ([10.149.53.254])
- by uls-op-cesaip01.wdc.com with ESMTP; 07 Nov 2019 17:57:03 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 Nov 2019 17:57:05 -0800
 From: Damien Le Moal <damien.lemoal@wdc.com>
 To: linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
  linux-scsi@vger.kernel.org,
  "Martin K . Petersen" <martin.petersen@oracle.com>, dm-devel@redhat.com,
  Mike Snitzer <snitzer@redhat.com>, linux-f2fs-devel@lists.sourceforge.net,
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
-Date: Fri,  8 Nov 2019 10:56:53 +0900
-Message-Id: <20191108015702.233102-1-damien.lemoal@wdc.com>
+Date: Fri,  8 Nov 2019 10:56:54 +0900
+Message-Id: <20191108015702.233102-2-damien.lemoal@wdc.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20191108015702.233102-1-damien.lemoal@wdc.com>
+References: <20191108015702.233102-1-damien.lemoal@wdc.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: wdc.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -95,10 +101,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iStWX-005k3N-1O
-Subject: [f2fs-dev] [PATCH 0/9] Zoned block device enhancements and zone
- report rework
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iStWa-005k3N-Hg
+Subject: [f2fs-dev] [PATCH 1/9] block: Enhance blk_revalidate_disk_zones()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,76 +119,281 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This series of patches introduces changes to zoned block device handling
-code with the intent to simplify the code while optimizing run-time
-operation, particularly in the area of zone reporting.
+For ZBC and ZAC zoned devices, the scsi driver revalidation processing
+implemented by sd_revalidate_disk() includes a call to
+sd_zbc_read_zones() which executes a full disk zone report used to
+check that all zones of the disk are the same size. This processing is
+followed by a call to blk_revalidate_disk_zones(), used to initialize
+the device request queue zone bitmaps (zone type and zone write lock
+bitmaps). To do so, blk_revalidate_disk_zones() also executes a full
+device zone report to obtain zone types. As a result, the entire
+zoned block device revalidation process includes two full device zone
+report.
 
-The first patch lifts the device zone check code out of the sd driver
-and reimplements these zone checks generically as part of
-blk_revalidate_disk_zones(). This avoids zoned block device drivers to
-have to implement these checks. The second patch simplifies this
-function code for the !zoned case.
+By moving the zone size checks into blk_revalidate_disk_zones(), this
+process can be optimized to a single full device zone report, leading to
+shorter device scan and revalidation times. This patch implements this
+optimization, reducing the original full device zone report implemented
+in sd_zbc_check_zones() to a single, small, report zones command
+execution to obtain the size of the first zone of the device. Checks
+whether all zones of the device are the same size as the first zone
+size are moved to the generic blk_check_zone() function called from
+blk_revalidate_disk_zones().
 
-The third patch is a small cleanup of zone report processing in
-preparation for the fourth patch which removes support for partitions
-on zoned block devices. As mentioned in that patch commit message, none
-of the known partitioning tools support zoned devices and there are no
-known use case in the field of SMR disks being used with partitions.
-Dropping partition supports allows to significantly simplify the code
-for zone report as zone sector values remapping becomes unnecessary.
+This optimization also has the following benefits:
+1) fewer memory allocations in the scsi layer during disk revalidation
+   as the potentailly large buffer for zone report execution is not
+   needed.
+2) Implement zone checks in a generic manner, reducing the burden on
+   device driver which only need to obtain the zone size and check that
+   this size is a power of 2 number of LBAs. Any new type of zoned
+   block device will benefit from this.
 
-Patch 5 to 6 are small cleanups and fixes of the null_blk driver zoned
-mode.
+Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
+---
+ block/blk-zoned.c     |  62 +++++++++++++++++++++++-
+ drivers/scsi/sd_zbc.c | 107 ++++++++----------------------------------
+ 2 files changed, 80 insertions(+), 89 deletions(-)
 
-The prep patch 7 optimizes zone report buffer allocation for the SCSI
-sd driver. Finally, patch 8 introduces a new interface for report zones
-handling using a callback function executed per zone reported by the
-device. This allows avoiding the need to allocate large arrays of
-blk_zone structures for the execution of zone reports. This can
-significantly reduce memory usage and pressure on the memory management
-system while significantly simplify the code all over.
-
-Overall, this series not only reduces significantly the code size, it
-also improves run-time memory usage for zone report execution.
-
-This series applies cleanly on the for-next block tree on top of the
-zone management operation series. It may however create a conflict with
-Christoph's reqork of disk size revalidation. Please consider this
-series for inclusion in the 5.5 kernel.
-
-As always, comments are welcome.
-
-
-Christoph Hellwig (4):
-  block: cleanup the !zoned case in blk_revalidate_disk_zones
-  null_blk: clean up the block device operations
-  null_blk: clean up report zones
-  block: rework zone reporting
-
-Damien Le Moal (5):
-  block: Enhance blk_revalidate_disk_zones()
-  block: Simplify report zones execution
-  block: Remove partition support for zoned block devices
-  null_blk: Add zone_nr_conv to features
-  scsi: sd_zbc: Cleanup sd_zbc_alloc_report_buffer()
-
- block/blk-core.c               |   6 +-
- block/blk-zoned.c              | 356 ++++++++++++++-------------------
- block/partition-generic.c      |  74 +------
- drivers/block/null_blk.h       |  11 +-
- drivers/block/null_blk_main.c  |  21 +-
- drivers/block/null_blk_zoned.c |  33 ++-
- drivers/md/dm-flakey.c         |  18 +-
- drivers/md/dm-linear.c         |  20 +-
- drivers/md/dm-zoned-metadata.c | 131 +++++-------
- drivers/md/dm.c                | 130 +++++-------
- drivers/scsi/sd.h              |   4 +-
- drivers/scsi/sd_zbc.c          | 235 ++++++++--------------
- fs/f2fs/super.c                |  51 ++---
- include/linux/blkdev.h         |  15 +-
- include/linux/device-mapper.h  |  24 ++-
- 15 files changed, 427 insertions(+), 702 deletions(-)
-
+diff --git a/block/blk-zoned.c b/block/blk-zoned.c
+index 481eaf7d04d4..dae787f67019 100644
+--- a/block/blk-zoned.c
++++ b/block/blk-zoned.c
+@@ -448,6 +448,58 @@ void blk_queue_free_zone_bitmaps(struct request_queue *q)
+ 	q->seq_zones_wlock = NULL;
+ }
+ 
++/*
++ * Helper function to check the validity of zones of a zoned block device.
++ */
++static bool blk_zone_valid(struct gendisk *disk, struct blk_zone *zone,
++			   sector_t *sector)
++{
++	struct request_queue *q = disk->queue;
++	sector_t zone_sectors = blk_queue_zone_sectors(q);
++	sector_t capacity = get_capacity(disk);
++
++	/*
++	 * All zones must have the same size, with the exception on an eventual
++	 * smaller last zone.
++	 */
++	if (zone->start + zone_sectors < capacity &&
++	    zone->len != zone_sectors) {
++		pr_warn("%s: Invalid zoned device with non constant zone size\n",
++			disk->disk_name);
++		return false;
++	}
++
++	if (zone->start + zone->len >= capacity &&
++	    zone->len > zone_sectors) {
++		pr_warn("%s: Invalid zoned device with larger last zone size\n",
++			disk->disk_name);
++		return false;
++	}
++
++	/* Check for holes in the zone report */
++	if (zone->start != *sector) {
++		pr_warn("%s: Zone gap at sectors %llu..%llu\n",
++			disk->disk_name, *sector, zone->start);
++		return false;
++	}
++
++	/* Check zone type */
++	switch (zone->type) {
++	case BLK_ZONE_TYPE_CONVENTIONAL:
++	case BLK_ZONE_TYPE_SEQWRITE_REQ:
++	case BLK_ZONE_TYPE_SEQWRITE_PREF:
++		break;
++	default:
++		pr_warn("%s: Invalid zone type 0x%x at sectors %llu\n",
++			disk->disk_name, (int)zone->type, zone->start);
++		return false;
++	}
++
++	*sector += zone->len;
++
++	return true;
++}
++
+ /**
+  * blk_revalidate_disk_zones - (re)allocate and initialize zone bitmaps
+  * @disk:	Target disk
+@@ -497,7 +549,10 @@ int blk_revalidate_disk_zones(struct gendisk *disk)
+ 	if (!seq_zones_bitmap)
+ 		goto out;
+ 
+-	/* Get zone information and initialize seq_zones_bitmap */
++	/*
++	 * Get zone information to check the zones and initialize
++	 * seq_zones_bitmap.
++	 */
+ 	rep_nr_zones = nr_zones;
+ 	zones = blk_alloc_zones(&rep_nr_zones);
+ 	if (!zones)
+@@ -511,11 +566,14 @@ int blk_revalidate_disk_zones(struct gendisk *disk)
+ 		if (!nrz)
+ 			break;
+ 		for (i = 0; i < nrz; i++) {
++			if (!blk_zone_valid(disk, &zones[i], &sector)) {
++				ret = -ENODEV;
++				goto out;
++			}
+ 			if (zones[i].type != BLK_ZONE_TYPE_CONVENTIONAL)
+ 				set_bit(z, seq_zones_bitmap);
+ 			z++;
+ 		}
+-		sector += nrz * blk_queue_zone_sectors(q);
+ 	}
+ 
+ 	if (WARN_ON(z != nr_zones)) {
+diff --git a/drivers/scsi/sd_zbc.c b/drivers/scsi/sd_zbc.c
+index 39f10ec0dfcf..7c4690f26698 100644
+--- a/drivers/scsi/sd_zbc.c
++++ b/drivers/scsi/sd_zbc.c
+@@ -339,32 +339,19 @@ static int sd_zbc_check_zoned_characteristics(struct scsi_disk *sdkp,
+  * Returns the zone size in number of blocks upon success or an error code
+  * upon failure.
+  */
+-static int sd_zbc_check_zones(struct scsi_disk *sdkp, u32 *zblocks)
++static int sd_zbc_check_zones(struct scsi_disk *sdkp, unsigned char *buf,
++			      u32 *zblocks)
+ {
+-	size_t bufsize, buflen;
+-	unsigned int noio_flag;
++	size_t buflen;
+ 	u64 zone_blocks = 0;
+-	sector_t max_lba, block = 0;
+-	unsigned char *buf;
++	sector_t max_lba;
+ 	unsigned char *rec;
+ 	int ret;
+-	u8 same;
+-
+-	/* Do all memory allocations as if GFP_NOIO was specified */
+-	noio_flag = memalloc_noio_save();
+ 
+-	/* Get a buffer */
+-	buf = sd_zbc_alloc_report_buffer(sdkp, SD_ZBC_REPORT_MAX_ZONES,
+-					 &bufsize);
+-	if (!buf) {
+-		ret = -ENOMEM;
+-		goto out;
+-	}
+-
+-	/* Do a report zone to get max_lba and the same field */
+-	ret = sd_zbc_do_report_zones(sdkp, buf, bufsize, 0, false);
++	/* Do a report zone to get max_lba and the size of the first zone */
++	ret = sd_zbc_do_report_zones(sdkp, buf, SD_BUF_SIZE, 0, false);
+ 	if (ret)
+-		goto out_free;
++		return ret;
+ 
+ 	if (sdkp->rc_basis == 0) {
+ 		/* The max_lba field is the capacity of this device */
+@@ -379,82 +366,28 @@ static int sd_zbc_check_zones(struct scsi_disk *sdkp, u32 *zblocks)
+ 		}
+ 	}
+ 
+-	/*
+-	 * Check same field: for any value other than 0, we know that all zones
+-	 * have the same size.
+-	 */
+-	same = buf[4] & 0x0f;
+-	if (same > 0) {
+-		rec = &buf[64];
+-		zone_blocks = get_unaligned_be64(&rec[8]);
+-		goto out;
+-	}
+-
+-	/*
+-	 * Check the size of all zones: all zones must be of
+-	 * equal size, except the last zone which can be smaller
+-	 * than other zones.
+-	 */
+-	do {
+-
+-		/* Parse REPORT ZONES header */
+-		buflen = min_t(size_t, get_unaligned_be32(&buf[0]) + 64,
+-			       bufsize);
+-		rec = buf + 64;
+-
+-		/* Parse zone descriptors */
+-		while (rec < buf + buflen) {
+-			u64 this_zone_blocks = get_unaligned_be64(&rec[8]);
+-
+-			if (zone_blocks == 0) {
+-				zone_blocks = this_zone_blocks;
+-			} else if (this_zone_blocks != zone_blocks &&
+-				   (block + this_zone_blocks < sdkp->capacity
+-				    || this_zone_blocks > zone_blocks)) {
+-				zone_blocks = 0;
+-				goto out;
+-			}
+-			block += this_zone_blocks;
+-			rec += 64;
+-		}
+-
+-		if (block < sdkp->capacity) {
+-			ret = sd_zbc_do_report_zones(sdkp, buf, bufsize, block,
+-						     true);
+-			if (ret)
+-				goto out_free;
+-		}
+-
+-	} while (block < sdkp->capacity);
+-
+-out:
+-	if (!zone_blocks) {
+-		if (sdkp->first_scan)
+-			sd_printk(KERN_NOTICE, sdkp,
+-				  "Devices with non constant zone "
+-				  "size are not supported\n");
+-		ret = -ENODEV;
+-	} else if (!is_power_of_2(zone_blocks)) {
++	/* Parse REPORT ZONES header */
++	buflen = min_t(size_t, get_unaligned_be32(&buf[0]) + 64, SD_BUF_SIZE);
++	rec = buf + 64;
++	zone_blocks = get_unaligned_be64(&rec[8]);
++	if (!zone_blocks || !is_power_of_2(zone_blocks)) {
+ 		if (sdkp->first_scan)
+ 			sd_printk(KERN_NOTICE, sdkp,
+ 				  "Devices with non power of 2 zone "
+ 				  "size are not supported\n");
+-		ret = -ENODEV;
+-	} else if (logical_to_sectors(sdkp->device, zone_blocks) > UINT_MAX) {
++		return -ENODEV;
++	}
++
++	if (logical_to_sectors(sdkp->device, zone_blocks) > UINT_MAX) {
+ 		if (sdkp->first_scan)
+ 			sd_printk(KERN_NOTICE, sdkp,
+ 				  "Zone size too large\n");
+-		ret = -EFBIG;
+-	} else {
+-		*zblocks = zone_blocks;
+-		ret = 0;
++		return -EFBIG;
+ 	}
+ 
+-out_free:
+-	memalloc_noio_restore(noio_flag);
+-	kvfree(buf);
++	*zblocks = zone_blocks;
+ 
+-	return ret;
++	return 0;
+ }
+ 
+ int sd_zbc_read_zones(struct scsi_disk *sdkp, unsigned char *buf)
+@@ -480,7 +413,7 @@ int sd_zbc_read_zones(struct scsi_disk *sdkp, unsigned char *buf)
+ 	 * Check zone size: only devices with a constant zone size (except
+ 	 * an eventual last runt zone) that is a power of 2 are supported.
+ 	 */
+-	ret = sd_zbc_check_zones(sdkp, &zone_blocks);
++	ret = sd_zbc_check_zones(sdkp, buf, &zone_blocks);
+ 	if (ret != 0)
+ 		goto err;
+ 
 -- 
 2.23.0
 
