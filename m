@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE82F4106
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 08:11:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F39CF4110
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 08:12:40 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iSyQc-0003kj-SQ; Fri, 08 Nov 2019 07:11:30 +0000
+	id 1iSyRj-0003td-3H; Fri, 08 Nov 2019 07:12:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hare@suse.de>) id 1iSyQb-0003kW-HQ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 07:11:29 +0000
+ (envelope-from <hare@suse.de>) id 1iSyRi-0003tR-23
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 07:12:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hLn+4QE0Y2kuaJCI+9pj4diRhGlZ876O4z1sRhB0Cb0=; b=K0IJO9uxMtiKtoBVvTaszGmyie
- 5Pze+6qb7gLUslbV+BfU+rn0GNVvaSuKSZ0g4NtuoqokHa+FiAdaiaZF6HbFE4FNxtNBFd5Gjqrbl
- vHT/BQIs+MhlLrBJFpq0C2ehdnjxnL8KSvXpQBbIcpiorhPtAAGjGZTqtvhfZkk6ZNMM=;
+ bh=okRbCxqDwG6zttNgZM8/++H/7i2EWdX6aA43V6UEw3k=; b=PG4HgPHrzidVf0N3bMX2JryfsE
+ QQHEkMupVeItjuDVyJab1zkkgzZ8X/5SpbwC250tEqiP38bdOePLHECxECGkrhM+mXQmcxZaj9Ppd
+ qYub6oqiAFVW3Alf8WNmahhOsXOLylDZ2s6f0tDLUnfI7yV9miQBpknT0FrLR8r5sx7A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,25 +29,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hLn+4QE0Y2kuaJCI+9pj4diRhGlZ876O4z1sRhB0Cb0=; b=UH0FwW11K3AqOfU+qaFUX1eyGM
- gaBQoHUuFiOFIHFp3tPQLWOeLF3/BCjDuzGk5LDwoGKhF9Tx+v4zjSd39Nq4oCwx4Abkoz+b2xRnC
- pSikabIrwKhqSDkpeeTu5KrmVEc/SYqnTCpnT24k9AO6SmX1ZzZpxehhCjaJv9MdVtcM=;
+ bh=okRbCxqDwG6zttNgZM8/++H/7i2EWdX6aA43V6UEw3k=; b=NpuogWYPqxXLq18tPyLMrXSyjy
+ 51Vfw3Ez7NJvTh5aKfpnWUQKwk0UVrT98gUi784n/AllkUrHpfCEpjPQ0p4lbHnDKXPBWXoLFW3Ze
+ JH60hIRm4wKlUOxlRe9m+IKon2oz9UW1knXPqpvx6kjNTzt6ryv+ebpNHjUbvNvAxxmg=;
 Received: from mx2.suse.de ([195.135.220.15] helo=mx1.suse.de)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iSyQZ-004chm-Dz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 07:11:29 +0000
+ id 1iSyRg-004clp-0a
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 07:12:38 +0000
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 4109DB33C;
- Fri,  8 Nov 2019 07:11:20 +0000 (UTC)
+ by mx1.suse.de (Postfix) with ESMTP id 74D94B393;
+ Fri,  8 Nov 2019 07:12:29 +0000 (UTC)
 To: Damien Le Moal <damien.lemoal@wdc.com>, linux-block@vger.kernel.org,
  Jens Axboe <axboe@kernel.dk>, linux-scsi@vger.kernel.org,
  "Martin K . Petersen" <martin.petersen@oracle.com>, dm-devel@redhat.com,
  Mike Snitzer <snitzer@redhat.com>, linux-f2fs-devel@lists.sourceforge.net,
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
 References: <20191108015702.233102-1-damien.lemoal@wdc.com>
- <20191108015702.233102-3-damien.lemoal@wdc.com>
+ <20191108015702.233102-4-damien.lemoal@wdc.com>
 From: Hannes Reinecke <hare@suse.de>
 Openpgp: preference=signencrypt
 Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
@@ -93,12 +93,12 @@ Autocrypt: addr=hare@suse.de; prefer-encrypt=mutual; keydata=
  ZtWlhGRERnDH17PUXDglsOA08HCls0PHx8itYsjYCAyETlxlLApXWdVl9YVwbQpQ+i693t/Y
  PGu8jotn0++P19d3JwXW8t6TVvBIQ1dRZHx1IxGLMn+CkDJMOmHAUMWTAXX2rf5tUjas8/v2
  azzYF4VRJsdl+d0MCaSy8mUh
-Message-ID: <ae0b85df-df04-21cf-be2d-ad040f21aad9@suse.de>
-Date: Fri, 8 Nov 2019 08:11:19 +0100
+Message-ID: <c496ebf7-9f1a-7777-b961-378f3155f3fe@suse.de>
+Date: Fri, 8 Nov 2019 08:12:25 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <20191108015702.233102-3-damien.lemoal@wdc.com>
+In-Reply-To: <20191108015702.233102-4-damien.lemoal@wdc.com>
 Content-Language: en-US
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -106,13 +106,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.de]
+ for more information. [URIs: wdc.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iSyQZ-004chm-Dz
-Subject: Re: [f2fs-dev] [PATCH 2/9] block: cleanup the !zoned case in
- blk_revalidate_disk_zones
+X-Headers-End: 1iSyRg-004clp-0a
+Subject: Re: [f2fs-dev] [PATCH 3/9] block: Simplify report zones execution
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,33 +127,28 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMTEvOC8xOSAyOjU2IEFNLCBEYW1pZW4gTGUgTW9hbCB3cm90ZToKPiBGcm9tOiBDaHJpc3Rv
-cGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KPiAKPiBibGtfcmV2YWxpZGF0ZV9kaXNrX3pvbmVzIGlz
-IG5ldmVyIGNhbGxlZCBmb3Igbm9uLXpvbmVkIGRldmljZXMuICBKdXN0Cj4gcmV0dXJuIGVhcmx5
-IGFuZCB3YXJuIGluc3RlYWQgb2YgdHJ5aW5nIHRvIGhhbmRsZSB0aGlzIGNhc2UuCj4gCj4gU2ln
-bmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Cj4gU2lnbmVkLW9mZi1i
-eTogRGFtaWVuIExlIE1vYWwgPGRhbWllbi5sZW1vYWxAd2RjLmNvbT4KPiAtLS0KPiAgYmxvY2sv
-YmxrLXpvbmVkLmMgfCA3ICsrKystLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygr
-KSwgMyBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvYmxvY2svYmxrLXpvbmVkLmMgYi9i
-bG9jay9ibGstem9uZWQuYwo+IGluZGV4IGRhZTc4N2Y2NzAxOS4uNTIzYTI4ZDdhMTVjIDEwMDY0
-NAo+IC0tLSBhL2Jsb2NrL2Jsay16b25lZC5jCj4gKysrIGIvYmxvY2svYmxrLXpvbmVkLmMKPiBA
-QCAtNTIwLDYgKzUyMCw5IEBAIGludCBibGtfcmV2YWxpZGF0ZV9kaXNrX3pvbmVzKHN0cnVjdCBn
-ZW5kaXNrICpkaXNrKQo+ICAJc2VjdG9yX3Qgc2VjdG9yID0gMDsKPiAgCWludCByZXQgPSAwOwo+
-ICAKPiArCWlmIChXQVJOX09OX09OQ0UoIWJsa19xdWV1ZV9pc196b25lZChxKSkpCj4gKwkJcmV0
-dXJuIC1FSU87Cj4gKwo+ICAJLyoKPiAgCSAqIEJJTyBiYXNlZCBxdWV1ZXMgZG8gbm90IHVzZSBh
-IHNjaGVkdWxlciBzbyBvbmx5IHEtPm5yX3pvbmVzCj4gIAkgKiBuZWVkcyB0byBiZSB1cGRhdGVk
-IHNvIHRoYXQgdGhlIHN5c2ZzIGV4cG9zZWQgdmFsdWUgaXMgY29ycmVjdC4KPiBAQCAtNTM1LDEw
-ICs1MzgsOCBAQCBpbnQgYmxrX3JldmFsaWRhdGVfZGlza196b25lcyhzdHJ1Y3QgZ2VuZGlzayAq
-ZGlzaykKPiAgCSAqLwo+ICAJbm9pb19mbGFnID0gbWVtYWxsb2Nfbm9pb19zYXZlKCk7Cj4gIAo+
-IC0JaWYgKCFibGtfcXVldWVfaXNfem9uZWQocSkgfHwgIW5yX3pvbmVzKSB7Cj4gLQkJbnJfem9u
-ZXMgPSAwOwo+ICsJaWYgKCFucl96b25lcykKPiAgCQlnb3RvIHVwZGF0ZTsKPiAtCX0KPiAgCj4g
-IAkvKiBBbGxvY2F0ZSBiaXRtYXBzICovCj4gIAlyZXQgPSAtRU5PTUVNOwo+IApSZXZpZXdlZC1i
-eTogSGFubmVzIFJlaW5lY2tlIDxoYXJlQHN1c2UuZGU+CgpDaGVlcnMsCgpIYW5uZXMKLS0gCkRy
-LiBIYW5uZXMgUmVpbmVja2UJCSAgICAgIFRlYW1sZWFkIFN0b3JhZ2UgJiBOZXR3b3JraW5nCmhh
-cmVAc3VzZS5kZQkJCSAgICAgICAgICAgICAgICAgICs0OSA5MTEgNzQwNTMgNjg4ClNVU0UgU29m
-dHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSCwgTWF4ZmVsZHN0ci4gNSwgOTA0MDkgTsO8cm5i
-ZXJnCkhSQiAyNDcxNjUgKEFHIE3DvG5jaGVuKSwgR0Y6IEZlbGl4IEltZW5kw7ZyZmZlcgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMt
-ZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0
-Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMt
-ZGV2ZWwK
+T24gMTEvOC8xOSAyOjU2IEFNLCBEYW1pZW4gTGUgTW9hbCB3cm90ZToKPiBBbGwga2VybmVsIHVz
+ZXJzIG9mIGJsa2Rldl9yZXBvcnRfem9uZXMoKSBhcyB3ZWxsIGFzIGFwcGxpY2F0aW9ucyB1c2UK
+PiB0aHJvdWdoIGlvY3RsKEJMS1pPTkVSRVBPUlQpIGV4cGVjdCB0byBwb3RlbnRpYWxseSBnZXQg
+bGVzcyB6b25lCj4gZGVzY3JpcHRvcnMgdGhhbiByZXF1ZXN0ZWQuIEFzIHN1Y2gsIHRoZSB1c2Ug
+b2YgdGhlIGludGVybmFsIHJlcG9ydAo+IHpvbmVzIGNvbW1hbmQgZXhlY3V0aW9uIGxvb3AgaW1w
+bGVtZW50ZWQgYnkgYmxrX3JlcG9ydF96b25lcygpIGlzCj4gbm90IG5lY2Vzc2FyeSBhbmQgY2Fu
+IGV2ZW4gYmUgaGFybWZ1bCB0byBwZXJmb3JtYW5jZSBieSBjYXVzaW5nIHRoZQo+IGV4ZWN1dGlv
+biBvZiBpbmVmZmljaWVudCBzbWFsbCB6b25lcyByZXBvcnQgY29tbWFuZCB0byBzZXJ2aWNlIHRo
+ZQo+IHJlbWluZGVyIG9mIGEgcmVxdWVzdGVkIHpvbmUgYXJyYXkuCj4gCj4gVGhpcyBwYXRjaCBy
+ZW1vdmVzIGJsa19yZXBvcnRfem9uZXMoKSwgc2ltcGxpZnlpbmcgdGhlIGNvZGUuIEFsc28KPiBy
+ZW1vdmUgYSBub3cgaW5jb3JyZWN0IGNvbW1lbnQgaW4gZG1fYmxrX3JlcG9ydF96b25lcygpLgo+
+IAo+IFNpZ25lZC1vZmYtYnk6IERhbWllbiBMZSBNb2FsIDxkYW1pZW4ubGVtb2FsQHdkYy5jb20+
+Cj4gUmV2aWV3ZWQtYnk6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgo+IFJldmlld2Vk
+LWJ5OiBKYXZpZXIgR29uemFsZXogPGphdmllckBqYXZpZ29uLmNvbT4KPiAtLS0KPiAgYmxvY2sv
+YmxrLXpvbmVkLmMgfCAzNCArKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gIGRy
+aXZlcnMvbWQvZG0uYyAgIHwgIDYgLS0tLS0tCj4gIDIgZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRp
+b25zKCspLCAzNSBkZWxldGlvbnMoLSkKPiAKUmV2aWV3ZWQtYnk6IEhhbm5lcyBSZWluZWNrZSA8
+aGFyZUBzdXNlLmRlPgoKQ2hlZXJzLAoKSGFubmVzCi0tIApEci4gSGFubmVzIFJlaW5lY2tlCQkg
+ICAgICBUZWFtbGVhZCBTdG9yYWdlICYgTmV0d29ya2luZwpoYXJlQHN1c2UuZGUJCQkgICAgICAg
+ICAgICAgICAgICArNDkgOTExIDc0MDUzIDY4OApTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJt
+YW55IEdtYkgsIE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZwpIUkIgMjQ3MTY1IChBRyBN
+w7xuY2hlbiksIEdGOiBGZWxpeCBJbWVuZMO2cmZmZXIKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
+aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
+ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
