@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E778F3DC0
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 02:57:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95DF2F3DC3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2019 02:57:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iStWi-0006Ae-Ad; Fri, 08 Nov 2019 01:57:28 +0000
+	id 1iStWj-0000nJ-9E; Fri, 08 Nov 2019 01:57:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=208d19533=damien.lemoal@wdc.com>)
- id 1iStWg-0006AB-LW
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:26 +0000
+ id 1iStWh-0000mZ-7Q
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DHA6avSzHHP4PvI86+yNyQrV5Tq5McHUDYPuiyO0LT8=; b=D2ynW6ZiHGd4MIL9O/m9PKmcgb
- q8UVB/yIqgBxadp4jmiIxXkjUo53L+y/cNxtKiONM7V29Kenywa8dei3cvSeQAoqS3Dgt03bVWyXN
- zbD0UeGqmjyxp2Az3neZRGJT1nf98kDOO1tsrSBx4woFl0lhdX+gUyYhbv4IsraDEKIM=;
+ bh=frkpvfZPxaVrY3g3VOF1jNxGdnsKUc1CWr+DH/6x80Y=; b=IkeaBLqFzY8KCmOwq8i+wRDbtr
+ boPZZr8qNk8+NRoInPgjSAUMPjZwoPDlCT/61AEXGhvdRFpuCAh8nFHLz7lR3xnzA+xddsjy9tW6a
+ OGa5Oeltb+Bbd5DTPUhp6PmnITZgLun44HzdEo/wYmeJN3GuKJKYrMWbzgwq2bv32kKE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,59 +30,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DHA6avSzHHP4PvI86+yNyQrV5Tq5McHUDYPuiyO0LT8=; b=C/t/UfI5d4OQ46jMQaQRXr+DsW
- OuRTE0OHQ8gpLky6Xn+B82/SHhDZsTLoeT8HRVbD0tNvI8DIcU2X48Dk8yHjNYNGQLHwAR8VfJvDw
- 4WCIr7Un4c+BuYYzNwSIkEXZSIVVBdHiTWiACY4Ueysey2Gi8CFK6Mib0dL6tvaqYnWo=;
+ bh=frkpvfZPxaVrY3g3VOF1jNxGdnsKUc1CWr+DH/6x80Y=; b=ifLQoPNObK0rhCj3OvVXD8f9+Y
+ 8ybCvW5JcYD53uLI9wSKdQw7TAufv0fxfYraNXkpqmEs1o3DZzN+ll3uOXjOD1ZpcQ666QC5GvNez
+ boWJGCFsFiTg0qZIZPJVJ+68xBtkPZDTABGWfHlQ9/nTvbfyN1Au2Y1oguM4CxX6iPdk=;
 Received: from esa2.hgst.iphmx.com ([68.232.143.124])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iStWf-004Ptp-Fg
+ id 1iStWf-005k3N-LF
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Nov 2019 01:57:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1573178287; x=1604714287;
  h=from:to:subject:date:message-id:in-reply-to:references:
  mime-version:content-transfer-encoding;
- bh=eU3UPObloIUO/IHs6JVYQB0lk+QRMMWcTIgAimNInc8=;
- b=DcCeTXRikZtp/MJza5ldyoH9jkvBFo2KgvHnzcCIChOEHtMUrcxYDmcz
- 0JzXpU/68JMw/Bd2DMYPm9qw5+Q4Posyn9uQe9YAGdmAU+EAqZ8WV109B
- GwvlDlNDUCmbVnC5nAhYS5KFu/U/98ks8BnMTQatXxkYA7YQcVDEhfoUx
- RpLCQW8QpcwVUBWvYgP7sexr7w0DDooPYv3jT7bbtsM9S9Me/7ssxIqwF
- HCNbyMCWICBlt/vLK9fiaJkgpCtTIsYye3A0xZpB14S8xiwGhuD6SmV/H
- DaQBeiChbmWOQcebayRuw1IBX6cMOSqKruYKPkmyM2USz9YLofLMfGGXg A==;
-IronPort-SDR: OiOxF1R0Obwgr1QS51DlbFNklKR+0qC00KNSQdPFcVjI29anmwooQ3Uv4989H455bs+d3AU36+
- YOwv8YYcs2EQx5633+Tt4aNbKzwWOFZo+zedBHp/hXCwht+IkMzhhI0wriZTqBesFGkglyFXhb
- HdWDsEjN9DMNuRVslDfCbCYrnF0uBM8rDfsy4ynTOUPiwY1CWYmTNuVrjLVlnK2dEazHAsB933
- u7c9Yrg6FB66ChMJrQPyC3AM6ckzul62AaFSlW9afjW+HhiDrrpDM7o5gdl6tlpK7CyR7kbStY
- V5M=
-X-IronPort-AV: E=Sophos;i="5.68,279,1569254400"; d="scan'208";a="223636915"
+ bh=EnSuzKY/axQCAajAVOcJoJw9dBgmXf5swcshYxE1YWA=;
+ b=ERoFGd5IUZOaIxkYWmICYuHaO4zR+TfTVyzSAFcLenyKoSQQAZ4/PDrs
+ 8gP4x2d8atahlhcKxfh0w/eBGc06ExnNBejB2xOReOii9lij/q8RimaiP
+ BKCjMFqADNEvo49Spu1BEtRnBZy91/XFA5KFwB/0cwCrXbV/9staEMY30
+ LQCgtoAiHoRj7KgiQuKeuMr0aybLZ/qaoMyewEk9dX9AfYU3Omg94l6uH
+ WqzpbQfbH7c/HotkNy5U0bkrlYWtA2+narvGc/5sjAZs3qUCEIQzQp6ZL
+ X7p9QMeUodZYFuFtJbuuq+DJjLTIimuNck+0rS8ZI+lMTIBuPHr7qqEL0 Q==;
+IronPort-SDR: kd4tVJtk8GO/ILZRFAIPQNwIIxnDfjd0E/lZ1Vx1Wb2+6g2iE38Eysbw8eZ61p6YPPdb478IcT
+ Ti9VAXBqR4hpG6ZZ9Z000BUQU+9PgXZDPbJ+YGeCfvR7cwo2YF+7ghiM7SBT8Aw838ypJX3m2F
+ achE5AJkENHzWCstnUqu2OcbeS6X2CzR5SzvXoZMvNj29LnI3PRYGY45H8BfzxYgELnRo6cMj/
+ LFZAGVWUXi7aicM5xgYuWFDOsk39ZwnlnCihEBu/nUekmgZwm9CSXwr2NbjCxxKPZzUaEtEqeX
+ 9bs=
+X-IronPort-AV: E=Sophos;i="5.68,279,1569254400"; d="scan'208";a="223636918"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 08 Nov 2019 09:57:54 +0800
-IronPort-SDR: YhxfispFe7IhvLK5hMH7FKDKTlbF74q8KzmwjzhRv3IEMXJuhUWNPGGpvAyeavJChR0ePgbsUG
- UXdMecu483n1wmNlat3W4CIxhBefbKoP204wYugj4xWxA/UeLLT4mh/SggmjT1sN11jAgaaWA8
- GZTh+e7O8nVujPvFeVTv+cmEef03niKEtH6sJF/Il0/EJJUtTTUE0LPCS97RKvbwqiBdfoNB4h
- 9iOazPOgaaykETneDYqwiwCS0Ea/iGuFbTVAlAwh1Y0seVR0F36s4Bw6l60/saCxwY+EaP3F6i
- Rd2ZwtZf1L8nh9IwlL2NxM/g
+ by ob1.hgst.iphmx.com with ESMTP; 08 Nov 2019 09:57:57 +0800
+IronPort-SDR: zRBPWkwsiQD7j8HWOe7Rm0OejVToKSYt1kTTu07T/yspyJBvikjjOQ92y70g0swhuoldNYto5i
+ osLjmwoRVqWGFwHEX5UV5jgCL+Yg+xMIfaQsDOgeRjUx2U7hhD+0nro4DcZLxrFnYhqOfHN/fF
+ 0vGx/asv3JErVinwoD4RXXJCFUrKJy+XbhkrsPxajF52NJbt5wQ/cQjkxHfo7aUcOaSYHfo+pO
+ nk1DiAsYc/kzN+XPYI3zNC1CCFPgReAGoo+XRJNIxH2FxrN8e5RdW+qvd/swQa8FrbalnPAzbx
+ Gxbu/TdNbm7n/mpNq1JjFG8l
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Nov 2019 17:52:26 -0800
-IronPort-SDR: eEzgyNms9DdIGk7sRIpN96F8FHGQ06z8avuZlFaN3KKigJBu+LO6ibEz+bD6UKDLObxbCGWKrq
- qXxDKKIVequs0bz2Mmbc2gCKQ8RIIFt3dNjcaHsmUhYC81ER/dlQzPyeEwS6AAJbdoFl3NuE3+
- GP1SLuVOOCyvTrPg6u8HiBFq4tLtmeEaOZdfiEtANGNEn2h8kSQL4eVWOKDVK9X3VfpodIFDIH
- 2j9psiwRP02r26em63ZNUVJUGD9fDwUWMsLeCvbu+LVXK/Wg8I1PhoyH5skaS419+eKEEEO0ZC
- hJU=
+ 07 Nov 2019 17:52:28 -0800
+IronPort-SDR: dHLRd3tvtQ98q8DR8MwYs6kFl+6+MwCORXw5XY8UeHeZmmbwW8EmKaU/5UBlQ7GIWI2DFt5/h3
+ pguu0LBgUW+IOJRG5oHEnqORPsQgS+3ttITalhT8LiVC71i3QBCZmPqzGx0gQ0zdTJT1IMPP7f
+ dNvMATD9OHPjcUhT/m49BQjwPkpDKz1gKwrGkyL6bKrb08LFBK9YIDij069nNj95EI/A9jryfZ
+ yTBySx8vV/N6UXprL8jNnLLQKZSRZIWWqWawaUj+itEJuxVNmwPXy4zdUaSOoJrr87VuDOSoWt
+ K5s=
 WDCIronportException: Internal
 Received: from washi.fujisawa.hgst.com ([10.149.53.254])
- by uls-op-cesaip01.wdc.com with ESMTP; 07 Nov 2019 17:57:15 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 Nov 2019 17:57:17 -0800
 From: Damien Le Moal <damien.lemoal@wdc.com>
 To: linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
  linux-scsi@vger.kernel.org,
  "Martin K . Petersen" <martin.petersen@oracle.com>, dm-devel@redhat.com,
  Mike Snitzer <snitzer@redhat.com>, linux-f2fs-devel@lists.sourceforge.net,
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
-Date: Fri,  8 Nov 2019 10:57:00 +0900
-Message-Id: <20191108015702.233102-8-damien.lemoal@wdc.com>
+Date: Fri,  8 Nov 2019 10:57:01 +0900
+Message-Id: <20191108015702.233102-9-damien.lemoal@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191108015702.233102-1-damien.lemoal@wdc.com>
 References: <20191108015702.233102-1-damien.lemoal@wdc.com>
@@ -102,8 +102,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iStWf-004Ptp-Fg
-Subject: [f2fs-dev] [PATCH 7/9] null_blk: Add zone_nr_conv to features
+X-Headers-End: 1iStWf-005k3N-LF
+Subject: [f2fs-dev] [PATCH 8/9] scsi: sd_zbc: Cleanup
+ sd_zbc_alloc_report_buffer()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,29 +120,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-For a null_blk device with zoned mode enabled, the number of
-conventional zones can be configured through configfs with the
-zone_nr_conv parameter. Add this missing parameter in the features
-string.
+There is no need to arbitrarily limit the size of a report zone to the
+number of zones defined by SD_ZBC_REPORT_MAX_ZONES. Rather, simply
+calculate the report buffer size needed for the requested number of
+zones without exceeding the device total number of zones. This buffer
+size limitation to the hardware maximum transfer size and page mapping
+capabilities is kept unchanged. Starting with this initial buffer size,
+the allocation is optimized by iterating over decreasing buffer size
+until the allocation succeeds. This ensures forward progress for zone
+reports and avoids failures of zones revalidation under memory pressure.
+
+While at it, also replace the hard coded 512 B sector size with the
+SECTOR_SIZE macro.
 
 Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
 ---
- drivers/block/null_blk_main.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/scsi/sd_zbc.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/block/null_blk_main.c b/drivers/block/null_blk_main.c
-index 2687eb36441c..27fb34d7da31 100644
---- a/drivers/block/null_blk_main.c
-+++ b/drivers/block/null_blk_main.c
-@@ -467,7 +467,7 @@ nullb_group_drop_item(struct config_group *group, struct config_item *item)
- 
- static ssize_t memb_group_features_show(struct config_item *item, char *page)
- {
--	return snprintf(page, PAGE_SIZE, "memory_backed,discard,bandwidth,cache,badblocks,zoned,zone_size\n");
-+	return snprintf(page, PAGE_SIZE, "memory_backed,discard,bandwidth,cache,badblocks,zoned,zone_size,zone_nr_conv\n");
+diff --git a/drivers/scsi/sd_zbc.c b/drivers/scsi/sd_zbc.c
+index 7c4690f26698..f191af15de1b 100644
+--- a/drivers/scsi/sd_zbc.c
++++ b/drivers/scsi/sd_zbc.c
+@@ -104,11 +104,6 @@ static int sd_zbc_do_report_zones(struct scsi_disk *sdkp, unsigned char *buf,
+ 	return 0;
  }
  
- CONFIGFS_ATTR_RO(memb_group_, features);
+-/*
+- * Maximum number of zones to get with one report zones command.
+- */
+-#define SD_ZBC_REPORT_MAX_ZONES		8192U
+-
+ /**
+  * Allocate a buffer for report zones reply.
+  * @sdkp: The target disk
+@@ -138,17 +133,22 @@ static void *sd_zbc_alloc_report_buffer(struct scsi_disk *sdkp,
+ 	 * sure that the allocated buffer can always be mapped by limiting the
+ 	 * number of pages allocated to the HBA max segments limit.
+ 	 */
+-	nr_zones = min(nr_zones, SD_ZBC_REPORT_MAX_ZONES);
+-	bufsize = roundup((nr_zones + 1) * 64, 512);
++	nr_zones = min(nr_zones, sdkp->nr_zones);
++	bufsize = roundup((nr_zones + 1) * 64, SECTOR_SIZE);
+ 	bufsize = min_t(size_t, bufsize,
+ 			queue_max_hw_sectors(q) << SECTOR_SHIFT);
+ 	bufsize = min_t(size_t, bufsize, queue_max_segments(q) << PAGE_SHIFT);
+ 
+-	buf = vzalloc(bufsize);
+-	if (buf)
+-		*buflen = bufsize;
++	while (bufsize >= SECTOR_SIZE) {
++		buf = vzalloc(bufsize);
++		if (buf) {
++			*buflen = bufsize;
++			return buf;
++		}
++		bufsize >>= 1;
++	}
+ 
+-	return buf;
++	return NULL;
+ }
+ 
+ /**
 -- 
 2.23.0
 
