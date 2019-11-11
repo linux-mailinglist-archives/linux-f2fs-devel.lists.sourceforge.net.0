@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09208F6D35
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2019 04:14:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFEABF6D49
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2019 04:27:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iU09m-0001Hl-B4; Mon, 11 Nov 2019 03:14:22 +0000
+	id 1iU0Mk-0000e3-Lf; Mon, 11 Nov 2019 03:27:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iU09k-0001Ha-U7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 03:14:20 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iU0Mh-0000dq-Rb
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 03:27:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fVoBBTreC1FuNjIDG49uQ3xEcZTvYtBJPsE0RSiVMRs=; b=OGF7Jqm76XiXlCDQ95WCGohCrr
- QZWjNJJQh8Sb5HTQaW8JzEs2hqbjjoiTw+wMYn5VhQVXnRnvbLbdfQ1cNlOuOxLm/x4PRVKBZU3z6
- jRVefMtl3N5+BwdpfJkCmWeg0X6nFruiKyIO+hzF8qcQ0OhLl99jKuzTSBMvHz8sXtEE=;
+ bh=+L78Mltzyj9ORmStfm1k/uQNF/aS3UHHYwxgnONCCfY=; b=UZf4jtyClrixQIhfXRAWCR5HxG
+ knr/4IU6QIqdlwXcc9CilLQG4zjAj7EcbgDm+b//ysz6GE6VTaSO8CsUK4Hgx36h+o/Ng2XE75JOp
+ QuiZyDBf6xJ5oiWFZ7jhrLTo1ii9oHpTdo82ykVRWOJNz/JwJNIR4QoHcIJt8s0wS7gk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fVoBBTreC1FuNjIDG49uQ3xEcZTvYtBJPsE0RSiVMRs=; b=K/1QhIWu2n9jwD6L6lm2BqIjES
- mRjLlf8beWC9zLdUOXe9g2aeJMqqA2UNIdJBT7HFGs8p6f5Wop9JMWwPqbyRpmDrnj92fVzqm4ht5
- B3X/+JzFvRNvtcrQfCw62bd/fJZ7jom39MQ8i8I6CYGRmQ0s6go6cAIOfgsjBGhyxPrY=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=+L78Mltzyj9ORmStfm1k/uQNF/aS3UHHYwxgnONCCfY=; b=YRHEDf1k08QqBdtYXQ5V8238lG
+ hAC0Fd5uSlpVMIN2Cl8sqYYXfsLD7uJML9Byh00xodHkUhKp9I3L69fGz24y9UWSnUfyamNgcUwYB
+ FZPYT2+VC1yEZ/Bcb4FCjFZ9tfE+xYqOZw0dV35vwk9UsjdY6qaS36Cw3tgdwEt91fJk=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iU09i-00BNo9-3m
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 03:14:20 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id E320619F068122D4CC8B;
- Mon, 11 Nov 2019 11:14:08 +0800 (CST)
+ id 1iU0Me-00EHn3-K9
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 03:27:43 +0000
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id E85D0F17D45CDA3F534E;
+ Mon, 11 Nov 2019 11:27:32 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 11 Nov
- 2019 11:14:06 +0800
+ (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 11 Nov
+ 2019 11:27:27 +0800
 To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-References: <20191028065512.27876-1-shinichiro.kawasaki@wdc.com>
- <20191028065512.27876-8-shinichiro.kawasaki@wdc.com>
- <a7c0f0e1-390f-636d-ac96-7644ecf29779@huawei.com>
- <20191106094510.6n3mntg5o3rz5frr@shindev.dhcp.fujisawa.hgst.com>
+References: <20191028065801.28220-1-shinichiro.kawasaki@wdc.com>
+ <20191028065801.28220-3-shinichiro.kawasaki@wdc.com>
+ <673218f1-ced2-132e-a91a-7554b6aad1d9@huawei.com>
+ <20191108042707.3xzzaiojvuhhrbe6@shindev.dhcp.fujisawa.hgst.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <74c119b6-a524-10ad-7093-87adcce3fb2d@huawei.com>
-Date: Mon, 11 Nov 2019 11:14:08 +0800
+Message-ID: <df512791-0ef5-37e2-1c8b-bd893635b90d@huawei.com>
+Date: Mon, 11 Nov 2019 11:27:27 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191106094510.6n3mntg5o3rz5frr@shindev.dhcp.fujisawa.hgst.com>
+In-Reply-To: <20191108042707.3xzzaiojvuhhrbe6@shindev.dhcp.fujisawa.hgst.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -64,9 +64,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iU09i-00BNo9-3m
-Subject: Re: [f2fs-dev] [PATCH v6 7/8] fsck: Check write pointer consistency
- of open zones
+X-Headers-End: 1iU0Me-00EHn3-K9
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: Check write pointer consistency
+ of non-open zones
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,407 +85,178 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/11/6 17:45, Shinichiro Kawasaki wrote:
-> On Nov 05, 2019 / 19:06, Chao Yu wrote:
->> On 2019/10/28 14:55, Shin'ichiro Kawasaki wrote:
->>> On sudden f2fs shutdown, write pointers of zoned block devices can go
->>> further but f2fs meta data keeps current segments at positions before the
->>> write operations. After remounting the f2fs, this inconsistency causes
->>> write operations not at write pointers and "Unaligned write command"
->>> error is reported.
+On 2019/11/8 12:27, Shinichiro Kawasaki wrote:
+> On Nov 05, 2019 / 20:22, Chao Yu wrote:
+>> On 2019/10/28 14:58, Shin'ichiro Kawasaki wrote:
+>>> To catch f2fs bugs in write pointer handling code for zoned block
+>>> devices, check write pointers of non-open zones that current segments do
+>>> not point to. Do this check at mount time, after the fsync data recovery
+>>> and current segments' write pointer consistency fix. Check two items
+>>> comparing write pointers with valid block maps in SIT.
 >>>
->>> To avoid the error, have f2fs.fsck check consistency of write pointers
->>> of open zones that current segments point to. Compare each current
->>> segment's position and the write pointer position of the open zone. If
->>> inconsistency is found and 'fix_on' flag is set, assign a new zone to the
->>> current segment and check the newly assigned zone has write pointer at
->>> the zone start. Leave the original zone as is to keep data recorded in
->>> it.
+>>> The first item is check for zones with no valid blocks. When there is no
+>>> valid blocks in a zone, the write pointer should be at the start of the
+>>> zone. If not, next write operation to the zone will cause unaligned write
+>>> error. If write pointer is not at the zone start, make mount fail and ask
+>>> users to run fsck.
 >>>
->>> To care about fsync data, refer each seg_entry's ckpt_valid_map to get
->>> the last valid block in the zone. If the last valid block is beyond the
->>> current segments position, fsync data exits in the zone. In case fsync
->>> data exists, do not assign a new zone to the current segment not to lose
->>> the fsync data. It is expected that the kernel replay the fsync data and
->>> fix the write pointer inconsistency at mount time.
+>>> The second item is check between the write pointer position and the last
+>>> valid block in the zone. It is unexpected that the last valid block
+>>> position is beyond the write pointer. In such a case, report as the bug.
+>>> Fix is not required for such zone, because the zone is not selected for
+>>> next write operation until the zone get discarded.
 >>>
->>> Also check consistency between write pointer of the zone the current
->>> segment points to with valid block maps of the zone. If the last valid
->>> block is beyond the write pointer position, report to indicate f2fs bug.
->>> If 'fix_on' flag is set, assign a new zone to the current segment.
->>>
->>> When inconsistencies are found, turn on 'bug_on' flag in fsck_verify() to
->>> ask users to fix them or not. When inconsistencies get fixed, turn on
->>> 'force' flag in fsck_verify() to enforce fixes in following checks.
->>>
->>> This check and fix is done twice. The first is done at the beginning of
->>> do_fsck() function so that other fixes can reflect the current segment
->>> modification. The second is done in fsck_verify() to reflect updated meta
->>> data by other fixes.
+>>> Also move a constant F2FS_REPORT_ZONE from super.c to f2fs.h to use it
+>>> in segment.c also.
 >>>
 >>> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 >>> ---
->>>  fsck/f2fs.h  |   5 ++
->>>  fsck/fsck.c  | 154 +++++++++++++++++++++++++++++++++++++++++++++++++++
->>>  fsck/fsck.h  |   3 +
->>>  fsck/main.c  |   2 +
->>>  fsck/mount.c |  49 +++++++++++++++-
->>>  5 files changed, 212 insertions(+), 1 deletion(-)
+>>>  fs/f2fs/f2fs.h    |   3 +
+>>>  fs/f2fs/segment.c | 147 ++++++++++++++++++++++++++++++++++++++++++++++
+>>>  fs/f2fs/super.c   |  11 ++--
+>>>  3 files changed, 157 insertions(+), 4 deletions(-)
 >>>
->>> diff --git a/fsck/f2fs.h b/fsck/f2fs.h
->>> index 399c74d..07513cb 100644
->>> --- a/fsck/f2fs.h
->>> +++ b/fsck/f2fs.h
->>> @@ -429,6 +429,11 @@ static inline block_t __end_block_addr(struct f2fs_sb_info *sbi)
->>>  #define GET_BLKOFF_FROM_SEG0(sbi, blk_addr)				\
->>>  	(GET_SEGOFF_FROM_SEG0(sbi, blk_addr) & (sbi->blocks_per_seg - 1))
+>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>> index 0216282c5b80..e8524be17852 100644
+>>> --- a/fs/f2fs/f2fs.h
+>>> +++ b/fs/f2fs/f2fs.h
+>>> @@ -3137,6 +3137,7 @@ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
+>>>  			unsigned int val, int alloc);
+>>>  void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
+>>>  int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi, bool check_only);
+>>> +int f2fs_check_write_pointer(struct f2fs_sb_info *sbi);
+>>>  int f2fs_build_segment_manager(struct f2fs_sb_info *sbi);
+>>>  void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
+>>>  int __init f2fs_create_segment_manager_caches(void);
+>>> @@ -3610,6 +3611,8 @@ static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
 >>>  
->>> +#define GET_SEC_FROM_SEG(sbi, segno)					\
->>> +	((segno) / (sbi)->segs_per_sec)
->>> +#define GET_SEG_FROM_SEC(sbi, secno)					\
->>> +	((secno) * (sbi)->segs_per_sec)
->>> +
->>>  #define FREE_I_START_SEGNO(sbi)						\
->>>  	GET_SEGNO_FROM_SEG0(sbi, SM_I(sbi)->main_blkaddr)
->>>  #define GET_R2L_SEGNO(sbi, segno)	(segno + FREE_I_START_SEGNO(sbi))
->>> diff --git a/fsck/fsck.c b/fsck/fsck.c
->>> index 2ae3bd5..e0eda4e 100644
->>> --- a/fsck/fsck.c
->>> +++ b/fsck/fsck.c
->>> @@ -2181,6 +2181,125 @@ static void fix_checkpoints(struct f2fs_sb_info *sbi)
->>>  	fix_checkpoint(sbi);
+>>>  	return test_bit(zno, FDEV(devi).blkz_seq);
 >>>  }
+>>> +
+>>> +#define F2FS_REPORT_NR_ZONES   4096
+>>>  #endif
 >>>  
->>> +#ifdef HAVE_LINUX_BLKZONED_H
->>> +
->>> +/*
->>> + * Refer valid block map and return offset of the last valid block in the zone.
->>> + * Obtain valid block map from SIT and fsync data.
->>> + * If there is no valid block in the zone, return -1.
->>> + */
->>> +static int last_vblk_off_in_zone(struct f2fs_sb_info *sbi,
->>> +				 unsigned int zone_segno)
+>>>  static inline bool f2fs_hw_should_discard(struct f2fs_sb_info *sbi)
+>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>> index 2b6e637dd6d3..20ef5b3705e1 100644
+>>> --- a/fs/f2fs/segment.c
+>>> +++ b/fs/f2fs/segment.c
+>>> @@ -4333,6 +4333,131 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+>>>  
+>>>  #ifdef CONFIG_BLK_DEV_ZONED
+>>>  
+>>> +static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+>>> +				    struct f2fs_dev_info *fdev,
+>>> +				    struct blk_zone *zone)
 >>> +{
->>> +	unsigned int s;
->>> +	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
+>>> +	unsigned int s, wp_segno, wp_blkoff, zone_secno, zone_segno, segno;
+>>> +	block_t zone_block, wp_block, last_valid_block, b;
+>>> +	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
+>>> +	int i;
 >>> +	struct seg_entry *se;
->>> +	block_t b;
->>> +	int ret = -1;
 >>> +
->>> +	for (s = 0; s < segs_per_zone; s++) {
->>> +		se = get_seg_entry(sbi, zone_segno + s);
+>>> +	wp_block = fdev->start_blk + (zone->wp >> log_sectors_per_block);
+>>> +	wp_segno = GET_SEGNO(sbi, wp_block);
+>>> +	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
+>>> +	zone_block = fdev->start_blk + (zone->start >> log_sectors_per_block);
+>>> +	zone_segno = GET_SEGNO(sbi, zone_block);
+>>> +	zone_secno = GET_SEC_FROM_SEG(sbi, zone_segno);
 >>> +
->>> +		/*
->>> +		 * Refer not cur_valid_map but ckpt_valid_map which reflects
->>> +		 * fsync data.
->>> +		 */
->>> +		ASSERT(se->ckpt_valid_map);
->>> +		for (b = 0; b < sbi->blocks_per_seg; b++)
->>> +			if (f2fs_test_bit(b, (const char*)se->ckpt_valid_map))
->>> +				ret = b + (s << sbi->log_blocks_per_seg);
->>
->> Minor thing, I guess we only need to find last valid block in target zone?
->>
->> int s, b;
->>
->> for (s = segs_per_zone - 1; s >= 0; s--) {
->> 	for (b = sbi->blocks_per_seg - 1; b >= 0; b--)
->> 		if (f2fs_test_bit(b, (const char*)se->ckpt_valid_map)) {
->> 			ret = b + (s << sbi->log_blocks_per_seg);
->> 			break;
->> 		}
->> }
-> 
-> Yes, reveresed search is the better. Will modify the code as suggested.
-> 
->>
->>> +	}
->>> +
->>> +	return ret;
->>> +}
->>> +
->>> +static int check_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
->>> +{
->>> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>> +	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
->>> +	struct blk_zone blkz;
->>> +	block_t cs_block, wp_block, zone_last_vblock;
->>> +	u_int64_t cs_sector, wp_sector;
->>> +	int i, ret;
->>> +	unsigned int zone_segno;
->>> +	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
->>> +
->>> +	/* get the device the curseg points to */
->>> +	cs_block = START_BLOCK(sbi, curseg->segno) + curseg->next_blkoff;
->>> +	for (i = 0; i < MAX_DEVICES; i++) {
->>> +		if (!c.devices[i].path)
->>> +			break;
->>> +		if (c.devices[i].start_blkaddr <= cs_block &&
->>> +		    cs_block <= c.devices[i].end_blkaddr)
->>> +			break;
->>> +	}
->>> +
->>> +	if (i >= MAX_DEVICES)
->>> +		return -EINVAL;
->>> +
->>> +	/* get write pointer position of the zone the curseg points to */
->>> +	cs_sector = (cs_block - c.devices[i].start_blkaddr)
->>> +		<< log_sectors_per_block;
->>> +	ret = f2fs_report_zone(i, cs_sector, &blkz);
->>> +	if (ret)
->>> +		return ret;
->>> +
->>> +	if (blk_zone_type(&blkz) != BLK_ZONE_TYPE_SEQWRITE_REQ)
+>>> +	if (zone_segno >= MAIN_SEGS(sbi))
 >>> +		return 0;
->>> +
->>> +	/* check consistency between the curseg and the write pointer */
->>> +	wp_block = c.devices[i].start_blkaddr +
->>> +		(blk_zone_wp_sector(&blkz) >> log_sectors_per_block);
->>> +	wp_sector = blk_zone_wp_sector(&blkz);
->>> +
->>> +	if (cs_sector == wp_sector)
->>> +		return 0;
->>> +
->>> +	if (cs_sector > wp_sector) {
->>> +		MSG(0, "Inconsistent write pointer with curseg %d: "
->>> +		    "curseg %d[0x%x,0x%x] > wp[0x%x,0x%x]\n",
->>> +		    type, type, curseg->segno, curseg->next_blkoff,
->>> +		    GET_SEGNO(sbi, wp_block), OFFSET_IN_SEG(sbi, wp_block));
->>> +		fsck->chk.wp_inconsistent_zones++;
->>> +		return -EINVAL;
->>> +	}
->>> +
->>> +	MSG(0, "Write pointer goes advance from curseg %d: "
->>> +	    "curseg %d[0x%x,0x%x] wp[0x%x,0x%x]\n",
->>> +	    type, type, curseg->segno, curseg->next_blkoff,
->>> +	    GET_SEGNO(sbi, wp_block), OFFSET_IN_SEG(sbi, wp_block));
->>> +
->>> +	zone_segno = GET_SEG_FROM_SEC(sbi,
->>> +				      GET_SEC_FROM_SEG(sbi, curseg->segno));
->>> +	zone_last_vblock = START_BLOCK(sbi, zone_segno) +
->>> +		last_vblk_off_in_zone(sbi, zone_segno);
 >>> +
 >>> +	/*
->>> +	 * If fsync data exists between the curseg and the last valid block,
->>> +	 * it is not an error to fix. Leave it for kernel to recover later.
+>>> +	 * If a curseg points to the zone, skip check because the zone
+>>> +	 * may have fsync data that valid block map does not mark.
+>>
+>> None-curseg zone may also contain fsynced data as well? Maybe we can only verify
+>> on clean image or recovered image?
+> 
+> Right. This function for none-curseg zones should be called after fsync data
+
+If so, any place to check recovery is done? You know, user can choose to skip
+recovery by using disable_roll_forward/norecovery mount option.
+
+> recovery. I think my comment above is confusing. The point is that this
+> function is for none-curseg zones, and other function covers check for curseg
+> zones. Let me revise the comment as follows:
+> 
+>      Skip check of zones cursegs point to, since fix_curseg_write_pointer()
+>      checks them.
+> 
+>>
 >>> +	 */
->>> +	if (cs_block <= zone_last_vblock) {
+>>> +	for (i = 0; i < NO_CHECK_TYPE; i++)
+>>> +		if (zone_secno == GET_SEC_FROM_SEG(sbi,
+>>> +						   CURSEG_I(sbi, i)->segno))
+>>> +			return 0;
+>>> +
+>>> +	/*
+>>> +	 * Get last valid block of the zone.
+>>> +	 */
+>>> +	last_valid_block = zone_block - 1;
+>>> +	for (s = 0; s < sbi->segs_per_sec; s++) {
+>>> +		segno = zone_segno + s;
+>>> +		se = get_seg_entry(sbi, segno);
+>>> +		for (b = 0; b < sbi->blocks_per_seg; b++)
+>>> +			if (f2fs_test_bit(b, se->cur_valid_map))
+>>> +				last_valid_block = START_BLOCK(sbi, segno) + b;
+>>> +	}
 >>
->> According to above comments, should condition be?
+>> We search bitmap table reversedly.
+> 
+> Yes, will reverse the loops in the next post.
+> 
 >>
->> if (cs_block < zone_last_vblock && zone_last_vblock <= wp_block)
+>>> +
+>>> +	/*
+>>> +	 * If last valid block is beyond the write pointer, report the
+>>> +	 * inconsistency. This inconsistency does not cause write error
+>>> +	 * because the zone will not be selected for write operation until
+>>> +	 * it get discarded. Just report it.
+>>> +	 */
+>>> +	if (last_valid_block >= wp_block) {
+>>> +		f2fs_notice(sbi, "Valid block beyond write pointer: "
+>>> +			    "valid block[0x%x,0x%x] wp[0x%x,0x%x]",
+>>> +			    GET_SEGNO(sbi, last_valid_block),
+>>> +			    GET_BLKOFF_FROM_SEG0(sbi, last_valid_block),
+>>> +			    wp_segno, wp_blkoff);
+>>> +		return 0;
+>>> +	}
+>>> +
+>>> +	/*
+>>> +	 * If there is no valid block in the zone and if write pointer is
+>>> +	 * not at zone start, report the error to run fsck and mark the
+>>> +	 * zone as used.
+>>> +	 */
+>>> +	if (last_valid_block + 1 == zone_block && zone->wp != zone->start) {
+>>> +		f2fs_notice(sbi,
+>>> +			    "Zone without valid block has non-zero write "
+>>> +			    "pointer, run fsck to fix: wp[0x%x,0x%x]",
+>>> +			    wp_segno, wp_blkoff);
+>>> +		__set_inuse(sbi, zone_segno);
 >>
+>> Why do we need to set it inused? if this is necessary, we need to call this
+>> under free_i->segmap_lock.
 > 
-> To be precise, cs_block points to curseg->next_blkoff, which is the block
-> curseg will write in the next write request. Then, if cs_block equals to
-> zone_last_vblock, it means that the block curseg->next_blkoff points to
-> already have valid block and fsync data. Then, comparator between cs_block
-> and zone_last_vblock should be "<=".
-
-You're right.
-
+> I once thought that I need to set inconsistent zones in use, because I observed
+> that write operation happened after zone consistency check failure (in
+> fill_super() after free_meta label). It caused unaligned writer error. To avoid
+> it, I added __set_inuse() to keep inconsistent zones not selected for the write
+> target.
 > 
-> I agree that it is the better to check zone_last_vblock with wp_block.
-> wp_block corresponds to the write pointer position that next write will be
-> made. It wp_block equals to zone_last_vblock, it means that unexpected data
-> is written beyond the write pointer. Then, comparator should be "<" between
-> zone_last_vblock and wp_block.
+> But that write operation happened because the write pointer fix curseg was done
+> out of the SBI_POR_DOING protection. Now I learned SBI_POR_DOING can protect
+> write operation, and I don't think set in use for the inconsistent zones is
+> required. Will remove __set_inuse() calls from this patch and the first patch.
 
-Oh, so wp has almost the same meaning to .next_blkoff in f2fs, it points to next
-free block/sector. I will keep that in mind.
-
-> 
-> In short, I suggest the condition check below as the good one.
-> 
-> if (cs_block <= zone_last_vblock && zone_last_vblock < wp_block)
-
-It's fine to me. :)
+Also f2fs_stop_checkpoint() will stop any data/node/meta writeback, so it'd be
+safe here.
 
 Thanks,
 
 > 
->>> +		MSG(0, "Curseg has fsync data: curseg %d[0x%x,0x%x] "
->>> +		    "last valid block in zone[0x%x,0x%x]\n",
->>> +		    type, curseg->segno, curseg->next_blkoff,
->>> +		    GET_SEGNO(sbi, zone_last_vblock),
->>> +		    OFFSET_IN_SEG(sbi, zone_last_vblock));
->>> +		return 0;
->>> +	}
->>> +
->>> +	fsck->chk.wp_inconsistent_zones++;
->>> +	return -EINVAL;
->>> +}
->>> +
->>> +#else
->>> +
->>> +static int check_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
->>> +{
->>> +	return 0;
->>> +}
->>> +
->>> +#endif
->>> +
->>>  int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
->>>  {
->>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>> @@ -2209,6 +2328,10 @@ int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
->>>  			return -EINVAL;
->>>  		}
->>>  	}
->>> +
->>> +	if (c.zoned_model == F2FS_ZONED_HM)
->>> +		return check_curseg_write_pointer(sbi, type);
->>> +
->>>  	return 0;
->>>  }
->>>  
->>> @@ -2628,6 +2751,23 @@ out:
->>>  	return cnt;
->>>  }
->>>  
->>> +/*
->>> + * Check and fix consistency with write pointers at the beginning of
->>> + * fsck so that following writes by fsck do not fail.
->>> + */
->>> +void fsck_chk_and_fix_write_pointers(struct f2fs_sb_info *sbi)
->>> +{
->>> +	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
->>> +
->>> +	if (c.zoned_model != F2FS_ZONED_HM)
->>> +		return;
->>> +
->>> +	if (check_curseg_offsets(sbi) && c.fix_on) {
->>> +		fix_curseg_info(sbi);
->>> +		fsck->chk.wp_fixed = 1;
->>> +	}
->>> +}
->>> +
->>>  int fsck_chk_curseg_info(struct f2fs_sb_info *sbi)
->>>  {
->>>  	struct curseg_info *curseg;
->>> @@ -2678,6 +2818,20 @@ int fsck_verify(struct f2fs_sb_info *sbi)
->>>  
->>>  	printf("\n");
->>>  
->>> +	if (c.zoned_model == F2FS_ZONED_HM) {
->>> +		printf("[FSCK] Write pointers consistency                    ");
->>> +		if (fsck->chk.wp_inconsistent_zones == 0x0) {
->>> +			printf(" [Ok..]\n");
->>> +		} else {
->>> +			printf(" [Fail] [0x%x]\n",
->>> +			       fsck->chk.wp_inconsistent_zones);
->>> +			c.bug_on = 1;
->>> +		}
->>> +
->>> +		if (fsck->chk.wp_fixed && c.fix_on)
->>> +			force = 1;
->>> +	}
->>> +
->>>  	if (c.feature & cpu_to_le32(F2FS_FEATURE_LOST_FOUND)) {
->>>  		for (i = 0; i < fsck->nr_nat_entries; i++)
->>>  			if (f2fs_test_bit(i, fsck->nat_area_bitmap) != 0)
->>> diff --git a/fsck/fsck.h b/fsck/fsck.h
->>> index 75052d8..c4432e8 100644
->>> --- a/fsck/fsck.h
->>> +++ b/fsck/fsck.h
->>> @@ -80,6 +80,8 @@ struct f2fs_fsck {
->>>  		u32 multi_hard_link_files;
->>>  		u64 sit_valid_blocks;
->>>  		u32 sit_free_segs;
->>> +		u32 wp_fixed;
->>> +		u32 wp_inconsistent_zones;
->>>  	} chk;
->>>  
->>>  	struct hard_link_node *hard_link_list_head;
->>> @@ -162,6 +164,7 @@ int fsck_chk_inline_dentries(struct f2fs_sb_info *, struct f2fs_node *,
->>>  		struct child_info *);
->>>  void fsck_chk_checkpoint(struct f2fs_sb_info *sbi);
->>>  int fsck_chk_meta(struct f2fs_sb_info *sbi);
->>> +void fsck_chk_and_fix_write_pointers(struct f2fs_sb_info *);
->>>  int fsck_chk_curseg_info(struct f2fs_sb_info *);
->>>  void pretty_print_filename(const u8 *raw_name, u32 len,
->>>  			   char out[F2FS_PRINT_NAMELEN], int enc_name);
->>> diff --git a/fsck/main.c b/fsck/main.c
->>> index 8c62a14..9a7d499 100644
->>> --- a/fsck/main.c
->>> +++ b/fsck/main.c
->>> @@ -602,6 +602,8 @@ static void do_fsck(struct f2fs_sb_info *sbi)
->>>  
->>>  	print_cp_state(flag);
->>>  
->>> +	fsck_chk_and_fix_write_pointers(sbi);
->>> +
->>>  	fsck_chk_curseg_info(sbi);
->>>  
->>>  	if (!c.fix_on && !c.bug_on) {
->>> diff --git a/fsck/mount.c b/fsck/mount.c
->>> index 2979865..5085e6c 100644
->>> --- a/fsck/mount.c
->>> +++ b/fsck/mount.c
->>> @@ -2465,6 +2465,52 @@ void set_section_type(struct f2fs_sb_info *sbi, unsigned int segno, int type)
->>>  	}
->>>  }
->>>  
->>> +#ifdef HAVE_LINUX_BLKZONED_H
->>> +
->>> +static bool write_pointer_at_zone_start(struct f2fs_sb_info *sbi,
->>> +					unsigned int zone_segno)
->>> +{
->>> +	u_int64_t sector;
->>> +	struct blk_zone blkz;
->>> +	block_t block = START_BLOCK(sbi, zone_segno);
->>> +	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
->>> +	int ret, j;
->>> +
->>> +	if (c.zoned_model != F2FS_ZONED_HM)
->>> +		return true;
->>> +
->>> +	for (j = 0; j < MAX_DEVICES; j++) {
->>> +		if (!c.devices[j].path)
->>> +			break;
->>> +		if (c.devices[j].start_blkaddr <= block &&
->>> +		    block <= c.devices[j].end_blkaddr)
->>> +			break;
->>> +	}
->>> +
->>> +	if (j >= MAX_DEVICES)
->>> +		return false;
->>> +
->>> +	sector = (block - c.devices[j].start_blkaddr) << log_sectors_per_block;
->>> +	ret = f2fs_report_zone(j, sector, &blkz);
->>> +	if (ret)
->>> +		return false;
->>> +
->>> +	if (blk_zone_type(&blkz) != BLK_ZONE_TYPE_SEQWRITE_REQ)
->>> +		return true;
->>> +
->>> +	return blk_zone_sector(&blkz) == blk_zone_wp_sector(&blkz);
->>> +}
->>> +
->>> +#else
->>> +
->>> +static bool write_pointer_at_zone_start(struct f2fs_sb_info *sbi,
->>> +					unsigned int zone_segno)
->>> +{
->>> +	return true;
->>> +}
->>> +
->>> +#endif
->>> +
->>>  int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left, int want_type, bool new_sec)
->>>  {
->>>  	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
->>> @@ -2517,7 +2563,8 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left, int want_t
->>>  					break;
->>>  			}
->>>  
->>> -			if (i == sbi->segs_per_sec) {
->>> +			if (i == sbi->segs_per_sec &&
->>> +			    write_pointer_at_zone_start(sbi, segno)) {
->>>  				set_section_type(sbi, segno, want_type);
->>>  				return 0;
->>>  			}
->>>
+> Thanks!
 > 
 > --
 > Best Regards,
