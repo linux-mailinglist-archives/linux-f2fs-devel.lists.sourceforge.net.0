@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63C00F6CEE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2019 03:39:59 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E443F6CEC
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2019 03:39:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iTzcU-000870-5Z; Mon, 11 Nov 2019 02:39:58 +0000
+	id 1iTzcR-0006yO-3M; Mon, 11 Nov 2019 02:39:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=2117e6735=damien.lemoal@wdc.com>)
- id 1iTzcR-00086Z-0v
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 02:39:55 +0000
+ id 1iTzcP-0006xp-K7
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 02:39:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1p84Dzt7aLKcIhCgP+9kMxrcFtIYRUYKyxQAvleM/y8=; b=maWLfXZi/+2NTivaWOlDM7UNiB
- KiNIEUu6LSSpam0easS7t8AO9E8JyURHrAaEz6yrWl2n+9rALPetopwWkPwf30Mn508TLjyq/gOnY
- AQeeSA7ekL62maDqMwpelHeWbvm5Z7BTeMbkUyEZ5hUczhUtdaecC1WVIHwokWTHlqcM=;
+ bh=FrkehnrfYHhE8jYuRR7S/GmUSrPV+VhpPYfLdPPp1Yo=; b=VY8pxq0tNGKRYYLQTO3j3rMvWI
+ DlatZlzYs9ByRxMAuYJiY38VRloCSaWcMD+UZOn3vFE6GWZTpRzMyubcCsj4MR7jveTvbTb9S5/Bo
+ rD/rebYRirZXTO3pElNfu8Fw+OtlxZUj4sqR6OTdmmIW/7kT8HJ9asNHZYU2ztnmfJSU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,59 +30,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1p84Dzt7aLKcIhCgP+9kMxrcFtIYRUYKyxQAvleM/y8=; b=EUMKGFomNVYJh/zSsK/qVeomrr
- hnczlVqXl4+0GplcRkeKQFeh66o14RumB63mKFRorht6SomNHaJ6sK9GXMXv78dE6n4FwT1cOmctA
- zmoHCt9KrNiykzgkIykc8CaLcEuawpSTOZk4Ot3YznOZeaez4hC7iyj4N8NVG0OG3cio=;
+ bh=FrkehnrfYHhE8jYuRR7S/GmUSrPV+VhpPYfLdPPp1Yo=; b=QXPmvIotmUL1Wh3gY99WAohyRP
+ /bcWWrEpP8NyXj3BC29D5z9Afg5MS2pcdk0ZY+rT3y1Ovr7dAGFcfwKBnfNEQ5MpkHP0WnJOumtSk
+ 8EBDjgmJuo0fSh5tOhlUxYG9RuHKqsj6WDhm7J+XdXYU4QlmTLwlGtPSkF5Or+Bmjlf8=;
 Received: from esa2.hgst.iphmx.com ([68.232.143.124])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iTzcN-00EDq9-9x
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 02:39:54 +0000
+ id 1iTzcO-00BS4R-Bw
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Nov 2019 02:39:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1573440033; x=1604976033;
+ t=1573440035; x=1604976035;
  h=from:to:subject:date:message-id:in-reply-to:references:
  mime-version:content-transfer-encoding;
- bh=utVEkPZAchArYh5SgdJN1MSWMEStdCpU26QNS2ZuWjM=;
- b=GadM+G6dzfDZ9I0GqG1hU0tbTSi0cod9Nhk4atqo9EzdHVt7KzzaLCki
- NyHmzvp9HUodI+VtLSIO7HB9L1MFBAb9rrsEiYpZ4Ay5780BDnnWeRMLM
- HttxrrviQv+KDdlSaFuAt3LeaDw4VwO5fwVnDtElrpjz9/InEjFD6NEcN
- Y2LLWo3QTLmAb6fLnU+QRh9P9lxXlnq3B1a8TLAUoAfS31wU4lDWAJkeZ
- MXfhONVf7QThq/tnMb4tkwxB0T8xB8ZUq9x+c42dWj1TXknOBtlGssTq8
- WPxgYnGpVkHrcRCl9KVnNhsAfqkmMVfed+syFUkfCtG4L4KrLQb32tDQs w==;
-IronPort-SDR: dHeX8W0Avu7+N0n5fh8/kZVUMhbX+yUPqYe0g40QpAkxKLxcZFDb8p6JUsxdppFuHxPVf4u6In
- Fom9uPt7bOAgZ+5VEnOc6cYep+Mp7TUxlukOpwjBz2ItPBfZvNaLRSFPe8bDDbe8wj69jI9Lo2
- 3lKJWW3XnbaUoBK01dGH+w0fHVUM2t3t3hxep13Wumv54mwUuPEVPrput2tnmR2bxwudVoQWPd
- hGowHM3T+RqvEROP++UYfStBbdo7LD6PhoUC43CNPIpO61p95ZQ4DzVLP7XmCmy8Bqqy3Zgm6T
- Suk=
-X-IronPort-AV: E=Sophos;i="5.68,291,1569254400"; d="scan'208";a="223871004"
+ bh=Mhdy8g97yrlGhg/4RxtKDJYb9b3tPtuYVaQdVOv/e+c=;
+ b=Ba79SW26r1tMkGkc692zZ6LQneuwCAgBQ32a7eUmXtOgLxNoLiWuKbym
+ vmW6bxqHnRSb0v2c+emiqohpGz4KUxfyMJcmsodINEBxauzmC/m+iZ7kk
+ Fu4ME8hoVx3peiO+e3G+Io65N4tkkobba+HfXnC1nCQd3+pmKbUeyWO4X
+ W8TSl9VKqfCiHoPj3Cii5b3RwKb0+x5tQpoAHXk34Ag1cS1FaJA1sDj6i
+ QfChkwpYfd3pGxID/XjSmCHpBtZLJDB8k5badc0LE2wofNj4bYkATyywm
+ zhYRP4Mz8kNf/zM3Qlh90TMQOWbOpGKgnhSH8mcG3QM5MULRQWVr+KDqg Q==;
+IronPort-SDR: tqG+53HrSJ6ioXEqXsl875gcJx6r/kKx1VvxUF/gpWTJXn8s6fQABSf8BUIX8YkDKoWWVIPSE4
+ ex0TxMX5g7X0bjZEtyFxLUIZtpjW9JRVwRE3Ff4LHzXmhA5kIy/Ii3SJHiiuwUDAYOnQ0Xnyfi
+ cDNICGZmt+i/E+ZT0LGirtR5Nqnr3IroF5ptRLNOyaEKp/MlrrFqYUrcK5DPm2qmY3Oi0deUGH
+ FpCMKRooDtS4zL+Nqec70cTFrR7kMVfIcUaADV6j81JpaCRx6OevmECvnn1yIiQJvgjSmQSRad
+ oBA=
+X-IronPort-AV: E=Sophos;i="5.68,291,1569254400"; d="scan'208";a="223871008"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 11 Nov 2019 10:40:15 +0800
-IronPort-SDR: 2l71vwIAUGQ8SsugtVquo2aQlxgWN1bBU0OQEEAEb805zm+JucE5QXzRHIQn2TGmrunSp2GuaE
- MUyJccpMBYskwYh8ylUGEhQAvIvCIVz9tPA5Av+e9VLUUueYlUran0JtnT/WeEujTspxSc8WT8
- qzMFqN9kVF5uwDfGtgxuT4FQOpS2XLSS6YqTbApwU0FlUdBEK/z59M0e78biLVhIZ6S+hHlM7j
- TXz6tpFA1Mn7AzdJJRc5HfbewPIASO8Ua/15ThNS/zsHZ1cNgmSkX5YtCYot/0taVRpXN3CGsp
- EkDmgg43AI9ZnJZgG8zJ2CB8
+ by ob1.hgst.iphmx.com with ESMTP; 11 Nov 2019 10:40:18 +0800
+IronPort-SDR: sKIDr/YddCgms+xqf2Ms6uCmZ4lJkEpQ3e/Czzjp17keVGfeWFzLsCFhwVr3cIbwp+Q1XRf6XM
+ 0rvbQpbQcba7J6eP/zyQHgVI3OK/xK7CFI6nBen7pYXs0VaoOPeS8IryHqCm0Qq7V8QQVEX3yw
+ xB17SaRsqCWPaXLtSyGrP14G2OdXT9U61czWU8x9rw6/JxcV0QVW/NEeIYiRAb6mU7Yn588bTt
+ 0lolgCeMDxRZ80i+VHkWqA2acaFtms3kwHu57i8p0wcPXmVj9SiTaRoxx6FpGEOSnkNQZ2i7t2
+ INNvybRTrFVaMDN1gzhzZaMr
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2019 18:34:44 -0800
-IronPort-SDR: pgSL4c208LsPbdHz9kRxJ+gjIMzeJC3XDYb0C7Na268ScNYQssVyNtAUsehnv07gO8dERFDYUj
- kFnXniFyP/q4BbmiSvMJ6xJLdFIip3NYYfFTOHCfJy2/iwhcXwKsD6CQ4XuFTqcMmhEZNxvltn
- 2QC6rznjs1+XBx1QmAursOrsOchyCUvTzkLG4NiBIfKfdL/d5o1MI/IWjDXe74NsQTGgSNpDyX
- EyxE7Y5kbjwFIIkDVc7HCLcIvuTlhDP/P78YtSJeA0+u8FgeXyKza/XU+9aoOVpwuF3X4FBU1Z
- uPA=
+ 10 Nov 2019 18:34:45 -0800
+IronPort-SDR: NyyzMjuId9K/cwPW4JejXGl9FOwY6f4zFA0r2xaWlqpgAWgx+kRjiP8OqVZDjDYVpGEZpwSIMZ
+ hPo4W3ycGN7s6Py3xxyG2l2wTUQ/d4aQg2jSYGFmjC19ej2PEMO11ERUdlhul1ZcvGNJ3lyNXt
+ TwsZraiGWIr9JWb9WdpAaWwQmF+iIsp8W4sgEKr9m/r1q5emigRYnXyY5HU9WxK5wLBB9UifKr
+ lZg8Zm0UZPNOJcTwRXXQwzESDgKQlU0hTaJsdD9YS951Nzj26s42T6SjnXuO1JrvfTrj2PhTSR
+ Nlk=
 WDCIronportException: Internal
 Received: from washi.fujisawa.hgst.com ([10.149.53.254])
- by uls-op-cesaip01.wdc.com with ESMTP; 10 Nov 2019 18:39:39 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 10 Nov 2019 18:39:40 -0800
 From: Damien Le Moal <damien.lemoal@wdc.com>
 To: linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
  linux-scsi@vger.kernel.org,
  "Martin K . Petersen" <martin.petersen@oracle.com>, dm-devel@redhat.com,
  Mike Snitzer <snitzer@redhat.com>, linux-f2fs-devel@lists.sourceforge.net,
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
-Date: Mon, 11 Nov 2019 11:39:25 +0900
-Message-Id: <20191111023930.638129-5-damien.lemoal@wdc.com>
+Date: Mon, 11 Nov 2019 11:39:26 +0900
+Message-Id: <20191111023930.638129-6-damien.lemoal@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191111023930.638129-1-damien.lemoal@wdc.com>
 References: <20191111023930.638129-1-damien.lemoal@wdc.com>
@@ -98,9 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iTzcN-00EDq9-9x
-Subject: [f2fs-dev] [PATCH v2 4/9] block: Remove partition support for zoned
- block devices
+X-Headers-End: 1iTzcO-00BS4R-Bw
+Subject: [f2fs-dev] [PATCH v2 5/9] null_blk: clean up the block device
+ operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,297 +116,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-No known partitioning tool supports zoned block devices, especially the
-host managed flavor with strong sequential write constraints.
-Furthermore, there are also no known user nor use cases for partitioned
-zoned block devices.
+From: Christoph Hellwig <hch@lst.de>
 
-This patch removes partition device creation for zoned block devices,
-which allows simplifying the processing of zone commands for zoned
-block devices. A warning is added if a partition table is found on the
-device.
+Remove the pointless stub open and release methods, give the operations
+vector a slightly less confusing name, and use normal alignment for the
+assignment operators.
 
-For report zones operations no zone sector information remapping is
-necessary anymore, simplifying the code. Of note is that remapping of
-zone reports for DM targets is still necessary as done by
-dm_remap_zone_report().
-
-Similarly, remaping of a zone reset bio is not necessary anymore.
-Testing for the applicability of the zone reset all request also becomes
-simpler and only needs to check that the number of sectors of the
-requested zone range is equal to the disk capacity.
-
+Signed-off-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+Reviewed-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
- block/blk-core.c          |  6 +---
- block/blk-zoned.c         | 62 ++++++--------------------------
- block/partition-generic.c | 74 +++++----------------------------------
- drivers/md/dm.c           |  3 --
- 4 files changed, 21 insertions(+), 124 deletions(-)
+ drivers/block/null_blk_main.c | 19 ++++---------------
+ 1 file changed, 4 insertions(+), 15 deletions(-)
 
-diff --git a/block/blk-core.c b/block/blk-core.c
-index 3306a3c5bed6..df6b70476187 100644
---- a/block/blk-core.c
-+++ b/block/blk-core.c
-@@ -851,11 +851,7 @@ static inline int blk_partition_remap(struct bio *bio)
- 	if (unlikely(bio_check_ro(bio, p)))
- 		goto out;
- 
--	/*
--	 * Zone management bios do not have a sector count but they do have
--	 * a start sector filled out and need to be remapped.
--	 */
--	if (bio_sectors(bio) || op_is_zone_mgmt(bio_op(bio))) {
-+	if (bio_sectors(bio)) {
- 		if (bio_check_eod(bio, part_nr_sects_read(p)))
- 			goto out;
- 		bio->bi_iter.bi_sector += p->start_sect;
-diff --git a/block/blk-zoned.c b/block/blk-zoned.c
-index ea4e086ba00e..ae665e490858 100644
---- a/block/blk-zoned.c
-+++ b/block/blk-zoned.c
-@@ -93,32 +93,10 @@ unsigned int blkdev_nr_zones(struct block_device *bdev)
- 	if (!blk_queue_is_zoned(q))
- 		return 0;
- 
--	return __blkdev_nr_zones(q, bdev->bd_part->nr_sects);
-+	return __blkdev_nr_zones(q, get_capacity(bdev->bd_disk));
+diff --git a/drivers/block/null_blk_main.c b/drivers/block/null_blk_main.c
+index 40a64bdd8ea7..89d385bab45b 100644
+--- a/drivers/block/null_blk_main.c
++++ b/drivers/block/null_blk_main.c
+@@ -1442,20 +1442,9 @@ static void null_config_discard(struct nullb *nullb)
+ 	blk_queue_flag_set(QUEUE_FLAG_DISCARD, nullb->q);
  }
- EXPORT_SYMBOL_GPL(blkdev_nr_zones);
  
--/*
-- * Check that a zone report belongs to this partition, and if yes, fix its start
-- * sector and write pointer and return true. Return false otherwise.
-- */
--static bool blkdev_report_zone(struct block_device *bdev, struct blk_zone *rep)
+-static int null_open(struct block_device *bdev, fmode_t mode)
 -{
--	sector_t offset = get_start_sect(bdev);
--
--	if (rep->start < offset)
--		return false;
--
--	rep->start -= offset;
--	if (rep->start + rep->len > bdev->bd_part->nr_sects)
--		return false;
--
--	if (rep->type == BLK_ZONE_TYPE_CONVENTIONAL)
--		rep->wp = rep->start + rep->len;
--	else
--		rep->wp -= offset;
--	return true;
--}
--
- /**
-  * blkdev_report_zones - Get zones information
-  * @bdev:	Target block device
-@@ -140,8 +118,7 @@ int blkdev_report_zones(struct block_device *bdev, sector_t sector,
- {
- 	struct request_queue *q = bdev_get_queue(bdev);
- 	struct gendisk *disk = bdev->bd_disk;
--	unsigned int i, nrz;
--	int ret;
-+	sector_t capacity = get_capacity(disk);
- 
- 	if (!blk_queue_is_zoned(q))
- 		return -EOPNOTSUPP;
-@@ -154,27 +131,14 @@ int blkdev_report_zones(struct block_device *bdev, sector_t sector,
- 	if (WARN_ON_ONCE(!disk->fops->report_zones))
- 		return -EOPNOTSUPP;
- 
--	if (!*nr_zones || sector >= bdev->bd_part->nr_sects) {
-+	if (!*nr_zones || sector >= capacity) {
- 		*nr_zones = 0;
- 		return 0;
- 	}
- 
--	nrz = min(*nr_zones,
--		  __blkdev_nr_zones(q, bdev->bd_part->nr_sects - sector));
--	ret = disk->fops->report_zones(disk, get_start_sect(bdev) + sector,
--				       zones, &nrz);
--	if (ret)
--		return ret;
-+	*nr_zones = min(*nr_zones, __blkdev_nr_zones(q, capacity - sector));
- 
--	for (i = 0; i < nrz; i++) {
--		if (!blkdev_report_zone(bdev, zones))
--			break;
--		zones++;
--	}
--
--	*nr_zones = i;
--
 -	return 0;
-+	return disk->fops->report_zones(disk, sector, zones, nr_zones);
- }
- EXPORT_SYMBOL_GPL(blkdev_report_zones);
- 
-@@ -185,15 +149,11 @@ static inline bool blkdev_allow_reset_all_zones(struct block_device *bdev,
- 	if (!blk_queue_zone_resetall(bdev_get_queue(bdev)))
- 		return false;
- 
--	if (sector || nr_sectors != part_nr_sects_read(bdev->bd_part))
--		return false;
- 	/*
--	 * REQ_OP_ZONE_RESET_ALL can be executed only if the block device is
--	 * the entire disk, that is, if the blocks device start offset is 0 and
--	 * its capacity is the same as the entire disk.
-+	 * REQ_OP_ZONE_RESET_ALL can be executed only if the number of sectors
-+	 * of the applicable zone range is the entire disk.
- 	 */
--	return get_start_sect(bdev) == 0 &&
--	       part_nr_sects_read(bdev->bd_part) == get_capacity(bdev->bd_disk);
-+	return !sector && nr_sectors == get_capacity(bdev->bd_disk);
- }
- 
- /**
-@@ -218,6 +178,7 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
- {
- 	struct request_queue *q = bdev_get_queue(bdev);
- 	sector_t zone_sectors = blk_queue_zone_sectors(q);
-+	sector_t capacity = get_capacity(bdev->bd_disk);
- 	sector_t end_sector = sector + nr_sectors;
- 	struct bio *bio = NULL;
- 	int ret;
-@@ -231,7 +192,7 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
- 	if (!op_is_zone_mgmt(op))
- 		return -EOPNOTSUPP;
- 
--	if (!nr_sectors || end_sector > bdev->bd_part->nr_sects)
-+	if (!nr_sectors || end_sector > capacity)
- 		/* Out of range */
- 		return -EINVAL;
- 
-@@ -239,8 +200,7 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
- 	if (sector & (zone_sectors - 1))
- 		return -EINVAL;
- 
--	if ((nr_sectors & (zone_sectors - 1)) &&
--	    end_sector != bdev->bd_part->nr_sects)
-+	if ((nr_sectors & (zone_sectors - 1)) && end_sector != capacity)
- 		return -EINVAL;
- 
- 	while (sector < end_sector) {
-diff --git a/block/partition-generic.c b/block/partition-generic.c
-index aee643ce13d1..31bff3fb28af 100644
---- a/block/partition-generic.c
-+++ b/block/partition-generic.c
-@@ -459,56 +459,6 @@ static int drop_partitions(struct gendisk *disk, struct block_device *bdev)
- 	return 0;
- }
- 
--static bool part_zone_aligned(struct gendisk *disk,
--			      struct block_device *bdev,
--			      sector_t from, sector_t size)
--{
--	unsigned int zone_sectors = bdev_zone_sectors(bdev);
--
--	/*
--	 * If this function is called, then the disk is a zoned block device
--	 * (host-aware or host-managed). This can be detected even if the
--	 * zoned block device support is disabled (CONFIG_BLK_DEV_ZONED not
--	 * set). In this case, however, only host-aware devices will be seen
--	 * as a block device is not created for host-managed devices. Without
--	 * zoned block device support, host-aware drives can still be used as
--	 * regular block devices (no zone operation) and their zone size will
--	 * be reported as 0. Allow this case.
--	 */
--	if (!zone_sectors)
--		return true;
--
--	/*
--	 * Check partition start and size alignement. If the drive has a
--	 * smaller last runt zone, ignore it and allow the partition to
--	 * use it. Check the zone size too: it should be a power of 2 number
--	 * of sectors.
--	 */
--	if (WARN_ON_ONCE(!is_power_of_2(zone_sectors))) {
--		u32 rem;
--
--		div_u64_rem(from, zone_sectors, &rem);
--		if (rem)
--			return false;
--		if ((from + size) < get_capacity(disk)) {
--			div_u64_rem(size, zone_sectors, &rem);
--			if (rem)
--				return false;
--		}
--
--	} else {
--
--		if (from & (zone_sectors - 1))
--			return false;
--		if ((from + size) < get_capacity(disk) &&
--		    (size & (zone_sectors - 1)))
--			return false;
--
--	}
--
--	return true;
 -}
 -
- int rescan_partitions(struct gendisk *disk, struct block_device *bdev)
- {
- 	struct parsed_partitions *state = NULL;
-@@ -544,6 +494,14 @@ int rescan_partitions(struct gendisk *disk, struct block_device *bdev)
- 		}
- 		return -EIO;
- 	}
-+
-+	/* Partitions are not supported on zoned block devices */
-+	if (bdev_is_zoned(bdev)) {
-+		pr_warn("%s: ignoring partition table on zoned block device\n",
-+			disk->disk_name);
-+		goto out;
-+	}
-+
- 	/*
- 	 * If any partition code tried to read beyond EOD, try
- 	 * unlocking native capacity even if partition table is
-@@ -607,21 +565,6 @@ int rescan_partitions(struct gendisk *disk, struct block_device *bdev)
- 			}
- 		}
- 
--		/*
--		 * On a zoned block device, partitions should be aligned on the
--		 * device zone size (i.e. zone boundary crossing not allowed).
--		 * Otherwise, resetting the write pointer of the last zone of
--		 * one partition may impact the following partition.
--		 */
--		if (bdev_is_zoned(bdev) &&
--		    !part_zone_aligned(disk, bdev, from, size)) {
--			printk(KERN_WARNING
--			       "%s: p%d start %llu+%llu is not zone aligned\n",
--			       disk->disk_name, p, (unsigned long long) from,
--			       (unsigned long long) size);
--			continue;
--		}
+-static void null_release(struct gendisk *disk, fmode_t mode)
+-{
+-}
 -
- 		part = add_partition(disk, p, from, size,
- 				     state->parts[p].flags,
- 				     &state->parts[p].info);
-@@ -635,6 +578,7 @@ int rescan_partitions(struct gendisk *disk, struct block_device *bdev)
- 			md_autodetect_dev(part_to_dev(part)->devt);
- #endif
- 	}
-+out:
- 	free_partitions(state);
- 	return 0;
- }
-diff --git a/drivers/md/dm.c b/drivers/md/dm.c
-index 89189c29438f..76f4cfdd6b41 100644
---- a/drivers/md/dm.c
-+++ b/drivers/md/dm.c
-@@ -1211,9 +1211,6 @@ EXPORT_SYMBOL_GPL(dm_accept_partial_bio);
-  * The zone descriptors obtained with a zone report indicate
-  * zone positions within the underlying device of the target. The zone
-  * descriptors must be remapped to match their position within the dm device.
-- * The caller target should obtain the zones information using
-- * blkdev_report_zones() to ensure that remapping for partition offset is
-- * already handled.
-  */
- void dm_remap_zone_report(struct dm_target *ti, sector_t start,
- 			  struct blk_zone *zones, unsigned int *nr_zones)
+-static const struct block_device_operations null_fops = {
+-	.owner =	THIS_MODULE,
+-	.open =		null_open,
+-	.release =	null_release,
+-	.report_zones =	null_zone_report,
++static const struct block_device_operations null_ops = {
++	.owner		= THIS_MODULE,
++	.report_zones	= null_zone_report,
+ };
+ 
+ static void null_init_queue(struct nullb *nullb, struct nullb_queue *nq)
+@@ -1556,7 +1545,7 @@ static int null_gendisk_register(struct nullb *nullb)
+ 	disk->flags |= GENHD_FL_EXT_DEVT | GENHD_FL_SUPPRESS_PARTITION_INFO;
+ 	disk->major		= null_major;
+ 	disk->first_minor	= nullb->index;
+-	disk->fops		= &null_fops;
++	disk->fops		= &null_ops;
+ 	disk->private_data	= nullb;
+ 	disk->queue		= nullb->q;
+ 	strncpy(disk->disk_name, nullb->disk_name, DISK_NAME_LEN);
 -- 
 2.23.0
 
