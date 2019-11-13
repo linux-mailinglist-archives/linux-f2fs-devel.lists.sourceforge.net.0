@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 183A2FB9EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Nov 2019 21:32:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D0FCFBA01
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Nov 2019 21:36:04 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iUzIz-0004MR-JW; Wed, 13 Nov 2019 20:31:57 +0000
+	id 1iUzMw-0001SL-ML; Wed, 13 Nov 2019 20:36:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iUzIx-0004M6-NU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:31:55 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iUzMv-0001S0-CT
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:36:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m36r+90O+fne/FepGPD3lvgEwCieTTyAnaSNQ9YyZfM=; b=Kxus6JXKawdBaqS180gsGX3+vR
- /zz5ReoDjJr/BONO/mGSVokYvhr1Q262rBD3Ow6pPNh6ykypR9uRX7BXm51guGdx3HOW+hgqOfa/F
- OTh3GY5vqV07iq5ILzYHZU358GSmNcE0B/ld6lWm3uPKJ3hmRJ+ZU1RvALt8H2slwDYA=;
+ bh=6FHRCFlZwk4ddGyBZ6vKher/yipY9ZrAix78EeHjfsQ=; b=BDueuLXGYvBbzAXso99FCUmxKQ
+ CVrZ2EVS4mPfj2qAPYVp3KEY3H6dgwPX7qAPK+e3BxR7//7Si6agnd55oINnYky78RCAmmrap0URU
+ oJ9WccQ7/pYsF2J2KEIz2KAwrwW0vUhjZ8Ge0dIg8L36qiyfiBX3i+0bKKJ5s/zBIheQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,43 +29,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=m36r+90O+fne/FepGPD3lvgEwCieTTyAnaSNQ9YyZfM=; b=Suq6reZFvalnSrgcj2C/O18Dvw
- 0HPvKz9zC4lxVuJdgbsaCZK4pJtH3s6Mk4r2fN9QzCqQlio81MlXmyVWSPbpdr0+wk4i7oYUHgnkv
- lGI9Y14uZXIUBUzTGNBmXu+v4Q4yttzTjai2rf5bmdYQGtPHmLd//8XBfXrNXFgykujg=;
+ bh=6FHRCFlZwk4ddGyBZ6vKher/yipY9ZrAix78EeHjfsQ=; b=PJnlL+Dj/gn6frowsaw1DsXI0y
+ rXx/QtiCyW/HgAfq38I4DumMlVu1T1oXuq1gwcWb0zrr/dR6lBJjARlenQFmDVtUsOrLXEANs7o2W
+ XbBqgICz4shrHzETBDaE8ArmRK7YD3P1IRi7FOEqyr1MP1Udm1cyuD6RGRFUqPc3lz+s=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iUzIw-00FYBI-CH
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:31:55 +0000
+ id 1iUzMt-00FiDK-0t
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:36:01 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4A2A2206EC;
- Wed, 13 Nov 2019 20:31:49 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D1D53206F0;
+ Wed, 13 Nov 2019 20:35:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573677109;
- bh=05ooIT3YbJ/fHw6k555x4s32E0dixclBOdSSgJz8rso=;
+ s=default; t=1573677354;
+ bh=F7ZEXH3Tifjy9sGUrwh8Fhs+H6mYs1GYZonZpiJuwEo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=S0mHiSipc5QBPv7QRZhJSWtDlMjLjk4z2sj+8cfsJMlOx/sVhBWJ8dS/+N7+yNVDb
- KF55x6fWjF9icemuoHDIDMBKOw2FsurKp16lRC1XNpJ6c7gHewEtwBegNRXI6heVW6
- 48kWapw6ynxD6/+2aK+SQYPQ3WRFiOxsU29zFvvY=
-Date: Wed, 13 Nov 2019 12:31:47 -0800
+ b=cN+5BXj91Btq6Ry/bO1VhiaNdo4x1+Lt3QDXuQLQyXlsCVgrWNJGKLW3Zy0M3qYgf
+ kZYrGKdT5NAbCuJckqXAScixPVqWmbN98LNs2qdXXxKYYq+xhab0ygSaprMlJrUDjc
+ 2Rl8cQmt+I9y4p/mks0qpzDMku7DMTI2kzVonDxM=
+Date: Wed, 13 Nov 2019 12:35:51 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: walter harms <wharms@bfs.de>
-Message-ID: <20191113203145.GH221701@gmail.com>
-Mail-Followup-To: walter harms <wharms@bfs.de>, linux-man@vger.kernel.org,
- darrick.wong@oracle.com, dhowells@redhat.com, jaegeuk@kernel.org,
- linux-api@vger.kernel.org, linux-ext4@vger.kernel.org,
+To: David Howells <dhowells@redhat.com>,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>, keyrings@vger.kernel.org
+Message-ID: <20191113203550.GI221701@gmail.com>
+Mail-Followup-To: David Howells <dhowells@redhat.com>,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+ keyrings@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ "Theodore Y . Ts'o" <tytso@mit.edu>,
+ Ondrej Mosnacek <omosnace@redhat.com>,
  linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- tytso@mit.edu, victorhsieh@google.com
-References: <20191107014420.GD15212@magnolia>
- <20191107220248.32025-1-ebiggers@kernel.org>
- <5DC525E8.4060705@bfs.de> <20191108193557.GA12997@gmail.com>
- <5DC714DB.9060007@bfs.de>
+ Paul Lawrence <paullawrence@google.com>,
+ linux-mtd@lists.infradead.org, Ondrej Kozina <okozina@redhat.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>
+References: <20191107001259.115018-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <5DC714DB.9060007@bfs.de>
+In-Reply-To: <20191107001259.115018-1-ebiggers@kernel.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -80,9 +82,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iUzIw-00FYBI-CH
-Subject: Re: [f2fs-dev] [man-pages RFC PATCH] statx.2: document
- STATX_ATTR_VERITY
+X-Headers-End: 1iUzMt-00FiDK-0t
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: support passing a keyring key to
+ FS_IOC_ADD_ENCRYPTION_KEY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,82 +96,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-man@vger.kernel.org, tytso@mit.edu, darrick.wong@oracle.com,
- linux-api@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- dhowells@redhat.com, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org,
- victorhsieh@google.com
+Cc: "Theodore Y . Ts'o" <tytso@mit.edu>, Ondrej Mosnacek <omosnace@redhat.com>,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Paul Lawrence <paullawrence@google.com>, linux-fscrypt@vger.kernel.org,
+ linux-mtd@lists.infradead.org, Ondrej Kozina <okozina@redhat.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Nov 09, 2019 at 08:34:51PM +0100, walter harms wrote:
-> Am 08.11.2019 20:35, schrieb Eric Biggers:
-> > On Fri, Nov 08, 2019 at 09:23:04AM +0100, walter harms wrote:
-> >>
-> >>
-> >> Am 07.11.2019 23:02, schrieb Eric Biggers:
-> >>> From: Eric Biggers <ebiggers@google.com>
-> >>>
-> >>> Document the verity attribute for statx().
-> >>>
-> >>> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> >>> ---
-> >>>  man2/statx.2 | 4 ++++
-> >>>  1 file changed, 4 insertions(+)
-> >>>
-> >>> RFC since the kernel patches are currently under review.
-> >>> The kernel patches can be found here:
-> >>> https://lkml.kernel.org/linux-fscrypt/20191029204141.145309-1-ebiggers@kernel.org/T/#u
-> >>>
-> >>> diff --git a/man2/statx.2 b/man2/statx.2
-> >>> index d2f1b07b8..713bd1260 100644
-> >>> --- a/man2/statx.2
-> >>> +++ b/man2/statx.2
-> >>> @@ -461,6 +461,10 @@ See
-> >>>  .TP
-> >>>  .B STATX_ATTR_ENCRYPTED
-> >>>  A key is required for the file to be encrypted by the filesystem.
-> >>> +.TP
-> >>> +.B STATX_ATTR_VERITY
-> >>> +The file has fs-verity enabled.  It cannot be written to, and all reads from it
-> >>> +will be verified against a Merkle tree.
-> >>
-> >> Using "Merkle tree" opens a can of worm and what will happen when the methode will change ?
-> >> Does it matter at all ? i would suggest "filesystem" here.
-> >>
-> > 
-> > Fundamentally, fs-verity guarantees that all data read is verified against a
-> > cryptographic hash that covers the entire file.  I think it will be helpful to
-> > convey that here, e.g. to avoid confusion with non-cryptographic, individual
-> > block checksums supported by filesystems like btrfs and zfs.
-> > 
-> > Now, the only sane way to implement this model is with a Merkle tree, and this
-> > is part of the fs-verity UAPI (via the file hash), so that's where I'm coming
-> > from here.  Perhaps the phrase "Merkle tree" could be interpreted too strictly,
-> > though, so it would be better to emphasize the more abstract model.  How about
-> > the following?:
-> > 
-> > 	The file has fs-verity enabled.  It cannot be written to, and all reads
-> > 	from it will be verified against a cryptographic hash that covers the
-> > 	entire file, e.g. via a Merkle tree.
-> > 
+On Wed, Nov 06, 2019 at 04:12:59PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> "feels" better,. but from a programmers perspective it is important at what level
-> this is actually done. To see my point look at the line before.
-> "encrypted by the filesystem" mean i have to read the documentation of the fs first
-> so if encryption is supported at all. Or do i think to complicated ?
+> Extend the FS_IOC_ADD_ENCRYPTION_KEY ioctl to allow the raw key to be
+> specified by a Linux keyring key, rather than specified directly.
 > 
+> This is useful because fscrypt keys belong to a particular filesystem
+> instance, so they are destroyed when that filesystem is unmounted.
+> Usually this is desired.  But in some cases, userspace may need to
+> unmount and re-mount the filesystem while keeping the keys, e.g. during
+> a system update.  This requires keeping the keys somewhere else too.
+> 
+> The keys could be kept in memory in a userspace daemon.  But depending
+> on the security architecture and assumptions, it can be preferable to
+> keep them only in kernel memory, where they are unreadable by userspace.
+> 
+> We also can't solve this by going back to the original fscrypt API
+> (where for each file, the master key was looked up in the process's
+> keyring hierarchy) because that caused lots of problems of its own.
+> 
+> Therefore, add the ability for FS_IOC_ADD_ENCRYPTION_KEY to accept a
+> Linux keyring key.  This solves the problem by allowing userspace to (if
+> needed) save the keys securely in a Linux keyring for re-provisioning,
+> while still using the new fscrypt key management ioctls.
+> 
+> This is analogous to how dm-crypt accepts a Linux keyring key, but the
+> key is then stored internally in the dm-crypt data structures rather
+> than being looked up again each time the dm-crypt device is accessed.
+> 
+> Use a custom key type "fscrypt-provisioning" rather than one of the
+> existing key types such as "logon".  This is strongly desired because it
+> enforces that these keys are only usable for a particular purpose: for
+> fscrypt as input to a particular KDF.  Otherwise, the keys could also be
+> passed to any kernel API that accepts a "logon" key with any service
+> prefix, e.g. dm-crypt, UBIFS, or (recently proposed) AF_ALG.  This would
+> risk leaking information about the raw key despite it ostensibly being
+> unreadable.  Of course, this mistake has already been made for multiple
+> kernel APIs; but since this is a new API, let's do it right.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-It's filesystem-specific whether encryption and verity are supported.  I'm not
-sure what your concern is, as statx() won't return the bits if the filesystem
-doesn't support them.
-
-Also note, if someone really wants the details about fscrypt and fsverity, they
-really should read the documentation we maintain in the kernel tree [1][2].
-
-[1] https://www.kernel.org/doc/html/latest/filesystems/fscrypt.html
-[2] https://www.kernel.org/doc/html/latest/filesystems/fsverity.html
+David and Jarkko, are you okay with this patch from a keyrings subsystem
+perspective?
 
 - Eric
 
