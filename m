@@ -2,77 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D0FCFBA01
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Nov 2019 21:36:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0033FBEAC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Nov 2019 05:45:14 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iUzMw-0001SL-ML; Wed, 13 Nov 2019 20:36:02 +0000
+	id 1iV70D-0005CV-AJ; Thu, 14 Nov 2019 04:45:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iUzMv-0001S0-CT
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:36:01 +0000
+ (envelope-from <prvs=2145628f9=shinichiro.kawasaki@wdc.com>)
+ id 1iV70B-0005CN-JH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Nov 2019 04:45:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6FHRCFlZwk4ddGyBZ6vKher/yipY9ZrAix78EeHjfsQ=; b=BDueuLXGYvBbzAXso99FCUmxKQ
- CVrZ2EVS4mPfj2qAPYVp3KEY3H6dgwPX7qAPK+e3BxR7//7Si6agnd55oINnYky78RCAmmrap0URU
- oJ9WccQ7/pYsF2J2KEIz2KAwrwW0vUhjZ8Ge0dIg8L36qiyfiBX3i+0bKKJ5s/zBIheQ=;
+ bh=ycIciqOcRr7T+vHpSVVMx8a9WgVXUakRlivtwfr9EP0=; b=V6E813ju72KouKZEc/8h0Pa4GR
+ RYhKfCiqjIJjYfBok8Ctdg5xh4EophH5dnI8gA4sVJ0ZxlJe5OX7guFx2WmIC0/hhYmv9TYcXQ71k
+ /QrG9YsZ+FkyLTYFN/1CD872Xb+hw5x/W0PtU6jviOt1BSUVPHOQfsxs10zttfPG2tjM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6FHRCFlZwk4ddGyBZ6vKher/yipY9ZrAix78EeHjfsQ=; b=PJnlL+Dj/gn6frowsaw1DsXI0y
- rXx/QtiCyW/HgAfq38I4DumMlVu1T1oXuq1gwcWb0zrr/dR6lBJjARlenQFmDVtUsOrLXEANs7o2W
- XbBqgICz4shrHzETBDaE8ArmRK7YD3P1IRi7FOEqyr1MP1Udm1cyuD6RGRFUqPc3lz+s=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ycIciqOcRr7T+vHpSVVMx8a9WgVXUakRlivtwfr9EP0=; b=O
+ Bv0glEJhyG3AttGEqVRjIAfERSoekai05BCUzeFMPGzoc/xiXZX1ZGZwQRAYqs28YyCjEF2/hld1R
+ uXevWQsHRxoaxdZfUpE2DHsGYkT6MvxHcs3qzre1qoAhN3Wy7kj/q/bIJc3/l0tDGwe7xRgvRDjax
+ /U2KPTJzGClB4jQY=;
+Received: from esa3.hgst.iphmx.com ([216.71.153.141])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iUzMt-00FiDK-0t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Nov 2019 20:36:01 +0000
-Received: from gmail.com (unknown [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D1D53206F0;
- Wed, 13 Nov 2019 20:35:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1573677354;
- bh=F7ZEXH3Tifjy9sGUrwh8Fhs+H6mYs1GYZonZpiJuwEo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cN+5BXj91Btq6Ry/bO1VhiaNdo4x1+Lt3QDXuQLQyXlsCVgrWNJGKLW3Zy0M3qYgf
- kZYrGKdT5NAbCuJckqXAScixPVqWmbN98LNs2qdXXxKYYq+xhab0ygSaprMlJrUDjc
- 2Rl8cQmt+I9y4p/mks0qpzDMku7DMTI2kzVonDxM=
-Date: Wed, 13 Nov 2019 12:35:51 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: David Howells <dhowells@redhat.com>,
- Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>, keyrings@vger.kernel.org
-Message-ID: <20191113203550.GI221701@gmail.com>
-Mail-Followup-To: David Howells <dhowells@redhat.com>,
- Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
- keyrings@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- "Theodore Y . Ts'o" <tytso@mit.edu>,
- Ondrej Mosnacek <omosnace@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net,
- Paul Lawrence <paullawrence@google.com>,
- linux-mtd@lists.infradead.org, Ondrej Kozina <okozina@redhat.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>
-References: <20191107001259.115018-1-ebiggers@kernel.org>
+ id 1iV709-002ZCm-HO
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Nov 2019 04:45:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1573706702; x=1605242702;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=OvWxdeM0TQYTAd58Ta9Y9v2l3tw4s7cISg19nKtEBCw=;
+ b=BdX3SbhUbN9PWAheH2O4REYt2uHhzuLrKrFp1sG1d1i491szOCPokDqf
+ ty9Axw236FcUadsZArkYOl/XXOMNuB5OLpjQw1J1mCmt5ZPU3wOptgi2p
+ hig3VuzXwAb+/E1O+RMTSyWLC2MUrhLo1Cot4yMo9xYeeCW6oxnPwfKzI
+ JJtkQkTtTrTwUgbCxMYx726fYwEmYKjIyPCSUyC/faFUV5WLbyDihpgFa
+ cVkDxB899+0xWzXDdRI6zuB6nW2VuOQsf4MRQyyKcxITk48QYsdCIyx2w
+ 6mYfFY66QYynR3M0qXZ79FsW1trTctHma9bA6E0t3yAhTgcri8Fi7a4Eo A==;
+IronPort-SDR: 2fnw4zVrpVK2tAUFXGs7nV1RSjGT15mHdHvlUvjinIjL10w8wy5Qqk9G4Wf5gDv9A+j0YHgpCV
+ Lz7LhEEZK+y0lT+Ar2jF7ZWoZcEIvUKHfYkLavMFaFIrhDRSK/2n20njPNL8XiUbvyQyMs5sTH
+ mQQbz+YCVDdjjCC0kZdZ+E6oeAIgSv0yRQzBVIA/aC0T3pCf7RHfrIipnRQE8CcTMvI0alNu37
+ C+i3RPxRa0j1gZY/Tz1N+nGh09wnXmpa2Yt0mKwUt7Ht5yt7AgLf+q1fY5gS675COeBOaCMc8p
+ y6g=
+X-IronPort-AV: E=Sophos;i="5.68,302,1569254400"; d="scan'208";a="127411440"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 14 Nov 2019 12:44:56 +0800
+IronPort-SDR: gQbpDjtZHKD5uamR+CNK8DSHYKzWZIXIekWNaGyf5iWI8vheM8g/nIerhJ5oSf/1+RhJ3gWMX1
+ gruUdn2g46jqXNcNW/IFldLOj/4QjJozZjbkgjSXh70sQnoHqW7b1zRhNoi/q9lP0zwXHt56s4
+ F3xip4WiCKj3oWgVRgD7H6s5N/jjT0wZoYuto4APCETX9B+lvjnMGY2qa7Mnfv7lyPn+SVcf1q
+ 8jBSJvCTshHKX3+4+YJM/iYiSjAguD49A6T5VZNhpw2k3CIIB9qysPlYEFgkjTa4ZdclrA2TNQ
+ 0wFNqJ4LKNeaViN45UeiBO/X
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Nov 2019 20:39:55 -0800
+IronPort-SDR: zO6PCWhckkt3ZMI9f8k4Gxi7DXhGbRpl1cHGgIPMpZq1K9UdnDyBR9hKq+z7FNDHNrP9/yqXBc
+ QDPYbboGeLnAhQWY6D67/yXLED8u2UXLueFXf0NV9ds7fqFAkbfDuNnlY8ZT2XfwqeFrWCp3Gd
+ o0zP2t6uxsmqj/4OYFgvbp9hoFvY8cKD/69AgbwBR1zMuHUIuXGsHcNZuNJEWZxO4nrx1sdb1A
+ xhVGve/wJGGn5yVWq1GXJXZdTrpn4w31XqOZL753a/fE04gfhf88FHPQndoC/l8fZHv2ebnmVP
+ CR4=
+WDCIronportException: Internal
+Received: from shindev.dhcp.fujisawa.hgst.com (HELO shindev.fujisawa.hgst.com)
+ ([10.149.53.87])
+ by uls-op-cesaip01.wdc.com with ESMTP; 13 Nov 2019 20:44:56 -0800
+From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 14 Nov 2019 13:44:46 +0900
+Message-Id: <20191114044454.200461-1-shinichiro.kawasaki@wdc.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191107001259.115018-1-ebiggers@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.3 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.6 FSL_HELO_FAKE          No description available.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -80,11 +93,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iUzMt-00FiDK-0t
-Subject: Re: [f2fs-dev] [PATCH] fscrypt: support passing a keyring key to
- FS_IOC_ADD_ENCRYPTION_KEY
+X-Headers-End: 1iV709-002ZCm-HO
+Subject: [f2fs-dev] [PATCH v7 0/8] fsck: Check write pointers of zoned block
+ devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,61 +107,98 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Theodore Y . Ts'o" <tytso@mit.edu>, Ondrej Mosnacek <omosnace@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net,
- Paul Lawrence <paullawrence@google.com>, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, Ondrej Kozina <okozina@redhat.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Paul Crowley <paulcrowley@google.com>
+Cc: Damien Le Moal <Damien.LeMoal@wdc.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Nov 06, 2019 at 04:12:59PM -0800, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Extend the FS_IOC_ADD_ENCRYPTION_KEY ioctl to allow the raw key to be
-> specified by a Linux keyring key, rather than specified directly.
-> 
-> This is useful because fscrypt keys belong to a particular filesystem
-> instance, so they are destroyed when that filesystem is unmounted.
-> Usually this is desired.  But in some cases, userspace may need to
-> unmount and re-mount the filesystem while keeping the keys, e.g. during
-> a system update.  This requires keeping the keys somewhere else too.
-> 
-> The keys could be kept in memory in a userspace daemon.  But depending
-> on the security architecture and assumptions, it can be preferable to
-> keep them only in kernel memory, where they are unreadable by userspace.
-> 
-> We also can't solve this by going back to the original fscrypt API
-> (where for each file, the master key was looked up in the process's
-> keyring hierarchy) because that caused lots of problems of its own.
-> 
-> Therefore, add the ability for FS_IOC_ADD_ENCRYPTION_KEY to accept a
-> Linux keyring key.  This solves the problem by allowing userspace to (if
-> needed) save the keys securely in a Linux keyring for re-provisioning,
-> while still using the new fscrypt key management ioctls.
-> 
-> This is analogous to how dm-crypt accepts a Linux keyring key, but the
-> key is then stored internally in the dm-crypt data structures rather
-> than being looked up again each time the dm-crypt device is accessed.
-> 
-> Use a custom key type "fscrypt-provisioning" rather than one of the
-> existing key types such as "logon".  This is strongly desired because it
-> enforces that these keys are only usable for a particular purpose: for
-> fscrypt as input to a particular KDF.  Otherwise, the keys could also be
-> passed to any kernel API that accepts a "logon" key with any service
-> prefix, e.g. dm-crypt, UBIFS, or (recently proposed) AF_ALG.  This would
-> risk leaking information about the raw key despite it ostensibly being
-> unreadable.  Of course, this mistake has already been made for multiple
-> kernel APIs; but since this is a new API, let's do it right.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+On sudden f2fs shutdown, zoned block device status and f2fs meta data can be
+inconsistent. When f2fs shutdown happens during write operations, write pointers
+on the device go forward but the f2fs meta data does not reflect the write
+pointer progress. This inconsistency will eventually cause "Unaligned write
+command" error when restarting write operation after the next mount.
 
-David and Jarkko, are you okay with this patch from a keyrings subsystem
-perspective?
+This error is observed with xfstests test case generic/388, which enforces
+sudden shutdown during write operation and checks the file system recovery.
 
-- Eric
+This patch series adds a feature to fsck.f2fs to check and fix the
+inconsistency. Per discussion on the list, implement two checks. The first check
+is for open zones that current segments point to. Check write pointer
+consistency with current segment positions recorded in CP, and if they are
+inconsistent, assign a new zone to the current segment. The second check is for
+non-open zones that current segments do not point to. Check write pointer
+consistency with valid block maps recorded in SIT.
+
+Reflect fsync data blocks in these checks. If fsync data exists and current
+segments point to zones with fsync data, keep the fsync data and the current
+segments untouched so that kernel can recover the fsync data. Another patch
+series for kernel is being posted to check and fix write pointer consistency
+after fsync data recovery.
+
+Have fsck check and fix the consistency twice. The first fix is at the beginning
+of fsck so that write by fsck for fix do not fail with unaligned write command
+error. The second fix is at the end of the fsck to reflect SIT valid block maps
+updates by fsck.
+
+The first three patches add three helper functions to call report zone and reset
+zone commands to zoned block devices. Next three patches modify existing fsck
+functions to meet zoned block devices' requirements. The last two patches add
+the two checks for write pointer consistency.
+
+Thank goes to Chao Yu for the detailed discussion on the list.
+
+
+For v7, rebased to dev-test branch. The patches from 1st to 6th in this series
+are taken from the dev-test branch, which reflects Jaegeuk's updates and Signed-
+off-by tags (Thanks Jaegeuk!). It will be appreciated to check 7th and 8th
+patches.
+
+Changes from v6:
+* 1st-6th patches: Taken from dev-test branch, Jaegeuk's updates and sign off
+* 7th patch: Reversed bitmap search order and improved last valid block check
+* 8th patch: Improved code comment
+
+Changes from v5:
+* 1st-3rd patch: Reflected review comments on helper functions
+* 8th patch: Ensure zones are in main segments and removed errno print
+
+Changes from v4:
+* Renewed the series based on design discussion on the list
+
+Changes from v3:
+* Set curseg position at a new zone start when its write pointer is at zone end
+
+Changes from v2:
+* Reflected review comments by Chao Yu
+* Dropped 4th patch and 2nd patch (2nd patch was required for the 4th patch)
+
+Changes from v1:
+* Fixed build failure on dev branch
+
+Shin'ichiro Kawasaki (8):
+  libf2fs_zoned: Introduce f2fs_report_zones() helper function
+  libf2fs_zoned: Introduce f2fs_report_zone() helper function
+  libf2fs_zoned: Introduce f2fs_reset_zone() helper function
+  fsck: Find free zones instead of blocks to assign to current segments
+  fsck: Introduce move_one_curseg_info() function
+  fsck: Check fsync data always for zoned block devices
+  fsck: Check write pointer consistency of open zones
+  fsck: Check write pointer consistency of non-open zones
+
+ fsck/defrag.c       |   2 +-
+ fsck/f2fs.h         |   6 +
+ fsck/fsck.c         | 271 ++++++++++++++++++++++++++++++++++++++++++++
+ fsck/fsck.h         |  11 +-
+ fsck/main.c         |   2 +
+ fsck/mount.c        | 139 ++++++++++++++++-------
+ fsck/segment.c      |   4 +-
+ include/f2fs_fs.h   |   7 ++
+ lib/libf2fs_zoned.c | 124 +++++++++++++++++++-
+ 9 files changed, 520 insertions(+), 46 deletions(-)
+
+-- 
+2.23.0
+
 
 
 _______________________________________________
