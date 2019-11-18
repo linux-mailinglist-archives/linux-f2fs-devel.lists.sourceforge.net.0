@@ -2,75 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E1EFFFDBB
+	by mail.lfdr.de (Postfix) with ESMTPS id 5ED18FFDBC
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Nov 2019 06:10:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iWZJQ-0007Hb-3f; Mon, 18 Nov 2019 05:10:56 +0000
+	id 1iWZJO-0004XX-CH; Mon, 18 Nov 2019 05:10:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <cgxu519@mykernel.net>) id 1iWZJO-0007HU-NH
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Nov 2019 05:10:54 +0000
+ (envelope-from <cgxu519@mykernel.net>) id 1iWZJM-0004XJ-SL
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Nov 2019 05:10:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BsgB+uLSbI/A7RpGrDvhjCegyC49pCxyhfWI2lOuUfk=; b=SOdwt2eEBowLoVGlZk7be4gVrE
- s3mkIEkJhpcY+gcSC3SMTitwIu9kb7BwXEBEoSpDil/qmyWEx2ggqNv6XWOXEC2Yo09jzK538kjMN
- 8UJPm0d7CEsWLnec41sQcE/DG13Vd+dwLDCojVoDyWGu02ko/I2XJc78bF2osryypE8Q=;
+ bh=W+4d37NiUZrTVp/T//URhJAtULIpMWsOCTG3JUgcQbA=; b=cvfboqRv1WHgAhApWEarpBrYhX
+ 5Y36PgbWcmSrCgDj0t1+rhW+pR39kaQmo5l8vAlZIR5SQYT0gs1rEZWbNu/hXqg8ekO//bp4EaBYM
+ 7Tdm8/kgS8B3PFjXUo+vELp62sacFtzV1/VKVCJdcyFD3fM8OU35rAcu32RTq/49lId8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Subject:
- Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BsgB+uLSbI/A7RpGrDvhjCegyC49pCxyhfWI2lOuUfk=; b=K8p1evRgzZ2y8QR9TOV/8T3yef
- ac8Q4jJ6/5kOvsJJIQJqUqhovIu8teDir0gpm63I4QBw1/jQIDxhOrA3Hg10W1O/9Z9GZAaEzNoCF
- nonWoBEL3ofveygfdOBRm9XvpCxKng3UuxfqGNUigFodpMji5tFpgwZeoZEzmlNM9CEM=;
+ bh=W+4d37NiUZrTVp/T//URhJAtULIpMWsOCTG3JUgcQbA=; b=X+Rs6hs+MrTNBc0mgGDGwfIp+U
+ iKNoy3S5J9gcicRwmOFPlSh7YzKm1J8iw8z9Syv2npvKtRrZvNjgyGpHZvzRXkrtcPj+X/E5csMaB
+ WhsQrXaR8xdhTOjwWI+a5vh6cflUDEvGTOcWoj02Knn/6dpY3tj29M+pDur6gDrsRkcE=;
 Received: from sender3-of-o52.zoho.com.cn ([124.251.121.247]
  helo=sender2.zoho.com.cn)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1iWZJL-004M0J-Rb
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Nov 2019 05:10:54 +0000
-ARC-Seal: i=1; a=rsa-sha256; t=1574053816; cv=none; d=zoho.com.cn; s=zohoarc; 
- b=nOqkrGkbDhtS3JDMvQRPuCCRI17CD3aKZSTRZtWSBRtIjONCrKc6v+eLP7IuCi+Tkb0VZoRzf+u9HRwRyoZxjpE3o/LBCY/xtjVY9lmLKSyHDBAtPBSmHY/MkEagt4xEyqco26PSMXg93wv5ol1WfKIHQt+zoEOWThlUcRAGN+8=
+ id 1iWZJI-004CUu-7b
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Nov 2019 05:10:52 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1574053818; cv=none; d=zoho.com.cn; s=zohoarc; 
+ b=CFiTydxXmqD9bMG7v780o3N8ddqWN6K3FCgyTdlTsez+ICLl9SEtemLlO1rFmwdlnFVn0KaMzc1ve2S2pA//ZQDSMywCMchSASZ55qhlGgITwNozY47/lo2c/INkLP4RSjDGEAEdUnzyuSWpR2MhhKkB3r8PeWHkAF6uLKrdeQw=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com.cn;
- s=zohoarc; t=1574053816;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=BsgB+uLSbI/A7RpGrDvhjCegyC49pCxyhfWI2lOuUfk=; 
- b=PTPwfFgv2WlRWueS8Em/r/X8tv6FghRBaJJqvDQHrdYADltuXdTTk+PPpD9x7DXGGxiajBFuHx+ywgo4prEMy5XC3vRT4LdJwBbfwIffx2ETasq8EpSMJaSyDqKAEK4aliVEMaWCccd8f334fuTtopvX2yodxA6oYCsKxH3LQIs=
+ s=zohoarc; t=1574053818;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=W+4d37NiUZrTVp/T//URhJAtULIpMWsOCTG3JUgcQbA=; 
+ b=SfZrHruFtbvLbpQPjNc72IC+JSlnZfJ+XGA4IFDCxatxJXqhBCbg8JNLUagIec/KDcUIuQTVBtngdQoSW3hkUMbcgLGEpH8Fm+eXwz7ARt58nKunz86ZgaxuRX//6Mv41ix92didw44LkKsvKlQgBBZdKpmg9s6dWyjCHjCQdl8=
 ARC-Authentication-Results: i=1; mx.zoho.com.cn;
  dkim=pass  header.i=mykernel.net;
  spf=pass  smtp.mailfrom=cgxu519@mykernel.net;
  dmarc=pass header.from=<cgxu519@mykernel.net>
  header.from=<cgxu519@mykernel.net>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1574053816; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1574053818; 
  s=zohomail; d=mykernel.net; i=cgxu519@mykernel.net;
- h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=1765; bh=BsgB+uLSbI/A7RpGrDvhjCegyC49pCxyhfWI2lOuUfk=;
- b=Hd4TEPjE8y+eT9uAecADUdrpdpM8idvHMa1WowClTYYDjvX+VFqMB/ZTpEKHKjQi
- efzGVbutkWe2JrkyEhT91eL6JxU5nE58/YJUeOzq8cRZoz3qf/lUNAW3IQPj19sZVxj
- 2ViUFwDHjLT3p5JQPt2yg7VxII6IbzbJfqaDVpmA=
+ h=From:To:Cc:Message-ID:Subject:Date:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ l=1801; bh=W+4d37NiUZrTVp/T//URhJAtULIpMWsOCTG3JUgcQbA=;
+ b=Jz7cAV9vUe3W4KyujDLRcYQXLcQV6tl7gVqHx1v+Ljon9oHqojtRod0Rc50n5YC5
+ ZkEOZtA8Vu7ezLL5/F5sGKbob4KLpIxLDCTIwMJBQFp3pj5hakvhUeJmc/iSvEmO7Gl
+ mbdedSI3usWavsqw8+/jaZGYDbtDrn2dLYPcKTdA=
 Received: from localhost.localdomain (218.18.229.179 [218.18.229.179]) by
- mx.zoho.com.cn with SMTPS id 1574053813058511.6204774440098;
- Mon, 18 Nov 2019 13:10:13 +0800 (CST)
+ mx.zoho.com.cn with SMTPS id 157405381681740.021350625482796;
+ Mon, 18 Nov 2019 13:10:16 +0800 (CST)
 From: Chengguang Xu <cgxu519@mykernel.net>
 To: linux-ext4@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org
-Message-ID: <20191118050949.15629-1-cgxu519@mykernel.net>
-Date: Mon, 18 Nov 2019 13:09:47 +0800
+Message-ID: <20191118050949.15629-2-cgxu519@mykernel.net>
+Date: Mon, 18 Nov 2019 13:09:48 +0800
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191118050949.15629-1-cgxu519@mykernel.net>
+References: <20191118050949.15629-1-cgxu519@mykernel.net>
 MIME-Version: 1.0
 X-ZohoCNMailClient: External
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: mykernel.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -78,13 +84,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: mykernel.net]
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iWZJL-004M0J-Rb
-Subject: [f2fs-dev] [RFC PATCH 1/3] ext4: show prjquota info on statfs for a
+X-Headers-End: 1iWZJI-004CUu-7b
+Subject: [f2fs-dev] [RFC PATCH 2/3] f2fs: show prjquota info on statfs for a
  file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -119,19 +120,20 @@ cmVkwqDCoMKgwqDCoCAxLjBHwqDCoCAxM00gMTAxMk3CoMKgIDIlIC8KClJ1biBkZiBvbiBhIGZp
 bGU6Cgpbcm9vdCAvXSMgZGYgLWggL2V0Yy9leHBvcnRzCkZpbGVzeXN0ZW3CoMKgwqDCoMKgIFNp
 emXCoCBVc2VkIEF2YWlsIFVzZSUgTW91bnRlZCBvbgprYXRhU2hhcmVkwqDCoMKgwqDCoCAxLjVU
 wqAgNzc4TcKgIDEuNVTCoMKgIDElIC8KClNpZ25lZC1vZmYtYnk6IENoZW5nZ3VhbmcgWHUgPGNn
-eHU1MTlAbXlrZXJuZWwubmV0PgotLS0KIGZzL2V4dDQvc3VwZXIuYyB8IDMgKystCiAxIGZpbGUg
-Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZnMv
-ZXh0NC9zdXBlci5jIGIvZnMvZXh0NC9zdXBlci5jCmluZGV4IGRkNjU0ZTUzYmEzZC4uM2ZiYTIy
-YjU0ZjVjIDEwMDY0NAotLS0gYS9mcy9leHQ0L3N1cGVyLmMKKysrIGIvZnMvZXh0NC9zdXBlci5j
-CkBAIC01NjA3LDcgKzU2MDcsOCBAQCBzdGF0aWMgaW50IGV4dDRfc3RhdGZzKHN0cnVjdCBkZW50
-cnkgKmRlbnRyeSwgc3RydWN0IGtzdGF0ZnMgKmJ1ZikKIAlidWYtPmZfZnNpZC52YWxbMV0gPSAo
-ZnNpZCA+PiAzMikgJiAweEZGRkZGRkZGVUw7CiAKICNpZmRlZiBDT05GSUdfUVVPVEEKLQlpZiAo
-ZXh0NF90ZXN0X2lub2RlX2ZsYWcoZGVudHJ5LT5kX2lub2RlLCBFWFQ0X0lOT0RFX1BST0pJTkhF
-UklUKSAmJgorCWlmICgoZXh0NF90ZXN0X2lub2RlX2ZsYWcoZGVudHJ5LT5kX2lub2RlLCBFWFQ0
-X0lOT0RFX1BST0pJTkhFUklUKSB8fAorCSAgICAgIVNfSVNESVIoZGVudHJ5LT5kX2lub2RlLT5p
-X21vZGUpKSAmJgogCSAgICBzYl9oYXNfcXVvdGFfbGltaXRzX2VuYWJsZWQoc2IsIFBSSlFVT1RB
-KSkKIAkJZXh0NF9zdGF0ZnNfcHJvamVjdChzYiwgRVhUNF9JKGRlbnRyeS0+ZF9pbm9kZSktPmlf
-cHJvamlkLCBidWYpOwogI2VuZGlmCi0tIAoyLjIwLjEKCgoKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+eHU1MTlAbXlrZXJuZWwubmV0PgotLS0KIGZzL2YyZnMvc3VwZXIuYyB8IDUgKysrLS0KIDEgZmls
+ZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
+ZnMvZjJmcy9zdXBlci5jIGIvZnMvZjJmcy9zdXBlci5jCmluZGV4IDE0NDNjZWUxNTg2My4uYzVi
+OWE5MmQ2MDZiIDEwMDY0NAotLS0gYS9mcy9mMmZzL3N1cGVyLmMKKysrIGIvZnMvZjJmcy9zdXBl
+ci5jCkBAIC0xMjg3LDggKzEyODcsOSBAQCBzdGF0aWMgaW50IGYyZnNfc3RhdGZzKHN0cnVjdCBk
+ZW50cnkgKmRlbnRyeSwgc3RydWN0IGtzdGF0ZnMgKmJ1ZikKIAlidWYtPmZfZnNpZC52YWxbMV0g
+PSAodTMyKShpZCA+PiAzMik7CiAKICNpZmRlZiBDT05GSUdfUVVPVEEKLQlpZiAoaXNfaW5vZGVf
+ZmxhZ19zZXQoZGVudHJ5LT5kX2lub2RlLCBGSV9QUk9KX0lOSEVSSVQpICYmCi0JCQlzYl9oYXNf
+cXVvdGFfbGltaXRzX2VuYWJsZWQoc2IsIFBSSlFVT1RBKSkgeworCWlmICgoaXNfaW5vZGVfZmxh
+Z19zZXQoZGVudHJ5LT5kX2lub2RlLCBGSV9QUk9KX0lOSEVSSVQpIHx8CisJICAgICAhU19JU0RJ
+UihkZW50cnktPmRfaW5vZGUtPmlfbW9kZSkpICYmCisJICAgIHNiX2hhc19xdW90YV9saW1pdHNf
+ZW5hYmxlZChzYiwgUFJKUVVPVEEpKSB7CiAJCWYyZnNfc3RhdGZzX3Byb2plY3Qoc2IsIEYyRlNf
+SShkZW50cnktPmRfaW5vZGUpLT5pX3Byb2ppZCwgYnVmKTsKIAl9CiAjZW5kaWYKLS0gCjIuMjAu
+MQoKCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
+Zm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xp
+bnV4LWYyZnMtZGV2ZWwK
