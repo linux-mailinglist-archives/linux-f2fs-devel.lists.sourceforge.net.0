@@ -2,62 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3ED12107609
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2019 17:53:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B237107947
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2019 21:09:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iYCBp-0006Mu-8Z; Fri, 22 Nov 2019 16:53:49 +0000
+	id 1iYFFR-0006oO-26; Fri, 22 Nov 2019 20:09:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1iYCBn-0006Mn-Qs
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 16:53:47 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1iYFFG-0006nm-FJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 20:09:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GVyP3qohTM4ZcHOJFrXk4YIsWCiqJCVX3D6C+EpUpJ0=; b=OKXILgweArHQiHCMcxANxbimLk
- o8z1RLV67RU4/4uMQg+SgYZ6KadnHSsZ158ahiH2LMEbo2zbS7Yi6rgFKctj74sKCDzvbyN3dPjvD
- Mv5BGH7Fs/+dVxZ3ko4RrNo163Fk7pNzFzda0JQtPj+c7GjGyiJnVymtu/mtWpUXt7CA=;
+ bh=A9Dtm7PIfXw0OTDWhLZrVgrukGKnYgFBLqGdjwfqcqI=; b=MDTfu01hS6d5LgUvLa05/ny1lp
+ GY0z9I4QiH69XVzDl+dxVFAUm9phbJUMFA4QJ83S5vvLgn2SdZtLOWzLSfEOjwBEYhbr8pUb/UHeE
+ D5E3TyedWWuwgvvYdbGKS56XjQJJVXchtQmARFs0LKU8heELRWJdxkhs3RL1JSivS96Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=GVyP3qohTM4ZcHOJFrXk4YIsWCiqJCVX3D6C+EpUpJ0=; b=jzeeXb3m5MVVEQbn0fC+b13WX4
- XafgbWGmWi1ZDKz8dfNDjvMcoI/I3S1Uz8pPbfHnkLkKp+0T+/xsBYZ9DPAzGH5M6cyEBNJWLFr73
- 2DVTny6Z6EjT3TS9aEPPEYRynbmMfBSt6YBogEQTNJvEVgMAMVDBnJOCjN+zyTORS6+k=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=A9Dtm7PIfXw0OTDWhLZrVgrukGKnYgFBLqGdjwfqcqI=; b=j
+ 7qLQj45/b6jBToFoglyrN/EjW+bMzadekzehDMRxLm/pbzdKGM5NjwhhWpCJZHpA7Ca7BNVFw1BGV
+ 7TS39KqGMC/kTcXXtSzvnx/g+IHwR7bD0+SsItWZxjMKc8pnCSBNivWlZTPcFWKYI6KtfGYL84dOc
+ mPHgLVx0QeEhbDFk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iYCBl-000gyn-Fx
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 16:53:47 +0000
+ id 1iYFFF-00AZkq-3H
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 20:09:34 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3102320672;
- Fri, 22 Nov 2019 16:53:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9B9AF2068F;
+ Fri, 22 Nov 2019 20:09:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1574441610;
- bh=JQc+KsF5lzYeruxmK9jO7TjWnowAWT5i/fC5nqNh9ss=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=BxYNl3gOYcqHLHgxDw4SbW5djxQLCNTFdwfPdsxPK6/g+yjSx35G1d/ade4NlhvJO
- 3cx1Ze3kd0wePIUlDcplMgcxiE73WnQG82V0APZ+6a9njWyp6h34pdJ1cJf66T/vV9
- uo3T2Le8MANxKTaxOC2SP8iFvn9+Jc6Gu0YIy9NM=
-Date: Fri, 22 Nov 2019 08:53:28 -0800
+ s=default; t=1574453362;
+ bh=sUU5ZHY5o7dMVF1G7nOuopKx1TMsfFOufwaWDvxep14=;
+ h=From:To:Cc:Subject:Date:From;
+ b=p3AersLtERcCiWgiHG0s79dPmiHB2nPQF2Ibr+jLXXalGxmxpLAOkIqWFUzaMh813
+ HI7a/gu38NO7AIXzEzt0eQETT1sfw7VdV6Mix+D1IQLAbfE2ZruFEtUKCk5PIgqQYD
+ AZ9VfK5k9//yIe3EcYAI2HUXUC0IBnTKvYAVPgp0=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Sahitya Tummala <stummala@codeaurora.org>
-Message-ID: <20191122165328.GA74621@jaegeuk-macbookpro.roam.corp.google.com>
-References: <1573641063-21232-1-git-send-email-stummala@codeaurora.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 22 Nov 2019 12:09:19 -0800
+Message-Id: <20191122200920.83941-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1573641063-21232-1-git-send-email-stummala@codeaurora.org>
-User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,9 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iYCBl-000gyn-Fx
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix deadlock in f2fs_gc() context
- during atomic files handling
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iYFFF-00AZkq-3H
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: expose main_blkaddr in sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,141 +81,89 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Ramon Pantin <pantin@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/13, Sahitya Tummala wrote:
-> The FS got stuck in the below stack when the storage is almost
-> full/dirty condition (when FG_GC is being done).
-> 
-> schedule_timeout
-> io_schedule_timeout
-> congestion_wait
-> f2fs_drop_inmem_pages_all
-> f2fs_gc
-> f2fs_balance_fs
-> __write_node_page
-> f2fs_fsync_node_pages
-> f2fs_do_sync_file
-> f2fs_ioctl
-> 
-> The root cause for this issue is there is a potential infinite loop
-> in f2fs_drop_inmem_pages_all() for the case where gc_failure is true
-> and when there an inode whose i_gc_failures[GC_FAILURE_ATOMIC] is
-> not set. Fix this by keeping track of the total atomic files
-> currently opened and using that to exit from this condition.
-> 
-> Fix-suggested-by: Chao Yu <yuchao0@huawei.com>
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> ---
-> v2:
-> - change fix as per Chao's suggestion
-> - decrement sbi->atomic_files protected under sbi->inode_lock[ATOMIC_FILE] and
->   only when atomic flag is cleared for the first time, otherwise, the count
->   goes to an invalid/high value as f2fs_drop_inmem_pages() can be called from
->   two contexts at the same time.
-> 
->  fs/f2fs/f2fs.h    |  1 +
->  fs/f2fs/file.c    |  1 +
->  fs/f2fs/segment.c | 21 +++++++++++++++------
->  3 files changed, 17 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index c681f51..e04a665 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1297,6 +1297,7 @@ struct f2fs_sb_info {
->  	unsigned int gc_mode;			/* current GC state */
->  	unsigned int next_victim_seg[2];	/* next segment in victim section */
->  	/* for skip statistic */
-> +	unsigned int atomic_files;              /* # of opened atomic file */
->  	unsigned long long skipped_atomic_files[2];	/* FG_GC and BG_GC */
->  	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
->  
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index f6c038e..22c4949 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -1919,6 +1919,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
->  	if (list_empty(&fi->inmem_ilist))
->  		list_add_tail(&fi->inmem_ilist, &sbi->inode_list[ATOMIC_FILE]);
-> +	sbi->atomic_files++;
->  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
->  
->  	/* add inode in inmem_list first and set atomic_file */
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index da830fc..0b7a33b 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -288,6 +288,8 @@ void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
->  	struct list_head *head = &sbi->inode_list[ATOMIC_FILE];
->  	struct inode *inode;
->  	struct f2fs_inode_info *fi;
-> +	unsigned int count = sbi->atomic_files;
-> +	unsigned int looped = 0;
->  next:
->  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
->  	if (list_empty(head)) {
-> @@ -296,22 +298,26 @@ void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
->  	}
->  	fi = list_first_entry(head, struct f2fs_inode_info, inmem_ilist);
->  	inode = igrab(&fi->vfs_inode);
-> +	if (inode)
-> +		list_move_tail(&fi->inmem_ilist, head);
->  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
->  
->  	if (inode) {
->  		if (gc_failure) {
-> -			if (fi->i_gc_failures[GC_FAILURE_ATOMIC])
-> -				goto drop;
-> -			goto skip;
-> +			if (!fi->i_gc_failures[GC_FAILURE_ATOMIC])
-> +				goto skip;
->  		}
-> -drop:
->  		set_inode_flag(inode, FI_ATOMIC_REVOKE_REQUEST);
->  		f2fs_drop_inmem_pages(inode);
-> +skip:
->  		iput(inode);
->  	}
-> -skip:
->  	congestion_wait(BLK_RW_ASYNC, HZ/50);
->  	cond_resched();
-> +	if (gc_failure) {
-> +		if (++looped >= count)
+Expose in /sys/fs/f2fs/<blockdev>/main_blkaddr the block address where the
+main area starts. This allows user mode programs to determine:
 
-There is a race condition when handling sbi->atomic_files?
+- That pinned files that are made exclusively of fully allocated 2MB
+  segments will never be unpinned by the file system.
 
-> +			return;
-> +	}
->  	goto next;
->  }
->  
-> @@ -327,13 +333,16 @@ void f2fs_drop_inmem_pages(struct inode *inode)
->  		mutex_unlock(&fi->inmem_lock);
->  	}
->  
-> -	clear_inode_flag(inode, FI_ATOMIC_FILE);
->  	fi->i_gc_failures[GC_FAILURE_ATOMIC] = 0;
->  	stat_dec_atomic_write(inode);
->  
->  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
->  	if (!list_empty(&fi->inmem_ilist))
->  		list_del_init(&fi->inmem_ilist);
-> +	if (f2fs_is_atomic_file(inode)) {
-> +		clear_inode_flag(inode, FI_ATOMIC_FILE);
-> +		sbi->atomic_files--;
-> +	}
->  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
->  }
->  
-> -- 
-> Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-> Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+- Where the main area starts. This is required by programs that want to
+  verify if a file is made exclusively of 2MB f2fs segments, the alignment
+  boundary for segments starts at this address. Testing for 2MB alignment
+  relative to the start of the device is incorrect, because for some
+  filesystems main_blkaddr is not at a 2MB boundary relative to the start
+  of the device.
+
+The entry will be used when validating reliable pinning file feature proposed
+by "f2fs: support aligned pinned file".
+
+Signed-off-by: Ramon Pantin <pantin@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ Documentation/filesystems/f2fs.txt      | 3 +++
+ fs/f2fs/sysfs.c                         | 2 ++
+ 3 files changed, 11 insertions(+)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 7ab2b1b5e255..aedeae1e8ec1 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -31,6 +31,12 @@ Contact:	"Jaegeuk Kim" <jaegeuk.kim@samsung.com>
+ Description:
+ 		 Controls the issue rate of segment discard commands.
+ 
++What:		/sys/fs/f2fs/<disk>/max_blkaddr
++Date:		November 2019
++Contact:	"Ramon Pantin" <pantin@google.com>
++Description:
++		 Shows first block address of MAIN area.
++
+ What:		/sys/fs/f2fs/<disk>/ipu_policy
+ Date:		November 2013
+ Contact:	"Jaegeuk Kim" <jaegeuk.kim@samsung.com>
+diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
+index 29020af0cff9..3135b80df6da 100644
+--- a/Documentation/filesystems/f2fs.txt
++++ b/Documentation/filesystems/f2fs.txt
+@@ -297,6 +297,9 @@ Files in /sys/fs/f2fs/<devname>
+ 			      reclaim the prefree segments to free segments.
+ 			      By default, 5% over total # of segments.
+ 
++ main_blkaddr                 This value gives the first block address of
++			      MAIN area in the partition.
++
+  max_small_discards	      This parameter controls the number of discard
+ 			      commands that consist small blocks less than 2MB.
+ 			      The candidates to be discarded are cached until
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index f164959e4224..70945ceb9c0c 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -445,6 +445,7 @@ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_no_gc_sleep_time, no_gc_sleep_time);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle, gc_mode);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent, gc_mode);
+ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, reclaim_segments, rec_prefree_segments);
++F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, main_blkaddr, main_blkaddr);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_small_discards, max_discards);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
+ F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
+@@ -512,6 +513,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_idle),
+ 	ATTR_LIST(gc_urgent),
+ 	ATTR_LIST(reclaim_segments),
++	ATTR_LIST(main_blkaddr),
+ 	ATTR_LIST(max_small_discards),
+ 	ATTR_LIST(discard_granularity),
+ 	ATTR_LIST(batched_trim_sections),
+-- 
+2.19.0.605.g01d371f741-goog
+
 
 
 _______________________________________________
