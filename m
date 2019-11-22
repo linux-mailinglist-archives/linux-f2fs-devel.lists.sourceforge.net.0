@@ -2,99 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9926510305C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Nov 2019 00:41:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A3091060C1
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2019 06:52:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iXD7L-00053L-EF; Tue, 19 Nov 2019 23:41:07 +0000
+	id 1iY1rW-0004gM-Ea; Fri, 22 Nov 2019 05:52:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <bart.vanassche@gmail.com>) id 1iXD7I-000537-OK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Nov 2019 23:41:04 +0000
+ (envelope-from <sashal@kernel.org>) id 1iY1rV-0004gF-82
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 05:52:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LGdI8nMvJO9Yp2V4F8P1ev7tTWwm2jfSwnW1T5/k5as=; b=Pl0BNalDrX5c0tNYp/YuYUzma5
- lUCzYXRP2s4JVFNdBqO60jZ3gCzL3w+SpGWkFTxqbVdxpzEKBblIeBJbtfMsxl0G4Z/3RCNjcqbkO
- vmXM/oRDlDt9RE5tB1i+tFif+dqs/ltMF3CmlVy6iUVsvoPj7hmitHaMr/ctggc6ndvY=;
+ bh=dOlEEsN1sM/ZeY3wtKXF1hCnfWPtlHPpkHhsec7O77Y=; b=Y9W8sC6jgIEeS2oYj6GeJRPVkD
+ 4fduRFo66uX1tpjk54mns+nHWktx2BnmCkvdsQnL7Bvlp/2ZzeraSWGtfDB7X9d3/DQK8kwdB611w
+ zO5FP6Zj/7drexa9VvGKd57qRJDfIVxgf20PM8l0eRl9vBMsTAQQWpcY+cMAZvr/NeIc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LGdI8nMvJO9Yp2V4F8P1ev7tTWwm2jfSwnW1T5/k5as=; b=iTb5/gydKPAbl3bXPDhmAXtUoe
- mV1Rbx50n/hwxVv54vgYKXtQXVB7yfiHsRWEXL+NGobgcWFqUi0aTlxf2QQgPFu2cE3I6WQYoj6Tw
- LcmTjLSW6nLPEtked0dA0k9Tbct/w5LE/K0tqbbGu0A8m01/heXzlZDUzq0T0agocvss=;
-Received: from mail-pl1-f196.google.com ([209.85.214.196])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iXD7H-006Zpa-Bw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Nov 2019 23:41:04 +0000
-Received: by mail-pl1-f196.google.com with SMTP id d7so12851325pls.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 19 Nov 2019 15:41:03 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=LGdI8nMvJO9Yp2V4F8P1ev7tTWwm2jfSwnW1T5/k5as=;
- b=n+FLwVHxmZmDN3ySNqSpdb1tcQ+jue2uqJdMBJ0s/eH/oMXz+yH6+5oxRk+X7lHy7p
- 19YwJfeh6t60ui9XG1zl4cgxlp7uWqMRGaQjz3DOU+3MEqlfmyOx12Tk1aNZADAXHa15
- r4N+71zcpcEXpDwY5M9fK8xFEjc/zqm0Rm2z0Qj9J4zEp8d1bk67emWIdaaF+8Tk8mvZ
- I5o2gzm7Wp0Lh3JPr2fsfFWLmAYaZP8PtuHVMkarCDkF4tDB3CJsT3ssWmc0hPrHO1Tq
- WIFm+WX2bJse8rBuY60k1hxqQbdARm6wxR0Ji4PVQYePh7pySiw/PVHPsxvknDfnM1n2
- O7Bw==
-X-Gm-Message-State: APjAAAW/H0Je+EjT3NPpV1vhYgbQiIkYBvhabcdPnYa/EALvhRhs0RPs
- q35sSWJflQkuSLA6fV4DlMsPadfkG1o=
-X-Google-Smtp-Source: APXvYqxaqRKCdfDH6V8YoUt6s/ImovXm0GCKDyXavhCF1NO0+J23GblS0JEL8I94w3YrZSAKQMm05Q==
-X-Received: by 2002:a17:90a:bd95:: with SMTP id
- z21mr246817pjr.10.1574206857435; 
- Tue, 19 Nov 2019 15:40:57 -0800 (PST)
-Received: from desktop-bart.svl.corp.google.com
- ([2620:15c:2cd:202:4308:52a3:24b6:2c60])
- by smtp.gmail.com with ESMTPSA id x192sm29727552pfd.96.2019.11.19.15.40.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Nov 2019 15:40:56 -0800 (PST)
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20190518004751.18962-1-jaegeuk@kernel.org>
- <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
-From: Bart Van Assche <bvanassche@acm.org>
-Message-ID: <1e1aae74-bd6b-dddb-0c88-660aac33872c@acm.org>
-Date: Tue, 19 Nov 2019 15:40:55 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ bh=dOlEEsN1sM/ZeY3wtKXF1hCnfWPtlHPpkHhsec7O77Y=; b=de0Vvpo0rAhYOOyMBfOJOx/NG4
+ wnjaP1hIjG1IHRYZEsLzk1Jv5j7CEcxuJy5lj+yv5sM6DxT8s1Mla/Ibg3h+Javfv/9Vtydsw0aY7
+ YA3tpJS9Lb7dsjAnzlnlN8rez8oA7ryXywzCo8UivwJsP18cBGaqvKysYwzO3qP9GnoU=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iY1rS-0000cu-6l
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Nov 2019 05:52:08 +0000
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0916520717;
+ Fri, 22 Nov 2019 05:51:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1574401910;
+ bh=pnHoMJ/VIf/bpAE19w6W//LfMUwzElYtDIiJ9wLpwgo=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=rVpGJBIFVn9ld64xGBlidcb1MVObsr3xoN5VZeHEw3BojbKasOoWgHvZzvT8HspwT
+ SxNFD44RR/9DN4U6ZaidiTDa+ysR7PIycotTimvc05BqzBn8GRexr5J7G0MyCf7qhG
+ auL0SqARIlpdOlIeg1irbs6IBU/WN59fBpFLR1to=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri, 22 Nov 2019 00:47:53 -0500
+Message-Id: <20191122054911.1750-134-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191122054911.1750-1-sashal@kernel.org>
+References: <20191122054911.1750-1-sashal@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (bart.vanassche[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.214.196 listed in list.dnswl.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and EnvelopeFrom
- freemail headers are different
- -0.6 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iXD7H-006Zpa-Bw
-Subject: Re: [f2fs-dev] [PATCH v2] loop: avoid EAGAIN,
- if offset or block_size are changed
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iY1rS-0000cu-6l
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 141/219] f2fs: fix block address for
+ __check_sit_bitmap
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,32 +87,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- stable@vger.kernel.org
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Qiuyang Sun <sunqiuyang@huawei.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 5/17/19 5:53 PM, Jaegeuk Kim wrote:
-> This patch tries to avoid EAGAIN due to nrpages!=0 that was originally trying
-> to drop stale pages resulting in wrong data access.
-> 
-> Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
+From: Qiuyang Sun <sunqiuyang@huawei.com>
 
-Please provide a more detailed commit description. What is wrong with 
-the current implementation and why is the new behavior considered the 
-correct behavior?
+[ Upstream commit 9249dded7b5cb539a8c8698b25d08a3c15261470 ]
 
-This patch moves draining code from before the following comment to 
-after that comment:
+Should use lstart (logical start address) instead of start (in dev) here.
+This fixes a bug in multi-device scenarios.
 
-/* I/O need to be drained during transfer transition */
+Signed-off-by: Qiuyang Sun <sunqiuyang@huawei.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ fs/f2fs/segment.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Is that comment still correct or should it perhaps be updated?
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 10d5dcdb34be6..01cb87b12d40b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1101,7 +1101,7 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+ 		list_move_tail(&dc->list, wait_list);
+ 
+ 		/* sanity check on discard range */
+-		__check_sit_bitmap(sbi, start, start + len);
++		__check_sit_bitmap(sbi, lstart, lstart + len);
+ 
+ 		bio->bi_private = dc;
+ 		bio->bi_end_io = f2fs_submit_discard_endio;
+-- 
+2.20.1
 
-Thanks,
-
-Bart.
 
 
 _______________________________________________
