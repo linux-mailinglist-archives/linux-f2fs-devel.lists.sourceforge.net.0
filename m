@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34B7F108B60
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 Nov 2019 11:09:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A5521092F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 Nov 2019 18:41:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iZBIg-000738-4x; Mon, 25 Nov 2019 10:08:58 +0000
+	id 1iZIMA-0002Gv-7h; Mon, 25 Nov 2019 17:41:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <0101016ea208bba5-3f551272-77ae-4a4c-8fff-afb947374bbf-000000@us-west-2.amazonses.com>)
- id 1iZBIa-00072m-4z
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 Nov 2019 10:08:52 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1iZIM9-0002Gd-4u
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 Nov 2019 17:41:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/GhtkUSnbi47bjaIsSSrfNIy0nMmqUCkfkyml8WbIhs=; b=KhRoTZAVTyY9EBNh+z+iW0QLqd
- /ghJYnkp4W+H/Hw/tW0xJ363Q+xSQ5KoOz3OSTnTGthCCIkCzdR1UqmmrSxbTtWSo9F19pXSxegEL
- dRJzDTuDpaXtQaHXonYc9Wivn/WzNxPj+TAwCnnx2YAWAIASwAVUamrY6kjw8mRNnThs=;
+ bh=ybGks680lJwNmhXCXZfywn4eAh432nZER0QhUR/7Vog=; b=F3V84+8/IWZ5/a95s3jThLfNjR
+ GxIaypwFEMQ2cy9WDrrDobSGJkAh8anMgT2cQdforr/iaP1ezwyP1MKL2ft7uRVA2IvEGk52jRum8
+ rs+eIcll+i59of26GKaDbEYHbyvADV7M6arPMd8dNJhg0VOnKGz3jbrIM1cLRkhgyS+8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,61 +29,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/GhtkUSnbi47bjaIsSSrfNIy0nMmqUCkfkyml8WbIhs=; b=bEvafkG5kSRksLUfXyhcek5Mn4
- kMWC9SWv+PTrYTOqTEZyNv3baUHAdJRKNImHsdMmzJA0moWz+Lbb5aUQcqJmlgkB4NtySazIj2JJK
- 6lob/4hgZ5bzS7t2WGlw90S6O+vXqTdI6mujh0Ketpq9PM0jDLoao44OX1Hu55bHU3ps=;
-Received: from a27-21.smtp-out.us-west-2.amazonses.com ([54.240.27.21])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92.2)
- id 1iZBIO-00DCx8-UR
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 Nov 2019 10:08:49 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=zsmsymrwgfyinv5wlfyidntwsjeeldzt; d=codeaurora.org; t=1574676511;
- h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To;
- bh=EL2996yTjmZweOQGwmsqTd/z5X3XZPc7Z11fozUUOn4=;
- b=dN63DBxi0skt809++2jbfK5n8ydBkgyQDb43Vrh99xiPwrrN/o97dV8e6sFEst0y
- 6HTotJ82lrQbWcYZZxzwCA7bhG3mwRVKyD0ZM6780MyyLctd0HoJJp4QEu3Gc8U4sS7
- UtltRz2CtoY2VwWk6QWv0tsJYzvpf9QXUwjzK7Oc=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx; d=amazonses.com; t=1574676511;
- h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Feedback-ID;
- bh=EL2996yTjmZweOQGwmsqTd/z5X3XZPc7Z11fozUUOn4=;
- b=MUBYzS2QwnB7OSgjOX33TkQkphzWQaTmViVYwlFszRbo50swH2s+eAD9upyNcduy
- 59pTF7R6d7Dgr6b4XaG3vU9w2VrT5MGTdZjBmCwmR4bix+qvIgl1p4vmNQ04I70kt8w
- 1q4CJo3x5dPSQx/fDsH6cddjoivB0o8Mmxm47OW4=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
- URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org F1D21C447B1
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-Date: Mon, 25 Nov 2019 10:08:31 +0000
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <0101016ea208bba5-3f551272-77ae-4a4c-8fff-afb947374bbf-000000@us-west-2.amazonses.com>
-References: <1573641063-21232-1-git-send-email-stummala@codeaurora.org>
- <20191122165328.GA74621@jaegeuk-macbookpro.roam.corp.google.com>
+ bh=ybGks680lJwNmhXCXZfywn4eAh432nZER0QhUR/7Vog=; b=eYq9295BUqIMg/5XXh+L8TqhGi
+ DYRL3ctFFgvcvzp1k8YLXrRWmrc5xIUshq/omDbPw56qBkeRe+ptxCF/INgp5NV0vGPPLTuCC8ypB
+ PllAhcLmRa5wpbSLL2zjCSuKsO9x6PdQd2qBiTEAV+uYdN6djY6iCcSz+ieNg7Y79faQ=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iZIM2-0056rZ-Mf
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 Nov 2019 17:41:01 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0D79A20835;
+ Mon, 25 Nov 2019 17:40:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1574703649;
+ bh=O3u3f9+D/RgY/nDvw9cILJ1NckWKDUqe9EarZDQRPqs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RnqAvINxwz3qS2ujBOBH5W0XjSEeSu4C4pQj7MwpBblGGglo6kdJlZH/uraTan6FY
+ cTWFkpnnzh20ZD6zSIVSfb2R7IxFcBf/ANbEKjs0qvs70VRNiAeU+ZvkqTSxv7eB5e
+ fuNbzQZov02k4U0lDDNMtzezFXzFPQSAQ5G/vwSY=
+Date: Mon, 25 Nov 2019 09:40:48 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Stephanos Mallouris <stephanos.mallouris@gmail.com>
+Message-ID: <20191125174048.GA71634@jaegeuk-macbookpro.roam.corp.google.com>
+References: <CAPfgDnCxNrZ-ZfEVoDG_ET8bjRNi3KaSPsjRE_ZrMm-yLbr4Cw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191122165328.GA74621@jaegeuk-macbookpro.roam.corp.google.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SES-Outgoing: 2019.11.25-54.240.27.21
-Feedback-ID: 1.us-west-2.CZuq2qbDmUIuT3qdvXlRHZZCpfZqZ4GtG9v3VKgRyF0=:AmazonSES
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <CAPfgDnCxNrZ-ZfEVoDG_ET8bjRNi3KaSPsjRE_ZrMm-yLbr4Cw@mail.gmail.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [54.240.27.21 listed in list.dnswl.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -93,9 +68,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iZBIO-00DCx8-UR
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix deadlock in f2fs_gc() context
- during atomic files handling
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iZIM2-0056rZ-Mf
+Subject: Re: [f2fs-dev] problem with f2fs android partition
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,159 +83,129 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jaegeuk,
+Hi,
 
-On Fri, Nov 22, 2019 at 08:53:28AM -0800, Jaegeuk Kim wrote:
-> On 11/13, Sahitya Tummala wrote:
-> > The FS got stuck in the below stack when the storage is almost
-> > full/dirty condition (when FG_GC is being done).
-> > 
-> > schedule_timeout
-> > io_schedule_timeout
-> > congestion_wait
-> > f2fs_drop_inmem_pages_all
-> > f2fs_gc
-> > f2fs_balance_fs
-> > __write_node_page
-> > f2fs_fsync_node_pages
-> > f2fs_do_sync_file
-> > f2fs_ioctl
-> > 
-> > The root cause for this issue is there is a potential infinite loop
-> > in f2fs_drop_inmem_pages_all() for the case where gc_failure is true
-> > and when there an inode whose i_gc_failures[GC_FAILURE_ATOMIC] is
-> > not set. Fix this by keeping track of the total atomic files
-> > currently opened and using that to exit from this condition.
-> > 
-> > Fix-suggested-by: Chao Yu <yuchao0@huawei.com>
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> > ---
-> > v2:
-> > - change fix as per Chao's suggestion
-> > - decrement sbi->atomic_files protected under sbi->inode_lock[ATOMIC_FILE] and
-> >   only when atomic flag is cleared for the first time, otherwise, the count
-> >   goes to an invalid/high value as f2fs_drop_inmem_pages() can be called from
-> >   two contexts at the same time.
-> > 
-> >  fs/f2fs/f2fs.h    |  1 +
-> >  fs/f2fs/file.c    |  1 +
-> >  fs/f2fs/segment.c | 21 +++++++++++++++------
-> >  3 files changed, 17 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index c681f51..e04a665 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -1297,6 +1297,7 @@ struct f2fs_sb_info {
-> >  	unsigned int gc_mode;			/* current GC state */
-> >  	unsigned int next_victim_seg[2];	/* next segment in victim section */
-> >  	/* for skip statistic */
-> > +	unsigned int atomic_files;              /* # of opened atomic file */
-> >  	unsigned long long skipped_atomic_files[2];	/* FG_GC and BG_GC */
-> >  	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
-> >  
-> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > index f6c038e..22c4949 100644
-> > --- a/fs/f2fs/file.c
-> > +++ b/fs/f2fs/file.c
-> > @@ -1919,6 +1919,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
-> >  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  	if (list_empty(&fi->inmem_ilist))
-> >  		list_add_tail(&fi->inmem_ilist, &sbi->inode_list[ATOMIC_FILE]);
-> > +	sbi->atomic_files++;
-> >  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  
-> >  	/* add inode in inmem_list first and set atomic_file */
-> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> > index da830fc..0b7a33b 100644
-> > --- a/fs/f2fs/segment.c
-> > +++ b/fs/f2fs/segment.c
-> > @@ -288,6 +288,8 @@ void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
-> >  	struct list_head *head = &sbi->inode_list[ATOMIC_FILE];
-> >  	struct inode *inode;
-> >  	struct f2fs_inode_info *fi;
-> > +	unsigned int count = sbi->atomic_files;
-> > +	unsigned int looped = 0;
-> >  next:
-> >  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  	if (list_empty(head)) {
-> > @@ -296,22 +298,26 @@ void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
-> >  	}
-> >  	fi = list_first_entry(head, struct f2fs_inode_info, inmem_ilist);
-> >  	inode = igrab(&fi->vfs_inode);
-> > +	if (inode)
-> > +		list_move_tail(&fi->inmem_ilist, head);
-> >  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  
-> >  	if (inode) {
-> >  		if (gc_failure) {
-> > -			if (fi->i_gc_failures[GC_FAILURE_ATOMIC])
-> > -				goto drop;
-> > -			goto skip;
-> > +			if (!fi->i_gc_failures[GC_FAILURE_ATOMIC])
-> > +				goto skip;
-> >  		}
-> > -drop:
-> >  		set_inode_flag(inode, FI_ATOMIC_REVOKE_REQUEST);
-> >  		f2fs_drop_inmem_pages(inode);
-> > +skip:
-> >  		iput(inode);
-> >  	}
-> > -skip:
-> >  	congestion_wait(BLK_RW_ASYNC, HZ/50);
-> >  	cond_resched();
-> > +	if (gc_failure) {
-> > +		if (++looped >= count)
+On 11/22, Stephanos Mallouris wrote:
+> Dear all,
 > 
-> There is a race condition when handling sbi->atomic_files?
+> I have backup my f2fs android partition via netcat and adb.
+> After loosing the original partition, tried to restore it on a local
+> drive and access it via linux but i am encountering the following
+> issues:
 > 
-There is no concern here in this function w.r.t sbi->atomic_files value.
-Since when we loop over all the atomic files, the looped counter will increment
-and will exit when all the files are looped at least once.
+> A. trying the command
+> 
+>  sudo mount -t f2fs /dev/sdc1 /mnt
+> 
+> gives the following error
+> 
+>  F2FS-fs (sdc1): Failed to read root inode
+> 
+> B1. Tried to fsck the file system , see bellow:
+> 
+> sudo fsck.f2fs -a  /dev/sdc1
+> 
+> result:
+> 
+> Info: Fix the reported corruption.
+> Info: sector size = 512
+> Info: total sectors = 22310913 (10894 MB)
+> Info: MKFS version
+>   "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
+> (gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri Jan
+> 19 17:16:04 PKT 2018"
+> Info: FSCK version
+>   from "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022) (gcc
+> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #198-Ubuntu
+> SMP Tue Nov 12 10:34:23 UTC 2019"
+>     to "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022) (gcc
+> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #198-Ubuntu
+> SMP Tue Nov 12 10:34:23 UTC 2019"
+> Info: superblock features = 0 :
+> Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
+> Info: total FS sectors = 22310912 (10894 MB)
+> Info: CKPT version = 1307e4
+> Info: No error was reported
+> 
+> Still unable to mount the partiotion , gives the same error.
+> 
+> B2. Tried
+> sudo fsck.f2fs -f  /dev/sdc1
 
-There is an issue with f2fs_drop_inmem_pages() which is actually decrementing
-the sbi->atomic_files and that was handled below.
+Could you try: fsck.f2fs -d 3 -f /dev/sdc1?
+It seems you didn't back up the entire partition which is missing root inode
+block.
 
 Thanks,
-Sahitya.
 
-> > +			return;
-> > +	}
-> >  	goto next;
-> >  }
-> >  
-> > @@ -327,13 +333,16 @@ void f2fs_drop_inmem_pages(struct inode *inode)
-> >  		mutex_unlock(&fi->inmem_lock);
-> >  	}
-> >  
-> > -	clear_inode_flag(inode, FI_ATOMIC_FILE);
-> >  	fi->i_gc_failures[GC_FAILURE_ATOMIC] = 0;
-> >  	stat_dec_atomic_write(inode);
-> >  
-> >  	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  	if (!list_empty(&fi->inmem_ilist))
-> >  		list_del_init(&fi->inmem_ilist);
-> > +	if (f2fs_is_atomic_file(inode)) {
-> > +		clear_inode_flag(inode, FI_ATOMIC_FILE);
-> > +		sbi->atomic_files--;
-> > +	}
-> >  	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
-> >  }
-> >  
-> > -- 
-> > Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-> > Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
-
--- 
---
-Sent by a consultant of the Qualcomm Innovation Center, Inc.
-The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
+> 
+> result
+> 
+> Info: Force to fix corruption
+> Info: sector size = 512
+> Info: total sectors = 22310913 (10894 MB)
+> Info: MKFS version
+>   "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
+> (gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri Jan
+> 19 17:16:04 PKT 2018"
+> Info: FSCK version
+>   from "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022) (gcc
+> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #198-Ubuntu
+> SMP Tue Nov 12 10:34:23 UTC 2019"
+>     to "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022) (gcc
+> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #198-Ubuntu
+> SMP Tue Nov 12 10:34:23 UTC 2019"
+> Info: superblock features = 0 :
+> Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
+> Info: total FS sectors = 22310912 (10894 MB)
+> Info: CKPT version = 1307e4
+> Info: checkpoint state = 1 :  unmount
+> [ASSERT] (sanity_check_nid: 362)  --> nid[0x3] ino is 0
+> 
+> [FSCK] Unreachable nat entries                        [Ok..] [0x0]
+> [FSCK] SIT valid block bitmap checking                [Ok..]
+> [FSCK] Hard link checking for regular file            [Ok..] [0x0]
+> [FSCK] valid_block_count matching with CP             [Ok..] [0x0]
+> [FSCK] valid_node_count matcing with CP (de lookup)   [Ok..] [0x0]
+> [FSCK] valid_node_count matcing with CP (nat lookup)  [Ok..] [0x0]
+> [FSCK] valid_inode_count matched with CP              [Ok..] [0x0]
+> [FSCK] free segment_count matched with CP             [Ok..] [0x1519]
+> [FSCK] next block offset is free                      [Ok..]
+> [FSCK] fixing SIT types
+> [FSCK] other corrupted bugs                           [Fail]
+> [move_curseg_info:1471] Move curseg[0] 0 -> 0 after 5000
+> [move_curseg_info:1471] Move curseg[1] 1 -> 1 after 5000
+> [move_curseg_info:1471] Move curseg[2] 2 -> 2 after 5000
+> [move_curseg_info:1471] Move curseg[3] 3 -> 3 after 5000
+> [move_curseg_info:1471] Move curseg[4] 4 -> 4 after 5000
+> [move_curseg_info:1471] Move curseg[5] 5 -> 5 after 5000
+> 
+> Done.
+> 
+> 
+> 
+> Trying to mount it , no success, gives
+> 
+> F2FS-fs (sdc1): Failed to read root inode.
+> 
+> 
+> Any help or advice will be much appreciated.
+> Keep up the great work on f2fs.
+> 
+> Kindest Regards
+> 
+> Stephanos Mallouris
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
