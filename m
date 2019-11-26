@@ -2,146 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7BBE109923
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Nov 2019 07:20:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB8A0109956
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Nov 2019 07:43:29 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iZUDU-0005Zw-GI; Tue, 26 Nov 2019 06:20:52 +0000
+	id 1iZUZL-0008Lc-6v; Tue, 26 Nov 2019 06:43:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=22691bff3=Damien.LeMoal@wdc.com>)
- id 1iZUDU-0005Zo-3z
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Nov 2019 06:20:52 +0000
+ (envelope-from <javier@javigon.com>) id 1iZUZK-0008LQ-9e
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Nov 2019 06:43:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iWufAtH5f8x/BD+L+zyEpuDTJHcRRtbC/XmD5DiSmi0=; b=TI0HzfeVtSXfM0+LEb+HMLBUR3
- ExxLkfO/p2wF+8QZVmLxAL5LkA8vXOk1fx6JZmnM4q1CvYieO01/pcd1YN/AmH9X9OJA699tNC/iL
- FXXB1RECldPvHKqNdkOjuXDaT51mwGeS7wftxHFad25DzdgcI9pRGCbkld20NwISRe+w=;
+ bh=ETIUHJ3AzvG4MKmyof7txYs57MBd5qafDNDNbagrVYo=; b=L24f1b6I6CSNt22BKCe1brm8Ko
+ nLVRF8zbDdW99HTd8o5qDLHNubQ0BhsAHnQiyXBxuxNWL7DzB+s63fMRvog5gwFukZntfhwvMU5fq
+ oDyRsOTj3t3Tnrt3IpsMsHj7tlj768WonvRRW2VmlCdFP026ZVPmzQhhMERk3d7ULK7E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:Message-ID
- :Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iWufAtH5f8x/BD+L+zyEpuDTJHcRRtbC/XmD5DiSmi0=; b=O
- gsAzInGikriKrB3uJjDvrJz66C9qTquXJFN2ms6KELIcsvQlUNnF65uZ1fJovvvatEulY/0kwL1Yt
- 81lNxwbb6qxviX+Ik8nX4b69mbXwzlXgIbs7YDIEUz6C6lvBseRjYpadwXB3J5bwc75ztQ6evXk/O
- fjQf3hAoDReo5oBA=;
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ETIUHJ3AzvG4MKmyof7txYs57MBd5qafDNDNbagrVYo=; b=h1yvG3EXGW7Lc3zHonBrhf3lCa
+ +VNTW77b3YJ+pXX5cO8JeCsz6B4r0yoy2YjgS23lsj6tJJGVZw9q1xalsAMrm5UJAoY5hZs6PUrSA
+ J8pCMRH2A0i0w7Tca7yWdWii5QXVkrPkSD+jLk6MGAuWprmvwIa054D5OsdZNBUWlf7w=;
+Received: from mail-wm1-f66.google.com ([209.85.128.66])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iZUDO-00DiS0-Oi
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Nov 2019 06:20:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1574749247; x=1606285247;
- h=from:to:cc:subject:date:message-id:references:
- content-transfer-encoding:mime-version;
- bh=rw0c8MR2zm+zV2ZpZJVw9YXj3Jt5iLsfZeLO4udaQEk=;
- b=jG+97mvtQPtLNfd9uSGowq8g0nzFxPd/jnh4i+tAQhL2+eXrdiL9OJFG
- 2gSuymudJXoMzCm8V0OyMd8OkG2Z9ELzj0kCjnStrqZtLHJ+tT0x+snLX
- GJ2+7MSW8hsajOQYc0Q+sbJft34Eapkqx+4YL/VeOjyYQXAfAEUzA90zs
- YXP5mY8KaaD0gZu9pSFB2O1twYQcpoeURyde5JS15lYMvXKvtv6RidXiZ
- ne5R0SqK8F98z/RSvR3j2hgB3u65WG89TzftxW4aYJMU1YZvsGWzyYMdX
- wt0hDv5F8Huj8T4QbfrBrcUpp9AR3FPN9ZDO42l56DSP1rQrsUkspzxnl Q==;
-IronPort-SDR: JLPrOr0w3sDmRjHVNeAw9HbpJOw8Z0fCtaVwf+3ils2GBcvVuiqcLan5LwzIFlOOcIpuskUSq1
- Ab7lacOx5oIu+okQ/p7yWecygMxNdsufUFTx9gBg8LMsv5olNXlTa7eBkv2lw/zTOh5yRiDlLm
- jZejvt8Zfp3b+hRjntyOSWtcO/KeGkcSLwZICSKMDn2VuDAy2FcSsstee0fzeqcfJvOStiKEHJ
- QwyJAz6qnj+VeqyhjokOoG/72xLAhRbwVPa/fGk1VlhRP5BHPLHQF35dVX2yOzduRwtAhfl3JF
- OVI=
-X-IronPort-AV: E=Sophos;i="5.69,244,1571673600"; d="scan'208";a="125619595"
-Received: from mail-co1nam03lp2051.outbound.protection.outlook.com (HELO
- NAM03-CO1-obe.outbound.protection.outlook.com) ([104.47.40.51])
- by ob1.hgst.iphmx.com with ESMTP; 26 Nov 2019 14:20:32 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fpjRY0FhR7WB1NK+permKTEnFZAKLBYRhp1PHAtdqXfO3oGGDajjuFzG2OkceVGbDbJyYBdjIw6RPaY56XpL/hZ/BJSBBk8qd8qHNxn2jtUqKsHHHTPPbP0VgAGMjxT21/PJzpX0yTp+yD0QI/m+fyTcwPCpYwQKGNivDROSlmvYN2dmYT6p2S3EDa3vhcKzJA7AZBHOeMnVWe6as6J0rCSvZzbfIt+geUfMQpDPFhbFmsJicl+qhwf8ePgbs0RU3HRAqmbe3zy/p1UWU5c2olQh9xAyKFXRjNyyeTS9Hffoe3CrhnDdT9tp/xPNJc4OhiyYB3qO6eE3JVFEN4T/pg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iWufAtH5f8x/BD+L+zyEpuDTJHcRRtbC/XmD5DiSmi0=;
- b=DhvPilrMxgh18rlxdanP6KARJap/kFX1/+XqAUryetaifmzYDo40D+BfFwdl2tLgd0+XZoHo1H5Cuodbm0oOHaiJurrwETrL0gmlQMh4B23jPZcChFLaWkPwe4sTeIemZyN/FaRQUkXkUsRj5EYUkzKWgyh9sI4ZYWffDF5lGTROx+oKghEpg3o8JKq9vziXZfWbqYupVfm/2R4iutItwWtTK/dltTiGnrnaffLQmfIC2O7J48166Ex6N1XsRZSFwKxcfQG9tIkhxkSqZDz1o917mBWApgjul3Zuuj0tJXxqPMOrs9hw7DcYaY8KFQWdyOZNmFVqy6mV/nEBW+BRzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1iZUZI-00DjGp-IU
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Nov 2019 06:43:26 +0000
+Received: by mail-wm1-f66.google.com with SMTP id b11so1847751wmb.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 25 Nov 2019 22:43:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iWufAtH5f8x/BD+L+zyEpuDTJHcRRtbC/XmD5DiSmi0=;
- b=vM5cQ7Zko6XXfo6Jab02UZnR8SM8IRZVhYdyetyMYKb2Zg2QKXK3k3TZeMt+yVxS6+Y5LbHax9mBRb6UzFpRyZKaxsx4d6KqcvD0h2+mQruBJ0MqsW4fYxfndyEnXmsDb36RgBPfGe6eZgA4eNYd5eDa5mmt23QMCrKMyULQBh4=
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com (20.179.59.16) by
- BYAPR04MB4629.namprd04.prod.outlook.com (52.135.240.142) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2474.21; Tue, 26 Nov 2019 06:20:30 +0000
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::4176:5eda:76a2:3c40]) by BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::4176:5eda:76a2:3c40%7]) with mapi id 15.20.2474.023; Tue, 26 Nov 2019
- 06:20:30 +0000
-From: Damien Le Moal <Damien.LeMoal@wdc.com>
-To: =?iso-8859-1?Q?Javier_Gonz=E1lez?= <javier@javigon.com>
-Thread-Topic: [PATCH] f2fs: disble physical prealloc in LSF mount
-Thread-Index: AQHVoRNC1jbxwLDWckincxKmSLcqwA==
-Date: Tue, 26 Nov 2019 06:20:30 +0000
-Message-ID: <BYAPR04MB5816F0BB42891E49C5AB42DDE7450@BYAPR04MB5816.namprd04.prod.outlook.com>
+ d=javigon-com.20150623.gappssmtp.com; s=20150623;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=ETIUHJ3AzvG4MKmyof7txYs57MBd5qafDNDNbagrVYo=;
+ b=dX4Rvw0zMtqYThfHdUPz31/4100BIND9a4FPEmcE1DdsM/Bw9snYmkdu6kGFMeaooB
+ 4LUn+RA5g0N/Ja4DRzXrpQawFoSGE5/tU6WH5A5aSWrgNAkx++6pQNDS21JUUFLH9twS
+ WntUKQKv/HabwTmvMpjIDJ6eNDpgbILdz9TmTLKB9i15G3PgwVOUc8gPVLr1iVRcL0MP
+ vXnUtUxyufSJuaW9dVSPtZuiDelOZTBLtjPGKQKHTvUFndoRY5LxhmnAXUZr3/OBL1Jx
+ tJAzoPg3QVVTR8FDMhXk+0rRwi2TYxFC3g6gXCD3Gtvqp/QHDND9cW/DhAwEwfDBhaYK
+ ukUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=ETIUHJ3AzvG4MKmyof7txYs57MBd5qafDNDNbagrVYo=;
+ b=T18OsWAUwKdZ9YjvPiC7NU2cZ+BK03KXNkqPWUvH5bxd2NjRAKxsKoXecxLNgpaqze
+ hZl5E9IIHbJcGgSIsaYGdE603n3fWshvwt/Zb4+ZsOs/sUGnlciAu+23dV8VEY9H5F7a
+ PXi/EoTchJqp/fxDfwLzXcJabr/UIen2nnHPPiqP/22he/utlK4iyGtrBrcfHBOCr++h
+ b57CjV1NP2AECxLsFJhxqSWCDTm/IngcODRBBpiE90pWfL0sLyYocz5la+qW3ZyxiDfH
+ cuke4UB95TcbF/1fUIocG69N477EZE79+/LwOpSzNISCtVoG+aX95Muia+SWK2lNaNKN
+ +tsQ==
+X-Gm-Message-State: APjAAAU4Ogo/U/KhU8+IUIyHiTxZloLtJOQJsxdBqxWB3ZUQwCwmNJOG
+ eLfn9J3vHDK6FgaVnkxiVRN2Ow==
+X-Google-Smtp-Source: APXvYqzfVhP4yywet9AudY12rs64ANWPmJoVuQ67NV89zaHmlmFhFFpY/La8bZ5ByNzdPWUk92hg3Q==
+X-Received: by 2002:a7b:ce92:: with SMTP id q18mr2612740wmj.164.1574750597913; 
+ Mon, 25 Nov 2019 22:43:17 -0800 (PST)
+Received: from localhost ([194.62.217.57])
+ by smtp.gmail.com with ESMTPSA id s9sm1870420wmj.22.2019.11.25.22.43.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Nov 2019 22:43:17 -0800 (PST)
+Date: Tue, 26 Nov 2019 07:43:16 +0100
+From: Javier =?utf-8?B?R29uesOhbGV6?= <javier@javigon.com>
+To: Damien Le Moal <Damien.LeMoal@wdc.com>
+Message-ID: <20191126064316.ly4sfdcmyxtccnss@mpHalley.local>
 References: <20191122085952.12754-1-javier@javigon.com>
  <BYAPR04MB58166AE029D919C6610D8404E74A0@BYAPR04MB5816.namprd04.prod.outlook.com>
  <20191125190320.g7beal27nc5ubju7@mpHalley>
  <BYAPR04MB58161C14246FA30366B69B9DE7450@BYAPR04MB5816.namprd04.prod.outlook.com>
  <20191126035726.xj7pierxsck6adow@mpHalley>
  <BYAPR04MB581676157DCF909EDF1AAAFCE7450@BYAPR04MB5816.namprd04.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Damien.LeMoal@wdc.com; 
-x-originating-ip: [199.255.47.8]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 140074a5-3535-4a9e-6e13-08d77238bcc5
-x-ms-traffictypediagnostic: BYAPR04MB4629:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <BYAPR04MB462978796DFC6CC81E7A1DD3E7450@BYAPR04MB4629.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 0233768B38
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(51444003)(199004)(189003)(4326008)(305945005)(55016002)(6116002)(3846002)(6916009)(76176011)(102836004)(229853002)(316002)(7696005)(6506007)(86362001)(33656002)(478600001)(2906002)(99286004)(74316002)(66066001)(66946007)(66476007)(66556008)(64756008)(91956017)(76116006)(52536014)(53546011)(54906003)(66574012)(14454004)(446003)(14444005)(6246003)(6436002)(5660300002)(8936002)(186003)(8676002)(66446008)(81166006)(9686003)(25786009)(71190400001)(71200400001)(256004)(81156014)(7736002)(26005);
- DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB4629;
- H:BYAPR04MB5816.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: QbiQYG506hx3FA5hCSLHFWWQxRDvMMPDeYyE2LhAGcK4IUNqykPfQmqi0Bbpxzz5Rhuvix58zoG/BI0TqHhUBgobJJugjKPECo8+szp1QEJpHUyi5Gkk/SWwUsR9xOcy1xa2m45hHoEnM33mLNFim9ZN9bs+XU7nNzDfUkcb9O2bGedv5Lfes2s7FVxa+3PLZ1BqlhTp9oAWG9YjqiSMZYNoAVFW5csNOj0XP7ejEJWiKwnKc4W9b1c8CblnYBG4/0ajUtBNRhdNjByYHM0OQGbX5+vzCQRYshmml9zwhtfjzN0XuDDHwyDJIqKWkit9yVvYcM8r403jDC9rzXj/UBa//LNs/02LGS+XWw5/EqEqNXBkzN+Ev/otsPJ9h+PmgbARp8BafPSrUdnWkzd6P8qvPNIlGFK2e4RPTMVvNVZQJP1rDLbJYgh2SijXI8W8
+ <BYAPR04MB5816F0BB42891E49C5AB42DDE7450@BYAPR04MB5816.namprd04.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 140074a5-3535-4a9e-6e13-08d77238bcc5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Nov 2019 06:20:30.4636 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SylEVGrexVPdMqOKZVt7bU5qgD4AOubzFOy4P26ygoauIYQ0lKqtaZ1nR3zKHaSZkZWzv8VV1T1UH/efoGXlEQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4629
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <BYAPR04MB5816F0BB42891E49C5AB42DDE7450@BYAPR04MB5816.namprd04.prod.outlook.com>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: samsung.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.66 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.66 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1iZUDO-00DiS0-Oi
+X-Headers-End: 1iZUZI-00DjGp-IU
 Subject: Re: [f2fs-dev] [PATCH] f2fs: disble physical prealloc in LSF mount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -157,210 +118,117 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>,
- =?iso-8859-1?Q?Javier_Gonz=E1lez?= <javier.gonz@samsung.com>,
+ Javier =?utf-8?B?R29uesOhbGV6?= <javier.gonz@samsung.com>,
  "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-+ Shin'Ichiro
-
-On 2019/11/26 15:19, Damien Le Moal wrote:
-> On 2019/11/26 12:58, Javier Gonz=E1lez wrote:
->> On 26.11.2019 02:06, Damien Le Moal wrote:
->>> On 2019/11/26 4:03, Javier Gonz=E1lez wrote:
->>>> On 25.11.2019 00:48, Damien Le Moal wrote:
->>>>> On 2019/11/22 18:00, Javier Gonz=E1lez wrote:
->>>>>> From: Javier Gonz=E1lez <javier.gonz@samsung.com>
->>>>>>
->>>>>> Fix file system corruption when using LFS mount (e.g., in zoned
->>>>>> devices). Seems like the fallback into buffered I/O creates an
->>>>>> inconsistency if the application is assuming both read and write DIO=
-. I
->>>>>> can easily reproduce a corruption with a simple RocksDB test.
->>>>>>
->>>>>> Might be that the f2fs_forced_buffered_io path brings some problems =
-too,
->>>>>> but I have not seen other failures besides this one.
->>>>>>
->>>>>> Problem reproducible without a zoned block device, simply by forcing
->>>>>> LFS mount:
->>>>>>
->>>>>>   $ sudo mkfs.f2fs -f -m /dev/nvme0n1
->>>>>>   $ sudo mount /dev/nvme0n1 /mnt/f2fs
->>>>>>   $ sudo  /opt/rocksdb/db_bench  --benchmarks=3Dfillseq --use_existi=
-ng_db=3D0
->>>>>>   --use_direct_reads=3Dtrue --use_direct_io_for_flush_and_compaction=
-=3Dtrue
->>>>>>   --db=3D/mnt/f2fs --num=3D5000 --value_size=3D1048576 --verify_chec=
-ksum=3D1
->>>>>>   --block_size=3D65536
->>>>>>
->>>>>> Note that the options that cause the problem are:
->>>>>>   --use_direct_reads=3Dtrue --use_direct_io_for_flush_and_compaction=
-=3Dtrue
->>>>>>
->>>>>> Fixes: f9d6d0597698 ("f2fs: fix out-place-update DIO write")
->>>>>>
->>>>>> Signed-off-by: Javier Gonz=E1lez <javier.gonz@samsung.com>
->>>>>> ---
->>>>>>  fs/f2fs/data.c | 3 ---
->>>>>>  1 file changed, 3 deletions(-)
->>>>>>
->>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>> index 5755e897a5f0..b045dd6ab632 100644
->>>>>> --- a/fs/f2fs/data.c
->>>>>> +++ b/fs/f2fs/data.c
->>>>>> @@ -1081,9 +1081,6 @@ int f2fs_preallocate_blocks(struct kiocb *iocb=
-, struct iov_iter *from)
->>>>>>  			return err;
->>>>>>  	}
->>>>>>
->>>>>> -	if (direct_io && allow_outplace_dio(inode, iocb, from))
->>>>>> -		return 0;
->>>>>
->>>>> Since for LFS mode, all DIOs can end up out of place, I think that it
->>>>> may be better to change allow_outplace_dio() to always return true in
->>>>> the case of LFS mode. So may be something like:
->>>>>
->>>>> static inline int allow_outplace_dio(struct inode *inode,
->>>>> 			struct kiocb *iocb, struct iov_iter *iter)
->>>>> {
->>>>> 	struct f2fs_sb_info *sbi =3D F2FS_I_SB(inode);
->>>>> 	int rw =3D iov_iter_rw(iter);
->>>>>
->>>>> 	return test_opt(sbi, LFS) ||
->>>>> 	 	(rw =3D=3D WRITE && !block_unaligned_IO(inode, iocb, iter));
->>>>> }
->>>>>
->>>>> instead of the original:
->>>>>
->>>>> static inline int allow_outplace_dio(struct inode *inode,
->>>>> 			struct kiocb *iocb, struct iov_iter *iter)
->>>>> {
->>>>> 	struct f2fs_sb_info *sbi =3D F2FS_I_SB(inode);
->>>>> 	int rw =3D iov_iter_rw(iter);
->>>>>
->>>>> 	return (test_opt(sbi, LFS) && (rw =3D=3D WRITE) &&
->>>>> 				!block_unaligned_IO(inode, iocb, iter));
->>>>> }
->>>>>
->>>>> Thoughts ?
->>>>>
->>>>
->>>> I see what you mean and it makes sense. However, the problem I am seei=
-ng
->>>> occurs when allow_outplace_dio() returns true, as this is what creates
->>>> the inconsistency between the write being buffered and the read being
->>>> DIO.
->>>
->>> But if the write is switched to buffered, the DIO read should use the
->>> buffered path too, no ? Since this is all happening under VFS, the
->>> generic DIO read path will not ensure that the buffered writes are
->>> flushed to disk before issuing the direct read, I think. So that would
->>> explain your data corruption, i.e. you are reading stale data on the
->>> device before the buffered writes make it to the media.
->>>
->>
->> As far as I can see, the read is always sent DIO, so yes, I also believe
->> that we are reading stale data. This is why the corruption is not seen
->> if preventing allow_outplace_dio() from sending the write to the
->> buffered path.
->>
->> What surprises me is that this is very easy to trigger (see commit), so
->> I assume you must have seen this with SMR in the past.
-> =
-
-> We just did. Shin'Ichiro in my team finally succeeded in recreating the
-> problem. The cause seems to be:
-> =
-
-> bool direct_io =3D iocb->ki_flags & IOCB_DIRECT;
-> =
-
-> being true on entry of f2fs_preallocate_blocks() whereas
-> f2fs_direct_IO() forces buffered IO path for DIO on zoned devices with:
-> =
-
-> if (f2fs_force_buffered_io(inode, iocb, iter))
-> 		return 0;
-> =
-
-> which has:
-> =
-
-> 	if (f2fs_sb_has_blkzoned(sbi))
-> 		return true;
-> =
-
-> So the top DIO code says "do buffered IOs", but lower in the write path,
-> the IO is still assumed to be a DIO because of the iocb flag... That's
-> inconsistent.
-> =
-
-> Note that for the non-zoned device LFS case, f2fs_force_buffered_io()
-> returns true only for unaligned write DIOs... But that will still trip
-> on the iocb flag test. So the proper fix is likely something like:
-> =
-
-> int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
-> {
-> 	struct inode *inode =3D file_inode(iocb->ki_filp);
-> 	struct f2fs_map_blocks map;
-> 	int flag;
-> 	int err =3D 0;
-> -	bool direct_io =3D iocb->ki_flags & IOCB_DIRECT;
-> +	bool direct_io =3D (iocb->ki_flags & IOCB_DIRECT) &&
-> +		!2fs_force_buffered_io(inode, iocb, iter);
-> =
-
-> 	/* convert inline data for Direct I/O*/
-> 	if (direct_io) {
-> 		err =3D f2fs_convert_inline_inode(inode);
-> 		if (err)
-> 			return err;
-> 	}
-> =
-
-> Shin'Ichiro tried this on SMR disks and the failure is gone...
-> =
-
-> Cheers.
-> =
-
-> =
-
->>
->> Does it make sense to leave the LFS check out of the
->> allow_outplace_dio()? Or in other words, is there a hard requirement for
->> writes to take this path on a zoned device that I am not seeing?
->> Something like:
->>
->>    static inline int allow_outplace_dio(struct inode *inode,
->>    			struct kiocb *iocb, struct iov_iter *iter)
->>    {
->>    	struct f2fs_sb_info *sbi =3D F2FS_I_SB(inode);
->>    	int rw =3D iov_iter_rw(iter);
->>
->>    	return (rw =3D=3D WRITE && !block_unaligned_IO(inode, iocb, iter));
->>    }
->>
->> Thanks,
->> Javier
->>
-> =
-
-> =
-
-
-
--- =
-
-Damien Le Moal
-Western Digital Research
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjYuMTEuMjAxOSAwNjoyMCwgRGFtaWVuIExlIE1vYWwgd3JvdGU6Cj4rIFNoaW4nSWNoaXJv
+Cj4KPk9uIDIwMTkvMTEvMjYgMTU6MTksIERhbWllbiBMZSBNb2FsIHdyb3RlOgo+PiBPbiAyMDE5
+LzExLzI2IDEyOjU4LCBKYXZpZXIgR29uesOhbGV6IHdyb3RlOgo+Pj4gT24gMjYuMTEuMjAxOSAw
+MjowNiwgRGFtaWVuIExlIE1vYWwgd3JvdGU6Cj4+Pj4gT24gMjAxOS8xMS8yNiA0OjAzLCBKYXZp
+ZXIgR29uesOhbGV6IHdyb3RlOgo+Pj4+PiBPbiAyNS4xMS4yMDE5IDAwOjQ4LCBEYW1pZW4gTGUg
+TW9hbCB3cm90ZToKPj4+Pj4+IE9uIDIwMTkvMTEvMjIgMTg6MDAsIEphdmllciBHb256w6FsZXog
+d3JvdGU6Cj4+Pj4+Pj4gRnJvbTogSmF2aWVyIEdvbnrDoWxleiA8amF2aWVyLmdvbnpAc2Ftc3Vu
+Zy5jb20+Cj4+Pj4+Pj4KPj4+Pj4+PiBGaXggZmlsZSBzeXN0ZW0gY29ycnVwdGlvbiB3aGVuIHVz
+aW5nIExGUyBtb3VudCAoZS5nLiwgaW4gem9uZWQKPj4+Pj4+PiBkZXZpY2VzKS4gU2VlbXMgbGlr
+ZSB0aGUgZmFsbGJhY2sgaW50byBidWZmZXJlZCBJL08gY3JlYXRlcyBhbgo+Pj4+Pj4+IGluY29u
+c2lzdGVuY3kgaWYgdGhlIGFwcGxpY2F0aW9uIGlzIGFzc3VtaW5nIGJvdGggcmVhZCBhbmQgd3Jp
+dGUgRElPLiBJCj4+Pj4+Pj4gY2FuIGVhc2lseSByZXByb2R1Y2UgYSBjb3JydXB0aW9uIHdpdGgg
+YSBzaW1wbGUgUm9ja3NEQiB0ZXN0Lgo+Pj4+Pj4+Cj4+Pj4+Pj4gTWlnaHQgYmUgdGhhdCB0aGUg
+ZjJmc19mb3JjZWRfYnVmZmVyZWRfaW8gcGF0aCBicmluZ3Mgc29tZSBwcm9ibGVtcyB0b28sCj4+
+Pj4+Pj4gYnV0IEkgaGF2ZSBub3Qgc2VlbiBvdGhlciBmYWlsdXJlcyBiZXNpZGVzIHRoaXMgb25l
+Lgo+Pj4+Pj4+Cj4+Pj4+Pj4gUHJvYmxlbSByZXByb2R1Y2libGUgd2l0aG91dCBhIHpvbmVkIGJs
+b2NrIGRldmljZSwgc2ltcGx5IGJ5IGZvcmNpbmcKPj4+Pj4+PiBMRlMgbW91bnQ6Cj4+Pj4+Pj4K
+Pj4+Pj4+PiAgICQgc3VkbyBta2ZzLmYyZnMgLWYgLW0gL2Rldi9udm1lMG4xCj4+Pj4+Pj4gICAk
+IHN1ZG8gbW91bnQgL2Rldi9udm1lMG4xIC9tbnQvZjJmcwo+Pj4+Pj4+ICAgJCBzdWRvICAvb3B0
+L3JvY2tzZGIvZGJfYmVuY2ggIC0tYmVuY2htYXJrcz1maWxsc2VxIC0tdXNlX2V4aXN0aW5nX2Ri
+PTAKPj4+Pj4+PiAgIC0tdXNlX2RpcmVjdF9yZWFkcz10cnVlIC0tdXNlX2RpcmVjdF9pb19mb3Jf
+Zmx1c2hfYW5kX2NvbXBhY3Rpb249dHJ1ZQo+Pj4+Pj4+ICAgLS1kYj0vbW50L2YyZnMgLS1udW09
+NTAwMCAtLXZhbHVlX3NpemU9MTA0ODU3NiAtLXZlcmlmeV9jaGVja3N1bT0xCj4+Pj4+Pj4gICAt
+LWJsb2NrX3NpemU9NjU1MzYKPj4+Pj4+Pgo+Pj4+Pj4+IE5vdGUgdGhhdCB0aGUgb3B0aW9ucyB0
+aGF0IGNhdXNlIHRoZSBwcm9ibGVtIGFyZToKPj4+Pj4+PiAgIC0tdXNlX2RpcmVjdF9yZWFkcz10
+cnVlIC0tdXNlX2RpcmVjdF9pb19mb3JfZmx1c2hfYW5kX2NvbXBhY3Rpb249dHJ1ZQo+Pj4+Pj4+
+Cj4+Pj4+Pj4gRml4ZXM6IGY5ZDZkMDU5NzY5OCAoImYyZnM6IGZpeCBvdXQtcGxhY2UtdXBkYXRl
+IERJTyB3cml0ZSIpCj4+Pj4+Pj4KPj4+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBKYXZpZXIgR29uesOh
+bGV6IDxqYXZpZXIuZ29uekBzYW1zdW5nLmNvbT4KPj4+Pj4+PiAtLS0KPj4+Pj4+PiAgZnMvZjJm
+cy9kYXRhLmMgfCAzIC0tLQo+Pj4+Pj4+ICAxIGZpbGUgY2hhbmdlZCwgMyBkZWxldGlvbnMoLSkK
+Pj4+Pj4+Pgo+Pj4+Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2RhdGEuYyBiL2ZzL2YyZnMvZGF0
+YS5jCj4+Pj4+Pj4gaW5kZXggNTc1NWU4OTdhNWYwLi5iMDQ1ZGQ2YWI2MzIgMTAwNjQ0Cj4+Pj4+
+Pj4gLS0tIGEvZnMvZjJmcy9kYXRhLmMKPj4+Pj4+PiArKysgYi9mcy9mMmZzL2RhdGEuYwo+Pj4+
+Pj4+IEBAIC0xMDgxLDkgKzEwODEsNiBAQCBpbnQgZjJmc19wcmVhbGxvY2F0ZV9ibG9ja3Moc3Ry
+dWN0IGtpb2NiICppb2NiLCBzdHJ1Y3QgaW92X2l0ZXIgKmZyb20pCj4+Pj4+Pj4gIAkJCXJldHVy
+biBlcnI7Cj4+Pj4+Pj4gIAl9Cj4+Pj4+Pj4KPj4+Pj4+PiAtCWlmIChkaXJlY3RfaW8gJiYgYWxs
+b3dfb3V0cGxhY2VfZGlvKGlub2RlLCBpb2NiLCBmcm9tKSkKPj4+Pj4+PiAtCQlyZXR1cm4gMDsK
+Pj4+Pj4+Cj4+Pj4+PiBTaW5jZSBmb3IgTEZTIG1vZGUsIGFsbCBESU9zIGNhbiBlbmQgdXAgb3V0
+IG9mIHBsYWNlLCBJIHRoaW5rIHRoYXQgaXQKPj4+Pj4+IG1heSBiZSBiZXR0ZXIgdG8gY2hhbmdl
+IGFsbG93X291dHBsYWNlX2RpbygpIHRvIGFsd2F5cyByZXR1cm4gdHJ1ZSBpbgo+Pj4+Pj4gdGhl
+IGNhc2Ugb2YgTEZTIG1vZGUuIFNvIG1heSBiZSBzb21ldGhpbmcgbGlrZToKPj4+Pj4+Cj4+Pj4+
+PiBzdGF0aWMgaW5saW5lIGludCBhbGxvd19vdXRwbGFjZV9kaW8oc3RydWN0IGlub2RlICppbm9k
+ZSwKPj4+Pj4+IAkJCXN0cnVjdCBraW9jYiAqaW9jYiwgc3RydWN0IGlvdl9pdGVyICppdGVyKQo+
+Pj4+Pj4gewo+Pj4+Pj4gCXN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSA9IEYyRlNfSV9TQihpbm9k
+ZSk7Cj4+Pj4+PiAJaW50IHJ3ID0gaW92X2l0ZXJfcncoaXRlcik7Cj4+Pj4+Pgo+Pj4+Pj4gCXJl
+dHVybiB0ZXN0X29wdChzYmksIExGUykgfHwKPj4+Pj4+IAkgCShydyA9PSBXUklURSAmJiAhYmxv
+Y2tfdW5hbGlnbmVkX0lPKGlub2RlLCBpb2NiLCBpdGVyKSk7Cj4+Pj4+PiB9Cj4+Pj4+Pgo+Pj4+
+Pj4gaW5zdGVhZCBvZiB0aGUgb3JpZ2luYWw6Cj4+Pj4+Pgo+Pj4+Pj4gc3RhdGljIGlubGluZSBp
+bnQgYWxsb3dfb3V0cGxhY2VfZGlvKHN0cnVjdCBpbm9kZSAqaW5vZGUsCj4+Pj4+PiAJCQlzdHJ1
+Y3Qga2lvY2IgKmlvY2IsIHN0cnVjdCBpb3ZfaXRlciAqaXRlcikKPj4+Pj4+IHsKPj4+Pj4+IAlz
+dHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0IoaW5vZGUpOwo+Pj4+Pj4gCWludCBy
+dyA9IGlvdl9pdGVyX3J3KGl0ZXIpOwo+Pj4+Pj4KPj4+Pj4+IAlyZXR1cm4gKHRlc3Rfb3B0KHNi
+aSwgTEZTKSAmJiAocncgPT0gV1JJVEUpICYmCj4+Pj4+PiAJCQkJIWJsb2NrX3VuYWxpZ25lZF9J
+Tyhpbm9kZSwgaW9jYiwgaXRlcikpOwo+Pj4+Pj4gfQo+Pj4+Pj4KPj4+Pj4+IFRob3VnaHRzID8K
+Pj4+Pj4+Cj4+Pj4+Cj4+Pj4+IEkgc2VlIHdoYXQgeW91IG1lYW4gYW5kIGl0IG1ha2VzIHNlbnNl
+LiBIb3dldmVyLCB0aGUgcHJvYmxlbSBJIGFtIHNlZWluZwo+Pj4+PiBvY2N1cnMgd2hlbiBhbGxv
+d19vdXRwbGFjZV9kaW8oKSByZXR1cm5zIHRydWUsIGFzIHRoaXMgaXMgd2hhdCBjcmVhdGVzCj4+
+Pj4+IHRoZSBpbmNvbnNpc3RlbmN5IGJldHdlZW4gdGhlIHdyaXRlIGJlaW5nIGJ1ZmZlcmVkIGFu
+ZCB0aGUgcmVhZCBiZWluZwo+Pj4+PiBESU8uCj4+Pj4KPj4+PiBCdXQgaWYgdGhlIHdyaXRlIGlz
+IHN3aXRjaGVkIHRvIGJ1ZmZlcmVkLCB0aGUgRElPIHJlYWQgc2hvdWxkIHVzZSB0aGUKPj4+PiBi
+dWZmZXJlZCBwYXRoIHRvbywgbm8gPyBTaW5jZSB0aGlzIGlzIGFsbCBoYXBwZW5pbmcgdW5kZXIg
+VkZTLCB0aGUKPj4+PiBnZW5lcmljIERJTyByZWFkIHBhdGggd2lsbCBub3QgZW5zdXJlIHRoYXQg
+dGhlIGJ1ZmZlcmVkIHdyaXRlcyBhcmUKPj4+PiBmbHVzaGVkIHRvIGRpc2sgYmVmb3JlIGlzc3Vp
+bmcgdGhlIGRpcmVjdCByZWFkLCBJIHRoaW5rLiBTbyB0aGF0IHdvdWxkCj4+Pj4gZXhwbGFpbiB5
+b3VyIGRhdGEgY29ycnVwdGlvbiwgaS5lLiB5b3UgYXJlIHJlYWRpbmcgc3RhbGUgZGF0YSBvbiB0
+aGUKPj4+PiBkZXZpY2UgYmVmb3JlIHRoZSBidWZmZXJlZCB3cml0ZXMgbWFrZSBpdCB0byB0aGUg
+bWVkaWEuCj4+Pj4KPj4+Cj4+PiBBcyBmYXIgYXMgSSBjYW4gc2VlLCB0aGUgcmVhZCBpcyBhbHdh
+eXMgc2VudCBESU8sIHNvIHllcywgSSBhbHNvIGJlbGlldmUKPj4+IHRoYXQgd2UgYXJlIHJlYWRp
+bmcgc3RhbGUgZGF0YS4gVGhpcyBpcyB3aHkgdGhlIGNvcnJ1cHRpb24gaXMgbm90IHNlZW4KPj4+
+IGlmIHByZXZlbnRpbmcgYWxsb3dfb3V0cGxhY2VfZGlvKCkgZnJvbSBzZW5kaW5nIHRoZSB3cml0
+ZSB0byB0aGUKPj4+IGJ1ZmZlcmVkIHBhdGguCj4+Pgo+Pj4gV2hhdCBzdXJwcmlzZXMgbWUgaXMg
+dGhhdCB0aGlzIGlzIHZlcnkgZWFzeSB0byB0cmlnZ2VyIChzZWUgY29tbWl0KSwgc28KPj4+IEkg
+YXNzdW1lIHlvdSBtdXN0IGhhdmUgc2VlbiB0aGlzIHdpdGggU01SIGluIHRoZSBwYXN0Lgo+Pgo+
+PiBXZSBqdXN0IGRpZC4gU2hpbidJY2hpcm8gaW4gbXkgdGVhbSBmaW5hbGx5IHN1Y2NlZWRlZCBp
+biByZWNyZWF0aW5nIHRoZQo+PiBwcm9ibGVtLiBUaGUgY2F1c2Ugc2VlbXMgdG8gYmU6Cj4+Cj4+
+IGJvb2wgZGlyZWN0X2lvID0gaW9jYi0+a2lfZmxhZ3MgJiBJT0NCX0RJUkVDVDsKPj4KPj4gYmVp
+bmcgdHJ1ZSBvbiBlbnRyeSBvZiBmMmZzX3ByZWFsbG9jYXRlX2Jsb2NrcygpIHdoZXJlYXMKPj4g
+ZjJmc19kaXJlY3RfSU8oKSBmb3JjZXMgYnVmZmVyZWQgSU8gcGF0aCBmb3IgRElPIG9uIHpvbmVk
+IGRldmljZXMgd2l0aDoKPj4KPj4gaWYgKGYyZnNfZm9yY2VfYnVmZmVyZWRfaW8oaW5vZGUsIGlv
+Y2IsIGl0ZXIpKQo+PiAJCXJldHVybiAwOwo+Pgo+PiB3aGljaCBoYXM6Cj4+Cj4+IAlpZiAoZjJm
+c19zYl9oYXNfYmxrem9uZWQoc2JpKSkKPj4gCQlyZXR1cm4gdHJ1ZTsKPj4KPj4gU28gdGhlIHRv
+cCBESU8gY29kZSBzYXlzICJkbyBidWZmZXJlZCBJT3MiLCBidXQgbG93ZXIgaW4gdGhlIHdyaXRl
+IHBhdGgsCj4+IHRoZSBJTyBpcyBzdGlsbCBhc3N1bWVkIHRvIGJlIGEgRElPIGJlY2F1c2Ugb2Yg
+dGhlIGlvY2IgZmxhZy4uLiBUaGF0J3MKPj4gaW5jb25zaXN0ZW50Lgo+Pgo+PiBOb3RlIHRoYXQg
+Zm9yIHRoZSBub24tem9uZWQgZGV2aWNlIExGUyBjYXNlLCBmMmZzX2ZvcmNlX2J1ZmZlcmVkX2lv
+KCkKPj4gcmV0dXJucyB0cnVlIG9ubHkgZm9yIHVuYWxpZ25lZCB3cml0ZSBESU9zLi4uIEJ1dCB0
+aGF0IHdpbGwgc3RpbGwgdHJpcAo+PiBvbiB0aGUgaW9jYiBmbGFnIHRlc3QuIFNvIHRoZSBwcm9w
+ZXIgZml4IGlzIGxpa2VseSBzb21ldGhpbmcgbGlrZToKPj4KPj4gaW50IGYyZnNfcHJlYWxsb2Nh
+dGVfYmxvY2tzKHN0cnVjdCBraW9jYiAqaW9jYiwgc3RydWN0IGlvdl9pdGVyICpmcm9tKQo+PiB7
+Cj4+IAlzdHJ1Y3QgaW5vZGUgKmlub2RlID0gZmlsZV9pbm9kZShpb2NiLT5raV9maWxwKTsKPj4g
+CXN0cnVjdCBmMmZzX21hcF9ibG9ja3MgbWFwOwo+PiAJaW50IGZsYWc7Cj4+IAlpbnQgZXJyID0g
+MDsKPj4gLQlib29sIGRpcmVjdF9pbyA9IGlvY2ItPmtpX2ZsYWdzICYgSU9DQl9ESVJFQ1Q7Cj4+
+ICsJYm9vbCBkaXJlY3RfaW8gPSAoaW9jYi0+a2lfZmxhZ3MgJiBJT0NCX0RJUkVDVCkgJiYKPj4g
+KwkJITJmc19mb3JjZV9idWZmZXJlZF9pbyhpbm9kZSwgaW9jYiwgaXRlcik7Cj4+Cj4+IAkvKiBj
+b252ZXJ0IGlubGluZSBkYXRhIGZvciBEaXJlY3QgSS9PKi8KPj4gCWlmIChkaXJlY3RfaW8pIHsK
+Pj4gCQllcnIgPSBmMmZzX2NvbnZlcnRfaW5saW5lX2lub2RlKGlub2RlKTsKPj4gCQlpZiAoZXJy
+KQo+PiAJCQlyZXR1cm4gZXJyOwo+PiAJfQo+Pgo+PiBTaGluJ0ljaGlybyB0cmllZCB0aGlzIG9u
+IFNNUiBkaXNrcyBhbmQgdGhlIGZhaWx1cmUgaXMgZ29uZS4uLgo+Pgo+PiBDaGVlcnMuCj4+CgpZ
+ZXMhIFRoaXMgaXMgaXQuIEkgb3JpZ2luYWxseSB0aG91Z2ggdGhhdCB0aGUgcHJvYmxlbSB3YXMg
+b24KZjJmc19mb3JjZV9idWZmZXJlZF9pbygpLCBidXQgY291bGQgbm90IGhpdCB0aGUgcHJvYmxl
+bSB0aGVyZS4gVGhhbmtzCmZvciB0aGUgYW5hbHlzaXM7IGl0IG1ha2VzIHNlbnNlIG5vdy4KCkp1
+c3QgdGVzdGVkIHlvdXIgcGF0Y2ggb24gb3VyIGRyaXZlcyBhbmQgdGhlIHByb2JsZW0gaXMgZ29u
+ZSB0b28uIEd1ZXNzCnlvdSBjYW4gc2VuZCBhIG5ldyBwYXRjaCBhbiBpZ25vcmUgdGhpcyBvbmUu
+IFlvdSBjYW4gc2V0IG15IHJldmlld2VkLWJ5Cm9uIGl0LgoKVGhhbmtzIERhbWllbiEKSmF2aWVy
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgt
+ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
+ZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgt
+ZjJmcy1kZXZlbAo=
