@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 204CD10B2BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Nov 2019 16:52:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF9A110B566
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Nov 2019 19:18:21 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iZzcN-0008Hh-JL; Wed, 27 Nov 2019 15:52:39 +0000
+	id 1ia1tK-0002Dh-P6; Wed, 27 Nov 2019 18:18:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <darrick.wong@oracle.com>) id 1iZzcM-0008HT-5W
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Nov 2019 15:52:38 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ia1tI-0002DZ-Mr
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Nov 2019 18:18:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H+/wgbi6zpbbhzBcnf3ZgXVMUMhhbOupxJKtToXxUKY=; b=B2xCynsbabNd8fG8M/Y21ka2gM
- kZJZ6Vn/ONNP5VvjiXMDcFJ3EF0AbZDNoBU1gGl0HftRpsckcWaxoW7P8bHYpb8bJFzMIo7qGfhQD
- THRD3DVhSmKqMHCDqhmKNytkqBlcH+f6ZtsP1nntV8UPDNpLWa6co97WtpnJXqtp3zuU=;
+ bh=SENlQ9cvWsEyM3AX8Admdi7IIe4WDspoVdiOpylt/P4=; b=eO0kkV2LNWjBJsR9pqvneyM6Qs
+ ska2/dmiWjXQPAJO9x98flEhpJEbWsIY2k2l4S3YqlJZGbWtLko3EK2WHQSK+Z0+d0SFgaHJLJORO
+ u0dkIGmCiy/g7qAsXvoLi64WkIBqyiKBpA5HWrgByPvI+cGMNWDOUZ7/7BLBgyZV1t7w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,83 +29,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H+/wgbi6zpbbhzBcnf3ZgXVMUMhhbOupxJKtToXxUKY=; b=BoX8XOc4Yyd29JaAgXTqL9F60P
- s4YjAYrKpYJKxQ/dVVRaSfBa8Zjs8O6D12uwtLW2bqyrg/QG4zQJFhcnJj4FbF4aNsu5eNcBfmV6o
- 7hLPqhDI2pmeueQrubcSpR2xk2VsnezaaUt6Ouqptgq7DAAJgOYrynxKDJNlynUlE/eA=;
-Received: from userp2120.oracle.com ([156.151.31.85])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=SENlQ9cvWsEyM3AX8Admdi7IIe4WDspoVdiOpylt/P4=; b=H/NM8/0cxXa+1UAJKI0lo9gm+W
+ GWwuSLULoF6iu1/Z0MNdbRypixaS5yKDQhx7XZrmB3JAZ6MI6jjtifWSbZRXaG79HHB04UhmnTW1H
+ mX1GIqLre5KyZKJgCxvSIZAr5oJzdi5OxKD6d+Gp1MGr+dGdPdS1vWIpmwu/clZtgAk4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iZzcH-00FHdj-4W
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Nov 2019 15:52:38 +0000
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xARFi6ak075759;
- Wed, 27 Nov 2019 15:52:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2019-08-05;
- bh=H+/wgbi6zpbbhzBcnf3ZgXVMUMhhbOupxJKtToXxUKY=;
- b=Kg0k/vAlSe8xFiAPHV3p230uhEAIhD+RfNy3L2xMgLeJjWzANRMgYHEoE0Ep3N7qUiEj
- vcF15VBYr8vifEfZfiVr6t7u8ViSjjCg7FNvuwZfLuggXSVyPGlhSN6JUTfYB83peZvJ
- 2Uo59BKL0j0vX1rUEJqlR/o/pNlsdkvaPc0SHw+2iWbYlZWmF6wiaTespaEP5ykBV9AG
- ImLwc8stIz9ZL95hlZuIpbBT4NAPPaz+UgI3qRiVr/uxeOf58bY1exPNLO2+wgw9Fc9C
- Rl8vZBiL+t0XTNoRZlRlrnqJqMZNYYPP0oHZxwuNG+rB9l114hLMSs0+hA/EVvczaecf TQ== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2120.oracle.com with ESMTP id 2wewdrecda-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 27 Nov 2019 15:52:06 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xARFdTWt031310;
- Wed, 27 Nov 2019 15:50:06 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3030.oracle.com with ESMTP id 2wgvhccg37-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 27 Nov 2019 15:50:05 +0000
-Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xARFnumk003050;
- Wed, 27 Nov 2019 15:49:56 GMT
-Received: from localhost (/67.169.218.210)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Wed, 27 Nov 2019 07:49:56 -0800
-Date: Wed, 27 Nov 2019 07:49:54 -0800
-From: "Darrick J. Wong" <darrick.wong@oracle.com>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Message-ID: <20191127154954.GT6219@magnolia>
-References: <20191127151811.9229-1-agruenba@redhat.com>
+ id 1ia1tI-00FFrU-40
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Nov 2019 18:18:17 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8F92F207DD;
+ Wed, 27 Nov 2019 18:18:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1574878689;
+ bh=i/se3RcsIPtxeow2Cfr1VyNjTABmBaPuWZQ0WCVcX7k=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=xRw2qL+FEZ3XWaQeCI4z4moDQmgMA5ZP8RI1XqHP6Hk8Wb4Rzhsc67EIACtWC5cKb
+ RRlUbshXjgJD2y2U1aoJMkIwxHuPepARGx8rEIf+ZX4UVzqnuQ6EKlhm9o3/gVbTxk
+ Qp+VqMW25truA+f5h8nVxdIRQW7CaOoT7gBUxceM=
+Date: Wed, 27 Nov 2019 10:18:09 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <20191127181809.GA42245@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20190518004751.18962-1-jaegeuk@kernel.org>
+ <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191127151811.9229-1-agruenba@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9454
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1911140001 definitions=main-1911270137
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9454
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
- definitions=main-1911270137
-X-Spam-Score: -0.5 (/)
+In-Reply-To: <20190518005304.GA19446@jaegeuk-macbookpro.roam.corp.google.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: cisco.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iZzcH-00FHdj-4W
-Subject: Re: [f2fs-dev] [PATCH] fs: Fix page_mkwrite off-by-one errors
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ia1tI-00FFrU-40
+Subject: Re: [f2fs-dev] [PATCH v3] loop: avoid EAGAIN,
+ if offset or block_size are changed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,135 +89,186 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Theodore Ts'o <tytso@mit.edu>, Sage Weil <sage@redhat.com>,
- Artem Bityutskiy <dedekind1@gmail.com>, Richard Weinberger <richard@nod.at>,
- Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
- Adrian Hunter <adrian.hunter@intel.com>, Christoph Hellwig <hch@infradead.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-mtd@lists.infradead.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>, ceph-devel@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
+ Bart Van Assche <bvanassche@acm.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Nov 27, 2019 at 04:18:11PM +0100, Andreas Gruenbacher wrote:
-> Fix a check in block_page_mkwrite meant to determine whether an offset
-> is within the inode size.  This error has spread to several filesystems
-> and to iomap_page_mkwrite, so fix those instances as well.
+Previously, there was a bug where user could see stale buffer cache (e.g, 512B)
+attached in the 4KB-sized pager cache, when the block size was changed from
+512B to 4KB. That was fixed by:
+commit 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
 
-Seeing how this has gotten screwed up at least six times in the kernel,
-maybe we need a static inline helper to do this for us?
+But, there were some regression reports saying the fix returns EAGAIN easily.
+So, this patch removes previously added EAGAIN condition, nrpages != 0.
 
-> Signed-off-by: Andreas Gruenbacher <agruenba@redhat.com>
+Instead, it changes the flow like this:
+- sync_blockdev()
+- blk_mq_freeze_queue()
+ : change the loop configuration
+- blk_mq_unfreeze_queue()
+- sync_blockdev()
+- invalidate_bdev()
 
-The iomap part looks ok,
-Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
+After invalidating the buffer cache, we must see the full valid 4KB page.
 
-(I might just extract the iomap part and put it in the iomap tree if
-someone doesn't merge this one before I get to it...)
+Additional concern came from Bart in which we can lose some data when
+changing the lo_offset. In that case, this patch adds:
+- sync_blockdev()
+- blk_set_queue_dying
+- blk_mq_freeze_queue()
+ : change the loop configuration
+- blk_mq_unfreeze_queue()
+- blk_queue_flag_clear(QUEUE_FLAG_DYING);
+- sync_blockdev()
+- invalidate_bdev()
 
---D
+Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
 
-> 
-> ---
-> 
-> This patch has a trivial conflict with commit "iomap: Fix overflow in
-> iomap_page_mkwrite" in Darrick's iomap pull request for 5.5:
-> 
->   https://lore.kernel.org/lkml/20191125190907.GN6219@magnolia/
-> ---
->  fs/buffer.c            | 2 +-
->  fs/ceph/addr.c         | 2 +-
->  fs/ext4/inode.c        | 2 +-
->  fs/f2fs/file.c         | 2 +-
->  fs/iomap/buffered-io.c | 2 +-
->  fs/ubifs/file.c        | 2 +-
->  6 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/buffer.c b/fs/buffer.c
-> index 86a38b979323..152d391858d4 100644
-> --- a/fs/buffer.c
-> +++ b/fs/buffer.c
-> @@ -2465,7 +2465,7 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
->  	lock_page(page);
->  	size = i_size_read(inode);
->  	if ((page->mapping != inode->i_mapping) ||
-> -	    (page_offset(page) > size)) {
-> +	    (page_offset(page) >= size)) {
->  		/* We overload EFAULT to mean page got truncated */
->  		ret = -EFAULT;
->  		goto out_unlock;
-> diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
-> index 7ab616601141..9fa0729ece41 100644
-> --- a/fs/ceph/addr.c
-> +++ b/fs/ceph/addr.c
-> @@ -1575,7 +1575,7 @@ static vm_fault_t ceph_page_mkwrite(struct vm_fault *vmf)
->  	do {
->  		lock_page(page);
->  
-> -		if ((off > size) || (page->mapping != inode->i_mapping)) {
-> +		if ((off >= size) || (page->mapping != inode->i_mapping)) {
->  			unlock_page(page);
->  			ret = VM_FAULT_NOPAGE;
->  			break;
-> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-> index 516faa280ced..6dd4efe2fb63 100644
-> --- a/fs/ext4/inode.c
-> +++ b/fs/ext4/inode.c
-> @@ -6224,7 +6224,7 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
->  	lock_page(page);
->  	size = i_size_read(inode);
->  	/* Page got truncated from under us? */
-> -	if (page->mapping != mapping || page_offset(page) > size) {
-> +	if (page->mapping != mapping || page_offset(page) >= size) {
->  		unlock_page(page);
->  		ret = VM_FAULT_NOPAGE;
->  		goto out;
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 29bc0a542759..3436be01af45 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -71,7 +71,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->  	down_read(&F2FS_I(inode)->i_mmap_sem);
->  	lock_page(page);
->  	if (unlikely(page->mapping != inode->i_mapping ||
-> -			page_offset(page) > i_size_read(inode) ||
-> +			page_offset(page) >= i_size_read(inode) ||
->  			!PageUptodate(page))) {
->  		unlock_page(page);
->  		err = -EFAULT;
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index e25901ae3ff4..d454dbab5133 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -1041,7 +1041,7 @@ vm_fault_t iomap_page_mkwrite(struct vm_fault *vmf, const struct iomap_ops *ops)
->  	lock_page(page);
->  	size = i_size_read(inode);
->  	if ((page->mapping != inode->i_mapping) ||
-> -	    (page_offset(page) > size)) {
-> +	    (page_offset(page) >= size)) {
->  		/* We overload EFAULT to mean page got truncated */
->  		ret = -EFAULT;
->  		goto out_unlock;
-> diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-> index cd52585c8f4f..ca0148ec77e6 100644
-> --- a/fs/ubifs/file.c
-> +++ b/fs/ubifs/file.c
-> @@ -1564,7 +1564,7 @@ static vm_fault_t ubifs_vm_page_mkwrite(struct vm_fault *vmf)
->  
->  	lock_page(page);
->  	if (unlikely(page->mapping != inode->i_mapping ||
-> -		     page_offset(page) > i_size_read(inode))) {
-> +		     page_offset(page) >= i_size_read(inode))) {
->  		/* Page got truncated out from underneath us */
->  		goto sigbus;
->  	}
-> -- 
-> 2.20.1
-> 
+Cc: <stable@vger.kernel.org>
+Cc: Jens Axboe <axboe@kernel.dk>
+Cc: linux-block@vger.kernel.org
+Cc: Bart Van Assche <bvanassche@acm.org>
+Fixes: 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
+Reported-by: Gwendal Grignou <gwendal@chromium.org>
+Reported-by: grygorii tertychnyi <gtertych@cisco.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ drivers/block/loop.c | 65 ++++++++++++++++++++++----------------------
+ 1 file changed, 33 insertions(+), 32 deletions(-)
+
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index f6f77eaa7217..b583050d513a 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -1232,6 +1232,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 	kuid_t uid = current_uid();
+ 	struct block_device *bdev;
+ 	bool partscan = false;
++	bool drop_request = false;
++	bool drop_cache = false;
+ 
+ 	err = mutex_lock_killable(&loop_ctl_mutex);
+ 	if (err)
+@@ -1251,14 +1253,21 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 		goto out_unlock;
+ 	}
+ 
++	if (lo->lo_offset != info->lo_offset)
++		drop_request = true;
+ 	if (lo->lo_offset != info->lo_offset ||
+-	    lo->lo_sizelimit != info->lo_sizelimit) {
+-		sync_blockdev(lo->lo_device);
+-		kill_bdev(lo->lo_device);
+-	}
++	    lo->lo_sizelimit != info->lo_sizelimit)
++		drop_cache = true;
+ 
+-	/* I/O need to be drained during transfer transition */
+-	blk_mq_freeze_queue(lo->lo_queue);
++	sync_blockdev(lo->lo_device);
++
++	if (drop_request) {
++		blk_set_queue_dying(lo->lo_queue);
++		blk_mq_freeze_queue_wait(lo->lo_queue);
++	} else {
++		/* I/O need to be drained during transfer transition */
++		blk_mq_freeze_queue(lo->lo_queue);
++	}
+ 
+ 	err = loop_release_xfer(lo);
+ 	if (err)
+@@ -1285,14 +1294,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 
+ 	if (lo->lo_offset != info->lo_offset ||
+ 	    lo->lo_sizelimit != info->lo_sizelimit) {
+-		/* kill_bdev should have truncated all the pages */
+-		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
+-			err = -EAGAIN;
+-			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+-				__func__, lo->lo_number, lo->lo_file_name,
+-				lo->lo_device->bd_inode->i_mapping->nrpages);
+-			goto out_unfreeze;
+-		}
+ 		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
+ 			err = -EFBIG;
+ 			goto out_unfreeze;
+@@ -1329,6 +1330,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 
+ out_unfreeze:
+ 	blk_mq_unfreeze_queue(lo->lo_queue);
++	if (drop_request)
++		blk_queue_flag_clear(QUEUE_FLAG_DYING, lo->lo_queue);
+ 
+ 	if (!err && (info->lo_flags & LO_FLAGS_PARTSCAN) &&
+ 	     !(lo->lo_flags & LO_FLAGS_PARTSCAN)) {
+@@ -1337,6 +1340,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 		bdev = lo->lo_device;
+ 		partscan = true;
+ 	}
++
++	/* truncate stale pages cached by previous operations */
++	if (!err && drop_cache) {
++		sync_blockdev(lo->lo_device);
++		invalidate_bdev(lo->lo_device);
++	}
+ out_unlock:
+ 	mutex_unlock(&loop_ctl_mutex);
+ 	if (partscan)
+@@ -1518,7 +1527,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
+ 
+ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+ {
+-	int err = 0;
++	bool drop_cache = false;
+ 
+ 	if (lo->lo_state != Lo_bound)
+ 		return -ENXIO;
+@@ -1526,31 +1535,23 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+ 	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
+ 		return -EINVAL;
+ 
+-	if (lo->lo_queue->limits.logical_block_size != arg) {
+-		sync_blockdev(lo->lo_device);
+-		kill_bdev(lo->lo_device);
+-	}
++	if (lo->lo_queue->limits.logical_block_size != arg)
++		drop_cache = true;
+ 
++	sync_blockdev(lo->lo_device);
+ 	blk_mq_freeze_queue(lo->lo_queue);
+-
+-	/* kill_bdev should have truncated all the pages */
+-	if (lo->lo_queue->limits.logical_block_size != arg &&
+-			lo->lo_device->bd_inode->i_mapping->nrpages) {
+-		err = -EAGAIN;
+-		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+-			__func__, lo->lo_number, lo->lo_file_name,
+-			lo->lo_device->bd_inode->i_mapping->nrpages);
+-		goto out_unfreeze;
+-	}
+-
+ 	blk_queue_logical_block_size(lo->lo_queue, arg);
+ 	blk_queue_physical_block_size(lo->lo_queue, arg);
+ 	blk_queue_io_min(lo->lo_queue, arg);
+ 	loop_update_dio(lo);
+-out_unfreeze:
+ 	blk_mq_unfreeze_queue(lo->lo_queue);
+ 
+-	return err;
++	/* truncate stale pages cached by previous operations */
++	if (drop_cache) {
++		sync_blockdev(lo->lo_device);
++		invalidate_bdev(lo->lo_device);
++	}
++	return 0;
+ }
+ 
+ static int lo_simple_ioctl(struct loop_device *lo, unsigned int cmd,
+-- 
+2.19.0.605.g01d371f741-goog
+
 
 
 _______________________________________________
