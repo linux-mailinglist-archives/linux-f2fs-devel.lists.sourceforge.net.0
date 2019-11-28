@@ -2,131 +2,129 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D0D010C22D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Nov 2019 03:11:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A76910C270
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Nov 2019 03:35:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ia9Go-0004dq-K5; Thu, 28 Nov 2019 02:11:02 +0000
+	id 1ia9eK-0000Mz-On; Thu, 28 Nov 2019 02:35:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=22887fd32=Damien.LeMoal@wdc.com>)
- id 1ia9Gn-0004dX-K5
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Nov 2019 02:11:01 +0000
+ (envelope-from <prvs=2285f8a38=shinichiro.kawasaki@wdc.com>)
+ id 1ia9eF-0000Mn-Da
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Nov 2019 02:35:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=niAEzFbx9Y53LyBkyWYTvw+2Q92yd+BRYbv7uBjA+P8=; b=mHPQurbycvzQn9WvQdNXRS9xJf
- 6XaBs6Gzd2R1ZW4j5j39/JoTEDvHyjyvsYs2h7HYrxm14/cLPqTAEY7A8tp3d9qQSVG+ByzFcK5yv
- DaBf4llubcs25m1Hi7IHjz39sm4WTrgmjT3hewWn4t4GojUj4JexC0jbpj3RC1nRizZE=;
+ bh=BQRqcICeNNZJ0xH03yCocvcOCIXayx13klFQGr0ucD0=; b=AtVa1GTxqD86E2DVHjGUEDDo5z
+ VkrCfv9L4/oL+NS4HVgwyGVldO0mhS8gHB8jEw6jPl7JEgZ+rFARUpeTpK3SKVEXL64DRU9FIIoRg
+ UERtCM2nyUcTFZGBWTFHcTfL5amkKNYKmNjJpKdasNfhQS84llMvze0IOkvAXFMaxei8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:Message-ID
- :Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=niAEzFbx9Y53LyBkyWYTvw+2Q92yd+BRYbv7uBjA+P8=; b=S
- XElO9nPeiMmOo/iWNnXvvSFhcK88pHREAwN1f1IFmdOMbBHHARTD0QwZq5tcDidVW8ipZzJnY/9ka
- QOLqrJgw5pzKV5RhxnxsXZLkFTeZ92QNV9hAyJ4c6mcdh1MR34YKB5ecrmlKxAIaf+3cCHlqoYvHr
- vfSTWwR4GVMn74Ys=;
-Received: from esa1.hgst.iphmx.com ([68.232.141.245])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=BQRqcICeNNZJ0xH03yCocvcOCIXayx13klFQGr0ucD0=; b=Fa88Df+1Ul+Ve627Oi5DWuopmV
+ zeXBdGXCPzCwkuoVY9i8UaqBNjzrRH5eZ1IxwMptZhyCSwt6yVMETTMJh+clfUH/jPDyG8j5Ssc0M
+ RyFwHKyWG3j0ntxpLEO/W8VwpYYJOCzuDvTuHdKRYewIFQVtVnCE469xOBbv+fzE7DoU=;
+Received: from esa6.hgst.iphmx.com ([216.71.154.45])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ia9Gj-008iY5-Ck
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Nov 2019 02:11:01 +0000
+ id 1ia9eD-00FafW-BK
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Nov 2019 02:35:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1574907057; x=1606443057;
+ t=1574908513; x=1606444513;
  h=from:to:cc:subject:date:message-id:references:
- content-transfer-encoding:mime-version;
- bh=syNyHpJTBDLEj5lYCHK7Sv3ZA9QIm4coeLntpsYTr4o=;
- b=J3UEMLFFT+RzwZiUA5GlDK6Tf9AkGUhi28LGf7V+zhw9v+odQrxlugNj
- RaY+JAIwMrbsjkO3Va6F4htQTahX6mKMCrCn07C9lk7p7L5rvUTe20mKQ
- yeYA+wNnmWDFZ7VSptkpztTm1hcuN6bBjq4goLAe8jl2DFtRo98r4Or/9
- sBFnuDnXX4EXNfwYZTxA26g9aIJLZVaZZ22+Dnlb+Y3usz3TyilSrRKTR
- V5H+psVPKM9mRo3Sla8oJ+LxGae9SIIPQUjZILzh+U8M1zdTpaZZVHBHL
- 1atJlxEUJMlwtOZWUCuzW5oJG1VpoCOS2njRSzByxmjDX9tu/pdwTnSgl g==;
-IronPort-SDR: ovf/sGAGaOWIvD0gyXG3a+UT/RDtRYaEPxxRMDWJbj5TaYpnP4xgqexOcR/axJ7ATYkn1NHDTF
- ALLzBqtWnZT6QQr38qi0SnDM0L7vMeTnoCMiLeeFgseiC2jlj5tW7cr7mFEIyA4RcffHSXZEBT
- 6vZ84KubqDBvEOJlwMDru/e0QYJVWD37Q/lPYYv1nDMz6J3XX0rZNCU1otXqlhJb39EGytPtEq
- SNAc7PrOjdqc1o+ENOzZQv/H7eJ8cR9YvXzpxfemsAQXTFezHQ1D8kENfi73b3UxIfkvS9Cffh
- yXU=
-X-IronPort-AV: E=Sophos;i="5.69,251,1571673600"; d="scan'208";a="231620118"
-Received: from mail-bn3nam04lp2056.outbound.protection.outlook.com (HELO
- NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.56])
- by ob1.hgst.iphmx.com with ESMTP; 28 Nov 2019 10:10:29 +0800
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=ekOU0kQbuGm474hNED4kL5Grj2ms63FFsolVYJZiCHY=;
+ b=OMnkEC3/bltPsQQMwVkHC9eoxp2XHU9sBnXJapYQwScXxuysNsnHx+Ex
+ 8pjpogcXPNSDAmhUnFUGiCH7OVVc1qmCbgq2k3QdcClVOT3OgtGk9Nltz
+ eqhaazmSVgZUPn6gm2B7WOTamelDW421ABdSwQxJ9c7ahStExWsH2gCRz
+ uN7DWhfCYeQm4Bt3Rhi2WelEYG2Soygf7f4tf1OpYVtwg4eA2V/xlTMqz
+ Ttu+aI3AGZ2rIxbwkrjlS9FoD4SxhMh5o9/VtS8LXnSd68YCasL9r5RCp
+ c+r/364yxeqpjwsbLmeqK0Xf8I3uHB3L4tS85Wm62QV823tQoj2KH5qU3 w==;
+IronPort-SDR: FuRXnZE6TNurlsFlI2EFnxpRsrc1khzPPiRU1vaBeusXcydWP0uNw5lB8rziiu6/E1oPQFtvQ1
+ k4rZYzfCBainmouXAhd6Q6dGMxNY09ZyhqYMt1P1XYCT3bIvUYZNdYMAplqScf39bdtFzdcnuf
+ cu6k6Drq+TaAYJAQzc7Ta0SoGH+65P7f9E9MP9phZEV/vQbe/PjAAhrXhrKzL4f61mdIFF6yHj
+ FyK7CSk6jA7ZwlzNceqW2DsfNYUXLKk8UOzpJrADH7azNyEbCajrNh8fgYEY0yRNn/xbN+t7cy
+ XWI=
+X-IronPort-AV: E=Sophos;i="5.69,251,1571673600"; d="scan'208";a="125783808"
+Received: from mail-dm3nam03lp2051.outbound.protection.outlook.com (HELO
+ NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.51])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Nov 2019 10:34:59 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Bkhqd+Ug6fJuhGtUcBxfMEGHor/f89CfYmjPvZpnYCgjOBxaKrWgQ5WLxZJeTmy2tPLrEU6PrP68UMmSUwWjqU0SjX5GRtX+vi6aF3Fftmc8ZtUT5AOqZMcam7dHSzLXh/IuXYenTIjGnykSKEGaEhpkuCe8i1Zv+pboZ4ZbpQ12qAqVl791pG8pBYgmbPwexVcvz/WJiozEA6ehd9OsFFAWA437uWkpIJLrsylEXXrwKsLtVAcEN3DHVq/sE7YGANwuyV2Af0+s6ZIPbvJ+GOoH20/3MwHK0RPUBi5UFm7k8kygQs8VVS25WvFr09Vlbo11KmYN53zBrb+yVCusdw==
+ b=AIqG80hJbFcIU4SUUrUJDmAcJbHPxYmh0LUmMnJQSgk7E+TIBtOGSlUoi28eCIJg9uSQZuJMmTUEjbjqmBnMQalav2H3B6w1d2A6kTMzOdTVgWvQrY0PRHwIMAGNwViJltpntfbUBeVR2JVh0qfqhvJ9etSYmpBtV6KcbRsITpzz5jirhDUVI3assCsWKaNA6HrzRLqtFXD7AZsijGBWrwYnx5KQqU22gDUoXngVrBhPBfMi/L88QU8JFI+pJTmjXJ/MZqrcR0MehMgDdddkyaBW+FK53g4n3gWtB0MKGiZ2IDoeiWPzwnBp3IOBuhZrBYGnWwgx+pvwmyVedjMz4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=niAEzFbx9Y53LyBkyWYTvw+2Q92yd+BRYbv7uBjA+P8=;
- b=jkFxHJ7f471a4JIWp+q5MBtSxLGzJWMnc9A3bHVyiy1ypuWiNYedq/HK8JzRwzMBPzrsg5Mx4VmbjvmKAleDoUod2Wj1nPhlFl3ExB08tgWEYw6FUlCFeQIjwwUwc9fzzR3/X1l8+cecKri2vKsBkE2wvOSnC2djbcMRzg2SxcA7F3pcWC9MnoxXap2Kw4qLwT7Uv0lgGKEQJn7CUS8QXKM0VcwVta8/JRRlFarpb0L1/ZnoDy3W7qZ2KVi3ZS2zemIqm2Oy896Pn0aooWIxwL/XFHHDiGYa4k9tU4c9Dw/Fl5hZTeqxp1gZfCLsedwv/Tg714AVb1eWio+HOipoBw==
+ bh=BQRqcICeNNZJ0xH03yCocvcOCIXayx13klFQGr0ucD0=;
+ b=f2+DRNFypMK2w49jlfooEwHDXsDu7kL7x5178ivzIEWR4v2+TeDI5mkzdLg7Q7Trwwr/jWpzdiYmkZji+KwM6vQnxjOQPFVkUsjoUrfjvBjoQnmtYZstQtnYvw4FmvO9UtkRB1mriGL0c78dBZEstmfsEyT/fquS03o07jSxrajZGFC/8Gvy9loilLbdIQho6RZBxR90BXpppcU9Z6MYn4BnZg7No1rTM/B85R96ZNeVgCXgWttXt+6HFOJ7SsaZlftRNiG5Kf49vvf0/3TmnA9xswOfCehwHKQCIV9DDyWm51kIzCf1xfyL2xAj1DpZhAxTUZtpb3A18eHIVg4y6w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=niAEzFbx9Y53LyBkyWYTvw+2Q92yd+BRYbv7uBjA+P8=;
- b=ZKn7J9XuDrxyda7poKl9p884eiU26dPm6F7BTha8vAEXbbe/P/AalYC/sqYTyYFKiKE5F7CgsaYm3FM9HOLfiQ0u1PFpN/pI1vmJLUBjYfjv+yjyIgekB7eJF/P4x5GBfmS2SiYvVoiXhOdwULkv1XPubaKDOAz1Q32rAAjUlRM=
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com (20.179.59.16) by
- BYAPR04MB5718.namprd04.prod.outlook.com (20.179.58.156) with Microsoft SMTP
+ bh=BQRqcICeNNZJ0xH03yCocvcOCIXayx13klFQGr0ucD0=;
+ b=GIm36vf0tqWcGBvb5s+YZRS0V67pQcSYqD/fuT/b+elBKMv9kb5u1RvTbCPO9nl1r65TS7S07QwGGoN5JPNerMdxai/a9ebEsYVvF7TQLKUg3qapZTOU2aUQ2JxIE1EARxBq8zjPqohtUMCqRL21Qio46q1/nH1jLdnKiQD/TWw=
+Received: from CY1PR04MB2268.namprd04.prod.outlook.com (10.167.10.135) by
+ CY1PR04MB2348.namprd04.prod.outlook.com (10.167.17.149) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2474.21; Thu, 28 Nov 2019 02:10:28 +0000
-Received: from BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::f0e9:c12:647d:2aae]) by BYAPR04MB5816.namprd04.prod.outlook.com
- ([fe80::f0e9:c12:647d:2aae%4]) with mapi id 15.20.2495.014; Thu, 28 Nov 2019
- 02:10:28 +0000
-From: Damien Le Moal <Damien.LeMoal@wdc.com>
-To: Ritesh Harjani <riteshh@linux.ibm.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu
- <yuchao0@huawei.com>
+ 15.20.2474.17; Thu, 28 Nov 2019 02:34:55 +0000
+Received: from CY1PR04MB2268.namprd04.prod.outlook.com
+ ([fe80::ac1b:af88:c028:7d74]) by CY1PR04MB2268.namprd04.prod.outlook.com
+ ([fe80::ac1b:af88:c028:7d74%11]) with mapi id 15.20.2474.023; Thu, 28 Nov
+ 2019 02:34:55 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 Thread-Topic: [PATCH] f2fs: Fix direct IO handling
-Thread-Index: AQHVpC8oKo+FZgLUZUKdgZnQSrVbXw==
-Date: Thu, 28 Nov 2019 02:10:28 +0000
-Message-ID: <BYAPR04MB5816C82F708612381216895BE7470@BYAPR04MB5816.namprd04.prod.outlook.com>
+Thread-Index: AQHVpC8oudPXEy0mBEmfCTgj/M+d7aeeHoMAgAHB64A=
+Date: Thu, 28 Nov 2019 02:34:55 +0000
+Message-ID: <20191128023447.wopisf4nh2l63evv@shindev.dhcp.fujisawa.hgst.com>
 References: <20191126075719.1046485-1-damien.lemoal@wdc.com>
- <20191126083443.F1FD5A405B@b06wcsmtp001.portsmouth.uk.ibm.com>
+ <20191126234428.GB20652@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20191126234428.GB20652@jaegeuk-macbookpro.roam.corp.google.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Damien.LeMoal@wdc.com; 
-x-originating-ip: [199.255.47.8]
+ smtp.mailfrom=shinichiro.kawasaki@wdc.com; 
+x-originating-ip: [199.255.47.12]
 x-ms-publictraffictype: Email
 x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 5574de00-208c-4881-e394-08d773a823ad
-x-ms-traffictypediagnostic: BYAPR04MB5718:
+x-ms-office365-filtering-correlation-id: 7c26b4f5-2a66-49db-fe5c-08d773ab8e00
+x-ms-traffictypediagnostic: CY1PR04MB2348:
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <BYAPR04MB57185885BCCA5B9AF16F6489E7470@BYAPR04MB5718.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <CY1PR04MB2348C068F495A456F0195811ED470@CY1PR04MB2348.namprd04.prod.outlook.com>
 wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
 x-forefront-prvs: 0235CBE7D0
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(396003)(39860400002)(366004)(346002)(136003)(376002)(199004)(189003)(55016002)(8936002)(256004)(3846002)(6116002)(26005)(4326008)(446003)(81156014)(81166006)(110136005)(14444005)(102836004)(5660300002)(14454004)(186003)(99286004)(8676002)(54906003)(305945005)(33656002)(76116006)(91956017)(2501003)(25786009)(66446008)(71200400001)(71190400001)(86362001)(64756008)(7696005)(66476007)(66556008)(52536014)(229853002)(7736002)(6506007)(53546011)(478600001)(316002)(66946007)(2906002)(6436002)(76176011)(66066001)(6246003)(2201001)(9686003)(74316002);
- DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB5718;
- H:BYAPR04MB5816.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ SFS:(10019020)(4636009)(346002)(376002)(396003)(366004)(136003)(39860400002)(199004)(189003)(81166006)(8936002)(76116006)(64756008)(86362001)(71190400001)(478600001)(11346002)(102836004)(9686003)(6512007)(14454004)(14444005)(6436002)(44832011)(2906002)(446003)(7736002)(6486002)(256004)(1076003)(54906003)(6116002)(99286004)(6246003)(186003)(4326008)(3846002)(5660300002)(26005)(76176011)(66066001)(6506007)(71200400001)(6916009)(66476007)(66556008)(66946007)(229853002)(91956017)(8676002)(81156014)(316002)(25786009)(66446008)(305945005);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR04MB2348;
+ H:CY1PR04MB2268.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: aRInWcL7Xm17iKI3BAG32Xpzcj64PUDcihsK0PBZtplHWtY7UjCRpMEuo2VNyBCTnXXhIRZLDV+hvJLMzO3iEmrZzSnOTqaTqzvZPyrufXNn/UBLlfoRKaFYopycqNt5DxQbGPfFg7es1le1tEMc5gdeZE1y53sryprBW8zPC/Q4JJmViLC1BGwSfz6LgIkXusWSP8OCxKQalygnP0og+yfgl98ynngaUdGhMgySeapcw8g9ImZt/LNFbO6ILjONJYAFN8cUizzLe6eBq+Sn0UO4qpUE9CgSMtK3zk9Orp4GsFSqgFTWEriNzdVs74Dcq9amPTCtxOTKLuWwln/yk+fuZ5jRH+4tUg89yBeSRii4JKiwBxf8Dp5nRC0soc3J0I31SwW7BhVXUFq40/ZLqci+spGW9H6KPAe2N4RMYayKOuWcwjRGSPtu68x0XC1u
+x-microsoft-antispam-message-info: SSyzbA1xyzV8lkgzdHZbCtR+3y8LVe7qLh+TYjJdIYIdsZC4oEPDRMJteciRBDyVyV7gZBYHqvdGYVQwwNeaPlk6BK/Ny92/Ic3yxB+iQPa7Gus+UAQJBtUv42gazBtMsTMVGNqMTnJutlx5D6DkC89GVHiIun9WZ+rqq8YBGMbvXKlGbUYOd5elIT6mVdTrW3Z78cBvsq0YBQeqKdpv0mtTocfYTZssLANPzesFZfLckXDnVI3d/0fSMbH4W7/wr/pPdNpqV7Vccs4fYme3XyPQy5jXeqKSpUslNdP9vOB5/8BqLIcZw7VxTLH5e/MmqQyQIUFrrDiwVw5jiaXvtbz7Emi94bv2qOjBr1hkPLvouYdIL/5XeA/TtRe7Z8x6at8DFb2ilcbTlMEExEftqCCpgHD2JZi/A3EjPX1jeqLpDRJ3McKw0eF9DYvaNx7c
+Content-ID: <8E365806411AA54BB3C5D02C69405593@namprd04.prod.outlook.com>
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5574de00-208c-4881-e394-08d773a823ad
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Nov 2019 02:10:28.4204 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c26b4f5-2a66-49db-fe5c-08d773ab8e00
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Nov 2019 02:34:55.3836 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 8gqRIFPT42ai7KNCMu7drCOZFpf0uZzjtXlWbw332nulvHWZIFmVrTVu0T1o5TXsWG3tf/pGyJkgNh8CCCOzwA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5718
+X-MS-Exchange-CrossTenant-userprincipalname: JGo1IL/Vftfu8a2vUOxKLgB/1n8p0AcXit+g5GiIes8yl+MMnPYiylvyr0Rf410Y3fgDzOKMjC3LPRzht7trWuCAlOcoqudwG+SqqaOnHJY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR04MB2348
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -141,8 +139,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ia9Gj-008iY5-Ck
+X-Headers-End: 1ia9eD-00FafW-BK
 Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix direct IO handling
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -155,95 +152,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- Javier Gonzalez <javier@javigon.com>
+Cc: Damien Le Moal <Damien.LeMoal@wdc.com>,
+ Javier Gonzalez <javier@javigon.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/11/26 17:34, Ritesh Harjani wrote:
-> Hello Damien,
+On Nov 26, 2019 / 15:44, Jaegeuk Kim wrote:
+> On 11/26, Damien Le Moal wrote:
+> > f2fs_preallocate_blocks() identifies direct IOs using the IOCB_DIRECT
+> > flag for a kiocb structure. However, the file system direct IO handler
+> > function f2fs_direct_IO() may have decided that a direct IO has to be
+> > exececuted as a buffered IO using the function f2fs_force_buffered_io().
+> > This is the case for instance for volumes including zoned block device
+> > and for unaligned write IOs with LFS mode enabled.
+> > 
+> > These 2 different methods of identifying direct IOs can result in
+> > inconsistencies generating stale data access for direct reads after a
+> > direct IO write that is treated as a buffered write. Fix this
+> > inconsistency by combining the IOCB_DIRECT flag test with the result
+> > of f2fs_force_buffered_io().
+> > 
+> > Reported-by: Javier Gonzalez <javier@javigon.com>
+> > Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
+> > ---
+> >  fs/f2fs/data.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > index 5755e897a5f0..8ac2d3b70022 100644
+> > --- a/fs/f2fs/data.c
+> > +++ b/fs/f2fs/data.c
+> > @@ -1073,6 +1073,8 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
+> >  	int flag;
+> >  	int err = 0;
+> >  	bool direct_io = iocb->ki_flags & IOCB_DIRECT;
+> > +	bool do_direct_io = direct_io &&
+> > +		!f2fs_force_buffered_io(inode, iocb, from);
+> >  
+> >  	/* convert inline data for Direct I/O*/
+> >  	if (direct_io) {
+> > @@ -1081,7 +1083,7 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
+> >  			return err;
+> >  	}
+> >  
+> > -	if (direct_io && allow_outplace_dio(inode, iocb, from))
+> > +	if (do_direct_io && allow_outplace_dio(inode, iocb, from))
 > 
-> IIUC, you are trying to fix a stale data read by DIO read for the case
-> you explained in your patch w.r.t. DIO-write forced to write as buffIO.
+> It seems f2fs_force_buffered_io() includes allow_outplace_dio().
 > 
-> Coincidentally I was just looking at the same code path just now.
-> So I do have a query to you/f2fs group. Below could be silly one, as I
-> don't understand F2FS in great detail.
-> 
-> How is the stale data by DIO read, is protected against a mmap
-> writes via f2fs_vm_page_mkwrite?
-> 
-> f2fs_vm_page_mkwrite()		 f2fs_direct_IO (read)
-> 					filemap_write_and_wait_range()
-> 	-> f2fs_get_blocks()				
-> 					 -> submit_bio()
-> 
-> 	-> set_page_dirty()
-> 
-> Is above race possible with current f2fs code?
-> i.e. f2fs_direct_IO could read the stale data from the blocks
-> which were allocated due to mmap fault?
+> How about this?
 
-The faulted page is locked until the fault is fully processed so direct
-IO has to wait for that to complete first.
+Thanks. I confirmed that the issue is gone with your patch.
 
+Tested-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+
+> ---
+>  fs/f2fs/data.c | 13 -------------
+>  fs/f2fs/file.c | 35 +++++++++++++++++++++++++----------
+>  2 files changed, 25 insertions(+), 23 deletions(-)
 > 
-> Am I missing something here?
-> 
-> -ritesh
-> 
-> On 11/26/19 1:27 PM, Damien Le Moal wrote:
->> f2fs_preallocate_blocks() identifies direct IOs using the IOCB_DIRECT
->> flag for a kiocb structure. However, the file system direct IO handler
->> function f2fs_direct_IO() may have decided that a direct IO has to be
->> exececuted as a buffered IO using the function f2fs_force_buffered_io().
->> This is the case for instance for volumes including zoned block device
->> and for unaligned write IOs with LFS mode enabled.
->>
->> These 2 different methods of identifying direct IOs can result in
->> inconsistencies generating stale data access for direct reads after a
->> direct IO write that is treated as a buffered write. Fix this
->> inconsistency by combining the IOCB_DIRECT flag test with the result
->> of f2fs_force_buffered_io().
->>
->> Reported-by: Javier Gonzalez <javier@javigon.com>
->> Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
->> ---
->>   fs/f2fs/data.c | 4 +++-
->>   1 file changed, 3 insertions(+), 1 deletion(-)
->>
->> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->> index 5755e897a5f0..8ac2d3b70022 100644
->> --- a/fs/f2fs/data.c
->> +++ b/fs/f2fs/data.c
->> @@ -1073,6 +1073,8 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
->>   	int flag;
->>   	int err = 0;
->>   	bool direct_io = iocb->ki_flags & IOCB_DIRECT;
->> +	bool do_direct_io = direct_io &&
->> +		!f2fs_force_buffered_io(inode, iocb, from);
->>   
->>   	/* convert inline data for Direct I/O*/
->>   	if (direct_io) {
->> @@ -1081,7 +1083,7 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
->>   			return err;
->>   	}
->>   
->> -	if (direct_io && allow_outplace_dio(inode, iocb, from))
->> +	if (do_direct_io && allow_outplace_dio(inode, iocb, from))
->>   		return 0;
->>   
->>   	if (is_inode_flag_set(inode, FI_NO_PREALLOC))
->>
-> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index a034cd0ce021..fc40a72f7827 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1180,19 +1180,6 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
+>  	int err = 0;
+>  	bool direct_io = iocb->ki_flags & IOCB_DIRECT;
+>  
+> -	/* convert inline data for Direct I/O*/
+> -	if (direct_io) {
+> -		err = f2fs_convert_inline_inode(inode);
+> -		if (err)
+> -			return err;
+> -	}
+> -
+> -	if (direct_io && allow_outplace_dio(inode, iocb, from))
+> -		return 0;
+> -
+> -	if (is_inode_flag_set(inode, FI_NO_PREALLOC))
+> -		return 0;
+> -
+>  	map.m_lblk = F2FS_BLK_ALIGN(iocb->ki_pos);
+>  	map.m_len = F2FS_BYTES_TO_BLK(iocb->ki_pos + iov_iter_count(from));
+>  	if (map.m_len > map.m_lblk)
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index c0560d62dbee..6b32ac6c3382 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -3386,18 +3386,33 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+>  				ret = -EAGAIN;
+>  				goto out;
+>  			}
+> -		} else {
+> -			preallocated = true;
+> -			target_size = iocb->ki_pos + iov_iter_count(from);
+> +			goto write;
+> +		}
+>  
+> -			err = f2fs_preallocate_blocks(iocb, from);
+> -			if (err) {
+> -				clear_inode_flag(inode, FI_NO_PREALLOC);
+> -				inode_unlock(inode);
+> -				ret = err;
+> -				goto out;
+> -			}
+> +		if (is_inode_flag_set(inode, FI_NO_PREALLOC))
+> +			goto write;
+> +
+> +		if (iocb->ki_flags & IOCB_DIRECT) {
+> +			/* convert inline data for Direct I/O*/
+> +			err = f2fs_convert_inline_inode(inode);
+> +			if (err)
+> +				goto out_err;
+> +
+> +			if (!f2fs_force_buffered_io(inode, iocb, from))
+> +				goto write;
+> +		}
+> +		preallocated = true;
+> +		target_size = iocb->ki_pos + iov_iter_count(from);
+> +
+> +		err = f2fs_preallocate_blocks(iocb, from);
+> +		if (err) {
+> +out_err:
+> +			clear_inode_flag(inode, FI_NO_PREALLOC);
+> +			inode_unlock(inode);
+> +			ret = err;
+> +			goto out;
+>  		}
+> +write:
+>  		ret = __generic_file_write_iter(iocb, from);
+>  		clear_inode_flag(inode, FI_NO_PREALLOC);
+>  
+> -- 
+> 2.19.0.605.g01d371f741-goog
 > 
 
-
--- 
-Damien Le Moal
-Western Digital Research
-
+--
+Best Regards,
+Shin'ichiro Kawasaki
 
 _______________________________________________
 Linux-f2fs-devel mailing list
