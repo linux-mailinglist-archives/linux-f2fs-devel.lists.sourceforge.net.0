@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8FA010DCED
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 Nov 2019 08:27:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B1C810DCFD
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 Nov 2019 08:49:20 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iaxAT-0005Re-8R; Sat, 30 Nov 2019 07:27:49 +0000
+	id 1iaxVG-0006G2-Ag; Sat, 30 Nov 2019 07:49:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iaxAP-0005RS-9O
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Nov 2019 07:27:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iaxVE-0006Fm-86
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Nov 2019 07:49:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+I+QoANEQOGPuT0wmkP3fOlpNljp5Q1rz19/BqUttYQ=; b=UIPAaqSV9Q5bcJ7lGMtEqhYVA4
- s4d6+DRaIt3dP1q0IumG5g15PceZeAZxyvu/8cSvniVAGTi6dtzz5ttHNQl8Ht0Iq0I3CdNCfI7gN
- W/caqfVn3Xq+n8wi1h6c/MR/5h133s7Xnpux34WDbjXWmDrjBVgkwX8BkNlhuaC+1izg=;
+ bh=CJxH3iYfTjgsQQvkLl7yM2OHAj4eeKQwiZ5dBhfVndI=; b=EmWMGSvKXM5BCUhJobVFArTLiE
+ AKjEzTRXmtWP9/esmEV9WeJIoiuP/BzxdJTBicfGcvDq4YEHVryQpwrmfhsjX89/hrMfZ6hRA7u3s
+ Oteb7I0/Kp9DvTM9A0GC30TPoqwhF9YZa2LON+3C5970iodLMse/BsHJ+qU2FvWDQcwo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,35 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+I+QoANEQOGPuT0wmkP3fOlpNljp5Q1rz19/BqUttYQ=; b=i4Z0Qn7bihj3AaOP9+YQymvkQ+
- UzC9NFuVhmUxxVeYLJ2GPipxaGWQDMuJfRkJtyUQrboQ/Ov0uFte+nqGi8qCVLZt9uLeK8NXS4mQJ
- wv3vIxTYLbIhT3luS5N9X4o4IBG2DvQBRPX3oSiN5sjAaE5XzX31za5sd8pRejw6detA=;
+ bh=CJxH3iYfTjgsQQvkLl7yM2OHAj4eeKQwiZ5dBhfVndI=; b=WQzcj1g3E7fgrtxpHV4lzFIabv
+ 0IngMR4RoCzrFc9MGxSfVdkdvIvsULo+CjTexwayEg642Gw0K48Z8al7Xf9+qLMSzAgDuEtgE6iQ4
+ SQXniQvyw7sip1vpkq0ZdFGrUNFBgLkD4hC6fal4+ESFkyX6jKZos3lvexT2VurfcBj0=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iaxAN-000Lwd-Q5
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Nov 2019 07:27:45 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 83080E6B1FE2ADD81028;
- Sat, 30 Nov 2019 15:27:32 +0800 (CST)
+ id 1iaxVB-00CVQa-Le
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Nov 2019 07:49:16 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 14315F84757930C58146;
+ Sat, 30 Nov 2019 15:49:03 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 30 Nov
- 2019 15:27:29 +0800
-To: Ritesh Harjani <riteshh@linux.ibm.com>, Damien Le Moal
- <Damien.LeMoal@wdc.com>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20191126075719.1046485-1-damien.lemoal@wdc.com>
- <20191126083443.F1FD5A405B@b06wcsmtp001.portsmouth.uk.ibm.com>
- <BYAPR04MB5816C82F708612381216895BE7470@BYAPR04MB5816.namprd04.prod.outlook.com>
- <20191128102033.6085952057@d06av21.portsmouth.uk.ibm.com>
+ (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 30 Nov
+ 2019 15:49:01 +0800
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+References: <20191114081903.312260-1-shinichiro.kawasaki@wdc.com>
+ <20191114081903.312260-3-shinichiro.kawasaki@wdc.com>
+ <52e3648c-999e-d09b-4af8-26cb213171d8@huawei.com>
+ <20191128053100.han73koggbr7uk7a@shindev.dhcp.fujisawa.hgst.com>
+ <fabfdebd-1403-9c37-cf68-71faa525c539@huawei.com>
+ <20191129052148.kgx6ahy2zu4rrsvq@shindev.dhcp.fujisawa.hgst.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <ad311ee5-fe8f-9fbc-1e7a-7bfc379d268c@huawei.com>
-Date: Sat, 30 Nov 2019 15:27:29 +0800
+Message-ID: <6d29c4f8-842f-9a48-9ec8-e0707f37d97b@huawei.com>
+Date: Sat, 30 Nov 2019 15:49:00 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191128102033.6085952057@d06av21.portsmouth.uk.ibm.com>
+In-Reply-To: <20191129052148.kgx6ahy2zu4rrsvq@shindev.dhcp.fujisawa.hgst.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -71,8 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iaxAN-000Lwd-Q5
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix direct IO handling
+X-Headers-End: 1iaxVB-00CVQa-Le
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: Check write pointer consistency
+ of non-open zones
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,117 +84,342 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Javier Gonzalez <javier@javigon.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Damien Le Moal <Damien.LeMoal@wdc.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/11/28 18:20, Ritesh Harjani wrote:
-> 
-> 
-> On 11/28/19 7:40 AM, Damien Le Moal wrote:
->> On 2019/11/26 17:34, Ritesh Harjani wrote:
->>> Hello Damien,
+On 2019/11/29 13:21, Shinichiro Kawasaki wrote:
+> On Nov 28, 2019 / 20:39, Chao Yu wrote:
+>> On 2019/11/28 13:31, Shinichiro Kawasaki wrote:
+>>> On Nov 25, 2019 / 15:37, Chao Yu wrote:
+>>>> On 2019/11/14 16:19, Shin'ichiro Kawasaki wrote:
+>>>>> To catch f2fs bugs in write pointer handling code for zoned block
+>>>>> devices, check write pointers of non-open zones that current segments do
+>>>>> not point to. Do this check at mount time, after the fsync data recovery
+>>>>> and current segments' write pointer consistency fix. Or when fsync data
+>>>>> recovery is disabled by mount option, do the check when there is no fsync
+>>>>> data.
+>>>>>
+>>>>> Check two items comparing write pointers with valid block maps in SIT.
+>>>>> The first item is check for zones with no valid blocks. When there is no
+>>>>> valid blocks in a zone, the write pointer should be at the start of the
+>>>>> zone. If not, next write operation to the zone will cause unaligned write
+>>>>> error. If write pointer is not at the zone start, make mount fail and ask
+>>>>> users to run fsck.
+>>>>>
+>>>>> The second item is check between the write pointer position and the last
+>>>>> valid block in the zone. It is unexpected that the last valid block
+>>>>> position is beyond the write pointer. In such a case, report as a bug.
+>>>>> Fix is not required for such zone, because the zone is not selected for
+>>>>> next write operation until the zone get discarded.
+>>>>>
+>>>>> Also move a constant F2FS_REPORT_ZONE from super.c to f2fs.h to use it
+>>>>> in segment.c also.
+>>>>>
+>>>>> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+>>>>> ---
+>>>>>  fs/f2fs/f2fs.h    |   3 +
+>>>>>  fs/f2fs/segment.c | 149 ++++++++++++++++++++++++++++++++++++++++++++++
+>>>>>  fs/f2fs/super.c   |  16 ++++-
+>>>>>  3 files changed, 165 insertions(+), 3 deletions(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>>> index a2e24718c13b..1bb64950d793 100644
+>>>>> --- a/fs/f2fs/f2fs.h
+>>>>> +++ b/fs/f2fs/f2fs.h
+>>>>> @@ -3137,6 +3137,7 @@ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
+>>>>>  			unsigned int val, int alloc);
+>>>>>  void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
+>>>>>  int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi);
+>>>>> +int f2fs_check_write_pointer(struct f2fs_sb_info *sbi);
+>>>>>  int f2fs_build_segment_manager(struct f2fs_sb_info *sbi);
+>>>>>  void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
+>>>>>  int __init f2fs_create_segment_manager_caches(void);
+>>>>> @@ -3610,6 +3611,8 @@ static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
+>>>>>  
+>>>>>  	return test_bit(zno, FDEV(devi).blkz_seq);
+>>>>>  }
+>>>>> +
+>>>>> +#define F2FS_REPORT_NR_ZONES   4096
+>>>>>  #endif
+>>>>>  
+>>>>>  static inline bool f2fs_hw_should_discard(struct f2fs_sb_info *sbi)
+>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>>>> index 6ece146dab34..29e3b6f62f8c 100644
+>>>>> --- a/fs/f2fs/segment.c
+>>>>> +++ b/fs/f2fs/segment.c
+>>>>> @@ -4333,6 +4333,133 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+>>>>>  
+>>>>>  #ifdef CONFIG_BLK_DEV_ZONED
+>>>>>  
+>>>>> +static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+>>>>> +				    struct f2fs_dev_info *fdev,
+>>>>> +				    struct blk_zone *zone)
+>>>>> +{
+>>>>> +	unsigned int wp_segno, wp_blkoff, zone_secno, zone_segno, segno;
+>>>>> +	block_t zone_block, wp_block, last_valid_block;
+>>>>> +	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
+>>>>> +	int i, s, b;
+>>>>> +	struct seg_entry *se;
+>>>>> +
+>>>>> +	wp_block = fdev->start_blk + (zone->wp >> log_sectors_per_block);
+>>>>> +	wp_segno = GET_SEGNO(sbi, wp_block);
+>>>>> +	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
+>>>>> +	zone_block = fdev->start_blk + (zone->start >> log_sectors_per_block);
+>>>>> +	zone_segno = GET_SEGNO(sbi, zone_block);
+>>>>> +	zone_secno = GET_SEC_FROM_SEG(sbi, zone_segno);
+>>>>> +
+>>>>> +	if (zone_segno >= MAIN_SEGS(sbi))
+>>>>> +		return 0;
+>>>>> +
+>>>>> +	/*
+>>>>> +	 * Skip check of zones cursegs point to, since
+>>>>> +	 * fix_curseg_write_pointer() checks them.
+>>>>> +	 */
+>>>>> +	for (i = 0; i < NO_CHECK_TYPE; i++)
+>>>>> +		if (zone_secno == GET_SEC_FROM_SEG(sbi,
+>>>>> +						   CURSEG_I(sbi, i)->segno))
+>>>>> +			return 0;
+>>>>> +
+>>>>> +	/*
+>>>>> +	 * Get last valid block of the zone.
+>>>>> +	 */
+>>>>> +	last_valid_block = zone_block - 1;
+>>>>> +	for (s = sbi->segs_per_sec - 1; s >= 0; s--) {
+>>>>> +		segno = zone_segno + s;
+>>>>> +		se = get_seg_entry(sbi, segno);
+>>>>> +		for (b = sbi->blocks_per_seg - 1; b >= 0; b--)
+>>>>> +			if (f2fs_test_bit(b, se->cur_valid_map)) {
+>>>>> +				last_valid_block = START_BLOCK(sbi, segno) + b;
+>>>>> +				break;
+>>>>> +			}
+>>>>> +		if (last_valid_block >= zone_block)
+>>>>> +			break;
+>>>>> +	}
+>>>>> +
+>>>>> +	/*
+>>>>> +	 * If last valid block is beyond the write pointer, report the
+>>>>> +	 * inconsistency. This inconsistency does not cause write error
+>>>>> +	 * because the zone will not be selected for write operation until
+>>>>> +	 * it get discarded. Just report it.
+>>>>> +	 */
+>>>>> +	if (last_valid_block >= wp_block) {
+>>>>> +		f2fs_notice(sbi, "Valid block beyond write pointer: "
+>>>>> +			    "valid block[0x%x,0x%x] wp[0x%x,0x%x]",
+>>>>> +			    GET_SEGNO(sbi, last_valid_block),
+>>>>> +			    GET_BLKOFF_FROM_SEG0(sbi, last_valid_block),
+>>>>> +			    wp_segno, wp_blkoff);
+>>>>> +		return 0;
+>>>>> +	}
+>>>>> +
+>>>>> +	/*
+>>>>> +	 * If there is no valid block in the zone and if write pointer is
+>>>>> +	 * not at zone start, report the error to run fsck.
+>>>>
+>>>> So we only need to report this as inconsistent status in the condition of
+>>>> discard has been triggered, right? otherwise, f2fs will trigger discard later
+>>>> to reset zone->wp before opening this zone?
 >>>
->>> IIUC, you are trying to fix a stale data read by DIO read for the case
->>> you explained in your patch w.r.t. DIO-write forced to write as buffIO.
->>>
->>> Coincidentally I was just looking at the same code path just now.
->>> So I do have a query to you/f2fs group. Below could be silly one, as I
->>> don't understand F2FS in great detail.
->>>
->>> How is the stale data by DIO read, is protected against a mmap
->>> writes via f2fs_vm_page_mkwrite?
->>>
->>> f2fs_vm_page_mkwrite()		 f2fs_direct_IO (read)
->>> 					filemap_write_and_wait_range()
->>> 	-> f2fs_get_blocks()				
->>> 					 -> submit_bio()
->>>
->>> 	-> set_page_dirty()
->>>
->>> Is above race possible with current f2fs code?
->>> i.e. f2fs_direct_IO could read the stale data from the blocks
->>> which were allocated due to mmap fault?
+>>> Hmm, my intent was to catch the inconsistency at mount time, assuming the
+>>> inconsistency is not expected at mount time. In other words, I assume that
+>>> discard is triggered for zones without valid blocks before that last clean
 >>
->> The faulted page is locked until the fault is fully processed so direct
->> IO has to wait for that to complete first.
+>> IIUC, if there is too many pending discards, put_super() may drop discard entries
+>> to avoid delaying umount, so we can not assume all discards are always being
+>> triggered.
 > 
-> How about below parallelism?
+> I see. In this case, current code in the patch will miss-detect the zone with
+> the dropped discard entries. This is not good. Thank you for catching this :)
 > 
->   f2fs_vm_page_mkwrite()		 f2fs_direct_IO (read)
->   					filemap_write_and_wait_range()
-> 	-> down_read(->i_mmap_sem);
-> 	-> lock_page()
-> 	-> f2fs_get_blocks()				
->   					 -> submit_bio()
+>>
+>> So what I mean is for the condition of a) there is valid (including fsycned) block,
+>> b) zone->wp is not at correct position, f2fs can handle it by issuing discard. Let
+>> me know if I misread this comment.
 > 
->   	-> set_page_dirty()
-> 
-> Can above DIO read not expose the stale data from block which was
-> allocated in f2fs_vm_page_mkwrite path?
+> For the condition a), do you mean "there is _no_ valid (include fsynced) block"?
 
-The race can happen, however I doubt the race condition is more complicated
-as I described in previous reply of mine, could you check that?
+Oops, yes, I meant that. :)
 
 Thanks,
 
-> 
+> If so, yes, I agree that f2fs can issue discard and both a) and b) are true. I
+> can add a simple function call of "reset zone" to discard the zone.
 > 
 >>
+>>> umount. If the last sudden f2fs shutdown without clean umount caused the
+>>> inconsistency, it should be reported and fixed, I think.
 >>>
->>> Am I missing something here?
+>>> SIT valid blocks are referred to check if there is no valid blocks in the zone.
+>>> SIT may be broken due to software bug or hardware flaw, then I think it is the
+>>> better to run fsck rather than discard by f2fs.
 >>>
->>> -ritesh
+>>> If I miss anything, please let me know.
 >>>
->>> On 11/26/19 1:27 PM, Damien Le Moal wrote:
->>>> f2fs_preallocate_blocks() identifies direct IOs using the IOCB_DIRECT
->>>> flag for a kiocb structure. However, the file system direct IO handler
->>>> function f2fs_direct_IO() may have decided that a direct IO has to be
->>>> exececuted as a buffered IO using the function f2fs_force_buffered_io().
->>>> This is the case for instance for volumes including zoned block device
->>>> and for unaligned write IOs with LFS mode enabled.
+>>> --
+>>> Best Regards,
+>>> Shin'ichiro Kawasaki
+>>>
 >>>>
->>>> These 2 different methods of identifying direct IOs can result in
->>>> inconsistencies generating stale data access for direct reads after a
->>>> direct IO write that is treated as a buffered write. Fix this
->>>> inconsistency by combining the IOCB_DIRECT flag test with the result
->>>> of f2fs_force_buffered_io().
+>>>> Thanks,
 >>>>
->>>> Reported-by: Javier Gonzalez <javier@javigon.com>
->>>> Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
->>>> ---
->>>>    fs/f2fs/data.c | 4 +++-
->>>>    1 file changed, 3 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>> index 5755e897a5f0..8ac2d3b70022 100644
->>>> --- a/fs/f2fs/data.c
->>>> +++ b/fs/f2fs/data.c
->>>> @@ -1073,6 +1073,8 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
->>>>    	int flag;
->>>>    	int err = 0;
->>>>    	bool direct_io = iocb->ki_flags & IOCB_DIRECT;
->>>> +	bool do_direct_io = direct_io &&
->>>> +		!f2fs_force_buffered_io(inode, iocb, from);
->>>>    
->>>>    	/* convert inline data for Direct I/O*/
->>>>    	if (direct_io) {
->>>> @@ -1081,7 +1083,7 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
->>>>    			return err;
->>>>    	}
->>>>    
->>>> -	if (direct_io && allow_outplace_dio(inode, iocb, from))
->>>> +	if (do_direct_io && allow_outplace_dio(inode, iocb, from))
->>>>    		return 0;
->>>>    
->>>>    	if (is_inode_flag_set(inode, FI_NO_PREALLOC))
->>>>
+>>>>> +	 */
+>>>>> +	if (last_valid_block + 1 == zone_block && zone->wp != zone->start) {
+>>>>> +		f2fs_notice(sbi,
+>>>>> +			    "Zone without valid block has non-zero write "
+>>>>> +			    "pointer, run fsck to fix: wp[0x%x,0x%x]",
+>>>>> +			    wp_segno, wp_blkoff);
+>>>>> +		f2fs_stop_checkpoint(sbi, true);
+>>>>> +		set_sbi_flag(sbi, SBI_NEED_FSCK);
+>>>>> +		return -EINVAL;
+>>>>> +	}
+>>>>> +
+>>>>> +	return 0;
+>>>>> +}
+>>>>> +
+>>>>> +static int check_dev_write_pointer(struct f2fs_sb_info *sbi,
+>>>>> +				   struct f2fs_dev_info *fdev) {
+>>>>> +	sector_t nr_sectors = fdev->bdev->bd_part->nr_sects;
+>>>>> +	sector_t sector = 0;
+>>>>> +	struct blk_zone *zones;
+>>>>> +	unsigned int i, nr_zones;
+>>>>> +	unsigned int n = 0;
+>>>>> +	int err = -EIO;
+>>>>> +
+>>>>> +	if (!bdev_is_zoned(fdev->bdev))
+>>>>> +		return 0;
+>>>>> +
+>>>>> +	zones = f2fs_kzalloc(sbi,
+>>>>> +			     array_size(F2FS_REPORT_NR_ZONES,
+>>>>> +					sizeof(struct blk_zone)),
+>>>>> +			     GFP_KERNEL);
+>>>>> +	if (!zones)
+>>>>> +		return -ENOMEM;
+>>>>> +
+>>>>> +	/* Get block zones type */
+>>>>> +	while (zones && sector < nr_sectors) {
+>>>>> +
+>>>>> +		nr_zones = F2FS_REPORT_NR_ZONES;
+>>>>> +		err = blkdev_report_zones(fdev->bdev, sector, zones, &nr_zones);
+>>>>> +		if (err)
+>>>>> +			break;
+>>>>> +		if (!nr_zones) {
+>>>>> +			err = -EIO;
+>>>>> +			break;
+>>>>> +		}
+>>>>> +
+>>>>> +		for (i = 0; i < nr_zones; i++) {
+>>>>> +			if (zones[i].type == BLK_ZONE_TYPE_SEQWRITE_REQ) {
+>>>>> +				err = check_zone_write_pointer(sbi, fdev,
+>>>>> +							       &zones[i]);
+>>>>> +				if (err)
+>>>>> +					break;
+>>>>> +			}
+>>>>> +			sector += zones[i].len;
+>>>>> +			n++;
+>>>>> +		}
+>>>>> +		if (err)
+>>>>> +			break;
+>>>>> +	}
+>>>>> +
+>>>>> +	kvfree(zones);
+>>>>> +
+>>>>> +	return err;
+>>>>> +}
+>>>>> +
+>>>>>  static struct f2fs_dev_info *get_target_zoned_dev(struct f2fs_sb_info *sbi,
+>>>>>  						  block_t zone_blkaddr)
+>>>>>  {
+>>>>> @@ -4399,6 +4526,10 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
+>>>>>  		    "curseg[0x%x,0x%x]", type, cs->segno, cs->next_blkoff);
+>>>>>  	allocate_segment_by_default(sbi, type, true);
+>>>>>  
+>>>>> +	/* check consistency of the zone curseg pointed to */
+>>>>> +	if (check_zone_write_pointer(sbi, zbd, &zone))
+>>>>> +		return -EIO;
+>>>>> +
+>>>>>  	/* check newly assigned zone */
+>>>>>  	cs_section = GET_SEC_FROM_SEG(sbi, cs->segno);
+>>>>>  	cs_zone_block = START_BLOCK(sbi, GET_SEG_FROM_SEC(sbi, cs_section));
+>>>>> @@ -4444,11 +4575,29 @@ int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
+>>>>>  
+>>>>>  	return 0;
+>>>>>  }
+>>>>> +
+>>>>> +int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
+>>>>> +{
+>>>>> +	int i, ret;
+>>>>> +
+>>>>> +	for (i = 0; i < sbi->s_ndevs; i++) {
+>>>>> +		ret = check_dev_write_pointer(sbi, &FDEV(i));
+>>>>> +		if (ret)
+>>>>> +			return ret;
+>>>>> +	}
+>>>>> +
+>>>>> +	return 0;
+>>>>> +}
+>>>>>  #else
+>>>>>  int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
+>>>>>  {
+>>>>>  	return 0;
+>>>>>  }
+>>>>> +
+>>>>> +int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
+>>>>> +{
+>>>>> +	return 0;
+>>>>> +}
+>>>>>  #endif
+>>>>>  
+>>>>>  /*
+>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>> index 1443cee15863..8ca772670c67 100644
+>>>>> --- a/fs/f2fs/super.c
+>>>>> +++ b/fs/f2fs/super.c
+>>>>> @@ -2890,8 +2890,6 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
+>>>>>  	if (!FDEV(devi).blkz_seq)
+>>>>>  		return -ENOMEM;
+>>>>>  
+>>>>> -#define F2FS_REPORT_NR_ZONES   4096
+>>>>> -
+>>>>>  	zones = f2fs_kzalloc(sbi,
+>>>>>  			     array_size(F2FS_REPORT_NR_ZONES,
+>>>>>  					sizeof(struct blk_zone)),
+>>>>> @@ -3509,7 +3507,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>>>>>  
+>>>>>  		err = f2fs_recover_fsync_data(sbi, false);
+>>>>>  		if (err < 0) {
+>>>>> -			if (err != -ENOMEM)
+>>>>> +			if (err != -ENOMEM &&
+>>>>> +			    !is_sbi_flag_set(sbi, SBI_NEED_FSCK))
+>>>>>  				skip_recovery = true;
+>>>>>  			need_fsck = true;
+>>>>>  			f2fs_err(sbi, "Cannot recover all fsync data errno=%d",
+>>>>> @@ -3525,6 +3524,17 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>>>>>  			goto free_meta;
+>>>>>  		}
+>>>>>  	}
+>>>>> +
+>>>>> +	/*
+>>>>> +	 * If the f2fs is not readonly and fsync data recovery succeeds,
+>>>>> +	 * check zoned block devices' write pointer consistency.
+>>>>> +	 */
+>>>>> +	if (!err && !f2fs_readonly(sb) && f2fs_sb_has_blkzoned(sbi)) {
+>>>>> +		err = f2fs_check_write_pointer(sbi);
+>>>>> +		if (err)
+>>>>> +			goto free_meta;
+>>>>> +	}
+>>>>> +
+>>>>>  reset_checkpoint:
+>>>>>  	/* f2fs_recover_fsync_data() cleared this already */
+>>>>>  	clear_sbi_flag(sbi, SBI_POR_DOING);
+>>>>> .
 >>>
->>>
->>
->>
 > 
+> --
+> Best Regards,
+> Shin'ichiro Kawasaki
 > .
 > 
 
