@@ -2,99 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16AC710F4B6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2019 02:52:38 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D86B710F4CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2019 03:08:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ibxMf-0003a2-2S; Tue, 03 Dec 2019 01:52:33 +0000
+	id 1ibxbj-00017F-Oj; Tue, 03 Dec 2019 02:08:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <andreas.gruenbacher@gmail.com>) id 1ibxMe-0003Zt-E7
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 01:52:32 +0000
+ (envelope-from <yangtiezhu@loongson.cn>) id 1ibxbf-000171-Q6
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 02:08:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TxhmjFxB0fSH7WF0Z6dyOJrwDyDBweaa0/5KnNO4AIw=; b=M1WGEsCbUQORUK7fbc0JwShN6u
- BL8lMqZtjT12duO38brIKc6+f4Y0m5BJfBrdrhphtyUqJz+gFUPNLaiMllbNbcdsV9oNFcTJLF+Cy
- QJE8OTA/3lYxd75FARWTjVN52zRqU53psUPp5ENNcAqAztTgpY/8Rw4v5b3xoP06k9Bs=;
+ bh=fpWW5RETItpVcPXM5zRUkbKNTZ3K9tlz0cRTDcgXCWc=; b=TvH8OQzrBXu97O640j//WCUXb9
+ TNjZ3r9Q7sf2ttrgEF5wsLmuZ29i399SUt9ll/LAP23aGpAn/onGjWNr4W7hFULjhta2mislHBXWw
+ ByNBbetGoFFj1IzLSGjXA4Jj0BOe1iWURgKeET4i2Mc8meQRsVr2/430Qy+pjsWNplb4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TxhmjFxB0fSH7WF0Z6dyOJrwDyDBweaa0/5KnNO4AIw=; b=lc9WbKATh/tz9q+yPpxaaICf9g
- 3lWgxv+iwluM+yec0OymWDig9s36jacSg3RJ659IfqVyueOOnrfCpFtznLu+fnDNphZWXt/MzRkFK
- bd9JGfvQT6sZ9nRNegGUEh3sAWcCWLFmrdUI/FxvbOapMU5WwL8HGfSVTOWVbTSd7mWE=;
-Received: from mail-io1-f66.google.com ([209.85.166.66])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ibxMd-0056fw-6x
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 01:52:32 +0000
-Received: by mail-io1-f66.google.com with SMTP id l17so1851612ioj.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 02 Dec 2019 17:52:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=TxhmjFxB0fSH7WF0Z6dyOJrwDyDBweaa0/5KnNO4AIw=;
- b=Xah07E77EL/ykU6H/9fOr3zX6G7oIlWdMl7pW0DtOY4vE5v7mHQywBuRicQbOxpksI
- oVlMR+lFoPd7LKC19a9HB2/wy/+jDp1nqd76VCZFCXYDbcb0C0lFjdfWx07BFtI61NyQ
- ULUpd+qRbkc1lNFMKvsoL6LpvtelvqGIpA+TiKw+pssj6AYPYx8QilsR5BTdNjSgzXV4
- TzOcqVnnTq03A9VJMHGxKZI9llFscQefkxFMrIAIJ8purFDg+fn3Sgw7mITq1bI0VNc4
- ggGt0dKL3T+x/JX3njY7HBts2xJIycvxD925/sF8Btt8swkgBaabvykwCkAgzw+wuURe
- 7mSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=TxhmjFxB0fSH7WF0Z6dyOJrwDyDBweaa0/5KnNO4AIw=;
- b=fUX4UlcJ2qxhtiaFlKkwrd7P0WbEBex1ksFEblfnUkQVRi5ZoGIVTIHLGSICid76pl
- zcvzrRT9MS/KyDeiTCukIoIW9uWbJQcICK5GT7+i4POK8BMl8LL0nQQuQhzSRZC/qGgN
- CjzUKM1orpxciodxkncbPYQFeGcCplXBhIZhRi8LtQbxip36hxeDjAHrLARH48yI5YOO
- 9F2LkOd5ixMAGtRWlfKk3KAb9nYCghfG9XJVfNCnOIKpPjc97Fxv+LdbJFCxRhn+xHhj
- AfgWsdfwIm06A34fEcS9ZSd2GqeEfwpmwfDBZ45pdX02Au2TeMs6vBfABnfwCJP4XMln
- catw==
-X-Gm-Message-State: APjAAAWnDPq3oCfna2ZwTDyA6nSyhUh7W3a+9+mvCJbMac8hzHXinox3
- vLr/8c83RXlK50texxH/H/naRcvJjPKy9/2BTCDWisXSNKM=
-X-Google-Smtp-Source: APXvYqz/HtSAKmFvtGA3vewcbEqy6GpkXcTpGWeY7zvzD8UPDmBHZYqWa5qgMjPw9AT+xjcV03w5DfEQU74871jze0c=
-X-Received: by 2002:a02:a915:: with SMTP id n21mr3314772jam.117.1575337945183; 
- Mon, 02 Dec 2019 17:52:25 -0800 (PST)
+ bh=fpWW5RETItpVcPXM5zRUkbKNTZ3K9tlz0cRTDcgXCWc=; b=CZQjZIFyFVtAVpYzE1/FOllNYn
+ vczjCXAvHnJ1MdkDPtZvUIA1dBajIS3zlv3muwtVxKCNHkvAcbEPTmViy3KvfbsO8oqJVFoPrHs9u
+ 9kk1b1lT59pTbKhxiqtXvCrdb0+O4nKOVnsOUj7BKqtTVPO1B4FmmRSz0PyPZx3u2UkA=;
+Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1ibxba-0057un-Mq
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 02:08:03 +0000
+Received: from [10.130.0.36] (unknown [123.138.236.242])
+ by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxr9dyw+VdzjYGAA--.0S3;
+ Tue, 03 Dec 2019 10:07:47 +0800 (CST)
+To: Matthew Wilcox <willy@infradead.org>
+References: <1575281413-6753-1-git-send-email-yangtiezhu@loongson.cn>
+ <20191202200302.GN20752@bombadil.infradead.org>
+From: Tiezhu Yang <yangtiezhu@loongson.cn>
+Message-ID: <357ad021-a58c-ad46-42bd-d5012126276f@loongson.cn>
+Date: Tue, 3 Dec 2019 10:07:41 +0800
+User-Agent: Mozilla/5.0 (X11; Linux mips64; rv:45.0) Gecko/20100101
+ Thunderbird/45.4.0
 MIME-Version: 1.0
-References: <20191129142045.7215-1-agruenba@redhat.com>
- <CAHk-=wj5caXKoukPyM7Zc6A0Q+E-pBGHSV64iZe8t98OerXR_w@mail.gmail.com>
-In-Reply-To: <CAHk-=wj5caXKoukPyM7Zc6A0Q+E-pBGHSV64iZe8t98OerXR_w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_Gr=C3=BCnbacher?= <andreas.gruenbacher@gmail.com>
-Date: Tue, 3 Dec 2019 02:52:13 +0100
-Message-ID: <CAHpGcMLe2Qy=RdcyFPav5Rfto9M4S9VdsX6E=b3FEywtUNQdqg@mail.gmail.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20191202200302.GN20752@bombadil.infradead.org>
+X-CM-TRANSID: AQAAf9Dxr9dyw+VdzjYGAA--.0S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF4UCFy7tr4kXr1rJrWDurg_yoW5XryDpa
+ y8Ja9FgFn7tFyUC3Wjqr4DX3yY93yxXr1DGr90va47ursIvrn0ga4rAr4j93s7tFWDur4r
+ X390yr45u34FyaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBEb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I
+ 8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+ F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
+ 4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xK
+ xwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0En4kS14v26r1q6r43MxkIecxEwVAFwVW8Jw
+ CF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j
+ 6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64
+ vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1lIxAIcVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07b5nQbUUUUU
+ =
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Spam-Score: 1.2 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (andreas.gruenbacher[at]gmail.com)
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux-foundation.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.66 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.166.66 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1ibxMd-0056fw-6x
-Subject: Re: [f2fs-dev] [PATCH v2] fs: Fix page_mkwrite off-by-one errors
+ 1.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ibxba-0057un-Mq
+Subject: Re: [f2fs-dev] [PATCH] fs: introduce is_dot_dotdot helper for
+ cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,88 +88,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Adrian Hunter <adrian.hunter@intel.com>, Chris Mason <clm@fb.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- Richard Weinberger <richard@nod.at>, Christoph Hellwig <hch@infradead.org>,
- Ilya Dryomov <idryomov@gmail.com>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>,
- Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Ceph Development <ceph-devel@vger.kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- Artem Bityutskiy <dedekind1@gmail.com>, Jeff Layton <jlayton@kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>, linux-mtd@lists.infradead.org,
- linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: ecryptfs@vger.kernel.org, "Theodore Y. Ts'o" <tytso@mit.edu>,
+ linux-kernel@vger.kernel.org, Tyler Hicks <tyhicks@canonical.com>,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Am Di., 3. Dez. 2019 um 02:09 Uhr schrieb Linus Torvalds
-<torvalds@linux-foundation.org>:
+On 12/03/2019 04:03 AM, Matthew Wilcox wrote:
+> On Mon, Dec 02, 2019 at 06:10:13PM +0800, Tiezhu Yang wrote:
+>> There exists many similar and duplicate codes to check "." and "..",
+>> so introduce is_dot_dotdot helper to make the code more clean.
+> The idea is good.  The implementation is, I'm afraid, badly chosen.
+> Did you benchmark this change at all?  In general, you should prefer the
+> core kernel implementation to that of some less-interesting filesystems.
+> I measured the performance with the attached test program on my laptop
+> (Core-i7 Kaby Lake):
 >
-> On Fri, Nov 29, 2019 at 6:21 AM Andreas Gruenbacher <agruenba@redhat.com> wrote:
-> >
-> > +/**
-> > + * page_mkwrite_check_truncate - check if page was truncated
-> > + * @page: the page to check
-> > + * @inode: the inode to check the page against
-> > + *
-> > + * Returns the number of bytes in the page up to EOF,
-> > + * or -EFAULT if the page was truncated.
-> > + */
-> > +static inline int page_mkwrite_check_truncate(struct page *page,
-> > +                                             struct inode *inode)
-> > +{
-> > +       loff_t size = i_size_read(inode);
-> > +       pgoff_t end_index = (size + PAGE_SIZE - 1) >> PAGE_SHIFT;
+> qstr . time_1 0.020531 time_2 0.005786
+> qstr .. time_1 0.017892 time_2 0.008798
+> qstr a time_1 0.017633 time_2 0.003634
+> qstr matthew time_1 0.011820 time_2 0.003605
+> qstr .a time_1 0.017909 time_2 0.008710
+> qstr , time_1 0.017631 time_2 0.003619
 >
-> This special end_index calculation seems to be redundant.
+> The results are quite stable:
 >
-> You later want "size >> PAGE_SHIFT" for another test, and that's
-> actually the important part.
+> qstr . time_1 0.021137 time_2 0.005780
+> qstr .. time_1 0.017964 time_2 0.008675
+> qstr a time_1 0.017899 time_2 0.003654
+> qstr matthew time_1 0.011821 time_2 0.003620
+> qstr .a time_1 0.017889 time_2 0.008662
+> qstr , time_1 0.017764 time_2 0.003613
 >
-> The "+ PAGE_SIZE - 1" case is purely to handle the "AT the page
-> boundary is special" case, but since you have to calculate
-> "offset_in_page(size)" anyway, that's entirely redundant - the answer
-> is part of that.
->
-> So I think it would be better to write the logic as
->
->         loff_t size = i_size_read(inode);
->         pgoff_t index = size >> PAGE_SHIFT;
->         int offset = offset_in_page(size);
->
->         if (page->mapping != inode->i_mapping)
->                 return -EFAULT;
->
->         /* Page is wholly past the EOF page */
->         if (page->index > index)
->                 return -EFAULT;
->         /* page is wholly inside EOF */
->         if (page->index < index)
->                 return PAGE_SIZE;
->         /* bytes in a page? If 0, it's past EOF */
->         return offset ? offset : -PAGE_SIZE;
->
-> instead. That avoids the unnecessary "round up" part, and simply uses
-> the same EOF index for everything.
+> Feel free to suggest some different strings we could use for testing.
+> These seemed like interesting strings to test with.  It's always possible
+> I've messed up something with this benchmark that causes it to not
+> accurately represent the performance of each algorithm, so please check
+> that too.
 
-And if we rearrange things slightly, we end up with:
+[Sorry to resend this email because the mail list server
+was denied due to it is not plain text.]
 
-        /* page is wholly inside EOF */
-        if (page->index < index)
-                return PAGE_SIZE;
-        /* page is wholly past EOF */
-        if (page->index > index || !offset)
-                return -EFAULT;
-        /* page is partially inside EOF */
-        return offset;
+Hi Matthew,
+
+Thanks for your reply and suggestion. I measured the
+performance with the test program, the following
+implementation is better for various of test cases:
+
+bool is_dot_dotdot(const struct qstr *str)
+{
+         if (unlikely(str->name[0] == '.')) {
+                 if (str->len < 2 || (str->len == 2 && str->name[1] == '.'))
+                         return true;
+         }
+
+         return false;
+}
+
+I will send a v2 patch used with this implementation.
 
 Thanks,
-Andreas
+
+Tiezhu Yang
+
+>
+>> +bool is_dot_dotdot(const struct qstr *str)
+>> +{
+>> +	if (str->len == 1 && str->name[0] == '.')
+>> +		return true;
+>> +
+>> +	if (str->len == 2 && str->name[0] == '.' && str->name[1] == '.')
+>> +		return true;
+>> +
+>> +	return false;
+>> +}
+>> +EXPORT_SYMBOL(is_dot_dotdot);
+>> diff --git a/fs/namei.c b/fs/namei.c
+>> index 2dda552..7730a3b 100644
+>> --- a/fs/namei.c
+>> +++ b/fs/namei.c
+>> @@ -2458,10 +2458,8 @@ static int lookup_one_len_common(const char *name, struct dentry *base,
+>>   	if (!len)
+>>   		return -EACCES;
+>>   
+>> -	if (unlikely(name[0] == '.')) {
+>> -		if (len < 2 || (len == 2 && name[1] == '.'))
+>> -			return -EACCES;
+>> -	}
+>> +	if (unlikely(is_dot_dotdot(this)))
+>> +		return -EACCES;
+>>   
+>>   	while (len--) {
+>>   		unsigned int c = *(const unsigned char *)name++;
+
 
 
 _______________________________________________
