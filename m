@@ -2,74 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E149511051D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2019 20:30:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8AB2110573
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2019 20:47:28 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1icDsj-0001kG-Py; Tue, 03 Dec 2019 19:30:45 +0000
+	id 1icE8s-0006WS-GK; Tue, 03 Dec 2019 19:47:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1icDsi-0001k4-KQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 19:30:44 +0000
+ (envelope-from <krisman@collabora.com>) id 1icE8r-0006WD-6H
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 19:47:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+SuOHAjl0U3ry7vU56uapxRrO++QVTUC2Fq9+17gPQM=; b=ZTX08Jlis+V+WjtBClLDN3gB24
- HSU3NBjw9CU5BRypPcEnJoWb/eog2XNs5sGbbrky2+BQpwpzHBGzw40+JMGF9EByx7EiVPJI/81yJ
- Ph355++qvSdsxtOBG2VZh9NxL82X0HOql776cyO7lhD5BO86tyLGKJ27d3pHwJmmd5V8=;
+ bh=U4H6KVpg86CpuGP69LTiXJl1tJliFfTfKDT0ElpYLY0=; b=I/0oSdh6zSxvxcZGQHsNnlG1bU
+ X8nIpD78jNWyZRZ0UEdkip5TBtJCU75XOQhS4km+P/4+JruagimbB0+vuOhgT1jLgupGqJDP6vpqA
+ tUtJ7pg/QUKjbuS1nbIgtmLOyaFasfpyb+/gUntAbpFbO1xTXljw/KoZkgl7EtlVJCmQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=+SuOHAjl0U3ry7vU56uapxRrO++QVTUC2Fq9+17gPQM=; b=i
- KZ0eg5Nm9qkdMm/iSYyh1iTd2vQRCTThJ90xzX53cgMvVvRDjUU/HLS4CyreqCkgCqGKPy5zZ++DV
- FckUT16nRBb3Rnurbk5YQ4tWINHZD6O4hcOwmfqz1pR7+ISKz30HJgmPa1cdfnIp8+SXEfbQcxq/h
- 2vukjZqiQ0RD6l6M=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=U4H6KVpg86CpuGP69LTiXJl1tJliFfTfKDT0ElpYLY0=; b=Pf6d7W14DDx6kBqzOImWOdvuaj
+ q1HPqHavCHVDT/yrHfhJpdUL5EqB7kJhm5ZNhvwiLptRMTo0vITCboxL/jw0PtVCkZejGUs8QZ1e/
+ 54hOrpHB/hAlO+js88e+Catr8ErT1jFdnVAqAkAu9Xg7HE532okyTJUdPu8Srpnt69rs=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1icDse-006ICr-WA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 19:30:44 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5BB2020640;
- Tue,  3 Dec 2019 19:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1575401430;
- bh=3gyEXfaqpedy6uRB/8VMCVxDlcKhW09vYVAVCCnolyc=;
- h=From:To:Cc:Subject:Date:From;
- b=FgKYpKIkk9MEV83ohzNgDB9G/T4o/iQ9m7o1UFMrbwOfpVwLcE5dD9OHGkoTo2LwO
- PnmEWqfvlFJ7EEGzDeoEmMV/1up/GnGaLng94nHb2TTD2h7CF+SsoBT/rBFnFdPT08
- Bdspll56L0sEIIuHxA4aDIZrtITbN6Fv1Bv4tK0E=
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Tue,  3 Dec 2019 11:30:01 -0800
-Message-Id: <20191203193001.66906-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.24.0
+ id 1icE8p-006IvP-Dq
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Dec 2019 19:47:25 +0000
+Received: from localhost (unknown [IPv6:2610:98:8005::647])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: krisman)
+ by bhuna.collabora.co.uk (Postfix) with ESMTPSA id BAB152904A2;
+ Tue,  3 Dec 2019 19:31:19 +0000 (GMT)
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: Daniel Rosenberg <drosen@google.com>
+Organization: Collabora
+References: <20191203051049.44573-1-drosen@google.com>
+ <20191203051049.44573-5-drosen@google.com>
+Date: Tue, 03 Dec 2019 14:31:16 -0500
+In-Reply-To: <20191203051049.44573-5-drosen@google.com> (Daniel Rosenberg's
+ message of "Mon, 2 Dec 2019 21:10:45 -0800")
+Message-ID: <851rtlcikb.fsf@collabora.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [46.235.227.227 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1icDse-006ICr-WA
-Subject: [f2fs-dev] [PATCH] fs-verity: implement readahead for
- FS_IOC_ENABLE_VERITY
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1icE8p-006IvP-Dq
+Subject: Re: [f2fs-dev] [PATCH 4/8] vfs: Fold casefolding into vfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,158 +74,229 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Victor Hsieh <victorhsieh@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ kernel-team@android.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+Daniel Rosenberg <drosen@google.com> writes:
 
-When it builds the first level of the Merkle tree, FS_IOC_ENABLE_VERITY
-sequentially reads each page of the file using read_mapping_page().
-This works fine if the file's data is already in pagecache, which should
-normally be the case, since this ioctl is normally used immediately
-after writing out the file.
+> Ext4 and F2fs are both using casefolding, and they, along with any other
+> filesystem that adds the feature, will be using identical dentry_ops.
+> Additionally, those dentry ops interfere with the dentry_ops required
+> for fscrypt once we add support for casefolding and encryption.
+> Moving this into the vfs removes code duplication as well as the
+> complication with encryption.
+>
+> Currently this is pretty close to just moving the existing f2fs/ext4
+> code up a level into the vfs, although there is a lot of room for
+> improvement now.
+>
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
+>  fs/dcache.c        | 35 +++++++++++++++++++++++++++++++++++
+>  fs/namei.c         | 43 ++++++++++++++++++++++++++++++++++++++++---
+>  include/linux/fs.h | 12 ++++++++++++
+>  3 files changed, 87 insertions(+), 3 deletions(-)
+>
+> diff --git a/fs/dcache.c b/fs/dcache.c
+> index f7931b682a0d..575f3c2c3f77 100644
+> --- a/fs/dcache.c
+> +++ b/fs/dcache.c
+> @@ -32,6 +32,7 @@
+>  #include <linux/bit_spinlock.h>
+>  #include <linux/rculist_bl.h>
+>  #include <linux/list_lru.h>
+> +#include <linux/unicode.h>
+>  #include "internal.h"
+>  #include "mount.h"
+>  
+> @@ -228,6 +229,13 @@ static inline int dentry_string_cmp(const unsigned char *cs, const unsigned char
+>  
+>  #endif
+>  
+> +bool needs_casefold(const struct inode *dir)
+> +{
+> +	return IS_CASEFOLDED(dir) &&
+> +			(!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir));
+> +}
+> +EXPORT_SYMBOL(needs_casefold);
+> +
+>  static inline int dentry_cmp(const struct dentry *dentry, const unsigned char *ct, unsigned tcount)
+>  {
+>  	/*
+> @@ -247,7 +255,19 @@ static inline int dentry_cmp(const struct dentry *dentry, const unsigned char *c
+>  	 * be no NUL in the ct/tcount data)
+>  	 */
+>  	const unsigned char *cs = READ_ONCE(dentry->d_name.name);
+> +#ifdef CONFIG_UNICODE
+> +	struct inode *parent = dentry->d_parent->d_inode;
+>  
+> +	if (unlikely(needs_casefold(parent))) {
+> +		const struct qstr n1 = QSTR_INIT(cs, tcount);
+> +		const struct qstr n2 = QSTR_INIT(ct, tcount);
+> +		int result = utf8_strncasecmp(dentry->d_sb->s_encoding,
+> +						&n1, &n2);
+> +
+> +		if (result >= 0 || sb_has_enc_strict_mode(dentry->d_sb))
+> +			return result;
+> +	}
+> +#endif
+>  	return dentry_string_cmp(cs, ct, tcount);
+>  }
+>  
+> @@ -2404,7 +2424,22 @@ struct dentry *d_hash_and_lookup(struct dentry *dir, struct qstr *name)
+>  	 * calculate the standard hash first, as the d_op->d_hash()
+>  	 * routine may choose to leave the hash value unchanged.
+>  	 */
+> +#ifdef CONFIG_UNICODE
+> +	unsigned char *hname = NULL;
+> +	int hlen = name->len;
+> +
+> +	if (IS_CASEFOLDED(dir->d_inode)) {
+> +		hname = kmalloc(PATH_MAX, GFP_ATOMIC);
+> +		if (!hname)
+> +			return ERR_PTR(-ENOMEM);
+> +		hlen = utf8_casefold(dir->d_sb->s_encoding,
+> +					name, hname, PATH_MAX);
+> +	}
+> +	name->hash = full_name_hash(dir, hname ?: name->name, hlen);
+> +	kfree(hname);
+> +#else
+>  	name->hash = full_name_hash(dir, name->name, name->len);
+> +#endif
+>  	if (dir->d_flags & DCACHE_OP_HASH) {
+>  		int err = dir->d_op->d_hash(dir, name);
+>  		if (unlikely(err < 0))
+> diff --git a/fs/namei.c b/fs/namei.c
+> index 2dda552bcf7a..b8d5cb0994ec 100644
+> --- a/fs/namei.c
+> +++ b/fs/namei.c
+> @@ -39,6 +39,7 @@
+>  #include <linux/bitops.h>
+>  #include <linux/init_task.h>
+>  #include <linux/uaccess.h>
+> +#include <linux/unicode.h>
+>  
+>  #include "internal.h"
+>  #include "mount.h"
+> @@ -2062,6 +2063,10 @@ static inline u64 hash_name(const void *salt, const char *name)
+>  static int link_path_walk(const char *name, struct nameidata *nd)
+>  {
+>  	int err;
+> +#ifdef CONFIG_UNICODE
+> +	char *hname = NULL;
+> +	int hlen = 0;
+> +#endif
+>  
+>  	if (IS_ERR(name))
+>  		return PTR_ERR(name);
+> @@ -2078,9 +2083,21 @@ static int link_path_walk(const char *name, struct nameidata *nd)
+>  		err = may_lookup(nd);
+>  		if (err)
+>  			return err;
+> -
+> +#ifdef CONFIG_UNICODE
+> +		if (needs_casefold(nd->path.dentry->d_inode)) {
+> +			struct qstr str = QSTR_INIT(name, PATH_MAX);
+> +
+> +			hname = kmalloc(PATH_MAX, GFP_ATOMIC);
+> +			if (!hname)
+> +				return -ENOMEM;
+> +			hlen = utf8_casefold(nd->path.dentry->d_sb->s_encoding,
+> +						&str, hname, PATH_MAX);
+> +		}
+> +		hash_len = hash_name(nd->path.dentry, hname ?: name);
+> +		kfree(hname);
 
-But in any other case this implementation performs very poorly, since
-only one page is read at a time.
+It would be nice to reuse the memory allocation for the entire path walk
+instead of allocating and freeing several times in a row.  Still not
+ideal, but I don't see how we could not have at least one allocation here.
 
-Fix this by implementing readahead using the functions from
-mm/readahead.c.
+> +#else
+>  		hash_len = hash_name(nd->path.dentry, name);
+> -
+> +#endif
+>  		type = LAST_NORM;
+>  		if (name[0] == '.') switch (hashlen_len(hash_len)) {
+>  			case 2:
+> @@ -2452,9 +2469,29 @@ EXPORT_SYMBOL(vfs_path_lookup);
+>  static int lookup_one_len_common(const char *name, struct dentry *base,
+>  				 int len, struct qstr *this)
+>  {
+> +#ifdef CONFIG_UNICODE
+> +	char *hname = NULL;
+> +	int hlen = len;
+> +
+> +	if (needs_casefold(base->d_inode)) {
+> +		struct qstr str = QSTR_INIT(name, len);
+> +
+> +		hname = kmalloc(PATH_MAX, GFP_ATOMIC);
+> +		if (!hname)
+> +			return -ENOMEM;
+> +		hlen = utf8_casefold(base->d_sb->s_encoding,
+> +					&str, hname, PATH_MAX);
+> +	}
+> +	this->hash = full_name_hash(base, hname ?: name, hlen);
+> +	kvfree(hname);
+> +#else
+> +	this->hash = full_name_hash(base, name, len);
+> +#endif
+>  	this->name = name;
+>  	this->len = len;
+> -	this->hash = full_name_hash(base, name, len);
+> +#ifdef CONFIG_UNICODE
+> +	kfree(hname);
+> +#endif
+>  	if (!len)
+>  		return -EACCES;
+>  
+> diff --git a/include/linux/fs.h b/include/linux/fs.h
+> index c159a8bdee8b..38d1c20f3e6f 100644
+> --- a/include/linux/fs.h
+> +++ b/include/linux/fs.h
+> @@ -1382,6 +1382,12 @@ extern int send_sigurg(struct fown_struct *fown);
+>  #define SB_ACTIVE	(1<<30)
+>  #define SB_NOUSER	(1<<31)
+>  
+> +/* These flags relate to encoding and casefolding */
+> +#define SB_ENC_STRICT_MODE_FL	(1 << 0)
+> +
+> +#define sb_has_enc_strict_mode(sb) \
+> +	(sb->s_encoding_flags & SB_ENC_STRICT_MODE_FL)
+> +
+>  /*
+>   *	Umount options
+>   */
+> @@ -1449,6 +1455,10 @@ struct super_block {
+>  #endif
+>  #ifdef CONFIG_FS_VERITY
+>  	const struct fsverity_operations *s_vop;
+> +#endif
+> +#ifdef CONFIG_UNICODE
+> +	struct unicode_map *s_encoding;
+> +	__u16 s_encoding_flags;
+>  #endif
+>  	struct hlist_bl_head	s_roots;	/* alternate root dentries for NFS */
+>  	struct list_head	s_mounts;	/* list of mounts; _not_ for fs use */
+> @@ -2044,6 +2054,8 @@ static inline bool sb_rdonly(const struct super_block *sb) { return sb->s_flags
+>  #define IS_WHITEOUT(inode)	(S_ISCHR(inode->i_mode) && \
+>  				 (inode)->i_rdev == WHITEOUT_DEV)
+>  
+> +extern bool needs_casefold(const struct inode *dir);
+> +
+>  static inline bool HAS_UNMAPPED_ID(struct inode *inode)
+>  {
+>  	return !uid_valid(inode->i_uid) || !gid_valid(inode->i_gid);
 
-This improves performance in the uncached case by about 20x, as seen in
-the following benchmarks done on a 250MB file (on x86_64 with SHA-NI):
-
-    FS_IOC_ENABLE_VERITY uncached (before) 3.299s
-    FS_IOC_ENABLE_VERITY uncached (after)  0.160s
-    FS_IOC_ENABLE_VERITY cached            0.147s
-    sha256sum uncached                     0.191s
-    sha256sum cached                       0.145s
-
-Note: we could instead switch to kernel_read().  But that would mean
-we'd no longer be hashing the data directly from the pagecache, which is
-a nice optimization of its own.  And using kernel_read() would require
-allocating another temporary buffer, hashing the data and tree pages
-separately, and explicitly zero-padding the last page -- so it wouldn't
-really be any simpler than direct pagecache access, at least for now.
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/verity/enable.c | 46 ++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 40 insertions(+), 6 deletions(-)
-
-diff --git a/fs/verity/enable.c b/fs/verity/enable.c
-index eabc6ac19906..f7eaffa60196 100644
---- a/fs/verity/enable.c
-+++ b/fs/verity/enable.c
-@@ -13,14 +13,44 @@
- #include <linux/sched/signal.h>
- #include <linux/uaccess.h>
- 
--static int build_merkle_tree_level(struct inode *inode, unsigned int level,
-+/*
-+ * Read a file data page for Merkle tree construction.  Do aggressive readahead,
-+ * since we're sequentially reading the entire file.
-+ */
-+static struct page *read_file_data_page(struct inode *inode,
-+					struct file_ra_state *ra,
-+					struct file *filp,
-+					pgoff_t index,
-+					pgoff_t num_pages_in_file)
-+{
-+	struct page *page;
-+
-+	page = find_get_page(inode->i_mapping, index);
-+	if (!page || !PageUptodate(page)) {
-+		if (page)
-+			put_page(page);
-+		page_cache_sync_readahead(inode->i_mapping, ra, filp,
-+					  index, num_pages_in_file - index);
-+		page = read_mapping_page(inode->i_mapping, index, NULL);
-+		if (IS_ERR(page))
-+			return page;
-+	}
-+	if (PageReadahead(page))
-+		page_cache_async_readahead(inode->i_mapping, ra, filp, page,
-+					   index, num_pages_in_file - index);
-+	return page;
-+}
-+
-+static int build_merkle_tree_level(struct file *filp, unsigned int level,
- 				   u64 num_blocks_to_hash,
- 				   const struct merkle_tree_params *params,
- 				   u8 *pending_hashes,
- 				   struct ahash_request *req)
- {
-+	struct inode *inode = file_inode(filp);
- 	const struct fsverity_operations *vops = inode->i_sb->s_vop;
- 	unsigned int pending_size = 0;
-+	struct file_ra_state ra = { 0 };
- 	u64 dst_block_num;
- 	u64 i;
- 	int err;
-@@ -36,6 +66,8 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
- 		dst_block_num = 0; /* unused */
- 	}
- 
-+	file_ra_state_init(&ra, inode->i_mapping);
-+
- 	for (i = 0; i < num_blocks_to_hash; i++) {
- 		struct page *src_page;
- 
-@@ -45,7 +77,8 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
- 
- 		if (level == 0) {
- 			/* Leaf: hashing a data block */
--			src_page = read_mapping_page(inode->i_mapping, i, NULL);
-+			src_page = read_file_data_page(inode, &ra, filp, i,
-+						       num_blocks_to_hash);
- 			if (IS_ERR(src_page)) {
- 				err = PTR_ERR(src_page);
- 				fsverity_err(inode,
-@@ -103,17 +136,18 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
- }
- 
- /*
-- * Build the Merkle tree for the given inode using the given parameters, and
-+ * Build the Merkle tree for the given file using the given parameters, and
-  * return the root hash in @root_hash.
-  *
-  * The tree is written to a filesystem-specific location as determined by the
-  * ->write_merkle_tree_block() method.  However, the blocks that comprise the
-  * tree are the same for all filesystems.
-  */
--static int build_merkle_tree(struct inode *inode,
-+static int build_merkle_tree(struct file *filp,
- 			     const struct merkle_tree_params *params,
- 			     u8 *root_hash)
- {
-+	struct inode *inode = file_inode(filp);
- 	u8 *pending_hashes;
- 	struct ahash_request *req;
- 	u64 blocks;
-@@ -139,7 +173,7 @@ static int build_merkle_tree(struct inode *inode,
- 	blocks = (inode->i_size + params->block_size - 1) >>
- 		 params->log_blocksize;
- 	for (level = 0; level <= params->num_levels; level++) {
--		err = build_merkle_tree_level(inode, level, blocks, params,
-+		err = build_merkle_tree_level(filp, level, blocks, params,
- 					      pending_hashes, req);
- 		if (err)
- 			goto out;
-@@ -227,7 +261,7 @@ static int enable_verity(struct file *filp,
- 	 */
- 	pr_debug("Building Merkle tree...\n");
- 	BUILD_BUG_ON(sizeof(desc->root_hash) < FS_VERITY_MAX_DIGEST_SIZE);
--	err = build_merkle_tree(inode, &params, desc->root_hash);
-+	err = build_merkle_tree(filp, &params, desc->root_hash);
- 	if (err) {
- 		fsverity_err(inode, "Error %d building Merkle tree", err);
- 		goto rollback;
 -- 
-2.24.0
-
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
