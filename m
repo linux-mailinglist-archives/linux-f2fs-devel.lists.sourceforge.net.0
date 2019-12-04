@@ -2,146 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1C531121F4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2019 05:01:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 547E81124BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2019 09:25:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1icLr9-0001iX-EY; Wed, 04 Dec 2019 04:01:39 +0000
+	id 1icPyj-0008Gb-Pn; Wed, 04 Dec 2019 08:25:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=234f285ce=shinichiro.kawasaki@wdc.com>)
- id 1icLr8-0001iJ-1l
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 Dec 2019 04:01:38 +0000
+ (envelope-from <slava@dubeyko.com>) id 1icPyi-0008GQ-H1
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 Dec 2019 08:25:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Mime-Version:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L4dBs8+mtj+LYeVUCfYtGpCr/TKNhd/JtzLruwdYEs4=; b=h/7yHZYu1D1o2eelTXqgICBVc6
- rA7igwLkFa/Mrh1yFxNP/YJbTbty4hlIsp6IGX2Roib37IySmDLSOoK9i7d7+YjvBbhwknkzDmgwH
- OTUujsJk+WJAshTRkF9dD8gUgWiId2vMfe7YLXpViaXOesSldmqfgmdqS66p1tljCj8c=;
+ bh=o7BdwW/nndIBcsxZWW8vbo3uXBPbU7tTjh33V04X4ek=; b=GNfCdrpOz3o1kBz/pX4A+730aj
+ MPKfLPFaJm/ewuaA7FcpICe18mPRqXlwfcmZKSoM4fm6KpHccaqfyd3DMTsBCqnFwOgVDXZhhZ195
+ ZlvuEVp4LhNuoChRIKhdLi6L/mqFfJYpB1+Io7u2+SUgPbVW7dsCuUJ56atqqh/rNB8Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=Content-Transfer-Encoding:Mime-Version:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L4dBs8+mtj+LYeVUCfYtGpCr/TKNhd/JtzLruwdYEs4=; b=Vn8H5tpG3ctDI6fWRCdHCCbhd+
- ykgJysbMvliCFOqaRNB5/43zp6PNLV3HVrM2KEbTHW0wxAmTsn3oOyvHWqkwvqJ00edMlE6f8Gz8w
- jVzVv45w0uDKwizsEyHyvRWqctqwUBTKLAzkNGkeeDMGdPdEAb2Crz7QtBw4KcibGz3U=;
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1icLr3-003ZGm-Cp
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 Dec 2019 04:01:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575432094; x=1606968094;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=NRLBclJoZbwvO/Dd3yZVRQhiyU4z+Y6vrETuZt0iLrc=;
- b=YC7KbEfu+HBnjepPgRleI5epnEQSAakSWdBpwsUNWrAFk1vEV2xpfq1f
- 58jZeF15z/mQUKxWJCjmwCPmYsEW2YnitEQeQcWTlbbsTyKvptK9+s0FT
- nNqo+PaYQpU4DvITPFNDGcZZlU0jIXn9l2nbcy+o/yet1CLfSYe8iZn8Y
- 32U+ctGFHIvktjjpoWdnkmsTfJ2H52h5wkixSifUqronpSjUezOcu77xl
- uB5vP1oyVHWywcBa7/h4iT2yvRxPlRJfAb+qBhMKHBnQANietqjZZ/54/
- go5uVdWZiV3EtIg5te/I5eoA5Uy+HUquHPdbA0+voGLJpSSSXOcF2KX+S g==;
-IronPort-SDR: vHvQYExHywA1oC7SBbhjnXOfKUD2GJuZu01n6VlBAwCtKtJ615qyMrecXOMjFheoI8YuRwnKtJ
- Peu+M/nB8MAIYQKRJgmh34eoTFsastKrujvyczgPLgEUtXKTuGsvyBFLmp91D6RB5csTSdDxZe
- tBU+Fs4MXSQ0LCNIzSgo+IVM0bd89Vk+eldx0lzRmn/c25W0dYGoCMbIBy6nBOLzrzCKe+akqm
- 90E+BSz+7jUrweLa1TDVVic+E6kmHx32n10NZRZ8rG+E95NtVemgai1nnm9I0CoiMrUWgdeeuS
- 8MI=
-X-IronPort-AV: E=Sophos;i="5.69,275,1571673600"; d="scan'208";a="126173766"
-Received: from mail-mw2nam10lp2109.outbound.protection.outlook.com (HELO
- NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.109])
- by ob1.hgst.iphmx.com with ESMTP; 04 Dec 2019 12:01:22 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jfzSajt6fbYTg05T2IFup/R02ncKEhcyaP4FPxmUwr69v3SHSATK4+Rak5mmgEMOIoQQ7QNL5orpkgWGZLLJYJmM4tRZ8CiakvNAjdjSbpWvKs6/9/NOlkg0VHwmx2LxI2dyGQRgclzBfCEo46wWao1W9RTbk6lqQKX0nf7NHbyOc4ty7qgxNIDxFTlN4K4kb8mQAvrwGBtuJ9KR6tiIIDtZzdBx8ev00UN6QBM456jhyNZ1uIlvJYVzJqdd/Jr33VjPCItqLEb8Tgo2R3H3cCpJHOLqJ5rKJUUo9tx5rmT4VOaWQtafQFXXEYhIJTFBcQjCWMYVuWyHDsZ9/mqXaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L4dBs8+mtj+LYeVUCfYtGpCr/TKNhd/JtzLruwdYEs4=;
- b=liNGdfW5j9bVfVgUbASswmv1jeiH7mi2WLeeBskEh3MCGB23LA4LNXPAZdkZLTqOLDqRfn4EYsFhui3R0VN+aICozDShRnS1T2RRl/tv6NS7bj0ZS9zTn1vfzUbvmEwv6rq1ihkBnimm5b13OUSMKBjGtwOfTRpa5Gfl6YB2xnEPePcfq+tu56h3rLj2a0MobrSIQ35jaqmnj/uIDneBrslECIyqg2QP0Anzx4i9t6Boh7X0RANlbV3TnhNb3RQvGR5voU42uw+x1lGixLlCmx/E0JSGeOq6IAjBZuouI8S8ffkVdL53L3SOuBvdC8hfXYBzbDW/Stf6mTrLW0oSOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ bh=o7BdwW/nndIBcsxZWW8vbo3uXBPbU7tTjh33V04X4ek=; b=DmKHsnfFJhDtDXsKYwaqAsmWIJ
+ DsvI3RGAb19XpDadPfnBMTAk577onylmik6qtGEI6R4BDlu718wlREgqAtYMnwEiBHJEEpsCbFDE+
+ ZzOebTzs8UOsxijUawooxgbSeEiMxjCIXkb9wJiBiERRtnS+94g9ZAxAV+OH5RLITpN4=;
+Received: from mail-lj1-f194.google.com ([209.85.208.194])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1icPyh-007LFo-1v
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 Dec 2019 08:25:44 +0000
+Received: by mail-lj1-f194.google.com with SMTP id m6so7053518ljc.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 04 Dec 2019 00:25:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L4dBs8+mtj+LYeVUCfYtGpCr/TKNhd/JtzLruwdYEs4=;
- b=HBbPfCl4BlAl2zip8g32AcCFIkRIjfTjTZvhlyOu/RHQOK2TXDd0ps7X87+PBLDgyIa03VM4S3U0wAoek13DFg/RipXgw4O/I1bogmFMoYAmiU38sI4eWj3QeBAPAgi6Q9hoKQKMXTwF24UW5zuHCAtLQxhnGh3p/xI0x+hOqOI=
-Received: from CY1PR04MB2268.namprd04.prod.outlook.com (10.167.10.135) by
- CY1PR04MB2298.namprd04.prod.outlook.com (10.167.8.21) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2495.22; Wed, 4 Dec 2019 04:01:21 +0000
-Received: from CY1PR04MB2268.namprd04.prod.outlook.com
- ([fe80::ac1b:af88:c028:7d74]) by CY1PR04MB2268.namprd04.prod.outlook.com
- ([fe80::ac1b:af88:c028:7d74%11]) with mapi id 15.20.2495.014; Wed, 4 Dec 2019
- 04:01:20 +0000
-From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Thread-Topic: [PATCH v2] f2fs: Fix direct IO handling
-Thread-Index: AQHVqf/EcUMid82cv0W5f8BjBRO52KepWvgA
-Date: Wed, 4 Dec 2019 04:01:20 +0000
-Message-ID: <20191204040120.gwcfglulpnlywc47@shindev.dhcp.fujisawa.hgst.com>
-References: <20191126075719.1046485-1-damien.lemoal@wdc.com>
- <20191126234428.GB20652@jaegeuk-macbookpro.roam.corp.google.com>
- <20191203173308.GA41093@jaegeuk-macbookpro.roam.corp.google.com>
-In-Reply-To: <20191203173308.GA41093@jaegeuk-macbookpro.roam.corp.google.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=shinichiro.kawasaki@wdc.com; 
-x-originating-ip: [199.255.47.12]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 6cd1789e-fec7-419d-f7b8-08d7786e9f40
-x-ms-traffictypediagnostic: CY1PR04MB2298:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <CY1PR04MB2298AE162C66534BB3703EEFED5D0@CY1PR04MB2298.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 0241D5F98C
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(376002)(366004)(396003)(39860400002)(136003)(346002)(189003)(199004)(53546011)(6506007)(25786009)(9686003)(11346002)(71190400001)(76176011)(6512007)(81166006)(14444005)(256004)(66446008)(76116006)(3846002)(6116002)(8676002)(99286004)(66476007)(64756008)(229853002)(5660300002)(66556008)(91956017)(1076003)(6246003)(4326008)(7736002)(305945005)(102836004)(14454004)(71200400001)(26005)(86362001)(66946007)(6436002)(2906002)(478600001)(316002)(446003)(186003)(8936002)(6486002)(44832011)(54906003)(81156014)(6916009);
- DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR04MB2298;
- H:CY1PR04MB2268.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: cPHlhWbR+s4JMyrbEb2iu4hqfblc6eT5uAuOvKWWJX4Sf5G0M2jQV9cPQNRJOux9/vCMrQVLZQpx6HNMws4+XYW3nA1LiUVyCPHWOsVcf5mF/gxrc/YuRMfpW1MtabXKthyndq7SDN4tnnLL9tKXTo6DaFNDYGWIshp2LptlhbWIFu1WozD/CHIWnbm4yLV10uCMwEBlybinec0GIZAKJSOzwhNvzVzmTHit1hJWFHf2ZNJ8hMBQaA9Ehtsd6ZPkHvia70Cw+kctr4tEe/iwTmH1OdPInzD4wEeGQgZgDxMFj53hLHX8XwMU0XS1e9qo8CWDE7mtj4WKHx6ApFl/dQLyJfG27YkKYVxqhhyQosFenrPGJ+0sw6+5gFcsxguLg8xb9YzJ+JjslrHrZrN/ixJTpLHIBdLL6A4wjiDPmmrHTPg4ICdNIpGMAiqLIYyT
-Content-ID: <F4642912A1089F4E859D707B968C3FE1@namprd04.prod.outlook.com>
-MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cd1789e-fec7-419d-f7b8-08d7786e9f40
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Dec 2019 04:01:20.7996 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: VX2aMjOzrg/T/ODQg9pnbIIE+gVoDXBclFxcXmgWDy8bA0iqfbV28gjw5auWm6TbvcfMHv+uIZ44jtQv3mR/9F1PVOVrb5j92uWEKwjqDBM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR04MB2298
-X-Spam-Score: -0.1 (/)
+ d=dubeyko-com.20150623.gappssmtp.com; s=20150623;
+ h=message-id:subject:from:to:cc:date:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=o7BdwW/nndIBcsxZWW8vbo3uXBPbU7tTjh33V04X4ek=;
+ b=R15GZEj9KTLTNO0VqqzBo4GIYJtcpTb2kJpdaZtblji+D+RrmcI9rTjDxe+QmhairT
+ Dbdver0Sq7o39O5yoG4UDoGmJmo9vH5HMuLXGO7h9I6dmFkSgcGzoSd18zm/LtsqK2mF
+ lUVjO8y7iCVF2gvIFJREkER6zjHAaENjaCcLtLpziuR4Pq2w3Z8Wlhe3XDpq/lUxhE9O
+ T4/3msAlwIt0YUvQb44lViYxzbj8rFEkqw+r1HWH3ILYKZPpWy2mnzcedUuXScZGEePd
+ QqT5lFUQEHQIvzSg5F3M5PVgRTSf84jSg366orX8ATHSyfkMZ7VBL4bHLLLgCBkyqZGQ
+ zDxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=o7BdwW/nndIBcsxZWW8vbo3uXBPbU7tTjh33V04X4ek=;
+ b=SI6/KL9fz4ypb5AjPmtsZLzrDhlizZV+GYl2FhJsOiQTN0gpS7wITP2wMchkcJQR3P
+ F8XA7oVJsEyYrrmX9iRYrQCLQGzNKTbOprx/z5iUgiBNu2dt9da/fQIMOQaw8IMZz1hf
+ ENy1t+j6kkW3v9PTInVcwYIrHryzKVz6k6aLIBYuC/nszBYRvmTOlDHBrBMWLbOzk8jH
+ CRfgvhYv/XwIGK34DXqT1ZYmG86+J3qhcETVKR2/2gDpn6Xg5c5M8S8tayb6z8HzfaUb
+ eVmAddvQ28kthWLn5DsnjiTcsXfyyMRh7cVlBia/svBGJS60e/6aiAUq15EzDPQIjDZ5
+ LWkA==
+X-Gm-Message-State: APjAAAWYbyBWrDr26HT3x+YImqC6rOP2CkgKBURjyOvzBHZHrwt7mqYG
+ iwM4uui1OGmSgeb3OaVQjLu0i0tMjLNU7g==
+X-Google-Smtp-Source: APXvYqw9cr0AJeOMuYf9c3iwqsmg8RWLKAie3QTXWVS6sDwM7krFflTW5KVptECDL2Qepv39q9RcUg==
+X-Received: by 2002:a2e:9e97:: with SMTP id f23mr1068434ljk.89.1575446031396; 
+ Tue, 03 Dec 2019 23:53:51 -0800 (PST)
+Received: from msk1wst115n.omp.ru (mail.omprussia.ru. [5.134.221.218])
+ by smtp.gmail.com with ESMTPSA id x23sm2807809lff.24.2019.12.03.23.53.50
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 03 Dec 2019 23:53:50 -0800 (PST)
+Message-ID: <96a288281d9d84f11dcc06e62a1ff20e2bb2f776.camel@dubeyko.com>
+From: Vyacheslav Dubeyko <slava@dubeyko.com>
+To: Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org
+Date: Wed, 04 Dec 2019 10:53:50 +0300
+In-Reply-To: <20191203193001.66906-1-ebiggers@kernel.org>
+References: <20191203193001.66906-1-ebiggers@kernel.org>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: javigon.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.194 listed in list.dnswl.org]
+ -0.1 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1icLr3-003ZGm-Cp
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Fix direct IO handling
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1icPyh-007LFo-1v
+Subject: Re: [f2fs-dev] [PATCH] fs-verity: implement readahead for
+ FS_IOC_ENABLE_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,147 +106,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Damien Le Moal <Damien.LeMoal@wdc.com>,
- Javier Gonzalez <javier@javigon.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Victor Hsieh <victorhsieh@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Dec 03, 2019 / 09:33, Jaegeuk Kim wrote:
-> Thank you for checking the patch.
-> I found some regressions in xfstests, so want to follow the Damien's one
-> like below.
+On Tue, 2019-12-03 at 11:30 -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Thanks,
+> When it builds the first level of the Merkle tree,
+> FS_IOC_ENABLE_VERITY
+> sequentially reads each page of the file using read_mapping_page().
+> This works fine if the file's data is already in pagecache, which
+> should
+> normally be the case, since this ioctl is normally used immediately
+> after writing out the file.
 > 
-> ===
-> From 9df6f09e3a09ed804aba4b56ff7cd9524c002e69 Mon Sep 17 00:00:00 2001
-> From: Jaegeuk Kim <jaegeuk@kernel.org>
-> Date: Tue, 26 Nov 2019 15:01:42 -0800
-> Subject: [PATCH] f2fs: preallocate DIO blocks when forcing buffered_io
+> But in any other case this implementation performs very poorly, since
+> only one page is read at a time.
 > 
-> The previous preallocation and DIO decision like below.
+> Fix this by implementing readahead using the functions from
+> mm/readahead.c.
 > 
->                          allow_outplace_dio              !allow_outplace_dio
-> f2fs_force_buffered_io   (*) No_Prealloc / Buffered_IO   Prealloc / Buffered_IO
-> !f2fs_force_buffered_io  No_Prealloc / DIO               Prealloc / DIO
+> This improves performance in the uncached case by about 20x, as seen
+> in
+> the following benchmarks done on a 250MB file (on x86_64 with SHA-
+> NI):
 > 
-> But, Javier reported Case (*) where zoned device bypassed preallocation but
-> fell back to buffered writes in f2fs_direct_IO(), resulting in stale data
-> being read.
+>     FS_IOC_ENABLE_VERITY uncached (before) 3.299s
+>     FS_IOC_ENABLE_VERITY uncached (after)  0.160s
+>     FS_IOC_ENABLE_VERITY cached            0.147s
+>     sha256sum uncached                     0.191s
+>     sha256sum cached                       0.145s
 > 
-> In order to fix the issue, actually we need to preallocate blocks whenever
-> we fall back to buffered IO like this. No change is made in the other cases.
+> Note: we could instead switch to kernel_read().  But that would mean
+> we'd no longer be hashing the data directly from the pagecache, which
+> is
+> a nice optimization of its own.  And using kernel_read() would
+> require
+> allocating another temporary buffer, hashing the data and tree pages
+> separately, and explicitly zero-padding the last page -- so it
+> wouldn't
+> really be any simpler than direct pagecache access, at least for now.
 > 
->                          allow_outplace_dio              !allow_outplace_dio
-> f2fs_force_buffered_io   (*) Prealloc / Buffered_IO      Prealloc / Buffered_IO
-> !f2fs_force_buffered_io  No_Prealloc / DIO               Prealloc / DIO
-> 
-> Reported-and-tested-by: Javier Gonzalez <javier@javigon.com>
-> Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
-> Tested-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-
-Using SMR disks, I reconfirmed that the reported problem goes away with this
-modified patch also. Thanks.
-
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 > ---
->  fs/f2fs/data.c | 13 -------------
->  fs/f2fs/file.c | 43 +++++++++++++++++++++++++++++++++----------
->  2 files changed, 33 insertions(+), 23 deletions(-)
+>  fs/verity/enable.c | 46 ++++++++++++++++++++++++++++++++++++++++--
+> ----
+>  1 file changed, 40 insertions(+), 6 deletions(-)
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index a034cd0ce021..fc40a72f7827 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1180,19 +1180,6 @@ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from)
->  	int err = 0;
->  	bool direct_io = iocb->ki_flags & IOCB_DIRECT;
+> diff --git a/fs/verity/enable.c b/fs/verity/enable.c
+> index eabc6ac19906..f7eaffa60196 100644
+> --- a/fs/verity/enable.c
+> +++ b/fs/verity/enable.c
+> @@ -13,14 +13,44 @@
+>  #include <linux/sched/signal.h>
+>  #include <linux/uaccess.h>
 >  
-> -	/* convert inline data for Direct I/O*/
-> -	if (direct_io) {
-> -		err = f2fs_convert_inline_inode(inode);
-> -		if (err)
-> -			return err;
-> -	}
-> -
-> -	if (direct_io && allow_outplace_dio(inode, iocb, from))
-> -		return 0;
-> -
-> -	if (is_inode_flag_set(inode, FI_NO_PREALLOC))
-> -		return 0;
-> -
->  	map.m_lblk = F2FS_BLK_ALIGN(iocb->ki_pos);
->  	map.m_len = F2FS_BYTES_TO_BLK(iocb->ki_pos + iov_iter_count(from));
->  	if (map.m_len > map.m_lblk)
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index c0560d62dbee..0e1b12a4a4d6 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3386,18 +3386,41 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
->  				ret = -EAGAIN;
->  				goto out;
->  			}
-> -		} else {
-> -			preallocated = true;
-> -			target_size = iocb->ki_pos + iov_iter_count(from);
-> +			goto write;
-> +		}
->  
-> -			err = f2fs_preallocate_blocks(iocb, from);
-> -			if (err) {
-> -				clear_inode_flag(inode, FI_NO_PREALLOC);
-> -				inode_unlock(inode);
-> -				ret = err;
-> -				goto out;
-> -			}
-> +		if (is_inode_flag_set(inode, FI_NO_PREALLOC))
-> +			goto write;
+> -static int build_merkle_tree_level(struct inode *inode, unsigned int
+> level,
+> +/*
+> + * Read a file data page for Merkle tree construction.  Do
+> aggressive readahead,
+> + * since we're sequentially reading the entire file.
+> + */
+> +static struct page *read_file_data_page(struct inode *inode,
+> +					struct file_ra_state *ra,
+> +					struct file *filp,
+> +					pgoff_t index,
+> +					pgoff_t num_pages_in_file)
+> +{
+> +	struct page *page;
 > +
-> +		if (iocb->ki_flags & IOCB_DIRECT) {
-> +			/*
-> +			 * Convert inline data for Direct I/O before entering
-> +			 * f2fs_direct_IO().
-> +			 */
-> +			err = f2fs_convert_inline_inode(inode);
-> +			if (err)
-> +				goto out_err;
-> +			/*
-> +			 * If force_buffere_io() is true, we have to allocate
-> +			 * blocks all the time, since f2fs_direct_IO will fall
-> +			 * back to buffered IO.
-> +			 */
-> +			if (!f2fs_force_buffered_io(inode, iocb, from) &&
-> +					allow_outplace_dio(inode, iocb, from))
-> +				goto write;
-> +		}
-> +		preallocated = true;
-> +		target_size = iocb->ki_pos + iov_iter_count(from);
-> +
-> +		err = f2fs_preallocate_blocks(iocb, from);
-> +		if (err) {
-> +out_err:
-> +			clear_inode_flag(inode, FI_NO_PREALLOC);
-> +			inode_unlock(inode);
-> +			ret = err;
-> +			goto out;
->  		}
-> +write:
->  		ret = __generic_file_write_iter(iocb, from);
->  		clear_inode_flag(inode, FI_NO_PREALLOC);
->  
-> -- 
-> 2.19.0.605.g01d371f741-goog
-> 
-> 
+> +	page = find_get_page(inode->i_mapping, index);
+> +	if (!page || !PageUptodate(page)) {
+> +		if (page)
+> +			put_page(page);
 
---
-Best Regards,
-Shin'ichiro Kawasaki
+
+It looks like that there is not necessary check here. If we have NULL
+pointer on page then we will not enter inside. But if we have valid
+pointer on page then we have double check inside. Am I correct? 
+
+
+> +		page_cache_sync_readahead(inode->i_mapping, ra, filp,
+> +					  index, num_pages_in_file -
+> index);
+> +		page = read_mapping_page(inode->i_mapping, index,
+> NULL);
+> +		if (IS_ERR(page))
+> +			return page;
+
+Could we recieve the NULL pointer here? Is callee ready to process theNULL return value? 
+
+Thanks,
+Viacheslav Dubeyko.
+
+
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
