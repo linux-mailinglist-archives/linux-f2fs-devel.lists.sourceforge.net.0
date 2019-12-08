@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63A961161BC
+	by mail.lfdr.de (Postfix) with ESMTPS id 61EC61161BB
 	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  8 Dec 2019 14:51:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -13,15 +13,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	 bh=RzEv97ZBG02vfCjBgjvEkEQsH8+pRwX7ka063WwnCWk=; b=PW0MyWOXax/DQRHJcmBpV1UX3
 	0jOY52XiewT3lRaOQCEmvwsW89cHMT+xLYOttyLBH12Dd7tV6dGABNVdDxRItqziQf4Xq2eJ+saoo
 	Uq0LNmaW8m8AG618LO8uCFJNoZXPnCgW2lcDr1wvMQWXp1Xqd9yKSDUsKjfhwVnfcjfNs=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1idwyP-0002PZ-Pa; Sun, 08 Dec 2019 13:51:45 +0000
+	id 1idwyP-0007KY-78; Sun, 08 Dec 2019 13:51:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1idwyO-0002PO-55
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 13:51:44 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1idwyN-0007K9-Qe
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 13:51:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
@@ -42,10 +42,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  OETPFGF+oY+YieHKWqCyTJHXeJw0JbZh0IqC3fgkcTnZ38AY2UEcWOxFn44LuKQYNBasNP9qGtJZz
  O6pqCThsjjkbjtMwxkL+G3V1fjP5Wzs3jM4wVvTS0ozGgXDCNoJ2PM65Lbu5zm6tnrSs=;
 Received: from sonic304-24.consmr.mail.gq1.yahoo.com ([98.137.68.205])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1idwyM-00EGwM-71
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 13:51:44 +0000
+ id 1idwyM-00E4hi-4Y
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 13:51:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
  t=1575813096; bh=Q/YPQxEAxJ5aBYx16SVmb/CPN8OO7gV3jCs34jLQ6GI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
@@ -90,10 +90,10 @@ X-Mailer: WebService/1.1.14728 hermes Apache-HttpAsyncClient/4.1.4
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [98.137.68.205 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (hsiangkao[at]aol.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [98.137.68.205 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -101,7 +101,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1idwyM-00EGwM-71
+X-Headers-End: 1idwyM-00E4hi-4Y
 Subject: Re: [f2fs-dev] Potential data corruption?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
