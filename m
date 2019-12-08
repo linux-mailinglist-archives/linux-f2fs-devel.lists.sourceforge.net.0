@@ -2,81 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B758115C03
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Dec 2019 12:36:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E611116044
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  8 Dec 2019 05:03:03 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1idYNw-00025Y-7A; Sat, 07 Dec 2019 11:36:28 +0000
+	id 1idnmf-00009T-Rq; Sun, 08 Dec 2019 04:03:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yangtiezhu@loongson.cn>) id 1idYNr-00025M-3l
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Dec 2019 11:36:23 +0000
+ (envelope-from <viro@ftp.linux.org.uk>) id 1idnmc-00009A-Vj
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 04:02:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=P7RFTkxVrsqfeOeGJUybmoLLq10bHUruEW7RbTEBaFk=; b=JZnsE8JBxggO+VZTD/IiVjsbNt
- cZCyBE95UHeWwOSW981aqJy2iB0VcXs5JHGYv5C0ee7ymziaeZ6edjdxn8qoRMtdAvXHc1PVonUPx
- sJM6tdFjIdRt5js9sN82z/QFzdMz+25srcvPK7wrleq3BeckpA8gUhgI5tQwS6sECJbE=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=lSP8/e8OjiSNZZDmK6SxArGfSuSlNA5shfAilc1iQA0=; b=WwvCon0lfSQ+LtFM1vJLLC91X
+ S3y+f4hpHc21qvHf1YP2q/Btsa6KKPBgutAJFui4akhVfB5Gl2I45IH0LP7SK4fM9zu9QLGHSwEM2
+ J9f0zl/1XO+pqDzEMuHMdwrdr6yO7KrfgPF53EHvji/4f0Gxw3RK2IiQBRWfXV4gucYRk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=P7RFTkxVrsqfeOeGJUybmoLLq10bHUruEW7RbTEBaFk=; b=h9djdjy9rJU8Tufi+ZEMIsHzI4
- N4FJYjXRL8Y8Z+svsHYZhWvS8+U9J4050PFvNm613yndBCp9ZvwhlOqy2MdNl8FEbdVgpScL/mLNx
- M/tYaUrHNaaoGRjZpMGFoMnOrdoY4ES0S9p7pFSeL6jphJDUn2u2ZoYjDsi8/P3KWAfw=;
-Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1idYNk-00BY3e-KU
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Dec 2019 11:36:23 +0000
-Received: from linux.localdomain (unknown [123.138.236.242])
- by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dx_xajjutdTiUIAA--.95S2;
- Sat, 07 Dec 2019 19:36:04 +0800 (CST)
-From: Tiezhu Yang <yangtiezhu@loongson.cn>
-To: Alexander Viro <viro@zeniv.linux.org.uk>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <yuchao0@huawei.com>, Eric Biggers <ebiggers@kernel.org>,
- Tyler Hicks <tyhicks@canonical.com>
-Date: Sat,  7 Dec 2019 19:35:48 +0800
-Message-Id: <1575718548-19017-1-git-send-email-yangtiezhu@loongson.cn>
-X-Mailer: git-send-email 2.1.0
-X-CM-TRANSID: AQAAf9Dx_xajjutdTiUIAA--.95S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxur15ZF45Ww47Jry3KF47XFb_yoW7JrW7pF
- sxAFyxtrs7Gry5ur95tr1ruw1Yv3s7Wr17JrZxKa40yryaqrn5XrWIyw109wn3JFWDuFn0
- gFZ8G34rCry5JFJanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvCb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwV
- C2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
- Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJV
- W8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka
- 0xkIwI1lc2xSY4AK67AK6r4kMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r
- 4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
- 67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2I
- x0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAI
- cVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kf
- nxnUUI43ZEXa7IU5D3vUUUUUU==
-X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
-X-Spam-Score: -0.1 (/)
+ bh=lSP8/e8OjiSNZZDmK6SxArGfSuSlNA5shfAilc1iQA0=; b=Odqd2Qxdb8p/1AVvWMXXQGh9jr
+ G33jBw9eh/uzT0XqnMOqTBrswnPFShSc/EpaG2bk07sGRIOoUVElkVg3+Cr4lgYRyWly6DmFCJQ8P
+ B5Cvb0HTcjTClg5U2rBzWLJiTbqdRzAyYDWzKDrrRws1ZK3IwGVnbsTJbRfDDFwWfmko=;
+Received: from zeniv.linux.org.uk ([195.92.253.2])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1idnmb-00Dg7k-9W
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Dec 2019 04:02:58 +0000
+Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1idnS4-00084W-CV; Sun, 08 Dec 2019 03:41:47 +0000
+Date: Sun, 8 Dec 2019 03:41:44 +0000
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Tiezhu Yang <yangtiezhu@loongson.cn>
+Message-ID: <20191208034144.GP4203@ZenIV.linux.org.uk>
+References: <1575718548-19017-1-git-send-email-yangtiezhu@loongson.cn>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <1575718548-19017-1-git-send-email-yangtiezhu@loongson.cn>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: loongson.cn]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1idYNk-00BY3e-KU
-Subject: [f2fs-dev] [PATCH v3] fs: introduce is_dot_dotdot helper for cleanup
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1idnmb-00Dg7k-9W
+Subject: Re: [f2fs-dev] [PATCH v3] fs: introduce is_dot_dotdot helper for
+ cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,184 +68,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- ecryptfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: ecryptfs@vger.kernel.org, "Theodore Y. Ts'o" <tytso@mit.edu>,
+ linux-kernel@vger.kernel.org, Tyler Hicks <tyhicks@canonical.com>,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There exists many similar and duplicate codes to check "." and "..",
-so introduce is_dot_dotdot helper to make the code more clean.
+On Sat, Dec 07, 2019 at 07:35:48PM +0800, Tiezhu Yang wrote:
+> There exists many similar and duplicate codes to check "." and "..",
+> so introduce is_dot_dotdot helper to make the code more clean.
 
-Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
----
+Umm...  No objections, in principle, but... you try to say that name
+(e.g. in a phone conversation) without stuttering ;-/
 
-v3:
-  - use "name" and "len" as arguments instead of qstr
-  - move is_dot_dotdot() to include/linux/namei.h
-
-v2:
-  - use the better performance implementation of is_dot_dotdot
-  - make it static inline and move it to include/linux/fs.h
-
- fs/crypto/fname.c     | 16 +++-------------
- fs/ecryptfs/crypto.c  | 10 ----------
- fs/f2fs/f2fs.h        | 11 -----------
- fs/f2fs/hash.c        |  3 ++-
- fs/namei.c            |  6 ++----
- include/linux/namei.h | 10 ++++++++++
- 6 files changed, 17 insertions(+), 39 deletions(-)
-
-diff --git a/fs/crypto/fname.c b/fs/crypto/fname.c
-index 3da3707..ed1d7c5 100644
---- a/fs/crypto/fname.c
-+++ b/fs/crypto/fname.c
-@@ -11,21 +11,11 @@
-  * This has not yet undergone a rigorous security audit.
-  */
- 
-+#include <linux/namei.h>
- #include <linux/scatterlist.h>
- #include <crypto/skcipher.h>
- #include "fscrypt_private.h"
- 
--static inline bool fscrypt_is_dot_dotdot(const struct qstr *str)
--{
--	if (str->len == 1 && str->name[0] == '.')
--		return true;
--
--	if (str->len == 2 && str->name[0] == '.' && str->name[1] == '.')
--		return true;
--
--	return false;
--}
--
- /**
-  * fname_encrypt() - encrypt a filename
-  *
-@@ -255,7 +245,7 @@ int fscrypt_fname_disk_to_usr(struct inode *inode,
- 	const struct qstr qname = FSTR_TO_QSTR(iname);
- 	struct fscrypt_digested_name digested_name;
- 
--	if (fscrypt_is_dot_dotdot(&qname)) {
-+	if (is_dot_dotdot(qname.name, qname.len)) {
- 		oname->name[0] = '.';
- 		oname->name[iname->len - 1] = '.';
- 		oname->len = iname->len;
-@@ -323,7 +313,7 @@ int fscrypt_setup_filename(struct inode *dir, const struct qstr *iname,
- 	memset(fname, 0, sizeof(struct fscrypt_name));
- 	fname->usr_fname = iname;
- 
--	if (!IS_ENCRYPTED(dir) || fscrypt_is_dot_dotdot(iname)) {
-+	if (!IS_ENCRYPTED(dir) || is_dot_dotdot(iname->name, iname->len)) {
- 		fname->disk_name.name = (unsigned char *)iname->name;
- 		fname->disk_name.len = iname->len;
- 		return 0;
-diff --git a/fs/ecryptfs/crypto.c b/fs/ecryptfs/crypto.c
-index f91db24..2014f8f 100644
---- a/fs/ecryptfs/crypto.c
-+++ b/fs/ecryptfs/crypto.c
-@@ -1991,16 +1991,6 @@ int ecryptfs_encrypt_and_encode_filename(
- 	return rc;
- }
- 
--static bool is_dot_dotdot(const char *name, size_t name_size)
--{
--	if (name_size == 1 && name[0] == '.')
--		return true;
--	else if (name_size == 2 && name[0] == '.' && name[1] == '.')
--		return true;
--
--	return false;
--}
--
- /**
-  * ecryptfs_decode_and_decrypt_filename - converts the encoded cipher text name to decoded plaintext
-  * @plaintext_name: The plaintext name
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5a888a0..3d5e684 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2767,17 +2767,6 @@ static inline bool f2fs_cp_error(struct f2fs_sb_info *sbi)
- 	return is_set_ckpt_flags(sbi, CP_ERROR_FLAG);
- }
- 
--static inline bool is_dot_dotdot(const struct qstr *str)
--{
--	if (str->len == 1 && str->name[0] == '.')
--		return true;
--
--	if (str->len == 2 && str->name[0] == '.' && str->name[1] == '.')
--		return true;
--
--	return false;
--}
--
- static inline bool f2fs_may_extent_tree(struct inode *inode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
-index 5bc4dcd..b8e123f 100644
---- a/fs/f2fs/hash.c
-+++ b/fs/f2fs/hash.c
-@@ -15,6 +15,7 @@
- #include <linux/cryptohash.h>
- #include <linux/pagemap.h>
- #include <linux/unicode.h>
-+#include <linux/namei.h>
- 
- #include "f2fs.h"
- 
-@@ -82,7 +83,7 @@ static f2fs_hash_t __f2fs_dentry_hash(const struct qstr *name_info,
- 	if (fname && !fname->disk_name.name)
- 		return cpu_to_le32(fname->hash);
- 
--	if (is_dot_dotdot(name_info))
-+	if (is_dot_dotdot(name, len))
- 		return 0;
- 
- 	/* Initialize the default seed for the hash checksum functions */
-diff --git a/fs/namei.c b/fs/namei.c
-index d6c91d1..acbfbe4 100644
---- a/fs/namei.c
-+++ b/fs/namei.c
-@@ -2451,10 +2451,8 @@ static int lookup_one_len_common(const char *name, struct dentry *base,
- 	if (!len)
- 		return -EACCES;
- 
--	if (unlikely(name[0] == '.')) {
--		if (len < 2 || (len == 2 && name[1] == '.'))
--			return -EACCES;
--	}
-+	if (is_dot_dotdot(name, len))
-+		return -EACCES;
- 
- 	while (len--) {
- 		unsigned int c = *(const unsigned char *)name++;
-diff --git a/include/linux/namei.h b/include/linux/namei.h
-index 7fe7b87..8254486 100644
---- a/include/linux/namei.h
-+++ b/include/linux/namei.h
-@@ -92,4 +92,14 @@ retry_estale(const long error, const unsigned int flags)
- 	return error == -ESTALE && !(flags & LOOKUP_REVAL);
- }
- 
-+static inline bool is_dot_dotdot(const unsigned char *name, size_t len)
-+{
-+	if (unlikely(name[0] == '.')) {
-+		if (len < 2 || (len == 2 && name[1] == '.'))
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- #endif /* _LINUX_NAMEI_H */
--- 
-2.1.0
-
+Any suggestions from native speakers?
 
 
 _______________________________________________
