@@ -2,105 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79F36116B53
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 11:45:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DBCF116B59
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 11:46:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ieGXN-0006Gr-7b; Mon, 09 Dec 2019 10:45:09 +0000
+	id 1ieGYu-0003Zg-VW; Mon, 09 Dec 2019 10:46:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=2395697a2=shinichiro.kawasaki@wdc.com>)
- id 1ieGXI-0006GX-GU
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 10:45:04 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1ieGYt-0003ZF-Hl
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 10:46:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aj5ma0tLcwU4Z5u/6GZH36tWMsW/WJK9aJKfajtQxnA=; b=AxfU7lMk9WD+PxCmd6X2i12+i1
- rOlaPsR6DisHU/5BBxZu9NXigQ3OOPwxcb7wrVlUV71tTbq0MmaL3hxr456jnloxuvZlJFMgjZd0e
- nvk8AA2Jy4GVeB7c5cM5Y97ex3L4ft584A3d2Zh5r9bIOmL079XuBRqZpyFxbaVc79GE=;
+ bh=KuXcOmi3wiRIJZ07UvP/j3jwxDFHLkFb6RZpc+tV1wM=; b=VelOZyFJlt2diCaOCK4YWJZVJs
+ gXZUBSEalbXm6M9GurVyMWsKhMtkn1mMRx8G6nTxyXYKrgMkSybNDss2h2YbAJpyvUJG5c+ZKmzIK
+ nvy+4cOPJsMONsR6zvP4cmC7n7fZWEOHdUiPIOh1PMRzbrnoM8aipqsQKkQtF12qb710=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aj5ma0tLcwU4Z5u/6GZH36tWMsW/WJK9aJKfajtQxnA=; b=SiISFSBhMNV9u4LnvhK+5W94oq
- P9cy4XBiDDNww7Fe8RArKInNnJih37cXXvJ8/G7ViAb4fVuQqTI+Ymu1f3XjVyhmKgRuU/ZH3j4bP
- Nu2MPrVOUtP4UMmuvKAdGp4MVMCD8pU5wLLAdS6GoFY1xtTZRGJxu51abgIotQjZrSyU=;
-Received: from esa2.hgst.iphmx.com ([68.232.143.124])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=KuXcOmi3wiRIJZ07UvP/j3jwxDFHLkFb6RZpc+tV1wM=; b=kzIMrWMFAyZCsL8wLCYZbN+d08
+ MrYBKVS3r1ZrdMCWuyRpuRtl82PvojnXoRwg1RHa57mAhMe6eD2WO4XfU4KhUaGeLbBHKHFA8ygec
+ JhfnRakm99ncMOvEQ1EEj7nVaDpJeKXF1msPatHY+bFfwFZRMr6il9ufIAcqGHT7IL+E=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ieGXG-00FMWj-O1
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 10:45:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575888314; x=1607424314;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=1Grid3JwSUkPu4nL9r2vaQHDvlO3FbSPefncr5TFEJA=;
- b=KIHCCzmzvfZNaMn77/abjb8e5iA29lhUtVX0fu7p3pKhzI6ULIGCHnQX
- grVhjv76iY3xCTk4asodagO8eog/wVgKGlBFRMZDuYz4AuXo1XPxPY/Wh
- IAvxLqc8mM8eGbqIZ/NPNb5ZVhVTB4EvfcFo2+ARooc+1Sxa14mVyM1wj
- hX+LIxe2zrbemxv/lpgFfLQ+aSik35i47Knl79UzFHr0vu2krPPivpYFZ
- dKRYdW9a8jJfw3NzGinSgiXiycF/HwJst5YY3XsIQT4nUS9O4puVhgVXG
- rhbfdeQridosagHvfMzh2hX2RlD1Bso+dReRpi4X7I634h+muF/mlnPa2 Q==;
-IronPort-SDR: Z9nt9pFqGF7f2vC/ORR4OIFMTkOxYwC5Mxy7+ais01qSDPgmshGloYw6795SiWLGNRLVBizz3U
- sre+4zfXw3J1KRJ/32WvKAFtSTJcY0vr39gzEqV0GmopJo1evUcO/OF2s3QbzmijOARVgo2aV2
- OYalTTIOQrv0RLl+8SbhdEt6BOv0qdRB6xv31PhXmE2IYBKt7SFlkNorNPxEpq8OPspfnFWlxQ
- xO4LMe8w+cXpGpIHosTc+kX0cHCCdS+rjNjDp9MsZD5zqrbXsagv77XdJmfePI7G96mBLQdFvz
- 6hg=
-X-IronPort-AV: E=Sophos;i="5.69,294,1571673600"; d="scan'208";a="226385650"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Dec 2019 18:44:56 +0800
-IronPort-SDR: tC/rqcV6/21VFiivcdrmfxFfzQASfoSBGThaCr3vYZGNWHUiBSuvXVLcnRXpo8pfV/1DaTavx7
- SYQ8xuRDwkE8aP2Y5toiLwnETmVyQw06X1BQ9wr8ZaoLiEVULNwuUyS50MV2kHjkb17Fq+dS5K
- ybxCCYhry+L85wP6Fml30jcjdPWjhJ5EN/ojZuRNgD4xZIHml3/kGf5kXZDMfSnrcCUhqgaaG/
- eqBA5yYemYo8lXlN2HkNcD/rUAu0iyNXcNWkThhkhR7HF0YE1+otYMuomXfGFFMEo9zZa2uGJE
- g6FHdpC0XAIGyC1rF3UNjACU
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 02:39:29 -0800
-IronPort-SDR: tLY7NhbXpXlTdkxFyQY17udo64gGber1huSleeZa4kF1rOykfXR9qYhaKMofAK2eXqi2ZB33j8
- B3OtfE4tFQcqrKiThyZpH/eE7yBFtU7XJtV4Ck2JLLtHKGr6X83BlEw/01ob5podqwd+1MQwNO
- MWo3FuVMRZmkKaLXqR+8+JM/jU6HpPW3Krff3efaLiC3m2WHj1oGbBo3J4fHTHGY4mfYmCtOOm
- bCMcBuJ4mU858Qv67wfqS8/OYD8dWqs563DGkIEjq8Hss/RZBFYBXoPogJSB9bJeRxd+OJ8G/m
- i2w=
-WDCIronportException: Internal
-Received: from shindev.dhcp.fujisawa.hgst.com (HELO shindev.fujisawa.hgst.com)
- ([10.149.53.87])
- by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 02:44:50 -0800
-From: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  9 Dec 2019 19:44:45 +0900
-Message-Id: <20191209104445.216327-3-shinichiro.kawasaki@wdc.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191209104445.216327-1-shinichiro.kawasaki@wdc.com>
-References: <20191209104445.216327-1-shinichiro.kawasaki@wdc.com>
+ id 1ieGYr-00F2gc-Au
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 10:46:43 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 85FBF78624F5C19E9F79;
+ Mon,  9 Dec 2019 18:46:32 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 9 Dec 2019
+ 18:46:28 +0800
+To: Gao Xiang <hsiangkao@aol.com>, Hongwei Qin <glqinhongwei@gmail.com>
+References: <tencent_0B38BD6C2739091DE8A052D6D772D1DEAA06@qq.com>
+ <4ef45a4b-47fa-4d7e-a060-4cad56ca372a@kernel.org>
+ <CAKvRR0QoH2RAEzb9ki8GVUX22omST-Z2kq287i0fXmYXC7XCLw@mail.gmail.com>
+ <20191208135117.GA12771@hsiangkao-HP-ZHAN-66-Pro-G1>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <11aeed7b-24e2-61ba-fddc-6684aac2b152@huawei.com>
+Date: Mon, 9 Dec 2019 18:46:28 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20191208135117.GA12771@hsiangkao-HP-ZHAN-66-Pro-G1>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.1 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [68.232.143.124 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ieGXG-00FMWj-O1
-Subject: [f2fs-dev] [PATCH v5 2/2] f2fs: Check write pointer consistency of
- non-open zones
+X-Headers-End: 1ieGYr-00F2gc-Au
+Subject: Re: [f2fs-dev] Potential data corruption?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,234 +77,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Damien Le Moal <Damien.LeMoal@wdc.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Content-Type: text/plain; charset="gbk"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-To catch f2fs bugs in write pointer handling code for zoned block
-devices, check write pointers of non-open zones that current segments do
-not point to. Do this check at mount time, after the fsync data recovery
-and current segments' write pointer consistency fix. Or when fsync data
-recovery is disabled by mount option, do the check when there is no fsync
-data.
-
-Check two items comparing write pointers with valid block maps in SIT.
-The first item is check for zones with no valid blocks. When there is no
-valid blocks in a zone, the write pointer should be at the start of the
-zone. If not, next write operation to the zone will cause unaligned write
-error. If write pointer is not at the zone start, reset the write pointer
-to place at the zone start.
-
-The second item is check between the write pointer position and the last
-valid block in the zone. It is unexpected that the last valid block
-position is beyond the write pointer. In such a case, report as a bug.
-Fix is not required for such zone, because the zone is not selected for
-next write operation until the zone get discarded.
-
-Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
----
- fs/f2fs/f2fs.h    |   1 +
- fs/f2fs/segment.c | 126 ++++++++++++++++++++++++++++++++++++++++++++++
- fs/f2fs/super.c   |  11 ++++
- 3 files changed, 138 insertions(+)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 002c417b0a53..23a84d7f17b8 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3156,6 +3156,7 @@ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
- 			unsigned int val, int alloc);
- void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
- int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi);
-+int f2fs_check_write_pointer(struct f2fs_sb_info *sbi);
- int f2fs_build_segment_manager(struct f2fs_sb_info *sbi);
- void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
- int __init f2fs_create_segment_manager_caches(void);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 73473f2eb49a..d8726df5b157 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -4370,6 +4370,90 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
- 
- #ifdef CONFIG_BLK_DEV_ZONED
- 
-+static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
-+				    struct f2fs_dev_info *fdev,
-+				    struct blk_zone *zone)
-+{
-+	unsigned int wp_segno, wp_blkoff, zone_secno, zone_segno, segno;
-+	block_t zone_block, wp_block, last_valid_block;
-+	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
-+	int i, s, b, ret;
-+	struct seg_entry *se;
-+
-+	if (zone->type != BLK_ZONE_TYPE_SEQWRITE_REQ)
-+		return 0;
-+
-+	wp_block = fdev->start_blk + (zone->wp >> log_sectors_per_block);
-+	wp_segno = GET_SEGNO(sbi, wp_block);
-+	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
-+	zone_block = fdev->start_blk + (zone->start >> log_sectors_per_block);
-+	zone_segno = GET_SEGNO(sbi, zone_block);
-+	zone_secno = GET_SEC_FROM_SEG(sbi, zone_segno);
-+
-+	if (zone_segno >= MAIN_SEGS(sbi))
-+		return 0;
-+
-+	/*
-+	 * Skip check of zones cursegs point to, since
-+	 * fix_curseg_write_pointer() checks them.
-+	 */
-+	for (i = 0; i < NO_CHECK_TYPE; i++)
-+		if (zone_secno == GET_SEC_FROM_SEG(sbi,
-+						   CURSEG_I(sbi, i)->segno))
-+			return 0;
-+
-+	/*
-+	 * Get last valid block of the zone.
-+	 */
-+	last_valid_block = zone_block - 1;
-+	for (s = sbi->segs_per_sec - 1; s >= 0; s--) {
-+		segno = zone_segno + s;
-+		se = get_seg_entry(sbi, segno);
-+		for (b = sbi->blocks_per_seg - 1; b >= 0; b--)
-+			if (f2fs_test_bit(b, se->cur_valid_map)) {
-+				last_valid_block = START_BLOCK(sbi, segno) + b;
-+				break;
-+			}
-+		if (last_valid_block >= zone_block)
-+			break;
-+	}
-+
-+	/*
-+	 * If last valid block is beyond the write pointer, report the
-+	 * inconsistency. This inconsistency does not cause write error
-+	 * because the zone will not be selected for write operation until
-+	 * it get discarded. Just report it.
-+	 */
-+	if (last_valid_block >= wp_block) {
-+		f2fs_notice(sbi, "Valid block beyond write pointer: "
-+			    "valid block[0x%x,0x%x] wp[0x%x,0x%x]",
-+			    GET_SEGNO(sbi, last_valid_block),
-+			    GET_BLKOFF_FROM_SEG0(sbi, last_valid_block),
-+			    wp_segno, wp_blkoff);
-+		return 0;
-+	}
-+
-+	/*
-+	 * If there is no valid block in the zone and if write pointer is
-+	 * not at zone start, reset the write pointer.
-+	 */
-+	if (last_valid_block + 1 == zone_block && zone->wp != zone->start) {
-+		f2fs_notice(sbi,
-+			    "Zone without valid block has non-zero write "
-+			    "pointer. Reset the write pointer: wp[0x%x,0x%x]",
-+			    wp_segno, wp_blkoff);
-+		ret = __f2fs_issue_discard_zone(sbi, fdev->bdev, zone_block,
-+					zone->len >> log_sectors_per_block);
-+		if (ret) {
-+			f2fs_err(sbi, "Discard zone failed: %s (errno=%d)",
-+				 fdev->path, ret);
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- static struct f2fs_dev_info *get_target_zoned_dev(struct f2fs_sb_info *sbi,
- 						  block_t zone_blkaddr)
- {
-@@ -4442,6 +4526,10 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 		    "curseg[0x%x,0x%x]", type, cs->segno, cs->next_blkoff);
- 	allocate_segment_by_default(sbi, type, true);
- 
-+	/* check consistency of the zone curseg pointed to */
-+	if (check_zone_write_pointer(sbi, zbd, &zone))
-+		return -EIO;
-+
- 	/* check newly assigned zone */
- 	cs_section = GET_SEC_FROM_SEG(sbi, cs->segno);
- 	cs_zone_block = START_BLOCK(sbi, GET_SEG_FROM_SEC(sbi, cs_section));
-@@ -4493,11 +4581,49 @@ int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
- 
- 	return 0;
- }
-+
-+struct check_zone_write_pointer_args {
-+	struct f2fs_sb_info *sbi;
-+	struct f2fs_dev_info *fdev;
-+};
-+
-+static int check_zone_write_pointer_cb(struct blk_zone *zone, unsigned int idx,
-+				      void *data) {
-+	struct check_zone_write_pointer_args *args;
-+	args = (struct check_zone_write_pointer_args *)data;
-+
-+	return check_zone_write_pointer(args->sbi, args->fdev, zone);
-+}
-+
-+int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
-+{
-+	int i, ret;
-+	struct check_zone_write_pointer_args args;
-+
-+	for (i = 0; i < sbi->s_ndevs; i++) {
-+		if (!bdev_is_zoned(FDEV(i).bdev))
-+			continue;
-+
-+		args.sbi = sbi;
-+		args.fdev = &FDEV(i);
-+		ret = blkdev_report_zones(FDEV(i).bdev, 0, BLK_ALL_ZONES,
-+					  check_zone_write_pointer_cb, &args);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
- #else
- int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
- {
- 	return 0;
- }
-+
-+int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
-+{
-+	return 0;
-+}
- #endif
- 
- /*
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5111e1ffe58a..755ad57c795b 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3544,6 +3544,17 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 			goto free_meta;
- 		}
- 	}
-+
-+	/*
-+	 * If the f2fs is not readonly and fsync data recovery succeeds,
-+	 * check zoned block devices' write pointer consistency.
-+	 */
-+	if (!err && !f2fs_readonly(sb) && f2fs_sb_has_blkzoned(sbi)) {
-+		err = f2fs_check_write_pointer(sbi);
-+		if (err)
-+			goto free_meta;
-+	}
-+
- reset_checkpoint:
- 	/* f2fs_recover_fsync_data() cleared this already */
- 	clear_sbi_flag(sbi, SBI_POR_DOING);
--- 
-2.23.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAxOS8xMi84IDIxOjUxLCBHYW8gWGlhbmcgdmlhIExpbnV4LWYyZnMtZGV2ZWwgd3JvdGU6
+Cj4gSGksCj4gCj4gT24gU3VuLCBEZWMgMDgsIDIwMTkgYXQgMDk6MTU6NTVQTSArMDgwMCwgSG9u
+Z3dlaSBRaW4gd3JvdGU6Cj4+IEhpLAo+Pgo+PiBPbiBTdW4sIERlYyA4LCAyMDE5IGF0IDEyOjAx
+IFBNIENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4gd3JvdGU6Cj4+Pgo+Pj4gSGVsbG8sCj4+Pgo+
+Pj4gT24gMjAxOS0xMi03IDE4OjEwLCDvv73vv73vv73Vte+/ve+/ve+/ve+/ve+/ve+/ve+/vSB3
+cm90ZToKPj4+PiBIaSBGMkZTIGV4cGVydHMsCj4+Pj4gVGhlIGZvbGxvd2luZyBjb25mdXNlcyBt
+ZToKPj4+Pgo+Pj4+IEEgdHlwaWNhbCBmc3luYygpIGdvZXMgbGlrZSB0aGlzOgo+Pj4+IDEpIElz
+c3VlIGRhdGEgYmxvY2sgSU9zCj4+Pj4gMikgV2FpdCBmb3IgY29tcGxldGlvbgo+Pj4+IDMpIElz
+c3VlIGNoYWluZWQgbm9kZSBibG9jayBJT3MKPj4+PiA0KSBXYWl0IGZvciBjb21wbGV0aW9uCj4+
+Pj4gNSkgSXNzdWUgZmx1c2ggY29tbWFuZAo+Pj4+Cj4+Pj4gSW4gb3JkZXIgdG8gcHJlc2VydmUg
+ZGF0YSBjb25zaXN0ZW5jeSB1bmRlciBzdWRkZW4gcG93ZXIgZmFpbHVyZSwgaXQgcmVxdWlyZXMg
+dGhhdCB0aGUgc3RvcmFnZSBkZXZpY2UgcGVyc2lzdHMgZGF0YSBibG9ja3MgcHJpb3IgdG8gbm9k
+ZSBibG9ja3MuCj4+Pj4gT3RoZXJ3aXNlLCB1bmRlciBzdWRkZW4gcG93ZXIgZmFpbHVyZSwgaXQn
+cyBwb3NzaWJsZSB0aGF0IHRoZSBwZXJzaXN0ZWQgbm9kZSBibG9jayBwb2ludHMgdG8gTlVMTCBk
+YXRhIGJsb2Nrcy4KPj4+Cj4+PiBGaXJzdGx5IGl0IGRvZXNuJ3QgYnJlYWsgUE9TSVggc2VtYW50
+aWNzLCByaWdodD8gc2luY2UgZnN5bmMoKSBkaWRuJ3QgcmV0dXJuCj4+PiBzdWNjZXNzZnVsbHkg
+YmVmb3JlIHN1ZGRlbiBwb3dlci1jdXQsIHNvIHdlIGNhbiBub3QgZ3VhcmFudGVlIHRoYXQgZGF0
+YSBpcyBmdWxseQo+Pj4gcGVyc2lzdGVkIGluIHN1Y2ggY29uZGl0aW9uLgo+Pj4KPj4+IEhvd2V2
+ZXIsIHdoYXQgeW91IHdhbnQgbG9va3MgbGlrZSBhdG9taWMgd3JpdGUgc2VtYW50aWNzLCB3aGlj
+aCBtb3N0bHkgZGF0YWJhc2UKPj4+IHdhbnQgdG8gZ3VhcmFudGVlIGR1cmluZyBkYiBmaWxlIHVw
+ZGF0ZS4KPj4+Cj4+PiBGMkZTIGhhcyBzdXBwb3J0IGF0b21pY193cml0ZSB2aWEgaW9jdGwsIHdo
+aWNoIGlzIHVzZWQgYnkgU1FMaXRlIG9mZmljaWFsbHksIEkKPj4+IGd1ZXNzIHlvdSBjYW4gY2hl
+Y2sgaXRzIGltcGxlbWVudGF0aW9uIGRldGFpbC4KPj4+Cj4+PiBUaGFua3MsCj4+Pgo+Pgo+PiBU
+aGFua3MgZm9yIHlvdXIga2luZCByZXBseS4KPj4gSXQncyB0cnVlIHRoYXQgaWYgd2UgbWVldCBw
+b3dlciBmYWlsdXJlIGJlZm9yZSBmc3luYygpIGNvbXBsZXRlcywKPj4gUE9TSVggZG9lbid0IHJl
+cXVpcmUgRlMgdG8gcmVjb3ZlciB0aGUgZmlsZS4gSG93ZXZlciwgY29uc2lkZXIgdGhlCj4+IGZv
+bGxvd2luZyBzaXR1YXRpb246Cj4+Cj4+IDEpIERhdGEgYmxvY2sgSU9zIChOb3QgcGVyc2lzdGVk
+KQo+PiAyKSBOb2RlIGJsb2NrIElPcyAoQWxsIFBlcnNpc3RlZCkKPj4gMykgUG93ZXIgZmFpbHVy
+ZQo+Pgo+PiBTaW5jZSB0aGUgbm9kZSBibG9ja3MgYXJlIGFsbCBwZXJzaXN0ZWQgYmVmb3JlIHBv
+d2VyIGZhaWx1cmUsIHRoZSBub2RlCj4+IGNoYWluIGlzbid0IGJyb2tlbi4gTm90ZSB0aGF0IHRo
+aXMgZmlsZSdzIG5ldyBkYXRhIGlzIG5vdCBwcm9wZXJseQo+PiBwZXJzaXN0ZWQgYmVmb3JlIGNy
+YXNoLiBTbyB0aGUgcmVjb3ZlcnkgcHJvY2VzcyBzaG91bGQgYmUgYWJsZSB0bwo+PiByZWNvZ25p
+emUgdGhpcyBzaXR1YXRpb24gYW5kIGF2b2lkIHJlY292ZXIgdGhpcyBmaWxlLiBIb3dldmVyLCBz
+aW5jZQo+PiB0aGUgbm9kZSBjaGFpbiBpcyBub3QgYnJva2VuLCBwZXJoYXBzIHRoZSByZWNvdmVy
+eSBwcm9jZXNzIHdpbGwgcmVnYXJkCj4+IHRoaXMgZmlsZSBhcyByZWNvdmVyYWJsZT8KPiAKPiBB
+cyBteSBvd24gbGltaXRlZCB1bmRlcnN0YW5kaW5nLCBJJ20gYWZyYWlkIGl0IHNlZW1zIHRydWUg
+Zm9yIGV4dHJlbWUgY2FzZS4KPiBXaXRob3V0IHByb3BlciBGTFVTSCBjb21tYW5kLCBuZXdlciBu
+b2RlcyBjb3VsZCBiZSByZWNvdmVyZWQgYnV0IG5vIG5ld2VyCj4gZGF0YSBwZXJzaXN0ZWQuCj4g
+Cj4gU28gaWYgZnN5bmMoKSBpcyBub3Qgc3VjY2Vzc2Z1bCwgdGhlIG9sZCBkYXRhIHNob3VsZCBi
+ZSByZWFkZWQKPiBidXQgZm9yIHRoaXMgY2FzZSwgdW5leHBlY3RlZCBkYXRhIChub3QgQSBvciBB
+JywgY291bGQgYmUgcmFuZG9tIGRhdGEKPiBDKSB3aWxsIGJlIGNvbnNpZGVyZWQgdmFsaWRseSBz
+aW5jZSBpdHMgbm9kZSBpcyBvay4KPiAKPiBJdCBzZWVtcyBpdCBzaG91bGQgRkxVU0ggZGF0YSBi
+ZWZvcmUgdGhlIHJlbGF0ZWQgbm9kZSBjaGFpbiB3cml0dGVuIG9yCj4gaW50cm9kdWNlIHNvbWUg
+ZGF0YSBjaGVja3N1bSB0aG91Z2guCj4gCj4gSWYgSSBhbSB3cm9uZywga2luZGx5IGNvcnJlY3Qg
+bWUuLi4KClllcywgSSBndWVzcyBpZiB1c2VyIHdhbnRzIG1vcmUgY29uc2lzdGVuY2UgZ3VhcmFu
+dGVlIG9mIGZzeW5jKCkgdGhhbiBwb3NpeCBvbmUsCndlIGNhbiByZWZhY3RvciBmc3luY19tb2Rl
+PXN0cmljdCBtb2RlIGEgYml0IHRvIGhhbmRsZSBmc3luYygpIElPcyBsaWtlIHdlIGRpZApmb3Ig
+YXRvbWljIHdyaXRlIElPcyB0byBrZWVwIHN0cmljdCBkYXRhL25vZGUgSU8gb3JkZXIuIEJ1dCBu
+b3RlIHRoYXQgc3VjaApjb25zaXN0ZW5jZSBndWFyYW50ZWUgaXMgd2VhaywgYWZ0ZXIgc3VkZGVu
+IHBvd2VyLWN1dCwgcmVjb3ZlcmVkIGZpbGUgbWF5CmNvbnRhaW4gbWl4ZWQgb2xkIGFuZCBuZXcg
+ZGF0YSAoZnN5bmNlZCBkYXRhIHBhcnRpYWxseSBwZXJzaXN0ZWQpIHdoaWNoIG1heSBhbHNvCmNy
+YXNoIHRoZSBBcHBzLgoKVGhhbmtzLAoKPiAKPiBUaGFua3MsCj4gR2FvIFhpYW5nCj4gCj4gCj4g
+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBMaW51
+eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+IExpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
+Zm9yZ2UubmV0Cj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
+bGludXgtZjJmcy1kZXZlbAo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2
+ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xp
+c3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
