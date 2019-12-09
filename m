@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C282311792D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 23:24:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44E3B11792E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 23:24:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ieRRg-0006F1-JG; Mon, 09 Dec 2019 22:24:00 +0000
+	id 1ieRRh-0005DC-Pi; Mon, 09 Dec 2019 22:24:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ieRRf-0006EM-NN
+ (envelope-from <jaegeuk@kernel.org>) id 1ieRRf-0005Cu-Bz
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:23:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M0fZM1jpsDmN56hwV25T0w9K/auMbpXtoK8qJktu21c=; b=X+Or3D68mJi/1Wy2AC7uLnlhMe
- GUtKSE23540g/poWNp9g9agrLC2R6mr5/sAnniKaQpGI256HNeI3FwkOx60jKu0mT5KqjGFX6O72U
- /2bGpqRZQT27nR+3k6s2gM6XV0nx9S4ApsblzIFexvnhnVcVPelglFNxHCl+BNb7Crs8=;
+ bh=qYCFUjYwM16rzvxl0oMDkPWW1FW7U1gDaazhGoaNQKM=; b=W4B3BFO3E2l5UA97EG1wThxsZl
+ Q/CgmAABrzKTBvAg3WbqRC5JSDHljtYRUpLYrhQ/mC+Y2UPa/4c1+CsN0+hz/G7ZF8pyxQTs1qzFJ
+ qDFk1t2tIyGtAOmqjci5HF4CWUQ1cZ5Mc43FxoUggUJVHcZi/gYecx5IKCePdlb49meg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M0fZM1jpsDmN56hwV25T0w9K/auMbpXtoK8qJktu21c=; b=MqBMdD7NIiElEmZDOzxkFKIndx
- nW2OKB6nCD+PQdC3fq+Q3p/yipDG4n5KVVzqqSv5bOCgNEpir+fvdTpYbATvGW3y3xcvZOt4F1h9d
- 1hzmjLI+WaUK+HZJrxlYY6rH1dmYAxHHQnyX+rKYRI3S6Y6ykICBGYmoEPPG9LwWPnVw=;
+ bh=qYCFUjYwM16rzvxl0oMDkPWW1FW7U1gDaazhGoaNQKM=; b=V6x4SIsNw4yeNKtuRLrnLHCcRE
+ ZFKw0a/TlVmbPbPNY15I39XPTdfmCS//kkHjx3yN01jtk20PaRdFDzG5ZR8O2m2leWB/Qhf+Ii8Xd
+ L9LWwjLIfH8SGkaqKe26uAnOxibUKVvn1227xp6YoXaj3DkQJHQDChvcmMiwrw1nkPtI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ieRRZ-00Fini-OB
+ id 1ieRRd-00GkrQ-8g
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:23:59 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2071320721;
+ by mail.kernel.org (Postfix) with ESMTPSA id BC6B220726;
  Mon,  9 Dec 2019 22:23:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1575930228;
- bh=TaaCS8RTMLVqjYqfCHXD8HZCQIXSSSjJveEkKOckY4w=;
+ bh=8cR/ULUscr3UPWmG/10SoHiMq7WuYzVCxKz9deW1Qxk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=QEnd3J1oeG0+9T5erKTz7uO3O/W4upU6IBhql845eAAUb9M1shFMafFgW7msGEALi
- x8BqBGByDYM3xHhe+beDrAFBDqRPC4WbiGdKYT/QtdK9i1nLpVh9WmAkErHZuYnOVH
- VJb7p6YckhqOTppjiXn/BsBoQcBSpfGpSxKxcxzM=
+ b=jZwDje6T2zUqfXoR++5dwDY3Jy/iemEyl8zsXLQjRSzKeepB83oLKKujI/9UhJCJw
+ jhHY6bviwuR8s9KOqKersNfKXiNps9uC0ffFJG4zYLw++izJY5sER/+PvwEVgeGdvP
+ OEp2dTo264cXQ6tGFc5wlkU4WaRDEYfVnkq/QhOs=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  9 Dec 2019 14:23:42 -0800
-Message-Id: <20191209222345.1078-3-jaegeuk@kernel.org>
+Date: Mon,  9 Dec 2019 14:23:43 -0800
+Message-Id: <20191209222345.1078-4-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
 In-Reply-To: <20191209222345.1078-1-jaegeuk@kernel.org>
 References: <20191209222345.1078-1-jaegeuk@kernel.org>
@@ -69,9 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ieRRZ-00Fini-OB
-Subject: [f2fs-dev] [PATCH 3/6] f2fs: keep quota data on write_begin failure
+X-Headers-End: 1ieRRd-00GkrQ-8g
+Subject: [f2fs-dev] [PATCH 4/6] f2fs: should avoid recursive filesystem ops
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,37 +87,33 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch avoids some unnecessary locks for quota files when write_begin
-fails.
+We need to use GFP_NOFS, since we did f2fs_lock_op().
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/data.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ fs/f2fs/file.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index fc40a72f7827..3b2945121557 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2600,14 +2600,16 @@ static void f2fs_write_failed(struct address_space *mapping, loff_t to)
- 	struct inode *inode = mapping->host;
- 	loff_t i_size = i_size_read(inode);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 6cebc6681487..eb653f700ade 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1191,13 +1191,13 @@ static int __exchange_data_block(struct inode *src_inode,
  
-+	if (IS_NOQUOTA(inode))
-+		return;
-+
- 	/* In the fs-verity case, f2fs_end_enable_verity() does the truncate */
- 	if (to > i_size && !f2fs_verity_in_progress(inode)) {
- 		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
- 		down_write(&F2FS_I(inode)->i_mmap_sem);
+ 		src_blkaddr = f2fs_kvzalloc(F2FS_I_SB(src_inode),
+ 					array_size(olen, sizeof(block_t)),
+-					GFP_KERNEL);
++					GFP_NOFS);
+ 		if (!src_blkaddr)
+ 			return -ENOMEM;
  
- 		truncate_pagecache(inode, i_size);
--		if (!IS_NOQUOTA(inode))
--			f2fs_truncate_blocks(inode, i_size, true);
-+		f2fs_truncate_blocks(inode, i_size, true);
- 
- 		up_write(&F2FS_I(inode)->i_mmap_sem);
- 		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 		do_replace = f2fs_kvzalloc(F2FS_I_SB(src_inode),
+ 					array_size(olen, sizeof(int)),
+-					GFP_KERNEL);
++					GFP_NOFS);
+ 		if (!do_replace) {
+ 			kvfree(src_blkaddr);
+ 			return -ENOMEM;
 -- 
 2.19.0.605.g01d371f741-goog
 
