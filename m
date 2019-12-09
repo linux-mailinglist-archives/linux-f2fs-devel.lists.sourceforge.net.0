@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A909611792B
+	by mail.lfdr.de (Postfix) with ESMTPS id C282311792D
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 23:24:01 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ieRRg-0006Ej-E2; Mon, 09 Dec 2019 22:24:00 +0000
+	id 1ieRRg-0006F1-JG; Mon, 09 Dec 2019 22:24:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ieRRf-0006EF-Jz
+ (envelope-from <jaegeuk@kernel.org>) id 1ieRRf-0006EM-NN
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:23:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KYnahTGQQvx23zazvjYuGgA0YACGNMtX/Xy0pXzVMh8=; b=V2xjAPcj/mL0LLYcAuG0bb6hQf
- +/0L39pexIuGvJ43IdxO5VIxixqA/sAfxBzkTyv2MkhD4CwtHv00M0damL9YXLGJ0URNZOyWLIFrA
- TMUWQWE7vDf4Jm08tyN2SVjuZNQB9RBShPiTxXW1avVgjRRtXqastwmby5v+DglmagqU=;
+ bh=M0fZM1jpsDmN56hwV25T0w9K/auMbpXtoK8qJktu21c=; b=X+Or3D68mJi/1Wy2AC7uLnlhMe
+ GUtKSE23540g/poWNp9g9agrLC2R6mr5/sAnniKaQpGI256HNeI3FwkOx60jKu0mT5KqjGFX6O72U
+ /2bGpqRZQT27nR+3k6s2gM6XV0nx9S4ApsblzIFexvnhnVcVPelglFNxHCl+BNb7Crs8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KYnahTGQQvx23zazvjYuGgA0YACGNMtX/Xy0pXzVMh8=; b=RZg2dLuPu566DMvg3ClERAPb2a
- z5jADQWM3RCsrk3mTJFvaNPBNpSNjjSXEhbf7uvr3cZU3t4qYNePH+wZaC1/FwiR+CPVQD6pRWNCP
- wfoMe4hje6KFlGqv0QzsyCzLxZ7H2upIZfbj+HrQjTisCBRQAL/WuY6nJiEtb+pgJ6CQ=;
+ bh=M0fZM1jpsDmN56hwV25T0w9K/auMbpXtoK8qJktu21c=; b=MqBMdD7NIiElEmZDOzxkFKIndx
+ nW2OKB6nCD+PQdC3fq+Q3p/yipDG4n5KVVzqqSv5bOCgNEpir+fvdTpYbATvGW3y3xcvZOt4F1h9d
+ 1hzmjLI+WaUK+HZJrxlYY6rH1dmYAxHHQnyX+rKYRI3S6Y6ykICBGYmoEPPG9LwWPnVw=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ieRRZ-00Fing-3B
+ id 1ieRRZ-00Fini-OB
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:23:59 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7B9762071E;
- Mon,  9 Dec 2019 22:23:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2071320721;
+ Mon,  9 Dec 2019 22:23:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1575930227;
- bh=A+gppiBF+YkBTBbG9jAbQcsegmphuu6BqQl55N2MGpg=;
+ s=default; t=1575930228;
+ bh=TaaCS8RTMLVqjYqfCHXD8HZCQIXSSSjJveEkKOckY4w=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=QoM6NzNiGJqicb+Ws8gUtxZCWYelOHpEef3cGJYk6HEfrAGJOGUz/RZ4SFzVt5GsQ
- 2Y9TUW4k9V5XXjX9g2774ksy4/mngjfVobySy5Tr2vaC99Y6KI5FQ0VahT0cmV60St
- wqF73/kj7rWlziKSdt+p6MhcVScbmlwg2IEW+2qw=
+ b=QEnd3J1oeG0+9T5erKTz7uO3O/W4upU6IBhql845eAAUb9M1shFMafFgW7msGEALi
+ x8BqBGByDYM3xHhe+beDrAFBDqRPC4WbiGdKYT/QtdK9i1nLpVh9WmAkErHZuYnOVH
+ VJb7p6YckhqOTppjiXn/BsBoQcBSpfGpSxKxcxzM=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  9 Dec 2019 14:23:41 -0800
-Message-Id: <20191209222345.1078-2-jaegeuk@kernel.org>
+Date: Mon,  9 Dec 2019 14:23:42 -0800
+Message-Id: <20191209222345.1078-3-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
 In-Reply-To: <20191209222345.1078-1-jaegeuk@kernel.org>
 References: <20191209222345.1078-1-jaegeuk@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1ieRRZ-00Fing-3B
-Subject: [f2fs-dev] [PATCH 2/6] f2fs: declare nested quota_sem and remove
- unnecessary sems
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ieRRZ-00Fini-OB
+Subject: [f2fs-dev] [PATCH 3/6] f2fs: keep quota data on write_begin failure
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,105 +88,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-1.
-f2fs_quota_sync
- -> down_read(&sbi->quota_sem)
- -> dquot_writeback_dquots
-  -> f2fs_dquot_commit
-   -> down_read(&sbi->quota_sem)
-
-2.
-f2fs_quota_sync
- -> down_read(&sbi->quota_sem)
-  -> f2fs_write_data_pages
-   -> f2fs_write_single_data_page
-    -> down_write(&F2FS_I(inode)->i_sem)
-
-f2fs_mkdir
- -> f2fs_do_add_link
-   -> down_write(&F2FS_I(inode)->i_sem)
-   -> f2fs_init_inode_metadata
-    -> f2fs_new_node_page
-     -> dquot_alloc_inode
-      -> f2fs_dquot_mark_dquot_dirty
-       -> down_read(&sbi->quota_sem)
+This patch avoids some unnecessary locks for quota files when write_begin
+fails.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/super.c | 22 +++++-----------------
- 1 file changed, 5 insertions(+), 17 deletions(-)
+ fs/f2fs/data.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5111e1ffe58a..15888ca02e7f 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2156,39 +2156,30 @@ static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
- static int f2fs_dquot_commit(struct dquot *dquot)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
--	int ret;
-+	int ret = dquot_commit(dquot);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index fc40a72f7827..3b2945121557 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2600,14 +2600,16 @@ static void f2fs_write_failed(struct address_space *mapping, loff_t to)
+ 	struct inode *inode = mapping->host;
+ 	loff_t i_size = i_size_read(inode);
  
--	down_read(&sbi->quota_sem);
--	ret = dquot_commit(dquot);
- 	if (ret < 0)
- 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
--	up_read(&sbi->quota_sem);
- 	return ret;
- }
++	if (IS_NOQUOTA(inode))
++		return;
++
+ 	/* In the fs-verity case, f2fs_end_enable_verity() does the truncate */
+ 	if (to > i_size && !f2fs_verity_in_progress(inode)) {
+ 		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 		down_write(&F2FS_I(inode)->i_mmap_sem);
  
- static int f2fs_dquot_acquire(struct dquot *dquot)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
--	int ret;
-+	int ret = dquot_acquire(dquot);
+ 		truncate_pagecache(inode, i_size);
+-		if (!IS_NOQUOTA(inode))
+-			f2fs_truncate_blocks(inode, i_size, true);
++		f2fs_truncate_blocks(inode, i_size, true);
  
--	down_read(&sbi->quota_sem);
--	ret = dquot_acquire(dquot);
- 	if (ret < 0)
- 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
--	up_read(&sbi->quota_sem);
- 	return ret;
- }
- 
- static int f2fs_dquot_release(struct dquot *dquot)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(dquot->dq_sb);
--	int ret;
-+	int ret = dquot_release(dquot);
- 
--	down_read(&sbi->quota_sem);
--	ret = dquot_release(dquot);
- 	if (ret < 0)
- 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
--	up_read(&sbi->quota_sem);
- 	return ret;
- }
- 
-@@ -2198,7 +2189,7 @@ static int f2fs_dquot_mark_dquot_dirty(struct dquot *dquot)
- 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
- 	int ret;
- 
--	down_read(&sbi->quota_sem);
-+	down_read_nested(&sbi->quota_sem, SINGLE_DEPTH_NESTING);
- 	ret = dquot_mark_dquot_dirty(dquot);
- 
- 	/* if we are using journalled quota */
-@@ -2212,13 +2203,10 @@ static int f2fs_dquot_mark_dquot_dirty(struct dquot *dquot)
- static int f2fs_dquot_commit_info(struct super_block *sb, int type)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
--	int ret;
-+	int ret = dquot_commit_info(sb, type);
- 
--	down_read(&sbi->quota_sem);
--	ret = dquot_commit_info(sb, type);
- 	if (ret < 0)
- 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
--	up_read(&sbi->quota_sem);
- 	return ret;
- }
- 
+ 		up_write(&F2FS_I(inode)->i_mmap_sem);
+ 		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
 -- 
 2.19.0.605.g01d371f741-goog
 
