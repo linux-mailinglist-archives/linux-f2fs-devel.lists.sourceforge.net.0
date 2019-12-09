@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E29181179A4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 23:46:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 026E11179A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Dec 2019 23:49:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ieRnQ-0005vn-S7; Mon, 09 Dec 2019 22:46:28 +0000
+	id 1ieRpz-0000YD-Kw; Mon, 09 Dec 2019 22:49:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ieRnP-0005ve-75
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:46:27 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ieRpx-0000Xl-Iw
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:49:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U40sVV4frHjBOQ+84CrHwqht9K36XVfTUFq39yidIks=; b=MOHAqJI6UbJX+vDerF42Tla4PO
- 0kGw9/qdcYyZgU2n1CE7MXlBwfUFFoQwd5F9qhKsNWSjjAEXmwpv35B/Ku3UWAwoH8FVE5G84htuF
- b8gL3PKPFk1dRDu9Hw0K501bpzeUZZdrfjSsPpcc7O9fhgcusYeOVTr+mgGKGgWlUOg8=;
+ bh=LVby8X28eFaqy7Yu01zabxXJBrTWs/eVcA7xU+aPgz4=; b=LhHisQOgMsfX76W/JNTi1wCuEV
+ wZ8dnpzo+WV4kuzQSQV3j37AizdTgwVNiaeSIxKRyDWBRffDC3Q0WoBJeD1j8jzvEH3OkN0dUTEGs
+ YJ75WfpCIqY7zoJRJJ5XiIO8uUzz24Jz23qK7wIjKgkw9uZc8jW0wNumEKH5EFdOxCJo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=U40sVV4frHjBOQ+84CrHwqht9K36XVfTUFq39yidIks=; b=jcO2362WRqgEbf8VvnS+CtQ8m/
- b8K5U22LGOKZNnnnENQHlNuc1pz6peTlCZwknIUvxR4Y1qhLzfcfXBVgWVG0x6nIeYTh045j08kHk
- jm4nJXxTQTKrmRFS2TVssgEhoPcO/m3WN75w+sSnKXpOmrE6NeX1FpmYP70FTjLosxjE=;
+ bh=LVby8X28eFaqy7Yu01zabxXJBrTWs/eVcA7xU+aPgz4=; b=Aaj43quuZ/qEbRCQkQvWEwxg6b
+ P+fDd5A2jEK1J6N26zfmauI1ITT1+BIWhuLcbJzP2qEQki2sMKl5/vNefi4z3xX5LZV8aOyWnIXFz
+ N3MB2ohuIjTNaiyphKTlvT4QBn9K6pBbddE1bbGNy4BA58PUXEuS24qAF++UGXxtCTqY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ieRnO-00Fvxa-0P
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:46:27 +0000
+ id 1ieRpw-00Fw5s-7J
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Dec 2019 22:49:05 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5788D206E0;
- Mon,  9 Dec 2019 22:46:20 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9B30B206E0;
+ Mon,  9 Dec 2019 22:48:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1575931580;
- bh=0AgztB5XCqmGtl8eo6+glDUwMI+RvTnl2/qdjaplZQ8=;
+ s=default; t=1575931738;
+ bh=vH/farJSG9hZlw716Zi6z129RFHZDQbeYF7NgRiLsNw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WqkalGHrgltNsOu6+hiuv7xTH0WqWn5oPt/Bt4UEfu7WAR5nfOE2X3jZ7ekt7/4iC
- 3p86DBIKDQVKGwmsEEe/Q/NVB3PgSZbMAqWY1VseDYAAbQY8W2a4qEFdYCHpnuqmdg
- u1JY2+2DkYPpxe8dAUlgyiFGcibHsrapA6Ai4XjE=
-Date: Mon, 9 Dec 2019 14:46:15 -0800
+ b=m2OuwtQVogLLsogmcxJG4JtV7InjbGD1Bfo85gKPBONLaJs02fww+Yx/uZUV8UcqM
+ VrcMJr9GuaK8C0gxNcijjyJncvI6T3r8Soq2BdetO55jVSvDK9kwZ/q2+xJnELZj8x
+ a/mRBEyRkThfDm9iC4DjUlSLoriKTfZIlvPwboRQ=
+Date: Mon, 9 Dec 2019 14:48:57 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Ju Hyung Park <qkrwngud825@gmail.com>
-Message-ID: <20191209224615.GB798@jaegeuk-macbookpro.roam.corp.google.com>
-References: <CAD14+f0rw8wUBsN9Cs3Nrp03g40qOk_7AnrOiVSN98d5Ec7PsQ@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20191209224857.GC798@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20191209200055.204040-1-ebiggers@kernel.org>
+ <20191209222828.GA798@jaegeuk-macbookpro.roam.corp.google.com>
+ <20191209224051.GF149190@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAD14+f0rw8wUBsN9Cs3Nrp03g40qOk_7AnrOiVSN98d5Ec7PsQ@mail.gmail.com>
+In-Reply-To: <20191209224051.GF149190@gmail.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -69,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ieRnO-00Fvxa-0P
-Subject: Re: [f2fs-dev] f2fs: How should I use the defragmentation tools?
+X-Headers-End: 1ieRpw-00Fw5s-7J
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't keep META_MAPPING pages used for
+ moving verity file blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,85 +85,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fscrypt@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Ju Hyung,
-
-On 12/10, Ju Hyung Park wrote:
-> Hi everyone.
+On 12/09, Eric Biggers wrote:
+> On Mon, Dec 09, 2019 at 02:28:28PM -0800, Jaegeuk Kim wrote:
+> > On 12/09, Eric Biggers wrote:
+> > > From: Eric Biggers <ebiggers@google.com>
+> > > 
+> > > META_MAPPING is used to move blocks for both encrypted and verity files.
+> > > So the META_MAPPING invalidation condition in do_checkpoint() should
+> > > consider verity too, not just encrypt.
+> > > 
+> > > Signed-off-by: Eric Biggers <ebiggers@google.com>
+> > > ---
+> > >  fs/f2fs/checkpoint.c | 6 +++---
+> > >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> > > index ffdaba0c55d29..44e84ac5c9411 100644
+> > > --- a/fs/f2fs/checkpoint.c
+> > > +++ b/fs/f2fs/checkpoint.c
+> > > @@ -1509,10 +1509,10 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+> > >  	f2fs_wait_on_all_pages_writeback(sbi);
+> > >  
+> > >  	/*
+> > > -	 * invalidate intermediate page cache borrowed from meta inode
+> > > -	 * which are used for migration of encrypted inode's blocks.
+> > > +	 * invalidate intermediate page cache borrowed from meta inode which are
+> > > +	 * used for migration of encrypted or verity inode's blocks.
+> > >  	 */
+> > > -	if (f2fs_sb_has_encrypt(sbi))
+> > > +	if (f2fs_sb_has_encrypt(sbi) || f2fs_sb_has_verity(sbi))
+> > 
+> > Do we need f2fs_post_read_required() aligned to the condition of
+> > move_data_block()?
+> > 
 > 
-> I've had interests in defragging f2fs for a long time now.
+> I think you're asking why verity files have to be moved via META_MAPPING?  The
+> reason is that we have to be super careful not to read pages of a verity file
+> into its own address_space without doing the fs-verity data verification, as
+> then unverified data would be available to userspace.
 > 
-> https://www.usenix.org/system/files/conference/atc17/atc17-hahn.pdf
-> This paper proves that defragmentation caused from the filesystem
-> takes a big portion of performance degradation.
-> (It'd be interesting to see whether f2fs would behave differently from
-> ext4 in terms of fragmentation.)
-> 
-> While doing defragmentation on a production device currently poses a
-> lot of practicality issues, I'd still like to try them out for
-> educational purposes.
-> 
-> However, I'm still not sure how to do defragmentation while f2fs
-> having 2 tools for that purpose.
-> 
-> 1. Is either of `defrag.f2fs` or `f2fs_io defrag_file` meant to be
-> feature-parity with e4defrag?
+> In theory, F2FS's garbage collector could do the data verification.  But it's
+> tricky because ->i_verity_info may not have been set up yet.  So it might be
+> easiest to continue to treat verity files like encrypted files.
 
-The defrag.f2fs is a tool to conduct runtime GC in user land,. IOWs, it'll
-migrate source range of blocks to target range of blocks directionally.
-OTOH, f2fs_io defrag_file is runtime ioctl to gather allocated blocks
-given file descriptor, which is more like e4defrag, IIUC.
-
-> 
-> 2. What's the expected output from `defrag.f2fs` and `f2fs_io
-> defrag_file`? I'd like to get example outputs from you guys for me to
-> compare.
-
-The defrag.f2fs will reduce # of dirty segments. The f2fs_io defrag_file will
-arrange more consecutive blocks allocated to the file; it doesn't guarantee
-whole blocks are sequential explicitly since it reads and writes back shortly
-to get spatial locality.
-
-> 
-> 3. Is `defrag.f2fs` and `f2fs_io defrag_file` tested thoroughly?
-> Should I expect any potential corruptions from running these?
-
-The defrag.f2fs uses part of block migration flow which was used for sload.f2fs,
-while f2fs_io defrag_file uses general writeback. So, the risk would be small.
-
-> 
-> 4. `defrag.f2fs` seems to only work on an unmounted block device.
-> What's the intended use-case scenario for this? I'm assuming running
-> `defrag.f2fs` and feeding the entire block length to -l is not how
-> it's meant to be used.
-
-It gives a way to decrease # of dirty segments.
+I meant to ask why not just checking f2fs_post_read_required() here so that we
+could sync the check across multiple places.
 
 > 
-> 5. Why did you make it mandatory for the users to supply the lengths
-> to `f2fs_io defrag_file`? Is it any practical to defrag a part of a
-> file?
-
-Yup.
-
-> 
-> 6. How exactly should I run `f2fs_io defrag_file`? My following
-> attempts failed with -EINVAL:
-
-Is this cold file by ".pdf"?
-
-> # ls -al session-02.pdf
-> -rw-rw-r--. 1 1023 1023 30517375 Nov  7 21:10 session-02.pdf
-> # f2fs_io defrag_file 0 30517375 session-02.pdf
-> F2FS_IOC_DEFRAGMENT failed: Invalid argument
-> # f2fs_io defrag_file 0 1048576 session-02.pdf
-> F2FS_IOC_DEFRAGMENT failed: Invalid argument
-> 
-> Thanks.
+> - Eric
 
 
 _______________________________________________
