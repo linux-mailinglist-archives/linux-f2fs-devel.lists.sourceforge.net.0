@@ -2,60 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63769118E16
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Dec 2019 17:47:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B82B0118FDF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Dec 2019 19:37:01 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ieifa-0000MR-JY; Tue, 10 Dec 2019 16:47:30 +0000
+	id 1iekNX-0004b3-4M; Tue, 10 Dec 2019 18:36:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ieifY-0000MK-VY
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Dec 2019 16:47:28 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iekNW-0004ax-6y
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Dec 2019 18:36:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M4lcrc5DrweqodnFAHSuBTS76E1iYDR4q7crma5mCsA=; b=Ac/zwPYsjsVIre4vnXgLie2539
- kcO3JUTPjrAhxyi4KGNGtA2fAINsFPJUuB+wgfCb5bkqTvaI1z2R04RVJYFu64XkHjs5FhxyanvS/
- eAJ605D4afxolUEHAKIVtkv99T0D3MXq6If2ptGdPjG9/tSyzi9OLsvDL+/s8BTvgSFk=;
+ bh=UFrHfxabwpgDr6ZTat0m4Nbfg3bAuXlfpEBY/aWl/TM=; b=GQYrYH+yiRlsgdytoqxerRIgew
+ ZNOUe5zZzZSdLz9iDVk4ZZGTYig+V1nv6n7OkN9ssaOHDL2klqBSJuJlJgjTme88+19hP7gn+TBrs
+ MQ0jBpU8HGx1/xY7155K+BBeKv8K9+yEbN3JfDcKxNa6RRNjyezn+Bb2ss6KBoNcLDys=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=M4lcrc5DrweqodnFAHSuBTS76E1iYDR4q7crma5mCsA=; b=h
- l6U7w3FKQCZvddbSFH3EbJMH7wQEvyjDmU3J+GBickJNFjX25pbyOGb/Y0LPV1TS+okMmIYa5rQyA
- 85dPFFgVXRgRcK38vzG9kPJA6r0GXjyT+VCNonb3JLuTJZYqFo7F7VnX+nHFblzNAbMIcwXcJTZ77
- 5NqkhPJoENCgLpOU=;
+ List-Owner:List-Archive; bh=UFrHfxabwpgDr6ZTat0m4Nbfg3bAuXlfpEBY/aWl/TM=; b=H
+ 9IuIfGC3nUMgqA2531+KaUgApuuY8iq7UB36L3V+iXI8lf2tD7nVVSNYOY6K4JPzSOY2ESNkck2GH
+ yJ5q0+GtrGUks5m6Km/uF7OgkiKTHlnKZdrwkHhxlCQcmoEVIdgrnGnLrSo7mt+nWzT8LzRiSTLFn
+ 9nja66A7rLAc6grE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ieifX-00H4a8-1n
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Dec 2019 16:47:28 +0000
-Received: from localhost (unknown [104.132.0.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1iekNU-00HMhs-Qr
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Dec 2019 18:36:58 +0000
+Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
+ [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7BF5F2073D;
- Tue, 10 Dec 2019 16:47:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1A67E20663;
+ Tue, 10 Dec 2019 18:36:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1575996436;
- bh=yia4s4T4uFLZ4+ZsPwBrkJa7O/oPqeS0+xN3aZuOJ88=;
+ s=default; t=1576003011;
+ bh=CgasdbtH3xcl2z0h0Kpxvo4k9RsFdfEY7tZI8ubO6AQ=;
  h=From:To:Cc:Subject:Date:From;
- b=S5JrzyK8Pd1kO9a0OCW29ruC1DaTAqZ5szpbp7lgjakm8yRU1RpewJF4o7zk4tE0G
- pquINkboXV7bDL9zwijRV7gQKsLVT+PHgWP/Yuxjxg/IBoPiDfA3Lv+Wy1ssDluSMt
- uowrPbW7OvFrnu+NpgmoWT/k91ZVqRMUJXh31GDY=
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 10 Dec 2019 08:47:15 -0800
-Message-Id: <20191210164715.28281-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.19.0.605.g01d371f741-goog
+ b=ts1eFIaCmEokD3v+0sQE0NtgVgt/X5zZLcd9pI3yGGnUswABOG3RZYDVAbecNOLmx
+ 3kGiziH/g0I4/WoG7RleYTRs+8LdQoKhgnbU8RFJGDxY/4tF5zocNPLn+9P7AmUMNS
+ ujUUOLf7E+IUcjSx3Vdv3wideomXuC3rtn0EvyTQ=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Tue, 10 Dec 2019 10:35:31 -0800
+Message-Id: <20191210183531.179836-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.24.0.525.g8f36a354ae-goog
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -66,9 +67,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1ieifX-00H4a8-1n
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: do not access nat etnries in ckpt
- before initialization
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iekNU-00HMhs-Qr
+Subject: [f2fs-dev] [PATCH v2] fs-verity: implement readahead for
+ FS_IOC_ENABLE_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,47 +82,161 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Victor Hsieh <victorhsieh@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-ckpt->entries is initialized by fsck_init(), but we tried to access it during
-f2fs_do_mount().
+From: Eric Biggers <ebiggers@google.com>
 
-The call sequence is:
- - f2fs_do_mount
-  - record_fsync_data
-    - traverse_dnodes
-     - do_record_fsync_data
-      - ADDRS_PER_PAGE
-       - get_node_info
-        - node_info_from_raw_nat(fsck->entries[nid])
- - do_fsck
-  - fsck_init
-   - build_nat_area_bitmap
-    - fsck->entries = calloc(fsck->nr_nat_entries);
+When it builds the first level of the Merkle tree, FS_IOC_ENABLE_VERITY
+sequentially reads each page of the file using read_mapping_page().
+This works fine if the file's data is already in pagecache, which should
+normally be the case, since this ioctl is normally used immediately
+after writing out the file.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+But in any other case this implementation performs very poorly, since
+only one page is read at a time.
+
+Fix this by implementing readahead using the functions from
+mm/readahead.c.
+
+This improves performance in the uncached case by about 20x, as seen in
+the following benchmarks done on a 250MB file (on x86_64 with SHA-NI):
+
+    FS_IOC_ENABLE_VERITY uncached (before) 3.299s
+    FS_IOC_ENABLE_VERITY uncached (after)  0.160s
+    FS_IOC_ENABLE_VERITY cached            0.147s
+    sha256sum uncached                     0.191s
+    sha256sum cached                       0.145s
+
+Note: we could instead switch to kernel_read().  But that would mean
+we'd no longer be hashing the data directly from the pagecache, which is
+a nice optimization of its own.  And using kernel_read() would require
+allocating another temporary buffer, hashing the data and tree pages
+separately, and explicitly zero-padding the last page -- so it wouldn't
+really be any simpler than direct pagecache access, at least for now.
+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fsck/mount.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fsck/mount.c b/fsck/mount.c
-index 47fe488..475ef67 100644
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -2139,7 +2139,7 @@ void get_node_info(struct f2fs_sb_info *sbi, nid_t nid, struct node_info *ni)
- 	struct f2fs_nat_entry raw_nat;
+Changed v1 => v2:
+- Only do sync readahead when the page wasn't found in the pagecache at all.
+- Use ->f_mapping so that the inode doesn't have to be passed.
+
+
+ fs/verity/enable.c | 45 +++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 39 insertions(+), 6 deletions(-)
+
+diff --git a/fs/verity/enable.c b/fs/verity/enable.c
+index eabc6ac199064..60e74dc9c242a 100644
+--- a/fs/verity/enable.c
++++ b/fs/verity/enable.c
+@@ -13,13 +13,42 @@
+ #include <linux/sched/signal.h>
+ #include <linux/uaccess.h>
  
- 	ni->nid = nid;
--	if (c.func == FSCK) {
-+	if (c.func == FSCK && F2FS_FSCK(sbi)->nr_nat_entries) {
- 		node_info_from_raw_nat(ni, &(F2FS_FSCK(sbi)->entries[nid]));
- 		if (ni->blk_addr)
- 			return;
+-static int build_merkle_tree_level(struct inode *inode, unsigned int level,
++/*
++ * Read a file data page for Merkle tree construction.  Do aggressive readahead,
++ * since we're sequentially reading the entire file.
++ */
++static struct page *read_file_data_page(struct file *filp, pgoff_t index,
++					struct file_ra_state *ra,
++					unsigned long remaining_pages)
++{
++	struct page *page;
++
++	page = find_get_page(filp->f_mapping, index);
++	if (!page || !PageUptodate(page)) {
++		if (page)
++			put_page(page);
++		else
++			page_cache_sync_readahead(filp->f_mapping, ra, filp,
++						  index, remaining_pages);
++		page = read_mapping_page(filp->f_mapping, index, NULL);
++		if (IS_ERR(page))
++			return page;
++	}
++	if (PageReadahead(page))
++		page_cache_async_readahead(filp->f_mapping, ra, filp, page,
++					   index, remaining_pages);
++	return page;
++}
++
++static int build_merkle_tree_level(struct file *filp, unsigned int level,
+ 				   u64 num_blocks_to_hash,
+ 				   const struct merkle_tree_params *params,
+ 				   u8 *pending_hashes,
+ 				   struct ahash_request *req)
+ {
++	struct inode *inode = file_inode(filp);
+ 	const struct fsverity_operations *vops = inode->i_sb->s_vop;
++	struct file_ra_state ra = { 0 };
+ 	unsigned int pending_size = 0;
+ 	u64 dst_block_num;
+ 	u64 i;
+@@ -36,6 +65,8 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
+ 		dst_block_num = 0; /* unused */
+ 	}
+ 
++	file_ra_state_init(&ra, filp->f_mapping);
++
+ 	for (i = 0; i < num_blocks_to_hash; i++) {
+ 		struct page *src_page;
+ 
+@@ -45,7 +76,8 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
+ 
+ 		if (level == 0) {
+ 			/* Leaf: hashing a data block */
+-			src_page = read_mapping_page(inode->i_mapping, i, NULL);
++			src_page = read_file_data_page(filp, i, &ra,
++						       num_blocks_to_hash - i);
+ 			if (IS_ERR(src_page)) {
+ 				err = PTR_ERR(src_page);
+ 				fsverity_err(inode,
+@@ -103,17 +135,18 @@ static int build_merkle_tree_level(struct inode *inode, unsigned int level,
+ }
+ 
+ /*
+- * Build the Merkle tree for the given inode using the given parameters, and
++ * Build the Merkle tree for the given file using the given parameters, and
+  * return the root hash in @root_hash.
+  *
+  * The tree is written to a filesystem-specific location as determined by the
+  * ->write_merkle_tree_block() method.  However, the blocks that comprise the
+  * tree are the same for all filesystems.
+  */
+-static int build_merkle_tree(struct inode *inode,
++static int build_merkle_tree(struct file *filp,
+ 			     const struct merkle_tree_params *params,
+ 			     u8 *root_hash)
+ {
++	struct inode *inode = file_inode(filp);
+ 	u8 *pending_hashes;
+ 	struct ahash_request *req;
+ 	u64 blocks;
+@@ -139,7 +172,7 @@ static int build_merkle_tree(struct inode *inode,
+ 	blocks = (inode->i_size + params->block_size - 1) >>
+ 		 params->log_blocksize;
+ 	for (level = 0; level <= params->num_levels; level++) {
+-		err = build_merkle_tree_level(inode, level, blocks, params,
++		err = build_merkle_tree_level(filp, level, blocks, params,
+ 					      pending_hashes, req);
+ 		if (err)
+ 			goto out;
+@@ -227,7 +260,7 @@ static int enable_verity(struct file *filp,
+ 	 */
+ 	pr_debug("Building Merkle tree...\n");
+ 	BUILD_BUG_ON(sizeof(desc->root_hash) < FS_VERITY_MAX_DIGEST_SIZE);
+-	err = build_merkle_tree(inode, &params, desc->root_hash);
++	err = build_merkle_tree(filp, &params, desc->root_hash);
+ 	if (err) {
+ 		fsverity_err(inode, "Error %d building Merkle tree", err);
+ 		goto rollback;
 -- 
-2.19.0.605.g01d371f741-goog
+2.24.0.525.g8f36a354ae-goog
 
 
 
