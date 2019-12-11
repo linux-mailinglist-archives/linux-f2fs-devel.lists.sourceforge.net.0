@@ -2,72 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 291A911A09E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Dec 2019 02:42:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5DFC11A148
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Dec 2019 03:20:47 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ier18-0001wE-9X; Wed, 11 Dec 2019 01:42:18 +0000
+	id 1iercK-00037U-96; Wed, 11 Dec 2019 02:20:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1ier16-0001w6-3K
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 01:42:16 +0000
+ (envelope-from <yangtiezhu@loongson.cn>) id 1iercI-00037J-KY
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 02:20:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3YkFOPfC9ZPn4bHmSnr4ZXE3klr8U/RVlI0Vnj/L6Ew=; b=brOj2iHoLP7izTMOA8mkq1gfsk
- jvFy4A02NiFLBywwet4hA74WLjmQ3m2xHmwqjCKP9DJ1k+5687KOwbwXY+smUBSAtAObtTDtR8zXK
- YmyPTWJxpaCot3AJNjH5yU7GW9iP3ctfvAlq8Xvq3Gtb+A4QIzxrmpxnyJSDzScx3gcM=;
+ bh=inxcWkdFZRSnYtx37zTuksEzmne8zm5rffLkk9auTP8=; b=mqDkOKOAFyr51hAM8eU34fP3To
+ qqUSji0w0SjgjuIAtLdJBNIgpGA3xccWHeSg5j7EmuogyF5wjnXmwWC66folBEYBZR6TVKS2FqXKo
+ eXy+95Mmwp+7NeeyKLEfgzhq3Tk6NIAXuU7u3xosxJAJR4rBmKRplk/8xObkydlWZXKw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3YkFOPfC9ZPn4bHmSnr4ZXE3klr8U/RVlI0Vnj/L6Ew=; b=nNi9Ue/9Vd6hjpyzGAzBLuwi8w
- IqSdUOiN/CD3frDd+skAMeXdaaw2HQrgIlmXaKPspSAnyRif3Efbvi8w7yFs40gdTJW2iUVhsYo0l
- cVRBsvsGUY899v4D4pzovbUtskrlNGMkosDZl2Wwu9XJ1FOdxwVz6LLi+muc69TgxTso=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ier13-000T0z-Lb
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 01:42:16 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id D323C4F4F6E34CA96FF6;
- Wed, 11 Dec 2019 09:42:03 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 11 Dec
- 2019 09:42:01 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20191209222345.1078-1-jaegeuk@kernel.org>
- <20191209222345.1078-6-jaegeuk@kernel.org>
- <88dcbca9-3757-a440-ed73-9d99a56b816c@huawei.com>
- <20191211012121.GA52962@jaegeuk-macbookpro.roam.corp.google.com>
- <00ced682-9522-236d-4078-4c8f2e348d39@huawei.com>
- <20191211013124.GB57416@jaegeuk-macbookpro.roam.corp.google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <dd2021ff-6968-43ad-d8b2-3689668cd79e@huawei.com>
-Date: Wed, 11 Dec 2019 09:42:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20191211013124.GB57416@jaegeuk-macbookpro.roam.corp.google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ bh=inxcWkdFZRSnYtx37zTuksEzmne8zm5rffLkk9auTP8=; b=JQvgd9SFSu/+9NJqNUuN6eu6Ws
+ Pjdl6ZTb44R8OHJEbeWwhV6jYxhBEEYFvEUA6iVan6CWqiANY61She9NrutJUkMx3FgmTmyRxg4N4
+ 6wYIa4F5bKFpSaiYc0xcuDRneiIxKGt/DDx5JSBBxPmnximxpAsBDycOIGJy3yFef/Cs=;
+Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1iercF-000fsf-RE
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 02:20:42 +0000
+Received: from linux.localdomain (unknown [123.138.236.242])
+ by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxrxdqUvBdi2oJAA--.59S2;
+ Wed, 11 Dec 2019 10:20:26 +0800 (CST)
+From: Tiezhu Yang <yangtiezhu@loongson.cn>
+To: Alexander Viro <viro@zeniv.linux.org.uk>,
+ "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Chao Yu <yuchao0@huawei.com>, Eric Biggers <ebiggers@kernel.org>,
+ Tyler Hicks <tyhicks@canonical.com>
+Date: Wed, 11 Dec 2019 10:20:01 +0800
+Message-Id: <1576030801-8609-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf9DxrxdqUvBdi2oJAA--.59S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtF18ZF4rZrW5Jw1ftrW3GFg_yoW7Zr4UpF
+ sxJF97trs7GryY9r95tr1fCr1Yv3s7Wr17GrZxGa4vy34aqrn5XrWIvry09wn3JFWDX3Z0
+ ga98G34rCFy5JFJanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPEb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4
+ vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAaw2AFwI0_Jrv_JF1le2I262IYc4CY6c8Ij28I
+ cVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx
+ 0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwAC
+ I402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxVWUAVWUtwCY02Avz4vE14v_Gr1l42
+ xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jrv_JF1l
+ x2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14
+ v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IY
+ x2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I
+ 8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73
+ UjIFyTuYvjxUgwSlUUUUU
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: disk_name.name]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1ier13-000T0z-Lb
-Subject: Re: [f2fs-dev] [PATCH 6/6] f2fs: set I_LINKABLE early to avoid
- wrong access by vfs
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iercF-000fsf-RE
+Subject: [f2fs-dev] [PATCH v5] fs: introduce is_dot_or_dotdot helper for
+ cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,179 +90,203 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ ecryptfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/12/11 9:31, Jaegeuk Kim wrote:
-> On 12/11, Chao Yu wrote:
->> On 2019/12/11 9:21, Jaegeuk Kim wrote:
->>> On 12/10, Chao Yu wrote:
->>>> On 2019/12/10 6:23, Jaegeuk Kim wrote:
->>>>> This patch moves setting I_LINKABLE early in rename2(whiteout) to avoid the
->>>>> below warning.
->>>>>
->>>>> [ 3189.163385] WARNING: CPU: 3 PID: 59523 at fs/inode.c:358 inc_nlink+0x32/0x40
->>>>> [ 3189.246979] Call Trace:
->>>>> [ 3189.248707]  f2fs_init_inode_metadata+0x2d6/0x440 [f2fs]
->>>>> [ 3189.251399]  f2fs_add_inline_entry+0x162/0x8c0 [f2fs]
->>>>> [ 3189.254010]  f2fs_add_dentry+0x69/0xe0 [f2fs]
->>>>> [ 3189.256353]  f2fs_do_add_link+0xc5/0x100 [f2fs]
->>>>> [ 3189.258774]  f2fs_rename2+0xabf/0x1010 [f2fs]
->>>>> [ 3189.261079]  vfs_rename+0x3f8/0xaa0
->>>>> [ 3189.263056]  ? tomoyo_path_rename+0x44/0x60
->>>>> [ 3189.265283]  ? do_renameat2+0x49b/0x550
->>>>> [ 3189.267324]  do_renameat2+0x49b/0x550
->>>>> [ 3189.269316]  __x64_sys_renameat2+0x20/0x30
->>>>> [ 3189.271441]  do_syscall_64+0x5a/0x230
->>>>> [ 3189.273410]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
->>>>> [ 3189.275848] RIP: 0033:0x7f270b4d9a49
->>>>>
->>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>>> ---
->>>>>  fs/f2fs/namei.c | 27 +++++++++++++--------------
->>>>>  1 file changed, 13 insertions(+), 14 deletions(-)
->>>>>
->>>>> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
->>>>> index a1c507b0b4ac..5d9584281935 100644
->>>>> --- a/fs/f2fs/namei.c
->>>>> +++ b/fs/f2fs/namei.c
->>>>> @@ -797,6 +797,7 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
->>>>>  
->>>>>  	if (whiteout) {
->>>>>  		f2fs_i_links_write(inode, false);
->>>>> +		inode->i_state |= I_LINKABLE;
->>>>>  		*whiteout = inode;
->>>>>  	} else {
->>>>>  		d_tmpfile(dentry, inode);
->>>>> @@ -867,6 +868,12 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  			F2FS_I(old_dentry->d_inode)->i_projid)))
->>>>>  		return -EXDEV;
->>>>>  
->>>>> +	if (flags & RENAME_WHITEOUT) {
->>>>> +		err = f2fs_create_whiteout(old_dir, &whiteout);
->>>>> +		if (err)
->>>>> +			return err;
->>>>> +	}
->>>>
->>>> To record quota info correctly, we need to create whiteout inode after
->>>> dquot_initialize(old_dir)?
->>>
->>> __f2fs_tmpfile() will do it.
->>
->> Okay.
->>
->> Any comments on below question?
->>
->>>
->>>>
->>>>> +
->>>>>  	err = dquot_initialize(old_dir);
->>>>>  	if (err)
->>>>>  		goto out;
->>>>> @@ -898,17 +905,11 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  		}
->>>>>  	}
->>>>>  
->>>>> -	if (flags & RENAME_WHITEOUT) {
->>>>> -		err = f2fs_create_whiteout(old_dir, &whiteout);
->>>>> -		if (err)
->>>>> -			goto out_dir;
->>>>> -	}
->>>>> -
->>>>>  	if (new_inode) {
->>>>>  
->>>>>  		err = -ENOTEMPTY;
->>>>>  		if (old_dir_entry && !f2fs_empty_dir(new_inode))
->>>>> -			goto out_whiteout;
->>>>> +			goto out_dir;
->>>>>  
->>>>>  		err = -ENOENT;
->>>>>  		new_entry = f2fs_find_entry(new_dir, &new_dentry->d_name,
->>>>> @@ -916,7 +917,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  		if (!new_entry) {
->>>>>  			if (IS_ERR(new_page))
->>>>>  				err = PTR_ERR(new_page);
->>>>> -			goto out_whiteout;
->>>>> +			goto out_dir;
->>>>>  		}
->>>>>  
->>>>>  		f2fs_balance_fs(sbi, true);
->>>>> @@ -948,7 +949,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  		err = f2fs_add_link(new_dentry, old_inode);
->>>>>  		if (err) {
->>>>>  			f2fs_unlock_op(sbi);
->>>>> -			goto out_whiteout;
->>>>> +			goto out_dir;
->>>>>  		}
->>>>>  
->>>>>  		if (old_dir_entry)
->>>>> @@ -972,7 +973,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  				if (IS_ERR(old_page))
->>>>>  					err = PTR_ERR(old_page);
->>>>>  				f2fs_unlock_op(sbi);
->>>>> -				goto out_whiteout;
->>>>> +				goto out_dir;
->>>>>  			}
->>>>>  		}
->>>>>  	}
->>>>> @@ -991,7 +992,6 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  	f2fs_delete_entry(old_entry, old_page, old_dir, NULL);
->>>>>  
->>>>>  	if (whiteout) {
->>>>> -		whiteout->i_state |= I_LINKABLE;
->>>>>  		set_inode_flag(whiteout, FI_INC_LINK);
->>>>>  		err = f2fs_add_link(old_dentry, whiteout);
->>>>
->>>> [ 3189.256353]  f2fs_do_add_link+0xc5/0x100 [f2fs]
->>>> [ 3189.258774]  f2fs_rename2+0xabf/0x1010 [f2fs]
->>>>
->>>> Does the call stack point here? if so, we have set I_LINKABLE before
->>>> f2fs_add_link(), why the warning still be triggered?
->>
->> Am I missing something?
-> 
-> Not sure exactly tho, I suspect some races before/after unlock_new_inode().
+There exists many similar and duplicate codes to check "." and "..",
+so introduce is_dot_or_dotdot helper to make the code more clean.
 
-Alright, I doubt some races on whiteout->i_state updating, as we set I_LINKABLE
-w/o holding inode.i_lock.
+Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
+---
 
-Could you have a try with holding i_lock?
+v5:
+  - remove "qname" variable in fscrypt_fname_disk_to_usr()
+  - modify "len < 2" to "len == 1" in is_dot_or_dotdot()
 
-Thanks,
+v4:
+  - rename is_dot_dotdot() to is_dot_or_dotdot()
 
-> 
->>
->> Thanks,
->>
->>>>
->>>> Thanks,
->>>>
->>>>>  		if (err)
->>>>> @@ -1027,15 +1027,14 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
->>>>>  	f2fs_unlock_op(sbi);
->>>>>  	if (new_page)
->>>>>  		f2fs_put_page(new_page, 0);
->>>>> -out_whiteout:
->>>>> -	if (whiteout)
->>>>> -		iput(whiteout);
->>>>>  out_dir:
->>>>>  	if (old_dir_entry)
->>>>>  		f2fs_put_page(old_dir_page, 0);
->>>>>  out_old:
->>>>>  	f2fs_put_page(old_page, 0);
->>>>>  out:
->>>>> +	if (whiteout)
->>>>> +		iput(whiteout);
->>>>>  	return err;
->>>>>  }
->>>>>  
->>>>>
->>> .
->>>
-> .
-> 
+v3:
+  - use "name" and "len" as arguments instead of qstr
+  - move is_dot_dotdot() to include/linux/namei.h
+
+v2:
+  - use the better performance implementation of is_dot_dotdot
+  - make it static inline and move it to include/linux/fs.h
+
+ fs/crypto/fname.c     | 17 +++--------------
+ fs/ecryptfs/crypto.c  | 12 +-----------
+ fs/f2fs/f2fs.h        | 11 -----------
+ fs/f2fs/hash.c        |  3 ++-
+ fs/namei.c            |  6 ++----
+ include/linux/namei.h | 10 ++++++++++
+ 6 files changed, 18 insertions(+), 41 deletions(-)
+
+diff --git a/fs/crypto/fname.c b/fs/crypto/fname.c
+index 3da3707..bb41f5d 100644
+--- a/fs/crypto/fname.c
++++ b/fs/crypto/fname.c
+@@ -11,21 +11,11 @@
+  * This has not yet undergone a rigorous security audit.
+  */
+ 
++#include <linux/namei.h>
+ #include <linux/scatterlist.h>
+ #include <crypto/skcipher.h>
+ #include "fscrypt_private.h"
+ 
+-static inline bool fscrypt_is_dot_dotdot(const struct qstr *str)
+-{
+-	if (str->len == 1 && str->name[0] == '.')
+-		return true;
+-
+-	if (str->len == 2 && str->name[0] == '.' && str->name[1] == '.')
+-		return true;
+-
+-	return false;
+-}
+-
+ /**
+  * fname_encrypt() - encrypt a filename
+  *
+@@ -252,10 +242,9 @@ int fscrypt_fname_disk_to_usr(struct inode *inode,
+ 			const struct fscrypt_str *iname,
+ 			struct fscrypt_str *oname)
+ {
+-	const struct qstr qname = FSTR_TO_QSTR(iname);
+ 	struct fscrypt_digested_name digested_name;
+ 
+-	if (fscrypt_is_dot_dotdot(&qname)) {
++	if (is_dot_or_dotdot(iname->name, iname->len)) {
+ 		oname->name[0] = '.';
+ 		oname->name[iname->len - 1] = '.';
+ 		oname->len = iname->len;
+@@ -323,7 +312,7 @@ int fscrypt_setup_filename(struct inode *dir, const struct qstr *iname,
+ 	memset(fname, 0, sizeof(struct fscrypt_name));
+ 	fname->usr_fname = iname;
+ 
+-	if (!IS_ENCRYPTED(dir) || fscrypt_is_dot_dotdot(iname)) {
++	if (!IS_ENCRYPTED(dir) || is_dot_or_dotdot(iname->name, iname->len)) {
+ 		fname->disk_name.name = (unsigned char *)iname->name;
+ 		fname->disk_name.len = iname->len;
+ 		return 0;
+diff --git a/fs/ecryptfs/crypto.c b/fs/ecryptfs/crypto.c
+index f91db24..c3bcbf0 100644
+--- a/fs/ecryptfs/crypto.c
++++ b/fs/ecryptfs/crypto.c
+@@ -1991,16 +1991,6 @@ int ecryptfs_encrypt_and_encode_filename(
+ 	return rc;
+ }
+ 
+-static bool is_dot_dotdot(const char *name, size_t name_size)
+-{
+-	if (name_size == 1 && name[0] == '.')
+-		return true;
+-	else if (name_size == 2 && name[0] == '.' && name[1] == '.')
+-		return true;
+-
+-	return false;
+-}
+-
+ /**
+  * ecryptfs_decode_and_decrypt_filename - converts the encoded cipher text name to decoded plaintext
+  * @plaintext_name: The plaintext name
+@@ -2027,7 +2017,7 @@ int ecryptfs_decode_and_decrypt_filename(char **plaintext_name,
+ 
+ 	if ((mount_crypt_stat->flags & ECRYPTFS_GLOBAL_ENCRYPT_FILENAMES) &&
+ 	    !(mount_crypt_stat->flags & ECRYPTFS_ENCRYPTED_VIEW_ENABLED)) {
+-		if (is_dot_dotdot(name, name_size)) {
++		if (is_dot_or_dotdot(name, name_size)) {
+ 			rc = ecryptfs_copy_filename(plaintext_name,
+ 						    plaintext_name_size,
+ 						    name, name_size);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5a888a0..3d5e684 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2767,17 +2767,6 @@ static inline bool f2fs_cp_error(struct f2fs_sb_info *sbi)
+ 	return is_set_ckpt_flags(sbi, CP_ERROR_FLAG);
+ }
+ 
+-static inline bool is_dot_dotdot(const struct qstr *str)
+-{
+-	if (str->len == 1 && str->name[0] == '.')
+-		return true;
+-
+-	if (str->len == 2 && str->name[0] == '.' && str->name[1] == '.')
+-		return true;
+-
+-	return false;
+-}
+-
+ static inline bool f2fs_may_extent_tree(struct inode *inode)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
+index 5bc4dcd..ef155c2 100644
+--- a/fs/f2fs/hash.c
++++ b/fs/f2fs/hash.c
+@@ -15,6 +15,7 @@
+ #include <linux/cryptohash.h>
+ #include <linux/pagemap.h>
+ #include <linux/unicode.h>
++#include <linux/namei.h>
+ 
+ #include "f2fs.h"
+ 
+@@ -82,7 +83,7 @@ static f2fs_hash_t __f2fs_dentry_hash(const struct qstr *name_info,
+ 	if (fname && !fname->disk_name.name)
+ 		return cpu_to_le32(fname->hash);
+ 
+-	if (is_dot_dotdot(name_info))
++	if (is_dot_or_dotdot(name, len))
+ 		return 0;
+ 
+ 	/* Initialize the default seed for the hash checksum functions */
+diff --git a/fs/namei.c b/fs/namei.c
+index d6c91d1..f3a4439 100644
+--- a/fs/namei.c
++++ b/fs/namei.c
+@@ -2451,10 +2451,8 @@ static int lookup_one_len_common(const char *name, struct dentry *base,
+ 	if (!len)
+ 		return -EACCES;
+ 
+-	if (unlikely(name[0] == '.')) {
+-		if (len < 2 || (len == 2 && name[1] == '.'))
+-			return -EACCES;
+-	}
++	if (is_dot_or_dotdot(name, len))
++		return -EACCES;
+ 
+ 	while (len--) {
+ 		unsigned int c = *(const unsigned char *)name++;
+diff --git a/include/linux/namei.h b/include/linux/namei.h
+index 7fe7b87..0fd9315 100644
+--- a/include/linux/namei.h
++++ b/include/linux/namei.h
+@@ -92,4 +92,14 @@ retry_estale(const long error, const unsigned int flags)
+ 	return error == -ESTALE && !(flags & LOOKUP_REVAL);
+ }
+ 
++static inline bool is_dot_or_dotdot(const unsigned char *name, size_t len)
++{
++	if (unlikely(name[0] == '.')) {
++		if (len == 1 || (len == 2 && name[1] == '.'))
++			return true;
++	}
++
++	return false;
++}
++
+ #endif /* _LINUX_NAMEI_H */
+-- 
+2.1.0
+
 
 
 _______________________________________________
