@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 369C911ADFD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Dec 2019 15:41:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FBFB11ADFA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Dec 2019 15:41:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -13,15 +13,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	 bh=HBiqgRExdgcR85kjCtFHvyd/ybIgfoYeWn7F8hhh+eU=; b=GA6B6h6h+Ay5Z31CYwrv0umW1
 	gSN81XFPUppdIo0/4Tx48dGrN9mr3Fr1STMx2RzJMLxSjPNrmOADkiX3b4nELoI9RO9WixXZLYIp+
 	98GE96tSwIdxuqHObtu9orcYPQ5QUGz7z7K4TuF2I6VUDm4I/9tialh3VsIKN9JKPSJ7c=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1if3BG-00024X-Su; Wed, 11 Dec 2019 14:41:34 +0000
+	id 1if3BF-0003f4-8i; Wed, 11 Dec 2019 14:41:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1if3BE-00023z-BQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 14:41:32 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1if3BD-0003ew-L5
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 14:41:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -42,10 +42,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  sO3zZbsXZt/Z9PUyd+c6TIorrXOtpxH/9mNmuuaKnfsK18070Jg6+hEG5CahYI6EgxIQ5wXIVApzL
  K87bTzDIBLAG4GkrJ1pT0lfuMgT4kMbAsQzkLSh26NHA1Rl6wC/rC+8/eOojhS+B9YAA=;
 Received: from sonic316-54.consmr.mail.gq1.yahoo.com ([98.137.69.30])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1if3BB-001BJh-Iw
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 14:41:32 +0000
+ id 1if3BB-0010St-Im
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Dec 2019 14:41:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
  t=1576075283; bh=8NXnEgzl9Hn8ih6NVxBSO6w7sunPtWemBcwEu/MIQmY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
@@ -105,7 +105,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1if3BB-001BJh-Iw
+X-Headers-End: 1if3BB-0010St-Im
 Subject: Re: [f2fs-dev] [PATCH v5] fs: introduce is_dot_or_dotdot helper for
  cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
