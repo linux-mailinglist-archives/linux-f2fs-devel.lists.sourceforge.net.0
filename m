@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 371441203F1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Dec 2019 12:32:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEA8F120462
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Dec 2019 12:51:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1igoc3-0006eP-5S; Mon, 16 Dec 2019 11:32:31 +0000
+	id 1igouT-0006Wb-7Z; Mon, 16 Dec 2019 11:51:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <Markus.Elfring@web.de>) id 1igoc1-0006dw-67
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Dec 2019 11:32:29 +0000
+ (envelope-from <Markus.Elfring@web.de>) id 1igouR-0006WT-63
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Dec 2019 11:51:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:Subject:References:Cc:To:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s7s4dbULmgG+ebpWpCYlbjhdB0N/vaPW6ABo/EJP5W4=; b=exfEUgsvZ98bM4m+Pm8pI1FWlg
- uFlJfbgqVzr/6WhGIsG+YFTTwaaiPncVsYs7Dz7vO+SGkyrat0rK38j24hz3xsk+iyH7yIrdWHqDc
- LfmSNv3rB74ao+0sp8ByHnz09ur3q5vQ44p6gMMihMI4XsZl7+sOx9ulG6OexNkOWs3c=;
+ bh=ndoUJiN+5aboVDuM7327NMBR7hvKm462DVSZE8B0Ans=; b=Pv4WRrmHZJV8HOK2lC30dN6aAq
+ l/0INfMGFRmp3ky683HsEFDn3E7tA1CrkQw+vrjzfxdav5swFuj51rK279MwNwb5IGpZK7/AGzQmh
+ cWCPvJDeMyIYpP42XWWcpRlCL2i7jfU6eC3JmjBM/LV6cTer8VWTRBmjOGAXT2RwriUY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,25 +29,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=s7s4dbULmgG+ebpWpCYlbjhdB0N/vaPW6ABo/EJP5W4=; b=ev2SVQWY2N/SmgJ+8HamhM2EdJ
- /AMvTfZgvedQVi4iLpZK6+2PXmAhDNZjgsjoUqaY2UToqbMt31JD7OitgZ3BnV1Cak8dbh7EYJeIH
- iiZIpGrB1/r4qJGRzMNYsjRCnQcHVRqffnS/CAY41w8uHV9cGEWjxDxBtRX8dHgJa6S8=;
-Received: from mout.web.de ([217.72.192.78])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=ndoUJiN+5aboVDuM7327NMBR7hvKm462DVSZE8B0Ans=; b=EuzE0BcpjcJ28dgUb3l+CHavoS
+ 4lBfetXkiVFPmMLEooqSGoeWhZQjlhLzX1r4GZO1OucpQbEQP83PZrP1jYQIjANNasxKaVJOS46UE
+ y5RNwglDOjw4R7Inzajzs+x2ItLWOMC2NWXV/PPs46JNN/nEsmplJViCwkpb6dWFKyVE=;
+Received: from mout.web.de ([212.227.17.11])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1igobz-00EUDi-6q
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Dec 2019 11:32:29 +0000
+ id 1igouO-006jdb-4Y
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Dec 2019 11:51:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
- s=dbaedf251592; t=1576495930;
- bh=ScEN8n3GV+WMJgfH5FlVtKpqjsLsOHIgy5pLVHm/22g=;
+ s=dbaedf251592; t=1576497065;
+ bh=ndoUJiN+5aboVDuM7327NMBR7hvKm462DVSZE8B0Ans=;
  h=X-UI-Sender-Class:To:Cc:References:Subject:From:Date:In-Reply-To;
- b=Uk02i/mPN6wHepBgQQm5RBJeoOiV2O9+Xig6UE17gqutji+xUxBRsldobOydiYx1X
- L8kZ5qBy7EjJZYESZHiIprQISEiYXDT9jCV2CNZ5N4eYg4cE/++qKM0gSkdyxNsyVU
- g3Ev7W5su/RdRfSUbjKIhWAQidE8N/0Ay15IbO+s=
+ b=A9X5Cgq2Pkh0mReqgtNObXQcy1Pc8wscLZf5iRgLm79oqRFvRnhrXVBo5/gqaS06T
+ ROrulaszTvVgeWNmVSwL7yQuxMeIIPaoryfHuIhB4iARllBybjUMwk2NXx3tl6LWb2
+ uRCBdcVsO0YJQ3ANr8bnb23RPhPh35jEo9TsqWf8=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.3] ([78.48.181.202]) by smtp.web.de (mrweb103
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0MUW7T-1iFUBG48l1-00RIWn; Mon, 16
- Dec 2019 12:32:10 +0100
+Received: from [192.168.1.3] ([78.48.181.202]) by smtp.web.de (mrweb101
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 0MeBPe-1iLIyk3mJS-00PxR7; Mon, 16
+ Dec 2019 12:51:05 +0100
 To: Chao Yu <yuchao0@huawei.com>, linux-f2fs-devel@lists.sourceforge.net
 References: <20191216062806.112361-1-yuchao0@huawei.com>
 From: Markus Elfring <Markus.Elfring@web.de>
@@ -94,42 +94,44 @@ Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  Z/wsLiWTgKlih2QYULvW61XU+mWsK8+ZlYUrRMpkauN4CJ5yTpvp+Orcz5KixHQmc5tbkLWf
  x0n1QFc1xxJhbzN+r9djSGGN/5IBDfUqSANC8cWzHpWaHmSuU3JSAMB/N+yQjIad2ztTckZY
  pwT6oxng29LzZspTYUEzMz3wK2jQHw+U66qBFk8whA7B2uAU1QdGyPgahLYSOa4XAEGb6wbI FEE=
-Message-ID: <594c3b59-b6f0-0e87-6acb-04161e555d7e@web.de>
-Date: Mon, 16 Dec 2019 12:32:09 +0100
+Message-ID: <0ab8c593-d043-cdf6-7805-f7bceba8e519@web.de>
+Date: Mon, 16 Dec 2019 12:51:04 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.3.0
 MIME-Version: 1.0
 In-Reply-To: <20191216062806.112361-1-yuchao0@huawei.com>
 Content-Language: en-US
-X-Provags-ID: V03:K1:7pip56QvaNsPXkcUF8CD2nIcFfLq1yUdoc94D3eknuvUIUmZ5hl
- WreGNVq7+OTt1xYhZOGybwdZ0pv2os1vFLGY9W99loHzr7nGIgffrJfFVW1B8V1fN6DpfSA
- vEDtoTXCJLt5T4rMrmKozbBPct0r5sA9t3u/iHovH/JFigD0i9sTiWBv6aENcSSCS+LT4Kj
- 8RyYztQEvzLR1pomAn50w==
+X-Provags-ID: V03:K1:TT2NeFbpx2eiQdsSNVkS7oXx645G/9dhZoLvu1C0ikwBJllIAQn
+ s5j8zGinPPKV/saY+ou5HDd2cy2ozGqJa6SnhmmF2EHpKvI3SsMzu1gR0f7E6i/Bz7ED6TY
+ U4MXL05KptDHflyhRbJdoNqv6qZxLUqNq1F2mWZn8P32qSjSRsSphMaB13Xm+RP1aV+ye+Q
+ oI+QBNqrx56Nj7HpxqzuA==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:bEnQUXtpG2M=:o/KpONtZB0jc6lMeB5oAsl
- bUAdfrA07oALR0urToFJH9zI2tHnpMHCt1+fhkWb6dSjiJnSfZkW6t56QzBVuSd87vrCllvrB
- wMP6Xo3Wvt1dxqwFZeYgJAbMoLHhr+lx+XBQoccQNnWtU3b+2oLy3t/BgOkaSRxwdtmTbDpJu
- 1fvfQKWR1I2xcRpjyhrcE/Dmm9pYGWJHTLZRgYSU+8I8HGvihiehkw6u7TZ00Yq5/X5Jm0TXq
- yrszz+AICqdv/fIsRbfaf6okw5wF/e8vIN2zvP2jI8U+k4/HteWaWcoQKYzs3w4rVArYT27NF
- 6R8vPrZzyxbTSeiN0KzQyjC2a2K2tSZnesRyyjE9PpOvzaf5Oso9rAU+tQWeciBe5kavV9//o
- e7jMvb/N+E7FkWzMkKyfJacGkB0095y9yr9dNblOIjLUY6Gwi4FFqf86X+IlY8p8H5AX/dZEO
- 5xrRENSorKPwDmbUPy1gzbCqsLGZOy22ot/ROV0Ku/qS2pbJpK6any7FX5H6di+brSzu3UKRg
- e8le+GW5o7mAp/MBaoOZwzobPztJOLpS9q80z3iX5l0vuJIfFz6gmMy4qe3j4t+lZ+1W93j3a
- +o+cFe88OLgueltdCjq+171eMdKeZM37uJIfE7iVWIUnDx/ZsP67KOqudjhF77ujZbS3hP3nk
- A5aBDkXj74/NBM7k01MYpm5Z+TY0yMti27JYNH6EqqCHHY0nnKVVVzWLuPo2fW/vVcobq45J8
- 4cEEh7xWfgh9TMtstFKTGHGfC14PfCJB0ERFFi1mFgpodtzTt5aD3PGeWlv5MDxyOqIjOLMfn
- K7E+NReNCyGYBb4EkexNhmV444QD4ELdr9VY0gm9nKhWksa97KLsIA3wllvKWKN1vubF+14y9
- 5fwdNU0Jekc/6nTZ+fI+SDY2hF/YtFoBT1AMNmMDWrzF3cmudu/0CRxId0JsZ12BZtQOfNlif
- odL0HSCLJnbeXQzbK/u0Pxua+WfAqHTgqUFgYskqdM1/mpxr3E1UTYJkXbWugcRD49H+GcHzD
- BwbDPvRa6JT2fuYwVD4VFwdD5mrS9boaq3AOVd0ygPmGavDKdlXZ1Bptp+2YzRbH5cmMw9APN
- lBNJQnOmgBOa8fqO6Vx/VlkQwZ2ANxGLmqiESHwzHNXez7deYGYmOHE9+A6kaVMZ4ZiPecioQ
- YFQ/Y74C6bObuwhraTlv1XwvP65lPdwDo5gJHpEJuZcxx2zVUINKypmF3blYRkR7i/MlrsDLW
- xb+7eRALnAF7s6XnjQzz7sc3y9ih810f/8yLeRr0zFwz96hj54nBHrXR6VPg=
+X-UI-Out-Filterresults: notjunk:1;V03:K0:e+j7nDihIYc=:EgXTh4Qj0vLN4lAxlE1SgK
+ 3u3JXxDuthwcTxHSnJtRhhGZGgkzdPgnXOXbFKHSOYwmPYgEXDp61eT3KMfjw4E6RYks+D7Y2
+ GX1FWa4UADNkVp6LAfho0/9whAzV9WVIfieENfL+3MS/7kvSDBayUk8iK5Mclkva9p8Ps25p3
+ RR2qO8Y7S0kfrtsRxtuLyAvQfE30eRuv1Yp+ZQBwBXky5uxn+igRO4h94MpdortPcl3/YTRS7
+ CKx7YhriDy6sd10oLHXegOscK/cNpeY8S7MBy48t3CXoLl2cbI8eMP02jWssTfc37XH8mguUt
+ v6dGEyj6izBd2wXyYa3VglnSvmGm04TJG8NvZalDalmNoDhif9rmU7eCJlJlncwIlkqyp1Wz4
+ qRlHlXevUpTKfwcl7ljVMHwovlSBgEh6Ypl5yzpx7UewOs9LoEwV3rO2o7xmC6AA5bwFIkbzs
+ LCK/g/E3erK64VpWjS/SfehwEA+zjhLZBGTxiM8NuQZ0wH/zDjXCaFU8X4WlrhXamQra513bP
+ IxOZ9oS34Gq71x7j5aXvKjAFp4YKTysm6b8CZp84rq/s53oQLvuVTIcRfnmLdkCmICDoi/t/1
+ G1k7VN2T+qJJGtIynIN72LszZ7RTda0hxeyatUZ3AWxBcx1qLe50EOLkjNIR1YQWNTvglLGsX
+ EKmEAtXKwc8KXGdpaikQjQ2lOnljocYdITRTNaftPtZHqDG/lSf2accYLnD/V033hGQ2sEDKR
+ /TVHjE6TMXwo2vhd0HRwrTo/lbg7vbKb8KpDx2zMAaCfHEL/1I6kpPmjhyZjBgR+WRsiinHpG
+ f8nEXAywohLu1G0W2ZTKt0mCtPAuWVDrF2yLXwAsJCTScX9+YmoMwI7NVBevaa6lY77HoTlxk
+ uXdVneoQcNiwgXZHHMGGsqrmMphSRpSXCIjy9zT6r+iDGeri1DFwd1P9cjnqKWzvG2X+Ry+Dx
+ fTNpbNkGIQVYhBBTXgp74TJLUykDGlHReKvYAjWdc2PFlEEcyQA8XwiB4wpm8GYwt/C8b4VT7
+ kSDIE+X/DsMBHEnu8WcL13+fXOlvNW5SYdFDM/sJhfmYbINqGj3+IIhtMK+QqWb6p1w/bZiC6
+ +y7t3ejMpJyE/gcwwRvg60vCsjy4YjktnEd/c97+FEUcVpaOukF5Dh1s9Y9bY+H7qXN5tq9hH
+ yHPDIk5QLr9YlLMohwAYaw1nt+Tn8q/JeSgA4SGl1SDHqHrv8b/wSXDA0wklC9xrx6o5wPWH0
+ rPIgzP87qTZofXASkDldhw6iRXk7BtBjxeqVrnXp3DLqcn6vu415p+Jl4ww0=
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (markus.elfring[at]web.de)
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [212.227.17.11 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -137,8 +139,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1igobz-00EUDi-6q
+X-Headers-End: 1igouO-006jdb-4Y
 Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -151,21 +154,17 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-4oCmCj4gKysrIGIvZnMvZjJmcy9jb21wcmVzcy5jCj4gQEAgLTAsMCArMSwxMTM5IEBACuKApgo+
-ICtib29sIGYyZnNfaXNfY29tcHJlc3NlZF9wYWdlKHN0cnVjdCBwYWdlICpwYWdlKQo+ICt7Cj4g
-KwlpZiAoIVBhZ2VQcml2YXRlKHBhZ2UpKQo+ICsJCXJldHVybiBmYWxzZTsKPiArCWlmICghcGFn
-ZV9wcml2YXRlKHBhZ2UpKQo+ICsJCXJldHVybiBmYWxzZTsKPiArCWlmIChJU19BVE9NSUNfV1JJ
-VFRFTl9QQUdFKHBhZ2UpIHx8IElTX0RVTU1ZX1dSSVRURU5fUEFHRShwYWdlKSkKPiArCQlyZXR1
-cm4gZmFsc2U7CuKApgoKSG93IGRvIHlvdSB0aGluayBhYm91dCB0byBjb21iaW5lIGNvbmRpdGlv
-biBjaGVja3MgbGlrZSB0aGUgZm9sbG93aW5nPwoKKwlpZiAoIVBhZ2VQcml2YXRlKHBhZ2UpIHx8
-ICFwYWdlX3ByaXZhdGUocGFnZSkgfHwKKwkgICAgSVNfQVRPTUlDX1dSSVRURU5fUEFHRShwYWdl
-KSB8fCBJU19EVU1NWV9XUklUVEVOX1BBR0UocGFnZSkpCisJCXJldHVybiBmYWxzZTsKCgpXb3Vs
-ZCB5b3UgbGlrZSB0byBhcHBseSBzaW1pbGFyIHRyYW5zZm9ybWF0aW9ucyBhdCBvdGhlciBzb3Vy
+4oCmCj4gKysrIGIvZnMvZjJmcy9mMmZzLmgK4oCmCj4gKyNpZmRlZiBDT05GSUdfRjJGU19GU19D
+T01QUkVTU0lPTgo+ICtib29sIGYyZnNfaXNfY29tcHJlc3NlZF9wYWdlKHN0cnVjdCBwYWdlICpw
+YWdlKTsK4oCmCgpDYW4gdGhlIGZvbGxvd2luZyBhZGp1c3RtZW50IG1ha2Ugc2Vuc2U/CgorYm9v
+bCBmMmZzX2lzX2NvbXByZXNzZWRfcGFnZShjb25zdCBzdHJ1Y3QgcGFnZSAqcGFnZSk7CgoKV291
+bGQgeW91IGxpa2UgdG8gaW1wcm92ZSBjb25zdC1jb3JyZWN0bmVzcyBhdCBhbnkgbW9yZSBzb3Vy
 Y2UgY29kZSBwbGFjZXM/CgpSZWdhcmRzLApNYXJrdXMKCgpfX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
 aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
