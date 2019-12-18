@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C501125455
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Dec 2019 22:10:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46B1F125482
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Dec 2019 22:21:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ihgai-0001J2-Ev; Wed, 18 Dec 2019 21:10:44 +0000
+	id 1ihglI-0002TS-6m; Wed, 18 Dec 2019 21:21:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1ihgah-0001Iv-2U
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 21:10:43 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1ihglC-0002Sg-JU
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 21:21:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u6546EG0kkUuXuI7tDsO6tDN8LXELcgbeKOuKSPBI3s=; b=Ra7qHPSTJ+a5HjNMiJJ8eN320I
- UWqe8qYyclGN2MIbE4yHXqRUGy7VQFdikJG0ZfXRVAUEUNO9JE0PRxtVKfJufpN9OMEkLD0GOOeOF
- dqd6W748VBmoy/0347e8klfLt9RGKD10sDffOrq7l2u9VOsQZ8fG9zLZu6ZaMxtOjJdc=;
+ bh=1hFmoDCKBvtS/CDDG8hA5Gv5JzyuGhgWd82bIRRd7WE=; b=LrOh2TSCVMKOE9jFpve5aGfAGq
+ 1Rskw0sjUZMhI37BmXDlcZLaMGAHGQgJSlUtkhUWqrEr3JyEioXF95WVp1DWb+GOWM/8kekLkXldH
+ tWy9w98EXhS8/Jw9S4xPcQNqP4T2S+XYVUGTKX8MklerPAEcYWo9f0pqbqayaOkGYJys=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,83 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=u6546EG0kkUuXuI7tDsO6tDN8LXELcgbeKOuKSPBI3s=; b=T0GIG6DFJbaDas1vYhz4xd5ySP
- 7q4dBBTMzb+myrpulcO9RbSOZJVXdaIc6lkCjtonCnXU1xQJeQHIvw3bZuWX8D63kMAcugCXqufr9
- nAX4M5XcOQsAMvJ/TH6Glosyw6md2sJ8C2Q5sOA8LSU9kIbZ2JGiXlfVBC9tUGed9lTI=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=1hFmoDCKBvtS/CDDG8hA5Gv5JzyuGhgWd82bIRRd7WE=; b=NJp7NMIZbd5lnRg3njevHS3obw
+ IwUFQ4HdrEPv7PYglUuIssn1TQfy0gird9BADfiUTgBY3HWWg4X3gxA+BYaZ3QFwgo+JK/WYmxEPk
+ LU/nKTxWZ0MFAG6ra2bl2PbQISr2WCROIQjvwspKoJuw6nC14OFS32QKHG16NaKlzpJ8=;
+Received: from aserp2120.oracle.com ([141.146.126.78])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ihgaf-0094F4-HU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 21:10:43 +0000
-Received: from gmail.com (unknown [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C73012072B;
- Wed, 18 Dec 2019 21:10:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576703431;
- bh=DjJlPhkNOeyYOEaPhZnxRDhM1ngiEl80Fz0h84MDDfU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=vbBLR4VDzDvap0a4QVSlvS4Woz6WBmC18j2ZKLHzxz/d2aG1a741m6A5xmuOPjqcw
- 4UcO3jopByVEzGq9h9BJHpyDrFaDeIDbdzL7awyQ6m7HV/fFfP69rWFEniM9CRWcGl
- xsMych95oZBnsqpI+UMX8S22BqN2jqjL89F8zO3E=
-Date: Wed, 18 Dec 2019 13:10:29 -0800
-From: Eric Biggers <ebiggers@kernel.org>
+ id 1ihgl8-0094c8-DR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 21:21:34 +0000
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xBIL9tmi002046;
+ Wed, 18 Dec 2019 21:21:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2019-08-05;
+ bh=1hFmoDCKBvtS/CDDG8hA5Gv5JzyuGhgWd82bIRRd7WE=;
+ b=A8q7HVxNUsPIxLqqEjIf1s/VtaDBeCt7dhzEtghfVVrEpWzGFvuJLbf/MeWXLTp9oW+V
+ IkSPzm8e8jOBGpRa7HNSPwa0w4+GdWJyaAiCIgwo2BgIK4qXjE7eQK93G8HIQzzXpm0T
+ gBXU58ej917mvMzsvqUVg+Ycj6eTMbXgrsy/Lx+WWA4pBpq1HcjBrN9zrxKC3vRAGD+t
+ hxmOW+NYs9I9fUHMn/bgNCn+32McH7M8Awi13cEq3D2h8xQ+Lm4+fFKijnAvJvpg3v0m
+ KABh5BXbhmBBzKuuUfkyP7NRjbnbWfirEgFokzsVpb88wZ4W1iW+or2Jl0r6xcI5taSJ RA== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by aserp2120.oracle.com with ESMTP id 2wvqpqg7tr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 18 Dec 2019 21:21:23 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xBILAoMM186550;
+ Wed, 18 Dec 2019 21:21:22 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3030.oracle.com with ESMTP id 2wyut48a7v-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 18 Dec 2019 21:21:22 +0000
+Received: from abhmp0009.oracle.com (abhmp0009.oracle.com [141.146.116.15])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xBILLK79023501;
+ Wed, 18 Dec 2019 21:21:21 GMT
+Received: from localhost (/67.169.218.210)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 18 Dec 2019 13:21:18 -0800
+Date: Wed, 18 Dec 2019 13:21:16 -0800
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20191218211028.GB47399@gmail.com>
+Message-ID: <20191218212116.GA7476@magnolia>
 References: <20191218145136.172774-1-satyat@google.com>
  <20191218145136.172774-3-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20191218145136.172774-3-satyat@google.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 1.3 (+)
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9475
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=2
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1912180163
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9475
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=2 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-1912180163
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 1.8 FSL_HELO_FAKE          No description available.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ihgaf-0094F4-HU
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ihgl8-0094c8-DR
 Subject: Re: [f2fs-dev] [PATCH v6 2/9] block: Add encryption context to
  struct bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -112,11 +145,33 @@ On Wed, Dec 18, 2019 at 06:51:29AM -0800, Satya Tangirala wrote:
 > information across layers in the storage stack). We also introduce various
 > functions to manipulate the bio_crypt_ctx and make the bio/request merging
 > logic aware of the bio_crypt_ctx.
-
-You might want to reword this to clarify that this could potentially be used by
-any user of the block layer (e.g., device-mapper targets), not just filesystems
-and not just fscrypt.  fscrypt is just the initial use case.
-
+> 
+> Signed-off-by: Satya Tangirala <satyat@google.com>
+> ---
+>  block/Makefile                |   2 +-
+>  block/bio-crypt-ctx.c         | 131 ++++++++++++++++++++++++++++++
+>  block/bio.c                   |  16 ++--
+>  block/blk-core.c              |   3 +
+>  block/blk-merge.c             |  11 +++
+>  block/bounce.c                |  12 ++-
+>  drivers/md/dm.c               |   3 +-
+>  include/linux/bio-crypt-ctx.h | 146 +++++++++++++++++++++++++++++++++-
+>  include/linux/blk_types.h     |   6 ++
+>  9 files changed, 312 insertions(+), 18 deletions(-)
+>  create mode 100644 block/bio-crypt-ctx.c
+> 
+> diff --git a/block/Makefile b/block/Makefile
+> index 7c603669f216..79f2b8b3fc5d 100644
+> --- a/block/Makefile
+> +++ b/block/Makefile
+> @@ -37,4 +37,4 @@ obj-$(CONFIG_BLK_DEBUG_FS)	+= blk-mq-debugfs.o
+>  obj-$(CONFIG_BLK_DEBUG_FS_ZONED)+= blk-mq-debugfs-zoned.o
+>  obj-$(CONFIG_BLK_SED_OPAL)	+= sed-opal.o
+>  obj-$(CONFIG_BLK_PM)		+= blk-pm.o
+> -obj-$(CONFIG_BLK_INLINE_ENCRYPTION)	+= keyslot-manager.o
+> \ No newline at end of file
+> +obj-$(CONFIG_BLK_INLINE_ENCRYPTION)	+= keyslot-manager.o bio-crypt-ctx.o
+> \ No newline at end of file
 > diff --git a/block/bio-crypt-ctx.c b/block/bio-crypt-ctx.c
 > new file mode 100644
 > index 000000000000..dadf0da3c21b
@@ -181,10 +236,28 @@ and not just fscrypt.  fscrypt is just the initial use case.
 > +	 * is called. As we only want the data to be decrypted once, copies
 > +	 * of the bio must not have have a crypt context.
 > +	 */
-
-This comment belongs in the patch that adds the crypto API fallback, not in this
-patch.
-
+> +	if (!src_bc)
+> +		return;
+> +
+> +	dst->bi_crypt_context = bio_crypt_alloc_ctx(gfp_mask);
+> +	*dst->bi_crypt_context = *src_bc;
+> +
+> +	if (src_bc->bc_keyslot >= 0)
+> +		keyslot_manager_get_slot(src_bc->bc_ksm, src_bc->bc_keyslot);
+> +}
+> +EXPORT_SYMBOL_GPL(bio_crypt_clone);
+> +
+> +bool bio_crypt_should_process(struct request *rq)
+> +{
+> +	struct bio *bio = rq->bio;
+> +
+> +	if (!bio || !bio->bi_crypt_context)
+> +		return false;
+> +
+> +	return rq->q->ksm == bio->bi_crypt_context->bc_ksm;
+> +}
+> +EXPORT_SYMBOL_GPL(bio_crypt_should_process);
+> +
 > +/*
 > + * Checks that two bio crypt contexts are compatible - i.e. that
 > + * they are mergeable except for data_unit_num continuity.
@@ -199,14 +272,56 @@ patch.
 > +
 > +	return !bc1 || bc1->bc_key == bc2->bc_key;
 > +}
-
-As we've been discussing, this got broken because it now always returns false
-when the bio_crypt_ctx's are different.  My suggestion is:
-
-	if (!bc1)
-		return !bc2;
-	return bc2 && bc1->bc_key == bc2->bc_key;
-
+> +
+> +/*
+> + * Checks that two bio crypt contexts are compatible, and also
+> + * that their data_unit_nums are continuous (and can hence be merged)
+> + * in the order b_1 followed by b_2.
+> + */
+> +bool bio_crypt_ctx_mergeable(struct bio *b_1, unsigned int b1_bytes,
+> +			     struct bio *b_2)
+> +{
+> +	struct bio_crypt_ctx *bc1 = b_1->bi_crypt_context;
+> +	struct bio_crypt_ctx *bc2 = b_2->bi_crypt_context;
+> +
+> +	if (!bio_crypt_ctx_compatible(b_1, b_2))
+> +		return false;
+> +
+> +	return !bc1 || bio_crypt_dun_is_contiguous(bc1, b1_bytes, bc2->bc_dun);
+> +}
+> +
+> +void bio_crypt_ctx_release_keyslot(struct bio_crypt_ctx *bc)
+> +{
+> +	keyslot_manager_put_slot(bc->bc_ksm, bc->bc_keyslot);
+> +	bc->bc_ksm = NULL;
+> +	bc->bc_keyslot = -1;
+> +}
+> +
+> +int bio_crypt_ctx_acquire_keyslot(struct bio_crypt_ctx *bc,
+> +				  struct keyslot_manager *ksm)
+> +{
+> +	int slot = keyslot_manager_get_slot_for_key(ksm, bc->bc_key);
+> +
+> +	if (slot < 0)
+> +		return slot;
+> +
+> +	bc->bc_keyslot = slot;
+> +	bc->bc_ksm = ksm;
+> +	return 0;
+> +}
+> diff --git a/block/bio.c b/block/bio.c
+> index a5d75f6bf4c7..c99e054d56ef 100644
+> --- a/block/bio.c
+> +++ b/block/bio.c
+> @@ -236,6 +236,8 @@ void bio_uninit(struct bio *bio)
+>  
+>  	if (bio_integrity(bio))
+>  		bio_integrity_free(bio);
+> +
+> +	bio_crypt_free_ctx(bio);
+>  }
+>  EXPORT_SYMBOL(bio_uninit);
+>  
 > @@ -615,15 +617,12 @@ struct bio *bio_clone_fast(struct bio *bio, gfp_t gfp_mask, struct bio_set *bs)
 >  
 >  	__bio_clone_fast(b, bio);
@@ -226,10 +341,29 @@ when the bio_crypt_ctx's are different.  My suggestion is:
 > +		bio_put(b);
 > +		return NULL;
 >  	}
-
-Now that bio_crypt_clone() can't fail, this patch probably shouldn't bother to
-clean up the blk-integrity error handling.
-
+>  
+>  	return b;
+> @@ -997,6 +996,7 @@ void bio_advance(struct bio *bio, unsigned bytes)
+>  	if (bio_integrity(bio))
+>  		bio_integrity_advance(bio, bytes);
+>  
+> +	bio_crypt_advance(bio, bytes);
+>  	bio_advance_iter(bio, &bio->bi_iter, bytes);
+>  }
+>  EXPORT_SYMBOL(bio_advance);
+> diff --git a/block/blk-core.c b/block/blk-core.c
+> index e0a094fddee5..5200f4d1fed4 100644
+> --- a/block/blk-core.c
+> +++ b/block/blk-core.c
+> @@ -1810,5 +1810,8 @@ int __init blk_dev_init(void)
+>  	blk_debugfs_root = debugfs_create_dir("block", NULL);
+>  #endif
+>  
+> +	if (bio_crypt_ctx_init() < 0)
+> +		panic("Failed to allocate mem for bio crypt ctxs\n");
+> +
+>  	return 0;
+>  }
 > diff --git a/block/blk-merge.c b/block/blk-merge.c
 > index d783bdc4559b..5e53aad97da9 100644
 > --- a/block/blk-merge.c
@@ -272,30 +406,6 @@ clean up the blk-integrity error handling.
 > +
 >  	return true;
 >  }
-
-Thanks, this looks much better now.  This fixes the bug in v5 where the DUN
-continuity check in blk_try_merge() was insufficient, as blk_try_merge() isn't
-always called, but ll_front_merge_fn() and ll_back_merge_fn() are.
-
-As an optional cleanup, could you also move the blk-crypto checks in
-ll_back_merge_fn(), ll_front_merge_fn(), and blk_rq_merge_ok() to be immediately
-below the corresponding blk-integrity checks?  blk-integrity and blk-crypto are
-both optional block layer features which have constraints for front and back
-merges, so they require merge checks in all the same places (except in one case
-where blk-integrity requires an extra check).  That's partly how I found the bug
-(which for the record, Satya found independently too) -- I was comparing the
-blk-crypto checks to blk-integrity.
-
-So having the blk-crypto and blk-integrity checks be immediately next to each
-other would be helpful from a readability standpoint.
-
-Could you also flip the argument order in the call to bio_crypt_ctx_compatible()
-so that it matches the order for the other checks in blk_rq_merge_ok()?
-
-None of this "actually matters", but IMO it's really important that we make
-these merge checks as straightforward and auditable as possible, as bugs in them
-cause data corruption, as we've seen.
-
 >  
 > diff --git a/block/bounce.c b/block/bounce.c
 > index f8ed677a1bf7..aa57ccc6ced3 100644
@@ -321,10 +431,6 @@ cause data corruption, as we've seen.
 >  	}
 >  
 >  	bio_clone_blkg_association(bio, bio_src);
-
-Like in bio_clone_fast(): now that bio_crypt_clone() can't fail, this patch
-probably shouldn't bother cleaning up the blk-integrity error handling.
-
 > diff --git a/drivers/md/dm.c b/drivers/md/dm.c
 > index e8f9661a10a1..783e0d5fd130 100644
 > --- a/drivers/md/dm.c
@@ -338,9 +444,9 @@ probably shouldn't bother cleaning up the blk-integrity error handling.
 >  	if (bio_integrity(bio)) {
 >  		int r;
 > -
-
-Unnecessary deleted line.
-
+>  		if (unlikely(!dm_target_has_integrity(tio->ti->type) &&
+>  			     !dm_target_passes_integrity(tio->ti->type))) {
+>  			DMWARN("%s: the target %s doesn't support integrity data.",
 > diff --git a/include/linux/bio-crypt-ctx.h b/include/linux/bio-crypt-ctx.h
 > index dd4ac9d95428..4535df0a6349 100644
 > --- a/include/linux/bio-crypt-ctx.h
@@ -351,9 +457,16 @@ Unnecessary deleted line.
 >  	BLK_ENCRYPTION_MODE_AES_256_XTS,
 > -	BLK_ENCRYPTION_MODE_AES_128_CBC,
 > +	BLK_ENCRYPTION_MODE_AES_128_CBC_ESSIV,
-
-This should be folded into the patch which introduced blk_crypto_mode_num.
-
+>  	BLK_ENCRYPTION_MODE_ADIANTUM,
+>  	BLK_ENCRYPTION_MODE_MAX,
+>  };
+> @@ -44,6 +44,150 @@ struct blk_crypto_key {
+>  	u8 raw[BLK_CRYPTO_MAX_KEY_SIZE];
+>  };
+>  
+> +#define BLK_CRYPTO_MAX_IV_SIZE		32
+> +#define BLK_CRYPTO_DUN_ARRAY_SIZE	(BLK_CRYPTO_MAX_IV_SIZE/sizeof(u64))
+> +
 > +/**
 > + * struct bio_crypt_ctx - an inline encryption context
 > + * @bc_key: the key, algorithm, and data unit size to use
@@ -380,22 +493,43 @@ This should be folded into the patch which introduced blk_crypto_mode_num.
 > +	 */
 > +	struct keyslot_manager		*bc_ksm;
 > +};
-
-The two comments inside the struct definition are not needed now that there is a
-kerneldoc comment above the struct which documents all the fields.
-
-FWIW, I also think it would be slightly more logical to order the fields like:
-
-struct bio_crypt_ctx {
-	const struct blk_crypto_key	*bc_key;
-	u64				bc_dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
-	struct keyslot_manager		*bc_ksm;
-	int				bc_keyslot;
-};
-
-... because (key, dun) go together as they're what the user provides, while
-(ksm, keyslot) go together as they're managed by the block layer.
-
+> +
+> +int bio_crypt_ctx_init(void);
+> +
+> +struct bio_crypt_ctx *bio_crypt_alloc_ctx(gfp_t gfp_mask);
+> +
+> +void bio_crypt_free_ctx(struct bio *bio);
+> +
+> +static inline bool bio_has_crypt_ctx(struct bio *bio)
+> +{
+> +	return bio->bi_crypt_context;
+> +}
+> +
+> +void bio_crypt_clone(struct bio *dst, struct bio *src, gfp_t gfp_mask);
+> +
+> +static inline void bio_crypt_set_ctx(struct bio *bio,
+> +				     const struct blk_crypto_key *key,
+> +				     u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE],
+> +				     gfp_t gfp_mask)
+> +{
+> +	struct bio_crypt_ctx *bc = bio_crypt_alloc_ctx(gfp_mask);
+> +
+> +	bc->bc_key = key;
+> +	memcpy(bc->bc_dun, dun, sizeof(bc->bc_dun));
+> +	bc->bc_ksm = NULL;
+> +	bc->bc_keyslot = -1;
+> +
+> +	bio->bi_crypt_context = bc;
+> +}
+> +
+> +void bio_crypt_ctx_release_keyslot(struct bio_crypt_ctx *bc);
+> +
+> +int bio_crypt_ctx_acquire_keyslot(struct bio_crypt_ctx *bc,
+> +				  struct keyslot_manager *ksm);
+> +
+> +struct request;
+> +bool bio_crypt_should_process(struct request *rq);
+> +
 > +static inline bool bio_crypt_dun_is_contiguous(const struct bio_crypt_ctx *bc,
 > +					       unsigned int bytes,
 > +					u64 next_dun[BLK_CRYPTO_DUN_ARRAY_SIZE])
@@ -412,16 +546,104 @@ struct bio_crypt_ctx {
 > +
 > +	return true;
 > +}
+> +
+> +
+> +static inline void bio_crypt_dun_increment(u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE],
+> +					   unsigned int inc)
+> +{
+> +	int i = 0;
+> +
+> +	while (inc && i < BLK_CRYPTO_DUN_ARRAY_SIZE) {
+> +		dun[i] += inc;
+> +		inc = (dun[i] < inc);
+> +		i++;
+> +	}
+> +}
+> +
+> +static inline void bio_crypt_advance(struct bio *bio, unsigned int bytes)
+> +{
+> +	struct bio_crypt_ctx *bc = bio->bi_crypt_context;
+> +
+> +	if (!bc)
+> +		return;
+> +
+> +	bio_crypt_dun_increment(bc->bc_dun,
+> +				bytes >> bc->bc_key->data_unit_size_bits);
+> +}
+> +
+> +bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2);
+> +
+> +bool bio_crypt_ctx_mergeable(struct bio *b_1, unsigned int b1_bytes,
+> +			     struct bio *b_2);
+> +
+> +#else /* CONFIG_BLK_INLINE_ENCRYPTION */
+> +static inline int bio_crypt_ctx_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +static inline bool bio_has_crypt_ctx(struct bio *bio)
+> +{
+> +	return false;
+> +}
+> +
+> +static inline void bio_crypt_clone(struct bio *dst, struct bio *src,
+> +				   gfp_t gfp_mask) { }
+> +
+> +static inline void bio_crypt_free_ctx(struct bio *bio) { }
+> +
+> +static inline void bio_crypt_advance(struct bio *bio, unsigned int bytes) { }
+> +
+> +static inline bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2)
+> +{
+> +	return true;
+> +}
+> +
+> +static inline bool bio_crypt_ctx_mergeable(struct bio *b_1,
+> +					   unsigned int b1_bytes,
+> +					   struct bio *b_2)
+> +{
+> +	return true;
+> +}
+> +
+>  #endif /* CONFIG_BLK_INLINE_ENCRYPTION */
+> +
+>  #endif /* CONFIG_BLOCK */
+> +
+>  #endif /* __LINUX_BIO_CRYPT_CTX_H */
+> diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
+> index 70254ae11769..1996689c51d3 100644
+> --- a/include/linux/blk_types.h
+> +++ b/include/linux/blk_types.h
+> @@ -18,6 +18,7 @@ struct block_device;
+>  struct io_context;
+>  struct cgroup_subsys_state;
+>  typedef void (bio_end_io_t) (struct bio *);
+> +struct bio_crypt_ctx;
+>  
+>  /*
+>   * Block error status values.  See block/blk-core:blk_errors for the details.
+> @@ -173,6 +174,11 @@ struct bio {
+>  	u64			bi_iocost_cost;
+>  #endif
+>  #endif
+> +
+> +#ifdef CONFIG_BLK_INLINE_ENCRYPTION
+> +	struct bio_crypt_ctx	*bi_crypt_context;
+> +#endif
 
-This incorrectly returns true in some cases.  It needs to compare the whole DUN,
-not stop as soon as 'inc' becomes 0.
+This grows struct bio even if we aren't actively using bi_crypt_context,
+and I thought Jens told us to stop making it bigger. :)
 
-I'm also always a bit nervious of code that checks for integer wraparound
-without casting or assigning the result, due to the presence of integer
-promotion in C...  That's partly why I had the 'u64 sum' variable in the version
-I suggested.  But this specific case is fine because the type is u64.
+--D
 
-- Eric
+> +
+>  	union {
+>  #if defined(CONFIG_BLK_DEV_INTEGRITY)
+>  		struct bio_integrity_payload *bi_integrity; /* data integrity */
+> -- 
+> 2.24.1.735.g03f4e72817-goog
+> 
 
 
 _______________________________________________
