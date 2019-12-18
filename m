@@ -2,99 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B55E3122867
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Dec 2019 11:12:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAD901247B4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Dec 2019 14:10:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ih9pn-0002KA-Ds; Tue, 17 Dec 2019 10:12:07 +0000
+	id 1ihZ5W-0001yY-O0; Wed, 18 Dec 2019 13:10:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stephanos.mallouris@gmail.com>) id 1ih9pl-0002K3-PV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Dec 2019 10:12:05 +0000
+ (envelope-from <agruenba@redhat.com>) id 1ihZ5U-0001y8-V7
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 13:10:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- References:In-Reply-To:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A0h029ly2rllY6Flf4el/df6ng6T97Q8SrUvj912AvA=; b=cynjCx23f7OIhOudGvXujsT+Fm
- I49HSgXkGeXXfOtMeDaTP95uQRPO+EvlLyy6K4Cid3d0vLtFHfAuurZbgMT24hdh/SikvgClXn6lS
- 63WmnqS+PWfRTPIOkPVDHpAdLk43+BYXfghic+FQuL/E9EDodcYKKHHFx56WlBw4LPec=;
+ bh=g5Ox4SHhc2xo2sY+PCKlmfIwG02oA4188ugvQugMGko=; b=dZJq1ecYrDbj2zoqjUZ4qmLcuI
+ 00SMPxIC8NcIaJR2FWDQkd25sQd455MCLcEhovHVc1tBT+pjP/YsM8kKcyt6iP+LXs3wyBX0z0598
+ 8faxkufc+Ffg5FlKAqTjB86GN8/AZzfgGvDhvGrAI4f/KuYBu+6j7FehGhbfXgf7sP8k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:References:In-Reply-To:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=A0h029ly2rllY6Flf4el/df6ng6T97Q8SrUvj912AvA=; b=Ih2jGP9k+XCz6vxvaTRTQaX/WE
- Hs/JCeH22xgFr+0kr9R9SzqKk50tXTJOw63NzHVMOIzDiwgZ/V1X5LKV9x55R4MSKtb8KEApLeX8X
- 2yFJiskc+Ikaeq1N1CCaZfsrcDomAxj1QLfF95b9zuhI6NbZ3ACpSYYpvCqCgGU1Cqww=;
-Received: from mail-lj1-f195.google.com ([209.85.208.195])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ih9pi-007Vlr-9h
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Dec 2019 10:12:05 +0000
-Received: by mail-lj1-f195.google.com with SMTP id u17so10260705lja.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 17 Dec 2019 02:12:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:in-reply-to:references:from:date:message-id:subject:to
- :cc; bh=A0h029ly2rllY6Flf4el/df6ng6T97Q8SrUvj912AvA=;
- b=meheRApjmNCcLPaZoJjRIo/lRlhXDu+WhMFB1/sqR423nJKBrsqzMKnIImJYRLJHl7
- /bTl2Y9rzvn8ogoqBArX735lM/W6iXzxKpwgd5eYhHBpQCr24YQ5vd6nYGXg8j9QIP4n
- +JtLGWzheqK3vqseKqcR7MvNVuu2ch8jnse1e6LsVupgbyY12UVS4R2+NDzJtCxuBYPG
- FOLUPqL6miJE9hyzlMfyXKymaauyA12AOM/+5IVgXKM+49miQUv9zv3M2kK1FDlKcU27
- Ps3fB6VAyyqPvzISp5qGcLF6tUSc/LooFAY91DRrs/RcnfbtxD5+SLNH+GT2BxcGswo/
- ctZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:in-reply-to:references:from:date
- :message-id:subject:to:cc;
- bh=A0h029ly2rllY6Flf4el/df6ng6T97Q8SrUvj912AvA=;
- b=UM4AnM+IcCRggeLBdjK3xYSQDkqNTcZvWPPAWvJ1K1BGIu6kbm94ErJ3AbVvwyQgX3
- 1+3KVnW0WRdw8HnmUBChUkWr0hOtIgKx+Dt/MBuXtWaRVlyLbtvKaGCzNGljJJss1dQi
- 5YxGuDJg08JihjibDA2wDK31mkPp29suR7FYsI0w+VQwV7ZcwHxW09E9JjJDco4Ood9N
- H2AmE5SGxejeBMjdTSahLSKlT+MbyEVBHnII7m8Ls1uaGKLyjBsCsaeHVfXxPwDM1vwf
- F+tpxc708H1ddoX2ibohQnVHUGy5mt9NivS2Hxbed8iaZv87mMlP8pWAzcOBIBurnY2o
- g2ZQ==
-X-Gm-Message-State: APjAAAVUfrX3U7+4A1IQYA1IJ60/Gcg1HJj90IUw7Lm6HjnP5J1lHs7X
- nN2pKef1oyDiN5Lr14nKs/NtvQglIjpc5zlgeDc=
-X-Google-Smtp-Source: APXvYqyaXxfjxMwp6vG2hSKMJzHl7muoF5/LuzznIoAwfFQzxLX2/GZWQ7hk4qN8y6g22haPkyNLSy/nAza+VSSjhnE=
-X-Received: by 2002:a2e:3216:: with SMTP id y22mr2516839ljy.95.1576577515311; 
- Tue, 17 Dec 2019 02:11:55 -0800 (PST)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=g5Ox4SHhc2xo2sY+PCKlmfIwG02oA4188ugvQugMGko=; b=U
+ hzcsz2OduuQVf2JGrFLBt5WMAaKNLP5jclmCw059sFvI1UlILbPqoCAloQK2jhwOWO3RJ5d33u1qv
+ bj+Pomx5ImVvjTrfLY9S9xNNeEFX0LHOGXqyGFdopakTGbT9/d48FgoRBfEpiLmROBmN5oiDz3/FN
+ h4FzVBIT6fJiSwfI=;
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]
+ helo=us-smtp-1.mimecast.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1ihZ5T-008pg2-4k
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 13:10:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1576674592;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g5Ox4SHhc2xo2sY+PCKlmfIwG02oA4188ugvQugMGko=;
+ b=YcdlH4pDb90tH1AU8byozWMg8zmiplQG8bqmvUWb1rjT4kLbsIN/pMOimhx0kkIqJ1/BGZ
+ gsAM67IymtKinjM5CaNfDbbFGRArDCRRaDZoqqHOtFMI6cn24d/MkwCgHZqln8UcN4iX8S
+ u9wZnhLIggIS4ATlmAznPf505Mct7P4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-34-RjePyPrbN4iiCFi_W_pbZA-1; Wed, 18 Dec 2019 08:09:51 -0500
+X-MC-Unique: RjePyPrbN4iiCFi_W_pbZA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DB92A10054E3;
+ Wed, 18 Dec 2019 13:09:46 +0000 (UTC)
+Received: from max.com (ovpn-204-101.brq.redhat.com [10.40.204.101])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E01D760C18;
+ Wed, 18 Dec 2019 13:09:37 +0000 (UTC)
+From: Andreas Gruenbacher <agruenba@redhat.com>
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Date: Wed, 18 Dec 2019 14:09:35 +0100
+Message-Id: <20191218130935.32402-1-agruenba@redhat.com>
 MIME-Version: 1.0
-Received: by 2002:a2e:8417:0:0:0:0:0 with HTTP; Tue, 17 Dec 2019 02:11:54
- -0800 (PST)
-In-Reply-To: <7bda6647-f4d6-216a-c771-a9023362e16b@huawei.com>
-References: <CAPfgDnCxNrZ-ZfEVoDG_ET8bjRNi3KaSPsjRE_ZrMm-yLbr4Cw@mail.gmail.com>
- <20191125174048.GA71634@jaegeuk-macbookpro.roam.corp.google.com>
- <CAPfgDnBLZUbx1pWZqTz09WmTcaS6gkE7sqLSXYSs_cJmWZ2PFg@mail.gmail.com>
- <20191126183448.GB5510@jaegeuk-macbookpro.roam.corp.google.com>
- <CAPfgDnDP8WCxL0s_2ct5egby1c-84rs9TmveHjb2TQ_1aW-4Uw@mail.gmail.com>
- <20191127182615.GB42245@jaegeuk-macbookpro.roam.corp.google.com>
- <CAPfgDnA28pAE=1y=6XtzmrhZ1WE8y-dScZv0dB6ymbkGbfzK=Q@mail.gmail.com>
- <20191203174302.GB41093@jaegeuk-macbookpro.roam.corp.google.com>
- <7bda6647-f4d6-216a-c771-a9023362e16b@huawei.com>
-From: Stephanos Mallouris <stephanos.mallouris@gmail.com>
-Date: Tue, 17 Dec 2019 12:11:54 +0200
-Message-ID: <CAPfgDnB6tRvKou_19gS7M0eqeL87WsW1f+vTKkkMnPxVnA4j4w@mail.gmail.com>
-To: Chao Yu <yuchao0@huawei.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.195 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (stephanos.mallouris[at]gmail.com)
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.195 listed in wl.mailspike.net]
+ for more information. [URIs: suse.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -102,8 +80,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1ih9pi-007Vlr-9h
-Subject: Re: [f2fs-dev] problem with f2fs android partition
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1ihZ5T-008pg2-4k
+Subject: [f2fs-dev] [PATCH v3] fs: Fix page_mkwrite off-by-one errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,570 +94,314 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jan Kara <jack@suse.cz>, Adrian Hunter <adrian.hunter@intel.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Richard Weinberger <richard@nod.at>, Christoph Hellwig <hch@infradead.org>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ Artem Bityutskiy <dedekind1@gmail.com>, Jeff Layton <jlayton@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi to all,
+Hi Darrick,
 
-Sorry for the late reply. running the commands as suggested gave the following:
+can this fix go in via the xfs tree?
 
-1. # dump.f2fs -i 0x3 /dev/sdc3
+Thanks,
+Andreas
 
-Info: sector size = 512
-Info: total sectors = 25624576 (12512 MB)
-Info: MKFS version
-  "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
-(gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri Jan
-19 17:16:04 PKT 2018"
-Info: FSCK version
-  from "Linux version 4.1.46-EliteKernelReborn-v6+
-(hassanmirza01@ubuntu) (gcc version 4.9 20150123 (prerelease) (GCC) )
-#1 SMP PREEMPT Sat Jan 27 00:46:02 PKT 2018"
-    to "Linux version 4.4.0-170-generic (buildd@lgw01-amd64-015) (gcc
-version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #199-Ubuntu
-SMP Thu Nov 14 01:44:41 UTC 2019"
-Info: superblock features = 0 :
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: total FS sectors = 22310912 (10894 MB)
-Info: CKPT version = 1307e4
-Info: checkpoint state = 4 :  compacted_summary sudden-power-off
-Invalid node block
+--
 
+The check in block_page_mkwrite that is meant to determine whether an
+offset is within the inode size is off by one.  This bug has been copied
+into iomap_page_mkwrite and several filesystems (ubifs, ext4, f2fs,
+ceph).
 
-Done.
+Fix that by introducing a new page_mkwrite_check_truncate helper that
+checks for truncate and computes the bytes in the page up to EOF.  Use
+the helper in the above mentioned filesystems.
 
-2.  # dump.f2fs -i 0x4 /dev/sdc3
+In addition, use the new helper in btrfs as well.
 
-Info: sector size = 512
-Info: total sectors = 25624576 (12512 MB)
-Info: MKFS version
-  "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
-(gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri Jan
-19 17:16:04 PKT 2018"
-Info: FSCK version
-  from "Linux version 4.4.0-170-generic (buildd@lgw01-amd64-015) (gcc
-version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #199-Ubuntu
-SMP Thu Nov 14 01:44:41 UTC 2019"
-    to "Linux version 4.4.0-170-generic (buildd@lgw01-amd64-015) (gcc
-version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #199-Ubuntu
-SMP Thu Nov 14 01:44:41 UTC 2019"
-Info: superblock features = 0 :
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: total FS sectors = 22310912 (10894 MB)
-Info: CKPT version = 1307e4
-Info: checkpoint state = 4 :  compacted_summary sudden-power-off
-[print_node_info: 103] Node ID [0x4:4] is inode
-i_mode                        		[0x    41f8 : 16888]
-i_advise                      		[0x       2 : 2]
-i_uid                         		[0x     3ff : 1023]
-i_gid                         		[0x     3ff : 1023]
-i_links                       		[0x       5 : 5]
-i_size                        		[0x    1000 : 4096]
-i_blocks                      		[0x       3 : 3]
-i_atime                       		[0x5c52cc67 : 1548930151]
-i_atime_nsec                  		[0x380742f0 : 939999984]
-i_ctime                       		[0x5da861d5 : 1571316181]
-i_ctime_nsec                  		[0x232aaf7f : 589999999]
-i_mtime                       		[0x5ca8c4a0 : 1554564256]
-i_mtime_nsec                  		[0x bebc1fd : 199999997]
-i_generation                  		[0x414c2cfb : 1095511291]
-i_current_depth               		[0x       1 : 1]
-i_xattr_nid                   		[0x       5 : 5]
-i_flags                       		[0x       0 : 0]
-i_inline                      		[0x       0 : 0]
-i_pino                        		[0x       3 : 3]
-i_namelen                     		[0x       5 : 5]
-i_name                        		[media]
-i_ext: fofs:0 blkaddr:0 len:0
-i_addr[0]                     		[0x  294852 : 2705490]
-i_addr[1]                     		[0x       0 : 0]
-i_addr[2]                     		[0x       0 : 0]
-i_addr[3]                     		[0x       0 : 0]
-i_nid[0]                      		[0x       0 : 0]
-i_nid[1]                      		[0x       0 : 0]
-i_nid[2]                      		[0x       0 : 0]
-i_nid[3]                      		[0x       0 : 0]
-i_nid[4]                      		[0x       0 : 0]
+Signed-off-by: Andreas Gruenbacher <agruenba@redhat.com>
+Acked-by: David Sterba <dsterba@suse.com> (btrfs part)
+Acked-by: Richard Weinberger <richard@nod.at> (ubifs part)
+---
+ fs/btrfs/inode.c        | 15 ++++-----------
+ fs/buffer.c             | 16 +++-------------
+ fs/ceph/addr.c          |  2 +-
+ fs/ext4/inode.c         | 14 ++++----------
+ fs/f2fs/file.c          | 19 +++++++------------
+ fs/iomap/buffered-io.c  | 18 +++++-------------
+ fs/ubifs/file.c         |  3 +--
+ include/linux/pagemap.h | 28 ++++++++++++++++++++++++++++
+ 8 files changed, 53 insertions(+), 62 deletions(-)
 
-Not a regular file
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index 56032c518b26..86c6fcd8139d 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -9016,13 +9016,11 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+ 	ret = VM_FAULT_NOPAGE; /* make the VM retry the fault */
+ again:
+ 	lock_page(page);
+-	size = i_size_read(inode);
+ 
+-	if ((page->mapping != inode->i_mapping) ||
+-	    (page_start >= size)) {
+-		/* page got truncated out from underneath us */
++	ret2 = page_mkwrite_check_truncate(page, inode);
++	if (ret2 < 0)
+ 		goto out_unlock;
+-	}
++	zero_start = ret2;
+ 	wait_on_page_writeback(page);
+ 
+ 	lock_extent_bits(io_tree, page_start, page_end, &cached_state);
+@@ -9043,6 +9041,7 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+ 		goto again;
+ 	}
+ 
++	size = i_size_read(inode);
+ 	if (page->index == ((size - 1) >> PAGE_SHIFT)) {
+ 		reserved_space = round_up(size - page_start,
+ 					  fs_info->sectorsize);
+@@ -9075,12 +9074,6 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+ 	}
+ 	ret2 = 0;
+ 
+-	/* page is wholly or partially inside EOF */
+-	if (page_start + PAGE_SIZE > size)
+-		zero_start = offset_in_page(size);
+-	else
+-		zero_start = PAGE_SIZE;
+-
+ 	if (zero_start != PAGE_SIZE) {
+ 		kaddr = kmap(page);
+ 		memset(kaddr + zero_start, 0, PAGE_SIZE - zero_start);
+diff --git a/fs/buffer.c b/fs/buffer.c
+index d8c7242426bb..53aabde57ca7 100644
+--- a/fs/buffer.c
++++ b/fs/buffer.c
+@@ -2499,23 +2499,13 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
+ 	struct page *page = vmf->page;
+ 	struct inode *inode = file_inode(vma->vm_file);
+ 	unsigned long end;
+-	loff_t size;
+ 	int ret;
+ 
+ 	lock_page(page);
+-	size = i_size_read(inode);
+-	if ((page->mapping != inode->i_mapping) ||
+-	    (page_offset(page) > size)) {
+-		/* We overload EFAULT to mean page got truncated */
+-		ret = -EFAULT;
++	ret = page_mkwrite_check_truncate(page, inode);
++	if (ret < 0)
+ 		goto out_unlock;
+-	}
+-
+-	/* page is wholly or partially inside EOF */
+-	if (((page->index + 1) << PAGE_SHIFT) > size)
+-		end = size & ~PAGE_MASK;
+-	else
+-		end = PAGE_SIZE;
++	end = ret;
+ 
+ 	ret = __block_write_begin(page, 0, end, get_block);
+ 	if (!ret)
+diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
+index 7ab616601141..ef958aa4adb4 100644
+--- a/fs/ceph/addr.c
++++ b/fs/ceph/addr.c
+@@ -1575,7 +1575,7 @@ static vm_fault_t ceph_page_mkwrite(struct vm_fault *vmf)
+ 	do {
+ 		lock_page(page);
+ 
+-		if ((off > size) || (page->mapping != inode->i_mapping)) {
++		if (page_mkwrite_check_truncate(page, inode) < 0) {
+ 			unlock_page(page);
+ 			ret = VM_FAULT_NOPAGE;
+ 			break;
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index 28f28de0c1b6..51ab1d2cac80 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -5871,7 +5871,6 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+ {
+ 	struct vm_area_struct *vma = vmf->vma;
+ 	struct page *page = vmf->page;
+-	loff_t size;
+ 	unsigned long len;
+ 	int err;
+ 	vm_fault_t ret;
+@@ -5907,18 +5906,13 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+ 	}
+ 
+ 	lock_page(page);
+-	size = i_size_read(inode);
+-	/* Page got truncated from under us? */
+-	if (page->mapping != mapping || page_offset(page) > size) {
++	err = page_mkwrite_check_truncate(page, inode);
++	if (err < 0) {
+ 		unlock_page(page);
+-		ret = VM_FAULT_NOPAGE;
+-		goto out;
++		goto out_ret;
+ 	}
++	len = err;
+ 
+-	if (page->index == size >> PAGE_SHIFT)
+-		len = size & ~PAGE_MASK;
+-	else
+-		len = PAGE_SIZE;
+ 	/*
+ 	 * Return if we have all the buffers mapped. This avoids the need to do
+ 	 * journal_start/journal_stop which can block and take a long time
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 85af112e868d..0e77b2e6f873 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -51,7 +51,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	struct inode *inode = file_inode(vmf->vma->vm_file);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct dnode_of_data dn = { .node_changed = false };
+-	int err;
++	int offset, err;
+ 
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		err = -EIO;
+@@ -70,13 +70,14 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	file_update_time(vmf->vma->vm_file);
+ 	down_read(&F2FS_I(inode)->i_mmap_sem);
+ 	lock_page(page);
+-	if (unlikely(page->mapping != inode->i_mapping ||
+-			page_offset(page) > i_size_read(inode) ||
+-			!PageUptodate(page))) {
++	err = -EFAULT;
++	if (likely(PageUptodate(page)))
++		err = page_mkwrite_check_truncate(page, inode);
++	if (unlikely(err < 0)) {
+ 		unlock_page(page);
+-		err = -EFAULT;
+ 		goto out_sem;
+ 	}
++	offset = err;
+ 
+ 	/* block allocation */
+ 	__do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
+@@ -101,14 +102,8 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	if (PageMappedToDisk(page))
+ 		goto out_sem;
+ 
+-	/* page is wholly or partially inside EOF */
+-	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
+-						i_size_read(inode)) {
+-		loff_t offset;
+-
+-		offset = i_size_read(inode) & ~PAGE_MASK;
++	if (offset != PAGE_SIZE)
+ 		zero_user_segment(page, offset, PAGE_SIZE);
+-	}
+ 	set_page_dirty(page);
+ 	if (!PageUptodate(page))
+ 		SetPageUptodate(page);
+diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+index d33c7bc5ee92..1aaf157fd6e9 100644
+--- a/fs/iomap/buffered-io.c
++++ b/fs/iomap/buffered-io.c
+@@ -1062,24 +1062,16 @@ vm_fault_t iomap_page_mkwrite(struct vm_fault *vmf, const struct iomap_ops *ops)
+ 	struct page *page = vmf->page;
+ 	struct inode *inode = file_inode(vmf->vma->vm_file);
+ 	unsigned long length;
+-	loff_t offset, size;
++	loff_t offset;
+ 	ssize_t ret;
+ 
+ 	lock_page(page);
+-	size = i_size_read(inode);
+-	offset = page_offset(page);
+-	if (page->mapping != inode->i_mapping || offset > size) {
+-		/* We overload EFAULT to mean page got truncated */
+-		ret = -EFAULT;
++	ret = page_mkwrite_check_truncate(page, inode);
++	if (ret < 0)
+ 		goto out_unlock;
+-	}
+-
+-	/* page is wholly or partially inside EOF */
+-	if (offset > size - PAGE_SIZE)
+-		length = offset_in_page(size);
+-	else
+-		length = PAGE_SIZE;
++	length = ret;
+ 
++	offset = page_offset(page);
+ 	while (length > 0) {
+ 		ret = iomap_apply(inode, offset, length,
+ 				IOMAP_WRITE | IOMAP_FAULT, ops, page,
+diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+index cd52585c8f4f..91f7a1f2db0d 100644
+--- a/fs/ubifs/file.c
++++ b/fs/ubifs/file.c
+@@ -1563,8 +1563,7 @@ static vm_fault_t ubifs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	}
+ 
+ 	lock_page(page);
+-	if (unlikely(page->mapping != inode->i_mapping ||
+-		     page_offset(page) > i_size_read(inode))) {
++	if (unlikely(page_mkwrite_check_truncate(page, inode) < 0)) {
+ 		/* Page got truncated out from underneath us */
+ 		goto sigbus;
+ 	}
+diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
+index 37a4d9e32cd3..ccb14b6a16b5 100644
+--- a/include/linux/pagemap.h
++++ b/include/linux/pagemap.h
+@@ -636,4 +636,32 @@ static inline unsigned long dir_pages(struct inode *inode)
+ 			       PAGE_SHIFT;
+ }
+ 
++/**
++ * page_mkwrite_check_truncate - check if page was truncated
++ * @page: the page to check
++ * @inode: the inode to check the page against
++ *
++ * Returns the number of bytes in the page up to EOF,
++ * or -EFAULT if the page was truncated.
++ */
++static inline int page_mkwrite_check_truncate(struct page *page,
++					      struct inode *inode)
++{
++	loff_t size = i_size_read(inode);
++	pgoff_t index = size >> PAGE_SHIFT;
++	int offset = offset_in_page(size);
++
++	if (page->mapping != inode->i_mapping)
++		return -EFAULT;
++
++	/* page is wholly inside EOF */
++	if (page->index < index)
++		return PAGE_SIZE;
++	/* page is wholly past EOF */
++	if (page->index > index || !offset)
++		return -EFAULT;
++	/* page is partially inside EOF */
++	return offset;
++}
++
+ #endif /* _LINUX_PAGEMAP_H */
+-- 
+2.20.1
 
-
-Done.
-
-
-
-
-3. dump.f2fs -i 0x5 /dev/sdc3
-
-Info: sector size = 512
-Info: total sectors = 25624576 (12512 MB)
-Info: MKFS version
-  "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
-(gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri Jan
-19 17:16:04 PKT 2018"
-Info: FSCK version
-  from "Linux version 4.4.0-170-generic (buildd@lgw01-amd64-015) (gcc
-version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #199-Ubuntu
-SMP Thu Nov 14 01:44:41 UTC 2019"
-    to "Linux version 4.4.0-170-generic (buildd@lgw01-amd64-015) (gcc
-version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #199-Ubuntu
-SMP Thu Nov 14 01:44:41 UTC 2019"
-Info: superblock features = 0 :
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: total FS sectors = 22310912 (10894 MB)
-Info: CKPT version = 1307e4
-Info: checkpoint state = 4 :  compacted_summary sudden-power-off
-[print_node_info: 109] Node ID [0x5:5] is direct node or indirect node.
-[0]			[0xf2f52011 : -218816495]
-[1]			[0x       1 : 1]
-[2]			[0x       0 : 0]
-[3]			[0x       0 : 0]
-[4]			[0x       0 : 0]
-[5]			[0x       0 : 0]
-[6]			[0x  210706 : 2164486]
-[7]			[0x696c6573 : 1768711539]
-[8]			[0x7578756e : 1970828654]
-[9]			[0x6a626f3a : 1784835898]
-[10]			[0x5f746365 : 1601463141]
-Not a regular file
-
-
-Done.
-
-Those are the results. Hoping for your assistance and help
-
-Regards
-
-Stephanos M.
-
-
-
-On 12/4/19, Chao Yu <yuchao0@huawei.com> wrote:
-> Hi Jaegeuk,
->
-> On 2019/12/4 1:43, Jaegeuk Kim wrote:
->> Hi,
->>
->> I think you didn't back up the root inode block, since it showed zeros.
->> Could you try the below a bit on fresh back-up image again?
->>
->> # dump.f2fs -i 0x3 /dev/sdc1
->> # dump.f2fs -i 0x4 /dev/sdc1
->> # dump.f2fs -i 0x5 /dev/sdc1
->
-> Quoted:
-> "[ASSERT] (sanity_check_nid: 362)  --> nid[0x3] ino is 0"
->
-> Look into log in the Stephanos' first report email, it looks like nat entry
-> of root inode was broken, if this is true, IMO, we have to add a routine to
-> detect such inconsistence and lookup last root inode and relink to its nat
-> entry.
->
-> Thanks,
->
->>
->> Thanks,
->>
->> On 11/28, Stephanos Mallouris wrote:
->>> Hi,
->>>
->>> Thanks for the effort and advice .
->>> Did execute the command. It gave a lot of information ,
->>> so i am attaching that to a file.
->>>
->>> Regards
->>>
->>> Stephanos
->>>
->>>
->>> On 11/27/19, Jaegeuk Kim <jaegeuk@kernel.org> wrote:
->>>> Hi,
->>>>
->>>> On 11/27, Stephanos Mallouris wrote:
->>>>> Dear Kim ,
->>>>>
->>>>> Regarding the question:
->>>>>
->>>>> "Hmm, # of valid blocks is 0, which is really impossible.
->>>>>  Do you have original backed up image? I think at some point the image
->>>>>  was overwritten when fsck.f2fs tried to fix.
->>>>>  "
->>>>>
->>>>> I do have the original dump raw image. Please advice actions
->>>>> to assist in recovering it.
->>>>
->>>> Could you share the first run with that image?
->>>> # fsck.f2fs -d 3 "fresh backup image"
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>> I did a dd to an external drive, and from where i tried unsuccessful
->>>>> so
->>>>> far.
->>>>> I use the following command
->>>>>
->>>>> sudo dd if=mmcblk0p49.raw bs=512 oflag=sync status=progress
->>>>> of=/dev/sda1
->>>>>
->>>>> mmcblk0p49.raw is the backup partitioned.
->>>>>
->>>>> Thanks in advance
->>>>>
->>>>> Stephanos M.
->>>>>
->>>>>
->>>>> On 11/26/19, Jaegeuk Kim <jaegeuk@kernel.org> wrote:
->>>>>> On 11/26, Stephanos Mallouris wrote:
->>>>>>> Dear Kim,
->>>>>>>
->>>>>>> Thanks for getting back to me.
->>>>>>>
->>>>>>> I executed the command  fsck.f2fs -d 3 -f /dev/sdc1
->>>>>>> and it gave me the following information:
->>>>>>>
->>>>>>> Info: Debug level = 3
->>>>>>> Info: Force to fix corruption
->>>>>>> Info: sector size = 512
->>>>>>> Info: total sectors = 22310913 (10894 MB)
->>>>>>> Info: MKFS version
->>>>>>>   "Linux version 4.1.46-EliteKernelReborn-v5+ (hassanmirza01@ubuntu)
->>>>>>> (gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri
->>>>>>> Jan
->>>>>>> 19 17:16:04 PKT 2018"
->>>>>>> Info: FSCK version
->>>>>>>   from "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>> (gcc
->>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>> #198-Ubuntu
->>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>>     to "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>> (gcc
->>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>> #198-Ubuntu
->>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>> Info: superblock features = 0 :
->>>>>>> Info: superblock encrypt level = 0, salt =
->>>>>>> 00000000000000000000000000000000
->>>>>>>
->>>>>>> +--------------------------------------------------------+
->>>>>>> | Super block                                            |
->>>>>>> +--------------------------------------------------------+
->>>>>>> magic                         		[0xf2f52010 : 4076150800]
->>>>>>> major_ver                     		[0x       1 : 1]
->>>>>>> volum_name                    		[]
->>>>>>> minor_ver                     		[0x       7 : 7]
->>>>>>> log_sectorsize                		[0x       9 : 9]
->>>>>>> log_sectors_per_block         		[0x       3 : 3]
->>>>>>> log_blocksize                 		[0x       c : 12]
->>>>>>> log_blocks_per_seg            		[0x       9 : 9]
->>>>>>> segs_per_sec                  		[0x       1 : 1]
->>>>>>> secs_per_zone                 		[0x       1 : 1]
->>>>>>> checksum_offset               		[0x       0 : 0]
->>>>>>> block_count                   		[0x  2a8e00 : 2788864]
->>>>>>> section_count                 		[0x    151f : 5407]
->>>>>>> segment_count                 		[0x    1546 : 5446]
->>>>>>> segment_count_ckpt            		[0x       2 : 2]
->>>>>>> segment_count_sit             		[0x       2 : 2]
->>>>>>> segment_count_nat             		[0x      18 : 24]
->>>>>>> segment_count_ssa             		[0x       b : 11]
->>>>>>> segment_count_main            		[0x    151f : 5407]
->>>>>>> segment0_blkaddr              		[0x     200 : 512]
->>>>>>> cp_blkaddr                    		[0x     200 : 512]
->>>>>>> sit_blkaddr                   		[0x     600 : 1536]
->>>>>>> nat_blkaddr                   		[0x     a00 : 2560]
->>>>>>> ssa_blkaddr                   		[0x    3a00 : 14848]
->>>>>>> main_blkaddr                  		[0x    5000 : 20480]
->>>>>>> root_ino                      		[0x       3 : 3]
->>>>>>> node_ino                      		[0x       1 : 1]
->>>>>>> meta_ino                      		[0x       2 : 2]
->>>>>>> cp_payload                    		[0x       0 : 0]
->>>>>>> version                       Linux version 4.4.0-169-generic
->>>>>>> (buildd@lgw01-amd64-022) (gcc version 5.4.0 20160609 (Ubuntu
->>>>>>> 5.4.0-6ubuntu1~16.04.12) ) #198-Ubuntu SMP Tue Nov 12 10:34:23 UTC
->>>>>>> 2019
->>>>>>> Info: total FS sectors = 22310912 (10894 MB)
->>>>>>> Info: CKPT version = 1307e4
->>>>>>>
->>>>>>> +--------------------------------------------------------+
->>>>>>> | Checkpoint                                             |
->>>>>>> +--------------------------------------------------------+
->>>>>>> checkpoint_ver                		[0x  1307e4 : 1247204]
->>>>>>> user_block_count              		[0x  289400 : 2659328]
->>>>>>> valid_block_count             		[0x       0 : 0]
->>>>>>
->>>>>> Hmm, # of valid blocks is 0, which is really impossible.
->>>>>> Do you have original backed up image? I think at some point the image
->>>>>> was overwritten when fsck.f2fs tried to fix.
->>>>>>
->>>>>>> rsvd_segment_count            		[0x      70 : 112]
->>>>>>> overprov_segment_count        		[0x      d5 : 213]
->>>>>>> free_segment_count            		[0x    1519 : 5401]
->>>>>>> alloc_type[CURSEG_HOT_NODE]   		[0x       1 : 1]
->>>>>>> alloc_type[CURSEG_WARM_NODE]  		[0x       1 : 1]
->>>>>>> alloc_type[CURSEG_COLD_NODE]  		[0x       1 : 1]
->>>>>>> cur_node_segno[0]             		[0x       3 : 3]
->>>>>>> cur_node_segno[1]             		[0x       4 : 4]
->>>>>>> cur_node_segno[2]             		[0x       5 : 5]
->>>>>>> cur_node_blkoff[0]            		[0x       0 : 0]
->>>>>>> cur_node_blkoff[1]            		[0x       0 : 0]
->>>>>>> cur_node_blkoff[2]            		[0x       0 : 0]
->>>>>>> alloc_type[CURSEG_HOT_DATA]   		[0x       1 : 1]
->>>>>>> alloc_type[CURSEG_WARM_DATA]  		[0x       1 : 1]
->>>>>>> alloc_type[CURSEG_COLD_DATA]  		[0x       1 : 1]
->>>>>>> cur_data_segno[0]             		[0x       0 : 0]
->>>>>>> cur_data_segno[1]             		[0x       1 : 1]
->>>>>>> cur_data_segno[2]             		[0x       2 : 2]
->>>>>>> cur_data_blkoff[0]            		[0x       0 : 0]
->>>>>>> cur_data_blkoff[1]            		[0x       0 : 0]
->>>>>>> cur_data_blkoff[2]            		[0x       0 : 0]
->>>>>>> ckpt_flags                    		[0x       1 : 1]
->>>>>>> cp_pack_total_block_count     		[0x       8 : 8]
->>>>>>> cp_pack_start_sum             		[0x       1 : 1]
->>>>>>> valid_node_count              		[0x       0 : 0]
->>>>>>> valid_inode_count             		[0x       0 : 0]
->>>>>>> next_free_nid                 		[0x   14105 : 82181]
->>>>>>> sit_ver_bitmap_bytesize       		[0x      40 : 64]
->>>>>>> nat_ver_bitmap_bytesize       		[0x     300 : 768]
->>>>>>> checksum_offset               		[0x     ffc : 4092]
->>>>>>> elapsed_time                  		[0x 167a468 : 23569512]
->>>>>>> sit_nat_version_bitmap[0]     		[0x      79 : 121]
->>>>>>>
->>>>>>>
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x4bb2] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x6ba0] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x783c] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xa0ec] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xab88] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xadcd] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xb19c] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xb431] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xb8f4] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xbf40] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xce28] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xd299] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xd56c] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xd8d3] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xe527] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xe67d] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xf88c] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0xfc96] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x10271] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x111d6] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x1154e] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x11b66] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x1271e] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x12abc] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x1339b] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x137d2] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x139ae] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x14363] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x146a2] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x151a3] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x151da] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x15580] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x15744] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x158eb] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x16030] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x1632b] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x16722] in nat cache
->>>>>>> [lookup_nat_in_journal:1515] ==> Found nid [0x16c38] in nat cache
->>>>>>> [build_nat_area_bitmap:1718] valid nat entries (block_addr != 0x0)
->>>>>>> [0x
->>>>>>>       0 : 0]
->>>>>>> [build_sit_area_bitmap:1214] Blocks [0x0 : 0] Free Segs [0x1519 :
->>>>>>> 5401]
->>>>>>>
->>>>>>> Info: checkpoint state = 1 :  unmount
->>>>>>> [ASSERT] (sanity_check_nid: 362)  --> nid[0x3] ino is 0
->>>>>>>
->>>>>>> [FSCK] Unreachable nat entries                        [Ok..] [0x0]
->>>>>>> [FSCK] SIT valid block bitmap checking                [Ok..]
->>>>>>> [FSCK] Hard link checking for regular file            [Ok..] [0x0]
->>>>>>> [FSCK] valid_block_count matching with CP             [Ok..] [0x0]
->>>>>>> [FSCK] valid_node_count matcing with CP (de lookup)   [Ok..] [0x0]
->>>>>>> [FSCK] valid_node_count matcing with CP (nat lookup)  [Ok..] [0x0]
->>>>>>> [FSCK] valid_inode_count matched with CP              [Ok..] [0x0]
->>>>>>> [FSCK] free segment_count matched with CP             [Ok..]
->>>>>>> [0x1519]
->>>>>>> [FSCK] next block offset is free                      [Ok..]
->>>>>>> [FSCK] fixing SIT types
->>>>>>> [FSCK] other corrupted bugs                           [Fail]
->>>>>>> [move_curseg_info:1471] Move curseg[0] 0 -> 0 after 5000
->>>>>>> [move_curseg_info:1471] Move curseg[1] 1 -> 1 after 5000
->>>>>>> [move_curseg_info:1471] Move curseg[2] 2 -> 2 after 5000
->>>>>>> [move_curseg_info:1471] Move curseg[3] 3 -> 3 after 5000
->>>>>>> [move_curseg_info:1471] Move curseg[4] 4 -> 4 after 5000
->>>>>>> [move_curseg_info:1471] Move curseg[5] 5 -> 5 after 5000
->>>>>>>
->>>>>>> Done.
->>>>>>>
->>>>>>>
->>>>>>> It still give the same error trying to mount the partiotion.
->>>>>>> [57765.609319] F2FS-fs (sdc1): Failed to read root inode
->>>>>>> [57765.651048] F2FS-fs (sdc1): Failed to read root inode
->>>>>>> [58015.507861] F2FS-fs (sdc1): Failed to read root inode
->>>>>>> [58015.563422] F2FS-fs (sdc1): Failed to read root inode
->>>>>>>
->>>>>>> Please advice and assist if possible.
->>>>>>>
->>>>>>> Kindest Regards,
->>>>>>>
->>>>>>> Stephanos Mallouris
->>>>>>>
->>>>>>> On 11/25/19, Jaegeuk Kim <jaegeuk@kernel.org> wrote:
->>>>>>>> Hi,
->>>>>>>>
->>>>>>>> On 11/22, Stephanos Mallouris wrote:
->>>>>>>>> Dear all,
->>>>>>>>>
->>>>>>>>> I have backup my f2fs android partition via netcat and adb.
->>>>>>>>> After loosing the original partition, tried to restore it on a
->>>>>>>>> local
->>>>>>>>> drive and access it via linux but i am encountering the following
->>>>>>>>> issues:
->>>>>>>>>
->>>>>>>>> A. trying the command
->>>>>>>>>
->>>>>>>>>  sudo mount -t f2fs /dev/sdc1 /mnt
->>>>>>>>>
->>>>>>>>> gives the following error
->>>>>>>>>
->>>>>>>>>  F2FS-fs (sdc1): Failed to read root inode
->>>>>>>>>
->>>>>>>>> B1. Tried to fsck the file system , see bellow:
->>>>>>>>>
->>>>>>>>> sudo fsck.f2fs -a  /dev/sdc1
->>>>>>>>>
->>>>>>>>> result:
->>>>>>>>>
->>>>>>>>> Info: Fix the reported corruption.
->>>>>>>>> Info: sector size = 512
->>>>>>>>> Info: total sectors = 22310913 (10894 MB)
->>>>>>>>> Info: MKFS version
->>>>>>>>>   "Linux version 4.1.46-EliteKernelReborn-v5+
->>>>>>>>> (hassanmirza01@ubuntu)
->>>>>>>>> (gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri
->>>>>>>>> Jan
->>>>>>>>> 19 17:16:04 PKT 2018"
->>>>>>>>> Info: FSCK version
->>>>>>>>>   from "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>>>> (gcc
->>>>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>>>> #198-Ubuntu
->>>>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>>>>     to "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>>>> (gcc
->>>>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>>>> #198-Ubuntu
->>>>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>>>> Info: superblock features = 0 :
->>>>>>>>> Info: superblock encrypt level = 0, salt =
->>>>>>>>> 00000000000000000000000000000000
->>>>>>>>> Info: total FS sectors = 22310912 (10894 MB)
->>>>>>>>> Info: CKPT version = 1307e4
->>>>>>>>> Info: No error was reported
->>>>>>>>>
->>>>>>>>> Still unable to mount the partiotion , gives the same error.
->>>>>>>>>
->>>>>>>>> B2. Tried
->>>>>>>>> sudo fsck.f2fs -f  /dev/sdc1
->>>>>>>>
->>>>>>>> Could you try: fsck.f2fs -d 3 -f /dev/sdc1?
->>>>>>>> It seems you didn't back up the entire partition which is missing
->>>>>>>> root
->>>>>>>> inode
->>>>>>>> block.
->>>>>>>>
->>>>>>>> Thanks,
->>>>>>>>
->>>>>>>>>
->>>>>>>>> result
->>>>>>>>>
->>>>>>>>> Info: Force to fix corruption
->>>>>>>>> Info: sector size = 512
->>>>>>>>> Info: total sectors = 22310913 (10894 MB)
->>>>>>>>> Info: MKFS version
->>>>>>>>>   "Linux version 4.1.46-EliteKernelReborn-v5+
->>>>>>>>> (hassanmirza01@ubuntu)
->>>>>>>>> (gcc version 4.9 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Fri
->>>>>>>>> Jan
->>>>>>>>> 19 17:16:04 PKT 2018"
->>>>>>>>> Info: FSCK version
->>>>>>>>>   from "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>>>> (gcc
->>>>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>>>> #198-Ubuntu
->>>>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>>>>     to "Linux version 4.4.0-169-generic (buildd@lgw01-amd64-022)
->>>>>>>>> (gcc
->>>>>>>>> version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) )
->>>>>>>>> #198-Ubuntu
->>>>>>>>> SMP Tue Nov 12 10:34:23 UTC 2019"
->>>>>>>>> Info: superblock features = 0 :
->>>>>>>>> Info: superblock encrypt level = 0, salt =
->>>>>>>>> 00000000000000000000000000000000
->>>>>>>>> Info: total FS sectors = 22310912 (10894 MB)
->>>>>>>>> Info: CKPT version = 1307e4
->>>>>>>>> Info: checkpoint state = 1 :  unmount
->>>>>>>>> [ASSERT] (sanity_check_nid: 362)  --> nid[0x3] ino is 0
->>>>>>>>>
->>>>>>>>> [FSCK] Unreachable nat entries                        [Ok..] [0x0]
->>>>>>>>> [FSCK] SIT valid block bitmap checking                [Ok..]
->>>>>>>>> [FSCK] Hard link checking for regular file            [Ok..] [0x0]
->>>>>>>>> [FSCK] valid_block_count matching with CP             [Ok..] [0x0]
->>>>>>>>> [FSCK] valid_node_count matcing with CP (de lookup)   [Ok..] [0x0]
->>>>>>>>> [FSCK] valid_node_count matcing with CP (nat lookup)  [Ok..] [0x0]
->>>>>>>>> [FSCK] valid_inode_count matched with CP              [Ok..] [0x0]
->>>>>>>>> [FSCK] free segment_count matched with CP             [Ok..]
->>>>>>>>> [0x1519]
->>>>>>>>> [FSCK] next block offset is free                      [Ok..]
->>>>>>>>> [FSCK] fixing SIT types
->>>>>>>>> [FSCK] other corrupted bugs                           [Fail]
->>>>>>>>> [move_curseg_info:1471] Move curseg[0] 0 -> 0 after 5000
->>>>>>>>> [move_curseg_info:1471] Move curseg[1] 1 -> 1 after 5000
->>>>>>>>> [move_curseg_info:1471] Move curseg[2] 2 -> 2 after 5000
->>>>>>>>> [move_curseg_info:1471] Move curseg[3] 3 -> 3 after 5000
->>>>>>>>> [move_curseg_info:1471] Move curseg[4] 4 -> 4 after 5000
->>>>>>>>> [move_curseg_info:1471] Move curseg[5] 5 -> 5 after 5000
->>>>>>>>>
->>>>>>>>> Done.
->>>>>>>>>
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> Trying to mount it , no success, gives
->>>>>>>>>
->>>>>>>>> F2FS-fs (sdc1): Failed to read root inode.
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> Any help or advice will be much appreciated.
->>>>>>>>> Keep up the great work on f2fs.
->>>>>>>>>
->>>>>>>>> Kindest Regards
->>>>>>>>>
->>>>>>>>> Stephanos Mallouris
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> _______________________________________________
->>>>>>>>> Linux-f2fs-devel mailing list
->>>>>>>>> Linux-f2fs-devel@lists.sourceforge.net
->>>>>>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>>>>>>>
->>>>>>
->>>>
->>
->>
->>
->>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->> .
->>
->
 
 
 _______________________________________________
