@@ -2,59 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 346291252C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Dec 2019 21:10:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C438E1252C5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Dec 2019 21:10:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ihfe2-0007BD-Ed; Wed, 18 Dec 2019 20:10:06 +0000
+	id 1ihfe0-0000iN-DN; Wed, 18 Dec 2019 20:10:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ihfdy-0007AC-6o
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 20:10:02 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ihfdx-0000hP-LW
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 20:10:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9wlYAg8NHN5uZ3ydGRdYz8rlf6RYtg1kQkxacdV9d84=; b=LGN8vIjm1Ze+NFAuS28mHQVr5y
- HIh5OREEId6lkjANRQm8ujmaBu019GgYB3u9KaJKKUDyRAb5Jlf9BvSnwfW4CUeVSWpqvy/HW3CAW
- lMMCnNZSAyVCZAxbO7WOvbJRrFCtATH0+E0Q94bCiN714wLtsxBq/qiEMXHgW1IFOl1s=;
+ bh=NFzT/D6FFPxhoZ/pqizjRUBdcOsuHBfUb4Z3CuppKwI=; b=S5EX6wAGJr/wpRYhWo352IMgdq
+ 3x1wencB/qeFeoDfjUojlGhMM4ftYtvAUn8sgiXld4YrmDAYmXB4pG8NH4v2tz6+6uoyIdSUPDOnM
+ WMlOl7Rr5lmwjGDCcWP4H9ajv3I82YIcbnUSvWh1XZU27eLIzOwd0fu25FGZBK9d5MQA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9wlYAg8NHN5uZ3ydGRdYz8rlf6RYtg1kQkxacdV9d84=; b=W
- YLBLEE7Kz7wmISlgcYvF3mp5Hj30kGwGARi988RUh/+Q41WzHn57dz48632COIXTncifFfkBiYdKG
- POXJ1TjRXavgkTOBplyWPWfLAfWyJh7fhi49jd5ac9sBtczTYxq224C0JGvZ+TiplwnCsmn2lDzpE
- xMuNkBQ+l/5z7W9M=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NFzT/D6FFPxhoZ/pqizjRUBdcOsuHBfUb4Z3CuppKwI=; b=bAIx/gQYXM+zFMIBtpB7TsRm7U
+ nWpi0hpQ28BE+OHb9vrllFIQApytVpj734WcNsp8lihpK45aisutZE4iNbesSO4Cvk5iRd+x6H4y2
+ ZZZQEyogTzgZF9O1xlSFLNENDKyEWk2qjdlGTfBt543A3kNurDfzb+VLphC33nBe1U7o=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ihfdu-0091lE-Sy
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 20:10:02 +0000
+ id 1ihfdv-009Ago-I6
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Dec 2019 20:10:01 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5DFEA2176D;
+ by mail.kernel.org (Postfix) with ESMTPSA id 030A821D7D;
  Wed, 18 Dec 2019 20:09:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576699788;
- bh=/KD7EM6C7AOfwLcr9C9xpVsfMo+pOZkTit5WAuTRmPU=;
- h=From:To:Cc:Subject:Date:From;
- b=2csad9tys+XBfYmT6nRuod03RfXeQE02r+DxP54UNLUBf7n32ThbskR3t6v5WcKzO
- 27xZeBLu3zNBIqVL45BPIS0vj2dZL3cD9/lcpIDGnjyiAQgCwceFGBBukcV2rZn8kX
- zLBO6TgZHPvKEAoWLzsCi04ew4/2uu5aW1opLFTI=
+ s=default; t=1576699789;
+ bh=Rod+bJ2QMrojGgJqYQnIMGlsLvajxvwq+9925iKpS+4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=X/xImYerBfbvNWoa9mF0Ye/pmPU3bqMMPKLjR53RlCEEdyd+kT4scluxwEVn4OTMG
+ lCAyR7kgoh1+9w9UZ2lgeMvIhbqGgkHgD33R6v7uKGeJIZ0nPwQY4odbkBhgRS4TtX
+ c+Xd/UcA4lO/1xzAdZnL/MT/qEBOY87ICRtrDF9s=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 18 Dec 2019 12:09:44 -0800
-Message-Id: <20191218200947.20445-1-jaegeuk@kernel.org>
+Date: Wed, 18 Dec 2019 12:09:45 -0800
+Message-Id: <20191218200947.20445-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.24.0.525.g8f36a354ae-goog
+In-Reply-To: <20191218200947.20445-1-jaegeuk@kernel.org>
+References: <20191218200947.20445-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -67,10 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ihfdu-0091lE-Sy
-Subject: [f2fs-dev] [PATCH 1/4] f2fs: convert inline_dir early before
- starting rename
+X-Headers-End: 1ihfdv-009Ago-I6
+Subject: [f2fs-dev] [PATCH 2/4] f2fs: don't put new_page twice in f2fs_rename
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,144 +87,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If we hit an error during rename, we'll get two dentries in different
-directories.
+In f2fs_rename(), new_page is gone after f2fs_set_link(), but it tries
+to put again when whiteout is failed and jumped to put_out_dir.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/f2fs.h   |  1 +
- fs/f2fs/inline.c | 30 ++++++++++++++++++++++++++++--
- fs/f2fs/namei.c  | 36 +++++++++++++-----------------------
- 3 files changed, 42 insertions(+), 25 deletions(-)
+ fs/f2fs/namei.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index dbc20d33d0e1..8d64525743cb 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3490,6 +3490,7 @@ void f2fs_truncate_inline_inode(struct inode *inode,
- int f2fs_read_inline_data(struct inode *inode, struct page *page);
- int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page);
- int f2fs_convert_inline_inode(struct inode *inode);
-+int f2fs_convert_inline_dir(struct inode *dir);
- int f2fs_write_inline_data(struct inode *inode, struct page *page);
- bool f2fs_recover_inline_data(struct inode *inode, struct page *npage);
- struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 52f85ed07a15..f82c3d9cf333 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -530,7 +530,7 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct page *ipage,
- 	return err;
- }
- 
--static int f2fs_convert_inline_dir(struct inode *dir, struct page *ipage,
-+static int do_convert_inline_dir(struct inode *dir, struct page *ipage,
- 							void *inline_dentry)
- {
- 	if (!F2FS_I(dir)->i_dir_level)
-@@ -539,6 +539,32 @@ static int f2fs_convert_inline_dir(struct inode *dir, struct page *ipage,
- 		return f2fs_move_rehashed_dirents(dir, ipage, inline_dentry);
- }
- 
-+int f2fs_convert_inline_dir(struct inode *dir)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
-+	struct page *ipage;
-+	void *inline_dentry = NULL;
-+	int err;
-+
-+	if (!f2fs_has_inline_dentry(dir))
-+		return 0;
-+
-+	f2fs_lock_op(sbi);
-+
-+	ipage = f2fs_get_node_page(sbi, dir->i_ino);
-+	if (IS_ERR(ipage))
-+		return PTR_ERR(ipage);
-+
-+	inline_dentry = inline_data_addr(dir, ipage);
-+
-+	err = do_convert_inline_dir(dir, ipage, inline_dentry);
-+	if (!err)
-+		f2fs_put_page(ipage, 1);
-+
-+	f2fs_unlock_op(sbi);
-+	return err;
-+}
-+
- int f2fs_add_inline_entry(struct inode *dir, const struct qstr *new_name,
- 				const struct qstr *orig_name,
- 				struct inode *inode, nid_t ino, umode_t mode)
-@@ -562,7 +588,7 @@ int f2fs_add_inline_entry(struct inode *dir, const struct qstr *new_name,
- 
- 	bit_pos = f2fs_room_for_filename(d.bitmap, slots, d.max);
- 	if (bit_pos >= d.max) {
--		err = f2fs_convert_inline_dir(dir, ipage, inline_dentry);
-+		err = do_convert_inline_dir(dir, ipage, inline_dentry);
- 		if (err)
- 			return err;
- 		err = -EAGAIN;
 diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 5d9584281935..61615ab466c2 100644
+index 61615ab466c2..91e7b8360d2a 100644
 --- a/fs/f2fs/namei.c
 +++ b/fs/f2fs/namei.c
-@@ -855,7 +855,6 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+@@ -850,7 +850,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 	struct inode *old_inode = d_inode(old_dentry);
+ 	struct inode *new_inode = d_inode(new_dentry);
+ 	struct inode *whiteout = NULL;
+-	struct page *old_dir_page;
++	struct page *old_dir_page = NULL;
+ 	struct page *old_page, *new_page = NULL;
  	struct f2fs_dir_entry *old_dir_entry = NULL;
  	struct f2fs_dir_entry *old_entry;
- 	struct f2fs_dir_entry *new_entry;
--	bool is_old_inline = f2fs_has_inline_dentry(old_dir);
- 	int err;
+@@ -941,6 +941,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 			goto put_out_dir;
  
- 	if (unlikely(f2fs_cp_error(sbi)))
-@@ -868,6 +867,19 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 			F2FS_I(old_dentry->d_inode)->i_projid)))
- 		return -EXDEV;
+ 		f2fs_set_link(new_dir, new_entry, new_page, old_inode);
++		new_page = NULL;
  
-+	/*
-+	 * old entry and new entry can locate in the same inline
-+	 * dentry in inode, when attaching new entry in inline dentry,
-+	 * it could force inline dentry conversion, after that,
-+	 * old_entry and old_page will point to wrong address, in
-+	 * order to avoid this, let's do the check and update here.
-+	 */
-+	if (old_dir == new_dir && !new_inode) {
-+		err = f2fs_convert_inline_dir(old_dir);
-+		if (err)
-+			return err;
-+	}
-+
- 	if (flags & RENAME_WHITEOUT) {
- 		err = f2fs_create_whiteout(old_dir, &whiteout);
- 		if (err)
-@@ -954,28 +966,6 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 		new_inode->i_ctime = current_time(new_inode);
+ 		down_write(&F2FS_I(new_inode)->i_sem);
+@@ -980,6 +981,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 	f2fs_mark_inode_dirty_sync(old_inode, false);
  
- 		if (old_dir_entry)
- 			f2fs_i_links_write(new_dir, true);
--
--		/*
--		 * old entry and new entry can locate in the same inline
--		 * dentry in inode, when attaching new entry in inline dentry,
--		 * it could force inline dentry conversion, after that,
--		 * old_entry and old_page will point to wrong address, in
--		 * order to avoid this, let's do the check and update here.
--		 */
--		if (is_old_inline && !f2fs_has_inline_dentry(old_dir)) {
--			f2fs_put_page(old_page, 0);
--			old_page = NULL;
--
--			old_entry = f2fs_find_entry(old_dir,
--						&old_dentry->d_name, &old_page);
--			if (!old_entry) {
--				err = -ENOENT;
--				if (IS_ERR(old_page))
--					err = PTR_ERR(old_page);
--				f2fs_unlock_op(sbi);
--				goto out_dir;
--			}
--		}
- 	}
+ 	f2fs_delete_entry(old_entry, old_page, old_dir, NULL);
++	old_page = NULL;
  
- 	down_write(&F2FS_I(old_inode)->i_sem);
+ 	if (whiteout) {
+ 		set_inode_flag(whiteout, FI_INC_LINK);
+@@ -1015,8 +1017,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
+ 
+ put_out_dir:
+ 	f2fs_unlock_op(sbi);
+-	if (new_page)
+-		f2fs_put_page(new_page, 0);
++	f2fs_put_page(new_page, 0);
+ out_dir:
+ 	if (old_dir_entry)
+ 		f2fs_put_page(old_dir_page, 0);
 -- 
 2.24.0.525.g8f36a354ae-goog
 
