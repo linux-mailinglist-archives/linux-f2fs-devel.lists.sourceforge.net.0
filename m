@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A7E3128C17
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2019 01:16:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A147A128C30
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2019 03:00:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iiov0-0007EJ-7m; Sun, 22 Dec 2019 00:16:22 +0000
+	id 1iiqXz-00035Z-3N; Sun, 22 Dec 2019 02:00:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iiouy-0007E8-7T
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Dec 2019 00:16:20 +0000
+ (envelope-from <tytso@mit.edu>) id 1iiqXx-00035N-VV
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Dec 2019 02:00:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JBXvJfArDIUHBEOO1lTRUbwOFqOeE91lqlG4Jj9DJKs=; b=J5Nf+aVUNLpyxGCMlE73Ts6vCb
- yOLTnHc9Kln3/4eo8rmZ6KYJ3HzLth5y5s7Cbw0YWMXtv0tENNDiWDIxC6Q4+eFGzxiPYkFW6yMty
- k5eA69pIL6bumHX3CIOeZ8K0m+hnltKKGqEyqkLl9lJSsEzX8woFeUJ5ixso4biG2bsM=;
+ bh=2qEYO0x6euIDQsPuQlnVZgH4EwXjUmOWQOSUlq6rg10=; b=KfGuEiUmXpTXN6r6tjhbSr386Q
+ SO0c2YyK7BqxLme+lKl9jZtdqVrp/h75Pqgr1YUB32eyoC7aIL1/HzI60ZQmlx3MAjixEcMRnODpW
+ 7VXlj+uFW0FE2bqi+XanyqXHOwWb5yx951F6qJmHC2cBcnoG9pQEo/MbrJIpGaDeOgi8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,49 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JBXvJfArDIUHBEOO1lTRUbwOFqOeE91lqlG4Jj9DJKs=; b=Wp8Ie84kYzEChYkTlbIk3zF4h9
- hxu0iQPXelqbk0LW8njnxKbQwbfGxBJUsA9rd7xHfJ0Gw3LXfmDAyJ9Cmhxp54dfI4SseSmhkjAky
- Yzxdd6qM3qSm8NyUcWs7BIldqfXGrBuYhth5774JhVFiYNPcP42v6OcZ7iJcrOO1NFm0=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=2qEYO0x6euIDQsPuQlnVZgH4EwXjUmOWQOSUlq6rg10=; b=XcN2pAt7vnCCfqmXL0Mj3yIr7Q
+ TF+VqrvpKwB34oqdAWKLHyN6oeBfNxPmlgLO117yKrQPx0BQQ7vSVtiXovYOuRRsKYxfHgoYwwHgZ
+ cH9rdFytK4LPGII/zeUWdkcnk6n5S2yZn7r3FlXPSK+N99MZVYqlQ0HF0TervWijqZR0=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iiouu-00C4Gk-Vl
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Dec 2019 00:16:20 +0000
-Received: from zzz.localdomain
- (h75-100-12-111.burkwi.broadband.dynamic.tds.net [75.100.12.111])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B0C0A206B7;
- Sun, 22 Dec 2019 00:16:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576973771;
- bh=zi2nezPZMF4U5iDzHEZMniOW0jiKQ3XbzvQhTGVXih0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PmEfdcFEm4iZEYixgfnC/uRgDEvX64zJcJZxYGNrmnC0RXjmgUCwRq2bvJHzcfEd7
- cD8IWH5mszK2iHiQeuHCMd4zK8J0IDMhr8Utv4MZmvn41dMIQwyBIhGe4pZDLiqNMR
- HajyfoOLGjhfi6UBWGo831W+/NFlYI1SyH8S+KUA=
-Date: Sat, 21 Dec 2019 18:16:08 -0600
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20191222001608.GB551@zzz.localdomain>
-References: <20191218145136.172774-1-satyat@google.com>
- <20191218145136.172774-10-satyat@google.com>
+ id 1iiqXw-00CEwY-0y
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Dec 2019 02:00:41 +0000
+Received: from callcc.thunk.org (pool-72-93-95-157.bstnma.fios.verizon.net
+ [72.93.95.157]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id xBM1xvSc030406
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 21 Dec 2019 20:59:57 -0500
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+ id DA5AB420822; Sat, 21 Dec 2019 20:59:56 -0500 (EST)
+Date: Sat, 21 Dec 2019 20:59:56 -0500
+From: "Theodore Y. Ts'o" <tytso@mit.edu>
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Message-ID: <20191222015956.GA63378@mit.edu>
+References: <20191218130935.32402-1-agruenba@redhat.com>
+ <20191218185216.GA7497@magnolia>
+ <CAHc6FU7vuiN4iCB3TthLaow+7c41UUS0MYEeiJ5b1iPStT=+sA@mail.gmail.com>
+ <20191218192331.GA7473@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191218145136.172774-10-satyat@google.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20191218192331.GA7473@magnolia>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iiouu-00C4Gk-Vl
-Subject: Re: [f2fs-dev] [PATCH v6 9/9] ext4: add inline encryption support
+X-Headers-End: 1iiqXw-00CEwY-0y
+Subject: Re: [f2fs-dev] [PATCH v3] fs: Fix page_mkwrite off-by-one errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,50 +75,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Cc: Jan Kara <jack@suse.cz>, Adrian Hunter <adrian.hunter@intel.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Sage Weil <sage@redhat.com>,
+ Richard Weinberger <richard@nod.at>, Christoph Hellwig <hch@infradead.org>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4 <linux-ext4@vger.kernel.org>,
+ Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Ceph Development <ceph-devel@vger.kernel.org>,
+ Artem Bityutskiy <dedekind1@gmail.com>, Jeff Layton <jlayton@kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ linux-mtd@lists.infradead.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 18, 2019 at 06:51:36AM -0800, Satya Tangirala wrote:
-> @@ -1460,6 +1466,7 @@ enum {
->  	Opt_journal_path, Opt_journal_checksum, Opt_journal_async_commit,
->  	Opt_abort, Opt_data_journal, Opt_data_ordered, Opt_data_writeback,
->  	Opt_data_err_abort, Opt_data_err_ignore, Opt_test_dummy_encryption,
-> +	Opt_inlinecrypt,
->  	Opt_usrjquota, Opt_grpjquota, Opt_offusrjquota, Opt_offgrpjquota,
->  	Opt_jqfmt_vfsold, Opt_jqfmt_vfsv0, Opt_jqfmt_vfsv1, Opt_quota,
->  	Opt_noquota, Opt_barrier, Opt_nobarrier, Opt_err,
-> @@ -1556,6 +1563,7 @@ static const match_table_t tokens = {
->  	{Opt_noinit_itable, "noinit_itable"},
->  	{Opt_max_dir_size_kb, "max_dir_size_kb=%u"},
->  	{Opt_test_dummy_encryption, "test_dummy_encryption"},
-> +	{Opt_inlinecrypt, "inlinecrypt"},
->  	{Opt_nombcache, "nombcache"},
->  	{Opt_nombcache, "no_mbcache"},	/* for backward compatibility */
->  	{Opt_removed, "check=none"},	/* mount option from ext2/3 */
-> @@ -1767,6 +1775,11 @@ static const struct mount_opts {
->  	{Opt_jqfmt_vfsv1, QFMT_VFS_V1, MOPT_QFMT},
->  	{Opt_max_dir_size_kb, 0, MOPT_GTE0},
->  	{Opt_test_dummy_encryption, 0, MOPT_GTE0},
-> +#ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
-> +	{Opt_inlinecrypt, EXT4_MOUNT_INLINECRYPT, MOPT_SET},
-> +#else
-> +	{Opt_inlinecrypt, EXT4_MOUNT_INLINECRYPT, MOPT_NOSUPPORT},
-> +#endif
->  	{Opt_nombcache, EXT4_MOUNT_NO_MBCACHE, MOPT_SET},
->  	{Opt_err, 0, 0}
->  };
+On Wed, Dec 18, 2019 at 11:23:31AM -0800, Darrick J. Wong wrote:
+> *OH*, because we're stuffing the value in ret2, not ret.  Ok, that makes
+> more sense.  Er, I guess I don't mind pushing via iomap tree, but could
+> we get some acks from Ted and any of the ceph maintainers?
 
-This mount option will need to be documented in
-Documentation/admin-guide/ext4.rst for ext4 and
-Documentation/filesystems/f2fs.txt for f2fs.
+Acked-by: Theodore Ts'o <tytso@mit.edu>
 
-- Eric
+My only nit is the same one Jan raised, which is should
+page_mkwrite_check_truncate() be an inline function?
+
+			      	    - Ted
 
 
 _______________________________________________
