@@ -2,90 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78C0D129333
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Dec 2019 09:41:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B213129A5B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Dec 2019 20:30:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ijJHG-0002GY-PS; Mon, 23 Dec 2019 08:41:22 +0000
+	id 1ijTP4-0000GZ-J0; Mon, 23 Dec 2019 19:30:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <geert.uytterhoeven@gmail.com>) id 1ijJHF-0002GE-6G
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Dec 2019 08:41:21 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ijTP2-0000GQ-Ng
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Dec 2019 19:30:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cDv9UaL4HKxCZwOpeNm1xbtf2cmQl4fg1wQxfmqaPlY=; b=GmC7XHCIUBtBFBHa5LV98uzU8U
- MTCsFkgg7X7XzPwnannzmsIpNJuf8nmPMsi976hyXMpo/MdXW83nrFwVbBX22g8e+5nciVlhaP4yT
- 23tJae2MsH8ap7ENYFUMdjIk+Dn5vUWj3WUA052ZPuVyelDLbW45j10plBm2Hsyz12j8=;
+ bh=a9daPsubFq/h0bO1ATnZ5dTZU+JPtWAw4KBuXMJhEmA=; b=nOTpkFVtEkkTVYG5X9Z7zofq/g
+ Tj8rtErGDmoe9FPmO+b341zn93vpZaCdpgyLkUGJFCx6pnidPJp6QYJmDlIQU32TwgnAd/9ymLcAt
+ mYwo2k7HLjqcq4nCLfgDrbgBf/jD7w71+R7PJSlG0iIy6vQjQB2C5OJp9RQrezxZw0Ic=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cDv9UaL4HKxCZwOpeNm1xbtf2cmQl4fg1wQxfmqaPlY=; b=EZjp2gL4xzaXl+/HAB5l7jwiRu
- LQkyswk3lg+MNGbpcbml6bUtwJl0CULBhokqMkDO0C+8tXP+LKBn4sYDLU0iZU+whL1AUOYVfrTdf
- iLxJ6sclp7jJbde8EWk2goiKyR/o1KmPnuRfU1oWO7DkHySzTuHOr3oXpSzIxA63dMfw=;
-Received: from mail-ot1-f67.google.com ([209.85.210.67])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ijJHD-00Ct7m-6O
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Dec 2019 08:41:20 +0000
-Received: by mail-ot1-f67.google.com with SMTP id b18so21229806otp.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 23 Dec 2019 00:41:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cDv9UaL4HKxCZwOpeNm1xbtf2cmQl4fg1wQxfmqaPlY=;
- b=sFnSsN5i6LwMX+EcSo408c1Z7ZlQExJWGGnuJpsuF0uOlp3ypyyeXPJZvOyXOC8l4h
- dokz9A7U9BYn63T4JukT38pozDj9UMWvnL9eg/+NgCwhDXWv6gs5crtsW0OJPJ7YvgYG
- mrdX8R0pd6rDJGyhFzb9N7RZ2Jnaeuw2B8GXRODieOzpCqMuLBuHKsBSaiFvN78CwoGe
- 6ZoYwbcEPq3LUVWjefByHIPd2GFm9+4dZ967ui1UU4GXaTdoroXcIDiQFTAF2/Z8yXAk
- yuLwunirnoI8oa7lDS7+n0uaTeUr105/vlHNYOqyRmclYm5SF//LEAP1bosZBgYqlwT9
- SeQg==
-X-Gm-Message-State: APjAAAVuAP598/0E/3rER5Ks5MO5jsajK+s9+TpkBvLAkpc2tsPULqgX
- fl2vkD2Qj+l8ePBs41qXY12f9yM1wlRE2ZWM06k=
-X-Google-Smtp-Source: APXvYqx2KCiv7cxuDdzBfA2c2NhXkW2xa7BGOvhzkGGauQ0VJ6aD6A5SkDirLFnjAg8AJrwmGlawMoHMEhNiYeHVBR4=
-X-Received: by 2002:a9d:dc1:: with SMTP id 59mr31479287ots.250.1577090473314; 
- Mon, 23 Dec 2019 00:41:13 -0800 (PST)
-MIME-Version: 1.0
-References: <20191223040020.109570-1-yuchao0@huawei.com>
-In-Reply-To: <20191223040020.109570-1-yuchao0@huawei.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 23 Dec 2019 09:41:02 +0100
-Message-ID: <CAMuHMdUDMv_mMw_ZU4BtuRKX1OvMhjLWw2owTcAP-0D4j5XROw@mail.gmail.com>
+ bh=a9daPsubFq/h0bO1ATnZ5dTZU+JPtWAw4KBuXMJhEmA=; b=EhOtYDcsmwo9rZHYlACk/pvGlE
+ GRRMtTcm1DDotFsSOs1ehllaZuKpl0ZrpiJI/2Xrmn+VVbQdBo0tEVjtxhYJ+Ozmxj/35S8IYJGfD
+ qYiIIm2ddfiAamaBay8ZW/5qOM+vjcydip5gUBpCTAe2h74RkOpft4SW4eWQmR8yKZ70=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ijTOv-00Bd8Y-Rl
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Dec 2019 19:30:04 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3117A20643;
+ Mon, 23 Dec 2019 19:29:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1577129392;
+ bh=9xZo8MS17ymclDrHbF1C0xS+tnJ1Y5IWGQbRr7M9kkU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Nwn6s9KbMF15IjI1ZXuDaSE9Zju8WT9h4Lpb9pUfJXhj0qSfteIW55/zYysZwScIE
+ BVOuvKY6q00D+l0hCtzUWO5z8gXFHKmiFv6ns7HndkBFJ62bs+dXrSkRsJW/40Eza/
+ sGS+Ac+/Fg9mHX2J8av4LCPCcGlLRDwe1LUo84H4=
+Date: Mon, 23 Dec 2019 11:29:51 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-X-Spam-Score: 0.1 (/)
+Message-ID: <20191223192951.GA49839@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20191216062806.112361-1-yuchao0@huawei.com>
+ <20191218214619.GA20072@jaegeuk-macbookpro.roam.corp.google.com>
+ <c7035795-73b3-d832-948f-deb36213ba07@huawei.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <c7035795-73b3-d832-948f-deb36213ba07@huawei.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.67 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (geert.uytterhoeven[at]gmail.com)
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux-m68k.org]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.67 listed in wl.mailspike.net]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and EnvelopeFrom
- freemail headers are different
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ijJHD-00Ct7m-6O
-Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce DEFAULT_IO_TIMEOUT_JIFFIES
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ijTOv-00Bd8Y-Rl
+Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,110 +85,165 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux FS Devel <linux-fsdevel@vger.kernel.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+On 12/23, Chao Yu wrote:
+> Hi Jaegeuk,
+> 
+> Sorry for the delay.
+> 
+> On 2019/12/19 5:46, Jaegeuk Kim wrote:
+> > Hi Chao,
+> > 
+> > I still see some diffs from my latest testing version, so please check anything
+> > that you made additionally from here.
+> > 
+> > https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=25d18e19a91e60837d36368ee939db13fd16dc64
+> 
+> I've checked the diff and picked up valid parts, could you please check and
+> comment on it?
 
-CC linux-fsdevel
+Let me test first and see the code change soon.
 
-On Mon, Dec 23, 2019 at 5:01 AM Chao Yu <yuchao0@huawei.com> wrote:
-> As Geert Uytterhoeven reported:
->
-> for parameter HZ/50 in congestion_wait(BLK_RW_ASYNC, HZ/50);
->
-> On some platforms, HZ can be less than 50, then unexpected 0 timeout
-> jiffies will be set in congestion_wait().
->
-> This patch introduces a macro DEFAULT_IO_TIMEOUT_JIFFIES to limit
-> mininum value of timeout jiffies.
->
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Thanks,
 
-Thanks for your patch!
-
+> 
 > ---
->  fs/f2fs/compress.c |  3 ++-
->  fs/f2fs/data.c     |  5 +++--
->  fs/f2fs/f2fs.h     |  2 ++
->  fs/f2fs/gc.c       |  3 ++-
->  fs/f2fs/inode.c    |  3 ++-
->  fs/f2fs/node.c     |  3 ++-
->  fs/f2fs/recovery.c |  6 ++++--
->  fs/f2fs/segment.c  | 12 ++++++++----
->  fs/f2fs/super.c    |  6 ++++--
->  9 files changed, 29 insertions(+), 14 deletions(-)
->
+>  fs/f2fs/compress.c |  8 ++++----
+>  fs/f2fs/data.c     | 18 +++++++++++++++---
+>  fs/f2fs/f2fs.h     |  3 +++
+>  fs/f2fs/file.c     |  1 -
+>  4 files changed, 22 insertions(+), 8 deletions(-)
+> 
 > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 1bc86a54ad71..ee4fe8e644aa 100644
+> index af23ed6deffd..1bc86a54ad71 100644
 > --- a/fs/f2fs/compress.c
 > +++ b/fs/f2fs/compress.c
-> @@ -945,7 +945,8 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
->                         } else if (ret == -EAGAIN) {
->                                 ret = 0;
->                                 cond_resched();
-> -                               congestion_wait(BLK_RW_ASYNC, HZ/50);
-> +                               congestion_wait(BLK_RW_ASYNC,
-> +                                       DEFAULT_IO_TIMEOUT_JIFFIES);
->                                 lock_page(cc->rpages[i]);
->                                 clear_page_dirty_for_io(cc->rpages[i]);
->                                 goto retry_write;
+> @@ -593,7 +593,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  							fgp_flag, GFP_NOFS);
+>  		if (!page) {
+>  			ret = -ENOMEM;
+> -			goto unlock_pages;
+> +			goto release_pages;
+>  		}
+> 
+>  		if (PageUptodate(page))
+> @@ -608,13 +608,13 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  		ret = f2fs_read_multi_pages(cc, &bio, cc->cluster_size,
+>  						&last_block_in_bio, false);
+>  		if (ret)
+> -			goto release_pages;
+> +			goto unlock_pages;
+>  		if (bio)
+>  			f2fs_submit_bio(sbi, bio, DATA);
+> 
+>  		ret = f2fs_init_compress_ctx(cc);
+>  		if (ret)
+> -			goto release_pages;
+> +			goto unlock_pages;
+>  	}
+> 
+>  	for (i = 0; i < cc->cluster_size; i++) {
+> @@ -762,7 +762,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>  	if (err)
+>  		goto out_unlock_op;
+> 
+> -	psize = (cc->rpages[last_index]->index + 1) << PAGE_SHIFT;
+> +	psize = (loff_t)(cc->rpages[last_index]->index + 1) << PAGE_SHIFT;
+> 
+>  	err = f2fs_get_node_info(fio.sbi, dn.nid, &ni);
+>  	if (err)
 > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index f1f5c701228d..78b5c0b0287e 100644
+> index 19cd03450066..f1f5c701228d 100644
 > --- a/fs/f2fs/data.c
 > +++ b/fs/f2fs/data.c
-> @@ -2320,7 +2320,8 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
->                 /* flush pending IOs and wait for a while in the ENOMEM case */
->                 if (PTR_ERR(fio->encrypted_page) == -ENOMEM) {
->                         f2fs_flush_merged_writes(fio->sbi);
-> -                       congestion_wait(BLK_RW_ASYNC, HZ/50);
-> +                       congestion_wait(BLK_RW_ASYNC,
-> +                                       DEFAULT_IO_TIMEOUT_JIFFIES);
->                         gfp_flags |= __GFP_NOFAIL;
->                         goto retry_encrypt;
->                 }
-> @@ -2900,7 +2901,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
->                                         if (wbc->sync_mode == WB_SYNC_ALL) {
->                                                 cond_resched();
->                                                 congestion_wait(BLK_RW_ASYNC,
-> -                                                               HZ/50);
-> +                                                       DEFAULT_IO_TIMEOUT_JIFFIES);
->                                                 goto retry_write;
->                                         }
->                                         goto next;
+> @@ -184,13 +184,18 @@ static void f2fs_decompress_work(struct bio_post_read_ctx *ctx)
+>  }
+> 
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+> +void f2fs_verify_pages(struct page **rpages, unsigned int cluster_size)
+> +{
+> +	f2fs_decompress_end_io(rpages, cluster_size, false, true);
+> +}
+> +
+>  static void f2fs_verify_bio(struct bio *bio)
+>  {
+>  	struct page *page = bio_first_page_all(bio);
+>  	struct decompress_io_ctx *dic =
+>  			(struct decompress_io_ctx *)page_private(page);
+> 
+> -	f2fs_decompress_end_io(dic->rpages, dic->cluster_size, false, true);
+> +	f2fs_verify_pages(dic->rpages, dic->cluster_size);
+>  	f2fs_free_dic(dic);
+>  }
+>  #endif
+> @@ -507,10 +512,16 @@ static bool __has_merged_page(struct bio *bio, struct inode *inode,
+>  	bio_for_each_segment_all(bvec, bio, iter_all) {
+>  		struct page *target = bvec->bv_page;
+> 
+> -		if (fscrypt_is_bounce_page(target))
+> +		if (fscrypt_is_bounce_page(target)) {
+>  			target = fscrypt_pagecache_page(target);
+> -		if (f2fs_is_compressed_page(target))
+> +			if (IS_ERR(target))
+> +				continue;
+> +		}
+> +		if (f2fs_is_compressed_page(target)) {
+>  			target = f2fs_compress_control_page(target);
+> +			if (IS_ERR(target))
+> +				continue;
+> +		}
+> 
+>  		if (inode && inode == target->mapping->host)
+>  			return true;
+> @@ -2039,6 +2050,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  	if (ret)
+>  		goto out;
+> 
+> +	/* cluster was overwritten as normal cluster */
+>  	if (dn.data_blkaddr != COMPRESS_ADDR)
+>  		goto out;
+> 
 > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 16edbf4e05e8..4bdc20a94185 100644
+> index 5d55cef66410..17d2af4eeafb 100644
 > --- a/fs/f2fs/f2fs.h
 > +++ b/fs/f2fs/f2fs.h
-> @@ -559,6 +559,8 @@ enum {
->
->  #define DEFAULT_RETRY_IO_COUNT 8       /* maximum retry read IO count */
->
-> +#define        DEFAULT_IO_TIMEOUT_JIFFIES      (max_t(long, HZ/50, 1))
-> +
->  /* maximum retry quota flush count */
->  #define DEFAULT_RETRY_QUOTA_FLUSH_COUNT                8
->
-
-Seeing other file systems (ext4, xfs) and even core MM code suffers from
-the same issue, perhaps it makes sense to move this into congestion_wait(),
-i.e. increase the timeout to 1 if it's zero in the latter function?
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+> @@ -2719,6 +2719,7 @@ static inline void set_compress_context(struct inode *inode)
+>  			1 << F2FS_I(inode)->i_log_cluster_size;
+>  	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
+>  	set_inode_flag(inode, FI_COMPRESSED_FILE);
+> +	stat_inc_compr_inode(inode);
+>  }
+> 
+>  static inline unsigned int addrs_per_inode(struct inode *inode)
+> @@ -3961,6 +3962,8 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+>  		return true;
+>  	if (f2fs_is_multi_device(sbi))
+>  		return true;
+> +	if (f2fs_compressed_file(inode))
+> +		return true;
+>  	/*
+>  	 * for blkzoned device, fallback direct IO to buffered IO, so
+>  	 * all IOs can be serialized by log-structured write.
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index bde5612f37f5..9aeadf14413c 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1828,7 +1828,6 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>  				return -EINVAL;
+> 
+>  			set_compress_context(inode);
+> -			stat_inc_compr_inode(inode);
+>  		}
+>  	}
+>  	if ((iflags ^ fi->i_flags) & F2FS_NOCOMP_FL) {
+> -- 
+> 2.18.0.rc1
+> 
+> Thanks,
 
 
 _______________________________________________
