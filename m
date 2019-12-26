@@ -2,68 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE6A112A980
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2019 02:32:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3861712A983
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2019 02:38:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ikI0o-0002Xp-PO; Thu, 26 Dec 2019 01:32:26 +0000
+	id 1ikI6I-0002tp-Qd; Thu, 26 Dec 2019 01:38:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1ikI0m-0002Xe-Rx
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:32:24 +0000
+ (envelope-from <SRS0=56M7=2Q=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
+ id 1ikI6H-0002ti-MV
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:38:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Sy2kuW3S7FUjSDMBZ8B3RoQVzHq0jdZFDkbc3sAnS1k=; b=nFQwO1tFmLgQBCLQcsn+P5GwSV
- jf+lMajypPwSUBfqnGF+bFygeJu9NkRKwXjGf+F6U5FLHmi9S2ZjfJbFNezs/d3b3it1fTPXsuAKw
- VhKx9gB/nAaXVILJ2+tBF4QSix4K84FhdQ65UdI+sFBitcrsBHu9aQ/CaVK8zruZB82g=;
+ bh=i8ffzQAHxoGj+hZzwWQ33OqRGDz1gmKt4cOB5gHj7Zk=; b=OpSKqxZE3bZDMQ4riVgtI0L9D/
+ iaoS3nlMO2F9VLmG6wM/ItIXAzSQSvem6PVQjunqRnkL/30IMfOJv4EnG55yMyJQHN6XJ2L5yYpYh
+ wpy0b0PqYLfGEWtDNstuRJ4XkGMPRtPTjNhDBLUgStvtf8Z//A7HoQsa6MdlKEwLF97Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Sy2kuW3S7FUjSDMBZ8B3RoQVzHq0jdZFDkbc3sAnS1k=; b=fLgVASNl+nKQuiwi92JvFMEsuv
- TYGePiAdx6FnS/NAcXS7Icu52c4uVxgfEtvTf9TbyB6zg4bNR6pIScDgtNrBUmpNHJhLB42VvWtop
- HJ4FMer756+g+7Jg/vS5YvkQ9gX9lzz1/Q20eqPqxvkGSAxUT4pvicGbZI1zy54CRqWQ=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=i8ffzQAHxoGj+hZzwWQ33OqRGDz1gmKt4cOB5gHj7Zk=; b=a4ggpy8he10pgnNUSgq0mOi8oU
+ rZZmBWTcBlseIm1VHUvPEg89i14SKbQg0B+8m3nfzHhP8mbRA1JY+o0kpJt0puvuJNjHiJg1Y2m2m
+ KVwgZt+UCyM+Vb0XxgerXTIgPcSxeAf6fmOGXwZyj48l/THQOctu2WfgKjO790C4LgzA=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ikI0k-00FMhW-H1
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:32:24 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id C44EFEE8CA7C40A2CB7B;
- Thu, 26 Dec 2019 09:32:14 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 26 Dec
- 2019 09:32:10 +0800
-To: Pavel Machek <pavel@ucw.cz>, <jaegeuk@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, kernel list
- <linux-kernel@vger.kernel.org>, <sfr@canb.auug.org.au>, <david@ixit.cz>
-References: <20191222154917.GA22964@amd> <20191225130456.GA18929@duo.ucw.cz>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <0d067e7a-e301-0c1a-c651-33845ad2c333@huawei.com>
-Date: Thu, 26 Dec 2019 09:32:09 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1ikI6G-00Dwxs-C4
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:38:05 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 26 Dec 2019 01:37:53 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: low
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: CODE_FIX
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-205203-202145-eTAGgw0n2r@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-205203-202145@https.bugzilla.kernel.org/>
+References: <bug-205203-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20191225130456.GA18929@duo.ucw.cz>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1ikI0k-00FMhW-H1
-Subject: Re: [f2fs-dev] f2fs compile problem in next-20191220 on x86-32
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ikI6G-00Dwxs-C4
+Subject: [f2fs-dev] [Bug 205203] ram_thresh default (DEF_RAM_THRESHOLD) is
+ wrong (outdated) in f2fs document
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,61 +88,21 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/12/25 21:04, Pavel Machek wrote:
-> On Sun 2019-12-22 16:49:17, Pavel Machek wrote:
->> Hi!
->>
->> I'm getting this:
->>
->>   LD      .tmp_vmlinux1
->>   ld: fs/f2fs/file.o: in function `f2fs_truncate_blocks':
->>   file.c:(.text+0x2968): undefined reference to `__udivdi3'
->>   make: *** [Makefile:1079: vmlinux] Error 1
->>
->> when attempting to compile kernel for x86-32.
-> 
-> David bisected it:
-> 
-> https://bugzilla.kernel.org/show_bug.cgi?id=205967
-> 
-> And the bug is actually easy to see:
-> 
-> +int f2fs_truncate_blocks(struct inode *inode, u64 from, bool lock)
-> +{
-> +       u64 free_from = from;
-> +
-> +       /*
-> +        * for compressed file, only support cluster size
-> +        * aligned truncation.
-> +        */
-> +       if (f2fs_compressed_file(inode)) {
-> +               size_t cluster_size = PAGE_SIZE <<
-> +                                       F2FS_I(inode)->i_log_cluster_size;
-> +
-> +               free_from = roundup(from, cluster_size);
-> 
-> #define roundup(x, y) (                                 \
-> {                                                       \
->         typeof(y) __y = y;                              \
->         (((x) + (__y - 1)) / __y) * __y;                \
-> }                                                       \
-> 
-> div64 is needed instead of div in the roundup macro. Or actually... It
-> is quite stupid to use roundup like this on value that is power of
-> two, right?
+https://bugzilla.kernel.org/show_bug.cgi?id=205203
 
-This has been fixed in dev branch, could you check that? People still saw this
-issue because linux-next did not update after we fix this bug.
+Chao Yu (chao@kernel.org) changed:
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|ASSIGNED                    |RESOLVED
+         Resolution|---                         |CODE_FIX
 
-Thanks,
+--- Comment #2 from Chao Yu (chao@kernel.org) ---
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=4c3258b9b0fff24623a6e95381e1112cc290abd4
 
-> 
-> Best regards,
-> 									Pavel
-> 
-
+-- 
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
