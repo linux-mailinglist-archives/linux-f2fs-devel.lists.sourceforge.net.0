@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3861712A983
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2019 02:38:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1622312A985
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2019 02:40:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ikI6I-0002tp-Qd; Thu, 26 Dec 2019 01:38:06 +0000
+	id 1ikI8S-000773-Ni; Thu, 26 Dec 2019 01:40:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <SRS0=56M7=2Q=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1ikI6H-0002ti-MV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:38:05 +0000
+ id 1ikI8R-00076w-3v
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:40:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i8ffzQAHxoGj+hZzwWQ33OqRGDz1gmKt4cOB5gHj7Zk=; b=OpSKqxZE3bZDMQ4riVgtI0L9D/
- iaoS3nlMO2F9VLmG6wM/ItIXAzSQSvem6PVQjunqRnkL/30IMfOJv4EnG55yMyJQHN6XJ2L5yYpYh
- wpy0b0PqYLfGEWtDNstuRJ4XkGMPRtPTjNhDBLUgStvtf8Z//A7HoQsa6MdlKEwLF97Q=;
+ bh=TRY4t7gVOnStBJLFVTlELAwO3sDoOfKp6naG6revKbM=; b=RF77qh/0hpcGeHuLhecMF5Fw0k
+ rPBem+kK7wwHT18jG6P8rdqSh+coJ/UrISoem5WRazJTaI5hmtdTonUDnU6b67kdGpiIbMWkcK4It
+ 8eor2+ggiiCK21TQpPwn8T1eyZz+glBcfqD8+OFs5uUM0GSa1VkUDrq2VpJeLQxfmnmc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,19 +30,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i8ffzQAHxoGj+hZzwWQ33OqRGDz1gmKt4cOB5gHj7Zk=; b=a4ggpy8he10pgnNUSgq0mOi8oU
- rZZmBWTcBlseIm1VHUvPEg89i14SKbQg0B+8m3nfzHhP8mbRA1JY+o0kpJt0puvuJNjHiJg1Y2m2m
- KVwgZt+UCyM+Vb0XxgerXTIgPcSxeAf6fmOGXwZyj48l/THQOctu2WfgKjO790C4LgzA=;
+ bh=TRY4t7gVOnStBJLFVTlELAwO3sDoOfKp6naG6revKbM=; b=OKaEwrxZ2+yzrRoTOc8+Wzmoou
+ FnQvhqO1gCr37V475rFvP4n5E3eI0KEA9xUUiBEBDqaAz1KOqagyjSuhXvKEmpCU/9/QRd6to8pqh
+ QZnL+SmaN3j7INnhawhXh50/PF6ASH+1+n6w7Ov+UNGIoo9EGAozjJGY3gLyDL8ExY/k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ikI6G-00Dwxs-C4
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:38:05 +0000
+ id 1ikI8P-00FMoa-UR
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Dec 2019 01:40:19 +0000
 From: bugzilla-daemon@bugzilla.kernel.org
 Authentication-Results: mail.kernel.org;
  dkim=permerror (bad message/signature format)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 26 Dec 2019 01:37:53 +0000
+Date: Thu, 26 Dec 2019 01:40:12 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -50,17 +50,17 @@ X-Bugzilla-Product: File System
 X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: low
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: CODE_FIX
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-205203-202145-eTAGgw0n2r@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-205203-202145@https.bugzilla.kernel.org/>
-References: <bug-205203-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-205967-202145-QH1IKQW1ZW@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-205967-202145@https.bugzilla.kernel.org/>
+References: <bug-205967-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ikI6G-00Dwxs-C4
-Subject: [f2fs-dev] [Bug 205203] ram_thresh default (DEF_RAM_THRESHOLD) is
- wrong (outdated) in f2fs document
+X-Headers-End: 1ikI8P-00FMoa-UR
+Subject: [f2fs-dev] [Bug 205967] [bisected] f2fs compression support breaks
+ build
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,17 +88,12 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=205203
+https://bugzilla.kernel.org/show_bug.cgi?id=205967
 
-Chao Yu (chao@kernel.org) changed:
+--- Comment #1 from Chao Yu (chao@kernel.org) ---
+We have fixed this issue, could you please check commit in last dev branch?
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|ASSIGNED                    |RESOLVED
-         Resolution|---                         |CODE_FIX
-
---- Comment #2 from Chao Yu (chao@kernel.org) ---
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=4c3258b9b0fff24623a6e95381e1112cc290abd4
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev
 
 -- 
 You are receiving this mail because:
