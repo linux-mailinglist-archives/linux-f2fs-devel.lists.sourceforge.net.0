@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7246D12BCE7
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Dec 2019 07:51:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB25B12BD3A
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Dec 2019 11:10:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1il5wJ-0008Up-4D; Sat, 28 Dec 2019 06:51:07 +0000
+	id 1il92m-0004ox-93; Sat, 28 Dec 2019 10:10:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1il5wH-0008Uh-62
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Dec 2019 06:51:05 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1il92k-0004ok-8F
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Dec 2019 10:09:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bfhCg8Z0D74M7XkJqrWdsxWVKiuP2fjB/w2ueoNH7mo=; b=NABsDqq4Di0IHbQJQTKZHbQWXJ
- dmj9m5VNgmCuiV9u0krjmdCBcDJjTeNWDYzIZgBfs5stkGKvtgZJLOHZV7tVg40905q1Qa6nV2xOr
- yG9DWwJuHCnc2imDunnHEUp04peQuEmjaB/rmlfIZsTMRMW4aiNADV/F1oeMTiD9hzN4=;
+ bh=HsDD4Zh+CZgLNxNpVxDc3UZIABPX/pyhSykkEAX0IMo=; b=T6F4RDBwdyGR9+8R14/ExppSHW
+ CI2yuO5q+vDg3JrGV5HOjjE5k2CnbV+OWZ8P2tNVJ7Dd77kp/rJfVQ9hcAlQjEL4+TCo+4F0XZ8dr
+ pbQgfjxWrNd3d+UjDfqvXGi8p7eFOt0eC43qB8lbVGnJ9rNmeZ3Za00iUBQn8GRNmCtM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bfhCg8Z0D74M7XkJqrWdsxWVKiuP2fjB/w2ueoNH7mo=; b=liCduf1P2Rl/IMlmtdSWgy92dL
- 4Ga6w2OSlYO24tAW0CDJ8DvIN4OWyAkiMPjc/y/EhicFoHglVSNnCLnqpU9V/mH3RnJ1Fs0CPlPVY
- Vizimpr1tNrjgwXPTzphEjj4iGXIVeBQPfTtX4oI/rtzXqW0PTjTnMZDr5FWm+aZnNsQ=;
+ bh=HsDD4Zh+CZgLNxNpVxDc3UZIABPX/pyhSykkEAX0IMo=; b=kmR90lOEXNWlhAmd07B38egFLD
+ cc8l2FU2UA2FDo1BUsYxnVbRaBTBGer9LpN4MniZzGrS5Twpcx1qvpCXPfaRAA+m7G8p2eMOLZJOH
+ BXebn0H62MOoYWYVm4coQWLkWQ80hS/MmC0W2PnX7gBqkt9eS728Hl+N0lKKTN7CsGVc=;
 Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1il5wE-00H5FP-S9
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Dec 2019 06:51:05 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 34DFF71B53E4CD75E645;
- Sat, 28 Dec 2019 14:50:54 +0800 (CST)
+ id 1il92X-00HFeL-4m
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Dec 2019 10:09:56 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 2EBA8E6CB2E93B2D71F9;
+ Sat, 28 Dec 2019 18:09:38 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 28 Dec
- 2019 14:50:49 +0800
+ (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 28 Dec
+ 2019 18:09:37 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
  <linux-f2fs-devel@lists.sourceforge.net>
 References: <20191218200947.20445-1-jaegeuk@kernel.org>
- <20191218200947.20445-2-jaegeuk@kernel.org>
+ <20191218200947.20445-4-jaegeuk@kernel.org>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <049ce80a-d977-d15a-ad56-11ad7f5edd1f@huawei.com>
-Date: Sat, 28 Dec 2019 14:50:48 +0800
+Message-ID: <c66c284d-1528-ff0c-41df-552ddbc25235@huawei.com>
+Date: Sat, 28 Dec 2019 18:09:36 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20191218200947.20445-2-jaegeuk@kernel.org>
+In-Reply-To: <20191218200947.20445-4-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -67,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1il5wE-00H5FP-S9
-Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: don't put new_page twice in
- f2fs_rename
+X-Headers-End: 1il92X-00HFeL-4m
+Subject: Re: [f2fs-dev] [PATCH 4/4] f2fs: free sysfs kobject
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,8 +85,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2019/12/19 4:09, Jaegeuk Kim wrote:
-> In f2fs_rename(), new_page is gone after f2fs_set_link(), but it tries
-> to put again when whiteout is failed and jumped to put_out_dir.
+> Detected kmemleak.
 > 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
