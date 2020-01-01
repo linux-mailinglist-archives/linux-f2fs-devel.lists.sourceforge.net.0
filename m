@@ -2,74 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BC4312DAE4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Dec 2019 19:15:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E84112E0DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jan 2020 23:45:56 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1imM3H-0007nP-Cn; Tue, 31 Dec 2019 18:15:31 +0000
+	id 1immkS-0001Ez-E5; Wed, 01 Jan 2020 22:45:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1imM3F-0007nF-1P
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Dec 2019 18:15:29 +0000
+ (envelope-from <SRS0=qmMd=2W=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
+ id 1immkQ-0001Er-Eh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jan 2020 22:45:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CpJvdkoFOG8u6urxBV+FeTUD+acFwyhD9uYxs9gUu8M=; b=Gc/XJZQVR8toASYADbTFBcSNiC
- KDj6uaTpNzUflZ/eYfY4gKh0D6o1hNzaF2Fd+aNkpdsvO1Ixy1vEZqtmrJsTSu0Pdk1riLt+V/Rrr
- YXi7Elg9hMnkH+ceuOQI5xh0DAsE8Q2/NTF0wlz1+vyiLU269JxMzQqrkhuV+VFcrGGo=;
+ bh=SrzTFWAxS7vSuORzAhnwcmmCKwFJ0KOrgukRqGsM3qQ=; b=jUjLWfhYtWxW2VpUIg05n5ICsb
+ XFgvok6R3JsX2WWKg++CcsruXwQzGYfLRdGSWQBhrRGVEM+w+NLCP+anCjQBYqKdMBRFxAJ2RKpyB
+ X94jxK2SXh6cDRbFwXCUhL66zCZ0eIykkQ2RQsVkBqtOxyCIcj6Kq9C1WvoSWsWMdeos=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CpJvdkoFOG8u6urxBV+FeTUD+acFwyhD9uYxs9gUu8M=; b=e
- fDNg2Ce/72b5cf6u+Fp8UxhNaYeeZP3e2PKVuW3gCwEdhHyLLoOC3tcpvvzzY3RVj6UqgJLcsMEl2
- L76HzoJU2Pwg6XXevSKtpzCCBYyqWpzqN5iApoMVoqxPz/uKLeGXFgO0dUDnCTxHa9iJdsT4OHLQN
- dkc1zlUsmYKK6dXc=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SrzTFWAxS7vSuORzAhnwcmmCKwFJ0KOrgukRqGsM3qQ=; b=Fp6/W95Ii9C9DbOnfYrgnluWdU
+ 06hSuulIAgit3CURJGhMmxGMD3EiyhhF0GRJe2s2LJs7a84IVPl62HCn08TP5ysgLIexBC4E7Lm+8
+ SrXjYVHTtYEJ/XF2g8cp3Av9ol9atdjkOu/JPmGUAfT/FHgPNloPDmOuPRsJ9nwTgzFk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1imM38-004GMJ-PI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Dec 2019 18:15:27 +0000
-Received: from zzz.tds (h75-100-12-111.burkwi.broadband.dynamic.tds.net
- [75.100.12.111])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E9F58206E0;
- Tue, 31 Dec 2019 18:15:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1577816117;
- bh=R7F0k84TKiRuXBbh08JjpWu+dILQdgBWUuwJnRPVITs=;
- h=From:To:Cc:Subject:Date:From;
- b=VvBZ6DKLJT67FOwaf2TjKTfeJkQtxdwc1JKZLSGwK7uxvTFC0Yen37Bm4uySTPGit
- 8Iq+XBuHVNxJN9Z0/rGmLuz31TE7TdPcRtlOrOYjFeoZuect9/f2tFsFXhla5wgpv4
- +NKXpZwcV8tBvHd2cqOsJWT9qDan88gnaAgejH8Q=
-From: Eric Biggers <ebiggers@kernel.org>
+ id 1immkJ-006Iwc-9W
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jan 2020 22:45:50 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 31 Dec 2019 12:14:56 -0600
-Message-Id: <20191231181456.47957-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.24.1
+Date: Wed, 01 Jan 2020 22:45:37 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: david@ixit.cz
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: PATCH_ALREADY_AVAILABLE
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-205967-202145-utnsgxsWSD@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-205967-202145@https.bugzilla.kernel.org/>
+References: <bug-205967-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1imM38-004GMJ-PI
-Subject: [f2fs-dev] [PATCH] f2fs: remove unneeded check for error allocating
- bio_post_read_ctx
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: ixit.cz]
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1immkJ-006Iwc-9W
+Subject: [f2fs-dev] [Bug 205967] [bisected] f2fs compression support breaks
+ build
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,43 +88,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fscrypt@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=205967
 
-Since allocating an object from a mempool never fails when
-__GFP_DIRECT_RECLAIM (which is included in GFP_NOFS) is set, the check
-for failure to allocate a bio_post_read_ctx is unnecessary.  Remove it.
+David Heidelberg (okias) (david@ixit.cz) changed:
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/f2fs/data.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|---                         |PATCH_ALREADY_AVAILABLE
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 618a05bf356e..b52e1512f82e 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -939,11 +939,8 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 		post_read_steps |= 1 << STEP_VERITY;
- 
- 	if (post_read_steps) {
-+		/* Due to the mempool, this never fails. */
- 		ctx = mempool_alloc(bio_post_read_ctx_pool, GFP_NOFS);
--		if (!ctx) {
--			bio_put(bio);
--			return ERR_PTR(-ENOMEM);
--		}
- 		ctx->bio = bio;
- 		ctx->sbi = sbi;
- 		ctx->enabled_steps = post_read_steps;
+--- Comment #2 from David Heidelberg (okias) (david@ixit.cz) ---
+Tested, fixed.
+
 -- 
-2.24.1
-
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
