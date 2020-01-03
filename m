@@ -2,51 +2,51 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDEE612F662
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Jan 2020 10:51:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1958812F665
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Jan 2020 10:51:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1inJbm-0007xI-Vo; Fri, 03 Jan 2020 09:51:06 +0000
+	id 1inJcH-0004hG-Mt; Fri, 03 Jan 2020 09:51:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1inJbl-0007wd-Qq
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jan 2020 09:51:05 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1inJcG-0004gs-3k
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jan 2020 09:51:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
  CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G9xXhN3jFPN5qIzTB2Ga35mv167/rXPJBIj7SZGmH4E=; b=hhKN3irSF7FNrlSAb+vJaLSTsR
- jCJ6scgLFz1NfT1SZHNcgx55s4K/6P/m8l15/McRGXaej23Kc1lTTfqJQhn8RHqUDGqN6nYMo/o1a
- g+xNQ1QnSt6IIcMhxCVOQVE2UKZzIaeOCwoCJ81i2Jttxl8dqVenVHxBSJn75DWLr+nI=;
+ bh=68YXLrrHvvrjwcMDkkjfMdhMxGBNpU7NDGv1QpSZd1g=; b=HvtSFmwaAWBzsFQwNluBuvyBMK
+ y19dkaWEtJvvGOpXUTu2/ndVucKTqtjNA4ROVC1rzONZCiYsJpnr8tSQvb+Xu7pI7akM9/3VWwRja
+ f31/qtGol7lV9Lzc+IvQ2zcRHDwJnD8jMYWXEYUKlXgPyWZIdzBCgVl1GdCr73qTIJF4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=G9xXhN3jFPN5qIzTB2Ga35mv167/rXPJBIj7SZGmH4E=; b=j
- eTvxQwMNzlypzzeqxisKANuBUAZljQBFv+Sa73vL2WLeIFt+bYaQ4cIAGckCI8najPakQvqIdj+of
- xShIRd7AKwPvKFap2H8ndCCOUF+dQ8R6P8cXGSBJp+WlHxzqDKgUxuxIK6NLOtXc31RcGvbI9IpmH
- /1Zv/VVE4hoQFmfg=;
+ List-Owner:List-Archive; bh=68YXLrrHvvrjwcMDkkjfMdhMxGBNpU7NDGv1QpSZd1g=; b=L
+ QtgNFikXynahweeNHaeBZVSIcXdHjktuxj6OY0ujAgOIM3+fQzLASXwe0Al6zunXIpZoxSrYURiNd
+ xo3eqsMGE74363U7lZimrDEi7NttKghZAdFnbeK834VQjPxVOZuhp5scU5ileCdqH2MsW1AYQuHUz
+ W1/QzkI3wBn9n6Vs=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1inJbZ-008Gtp-KG
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jan 2020 09:51:05 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id D9219473D041D0E29CB6;
- Fri,  3 Jan 2020 17:50:42 +0800 (CST)
+ id 1inJc8-007yrO-1q
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jan 2020 09:51:30 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 8145DAB6D6BC0B2438A2;
+ Fri,  3 Jan 2020 17:51:19 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS413-HUB.china.huawei.com (10.3.19.213) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 3 Jan 2020 17:50:36 +0800
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.439.0; Fri, 3 Jan 2020 17:51:13 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 3 Jan 2020 17:50:33 +0800
-Message-ID: <20200103095033.8024-1-yuchao0@huawei.com>
+Date: Fri, 3 Jan 2020 17:51:07 +0800
+Message-ID: <20200103095107.8152-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
@@ -61,8 +61,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1inJbZ-008Gtp-KG
-Subject: [f2fs-dev] [PATCH] f2fs: compress: fix NULL pointer dereference
+X-Headers-End: 1inJc8-007yrO-1q
+Subject: [f2fs-dev] [PATCH TEST] f2fs: compress: fix deadlock in
+ prepare_compress_overwrite()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,74 +80,87 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
- BUG: kernel NULL pointer dereference, address: 0000000000000000
- #PF: supervisor read access in kernel mode
- #PF: error_code(0x0000) - not-present page
- PGD 0 P4D 0
- Oops: 0000 [#1] SMP PTI
- CPU: 11 PID: 70359 Comm: kworker/u256:4 Tainted: G           OE     5.5.0-rc1 #36
- Hardware name: Xen HVM domU, BIOS 4.1.2_115-908.790. 06/05/2017
- Workqueue: writeback wb_workfn (flush-251:0)
- RIP: 0010:f2fs_write_single_data_page+0x4f/0x700 [f2fs]
- Call Trace:
-  ? __next_timer_interrupt+0xc0/0xc0
-  ? finish_wait+0x32/0x70
-  ? congestion_wait+0xa5/0x120
-  f2fs_write_multi_pages+0xc7/0x810 [f2fs]
-  f2fs_write_cache_pages+0x6c0/0x790 [f2fs]
-  ? select_task_rq_fair+0x584/0x800
-  ? atomic_notifier_chain_unregister+0x30/0x70
-  ? __set_page_dirty_nobuffers+0x101/0x150
-  f2fs_write_data_pages+0x2cd/0x320 [f2fs]
-  ? f2fs_update_inode+0x9c/0x4f0 [f2fs]
-  ? do_writepages+0x1a/0x60
-  do_writepages+0x1a/0x60
-  __writeback_single_inode+0x3d/0x340
-  writeback_sb_inodes+0x225/0x4a0
-  wb_writeback+0xf7/0x320
-  ? wb_workfn+0xa8/0x450
-  ? _raw_spin_unlock_bh+0xa/0x20
-  wb_workfn+0xa8/0x450
-  ? finish_task_switch+0x75/0x2a0
-  process_one_work+0x15e/0x3e0
-  worker_thread+0x4c/0x440
-  ? rescuer_thread+0x350/0x350
-  kthread+0xf8/0x130
-  ? kthread_unpark+0x70/0x70
-  ret_from_fork+0x35/0x40
+   100.00%    13.65%  fsstress  [f2fs]              [k] prepare_compress_overwrite
+            |
+            |--86.35%--prepare_compress_overwrite
+            |          |
+            |          |--46.78%--f2fs_read_multi_pages
+            |          |          |
+            |          |          |--19.81%--f2fs_decompress_end_io
+            |          |          |          |
+            |          |          |           --5.77%--unlock_page
+            |          |          |
+            |          |          |--19.53%--f2fs_get_dnode_of_data
 
-In scenario of truncate vs writeback, we need to check page's mapping
-before access it during writeback.
+In prepare_compress_overwrite(), we need to check cluster state before
+read cluster data, otherwise, read normal cluster as a compressed one
+will always cause failure and retry.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/compress.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/f2fs/compress.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index fa67ffd9d79d..9e8fba78db4d 100644
+index 9e8fba78db4d..f993b4ce1970 100644
 --- a/fs/f2fs/compress.c
 +++ b/fs/f2fs/compress.c
-@@ -932,6 +932,7 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
- 					enum iostat_type io_type,
- 					bool compressed)
+@@ -570,8 +570,7 @@ static void set_cluster_dirty(struct compress_ctx *cc)
+ }
+ 
+ static int prepare_compress_overwrite(struct compress_ctx *cc,
+-		struct page **pagep, pgoff_t index, void **fsdata,
+-		bool prealloc)
++		struct page **pagep, pgoff_t index, void **fsdata)
  {
-+	struct address_space *mapping = cc->inode->i_mapping;
- 	int i, _submitted;
- 	int ret, err = 0;
- 
-@@ -939,6 +940,11 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
- 		if (!cc->rpages[i])
- 			continue;
- retry_write:
-+		if (cc->rpages[i]->mapping != mapping) {
-+			unlock_page(cc->rpages[i]);
-+			continue;
-+		}
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(cc->inode);
+ 	struct address_space *mapping = cc->inode->i_mapping;
+@@ -582,11 +581,20 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+ 	unsigned int start_idx = start_idx_of_cluster(cc);
+ 	int i, idx;
+ 	int ret;
++	bool prealloc;
 +
- 		BUG_ON(!PageLocked(cc->rpages[i]));
++retry:
++	ret = is_compressed_cluster(cc);
++	if (ret <= 0)
++		return ret;
++
++	/* compressed case */
++	prealloc = (ret == CLUSTER_HAS_SPACE);
  
- 		ret = f2fs_write_single_data_page(cc->rpages[i], &_submitted,
+ 	ret = f2fs_init_compress_ctx(cc);
+ 	if (ret)
+ 		return ret;
+-retry:
++
+ 	/* keep page reference to avoid page reclaim */
+ 	for (i = 0; i < cc->cluster_size; i++) {
+ 		page = f2fs_pagecache_get_page(mapping, start_idx + i,
+@@ -632,6 +640,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+ 						(idx <= i) ? 1 : 0);
+ 				cc->rpages[idx] = NULL;
+ 			}
++			kvfree(cc->rpages);
+ 			cc->nr_rpages = 0;
+ 			goto retry;
+ 		}
+@@ -687,14 +696,8 @@ int f2fs_prepare_compress_overwrite(struct inode *inode,
+ 		.rpages = NULL,
+ 		.nr_rpages = 0,
+ 	};
+-	int ret = is_compressed_cluster(&cc);
+-
+-	if (ret <= 0)
+-		return ret;
+ 
+-	/* compressed case */
+-	return prepare_compress_overwrite(&cc, pagep, index,
+-			fsdata, ret == CLUSTER_HAS_SPACE);
++	return prepare_compress_overwrite(&cc, pagep, index, fsdata);
+ }
+ 
+ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
 -- 
 2.18.0.rc1
 
