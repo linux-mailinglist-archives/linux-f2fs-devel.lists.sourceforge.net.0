@@ -2,70 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A89FF1302BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Jan 2020 15:37:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7013D1302BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Jan 2020 15:37:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1inkY0-0002Dy-Px; Sat, 04 Jan 2020 14:37:00 +0000
+	id 1inkXx-0007zU-Pq; Sat, 04 Jan 2020 14:36:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <cgxu519@mykernel.net>) id 1inkXs-0002Dc-Lq
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 14:36:52 +0000
+ (envelope-from <cgxu519@mykernel.net>) id 1inkXr-0007yP-KV
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 14:36:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6RgICWXwhvwNHztqQtPT2dhQ/f21R4V1Nli9Z29zuMM=; b=bJJo9jydRJH8anxsYn+QPtCR/w
- y8wAcADmTfjMYavc4DQ6A3U/0VuwqmzxI/JIHzn0pVijZSTJLWP+CecTNu0E8E3Q8IaudXNMQmbv3
- kSGLkNjy5TNHuRrVrcQvJ0TpjxbzvzuCOL34VsOPbwuIrgmi/V+Xh1f1yAQbddzr7QL0=;
+ bh=7k8gaLXukPzjJGyY+xIC8DOJaUh+oLrwvPFiks3Knak=; b=QJYwK5Ab8wxfJNP3eCeBYgMUeH
+ Ze02yjhKRaP3dNWyH8bLW3eqrIwXGfYwXCa+vSbqZ+yrAO+PoKiuWQGoR7kjvyMki2dswBqD8q6HY
+ fh4Alj8c1leWqKmyNuNSBPFm7c6DaobgXAnARNnyTAcLCwvxU0jnKKCjHBBy2vb7jmNQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Date:Subject:
- Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6RgICWXwhvwNHztqQtPT2dhQ/f21R4V1Nli9Z29zuMM=; b=EqovaYbJkOuzVnFEehFva4/cgk
- c1ioA+KFfKAdCuOBNQhp3jUjtREy1Y+i4twrzdD6+52mRb86+G/jOk+BKWdzL5atIk0Y87doPQ2NB
- MPX+ZXR2vZWZWOV4ppX/ZjibXLklMPQNxMmY0pYbSX4YoTWePMI5fteJZF0RpHhR2ZB8=;
+ bh=7k8gaLXukPzjJGyY+xIC8DOJaUh+oLrwvPFiks3Knak=; b=RdZFvzSjrS5cCa9eFiutt6Q7oy
+ XWaY+fHuv6qB/pYGUl7WtjADpgCH/c8g44Qjt5clZHOpwiAdBUVb3ak4//WV4nXa5wT83+gMtM1iu
+ UIvg9Kf5zJj4cv5o0aGHJjeUKIbdk1YN4pbKSemopYR6Nuh+ukbOdccMemHJbihKf3N8=;
 Received: from sender2-of-o52.zoho.com.cn ([163.53.93.247])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1inkXm-009ZAC-8u
+ id 1inkXc-0094CR-IZ
  for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 14:36:51 +0000
-ARC-Seal: i=1; a=rsa-sha256; t=1578147625; cv=none; d=zoho.com.cn; s=zohoarc; 
- b=bgbpHZyY+MRw8YTJOM1WEOc7yXFt1MCmQ61SZGH2rCLHeEBVB4FX376zfIqrFHr+4TW1CmxdlgFkm71q6+heq6ihQRzsneaLjpR1TqfbZI4hxtQgahVRkRpZ/HgFO844kR/9YK4Nl6kpPECRmtWRxr345LyPkP7idrq2qrvV+eE=
+ARC-Seal: i=1; a=rsa-sha256; t=1578147631; cv=none; d=zoho.com.cn; s=zohoarc; 
+ b=Wm1LmxEiRdnPxgUwAF6QFOvou39oZfviXf6u9vBIe+s4Wp24uY8rW49btrDPv9isBkv4WKchZ9HgTPykYIZYlv383SWfGnsJuhY7fQAhR2Fyp9kER6BjGvkqh8S9kXxOTn03xPJABz/DQKZNNUnobxZE0uPuw6GceLkABB4hoiw=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com.cn;
- s=zohoarc; t=1578147625;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=6RgICWXwhvwNHztqQtPT2dhQ/f21R4V1Nli9Z29zuMM=; 
- b=B8LMXxqN+WYi2cB+C1WgsNs4MSabWqQN3AnbeGsdg0da3fF8Z2qJkwLk51zoErV3I1R5+bIPR69V7eR1j1vrvhNabBeQobn5ljVEYWfjYM/ETcU7veEbtogT8JhGfCoEU0lCOArv8hKlSxFb8Gx0UDz3PmSWL2H8DlLMob3UJm8=
+ s=zohoarc; t=1578147631;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=7k8gaLXukPzjJGyY+xIC8DOJaUh+oLrwvPFiks3Knak=; 
+ b=fZJBaexuGyqp/gqCJVR0N/D7EWMuF9C8MMisxzgrbDxZ8XIW+hjdXF+uBCK/GoiQTc8zGXJlV8Yr4I/RlulMlp+OGQVzVQPBWIxcLi9Y8IjzvQ5IDA+CSaWlEwQ1JlO2DYxgxqC4rRXlIDdiUa3z2Z3AtGKuk9Ezlc5gkOU/45Y=
 ARC-Authentication-Results: i=1; mx.zoho.com.cn;
  dkim=pass  header.i=mykernel.net;
  spf=pass  smtp.mailfrom=cgxu519@mykernel.net;
  dmarc=pass header.from=<cgxu519@mykernel.net>
  header.from=<cgxu519@mykernel.net>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1578147625; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1578147631; 
  s=zohomail; d=mykernel.net; i=cgxu519@mykernel.net;
- h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Transfer-Encoding:Content-Type;
- bh=6RgICWXwhvwNHztqQtPT2dhQ/f21R4V1Nli9Z29zuMM=;
- b=e8i109+QZvsd4wrqLK+Ybcy0JonbcvaCzWUFIG4Iwxz4G4U8UYlj1I/qUOqH64cF
- qGOUrEQYCiykqYIU6t+eIUqA/roamSoT7ILbISdwEw6MSZvg6qeMelcXj5bANQIc7Oo
- zJUYuSqTJ4leSILovkpfDaLNU+0aPpMCV9KLhQSk=
+ h=From:To:Cc:Message-ID:Subject:Date:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type;
+ bh=7k8gaLXukPzjJGyY+xIC8DOJaUh+oLrwvPFiks3Knak=;
+ b=cng1tKuBAc7ah7mdBkmJMkb1ivGDCz7jaUqTUyBO/pfGl6X47GgFlfPQzTB0R8dF
+ mpQSMQnATVk2uNkaUraso0szktsumaHmGPg5zINaL4UFB9+wZguvZtGIiYZiG/jyoCZ
+ nE/r+3MgyPNA1dCdAgiFTowqWQKHmYrcPzLzBeXI=
 Received: from localhost.localdomain.localdomain (113.116.49.111
  [113.116.49.111]) by mx.zoho.com.cn
- with SMTPS id 15781476236011.4213776319637645;
- Sat, 4 Jan 2020 22:20:23 +0800 (CST)
+ with SMTPS id 1578147629444192.7016564807659;
+ Sat, 4 Jan 2020 22:20:29 +0800 (CST)
 From: Chengguang Xu <cgxu519@mykernel.net>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Message-ID: <20200104142004.12883-1-cgxu519@mykernel.net>
-Date: Sat,  4 Jan 2020 22:20:03 +0800
+Message-ID: <20200104142004.12883-2-cgxu519@mykernel.net>
+Date: Sat,  4 Jan 2020 22:20:04 +0800
 X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200104142004.12883-1-cgxu519@mykernel.net>
+References: <20200104142004.12883-1-cgxu519@mykernel.net>
 MIME-Version: 1.0
 X-ZohoCNMailClient: External
 X-Spam-Score: -0.1 (/)
@@ -84,9 +86,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1inkXm-009ZAC-8u
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix miscounted block limit in
- f2fs_statfs_project()
+X-Headers-End: 1inkXc-0094CR-IZ
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: code cleanup for f2fs_statfs_project()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,69 +105,48 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-statfs calculates Total/Used/Avail disk space in block unit,
-so we should translate soft/hard prjquota limit to block unit
-as well.
+Calling min_not_zero() to simplify complicated prjquota
+limit comparison in f2fs_statfs_project().
 
-Below testing result shows the block/inode numbers of
-Total/Used/Avail from df command are all correct afer
-applying this patch.
-
-[root@localhost quota-tools]\# ./repquota -P /dev/sdb1
-*** Report for project quotas on device /dev/sdb1
-Block grace time: 7days; Inode grace time: 7days
-              Block limits                File limits
-Project   used soft    hard  grace  used  soft  hard  grace
------------------------------------------------------------
-\#0   --   4       0       0         1     0     0
-\#101 --   0       0       0         2     0     0
-\#102 --   0   10240       0         2    10     0
-\#103 --   0       0   20480         2     0    20
-\#104 --   0   10240   20480         2    10    20
-\#105 --   0   20480   10240         2    20    10
-
-[root@localhost sdb1]\# lsattr -p t{1,2,3,4,5}
-  101 ----------------N-- t1/a1
-  102 ----------------N-- t2/a2
-  103 ----------------N-- t3/a3
-  104 ----------------N-- t4/a4
-  105 ----------------N-- t5/a5
-
-[root@localhost sdb1]\# df -hi t{1,2,3,4,5}
-Filesystem     Inodes IUsed IFree IUse% Mounted on
-/dev/sdb1        2.4M    21  2.4M    1% /mnt/sdb1
-/dev/sdb1          10     2     8   20% /mnt/sdb1
-/dev/sdb1          20     2    18   10% /mnt/sdb1
-/dev/sdb1          10     2     8   20% /mnt/sdb1
-/dev/sdb1          10     2     8   20% /mnt/sdb1
-
-[root@localhost sdb1]\# df -h t{1,2,3,4,5}
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sdb1        10G  489M  9.6G   5% /mnt/sdb1
-/dev/sdb1        10M     0   10M   0% /mnt/sdb1
-/dev/sdb1        20M     0   20M   0% /mnt/sdb1
-/dev/sdb1        10M     0   10M   0% /mnt/sdb1
-/dev/sdb1        10M     0   10M   0% /mnt/sdb1
-
-Fixes: 909110c060f2 ("f2fs: choose hardlimit when softlimit is larger than hardlimit in f2fs_statfs_project()")
 Signed-off-by: Chengguang Xu <cgxu519@mykernel.net>
 ---
- fs/f2fs/super.c | 2 ++
- 1 file changed, 2 insertions(+)
+ fs/f2fs/super.c | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5111e1ffe58a..78efd0e76174 100644
+index 78efd0e76174..ac01c3f8863d 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -1219,6 +1219,8 @@ static int f2fs_statfs_project(struct super_block *sb,
- 	if (dquot->dq_dqb.dqb_bhardlimit &&
- 			(!limit || dquot->dq_dqb.dqb_bhardlimit < limit))
- 		limit = dquot->dq_dqb.dqb_bhardlimit;
-+	if (limit)
-+		limit >>= sb->s_blocksize_bits;
+@@ -1213,12 +1213,8 @@ static int f2fs_statfs_project(struct super_block *sb,
+ 		return PTR_ERR(dquot);
+ 	spin_lock(&dquot->dq_dqb_lock);
  
- 	if (limit && buf->f_blocks > limit) {
- 		curblock = dquot->dq_dqb.dqb_curspace >> sb->s_blocksize_bits;
+-	limit = 0;
+-	if (dquot->dq_dqb.dqb_bsoftlimit)
+-		limit = dquot->dq_dqb.dqb_bsoftlimit;
+-	if (dquot->dq_dqb.dqb_bhardlimit &&
+-			(!limit || dquot->dq_dqb.dqb_bhardlimit < limit))
+-		limit = dquot->dq_dqb.dqb_bhardlimit;
++	limit = min_not_zero(dquot->dq_dqb.dqb_bsoftlimit,
++					dquot->dq_dqb.dqb_bhardlimit);
+ 	if (limit)
+ 		limit >>= sb->s_blocksize_bits;
+ 
+@@ -1230,12 +1226,8 @@ static int f2fs_statfs_project(struct super_block *sb,
+ 			 (buf->f_blocks - curblock) : 0;
+ 	}
+ 
+-	limit = 0;
+-	if (dquot->dq_dqb.dqb_isoftlimit)
+-		limit = dquot->dq_dqb.dqb_isoftlimit;
+-	if (dquot->dq_dqb.dqb_ihardlimit &&
+-			(!limit || dquot->dq_dqb.dqb_ihardlimit < limit))
+-		limit = dquot->dq_dqb.dqb_ihardlimit;
++	limit = min_not_zero(dquot->dq_dqb.dqb_isoftlimit,
++					dquot->dq_dqb.dqb_ihardlimit);
+ 
+ 	if (limit && buf->f_files > limit) {
+ 		buf->f_files = limit;
 -- 
 2.21.1
 
