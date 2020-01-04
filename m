@@ -2,73 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A20E1303A8
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Jan 2020 17:48:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82C491304C6
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Jan 2020 22:53:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:Message-ID:To:Date:MIME-Version:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=YKMGpWIil/fOQRrsHWL/vU6L32I6GLUbFI4fqnIknFc=; b=RXsz9YgdNsE0e2DKRmlwbPX6Le
-	DKPupc/l0w0yhgJIFvsuP6Hox/IsT6is0lruSfaA18IJXt0UuuC5BGXCmk4IWS64mORGHOx60Neoe
-	c42FoxtXd8Qb6RuUcV+j2R4dym+RXnOQRTLuhZ80m6ComBRjRBBQRxxFu2W+om7Db+3s=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	List-Unsubscribe:List-Id:Subject:Message-ID:References:In-Reply-To:To:Date:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=KexO7ELr7JZfOXnHFI21HFw207Tzqnz3SUtK2egzcUA=; b=I42dM8+RKN649Vn5XxiXXTWm0o
+	aqb6ZWN0Itc3rvhKn+H193e7aOuzB0sRkoWLr6bJ69xlfQDc+IaCIsVVACVV6mgTiRuTcyUS7Ah0V
+	6JTh/0H8osrkNSoMgArSYH/FBq1PSXyBEV0E3zjiXu0ChyrjJHbIHGlIq4RvVAa7ekaw=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1inmbP-0000Lb-Tx; Sat, 04 Jan 2020 16:48:39 +0000
+	id 1inrMA-0003qm-KL; Sat, 04 Jan 2020 21:53:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <oleksandr@natalenko.name>) id 1inmbO-0000LJ-BZ
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 16:48:38 +0000
+ (envelope-from <oleksandr@natalenko.name>) id 1inrM8-0003qO-Bg
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 21:53:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:Subject:Cc:To:From:Date:
+ d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
+ From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=J8kF02N3UgQmy+M1+yfJ0I6y3z6Y1C+QkxFReEl2674=; b=IPgYKfkDHyqjyv8bNTZ4l4ttE4
+ 743H5LzIQGFso0QxFHU8WwkwkqazfAvQ3MzmLRjocxc5dzUGTrJg9+VKGoGCtI13RvWX1ENn02OSj
+ jAnZgPUx8YDOa4IiSX2bvYgbm5jYZzbh/op1pk/ZgT6gXID0UfNoRLCalXaUwddbXwa0=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RboBw79xQDQsEmbNfetBmtEfWpp5jtrjn3jvMeyFDd8=; b=DATSnwZQzxB+FRNH4EDyDyEqL
- N+3n1qCQkIz2hqDdDkczrhxt33QB2zw7/ZOoB8Qz7dhHz3Gx7WImzzN/R3jw6SIS7+lorkFqBQvRl
- NrGO+7HwDl56VKxruh6eXte2+ROD5NbO04AXHe3Zgy5Dq7seZ4MrcC5piZB5EeXXEQNfU=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Message-ID:Subject:Cc:To:From:Date:Content-Transfer-Encoding:Content-Type
- :MIME-Version:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=RboBw79xQDQsEmbNfetBmtEfWpp5jtrjn3jvMeyFDd8=; b=E
- UzP21Z50o1kSCO2FAfxdhlH2iMQNuW6J/Dc5y2dvHd94EofeyKPF6O4D+lyQ6KmV5sMNn0HNGltbw
- U/WS+UNkm6lbLEP0sttoBU+b5t7y/c5FwKgBV7VGiT81reUUl4leMHfiVdUThxlxH1lFa2Z2Zxir6
- VJ2OkjfvB4OuBIcw=;
-Received: from vulcan.natalenko.name ([104.207.131.136])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=J8kF02N3UgQmy+M1+yfJ0I6y3z6Y1C+QkxFReEl2674=; b=cIXV7cXyojhgSfzxDKk3XaUr3e
+ /aZ7utczBRB7+/xqlpAm9z7Pa+i8TiNFKAC5J1HDNRAmcJoQyRpYpULvf1M76ZByqtxXrRUa8Jrse
+ SheSNHKuom1Lmsvl9hKzl1yzaW7bh4yZLJpbv4a3nZqY1p33y6pSJrQEUnpVK8t6a07A=;
+Received: from [104.207.131.136] (helo=vulcan.natalenko.name)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1inmbA-0098L7-RE
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 16:48:38 +0000
+ id 1inrM0-009rwo-Dg
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Jan 2020 21:53:11 +0000
 Received: from mail.natalenko.name (vulcan.natalenko.name
  [IPv6:fe80::5400:ff:fe0c:dfa0])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by vulcan.natalenko.name (Postfix) with ESMTPSA id 7677F67E7DA;
- Sat,  4 Jan 2020 17:29:31 +0100 (CET)
+ by vulcan.natalenko.name (Postfix) with ESMTPSA id B399E67EB38;
+ Sat,  4 Jan 2020 22:52:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
- s=dkim-20170712; t=1578155371;
+ s=dkim-20170712; t=1578174768;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=RboBw79xQDQsEmbNfetBmtEfWpp5jtrjn3jvMeyFDd8=;
- b=DkHWDLocTyngL9E+vupQYYBTyODXr2TXjDvI/3TsSqhEPaM3q+P51wizrwMU4TIGePHz5j
- unvCnt0pxUY7PaVkSI92RlWHybv7hfOpvkJUVW1EgXM0BTj/q645jA/tGSIQdPh1F8cI/+
- 5sx+fsMDnp+sAIRnwmzxnUQGkrT3Y5E=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J8kF02N3UgQmy+M1+yfJ0I6y3z6Y1C+QkxFReEl2674=;
+ b=GFNOZfPmGwsVS7Lu1EiBphG1JX+AG9AGuAp80b0BOmfehEGCwtDhFkzBKLzoLIuRwYwVUo
+ 7yk63AU35oNKiI+qp62YNbWfkA0b7hoO7aIGj4PruQAsQ7fpWcM03Khl5Ew2ASAZIl0HoY
+ xJszXGq1M10QUMvkakjs14dtGuAWUhI=
 MIME-Version: 1.0
-Date: Sat, 04 Jan 2020 17:29:31 +0100
+Date: Sat, 04 Jan 2020 22:52:48 +0100
 To: linux-f2fs-devel@lists.sourceforge.net
+In-Reply-To: <4c6cf8418236145f7124ac61eb2908ad@natalenko.name>
+References: <4c6cf8418236145f7124ac61eb2908ad@natalenko.name>
 User-Agent: Roundcube Webmail/1.4.1
-Message-ID: <4c6cf8418236145f7124ac61eb2908ad@natalenko.name>
+Message-ID: <2c4cafd35d1595a62134203669d7c244@natalenko.name>
 X-Sender: oleksandr@natalenko.name
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -78,8 +80,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1inmbA-0098L7-RE
-Subject: [f2fs-dev] Multidevice f2fs mount after disk rearrangement
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1inrM0-009rwo-Dg
+Subject: Re: [f2fs-dev] Multidevice f2fs mount after disk rearrangement
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,42 +103,51 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello.
+Hi.
 
-I was brave enough to create f2fs filesystem spanning through 2 physical 
-device using this command:
+On 04.01.2020 17:29, Oleksandr Natalenko wrote:
+> I was brave enough to create f2fs filesystem spanning through 2
+> physical device using this command:
+> 
+> # mkfs.f2fs -t 0 /dev/sdc -c /dev/sdd
+> 
+> It worked fine until I removed /dev/sdb from my system, so f2fs devices 
+> became:
+> 
+> /dev/sdc -> /dev/sdb
+> /dev/sdd -> /dev/sdc
+> 
+> Now, when I try to mount it, I get the following:
+> 
+> # mount -t f2fs /dev/sdb /mnt/fs
+> mount: /mnt/fs: mount(2) system call failed: No such file or directory.
+> 
+> In dmesg:
+> 
+> [Jan 4 17:25] F2FS-fs (sdb): Mount Device [ 0]:             /dev/sdc,
+>   59063,        0 -  1cd6fff
+> [  +0,000024] F2FS-fs (sdb): Failed to find devices
+> 
+> fsck also fails with the following assertion:
+> 
+> [ASSERT] (init_sb_info: 908) !strcmp((char *)sb->devs[i].path, (char
+> *)c.devices[i].path)
+> 
+> Am I doing something obviously stupid, and the device path can be
+> (somehow) changed so that the mount succeeds, or this is unfixable,
+> and f2fs relies on persistent device naming?
+> 
+> Please suggest.
+> 
+> Thank you.
 
-# mkfs.f2fs -t 0 /dev/sdc -c /dev/sdd
+Erm, fine. I studied f2fs-tools code a little bit and discovered that 
+superblock indeed had /dev/sdX paths saved as strings. So I fired up 
+hexedit and just changed the superblock directly on the first device, 
+substituting sdc with sdb and sdd with sdc (I did it twice; I guess 
+there are 2 copies of superblock), and after this the mount worked.
 
-It worked fine until I removed /dev/sdb from my system, so f2fs devices 
-became:
-
-/dev/sdc -> /dev/sdb
-/dev/sdd -> /dev/sdc
-
-Now, when I try to mount it, I get the following:
-
-# mount -t f2fs /dev/sdb /mnt/fs
-mount: /mnt/fs: mount(2) system call failed: No such file or directory.
-
-In dmesg:
-
-[Jan 4 17:25] F2FS-fs (sdb): Mount Device [ 0]:             /dev/sdc,    
-59063,        0 -  1cd6fff
-[  +0,000024] F2FS-fs (sdb): Failed to find devices
-
-fsck also fails with the following assertion:
-
-[ASSERT] (init_sb_info: 908) !strcmp((char *)sb->devs[i].path, (char 
-*)c.devices[i].path)
-
-Am I doing something obviously stupid, and the device path can be 
-(somehow) changed so that the mount succeeds, or this is unfixable, and 
-f2fs relies on persistent device naming?
-
-Please suggest.
-
-Thank you.
+Am I really supposed to do this manually ;)?
 
 -- 
    Oleksandr Natalenko (post-factum)
