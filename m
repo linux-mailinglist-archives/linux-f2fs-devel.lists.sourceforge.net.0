@@ -2,79 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72BCD1317A0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2020 19:41:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:Message-ID:References:In-Reply-To:To:Date:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=li/DjvsgRi1VQlH7lCnoYV0gBAoxo+clhXD4vAFt1Z8=; b=YSg+pNwxBXeHbcOqaRALCM85v5
-	GENIFx+YYNi8MSZA0HWmI2bspvbYahBHCf2tWzkzKBmAh4hvsbCBmvuN/85jtxRdZdTPBo8O37QAk
-	SSs4ou1D1QDRWuJh3Ox1MnkcdoFiB8sAl7Q7PCpdCtFrOpEoq08Uk/ODH7a4twbe5QEM=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C561131848
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2020 20:08:30 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ioXJd-0006Y4-3R; Mon, 06 Jan 2020 18:41:25 +0000
+	id 1ioXjo-0007vA-0Y; Mon, 06 Jan 2020 19:08:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <oleksandr@natalenko.name>) id 1ioXJb-0006Xu-6P
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 18:41:23 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ioXjm-0007v3-NY
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:08:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
- From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rp8CUrnWGAoX8TC2iOuIG764rbPn2mqZv/jvq2or5Tk=; b=ZULtkGRNYSZnS/SBpbVw3r8FME
- JUR55nrQcSymM+Mm8yZ0TSf/bioqPiJ/zeHy0cXmwa7GGwkoaor6CQYk2aI29ec7rM+hUCK4ay4br
- +bdbSUK/Rqsa3CJpAmMIAhvANpKv3uuEg/RNwUlnmF/kV4Zo+9tXEF0wuU69VAVqW1P8=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rp8CUrnWGAoX8TC2iOuIG764rbPn2mqZv/jvq2or5Tk=; b=hMxVTuEhXXXs/vgAL1gk2+/lDd
- cfv+twjMgg04xM8oh31aiG+T/dLmH80tBSMKgvY5/S7uiEzRs9g3GR3GOI9dhM/ZJ+g7nE3rN0cSl
- 4X73qk+y4N77z7KYer8IoVp+JT16xXlMOGQeW+9UlPvcVyCXFeGgaiA6kbWFXA7cVOCs=;
-Received: from vulcan.natalenko.name ([104.207.131.136])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=GwyBDE5RoEQJmaXwfGvUfzarH+tvNp/I7gtqeEGLJrA=; b=mDdD9yvGh3TEsBlbv9u73Vkmoa
+ r8QgzADWDMLNWTCxRyLbnpMfA1hKUoJ/RVLwf0D8urenN0To2Zm+ZpHbiSaxc6D+zoInDsk0T77MK
+ Avc/wAushRNW/S5xc6ZgpeVhNdW9CHWiWh/4AphsbEUpVNG5AXspknzOgjS5hwkLRJ6A=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GwyBDE5RoEQJmaXwfGvUfzarH+tvNp/I7gtqeEGLJrA=; b=XSXQIxqg+uB8VEjzurzZSWg2AS
+ f7sRlRCnnxjg7uuyaYtxcNLGtCT4WuPgDPEpLFHBk8/rch1okESMjiSQBkyNPIz19KmqIKm9K+CAb
+ KogQdKHK6GpRAsueVSPAavK7B7XIO+nt+LLSQl2IPMolMKKZ+Qosu/2Wi4mqCleiT4vs=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ioXJN-00Bpxx-Pg
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 18:41:23 +0000
-Received: from mail.natalenko.name (vulcan.natalenko.name
- [IPv6:fe80::5400:ff:fe0c:dfa0])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ id 1ioXjb-00Caef-OQ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:08:26 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by vulcan.natalenko.name (Postfix) with ESMTPSA id 7F188683B63;
- Mon,  6 Jan 2020 19:40:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
- s=dkim-20170712; t=1578336055;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rp8CUrnWGAoX8TC2iOuIG764rbPn2mqZv/jvq2or5Tk=;
- b=IjaLXYIRwuSSDDoP3AEQkfXkT3M26EZ/9Lfh+wD7HcqyriyPvB5UuIPxmJ7a2JCitX5e1+
- GFvUj6Xs95xNou34pU8rzc0T6QijPfQ/KyFAkdxDXlCrdtswZMRz8caBzjUWzGMO34qRMK
- CZuYApNwruZvaodV0MuczD4YHq4f/t0=
+ by mail.kernel.org (Postfix) with ESMTPSA id 2549E2072E;
+ Mon,  6 Jan 2020 19:08:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1578337690;
+ bh=GTgBx/JA91ia0+OMvTgPUGoIEEqGYFmp61UBCTw+K+g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=jbPI6gd17MVlhjV1JDDBmHnf2an7DD5VWxs6DCFS9mIDC+HU5PAxeOfNzDqIIcHAp
+ Q7+mf9RkCC/aJ0DNn8E7UYnoHWpmjsLmcCGq3ikfuSC6y/emkVTDsdsIH23IbT6J7i
+ DCj8ab6ajH+5jyRGuttqhaYaNQjDMMsTd+WOQqWQ=
+Date: Mon, 6 Jan 2020 11:08:09 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200106190809.GE50058@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20200106080144.52363-1-yuchao0@huawei.com>
+ <20200106080144.52363-3-yuchao0@huawei.com>
 MIME-Version: 1.0
-Date: Mon, 06 Jan 2020 19:40:55 +0100
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-In-Reply-To: <20200106183450.GC50058@jaegeuk-macbookpro.roam.corp.google.com>
-References: <4c6cf8418236145f7124ac61eb2908ad@natalenko.name>
- <2c4cafd35d1595a62134203669d7c244@natalenko.name>
- <20200106183450.GC50058@jaegeuk-macbookpro.roam.corp.google.com>
-User-Agent: Roundcube Webmail/1.4.1
-Message-ID: <ee2cb1d7a6c1b51e1c8277a8feaafe6d@natalenko.name>
-X-Sender: oleksandr@natalenko.name
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20200106080144.52363-3-yuchao0@huawei.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -82,9 +73,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ioXJN-00Bpxx-Pg
-Subject: Re: [f2fs-dev] Multidevice f2fs mount after disk rearrangement
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ioXjb-00Caef-OQ
+Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: compress: fix error path in
+ prepare_compress_overwrite()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,38 +89,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Oleksandr Natalenko via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Oleksandr Natalenko <oleksandr@natalenko.name>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi.
-
-On 06.01.2020 19:34, Jaegeuk Kim wrote:
-> Thank you for investigating this ahead of me. :) Yes, the device list 
-> is stored
-> in superblock, so hacking it manually should work.
+On 01/06, Chao Yu wrote:
+> - fix to release cluster pages in retry flow
+> - fix to call f2fs_put_dnode() & __do_map_lock() in error path
 > 
-> Let me think about a tool to tune that.
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/compress.c | 22 ++++++++++++++++------
+>  1 file changed, 16 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index fc4510729654..3390351d2e39 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -626,20 +626,26 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  	}
+>  
+>  	for (i = 0; i < cc->cluster_size; i++) {
+> +		f2fs_bug_on(sbi, cc->rpages[i]);
+> +
+>  		page = find_lock_page(mapping, start_idx + i);
+>  		f2fs_bug_on(sbi, !page);
+>  
+>  		f2fs_wait_on_page_writeback(page, DATA, true, true);
+>  
+> -		cc->rpages[i] = page;
+> +		f2fs_compress_ctx_add_page(cc, page);
+>  		f2fs_put_page(page, 0);
+>  
+>  		if (!PageUptodate(page)) {
+> -			for (idx = 0; idx < cc->cluster_size; idx++) {
+> -				f2fs_put_page(cc->rpages[idx],
+> -						(idx <= i) ? 1 : 0);
+> +			for (idx = 0; idx <= i; idx++) {
+> +				unlock_page(cc->rpages[idx]);
+>  				cc->rpages[idx] = NULL;
+>  			}
+> +			for (idx = 0; idx < cc->cluster_size; idx++) {
+> +				page = find_lock_page(mapping, start_idx + idx);
 
-Thank you both for the replies.
+Why do we need to lock the pages again?
 
-IIUC, tune.f2fs is not there yet. I saw a submission, but I do not see 
-it as accepted, right?
+> +				f2fs_put_page(page, 1);
+> +				f2fs_put_page(page, 0);
+> +			}
+>  			kvfree(cc->rpages);
+>  			cc->nr_rpages = 0;
+>  			goto retry;
+> @@ -654,16 +660,20 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  		for (i = cc->cluster_size - 1; i > 0; i--) {
+>  			ret = f2fs_get_block(&dn, start_idx + i);
+>  			if (ret) {
+> -				/* TODO: release preallocate blocks */
+>  				i = cc->cluster_size;
+> -				goto unlock_pages;
+> +				break;
+>  			}
+>  
+>  			if (dn.data_blkaddr != NEW_ADDR)
+>  				break;
+>  		}
+>  
+> +		f2fs_put_dnode(&dn);
 
-Having this in tune.f2fs would be fine (assuming the assertion is 
-replaced with some meaningful hint message), but wouldn't it be more 
-convenient for an ordinary user to have implemented something like:
+We don't neeed this, since f2fs_reserve_block() put the dnode.
 
-# mount -t f2fs /dev/sdb -o nextdev=/dev/sdc /mnt/fs
-
-Hm?
-
--- 
-   Oleksandr Natalenko (post-factum)
+> +
+>  		__do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
+> +
+> +		if (ret)
+> +			goto unlock_pages;
+>  	}
+>  
+>  	*fsdata = cc->rpages;
+> -- 
+> 2.18.0.rc1
 
 
 _______________________________________________
