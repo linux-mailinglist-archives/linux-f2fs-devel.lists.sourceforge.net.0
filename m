@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C561131848
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2020 20:08:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DA461318AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2020 20:26:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ioXjo-0007vA-0Y; Mon, 06 Jan 2020 19:08:28 +0000
+	id 1ioY1U-0000GX-19; Mon, 06 Jan 2020 19:26:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ioXjm-0007v3-NY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:08:26 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ioY1T-0000GN-3u
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:26:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GwyBDE5RoEQJmaXwfGvUfzarH+tvNp/I7gtqeEGLJrA=; b=mDdD9yvGh3TEsBlbv9u73Vkmoa
- r8QgzADWDMLNWTCxRyLbnpMfA1hKUoJ/RVLwf0D8urenN0To2Zm+ZpHbiSaxc6D+zoInDsk0T77MK
- Avc/wAushRNW/S5xc6ZgpeVhNdW9CHWiWh/4AphsbEUpVNG5AXspknzOgjS5hwkLRJ6A=;
+ bh=GO0UzBoLhk3X6zPIIyPoFsmhqx78YbnC1/SO0j/SCM0=; b=Gt/QQKNCdtdmgTKGmuPjy2ixy5
+ x6QDOPt6WtMMTnlmgNvU5fVmJ0T6mJwLDpBq7j5qPk/v30L1JaOXOCKmbWVD+qiz5ioAhacfLRI+D
+ Pp5DViUGKvXkEGLly8Ix6B0cWjLW0hf5BQn7ZgUR5daYdVvyS/hfcvg7oI3D7QvikieU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GwyBDE5RoEQJmaXwfGvUfzarH+tvNp/I7gtqeEGLJrA=; b=XSXQIxqg+uB8VEjzurzZSWg2AS
- f7sRlRCnnxjg7uuyaYtxcNLGtCT4WuPgDPEpLFHBk8/rch1okESMjiSQBkyNPIz19KmqIKm9K+CAb
- KogQdKHK6GpRAsueVSPAavK7B7XIO+nt+LLSQl2IPMolMKKZ+Qosu/2Wi4mqCleiT4vs=;
+ bh=GO0UzBoLhk3X6zPIIyPoFsmhqx78YbnC1/SO0j/SCM0=; b=cZnz9qaI07tSa3RTyK5YyPcJ29
+ abTrzo9NJ1VRaWqTYSHw4aQ2qrj+77IHp+sycHfe+uUAPmrVuC8EjVtjtkR0bI70qD7oobK/se0rA
+ Wh+35pLQ3cce3OHQ0JtS4QnG8/Y3/yV8EhBWWxXDspufMMyWEZWHCnv77bYDsV3amk/Q=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ioXjb-00Caef-OQ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:08:26 +0000
+ id 1ioY1O-00BrkX-Bm
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 19:26:43 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2549E2072E;
- Mon,  6 Jan 2020 19:08:10 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B1921207FD;
+ Mon,  6 Jan 2020 19:26:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578337690;
- bh=GTgBx/JA91ia0+OMvTgPUGoIEEqGYFmp61UBCTw+K+g=;
+ s=default; t=1578338792;
+ bh=VqTyU2RlTLgSzL+Ruz0hd8I1VqsH4XlXPDI9GzRjKhM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jbPI6gd17MVlhjV1JDDBmHnf2an7DD5VWxs6DCFS9mIDC+HU5PAxeOfNzDqIIcHAp
- Q7+mf9RkCC/aJ0DNn8E7UYnoHWpmjsLmcCGq3ikfuSC6y/emkVTDsdsIH23IbT6J7i
- DCj8ab6ajH+5jyRGuttqhaYaNQjDMMsTd+WOQqWQ=
-Date: Mon, 6 Jan 2020 11:08:09 -0800
+ b=AF9AnPuV6xe29dgVNaLfENYinKREP1vSQDAaZWjLgGFPhSoqUnN0bhj+HJ5afJxrS
+ WZfDIS4wgMj2ume86S5efZdD+t929q+QSrFDG7mCvvm5EZxDesnrbib/PBNaPbB1e5
+ uLFXiybTwHT11AS9w6i6oeREiY8YwQTejY6xI0Bw=
+Date: Mon, 6 Jan 2020 11:26:31 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200106190809.GE50058@jaegeuk-macbookpro.roam.corp.google.com>
+Message-ID: <20200106192631.GF50058@jaegeuk-macbookpro.roam.corp.google.com>
 References: <20200106080144.52363-1-yuchao0@huawei.com>
- <20200106080144.52363-3-yuchao0@huawei.com>
+ <20200106080144.52363-2-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200106080144.52363-3-yuchao0@huawei.com>
+In-Reply-To: <20200106080144.52363-2-yuchao0@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -75,9 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ioXjb-00Caef-OQ
-Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: compress: fix error path in
- prepare_compress_overwrite()
+X-Headers-End: 1ioY1O-00BrkX-Bm
+Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: compress: revert error path fix
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,79 +93,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Hi Chao,
+
+Could you please check this out?
+https://github.com/jaegeuk/f2fs/commits/g-dev-test
+
+Thanks,
+
 On 01/06, Chao Yu wrote:
-> - fix to release cluster pages in retry flow
-> - fix to call f2fs_put_dnode() & __do_map_lock() in error path
+> Revert incorrect fix in ("TEMP: f2fs: support data compression - fix1")
 > 
 > Signed-off-by: Chao Yu <yuchao0@huawei.com>
 > ---
->  fs/f2fs/compress.c | 22 ++++++++++++++++------
->  1 file changed, 16 insertions(+), 6 deletions(-)
+>  fs/f2fs/compress.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
 > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index fc4510729654..3390351d2e39 100644
+> index f993b4ce1970..fc4510729654 100644
 > --- a/fs/f2fs/compress.c
 > +++ b/fs/f2fs/compress.c
-> @@ -626,20 +626,26 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+> @@ -601,7 +601,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  							fgp_flag, GFP_NOFS);
+>  		if (!page) {
+>  			ret = -ENOMEM;
+> -			goto release_pages;
+> +			goto unlock_pages;
+>  		}
+>  
+>  		if (PageUptodate(page))
+> @@ -616,13 +616,13 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  		ret = f2fs_read_multi_pages(cc, &bio, cc->cluster_size,
+>  						&last_block_in_bio, false);
+>  		if (ret)
+> -			goto unlock_pages;
+> +			goto release_pages;
+>  		if (bio)
+>  			f2fs_submit_bio(sbi, bio, DATA);
+>  
+>  		ret = f2fs_init_compress_ctx(cc);
+>  		if (ret)
+> -			goto unlock_pages;
+> +			goto release_pages;
 >  	}
 >  
 >  	for (i = 0; i < cc->cluster_size; i++) {
-> +		f2fs_bug_on(sbi, cc->rpages[i]);
-> +
->  		page = find_lock_page(mapping, start_idx + i);
->  		f2fs_bug_on(sbi, !page);
->  
->  		f2fs_wait_on_page_writeback(page, DATA, true, true);
->  
-> -		cc->rpages[i] = page;
-> +		f2fs_compress_ctx_add_page(cc, page);
->  		f2fs_put_page(page, 0);
->  
->  		if (!PageUptodate(page)) {
-> -			for (idx = 0; idx < cc->cluster_size; idx++) {
-> -				f2fs_put_page(cc->rpages[idx],
-> -						(idx <= i) ? 1 : 0);
-> +			for (idx = 0; idx <= i; idx++) {
-> +				unlock_page(cc->rpages[idx]);
->  				cc->rpages[idx] = NULL;
->  			}
-> +			for (idx = 0; idx < cc->cluster_size; idx++) {
-> +				page = find_lock_page(mapping, start_idx + idx);
-
-Why do we need to lock the pages again?
-
-> +				f2fs_put_page(page, 1);
-> +				f2fs_put_page(page, 0);
-> +			}
->  			kvfree(cc->rpages);
->  			cc->nr_rpages = 0;
->  			goto retry;
-> @@ -654,16 +660,20 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
->  		for (i = cc->cluster_size - 1; i > 0; i--) {
->  			ret = f2fs_get_block(&dn, start_idx + i);
->  			if (ret) {
-> -				/* TODO: release preallocate blocks */
->  				i = cc->cluster_size;
-> -				goto unlock_pages;
-> +				break;
->  			}
->  
->  			if (dn.data_blkaddr != NEW_ADDR)
->  				break;
->  		}
->  
-> +		f2fs_put_dnode(&dn);
-
-We don't neeed this, since f2fs_reserve_block() put the dnode.
-
-> +
->  		__do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
-> +
-> +		if (ret)
-> +			goto unlock_pages;
->  	}
->  
->  	*fsdata = cc->rpages;
 > -- 
 > 2.18.0.rc1
 
