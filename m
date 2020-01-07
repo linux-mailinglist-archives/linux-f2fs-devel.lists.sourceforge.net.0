@@ -2,75 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4572C1319EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2020 21:55:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B259E131D42
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jan 2020 02:35:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ioZPh-00069W-OV; Mon, 06 Jan 2020 20:55:49 +0000
+	id 1iodmH-0008Dd-RV; Tue, 07 Jan 2020 01:35:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1ioZPf-000696-N8
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 20:55:47 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iodmG-0008DB-SW
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jan 2020 01:35:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6N+uV/RFamLTiV/GDrPF3DGta1o3hLBDTQF6ozFNPw4=; b=KRbJHFf7PbqbXVHDwk7ezhAh+e
- ATo+tYtgkaVQ1YePb9CatFmuPvtxHH5E2bpcqO15JVPHyTiZZY+3B/PyNdV0g3lyJxQmnAIgAPvEV
- SWUEB6vU61CSBk2GWxAmuQUY9cJSjfq13lRTC28ja5gRAkcrUj1rT1uxaM9PPRL9td/0=;
+ bh=+5/ybG7n2omfwObzZ7vfdoop7L14vRkFSlZoht32lCk=; b=jti7OsXgJFPhfX9+lKR7JW6kU5
+ nAnmgWQ0K5edHHB1joqxwjaXcZTSfZ5bQi7VW+O7T/IgdaoaMYyfY/h+dnxOUNqr55JrYmrEBVX2+
+ 3XgLkk1dsGOf8bWdlUVQfaD/laW+KzzhbTzoBXWJRuBj2Y/jH61NXmdA0juNe3JMv0K8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6N+uV/RFamLTiV/GDrPF3DGta1o3hLBDTQF6ozFNPw4=; b=j
- ywFjv0wy6FTLnZguF3pxaFIjbbhCDi8Og3lWZcS3p72456BIR+137fNsXbRTfUV7WCvOQd9YWFUYY
- za55g7ViR6vfkjwKzydFrfkTsWxqRod4VeiPUSwNM36nQDM7KNitG7pHftVp04aA0bAchJVKpB6aa
- lKBqcxLa+4jrRSkg=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+5/ybG7n2omfwObzZ7vfdoop7L14vRkFSlZoht32lCk=; b=QuaPsU2rIX0WwpgAwc6oh+7OSp
+ rDs4dh+YUk4/MRP1lF4vqqefLoTVDEdejYFUPruLJAHSJXVMSm18goxt53QTln1rPKJvdEMt+6Ymn
+ JmpBprUimIU3TEI40im/LYIw1li7apgN4MW3sT2jx5PcoOXeI7+F6LNQh+RN10C8el8Y=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ioZPe-00BluI-4U
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jan 2020 20:55:47 +0000
-Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
- [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5893524676;
- Mon,  6 Jan 2020 20:55:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578344140;
- bh=WjlD+EtOaajQeaydUzTO0rbd1FdDwTIc2PeMcg7xbHo=;
- h=From:To:Cc:Subject:Date:From;
- b=JJ0rn3dP3gWXKYN3XWNftCCLR1vhewXuK834gQNqw1mr0wBWgCzavnwlyCBbU3vhi
- BJUsdreHW1GOF9QxRtCPm/kjMQEhjrkUqgXfQjb8t2LtkUxSOVLEAGlsdj0AXuOUOw
- 3Lp1Nta2h8OfHWz526FhuCsrKGIjVyY0jxjvh9Xs=
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Mon,  6 Jan 2020 12:55:33 -0800
-Message-Id: <20200106205533.137005-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.24.1.735.g03f4e72817-goog
+ id 1iodm7-00C3kz-OJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jan 2020 01:35:24 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id C72D9F1DEBA7F58D88D2;
+ Tue,  7 Jan 2020 09:35:05 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 7 Jan 2020
+ 09:35:00 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20200106080144.52363-1-yuchao0@huawei.com>
+ <20200106080144.52363-3-yuchao0@huawei.com>
+ <20200106190809.GE50058@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <e5c45ba2-6437-c84a-11b3-abe8c16a5c6c@huawei.com>
+Date: Tue, 7 Jan 2020 09:35:00 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200106190809.GE50058@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ioZPe-00BluI-4U
-Subject: [f2fs-dev] [PATCH v2] fs-verity: implement readahead of Merkle tree
- pages
+X-Headers-End: 1iodm7-00C3kz-OJ
+Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: compress: fix error path in
+ prepare_compress_overwrite()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,391 +80,104 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Victor Hsieh <victorhsieh@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On 2020/1/7 3:08, Jaegeuk Kim wrote:
+> On 01/06, Chao Yu wrote:
+>> - fix to release cluster pages in retry flow
+>> - fix to call f2fs_put_dnode() & __do_map_lock() in error path
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>>  fs/f2fs/compress.c | 22 ++++++++++++++++------
+>>  1 file changed, 16 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>> index fc4510729654..3390351d2e39 100644
+>> --- a/fs/f2fs/compress.c
+>> +++ b/fs/f2fs/compress.c
+>> @@ -626,20 +626,26 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>>  	}
+>>  
+>>  	for (i = 0; i < cc->cluster_size; i++) {
+>> +		f2fs_bug_on(sbi, cc->rpages[i]);
+>> +
+>>  		page = find_lock_page(mapping, start_idx + i);
+>>  		f2fs_bug_on(sbi, !page);
+>>  
+>>  		f2fs_wait_on_page_writeback(page, DATA, true, true);
+>>  
+>> -		cc->rpages[i] = page;
+>> +		f2fs_compress_ctx_add_page(cc, page);
+>>  		f2fs_put_page(page, 0);
+>>  
+>>  		if (!PageUptodate(page)) {
+>> -			for (idx = 0; idx < cc->cluster_size; idx++) {
+>> -				f2fs_put_page(cc->rpages[idx],
+>> -						(idx <= i) ? 1 : 0);
+>> +			for (idx = 0; idx <= i; idx++) {
+>> +				unlock_page(cc->rpages[idx]);
+>>  				cc->rpages[idx] = NULL;
+>>  			}
+>> +			for (idx = 0; idx < cc->cluster_size; idx++) {
+>> +				page = find_lock_page(mapping, start_idx + idx);
+> 
+> Why do we need to lock the pages again?
 
-When fs-verity verifies data pages, currently it reads each Merkle tree
-page synchronously using read_mapping_page().
+Here, all pages in cluster has one extra reference count, we need to find all
+pages, and release those references on them.
 
-Therefore, when the Merkle tree pages aren't already cached, fs-verity
-causes an extra 4 KiB I/O request for every 512 KiB of data (assuming
-that the Merkle tree uses SHA-256 and 4 KiB blocks).  This results in
-more I/O requests and performance loss than is strictly necessary.
+cc->rpages may not record all pages' pointers, so we can not use
 
-Therefore, implement readahead of the Merkle tree pages.
+f2fs_put_page(cc->rpages[idx], (idx <= i) ? 1 : 0); to release all pages' references.
 
-For simplicity, we take advantage of the fact that the kernel already
-does readahead of the file's *data*, just like it does for any other
-file.  Due to this, we don't really need a separate readahead state
-(struct file_ra_state) just for the Merkle tree, but rather we just need
-to piggy-back on the existing data readahead requests.
+BTW, find_get_page() should be fine to instead find_lock_page().
 
-We also only really need to bother with the first level of the Merkle
-tree, since the usual fan-out factor is 128, so normally over 99% of
-Merkle tree I/O requests are for the first level.
+> 
+>> +				f2fs_put_page(page, 1);
+>> +				f2fs_put_page(page, 0);
+>> +			}
+>>  			kvfree(cc->rpages);
+>>  			cc->nr_rpages = 0;
+>>  			goto retry;
+>> @@ -654,16 +660,20 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>>  		for (i = cc->cluster_size - 1; i > 0; i--) {
+>>  			ret = f2fs_get_block(&dn, start_idx + i);
+>>  			if (ret) {
+>> -				/* TODO: release preallocate blocks */
+>>  				i = cc->cluster_size;
+>> -				goto unlock_pages;
+>> +				break;
+>>  			}
+>>  
+>>  			if (dn.data_blkaddr != NEW_ADDR)
+>>  				break;
+>>  		}
+>>  
+>> +		f2fs_put_dnode(&dn);
+> 
+> We don't neeed this, since f2fs_reserve_block() put the dnode.
 
-Therefore, make fsverity_verify_bio() enable readahead of the first
-Merkle tree level, for up to 1/4 the number of pages in the bio, when it
-sees that the REQ_RAHEAD flag is set on the bio.  The readahead size is
-then passed down to ->read_merkle_tree_page() for the filesystem to
-(optionally) implement if it sees that the requested page is uncached.
+Correct.
 
-While we're at it, also make build_merkle_tree_level() set the Merkle
-tree readahead size, since it's easy to do there.
+Thanks,
 
-However, for now don't set the readahead size in fsverity_verify_page(),
-since currently it's only used to verify holes on ext4 and f2fs, and it
-would need parameters added to know how much to read ahead.
-
-This patch significantly improves fs-verity sequential read performance.
-Some quick benchmarks with 'cat'-ing a 250MB file after dropping caches:
-
-    On an ARM64 phone (using sha256-ce):
-        Before: 217 MB/s
-        After: 263 MB/s
-        (compare to sha256sum of non-verity file: 357 MB/s)
-
-    In an x86_64 VM (using sha256-avx2):
-        Before: 173 MB/s
-        After: 215 MB/s
-        (compare to sha256sum of non-verity file: 223 MB/s)
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
-
-Changed v1 => v2:
-  - Ensure that the pages continue being marked accessed when they're
-    already cached and Uptodate.
-  - Removed unnecessary IS_ERR(page) checks.
-  - Adjusted formatting of the prototype of f2fs_mpage_readpages() to
-    avoid a merge conflict with the f2fs tree.
-
- fs/ext4/verity.c             | 47 ++++++++++++++++++++++++++++++++++--
- fs/f2fs/data.c               |  2 +-
- fs/f2fs/f2fs.h               |  3 +++
- fs/f2fs/verity.c             | 47 ++++++++++++++++++++++++++++++++++--
- fs/verity/enable.c           |  8 +++++-
- fs/verity/fsverity_private.h |  1 +
- fs/verity/open.c             |  1 +
- fs/verity/verify.c           | 34 +++++++++++++++++++++-----
- include/linux/fsverity.h     |  7 +++++-
- 9 files changed, 137 insertions(+), 13 deletions(-)
-
-diff --git a/fs/ext4/verity.c b/fs/ext4/verity.c
-index d0d8a9795dd62..dc5ec724d8891 100644
---- a/fs/ext4/verity.c
-+++ b/fs/ext4/verity.c
-@@ -342,12 +342,55 @@ static int ext4_get_verity_descriptor(struct inode *inode, void *buf,
- 	return desc_size;
- }
- 
-+/*
-+ * Prefetch some pages from the file's Merkle tree.
-+ *
-+ * This is basically a stripped-down version of __do_page_cache_readahead()
-+ * which works on pages past i_size.
-+ */
-+static void ext4_merkle_tree_readahead(struct address_space *mapping,
-+				       pgoff_t start_index, unsigned long count)
-+{
-+	LIST_HEAD(pages);
-+	unsigned int nr_pages = 0;
-+	struct page *page;
-+	pgoff_t index;
-+	struct blk_plug plug;
-+
-+	for (index = start_index; index < start_index + count; index++) {
-+		page = xa_load(&mapping->i_pages, index);
-+		if (!page || xa_is_value(page)) {
-+			page = __page_cache_alloc(readahead_gfp_mask(mapping));
-+			if (!page)
-+				break;
-+			page->index = index;
-+			list_add(&page->lru, &pages);
-+			nr_pages++;
-+		}
-+	}
-+	blk_start_plug(&plug);
-+	ext4_mpage_readpages(mapping, &pages, NULL, nr_pages, true);
-+	blk_finish_plug(&plug);
-+}
-+
- static struct page *ext4_read_merkle_tree_page(struct inode *inode,
--					       pgoff_t index)
-+					       pgoff_t index,
-+					       unsigned long num_ra_pages)
- {
-+	struct page *page;
-+
- 	index += ext4_verity_metadata_pos(inode) >> PAGE_SHIFT;
- 
--	return read_mapping_page(inode->i_mapping, index, NULL);
-+	page = find_get_page_flags(inode->i_mapping, index, FGP_ACCESSED);
-+	if (!page || !PageUptodate(page)) {
-+		if (page)
-+			put_page(page);
-+		else if (num_ra_pages > 1)
-+			ext4_merkle_tree_readahead(inode->i_mapping, index,
-+						   num_ra_pages);
-+		page = read_mapping_page(inode->i_mapping, index, NULL);
-+	}
-+	return page;
- }
- 
- static int ext4_write_merkle_tree_block(struct inode *inode, const void *buf,
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index a034cd0ce0217..0fa356e94ef56 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1881,7 +1881,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
-  * use ->readpage() or do the necessary surgery to decouple ->readpages()
-  * from read-ahead.
-  */
--static int f2fs_mpage_readpages(struct address_space *mapping,
-+int f2fs_mpage_readpages(struct address_space *mapping,
- 			struct list_head *pages, struct page *page,
- 			unsigned nr_pages, bool is_readahead)
- {
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5a888a063c7f1..059ade83bfb1f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3229,6 +3229,9 @@ int f2fs_reserve_new_block(struct dnode_of_data *dn);
- int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
- int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from);
- int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
-+int f2fs_mpage_readpages(struct address_space *mapping,
-+			struct list_head *pages, struct page *page,
-+			unsigned nr_pages, bool is_readahead);
- struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
- 			int op_flags, bool for_write);
- struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index);
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index a401ef72bc821..d7d430a6f1305 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -222,12 +222,55 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
- 	return size;
- }
- 
-+/*
-+ * Prefetch some pages from the file's Merkle tree.
-+ *
-+ * This is basically a stripped-down version of __do_page_cache_readahead()
-+ * which works on pages past i_size.
-+ */
-+static void f2fs_merkle_tree_readahead(struct address_space *mapping,
-+				       pgoff_t start_index, unsigned long count)
-+{
-+	LIST_HEAD(pages);
-+	unsigned int nr_pages = 0;
-+	struct page *page;
-+	pgoff_t index;
-+	struct blk_plug plug;
-+
-+	for (index = start_index; index < start_index + count; index++) {
-+		page = xa_load(&mapping->i_pages, index);
-+		if (!page || xa_is_value(page)) {
-+			page = __page_cache_alloc(readahead_gfp_mask(mapping));
-+			if (!page)
-+				break;
-+			page->index = index;
-+			list_add(&page->lru, &pages);
-+			nr_pages++;
-+		}
-+	}
-+	blk_start_plug(&plug);
-+	f2fs_mpage_readpages(mapping, &pages, NULL, nr_pages, true);
-+	blk_finish_plug(&plug);
-+}
-+
- static struct page *f2fs_read_merkle_tree_page(struct inode *inode,
--					       pgoff_t index)
-+					       pgoff_t index,
-+					       unsigned long num_ra_pages)
- {
-+	struct page *page;
-+
- 	index += f2fs_verity_metadata_pos(inode) >> PAGE_SHIFT;
- 
--	return read_mapping_page(inode->i_mapping, index, NULL);
-+	page = find_get_page_flags(inode->i_mapping, index, FGP_ACCESSED);
-+	if (!page || !PageUptodate(page)) {
-+		if (page)
-+			put_page(page);
-+		else if (num_ra_pages > 1)
-+			f2fs_merkle_tree_readahead(inode->i_mapping, index,
-+						   num_ra_pages);
-+		page = read_mapping_page(inode->i_mapping, index, NULL);
-+	}
-+	return page;
- }
- 
- static int f2fs_write_merkle_tree_block(struct inode *inode, const void *buf,
-diff --git a/fs/verity/enable.c b/fs/verity/enable.c
-index 9c93c17f1c1cd..efc79a2cedf27 100644
---- a/fs/verity/enable.c
-+++ b/fs/verity/enable.c
-@@ -8,6 +8,7 @@
- #include "fsverity_private.h"
- 
- #include <crypto/hash.h>
-+#include <linux/backing-dev.h>
- #include <linux/mount.h>
- #include <linux/pagemap.h>
- #include <linux/sched/signal.h>
-@@ -86,9 +87,14 @@ static int build_merkle_tree_level(struct file *filp, unsigned int level,
- 				return err;
- 			}
- 		} else {
-+			unsigned long num_ra_pages =
-+				min_t(unsigned long, num_blocks_to_hash - i,
-+				      inode->i_sb->s_bdi->io_pages);
-+
- 			/* Non-leaf: hashing hash block from level below */
- 			src_page = vops->read_merkle_tree_page(inode,
--					params->level_start[level - 1] + i);
-+					params->level_start[level - 1] + i,
-+					num_ra_pages);
- 			if (IS_ERR(src_page)) {
- 				err = PTR_ERR(src_page);
- 				fsverity_err(inode,
-diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
-index e74c79b64d889..ab9cfdd8f965a 100644
---- a/fs/verity/fsverity_private.h
-+++ b/fs/verity/fsverity_private.h
-@@ -50,6 +50,7 @@ struct merkle_tree_params {
- 	unsigned int log_arity;		/* log2(hashes_per_block) */
- 	unsigned int num_levels;	/* number of levels in Merkle tree */
- 	u64 tree_size;			/* Merkle tree size in bytes */
-+	unsigned long level0_blocks;	/* number of blocks in tree level 0 */
- 
- 	/*
- 	 * Starting block index for each tree level, ordered from leaf level (0)
-diff --git a/fs/verity/open.c b/fs/verity/open.c
-index 63d1004b688cb..e9cdf7d00ed26 100644
---- a/fs/verity/open.c
-+++ b/fs/verity/open.c
-@@ -102,6 +102,7 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
- 		/* temporarily using level_start[] to store blocks in level */
- 		params->level_start[params->num_levels++] = blocks;
- 	}
-+	params->level0_blocks = params->level_start[0];
- 
- 	/* Compute the starting block of each level */
- 	offset = 0;
-diff --git a/fs/verity/verify.c b/fs/verity/verify.c
-index 3e8f2de44667f..7fa561c343c2a 100644
---- a/fs/verity/verify.c
-+++ b/fs/verity/verify.c
-@@ -84,7 +84,8 @@ static inline int cmp_hashes(const struct fsverity_info *vi,
-  * Return: true if the page is valid, else false.
-  */
- static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
--			struct ahash_request *req, struct page *data_page)
-+			struct ahash_request *req, struct page *data_page,
-+			unsigned long level0_ra_pages)
- {
- 	const struct merkle_tree_params *params = &vi->tree_params;
- 	const unsigned int hsize = params->digest_size;
-@@ -117,8 +118,8 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
- 		pr_debug_ratelimited("Level %d: hindex=%lu, hoffset=%u\n",
- 				     level, hindex, hoffset);
- 
--		hpage = inode->i_sb->s_vop->read_merkle_tree_page(inode,
--								  hindex);
-+		hpage = inode->i_sb->s_vop->read_merkle_tree_page(inode, hindex,
-+				level == 0 ? level0_ra_pages : 0);
- 		if (IS_ERR(hpage)) {
- 			err = PTR_ERR(hpage);
- 			fsverity_err(inode,
-@@ -195,7 +196,7 @@ bool fsverity_verify_page(struct page *page)
- 	if (unlikely(!req))
- 		return false;
- 
--	valid = verify_page(inode, vi, req, page);
-+	valid = verify_page(inode, vi, req, page, 0);
- 
- 	ahash_request_free(req);
- 
-@@ -222,21 +223,42 @@ void fsverity_verify_bio(struct bio *bio)
- {
- 	struct inode *inode = bio_first_page_all(bio)->mapping->host;
- 	const struct fsverity_info *vi = inode->i_verity_info;
-+	const struct merkle_tree_params *params = &vi->tree_params;
- 	struct ahash_request *req;
- 	struct bio_vec *bv;
- 	struct bvec_iter_all iter_all;
-+	unsigned long max_ra_pages = 0;
- 
--	req = ahash_request_alloc(vi->tree_params.hash_alg->tfm, GFP_NOFS);
-+	req = ahash_request_alloc(params->hash_alg->tfm, GFP_NOFS);
- 	if (unlikely(!req)) {
- 		bio_for_each_segment_all(bv, bio, iter_all)
- 			SetPageError(bv->bv_page);
- 		return;
- 	}
- 
-+	if (bio->bi_opf & REQ_RAHEAD) {
-+		/*
-+		 * If this bio is for data readahead, then we also do readahead
-+		 * of the first (largest) level of the Merkle tree.  Namely,
-+		 * when a Merkle tree page is read, we also try to piggy-back on
-+		 * some additional pages -- up to 1/4 the number of data pages.
-+		 *
-+		 * This improves sequential read performance, as it greatly
-+		 * reduces the number of I/O requests made to the Merkle tree.
-+		 */
-+		bio_for_each_segment_all(bv, bio, iter_all)
-+			max_ra_pages++;
-+		max_ra_pages /= 4;
-+	}
-+
- 	bio_for_each_segment_all(bv, bio, iter_all) {
- 		struct page *page = bv->bv_page;
-+		unsigned long level0_index = page->index >> params->log_arity;
-+		unsigned long level0_ra_pages =
-+			min(max_ra_pages, params->level0_blocks - level0_index);
- 
--		if (!PageError(page) && !verify_page(inode, vi, req, page))
-+		if (!PageError(page) &&
-+		    !verify_page(inode, vi, req, page, level0_ra_pages))
- 			SetPageError(page);
- 	}
- 
-diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index 3b6b8ccebe7d2..ecc604e61d61b 100644
---- a/include/linux/fsverity.h
-+++ b/include/linux/fsverity.h
-@@ -77,6 +77,10 @@ struct fsverity_operations {
- 	 *
- 	 * @inode: the inode
- 	 * @index: 0-based index of the page within the Merkle tree
-+	 * @num_ra_pages: The number of Merkle tree pages that should be
-+	 *		  prefetched starting at @index if the page at @index
-+	 *		  isn't already cached.  Implementations may ignore this
-+	 *		  argument; it's only a performance optimization.
- 	 *
- 	 * This can be called at any time on an open verity file, as well as
- 	 * between ->begin_enable_verity() and ->end_enable_verity().  It may be
-@@ -87,7 +91,8 @@ struct fsverity_operations {
- 	 * Return: the page on success, ERR_PTR() on failure
- 	 */
- 	struct page *(*read_merkle_tree_page)(struct inode *inode,
--					      pgoff_t index);
-+					      pgoff_t index,
-+					      unsigned long num_ra_pages);
- 
- 	/**
- 	 * Write a Merkle tree block to the given inode.
--- 
-2.24.1.735.g03f4e72817-goog
-
+> 
+>> +
+>>  		__do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
+>> +
+>> +		if (ret)
+>> +			goto unlock_pages;
+>>  	}
+>>  
+>>  	*fsdata = cc->rpages;
+>> -- 
+>> 2.18.0.rc1
+> .
+> 
 
 
 _______________________________________________
