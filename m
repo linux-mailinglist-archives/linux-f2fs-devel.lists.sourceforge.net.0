@@ -2,111 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74E6D134ECD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 22:24:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ks4tglrAu3GkKayMzQJgXxXrIHoXao5FNjVM6LFvkKg=; b=jsO2ax7W44QxUz5Jhg1lv8H14C
-	wLOqeWvLfEaW/HnxMKf64pGHCq42VStkOl6ifLBEoEdKN8OInKqAGUrKo5iDuYaX3aX6kCQXC9NsF
-	AQ1W2ytGpnojy5gOc5slC4i6dzWW6IG2BxlTP7T4nCr7o1U0rheEEofNA3JusIGSfNyM=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 58B64134F82
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 23:43:13 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipIoV-0001Dm-1a; Wed, 08 Jan 2020 21:24:27 +0000
+	id 1ipK2g-0004jd-6x; Wed, 08 Jan 2020 22:43:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <drosen@google.com>) id 1ipIoT-0001De-CH
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 21:24:25 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ipK2e-0004jV-JO
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 22:43:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MrgqnfuzWiyeoBisKfI9WUGDpT/I3A3pzpV2omGtkBc=; b=LOFNXLaSMTOA6fwMt3haZTMm9O
- u8lA8Z5C7oVpv3zKH/lRpmymCIXvaC3sQMeu65n7DCj60YN9nN2S0Tv+8FyapKzt/lkGC3G/iIgWx
- orkvF4jv5SZ3/aRnWJVtTht0ZmD79sD4o5h92fvTAOPSGw00gLiU544cUKZ/CB0x+cKE=;
+ bh=Wf0monf1+wWi4aOGGoVm5lcLSXCpwv7BfGqWrpih+48=; b=SibRl9nek1KtNFBMi6WVLjSybA
+ BReAKMwHF4Ze8mBMhFZwppvHObn5qFyCrD2t6It2qG+H64neIJQNUBGOX+4bdkJuezmBSUlwafeDv
+ miQyptISW6tN4ZDAhyYlkBIkIbsPPJ2YwPgrGIvmU02gw5R3K+n2UAxKepTl7a5ByW0M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MrgqnfuzWiyeoBisKfI9WUGDpT/I3A3pzpV2omGtkBc=; b=Qs53t5fADK/FjUv3FnwtOIe07q
- ssJijdzemxJ5xUL47avkO+TntWFgaF+D1c8aQycKUdFPxJ9dLp8kNYLW8pt5mh4+46JaEZISbEFV4
- GAfRFQylIMe4701lrEVocMzWbOvzsL8j0357KHamubrB9gWBsEx7znRZQoR7Oz4HXu1c=;
-Received: from mail-lj1-f194.google.com ([209.85.208.194])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ipIoR-00DgSh-GV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 21:24:25 +0000
-Received: by mail-lj1-f194.google.com with SMTP id z22so4910362ljg.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 08 Jan 2020 13:24:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MrgqnfuzWiyeoBisKfI9WUGDpT/I3A3pzpV2omGtkBc=;
- b=DDNcIoteefV8aBFRJqRjAYF8UmeDfEGuxO5aoHpC40ksghWZNn1vYOvHVH75utqX92
- 8pyR/nWuhn+vomgt79nK/sovZ1x7PhYhTnNXeT0womFAJ98oI98vJEh+zZtrLhhAsaiT
- xHAeO525OvgTSe1X+L3USeOsbOk+RWWtyuGny4uD91Ul8TIcjfd6L4XmBIrytt5zzyEs
- hQErb3i2mU9p3strf1rp4eW3q1/1zYZBB0VrVfwfyEPkEBvcTwGsqDvhRh9K2zjsT3ch
- 4bymw0ydHk1l0bLwoVhIPuVYIxoBXZ9csRffl8URhKARiRZg6AEOEEzGhtohlDS2x0zL
- xbtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MrgqnfuzWiyeoBisKfI9WUGDpT/I3A3pzpV2omGtkBc=;
- b=d5bQ3/oPCdB4eAxxE831qyNNUZd9ydb9lvg5NgeQV7qmaVnXLxxGhvjJThxYUxFjZ0
- p01myL4WR8V2PCbaKd6T3oNEJKQYRpCWBbfnhsd2bnn8NF6IkbmoU/PDJ4jh8qf3yk5W
- DXXAnOn4zaN/fMe/j61f0nKJ+0XPm4jo70GKwfc2XKImVPHKkTQFsHdjlrHWols6gj/F
- wA++JkVCVBdxz1vBB6znVBJGEv4a0zl3RFBQZiqFZFKi7OmQSV62fOi2REvqk45Xkflf
- QlcTLWc5lfN4ls/LnWiHlKThNV4CaTJOd8yFA9Ru+KZFYkgoAUKS2clSDX8h9hODMJM2
- jTnA==
-X-Gm-Message-State: APjAAAXUvmknzhq3i6YVfDRfEe3xpmmmrME+blwsfYmMJNWY9z2xqVhF
- MVE6e2lNQTCw28/P32gnQ6d7RRNmgtIHfiAJEQiTtQ==
-X-Google-Smtp-Source: APXvYqzIFAaH51EKKHEbmEN6pXokDd653dkwA7mvIiTffi1G/lQMFKNkhMpqs1Z3DU3Ocqxwmy/VJxTCWBZ8KPcs8nw=
-X-Received: by 2002:a05:651c:1049:: with SMTP id
- x9mr4073045ljm.233.1578518656460; 
- Wed, 08 Jan 2020 13:24:16 -0800 (PST)
+ bh=Wf0monf1+wWi4aOGGoVm5lcLSXCpwv7BfGqWrpih+48=; b=mq1+WHS+DoIPiYa0DGHsa/szHi
+ fa+zhtjVFsQpwd0/k5LTv5jsrdQircE6xhtobKKmux1jcTWIJfmqBqAm5jxmjvyGVLH5d8xguzGzI
+ C6TgWh9JIdBVIywixNH6z5oaFF1/2QZ2gP5sKUvVZlTSx1eE37tm85bxPg6SB3mP9phk=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ipK2a-00F2j5-Tj
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 22:43:08 +0000
+Received: from localhost (unknown [104.132.0.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4A6DA2053B;
+ Wed,  8 Jan 2020 22:42:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1578523374;
+ bh=o+EBZqF4Q3rb3rJsaguToktWL8ixzhk3Cs0X6JHnuWQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=k5NdnaWaKTe+ShsNn7Avicpv6kmAudgSdjCCCkHc8JkJ93E1FGAoiqJTJv9Gt2b7h
+ K86oj/gBeyC8BzLIZWCfEwzTczvjm+Q6NtHwDbaI/4l6BETeoUDyqXGraok+juAheo
+ k9q1huD97Dyfqg5/bZhKEna9PZ9KqS6dlvuuDgUI=
+Date: Wed, 8 Jan 2020 14:42:53 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Andreas Gruenbacher <agruenba@redhat.com>
+Message-ID: <20200108224253.GA42219@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20200108131528.4279-1-agruenba@redhat.com>
 MIME-Version: 1.0
-References: <20200107051638.40893-1-drosen@google.com>
- <20200108185005.GE263696@mit.edu>
-In-Reply-To: <20200108185005.GE263696@mit.edu>
-Date: Wed, 8 Jan 2020 13:24:05 -0800
-Message-ID: <CA+PiJmSLFVvRazSKDWOiygtgvE3-o6m6rq9q+jUKuhP-T2RHNw@mail.gmail.com>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>
-X-Spam-Score: -15.8 (---------------)
+Content-Disposition: inline
+In-Reply-To: <20200108131528.4279-1-agruenba@redhat.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.194 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.194 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: android.com]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ipIoR-00DgSh-GV
-Subject: Re: [f2fs-dev] [PATCH v2 0/6] Support for Casefolding and Encryption
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1ipK2a-00F2j5-Tj
+Subject: Re: [f2fs-dev] [PATCH v4] fs: Fix page_mkwrite off-by-one errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,63 +86,355 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Rosenberg via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Rosenberg <drosen@google.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, kernel-team@android.com,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Jan Kara <jack@suse.cz>, Adrian Hunter <adrian.hunter@intel.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Sage Weil <sage@redhat.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
+ Richard Weinberger <richard@nod.at>, YueHaibing <yuehaibing@huawei.com>,
+ Christoph Hellwig <hch@infradead.org>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+ Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, ceph-devel@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Artem Bityutskiy <dedekind1@gmail.com>,
+ Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Linus Torvalds <torvalds@linux-foundation.org>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jan 8, 2020 at 10:50 AM Theodore Y. Ts'o <tytso@mit.edu> wrote:
->
-> On Mon, Jan 06, 2020 at 09:16:32PM -0800, Daniel Rosenberg wrote:
-> > changes:
-> > fscrypt moved to separate thread to rebase on fscrypt dev branch
-> > addressed feedback, plus some minor fixes
->
-> What branch was this based on?  There is no fscrypt dev branch, so I
-> took the fscrypt master branch, and then applied your fscrypt patches,
-> and then I tried to apply this patch series.  I got patch conflicts
-> starting with the very first patch.
->
-> Applying: TMP: fscrypt: Add support for casefolding with encryption
-> error: patch failed: fs/crypto/Kconfig:9
-> error: fs/crypto/Kconfig: patch does not apply
-> error: patch failed: fs/crypto/fname.c:12
-> error: fs/crypto/fname.c: patch does not apply
-> error: patch failed: fs/crypto/fscrypt_private.h:12
-> error: fs/crypto/fscrypt_private.h: patch does not apply
-> error: patch failed: fs/crypto/keysetup.c:192
-> error: fs/crypto/keysetup.c: patch does not apply
-> error: patch failed: fs/crypto/policy.c:67
-> error: fs/crypto/policy.c: patch does not apply
-> error: patch failed: fs/inode.c:20
-> error: fs/inode.c: patch does not apply
-> error: patch failed: include/linux/fscrypt.h:127
-> error: include/linux/fscrypt.h: patch does not apply
-> Patch failed at 0001 TMP: fscrypt: Add support for casefolding with encryption
-> hint: Use 'git am --show-current-patch' to see the failed patch
-> When you have resolved this problem, run "git am --continue".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am --abort".
->
->                                                   - Ted
->
+On 01/08, Andreas Gruenbacher wrote:
+> Hi Darrick,
+> 
+> here's an updated version with the latest feedback incorporated.  Hope
+> you find that useful.
+> 
+> As far as the f2fs merge conflict goes, I've been told by Linus not to
+> resolve those kinds of conflicts but to point them out when sending the
+> merge request.  So this shouldn't be a big deal.
+> 
+> Changes:
+> 
+> * Turn page_mkwrite_check_truncate into a non-inline function.
+> * Get rid of now-unused mapping variable in ext4_page_mkwrite.
+> * In btrfs_page_mkwrite, don't ignore the return value of
+>   block_page_mkwrite_return (no change in behavior).
+> * Clean up the f2fs_vm_page_mkwrite changes as suggested by
+>   Jaegeuk Kim.
+> 
+> Thanks,
+> Andreas
+> 
 > --
-> To unsubscribe from this group and stop receiving emails from it, send an email to kernel-team+unsubscribe@android.com.
->
+> 
+> The check in block_page_mkwrite that is meant to determine whether an
+> offset is within the inode size is off by one.  This bug has been copied
+> into iomap_page_mkwrite and several filesystems (ubifs, ext4, f2fs,
+> ceph).
+> 
+> Fix that by introducing a new page_mkwrite_check_truncate helper that
+> checks for truncate and computes the bytes in the page up to EOF.  Use
+> the helper in the above mentioned filesystems.
+> 
+> In addition, use the new helper in btrfs as well.
+> 
+> Signed-off-by: Andreas Gruenbacher <agruenba@redhat.com>
+> Acked-by: David Sterba <dsterba@suse.com> (btrfs)
+> Acked-by: Richard Weinberger <richard@nod.at> (ubifs)
+> Acked-by: Theodore Ts'o <tytso@mit.edu> (ext4)
+> Acked-by: Chao Yu <yuchao0@huawei.com> (f2fs)
 
-This is based off of ToT master. I put in a dummy fscrypt patch so you
-wouldn't need to rebase on top of fscrypt, but I could just do future
-patch sets all on top of fscrypt-dev. I guess my attempt to make it
-easier just made it more confusing :(
+Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+
+> ---
+>  fs/btrfs/inode.c        | 16 +++++-----------
+>  fs/buffer.c             | 16 +++-------------
+>  fs/ceph/addr.c          |  2 +-
+>  fs/ext4/inode.c         | 15 ++++-----------
+>  fs/f2fs/file.c          | 19 +++++++------------
+>  fs/iomap/buffered-io.c  | 18 +++++-------------
+>  fs/ubifs/file.c         |  3 +--
+>  include/linux/pagemap.h |  2 ++
+>  mm/filemap.c            | 28 ++++++++++++++++++++++++++++
+>  9 files changed, 56 insertions(+), 63 deletions(-)
+> 
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index e3c76645cad7..23e6f614e000 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -9011,16 +9011,15 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  		goto out_noreserve;
+>  	}
+>  
+> -	ret = VM_FAULT_NOPAGE; /* make the VM retry the fault */
+>  again:
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+>  
+> -	if ((page->mapping != inode->i_mapping) ||
+> -	    (page_start >= size)) {
+> -		/* page got truncated out from underneath us */
+> +	ret2 = page_mkwrite_check_truncate(page, inode);
+> +	if (ret2 < 0) {
+> +		ret = block_page_mkwrite_return(ret2);
+>  		goto out_unlock;
+>  	}
+> +	zero_start = ret2;
+>  	wait_on_page_writeback(page);
+>  
+>  	lock_extent_bits(io_tree, page_start, page_end, &cached_state);
+> @@ -9041,6 +9040,7 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  		goto again;
+>  	}
+>  
+> +	size = i_size_read(inode);
+>  	if (page->index == ((size - 1) >> PAGE_SHIFT)) {
+>  		reserved_space = round_up(size - page_start,
+>  					  fs_info->sectorsize);
+> @@ -9073,12 +9073,6 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  	}
+>  	ret2 = 0;
+>  
+> -	/* page is wholly or partially inside EOF */
+> -	if (page_start + PAGE_SIZE > size)
+> -		zero_start = offset_in_page(size);
+> -	else
+> -		zero_start = PAGE_SIZE;
+> -
+>  	if (zero_start != PAGE_SIZE) {
+>  		kaddr = kmap(page);
+>  		memset(kaddr + zero_start, 0, PAGE_SIZE - zero_start);
+> diff --git a/fs/buffer.c b/fs/buffer.c
+> index d8c7242426bb..53aabde57ca7 100644
+> --- a/fs/buffer.c
+> +++ b/fs/buffer.c
+> @@ -2499,23 +2499,13 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
+>  	struct page *page = vmf->page;
+>  	struct inode *inode = file_inode(vma->vm_file);
+>  	unsigned long end;
+> -	loff_t size;
+>  	int ret;
+>  
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+> -	if ((page->mapping != inode->i_mapping) ||
+> -	    (page_offset(page) > size)) {
+> -		/* We overload EFAULT to mean page got truncated */
+> -		ret = -EFAULT;
+> +	ret = page_mkwrite_check_truncate(page, inode);
+> +	if (ret < 0)
+>  		goto out_unlock;
+> -	}
+> -
+> -	/* page is wholly or partially inside EOF */
+> -	if (((page->index + 1) << PAGE_SHIFT) > size)
+> -		end = size & ~PAGE_MASK;
+> -	else
+> -		end = PAGE_SIZE;
+> +	end = ret;
+>  
+>  	ret = __block_write_begin(page, 0, end, get_block);
+>  	if (!ret)
+> diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
+> index 7ab616601141..ef958aa4adb4 100644
+> --- a/fs/ceph/addr.c
+> +++ b/fs/ceph/addr.c
+> @@ -1575,7 +1575,7 @@ static vm_fault_t ceph_page_mkwrite(struct vm_fault *vmf)
+>  	do {
+>  		lock_page(page);
+>  
+> -		if ((off > size) || (page->mapping != inode->i_mapping)) {
+> +		if (page_mkwrite_check_truncate(page, inode) < 0) {
+>  			unlock_page(page);
+>  			ret = VM_FAULT_NOPAGE;
+>  			break;
+> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+> index 629a25d999f0..3244803df30a 100644
+> --- a/fs/ext4/inode.c
+> +++ b/fs/ext4/inode.c
+> @@ -5871,13 +5871,11 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+>  {
+>  	struct vm_area_struct *vma = vmf->vma;
+>  	struct page *page = vmf->page;
+> -	loff_t size;
+>  	unsigned long len;
+>  	int err;
+>  	vm_fault_t ret;
+>  	struct file *file = vma->vm_file;
+>  	struct inode *inode = file_inode(file);
+> -	struct address_space *mapping = inode->i_mapping;
+>  	handle_t *handle;
+>  	get_block_t *get_block;
+>  	int retries = 0;
+> @@ -5907,18 +5905,13 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+>  	}
+>  
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+> -	/* Page got truncated from under us? */
+> -	if (page->mapping != mapping || page_offset(page) > size) {
+> +	err = page_mkwrite_check_truncate(page, inode);
+> +	if (err < 0) {
+>  		unlock_page(page);
+> -		ret = VM_FAULT_NOPAGE;
+> -		goto out;
+> +		goto out_ret;
+>  	}
+> +	len = err;
+>  
+> -	if (page->index == size >> PAGE_SHIFT)
+> -		len = size & ~PAGE_MASK;
+> -	else
+> -		len = PAGE_SIZE;
+>  	/*
+>  	 * Return if we have all the buffers mapped. This avoids the need to do
+>  	 * journal_start/journal_stop which can block and take a long time
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 85af112e868d..c2d919210a26 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -51,7 +51,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+>  	struct inode *inode = file_inode(vmf->vma->vm_file);
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  	struct dnode_of_data dn = { .node_changed = false };
+> -	int err;
+> +	int offset, err;
+>  
+>  	if (unlikely(f2fs_cp_error(sbi))) {
+>  		err = -EIO;
+> @@ -70,11 +70,12 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+>  	file_update_time(vmf->vma->vm_file);
+>  	down_read(&F2FS_I(inode)->i_mmap_sem);
+>  	lock_page(page);
+> -	if (unlikely(page->mapping != inode->i_mapping ||
+> -			page_offset(page) > i_size_read(inode) ||
+> -			!PageUptodate(page))) {
+> +	offset = -EFAULT;
+> +	if (likely(PageUptodate(page)))
+> +		offset = page_mkwrite_check_truncate(page, inode);
+> +	if (unlikely(offset < 0)) {
+>  		unlock_page(page);
+> -		err = -EFAULT;
+> +		err = offset;
+>  		goto out_sem;
+>  	}
+>  
+> @@ -101,14 +102,8 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+>  	if (PageMappedToDisk(page))
+>  		goto out_sem;
+>  
+> -	/* page is wholly or partially inside EOF */
+> -	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
+> -						i_size_read(inode)) {
+> -		loff_t offset;
+> -
+> -		offset = i_size_read(inode) & ~PAGE_MASK;
+> +	if (offset != PAGE_SIZE)
+>  		zero_user_segment(page, offset, PAGE_SIZE);
+> -	}
+>  	set_page_dirty(page);
+>  	if (!PageUptodate(page))
+>  		SetPageUptodate(page);
+> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+> index 828444e14d09..7c84c4c027c4 100644
+> --- a/fs/iomap/buffered-io.c
+> +++ b/fs/iomap/buffered-io.c
+> @@ -1077,24 +1077,16 @@ vm_fault_t iomap_page_mkwrite(struct vm_fault *vmf, const struct iomap_ops *ops)
+>  	struct page *page = vmf->page;
+>  	struct inode *inode = file_inode(vmf->vma->vm_file);
+>  	unsigned long length;
+> -	loff_t offset, size;
+> +	loff_t offset;
+>  	ssize_t ret;
+>  
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+> -	offset = page_offset(page);
+> -	if (page->mapping != inode->i_mapping || offset > size) {
+> -		/* We overload EFAULT to mean page got truncated */
+> -		ret = -EFAULT;
+> +	ret = page_mkwrite_check_truncate(page, inode);
+> +	if (ret < 0)
+>  		goto out_unlock;
+> -	}
+> -
+> -	/* page is wholly or partially inside EOF */
+> -	if (offset > size - PAGE_SIZE)
+> -		length = offset_in_page(size);
+> -	else
+> -		length = PAGE_SIZE;
+> +	length = ret;
+>  
+> +	offset = page_offset(page);
+>  	while (length > 0) {
+>  		ret = iomap_apply(inode, offset, length,
+>  				IOMAP_WRITE | IOMAP_FAULT, ops, page,
+> diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+> index cd52585c8f4f..91f7a1f2db0d 100644
+> --- a/fs/ubifs/file.c
+> +++ b/fs/ubifs/file.c
+> @@ -1563,8 +1563,7 @@ static vm_fault_t ubifs_vm_page_mkwrite(struct vm_fault *vmf)
+>  	}
+>  
+>  	lock_page(page);
+> -	if (unlikely(page->mapping != inode->i_mapping ||
+> -		     page_offset(page) > i_size_read(inode))) {
+> +	if (unlikely(page_mkwrite_check_truncate(page, inode) < 0)) {
+>  		/* Page got truncated out from underneath us */
+>  		goto sigbus;
+>  	}
+> diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
+> index 37a4d9e32cd3..6c9c5b88924d 100644
+> --- a/include/linux/pagemap.h
+> +++ b/include/linux/pagemap.h
+> @@ -636,4 +636,6 @@ static inline unsigned long dir_pages(struct inode *inode)
+>  			       PAGE_SHIFT;
+>  }
+>  
+> +int page_mkwrite_check_truncate(struct page *page, struct inode *inode);
+> +
+>  #endif /* _LINUX_PAGEMAP_H */
+> diff --git a/mm/filemap.c b/mm/filemap.c
+> index bf6aa30be58d..d3e2766216e3 100644
+> --- a/mm/filemap.c
+> +++ b/mm/filemap.c
+> @@ -2700,6 +2700,34 @@ const struct vm_operations_struct generic_file_vm_ops = {
+>  	.page_mkwrite	= filemap_page_mkwrite,
+>  };
+>  
+> +/**
+> + * page_mkwrite_check_truncate - check if page was truncated
+> + * @page: the page to check
+> + * @inode: the inode to check the page against
+> + *
+> + * Returns the number of bytes in the page up to EOF,
+> + * or -EFAULT if the page was truncated.
+> + */
+> +int page_mkwrite_check_truncate(struct page *page, struct inode *inode)
+> +{
+> +	loff_t size = i_size_read(inode);
+> +	pgoff_t index = size >> PAGE_SHIFT;
+> +	int offset = offset_in_page(size);
+> +
+> +	if (page->mapping != inode->i_mapping)
+> +		return -EFAULT;
+> +
+> +	/* page is wholly inside EOF */
+> +	if (page->index < index)
+> +		return PAGE_SIZE;
+> +	/* page is wholly past EOF */
+> +	if (page->index > index || !offset)
+> +		return -EFAULT;
+> +	/* page is partially inside EOF */
+> +	return offset;
+> +}
+> +EXPORT_SYMBOL(page_mkwrite_check_truncate);
+> +
+>  /* This is used for a general mmap of a disk file */
+>  
+>  int generic_file_mmap(struct file * file, struct vm_area_struct * vma)
+> -- 
+> 2.20.1
 
 
 _______________________________________________
