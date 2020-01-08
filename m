@@ -2,70 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A191F134AA4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 19:45:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipGKq-0003On-4f; Wed, 08 Jan 2020 18:45:40 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <piergiorgio.sartor@nexgo.de>) id 1ipGKo-0003Og-F0
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:45:38 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id AD977134AF4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 19:50:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=oT8/Lv/txkaewwtN/xtClYllbRYv+fAmuDvyyAtQ/i0=; b=IMUcSKhsMkqB7XbW7qB5zKzby
+	Lsul6efwv+OD1Suf0feHKeoMFYf7mjQT/lMbB6E7vHtksuZZ7bQ32S+XWUBg/cccDgQX0aipBNtBX
+	sszUDCFJw/QsqZ+YBaOQlxqn+p5vkf91EbE9jST5M2vTsLtTBarjzRLwzcV97Apat8f8o=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1ipGPr-00039o-Az; Wed, 08 Jan 2020 18:50:51 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <satyat@google.com>) id 1ipGPp-00039M-Rg
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:50:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oCw6uQQEhudOuleCQDp30XdPuhglQuJFgurblsCoo/o=; b=iE0QR5egcA5FMdwWwfnoeoIXEP
- yKs/r94y1frwB6zHN3CIsy/0Tu6NDS9wy7H7QBiLigxdWbklBdPblugLZoKBbGvTS+5Yr8t9RV1wC
- YAtABvOr+WOzpJqTTSWuptWfbzxSPoe2QycVqa+4VhtTpVA822HG/2RaW5QOeQBD5MPY=;
+ bh=GqM7/Gox89N6RYmX8N+C+JYNDY9Y92t5hXeig9A+0NE=; b=jTZHXNAcd+SZ3gyBpPG8WB1GOh
+ SKhaqFGkFaXhbIMfO7ohPdKfrZBneabntu0G1O3nnTE3EnDO6dcLL8deHN6829hr8wC1VRH+pT1zG
+ CII6YxA9l850FmSBTCIhY14pB8Fz2yCLfvyHazoFaKh4m/cGJBvY14zuew1iLG9lqPyI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oCw6uQQEhudOuleCQDp30XdPuhglQuJFgurblsCoo/o=; b=R
- rV7m2VUNLa+7UrDTMpHgWUztj4GwyZKJtQCpdDG9jclP9ZbZuksQKARBQU2IgAR5nVv743b8mFo6m
- THU+sF+Ia2/8dWpnUNGickLfzI8U7qsd8gxS0cYSFqoZINGhtX1kxUQ2yl4asji2XTakBNsqPdD9i
- gb2MIXfytc2WUu0I=;
-Received: from vsmx011.vodafonemail.xion.oxcs.net ([153.92.174.89])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GqM7/Gox89N6RYmX8N+C+JYNDY9Y92t5hXeig9A+0NE=; b=lJlR18bvnJH78pUNBu0aDgjiLd
+ k088FduCX8PMKc2oaJoyO2tHHXHNFNW0A7K5ZQ+x/EP3BVGPnkZvxg04zW7XaK8aZ0njHpVTGx6cj
+ 3L5zoDbjXMNl2+R9Mum4RLSsagi58SaMMFRpuRnNf8FyYntapoyjJ/At1ch9KlepJfzo=;
+Received: from mail-pj1-f65.google.com ([209.85.216.65])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ipGKl-00DhIA-QR
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:45:38 +0000
-Received: from vsmx003.vodafonemail.xion.oxcs.net (unknown [192.168.75.197])
- by mta-5-out.mta.xion.oxcs.net (Postfix) with ESMTP id 786BB59D19C
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1ipGPj-00DhYD-2v
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:50:44 +0000
+Received: by mail-pj1-f65.google.com with SMTP id s94so95872pjc.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  8 Jan 2020 18:26:58 +0000 (UTC)
-Received: from lazy.lzy (unknown [79.214.221.251])
- by mta-7-out.mta.xion.oxcs.net (Postfix) with ESMTPA id 5546E5399E4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  8 Jan 2020 18:26:56 +0000 (UTC)
-Received: from lazy.lzy (localhost [127.0.0.1])
- by lazy.lzy (8.15.2/8.14.5) with ESMTPS id 008IQtBt010412
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO)
- for <linux-f2fs-devel@lists.sourceforge.net>; Wed, 8 Jan 2020 19:26:55 +0100
-Received: (from red@localhost)
- by lazy.lzy (8.15.2/8.15.2/Submit) id 008IQt2U010411
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 8 Jan 2020 19:26:55 +0100
-Date: Wed, 8 Jan 2020 19:26:55 +0100
-From: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20200108182655.GA10257@lazy.lzy>
+ Wed, 08 Jan 2020 10:50:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=GqM7/Gox89N6RYmX8N+C+JYNDY9Y92t5hXeig9A+0NE=;
+ b=U3nfmbMHq/W60Cggp7RJIO+vjwZF+eOByq0zw2NdD3Ar4SSHaOIVputw0PVblX2/o4
+ rGuycl8hULEeLa76n6VKtiejtrAZxV2ip7LKG2pkIUppk7kP+nYsoJH8PIA2ERd6eHZF
+ 7kg8c8oxe1HfsuNiPK04ZvCZVI7p4MrF4wrplzGBHJ7+0t7oRiI5MUorB0njq6uxH/p4
+ g3w3/0xI8Flgn5SK4qw2rmZOVRk4uCUJbVGYc+4YUDe02CHqfod56+BNdpYqpkr4u4Ju
+ QWRtvYtE+1qc0bdsIr5YDGmM3klH/1hIseMl+g3jErzlysuBDR4N36fNB1+B3orn9fso
+ nn7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=GqM7/Gox89N6RYmX8N+C+JYNDY9Y92t5hXeig9A+0NE=;
+ b=F+4P835OXRFOLqA+I4EF5ar/hdGDC/tNb8NaQPMkwmemsLta2HMCocR7KUE706PpLs
+ xdCFxzBD++hfA7A8HNU1xzO3RxiBE4D8byu/41jsXh+HQlBt+iGvpUk+nV7YuYxKfk6y
+ kjSNRv+298WQt2mrChLvva7P6vmZ3n9HqkAWNGMw2tAKBG/qRrk6IL0ZSRc8NiIYXqUd
+ qph3S2MHHfiiTN+3YXXBxV6vBl7uA3BfUR4EP7RPzQTaWfL2skPw66e/9m/uWZM2W2PW
+ MJvNSNvTPeJYlqOgZAbXqbpEmH9Rv1KwmunSyWYsud0Lsq5BEFqDguFbfNYmpfj2haTC
+ lQGA==
+X-Gm-Message-State: APjAAAWuSheNNCXF0OnfWyaU7TDjU6b+nG0w8HF9iyXLJZOYVCtwVM5f
+ SLcxNdgYmuDc2r7fZJ4ZlM3FSA==
+X-Google-Smtp-Source: APXvYqwLsrqAQku6UEZ+m75sX13ln6fLUNoETR2ZmPckprU0bqTzke9nFnndvHW2jpMVg425OyWE3w==
+X-Received: by 2002:a17:90a:480a:: with SMTP id a10mr14637pjh.88.1578508990909; 
+ Wed, 08 Jan 2020 10:43:10 -0800 (PST)
+Received: from google.com ([2620:15c:201:0:7f8c:9d6e:20b8:e324])
+ by smtp.gmail.com with ESMTPSA id y7sm4734645pfb.139.2020.01.08.10.43.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jan 2020 10:43:10 -0800 (PST)
+Date: Wed, 8 Jan 2020 10:43:05 -0800
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200108184305.GA173657@google.com>
+References: <20191218145136.172774-1-satyat@google.com>
+ <20200108140556.GB2896@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-X-VADE-STATUS: LEGIT
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20200108140556.GB2896@infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -14.8 (--------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 1.8 FSL_HELO_FAKE          No description available.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.65 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.65 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1ipGKl-00DhIA-QR
-Subject: [f2fs-dev] TRIM issue
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+ -1.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ipGPj-00DhYD-2v
+Subject: Re: [f2fs-dev] [PATCH v6 0/9] Inline Encryption Support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,57 +122,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Satya Tangirala via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Satya Tangirala <satyat@google.com>
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi all,
+On Wed, Jan 08, 2020 at 06:05:56AM -0800, Christoph Hellwig wrote:
+> I haven't been able to deep dive into the details, but the structure
+> of this still makes me very unhappy.
+> 
+> Most of it is related to the software fallback again.  Please split the
+> fallback into a separate file, and also into a separate data structure.
+> There is abslutely no need to have the overhead of the software only
+> fields for the hardware case.
+> 
+The fallback actually is in a separate file, and the software only fields
+are not allocated in the hardware case anymore, either - I should have
+made that clear(er) in the coverletter.
+> On the counter side I think all the core block layer code added should
+> go into a single file instead of split into three with some odd
+> layering.
+> 
+Alright, I'll look into this. I still think that the keyslot manager
+should maybe go in a separate file because it does a specific, fairly
+self contained task and isn't just block layer code - it's the interface
+between the device drivers and any upper layer.
+> Also what I don't understand is why this managed key-slots on a per-bio
+> basis.  Wou;dn't it make a whole lot more sense to manage them on a
+> struct request basis once most of the merging has been performed?
+I don't immediately see an issue with making it work on a struct request
+basis. I'll look into this more carefully.
 
-I've a small box, with Fedora 31 up-to-date.
-
-The system has LUKS + LVM + f2fs.
-
-Since kernel 5.3.16-300.fc31.x86_64 the fstrim.service,
-triggered by the systemd service fstrim.timer or from
-command line, does return an error:
-
-Starting Discard unused blocks on filesystems from /etc/fstab...
-fstrim: /home: FITRIM ioctl failed: Read-only file system
-fstrim: /: FITRIM ioctl failed: Read-only file system
-fstrim.service: Main process exited, code=exited, status=32/n/a
-fstrim.service: Failed with result 'exit-code'.
-Failed to start Discard unused blocks on filesystems from /etc/fstab.
-
-Note the following:
-1) Both /home and / are rw
-2) LUKS and LVM allow discard to the underlying device
-3) An other PC, with same layout, but ext4, does work as expected
-4) kernel 5.4.7-200.fc31.x86_64 (latest for f31) has same result
-5) fstrim -vA or -va does not return an error, exit code is 0,
-but it always says 0 (zero) bytes are trimmed:
-
-/home: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-home
-/: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-root
-
-6) mount shows that the f2fs mounts have "discard" flag
-
-So, I suspect there is something with f2fs which somehow
-confuses the trimming process.
-
-I had a quick search, but I could not find any other
-similar report, except one about systemd, but that
-does not seem related.
-
-Any idea? Suggestions?
-Debugging possibilities?
-
-Thanks a lot in advance,
-
-bye,
-
--- 
-
-piergiorgio
+Thanks!
+Satya
 
 
 _______________________________________________
