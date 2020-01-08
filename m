@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B64134F82
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 23:43:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73DC2134FEF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 00:18:55 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipK2g-0004jd-6x; Wed, 08 Jan 2020 22:43:10 +0000
+	id 1ipKbE-00046n-23; Wed, 08 Jan 2020 23:18:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ipK2e-0004jV-JO
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 22:43:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ipKbD-00046b-1Z
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 23:18:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Wf0monf1+wWi4aOGGoVm5lcLSXCpwv7BfGqWrpih+48=; b=SibRl9nek1KtNFBMi6WVLjSybA
- BReAKMwHF4Ze8mBMhFZwppvHObn5qFyCrD2t6It2qG+H64neIJQNUBGOX+4bdkJuezmBSUlwafeDv
- miQyptISW6tN4ZDAhyYlkBIkIbsPPJ2YwPgrGIvmU02gw5R3K+n2UAxKepTl7a5ByW0M=;
+ bh=J6a0HPrJ63WHKyoLqdUyHULAz04QyRnZTjE0G42Yy5s=; b=AwTwSf7yHfAfhsQr+lu6bOpfoA
+ yO6v1DYkG4WQbcEveTWBdrYzJDnXc4/+/pHPxBdgGyNvdzAeGVkF7UplU6vYLn/FGXOQDVup1AUpm
+ kIN3qXDFnIA3AIBtTDiWCC9M/C2Gwr43uEEurIadhLnWbguFwxHmrhOEF77MPQFF2Ncc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Wf0monf1+wWi4aOGGoVm5lcLSXCpwv7BfGqWrpih+48=; b=mq1+WHS+DoIPiYa0DGHsa/szHi
- fa+zhtjVFsQpwd0/k5LTv5jsrdQircE6xhtobKKmux1jcTWIJfmqBqAm5jxmjvyGVLH5d8xguzGzI
- C6TgWh9JIdBVIywixNH6z5oaFF1/2QZ2gP5sKUvVZlTSx1eE37tm85bxPg6SB3mP9phk=;
+ bh=J6a0HPrJ63WHKyoLqdUyHULAz04QyRnZTjE0G42Yy5s=; b=I2iz6/YIhuzYPqbDXgJXqNEWnq
+ ns4OD5pH/JPRwdORyHScoHEyOc/7EM6rd5QZAHexPSlMpgxc9/IX2ED0gWNscj5iyKVppvaPfGNob
+ d3921ouXDQVwpjs03GQcypK/9P8KKPAs0FWN1LSk0l0eSR6TxhH6+RBLlDm+FEoU+LmM=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ipK2a-00F2j5-Tj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 22:43:08 +0000
+ id 1ipKb8-00DwyJ-Hv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 23:18:50 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4A6DA2053B;
- Wed,  8 Jan 2020 22:42:54 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DCEBB20692;
+ Wed,  8 Jan 2020 23:18:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578523374;
- bh=o+EBZqF4Q3rb3rJsaguToktWL8ixzhk3Cs0X6JHnuWQ=;
+ s=default; t=1578525520;
+ bh=q1ENe4lLdEVnjYZqJH1I18oDEtMqgJp+XWV9ZHBhBUo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=k5NdnaWaKTe+ShsNn7Avicpv6kmAudgSdjCCCkHc8JkJ93E1FGAoiqJTJv9Gt2b7h
- K86oj/gBeyC8BzLIZWCfEwzTczvjm+Q6NtHwDbaI/4l6BETeoUDyqXGraok+juAheo
- k9q1huD97Dyfqg5/bZhKEna9PZ9KqS6dlvuuDgUI=
-Date: Wed, 8 Jan 2020 14:42:53 -0800
+ b=xRtKYFCRN3JZg9pKxw7k1COaZOH2oDBEouKYbCKb555D9DRFy2p8VMwZqTKDJyKpJ
+ bp5nTDdhgYT9xRZtewxTb1vozXEmnuLYZ3ceotd9czbs1mVwQSpS7lH3E8UNhHukJJ
+ Vmf+RQ2X691WtheRwbLZE7Zr8sMvAiAyy30MVtkI=
+Date: Wed, 8 Jan 2020 15:18:40 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Message-ID: <20200108224253.GA42219@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20200108131528.4279-1-agruenba@redhat.com>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200108231840.GB42219@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20200107020709.73568-1-jaegeuk@kernel.org>
+ <afddac87-b7c5-f68c-4e55-3705be311cf6@huawei.com>
+ <20200108120444.GC28331@jaegeuk-macbookpro.roam.corp.google.com>
+ <d5555fd8-736f-cc2f-1e57-d9ac01b3d012@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200108131528.4279-1-agruenba@redhat.com>
+In-Reply-To: <d5555fd8-736f-cc2f-1e57-d9ac01b3d012@huawei.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -73,8 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1ipK2a-00F2j5-Tj
-Subject: Re: [f2fs-dev] [PATCH v4] fs: Fix page_mkwrite off-by-one errors
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ipKb8-00DwyJ-Hv
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add a way to turn off ipu bio cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,355 +86,91 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jan Kara <jack@suse.cz>, Adrian Hunter <adrian.hunter@intel.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Sage Weil <sage@redhat.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
- Richard Weinberger <richard@nod.at>, YueHaibing <yuehaibing@huawei.com>,
- Christoph Hellwig <hch@infradead.org>, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
- Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, ceph-devel@vger.kernel.org,
- Theodore Ts'o <tytso@mit.edu>, Artem Bityutskiy <dedekind1@gmail.com>,
- Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
- Linus Torvalds <torvalds@linux-foundation.org>, linux-btrfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/08, Andreas Gruenbacher wrote:
-> Hi Darrick,
+On 01/08, Chao Yu wrote:
+> On 2020/1/8 20:04, Jaegeuk Kim wrote:
+> > On 01/08, Chao Yu wrote:
+> >> On 2020/1/7 10:07, Jaegeuk Kim wrote:
+> >>> Setting 0x40 in /sys/fs/f2fs/dev/ipu_policy gives a way to turn off
+> >>> bio cache, which is useufl to check whether block layer using hardware
+> >>> encryption engine merges IOs correctly.
+> >>>
+> >>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> >>> ---
+> >>>  Documentation/filesystems/f2fs.txt | 1 +
+> >>>  fs/f2fs/segment.c                  | 2 +-
+> >>>  fs/f2fs/segment.h                  | 1 +
+> >>>  3 files changed, 3 insertions(+), 1 deletion(-)
+> >>>
+> >>> diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
+> >>> index 41b5aa94b30f..cd93bcc34726 100644
+> >>> --- a/Documentation/filesystems/f2fs.txt
+> >>> +++ b/Documentation/filesystems/f2fs.txt
+> >>> @@ -335,6 +335,7 @@ Files in /sys/fs/f2fs/<devname>
+> >>>                                 0x01: F2FS_IPU_FORCE, 0x02: F2FS_IPU_SSR,
+> >>>                                 0x04: F2FS_IPU_UTIL,  0x08: F2FS_IPU_SSR_UTIL,
+> >>>                                 0x10: F2FS_IPU_FSYNC.
+> >>
+> >> . -> ,
+> > 
+> > Actually, we can't do it. I revised it a bit instead.
 > 
-> here's an updated version with the latest feedback incorporated.  Hope
-> you find that useful.
-> 
-> As far as the f2fs merge conflict goes, I've been told by Linus not to
-> resolve those kinds of conflicts but to point them out when sending the
-> merge request.  So this shouldn't be a big deal.
-> 
-> Changes:
-> 
-> * Turn page_mkwrite_check_truncate into a non-inline function.
-> * Get rid of now-unused mapping variable in ext4_page_mkwrite.
-> * In btrfs_page_mkwrite, don't ignore the return value of
->   block_page_mkwrite_return (no change in behavior).
-> * Clean up the f2fs_vm_page_mkwrite changes as suggested by
->   Jaegeuk Kim.
-> 
-> Thanks,
-> Andreas
-> 
-> --
-> 
-> The check in block_page_mkwrite that is meant to determine whether an
-> offset is within the inode size is off by one.  This bug has been copied
-> into iomap_page_mkwrite and several filesystems (ubifs, ext4, f2fs,
-> ceph).
-> 
-> Fix that by introducing a new page_mkwrite_check_truncate helper that
-> checks for truncate and computes the bytes in the page up to EOF.  Use
-> the helper in the above mentioned filesystems.
-> 
-> In addition, use the new helper in btrfs as well.
-> 
-> Signed-off-by: Andreas Gruenbacher <agruenba@redhat.com>
-> Acked-by: David Sterba <dsterba@suse.com> (btrfs)
-> Acked-by: Richard Weinberger <richard@nod.at> (ubifs)
-> Acked-by: Theodore Ts'o <tytso@mit.edu> (ext4)
-> Acked-by: Chao Yu <yuchao0@huawei.com> (f2fs)
+> One more question, why skipping 0x20 bit position?
 
-Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+It seems original patch missed to add comment.
 
-> ---
->  fs/btrfs/inode.c        | 16 +++++-----------
->  fs/buffer.c             | 16 +++-------------
->  fs/ceph/addr.c          |  2 +-
->  fs/ext4/inode.c         | 15 ++++-----------
->  fs/f2fs/file.c          | 19 +++++++------------
->  fs/iomap/buffered-io.c  | 18 +++++-------------
->  fs/ubifs/file.c         |  3 +--
->  include/linux/pagemap.h |  2 ++
->  mm/filemap.c            | 28 ++++++++++++++++++++++++++++
->  9 files changed, 56 insertions(+), 63 deletions(-)
-> 
-> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
-> index e3c76645cad7..23e6f614e000 100644
-> --- a/fs/btrfs/inode.c
-> +++ b/fs/btrfs/inode.c
-> @@ -9011,16 +9011,15 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
->  		goto out_noreserve;
->  	}
->  
-> -	ret = VM_FAULT_NOPAGE; /* make the VM retry the fault */
->  again:
->  	lock_page(page);
-> -	size = i_size_read(inode);
->  
-> -	if ((page->mapping != inode->i_mapping) ||
-> -	    (page_start >= size)) {
-> -		/* page got truncated out from underneath us */
-> +	ret2 = page_mkwrite_check_truncate(page, inode);
-> +	if (ret2 < 0) {
-> +		ret = block_page_mkwrite_return(ret2);
->  		goto out_unlock;
->  	}
-> +	zero_start = ret2;
->  	wait_on_page_writeback(page);
->  
->  	lock_extent_bits(io_tree, page_start, page_end, &cached_state);
-> @@ -9041,6 +9040,7 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
->  		goto again;
->  	}
->  
-> +	size = i_size_read(inode);
->  	if (page->index == ((size - 1) >> PAGE_SHIFT)) {
->  		reserved_space = round_up(size - page_start,
->  					  fs_info->sectorsize);
-> @@ -9073,12 +9073,6 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
->  	}
->  	ret2 = 0;
->  
-> -	/* page is wholly or partially inside EOF */
-> -	if (page_start + PAGE_SIZE > size)
-> -		zero_start = offset_in_page(size);
-> -	else
-> -		zero_start = PAGE_SIZE;
-> -
->  	if (zero_start != PAGE_SIZE) {
->  		kaddr = kmap(page);
->  		memset(kaddr + zero_start, 0, PAGE_SIZE - zero_start);
-> diff --git a/fs/buffer.c b/fs/buffer.c
-> index d8c7242426bb..53aabde57ca7 100644
-> --- a/fs/buffer.c
-> +++ b/fs/buffer.c
-> @@ -2499,23 +2499,13 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
->  	struct page *page = vmf->page;
->  	struct inode *inode = file_inode(vma->vm_file);
->  	unsigned long end;
-> -	loff_t size;
->  	int ret;
->  
->  	lock_page(page);
-> -	size = i_size_read(inode);
-> -	if ((page->mapping != inode->i_mapping) ||
-> -	    (page_offset(page) > size)) {
-> -		/* We overload EFAULT to mean page got truncated */
-> -		ret = -EFAULT;
-> +	ret = page_mkwrite_check_truncate(page, inode);
-> +	if (ret < 0)
->  		goto out_unlock;
-> -	}
-> -
-> -	/* page is wholly or partially inside EOF */
-> -	if (((page->index + 1) << PAGE_SHIFT) > size)
-> -		end = size & ~PAGE_MASK;
-> -	else
-> -		end = PAGE_SIZE;
-> +	end = ret;
->  
->  	ret = __block_write_begin(page, 0, end, get_block);
->  	if (!ret)
-> diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
-> index 7ab616601141..ef958aa4adb4 100644
-> --- a/fs/ceph/addr.c
-> +++ b/fs/ceph/addr.c
-> @@ -1575,7 +1575,7 @@ static vm_fault_t ceph_page_mkwrite(struct vm_fault *vmf)
->  	do {
->  		lock_page(page);
->  
-> -		if ((off > size) || (page->mapping != inode->i_mapping)) {
-> +		if (page_mkwrite_check_truncate(page, inode) < 0) {
->  			unlock_page(page);
->  			ret = VM_FAULT_NOPAGE;
->  			break;
-> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-> index 629a25d999f0..3244803df30a 100644
-> --- a/fs/ext4/inode.c
-> +++ b/fs/ext4/inode.c
-> @@ -5871,13 +5871,11 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
->  {
->  	struct vm_area_struct *vma = vmf->vma;
->  	struct page *page = vmf->page;
-> -	loff_t size;
->  	unsigned long len;
->  	int err;
->  	vm_fault_t ret;
->  	struct file *file = vma->vm_file;
->  	struct inode *inode = file_inode(file);
-> -	struct address_space *mapping = inode->i_mapping;
->  	handle_t *handle;
->  	get_block_t *get_block;
->  	int retries = 0;
-> @@ -5907,18 +5905,13 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
->  	}
->  
->  	lock_page(page);
-> -	size = i_size_read(inode);
-> -	/* Page got truncated from under us? */
-> -	if (page->mapping != mapping || page_offset(page) > size) {
-> +	err = page_mkwrite_check_truncate(page, inode);
-> +	if (err < 0) {
->  		unlock_page(page);
-> -		ret = VM_FAULT_NOPAGE;
-> -		goto out;
-> +		goto out_ret;
->  	}
-> +	len = err;
->  
-> -	if (page->index == size >> PAGE_SHIFT)
-> -		len = size & ~PAGE_MASK;
-> -	else
-> -		len = PAGE_SIZE;
->  	/*
->  	 * Return if we have all the buffers mapped. This avoids the need to do
->  	 * journal_start/journal_stop which can block and take a long time
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 85af112e868d..c2d919210a26 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -51,7 +51,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->  	struct inode *inode = file_inode(vmf->vma->vm_file);
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->  	struct dnode_of_data dn = { .node_changed = false };
-> -	int err;
-> +	int offset, err;
->  
->  	if (unlikely(f2fs_cp_error(sbi))) {
->  		err = -EIO;
-> @@ -70,11 +70,12 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->  	file_update_time(vmf->vma->vm_file);
->  	down_read(&F2FS_I(inode)->i_mmap_sem);
->  	lock_page(page);
-> -	if (unlikely(page->mapping != inode->i_mapping ||
-> -			page_offset(page) > i_size_read(inode) ||
-> -			!PageUptodate(page))) {
-> +	offset = -EFAULT;
-> +	if (likely(PageUptodate(page)))
-> +		offset = page_mkwrite_check_truncate(page, inode);
-> +	if (unlikely(offset < 0)) {
->  		unlock_page(page);
-> -		err = -EFAULT;
-> +		err = offset;
->  		goto out_sem;
->  	}
->  
-> @@ -101,14 +102,8 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->  	if (PageMappedToDisk(page))
->  		goto out_sem;
->  
-> -	/* page is wholly or partially inside EOF */
-> -	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
-> -						i_size_read(inode)) {
-> -		loff_t offset;
-> -
-> -		offset = i_size_read(inode) & ~PAGE_MASK;
-> +	if (offset != PAGE_SIZE)
->  		zero_user_segment(page, offset, PAGE_SIZE);
-> -	}
->  	set_page_dirty(page);
->  	if (!PageUptodate(page))
->  		SetPageUptodate(page);
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index 828444e14d09..7c84c4c027c4 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -1077,24 +1077,16 @@ vm_fault_t iomap_page_mkwrite(struct vm_fault *vmf, const struct iomap_ops *ops)
->  	struct page *page = vmf->page;
->  	struct inode *inode = file_inode(vmf->vma->vm_file);
->  	unsigned long length;
-> -	loff_t offset, size;
-> +	loff_t offset;
->  	ssize_t ret;
->  
->  	lock_page(page);
-> -	size = i_size_read(inode);
-> -	offset = page_offset(page);
-> -	if (page->mapping != inode->i_mapping || offset > size) {
-> -		/* We overload EFAULT to mean page got truncated */
-> -		ret = -EFAULT;
-> +	ret = page_mkwrite_check_truncate(page, inode);
-> +	if (ret < 0)
->  		goto out_unlock;
-> -	}
-> -
-> -	/* page is wholly or partially inside EOF */
-> -	if (offset > size - PAGE_SIZE)
-> -		length = offset_in_page(size);
-> -	else
-> -		length = PAGE_SIZE;
-> +	length = ret;
->  
-> +	offset = page_offset(page);
->  	while (length > 0) {
->  		ret = iomap_apply(inode, offset, length,
->  				IOMAP_WRITE | IOMAP_FAULT, ops, page,
-> diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-> index cd52585c8f4f..91f7a1f2db0d 100644
-> --- a/fs/ubifs/file.c
-> +++ b/fs/ubifs/file.c
-> @@ -1563,8 +1563,7 @@ static vm_fault_t ubifs_vm_page_mkwrite(struct vm_fault *vmf)
->  	}
->  
->  	lock_page(page);
-> -	if (unlikely(page->mapping != inode->i_mapping ||
-> -		     page_offset(page) > i_size_read(inode))) {
-> +	if (unlikely(page_mkwrite_check_truncate(page, inode) < 0)) {
->  		/* Page got truncated out from underneath us */
->  		goto sigbus;
->  	}
-> diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
-> index 37a4d9e32cd3..6c9c5b88924d 100644
-> --- a/include/linux/pagemap.h
-> +++ b/include/linux/pagemap.h
-> @@ -636,4 +636,6 @@ static inline unsigned long dir_pages(struct inode *inode)
->  			       PAGE_SHIFT;
->  }
->  
-> +int page_mkwrite_check_truncate(struct page *page, struct inode *inode);
-> +
->  #endif /* _LINUX_PAGEMAP_H */
-> diff --git a/mm/filemap.c b/mm/filemap.c
-> index bf6aa30be58d..d3e2766216e3 100644
-> --- a/mm/filemap.c
-> +++ b/mm/filemap.c
-> @@ -2700,6 +2700,34 @@ const struct vm_operations_struct generic_file_vm_ops = {
->  	.page_mkwrite	= filemap_page_mkwrite,
->  };
->  
-> +/**
-> + * page_mkwrite_check_truncate - check if page was truncated
-> + * @page: the page to check
-> + * @inode: the inode to check the page against
-> + *
-> + * Returns the number of bytes in the page up to EOF,
-> + * or -EFAULT if the page was truncated.
-> + */
-> +int page_mkwrite_check_truncate(struct page *page, struct inode *inode)
-> +{
-> +	loff_t size = i_size_read(inode);
-> +	pgoff_t index = size >> PAGE_SHIFT;
-> +	int offset = offset_in_page(size);
-> +
-> +	if (page->mapping != inode->i_mapping)
-> +		return -EFAULT;
-> +
-> +	/* page is wholly inside EOF */
-> +	if (page->index < index)
-> +		return PAGE_SIZE;
-> +	/* page is wholly past EOF */
-> +	if (page->index > index || !offset)
-> +		return -EFAULT;
-> +	/* page is partially inside EOF */
-> +	return offset;
-> +}
-> +EXPORT_SYMBOL(page_mkwrite_check_truncate);
-> +
->  /* This is used for a general mmap of a disk file */
->  
->  int generic_file_mmap(struct file * file, struct vm_area_struct * vma)
-> -- 
-> 2.20.1
+From f9447095de55a3cda1023a37a5e1cb6dd2f54ebb Mon Sep 17 00:00:00 2001
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Wed, 8 Jan 2020 15:10:02 -0800
+Subject: [PATCH] f2fs: update f2fs document regarding to fsync_mode
+
+This patch adds missing fsync_mode entry in f2fs document.
+
+Fixes: 04485987f053 ("f2fs: introduce async IPU policy")
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ Documentation/filesystems/f2fs.txt | 3 ++-
+ fs/f2fs/segment.h                  | 5 +++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
+index b80a7b69f210..ee61ace30276 100644
+--- a/Documentation/filesystems/f2fs.txt
++++ b/Documentation/filesystems/f2fs.txt
+@@ -334,7 +334,8 @@ Files in /sys/fs/f2fs/<devname>
+                               updates in f2fs. User can set:
+                                0x01: F2FS_IPU_FORCE, 0x02: F2FS_IPU_SSR,
+                                0x04: F2FS_IPU_UTIL,  0x08: F2FS_IPU_SSR_UTIL,
+-                               0x10: F2FS_IPU_FSYNC, 0x40: F2FS_IPU_NOCACHE.
++                               0x10: F2FS_IPU_FSYNC, 0x20: F2FS_IPU_ASYNC,
++                               0x40: F2FS_IPU_NOCACHE.
+                               Refer segment.h for details.
+ 
+  min_ipu_util                 This parameter controls the threshold to trigger
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 5e6cd8d8411d..459dc3901a57 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -607,9 +607,10 @@ static inline int utilization(struct f2fs_sb_info *sbi)
+  *                     threashold,
+  * F2FS_IPU_FSYNC - activated in fsync path only for high performance flash
+  *                     storages. IPU will be triggered only if the # of dirty
+- *                     pages over min_fsync_blocks.
++ *                     pages over min_fsync_blocks. (=default option)
++ * F2FS_IPU_ASYNC - do IPU given by asynchronous write requests.
+  * F2FS_IPU_NOCACHE - disable IPU bio cache.
+- * F2FS_IPUT_DISABLE - disable IPU. (=default option)
++ * F2FS_IPUT_DISABLE - disable IPU. (=default option in LFS mode)
+  */
+ #define DEF_MIN_IPU_UTIL	70
+ #define DEF_MIN_FSYNC_BLOCKS	8
+-- 
+2.24.0.525.g8f36a354ae-goog
+
 
 
 _______________________________________________
