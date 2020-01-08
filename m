@@ -2,85 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C883513494F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 18:26:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A191F134AA4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jan 2020 19:45:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipF6Y-0007vI-7g; Wed, 08 Jan 2020 17:26:50 +0000
+	id 1ipGKq-0003On-4f; Wed, 08 Jan 2020 18:45:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1ipF6U-0007v1-FC
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 17:26:46 +0000
+ (envelope-from <piergiorgio.sartor@nexgo.de>) id 1ipGKo-0003Og-F0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:45:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Qzmv9Ori8AP360S8wLzMH5NFK0h0g+qtKHsRtl9Y8io=; b=ao5RdlOt2sCJMbhCXS3D5nzMxu
- 0dhGGlmmbiYDbFOJjpDf85o0tzDsfm4PpBhqZ1uFuttrpnHSJwaeI2dTtKt7c4aMgWPu3uWmHQIQo
- puMV6Z9x2VrYQB4ZUUG7cIf88XiKcqk0yBmWw/+BzlNo7dQIFAzQEkeoW8epGdSn+fAw=;
+ bh=oCw6uQQEhudOuleCQDp30XdPuhglQuJFgurblsCoo/o=; b=iE0QR5egcA5FMdwWwfnoeoIXEP
+ yKs/r94y1frwB6zHN3CIsy/0Tu6NDS9wy7H7QBiLigxdWbklBdPblugLZoKBbGvTS+5Yr8t9RV1wC
+ YAtABvOr+WOzpJqTTSWuptWfbzxSPoe2QycVqa+4VhtTpVA822HG/2RaW5QOeQBD5MPY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Qzmv9Ori8AP360S8wLzMH5NFK0h0g+qtKHsRtl9Y8io=; b=Gg04SoSLS1NP5KS0M8XT/Xlja5
- qXgx+JAOiJIoelmmRX4m2RkBeLzQ5ME9KAmswi5bM7hOyCP/DlKc4QuJE8X0auDtJLKLjDX/cV85v
- R3EarJEEGZ13jxANAIKhGCapVfujCYLtT0CgmncHq904OJflpnWOOFw/710BLYkV5QGg=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=oCw6uQQEhudOuleCQDp30XdPuhglQuJFgurblsCoo/o=; b=R
+ rV7m2VUNLa+7UrDTMpHgWUztj4GwyZKJtQCpdDG9jclP9ZbZuksQKARBQU2IgAR5nVv743b8mFo6m
+ THU+sF+Ia2/8dWpnUNGickLfzI8U7qsd8gxS0cYSFqoZINGhtX1kxUQ2yl4asji2XTakBNsqPdD9i
+ gb2MIXfytc2WUu0I=;
+Received: from vsmx011.vodafonemail.xion.oxcs.net ([153.92.174.89])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ipF6P-00DVOK-2t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 17:26:44 +0000
-Received: from sol.localdomain (c-24-5-143-220.hsd1.ca.comcast.net
- [24.5.143.220])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 12EE220705;
- Wed,  8 Jan 2020 17:26:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578504391;
- bh=ij94aMQ07BTirE2iQNs+dEg6zAm/wuo0VueM7DAIze4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oHEjZcS3fZyHeprMzzff0S4Qy7ZcDSwpql0QpUi80QfppmiZQy/P4oJ803uYuwA5v
- x1z5xr+45sSoD3DV04KiQ0p1hjw++k6Xwnn+gSKBhtW5tfWhW2/9kVKkkQ88eIbzQA
- xNgFPef3+sqSoWBVJZJ9OaQn9qe8KNklyQnyAd9c=
-Date: Wed, 8 Jan 2020 09:26:29 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200108172629.GA232722@sol.localdomain>
-References: <20191218145136.172774-1-satyat@google.com>
- <20191218145136.172774-3-satyat@google.com>
- <20191218212116.GA7476@magnolia> <yq1y2v9e37b.fsf@oracle.com>
- <20191218222726.GC47399@gmail.com> <yq1fthhdttv.fsf@oracle.com>
- <20200108140730.GC2896@infradead.org>
+ id 1ipGKl-00DhIA-QR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 18:45:38 +0000
+Received: from vsmx003.vodafonemail.xion.oxcs.net (unknown [192.168.75.197])
+ by mta-5-out.mta.xion.oxcs.net (Postfix) with ESMTP id 786BB59D19C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  8 Jan 2020 18:26:58 +0000 (UTC)
+Received: from lazy.lzy (unknown [79.214.221.251])
+ by mta-7-out.mta.xion.oxcs.net (Postfix) with ESMTPA id 5546E5399E4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  8 Jan 2020 18:26:56 +0000 (UTC)
+Received: from lazy.lzy (localhost [127.0.0.1])
+ by lazy.lzy (8.15.2/8.14.5) with ESMTPS id 008IQtBt010412
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO)
+ for <linux-f2fs-devel@lists.sourceforge.net>; Wed, 8 Jan 2020 19:26:55 +0100
+Received: (from red@localhost)
+ by lazy.lzy (8.15.2/8.15.2/Submit) id 008IQt2U010411
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 8 Jan 2020 19:26:55 +0100
+Date: Wed, 8 Jan 2020 19:26:55 +0100
+From: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>
+To: linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <20200108182655.GA10257@lazy.lzy>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200108140730.GC2896@infradead.org>
-X-Spam-Score: -0.6 (/)
+X-VADE-STATUS: LEGIT
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: ieee-security.org]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ipF6P-00DVOK-2t
-Subject: Re: [f2fs-dev] [PATCH v6 2/9] block: Add encryption context to
- struct bio
+X-Headers-End: 1ipGKl-00DhIA-QR
+Subject: [f2fs-dev] TRIM issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,66 +77,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Martin K. Petersen" <martin.petersen@oracle.com>,
- linux-scsi@vger.kernel.org, "Darrick J. Wong" <darrick.wong@oracle.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>, Kim Boojin <boojin.kim@samsung.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Satya Tangirala <satyat@google.com>, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jan 08, 2020 at 06:07:30AM -0800, Christoph Hellwig wrote:
-> On Wed, Dec 18, 2019 at 07:47:56PM -0500, Martin K. Petersen wrote:
-> > Absolutely. That's why it's a union. Putting your stuff there is a
-> > prerequisite as far as I'm concerned. No need to grow the bio when the
-> > two features are unlikely to coexist. We can revisit that later should
-> > the need arise.
-> 
-> With NVMe key per I/O support some form of inline encryption and PI are
-> very likely to be used together in the not too far future.
+Hi all,
 
-The NVMe "key per I/O" draft is heavily flawed, and I don't think it will be
-useful at all in the Linux kernel context.  The problem is that, as far as I can
-tell, it doesn't allow the encryption algorithm and IVs to be selected, or even
-standardized or made discoverable in any way.  It does say that AES-256 must be
-supported, but it doesn't say which mode of operation (i.e. it could be
-something inappropriate for disk encryption, like ECB), nor does it say whether
-AES-256 has to be the default or not, and if it's not the default how to
-discover that and select AES-256.  IV generation is also unspecified, so it
-could be something insecure like always using the same IV.
+I've a small box, with Fedora 31 up-to-date.
 
-So effectively the NVMe encryption will be unspecified, untestable, and
-unverifiable.  That means that vendors are likely to implement it insecurely,
-similar to how they're implementing self-encrypting drives insecurely [1].
-(Granted, there are some reasons to think that vendors are less likely to screw
-up key per I/O.  But inevitably some will still get it wrong.)
+The system has LUKS + LVM + f2fs.
 
-[1] https://www.ieee-security.org/TC/SP2019/papers/310.pdf
+Since kernel 5.3.16-300.fc31.x86_64 the fstrim.service,
+triggered by the systemd service fstrim.timer or from
+command line, does return an error:
 
-Also, since "key per I/O" won't allow selecting IVs, all the encrypted data will
-be tied to its physical location on-disk.  That will make "key per I/O" unusable
-in any case where encrypted blocks are moved without the key, e.g.
-filesystem-level encryption on many filesystems.
+Starting Discard unused blocks on filesystems from /etc/fstab...
+fstrim: /home: FITRIM ioctl failed: Read-only file system
+fstrim: /: FITRIM ioctl failed: Read-only file system
+fstrim.service: Main process exited, code=exited, status=32/n/a
+fstrim.service: Failed with result 'exit-code'.
+Failed to start Discard unused blocks on filesystems from /etc/fstab.
 
-And since the way that dm-crypt and fscrypt work is that you select which
-algorithm and IV generator you want to use, to even use NVMe "key per I/O" with
-them we'd have to add magic settings that say to use some unspecified
-hardware-specific encryption format, which could be completely insecure.  As one
-of the fscrypt maintainers I'd be really hesistant to accept any such patch, and
-I think the dm-crypt people would feel the same way.
+Note the following:
+1) Both /home and / are rw
+2) LUKS and LVM allow discard to the underlying device
+3) An other PC, with same layout, but ext4, does work as expected
+4) kernel 5.4.7-200.fc31.x86_64 (latest for f31) has same result
+5) fstrim -vA or -va does not return an error, exit code is 0,
+but it always says 0 (zero) bytes are trimmed:
 
-I've already raised these concerns in the NVMe and TCG Storage working groups,
-and the people working on it refused to make any changes, as they consider "key
-per I/O" to be more akin to the TCG Opal self-encrypting drive specification,
-and not actually intended to be "inline encryption".
+/home: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-home
+/: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-root
 
-So let's not over-engineer this kernel patchset to support some broken
-vaporware, please.
+6) mount shows that the f2fs mounts have "discard" flag
 
-- Eric
+So, I suspect there is something with f2fs which somehow
+confuses the trimming process.
+
+I had a quick search, but I could not find any other
+similar report, except one about systemd, but that
+does not seem related.
+
+Any idea? Suggestions?
+Debugging possibilities?
+
+Thanks a lot in advance,
+
+bye,
+
+-- 
+
+piergiorgio
 
 
 _______________________________________________
