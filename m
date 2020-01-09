@@ -2,76 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0DE4135155
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 03:29:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B50B7135206
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 04:41:05 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipNZv-0006KO-Ao; Thu, 09 Jan 2020 02:29:43 +0000
+	id 1ipOgw-0002kL-FV; Thu, 09 Jan 2020 03:41:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ipNZt-0006K6-CZ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 02:29:41 +0000
+ (envelope-from <martin.petersen@oracle.com>) id 1ipOgu-0002k0-HP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 03:41:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:From:Subject:Cc:To:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jJKUsylpIV/w5ceaWXY+6Q4M/JI58rLO1KoRdFxEvLU=; b=KI5LVJJ9qa/yxu7C0gn5QzI+ru
- 3NM7KyrirQrmzVAH+qSxRRe3fYmvZJPhtafMUIw3744YnbSPguc1Vo+lSA0A8SJZo7NB3Pw5KryGz
- StY10iBQXLzFbRpwSEgy9rNo1t9uVZ83KT2e2URY4uWHPJFnrl6KuXvO/yN1VhMCcSuw=;
+ bh=d286TUXfSVAxHnl9z2DyeRiz3PyfuYs/FVhffcmdrHI=; b=EbTW7L47MuX+v4r+ilHzLqScTW
+ wkx07cABVec7bV+XZsbkDo7As07PLr58XBcRppFfA5gOUuv4v9z34bW7qi3QQj5Szc4dS7WVC6n+C
+ 3iDgtFOfousP7SGypB/oENyHFb77EUU1TplG3XQRUYW9MkPwzR894RM0P2f5gP/uSslM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:From:
+ Subject:Cc:To:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jJKUsylpIV/w5ceaWXY+6Q4M/JI58rLO1KoRdFxEvLU=; b=don6kHNtEtzKuXwn2piThevTQ5
- Y8+DSVcImqG29P7LkZtOu4i7+OSmCXFUtUQfHA2OFy8ynf89mNYq1sK5G9REWFk6XWHGExlK7Wx+b
- HMwLG6uXMyQQQMeB3NepuEwo3WImGQzf9ejpJjaTlTKFWxyvyGVexcqyMfsBjD2HADF8=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=d286TUXfSVAxHnl9z2DyeRiz3PyfuYs/FVhffcmdrHI=; b=kCAkzIgaP1oUE9eeoJjsGH4IYv
+ J11HPxlgb5y8t0mv7CsNwGZ+ZM6tvE695NOapnYqXWxcXF1OOBwWoODfS2uzqHrY62jZcqvHlil3E
+ /eg80B9YAtY3VxbNRn+ZsKkMGoEjZrQCiSRnAJt/rkCxZJTA8nINnYlncUI5wXEB02Ek=;
+Received: from aserp2120.oracle.com ([141.146.126.78])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ipNZr-00E0Ci-3j
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 02:29:41 +0000
-Received: from localhost (unknown [104.132.0.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D9B92067D;
- Thu,  9 Jan 2020 02:29:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578536971;
- bh=f7IEBaGJooV1gl0g+Lp0AXtQKquEJ4EFoMLUn+hicbw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ES2f5jyWm1lCHCPuuV0qkwtlxpfDqadLgkamg3skDnA9adkUQlA+NO7uqNmXMsp6A
- s4IsQaB1axAHV+PPNAivSZqSKpDDFxLkDikl4+gAFSR9hjq0n4uxp+SX4wOo2JzJkJ
- Vee5oPkecZJt968VEU8pS70Tqrw2MtLmSd+A3w2c=
-Date: Wed, 8 Jan 2020 18:29:30 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>
-Message-ID: <20200109022930.GC42219@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20200108182655.GA10257@lazy.lzy>
+ id 1ipOgo-00E3Dv-QC
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 03:41:00 +0000
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0093Y91f165213;
+ Thu, 9 Jan 2020 03:40:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=to : cc : subject :
+ from : references : date : in-reply-to : message-id : mime-version :
+ content-type; s=corp-2019-08-05;
+ bh=d286TUXfSVAxHnl9z2DyeRiz3PyfuYs/FVhffcmdrHI=;
+ b=qBjXF9EEZvVjREBQqOD3nS6joNQ8l/CSfkq4zKjHaqIx8/X7IZD04wuMDFHN2trWNTGd
+ QoTryWftjxWUVg8DU1R+kRczakqJBoKgetQ8TBOSPBefI3gmE5edCg04UvqdTz5MWYqd
+ R76CHK9kDCD4rhD2blijFxJmD3N3AQie1mM5vh/oangx5yw7VmOmJSBIAGOQAutcEjfm
+ WjwtitDt+Z8llvkwc6kkAxpxaQ/RmBjnVZHVKO2ax4FbSSUJ3W4cCyyD8Sg4DZxyU9PU
+ nQvYEMCtNFtntHLvu06/h/W3hUdX/G6ouabHTNuWZU0DB2P587n4ViSqtyuse2HuzZkZ aA== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by aserp2120.oracle.com with ESMTP id 2xajnq83nd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 09 Jan 2020 03:40:36 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0093XAkf107048;
+ Thu, 9 Jan 2020 03:40:35 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3030.oracle.com with ESMTP id 2xdmrx90ua-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 09 Jan 2020 03:40:35 +0000
+Received: from abhmp0001.oracle.com (abhmp0001.oracle.com [141.146.116.7])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0093eXBk007672;
+ Thu, 9 Jan 2020 03:40:33 GMT
+Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 08 Jan 2020 19:40:33 -0800
+To: Christoph Hellwig <hch@infradead.org>
+From: "Martin K. Petersen" <martin.petersen@oracle.com>
+Organization: Oracle Corporation
+References: <20191218145136.172774-1-satyat@google.com>
+ <20191218145136.172774-3-satyat@google.com>
+ <20191218212116.GA7476@magnolia> <yq1y2v9e37b.fsf@oracle.com>
+ <20191218222726.GC47399@gmail.com> <yq1fthhdttv.fsf@oracle.com>
+ <20200108140730.GC2896@infradead.org>
+Date: Wed, 08 Jan 2020 22:40:30 -0500
+In-Reply-To: <20200108140730.GC2896@infradead.org> (Christoph Hellwig's
+ message of "Wed, 8 Jan 2020 06:07:30 -0800")
+Message-ID: <yq1ftgpxpox.fsf@oracle.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1.92 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200108182655.GA10257@lazy.lzy>
-User-Agent: Mutt/1.8.2 (2017-04-18)
-X-Spam-Score: -0.2 (/)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9494
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=598
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-2001090033
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9494
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=659 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-2001090033
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ipNZr-00E0Ci-3j
-Subject: Re: [f2fs-dev] TRIM issue
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ipOgo-00E3Dv-QC
+Subject: Re: [f2fs-dev] [PATCH v6 2/9] block: Add encryption context to
+ struct bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,80 +123,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org,
+ "Darrick J. Wong" <darrick.wong@oracle.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>, Kim Boojin <boojin.kim@samsung.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Satya Tangirala <satyat@google.com>, Eric Biggers <ebiggers@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
 
-On 01/08, Piergiorgio Sartor wrote:
-> Hi all,
-> 
-> I've a small box, with Fedora 31 up-to-date.
-> 
-> The system has LUKS + LVM + f2fs.
-> 
-> Since kernel 5.3.16-300.fc31.x86_64 the fstrim.service,
-> triggered by the systemd service fstrim.timer or from
-> command line, does return an error:
-> 
-> Starting Discard unused blocks on filesystems from /etc/fstab...
-> fstrim: /home: FITRIM ioctl failed: Read-only file system
-> fstrim: /: FITRIM ioctl failed: Read-only file system
-> fstrim.service: Main process exited, code=exited, status=32/n/a
-> fstrim.service: Failed with result 'exit-code'.
-> Failed to start Discard unused blocks on filesystems from /etc/fstab.
+Christoph,
 
-It smells like trying fstrim along with /etc/fstab before mounting the
-partitions?
+>> Absolutely. That's why it's a union. Putting your stuff there is a
+>> prerequisite as far as I'm concerned. No need to grow the bio when the
+>> two features are unlikely to coexist. We can revisit that later should
+>> the need arise.
+>
+> With NVMe key per I/O support some form of inline encryption and PI are
+> very likely to be used together in the not too far future.
 
-> 
-> Note the following:
-> 1) Both /home and / are rw
-> 2) LUKS and LVM allow discard to the underlying device
-> 3) An other PC, with same layout, but ext4, does work as expected
-> 4) kernel 5.4.7-200.fc31.x86_64 (latest for f31) has same result
-> 5) fstrim -vA or -va does not return an error, exit code is 0,
-> but it always says 0 (zero) bytes are trimmed:
-> 
-> /home: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-home
-> /: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-root
+I don't disagree that we'll have to manage coexistence eventually. Hence
+my comments about being able to chain multiple things to a bio.
 
-This is normal. Since f2fs issues discard commands asynchronously, fstrim
-just collects discard candidates and returns right away. Later, it will
-actually issue the candidates in background. Whereas, if it was mounted as
-"-o nodiscard", fstrim will wait for whole discard commands being issued
-and completed as you expect.
+In the immediate term, though, I think it makes sense to leverage the
+integrity pointer to avoid growing struct bio.
 
-Thanks,
-
-> 
-> 6) mount shows that the f2fs mounts have "discard" flag
-> 
-> So, I suspect there is something with f2fs which somehow
-> confuses the trimming process.
-> 
-> I had a quick search, but I could not find any other
-> similar report, except one about systemd, but that
-> does not seem related.
-> 
-> Any idea? Suggestions?
-> Debugging possibilities?
-> 
-> Thanks a lot in advance,
-> 
-> bye,
-> 
-> -- 
-> 
-> piergiorgio
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+-- 
+Martin K. Petersen	Oracle Linux Engineering
 
 
 _______________________________________________
