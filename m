@@ -2,65 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73DC2134FEF
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 00:18:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D209135123
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 03:00:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipKbE-00046n-23; Wed, 08 Jan 2020 23:18:52 +0000
+	id 1ipN7L-0005Qf-30; Thu, 09 Jan 2020 02:00:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ipKbD-00046b-1Z
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 23:18:51 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ipN7J-0005QY-F6
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 02:00:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=J6a0HPrJ63WHKyoLqdUyHULAz04QyRnZTjE0G42Yy5s=; b=AwTwSf7yHfAfhsQr+lu6bOpfoA
- yO6v1DYkG4WQbcEveTWBdrYzJDnXc4/+/pHPxBdgGyNvdzAeGVkF7UplU6vYLn/FGXOQDVup1AUpm
- kIN3qXDFnIA3AIBtTDiWCC9M/C2Gwr43uEEurIadhLnWbguFwxHmrhOEF77MPQFF2Ncc=;
+ bh=EhVITCXGJ2KNLc1HTkU5LbNhvGikoKjcNmpQHmBApM4=; b=Z0ic5CsP7gxPA8V4idALAyOU5W
+ HgeqGH3TIqbzPiCbpcTpCFYs7WQWpayFZjnwMuWztFKXUqRryE/Rgbp/Nf5rm+Q+D7I9TzA0hgGj5
+ RpGipVpTWMOgDQMKDrYkKUS2Jn+gpu50KPk/THgmqIm/Xtsnjl1bF+NYkUxH/ntHqN/Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=J6a0HPrJ63WHKyoLqdUyHULAz04QyRnZTjE0G42Yy5s=; b=I2iz6/YIhuzYPqbDXgJXqNEWnq
- ns4OD5pH/JPRwdORyHScoHEyOc/7EM6rd5QZAHexPSlMpgxc9/IX2ED0gWNscj5iyKVppvaPfGNob
- d3921ouXDQVwpjs03GQcypK/9P8KKPAs0FWN1LSk0l0eSR6TxhH6+RBLlDm+FEoU+LmM=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EhVITCXGJ2KNLc1HTkU5LbNhvGikoKjcNmpQHmBApM4=; b=e
+ Aro3XShE7oWwmwymuN9Q4hOeOUe2DKAdXiVWYHiVTKlU7tP0hk0sW+FdbTCKClLpcT5hAZ29dcpGM
+ FfiExnVXL85DxT6KJflzyda0L77mCKKc5rJ5pGmOMfYNAjExXSev6TLZzMtBDYUCm6VHep2hxv192
+ TAr+UNfXmrWrYPTI=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ipKb8-00DwyJ-Hv
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jan 2020 23:18:50 +0000
+ id 1ipN7H-00E6sC-F0
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 02:00:09 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DCEBB20692;
- Wed,  8 Jan 2020 23:18:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 94C4A206ED;
+ Thu,  9 Jan 2020 01:59:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578525520;
- bh=q1ENe4lLdEVnjYZqJH1I18oDEtMqgJp+XWV9ZHBhBUo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xRtKYFCRN3JZg9pKxw7k1COaZOH2oDBEouKYbCKb555D9DRFy2p8VMwZqTKDJyKpJ
- bp5nTDdhgYT9xRZtewxTb1vozXEmnuLYZ3ceotd9czbs1mVwQSpS7lH3E8UNhHukJJ
- Vmf+RQ2X691WtheRwbLZE7Zr8sMvAiAyy30MVtkI=
-Date: Wed, 8 Jan 2020 15:18:40 -0800
+ s=default; t=1578535198;
+ bh=EwqILaqz/7PnoAABIjsPPvQpMc/sg0Kh++EN6x1YpSU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=1Q1m3BoNkfc7VHF7l3PG3a9XZb/SG+/9z1fJ31ihbFnztdQjb/nXq2h8yXniEhvS1
+ V12cUbmPYEs9T3ybI2iOZzbMHSZOPZ6SeQpDWn3MRwI248NV4sAG74YIn6otjr+PeN
+ C5iMOi5wL9luxNnjUeoxALJTg9mJaFwWKQP7SWNI=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200108231840.GB42219@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20200107020709.73568-1-jaegeuk@kernel.org>
- <afddac87-b7c5-f68c-4e55-3705be311cf6@huawei.com>
- <20200108120444.GC28331@jaegeuk-macbookpro.roam.corp.google.com>
- <d5555fd8-736f-cc2f-1e57-d9ac01b3d012@huawei.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  8 Jan 2020 17:59:57 -0800
+Message-Id: <20200109015957.61089-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.24.0.525.g8f36a354ae-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <d5555fd8-736f-cc2f-1e57-d9ac01b3d012@huawei.com>
-User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -73,8 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ipKb8-00DwyJ-Hv
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add a way to turn off ipu bio cache
+X-Headers-End: 1ipN7H-00E6sC-F0
+Subject: [f2fs-dev] [PATCH] f2fs-tools: avoid ambigous checkpoint mirroring
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,88 +80,128 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/08, Chao Yu wrote:
-> On 2020/1/8 20:04, Jaegeuk Kim wrote:
-> > On 01/08, Chao Yu wrote:
-> >> On 2020/1/7 10:07, Jaegeuk Kim wrote:
-> >>> Setting 0x40 in /sys/fs/f2fs/dev/ipu_policy gives a way to turn off
-> >>> bio cache, which is useufl to check whether block layer using hardware
-> >>> encryption engine merges IOs correctly.
-> >>>
-> >>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> >>> ---
-> >>>  Documentation/filesystems/f2fs.txt | 1 +
-> >>>  fs/f2fs/segment.c                  | 2 +-
-> >>>  fs/f2fs/segment.h                  | 1 +
-> >>>  3 files changed, 3 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-> >>> index 41b5aa94b30f..cd93bcc34726 100644
-> >>> --- a/Documentation/filesystems/f2fs.txt
-> >>> +++ b/Documentation/filesystems/f2fs.txt
-> >>> @@ -335,6 +335,7 @@ Files in /sys/fs/f2fs/<devname>
-> >>>                                 0x01: F2FS_IPU_FORCE, 0x02: F2FS_IPU_SSR,
-> >>>                                 0x04: F2FS_IPU_UTIL,  0x08: F2FS_IPU_SSR_UTIL,
-> >>>                                 0x10: F2FS_IPU_FSYNC.
-> >>
-> >> . -> ,
-> > 
-> > Actually, we can't do it. I revised it a bit instead.
-> 
-> One more question, why skipping 0x20 bit position?
-
-It seems original patch missed to add comment.
-
-From f9447095de55a3cda1023a37a5e1cb6dd2f54ebb Mon Sep 17 00:00:00 2001
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed, 8 Jan 2020 15:10:02 -0800
-Subject: [PATCH] f2fs: update f2fs document regarding to fsync_mode
-
-This patch adds missing fsync_mode entry in f2fs document.
-
-Fixes: 04485987f053 ("f2fs: introduce async IPU policy")
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- Documentation/filesystems/f2fs.txt | 3 ++-
- fs/f2fs/segment.h                  | 5 +++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ fsck/fsck.c  | 26 ++++++++++++++------------
+ fsck/fsck.h  |  1 -
+ fsck/mount.c | 20 +++++---------------
+ 3 files changed, 19 insertions(+), 28 deletions(-)
 
-diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-index b80a7b69f210..ee61ace30276 100644
---- a/Documentation/filesystems/f2fs.txt
-+++ b/Documentation/filesystems/f2fs.txt
-@@ -334,7 +334,8 @@ Files in /sys/fs/f2fs/<devname>
-                               updates in f2fs. User can set:
-                                0x01: F2FS_IPU_FORCE, 0x02: F2FS_IPU_SSR,
-                                0x04: F2FS_IPU_UTIL,  0x08: F2FS_IPU_SSR_UTIL,
--                               0x10: F2FS_IPU_FSYNC, 0x40: F2FS_IPU_NOCACHE.
-+                               0x10: F2FS_IPU_FSYNC, 0x20: F2FS_IPU_ASYNC,
-+                               0x40: F2FS_IPU_NOCACHE.
-                               Refer segment.h for details.
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 507437d..8383f08 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -2171,16 +2171,6 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+ 	ASSERT(ret >= 0);
+ }
  
-  min_ipu_util                 This parameter controls the threshold to trigger
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 5e6cd8d8411d..459dc3901a57 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -607,9 +607,10 @@ static inline int utilization(struct f2fs_sb_info *sbi)
-  *                     threashold,
-  * F2FS_IPU_FSYNC - activated in fsync path only for high performance flash
-  *                     storages. IPU will be triggered only if the # of dirty
-- *                     pages over min_fsync_blocks.
-+ *                     pages over min_fsync_blocks. (=default option)
-+ * F2FS_IPU_ASYNC - do IPU given by asynchronous write requests.
-  * F2FS_IPU_NOCACHE - disable IPU bio cache.
-- * F2FS_IPUT_DISABLE - disable IPU. (=default option)
-+ * F2FS_IPUT_DISABLE - disable IPU. (=default option in LFS mode)
-  */
- #define DEF_MIN_IPU_UTIL	70
- #define DEF_MIN_FSYNC_BLOCKS	8
+-static void fix_checkpoints(struct f2fs_sb_info *sbi)
+-{
+-	/* copy valid checkpoint to its mirror position */
+-	duplicate_checkpoint(sbi);
+-
+-	/* repair checkpoint at CP #0 position */
+-	sbi->cur_cp = 1;
+-	fix_checkpoint(sbi);
+-}
+-
+ #ifdef HAVE_LINUX_BLKZONED_H
+ 
+ /*
+@@ -3103,6 +3093,12 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
+ 
+ 		if (force || c.bug_on || c.bug_nat_bits) {
++			/*
++			 * copy valid checkpoint to its mirror position and
++			 * fix everything in cp #0.
++			 */
++			duplicate_checkpoint(sbi);
++
+ 			/* flush nats to write_nit_bits below */
+ 			flush_journal_entries(sbi);
+ 			fix_hard_links(sbi);
+@@ -3111,10 +3107,16 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 			fix_wp_sit_alignment(sbi);
+ 			fix_curseg_info(sbi);
+ 			fix_checksum(sbi);
+-			fix_checkpoints(sbi);
++			fix_checkpoint(sbi);
+ 		} else if (is_set_ckpt_flags(cp, CP_FSCK_FLAG) ||
+ 			is_set_ckpt_flags(cp, CP_QUOTA_NEED_FSCK_FLAG)) {
+-			write_checkpoints(sbi);
++
++			/*
++			 * copy valid checkpoint to its mirror position and
++			 * fix everything in cp #0.
++			 */
++			duplicate_checkpoint(sbi);
++			write_checkpoint(sbi);
+ 		}
+ 	}
+ 	return ret;
+diff --git a/fsck/fsck.h b/fsck/fsck.h
+index c4432e8..bbc2593 100644
+--- a/fsck/fsck.h
++++ b/fsck/fsck.h
+@@ -203,7 +203,6 @@ extern void write_curseg_info(struct f2fs_sb_info *);
+ extern int find_next_free_block(struct f2fs_sb_info *, u64 *, int, int, bool);
+ extern void duplicate_checkpoint(struct f2fs_sb_info *);
+ extern void write_checkpoint(struct f2fs_sb_info *);
+-extern void write_checkpoints(struct f2fs_sb_info *);
+ extern void update_superblock(struct f2fs_super_block *, int);
+ extern void update_data_blkaddr(struct f2fs_sb_info *, nid_t, u16, block_t);
+ extern void update_nat_blkaddr(struct f2fs_sb_info *, nid_t, nid_t, block_t);
+diff --git a/fsck/mount.c b/fsck/mount.c
+index 882f1ea..ffc10fb 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -2404,11 +2404,8 @@ next:
+ 
+ void flush_journal_entries(struct f2fs_sb_info *sbi)
+ {
+-	int n_nats = flush_nat_journal_entries(sbi);
+-	int n_sits = flush_sit_journal_entries(sbi);
+-
+-	if (n_nats || n_sits)
+-		write_checkpoints(sbi);
++	flush_nat_journal_entries(sbi);
++	flush_sit_journal_entries(sbi);
+ }
+ 
+ void flush_sit_entries(struct f2fs_sb_info *sbi)
+@@ -2777,6 +2774,9 @@ void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ 	sbi->cp_backuped = 1;
+ 
++	/* repair checkpoint at CP #0 position */
++	sbi->cur_cp = 1;
++
+ 	MSG(0, "Info: Duplicate valid checkpoint to mirror position "
+ 		"%llu -> %llu\n", src, dst);
+ }
+@@ -2870,16 +2870,6 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+ 	ASSERT(ret >= 0);
+ }
+ 
+-void write_checkpoints(struct f2fs_sb_info *sbi)
+-{
+-	/* copy valid checkpoint to its mirror position */
+-	duplicate_checkpoint(sbi);
+-
+-	/* repair checkpoint at CP #0 position */
+-	sbi->cur_cp = 1;
+-	write_checkpoint(sbi);
+-}
+-
+ void build_nat_area_bitmap(struct f2fs_sb_info *sbi)
+ {
+ 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
 -- 
 2.24.0.525.g8f36a354ae-goog
 
