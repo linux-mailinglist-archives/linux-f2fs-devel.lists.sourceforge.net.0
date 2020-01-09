@@ -2,103 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF95F1355D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 10:32:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B2DD135A38
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2020 14:35:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ipUBL-0004mt-1Z; Thu, 09 Jan 2020 09:32:47 +0000
+	id 1ipXxt-0003pH-55; Thu, 09 Jan 2020 13:35:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <xp1982.06.06@gmail.com>) id 1ipUBK-0004mX-32
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 09:32:46 +0000
+ (envelope-from <jlayton@kernel.org>) id 1ipXxq-0003p8-KR
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 13:35:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IUptMHJL+9Tl4nhOhJMfCKeT/r8B8a7YJnYcaAk5T+4=; b=O/ZOw9XxS1FJ6iHsjS9Rx5hNnU
- jJnbsCHtr2t/Ox5qQ6o5mEpDETa3k1HcsOr0j7VyfxtOEf5xkuW7Xtsu/Eax1rO7+T1V21uYzEQbt
- 9KmVraNELC0FnlPQlPr+BM+6l8ajyYa3owLnSvM4p3XM2FpyblrxTTnpUeqzwfSilbYQ=;
+ bh=xWUsYnLJ/w3X2ZAVB7m0VnN+WtW8bajO5eJCN5aJbGk=; b=F4FFC4Bx/oTCFFSznKhBx+vcF5
+ JfXfrqOXYavP3YETiEXt+jpQW3UwREXFu6CW9pGcUW/xBPTXiQTnZurKwXVfq6TAjPsSAYmgQEd/X
+ lWtYkcraXNNhF37vbRLZuhXXrXoEk0xphfLFcmKD4eHvi1Lyiwo4npYHXWJ6K+wTTYak=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IUptMHJL+9Tl4nhOhJMfCKeT/r8B8a7YJnYcaAk5T+4=; b=NVp/7VAEhUW9V14J1P+yeLC8Xz
- zsg964jAFYarZayzYfZbA4Cb2+U4xWXxlOMLH4gnv/ZQB/wcgB+SOmsUuO/hlnl7iWO3n1N0Y6WWJ
- F91vx13A7tU4y+Xe+XN1AdbY5YX1yG/3X0idsQ+AaV7KeWKIMKonskxAEe6hNDiaK/EI=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ipUBI-00EH5M-3s
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 09:32:46 +0000
-Received: by mail-pg1-f194.google.com with SMTP id z124so2934679pgb.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 09 Jan 2020 01:32:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=IUptMHJL+9Tl4nhOhJMfCKeT/r8B8a7YJnYcaAk5T+4=;
- b=n930WMFzeCmP5ttP1TldocO/9JwvUJXTCdFgxCpyoVU14UEuckw3pi5GhVnTrxel8y
- qXH2mO5pl0DD05POWU6NQBkhrrKF+96Jomuv48OJdpEG3VbrIbSrBqxOV4Q7UUGN36iI
- pS2t/PuBonQ12GJk2MRiL4QjBN8Z+bwun2A3bl1NmvodbF1Q/Xbd5vc/g6bOtzOjW630
- S71ZUbs7tevnBWY/4PJO3TK87CeVVPOw1rJINrfPPgELpO4mRKnsbeq6wIeHN2n1b5Fh
- rYy3lSe7o2TENXT94FZrTiPCEinaAiVmgYZLEg44liGVMH60IgJTHZ9PgGkbOKTRZu7X
- LQCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=IUptMHJL+9Tl4nhOhJMfCKeT/r8B8a7YJnYcaAk5T+4=;
- b=RgaIxG/3ZAS2MKHVy1W9SMRSFR/Cd6pLSL6Djqbv+u9Bf7sXhV6mAXzy1Mvt4e7Jll
- MMmck21K+pR63Vgv++4XRAEYiSPpDunae5zpfHGbCwkkPhzf83JXJTcJIe65N9KJbiXq
- DckmlA1FaEIIxYfTo22dEVGuv2CanhqEl1MiUxtXgHS9IhqLoJn0+khpkjFBqwDiTXma
- YCi83GQZ2HMdcWxAmMH7KGDIRIUNpA7SmvZ/rmjdZYzRZxcNx71ywoKFDPF4ORJIaR0q
- HlLniDLQBpB436JNTjeE7sTxVooOxgarL5vyEOeQ8iSgfYUHDMrykeABOvStDAXUt7BF
- rQZw==
-X-Gm-Message-State: APjAAAVqBHVtb6a2/uqr6qr4c9or6aHWwPYpJYz3OCj7bqiSE7yhlcTu
- lex/k7AgUH9um8HM8Q9WaaU=
-X-Google-Smtp-Source: APXvYqyPNuEcV6edJfxPLDzBxOyLVXgzbP+dnUJvCZ/+azkjXlXkF1dASRQjsluZjmvJDYVIzuH93g==
-X-Received: by 2002:a63:904c:: with SMTP id a73mr10267285pge.335.1578562358385; 
- Thu, 09 Jan 2020 01:32:38 -0800 (PST)
-Received: from xp-OptiPlex-7050.mioffice.cn ([43.224.245.180])
- by smtp.gmail.com with ESMTPSA id m128sm6963746pfm.183.2020.01.09.01.32.36
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Thu, 09 Jan 2020 01:32:38 -0800 (PST)
-From: ping xiong <xp1982.06.06@gmail.com>
-To: yuchao0@huawei.com
-Date: Thu,  9 Jan 2020 17:32:29 +0800
-Message-Id: <1578562349-842-1-git-send-email-xp1982.06.06@gmail.com>
-X-Mailer: git-send-email 2.7.4
-X-Spam-Score: 0.2 (/)
+ bh=xWUsYnLJ/w3X2ZAVB7m0VnN+WtW8bajO5eJCN5aJbGk=; b=CxEQK7girWgtOp47b5R3LZzfeg
+ mkxW81id8BJqv86L/4VeqKZajV1wFdkFoa9CVmxThO2Qm04Qq1+MOAx7jzBGZP2OwPbWiaVVcyZ6d
+ SNiEm4YbzMFhkIFrncc9BXQEbr3I98HctCthlt/nnr1qF4ZJSZz9Rj4F2zXk5MHqpsH4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ipXxp-00FpS9-0T
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jan 2020 13:35:06 +0000
+Received: from tleilax.poochiereds.net
+ (68-20-15-154.lightspeed.rlghnc.sbcglobal.net [68.20.15.154])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0E05F20661;
+ Thu,  9 Jan 2020 13:34:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1578576899;
+ bh=B5yzemeRMvzL4pKKGwpH7BIBwVJZXFC+F4JbFhOpfek=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=FP854yG1iF6PZ3f6ByuN1p2Ck1GBxOzQ7bJVht0FIaYDlv1ZpMklxdzoRLjXc24xu
+ yLKaBtnOxLxgrrHRlvX1FPMkTu5c2imI1AWkgiKt56QokkSQZHzV5fJTLYZBVp6zDp
+ o7s2RWwZqfybKsBicS2CNXr6XgOrIP1D8y9ov0kg=
+Message-ID: <03e0e79fefcd9e7985a5defce5d5833d3175847a.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: Andreas Gruenbacher <agruenba@redhat.com>, "Darrick J. Wong"
+ <darrick.wong@oracle.com>
+Date: Thu, 09 Jan 2020 08:34:56 -0500
+In-Reply-To: <20200108131528.4279-1-agruenba@redhat.com>
+References: <20200108131528.4279-1-agruenba@redhat.com>
+User-Agent: Evolution 3.34.2 (3.34.2-1.fc31) 
+MIME-Version: 1.0
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (xp1982.06.06[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: xiaomi.com]
+ for more information. [URIs: suse.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (xp1982.06.06[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ipUBI-00EH5M-3s
-Subject: [f2fs-dev] [PATCH] resize.f2fs: add option for large_nat_bitmap
- feature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ipXxp-00FpS9-0T
+Subject: Re: [f2fs-dev] [PATCH v4] fs: Fix page_mkwrite off-by-one errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,75 +88,171 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, xiongping1 <xiongping1@xiaomi.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
+Cc: Jan Kara <jack@suse.cz>, Adrian Hunter <adrian.hunter@intel.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Sage Weil <sage@redhat.com>, Richard Weinberger <richard@nod.at>,
+ YueHaibing <yuehaibing@huawei.com>, Christoph Hellwig <hch@infradead.org>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ Arnd Bergmann <arnd@arndb.de>, Josef Bacik <josef@toxicpanda.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Artem Bityutskiy <dedekind1@gmail.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: xiongping1 <xiongping1@xiaomi.com>
+On Wed, 2020-01-08 at 14:15 +0100, Andreas Gruenbacher wrote:
+> Hi Darrick,
+> 
+> here's an updated version with the latest feedback incorporated.  Hope
+> you find that useful.
+> 
+> As far as the f2fs merge conflict goes, I've been told by Linus not to
+> resolve those kinds of conflicts but to point them out when sending the
+> merge request.  So this shouldn't be a big deal.
+> 
+> Changes:
+> 
+> * Turn page_mkwrite_check_truncate into a non-inline function.
+> * Get rid of now-unused mapping variable in ext4_page_mkwrite.
+> * In btrfs_page_mkwrite, don't ignore the return value of
+>   block_page_mkwrite_return (no change in behavior).
+> * Clean up the f2fs_vm_page_mkwrite changes as suggested by
+>   Jaegeuk Kim.
+> 
+> Thanks,
+> Andreas
+> 
+> --
+> 
+> The check in block_page_mkwrite that is meant to determine whether an
+> offset is within the inode size is off by one.  This bug has been copied
+> into iomap_page_mkwrite and several filesystems (ubifs, ext4, f2fs,
+> ceph).
+> 
+> Fix that by introducing a new page_mkwrite_check_truncate helper that
+> checks for truncate and computes the bytes in the page up to EOF.  Use
+> the helper in the above mentioned filesystems.
+> 
+> In addition, use the new helper in btrfs as well.
+> 
+> Signed-off-by: Andreas Gruenbacher <agruenba@redhat.com>
+> Acked-by: David Sterba <dsterba@suse.com> (btrfs)
+> Acked-by: Richard Weinberger <richard@nod.at> (ubifs)
+> Acked-by: Theodore Ts'o <tytso@mit.edu> (ext4)
+> Acked-by: Chao Yu <yuchao0@huawei.com> (f2fs)
+> ---
+>  fs/btrfs/inode.c        | 16 +++++-----------
+>  fs/buffer.c             | 16 +++-------------
+>  fs/ceph/addr.c          |  2 +-
+>  fs/ext4/inode.c         | 15 ++++-----------
+>  fs/f2fs/file.c          | 19 +++++++------------
+>  fs/iomap/buffered-io.c  | 18 +++++-------------
+>  fs/ubifs/file.c         |  3 +--
+>  include/linux/pagemap.h |  2 ++
+>  mm/filemap.c            | 28 ++++++++++++++++++++++++++++
+>  9 files changed, 56 insertions(+), 63 deletions(-)
+> 
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index e3c76645cad7..23e6f614e000 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -9011,16 +9011,15 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  		goto out_noreserve;
+>  	}
+>  
+> -	ret = VM_FAULT_NOPAGE; /* make the VM retry the fault */
+>  again:
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+>  
+> -	if ((page->mapping != inode->i_mapping) ||
+> -	    (page_start >= size)) {
+> -		/* page got truncated out from underneath us */
+> +	ret2 = page_mkwrite_check_truncate(page, inode);
+> +	if (ret2 < 0) {
+> +		ret = block_page_mkwrite_return(ret2);
+>  		goto out_unlock;
+>  	}
+> +	zero_start = ret2;
+>  	wait_on_page_writeback(page);
+>  
+>  	lock_extent_bits(io_tree, page_start, page_end, &cached_state);
+> @@ -9041,6 +9040,7 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  		goto again;
+>  	}
+>  
+> +	size = i_size_read(inode);
+>  	if (page->index == ((size - 1) >> PAGE_SHIFT)) {
+>  		reserved_space = round_up(size - page_start,
+>  					  fs_info->sectorsize);
+> @@ -9073,12 +9073,6 @@ vm_fault_t btrfs_page_mkwrite(struct vm_fault *vmf)
+>  	}
+>  	ret2 = 0;
+>  
+> -	/* page is wholly or partially inside EOF */
+> -	if (page_start + PAGE_SIZE > size)
+> -		zero_start = offset_in_page(size);
+> -	else
+> -		zero_start = PAGE_SIZE;
+> -
+>  	if (zero_start != PAGE_SIZE) {
+>  		kaddr = kmap(page);
+>  		memset(kaddr + zero_start, 0, PAGE_SIZE - zero_start);
+> diff --git a/fs/buffer.c b/fs/buffer.c
+> index d8c7242426bb..53aabde57ca7 100644
+> --- a/fs/buffer.c
+> +++ b/fs/buffer.c
+> @@ -2499,23 +2499,13 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
+>  	struct page *page = vmf->page;
+>  	struct inode *inode = file_inode(vma->vm_file);
+>  	unsigned long end;
+> -	loff_t size;
+>  	int ret;
+>  
+>  	lock_page(page);
+> -	size = i_size_read(inode);
+> -	if ((page->mapping != inode->i_mapping) ||
+> -	    (page_offset(page) > size)) {
+> -		/* We overload EFAULT to mean page got truncated */
+> -		ret = -EFAULT;
+> +	ret = page_mkwrite_check_truncate(page, inode);
+> +	if (ret < 0)
+>  		goto out_unlock;
+> -	}
+> -
+> -	/* page is wholly or partially inside EOF */
+> -	if (((page->index + 1) << PAGE_SHIFT) > size)
+> -		end = size & ~PAGE_MASK;
+> -	else
+> -		end = PAGE_SIZE;
+> +	end = ret;
+>  
+>  	ret = __block_write_begin(page, 0, end, get_block);
+>  	if (!ret)
+> diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
+> index 7ab616601141..ef958aa4adb4 100644
+> --- a/fs/ceph/addr.c
+> +++ b/fs/ceph/addr.c
+> @@ -1575,7 +1575,7 @@ static vm_fault_t ceph_page_mkwrite(struct vm_fault *vmf)
+>  	do {
+>  		lock_page(page);
+>  
+> -		if ((off > size) || (page->mapping != inode->i_mapping)) {
+> +		if (page_mkwrite_check_truncate(page, inode) < 0) {
+>  			unlock_page(page);
+>  			ret = VM_FAULT_NOPAGE;
+>  			break;
 
-resize.f2fs has already supported large_nat_bitmap feature, but has no
-option to turn on it.
 
-This change add a new '-i' option to control turning on/off it.
+You can add my Acked-by on the ceph part.
 
-Signed-off-by: xiongping1 <xiongping1@xiaomi.com>
----
- fsck/main.c   | 6 +++++-
- fsck/resize.c | 5 +++++
- 2 files changed, 10 insertions(+), 1 deletion(-)
-
-diff --git a/fsck/main.c b/fsck/main.c
-index 9a7d499..e7e3dfc 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -104,6 +104,7 @@ void resize_usage()
- 	MSG(0, "\nUsage: resize.f2fs [options] device\n");
- 	MSG(0, "[options]:\n");
- 	MSG(0, "  -d debug level [default:0]\n");
-+	MSG(0, "  -i extended node bitmap, node ratio is 20%% by default\n");
- 	MSG(0, "  -s safe resize (Does not resize metadata)");
- 	MSG(0, "  -t target sectors [default: device size]\n");
- 	MSG(0, "  -V print the version number and exit\n");
-@@ -449,7 +450,7 @@ void f2fs_parse_options(int argc, char *argv[])
- 				break;
- 		}
- 	} else if (!strcmp("resize.f2fs", prog)) {
--		const char *option_string = "d:st:V";
-+		const char *option_string = "d:st:iV";
- 
- 		c.func = RESIZE;
- 		while ((option = getopt(argc, argv, option_string)) != EOF) {
-@@ -476,6 +477,9 @@ void f2fs_parse_options(int argc, char *argv[])
- 					ret = sscanf(optarg, "%"PRIx64"",
- 							&c.target_sectors);
- 				break;
-+			case 'i':
-+				c.large_nat_bitmap = 1;
-+				break;
- 			case 'V':
- 				show_version(prog);
- 				exit(0);
-diff --git a/fsck/resize.c b/fsck/resize.c
-index fc563f2..88e063e 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -519,6 +519,11 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
- 	else
- 		set_cp(checksum_offset, CP_CHKSUM_OFFSET);
- 
-+	if (c.large_nat_bitmap) {
-+		set_cp(checksum_offset, CP_MIN_CHKSUM_OFFSET);
-+		flags |= CP_LARGE_NAT_BITMAP_FLAG;
-+	}
-+
- 	set_cp(ckpt_flags, flags);
- 
- 	memcpy(new_cp, cp, (unsigned char *)cp->sit_nat_version_bitmap -
 -- 
-2.7.4
+Jeff Layton <jlayton@kernel.org>
 
 
 
