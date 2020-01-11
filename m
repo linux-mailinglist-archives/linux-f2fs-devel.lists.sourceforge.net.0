@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 239A2137C8E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jan 2020 10:09:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40EE7137C9E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jan 2020 10:27:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iqClT-0007RH-4K; Sat, 11 Jan 2020 09:09:03 +0000
+	id 1iqD34-0000kH-Mc; Sat, 11 Jan 2020 09:27:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1iqClR-0007R1-5v
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 09:09:01 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iqD2z-0000jQ-8n
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 09:27:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bZyN+dNe+EQVXrCcmT1jEU83OSlvWB75S9MMMwr9pbc=; b=Bf5lyv8QfRANWBO7LwZnNO4FEB
- AmIHPIEnmbrFcoq9r+WfrfZksJ8YQYNkXN+UkQhZZbkzxVakGZxBKn1gaW4f9upTthxTVX1Dl2wXf
- A5lZu+VgMQaWuvG+dIodERAwL8MLRIaDtv+FZlgk8o6BACcQP1Z0CrM41rCDPn3SIgkk=;
+ bh=aHnEY0WZSuOprgp6zYLLP2ROjnwPtaV4bV1qhCteZm4=; b=Q6G0fjev2DksTFhFpLn7G8XJBs
+ IpGmgNjF0J0RLSjRy0WnTte5Fg5pMig+A7uwT+XGClebCe73gx6qyhIEx/gAtNFbdIMNcW/f4JF0B
+ akFqnmeQqs8VeMOV+bYkyZGvgxBYPUHFWfEbXnwEEvtLIzu/hF8Q0z3ZSuIg4dVqy2e0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,39 +29,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bZyN+dNe+EQVXrCcmT1jEU83OSlvWB75S9MMMwr9pbc=; b=K7VW+MZqeVitWtd7mKbG1sc4FW
- cQUkpjdktzS9gSLRE+nek3zhJ5A23H+KKNLTT4HuUB9w4qWcYKhzjAWlMUNC/d1Srz3KVH9owbqgf
- YWCDDiDzsJjbUITUzroylLw5aaec6hdWRsrmzwTpi0eEUcbmMzFqsE9DF1JPmED33at8=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ bh=aHnEY0WZSuOprgp6zYLLP2ROjnwPtaV4bV1qhCteZm4=; b=RAXjfHreSLXfbR21ekaDwr0Uj9
+ 0nHQ7ruPgMlEh//zJ2M0UQu651T5SRE2l0j+aW+rgRFXXqhQ0WeQjhtyb9UF3Xun92R3EHCw1MySH
+ 8u8yu0eYSuFRb7rnGcAos7HmsltKPDWD1bVPDC7lq3S8Z8gLokFnqdYADCcgWCZ2aNlI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iqClO-00GJk3-MW
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 09:09:01 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 0F1D09625D48D0B11230;
- Sat, 11 Jan 2020 17:08:51 +0800 (CST)
+ id 1iqD2u-00GKR4-BP
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 09:27:07 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 5A99D26524B0229798D5;
+ Sat, 11 Jan 2020 17:26:54 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 11 Jan
- 2020 17:08:47 +0800
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.439.0; Sat, 11 Jan
+ 2020 17:26:51 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20191216062806.112361-1-yuchao0@huawei.com>
- <20191218214619.GA20072@jaegeuk-macbookpro.roam.corp.google.com>
- <c7035795-73b3-d832-948f-deb36213ba07@huawei.com>
- <20191231004633.GA85441@jaegeuk-macbookpro.roam.corp.google.com>
- <7a579223-39d4-7e51-c361-4aa592b2500d@huawei.com>
- <20200102181832.GA1953@jaegeuk-macbookpro.roam.corp.google.com>
- <20200102190003.GA7597@jaegeuk-macbookpro.roam.corp.google.com>
- <d51f0325-6879-9aa6-f549-133b96e3eef5@huawei.com>
- <94786408-219d-c343-70f2-70a2cc68dd38@huawei.com>
- <20200106181620.GB50058@jaegeuk-macbookpro.roam.corp.google.com>
- <20200110235214.GA25700@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20200107020709.73568-1-jaegeuk@kernel.org>
+ <afddac87-b7c5-f68c-4e55-3705be311cf6@huawei.com>
+ <20200108120444.GC28331@jaegeuk-macbookpro.roam.corp.google.com>
+ <d5555fd8-736f-cc2f-1e57-d9ac01b3d012@huawei.com>
+ <20200108231840.GB42219@jaegeuk-macbookpro.roam.corp.google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <3776cb0b-4b18-ae0d-16a7-a591bec77a5e@huawei.com>
-Date: Sat, 11 Jan 2020 17:08:46 +0800
+Message-ID: <bdd79445-cf45-4841-bfcd-f66260ef8bd3@huawei.com>
+Date: Sat, 11 Jan 2020 17:26:51 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200110235214.GA25700@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20200108231840.GB42219@jaegeuk-macbookpro.roam.corp.google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -75,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iqClO-00GJk3-MW
-Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
+X-Headers-End: 1iqD2u-00GKR4-BP
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add a way to turn off ipu bio cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,129 +87,51 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/1/11 7:52, Jaegeuk Kim wrote:
-> On 01/06, Jaegeuk Kim wrote:
->> On 01/06, Chao Yu wrote:
->>> On 2020/1/3 14:50, Chao Yu wrote:
->>>> This works to me. Could you run fsstress tests on compressed root directory?
->>>> It seems still there are some bugs.
+On 2020/1/9 7:18, Jaegeuk Kim wrote:
+> On 01/08, Chao Yu wrote:
+>> On 2020/1/8 20:04, Jaegeuk Kim wrote:
+>>> On 01/08, Chao Yu wrote:
+>>>> On 2020/1/7 10:07, Jaegeuk Kim wrote:
+>>>>> Setting 0x40 in /sys/fs/f2fs/dev/ipu_policy gives a way to turn off
+>>>>> bio cache, which is useufl to check whether block layer using hardware
+>>>>> encryption engine merges IOs correctly.
+>>>>>
+>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>>> ---
+>>>>>  Documentation/filesystems/f2fs.txt | 1 +
+>>>>>  fs/f2fs/segment.c                  | 2 +-
+>>>>>  fs/f2fs/segment.h                  | 1 +
+>>>>>  3 files changed, 3 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
+>>>>> index 41b5aa94b30f..cd93bcc34726 100644
+>>>>> --- a/Documentation/filesystems/f2fs.txt
+>>>>> +++ b/Documentation/filesystems/f2fs.txt
+>>>>> @@ -335,6 +335,7 @@ Files in /sys/fs/f2fs/<devname>
+>>>>>                                 0x01: F2FS_IPU_FORCE, 0x02: F2FS_IPU_SSR,
+>>>>>                                 0x04: F2FS_IPU_UTIL,  0x08: F2FS_IPU_SSR_UTIL,
+>>>>>                                 0x10: F2FS_IPU_FSYNC.
+>>>>
+>>>> . -> ,
 >>>
->>> Jaegeuk,
->>>
->>> Did you mean running por_fsstress testcase?
->>>
->>> Now, at least I didn't hit any problem for normal fsstress case.
+>>> Actually, we can't do it. I revised it a bit instead.
 >>
->> Yup. por_fsstress
+>> One more question, why skipping 0x20 bit position?
 > 
-> Please check https://github.com/jaegeuk/f2fs/commits/g-dev-test.
-> I've fixed
-> - truncation offset
-> - i_compressed_blocks and its lock coverage
-> - error handling
-> - etc
-
-I changed as below, and por_fsstress stops panic the system.
-
-Could you merge all these fixes into original patch?
-
-From bb17d7d77fe0b8a3e3632a7026550800ab9609e9 Mon Sep 17 00:00:00 2001
-From: Chao Yu <yuchao0@huawei.com>
-Date: Sat, 11 Jan 2020 16:58:20 +0800
-Subject: [PATCH] f2fs: compress: fix f2fs_put_rpages_mapping()
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/compress.c | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 502cd0ddc2a7..5c6a31d84ce4 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -74,18 +74,10 @@ static void f2fs_put_compressed_page(struct page *page)
- }
-
- static void f2fs_drop_rpages(struct compress_ctx *cc,
--		struct address_space *mapping, int len, bool unlock)
-+					int len, bool unlock)
- {
- 	unsigned int i;
- 	for (i = 0; i < len; i++) {
--		if (mapping) {
--			pgoff_t start = start_idx_of_cluster(cc);
--			struct page *page = find_get_page(mapping, start + i);
--
--			put_page(page);
--			put_page(page);
--			cc->rpages[i] = NULL;
--		}
- 		if (!cc->rpages[i])
- 			continue;
- 		if (unlock)
-@@ -97,18 +89,25 @@ static void f2fs_drop_rpages(struct compress_ctx *cc,
-
- static void f2fs_put_rpages(struct compress_ctx *cc)
- {
--	f2fs_drop_rpages(cc, NULL, cc->cluster_size, false);
-+	f2fs_drop_rpages(cc, cc->cluster_size, false);
- }
-
- static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
- {
--	f2fs_drop_rpages(cc, NULL, len, true);
-+	f2fs_drop_rpages(cc, len, true);
- }
-
- static void f2fs_put_rpages_mapping(struct compress_ctx *cc,
--				struct address_space *mapping, int len)
-+				struct address_space *mapping,
-+				pgoff_t start, int len)
- {
--	f2fs_drop_rpages(cc, mapping, len, false);
-+	int i;
-+	for (i = 0; i < len; i++) {
-+		struct page *page = find_get_page(mapping, start + i);
-+
-+		put_page(page);
-+		put_page(page);
-+	}
- }
-
- static void f2fs_put_rpages_wbc(struct compress_ctx *cc,
-@@ -680,7 +679,8 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
-
- 		if (!PageUptodate(page)) {
- 			f2fs_unlock_rpages(cc, i + 1);
--			f2fs_put_rpages_mapping(cc, mapping, cc->cluster_size);
-+			f2fs_put_rpages_mapping(cc, mapping, start_idx,
-+					cc->cluster_size);
- 			f2fs_destroy_compress_ctx(cc);
- 			goto retry;
- 		}
-@@ -714,7 +714,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- unlock_pages:
- 	f2fs_unlock_rpages(cc, i);
- release_pages:
--	f2fs_put_rpages_mapping(cc, mapping, i);
-+	f2fs_put_rpages_mapping(cc, mapping, start_idx, i);
- 	f2fs_destroy_compress_ctx(cc);
- 	return ret;
- }
--- 
-2.18.0.rc1
-
-
-
+> It seems original patch missed to add comment.
 > 
-> One another fix in f2fs-tools as well.
-> https://github.com/jaegeuk/f2fs-tools
+>>From f9447095de55a3cda1023a37a5e1cb6dd2f54ebb Mon Sep 17 00:00:00 2001
+> From: Jaegeuk Kim <jaegeuk@kernel.org>
+> Date: Wed, 8 Jan 2020 15:10:02 -0800
+> Subject: [PATCH] f2fs: update f2fs document regarding to fsync_mode
 > 
->>
->>>
->>> Thanks,
-> .
+> This patch adds missing fsync_mode entry in f2fs document.
 > 
+> Fixes: 04485987f053 ("f2fs: introduce async IPU policy")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
+
+Thanks,
 
 
 _______________________________________________
