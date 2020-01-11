@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5E99137A63
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jan 2020 00:52:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BB08137AC2
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jan 2020 01:49:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iq450-0001Mr-QY; Fri, 10 Jan 2020 23:52:38 +0000
+	id 1iq4xk-0004bu-CH; Sat, 11 Jan 2020 00:49:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1iq44s-0001MX-JJ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jan 2020 23:52:30 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1iq4xj-0004bg-1m
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 00:49:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JzLRdHvGFg5Agv66X/P8KtcTDPVQVS7wlsWlJZDHwuA=; b=AIc2a7SSBYedmDESO6av41Qapv
- 9BUKD10fmMEV0qkSniUVtsHv9mPqFtPaSmaLh6uAQ2dal+4ROjAa7bz5PuhIzn4buV2OWKZvdgFBr
- pkI3pGPAGu8q08UDBLGf+3HujCZgKLoUZqAl8UpxqGmroJAzA1XoTS0UleNTuc+9xUuQ=;
+ bh=fL+jpi61rk7LDRMH/eWtLLuDjd9z3bxFc59xFpvg0S4=; b=hNrxTGi30XZ7M5yjwp4oki/XrO
+ W53Lpn2FlCUYosnUX6iaA1rMhJOx9WJ5JjfWMYeKcw7CKk/jtpPb8uPuKltGscJK80lTejAXTJQWb
+ 2RMLzd6wMTc6eACzKsWJUn4Sro5nD6uu0Z4I+XfM8MH1lb5RYQ0b2Su+UX/5roH30350=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,47 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JzLRdHvGFg5Agv66X/P8KtcTDPVQVS7wlsWlJZDHwuA=; b=NQcBNrU2hdmcOOuhTsxQWrdBdr
- 5ZsFDPraHPFepFaQh+dZmahwpl+Af1FaaPCcQK39qeoOE+QgTmxt/pTlUqQjt9PQPq25GFbIgSHXU
- IulJpg4WwOJ+XDjbQUzG4QHBaFpXhWeifIksqbS5nvkoH5jh0NkoWltynRL4YHBTjWTI=;
+ bh=fL+jpi61rk7LDRMH/eWtLLuDjd9z3bxFc59xFpvg0S4=; b=TEAOePJdM67EOYqherzGzee5g+
+ IW2XGWJuyGOa4PvcWOEDSSPRqx5/XjaGrDvUDbZMPesuEOHxnXGwTzuV0smyJwVP3bvlhbiuoct/N
+ MoNhyZhVARNpSEvq5N3xf7U/DVRFvDux6sym/GXelP57mWwer0V0Zc9I97XdGBykWT0M=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iq44o-00HTaD-3B
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jan 2020 23:52:29 +0000
+ id 1iq4xd-00HWC5-DP
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Jan 2020 00:49:10 +0000
 Received: from localhost (unknown [104.132.0.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 91F062072A;
- Fri, 10 Jan 2020 23:52:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BC3A424649;
+ Sat, 11 Jan 2020 00:48:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578700335;
- bh=NvOUcUspxFLI01lV4A8uaAMX4Ow8pA4DdoGx2zMfWBU=;
+ s=default; t=1578703739;
+ bh=3kZ1iuWEqVVyEqOBdLPjD3O6skFoOheCA4Q0UzPwbIc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=K5rsvDPnEAR5f21xmUvg1WTxOoWEYMaz3T4nOp8ln4/PnRUK4/QvBccKSxw5gx6F5
- KSbS8D2qzcW2V8HhqcHE4E4fU2V4WST4iFRc15NeOJdUxDkmGbzhsYrvkRgYg0zg5s
- 4Pnn73nYDbl8cxLB9pOYFoZPsR8NX3+HrjDDKgns=
-Date: Fri, 10 Jan 2020 15:52:14 -0800
+ b=SGb2ttnIdOqF8wCoJ2KzHBp8GNx5FxGIL3w/4ubgFyJkbQpTAhqe/oy2dd6vSnO6M
+ 7vF5eYm6ghjpfRFx0460nQbQyVPxa0r63UZdaJkCOVEFhqMTbc/KH1Sbax5Ey4tU/5
+ Gl8h7retz2eDoC7xWXQGEFnFZQ1fD5lYz3EfARjQ=
+Date: Fri, 10 Jan 2020 16:48:58 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200110235214.GA25700@jaegeuk-macbookpro.roam.corp.google.com>
-References: <20191216062806.112361-1-yuchao0@huawei.com>
- <20191218214619.GA20072@jaegeuk-macbookpro.roam.corp.google.com>
- <c7035795-73b3-d832-948f-deb36213ba07@huawei.com>
- <20191231004633.GA85441@jaegeuk-macbookpro.roam.corp.google.com>
- <7a579223-39d4-7e51-c361-4aa592b2500d@huawei.com>
- <20200102181832.GA1953@jaegeuk-macbookpro.roam.corp.google.com>
- <20200102190003.GA7597@jaegeuk-macbookpro.roam.corp.google.com>
- <d51f0325-6879-9aa6-f549-133b96e3eef5@huawei.com>
- <94786408-219d-c343-70f2-70a2cc68dd38@huawei.com>
- <20200106181620.GB50058@jaegeuk-macbookpro.roam.corp.google.com>
+To: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>
+Message-ID: <20200111004858.GB25700@jaegeuk-macbookpro.roam.corp.google.com>
+References: <20200108182655.GA10257@lazy.lzy>
+ <20200109022930.GC42219@jaegeuk-macbookpro.roam.corp.google.com>
+ <20200109173753.GA4863@lazy.lzy>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200106181620.GB50058@jaegeuk-macbookpro.roam.corp.google.com>
+In-Reply-To: <20200109173753.GA4863@lazy.lzy>
 User-Agent: Mutt/1.8.2 (2017-04-18)
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: googlesource.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -79,8 +76,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iq44o-00HTaD-3B
-Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
+X-Headers-End: 1iq4xd-00HWC5-DP
+Subject: Re: [f2fs-dev] TRIM issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,38 +89,169 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/06, Jaegeuk Kim wrote:
-> On 01/06, Chao Yu wrote:
-> > On 2020/1/3 14:50, Chao Yu wrote:
-> > > This works to me. Could you run fsstress tests on compressed root directory?
-> > > It seems still there are some bugs.
-> > 
-> > Jaegeuk,
-> > 
-> > Did you mean running por_fsstress testcase?
-> > 
-> > Now, at least I didn't hit any problem for normal fsstress case.
+On 01/09, Piergiorgio Sartor wrote:
+> Hi,
 > 
-> Yup. por_fsstress
+> thanks for the reply, please see my comments
+> embedded below.
+> 
+> On Wed, Jan 08, 2020 at 06:29:30PM -0800, Jaegeuk Kim wrote:
+> > Hi,
+> > 
+> > On 01/08, Piergiorgio Sartor wrote:
+> > > Hi all,
+> > > 
+> > > I've a small box, with Fedora 31 up-to-date.
+> > > 
+> > > The system has LUKS + LVM + f2fs.
+> > > 
+> > > Since kernel 5.3.16-300.fc31.x86_64 the fstrim.service,
+> > > triggered by the systemd service fstrim.timer or from
+> > > command line, does return an error:
+> > > 
+> > > Starting Discard unused blocks on filesystems from /etc/fstab...
+> > > fstrim: /home: FITRIM ioctl failed: Read-only file system
+> > > fstrim: /: FITRIM ioctl failed: Read-only file system
+> > > fstrim.service: Main process exited, code=exited, status=32/n/a
+> > > fstrim.service: Failed with result 'exit-code'.
+> > > Failed to start Discard unused blocks on filesystems from /etc/fstab.
+> > 
+> > It smells like trying fstrim along with /etc/fstab before mounting the
+> > partitions?
+> 
+> The error is reported also when running, as root,
+> the command "systemctl start fstrim.service" from
+> command line, that is with partitions available.
+> So, I do not think it is before mounting. Also,
+> this is usually started weekly from fstrim.timer,
+> and this requires a running system.
+> It could be a strange conflict with systemd, but
+> with ext4 there is no problem, it happens with f2fs.
 
-Please check https://github.com/jaegeuk/f2fs/commits/g-dev-test.
-I've fixed
-- truncation offset
-- i_compressed_blocks and its lock coverage
-- error handling
-- etc
+Okay.
 
-One another fix in f2fs-tools as well.
-https://github.com/jaegeuk/f2fs-tools
+> 
+> > > Note the following:
+> > > 1) Both /home and / are rw
+> > > 2) LUKS and LVM allow discard to the underlying device
+> > > 3) An other PC, with same layout, but ext4, does work as expected
+> > > 4) kernel 5.4.7-200.fc31.x86_64 (latest for f31) has same result
+> > > 5) fstrim -vA or -va does not return an error, exit code is 0,
+> > > but it always says 0 (zero) bytes are trimmed:
+> > > 
+> > > /home: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-home
+> > > /: 0 B (0 bytes) trimmed on /dev/mapper/fedora--server-root
+> > 
+> > This is normal. Since f2fs issues discard commands asynchronously, fstrim
+> > just collects discard candidates and returns right away. Later, it will
+> > actually issue the candidates in background. Whereas, if it was mounted as
+> > "-o nodiscard", fstrim will wait for whole discard commands being issued
+> > and completed as you expect.
+> 
+> OK, I remounted / with "nodiscard", created a 1GB
+> file, synched the fs, deleted the file and issued
+> "fstrim -vA".
+> I can confirm 1GB was trimmed, more precisely 1.1GB
+> according to "fstrim".
+> 
+> I repeated the test, but instead using "systemctl
+> start fstrim.service".
+> Same error as before.
+> But, a succesive "fstrim -vA" returned only 2.7MB
+> trimmed.
+> This could be that the "fstrim" call was executed
+> properly, but some error report was triggered.
+> Maybe the read-only file system is not correct,
+> but something happened.
+> I would like to stress again that ext4 does not
+> trigger this error.
+> 
+> So, there is something related with f2fs, at
+> least with the interaction with fstrim and
+> systemd.
 
+I'm not sure, maybe systemd interpreted zero return as RO partition?
+
+> 
+> I have one question.
+> 
+> Since f2fs is mounted with "discard" and, as I
+> understand it, f2fs will issue discard as soon
+> as a segment is freed, is it relevant to have
+> the weekly fstrim from systemd?
+
+Not exactly segment. f2fs supports small sized discards as well in order to
+get better performance of small crappy mmc cards.
+
+The return value of fstrim in f2fs represents the actual size of discard
+commands being issued during the syscall. So, fstrim w/ "-o discard" gives zero
+all the time. OTOH, it reports non-zero value given "-o nodiscard", but again
+won't give the full size all the time, since f2fs doesn't issue discard commands
+onto previously discarded space.
+
+So, in general, I prefer managing this like in Android [1] with "-o discard" and
+1) run f2fs GC/discard w/ "-o discard" aggressively at night, 2) run fstrim
+instantly, 3) sync.
+
+1) can be simply done by:
+- "echo 1 > /sys/fs/f2fs/dev/gc_urgent" 
+- wait for 10 minutres
+- "echo 0 > /sys/fs/f2fs/dev/gc_urgent"
+- sync
+
+[1] https://android.googlesource.com/platform/system/vold/+/91a68dfc98defe4de8630290b0dcff0311de6678/IdleMaint.cpp#71
+
+> 
+> Thanks a lot in advance,
+> 
+> bye,
+> 
+> pg
 > 
 > > 
 > > Thanks,
+> > 
+> > > 
+> > > 6) mount shows that the f2fs mounts have "discard" flag
+> > > 
+> > > So, I suspect there is something with f2fs which somehow
+> > > confuses the trimming process.
+> > > 
+> > > I had a quick search, but I could not find any other
+> > > similar report, except one about systemd, but that
+> > > does not seem related.
+> > > 
+> > > Any idea? Suggestions?
+> > > Debugging possibilities?
+> > > 
+> > > Thanks a lot in advance,
+> > > 
+> > > bye,
+> > > 
+> > > -- 
+> > > 
+> > > piergiorgio
+> > > 
+> > > 
+> > > _______________________________________________
+> > > Linux-f2fs-devel mailing list
+> > > Linux-f2fs-devel@lists.sourceforge.net
+> > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> 
+> -- 
+> 
+> piergiorgio
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
