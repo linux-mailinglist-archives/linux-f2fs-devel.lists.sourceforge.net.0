@@ -2,101 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E42B5138C11
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jan 2020 07:52:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF640138D43
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jan 2020 09:56:23 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iqtaj-0003th-B9; Mon, 13 Jan 2020 06:52:49 +0000
+	id 1iqvWG-0007ZG-T0; Mon, 13 Jan 2020 08:56:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <xp1982.06.06@gmail.com>) id 1iqtai-0003ta-Rb
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jan 2020 06:52:48 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iqvWE-0007YP-Sj
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jan 2020 08:56:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ixWmZZn5cz1mbd7yW9N78OzPov834nZ+OiSf3qX3/Iw=; b=HfZmZWMvWkVfsMBPNlrRZgM6JB
- hJDQ2D0xZR888BqGAIaqn/dQLpOqnE8jX9lBNatEu/Z4zdbGpIO1AdVI53wvjf4EosHW0QUSemaoC
- VE4MEght8vhg5vAce6k7LwQLnTtWCZ9TvP4ueRR8ly8/LxWzEUKk0uhbcGstix1cB9C0=;
+ bh=g/w3iNG7bv0Mruu1xjGdxEq4u239cLeiIACS4PnuQbU=; b=MagWkKUb70SeaW6dmBoqCpGQ+F
+ FG5OMlFA8ysk1vbE2Id9fHBza830Lvnj2qnlByoShmJFThbzmUw0rX6apKk80fJV06nXQVjZq3jqp
+ 6CdMQ9qoIE0EDq9Ge3DC7B2vB4t4MTo92ft4uMJ0qQkpL5vPuen7pbDGZaTX/1VDlIS8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ixWmZZn5cz1mbd7yW9N78OzPov834nZ+OiSf3qX3/Iw=; b=VFfKUUE2SZgGtC9pnlCV+pzERE
- d2s3zZoskxobx1g1uyR6Htwc/Vc8DjXLp8DvWgT+krEHgKUcDux+97gp2+TkB3ZH0YMICt8LECnHl
- 4/JFjj15MhhLM/WyWMN40Asv76V/KDoyJ7RgnTM1Z7ZMrg8aIjcVN10IO+uGBvRkm7iE=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
+ bh=g/w3iNG7bv0Mruu1xjGdxEq4u239cLeiIACS4PnuQbU=; b=TQlwIutITGil2pm0smQnGcYibC
+ glH3EaNTFmUpADtW9Btt5wAzDFWsqG+XudxsjEDcE4GfrxexS0p7wCYmYj5dSEio2bOI2v+79LWFz
+ Y9gR9cEyzcee1GMirXTTei0+4G7hy/K8r62zJ817aI2uR8gf0cBHN0CueX9cbsi6AVlQ=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iqtag-002nCX-Mh
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jan 2020 06:52:48 +0000
-Received: by mail-pg1-f194.google.com with SMTP id k3so4236892pgc.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 12 Jan 2020 22:52:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=ixWmZZn5cz1mbd7yW9N78OzPov834nZ+OiSf3qX3/Iw=;
- b=MWDnx4s6w/tmBrNVbFIQ1vEX6qQvpKt44HmfIThiV/xaQluAyx9nzyLcL1Yscq+xBf
- 85JkyYzx/i3b13pq2yZWeuEiFyErVuSGRIvzYKg2iEQ28m/8Emq3+YX7/q0T0WBZFIMf
- oTC6CpQifBvzkwRzR4sdi24ce49Jp8JxpA6AuQFHTZyKoAiT0ivYXwf4aytyqc13wQ3a
- 1Lga1hYL7mosq+M9NPIETKtjn0RmIMrRa/6veh8h7PHZwLsJx+2JYtc3LfBUGPv8OyWz
- CqkgN1sVbjpQlCZH9/lo7vnLK3UHfaqTWUezZWHxQ7oaQ0lMi2fEOtSkA7s27R2x/y3B
- U54Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=ixWmZZn5cz1mbd7yW9N78OzPov834nZ+OiSf3qX3/Iw=;
- b=IrBSYOLHGR3LAXwH1MeP58THiArUEMFOor5MIrc7hujzp2kGt7v9eP3vluy8Owqzfc
- ySwAnYDMM2YytX5oKXEjU3f9Lrh2BSTJs4zjwJjB5t8L7ragC0Fbq0/rW1mSOKNryiQy
- /lYw6WHR1tTs8CgqTrp7W7+Gs5vkep34RXCd0gWLh343kJiKH8yzdwqMvUp9oMeEOmSe
- Y2GES2gt7gHd4O1gn3aMe6e/cSPMei7K9usgPKa8sojpFoUmFDKxnGtE4sIRm3JmeeO9
- 48tabpNq49OLRqCwPeBIjpWL1MUAwXkPFumVb8S70wZPggxPeEtp/wi1twxuRYp92cG8
- 92Pw==
-X-Gm-Message-State: APjAAAXOlUkjpvQ2+wkZrqFCL/lvGPwfaLe7XTnwGGYoPCVUv33l8vca
- bdPhbfp7XqBYf+bp/iSs6D4=
-X-Google-Smtp-Source: APXvYqz8DDYgtxILjbT8NXNXztKpdNhF11x4wKO5q4NOEFrzD3WC1my7gwV5KogGtPbc3vnQZWJIiw==
-X-Received: by 2002:a05:6a00:90:: with SMTP id
- c16mr17661377pfj.230.1578898361059; 
- Sun, 12 Jan 2020 22:52:41 -0800 (PST)
-Received: from xp-OptiPlex-7050.mioffice.cn ([43.224.245.180])
- by smtp.gmail.com with ESMTPSA id p21sm12338217pfn.103.2020.01.12.22.52.39
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Sun, 12 Jan 2020 22:52:40 -0800 (PST)
-From: ping xiong <xp1982.06.06@gmail.com>
-To: yuchao0@huawei.com
-Date: Mon, 13 Jan 2020 14:52:30 +0800
-Message-Id: <1578898350-29607-1-git-send-email-xp1982.06.06@gmail.com>
-X-Mailer: git-send-email 2.7.4
-X-Spam-Score: 0.1 (/)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1iqvWB-002tbg-4m
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jan 2020 08:56:18 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id CDA061B4BE308E82E9D1;
+ Mon, 13 Jan 2020 16:56:04 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 13 Jan
+ 2020 16:56:00 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <c7035795-73b3-d832-948f-deb36213ba07@huawei.com>
+ <20191231004633.GA85441@jaegeuk-macbookpro.roam.corp.google.com>
+ <7a579223-39d4-7e51-c361-4aa592b2500d@huawei.com>
+ <20200102181832.GA1953@jaegeuk-macbookpro.roam.corp.google.com>
+ <20200102190003.GA7597@jaegeuk-macbookpro.roam.corp.google.com>
+ <d51f0325-6879-9aa6-f549-133b96e3eef5@huawei.com>
+ <94786408-219d-c343-70f2-70a2cc68dd38@huawei.com>
+ <20200106181620.GB50058@jaegeuk-macbookpro.roam.corp.google.com>
+ <20200110235214.GA25700@jaegeuk-macbookpro.roam.corp.google.com>
+ <3776cb0b-4b18-ae0d-16a7-a591bec77a5e@huawei.com>
+ <20200111180200.GA36424@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <72418aa5-7d2a-de26-f0b5-9c839f0c3404@huawei.com>
+Date: Mon, 13 Jan 2020 16:56:00 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20200111180200.GA36424@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (xp1982.06.06[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (xp1982.06.06[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iqtag-002nCX-Mh
-Subject: [f2fs-dev] [PATCH V2] resize.f2fs: add option for large_nat_bitmap
- feature
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iqvWB-002tbg-4m
+Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,74 +84,147 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, xiongping1 <xiongping1@xiaomi.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: xiongping1 <xiongping1@xiaomi.com>
+On 2020/1/12 2:02, Jaegeuk Kim wrote:
+> On 01/11, Chao Yu wrote:
+>> On 2020/1/11 7:52, Jaegeuk Kim wrote:
+>>> On 01/06, Jaegeuk Kim wrote:
+>>>> On 01/06, Chao Yu wrote:
+>>>>> On 2020/1/3 14:50, Chao Yu wrote:
+>>>>>> This works to me. Could you run fsstress tests on compressed root directory?
+>>>>>> It seems still there are some bugs.
+>>>>>
+>>>>> Jaegeuk,
+>>>>>
+>>>>> Did you mean running por_fsstress testcase?
+>>>>>
+>>>>> Now, at least I didn't hit any problem for normal fsstress case.
+>>>>
+>>>> Yup. por_fsstress
+>>>
+>>> Please check https://github.com/jaegeuk/f2fs/commits/g-dev-test.
+>>> I've fixed
+>>> - truncation offset
+>>> - i_compressed_blocks and its lock coverage
+>>> - error handling
+>>> - etc
+>>
+>> I changed as below, and por_fsstress stops panic the system.
+>>
+>> Could you merge all these fixes into original patch?
+> 
+> Yup, let m roll up some early patches first once test results become good.
 
-resize.f2fs has already supported large_nat_bitmap feature, but has no
-option to turn on it.
+I didn't encounter issue any more, how about por_fsstress test result in your
+enviornment? If there is, please share the call stack with me.
 
-This change add a new '-i' option to control turning on it.
+Thanks,
 
-Signed-off-by: xiongping1 <xiongping1@xiaomi.com>
----
- fsck/main.c   | 6 +++++-
- fsck/resize.c | 3 +++
- 2 files changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/fsck/main.c b/fsck/main.c
-index 9a7d499..e7e3dfc 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -104,6 +104,7 @@ void resize_usage()
- 	MSG(0, "\nUsage: resize.f2fs [options] device\n");
- 	MSG(0, "[options]:\n");
- 	MSG(0, "  -d debug level [default:0]\n");
-+	MSG(0, "  -i extended node bitmap, node ratio is 20%% by default\n");
- 	MSG(0, "  -s safe resize (Does not resize metadata)");
- 	MSG(0, "  -t target sectors [default: device size]\n");
- 	MSG(0, "  -V print the version number and exit\n");
-@@ -449,7 +450,7 @@ void f2fs_parse_options(int argc, char *argv[])
- 				break;
- 		}
- 	} else if (!strcmp("resize.f2fs", prog)) {
--		const char *option_string = "d:st:V";
-+		const char *option_string = "d:st:iV";
- 
- 		c.func = RESIZE;
- 		while ((option = getopt(argc, argv, option_string)) != EOF) {
-@@ -476,6 +477,9 @@ void f2fs_parse_options(int argc, char *argv[])
- 					ret = sscanf(optarg, "%"PRIx64"",
- 							&c.target_sectors);
- 				break;
-+			case 'i':
-+				c.large_nat_bitmap = 1;
-+				break;
- 			case 'V':
- 				show_version(prog);
- 				exit(0);
-diff --git a/fsck/resize.c b/fsck/resize.c
-index fc563f2..46b1cfb 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -512,6 +512,9 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
- 
- 	/* update nat_bits flag */
- 	flags = update_nat_bits_flags(new_sb, cp, get_cp(ckpt_flags));
-+	if (c.large_nat_bitmap)
-+		flags |= CP_LARGE_NAT_BITMAP_FLAG;
-+
- 	if (flags & CP_COMPACT_SUM_FLAG)
- 		flags &= ~CP_COMPACT_SUM_FLAG;
- 	if (flags & CP_LARGE_NAT_BITMAP_FLAG)
--- 
-2.7.4
-
+> 
+>>
+>> >From bb17d7d77fe0b8a3e3632a7026550800ab9609e9 Mon Sep 17 00:00:00 2001
+>> From: Chao Yu <yuchao0@huawei.com>
+>> Date: Sat, 11 Jan 2020 16:58:20 +0800
+>> Subject: [PATCH] f2fs: compress: fix f2fs_put_rpages_mapping()
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>>  fs/f2fs/compress.c | 30 +++++++++++++++---------------
+>>  1 file changed, 15 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>> index 502cd0ddc2a7..5c6a31d84ce4 100644
+>> --- a/fs/f2fs/compress.c
+>> +++ b/fs/f2fs/compress.c
+>> @@ -74,18 +74,10 @@ static void f2fs_put_compressed_page(struct page *page)
+>>  }
+>>
+>>  static void f2fs_drop_rpages(struct compress_ctx *cc,
+>> -		struct address_space *mapping, int len, bool unlock)
+>> +					int len, bool unlock)
+>>  {
+>>  	unsigned int i;
+>>  	for (i = 0; i < len; i++) {
+>> -		if (mapping) {
+>> -			pgoff_t start = start_idx_of_cluster(cc);
+>> -			struct page *page = find_get_page(mapping, start + i);
+>> -
+>> -			put_page(page);
+>> -			put_page(page);
+>> -			cc->rpages[i] = NULL;
+>> -		}
+>>  		if (!cc->rpages[i])
+>>  			continue;
+>>  		if (unlock)
+>> @@ -97,18 +89,25 @@ static void f2fs_drop_rpages(struct compress_ctx *cc,
+>>
+>>  static void f2fs_put_rpages(struct compress_ctx *cc)
+>>  {
+>> -	f2fs_drop_rpages(cc, NULL, cc->cluster_size, false);
+>> +	f2fs_drop_rpages(cc, cc->cluster_size, false);
+>>  }
+>>
+>>  static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
+>>  {
+>> -	f2fs_drop_rpages(cc, NULL, len, true);
+>> +	f2fs_drop_rpages(cc, len, true);
+>>  }
+>>
+>>  static void f2fs_put_rpages_mapping(struct compress_ctx *cc,
+>> -				struct address_space *mapping, int len)
+>> +				struct address_space *mapping,
+>> +				pgoff_t start, int len)
+>>  {
+>> -	f2fs_drop_rpages(cc, mapping, len, false);
+>> +	int i;
+>> +	for (i = 0; i < len; i++) {
+>> +		struct page *page = find_get_page(mapping, start + i);
+>> +
+>> +		put_page(page);
+>> +		put_page(page);
+>> +	}
+>>  }
+>>
+>>  static void f2fs_put_rpages_wbc(struct compress_ctx *cc,
+>> @@ -680,7 +679,8 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>>
+>>  		if (!PageUptodate(page)) {
+>>  			f2fs_unlock_rpages(cc, i + 1);
+>> -			f2fs_put_rpages_mapping(cc, mapping, cc->cluster_size);
+>> +			f2fs_put_rpages_mapping(cc, mapping, start_idx,
+>> +					cc->cluster_size);
+>>  			f2fs_destroy_compress_ctx(cc);
+>>  			goto retry;
+>>  		}
+>> @@ -714,7 +714,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>>  unlock_pages:
+>>  	f2fs_unlock_rpages(cc, i);
+>>  release_pages:
+>> -	f2fs_put_rpages_mapping(cc, mapping, i);
+>> +	f2fs_put_rpages_mapping(cc, mapping, start_idx, i);
+>>  	f2fs_destroy_compress_ctx(cc);
+>>  	return ret;
+>>  }
+>> -- 
+>> 2.18.0.rc1
+>>
+>>
+>>
+>>>
+>>> One another fix in f2fs-tools as well.
+>>> https://github.com/jaegeuk/f2fs-tools
+>>>
+>>>>
+>>>>>
+>>>>> Thanks,
+>>> .
+>>>
+> .
+> 
 
 
 _______________________________________________
