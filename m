@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 302DC13B41C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 22:13:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69A8C13B428
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 22:17:11 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1irTUg-0004ry-GI; Tue, 14 Jan 2020 21:12:58 +0000
+	id 1irTYe-0006AM-8W; Tue, 14 Jan 2020 21:17:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1irTUf-0004rr-7U
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:12:57 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1irTYc-0006AC-Jl
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:17:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ybNZ8wKgI8L3tBF7nQ3GQQ6ChJg3kSEldpJ/J9fEtGU=; b=SMz/s7WK+0mD1MQwkGLyHBEZx9
- nsniZcpaWcsy9C9GO+e+FMFuTohK7U82gtpFw4RYtwO84rBTrQCFf1JFy3/bp+lEItYY5BwHxXzNi
- BL/fipDvnQYDhfFTAfdqLKTuxcQmy4dOjvEz1g+2yQbqb4M/bDjSx2CF7ExAk8DHqqf4=;
+ bh=KjxKSwhl2JVBvoUuNac2VDAnPcTJIOED8DCnyJYimIQ=; b=mgqPoLl6DAfgnPB3vodiuAecK4
+ xY+TC4N13JzCP9NjXBo5rkEnEGDldR6P9ixelB20jno+4nNy3VMXV/s1R9/hB/jMl3SGakji0RADK
+ XYxRpY4YuUDYLAwTpezjzLIxO8lHebLEqzUdwThvetkKvTYNh5+KvDkX9wTNlW/WzP/s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ybNZ8wKgI8L3tBF7nQ3GQQ6ChJg3kSEldpJ/J9fEtGU=; b=jLP84CgGCPuOzGVtbgN2UwO5hi
- /w8AZE79gEBEB85DbCNN1sJCmBhSnJg18TOhs+C6D/GagYXmKBv24N/PUkwHfHrBka5lHIQlhaI6y
- /kzpuIIKHbQK5ZD2Na0HCdq6N4jqaKj6TtequUIc3+Hi9M1W/vJzcbJtawVv5jiO5Ats=;
+ bh=KjxKSwhl2JVBvoUuNac2VDAnPcTJIOED8DCnyJYimIQ=; b=DdyKel5TMvYsC86ZWf17A5YshW
+ mYBWtVYTY6cllAMCB/FMLIzvaKh+ihHYRf92GNdx/cKrKZ4mxvRI6hcY74i1PWAbFi8AoS65wdrNV
+ 3alcbvgMhIB76J+QPbocJQipmd6rHy/+BDs2tt7OyWphwNZsh9YOXZJ1LN5W9a/kmBH8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1irTUd-003Vl2-TD
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:12:57 +0000
+ id 1irTYb-003VwU-DR
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:17:02 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2244124658;
- Tue, 14 Jan 2020 21:12:45 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8862124658;
+ Tue, 14 Jan 2020 21:16:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579036365;
- bh=J3OsxJ0QF2e1qLWbeTaDEKd7v4FiOXvliReYz6wlurA=;
+ s=default; t=1579036615;
+ bh=PzGGbPQJnnJrvhracuO2jY95bGpEghQuRwTZb0zELqc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YSpaSCiNWpxz/Hp2I+ocHoWQz+de0pi1yKaVA0WbbtASy9uM/orM1gSNArzG1gjKk
- xZOGhpvoB7cWI1MxLIjy5b+npg8ynLKCAHAJVmhzVpuVGbrMBK5UchQD+tdNUNiIPB
- iaXoDigsthokLSovxzjetaBBqV1oyWdI7noUMCyA=
-Date: Tue, 14 Jan 2020 13:12:43 -0800
+ b=TvYuEITubu7X9Iyh7rL1YDF9fFJ6DmKcYzaM8JPSbuuQnYaWIeNMfyoIrp7LTNzzk
+ AFLcvj+PHjjtph7ptkJjJNJBLMX0wQLtE9FAUBkmym2qR4do8F9NVjFgXKsK4L7j/p
+ duZAnSEudfJrWbWpuKsOM+wEVqoY0d5Pnz5UL82k=
+Date: Tue, 14 Jan 2020 13:16:54 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200114211243.GC41220@gmail.com>
+Message-ID: <20200114211653.GD41220@gmail.com>
 References: <20191218145136.172774-1-satyat@google.com>
- <20191218145136.172774-8-satyat@google.com>
+ <20191218145136.172774-6-satyat@google.com>
+ <20191220044838.GD718@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191218145136.172774-8-satyat@google.com>
+In-Reply-To: <20191220044838.GD718@sol.localdomain>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.6 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1irTUd-003Vl2-TD
-Subject: Re: [f2fs-dev] [PATCH v6 7/9] fscrypt: add inline encryption support
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1irTYb-003VwU-DR
+Subject: Re: [f2fs-dev] [PATCH v6 5/9] scsi: ufs: UFS crypto API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,124 +94,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 18, 2019 at 06:51:34AM -0800, Satya Tangirala wrote:
-> diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-> index 1f4b8a277060..d28d8e803554 100644
-> --- a/fs/crypto/bio.c
-> +++ b/fs/crypto/bio.c
-> @@ -46,26 +46,35 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
->  {
->  	const unsigned int blockbits = inode->i_blkbits;
->  	const unsigned int blocksize = 1 << blockbits;
-> +	const bool inlinecrypt = fscrypt_inode_uses_inline_crypto(inode);
->  	struct page *ciphertext_page;
->  	struct bio *bio;
->  	int ret, err = 0;
->  
-> -	ciphertext_page = fscrypt_alloc_bounce_page(GFP_NOWAIT);
-> -	if (!ciphertext_page)
-> -		return -ENOMEM;
-> +	if (inlinecrypt) {
-> +		ciphertext_page = ZERO_PAGE(0);
-> +	} else {
-> +		ciphertext_page = fscrypt_alloc_bounce_page(GFP_NOWAIT);
-> +		if (!ciphertext_page)
-> +			return -ENOMEM;
-> +	}
->  
->  	while (len--) {
-> -		err = fscrypt_crypt_block(inode, FS_ENCRYPT, lblk,
-> -					  ZERO_PAGE(0), ciphertext_page,
-> -					  blocksize, 0, GFP_NOFS);
-> -		if (err)
-> -			goto errout;
-> +		if (!inlinecrypt) {
-> +			err = fscrypt_crypt_block(inode, FS_ENCRYPT, lblk,
-> +						  ZERO_PAGE(0), ciphertext_page,
-> +						  blocksize, 0, GFP_NOFS);
-> +			if (err)
-> +				goto errout;
-> +		}
->  
->  		bio = bio_alloc(GFP_NOWAIT, 1);
->  		if (!bio) {
->  			err = -ENOMEM;
->  			goto errout;
->  		}
-> +		fscrypt_set_bio_crypt_ctx(bio, inode, lblk, GFP_NOIO);
-> +
->  		bio_set_dev(bio, inode->i_sb->s_bdev);
->  		bio->bi_iter.bi_sector = pblk << (blockbits - 9);
->  		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
-> @@ -87,7 +96,8 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
->  	}
->  	err = 0;
->  errout:
-> -	fscrypt_free_bounce_page(ciphertext_page);
-> +	if (!inlinecrypt)
-> +		fscrypt_free_bounce_page(ciphertext_page);
->  	return err;
->  }
->  EXPORT_SYMBOL(fscrypt_zeroout_range);
+On Thu, Dec 19, 2019 at 08:48:38PM -0800, Eric Biggers wrote:
+> On Wed, Dec 18, 2019 at 06:51:32AM -0800, Satya Tangirala wrote:
+> > +/**
+> > + * ufshcd_hba_init_crypto - Read crypto capabilities, init crypto fields in hba
+> > + * @hba: Per adapter instance
+> > + *
+> > + * Return: 0 if crypto was initialized or is not supported, else a -errno value.
+> > + */
+> > +int ufshcd_hba_init_crypto(struct ufs_hba *hba)
+> > +{
+> > +	int cap_idx = 0;
+> > +	int err = 0;
+> > +	unsigned int crypto_modes_supported[BLK_ENCRYPTION_MODE_MAX];
+> > +	enum blk_crypto_mode_num blk_mode_num;
+> > +
+> > +	/* Default to disabling crypto */
+> > +	hba->caps &= ~UFSHCD_CAP_CRYPTO;
+> > +
+> > +	/* Return 0 if crypto support isn't present */
+> > +	if (!(hba->capabilities & MASK_CRYPTO_SUPPORT))
+> > +		goto out;
+> > +
+> 
+> Note that unfortunately, this patch doesn't work yet on some UFS host
+> controllers that claim to support the UFS standard crypto, due to issues like
+> deviations from the UFS standard and missing device tree changes -- and this can
+> even cause boot-time crashes.
+> 
+> So if we can't fix everything right away (which can be really hard without help
+> from the relevant vendor) I think we have to define a bit
+> UFSHCD_QUIRK_BROKEN_CRYPTO in ufs_hba::quirks which can be set on host
+> controllers where the proper tricks to get the crypto working correctly haven't
+> been figured out yet.  The crypto support would be ignored if that bit is set.
 
-FYI, I've just applied a patch
-(https://lore.kernel.org/r/20191226160813.53182-1-ebiggers@kernel.org/)
-to fscrypt.git#master that optimizes this function to write multiple pages at a
-time.  So this part of this patch will need to be reworked.  I suggest just
-handling the inline and fs-layer encryption cases separately.
+I included a patch defining UFSHCD_QUIRK_BROKEN_CRYPTO in my RFC patchset that
+wires up inline crypto support on Dragonboard 845c:
+https://lkml.kernel.org/linux-scsi/20200110061634.46742-4-ebiggers@kernel.org/
 
-I maintain a testing branch that has all the pending patches I'm interested in
-applied, so I actually already hacked together the following to resolve the
-conflict.  Please double check it carefully before using it in v7 though:
+Satya, feel free to include that patch in v7 of your patchset.
 
-static int fscrypt_zeroout_range_inlinecrypt(const struct inode *inode,
-					     pgoff_t lblk,
-					     sector_t pblk, unsigned int len)
-{
-	const unsigned int blockbits = inode->i_blkbits;
-	const unsigned int blocks_per_page_bits = PAGE_SHIFT - blockbits;
-	const unsigned int blocks_per_page = 1 << blocks_per_page_bits;
-	unsigned int i;
-	struct bio *bio;
-	int ret, err;
-
-	/* This always succeeds since __GFP_DIRECT_RECLAIM is set. */
-	bio = bio_alloc(GFP_NOFS, BIO_MAX_PAGES);
-
-	do {
-		bio_set_dev(bio, inode->i_sb->s_bdev);
-		bio->bi_iter.bi_sector = pblk << (blockbits - 9);
-		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
-		fscrypt_set_bio_crypt_ctx(bio, inode, lblk, GFP_NOFS);
-
-		i = 0;
-		do {
-			unsigned int blocks_this_page =
-				min(len, blocks_per_page);
-			unsigned int bytes_this_page =
-				blocks_this_page << blockbits;
-
-			ret = bio_add_page(bio, ZERO_PAGE(0),
-					   bytes_this_page, 0);
-			if (WARN_ON(ret != bytes_this_page)) {
-				err = -EIO;
-				goto out;
-			}
-			lblk += blocks_this_page;
-			pblk += blocks_this_page;
-			len -= blocks_this_page;
-		} while (++i != BIO_MAX_PAGES && len != 0);
-
-		err = submit_bio_wait(bio);
-		if (err)
-			goto out;
-		bio_reset(bio);
-	} while (len != 0);
-	err = 0;
-out:
-	bio_put(bio);
-	return err;
-}
+- Eric
 
 
 _______________________________________________
