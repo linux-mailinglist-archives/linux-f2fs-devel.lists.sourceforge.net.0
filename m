@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69A8C13B428
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 22:17:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DE7313B432
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 22:22:53 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1irTYe-0006AM-8W; Tue, 14 Jan 2020 21:17:04 +0000
+	id 1irTeF-0006WY-Pq; Tue, 14 Jan 2020 21:22:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1irTYc-0006AC-Jl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:17:02 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1irTeE-0006WQ-PF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:22:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KjxKSwhl2JVBvoUuNac2VDAnPcTJIOED8DCnyJYimIQ=; b=mgqPoLl6DAfgnPB3vodiuAecK4
- xY+TC4N13JzCP9NjXBo5rkEnEGDldR6P9ixelB20jno+4nNy3VMXV/s1R9/hB/jMl3SGakji0RADK
- XYxRpY4YuUDYLAwTpezjzLIxO8lHebLEqzUdwThvetkKvTYNh5+KvDkX9wTNlW/WzP/s=;
+ bh=Qyi65/d00C5NRqoV7OYo291Q8u964Yi9KA0XN65wPB0=; b=G70Mgbp4+CzGG+9qpx1tzeqo3N
+ f/136VR3nDQ0x/EfX+WH7q25rfIa+//veSBMiVYt2K8lTb7KpfkWKcN+1OhMjxsdXfuszrg6C5Gwt
+ NAsW6WxaCDZo+uE0CYugk3mGW1EjoWU/L3xoSqamFxf4RnxNJC/7crsGREX9PJOaP4tM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KjxKSwhl2JVBvoUuNac2VDAnPcTJIOED8DCnyJYimIQ=; b=DdyKel5TMvYsC86ZWf17A5YshW
- mYBWtVYTY6cllAMCB/FMLIzvaKh+ihHYRf92GNdx/cKrKZ4mxvRI6hcY74i1PWAbFi8AoS65wdrNV
- 3alcbvgMhIB76J+QPbocJQipmd6rHy/+BDs2tt7OyWphwNZsh9YOXZJ1LN5W9a/kmBH8=;
+ bh=Qyi65/d00C5NRqoV7OYo291Q8u964Yi9KA0XN65wPB0=; b=TpseFohKiM3jVwA/hIyabmoepz
+ VzJ4Tr5BAlnoG33Hk6ARviem9r5vvEBTN42TC7CUzX8IxdCtfmT8KkNezh4mnhImzHCnwX/v7Inlp
+ 5doGPsfTL6rlp37GWu/NPuft9ZHTd6WWKSi6skLA7t251ElQD6axU1ZX6OQN5zItzc3I=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1irTYb-003VwU-DR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:17:02 +0000
+ id 1irTeD-003STn-Mt
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 21:22:50 +0000
 Received: from gmail.com (unknown [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8862124658;
- Tue, 14 Jan 2020 21:16:55 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id CDB2324656;
+ Tue, 14 Jan 2020 21:22:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579036615;
- bh=PzGGbPQJnnJrvhracuO2jY95bGpEghQuRwTZb0zELqc=;
+ s=default; t=1579036964;
+ bh=c8PYOB+50Kwdr59J5Dy8+ISZBBmGFo4QI2J2EjwP7yg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TvYuEITubu7X9Iyh7rL1YDF9fFJ6DmKcYzaM8JPSbuuQnYaWIeNMfyoIrp7LTNzzk
- AFLcvj+PHjjtph7ptkJjJNJBLMX0wQLtE9FAUBkmym2qR4do8F9NVjFgXKsK4L7j/p
- duZAnSEudfJrWbWpuKsOM+wEVqoY0d5Pnz5UL82k=
-Date: Tue, 14 Jan 2020 13:16:54 -0800
+ b=Mtg8mLRqrHyH3Pl/BnJYWcJgbd7KdfoRejq1YKgwV7Weg3gb4Eau76XslsKhiKU3+
+ eRVm56RYnH1DdThk/eD2PGOrsRvEsvwngLKIX8CekgrRW4zJ+YQ2+uFmFTLLM62c39
+ rLG3pQpAu4zKMuJFpfF9w6GZjwib6hwwGIJ0uK/Q=
+Date: Tue, 14 Jan 2020 13:22:42 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200114211653.GD41220@gmail.com>
+Message-ID: <20200114212241.GE41220@gmail.com>
 References: <20191218145136.172774-1-satyat@google.com>
- <20191218145136.172774-6-satyat@google.com>
- <20191220044838.GD718@sol.localdomain>
+ <20191218145136.172774-4-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191220044838.GD718@sol.localdomain>
+In-Reply-To: <20191218145136.172774-4-satyat@google.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -72,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1irTYb-003VwU-DR
-Subject: Re: [f2fs-dev] [PATCH v6 5/9] scsi: ufs: UFS crypto API
+X-Headers-End: 1irTeD-003STn-Mt
+Subject: Re: [f2fs-dev] [PATCH v6 3/9] block: blk-crypto for Inline
+ Encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,45 +94,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Dec 19, 2019 at 08:48:38PM -0800, Eric Biggers wrote:
-> On Wed, Dec 18, 2019 at 06:51:32AM -0800, Satya Tangirala wrote:
-> > +/**
-> > + * ufshcd_hba_init_crypto - Read crypto capabilities, init crypto fields in hba
-> > + * @hba: Per adapter instance
-> > + *
-> > + * Return: 0 if crypto was initialized or is not supported, else a -errno value.
-> > + */
-> > +int ufshcd_hba_init_crypto(struct ufs_hba *hba)
-> > +{
-> > +	int cap_idx = 0;
-> > +	int err = 0;
-> > +	unsigned int crypto_modes_supported[BLK_ENCRYPTION_MODE_MAX];
-> > +	enum blk_crypto_mode_num blk_mode_num;
-> > +
-> > +	/* Default to disabling crypto */
-> > +	hba->caps &= ~UFSHCD_CAP_CRYPTO;
-> > +
-> > +	/* Return 0 if crypto support isn't present */
-> > +	if (!(hba->capabilities & MASK_CRYPTO_SUPPORT))
-> > +		goto out;
-> > +
-> 
-> Note that unfortunately, this patch doesn't work yet on some UFS host
-> controllers that claim to support the UFS standard crypto, due to issues like
-> deviations from the UFS standard and missing device tree changes -- and this can
-> even cause boot-time crashes.
-> 
-> So if we can't fix everything right away (which can be really hard without help
-> from the relevant vendor) I think we have to define a bit
-> UFSHCD_QUIRK_BROKEN_CRYPTO in ufs_hba::quirks which can be set on host
-> controllers where the proper tricks to get the crypto working correctly haven't
-> been figured out yet.  The crypto support would be ignored if that bit is set.
+On Wed, Dec 18, 2019 at 06:51:30AM -0800, Satya Tangirala wrote:
+> +static inline int blk_crypto_fallback_submit_bio(struct bio **bio_ptr)
+> +{
+> +	pr_warn_once("blk-crypto crypto API fallback disabled; failing request");
+> +	(*bio_ptr)->bi_status = BLK_STS_NOTSUPP;
+> +	return -EIO;
+> +}
 
-I included a patch defining UFSHCD_QUIRK_BROKEN_CRYPTO in my RFC patchset that
-wires up inline crypto support on Dragonboard 845c:
-https://lkml.kernel.org/linux-scsi/20200110061634.46742-4-ebiggers@kernel.org/
+There needs to be a "\n" at the end of this log message.  Also, due to the
+pr_fmt() in blk-crypto.c, this prints as:
 
-Satya, feel free to include that patch in v7 of your patchset.
+	blk-crypto: blk-crypto crypto API fallback disabled; failing request
+
+... so the second "blk-crypto" is redundant.
 
 - Eric
 
