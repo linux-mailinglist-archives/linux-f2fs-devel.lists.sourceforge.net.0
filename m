@@ -2,68 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9DED139F30
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 02:52:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA9AC13A882
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2020 12:37:21 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1irBNW-0001Qf-UR; Tue, 14 Jan 2020 01:52:22 +0000
+	id 1irKVa-0005xo-6Z; Tue, 14 Jan 2020 11:37:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1irBNV-0001QR-IC
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 01:52:21 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1irKVY-0005xg-PY
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 11:37:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TKW6anJiDDzICMJXzhcaOB05A2K2bZmu8Uf+9cIJ49M=; b=HOfcavSM0bAEE3NT0hOO4xePPY
- QlEeUEakwMct70CIRqrOHR1g/bq+ZFyyKGeiMuF2igRtSgn8l1B+qrcUJr9NyBlFM4j7zTqJ3yPHJ
- l7htMO8hX4z6q/vx/Qwk7WH5iu7D12eP4ZYVPKXy6zV7ack8Xzh9FAHu+z3Z0UI9RBbc=;
+ bh=OoV4HzdYeGPGzihAoWXG9NReeBOnhSr4cI5NXn8EgAE=; b=cXSvQ63YPdyas/DqmrWewqc5NB
+ MnfZoDRW/7jvzt/+wGjC/c4OCqkZFpQsr3MNNQohTkX1AL1KWfLIs4cow15LYehxEtiayPomi2/jD
+ Pw/qg+uGCwPJxce6DH8OL9aZI6uYHBB5W4HQ2HQ3yYWhTuy7KeMFtnuD8++Hao0PSkKg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TKW6anJiDDzICMJXzhcaOB05A2K2bZmu8Uf+9cIJ49M=; b=lx6CXCSNOZznncdFF4alBzZ1gv
- FdOQU4tS9HAPsxgO4DIvOb8OqHe+MljnH+Qmnf9ieA7cyle4+0y2I6+/uKMAhGpmagKviheM2ESVB
- 1c47o6asGNr4+z6B0xS8mXTGnSaM00r52i8TvEpPOK3qGEebdA01W4k57+uBih6LkmJg=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=OoV4HzdYeGPGzihAoWXG9NReeBOnhSr4cI5NXn8EgAE=; b=V
+ hlIsed8Gei5JI7TQ4L/9EtoMLtcb9/TfyIDdBzaxp0wmTIWUHX5ctfb2O9RQvWNZwhzymUeRuIO9O
+ sqI4tNEgELvMdVrQGlhvd0e5dZgyn1Dd0V5T+ObtcdlNWVFweqC9jnQoBJ0r+/SUFrBBeWoHLoqQX
+ UfQSNtYnsZdkC6F8=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1irBNT-001qqr-JW
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 01:52:21 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 68C3BD61D8DC748DF313;
- Tue, 14 Jan 2020 09:52:09 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 14 Jan
- 2020 09:52:07 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <7a579223-39d4-7e51-c361-4aa592b2500d@huawei.com>
- <20200102181832.GA1953@jaegeuk-macbookpro.roam.corp.google.com>
- <20200102190003.GA7597@jaegeuk-macbookpro.roam.corp.google.com>
- <d51f0325-6879-9aa6-f549-133b96e3eef5@huawei.com>
- <94786408-219d-c343-70f2-70a2cc68dd38@huawei.com>
- <20200106181620.GB50058@jaegeuk-macbookpro.roam.corp.google.com>
- <20200110235214.GA25700@jaegeuk-macbookpro.roam.corp.google.com>
- <3776cb0b-4b18-ae0d-16a7-a591bec77a5e@huawei.com>
- <20200111180200.GA36424@jaegeuk-macbookpro.roam.corp.google.com>
- <72418aa5-7d2a-de26-f0b5-9c839f0c3404@huawei.com>
- <20200113161120.GA49290@jaegeuk-macbookpro.roam.corp.google.com>
+ id 1irKVV-002n8T-6V
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jan 2020 11:37:16 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id C8605A6E80C2610A71DD;
+ Tue, 14 Jan 2020 19:37:03 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
+ 14.3.439.0; Tue, 14 Jan 2020 19:36:57 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <326f0049-936c-7dc4-52c3-aa64e13b2cc6@huawei.com>
-Date: Tue, 14 Jan 2020 09:52:05 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Tue, 14 Jan 2020 19:36:50 +0800
+Message-ID: <20200114113650.104881-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20200113161120.GA49290@jaegeuk-macbookpro.roam.corp.google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -74,8 +60,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1irBNT-001qqr-JW
-Subject: Re: [f2fs-dev] [RFC PATCH v5] f2fs: support data compression
+X-Headers-End: 1irKVV-002n8T-6V
+Subject: [f2fs-dev] [PATCH] f2fs: change to use rwsem for gc_mutex
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,174 +78,228 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/1/14 0:11, Jaegeuk Kim wrote:
-> On 01/13, Chao Yu wrote:
->> On 2020/1/12 2:02, Jaegeuk Kim wrote:
->>> On 01/11, Chao Yu wrote:
->>>> On 2020/1/11 7:52, Jaegeuk Kim wrote:
->>>>> On 01/06, Jaegeuk Kim wrote:
->>>>>> On 01/06, Chao Yu wrote:
->>>>>>> On 2020/1/3 14:50, Chao Yu wrote:
->>>>>>>> This works to me. Could you run fsstress tests on compressed root directory?
->>>>>>>> It seems still there are some bugs.
->>>>>>>
->>>>>>> Jaegeuk,
->>>>>>>
->>>>>>> Did you mean running por_fsstress testcase?
->>>>>>>
->>>>>>> Now, at least I didn't hit any problem for normal fsstress case.
->>>>>>
->>>>>> Yup. por_fsstress
->>>>>
->>>>> Please check https://github.com/jaegeuk/f2fs/commits/g-dev-test.
->>>>> I've fixed
->>>>> - truncation offset
->>>>> - i_compressed_blocks and its lock coverage
->>>>> - error handling
->>>>> - etc
->>>>
->>>> I changed as below, and por_fsstress stops panic the system.
->>>>
->>>> Could you merge all these fixes into original patch?
->>>
->>> Yup, let m roll up some early patches first once test results become good.
->>
->> I didn't encounter issue any more, how about por_fsstress test result in your
->> enviornment? If there is, please share the call stack with me.
-> 
-> Sure, will do, once I hit an issue. BTW, I'm hitting another unreacheable nat
-> entry issue during por_stress without compression. :(
+Mutex lock won't serialize callers, in order to avoid starving of unlucky
+caller, let's use rwsem lock instead.
 
-Did you enable any features during por_fsstress test?
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/f2fs.h    |  5 ++++-
+ fs/f2fs/file.c    | 12 ++++++------
+ fs/f2fs/gc.c      | 12 ++++++------
+ fs/f2fs/segment.c |  6 +++---
+ fs/f2fs/super.c   | 16 ++++++++--------
+ 5 files changed, 27 insertions(+), 24 deletions(-)
 
-I only hit below warning during por_fsstress test on image w/o compression.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index e7208442d32a..61d62cd06449 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1391,7 +1391,10 @@ struct f2fs_sb_info {
+ 	struct f2fs_mount_info mount_opt;	/* mount options */
+ 
+ 	/* for cleaning operations */
+-	struct mutex gc_mutex;			/* mutex for GC */
++	struct rw_semaphore gc_lock;		/*
++						 * semaphore for GC, avoid
++						 * race between GC and GC or CP
++						 */
+ 	struct f2fs_gc_kthread	*gc_thread;	/* GC thread */
+ 	unsigned int cur_victim_sec;		/* current victim section num */
+ 	unsigned int gc_mode;			/* current GC state */
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 0dff22566a1d..86ddbb55d2b1 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1642,7 +1642,7 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+ next_alloc:
+ 		if (has_not_enough_free_secs(sbi, 0,
+ 			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
+-			mutex_lock(&sbi->gc_mutex);
++			down_write(&sbi->gc_lock);
+ 			err = f2fs_gc(sbi, true, false, NULL_SEGNO);
+ 			if (err && err != -ENODATA && err != -EAGAIN)
+ 				goto out_err;
+@@ -2450,12 +2450,12 @@ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
+ 		return ret;
+ 
+ 	if (!sync) {
+-		if (!mutex_trylock(&sbi->gc_mutex)) {
++		if (!down_write_trylock(&sbi->gc_lock)) {
+ 			ret = -EBUSY;
+ 			goto out;
+ 		}
+ 	} else {
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 	}
+ 
+ 	ret = f2fs_gc(sbi, sync, true, NULL_SEGNO);
+@@ -2493,12 +2493,12 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
+ 
+ do_more:
+ 	if (!range.sync) {
+-		if (!mutex_trylock(&sbi->gc_mutex)) {
++		if (!down_write_trylock(&sbi->gc_lock)) {
+ 			ret = -EBUSY;
+ 			goto out;
+ 		}
+ 	} else {
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 	}
+ 
+ 	ret = f2fs_gc(sbi, range.sync, true, GET_SEGNO(sbi, range.start));
+@@ -2929,7 +2929,7 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
+ 	end_segno = min(start_segno + range.segments, dev_end_segno);
+ 
+ 	while (start_segno < end_segno) {
+-		if (!mutex_trylock(&sbi->gc_mutex)) {
++		if (!down_write_trylock(&sbi->gc_lock)) {
+ 			ret = -EBUSY;
+ 			goto out;
+ 		}
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index c43181ef98c4..67eca7c2d983 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -78,18 +78,18 @@ static int gc_thread_func(void *data)
+ 		 */
+ 		if (sbi->gc_mode == GC_URGENT) {
+ 			wait_ms = gc_th->urgent_sleep_time;
+-			mutex_lock(&sbi->gc_mutex);
++			down_write(&sbi->gc_lock);
+ 			goto do_gc;
+ 		}
+ 
+-		if (!mutex_trylock(&sbi->gc_mutex)) {
++		if (!down_write_trylock(&sbi->gc_lock)) {
+ 			stat_other_skip_bggc_count(sbi);
+ 			goto next;
+ 		}
+ 
+ 		if (!is_idle(sbi, GC_TIME)) {
+ 			increase_sleep_time(gc_th, &wait_ms);
+-			mutex_unlock(&sbi->gc_mutex);
++			up_write(&sbi->gc_lock);
+ 			stat_io_skip_bggc_count(sbi);
+ 			goto next;
+ 		}
+@@ -1370,7 +1370,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+ 				reserved_segments(sbi),
+ 				prefree_segments(sbi));
+ 
+-	mutex_unlock(&sbi->gc_mutex);
++	up_write(&sbi->gc_lock);
+ 
+ 	put_gc_inode(&gc_list);
+ 
+@@ -1409,9 +1409,9 @@ static int free_segment_range(struct f2fs_sb_info *sbi, unsigned int start,
+ 			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+ 		};
+ 
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 		do_garbage_collect(sbi, segno, &gc_list, FG_GC);
+-		mutex_unlock(&sbi->gc_mutex);
++		up_write(&sbi->gc_lock);
+ 		put_gc_inode(&gc_list);
+ 
+ 		if (get_valid_blocks(sbi, segno, true))
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 311fe4937f6a..6d03b89242f5 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -504,7 +504,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+ 	 * dir/node pages without enough free segments.
+ 	 */
+ 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 		f2fs_gc(sbi, false, false, NULL_SEGNO);
+ 	}
+ }
+@@ -2860,9 +2860,9 @@ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range)
+ 	if (sbi->discard_blks == 0)
+ 		goto out;
+ 
+-	mutex_lock(&sbi->gc_mutex);
++	down_write(&sbi->gc_lock);
+ 	err = f2fs_write_checkpoint(sbi, &cpc);
+-	mutex_unlock(&sbi->gc_mutex);
++	up_write(&sbi->gc_lock);
+ 	if (err)
+ 		goto out;
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 593dc3d2b80b..65a7a432dfee 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1238,9 +1238,9 @@ int f2fs_sync_fs(struct super_block *sb, int sync)
+ 
+ 		cpc.reason = __get_cp_reason(sbi);
+ 
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 		err = f2fs_write_checkpoint(sbi, &cpc);
+-		mutex_unlock(&sbi->gc_mutex);
++		up_write(&sbi->gc_lock);
+ 	}
+ 	f2fs_trace_ios(NULL, 1);
+ 
+@@ -1621,7 +1621,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 	f2fs_update_time(sbi, DISABLE_TIME);
+ 
+ 	while (!f2fs_time_over(sbi, DISABLE_TIME)) {
+-		mutex_lock(&sbi->gc_mutex);
++		down_write(&sbi->gc_lock);
+ 		err = f2fs_gc(sbi, true, false, NULL_SEGNO);
+ 		if (err == -ENODATA) {
+ 			err = 0;
+@@ -1643,7 +1643,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 		goto restore_flag;
+ 	}
+ 
+-	mutex_lock(&sbi->gc_mutex);
++	down_write(&sbi->gc_lock);
+ 	cpc.reason = CP_PAUSE;
+ 	set_sbi_flag(sbi, SBI_CP_DISABLED);
+ 	err = f2fs_write_checkpoint(sbi, &cpc);
+@@ -1655,7 +1655,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 	spin_unlock(&sbi->stat_lock);
+ 
+ out_unlock:
+-	mutex_unlock(&sbi->gc_mutex);
++	up_write(&sbi->gc_lock);
+ restore_flag:
+ 	sbi->sb->s_flags = s_flags;	/* Restore MS_RDONLY status */
+ 	return err;
+@@ -1663,12 +1663,12 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ {
+-	mutex_lock(&sbi->gc_mutex);
++	down_write(&sbi->gc_lock);
+ 	f2fs_dirty_to_prefree(sbi);
+ 
+ 	clear_sbi_flag(sbi, SBI_CP_DISABLED);
+ 	set_sbi_flag(sbi, SBI_IS_DIRTY);
+-	mutex_unlock(&sbi->gc_mutex);
++	up_write(&sbi->gc_lock);
+ 
+ 	f2fs_sync_fs(sbi->sb, 1);
+ }
+@@ -3398,7 +3398,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 
+ 	/* init f2fs-specific super block info */
+ 	sbi->valid_super_block = valid_super_block;
+-	mutex_init(&sbi->gc_mutex);
++	init_rwsem(&sbi->gc_lock);
+ 	mutex_init(&sbi->writepages);
+ 	mutex_init(&sbi->cp_mutex);
+ 	mutex_init(&sbi->resize_mutex);
+-- 
+2.18.0.rc1
 
-------------[ cut here ]------------
-WARNING: CPU: 10 PID: 33483 at fs/fs-writeback.c:1448 __writeback_single_inode+0x28c/0x340
-Call Trace:
- writeback_single_inode+0xad/0x120
- sync_inode_metadata+0x3d/0x60
- f2fs_sync_inode_meta+0x90/0xe0 [f2fs]
- block_operations+0x17c/0x360 [f2fs]
- f2fs_write_checkpoint+0x101/0xff0 [f2fs]
- f2fs_sync_fs+0xa8/0x130 [f2fs]
- f2fs_do_sync_file+0x19c/0x880 [f2fs]
- do_fsync+0x38/0x60
- __x64_sys_fsync+0x10/0x20
- do_syscall_64+0x5f/0x220
- entry_SYSCALL_64_after_hwframe+0x44/0xa9
-
-Thanks,
-
-> 
-> Thanks,
-> 
->>
->> Thanks,
->>
->>>
->>>>
->>>> >From bb17d7d77fe0b8a3e3632a7026550800ab9609e9 Mon Sep 17 00:00:00 2001
->>>> From: Chao Yu <yuchao0@huawei.com>
->>>> Date: Sat, 11 Jan 2020 16:58:20 +0800
->>>> Subject: [PATCH] f2fs: compress: fix f2fs_put_rpages_mapping()
->>>>
->>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>> ---
->>>>  fs/f2fs/compress.c | 30 +++++++++++++++---------------
->>>>  1 file changed, 15 insertions(+), 15 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>> index 502cd0ddc2a7..5c6a31d84ce4 100644
->>>> --- a/fs/f2fs/compress.c
->>>> +++ b/fs/f2fs/compress.c
->>>> @@ -74,18 +74,10 @@ static void f2fs_put_compressed_page(struct page *page)
->>>>  }
->>>>
->>>>  static void f2fs_drop_rpages(struct compress_ctx *cc,
->>>> -		struct address_space *mapping, int len, bool unlock)
->>>> +					int len, bool unlock)
->>>>  {
->>>>  	unsigned int i;
->>>>  	for (i = 0; i < len; i++) {
->>>> -		if (mapping) {
->>>> -			pgoff_t start = start_idx_of_cluster(cc);
->>>> -			struct page *page = find_get_page(mapping, start + i);
->>>> -
->>>> -			put_page(page);
->>>> -			put_page(page);
->>>> -			cc->rpages[i] = NULL;
->>>> -		}
->>>>  		if (!cc->rpages[i])
->>>>  			continue;
->>>>  		if (unlock)
->>>> @@ -97,18 +89,25 @@ static void f2fs_drop_rpages(struct compress_ctx *cc,
->>>>
->>>>  static void f2fs_put_rpages(struct compress_ctx *cc)
->>>>  {
->>>> -	f2fs_drop_rpages(cc, NULL, cc->cluster_size, false);
->>>> +	f2fs_drop_rpages(cc, cc->cluster_size, false);
->>>>  }
->>>>
->>>>  static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
->>>>  {
->>>> -	f2fs_drop_rpages(cc, NULL, len, true);
->>>> +	f2fs_drop_rpages(cc, len, true);
->>>>  }
->>>>
->>>>  static void f2fs_put_rpages_mapping(struct compress_ctx *cc,
->>>> -				struct address_space *mapping, int len)
->>>> +				struct address_space *mapping,
->>>> +				pgoff_t start, int len)
->>>>  {
->>>> -	f2fs_drop_rpages(cc, mapping, len, false);
->>>> +	int i;
->>>> +	for (i = 0; i < len; i++) {
->>>> +		struct page *page = find_get_page(mapping, start + i);
->>>> +
->>>> +		put_page(page);
->>>> +		put_page(page);
->>>> +	}
->>>>  }
->>>>
->>>>  static void f2fs_put_rpages_wbc(struct compress_ctx *cc,
->>>> @@ -680,7 +679,8 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
->>>>
->>>>  		if (!PageUptodate(page)) {
->>>>  			f2fs_unlock_rpages(cc, i + 1);
->>>> -			f2fs_put_rpages_mapping(cc, mapping, cc->cluster_size);
->>>> +			f2fs_put_rpages_mapping(cc, mapping, start_idx,
->>>> +					cc->cluster_size);
->>>>  			f2fs_destroy_compress_ctx(cc);
->>>>  			goto retry;
->>>>  		}
->>>> @@ -714,7 +714,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
->>>>  unlock_pages:
->>>>  	f2fs_unlock_rpages(cc, i);
->>>>  release_pages:
->>>> -	f2fs_put_rpages_mapping(cc, mapping, i);
->>>> +	f2fs_put_rpages_mapping(cc, mapping, start_idx, i);
->>>>  	f2fs_destroy_compress_ctx(cc);
->>>>  	return ret;
->>>>  }
->>>> -- 
->>>> 2.18.0.rc1
->>>>
->>>>
->>>>
->>>>>
->>>>> One another fix in f2fs-tools as well.
->>>>> https://github.com/jaegeuk/f2fs-tools
->>>>>
->>>>>>
->>>>>>>
->>>>>>> Thanks,
->>>>> .
->>>>>
->>> .
->>>
-> .
-> 
 
 
 _______________________________________________
