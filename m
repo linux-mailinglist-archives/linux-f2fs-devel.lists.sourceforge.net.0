@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 614E813E4F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:11:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 831C713E4FD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:12:07 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1is8gN-0003Hb-4z; Thu, 16 Jan 2020 17:11:47 +0000
+	id 1is8gg-0003JA-7f; Thu, 16 Jan 2020 17:12:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1is8gJ-0003HP-0m
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:43 +0000
+ (envelope-from <sashal@kernel.org>) id 1is8ge-0003J0-OT
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:12:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iyYL2Mv1uMGnYJNtFU6pJqIBtdXfAlwieZjkuLn2wmA=; b=NJ3GeGR5/taTysTKiFFH8RwOpu
- IvA3NYJeLa8NalgLaO4TiGfXa/VpDa8q5Us1WRS/q+VRV/frO116j4PxlgZFE9q2l/At/XCPknDTD
- X7IeAgqwItzfrugT6e9uiiRwp+6AYibwfJ8bZxdcbZ2cqzQYY1giUvvb3k3OfZyBog1c=;
+ bh=ZHFlC7H3u+HxnSJk9H8fbvKceWoZ7YM5WZEw53E6dGY=; b=l/E/LuIfWEMj+f2bQ+y6uMZWGK
+ Mo3wEqQtFdmPmafvYeFbnVXYMhWKJ8Fjlw84jhpGVuW5j7dVt0jLZWw5r8a9mlg2esEmc1VFQVuKW
+ aRSkOgbq6SKmghKhk4hdF7UGQoH0OGLke7nY0BB/a7GfV6aF6UkENi4p3rOyE0T1eG+Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iyYL2Mv1uMGnYJNtFU6pJqIBtdXfAlwieZjkuLn2wmA=; b=LID2Ec+2xo3WlVP0U+HpENh0UN
- Ifs8hhl5iEH8fOEjasU1ecluANOKHzXMG5yUKmIpMNJRit2qL1uZdt4H/TZF0NMwahI4fecj9BTiO
- ihgMYnNk6pynD5ngdL6YHLkGvmhc0HZyrCbJ2zuNWgrisR/R5f/Vu6loAPONNGjWfTaM=;
+ bh=ZHFlC7H3u+HxnSJk9H8fbvKceWoZ7YM5WZEw53E6dGY=; b=cAvucNwhtEKZzFLZXveoOTG226
+ EbZOUxgeazcMkJ4Fv5FeeWrDxV0EWtTC+2615yvUBQHbQlq3qZoRWIuabySqJ5VP9Yk9uQtVHn0oO
+ g3jDeH1LvySf/B2N1XOHJYU4ECoVecCtXHYGB2LRSIjtdEHTFFZU+h5clkoETA3wg6+U=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1is8gI-009YLw-0W
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:42 +0000
+ id 1is8gd-006kZV-Kc
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:12:04 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C20A224684;
- Thu, 16 Jan 2020 17:11:35 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5925524696;
+ Thu, 16 Jan 2020 17:11:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579194696;
- bh=NFOghJbHZHRuK3J9I5B8sv+qIgsl9qZfGJ1OMUcIJgI=;
+ s=default; t=1579194718;
+ bh=82bJvPDnc5G4xgw16Uc87CO0wdYNO9sE+vaqbaDhJas=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qibb/8vZC3PHhdTXoTUpwL8763VxX7mx9o44L28Tov/57oBrlAFZ10q3QwLxgF5gN
- o0rokLaJyqvUrfA4PYO4wtVwXwZ+X3OG7mLlQEvW1a6j/NMwze3SbVwqRJvRpz0bWu
- oABm5XWSaLEfCit6Xg1MV8jhOZBrX0n/ch4Y9Kmo=
+ b=Pupw2R84sojUTP7T7avYluQoBBQnbTfUyrWIqKu2FWTD4nvP63safLWrdITKm10w3
+ brlbqVY29cX2Pbkc2X+5OYLJWKJ+vY0IcIiuJEm79Ea/qTYbHNhddg5LfY4huaSehD
+ gn6uPjHAaW475k6M/KvoDWf19LGnESgmk8oWqFwY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 16 Jan 2020 12:02:55 -0500
-Message-Id: <20200116170509.12787-274-sashal@kernel.org>
+Date: Thu, 16 Jan 2020 12:03:12 -0500
+Message-Id: <20200116170509.12787-291-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200116170509.12787-1-sashal@kernel.org>
 References: <20200116170509.12787-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1is8gI-009YLw-0W
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 537/671] f2fs: fix error path of
- f2fs_convert_inline_page()
+X-Headers-End: 1is8gd-006kZV-Kc
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 554/671] f2fs: fix to avoid
+ accessing uninitialized field of inode page in is_alive()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,31 +99,70 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit e8c82c11c93d586d03d80305959527bcac383555 ]
+[ Upstream commit 98194030554cd9b10568a9b58f5a135c7e7cba85 ]
 
-In error path of f2fs_convert_inline_page(), we missed to truncate newly
-reserved block in .i_addrs[0] once we failed in get_node_info(), fix it.
+If inode is newly created, inode page may not synchronize with inode cache,
+so fields like .i_inline or .i_extra_isize could be wrong, in below call
+path, we may access such wrong fields, result in failing to migrate valid
+target block.
 
-Fixes: 7735730d39d7 ("f2fs: fix to propagate error from __get_meta_page()")
+Thread A				Thread B
+- f2fs_create
+ - f2fs_add_link
+  - f2fs_add_dentry
+   - f2fs_init_inode_metadata
+    - f2fs_add_inline_entry
+     - f2fs_new_inode_page
+     - f2fs_put_page
+     : inode page wasn't updated with inode cache
+					- gc_data_segment
+					 - is_alive
+					  - f2fs_get_node_page
+					  - datablock_addr
+					   - offset_in_addr
+					   : access uninitialized fields
+
+Fixes: 7a2af766af15 ("f2fs: enhance on-disk inode structure scalability")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/inline.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/f2fs/dir.c    | 5 +++++
+ fs/f2fs/inline.c | 5 +++++
+ 2 files changed, 10 insertions(+)
 
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index cd611a57d04d..8692cfa89a1c 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -572,6 +572,11 @@ int f2fs_add_regular_entry(struct inode *dir, const struct qstr *new_name,
+ 
+ 	if (inode) {
+ 		f2fs_i_pino_write(inode, dir->i_ino);
++
++		/* synchronize inode page's data from inode cache */
++		if (is_inode_flag_set(inode, FI_NEW_INODE))
++			f2fs_update_inode(inode, page);
++
+ 		f2fs_put_page(page, 1);
+ 	}
+ 
 diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 6bbb5f6801e2..3fe0dd531390 100644
+index 3fe0dd531390..c1ba29d10789 100644
 --- a/fs/f2fs/inline.c
 +++ b/fs/f2fs/inline.c
-@@ -133,6 +133,7 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
- 
- 	err = f2fs_get_node_info(fio.sbi, dn->nid, &ni);
- 	if (err) {
-+		f2fs_truncate_data_blocks_range(dn, 1);
- 		f2fs_put_dnode(dn);
- 		return err;
+@@ -578,6 +578,11 @@ int f2fs_add_inline_entry(struct inode *dir, const struct qstr *new_name,
+ 	/* we don't need to mark_inode_dirty now */
+ 	if (inode) {
+ 		f2fs_i_pino_write(inode, dir->i_ino);
++
++		/* synchronize inode page's data from inode cache */
++		if (is_inode_flag_set(inode, FI_NEW_INODE))
++			f2fs_update_inode(inode, page);
++
+ 		f2fs_put_page(page, 1);
  	}
+ 
 -- 
 2.20.1
 
