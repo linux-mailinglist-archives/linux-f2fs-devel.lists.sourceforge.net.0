@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F2D313E4ED
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:11:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 614E813E4F0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:11:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1is8gL-0005ha-5X; Thu, 16 Jan 2020 17:11:45 +0000
+	id 1is8gN-0003Hb-4z; Thu, 16 Jan 2020 17:11:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1is8gH-0005gq-VV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:41 +0000
+ (envelope-from <sashal@kernel.org>) id 1is8gJ-0003HP-0m
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gt1rW0Gjh+8oG/OoELAAhmoYS/XE27p0Mjb1xhtq9eA=; b=FvkoyfSNrbOLnWyAQyOQZmqmJN
- S+2dvIbQWdOHDdq72ml2AMbVGV4D3nDEAmYKzfv44dnqXAXB0zjykWpfs77RU/0NC6M5tjMA2K/Sg
- 0X6LRbaFjWtGKxGSUAco17LVwQJsnKh22v9wTrPhcMKhMTWu/nJVGUgCsf/8VJUrnGCE=;
+ bh=iyYL2Mv1uMGnYJNtFU6pJqIBtdXfAlwieZjkuLn2wmA=; b=NJ3GeGR5/taTysTKiFFH8RwOpu
+ IvA3NYJeLa8NalgLaO4TiGfXa/VpDa8q5Us1WRS/q+VRV/frO116j4PxlgZFE9q2l/At/XCPknDTD
+ X7IeAgqwItzfrugT6e9uiiRwp+6AYibwfJ8bZxdcbZ2cqzQYY1giUvvb3k3OfZyBog1c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gt1rW0Gjh+8oG/OoELAAhmoYS/XE27p0Mjb1xhtq9eA=; b=Aad/nyjwoxbVcYge6g3TdA2PjY
- CvbOVZ0gWK9uhJa6i61HyEukEsxx5aRo7gnuTaIM33gRfzRcUVZI7cHDm/L0VZTYrBrDRYx8yvZco
- 8VqBAT/V3+mPKwTpmT1fDHY2hGdDqmCjZOq30g0zFRIEvXqIIopPPIKbTeBBHwoRJwfc=;
+ bh=iyYL2Mv1uMGnYJNtFU6pJqIBtdXfAlwieZjkuLn2wmA=; b=LID2Ec+2xo3WlVP0U+HpENh0UN
+ Ifs8hhl5iEH8fOEjasU1ecluANOKHzXMG5yUKmIpMNJRit2qL1uZdt4H/TZF0NMwahI4fecj9BTiO
+ ihgMYnNk6pynD5ngdL6YHLkGvmhc0HZyrCbJ2zuNWgrisR/R5f/Vu6loAPONNGjWfTaM=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1is8gG-009YLn-Tm
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:41 +0000
+ id 1is8gI-009YLw-0W
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:11:42 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A2DDE24694;
- Thu, 16 Jan 2020 17:11:34 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C20A224684;
+ Thu, 16 Jan 2020 17:11:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579194695;
- bh=DR32DR8d4K1wA9tfWglrMCeUfYTQwAn8k8OglQZW2Ew=;
+ s=default; t=1579194696;
+ bh=NFOghJbHZHRuK3J9I5B8sv+qIgsl9qZfGJ1OMUcIJgI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=XijFdajCpD7HRnwjvT3UCusY80rsZ7TRGe0+wqvy/bMG0cR9nS8AfX73ydvSnxVFG
- bm0ADqUpjF8sxuKLYiy/NCdF1qUAznAm3l0b1798aHDnuYd129QHfPjyHNs+4GlypK
- mCt4abNYy8JHn0Q0XYc0x0zyBn8CYJ2qI14ICtkU=
+ b=qibb/8vZC3PHhdTXoTUpwL8763VxX7mx9o44L28Tov/57oBrlAFZ10q3QwLxgF5gN
+ o0rokLaJyqvUrfA4PYO4wtVwXwZ+X3OG7mLlQEvW1a6j/NMwze3SbVwqRJvRpz0bWu
+ oABm5XWSaLEfCit6Xg1MV8jhOZBrX0n/ch4Y9Kmo=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 16 Jan 2020 12:02:54 -0500
-Message-Id: <20200116170509.12787-273-sashal@kernel.org>
+Date: Thu, 16 Jan 2020 12:02:55 -0500
+Message-Id: <20200116170509.12787-274-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200116170509.12787-1-sashal@kernel.org>
 References: <20200116170509.12787-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1is8gG-009YLn-Tm
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 536/671] f2fs: fix wrong error
- injection path in inc_valid_block_count()
+X-Headers-End: 1is8gI-009YLw-0W
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 537/671] f2fs: fix error path of
+ f2fs_convert_inline_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,41 +99,31 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 9ea2f0be6ceaebae1518a5f897cff2645830dd95 ]
+[ Upstream commit e8c82c11c93d586d03d80305959527bcac383555 ]
 
-If FAULT_BLOCK type error injection is on, in inc_valid_block_count()
-we may decrease sbi->alloc_valid_block_count percpu stat count
-incorrectly, fix it.
+In error path of f2fs_convert_inline_page(), we missed to truncate newly
+reserved block in .i_addrs[0] once we failed in get_node_info(), fix it.
 
-Fixes: 36b877af7992 ("f2fs: Keep alloc_valid_block_count in sync")
+Fixes: 7735730d39d7 ("f2fs: fix to propagate error from __get_meta_page()")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ fs/f2fs/inline.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 72d154e71bb5..6b5b685af599 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1701,7 +1701,7 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 	if (time_to_inject(sbi, FAULT_BLOCK)) {
- 		f2fs_show_injection_info(FAULT_BLOCK);
- 		release = *count;
--		goto enospc;
-+		goto release_quota;
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 6bbb5f6801e2..3fe0dd531390 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -133,6 +133,7 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
+ 
+ 	err = f2fs_get_node_info(fio.sbi, dn->nid, &ni);
+ 	if (err) {
++		f2fs_truncate_data_blocks_range(dn, 1);
+ 		f2fs_put_dnode(dn);
+ 		return err;
  	}
- 
- 	/*
-@@ -1741,6 +1741,7 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
- 
- enospc:
- 	percpu_counter_sub(&sbi->alloc_valid_block_count, release);
-+release_quota:
- 	dquot_release_reservation_block(inode, release);
- 	return -ENOSPC;
- }
 -- 
 2.20.1
 
