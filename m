@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 114F113E828
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:30:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CD5A13EA06
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:41:48 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1is8yt-00045f-2q; Thu, 16 Jan 2020 17:30:55 +0000
+	id 1is99M-0003A5-TF; Thu, 16 Jan 2020 17:41:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1is8ys-00045W-KS
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:30:54 +0000
+ (envelope-from <sashal@kernel.org>) id 1is99K-00039W-Ew
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:41:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VO7ef8Jvmt8Ft+aVemlUXqZeJaLp0SQN50+ySqMGQn8=; b=VeR+kGpbUmn1ycf5VxzBOTOxnw
- /GbMBagZHAtZ6vIJ5URw5X1s056eWW6PFrTKg0AdXtJ5rBNjJJYN7pAEbJL+gqh3M3z5OIg6rr+FA
- cmq1UHlL/wGL90H9Lmz92/8dM39MzZK3BzKzqmmQl7RfRbnZEl7iJephQmxQLp8DvSTU=;
+ bh=8eIAsw1CDytLGtTmwsUE5JueBfeQ/jDBlPvjLorfjTo=; b=HdkI26YgwGJmhmTz04Y5gp//Cz
+ 9yFjHVRagipwZKWN+JWEAej1vpRPa7+L7lWErEz2QHE2qU67s+KTDx91ZOya4IQDR5wmSHTAC6UT2
+ DcS2US92I4d0KqQeWXekBIutZ8yh9FXStWVexBM6s725B8bCRG6a1ayZW4Ls+lR7JrrU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VO7ef8Jvmt8Ft+aVemlUXqZeJaLp0SQN50+ySqMGQn8=; b=mMNc/8hvmw7IT4McuCxeT7j/4/
- y196uRU9dsn4OJe5Q5JRjL3FLjP6fWD/ImstpLgXHN1O5qOMdZjSZKZUM2lX6bBUNrnjBgwvN/zLK
- sSJkaW+0EglpLdjpI0FIWNMUWJcoEESp1z8jjnufirgIAJwWjJAJVfeCmJSHR/c6w3DI=;
+ bh=8eIAsw1CDytLGtTmwsUE5JueBfeQ/jDBlPvjLorfjTo=; b=k4eNSluEpw2+nXQPNztyAFFGwv
+ ek6uqlSKwXi+/KW66t91fqcKWd1nuwicCBq6xoZ9CezFisJyiuAa3DglBz9q5bFqSzHS7+14/kipi
+ xn0i5rOd8KNGnV3HpWbmGHmxVtq4OPGRdsFG3/6FlURAjDCIT13ZIrFpgYvQk8ZxVuys=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1is8yr-006mpO-Gi
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:30:54 +0000
+ id 1is99J-006leY-4u
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:41:42 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DD87E20728;
- Thu, 16 Jan 2020 17:30:46 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D5D7124724;
+ Thu, 16 Jan 2020 17:41:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579195847;
- bh=6ToXo0U8rBrgbvu3xP30vvqRqWu7VCADypBze9Uf9o4=;
+ s=default; t=1579196495;
+ bh=lqrIGMuhw2YUdZMNtbC+hPhbBIxoi+KdmiQHRp4jedg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sbjsbkn6enfDlNX+M1NIt8dyCvcIgvwun4qoGkDzlOVpHoVCMVc/RcaR13eU5G1cQ
- X34giu429kOKqnDkrLr1TcO0ZHjNVYljaVAAT3EJHizJkSKEWNfL2sjiAH6g2v8PpO
- QVN8Up9Iy3i8m5FLIc5iFUlYyQvWOCXnOT1Fvnk8=
+ b=g9jQsq3oUg98Ms9bAlSSyZT8Oq914S6Dp5Rsba9Mj4AlRb7UahjKvqGg0XBM4lTGg
+ wMngyNGbV6QeCxY4CTD7B3lXS/qRFrQVUqKGChcN/ktmZUwFQludX9U216hVHtfrWB
+ uBekmljBfm07mk1b6tZpu5w59sN8/x9dqgWg6RVE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 16 Jan 2020 12:23:40 -0500
-Message-Id: <20200116172403.18149-291-sashal@kernel.org>
+Date: Thu, 16 Jan 2020 12:36:27 -0500
+Message-Id: <20200116173641.22137-198-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200116172403.18149-1-sashal@kernel.org>
-References: <20200116172403.18149-1-sashal@kernel.org>
+In-Reply-To: <20200116173641.22137-1-sashal@kernel.org>
+References: <20200116173641.22137-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,8 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1is8yr-006mpO-Gi
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 348/371] f2fs: fix potential overflow
+X-Headers-End: 1is99J-006leY-4u
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.9 238/251] f2fs: fix potential overflow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,10 +124,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index ac3fa4bbed2d..afe7dcfff036 100644
+index 0206c8c20784..b2cccd4083b8 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1512,7 +1512,7 @@ static int __write_data_page(struct page *page, bool *submitted,
+@@ -1267,7 +1267,7 @@ static int f2fs_write_data_page(struct page *page,
  	loff_t i_size = i_size_read(inode);
  	const pgoff_t end_index = ((unsigned long long) i_size)
  							>> PAGE_SHIFT;
@@ -137,10 +137,10 @@ index ac3fa4bbed2d..afe7dcfff036 100644
  	bool need_balance_fs = false;
  	int err = 0;
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index a90173b856f6..d98acc20a38a 100644
+index f46ac1651bd5..e3c438c8b8ce 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -1059,7 +1059,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
+@@ -980,7 +980,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
  				}
  				dn.ofs_in_node++;
  				i++;
