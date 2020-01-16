@@ -2,72 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD5A13EA06
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 18:41:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 659A413F8C6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jan 2020 20:21:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1is99M-0003A5-TF; Thu, 16 Jan 2020 17:41:44 +0000
+	id 1isAhf-0000dW-CA; Thu, 16 Jan 2020 19:21:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1is99K-00039W-Ew
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:41:42 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1isAhe-0000dP-CZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 19:21:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8eIAsw1CDytLGtTmwsUE5JueBfeQ/jDBlPvjLorfjTo=; b=HdkI26YgwGJmhmTz04Y5gp//Cz
- 9yFjHVRagipwZKWN+JWEAej1vpRPa7+L7lWErEz2QHE2qU67s+KTDx91ZOya4IQDR5wmSHTAC6UT2
- DcS2US92I4d0KqQeWXekBIutZ8yh9FXStWVexBM6s725B8bCRG6a1ayZW4Ls+lR7JrrU=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8eIAsw1CDytLGtTmwsUE5JueBfeQ/jDBlPvjLorfjTo=; b=k4eNSluEpw2+nXQPNztyAFFGwv
- ek6uqlSKwXi+/KW66t91fqcKWd1nuwicCBq6xoZ9CezFisJyiuAa3DglBz9q5bFqSzHS7+14/kipi
- xn0i5rOd8KNGnV3HpWbmGHmxVtq4OPGRdsFG3/6FlURAjDCIT13ZIrFpgYvQk8ZxVuys=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=tiVD/CWJAz6wUbslbVU5bSilCuVisNhM+BroVd9v+i4=; b=L7iZCZ96ydv+/OH9ROHTC5+2Ui
+ 78I14REQaOMmd+JRVVEH2scC9VFlIrDqWx4L6hsbr7hulz2qaGvaTSh7xU7M0BJcepiXR3ubNvWHt
+ FuvO0nKkMrGbHDkTU7QgGe8WT0uCIIPcOUk3KozUVFMB1Di/zt9j8F75fu8DlKLw8OjQ=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=tiVD/CWJAz6wUbslbVU5bSilCuVisNhM+BroVd9v+i4=; b=E
+ JTR6+n31bQ+6D10EJseiWHzCbrj/jCUiMNe+3tbPmGzkNJiBAgTTeiL25KiRBeX9X0p/YzAfyWZi4
+ Y0Hf53QHSi/wW1o7wseKaA0Xl79wHhrgPIhBUhNz6ZoOhFpAvEov8t5fhiV7672mGFGymOHr3ti09
+ 9hKMmaeCyhEvY/xY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1is99J-006leY-4u
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 17:41:42 +0000
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
+ id 1isAhc-009pPu-Qd
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jan 2020 19:21:14 +0000
+Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
+ [104.132.1.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D5D7124724;
- Thu, 16 Jan 2020 17:41:34 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1E2D820661;
+ Thu, 16 Jan 2020 19:21:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579196495;
- bh=lqrIGMuhw2YUdZMNtbC+hPhbBIxoi+KdmiQHRp4jedg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=g9jQsq3oUg98Ms9bAlSSyZT8Oq914S6Dp5Rsba9Mj4AlRb7UahjKvqGg0XBM4lTGg
- wMngyNGbV6QeCxY4CTD7B3lXS/qRFrQVUqKGChcN/ktmZUwFQludX9U216hVHtfrWB
- uBekmljBfm07mk1b6tZpu5w59sN8/x9dqgWg6RVE=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Thu, 16 Jan 2020 12:36:27 -0500
-Message-Id: <20200116173641.22137-198-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200116173641.22137-1-sashal@kernel.org>
-References: <20200116173641.22137-1-sashal@kernel.org>
+ s=default; t=1579202466;
+ bh=rUr1wlexBA7T5J5m/OSW8iFgPsbrK8hJ/8NOCZzbZK8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=2o/B2tfu8Tgm7+qJkztQ+IGIiSVLQQD4L+vz4mFLQQhxf/05CdxlNQXabL5dVTBRE
+ kEfexecpizCN0hk37ZSmvwuUVv+OLvaeWfK50X4ddeBfHKX66XFfOlGUhdJ4n1ut+1
+ uXug04sCgFEERthHjP/SNqZMkyCDOjxtcExOMNdA=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Thu, 16 Jan 2020 11:20:08 -0800
+Message-Id: <20200116192008.35766-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.25.0.rc1.283.g88dfdc4193-goog
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.5 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: googlesource.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -76,9 +71,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1is99J-006leY-4u
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.9 238/251] f2fs: fix potential overflow
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1isAhc-009pPu-Qd
+Subject: [f2fs-dev] [PATCH] fscrypt: reserve flags for hardware-wrapped keys
+ feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,67 +86,135 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Barani Muthukumaran <bmuthuku@codeaurora.org>,
+ Gaurav Kashyap <gaurkash@codeaurora.org>, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Eric Biggers <ebiggers@google.com>
 
-[ Upstream commit a9af3fdcc4258af406879eca63d82e9d6baa892e ]
+Reserve flags for the hardware-wrapped keys feature which is being
+worked on [1].  FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY will denote that the
+encryption policy needs a hardware-wrapped key to be unlocked.
+FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED will denote that the key being added is
+a hardware-wrapped key.
 
-In build_sit_entries(), if valid_blocks in SIT block is smaller than
-valid_blocks in journal, for below calculation:
+This reservation is tentative, and these codepoints may be reused if the
+feature is not upstreamed.
 
-sbi->discard_blks += old_valid_blocks - se->valid_blocks;
+[1] https://android-review.googlesource.com/c/kernel/common/+/1200864
 
-There will be two times potential overflow:
-- old_valid_blocks - se->valid_blocks will overflow, and be a very
-large number.
-- sbi->discard_blks += result will overflow again, comes out a correct
-result accidently.
-
-Anyway, it should be fixed.
-
-Fixes: d600af236da5 ("f2fs: avoid unneeded loop in build_sit_entries")
-Fixes: 1f43e2ad7bff ("f2fs: introduce CP_TRIMMED_FLAG to avoid unneeded discard")
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/data.c | 2 +-
- fs/f2fs/file.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ Documentation/filesystems/fscrypt.rst | 5 +++--
+ fs/crypto/keyring.c                   | 5 ++++-
+ fs/crypto/policy.c                    | 4 +++-
+ include/uapi/linux/fscrypt.h          | 9 ++++++---
+ 4 files changed, 16 insertions(+), 7 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 0206c8c20784..b2cccd4083b8 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1267,7 +1267,7 @@ static int f2fs_write_data_page(struct page *page,
- 	loff_t i_size = i_size_read(inode);
- 	const pgoff_t end_index = ((unsigned long long) i_size)
- 							>> PAGE_SHIFT;
--	loff_t psize = (page->index + 1) << PAGE_SHIFT;
-+	loff_t psize = (loff_t)(page->index + 1) << PAGE_SHIFT;
- 	unsigned offset = 0;
- 	bool need_balance_fs = false;
- 	int err = 0;
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index f46ac1651bd5..e3c438c8b8ce 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -980,7 +980,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
- 				}
- 				dn.ofs_in_node++;
- 				i++;
--				new_size = (dst + i) << PAGE_SHIFT;
-+				new_size = (loff_t)(dst + i) << PAGE_SHIFT;
- 				if (dst_inode->i_size < new_size)
- 					f2fs_i_size_write(dst_inode, new_size);
- 			} while (--ilen && (do_replace[i] || blkaddr[i] == NULL_ADDR));
+diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
+index 9c53336d06a438..4c443d7b1fc6b5 100644
+--- a/Documentation/filesystems/fscrypt.rst
++++ b/Documentation/filesystems/fscrypt.rst
+@@ -639,7 +639,8 @@ follows::
+             struct fscrypt_key_specifier key_spec;
+             __u32 raw_size;
+             __u32 key_id;
+-            __u32 __reserved[8];
++            __u32 flags;
++            __u32 __reserved[7];
+             __u8 raw[];
+     };
+ 
+@@ -658,7 +659,7 @@ follows::
+ 
+     struct fscrypt_provisioning_key_payload {
+             __u32 type;
+-            __u32 __reserved;
++            __u32 flags;
+             __u8 raw[];
+     };
+ 
+diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
+index 098ff2e0f0bb41..fc27f5d08d7dbe 100644
+--- a/fs/crypto/keyring.c
++++ b/fs/crypto/keyring.c
+@@ -477,7 +477,7 @@ static int fscrypt_provisioning_key_preparse(struct key_preparsed_payload *prep)
+ 	    payload->type != FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER)
+ 		return -EINVAL;
+ 
+-	if (payload->__reserved)
++	if (payload->flags)
+ 		return -EINVAL;
+ 
+ 	prep->payload.data[0] = kmemdup(payload, prep->datalen, GFP_KERNEL);
+@@ -606,6 +606,9 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
+ 	if (!valid_key_spec(&arg.key_spec))
+ 		return -EINVAL;
+ 
++	if (arg.flags)
++		return -EINVAL;
++
+ 	if (memchr_inv(arg.__reserved, 0, sizeof(arg.__reserved)))
+ 		return -EINVAL;
+ 
+diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
+index f1cff83c151acf..36a2bb077b6910 100644
+--- a/fs/crypto/policy.c
++++ b/fs/crypto/policy.c
+@@ -139,7 +139,9 @@ static bool fscrypt_supported_v2_policy(const struct fscrypt_policy_v2 *policy,
+ 		return false;
+ 	}
+ 
+-	if (policy->flags & ~FSCRYPT_POLICY_FLAGS_VALID) {
++	if (policy->flags & ~(FSCRYPT_POLICY_FLAGS_PAD_MASK |
++			      FSCRYPT_POLICY_FLAG_DIRECT_KEY |
++			      FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64)) {
+ 		fscrypt_warn(inode, "Unsupported encryption flags (0x%02x)",
+ 			     policy->flags);
+ 		return false;
+diff --git a/include/uapi/linux/fscrypt.h b/include/uapi/linux/fscrypt.h
+index 0d8a6f47711c32..fad624a4c5feda 100644
+--- a/include/uapi/linux/fscrypt.h
++++ b/include/uapi/linux/fscrypt.h
+@@ -19,7 +19,8 @@
+ #define FSCRYPT_POLICY_FLAGS_PAD_MASK		0x03
+ #define FSCRYPT_POLICY_FLAG_DIRECT_KEY		0x04
+ #define FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64	0x08
+-#define FSCRYPT_POLICY_FLAGS_VALID		0x0F
++#define FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY	0x10
++#define FSCRYPT_POLICY_FLAGS_VALID		0x1F
+ 
+ /* Encryption algorithms */
+ #define FSCRYPT_MODE_AES_256_XTS		1
+@@ -116,7 +117,7 @@ struct fscrypt_key_specifier {
+  */
+ struct fscrypt_provisioning_key_payload {
+ 	__u32 type;
+-	__u32 __reserved;
++	__u32 flags;
+ 	__u8 raw[];
+ };
+ 
+@@ -125,7 +126,9 @@ struct fscrypt_add_key_arg {
+ 	struct fscrypt_key_specifier key_spec;
+ 	__u32 raw_size;
+ 	__u32 key_id;
+-	__u32 __reserved[8];
++#define FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED			0x00000001
++	__u32 flags;
++	__u32 __reserved[7];
+ 	__u8 raw[];
+ };
+ 
+
+base-commit: 2d8f7f119b0b2ce5e7ff0e8024b0763bf42b99c9
 -- 
-2.20.1
+2.25.0.rc1.283.g88dfdc4193-goog
 
 
 
