@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F05E51404EF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Jan 2020 09:13:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5833C140580
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Jan 2020 09:32:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1isMkb-00086N-Sl; Fri, 17 Jan 2020 08:13:05 +0000
+	id 1isN3U-0000vt-SS; Fri, 17 Jan 2020 08:32:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+99029fa5cb4ba764ed81+5990+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1isMkZ-00086B-TH
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Jan 2020 08:13:03 +0000
+ id 1isN3P-0000v3-Rr
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Jan 2020 08:32:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t/MEhEZGYZHmMiJmrgugavb+9sNbSeK5h6oldhHUYs8=; b=ENTUXYqOKDRnzgDT+iWJxxDwB7
- 2cYbEgTQAzPEquJ8fy33y8aPLFyfN7w9wYw8dJTyebqiW/oNX6UPeqkfjH/OdRuvFTNL7zo2NQGGC
- wcqgrFz4ZMFNitfupeQQmfF/SYl0grdvXMuc6H3K2UaDZ8sqsg63ppjHcuSeT2CzBzkE=;
+ bh=Y9Ep/eeYbaIxxVmlhJEobd6cxmZ0LGEzXqlvP1MkkLE=; b=fGdOSlLJAIoX8TzC9iKT8G+Ili
+ vkRfRdWklKdP77905PZ9xvAt06AKVsOLhQwRLOzymQtKbPF8BtKAHxYsMPUWS2Th5FosWjL80B+Ue
+ 1G2kSRLSb4sN/vRaZwOrRiQSD30snt0cEXTVNfTeuNLM62STNVf16jtOYZ4teqs0tNXU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,36 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t/MEhEZGYZHmMiJmrgugavb+9sNbSeK5h6oldhHUYs8=; b=SLQxXx/Ut3FPTw1TwXpp2AtvAq
- 24Ou3SEHvzwqA3A2WxxSz4uU3Sp5en+L8sn2NOIXosq/HQlBG/E0+mG7pOy3ExcloRGWtYUXgWsGc
- 7vOynXcelrAKMtIAaQy6qxf7pKGH6M3hyS7XgN0A3xmJOR8sCcGwBJ1PRCL3NvmYDaZs=;
+ bh=Y9Ep/eeYbaIxxVmlhJEobd6cxmZ0LGEzXqlvP1MkkLE=; b=MbcjylPo0IHrOxYNtf6jMEZGtW
+ qAVyEF4Qg3U582RPpHiZT3dc8kQyFVkWFNeQW0Fq56W/+bJyaNM0l1BL77C6C74S+zrXBoHuFB02m
+ eu9vVL0n/yIu9MB3DfywukvW4yrcSWDmJfsw0/NG+KyAQInJbPuPUrkAwprCRKAiFUZw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1isMkV-00Au6s-19
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Jan 2020 08:13:03 +0000
+ id 1isN3O-00AvXa-Hb
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Jan 2020 08:32:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t/MEhEZGYZHmMiJmrgugavb+9sNbSeK5h6oldhHUYs8=; b=CBE9ZS2IjXbfrp+dvzcCM+LGx
- VZTVAlzWhocgiFF1/YMmGjxIEZ/q2YrWWmmFIXWh/MtSDaEomRJZPzpowabxJw89/lYJvFOTzFTTb
- 15FsRdHD+UhNq+yMNIqE7bJ/9sUrZRPyiROdXSxQUV2MrRQCGaVv5X8CQmhAVgkzbVpSH4VD9xgEw
- iF5qutl89oTzwNv6K7NqOg/xSVNQDjb6ZpF+V6bQvMfGdzQ1ssvAE0sran+0msDNQl8ksQNVInVZy
- xApRZDzdrqjxxSAQGgoFXJPwSY6UAjMCuLJ/t31A4nvFhJqqaVXPV4DQIITCBoAPMsluWWM4958TK
- MyV2DTmUQ==;
+ bh=Y9Ep/eeYbaIxxVmlhJEobd6cxmZ0LGEzXqlvP1MkkLE=; b=Tpb+CKn0VYnlSFFimCbPKAl7h
+ NZt0oWSreQSTUNdpWR/rpSkjPMbJwbLyrAXp0GXq85PtjBXoFw1Nb17SKs1nb5c+lJDtvebqaP6Nn
+ PJ3v9S6vdmcJ81DbbxbqxjY8815Mn4BGtmTDozpzMMRhnF1qTOr+AfAu59zqZPjRG2rgRvwDB1W3D
+ I35Kd62ZVVxFsEssqdYG5Ss2a9MA70WeqsGgU19KnbRkhtdLVkZ+munwtJYkhd/4VFVgZAJCn+Ed1
+ 8mVPnJ5nfpCrYyOiUTPWXC88Fl42EawWl32m5908L829v3FaylM7QIRNMMmEaG0oa96IcftbBfqbS
+ vmrXSPRBA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1isMkI-0004ao-RH; Fri, 17 Jan 2020 08:12:46 +0000
-Date: Fri, 17 Jan 2020 00:12:46 -0800
+ Hat Linux)) id 1isN3F-0004ZQ-RD; Fri, 17 Jan 2020 08:32:21 +0000
+Date: Fri, 17 Jan 2020 00:32:21 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200117081246.GA16846@infradead.org>
-References: <20200116192008.35766-1-ebiggers@kernel.org>
+Message-ID: <20200117083221.GA324@infradead.org>
+References: <20191218145136.172774-1-satyat@google.com>
+ <20191218145136.172774-3-satyat@google.com>
+ <20191218212116.GA7476@magnolia> <yq1y2v9e37b.fsf@oracle.com>
+ <20191218222726.GC47399@gmail.com> <yq1fthhdttv.fsf@oracle.com>
+ <20200108140730.GC2896@infradead.org>
+ <20200108172629.GA232722@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200116192008.35766-1-ebiggers@kernel.org>
+In-Reply-To: <20200108172629.GA232722@sol.localdomain>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.3 (/)
@@ -74,9 +79,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1isMkV-00Au6s-19
-Subject: Re: [f2fs-dev] [PATCH] fscrypt: reserve flags for hardware-wrapped
- keys feature
+X-Headers-End: 1isN3O-00AvXa-Hb
+Subject: Re: [f2fs-dev] [PATCH v6 2/9] block: Add encryption context to
+ struct bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,29 +93,85 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Barani Muthukumaran <bmuthuku@codeaurora.org>,
- Gaurav Kashyap <gaurkash@codeaurora.org>, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, linux-ext4@vger.kernel.org
+Cc: linux-block@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org,
+ "Darrick J. Wong" <darrick.wong@oracle.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>, Kim Boojin <boojin.kim@samsung.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Satya Tangirala <satyat@google.com>, Christoph Hellwig <hch@infradead.org>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 16, 2020 at 11:20:08AM -0800, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Reserve flags for the hardware-wrapped keys feature which is being
-> worked on [1].  FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY will denote that the
-> encryption policy needs a hardware-wrapped key to be unlocked.
-> FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED will denote that the key being added is
-> a hardware-wrapped key.
-> 
-> This reservation is tentative, and these codepoints may be reused if the
-> feature is not upstreamed.
+Hi Eric,
 
-NAK.  While the feature itself sounds really useful we don't just
-reserve format bits for code not upstream.
+On Wed, Jan 08, 2020 at 09:26:29AM -0800, Eric Biggers wrote:
+> The NVMe "key per I/O" draft is heavily flawed, and I don't think it will be
+> useful at all in the Linux kernel context.  The problem is that, as far as I
+> can tell, it doesn't allow the encryption algorithm and IVs to be selected,
+> or even standardized or made discoverable in any way.  It does say that
+> AES-256 must be supported, but it doesn't say which mode of operation (i.e.
+> it could be something inappropriate for disk encryption, like ECB), nor
+> does it say whether AES-256 has to be the default or not, and if it's not
+> the default how to discover that and select AES-256.
+
+I've talked to people involved with the TCG side of this spec, where
+all the interesting crypto happens.  Currently the plan is to support
+KMIP wrapper keys, which specify the exact algorithm and operation
+mode, and algorithms and modes for the initial version are planned to
+be AES 256/512 XTS.  I also had a chat with an involved person and
+they understand the principle that for the inline crypto to be trusted
+it needs to be interoperable with (trusted) software algorithms.  So
+I don't think it is all doom.
+
+> IV generation is also unspecified, so it
+> could be something insecure like always using the same IV.
+
+From talking to one of the initiators of the spec, no it is not intended
+to be unspecified, but indeed tied to the LBA (see below).
+
+> Also, since "key per I/O" won't allow selecting IVs, all the encrypted data will
+> be tied to its physical location on-disk.  That will make "key per I/O" unusable
+> in any case where encrypted blocks are moved without the key, e.g.
+> filesystem-level encryption on many filesystems.
+
+File systems don't move data around all that often (saying that with my
+fs developer hat on).  In traditional file systems only defragmentation
+will move data around, with extent refcounting it can also happen for
+dedup, and for file systems that write out of place data gets moved
+when parts of a block are rewritten, but in that case a read modify
+write cycle is perfomed in the Linux code anyway, so it will go through
+the inline encryption engined on the way and the way out.
+
+So in other words - specifying an IV would be useful for some use cases,
+but I don't think it is a deal blocker. Even without that is is useful
+for block device level encryption, and could have some usefulness for
+file system encryption usage.
+
+I think that adding an IV would eventually be useful, but fitting that
+into NVMe won't be easy, as you'd need to find a way to specify the IV
+for each submission queue entry, which requires growing it, or finding
+some way to extend it out of band.
+
+> I've already raised these concerns in the NVMe and TCG Storage working groups,
+> and the people working on it refused to make any changes, as they consider "key
+> per I/O" to be more akin to the TCG Opal self-encrypting drive specification,
+> and not actually intended to be "inline encryption".
+
+While I have my fair share of issues how the spec is developed that
+isn't my impression, and at least for the verifyable part I heard
+contrary statements.  Feel free to contact me offline to make sure we
+can move this into the right direction.
+
+> So let's not over-engineer this kernel patchset to support some broken
+> vaporware, please.
+
+Not sharing bio fields for integrity and encryption actually keeps
+the patchset simpler (although uses more memory if both options are
+enabled).  So my main point here is to not over engineer it for broken
+premise that won't be true soon.
 
 
 _______________________________________________
