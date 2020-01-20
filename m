@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BDFC143405
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 23:34:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0C6014340A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 23:34:37 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1itfcw-0001Zs-5S; Mon, 20 Jan 2020 22:34:34 +0000
+	id 1itfcy-0001aQ-I9; Mon, 20 Jan 2020 22:34:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1itfcs-0001Zd-PB
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 22:34:30 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1itfcx-0001aA-9S
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 22:34:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=27/66Nvm9lO3OX3J5wgRh3K2tHq3u3Wqi2t78kCSOWQ=; b=cGTPxc8DIKKboEaCrriLEf7PUU
- 3ASTtY0Rd5Yx4CRCqbsXRwLpySxfLdlf2tne/aXht7OT2dm/s8pqYSu09hRuCTyDM4Q4wfEzmIy7H
- YumP/qDporXPGTT2rVJY2mpbmC2uVYWiNPcNpiPRD0hO4HZHWc19tkI3d1tv9Ax9iP5U=;
+ bh=wgB++3ieq6AdT0o05Cl2/MRhzkH2oGAI+GMlWpJM9bU=; b=cNvbCAG9i2txhcEeTXkgFH16k0
+ IGrTnxnbK93lU8HRlkMg2HjhcIIR5Igin5cTFeIefjfG22/aykq2I/6QefCRRBmgDgGBvk+plBKw5
+ E5vQ92Y9hsmpyEbmhECBAcgdF91HjiUfl5R5VtJhd7wUkgPA6FD7C8dMRBNQl8dvpUns=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=27/66Nvm9lO3OX3J5wgRh3K2tHq3u3Wqi2t78kCSOWQ=; b=T6P0kszb8hPRQGD+GOnFhSpDTx
- OKT8fCfSnNLk8iVu59AMUoIvo7O488AUTVdT1sMSXdzGQLozwjnjOdNDmZAg9hX6fBlcAYnKQZJ6s
- bsREgBS6a/UeIHalvsnxvg5BBX6zZhh4HMi64pEl4bk/wCWgWB1HJ8cfhEQ7/W36aUmY=;
+ bh=wgB++3ieq6AdT0o05Cl2/MRhzkH2oGAI+GMlWpJM9bU=; b=SKEFnOHtQZ5yRvOLyXhTtWghHG
+ 6usrw4J3L3itd2QimgWHe3TQc01tkTQ6/lHmsxMHmNbiLw6A61ImrblNLUnb9EycmKmmuq2qgQYHc
+ jBtrthALAYP8h4ilLKh1u52XKvcSdubTYkutYPetYZlwaFxha60y7FfgZiyx4PgoJ8KE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1itfcp-00BrPI-Up
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 22:34:30 +0000
+ id 1itfcw-00Brhg-4K
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 22:34:35 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8125524125;
+ by mail.kernel.org (Postfix) with ESMTPSA id EE59C24654;
  Mon, 20 Jan 2020 22:34:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579559658;
- bh=z2Y0IHglkKCvSNW3HrTdG8/6BD+OKkO7hiP7aqvSJao=;
+ s=default; t=1579559659;
+ bh=a6AglMzuzSADbIykjFsh6WiXfUA9a8BSXSse5YpowJc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZB3SVJ8mSzoYzK9TQg1dPhopO5UVnGDpovyzD09WXgRSNwFHyvEGuEnJuXKB8QU0M
- PwAjhqcs/SkmEahZUDCqWX/w8vAfdZ7DzKFpXQHyzzwViiMZ8WwPjBUBOy2vdNNi/P
- /gzyfLaRHRr2ZdmVU0xfBIzVXnFBcyFDVqXiNG6M=
+ b=CxGsA6XSOH79/Ez1YYKFPwXEuecFLee2D4d34j5HPAbu0KJ494XC9qdVSW62bCxh/
+ gg3un57dpwbCJT0BoaNxddQ6mXy41R5m3H+nmpvn5XDzbEb64fyS8RSpBsVTkZZBTi
+ etgWdPATptkXqIamnw2Ms4bOtO2E8kcWZ4mwWCDc=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Mon, 20 Jan 2020 14:31:59 -0800
-Message-Id: <20200120223201.241390-5-ebiggers@kernel.org>
+Date: Mon, 20 Jan 2020 14:32:00 -0800
+Message-Id: <20200120223201.241390-6-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200120223201.241390-1-ebiggers@kernel.org>
 References: <20200120223201.241390-1-ebiggers@kernel.org>
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1itfcp-00BrPI-Up
-Subject: [f2fs-dev] [PATCH v5 4/6] ubifs: don't trigger assertion on invalid
- no-key filename
+X-Headers-End: 1itfcw-00Brhg-4K
+Subject: [f2fs-dev] [PATCH v5 5/6] ubifs: allow both hash and disk name to
+ be provided in no-key names
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,45 +95,73 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-If userspace provides an invalid fscrypt no-key filename which encodes a
-hash value with any of the UBIFS node type bits set (i.e. the high 3
-bits), gracefully report ENOENT rather than triggering ubifs_assert().
+In order to support a new dirhash method that is a secret-keyed hash
+over the plaintext filenames (which will be used by encrypted+casefolded
+directories on ext4 and f2fs), fscrypt will be switching to a new no-key
+name format that always encodes the dirhash in the name.
 
-Test case with kvm-xfstests shell:
+UBIFS isn't happy with this because it has assertions that verify that
+either the hash or the disk name is provided, not both.
 
-    . fs/ubifs/config
-    . ~/xfstests/common/encrypt
-    dev=$(__blkdev_to_ubi_volume /dev/vdc)
-    ubiupdatevol $dev -t
-    mount $dev /mnt -t ubifs
-    mkdir /mnt/edir
-    xfs_io -c set_encpolicy /mnt/edir
-    rm /mnt/edir/_,,,,,DAAAAAAAAAAAAAAAAAAAAAAAAAA
+Change it to use the disk name if one is provided, even if a hash is
+available too; else use the hash.
 
-With the bug, the following assertion fails on the 'rm' command:
-
-    [   19.066048] UBIFS error (ubi0:0 pid 379): ubifs_assert_failed: UBIFS assert failed: !(hash & ~UBIFS_S_KEY_HASH_MASK), in fs/ubifs/key.h:170
-
-Fixes: f4f61d2cc6d8 ("ubifs: Implement encrypted filenames")
-Cc: <stable@vger.kernel.org> # v4.10+
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ubifs/dir.c | 2 ++
- 1 file changed, 2 insertions(+)
+ fs/ubifs/dir.c     | 4 +---
+ fs/ubifs/journal.c | 4 ++--
+ fs/ubifs/key.h     | 1 -
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
-index 636c3222c2308..5f937226976a6 100644
+index 5f937226976a6..ef85ec167a843 100644
 --- a/fs/ubifs/dir.c
 +++ b/fs/ubifs/dir.c
-@@ -228,6 +228,8 @@ static struct dentry *ubifs_lookup(struct inode *dir, struct dentry *dentry,
- 	if (nm.hash) {
- 		ubifs_assert(c, fname_len(&nm) == 0);
- 		ubifs_assert(c, fname_name(&nm) == NULL);
-+		if (nm.hash & ~UBIFS_S_KEY_HASH_MASK)
-+			goto done; /* ENOENT */
+@@ -225,9 +225,7 @@ static struct dentry *ubifs_lookup(struct inode *dir, struct dentry *dentry,
+ 		goto done;
+ 	}
+ 
+-	if (nm.hash) {
+-		ubifs_assert(c, fname_len(&nm) == 0);
+-		ubifs_assert(c, fname_name(&nm) == NULL);
++	if (fname_name(&nm) == NULL) {
+ 		if (nm.hash & ~UBIFS_S_KEY_HASH_MASK)
+ 			goto done; /* ENOENT */
  		dent_key_init_hash(c, &key, dir->i_ino, nm.hash);
- 		err = ubifs_tnc_lookup_dh(c, &key, dent, nm.minor_hash);
- 	} else {
+diff --git a/fs/ubifs/journal.c b/fs/ubifs/journal.c
+index a38e18d3ef1d7..3bf8b1fda9d74 100644
+--- a/fs/ubifs/journal.c
++++ b/fs/ubifs/journal.c
+@@ -588,7 +588,7 @@ int ubifs_jnl_update(struct ubifs_info *c, const struct inode *dir,
+ 
+ 	if (!xent) {
+ 		dent->ch.node_type = UBIFS_DENT_NODE;
+-		if (nm->hash)
++		if (fname_name(nm) == NULL)
+ 			dent_key_init_hash(c, &dent_key, dir->i_ino, nm->hash);
+ 		else
+ 			dent_key_init(c, &dent_key, dir->i_ino, nm);
+@@ -646,7 +646,7 @@ int ubifs_jnl_update(struct ubifs_info *c, const struct inode *dir,
+ 	ubifs_add_auth_dirt(c, lnum);
+ 
+ 	if (deletion) {
+-		if (nm->hash)
++		if (fname_name(nm) == NULL)
+ 			err = ubifs_tnc_remove_dh(c, &dent_key, nm->minor_hash);
+ 		else
+ 			err = ubifs_tnc_remove_nm(c, &dent_key, nm);
+diff --git a/fs/ubifs/key.h b/fs/ubifs/key.h
+index afa704ff5ca08..8142d9d6fe5da 100644
+--- a/fs/ubifs/key.h
++++ b/fs/ubifs/key.h
+@@ -150,7 +150,6 @@ static inline void dent_key_init(const struct ubifs_info *c,
+ 	uint32_t hash = c->key_hash(fname_name(nm), fname_len(nm));
+ 
+ 	ubifs_assert(c, !(hash & ~UBIFS_S_KEY_HASH_MASK));
+-	ubifs_assert(c, !nm->hash && !nm->minor_hash);
+ 	key->u32[0] = inum;
+ 	key->u32[1] = hash | (UBIFS_DENT_KEY << UBIFS_S_KEY_HASH_BITS);
+ }
 -- 
 2.25.0
 
