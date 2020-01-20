@@ -2,62 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AECC14228C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 05:52:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51C4B142303
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 07:08:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1itP35-0003Lk-CX; Mon, 20 Jan 2020 04:52:27 +0000
+	id 1itQEi-0006xE-2w; Mon, 20 Jan 2020 06:08:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1itP33-0003LM-IE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:52:25 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1itQEg-0006x7-TO
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 06:08:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aOK2Wv34Jv2uKr8eXhPqjKsozzUn53pkOKxNgF8Ad7g=; b=lelaveGUtVTl+Oe2J8XB+qWGQV
- PjP3PxXAbuTfleLApDx0JNQTWf/NnhvWd0d1WfUWiw1vTBCI8crRk6jLqviSGPSyeEFyX8uN0C4bH
- TlwvjIIa0K4FbyR8gWKe9N9oPmFPje84x6GHwN0JmBu/BerShmj57PZITVt6CtC80FcU=;
+ bh=Z7cd83LaWhEZ28DgHXZjGeR3QbRfJ6KMnsgZcsPAjrE=; b=UJ6icp2ZMQ0KjPTyzxXg4sDCym
+ uleBpNnVMdyxqA5pqD/86jpJe+R9d3l08IzDE9ktXBO0T+NYn+13fesXvRnOIQ2DKi8ULRKkQfMCy
+ jqT/QI8pAg1KQfpcFz1D/zzxAucbyOBbX+yxrnxRGUH5Vt8LuvugLmJfrEgNxWWbXrbI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=aOK2Wv34Jv2uKr8eXhPqjKsozzUn53pkOKxNgF8Ad7g=; b=Z9YHbACmUNnEN9MJZ5NX1eV3fG
- /rR0lwLR5wCp/K1PjkxT0XAqsUnK5or2gGVfxr+HrAhSkJID7+pPhTcYDwAv8xRwBWmCVaFwBWRTk
- a5QO0Sm3FvalvNSQf/cfqU8O50jV+7z9X40opXSasCGx/Aan3JJ6vCln1plS+83mYRJI=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Z7cd83LaWhEZ28DgHXZjGeR3QbRfJ6KMnsgZcsPAjrE=; b=H
+ R53YZ5D9QCT23Wl51dw4bd371289SpADKJb3yEhS19ag47x0uGCuOASYe6/a512NPQA/0cV0iwqnp
+ XY3o1VZBgr/FnbE6Y8ZX70CQERuqrMfXZAMjDyvHd8ug2sC1fKHfR2m9ug4oQlNVCiMhFBmyG+pzd
+ 33s7rmSkyjOGdTAk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1itP32-00B5n6-5y
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:52:25 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ id 1itQEf-00EdAd-N5
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 06:08:30 +0000
+Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EE82A2073A;
- Mon, 20 Jan 2020 04:52:17 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 23AF72073A;
+ Mon, 20 Jan 2020 06:08:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579495938;
- bh=DAtdwoWn08bxGri1PxDJ/LULe8Ktr8pcYIS21k28EN4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=j0tf43nqBaHRTk8KvCSppcB0LKW557pYqYNlt49K3zTMGOJWI1C55cXqV6Sa+upBN
- fe1G0uKWFmL5LwUIKfbU9zbeAHfL4x+4mO/ID01faHvm3joFX5AL1Kn8Zsh+bQ3+NM
- w1eqcV5s+H8nFfeVbQ2zUJHWkDdHVGMQVksgVduE=
-Date: Sun, 19 Jan 2020 20:52:16 -0800
+ s=default; t=1579500499;
+ bh=vXDa7ReBep0t1iBlcWB2T87bMhiP9s/H3lDJdDPQErA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EJxMqhiexC9D9GSnjVpbpE4UHvRvOuMwYSeWTItv76T9/XLZAhlRkdKtuajoYsnOL
+ W+aW/xjnINdGJt+apMkE1TNd44JCaKBAopXzdosKByIwtlst8dLFX9KLF9i7sxZAFE
+ JZoFJFK8ttdCd8/ZDgBx6pkKhG6qVsDNoEeTH/ak=
 From: Eric Biggers <ebiggers@kernel.org>
-To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20200120045216.GB913@sol.localdomain>
-References: <20200117214246.235591-1-drosen@google.com>
+To: linux-fscrypt@vger.kernel.org
+Date: Sun, 19 Jan 2020 22:07:32 -0800
+Message-Id: <20200120060732.390362-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200117214246.235591-1-drosen@google.com>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,8 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1itP32-00B5n6-5y
-Subject: Re: [f2fs-dev] [PATCH v3 0/9] Support for Casefolding and Encryption
+X-Headers-End: 1itQEf-00EdAd-N5
+Subject: [f2fs-dev] [PATCH] fscrypt: don't print name of busy file when
+ removing key
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,98 +82,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, Jonathan Corbet <corbet@lwn.net>,
- kernel-team@android.com, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 17, 2020 at 01:42:37PM -0800, Daniel Rosenberg wrote:
-> These patches are all on top of fscrypt's developement branch
-> 
-> Ext4 and F2FS currently both support casefolding and encryption, but not at
-> the same time. These patches aim to rectify that.
-> 
-> Since directory names are stored case preserved, we cannot just take the hash
-> of the ciphertext. Instead we use the siphash of the casefolded name. With this
-> we no longer have a direct path from an encrypted name to the hash without the
-> key. To deal with this, fscrypt now always includes the hash in the name it
-> presents when the key is not present. There is a pre-existing bug where you can
-> change parts of the hash and still match the name so long as the disruption to
-> the hash does not happen to affect lookup on that filesystem. I'm not sure how
-> to fix that without making ext4 lookups slower in the more common case.
-> 
-> I moved the identical dcache operations for ext4 and f2fs into the VFS, as any
-> filesystem that uses casefolding will need the same code. This will also allow
-> further optimizations to that path, although my current changes don't take
-> advantage of that yet.
-> 
-> For Ext4, this also means that we need to store the hash on disk. We only do so
-> for encrypted and casefolded directories to avoid on disk format changes.
-> Previously encryption and casefolding could not live on the same filesystem,
-> and we're relaxing that requirement. F2fs is a bit more straightforward since
-> it already stores hashes on disk.
-> 
-> I've updated the related tools with just enough to enable the feature. I still
-> need to adjust ext4's fsck's, although without access to the keys,
-> neither fsck will be able to verify the hashes of casefolded and encrypted names.
-> 
-> v3 changes:
-> fscrypt patch only creates hash key if it will be needed.
-> Rebased on top of fscrypt branch, reconstified match functions in ext4/f2fs
-> 
-> v2 changes:
-> fscrypt moved to separate thread to rebase on fscrypt dev branch
-> addressed feedback, plus some minor fixes
-> 
-> 
-> Daniel Rosenberg (9):
->   fscrypt: Add siphash and hash key for policy v2
->   fscrypt: Don't allow v1 policies with casefolding
->   fscrypt: Change format of no-key token
->   fscrypt: Only create hash key when needed
->   vfs: Fold casefolding into vfs
->   f2fs: Handle casefolding with Encryption
->   ext4: Use struct super_blocks' casefold data
->   ext4: Hande casefolding with encryption
->   ext4: Optimize match for casefolded encrypted dirs
+From: Eric Biggers <ebiggers@google.com>
 
-Thanks for the new version of this patchset, Daniel!
+When an encryption key can't be fully removed due to file(s) protected
+by it still being in-use, we shouldn't really print the path to one of
+these files to the kernel log, since parts of this path are likely to be
+encrypted on-disk, and (depending on how the system is set up) the
+confidentiality of this path might be lost by printing it to the log.
 
-I'd like to apply the first four patches (the fs/crypto/ part, to prepare for
-the new dirhash method) for 5.6, to get ready for the actual
-encrypted+casefolded support in filesystems later.
+This is a trade-off: a single file path often doesn't matter at all,
+especially if it's a directory; the kernel log might still be protected
+in some way; and I had originally hoped that any "inode(s) still busy"
+bugs (which are security weaknesses in their own right) would be quickly
+fixed and that to do so it would be super helpful to always know the
+file path and not have to run 'find dir -inum $inum' after the fact.
 
-But we don't have much time left before the merge window, the more I look at the
-patches I'm still not very happy with them.  E.g., some comments I made haven't
-been addressed, it's missing updates to the documentation, and some of the code
-comments and commit messages are still confusing.  For one, there's still some
-ambiguity between the dirhash and the SHA-256 hash, and it's not really
-explained why the patch introduces the SHA-256 stuff, which actually has nothing
-to do with encrypted+casefold (other than it was a good opportunity to do it as
-the nokey name format had to be changed for encrypted+casefold anyway).
+But in practice, these bugs can be hard to fix (e.g. due to asynchronous
+process killing that is difficult to eliminate, for performance
+reasons), and also not tied to specific files, so knowing a file path
+doesn't necessarily help.
 
-I also found a bug where the return value of base64_decode() isn't being checked
-properly.  We should also keep fscrypt_match_name() simpler by setting disk_name
-for short names, like we were before.  There are also some places that count the
-padding in struct fscrypt_nokey_name and some that don't, which is confusing.
-We also no longer need to call fscrypt_get_policy() during setflags, as we call
-fscrypt_require_key() now anyway.  And there's now some ambiguity about what's
-meant by a "per-file key", since now there will be 2 types of per-file keys.
+So to be safe, for now let's just show the inode number, not the path.
+If someone really wants to know a path they can use 'find -inum'.
 
-So I hope you don't mind, but to move things along I've had a go at cleaning up
-the fscrypt patches, and I've sent out an updated version of them.  Can you
-please take a look when you have a chance?:
-https://lkml.kernel.org/linux-fscrypt/20200120044401.325453-1-ebiggers@kernel.org/T/#u
+Fixes: b1c0ec3599f4 ("fscrypt: add FS_IOC_REMOVE_ENCRYPTION_KEY ioctl")
+Cc: <stable@vger.kernel.org> # v5.4+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/crypto/keyring.c | 15 ++-------------
+ 1 file changed, 2 insertions(+), 13 deletions(-)
 
-Thanks!
+diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
+index 098ff2e0f0bb4..ab41b25d4fa1b 100644
+--- a/fs/crypto/keyring.c
++++ b/fs/crypto/keyring.c
+@@ -776,9 +776,6 @@ static int check_for_busy_inodes(struct super_block *sb,
+ 	struct list_head *pos;
+ 	size_t busy_count = 0;
+ 	unsigned long ino;
+-	struct dentry *dentry;
+-	char _path[256];
+-	char *path = NULL;
+ 
+ 	spin_lock(&mk->mk_decrypted_inodes_lock);
+ 
+@@ -797,22 +794,14 @@ static int check_for_busy_inodes(struct super_block *sb,
+ 					 struct fscrypt_info,
+ 					 ci_master_key_link)->ci_inode;
+ 		ino = inode->i_ino;
+-		dentry = d_find_alias(inode);
+ 	}
+ 	spin_unlock(&mk->mk_decrypted_inodes_lock);
+ 
+-	if (dentry) {
+-		path = dentry_path(dentry, _path, sizeof(_path));
+-		dput(dentry);
+-	}
+-	if (IS_ERR_OR_NULL(path))
+-		path = "(unknown)";
+-
+ 	fscrypt_warn(NULL,
+-		     "%s: %zu inode(s) still busy after removing key with %s %*phN, including ino %lu (%s)",
++		     "%s: %zu inode(s) still busy after removing key with %s %*phN, including ino %lu",
+ 		     sb->s_id, busy_count, master_key_spec_type(&mk->mk_spec),
+ 		     master_key_spec_len(&mk->mk_spec), (u8 *)&mk->mk_spec.u,
+-		     ino, path);
++		     ino);
+ 	return -EBUSY;
+ }
+ 
+-- 
+2.25.0
 
-- Eric
 
 
 _______________________________________________
