@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9324814227B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 05:49:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A2E9142275
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2020 05:49:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1itOzy-0003c2-DH; Mon, 20 Jan 2020 04:49:14 +0000
+	id 1itOzu-000532-Qx; Mon, 20 Jan 2020 04:49:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1itOzv-0003bN-OH
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:49:11 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1itOzs-00052v-MR
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:49:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U2qup7If+VLv2fCTxrLrPwgr9qLKR4toRxPtWTtmNYU=; b=kcxEn1E182yd8/3ITghuWncuxP
- URciehRTO4rUcAbH7G3A9rcrUq3l4idX2h3We3qaZZCjhYwe3mrdD+0JACi63NrAg+BEVw81Xk2No
- GEFJGhvs4QrtexV2twC6wFgcZM39tGD8j2pEV+KnYB3zQBKaMKJF/5/RlOeIsNk7Gx5s=;
+ bh=CqbO8Z5l2eWv1DW3KRf+wJ+EPUbyU/3zI4IHs56Zwnk=; b=UstuOfBRKz7OzlRiUqA97cKlzx
+ deELi2p/fkcZJO9LcKMRX3GZtZwqcHO9P5OJq9AnbzWhoHI0gHyiwEM1i7x56DkDhF+OvyMcFZCIL
+ +vTvgJgzGEdGvXoEBHf881vcj+u/MtP5cGVcESdDolXUAdNssGpGTYuOW3jd2vOz1eJw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=U2qup7If+VLv2fCTxrLrPwgr9qLKR4toRxPtWTtmNYU=; b=UHF2sn7EzyB9wDsMgauFlo4ZVV
- a7rxkT0TerRIizieeWdSZRx14lGhZWdwGGXkU6jf9w+JFmAy9cl/X0ZFltMa+qXsIfTm5g4nhfzKf
- +oIpjz/r1JI+nb/4DmRaCARvXNDKtYbnQoDAlOA7dXaTKBeQTEPM/MmmbatIEAPAAMDs=;
+ bh=CqbO8Z5l2eWv1DW3KRf+wJ+EPUbyU/3zI4IHs56Zwnk=; b=CJjXGN/8Yptb2QVa525IZni2+o
+ WtrTB4ktlJvMOGnihigfmS//x0FmeICtyzkdgfVjQb62pC+0sIHdR11+rZNfIkvp+gfMsRhgCR61m
+ w6Oh5hFIXpRJRvqkCK9l84apCPmdKsrkVdQw/61CbZwDDPVO62+TW12S1C/77/AsNxmk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1itOzm-00EZzq-RA
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:49:11 +0000
+ id 1itOzn-00EZzu-94
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 20 Jan 2020 04:49:08 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 17AD12073D;
+ by mail.kernel.org (Postfix) with ESMTPSA id 76FE42077C;
  Mon, 20 Jan 2020 04:48:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1579495737;
- bh=v2IOamtEHR2AceXQ2i+GCO37/2hpui4sIXfA+tBcEXg=;
+ bh=p/DgHDFclnTng9CfXnppGqNqd+PPXfM9Ssv17UhFi6Q=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=caYznpiyRE09Z5jprf6wPliiMJ/puPGcB+9+PbpHbhHD+J2nFGO0qqnCs1IGKpVZm
- 9BPh3qWiUhuJoSpy2Joua7BsPcaNPW7/qt+s+/f5yjG6f3dMXJV4VhbTcVvIsH3sRn
- IxqVlMVSdl1hBcnUD5IWDg9c6vt0gqA2md00kepg=
+ b=CtqylcuviFBxeo8SuRWNF15fVc8tPN3WTuSR01z6KU1JVfSWwblg6njE0saU6m5jP
+ XWSF3J8wqo+P8kK1sdkO8hVRfyYuF9eg4jBrWCoZIYXhfO7/yD2FS1AXWn3OYaYabx
+ /ArIESb98tgnCKBZKw7+S78LIk5LQyRAnEBxq5MM=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 19 Jan 2020 20:43:58 -0800
-Message-Id: <20200120044401.325453-2-ebiggers@kernel.org>
+Date: Sun, 19 Jan 2020 20:43:59 -0800
+Message-Id: <20200120044401.325453-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200120044401.325453-1-ebiggers@kernel.org>
 References: <20200120044401.325453-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1itOzm-00EZzq-RA
-Subject: [f2fs-dev] [PATCH v4 1/4] fscrypt: don't allow v1 policies with
- casefolding
+X-Headers-End: 1itOzn-00EZzu-94
+Subject: [f2fs-dev] [PATCH v4 2/4] fscrypt: derive dirhash key for
+ casefolded directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,148 +93,293 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daniel Rosenberg <drosen@google.com>
 
-Casefolded encrypted directories will use a new dirhash method that
-requires a secret key.  If the directory uses a v2 encryption policy,
-it's easy to derive this key from the master key using HKDF.  However,
-v1 encryption policies don't provide a way to derive additional keys.
+When we allow indexed directories to use both encryption and
+casefolding, for the dirhash we can't just hash the ciphertext filenames
+that are stored on-disk (as is done currently) because the dirhash must
+be case insensitive, but the stored names are case-preserving.  Nor can
+we hash the plaintext names with an unkeyed hash (or a hash keyed with a
+value stored on-disk like ext4's s_hash_seed), since that would leak
+information about the names that encryption is meant to protect.
 
-Therefore, don't allow casefolding on directories that use a v1 policy.
-Specifically, make it so that trying to enable casefolding on a
-directory that has a v1 policy fails, trying to set a v1 policy on a
-casefolded directory fails, and trying to open a casefolded directory
-that has a v1 policy (if one somehow exists on-disk) fails.
+Instead, if we can accept a dirhash that's only computable when the
+fscrypt key is available, we can hash the plaintext names with a keyed
+hash using a secret key derived from the directory's fscrypt master key.
+We'll use SipHash-2-4 for this purpose.
+
+Prepare for this by deriving a SipHash key for each casefolded encrypted
+directory.  Make sure to handle deriving the key not only when setting
+up the directory's fscrypt_info, but also in the case where the casefold
+flag is enabled after the fscrypt_info was already set up.  (We could
+just always derive the key regardless of casefolding, but that would
+introduce unnecessary overhead for people not using casefolding.)
 
 Signed-off-by: Daniel Rosenberg <drosen@google.com>
-[EB: improved commit message, updated fscrypt.rst, and other cleanups]
+[EB: improved commit message, updated fscrypt.rst, squashed with change
+ that avoids unnecessarily deriving the key, and many other cleanups]
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- Documentation/filesystems/fscrypt.rst |  4 +++-
- fs/crypto/hooks.c                     | 28 +++++++++++++++++++++++++++
- fs/crypto/policy.c                    |  7 +++++++
- fs/inode.c                            |  3 ++-
- include/linux/fscrypt.h               |  9 +++++++++
- 5 files changed, 49 insertions(+), 2 deletions(-)
+ Documentation/filesystems/fscrypt.rst | 10 +++++
+ fs/crypto/fname.c                     | 21 +++++++++++
+ fs/crypto/fscrypt_private.h           | 13 +++++++
+ fs/crypto/hooks.c                     | 16 ++++++++
+ fs/crypto/keysetup.c                  | 54 ++++++++++++++++++++-------
+ include/linux/fscrypt.h               |  9 +++++
+ 6 files changed, 109 insertions(+), 14 deletions(-)
 
 diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
-index 9c53336d06a43..380a1be9550e1 100644
+index 380a1be9550e1..c45f5bcc13e17 100644
 --- a/Documentation/filesystems/fscrypt.rst
 +++ b/Documentation/filesystems/fscrypt.rst
-@@ -513,7 +513,9 @@ FS_IOC_SET_ENCRYPTION_POLICY can fail with the following errors:
- - ``EEXIST``: the file is already encrypted with an encryption policy
-   different from the one specified
- - ``EINVAL``: an invalid encryption policy was specified (invalid
--  version, mode(s), or flags; or reserved bits were set)
-+  version, mode(s), or flags; or reserved bits were set); or a v1
-+  encryption policy was specified but the directory has the casefold
-+  flag enabled (casefolding is incompatible with v1 policies).
- - ``ENOKEY``: a v2 encryption policy was specified, but the key with
-   the specified ``master_key_identifier`` has not been added, nor does
-   the process have the CAP_FOWNER capability in the initial user
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index bb3b7fcfdd48a..d96a58f11d2b0 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -122,6 +122,34 @@ int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
+@@ -302,6 +302,16 @@ For master keys used for v2 encryption policies, a unique 16-byte "key
+ identifier" is also derived using the KDF.  This value is stored in
+ the clear, since it is needed to reliably identify the key itself.
+ 
++Dirhash keys
++------------
++
++For directories that are indexed using a secret-keyed dirhash over the
++plaintext filenames, the KDF is also used to derive a 128-bit
++SipHash-2-4 key per directory in order to hash filenames.  This works
++just like deriving a per-file encryption key, except that a different
++KDF context is used.  Currently, only casefolded ("case-insensitive")
++encrypted directories use this style of hashing.
++
+ Encryption modes and usage
+ ==========================
+ 
+diff --git a/fs/crypto/fname.c b/fs/crypto/fname.c
+index 3fd27e14ebdd6..2d0d5a934e170 100644
+--- a/fs/crypto/fname.c
++++ b/fs/crypto/fname.c
+@@ -402,6 +402,27 @@ int fscrypt_setup_filename(struct inode *dir, const struct qstr *iname,
  }
- EXPORT_SYMBOL_GPL(__fscrypt_prepare_lookup);
+ EXPORT_SYMBOL(fscrypt_setup_filename);
  
 +/**
-+ * fscrypt_prepare_setflags() - prepare to change flags with FS_IOC_SETFLAGS
-+ * @inode: the inode on which flags are being changed
-+ * @oldflags: the old flags
-+ * @flags: the new flags
++ * fscrypt_fname_siphash() - calculate the SipHash of a filename
++ * @dir: the parent directory
++ * @name: the filename to calculate the SipHash of
 + *
-+ * The caller should be holding i_rwsem for write.
++ * Given a plaintext filename @name and a directory @dir which uses SipHash as
++ * its dirhash method and has had its fscrypt key set up, this function
++ * calculates the SipHash of that name using the directory's secret dirhash key.
 + *
-+ * Return: 0 on success; -errno if the flags change isn't allowed or if
-+ *	   another error occurs.
++ * Return: the SipHash of @name using the hash key of @dir
 + */
-+int fscrypt_prepare_setflags(struct inode *inode,
-+			     unsigned int oldflags, unsigned int flags)
++u64 fscrypt_fname_siphash(const struct inode *dir, const struct qstr *name)
 +{
-+	struct fscrypt_info *ci;
++	const struct fscrypt_info *ci = dir->i_crypt_info;
++
++	WARN_ON(!ci->ci_dirhash_key_initialized);
++
++	return siphash(name->name, name->len, &ci->ci_dirhash_key);
++}
++EXPORT_SYMBOL_GPL(fscrypt_fname_siphash);
++
+ /*
+  * Validate dentries in encrypted directories to make sure we aren't potentially
+  * caching stale dentries after a key has been added.
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index b22e8decebedd..d4e650086edc6 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -12,6 +12,7 @@
+ #define _FSCRYPT_PRIVATE_H
+ 
+ #include <linux/fscrypt.h>
++#include <linux/siphash.h>
+ #include <crypto/hash.h>
+ 
+ #define CONST_STRLEN(str)	(sizeof(str) - 1)
+@@ -188,6 +189,14 @@ struct fscrypt_info {
+ 	 */
+ 	struct fscrypt_direct_key *ci_direct_key;
+ 
++	/*
++	 * This inode's hash key for filenames.  This is a 128-bit SipHash-2-4
++	 * key.  This is only set for directories that use a keyed dirhash over
++	 * the plaintext filenames -- currently just casefolded directories.
++	 */
++	siphash_key_t ci_dirhash_key;
++	bool ci_dirhash_key_initialized;
++
+ 	/* The encryption policy used by this inode */
+ 	union fscrypt_policy ci_policy;
+ 
+@@ -262,6 +271,7 @@ extern int fscrypt_init_hkdf(struct fscrypt_hkdf *hkdf, const u8 *master_key,
+ #define HKDF_CONTEXT_PER_FILE_KEY	2
+ #define HKDF_CONTEXT_DIRECT_KEY		3
+ #define HKDF_CONTEXT_IV_INO_LBLK_64_KEY	4
++#define HKDF_CONTEXT_DIRHASH_KEY	5
+ 
+ extern int fscrypt_hkdf_expand(const struct fscrypt_hkdf *hkdf, u8 context,
+ 			       const u8 *info, unsigned int infolen,
+@@ -433,6 +443,9 @@ fscrypt_allocate_skcipher(struct fscrypt_mode *mode, const u8 *raw_key,
+ extern int fscrypt_set_derived_key(struct fscrypt_info *ci,
+ 				   const u8 *derived_key);
+ 
++extern int fscrypt_derive_dirhash_key(const struct fscrypt_master_key *mk,
++				      struct fscrypt_info *ci);
++
+ /* keysetup_v1.c */
+ 
+ extern void fscrypt_put_direct_key(struct fscrypt_direct_key *dk);
+diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
+index d96a58f11d2b0..bbb31dca0311e 100644
+--- a/fs/crypto/hooks.c
++++ b/fs/crypto/hooks.c
+@@ -5,6 +5,8 @@
+  * Encryption hooks for higher-level filesystem operations.
+  */
+ 
++#include <linux/key.h>
++
+ #include "fscrypt_private.h"
+ 
+ /**
+@@ -137,8 +139,14 @@ int fscrypt_prepare_setflags(struct inode *inode,
+ 			     unsigned int oldflags, unsigned int flags)
+ {
+ 	struct fscrypt_info *ci;
++	struct fscrypt_master_key *mk;
+ 	int err;
+ 
++	/*
++	 * When the CASEFOLD flag is set on an encrypted directory, we must
++	 * derive the secret key needed for the dirhash.  This is only possible
++	 * if the directory uses a v2 encryption policy.
++	 */
+ 	if (IS_ENCRYPTED(inode) && (flags & ~oldflags & FS_CASEFOLD_FL)) {
+ 		err = fscrypt_require_key(inode);
+ 		if (err)
+@@ -146,6 +154,14 @@ int fscrypt_prepare_setflags(struct inode *inode,
+ 		ci = inode->i_crypt_info;
+ 		if (ci->ci_policy.version != FSCRYPT_POLICY_V2)
+ 			return -EINVAL;
++		mk = ci->ci_master_key->payload.data[0];
++		down_read(&mk->mk_secret_sem);
++		if (is_master_key_secret_present(&mk->mk_secret))
++			err = fscrypt_derive_dirhash_key(mk, ci);
++		else
++			err = -ENOKEY;
++		up_read(&mk->mk_secret_sem);
++		return err;
+ 	}
+ 	return 0;
+ }
+diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
+index 96074054bdbc8..31c26ca75f43c 100644
+--- a/fs/crypto/keysetup.c
++++ b/fs/crypto/keysetup.c
+@@ -174,10 +174,24 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
+ 	return 0;
+ }
+ 
++int fscrypt_derive_dirhash_key(const struct fscrypt_master_key *mk,
++			       struct fscrypt_info *ci)
++{
 +	int err;
 +
-+	if (IS_ENCRYPTED(inode) && (flags & ~oldflags & FS_CASEFOLD_FL)) {
-+		err = fscrypt_require_key(inode);
++	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf, HKDF_CONTEXT_DIRHASH_KEY,
++				  ci->ci_nonce, FS_KEY_DERIVATION_NONCE_SIZE,
++				  (u8 *)&ci->ci_dirhash_key,
++				  sizeof(ci->ci_dirhash_key));
++	if (err)
++		return err;
++	ci->ci_dirhash_key_initialized = true;
++	return 0;
++}
++
+ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
+ 				     struct fscrypt_master_key *mk)
+ {
+-	u8 derived_key[FSCRYPT_MAX_KEY_SIZE];
+ 	int err;
+ 
+ 	if (ci->ci_policy.v2.flags & FSCRYPT_POLICY_FLAG_DIRECT_KEY) {
+@@ -189,8 +203,8 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
+ 		 * This ensures that the master key is consistently used only
+ 		 * for HKDF, avoiding key reuse issues.
+ 		 */
+-		return setup_per_mode_key(ci, mk, mk->mk_direct_tfms,
+-					  HKDF_CONTEXT_DIRECT_KEY, false);
++		err = setup_per_mode_key(ci, mk, mk->mk_direct_tfms,
++					 HKDF_CONTEXT_DIRECT_KEY, false);
+ 	} else if (ci->ci_policy.v2.flags &
+ 		   FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64) {
+ 		/*
+@@ -199,21 +213,33 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
+ 		 * the IVs.  This format is optimized for use with inline
+ 		 * encryption hardware compliant with the UFS or eMMC standards.
+ 		 */
+-		return setup_per_mode_key(ci, mk, mk->mk_iv_ino_lblk_64_tfms,
+-					  HKDF_CONTEXT_IV_INO_LBLK_64_KEY,
+-					  true);
++		err = setup_per_mode_key(ci, mk, mk->mk_iv_ino_lblk_64_tfms,
++					 HKDF_CONTEXT_IV_INO_LBLK_64_KEY, true);
++	} else {
++		u8 derived_key[FSCRYPT_MAX_KEY_SIZE];
++
++		err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
++					  HKDF_CONTEXT_PER_FILE_KEY,
++					  ci->ci_nonce,
++					  FS_KEY_DERIVATION_NONCE_SIZE,
++					  derived_key, ci->ci_mode->keysize);
 +		if (err)
 +			return err;
-+		ci = inode->i_crypt_info;
-+		if (ci->ci_policy.version != FSCRYPT_POLICY_V2)
-+			return -EINVAL;
++
++		err = fscrypt_set_derived_key(ci, derived_key);
++		memzero_explicit(derived_key, ci->ci_mode->keysize);
+ 	}
+-
+-	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+-				  HKDF_CONTEXT_PER_FILE_KEY,
+-				  ci->ci_nonce, FS_KEY_DERIVATION_NONCE_SIZE,
+-				  derived_key, ci->ci_mode->keysize);
+ 	if (err)
+ 		return err;
+ 
+-	err = fscrypt_set_derived_key(ci, derived_key);
+-	memzero_explicit(derived_key, ci->ci_mode->keysize);
+-	return err;
++	/* Derive a secret dirhash key for directories that need it. */
++	if (S_ISDIR(ci->ci_inode->i_mode) && IS_CASEFOLDED(ci->ci_inode)) {
++		err = fscrypt_derive_dirhash_key(mk, ci);
++		if (err)
++			return err;
 +	}
++
 +	return 0;
-+}
-+
- int __fscrypt_prepare_symlink(struct inode *dir, unsigned int len,
- 			      unsigned int max_len,
- 			      struct fscrypt_str *disk_link)
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index f1cff83c151ac..cf2a9d26ef7da 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -124,6 +124,13 @@ static bool fscrypt_supported_v1_policy(const struct fscrypt_policy_v1 *policy,
- 					policy->filenames_encryption_mode))
- 		return false;
- 
-+	if (IS_CASEFOLDED(inode)) {
-+		/* With v1, there's no way to derive dirhash keys. */
-+		fscrypt_warn(inode,
-+			     "v1 policies can't be used on casefolded directories");
-+		return false;
-+	}
-+
- 	return true;
  }
  
-diff --git a/fs/inode.c b/fs/inode.c
-index 96d62d97694ef..ea15c6d9f2742 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -12,6 +12,7 @@
- #include <linux/security.h>
- #include <linux/cdev.h>
- #include <linux/memblock.h>
-+#include <linux/fscrypt.h>
- #include <linux/fsnotify.h>
- #include <linux/mount.h>
- #include <linux/posix_acl.h>
-@@ -2252,7 +2253,7 @@ int vfs_ioc_setflags_prepare(struct inode *inode, unsigned int oldflags,
- 	    !capable(CAP_LINUX_IMMUTABLE))
- 		return -EPERM;
- 
--	return 0;
-+	return fscrypt_prepare_setflags(inode, oldflags, flags);
- }
- EXPORT_SYMBOL(vfs_ioc_setflags_prepare);
- 
+ /*
 diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 6fe8d0f96a4ac..3984eadd7023f 100644
+index 3984eadd7023f..2bb43a772f361 100644
 --- a/include/linux/fscrypt.h
 +++ b/include/linux/fscrypt.h
-@@ -263,6 +263,8 @@ extern int __fscrypt_prepare_rename(struct inode *old_dir,
- 				    unsigned int flags);
- extern int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
- 				    struct fscrypt_name *fname);
-+extern int fscrypt_prepare_setflags(struct inode *inode,
-+				    unsigned int oldflags, unsigned int flags);
- extern int __fscrypt_prepare_symlink(struct inode *dir, unsigned int len,
- 				     unsigned int max_len,
- 				     struct fscrypt_str *disk_link);
-@@ -519,6 +521,13 @@ static inline int __fscrypt_prepare_lookup(struct inode *dir,
- 	return -EOPNOTSUPP;
+@@ -172,6 +172,8 @@ extern int fscrypt_fname_disk_to_usr(const struct inode *inode,
+ 				     u32 hash, u32 minor_hash,
+ 				     const struct fscrypt_str *iname,
+ 				     struct fscrypt_str *oname);
++extern u64 fscrypt_fname_siphash(const struct inode *dir,
++				 const struct qstr *name);
+ 
+ #define FSCRYPT_FNAME_MAX_UNDIGESTED_SIZE	32
+ 
+@@ -479,6 +481,13 @@ static inline bool fscrypt_match_name(const struct fscrypt_name *fname,
+ 	return !memcmp(de_name, fname->disk_name.name, fname->disk_name.len);
  }
  
-+static inline int fscrypt_prepare_setflags(struct inode *inode,
-+					   unsigned int oldflags,
-+					   unsigned int flags)
++static inline u64 fscrypt_fname_siphash(const struct inode *dir,
++					const struct qstr *name)
 +{
++	WARN_ON_ONCE(1);
 +	return 0;
 +}
 +
- static inline int __fscrypt_prepare_symlink(struct inode *dir,
- 					    unsigned int len,
- 					    unsigned int max_len,
+ /* bio.c */
+ static inline void fscrypt_decrypt_bio(struct bio *bio)
+ {
 -- 
 2.25.0
 
