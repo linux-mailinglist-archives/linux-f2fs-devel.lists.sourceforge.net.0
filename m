@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF0441477D9
+	by mail.lfdr.de (Postfix) with ESMTPS id A62771477D8
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:04:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -13,15 +13,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	 bh=ObqHxY2zYLObeE0FeFENa/19DWyWfKFqIei1AT1IuRE=; b=UHBufNCp4Eq80W+VHaYcNTh+t
 	6bFrQrSP7mdgwuX+TeWu6XOJRyOJXVjs/wo4YJ5ZsOTgqK4SHHyu0JcTPq9/vPZBEoVNTU4Q1MmQU
 	2r+GDgCSqIBuHOQWwCmU+UpD+00skg/UormOFWqzvLecds69T3WspRRpQ4tft5Ji09oeE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iur9C-0006mb-M1; Fri, 24 Jan 2020 05:04:46 +0000
+	id 1iur9B-0005ab-I5; Fri, 24 Jan 2020 05:04:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iur9B-0006mU-PB
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:04:45 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iur9A-0005aM-3K
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:04:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -42,10 +42,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  JEwF4Vr6sALn4939eGlaaiCVhpYQdJblgKaa6CsO6qWH+RRC7nYBIo+YQZe92yulpr8u/5cq9WjMO
  iwTAUblesnmlTCnXzJQmjiWNCk1mSl4nolnZ1vRa24BPDwP/HrqRbL8C5WHUO9K5qlCM=;
 Received: from sonic310-22.consmr.mail.gq1.yahoo.com ([98.137.69.148])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iur9A-003H0O-C7
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:04:45 +0000
+ id 1iur98-00GZgO-0N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:04:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
  t=1579842276; bh=KxVB/E86lNKNhPTU2/RM2/D0ts46IDAvVmg873JVtI4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
@@ -88,14 +88,14 @@ X-Mailer: WebService/1.1.14873 hermes Apache-HttpAsyncClient/4.1.4
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (hsiangkao[at]aol.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [98.137.69.148 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [98.137.69.148 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (hsiangkao[at]aol.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -104,7 +104,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iur9A-003H0O-C7
+X-Headers-End: 1iur98-00GZgO-0N
 Subject: Re: [f2fs-dev] [PATCH] ext4: fix race conditions in ->d_compare()
  and ->d_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
