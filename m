@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 768F414785B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:54:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5F37147846
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:44:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -16,12 +16,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iurvj-00038r-9C; Fri, 24 Jan 2020 05:54:55 +0000
+	id 1iurlv-0001sT-Gj; Fri, 24 Jan 2020 05:44:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iurvh-00038U-R6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:54:53 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iurlu-0001sA-Jc
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:44:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -44,12 +44,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from sonic314-21.consmr.mail.gq1.yahoo.com ([98.137.69.84])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iurvf-003Jr4-MF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:54:53 +0000
+ id 1iurlt-003JDu-8u
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:44:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1579845286; bh=UeJz9jyBNt5yayp7xj4f/SZWo0DpuycvuaFMYq1D8lg=;
+ t=1579844679; bh=UeJz9jyBNt5yayp7xj4f/SZWo0DpuycvuaFMYq1D8lg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
- b=KGsVaRm92ZxxNl+FfyKr9wtDg7H7TiVu0Hhui3zuhNcA1t7KmNixs1e78tp8OZrhX+o0mZsRWdsEFV8MHH1VMrSKhrIF747+f5neYNRobRasQHUvemAEGe6fdyHIQNr+rmp4jfIszKDWaXK2YIuArPgeWnq79x13D/roedNAVmG8YZw9SAhh2k3uRPdHcU+ksg4/FmWJ2M1QO9oj0ozEkhe5oG69VMTtjaPBgPQjfOXtFLvTI8pkwdbbZZGF6xIwTO8auOjPZeypae/8X7hBUS/xvk1U2qIl4ydJUzBDbztsmNzMoM2VJp+Z0LpauqqIPqp/vixM7Tm2ldm5EdyGDQ==
+ b=deaF3/93Y86x1r+EQkWAbbINH7I4pLd3qAY6MwodWVrGGyFhBCsFK0ryzBKhpRNb2Y2vNiyeUSSVSsa+d8J0KHL7uj5nQsrxG3yOeZWbzDmhK6YDjP3yNGlhcYIEiBx6+am9UdJccLY0WdzJUh3NG1c3SAdKgFoaf6REz3GokpOR0NV9pkY6ghA/N2EZj+Ldjk4MtaZV2QohtpC7ELjw0wddIIHoU181S9H6lWgHKNkrhBwpJBZ5+5wv9oBGrBpF0oTTQF7kms5oxA0JASSZ34hVbKwm7ZSk3Lmbq1GXtlGv+7UK5tyuzi1U56TlQPh+uuGnjFF+WB004cM6/3TX4Q==
 X-YMail-OSG: jpBgorYVM1niDtoaJJkIHlAQwijPN.6fSmZoI4.D5pZpqmPkPgbrgdCc3bajoGE
  9NFLvAJZlQp9e_slnmrybNZnRd7.xfJeiO6p85yik1XdVrNwNPhSm7jC9gCYQpbQ1MkUkVhqXlP8
  CbEPhu4VEYevwxrsg6VN3Rpigk9xLiQ0ucRw.WZKNCtGQ_AkCTxq_fYq_ss8sbV.95yBQIXJ0RSE
@@ -71,7 +71,7 @@ X-YMail-OSG: jpBgorYVM1niDtoaJJkIHlAQwijPN.6fSmZoI4.D5pZpqmPkPgbrgdCc3bajoGE
  X1nwNxGlfh5jUxtNLWD267If67nf456b57TzIDkE1KOIbHMfgw4SLofRbwDWkPsZglTDkBaBnCWr
  1advyz4RlnpkNGQ9QV.pBaXmwhD6r72hh8fiCGsLBbA--
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.gq1.yahoo.com with HTTP; Fri, 24 Jan 2020 05:54:46 +0000
+ sonic314.consmr.mail.gq1.yahoo.com with HTTP; Fri, 24 Jan 2020 05:44:39 +0000
 Received: by smtp432.mail.gq1.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
  ID 5154e0a93daa76c8f17f548eb900f9b7; 
  Fri, 24 Jan 2020 05:34:30 +0000 (UTC)
@@ -102,7 +102,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iurvf-003Jr4-MF
+X-Headers-End: 1iurlt-003JDu-8u
 Subject: Re: [f2fs-dev] [PATCH] ext4: fix race conditions in ->d_compare()
  and ->d_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
