@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD3E14783D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:43:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0269F14785A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:54:11 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iurkI-0001J2-5t; Fri, 24 Jan 2020 05:43:06 +0000
+	id 1iuruy-0001xC-Sm; Fri, 24 Jan 2020 05:54:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iurkH-0001Iv-Ik
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:43:05 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iuruw-0001x4-Ls
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:54:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mFLiWJaLCQ+CW+PIlgpT+PDyeCi9t9TXCuWpjL/IOkc=; b=ccmQwkcumsiEOmkenGMGZooUkb
- /96pW0BsWIrVOgXoA8OZncZT75jBd31m640+GYW8xQZj9LEEUxTj0zT+ufCiQNrNYL9hu1KMBEMVx
- Gef8nQSiApNG3QCs1SnlqhDzo/Yb9Wq165UTr8XFr4zlQt4+Dz00tziaDUdKgKhYr6mY=;
+ bh=Sk2pY5AisMa/av235iqzQb5ycJz9ETouLkY9hedRTfs=; b=bxVnKhV8PwKnXhE/NQQirXV5r4
+ DTKiWtpp3SKOe2SrgKqOqpvHeWbqFOjvmWy4lJGongEXwwLMUIQrlUwescIsJZbX15ILrqTonQ+1J
+ /HprUD/EmHudvDXSMQGQZGR2Dd7daKF6JDWh5bAXaEXjFuiL8AXrYTlyVDSENqfGLc7s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,41 +29,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mFLiWJaLCQ+CW+PIlgpT+PDyeCi9t9TXCuWpjL/IOkc=; b=LRGU5c6+HiwgxzPrdLOwv4olga
- O9JFS8jdRENgIWjyXYgR6DgJeR9XxZrGO9XVOKWIiOgf0RB/zsLNKJx/UszQ3iYwOUgcAY0HUqhzF
- sD3BmVROhgY6air+yxFG8aMm9Yz15hY8M9sqXleNcq3Q6lz2JMrDf2nv8DijBm5p1uig=;
+ bh=Sk2pY5AisMa/av235iqzQb5ycJz9ETouLkY9hedRTfs=; b=QAdpsV7tN9qj1/kpgfoSJSLl3a
+ mfbkTHyKc9AFc6W1BWKi4TG8Lc1Xwq/VZH5b0gF8saDL0fVI9GBjpMeIN9nMzpre68C3qwlevSdJg
+ PpCan13+NkP1cav0Ifj+2mp+QbwU8LbBd8WHMM9bbKkrxQdoKV1wepcGMO2MH6cvJWek=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iurkG-003J81-0b
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:43:05 +0000
+ id 1iuruv-00GZJ4-Gn
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:54:06 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3CEDE2070A;
- Fri, 24 Jan 2020 05:42:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id AE5132071A;
+ Fri, 24 Jan 2020 05:53:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579844578;
- bh=UtXlQmAwVpIV4UVkULwSxcBxj3f1rwjkrvqd+IMtrm8=;
+ s=default; t=1579845239;
+ bh=PD319ZtzsARpjQN1qMfKAV/AztFjbl+rqa9IicPM79c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gHZoFfUfHkbxCFtJeTBNinZ/zDprtq6eg9/MVNYgeL82NiDWUtWTiqMDe4DOtiM70
- xdTFSRWqRr9C87t/SulBsXb/TeI1wl6PGQYgFnLLS8shbSH78TyKf1/Z5uZqqWjwVT
- uWVf1KoxKRFRDgOcVd4Yu4ZLUxDsSDoMNw9deF+8=
-Date: Thu, 23 Jan 2020 21:42:56 -0800
+ b=F+N98E0/dZZRYj9BMz9tUTtbHDoSnZvlNf8oRs8RP+l/FZb0ctHVNOVfdHtZWXdXR
+ gG/Cx4DZH2U+0Sncv8BudMGmyMmULJOBTJyfeb3sMsM4RJltlvJVBGaMvyx7BE+ep+
+ O9wEiILKvXBu44x4EbHiFVxgdBWRTe4dhjwAB/Gg=
+Date: Thu, 23 Jan 2020 21:53:58 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gao Xiang <hsiangkao@aol.com>
-Message-ID: <20200124054256.GC832@sol.localdomain>
+Message-ID: <20200124055358.GD832@sol.localdomain>
 References: <20200124041234.159740-1-ebiggers@kernel.org>
  <20200124050423.GA31271@hsiangkao-HP-ZHAN-66-Pro-G1>
  <20200124051601.GB832@sol.localdomain>
- <20200124053415.GC31271@hsiangkao-HP-ZHAN-66-Pro-G1>
+ <20200124052740.GB31271@hsiangkao-HP-ZHAN-66-Pro-G1>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200124053415.GC31271@hsiangkao-HP-ZHAN-66-Pro-G1>
+In-Reply-To: <20200124052740.GB31271@hsiangkao-HP-ZHAN-66-Pro-G1>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -73,7 +77,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iurkG-003J81-0b
+X-Headers-End: 1iuruv-00GZJ4-Gn
 Subject: Re: [f2fs-dev] [PATCH] ext4: fix race conditions in ->d_compare()
  and ->d_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -95,26 +99,44 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 24, 2020 at 01:34:23PM +0800, Gao Xiang wrote:
+On Fri, Jan 24, 2020 at 01:27:50PM +0800, Gao Xiang wrote:
 > On Thu, Jan 23, 2020 at 09:16:01PM -0800, Eric Biggers wrote:
-> 
-> []
-> 
+> > On Fri, Jan 24, 2020 at 01:04:25PM +0800, Gao Xiang wrote:
+> > > > diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
+> > > > index 8964778aabefb..0129d14629881 100644
+> > > > --- a/fs/ext4/dir.c
+> > > > +++ b/fs/ext4/dir.c
+> > > > @@ -671,9 +671,11 @@ static int ext4_d_compare(const struct dentry *dentry, unsigned int len,
+> > > >  			  const char *str, const struct qstr *name)
+> > > >  {
+> > > >  	struct qstr qstr = {.name = str, .len = len };
+> > > > -	struct inode *inode = dentry->d_parent->d_inode;
+> > > > +	const struct dentry *parent = READ_ONCE(dentry->d_parent);
+> > > 
+> > > I'm not sure if we really need READ_ONCE d_parent here (p.s. d_parent
+> > > won't be NULL anyway), and d_seq will guard all its validity. If I'm
+> > > wrong, correct me kindly...
+> > > 
+> > > Otherwise, it looks good to me...
+> > > Reviewed-by: Gao Xiang <gaoxiang25@huawei.com>
+> > > 
+> > 
+> > While d_parent can't be set to NULL, it can still be changed concurrently.
 > > So we need READ_ONCE() to ensure that a consistent value is used.
 > 
-> By the way, my understanding is all pointer could be accessed
-> atomicly guaranteed by compiler. In my opinion, we generally
-> use READ_ONCE() on pointers for other uses (such as, avoid
-> accessing a variable twice due to compiler optimization and
-> it will break some logic potentially or need some data
-> dependency barrier...)
+> If I understand correctly, unlazy RCU->ref-walk will be guarded by
+> seqlock, and for ref-walk we have d_lock (and even parent lock)
+> in relative paths. So I prematurely think no race of renaming or
+> unlinking evenually.
 > 
-> Thanks,
-> Gao Xiang
+> I'm curious about that if experts could correct me about this.
+> 
 
-But that *is* why we need READ_ONCE() here.  Without it, there's no guarantee
-that the compiler doesn't load the variable twice.  Please read:
-https://github.com/google/ktsan/wiki/READ_ONCE-and-WRITE_ONCE
+Taking a seqlock for read doesn't prevent the protected data from changing.
+It just allows the reader to detect that it changed.
+
+So we still need to handle the dentry fields being changed concurrently here,
+even if it will be detected by a read_seqcount_retry() later.
 
 - Eric
 
