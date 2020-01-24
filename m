@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5DCF147834
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:38:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10670147835
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2020 06:38:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -16,12 +16,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iurfX-00013m-NV; Fri, 24 Jan 2020 05:38:11 +0000
+	id 1iurfa-00014Z-RS; Fri, 24 Jan 2020 05:38:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1iurfW-00013b-MN
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:38:10 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1iurfZ-00014I-Dt
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:38:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -41,15 +41,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  bh=9necSZIJYyRRJ8jaU0pxv6QHcZkJLNsfLRyto+nrVh0=; b=TWDF3zSJl/aqJf8KZ8BPgmnEji
  gthM1e51ocm23LJZCB2002Q28G3+4d3ufNVOADScIMYU9xVHA7YOEigDnHdbqgclTNl9lvkLWZs7Y
  Wz3sqNm9WusoKg5uhEinJSwzyRYFEXfz4Pd0ssiu9yjArmxmECeJiXN34+h7VWwZCCmw=;
-Received: from sonic314-21.consmr.mail.gq1.yahoo.com ([98.137.69.84])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+Received: from sonic316-8.consmr.mail.gq1.yahoo.com ([98.137.69.32])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1iurfU-00GYWL-3D
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:38:10 +0000
+ id 1iurfV-003Iqk-Fh
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jan 2020 05:38:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1579844282; bh=9necSZIJYyRRJ8jaU0pxv6QHcZkJLNsfLRyto+nrVh0=;
+ t=1579844283; bh=9necSZIJYyRRJ8jaU0pxv6QHcZkJLNsfLRyto+nrVh0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
- b=XLwynAJRScyQDLoCb9gCOYg7IMd0QxP1gndGXmiPXQytf58WBOa7obpV6tcPFc6tEFLrzn+y1QakSLUd55l/kZbJxSW1YAwv7l0S4vN504xqQaGxV7Z5a0j1tAg7vmpHJ3rHiuvQVjUTjXPdZ7JRHl82A7SBVRxYzrR+ozcA+rv4yH0YbkEXJaMTpzXYKFrTMwzC3zzplOx/bB/gUfmMg7J+cL6NFY8cAkNhtiSJY9ZSCS+A1/w86IVEyGp4oOUMykKO7tBEX9rB/muCZuGhKfnDhJs9m3xU360jU5utmC5oxZnJfAR44XoRbWHS19gI5bNgaZIt0xJhwD+qyPY40A==
+ b=HBWJCEQBK/ypchGf91p29qcl4eIaf6e4+80RFoMAqqV+US/LtqOZFxUHFWFYfBX7qwMpj+FYzLBlI5gU+5CjVOnU50wrmyA3VA+nvRR6evWsuBAE/rYNP5WJG1insD0rsmHAjG3Jm8D01+WLvb4j5h8Sk0iN3YQGFXPF2XWpQtsc6BXNUKrSWIMyMUP/AzGHAOavB8F+OhJEww5WN6eqtYXWpvg4eaAmz8iKRJr34oSVWe9WOEyY7ecxvxRUwFXr5DW5iMnGn0+KnQrPDuiMSwogdNmNHanMbuDJHYQGuIZJK0wMt12Ic6lHMAQw3F2bDURnE29ZC9gcNdkVvEuQ8w==
 X-YMail-OSG: qwkSMKYVM1nerF17bL_ncoKZ2f_7EvelyTnyy3.ARwKl_O4amY4btNkvurM6GkS
  tz_M1Jj66QgrapfINFE7UFlEbiLNWpxMMC0irIKqVtR4VgNCfNvkd2GitLYcrbCEmRe__rz9aEDG
  ZfHMAOJOxx8fZ6DX9H0vybNj_il3xFVv7olWcc976yMVozTOQdrl9J8EmFPPy4uUXGR8aJNwQjbP
@@ -71,7 +71,7 @@ X-YMail-OSG: qwkSMKYVM1nerF17bL_ncoKZ2f_7EvelyTnyy3.ARwKl_O4amY4btNkvurM6GkS
  bfVsd3XrV2xpw4O5RqUj16Y76vzS3DemXYXClYZ5yRxjlpIHmk7ctla4tZwODvVmAy.dJKizhsV1
  SdNFR_yBYcwpZQ3UEzU3kojQlAqDMgkk1Ag--
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.gq1.yahoo.com with HTTP; Fri, 24 Jan 2020 05:38:02 +0000
+ sonic316.consmr.mail.gq1.yahoo.com with HTTP; Fri, 24 Jan 2020 05:38:03 +0000
 Received: by smtp428.mail.gq1.yahoo.com (Oath Hermes SMTP Server) with ESMTPA
  ID f9b7953f40d5a7531fce28ad55186da6; 
  Fri, 24 Jan 2020 05:27:55 +0000 (UTC)
@@ -94,19 +94,19 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [98.137.69.84 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (hsiangkao[at]aol.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [98.137.69.32 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iurfU-00GYWL-3D
+X-Headers-End: 1iurfV-003Iqk-Fh
 Subject: Re: [f2fs-dev] [PATCH] ext4: fix race conditions in ->d_compare()
  and ->d_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
