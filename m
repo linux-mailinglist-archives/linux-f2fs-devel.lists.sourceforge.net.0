@@ -2,74 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDA1F14ADBE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jan 2020 02:50:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40AAE14C0E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jan 2020 20:25:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iwG0s-0007uX-HZ; Tue, 28 Jan 2020 01:49:58 +0000
+	id 1iwWUb-0001Wi-Ta; Tue, 28 Jan 2020 19:25:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iwG0r-0007uJ-BF
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 01:49:57 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iwWUa-0001Wa-4h
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 19:25:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qy+VOSkDFmJFEIp1pyfM6GyyGFDgpRhz5WRRVJ6zMYQ=; b=McR31vhPT7lA5lRAO3HqsruwIF
- VCDPueWqQK+2TjsWLstC+H8THqvpJLLEaSQZtt8hgaQnftCimlcNLg3ViW3zqHQyQQSZfVM9zqc9y
- 4aTNvmlMqBm6MkS0dSoF/CFS+HKG62KUQ2fq2LHgZwDxtq9FhCB00xH2IUccClNOHKxQ=;
+ bh=+wb5QnhsxxiWxVevFo3rcYs5500P9NHKkAqpSPYp9mY=; b=cY6VhK/KyWsnhpc6HfqBOb2h9a
+ 0AAZKn5mBjoMCBGcx/XwIGfSp3XQVlmqJ5BjlTqwmI4HF66dtAnA2p521Vc4qPs5OBzjhRM1xTKrh
+ WN8wffvN+FMWnKqm92QsAz/mNzys+CFn9PdYoVfKoSRRHQtPg2kJDrmzV1whoZuLYuVU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qy+VOSkDFmJFEIp1pyfM6GyyGFDgpRhz5WRRVJ6zMYQ=; b=m
- +4ODrYiyQtClCIN+DZf5Y+K9j6JvvZtFbgWDDFs2IruHslu8qNgggYluLE4dlrHjR3ZS5ArFt2w5b
- XPHGHrXQoy7cvTHT34bdfJtweg7Rqg+ugIfeCM23sopc7KzRSLL6oXVnNniwl38dzuE94uJPfAw60
- jyGL7CxgicYb9uAo=;
+ List-Owner:List-Archive; bh=+wb5QnhsxxiWxVevFo3rcYs5500P9NHKkAqpSPYp9mY=; b=Z
+ ZMzyBQiVnHrv8KEykDs1Iw8x6zmQvW2hxb+MWlOsgfVmJCTEuP9qbYDKP9tUxRs5EfcPewq7Kyu1t
+ zQ7fsrjMMZu1ZzFY+mmsU72UMWwP9WY4M4bMcJyAeUuVY6JQV3f4x5N/DQHqEgCyQ602kTZi1XRDa
+ ZJdxLpedRA8NWLVc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iwG0m-002ZIO-Ty
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 01:49:57 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1iwWUY-008U78-U0
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 19:25:44 +0000
+Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
+ [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 171B6214AF;
- Tue, 28 Jan 2020 01:49:46 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4AA6C2467E;
+ Tue, 28 Jan 2020 19:25:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1580176186;
- bh=LG/91wYLxxcYT1svtlzLQ/c/hCjXKTZSNlbksK28KB8=;
- h=Date:From:To:Cc:Subject:From;
- b=O1F0TfY1lPK6UDP2+cAy1qiAe5gEdKKYy0ffpzRZKA6oCncfLoLhWr1QrWxf7ooi5
- HL4jFb0D2IC39TmP0BOa2trGbZYvJJ4O5lDnJJZFdddcuERLlqKFMkhjVIRBAO1muy
- oUfSt9noSUuHQmMW4oTq+ajZAVYQ8yqB791BiJ48=
-Date: Mon, 27 Jan 2020 17:49:44 -0800
+ s=default; t=1580239536;
+ bh=M3Y7uG3L87hHEIblJRkwGCUrIWxfUyUuQcFB65l6IOU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=wTXco5V78aTgUxIfwidPR1INdxREciyqDqF7/pont4zqUkKXRrsNfKNTjuIRuIHZi
+ HsblQFNH95dkMKqBw5aclAbH+itf7iLvYRjERPOvlbxYPyvh1sZPAml/cAuxvPEZN8
+ trvb/I0cedRqTxCE15eKdSyDtZLYoF5gFJyGdWOI=
 From: Eric Biggers <ebiggers@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20200128014944.GB960@sol.localdomain>
+To: mtk.manpages@gmail.com
+Date: Tue, 28 Jan 2020 11:24:49 -0800
+Message-Id: <20200128192449.260550-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: 2.4 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iwG0m-002ZIO-Ty
-Subject: [f2fs-dev] [GIT PULL] fsverity updates for 5.6
+X-Headers-End: 1iwWUY-008U78-U0
+Subject: [f2fs-dev] [man-pages PATCH v2] statx.2: document STATX_ATTR_VERITY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,56 +81,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, Victor Hsieh <victorhsieh@google.com>
+Cc: linux-fsdevel@vger.kernel.org, linux-man@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The following changes since commit fd6988496e79a6a4bdb514a4655d2920209eb85d:
+From: Eric Biggers <ebiggers@google.com>
 
-  Linux 5.5-rc4 (2019-12-29 15:29:16 -0800)
+Document the verity attribute for statx(), which was added in
+Linux 5.5.
 
-are available in the Git repository at:
+For more context, see the fs-verity documentation:
+https://www.kernel.org/doc/html/latest/filesystems/fsverity.html
 
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ man2/statx.2 | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-for you to fetch changes up to da3a3da4e6c68459618a1043dcb12b450312a4e2:
-
-  fs-verity: use u64_to_user_ptr() (2020-01-14 13:28:28 -0800)
-
-----------------------------------------------------------------
-
-- Optimize fs-verity sequential read performance by implementing
-  readahead of Merkle tree pages.  This allows the Merkle tree to be
-  read in larger chunks.
-
-- Optimize FS_IOC_ENABLE_VERITY performance in the uncached case by
-  implementing readahead of data pages.
-
-- Allocate the hash requests from a mempool in order to eliminate the
-  possibility of allocation failures during I/O.
-
-----------------------------------------------------------------
-Eric Biggers (4):
-      fs-verity: implement readahead for FS_IOC_ENABLE_VERITY
-      fs-verity: implement readahead of Merkle tree pages
-      fs-verity: use mempool for hash requests
-      fs-verity: use u64_to_user_ptr()
-
- fs/ext4/verity.c             | 47 ++++++++++++++++++++-
- fs/f2fs/data.c               |  2 +-
- fs/f2fs/f2fs.h               |  3 ++
- fs/f2fs/verity.c             | 47 ++++++++++++++++++++-
- fs/verity/enable.c           | 67 +++++++++++++++++++++++-------
- fs/verity/fsverity_private.h | 17 +++++---
- fs/verity/hash_algs.c        | 98 +++++++++++++++++++++++++++++++++-----------
- fs/verity/open.c             |  5 ++-
- fs/verity/verify.c           | 47 ++++++++++++++-------
- include/linux/fsverity.h     |  7 +++-
- 10 files changed, 273 insertions(+), 67 deletions(-)
+diff --git a/man2/statx.2 b/man2/statx.2
+index d2f1b07b8..d015ee73d 100644
+--- a/man2/statx.2
++++ b/man2/statx.2
+@@ -461,6 +461,11 @@ See
+ .TP
+ .B STATX_ATTR_ENCRYPTED
+ A key is required for the file to be encrypted by the filesystem.
++.TP
++.B STATX_ATTR_VERITY
++Since Linux 5.5: the file has fs-verity enabled.  It cannot be written to, and
++all reads from it will be verified against a cryptographic hash that covers the
++entire file, e.g. via a Merkle tree.
+ .SH RETURN VALUE
+ On success, zero is returned.
+ On error, \-1 is returned, and
+-- 
+2.25.0.341.g760bfbb309-goog
 
 
 
