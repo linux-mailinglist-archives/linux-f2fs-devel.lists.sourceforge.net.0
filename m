@@ -2,75 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7BB014C3A7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jan 2020 00:40:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9E2714C43D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jan 2020 01:53:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iwaSq-0004Ym-Us; Tue, 28 Jan 2020 23:40:12 +0000
+	id 1iwbbw-0006el-UG; Wed, 29 Jan 2020 00:53:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1iwaSp-0004Ya-Sl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 23:40:11 +0000
+ (envelope-from <david@fromorbit.com>) id 1iwbbv-0006ed-J7
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jan 2020 00:53:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vrlZ0nVCfkwotcqRs42PAQErikqPofy20q8uJJ+ulkY=; b=hil/zoae9/MpkxzQSIMvWxX3FF
- cIMXnSA3Wj75fx0wvZGx2QQzgQPxzhIfTiQjX/SXOr0OHvsDsfkD0eolQ3W/1cEPUVph3sFoZiMS7
- 6K1SeluMtPc4wYpA8qblYUnw+rpuJEs0vRdAbtjPzFXL5b6M3ncU8ehGk7mjAP3GNJJQ=;
+ bh=o1nhRe1kYWHUMeg53adC2wPv23K6dyAmEg/aKuHeXPY=; b=OMSBtY7FXP3EN8M8wEg9OUv37G
+ vJjlxyiNPZrKwzc3N0G0CJNIL3zctncN7N70J+6nC1xaydhGOorCfvinyVMHmM+mIjw+xYWE5skof
+ fYhaNewKJ9uczwAR4VyEcGJDycRNC1dwTNi50J7i60SMBrJqjNfv4cqyRsDKBi4l56lc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vrlZ0nVCfkwotcqRs42PAQErikqPofy20q8uJJ+ulkY=; b=GttC1rZzupGEQw7UbBl8NDJNsr
- SXYnoiF9HPXD2DngZMUl39bhKf//Ac5NzNu0XPK90k32PcxdPPZ4hvEZzlZoi8yMRmMCU+RnTB9N1
- e2lpqW96kZCFptV2wXmV11mSYgl/waA9Vu00HRs1ntFCtaGWcHIE9lAzJFsK1VL5qqbQ=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iwaSo-003OAH-O5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jan 2020 23:40:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1580254802;
- bh=9uTx239fooQ7plHBZTD5UrhlEffcj1C8aMwsaCAAq7A=;
- h=From:In-Reply-To:References:Date:To:Cc:From;
- b=NyIceaZsXCVYbOokVaYNLUJfCu61F+S/qyKlSpWbLDTRehexksnLX99Iv4zylcp+3
- Zy8b8dsSMMMJCa8+nPif1Mov4/azHx09UOn59K+SznaP3Fx2a9+Ip597Aurp4wtrvG
- Av69XK6AbmvHS+YgMHu9oaZ8p+OUcwQsBu0h79dw=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20200128014944.GB960@sol.localdomain>
-References: <20200128014944.GB960@sol.localdomain>
-X-PR-Tracked-List-Id: <linux-fsdevel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20200128014944.GB960@sol.localdomain>
-X-PR-Tracked-Remote: https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
- tags/fsverity-for-linus
-X-PR-Tracked-Commit-Id: da3a3da4e6c68459618a1043dcb12b450312a4e2
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: c8994374d90b5823b3b29a5e5d8648ac418b57b4
-Message-Id: <158025480250.16364.14659123775629628109.pr-tracker-bot@kernel.org>
-Date: Tue, 28 Jan 2020 23:40:02 +0000
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: -0.1 (/)
+ bh=o1nhRe1kYWHUMeg53adC2wPv23K6dyAmEg/aKuHeXPY=; b=FCHq2onmHh6GVx3b5heCOEzd4s
+ 3+C1wqxlzTha35IPFeqbTD1FxPPMIUjK/8d8KyJU8qbNHjO5CEuuJ3cWOJoMCXH8aZUFZO2k1I3Jb
+ I6ZezU4+t62B1cLUCcbIBET0kSK3iR7BnNdy+2u2HAhkk1/FYdu27nl4GMfn84IQGWkI=;
+Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1iwbbt-008lTe-Mc
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jan 2020 00:53:39 +0000
+Received: from dread.disaster.area (pa49-195-111-217.pa.nsw.optusnet.com.au
+ [49.195.111.217])
+ by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 32C487E9A77;
+ Wed, 29 Jan 2020 11:24:56 +1100 (AEDT)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1iwbA8-0005eI-Bd; Wed, 29 Jan 2020 11:24:56 +1100
+Date: Wed, 29 Jan 2020 11:24:56 +1100
+From: Dave Chinner <david@fromorbit.com>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200129002456.GH18610@dread.disaster.area>
+References: <20200125013553.24899-1-willy@infradead.org>
+ <20200125013553.24899-5-willy@infradead.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200125013553.24899-5-willy@infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.3 cv=LYdCFQXi c=1 sm=1 tr=0
+ a=0OveGI8p3fsTA6FL6ss4ZQ==:117 a=0OveGI8p3fsTA6FL6ss4ZQ==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=Jdjhy38mL1oA:10
+ a=JfrnYn6hAAAA:8 a=7-415B0cAAAA:8 a=bQT49A20HjYUhGx6rhoA:9
+ a=UEMyszIiLG9v0jT0:21 a=UWfWf6Z2s6wDmKyN:21 a=CjuIK1q_8ugA:10
+ a=1CNFftbPRP8L7MoqJWF3:22 a=biEYGPWJfzWAr4FL6Ov7:22
+X-Spam-Score: 1.5 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iwaSo-003OAH-O5
-Subject: Re: [f2fs-dev] [GIT PULL] fsverity updates for 5.6
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: infradead.org]
+ 2.5 URIBL_DBL_ABUSE_MALW   Contains an abused malware URL listed in the
+ Spamhaus DBL blocklist [URIs: infradead.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -1.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1iwbbt-008lTe-Mc
+Subject: Re: [f2fs-dev] [PATCH 04/12] mm: Add readahead address space
+ operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,28 +86,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
- Victor Hsieh <victorhsieh@google.com>
-MIME-Version: 1.0
+Cc: cluster-devel@redhat.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Mon, 27 Jan 2020 17:49:44 -0800:
+On Fri, Jan 24, 2020 at 05:35:45PM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> 
+> This replaces ->readpages with a saner interface:
+>  - Return the number of pages not read instead of an ignored error code.
+>  - Pages are already in the page cache when ->readahead is called.
+>  - Implementation looks up the pages in the page cache instead of
+>    having them passed in a linked list.
+....
+> diff --git a/mm/readahead.c b/mm/readahead.c
+> index 5a6676640f20..6d65dae6dad0 100644
+> --- a/mm/readahead.c
+> +++ b/mm/readahead.c
+> @@ -121,7 +121,18 @@ static void read_pages(struct address_space *mapping, struct file *filp,
+>  
+>  	blk_start_plug(&plug);
+>  
+> -	if (mapping->a_ops->readpages) {
+> +	if (mapping->a_ops->readahead) {
+> +		unsigned left = mapping->a_ops->readahead(filp, mapping,
+> +				start, nr_pages);
+> +
+> +		while (left) {
+> +			struct page *page = readahead_page(mapping,
+> +					start + nr_pages - left - 1);
 
-> https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
+Off by one? start = 2, nr_pages = 2, left = 1, this looks up the
+page at index 2, which is the one we issued IO on, not the one we
+"left behind" which is at index 3.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/c8994374d90b5823b3b29a5e5d8648ac418b57b4
+Cheers,
 
-Thank you!
-
+Dave.
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.wiki.kernel.org/userdoc/prtracker
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
