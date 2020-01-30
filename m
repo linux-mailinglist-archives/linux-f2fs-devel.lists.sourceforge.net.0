@@ -2,104 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E25BB14DA7D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Jan 2020 13:16:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2843314E2A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Jan 2020 19:53:56 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ix8jy-0005Vp-Bq; Thu, 30 Jan 2020 12:16:10 +0000
+	id 1ixEwo-0006zY-D9; Thu, 30 Jan 2020 18:53:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <greg@kroah.com>) id 1ix8jx-0005Vh-47
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jan 2020 12:16:09 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ixEwm-0006zR-Ld
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jan 2020 18:53:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SJyu3bBmI2OdB73/aniVF5SZ80+0U7MRpnJsNZP5oLQ=; b=QrXatVMaa0XIBpqoFKQJaw8AhE
- PL3gs3qZLAwv8xiBFHcN3Z0NiSOrqIJFDhYIrwRgo18d3r7FIPdS6gVDEDqFHGZZx34Cp+eYYeDaS
- walONfE0NbtxI5qafhXa2JCKhVO67SqbjV0Im/npNiBr9KJmKLyOiyThBYvhYaSmQNGU=;
+ bh=vpJ9dXZxUyELiUZkJF9BzCAgHOYEhjLX6dirLp9GYu8=; b=hPj7x/kBkkp6I4iUwW8+BtIkMH
+ My3XrNwtMKTm6ElrE2LD1yF+ClzjWmzJHgxInZXuPn0qOrLR/zxkWYa2zR8//jEBcLy25HUWLewdt
+ mOctelABDA4D7F6d85m+eZwRTKjqwwp3z4Lx5I7vMRgSq2BbQsj+U+zYPQ9xJz6kHZ9s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SJyu3bBmI2OdB73/aniVF5SZ80+0U7MRpnJsNZP5oLQ=; b=O
- XyfUk+qAiOnbhL+SlSJphMOXHkW5cznz7WzHB59vCg+FNhCSHnximoJFqvx6t+1lku+xT0f4/F1MJ
- ponW80+VhAal0pJn+ioBi17ohbsZgVGb96Mk+h5iiBvYVThppX5u8Se3AegBmS989jOwDHbpeUA5J
- UOUbyXgFhOZXlu+E=;
-Received: from wout4-smtp.messagingengine.com ([64.147.123.20])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=vpJ9dXZxUyELiUZkJF9BzCAgHOYEhjLX6dirLp9GYu8=; b=h
+ 6ln5SQGJQD2VtF2L72YQzLAGZyj0qKJhHtN0LLGILNt58KP9yRoTgsppJeNbCpcLeMmzEVieezzL6
+ r46g60dNFxj+9MTK0dRCaGe6x7XZ96UUYamfQLjfETA+mZJO7FgFE8YTnORn8PO2dO3ab5uNb0PNb
+ bbWGyGEkGR2VeUwM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ix8js-004zxO-Qo
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jan 2020 12:16:08 +0000
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
- by mailout.west.internal (Postfix) with ESMTP id 09DB9466
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 30 Jan 2020 06:59:40 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Thu, 30 Jan 2020 06:59:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=
- date:from:to:subject:message-id:mime-version:content-type; s=
- fm2; bh=SJyu3bBmI2OdB73/aniVF5SZ80+0U7MRpnJsNZP5oLQ=; b=nNX2avGD
- lsLVK/ZPrqUGcnXgFV8QP04WjcQXP+6DyEAnsL7DBXUQ5+oK+1amHUjPCDQpt5Fa
- iuvICJmSDwHgM38N+DZBJOvgqn8gCD07AfF1VSIOSUfbCbu8bxn8duXVHk582l+C
- iHwV/rUUIpyxLZPflwwYPWfbjTd6ppqfAcSW1eTVGBIKStekJn90kgZoVwIoYWZK
- XPJhjplb7eM8+cMFB8YjsUVNQO621D+1KuWDBI39SSC6BVfkpzJnJl8H+WuFkNyL
- 7zIwheks8khbd8OODD3a8n8bD0RN1IkiSPBSKOfnZNj422s+RzL4laz8KGCETckD
- JOeEIuYSBAXCZQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=content-type:date:from:message-id
- :mime-version:subject:to:x-me-proxy:x-me-proxy:x-me-sender
- :x-me-sender:x-sasl-enc; s=fm1; bh=SJyu3bBmI2OdB73/aniVF5SZ80+0U
- 7MRpnJsNZP5oLQ=; b=DYgMmRqXD/wnKlIFz+XZZgTsbkAWs5JbQirgl6NTBKNwX
- QrRZ4ZR2AKvyc1mjaUjdf1TlFPwjb6GGWivN2U1meOWIe5otvdSLw2vSIG6ldqV9
- HAy+39fc6ySLg9T/h9ve3ffKjFHefz0E80iratk+85o0VsZRcGi64XhrgOoJM9c0
- CxOEdEfVl/++zUpLebs4H0QbBzOvJvOOgUiN2V8VutYVY+fAfZbupDfoCvzspI9z
- VRkZ7TylLRhig2N51ET8ZNU6hWpVcnM7Pb105A9lQWfvaGoWBme5uxKDlBOTzUb/
- RCdAUe17CY+LPtHHsNsR0q4aDNm/+jBnMobnICGCw==
-X-ME-Sender: <xms:LMUyXscq2qtcre_ReEz8oH-28r_wc9QmyxLthmGWmcXSLTAJzTTbbQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrfeekgdefhecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecunecujfgurhepfffhvffukfggtggusehttdertddttd
- dvnecuhfhrohhmpefirhgvghcumffjuceoghhrvghgsehkrhhorghhrdgtohhmqeenucff
- ohhmrghinheplhifnhdrnhgvthdplhhinhhugihfohhunhgurghtihhonhdrohhrghdpgh
- hithhhuhgsrdgtohhmnecukfhppeekgedrvdeguddrudelkedrudekudenucevlhhushht
- vghrufhiiigvpeehfeenucfrrghrrghmpehmrghilhhfrhhomhepghhrvghgsehkrhhorg
- hhrdgtohhm
-X-ME-Proxy: <xmx:LMUyXjL3CHiKHTnJ7_sVpoTPZ5LyeaVjwHfLT4XqOfbbwiAZZhqMsg>
- <xmx:LMUyXoRv-WwWdRGAnxgx6Q7wMLCu1J1ek6nIFUcIcg9DZ71v257Axw>
- <xmx:LMUyXsrYWnCPeZAc6BqJYRGbqRxK0QMb5QVhwMocMCOKtpK9e5W6Cg>
- <xmx:LMUyXujm0m5YWhyHv-sQo6YX6zoKaMYS4v_i5XaguADllfPBnYyZqg>
-Received: from localhost (unknown [84.241.198.181])
- by mail.messagingengine.com (Postfix) with ESMTPA id 00E923280062;
- Thu, 30 Jan 2020 06:59:39 -0500 (EST)
-Date: Thu, 30 Jan 2020 12:53:18 +0100
-From: Greg KH <greg@kroah.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20200130115318.GA959673@kroah.com>
+ id 1ixEwl-00B3U8-9w
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jan 2020 18:53:48 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 76A8220702;
+ Thu, 30 Jan 2020 18:53:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1580410416;
+ bh=gkUZbH3+rXoDnKrPU3LUSjOmxfEKY55z4s/Syd5EzCk=;
+ h=Date:From:To:Cc:Subject:From;
+ b=WfC4r47vT1+7aO/866TXK/W8wZf+cBh1dbByr+22PkvKt327PJ6JvEuvSgILTjVq3
+ Ms6NDRGJK0nAk0d1kQoeOeIz6xio7S+fwAlFTBfwBA3nyX+8Jfqy6pUf/0vOEitBb5
+ mApmLVB4Wny4Pkid6ZSk/VmRtZEt12uGooCY2w9k=
+Date: Thu, 30 Jan 2020 10:53:36 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20200130185335.GA225399@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lwn.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1ix8js-004zxO-Qo
-Subject: [f2fs-dev] Linux kernel development reports for the 5.5 release
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1ixEwl-00B3U8-9w
+Subject: [f2fs-dev] [GIT PULL] f2fs for 5.6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,58 +80,128 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+Hi Linus,
 
-I'm trying to keep track of the different companies that people are
-working for, or if people are just doing this as a hobby, or being paid
-as a consultant for future articles on lwn.net about who is doing the
-work on the Linux kernel.
+Could you please consider this pull request?
 
-Jonathan Corbet has also been writing articles at lwn.net about this
-topic, and we share the same set of scripts, as well as we write a
-yearly article for the Linux Foundation about Linux kernel
-contributions.  An example of this can be found at:
-	https://www.linuxfoundation.org/2017-linux-kernel-report-landing-page/
+Thanks,
 
-Your email address shows up in the changelog for the 5.5 kernel release
-as a contributor, but I can't seem to place it with a company.  If you
-don't mind, could you let me know what company you work for?  Or if no
-company, do you want to be classified in any of these other categories
-instead:
-	- Amateur/Hobbyist/Unaffiliated/None
-	  - this category is for people who are doing kernel work, but
-	    not getting paid by any corporation to do it.
-	- Consultant
-	  - this category is for people who are consultants working on
-	    the kernel and getting paid by other companies (not your
-	    own) to do the work
-	- Academia
-	  - this category is for people working for Universities and
-	    doing kernel work as part of their research or other
-	    responsibilities related to school work.
-	- Unknown
-	  - this category is for people who want to remain in the
-	    "unknown" category.
+The following changes since commit 6794862a16ef41f753abd75c03a152836e4c8028:
 
-If you want, this mapping will be kept private and only myself and Jon
-Corbet (of lwn.net) will have access to it.
+  Merge tag 'for-5.5-rc1-kconfig-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux (2019-12-09 12:14:31 -0800)
 
-The scripts involved in this can be found at:
-	https://github.com/gregkh/kernel-history
-if you are curious.
+are available in the Git repository at:
 
-If you have any questions about this, please let me know.
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.6
 
-If you never want me to bother you with this again, just let me know and
-I will be glad to take you off of my list.
+for you to fetch changes up to 80f2388afa6ef985f9c5c228e36705c4d4db4756:
 
-Thank you for your time,
+  f2fs: fix race conditions in ->d_compare() and ->d_hash() (2020-01-24 10:04:09 -0800)
 
-greg k-h
+----------------------------------------------------------------
+f2fs-for-5.6
+
+In this series, we've implemented transparent compression experimentally. It
+supports LZO and LZ4, but will add more later as we investigate in the field
+more. At this point, the feature doesn't expose compressed space to user
+directly in order to guarantee potential data updates later to the space.
+Instead, the main goal is to reduce data writes to flash disk as much as
+possible, resulting in extending disk life time as well as relaxing IO
+congestion. Alternatively, we're also considering to add ioctl() to reclaim
+compressed space and show it to user after putting the immutable bit.
+
+Enhancement:
+ - add compression support
+ - avoid unnecessary locks in quota ops
+ - harden power-cut scenario for zoned block devices
+ - use private bio_set to avoid IO congestion
+ - replace GC mutex with rwsem to serialize callers
+
+Bug fix:
+ - fix dentry consistency and memory corruption in rename()'s error case
+ - fix wrong swap extent reports
+ - fix casefolding bugs
+ - change lock coverage to avoid deadlock
+ - avoid GFP_KERNEL under f2fs_lock_op
+
+And, we've cleaned up sysfs entries to prepare no debugfs.
+
+----------------------------------------------------------------
+Chao Yu (5):
+      f2fs: introduce private bioset
+      f2fs: support data compression
+      f2fs: fix to add swap extent correctly
+      f2fs: fix memleak of kobject
+      f2fs: change to use rwsem for gc_mutex
+
+Chengguang Xu (2):
+      f2fs: fix miscounted block limit in f2fs_statfs_project()
+      f2fs: code cleanup for f2fs_statfs_project()
+
+Eric Biggers (5):
+      f2fs: don't keep META_MAPPING pages used for moving verity file blocks
+      f2fs: remove unneeded check for error allocating bio_post_read_ctx
+      f2fs: fix deadlock allocating bio_post_read_ctx from mempool
+      f2fs: fix dcache lookup of !casefolded directories
+      f2fs: fix race conditions in ->d_compare() and ->d_hash()
+
+Hridya Valsaraju (2):
+      f2fs: delete duplicate information on sysfs nodes
+      f2fs: Add f2fs stats to sysfs
+
+Jaegeuk Kim (13):
+      f2fs: preallocate DIO blocks when forcing buffered_io
+      f2fs: call f2fs_balance_fs outside of locked page
+      f2fs: keep quota data on write_begin failure
+      f2fs: should avoid recursive filesystem ops
+      f2fs: set GFP_NOFS when moving inline dentries
+      f2fs: set I_LINKABLE early to avoid wrong access by vfs
+      f2fs: don't put new_page twice in f2fs_rename
+      f2fs: declare nested quota_sem and remove unnecessary sems
+      f2fs: free sysfs kobject
+      f2fs: run fsck when getting bad inode during GC
+      f2fs: convert inline_dir early before starting rename
+      f2fs: add a way to turn off ipu bio cache
+      f2fs: update f2fs document regarding to fsync_mode
+
+Sahitya Tummala (2):
+      f2fs: cleanup duplicate stats for atomic files
+      f2fs: show the CP_PAUSE reason in checkpoint traces
+
+Shin'ichiro Kawasaki (2):
+      f2fs: Check write pointer consistency of open zones
+      f2fs: Check write pointer consistency of non-open zones
+
+ Documentation/ABI/testing/sysfs-fs-f2fs |  280 +++++---
+ Documentation/filesystems/f2fs.txt      |  216 ++----
+ fs/f2fs/Kconfig                         |   27 +-
+ fs/f2fs/Makefile                        |    1 +
+ fs/f2fs/checkpoint.c                    |    6 +-
+ fs/f2fs/compress.c                      | 1176 +++++++++++++++++++++++++++++++
+ fs/f2fs/data.c                          |  736 ++++++++++++++++---
+ fs/f2fs/debug.c                         |   88 ++-
+ fs/f2fs/dir.c                           |   25 +-
+ fs/f2fs/f2fs.h                          |  329 ++++++++-
+ fs/f2fs/file.c                          |  251 +++++--
+ fs/f2fs/gc.c                            |   18 +-
+ fs/f2fs/inline.c                        |   44 +-
+ fs/f2fs/inode.c                         |   41 ++
+ fs/f2fs/namei.c                         |  120 +++-
+ fs/f2fs/recovery.c                      |   20 +-
+ fs/f2fs/segment.c                       |  271 ++++++-
+ fs/f2fs/segment.h                       |   19 +-
+ fs/f2fs/super.c                         |  182 ++++-
+ fs/f2fs/sysfs.c                         |  158 ++++-
+ include/linux/f2fs_fs.h                 |    5 +
+ include/trace/events/f2fs.h             |  103 ++-
+ 22 files changed, 3467 insertions(+), 649 deletions(-)
+ create mode 100644 fs/f2fs/compress.c
 
 
 _______________________________________________
