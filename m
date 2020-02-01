@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B57814F83B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Feb 2020 16:13:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D26DE14F839
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Feb 2020 16:12:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ixuSB-00028p-Dw; Sat, 01 Feb 2020 15:12:59 +0000
+	id 1ixuS8-0002Z6-L0; Sat, 01 Feb 2020 15:12:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1ixuS9-00028G-Bo
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Feb 2020 15:12:57 +0000
+ (envelope-from <willy@infradead.org>) id 1ixuS7-0002Yp-G3
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Feb 2020 15:12:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ml5Puu4JmLRdzMhiiCOiBo4ACbPsQdjTb+QSPxS+DKY=; b=CnO9WleuCjBBTwcYPNAWbbtOcL
- pEfAjFz7LTHDQn2JHgdl7pWk5iaw0FYV5aKXA01p/LRdMSV/3IL4lapt9nfgVx8RPC7ZGtDAJcsnp
- XvsFE6S5Xa8Bj51P+M3LoTzU49G+1UrbzeyPyVbKj2pWNOvLz9MO/K5tYymYlUYZzjKU=;
+ bh=5KdHAUiS686jTpU0UKHCIX4BueXn8cIx7wjJa85X5I0=; b=FkVnieACOTf0A4lOUQVBkyq2Zr
+ FdtIfFrtB+MuDt/xOOXOb7/m/tKR6/xUvhPeMHsdAxxOCg3Ri7juaur43X4ttCStd+1O37OlP6g59
+ b5DVgk2bBIV8u+bJ+6HbQVnjVHtTTDEKboCBCwRPc7tsXqWZqayD0kcAuW+ao6dsA4NM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ml5Puu4JmLRdzMhiiCOiBo4ACbPsQdjTb+QSPxS+DKY=; b=aeF1PWxgGNOdGzrX+cO0AaF6IL
- ep02PnCo5CL+6AZAP7IUOeG9jR7SdLH1X5gG2AlNdNTRYuxRlDt2gFMi0ueQTovJqXIfMeWC79GcV
- 4lcwBTrCyExYCkoh5IYDQSAwNrNv7BGmePzuM9OafTu6D9AeqjTMjjEtXbWuL7zJ7OZU=;
+ bh=5KdHAUiS686jTpU0UKHCIX4BueXn8cIx7wjJa85X5I0=; b=mXMoEpvcUIqgEqIQj8fOeCkY1M
+ yOeKeBDIWWJ9ULADdAQQcbAYlWtUe8+o9/Daohi/zWe1GlOqtSZkblMSi47UgYgjmPQrTAZ8wZDth
+ TXioympYJ1BvkXIAvJ0lgXiLsBGRfRQgbuJ+Psxqaz9KvTT1MP++xbX/powdhcu3Vlxo=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ixuS7-007EgC-5v
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Feb 2020 15:12:57 +0000
+ id 1ixuS6-007Efu-8B
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 01 Feb 2020 15:12:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From
  :Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ml5Puu4JmLRdzMhiiCOiBo4ACbPsQdjTb+QSPxS+DKY=; b=bY3NBrXng43eEHaP4qFkNBHkjA
- /0ai0QxQPvj+vzTnehD7kfdwvHZ8vzjptHG3nMCtmSDzhJPLlrrRvHwMG04vHV9fd/CCJRTd7hZ9S
- kCY6iKxXzzldIpqfDcbhn1eEv9lpm3OwGdFjku0KJeD/QhITkP89Q8r/3MLB+25BxQPdL5yjJPCI/
- zaoC9Cl+tOymw4aTP+dhrGrhEN9KAUrBXzsBIHlqEM/UfvzLlZxLPkERj8Ov2t+ljIWtVaj85jqMP
- h352PTKYgXTRiVZYfWwYCWlL9sM65Px7gR4w2uvH7jwuclAa5kmfsGcMYSDK+NcJWFvdA8OCVg7ot
- FV+G0YLQ==;
+ bh=5KdHAUiS686jTpU0UKHCIX4BueXn8cIx7wjJa85X5I0=; b=FlVyy6qaG4IujDNRCtF80f9ySl
+ u5mmlE5tsMA75R2R/eYDZpmR8IeeooX5NSL6xAXJCk/H+/5OJn0NPzsNOZ5WkFGxat2yok9CazbY8
+ 1pOlT/2Ai0gOBLMnUF2xrNhDj9Pe55GWzzCiOqRfpc0eJXqS4+AnHxwDAZRaVO0ztF1uHWigPOp+l
+ HXRKlCW9qU5wh3naAfOyhIlT9u7dCFkFf25j9ym/UMn5RYq51PhUzSsXbXfJaruowz2NAeBqJPszW
+ 6VD6NliwDsjdULcKj4Y7T1NoMA+wy+jqvmmpBc5Ntaj6sZ2/RrVnZhTyZlszd0Okkg9ijvLICcDq7
+ t5xACMnQ==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1ixuRu-0006HT-5R; Sat, 01 Feb 2020 15:12:42 +0000
+ Hat Linux)) id 1ixuRu-0006Hw-Cn; Sat, 01 Feb 2020 15:12:42 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Sat,  1 Feb 2020 07:12:32 -0800
-Message-Id: <20200201151240.24082-5-willy@infradead.org>
+Date: Sat,  1 Feb 2020 07:12:38 -0800
+Message-Id: <20200201151240.24082-11-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200201151240.24082-1-willy@infradead.org>
 References: <20200201151240.24082-1-willy@infradead.org>
 MIME-Version: 1.0
-X-Spam-Score: 1.8 (+)
+X-Spam-Score: 1.7 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -75,10 +75,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.6 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1ixuS7-007EgC-5v
-Subject: [f2fs-dev] [PATCH v4 04/12] mm: Add readahead address space
- operation
+ -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ixuS6-007Efu-8B
+Subject: [f2fs-dev] [PATCH v4 10/12] f2fs: Convert from readpages to
+ readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,163 +90,206 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: cluster-devel@redhat.com, linux-kernel@vger.kernel.org,
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-This replaces ->readpages with a saner interface:
- - Return the number of pages not read instead of an ignored error code.
- - Pages are already in the page cache when ->readahead is called.
- - Implementation looks up the pages in the page cache instead of
-   having them passed in a linked list.
+Use the new readahead operation in f2fs
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Cc: linux-btrfs@vger.kernel.org
-Cc: linux-erofs@lists.ozlabs.org
-Cc: linux-ext4@vger.kernel.org
 Cc: linux-f2fs-devel@lists.sourceforge.net
-Cc: linux-xfs@vger.kernel.org
-Cc: cluster-devel@redhat.com
-Cc: ocfs2-devel@oss.oracle.com
 ---
- Documentation/filesystems/locking.rst |  7 ++++++-
- Documentation/filesystems/vfs.rst     | 14 ++++++++++++++
- include/linux/fs.h                    |  2 ++
- include/linux/pagemap.h               | 12 ++++++++++++
- mm/readahead.c                        | 13 ++++++++++++-
- 5 files changed, 46 insertions(+), 2 deletions(-)
+ fs/f2fs/data.c              | 35 ++++++++++++++---------------------
+ fs/f2fs/f2fs.h              |  5 ++---
+ fs/f2fs/verity.c            | 16 +++++++++++-----
+ include/trace/events/f2fs.h |  6 +++---
+ 4 files changed, 30 insertions(+), 32 deletions(-)
 
-diff --git a/Documentation/filesystems/locking.rst b/Documentation/filesystems/locking.rst
-index 5057e4d9dcd1..3d10729caf44 100644
---- a/Documentation/filesystems/locking.rst
-+++ b/Documentation/filesystems/locking.rst
-@@ -239,6 +239,8 @@ prototypes::
- 	int (*readpage)(struct file *, struct page *);
- 	int (*writepages)(struct address_space *, struct writeback_control *);
- 	int (*set_page_dirty)(struct page *page);
-+	unsigned (*readahead)(struct file *, struct address_space *,
-+				 pgoff_t start, unsigned nr_pages);
- 	int (*readpages)(struct file *filp, struct address_space *mapping,
- 			struct list_head *pages, unsigned nr_pages);
- 	int (*write_begin)(struct file *, struct address_space *mapping,
-@@ -271,7 +273,8 @@ writepage:		yes, unlocks (see below)
- readpage:		yes, unlocks
- writepages:
- set_page_dirty		no
--readpages:
-+readahead:		yes, unlocks
-+readpages:		no
- write_begin:		locks the page		 exclusive
- write_end:		yes, unlocks		 exclusive
- bmap:
-@@ -295,6 +298,8 @@ the request handler (/dev/loop).
- ->readpage() unlocks the page, either synchronously or via I/O
- completion.
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 8bd9afa81c54..80803f8b1b40 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2159,9 +2159,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+  * use ->readpage() or do the necessary surgery to decouple ->readpages()
+  * from read-ahead.
+  */
+-int f2fs_mpage_readpages(struct address_space *mapping,
+-			struct list_head *pages, struct page *page,
+-			unsigned nr_pages, bool is_readahead)
++int f2fs_mpage_readpages(struct address_space *mapping, pgoff_t start,
++		struct page *page, unsigned nr_pages, bool is_readahead)
+ {
+ 	struct bio *bio = NULL;
+ 	sector_t last_block_in_bio = 0;
+@@ -2192,15 +2191,10 @@ int f2fs_mpage_readpages(struct address_space *mapping,
+ 	map.m_may_create = false;
  
-+->readahead() unlocks the pages like ->readpage().
-+
- ->readpages() populates the pagecache with the passed pages and starts
- I/O against them.  They come unlocked upon I/O completion.
+ 	for (; nr_pages; nr_pages--) {
+-		if (pages) {
+-			page = list_last_entry(pages, struct page, lru);
++		if (is_readahead) {
++			page = readahead_page(mapping, start++);
  
-diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
-index 7d4d09dd5e6d..c2bc345f2169 100644
---- a/Documentation/filesystems/vfs.rst
-+++ b/Documentation/filesystems/vfs.rst
-@@ -706,6 +706,8 @@ cache in your filesystem.  The following members are defined:
- 		int (*readpage)(struct file *, struct page *);
- 		int (*writepages)(struct address_space *, struct writeback_control *);
- 		int (*set_page_dirty)(struct page *page);
-+		unsigned (*readahead)(struct file *filp, struct address_space *mapping,
-+				 pgoff_t start, unsigned nr_pages);
- 		int (*readpages)(struct file *filp, struct address_space *mapping,
- 				 struct list_head *pages, unsigned nr_pages);
- 		int (*write_begin)(struct file *, struct address_space *mapping,
-@@ -781,6 +783,18 @@ cache in your filesystem.  The following members are defined:
- 	If defined, it should set the PageDirty flag, and the
- 	PAGECACHE_TAG_DIRTY tag in the radix tree.
+ 			prefetchw(&page->flags);
+-			list_del(&page->lru);
+-			if (add_to_page_cache_lru(page, mapping,
+-						  page_index(page),
+-						  readahead_gfp_mask(mapping)))
+-				goto next_page;
+ 		}
  
-+``readahead``
-+	Called by the VM to read pages associated with the address_space
-+	object.  The pages are consecutive in the page cache and
-+	are locked.  The implementation should decrement the page
-+	refcount after attempting I/O on each page.  Usually the
-+	page will be unlocked by the I/O completion handler.  If the
-+	function does not attempt I/O on some pages, return the number
-+	of pages which were not read so the caller can unlock the pages
-+	for you.  Set PageUptodate if the I/O completes successfully.
-+	Setting PageError on any page will be ignored; simply unlock
-+	the page if an I/O error occurs.
-+
- ``readpages``
- 	called by the VM to read pages associated with the address_space
- 	object.  This is essentially just a vector version of readpage.
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 41584f50af0d..3bfc142e7d10 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -375,6 +375,8 @@ struct address_space_operations {
- 	 */
- 	int (*readpages)(struct file *filp, struct address_space *mapping,
- 			struct list_head *pages, unsigned nr_pages);
-+	unsigned (*readahead)(struct file *, struct address_space *,
-+			pgoff_t start, unsigned nr_pages);
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+@@ -2243,7 +2237,7 @@ int f2fs_mpage_readpages(struct address_space *mapping,
+ 			unlock_page(page);
+ 		}
+ next_page:
+-		if (pages)
++		if (is_readahead)
+ 			put_page(page);
  
- 	int (*write_begin)(struct file *, struct address_space *mapping,
- 				loff_t pos, unsigned len, unsigned flags,
-diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
-index ccb14b6a16b5..a2cf007826f2 100644
---- a/include/linux/pagemap.h
-+++ b/include/linux/pagemap.h
-@@ -630,6 +630,18 @@ static inline int add_to_page_cache(struct page *page,
- 	return error;
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+@@ -2259,10 +2253,9 @@ int f2fs_mpage_readpages(struct address_space *mapping,
+ 		}
+ #endif
+ 	}
+-	BUG_ON(pages && !list_empty(pages));
+ 	if (bio)
+ 		__submit_bio(F2FS_I_SB(inode), bio, DATA);
+-	return pages ? 0 : ret;
++	return ret;
  }
  
-+/*
-+ * Only call this from a ->readahead implementation.
-+ */
-+static inline
-+struct page *readahead_page(struct address_space *mapping, pgoff_t index)
-+{
-+	struct page *page = xa_load(&mapping->i_pages, index);
-+	VM_BUG_ON_PAGE(!PageLocked(page), page);
-+
-+	return page;
-+}
-+
- static inline unsigned long dir_pages(struct inode *inode)
+ static int f2fs_read_data_page(struct file *file, struct page *page)
+@@ -2282,27 +2275,27 @@ static int f2fs_read_data_page(struct file *file, struct page *page)
+ 		ret = f2fs_read_inline_data(inode, page);
+ 	if (ret == -EAGAIN)
+ 		ret = f2fs_mpage_readpages(page_file_mapping(page),
+-						NULL, page, 1, false);
++						0, page, 1, false);
+ 	return ret;
+ }
+ 
+-static int f2fs_read_data_pages(struct file *file,
++static unsigned f2fs_readahead(struct file *file,
+ 			struct address_space *mapping,
+-			struct list_head *pages, unsigned nr_pages)
++			pgoff_t start, unsigned nr_pages)
  {
- 	return (unsigned long)(inode->i_size + PAGE_SIZE - 1) >>
-diff --git a/mm/readahead.c b/mm/readahead.c
-index 7daef0038b14..b2ed0baf3a5d 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -121,7 +121,18 @@ static void read_pages(struct address_space *mapping, struct file *filp,
+ 	struct inode *inode = mapping->host;
+-	struct page *page = list_last_entry(pages, struct page, lru);
  
- 	blk_start_plug(&plug);
+-	trace_f2fs_readpages(inode, page, nr_pages);
++	trace_f2fs_readpages(inode, start, nr_pages);
  
--	if (mapping->a_ops->readpages) {
-+	if (mapping->a_ops->readahead) {
-+		unsigned left = mapping->a_ops->readahead(filp, mapping,
-+				start, nr_pages);
+ 	if (!f2fs_is_compress_backend_ready(inode))
+ 		return 0;
+ 
+ 	/* If the file has inline data, skip readpages */
+ 	if (f2fs_has_inline_data(inode))
+-		return 0;
++		return nr_pages;
+ 
+-	return f2fs_mpage_readpages(mapping, pages, NULL, nr_pages, true);
++	f2fs_mpage_readpages(mapping, start, NULL, nr_pages, true);
++	return 0;
+ }
+ 
+ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
+@@ -3778,7 +3771,7 @@ static void f2fs_swap_deactivate(struct file *file)
+ 
+ const struct address_space_operations f2fs_dblock_aops = {
+ 	.readpage	= f2fs_read_data_page,
+-	.readpages	= f2fs_read_data_pages,
++	.readahead	= f2fs_readahead,
+ 	.writepage	= f2fs_write_data_page,
+ 	.writepages	= f2fs_write_data_pages,
+ 	.write_begin	= f2fs_write_begin,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5355be6b6755..db00907f90f1 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3344,9 +3344,8 @@ int f2fs_reserve_new_block(struct dnode_of_data *dn);
+ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
+ int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from);
+ int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
+-int f2fs_mpage_readpages(struct address_space *mapping,
+-			struct list_head *pages, struct page *page,
+-			unsigned nr_pages, bool is_readahead);
++int f2fs_mpage_readpages(struct address_space *mapping, pgoff_t start,
++		struct page *page, unsigned nr_pages, bool is_readahead);
+ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+ 			int op_flags, bool for_write);
+ struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index);
+diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+index d7d430a6f130..71e92b9b3aa6 100644
+--- a/fs/f2fs/verity.c
++++ b/fs/f2fs/verity.c
+@@ -231,7 +231,6 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
+ static void f2fs_merkle_tree_readahead(struct address_space *mapping,
+ 				       pgoff_t start_index, unsigned long count)
+ {
+-	LIST_HEAD(pages);
+ 	unsigned int nr_pages = 0;
+ 	struct page *page;
+ 	pgoff_t index;
+@@ -240,16 +239,23 @@ static void f2fs_merkle_tree_readahead(struct address_space *mapping,
+ 	for (index = start_index; index < start_index + count; index++) {
+ 		page = xa_load(&mapping->i_pages, index);
+ 		if (!page || xa_is_value(page)) {
+-			page = __page_cache_alloc(readahead_gfp_mask(mapping));
++			gfp_t gfp = readahead_gfp_mask(mapping);
++			page = __page_cache_alloc(gfp);
+ 			if (!page)
+ 				break;
+-			page->index = index;
+-			list_add(&page->lru, &pages);
++			if (add_to_page_cache_lru(page, mapping, index, gfp)) {
++				put_page(page);
++				break;
++			}
+ 			nr_pages++;
+ 		}
+ 	}
 +
-+		while (left) {
-+			struct page *page = readahead_page(mapping,
-+					start + nr_pages - left);
-+			unlock_page(page);
-+			put_page(page);
-+			left--;
-+		}
-+	} else if (mapping->a_ops->readpages) {
- 		mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
- 		/* Clean up the remaining pages */
- 		put_pages_list(pages);
++	if (!nr_pages)
++		return;
++
+ 	blk_start_plug(&plug);
+-	f2fs_mpage_readpages(mapping, &pages, NULL, nr_pages, true);
++	f2fs_mpage_readpages(mapping, start_index, NULL, nr_pages, true);
+ 	blk_finish_plug(&plug);
+ }
+ 
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 67a97838c2a0..d72da4a33883 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -1375,9 +1375,9 @@ TRACE_EVENT(f2fs_writepages,
+ 
+ TRACE_EVENT(f2fs_readpages,
+ 
+-	TP_PROTO(struct inode *inode, struct page *page, unsigned int nrpage),
++	TP_PROTO(struct inode *inode, pgoff_t start, unsigned int nrpage),
+ 
+-	TP_ARGS(inode, page, nrpage),
++	TP_ARGS(inode, start, nrpage),
+ 
+ 	TP_STRUCT__entry(
+ 		__field(dev_t,	dev)
+@@ -1389,7 +1389,7 @@ TRACE_EVENT(f2fs_readpages,
+ 	TP_fast_assign(
+ 		__entry->dev	= inode->i_sb->s_dev;
+ 		__entry->ino	= inode->i_ino;
+-		__entry->start	= page->index;
++		__entry->start	= start;
+ 		__entry->nrpage	= nrpage;
+ 	),
+ 
 -- 
 2.24.1
 
