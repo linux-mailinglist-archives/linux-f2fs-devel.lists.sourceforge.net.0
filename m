@@ -2,85 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69E6D151F1A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Feb 2020 18:17:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CD061521E9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Feb 2020 22:21:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iz1oq-0004rO-GX; Tue, 04 Feb 2020 17:17:00 +0000
+	id 1iz5dJ-0001te-Lz; Tue, 04 Feb 2020 21:21:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1iz1oo-0004r8-NM
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 17:16:58 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1iz5dJ-0001tW-0W
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 21:21:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3NMwJ5AxeA2DxLtwDwGHd3oNGbv+NT9nGn8qTgTw24Y=; b=hcLuNJBqX2ai4SBi5JXeJ3KndR
- uE1LeVaWWBwI42v76VSp0y7AwxGom8X59Y/cR9ozAQrcolcw/DSpkboxDj7Hr6zNVBxZaaAOSNgsQ
- ff4O+Sxl8TZHKTxrzdrvUeHQisLa9EcxaCSaL9Q0gAdCzEVhNT1Nn7pOzSHQwUTtr91A=;
+ bh=tvDW4vTwwhpB3WPkRzSMtCWXYEqurclajuXMBivQWM4=; b=JJf83NMmimStFNUIYNdYD8G8T0
+ gpeKcRRE5GhSiFVjK9ac8035l92dPuo8Y/5D2nTLcR7HhSyaASJO3dY5VDndw7m1dVIQ5P1eaBpiD
+ axM9wAwy3maa4Y+UtTIqI1tOPhg4DATlKAoeOyXFwCE3VgGpLUBfC0gZtTs8fCNKfvi8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3NMwJ5AxeA2DxLtwDwGHd3oNGbv+NT9nGn8qTgTw24Y=; b=OIs6Qa9YeDNCSBmCic6AhoFs9l
- CfXNJX/XvDmc2Lx0hRZCfEiSqMe31dVe1KNsaU/PVwAPJ5/bSDMRD0sCunZiATIIanCJJJmQXVt5Z
- /n4wnIyLiIQKuD3QU8+0AjxfB4eat/fWAG23aRdwQCaJV4C8mg0IId07tn0kdeBCpHvc=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=tvDW4vTwwhpB3WPkRzSMtCWXYEqurclajuXMBivQWM4=; b=DXRieY+iiXiJOtw6XF1E7LBLow
+ cGD/t3TepELbgy3RLTcvstHDHBQX1plFfuTUovm+VfQJ8+f/bwDHVewgVNQ+4mjkA3UxSxs/u0HIg
+ BB5PKIIJKaim2Dhgp+5xyUZeIJUiGqoVWoGVo3Zz+QIXBuX/o0oEBECpbV8wpfpsZ7KU=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iz1ok-00Grxv-UP
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 17:16:58 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=3NMwJ5AxeA2DxLtwDwGHd3oNGbv+NT9nGn8qTgTw24Y=; b=KvUEDJeoNCmLGpgVORZ1wzUvhJ
- wIAGhqJxfoOzPQ81fRuNGE10yA3XKfb/XFoGImLuak/cMOfZTUmObg0Isl2d2H0xUOSKupB0K5WcM
- sKxT2uMCKsc4W81B/oIY7Nq/C5eF5mKX/mpXbcr6o6ZfTyX9aekNmNh3gtOEhVHyRyRFOjLmBOoAV
- w/5nCLaExb6rBxUuDMer/dCqVGMYPxFJFfEgIYZLwmM129d6OhQkvQzzrkTlvB2JCwmIwlAncUOBt
- f+hfqZM2PPSztiwr4r/vdc/oOP6H8o9d+EufWbh/gPVAF/VnEbBn1Z6Mr84omAyvjNDVJTZNQSeyL
- y2yx+ifA==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iz1oN-0000iE-LX; Tue, 04 Feb 2020 17:16:31 +0000
-Date: Tue, 4 Feb 2020 09:16:31 -0800
-From: Matthew Wilcox <willy@infradead.org>
-To: dsterba@suse.cz, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- cluster-devel@redhat.com, ocfs2-devel@oss.oracle.com
-Message-ID: <20200204171631.GM8731@bombadil.infradead.org>
-References: <20200201151240.24082-1-willy@infradead.org>
- <20200204153227.GF2654@twin.jikos.cz>
+ id 1iz5dG-00APPx-Ql
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 21:21:20 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id EB9E52082E;
+ Tue,  4 Feb 2020 21:21:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1580851273;
+ bh=KKB12bjPksD5iDE0UW+8PafWpWM7BZjKsP6ut1aSK0A=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oxmTWCjiquUMY/wLyhosQzPiJUtMVJpf+m1lgxRnrRYaMOAsKMe+YztcbPWFAAUfW
+ iI4xdmUCwP/eczU9zRInuGln1AqHPidnOQJDDwEhMnsC7PSPpuh221PGtC+P6WWC9o
+ fNNO9pXc/hjVFXtQuzkp0Oh/c6mafWyPFwBNDC30=
+Date: Tue, 4 Feb 2020 13:21:11 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200204212110.GA122850@gmail.com>
+References: <20191218145136.172774-1-satyat@google.com>
+ <20200108140556.GB2896@infradead.org>
+ <20200108184305.GA173657@google.com>
+ <20200117085210.GA5473@infradead.org>
+ <20200201005341.GA134917@google.com>
+ <20200203091558.GA28527@infradead.org>
+ <20200204033915.GA122248@google.com>
+ <20200204145832.GA28393@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200204153227.GF2654@twin.jikos.cz>
-X-Spam-Score: 2.2 (++)
+In-Reply-To: <20200204145832.GA28393@infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 1.7 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 2.5 URIBL_DBL_ABUSE_MALW   Contains an abused malware URL listed in the
- Spamhaus DBL blocklist [URIs: infradead.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 1.8 FSL_HELO_FAKE          No description available.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1iz1ok-00Grxv-UP
-Subject: Re: [f2fs-dev] [PATCH v4 00/12] Change readahead API
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1iz5dG-00APPx-Ql
+Subject: Re: [f2fs-dev] [PATCH v6 0/9] Inline Encryption Support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,41 +90,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 04, 2020 at 04:32:27PM +0100, David Sterba wrote:
-> On Sat, Feb 01, 2020 at 07:12:28AM -0800, Matthew Wilcox wrote:
-> > From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> > 
-> > I would particularly value feedback on this from the gfs2 and ocfs2
-> > maintainers.  They have non-trivial changes, and a review on patch 5
-> > would be greatly appreciated.
-> > 
-> > This series adds a readahead address_space operation to eventually
-> > replace the readpages operation.  The key difference is that
-> > pages are added to the page cache as they are allocated (and
-> > then looked up by the filesystem) instead of passing them on a
-> > list to the readpages operation and having the filesystem add
-> > them to the page cache.  It's a net reduction in code for each
-> > implementation, more efficient than walking a list, and solves
-> > the direct-write vs buffered-read problem reported by yu kuai at
-> > https://lore.kernel.org/linux-fsdevel/20200116063601.39201-1-yukuai3@huawei.com/
-> > 
-> > v4:
-> >  - Rebase on current Linus (a62aa6f7f50a ("Merge tag 'gfs2-for-5.6'"))
+On Tue, Feb 04, 2020 at 06:58:32AM -0800, Christoph Hellwig wrote:
+> On Mon, Feb 03, 2020 at 07:39:15PM -0800, Satya Tangirala wrote:
+> > Wouldn't that mean that all the other requests in the queue, even ones that
+> > don't even need any inline encryption, also don't get processed until the
+> > queue is woken up again?
 > 
-> I've tried to test the patchset but haven't got very far, it crashes at boot
-> ritht after VFS mounts the root. The patches are from mailinglist, applied on
-> current master, bug I saw the same crash with the git branch in your
-> repo (probably v1).
+> For the basic implementation yes.
+> 
+> > And if so, are we really ok with that?
+> 
+> That depends on the use cases.  With the fscrypt setup are we still
+> going to see unencrypted I/O to the device as well?  If so we'll need
+> to refine the setup and only queue up unencrypted requests.  But I'd
+> still try to dumb version first and then refine it.
 
-Yeah, I wasn't able to test at the time due to what turned out to be
-the hpet bug in Linus' tree.  Now that's fixed, I've found & fixed a
-couple more bugs.  There'll be a v5 once I fix the remaining problem
-(looks like a missing page unlock somewhere).
+Definitely, for several reasons:
 
+- Not all files on the filesystem are necessarily encrypted.
+- Filesystem metadata is not encrypted (except for filenames, but those don't
+  use inline encryption).
+- Encryption isn't necessarily being used on all partitions on the disk.
+
+It's also not just about unencrypted vs. encrypted, since just because someone
+is waiting for one keyslot doesn't mean we should pause all encrypted I/O to the
+device for all keyslots.
+
+> 
+> > As you said, we'd need the queue to wake up once a keyslot is available.
+> > It's possible that only some hardware queues and not others get blocked
+> > because of keyslot programming, so ideally, we could somehow make the
+> > correct hardware queue(s) wake up once a keyslot is freed. But the keyslot
+> > manager can't assume that it's actually blk-mq that's being used
+> > underneath,
+> 
+> Why?  The legacy requet code is long gone.
+> 
+> > Also I forgot to mention this in my previous mail, but there may be some
+> > drivers/devices whose keyslots cannot be programmed from an atomic context,
+> > so this approach which might make things difficult in those situations (the
+> > UFS v2.1 spec, which I followed while implementing support for inline
+> > crypto for UFS, does not care whether we're in an atomic context or not,
+> > but there might be specifications for other drivers, or even some
+> > particular UFS inline encryption hardware that do).
+> 
+> We have an option to never call ->queue_rq from atomic context
+> (BLK_MQ_F_BLOCKING).  But do you know of existing hardware that behaves
+> like this or is it just hypothetical?
+
+Maybe -- check the Qualcomm ICE (Inline Crypto Engine) driver I posted at
+https://lkml.kernel.org/linux-block/20200110061634.46742-1-ebiggers@kernel.org/.
+The hardware requires vendor-specific SMC calls to program keys, rather than the
+UFS standard way.  It's currently blocking, since the code to make the SMC calls
+in drivers/firmware/qcom_scm*.c uses GFP_KERNEL and mutex_lock().
+
+I'll test whether it can work in atomic context by using GFP_ATOMIC and
+qcom_scm_call_atomic() instead.  (Adding a spinlock might be needed too.)
+
+- Eric
 
 
 _______________________________________________
