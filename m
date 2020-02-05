@@ -2,83 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CD061521E9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Feb 2020 22:21:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7721E152484
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Feb 2020 02:40:16 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1iz5dJ-0001te-Lz; Tue, 04 Feb 2020 21:21:21 +0000
+	id 1iz9fq-0004ct-1L; Wed, 05 Feb 2020 01:40:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1iz5dJ-0001tW-0W
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 21:21:21 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1iz9fo-0004cf-Uk
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 01:40:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tvDW4vTwwhpB3WPkRzSMtCWXYEqurclajuXMBivQWM4=; b=JJf83NMmimStFNUIYNdYD8G8T0
- gpeKcRRE5GhSiFVjK9ac8035l92dPuo8Y/5D2nTLcR7HhSyaASJO3dY5VDndw7m1dVIQ5P1eaBpiD
- axM9wAwy3maa4Y+UtTIqI1tOPhg4DATlKAoeOyXFwCE3VgGpLUBfC0gZtTs8fCNKfvi8=;
+ bh=2fK6zMfEnGUN3zm0KimX+IUR7M3QnDEwV0PIO8DrBCA=; b=YiK1F56MeQGwWpFUxl24U6THvO
+ 9BY71BOlga9w8wMFr7LjtlroVkQnLyy6VgD0wVFZVpzk5FQsfdgT+D1I6RwQARMwtr4akdtrGw5qO
+ 1Bobe2XkiEB3rjUUQhaLcavzu3LvN42i4E5JZvoYlHe8cOfFGTKvSZULNX77HBT6CVb8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tvDW4vTwwhpB3WPkRzSMtCWXYEqurclajuXMBivQWM4=; b=DXRieY+iiXiJOtw6XF1E7LBLow
- cGD/t3TepELbgy3RLTcvstHDHBQX1plFfuTUovm+VfQJ8+f/bwDHVewgVNQ+4mjkA3UxSxs/u0HIg
- BB5PKIIJKaim2Dhgp+5xyUZeIJUiGqoVWoGVo3Zz+QIXBuX/o0oEBECpbV8wpfpsZ7KU=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=2fK6zMfEnGUN3zm0KimX+IUR7M3QnDEwV0PIO8DrBCA=; b=WikqikVp0n7cYqY0OAG2mFhHbK
+ moDSLf2bzcIg5+XhPh00I8dAvqyW0K/oGsOHrSsqQdnBY5LenMHuN1nLX/gnzcnBlYEA1s588mJD2
+ nTdMUXHhsYQTHvsAi0khy7tEUjkJbsuX8v3XAtA6QZY7xD7AYoHGl5MHpXANTDBM2At0=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iz5dG-00APPx-Ql
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Feb 2020 21:21:20 +0000
-Received: from gmail.com (unknown [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EB9E52082E;
- Tue,  4 Feb 2020 21:21:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1580851273;
- bh=KKB12bjPksD5iDE0UW+8PafWpWM7BZjKsP6ut1aSK0A=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oxmTWCjiquUMY/wLyhosQzPiJUtMVJpf+m1lgxRnrRYaMOAsKMe+YztcbPWFAAUfW
- iI4xdmUCwP/eczU9zRInuGln1AqHPidnOQJDDwEhMnsC7PSPpuh221PGtC+P6WWC9o
- fNNO9pXc/hjVFXtQuzkp0Oh/c6mafWyPFwBNDC30=
-Date: Tue, 4 Feb 2020 13:21:11 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200204212110.GA122850@gmail.com>
-References: <20191218145136.172774-1-satyat@google.com>
- <20200108140556.GB2896@infradead.org>
- <20200108184305.GA173657@google.com>
- <20200117085210.GA5473@infradead.org>
- <20200201005341.GA134917@google.com>
- <20200203091558.GA28527@infradead.org>
- <20200204033915.GA122248@google.com>
- <20200204145832.GA28393@infradead.org>
+ id 1iz9fk-00AVHj-FB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 01:40:12 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id E418031958F4B04BFA3;
+ Wed,  5 Feb 2020 09:39:50 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 5 Feb 2020
+ 09:39:48 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20200120100045.70210-1-yuchao0@huawei.com>
+ <20200123221855.GA7917@jaegeuk-macbookpro.roam.corp.google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <0d3f284a-5b98-3d6f-cc9f-47431053f42c@huawei.com>
+Date: Wed, 5 Feb 2020 09:39:47 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200204145832.GA28393@infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 1.7 (+)
+In-Reply-To: <20200123221855.GA7917@jaegeuk-macbookpro.roam.corp.google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 1.8 FSL_HELO_FAKE          No description available.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: mail-archive.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1iz5dG-00APPx-Ql
-Subject: Re: [f2fs-dev] [PATCH v6 0/9] Inline Encryption Support
+X-Headers-End: 1iz9fk-00AVHj-FB
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to force keeping write barrier for
+ strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,74 +79,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Satya Tangirala <satyat@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 04, 2020 at 06:58:32AM -0800, Christoph Hellwig wrote:
-> On Mon, Feb 03, 2020 at 07:39:15PM -0800, Satya Tangirala wrote:
-> > Wouldn't that mean that all the other requests in the queue, even ones that
-> > don't even need any inline encryption, also don't get processed until the
-> > queue is woken up again?
+On 2020/1/24 6:18, Jaegeuk Kim wrote:
+> On 01/20, Chao Yu wrote:
+>> If barrier is enabled, for strict fsync mode, we should force to
+>> use atomic write semantics to avoid data corruption due to no
+>> barrier support in lower device.
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>>  fs/f2fs/file.c | 7 +++++++
+>>  1 file changed, 7 insertions(+)
+>>
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 86ddbb55d2b1..c9dd45f82fbd 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -241,6 +241,13 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+>>  	};
+>>  	unsigned int seq_id = 0;
+>>  
+>> +	/*
+>> +	 * for strict fsync mode, force to keep atomic write sematics to avoid
+>> +	 * data corruption if lower device doesn't support write barrier.
+>> +	 */
+>> +	if (!atomic && F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
+>> +		atomic = true;
 > 
-> For the basic implementation yes.
+> This allows to relax IO ordering and cache flush. I'm not sure that's what you
+> want to do here for strict mode.
+
+I intend to solve potential data corruption mentioned in below report:
+
+https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
+
+It occurs in this scenario:
+
+- write page #0; persist
+- overwrite page #0
+- fsync
+ - write data page #0 OPU into device's cache
+ - write inode page into device's cache
+ - issue flush
+
+If SPO is triggered during flush command, inode page can be persisted before data
+page #0, so that after recovery, inode page can be recovered with new physical block
+address of data page #0, however there may contains dummy data in new physical block
+address.
+
+So what user see is after overwrite & fsync + SPO, old data in file was corrupted, if
+any user do care about such case, we can enhance to avoid the corruption in strict mode
+and suggest user to use fsync's strict mode.
+
+Thoughts?
+
+Thanks,
+
 > 
-> > And if so, are we really ok with that?
+>> +
+>>  	if (unlikely(f2fs_readonly(inode->i_sb) ||
+>>  				is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
+>>  		return 0;
+>> -- 
+>> 2.18.0.rc1
+> .
 > 
-> That depends on the use cases.  With the fscrypt setup are we still
-> going to see unencrypted I/O to the device as well?  If so we'll need
-> to refine the setup and only queue up unencrypted requests.  But I'd
-> still try to dumb version first and then refine it.
-
-Definitely, for several reasons:
-
-- Not all files on the filesystem are necessarily encrypted.
-- Filesystem metadata is not encrypted (except for filenames, but those don't
-  use inline encryption).
-- Encryption isn't necessarily being used on all partitions on the disk.
-
-It's also not just about unencrypted vs. encrypted, since just because someone
-is waiting for one keyslot doesn't mean we should pause all encrypted I/O to the
-device for all keyslots.
-
-> 
-> > As you said, we'd need the queue to wake up once a keyslot is available.
-> > It's possible that only some hardware queues and not others get blocked
-> > because of keyslot programming, so ideally, we could somehow make the
-> > correct hardware queue(s) wake up once a keyslot is freed. But the keyslot
-> > manager can't assume that it's actually blk-mq that's being used
-> > underneath,
-> 
-> Why?  The legacy requet code is long gone.
-> 
-> > Also I forgot to mention this in my previous mail, but there may be some
-> > drivers/devices whose keyslots cannot be programmed from an atomic context,
-> > so this approach which might make things difficult in those situations (the
-> > UFS v2.1 spec, which I followed while implementing support for inline
-> > crypto for UFS, does not care whether we're in an atomic context or not,
-> > but there might be specifications for other drivers, or even some
-> > particular UFS inline encryption hardware that do).
-> 
-> We have an option to never call ->queue_rq from atomic context
-> (BLK_MQ_F_BLOCKING).  But do you know of existing hardware that behaves
-> like this or is it just hypothetical?
-
-Maybe -- check the Qualcomm ICE (Inline Crypto Engine) driver I posted at
-https://lkml.kernel.org/linux-block/20200110061634.46742-1-ebiggers@kernel.org/.
-The hardware requires vendor-specific SMC calls to program keys, rather than the
-UFS standard way.  It's currently blocking, since the code to make the SMC calls
-in drivers/firmware/qcom_scm*.c uses GFP_KERNEL and mutex_lock().
-
-I'll test whether it can work in atomic context by using GFP_ATOMIC and
-qcom_scm_call_atomic() instead.  (Adding a spinlock might be needed too.)
-
-- Eric
 
 
 _______________________________________________
