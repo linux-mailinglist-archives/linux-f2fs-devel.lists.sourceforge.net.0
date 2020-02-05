@@ -2,76 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 322F115251E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Feb 2020 04:09:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 247D8152593
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Feb 2020 05:22:02 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1izB3m-0005BZ-R1; Wed, 05 Feb 2020 03:09:02 +0000
+	id 1izCCK-0008Dw-8w; Wed, 05 Feb 2020 04:21:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1izB3m-0005BT-5o
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 03:09:02 +0000
+ (envelope-from <krisman@collabora.com>) id 1izCCI-0008Do-Rj
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 04:21:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B9LDa0XPjCzIKceODg69dXaRY5vDVy2Yt+cLAsHZ2iE=; b=OKgPy6XtSDs+RMO9NPwCRao5uD
- SUlQ9X7WlgOW8cwS0LY5/FYtpTwCdQflrD+E41IMAK0mN9QYfP7WY9R6fuUV9OuGQuF8jl1HPZKsH
- Sh1apRoX4AkwC9YhV2YmPVdNGKzSq8/tX+LPDImhnfz/huJaE+NWptcOpu4wLRzUu2fI=;
+ bh=fqzN6b452rdZZaRyKiGrVh5MWdZs8ZehY7iXYXh+iBM=; b=UBSS4w+ZAoWp9EOPkcjcbNb0BU
+ T68rnX5e77jr/H7KIuwhl6DwH6vF+NZWA26jgCyeRSa+LgNMpiGMzbSW2yWbZUZyCEcl1k9IQvRG9
+ uzVsT/j1JveJH4o76LlFXLjXj4jyKbOJ+A69xTI7GU5/Uwn0u2p2ucl3iHRlkQXDwVkg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B9LDa0XPjCzIKceODg69dXaRY5vDVy2Yt+cLAsHZ2iE=; b=SmVAjZsbOms9cC7cJTcVntxF7R
- BxGVJfDGPIFy5GlKQ9t/RNJ9vWLCCpp8gV0f4NWQrrctqYNaPiApWGrRBIi/sZdagFPrQXjaVoJdP
- 4lqMbBjGyIGKONiafIiy3DBfOeni9HkCt53xIArbXCz+pFhvUwbaTuUYvOY5WvNHBw8o=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=fqzN6b452rdZZaRyKiGrVh5MWdZs8ZehY7iXYXh+iBM=; b=fHxZa6TgOETX8QIzAA/+pBVGOH
+ bROP39bKXsF/UaU4bUtwlJW4xuwaQI5Z13nXAYZt86uJPAFwT2FB0Of0txL9DfnXwdVlSrDTchVoK
+ BvFusV83eXmrpAFqP5tXneWqVjXBPSK1FJjZM84BF3E0MyZbXGhWqpT9zlVM19QYKw5Y=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1izB3k-00HIow-Mx
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 03:09:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=B9LDa0XPjCzIKceODg69dXaRY5vDVy2Yt+cLAsHZ2iE=; b=PQCpAoMYAzYAXkWKSEO3RGZF4s
- AK6ojSEAycRh8cHHpUbZtVb7KM0F/ojyKZAZKrn7EBESGSRqa/T6/DnaZMEFk+Y1TRw4fo+iTeEg/
- AiRolVywUugJMf867i8TU7jcgVi/Cb3WzTHOaxrEeDR25uQxgNtyA6p5vyxiL8MD6DY8cG7TxK6uL
- iYTl5wvvDyvzqdgU/6DCi8FDWVcB2GZC3kI49PLkwZ8adicSn4VdToOOVrMRIlc2qLaAjUYpsSaKa
- 1Yjyvignnce2OK8Ng0b/D/7aWKtJlLdLoU3V4H/W5zdAN4SpOCZw0vuIVUWByWc/kHmlF7sCJKyA9
- r/sGtZ2g==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1izB3V-0000ZM-OD; Wed, 05 Feb 2020 03:08:45 +0000
-Date: Tue, 4 Feb 2020 19:08:45 -0800
-From: Matthew Wilcox <willy@infradead.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200205030845.GP8731@bombadil.infradead.org>
-References: <20200201150807.17820-1-willy@infradead.org>
- <20200203033903.GB8731@bombadil.infradead.org>
- <bd08bf56-f901-33b1-5151-f77fd823e343@huawei.com>
+ id 1izCCH-00AZyO-8c
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 04:21:54 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: krisman) with ESMTPSA id 694AB29298E
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: Daniel Rosenberg <drosen@google.com>
+Organization: Collabora
+References: <20200128230328.183524-1-drosen@google.com>
+ <20200128230328.183524-2-drosen@google.com>
+ <85sgjsxx2g.fsf@collabora.com>
+ <CA+PiJmS3kbK8220QaccP5jJ7dSf4xv3UrStQvLskAtCN+=vG_A@mail.gmail.com>
+Date: Tue, 04 Feb 2020 23:21:33 -0500
+In-Reply-To: <CA+PiJmS3kbK8220QaccP5jJ7dSf4xv3UrStQvLskAtCN+=vG_A@mail.gmail.com>
+ (Daniel Rosenberg's message of "Tue, 4 Feb 2020 19:05:02 -0800")
+Message-ID: <85h8051x6a.fsf@collabora.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <bd08bf56-f901-33b1-5151-f77fd823e343@huawei.com>
-X-Spam-Score: 1.0 (+)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 1.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1izB3k-00HIow-Mx
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Make f2fs_readpages readable again
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [46.235.227.227 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1izCCH-00AZyO-8c
+Subject: Re: [f2fs-dev] [PATCH v6 1/5] unicode: Add standard casefolded d_ops
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,38 +77,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, Jonathan Corbet <corbet@lwn.net>,
+ Richard Weinberger <richard@nod.at>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ kernel-team@android.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Feb 05, 2020 at 09:58:29AM +0800, Chao Yu wrote:
-> On 2020/2/3 11:39, Matthew Wilcox wrote:
-> > 
-> > Remove the horrendous ifdeffery by slipping an IS_ENABLED into
-> > f2fs_compressed_file().
-> 
-> I'd like to suggest to use
-> 
-> if (IS_ENABLED(CONFIG_F2FS_FS_COMPRESSION) && f2fs_compressed_file(inode))
-> 
-> here to clean up f2fs_readpages' codes.
-> 
-> Otherwise, f2fs module w/o compression support will not recognize compressed
-> file in most other cases if we add IS_ENABLED() condition into
-> f2fs_compressed_file().
+Daniel Rosenberg <drosen@google.com> writes:
 
-If we need to recognise them in order to deny access to them, then I
-suppose we need two predicates.  Perhaps:
+> On Sun, Feb 2, 2020 at 5:46 PM Gabriel Krisman Bertazi
+> <krisman@collabora.com> wrote:
+>>
+>>
+>> I don't think fs/unicode is the right place for these very specific
+>> filesystem functions, just because they happen to use unicode.  It is an
+>> encoding library, it doesn't care about dentries, nor should know how to
+>> handle them.  It exposes a simple api to manipulate and convert utf8 strings.
+>>
+>> I saw change was after the desire to not have these functions polluting
+>> the VFS hot path, but that has nothing to do with placing them here.
+>>
+>> Would libfs be better?  or a casefolding library in fs/casefold.c?
+>>
+>>
+>> --
+>> Gabriel Krisman Bertazi
+>
+> The hash function needs access to utf8ncursor, but apart from that,
+> libfs would make sense. utf8ncursor is the only reason I have them
+> here. How do you feel about exposing utf8cursor or something similar?
 
-	f2fs_unsupported_attributes(inode)
-and
-	f2fs_compressed_file(inode)
+Hi,
 
-where f2fs_unsupported_attributes can NACK any set flag (including those
-which don't exist yet), eg encrypted.  That seems like a larger change
-than I should be making, since I'm not really familiar with f2fs code.
+It was designed to be an internal thing, but I'm ok with exposing it.
+
+-- 
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
