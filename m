@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD958153742
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Feb 2020 19:07:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEC2C1539BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Feb 2020 21:47:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1izP5B-0003ay-Gq; Wed, 05 Feb 2020 18:07:25 +0000
+	id 1izRZx-0001Kb-Bt; Wed, 05 Feb 2020 20:47:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+a2b935cbc3c12af13a1b+6009+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1izP5A-0003aj-7E
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 18:07:24 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1izRZw-0001KT-0A
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 20:47:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gs10jRZHLwjIOjYVjU5UoDYIxulcXGovME2eBvzaEu0=; b=APQuXK8qqO88vlbJKjyL9a7B5K
- 3U8s81eVVRCcqqHqFT+pC5P16FNRtlF81J1OABpODkpyrSP3C2CEovZncLuIeXsiJRSg9Zusqn+SA
- pgvH+TKaAeWqsv4oTnexk/sByLtrdeSppJ4HmTkX6iXZcgX5LIfy2tUNRjgwif1gh8/8=;
+ bh=vP8sWlSSKbm16MiUxDuucKVihCQaRg3k2eJIHeg5/C8=; b=k57JxSqh6wM2mMQX3m2JCkAHJL
+ O8mCk0sFWc/qZa4A2pMumaGHcUH9JolSpft12NgC1Dfw5NNxbbYHUG333yIKkbXW9bLN9N4MXlWgm
+ opyul+FE0Zva36rSmE206Y+OW+F1zGd9+QWEklQdJpS25+HcxXNJGO6FxTbwtyvNhYVA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,51 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gs10jRZHLwjIOjYVjU5UoDYIxulcXGovME2eBvzaEu0=; b=GD8sF5cJFBKreD0HU+I6rQa3iU
- GQoAJdqhXbx+KZ57FuMHajWFAvwFsQiKV5ESEDJa+umen53nNurbrd80bTzMECVTPqKOwsH5bBfKQ
- tZc3iWQZ1pYrvoxQ9atCtDa8v/AFwZYVLjGLBurMZXgh+DBMCmXS8LFuk5YC7PJpzyFg=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=vP8sWlSSKbm16MiUxDuucKVihCQaRg3k2eJIHeg5/C8=; b=dzpZS1Sn6uuCyhx4lOXgoeZIR3
+ zf2o451++DdVSEjWcqAVl4+JjTSmeywCtCT47dRCs5lovW0E1XhK4eYXF4FPyLWp9xwIbPBH46YOt
+ Fi9w50Jrzk9vLTaQZolLj5VHV6x55clsFiVqQhABWUVwm4TvspCVCHvARIohrGMD4/rw=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1izP58-000REZ-V4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 18:07:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=gs10jRZHLwjIOjYVjU5UoDYIxulcXGovME2eBvzaEu0=; b=K5B5B1Wr2NgBnfmyO9DXR16gbP
- UWtIGk1NOt9+nnJLa9z8Hx9aSHXAN28QVk1+j81UZ4ps+KIX9PiL9RpepFY/llR8vFYM+VjxtlFKS
- RDOAmrCz0xLwUfEcXOpE2w90vsqxK/HjozjZTrvXiNdfa3RLhAyBfl4ZvQeuUtR45EfyP1J4NEb91
- ZQqGP8cVqKIEOApdbh+sWw7rj5D3LQJcioXoE1HLIt3g3pw4KsToRoLAKhhQafKmFFHfG7FQhSrxz
- jPx50gFpHpM6INp9TKyjx7BSF1JuGgUr03bW8xgOuoy7ti96pTjdN62goLKbranqk9g+U3q97w5jc
- i5/J1IIA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1izP52-0001RS-L0; Wed, 05 Feb 2020 18:07:16 +0000
-Date: Wed, 5 Feb 2020 10:07:16 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200205180716.GB32041@infradead.org>
+ id 1izRZu-00BIij-Vk
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Feb 2020 20:47:19 +0000
+Received: from gmail.com (unknown [104.132.1.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 294D02072B;
+ Wed,  5 Feb 2020 20:47:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1580935633;
+ bh=+ZS+NN3+LYtwsrpUFYDvOFcmW2Zu5fsUZcqSPkhg4lU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gjvMPyIRhoMGBaCI7MUINX99uO8A+WSahEkQxe0NwqVase8Kt3OdsPyTgQdAddwpe
+ sPqnpxP6yhP0i05boyaZUGSbzavu3uTCqEKyTBI1gAUbygv8J4fhmq4I+NrO1bIdbO
+ 3fvVcT2HL0T8TSI8+QzmXbu1arwf2m7l9btJBDKA=
+Date: Wed, 5 Feb 2020 12:47:11 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20200205204711.GA112437@gmail.com>
 References: <20191218145136.172774-1-satyat@google.com>
  <20191218145136.172774-7-satyat@google.com>
- <20200117135808.GB5670@infradead.org>
- <20200118052720.GD3290@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200118052720.GD3290@sol.localdomain>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20191218145136.172774-7-satyat@google.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 1.4 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 1.8 FSL_HELO_FAKE          No description available.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1izP58-000REZ-V4
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1izRZu-00BIij-Vk
 Subject: Re: [f2fs-dev] [PATCH v6 6/9] scsi: ufs: Add inline encryption
  support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -89,38 +86,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
- Kim Boojin <boojin.kim@samsung.com>, Kuohong Wang <kuohong.wang@mediatek.com>,
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
  Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Satya Tangirala <satyat@google.com>, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 17, 2020 at 09:27:20PM -0800, Eric Biggers wrote:
-> On Fri, Jan 17, 2020 at 05:58:08AM -0800, Christoph Hellwig wrote:
-> > On Wed, Dec 18, 2019 at 06:51:33AM -0800, Satya Tangirala wrote:
-> > > Wire up ufshcd.c with the UFS Crypto API, the block layer inline
-> > > encryption additions and the keyslot manager.
-> > 
-> > I think this patch should be merged into the previous patch, as the
-> > previous one isn't useful without wiring it up.
-> > 
-> 
-> Satya actually did this originally but then one of the UFS maintainers requested
-> the separate patches for (1) new registers, (2) ufshcd-crypto, and (3) ufshcd.c:
-> https://lore.kernel.org/linux-block/SN6PR04MB49259F70346E2055C9E0F401FC310@SN6PR04MB4925.namprd04.prod.outlook.com/
-> 
-> So, he's not going to be able to make everyone happy :-)
-> 
-> I personally would be fine with either way.
+On Wed, Dec 18, 2019 at 06:51:33AM -0800, Satya Tangirala wrote:
+> @@ -2472,6 +2492,13 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
+>  	lrbp->task_tag = tag;
+>  	lrbp->lun = ufshcd_scsi_to_upiu_lun(cmd->device->lun);
+>  	lrbp->intr_cmd = !ufshcd_is_intr_aggr_allowed(hba) ? true : false;
+> +
+> +	err = ufshcd_prepare_lrbp_crypto(hba, cmd, lrbp);
+> +	if (err) {
+> +		lrbp->cmd = NULL;
+> +		clear_bit_unlock(tag, &hba->lrb_in_use);
+> +		goto out;
+> +	}
 
-Oh well, the split between adding functions and callers is highly
-unusual for Linux development.  Adding the defines I can see,
-especially if they are large (which these aren't).  But you'll need
-to get this accepted by the UFS folks, so I'll shut up now.
+The error path here is missing a call to ufshcd_release().
+
+- Eric
 
 
 _______________________________________________
