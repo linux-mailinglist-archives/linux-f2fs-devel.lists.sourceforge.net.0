@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 965E1153F3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Feb 2020 08:29:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A870154211
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Feb 2020 11:44:42 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1izbbU-0003J8-Cl; Thu, 06 Feb 2020 07:29:36 +0000
+	id 1izeeF-0003nR-0d; Thu, 06 Feb 2020 10:44:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1izbbS-0003J1-UE
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Feb 2020 07:29:34 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1izeeD-0003n1-2k
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Feb 2020 10:44:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
@@ -33,9 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  x2VconAzvofWy0TqRnhfSfJlJgRXtDVY/pSeixR0D70X1uqpn/HObZH31/U4Z8SUeV146KhxkGb4L
  0g3l9l4WYKA6zVGiYQXCJEHk1FzA0gSJXqsiOWUu4dpBauWoHsmXMVnNXr+U89+ktcHg=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1izbZq-00122o-A6
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Feb 2020 07:29:34 +0000
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1izee8-00Bprr-Rw
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Feb 2020 10:44:37 +0000
 Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
  by Forcepoint Email with ESMTP id AB7CA32F6C2CAFABF1A5;
  Thu,  6 Feb 2020 14:29:34 +0800 (CST)
@@ -57,13 +58,13 @@ In-Reply-To: <20200205030845.GP8731@bombadil.infradead.org>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
-X-Spam-Score: 0.4 (/)
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1izbZq-00122o-A6
+ 0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1izee8-00Bprr-Rw
 Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Make f2fs_readpages readable again
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
