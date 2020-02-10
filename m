@@ -2,63 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79F92156FBF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Feb 2020 08:02:35 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j135U-00071T-HB; Mon, 10 Feb 2020 07:02:32 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j135R-00071G-1s
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 Feb 2020 07:02:29 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 64BBA158604
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 00:11:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=+MVj/cuEe2VzH0J3qwC7/Omf6tS9SjweegTeqxMtEbw=; b=i7WyYQzZf9q64UbdRMKLqf6ebC
+	4ZftJLFQoKuBorkBBuP+aAwYL2YOhr9WlDIbhf4WqlHXk2mNkrnDagHfoWN/JY2B++3RdGngwoDz7
+	ywL5pXb1JGnYWbXs7hCvFLvHRVcXxPs9Dv9iAmtmF+RwLvuSYsEIO5eRk3vDvUnjNqTE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1j1IDG-00059T-HX; Mon, 10 Feb 2020 23:11:34 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <drosen@google.com>) id 1j1IDF-00059F-8J
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 Feb 2020 23:11:33 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jkEkkPZOoD83/fJs0QGp6DkX5rr3w+pp7KogvsYQL0w=; b=E2tuyk30pLRyae7BZJleMnvn/X
- V9GjY/642Y1hvyBAZ5s8b91BcYyeizvfSoGe/F9rqTk7+ClUm1TLqpdxczM+fbhplRahu4MSwsbSq
- CDqLqew+IBk+j5hJgGqnGODmZsyQWEJqm79YHLiE/UmzU3/j2KIB6P8CdyAHdR3hl7vI=;
+ bh=jHnULLRvzcnTmrApgk0J6kXZO0qLfuB4AVQHnM4cmAE=; b=HtiU1iJKb6yVsw+DKtlrSv/lgA
+ 03Hd7bEb11Q8TYJvEEiUZJzHb78ORHp8YxowCRoWVX5tCK34k0Nthm4OoXF4E4Tvt616AI2y3cFao
+ 7omaLWqn4JLEhXuOo2TJjvOAfdm/v1WavWHrsuXgP6zKhhlJE17icyXWQDpcxVD/cB5E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jkEkkPZOoD83/fJs0QGp6DkX5rr3w+pp7KogvsYQL0w=; b=d
- qDFkcUJ83M596gzNarhLixz9aSUt+IBCFTQ9XyqWhoZFAB3tHIhWDGR//kjolwDRC04WW3JJTrC4u
- KgZC73lxdPhd5y0IPOa4hckcRo+c6pTudNi15jbxtO9f/F9JSo43UyN6DROxlpNM8vNA9VMWPxJLM
- 1WhHX0yRcMH/j9hc=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=jHnULLRvzcnTmrApgk0J6kXZO0qLfuB4AVQHnM4cmAE=; b=VaVWEZiJir8jvm1w3npY5ihHtU
+ 414zV6Je6RuKDR6touI1y4f6bhi6uyRSbw9oiKrcq3U+/P7dLcoJNJjr8m8iO2GiNAd7LQl16x1ef
+ irZHS6OkMDUzh/rRtHVe7T5xqAL3c6RCrQMXZfwl3EjNzAOjYx3vN70L1QGeLTZEj8Io=;
+Received: from mail-lf1-f66.google.com ([209.85.167.66])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j135M-0077Us-RW
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 Feb 2020 07:02:29 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 950C45A910F7BD655A9D;
- Mon, 10 Feb 2020 15:02:14 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS403-HUB.china.huawei.com (10.3.19.203) with Microsoft SMTP Server id
- 14.3.439.0; Mon, 10 Feb 2020 15:02:04 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Mon, 10 Feb 2020 15:01:08 +0800
-Message-ID: <20200210070108.8963-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1j1IDD-00803L-Pw
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 Feb 2020 23:11:33 +0000
+Received: by mail-lf1-f66.google.com with SMTP id r14so5573442lfm.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 10 Feb 2020 15:11:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jHnULLRvzcnTmrApgk0J6kXZO0qLfuB4AVQHnM4cmAE=;
+ b=esB/56n6Q/Msdc20g+jexMovttxt6hCUBxvlvmdqGEumLlcmF5aj3v38oGR21nFNxo
+ cOk4ekYVR6FdU2NjqUfNrI3LKVvMII6sqM7sSRTkqviALl/XYnv7z0n+5b5yYI3Lni/Z
+ pHlhrG3K7Bp+8RWOpjWHLKMsY1f7PTIEy4J/RPb301AvTHMZeUbf9QaVy+/1sChmohPn
+ 5sq+e6/X6b3sYiGh+ziR8racoEm4OmMe/es+FRFQCba4zTFopBh8xK7owBMwffjbGKty
+ kt8xNXlsArGuuruRAvzftXBAFrERmdhUUoEdMwiUrXKqtFq9YOe+1lKW7UiPQs4r9v/n
+ YlSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jHnULLRvzcnTmrApgk0J6kXZO0qLfuB4AVQHnM4cmAE=;
+ b=DhZUabYMtefLmAOh84QHLRWNNY5zfvw53emn3R3BGomRHGx190yp+eVs0RDWZ/NdK5
+ HZd8r/QvvCQSUEhB70VOt95iYVosDKG4oVn2C4g6HRH4xruA7NVkR5Ue2yPJykSeaPVz
+ q2WtYpyjLAOsu9bkhIY5pQxUJ6yzYXJxe/bjmaed8ESm5vVf73ymrVx2jn4JeWcI8D9p
+ GrkbGNaDQdwqFipDBFbOxzXfcOI8ySjRTabXCTf7Y8zRV3Hyy6xyu3d4ptkHlmZJhjgr
+ /f6XhwVae2uKTUu6HIr2MAHydCAd0nIhZpduNPcfBAd/qr8X6mbuqPQB4S/4cLWCD5Cl
+ t5cg==
+X-Gm-Message-State: APjAAAUfPIMu5gQBxfI7coacA+ls/xmCq94bKq5TsC/LJNbuZ9NSZMSL
+ 7yOaOT9CNNttfSmFYA8nQpZVXIYiCD5im88c/aL5Ng==
+X-Google-Smtp-Source: APXvYqxiERXVniVJSVLKbVx/xqUKUzq4lPf5gqhBdctRYV5+IUwsgO7mOTwXnfu4yRdcGlrvRlDwJrZV+Drqhe6D0W8=
+X-Received: by 2002:a05:6512:2035:: with SMTP id
+ s21mr1781905lfs.99.1581376284825; 
+ Mon, 10 Feb 2020 15:11:24 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.2 (/)
+References: <20200208013552.241832-1-drosen@google.com>
+ <20200208013552.241832-3-drosen@google.com>
+ <20200208021216.GE23230@ZenIV.linux.org.uk>
+In-Reply-To: <20200208021216.GE23230@ZenIV.linux.org.uk>
+Date: Mon, 10 Feb 2020 15:11:13 -0800
+Message-ID: <CA+PiJmTYbEA-hgrKwtp0jZXqsfYrzgogOZ0Pt=gTCtqhBfnqFA@mail.gmail.com>
+To: Al Viro <viro@zeniv.linux.org.uk>
+X-Spam-Score: -15.6 (---------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.66 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.66 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j135M-0077Us-RW
-Subject: [f2fs-dev] [PATCH] f2fs: fix to add swap extent correctly
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1j1IDD-00803L-Pw
+Subject: Re: [f2fs-dev] [PATCH v7 2/8] fs: Add standard casefolding support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,127 +114,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: kernel-team@android.com, Theodore Ts'o <tytso@mit.edu>,
+ Jonathan Corbet <corbet@lwn.net>, Richard Weinberger <richard@nod.at>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As Youling reported in mailing list:
+On Fri, Feb 7, 2020 at 6:12 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
+>
+> On Fri, Feb 07, 2020 at 05:35:46PM -0800, Daniel Rosenberg wrote:
+>
+>
+> Again, is that safe in case when the contents of the string str points to
+> keeps changing under you?
 
-https://www.linuxquestions.org/questions/linux-newbie-8/the-file-system-f2fs-is-broken-4175666043/
-
-https://www.linux.org/threads/the-file-system-f2fs-is-broken.26490/
-
-There is a test case can corrupt f2fs image:
-- dd if=/dev/zero of=/swapfile bs=1M count=4096
-- chmod 600 /swapfile
-- mkswap /swapfile
-- swapon --discard /swapfile
-
-The root cause is f2fs_swap_activate() intends to return zero value
-to setup_swap_extents() to enable SWP_FS mode (swap file goes through
-fs), in this flow, setup_swap_extents() setups swap extent with wrong
-block address range, result in discard_swap() erasing incorrect address.
-
-Because f2fs_swap_activate() has pinned swapfile, its data block
-address will not change, it's safe to let swap to handle IO through
-raw device, so we can get rid of SWAP_FS mode and initial swap extents
-inside f2fs_swap_activate(), by this way, later discard_swap() can trim
-in right address range.
-
-Fixes: 4969c06a0d83 ("f2fs: support swap file w/ DIO")
-Cc: <stable@vger.kernel.org>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/data.c | 32 +++++++++++++++++++++++++-------
- 1 file changed, 25 insertions(+), 7 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 98c946dfee13..b56437d4973d 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -3627,7 +3627,8 @@ int f2fs_migrate_page(struct address_space *mapping,
- 
- #ifdef CONFIG_SWAP
- /* Copied from generic_swapfile_activate() to check any holes */
--static int check_swap_activate(struct file *swap_file, unsigned int max)
-+static int check_swap_activate(struct swap_info_struct *sis,
-+				struct file *swap_file, sector_t *span)
- {
- 	struct address_space *mapping = swap_file->f_mapping;
- 	struct inode *inode = mapping->host;
-@@ -3638,6 +3639,8 @@ static int check_swap_activate(struct file *swap_file, unsigned int max)
- 	sector_t last_block;
- 	sector_t lowest_block = -1;
- 	sector_t highest_block = 0;
-+	int nr_extents = 0;
-+	int ret;
- 
- 	blkbits = inode->i_blkbits;
- 	blocks_per_page = PAGE_SIZE >> blkbits;
-@@ -3649,7 +3652,8 @@ static int check_swap_activate(struct file *swap_file, unsigned int max)
- 	probe_block = 0;
- 	page_no = 0;
- 	last_block = i_size_read(inode) >> blkbits;
--	while ((probe_block + blocks_per_page) <= last_block && page_no < max) {
-+	while ((probe_block + blocks_per_page) <= last_block &&
-+			page_no < sis->max) {
- 		unsigned block_in_page;
- 		sector_t first_block;
- 
-@@ -3689,13 +3693,27 @@ static int check_swap_activate(struct file *swap_file, unsigned int max)
- 				highest_block = first_block;
- 		}
- 
-+		/*
-+		 * We found a PAGE_SIZE-length, PAGE_SIZE-aligned run of blocks
-+		 */
-+		ret = add_swap_extent(sis, page_no, 1, first_block);
-+		if (ret < 0)
-+			goto out;
-+		nr_extents += ret;
- 		page_no++;
- 		probe_block += blocks_per_page;
- reprobe:
- 		continue;
- 	}
--	return 0;
--
-+	ret = nr_extents;
-+	*span = 1 + highest_block - lowest_block;
-+	if (page_no == 0)
-+		page_no = 1;	/* force Empty message */
-+	sis->max = page_no;
-+	sis->pages = page_no - 1;
-+	sis->highest_bit = page_no - 1;
-+out:
-+	return ret;
- bad_bmap:
- 	pr_err("swapon: swapfile has holes\n");
- 	return -EINVAL;
-@@ -3720,14 +3738,14 @@ static int f2fs_swap_activate(struct swap_info_struct *sis, struct file *file,
- 	if (f2fs_disable_compressed_file(inode))
- 		return -EINVAL;
- 
--	ret = check_swap_activate(file, sis->max);
--	if (ret)
-+	ret = check_swap_activate(sis, file, span);
-+	if (ret < 0)
- 		return ret;
- 
- 	set_inode_flag(inode, FI_PIN_FILE);
- 	f2fs_precache_extents(inode);
- 	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
--	return 0;
-+	return ret;
- }
- 
- static void f2fs_swap_deactivate(struct file *file)
--- 
-2.18.0.rc1
-
+I'm not sure what you mean. I thought it was safe to use the str and
+len passed into d_compare. Even if it gets changed under RCU
+conditions I thought there was some code to ensure that the name/len
+pair passed in is consistent, and any other inconsistencies would get
+caught by d_seq later. Are there unsafe code paths that can follow?
 
 
 _______________________________________________
