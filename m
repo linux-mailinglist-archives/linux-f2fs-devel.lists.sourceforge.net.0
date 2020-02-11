@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F9B515873B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 02:04:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83C99158739
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 02:04:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1JyC-0004fe-UX; Tue, 11 Feb 2020 01:04:08 +0000
+	id 1j1JyC-0005s9-AX; Tue, 11 Feb 2020 01:04:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j1JyA-0004ev-0q
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 01:04:06 +0000
+ (envelope-from <willy@infradead.org>) id 1j1Jy9-0005ri-Pc
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 01:04:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pH5LFtlmOrFfMRG0qpJp1Yog2+5WC4QJAZDPBwZZUFQ=; b=Chob6IjUW+0NPrJpDZQiyddz1L
- 5T6cwYU7Ty4oKFFiDpF8lj3K9z/EftxUvFCDOVVPxjrhXhbr3jn+kKLOaedljLo72cp4mtU73gvg6
- lVkD57gS71XM+eUhySEOetMb+Z2qGpI/galAOY8Ur1c7YFYc1S807zZcPnnyaFgTUJiw=;
+ bh=MOOCl0kElclaL12Bo2vdDIW4gCL68Y7X1xBVMIbuM80=; b=nSgROtihX+p87g2QN6fnx88KUI
+ fBLa7jqvgkEtr9u6vBYTD/Iy6HyyrbjYuv6qMHf5g/qz8cC9Ogq78zYUR8XDi+Se49p8sZrINBhBX
+ 8ds5BVABVi1B/wv052tPraoqgqXNkTtpfZnTm0GTdgy93nRwpd7VZBhzEfLPltZEXbJg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pH5LFtlmOrFfMRG0qpJp1Yog2+5WC4QJAZDPBwZZUFQ=; b=ie3w+6VA94j+lfwbw/fgK0/b2L
- n37K528ir2kCbbsDtEWjwQTh5tkHMO3Fhlwj6VsOuiADd4JVzRGaiPEXEAuk5IKnw8KzICKIitrSO
- 7XZXg7IkP9yZLfFSW/BmBBv38PqlWDMdU7lsBXskIQCnEsC+p/IMFMAIFzS5PYx1SCeY=;
+ bh=MOOCl0kElclaL12Bo2vdDIW4gCL68Y7X1xBVMIbuM80=; b=SDNh+22QDlrtcJS8eXilmfiU3J
+ I2kNK/L46mUeHMZglWvgBvMuOO58aSpwJikire04Yh5ZrD3nGvQ0CMNBf3/HA/Fpx24gBF0RLWpGQ
+ dcKAcsF6TF/9FnZG68m57Le6JeTW13iia2+odslOwhKhriY7o+ylx9iYQ3jEVi8a/NJw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j1Jy8-0084PZ-5V
+ id 1j1Jy7-0006sZ-Ic
  for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 01:04:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=pH5LFtlmOrFfMRG0qpJp1Yog2+5WC4QJAZDPBwZZUFQ=; b=WYDhnMYb2Tl4xEYpfY2Ku86VXL
- FI/V0kmlpCs1KHRO35xmh+JKDrQMAEC2a25oQ9BygbUIHc0PYTN7FG/TumtQJ+kUp1O3OHsdm2haz
- hhEkhbx7SOE6j08H5VRVSHsnGE+ExUvbUQojTzl55uokP3eAI6x7olxu2lddAMOmqOny931og4gai
- VgiCC9cKCaXR15L83kZWcgQeZ0a5wsc3LFjHAjj0kTRlTOW+lLChKb6KWREqxkWZaagtfhYE9EiFR
- wECqSjkjhjQbWw5xKUEDD5X8x+mDovm6ZDsjY7BYvt+CQ33FjwZUVX3fAQDKwOducVwUJV4OnKGzp
- HTa7QHMQ==;
+ bh=MOOCl0kElclaL12Bo2vdDIW4gCL68Y7X1xBVMIbuM80=; b=Isw5m/tToyqF5hw2BHaQc66txg
+ PLpadc/3h5L6eAeruvyIBlnGL1PP7HBjXzQGHBrgDRT079Q3r/xXZRoyDxjg9eYDqeL9RoWbECgEm
+ IViGYNLoYxC8uf/tZ96aGfepdrMqdPmTsRd0IMjX/2KZemd3naXkvF6oAY3AtJ8V4hqLrYX9oKGei
+ WdFEds4K+gW630ResAlErqadDoitOedK0m1LuInhQW/SaVHIon6X3nGWBFlKNaEWcziZjkDcH9c4A
+ MYXX/W4UN0+2jmsJlL97B3nSSMEXmyOgLqdqFqdm+QN3vnSEn0/Zyg8JczgtVc92uJp3BUxRQVhaa
+ 4qj969Yw==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j1Jxu-0001nh-AM; Tue, 11 Feb 2020 01:03:50 +0000
+ Hat Linux)) id 1j1Jxu-0001nl-BQ; Tue, 11 Feb 2020 01:03:50 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon, 10 Feb 2020 17:03:36 -0800
-Message-Id: <20200211010348.6872-2-willy@infradead.org>
+Date: Mon, 10 Feb 2020 17:03:37 -0800
+Message-Id: <20200211010348.6872-3-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200211010348.6872-1-willy@infradead.org>
 References: <20200211010348.6872-1-willy@infradead.org>
@@ -71,10 +71,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j1Jy8-0084PZ-5V
-Subject: [f2fs-dev] [PATCH v5 01/13] mm: Fix the return type of
- __do_page_cache_readahead
+X-Headers-End: 1j1Jy7-0006sZ-Ic
+Subject: [f2fs-dev] [PATCH v5 02/13] mm: Ignore return value of ->readpages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,53 +95,51 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-ra_submit() which is a wrapper around __do_page_cache_readahead() already
-returns an unsigned long, and the 'nr_to_read' parameter is an unsigned
-long, so fix __do_page_cache_readahead() to return an unsigned long,
-even though I'm pretty sure we're not going to readahead more than 2^32
-pages ever.
+We used to assign the return value to a variable, which we then ignored.
+Remove the pretence of caring.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- mm/internal.h  | 2 +-
- mm/readahead.c | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ mm/readahead.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/mm/internal.h b/mm/internal.h
-index 3cf20ab3ca01..41b93c4b3ab7 100644
---- a/mm/internal.h
-+++ b/mm/internal.h
-@@ -49,7 +49,7 @@ void unmap_page_range(struct mmu_gather *tlb,
- 			     unsigned long addr, unsigned long end,
- 			     struct zap_details *details);
- 
--extern unsigned int __do_page_cache_readahead(struct address_space *mapping,
-+extern unsigned long __do_page_cache_readahead(struct address_space *mapping,
- 		struct file *filp, pgoff_t offset, unsigned long nr_to_read,
- 		unsigned long lookahead_size);
- 
 diff --git a/mm/readahead.c b/mm/readahead.c
-index 2fe72cd29b47..6bf73ef33b7e 100644
+index 6bf73ef33b7e..fc77d13af556 100644
 --- a/mm/readahead.c
 +++ b/mm/readahead.c
-@@ -152,7 +152,7 @@ static int read_pages(struct address_space *mapping, struct file *filp,
-  *
-  * Returns the number of pages requested, or the maximum amount of I/O allowed.
-  */
--unsigned int __do_page_cache_readahead(struct address_space *mapping,
-+unsigned long __do_page_cache_readahead(struct address_space *mapping,
- 		struct file *filp, pgoff_t offset, unsigned long nr_to_read,
- 		unsigned long lookahead_size)
- {
-@@ -161,7 +161,7 @@ unsigned int __do_page_cache_readahead(struct address_space *mapping,
- 	unsigned long end_index;	/* The last page we want to read */
- 	LIST_HEAD(page_pool);
- 	int page_idx;
--	unsigned int nr_pages = 0;
-+	unsigned long nr_pages = 0;
- 	loff_t isize = i_size_read(inode);
- 	gfp_t gfp_mask = readahead_gfp_mask(mapping);
+@@ -113,17 +113,16 @@ int read_cache_pages(struct address_space *mapping, struct list_head *pages,
  
+ EXPORT_SYMBOL(read_cache_pages);
+ 
+-static int read_pages(struct address_space *mapping, struct file *filp,
++static void read_pages(struct address_space *mapping, struct file *filp,
+ 		struct list_head *pages, unsigned int nr_pages, gfp_t gfp)
+ {
+ 	struct blk_plug plug;
+ 	unsigned page_idx;
+-	int ret;
+ 
+ 	blk_start_plug(&plug);
+ 
+ 	if (mapping->a_ops->readpages) {
+-		ret = mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
++		mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
+ 		/* Clean up the remaining pages */
+ 		put_pages_list(pages);
+ 		goto out;
+@@ -136,12 +135,9 @@ static int read_pages(struct address_space *mapping, struct file *filp,
+ 			mapping->a_ops->readpage(filp, page);
+ 		put_page(page);
+ 	}
+-	ret = 0;
+ 
+ out:
+ 	blk_finish_plug(&plug);
+-
+-	return ret;
+ }
+ 
+ /*
 -- 
 2.25.0
 
