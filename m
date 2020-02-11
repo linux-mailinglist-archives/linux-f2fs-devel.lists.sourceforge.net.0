@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83122158E93
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 13:34:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64AD7158F3D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 13:54:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1UkY-0000Wb-4Y; Tue, 11 Feb 2020 12:34:46 +0000
+	id 1j1V3i-0004To-Md; Tue, 11 Feb 2020 12:54:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j1UkW-0000Vz-U4
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 12:34:44 +0000
+ (envelope-from <willy@infradead.org>) id 1j1V3h-0004Tb-ED
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 12:54:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uIlXDShEskfTvbYftNPC1eqkJUsB5szLvdV7iweWe4s=; b=PWjKNtfWgQwQGn+6PSvSVX2Wf6
- h2TJS+TJA0upPiSb0LEsRIXtxhi84IBo1Af+i+XPdLYMSQ3ebUqZYaSm13GENbKvjiUixRRTAq3cC
- 1QVayHfZVAcDUfhTMfHhisHeAWpy8FtTcJIuHlVBpQDAQ+sqLKqEUk4G7c+YMmM6+Hno=;
+ bh=+uQN30cS5Bj87iEEBzdOLx8lg9+i0ExEu8VOZjq8Ndo=; b=FpE7nzERDlD5kkcc5w4iPgcGto
+ XmgfrRyQOIGkF8usbJ76qXJuMUrPCwl7SrONAQxwCtogKumUDi+IAC3YKfM6HB+LR3u6sgfTv9IKu
+ gFRe4CoZLE7AlkgbvZNSscdCpyVg3zKu/XBfUDPf2JvIC828EOqHDHXnAwBQ/+D+4jeI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uIlXDShEskfTvbYftNPC1eqkJUsB5szLvdV7iweWe4s=; b=eBynScIo3UJSJT/9i3i2JsufYA
- ZdPtG9kutOxLPNybF6ewiyp8WSIf1mY9a4kFJgWR1AtmsgFwH7rc8+P/n6wou44iWQ69bhWC/Bk30
- R9idGpf2Ij8t9lnFlkHhDkvE63JkPcVF3CstTPbb1BMDV/ASS3tvzvPnVfrPvPn0Cqds=;
+ bh=+uQN30cS5Bj87iEEBzdOLx8lg9+i0ExEu8VOZjq8Ndo=; b=et53wajcgINOnginWIYY9+n+N0
+ XQKNkKTYbZetZBAQeAaNw+WEtZPcX6UK6I5ByIsfheiC0UYzykOuGEPpmVuBD3lmMbprQzlWTIndy
+ ab/BAfTKw3o9aDEip6Xa4qhmQ+pAFMAi720LAHZCxp2G5U/e+Mm+H5xk6i5jQSXHlU7w=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j1UkV-000W9i-Cv
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 12:34:44 +0000
+ id 1j1V3g-000TkO-5K
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 12:54:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=uIlXDShEskfTvbYftNPC1eqkJUsB5szLvdV7iweWe4s=; b=SeyBbYthoa6L+1pKSTBoqxCFni
- wTJRyOqUnVlYvD37j4HGWVkO1X/D0fyafdbCfsynh7E7Nd3cyOFPC/SIb5jUOMZyzdEvncdXAzReF
- vQYgsmrVkB4zwfd6rrwB1SvDqqK2SKFVfjZfVMxT8s5K4GJS8hhniBqwoUBwsteVgZNIUfpPcQ5aP
- 0IPMIzBXCcgmYEtwqCZOxnn68TEw92XrWsLDyQuhAe5AlzAF01rYALZpzjl8uENQAqVFM68FPSZW4
- JFup/EfcWoR5+TyIkZIBfhMJ9badlt8+Epn37DVY1zowNGoeUikWKpJqKg7VeqVpO/jC94HcPn328
- u1r5UcAQ==;
+ bh=+uQN30cS5Bj87iEEBzdOLx8lg9+i0ExEu8VOZjq8Ndo=; b=eWC7poTUmbgHCYbKut5tUcDZwL
+ w3YYTT854/6orjDXWt0o8myOrLaqYxmNildHwtqHwB9P6sAmRSzUVkC2ndTa5MBo6vPhEIM38iBQg
+ 3QFH9rbgbTMx5jUAauOSubj91u3I4QqJCftUeJ3u2BRZFY7uw1LRQwqgp3/dZBByXH8F5OzZAb0t+
+ miBihdnvmVJGXqnRBr1rG3atRoSZFunPwyyK3rI6Tg1RqDm7wVtET7WbIVm0KlJr9sAYInPEKF3Lu
+ GTYeC4TiyWPK4e73vfdDf6T1j5MFZMYQQejC42VttS5bt+wx+jfOtOIGuI60RBaTCQF1YD4hRLaX6
+ 1eYOefYA==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j1UkI-0006ev-Kh; Tue, 11 Feb 2020 12:34:30 +0000
-Date: Tue, 11 Feb 2020 04:34:30 -0800
+ Hat Linux)) id 1j1V3O-0006U6-1C; Tue, 11 Feb 2020 12:54:14 +0000
+Date: Tue, 11 Feb 2020 04:54:13 -0800
 From: Matthew Wilcox <willy@infradead.org>
-To: Johannes Thumshirn <Johannes.Thumshirn@wdc.com>
-Message-ID: <20200211123430.GT8731@bombadil.infradead.org>
+To: Dave Chinner <david@fromorbit.com>
+Message-ID: <20200211125413.GU8731@bombadil.infradead.org>
 References: <20200211010348.6872-1-willy@infradead.org>
- <20200211010348.6872-2-willy@infradead.org>
- <SN4PR0401MB3598602411B75B46F5267B829B180@SN4PR0401MB3598.namprd04.prod.outlook.com>
+ <20200211010348.6872-5-willy@infradead.org>
+ <20200211045230.GD10776@dread.disaster.area>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <SN4PR0401MB3598602411B75B46F5267B829B180@SN4PR0401MB3598.namprd04.prod.outlook.com>
+In-Reply-To: <20200211045230.GD10776@dread.disaster.area>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j1UkV-000W9i-Cv
-Subject: Re: [f2fs-dev] [PATCH v5 01/13] mm: Fix the return type of
- __do_page_cache_readahead
+X-Headers-End: 1j1V3g-000TkO-5K
+Subject: Re: [f2fs-dev] [PATCH v5 04/13] mm: Add readahead address space
+ operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,40 +84,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "cluster-devel@redhat.com" <cluster-devel@redhat.com>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "ocfs2-devel@oss.oracle.com" <ocfs2-devel@oss.oracle.com>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
- "linux-erofs@lists.ozlabs.org" <linux-erofs@lists.ozlabs.org>,
- "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 11, 2020 at 08:19:14AM +0000, Johannes Thumshirn wrote:
-> On 11/02/2020 02:05, Matthew Wilcox wrote:
-> > even though I'm pretty sure we're not going to readahead more than 2^32
-> > pages ever.
+On Tue, Feb 11, 2020 at 03:52:30PM +1100, Dave Chinner wrote:
+> > +struct readahead_control {
+> > +	struct file *file;
+> > +	struct address_space *mapping;
+> > +/* private: use the readahead_* accessors instead */
+> > +	pgoff_t start;
+> > +	unsigned int nr_pages;
+> > +	unsigned int batch_count;
+> > +};
+> > +
+> > +static inline struct page *readahead_page(struct readahead_control *rac)
+> > +{
+> > +	struct page *page;
+> > +
+> > +	if (!rac->nr_pages)
+> > +		return NULL;
+> > +
+> > +	page = xa_load(&rac->mapping->i_pages, rac->start);
+> > +	VM_BUG_ON_PAGE(!PageLocked(page), page);
+> > +	rac->batch_count = hpage_nr_pages(page);
+> > +	rac->start += rac->batch_count;
 > 
-> And 640K is more memory than anyone will ever need on a computer *scnr*
+> There's no mention of large page support in the patch description
+> and I don't recall this sort of large page batching in previous
+> iterations.
+> 
+> This seems like new functionality to me, not directly related to
+> the initial ->readahead API change? What have I missed?
 
-Sure, but bandwidth just isn't increasing quickly enough to have
-this make sense.  2^32 pages even on our smallest page size machines
-is 16GB.  Right now, we cap readahead at just 256kB.  If we did try to
-readahead 16GB, we'd be occupying a PCIe gen4 x4 drive for two seconds,
-just satisfying this one readahead.  PCIe has historically doubled in
-bandwidth every three years or so, so to get this down to something
-reasonable like a hundredth of a second, we're looking at PCIe gen12 in
-twenty years or so.  And I bet we still won't do it (also, I doubt PCIe
-will continue doubling bandwidth every three years).
+I had a crisis of confidence when I was working on this -- the loop
+originally looked like this:
 
-And Linus has forbidden individual IOs over 2GB anyway, so not happening
-until he's forced to see the error of his ways ;-)
+#define readahead_for_each(rac, page)                                   \
+        for (; (page = readahead_page(rac)); rac->nr_pages--)
+
+and then I started thinking about what I'd need to do to support large
+pages, and that turned into
+
+#define readahead_for_each(rac, page)                                   \
+        for (; (page = readahead_page(rac));				\
+		rac->nr_pages -= hpage_nr_pages(page))
+
+but I realised that was potentially a use-after-free because 'page' has
+certainly had put_page() called on it by then.  I had a brief period
+where I looked at moving put_page() away from being the filesystem's
+responsibility and into the iterator, but that would introduce more
+changes into the patchset, as well as causing problems for filesystems
+that want to break out of the loop.
+
+By this point, I was also looking at the readahead_for_each_batch()
+iterator that btrfs uses, and so we have the batch count anyway, and we
+might as well use it to store the number of subpages of the large page.
+And so it became easier to just put the whole ball of wax into the initial
+patch set, rather than introduce the iterator now and then fix it up in
+the patch set that I'm basing on this.
+
+So yes, there's a certain amount of excess functionality in this patch
+set ... I can remove it for the next release.
 
 
 _______________________________________________
