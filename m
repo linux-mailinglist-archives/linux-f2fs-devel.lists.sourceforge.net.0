@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 536F515AF7F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 19:13:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15D5815AF98
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 19:18:28 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1wW6-0000eK-3z; Wed, 12 Feb 2020 18:13:42 +0000
+	id 1j1wag-0000qc-M2; Wed, 12 Feb 2020 18:18:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+0636056a4212f82c3197+6016+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j1wW4-0000eB-Cf
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 18:13:40 +0000
+ id 1j1waf-0000qL-7a
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 18:18:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=exbKuTmB3BypNRUAcUVWw3Jh2/ptObaFi+H8fsEcxKE=; b=OYAEYgSRI4HC+QwnJkvBE9C8P2
- O/7JEOQHMDZ9OSz+BIA2LRw+0/dtNyCsLir4EJ+n0XD6cBEMdrWblcO2/GHgoyarPQDGp5wkDsCtQ
- jh0xovhGUyB5h0NETYpaK8bEhaWaZx2Bqcb3D4Uy4vg495qgOMzAVbF2Ke0ZqcYcSt4g=;
+ bh=4+pGNKZQNPPjUYhUfxAE2vdkfqWETPzu/0lbzblOiLM=; b=UhqZx7L4IuK0fNkHYfb2pmhiR4
+ AK80psOgv0L67ZtNPLwbE0EpChVAtgODirX3fAoxahV6yKS0k02QjSofpzODEIeztGundEPdXFJM1
+ aeXGsBaNpJU0IVx48rbG6l8rpMg74c/9q1qj4SpC0hSoQLGNHgzhfTyfmdyk8nwRF7Gc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,44 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=exbKuTmB3BypNRUAcUVWw3Jh2/ptObaFi+H8fsEcxKE=; b=dUCQ5O6eNjOxlEr/5h7NCp3FcX
- gA9ttKzsCeID+y0PAOY24cNSDSn9/1DW0wodKcLLJeX2kRJNXdvOCPhygD/7Mvu1kGKFGOzeo2H5X
- 2oCzRstr/MgQqvYg0fOh+pQ4CFdovwQoqkzyQm+TzMAKnh4Umras+LblnYUt70IETXAc=;
+ bh=4+pGNKZQNPPjUYhUfxAE2vdkfqWETPzu/0lbzblOiLM=; b=YjmNuRSAz8q5KCI3D2+6ZtWsLt
+ oljTpchANJDFU6290PaKmNSGrb25Qct9CxJ7yeKjRP/v6vcFI6TF2nxUQ0dW7rph31JbAkw6UpiB+
+ xYFunp1gsR5gS6g3dBdCl0/v6vxiJNQ0PxY7G2mme7Dd5/sBhQLuROtv357gpHDNb0kw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j1wW3-001WeD-7I
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 18:13:40 +0000
+ id 1j1wae-001d3q-82
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 18:18:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=exbKuTmB3BypNRUAcUVWw3Jh2/ptObaFi+H8fsEcxKE=; b=kfnqaCCT7YWX4nBMwDXdhFflTO
- GchhyNM5fm8RyKBM+/aj2h5Cuth7F4gsvGUO233CoUs/Jc9bqjOOO2tU2zM+ICd06jmGSkWZW4I/k
- xootPKLT7JvmY10K4LD5LdaVgfHHT0ofNUFoWq5s1wu7sfUCSds7gSMPkAVFGx2h9sDVnMvdbrMha
- UadJrwNB6Pd5MIPsfdkJ9ZHiYkkYTQ7iAJMXyfRnyQMqUJ9hPSorBBhCtwBP1k4l7m7L1NJA23Q6E
- DLvyHLGiztgzg8AQ6OWjDLFqLL/ytC981/NRCevE1vjEixMjTUWdlDnFOHo9gKGpBWg4t+WsmRGt9
- Qmymo12A==;
+ bh=4+pGNKZQNPPjUYhUfxAE2vdkfqWETPzu/0lbzblOiLM=; b=qC1Fti8lZ0koII3U5Sa2TjOM28
+ nosTSzdm25oQSeIMGq07AVlCw20djEBGUpWliyiKQwITDdQcoaxm1uXqtkNjwxfTpJNhiOtI8jhOb
+ r7GEIlGzU7vqitlAbk9aJYzHnlfzWJw31vQC/Z3Til1uih5qj+enBDV26fhdRz3DdCxYbTIaNuUIX
+ 2OnWR1DrQfnRApPtzcldB3qtqOzSKFM+aq41f9gck471QDMk1xCwWxmFurCQfy00JF0ZQaamhxAYP
+ Bw2GDAtxWrBD9CBq026AuSAIvMitA8b0oUDL/p3WShFpcX4ybJFYzF5XIQaHgMzYrROtQoZVzZ4bv
+ WrZl7SaA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j1wVu-0002f2-F4; Wed, 12 Feb 2020 18:13:30 +0000
-Date: Wed, 12 Feb 2020 10:13:30 -0800
+ Hat Linux)) id 1j1waR-0004Q0-E1; Wed, 12 Feb 2020 18:18:11 +0000
+Date: Wed, 12 Feb 2020 10:18:11 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200212181330.GB9756@infradead.org>
+Message-ID: <20200212181811.GC9756@infradead.org>
 References: <20200211010348.6872-1-willy@infradead.org>
- <20200211010348.6872-3-willy@infradead.org>
+ <20200211010348.6872-5-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200211010348.6872-3-willy@infradead.org>
+In-Reply-To: <20200211010348.6872-5-willy@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -77,9 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j1wW3-001WeD-7I
-Subject: Re: [f2fs-dev] [PATCH v5 02/13] mm: Ignore return value of
- ->readpages
+X-Headers-End: 1j1wae-001d3q-82
+Subject: Re: [f2fs-dev] [PATCH v5 04/13] mm: Add readahead address space
+ operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,17 +96,17 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 10, 2020 at 05:03:37PM -0800, Matthew Wilcox wrote:
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> 
-> We used to assign the return value to a variable, which we then ignored.
-> Remove the pretence of caring.
-> 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+On Mon, Feb 10, 2020 at 05:03:39PM -0800, Matthew Wilcox wrote:
+> +struct readahead_control {
+> +	struct file *file;
+> +	struct address_space *mapping;
+> +/* private: use the readahead_* accessors instead */
+> +	pgoff_t start;
+> +	unsigned int nr_pages;
+> +	unsigned int batch_count;
 
-Looks good,
-
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+We often use __ prefixes for the private fields to make that a little
+more clear.
 
 
 _______________________________________________
