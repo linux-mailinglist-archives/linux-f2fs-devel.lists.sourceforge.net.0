@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D57A1159A3F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2020 21:08:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A85F5159F92
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 04:38:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1bpo-0008K6-2S; Tue, 11 Feb 2020 20:08:40 +0000
+	id 1j1irA-0003CM-8A; Wed, 12 Feb 2020 03:38:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1j1bpn-0008Jw-C6
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 20:08:39 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1j1ir4-0003C7-V8
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:38:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xI5wPlQAb6RYd+Bo7ZTjb9KE+NndnBDQlJMhAtCInEE=; b=G4Mf1OY0AgcdxaOe5w3Hbjgfj4
- DcYsVLL3i8JT5PTBKbS1X6W9UdRMEDgGX3BQyGvJkJanzhvYSA2KL6fOfbMunC3CfZ+WlQJfg+p+9
- NxBUP/mnEu66zqOj/3rjK01O595rHl9WbwB3XM3GB5e5SjTX+5nA+LDQTlUY22Jol9eE=;
+ bh=jqjp8DR9BpSBkCVT4AyTGBZkwOJQhZg/XHWI/DKBslQ=; b=P4Ld1gZQR5kWEDr5oFIoNMykvJ
+ +K6uELaxej4hGr8gc60JeGNYprgWTGZ6DQm/FelnqR6rZdPosYrUDNEcCylgU8G9xA27+VyiEvOhJ
+ hjcVADtVzBG1pO1ynHtjDmNt8o8v6qTy45ysMehwQWyBWWblsByQfs2yIrtcz7RhQC5A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,51 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xI5wPlQAb6RYd+Bo7ZTjb9KE+NndnBDQlJMhAtCInEE=; b=SVV6mrGPDxVRTPPDtHyorMJdmT
- lDB9/gL3KF+MMJttn1CnVW4WbI5EfSs2N1S8e8RDoAPLjnW2nbW3rYVklgManCb+lVshv/3fXectE
- 7bbE4Ez6fG4SpUecC2zUoy5uJS7SUbor9U7b7yq3Pmf6iNH9hbEJpLoOe0FhI/PFEL40=;
-Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1j1bpl-000nk2-5O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Feb 2020 20:08:39 +0000
-Received: from dread.disaster.area (pa49-179-138-28.pa.nsw.optusnet.com.au
- [49.179.138.28])
- by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 2D0293A3899;
- Wed, 12 Feb 2020 07:08:28 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1j1bpa-0002l0-DL; Wed, 12 Feb 2020 07:08:26 +1100
-Date: Wed, 12 Feb 2020 07:08:26 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200211200826.GK10776@dread.disaster.area>
-References: <20200211010348.6872-1-willy@infradead.org>
- <20200211010348.6872-5-willy@infradead.org>
- <20200211045230.GD10776@dread.disaster.area>
- <20200211125413.GU8731@bombadil.infradead.org>
+ bh=jqjp8DR9BpSBkCVT4AyTGBZkwOJQhZg/XHWI/DKBslQ=; b=a6a4VzgSLhZs3FGhc4vQJMj5fX
+ w+BZGXxK7EojGtVb7zDMhQ/hEF5NCIliM8QzQYSu5o8nDnsMKFmQyMWSqwFUVgWBuOiZqQNq6C8Fr
+ Ay9oKZ3MrZDV5wzsDbmuOMj2x0PAKpa2h83Ce1oxRFdVLjtLN/z16vXMdP4W8kO49lso=;
+Received: from [198.145.29.99] (helo=mail.kernel.org)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1j1iqy-0015rx-0C
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:38:26 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D8E112073C;
+ Wed, 12 Feb 2020 03:38:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1581478684;
+ bh=QFEFG/81Rfdx+DhaJa330Iy0plXtvuXYAYlLrbnAw4s=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kgLuYeSFpKxnDdxa83uM8r7H8S2iSSVhydJQbgl1WskDbn0S35JXuXY6oYMb6AFqU
+ HxO5QSmEbAmJQYLuF8FimrMwI0rN+5dYv0mjVwfxsOCEj+bKApbx/sRGflnZL6TTxF
+ hsjxh+dI86q2CbBRmKMiAXqhZqvYy14nr51t/CqE=
+Date: Tue, 11 Feb 2020 19:38:00 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Daniel Rosenberg <drosen@google.com>
+Message-ID: <20200212033800.GC870@sol.localdomain>
+References: <20200208013552.241832-1-drosen@google.com>
+ <20200208013552.241832-2-drosen@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200211125413.GU8731@bombadil.infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=X6os11be c=1 sm=1 tr=0
- a=zAxSp4fFY/GQY8/esVNjqw==:117 a=zAxSp4fFY/GQY8/esVNjqw==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=l697ptgUJYAA:10
- a=7-415B0cAAAA:8 a=EnYlyWvjhy6VBD_eMqkA:9 a=CdacwtsPoHkD4rhW:21
- a=vlsg44Ume0T2P6Xz:21 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200208013552.241832-2-drosen@google.com>
+X-Spam-Score: 0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fromorbit.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j1bpl-000nk2-5O
-Subject: Re: [f2fs-dev] [PATCH v5 04/13] mm: Add readahead address space
- operation
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1j1iqy-0015rx-0C
+Subject: Re: [f2fs-dev] [PATCH v7 1/8] unicode: Add utf8_casefold_iter
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,86 +84,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+Cc: kernel-team@android.com, Theodore Ts'o <tytso@mit.edu>,
+ Jonathan Corbet <corbet@lwn.net>, Richard Weinberger <richard@nod.at>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 11, 2020 at 04:54:13AM -0800, Matthew Wilcox wrote:
-> On Tue, Feb 11, 2020 at 03:52:30PM +1100, Dave Chinner wrote:
-> > > +struct readahead_control {
-> > > +	struct file *file;
-> > > +	struct address_space *mapping;
-> > > +/* private: use the readahead_* accessors instead */
-> > > +	pgoff_t start;
-> > > +	unsigned int nr_pages;
-> > > +	unsigned int batch_count;
-> > > +};
-> > > +
-> > > +static inline struct page *readahead_page(struct readahead_control *rac)
-> > > +{
-> > > +	struct page *page;
-> > > +
-> > > +	if (!rac->nr_pages)
-> > > +		return NULL;
-> > > +
-> > > +	page = xa_load(&rac->mapping->i_pages, rac->start);
-> > > +	VM_BUG_ON_PAGE(!PageLocked(page), page);
-> > > +	rac->batch_count = hpage_nr_pages(page);
-> > > +	rac->start += rac->batch_count;
-> > 
-> > There's no mention of large page support in the patch description
-> > and I don't recall this sort of large page batching in previous
-> > iterations.
-> > 
-> > This seems like new functionality to me, not directly related to
-> > the initial ->readahead API change? What have I missed?
+On Fri, Feb 07, 2020 at 05:35:45PM -0800, Daniel Rosenberg wrote:
+> This function will allow other uses of unicode to act upon a casefolded
+> string without needing to allocate their own copy of one.
 > 
-> I had a crisis of confidence when I was working on this -- the loop
-> originally looked like this:
+> The actor function can return an nonzero value to exit early.
 > 
-> #define readahead_for_each(rac, page)                                   \
->         for (; (page = readahead_page(rac)); rac->nr_pages--)
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
+>  fs/unicode/utf8-core.c  | 25 ++++++++++++++++++++++++-
+>  include/linux/unicode.h | 10 ++++++++++
+>  2 files changed, 34 insertions(+), 1 deletion(-)
 > 
-> and then I started thinking about what I'd need to do to support large
-> pages, and that turned into
-> 
-> #define readahead_for_each(rac, page)                                   \
->         for (; (page = readahead_page(rac));				\
-> 		rac->nr_pages -= hpage_nr_pages(page))
-> 
-> but I realised that was potentially a use-after-free because 'page' has
-> certainly had put_page() called on it by then.  I had a brief period
-> where I looked at moving put_page() away from being the filesystem's
-> responsibility and into the iterator, but that would introduce more
-> changes into the patchset, as well as causing problems for filesystems
-> that want to break out of the loop.
-> 
-> By this point, I was also looking at the readahead_for_each_batch()
-> iterator that btrfs uses, and so we have the batch count anyway, and we
-> might as well use it to store the number of subpages of the large page.
-> And so it became easier to just put the whole ball of wax into the initial
-> patch set, rather than introduce the iterator now and then fix it up in
-> the patch set that I'm basing on this.
-> 
-> So yes, there's a certain amount of excess functionality in this patch
-> set ... I can remove it for the next release.
+> diff --git a/fs/unicode/utf8-core.c b/fs/unicode/utf8-core.c
+> index 2a878b739115d..db050bf59a32b 100644
+> --- a/fs/unicode/utf8-core.c
+> +++ b/fs/unicode/utf8-core.c
+> @@ -122,9 +122,32 @@ int utf8_casefold(const struct unicode_map *um, const struct qstr *str,
+>  	}
+>  	return -EINVAL;
+>  }
+> -
+>  EXPORT_SYMBOL(utf8_casefold);
+>  
+> +int utf8_casefold_iter(const struct unicode_map *um, const struct qstr *str,
+> +		    struct utf8_itr_context *ctx)
+> +{
+> +	const struct utf8data *data = utf8nfdicf(um->version);
+> +	struct utf8cursor cur;
+> +	int c;
+> +	int res = 0;
+> +	int pos = 0;
+> +
+> +	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
+> +		return -EINVAL;
+> +
+> +	while ((c = utf8byte(&cur))) {
+> +		if (c < 0)
+> +			return c;
+> +		res = ctx->actor(ctx, c, pos);
+> +		pos++;
+> +		if (res)
+> +			return res;
+> +	}
+> +	return res;
+> +}
+> +EXPORT_SYMBOL(utf8_casefold_iter);
 
-I'd say "Just document it" as that was the main reason I noticed it.
-Or perhaps add the batching function as a stand-alone patch so it's
-clear that the batch interface solves two problems at once - large
-pages and the btrfs page batching implementation...
+Indirect function calls are expensive these days for various reasons, including
+Spectre mitigations and CFI.  Are you sure it's okay from a performance
+perspective to make an indirect call for every byte of the pathname?
 
-Cheers,
+> +typedef int (*utf8_itr_actor_t)(struct utf8_itr_context *, int byte, int pos);
 
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+The byte argument probably should be 'u8', to avoid confusion about whether it's
+a byte or a Unicode codepoint.
+
+- Eric
 
 
 _______________________________________________
