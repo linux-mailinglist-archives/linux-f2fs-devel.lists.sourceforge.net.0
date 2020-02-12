@@ -2,85 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28FAE15A175
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 07:57:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72C5415A67E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 11:35:07 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1lxx-00087v-QC; Wed, 12 Feb 2020 06:57:45 +0000
+	id 1j1pMD-0006vA-RR; Wed, 12 Feb 2020 10:35:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1j1lxx-00087k-4s
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 06:57:45 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1j1pMC-0006uc-SZ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 10:35:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u4DmAKm4rZNkyHENtR850C9P9HJTn6T4/a1y7JduOTg=; b=b+0pL7j8qvSeYsRi1vYVp3xp5k
- uq3JZa1dskD7cVIGqU0UZs4V1s0vY5RREGyOpqPIohpFNKvJ4wB0o6KVEtU1wkO4L7Hfh6MDu60/3
- el4APYsnS9xH+qFPqlXK/GFRp9PI1eNH7SEzoOuvSCpHnmw8E2HZidgXDpNx3h8u3RXc=;
+ bh=2BzVBkWXGOG1Dibf8D8odHQzCgza5j9KmDN17ZfpAAs=; b=BjQmvxQ74OwbSKzrUrgv0NQGdm
+ JmIH+aEq0VgX0xFvwe/raXpo+2/lAc/g1VN5M1Yi1uTqTnlIVFxd47e+utgHr3I+7rt/AjtaKUcUM
+ 7tTURqV1jCxRZCAjFd/GgeZhVNrrdC7if7577KMGRA+qZ8TfM0BwZty9+m9JiKmDalwY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=u4DmAKm4rZNkyHENtR850C9P9HJTn6T4/a1y7JduOTg=; b=VaaMhzfuPL6CP04AC87tidDWJn
- TnHtFsX1knE6CT4Dyzr6WM8IuzSJ6FQg72D2a2hqL8CO24Fw0IQLlbsA/eta3nd/Lchqxd/wfT5ho
- UVZilU/H1M0mK4fuKURuLnUsyFkTsUK5oeMUemDrwAcK77v/MLhoXbjOzfhgyQrT2w8Y=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=2BzVBkWXGOG1Dibf8D8odHQzCgza5j9KmDN17ZfpAAs=; b=Z+06ODr6J25EILKJc1BqlrVtlt
+ UYPdGEMaYfqBVcus3vO1Er7hUvOMrEjayPL39sfrSOizew7g02n98AQHKvuBe6wK85XiEjvQvJaMH
+ OucoLoRa/UXKmcSBhY74A/Z5IQLM9eohbmVPaOcEqnoD2eoqrgHU9hTuutFrUUSWvfvs=;
+Received: from mail26.static.mailgun.info ([104.130.122.26])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j1lxv-009JvY-TC
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 06:57:45 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E34E22073C;
- Wed, 12 Feb 2020 06:57:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581490656;
- bh=19SiagyBycCgiJZF31FnbdIK3NQ4MFyvHwRPT//W9JE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=h+dAaEROsZffCQMVY8G50cRWmHjM/wRDc/9JlSSWDsBr6/IAgHBKtnX222ZTx5Q2Q
- H77nJ9ax+MWcXCxYZ+7U/B4M3oavH5FuxwsoOg4BTYZI36prcxXHdxlvNgfXkOy/lv
- avaF1djrLaSPyjJTb1dEC5HGal0mzJPA5odqCW9M=
-Date: Tue, 11 Feb 2020 22:57:34 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Message-ID: <20200212065734.GA157327@sol.localdomain>
-References: <20200208013552.241832-1-drosen@google.com>
- <20200208013552.241832-3-drosen@google.com>
- <20200208021216.GE23230@ZenIV.linux.org.uk>
- <CA+PiJmTYbEA-hgrKwtp0jZXqsfYrzgogOZ0Pt=gTCtqhBfnqFA@mail.gmail.com>
- <20200210234207.GJ23230@ZenIV.linux.org.uk>
- <20200212063440.GL870@sol.localdomain>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200212063440.GL870@sol.localdomain>
-X-Spam-Score: -0.3 (/)
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1j1pM8-009Uny-CA
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 10:35:00 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1581503695; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=2BzVBkWXGOG1Dibf8D8odHQzCgza5j9KmDN17ZfpAAs=;
+ b=e4QKnRUSvzmbExBOV+H/xV8x5NhZsCeWAbbQ1O+ITMO6vKF5d2k37eGWEb1yo+bYG4MKgQR4
+ TmGI4DTjLZz4u1br/fxojJ9EUsg9p247MrRyAbevLZMBIbgkG9ZygdPQM3y/Mrek/rtImaXc
+ 9Ln6a4jg3hz/lYSVYIaEGNBeEio=
+X-Mailgun-Sending-Ip: 104.130.122.26
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
+ by mxa.mailgun.org with ESMTP id 5e43d4c7.7fd31f094688-smtp-out-n03;
+ Wed, 12 Feb 2020 10:34:47 -0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id 4796FC43383; Wed, 12 Feb 2020 10:34:47 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
+ URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from codeaurora.org
+ (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: stummala)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id B7DD8C433A2;
+ Wed, 12 Feb 2020 10:34:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org B7DD8C433A2
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=stummala@codeaurora.org
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 12 Feb 2020 16:04:25 +0530
+Message-Id: <1581503665-19914-1-git-send-email-stummala@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux.org.uk]
+ for more information. [URIs: codeaurora.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [104.130.122.26 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j1lxv-009JvY-TC
-Subject: Re: [f2fs-dev] [PATCH v7 2/8] fs: Add standard casefolding support
+X-Headers-End: 1j1pM8-009Uny-CA
+Subject: [f2fs-dev] [PATCH] f2fs: fix the panic in do_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,93 +103,130 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, Theodore Ts'o <tytso@mit.edu>,
- Daniel Rosenberg <drosen@google.com>, Jonathan Corbet <corbet@lwn.net>,
- Richard Weinberger <richard@nod.at>, Andreas Dilger <adilger.kernel@dilger.ca>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 11, 2020 at 10:34:40PM -0800, Eric Biggers wrote:
-> On Mon, Feb 10, 2020 at 11:42:07PM +0000, Al Viro wrote:
-> > On Mon, Feb 10, 2020 at 03:11:13PM -0800, Daniel Rosenberg wrote:
-> > > On Fri, Feb 7, 2020 at 6:12 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
-> > > >
-> > > > On Fri, Feb 07, 2020 at 05:35:46PM -0800, Daniel Rosenberg wrote:
-> > > >
-> > > >
-> > > > Again, is that safe in case when the contents of the string str points to
-> > > > keeps changing under you?
-> > > 
-> > > I'm not sure what you mean. I thought it was safe to use the str and
-> > > len passed into d_compare. Even if it gets changed under RCU
-> > > conditions I thought there was some code to ensure that the name/len
-> > > pair passed in is consistent, and any other inconsistencies would get
-> > > caught by d_seq later. Are there unsafe code paths that can follow?
-> > 
-> > If you ever fetch the same byte twice, you might see different values.
-> > You need a fairly careful use of READ_ONCE() or equivalents to make
-> > sure that you don't get screwed over by that.
-> > 
-> > Sure, ->d_seq mismatch will throw the result out, but you need to make
-> > sure you won't oops/step on uninitialized memory/etc. in process.
-> > 
-> > It's not impossible to get right, but it's not trivial and you need all
-> > code working with that much more careful than normal for string handling.
-> 
-> It looks like this is a real problem, not just a "theoretical" data race.
-> For example, see:
-> 
-> utf8ncursor():
->         /* The first byte of s may not be an utf8 continuation. */
->         if (len > 0 && (*s & 0xC0) == 0x80)
->                 return -1;
-> 
-> and then utf8byte():
->                 } else if ((*u8c->s & 0xC0) == 0x80) {
->                         /* This is a continuation of the current character. */
->                         if (!u8c->p)
->                                 u8c->len--;
->                         return (unsigned char)*u8c->s++;
-> 
-> The first byte of the string is checked in two different functions, so it's very
-> likely to be loaded twice.  In between, it could change from a non-continuation
-> byte to a continuation byte.  That would cause the string length to be
-> decremented from 0 to UINT_MAX.  Then utf8_strncasecmp() would run beyond the
-> bounds of the string until something happened to mismatch.
-> 
-> That's just an example that I found right away; there are probably more.
-> 
-> IMO, this needs to be fixed before anyone can actually use the ext4 and f2fs
-> casefolding stuff.
-> 
-> I don't know the best solution.  One option is to fix fs/unicode/ to handle
-> concurrently modified strings.  Another could be to see what it would take to
-> serialize lookups and renames for casefolded directories...
-> 
+There could be a scenario where f2fs_sync_meta_pages() will not
+ensure that all F2FS_DIRTY_META pages are submitted for IO. Thus,
+resulting in the below panic in do_checkpoint() -
 
-Or (just throwing another idea out there) the dentry's name could be copied to a
-temporary buffer in ->d_compare().  The simplest version would be:
+f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
+				!f2fs_cp_error(sbi));
 
-	u8 _name[NAME_MAX];
+This can happen in a low-memory condition, where shrinker could
+also be doing the writepage operation (stack shown below)
+at the same time when checkpoint is running on another core.
 
-	memcpy(_name, name, len);
-	name = _name;
+schedule
+down_write
+f2fs_submit_page_write -> by this time, this page in page cache is tagged
+			as PAGECACHE_TAG_WRITEBACK and PAGECACHE_TAG_DIRTY
+			is cleared, due to which f2fs_sync_meta_pages()
+			cannot sync this page in do_checkpoint() path.
+f2fs_do_write_meta_page
+__f2fs_write_meta_page
+f2fs_write_meta_page
+shrink_page_list
+shrink_inactive_list
+shrink_node_memcg
+shrink_node
+kswapd
 
-Though, 255 bytes is a bit large for a stack buffer (so for long names it may
-need kmalloc with GFP_ATOMIC), and technically it would need a special version
-of memcpy() to be guaranteed safe from compiler optimizations (though I expect
-this would work in practice).
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+---
+ fs/f2fs/checkpoint.c | 16 ++++++++--------
+ fs/f2fs/f2fs.h       |  2 +-
+ fs/f2fs/super.c      |  2 +-
+ 3 files changed, 10 insertions(+), 10 deletions(-)
 
-Alternatively, take_dentry_name_snapshot() kind of does this already, except
-that it takes a dentry and not a (name, len) pair.
-
-- Eric
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index ffdaba0..2b651a3 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1250,14 +1250,14 @@ static void unblock_operations(struct f2fs_sb_info *sbi)
+ 	f2fs_unlock_all(sbi);
+ }
+ 
+-void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi)
++void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
+ {
+ 	DEFINE_WAIT(wait);
+ 
+ 	for (;;) {
+ 		prepare_to_wait(&sbi->cp_wait, &wait, TASK_UNINTERRUPTIBLE);
+ 
+-		if (!get_pages(sbi, F2FS_WB_CP_DATA))
++		if (!get_pages(sbi, type))
+ 			break;
+ 
+ 		if (unlikely(f2fs_cp_error(sbi)))
+@@ -1384,8 +1384,8 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 	/* Flush all the NAT/SIT pages */
+ 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+-	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
+-					!f2fs_cp_error(sbi));
++	/* Wait for all dirty meta pages to be submitted for IO */
++	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
+ 
+ 	/*
+ 	 * modify checkpoint
+@@ -1493,11 +1493,11 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 	/* Here, we have one bio having CP pack except cp pack 2 page */
+ 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+-	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
+-					!f2fs_cp_error(sbi));
++	/* Wait for all dirty meta pages to be submitted for IO */
++	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
+ 
+ 	/* wait for previous submitted meta pages writeback */
+-	f2fs_wait_on_all_pages_writeback(sbi);
++	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
+ 
+ 	/* flush all device cache */
+ 	err = f2fs_flush_device_cache(sbi);
+@@ -1506,7 +1506,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 	/* barrier and flush checkpoint cp pack 2 page if it can */
+ 	commit_checkpoint(sbi, ckpt, start_blk);
+-	f2fs_wait_on_all_pages_writeback(sbi);
++	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
+ 
+ 	/*
+ 	 * invalidate intermediate page cache borrowed from meta inode
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5a888a0..b0e0535 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3196,7 +3196,7 @@ bool f2fs_is_dirty_device(struct f2fs_sb_info *sbi, nid_t ino,
+ void f2fs_update_dirty_page(struct inode *inode, struct page *page);
+ void f2fs_remove_dirty_inode(struct inode *inode);
+ int f2fs_sync_dirty_inodes(struct f2fs_sb_info *sbi, enum inode_type type);
+-void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi);
++void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type);
+ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc);
+ void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi);
+ int __init f2fs_create_checkpoint_caches(void);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 5111e1f..084633b 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1105,7 +1105,7 @@ static void f2fs_put_super(struct super_block *sb)
+ 	/* our cp_error case, we can wait for any writeback page */
+ 	f2fs_flush_merged_writes(sbi);
+ 
+-	f2fs_wait_on_all_pages_writeback(sbi);
++	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
+ 
+ 	f2fs_bug_on(sbi, sbi->fsync_node_num);
+ 
+-- 
+Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
 
 
 _______________________________________________
