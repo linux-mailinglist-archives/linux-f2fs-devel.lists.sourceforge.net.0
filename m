@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A85F5159F92
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 04:38:39 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDD93159FB1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2020 04:56:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j1irA-0003CM-8A; Wed, 12 Feb 2020 03:38:32 +0000
+	id 1j1j8A-0007RO-US; Wed, 12 Feb 2020 03:56:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1j1ir4-0003C7-V8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:38:26 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1j1j89-0007R8-41
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:56:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jqjp8DR9BpSBkCVT4AyTGBZkwOJQhZg/XHWI/DKBslQ=; b=P4Ld1gZQR5kWEDr5oFIoNMykvJ
- +K6uELaxej4hGr8gc60JeGNYprgWTGZ6DQm/FelnqR6rZdPosYrUDNEcCylgU8G9xA27+VyiEvOhJ
- hjcVADtVzBG1pO1ynHtjDmNt8o8v6qTy45ysMehwQWyBWWblsByQfs2yIrtcz7RhQC5A=;
+ bh=pNWa8x3voWLEepFqOrgfjz4N8M6OqVps8r27OXNAaPM=; b=cH5Fln5ZiJVSbiZNvz1rZo9r60
+ i2+CPUic+JJAL4Abks9v0FugGPAxD4LUk+AvnBqfhbFdFwA9i+Ezk/WvhdcJQXXyCHgTmlQroeibx
+ EyudsTC92tbbOVbuZkqyYA7vf6KAP7CcISd5NglccqXff4Ny4wuMayYijvrAYz2nT1iA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jqjp8DR9BpSBkCVT4AyTGBZkwOJQhZg/XHWI/DKBslQ=; b=a6a4VzgSLhZs3FGhc4vQJMj5fX
- w+BZGXxK7EojGtVb7zDMhQ/hEF5NCIliM8QzQYSu5o8nDnsMKFmQyMWSqwFUVgWBuOiZqQNq6C8Fr
- Ay9oKZ3MrZDV5wzsDbmuOMj2x0PAKpa2h83Ce1oxRFdVLjtLN/z16vXMdP4W8kO49lso=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=pNWa8x3voWLEepFqOrgfjz4N8M6OqVps8r27OXNAaPM=; b=c4QELiO2UukFLPLVYLKBKSyhbI
+ 8jtVL5W5vYqWjEZtaov4iZm8fkBKRjcEXkTmGLiZfy+JGmwsItv2uKvJ4sVgsmc3mVLM5rDEBTEat
+ DshcPDGX5/SJQm18x8cpxUaaN3nTfzCfoefM7olfkPj4T4I4ozAhlEtoiph2jUyEh46A=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j1iqy-0015rx-0C
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:38:26 +0000
+ id 1j1j86-0011lD-Rf
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 Feb 2020 03:56:05 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D8E112073C;
- Wed, 12 Feb 2020 03:38:03 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5566B206D7;
+ Wed, 12 Feb 2020 03:55:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581478684;
- bh=QFEFG/81Rfdx+DhaJa330Iy0plXtvuXYAYlLrbnAw4s=;
+ s=default; t=1581479745;
+ bh=QRHIt8kBfhFwG/eebDuW7D9CmPyDjyjrXyg9CDC5NUw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kgLuYeSFpKxnDdxa83uM8r7H8S2iSSVhydJQbgl1WskDbn0S35JXuXY6oYMb6AFqU
- HxO5QSmEbAmJQYLuF8FimrMwI0rN+5dYv0mjVwfxsOCEj+bKApbx/sRGflnZL6TTxF
- hsjxh+dI86q2CbBRmKMiAXqhZqvYy14nr51t/CqE=
-Date: Tue, 11 Feb 2020 19:38:00 -0800
+ b=QDjwA1UUCb18CDvTZAWN3AWxXhe8SylkHRngDpUO6Eo0l9UqmK2TbcwHSvmdzSIdq
+ 8lpBsW3LIAzLnS9/lpjvbuepoMDAj1jRGvX2twIB172UT2z1b0FdwMXW2zw4q/ykCV
+ QH0qbBpDSO+kDk6Nfy2KrHxMmTeVcqviduLNqrp8=
+Date: Tue, 11 Feb 2020 19:55:43 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20200212033800.GC870@sol.localdomain>
+Message-ID: <20200212035543.GD870@sol.localdomain>
 References: <20200208013552.241832-1-drosen@google.com>
- <20200208013552.241832-2-drosen@google.com>
+ <20200208013552.241832-3-drosen@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200208013552.241832-2-drosen@google.com>
-X-Spam-Score: 0.9 (/)
+In-Reply-To: <20200208013552.241832-3-drosen@google.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,10 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1j1iqy-0015rx-0C
-Subject: Re: [f2fs-dev] [PATCH v7 1/8] unicode: Add utf8_casefold_iter
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j1j86-0011lD-Rf
+Subject: Re: [f2fs-dev] [PATCH v7 2/8] fs: Add standard casefolding support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,61 +96,105 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Feb 07, 2020 at 05:35:45PM -0800, Daniel Rosenberg wrote:
-> This function will allow other uses of unicode to act upon a casefolded
-> string without needing to allocate their own copy of one.
+On Fri, Feb 07, 2020 at 05:35:46PM -0800, Daniel Rosenberg wrote:
+> This adds general supporting functions for filesystems that use
+> utf8 casefolding. It provides standard dentry_operations and adds the
+> necessary structures in struct super_block to allow this standardization.
 > 
-> The actor function can return an nonzero value to exit early.
-> 
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> ---
->  fs/unicode/utf8-core.c  | 25 ++++++++++++++++++++++++-
->  include/linux/unicode.h | 10 ++++++++++
->  2 files changed, 34 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/unicode/utf8-core.c b/fs/unicode/utf8-core.c
-> index 2a878b739115d..db050bf59a32b 100644
-> --- a/fs/unicode/utf8-core.c
-> +++ b/fs/unicode/utf8-core.c
-> @@ -122,9 +122,32 @@ int utf8_casefold(const struct unicode_map *um, const struct qstr *str,
->  	}
->  	return -EINVAL;
->  }
-> -
->  EXPORT_SYMBOL(utf8_casefold);
->  
-> +int utf8_casefold_iter(const struct unicode_map *um, const struct qstr *str,
-> +		    struct utf8_itr_context *ctx)
+> Ext4 and F2fs are switch to these implementations.
+
+I think you mean that ext4 and f2fs *will be switched* to these implementations?
+It's later in the series, not in this patch.
+
+> +#ifdef CONFIG_UNICODE
+> +bool needs_casefold(const struct inode *dir)
 > +{
-> +	const struct utf8data *data = utf8nfdicf(um->version);
-> +	struct utf8cursor cur;
-> +	int c;
-> +	int res = 0;
-> +	int pos = 0;
-> +
-> +	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> +		return -EINVAL;
-> +
-> +	while ((c = utf8byte(&cur))) {
-> +		if (c < 0)
-> +			return c;
-> +		res = ctx->actor(ctx, c, pos);
-> +		pos++;
-> +		if (res)
-> +			return res;
-> +	}
-> +	return res;
+> +	return IS_CASEFOLDED(dir) && dir->i_sb->s_encoding &&
+> +			(!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir));
 > +}
-> +EXPORT_SYMBOL(utf8_casefold_iter);
+> +EXPORT_SYMBOL(needs_casefold);
 
-Indirect function calls are expensive these days for various reasons, including
-Spectre mitigations and CFI.  Are you sure it's okay from a performance
-perspective to make an indirect call for every byte of the pathname?
+Can you add kerneldoc comments to all the new functions that are exported to
+modules?
 
-> +typedef int (*utf8_itr_actor_t)(struct utf8_itr_context *, int byte, int pos);
+> +struct hash_ctx {
+> +	struct utf8_itr_context ctx;
+> +	unsigned long hash;
+> +};
+> +
+> +static int do_generic_ci_hash(struct utf8_itr_context *ctx, int byte, int pos)
+> +{
+> +	struct hash_ctx *hctx = container_of(ctx, struct hash_ctx, ctx);
+> +
+> +	hctx->hash = partial_name_hash((unsigned char)byte, hctx->hash);
+> +	return 0;
+> +}
+> +
+> +int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
+> +{
+> +	const struct inode *inode = READ_ONCE(dentry->d_inode);
+> +	struct super_block *sb = dentry->d_sb;
+> +	const struct unicode_map *um = sb->s_encoding;
+> +	int ret = 0;
+> +	struct hash_ctx hctx;
+> +
+> +	if (!inode || !needs_casefold(inode))
+> +		return 0;
+> +
+> +	hctx.hash = init_name_hash(dentry);
+> +	hctx.ctx.actor = do_generic_ci_hash;
+> +	ret = utf8_casefold_iter(um, str, &hctx.ctx);
+> +	if (ret < 0)
+> +		goto err;
+> +	str->hash = end_name_hash(hctx.hash);
+> +
+> +	return 0;
+> +err:
+> +	if (sb_has_enc_strict_mode(sb))
+> +		ret = -EINVAL;
+> +	return ret;
+> +}
+> +EXPORT_SYMBOL(generic_ci_d_hash);
+> +#endif
 
-The byte argument probably should be 'u8', to avoid confusion about whether it's
-a byte or a Unicode codepoint.
+This breaks the !strict_mode case by starting to fail lookups of names that
+aren't valid Unicode, instead of falling back to the standard case-sensitive
+behavior.
+
+There is an xfstest for casefolding; is this bug not caught by it (in which case
+the test needs to be improved)?  Or did you just not run it?
+
+> diff --git a/include/linux/fs.h b/include/linux/fs.h
+> index 6eae91c0668f9..a260afbc06d22 100644
+> --- a/include/linux/fs.h
+> +++ b/include/linux/fs.h
+> @@ -1382,6 +1382,12 @@ extern int send_sigurg(struct fown_struct *fown);
+>  #define SB_ACTIVE	(1<<30)
+>  #define SB_NOUSER	(1<<31)
+>  
+> +/* These flags relate to encoding and casefolding */
+> +#define SB_ENC_STRICT_MODE_FL	(1 << 0)
+
+It would be helpful if the comment mentioned that these flags are stored on-disk
+(and therefore can't be re-numbered, unlike the other flags defined nearby).
+
+> +#ifdef CONFIG_UNICODE
+> +	struct unicode_map *s_encoding;
+> +	__u16 s_encoding_flags;
+>  #endif
+
+This isn't a UAPI header, so 's_encoding_flags' should use u16, not __u16.
+
+And for that matter, 's_encoding_flags' will be pointer-sized due to padding
+anyway, so maybe just make it 'unsigned int'?
+
+> +static inline bool needs_casefold(const struct inode *dir)
+> +{
+> +	return 0;
+> +}
+> +#endif
+
+Use false instead of 0 for 'bool'.
 
 - Eric
 
