@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 203B415DD03
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 16:57:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DBBB15DD28
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 16:57:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2dKz-0004zO-TM; Fri, 14 Feb 2020 15:57:05 +0000
+	id 1j2dLi-000560-1r; Fri, 14 Feb 2020 15:57:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1j2dKx-0004zE-TF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 15:57:03 +0000
+ (envelope-from <sashal@kernel.org>) id 1j2dLh-00055W-CE
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 15:57:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Vp6Um4oxAwWUG4DRhpaTlGhe4OTNdKb2At7yNf3So6s=; b=PA4pA0GlPB7jI0+ht5cRaTuYCP
- hrSBCR00AzjyV6LdvjqZcqknR5VNTnH3C3EtfWL/W+HY+nEY7l4U2lzNGnAWOtkHzDKM6EbBslAuB
- uhhCCjyWmhrCvrIfPpb9DG6Va/jHn+rgdDXUKQlGhgiG6tV0kSC/vQ+q7RhVMu56M43w=;
+ bh=/h7v33dvWTl8smQsFVl0KXG6cyPJV5K/hMhk0wjK4mQ=; b=hUMZYcwfNTc1IhJjWkQJiBL2/3
+ Gt7KYD9U1cE7xpzrX8raZrn3OALBNxW5vTKKbXp+92OlbkhSmldhNbKCXS4TOyQR8AKkulA59xx68
+ Y0f4WPY9LXhneH1mVFDWkN0ugMpQTW3NMHUs2ZGekCcgasEUSKGMcZT+ocSEIU/YfG+0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,39 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Vp6Um4oxAwWUG4DRhpaTlGhe4OTNdKb2At7yNf3So6s=; b=QfzRMqHgpDS/uxPU+jPWS6w2YB
- a4Kt4ftBF6jtxTUKMVw1cTIzqIa3ZwZNrTHojQ4jqVcsJybNoaEJbKjbDrwGVKeadi1sZEkuJWtPe
- anAfAqoOKzKK9/hCmAB9ANXpEj7ff53xUFEsLoo7ZJhOxbGXJAt27aLs6twvWf2ltHHo=;
+ bh=/h7v33dvWTl8smQsFVl0KXG6cyPJV5K/hMhk0wjK4mQ=; b=YOyUDt3AQiqX0+184/wfU6ky0+
+ 9Lsf3GgMKQU+6wEH4lPiioofDD0UrrOAVg67eVCb6PXPBosHcdpTjlG5ce73a1++x3mIrdpu+xQOr
+ yVOeoHDPQWlWY+Mcbh2iltq8tmR2ZuNuUA0fA/ZyH6/wQ1MXION8P0+9+7fAVbFoOqi0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2dKw-0045sC-RF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 15:57:03 +0000
+ id 1j2dLg-0045uL-8K
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 15:57:49 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8A1ED2067D;
- Fri, 14 Feb 2020 15:56:56 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id E1E5B2067D;
+ Fri, 14 Feb 2020 15:57:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581695817;
- bh=C/86LdAUnf6DSfPmYMylVq8bsdHu+MbWX9X+ufmRigQ=;
+ s=default; t=1581695862;
+ bh=Fu3+zaxSeTBbuporxA72n1l1vChr5Fc1WMlbXQ7PtWc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gN2QL8mZFmg1j9O+aQ6naJYONGWRdlAaY03DxWu65qHo4eEOmLRnD+7bmfME/6ApR
- GCCN5FXQrPg2TuOAm12qTNprHmwjjwpZNaS52fLXWzoKTzQVzEjIugGJqZYLcthUbk
- 2iInh6RQwkkyp3PJClmCSPm4cqdZAYZ0Xa04ZNRY=
+ b=QwblcM3BiBdru81208fUMT+3MkfCe4dK+LEgihNmO9B2RynYLABJSREECkgJEk5+d
+ 572dbCvkLWi3WogBDgKFQ9fR4FUo6zjW3PP3FsFuepTWbryL2GeqNIceknCoqwcXtl
+ osEjhyRDUoRPDoCgbR19EBN+SaZCOw4WbRe5PWYE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 10:46:06 -0500
-Message-Id: <20200214154854.6746-374-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 10:46:41 -0500
+Message-Id: <20200214154854.6746-409-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
 References: <20200214154854.6746-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -76,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j2dKw-0045sC-RF
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.5 374/542] f2fs: free sysfs kobject
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j2dLg-0045uL-8K
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.5 409/542] f2fs: fix memleak of kobject
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,29 +96,52 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 820d366736c949ffe698d3b3fe1266a91da1766d ]
+[ Upstream commit fe396ad8e7526f059f7b8c7290d33a1b84adacab ]
 
-Detected kmemleak.
+If kobject_init_and_add() failed, caller needs to invoke kobject_put()
+to release kobject explicitly.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/sysfs.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/f2fs/sysfs.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 70945ceb9c0ca..5963316f391a5 100644
+index 5963316f391a5..e79c86b8553a5 100644
 --- a/fs/f2fs/sysfs.c
 +++ b/fs/f2fs/sysfs.c
-@@ -786,4 +786,5 @@ void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
- 		remove_proc_entry(sbi->sb->s_id, f2fs_proc_root);
- 	}
- 	kobject_del(&sbi->s_kobj);
-+	kobject_put(&sbi->s_kobj);
+@@ -733,10 +733,12 @@ int __init f2fs_init_sysfs(void)
+ 
+ 	ret = kobject_init_and_add(&f2fs_feat, &f2fs_feat_ktype,
+ 				   NULL, "features");
+-	if (ret)
++	if (ret) {
++		kobject_put(&f2fs_feat);
+ 		kset_unregister(&f2fs_kset);
+-	else
++	} else {
+ 		f2fs_proc_root = proc_mkdir("fs/f2fs", NULL);
++	}
+ 	return ret;
  }
+ 
+@@ -757,8 +759,11 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
+ 	init_completion(&sbi->s_kobj_unregister);
+ 	err = kobject_init_and_add(&sbi->s_kobj, &f2fs_sb_ktype, NULL,
+ 				"%s", sb->s_id);
+-	if (err)
++	if (err) {
++		kobject_put(&sbi->s_kobj);
++		wait_for_completion(&sbi->s_kobj_unregister);
+ 		return err;
++	}
+ 
+ 	if (f2fs_proc_root)
+ 		sbi->s_proc = proc_mkdir(sb->s_id, f2fs_proc_root);
 -- 
 2.20.1
 
