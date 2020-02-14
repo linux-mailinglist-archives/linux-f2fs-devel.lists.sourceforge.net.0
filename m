@@ -2,68 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2A9315D4F6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 10:47:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D92815D4F5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 10:47:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2XZF-0001sR-PT; Fri, 14 Feb 2020 09:47:25 +0000
+	id 1j2XZ8-0005Dj-Cy; Fri, 14 Feb 2020 09:47:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j2XXM-0001gz-8v
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:45:28 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j2XYE-0005As-Eo
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Oyr+XRtibRBwoAj3NVfhgEfLyO4S4AhQrKGNgfIFwtI=; b=CDS5GvC+PTuCMinv5cIWq0FN9V
- +kR2rY/1eYzVqPCiwhEYhAUmOhx/H3SK6D0CqEZ/34bWeKFHOAPbQ3vtOMISdMQ3lJsfNIZ82bwjQ
- fjP79vVnWjLKVvTpDc9MCUiQYDRMwkZBQ+oH2hvoQisAfFqjBopDq/wbYRJKimghyMa8=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
  CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Oyr+XRtibRBwoAj3NVfhgEfLyO4S4AhQrKGNgfIFwtI=; b=ETNSYnW15LaD1hhxeKBHhCXIgr
- cFyBXLhiDi1gV4pg4LbJn+7vp9okNqF3omCyS6C989WdsJtxtN/n6ZZvTjMPZk3ww5bb+STMsvqHk
- viE6/XXpaD+DRkfxodSyotspyXD/ATaJGsOqZIdmuW3KSL+NLZO9ipkmv0z5qf2iBgpE=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ePPLTvYhQv8bsYdmd/05WFY8opwnIkiXe9ipKheM8CE=; b=U1pXQPzzi6sQpnVNsqI86APAb2
+ OTtRED+d7RMAi7QN8KFlpM8iCtY6b5kDY9mgHBTEKCxkI5PM7yMC/wnunYDnipCsEUxuP3vdwjbmd
+ i0f7bAkuVpjLmjjTGjDk+W5G88h0KLP9KWve4Jl2tNpMQh0yoVfmsIKLKDYqwVaHTiOs=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ePPLTvYhQv8bsYdmd/05WFY8opwnIkiXe9ipKheM8CE=; b=H
+ YpnREkXRFu+pydOo7ju9hcKFMXCfy2F7HXdrgIvXuGx/A/5TBuPNzz73oQ6Da5PmQ4I0a0CQe3j4k
+ dhRzlxLQ5XFcIXj3lJ0Tw2SOLVGzgW6pytjrbt3tllrypUfGYgUpXp80tXVl+Xf/V0zq9tBroPEDr
+ u/tJmmsdBMYYExUY=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2XXH-00CM4x-OE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:45:28 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 23EBED497044317487E6;
- Fri, 14 Feb 2020 17:45:11 +0800 (CST)
+ id 1j2XYC-00CM7F-A8
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:22 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 03289A10FFA0AC732EA8;
+ Fri, 14 Feb 2020 17:46:08 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 14 Feb 2020 17:45:00 +0800
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.439.0; Fri, 14 Feb 2020 17:45:58 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 14 Feb 2020 17:44:13 +0800
-Message-ID: <20200214094413.12784-4-yuchao0@huawei.com>
+Date: Fri, 14 Feb 2020 17:45:11 +0800
+Message-ID: <20200214094512.13035-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
-In-Reply-To: <20200214094413.12784-1-yuchao0@huawei.com>
-References: <20200214094413.12784-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
-X-Headers-End: 1j2XXH-00CM4x-OE
-Subject: [f2fs-dev] [PATCH 4/4] f2fs: clean up bggc mount option
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1j2XYC-00CM7F-A8
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to show norecovery mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,171 +78,59 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There are three status for background gc: on, off and sync, it's
-a little bit confused to use test_opt(BG_GC) and test_opt(FORCE_FG_GC)
-combinations to indicate status of background gc.
-
-So let's remove F2FS_MOUNT_BG_GC and F2FS_MOUNT_FORCE_FG_GC mount
-options, and add F2FS_OPTION().bggc_mode with below three status
-to clean up codes and enhance bggc mode's scalability.
-
-enum {
-	BGGC_MODE_ON,		/* background gc is on */
-	BGGC_MODE_OFF,		/* background gc is off */
-	BGGC_MODE_SYNC,		/*
-				 * background gc is on, migrating blocks
-				 * like foreground gc
-				 */
-};
+Previously, 'norecovery' mount option will be shown as
+'disable_roll_forward', fix to show original option name correctly.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/f2fs.h  | 12 ++++++++++--
- fs/f2fs/gc.c    |  6 +++++-
- fs/f2fs/super.c | 29 +++++++++++++----------------
- 3 files changed, 28 insertions(+), 19 deletions(-)
+ fs/f2fs/f2fs.h  | 1 +
+ fs/f2fs/super.c | 7 +++++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d2d50827772c..9f65ba8057ad 100644
+index 9f65ba8057ad..816a5adb83a4 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -74,7 +74,6 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- /*
-  * For mount options
-  */
--#define F2FS_MOUNT_BG_GC		0x00000001
- #define F2FS_MOUNT_DISABLE_ROLL_FORWARD	0x00000002
- #define F2FS_MOUNT_DISCARD		0x00000004
- #define F2FS_MOUNT_NOHEAP		0x00000008
-@@ -88,7 +87,6 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- #define F2FS_MOUNT_NOBARRIER		0x00000800
- #define F2FS_MOUNT_FASTBOOT		0x00001000
- #define F2FS_MOUNT_EXTENT_CACHE		0x00002000
--#define F2FS_MOUNT_FORCE_FG_GC		0x00004000
- #define F2FS_MOUNT_DATA_FLUSH		0x00008000
- #define F2FS_MOUNT_FAULT_INJECTION	0x00010000
- #define F2FS_MOUNT_USRQUOTA		0x00080000
-@@ -137,6 +135,7 @@ struct f2fs_mount_info {
- 	int alloc_mode;			/* segment allocation policy */
- 	int fsync_mode;			/* fsync policy */
- 	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
-+	int bggc_mode;			/* bggc mode: off, on or sync */
- 	bool test_dummy_encryption;	/* test dummy encryption */
- 	block_t unusable_cap;		/* Amount of space allowed to be
- 					 * unusable when disabling checkpoint
-@@ -1170,6 +1169,15 @@ enum {
- 	GC_URGENT,
- };
+@@ -96,6 +96,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+ #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
+ #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
+ #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
++#define F2FS_MOUNT_NORECOVERY		0x04000000
  
-+enum {
-+	BGGC_MODE_ON,		/* background gc is on */
-+	BGGC_MODE_OFF,		/* background gc is off */
-+	BGGC_MODE_SYNC,		/*
-+				 * background gc is on, migrating blocks
-+				 * like foreground gc
-+				 */
-+};
-+
- enum {
- 	FS_MODE_ADAPTIVE,	/* use both lfs/ssr allocation */
- 	FS_MODE_LFS,		/* use lfs allocation only */
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 8aebe2b9c655..897de003e423 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -31,6 +31,8 @@ static int gc_thread_func(void *data)
- 
- 	set_freezable();
- 	do {
-+		bool sync_mode;
-+
- 		wait_event_interruptible_timeout(*wq,
- 				kthread_should_stop() || freezing(current) ||
- 				gc_th->gc_wake,
-@@ -101,8 +103,10 @@ static int gc_thread_func(void *data)
- do_gc:
- 		stat_inc_bggc_count(sbi->stat_info);
- 
-+		sync_mode = F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC;
-+
- 		/* if return value is not zero, no victim was selected */
--		if (f2fs_gc(sbi, test_opt(sbi, FORCE_FG_GC), true, NULL_SEGNO))
-+		if (f2fs_gc(sbi, sync_mode, true, NULL_SEGNO))
- 			wait_ms = gc_th->no_gc_sleep_time;
- 
- 		trace_f2fs_background_gc(sbi->sb, wait_ms,
+ #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+ #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 427409eff354..4ef7e6eb37da 100644
+index 4ef7e6eb37da..1456979222cf 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -427,14 +427,11 @@ static int parse_options(struct super_block *sb, char *options)
- 			if (!name)
- 				return -ENOMEM;
- 			if (strlen(name) == 2 && !strncmp(name, "on", 2)) {
--				set_opt(sbi, BG_GC);
--				clear_opt(sbi, FORCE_FG_GC);
-+				F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_ON;
- 			} else if (strlen(name) == 3 && !strncmp(name, "off", 3)) {
--				clear_opt(sbi, BG_GC);
--				clear_opt(sbi, FORCE_FG_GC);
-+				F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_OFF;
- 			} else if (strlen(name) == 4 && !strncmp(name, "sync", 4)) {
--				set_opt(sbi, BG_GC);
--				set_opt(sbi, FORCE_FG_GC);
-+				F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_SYNC;
- 			} else {
- 				kvfree(name);
+@@ -443,7 +443,7 @@ static int parse_options(struct super_block *sb, char *options)
+ 			break;
+ 		case Opt_norecovery:
+ 			/* this option mounts f2fs with ro */
+-			set_opt(sbi, DISABLE_ROLL_FORWARD);
++			set_opt(sbi, NORECOVERY);
+ 			if (!f2fs_readonly(sb))
  				return -EINVAL;
-@@ -1436,14 +1433,13 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(root->d_sb);
+ 			break;
+@@ -1442,6 +1442,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
  
--	if (!f2fs_readonly(sbi->sb) && test_opt(sbi, BG_GC)) {
--		if (test_opt(sbi, FORCE_FG_GC))
--			seq_printf(seq, ",background_gc=%s", "sync");
--		else
--			seq_printf(seq, ",background_gc=%s", "on");
--	} else {
-+	if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC)
-+		seq_printf(seq, ",background_gc=%s", "sync");
-+	else if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_ON)
-+		seq_printf(seq, ",background_gc=%s", "on");
-+	else if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF)
- 		seq_printf(seq, ",background_gc=%s", "off");
--	}
-+
  	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
  		seq_puts(seq, ",disable_roll_forward");
++	if (test_opt(sbi, NORECOVERY))
++		seq_puts(seq, ",norecovery");
  	if (test_opt(sbi, DISCARD))
-@@ -1573,8 +1569,8 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	F2FS_OPTION(sbi).compress_algorithm = COMPRESS_LZO;
- 	F2FS_OPTION(sbi).compress_log_size = MIN_COMPRESS_LOG_SIZE;
- 	F2FS_OPTION(sbi).compress_ext_cnt = 0;
-+	F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_ON;
+ 		seq_puts(seq, ",discard");
+ 	else
+@@ -3595,7 +3597,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		goto reset_checkpoint;
  
--	set_opt(sbi, BG_GC);
- 	set_opt(sbi, INLINE_XATTR);
- 	set_opt(sbi, INLINE_DATA);
- 	set_opt(sbi, INLINE_DENTRY);
-@@ -1780,7 +1776,8 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	 * or if background_gc = off is passed in mount
- 	 * option. Also sync the filesystem.
- 	 */
--	if ((*flags & SB_RDONLY) || !test_opt(sbi, BG_GC)) {
-+	if ((*flags & SB_RDONLY) ||
-+			F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF) {
- 		if (sbi->gc_thread) {
- 			f2fs_stop_gc_thread(sbi);
- 			need_restart_gc = true;
-@@ -3664,7 +3661,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	 * If filesystem is not mounted as read-only then
- 	 * do start the gc_thread.
- 	 */
--	if (test_opt(sbi, BG_GC) && !f2fs_readonly(sb)) {
-+	if (F2FS_OPTION(sbi).bggc_mode != BGGC_MODE_OFF && !f2fs_readonly(sb)) {
- 		/* After POR, we can run background GC thread.*/
- 		err = f2fs_start_gc_thread(sbi);
- 		if (err)
+ 	/* recover fsynced data */
+-	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
++	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
++			!test_opt(sbi, NORECOVERY)) {
+ 		/*
+ 		 * mount should be failed, when device has readonly mode, and
+ 		 * previous checkpoint was not done by clean system shutdown.
 -- 
 2.18.0.rc1
 
