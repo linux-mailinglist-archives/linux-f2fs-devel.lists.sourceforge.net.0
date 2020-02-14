@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51EC215DF66
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 17:08:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85A8E15DF67
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 17:08:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2dWP-0007kb-DH; Fri, 14 Feb 2020 16:08:53 +0000
+	id 1j2dWR-0005Vq-Bj; Fri, 14 Feb 2020 16:08:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1j2dWO-0007kR-GT
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 16:08:52 +0000
+ (envelope-from <sashal@kernel.org>) id 1j2dWP-0005Ve-Bm
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 16:08:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5610HlhFn5Y5yhrSSkkbgsJrcD+vbkRlHLYLaDqQwI8=; b=Cbc1SS09fuOCSoFC9aSxANB96d
- Jj5JSd0E6/Xy34Any5J81AGHuYddRyhCpesrKUINihrpjazyYtBmmw9XvPqwc0hj9c33u3MQwVvy/
- VO/f/5/nyY/hnDUluIZglcZEpfc8n0+Pe0JYEDuZqMV75kTV7ef8PA/TBLQqg4XX+yZE=;
+ bh=N4u7eyLgJdBjn3X4RWpGs55GDfef+2OAH6cZOGomaD4=; b=UlMvNV9mC3ZiRfnzGNf5tQlHKx
+ vVDu5wMRIySG6SdBV7urNg4IqJoLvZOLsCm5D5a4yXGe8OqvSnRB8vVfUwis1Bpl587WGTISUNID8
+ YKvNvqtpoYH/KQHYs6uEZb1x3IVzuQWFm1AMx2B3E7MukzOVxgHPL9s1IH7QDdqlgwa8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5610HlhFn5Y5yhrSSkkbgsJrcD+vbkRlHLYLaDqQwI8=; b=d5MRCgZkBE1b6QuMAWE9gOlAHc
- 4Bd5dEAGo2ovKvcbQ61g6M8IACzSHV4SSb6oscAdGIvAwEU/a0CQfwBN6W7oz3CBHwSI8GIHrCQyt
- a67FPmXWAbIfBAQuEBXHZ8LWBzx9OXZk5LKapx01LFxU20aC5OOMSW29f9OmJhvoWXCA=;
+ bh=N4u7eyLgJdBjn3X4RWpGs55GDfef+2OAH6cZOGomaD4=; b=J53iJ7zsG3NFh4y4fVxJ2rlUoS
+ D8fFG4N5hgHW/vFZMaM8ZM9wuUbJAGx8jGWhbzy7Hvq1nJKDMQMgTyHaIPVbEin1Mi542EXATQLS9
+ ehP/F802Zn7dt0XKSgU++vOmJqzeOilOlufAloWZ/k+HBADDmMIPUx0Xedx6DuUXvv4k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2dWN-003vYO-8S
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 16:08:52 +0000
+ id 1j2dWO-0046aD-BW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 16:08:53 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D64E24682;
- Fri, 14 Feb 2020 16:08:44 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0809922314;
+ Fri, 14 Feb 2020 16:08:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581696525;
- bh=XVTS8iskw9/jLuaj5w3Q2gsSEKn4f5Cc5TOrqbKxMuk=;
+ s=default; t=1581696526;
+ bh=z9lZsmTV7165P7cffCuoQ2Igv1tMoJpZxY/bd3jhAiI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jc6jUGgdlS0TFNRVqKQJDLPmURkFBjmoqkb6FRsOgvvUFz/rJL+1dAzs3mBT5P6XO
- TlmcX0UHVMK6WfuRUC1zhH0AUB5FCBMSMK4bbBo2P3Go4FKUbFVZfK0tDyht61N/46
- cPo23byN4j0Kh63tyWBVZfm6h7Td6ELIVjGehZH4=
+ b=eRIpfwFz6p8jmM/aZWJjleKfXVkZi1E6+GVEQu3tE7MNw6QRl9M1xd9y0YEJqbZCz
+ mgAT07zXn+ZGVssOFbLKInlFi2sCLFBkMrEP4HnZU3jflhXu7j7h3xAMNzQwApV4II
+ jCc/UYedRdpPEZ8S5dcsPxTZE/CRLBRYZre+E++0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 10:59:35 -0500
-Message-Id: <20200214160149.11681-325-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 10:59:36 -0500
+Message-Id: <20200214160149.11681-326-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200214160149.11681-1-sashal@kernel.org>
 References: <20200214160149.11681-1-sashal@kernel.org>
@@ -64,6 +64,10 @@ X-Patchwork-Hint: Ignore
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -73,9 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j2dWN-003vYO-8S
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 325/459] f2fs: set I_LINKABLE early
- to avoid wrong access by vfs
+X-Headers-End: 1j2dWO-0046aD-BW
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 326/459] f2fs: free sysfs kobject
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,130 +98,27 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-[ Upstream commit 5b1dbb082f196278f82b6a15a13848efacb9ff11 ]
+[ Upstream commit 820d366736c949ffe698d3b3fe1266a91da1766d ]
 
-This patch moves setting I_LINKABLE early in rename2(whiteout) to avoid the
-below warning.
+Detected kmemleak.
 
-[ 3189.163385] WARNING: CPU: 3 PID: 59523 at fs/inode.c:358 inc_nlink+0x32/0x40
-[ 3189.246979] Call Trace:
-[ 3189.248707]  f2fs_init_inode_metadata+0x2d6/0x440 [f2fs]
-[ 3189.251399]  f2fs_add_inline_entry+0x162/0x8c0 [f2fs]
-[ 3189.254010]  f2fs_add_dentry+0x69/0xe0 [f2fs]
-[ 3189.256353]  f2fs_do_add_link+0xc5/0x100 [f2fs]
-[ 3189.258774]  f2fs_rename2+0xabf/0x1010 [f2fs]
-[ 3189.261079]  vfs_rename+0x3f8/0xaa0
-[ 3189.263056]  ? tomoyo_path_rename+0x44/0x60
-[ 3189.265283]  ? do_renameat2+0x49b/0x550
-[ 3189.267324]  do_renameat2+0x49b/0x550
-[ 3189.269316]  __x64_sys_renameat2+0x20/0x30
-[ 3189.271441]  do_syscall_64+0x5a/0x230
-[ 3189.273410]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
-[ 3189.275848] RIP: 0033:0x7f270b4d9a49
-
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/namei.c | 27 +++++++++++++--------------
- 1 file changed, 13 insertions(+), 14 deletions(-)
+ fs/f2fs/sysfs.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index a1c507b0b4ac4..5d9584281935f 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -797,6 +797,7 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
- 
- 	if (whiteout) {
- 		f2fs_i_links_write(inode, false);
-+		inode->i_state |= I_LINKABLE;
- 		*whiteout = inode;
- 	} else {
- 		d_tmpfile(dentry, inode);
-@@ -867,6 +868,12 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 			F2FS_I(old_dentry->d_inode)->i_projid)))
- 		return -EXDEV;
- 
-+	if (flags & RENAME_WHITEOUT) {
-+		err = f2fs_create_whiteout(old_dir, &whiteout);
-+		if (err)
-+			return err;
-+	}
-+
- 	err = dquot_initialize(old_dir);
- 	if (err)
- 		goto out;
-@@ -898,17 +905,11 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 		}
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index b558b64a4c9ca..8544c0ab7b32b 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -782,4 +782,5 @@ void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
+ 		remove_proc_entry(sbi->sb->s_id, f2fs_proc_root);
  	}
- 
--	if (flags & RENAME_WHITEOUT) {
--		err = f2fs_create_whiteout(old_dir, &whiteout);
--		if (err)
--			goto out_dir;
--	}
--
- 	if (new_inode) {
- 
- 		err = -ENOTEMPTY;
- 		if (old_dir_entry && !f2fs_empty_dir(new_inode))
--			goto out_whiteout;
-+			goto out_dir;
- 
- 		err = -ENOENT;
- 		new_entry = f2fs_find_entry(new_dir, &new_dentry->d_name,
-@@ -916,7 +917,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 		if (!new_entry) {
- 			if (IS_ERR(new_page))
- 				err = PTR_ERR(new_page);
--			goto out_whiteout;
-+			goto out_dir;
- 		}
- 
- 		f2fs_balance_fs(sbi, true);
-@@ -948,7 +949,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 		err = f2fs_add_link(new_dentry, old_inode);
- 		if (err) {
- 			f2fs_unlock_op(sbi);
--			goto out_whiteout;
-+			goto out_dir;
- 		}
- 
- 		if (old_dir_entry)
-@@ -972,7 +973,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 				if (IS_ERR(old_page))
- 					err = PTR_ERR(old_page);
- 				f2fs_unlock_op(sbi);
--				goto out_whiteout;
-+				goto out_dir;
- 			}
- 		}
- 	}
-@@ -991,7 +992,6 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 	f2fs_delete_entry(old_entry, old_page, old_dir, NULL);
- 
- 	if (whiteout) {
--		whiteout->i_state |= I_LINKABLE;
- 		set_inode_flag(whiteout, FI_INC_LINK);
- 		err = f2fs_add_link(old_dentry, whiteout);
- 		if (err)
-@@ -1027,15 +1027,14 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 	f2fs_unlock_op(sbi);
- 	if (new_page)
- 		f2fs_put_page(new_page, 0);
--out_whiteout:
--	if (whiteout)
--		iput(whiteout);
- out_dir:
- 	if (old_dir_entry)
- 		f2fs_put_page(old_dir_page, 0);
- out_old:
- 	f2fs_put_page(old_page, 0);
- out:
-+	if (whiteout)
-+		iput(whiteout);
- 	return err;
+ 	kobject_del(&sbi->s_kobj);
++	kobject_put(&sbi->s_kobj);
  }
- 
 -- 
 2.20.1
 
