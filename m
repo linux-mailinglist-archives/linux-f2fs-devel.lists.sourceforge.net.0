@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D92815D4F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 10:47:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81D5815D4F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 10:47:27 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2XZ8-0005Dj-Cy; Fri, 14 Feb 2020 09:47:18 +0000
+	id 1j2XZG-0001sd-Bb; Fri, 14 Feb 2020 09:47:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j2XYE-0005As-Eo
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:22 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j2XY9-0001lc-6N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ePPLTvYhQv8bsYdmd/05WFY8opwnIkiXe9ipKheM8CE=; b=U1pXQPzzi6sQpnVNsqI86APAb2
- OTtRED+d7RMAi7QN8KFlpM8iCtY6b5kDY9mgHBTEKCxkI5PM7yMC/wnunYDnipCsEUxuP3vdwjbmd
- i0f7bAkuVpjLmjjTGjDk+W5G88h0KLP9KWve4Jl2tNpMQh0yoVfmsIKLKDYqwVaHTiOs=;
+ bh=1PuCNVkSZNSXN3h8bMIyt2+7Oa5jDpNd+bFkFyTjrtA=; b=f/3ixlS/VoGv42WBM2nP6n4FUv
+ ZtVV2wNESbau0CRGbux/GfXwyNjOeeqNQbJVC1YMzj+TndYQ7Vkt92mctUUYEa/5DZS4K8cbFEXLD
+ ibm6g0bt2QBE9YOJ15mt4CQVQifwVQa9Y7UveGCALHk0NtlWi5gWctQ2OispYhLHAQrY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ePPLTvYhQv8bsYdmd/05WFY8opwnIkiXe9ipKheM8CE=; b=H
- YpnREkXRFu+pydOo7ju9hcKFMXCfy2F7HXdrgIvXuGx/A/5TBuPNzz73oQ6Da5PmQ4I0a0CQe3j4k
- dhRzlxLQ5XFcIXj3lJ0Tw2SOLVGzgW6pytjrbt3tllrypUfGYgUpXp80tXVl+Xf/V0zq9tBroPEDr
- u/tJmmsdBMYYExUY=;
+ h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=1PuCNVkSZNSXN3h8bMIyt2+7Oa5jDpNd+bFkFyTjrtA=; b=TLR9iKkdkHT0nV++KfbHTFdo6U
+ aKIL1DqfSGPhI1rPSCWNIElE7nPK4NYQjSPqetknkAKpfSZuVM/Y1jEWRoUhOPUliLNYA7WhLaWQe
+ tF5yNL8H57kOBodxXx6qDYHqcYw1uHM3rVwX3sHQtBWIsl4E1Q+PA8ksfKlsJ26/lrFU=;
 Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2XYC-00CM7F-A8
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:22 +0000
+ id 1j2XY7-00CM79-VF
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:46:17 +0000
 Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 03289A10FFA0AC732EA8;
- Fri, 14 Feb 2020 17:46:08 +0800 (CST)
+ by Forcepoint Email with ESMTP id F33C2703F484B2A39113;
+ Fri, 14 Feb 2020 17:46:07 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
- 14.3.439.0; Fri, 14 Feb 2020 17:45:58 +0800
+ 14.3.439.0; Fri, 14 Feb 2020 17:45:59 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 14 Feb 2020 17:45:11 +0800
-Message-ID: <20200214094512.13035-1-yuchao0@huawei.com>
+Date: Fri, 14 Feb 2020 17:45:12 +0800
+Message-ID: <20200214094512.13035-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
+In-Reply-To: <20200214094512.13035-1-yuchao0@huawei.com>
+References: <20200214094512.13035-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -60,8 +62,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1j2XYC-00CM7F-A8
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to show norecovery mount option
+X-Headers-End: 1j2XY7-00CM79-VF
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to wait all node page writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,59 +80,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Previously, 'norecovery' mount option will be shown as
-'disable_roll_forward', fix to show original option name correctly.
+There is a race condition that we may miss to wait for all node pages
+writeback, fix it.
 
+- fsync()				- shrink
+ - f2fs_do_sync_file
+					 - __write_node_page
+					  - set_page_writeback(page#0)
+					  : remove DIRTY/TOWRITE flag
+  - f2fs_fsync_node_pages
+  : won't find page #0 as TOWRITE flag was removeD
+  - f2fs_wait_on_node_pages_writeback
+  : wont' wait page #0 writeback as it was not in fsync_node_list list.
+					   - f2fs_add_fsync_node_entry
+
+Fixes: 50fa53eccf9f ("f2fs: fix to avoid broken of dnode block list")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/f2fs.h  | 1 +
- fs/f2fs/super.c | 7 +++++--
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ fs/f2fs/node.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 9f65ba8057ad..816a5adb83a4 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -96,6 +96,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
- #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
- #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
-+#define F2FS_MOUNT_NORECOVERY		0x04000000
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 332cebc2033c..9824f055a5bc 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1561,15 +1561,16 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 	if (atomic && !test_opt(sbi, NOBARRIER))
+ 		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
  
- #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
- #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 4ef7e6eb37da..1456979222cf 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -443,7 +443,7 @@ static int parse_options(struct super_block *sb, char *options)
- 			break;
- 		case Opt_norecovery:
- 			/* this option mounts f2fs with ro */
--			set_opt(sbi, DISABLE_ROLL_FORWARD);
-+			set_opt(sbi, NORECOVERY);
- 			if (!f2fs_readonly(sb))
- 				return -EINVAL;
- 			break;
-@@ -1442,6 +1442,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+-	set_page_writeback(page);
+-	ClearPageError(page);
+-
++	/* should add to global list before clearing PAGECACHE status */
+ 	if (f2fs_in_warm_node_list(sbi, page)) {
+ 		seq = f2fs_add_fsync_node_entry(sbi, page);
+ 		if (seq_id)
+ 			*seq_id = seq;
+ 	}
  
- 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
- 		seq_puts(seq, ",disable_roll_forward");
-+	if (test_opt(sbi, NORECOVERY))
-+		seq_puts(seq, ",norecovery");
- 	if (test_opt(sbi, DISCARD))
- 		seq_puts(seq, ",discard");
- 	else
-@@ -3595,7 +3597,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		goto reset_checkpoint;
- 
- 	/* recover fsynced data */
--	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
-+	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
-+			!test_opt(sbi, NORECOVERY)) {
- 		/*
- 		 * mount should be failed, when device has readonly mode, and
- 		 * previous checkpoint was not done by clean system shutdown.
++	set_page_writeback(page);
++	ClearPageError(page);
++
+ 	fio.old_blkaddr = ni.blk_addr;
+ 	f2fs_do_write_node_page(nid, &fio);
+ 	set_node_addr(sbi, &ni, fio.new_blkaddr, is_fsync_dnode(page));
 -- 
 2.18.0.rc1
 
