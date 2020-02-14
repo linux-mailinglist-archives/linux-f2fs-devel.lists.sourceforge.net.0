@@ -2,61 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A20715D2E6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 08:35:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E03B15D4EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Feb 2020 10:45:25 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2VVw-0007VC-Bg; Fri, 14 Feb 2020 07:35:52 +0000
+	id 1j2XXF-00057W-Rs; Fri, 14 Feb 2020 09:45:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j2VVu-0007V5-65
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 07:35:50 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j2XXD-00057K-TO
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:45:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BsUzQSXJ7rRYipGkpwdy6oq2XZYl4F7XDIOcgVGfPTs=; b=DX2NkQXc+hiZSHDtzWFR+U0PoT
- mJoHjFkEA0x8jT/H8WbZ3QvXY4Lu/qfhrwXcHeEyZJHWDU4DGpJ8pjI3uywtrdrLSkVePY95vcQZ5
- slTXmE3Li5WzMzTybfpV0451G7PTbmA40xrRpBlOtHL8pztLRleBV1DYaHzCS1O+VstQ=;
+ bh=BeItNmTsKyBg0+v7mAc3HeERrJxMCzWtXATfwyHCrWA=; b=ArgnFJs3Pdv2AL6Ecc9Xo0GzGh
+ tB/TMF0GdczBvLu9sbtdQLbDXCtBqBKTnhLl9Bmd/zzzqdm5op/S4iEoqJ3WOqRGBFy/0BlkrkI6D
+ 8MVl6qtLTBrWwqH2XXWOFMgEo+SR+D0GEFGBWjl/1Wa4h3tkvIePi0I888pQcd59z+/o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BsUzQSXJ7rRYipGkpwdy6oq2XZYl4F7XDIOcgVGfPTs=; b=GmDcKDfwQLSSvGeXpLuyIRkuq4
- /7tQlEBIb9OBftxRM1T6etQLwrrzbqb2dH9XnONW2R86HD6iBWlqMWbr6VDEkEIXRkTNTXo1vDJek
- 1q5CMKtWrivJFt0P6ZXuL9cY6tucQBrWgDRGtXYnJxIj2mguemVZGqVkdXOZC+gfdJIY=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BeItNmTsKyBg0+v7mAc3HeERrJxMCzWtXATfwyHCrWA=; b=R
+ i/kh5WW0yT+iLu2YilUreV5ZJOzAO8PYUK31mC9LE51mjYrvZNNRi86zJbcfwlf7oyVweGyUsmGpe
+ ZqA4eZNiqIpmNbj+OG94eg9f9CgqBEK6Urp5IZRK/Uf4iCR/N4iXWCJ6K7vqe+GvDAR9I2mIp3U6W
+ 3DVU06HgWkjatPcM=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2VVn-003az8-CK
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 07:35:50 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id B5065E5E1AC9CC34D098;
- Fri, 14 Feb 2020 15:35:20 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 14 Feb
- 2020 15:35:18 +0800
+ id 1j2XX9-003gep-Fd
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 Feb 2020 09:45:19 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 1B1926252407A682C1C8;
+ Fri, 14 Feb 2020 17:45:06 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
+ 14.3.439.0; Fri, 14 Feb 2020 17:44:59 +0800
 From: Chao Yu <yuchao0@huawei.com>
-To: Sahitya Tummala <stummala@codeaurora.org>
-References: <1581503665-19914-1-git-send-email-stummala@codeaurora.org>
- <5d5903e6-f089-7ecf-f1ff-ad341c4cef56@huawei.com>
- <20200214035425.GA20234@codeaurora.org>
- <7fb14366-0ae3-e2d9-49ff-b7257054002c@huawei.com>
-Message-ID: <78d14656-360a-5a43-ee72-17d0ffb70a25@huawei.com>
-Date: Fri, 14 Feb 2020 15:35:18 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Fri, 14 Feb 2020 17:44:10 +0800
+Message-ID: <20200214094413.12784-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <7fb14366-0ae3-e2d9-49ff-b7257054002c@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -64,11 +57,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1j2VVn-003az8-CK
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix the panic in do_checkpoint()
+X-Headers-End: 1j2XX9-003gep-Fd
+Subject: [f2fs-dev] [PATCH 1/4] f2fs: clean up codes with {f2fs_,
+ }data_blkaddr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,222 +74,243 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/2/14 15:16, Chao Yu wrote:
-> Hi Sahitya,
-> 
-> On 2020/2/14 11:54, Sahitya Tummala wrote:
->> Hi Chao,
->>
->> On Fri, Feb 14, 2020 at 10:26:18AM +0800, Chao Yu wrote:
->>> Hi Sahitya,
->>>
->>> On 2020/2/12 18:34, Sahitya Tummala wrote:
->>>> There could be a scenario where f2fs_sync_meta_pages() will not
->>>> ensure that all F2FS_DIRTY_META pages are submitted for IO. Thus,
->>>> resulting in the below panic in do_checkpoint() -
->>>>
->>>> f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
->>>> 				!f2fs_cp_error(sbi));
->>>>
->>>> This can happen in a low-memory condition, where shrinker could
->>>> also be doing the writepage operation (stack shown below)
->>>> at the same time when checkpoint is running on another core.
->>>>
->>>> schedule
->>>> down_write
->>>> f2fs_submit_page_write -> by this time, this page in page cache is tagged
->>>> 			as PAGECACHE_TAG_WRITEBACK and PAGECACHE_TAG_DIRTY
->>>> 			is cleared, due to which f2fs_sync_meta_pages()
->>>> 			cannot sync this page in do_checkpoint() path.
->>>> f2fs_do_write_meta_page
->>>> __f2fs_write_meta_page
->>>> f2fs_write_meta_page
->>>> shrink_page_list
->>>> shrink_inactive_list
->>>> shrink_node_memcg
->>>> shrink_node
->>>> kswapd
->>>
->>> IMO, there may be one more simple fix here:
->>>
->>> -	f2fs_do_write_meta_page(sbi, page, io_type);
->>> 	dec_page_count(sbi, F2FS_DIRTY_META);
->>>
->>> +	f2fs_do_write_meta_page(sbi, page, io_type);
->>>
->>> If we can remove F2FS_DIRTY_META reference count before we clear
->>> PAGECACHE_TAG_DIRTY, we can avoid this race condition.
->>>
->>> - dec_page_count(sbi, F2FS_DIRTY_META);
->>> - f2fs_do_write_meta_page
->>>  - set_page_writeback
->>>   - __test_set_page_writeback
->>>    - xas_clear_mark(&xas, PAGECACHE_TAG_DIRTY);
->>>
->>> Thoughts?
->>
->> I believe it will be a problem because let's say the shrinker path is 
->> still in the below stack -
->>
->> f2fs_submit_page_write();
->> ->down_write(&io->io_rwsem);
->>
->> Then, the current f2fs_wait_on_all_pages_writeback() will not wait for
->> that page as it is not yet tagged as F2FS_WB_CP_DATA. Hence, the checkpoint
->> may proceed without waiting for this meta page to be written to disk.
-> 
-> Oh, you're right.
-> 
-> It looks the race can happen for data/node pages? like in fsync() procedure.
+- rename datablock_addr() to data_blkaddr().
+- wrap data_blkaddr() with f2fs_data_blkaddr() to clean up
+parameters.
 
-I mean something like this:
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/compress.c |  7 +++----
+ fs/f2fs/data.c     | 12 +++++-------
+ fs/f2fs/f2fs.h     |  7 ++++++-
+ fs/f2fs/file.c     | 15 +++++----------
+ fs/f2fs/gc.c       |  2 +-
+ fs/f2fs/node.c     |  3 +--
+ fs/f2fs/recovery.c |  7 +++----
+ 7 files changed, 24 insertions(+), 29 deletions(-)
 
-- fsync()				- shrink
- - f2fs_do_sync_file
-					 - __write_node_page
-					  - set_page_writeback(page#0)
-					  : remove DIRTY/TOWRITE flag
-  - f2fs_fsync_node_pages
-  : won't find page #0 as TOWRITE flag was removeD
-  - f2fs_wait_on_node_pages_writeback
-  : wont' wait page #0 writeback as it was not in fsync_node_list list.
-					   - f2fs_add_fsync_node_entry
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index d8a64be90a50..0282149aa4c8 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -554,7 +554,7 @@ static int f2fs_compressed_blocks(struct compress_ctx *cc)
+ 		for (i = 1; i < cc->cluster_size; i++) {
+ 			block_t blkaddr;
+ 
+-			blkaddr = datablock_addr(dn.inode,
++			blkaddr = data_blkaddr(dn.inode,
+ 					dn.node_page, dn.ofs_in_node + i);
+ 			if (blkaddr != NULL_ADDR)
+ 				ret++;
+@@ -794,7 +794,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 		goto out_unlock_op;
+ 
+ 	for (i = 0; i < cc->cluster_size; i++) {
+-		if (datablock_addr(dn.inode, dn.node_page,
++		if (data_blkaddr(dn.inode, dn.node_page,
+ 					dn.ofs_in_node + i) == NULL_ADDR)
+ 			goto out_put_dnode;
+ 	}
+@@ -843,8 +843,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	for (i = 0; i < cc->cluster_size; i++, dn.ofs_in_node++) {
+ 		block_t blkaddr;
+ 
+-		blkaddr = datablock_addr(dn.inode, dn.node_page,
+-							dn.ofs_in_node);
++		blkaddr = f2fs_data_blkaddr(&dn);
+ 		fio.page = cic->rpages[i];
+ 		fio.old_blkaddr = blkaddr;
+ 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 1f9f755dc8c2..ec4b030e2466 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1047,8 +1047,7 @@ int f2fs_reserve_new_blocks(struct dnode_of_data *dn, blkcnt_t count)
+ 	f2fs_wait_on_page_writeback(dn->node_page, NODE, true, true);
+ 
+ 	for (; count > 0; dn->ofs_in_node++) {
+-		block_t blkaddr = datablock_addr(dn->inode,
+-					dn->node_page, dn->ofs_in_node);
++		block_t blkaddr = f2fs_data_blkaddr(dn);
+ 		if (blkaddr == NULL_ADDR) {
+ 			dn->data_blkaddr = NEW_ADDR;
+ 			__set_data_blkaddr(dn);
+@@ -1300,8 +1299,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+ 	if (err)
+ 		return err;
+ 
+-	dn->data_blkaddr = datablock_addr(dn->inode,
+-				dn->node_page, dn->ofs_in_node);
++	dn->data_blkaddr = f2fs_data_blkaddr(dn);
+ 	if (dn->data_blkaddr != NULL_ADDR)
+ 		goto alloc;
+ 
+@@ -1467,7 +1465,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 	end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
+ 
+ next_block:
+-	blkaddr = datablock_addr(dn.inode, dn.node_page, dn.ofs_in_node);
++	blkaddr = f2fs_data_blkaddr(&dn);
+ 
+ 	if (__is_valid_data_blkaddr(blkaddr) &&
+ 		!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE)) {
+@@ -2067,7 +2065,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 	for (i = 1; i < cc->cluster_size; i++) {
+ 		block_t blkaddr;
+ 
+-		blkaddr = datablock_addr(dn.inode, dn.node_page,
++		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+ 						dn.ofs_in_node + i);
+ 
+ 		if (!__is_valid_data_blkaddr(blkaddr))
+@@ -2096,7 +2094,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 		struct page *page = dic->cpages[i];
+ 		block_t blkaddr;
+ 
+-		blkaddr = datablock_addr(dn.inode, dn.node_page,
++		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+ 						dn.ofs_in_node + i + 1);
+ 
+ 		if (bio && !page_is_mergeable(sbi, bio,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5355be6b6755..5152e9bf432b 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2378,7 +2378,7 @@ static inline __le32 *blkaddr_in_node(struct f2fs_node *node)
+ }
+ 
+ static inline int f2fs_has_extra_attr(struct inode *inode);
+-static inline block_t datablock_addr(struct inode *inode,
++static inline block_t data_blkaddr(struct inode *inode,
+ 			struct page *node_page, unsigned int offset)
+ {
+ 	struct f2fs_node *raw_node;
+@@ -2400,6 +2400,11 @@ static inline block_t datablock_addr(struct inode *inode,
+ 	return le32_to_cpu(addr_array[base + offset]);
+ }
+ 
++static inline block_t f2fs_data_blkaddr(struct dnode_of_data *dn)
++{
++	return data_blkaddr(dn->inode, dn->node_page, dn->ofs_in_node);
++}
++
+ static inline int f2fs_test_bit(unsigned int nr, char *addr)
+ {
+ 	int mask;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index c9dd45f82fbd..5a0f84751091 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -455,8 +455,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
+ 				data_ofs = (loff_t)pgofs << PAGE_SHIFT) {
+ 			block_t blkaddr;
+ 
+-			blkaddr = datablock_addr(dn.inode,
+-					dn.node_page, dn.ofs_in_node);
++			blkaddr = f2fs_data_blkaddr(&dn);
+ 
+ 			if (__is_valid_data_blkaddr(blkaddr) &&
+ 				!f2fs_is_valid_blkaddr(F2FS_I_SB(inode),
+@@ -1122,8 +1121,7 @@ static int __read_out_blkaddrs(struct inode *inode, block_t *blkaddr,
+ 	done = min((pgoff_t)ADDRS_PER_PAGE(dn.node_page, inode) -
+ 							dn.ofs_in_node, len);
+ 	for (i = 0; i < done; i++, blkaddr++, do_replace++, dn.ofs_in_node++) {
+-		*blkaddr = datablock_addr(dn.inode,
+-					dn.node_page, dn.ofs_in_node);
++		*blkaddr = f2fs_data_blkaddr(&dn);
+ 
+ 		if (__is_valid_data_blkaddr(*blkaddr) &&
+ 			!f2fs_is_valid_blkaddr(sbi, *blkaddr,
+@@ -1212,8 +1210,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
+ 				ADDRS_PER_PAGE(dn.node_page, dst_inode) -
+ 						dn.ofs_in_node, len - i);
+ 			do {
+-				dn.data_blkaddr = datablock_addr(dn.inode,
+-						dn.node_page, dn.ofs_in_node);
++				dn.data_blkaddr = f2fs_data_blkaddr(&dn);
+ 				f2fs_truncate_data_blocks_range(&dn, 1);
+ 
+ 				if (do_replace[i]) {
+@@ -1389,8 +1386,7 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
+ 	int ret;
+ 
+ 	for (; index < end; index++, dn->ofs_in_node++) {
+-		if (datablock_addr(dn->inode, dn->node_page,
+-					dn->ofs_in_node) == NULL_ADDR)
++		if (f2fs_data_blkaddr(dn) == NULL_ADDR)
+ 			count++;
+ 	}
+ 
+@@ -1401,8 +1397,7 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
+ 
+ 	dn->ofs_in_node = ofs_in_node;
+ 	for (index = start; index < end; index++, dn->ofs_in_node++) {
+-		dn->data_blkaddr = datablock_addr(dn->inode,
+-					dn->node_page, dn->ofs_in_node);
++		dn->data_blkaddr = f2fs_data_blkaddr(dn);
+ 		/*
+ 		 * f2fs_reserve_new_blocks will not guarantee entire block
+ 		 * allocation.
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index db8725d473b5..53312d7bc78b 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -634,7 +634,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 	}
+ 
+ 	*nofs = ofs_of_node(node_page);
+-	source_blkaddr = datablock_addr(NULL, node_page, ofs_in_node);
++	source_blkaddr = data_blkaddr(NULL, node_page, ofs_in_node);
+ 	f2fs_put_page(node_page, 1);
+ 
+ 	if (source_blkaddr != blkaddr) {
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 3314a0f3405e..332cebc2033c 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -809,8 +809,7 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+ 	dn->nid = nids[level];
+ 	dn->ofs_in_node = offset[level];
+ 	dn->node_page = npage[level];
+-	dn->data_blkaddr = datablock_addr(dn->inode,
+-				dn->node_page, dn->ofs_in_node);
++	dn->data_blkaddr = f2fs_data_blkaddr(dn);
+ 	return 0;
+ 
+ release_pages:
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 763d5c0951d1..348e8d463b3e 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -496,8 +496,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
+ 	return 0;
+ 
+ truncate_out:
+-	if (datablock_addr(tdn.inode, tdn.node_page,
+-					tdn.ofs_in_node) == blkaddr)
++	if (f2fs_data_blkaddr(&tdn) == blkaddr)
+ 		f2fs_truncate_data_blocks_range(&tdn, 1);
+ 	if (dn->inode->i_ino == nid && !dn->inode_page_locked)
+ 		unlock_page(dn->inode_page);
+@@ -560,8 +559,8 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
+ 	for (; start < end; start++, dn.ofs_in_node++) {
+ 		block_t src, dest;
+ 
+-		src = datablock_addr(dn.inode, dn.node_page, dn.ofs_in_node);
+-		dest = datablock_addr(dn.inode, page, dn.ofs_in_node);
++		src = f2fs_data_blkaddr(&dn);
++		dest = data_blkaddr(dn.inode, page, dn.ofs_in_node);
+ 
+ 		if (__is_valid_data_blkaddr(src) &&
+ 			!f2fs_is_valid_blkaddr(sbi, src, META_POR)) {
+-- 
+2.18.0.rc1
 
-Thanks,
-
-> 
->>
->>>
->>>>
->>>> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
->>>> ---
->>>>  fs/f2fs/checkpoint.c | 16 ++++++++--------
->>>>  fs/f2fs/f2fs.h       |  2 +-
->>>>  fs/f2fs/super.c      |  2 +-
->>>>  3 files changed, 10 insertions(+), 10 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>>> index ffdaba0..2b651a3 100644
->>>> --- a/fs/f2fs/checkpoint.c
->>>> +++ b/fs/f2fs/checkpoint.c
->>>> @@ -1250,14 +1250,14 @@ static void unblock_operations(struct f2fs_sb_info *sbi)
->>>>  	f2fs_unlock_all(sbi);
->>>>  }
->>>>  
->>>> -void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi)
->>>> +void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
->>>>  {
->>>>  	DEFINE_WAIT(wait);
->>>>  
->>>>  	for (;;) {
->>>>  		prepare_to_wait(&sbi->cp_wait, &wait, TASK_UNINTERRUPTIBLE);
->>>>  
->>>> -		if (!get_pages(sbi, F2FS_WB_CP_DATA))
->>>> +		if (!get_pages(sbi, type))
->>>>  			break;
->>>>  
->>>>  		if (unlikely(f2fs_cp_error(sbi)))
->>>> @@ -1384,8 +1384,8 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>  
->>>>  	/* Flush all the NAT/SIT pages */
->>>>  	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
->>>> -	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
->>>> -					!f2fs_cp_error(sbi));
->>>> +	/* Wait for all dirty meta pages to be submitted for IO */
->>>> +	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
->>>
->>> I'm afraid calling f2fs_wait_on_all_pages() after we call
->>> f2fs_sync_meta_pages() is low efficient, as we only want to write out
->>> dirty meta pages instead of wait for writebacking them to device cache.
->>>
->>
->> I have modified the existing function f2fs_wait_on_all_pages_writeback() to
->> a generic one f2fs_wait_on_all_pages(), where it will wait according to the
->> requested type. In this case, it will only wait for dirty F2FS_DIRTY_META pages
->> but not for the writeback to device cache.
-> 
-> Oh, I see, as last dirty reference count decreaser won't wake up waiter, we need
-> to wait for timeout, right? Can we decrease timeout count, maybe HZ/50 as we did
-> for congestion.
-> 
-> io_schedule_timeout(5*HZ);
-> 
-> Thanks,
-> 
->>
->> Thanks,
->>
->>> Thanks,
->>>
->>>>  
->>>>  	/*
->>>>  	 * modify checkpoint
->>>> @@ -1493,11 +1493,11 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>  
->>>>  	/* Here, we have one bio having CP pack except cp pack 2 page */
->>>>  	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
->>>> -	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
->>>> -					!f2fs_cp_error(sbi));
->>>> +	/* Wait for all dirty meta pages to be submitted for IO */
->>>> +	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
->>>>  
->>>>  	/* wait for previous submitted meta pages writeback */
->>>> -	f2fs_wait_on_all_pages_writeback(sbi);
->>>> +	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
->>>>  
->>>>  	/* flush all device cache */
->>>>  	err = f2fs_flush_device_cache(sbi);
->>>> @@ -1506,7 +1506,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>  
->>>>  	/* barrier and flush checkpoint cp pack 2 page if it can */
->>>>  	commit_checkpoint(sbi, ckpt, start_blk);
->>>> -	f2fs_wait_on_all_pages_writeback(sbi);
->>>> +	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
->>>>  
->>>>  	/*
->>>>  	 * invalidate intermediate page cache borrowed from meta inode
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index 5a888a0..b0e0535 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -3196,7 +3196,7 @@ bool f2fs_is_dirty_device(struct f2fs_sb_info *sbi, nid_t ino,
->>>>  void f2fs_update_dirty_page(struct inode *inode, struct page *page);
->>>>  void f2fs_remove_dirty_inode(struct inode *inode);
->>>>  int f2fs_sync_dirty_inodes(struct f2fs_sb_info *sbi, enum inode_type type);
->>>> -void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi);
->>>> +void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type);
->>>>  int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc);
->>>>  void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi);
->>>>  int __init f2fs_create_checkpoint_caches(void);
->>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>> index 5111e1f..084633b 100644
->>>> --- a/fs/f2fs/super.c
->>>> +++ b/fs/f2fs/super.c
->>>> @@ -1105,7 +1105,7 @@ static void f2fs_put_super(struct super_block *sb)
->>>>  	/* our cp_error case, we can wait for any writeback page */
->>>>  	f2fs_flush_merged_writes(sbi);
->>>>  
->>>> -	f2fs_wait_on_all_pages_writeback(sbi);
->>>> +	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
->>>>  
->>>>  	f2fs_bug_on(sbi, sbi->fsync_node_num);
->>>>  
->>>>
->>
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
 
 
 _______________________________________________
