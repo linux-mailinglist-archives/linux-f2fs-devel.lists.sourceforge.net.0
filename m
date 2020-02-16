@@ -2,49 +2,49 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02D2A1605B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 16 Feb 2020 20:14:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CC891605B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 16 Feb 2020 20:15:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j3PN4-0005ng-NB; Sun, 16 Feb 2020 19:14:26 +0000
+	id 1j3PO3-0000Xj-Mh; Sun, 16 Feb 2020 19:15:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <SRS0=RaUl=4E=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1j3PN3-0005nZ-3R
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:14:25 +0000
+ id 1j3PO2-0000Xc-Ni
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:15:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GcNyMDo4ytPz4ZUyhTPe1Si/WA5TwzS2zADjDyoAFRY=; b=JhEtCnDMmc7TN5wsDahVIIn8tN
- W6kSZ9WgKKukRD4PeWLS7nzMoyOv48rem0omh+hbY/aGXFdSBMi0Lw+Uv3VzBQQi0vvJs1Z8Evys8
- CaPXMNhtSdUZxUcel5IQ3hHs6X8/ooYdG2q1XBGZYTDPLN/uzncbmT0kLmAE57ezL4so=;
+ bh=PEF83PCQh5Lby3k0EHzmO1r1ADR6xil9/2pd0/zp19E=; b=LVynN9X0goxijUtxuNC8w7yHLR
+ rTtUMxCv4T9jSb4v/8G8jEG9F/o3lPFJihbQmR2Sq/9p/hh2eyr97fwXgeN5H4zR5smQb5WKXforK
+ y5ifbD6JJ9I/F/xUF1Gv79uhZ6zQbi7D4RwETixFFDpV3xf44lK6pdujM23r1swaUOqw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=GcNyMDo4ytPz4ZUyhTPe1Si/WA5TwzS2zADjDyoAFRY=; b=b
- 1PaB9vYqsOcqjrfSf+KniQgI7/WJl+vsT6ytG4CNxSX6ihDAioQ6JsjKqYvgv30Rm97Mh+++gdOrg
- jok9KgVWVlEnoSk2lcPwRzWfKRBAULLyAnqcW82Vb+/2/iSsIUvqkjfflze8T8GDvdg1SE53lvg9X
- qnpvDHWDYQtFa+b4=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PEF83PCQh5Lby3k0EHzmO1r1ADR6xil9/2pd0/zp19E=; b=DX53vVrNgv1JqYYkVH/JL1IzSP
+ n53Rn8d5bBPkCi69PjYYJfg9gSRnlVByXj5q9Aa0Yw+Pg1Zn2VZFny7674GaUNMFGJ4MO1/ds+T3m
+ A/eOTjaumrKXZeQRBsyX1/eftrp76KYHFuHHihFF5DO0DabIWbVlEPSlU2F4Io8mBwys=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j3PN1-005WI3-Hi
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:14:25 +0000
+ id 1j3PO0-00EgCe-2Z
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:15:26 +0000
 From: bugzilla-daemon@bugzilla.kernel.org
 Authentication-Results: mail.kernel.org;
  dkim=permerror (bad message/signature format)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 16 Feb 2020 19:14:15 +0000
+Date: Sun, 16 Feb 2020 19:15:12 +0000
 X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
+X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Product: File System
 X-Bugzilla-Component: f2fs
@@ -57,10 +57,10 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression attachments.created
-Message-ID: <bug-206551-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-206551-202145-PoZc2karDa@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-206551-202145@https.bugzilla.kernel.org/>
+References: <bug-206551-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -74,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j3PN1-005WI3-Hi
-Subject: [f2fs-dev] [Bug 206551] New: Failed to initialize F2FS segment
- manager (-117)
+X-Headers-End: 1j3PO0-00EgCe-2Z
+Subject: [f2fs-dev] [Bug 206551] Failed to initialize F2FS segment manager
+ (-117)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,60 +94,10 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=206551
 
-            Bug ID: 206551
-           Summary: Failed to initialize F2FS segment manager (-117)
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.5.3-gentoo
-          Hardware: x86-64
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: normal
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: stefan@konink.de
-        Regression: No
-
-Created attachment 287423
-  --> https://bugzilla.kernel.org/attachment.cgi?id=287423&action=edit
-Linux boot, root fs can't be mounted.
-
-I am aware this bug report is done on a non-vanilla Gentoo based kernel, but
-since I have seen it now twice in two days on two different kernel versions
-5.4.13-gentoo and 5.5.3-gentoo I would like to document it upstream as well.
-Not excluding a hardware failure.
-
-I am running Linux on a Lenovo E485 machine having a AMD Ryzen 5 2500U
-processor, which is quite problematic to resume after a memory suspend.
-Therefore I use hibernation to a swap partition which most of the time allows
-me to resume what I was working on. The disk is a Samsung SSD 840 EVO 500GB,
-EXT0CB6Q. It wasn't used for quite a while but is now in use for about two
-months without issues.
-
-The day before yesterday I again hibernated my machine which kernel paniced
-after resuming, the screen was still black, so I wouldn't have any information
-on the topic. After restarting, my problems with F2FS, the filesystem for my
-root partition, started.
-
-I was able to boot using an Arch Linux ISO, and ran the F2FS-tools. fsck.f2fs
-was unable to succeed when I requested to write "missing" files in ./lostfound.
-Only when answering "No" the partition was repaired and could be mounted. I
-remember that one of the causes flags was something like "Sudden loss of
-power".
-
-Today I have completely shutdown my machine using "poweroff". When I switched
-the machine back on I had a similar experience as two days ago, my root
-partition would mound with the same segment manager error. I again ran the
-fsck.f2fs, this time not being prompted for missing files. Neither did it
-mention anything similar like loss of power.
-
-I wonder if the partition is fixed using the fsck.f2fs tool, considering the
-output. If not, is this a gap in the implementation? Should this partition be
-completely be copied, and then restored on a new f2fs partition? Or is it
-expected that the file structure is "OK" after running the tool, and the fact
-that two days in a row this happened was a coincidence?
+--- Comment #1 from Stefan de Konink (stefan@konink.de) ---
+Created attachment 287425
+  --> https://bugzilla.kernel.org/attachment.cgi?id=287425&action=edit
+fsck.f2fs result specifically showing SIT bitmap is 0x0.
 
 -- 
 You are receiving this mail because:
