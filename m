@@ -2,77 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EC6C15FBED
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 15 Feb 2020 02:16:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02D2A1605B2
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 16 Feb 2020 20:14:31 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j2m3x-00013v-3E; Sat, 15 Feb 2020 01:16:05 +0000
+	id 1j3PN4-0005ng-NB; Sun, 16 Feb 2020 19:14:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j2m3u-00013m-LC
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Feb 2020 01:16:02 +0000
+ (envelope-from <SRS0=RaUl=4E=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
+ id 1j3PN3-0005nZ-3R
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:14:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rLBAYvHDyQG068qFXc4PKikpMZL0O5lvrEMnkVr84hY=; b=P1+D02WpMHiZJQTHpCCr1we7sP
- d6vJ4ZvMzSmso0KmNoa2dEjCpWn97SwvRCTK2PqDGRwhT34D0otzQx+CWG9TdC6q7Fwvu3wlNIXX3
- 1YUTsFcucEC2xlJcbNtKDLwzX6O9bUnUWePFdAYqWlnGvwOOEbc4gRirOPXp1PGcaGYs=;
+ bh=GcNyMDo4ytPz4ZUyhTPe1Si/WA5TwzS2zADjDyoAFRY=; b=JhEtCnDMmc7TN5wsDahVIIn8tN
+ W6kSZ9WgKKukRD4PeWLS7nzMoyOv48rem0omh+hbY/aGXFdSBMi0Lw+Uv3VzBQQi0vvJs1Z8Evys8
+ CaPXMNhtSdUZxUcel5IQ3hHs6X8/ooYdG2q1XBGZYTDPLN/uzncbmT0kLmAE57ezL4so=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rLBAYvHDyQG068qFXc4PKikpMZL0O5lvrEMnkVr84hY=; b=hWrlyjP1xpEbdDeo/UNYYIAgIq
- u7yKdo8TiEGJpgViuheuSQJ/jebS1n3v/++fszfpQg2pjb9z4lc/dmGZTku8ZVXToEaLWJaDqs2N0
- l0h1IfUjUtfu16YFeMrX6GiU8AGY4tbbu19XfdRRWe2z78YFmC+tDox1TGKomUf1tWyg=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GcNyMDo4ytPz4ZUyhTPe1Si/WA5TwzS2zADjDyoAFRY=; b=b
+ 1PaB9vYqsOcqjrfSf+KniQgI7/WJl+vsT6ytG4CNxSX6ihDAioQ6JsjKqYvgv30Rm97Mh+++gdOrg
+ jok9KgVWVlEnoSk2lcPwRzWfKRBAULLyAnqcW82Vb+/2/iSsIUvqkjfflze8T8GDvdg1SE53lvg9X
+ qnpvDHWDYQtFa+b4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j2m3s-004ROm-Oq
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 15 Feb 2020 01:16:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=rLBAYvHDyQG068qFXc4PKikpMZL0O5lvrEMnkVr84hY=; b=pp4+jYrdtIiCu1ZmQd3UA6AYr/
- 85A+NhPrb4RLR40lY3uBj4FXFTAWs54cubURwUY781EoXTIC1BHmzzNCBvBY8CryBQxMU/K9kCyDD
- Uej9VEruUNuHLfKPM4kfSaYvl7cRuRpvE6a4DUQXDHXn67rTy5ieMKlxLHoaPREJTum8bIQ9MN9Gw
- zdza5RTyE51eZi3yeNdHM+vbtFO0NAVQHI+/F7pxpuo7utWxpPvSsEQWVwOfY7b3Djjfu7uYZbJKq
- pEcZMax/EA/FGJvJyodBK0tcSq1rmhd9c8O3RFfEaCuHnm/yRy6hPamomhAD6zwSpAIRbrf8oTm28
- VPquc2zA==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j2m3k-00083J-V5; Sat, 15 Feb 2020 01:15:52 +0000
-Date: Fri, 14 Feb 2020 17:15:52 -0800
-From: Matthew Wilcox <willy@infradead.org>
-To: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <20200215011552.GE7778@bombadil.infradead.org>
-References: <20200211010348.6872-1-willy@infradead.org>
- <20200211010348.6872-4-willy@infradead.org>
- <b0cdd7b4-e103-a884-d8f7-2378905f7b3b@nvidia.com>
+ id 1j3PN1-005WI3-Hi
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 16 Feb 2020 19:14:25 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 16 Feb 2020 19:14:15 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: stefan@konink.de
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression attachments.created
+Message-ID: <bug-206551-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <b0cdd7b4-e103-a884-d8f7-2378905f7b3b@nvidia.com>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: konink.de]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j2m3s-004ROm-Oq
-Subject: Re: [f2fs-dev] [PATCH v5 03/13] mm: Put readahead pages in cache
- earlier
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j3PN1-005WI3-Hi
+Subject: [f2fs-dev] [Bug 206551] New: Failed to initialize F2FS segment
+ manager (-117)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,29 +88,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Feb 13, 2020 at 07:36:38PM -0800, John Hubbard wrote:
-> I see two distinct things happening in this patch, and I think they want to each be
-> in their own patch:
-> 
-> 1) A significant refactoring of the page loop, and
-> 
-> 2) Changing the place where the page is added to the page cache. (Only this one is 
->    mentioned in the commit description.)
-> 
-> We'll be more likely to spot any errors if these are teased apart.
+https://bugzilla.kernel.org/show_bug.cgi?id=206551
 
-Thanks.  I ended up splitting this patch into three, each hopefully
-easier to understand.
+            Bug ID: 206551
+           Summary: Failed to initialize F2FS segment manager (-117)
+           Product: File System
+           Version: 2.5
+    Kernel Version: 5.5.3-gentoo
+          Hardware: x86-64
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: normal
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: stefan@konink.de
+        Regression: No
 
+Created attachment 287423
+  --> https://bugzilla.kernel.org/attachment.cgi?id=287423&action=edit
+Linux boot, root fs can't be mounted.
+
+I am aware this bug report is done on a non-vanilla Gentoo based kernel, but
+since I have seen it now twice in two days on two different kernel versions
+5.4.13-gentoo and 5.5.3-gentoo I would like to document it upstream as well.
+Not excluding a hardware failure.
+
+I am running Linux on a Lenovo E485 machine having a AMD Ryzen 5 2500U
+processor, which is quite problematic to resume after a memory suspend.
+Therefore I use hibernation to a swap partition which most of the time allows
+me to resume what I was working on. The disk is a Samsung SSD 840 EVO 500GB,
+EXT0CB6Q. It wasn't used for quite a while but is now in use for about two
+months without issues.
+
+The day before yesterday I again hibernated my machine which kernel paniced
+after resuming, the screen was still black, so I wouldn't have any information
+on the topic. After restarting, my problems with F2FS, the filesystem for my
+root partition, started.
+
+I was able to boot using an Arch Linux ISO, and ran the F2FS-tools. fsck.f2fs
+was unable to succeed when I requested to write "missing" files in ./lostfound.
+Only when answering "No" the partition was repaired and could be mounted. I
+remember that one of the causes flags was something like "Sudden loss of
+power".
+
+Today I have completely shutdown my machine using "poweroff". When I switched
+the machine back on I had a similar experience as two days ago, my root
+partition would mound with the same segment manager error. I again ran the
+fsck.f2fs, this time not being prompted for missing files. Neither did it
+mention anything similar like loss of power.
+
+I wonder if the partition is fixed using the fsck.f2fs tool, considering the
+output. If not, is this a gap in the implementation? Should this partition be
+completely be copied, and then restored on a new f2fs partition? Or is it
+expected that the file structure is "OK" after running the tool, and the fact
+that two days in a row this happened was a coincidence?
+
+-- 
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
