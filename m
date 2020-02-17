@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34261160941
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 04:51:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CD4F160A59
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 07:22:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j3XRA-00027e-K3; Mon, 17 Feb 2020 03:51:12 +0000
+	id 1j3Zn8-000308-QS; Mon, 17 Feb 2020 06:22:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j3XR8-00027W-BT
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 03:51:10 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j3Zn7-0002zt-Ag
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 06:22:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ixTXCc4q43TAvLFA6eLRMH9ZSsIvtxxOpXfjnBOhgCw=; b=FvRcfu7RXviPUaGoBIBeQxQde2
- KdomNBat5diE+HOpVrQAOUd8Ujeay5N3lT7G+RAG7iY7Z1BVCDtefoQEOIy6rX5fU4tnOJsCgwzo2
- 483O/0HZAlBQHbuS5UmRClzVjxU/ySj/75MzsLUEiqFZStH46yx1Q4U+be8Ew4QjglG8=;
+ bh=3D2QkFU7Cfw9O7Xc10Z3HcyFLPWilDuwJzWAbSLDdNg=; b=Mk7p6eQNp5oazJsyaUCVrgxyuH
+ ESTLLQx80o5oDQzrRgs0pLOU9UYixGgAF66nF5O3ZhSphzhvyY9/P55U0n8MwWl9gH5fmufEUA3/J
+ /xj0D/euqdmic819cRjladRKB/lyZAyY+Ht1CvlOhg2dFLhWCrX84dz5Hffr5smh1dDg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,29 +29,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ixTXCc4q43TAvLFA6eLRMH9ZSsIvtxxOpXfjnBOhgCw=; b=OBIzglTwYwTD0sjBaEMj+s3x58
- aYvou5KGiNImVwOj9b2/qEBI6i1gUkKaSwVnuon+LZbcS3vU2Bl7Xy765j4SX5iFr5UWWJSkw4zI8
- /Kckd6g5lrxciYULZHI4GN+9cidv0RJPbN0ILVY/f9CQwxMCF5S8kkOmMUc+vXuBSHmo=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ bh=3D2QkFU7Cfw9O7Xc10Z3HcyFLPWilDuwJzWAbSLDdNg=; b=k2TNGSbNv7Qp5SmahFD3C6KVxd
+ L+5xzCduBofucyHajq5tNqZe+EdP5escgGLYptq00ULl2xtx5WPYzmrXkJa/oht9JfSGG7bn8WxS/
+ D2VjZLdFgPhJLDS4AoszVkfvuJkoy18wk7tjvAIX6FVeQXlXuPgGQE+FMaaqSKG41bhI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j3XR6-00F0RZ-Lu
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 03:51:10 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 8AFA76B90E9869D6C1AE;
- Mon, 17 Feb 2020 11:50:58 +0800 (CST)
+ id 1j3Zn4-00F6XS-DN
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 06:22:01 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id B80EE3605D358AAF3B7C;
+ Mon, 17 Feb 2020 14:21:48 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 17 Feb
- 2020 11:50:57 +0800
-To: =?UTF-8?B?546L55+b?= <spearmao@126.com>
-References: <381334f9.10021.1704dcbf102.Coremail.spearmao@126.com>
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 17 Feb
+ 2020 14:21:45 +0800
+To: <jaegeuk@kernel.org>
+References: <20190927102305.11587-1-yuchao0@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <cc33bd7d-a2df-ee10-db58-445cfbfeef07@huawei.com>
-Date: Mon, 17 Feb 2020 11:50:56 +0800
+Message-ID: <65ad1ac6-726c-b974-bcfc-ce09965ff497@huawei.com>
+Date: Mon, 17 Feb 2020 14:21:45 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <381334f9.10021.1704dcbf102.Coremail.spearmao@126.com>
+In-Reply-To: <20190927102305.11587-1-yuchao0@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -60,9 +60,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1j3XR6-00F0RZ-Lu
-Subject: Re: [f2fs-dev] F2fs panic | update_sit_entry() | no free segment |
- se invalid
+X-Headers-End: 1j3Zn4-00F6XS-DN
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix inconsistent comments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,35 +73,302 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkg546L55+b77yMCgpPbiAyMDIwLzIvMTYgMTk6MzksIOeOi+efmyB3cm90ZToKPiAqU28gdGhl
-IHByb2JsZW0gaXM6Kgo+IAo+IDEuIGluIG5ld19jdXJzZWcoKSwgaWYgdGhlIHNlZ25vIGFsbG9j
-YXRlZCBpcyBpbnZhbGlkKG5vIGZyZWUgc2VnbWVudCwgbWF4IHNlZ25vCj4gaXMgcmV0dXJuZWQp
-Lgo+IAo+IEYyZnMgc2hvdWxkIGRvIHNvbWV0aGluZyB0byBpbmRpY2F0ZSB0aGlzIGV4Y2VwdGlv
-bi4KPiAKPiAyLiBvdGhlcndpc2UsIHdlIG1heSBoaXQgdGhlIGYyZnMgcGFuaWMoc2UgaW52YWxp
-ZCkuCj4gCj4gTWF5YmUgd2Ugc2hvdWxkIGRvIHNhbml0eSBjaGVjayBpbiB1cGRhdGVfc2l0X2Vu
-dHJ5KCkgdG8gc2VlIGlmIHNlZ25vIGlzIHJlYWxseQo+IG91dCBvZiByYW5nZSBhbmQgY2F1c2Vk
-IHRoaXMgcGFuaWMuCgpJJ20gYWZyYWlkIGl0J3MgdG9vIGxhdGUgdG8gaGFuZGxlIHN1Y2ggZXJy
-b3IgaW4gdXBkYXRlX3NpdF9lbnRyeSgpLCBzaW5jZSB3ZQpleHBlY3QgYWxsIHByb2NlZHVyZXMg
-aW4gZG9fd3JpdGVfcGFnZSgpIHdpbGwgYmUgc3VjY2Vzc2Z1bCwgaXQncyBhIGxpdHRsZSBoYXJk
-CnRvIGhhbmRsZSBzdWNoIGVycm9yIGluIHRoYXQgY29udGV4dC4KClNvIHRoZSBwcm9ibGVtIGhl
-cmUgaXMgd2h5IHdlIGNhbiBub3QgZmluZCBhbnkgZnJlZSBzZWdtZW50cyB3LyBMRlMgYWxsb2Nh
-dGlvbiwKYmVjYXVzZSBpbiBjYXNlIG9mIGxhY2sgb2YgZnJlZSBzZWdtZW50cyAoY2hlY2sgdmlh
-IGhhc19ub3RfZW5vdWdoX2ZyZWVfc2VjcygpKSwKZjJmcyB3aWxsIGZvcmNlIHRvIHRyaWdnZXIg
-ZjJmc19nYygpIHRvIHJlY3ljbGUgZnJlZSBzZWN0aW9ucy4KCkkgZG91YnQgdGhlcmUgbWF5IGJl
-IHNvbWUgY29ybmVyIGNhc2Ugd2UgaGF2ZW4ndCBjb25zaWRlcmVkLCByZXN1bHQgYWxsIGZyZWUK
-c2VnbWVudHMgKGluY2x1ZGluZyByZXNlcnZlZCBmcmVlIHNlZ21lbnRzKSB3YXMgZXhoYXVzdGVk
-IGJ5IGRhdGEvbm9kZSB3cml0ZXMKd2hlbiBsYXN0IGNoZWNrcG9pbnQgaXMgdHJpZ2dlcmVkIGR1
-cmluZyB1bW91bnQuCgpJZiB0aGlzIGlzc3VlIGNhbiBiZSByZXByb2R1Y2VkIChkdXJpbmcgdW1v
-dW50LCBmcmVlX3NlZ21lbnRzKCkgPApyZXNlcnZlZF9zZWdtZW50cygpKSwgd2UgY2FuIGFkZCBz
-b21lIGxvZ3MgdG8gc2VlIHdoeSBmMmZzX2JhbGFuY2VfZnMoKSBmYWlsIHRvCnJlY3ljbGUgZW5v
-dWdoIGZyZWUgc2VnbWVudHMgcHJldmlvdXNseS4KClRoYW5rcywKCj4gCj4gCj4gVGhhbmtzLAo+
-IE1hbwo+IAo+IAo+IAo+IMKgCj4gCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1k
-ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
-bGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+Hi Jaegeuk,
+
+I can still see many inconsistent comments in f2fs code, would you consider to
+merge this patch to fix them?
+
+Thanks,
+
+On 2019/9/27 18:23, Chao Yu wrote:
+> Lack of maintenance on comments may mislead developers, fix them.
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/checkpoint.c | 18 ++++--------------
+>  fs/f2fs/data.c       | 19 ++++++-------------
+>  fs/f2fs/f2fs.h       |  2 +-
+>  fs/f2fs/file.c       |  1 -
+>  fs/f2fs/gc.c         |  5 ++++-
+>  fs/f2fs/inode.c      |  2 +-
+>  fs/f2fs/namei.c      |  2 +-
+>  fs/f2fs/node.c       |  6 +-----
+>  fs/f2fs/shrinker.c   |  2 +-
+>  fs/f2fs/super.c      |  4 ++--
+>  fs/f2fs/xattr.c      |  1 -
+>  11 files changed, 21 insertions(+), 41 deletions(-)
+> 
+> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> index a0eef95b9e0e..c9f68b7e2663 100644
+> --- a/fs/f2fs/checkpoint.c
+> +++ b/fs/f2fs/checkpoint.c
+> @@ -50,9 +50,6 @@ struct page *f2fs_grab_meta_page(struct f2fs_sb_info *sbi, pgoff_t index)
+>  	return page;
+>  }
+>  
+> -/*
+> - * We guarantee no failure on the returned page.
+> - */
+>  static struct page *__get_meta_page(struct f2fs_sb_info *sbi, pgoff_t index,
+>  							bool is_meta)
+>  {
+> @@ -206,7 +203,7 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>  }
+>  
+>  /*
+> - * Readahead CP/NAT/SIT/SSA pages
+> + * Readahead CP/NAT/SIT/SSA/POR pages
+>   */
+>  int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+>  							int type, bool sync)
+> @@ -898,7 +895,7 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
+>  		return -ENOMEM;
+>  	/*
+>  	 * Finding out valid cp block involves read both
+> -	 * sets( cp pack1 and cp pack 2)
+> +	 * sets( cp pack 1 and cp pack 2)
+>  	 */
+>  	cp_start_blk_no = le32_to_cpu(fsb->cp_blkaddr);
+>  	cp1 = validate_checkpoint(sbi, cp_start_blk_no, &cp1_version);
+> @@ -1387,10 +1384,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
+>  					!f2fs_cp_error(sbi));
+>  
+> -	/*
+> -	 * modify checkpoint
+> -	 * version number is already updated
+> -	 */
+> +	/* start to update checkpoint, cp ver is already updated previously */
+>  	ckpt->elapsed_time = cpu_to_le64(get_mtime(sbi, true));
+>  	ckpt->free_segment_count = cpu_to_le32(free_segments(sbi));
+>  	for (i = 0; i < NR_CURSEG_NODE_TYPE; i++) {
+> @@ -1543,9 +1537,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  	return unlikely(f2fs_cp_error(sbi)) ? -EIO : 0;
+>  }
+>  
+> -/*
+> - * We guarantee that this checkpoint procedure will not fail.
+> - */
+>  int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  {
+>  	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
+> @@ -1613,7 +1604,6 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  
+>  	f2fs_flush_sit_entries(sbi, cpc);
+>  
+> -	/* unlock all the fs_lock[] in do_checkpoint() */
+>  	err = do_checkpoint(sbi, cpc);
+>  	if (err)
+>  		f2fs_release_discard_addrs(sbi);
+> @@ -1626,7 +1616,7 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  	if (cpc->reason & CP_RECOVERY)
+>  		f2fs_notice(sbi, "checkpoint: version = %llx", ckpt_ver);
+>  
+> -	/* do checkpoint periodically */
+> +	/* update CP_TIME to trigger checkpoint periodically */
+>  	f2fs_update_time(sbi, CP_TIME);
+>  	trace_f2fs_write_checkpoint(sbi->sb, cpc->reason, "finish checkpoint");
+>  out:
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 5755e897a5f0..87a6d34db34a 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -234,9 +234,6 @@ static void f2fs_write_end_io(struct bio *bio)
+>  	bio_put(bio);
+>  }
+>  
+> -/*
+> - * Return true, if pre_bio's bdev is same as its target device.
+> - */
+>  struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
+>  				block_t blk_addr, struct bio *bio)
+>  {
+> @@ -273,6 +270,9 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
+>  	return 0;
+>  }
+>  
+> +/*
+> + * Return true, if pre_bio's bdev is same as its target device.
+> + */
+>  static bool __same_bdev(struct f2fs_sb_info *sbi,
+>  				block_t blk_addr, struct bio *bio)
+>  {
+> @@ -280,9 +280,6 @@ static bool __same_bdev(struct f2fs_sb_info *sbi,
+>  	return bio->bi_disk == b->bd_disk && bio->bi_partno == b->bd_partno;
+>  }
+>  
+> -/*
+> - * Low-level block read/write IO operations.
+> - */
+>  static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+>  {
+>  	struct f2fs_sb_info *sbi = fio->sbi;
+> @@ -1142,13 +1139,9 @@ void __do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock)
+>  }
+>  
+>  /*
+> - * f2fs_map_blocks() now supported readahead/bmap/rw direct_IO with
+> - * f2fs_map_blocks structure.
+> - * If original data blocks are allocated, then give them to blockdev.
+> - * Otherwise,
+> - *     a. preallocate requested block addresses
+> - *     b. do not use extent cache for better performance
+> - *     c. give the block addresses to blockdev
+> + * f2fs_map_blocks() tries to find or build mapping relationship which
+> + * maps continuous logical blocks to physical blocks, and return such
+> + * info via f2fs_map_blocks structure.
+>   */
+>  int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>  						int create, int flag)
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index f078cd20dab8..aa2e6ddccdbf 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -2291,9 +2291,9 @@ static inline block_t datablock_addr(struct inode *inode,
+>  
+>  	raw_node = F2FS_NODE(node_page);
+>  
+> -	/* from GC path only */
+>  	if (is_inode) {
+>  		if (!inode)
+> +			/* from GC path only */
+>  			base = offset_in_addr(&raw_node->i);
+>  		else if (f2fs_has_extra_attr(inode))
+>  			base = get_extra_isize(inode);
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 29bc0a542759..6ddb2f1964a9 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -89,7 +89,6 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+>  		goto out_sem;
+>  	}
+>  
+> -	/* fill the page */
+>  	f2fs_wait_on_page_writeback(page, DATA, false, true);
+>  
+>  	/* wait for GCed page writeback via META_MAPPING */
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 5877bd729689..9f6df84eb9e2 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -192,7 +192,10 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
+>  		p->ofs_unit = sbi->segs_per_sec;
+>  	}
+>  
+> -	/* we need to check every dirty segments in the FG_GC case */
+> +	/*
+> +	 * adjust candidates range, should select all dirty segments for
+> +	 * foreground GC and urgent GC cases.
+> +	 */
+>  	if (gc_type != FG_GC &&
+>  			(sbi->gc_mode != GC_URGENT) &&
+>  			p->max_search > sbi->max_victim_search)
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index 8547b6f7921b..540280cee614 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -718,7 +718,7 @@ void f2fs_evict_inode(struct inode *inode)
+>  	else
+>  		f2fs_inode_synced(inode);
+>  
+> -	/* ino == 0, if f2fs_new_inode() was failed t*/
+> +	/* for the case f2fs_new_inode() was failed, .i_ino is zero, skip it */
+>  	if (inode->i_ino)
+>  		invalidate_mapping_pages(NODE_MAPPING(sbi), inode->i_ino,
+>  							inode->i_ino);
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 4faf06e8bf89..c19ffcf1d987 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -167,7 +167,7 @@ static inline int is_extension_exist(const unsigned char *s, const char *sub)
+>  }
+>  
+>  /*
+> - * Set multimedia files as cold files for hot/cold data separation
+> + * Set file's temperature for hot/cold data separation
+>   */
+>  static inline void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
+>  		const unsigned char *name)
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 8b66bc4c004b..d35e7f953c13 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -510,9 +510,6 @@ int f2fs_try_to_free_nats(struct f2fs_sb_info *sbi, int nr_shrink)
+>  	return nr - nr_shrink;
+>  }
+>  
+> -/*
+> - * This function always returns success
+> - */
+>  int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
+>  						struct node_info *ni)
+>  {
+> @@ -716,8 +713,7 @@ static int get_node_path(struct inode *inode, long block,
+>  /*
+>   * Caller should call f2fs_put_dnode(dn).
+>   * Also, it should grab and release a rwsem by calling f2fs_lock_op() and
+> - * f2fs_unlock_op() only if ro is not set RDONLY_NODE.
+> - * In the case of RDONLY_NODE, we don't need to care about mutex.
+> + * f2fs_unlock_op() only if mode is set with ALLOC_NODE.
+>   */
+>  int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+>  {
+> diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
+> index a467aca29cfe..d66de5999a26 100644
+> --- a/fs/f2fs/shrinker.c
+> +++ b/fs/f2fs/shrinker.c
+> @@ -58,7 +58,7 @@ unsigned long f2fs_shrink_count(struct shrinker *shrink,
+>  		/* count extent cache entries */
+>  		count += __count_extent_cache(sbi);
+>  
+> -		/* shrink clean nat cache entries */
+> +		/* count clean nat cache entries */
+>  		count += __count_nat_entries(sbi);
+>  
+>  		/* count free nids cache entries */
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 1443cee15863..ce012b6a9eb0 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1552,7 +1552,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+>  out_unlock:
+>  	mutex_unlock(&sbi->gc_mutex);
+>  restore_flag:
+> -	sbi->sb->s_flags = s_flags;	/* Restore MS_RDONLY status */
+> +	sbi->sb->s_flags = s_flags;	/* Restore SB_RDONLY status */
+>  	return err;
+>  }
+>  
+> @@ -3477,7 +3477,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  			f2fs_err(sbi, "Cannot turn on quotas: error %d", err);
+>  	}
+>  #endif
+> -	/* if there are nt orphan nodes free them */
+> +	/* if there are any orphan inodes, free them */
+>  	err = f2fs_recover_orphan_inodes(sbi);
+>  	if (err)
+>  		goto free_meta;
+> diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> index 181900af2576..66a04143768f 100644
+> --- a/fs/f2fs/xattr.c
+> +++ b/fs/f2fs/xattr.c
+> @@ -746,7 +746,6 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
+>  	f2fs_balance_fs(sbi, true);
+>  
+>  	f2fs_lock_op(sbi);
+> -	/* protect xattr_ver */
+>  	down_write(&F2FS_I(inode)->i_sem);
+>  	down_write(&F2FS_I(inode)->i_xattr_sem);
+>  	err = __f2fs_setxattr(inode, index, name, value, size, ipage, flags);
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
