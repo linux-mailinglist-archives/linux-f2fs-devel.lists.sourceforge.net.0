@@ -2,78 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0551C16172B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 17:12:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBA18161A05
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 19:46:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j3j0u-0001n9-NY; Mon, 17 Feb 2020 16:12:52 +0000
+	id 1j3lPh-00038b-MC; Mon, 17 Feb 2020 18:46:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <mchehab@bombadil.infradead.org>) id 1j3j0r-0001mp-0a
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 16:12:49 +0000
+ (envelope-from <willy@infradead.org>) id 1j3lPc-00035z-JC
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 18:46:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KSxB+t1J6pAt1YUMmfwIBlCvZLRwWTHsFEXXGPYwZ8Y=; b=WbghgKZpan2r+KHbSV1+MOaz1K
- QbvyQJRDbtQE1wgdwA0TG78EvDJUSdg4QDZWDiSqoCA32h5jTKTmISw/CuVM5+kdSSOYc8fjUauzG
- zsveacnHZWtPeIajk9myyIcizKWBc6iX70GkEMV/gvZ/k1IRdjvr9dCgLiOoiD+HvXak=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=T1hWdYf0rB2BfBCCA/ycayjeULcD1RhEgE660nEF24U=; b=MFVD71pob7dijtabt9B/0xN6nJ
+ mKEXW/t7J+4mo20R+k+Is4WJuu4LPcyoTTiOdU7DHQhCyBvweE2d9qjMqJHvpUXaZRoaQOxSniV1U
+ pjgDgTzZ23tBVUDRDQJFrppBUsMX0Giqc5wlXKeooBcRrVIn0jdUS3rT/wTasqcfmvKk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
- Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=KSxB+t1J6pAt1YUMmfwIBlCvZLRwWTHsFEXXGPYwZ8Y=; b=AzRE42sbb/uqrIExe9ftcJ3rKS
- TuzuEOmqhzj9ZCbtR/Gljx6G4UrhaxNz+6ZnXM6rp3VPhdMQJz2Fhi0YQrHVLc3k4dVQCUmDGVaj5
- zmHlAGWSW9Qsfu4IUHPJLd1e9EmwCzph/OnndtvnZ8uFfQQNuvwMMKq9km5Nj1MUCU8E=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=T1hWdYf0rB2BfBCCA/ycayjeULcD1RhEgE660nEF24U=; b=Y
+ 0aEnehJ0vh6LYE0IL3XPGT/3YKI+aHW1O0Srd2etSwJHYAaEnb7ipN5VTCBw9X1j+Lxz0ftcfd24O
+ EEhvFLvLFbYPJWA3pJ5aiSER3bcDZiAj3rCeMGCfZZ6LSZSSgTKR9ijSUwyNp7z9mGl8rUOKvE8Qy
+ x+SxmjsqS6thbH2U=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j3j0o-006JiT-3i
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 16:12:48 +0000
+ id 1j3lPY-006iXi-T7
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 18:46:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description;
- bh=KSxB+t1J6pAt1YUMmfwIBlCvZLRwWTHsFEXXGPYwZ8Y=; b=I7OhnJpc4UkchnK7IJVo9APiIc
- DrtQiXqBYv5E2UC36ZDz7YgVG+VLkwYHw5E3XEPQTwRjBz0UJzhyK7gyYpqzjc0mkgjDLp1AWbehf
- jwOVlITW1XKbH8XO8S7B5aGYKCU9CNX/omS5lEdGf/Tv4tzlHukuhyJH4SZL1FAvhHXC7RBmhRpOm
- ZvaYxn2+7/PNCiv9kAgumaYFIRZszibdq/QhvNi2UsjHcZCBqFgmuvcP8KeGfXRLMTiB6B/IbzigU
- IVzEP+R3uKNnjpxShE8EZ/Z1yfl/LhjLT51viqaWf85e0UTl9kjHsWjwOyUaN3w9Y4E8OG2v68j3w
- arsgaEzA==;
-Received: from ip-109-41-129-189.web.vodafone.de ([109.41.129.189]
- helo=bombadil.infradead.org)
- by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1j3j0c-0006ug-B3; Mon, 17 Feb 2020 16:12:34 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
- (envelope-from <mchehab@bombadil.infradead.org>)
- id 1j3j0a-000faO-Af; Mon, 17 Feb 2020 17:12:32 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Date: Mon, 17 Feb 2020 17:12:04 +0100
-Message-Id: <8dd156320b0c015dec6d3f848d03ea057042a15b.1581955849.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1581955849.git.mchehab+huawei@kernel.org>
-References: <cover.1581955849.git.mchehab+huawei@kernel.org>
+ d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=T1hWdYf0rB2BfBCCA/ycayjeULcD1RhEgE660nEF24U=; b=sDP0FQJf/K4vAFf0xbBt1NG5yU
+ BQo1zx2sDVZ4f5cBkmFWO1G5RYV/E561hS2Td5IkHpV55ScSQW46Pj3wPG/gZaXv5iWHZLxlFtSnT
+ BjLdIL++tZJlAw+Xzc28cr0VXtl8dDkruXjAEG9us+5NgJF/WpeRWy/LlJXX4j3I+4+SEJhRWETgz
+ Pc3A3JXDX5ggpPhYiDZYGDq58my+Q7ybdYT8YK8UL/adpWVgbm5fu+cJicN73uRbmjyuszU+cwKHN
+ CfFecxgyQQHpcERi6MFkYvGkiqN5jvoxW64RDHCkUV7Phh5O9263P2GEglbrJexeT6DAt54eb4wHq
+ 2EZUCDbw==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1j3lPL-00058b-99; Mon, 17 Feb 2020 18:46:15 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: linux-fsdevel@vger.kernel.org
+Date: Mon, 17 Feb 2020 10:45:41 -0800
+Message-Id: <20200217184613.19668-1-willy@infradead.org>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-X-Spam-Score: 0.3 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1j3j0o-006JiT-3i
-Subject: [f2fs-dev] [PATCH 18/44] docs: filesystems: convert f2fs.txt to ReST
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j3lPY-006iXi-T7
+Subject: [f2fs-dev] [PATCH v6 00/19] Change readahead API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,539 +79,135 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-- Add a SPDX header;
-- Adjust document and section titles;
-- Some whitespace fixes and new line breaks;
-- Mark literal blocks as such;
-- Add table markups;
-- Add it to filesystems/index.rst.
+From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- .../filesystems/{f2fs.txt => f2fs.rst}        | 252 ++++++++++--------
- Documentation/filesystems/index.rst           |   1 +
- 2 files changed, 143 insertions(+), 110 deletions(-)
- rename Documentation/filesystems/{f2fs.txt => f2fs.rst} (84%)
+This series adds a readahead address_space operation to eventually
+replace the readpages operation.  The key difference is that
+pages are added to the page cache as they are allocated (and
+then looked up by the filesystem) instead of passing them on a
+list to the readpages operation and having the filesystem add
+them to the page cache.  It's a net reduction in code for each
+implementation, more efficient than walking a list, and solves
+the direct-write vs buffered-read problem reported by yu kuai at
+https://lore.kernel.org/linux-fsdevel/20200116063601.39201-1-yukuai3@huawei.com/
 
-diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.rst
-similarity index 84%
-rename from Documentation/filesystems/f2fs.txt
-rename to Documentation/filesystems/f2fs.rst
-index 4eb3e2ddd00e..d681203728d7 100644
---- a/Documentation/filesystems/f2fs.txt
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -1,6 +1,8 @@
--================================================================================
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+==========================================
- WHAT IS Flash-Friendly File System (F2FS)?
--================================================================================
-+==========================================
- 
- NAND flash memory-based storage devices, such as SSD, eMMC, and SD cards, have
- been equipped on a variety systems ranging from mobile to server systems. Since
-@@ -20,14 +22,15 @@ layout, but also for selecting allocation and cleaning algorithms.
- 
- The following git tree provides the file system formatting tool (mkfs.f2fs),
- a consistency checking tool (fsck.f2fs), and a debugging tool (dump.f2fs).
-->> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
-+
-+- git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
- 
- For reporting bugs and sending patches, please use the following mailing list:
-->> linux-f2fs-devel@lists.sourceforge.net
- 
--================================================================================
--BACKGROUND AND DESIGN ISSUES
--================================================================================
-+- linux-f2fs-devel@lists.sourceforge.net
-+
-+Background and Design issues
-+============================
- 
- Log-structured File System (LFS)
- --------------------------------
-@@ -61,6 +64,7 @@ needs to reclaim these obsolete blocks seamlessly to users. This job is called
- as a cleaning process.
- 
- The process consists of three operations as follows.
-+
- 1. A victim segment is selected through referencing segment usage table.
- 2. It loads parent index structures of all the data in the victim identified by
-    segment summary blocks.
-@@ -71,9 +75,8 @@ This cleaning job may cause unexpected long delays, so the most important goal
- is to hide the latencies to users. And also definitely, it should reduce the
- amount of valid data to be moved, and move them quickly as well.
- 
--================================================================================
--KEY FEATURES
--================================================================================
-+Key Features
-+============
- 
- Flash Awareness
- ---------------
-@@ -94,10 +97,11 @@ Cleaning Overhead
- - Support multi-head logs for static/dynamic hot and cold data separation
- - Introduce adaptive logging for efficient block allocation
- 
--================================================================================
--MOUNT OPTIONS
--================================================================================
-+Mount Options
-+=============
- 
-+
-+====================== ============================================================
- background_gc=%s       Turn on/off cleaning operations, namely garbage
-                        collection, triggered in background when I/O subsystem is
-                        idle. If background_gc=on, it will turn on the garbage
-@@ -167,7 +171,10 @@ fault_injection=%d     Enable fault injection in all supported types with
- fault_type=%d          Support configuring fault injection type, should be
-                        enabled with fault_injection option, fault type value
-                        is shown below, it supports single or combined type.
-+
-+                       ===================	===========
-                        Type_Name		Type_Value
-+                       ===================	===========
-                        FAULT_KMALLOC		0x000000001
-                        FAULT_KVMALLOC		0x000000002
-                        FAULT_PAGE_ALLOC		0x000000004
-@@ -183,6 +190,7 @@ fault_type=%d          Support configuring fault injection type, should be
-                        FAULT_CHECKPOINT		0x000001000
-                        FAULT_DISCARD		0x000002000
-                        FAULT_WRITE_IO		0x000004000
-+                       ===================	===========
- mode=%s                Control block allocation mode which supports "adaptive"
-                        and "lfs". In "lfs" mode, there should be no random
-                        writes towards main area.
-@@ -219,7 +227,7 @@ fsync_mode=%s          Control the policy of fsync. Currently supports "posix",
-                        non-atomic files likewise "nobarrier" mount option.
- test_dummy_encryption  Enable dummy encryption, which provides a fake fscrypt
-                        context. The fake fscrypt context is used by xfstests.
--checkpoint=%s[:%u[%]]     Set to "disable" to turn off checkpointing. Set to "enable"
-+checkpoint=%s[:%u[%]]  Set to "disable" to turn off checkpointing. Set to "enable"
-                        to reenable checkpointing. Is enabled by default. While
-                        disabled, any unmounting or unexpected shutdowns will cause
-                        the filesystem contents to appear as they did when the
-@@ -246,22 +254,22 @@ compress_extension=%s  Support adding specified extension, so that f2fs can enab
-                        on compression extension list and enable compression on
-                        these file by default rather than to enable it via ioctl.
-                        For other files, we can still enable compression via ioctl.
-+====================== ============================================================
- 
--================================================================================
--DEBUGFS ENTRIES
--================================================================================
-+Debugfs Entries
-+===============
- 
- /sys/kernel/debug/f2fs/ contains information about all the partitions mounted as
- f2fs. Each file shows the whole f2fs information.
- 
- /sys/kernel/debug/f2fs/status includes:
-+
-  - major file system information managed by f2fs currently
-  - average SIT information about whole segments
-  - current memory footprint consumed by f2fs.
- 
--================================================================================
--SYSFS ENTRIES
--================================================================================
-+Sysfs Entries
-+=============
- 
- Information about mounted f2fs file systems can be found in
- /sys/fs/f2fs.  Each mounted filesystem will have a directory in
-@@ -271,22 +279,24 @@ The files in each per-device directory are shown in table below.
- Files in /sys/fs/f2fs/<devname>
- (see also Documentation/ABI/testing/sysfs-fs-f2fs)
- 
--================================================================================
--USAGE
--================================================================================
-+Usage
-+=====
- 
- 1. Download userland tools and compile them.
- 
- 2. Skip, if f2fs was compiled statically inside kernel.
--   Otherwise, insert the f2fs.ko module.
-- # insmod f2fs.ko
-+   Otherwise, insert the f2fs.ko module::
- 
--3. Create a directory trying to mount
-- # mkdir /mnt/f2fs
-+	# insmod f2fs.ko
- 
--4. Format the block device, and then mount as f2fs
-- # mkfs.f2fs -l label /dev/block_device
-- # mount -t f2fs /dev/block_device /mnt/f2fs
-+3. Create a directory trying to mount::
-+
-+	# mkdir /mnt/f2fs
-+
-+4. Format the block device, and then mount as f2fs::
-+
-+	# mkfs.f2fs -l label /dev/block_device
-+	# mount -t f2fs /dev/block_device /mnt/f2fs
- 
- mkfs.f2fs
- ---------
-@@ -294,18 +304,26 @@ The mkfs.f2fs is for the use of formatting a partition as the f2fs filesystem,
- which builds a basic on-disk layout.
- 
- The options consist of:
---l [label]   : Give a volume label, up to 512 unicode name.
---a [0 or 1]  : Split start location of each area for heap-based allocation.
--               1 is set by default, which performs this.
---o [int]     : Set overprovision ratio in percent over volume size.
--               5 is set by default.
---s [int]     : Set the number of segments per section.
--               1 is set by default.
---z [int]     : Set the number of sections per zone.
--               1 is set by default.
---e [str]     : Set basic extension list. e.g. "mp3,gif,mov"
---t [0 or 1]  : Disable discard command or not.
--               1 is set by default, which conducts discard.
-+
-+===============    ===========================================================
-+``-l [label]``     Give a volume label, up to 512 unicode name.
-+``-a [0 or 1]``    Split start location of each area for heap-based allocation.
-+
-+                   1 is set by default, which performs this.
-+``-o [int]``       Set overprovision ratio in percent over volume size.
-+
-+                   5 is set by default.
-+``-s [int]``       Set the number of segments per section.
-+
-+                   1 is set by default.
-+``-z [int]``       Set the number of sections per zone.
-+
-+                   1 is set by default.
-+``-e [str]``       Set basic extension list. e.g. "mp3,gif,mov"
-+``-t [0 or 1]``    Disable discard command or not.
-+
-+                   1 is set by default, which conducts discard.
-+===============    ===========================================================
- 
- fsck.f2fs
- ---------
-@@ -314,7 +332,8 @@ partition, which examines whether the filesystem metadata and user-made data
- are cross-referenced correctly or not.
- Note that, initial version of the tool does not fix any inconsistency.
- 
--The options consist of:
-+The options consist of::
-+
-   -d debug level [default:0]
- 
- dump.f2fs
-@@ -327,20 +346,21 @@ It shows on-disk inode information recognized by a given inode number, and is
- able to dump all the SSA and SIT entries into predefined files, ./dump_ssa and
- ./dump_sit respectively.
- 
--The options consist of:
-+The options consist of::
-+
-   -d debug level [default:0]
-   -i inode no (hex)
-   -s [SIT dump segno from #1~#2 (decimal), for all 0~-1]
-   -a [SSA dump segno from #1~#2 (decimal), for all 0~-1]
- 
--Examples:
--# dump.f2fs -i [ino] /dev/sdx
--# dump.f2fs -s 0~-1 /dev/sdx (SIT dump)
--# dump.f2fs -a 0~-1 /dev/sdx (SSA dump)
-+Examples::
- 
--================================================================================
--DESIGN
--================================================================================
-+    # dump.f2fs -i [ino] /dev/sdx
-+    # dump.f2fs -s 0~-1 /dev/sdx (SIT dump)
-+    # dump.f2fs -a 0~-1 /dev/sdx (SSA dump)
-+
-+Design
-+======
- 
- On-disk Layout
- --------------
-@@ -351,7 +371,7 @@ consists of a set of sections. By default, section and zone sizes are set to one
- segment size identically, but users can easily modify the sizes by mkfs.
- 
- F2FS splits the entire volume into six areas, and all the areas except superblock
--consists of multiple segments as described below.
-+consists of multiple segments as described below::
- 
-                                             align with the zone size <-|
-                  |-> align with the segment size
-@@ -373,28 +393,28 @@ consists of multiple segments as described below.
- 	                            |__zone__|
- 
- - Superblock (SB)
-- : It is located at the beginning of the partition, and there exist two copies
-+   It is located at the beginning of the partition, and there exist two copies
-    to avoid file system crash. It contains basic partition information and some
-    default parameters of f2fs.
- 
- - Checkpoint (CP)
-- : It contains file system information, bitmaps for valid NAT/SIT sets, orphan
-+   It contains file system information, bitmaps for valid NAT/SIT sets, orphan
-    inode lists, and summary entries of current active segments.
- 
- - Segment Information Table (SIT)
-- : It contains segment information such as valid block count and bitmap for the
-+   It contains segment information such as valid block count and bitmap for the
-    validity of all the blocks.
- 
- - Node Address Table (NAT)
-- : It is composed of a block address table for all the node blocks stored in
-+   It is composed of a block address table for all the node blocks stored in
-    Main area.
- 
- - Segment Summary Area (SSA)
-- : It contains summary entries which contains the owner information of all the
-+   It contains summary entries which contains the owner information of all the
-    data and node blocks stored in Main area.
- 
- - Main Area
-- : It contains file and directory data including their indices.
-+   It contains file and directory data including their indices.
- 
- In order to avoid misalignment between file system and flash-based storage, F2FS
- aligns the start block address of CP with the segment size. Also, it aligns the
-@@ -414,7 +434,7 @@ One of them always indicates the last valid data, which is called as shadow copy
- mechanism. In addition to CP, NAT and SIT also adopt the shadow copy mechanism.
- 
- For file system consistency, each CP points to which NAT and SIT copies are
--valid, as shown as below.
-+valid, as shown as below::
- 
-   +--------+----------+---------+
-   |   CP   |    SIT   |   NAT   |
-@@ -438,7 +458,7 @@ indirect node. F2FS assigns 4KB to an inode block which contains 923 data block
- indices, two direct node pointers, two indirect node pointers, and one double
- indirect node pointer as described below. One direct node block contains 1018
- data blocks, and one indirect node block contains also 1018 node blocks. Thus,
--one inode block (i.e., a file) covers:
-+one inode block (i.e., a file) covers::
- 
-   4KB * (923 + 2 * 1018 + 2 * 1018 * 1018 + 1018 * 1018 * 1018) := 3.94TB.
- 
-@@ -473,6 +493,8 @@ A dentry block consists of 214 dentry slots and file names. Therein a bitmap is
- used to represent whether each dentry is valid or not. A dentry block occupies
- 4KB with the following composition.
- 
-+::
-+
-   Dentry Block(4 K) = bitmap (27 bytes) + reserved (3 bytes) +
- 	              dentries(11 * 214 bytes) + file name (8 * 214 bytes)
- 
-@@ -498,23 +520,25 @@ F2FS implements multi-level hash tables for directory structure. Each level has
- a hash table with dedicated number of hash buckets as shown below. Note that
- "A(2B)" means a bucket includes 2 data blocks.
- 
------------------------
--A : bucket
--B : block
--N : MAX_DIR_HASH_DEPTH
------------------------
-+::
- 
--level #0   | A(2B)
--           |
--level #1   | A(2B) - A(2B)
--           |
--level #2   | A(2B) - A(2B) - A(2B) - A(2B)
--     .     |   .       .       .       .
--level #N/2 | A(2B) - A(2B) - A(2B) - A(2B) - A(2B) - ... - A(2B)
--     .     |   .       .       .       .
--level #N   | A(4B) - A(4B) - A(4B) - A(4B) - A(4B) - ... - A(4B)
-+    ----------------------
-+    A : bucket
-+    B : block
-+    N : MAX_DIR_HASH_DEPTH
-+    ----------------------
- 
--The number of blocks and buckets are determined by,
-+    level #0   | A(2B)
-+	    |
-+    level #1   | A(2B) - A(2B)
-+	    |
-+    level #2   | A(2B) - A(2B) - A(2B) - A(2B)
-+	.     |   .       .       .       .
-+    level #N/2 | A(2B) - A(2B) - A(2B) - A(2B) - A(2B) - ... - A(2B)
-+	.     |   .       .       .       .
-+    level #N   | A(4B) - A(4B) - A(4B) - A(4B) - A(4B) - ... - A(4B)
-+
-+The number of blocks and buckets are determined by::
- 
-                             ,- 2, if n < MAX_DIR_HASH_DEPTH / 2,
-   # of blocks in level #n = |
-@@ -532,7 +556,7 @@ dentry consisting of the file name and its inode number. If not found, F2FS
- scans the next hash table in level #1. In this way, F2FS scans hash tables in
- each levels incrementally from 1 to N. In each levels F2FS needs to scan only
- one bucket determined by the following equation, which shows O(log(# of files))
--complexity.
-+complexity::
- 
-   bucket number to scan in level #n = (hash value) % (# of buckets in level #n)
- 
-@@ -540,7 +564,8 @@ In the case of file creation, F2FS finds empty consecutive slots that cover the
- file name. F2FS searches the empty slots in the hash tables of whole levels from
- 1 to N in the same way as the lookup operation.
- 
--The following figure shows an example of two cases holding children.
-+The following figure shows an example of two cases holding children::
-+
-        --------------> Dir <--------------
-        |                                 |
-     child                             child
-@@ -611,14 +636,15 @@ Write-hint Policy
- 2) whint_mode=user-based. F2FS tries to pass down hints given by
- users.
- 
-+===================== ======================== ===================
- User                  F2FS                     Block
------                  ----                     -----
-+===================== ======================== ===================
-                       META                     WRITE_LIFE_NOT_SET
-                       HOT_NODE                 "
-                       WARM_NODE                "
-                       COLD_NODE                "
--*ioctl(COLD)          COLD_DATA                WRITE_LIFE_EXTREME
--*extension list       "                        "
-+ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
-+extension list        "                        "
- 
- -- buffered io
- WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
-@@ -635,11 +661,13 @@ WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
- WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
- WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
- WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
-+===================== ======================== ===================
- 
- 3) whint_mode=fs-based. F2FS passes down hints with its policy.
- 
-+===================== ======================== ===================
- User                  F2FS                     Block
------                  ----                     -----
-+===================== ======================== ===================
-                       META                     WRITE_LIFE_MEDIUM;
-                       HOT_NODE                 WRITE_LIFE_NOT_SET
-                       WARM_NODE                "
-@@ -662,6 +690,7 @@ WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
- WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
- WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
- WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
-+===================== ======================== ===================
- 
- Fallocate(2) Policy
- -------------------
-@@ -681,6 +710,7 @@ Allocating disk space
- However, once F2FS receives ioctl(fd, F2FS_IOC_SET_PIN_FILE) in prior to
- fallocate(fd, DEFAULT_MODE), it allocates on-disk blocks addressess having
- zero or random data, which is useful to the below scenario where:
-+
-  1. create(fd)
-  2. ioctl(fd, F2FS_IOC_SET_PIN_FILE)
-  3. fallocate(fd, 0, 0, size)
-@@ -692,39 +722,41 @@ Compression implementation
- --------------------------
- 
- - New term named cluster is defined as basic unit of compression, file can
--be divided into multiple clusters logically. One cluster includes 4 << n
--(n >= 0) logical pages, compression size is also cluster size, each of
--cluster can be compressed or not.
-+  be divided into multiple clusters logically. One cluster includes 4 << n
-+  (n >= 0) logical pages, compression size is also cluster size, each of
-+  cluster can be compressed or not.
- 
- - In cluster metadata layout, one special block address is used to indicate
--cluster is compressed one or normal one, for compressed cluster, following
--metadata maps cluster to [1, 4 << n - 1] physical blocks, in where f2fs
--stores data including compress header and compressed data.
-+  cluster is compressed one or normal one, for compressed cluster, following
-+  metadata maps cluster to [1, 4 << n - 1] physical blocks, in where f2fs
-+  stores data including compress header and compressed data.
- 
- - In order to eliminate write amplification during overwrite, F2FS only
--support compression on write-once file, data can be compressed only when
--all logical blocks in file are valid and cluster compress ratio is lower
--than specified threshold.
-+  support compression on write-once file, data can be compressed only when
-+  all logical blocks in file are valid and cluster compress ratio is lower
-+  than specified threshold.
- 
- - To enable compression on regular inode, there are three ways:
--* chattr +c file
--* chattr +c dir; touch dir/file
--* mount w/ -o compress_extension=ext; touch file.ext
- 
--Compress metadata layout:
--                             [Dnode Structure]
--             +-----------------------------------------------+
--             | cluster 1 | cluster 2 | ......... | cluster N |
--             +-----------------------------------------------+
--             .           .                       .           .
--       .                       .                .                      .
--  .         Compressed Cluster       .        .        Normal Cluster            .
--+----------+---------+---------+---------+  +---------+---------+---------+---------+
--|compr flag| block 1 | block 2 | block 3 |  | block 1 | block 2 | block 3 | block 4 |
--+----------+---------+---------+---------+  +---------+---------+---------+---------+
--           .                             .
--         .                                           .
--       .                                                           .
--      +-------------+-------------+----------+----------------------------+
--      | data length | data chksum | reserved |      compressed data       |
--      +-------------+-------------+----------+----------------------------+
-+  * chattr +c file
-+  * chattr +c dir; touch dir/file
-+  * mount w/ -o compress_extension=ext; touch file.ext
-+
-+Compress metadata layout::
-+
-+				[Dnode Structure]
-+		+-----------------------------------------------+
-+		| cluster 1 | cluster 2 | ......... | cluster N |
-+		+-----------------------------------------------+
-+		.           .                       .           .
-+	.                       .                .                      .
-+    .         Compressed Cluster       .        .        Normal Cluster            .
-+    +----------+---------+---------+---------+  +---------+---------+---------+---------+
-+    |compr flag| block 1 | block 2 | block 3 |  | block 1 | block 2 | block 3 | block 4 |
-+    +----------+---------+---------+---------+  +---------+---------+---------+---------+
-+	    .                             .
-+	    .                                           .
-+	.                                                           .
-+	+-------------+-------------+----------+----------------------------+
-+	| data length | data chksum | reserved |      compressed data       |
-+	+-------------+-------------+----------+----------------------------+
-diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
-index aa2c3d1de3de..f69d20406be0 100644
---- a/Documentation/filesystems/index.rst
-+++ b/Documentation/filesystems/index.rst
-@@ -64,6 +64,7 @@ Documentation for filesystem implementations.
-    erofs
-    ext2
-    ext3
-+   f2fs
-    fuse
-    overlayfs
-    virtiofs
+The only unconverted filesystems are those which use fscache.
+Their conversion is pending Dave Howells' rewrite which will make the
+conversion substantially easier.
+
+v6:
+ - Name the private members of readahead_control with a leading underscore
+   (suggested by Christoph Hellwig)
+ - Fix whitespace in rst file
+ - Remove misleading comment in btrfs patch
+ - Add readahead_next() API and use it in iomap
+ - Add iomap_readahead kerneldoc.
+ - Fix the mpage_readahead kerneldoc
+ - Make various readahead functions return void
+ - Keep readahead_index() and readahead_offset() pointing to the start of
+   this batch through the body.  No current user requires this, but it's
+   less surprising.
+ - Add kerneldoc for page_cache_readahead_limit
+ - Make page_idx an unsigned long, and rename it to just 'i'
+ - Get rid of page_offset local variable
+ - Add patch to call memalloc_nofs_save() before allocating pages (suggested
+   by Michal Hocko)
+ - Resplit a lot of patches for more logical progression and easier review
+   (suggested by John Hubbard)
+ - Added sign-offs where received, and I deemed still relevant
+
+v5 switched to passing a readahead_control struct (mirroring the
+writepages_control struct passed to writepages).  This has a number of
+advantages:
+ - It fixes a number of bugs in various implementations, eg forgetting to
+   increment 'start', an off-by-one error in 'nr_pages' or treating 'start'
+   as a byte offset instead of a page offset.
+ - It allows us to change the arguments without changing all the
+   implementations of ->readahead which just call mpage_readahead() or
+   iomap_readahead()
+ - Figuring out which pages haven't been attempted by the implementation
+   is more natural this way.
+ - There's less code in each implementation.
+
+Matthew Wilcox (Oracle) (19):
+  mm: Return void from various readahead functions
+  mm: Ignore return value of ->readpages
+  mm: Use readahead_control to pass arguments
+  mm: Rearrange readahead loop
+  mm: Remove 'page_offset' from readahead loop
+  mm: rename readahead loop variable to 'i'
+  mm: Put readahead pages in cache earlier
+  mm: Add readahead address space operation
+  mm: Add page_cache_readahead_limit
+  fs: Convert mpage_readpages to mpage_readahead
+  btrfs: Convert from readpages to readahead
+  erofs: Convert uncompressed files from readpages to readahead
+  erofs: Convert compressed files from readpages to readahead
+  ext4: Convert from readpages to readahead
+  f2fs: Convert from readpages to readahead
+  fuse: Convert from readpages to readahead
+  iomap: Restructure iomap_readpages_actor
+  iomap: Convert from readpages to readahead
+  mm: Use memalloc_nofs_save in readahead path
+
+ Documentation/filesystems/locking.rst |   6 +-
+ Documentation/filesystems/vfs.rst     |  13 ++
+ drivers/staging/exfat/exfat_super.c   |   7 +-
+ fs/block_dev.c                        |   7 +-
+ fs/btrfs/extent_io.c                  |  46 ++-----
+ fs/btrfs/extent_io.h                  |   3 +-
+ fs/btrfs/inode.c                      |  16 +--
+ fs/erofs/data.c                       |  39 ++----
+ fs/erofs/zdata.c                      |  29 ++--
+ fs/ext2/inode.c                       |  10 +-
+ fs/ext4/ext4.h                        |   3 +-
+ fs/ext4/inode.c                       |  23 ++--
+ fs/ext4/readpage.c                    |  22 ++-
+ fs/ext4/verity.c                      |  35 +----
+ fs/f2fs/data.c                        |  50 +++----
+ fs/f2fs/f2fs.h                        |   5 +-
+ fs/f2fs/verity.c                      |  35 +----
+ fs/fat/inode.c                        |   7 +-
+ fs/fuse/file.c                        |  46 +++----
+ fs/gfs2/aops.c                        |  23 ++--
+ fs/hpfs/file.c                        |   7 +-
+ fs/iomap/buffered-io.c                | 118 +++++++----------
+ fs/iomap/trace.h                      |   2 +-
+ fs/isofs/inode.c                      |   7 +-
+ fs/jfs/inode.c                        |   7 +-
+ fs/mpage.c                            |  38 ++----
+ fs/nilfs2/inode.c                     |  15 +--
+ fs/ocfs2/aops.c                       |  34 ++---
+ fs/omfs/file.c                        |   7 +-
+ fs/qnx6/inode.c                       |   7 +-
+ fs/reiserfs/inode.c                   |   8 +-
+ fs/udf/inode.c                        |   7 +-
+ fs/xfs/xfs_aops.c                     |  13 +-
+ fs/zonefs/super.c                     |   7 +-
+ include/linux/fs.h                    |   2 +
+ include/linux/iomap.h                 |   3 +-
+ include/linux/mpage.h                 |   4 +-
+ include/linux/pagemap.h               |  90 +++++++++++++
+ include/trace/events/erofs.h          |   6 +-
+ include/trace/events/f2fs.h           |   6 +-
+ mm/internal.h                         |   8 +-
+ mm/migrate.c                          |   2 +-
+ mm/readahead.c                        | 184 +++++++++++++++++---------
+ 43 files changed, 474 insertions(+), 533 deletions(-)
+
+
+base-commit: 11a48a5a18c63fd7621bb050228cebf13566e4d8
 -- 
-2.24.1
+2.25.0
 
 
 
