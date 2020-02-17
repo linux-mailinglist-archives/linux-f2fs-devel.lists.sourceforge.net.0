@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 407FD160B72
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 08:17:57 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41ADD160E70
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Feb 2020 10:27:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j3afA-00029Y-PW; Mon, 17 Feb 2020 07:17:52 +0000
+	id 1j3cg5-0002o8-26; Mon, 17 Feb 2020 09:26:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <SRS0=TIt0=4F=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1j3af9-00029R-Fc
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 07:17:51 +0000
+ id 1j3cg3-0002nd-09
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 09:26:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MvujMPhaMZWrtbI9teffZ1YG6e8jE41mtD/jixXN3Iw=; b=Hy5iuZu+C0Brnw4MpOcgDjRx0a
- 3JaDeUrbo5VnvsL0JgFTYdYZSkdjKa10CjWKFoX32a/0UpXRTSQVwgS2Ae0QyrfnjzKaBljS0lQl0
- mmavfSHntiIU79GaQgA5/ZiFdhABhAPzlUJ8Zy8lb5h0rydQddrfGdARhgeJflDRkwzU=;
+ bh=v6VV8iY5MxvV7+AKgwQbkXbcDhc7hiQ+FUzhwAc+Wb4=; b=Pt9JjyB8Lo+5jpIvyBWCTP1BcX
+ KALJKxHjvg+KCMQEpS0w81k0REf3WRnthDFVEi7NHwLNxKlCmzS9W0+yyYXgLvKnycrWOqdbpdKnR
+ NZNwS7yjmJfrflAHBtd1/k3Q4kb5WSOrZUsa3/smLTrTMK990EPkQ0sAyEytfIoSE77U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,19 +30,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MvujMPhaMZWrtbI9teffZ1YG6e8jE41mtD/jixXN3Iw=; b=MfErtq7y3PqWCf42wJSb7b8fU8
- eKVho+suw1xTfGsQ83qHRi1SaVbLD6xPPaZ+UQjbXQ/R56TFVjvTVV12AFXEphEDJuQsJF5YCpdlA
- 9+dek75gYsUQ08q7ISYk39NzYXIHrRt/9l8VgyYYE9oSAxwd9STNk6erDsOkMK45CjnY=;
+ bh=v6VV8iY5MxvV7+AKgwQbkXbcDhc7hiQ+FUzhwAc+Wb4=; b=YDDKSgjKo9N/AHtJrWjvX4tnnf
+ gzARZ9XcFCAs1W9E7sL1vnyX+PnWT3PvhMhr94xdezbAES/YIb1QGqUzmhGsMECWmbgU/HO8Si2Fm
+ rhLGhSZg/4zNeyl9tOQf/5txTlPyV266X/X7xo10yE7eRWJk/1bWYrKJjDzsZvvzBt98=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j3af8-006AWc-B1
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 07:17:51 +0000
+ id 1j3cg1-00FFqk-NF
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 Feb 2020 09:26:54 +0000
 From: bugzilla-daemon@bugzilla.kernel.org
 Authentication-Results: mail.kernel.org;
  dkim=permerror (bad message/signature format)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 17 Feb 2020 07:17:44 +0000
+Date: Mon, 17 Feb 2020 09:26:47 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -51,14 +51,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Who: stefan@konink.de
 X-Bugzilla-Status: ASSIGNED
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-206551-202145-wQuRx3h4aJ@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-206551-202145-QRn26RAzCG@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-206551-202145@https.bugzilla.kernel.org/>
 References: <bug-206551-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -70,7 +70,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j3af8-006AWc-B1
+X-Headers-End: 1j3cg1-00FFqk-NF
 Subject: [f2fs-dev] [Bug 206551] Failed to initialize F2FS segment manager
  (-117)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -84,25 +84,20 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-aHR0cHM6Ly9idWd6aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMDY1NTEKCkNoYW8g
-WXUgKGNoYW9Aa2VybmVsLm9yZykgY2hhbmdlZDoKCiAgICAgICAgICAgV2hhdCAgICB8UmVtb3Zl
-ZCAgICAgICAgICAgICAgICAgICAgIHxBZGRlZAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAgICAg
-ICAgICBTdGF0dXN8TkVXICAgICAgICAgICAgICAgICAgICAgICAgIHxBU1NJR05FRAogICAgICAg
-ICAgICAgICAgIENDfCAgICAgICAgICAgICAgICAgICAgICAgICAgICB8Y2hhb0BrZXJuZWwub3Jn
-CgotLS0gQ29tbWVudCAjMiBmcm9tIENoYW8gWXUgKGNoYW9Aa2VybmVsLm9yZykgLS0tCkJvdGgg
-a2VybmVsIGxvZ+KAnE1pc21hdGNoIHZhbGlkIGJsb2Nrc+KAnSBhbmQgZnNjayBsb2cgIlNJVCBi
-aXRtYXAgaXMgMCIgc2F5cyBTSVQKdGFibGUgbWF5IGJlIGluY29uc2lzdGVudCBpbiB5b3VyIGlt
-YWdlLgoKSSBub3RpY2VkIHRoYXQgeW91J3JlIHVzaW5nIGEgc3dhcCBwYXJ0aXRpb24sIG1heSBJ
-IGFzayB3aGVyZSBkaWQgeW91IGJ1aWxkIHRoZQpzd2FwIHBhcnRpdGlvbj8gaW4geW91ciBmMmZz
-IGltYWdlPyBXaGF0J3MgeW91ciBzd2FwIG9wdGlvbj8KClF1b3RlZDogIkkgdXNlIGhpYmVybmF0
-aW9uIHRvIGEgc3dhcCBwYXJ0aXRpb24iCgotLSAKWW91IGFyZSByZWNlaXZpbmcgdGhpcyBtYWls
-IGJlY2F1c2U6CllvdSBhcmUgd2F0Y2hpbmcgdGhlIGFzc2lnbmVlIG9mIHRoZSBidWcuCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRl
-dmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
-dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRl
-dmVsCg==
+https://bugzilla.kernel.org/show_bug.cgi?id=206551
+
+--- Comment #3 from Stefan de Konink (stefan@konink.de) ---
+My swap partition is at /dev/sda3, as independent of f2fs.
+
+-- 
+You are receiving this mail because:
+You are watching the assignee of the bug.
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
