@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC58A163586
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Feb 2020 22:53:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6423D163605
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Feb 2020 23:22:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4Anc-0006Jx-2P; Tue, 18 Feb 2020 21:53:00 +0000
+	id 1j4BGF-0005YS-I2; Tue, 18 Feb 2020 22:22:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jhubbard@nvidia.com>) id 1j4Ana-0006Jq-Qw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 21:52:58 +0000
+ (envelope-from <jhubbard@nvidia.com>) id 1j4BGE-0005YH-U3
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 22:22:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qfpwxWjoJAxZXMl/fVWRFqa8SVkCAfNTchKU/DsPf1w=; b=KCX31qGr2jXNX/9qmD70hkT1lK
- npOVhZMZ6Mi1FBCge7DJjGp2gvtnHFFGMA4DA26oDspDjTqAyj0PpyKLkh1d4B7cN1y1qcEmYclxP
- Djh+dfvWARb4JppZolg7qY7Hlku11iExXH5Ljr1sqrNGeojKxL/CGs3dOVP6qaW6HASw=;
+ bh=ZZ7ZnXmWS/+25lCnS0Msc4oVcTYWx35dNubCQJlyios=; b=itDietDMxz0orCr23OTzoSx82u
+ r1xBaVu2KcS6aNgCUyOuW7hPDAY3kian+jiwRsk621tW0cujriKCzlrNmaRjbwKCP0zlRlORplJVg
+ ncM8mqA/6+ga7w/IKkH6RKYy170lpora8yPXcORhata1QMFIJxQjMwJYObQ8QAEkMkcA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,54 +29,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qfpwxWjoJAxZXMl/fVWRFqa8SVkCAfNTchKU/DsPf1w=; b=VoMziu8CpkbFzmWEzDsKHGMxKo
- QqQqe9uLsWCyEbxIAA8PYYKqwJ7JRBPaeD/0kYw4TLDrK9Af7HREdmKQHboToqnyZNuX8bhot2g0y
- eT+g+5uZUk/0jVan4dW2VIVSzYiIHtDXQ9upYBFdu5qNUT4lg+vjo5y/X3ga1CUO2+oQ=;
-Received: from hqnvemgate26.nvidia.com ([216.228.121.65])
+ bh=ZZ7ZnXmWS/+25lCnS0Msc4oVcTYWx35dNubCQJlyios=; b=Bz6711ZC3Y9f7UFXhm/EfiXg2q
+ UEZCpkk5ij7bF3nLoHsg+57HlT3tfDSgipspjC4fW0QbhxTjeQDQxWGIf0nbFLa3W/5FS0bh42DaN
+ rkgkroAcK5YUTLeMSyI1jCC8eBNwzS49YGn8HqdCsfzWj62ikk6W0odWiv6oTQ05DNBc=;
+Received: from hqnvemgate25.nvidia.com ([216.228.121.64])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4AnZ-007NdW-3Y
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 21:52:58 +0000
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e4c5ca30001>; Tue, 18 Feb 2020 13:52:35 -0800
+ id 1j4BGD-007Omi-JF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 22:22:34 +0000
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e4c63810000>; Tue, 18 Feb 2020 14:21:53 -0800
 Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Tue, 18 Feb 2020 13:52:49 -0800
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Tue, 18 Feb 2020 14:22:25 -0800
 X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Tue, 18 Feb 2020 13:52:49 -0800
+ by hqpgpgate101.nvidia.com on Tue, 18 Feb 2020 14:22:25 -0800
 Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 18 Feb
- 2020 21:52:48 +0000
-To: Matthew Wilcox <willy@infradead.org>
+ 2020 22:22:25 +0000
+To: Matthew Wilcox <willy@infradead.org>, <linux-fsdevel@vger.kernel.org>
 References: <20200217184613.19668-1-willy@infradead.org>
- <20200217184613.19668-2-willy@infradead.org>
- <29d2d7ca-7f2b-7eb4-78bc-f2af36c4c426@nvidia.com>
- <20200218212115.GG24185@bombadil.infradead.org>
+ <20200217184613.19668-4-willy@infradead.org>
 X-Nvconfidentiality: public
 From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <df31e4a4-fe1a-5826-c8e1-c66e5197e071@nvidia.com>
-Date: Tue, 18 Feb 2020 13:52:48 -0800
+Message-ID: <e42273c5-1528-73d1-7a1c-6cc4253ddf5c@nvidia.com>
+Date: Tue, 18 Feb 2020 14:22:24 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200218212115.GG24185@bombadil.infradead.org>
+In-Reply-To: <20200217184613.19668-4-willy@infradead.org>
 X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1582062755; bh=qfpwxWjoJAxZXMl/fVWRFqa8SVkCAfNTchKU/DsPf1w=;
+ t=1582064513; bh=ZZ7ZnXmWS/+25lCnS0Msc4oVcTYWx35dNubCQJlyios=;
  h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
  Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
  X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
  Content-Transfer-Encoding;
- b=L8ru848XvUIfOJO/JXhX+NAXu7iIY1KJSx3RiY9Om4rla5Ao2A9lF+RAEJasJvP5L
- owCBjoiopItYsoex90j53Y8mnM3ktiY1MMNo8HH+kjWAdu7/XAWRA5giE/2/cgeZo1
- UzfV3lbbxYSMkVntSf7SjA5oxNk59bYCkEmDWiuTjVcx3LjHjGBJkIBzlgkhs4ZBhL
- oBrJEGs94r8uGApZIYHqfv60ijxl2jPOY76N6V1bK0kLceuPY9FEScpmq72aOxPBeV
- O9bOSJy3x3CRdtcl3DfnYeEMl70MqfhK4trIMvG7AasW+TbAnle4v8IFOUmWPDmYWd
- rkWaM8EskmDKw==
+ b=sMCo+kzHChvgZdHGQm3ugwe95Yy3u85k0iTNa8iFdKNEtWD62hxHdqvdgNNSjtdxb
+ enTEGW/SfVJLCHfbmpjg9Jefzr0FSn8p03k0hmK3im6emR6FuRzJ4Kjh2jAGWCPOAZ
+ AJRFKt4RYh6NxqnG9BlGHsnneYy9zTg2CqrTbBftfsZBMhcHh5fR/jXoDtYl395Lyn
+ GfNFP9aWRVAzaXP3VMZv/tOL1A3fARHojujr1xyeVhMxRRfK5C11alx3JJspYdo8HS
+ n4v0x5ZPHFSa3fu1BIfcU7dkxH9vREijE68noNdkb+cNvvV8S4dd0wqjChm3q9T+nM
+ 7MAerZ+gnJAQw==
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -93,9 +91,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4AnZ-007NdW-3Y
-Subject: Re: [f2fs-dev] [PATCH v6 01/19] mm: Return void from various
- readahead functions
+X-Headers-End: 1j4BGD-007Omi-JF
+Subject: Re: [f2fs-dev] [PATCH v6 03/19] mm: Use readahead_control to pass
+ arguments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,64 +107,170 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2/18/20 1:21 PM, Matthew Wilcox wrote:
-> On Tue, Feb 18, 2020 at 01:05:29PM -0800, John Hubbard wrote:
->> This is an easy review and obviously correct, so:
->>
->>     Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+On 2/17/20 10:45 AM, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 > 
-> Thanks
+> In this patch, only between __do_page_cache_readahead() and
+> read_pages(), but it will be extended in upcoming patches.  Also add
+> the readahead_count() accessor.
 > 
->> Thoughts for the future of the API:
->>
->> I will add that I could envision another patchset that went in the
->> opposite direction, and attempted to preserve the information about
->> how many pages were successfully read ahead. And that would be nice
->> to have (at least IMHO), even all the way out to the syscall level,
->> especially for the readahead syscall.
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>  include/linux/pagemap.h | 17 +++++++++++++++++
+>  mm/readahead.c          | 36 +++++++++++++++++++++---------------
+>  2 files changed, 38 insertions(+), 15 deletions(-)
 > 
-> Right, and that was where I went initially.  It turns out to be a
-> non-trivial aount of work to do the book-keeping to find out how many
-> pages were _attempted_, and since we don't wait for the I/O to complete,
-> we don't know how many _succeeded_, and we also don't know how many
-> weren't attempted because they were already there, and how many weren't
-> attempted because somebody else has raced with us and is going to attempt
-> them themselves, and how many weren't attempted because we just ran out
-> of memory, and decided to give up.
+> diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
+> index ccb14b6a16b5..982ecda2d4a2 100644
+> --- a/include/linux/pagemap.h
+> +++ b/include/linux/pagemap.h
+> @@ -630,6 +630,23 @@ static inline int add_to_page_cache(struct page *page,
+>  	return error;
+>  }
+>  
+> +/*
+> + * Readahead is of a block of consecutive pages.
+> + */
+> +struct readahead_control {
+> +	struct file *file;
+> +	struct address_space *mapping;
+> +/* private: use the readahead_* accessors instead */
+
+
+Really a minor point, sorry...what about documenting "input", "output", 
+"input/output" instead? I ask because:
+
+a) public and private seems sort of meaningless here: even in this initial
+   patch, the code starts off by setting .file, .mapping, and .nr_pages.
+
+b) The part that's confusing, and that might benefit from either documentation
+   or naming changes, is the way _nr_pages is used. Is it "number of pages
+   requested to read ahead", or "number of pages just read", or number of
+   pages remaining to be read"? I've had trouble keeping it straight because
+   I recall it being used differently at different points.
+
+
+> +	pgoff_t _start;
+> +	unsigned int _nr_pages;
+> +};
+> +
+> +/* The number of pages in this readahead block */
+> +static inline unsigned int readahead_count(struct readahead_control *rac)
+> +{
+> +	return rac->_nr_pages;
+> +}
+
+
+I took a peek at the generated code, and was reassured to see that this realy
+does work even in the "for" loops. Once in a while I like to get my faith in
+the compiler renewed. :)
+
+> +
+>  static inline unsigned long dir_pages(struct inode *inode)
+>  {
+>  	return (unsigned long)(inode->i_size + PAGE_SIZE - 1) >>
+> diff --git a/mm/readahead.c b/mm/readahead.c
+> index 12d13b7792da..15329309231f 100644
+> --- a/mm/readahead.c
+> +++ b/mm/readahead.c
+> @@ -113,26 +113,29 @@ int read_cache_pages(struct address_space *mapping, struct list_head *pages,
+>  
+>  EXPORT_SYMBOL(read_cache_pages);
+>  
+> -static void read_pages(struct address_space *mapping, struct file *filp,
+> -		struct list_head *pages, unsigned int nr_pages, gfp_t gfp)
+> +static void read_pages(struct readahead_control *rac, struct list_head *pages,
+> +		gfp_t gfp)
+>  {
+> +	const struct address_space_operations *aops = rac->mapping->a_ops;
+>  	struct blk_plug plug;
+>  	unsigned page_idx;
+>  
+>  	blk_start_plug(&plug);
+>  
+> -	if (mapping->a_ops->readpages) {
+> -		mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
+> +	if (aops->readpages) {
+> +		aops->readpages(rac->file, rac->mapping, pages,
+> +				readahead_count(rac));
+>  		/* Clean up the remaining pages */
+>  		put_pages_list(pages);
+>  		goto out;
+>  	}
+>  
+> -	for (page_idx = 0; page_idx < nr_pages; page_idx++) {
+> +	for (page_idx = 0; page_idx < readahead_count(rac); page_idx++) {
+>  		struct page *page = lru_to_page(pages);
+>  		list_del(&page->lru);
+> -		if (!add_to_page_cache_lru(page, mapping, page->index, gfp))
+> -			mapping->a_ops->readpage(filp, page);
+> +		if (!add_to_page_cache_lru(page, rac->mapping, page->index,
+> +				gfp))
+> +			aops->readpage(rac->file, page);
+>  		put_page(page);
+>  	}
+>  
+> @@ -155,9 +158,13 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  	unsigned long end_index;	/* The last page we want to read */
+>  	LIST_HEAD(page_pool);
+>  	int page_idx;
+> -	unsigned int nr_pages = 0;
+>  	loff_t isize = i_size_read(inode);
+>  	gfp_t gfp_mask = readahead_gfp_mask(mapping);
+> +	struct readahead_control rac = {
+> +		.mapping = mapping,
+> +		.file = filp,
+> +		._nr_pages = 0,
+> +	};
+>  
+>  	if (isize == 0)
+>  		return;
+> @@ -180,10 +187,9 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  			 * contiguous pages before continuing with the next
+>  			 * batch.
+>  			 */
+> -			if (nr_pages)
+> -				read_pages(mapping, filp, &page_pool, nr_pages,
+> -						gfp_mask);
+> -			nr_pages = 0;
+> +			if (readahead_count(&rac))
+> +				read_pages(&rac, &page_pool, gfp_mask);
+> +			rac._nr_pages = 0;
+>  			continue;
+>  		}
+>  
+> @@ -194,7 +200,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  		list_add(&page->lru, &page_pool);
+>  		if (page_idx == nr_to_read - lookahead_size)
+>  			SetPageReadahead(page);
+> -		nr_pages++;
+> +		rac._nr_pages++;
+>  	}
+>  
+>  	/*
+> @@ -202,8 +208,8 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  	 * uptodate then the caller will launch readpage again, and
+>  	 * will then handle the error.
+>  	 */
+> -	if (nr_pages)
+> -		read_pages(mapping, filp, &page_pool, nr_pages, gfp_mask);
+> +	if (readahead_count(&rac))
+> +		read_pages(&rac, &page_pool, gfp_mask);
+>  	BUG_ON(!list_empty(&page_pool));
+>  }
+>  
 > 
-> Also, we don't know how many pages were successfully read, and then the
-> system decided to evict before the program found out how many were read,
-> let alone before it did any action based on that.
-> 
 
+In any case, this patch faithfully preserves the existing logic, so regardless of any
+documentation decisions, 
 
-That is even worse than I initially thought. :)
-
-
-> So, given all that complexity, and the fact that nobody actually does
-> anything with the limited and incorrect information we tried to provide
-> today, I think it's fair to say that anybody who wants to start to do
-> anything with that information can delve into all the complexity around
-> "what number should we return, and what does it really mean".  In the
-
-
-Yes, and now that you mention it, it's really tough to pick a single number
-that answers the right questions that the user space caller might have. whew.
-
-
-> meantime, let's just ditch the complexity and pretense that this number
-> means anything.
-> 
-
-Definitely. Thanks for the notes here.
-
+    Reviewed-by: John Hubbard <jhubbard@nvidia.com>
 
 thanks,
 -- 
