@@ -2,79 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C965F163695
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Feb 2020 23:58:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2A5A1636A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 00:00:28 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4BoU-0002mf-3S; Tue, 18 Feb 2020 22:57:58 +0000
+	id 1j4Bqs-0002tf-EZ; Tue, 18 Feb 2020 23:00:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jhubbard@nvidia.com>) id 1j4BoS-0002mB-6H
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 22:57:56 +0000
+ (envelope-from <jhubbard@nvidia.com>) id 1j4Bqr-0002tY-4g
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:00:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FNMoOaZBBl3i9xCcuLKNCWIelNbWmCqc+hWHl4NpXdM=; b=Q9m2tp9YE78Ov/MOwWHlc2Gxoz
- WxPwsBK6SUbT5S6nMpC+8tkuhfd0679t3VKyS8ySxK6D5YX4QgqQsqDz2iY0sVzZueJXB6mZiGpBJ
- K6L/vDpyHKmA+MNBBH13LzTfTSyTlT/wCpfNXkoYRrWD0jHrWoxMJFOc3TYtaHoXQXmo=;
+ bh=IB7kCRmqWHOCgH5gvEJMi5Ucod9FJFELOexbDWiq5WM=; b=XMIzktPbBiAU2TS7+vgrbHGTHs
+ 7t96j/oEX2ikwZ0fzpQTmnP6fU3Q6e2GNYL1GQaBWd+FCr4UJW/MC4tthZiP7ZdlLNSKsdgyLVH3o
+ FXufJVNE2aki23VTsiW8Lj3Z6IYFqfmIwAeB6FFw8rYJ34Yu56kPkDYDn9Wcw0YVeaVA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FNMoOaZBBl3i9xCcuLKNCWIelNbWmCqc+hWHl4NpXdM=; b=hSwZGJBgH8GJ943fy4aaqpmxO9
- i1WqkpHDdVSNyKhs0WMPmBxde8e+TqYQFLWc4QKGgCNLrJGrkKlh/IbwotZ4o9MWD1BgBLqztsOnH
- E5ZB/jVZLqLuubAbbC3iafpTEZ/wDKGHCwPC8iYK8xkaiUq3hzPgtjTZXUW5a1AvHEDE=;
-Received: from hqnvemgate24.nvidia.com ([216.228.121.143])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=IB7kCRmqWHOCgH5gvEJMi5Ucod9FJFELOexbDWiq5WM=; b=WF4p6LhXJIYw6GxEcHonry/vQX
+ g/6eQCPSwzXq5F8nMWtIj7jEaWZtuZ7N2iwIYA5VEjCMON0nIExzl8fqJhrHQTGl2e+/9KVCCPMV0
+ oNjG6ODTPMezkHiBDuZIP4EC53UZaEdTmmMrIVV4NUojKSnymZb/ZH7GtKkq60m/eP2o=;
+Received: from hqnvemgate26.nvidia.com ([216.228.121.65])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4BoQ-00H1Qa-AK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 22:57:56 +0000
+ id 1j4Bqp-007lwJ-Ui
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:00:25 +0000
 Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e4c6ba10001>; Tue, 18 Feb 2020 14:56:33 -0800
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e4c6c6f0000>; Tue, 18 Feb 2020 14:59:59 -0800
 Received: from hqmail.nvidia.com ([172.20.161.6])
  by hqpgpgate102.nvidia.com (PGP Universal service);
- Tue, 18 Feb 2020 14:57:43 -0800
+ Tue, 18 Feb 2020 15:00:13 -0800
 X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Tue, 18 Feb 2020 14:57:43 -0800
+ by hqpgpgate102.nvidia.com on Tue, 18 Feb 2020 15:00:13 -0800
 Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 18 Feb
- 2020 22:57:43 +0000
+ 2020 23:00:13 +0000
+From: John Hubbard <jhubbard@nvidia.com>
 To: Matthew Wilcox <willy@infradead.org>, <linux-fsdevel@vger.kernel.org>
 References: <20200217184613.19668-1-willy@infradead.org>
  <20200217184613.19668-6-willy@infradead.org>
+ <7691abe7-d0e9-e091-b158-764fb624c2d7@nvidia.com>
 X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <7691abe7-d0e9-e091-b158-764fb624c2d7@nvidia.com>
-Date: Tue, 18 Feb 2020 14:57:43 -0800
+Message-ID: <cf7c9f73-ea15-24a5-2b97-388164a581ef@nvidia.com>
+Date: Tue, 18 Feb 2020 15:00:12 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200217184613.19668-6-willy@infradead.org>
+In-Reply-To: <7691abe7-d0e9-e091-b158-764fb624c2d7@nvidia.com>
 X-Originating-IP: [10.124.1.5]
 X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1582066593; bh=FNMoOaZBBl3i9xCcuLKNCWIelNbWmCqc+hWHl4NpXdM=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ t=1582066800; bh=IB7kCRmqWHOCgH5gvEJMi5Ucod9FJFELOexbDWiq5WM=;
+ h=X-PGP-Universal:Subject:From:To:CC:References:X-Nvconfidentiality:
  Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
  X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
  Content-Transfer-Encoding;
- b=MTyOyZdHZQkMODmo8rlMB/2qEg3HU5pqh9FgRxpYsmGRmONsz8OrRQrreEBM2NRJR
- 0PWe6O9d1zufzQnZ7Nh6PXVGWI9FIG6u5Ry+tgMofrYVgsctLaciTGIvy+/cW27I6X
- ozy/zXaexJDMUc/Qb0NIOSo/IRTQ4YUAKJ8AfzrVP0G+gsALpSzt/WUyZkuZM9/H1b
- pEHxNVaE1Zn1djE6CJLbRxf6pW4SLxI0NCI/PFJCulvIoPdYakDv8H6EHgYany/KqQ
- +WVDcVH0cvTLVgLvT04N+CZ78lEclF8aBvkeqi/RwbOuHLAT3Vj6DHF81hAcdWMyIY
- Ygo2o7pN3aTag==
+ b=W3IJqlJox7bQX9XTPoXwA3Jm6LhlHKJW+mAhVNPdcUggDXvirw1BsO/uwsxWZ+7uS
+ HOOter52f4A4hAaPodlY7f0GW7DAaw2gYdUynWMuU/ILsZ4VQHwSB4sSV1XGIKIA1A
+ II9rNVEbC3tSkSbIrmRnLlFSPi3rJAn0dkG/YfARpEmDHSprmsPvxbe3KwU65uSj8y
+ C3+FXfpxW4WIejSQ4+P4rtEccN3mioAXj3gOw9uQ19e5wS/+Cgx/Bb4Am7uQzPhoVD
+ I7pTDe0JMynA0Ndr5M6yG+B/RUQjl0P9V/TbFUVySKOwDQKwJXGqsxl0tiggBN1WNv
+ 28HLo+ojFyGyw==
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -91,7 +92,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4BoQ-00H1Qa-AK
+X-Headers-End: 1j4Bqp-007lwJ-Ui
 Subject: Re: [f2fs-dev] [PATCH v6 04/16] mm: Tweak readahead loop slightly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,118 +113,79 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2/17/20 10:45 AM, Matthew Wilcox wrote:
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+On 2/18/20 2:57 PM, John Hubbard wrote:
+> On 2/17/20 10:45 AM, Matthew Wilcox wrote:
+>> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+>>
+>> Eliminate the page_offset variable which was just confusing;
+>> record the start of each consecutive run of pages in the
 > 
-> Eliminate the page_offset variable which was just confusing;
-> record the start of each consecutive run of pages in the
-
-
-OK...presumably for the benefit of a following patch, since it is not 
-actually consumed in this patch.
-
-> readahead_control, and move the 'kick off a fresh batch' code to
-> the end of the function for easier use in the next patch.
-
-
-That last bit was actually done in the previous patch, rather than this
-one, right?
-
 > 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> ---
->  mm/readahead.c | 31 +++++++++++++++++++------------
->  1 file changed, 19 insertions(+), 12 deletions(-)
-> 
-> diff --git a/mm/readahead.c b/mm/readahead.c
-> index 15329309231f..74791b96013f 100644
-> --- a/mm/readahead.c
-> +++ b/mm/readahead.c
-> @@ -154,7 +154,6 @@ void __do_page_cache_readahead(struct address_space *mapping,
->  		unsigned long lookahead_size)
->  {
->  	struct inode *inode = mapping->host;
-> -	struct page *page;
->  	unsigned long end_index;	/* The last page we want to read */
->  	LIST_HEAD(page_pool);
->  	int page_idx;
-> @@ -163,6 +162,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
->  	struct readahead_control rac = {
->  		.mapping = mapping,
->  		.file = filp,
-> +		._start = offset,
->  		._nr_pages = 0,
->  	};
->  
-> @@ -175,32 +175,39 @@ void __do_page_cache_readahead(struct address_space *mapping,
->  	 * Preallocate as many pages as we will need.
->  	 */
->  	for (page_idx = 0; page_idx < nr_to_read; page_idx++) {
-> -		pgoff_t page_offset = offset + page_idx;
 
-
-You know...this ends up incrementing offset each time through the
-loop, so yes, the behavior is the same as when using "offset + page_idx".
-However, now it's a little harder to see that.
-
-IMHO the page_offset variable is not actually a bad thing, here. I'd rather
-keep it, all other things being equal (and I don't see any other benefits
-here: line count is the same, for example).
-
-What do you think?
-
+Darn it, I incorrectly reviewed the N/16 patch, instead of the N/19, for 
+this one. I thought I had deleted all those! Let me try again with the
+correct patch, sorry!!
 
 thanks,
 -- 
 John Hubbard
 NVIDIA
 
-> +		struct page *page;
->  
-> -		if (page_offset > end_index)
-> +		if (offset > end_index)
->  			break;
->  
-> -		page = xa_load(&mapping->i_pages, page_offset);
-> +		page = xa_load(&mapping->i_pages, offset);
->  		if (page && !xa_is_value(page)) {
->  			/*
-> -			 * Page already present?  Kick off the current batch of
-> -			 * contiguous pages before continuing with the next
-> -			 * batch.
-> +			 * Page already present?  Kick off the current batch
-> +			 * of contiguous pages before continuing with the
-> +			 * next batch.  This page may be the one we would
-> +			 * have intended to mark as Readahead, but we don't
-> +			 * have a stable reference to this page, and it's
-> +			 * not worth getting one just for that.
->  			 */
-> -			if (readahead_count(&rac))
-> -				read_pages(&rac, &page_pool, gfp_mask);
-> -			rac._nr_pages = 0;
-> -			continue;
-> +			goto read;
->  		}
->  
->  		page = __page_cache_alloc(gfp_mask);
->  		if (!page)
->  			break;
-> -		page->index = page_offset;
-> +		page->index = offset;
->  		list_add(&page->lru, &page_pool);
->  		if (page_idx == nr_to_read - lookahead_size)
->  			SetPageReadahead(page);
->  		rac._nr_pages++;
-> +		offset++;
-> +		continue;
-> +read:
-> +		if (readahead_count(&rac))
-> +			read_pages(&rac, &page_pool, gfp_mask);
-> +		rac._nr_pages = 0;
-> +		rac._start = ++offset;
->  	}
->  
->  	/*
+> OK...presumably for the benefit of a following patch, since it is not 
+> actually consumed in this patch.
+> 
+>> readahead_control, and move the 'kick off a fresh batch' code to
+>> the end of the function for easier use in the next patch.
+> 
+> 
+> That last bit was actually done in the previous patch, rather than this
+> one, right?
+> 
+>>
+>> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+>> ---
+>>  mm/readahead.c | 31 +++++++++++++++++++------------
+>>  1 file changed, 19 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/mm/readahead.c b/mm/readahead.c
+>> index 15329309231f..74791b96013f 100644
+>> --- a/mm/readahead.c
+>> +++ b/mm/readahead.c
+>> @@ -154,7 +154,6 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>>  		unsigned long lookahead_size)
+>>  {
+>>  	struct inode *inode = mapping->host;
+>> -	struct page *page;
+>>  	unsigned long end_index;	/* The last page we want to read */
+>>  	LIST_HEAD(page_pool);
+>>  	int page_idx;
+>> @@ -163,6 +162,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>>  	struct readahead_control rac = {
+>>  		.mapping = mapping,
+>>  		.file = filp,
+>> +		._start = offset,
+>>  		._nr_pages = 0,
+>>  	};
+>>  
+>> @@ -175,32 +175,39 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>>  	 * Preallocate as many pages as we will need.
+>>  	 */
+>>  	for (page_idx = 0; page_idx < nr_to_read; page_idx++) {
+>> -		pgoff_t page_offset = offset + page_idx;
+> 
+> 
+> You know...this ends up incrementing offset each time through the
+> loop, so yes, the behavior is the same as when using "offset + page_idx".
+> However, now it's a little harder to see that.
+> 
+> IMHO the page_offset variable is not actually a bad thing, here. I'd rather
+> keep it, all other things being equal (and I don't see any other benefits
+> here: line count is the same, for example).
+> 
+> What do you think?
+> 
+> 
+> thanks,
 > 
 
 
