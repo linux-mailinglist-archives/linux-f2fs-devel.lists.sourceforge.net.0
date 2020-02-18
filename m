@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6233616371D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 00:24:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D3DA163723
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 00:27:24 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4CEF-0001yt-MF; Tue, 18 Feb 2020 23:24:35 +0000
+	id 1j4CGx-00028M-5E; Tue, 18 Feb 2020 23:27:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1j4CE8-0001yQ-3O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:24:28 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1j4CGw-00028F-4Y
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:27:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tIzAEJsuLi1rhHTq8tVU+ryOfNddGx9piIKavCdaTgI=; b=Lk7J7FNzaN/dT3Gj859FxnxFOi
- d6ENbxcK1iI7enaNdTx7rsSI+9R33cYe3BnhWSu6r2CD1t7wqovqnOC3/qUOH3H/alze/Xe+kcc81
- Ph360gU8Re096vzUS6TmyCCOuOtBtGg0Tg+FxEcX7TbiM3pdkr8OQqn3dragwnht6zMc=;
+ bh=2Q66h4IwTYxpnVhZBYUGtGOc7bh9UbfLn7Cp9cfXUk8=; b=ZQfhH65VJ3HzsBpHY3cYU/Sa1R
+ Lx5yLbxbu6bsFrffN28Gyy9L6vF455AL9RO9HN8ElVTsCqJh6zsobfcDMXcat0IdkKMLcLpYHr+7E
+ xHP+647rgbQqoQ8RuagYXfLi1vuP0jfoKyP25Vo/H5Hk9bxmO0YAjOsgaXoOpCbGwrN4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tIzAEJsuLi1rhHTq8tVU+ryOfNddGx9piIKavCdaTgI=; b=eiuA7yij4fq9VPDa/tb+TP4hNs
- 7nBBOpnhRZ34QocDOJE+LpBd1vnEE28de7QpnGT9hycIZbbjfP67kiU1PS4dU+RgoiXuyQF5n2puy
- rdVzrtUEOypmQzqo9hc9eYBQHbYKATmhLgVxW4Aa+FaO/5jqgyZE3Z/Us/ex3wb9DG10=;
+ bh=2Q66h4IwTYxpnVhZBYUGtGOc7bh9UbfLn7Cp9cfXUk8=; b=P+6gRnT1CHs3bez9dmr5Atc79i
+ E1fstxDQKzjKxFJJiJqlGWKBztcQHj4A4BUS9yAoyNcDW4bP9krClBAyfvtkcZ8spueeo3uiyQmt3
+ dgeetIgZHB1At7p4dRamJBmxZqxCil4s0w4/0BTIjGvG1Pqf9sJTNNV3/fnqWeDsuXhE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4CE7-00H2Sg-2n
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:24:28 +0000
+ id 1j4CGv-007R7k-2o
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Feb 2020 23:27:22 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1B5F024655;
- Tue, 18 Feb 2020 23:24:14 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8492422B48;
+ Tue, 18 Feb 2020 23:27:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582068254;
- bh=cE1KL7ESu7HCICcE8VORkQLYSFi1c/bNZgc87tvL56Q=;
+ s=default; t=1582068434;
+ bh=rUP93xEkDhBdiO8ILugsojP+aU7U9As9cgAaxy/Sn8c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=zsp/4FRD1CWCCkP19KOIGA2baZ6zLP1vyNzO4mvzKrtGjtLqeHFRIYQeEnd2esFwO
- wbMHNod93deJ4d6Ail3dsW7kuEAu0Sdp0li82EdFJJEEBZHNaUbstYpaYm3H1kKvvn
- C3m/D9fZth1r/Hq9e3B5rjhKACO4QK2KwIjn63eU=
-Date: Tue, 18 Feb 2020 15:24:13 -0800
+ b=njxulyfwSmUPae6vEWrNK0WrXyb7Os08KUJex733g9Q3dyMQdDq4MQlW4XtlIO0RK
+ ORCfyAff92y7OrewyBZODjxSkQIBav7FI8QlooxmPiSrHHuce5EKGtZjqG55yETM06
+ 1j6iD8ucFY82Hgm1WVhGsIG7GWuXhWHHaV7jaTok=
+Date: Tue, 18 Feb 2020 15:27:14 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200218232413.GA10213@google.com>
-References: <20200214094413.12784-1-yuchao0@huawei.com>
- <20200214094413.12784-3-yuchao0@huawei.com>
- <20200214184150.GB60913@google.com>
- <c0436553-a1b6-8124-a096-15d2c3d5bd79@huawei.com>
+Message-ID: <20200218232714.GB10213@google.com>
+References: <20200214185855.217360-1-jaegeuk@kernel.org>
+ <20200214185855.217360-3-jaegeuk@kernel.org>
+ <9c497f3e-3399-e4a6-f81c-6c4a1f35e5bb@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <c0436553-a1b6-8124-a096-15d2c3d5bd79@huawei.com>
+In-Reply-To: <9c497f3e-3399-e4a6-f81c-6c4a1f35e5bb@huawei.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -72,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1j4CE7-00H2Sg-2n
-Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: clean up lfs/adaptive mount option
+X-Headers-End: 1j4CGv-007R7k-2o
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: skip migration only when BG_GC is
+ called
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,37 +91,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 02/17, Chao Yu wrote:
-> On 2020/2/15 2:41, Jaegeuk Kim wrote:
-> >> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> >> index 5152e9bf432b..d2d50827772c 100644
-> >> --- a/fs/f2fs/f2fs.h
-> >> +++ b/fs/f2fs/f2fs.h
-> >> @@ -91,8 +91,6 @@ extern const char *f2fs_fault_name[FAULT_MAX];
-> >>  #define F2FS_MOUNT_FORCE_FG_GC		0x00004000
-> >>  #define F2FS_MOUNT_DATA_FLUSH		0x00008000
-> >>  #define F2FS_MOUNT_FAULT_INJECTION	0x00010000
-> >> -#define F2FS_MOUNT_ADAPTIVE		0x00020000
-> >> -#define F2FS_MOUNT_LFS			0x00040000
+> On 2020/2/15 2:58, Jaegeuk Kim wrote:
+> > FG_GC needs to move entire section more quickly.
 > > 
-> > I don't think we can remove this simply.
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > ---
+> >  fs/f2fs/gc.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > 
-> >>  #define F2FS_MOUNT_USRQUOTA		0x00080000
-> >>  #define F2FS_MOUNT_GRPQUOTA		0x00100000
-> >>  #define F2FS_MOUNT_PRJQUOTA		0x00200000
+> > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> > index bbf4db3f6bb4..1676eebc8c8b 100644
+> > --- a/fs/f2fs/gc.c
+> > +++ b/fs/f2fs/gc.c
+> > @@ -1203,7 +1203,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+> >  
+> >  		if (get_valid_blocks(sbi, segno, false) == 0)
+> >  			goto freed;
+> > -		if (__is_large_section(sbi) &&
+> > +		if (gc_type == BG_GC && __is_large_section(sbi) &&
+> >  				migrated >= sbi->migration_granularity)
 > 
-> You mean getting rid of this change or we need to fill F2FS_MOUNT_* hole as below:
+> I knew migrating one large section is a more efficient way, but this can
+> increase long-tail latency of f2fs_balance_fs() occasionally, especially in
+> extreme fragmented space.
 
-nvm. So, we can reuse the removed bits later in other features.
+FG_GC requires to wait for whole section migration which shows the entire
+latency.
 
-> 
-> #define F2FS_MOUNT_FAULT_INJECTION	0x00010000
-> -#define F2FS_MOUNT_ADAPTIVE		0x00020000
-> -#define F2FS_MOUNT_LFS			0x00040000
-> +#define F2FS_MOUNT_USRQUOTA		0x00020000
-> +#define F2FS_MOUNT_GRPQUOTA		0x00040000
-> ...
 > 
 > Thanks,
+> 
+> >  			goto skip;
+> >  		if (!PageUptodate(sum_page) || unlikely(f2fs_cp_error(sbi)))
+> > 
 
 
 _______________________________________________
