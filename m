@@ -2,91 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A60B2164F61
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 20:58:59 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3557164FC9
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 21:24:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4VUm-0002DD-7h; Wed, 19 Feb 2020 19:58:56 +0000
+	id 1j4Vtg-0008Ls-Nm; Wed, 19 Feb 2020 20:24:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <andrew.p.norrie@gmail.com>) id 1j4VUk-0002Cv-JG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 19:58:54 +0000
+ (envelope-from <jhubbard@nvidia.com>) id 1j4Vtf-0008Ll-Va
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 20:24:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EE2YczNla8qcSD1v8Yhtpjh81Hi8Cqph0O/BaPLbCAQ=; b=TH/SEdJiM05SmHUuYrvlnOBSlj
- +dVIoVNdWV6obhjfLaADo4q/Rq3IjNJ4buj+QNOvSxGR7HD/CUEN3P7nL8FJJ/niRjPU9RttqnKHI
- VlsSXhkwm92y/10wy+/U8cYuQ277JW1r+iPD425LQK+pyyjHYFwuljnltGtIgmrMKyJg=;
+ bh=Stnn+zSSGNCFbZ988J4GuiCkm17Qbq44jVcYhuJTWJc=; b=W+hSnrDLfj3O5CurKtTkbd5V6s
+ kg9iaZkwUe/Hfgz169LTDm+leL78l7EX+WJWYKvznwQr7xdaIBR/zCZY4zSyF3cPt0SMrWzoeuR07
+ zKg0trwUgM9Zq0/cflxP9oEtFhrQ/GLp0C46+4/wSQ2qF8kgETJXA1Jhfc+BdNIH9WLA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EE2YczNla8qcSD1v8Yhtpjh81Hi8Cqph0O/BaPLbCAQ=; b=FuiOMFbuQq440pEjL6YrGIvLdn
- YZwjljuX4vnnkMNyOot1o1rFyWwEBYtKhI/BApRQbxhQt+WZr0gt3ph21kDD9h50fmRfINdRl5KTs
- i13poU9mb2dfGOrR/ZxWouzN9kURCYIL3ojc+9puRyKpY8aazCliCtaMk5H8c+5DwRuk=;
-Received: from mail-qv1-f66.google.com ([209.85.219.66])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1j4VUi-008QV0-KJ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 19:58:54 +0000
-Received: by mail-qv1-f66.google.com with SMTP id ff2so777273qvb.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 19 Feb 2020 11:58:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=EE2YczNla8qcSD1v8Yhtpjh81Hi8Cqph0O/BaPLbCAQ=;
- b=G1xtQrA+Fl4T+NuvpjF24JE+In7qYLxIVbRiQPkhWMC1ygQS53vX7qgTSJMWTK1yAo
- Fnxy/LLZlO9YMHyqOehXXfantuBgsWk1g8kgrvnXyuidsDUdQsLyt1rTnOGIQwyLGuIU
- HGm7wU+lOgUaYtDAA5xrONZf4U02774D8cZPxqI2iptCYE32M4ji1gZOfi2bgXgdYCBm
- 49/aFU3pEkkgxZlJBuLQR2S3S5uyUNHBH6Y8l7sc8MzEiiEgATMsMsbvswFymESb6z2f
- imR7csI3tgyJvoX49ybjwQDkDLW7BbsVmnemJTSEBOwtr8wfDCBflEPziuqtohqxBBCk
- 3EGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=EE2YczNla8qcSD1v8Yhtpjh81Hi8Cqph0O/BaPLbCAQ=;
- b=EZNK/uldETgkdsKeF/UW36RcllMOn/6ElmeTlZT6gMMclMobfDvstltAispr7EsIdz
- dNZ+Ljdax/wFG4QtOjVMDf5ryjX2xu5b/SK4gpO3brQrcSUBbTarMFWk8mS91ODYYqVG
- O9TDAV4EhWlwVhe3UzAjpVcg5pWKC6y1VhgzRbVpH3H+52Amvw/TYoj2IHoTio5bwY7f
- JQkOqVK+vVkqmz/WNZwaDMJ5PpxO7uMKx6/cda2zF/4NKK27Lrom6Ntu+qNEGpOmQMA3
- 9iGa22e8/dfnBpGboVOpBeMiuJByD3MiRTpfqiFGV/a5JEK2rHf0L7tEBuM4Ai0+gvQO
- VrNg==
-X-Gm-Message-State: APjAAAX7hKYbX0mq2kUgPLDpK4EDARzuH5Ya+lFQsm4n/tedw7HTRzXE
- VhhCJBYbVa5LC0sWEnHxDYc=
-X-Google-Smtp-Source: APXvYqxzp/p/uQ5OKuQzlRYvxU23dKiBTzDJThNZdRcJUJajNV++tcWXBL5KzKBvpWKSUDJ/qbow+A==
-X-Received: by 2002:a0c:f24a:: with SMTP id z10mr22861156qvl.33.1582142326588; 
- Wed, 19 Feb 2020 11:58:46 -0800 (PST)
-Received: from andrew4.ggf2gnjfztzulbq0d1gogf4ope.bx.internal.cloudapp.net
- ([52.224.106.77])
- by smtp.gmail.com with ESMTPSA id j28sm368751qki.61.2020.02.19.11.58.45
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Wed, 19 Feb 2020 11:58:46 -0800 (PST)
-From: Andrew Norrie <andrew.p.norrie@gmail.com>
-X-Google-Original-From: Andrew Norrie <andrew.norrie@cgg.com>
-To: bvanassche@acm.org
-Date: Wed, 19 Feb 2020 19:58:45 +0000
-Message-Id: <1582142325-40880-1-git-send-email-andrew.norrie@cgg.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <898950e4-3759-c78e-dd5d-422af9f8c507@acm.org>
-References: <898950e4-3759-c78e-dd5d-422af9f8c507@acm.org>
-X-Spam-Score: -0.1 (/)
+ bh=Stnn+zSSGNCFbZ988J4GuiCkm17Qbq44jVcYhuJTWJc=; b=hTsj7XzQonpH3YhrwpUn6pJ5VR
+ J7AX8Z68Gy9F3O7h3TbQMgTnnIM3FycmBhbcFlzfMyb2YccMqpRQpu2zubfkMlIbTVepZqfdfUmzi
+ ZvMVdgtSrGlrVRGG+8hGO7TutOlMybqRJKK0CCcwsTFiznBpOA7igJ7yJeEtYEzSXLWo=;
+Received: from hqnvemgate24.nvidia.com ([216.228.121.143])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1j4Vtb-0083jO-HF
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 20:24:39 +0000
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e4d99340000>; Wed, 19 Feb 2020 12:23:16 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Wed, 19 Feb 2020 12:24:27 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Wed, 19 Feb 2020 12:24:27 -0800
+Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 19 Feb
+ 2020 20:24:27 +0000
+To: Matthew Wilcox <willy@infradead.org>, Christoph Hellwig <hch@infradead.org>
+References: <20200217184613.19668-1-willy@infradead.org>
+ <20200217184613.19668-12-willy@infradead.org>
+ <e3671faa-dfb3-ceba-3120-a445b2982a95@nvidia.com>
+ <20200219144117.GP24185@bombadil.infradead.org>
+ <20200219145246.GA29869@infradead.org>
+ <20200219150103.GQ24185@bombadil.infradead.org>
+From: John Hubbard <jhubbard@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <a5f8ba4c-8413-2633-9523-5b5941c0762b@nvidia.com>
+Date: Wed, 19 Feb 2020 12:24:26 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <20200219150103.GQ24185@bombadil.infradead.org>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1582143796; bh=Stnn+zSSGNCFbZ988J4GuiCkm17Qbq44jVcYhuJTWJc=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=PoUTRdSyZJ3hX2dxzQISosJ/wVYoveMKl+7atg1sDrOWdAAaYMtdVxq7QyYHhh7xe
+ EvTmBI7/rq4HLGscXS8LPXNBnQ1Jix4flhNHGsxk201kSI8sMpgUmQGRpk7I9BpUhS
+ +KjQiwXIyu9koQoSyGAly8ElawI2qpwAoJWQDFM4pVRo/Z9yKmG/dGB+jg0mlia4Y2
+ aAY4dZzfwP+DRcHOuBWJl3IdIgHWxdpwgzTmZEfGVW+WOZbqKq5bU129bePvvI5bU1
+ dYKswZNLebiNLPAg01grHG4u36LomMBF2QsjP/hPLPNASaXyUhQMXbUJhq2V3Ktwp6
+ cwNUY5UNidflg==
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (andrew.p.norrie[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.219.66 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.66 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -94,9 +89,11 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1j4VUi-008QV0-KJ
-Subject: Re: [f2fs-dev] [PATCH v3] loop: avoid EAGAIN,
- if offset or block_size are changed
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j4Vtb-0083jO-HF
+Subject: Re: [f2fs-dev] [PATCH v6 07/19] mm: Put readahead pages in cache
+ earlier
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,19 +105,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: axboe@kernel.dk, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- jaegeuk@kernel.org
-MIME-Version: 1.0
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+On 2/19/20 7:01 AM, Matthew Wilcox wrote:
+> On Wed, Feb 19, 2020 at 06:52:46AM -0800, Christoph Hellwig wrote:
+>> On Wed, Feb 19, 2020 at 06:41:17AM -0800, Matthew Wilcox wrote:
+>>> #define readahead_for_each(rac, page)                                   \
+>>>         while ((page = readahead_page(rac)))
+>>>
+>>> No more readahead_next() to forget to add to filesystems which don't use
+>>> the readahead_for_each() iterator.  Ahem.
 
-Just checking again the status of this patch?
-It doesn't look like it's made it into the kernel yet?
 
+Yes, this looks very clean. And less error-prone, which I definitely
+appreciate too. :)
+
+
+>>
+>> And then kill readahead_for_each and open code the above to make it
+>> even more obvious?
+> 
+> Makes sense.
+> 
+
+Great!
+
+
+thanks,
+-- 
+John Hubbard
+NVIDIA
 
 
 _______________________________________________
