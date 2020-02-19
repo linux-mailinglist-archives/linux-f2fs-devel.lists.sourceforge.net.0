@@ -2,76 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF973163A18
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 03:23:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D3A4163A4A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 03:36:00 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4F1H-0006Ty-3h; Wed, 19 Feb 2020 02:23:23 +0000
+	id 1j4FDR-000801-0z; Wed, 19 Feb 2020 02:35:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j4F1F-0006Ta-AV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 02:23:21 +0000
+ (envelope-from <gaoxiang25@huawei.com>) id 1j4FDN-0007zZ-PK
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 02:35:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:CC:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AmBYu3mpTxz55oEbZdrXdPhOFuVVUVpBKAkDMjhC+bk=; b=MXoYEBiTWh13aQIi7Z2jBr1CA/
- AMRsLl+bvSNo/AfM/yNUQsZQ0LdQJEYbC9LP5unzxUKV+iOk8BhJ9QOi7vSiYAOw1muhSGPHMlJ0B
- xjf8mWRR8/aE12q0W7dSH+6+hiMQUY5amovGgYxX5OTkO5cjqVHe/CUguPOGShL3Aqtk=;
+ bh=/a0NQp4kWqGbQgegzo0R4F7oTaDb4qIVFekj0jtG+Vg=; b=Aj06BoOQJDWmaS8MWjAEODxAuq
+ ASBUQ/IsEtKP5iw4TuSZLoSfYsPoeQv3xqVY1Eejv9e1tHP4BXIk4x2NH0eU24JtS3xiYHgw7J5vD
+ dz+QN5R3g+51Wpf0xQ5Scg+de+gk1/EzIgxM3NltqvGc/rTq9HVswSjIJGSKdaFcRn6M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:CC:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AmBYu3mpTxz55oEbZdrXdPhOFuVVUVpBKAkDMjhC+bk=; b=EieaeMPmVkZXg6LexxE7IB2pR9
- He20eyaPVkzMriwoAqY9XTfNIZjADms4GpAv0Et7DaB56XztYf5uJuMaCMLCybTcCN0D/eNgx03Ve
- nE8S+N7rPyrmK2ZailrC+mwtV9bQee1rypxw25yvPiw7aoGVd+DwmA87tMq9vz1IPSaQ=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=/a0NQp4kWqGbQgegzo0R4F7oTaDb4qIVFekj0jtG+Vg=; b=gIV1YAh0AFHjk6ancpZyT46n93
+ 3NueCQoIJsZogU77LteACWkuMalrsArYalxRhAg7+ZNNd3EfxBjVgRE0n2JReASerL7IFQK4+unQe
+ 0Lb7yyIklpL+kW9EiQiiWLGgIiKnfRAkridI42hmiJK1ok/438xEJqT3it8K2O7xZ5VQ=;
+Received: from szxga02-in.huawei.com ([45.249.212.188] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4F1D-007VU6-AN
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 02:23:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=AmBYu3mpTxz55oEbZdrXdPhOFuVVUVpBKAkDMjhC+bk=; b=ZnvNzleUFxBP7YT/XJ7y0Rz/bu
- VkddBEMMXKNPUEPIHNmeV0img3eiMCgmTDLWhnmF0LgRkhumSClEFtJ8h9QNQ1gTWJ7cQ7oYl5y2T
- LQq1+MXm3VWWly+rUeCiBOlqF7kPYFOalIjZFbqYzu76qbt0PLrQYATKJKLlxP1jWBvgL8vVEl1oK
- PZK3QLY1XvI1RwzN3cfFLeaib3/PQmj6eNOnYQSQu+wNZ3jLp3NgdPPwpBmDQq/4dju6xWjfr9B1l
- Je53RqtXvIb3d5xbLSBBBArNi+TgTTRpln+YO9xoRn4KQfP+zLPQhoOJyXxsL0Z4nCcXJHdASLsqc
- D4fDP3AQ==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j4F0v-0003R5-2P; Wed, 19 Feb 2020 02:23:01 +0000
-Date: Tue, 18 Feb 2020 18:23:00 -0800
-From: Matthew Wilcox <willy@infradead.org>
-To: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <20200219022300.GJ24185@bombadil.infradead.org>
+ id 1j4FDL-007Vhf-Ur
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 02:35:53 +0000
+Received: from DGGEMM404-HUB.china.huawei.com (unknown [172.30.72.53])
+ by Forcepoint Email with ESMTP id 83358F8D75B7100BDEA5;
+ Wed, 19 Feb 2020 10:35:42 +0800 (CST)
+Received: from dggeme762-chm.china.huawei.com (10.3.19.108) by
+ DGGEMM404-HUB.china.huawei.com (10.3.20.212) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Wed, 19 Feb 2020 10:35:42 +0800
+Received: from architecture4 (10.160.196.180) by
+ dggeme762-chm.china.huawei.com (10.3.19.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1713.5; Wed, 19 Feb 2020 10:35:41 +0800
+Date: Wed, 19 Feb 2020 10:34:22 +0800
+From: Gao Xiang <gaoxiang25@huawei.com>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200219023422.GA83440@architecture4>
 References: <20200217184613.19668-1-willy@infradead.org>
- <20200217184613.19668-16-willy@infradead.org>
- <1263603d-f446-c447-2eac-697d105fa76c@nvidia.com>
+ <20200217184613.19668-20-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1263603d-f446-c447-2eac-697d105fa76c@nvidia.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20200217184613.19668-20-willy@infradead.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Originating-IP: [10.160.196.180]
+X-ClientProxiedBy: dggeme706-chm.china.huawei.com (10.1.199.102) To
+ dggeme762-chm.china.huawei.com (10.3.19.108)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4F1D-007VU6-AN
-Subject: Re: [f2fs-dev] [PATCH v6 09/19] mm: Add page_cache_readahead_limit
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: infradead.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1j4FDL-007Vhf-Ur
+Subject: Re: [f2fs-dev] [PATCH v6 11/16] erofs: Convert compressed files
+ from readpages to readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,84 +93,97 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 18, 2020 at 05:32:31PM -0800, John Hubbard wrote:
-> > +			page_cache_readahead_limit(inode->i_mapping, NULL,
-> > +					index, LONG_MAX, num_ra_pages, 0);
+On Mon, Feb 17, 2020 at 10:46:00AM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> 
+> Use the new readahead operation in erofs.
+> 
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+
+It looks good to me, although some further optimization exists
+but we could make a straight-forward transform first, and
+I haven't tested the whole series for now...
+Will test it later.
+
+Acked-by: Gao Xiang <gaoxiang25@huawei.com>
+
+Thanks,
+Gao Xiang
+
+> ---
+>  fs/erofs/zdata.c | 29 +++++++++--------------------
+>  1 file changed, 9 insertions(+), 20 deletions(-)
+> 
+> diff --git a/fs/erofs/zdata.c b/fs/erofs/zdata.c
+> index 17f45fcb8c5c..7c02015d501d 100644
+> --- a/fs/erofs/zdata.c
+> +++ b/fs/erofs/zdata.c
+> @@ -1303,28 +1303,23 @@ static bool should_decompress_synchronously(struct erofs_sb_info *sbi,
+>  	return nr <= sbi->max_sync_decompress_pages;
+>  }
+>  
+> -static int z_erofs_readpages(struct file *filp, struct address_space *mapping,
+> -			     struct list_head *pages, unsigned int nr_pages)
+> +static void z_erofs_readahead(struct readahead_control *rac)
+>  {
+> -	struct inode *const inode = mapping->host;
+> +	struct inode *const inode = rac->mapping->host;
+>  	struct erofs_sb_info *const sbi = EROFS_I_SB(inode);
+>  
+> -	bool sync = should_decompress_synchronously(sbi, nr_pages);
+> +	bool sync = should_decompress_synchronously(sbi, readahead_count(rac));
+>  	struct z_erofs_decompress_frontend f = DECOMPRESS_FRONTEND_INIT(inode);
+> -	gfp_t gfp = mapping_gfp_constraint(mapping, GFP_KERNEL);
+> -	struct page *head = NULL;
+> +	struct page *page, *head = NULL;
+>  	LIST_HEAD(pagepool);
+>  
+> -	trace_erofs_readpages(mapping->host, lru_to_page(pages)->index,
+> -			      nr_pages, false);
+> +	trace_erofs_readpages(inode, readahead_index(rac),
+> +			readahead_count(rac), false);
+>  
+> -	f.headoffset = (erofs_off_t)lru_to_page(pages)->index << PAGE_SHIFT;
+> -
+> -	for (; nr_pages; --nr_pages) {
+> -		struct page *page = lru_to_page(pages);
+> +	f.headoffset = readahead_offset(rac);
+>  
+> +	readahead_for_each(rac, page) {
+>  		prefetchw(&page->flags);
+> -		list_del(&page->lru);
+>  
+>  		/*
+>  		 * A pure asynchronous readahead is indicated if
+> @@ -1333,11 +1328,6 @@ static int z_erofs_readpages(struct file *filp, struct address_space *mapping,
+>  		 */
+>  		sync &= !(PageReadahead(page) && !head);
+>  
+> -		if (add_to_page_cache_lru(page, mapping, page->index, gfp)) {
+> -			list_add(&page->lru, &pagepool);
+> -			continue;
+> -		}
+> -
+>  		set_page_private(page, (unsigned long)head);
+>  		head = page;
+>  	}
+> @@ -1366,11 +1356,10 @@ static int z_erofs_readpages(struct file *filp, struct address_space *mapping,
+>  
+>  	/* clean up the remaining free pages */
+>  	put_pages_list(&pagepool);
+> -	return 0;
+>  }
+>  
+>  const struct address_space_operations z_erofs_aops = {
+>  	.readpage = z_erofs_readpage,
+> -	.readpages = z_erofs_readpages,
+> +	.readahead = z_erofs_readahead,
+>  };
+>  
+> -- 
+> 2.25.0
 > 
 > 
-> LONG_MAX seems bold at first, but then again I can't think of anything smaller 
-> that makes any sense, and the previous code didn't have a limit either...OK.
-
-Probably worth looking at Dave's review of this and what we've just
-negotiated on the other subthread ... LONG_MAX is gone.
-
-> I also wondered about the NULL file parameter, and wonder if we're stripping out
-> information that is needed for authentication, given that that's what the newly
-> written kerneldoc says the "file" arg is for. But it seems that if we're this 
-> deep in the fs code's read routines, file system authentication has long since 
-> been addressed.
-
-The authentication is for network filesystems.  Local filesystems
-generally don't use the 'file' parameter, and since we're going to be
-calling back into the filesystem's own readahead routine, we know it's
-not needed.
-
-> Any actually I don't yet (still working through the patches) see any authentication,
-> so maybe that parameter will turn out to be unnecessary.
-> 
-> Anyway, It's nice to see this factored out into a single routine.
-
-I'm kind of thinking about pushing the rac in the other direction too,
-so page_cache_readahead_unlimited(rac, nr_to_read, lookahead_size).
-
-> > +/**
-> > + * page_cache_readahead_limit - Start readahead beyond a file's i_size.
-> 
-> 
-> Maybe: 
-> 
->     "Start readahead to a caller-specified end point" ?
-> 
-> (It's only *potentially* beyond files's i_size.)
-
-My current tree has:
- * page_cache_readahead_exceed - Start unchecked readahead.
-
-
-> > + * @mapping: File address space.
-> > + * @file: This instance of the open file; used for authentication.
-> > + * @offset: First page index to read.
-> > + * @end_index: The maximum page index to read.
-> > + * @nr_to_read: The number of pages to read.
-> 
-> 
-> How about:
-> 
->     "The number of pages to read, as long as end_index is not exceeded."
-
-API change makes this irrelevant ;-)
-
-> > + * @lookahead_size: Where to start the next readahead.
-> 
-> Pre-existing, but...it's hard to understand how a size is "where to start".
-> Should we rename this arg?
-
-It should probably be lookahead_count.
-
-> > + *
-> > + * This function is for filesystems to call when they want to start
-> > + * readahead potentially beyond a file's stated i_size.  If you want
-> > + * to start readahead on a normal file, you probably want to call
-> > + * page_cache_async_readahead() or page_cache_sync_readahead() instead.
-> > + *
-> > + * Context: File is referenced by caller.  Mutexes may be held by caller.
-> > + * May sleep, but will not reenter filesystem to reclaim memory.
-> 
-> In fact, can we say "must not reenter filesystem"? 
-
-I think it depends which side of the API you're looking at which wording
-you prefer ;-)
-
 
 
 _______________________________________________
