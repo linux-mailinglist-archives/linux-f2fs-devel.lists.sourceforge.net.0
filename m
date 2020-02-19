@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C047C165086
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 22:01:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E8541650A0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 22:01:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4WTG-0002W9-J6; Wed, 19 Feb 2020 21:01:26 +0000
+	id 1j4WTO-0002Rl-A0; Wed, 19 Feb 2020 21:01:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j4WT7-0002TZ-RV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:17 +0000
+ (envelope-from <willy@infradead.org>) id 1j4WTD-0002PT-OX
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8zYEi4IG7gzAvMHdDHY3fStOc4dh5wVqKWm99G/lD2Q=; b=V1UrpUe/qpAgLXbMzc2FGvyedt
- Jot4/ezqS2muNdguuHuFE6B2EYK2cMa1NWi6E3NrCkrEq1WwxM9ih0d+xE0uoN7may3OtIMtaFeGo
- kvzTENMM21Uv1YnMjhejBw3a7jg9IE9/qdktxI+dntsk+dlYp3nLmfQwvfQyglK6qFYs=;
+ bh=xVXe2mHxuFlpJauTFAREACgBtskK8JQqv16NulPdwMo=; b=Ys6Ra58tgcccdfeGcxm1W1iJXO
+ a3yHkUWui57mVlhFnsotUb5YF7zIimAN5LQuLFGFGPCtut/3oqrVkiG0e0wEgXLC9gupFrgObz2gd
+ 5XbNnqeV5kBx+MLOF00g5/Rpymd00QOBNHqX+VAh21xv6FE5GJNYjfLXLr310c8D+7ts=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8zYEi4IG7gzAvMHdDHY3fStOc4dh5wVqKWm99G/lD2Q=; b=NDqq4BXaNZ2edLdFHqjTdwRYu8
- RSYH6JKkex3t18TEt2FaHgAPyyPv0cPQ2LISrVF0oKYMjeg7R6ntKSK3a2VEFZ5o5K2TPVIgIcZS/
- z5lk1xNI1UYbdEjE0qp2wn7Q6u2S7LPKc4VqsrObJLp2WcxkMh0cwAvgpE+212LxArrI=;
+ bh=xVXe2mHxuFlpJauTFAREACgBtskK8JQqv16NulPdwMo=; b=mAo3H2Hn9UiRBTNbLJp/oqlGnn
+ BR5ZEhLXMXxuvNr49oE2Mln7XjCWEKykWm2zoWhvnm4FaZNkf9F1RcRyd4li+VoXdTY/QJk3KuPEL
+ /AUklljnrkqr7HKShduB4/AWYshdpjHZYTQPVRprUVMSLQRDPyI625E2cQgfEKgrqp9Q=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4WT4-000Gis-UN
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:17 +0000
+ id 1j4WT8-0084mX-Af
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=8zYEi4IG7gzAvMHdDHY3fStOc4dh5wVqKWm99G/lD2Q=; b=Rr0Isn6KV0yiQsuTepKXa8KVhx
- +JyO+IlvzFzA0z8sV2iMvtsm9Pv6cgJBZMIpSg1cP4Tx/ZMk08ueKIw29L1ptgphnFq+2Q+86II+5
- PJNKMmaiCDdBTTJcDI/iXmLXg84N2WswF5/urdiVm5BTv6ykoK2n3od2eyCx5s1P6nY1KF4YFoSKI
- volIkWq8cBw6eiWFrgoZdNhCO9tAL9ZiLKXZMPI9znsj3s/nMwWW9pTQdBxelt0H9avPXVOec5UVz
- t7L9I6CkSyQomfI4fzLa6hPYbkKOJATGVMcI+Zu0LuHW7aFhXW23e3VE3cpt3VyFwn6ldkAqvOfZV
- bM3ipe0w==;
+ bh=xVXe2mHxuFlpJauTFAREACgBtskK8JQqv16NulPdwMo=; b=F3kXDDpZ016zj77nzf3xs9HNhB
+ c39hgvEiXMXpDmXJJghRyVbQMd9bQMtSAzeQLHly/ybPqD2ydVSEI4rkiaB9n4MrV5lJMO5TAOHpT
+ LsA4+sqAh3sjH6idXLPtUndMdxvuT67kL2DMo4IotYTvlEvyNqU15dBP/gmtAHMJiYi1zlhefB+pQ
+ okljimRMCao3QCzBUAxBJQKIRfcethiQohvU/9XCsH/VS+Vpp+HAgX2+R1ONMyFmghwTrN6Tmau8B
+ beKkIxg+LolJhz+78XZwS7VZsuxlQ7gLLHa+AyMl78a/LXsGBf7EVWA8feUeASUtSsf4m1jAST6h0
+ JPdvTb6Q==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j4WSv-0008VZ-JM; Wed, 19 Feb 2020 21:01:05 +0000
+ Hat Linux)) id 1j4WSv-0008Ve-Kf; Wed, 19 Feb 2020 21:01:05 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed, 19 Feb 2020 13:01:02 -0800
-Message-Id: <20200219210103.32400-24-willy@infradead.org>
+Date: Wed, 19 Feb 2020 13:01:03 -0800
+Message-Id: <20200219210103.32400-25-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200219210103.32400-1-willy@infradead.org>
 References: <20200219210103.32400-1-willy@infradead.org>
@@ -72,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4WT4-000Gis-UN
-Subject: [f2fs-dev] [PATCH v7 23/24] mm: Document why we don't set
- PageReadahead
+X-Headers-End: 1j4WT8-0084mX-Af
+Subject: [f2fs-dev] [PATCH v7 24/24] mm: Use memalloc_nofs_save in readahead
+ path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,10 +86,12 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, Michal Hocko <mhocko@suse.com>,
+ linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
+ Cong Wang <xiyou.wangcong@gmail.com>, linux-ext4@vger.kernel.org,
  linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -97,33 +99,57 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-If the page is already in cache, we don't set PageReadahead on it.
+Ensure that memory allocations in the readahead path do not attempt to
+reclaim file-backed pages, which could lead to a deadlock.  It is
+possible, though unlikely this is the root cause of a problem observed
+by Cong Wang.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+Reported-by: Cong Wang <xiyou.wangcong@gmail.com>
+Suggested-by: Michal Hocko <mhocko@suse.com>
 ---
- mm/readahead.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ mm/readahead.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/mm/readahead.c b/mm/readahead.c
-index 453ef146de83..bbe7208fcc2d 100644
+index bbe7208fcc2d..9fb5f77dcf69 100644
 --- a/mm/readahead.c
 +++ b/mm/readahead.c
-@@ -196,9 +196,12 @@ void page_cache_readahead_unbounded(struct address_space *mapping,
+@@ -22,6 +22,7 @@
+ #include <linux/mm_inline.h>
+ #include <linux/blk-cgroup.h>
+ #include <linux/fadvise.h>
++#include <linux/sched/mm.h>
  
- 		if (page && !xa_is_value(page)) {
- 			/*
--			 * Page already present?  Kick off the current batch of
--			 * contiguous pages before continuing with the next
--			 * batch.
-+			 * Page already present?  Kick off the current batch
-+			 * of contiguous pages before continuing with the
-+			 * next batch.  This page may be the one we would
-+			 * have intended to mark as Readahead, but we don't
-+			 * have a stable reference to this page, and it's
-+			 * not worth getting one just for that.
- 			 */
- 			read_pages(&rac, &page_pool);
- 			continue;
+ #include "internal.h"
+ 
+@@ -186,6 +187,18 @@ void page_cache_readahead_unbounded(struct address_space *mapping,
+ 	};
+ 	unsigned long i;
+ 
++	/*
++	 * Partway through the readahead operation, we will have added
++	 * locked pages to the page cache, but will not yet have submitted
++	 * them for I/O.  Adding another page may need to allocate memory,
++	 * which can trigger memory reclaim.  Telling the VM we're in
++	 * the middle of a filesystem operation will cause it to not
++	 * touch file-backed pages, preventing a deadlock.  Most (all?)
++	 * filesystems already specify __GFP_NOFS in their mapping's
++	 * gfp_mask, but let's be explicit here.
++	 */
++	unsigned int nofs = memalloc_nofs_save();
++
+ 	/*
+ 	 * Preallocate as many pages as we will need.
+ 	 */
+@@ -230,6 +243,7 @@ void page_cache_readahead_unbounded(struct address_space *mapping,
+ 	 * will then handle the error.
+ 	 */
+ 	read_pages(&rac, &page_pool);
++	memalloc_nofs_restore(nofs);
+ }
+ EXPORT_SYMBOL_GPL(page_cache_readahead_unbounded);
+ 
 -- 
 2.25.0
 
