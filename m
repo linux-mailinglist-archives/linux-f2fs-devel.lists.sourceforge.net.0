@@ -2,79 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38D27163BB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 04:57:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1455163C75
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 06:22:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4GUN-0003UD-Sg; Wed, 19 Feb 2020 03:57:31 +0000
+	id 1j4Hov-0000vK-Jc; Wed, 19 Feb 2020 05:22:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1j4GUM-0003Ty-2r
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:57:30 +0000
+ (envelope-from <willy@infradead.org>) id 1j4Hou-0000vE-Du
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 05:22:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6UGsKUfklF+XxwPnTtZqjA1giwm2crvQxVLfc+LHshE=; b=j17fUn1DBlbfMoYdbTGWn18CdF
- HAi5Whx4h7FaNtNnCObs6Y+CBM3Irmv/+/RxW9DeJqZR0hATrw7iYhljlqstTgXVJUcY50nUTHwUu
- t3zV4H/bb1ZXkjDgXoIla8ecZgtWDWEg61Rrcn/9PW5ozG7vipcyRl1xV0OFQIiTrOJc=;
+ bh=v3wjYvTxIvyqdBjcTZbZ6V6XXTZeeNXrItglyOMcggo=; b=mSVxbuxdxVbW9TQcSufvektrMa
+ GWZv8ZL5wA67rI2P+W8d3Br5Y94zG0EVD0RpQsiPQOESsca7H3+/h/5afS0UnTm0GXDyCJ9vZFdB/
+ fX+wvAIceTHXj1i0G7JZTKdQop/zC6rQq6BQMli5ZlyW0zD1+DBvj9/5jZPW7vMUTPo4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6UGsKUfklF+XxwPnTtZqjA1giwm2crvQxVLfc+LHshE=; b=JFXxTsuPYlyJkr3ZwMoVtlthBV
- lJTIfE3eCfX91o2BUbClUUIIvYNLTXzSWbMeOJhdTY8iUok8Md8xbnO4p18DHiIPpg+xJSl1//4Qf
- T8krwI79SWyd5C40F7xQjqvrc8kLN2YGqdGdNew6eeLJw1R29zJzP54pMPZUf0t+EcPI=;
-Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1j4GUK-007XGA-FV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:57:30 +0000
-Received: from dread.disaster.area (pa49-179-138-28.pa.nsw.optusnet.com.au
- [49.179.138.28])
- by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id A8BC07EB672;
- Wed, 19 Feb 2020 14:57:21 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1j4GUC-0005gh-AV; Wed, 19 Feb 2020 14:57:20 +1100
-Date: Wed, 19 Feb 2020 14:57:20 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200219035720.GI10776@dread.disaster.area>
+ bh=v3wjYvTxIvyqdBjcTZbZ6V6XXTZeeNXrItglyOMcggo=; b=c6OGcCX/yaMOo72ucZ1bc9N+WH
+ YgsPHfRbGFeKi9u1CYl1mPPtIHkZNxohvQqGSbEk1sHfBnHqGT1OqQprz/TRx/YGA9UBWGNFtB9ov
+ uKxRIvc4XEJcFiwxHkzlNrhHW8la1dSReX0h3YbPCRFuFknx4AeXvwr2phYwSNcmq4tg=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1j4Hoq-007v9D-PR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 05:22:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=v3wjYvTxIvyqdBjcTZbZ6V6XXTZeeNXrItglyOMcggo=; b=Auyp6lhSbAEYNk7jcncbMkY0Ws
+ XinG1c/KH2WIappKRapF9o4axpn9L8oQskBlHlBLw9XQ0nXbJnkDsqfh2SkyzmQK0YhzpKp/QBFO0
+ bpEGyHFQ+YA3qxJU00WEU/tiwjkGuEnVYcW0g3zXVubgFDKWaDvoJvN6VkjVPrCo/uQ+QP9jf8QO3
+ 9qiXCqAzx7Awla3qaJlBefBlwM8EQeYBIUB12k8qt69YC/AIm0vwjb3K/41acVQTK6Lg81YYNgtrt
+ gWZkFfEHpJDHCeifbBhNb09jKli8nY0l/0Vau09mO9a0Cb/TiGxAZcwsAaM0Zi6C3GyPPjl+GKcMg
+ Evj5uHjQ==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1j4Hoc-0008Pr-3p; Wed, 19 Feb 2020 05:22:30 +0000
+Date: Tue, 18 Feb 2020 21:22:30 -0800
+From: Matthew Wilcox <willy@infradead.org>
+To: Dave Chinner <david@fromorbit.com>
+Message-ID: <20200219052230.GM24185@bombadil.infradead.org>
 References: <20200217184613.19668-1-willy@infradead.org>
- <20200218045633.GH10776@dread.disaster.area>
- <20200218134230.GN7778@bombadil.infradead.org>
- <20200218212652.GR10776@dread.disaster.area>
- <20200219034525.GH10776@dread.disaster.area>
- <20200219034832.GL24185@bombadil.infradead.org>
+ <20200217184613.19668-33-willy@infradead.org>
+ <20200219034324.GG10776@dread.disaster.area>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200219034832.GL24185@bombadil.infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=W5xGqiek c=1 sm=1 tr=0
- a=zAxSp4fFY/GQY8/esVNjqw==:117 a=zAxSp4fFY/GQY8/esVNjqw==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=IkcTkHD0fZMA:10 a=l697ptgUJYAA:10
- a=7-415B0cAAAA:8 a=4gE3ddVfANxGN4fhDGwA:9 a=QEXdDO2ut3YA:10
- a=biEYGPWJfzWAr4FL6Ov7:22
+In-Reply-To: <20200219034324.GG10776@dread.disaster.area>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fromorbit.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ for more information. [URIs: suse.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4GUK-007XGA-FV
-Subject: Re: [f2fs-dev] [PATCH v6 00/19] Change readahead API
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j4Hoq-007v9D-PR
+Subject: Re: [f2fs-dev] [PATCH v6 19/19] mm: Use memalloc_nofs_save in
+ readahead path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,61 +88,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, Michal Hocko <mhocko@suse.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ cluster-devel@redhat.com, linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
+ linux-fsdevel@vger.kernel.org, Cong Wang <xiyou.wangcong@gmail.com>,
  linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
  linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVHVlLCBGZWIgMTgsIDIwMjAgYXQgMDc6NDg6MzJQTSAtMDgwMCwgTWF0dGhldyBXaWxjb3gg
-d3JvdGU6Cj4gT24gV2VkLCBGZWIgMTksIDIwMjAgYXQgMDI6NDU6MjVQTSArMTEwMCwgRGF2ZSBD
-aGlubmVyIHdyb3RlOgo+ID4gT24gV2VkLCBGZWIgMTksIDIwMjAgYXQgMDg6MjY6NTJBTSArMTEw
-MCwgRGF2ZSBDaGlubmVyIHdyb3RlOgo+ID4gPiBPbiBUdWUsIEZlYiAxOCwgMjAyMCBhdCAwNTo0
-MjozMEFNIC0wODAwLCBNYXR0aGV3IFdpbGNveCB3cm90ZToKPiA+ID4gPiBPbiBUdWUsIEZlYiAx
-OCwgMjAyMCBhdCAwMzo1NjozM1BNICsxMTAwLCBEYXZlIENoaW5uZXIgd3JvdGU6Cj4gPiA+ID4g
-PiBMYXRlc3QgdmVyc2lvbiBpbiB5b3VyIGdpdCB0cmVlOgo+ID4gPiA+ID4gCj4gPiA+ID4gPiAk
-IOKWtiBnbG8gLW4gNSB3aWxseS9yZWFkYWhlYWQKPiA+ID4gPiA+IDRiZTQ5NzA5NmMwNCBtbTog
-VXNlIG1lbWFsbG9jX25vZnNfc2F2ZSBpbiByZWFkYWhlYWQgcGF0aAo+ID4gPiA+ID4gZmY2MzQ5
-N2ZjYjk4IGlvbWFwOiBDb252ZXJ0IGZyb20gcmVhZHBhZ2VzIHRvIHJlYWRhaGVhZAo+ID4gPiA+
-ID4gMjZhZWU2MGU4OWI1IGlvbWFwOiBSZXN0cnVjdHVyZSBpb21hcF9yZWFkcGFnZXNfYWN0b3IK
-PiA+ID4gPiA+IDgxMTViY2NhNzMxMiBmdXNlOiBDb252ZXJ0IGZyb20gcmVhZHBhZ2VzIHRvIHJl
-YWRhaGVhZAo+ID4gPiA+ID4gM2RiM2QxMGQ5ZWExIGYyZnM6IENvbnZlcnQgZnJvbSByZWFkcGFn
-ZXMgdG8gcmVhZGFoZWFkCj4gPiA+ID4gPiAkCj4gPiA+ID4gPiAKPiA+ID4gPiA+IG1lcmdlZCBp
-bnRvIGEgNS42LXJjMiB0cmVlIGZhaWxzIGF0IGJvb3Qgb24gbXkgdGVzdCB2bToKPiA+ID4gPiA+
-IAo+ID4gPiA+ID4gWyAgICAyLjQyMzExNl0gLS0tLS0tLS0tLS0tWyBjdXQgaGVyZSBdLS0tLS0t
-LS0tLS0tCj4gPiA+ID4gPiBbICAgIDIuNDI0OTU3XSBsaXN0X2FkZCBkb3VibGUgYWRkOiBuZXc9
-ZmZmZmVhMDAwZWZmZjRjOCwgcHJldj1mZmZmODg4M2JmZmZlZTYwLCBuZXh0PWZmZmZlYTAwMGVm
-ZmY0YzguCj4gPiA+ID4gPiBbICAgIDIuNDI4MjU5XSBXQVJOSU5HOiBDUFU6IDQgUElEOiAxIGF0
-IGxpYi9saXN0X2RlYnVnLmM6MjkgX19saXN0X2FkZF92YWxpZCsweDY3LzB4NzAKPiA+ID4gPiA+
-IFsgICAgMi40NTc0ODRdIENhbGwgVHJhY2U6Cj4gPiA+ID4gPiBbICAgIDIuNDU4MTcxXSAgX19w
-YWdldmVjX2xydV9hZGRfZm4rMHgxNWYvMHgyYzAKPiA+ID4gPiA+IFsgICAgMi40NTkzNzZdICBw
-YWdldmVjX2xydV9tb3ZlX2ZuKzB4ODcvMHhkMAo+ID4gPiA+ID4gWyAgICAyLjQ2MDUwMF0gID8g
-cGFnZXZlY19tb3ZlX3RhaWxfZm4rMHgyZDAvMHgyZDAKPiA+ID4gPiA+IFsgICAgMi40NjE3MTJd
-ICBscnVfYWRkX2RyYWluX2NwdSsweDhkLzB4MTYwCj4gPiA+ID4gPiBbICAgIDIuNDYyNzg3XSAg
-bHJ1X2FkZF9kcmFpbisweDE4LzB4MjAKPiA+ID4gPiAKPiA+ID4gPiBBcmUgeW91IHN1cmUgdGhh
-dCB3YXMgNGJlNDk3MDk2YzA0ID8gIEkgYXNrIGJlY2F1c2UgdGhlcmUgd2FzIGEKPiA+ID4gCj4g
-PiA+IFllcywgYmVjYXVzZSBpdCdzIHRoZSBvbmx5IHZlcnNpb24gSSd2ZSBhY3R1YWxseSBtZXJn
-ZWQgaW50byBteQo+ID4gPiB3b3JraW5nIHRyZWUsIGNvbXBpbGVkIGFuZCB0cmllZCB0byBydW4u
-IDpQCj4gPiA+IAo+ID4gPiA+IHZlcnNpb24gcHVzaGVkIHRvIHRoYXQgZ2l0IHRyZWUgdGhhdCBk
-aWQgY29udGFpbiBhIGxpc3QgZG91YmxlLWFkZAo+ID4gPiA+IChkdWUgdG8gYSBtaXNtZXJnZSB3
-aGVuIHNodWZmbGluZyBwYXRjaGVzKS4gIEkgbm90aWNlZCBpdCBhbmQgZml4ZWQKPiA+ID4gPiBp
-dCwgYW5kIDRiZTQ5NzA5NmMwNCBkb2Vzbid0IGhhdmUgdGhhdCBwcm9ibGVtLiAgSSBhbHNvIHRl
-c3Qgd2l0aAo+ID4gPiA+IENPTkZJR19ERUJVR19MSVNUIHR1cm5lZCBvbiwgYnV0IHRoaXMgcHJv
-YmxlbSB5b3UgaGl0IGlzIGdvaW5nIHRvIGJlCj4gPiA+ID4gcHJvYmFiaWxpc3RpYyBiZWNhdXNl
-IGl0J2xsIGRlcGVuZCBvbiB0aGUgdGltaW5nIGJldHdlZW4gd2hhdGV2ZXIgb3RoZXIKPiA+ID4g
-PiBsaXN0IGlzIGJlaW5nIHVzZWQgYW5kIHRoZSBwYWdlIGFjdHVhbGx5IGJlaW5nIGFkZGVkIHRv
-IHRoZSBMUlUuCj4gPiA+IAo+ID4gPiBJJ2xsIHNlZSBpZiBJIGNhbiByZXByb2R1Y2UgaXQuCj4g
-PiAKPiA+IEp1c3QgdXBkYXRlZCB0byBhIGN1cnJlbnQgVE9UIExpbnVzIGtlcm5lbCBhbmQgeW91
-ciBsYXRlc3QgYnJhbmNoLAo+ID4gYW5kIHNvIGZhciB0aGlzIGlzIDEwMCUgcmVwcm9kdWNhYmxl
-Lgo+ID4gCj4gPiBOb3Qgc3VyZSBob3cgSSdtIGdvaW5nIHRvIGRlYnVnIGl0IHlldCwgYmVjYXVz
-ZSBpdCdzIGluaXQgdGhhdCBpcwo+ID4gdHJpZ2dlcmluZyBpdC4uLi4KPiAKPiBFcmljIGZvdW5k
-IGl0IC4uLgoKWWVhaCwganVzdCBzYXcgdGhhdCBhbmQgYW0gYXBwbHlpbmcgaGlzIHBhdGNoIHRv
-IHRlc3QgaXQuLi4KCj4gc3RpbGwgbm90IHN1cmUgd2h5IEkgZG9uJ3Qgc2VlIGl0LgoKTm8gcmVh
-ZGFoZWFkIGNvbmZpZ3VyZWQgb24geW91ciBkZXZpY2U/CgoKQ2hlZXJzLAoKRGF2ZS4KLS0gCkRh
-dmUgQ2hpbm5lcgpkYXZpZEBmcm9tb3JiaXQuY29tCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGlu
-dXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
-b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On Wed, Feb 19, 2020 at 02:43:24PM +1100, Dave Chinner wrote:
+> On Mon, Feb 17, 2020 at 10:46:13AM -0800, Matthew Wilcox wrote:
+> > From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> > 
+> > Ensure that memory allocations in the readahead path do not attempt to
+> > reclaim file-backed pages, which could lead to a deadlock.  It is
+> > possible, though unlikely this is the root cause of a problem observed
+> > by Cong Wang.
+> > 
+> > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> > Reported-by: Cong Wang <xiyou.wangcong@gmail.com>
+> > Suggested-by: Michal Hocko <mhocko@suse.com>
+> > ---
+> >  mm/readahead.c | 14 ++++++++++++++
+> >  1 file changed, 14 insertions(+)
+> > 
+> > diff --git a/mm/readahead.c b/mm/readahead.c
+> > index 94d499cfb657..8f9c0dba24e7 100644
+> > --- a/mm/readahead.c
+> > +++ b/mm/readahead.c
+> > @@ -22,6 +22,7 @@
+> >  #include <linux/mm_inline.h>
+> >  #include <linux/blk-cgroup.h>
+> >  #include <linux/fadvise.h>
+> > +#include <linux/sched/mm.h>
+> >  
+> >  #include "internal.h"
+> >  
+> > @@ -174,6 +175,18 @@ void page_cache_readahead_limit(struct address_space *mapping,
+> >  		._nr_pages = 0,
+> >  	};
+> >  
+> > +	/*
+> > +	 * Partway through the readahead operation, we will have added
+> > +	 * locked pages to the page cache, but will not yet have submitted
+> > +	 * them for I/O.  Adding another page may need to allocate memory,
+> > +	 * which can trigger memory reclaim.  Telling the VM we're in
+> > +	 * the middle of a filesystem operation will cause it to not
+> > +	 * touch file-backed pages, preventing a deadlock.  Most (all?)
+> > +	 * filesystems already specify __GFP_NOFS in their mapping's
+> > +	 * gfp_mask, but let's be explicit here.
+> > +	 */
+> > +	unsigned int nofs = memalloc_nofs_save();
+> > +
+> 
+> So doesn't this largely remove the need for all the gfp flag futzing
+> in the readahead path? i.e. almost all readahead allocations are now
+> going to be GFP_NOFS | GFP_NORETRY | GFP_NOWARN ?
+
+I don't think it ensures the GFP_NORETRY | GFP_NOWARN, just the GFP_NOFS
+part.  IOW, we'll still need a readahead_gfp() macro at some point ... I
+don't want to add that to this already large series though.
+
+Michal also wants to kill mapping->gfp_mask, btw.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
