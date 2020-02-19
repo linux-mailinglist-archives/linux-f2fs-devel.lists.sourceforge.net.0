@@ -2,80 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F59C163BB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 04:56:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38D27163BB5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 04:57:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4GSu-00079H-EM; Wed, 19 Feb 2020 03:56:00 +0000
+	id 1j4GUN-0003UD-Sg; Wed, 19 Feb 2020 03:57:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1j4GSt-00079B-QQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:55:59 +0000
+ (envelope-from <david@fromorbit.com>) id 1j4GUM-0003Ty-2r
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:57:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2nAAEli+jakfqKTCQ/G+NGjm0+hN5m9VbdiYyldCHgc=; b=KcJbjK1CtaLu4Vie0ku0v1+8ZE
- i9XCNb02rkTbYGMEBg+469K4ChYyWRizpKPLMCHXKeCKjDtxjz9j4nq8SDaOmDJX7AIWrwOYBDKFh
- UmJj+sHGoy112mhLoST0rRjbp7qt4wfKxKGQfUYN16vw0wJECjNG3ptZwz/iTSwgtJ5g=;
+ bh=6UGsKUfklF+XxwPnTtZqjA1giwm2crvQxVLfc+LHshE=; b=j17fUn1DBlbfMoYdbTGWn18CdF
+ HAi5Whx4h7FaNtNnCObs6Y+CBM3Irmv/+/RxW9DeJqZR0hATrw7iYhljlqstTgXVJUcY50nUTHwUu
+ t3zV4H/bb1ZXkjDgXoIla8ecZgtWDWEg61Rrcn/9PW5ozG7vipcyRl1xV0OFQIiTrOJc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2nAAEli+jakfqKTCQ/G+NGjm0+hN5m9VbdiYyldCHgc=; b=fpy+4guMJ1WHm/zIBegMTvAa+A
- pW8WD/Ck51n6I+dmWAofS5NVKnxMd6gCvOOo2xTBPnpQEawN7hcyU5S4471FZm9jCD7WfmJgjIt6C
- kqVHirkDyB2kcllAsIpiiS23AvkJ31Vhwy/3JWAL3AuHKTz4iQoXLAYfWPUYZxFOp+ww=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4GSs-00HB30-N8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:55:59 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DCCEB206DB;
- Wed, 19 Feb 2020 03:55:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582084552;
- bh=ra63ctCM03qQ/yjMX6m08SRFO6UdUhDwmhqww51jeug=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cHpc7qeSZ/gAs6+Ko/Z9/c8wDmwW8WTd6Y9ysIVgBbEI5SGfvT8WdEDSgJvrnpRtd
- JfJgLR87X7pDZj1ZfCs4p5yM6PqBSZH+kh5NSfb+dGb2Fgl12LstCggu8oVIaphCC5
- XsxYNaY/zixWmZHQTqiVBZLArwLDm8F1awAYyw38=
-Date: Tue, 18 Feb 2020 19:55:50 -0800
-From: Eric Biggers <ebiggers@kernel.org>
+ bh=6UGsKUfklF+XxwPnTtZqjA1giwm2crvQxVLfc+LHshE=; b=JFXxTsuPYlyJkr3ZwMoVtlthBV
+ lJTIfE3eCfX91o2BUbClUUIIvYNLTXzSWbMeOJhdTY8iUok8Md8xbnO4p18DHiIPpg+xJSl1//4Qf
+ T8krwI79SWyd5C40F7xQjqvrc8kLN2YGqdGdNew6eeLJw1R29zJzP54pMPZUf0t+EcPI=;
+Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1j4GUK-007XGA-FV
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:57:30 +0000
+Received: from dread.disaster.area (pa49-179-138-28.pa.nsw.optusnet.com.au
+ [49.179.138.28])
+ by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id A8BC07EB672;
+ Wed, 19 Feb 2020 14:57:21 +1100 (AEDT)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1j4GUC-0005gh-AV; Wed, 19 Feb 2020 14:57:20 +1100
+Date: Wed, 19 Feb 2020 14:57:20 +1100
+From: Dave Chinner <david@fromorbit.com>
 To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200219035550.GE1075@sol.localdomain>
+Message-ID: <20200219035720.GI10776@dread.disaster.area>
 References: <20200217184613.19668-1-willy@infradead.org>
- <20200217184613.19668-18-willy@infradead.org>
- <20200219032826.GB1075@sol.localdomain>
- <20200219034741.GK24185@bombadil.infradead.org>
+ <20200218045633.GH10776@dread.disaster.area>
+ <20200218134230.GN7778@bombadil.infradead.org>
+ <20200218212652.GR10776@dread.disaster.area>
+ <20200219034525.GH10776@dread.disaster.area>
+ <20200219034832.GL24185@bombadil.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200219034741.GK24185@bombadil.infradead.org>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200219034832.GL24185@bombadil.infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.3 cv=W5xGqiek c=1 sm=1 tr=0
+ a=zAxSp4fFY/GQY8/esVNjqw==:117 a=zAxSp4fFY/GQY8/esVNjqw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=IkcTkHD0fZMA:10 a=l697ptgUJYAA:10
+ a=7-415B0cAAAA:8 a=4gE3ddVfANxGN4fhDGwA:9 a=QEXdDO2ut3YA:10
+ a=biEYGPWJfzWAr4FL6Ov7:22
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: fromorbit.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4GSs-00HB30-N8
-Subject: Re: [f2fs-dev] [PATCH v6 10/19] fs: Convert mpage_readpages to
- mpage_readahead
+X-Headers-End: 1j4GUK-007XGA-FV
+Subject: Re: [f2fs-dev] [PATCH v6 00/19] Change readahead API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,52 +86,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: cluster-devel@redhat.com, linux-ext4@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-mm@kvack.org, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Junxiao Bi <junxiao.bi@oracle.com>,
- linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 18, 2020 at 07:47:41PM -0800, Matthew Wilcox wrote:
-> On Tue, Feb 18, 2020 at 07:28:26PM -0800, Eric Biggers wrote:
-> > On Mon, Feb 17, 2020 at 10:45:58AM -0800, Matthew Wilcox wrote:
-> > > diff --git a/include/linux/mpage.h b/include/linux/mpage.h
-> > > index 001f1fcf9836..f4f5e90a6844 100644
-> > > --- a/include/linux/mpage.h
-> > > +++ b/include/linux/mpage.h
-> > > @@ -13,9 +13,9 @@
-> > >  #ifdef CONFIG_BLOCK
-> > >  
-> > >  struct writeback_control;
-> > > +struct readahead_control;
-> > >  
-> > > -int mpage_readpages(struct address_space *mapping, struct list_head *pages,
-> > > -				unsigned nr_pages, get_block_t get_block);
-> > > +void mpage_readahead(struct readahead_control *, get_block_t get_block);
-> > >  int mpage_readpage(struct page *page, get_block_t get_block);
-> > >  int mpage_writepages(struct address_space *mapping,
-> > >  		struct writeback_control *wbc, get_block_t get_block);
-> > 
-> > Can you name the 'struct readahead_control *' parameter?
-> 
-> What good would that do?  I'm sick of seeing 'struct page *page'.
-> Well, no shit it's a page.  Unless there's some actual information to
-> convey, leave the argument unnamed.  It should be a crime to not name
-> an unsigned long, but not naming the struct address_space pointer is
-> entirely reasonable.
-
-It's the coding style the community has agreed on, so the tools check for.
-
-I don't care that much myself; it just appeared like this was a mistake rather
-than intentional so I thought I'd point it out.
-
-- Eric
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gVHVlLCBGZWIgMTgsIDIwMjAgYXQgMDc6NDg6MzJQTSAtMDgwMCwgTWF0dGhldyBXaWxjb3gg
+d3JvdGU6Cj4gT24gV2VkLCBGZWIgMTksIDIwMjAgYXQgMDI6NDU6MjVQTSArMTEwMCwgRGF2ZSBD
+aGlubmVyIHdyb3RlOgo+ID4gT24gV2VkLCBGZWIgMTksIDIwMjAgYXQgMDg6MjY6NTJBTSArMTEw
+MCwgRGF2ZSBDaGlubmVyIHdyb3RlOgo+ID4gPiBPbiBUdWUsIEZlYiAxOCwgMjAyMCBhdCAwNTo0
+MjozMEFNIC0wODAwLCBNYXR0aGV3IFdpbGNveCB3cm90ZToKPiA+ID4gPiBPbiBUdWUsIEZlYiAx
+OCwgMjAyMCBhdCAwMzo1NjozM1BNICsxMTAwLCBEYXZlIENoaW5uZXIgd3JvdGU6Cj4gPiA+ID4g
+PiBMYXRlc3QgdmVyc2lvbiBpbiB5b3VyIGdpdCB0cmVlOgo+ID4gPiA+ID4gCj4gPiA+ID4gPiAk
+IOKWtiBnbG8gLW4gNSB3aWxseS9yZWFkYWhlYWQKPiA+ID4gPiA+IDRiZTQ5NzA5NmMwNCBtbTog
+VXNlIG1lbWFsbG9jX25vZnNfc2F2ZSBpbiByZWFkYWhlYWQgcGF0aAo+ID4gPiA+ID4gZmY2MzQ5
+N2ZjYjk4IGlvbWFwOiBDb252ZXJ0IGZyb20gcmVhZHBhZ2VzIHRvIHJlYWRhaGVhZAo+ID4gPiA+
+ID4gMjZhZWU2MGU4OWI1IGlvbWFwOiBSZXN0cnVjdHVyZSBpb21hcF9yZWFkcGFnZXNfYWN0b3IK
+PiA+ID4gPiA+IDgxMTViY2NhNzMxMiBmdXNlOiBDb252ZXJ0IGZyb20gcmVhZHBhZ2VzIHRvIHJl
+YWRhaGVhZAo+ID4gPiA+ID4gM2RiM2QxMGQ5ZWExIGYyZnM6IENvbnZlcnQgZnJvbSByZWFkcGFn
+ZXMgdG8gcmVhZGFoZWFkCj4gPiA+ID4gPiAkCj4gPiA+ID4gPiAKPiA+ID4gPiA+IG1lcmdlZCBp
+bnRvIGEgNS42LXJjMiB0cmVlIGZhaWxzIGF0IGJvb3Qgb24gbXkgdGVzdCB2bToKPiA+ID4gPiA+
+IAo+ID4gPiA+ID4gWyAgICAyLjQyMzExNl0gLS0tLS0tLS0tLS0tWyBjdXQgaGVyZSBdLS0tLS0t
+LS0tLS0tCj4gPiA+ID4gPiBbICAgIDIuNDI0OTU3XSBsaXN0X2FkZCBkb3VibGUgYWRkOiBuZXc9
+ZmZmZmVhMDAwZWZmZjRjOCwgcHJldj1mZmZmODg4M2JmZmZlZTYwLCBuZXh0PWZmZmZlYTAwMGVm
+ZmY0YzguCj4gPiA+ID4gPiBbICAgIDIuNDI4MjU5XSBXQVJOSU5HOiBDUFU6IDQgUElEOiAxIGF0
+IGxpYi9saXN0X2RlYnVnLmM6MjkgX19saXN0X2FkZF92YWxpZCsweDY3LzB4NzAKPiA+ID4gPiA+
+IFsgICAgMi40NTc0ODRdIENhbGwgVHJhY2U6Cj4gPiA+ID4gPiBbICAgIDIuNDU4MTcxXSAgX19w
+YWdldmVjX2xydV9hZGRfZm4rMHgxNWYvMHgyYzAKPiA+ID4gPiA+IFsgICAgMi40NTkzNzZdICBw
+YWdldmVjX2xydV9tb3ZlX2ZuKzB4ODcvMHhkMAo+ID4gPiA+ID4gWyAgICAyLjQ2MDUwMF0gID8g
+cGFnZXZlY19tb3ZlX3RhaWxfZm4rMHgyZDAvMHgyZDAKPiA+ID4gPiA+IFsgICAgMi40NjE3MTJd
+ICBscnVfYWRkX2RyYWluX2NwdSsweDhkLzB4MTYwCj4gPiA+ID4gPiBbICAgIDIuNDYyNzg3XSAg
+bHJ1X2FkZF9kcmFpbisweDE4LzB4MjAKPiA+ID4gPiAKPiA+ID4gPiBBcmUgeW91IHN1cmUgdGhh
+dCB3YXMgNGJlNDk3MDk2YzA0ID8gIEkgYXNrIGJlY2F1c2UgdGhlcmUgd2FzIGEKPiA+ID4gCj4g
+PiA+IFllcywgYmVjYXVzZSBpdCdzIHRoZSBvbmx5IHZlcnNpb24gSSd2ZSBhY3R1YWxseSBtZXJn
+ZWQgaW50byBteQo+ID4gPiB3b3JraW5nIHRyZWUsIGNvbXBpbGVkIGFuZCB0cmllZCB0byBydW4u
+IDpQCj4gPiA+IAo+ID4gPiA+IHZlcnNpb24gcHVzaGVkIHRvIHRoYXQgZ2l0IHRyZWUgdGhhdCBk
+aWQgY29udGFpbiBhIGxpc3QgZG91YmxlLWFkZAo+ID4gPiA+IChkdWUgdG8gYSBtaXNtZXJnZSB3
+aGVuIHNodWZmbGluZyBwYXRjaGVzKS4gIEkgbm90aWNlZCBpdCBhbmQgZml4ZWQKPiA+ID4gPiBp
+dCwgYW5kIDRiZTQ5NzA5NmMwNCBkb2Vzbid0IGhhdmUgdGhhdCBwcm9ibGVtLiAgSSBhbHNvIHRl
+c3Qgd2l0aAo+ID4gPiA+IENPTkZJR19ERUJVR19MSVNUIHR1cm5lZCBvbiwgYnV0IHRoaXMgcHJv
+YmxlbSB5b3UgaGl0IGlzIGdvaW5nIHRvIGJlCj4gPiA+ID4gcHJvYmFiaWxpc3RpYyBiZWNhdXNl
+IGl0J2xsIGRlcGVuZCBvbiB0aGUgdGltaW5nIGJldHdlZW4gd2hhdGV2ZXIgb3RoZXIKPiA+ID4g
+PiBsaXN0IGlzIGJlaW5nIHVzZWQgYW5kIHRoZSBwYWdlIGFjdHVhbGx5IGJlaW5nIGFkZGVkIHRv
+IHRoZSBMUlUuCj4gPiA+IAo+ID4gPiBJJ2xsIHNlZSBpZiBJIGNhbiByZXByb2R1Y2UgaXQuCj4g
+PiAKPiA+IEp1c3QgdXBkYXRlZCB0byBhIGN1cnJlbnQgVE9UIExpbnVzIGtlcm5lbCBhbmQgeW91
+ciBsYXRlc3QgYnJhbmNoLAo+ID4gYW5kIHNvIGZhciB0aGlzIGlzIDEwMCUgcmVwcm9kdWNhYmxl
+Lgo+ID4gCj4gPiBOb3Qgc3VyZSBob3cgSSdtIGdvaW5nIHRvIGRlYnVnIGl0IHlldCwgYmVjYXVz
+ZSBpdCdzIGluaXQgdGhhdCBpcwo+ID4gdHJpZ2dlcmluZyBpdC4uLi4KPiAKPiBFcmljIGZvdW5k
+IGl0IC4uLgoKWWVhaCwganVzdCBzYXcgdGhhdCBhbmQgYW0gYXBwbHlpbmcgaGlzIHBhdGNoIHRv
+IHRlc3QgaXQuLi4KCj4gc3RpbGwgbm90IHN1cmUgd2h5IEkgZG9uJ3Qgc2VlIGl0LgoKTm8gcmVh
+ZGFoZWFkIGNvbmZpZ3VyZWQgb24geW91ciBkZXZpY2U/CgoKQ2hlZXJzLAoKRGF2ZS4KLS0gCkRh
+dmUgQ2hpbm5lcgpkYXZpZEBmcm9tb3JiaXQuY29tCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGlu
+dXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
+b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
