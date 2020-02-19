@@ -2,73 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 951D1163AFF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 04:18:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 771C3163B07
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 04:22:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4Fsf-0006Gv-6I; Wed, 19 Feb 2020 03:18:33 +0000
+	id 1j4Fwb-0006lD-4L; Wed, 19 Feb 2020 03:22:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j4Fse-0006Gj-3K
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:18:32 +0000
+ (envelope-from <david@fromorbit.com>) id 1j4FwZ-0006kn-75
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:22:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wrYQNbvfuDPnxD93wn7O0cc2EQYK1CANQPYgnRc0BPU=; b=B6Q18MPJ4j+u5KLsLtF1D7odgA
- 5arA1GJZlIQ7o4oDj4r4hS7gyoiEY4frHR4Gmfcx3MJaqmDlZQtsC5Vh4W3zR9iW3w0+ZhasHIXvZ
- 4fxn/sRcyJM0KqHDXLt/T1sOrcJRkwfmcXNkJNYM0CFLQSLBp5aEK2NU/xsHG+rd1jgI=;
+ bh=XlrxGxSkI7c5ny12m2Q4VIBdi/hNMGRZOvsO6gXdncE=; b=RnF/pz/zEogtDX7jYdJMw/7XBP
+ Y+vvPZnHVL1pjQu0prurFU1YS18bj7DrkEnE3S7RcjU/0ovHQP3+Ftwpyhea1TBTVnWT2mwU6rWe5
+ TZc9yDsZAiwORT8qmurVb8/mRlbmI5owXZStoNyrmZwBOMnGHalZJJ2hF38CzFZHjEew=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wrYQNbvfuDPnxD93wn7O0cc2EQYK1CANQPYgnRc0BPU=; b=DqtBvMsi5VEWXC1ycIcISUl/br
- 6PIZYUCqSPCru/cSQh7CASht1Vaeyyar3pyq9Z5mz59UQo41E7Qs0O6a0jfl2pIEckWhhBLLLbk7n
- Ln+q86cFOaLKebimAuZ/zMAK9Tqm040XPwbQ3xQVkz2qDf3kmumfg2PYJWitsDgXYqTg=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4FsZ-007WYM-SD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:18:32 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 092E8BD6156035A3226A;
- Wed, 19 Feb 2020 11:18:20 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 19 Feb
- 2020 11:18:15 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200218102136.32150-1-yuchao0@huawei.com>
- <20200218102136.32150-3-yuchao0@huawei.com>
- <20200219025154.GB96609@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <576f8389-ba27-b461-5466-cc62e84b5c92@huawei.com>
-Date: Wed, 19 Feb 2020 11:18:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=XlrxGxSkI7c5ny12m2Q4VIBdi/hNMGRZOvsO6gXdncE=; b=QoT1Maof07W4xGiijLyla4zb24
+ s9npj1w8WE6x0E1Bwfb5RF0jY+is13tINFMeVSiXEVG4OAl41YbBWWsgcXcat1diaLm0AfgYqzgqZ
+ 7VDB0c1FuOwjzuwDtT86Zu/Q8G/bHxkmE/OQRu5wGKPyjYSNuHNmG4Dkvjiy4Vv5KlsM=;
+Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1j4FwX-007Wck-Ay
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 03:22:35 +0000
+Received: from dread.disaster.area (pa49-179-138-28.pa.nsw.optusnet.com.au
+ [49.179.138.28])
+ by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 3E55E3A35A2;
+ Wed, 19 Feb 2020 14:22:27 +1100 (AEDT)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1j4FwP-0005Mo-TE; Wed, 19 Feb 2020 14:22:25 +1100
+Date: Wed, 19 Feb 2020 14:22:25 +1100
+From: Dave Chinner <david@fromorbit.com>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200219032225.GD10776@dread.disaster.area>
+References: <20200217184613.19668-1-willy@infradead.org>
+ <20200217184613.19668-29-willy@infradead.org>
 MIME-Version: 1.0
-In-Reply-To: <20200219025154.GB96609@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200217184613.19668-29-willy@infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.3 cv=W5xGqiek c=1 sm=1 tr=0
+ a=zAxSp4fFY/GQY8/esVNjqw==:117 a=zAxSp4fFY/GQY8/esVNjqw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=l697ptgUJYAA:10
+ a=JfrnYn6hAAAA:8 a=20KFwNOVAAAA:8 a=7-415B0cAAAA:8 a=x3J6VNESQafu8Wz7OnQA:9
+ a=CjuIK1q_8ugA:10 a=1CNFftbPRP8L7MoqJWF3:22 a=biEYGPWJfzWAr4FL6Ov7:22
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: infradead.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [211.29.132.249 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1j4FsZ-007WYM-SD
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: avoid unneeded barrier in
- do_checkpoint()
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j4FwX-007Wck-Ay
+Subject: Re: [f2fs-dev] [PATCH v6 16/19] fuse: Convert from readpages to
+ readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,52 +85,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/2/19 10:51, Jaegeuk Kim wrote:
-> On 02/18, Chao Yu wrote:
->> We don't need to wait all dirty page submitting IO twice,
->> remove unneeded wait step.
+On Mon, Feb 17, 2020 at 10:46:09AM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 > 
-> What happens if checkpoint and other meta writs are reordered?
-
-checkpoint can be done as following:
-
-1. All meta except last cp-park of checkpoint area.
-2. last cp-park of checkpoint area
-
-So we only need to keep barrier in between step 1 and 2, we don't need
-to care about the write order of meta in step 1, right?
-
-Thanks,
-
+> Use the new readahead operation in fuse.  Switching away from the
+> read_cache_pages() helper gets rid of an implicit call to put_page(),
+> so we can get rid of the get_page() call in fuse_readpages_fill().
 > 
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  fs/f2fs/checkpoint.c | 2 --
->>  1 file changed, 2 deletions(-)
->>
->> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->> index 751815cb4c2b..9c88fb3d255a 100644
->> --- a/fs/f2fs/checkpoint.c
->> +++ b/fs/f2fs/checkpoint.c
->> @@ -1384,8 +1384,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>  
->>  	/* Flush all the NAT/SIT pages */
->>  	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
->> -	/* Wait for all dirty meta pages to be submitted for IO */
->> -	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
->>  
->>  	/*
->>  	 * modify checkpoint
->> -- 
->> 2.18.0.rc1
-> .
-> 
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+
+Looks OK.
+
+Reviewed-by: Dave Chinner <dchinner@redhat.com>
+-- 
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
