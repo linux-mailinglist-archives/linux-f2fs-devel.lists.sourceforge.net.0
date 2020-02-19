@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E26C1650A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 22:01:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C29F916509F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 22:01:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4WTQ-0001uc-DG; Wed, 19 Feb 2020 21:01:36 +0000
+	id 1j4WTM-0002Qk-Rc; Wed, 19 Feb 2020 21:01:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j4WTE-0001o7-9U
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:24 +0000
+ (envelope-from <willy@infradead.org>) id 1j4WTB-0002P6-5t
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ilETxbAF/LnQ+7vQ62oXBRdetg0lVhl7+QmSqIaqn70=; b=gxcs4GTkFIjxKj+3+GPpsWwq7Z
- gtAZ4/GWwV7ZrVROHzHtPeeP8ICTkbfHglfo+aQPcFAK+N/EmdEFzdnv4NDmKInENOWVX4n9uBTFF
- zM67atzs1OY84mv8s9ToBiB7gRbHCkwo8Q/bMF1rBi8s3b/2b2M363egZSG0eemhRLqY=;
+ bh=ti/VQbcGx7iB5ZkDtMNebTtjtNZ81oeKJGpMdUNZLV0=; b=Y39T9+cXnekOz1bB8eldY4fmRu
+ iTgoUtKa644I5CevXqSAuTSWmzUPQejUafTdpH1I2D3+QQcXVtKIW+jdHoHaoClC8wKDdswBhnNYJ
+ CBx+4iwxm0cQIhqIpH+oEo2V+KDViQg+ASImfsL33l0MuPB0sumCwI8AdZCpOlAzOkOw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ilETxbAF/LnQ+7vQ62oXBRdetg0lVhl7+QmSqIaqn70=; b=jLtTs5UtYkPgzlDEARp36Sxxl4
- lxv2pxCzad3W6EYMK/BZf/uLRa8UqxtWhUAThDeacR6vTZfj5jMXy4jlGTKEq6uLu+qHtyc593G27
- kpovbJMhUy1EZGgRUxMYZDRDgOs5Cjmrr+MpT3EChSVW8Vvlntscp2nziLmz8CJ+Io6Y=;
+ bh=ti/VQbcGx7iB5ZkDtMNebTtjtNZ81oeKJGpMdUNZLV0=; b=Wr06DMAdI+GDQsUcTh3euwZlvk
+ SuJaXGjINJod6Wtpw0rBxDgh3KQqxqVS25EfjCxqGZmpcs5LxcFocxWAHGjr997xCm5rtxBS6dnHA
+ mh/bKI4ZEVJO/uDev4bEskkgX1t9J/C76SRnevz8/kPJXf5NI7mxLs05XuWBVGfjDwp8=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4WT8-0084mm-73
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:24 +0000
+ id 1j4WT9-008SV8-5f
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 21:01:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=ilETxbAF/LnQ+7vQ62oXBRdetg0lVhl7+QmSqIaqn70=; b=pCtXQgv4jom00XDYTY0fYEcMBK
- ZTYRThGmAkJTi8wYgl9f5mtvJNhGbmyydXumLL8qv0JcGiKc2OV5l4h9Cbpl021GfCVT6KdPV6NXp
- ugPJNVJ6i9myr/7Haui2EkR6jj9KUcBj+EytJw8g9P2YvppnPcxaAuaK1hOc9Y+J01A8pzOuMkFpk
- 55PaVn8haSoigcXBAESNi0i9Ayzyt1/9GoSQ3wiHXu/46rv0BF64Hjd71/qwKc3zz2JlOKMw6x9B7
- im4rGPcm6Div02O4s5x5iUJ9uGwpGXsU3TXZFezjocQ3A+TBDxZJUzatatF7+CU8FibB5IQbHpx/v
- AJzVZi4g==;
+ bh=ti/VQbcGx7iB5ZkDtMNebTtjtNZ81oeKJGpMdUNZLV0=; b=uH+Yj68Zq00b1el9IhXvtJg/ER
+ JKcDD2sr89kzrbW/CetZp6Fyud1tXA80CjzlzuHIreMpTZdCzt66YpvfxzztwR+HxT6XAzvXxI/iu
+ b4YFRc6hamcIFMjpT0TuqEPN+qLrwntKHxJK8PDELA+OzYON8fSCz/Y20rnFMWe49OrohOnwn9yHz
+ CGOoG1Lq3O5ypaCkNP2WJtcS91SQhIpHvbhIWNgGw2uR8VbM/wEI+AO28/uJA3ZoEJKzV7jnvLSkG
+ 3NbrGg91hnS2b8QyqPxskApWNYq11NuSW2lm22pIud33IrSYx0BQAbPqykBUdwrgp/K0HLfPETgOS
+ ORq69oYQ==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j4WSu-0008TO-RZ; Wed, 19 Feb 2020 21:01:04 +0000
+ Hat Linux)) id 1j4WSu-0008TS-SZ; Wed, 19 Feb 2020 21:01:04 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed, 19 Feb 2020 13:00:42 -0800
-Message-Id: <20200219210103.32400-4-willy@infradead.org>
+Date: Wed, 19 Feb 2020 13:00:43 -0800
+Message-Id: <20200219210103.32400-5-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200219210103.32400-1-willy@infradead.org>
 References: <20200219210103.32400-1-willy@infradead.org>
@@ -63,7 +63,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: nvidia.com]
+ for more information. [URIs: infradead.org]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -72,8 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4WT8-0084mm-73
-Subject: [f2fs-dev] [PATCH v7 03/24] mm: Ignore return value of ->readpages
+X-Headers-End: 1j4WT9-008SV8-5f
+Subject: [f2fs-dev] [PATCH v7 04/24] mm: Move readahead nr_pages check into
+ read_pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,65 +86,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- linux-kernel@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
- Dave Chinner <dchinner@redhat.com>, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, Christoph Hellwig <hch@lst.de>,
- linux-btrfs@vger.kernel.org
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-We used to assign the return value to a variable, which we then ignored.
-Remove the pretence of caring.
+Simplify the callers by moving the check for nr_pages and the BUG_ON
+into read_pages().
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Dave Chinner <dchinner@redhat.com>
-Reviewed-by: John Hubbard <jhubbard@nvidia.com>
 ---
- mm/readahead.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ mm/readahead.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/mm/readahead.c b/mm/readahead.c
-index 41a592886da7..61b15b6b9e72 100644
+index 61b15b6b9e72..9fcd4e32b62d 100644
 --- a/mm/readahead.c
 +++ b/mm/readahead.c
-@@ -113,17 +113,16 @@ int read_cache_pages(struct address_space *mapping, struct list_head *pages,
- 
- EXPORT_SYMBOL(read_cache_pages);
- 
--static int read_pages(struct address_space *mapping, struct file *filp,
-+static void read_pages(struct address_space *mapping, struct file *filp,
- 		struct list_head *pages, unsigned int nr_pages, gfp_t gfp)
- {
+@@ -119,6 +119,9 @@ static void read_pages(struct address_space *mapping, struct file *filp,
  	struct blk_plug plug;
  	unsigned page_idx;
--	int ret;
  
++	if (!nr_pages)
++		return;
++
  	blk_start_plug(&plug);
  
  	if (mapping->a_ops->readpages) {
--		ret = mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
-+		mapping->a_ops->readpages(filp, mapping, pages, nr_pages);
- 		/* Clean up the remaining pages */
- 		put_pages_list(pages);
- 		goto out;
-@@ -136,12 +135,9 @@ static int read_pages(struct address_space *mapping, struct file *filp,
- 			mapping->a_ops->readpage(filp, page);
- 		put_page(page);
- 	}
--	ret = 0;
+@@ -138,6 +141,8 @@ static void read_pages(struct address_space *mapping, struct file *filp,
  
  out:
  	blk_finish_plug(&plug);
--
--	return ret;
++
++	BUG_ON(!list_empty(pages));
+ }
+ 
+ /*
+@@ -180,8 +185,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
+ 			 * contiguous pages before continuing with the next
+ 			 * batch.
+ 			 */
+-			if (nr_pages)
+-				read_pages(mapping, filp, &page_pool, nr_pages,
++			read_pages(mapping, filp, &page_pool, nr_pages,
+ 						gfp_mask);
+ 			nr_pages = 0;
+ 			continue;
+@@ -202,9 +206,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
+ 	 * uptodate then the caller will launch readpage again, and
+ 	 * will then handle the error.
+ 	 */
+-	if (nr_pages)
+-		read_pages(mapping, filp, &page_pool, nr_pages, gfp_mask);
+-	BUG_ON(!list_empty(&page_pool));
++	read_pages(mapping, filp, &page_pool, nr_pages, gfp_mask);
  }
  
  /*
