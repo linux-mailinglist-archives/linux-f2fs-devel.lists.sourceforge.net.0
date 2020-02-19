@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 939F51638E6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 02:02:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 232E41638F5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Feb 2020 02:04:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4Dkw-0002wL-78; Wed, 19 Feb 2020 01:02:26 +0000
+	id 1j4DnA-0006ZL-H1; Wed, 19 Feb 2020 01:04:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j4Dku-0002w7-Nr
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 01:02:24 +0000
+ (envelope-from <david@fromorbit.com>) id 1j4Dn9-0006ZD-7F
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 01:04:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dmgQq76s5htd6QK1djoTrZsBDESqx9Po29KnZ84sMso=; b=D3G66nE8ybkcI1l+yEeVt03au/
- SfhtfByLHMcNzb+MR/u/xF3xePLF4iHe2z7a2vkZgb7cYdJAhbdnOWohlsX//eK8RSRtdjtRB2weE
- 3zGBUJHfQc2xCGC216NytXTWzd9cNwT8XmJOP5StMIxwyAmmR/bvBJczJlCx72FPlhh8=;
+ bh=0P8kXEphX0Bo54UkfRtPgvbODxf5K74L2bNQivkGKvE=; b=JduMel4X/LSYBiYUNZaVQGk2f+
+ RHcuguqjt610qRxVhnppYvuZinWkNSmIqsYoWhIyOYsRPsJoCrTfmHiw0BQzxmjcvFyZmkq1fAZ+K
+ SOyl+bt6t9XOiHImx6ftYSSd79O66i+PzUDRK+vAy/+7gbduNluc2WNUZyJlNGLstPMo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dmgQq76s5htd6QK1djoTrZsBDESqx9Po29KnZ84sMso=; b=HxPzTN2IGBUJuB/l1rqmcLI8uw
- RFIMQhJSoyt+uIKIVHVaMXMYFB4mYsyeAd0MgM2HqS5M6ql2dxcg2k34jUKDlnx0KpVC4jdj1YxtK
- Nsv8aqeLMP33DARds7ZL1hKVa9RzA9zx4na46Jaw4JZAkaYZL20CHPoDLY7zHRJxFsUc=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4Dks-00H65b-Ka
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 01:02:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=dmgQq76s5htd6QK1djoTrZsBDESqx9Po29KnZ84sMso=; b=eAZdgCeC8YnlA9szfqlWljjWDh
- UQdArvzLM0oiT5XqIC/Q7h5+HeHL9h7cGk8uQK7lBmcw6zYNiJPBANRy3Kwp44uDdtkV2GwprxPbm
- 2qK75Ii01IRiWR/ENG9UpNAtQ6GGFmxoDicA6zhQykS1pxRxOwf5Iqo0m6NjHXkdBzku6LESIgg13
- MNO5VqW3ruk/ciL+0+OSHHUM0uvKmDauMYS1h6HQC5+eUgS66IZUqnL5ZBn4iPhOROjAMtOQnLmUp
- r0l8D5tGUQYLIWt9/cYhYmOOb/1dYr6JEJYp93FoEhbgXTOlcGKNkDzg1ltXOO9ME1PREkt7eWceP
- c68pLuUA==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j4Dkf-0005UF-KW; Wed, 19 Feb 2020 01:02:09 +0000
-Date: Tue, 18 Feb 2020 17:02:09 -0800
-From: Matthew Wilcox <willy@infradead.org>
-To: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <20200219010209.GI24185@bombadil.infradead.org>
+ bh=0P8kXEphX0Bo54UkfRtPgvbODxf5K74L2bNQivkGKvE=; b=Pm/47WgmH0521ZbkfEK2J7jkHB
+ BVol1kC0vi5ND6bvEu17TiXS4fY9hX8NGzSscw9s3Pci7Gv5USuRNndDiCCz5JTpI8W9Zk09huzOG
+ DpmuBxUBCPL4iQcaFBO/jlfKXrYwJcpCBVXkgOxk5j/N/DxHdfyxugths/Jlx1qlQJgE=;
+Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1j4Dn6-007ToV-Hy
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 Feb 2020 01:04:43 +0000
+Received: from dread.disaster.area (pa49-179-138-28.pa.nsw.optusnet.com.au
+ [49.179.138.28])
+ by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 832B83A331C;
+ Wed, 19 Feb 2020 12:04:32 +1100 (AEDT)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1j4Dmx-0004dF-Ul; Wed, 19 Feb 2020 12:04:31 +1100
+Date: Wed, 19 Feb 2020 12:04:31 +1100
+From: Dave Chinner <david@fromorbit.com>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200219010431.GW10776@dread.disaster.area>
 References: <20200217184613.19668-1-willy@infradead.org>
- <20200217184613.19668-12-willy@infradead.org>
- <e3671faa-dfb3-ceba-3120-a445b2982a95@nvidia.com>
+ <20200217184613.19668-14-willy@infradead.org>
+ <20200218062147.GN10776@dread.disaster.area>
+ <20200218161004.GR7778@bombadil.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <e3671faa-dfb3-ceba-3120-a445b2982a95@nvidia.com>
+In-Reply-To: <20200218161004.GR7778@bombadil.infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.3 cv=W5xGqiek c=1 sm=1 tr=0
+ a=zAxSp4fFY/GQY8/esVNjqw==:117 a=zAxSp4fFY/GQY8/esVNjqw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=l697ptgUJYAA:10
+ a=JfrnYn6hAAAA:8 a=7-415B0cAAAA:8 a=J8tHrh_ofsGOLyDWh6kA:9
+ a=ffwTswad_GV-5CZc:21 a=o0rOaByW-dbbsVyy:21 a=CjuIK1q_8ugA:10
+ a=1CNFftbPRP8L7MoqJWF3:22 a=biEYGPWJfzWAr4FL6Ov7:22
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: fromorbit.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4Dks-00H65b-Ka
-Subject: Re: [f2fs-dev] [PATCH v6 07/19] mm: Put readahead pages in cache
- earlier
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [211.29.132.249 listed in wl.mailspike.net]
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j4Dn6-007ToV-Hy
+Subject: Re: [f2fs-dev] [PATCH v6 08/19] mm: Add readahead address space
+ operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,41 +97,97 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Feb 18, 2020 at 04:01:43PM -0800, John Hubbard wrote:
-> How about this instead? It uses the "for" loop fully and more naturally,
-> and is easier to read. And it does the same thing:
+On Tue, Feb 18, 2020 at 08:10:04AM -0800, Matthew Wilcox wrote:
+> On Tue, Feb 18, 2020 at 05:21:47PM +1100, Dave Chinner wrote:
+> > On Mon, Feb 17, 2020 at 10:45:54AM -0800, Matthew Wilcox wrote:
+> > > From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> > > 
+> > > This replaces ->readpages with a saner interface:
+> > >  - Return void instead of an ignored error code.
+> > >  - Pages are already in the page cache when ->readahead is called.
+> > 
+> > Might read better as:
+> > 
+> >  - Page cache is already populates with locked pages when
+> >    ->readahead is called.
 > 
-> static inline struct page *readahead_page(struct readahead_control *rac)
-> {
-> 	struct page *page;
+> Will do.
 > 
-> 	if (!rac->_nr_pages)
-> 		return NULL;
+> > >  - Implementation looks up the pages in the page cache instead of
+> > >    having them passed in a linked list.
+> > 
+> > Add:
+> > 
+> >  - cleanup of unused readahead handled by ->readahead caller, not
+> >    the method implementation.
 > 
-> 	page = xa_load(&rac->mapping->i_pages, rac->_start);
-> 	VM_BUG_ON_PAGE(!PageLocked(page), page);
-> 	rac->_batch_count = hpage_nr_pages(page);
-> 
-> 	return page;
-> }
-> 
-> static inline struct page *readahead_next(struct readahead_control *rac)
-> {
-> 	rac->_nr_pages -= rac->_batch_count;
-> 	rac->_start += rac->_batch_count;
-> 
-> 	return readahead_page(rac);
-> }
-> 
-> #define readahead_for_each(rac, page)			\
-> 	for (page = readahead_page(rac); page != NULL;	\
-> 	     page = readahead_page(rac))
+> The readpages caller does that cleanup too, so it's not an advantage
+> to the readahead interface.
 
-I'm assuming you mean 'page = readahead_next(rac)' on that second line.
+Right. I kinda of read the list as "the reasons the new API is sane"
+not as "how readahead is different to readpages"....
 
-If you keep reading all the way to the penultimate patch, it won't work
-for iomap ... at least not in the same way.
+> > >  ``readpages``
+> > >  	called by the VM to read pages associated with the address_space
+> > >  	object.  This is essentially just a vector version of readpage.
+> > >  	Instead of just one page, several pages are requested.
+> > >  	readpages is only used for read-ahead, so read errors are
+> > >  	ignored.  If anything goes wrong, feel free to give up.
+> > > +	This interface is deprecated; implement readahead instead.
+> > 
+> > What is the removal schedule for the deprecated interface? 
+> 
+> I mentioned that in the cover letter; once Dave Howells has the fscache
+> branch merged, I'll do the remaining filesystems.  Should be within the
+> next couple of merge windows.
 
+Sure, but I like to see actual release tags with the deprecation
+notice so that it's obvious to the reader as to whether this is
+something new and/or when they can expect it to go away.
+
+> > > +/* The byte offset into the file of this readahead block */
+> > > +static inline loff_t readahead_offset(struct readahead_control *rac)
+> > > +{
+> > > +	return (loff_t)rac->_start * PAGE_SIZE;
+> > > +}
+> > 
+> > Urk. Didn't an early page use "offset" for the page index? That
+> > was was "mm: Remove 'page_offset' from readahead loop" did, right?
+> > 
+> > That's just going to cause confusion to have different units for
+> > readahead "offsets"....
+> 
+> We are ... not consistent anywhere in the VM/VFS with our naming.
+> Unfortunately.
+> 
+> $ grep -n offset mm/filemap.c 
+> 391: * @start:	offset in bytes where the range starts
+> ...
+> 815:	pgoff_t offset = old->index;
+> ...
+> 2020:	unsigned long offset;      /* offset into pagecache page */
+> ...
+> 2257:	*ppos = ((loff_t)index << PAGE_SHIFT) + offset;
+> 
+> That last one's my favourite.  Not to mention the fine distinction you
+> and I discussed recently between offset_in_page() and page_offset().
+> 
+> Best of all, even our types encode the ambiguity of an 'offset'.  We have
+> pgoff_t and loff_t (replacing the earlier off_t).
+> 
+> So, new rule.  'pos' is the number of bytes into a file.  'index' is the
+> number of PAGE_SIZE pages into a file.  We don't use the word 'offset'
+> at all.  'length' as a byte count and 'count' as a page count seem like
+> fine names to me.
+
+That sounds very reasonable to me. Another patchset in the making? :)
+
+Cheers,
+
+Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
