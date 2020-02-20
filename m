@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8CBF1667E5
+	by mail.lfdr.de (Postfix) with ESMTPS id E7F211667E6
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Feb 2020 21:02:12 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4s1O-00005o-Tb; Thu, 20 Feb 2020 20:02:06 +0000
+	id 1j4s1M-00004x-Rh; Thu, 20 Feb 2020 20:02:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1j4s1N-00005K-Bu
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Feb 2020 20:02:05 +0000
+ (envelope-from <willy@infradead.org>) id 1j4s1L-0008WO-F8
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Feb 2020 20:02:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/X+cuahXNVjwX8kIjzPU/QZUMEm+qIm+lNxfvhlX3EA=; b=ltV5o52urh5dvnj7KYBsX1PrFw
- Dd+EG6+6MOwx/kbgnPCxuaYNUCNI1rPCSa1TPGGtWO3R1aLY2FZaXnlaa/rofzb+kC76ysSt40Cjs
- /cqjjmbU5PPo7UojhIjeAzwi2P+RRVWBI727UkyDkkyLSHsXoH2fle80C1GglSWEE0v0=;
+ bh=qHvBZa6xH4q8QoO0XjztoHEsiwUeumDdhpQiwafJ4fA=; b=IEay/d4/XxCkZrdAe6AZaDSXIT
+ 4jAdja0UbiVcjklm6IghxNdRKGirgYtatRZ+liZm41mtkn4mBXmrVditlWgur2WkNznCY/AC9O9XT
+ EcTtvcdhzLOUhTFQ3KttiCcPYX08zXwZ8xS42rg+7Z6tBbGR/oe471+WTLOeR1JIw0hc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,55 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/X+cuahXNVjwX8kIjzPU/QZUMEm+qIm+lNxfvhlX3EA=; b=QpSIfh74g/rPsMtf09DGmrfkzC
- Cw0/zKpNhzyT31heGMVZSKMvnuQFq/InYWSv1VqgdmJDzOPVh8VpevsnKUFLZIEWdkD76xQXxM9Y0
- uFt4oZppBk4hguXQGhxKGX35ND1UVQZaSB/BXcCpLMclgc9T/+Esz5eoETl4NmPIHea4=;
+ bh=qHvBZa6xH4q8QoO0XjztoHEsiwUeumDdhpQiwafJ4fA=; b=Un/15Nm2l11fA24vMc4ExmuO3R
+ wAbR5C1zDKlKTYI9y7jF1HSIA6FH9hHwP1R33IdP80TtJvAekBXqKtJhaIPAq/n91RP95hJXd50P5
+ x3LK7vy0dLLrEkpE+f/MW1GhbYjnfW1WSb3n2j/4zyQGGozlxswXWXArE3e0s7Y1utyw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4s1L-00C9cy-IG
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Feb 2020 20:02:05 +0000
+ id 1j4s1K-00C9cy-6R
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Feb 2020 20:02:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=/X+cuahXNVjwX8kIjzPU/QZUMEm+qIm+lNxfvhlX3EA=; b=lxTIdidZw2P2UO9t/Oji3FNceT
- +CjnxJZogq66GLHl3rhRoufVhXPoH7CxN5rw1pgrMvr7szk03lJeq2TvDL3R2ys6m86hnGj7sXBXg
- AQaHFo4WLWH90RnuR6backVMmU/lhsJTXMH7V42hfdxcXElLYWAoi8WkszieVn0N2xZmXUiT1EECe
- GJX8uJUjnaFLb7zI2vKxvhhrKwSedVafnnaMtZd9zrJbg6npgPtnxSYDtx+h9J81ITalXizKXonPp
- SQVVA+pyipbUonuljCpyE7+n90vEPRYltjJb/REqxUNVBonREpCV+ttQEEWV7EF1CEorahGhIHM1b
- 9p1J3F8g==;
+ bh=qHvBZa6xH4q8QoO0XjztoHEsiwUeumDdhpQiwafJ4fA=; b=XxNghq7rFzqnKm0SVydd0tHTdn
+ n4s70eVOvmXv6xE4upQLTZABvYZeabWIKMlGk6r1YJRae6i8tpYXe5dtM9zo+Nvpbtu1wnMIhCRDY
+ nXaWx7ub/Z7OzeYS+E/BNUzS6JOhGzIvL1BAO8xZgolQ++p6TjxSiG17Yqf5R/+hI5Tk6WktBEQFl
+ ALA1Z2m00fN67lT/dRb+VmatCW5BfMt0zqFVJecwEgC4ipDl7wtLI+budHd68slvGKbN8MEQRduxB
+ hi02UijAGWWe/BHat9owg4eLO9dGnV9K9muMrZ8ZBwLUooYgWOvcD2lcfCIagHu0PZetNNM4A6azz
+ Ltap/rvQ==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j4ocO-0001zg-A1; Thu, 20 Feb 2020 16:24:04 +0000
-Date: Thu, 20 Feb 2020 08:24:04 -0800
+ Hat Linux)) id 1j4p8p-0005KC-2B; Thu, 20 Feb 2020 16:57:35 +0000
+Date: Thu, 20 Feb 2020 08:57:34 -0800
 From: Matthew Wilcox <willy@infradead.org>
 To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200220162404.GY24185@bombadil.infradead.org>
+Message-ID: <20200220165734.GZ24185@bombadil.infradead.org>
 References: <20200219210103.32400-1-willy@infradead.org>
- <20200219210103.32400-22-willy@infradead.org>
- <20200220154741.GB19577@infradead.org>
+ <20200219210103.32400-23-willy@infradead.org>
+ <20200220154912.GC19577@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200220154741.GB19577@infradead.org>
-X-Spam-Score: 0.3 (/)
+In-Reply-To: <20200220154912.GC19577@infradead.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 1.1 DATE_IN_PAST_03_06     Date: is 3 to 6 hours before Received: date
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4s1L-00C9cy-IG
-Subject: Re: [f2fs-dev] [PATCH v7 21/24] iomap: Restructure
- iomap_readpages_actor
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j4s1K-00C9cy-6R
+Subject: Re: [f2fs-dev] [PATCH v7 22/24] iomap: Convert from readpages to
+ readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,25 +93,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Feb 20, 2020 at 07:47:41AM -0800, Christoph Hellwig wrote:
-> On Wed, Feb 19, 2020 at 01:01:00PM -0800, Matthew Wilcox wrote:
-> > From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> > 
-> > By putting the 'have we reached the end of the page' condition at the end
-> > of the loop instead of the beginning, we can remove the 'submit the last
-> > page' code from iomap_readpages().  Also check that iomap_readpage_actor()
-> > didn't return 0, which would lead to an endless loop.
+On Thu, Feb 20, 2020 at 07:49:12AM -0800, Christoph Hellwig wrote:
+> > +/**
+> > + * iomap_readahead - Attempt to read pages from a file.
+> > + * @rac: Describes the pages to be read.
+> > + * @ops: The operations vector for the filesystem.
+> > + *
+> > + * This function is for filesystems to call to implement their readahead
+> > + * address_space operation.
+> > + *
+> > + * Context: The file is pinned by the caller, and the pages to be read are
+> > + * all locked and have an elevated refcount.  This function will unlock
+> > + * the pages (once I/O has completed on them, or I/O has been determined to
+> > + * not be necessary).  It will also decrease the refcount once the pages
+> > + * have been submitted for I/O.  After this point, the page may be removed
+> > + * from the page cache, and should not be referenced.
+> > + */
 > 
-> I'm obviously biassed a I wrote the original code, but I find the new
-> very much harder to understand (not that the previous one was easy, this
-> is tricky code..).
+> Isn't the context documentation something that belongs into the aop
+> documentation?  I've never really seen the value of duplicating this
+> information in method instances, as it is just bound to be out of date
+> rather sooner than later.
 
-Agreed, I found the original code hard to understand.  I think this is
-easier because now cur_page doesn't leak outside this loop, so it has
-an obvious lifecycle.
+I'm in two minds about it as well.  There's definitely no value in
+providing kernel-doc for implementations of a common interface ... so
+rather than fixing the nilfs2 kernel-doc, I just deleted it.  But this
+isn't just the implementation, like nilfs2_readahead() is, it's a library
+function for filesystems to call, so it deserves documentation.  On the
+other hand, there's no real thought to this on the part of the filesystem;
+the implementation just calls this with the appropriate ops pointer.
 
-I'm kind of optimistic for Dave Howells' iov_iter addition of an
-ITER_MAPPING.  That might simplify all of this code.
+Then again, I kind of feel like we need more documentation of iomap to
+help filesystems convert to using it.  But maybe kernel-doc isn't the
+mechanism to provide that.
 
 
 _______________________________________________
