@@ -2,64 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF38F1686D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 19:40:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B35716879E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 20:44:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j5DDs-0007pN-VV; Fri, 21 Feb 2020 18:40:24 +0000
+	id 1j5EE9-0002mX-Mk; Fri, 21 Feb 2020 19:44:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1j5DDr-0007pA-AS
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 18:40:23 +0000
+ (envelope-from <jhubbard@nvidia.com>) id 1j5EE8-0002mP-5l
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 19:44:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G+MomOU1TbmAxWE9wzxfDOXFuB6DjpEC8bY8Hv2jEXA=; b=m/3bdRxu6yK6bKYjhFOJTs9TWM
- Ym/DYXK8UuKA39Zr+QYOChCs6ZqySM4xAd8cOhlzUR9VQ0pi77Ydq2Rbr+LQMGixWlc0npknDkGcv
- 1PNmFSOb5Zu+6i9Alm9IbPSiFfJh3nAvpnIfeW2aIvnU1E0wfOI7/Uk656MsmoNEcQdg=;
+ bh=pQKOwwEmNmp5lZ+eX1Ols5QNnW+OORTLQJDMCsPxtEc=; b=LdvvyttcwMvz/gS1vOoMreu8p8
+ 9O3Rf9FjYfhCGRse2/1Hw9NCUIbZSO2KJXwL7PCSBlf8ZBXi3EOyjPaLeVDPa7wnD6mpF3HfDSSEm
+ Bdt1goe8wYTHquMITFbpePKIgD4e1LEJKvaDuC3PLl12pDHWLkqov9pMDnQBT4tVA+EA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G+MomOU1TbmAxWE9wzxfDOXFuB6DjpEC8bY8Hv2jEXA=; b=i0pqxUqv6ohnBPr/a2HOUBtdil
- pnTG/Wo0KndKXwRZ6tw+4l8Wza4BRmwZwHL0mBrO/ytlEwwXv3v1VxTVZdvh3RrurP2RfyhQygMqO
- 7Cbw7b+6wtZqaR/jc/2EyuypYCOYOVMar+qOxWK4D6fHEkHlObC7N8DRsRrWjL1eZmEU=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=pQKOwwEmNmp5lZ+eX1Ols5QNnW+OORTLQJDMCsPxtEc=; b=eEgo0ZiQNDl1/4JFiYHBC5/DRi
+ lGYLb2LJ9afWEuoVinF0cnpxrMxIp+A3cMtAivQvkvlIxQkaGgrLCoGiSg8dbkEu8+iVVQlGh7lto
+ bLbgSyyASmLIzP3aIRVwMVYx3H853FyAzd7TeF8PQgmV2STtTtKV4tBkKJw/EayQ8i80=;
+Received: from hqnvemgate26.nvidia.com ([216.228.121.65])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j5DDp-00BGth-QW
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 18:40:23 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 04462208E4;
- Fri, 21 Feb 2020 18:40:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582310411;
- bh=3YrQ2Cspduv8p1rKuaa41bpCFtQWvnwvF2Buv3BWSGE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UAEVGHH0S7mhCC+QS//PHH1fwrlrqpoUQbMfcOGAzku9VHK4DRtsBKSt+PxFmIBCf
- KMS80bOXgolqa1nlyFbwYcANnTzGrE/4USZOCmCppD6ZYYrSHA/Dbdy00MoaOi6Fl6
- sLYGJ/B6gcxiMLvXAT3ZDqwNJeO/ox8wMsKJBFp8=
-Date: Fri, 21 Feb 2020 10:40:09 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200221184009.GD925@sol.localdomain>
-References: <20200221115050.238976-1-satyat@google.com>
- <20200221115050.238976-8-satyat@google.com>
+ id 1j5EE5-00D0Xt-V0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 19:44:44 +0000
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e5033120000>; Fri, 21 Feb 2020 11:44:18 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Fri, 21 Feb 2020 11:44:32 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Fri, 21 Feb 2020 11:44:32 -0800
+Received: from [10.2.166.200] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 21 Feb
+ 2020 19:44:32 +0000
+To: Matthew Wilcox <willy@infradead.org>
+References: <20200219210103.32400-1-willy@infradead.org>
+ <20200219210103.32400-12-willy@infradead.org>
+ <e6ef2075-b849-299e-0f11-c6ee82b0a3c7@nvidia.com>
+ <20200221153537.GE24185@bombadil.infradead.org>
+From: John Hubbard <jhubbard@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <1fd052ce-cd5e-60ce-e494-cbf6427d3ed3@nvidia.com>
+Date: Fri, 21 Feb 2020 11:41:28 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200221115050.238976-8-satyat@google.com>
-X-Spam-Score: -0.4 (/)
+In-Reply-To: <20200221153537.GE24185@bombadil.infradead.org>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1582314258; bh=pQKOwwEmNmp5lZ+eX1Ols5QNnW+OORTLQJDMCsPxtEc=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=lYdo4NH8M7SXphPat6doJg0oOA1V6kLXukQ7JIEh5FVkfFb0/CxKOhHQdMiRNYy87
+ Q6EhPR2Fph1xqpiZaGm+fIV8Ra4pJE8E5H2Ofj6LlTy0+Qb+/+y64EhZcbjIYXrOqI
+ IXR7s2kX4Yi3hnWXNuj2sU2+Joh83jXJxvw8pHXSeKQS/7ccswnLmpLkros2lxWTg/
+ 2U8B/Ar6NYNMOQFqfCj3j5XpjUwSHVdi0BMHCh2YVMnazsUm42RddLEt+ZRAKHCaXa
+ IlYO+1WyQ2QxlFvwnZy2R5xtgMwusy7sT9ZlwHQi2bqndUATGT9KLiH14aMZETjP0i
+ ow4Jt857PEIiA==
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,9 +88,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j5DDp-00BGth-QW
-Subject: Re: [f2fs-dev] [PATCH v7 7/9] fscrypt: add inline encryption support
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j5EE5-00D0Xt-V0
+Subject: Re: [f2fs-dev] [PATCH v7 11/24] mm: Move end_index check out of
+ readahead loop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,99 +103,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Feb 21, 2020 at 03:50:48AM -0800, Satya Tangirala wrote:
-> diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-> index 4fa18fff9c4e..82d06cf4b94a 100644
-> --- a/fs/crypto/bio.c
-> +++ b/fs/crypto/bio.c
-> @@ -24,6 +24,8 @@
->  #include <linux/module.h>
->  #include <linux/bio.h>
->  #include <linux/namei.h>
-> +#include <linux/fscrypt.h>
+On 2/21/20 7:35 AM, Matthew Wilcox wrote:
+> On Thu, Feb 20, 2020 at 07:50:39PM -0800, John Hubbard wrote:
+>> This tiny patch made me pause, because I wasn't sure at first of the exact
+>> intent of the lines above. Once I worked it out, it seemed like it might
+>> be helpful (or overkill??) to add a few hints for the reader, especially since
+>> there are no hints in the function's (minimal) documentation header. What
+>> do you think of this?
+>>
+>> 	/*
+>> 	 * If we can't read *any* pages without going past the inodes's isize
+>> 	 * limit, give up entirely:
+>> 	 */
+>> 	if (index > end_index)
+>> 		return;
+>>
+>> 	/* Cap nr_to_read, in order to avoid overflowing the ULONG type: */
+>> 	if (index + nr_to_read < index)
+>> 		nr_to_read = ULONG_MAX - index + 1;
+>>
+>> 	/* Cap nr_to_read, to avoid reading past the inode's isize limit: */
+>> 	if (index + nr_to_read >= end_index)
+>> 		nr_to_read = end_index - index + 1;
+> 
+> A little verbose for my taste ... How about this?
 
-No need to include <linux/fscrypt.h> explicitly here, since everything in
-fs/crypto/ already gets it via "fscrypt_private.h".
 
-> +static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
-> +					      pgoff_t lblk, sector_t pblk,
-> +					      unsigned int len)
-> +{
-> +	const unsigned int blockbits = inode->i_blkbits;
-> +	const unsigned int blocks_per_page = 1 << (PAGE_SHIFT - blockbits);
-> +	struct bio *bio;
-> +	int ret, err = 0;
-> +	int num_pages = 0;
-> +
-> +	/* This always succeeds since __GFP_DIRECT_RECLAIM is set. */
-> +	bio = bio_alloc(GFP_NOFS, BIO_MAX_PAGES);
-> +
-> +	while (len) {
-> +		unsigned int blocks_this_page = min(len, blocks_per_page);
-> +		unsigned int bytes_this_page = blocks_this_page << blockbits;
-> +
-> +		if (num_pages == 0) {
-> +			fscrypt_set_bio_crypt_ctx(bio, inode, lblk, GFP_NOIO);
+Mine too, actually. :)  I think your version below looks good.
 
-This should use GFP_NOFS rather than the stricter GFP_NOIO.
 
-> +			bio_set_dev(bio, inode->i_sb->s_bdev);
-> +			bio->bi_iter.bi_sector =
-> +					pblk << (blockbits - SECTOR_SHIFT);
-> +			bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
-> +		}
-> +		ret = bio_add_page(bio, ZERO_PAGE(0), bytes_this_page, 0);
-> +		if (WARN_ON(ret != bytes_this_page)) {
-> +			err = -EIO;
-> +			goto out;
-> +		}
-> +		num_pages++;
-> +		len -= blocks_this_page;
-> +		lblk += blocks_this_page;
-> +		pblk += blocks_this_page;
-> +		if (num_pages == BIO_MAX_PAGES || !len) {
-> +			err = submit_bio_wait(bio);
-> +			if (!err && bio->bi_status)
-> +				err = -EIO;
+thanks,
+-- 
+John Hubbard
+NVIDIA
 
-submit_bio_wait() already checks bi_status and reflects it in the returned
-error, so checking it again here is redundant.
+> 
+>          end_index = (isize - 1) >> PAGE_SHIFT;
+>          if (index > end_index)
+>                  return;
+>          /* Avoid wrapping to the beginning of the file */
+>          if (index + nr_to_read < index)
+>                  nr_to_read = ULONG_MAX - index + 1;
+>          /* Don't read past the page containing the last byte of the file */
+>          if (index + nr_to_read >= end_index)
+>                  nr_to_read = end_index - index + 1;
+> 
 
-> @@ -69,12 +119,17 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
->  	unsigned int nr_pages;
->  	unsigned int i;
->  	unsigned int offset;
-> +	const bool inlinecrypt = fscrypt_inode_uses_inline_crypto(inode);
->  	struct bio *bio;
->  	int ret, err;
->  
->  	if (len == 0)
->  		return 0;
->  
-> +	if (inlinecrypt)
-> +		return fscrypt_zeroout_range_inline_crypt(inode, lblk, pblk,
-> +							  len);
-> +
-
-No need for the 'inlinecrypt' bool variable.  Just do:
-
-	if (fscrypt_inode_uses_inline_crypto(inode))
-
-FYI, I had suggested a merge resolution to use here which didn't have the above
-problems.  Looks like you missed it?
-https://lkml.kernel.org/linux-block/20200114211243.GC41220@gmail.com/
-
-- Eric
 
 
 _______________________________________________
