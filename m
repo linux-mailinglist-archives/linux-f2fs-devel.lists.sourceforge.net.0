@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EC41168001
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 15:20:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B62801681CE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 16:36:00 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j59AR-0003mA-FY; Fri, 21 Feb 2020 14:20:35 +0000
+	id 1j5ALK-0007iP-8w; Fri, 21 Feb 2020 15:35:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+b8b070cac54c30a96dd5+6025+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j59AQ-0003m3-Jv
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 14:20:34 +0000
+ (envelope-from <willy@infradead.org>) id 1j5ALI-0007iH-A9
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 15:35:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LytBCHQtySSQHC//YYsk3cTp1SDQnnhLtWFiulJBZy8=; b=iyAYVpKntmovUa0FN1Zvt2jH/r
- 18DHFvRu4cEP1xUGERB1ihOtmTl8nVxjs0bxh+GKd//dNk2+sLkjQGfx3mJOIltP3OzcePxsvQGQi
- QBpXuRgjKxd7jRq9kwxoZ0K97S5+UtKIN1pP5qdbwHTjEHlZAttCg9+YSDMfT/lWocw0=;
+ bh=+ZsaQJllFuL8jpNObDQrHmpdC/B73n9RqMvE0qPHxaM=; b=WLbTViXfKA5LCrfZ76DfKyoFnC
+ nPrRX9Je5BcCzbg6hk2GpAD3ziMUE5etz+9KWJ5RX10RFcoZ07PgQ8b1G4R6XnFthWEGr1qsodZbR
+ jP5HLehbDt9xMUbETPAu6vfn43Rjulw6Qd5Pf+UtV71VMN5w0FlKtoHmXOPAnalRXXdM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,45 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LytBCHQtySSQHC//YYsk3cTp1SDQnnhLtWFiulJBZy8=; b=YPSTAkiE9+Twc7dIRfFrQAFkYL
- wcX+tOx5O2VjPxRnT3CTXuHsZcduSR+WkHOINkyutaVEIDq7ZYyZPCdoAXsQTMKMgOvCZyEXHHXp/
- hhcQIDrjpPob3lLM8gv6Mh6eG+szgtiAZZkplw1ytKdjXjKuvpcqWTtt8BM40myxjaN8=;
+ bh=+ZsaQJllFuL8jpNObDQrHmpdC/B73n9RqMvE0qPHxaM=; b=IgWFREgyJB+POVFmVCl8EVnp23
+ PuwAlSbYlLwbPgAjlhtOoZEh46js/rgd6jMKH7zxucZB5kByKTYNqJojYZRPZB0t6NkQLboAe17MA
+ 6q2fD56N1+F3rC/jfNnMrxZKx1BqzWw4SXHLS9ASPOO4uG8q0p1wzsAMo+jyDowuNoVM=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j59AN-003N4w-QM
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 14:20:34 +0000
+ id 1j5ALE-003PUh-J2
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 15:35:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=LytBCHQtySSQHC//YYsk3cTp1SDQnnhLtWFiulJBZy8=; b=DZyV9UxLlQ1dXSvWlM5ACgoz8S
- 66UCzAs+/vDp19vCMf/XiGjrgq/QpQ5MSmVm/cq7+gbhKX2cMIX1taXRr/28lPIKdmzmh69nv04Ah
- jwc9CKCejXv0Yp4mbSM/q3/tDIhqtMMSmNl9pu3s8tg24ZdjHzYMMgLs+rc7QJw5HNC07Z3yyMc8F
- LrWSlmph5HCQzhVD6l+1jhZTBzUgoCltUXUStnxF/6+NXmWhqg6fe/7W9ZhC1tQlUPJRTzQ06pK5k
- wVCnFwUDhQ7pTnQaf3ggXDyfYcZZNw61QTbu1cIlLeHfVXYoXnrImvysZ5JDQhd9ynz72vOhOetCJ
- eJPdKzew==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j59AA-0005Lk-DL; Fri, 21 Feb 2020 14:20:18 +0000
-Date: Fri, 21 Feb 2020 06:20:18 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200221142018.GA27636@infradead.org>
-References: <20200108184305.GA173657@google.com>
- <20200117085210.GA5473@infradead.org>
- <20200201005341.GA134917@google.com>
- <20200203091558.GA28527@infradead.org>
- <20200204033915.GA122248@google.com>
- <20200204145832.GA28393@infradead.org>
- <20200204212110.GA122850@gmail.com>
- <20200205073601.GA191054@sol.localdomain>
- <20200205180541.GA32041@infradead.org>
- <20200221123030.GA253045@google.com>
+ bh=+ZsaQJllFuL8jpNObDQrHmpdC/B73n9RqMvE0qPHxaM=; b=e19h/tTJERLUFpOL5Gva3Nh5/X
+ wd0VH9aVgKh+1Blgs+9Q15ijaVkaoTLAy7WypYckq6maI2+/Qpa5TYpUzL45zkwW6/rKVd4gOa/Q3
+ 37XTTlJ3n85F+yMLVB8w0BnbSlS+Y+mVNSOJqRCX3b4kHG/mSGnd+/RHhL7LSbdq0PycpO3gHljyg
+ 1ePLpWP66QKkQwSW3hqI4AmWyW4KZvprzI+VqeFwh8xfQgZxihaUIj3MuUi6DWndVunwNc8HfQSPa
+ cJzgSNpVLmszdlcuXvTGALnsMeU2uXmuwM6kJU9UgfbmbAX46oAsryhNENVSPO0btKS8JfbqGc1YR
+ ErE1c+gA==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1j5AL3-00062c-43; Fri, 21 Feb 2020 15:35:37 +0000
+Date: Fri, 21 Feb 2020 07:35:37 -0800
+From: Matthew Wilcox <willy@infradead.org>
+To: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <20200221153537.GE24185@bombadil.infradead.org>
+References: <20200219210103.32400-1-willy@infradead.org>
+ <20200219210103.32400-12-willy@infradead.org>
+ <e6ef2075-b849-299e-0f11-c6ee82b0a3c7@nvidia.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200221123030.GA253045@google.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <e6ef2075-b849-299e-0f11-c6ee82b0a3c7@nvidia.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -81,8 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j59AN-003N4w-QM
-Subject: Re: [f2fs-dev] [PATCH v6 0/9] Inline Encryption Support
+X-Headers-End: 1j5ALE-003PUh-J2
+Subject: Re: [f2fs-dev] [PATCH v7 11/24] mm: Move end_index check out of
+ readahead loop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,28 +84,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@kernel.org>, linux-scsi@vger.kernel.org,
- Kim Boojin <boojin.kim@samsung.com>, Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Feb 21, 2020 at 04:30:30AM -0800, Satya Tangirala wrote:
-> Hi Christoph,
+On Thu, Feb 20, 2020 at 07:50:39PM -0800, John Hubbard wrote:
+> This tiny patch made me pause, because I wasn't sure at first of the exact
+> intent of the lines above. Once I worked it out, it seemed like it might
+> be helpful (or overkill??) to add a few hints for the reader, especially since
+> there are no hints in the function's (minimal) documentation header. What
+> do you think of this?
 > 
-> I sent out v7 of the patch series. It's at
-> https://lore.kernel.org/linux-fscrypt/20200221115050.238976-1-satyat@google.com/T/#t
+> 	/*
+> 	 * If we can't read *any* pages without going past the inodes's isize
+> 	 * limit, give up entirely:
+> 	 */
+> 	if (index > end_index)
+> 		return;
 > 
-> It manages keyslots on a per-request basis now - I made it get keyslots
-> in blk_mq_get_request, because that way I wouldn't have to worry about
-> programming keys in an atomic context. What do you think of the new
-> approach?
+> 	/* Cap nr_to_read, in order to avoid overflowing the ULONG type: */
+> 	if (index + nr_to_read < index)
+> 		nr_to_read = ULONG_MAX - index + 1;
+> 
+> 	/* Cap nr_to_read, to avoid reading past the inode's isize limit: */
+> 	if (index + nr_to_read >= end_index)
+> 		nr_to_read = end_index - index + 1;
 
-I'll try to review it soon, thanks!
+A little verbose for my taste ... How about this?
+
+        end_index = (isize - 1) >> PAGE_SHIFT;
+        if (index > end_index)
+                return;
+        /* Avoid wrapping to the beginning of the file */
+        if (index + nr_to_read < index)
+                nr_to_read = ULONG_MAX - index + 1;
+        /* Don't read past the page containing the last byte of the file */
+        if (index + nr_to_read >= end_index)
+                nr_to_read = end_index - index + 1;
+
 
 
 _______________________________________________
