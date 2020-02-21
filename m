@@ -2,86 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34245166E8A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 05:30:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49EC7166EA5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2020 05:52:23 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j4zxg-0002jO-EO; Fri, 21 Feb 2020 04:30:48 +0000
+	id 1j50IN-0003dY-O0; Fri, 21 Feb 2020 04:52:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jhubbard@nvidia.com>) id 1j4zxf-0002jH-9v
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 04:30:47 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1j50IM-0003dN-9W
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 04:52:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+Wm3044wXz/CoDYYTB4qibyZMJiORNPZJOuYKY+0G8w=; b=ZDqA8Hb5q/tcpcaVj57Yzh4Vcs
- niDe1QiDWDYXnkPoqo9dB6KGPM2+4ynfHctdgDjqIn8wck9MOe47gRYVgnLwRv5W0Kx5xiAGyGdVc
- KEor3gUn+DaOtUkv0BcJR2cCumdBiioUHGMYhwWwdnnXW47zBQTnXCUzuoJ4MjJs+NcI=;
+ bh=8V430hWkyMTB35swz0y0tGK8j3fxKghIblUOn/eKqrg=; b=VlAZ0DwFvhyxnnfxwXpetcj7on
+ nBjsbSL561as4Avi4isfKxI7cH4Y7z9VcfcTSkUEmZtEtgunuGEPOBC0cJ3tm4AaBWK4RzEVJPD94
+ XvzxSKdAvICLrkh98GrE5Z0pU/pSs0xx0sACxlowheI0rB6YQOvDm5OFeyHE0LeRtjCI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+Wm3044wXz/CoDYYTB4qibyZMJiORNPZJOuYKY+0G8w=; b=nCxK8exyP44goVkaqFhr0nSlDM
- dQ2sJXiilCrd0qw6kvh51Gp4ci5jpgcC/7SV7Z2N6nh4TjXurM63DfT8AJqhUJDIqI704CHA/lIj+
- NNjniWRaMTOsb9kJi7LDCZYXE8xboKwcBQUbvVN1EJhnH1DlqVt3MX3qPRGwsBDnfwR0=;
-Received: from hqnvemgate24.nvidia.com ([216.228.121.143])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
+ Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8V430hWkyMTB35swz0y0tGK8j3fxKghIblUOn/eKqrg=; b=J
+ 0vEmykOqKle+TKHxvoFieJlaFe52/PmCYp1fyEY0wCwCurVp/BCYORpo7lPqCLdk0EPkA8/iUxWj3
+ Ez+7EhPp/ldtDt5GOLlVLcdfNSRE8l3tJRW1x/g1pnp0UmHC+v2pnA91/bcJpI5tCiVB+A8P1jvao
+ EQM4g9x0Vt8VrxwE=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j4zxc-00ClYC-6F
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 04:30:47 +0000
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e4f5ca50002>; Thu, 20 Feb 2020 20:29:25 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Thu, 20 Feb 2020 20:30:38 -0800
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Thu, 20 Feb 2020 20:30:38 -0800
-Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 21 Feb
- 2020 04:30:38 +0000
-To: Matthew Wilcox <willy@infradead.org>, <linux-fsdevel@vger.kernel.org>
-References: <20200219210103.32400-1-willy@infradead.org>
- <20200219210103.32400-11-willy@infradead.org>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <45d67cb1-9ca3-e2b8-d71f-1f0c2e085155@nvidia.com>
-Date: Thu, 20 Feb 2020 20:30:37 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ id 1j50IJ-00CQXX-Hc
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Feb 2020 04:52:10 +0000
+Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id C24D920722;
+ Fri, 21 Feb 2020 04:52:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1582260721;
+ bh=NIb+2BaYlYqr7iWtTRkiEvfsihqHfCzh+L7LtI63+So=;
+ h=From:To:Subject:Date:From;
+ b=DC4ELjQ23Y6Vw+rpR1xFnPWxc/v+LkAbBzcq973ggMbhqQPBoTxggh5vjBryLtY+4
+ wJ7bg5z8j4tDUwINhxXLbz2SZbNeaWIM4aJTaqn9/WLy0+vx+z1jAGOAgYCogeuvjt
+ qKy7dKX+eMkvBEnV4/ZqJyvLsfX67VMJD0e/0eC4=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net, Chao Yu <chao@kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Thu, 20 Feb 2020 20:50:37 -0800
+Message-Id: <20200221045037.154450-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20200219210103.32400-11-willy@infradead.org>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1582259366; bh=+Wm3044wXz/CoDYYTB4qibyZMJiORNPZJOuYKY+0G8w=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=UitvsuI1yoXnzml76+cSz7F+oTZFS/iyT7dOV5LH/5L9YZnf2JDmcICsW5QQsDOWw
- JEmxfGjJhpm6Mw0DpkQ4I97JHP2YxMVlsg4TdE5MBveHV+wfxOmkMx2E9X1fQGLWfG
- f8znlDQrWpx92I4FW23hWS3bxNs0j+rkOmq+Rdu1ptzaIP6nxGv9ByYUjCJJs79YE7
- seWhQosGZtfe20jPzoLRnPNfNQlt0kzqk9SCpCzrG7HeKnuVPkQFIfGbTqOGCn3/Pw
- /XB5cMIwzFk+62xO1plJYkkUcmyRC6IeEYi54p0+giupM67/DiXtRdSSVw1QBxLyH7
- Qd6o1BBujjHhg==
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: nvidia.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -91,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j4zxc-00ClYC-6F
-Subject: Re: [f2fs-dev] [PATCH v7 10/24] mm: Add readahead address space
- operation
+X-Headers-End: 1j50IJ-00CQXX-Hc
+Subject: [f2fs-dev] [PATCH] f2fs: fix leaking uninitialized memory in
+ compressed clusters
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,197 +83,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2/19/20 1:00 PM, Matthew Wilcox wrote:
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> 
-> This replaces ->readpages with a saner interface:
->  - Return void instead of an ignored error code.
->  - Page cache is already populated with locked pages when ->readahead
->    is called.
->  - New arguments can be passed to the implementation without changing
->    all the filesystems that use a common helper function like
->    mpage_readahead().
-> 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> ---
->  Documentation/filesystems/locking.rst |  6 +++++-
->  Documentation/filesystems/vfs.rst     | 15 +++++++++++++++
->  include/linux/fs.h                    |  2 ++
->  include/linux/pagemap.h               | 18 ++++++++++++++++++
->  mm/readahead.c                        | 12 ++++++++++--
->  5 files changed, 50 insertions(+), 3 deletions(-)
+From: Eric Biggers <ebiggers@google.com>
 
+When the compressed data of a cluster doesn't end on a page boundary,
+the remainder of the last page must be zeroed in order to avoid leaking
+uninitialized memory to disk.
 
-This all looks correct to me, so: 
+Fixes: 4c8ff7095bef ("f2fs: support data compression")
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/compress.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-    Reviewed-by: John Hubbard <jhubbard@nvidia.com>
-
-
-thanks,
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index d8a64be90a501..ef7dd04312fed 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -385,11 +385,15 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+ 	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
+ 		cc->cbuf->reserved[i] = cpu_to_le32(0);
+ 
++	nr_cpages = DIV_ROUND_UP(cc->clen + COMPRESS_HEADER_SIZE, PAGE_SIZE);
++
++	/* zero out any unused part of the last page */
++	memset(&cc->cbuf->cdata[cc->clen], 0,
++	       (nr_cpages * PAGE_SIZE) - (cc->clen + COMPRESS_HEADER_SIZE));
++
+ 	vunmap(cc->cbuf);
+ 	vunmap(cc->rbuf);
+ 
+-	nr_cpages = DIV_ROUND_UP(cc->clen + COMPRESS_HEADER_SIZE, PAGE_SIZE);
+-
+ 	for (i = nr_cpages; i < cc->nr_cpages; i++) {
+ 		f2fs_put_compressed_page(cc->cpages[i]);
+ 		cc->cpages[i] = NULL;
 -- 
-John Hubbard
-NVIDIA
+2.25.1
 
-
-> 
-> diff --git a/Documentation/filesystems/locking.rst b/Documentation/filesystems/locking.rst
-> index 5057e4d9dcd1..0af2e0e11461 100644
-> --- a/Documentation/filesystems/locking.rst
-> +++ b/Documentation/filesystems/locking.rst
-> @@ -239,6 +239,7 @@ prototypes::
->  	int (*readpage)(struct file *, struct page *);
->  	int (*writepages)(struct address_space *, struct writeback_control *);
->  	int (*set_page_dirty)(struct page *page);
-> +	void (*readahead)(struct readahead_control *);
->  	int (*readpages)(struct file *filp, struct address_space *mapping,
->  			struct list_head *pages, unsigned nr_pages);
->  	int (*write_begin)(struct file *, struct address_space *mapping,
-> @@ -271,7 +272,8 @@ writepage:		yes, unlocks (see below)
->  readpage:		yes, unlocks
->  writepages:
->  set_page_dirty		no
-> -readpages:
-> +readahead:		yes, unlocks
-> +readpages:		no
->  write_begin:		locks the page		 exclusive
->  write_end:		yes, unlocks		 exclusive
->  bmap:
-> @@ -295,6 +297,8 @@ the request handler (/dev/loop).
->  ->readpage() unlocks the page, either synchronously or via I/O
->  completion.
->  
-> +->readahead() unlocks the pages that I/O is attempted on like ->readpage().
-> +
->  ->readpages() populates the pagecache with the passed pages and starts
->  I/O against them.  They come unlocked upon I/O completion.
->  
-> diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
-> index 7d4d09dd5e6d..ed17771c212b 100644
-> --- a/Documentation/filesystems/vfs.rst
-> +++ b/Documentation/filesystems/vfs.rst
-> @@ -706,6 +706,7 @@ cache in your filesystem.  The following members are defined:
->  		int (*readpage)(struct file *, struct page *);
->  		int (*writepages)(struct address_space *, struct writeback_control *);
->  		int (*set_page_dirty)(struct page *page);
-> +		void (*readahead)(struct readahead_control *);
->  		int (*readpages)(struct file *filp, struct address_space *mapping,
->  				 struct list_head *pages, unsigned nr_pages);
->  		int (*write_begin)(struct file *, struct address_space *mapping,
-> @@ -781,12 +782,26 @@ cache in your filesystem.  The following members are defined:
->  	If defined, it should set the PageDirty flag, and the
->  	PAGECACHE_TAG_DIRTY tag in the radix tree.
->  
-> +``readahead``
-> +	Called by the VM to read pages associated with the address_space
-> +	object.  The pages are consecutive in the page cache and are
-> +	locked.  The implementation should decrement the page refcount
-> +	after starting I/O on each page.  Usually the page will be
-> +	unlocked by the I/O completion handler.  If the filesystem decides
-> +	to stop attempting I/O before reaching the end of the readahead
-> +	window, it can simply return.  The caller will decrement the page
-> +	refcount and unlock the remaining pages for you.  Set PageUptodate
-> +	if the I/O completes successfully.  Setting PageError on any page
-> +	will be ignored; simply unlock the page if an I/O error occurs.
-> +
->  ``readpages``
->  	called by the VM to read pages associated with the address_space
->  	object.  This is essentially just a vector version of readpage.
->  	Instead of just one page, several pages are requested.
->  	readpages is only used for read-ahead, so read errors are
->  	ignored.  If anything goes wrong, feel free to give up.
-> +	This interface is deprecated and will be removed by the end of
-> +	2020; implement readahead instead.
->  
->  ``write_begin``
->  	Called by the generic buffered write code to ask the filesystem
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index 3cd4fe6b845e..d4e2d2964346 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -292,6 +292,7 @@ enum positive_aop_returns {
->  struct page;
->  struct address_space;
->  struct writeback_control;
-> +struct readahead_control;
->  
->  /*
->   * Write life time hint values.
-> @@ -375,6 +376,7 @@ struct address_space_operations {
->  	 */
->  	int (*readpages)(struct file *filp, struct address_space *mapping,
->  			struct list_head *pages, unsigned nr_pages);
-> +	void (*readahead)(struct readahead_control *);
->  
->  	int (*write_begin)(struct file *, struct address_space *mapping,
->  				loff_t pos, unsigned len, unsigned flags,
-> diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
-> index 4989d330fada..b3008605fd1b 100644
-> --- a/include/linux/pagemap.h
-> +++ b/include/linux/pagemap.h
-> @@ -669,6 +669,24 @@ static inline struct page *readahead_page(struct readahead_control *rac)
->  	return page;
->  }
->  
-> +/* The byte offset into the file of this readahead block */
-> +static inline loff_t readahead_pos(struct readahead_control *rac)
-> +{
-> +	return (loff_t)rac->_index * PAGE_SIZE;
-> +}
-> +
-> +/* The number of bytes in this readahead block */
-> +static inline loff_t readahead_length(struct readahead_control *rac)
-> +{
-> +	return (loff_t)rac->_nr_pages * PAGE_SIZE;
-> +}
-> +
-> +/* The index of the first page in this readahead block */
-> +static inline unsigned int readahead_index(struct readahead_control *rac)
-> +{
-> +	return rac->_index;
-> +}
-> +
->  /* The number of pages in this readahead block */
->  static inline unsigned int readahead_count(struct readahead_control *rac)
->  {
-> diff --git a/mm/readahead.c b/mm/readahead.c
-> index aaa209559ba2..07cdfbf00f4b 100644
-> --- a/mm/readahead.c
-> +++ b/mm/readahead.c
-> @@ -124,7 +124,14 @@ static void read_pages(struct readahead_control *rac, struct list_head *pages)
->  
->  	blk_start_plug(&plug);
->  
-> -	if (aops->readpages) {
-> +	if (aops->readahead) {
-> +		aops->readahead(rac);
-> +		/* Clean up the remaining pages */
-> +		while ((page = readahead_page(rac))) {
-> +			unlock_page(page);
-> +			put_page(page);
-> +		}
-> +	} else if (aops->readpages) {
->  		aops->readpages(rac->file, rac->mapping, pages,
->  				readahead_count(rac));
->  		/* Clean up the remaining pages */
-> @@ -234,7 +241,8 @@ void force_page_cache_readahead(struct address_space *mapping,
->  	struct file_ra_state *ra = &filp->f_ra;
->  	unsigned long max_pages;
->  
-> -	if (unlikely(!mapping->a_ops->readpage && !mapping->a_ops->readpages))
-> +	if (unlikely(!mapping->a_ops->readpage && !mapping->a_ops->readpages &&
-> +			!mapping->a_ops->readahead))
->  		return;
->  
->  	/*
-> 
 
 
 _______________________________________________
