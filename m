@@ -2,100 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D743168ADA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 22 Feb 2020 01:15:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 111A9168B28
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 22 Feb 2020 01:45:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j5ISN-0005ZC-7d; Sat, 22 Feb 2020 00:15:43 +0000
+	id 1j5Iut-0007uk-U5; Sat, 22 Feb 2020 00:45:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jhubbard@nvidia.com>) id 1j5ISL-0005Yy-M0
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Feb 2020 00:15:41 +0000
+ (envelope-from <darrick.wong@oracle.com>) id 1j5Iun-0007uW-7u
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Feb 2020 00:45:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xu1W/y2f9OTxnj+6T8DBBjck/f2ICJjqDeKYJhM73bw=; b=T1lZSGQ0OPzJrvDMRlmRzOQFsO
- o01JJXgGrjlUxf1VkgUwj3Ja2sgY4G3wuZDeP6GEtQrMJhx6ylD7aifupJrw/nLtyCrB78u9VDTRG
- /jIYH7OXZyv4u25jdakbeJN0Nnp7JuF9T63lXPwHYOXRS8acJH7E141QWS5kiy2ujd08=;
+ bh=RJWVxIQBtpVgLNZnOCgy+9DNBRETFyaw+B0IqQ80Smk=; b=j8fEIQD43PcNKNu9MszKXzfryq
+ 7s127gjiqDZavMSmN3E+uFdK+CGjgP0vXKOthLw8RRXhE3I0T7c0YuW6axPq2SHL2WZSik87zk7WW
+ oC2KnKIHZREw0l3/fsJpB7+bsiJ1n2pPlKSzpBQxDqDbzl+gcjUzbumBcV9JA6CanDAI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Xu1W/y2f9OTxnj+6T8DBBjck/f2ICJjqDeKYJhM73bw=; b=Xt7RKU1Go9c3u2sfEAh/m16mvV
- 2vZY7q1/n9Z8C4zNQQkDQZ+jMS/ZFxCyr7HeQMFOIPtiM5kzvNv+XGNGz6M+Kxj0uTlp4aO98J5yO
- mUr5LwGm7QhLovcv8AFU5fr0SuzEcEE84Nvfbn2Peo4Vled8QMqwzDz4C0M80NFhMb9s=;
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=RJWVxIQBtpVgLNZnOCgy+9DNBRETFyaw+B0IqQ80Smk=; b=WIZTFGf4ed+XBGitrU6Z1Rdkso
+ ocN/NJ/q28f/pvRKp/ugmGVuize07pBtDjBPKYT12UxGOnRAKbfVRNflIltkSam4hXffMNTkucmJe
+ 8dT1+Ddp28I8iFQLcMPZalY0LlwiKITEFO1kA2OWn2hXupOVDHQ4atHEDwIID25ZROHc=;
+Received: from aserp2120.oracle.com ([141.146.126.78])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j5ISH-00D9zM-S3
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Feb 2020 00:15:41 +0000
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e50727e0001>; Fri, 21 Feb 2020 16:14:54 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Fri, 21 Feb 2020 16:15:28 -0800
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Fri, 21 Feb 2020 16:15:28 -0800
-Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Sat, 22 Feb
- 2020 00:15:28 +0000
+ id 1j5Iuk-003gJE-9L
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 22 Feb 2020 00:45:05 +0000
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 01M0iXKo069490;
+ Sat, 22 Feb 2020 00:44:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=RJWVxIQBtpVgLNZnOCgy+9DNBRETFyaw+B0IqQ80Smk=;
+ b=nN7Sv9aAp1H5VNNHgY3l0Y8a6GkUkVAQwxYCK7nBY3u4+U0MhiP8X5I4zx8YknXK7zVO
+ kSiV7uX0W1ht1ti0UCfB9WMesmmPQQNYMgrjYAKzWbu9+zDyk1QLFzxk2eXMBu12OgOb
+ IK11lZpex2Vs79Mc9GOI67PGIte05b1FhvOddV/Hmp6TCKu+/8YmKr57C9gshxW+71eS
+ k9YCRmVeiiMcdml+G/0dXbBKhQpDRF4Jb5reMrmO6oBEKdRiXFUaNCeG2SoUS7s1lCC0
+ vObNA+f+EtvbzMBjjuEOJkL0chWUualvFuiinduRft/uSF2RD+r78eE7lIG3Vpw6kQnj OA== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by aserp2120.oracle.com with ESMTP id 2y8udkuk25-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 22 Feb 2020 00:44:33 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 01M0h54Z146709;
+ Sat, 22 Feb 2020 00:44:33 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3030.oracle.com with ESMTP id 2y8udg8m3c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 22 Feb 2020 00:44:33 +0000
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 01M0iWwv149129;
+ Sat, 22 Feb 2020 00:44:32 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by aserp3030.oracle.com with ESMTP id 2y8udg8m32-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 22 Feb 2020 00:44:32 +0000
+Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
+ by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 01M0iRp8021588;
+ Sat, 22 Feb 2020 00:44:27 GMT
+Received: from localhost (/10.145.179.117)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Fri, 21 Feb 2020 16:44:27 -0800
+Date: Fri, 21 Feb 2020 16:44:25 -0800
+From: "Darrick J. Wong" <darrick.wong@oracle.com>
 To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200222004425.GG9506@magnolia>
 References: <20200219210103.32400-1-willy@infradead.org>
- <20200219210103.32400-2-willy@infradead.org>
- <e065679e-222f-7323-9782-0c4471bb9233@nvidia.com>
- <20200221214853.GF24185@bombadil.infradead.org>
-From: John Hubbard <jhubbard@nvidia.com>
-X-Nvconfidentiality: public
-Message-ID: <69fa8779-3433-9d35-a1f4-f115dc86c6d8@nvidia.com>
-Date: Fri, 21 Feb 2020 16:15:27 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <20200219210103.32400-22-willy@infradead.org>
 MIME-Version: 1.0
-In-Reply-To: <20200221214853.GF24185@bombadil.infradead.org>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1582330494; bh=Xu1W/y2f9OTxnj+6T8DBBjck/f2ICJjqDeKYJhM73bw=;
- h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=p2+0C6I2/yxvNQ1pZnv87YfPksTddG+e8cc03+sVRvODjU2CaK7MWQBiokHBWhwgb
- ieVI22Ga85j5LMOJVhYhtaccRh8zhO2H+xRsWBU/P8jaMdk1KeAHP1UgdQZbuh/fxI
- hzO1rCi0fPdivx/Gdy87keJKQLfBTMl82lrGPg+HtMx4bbn1scu0JW30tCh15BSQmD
- mQSimv7RYwfVWTinVZWGntdq5fdSKt8II8eY04QJynTy8RS0zcVz5otr5kwPPCZ2pE
- v1Ek68IoRy4J0my4VYUXkHH4q/cEli9/t/FTx/7/JWNBZEw7tWg2FKjPvsTsMCyd6G
- n45AbsLmye9OQ==
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <20200219210103.32400-22-willy@infradead.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9538
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ lowpriorityscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 mlxscore=0 clxscore=1011
+ malwarescore=0 mlxlogscore=999 phishscore=0 impostorscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2001150001
+ definitions=main-2002220001
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: nvidia.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [URIs: infradead.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j5ISH-00D9zM-S3
-Subject: Re: [f2fs-dev] [PATCH v7 01/24] mm: Move readahead prototypes from
- mm.h
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j5Iuk-003gJE-9L
+Subject: Re: [f2fs-dev] [PATCH v7 21/24] iomap: Restructure
+ iomap_readpages_actor
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,71 +132,88 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2/21/20 1:48 PM, Matthew Wilcox wrote:
-> On Thu, Feb 20, 2020 at 06:43:31PM -0800, John Hubbard wrote:
->> Yes. But I think these files also need a similar change:
->>
->>     fs/btrfs/disk-io.c
+On Wed, Feb 19, 2020 at 01:01:00PM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 > 
-> That gets pagemap.h through ctree.h, so I think it's fine.  It's
-> already using mapping_set_gfp_mask(), so it already depends on pagemap.h.
+> By putting the 'have we reached the end of the page' condition at the end
+> of the loop instead of the beginning, we can remove the 'submit the last
+> page' code from iomap_readpages().  Also check that iomap_readpage_actor()
+> didn't return 0, which would lead to an endless loop.
 > 
->>     fs/nfs/super.c
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>  fs/iomap/buffered-io.c | 32 ++++++++++++++++++--------------
+>  1 file changed, 18 insertions(+), 14 deletions(-)
 > 
-> That gets it through linux/nfs_fs.h.
-> 
-> I was reluctant to not add it to blk-core.c because it doesn't seem
-> necessarily intuitive that the block device core would include pagemap.h.
-> 
-> That said, blkdev.h does include pagemap.h, so maybe I don't need to
-> include it here.
+> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+> index cb3511eb152a..31899e6cb0f8 100644
+> --- a/fs/iomap/buffered-io.c
+> +++ b/fs/iomap/buffered-io.c
+> @@ -400,15 +400,9 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
+>  		void *data, struct iomap *iomap, struct iomap *srcmap)
+>  {
+>  	struct iomap_readpage_ctx *ctx = data;
+> -	loff_t done, ret;
+> -
+> -	for (done = 0; done < length; done += ret) {
+> -		if (ctx->cur_page && offset_in_page(pos + done) == 0) {
+> -			if (!ctx->cur_page_in_bio)
+> -				unlock_page(ctx->cur_page);
+> -			put_page(ctx->cur_page);
+> -			ctx->cur_page = NULL;
+> -		}
+> +	loff_t ret, done = 0;
+> +
+> +	while (done < length) {
+>  		if (!ctx->cur_page) {
+>  			ctx->cur_page = iomap_next_page(inode, ctx->pages,
+>  					pos, length, &done);
+> @@ -418,6 +412,20 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
+>  		}
+>  		ret = iomap_readpage_actor(inode, pos + done, length - done,
+>  				ctx, iomap, srcmap);
+> +		done += ret;
+> +
+> +		/* Keep working on a partial page */
+> +		if (ret && offset_in_page(pos + done))
+> +			continue;
+> +
+> +		if (!ctx->cur_page_in_bio)
+> +			unlock_page(ctx->cur_page);
+> +		put_page(ctx->cur_page);
+> +		ctx->cur_page = NULL;
+> +
+> +		/* Don't loop forever if we made no progress */
+> +		if (WARN_ON(!ret))
+> +			break;
+>  	}
+>  
+>  	return done;
+> @@ -451,11 +459,7 @@ iomap_readpages(struct address_space *mapping, struct list_head *pages,
+>  done:
+>  	if (ctx.bio)
+>  		submit_bio(ctx.bio);
+> -	if (ctx.cur_page) {
+> -		if (!ctx.cur_page_in_bio)
+> -			unlock_page(ctx.cur_page);
+> -		put_page(ctx.cur_page);
+> -	}
+> +	BUG_ON(ctx.cur_page);
 
-OK. Looks good (either through blkdev.h or as-is), so:
+Whoah, is the system totally unrecoverably hosed at this point?
 
-    Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+I get that this /shouldn't/ happen, but should we somehow end up with a
+page here, are we unable either to release it or even just leak it?  I'd
+have thought a WARN_ON would be just fine here.
 
+--D
 
+>  
+>  	/*
+>  	 * Check that we didn't lose a page due to the arcance calling
+> -- 
+> 2.25.0
 > 
->> ...because they also use VM_READAHEAD_PAGES, and do not directly include
->> pagemap.h yet.
-> 
->>> +#define VM_READAHEAD_PAGES	(SZ_128K / PAGE_SIZE)
->>> +
->>> +void page_cache_sync_readahead(struct address_space *, struct file_ra_state *,
->>> +		struct file *, pgoff_t index, unsigned long req_count);
->>
->> Yes, "struct address_space *mapping" is weird, but I don't know if it's
->> "misleading", given that it's actually one of the things you have to learn
->> right from the beginning, with linux-mm, right? Or is that about to change?
->>
->> I'm not asking to restore this to "struct address_space *mapping", but I thought
->> it's worth mentioning out loud, especially if you or others are planning on
->> changing those names or something. Just curious.
-> 
-> No plans (on my part) to change the name, although I have heard people
-> grumbling that there's very little need for it to be a separate struct
-> from inode, except for the benefit of coda, which is not exactly a
-> filesystem with a lot of users ...
-> 
-> Anyway, no plans to change it.  If there were something _special_ about
-> it like a theoretical:
-> 
-> void mapping_dedup(struct address_space *canonical,
-> 		struct address_space *victim);
-> 
-> then that's useful information and shouldn't be deleted.  But I don't
-> think the word 'mapping' there conveys anything useful (other than the
-> convention is to call a 'struct address_space' a mapping, which you'll
-> see soon enough once you look at any of the .c files).
-> 
-
-OK, that's consistent and makes sense.
-
-
-thanks,
--- 
-John Hubbard
-NVIDIA
 
 
 _______________________________________________
