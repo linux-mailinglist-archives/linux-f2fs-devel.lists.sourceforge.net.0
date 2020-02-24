@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A25FC16B36B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 22:57:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D022816B375
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 23:00:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6Ljd-0000fu-9R; Mon, 24 Feb 2020 21:57:53 +0000
+	id 1j6LmN-0000nC-IT; Mon, 24 Feb 2020 22:00:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+fd4c774fa746ae91f5d1+6028+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j6Ljb-0000fh-V9
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:57:51 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1j6LmL-0000n4-HJ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 22:00:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IhFcixf6xB7flTgkTYeOnbWlEpWZuV6CKSy7ZQez0WI=; b=WGTIfjW+xHbdWCJDsrpLn5jFTG
- +9vo1OMqOjKDI1yZuvEZ1e2OkWjJuwZN9UQKW0pcAtZ5tws7zniyfhY52PoBBnFdLuipaXdgF+5HI
- +Ns4pbM/zcO+Hg32+zUBCH6mTzlbPJcL9JtuG6WvAbmaN3IanEFEQUKnZSfL1q+N5YAE=;
+ bh=ruu/Rn4hMv8v5OeE3t24iof8dSYHpCJXLEq2Majx4cc=; b=V/dD1BBt6iP1guG85omsyymTvo
+ +xhKiIZCDIWZlkq6xjh0JOHEBtdds4S4IzDta2Kr+gXnzYGGcJsf5pA9psOzpnQAKug+5CRRitAVm
+ UWHRnsAygFT+cNfNoPuXBqlbxI26IPbPFp+PbhN7Dnl12FoWkkRbHTVeVMMVhXVAOauE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,58 +29,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IhFcixf6xB7flTgkTYeOnbWlEpWZuV6CKSy7ZQez0WI=; b=aqDe1j3vJwn1QGjqPKhYo9xpmv
- lcM/ggKwixPO4kR95qVobo0yobBeyK1cVSEJ2M7pRQ9pU3U2bQsMmGSacONqylgMJlEbL9seycAuI
- 6nSMPaDSuXrlUxYanc0QWYVgLGEQCzQSPA8iNiMcStdenfXHAoLproknQo5mscvhh9xk=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=ruu/Rn4hMv8v5OeE3t24iof8dSYHpCJXLEq2Majx4cc=; b=EczYLfHiHvqZj8j+OE3BTGSJLI
+ TDN+SPA5uK+6JvA1PM6+/2twv3w3nrMjD+Oqq3l0zThw3eqqZuB7k1+xy/JlD4Q/4Xu/6yu+JNb3M
+ BscdoO/5WtnvEJ5QzYm7TWNe2Pz0f2NXkN1PVZ6/UnWlAaiPkCHwMX9BhzBx6B9D12T4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6Lja-005TOs-Uu
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:57:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=IhFcixf6xB7flTgkTYeOnbWlEpWZuV6CKSy7ZQez0WI=; b=Xsl1VicGy/cUMy3nKSfLYsp4JQ
- XuauTs+SlYeSgQlRLvumnWjOr2cplAYv962X+iwgIS1cxx+dgzmOltxe84qM829HlpGa7tIVs0rCR
- UHY9vePWsKoMCOJwVPvOJVEDVFCToUF9yNOI+tB8g0de/RYeV2SMFMNQdVuKQtuM7NwbEbskf1eLg
- dUXO0x+mn96sZpwZlnDzQxbegLQ/KMtN7w/7oKgd1oDm9ELzK0l9J7YruyW3Oz774Ix0HS0VLNMdY
- vEye7QuENdlHLI1W4ae0sgNhwCA9TIm6YccKAq+w4+qAYpIVZfjL3mSg7AgI6bRAZf2eZBA7qbemA
- dCabWfIw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j6LjT-0006S8-Ch; Mon, 24 Feb 2020 21:57:43 +0000
-Date: Mon, 24 Feb 2020 13:57:43 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200224215743.GA24044@infradead.org>
-References: <20200219210103.32400-1-willy@infradead.org>
- <20200219210103.32400-15-willy@infradead.org>
- <SN4PR0401MB35987D7B76007B93B1C5CE5E9B130@SN4PR0401MB3598.namprd04.prod.outlook.com>
- <20200220134849.GV24185@bombadil.infradead.org>
- <20200220154658.GA19577@infradead.org>
- <20200220155452.GX24185@bombadil.infradead.org>
- <20200220155727.GA32232@infradead.org>
- <20200224214347.GH13895@infradead.org>
- <20200224215414.GR24185@bombadil.infradead.org>
+ id 1j6LmJ-008zEG-DB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 22:00:41 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1DD0120CC7;
+ Mon, 24 Feb 2020 22:00:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1582581632;
+ bh=EZ+Ei0mMz9aXg3foEaWmEi27b7awpExGYB0AFFAuoqI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=g0MIX48mZqh7MT751Vhna3OD982qJJ5UTkzxOZbW23WmZhEVMyMaAgEy6GR85ShQY
+ MHxPab2CLyyQ6oJO+pLL5YlNbtDt7e3pw1yr8mRUi30r1jQqo/NRNHPI+4NTbb5z5x
+ n82nVdimza2L8+HJKyGBjmGN4g2OgB6DaVVPCJkM=
+Date: Mon, 24 Feb 2020 14:00:31 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200224220031.GC77839@google.com>
+References: <20200218102136.32150-1-yuchao0@huawei.com>
+ <20200218102136.32150-3-yuchao0@huawei.com>
+ <20200219025154.GB96609@google.com>
+ <576f8389-ba27-b461-5466-cc62e84b5c92@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200224215414.GR24185@bombadil.infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <576f8389-ba27-b461-5466-cc62e84b5c92@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6Lja-005TOs-Uu
-Subject: Re: [f2fs-dev] [PATCH v7 14/24] btrfs: Convert from readpages to
- readahead
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1j6LmJ-008zEG-DB
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: avoid unneeded barrier in
+ do_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,34 +86,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "cluster-devel@redhat.com" <cluster-devel@redhat.com>,
- Johannes Thumshirn <Johannes.Thumshirn@wdc.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- Christoph Hellwig <hch@infradead.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "ocfs2-devel@oss.oracle.com" <ocfs2-devel@oss.oracle.com>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
- "linux-erofs@lists.ozlabs.org" <linux-erofs@lists.ozlabs.org>,
- "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
- "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 24, 2020 at 01:54:14PM -0800, Matthew Wilcox wrote:
-> > First I think the implicit ARRAY_SIZE in readahead_page_batch is highly
-> > dangerous, as it will do the wrong thing when passing a pointer or
-> > function argument.
+On 02/19, Chao Yu wrote:
+> On 2020/2/19 10:51, Jaegeuk Kim wrote:
+> > On 02/18, Chao Yu wrote:
+> >> We don't need to wait all dirty page submitting IO twice,
+> >> remove unneeded wait step.
+> > 
+> > What happens if checkpoint and other meta writs are reordered?
 > 
-> somebody already thought of that ;-)
+> checkpoint can be done as following:
 > 
-> #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
+> 1. All meta except last cp-park of checkpoint area.
+> 2. last cp-park of checkpoint area
+> 
+> So we only need to keep barrier in between step 1 and 2, we don't need
+> to care about the write order of meta in step 1, right?
 
-Ok.  Still find it pretty weird to design a primary interface that
-just works with an array type.
+Ah, let me integrate this patch into Sahitya's patch.
+
+f2fs: fix the panic in do_checkpoint()
+
+> 
+> Thanks,
+> 
+> > 
+> >>
+> >> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> >> ---
+> >>  fs/f2fs/checkpoint.c | 2 --
+> >>  1 file changed, 2 deletions(-)
+> >>
+> >> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> >> index 751815cb4c2b..9c88fb3d255a 100644
+> >> --- a/fs/f2fs/checkpoint.c
+> >> +++ b/fs/f2fs/checkpoint.c
+> >> @@ -1384,8 +1384,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+> >>  
+> >>  	/* Flush all the NAT/SIT pages */
+> >>  	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+> >> -	/* Wait for all dirty meta pages to be submitted for IO */
+> >> -	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
+> >>  
+> >>  	/*
+> >>  	 * modify checkpoint
+> >> -- 
+> >> 2.18.0.rc1
+> > .
+> > 
 
 
 _______________________________________________
