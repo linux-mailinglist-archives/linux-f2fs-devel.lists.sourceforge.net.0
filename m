@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4728A16B292
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 22:34:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B73316B2A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 22:34:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6LMd-0000Vm-3P; Mon, 24 Feb 2020 21:34:07 +0000
+	id 1j6LN8-0004bl-TO; Mon, 24 Feb 2020 21:34:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+fd4c774fa746ae91f5d1+6028+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j6LMc-0000Vg-IZ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:34:06 +0000
+ id 1j6LN8-0004bc-Dx
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:34:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l2WBiCb5duYJRA9nKpihqrJOH1Qjg6utSrFiu8qAdtc=; b=EPSkV5JeVQDGk0Dg7HrXSH0g6i
- iHacdalusglfyrXUI0sRm8qFn7MOZ4N4qK5dlthx+dZkfVxeTPKkp7KaewCCGnjfgk8owcHyw4apP
- MJc50S8MPU15UkUGwZO+DZKvYHlJjNJRrCx9LucG0Ihlyfoz33mj6GkM21UHoAfgtsBE=;
+ bh=h9cf10iCtPnLTwQuBkW69J+FxlKeKDa7FzCrtD5etU0=; b=EkRphxI8TqVml3lX/qLbHatzrl
+ U0vSa2HqkjgXXvA0JwIqqLNjjbws+cCO4FPzDnaQw62XMFRya17fW0oqKKqTY3P0JSAfruBuZVIhO
+ dh4SukvJ5Gij1Qtdmo6ZE32W5cQjJNWNMpJ6w5eLTFdAa0EKLWv/8qckET4a8zYpMqck=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=l2WBiCb5duYJRA9nKpihqrJOH1Qjg6utSrFiu8qAdtc=; b=dQvvii3E61XOqFa/h4Zvyd0+BQ
- MUwg5T1kTh0HBu4GkR1TwCTQERrSo49qQCePUx4RueJfltKS8SYjW7xrHZiMUo8d9ig7ujlzgdh/n
- cBK2QhsAmkDl+1wa2PTTawMWtSpVdqIHHve9fWyDMZlQsa2qtMc3+5JAM1HFaAz4G3c8=;
+ bh=h9cf10iCtPnLTwQuBkW69J+FxlKeKDa7FzCrtD5etU0=; b=AMC24Cu+TXXxpHdDYbdoHxVcgP
+ PN3fvrPs2jVWC3LeJac6nN0cu7AyDtrPBT+PcyV+gGUPXLUQIB9O07cuTDEIqnmoy6feuasGCzvFB
+ b4iWrjrpHHqBCwbDkLD4tBpnI2+KrpODqbtEkdC3nrOCX+wuHBZOU4OlvIrTzk/WAqn4=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6LMa-005SWn-G4
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:34:06 +0000
+ id 1j6LN5-00FRdg-2o
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:34:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=l2WBiCb5duYJRA9nKpihqrJOH1Qjg6utSrFiu8qAdtc=; b=CiTwqnEvciiAQat+oldK633lmg
- zUawSauYqMaewNeZNVkeqnPK9Dhr87RX5DCkkld/HO7vh1OMCcSSpI6qklmXTtXeOk9AKTwRC3+kA
- 6pf3Pjk2PiFQ9J8Q+q9u93/j1yk2LCsyKVrXcjrWVTOSiNY8S+dka/Tg3TIfYq6mXxUUiYmadp/Qz
- jrgn7KhcrwzLQshsGaCz1A8KpgR3cTw0cWajD7kDWH+IbtI99BCaafCuCvpMRoPJuUYxgKYyXgeLc
- OIJmBvwaPjoGKLZqi0ywPLQaNkBXn7O0W6ogtLU4CqYsPBWE1o/YSi0+8TFNlNMRRoH7t7l6VNSZ5
- luB/mO1Q==;
+ bh=h9cf10iCtPnLTwQuBkW69J+FxlKeKDa7FzCrtD5etU0=; b=SH4Zm1WNzfTYIq/DSOIWvy23AR
+ DPI2x856EKO69cJRpJCTmsHgo0z6UGzPyz8tuDkedAoWSDrmd0XLvyNGo0ZFn23cYKzgxrSIbnVPs
+ y+Dq9RA/hLxGChXr6yzrG/KoBeSqmn87OHIzV4YnKWpzMEuTbLGzyg3OlF6Q4W6VvIlLj/mkRqHZ3
+ pgfbWw+L5oQzWZ4yKnwYZlV3vdfGyNuccDRKRJWYeVANIZD9sqM66SjndKE/I0CLgxxmJluCB3AZg
+ Pkxzvi+K8MiCbR8OJgHI/Qj/Uxh1mGjYn/DviBficxtzsXL/izjjUx90L69WAIKw2tupIeOWUnpjz
+ 3ONnfXdw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j6LMO-0004Ap-Do; Mon, 24 Feb 2020 21:33:52 +0000
-Date: Mon, 24 Feb 2020 13:33:52 -0800
+ Hat Linux)) id 1j6LMr-0004Ee-Q4; Mon, 24 Feb 2020 21:34:21 +0000
+Date: Mon, 24 Feb 2020 13:34:21 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200224213352.GB13895@infradead.org>
+Message-ID: <20200224213421.GC13895@infradead.org>
 References: <20200219210103.32400-1-willy@infradead.org>
- <20200219210103.32400-3-willy@infradead.org>
+ <20200219210103.32400-5-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200219210103.32400-3-willy@infradead.org>
+In-Reply-To: <20200219210103.32400-5-willy@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.2 (/)
@@ -73,9 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6LMa-005SWn-G4
-Subject: Re: [f2fs-dev] [PATCH v7 02/24] mm: Return void from various
- readahead functions
+X-Headers-End: 1j6LN5-00FRdg-2o
+Subject: Re: [f2fs-dev] [PATCH v7 04/24] mm: Move readahead nr_pages check
+ into read_pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,15 +87,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
- Dave Chinner <dchinner@redhat.com>, linux-fsdevel@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
  linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
+
+On Wed, Feb 19, 2020 at 01:00:43PM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> 
+> Simplify the callers by moving the check for nr_pages and the BUG_ON
+> into read_pages().
+> 
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
 Looks good,
 
