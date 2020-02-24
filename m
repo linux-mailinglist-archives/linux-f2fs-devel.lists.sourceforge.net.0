@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ABF116B5BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 00:36:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB0CF16B5C7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 00:38:18 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6NHA-0005Ui-4H; Mon, 24 Feb 2020 23:36:36 +0000
+	id 1j6NIn-0005hV-A3; Mon, 24 Feb 2020 23:38:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+fd4c774fa746ae91f5d1+6028+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j6NH8-0005US-Fr
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:36:34 +0000
+ id 1j6NIm-0005hK-8B
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:38:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=su7zxcSpmTZRMT/KaDln9XS6SD5jlWklN/1EnJqLTaY=; b=fUu3ZeOJxVw4QQBiiWRPR2m0Ao
- SRy8LN83WIj3JO2UavKWGJI2FXTSIaY8iVX6X2murHlKE0d4SW6lobNAG0ZG74XRa5Q6JnVMj7fxF
- oNlVoJ6YK3GPD0qNGFvcES/4lrABFwzmqIqu8Mj3cZsbfJNLnDp+HQQWh6B4JDFW2N2w=;
+ bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=K8uKU6w2aC/A/6MkxdsIQAcCiU
+ Fw33DWaUFqEkT//UNFWgYlNHFjhBA0tJVBgw7St6KiNPmP5TaCnuQ6cDscCb9gNmBPdTSeJY1/WjX
+ dQtQ0Mrtk8Zhd2KBY80z6HEw8KogsvQBmE3OxeYYnJ1cOnoy2UWoqII99PWDf3HHz4WQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,37 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=su7zxcSpmTZRMT/KaDln9XS6SD5jlWklN/1EnJqLTaY=; b=L5kfIGizGRYAokMY7k8x9t3MwF
- w9YUqU6oir+X7AqPpQEXGBsvD2m5fDJZZhEk918med7U9vszsIlz7+YMFUJpHspdil15hB99BGTEE
- jBoeJ/E1aVdi/mZrgv9aefBSC29AjOoaRWwTUsDromJZveTwqkr2Z0WPuUBAN/wdE0TI=;
+ bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=j8EdOzFxlW41LMDPXZAaAa/sDZ
+ kybpnKhJ+Cxuks1wWS4cdnx8FF+FTnIeyOBuZakhoUe41tS9HXzNx4ic9gI0zjtI2wFNIM+kyHCQg
+ 4Z2b97tHhWXZwamld3NAPIATB6S5BqS18LeDpKiniaPu2Fonly8HI9lH+xIj9bAVftIs=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6NH7-005WeM-DR
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:36:34 +0000
+ id 1j6NIl-0092OD-4C
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:38:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=su7zxcSpmTZRMT/KaDln9XS6SD5jlWklN/1EnJqLTaY=; b=a8iBiTmLkCfR2U9kE0H0YYhTfn
- o/scgFru4hBFHzGI47rRZprkclexGVaEqLsg/rB+QSE6MOYe5nK5Y1JE/sYlvoTfKu9jWgQOBc04h
- sbbQ4fEsVPSyaV0j12+5FyNyWHxuj2OsU1d8qRaMZxJ/8ab/QhwonRXL1U4J2B0RsT1evDF4WLvD3
- Nki3qFEibQFrRTlru5egSP0PRrZb4Qdm9/KhXRx+RzSljbgj93kiY7faRf0dBqTSaibeFHOp3N4tJ
- wbdqJqnYtIVPFODIAQhv+tQ+vb02DXh4rvICJ6LbuJXKYUDZHVJSycZVvB6U1fjvMp3txTYeymc1R
- 4jZ/y1eA==;
+ bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=tsH+RQq9nsdWo8IIY9tkNpYUNU
+ XgrNdOr80eLKEtXvEFno8gvU4qBdtiN5909aTbWi0i4Mn192mp414I4f7ImjuKXsQEPhOibS7bTwU
+ cOsxCIWLp2zKT3TrsWxL2LBmNdhy2TDXl8m50nN4H1fo5ZuoIqjiPZzhYNjCMDBSq643wPIW66ATo
+ c2u37N+UIz34xOGA5lZnneTU0FiBG/QNqURtzRbfxDmVDDvcVQXxx2J9oSjbcL56/SnvF6ZaDdp5f
+ xwB90p+ijsqr/WHbcdu8Ex6TI2tXeVKVR+0eEXlgj0Omm7bgRLCdF0x20EQH304R+C2d0zp+9SCLy
+ d4HdDp4A==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j6NGz-0001wx-Mm; Mon, 24 Feb 2020 23:36:25 +0000
-Date: Mon, 24 Feb 2020 15:36:25 -0800
+ Hat Linux)) id 1j6NIV-00021I-MY; Mon, 24 Feb 2020 23:37:59 +0000
+Date: Mon, 24 Feb 2020 15:37:59 -0800
 From: Christoph Hellwig <hch@infradead.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200224233625.GB30288@infradead.org>
+To: Stanley Chu <stanley.chu@mediatek.com>
+Message-ID: <20200224233759.GC30288@infradead.org>
 References: <20200221115050.238976-1-satyat@google.com>
- <20200221115050.238976-4-satyat@google.com>
- <20200221173539.GA6525@infradead.org>
- <20200221183437.GC925@sol.localdomain>
+ <20200221115050.238976-7-satyat@google.com>
+ <20200221172244.GC438@infradead.org>
+ <20200221181109.GB925@sol.localdomain>
+ <1582465656.26304.69.camel@mtksdccf07>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200221183437.GC925@sol.localdomain>
+In-Reply-To: <1582465656.26304.69.camel@mtksdccf07>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.2 (/)
@@ -75,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6NH7-005WeM-DR
-Subject: Re: [f2fs-dev] [PATCH v7 3/9] block: blk-crypto-fallback for Inline
- Encryption
+X-Headers-End: 1j6NIl-0092OD-4C
+Subject: Re: [f2fs-dev] [PATCH v7 6/9] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,40 +90,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-ext4@vger.kernel.org,
+Cc: Christoph Hellwig <hch@infradead.org>,
+ Ladvine D Almeida <Ladvine.DAlmeida@synopsys.com>, linux-ext4@vger.kernel.org,
  linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
  Kuohong Wang <kuohong.wang@mediatek.com>,
+ Parshuram Raju Thombare <pthombar@cadence.com>,
  Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Satya Tangirala <satyat@google.com>, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+ Satya Tangirala <satyat@google.com>, Eric Biggers <ebiggers@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Feb 21, 2020 at 10:34:37AM -0800, Eric Biggers wrote:
-> On Fri, Feb 21, 2020 at 09:35:39AM -0800, Christoph Hellwig wrote:
-> > High-level question:  Does the whole keyslot manager concept even make
-> > sense for the fallback?  With the work-queue we have item that exectutes
-> > at a time per cpu.  So just allocatea per-cpu crypto_skcipher for
-> > each encryption mode and there should never be a slot limitation.  Or
-> > do I miss something?
+On Sun, Feb 23, 2020 at 09:47:36PM +0800, Stanley Chu wrote:
+> Yes, MediaTek is keeping work closely with inline encryption patch sets.
+> Currently the v6 version can work well (without
+> UFSHCD_QUIRK_BROKEN_CRYPTO quirk) at least in our MT6779 SoC platform
+> which basic SoC support and some other peripheral drivers are under
+> upstreaming as below link,
 > 
-> It does make sense because if blk-crypto-fallback didn't use a keyslot manager,
-> it would have to call crypto_skcipher_setkey() on the I/O path for every bio to
-> ensure that the CPU's crypto_skcipher has the correct key.  That's undesirable,
-> because setting a new key can be expensive with some encryption algorithms, and
-> also it can require a memory allocation which can fail.  For example, with the
-> Adiantum algorithm, setting a key requires encrypting ~1100 bytes of data in
-> order to generate subkeys.  It's better to set a key once and use it many times.
+> https://patchwork.kernel.org/project/linux-mediatek/list/?state=%
+> 2A&q=6779&series=&submitter=&delegate=&archive=both
+> 
+> The integration with inline encryption patch set needs to patch
+> ufs-mediatek and patches are ready in downstream. We plan to upstream
+> them soon after inline encryption patch sets get merged.
 
-I didn't think of such expensive operations when setting the key.
-Note that you would not have to do it on every I/O, as chances are high
-you'll get I/O from the same submitter and thus the same key, and we
-can optimize for that case pretty easily.
-
-But if you think the keyslot manager is better I accept that, this was
-just a throught when looking over the code.
+What amount of support do you need in ufs-mediatek?  It seems like
+pretty much every ufs low-level driver needs some kind of specific
+support now, right?  I wonder if we should instead opt into the support
+instead of all the quirking here.
 
 
 _______________________________________________
