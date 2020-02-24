@@ -2,26 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D699316B12C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 21:51:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9688916B283
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Feb 2020 22:32:50 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6Kh1-0006yj-Hx; Mon, 24 Feb 2020 20:51:07 +0000
+	id 1j6LLH-0000Ph-O0; Mon, 24 Feb 2020 21:32:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1j6Kgz-0006yK-UY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 20:51:05 +0000
+ (envelope-from
+ <BATV+fd4c774fa746ae91f5d1+6028+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1j6LLF-0000PU-VL
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:32:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6W+sNfj/1MTXjduMkepO88V8Uiy2/7erPQFFCUQqjE0=; b=ZGNrwIbqBu1ss34L05tTRYw3fh
- wQTsMYK7G1P4LFPhc4aYPjwzNFZ4LrO9L/t4jc1CeHlpxg0YfJQwHP+ZkdS0dInGruX4DreiXL3Oe
- MhJjYn4LNtWVQ0BF9ovmzVosoEUUyPrhfa7OSIATmRRU/Br5AFIEkiPxY5VS2H4dAiJk=;
+ bh=emtDgV24Eo0XKJNO3XWaY50cgCvPe4AajCupipZ+mFM=; b=WMz2Lqa/lghmFFwEHvDq2aCvW9
+ j/ecITQ4wL0zw/PrEoahWTyrwZl2itUR8AsM85AwkJUSokKTkTjzzbIvCVChi/WRzCWQj1c/7jQne
+ ukbn2PCN5Mro03b2eSlY19RXhJ6mj3EhNlyd8vqhpDt6CFtrBkX0aGebc/kG/j65B6fQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,52 +31,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6W+sNfj/1MTXjduMkepO88V8Uiy2/7erPQFFCUQqjE0=; b=AMh5XPh9ArmpOsfc2Uw3rhu8TE
- 81cdWCdFKlUW0JA/fJoglqPnDvNYvFKMOK0Wk0rBVOAqMX5oQgs9aBqyB4v1T1aJyYGU21CxFl68R
- tzvYP3VNc/dJGPUTsqzozBi6nDOlUsFF0iGS8AAXHk6HuwJ088ms7bfUmF2E8gFKtSDg=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=emtDgV24Eo0XKJNO3XWaY50cgCvPe4AajCupipZ+mFM=; b=VjiLOG3iFdISecOBYBzlyR5SrF
+ qUPrggvKpBwyQX1/q9BXL4WqtM2UshaXRUbQ6OIjEH/Vm0mkO8cJVEYXNr5LBvMsCSeomH9MWYwBD
+ Uarrym1ORzc4f5jkybfEqFqyIBvxd8UPs4mx3tpi+5WKWJYI6NgUrNb4Ol5IYndP6TxE=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6Kgs-00FQGe-UO
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 20:51:05 +0000
-Received: from gmail.com (unknown [104.132.1.77])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1FAF220726;
- Mon, 24 Feb 2020 20:50:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582577453;
- bh=3ws2XCyy6ILZso2oH4i/yzvd9uzvxwvQWJJv4TRuz70=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=I9K9/4BBR6t94BgsvQWvL0MElmPNMiRWdsQHvAkOcAoRolDDWAYFaRQbGHAX/th9Y
- RfGNU35wJz/tbi+gRRQcx+ddhCAfCvP4LZS2XAnCxT4tDvB3hZsUZzmiW3hP0rlS1M
- 0H4NWqJWja70WOgXrjABzy9YWTQImgBaVYFeNivo=
-Date: Mon, 24 Feb 2020 12:50:51 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: mtk.manpages@gmail.com
-Message-ID: <20200224205051.GE109047@gmail.com>
-References: <20200128192449.260550-1-ebiggers@kernel.org>
+ id 1j6LLC-008yJ3-Ll
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 21:32:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=emtDgV24Eo0XKJNO3XWaY50cgCvPe4AajCupipZ+mFM=; b=faavxfwYgJ6BV4aMG0yBGMTdvs
+ FIHOEugMta99lUrJ1bnzTZ/FRNYp6SPEABIaJ5EtGCi+eQP8a0kjK0ZbLdgXYa/37U/swNDVC13km
+ Va5rLvps0hefygpoSkbchuXiH08P6MV/rAg7EcSCaaM7QZSEw0JsM/CNamhza4du/dvIO9YVBTlnB
+ RoHdf0GoNG+qOIjDajjFjogi72piGjB1CilX1d9marpYm2pZ/fzynRHB+WFG63bofIN3ZLXSOH6JY
+ ttUElXB1HnhGmHknkGtgPrvb11HJuWiiU/SslxTdDxTUKWpXvJpAQegm1IrAR6sPxW+YVNdZRQbOd
+ Gj+d14cg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1j6LKu-0003kl-Dd; Mon, 24 Feb 2020 21:32:20 +0000
+Date: Mon, 24 Feb 2020 13:32:20 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200224213220.GA13895@infradead.org>
+References: <20200219210103.32400-1-willy@infradead.org>
+ <20200219210103.32400-2-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200128192449.260550-1-ebiggers@kernel.org>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: 4.5 (++++)
+In-Reply-To: <20200219210103.32400-2-willy@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 2.6 FSL_HELO_FAKE          No description available.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6Kgs-00FQGe-UO
-Subject: Re: [f2fs-dev] [man-pages PATCH v2] statx.2: document
- STATX_ATTR_VERITY
+X-Headers-End: 1j6LLC-008yJ3-Ll
+Subject: Re: [f2fs-dev] [PATCH v7 01/24] mm: Move readahead prototypes from
+ mm.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,50 +86,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-man@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jan 28, 2020 at 11:24:49AM -0800, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On Wed, Feb 19, 2020 at 01:00:40PM -0800, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 > 
-> Document the verity attribute for statx(), which was added in
-> Linux 5.5.
-> 
-> For more context, see the fs-verity documentation:
-> https://www.kernel.org/doc/html/latest/filesystems/fsverity.html
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  man2/statx.2 | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/man2/statx.2 b/man2/statx.2
-> index d2f1b07b8..d015ee73d 100644
-> --- a/man2/statx.2
-> +++ b/man2/statx.2
-> @@ -461,6 +461,11 @@ See
->  .TP
->  .B STATX_ATTR_ENCRYPTED
->  A key is required for the file to be encrypted by the filesystem.
-> +.TP
-> +.B STATX_ATTR_VERITY
-> +Since Linux 5.5: the file has fs-verity enabled.  It cannot be written to, and
-> +all reads from it will be verified against a cryptographic hash that covers the
-> +entire file, e.g. via a Merkle tree.
->  .SH RETURN VALUE
->  On success, zero is returned.
->  On error, \-1 is returned, and
-> -- 
-> 2.25.0.341.g760bfbb309-goog
-> 
+> The readahead code is part of the page cache so should be found in the
+> pagemap.h file.  force_page_cache_readahead is only used within mm,
+> so move it to mm/internal.h instead.  Remove the parameter names where
+> they add no value, and rename the ones which were actively misleading.
 
-Ping?  Michael, can you apply this man-pages patch?
+Looks good,
 
-- Eric
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
 
 _______________________________________________
