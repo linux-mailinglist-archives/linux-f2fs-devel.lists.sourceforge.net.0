@@ -2,83 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB0CF16B5C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 00:38:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FD7E16B74B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 02:43:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6NIn-0005hV-A3; Mon, 24 Feb 2020 23:38:17 +0000
+	id 1j6PG5-0001j4-1L; Tue, 25 Feb 2020 01:43:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+fd4c774fa746ae91f5d1+6028+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j6NIm-0005hK-8B
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:38:16 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j6PG3-0001is-Cs
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:43:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=K8uKU6w2aC/A/6MkxdsIQAcCiU
- Fw33DWaUFqEkT//UNFWgYlNHFjhBA0tJVBgw7St6KiNPmP5TaCnuQ6cDscCb9gNmBPdTSeJY1/WjX
- dQtQ0Mrtk8Zhd2KBY80z6HEw8KogsvQBmE3OxeYYnJ1cOnoy2UWoqII99PWDf3HHz4WQ=;
+ bh=4OnnLOm+0893oqSYjRGs75abuvoXChjJxnmOHqdSBd8=; b=iyfjRrxskbHMBuVsO07f0ddC/m
+ 2U8M/6sPzkqYVx60yHhf1agzQdWVw+i5lhx7NDrXZ/MahxcuRozhdz74E7lgnNAU3xOXfIJKKZUVX
+ Hy3j4TF04W1UugJlkviMl2tS2AvdpUs/lEc4qzZn575B6h2gP/uaW6O3sa2BcEDEcufo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=j8EdOzFxlW41LMDPXZAaAa/sDZ
- kybpnKhJ+Cxuks1wWS4cdnx8FF+FTnIeyOBuZakhoUe41tS9HXzNx4ic9gI0zjtI2wFNIM+kyHCQg
- 4Z2b97tHhWXZwamld3NAPIATB6S5BqS18LeDpKiniaPu2Fonly8HI9lH+xIj9bAVftIs=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=4OnnLOm+0893oqSYjRGs75abuvoXChjJxnmOHqdSBd8=; b=g
+ DvyXKAIU+rk90MnLiWf7oNCGRkHQlepTegTcf1xyiC1HF1zws9ymZ2Q+tCLzanYQ28B53w3Fox5Co
+ tlyVr0Ibj5/F2g4pQOIeSuUy1zGOs/YYvFpuARkjL1M6nR+5EPL35kagUKrCspbV6vXFlXIU+AxdI
+ ReUbWYcL1EOP/Qjg=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6NIl-0092OD-4C
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Feb 2020 23:38:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=q86n0/Atkm4Y4ZtubbVGTblHU1TxdG/2icnoc8+Xwo0=; b=tsH+RQq9nsdWo8IIY9tkNpYUNU
- XgrNdOr80eLKEtXvEFno8gvU4qBdtiN5909aTbWi0i4Mn192mp414I4f7ImjuKXsQEPhOibS7bTwU
- cOsxCIWLp2zKT3TrsWxL2LBmNdhy2TDXl8m50nN4H1fo5ZuoIqjiPZzhYNjCMDBSq643wPIW66ATo
- c2u37N+UIz34xOGA5lZnneTU0FiBG/QNqURtzRbfxDmVDDvcVQXxx2J9oSjbcL56/SnvF6ZaDdp5f
- xwB90p+ijsqr/WHbcdu8Ex6TI2tXeVKVR+0eEXlgj0Omm7bgRLCdF0x20EQH304R+C2d0zp+9SCLy
- d4HdDp4A==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j6NIV-00021I-MY; Mon, 24 Feb 2020 23:37:59 +0000
-Date: Mon, 24 Feb 2020 15:37:59 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Stanley Chu <stanley.chu@mediatek.com>
-Message-ID: <20200224233759.GC30288@infradead.org>
-References: <20200221115050.238976-1-satyat@google.com>
- <20200221115050.238976-7-satyat@google.com>
- <20200221172244.GC438@infradead.org>
- <20200221181109.GB925@sol.localdomain>
- <1582465656.26304.69.camel@mtksdccf07>
+ id 1j6PFz-005anY-7m
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:43:35 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 2020AE18E1B2C497C114;
+ Tue, 25 Feb 2020 09:43:20 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
+ 14.3.439.0; Tue, 25 Feb 2020 09:43:14 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Tue, 25 Feb 2020 09:42:57 +0800
+Message-ID: <20200225014257.83903-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1582465656.26304.69.camel@mtksdccf07>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6NIl-0092OD-4C
-Subject: Re: [f2fs-dev] [PATCH v7 6/9] scsi: ufs: Add inline encryption
- support to UFS
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1j6PFz-005anY-7m
+Subject: [f2fs-dev] [PATCH] f2fs: use kmem_cache pool during inline xattr
+ lookups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,37 +74,220 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christoph Hellwig <hch@infradead.org>,
- Ladvine D Almeida <Ladvine.DAlmeida@synopsys.com>, linux-ext4@vger.kernel.org,
- linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Parshuram Raju Thombare <pthombar@cadence.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- Satya Tangirala <satyat@google.com>, Eric Biggers <ebiggers@kernel.org>,
- linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Feb 23, 2020 at 09:47:36PM +0800, Stanley Chu wrote:
-> Yes, MediaTek is keeping work closely with inline encryption patch sets.
-> Currently the v6 version can work well (without
-> UFSHCD_QUIRK_BROKEN_CRYPTO quirk) at least in our MT6779 SoC platform
-> which basic SoC support and some other peripheral drivers are under
-> upstreaming as below link,
-> 
-> https://patchwork.kernel.org/project/linux-mediatek/list/?state=%
-> 2A&q=6779&series=&submitter=&delegate=&archive=both
-> 
-> The integration with inline encryption patch set needs to patch
-> ufs-mediatek and patches are ready in downstream. We plan to upstream
-> them soon after inline encryption patch sets get merged.
+It's been observed that kzalloc() on lookup_all_xattrs() are called millions
+of times on Android, quickly becoming the top abuser of slub memory allocator.
 
-What amount of support do you need in ufs-mediatek?  It seems like
-pretty much every ufs low-level driver needs some kind of specific
-support now, right?  I wonder if we should instead opt into the support
-instead of all the quirking here.
+Use a dedicated kmem cache pool for xattr lookups to mitigate this.
+
+Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+
+Hi, Ju Hyung,
+
+Let me know if you have any objection on this patch. :)
+
+ fs/f2fs/f2fs.h  |  3 +++
+ fs/f2fs/super.c | 10 ++++++++-
+ fs/f2fs/xattr.c | 54 ++++++++++++++++++++++++++++++++++++++++++++-----
+ fs/f2fs/xattr.h |  4 ++++
+ 4 files changed, 65 insertions(+), 6 deletions(-)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 12a197e89a3e..23b93a116c73 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1486,6 +1486,9 @@ struct f2fs_sb_info {
+ 	__u32 s_chksum_seed;
+ 
+ 	struct workqueue_struct *post_read_wq;	/* post read workqueue */
++
++	struct kmem_cache *inline_xattr_slab;	/* inline xattr entry */
++	unsigned int inline_xattr_slab_size;	/* default inline xattr slab size */
+ };
+ 
+ struct f2fs_private_dio {
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index d241e07c0bfa..0b16204d3b7d 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1201,6 +1201,7 @@ static void f2fs_put_super(struct super_block *sb)
+ 	kvfree(sbi->raw_super);
+ 
+ 	destroy_device_list(sbi);
++	f2fs_destroy_xattr_caches(sbi);
+ 	mempool_destroy(sbi->write_io_dummy);
+ #ifdef CONFIG_QUOTA
+ 	for (i = 0; i < MAXQUOTAS; i++)
+@@ -3457,12 +3458,17 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		}
+ 	}
+ 
++	/* init per sbi slab cache */
++	err = f2fs_init_xattr_caches(sbi);
++	if (err)
++		goto free_io_dummy;
++
+ 	/* get an inode for meta space */
+ 	sbi->meta_inode = f2fs_iget(sb, F2FS_META_INO(sbi));
+ 	if (IS_ERR(sbi->meta_inode)) {
+ 		f2fs_err(sbi, "Failed to read F2FS meta data inode");
+ 		err = PTR_ERR(sbi->meta_inode);
+-		goto free_io_dummy;
++		goto free_xattr_cache;
+ 	}
+ 
+ 	err = f2fs_get_valid_checkpoint(sbi);
+@@ -3735,6 +3741,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	make_bad_inode(sbi->meta_inode);
+ 	iput(sbi->meta_inode);
+ 	sbi->meta_inode = NULL;
++free_xattr_cache:
++	f2fs_destroy_xattr_caches(sbi);
+ free_io_dummy:
+ 	mempool_destroy(sbi->write_io_dummy);
+ free_percpu:
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index a3360a97e624..e46a10eb0e42 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -23,6 +23,25 @@
+ #include "xattr.h"
+ #include "segment.h"
+ 
++static void *xattr_alloc(struct f2fs_sb_info *sbi, int size, bool *is_inline)
++{
++	*is_inline = (size == sbi->inline_xattr_slab_size);
++
++	if (*is_inline)
++		return kmem_cache_zalloc(sbi->inline_xattr_slab, GFP_NOFS);
++
++	return f2fs_kzalloc(sbi, size, GFP_NOFS);
++}
++
++static void xattr_free(struct f2fs_sb_info *sbi, void *xattr_addr,
++							bool is_inline)
++{
++	if (is_inline)
++		kmem_cache_free(sbi->inline_xattr_slab, xattr_addr);
++	else
++		kvfree(xattr_addr);
++}
++
+ static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
+ 		struct dentry *unused, struct inode *inode,
+ 		const char *name, void *buffer, size_t size)
+@@ -301,7 +320,8 @@ static int read_xattr_block(struct inode *inode, void *txattr_addr)
+ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+ 				unsigned int index, unsigned int len,
+ 				const char *name, struct f2fs_xattr_entry **xe,
+-				void **base_addr, int *base_size)
++				void **base_addr, int *base_size,
++				bool *is_inline)
+ {
+ 	void *cur_addr, *txattr_addr, *last_txattr_addr;
+ 	void *last_addr = NULL;
+@@ -313,7 +333,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+ 		return -ENODATA;
+ 
+ 	*base_size = XATTR_SIZE(inode) + XATTR_PADDING_SIZE;
+-	txattr_addr = f2fs_kzalloc(F2FS_I_SB(inode), *base_size, GFP_NOFS);
++	txattr_addr = xattr_alloc(F2FS_I_SB(inode), *base_size, is_inline);
+ 	if (!txattr_addr)
+ 		return -ENOMEM;
+ 
+@@ -362,7 +382,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+ 	*base_addr = txattr_addr;
+ 	return 0;
+ out:
+-	kvfree(txattr_addr);
++	xattr_free(F2FS_I_SB(inode), txattr_addr, *is_inline);
+ 	return err;
+ }
+ 
+@@ -499,6 +519,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 	unsigned int size, len;
+ 	void *base_addr = NULL;
+ 	int base_size;
++	bool is_inline;
+ 
+ 	if (name == NULL)
+ 		return -EINVAL;
+@@ -509,7 +530,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 
+ 	down_read(&F2FS_I(inode)->i_xattr_sem);
+ 	error = lookup_all_xattrs(inode, ipage, index, len, name,
+-				&entry, &base_addr, &base_size);
++				&entry, &base_addr, &base_size, &is_inline);
+ 	up_read(&F2FS_I(inode)->i_xattr_sem);
+ 	if (error)
+ 		return error;
+@@ -532,7 +553,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 	}
+ 	error = size;
+ out:
+-	kvfree(base_addr);
++	xattr_free(F2FS_I_SB(inode), base_addr, is_inline);
+ 	return error;
+ }
+ 
+@@ -767,3 +788,26 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
+ 	f2fs_update_time(sbi, REQ_TIME);
+ 	return err;
+ }
++
++int f2fs_init_xattr_caches(struct f2fs_sb_info *sbi)
++{
++	dev_t dev = sbi->sb->s_bdev->bd_dev;
++	char slab_name[32];
++
++	sprintf(slab_name, "f2fs_xattr_entry-%u:%u", MAJOR(dev), MINOR(dev));
++
++	sbi->inline_xattr_slab_size = F2FS_OPTION(sbi).inline_xattr_size *
++					sizeof(__le32) + XATTR_PADDING_SIZE;
++
++	sbi->inline_xattr_slab = f2fs_kmem_cache_create(slab_name,
++					sbi->inline_xattr_slab_size);
++	if (!sbi->inline_xattr_slab)
++		return -ENOMEM;
++
++	return 0;
++}
++
++void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi)
++{
++	kmem_cache_destroy(sbi->inline_xattr_slab);
++}
+diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
+index 574beea46494..7345dfa7b7a9 100644
+--- a/fs/f2fs/xattr.h
++++ b/fs/f2fs/xattr.h
+@@ -131,6 +131,8 @@ extern int f2fs_setxattr(struct inode *, int, const char *,
+ extern int f2fs_getxattr(struct inode *, int, const char *, void *,
+ 						size_t, struct page *);
+ extern ssize_t f2fs_listxattr(struct dentry *, char *, size_t);
++extern int f2fs_init_xattr_caches(struct f2fs_sb_info *);
++extern void f2fs_destroy_xattr_caches(struct f2fs_sb_info *);
+ #else
+ 
+ #define f2fs_xattr_handlers	NULL
+@@ -151,6 +153,8 @@ static inline ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer,
+ {
+ 	return -EOPNOTSUPP;
+ }
++static int f2fs_init_xattr_caches(struct f2fs_sb_info *sbi) { return 0; }
++static void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi) { return 0; }
+ #endif
+ 
+ #ifdef CONFIG_F2FS_FS_SECURITY
+-- 
+2.18.0.rc1
+
 
 
 _______________________________________________
