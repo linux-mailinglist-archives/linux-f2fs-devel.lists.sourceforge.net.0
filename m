@@ -2,54 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FD7E16B74B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 02:43:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED25416B766
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Feb 2020 02:51:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6PG5-0001j4-1L; Tue, 25 Feb 2020 01:43:37 +0000
+	id 1j6PO9-0008VK-63; Tue, 25 Feb 2020 01:51:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j6PG3-0001is-Cs
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:43:35 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j6PO8-0008V7-B3
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:51:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4OnnLOm+0893oqSYjRGs75abuvoXChjJxnmOHqdSBd8=; b=iyfjRrxskbHMBuVsO07f0ddC/m
- 2U8M/6sPzkqYVx60yHhf1agzQdWVw+i5lhx7NDrXZ/MahxcuRozhdz74E7lgnNAU3xOXfIJKKZUVX
- Hy3j4TF04W1UugJlkviMl2tS2AvdpUs/lEc4qzZn575B6h2gP/uaW6O3sa2BcEDEcufo=;
+ bh=yeaI+n+nk2ZsNVdodi0oId9ksuvSC7mOnzDmOvmY28k=; b=Y8GgVemAweObKHy8Retv7SCDZ6
+ gE4bjdf+qFh4OEumzEy30mO7D6tQ7OF4/uqzL1sLBc0D6jn1yoUWkeaI4fV7jFcBwDnR40PjJvlKv
+ 2mV+9CPQFoi7pVo/zazLjFsv844XMGIORI4zolixAynm97A+gcpftcl4twyaKGsXzzyQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=4OnnLOm+0893oqSYjRGs75abuvoXChjJxnmOHqdSBd8=; b=g
- DvyXKAIU+rk90MnLiWf7oNCGRkHQlepTegTcf1xyiC1HF1zws9ymZ2Q+tCLzanYQ28B53w3Fox5Co
- tlyVr0Ibj5/F2g4pQOIeSuUy1zGOs/YYvFpuARkjL1M6nR+5EPL35kagUKrCspbV6vXFlXIU+AxdI
- ReUbWYcL1EOP/Qjg=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yeaI+n+nk2ZsNVdodi0oId9ksuvSC7mOnzDmOvmY28k=; b=a7P18QYZWpxJ49un/5NErPAGLN
+ xRju7zZYBaILbgaTq6O96vJSRHW3qt1XQyV9pLJQPA3SBqFHqHbEI99aNCs5vzN/n7AFe1sVHaiZo
+ h34e1WEgTLwYgxRin/YkaVWn1LJtSfqBX1LG/P5Xn7afqq56AVmF7R7aHyt4EdjRIEWI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6PFz-005anY-7m
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:43:35 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 2020AE18E1B2C497C114;
- Tue, 25 Feb 2020 09:43:20 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
- 14.3.439.0; Tue, 25 Feb 2020 09:43:14 +0800
+ id 1j6PO2-0096kq-Ba
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Feb 2020 01:51:56 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id CE461DE503E800B389C1;
+ Tue, 25 Feb 2020 09:46:32 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 25 Feb
+ 2020 09:46:30 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20200221100922.16781-1-yuchao0@huawei.com>
+ <20200221100922.16781-2-yuchao0@huawei.com>
+ <20200224214605.GA77839@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Tue, 25 Feb 2020 09:42:57 +0800
-Message-ID: <20200225014257.83903-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+Message-ID: <db505852-345d-05d0-4555-437093d2af14@huawei.com>
+Date: Tue, 25 Feb 2020 09:46:29 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <20200224214605.GA77839@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -60,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1j6PFz-005anY-7m
-Subject: [f2fs-dev] [PATCH] f2fs: use kmem_cache pool during inline xattr
- lookups
+X-Headers-End: 1j6PO2-0096kq-Ba
+Subject: Re: [f2fs-dev] [RFC PATCH 2/2] f2fs: introduce
+ F2FS_IOC_RELEASE_COMPRESS_BLOCKS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,215 +85,228 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It's been observed that kzalloc() on lookup_all_xattrs() are called millions
-of times on Android, quickly becoming the top abuser of slub memory allocator.
+On 2020/2/25 5:46, Jaegeuk Kim wrote:
+> On 02/21, Chao Yu wrote:
+>> There are still reserved blocks on compressed inode, this patch
+>> introduce a new ioctl to help release reserved blocks back to
+>> filesystem, so that userspace can reuse those freed space.
+> 
+> I thought we can add compressed_blocks into free space, after converting
+> the file to immutable one. Otherwise, this patch is able to corrupt the
 
-Use a dedicated kmem cache pool for xattr lookups to mitigate this.
+Yes, I remember that.
 
-Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
+So any suggestion on this patch? we can:
+- check immutable flag before releasing space, or
+- we can add immutable flag on compressed inode in this ioctl interface?
 
-Hi, Ju Hyung,
+Thanks,
 
-Let me know if you have any objection on this patch. :)
-
- fs/f2fs/f2fs.h  |  3 +++
- fs/f2fs/super.c | 10 ++++++++-
- fs/f2fs/xattr.c | 54 ++++++++++++++++++++++++++++++++++++++++++++-----
- fs/f2fs/xattr.h |  4 ++++
- 4 files changed, 65 insertions(+), 6 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 12a197e89a3e..23b93a116c73 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1486,6 +1486,9 @@ struct f2fs_sb_info {
- 	__u32 s_chksum_seed;
- 
- 	struct workqueue_struct *post_read_wq;	/* post read workqueue */
-+
-+	struct kmem_cache *inline_xattr_slab;	/* inline xattr entry */
-+	unsigned int inline_xattr_slab_size;	/* default inline xattr slab size */
- };
- 
- struct f2fs_private_dio {
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index d241e07c0bfa..0b16204d3b7d 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1201,6 +1201,7 @@ static void f2fs_put_super(struct super_block *sb)
- 	kvfree(sbi->raw_super);
- 
- 	destroy_device_list(sbi);
-+	f2fs_destroy_xattr_caches(sbi);
- 	mempool_destroy(sbi->write_io_dummy);
- #ifdef CONFIG_QUOTA
- 	for (i = 0; i < MAXQUOTAS; i++)
-@@ -3457,12 +3458,17 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		}
- 	}
- 
-+	/* init per sbi slab cache */
-+	err = f2fs_init_xattr_caches(sbi);
-+	if (err)
-+		goto free_io_dummy;
-+
- 	/* get an inode for meta space */
- 	sbi->meta_inode = f2fs_iget(sb, F2FS_META_INO(sbi));
- 	if (IS_ERR(sbi->meta_inode)) {
- 		f2fs_err(sbi, "Failed to read F2FS meta data inode");
- 		err = PTR_ERR(sbi->meta_inode);
--		goto free_io_dummy;
-+		goto free_xattr_cache;
- 	}
- 
- 	err = f2fs_get_valid_checkpoint(sbi);
-@@ -3735,6 +3741,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	make_bad_inode(sbi->meta_inode);
- 	iput(sbi->meta_inode);
- 	sbi->meta_inode = NULL;
-+free_xattr_cache:
-+	f2fs_destroy_xattr_caches(sbi);
- free_io_dummy:
- 	mempool_destroy(sbi->write_io_dummy);
- free_percpu:
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index a3360a97e624..e46a10eb0e42 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -23,6 +23,25 @@
- #include "xattr.h"
- #include "segment.h"
- 
-+static void *xattr_alloc(struct f2fs_sb_info *sbi, int size, bool *is_inline)
-+{
-+	*is_inline = (size == sbi->inline_xattr_slab_size);
-+
-+	if (*is_inline)
-+		return kmem_cache_zalloc(sbi->inline_xattr_slab, GFP_NOFS);
-+
-+	return f2fs_kzalloc(sbi, size, GFP_NOFS);
-+}
-+
-+static void xattr_free(struct f2fs_sb_info *sbi, void *xattr_addr,
-+							bool is_inline)
-+{
-+	if (is_inline)
-+		kmem_cache_free(sbi->inline_xattr_slab, xattr_addr);
-+	else
-+		kvfree(xattr_addr);
-+}
-+
- static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
- 		struct dentry *unused, struct inode *inode,
- 		const char *name, void *buffer, size_t size)
-@@ -301,7 +320,8 @@ static int read_xattr_block(struct inode *inode, void *txattr_addr)
- static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
- 				unsigned int index, unsigned int len,
- 				const char *name, struct f2fs_xattr_entry **xe,
--				void **base_addr, int *base_size)
-+				void **base_addr, int *base_size,
-+				bool *is_inline)
- {
- 	void *cur_addr, *txattr_addr, *last_txattr_addr;
- 	void *last_addr = NULL;
-@@ -313,7 +333,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
- 		return -ENODATA;
- 
- 	*base_size = XATTR_SIZE(inode) + XATTR_PADDING_SIZE;
--	txattr_addr = f2fs_kzalloc(F2FS_I_SB(inode), *base_size, GFP_NOFS);
-+	txattr_addr = xattr_alloc(F2FS_I_SB(inode), *base_size, is_inline);
- 	if (!txattr_addr)
- 		return -ENOMEM;
- 
-@@ -362,7 +382,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
- 	*base_addr = txattr_addr;
- 	return 0;
- out:
--	kvfree(txattr_addr);
-+	xattr_free(F2FS_I_SB(inode), txattr_addr, *is_inline);
- 	return err;
- }
- 
-@@ -499,6 +519,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- 	unsigned int size, len;
- 	void *base_addr = NULL;
- 	int base_size;
-+	bool is_inline;
- 
- 	if (name == NULL)
- 		return -EINVAL;
-@@ -509,7 +530,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- 
- 	down_read(&F2FS_I(inode)->i_xattr_sem);
- 	error = lookup_all_xattrs(inode, ipage, index, len, name,
--				&entry, &base_addr, &base_size);
-+				&entry, &base_addr, &base_size, &is_inline);
- 	up_read(&F2FS_I(inode)->i_xattr_sem);
- 	if (error)
- 		return error;
-@@ -532,7 +553,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- 	}
- 	error = size;
- out:
--	kvfree(base_addr);
-+	xattr_free(F2FS_I_SB(inode), base_addr, is_inline);
- 	return error;
- }
- 
-@@ -767,3 +788,26 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
- 	f2fs_update_time(sbi, REQ_TIME);
- 	return err;
- }
-+
-+int f2fs_init_xattr_caches(struct f2fs_sb_info *sbi)
-+{
-+	dev_t dev = sbi->sb->s_bdev->bd_dev;
-+	char slab_name[32];
-+
-+	sprintf(slab_name, "f2fs_xattr_entry-%u:%u", MAJOR(dev), MINOR(dev));
-+
-+	sbi->inline_xattr_slab_size = F2FS_OPTION(sbi).inline_xattr_size *
-+					sizeof(__le32) + XATTR_PADDING_SIZE;
-+
-+	sbi->inline_xattr_slab = f2fs_kmem_cache_create(slab_name,
-+					sbi->inline_xattr_slab_size);
-+	if (!sbi->inline_xattr_slab)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi)
-+{
-+	kmem_cache_destroy(sbi->inline_xattr_slab);
-+}
-diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
-index 574beea46494..7345dfa7b7a9 100644
---- a/fs/f2fs/xattr.h
-+++ b/fs/f2fs/xattr.h
-@@ -131,6 +131,8 @@ extern int f2fs_setxattr(struct inode *, int, const char *,
- extern int f2fs_getxattr(struct inode *, int, const char *, void *,
- 						size_t, struct page *);
- extern ssize_t f2fs_listxattr(struct dentry *, char *, size_t);
-+extern int f2fs_init_xattr_caches(struct f2fs_sb_info *);
-+extern void f2fs_destroy_xattr_caches(struct f2fs_sb_info *);
- #else
- 
- #define f2fs_xattr_handlers	NULL
-@@ -151,6 +153,8 @@ static inline ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer,
- {
- 	return -EOPNOTSUPP;
- }
-+static int f2fs_init_xattr_caches(struct f2fs_sb_info *sbi) { return 0; }
-+static void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi) { return 0; }
- #endif
- 
- #ifdef CONFIG_F2FS_FS_SECURITY
--- 
-2.18.0.rc1
-
+> filesystem very easily.
+> 
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>>  fs/f2fs/f2fs.h |   6 +++
+>>  fs/f2fs/file.c | 129 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>>  2 files changed, 134 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index 15199df5d40a..468f807fd917 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -427,6 +427,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+>>  #define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
+>>  #define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
+>>  #define F2FS_IOC_GET_COMPRESS_BLOCKS	_IOR(F2FS_IOCTL_MAGIC, 17, __u64)
+>> +#define F2FS_IOC_RELEASE_COMPRESS_BLOCKS				\
+>> +					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
+>>  
+>>  #define F2FS_IOC_GET_VOLUME_NAME	FS_IOC_GETFSLABEL
+>>  #define F2FS_IOC_SET_VOLUME_NAME	FS_IOC_SETFSLABEL
+>> @@ -3957,6 +3959,10 @@ static inline void f2fs_i_compr_blocks_update(struct inode *inode,
+>>  {
+>>  	int diff = F2FS_I(inode)->i_cluster_size - blocks;
+>>  
+>> +	/* don't update i_compr_blocks if saved blocks were released */
+>> +	if (!add && !F2FS_I(inode)->i_compr_blocks)
+>> +		return;
+>> +
+>>  	if (add) {
+>>  		F2FS_I(inode)->i_compr_blocks += diff;
+>>  		stat_add_compr_blocks(inode, diff);
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 235708c892af..613f87151d90 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -557,6 +557,7 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+>>  	bool compressed_cluster = false;
+>>  	int cluster_index = 0, valid_blocks = 0;
+>>  	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
+>> +	bool released = !F2FS_I(dn->inode)->i_compr_blocks;
+>>  
+>>  	if (IS_INODE(dn->node_page) && f2fs_has_extra_attr(dn->inode))
+>>  		base = get_extra_isize(dn->inode);
+>> @@ -595,7 +596,9 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+>>  			clear_inode_flag(dn->inode, FI_FIRST_BLOCK_WRITTEN);
+>>  
+>>  		f2fs_invalidate_blocks(sbi, blkaddr);
+>> -		nr_free++;
+>> +
+>> +		if (released && blkaddr != COMPRESS_ADDR)
+>> +			nr_free++;
+>>  	}
+>>  
+>>  	if (compressed_cluster)
+>> @@ -3416,6 +3419,127 @@ static int f2fs_get_compress_blocks(struct file *filp, unsigned long arg)
+>>  	return put_user(blocks, (u64 __user *)arg);
+>>  }
+>>  
+>> +static int release_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
+>> +{
+>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
+>> +	unsigned int released_blocks = 0;
+>> +	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
+>> +
+>> +	while (count) {
+>> +		int compr_blocks = 0;
+>> +		block_t blkaddr = f2fs_data_blkaddr(dn);
+>> +		int i;
+>> +
+>> +		if (blkaddr != COMPRESS_ADDR) {
+>> +			dn->ofs_in_node += cluster_size;
+>> +			goto next;
+>> +		}
+>> +
+>> +		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
+>> +			blkaddr = f2fs_data_blkaddr(dn);
+>> +
+>> +			if (__is_valid_data_blkaddr(blkaddr)) {
+>> +				compr_blocks++;
+>> +				if (unlikely(!f2fs_is_valid_blkaddr(sbi, blkaddr,
+>> +							DATA_GENERIC_ENHANCE)))
+>> +					return -EFSCORRUPTED;
+>> +			}
+>> +
+>> +			if (blkaddr != NEW_ADDR)
+>> +				continue;
+>> +
+>> +			dn->data_blkaddr = NULL_ADDR;
+>> +			f2fs_set_data_blkaddr(dn);
+>> +		}
+>> +
+>> +		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, false);
+>> +		dec_valid_block_count(sbi, dn->inode,
+>> +					cluster_size - compr_blocks);
+>> +
+>> +		released_blocks += cluster_size - compr_blocks;
+>> +next:
+>> +		count -= cluster_size;
+>> +	}
+>> +
+>> +	return released_blocks;
+>> +}
+>> +
+>> +static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+>> +{
+>> +	struct inode *inode = file_inode(filp);
+>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>> +	pgoff_t page_idx = 0, last_idx;
+>> +	unsigned int released_blocks = 0;
+>> +	int ret;
+>> +
+>> +	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
+>> +		return -EOPNOTSUPP;
+>> +
+>> +	if (!f2fs_compressed_file(inode))
+>> +		return -EINVAL;
+>> +
+>> +	if (f2fs_readonly(sbi->sb))
+>> +		return -EROFS;
+>> +
+>> +	ret = mnt_want_write_file(filp);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	if (!F2FS_I(inode)->i_compr_blocks)
+>> +		goto out;
+>> +
+>> +	f2fs_balance_fs(F2FS_I_SB(inode), true);
+>> +
+>> +	inode_lock(inode);
+>> +
+>> +	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
+>> +
+>> +	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
+>> +
+>> +	while (page_idx < last_idx) {
+>> +		struct dnode_of_data dn;
+>> +		pgoff_t end_offset, count;
+>> +
+>> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
+>> +		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
+>> +		if (ret) {
+>> +			if (ret == -ENOENT) {
+>> +				page_idx = f2fs_get_next_page_offset(&dn,
+>> +								page_idx);
+>> +				ret = 0;
+>> +				continue;
+>> +			}
+>> +			break;
+>> +		}
+>> +
+>> +		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
+>> +		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
+>> +
+>> +		ret = release_compress_blocks(&dn, count);
+>> +
+>> +		f2fs_put_dnode(&dn);
+>> +
+>> +		if (ret < 0)
+>> +			break;
+>> +
+>> +		page_idx += count;
+>> +		released_blocks += ret;
+>> +	}
+>> +
+>> +	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
+>> +
+>> +	inode_unlock(inode);
+>> +out:
+>> +	mnt_drop_write_file(filp);
+>> +
+>> +	if (!ret)
+>> +		ret = put_user(released_blocks, (u64 __user *)arg);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>>  long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>  {
+>>  	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
+>> @@ -3496,6 +3620,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>  		return f2fs_set_volume_name(filp, arg);
+>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
+>>  		return f2fs_get_compress_blocks(filp, arg);
+>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
+>> +		return f2fs_release_compress_blocks(filp, arg);
+>>  	default:
+>>  		return -ENOTTY;
+>>  	}
+>> @@ -3654,6 +3780,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+>>  	case F2FS_IOC_GET_VOLUME_NAME:
+>>  	case F2FS_IOC_SET_VOLUME_NAME:
+>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
+>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
+>>  		break;
+>>  	default:
+>>  		return -ENOIOCTLCMD;
+>> -- 
+>> 2.18.0.rc1
+> .
+> 
 
 
 _______________________________________________
