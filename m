@@ -2,84 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ADE416F569
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Feb 2020 02:58:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 360C516F826
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Feb 2020 07:43:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j6lxx-0007W1-MP; Wed, 26 Feb 2020 01:58:25 +0000
+	id 1j6qPv-0007na-Dt; Wed, 26 Feb 2020 06:43:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j6lxw-0007Vt-9m
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Feb 2020 01:58:24 +0000
+ (envelope-from <stanley.chu@mediatek.com>) id 1j6qPt-0007nK-Uv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Feb 2020 06:43:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
+ :References:In-Reply-To:Date:CC:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0xmBOg++px664iIfnQK6POS6e1O3/DdDG+3gRlyuTP4=; b=lY8reVB0nxjLYrQWQGTraKsecf
- jwncSLNy/DXJCrFiqGYYsKaFAUKLRGqkKoNZr0UbdCjJKCFexe1beoJYJ4AlhnlM9FcC/josN74q7
- a+U+znLXueZVM0Ek59b5+vS369K4B3AaobBGCbdivXB3Bnru3bgbMq26UJlIJ+3VseSw=;
+ bh=apvx+VLcaGZjP80PbFYAB+4q9C0nw1KkpiRc7G/OTT0=; b=TRu3InAj9xOOGkelEZOgq1wWlq
+ ZAYU/2S+3nsrBx5qO4eNDh6hqAaWnaJwqpLrtEONujtwYSRe02WwGTZ63FVFhWCftpDqzbIrgt6Z6
+ Ipq0t9/u3SLlb8oPEVpbHTxhQ1eaf85Lih9e4WCl+gQnkkrnhcPnVk7wGNFqEBSLkjvM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
+ In-Reply-To:Date:CC:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0xmBOg++px664iIfnQK6POS6e1O3/DdDG+3gRlyuTP4=; b=iLGJkrMPrfZHD3iUplb7GouEWo
- /HtPqIhrbxvusI7hL2H+vO+icJUCxuVZJThq1zvwEZgJTre6RTJsWMmYmJ9oBiCwUCARqqCQVfkWb
- /ethrWF7fE8+7JxrrtGWvhffVC93riy25+/F+o38neQd3jA12+VFHY7WnAoy2kf6wKQY=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j6lxr-006Pcf-Jd
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Feb 2020 01:58:24 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 677A1B8C5026B24D04EA;
- Wed, 26 Feb 2020 09:58:05 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 26 Feb
- 2020 09:58:04 +0800
-To: =?UTF-8?Q?Ond=c5=99ej_Jirman?= <megi@xff.cz>, Jaegeuk Kim
- <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20191209222345.1078-1-jaegeuk@kernel.org>
- <20200222044617.pfrhnz2iavkrtdn6@core.my.home>
- <20200222181721.tzrrohep5l3yklpf@core.my.home>
- <bec3798b-f861-b132-9138-221027bb5195@huawei.com>
- <b1eb9b22-b570-41ab-5177-2c89105428a2@huawei.com>
- <20200224135837.k54ke4ppca26ibec@core.my.home>
- <20200224140349.74yagjdwewmclx4v@core.my.home>
- <20200224143149.au6hvmmfw4ajsq2g@core.my.home>
- <39712bf4-210b-d7b6-cbb1-eb57585d991a@huawei.com>
- <20200225120814.gjm4dby24cs22lux@core.my.home>
- <20200225122706.d6pngz62iwyowhym@core.my.home>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <72d28eba-53b9-b6f4-01a5-45b2352f4285@huawei.com>
-Date: Wed, 26 Feb 2020 09:58:03 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=apvx+VLcaGZjP80PbFYAB+4q9C0nw1KkpiRc7G/OTT0=; b=e7gy9KPt3Y05WCVPpwkyPC73D5
+ 4wM0BeLKsTHjdFsnK+XAl+mZe7DYE3aRMPRvtza3rFhU8hz+UXBnBsh4PMsj3zSgDauXHKmPgHocG
+ SFkQzar5bAbxWvN+PKn4V5+BaHWzcKwIvCKcoD0jJ3PFzbLrHNzs85UE/2nmxnJjg4XU=;
+Received: from [210.61.82.184] (helo=mailgw02.mediatek.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1j6qPp-00A2h7-KL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 26 Feb 2020 06:43:33 +0000
+X-UUID: 66ab466f211b4c578793ed09b5fa2993-20200226
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=apvx+VLcaGZjP80PbFYAB+4q9C0nw1KkpiRc7G/OTT0=; 
+ b=LQPK7eVtpWBPw8xiPHS9jB8i5vXbWpu1Tc+wAzon0iiqZYlkRoxGvNRk5L9f8fEIPVDuPfebLxbLMQ/hXl++0DzkdCCeKRpCARCKaWXWljYLlekfmNiRaFM7gwqHhecoxY5/6rmXURdQ9QAlqtXooKHkDYmChmpNE8D59xI6Z38=;
+X-UUID: 66ab466f211b4c578793ed09b5fa2993-20200226
+Received: from mtkexhb02.mediatek.inc [(172.21.101.103)] by
+ mailgw02.mediatek.com (envelope-from <stanley.chu@mediatek.com>)
+ (Cellopoint E-mail Firewall v4.1.10 Build 0809 with TLS)
+ with ESMTP id 675364193; Wed, 26 Feb 2020 14:43:16 +0800
+Received: from mtkcas08.mediatek.inc (172.21.101.126) by
+ mtkmbs02n1.mediatek.inc (172.21.101.77) with Microsoft SMTP Server (TLS) id
+ 15.0.1395.4; Wed, 26 Feb 2020 14:41:21 +0800
+Received: from [172.21.84.99] (172.21.84.99) by mtkcas08.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.0.1395.4 via Frontend
+ Transport; Wed, 26 Feb 2020 14:43:23 +0800
+Message-ID: <1582699394.26304.96.camel@mtksdccf07>
+From: Stanley Chu <stanley.chu@mediatek.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Date: Wed, 26 Feb 2020 14:43:14 +0800
+In-Reply-To: <20200226011206.GD114977@gmail.com>
+References: <20200221115050.238976-1-satyat@google.com>
+ <20200221115050.238976-7-satyat@google.com>
+ <20200221172244.GC438@infradead.org> <20200221181109.GB925@sol.localdomain>
+ <1582465656.26304.69.camel@mtksdccf07>
+ <20200224233759.GC30288@infradead.org>
+ <1582615285.26304.93.camel@mtksdccf07> <20200226011206.GD114977@gmail.com>
+X-Mailer: Evolution 3.2.3-0ubuntu6 
 MIME-Version: 1.0
-In-Reply-To: <20200225122706.d6pngz62iwyowhym@core.my.home>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-MTK: N
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: megous.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j6lxr-006Pcf-Jd
-Subject: Re: [f2fs-dev] Writes stoped working on f2fs after the compression
- support was added
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j6qPp-00A2h7-KL
+Subject: Re: [f2fs-dev] [PATCH v7 6/9] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,193 +94,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-block@vger.kernel.org,
+ Ladvine D Almeida <Ladvine.DAlmeida@synopsys.com>, linux-ext4@vger.kernel.org,
+ linux-scsi@vger.kernel.org, Kim
+ Boojin <boojin.kim@samsung.com>, Kuohong Wang <kuohong.wang@mediatek.com>,
+ Parshuram Raju Thombare <pthombar@cadence.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Satya Tangirala <satyat@google.com>, Christoph Hellwig <hch@infradead.org>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMC8yLzI1IDIwOjI3LCBPbmTFmWVqIEppcm1hbiB3cm90ZToKPiBPbiBUdWUsIEZlYiAy
-NSwgMjAyMCBhdCAwMTowODoxNFBNICswMTAwLCBtZWdpIHhmZiB3cm90ZToKPj4gSGVsbG8sCj4+
-Cj4+IE9uIFR1ZSwgRmViIDI1LCAyMDIwIGF0IDA3OjI0OjEyUE0gKzA4MDAsIENoYW8gWXUgd3Jv
-dGU6Cj4+PiBPbiAyMDIwLzIvMjQgMjI6MzEsIE9uZMWZZWogSmlybWFuIHdyb3RlOgo+Pj4+PiBK
-dXN0IGJ5IGEgbG9va3Mgb2YgaXQ6Cj4+Pj4+Cj4+Pj4+IHJvb3RAdGJzMlsvcHJvYy9zeXMva2Vy
-bmVsXSAjIGRtZXNnIHwgZ3JlcCB1cF93cml0ZSB8IHdjIC1sCj4+Pj4+IDMyNAo+Pj4+PiByb290
-QHRiczJbL3Byb2Mvc3lzL2tlcm5lbF0gIyBkbWVzZyB8IGdyZXAgZG93bl93cml0ZSB8IHdjIC1s
-Cj4+Pj4+IDM0Nwo+Pj4+Pgo+Pj4+PiB0aGVyZSBzZWVtcyB0byBiZSBhIG1pc21hdGNoIG9mIGxv
-Y2svdW5sb2NrIGNvdW50cy4KPj4+PiAgCj4+Pj4gU29ycnksIGEgd3JvbmcgZ3JlcCBleHByZXNz
-aW9uLgo+Pj4+Cj4+Pj4gcm9vdEB0YnMyW35dICMgZG1lc2cgfCBncmVwIGlub2RlX2Rvd25fd3Jp
-dGUgfCB3YyAtbAo+Pj4+IDM1Nwo+Pj4+IHJvb3RAdGJzMlt+XSAjIGRtZXNnIHwgZ3JlcCBpbm9k
-ZV91cF93cml0ZSB8IHdjIC1sCj4+Pj4gMzU3Cj4+Pj4gcm9vdEB0YnMyW35dICMgZG1lc2cgfCBn
-cmVwIGlub2RlX3VwX3JlYWQgfCB3YyAtbAo+Pj4+IDE2Cj4+Pj4gcm9vdEB0YnMyW35dICMgZG1l
-c2cgfCBncmVwIGlub2RlX2Rvd25fcmVhZCB8IHdjIC1sCj4+Pj4gMTYKPj4+Cj4+PiBJIGRvbid0
-IGtub3cgd2h5IHdlIGhhdmUgY29uc2lzdGVudCBkb3duL3VwIHBhaXIsIGJ1dCB0aHJvdWdoIGRp
-c2Fzc2VtYmxlZAo+Pj4gY29kZSwgSSBkb3VidCBpdCdzIHRoZSBmMmZzX2lub2RlLT5pX3NlbS4K
-Pj4KPj4gQmVjYXVzZSB3ZSB3ZXJlIGNvdW50aW5nIGF0dGVtcHRzLCBhbmQgbm90IGEgc3VjY2Vz
-c2Z1bCBsb2NrLiA7KQoKWyAgMjE0LjUwODk0M10gaW5vZGVfZG93bl93cml0ZSBmcm9tIGYyZnNf
-d3JpdGVfY2FjaGVfcGFnZXMrMHgyYjQvMHg3YzQKWyAgMzA2LjIxMzMyNV0gaW5vZGVfZG93bl93
-cml0ZSBmcm9tIGYyZnNfd3JpdGVfY2FjaGVfcGFnZXMrMHgyYjQvMHg3YzQKCkFjdHVhbGx5LCBk
-b3duX3dyaXRlIGNvdW50IGlzIDMyMCwgdXBfd3JpdGUgY291bnQgaXMgMzE5LCBrd29ya2VyIGRp
-ZG4ndCBjYWxsCnVwX3dyaXRlIGF0IDIxNC41MDg5NDMuCgo+Pgo+Pj4gYzA0MzVkN2M6ICAgICAg
-IGViZjU0YWY4ICAgICAgICBibCAgICAgIGMwMTg4OTY0IDxwcmludGs+Cj4+PiBjMDQzNWQ4MDog
-ICAgICAgZTFhMDAwMDYgICAgICAgIG1vdiAgICAgcjAsIHI2Cj4+PiBjMDQzNWQ4NDogICAgICAg
-ZWIxMzgxMzUgICAgICAgIGJsICAgICAgYzA5MTYyNjAgPGRvd25fd3JpdGU+Cj4+Pgo+Pj4gaW5v
-ZGVfZG93bl93cml0ZSgpCj4+Pgo+Pj4gYzA0MzVkODg6ICAgICAgIGUyODRjZTFkICAgICAgICBh
-ZGQgICAgIGlwLCByNCwgIzQ2NCAgICA7IDB4MWQwCj4+Pgo+Pj4gV2UgYXJlIHN0dWNrIGhlcmUu
-Cj4+Pgo+Pj4gWyAgNDMwLjY3NTc1NF0gWzxjMDkxNjI2MD5dIChkb3duX3dyaXRlKSBmcm9tIFs8
-YzA0MzVkODg+XSAoZjJmc193cml0ZV9zaW5nbGVfZGF0YV9wYWdlKzB4NjAwLzB4N2Q4KQo+Pj4g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXl5eXl5eXl5e
-Cj4+PiBbICA0MzAuNjc1NzY0XSBbPGMwNDM1Nzg4Pl0gKGYyZnNfd3JpdGVfc2luZ2xlX2RhdGFf
-cGFnZSkgZnJvbSBbPGMwNDM2MjE0Pl0gKGYyZnNfd3JpdGVfY2FjaGVfcGFnZXMrMHgyYjQvMHg3
-YzQpCj4+Pgo+Pj4KPj4+IGMwNDM1ZDhjOiAgICAgICBlMTRiMGFkNCAgICAgICAgbGRyZCAgICBy
-MCwgW2ZwLCAjLTE2NF0gOyAweGZmZmZmZjVjCj4+PiBjMDQzNWQ5MDogICAgICAgZTFjYzIwZDAg
-ICAgICAgIGxkcmQgICAgcjIsIFtpcF0KPj4+IGMwNDM1ZDk0OiAgICAgICBlMTUyMDAwMCAgICAg
-ICAgY21wICAgICByMiwgcjAKPj4+IGMwNDM1ZDk4OiAgICAgICBlMGQzMzAwMSAgICAgICAgc2Jj
-cyAgICByMywgcjMsIHIxCj4+PiBjMDQzNWQ5YzogICAgICAgYjFjYzAwZjAgICAgICAgIHN0cmRs
-dCAgcjAsIFtpcF0KPj4+IGMwNDM1ZGEwOiAgICAgICBlMWEwMDAwNiAgICAgICAgbW92ICAgICBy
-MCwgcjYKPj4+IGMwNDM1ZGE0OiAgICAgICBlYmY1MjIyNyAgICAgICAgYmwgICAgICBjMDE3ZTY0
-OCA8dXBfd3JpdGU+Cj4+PiBjMDQzNWRhODogICAgICAgZTUxYjIwOTggICAgICAgIGxkciAgICAg
-cjIsIFtmcCwgIy0xNTJdIDsgMHhmZmZmZmY2OAo+Pj4gYzA0MzVkYWM6ICAgICAgIGUzMGMwNzMw
-ICAgICAgICBtb3Z3ICAgIHIwLCAjNTA5OTIgICAgICA7IDB4YzczMAo+Pj4gYzA0MzVkYjA6ICAg
-ICAgIGU1OWYxMWE0ICAgICAgICBsZHIgICAgIHIxLCBbcGMsICM0MjBdICA7IGMwNDM1ZjVjIDxm
-MmZzX3dyaXRlX3NpbmdsZV9kYXRhX3BhZ2UrMHg3ZDQ+Cj4+PiBjMDQzNWRiNDogICAgICAgZTM0
-YzAwYjYgICAgICAgIG1vdnQgICAgcjAsICM0OTMzNCAgICAgIDsgMHhjMGI2Cj4+PiBjMDQzNWRi
-ODogICAgICAgZWJmNTRhZTkgICAgICAgIGJsICAgICAgYzAxODg5NjQgPHByaW50az4KPj4+Cj4+
-PiBpbm9kZV91cF93cml0ZSgpCj4+Cj4+IFRoZSBwYXRjaCB5b3Ugc2VudCBoZWxwZWQgc28gZmFy
-LiBJJ2xsIGtlZXAgdGhlIHRhYmxldCBydW5uaW5nIGZvciBhIHdoaWxlLAo+PiBidXQgc28gZmFy
-IHRoZSBpc3N1ZSBkaWQgbm90IHJlYXBwZWFyIHdpdGhpbiBhIGZldyBtaW51dGVzIGFmdGVyIGJv
-b3QgYXMKPj4gdXN1YWwuCj4gCj4gU28gdGhpcyB0aW1lIGl0IGp1c3QgdG9vayBzZXZlcmFsIHRp
-bWVzIGxvbmdlciB0byBhcHBlYXIgKDgtMjBtaW5zIHRvIHRoZSBoYW5nKToKPiAKPiBodHRwczov
-L21lZ291cy5jb20vZGwvdG1wL2RtZXNnMQo+IGh0dHBzOi8vbWVnb3VzLmNvbS9kbC90bXAvZG1l
-c2cyCgpBbHJpZ2h0LCBJIHN0aWxsIGRpZG4ndCBzZWUgYW55IHBvc3NpYmxlIGRlYWRsb2NrIGlu
-IGYyZnMuCgpDYW4geW91IHRyeSBiZWxvdyBwYXRjaD8gSSdkIGxpa2UgdG8gc2VlIHdoZXRoZXIg
-c3BpbmxvY2sgY2FuIGNhdXNlIHRoZSBzYW1lIGlzc3VlLgoKRnJvbSAzZTllOGRhZjkyMmVhYTJj
-NWRiMTk1Y2UyNzhlODllMTAxOTFjNTE2IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBD
-aGFvIFl1IDx5dWNoYW8wQGh1YXdlaS5jb20+CkRhdGU6IFdlZCwgMjYgRmViIDIwMjAgMDk6NTM6
-MDMgKzA4MDAKU3ViamVjdDogW1BBVENIXSBmaXgKClNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPHl1
-Y2hhbzBAaHVhd2VpLmNvbT4KLS0tCiBmcy9mMmZzL2NvbXByZXNzLmMgfCA0ICsrLS0KIGZzL2Yy
-ZnMvZGF0YS5jICAgICB8IDQgKystLQogZnMvZjJmcy9mMmZzLmggICAgIHwgNSArKystLQogZnMv
-ZjJmcy9maWxlLmMgICAgIHwgNCArKy0tCiBmcy9mMmZzL3N1cGVyLmMgICAgfCAxICsKIDUgZmls
-ZXMgY2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQg
-YS9mcy9mMmZzL2NvbXByZXNzLmMgYi9mcy9mMmZzL2NvbXByZXNzLmMKaW5kZXggYjRmZjI1ZGM1
-NWE5Li42ZGUwODcyYWQ4ODEgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMvY29tcHJlc3MuYworKysgYi9m
-cy9mMmZzL2NvbXByZXNzLmMKQEAgLTkwNiwxMCArOTA2LDEwIEBAIHN0YXRpYyBpbnQgZjJmc193
-cml0ZV9jb21wcmVzc2VkX3BhZ2VzKHN0cnVjdCBjb21wcmVzc19jdHggKmNjLAogCWYyZnNfcHV0
-X2Rub2RlKCZkbik7CiAJZjJmc191bmxvY2tfb3Aoc2JpKTsKCi0JZG93bl93cml0ZSgmZmktPmlf
-c2VtKTsKKwlzcGluX2xvY2soJmZpLT5pX3NpemVfbG9jayk7CiAJaWYgKGZpLT5sYXN0X2Rpc2tf
-c2l6ZSA8IHBzaXplKQogCQlmaS0+bGFzdF9kaXNrX3NpemUgPSBwc2l6ZTsKLQl1cF93cml0ZSgm
-ZmktPmlfc2VtKTsKKwlzcGluX3VubG9jaygmZmktPmlfc2l6ZV9sb2NrKTsKCiAJZjJmc19wdXRf
-cnBhZ2VzKGNjKTsKIAlmMmZzX2Rlc3Ryb3lfY29tcHJlc3NfY3R4KGNjKTsKZGlmZiAtLWdpdCBh
-L2ZzL2YyZnMvZGF0YS5jIGIvZnMvZjJmcy9kYXRhLmMKaW5kZXggY2I0MTI2MGNhOTQxLi41Yzli
-MDcyY2YwZGUgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMvZGF0YS5jCisrKyBiL2ZzL2YyZnMvZGF0YS5j
-CkBAIC0yNjUxLDEwICsyNjUxLDEwIEBAIGludCBmMmZzX3dyaXRlX3NpbmdsZV9kYXRhX3BhZ2Uo
-c3RydWN0IHBhZ2UgKnBhZ2UsIGludCAqc3VibWl0dGVkLAogCWlmIChlcnIpIHsKIAkJZmlsZV9z
-ZXRfa2VlcF9pc2l6ZShpbm9kZSk7CiAJfSBlbHNlIHsKLQkJZG93bl93cml0ZSgmRjJGU19JKGlu
-b2RlKS0+aV9zZW0pOworCQlzcGluX2xvY2soJkYyRlNfSShpbm9kZSktPmlfc2l6ZV9sb2NrKTsK
-IAkJaWYgKEYyRlNfSShpbm9kZSktPmxhc3RfZGlza19zaXplIDwgcHNpemUpCiAJCQlGMkZTX0ko
-aW5vZGUpLT5sYXN0X2Rpc2tfc2l6ZSA9IHBzaXplOwotCQl1cF93cml0ZSgmRjJGU19JKGlub2Rl
-KS0+aV9zZW0pOworCQlzcGluX3VubG9jaygmRjJGU19JKGlub2RlKS0+aV9zaXplX2xvY2spOwog
-CX0KCiBkb25lOgpkaWZmIC0tZ2l0IGEvZnMvZjJmcy9mMmZzLmggYi9mcy9mMmZzL2YyZnMuaApp
-bmRleCA0YTAyZWRjMjQ1NGIuLjFhOGFmMjAyMGU3MiAxMDA2NDQKLS0tIGEvZnMvZjJmcy9mMmZz
-LmgKKysrIGIvZnMvZjJmcy9mMmZzLmgKQEAgLTcwMSw2ICs3MDEsNyBAQCBzdHJ1Y3QgZjJmc19p
-bm9kZV9pbmZvIHsKIAlzdHJ1Y3QgdGFza19zdHJ1Y3QgKmNwX3Rhc2s7CS8qIHNlcGFyYXRlIGNw
-L3diIElPIHN0YXRzKi8KIAluaWRfdCBpX3hhdHRyX25pZDsJCS8qIG5vZGUgaWQgdGhhdCBjb250
-YWlucyB4YXR0cnMgKi8KIAlsb2ZmX3QJbGFzdF9kaXNrX3NpemU7CQkvKiBsYXN0bHkgd3JpdHRl
-biBmaWxlIHNpemUgKi8KKwlzcGlubG9ja190IGlfc2l6ZV9sb2NrOwkJLyogcHJvdGVjdCBsYXN0
-X2Rpc2tfc2l6ZSAqLwoKICNpZmRlZiBDT05GSUdfUVVPVEEKIAlzdHJ1Y3QgZHF1b3QgKmlfZHF1
-b3RbTUFYUVVPVEFTXTsKQEAgLTI4ODIsOSArMjg4Myw5IEBAIHN0YXRpYyBpbmxpbmUgYm9vbCBm
-MmZzX3NraXBfaW5vZGVfdXBkYXRlKHN0cnVjdCBpbm9kZSAqaW5vZGUsIGludCBkc3luYykKIAlp
-ZiAoIWYyZnNfaXNfdGltZV9jb25zaXN0ZW50KGlub2RlKSkKIAkJcmV0dXJuIGZhbHNlOwoKLQlk
-b3duX3JlYWQoJkYyRlNfSShpbm9kZSktPmlfc2VtKTsKKwlzcGluX2xvY2soJkYyRlNfSShpbm9k
-ZSktPmlfc2l6ZV9sb2NrKTsKIAlyZXQgPSBGMkZTX0koaW5vZGUpLT5sYXN0X2Rpc2tfc2l6ZSA9
-PSBpX3NpemVfcmVhZChpbm9kZSk7Ci0JdXBfcmVhZCgmRjJGU19JKGlub2RlKS0+aV9zZW0pOwor
-CXNwaW5fdW5sb2NrKCZGMkZTX0koaW5vZGUpLT5pX3NpemVfbG9jayk7CgogCXJldHVybiByZXQ7
-CiB9CmRpZmYgLS1naXQgYS9mcy9mMmZzL2ZpbGUuYyBiL2ZzL2YyZnMvZmlsZS5jCmluZGV4IGZk
-YjQ5MmMyZjI0OC4uNTZmZTE4ZmJiMmVmIDEwMDY0NAotLS0gYS9mcy9mMmZzL2ZpbGUuYworKysg
-Yi9mcy9mMmZzL2ZpbGUuYwpAQCAtOTM4LDEwICs5MzgsMTAgQEAgaW50IGYyZnNfc2V0YXR0cihz
-dHJ1Y3QgZGVudHJ5ICpkZW50cnksIHN0cnVjdCBpYXR0ciAqYXR0cikKIAkJaWYgKGVycikKIAkJ
-CXJldHVybiBlcnI7CgotCQlkb3duX3dyaXRlKCZGMkZTX0koaW5vZGUpLT5pX3NlbSk7CisJCXNw
-aW5fbG9jaygmRjJGU19JKGlub2RlKS0+aV9zaXplX2xvY2spOwogCQlpbm9kZS0+aV9tdGltZSA9
-IGlub2RlLT5pX2N0aW1lID0gY3VycmVudF90aW1lKGlub2RlKTsKIAkJRjJGU19JKGlub2RlKS0+
-bGFzdF9kaXNrX3NpemUgPSBpX3NpemVfcmVhZChpbm9kZSk7Ci0JCXVwX3dyaXRlKCZGMkZTX0ko
-aW5vZGUpLT5pX3NlbSk7CisJCXNwaW5fdW5sb2NrKCZGMkZTX0koaW5vZGUpLT5pX3NpemVfbG9j
-ayk7CiAJfQoKIAlfX3NldGF0dHJfY29weShpbm9kZSwgYXR0cik7CmRpZmYgLS1naXQgYS9mcy9m
-MmZzL3N1cGVyLmMgYi9mcy9mMmZzL3N1cGVyLmMKaW5kZXggMGIxNjIwNGQzYjdkLi4yZDBlNWQx
-MjY5ZjUgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMvc3VwZXIuYworKysgYi9mcy9mMmZzL3N1cGVyLmMK
-QEAgLTk1Nyw2ICs5NTcsNyBAQCBzdGF0aWMgc3RydWN0IGlub2RlICpmMmZzX2FsbG9jX2lub2Rl
-KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IpCiAJLyogSW5pdGlhbGl6ZSBmMmZzLXNwZWNpZmljIGlu
-b2RlIGluZm8gKi8KIAlhdG9taWNfc2V0KCZmaS0+ZGlydHlfcGFnZXMsIDApOwogCWluaXRfcndz
-ZW0oJmZpLT5pX3NlbSk7CisJc3Bpbl9sb2NrX2luaXQoJmZpLT5pX3NpemVfbG9jayk7CiAJSU5J
-VF9MSVNUX0hFQUQoJmZpLT5kaXJ0eV9saXN0KTsKIAlJTklUX0xJU1RfSEVBRCgmZmktPmdkaXJ0
-eV9saXN0KTsKIAlJTklUX0xJU1RfSEVBRCgmZmktPmlubWVtX2lsaXN0KTsKLS0gCjIuMTguMC5y
-YzEKCgoKCj4gCj4gdGhhbmsgeW91IGFuZCByZWdhcmRzLAo+IAlvLgo+IAo+PiB0aGFuayB5b3Ug
-YW5kIHJlZ2FyZHMsCj4+IAlvLgo+Pgo+Pj4gVGhhbmtzLAo+Pj4KPj4+Pgo+Pj4+IFNvIGl0J3Mg
-cHJvYmFibHkgbm90IGlub2RlIGxvY2tpbmcuCj4+Pj4KPj4+Pj4gcm9vdEB0YnMyWy9wcm9jL3N5
-cy9rZXJuZWxdICMgZG1lc2cgfCBncmVwIGRvd25fcmVhZCB8IHdjIC1sCj4+Pj4+IDE2Cj4+Pj4+
-IHJvb3RAdGJzMlsvcHJvYy9zeXMva2VybmVsXSAjIGRtZXNnIHwgZ3JlcCB1cF9yZWFkIHwgd2Mg
-LWwKPj4+Pj4gMTYKPj4+Pj4KPj4+Pj4gcmVnYXJkcywKPj4+Pj4gCW8uCj4+Pj4+Cj4+Pj4+PiB0
-aGFuayB5b3UsCj4+Pj4+PiAJby4KPj4+Pj4+Cj4+Pj4+Pj4+IFRoYW5rcywKPj4+Pj4+Pj4KPj4+
-Pj4+Pj4+IFsgIDI0Ni43NTgxOTBdICByNTplZmYyMTNiMCByNDpkYTI4M2M2MAo+Pj4+Pj4+Pj4g
-WyAgMjQ2Ljc1ODE5OF0gWzxjMDQzNTU3OD5dIChmMmZzX3dyaXRlX3NpbmdsZV9kYXRhX3BhZ2Up
-IGZyb20gWzxjMDQzNWZkOD5dIChmMmZzX3dyaXRlX2NhY2hlX3BhZ2VzKzB4MmI0LzB4N2M0KQo+
-Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODIwNF0gIHIxMDpkYTY0NWMyOCByOTpkYTI4M2Q2MCByODpkYTI4
-M2M2MCByNzowMDAwMDAwZiByNjpkYTY0NWQ4MCByNTowMDAwMDAwMQo+Pj4+Pj4+Pj4gWyAgMjQ2
-Ljc1ODIwNl0gIHI0OmVmZjIxM2IwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjE0XSBbPGMwNDM1ZDI0
-Pl0gKGYyZnNfd3JpdGVfY2FjaGVfcGFnZXMpIGZyb20gWzxjMDQzNjgyYz5dIChmMmZzX3dyaXRl
-X2RhdGFfcGFnZXMrMHgzNDQvMHgzNWMpCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjIwXSAgcjEwOjAw
-MDAwMDAwIHI5OmQ5ZWQwMDJjIHI4OmQ5ZWQwMDAwIHI3OjAwMDAwMDA0IHI2OmRhMjgzZDYwIHI1
-OmRhMjgzYzYwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjIzXSAgcjQ6ZGE2NDVkODAKPj4+Pj4+Pj4+
-IFsgIDI0Ni43NTgyMzhdIFs8YzA0MzY0ZTg+XSAoZjJmc193cml0ZV9kYXRhX3BhZ2VzKSBmcm9t
-IFs8YzAyNjdlZTg+XSAoZG9fd3JpdGVwYWdlcysweDNjLzB4ZDQpCj4+Pj4+Pj4+PiBbICAyNDYu
-NzU4MjQ0XSAgcjEwOjAwMDAwMDBhIHI5OmMwZTAzZDAwIHI4OjAwMDAwYzAwIHI3OmMwMjY0ZGRj
-IHI2OmRhNjQ1ZDgwIHI1OmRhMjgzZDYwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjQ2XSAgcjQ6ZGEy
-ODNjNjAKPj4+Pj4+Pj4+IFsgIDI0Ni43NTgyNTRdIFs8YzAyNjdlYWM+XSAoZG9fd3JpdGVwYWdl
-cykgZnJvbSBbPGMwMzEwY2JjPl0gKF9fd3JpdGViYWNrX3NpbmdsZV9pbm9kZSsweDQ0LzB4NDU0
-KQo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODI1OV0gIHI3OmRhMjgzZDYwIHI2OmRhNjQ1ZWFjIHI1OmRh
-NjQ1ZDgwIHI0OmRhMjgzYzYwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjY2XSBbPGMwMzEwYzc4Pl0g
-KF9fd3JpdGViYWNrX3NpbmdsZV9pbm9kZSkgZnJvbSBbPGMwMzExMmQwPl0gKHdyaXRlYmFja19z
-Yl9pbm9kZXMrMHgyMDQvMHg0YjApCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MjcyXSAgcjEwOjAwMDAw
-MDBhIHI5OmMwZTAzZDAwIHI4OmRhMjgzY2M4IHI3OmRhMjgzYzYwIHI2OmRhNjQ1ZWFjIHI1OmRh
-MjgzZDA4Cj4+Pj4+Pj4+PiBbICAyNDYuNzU4Mjc0XSAgcjQ6ZDlkYzk4NDgKPj4+Pj4+Pj4+IFsg
-IDI0Ni43NTgyODFdIFs8YzAzMTEwY2M+XSAod3JpdGViYWNrX3NiX2lub2RlcykgZnJvbSBbPGMw
-MzExNWNjPl0gKF9fd3JpdGViYWNrX2lub2Rlc193YisweDUwLzB4ZTQpCj4+Pj4+Pj4+PiBbICAy
-NDYuNzU4Mjg3XSAgcjEwOmRhMzc5N2E4IHI5OmMwZTAzZDAwIHI4OmQ5ZGM5ODVjIHI3OmRhNjQ1
-ZWFjIHI2OjAwMDAwMDAwIHI1OmQ5ZGM5ODQ4Cj4+Pj4+Pj4+PiBbICAyNDYuNzU4Mjg5XSAgcjQ6
-ZGE1YTg4MDAKPj4+Pj4+Pj4+IFsgIDI0Ni43NTgyOTZdIFs8YzAzMTE1N2M+XSAoX193cml0ZWJh
-Y2tfaW5vZGVzX3diKSBmcm9tIFs8YzAzMTE4ZjQ+XSAod2Jfd3JpdGViYWNrKzB4Mjk0LzB4MzM4
-KQo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODMwMl0gIHIxMDpmZmZiZjIwMCByOTpkYTY0NDAwMCByODpj
-MGUwNGU2NCByNzpkOWRjOTg0OCByNjpkOWRjOTg3NCByNTpkYTY0NWVhYwo+Pj4+Pj4+Pj4gWyAg
-MjQ2Ljc1ODMwNV0gIHI0OmQ5ZGM5ODQ4Cj4+Pj4+Pj4+PiBbICAyNDYuNzU4MzEyXSBbPGMwMzEx
-NjYwPl0gKHdiX3dyaXRlYmFjaykgZnJvbSBbPGMwMzEyZGFjPl0gKHdiX3dvcmtmbisweDM1Yy8w
-eDU0YykKPj4+Pj4+Pj4+IFsgIDI0Ni43NTgzMThdICByMTA6ZGE1ZjIwMDUgcjk6ZDlkYzk4NGMg
-cjg6ZDlkYzk5NDggcjc6ZDlkYzk4NDggcjY6MDAwMDAwMDAgcjU6ZDlkYzk5NTQKPj4+Pj4+Pj4+
-IFsgIDI0Ni43NTgzMjFdICByNDowMDAwMzFlNgo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODMzNF0gWzxj
-MDMxMmE1MD5dICh3Yl93b3JrZm4pIGZyb20gWzxjMDE0ZjJiOD5dIChwcm9jZXNzX29uZV93b3Jr
-KzB4MjE0LzB4NTQ0KQo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODM0MF0gIHIxMDpkYTVmMjAwNSByOTow
-MDAwMDIwMCByODowMDAwMDAwMCByNzpkYTVmMjAwMCByNjplZjA0NDQwMCByNTpkYTVlYjAwMAo+
-Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODM0M10gIHI0OmQ5ZGM5OTU0Cj4+Pj4+Pj4+PiBbICAyNDYuNzU4
-MzUwXSBbPGMwMTRmMGE0Pl0gKHByb2Nlc3Nfb25lX3dvcmspIGZyb20gWzxjMDE0ZjYzND5dICh3
-b3JrZXJfdGhyZWFkKzB4NGMvMHg1NzQpCj4+Pj4+Pj4+PiBbICAyNDYuNzU4MzU3XSAgcjEwOmVm
-MDQ0NDAwIHI5OmMwZTAzZDAwIHI4OmVmMDQ0NDE4IHI3OjAwMDAwMDg4IHI2OmVmMDQ0NDAwIHI1
-OmRhNWViMDE0Cj4+Pj4+Pj4+PiBbICAyNDYuNzU4MzU5XSAgcjQ6ZGE1ZWIwMDAKPj4+Pj4+Pj4+
-IFsgIDI0Ni43NTgzNjhdIFs8YzAxNGY1ZTg+XSAod29ya2VyX3RocmVhZCkgZnJvbSBbPGMwMTU2
-NGZjPl0gKGt0aHJlYWQrMHgxNDQvMHgxNzApCj4+Pj4+Pj4+PiBbICAyNDYuNzU4Mzc0XSAgcjEw
-OmVjOWU1ZTkwIHI5OmRhYmYzMjVjIHI4OmRhNWViMDAwIHI3OmRhNjQ0MDAwIHI2OjAwMDAwMDAw
-IHI1OmRhNWZlMDAwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4Mzc3XSAgcjQ6ZGFiZjMyNDAKPj4+Pj4+
-Pj4+IFsgIDI0Ni43NTgzODZdIFs8YzAxNTYzYjg+XSAoa3RocmVhZCkgZnJvbSBbPGMwMTAxMGU4
-Pl0gKHJldF9mcm9tX2ZvcmsrMHgxNC8weDJjKQo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODM5MV0gRXhj
-ZXB0aW9uIHN0YWNrKDB4ZGE2NDVmYjAgdG8gMHhkYTY0NWZmOCkKPj4+Pj4+Pj4+IFsgIDI0Ni43
-NTgzOTddIDVmYTA6ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDAwMDAwMDAw
-IDAwMDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwCj4+Pj4+Pj4+PiBbICAyNDYuNzU4NDAyXSA1ZmMw
-OiAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAw
-MDAwMDAwMCAwMDAwMDAwMAo+Pj4+Pj4+Pj4gWyAgMjQ2Ljc1ODQwN10gNWZlMDogMDAwMDAwMDAg
-MDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMTMgMDAwMDAwMDAKPj4+Pj4+Pj4+IFsg
-IDI0Ni43NTg0MTNdICByMTA6MDAwMDAwMDAgcjk6MDAwMDAwMDAgcjg6MDAwMDAwMDAgcjc6MDAw
-MDAwMDAgcjY6MDAwMDAwMDAgcjU6YzAxNTYzYjgKPj4+Pj4+Pj4+IFsgIDI0Ni43NTg0MTZdICBy
-NDpkYTVmZTAwMAo+Pj4+Pj4+Pj4gLgo+Pj4+Pj4+Pj4KPj4+Pj4+Pj4KPj4+Pj4+Pj4KPj4+Pj4+
-Pj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPj4+Pj4+
-Pj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPj4+Pj4+Pj4gTGludXgtZjJmcy1kZXZl
-bEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKPj4+Pj4+Pj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo+Pj4+Pj4+Pgo+Pj4+IC4KPj4+
-Pgo+IC4KPiAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNv
-dXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5m
-by9saW51eC1mMmZzLWRldmVsCg==
+Hi Eric,
+
+On Tue, 2020-02-25 at 17:12 -0800, Eric Biggers wrote:
+> On Tue, Feb 25, 2020 at 03:21:25PM +0800, Stanley Chu wrote:
+> > Hi Christoph,
+> > 
+> > On Mon, 2020-02-24 at 15:37 -0800, Christoph Hellwig wrote:
+> > > On Sun, Feb 23, 2020 at 09:47:36PM +0800, Stanley Chu wrote:
+> > > > Yes, MediaTek is keeping work closely with inline encryption patch sets.
+> > > > Currently the v6 version can work well (without
+> > > > UFSHCD_QUIRK_BROKEN_CRYPTO quirk) at least in our MT6779 SoC platform
+> > > > which basic SoC support and some other peripheral drivers are under
+> > > > upstreaming as below link,
+> > > > 
+> > > > https://patchwork.kernel.org/project/linux-mediatek/list/?state=%
+> > > > 2A&q=6779&series=&submitter=&delegate=&archive=both
+> > > > 
+> > > > The integration with inline encryption patch set needs to patch
+> > > > ufs-mediatek and patches are ready in downstream. We plan to upstream
+> > > > them soon after inline encryption patch sets get merged.
+> > > 
+> > > What amount of support do you need in ufs-mediatek?  It seems like
+> > > pretty much every ufs low-level driver needs some kind of specific
+> > > support now, right?  I wonder if we should instead opt into the support
+> > > instead of all the quirking here.
+> > 
+> > The patch in ufs-mediatek is aimed to issue vendor-specific SMC calls
+> > for host initialization and configuration. This is because MediaTek UFS
+> > host has some "secure-protected" registers/features which need to be
+> > accessed/switched in secure world. 
+> > 
+> > Such protection is not mentioned by UFSHCI specifications thus inline
+> > encryption patch set assumes that every registers in UFSHCI can be
+> > accessed normally in kernel. This makes sense and surely the patchset
+> > can work fine in any "standard" UFS host. However if host has special
+> > design then it can work normally only if some vendor-specific treatment
+> > is applied.
+> > 
+> > I think one of the reason to apply UFSHCD_QUIRK_BROKEN_CRYPTO quirk in
+> > ufs-qcom host is similar to above case.
+> 
+> So, I had originally assumed that most kernel developers would prefer to make
+> the UFS crypto support opt-out rather than opt-in, since that matches the normal
+> Linux way of doing things.  I.e. normally the kernel's default assumption is
+> that devices implement the relevant standard, and only when a device is known to
+> deviate from the standard does the driver apply quirks.
+> 
+> But indeed, as we've investigated more vendors' UFS hardware, it seems that
+> everyone has some quirk that needs to be handled in the platform driver:
+> 
+>   - ufs-qcom (tested on DragonBoard 845c with upstream kernel) needs
+>     vendor-specific crypto initialization logic and SMC calls to set keys
+> 
+>   - ufs-mediatek needs the quirks that Stanley mentioned above
+> 
+>   - ufs-hisi (tested on Hikey960 with upstream kernel) needs to write a
+>     vendor-specific register to use high keyslots, but even then I still
+>     couldn't get the crypto support working correctly.
+> 
+> I'm not sure about the UFS controllers from Synopsys, Cadence, or Samsung, all
+> of which apparently have implemented some form of the crypto support too.  But I
+> wouldn't get my hopes up that everyone followed the UFS standard precisely.
+> 
+> So if there are no objections, IMO we should make the crypto support opt-in.
+> 
+> That makes it even more important to upstream the crypto support for specific
+> hardware like ufs-qcom and ufs-mediatek, since otherwise the ufshcd-crypto code
+> would be unusable even theoretically.  I'm volunteering to handle ufs-qcom with
+> https://lkml.kernel.org/linux-block/20200110061634.46742-1-ebiggers@kernel.org/.
+> Stanley, could you send out ufs-mediatek support as an RFC so people can see
+> better what it involves?
+
+Sure, I will send out our RFC patches. Please allow me some time for
+submission.
+
+Thanks,
+Stanley Chu
+> - Eric
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
