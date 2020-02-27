@@ -2,76 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B099A170E25
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Feb 2020 03:03:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8680317152A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Feb 2020 11:40:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j78Vv-0005LX-JF; Thu, 27 Feb 2020 02:02:59 +0000
+	id 1j7GaR-0003tA-Bq; Thu, 27 Feb 2020 10:40:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1j78Vu-0005LP-RF
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 02:02:58 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1j7GaQ-0003sn-4K
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 10:40:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tKWVo3Jcho75dakoKJ4dajdigpATGSMB2OeBrkh+LBc=; b=SQiSxiQFp/zCeHIJ69aUyoly8x
- 89jOsd9qthopj1bVGNbJ3fBD/HHRLfirXjhbli1uQWvN2hK+v1VyJhkfzN28HPHK1kCTvL1WrHNdu
- QK/NJD7P9FnbvGxgSxakiYlmKACpaH9ciIlFB2Sr/Q3wfpjQmQDCmX5KUeBNLDtDviJY=;
+ bh=ohDNCMzAy83upjfyUzJEOTExlxxIJl91j/cton1k8WU=; b=NUskamLeC1KLZry9eRicNMRbLq
+ Kh/LVJIR6IMDU9K/+BNyrlgHeGsDJN+GvDRPKPC5+ls16eEIxG1ow+2MmM9evzmrs5qtNJx/C4Pz7
+ RfDWlCYqBpmPb19VsMOV1FS4O9u+N+ee5+cYs6NVqh4h8mPXmAs97QSLvg+YSBOBjBfc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tKWVo3Jcho75dakoKJ4dajdigpATGSMB2OeBrkh+LBc=; b=SwTvvOGkMQaZPzjNaJmBLTFLju
- xEk/e1cXWCHAFJcYlcS9HvFyuDvVBPcwMIpTL8ZnwSF0+zt3nKZCSkUaMXbkqB8S6zXq4SKYageFV
- R0ptVrhHbvUNzEWpeJytON0nqKZz3AA15PhDqRsbsRH+zRAiKhq046Yft6joiOFx0kzI=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ bh=ohDNCMzAy83upjfyUzJEOTExlxxIJl91j/cton1k8WU=; b=fInbsnrBt99XL91m6AN8jkz59c
+ ue3vbuXP6J5vSlrhgKxEUqbazEYwgSXTRPhmbX66YTy94aW8H1IlYSUbBLLjceYdLrgB8mMPBOOVx
+ Y37kherr0hFgeY13K8bp5k6sjPXoTOjgJfWWbJPxN4D/67Q9RXcqmlaUx/nIYozcUKOw=;
+Received: from mail26.static.mailgun.info ([104.130.122.26])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j78Vt-00Aksz-9h
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 02:02:58 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 825E5F6BE13977F818C5;
- Thu, 27 Feb 2020 10:02:47 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 27 Feb
- 2020 10:02:45 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200221100922.16781-1-yuchao0@huawei.com>
- <20200221100922.16781-2-yuchao0@huawei.com>
- <20200224214605.GA77839@google.com>
- <db505852-345d-05d0-4555-437093d2af14@huawei.com>
- <20200226221608.GA224608@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <4c877b2c-177c-a76a-ced4-1d3e087d8530@huawei.com>
-Date: Thu, 27 Feb 2020 10:02:45 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20200226221608.GA224608@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1j7GaH-00B40k-I5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 10:40:10 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1582800001; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=ohDNCMzAy83upjfyUzJEOTExlxxIJl91j/cton1k8WU=;
+ b=iAFmwa7+f/plxYLo2enCQNnwa4CNHNKvlvEhfGCIlNT4kxkfcDsLWa3j/FrBbEb2fCQhRX4m
+ spCmwFuVH1dSqlaYYce7cO+gtL8qDZruBWJ+RBcwfaPHLaMUlPhogoGUrw7bOAQ/NCDb37/z
+ IdhSCD5JDAdEEJFY7C5DsqntUYk=
+X-Mailgun-Sending-Ip: 104.130.122.26
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
+ by mxa.mailgun.org with ESMTP id 5e579c77.7f90f9a926f8-smtp-out-n03;
+ Thu, 27 Feb 2020 10:39:51 -0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id 16D38C4479D; Thu, 27 Feb 2020 10:39:51 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
+ URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+Received: from codeaurora.org
+ (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: stummala)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 10D07C433A2;
+ Thu, 27 Feb 2020 10:39:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 10D07C433A2
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=stummala@codeaurora.org
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 27 Feb 2020 16:09:37 +0530
+Message-Id: <1582799978-22277-1-git-send-email-stummala@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [104.130.122.26 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ for more information. [URIs: codeaurora.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j78Vt-00Aksz-9h
-Subject: Re: [f2fs-dev] [RFC PATCH 2/2] f2fs: introduce
- F2FS_IOC_RELEASE_COMPRESS_BLOCKS
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1j7GaH-00B40k-I5
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: Fix mount failure due to SPO after a
+ successful online resize FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,246 +104,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/2/27 6:16, Jaegeuk Kim wrote:
-> On 02/25, Chao Yu wrote:
->> On 2020/2/25 5:46, Jaegeuk Kim wrote:
->>> On 02/21, Chao Yu wrote:
->>>> There are still reserved blocks on compressed inode, this patch
->>>> introduce a new ioctl to help release reserved blocks back to
->>>> filesystem, so that userspace can reuse those freed space.
->>>
->>> I thought we can add compressed_blocks into free space, after converting
->>> the file to immutable one. Otherwise, this patch is able to corrupt the
->>
->> Yes, I remember that.
->>
->> So any suggestion on this patch? we can:
->> - check immutable flag before releasing space, or
->> - we can add immutable flag on compressed inode in this ioctl interface?
-> 
-> Can we add a flag in ioctl for both?
-> Default is checking immutable, but add a flag to force enabling it.
+Even though online resize is successfully done, a SPO immediately
+after resize, still causes below error in the next mount.
 
-Okay, let me update the patch.
+[   11.294650] F2FS-fs (sda8): Wrong user_block_count: 2233856
+[   11.300272] F2FS-fs (sda8): Failed to get valid F2FS checkpoint
 
-Thanks,
+This is because after FS metadata is updated in update_fs_metadata()
+if the SBI_IS_DIRTY is not dirty, then CP will not be done to reflect
+the new user_block_count.
 
-> 
->>
->> Thanks,
->>
->>> filesystem very easily.
->>>
->>>>
->>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>> ---
->>>>  fs/f2fs/f2fs.h |   6 +++
->>>>  fs/f2fs/file.c | 129 ++++++++++++++++++++++++++++++++++++++++++++++++-
->>>>  2 files changed, 134 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index 15199df5d40a..468f807fd917 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -427,6 +427,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
->>>>  #define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
->>>>  #define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
->>>>  #define F2FS_IOC_GET_COMPRESS_BLOCKS	_IOR(F2FS_IOCTL_MAGIC, 17, __u64)
->>>> +#define F2FS_IOC_RELEASE_COMPRESS_BLOCKS				\
->>>> +					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
->>>>  
->>>>  #define F2FS_IOC_GET_VOLUME_NAME	FS_IOC_GETFSLABEL
->>>>  #define F2FS_IOC_SET_VOLUME_NAME	FS_IOC_SETFSLABEL
->>>> @@ -3957,6 +3959,10 @@ static inline void f2fs_i_compr_blocks_update(struct inode *inode,
->>>>  {
->>>>  	int diff = F2FS_I(inode)->i_cluster_size - blocks;
->>>>  
->>>> +	/* don't update i_compr_blocks if saved blocks were released */
->>>> +	if (!add && !F2FS_I(inode)->i_compr_blocks)
->>>> +		return;
->>>> +
->>>>  	if (add) {
->>>>  		F2FS_I(inode)->i_compr_blocks += diff;
->>>>  		stat_add_compr_blocks(inode, diff);
->>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>> index 235708c892af..613f87151d90 100644
->>>> --- a/fs/f2fs/file.c
->>>> +++ b/fs/f2fs/file.c
->>>> @@ -557,6 +557,7 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
->>>>  	bool compressed_cluster = false;
->>>>  	int cluster_index = 0, valid_blocks = 0;
->>>>  	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
->>>> +	bool released = !F2FS_I(dn->inode)->i_compr_blocks;
->>>>  
->>>>  	if (IS_INODE(dn->node_page) && f2fs_has_extra_attr(dn->inode))
->>>>  		base = get_extra_isize(dn->inode);
->>>> @@ -595,7 +596,9 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
->>>>  			clear_inode_flag(dn->inode, FI_FIRST_BLOCK_WRITTEN);
->>>>  
->>>>  		f2fs_invalidate_blocks(sbi, blkaddr);
->>>> -		nr_free++;
->>>> +
->>>> +		if (released && blkaddr != COMPRESS_ADDR)
->>>> +			nr_free++;
->>>>  	}
->>>>  
->>>>  	if (compressed_cluster)
->>>> @@ -3416,6 +3419,127 @@ static int f2fs_get_compress_blocks(struct file *filp, unsigned long arg)
->>>>  	return put_user(blocks, (u64 __user *)arg);
->>>>  }
->>>>  
->>>> +static int release_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
->>>> +{
->>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
->>>> +	unsigned int released_blocks = 0;
->>>> +	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
->>>> +
->>>> +	while (count) {
->>>> +		int compr_blocks = 0;
->>>> +		block_t blkaddr = f2fs_data_blkaddr(dn);
->>>> +		int i;
->>>> +
->>>> +		if (blkaddr != COMPRESS_ADDR) {
->>>> +			dn->ofs_in_node += cluster_size;
->>>> +			goto next;
->>>> +		}
->>>> +
->>>> +		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
->>>> +			blkaddr = f2fs_data_blkaddr(dn);
->>>> +
->>>> +			if (__is_valid_data_blkaddr(blkaddr)) {
->>>> +				compr_blocks++;
->>>> +				if (unlikely(!f2fs_is_valid_blkaddr(sbi, blkaddr,
->>>> +							DATA_GENERIC_ENHANCE)))
->>>> +					return -EFSCORRUPTED;
->>>> +			}
->>>> +
->>>> +			if (blkaddr != NEW_ADDR)
->>>> +				continue;
->>>> +
->>>> +			dn->data_blkaddr = NULL_ADDR;
->>>> +			f2fs_set_data_blkaddr(dn);
->>>> +		}
->>>> +
->>>> +		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, false);
->>>> +		dec_valid_block_count(sbi, dn->inode,
->>>> +					cluster_size - compr_blocks);
->>>> +
->>>> +		released_blocks += cluster_size - compr_blocks;
->>>> +next:
->>>> +		count -= cluster_size;
->>>> +	}
->>>> +
->>>> +	return released_blocks;
->>>> +}
->>>> +
->>>> +static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
->>>> +{
->>>> +	struct inode *inode = file_inode(filp);
->>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->>>> +	pgoff_t page_idx = 0, last_idx;
->>>> +	unsigned int released_blocks = 0;
->>>> +	int ret;
->>>> +
->>>> +	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
->>>> +		return -EOPNOTSUPP;
->>>> +
->>>> +	if (!f2fs_compressed_file(inode))
->>>> +		return -EINVAL;
->>>> +
->>>> +	if (f2fs_readonly(sbi->sb))
->>>> +		return -EROFS;
->>>> +
->>>> +	ret = mnt_want_write_file(filp);
->>>> +	if (ret)
->>>> +		return ret;
->>>> +
->>>> +	if (!F2FS_I(inode)->i_compr_blocks)
->>>> +		goto out;
->>>> +
->>>> +	f2fs_balance_fs(F2FS_I_SB(inode), true);
->>>> +
->>>> +	inode_lock(inode);
->>>> +
->>>> +	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->>>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
->>>> +
->>>> +	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
->>>> +
->>>> +	while (page_idx < last_idx) {
->>>> +		struct dnode_of_data dn;
->>>> +		pgoff_t end_offset, count;
->>>> +
->>>> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
->>>> +		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
->>>> +		if (ret) {
->>>> +			if (ret == -ENOENT) {
->>>> +				page_idx = f2fs_get_next_page_offset(&dn,
->>>> +								page_idx);
->>>> +				ret = 0;
->>>> +				continue;
->>>> +			}
->>>> +			break;
->>>> +		}
->>>> +
->>>> +		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
->>>> +		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
->>>> +
->>>> +		ret = release_compress_blocks(&dn, count);
->>>> +
->>>> +		f2fs_put_dnode(&dn);
->>>> +
->>>> +		if (ret < 0)
->>>> +			break;
->>>> +
->>>> +		page_idx += count;
->>>> +		released_blocks += ret;
->>>> +	}
->>>> +
->>>> +	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->>>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
->>>> +
->>>> +	inode_unlock(inode);
->>>> +out:
->>>> +	mnt_drop_write_file(filp);
->>>> +
->>>> +	if (!ret)
->>>> +		ret = put_user(released_blocks, (u64 __user *)arg);
->>>> +
->>>> +	return ret;
->>>> +}
->>>> +
->>>>  long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->>>>  {
->>>>  	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
->>>> @@ -3496,6 +3620,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->>>>  		return f2fs_set_volume_name(filp, arg);
->>>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
->>>>  		return f2fs_get_compress_blocks(filp, arg);
->>>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
->>>> +		return f2fs_release_compress_blocks(filp, arg);
->>>>  	default:
->>>>  		return -ENOTTY;
->>>>  	}
->>>> @@ -3654,6 +3780,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
->>>>  	case F2FS_IOC_GET_VOLUME_NAME:
->>>>  	case F2FS_IOC_SET_VOLUME_NAME:
->>>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
->>>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
->>>>  		break;
->>>>  	default:
->>>>  		return -ENOIOCTLCMD;
->>>> -- 
->>>> 2.18.0.rc1
->>> .
->>>
-> .
-> 
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+---
+ fs/f2fs/gc.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index a92fa49..a14a75f 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1577,6 +1577,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 
+ 	update_fs_metadata(sbi, -secs);
+ 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
++	set_sbi_flag(sbi, SBI_IS_DIRTY);
+ 	err = f2fs_sync_fs(sbi->sb, 1);
+ 	if (err) {
+ 		update_fs_metadata(sbi, secs);
+-- 
+Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
 
 
 _______________________________________________
