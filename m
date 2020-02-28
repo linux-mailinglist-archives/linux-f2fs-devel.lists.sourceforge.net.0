@@ -2,78 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D65F172FE3
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Feb 2020 05:38:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 849CC1732B7
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Feb 2020 09:20:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j7XQ6-0001x8-6p; Fri, 28 Feb 2020 04:38:38 +0000
+	id 1j7asr-00088z-W8; Fri, 28 Feb 2020 08:20:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1j7XQ4-0001x0-LU
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 04:38:36 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1j7aso-00087c-G5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 08:20:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dA/5ebLbP7M8A7hFMbfrUAWRFwPNbUxzpRKqDac8Mtc=; b=VY0RxZkkWfiMpIVbtGLQspkrxh
- V33fz+E9CoN610SHT7zpAh/A34I7OHHkCeK/o3tyZYpjgkeRR0mibigQwWYj/Tv6hF+p8w9Jt3aqX
- WAEwuIxIQ1adizYIoZzrQlniUtaIY0BRnWUtmAB8XQaXW5SLUVJpDcbAkhrfyUGXOACo=;
+ bh=cl4qVE2RQpQGLJnTOs8DPd/iZvJ/dgNI3dIV8kTSGMM=; b=g2VY+JD3KH8BkSIsH2MqRvy6nC
+ oal14OxNita0ZASDdMwu5ijliQQyuDBqNGp0FmGq31eFGM3S1+AxBXuPJQJF7NSfHJxsfTAmPBVlU
+ 2W+PZKctGuyrHMWVeG8YJqF/d9xIbm6WcQ+p5svdLuiSRY5hWJhZwfWMzylMenoJ7sKc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=dA/5ebLbP7M8A7hFMbfrUAWRFwPNbUxzpRKqDac8Mtc=; b=I
- ZKUJ/v1/vEBbRhZzvpqoMa7kk5bPx8/61qDqaEKMAZpkOIVvlKC1kQuYZEApx+gxKGrVN4KozGv52
- L5VbGaowjOLf4u1ugpE8Waw/Ihh6Xi5ZkF0t6S4/mYvyB3cHdn+Ft5H5oD+yUL6Q8SdBs8AWXPWSq
- uE3krHpHpSekH8s0=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cl4qVE2RQpQGLJnTOs8DPd/iZvJ/dgNI3dIV8kTSGMM=; b=ifmBEabuPb6GODwyPy61qIJNod
+ EgUfiUJm6t7w3yWaTYW6IQzRU2H47kNNYvntSRTXUdhwdPUVy04PfX8VTNetEuM8wSd3cqC0IhC63
+ 7pRhjDEQg/1vDmelsE1W8QD/BmUTMIftHlgasu/adOXRNUv8VxpfHyq0jNq+uHqgeVts=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j7XPx-001BrH-KS
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 04:38:36 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EA19D2469D;
- Fri, 28 Feb 2020 04:38:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582864704;
- bh=HQ7hmvfvnb2OGkhjZtbAEIeMVAGbeP6z+iDoaV29xGg=;
- h=From:To:Cc:Subject:Date:From;
- b=R1JdH66yUYP82IgWNwYtnKp6TJ80AtmtFaMnGZ/ppt73Dd0sHeSZcyQZPOvif2NWz
- M61C7KNWhgVQXHzTz7HTskXmFQftQZOqgAI6oXDzHObSziAc4JpOPqh9tRwgd8kl5G
- 1MaKi+uZlnDK4is2WTFDpTdQf+02p7X4EdifKWd4=
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 27 Feb 2020 20:38:20 -0800
-Message-Id: <20200228043820.169288-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.25.1.481.gfbce0eb801-goog
+ id 1j7ash-008Jnc-JW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 08:20:30 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 5A3DCFC4D9A94DCBAD55;
+ Fri, 28 Feb 2020 16:20:12 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 28 Feb
+ 2020 16:20:09 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20200227112621.126505-1-yuchao0@huawei.com>
+ <20200227183052.GA55284@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <8cb4552e-e6a2-e57b-1baa-40171e53e120@huawei.com>
+Date: Fri, 28 Feb 2020 16:20:09 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200227183052.GA55284@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: kernel.dk]
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1j7XPx-001BrH-KS
-Subject: [f2fs-dev] [PATCH] loop: avoid EAGAIN,
- if offset or block_size are changed
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j7ash-008Jnc-JW
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce
+ F2FS_IOC_RELEASE_COMPRESS_BLOCKS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,189 +80,244 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, Gwendal Grignou <gwendal@chromium.org>,
- Bart Van Assche <bvanassche@acm.org>, grygorii tertychnyi <gtertych@cisco.com>,
- stable@vger.kernel.org, linux-block@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Previously, there was a bug where user could see stale buffer cache (e.g, 512B)
-attached in the 4KB-sized pager cache, when the block size was changed from
-512B to 4KB. That was fixed by:
-commit 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
+On 2020/2/28 2:30, Jaegeuk Kim wrote:
+> On 02/27, Chao Yu wrote:
+>> There are still reserved blocks on compressed inode, this patch
+>> introduce a new ioctl to help release reserved blocks back to
+>> filesystem, so that userspace can reuse those freed space.
+> 
+> Hmm, once we release the blocks, what happens if we remove the immutable
+> bit back?
 
-But, there were some regression reports saying the fix returns EAGAIN easily.
-So, this patch removes previously added EAGAIN condition, nrpages != 0.
+Oh, if we allow to overwrite on compress file, i_blocks and real physical blocks
+usage may be inconsistent?
 
-Instead, it changes the flow like this:
-- sync_blockdev()
-- blk_mq_freeze_queue()
- : change the loop configuration
-- blk_mq_unfreeze_queue()
-- sync_blockdev()
-- invalidate_bdev()
+So if we need to support above scenario, should we add another ioctl interface
+to rollback all compress inode status:
+- add reserved blocks in dnode blocks
+- increase i_compr_blocks, i_blocks, total_valid_block_count
+- remove immutable
 
-After invalidating the buffer cache, we must see the full valid 4KB page.
+Thanks,
 
-Additional concern came from Bart in which we can lose some data when
-changing the lo_offset. In that case, this patch adds:
-- sync_blockdev()
-- blk_set_queue_dying
-- blk_mq_freeze_queue()
- : change the loop configuration
-- blk_mq_unfreeze_queue()
-- blk_queue_flag_clear(QUEUE_FLAG_DYING);
-- sync_blockdev()
-- invalidate_bdev()
-
-Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
-
-Cc: <stable@vger.kernel.org>
-Cc: Jens Axboe <axboe@kernel.dk>
-Cc: linux-block@vger.kernel.org
-Cc: Bart Van Assche <bvanassche@acm.org>
-Fixes: 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
-Reported-by: Gwendal Grignou <gwendal@chromium.org>
-Reported-by: grygorii tertychnyi <gtertych@cisco.com>
-Reviewed-by: Bart Van Assche <bvanassche@acm.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- drivers/block/loop.c | 65 ++++++++++++++++++++++----------------------
- 1 file changed, 33 insertions(+), 32 deletions(-)
-
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 739b372a5112..8c9da7f9b1f6 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -1245,6 +1245,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 	kuid_t uid = current_uid();
- 	struct block_device *bdev;
- 	bool partscan = false;
-+	bool drop_request = false;
-+	bool drop_cache = false;
- 
- 	err = mutex_lock_killable(&loop_ctl_mutex);
- 	if (err)
-@@ -1264,14 +1266,21 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 		goto out_unlock;
- 	}
- 
-+	if (lo->lo_offset != info->lo_offset)
-+		drop_request = true;
- 	if (lo->lo_offset != info->lo_offset ||
--	    lo->lo_sizelimit != info->lo_sizelimit) {
--		sync_blockdev(lo->lo_device);
--		kill_bdev(lo->lo_device);
--	}
-+	    lo->lo_sizelimit != info->lo_sizelimit)
-+		drop_cache = true;
- 
--	/* I/O need to be drained during transfer transition */
--	blk_mq_freeze_queue(lo->lo_queue);
-+	sync_blockdev(lo->lo_device);
-+
-+	if (drop_request) {
-+		blk_set_queue_dying(lo->lo_queue);
-+		blk_mq_freeze_queue_wait(lo->lo_queue);
-+	} else {
-+		/* I/O need to be drained during transfer transition */
-+		blk_mq_freeze_queue(lo->lo_queue);
-+	}
- 
- 	err = loop_release_xfer(lo);
- 	if (err)
-@@ -1298,14 +1307,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 
- 	if (lo->lo_offset != info->lo_offset ||
- 	    lo->lo_sizelimit != info->lo_sizelimit) {
--		/* kill_bdev should have truncated all the pages */
--		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
--			err = -EAGAIN;
--			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
--				__func__, lo->lo_number, lo->lo_file_name,
--				lo->lo_device->bd_inode->i_mapping->nrpages);
--			goto out_unfreeze;
--		}
- 		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
- 			err = -EFBIG;
- 			goto out_unfreeze;
-@@ -1342,6 +1343,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 
- out_unfreeze:
- 	blk_mq_unfreeze_queue(lo->lo_queue);
-+	if (drop_request)
-+		blk_queue_flag_clear(QUEUE_FLAG_DYING, lo->lo_queue);
- 
- 	if (!err && (info->lo_flags & LO_FLAGS_PARTSCAN) &&
- 	     !(lo->lo_flags & LO_FLAGS_PARTSCAN)) {
-@@ -1350,6 +1353,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 		bdev = lo->lo_device;
- 		partscan = true;
- 	}
-+
-+	/* truncate stale pages cached by previous operations */
-+	if (!err && drop_cache) {
-+		sync_blockdev(lo->lo_device);
-+		invalidate_bdev(lo->lo_device);
-+	}
- out_unlock:
- 	mutex_unlock(&loop_ctl_mutex);
- 	if (partscan)
-@@ -1531,7 +1540,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
- 
- static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- {
--	int err = 0;
-+	bool drop_cache = false;
- 
- 	if (lo->lo_state != Lo_bound)
- 		return -ENXIO;
-@@ -1539,31 +1548,23 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
- 	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
- 		return -EINVAL;
- 
--	if (lo->lo_queue->limits.logical_block_size != arg) {
--		sync_blockdev(lo->lo_device);
--		kill_bdev(lo->lo_device);
--	}
-+	if (lo->lo_queue->limits.logical_block_size != arg)
-+		drop_cache = true;
- 
-+	sync_blockdev(lo->lo_device);
- 	blk_mq_freeze_queue(lo->lo_queue);
--
--	/* kill_bdev should have truncated all the pages */
--	if (lo->lo_queue->limits.logical_block_size != arg &&
--			lo->lo_device->bd_inode->i_mapping->nrpages) {
--		err = -EAGAIN;
--		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
--			__func__, lo->lo_number, lo->lo_file_name,
--			lo->lo_device->bd_inode->i_mapping->nrpages);
--		goto out_unfreeze;
--	}
--
- 	blk_queue_logical_block_size(lo->lo_queue, arg);
- 	blk_queue_physical_block_size(lo->lo_queue, arg);
- 	blk_queue_io_min(lo->lo_queue, arg);
- 	loop_update_dio(lo);
--out_unfreeze:
- 	blk_mq_unfreeze_queue(lo->lo_queue);
- 
--	return err;
-+	/* truncate stale pages cached by previous operations */
-+	if (drop_cache) {
-+		sync_blockdev(lo->lo_device);
-+		invalidate_bdev(lo->lo_device);
-+	}
-+	return 0;
- }
- 
- static int lo_simple_ioctl(struct loop_device *lo, unsigned int cmd,
--- 
-2.25.1.481.gfbce0eb801-goog
-
+> 
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>> v2:
+>> - set inode as immutable in ioctl.
+>>  fs/f2fs/f2fs.h |   6 +++
+>>  fs/f2fs/file.c | 136 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>>  2 files changed, 141 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index 23b93a116c73..4a02edc2454b 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -427,6 +427,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+>>  #define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
+>>  #define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
+>>  #define F2FS_IOC_GET_COMPRESS_BLOCKS	_IOR(F2FS_IOCTL_MAGIC, 17, __u64)
+>> +#define F2FS_IOC_RELEASE_COMPRESS_BLOCKS				\
+>> +					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
+>>  
+>>  #define F2FS_IOC_GET_VOLUME_NAME	FS_IOC_GETFSLABEL
+>>  #define F2FS_IOC_SET_VOLUME_NAME	FS_IOC_SETFSLABEL
+>> @@ -3956,6 +3958,10 @@ static inline void f2fs_i_compr_blocks_update(struct inode *inode,
+>>  {
+>>  	int diff = F2FS_I(inode)->i_cluster_size - blocks;
+>>  
+>> +	/* don't update i_compr_blocks if saved blocks were released */
+>> +	if (!add && !F2FS_I(inode)->i_compr_blocks)
+>> +		return;
+>> +
+>>  	if (add) {
+>>  		F2FS_I(inode)->i_compr_blocks += diff;
+>>  		stat_add_compr_blocks(inode, diff);
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 37c1147eb244..b8f01ee9d698 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -550,6 +550,7 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+>>  	bool compressed_cluster = false;
+>>  	int cluster_index = 0, valid_blocks = 0;
+>>  	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
+>> +	bool released = !F2FS_I(dn->inode)->i_compr_blocks;
+>>  
+>>  	if (IS_INODE(dn->node_page) && f2fs_has_extra_attr(dn->inode))
+>>  		base = get_extra_isize(dn->inode);
+>> @@ -588,7 +589,9 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+>>  			clear_inode_flag(dn->inode, FI_FIRST_BLOCK_WRITTEN);
+>>  
+>>  		f2fs_invalidate_blocks(sbi, blkaddr);
+>> -		nr_free++;
+>> +
+>> +		if (released && blkaddr != COMPRESS_ADDR)
+>> +			nr_free++;
+>>  	}
+>>  
+>>  	if (compressed_cluster)
+>> @@ -3403,6 +3406,134 @@ static int f2fs_get_compress_blocks(struct file *filp, unsigned long arg)
+>>  	return put_user(blocks, (u64 __user *)arg);
+>>  }
+>>  
+>> +static int release_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
+>> +{
+>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
+>> +	unsigned int released_blocks = 0;
+>> +	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
+>> +
+>> +	while (count) {
+>> +		int compr_blocks = 0;
+>> +		block_t blkaddr = f2fs_data_blkaddr(dn);
+>> +		int i;
+>> +
+>> +		if (blkaddr != COMPRESS_ADDR) {
+>> +			dn->ofs_in_node += cluster_size;
+>> +			goto next;
+>> +		}
+>> +
+>> +		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
+>> +			blkaddr = f2fs_data_blkaddr(dn);
+>> +
+>> +			if (__is_valid_data_blkaddr(blkaddr)) {
+>> +				compr_blocks++;
+>> +				if (unlikely(!f2fs_is_valid_blkaddr(sbi, blkaddr,
+>> +							DATA_GENERIC_ENHANCE)))
+>> +					return -EFSCORRUPTED;
+>> +			}
+>> +
+>> +			if (blkaddr != NEW_ADDR)
+>> +				continue;
+>> +
+>> +			dn->data_blkaddr = NULL_ADDR;
+>> +			f2fs_set_data_blkaddr(dn);
+>> +		}
+>> +
+>> +		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, false);
+>> +		dec_valid_block_count(sbi, dn->inode,
+>> +					cluster_size - compr_blocks);
+>> +
+>> +		released_blocks += cluster_size - compr_blocks;
+>> +next:
+>> +		count -= cluster_size;
+>> +	}
+>> +
+>> +	return released_blocks;
+>> +}
+>> +
+>> +static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+>> +{
+>> +	struct inode *inode = file_inode(filp);
+>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>> +	pgoff_t page_idx = 0, last_idx;
+>> +	unsigned int released_blocks = 0;
+>> +	int ret;
+>> +
+>> +	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
+>> +		return -EOPNOTSUPP;
+>> +
+>> +	if (!f2fs_compressed_file(inode))
+>> +		return -EINVAL;
+>> +
+>> +	if (f2fs_readonly(sbi->sb))
+>> +		return -EROFS;
+>> +
+>> +	ret = mnt_want_write_file(filp);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	if (!F2FS_I(inode)->i_compr_blocks)
+>> +		goto out;
+>> +
+>> +	f2fs_balance_fs(F2FS_I_SB(inode), true);
+>> +
+>> +	inode_lock(inode);
+>> +
+>> +	if (!IS_IMMUTABLE(inode)) {
+>> +		F2FS_I(inode)->i_flags |= F2FS_IMMUTABLE_FL;
+>> +		f2fs_set_inode_flags(inode);
+>> +		inode->i_ctime = current_time(inode);
+>> +		f2fs_mark_inode_dirty_sync(inode, true);
+>> +	}
+>> +
+>> +	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
+>> +
+>> +	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
+>> +
+>> +	while (page_idx < last_idx) {
+>> +		struct dnode_of_data dn;
+>> +		pgoff_t end_offset, count;
+>> +
+>> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
+>> +		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
+>> +		if (ret) {
+>> +			if (ret == -ENOENT) {
+>> +				page_idx = f2fs_get_next_page_offset(&dn,
+>> +								page_idx);
+>> +				ret = 0;
+>> +				continue;
+>> +			}
+>> +			break;
+>> +		}
+>> +
+>> +		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
+>> +		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
+>> +
+>> +		ret = release_compress_blocks(&dn, count);
+>> +
+>> +		f2fs_put_dnode(&dn);
+>> +
+>> +		if (ret < 0)
+>> +			break;
+>> +
+>> +		page_idx += count;
+>> +		released_blocks += ret;
+>> +	}
+>> +
+>> +	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
+>> +
+>> +	inode_unlock(inode);
+>> +out:
+>> +	mnt_drop_write_file(filp);
+>> +
+>> +	if (!ret)
+>> +		ret = put_user(released_blocks, (u64 __user *)arg);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>>  long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>  {
+>>  	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
+>> @@ -3483,6 +3614,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>  		return f2fs_set_volume_name(filp, arg);
+>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
+>>  		return f2fs_get_compress_blocks(filp, arg);
+>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
+>> +		return f2fs_release_compress_blocks(filp, arg);
+>>  	default:
+>>  		return -ENOTTY;
+>>  	}
+>> @@ -3643,6 +3776,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+>>  	case F2FS_IOC_GET_VOLUME_NAME:
+>>  	case F2FS_IOC_SET_VOLUME_NAME:
+>>  	case F2FS_IOC_GET_COMPRESS_BLOCKS:
+>> +	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
+>>  		break;
+>>  	default:
+>>  		return -ENOIOCTLCMD;
+>> -- 
+>> 2.18.0.rc1
+> .
+> 
 
 
 _______________________________________________
