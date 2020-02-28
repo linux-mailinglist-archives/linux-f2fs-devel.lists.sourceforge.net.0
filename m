@@ -2,119 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FDCD172A15
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Feb 2020 22:25:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=4G28zG2XRrVEVPSSe6x2qwNUXKlBrq2Meg6u0ad6l5I=; b=eSxGwg6MrIsDq+6EZtVdMwMSG
-	rXc94jazTzqRqMdSp13r5Pk76ZRm1CXj4SpiZhTTRzQHTX3+87zhIwM0+iidSzlp1IvBRqnguzit1
-	JGyxRBVsbAQ/wB7GhaSKLG2gQfJdrl2n6YJ+J+eeHlU6NLJX15s/TZwarL9ZitABVdTXE=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D65F172FE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Feb 2020 05:38:53 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j7Qeu-0000F2-PS; Thu, 27 Feb 2020 21:25:28 +0000
+	id 1j7XQ6-0001x8-6p; Fri, 28 Feb 2020 04:38:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <satyat@google.com>) id 1j7Qet-0000Es-Oj
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 21:25:27 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1j7XQ4-0001x0-LU
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 04:38:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zbiMEvwdKM/tvZAA5Qj434C9S081Ob3tK31bpwxJweM=; b=cRADfYRbZ2IGaxP/gSNoMMVrki
- t80MMWzTI/XoH/2iNXH/GT3YwjEjHLdsFUvYV0ZpOVhqKpyFGyUy0HYDeXQroX1D23IbB6rSoZH3p
- 9m/swcYH8QDo0L6yc+alsxsYz3CXiEhA6UlzmOqez8SobiXPfEPeCgOUVYLlc8u76MoQ=;
+ bh=dA/5ebLbP7M8A7hFMbfrUAWRFwPNbUxzpRKqDac8Mtc=; b=VY0RxZkkWfiMpIVbtGLQspkrxh
+ V33fz+E9CoN610SHT7zpAh/A34I7OHHkCeK/o3tyZYpjgkeRR0mibigQwWYj/Tv6hF+p8w9Jt3aqX
+ WAEwuIxIQ1adizYIoZzrQlniUtaIY0BRnWUtmAB8XQaXW5SLUVJpDcbAkhrfyUGXOACo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=zbiMEvwdKM/tvZAA5Qj434C9S081Ob3tK31bpwxJweM=; b=faKNKR8+SDJAkQ8uqJMx8gwrj1
- OGT/z3fqYffH1op3tSTz28k0JhMeJ1xroBzdz7iGj6nUAHhEdLLGtOWF3YI/HB7vSEBS8HqOWqxCA
- ivXREXhn/SDHrY6tgreHpDXQndMNhcHScqViZu/1LLsB2RezRSxMeds2NoFn6X1U42HM=;
-Received: from mail-pj1-f66.google.com ([209.85.216.66])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1j7Qep-007zw1-AW
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Feb 2020 21:25:27 +0000
-Received: by mail-pj1-f66.google.com with SMTP id ep11so332874pjb.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 27 Feb 2020 13:25:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=zbiMEvwdKM/tvZAA5Qj434C9S081Ob3tK31bpwxJweM=;
- b=PD5AuIH9YkPwMY1wk/M2YjcFyJ0ifFKkRpny5ZyGDYGn1QOO/zohITOuyJrm8SULUl
- 7i+MnHC+yUTXTPi9Ej+G5yNVS3jFkcc7VmG08QcNrBd6venEz216NN4gW5ri9dfRMEY5
- T9q3N+SI14tw/2hmTyKa+XjXBZtxMwuu/SYW/t2qpCgLUResl8ne20dFgnF5Clkq+VPd
- fKd4zMbXTcBkWMq/t3v6ItovAlemxDo+YGgs9x//wHp14jvdIoTrJr8E7cFsndG+SFrU
- lQ3Su/cUXhsTRXyXiXcqdziWtx03q3ThazV8PbjImCgXZMy3x3k0A2xd3rU2TVHPaLCB
- 3Adg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=zbiMEvwdKM/tvZAA5Qj434C9S081Ob3tK31bpwxJweM=;
- b=tjwBEMJtiurE+mVkm3aKynPA5d5O2AhYUXR94ZxK6Z1Qa1agWsNnVFSeh39DDpjm5s
- 4qN7JLFnnKRH7wyPQ6DEIFErKvRD+9F7Rq16+1hg4gTZxKwc2QdVSYm5ge2lc5sdDx1B
- ixd4/RqEjTNMGKxKBRFvngnN2VHZKcvlkyENU76zv8vxq/Rlcb/DfmkCll9YmD1NytHd
- kmn2aWPgNDTE6jZce/eVBj+kN6YSmXn3UH8S/iMHPbQqb6VZf2/lHsx0LZpmVeJ9t5WX
- tpDYiI5z5qz0bGjOFNs/m5PvGYnk1D8PTdJG2aPees+bPdtZKGsgse0Q8oDGtgfbLbol
- eO0w==
-X-Gm-Message-State: APjAAAX7eDb6ScMoREcoymanXuMWakNgIIK95SnrfBiFf6a08TIgAxXs
- ukEIB2SzKoedqBuF3BQdtOrsqg==
-X-Google-Smtp-Source: APXvYqx9TDG0Lr2SN5dRxW/+L8a98eXpzWzxOnFNh71eBbIDihuNaU52qVET1Y7r5ElfIRGM27CypQ==
-X-Received: by 2002:a17:902:6907:: with SMTP id j7mr807838plk.88.1582838717243; 
- Thu, 27 Feb 2020 13:25:17 -0800 (PST)
-Received: from google.com ([2620:15c:201:0:7f8c:9d6e:20b8:e324])
- by smtp.gmail.com with ESMTPSA id k9sm8493396pfh.153.2020.02.27.13.25.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2020 13:25:16 -0800 (PST)
-Date: Thu, 27 Feb 2020 13:25:12 -0800
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200227212512.GA162309@google.com>
-References: <20200221115050.238976-1-satyat@google.com>
- <20200221115050.238976-2-satyat@google.com>
- <20200221170434.GA438@infradead.org>
- <20200221173118.GA30670@infradead.org>
- <20200227181411.GB877@sol.localdomain>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=dA/5ebLbP7M8A7hFMbfrUAWRFwPNbUxzpRKqDac8Mtc=; b=I
+ ZKUJ/v1/vEBbRhZzvpqoMa7kk5bPx8/61qDqaEKMAZpkOIVvlKC1kQuYZEApx+gxKGrVN4KozGv52
+ L5VbGaowjOLf4u1ugpE8Waw/Ihh6Xi5ZkF0t6S4/mYvyB3cHdn+Ft5H5oD+yUL6Q8SdBs8AWXPWSq
+ uE3krHpHpSekH8s0=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1j7XPx-001BrH-KS
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Feb 2020 04:38:36 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id EA19D2469D;
+ Fri, 28 Feb 2020 04:38:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1582864704;
+ bh=HQ7hmvfvnb2OGkhjZtbAEIeMVAGbeP6z+iDoaV29xGg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=R1JdH66yUYP82IgWNwYtnKp6TJ80AtmtFaMnGZ/ppt73Dd0sHeSZcyQZPOvif2NWz
+ M61C7KNWhgVQXHzTz7HTskXmFQftQZOqgAI6oXDzHObSziAc4JpOPqh9tRwgd8kl5G
+ 1MaKi+uZlnDK4is2WTFDpTdQf+02p7X4EdifKWd4=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 27 Feb 2020 20:38:20 -0800
+Message-Id: <20200228043820.169288-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.25.1.481.gfbce0eb801-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200227181411.GB877@sol.localdomain>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -13.4 (-------------)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 2.6 FSL_HELO_FAKE          No description available.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.66 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.66 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: kernel.dk]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j7Qep-007zw1-AW
-Subject: Re: [f2fs-dev] [PATCH v7 1/9] block: Keyslot Manager for Inline
- Encryption
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1j7XPx-001BrH-KS
+Subject: [f2fs-dev] [PATCH] loop: avoid EAGAIN,
+ if offset or block_size are changed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,52 +85,189 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Satya Tangirala via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Satya Tangirala <satyat@google.com>
-Cc: linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
- Kim Boojin <boojin.kim@samsung.com>, Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>, Gwendal Grignou <gwendal@chromium.org>,
+ Bart Van Assche <bvanassche@acm.org>, grygorii tertychnyi <gtertych@cisco.com>,
+ stable@vger.kernel.org, linux-block@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Feb 27, 2020 at 10:14:11AM -0800, Eric Biggers wrote:
-> On Fri, Feb 21, 2020 at 09:31:18AM -0800, Christoph Hellwig wrote:
-> > On Fri, Feb 21, 2020 at 09:04:34AM -0800, Christoph Hellwig wrote:
-> > > Given that blk_ksm_get_slot_for_key returns a signed keyslot that
-> > > can return errors, and the only callers stores it in a signed variable
-> > > I think this function should take a signed slot as well, and the check
-> > > for a non-negative slot should be moved here from the only caller.
-> > 
-> > Actually looking over the code again I think it might be better to
-> > return only the error code (and that might actually be a blk_status_t),
-> > and then use an argument to return a pointer to the actual struct
-> > keyslot.  That gives us much easier to understand code and better
-> > type safety.
-> 
-> That doesn't make sense because the caller only cares about the keyslot number,
-> not the 'struct keyslot'.  The 'struct keyslot' is internal to
-> keyslot-manager.c, as it only contains keyslot management information.
-> 
-I think it does make some sense at least to make the keyslot type opaque
-to most of the system other than the driver itself (the driver will now
-have to call a function like blk_ksm_slot_idx_for_keyslot to actually get
-a keyslot number at the end of the day). Also this way, the keyslot manager
-can verify that the keyslot passed to blk_ksm_put_slot is actually part of
-that keyslot manager (and that somebody isn't releasing a slot number that
-was actually acquired from a different keyslot manager). I don't think
-it's much benefit or loss either way, but I already switched to passing
-pointers to struct keyslot around instead of ints, so I'll keep it that
-way unless you strongly feel that using ints in this case is better
-than struct keyslot *.
-> Your earlier suggestion of making blk_ksm_put_slot() be a no-op on a negative
-> keyslot number sounds fine though.
-> 
-> - Eric
+Previously, there was a bug where user could see stale buffer cache (e.g, 512B)
+attached in the 4KB-sized pager cache, when the block size was changed from
+512B to 4KB. That was fixed by:
+commit 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
+
+But, there were some regression reports saying the fix returns EAGAIN easily.
+So, this patch removes previously added EAGAIN condition, nrpages != 0.
+
+Instead, it changes the flow like this:
+- sync_blockdev()
+- blk_mq_freeze_queue()
+ : change the loop configuration
+- blk_mq_unfreeze_queue()
+- sync_blockdev()
+- invalidate_bdev()
+
+After invalidating the buffer cache, we must see the full valid 4KB page.
+
+Additional concern came from Bart in which we can lose some data when
+changing the lo_offset. In that case, this patch adds:
+- sync_blockdev()
+- blk_set_queue_dying
+- blk_mq_freeze_queue()
+ : change the loop configuration
+- blk_mq_unfreeze_queue()
+- blk_queue_flag_clear(QUEUE_FLAG_DYING);
+- sync_blockdev()
+- invalidate_bdev()
+
+Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
+
+Cc: <stable@vger.kernel.org>
+Cc: Jens Axboe <axboe@kernel.dk>
+Cc: linux-block@vger.kernel.org
+Cc: Bart Van Assche <bvanassche@acm.org>
+Fixes: 5db470e229e2 ("loop: drop caches if offset or block_size are changed")
+Reported-by: Gwendal Grignou <gwendal@chromium.org>
+Reported-by: grygorii tertychnyi <gtertych@cisco.com>
+Reviewed-by: Bart Van Assche <bvanassche@acm.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ drivers/block/loop.c | 65 ++++++++++++++++++++++----------------------
+ 1 file changed, 33 insertions(+), 32 deletions(-)
+
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 739b372a5112..8c9da7f9b1f6 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -1245,6 +1245,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 	kuid_t uid = current_uid();
+ 	struct block_device *bdev;
+ 	bool partscan = false;
++	bool drop_request = false;
++	bool drop_cache = false;
+ 
+ 	err = mutex_lock_killable(&loop_ctl_mutex);
+ 	if (err)
+@@ -1264,14 +1266,21 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 		goto out_unlock;
+ 	}
+ 
++	if (lo->lo_offset != info->lo_offset)
++		drop_request = true;
+ 	if (lo->lo_offset != info->lo_offset ||
+-	    lo->lo_sizelimit != info->lo_sizelimit) {
+-		sync_blockdev(lo->lo_device);
+-		kill_bdev(lo->lo_device);
+-	}
++	    lo->lo_sizelimit != info->lo_sizelimit)
++		drop_cache = true;
+ 
+-	/* I/O need to be drained during transfer transition */
+-	blk_mq_freeze_queue(lo->lo_queue);
++	sync_blockdev(lo->lo_device);
++
++	if (drop_request) {
++		blk_set_queue_dying(lo->lo_queue);
++		blk_mq_freeze_queue_wait(lo->lo_queue);
++	} else {
++		/* I/O need to be drained during transfer transition */
++		blk_mq_freeze_queue(lo->lo_queue);
++	}
+ 
+ 	err = loop_release_xfer(lo);
+ 	if (err)
+@@ -1298,14 +1307,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 
+ 	if (lo->lo_offset != info->lo_offset ||
+ 	    lo->lo_sizelimit != info->lo_sizelimit) {
+-		/* kill_bdev should have truncated all the pages */
+-		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
+-			err = -EAGAIN;
+-			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+-				__func__, lo->lo_number, lo->lo_file_name,
+-				lo->lo_device->bd_inode->i_mapping->nrpages);
+-			goto out_unfreeze;
+-		}
+ 		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
+ 			err = -EFBIG;
+ 			goto out_unfreeze;
+@@ -1342,6 +1343,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 
+ out_unfreeze:
+ 	blk_mq_unfreeze_queue(lo->lo_queue);
++	if (drop_request)
++		blk_queue_flag_clear(QUEUE_FLAG_DYING, lo->lo_queue);
+ 
+ 	if (!err && (info->lo_flags & LO_FLAGS_PARTSCAN) &&
+ 	     !(lo->lo_flags & LO_FLAGS_PARTSCAN)) {
+@@ -1350,6 +1353,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 		bdev = lo->lo_device;
+ 		partscan = true;
+ 	}
++
++	/* truncate stale pages cached by previous operations */
++	if (!err && drop_cache) {
++		sync_blockdev(lo->lo_device);
++		invalidate_bdev(lo->lo_device);
++	}
+ out_unlock:
+ 	mutex_unlock(&loop_ctl_mutex);
+ 	if (partscan)
+@@ -1531,7 +1540,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
+ 
+ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+ {
+-	int err = 0;
++	bool drop_cache = false;
+ 
+ 	if (lo->lo_state != Lo_bound)
+ 		return -ENXIO;
+@@ -1539,31 +1548,23 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+ 	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
+ 		return -EINVAL;
+ 
+-	if (lo->lo_queue->limits.logical_block_size != arg) {
+-		sync_blockdev(lo->lo_device);
+-		kill_bdev(lo->lo_device);
+-	}
++	if (lo->lo_queue->limits.logical_block_size != arg)
++		drop_cache = true;
+ 
++	sync_blockdev(lo->lo_device);
+ 	blk_mq_freeze_queue(lo->lo_queue);
+-
+-	/* kill_bdev should have truncated all the pages */
+-	if (lo->lo_queue->limits.logical_block_size != arg &&
+-			lo->lo_device->bd_inode->i_mapping->nrpages) {
+-		err = -EAGAIN;
+-		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+-			__func__, lo->lo_number, lo->lo_file_name,
+-			lo->lo_device->bd_inode->i_mapping->nrpages);
+-		goto out_unfreeze;
+-	}
+-
+ 	blk_queue_logical_block_size(lo->lo_queue, arg);
+ 	blk_queue_physical_block_size(lo->lo_queue, arg);
+ 	blk_queue_io_min(lo->lo_queue, arg);
+ 	loop_update_dio(lo);
+-out_unfreeze:
+ 	blk_mq_unfreeze_queue(lo->lo_queue);
+ 
+-	return err;
++	/* truncate stale pages cached by previous operations */
++	if (drop_cache) {
++		sync_blockdev(lo->lo_device);
++		invalidate_bdev(lo->lo_device);
++	}
++	return 0;
+ }
+ 
+ static int lo_simple_ioctl(struct loop_device *lo, unsigned int cmd,
+-- 
+2.25.1.481.gfbce0eb801-goog
+
 
 
 _______________________________________________
