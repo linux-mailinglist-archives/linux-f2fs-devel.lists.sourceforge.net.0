@@ -2,102 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 643A51752BE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Mar 2020 05:40:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D68EB1756C7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Mar 2020 10:18:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j8csU-0002Ae-3g; Mon, 02 Mar 2020 04:40:26 +0000
+	id 1j8hDA-00079n-LD; Mon, 02 Mar 2020 09:18:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1j8csR-0002AR-SC
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Mar 2020 04:40:23 +0000
+ (envelope-from <stanley.chu@mediatek.com>) id 1j8hD9-000798-4Q
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Mar 2020 09:18:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
+ :References:In-Reply-To:Date:CC:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MksOsb05vIoMJy+O+jY+fWaky1s1xPB27dYWvBuRQlo=; b=JAkmZaxw5lVRPEXH41yvBqDSmg
- gn81pnHaZwGWHb4ecAD0JCNUEhslE6Wr7lJHED8koc3hzsx5ubvRe5cGT78UzF2XUBAY2JTX7IOqh
- Gk1jxKpRvZqSnFKj43GuXPAg7dHg1kGe/x67n2uwXo9qunCiCMrY5y827GnI95IxRS4Q=;
+ bh=Tm2dGLrDuwKIqwWQ0m6yCuCCVqgYcKl6heBDIiRcfnw=; b=LsyHdmJF5rDzPQej2uN6HMZY7T
+ VgakIf30/qYuJ1aWt+raOay3ZL/8sKbR4fFpF6rNW8GZbfxBtkbXl0YxqYAbMpe7vumQBnHz3nVVY
+ bp4GnybqV9Op8Y9ojitRinE5NTVxDxJbxAP/8ViKG6STnJcuBzpE10UFbiPujqR0SMRM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
+ In-Reply-To:Date:CC:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MksOsb05vIoMJy+O+jY+fWaky1s1xPB27dYWvBuRQlo=; b=cFLkSUcX8sQLdXiWwqhSinRn78
- LyBcak5zwtW8geAjorH4AH2LwSR3yFX0Sh8+WvXLTqjC32ImaCOmAMbZCEpk8Ni1Coc1GwVdSKmNu
- wiM00rd0WftD8j1eKPTdcMdXgb8usVuKjilIVBn0S5yKS0wWo6HQp3SE+bsD58pzBxdw=;
-Received: from mail26.static.mailgun.info ([104.130.122.26])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1j8csG-00EFr9-Hs
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Mar 2020 04:40:23 +0000
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1583124016; h=In-Reply-To: Content-Type: MIME-Version:
- References: Message-ID: Subject: Cc: To: From: Date: Sender;
- bh=MksOsb05vIoMJy+O+jY+fWaky1s1xPB27dYWvBuRQlo=;
- b=jkCOcM9+eRNB9G2lOHAAwN/EqNE1OrEcRpRTD+2dyRrnywsIkF5r06lffL68/OhcrlesJWVT
- JdmWbfZqADC17J52cBb/LylAr+kg/JTYOHKYEyJzZIFg9BhX44qLCbEajjyuLcoJLmOGNClI
- iy0nhgIECHD89O+94UWJ8Y8SpJg=
-X-Mailgun-Sending-Ip: 104.130.122.26
-X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
- by mxa.mailgun.org with ESMTP id 5e5c8e1b.7fb7f17de8b8-smtp-out-n03;
- Mon, 02 Mar 2020 04:39:55 -0000 (UTC)
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 1297EC4479F; Mon,  2 Mar 2020 04:39:55 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
- URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher DHE-RSA-AES128-SHA (128/128 bits))
- (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 8C269C43383;
- Mon,  2 Mar 2020 04:39:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 8C269C43383
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-Date: Mon, 2 Mar 2020 10:09:48 +0530
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200302043948.GE20234@codeaurora.org>
-References: <1582799978-22277-1-git-send-email-stummala@codeaurora.org>
- <c39e0cf1-dbb1-5f60-50b5-e0eb246782bc@huawei.com>
+ bh=Tm2dGLrDuwKIqwWQ0m6yCuCCVqgYcKl6heBDIiRcfnw=; b=ElD1bjW0pqnrSR88A9bYN6IJYN
+ V2B6lPaW70iN85soat2gFnOs0VskbuXZOttfBSfY8Hp6LVBLJpbsvYN9KW2qKoFqOzDGmRYYYf0Qt
+ O7Epb4nzQxQfUJywku5aLKxP34vG47QHuXE3gGP3F3gyaXE0R7BNoh6vrJRbgVs/2Xl8=;
+Received: from [210.61.82.183] (helo=mailgw01.mediatek.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1j8hD1-00ESdQ-NK
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Mar 2020 09:18:03 +0000
+X-UUID: f41c14b013444c8b8059cd4b70c15acd-20200302
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=Tm2dGLrDuwKIqwWQ0m6yCuCCVqgYcKl6heBDIiRcfnw=; 
+ b=m/hQqlwlZqZcCb/1QUp0UCExNYbrk9++KsBF02NmBy/z0LHTDcXsjFrTuG1Zf3urS9X368of4Ko+LS0URaE24EUuO7V75ePvrrl8slLb7iiq+MjRAcUPr8//p0xJT6OkDqOd4GCkNnoFx4lylvtBkyXV4fqCQ5hG4JDNusRWGwU=;
+X-UUID: f41c14b013444c8b8059cd4b70c15acd-20200302
+Received: from mtkcas07.mediatek.inc [(172.21.101.84)] by mailgw01.mediatek.com
+ (envelope-from <stanley.chu@mediatek.com>)
+ (Cellopoint E-mail Firewall v4.1.10 Build 0809 with TLS)
+ with ESMTP id 1936260261; Mon, 02 Mar 2020 17:17:43 +0800
+Received: from mtkcas07.mediatek.inc (172.21.101.84) by
+ mtkmbs02n1.mediatek.inc (172.21.101.77) with Microsoft SMTP Server (TLS) id
+ 15.0.1395.4; Mon, 2 Mar 2020 17:15:37 +0800
+Received: from [172.21.84.99] (172.21.84.99) by mtkcas07.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.0.1395.4 via Frontend
+ Transport; Mon, 2 Mar 2020 17:17:04 +0800
+Message-ID: <1583140656.10509.2.camel@mtksdccf07>
+From: Stanley Chu <stanley.chu@mediatek.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Date: Mon, 2 Mar 2020 17:17:36 +0800
+In-Reply-To: <1582699394.26304.96.camel@mtksdccf07>
+References: <20200221115050.238976-1-satyat@google.com>
+ <20200221115050.238976-7-satyat@google.com>
+ <20200221172244.GC438@infradead.org> <20200221181109.GB925@sol.localdomain>
+ <1582465656.26304.69.camel@mtksdccf07>
+ <20200224233759.GC30288@infradead.org>
+ <1582615285.26304.93.camel@mtksdccf07> <20200226011206.GD114977@gmail.com>
+ <1582699394.26304.96.camel@mtksdccf07>
+X-Mailer: Evolution 3.2.3-0ubuntu6 
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <c39e0cf1-dbb1-5f60-50b5-e0eb246782bc@huawei.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Score: 0.0 (/)
+X-MTK: N
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [104.130.122.26 listed in list.dnswl.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1j8csG-00EFr9-Hs
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: Fix mount failure due to SPO after
- a successful online resize FS
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j8hD1-00ESdQ-NK
+Subject: Re: [f2fs-dev] [PATCH v7 6/9] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,100 +95,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ Ladvine D Almeida <Ladvine.DAlmeida@synopsys.com>,
+ "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang =?UTF-8?Q?=28=E7=8E=8B=E5=9C=8B=E9=B4=BB=29?=
+ <kuohong.wang@mediatek.com>, Parshuram Raju Thombare <pthombar@cadence.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Satya Tangirala <satyat@google.com>, Christoph Hellwig <hch@infradead.org>,
+ "linux-fscrypt@vger.kernel.org" <linux-fscrypt@vger.kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Chao,
+Hi Eric and all,
 
-On Fri, Feb 28, 2020 at 04:35:37PM +0800, Chao Yu wrote:
-> Hi Sahitya,
+On Wed, 2020-02-26 at 14:43 +0800, Stanley Chu wrote:
+> Hi Eric,
 > 
-> Good catch.
-> 
-> On 2020/2/27 18:39, Sahitya Tummala wrote:
-> > Even though online resize is successfully done, a SPO immediately
-> > after resize, still causes below error in the next mount.
+> On Tue, 2020-02-25 at 17:12 -0800, Eric Biggers wrote:
+
 > > 
-> > [   11.294650] F2FS-fs (sda8): Wrong user_block_count: 2233856
-> > [   11.300272] F2FS-fs (sda8): Failed to get valid F2FS checkpoint
+> > I'm not sure about the UFS controllers from Synopsys, Cadence, or Samsung, all
+> > of which apparently have implemented some form of the crypto support too.  But I
+> > wouldn't get my hopes up that everyone followed the UFS standard precisely.
 > > 
-> > This is because after FS metadata is updated in update_fs_metadata()
-> > if the SBI_IS_DIRTY is not dirty, then CP will not be done to reflect
-> > the new user_block_count.
+> > So if there are no objections, IMO we should make the crypto support opt-in.
 > > 
-> > Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> > ---
-> >  fs/f2fs/gc.c | 1 +
-> >  1 file changed, 1 insertion(+)
-> > 
-> > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> > index a92fa49..a14a75f 100644
-> > --- a/fs/f2fs/gc.c
-> > +++ b/fs/f2fs/gc.c
-> > @@ -1577,6 +1577,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
-> >  
-> >  	update_fs_metadata(sbi, -secs);
-> >  	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+> > That makes it even more important to upstream the crypto support for specific
+> > hardware like ufs-qcom and ufs-mediatek, since otherwise the ufshcd-crypto code
+> > would be unusable even theoretically.  I'm volunteering to handle ufs-qcom with
+> > https://lkml.kernel.org/linux-block/20200110061634.46742-1-ebiggers@kernel.org/.
+> > Stanley, could you send out ufs-mediatek support as an RFC so people can see
+> > better what it involves?
 > 
-> Need a barrier here to keep order in between above code and set_sbi_flag(DIRTY)?
+> Sure, I will send out our RFC patches. Please allow me some time for
+> submission.
 
-I don't think a barrier will help here. Let us say there is a another context
-doing CP already, then it races with update_fs_metadata(), so it may or may not
-see the resize updates and it will also clear the SBI_IS_DIRTY flag set by resize
-(even with a barrier).
+The ufs-mediatek RFC patch is uploaded as
+https://patchwork.kernel.org/patch/11415051/
 
-I think we need to synchronize this with CP context, so that these resize changes
-will be reflected properly. Please see the new diff below and help with the review.
+This patch is rebased to the latest wip-inline-encryption branch in
+Eric Biggers's git:
+https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git/
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index a14a75f..5554af8 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1467,6 +1467,7 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
-        long long user_block_count =
-                                le64_to_cpu(F2FS_CKPT(sbi)->user_block_count);
-
-+       clear_sbi_flag(sbi, SBI_IS_DIRTY);
-        SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
-        MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
-        FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
-@@ -1575,9 +1576,12 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
-                goto out;
-        }
-
-+       mutex_lock(&sbi->cp_mutex);
-        update_fs_metadata(sbi, -secs);
-        clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
-        set_sbi_flag(sbi, SBI_IS_DIRTY);
-+       mutex_unlock(&sbi->cp_mutex);
-+
-        err = f2fs_sync_fs(sbi->sb, 1);
-        if (err) {
-                update_fs_metadata(sbi, secs);
-
-thanks,
-
-> 
-> > +	set_sbi_flag(sbi, SBI_IS_DIRTY);
-> >  	err = f2fs_sync_fs(sbi->sb, 1);
-> >  	if (err) {
-> >  		update_fs_metadata(sbi, secs);
-> 
-> Do we need to add clear_sbi_flag(, SBI_IS_DIRTY) into update_fs_metadata(), so above
-> path can be covered as well?
-> 
-> Thanks,
-> 
-> > 
-
--- 
---
-Sent by a consultant of the Qualcomm Innovation Center, Inc.
-The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
-
+Thanks,
+Stanley Chu
 
 _______________________________________________
 Linux-f2fs-devel mailing list
