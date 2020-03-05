@@ -2,68 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B7AD17B03F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Mar 2020 22:04:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 673DD17B26A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Mar 2020 00:48:50 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j9xfQ-00023p-BN; Thu, 05 Mar 2020 21:04:28 +0000
+	id 1jA0EL-0000Xg-0Y; Thu, 05 Mar 2020 23:48:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jack@suse.cz>) id 1j9xfO-00023i-FY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 21:04:26 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jA0EJ-0000XT-Kx
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 23:48:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j3SC4gl8kjzmOIQi/hpY5HqxNwuh/sSuUs7EtDODFhs=; b=lZIWFBHhiwClU4eH3EO7ZmC1QK
- rLLA9pkipuk3ztbbjAcRKA9Jkzvlw4FkttZWqHKehT1wkeoJIG6BEs2hpdoj3pH/5vhqr14rAZwDI
- vpj+FkTYOBgEgoXSKz8lDCXPWI0mT6wqK3XvT07KEKDDnNP02yPpPQsu3mk/7DFDvxCg=;
+ bh=wntQB8RheADAmL7MIPzkrAFyo4pv0NyUMAwgrix1UT8=; b=JQKseSUexcQ11TYyI1KRew6UFt
+ Iaq5YSk31aOgEUB8sNzcZqgZH0NjnU9vN4Pqn8RkB1v3RPcelq1UwVI3jAE3uQoxkMC2iDNA9T/hb
+ h3PmtlDD8tEsD7h2fE1uouLCfIW0oYgnTBnknefPCTUm5iq5RGmgfT+wkrYN4sC+AZ8A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=j3SC4gl8kjzmOIQi/hpY5HqxNwuh/sSuUs7EtDODFhs=; b=hqBsDAyNE3B33hE7B8ReqdF8eR
- tVjIknaCzFWswRexl67FiQebyuOpxAmMJss4cuWPPaBybI7c1Vm4pKEmwkJAKhwOaMFcUZclW1fcI
- 4Kk8ToCInqY246CPC3qUt4w1GG523i5/Wa2WvP6teOOFyY+OOf/RtikgIP7ZqWGC6O68=;
-Received: from mx2.suse.de ([195.135.220.15])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=wntQB8RheADAmL7MIPzkrAFyo4pv0NyUMAwgrix1UT8=; b=Y
+ yygMz3aE3g8AQE8RnUtiAlgMyjDdl2umAjD6rXIUsd1nWIhu6AOq1d+LPThNKdncyUBJYIY37hi0L
+ RI63vbzoafWvWIShNaH3mDXWxqAEAbm4UYjTOD9MPDG3SVfIlfpxjvTfd1ULdK16k5/Ddj6aW+hKn
+ gnilPm+ZOCzI/Uig=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j9xfL-003H3c-H5
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 21:04:26 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 016C9ACC6;
- Thu,  5 Mar 2020 21:04:15 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id EFAF41E0FC2; Thu,  5 Mar 2020 22:04:14 +0100 (CET)
-Date: Thu, 5 Mar 2020 22:04:14 +0100
-From: Jan Kara <jack@suse.cz>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20200305210414.GA1678@quack2.suse.cz>
-References: <20190518004751.18962-1-jaegeuk@kernel.org>
+ id 1jA0EE-00HQ1m-D1
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 23:48:39 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id B6DF520717;
+ Thu,  5 Mar 2020 23:48:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1583452103;
+ bh=Y8k9h7kxv3IqWsza/9KnsqFOgRnXjD8bfknBAcC9/r0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=wH8SH9C9ro8FdneBLDrrJ9SUXN2tdQghLktAMkrilfz1+rzpfUrw4lqDYaesj5Ca0
+ m8DCIKEmQrBXBoFYP8hEPOgYZUrOUQMeYOkApWlw3JCa9cf0zI3LbAUatrnc/5Q8Af
+ TsavOfgjoF0U0sMouWvpP2kureiblQOZM9PxOX/c=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Thu,  5 Mar 2020 15:48:22 -0800
+Message-Id: <20200305234822.178708-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.25.1.481.gfbce0eb801-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190518004751.18962-1-jaegeuk@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j9xfL-003H3c-H5
-Subject: Re: [f2fs-dev] [PATCH] loop: avoid EAGAIN,
- if offset or block_size are changed
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1jA0EE-00HQ1m-D1
+Subject: [f2fs-dev] [PATCH] f2fs: fix wrong check on F2FS_IOC_FSSETXATTR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,154 +80,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, Bart Van Assche <bvanassche@acm.org>,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri 17-05-19 17:47:51, Jaegeuk Kim wrote:
-> This patch tries to avoid EAGAIN due to nrpages!=0 that was originally trying
-> to drop stale pages resulting in wrong data access.
-> 
-> Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
+This fixes the incorrect failure when enabling project quota on casefold-enabled
+file.
 
-...
+Cc: Daniel Rosenberg <drosen@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/file.c | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-> ---
->  drivers/block/loop.c | 44 +++++++++++++++++---------------------------
->  1 file changed, 17 insertions(+), 27 deletions(-)
-> 
-> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-> index 102d79575895..7c7d2d9c47d0 100644
-> --- a/drivers/block/loop.c
-> +++ b/drivers/block/loop.c
-> @@ -1212,6 +1212,7 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  	kuid_t uid = current_uid();
->  	struct block_device *bdev;
->  	bool partscan = false;
-> +	bool drop_caches = false;
->  
->  	err = mutex_lock_killable(&loop_ctl_mutex);
->  	if (err)
-> @@ -1232,10 +1233,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  	}
->  
->  	if (lo->lo_offset != info->lo_offset ||
-> -	    lo->lo_sizelimit != info->lo_sizelimit) {
-> -		sync_blockdev(lo->lo_device);
-> -		kill_bdev(lo->lo_device);
-> -	}
-> +	    lo->lo_sizelimit != info->lo_sizelimit)
-> +		drop_caches = true;
-
-I don't think this solution of moving buffer cache invalidation after loop
-device is updated is really correct.
-
-If there's any dirty data in the buffer cache, god knows where it ends
-up being written after the loop device is reconfigured. Think e.g. of a
-file offset being changed. It may not be even possible to write it if say
-block size increased and we have now improperly sized buffers in the buffer
-cache...
-
-Frankly, I have rather limited sympathy to someone trying to reconfigure a
-loop device while it is in use. Is there any sane usecase? I'd be inclined
-to just use a similar trick as we did with LOOP_SET_FD and allow these
-changes only if the caller has the loop device open exclusively or we are
-able to upgrade to exclusive open. As otherwise say mounted filesystem on
-top of loop device being reconfigured is very likely to be in serious
-trouble (e.g. it's impossible to fully invalidate buffer cache in that
-case).
-
-But that's probably somewhat tangential to the problem you have. For your
-case I don't really see a race-free way to invalidate buffer cache and
-update loop configuration - the best I can see is to flush & invalidate
-the cache, freeze the bdev so that new data cannot be read into the
-buffer cache, check the cache is still empty - if yes, go ahead. If not,
-unfreeze and try again...
-
-								Honza
-
->  	/* I/O need to be drained during transfer transition */
->  	blk_mq_freeze_queue(lo->lo_queue);
-> @@ -1265,14 +1264,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  
->  	if (lo->lo_offset != info->lo_offset ||
->  	    lo->lo_sizelimit != info->lo_sizelimit) {
-> -		/* kill_bdev should have truncated all the pages */
-> -		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
-> -			err = -EAGAIN;
-> -			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
-> -				__func__, lo->lo_number, lo->lo_file_name,
-> -				lo->lo_device->bd_inode->i_mapping->nrpages);
-> -			goto out_unfreeze;
-> -		}
->  		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
->  			err = -EFBIG;
->  			goto out_unfreeze;
-> @@ -1317,6 +1308,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
->  		bdev = lo->lo_device;
->  		partscan = true;
->  	}
-> +
-> +	/* truncate stale pages cached by previous operations */
-> +	if (!err && drop_caches) {
-> +		sync_blockdev(lo->lo_device);
-> +		kill_bdev(lo->lo_device);
-> +	}
->  out_unlock:
->  	mutex_unlock(&loop_ctl_mutex);
->  	if (partscan)
-> @@ -1498,6 +1495,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
->  
->  static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
->  {
-> +	bool drop_caches = false;
->  	int err = 0;
->  
->  	if (lo->lo_state != Lo_bound)
-> @@ -1506,23 +1504,10 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
->  	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
->  		return -EINVAL;
->  
-> -	if (lo->lo_queue->limits.logical_block_size != arg) {
-> -		sync_blockdev(lo->lo_device);
-> -		kill_bdev(lo->lo_device);
-> -	}
-> +	if (lo->lo_queue->limits.logical_block_size != arg)
-> +		drop_caches = true;
->  
->  	blk_mq_freeze_queue(lo->lo_queue);
-> -
-> -	/* kill_bdev should have truncated all the pages */
-> -	if (lo->lo_queue->limits.logical_block_size != arg &&
-> -			lo->lo_device->bd_inode->i_mapping->nrpages) {
-> -		err = -EAGAIN;
-> -		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
-> -			__func__, lo->lo_number, lo->lo_file_name,
-> -			lo->lo_device->bd_inode->i_mapping->nrpages);
-> -		goto out_unfreeze;
-> -	}
-> -
->  	blk_queue_logical_block_size(lo->lo_queue, arg);
->  	blk_queue_physical_block_size(lo->lo_queue, arg);
->  	blk_queue_io_min(lo->lo_queue, arg);
-> @@ -1530,6 +1515,11 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
->  out_unfreeze:
->  	blk_mq_unfreeze_queue(lo->lo_queue);
->  
-> +	/* truncate stale pages cached by previous operations */
-> +	if (drop_caches) {
-> +		sync_blockdev(lo->lo_device);
-> +		kill_bdev(lo->lo_device);
-> +	}
->  	return err;
->  }
->  
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index fb070816a8a5..8a41afac0346 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1789,12 +1789,15 @@ static int f2fs_file_flush(struct file *file, fl_owner_t id)
+ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ {
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
++	u32 masked_flags = fi->i_flags & mask;
++
++	f2fs_bug_on(F2FS_I_SB(inode), (iflags & ~mask));
+ 
+ 	/* Is it quota file? Do not allow user to mess with it */
+ 	if (IS_NOQUOTA(inode))
+ 		return -EPERM;
+ 
+-	if ((iflags ^ fi->i_flags) & F2FS_CASEFOLD_FL) {
++	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
+ 		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
+ 			return -EOPNOTSUPP;
+ 		if (!f2fs_empty_dir(inode))
+@@ -1808,9 +1811,9 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 			return -EINVAL;
+ 	}
+ 
+-	if ((iflags ^ fi->i_flags) & F2FS_COMPR_FL) {
++	if ((iflags ^ masked_flags) & F2FS_COMPR_FL) {
+ 		if (S_ISREG(inode->i_mode) &&
+-			(fi->i_flags & F2FS_COMPR_FL || i_size_read(inode) ||
++			(masked_flags & F2FS_COMPR_FL || i_size_read(inode) ||
+ 						F2FS_HAS_BLOCKS(inode)))
+ 			return -EINVAL;
+ 		if (iflags & F2FS_NOCOMP_FL)
+@@ -1827,16 +1830,16 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 			set_compress_context(inode);
+ 		}
+ 	}
+-	if ((iflags ^ fi->i_flags) & F2FS_NOCOMP_FL) {
+-		if (fi->i_flags & F2FS_COMPR_FL)
++	if ((iflags ^ masked_flags) & F2FS_NOCOMP_FL) {
++		if (masked_flags & F2FS_COMPR_FL)
+ 			return -EINVAL;
+ 	}
+ 
+ 	fi->i_flags = iflags | (fi->i_flags & ~mask);
+-	f2fs_bug_on(F2FS_I_SB(inode), (fi->i_flags & F2FS_COMPR_FL) &&
+-					(fi->i_flags & F2FS_NOCOMP_FL));
++	f2fs_bug_on(F2FS_I_SB(inode), (masked_flags & F2FS_COMPR_FL) &&
++					(masked_flags & F2FS_NOCOMP_FL));
+ 
+-	if (fi->i_flags & F2FS_PROJINHERIT_FL)
++	if (masked_flags & F2FS_PROJINHERIT_FL)
+ 		set_inode_flag(inode, FI_PROJ_INHERIT);
+ 	else
+ 		clear_inode_flag(inode, FI_PROJ_INHERIT);
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.25.1.481.gfbce0eb801-goog
+
 
 
 _______________________________________________
