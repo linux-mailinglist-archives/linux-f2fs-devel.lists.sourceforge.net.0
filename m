@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E3DB17AA3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Mar 2020 17:11:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B7AD17B03F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Mar 2020 22:04:40 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1j9t6H-00069C-4i; Thu, 05 Mar 2020 16:11:53 +0000
+	id 1j9xfQ-00023p-BN; Thu, 05 Mar 2020 21:04:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+f57f9490110fc31f28f2+6038+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1j9t6F-000691-5V
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 16:11:51 +0000
+ (envelope-from <jack@suse.cz>) id 1j9xfO-00023i-FY
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 21:04:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Uen6VLar276Fa0qz/XOKv1RvuUuLbo9suzCz5NScJNI=; b=O8cG9R6AV28MqeQKZXmQzo2xMJ
- z+LdwQeeffVC1KA0Ha9PX2IMUkMqQV/tbnjX8kNvmR/Q6bbnBCN3fqocq0qHkSLVAeOzujb8wvLUY
- CWsB3mPim+vwl+MkBIie6mg9ghEcBEOESEhDQ8EWPxm/oyxoIT5A1unLDI4lnWe/kGwo=;
+ bh=j3SC4gl8kjzmOIQi/hpY5HqxNwuh/sSuUs7EtDODFhs=; b=lZIWFBHhiwClU4eH3EO7ZmC1QK
+ rLLA9pkipuk3ztbbjAcRKA9Jkzvlw4FkttZWqHKehT1wkeoJIG6BEs2hpdoj3pH/5vhqr14rAZwDI
+ vpj+FkTYOBgEgoXSKz8lDCXPWI0mT6wqK3XvT07KEKDDnNP02yPpPQsu3mk/7DFDvxCg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,55 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Uen6VLar276Fa0qz/XOKv1RvuUuLbo9suzCz5NScJNI=; b=SCYOWrb78a9Wgaz1lGkhWWCtQx
- DqrlGas0OA0oBnO30vbotnZKGvy/HV6Q4o28cmbtEq7UNSHkAYdwljakxC0KMSHvGhZlEwvGchReL
- qz4+Oa1GFm+V24EelJ0HBahfYdtYM4Eyn0AI85AIH7SHLrIXvoZiSDismZF7qj9lZvZI=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=j3SC4gl8kjzmOIQi/hpY5HqxNwuh/sSuUs7EtDODFhs=; b=hqBsDAyNE3B33hE7B8ReqdF8eR
+ tVjIknaCzFWswRexl67FiQebyuOpxAmMJss4cuWPPaBybI7c1Vm4pKEmwkJAKhwOaMFcUZclW1fcI
+ 4Kk8ToCInqY246CPC3qUt4w1GG523i5/Wa2WvP6teOOFyY+OOf/RtikgIP7ZqWGC6O68=;
+Received: from mx2.suse.de ([195.135.220.15])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1j9t6C-000ITT-4F
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 16:11:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Uen6VLar276Fa0qz/XOKv1RvuUuLbo9suzCz5NScJNI=; b=tow7fovI56zU/zHIFBvyQFjPvu
- oxu7I0rkCiFvKuf0jEyycgSOkgif2ymuw5tLBs0Iv2NiEPVqH11+DMB5tD5Y1H5n5aG/6Y8W7Z8/g
- I9rzwwornx2tBwTtWTg7Jy50rRRciiS730r/9jfMQuw/uB3cN+ipx7Q+YO+vTUh+5OgwpnmMwOvPd
- xjsFxPMQlR8JlJEeUjcvs7Uk/1Dg1af47nYqVfza4SpnXum9WuKlu4VGLvQsHemNL/GQhsJkzwJID
- JJsVbxURX6EkP2HNco5kV4mp9mkq4B9IciJaI9mhKj378teu4MbbrEbnSAeqCsMgEfix3nL3UWdSI
- wvQ8JOIw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1j9t63-00054F-6B; Thu, 05 Mar 2020 16:11:39 +0000
-Date: Thu, 5 Mar 2020 08:11:39 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200305161139.GA19270@infradead.org>
-References: <20200221115050.238976-1-satyat@google.com>
- <20200221115050.238976-2-satyat@google.com>
- <20200221170434.GA438@infradead.org>
- <20200221173118.GA30670@infradead.org>
- <20200227181411.GB877@sol.localdomain>
- <20200227212512.GA162309@google.com>
+ id 1j9xfL-003H3c-H5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Mar 2020 21:04:26 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 016C9ACC6;
+ Thu,  5 Mar 2020 21:04:15 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id EFAF41E0FC2; Thu,  5 Mar 2020 22:04:14 +0100 (CET)
+Date: Thu, 5 Mar 2020 22:04:14 +0100
+From: Jan Kara <jack@suse.cz>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20200305210414.GA1678@quack2.suse.cz>
+References: <20190518004751.18962-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200227212512.GA162309@google.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20190518004751.18962-1-jaegeuk@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1j9t6C-000ITT-4F
-Subject: Re: [f2fs-dev] [PATCH v7 1/9] block: Keyslot Manager for Inline
- Encryption
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1j9xfL-003H3c-H5
+Subject: Re: [f2fs-dev] [PATCH] loop: avoid EAGAIN,
+ if offset or block_size are changed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,30 +75,154 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christoph Hellwig <hch@infradead.org>, linux-scsi@vger.kernel.org,
- Kim Boojin <boojin.kim@samsung.com>, Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>, Bart Van Assche <bvanassche@acm.org>,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Feb 27, 2020 at 01:25:12PM -0800, Satya Tangirala wrote:
-> I think it does make some sense at least to make the keyslot type opaque
-> to most of the system other than the driver itself (the driver will now
-> have to call a function like blk_ksm_slot_idx_for_keyslot to actually get
-> a keyslot number at the end of the day). Also this way, the keyslot manager
-> can verify that the keyslot passed to blk_ksm_put_slot is actually part of
-> that keyslot manager (and that somebody isn't releasing a slot number that
-> was actually acquired from a different keyslot manager). I don't think
-> it's much benefit or loss either way, but I already switched to passing
-> pointers to struct keyslot around instead of ints, so I'll keep it that
-> way unless you strongly feel that using ints in this case is better
-> than struct keyslot *.
+On Fri 17-05-19 17:47:51, Jaegeuk Kim wrote:
+> This patch tries to avoid EAGAIN due to nrpages!=0 that was originally trying
+> to drop stale pages resulting in wrong data access.
+> 
+> Report: https://bugs.chromium.org/p/chromium/issues/detail?id=938958#c38
 
-Exactly.  This provides a little type safety.
+...
+
+> ---
+>  drivers/block/loop.c | 44 +++++++++++++++++---------------------------
+>  1 file changed, 17 insertions(+), 27 deletions(-)
+> 
+> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+> index 102d79575895..7c7d2d9c47d0 100644
+> --- a/drivers/block/loop.c
+> +++ b/drivers/block/loop.c
+> @@ -1212,6 +1212,7 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+>  	kuid_t uid = current_uid();
+>  	struct block_device *bdev;
+>  	bool partscan = false;
+> +	bool drop_caches = false;
+>  
+>  	err = mutex_lock_killable(&loop_ctl_mutex);
+>  	if (err)
+> @@ -1232,10 +1233,8 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+>  	}
+>  
+>  	if (lo->lo_offset != info->lo_offset ||
+> -	    lo->lo_sizelimit != info->lo_sizelimit) {
+> -		sync_blockdev(lo->lo_device);
+> -		kill_bdev(lo->lo_device);
+> -	}
+> +	    lo->lo_sizelimit != info->lo_sizelimit)
+> +		drop_caches = true;
+
+I don't think this solution of moving buffer cache invalidation after loop
+device is updated is really correct.
+
+If there's any dirty data in the buffer cache, god knows where it ends
+up being written after the loop device is reconfigured. Think e.g. of a
+file offset being changed. It may not be even possible to write it if say
+block size increased and we have now improperly sized buffers in the buffer
+cache...
+
+Frankly, I have rather limited sympathy to someone trying to reconfigure a
+loop device while it is in use. Is there any sane usecase? I'd be inclined
+to just use a similar trick as we did with LOOP_SET_FD and allow these
+changes only if the caller has the loop device open exclusively or we are
+able to upgrade to exclusive open. As otherwise say mounted filesystem on
+top of loop device being reconfigured is very likely to be in serious
+trouble (e.g. it's impossible to fully invalidate buffer cache in that
+case).
+
+But that's probably somewhat tangential to the problem you have. For your
+case I don't really see a race-free way to invalidate buffer cache and
+update loop configuration - the best I can see is to flush & invalidate
+the cache, freeze the bdev so that new data cannot be read into the
+buffer cache, check the cache is still empty - if yes, go ahead. If not,
+unfreeze and try again...
+
+								Honza
+
+>  	/* I/O need to be drained during transfer transition */
+>  	blk_mq_freeze_queue(lo->lo_queue);
+> @@ -1265,14 +1264,6 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+>  
+>  	if (lo->lo_offset != info->lo_offset ||
+>  	    lo->lo_sizelimit != info->lo_sizelimit) {
+> -		/* kill_bdev should have truncated all the pages */
+> -		if (lo->lo_device->bd_inode->i_mapping->nrpages) {
+> -			err = -EAGAIN;
+> -			pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+> -				__func__, lo->lo_number, lo->lo_file_name,
+> -				lo->lo_device->bd_inode->i_mapping->nrpages);
+> -			goto out_unfreeze;
+> -		}
+>  		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
+>  			err = -EFBIG;
+>  			goto out_unfreeze;
+> @@ -1317,6 +1308,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+>  		bdev = lo->lo_device;
+>  		partscan = true;
+>  	}
+> +
+> +	/* truncate stale pages cached by previous operations */
+> +	if (!err && drop_caches) {
+> +		sync_blockdev(lo->lo_device);
+> +		kill_bdev(lo->lo_device);
+> +	}
+>  out_unlock:
+>  	mutex_unlock(&loop_ctl_mutex);
+>  	if (partscan)
+> @@ -1498,6 +1495,7 @@ static int loop_set_dio(struct loop_device *lo, unsigned long arg)
+>  
+>  static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+>  {
+> +	bool drop_caches = false;
+>  	int err = 0;
+>  
+>  	if (lo->lo_state != Lo_bound)
+> @@ -1506,23 +1504,10 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+>  	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
+>  		return -EINVAL;
+>  
+> -	if (lo->lo_queue->limits.logical_block_size != arg) {
+> -		sync_blockdev(lo->lo_device);
+> -		kill_bdev(lo->lo_device);
+> -	}
+> +	if (lo->lo_queue->limits.logical_block_size != arg)
+> +		drop_caches = true;
+>  
+>  	blk_mq_freeze_queue(lo->lo_queue);
+> -
+> -	/* kill_bdev should have truncated all the pages */
+> -	if (lo->lo_queue->limits.logical_block_size != arg &&
+> -			lo->lo_device->bd_inode->i_mapping->nrpages) {
+> -		err = -EAGAIN;
+> -		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
+> -			__func__, lo->lo_number, lo->lo_file_name,
+> -			lo->lo_device->bd_inode->i_mapping->nrpages);
+> -		goto out_unfreeze;
+> -	}
+> -
+>  	blk_queue_logical_block_size(lo->lo_queue, arg);
+>  	blk_queue_physical_block_size(lo->lo_queue, arg);
+>  	blk_queue_io_min(lo->lo_queue, arg);
+> @@ -1530,6 +1515,11 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
+>  out_unfreeze:
+>  	blk_mq_unfreeze_queue(lo->lo_queue);
+>  
+> +	/* truncate stale pages cached by previous operations */
+> +	if (drop_caches) {
+> +		sync_blockdev(lo->lo_device);
+> +		kill_bdev(lo->lo_device);
+> +	}
+>  	return err;
+>  }
+>  
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
