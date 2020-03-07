@@ -2,76 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BDA317C9AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Mar 2020 01:25:05 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2ECA317CA9B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Mar 2020 03:01:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jANGv-0004Bw-Rd; Sat, 07 Mar 2020 00:24:53 +0000
+	id 1jAOm7-0003EC-UR; Sat, 07 Mar 2020 02:01:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jANGu-0004Bh-8L
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Mar 2020 00:24:52 +0000
+ (envelope-from <tytso@mit.edu>) id 1jAOm6-0003Dz-CZ
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Mar 2020 02:01:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JePsOinuyqrfoBOxQwjLOgF0L/X0Fljm69rhHZAecFc=; b=LikT/03U1KiQTniuVoLpWJFgq0
- S0j9a329uIkZkCidQU7AZx31H2UtAPckjVB7rD6o+x4h64qXj324+7U29CoJYTEIOev8NSTvpomlu
- HjwKbrH6ft3jiIYG7zpjuqGnKvf9B5xoB9jeUNZxXktsH7lSbHHo8OaYPsVZQfs2yZxk=;
+ bh=H/NDT5ty+VhGKKSqgCdILAzSSI1bGo3X7VZZq00+MIw=; b=fEzQXwhLCfNY77gG+KlDfudsDY
+ plmU73bHd06gZQHVCPVNM/DWdJT7LTxgYrBTfSENpgHta9WJPREgyBBYbOL6EqTOx5g847smdSG3W
+ 2V61puMVJQmydotASNx3tGhu1rBrZA28yUbcE7dlmrRhbwiGpSQ/Jc/FJF5wjwqa7PsE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JePsOinuyqrfoBOxQwjLOgF0L/X0Fljm69rhHZAecFc=; b=eWCXpnOAMJbuUCpiZFRj/0mBig
- vhXtQl50wKfZvg9V1oWEvlKmVO8ysMsel8YrppnEJhIYkmGcW3qy1DEDDv9UZpqN5jmdg6unAxIpW
- 5fObi+3awAR2V09ze3ip41Vj+VCdm3HvIsUAHbuLPcKYfGML2CCv9aaKl6oQuMhd1pyE=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=H/NDT5ty+VhGKKSqgCdILAzSSI1bGo3X7VZZq00+MIw=; b=Myq/Ub13Jisbj6zpw7deG4/c8A
+ sOhLg36I1OlvpCnHn7emBQmbFGqNow72yqhl60e81nPNFfa/kbmRNcA6Om7Cj5gj9bpTSZG1z82aP
+ pCLbS7a4kIYzI3Fjeyezn1iB4OoxZwUlkeKALQ5w4CwEdP+BSv/ydTiQeMy7+VnyN4F4=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jANGo-004ZNQ-8u
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Mar 2020 00:24:52 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 901C0206E2;
- Sat,  7 Mar 2020 00:24:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1583540680;
- bh=B72rG1jwLbG2y/Xk21RtChGVMs08LLX26UA7wxJK7XI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=tpSqdkzjbvlHV87zP5VZdFv9lE0mA/6eQJkWRgcGgYArXxTgvSeCyV8Z8vgOiD8Ku
- 91oZt4IM9h1yIscyunfSHVvMeIaPPVyKpdb/Rv1cNXPvtx77nBUxiEHWy/UCmZ5nLp
- E1SSOAedqG+uu7BrqfC++0gy/ad+A7ngWYpF2or8=
-Date: Fri, 6 Mar 2020 16:24:40 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20200307002440.GA7944@google.com>
-References: <20200305234822.178708-1-jaegeuk@kernel.org>
+ id 1jAOm1-000tZV-FV
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Mar 2020 02:01:10 +0000
+Received: from callcc.thunk.org (pool-72-93-95-157.bstnma.fios.verizon.net
+ [72.93.95.157]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 02720trO015135
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 6 Mar 2020 21:00:55 -0500
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+ id 4FE0242045B; Fri,  6 Mar 2020 21:00:54 -0500 (EST)
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Linux Filesystem Development List <linux-fsdevel@vger.kernel.org>
+Date: Fri,  6 Mar 2020 21:00:43 -0500
+Message-Id: <20200307020043.60118-1-tytso@mit.edu>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200306004555.GB225345@gmail.com>
+References: <20200306004555.GB225345@gmail.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200305234822.178708-1-jaegeuk@kernel.org>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jANGo-004ZNQ-8u
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix wrong check on
- F2FS_IOC_FSSETXATTR
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jAOm1-000tZV-FV
+Subject: [f2fs-dev] [PATCH] writeback: avoid double-writing the inode on a
+ lazytime expiration
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,70 +73,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, Daniel Rosenberg <drosen@google.com>
+Cc: Eric Biggers <ebiggers@kernel.org>,
+ Ext4 Developers List <linux-ext4@vger.kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This fixes the incorrect failure when enabling project quota on casefold-enabled
-file.
+In the case that an inode has dirty timestamp for longer than the
+lazytime expiration timeout (or if all such inodes are being flushed
+out due to a sync or syncfs system call), we need to inform the file
+system that the inode is dirty so that the inode's timestamps can be
+copied out to the on-disk data structures.  That's because if the file
+system supports lazytime, it will have ignored the dirty_inode(inode,
+I_DIRTY_TIME) notification when the timestamp was modified in memory.q
 
-Cc: Daniel Rosenberg <drosen@google.com>
-Cc: kernel-team@android.com
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Previously, this was accomplished by calling mark_inode_dirty_sync(),
+but that has the unfortunate side effect of also putting the inode the
+writeback list, and that's not necessary in this case, since we will
+immediately call write_inode() afterwards.
+
+Eric Biggers noticed that this was causing problems for fscrypt after
+the key was removed[1].
+
+[1] https://lore.kernel.org/r/20200306004555.GB225345@gmail.com
+
+Reported-by: Eric Biggers <ebiggers@kernel.org>
+Signed-off-by: Theodore Ts'o <tytso@mit.edu>
 ---
- log from v1:
-  - fix the last check
+ fs/fs-writeback.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
- fs/f2fs/file.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index b443dc2947c7..07f636732199 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1794,12 +1794,15 @@ static int f2fs_file_flush(struct file *file, fl_owner_t id)
- static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- {
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	u32 masked_flags = fi->i_flags & mask;
-+
-+	f2fs_bug_on(F2FS_I_SB(inode), (iflags & ~mask));
+diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
+index 76ac9c7d32ec..32101349ba97 100644
+--- a/fs/fs-writeback.c
++++ b/fs/fs-writeback.c
+@@ -1504,8 +1504,9 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
  
- 	/* Is it quota file? Do not allow user to mess with it */
- 	if (IS_NOQUOTA(inode))
- 		return -EPERM;
+ 	spin_unlock(&inode->i_lock);
  
--	if ((iflags ^ fi->i_flags) & F2FS_CASEFOLD_FL) {
-+	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
- 		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
- 			return -EOPNOTSUPP;
- 		if (!f2fs_empty_dir(inode))
-@@ -1813,9 +1816,9 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- 			return -EINVAL;
- 	}
- 
--	if ((iflags ^ fi->i_flags) & F2FS_COMPR_FL) {
-+	if ((iflags ^ masked_flags) & F2FS_COMPR_FL) {
- 		if (S_ISREG(inode->i_mode) &&
--			(fi->i_flags & F2FS_COMPR_FL || i_size_read(inode) ||
-+			(masked_flags & F2FS_COMPR_FL || i_size_read(inode) ||
- 						F2FS_HAS_BLOCKS(inode)))
- 			return -EINVAL;
- 		if (iflags & F2FS_NOCOMP_FL)
-@@ -1832,8 +1835,8 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- 			set_compress_context(inode);
- 		}
- 	}
--	if ((iflags ^ fi->i_flags) & F2FS_NOCOMP_FL) {
--		if (fi->i_flags & F2FS_COMPR_FL)
-+	if ((iflags ^ masked_flags) & F2FS_NOCOMP_FL) {
-+		if (masked_flags & F2FS_COMPR_FL)
- 			return -EINVAL;
- 	}
- 
+-	if (dirty & I_DIRTY_TIME)
+-		mark_inode_dirty_sync(inode);
++	/* This was a lazytime expiration; we need to tell the file system */
++	if (dirty & I_DIRTY_TIME_EXPIRED && inode->i_sb->s_op->dirty_inode)
++		inode->i_sb->s_op->dirty_inode(inode, I_DIRTY_TIME_EXPIRED);
+ 	/* Don't write the inode if only I_DIRTY_PAGES was set */
+ 	if (dirty & ~I_DIRTY_PAGES) {
+ 		int err = write_inode(inode, wbc);
 -- 
-2.25.1.481.gfbce0eb801-goog
+2.24.1
 
 
 
