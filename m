@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38852180307
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2020 17:18:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6782818038F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2020 17:32:53 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jBhal-00071h-Rb; Tue, 10 Mar 2020 16:18:51 +0000
+	id 1jBhoG-0007fx-89; Tue, 10 Mar 2020 16:32:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jBhai-00071Q-Km
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Mar 2020 16:18:48 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jBhoF-0007fq-0w
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Mar 2020 16:32:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JZEmvk3seR40BN/FCOYVlFxxXpb+Wf0LSycR2/C5nU8=; b=QpgbL2Tb4CLAh3mVNDnUh3/Wob
- KghGSIYhBFySxmOGqOlPGhLnTqbCRvoKZmzP97bgbwPg1hrncECadqHotd6NP9zZ5eYedLfOJ42+E
- g0yyrwAdGW5M+u+tufi0sKIaQc7Hgu2r1PiGorIQTbfjJk9WwOc2c35GYBRnT0PTRvk8=;
+ bh=v6UUlXs6s/wfkxq7kKSxxRt/BhpkTl3aXYt0Mf3Q25U=; b=Bw05hDwuUhO8pSxOzPyVDFK+Fl
+ 2ljUecxw6RtWAcRlgqT/bEvR6c88TBfoCZTeZ6R+pL1ZcY1muSMxLZ+ps4MKxn8Tb838CRHzkzLOw
+ cYf2kaVcKJk/UyrcN9kH7YkEjkE3iT3B5lIqypc+w1pAlvKonktcoEXXuxRqVFdYkuRg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JZEmvk3seR40BN/FCOYVlFxxXpb+Wf0LSycR2/C5nU8=; b=a+7x9J9Saj6kn0wN7WPpZMkkWu
- 5Y3bCa0t8Mm5ZDnHwRg11Z+VBahrFBHkHWTIo9cYtf362SsTfeCef0laLMiqG6l6HsdI6R4wx2LGi
- EzWCIZXLk7dhJDEqIAXmtS9uRaTA6tTWFx+pt2Y7kEtJqyjzlDkzCRkBR+Z7dd3ftYe0=;
+ bh=v6UUlXs6s/wfkxq7kKSxxRt/BhpkTl3aXYt0Mf3Q25U=; b=l8uHHrw81JFwIX+fQBLVCHTZAQ
+ A7SW6WtUtYYSfPugYaHsYVMPjxJnzBoKxj0VSLqWtyILeY6VERN7ttHkgkfy4wmJJuAQohVXD6Qyl
+ 8hrjfK+YSr/jYNh4gVDvkZkh0ef7MZKIShN6X1p3Uxcx9i7YXVAG9NNH924OsXhadMDA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jBhae-007m5c-SK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Mar 2020 16:18:48 +0000
+ id 1jBhoD-007miM-9S
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Mar 2020 16:32:46 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 287A420873;
- Tue, 10 Mar 2020 16:18:39 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 89DBD20848;
+ Tue, 10 Mar 2020 16:32:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1583857119;
- bh=S1BKfDbjA1iRAn3ZZqZEqHXcCp/sA+icgC/rWITTyl8=;
+ s=default; t=1583857959;
+ bh=/2iPAON56KiKp4VwG3w8X0u28X5Zi54HWAvPebGYCEc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=AbmLKWbKqzpbhhIUi6xrKsdd4lokgJa/FCeZ1/1F11RdP+MMJbdWChWhw15lfVUZn
- GKP+FFET/eK75dVo8jugvBoGpquwYT3h9ZtuRKMhrOyvLFw6eLKOuwXlXyvnrr3/Qj
- bYJlaEEzuqw5Bsg7pUK2MmY9hblNNDwqtMnVc5jk=
-Date: Tue, 10 Mar 2020 09:18:38 -0700
+ b=Rb36kZ2IbhnZyB3p1V4V9GfgNg6bejDxx1CE6wjMZfT6YUH/psCRAb2RrJkPjMgH2
+ Go0BJJKKyZ5lTjS5QhXBu42kon1eWwEY210z/9Ec+pBRGEjfzfyFtu+GiWsT6Os2CD
+ XunWcletPjGcSg/F8kGYtouEaW6O5e0gn8UznE8s=
+Date: Tue, 10 Mar 2020 09:32:39 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20200310161838.GB240315@google.com>
-References: <20200225102646.43367-1-yuchao0@huawei.com>
- <3525f924-7d65-c005-a7e6-d315cf14aab2@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200310163239.GC240315@google.com>
+References: <20200310125009.12966-1-yuchao0@huawei.com>
+ <20200310125009.12966-2-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3525f924-7d65-c005-a7e6-d315cf14aab2@kernel.org>
+In-Reply-To: <20200310125009.12966-2-yuchao0@huawei.com>
 User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -74,8 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jBhae-007m5c-SK
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check i_compr_blocks correctly
+X-Headers-End: 1jBhoD-007miM-9S
+Subject: Re: [f2fs-dev] [PATCH 2/5] f2fs: force compressed data into warm
+ area
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,69 +94,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 03/10, Chao Yu wrote:
-> Hi Jaegeuk,
-> 
-> On 2020-2-25 18:26, Chao Yu wrote:
-> > inode.i_blocks counts based on 512byte sector, we need to convert
-> > to 4kb sized block count before comparing to i_compr_blocks.
-> > 
-> > In addition, add to print message when sanity check on inode
-> > compression configs failed.
-> > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> >  fs/f2fs/inode.c | 23 ++++++++++++++++++++---
-> >  1 file changed, 20 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> > index 156cc5ef3044..299611562f7e 100644
-> > --- a/fs/f2fs/inode.c
-> > +++ b/fs/f2fs/inode.c
-> > @@ -291,13 +291,30 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
-> >  			fi->i_flags & F2FS_COMPR_FL &&
-> >  			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
-> >  						i_log_cluster_size)) {
-> > -		if (ri->i_compress_algorithm >= COMPRESS_MAX)
-> > +		if (ri->i_compress_algorithm >= COMPRESS_MAX) {
-> > +			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
-> > +				"compress algorithm: %u, run fsck to fix",
-> > +				  __func__, inode->i_ino,
-> > +				  ri->i_compress_algorithm);
-> >  			return false;
-> > -		if (le64_to_cpu(ri->i_compr_blocks) > inode->i_blocks)
-> > +		}
-> > +		if (le64_to_cpu(ri->i_compr_blocks) >
-> > +				SECTOR_TO_BLOCK(inode->i_blocks)) {
-> > +			f2fs_warn(sbi, "%s: inode (ino=%lx) hash inconsistent "
-> 
-> This is a typo: hash -> has
-> 
-> Could you please manually fix this in your tree?
+> Generally, data shows better continuity in warm data area as its
+> default allocation direction is right, in order to enhance
+> sequential read/write performance of compress inode, let's force
+> compress data into warm area.
 
-Done.
+Not quite sure tho, compressed blocks are logically cold, no?
 
 > 
-> Thanks
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/segment.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 > 
-> > +				"i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
-> > +				  __func__, inode->i_ino,
-> > +				  le64_to_cpu(ri->i_compr_blocks),
-> > +				  SECTOR_TO_BLOCK(inode->i_blocks));
-> >  			return false;
-> > +		}
-> >  		if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
-> > -			ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE)
-> > +			ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
-> > +			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
-> > +				"log cluster size: %u, run fsck to fix",
-> > +				  __func__, inode->i_ino,
-> > +				  ri->i_log_cluster_size);
-> >  			return false;
-> > +		}
-> >  	}
-> > 
-> >  	return true;
-> > 
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 601d67e72c50..ab1bc750712a 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3037,9 +3037,10 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>  	if (fio->type == DATA) {
+>  		struct inode *inode = fio->page->mapping->host;
+>  
+> -		if (is_cold_data(fio->page) || file_is_cold(inode) ||
+> -				f2fs_compressed_file(inode))
+> +		if (is_cold_data(fio->page) || file_is_cold(inode))
+>  			return CURSEG_COLD_DATA;
+> +		if (f2fs_compressed_file(inode))
+> +			return CURSEG_WARM_DATA;
+>  		if (file_is_hot(inode) ||
+>  				is_inode_flag_set(inode, FI_HOT_DATA) ||
+>  				f2fs_is_atomic_file(inode) ||
+> -- 
+> 2.18.0.rc1
 
 
 _______________________________________________
