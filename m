@@ -2,63 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8A16181DCA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2020 17:27:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46111181E41
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2020 17:49:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jC4Cw-0003sz-7A; Wed, 11 Mar 2020 16:27:46 +0000
+	id 1jC4Xe-0002pH-Df; Wed, 11 Mar 2020 16:49:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jC4Cu-0003sr-4L
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 16:27:44 +0000
+ (envelope-from <artur@juraszek.xyz>) id 1jC4Xc-0002p9-JL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 16:49:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zO/stjkBXEyBU+1Jg0pVaRdkT+cyc6rfHFs3zg18v/I=; b=NhsXWAdQVSJeRd10VeB7fft2Yh
- ptPRa3cBTs2V04m3eSmpn/OHLJ8meXbmJJeOVBcKJZgsY8xSHT8BjwBXH3MaBgInqOgRfWCgHXlXh
- gFdL79kDfGozxGmIzw++N1TVisBDGsvsbsrdwLEDQ4RLtKVgu20CbrtR+1g/kogUrEvM=;
+ bh=oV5+mVTLKgitGy1k9Dd0HBZea7uQGarFhSGo7wMDp2c=; b=QP4aov1pzHiDoRx3LCeVEarBYX
+ cbHGcM3kfujo+H1OLUDxneKYWL8htwA+bAsClI2/rq/X8p73+OYtlIr1UCgDJb+vo6nEFkjbgugRl
+ AibZKw/2DT/GroMNpSZD3ZgdguXdpwqC7NjUxUSJ1In9njjZpCMhcPOa7zR2PdeQBGUc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zO/stjkBXEyBU+1Jg0pVaRdkT+cyc6rfHFs3zg18v/I=; b=H
- k76rP4q17/qXeQwhHv3Zz0+JhaY05Hc15PZwvGlyqIcSQnjf+ARgs0zMrF3eD5G7WAiK3KvKyZXyp
- 2/lYIVaUf6URyJpk+4l1P7CSA+eTHevZm1kpzEfUQtYgmA6X71j+BVSdjN7539JVMpTlD79SNMWRk
- nwP36uj2Ac6Ws1ek=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=oV5+mVTLKgitGy1k9Dd0HBZea7uQGarFhSGo7wMDp2c=; b=O
+ rJyXg6ufmi3K3KYjqp+PfDeWMEY5vCnFb2KiApCp0rw3IigzvZgC5FCuQLQ3rESU3SQ9CGLs+cMTa
+ UW7BivxaAY47e01p0WxIoX/Pn+gI/iX14YMO01HVlLOvDFVJGPPtnNro6uA4towfv6UxwLA2G3cjP
+ WeJ8vHa6/ZN/mWv4=;
+Received: from h1.fbrelay.privateemail.com ([131.153.2.42])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jC4Cr-00FkKG-Cx
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 16:27:44 +0000
-Received: from localhost (unknown [104.132.1.66])
+ id 1jC4XS-008Zrw-HP
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 16:49:08 +0000
+Received: from MTA-05-3.privateemail.com (mta-05.privateemail.com
+ [198.54.127.60])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 03E70206BE;
- Wed, 11 Mar 2020 16:27:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1583944056;
- bh=6Vo3+x0qJalhkBRtWzcGky+bHsuwVfFeSdbQXvVkhUQ=;
- h=Date:From:To:Cc:Subject:From;
- b=yMJ5i1TnwI1bH7wYGWAQujoySrxYNb6JJqlT3ces9qWP3xXNA8Jr4wWMtImW9UVOG
- wxmOxSc07MpcO69zm6fENyc/zI44TvJn37V0sfYPdsBYV4bMyN8yBI2eTp3AYgaW7/
- cW4GPNXM3wHuqLIfupBz6q+FYpyRB5J3jUvj5X1I=
-Date: Wed, 11 Mar 2020 09:27:35 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20200311162735.GA152176@google.com>
+ by h1.fbrelay.privateemail.com (Postfix) with ESMTPS id 51F9E8134C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 11 Mar 2020 12:36:13 -0400 (EDT)
+Received: from MTA-05.privateemail.com (localhost [127.0.0.1])
+ by MTA-05.privateemail.com (Postfix) with ESMTP id 8BBBC60056;
+ Wed, 11 Mar 2020 12:35:57 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=juraszek.xyz;
+ s=default; t=1583944557;
+ bh=jUmHCuadOjADh9i9U4Kngw44/tBcaOYcVlo6zsIT8hw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ostQfCh8HXBmbtL2gFztLhT7iZiAoCJIsTneiUm6dViHCVaozqdjYjDci+3XYNDvX
+ mrLRu/Dh4K9GI+Cd9MKtEkthMrnHRPRYZBStPeRvfVB0oMwm6WRILVNRhg+zvbB4y5
+ VhbMKl1D/Uqpn064sbmHWNrMTpok0oRVM9sfHoF4=
+Received: from opera-juraszek.service.osa (unknown [10.20.151.236])
+ by MTA-05.privateemail.com (Postfix) with ESMTPA id 6E10460055;
+ Wed, 11 Mar 2020 16:35:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=juraszek.xyz;
+ s=default; t=1583944557;
+ bh=jUmHCuadOjADh9i9U4Kngw44/tBcaOYcVlo6zsIT8hw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ostQfCh8HXBmbtL2gFztLhT7iZiAoCJIsTneiUm6dViHCVaozqdjYjDci+3XYNDvX
+ mrLRu/Dh4K9GI+Cd9MKtEkthMrnHRPRYZBStPeRvfVB0oMwm6WRILVNRhg+zvbB4y5
+ VhbMKl1D/Uqpn064sbmHWNrMTpok0oRVM9sfHoF4=
+From: Artur Juraszek <artur@juraszek.xyz>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 11 Mar 2020 17:35:46 +0100
+Message-Id: <20200311163546.1843-1-artur@juraszek.xyz>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Virus-Scanned: ClamAV using ClamSMTP
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [131.153.2.42 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: juraszek.xyz]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -66,9 +87,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jC4Cr-00FkKG-Cx
-Subject: [f2fs-dev] [GIT PULL] f2fs for 5.6-rc6
+X-Headers-End: 1jC4XS-008Zrw-HP
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs: Slightly improve the manpage wording
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,82 +100,64 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+Signed-off-by: Artur Juraszek <artur@juraszek.xyz>
+---
+ man/mkfs.f2fs.8 | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
-Sorry for late pull request. Could you please consider this?
+diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+index f9484eb..7d16930 100644
+--- a/man/mkfs.f2fs.8
++++ b/man/mkfs.f2fs.8
+@@ -93,8 +93,8 @@ Specify the level of debugging options.
+ The default number is 0, which shows basic debugging messages.
+ .TP
+ .BI \-e " extension-list"
+-Specify a file extension list in order f2fs to treat them as cold files.
+-The data of files having those extensions will be stored to the cold log.
++Specify a list of file extensions which f2fs will treat as cold files, i.e.
++data of files having those extensions will be written to the cold log.
+ The default list includes most of multimedia file extensions such as jpg, gif,
+ mpeg, mkv, and so on.
+ .TP
+@@ -107,22 +107,21 @@ there is a filesystem or partition table on the device already.
+ Specify the volume label to the partition mounted as F2FS.
+ .TP
+ .BI \-m
+-Specify f2fs filesystem to supports the block zoned feature.
+-Without it, the filesystem isn't supports the feature.
++Turn on the block zoned feature support.
++Without this flag the filesystem won't support it.
+ .TP
+ .BI \-o " overprovision-ratio-percentage"
+-Specify the percentage over the volume size for overprovision area. This area
+-is hidden to users, and utilized by F2FS cleaner. If not specified, the best
+-number will be assigned automatically accoring to the partition size.
++Specify the percentage of the volume size that will be used for overprovision area.
++This area is hidden to users, and utilized by F2FS cleaner. If not specified, the best
++number will be assigned automatically, according to the partition size.
+ .TP
+ .BI \-O " feature-list"
+-Specify a feature list like feature1[feature2,feature3,...] in order f2fs
+-filesystem will supports.
++Specify a feature list like feature1[,feature2,feature3,...] which the
++filesystem will support.
+ e.g "encrypt" and so on.
+ .TP
+ .BI \-q
+-Quiet mode.
+-With it, mkfs.f2fs does not show any messages include the basic messages.
++Quiet mode - do not show any messages.
+ .TP
+ .BI \-R
+ Give root_owner option for initial uid/gid assignment.
+-- 
+2.25.1
 
-Thanks,
-
-The following changes since commit b19e8c68470385dd2c5440876591fddb02c8c402:
-
-  Merge tag 'arm64-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux (2020-02-13 14:36:57 -0800)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.6-rc6
-
-for you to fetch changes up to 2536ac6872e5265b4d9d263122cee02e3d5cae1d:
-
-  f2fs: allow to clear F2FS_COMPR_FL flag (2020-03-11 08:25:38 -0700)
-
-----------------------------------------------------------------
-f2fs-for-5.6-rc6
-
-Some major bug fixes wrt compression:
-- compressed block count
-- memory access and leak
-- remove obsolete fields
-- flag controls
-
-And some others:
-- replace rwsem with spinlock
-- potential deadlock
-
-----------------------------------------------------------------
-Chao Yu (14):
-      f2fs: fix to wait all node page writeback
-      f2fs: fix to avoid NULL pointer dereference
-      f2fs: recycle unused compress_data.chksum feild
-      f2fs: add missing function name in kernel message
-      f2fs: fix to avoid potential deadlock
-      f2fs: fix to check i_compr_blocks correctly
-      f2fs: cover last_disk_size update with spinlock
-      f2fs: remove i_sem lock coverage in f2fs_setxattr()
-      f2fs: fix inconsistent comments
-      f2fs: fix to avoid using uninitialized variable
-      f2fs: fix to avoid use-after-free in f2fs_write_multi_pages()
-      f2fs: fix to account compressed inode correctly
-      f2fs: fix to check dirty pages during compressed inode conversion
-      f2fs: allow to clear F2FS_COMPR_FL flag
-
-Eric Biggers (1):
-      f2fs: fix leaking uninitialized memory in compressed clusters
-
-Jaegeuk Kim (1):
-      f2fs: fix wrong check on F2FS_IOC_FSSETXATTR
-
-Sahitya Tummala (1):
-      f2fs: fix the panic in do_checkpoint()
-
- fs/f2fs/checkpoint.c | 34 +++++++++++-----------------------
- fs/f2fs/compress.c   | 24 ++++++++++++++----------
- fs/f2fs/data.c       | 23 ++++++++---------------
- fs/f2fs/f2fs.h       | 18 ++++++++++--------
- fs/f2fs/file.c       | 40 +++++++++++++++++++++++++---------------
- fs/f2fs/gc.c         |  5 ++++-
- fs/f2fs/inode.c      | 25 +++++++++++++++++++++----
- fs/f2fs/namei.c      |  2 +-
- fs/f2fs/node.c       | 18 ++++++++----------
- fs/f2fs/shrinker.c   |  2 +-
- fs/f2fs/super.c      |  7 ++++---
- fs/f2fs/xattr.c      |  3 ---
- 12 files changed, 107 insertions(+), 94 deletions(-)
 
 
 _______________________________________________
