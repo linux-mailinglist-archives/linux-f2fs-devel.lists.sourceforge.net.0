@@ -2,61 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 040981822C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2020 20:49:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7F55182376
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2020 21:45:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jC7LZ-0002a3-HR; Wed, 11 Mar 2020 19:48:53 +0000
+	id 1jC8E6-0004Gd-GO; Wed, 11 Mar 2020 20:45:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jC7LX-0002Zq-RJ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 19:48:51 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1jC8E5-0004GR-H3
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 20:45:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OrId9KCjmGjUXLdxmPHUp/Q/wou5a/mcd5X6jSO0xps=; b=Ny2KJdcFYBfPFnO9swNRZLtDA0
- C+ddUtrAo6aCfEpQMbGWsaioZhyO4dANiJoSTyyCiIGy4HS8NNhKJgcd4ny4Z98KSsZMVRmWBBjsK
- NuZVSTaIDiEmbnVjBhK4wEIDKP74dN5Q5JAT6FzZLapnGlJoH9y4vg+ZlJuv6YpNx4MI=;
+ bh=+i3muPD+8G5NjEHsrC2AR3Vj9hX0xw6UXJUKOt17o/A=; b=IzZoApru8bxDC20e3P1x6A1zvk
+ 4p31aPck6mgx9uc1Yb3x+sfGVxauW2bHFCfJAp/992gj7w8wpanOHYPxhfDVMFMgD0AJp/0t1g29l
+ jPO76X0iO3Ce8ukl+WpQXjtFMrED/qbBsZHUJdNh9OTIFzw9q9H1ks6xFzlppoJ0aMe8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=OrId9KCjmGjUXLdxmPHUp/Q/wou5a/mcd5X6jSO0xps=; b=h
- z87opTC0kCR8Fb0RieJpU2BI/L58X2IN9hDtjMP4WtfkL74Dc0CFI9+Y4gFPy9A3JGhOAE+OWH8by
- OMocCfp7JXcfDRVehtxZNk7mWS5TyTgSPtnQAmL1WZ1KTK4fydJrF53ySOkXDMaO2UrbosEna/hSi
- tg8O7ZAKs/YJHADs=;
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+i3muPD+8G5NjEHsrC2AR3Vj9hX0xw6UXJUKOt17o/A=; b=Jc3YCjGXvqjQxUwNDgQygCSCTW
+ F0Z3L/PjZoi7q0eBmBF+lh1mS15x71PwUFkhrwZgdWXmJ/z3W3PvUhdwkdQL7OYH+3UtuE+ihahPZ
+ wlv5EeUZtGz/fbkR6NhJd4AlkpN8xwQxcCEPICMJwNK6sqRBQ0dKjTtN6k13bX0Lk1Rk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jC7LT-00FuUz-Ph
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 19:48:51 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5F6A020691;
- Wed, 11 Mar 2020 19:48:42 +0000 (UTC)
+ id 1jC8E0-008iQw-7y
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Mar 2020 20:45:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1583956122;
- bh=NTCCQBA/qngUM9vruihaGQpLvV8cowQXBnlryjh7duc=;
- h=Date:From:To:Cc:Subject:From;
- b=v/jab1Mtz7GdBG9uHSDV6k2H9A5ugStqAz7qXsT5oSvLW0R8a6a71HOmgfCea5clU
- G66Us11UI+4tNO3Dj0FH7tIcAgD6G5vzcw6dOTDobm5SYL6M1oFXxg7KIYICRZtMGR
- 9CaWX6LC7nIdux3wMMCMyiTs0f5kOJR5zRFuyh0M=
-Date: Wed, 11 Mar 2020 12:48:39 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20200311194839.GB41227@sol.localdomain>
-MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -0.4 (/)
+ s=default; t=1583959502;
+ bh=BpqMPqVMEExHAmwE9Beff6FPwRMgQuXwVzkTYS3rtlU=;
+ h=From:In-Reply-To:References:Date:To:Cc:From;
+ b=Xs0c8KJMFvlIzYcA40MhFlGm1IOWy8yJpK+Fr+m+FqJo0T4F6QMhQO5I8brlBTQQ9
+ uN96LInyTlX1axYS0S+hFluaPchZGwlMsSGXC1kNPWesIoYBt+wReS3ilar28gicxk
+ whhVJL8+3q1awpkbNsNhFivAMtRZl/XbkoeJm9ig=
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20200311194839.GB41227@sol.localdomain>
+References: <20200311194839.GB41227@sol.localdomain>
+X-PR-Tracked-List-Id: <linux-fsdevel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20200311194839.GB41227@sol.localdomain>
+X-PR-Tracked-Remote: https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
+ tags/fscrypt-for-linus
+X-PR-Tracked-Commit-Id: 2b4eae95c7361e0a147b838715c8baa1380a428f
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: e6e6ec48dd0fa12e8a2d1ff6b55cd907401bd7fe
+Message-Id: <158395950136.14877.831369511825672693.pr-tracker-bot@kernel.org>
+Date: Wed, 11 Mar 2020 20:45:01 +0000
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -67,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jC7LT-00FuUz-Ph
-Subject: [f2fs-dev] [GIT PULL] fscrypt fix for v5.6-rc6
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jC8E0-008iQw-7y
+Subject: Re: [f2fs-dev] [GIT PULL] fscrypt fix for v5.6-rc6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,42 +86,25 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The following changes since commit 98d54f81e36ba3bf92172791eba5ca5bd813989b:
+The pull request you sent on Wed, 11 Mar 2020 12:48:39 -0700:
 
-  Linux 5.6-rc4 (2020-03-01 16:38:46 -0600)
+> https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
 
-are available in the Git repository at:
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/e6e6ec48dd0fa12e8a2d1ff6b55cd907401bd7fe
 
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
+Thank you!
 
-for you to fetch changes up to 2b4eae95c7361e0a147b838715c8baa1380a428f:
-
-  fscrypt: don't evict dirty inodes after removing key (2020-03-07 18:43:07 -0800)
-
-----------------------------------------------------------------
-
-Fix a bug where if userspace is writing to encrypted files while the
-FS_IOC_REMOVE_ENCRYPTION_KEY ioctl (introduced in v5.4) is running,
-dirty inodes could be evicted, causing writes could be lost or the
-filesystem to hang due to a use-after-free.  This was encountered during
-real-world use, not just theoretical.
-
-Tested with the existing fscrypt xfstests, and with a new xfstest I
-wrote to reproduce this bug.  This fix does expose an existing bug with
-'-o lazytime' that Ted is working on fixing, but this fscrypt fix is
-more critical and is needed anyway regardless of the lazytime fix.
-
-----------------------------------------------------------------
-Eric Biggers (1):
-      fscrypt: don't evict dirty inodes after removing key
-
- fs/crypto/keysetup.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.wiki.kernel.org/userdoc/prtracker
 
 
 _______________________________________________
