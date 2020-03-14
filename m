@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 959A918564C
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E15018564B
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Mar 2020 21:53:39 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jDDmn-0006bx-G4; Sat, 14 Mar 2020 20:53:33 +0000
+	id 1jDDmn-0006bk-Ck; Sat, 14 Mar 2020 20:53:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jDDmj-0006bE-9y
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jDDmh-0006ax-Ew
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Pp6U9zxw1ahQ6NP++1Emk0WMyLUkSoYXAFsBl+jYMSw=; b=dv8b1y8QCajI3RSfokJW3BbgxI
- EbtgL4ajo9JcvnDOfwJvPTYTYKgiwYJmBn2uARewrcjyvf9SumiG9a/yLAwh4COnSFKxdsN2ECdP3
- UGYG/KDqS5qdXtMKHrGiiJYhqG/Ozvyhs7PrChWXCyJTrObb2XHU31uL7tV72sVuMcds=;
+ bh=g94DROzKBKvyq90FK5hc2TC1+1+K+aPsRCLWN885u9E=; b=TGQrws2FNwf7BtaP/AEs/rQuVu
+ 5IOJO7LVQ+MBoXmJuQ8pa5M7+dQyUhse3n1mhI4RKaCRvQYZ5vKTsb/JCskqOtrYBejY7C3ral/f3
+ I2LzmzVc9GfFxYYwNxUDbNYJuFyyZA25PaWTjESOsgMzhC9gD8i9Mt1W7tQ/75YtlJGY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Pp6U9zxw1ahQ6NP++1Emk0WMyLUkSoYXAFsBl+jYMSw=; b=NL13iRZY+zYVj6XbS4W+TFAfYY
- OZcO1zfDvj+U/5e7U4VM0aA1GyiQMVH6NiMlzKS4CbhkKFnkXbtf7yDiYgHpI2tbkhk5vlS5r2d7D
- qaGX0Usoypug7YfeAcvIMUzaskHZREzuvfBME3sExu9hYskWCKfRhBHIFsP1CPPRcPUs=;
+ bh=g94DROzKBKvyq90FK5hc2TC1+1+K+aPsRCLWN885u9E=; b=jEmHYuTjPH4LBrrMMejoqMlQCP
+ OjM1iu5Cm1iWe4ECSoNdpdzH1UsBP4kZgv9skpd2C73CZHKXsu4aOpsZeJ4uErMtSgO9jU2CoMm6J
+ zkGsjq3LO/21ESVIbdJUnJgMCNOCvhw2dOScduLBbNKfcmQgE2nvOYsX+g1dDLBoGwdM=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jDDmi-001Nos-8H
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:29 +0000
+ id 1jDDmd-007VBY-TU
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:27 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9A95620790;
+ by mail.kernel.org (Postfix) with ESMTPSA id EADF720791;
  Sat, 14 Mar 2020 20:53:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584219193;
- bh=CmnZSp1cD9W7GBGuNrZlONVYibn7gCqqoj6gfIP9vA4=;
+ s=default; t=1584219194;
+ bh=ZzuiXJqO7xJuPiMyB/BPCRwhFr979eXQdYA1WeJwYWU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gZfFkIOMgxmssruP+ea9EmjgNTu0xB1lPyOJtKrZoCw0s+W9sImhe8b8XapQ7wupz
- k50I7OFwE0y6DZSyUAaqAE1YEnztPP4sMCFh4vnyxj01ht3I67/QjbWDkGypsH3cxy
- winlpMSIqpy6GLkVeR2z71N6lCVDH7b4zg7GOjn8=
+ b=hAaAM7yRrqMusd/sK52UdwQpOzgF3eiT9ddaMqxp+st3LMnrNcXRPOBlYKENxE8q8
+ en7uS4J+vpq0fp2GA3ZxV+CrJYXX6hBYwnhSbT0f+RARhtTLKPM9O3o5/80ffNQxxk
+ nrdzx8iSktHeW2Jeb7tnkEWDGz5XJKI76gJnQZlk=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sat, 14 Mar 2020 13:50:50 -0700
-Message-Id: <20200314205052.93294-3-ebiggers@kernel.org>
+Date: Sat, 14 Mar 2020 13:50:51 -0700
+Message-Id: <20200314205052.93294-4-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200314205052.93294-1-ebiggers@kernel.org>
 References: <20200314205052.93294-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 1.0 (+)
+X-Spam-Score: 0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -1.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jDDmi-001Nos-8H
-Subject: [f2fs-dev] [PATCH 2/4] ext4: wire up FS_IOC_GET_ENCRYPTION_NONCE
+ -1.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jDDmd-007VBY-TU
+Subject: [f2fs-dev] [PATCH 3/4] f2fs: wire up FS_IOC_GET_ENCRYPTION_NONCE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,33 +98,45 @@ testing.  See the corresponding fs/crypto/ patch for more details.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/ioctl.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/f2fs/file.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
-index a0ec750018dd3..0c1d1720cf1ae 100644
---- a/fs/ext4/ioctl.c
-+++ b/fs/ext4/ioctl.c
-@@ -1210,6 +1210,11 @@ long ext4_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 			return -EOPNOTSUPP;
- 		return fscrypt_ioctl_get_key_status(filp, (void __user *)arg);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 0d4da644df3bc..351762f778405 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2423,6 +2423,14 @@ static int f2fs_ioc_get_encryption_key_status(struct file *filp,
+ 	return fscrypt_ioctl_get_key_status(filp, (void __user *)arg);
+ }
  
-+	case FS_IOC_GET_ENCRYPTION_NONCE:
-+		if (!ext4_has_feature_encrypt(sb))
-+			return -EOPNOTSUPP;
-+		return fscrypt_ioctl_get_nonce(filp, (void __user *)arg);
++static int f2fs_ioc_get_encryption_nonce(struct file *filp, unsigned long arg)
++{
++	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
++		return -EOPNOTSUPP;
 +
- 	case EXT4_IOC_CLEAR_ES_CACHE:
- 	{
- 		if (!inode_owner_or_capable(inode))
-@@ -1370,6 +1375,7 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
++	return fscrypt_ioctl_get_nonce(filp, (void __user *)arg);
++}
++
+ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
+ {
+ 	struct inode *inode = file_inode(filp);
+@@ -3437,6 +3445,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ 		return f2fs_ioc_remove_encryption_key_all_users(filp, arg);
+ 	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
+ 		return f2fs_ioc_get_encryption_key_status(filp, arg);
++	case FS_IOC_GET_ENCRYPTION_NONCE:
++		return f2fs_ioc_get_encryption_nonce(filp, arg);
+ 	case F2FS_IOC_GARBAGE_COLLECT:
+ 		return f2fs_ioc_gc(filp, arg);
+ 	case F2FS_IOC_GARBAGE_COLLECT_RANGE:
+@@ -3611,6 +3621,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
  	case FS_IOC_REMOVE_ENCRYPTION_KEY:
  	case FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS:
  	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
 +	case FS_IOC_GET_ENCRYPTION_NONCE:
- 	case EXT4_IOC_SHUTDOWN:
- 	case FS_IOC_GETFSMAP:
- 	case FS_IOC_ENABLE_VERITY:
+ 	case F2FS_IOC_GARBAGE_COLLECT:
+ 	case F2FS_IOC_GARBAGE_COLLECT_RANGE:
+ 	case F2FS_IOC_WRITE_CHECKPOINT:
 -- 
 2.25.1
 
