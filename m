@@ -2,77 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B53B18564D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Mar 2020 21:53:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA646185EA7
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Mar 2020 18:17:22 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jDDmj-0002dv-CK; Sat, 14 Mar 2020 20:53:29 +0000
+	id 1jDWsv-0003Mk-Kg; Sun, 15 Mar 2020 17:17:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jDDmg-0002dm-J4
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:26 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jDWsu-0003MZ-Fj
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:17:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CFqDkCPnjOfvQPkkCG9GnjiyYIxcYe3v7qvvBrMQnWA=; b=mAe7WE/On8xbqj4auBSQduQURe
- QFplpQGlLHAh6k9yJ0cklbLY9dKceqrOHvl35ZRrJHDZZIg3RgGK4bSStvUyojqInPQnbffjQnyEe
- sjYOE68KhOKGa9cDU2aU6BRGxGkhHgZ66bOqfxziJirE/eTtzd5mR6Ch3REMrxUMEdnk=;
+ bh=1u7noUF5hbjOzf1Cqm3pnq4R2FK6W1wARcJl3hl/RGw=; b=Y6sdcna+1QmtH28qzzzOgIMwPi
+ NrZRuGc5lk/xucB99/5tuSx+kZ8G1SSbi2+xAyhAGy6AmEJdc17X96j83qxzqTIqXpP8zTKn2myFZ
+ wtlUaCu+3MUzlV5rRh16+YAR4XGgM5I/k10Z92UEGF/BaKvtIStkqeC6p/RgKh2NkGdQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CFqDkCPnjOfvQPkkCG9GnjiyYIxcYe3v7qvvBrMQnWA=; b=cx1LGBmS7iUCsdP8yIWDu6uG4h
- Rs0LGCCxj1+kVofiUwhymCJssVRza7zXCnyFqWXnwKnBk0e6lbXeRrfLvFsF2zL/bxT5VkH/XZ13+
- Jcd4RbTMEA671CUOPK9xAr5jHWc0eRXJoS3sPPyIFbkSn3iF8B1cYauwBeSGf/NhsroI=;
+ bh=1u7noUF5hbjOzf1Cqm3pnq4R2FK6W1wARcJl3hl/RGw=; b=K6D9NpW+PHVs8gxW5/OkM+D/38
+ JAqZSYaVgC4VTy/K08A+lBHwAJ7riKgu3EO40LhNtEVHN2UfaoJZOnKLum+BNhSeujhk+awVN/Zdz
+ kYK/zG4auE8fQaD3g3KRbu230xe+GP8XtEcJ3emwP+l6kL6A4FF23GL/sLLlm4qfSwwE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jDDmd-00BCJH-Im
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Mar 2020 20:53:26 +0000
-Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
+ id 1jDWsq-00Btls-Jw
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:17:08 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4A39620792;
- Sat, 14 Mar 2020 20:53:14 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BC567206E9;
+ Sun, 15 Mar 2020 17:16:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584219194;
- bh=BekzoYGRaAG7hdnMIHYnXydLgmN0afGG/lRCyAbxsow=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DxtA5FndvEQrWYJ1lLT38U6RoCkJTTKARYiBRkYMxyhpzJqs9rlw1ebJKhqeONoVc
- PrGI+9cNJaMxe/l32l3G3sElzfnTGKgS9d3i70orWJl/g5fzCmYnfWgQhCRW8GsDd3
- AUxOd5Pk7uahYWHoTpKyZYZRStA9y4nu6SuMdczo=
+ s=default; t=1584292614;
+ bh=+lmpvdxUBRgyrzSD7k7JSLFEM42g3oWA97s0+PhrLF8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fz8xheLuuQR+wB/DfIa8fMDHBJ96eTBl6qoUQEPumGFkmN+p2eeRitOsIvPQcwEWX
+ sRdvJhFc0FfCr/6CNrztD5Ta/DRrUiu5/aYHe+U70wAB9I8f7fFCSoPsWq5PyGQl0F
+ bbS551kFvD0b5ZrLw8+8RdX4rlEDR7PjNypkYRrs=
+Date: Sun, 15 Mar 2020 10:16:52 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Sat, 14 Mar 2020 13:50:52 -0700
-Message-Id: <20200314205052.93294-5-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200314205052.93294-1-ebiggers@kernel.org>
-References: <20200314205052.93294-1-ebiggers@kernel.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20200315171652.GA1055@sol.localdomain>
+References: <20200312080253.3667-1-satyat@google.com>
+ <20200312080253.3667-11-satyat@google.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.8 (/)
+Content-Disposition: inline
+In-Reply-To: <20200312080253.3667-11-satyat@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -1.6 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jDDmd-00BCJH-Im
-Subject: [f2fs-dev] [PATCH 4/4] ubifs: wire up FS_IOC_GET_ENCRYPTION_NONCE
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jDWsq-00Btls-Jw
+Subject: Re: [f2fs-dev] [PATCH v8 10/11] f2fs: add inline encryption support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,48 +84,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Thu, Mar 12, 2020 at 01:02:52AM -0700, Satya Tangirala wrote:
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 5355be6b6755..75817f0dc6f8 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -139,6 +139,9 @@ struct f2fs_mount_info {
+>  	int alloc_mode;			/* segment allocation policy */
+>  	int fsync_mode;			/* fsync policy */
+>  	bool test_dummy_encryption;	/* test dummy encryption */
+> +#ifdef CONFIG_FS_ENCRYPTION
+> +	bool inlinecrypt;		/* inline encryption enabled */
+> +#endif
+>  	block_t unusable_cap;		/* Amount of space allowed to be
+>  					 * unusable when disabling checkpoint
+>  					 */
 
-This new ioctl retrieves a file's encryption nonce, which is useful for
-testing.  See the corresponding fs/crypto/ patch for more details.
+This bool is unused now.
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/ubifs/ioctl.c | 4 ++++
- 1 file changed, 4 insertions(+)
+> @@ -1568,6 +1577,9 @@ static void default_options(struct f2fs_sb_info *sbi)
+>  	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
+>  	F2FS_OPTION(sbi).fsync_mode = FSYNC_MODE_POSIX;
+>  	F2FS_OPTION(sbi).test_dummy_encryption = false;
+> +#ifdef CONFIG_FS_ENCRYPTION
+> +	sbi->sb->s_flags &= ~SB_INLINECRYPT;
+> +#endif
 
-diff --git a/fs/ubifs/ioctl.c b/fs/ubifs/ioctl.c
-index d49fc04f2d7d4..3df9be2c684c3 100644
---- a/fs/ubifs/ioctl.c
-+++ b/fs/ubifs/ioctl.c
-@@ -208,6 +208,9 @@ long ubifs_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
- 		return fscrypt_ioctl_get_key_status(file, (void __user *)arg);
- 
-+	case FS_IOC_GET_ENCRYPTION_NONCE:
-+		return fscrypt_ioctl_get_nonce(file, (void __user *)arg);
-+
- 	default:
- 		return -ENOTTY;
- 	}
-@@ -230,6 +233,7 @@ long ubifs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case FS_IOC_REMOVE_ENCRYPTION_KEY:
- 	case FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS:
- 	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
-+	case FS_IOC_GET_ENCRYPTION_NONCE:
- 		break;
- 	default:
- 		return -ENOIOCTLCMD;
--- 
-2.25.1
+This really should be CONFIG_FS_ENCRYPTION_INLINE_CRYPT, but actually there's no
+need for the #ifdef at all.  Just clear the flag unconditionally.
 
+- Eric
 
 
 _______________________________________________
