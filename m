@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA646185EA7
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Mar 2020 18:17:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B18C7185EB6
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Mar 2020 18:20:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jDWsv-0003Mk-Kg; Sun, 15 Mar 2020 17:17:09 +0000
+	id 1jDWvx-0002y2-5r; Sun, 15 Mar 2020 17:20:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jDWsu-0003MZ-Fj
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:17:08 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jDWvv-0002xu-7a
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:20:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1u7noUF5hbjOzf1Cqm3pnq4R2FK6W1wARcJl3hl/RGw=; b=Y6sdcna+1QmtH28qzzzOgIMwPi
- NrZRuGc5lk/xucB99/5tuSx+kZ8G1SSbi2+xAyhAGy6AmEJdc17X96j83qxzqTIqXpP8zTKn2myFZ
- wtlUaCu+3MUzlV5rRh16+YAR4XGgM5I/k10Z92UEGF/BaKvtIStkqeC6p/RgKh2NkGdQ=;
+ bh=CWLpPDoFHazfjx32kSjsxWwwhng2wiYDVsnBb/th+1I=; b=DM+pf2ipulTYl2DgmAUq4ELkqT
+ qzXG5f/1BJ9aqxAhwKRQmwJQVNuargKNOtM+5P24F2KxA92C4TiHizKDHj2cpYmVSWUeBrwTLst4h
+ 7jIKYtB0rM9EBetywoe1p9QhErSvVDE74ufl6z1n+Y+35d0nLMROdq1eISEUkgxdW2hc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1u7noUF5hbjOzf1Cqm3pnq4R2FK6W1wARcJl3hl/RGw=; b=K6D9NpW+PHVs8gxW5/OkM+D/38
- JAqZSYaVgC4VTy/K08A+lBHwAJ7riKgu3EO40LhNtEVHN2UfaoJZOnKLum+BNhSeujhk+awVN/Zdz
- kYK/zG4auE8fQaD3g3KRbu230xe+GP8XtEcJ3emwP+l6kL6A4FF23GL/sLLlm4qfSwwE=;
+ bh=CWLpPDoFHazfjx32kSjsxWwwhng2wiYDVsnBb/th+1I=; b=N5XrmGx6u8HZYTjx7lL5e6c5+i
+ hvRKSFMJYU1BIEXEGyR7FNf99MM27/01JCWWHi5Zt5h2VfBtBlGqGhgtmFMacvohwwVgt3cpSCiBg
+ jDyq2g28JYpxPbRkP2zf/gkxlyWGXcQ7SnFu7G4nmX7IOWpbvu8I/noOTAIvK5XWfwH8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jDWsq-00Btls-Jw
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:17:08 +0000
+ id 1jDWvu-00Btsx-4K
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 17:20:15 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BC567206E9;
- Sun, 15 Mar 2020 17:16:53 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3A404206E9;
+ Sun, 15 Mar 2020 17:20:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584292614;
- bh=+lmpvdxUBRgyrzSD7k7JSLFEM42g3oWA97s0+PhrLF8=;
+ s=default; t=1584292808;
+ bh=bAeTblsoxv+HFw200CM9Fo21wbK4gQ0eQ+AlWbrz0/0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=fz8xheLuuQR+wB/DfIa8fMDHBJ96eTBl6qoUQEPumGFkmN+p2eeRitOsIvPQcwEWX
- sRdvJhFc0FfCr/6CNrztD5Ta/DRrUiu5/aYHe+U70wAB9I8f7fFCSoPsWq5PyGQl0F
- bbS551kFvD0b5ZrLw8+8RdX4rlEDR7PjNypkYRrs=
-Date: Sun, 15 Mar 2020 10:16:52 -0700
+ b=GRv0yGuN17hv3d3+XX/JErNuOlQ9wEp2jXMDSSfAdKpQFimOJFZNYD4p+r7FN4mEh
+ 5DFaGOTng+jHOnJaslTMvshAzPnWw0R85Z0mtXdrqX1rBpNsOcbSNPgEvw0G6KN5bV
+ UK9YdrCVshpeCuEUEdP6m4SiLxIad2uylRMWyEm8=
+Date: Sun, 15 Mar 2020 10:20:06 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200315171652.GA1055@sol.localdomain>
+Message-ID: <20200315172006.GB1055@sol.localdomain>
 References: <20200312080253.3667-1-satyat@google.com>
- <20200312080253.3667-11-satyat@google.com>
+ <20200312080253.3667-10-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200312080253.3667-11-satyat@google.com>
+In-Reply-To: <20200312080253.3667-10-satyat@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jDWsq-00Btls-Jw
-Subject: Re: [f2fs-dev] [PATCH v8 10/11] f2fs: add inline encryption support
+X-Headers-End: 1jDWvu-00Btsx-4K
+Subject: Re: [f2fs-dev] [PATCH v8 09/11] fscrypt: add inline encryption
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,34 +95,44 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Mar 12, 2020 at 01:02:52AM -0700, Satya Tangirala wrote:
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 5355be6b6755..75817f0dc6f8 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -139,6 +139,9 @@ struct f2fs_mount_info {
->  	int alloc_mode;			/* segment allocation policy */
->  	int fsync_mode;			/* fsync policy */
->  	bool test_dummy_encryption;	/* test dummy encryption */
-> +#ifdef CONFIG_FS_ENCRYPTION
-> +	bool inlinecrypt;		/* inline encryption enabled */
-> +#endif
->  	block_t unusable_cap;		/* Amount of space allowed to be
->  					 * unusable when disabling checkpoint
->  					 */
+On Thu, Mar 12, 2020 at 01:02:51AM -0700, Satya Tangirala wrote:
+> +int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
+> +				     const u8 *raw_key,
+> +				     const struct fscrypt_info *ci)
+> +{
+> +	const struct inode *inode = ci->ci_inode;
+> +	struct super_block *sb = inode->i_sb;
+> +	enum blk_crypto_mode_num crypto_mode = ci->ci_mode->blk_crypto_mode;
+> +	unsigned int blk_crypto_dun_bytes;
 
-This bool is unused now.
+'blk_crypto_dun_bytes' is overly verbose.  'dun_bytes' would still be just as
+clear.
 
-> @@ -1568,6 +1577,9 @@ static void default_options(struct f2fs_sb_info *sbi)
->  	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
->  	F2FS_OPTION(sbi).fsync_mode = FSYNC_MODE_POSIX;
->  	F2FS_OPTION(sbi).test_dummy_encryption = false;
-> +#ifdef CONFIG_FS_ENCRYPTION
-> +	sbi->sb->s_flags &= ~SB_INLINECRYPT;
-> +#endif
+This comment also applies to the parameter to blk_crypto_init_key().
 
-This really should be CONFIG_FS_ENCRYPTION_INLINE_CRYPT, but actually there's no
-need for the #ifdef at all.  Just clear the flag unconditionally.
+> +/**
+> + * fscrypt_set_bio_crypt_ctx_bh - prepare a file contents bio for inline
+> + *				  encryption
+> + * @bio: a bio which will eventually be submitted to the file
+> + * @first_bh: the first buffer_head for which I/O will be submitted
+> + * @gfp_mask: memory allocation flags
+> + *
+> + * Same as fscrypt_set_bio_crypt_ctx(), except this takes a buffer_head instead
+> + * of an inode and block number directly.
+> + */
+> +void fscrypt_set_bio_crypt_ctx_bh(struct bio *bio,
+> +				 const struct buffer_head *first_bh,
+> +				 gfp_t gfp_mask)
+> +{
+> +	const struct inode *inode;
+> +	u64 first_lblk;
+> +
+> +	if (bh_get_inode_and_lblk_num(first_bh, &inode, &first_lblk))
+> +		fscrypt_set_bio_crypt_ctx(bio, inode, first_lblk, gfp_mask);
+> +}
+> +EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx_bh);
+
+Nit: the continuation lines for the function arguments aren't aligned.
 
 - Eric
 
