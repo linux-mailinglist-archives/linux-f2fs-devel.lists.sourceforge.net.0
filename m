@@ -2,78 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0F0A185FBB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Mar 2020 21:16:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A97E1860F6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Mar 2020 01:53:04 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jDZgX-0002pK-Ci; Sun, 15 Mar 2020 20:16:33 +0000
+	id 1jDdzt-0006QJ-IW; Mon, 16 Mar 2020 00:52:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jDZgW-0002pC-1P
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 20:16:32 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jDdzr-0006QA-Uk
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Mar 2020 00:52:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gpGo81BCJYvZ8yssCETvJT94D0auTLliWXJOXdn9/gc=; b=TPnl99Nw0IZRSrN6VSoFb6EP94
- NoW+BzRF8+fMLo49yAPDgcD+zLoxgn5qCqT0/xZ0vWvz5BMDXI/hB62IXlwPb03pRM2axro46qU3W
- x1uVGRk77Im2FEjvaHOysHDyJkScIdNnwuZmxxQuFkaJCzU2tDXAhOqFcohl9tPym3Ww=;
+ bh=OAXWphv3NZw6ANv7DQmwXfchLi3reTRCNidmJrajFhA=; b=P0B7Re9gLreyOPz1QsxILzcQrt
+ V45thAcZGvftEo+aTfvFENML1wOHqRnQ/Tggw+yZRiWxH6JmAwUcMtR3a7IIImaFPZt/ZpNBbtIsj
+ hpp6yxizNsyMGMN2oWTOmdgdC0LL6blatroA3IkSrTYWi10EatK2OaBfO1r3a/FRBsD0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gpGo81BCJYvZ8yssCETvJT94D0auTLliWXJOXdn9/gc=; b=eX/lXk3C8nLwPZetPsuCCznWJF
- W6dRhnEAikKNmBjS1EYqq/3qlQ0mNaemlL/ESK5jL/gkqoYgbM0WPjWzydi73WZ71VzWQIV+xvao3
- q/bSwqe8O1ekzxYkhtd0PjTBxqHZbBrrgrVDH6KIysiVQ9N3kZk4F/Wybn7c8UzVT3Q0=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=OAXWphv3NZw6ANv7DQmwXfchLi3reTRCNidmJrajFhA=; b=d9PO1UgJ8MjT6KTL0CVAwFnv2u
+ 3HsYSyCNLUFqwmN/8SXPhkwbiIRgsWcb6dSGy21V+TPZIMAzG4vTetf/b0+7iGMee0sQIp7w3qKqm
+ dnIAuURgKG2yV3TWW1nIajWXrh67mu2q3L3/uU7+TqbipMJDz2hAx0+jpmGdFeHn6EzU=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jDZgQ-00Bz2m-62
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 20:16:32 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4834A205C9;
- Sun, 15 Mar 2020 20:16:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584303380;
- bh=5VqbqRCMOuCKrwhIgRoKM6xoalmVSXXR/W2soqbZ1L0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=EcUzhGIuXaHU9vfOPWYtMg5tNxsoTitGkBlfvXySVUWt6Iu1NQNDAB8LCd1+0Nvyt
- 4XcWpBlIK/3A1T+NUUSkZwIzsU4SL3OLRuehrOjZp/6w9mEHq4mVL63J3TZCxfZEB0
- 4hZ1adM0h2K2JuNo4FFTY29yf4DUchHuTWpNOS4I=
-Date: Sun, 15 Mar 2020 13:16:18 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200315201618.GH1055@sol.localdomain>
-References: <20200312080253.3667-1-satyat@google.com>
- <20200312080253.3667-4-satyat@google.com>
+ id 1jDdzm-002Vsj-PC
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Mar 2020 00:52:47 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 25AF7FB1864F123E307B;
+ Mon, 16 Mar 2020 08:52:31 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 16 Mar
+ 2020 08:52:26 +0800
+To: Sahitya Tummala <stummala@codeaurora.org>
+References: <1584011671-20939-1-git-send-email-stummala@codeaurora.org>
+ <fa7d88ee-01e2-e82c-6c79-f24b90fbd472@huawei.com>
+ <20200313033912.GJ20234@codeaurora.org>
+ <a8f01157-0b1b-d83a-488d-bb48cf8954ab@huawei.com>
+ <20200313110846.GL20234@codeaurora.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20d3b7ef-b216-6e46-58fd-7f1c96d4a8d3@huawei.com>
+Date: Mon, 16 Mar 2020 08:52:25 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200312080253.3667-4-satyat@google.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200313110846.GL20234@codeaurora.org>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: codeaurora.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jDZgQ-00Bz2m-62
-Subject: Re: [f2fs-dev] [PATCH v8 03/11] block: Make blk-integrity preclude
- hardware inline encryption
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jDdzm-002Vsj-PC
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix long latency due to discard during
+ umount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,89 +83,140 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Mar 12, 2020 at 01:02:45AM -0700, Satya Tangirala wrote:
-> diff --git a/block/blk-integrity.c b/block/blk-integrity.c
-> index ff1070edbb40..793ba23e8688 100644
-> --- a/block/blk-integrity.c
-> +++ b/block/blk-integrity.c
-> @@ -409,6 +409,13 @@ void blk_integrity_register(struct gendisk *disk, struct blk_integrity *template
->  	bi->tag_size = template->tag_size;
->  
->  	disk->queue->backing_dev_info->capabilities |= BDI_CAP_STABLE_WRITES;
-> +
-> +#ifdef BLK_INLINE_ENCRYPTION
-> +	if (disk->queue->ksm) {
-> +		pr_warn("blk-integrity: Integrity and hardware inline encryption are not supported together. Unregistering keyslot manager from request queue, to disable hardware inline encryption.");
-> +		blk_ksm_unregister(disk->queue);
-> +	}
-> +#endif
->  }
->  EXPORT_SYMBOL(blk_integrity_register);
+On 2020/3/13 19:08, Sahitya Tummala wrote:
+> On Fri, Mar 13, 2020 at 02:30:55PM +0800, Chao Yu wrote:
+>> On 2020/3/13 11:39, Sahitya Tummala wrote:
+>>> On Fri, Mar 13, 2020 at 10:20:04AM +0800, Chao Yu wrote:
+>>>> On 2020/3/12 19:14, Sahitya Tummala wrote:
+>>>>> F2FS already has a default timeout of 5 secs for discards that
+>>>>> can be issued during umount, but it can take more than the 5 sec
+>>>>> timeout if the underlying UFS device queue is already full and there
+>>>>> are no more available free tags to be used. In that case, submit_bio()
+>>>>> will wait for the already queued discard requests to complete to get
+>>>>> a free tag, which can potentially take way more than 5 sec.
+>>>>>
+>>>>> Fix this by submitting the discard requests with REQ_NOWAIT
+>>>>> flags during umount. This will return -EAGAIN for UFS queue/tag full
+>>>>> scenario without waiting in the context of submit_bio(). The FS can
+>>>>> then handle these requests by retrying again within the stipulated
+>>>>> discard timeout period to avoid long latencies.
+>>>>>
+>>>>> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+>>>>> ---
+>>>>>  fs/f2fs/segment.c | 14 +++++++++++++-
+>>>>>  1 file changed, 13 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>>>> index fb3e531..a06bbac 100644
+>>>>> --- a/fs/f2fs/segment.c
+>>>>> +++ b/fs/f2fs/segment.c
+>>>>> @@ -1124,10 +1124,13 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>>>>>  	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
+>>>>>  	struct list_head *wait_list = (dpolicy->type == DPOLICY_FSTRIM) ?
+>>>>>  					&(dcc->fstrim_list) : &(dcc->wait_list);
+>>>>> -	int flag = dpolicy->sync ? REQ_SYNC : 0;
+>>>>> +	int flag;
+>>>>>  	block_t lstart, start, len, total_len;
+>>>>>  	int err = 0;
+>>>>>  
+>>>>> +	flag = dpolicy->sync ? REQ_SYNC : 0;
+>>>>> +	flag |= dpolicy->type == DPOLICY_UMOUNT ? REQ_NOWAIT : 0;
+>>>>> +
+>>>>>  	if (dc->state != D_PREP)
+>>>>>  		return 0;
+>>>>>  
+>>>>> @@ -1203,6 +1206,11 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>>>>>  		bio->bi_end_io = f2fs_submit_discard_endio;
+>>>>>  		bio->bi_opf |= flag;
+>>>>>  		submit_bio(bio);
+>>>>> +		if ((flag & REQ_NOWAIT) && (dc->error == -EAGAIN)) {
+>>>>
+>>>> If we want to update dc->state, we need to cover it with dc->lock.
+>>>
+>>> Sure, will update it.
+>>>
+>>>>
+>>>>> +			dc->state = D_PREP;
+>>>>
+>>>> BTW, one dc can be referenced by multiple bios, so dc->state could be updated to
+>>>> D_DONE later by f2fs_submit_discard_endio(), however we just relocate it to
+>>>> pending list... which is inconsistent status.
+>>>
+>>> In that case dc->bio_ref will reflect it and until it becomes 0, the dc->state
+>>> will not be updated to D_DONE in f2fs_submit_discard_endio()?
+>>
+>> __submit_discard_cmd()
+>>  lock()
+>>  dc->state = D_SUBMIT;
+>>  dc->bio_ref++;
+>>  unlock()
+>> ...
+>>  submit_bio()
+>> 				f2fs_submit_discard_endio()
+>> 				 dc->error = -EAGAIN;
+>> 				 lock()
+>> 				 dc->bio_ref--;
+>>
+>>  dc->state = D_PREP;
+>>
+>> 				 dc->state = D_DONE;
+>> 				 unlock()
+>>
+>> So finally, dc's state is D_DONE, and it's in wait list, then will be relocated
+>> to pending list.
+> 
+> In case of queue full, f2fs_submit_discard_endio() will not be called
 
-This ifdef is wrong, it should be CONFIG_BLK_INLINE_ENCRYPTION.
+I guess the case is there are multiple bios related to one dc and partially callback
+of bio is called asynchronously and the other is called synchronously, so the race
+condition could happen.
 
-Also the log message is missing a trailing newline.
+Thanks,
 
->  
-> diff --git a/block/keyslot-manager.c b/block/keyslot-manager.c
-> index 38df0652df80..a7970e18a122 100644
-> --- a/block/keyslot-manager.c
-> +++ b/block/keyslot-manager.c
-> @@ -25,6 +25,9 @@
->   * Upper layers will call blk_ksm_get_slot_for_key() to program a
->   * key into some slot in the inline encryption hardware.
->   */
-> +
-> +#define pr_fmt(fmt) "blk_ksm: " fmt
-
-People aren't going to know what "blk_ksm" means in the logs.
-I think just use "blk-crypto" instead.
-
-> +
->  #include <crypto/algapi.h>
->  #include <linux/keyslot-manager.h>
->  #include <linux/atomic.h>
-> @@ -375,3 +378,20 @@ void blk_ksm_destroy(struct keyslot_manager *ksm)
->  	memzero_explicit(ksm, sizeof(*ksm));
->  }
->  EXPORT_SYMBOL_GPL(blk_ksm_destroy);
-> +
-> +bool blk_ksm_register(struct keyslot_manager *ksm, struct request_queue *q)
-> +{
-> +	if (blk_integrity_queue_supports_integrity(q)) {
-> +		pr_warn("Integrity and hardware inline encryption are not supported together. Won't register keyslot manager with request queue.");
-> +		return false;
-> +	}
-> +	q->ksm = ksm;
-> +	return true;
-> +}
-> +EXPORT_SYMBOL_GPL(blk_ksm_register);
-
-
-People reading the logs won't know what a keyslot manager is and why they should
-care that one wasn't registered.  It would be better to say that hardware inline
-encryption is being disabled.
-
-Ideally the device name would be included in the message too.
-
-> +
-> +void blk_ksm_unregister(struct request_queue *q)
-> +{
-> +	q->ksm = NULL;
-> +}
-> +EXPORT_SYMBOL_GPL(blk_ksm_unregister);
-
-blk_ksm_unregister() doesn't need to be exported.
+> asynchronously. It will be called in the context of submit_bio() itself.
+> So by the time, submit_bio returns dc->error will be -EAGAIN and dc->state
+> will be D_DONE. 
+> 
+> submit_bio()
+> ->blk_mq_make_request
+> ->blk_mq_get_request()
+>   ->bio_wouldblock_error() (called due to queue full)
+>     ->bio_endio()
+>     
+> Thanks,
+>>
+>>>
+>>> Thanks,
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>> +			err = dc->error;
+>>>>> +			break;
+>>>>> +		}
+>>>>>  
+>>>>>  		atomic_inc(&dcc->issued_discard);
+>>>>>  
+>>>>> @@ -1510,6 +1518,10 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+>>>>>  			}
+>>>>>  
+>>>>>  			__submit_discard_cmd(sbi, dpolicy, dc, &issued);
+>>>>> +			if (dc->error == -EAGAIN) {
+>>>>> +				congestion_wait(BLK_RW_ASYNC, HZ/50);
+>>>>> +				__relocate_discard_cmd(dcc, dc);
+>>>>> +			}
+>>>>>  
+>>>>>  			if (issued >= dpolicy->max_requests)
+>>>>>  				break;
+>>>>>
+>>>
+> 
 
 
 _______________________________________________
