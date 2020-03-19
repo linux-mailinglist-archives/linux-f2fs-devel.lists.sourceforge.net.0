@@ -2,68 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4601C18AAB8
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2020 03:37:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83EFF18AD4B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2020 08:28:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jEl3o-0001mI-SQ; Thu, 19 Mar 2020 02:37:28 +0000
+	id 1jEpb2-0004wp-6V; Thu, 19 Mar 2020 07:28:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jEl3n-0001m5-Of
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 02:37:27 +0000
+ (envelope-from <info56@appletoncreative.com>) id 1jEpb0-0004wi-JG
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 07:28:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rA9A7+oDBZw1gVo7OjOl/6Q6sHkbxSPtFtiwft3+qxI=; b=B/XAo3IFtmeFTU8ZvTpGXBAu2p
- +9MW1tk/BYBBNFHNRo2zdfUIoMjoClScAMQTPI4cdKMy/cLclzkBbklBSBaPtNAKefPyLhcmFz58o
- lnSWSaGM/pPBbcsoXMNq5ZOR40e3qeIuQ54YyVQfmeS42ZB5TaDhIxTHBFnld3M+6kJE=;
+ bh=FWtie/Q5hJ/5u4V2agqx2Y9+mJbT6joJtZJP/PPrJKc=; b=ROQ4pgNNZF4FAclMCjnHU6Loxb
+ 3qznO8MnuteTV4XvkYJ+cGFqptnitmTMJCsMsEswmtGgd21h07tuYAs8DBAPnKzG6clK64PKriNjz
+ MnbBlIKKTWCqAJLW67lZzuBiWY51bEPeTg7/xy3/NlpGocmawtjk8Y6eBrjH9YjwuGfs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rA9A7+oDBZw1gVo7OjOl/6Q6sHkbxSPtFtiwft3+qxI=; b=DlWthTYPdq2fHhOrpZuNf3X0O3
- VzIW5zUpSfhXeDncGJropu1LMzEe9gEwwYKiowwTnYFyFN776CNKyebZDFbqnxLS4Q2UBfiB1Ybze
- 8A1PNFc8EDvdgM/6U26Khw0JPN9RmC4oApZ3LGoypveB0i1MNn0jFx36qbCgGfdm8Lj8=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jEl3h-00Dlew-QF
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 02:37:27 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 485D598D51686BB0ABD9;
- Thu, 19 Mar 2020 10:37:12 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 19 Mar
- 2020 10:37:07 +0800
-To: Ju Hyung Park <qkrwngud825@gmail.com>
-References: <20200225101710.40123-1-yuchao0@huawei.com>
- <CAD14+f3pi331-V0gzjtxcMRVaEn3tPacrC20wtRq9+6JY9_HVA@mail.gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <08d03473-9871-ba10-4626-58c4479ef9d1@huawei.com>
-Date: Thu, 19 Mar 2020 10:37:06 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=FWtie/Q5hJ/5u4V2agqx2Y9+mJbT6joJtZJP/PPrJKc=; b=a
+ eg6vBo9HLAYTHnCWOKYfuNOnTRWOgcY7ETsMlhzr7GUH8/4eMDGlDv6O7FS2MiHfEmw6fI3xsz37S
+ rA4Arc600wgyGvMjh0qJ1ZWaWwtx3FZWtWmQeyuiYjTB2Whjrz16x8qt4SExtK8Fsd2uRLDw83Qsi
+ 0ckTJiOBxPbQWn+g=;
+Received: from [202.89.0.21] (helo=CentOS5.cih.org.hk)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps (TLSv1:DHE-RSA-AES256-SHA:256)
+ (Exim 4.92.2) id 1jEpay-008aZu-JP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 07:28:02 +0000
+Received: (qmail 8305 invoked by uid 89); 19 Mar 2020 04:01:08 -0000
+Received: by simscan 1.3.1 ppid: 7003, pid: 8267, t: 3.4620s
+ scanners: attach: 1.3.1 clamav: 0.98.4/m:
+Received: from unknown (HELO ?202.186.166.133?)
+ (choitszping@cih.org.hk@103.231.90.2)
+ by server1 with ESMTPA; 19 Mar 2020 04:01:04 -0000
+From: "Jenny Chui" <info56@appletoncreative.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: 18 Mar 2020 21:01:03 -0700
+Message-ID: <20200318210103.0B7000904AA37F73@appletoncreative.com>
 MIME-Version: 1.0
-In-Reply-To: <CAD14+f3pi331-V0gzjtxcMRVaEn3tPacrC20wtRq9+6JY9_HVA@mail.gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 4.4 (++++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jEl3h-00Dlew-QF
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: use kmem_cache pool during inline
- xattr lookups
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.9 SPF_FAIL               SPF: sender does not match SPF record (fail)
+ [SPF failed: Please see http://www.openspf.net/Why?s=mfrom;
+ id=info56%40appletoncreative.com; ip=202.89.0.21;
+ r=util-malware-1.v13.lw.sourceforge.com]
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Headers-End: 1jEpay-008aZu-JP
+Subject: Re: [f2fs-dev] Response
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,58 +70,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Reply-To: jennychui.comp@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Ju Hyung,
+Good day,
 
-On 2020/3/18 20:14, Ju Hyung Park wrote:
-> Hi Chao.
-> 
-> I got the time around to test this patch.
-> The v2 patch seems to work just fine, and the code looks good.
+ This is to inform you that we have a part-time  (Work from Home)
+ job that takes less than 2 hour(s) of your time daily with a 5%
+ commission and $2,100 monthly salary payment available for you 
+in
+ your region, please get back to me if you are still available 
+for
+ the work  to enable me send you more information.
 
-Thanks a lot for the review and test.
-
-> 
-> On Tue, Feb 25, 2020 at 7:17 PM Chao Yu <yuchao0@huawei.com> wrote:
->> diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
->> index a3360a97e624..e46a10eb0e42 100644
->> --- a/fs/f2fs/xattr.c
->> +++ b/fs/f2fs/xattr.c
->> @@ -23,6 +23,25 @@
->>  #include "xattr.h"
->>  #include "segment.h"
->>
->> +static void *xattr_alloc(struct f2fs_sb_info *sbi, int size, bool *is_inline)
->> +{
->> +       *is_inline = (size == sbi->inline_xattr_slab_size);
-> 
-> Would it be meaningless to change this to the following code?
-> if (likely(size == sbi->inline_xattr_slab_size))
->     *is_inline = true;
-> else
->     *is_inline = false;
-
-Yup, I guess it's very rare that user will change inline xattr size via remount,
-so I'm okay with this change.
-
-Jaegeuk,
-
-Could you please help to update the patch in your git tree directly?
-
-Thanks,
-
-> 
-> The above statement seems to be only false during the initial mount
-> and the rest(millions) seems to be always true.
-> 
-> Thanks.
-> .
-> 
+Thanks
+Jenny Chui  
 
 
 _______________________________________________
