@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D854B18B2D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2020 12:58:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF33B18B2D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2020 12:58:27 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jEtoc-0005pI-Ek; Thu, 19 Mar 2020 11:58:22 +0000
+	id 1jEtog-0005qn-Hz; Thu, 19 Mar 2020 11:58:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jEtob-0005p1-Gk
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 11:58:21 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jEtoc-0005pQ-Fa
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 11:58:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
  Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yyru5MNVMZOvomYkvqN9B2w8wvmlkiMGd4+/75noMBU=; b=K1h6ibRWjapufDuP2BNdwbrf3/
- GDQpiqBcoNbQj1od2RCzZLvMG+5yqGuK17RxBBzaW9D+WRJ1ztlmOrD21Sajb9f1Wto01f6u+gVLv
- POrG2izVmlkW69Vj/WGKpQ6HaxUhWxj9XcKNnfgVWJWT9lE2oV8vAOo6lXjuJ0siHFkQ=;
+ bh=tUyYgqjAW04sXF4hACsPU0vX0j9FBwpd8xFeCtzXD3c=; b=kL6gz6G0O7jjgmjs0VVyfFkLrz
+ K4xWZWrctAWZvHdwOgsYIl1s1DpK7itmiRbJOwkGSsAinaijQAn2yt5EtCJastjyJ0BXe2Hl5Zcme
+ II9pxfI8fkm8sQZuaLcRHhra9C+PDaCelTQKHbbX65CkO2zvesrcHc01AVUJkS8YpxUI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
@@ -29,24 +29,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Yyru5MNVMZOvomYkvqN9B2w8wvmlkiMGd4+/75noMBU=; b=j25FljCcHHcitngoM4uqshveY/
- hs0ED7CQnNtMeQDSAxHW9X+ac8aXxvEnfGnziDMSm/lJA7p8Mxc/3D3I0pmbhdspF25m+UTM4MlVB
- Mtz46tcuuLQgq0IX+hPK1O0KvVRYxaS95wbb3CRwzKo8J/pWg/TOGrr6vvBhm6dOZoj8=;
+ bh=tUyYgqjAW04sXF4hACsPU0vX0j9FBwpd8xFeCtzXD3c=; b=U0mUPAi4z5DhIPUAwGFC8BnR3i
+ 6vuN2oX78LQV5bfCfUKTHRPv5htFYDNmX73/I3Vc7cuGarIiFpa1ZolKXjzzeJh24/QRhXN5/8h0y
+ sqdYC7PJqb6uk/b+JfSrZuWFEndSr6Iw8Gy6eZY/xJqsn2G0e+VbgQ7azllxZCJZ4two=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jEtoZ-008oj5-Qc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 11:58:21 +0000
+ id 1jEtoa-00E6iN-75
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 Mar 2020 11:58:22 +0000
 Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id A693FA6BF3FD5995D8B0;
+ by Forcepoint Email with ESMTP id 9D11378D7C42C01D85C1;
  Thu, 19 Mar 2020 19:58:10 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS414-HUB.china.huawei.com (10.3.19.214) with Microsoft SMTP Server id
  14.3.487.0; Thu, 19 Mar 2020 19:58:04 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Thu, 19 Mar 2020 19:57:59 +0800
-Message-ID: <20200319115800.108926-3-yuchao0@huawei.com>
+Date: Thu, 19 Mar 2020 19:58:00 +0800
+Message-ID: <20200319115800.108926-4-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 In-Reply-To: <20200319115800.108926-1-yuchao0@huawei.com>
 References: <20200319115800.108926-1-yuchao0@huawei.com>
@@ -58,9 +58,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jEtoZ-008oj5-Qc
-Subject: [f2fs-dev] [PATCH 3/4] f2fs: fix NULL pointer dereference in
- f2fs_verity_work()
+X-Headers-End: 1jEtoa-00E6iN-75
+Subject: [f2fs-dev] [PATCH 4/4] f2fs: fix NULL pointer dereference in
+ f2fs_write_begin()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,82 +77,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If both compression and fsverity feature is on, generic/572 will
-report below NULL pointer dereference bug.
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+RIP: 0010:f2fs_write_begin+0x823/0xb90 [f2fs]
+Call Trace:
+ f2fs_quota_write+0x139/0x1d0 [f2fs]
+ write_blk+0x36/0x80 [quota_tree]
+ get_free_dqblk+0x42/0xa0 [quota_tree]
+ do_insert_tree+0x235/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ qtree_write_dquot+0x70/0x190 [quota_tree]
+ v2_write_dquot+0x43/0x90 [quota_v2]
+ dquot_acquire+0x77/0x100
+ f2fs_dquot_acquire+0x2f/0x60 [f2fs]
+ dqget+0x310/0x450
+ dquot_transfer+0x7e/0x120
+ f2fs_setattr+0x11a/0x4a0 [f2fs]
+ notify_change+0x349/0x480
+ chown_common+0x168/0x1c0
+ do_fchownat+0xbc/0xf0
+ __x64_sys_fchownat+0x20/0x30
+ do_syscall_64+0x5f/0x220
+ entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
- BUG: kernel NULL pointer dereference, address: 0000000000000018
- RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
- #PF: supervisor read access in kernel mode
- Workqueue: fsverity_read_queue f2fs_verity_work [f2fs]
- RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
- Call Trace:
-  process_one_work+0x16c/0x3f0
-  worker_thread+0x4c/0x440
-  ? rescuer_thread+0x350/0x350
-  kthread+0xf8/0x130
-  ? kthread_unpark+0x70/0x70
-  ret_from_fork+0x35/0x40
-
-There are two issue in f2fs_verity_work():
-- it needs to traverse and verify all pages in bio.
-- if pages in bio belong to non-compressed cluster, accessing
-decompress IO context stored in page private will cause NULL
-pointer dereference.
-
-Fix them.
+Passing fsdata parameter to .write_{begin,end} in f2fs_quota_write(),
+so that if quota file is compressed one, we can avoid above NULL
+pointer dereference when updating quota content.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/data.c | 35 ++++++++++++++++++++++++++++++-----
- 1 file changed, 30 insertions(+), 5 deletions(-)
+ fs/f2fs/super.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 5c5db09324b7..66e49fc1056e 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -187,12 +187,37 @@ static void f2fs_verify_pages(struct page **rpages, unsigned int cluster_size)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ebffe7aa08ee..b83b17b54a0a 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1936,6 +1936,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 	int offset = off & (sb->s_blocksize - 1);
+ 	size_t towrite = len;
+ 	struct page *page;
++	void *fsdata = NULL;
+ 	char *kaddr;
+ 	int err = 0;
+ 	int tocopy;
+@@ -1945,7 +1946,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 								towrite);
+ retry:
+ 		err = a_ops->write_begin(NULL, mapping, off, tocopy, 0,
+-							&page, NULL);
++							&page, &fsdata);
+ 		if (unlikely(err)) {
+ 			if (err == -ENOMEM) {
+ 				congestion_wait(BLK_RW_ASYNC,
+@@ -1962,7 +1963,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 		flush_dcache_page(page);
  
- static void f2fs_verify_bio(struct bio *bio)
- {
--	struct page *page = bio_first_page_all(bio);
--	struct decompress_io_ctx *dic =
--			(struct decompress_io_ctx *)page_private(page);
-+	struct bio_vec *bv;
-+	struct bvec_iter_all iter_all;
-+	struct decompress_io_ctx *dic, *pdic = NULL;
-+
-+	bio_for_each_segment_all(bv, bio, iter_all) {
-+		struct page *page = bv->bv_page;
-+
-+		dic = (struct decompress_io_ctx *)page_private(page);
-+
-+		if (dic) {
-+			if (dic != pdic) {
-+				f2fs_verify_pages(dic->rpages,
-+							dic->cluster_size);
-+				f2fs_free_dic(dic);
-+				pdic = dic;
-+			}
-+			continue;
-+		}
-+		pdic = dic;
- 
--	f2fs_verify_pages(dic->rpages, dic->cluster_size);
--	f2fs_free_dic(dic);
-+		if (bio->bi_status || PageError(page)) {
-+			ClearPageUptodate(page);
-+			ClearPageError(page);
-+		} else {
-+			if (fsverity_verify_page(page))
-+				SetPageUptodate(page);
-+			else
-+				SetPageError(page);
-+		}
-+		unlock_page(page);
-+	}
- }
- #endif
- 
+ 		a_ops->write_end(NULL, mapping, off, tocopy, tocopy,
+-						page, NULL);
++						page, fsdata);
+ 		offset = 0;
+ 		towrite -= tocopy;
+ 		off += tocopy;
 -- 
 2.18.0.rc1
 
