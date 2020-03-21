@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCF1918E148
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:38:35 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2737218E153
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:41:28 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jFdOc-00039v-AZ; Sat, 21 Mar 2020 12:38:34 +0000
+	id 1jFdRO-0001PH-Il; Sat, 21 Mar 2020 12:41:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1jFdOb-00039p-Vr
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:38:33 +0000
+ (envelope-from <chao@kernel.org>) id 1jFdRM-0001P9-Mv
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:41:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zp2n1MEssNtUaVqT85o+OvS2O3s3EUm4WEI+nLhZGcA=; b=DI1FosJlcZb8R6vJ/UqBP46D+7
- EIUR3h+wgNVK/YHLlQKcUPOmBmLiFiYxJC01q53NY8WUkEEt/p3cSdM2prloRZ4/3Ww1WetS7RlF0
- zdv7PdmvdC8sjLHq/joxBCNzYcZPy3+jsujGjV69CmjMrmMS7GC8V0KA+Yer8IU2Z8Tc=;
+ bh=SYButYYnPtTNzTsvJv/ztlsV2rT6hQCbbeI2pzlT52k=; b=GUBkcj16fS4QKewyM5++DoksgB
+ bBIJvU14HosKjJb8oIhn0Tu4frT+/v/3rcoSRcXpy8tNWTqHWSjZeattIAn3W1sb2kDbJkRip8xf7
+ Ec60O8cEYy9He1lBJuXgIh8sKhJ44A2RuzjP+Cnoe6MK+Y1mt75Cm4+3XquaHdqSU9hY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zp2n1MEssNtUaVqT85o+OvS2O3s3EUm4WEI+nLhZGcA=; b=JubVcTW4nIuHY4yCAmsO3oJKOy
- NODLfLa809KM72bH+4wqG6P3DYwFuA3CaCifIitqiQtHMKpDfrb5OPBnF2m6UCpGQt5qAWQnVL1Hv
- LpdqG5F/P/AmRfq3mPcVPVAJ++JjgiWMSv5R36WsaeJLWCwDhJLd2TFTRXMSIfh1qkq8=;
+ bh=SYButYYnPtTNzTsvJv/ztlsV2rT6hQCbbeI2pzlT52k=; b=dqY07jWsqYp1sRasNJPp+p2mep
+ dEFgtvp+XLcR1pWQU4WQX4/jPk4cUgmlg2sWW2DZ1uFxw2DZJn588C84XIIFl0HgvD7CtkeQ3lrZd
+ oQcmcAagr2rsGFk0KeNpD9oH6pgbHuF+bZY5vmnAL+6oEcMm8fHEN3pKOx2+HnqZmmTA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jFdOa-00BNdC-Tm
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:38:33 +0000
+ id 1jFdRL-00GJUS-5c
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:41:24 +0000
 Received: from [192.168.0.107] (unknown [49.65.245.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A9EFD20754;
- Sat, 21 Mar 2020 12:38:20 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B163C20754;
+ Sat, 21 Mar 2020 12:41:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584794305;
- bh=zp2n1MEssNtUaVqT85o+OvS2O3s3EUm4WEI+nLhZGcA=;
+ s=default; t=1584794477;
+ bh=SYButYYnPtTNzTsvJv/ztlsV2rT6hQCbbeI2pzlT52k=;
  h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
- b=wg0BZOyQxkJPeGA6fMlf8DP3FnZm25yOoGK8F4EgvgaHjCd9lK/nlsw/qOgvlrhRT
- 6g3ukkYCrGg4mHygVxRsdOHXGALoxh5W7NiPs4ZXnzM1hOpXl45tysIblZC1s7vspe
- QJhVI4uupeoTC2/6pjQQHfIwaDfJfrSYhoqespzM=
+ b=mZAqbYYEyed/TRFC34Za867sHZy20DSHbKWw+pfpCOnVubLSkgdKhC74IfLXb0oQ5
+ irgqnDuLIeHhDqhwmSXSHDKHRIlhYBBteSxo2x9Zg8CrGALnf5+E10sckAtjZq5EYM
+ B0EReMmsHEMDlh4R+X7pNuj+kYgFVEbn3aKM9dbQ=
 To: Matthew Wilcox <willy@infradead.org>,
  Andrew Morton <akpm@linux-foundation.org>
 References: <20200320142231.2402-1-willy@infradead.org>
- <20200320142231.2402-19-willy@infradead.org>
+ <20200320142231.2402-20-willy@infradead.org>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <2796a575-dd89-6cfb-a7af-511a2f463fda@kernel.org>
-Date: Sat, 21 Mar 2020 20:38:19 +0800
+Message-ID: <135c3eeb-c809-08dc-8b4b-31ced90c622a@kernel.org>
+Date: Sat, 21 Mar 2020 20:41:10 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
  Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200320142231.2402-19-willy@infradead.org>
+In-Reply-To: <20200320142231.2402-20-willy@infradead.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -72,8 +72,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jFdOa-00BNdC-Tm
-Subject: Re: [f2fs-dev] [PATCH v9 18/25] erofs: Convert uncompressed files
+X-Headers-End: 1jFdRL-00GJUS-5c
+Subject: Re: [f2fs-dev] [PATCH v9 19/25] erofs: Convert compressed files
  from readpages to readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -89,8 +89,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: cluster-devel@redhat.com, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
  William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
+ Dave Chinner <dchinner@redhat.com>, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ ocfs2-devel@oss.oracle.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -98,13 +99,16 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 2020-3-20 22:22, Matthew Wilcox wrote:
 > From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 >
-> Use the new readahead operation in erofs
+> Use the new readahead operation in erofs.
 >
 > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 > Acked-by: Gao Xiang <gaoxiang25@huawei.com>
+> Reviewed-by: Dave Chinner <dchinner@redhat.com>
 > Reviewed-by: William Kucharski <william.kucharski@oracle.com>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
+
+Thanks,
 
 
 _______________________________________________
