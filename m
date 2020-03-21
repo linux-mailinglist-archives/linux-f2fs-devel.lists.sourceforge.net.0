@@ -2,57 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6525618E11E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:20:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CBD818E122
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:22:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jFd6r-0005sx-S5; Sat, 21 Mar 2020 12:20:13 +0000
+	id 1jFd97-0000SM-AV; Sat, 21 Mar 2020 12:22:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1jFd6q-0005sa-9g
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:20:12 +0000
+ (envelope-from <chao@kernel.org>) id 1jFd95-0000S5-Rz
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:22:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KqrIWbvP5SvmQ+aqj8hJJFushZwxe8NNtDFsm2YIYzY=; b=a/f3ULVl/Rj+zbMD7E6GEDbjeF
- udeWUT+F1Z+UpPioWWEJ/xhsmX4LmDbBYzCUTPqJbgN7n3Up60HJ7HzamAuitWGBLtgeBjhzoEBQu
- 8OjjPmm5x8z5GPmoc5FKY6zG1SI4Yngy7Lm+bw1XGCk+lCK0Rsc9P3WJm6r2StnAgHQI=;
+ bh=TPQ5soQ5M4AH6aZQTteEUjCLEJ+xeZE7tmk6FZqPxBQ=; b=e108jbCX8zyA4Q9d7p32Rw4lwE
+ R9/NZrngkGgB48FcJNQdz6IeEp9BiSCjzfN25BHruYdT3Oxwqa6GAE9fGvKu+zl4MYTaj63Qc/tFd
+ /BdRf+aR3EaAdREM67uHVFiVt+lIn5nKKx1CSzDdahm5+AbRtMbtglCM3G3Ra70VWPtc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KqrIWbvP5SvmQ+aqj8hJJFushZwxe8NNtDFsm2YIYzY=; b=c
- vFEdi9g2wTgzhspqwRD7vOHqFSPnW21Agk1+OKzisG9P2rT55cmW+jQIarVK/CX8TQI6v91Dr76jD
- CuZTpPGqgbp5EssLIXLE3AzUmG5up4mpcj+cCqMurueqCWQj85QJcUta8J4GBHJ2K80gHHFUrLh92
- 9H+Z/vFMepJ7RQjk=;
+ List-Owner:List-Archive; bh=TPQ5soQ5M4AH6aZQTteEUjCLEJ+xeZE7tmk6FZqPxBQ=; b=L
+ HsI50dTOWRxzXO0l0s5pbJ9KcHLvAkpUvjgUTkIx8gEj/T3vvS1L6L/si4ngrXZo1WCGj/5rn+4sU
+ WhSAZJLOxmHo5k2xfImfSLTmSuw62cxlb2Ht4FG3fEsSFLK3SkY2lflFMDIYULWVmVN67zwDv83fr
+ 2HN9mf6zjKFzHc0Q=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jFd6o-00GIbd-9v
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:20:12 +0000
+ id 1jFd93-00GIha-2M
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:22:31 +0000
 Received: from localhost.localdomain (unknown [49.65.245.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 308B020722;
- Sat, 21 Mar 2020 12:19:57 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D83F720722;
+ Sat, 21 Mar 2020 12:22:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584793199;
- bh=dAEeJBsBD8vPgIWoHtkB7iVfjDZMwlGNTPBlVTUgEyo=;
+ s=default; t=1584793343;
+ bh=/3nPfZXBKwKIY++A+xEYIPUcMBEvmjAt1f4xiG8QQQU=;
  h=From:To:Cc:Subject:Date:From;
- b=KQm646WSgVFJGEc8ROvdcbEXR7+q9y6Iuhid9lNRfvqAriTzuCIikvr5d0sHjMgV0
- oTDapfUuoeOfOqi9iE8Z2zgkUv5ZDh0WEFbiVKqZUZemvHZ8lXThAlYaSh8MQvvfFV
- Qclgk9KXTBQoucmzHypwjXFLik4SPjwZIWsM/rFA=
+ b=JFmljKSM8w9/MneocFtCjszq19tzQLUtntTjEkg7r6wBDNMD7T8A1AbIhFWOu1Wpn
+ yRFtKKuUiHqvhVhVePJR3SwyRBbZNEBzcJAiT4PkEBPC5aevrhdPPOm7Y/Uk/6+Uzn
+ Z9HwnHUPCi+NZeILt1EwiwSm9T+SMUoFLuJpmesw=
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sat, 21 Mar 2020 20:19:33 +0800
-Message-Id: <20200321121933.22297-1-chao@kernel.org>
+Date: Sat, 21 Mar 2020 20:21:53 +0800
+Message-Id: <20200321122153.22424-1-chao@kernel.org>
 X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
@@ -66,8 +66,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jFd6o-00GIbd-9v
-Subject: [f2fs-dev] [PATCH v2] f2fs: clean up f2fs_may_encrypt()
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jFd93-00GIha-2M
+Subject: [f2fs-dev] [PATCH v2 3/4] f2fs: fix NULL pointer dereference in
+ f2fs_verity_work()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,89 +88,86 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-Merge below two conditions into f2fs_may_encrypt() for cleanup
-- IS_ENCRYPTED()
-- DUMMY_ENCRYPTION_ENABLED()
+If both compression and fsverity feature is on, generic/572 will
+report below NULL pointer dereference bug.
 
-Check IS_ENCRYPTED(inode) condition in f2fs_init_inode_metadata()
-is enough since we have already set encrypt flag in f2fs_new_inode().
+ BUG: kernel NULL pointer dereference, address: 0000000000000018
+ RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
+ #PF: supervisor read access in kernel mode
+ Workqueue: fsverity_read_queue f2fs_verity_work [f2fs]
+ RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
+ Call Trace:
+  process_one_work+0x16c/0x3f0
+  worker_thread+0x4c/0x440
+  ? rescuer_thread+0x350/0x350
+  kthread+0xf8/0x130
+  ? kthread_unpark+0x70/0x70
+  ret_from_fork+0x35/0x40
+
+There are two issue in f2fs_verity_work():
+- it needs to traverse and verify all pages in bio.
+- if pages in bio belong to non-compressed cluster, accessing
+decompress IO context stored in page private will cause NULL
+pointer dereference.
+
+Fix them.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
 v2:
-- remove unneeded check condition in f2fs_init_inode_metadata() suggested
-by Eric.
- fs/f2fs/dir.c   |  4 +---
- fs/f2fs/f2fs.h  | 13 +++++++++----
- fs/f2fs/namei.c |  4 +---
- 3 files changed, 11 insertions(+), 10 deletions(-)
+- fix error path of f2fs_verify_bio pointed out by Eric
+ fs/f2fs/data.c | 37 ++++++++++++++++++++++++++++++++-----
+ 1 file changed, 32 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 0971ccc4664a..44bfc464df78 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -471,7 +471,6 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
- 			struct page *dpage)
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 5c5db09324b7..d5b1eda21519 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -187,12 +187,39 @@ static void f2fs_verify_pages(struct page **rpages, unsigned int cluster_size)
+ 
+ static void f2fs_verify_bio(struct bio *bio)
  {
- 	struct page *page;
--	int dummy_encrypt = DUMMY_ENCRYPTION_ENABLED(F2FS_I_SB(dir));
- 	int err;
+-	struct page *page = bio_first_page_all(bio);
+-	struct decompress_io_ctx *dic =
+-			(struct decompress_io_ctx *)page_private(page);
++	struct bio_vec *bv;
++	struct bvec_iter_all iter_all;
++	struct decompress_io_ctx *dic, *pdic = NULL;
++
++	bio_for_each_segment_all(bv, bio, iter_all) {
++		struct page *page = bv->bv_page;
++
++		dic = (struct decompress_io_ctx *)page_private(page);
  
- 	if (is_inode_flag_set(inode, FI_NEW_INODE)) {
-@@ -498,8 +497,7 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
- 		if (err)
- 			goto put_error;
- 
--		if ((IS_ENCRYPTED(dir) || dummy_encrypt) &&
--					f2fs_may_encrypt(inode)) {
-+		if (IS_ENCRYPTED(inode)) {
- 			err = fscrypt_inherit_context(dir, inode, page, false);
- 			if (err)
- 				goto put_error;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 09db79a20f8e..fcafa68212eb 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3946,15 +3946,20 @@ static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
- 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
+-	f2fs_verify_pages(dic->rpages, dic->cluster_size);
+-	f2fs_free_dic(dic);
++		if (dic) {
++			if (dic != pdic) {
++				f2fs_verify_pages(dic->rpages,
++							dic->cluster_size);
++				f2fs_free_dic(dic);
++				pdic = dic;
++			}
++			continue;
++		}
++		pdic = dic;
++
++		if (bio->bi_status || PageError(page))
++			goto clear_uptodate;
++
++		if (fsverity_verify_page(page)) {
++			SetPageUptodate(page);
++			goto unlock;
++		}
++clear_uptodate:
++		ClearPageUptodate(page);
++		ClearPageError(page);
++unlock:
++		unlock_page(page);
++	}
  }
- 
--static inline bool f2fs_may_encrypt(struct inode *inode)
-+static inline bool f2fs_may_encrypt(struct inode *dir, struct inode *inode)
- {
- #ifdef CONFIG_FS_ENCRYPTION
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
- 	umode_t mode = inode->i_mode;
- 
--	return (S_ISREG(mode) || S_ISDIR(mode) || S_ISLNK(mode));
--#else
--	return false;
-+	/*
-+	 * If the directory encrypted or dummy encryption enabled,
-+	 * then we should encrypt the inode.
-+	 */
-+	if (IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi))
-+		return (S_ISREG(mode) || S_ISDIR(mode) || S_ISLNK(mode));
  #endif
-+	return false;
- }
  
- static inline bool f2fs_may_compress(struct inode *inode)
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index b75c70813f9e..95cfbce062e8 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -75,9 +75,7 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
- 
- 	set_inode_flag(inode, FI_NEW_INODE);
- 
--	/* If the directory encrypted, then we should encrypt the inode. */
--	if ((IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi)) &&
--				f2fs_may_encrypt(inode))
-+	if (f2fs_may_encrypt(dir, inode))
- 		f2fs_set_encrypted_inode(inode);
- 
- 	if (f2fs_sb_has_extra_attr(sbi)) {
 -- 
 2.22.0
 
