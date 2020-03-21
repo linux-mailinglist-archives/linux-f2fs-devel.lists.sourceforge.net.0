@@ -2,59 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1D3618E128
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:25:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44E1C18E136
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Mar 2020 13:34:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jFdBg-0002bh-Od; Sat, 21 Mar 2020 12:25:12 +0000
+	id 1jFdKn-0000Ln-T9; Sat, 21 Mar 2020 12:34:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1jFdBg-0002ba-2q
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:25:12 +0000
+ (envelope-from <chao@kernel.org>) id 1jFdKm-0000LU-P4
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:34:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B28rYFVExumdpud/ewa1KE92b1Wogew2qx1YvNkCHns=; b=UZAZlJ21sSfKv7uS96Un/0bho+
- 3ayAXisqACrCF7x36oCYomqD7qiC+ofB20cw8z6vmQhDmVa1USMbtVOCVjGW6tynErLDiE3AVlruQ
- QZGf5OnDxbrX8zHFAOIJoF+K1ZIiDy2P/czD4nrMvE9gnrkDNTgg5i5H30TbbyzaXBDs=;
+ bh=Q6XqKfK0pWystRPr1/fmOD76oUU2oT/CO/tHv4FEv+M=; b=g+Wp5GpD6yVIiZW4wXWxjx+oJt
+ UeilvJe9rVSd6h9dWAG9h0mv4dqmRzqCJZQUVyrHfU2WRxWU+ug7RKI3VH2s+VYr5rBbECxwtGJIK
+ LzAAJR1v9wO8RMuC8VLKgUYFxpYkdQObflp4FXxXj8Iyo3bb/M5u0ETUn7iDRtRt09II=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=B28rYFVExumdpud/ewa1KE92b1Wogew2qx1YvNkCHns=; b=S
- O8VClXz7ncYbJOAHsH+RG+m6iKqu7XrycRiGZQrvhW0iZ6hPMKR7U+gNRVTa51Dv8mkx5O0xNdDsy
- TtuOmV45+oeRrHtZija9IJbq4IW9yIZnSC35JHjdPBVoVXt0josfKtECNjqa4gchHKfqNr6bX+nAD
- kZjFTnUA6YjIR0Ms=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Q6XqKfK0pWystRPr1/fmOD76oUU2oT/CO/tHv4FEv+M=; b=eCRAGK737YuEZUTui97g0CJEqn
+ Z8FzJLuvlmzPiytkmO69ymcG6vFBebY81ySCPey5MC3tCrZnQJSExZO2AuqXasNBRNG1Y7sI6zXbB
+ IumFZpArlaL4FGfFTepr44Fw62djzjsjgQaokYc2fOEkWfsFmuholW00tg5m26eM2STg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jFdBc-00GIpW-HU
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:25:12 +0000
-Received: from localhost.localdomain (unknown [49.65.245.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ id 1jFdKk-00GJG6-PP
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 21 Mar 2020 12:34:36 +0000
+Received: from [192.168.0.107] (unknown [49.65.245.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CEB9620724;
- Sat, 21 Mar 2020 12:25:01 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9C38F20714;
+ Sat, 21 Mar 2020 12:34:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584793503;
- bh=baXkY26+grqrvtO0gFEMOKOPPJpTnN3B7ErAMOGPQeI=;
- h=From:To:Cc:Subject:Date:From;
- b=LS1uO6vlEb4UBkc+v99Z26763EJTT1Z7xagXup+HO0xapJrD9yp5dh1C+61pwexiw
- DOklNap9QXfHiD7PqUgFHG/z5vH6igI/AH2TEqQSyhamQvQ2aJSyZD54RUv1Fz598A
- uBSiDcLK5AjfSXusw0t9KhSz6W/+RgpIMpQtdxk4=
+ s=default; t=1584794069;
+ bh=Q6XqKfK0pWystRPr1/fmOD76oUU2oT/CO/tHv4FEv+M=;
+ h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
+ b=UvmxaCjKTfMCk/EmBAq3YRIvZdf+MlpIq9JFz5KXyFe6O7vfX0lBpNj0bRdKqE4IY
+ 7mp4Zavgxc+xNqzUhd2LCGkmHXXqGatoP6Uf3qNoPy/Gj8bAWI0TDu5ZIorpLQLBfj
+ JCe8QAxgl2TgQ+py6UG6Qr7uZ/m1+L4zv1mGdmvA=
+To: Matthew Wilcox <willy@infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>
+References: <20200320142231.2402-1-willy@infradead.org>
+ <20200320142231.2402-23-willy@infradead.org>
 From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Sat, 21 Mar 2020 20:24:11 +0800
-Message-Id: <20200321122411.22597-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.0
+Message-ID: <557257d3-6799-df31-378a-a39c36fa3191@kernel.org>
+Date: Sat, 21 Mar 2020 20:34:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
 MIME-Version: 1.0
+In-Reply-To: <20200320142231.2402-23-willy@infradead.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -66,8 +71,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jFdBc-00GIpW-HU
-Subject: [f2fs-dev] [PATCH] f2fs: fix to clear PG_error if fsverity failed
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jFdKk-00GJG6-PP
+Subject: Re: [f2fs-dev] [PATCH v9 22/25] f2fs: Convert from readpages to
+ readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,55 +86,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: cluster-devel@redhat.com, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+On 2020-3-20 22:22, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+>
+> Use the new readahead operation in f2fs
+>
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> Reviewed-by: William Kucharski <william.kucharski@oracle.com>
 
-In f2fs_decompress_end_io(), we should clear PG_error flag before page
-unlock, otherwise reread will fail due to the flag as described in
-commit fb7d70db305a ("f2fs: clear PageError on the read path").
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/compress.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index df3e6ad5b6d7..f37b83534322 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1420,15 +1420,17 @@ void f2fs_decompress_end_io(struct page **rpages,
- 		if (!rpage)
- 			continue;
- 
--		if (err || PageError(rpage)) {
--			ClearPageUptodate(rpage);
--			ClearPageError(rpage);
--		} else {
--			if (!verity || fsverity_verify_page(rpage))
--				SetPageUptodate(rpage);
--			else
--				SetPageError(rpage);
-+		if (err || PageError(rpage))
-+			goto clear_uptodate;
-+
-+		if (!verity || fsverity_verify_page(rpage)) {
-+			SetPageUptodate(rpage);
-+			goto unlock;
- 		}
-+clear_uptodate:
-+		ClearPageUptodate(rpage);
-+		ClearPageError(rpage);
-+unlock:
- 		unlock_page(rpage);
- 	}
- }
--- 
-2.22.0
-
+Thanks,
 
 
 _______________________________________________
