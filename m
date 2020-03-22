@@ -2,76 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C1FC18E9A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Mar 2020 16:30:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC65E18EA5B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Mar 2020 17:28:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jG2Ye-0004Zt-ON; Sun, 22 Mar 2020 15:30:36 +0000
+	id 1jG3Sl-0004kl-Fv; Sun, 22 Mar 2020 16:28:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <megi@xff.cz>) id 1jG2Yd-0004ZO-JI
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Mar 2020 15:30:35 +0000
+ (envelope-from <willy@infradead.org>) id 1jG3Sk-0004ke-5j
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Mar 2020 16:28:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eQkAwMUPPLvQ51yNu21HMbcimRGsbSNexABAehTgFmE=; b=EwbI6GIJvYj5JaleP0scloXuOY
- bXEK72OMl4d9mmD5ydRiHUsANc8wowcfiGOCd9+e/NUKySJU5xQalfGayZNDV8AZsh94u/6EJKSAM
- 1EuJSzVza8tJNxTddAvQn6DkBNTV/jWmS5wDIRC81xYNwd+YjEnm4dFKOiZyURpr+JS0=;
+ bh=+q5SE8PabkJ4E2ARJpyvT2voAuJ2mKWWauYSLk4KvP8=; b=NHFppTSje9bh+r4Isf+ymV5owd
+ 0uTJeSDF36Db5lFLNhxfwPJ7De58ChurMpwtLc/a+n374MIpidi4U00bALaL+MsPqc+xCBNQL9zm6
+ 1mXNMwxB1CxrZncAgGlnn0QolJsArhwtr6V+NMZhSQ7mmOWBG2Oq8htZDoh2qyTKWmFQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eQkAwMUPPLvQ51yNu21HMbcimRGsbSNexABAehTgFmE=; b=ARjae3cn/eDeXlWeutqFUJipzl
- PjaDw3VyljAuzD2KzZ9G/fgtdNQpeSJnww+iqUw2tJoeo54JYeaCanr4LGCjupuiA550oI/LGmV7C
- 4hQODOmQWrC4/JgwskiB/qiqayif385Loryoq93J21War9G0T6x8NxZZsTgXQxtZbfbQ=;
-Received: from vps.xff.cz ([195.181.215.36])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=+q5SE8PabkJ4E2ARJpyvT2voAuJ2mKWWauYSLk4KvP8=; b=TZFAA++vZahVnU0YP4IFa6WWXm
+ w9KjhcPQjRNyUZ5GgZZS//k4RegukTolbgQvYlYrG4YaL6YOLe3tuPtd5ceXWNOqLJaqz5VerEP6X
+ 8VD1/lsrIqZUHQ2Vii85FfTU9iqiVTiMAX8lo8vufSDIhKsWAReZd3dmGTqK0CDHdVzk=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jG2YT-003dbR-Mc
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Mar 2020 15:30:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xff.cz; s=mail;
- t=1584891015; bh=RoFPbFA3+ibWKe/oDKEUezK72UbjGOqeR5zVlBJwIws=;
- h=Date:From:To:Cc:Subject:References:X-My-GPG-KeyId:From;
- b=1LHl9RxrN4sRj7s3WgembJ8EhmKywDYj6P9hoQhr76RycVHZHFw3iq9T+zKTpF8FH
- opj1f8voTM7Bl9QzCkgRe+wYr7QrfdKoZgbq0J+0rzIXO+bpp5w/USelrJjaAH20tV
- 0y3AUnMNaIEsaV2eiZEadG77iPQdjmULS7pUHmgA=
-Date: Sun, 22 Mar 2020 16:30:14 +0100
-From: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20200322153014.czpca7ozhfy4ctdh@core.my.home>
-Mail-Followup-To: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>,
- Chao Yu <chao@kernel.org>, jaegeuk@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- linux-kernel@vger.kernel.org, Chao Yu <yuchao0@huawei.com>
-References: <20200322101327.5979-1-chao@kernel.org>
- <20200322121434.i2jea6o5tzanip7z@core.my.home>
- <47c71fe9-e168-8080-d0ed-2cfaa9a77e5e@kernel.org>
+ id 1jG3Sg-00CpWF-Tk
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 22 Mar 2020 16:28:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=+q5SE8PabkJ4E2ARJpyvT2voAuJ2mKWWauYSLk4KvP8=; b=DMIkZSYbAXVYZnU8ct+6eTALIM
+ IIwMq32XvglVnA0tcHkjB7yxlMiata26hBz45kwB5a05tIb02c9RE5ySYhs3Ho1G+lFVSgzlzVVDc
+ DUMiK8p2sT6gtwlUuoh5Nc7LPQ6R2kVmwSly/JqhfRE2B1JKygrsPQSdgxP2bs4+VdMciVAE86kHt
+ faPtljJno8DX46yFjGcZZwU56Jt23D6buy8qiu9daFTCr8dE5hV5cU6dlBPdz0Fx7mooeF/M7/3E9
+ cV1R/zopL7FbuerKPz2Tn81i5E79BF6SUI1praSaJFyVmD8DjvZ9DxsxJvgden2Wq6jHCv3KoNE8F
+ cMFMFWAw==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jG3SU-0000CF-PX; Sun, 22 Mar 2020 16:28:18 +0000
+Date: Sun, 22 Mar 2020 09:28:18 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20200322162818.GG4971@bombadil.infradead.org>
+References: <20200320142231.2402-1-willy@infradead.org>
+ <20200320142231.2402-13-willy@infradead.org>
+ <20200320165828.GB851@sol.localdomain>
+ <20200320173040.GB4971@bombadil.infradead.org>
+ <20200320180017.GE851@sol.localdomain>
+ <20200320181132.GD4971@bombadil.infradead.org>
+ <20200320182452.GF851@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <47c71fe9-e168-8080-d0ed-2cfaa9a77e5e@kernel.org>
-X-My-GPG-KeyId: EBFBDDE11FB918D44D1F56C1F9F0A873BE9777ED
- <https://xff.cz/key.txt>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200320182452.GF851@sol.localdomain>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jG2YT-003dbR-Mc
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix potential .flags overflow on 32bit
- architecture
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jG3Sg-00CpWF-Tk
+Subject: Re: [f2fs-dev] [PATCH v9 12/25] mm: Move end_index check out of
+ readahead loop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,100 +88,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: cluster-devel@redhat.com, linux-mm@kvack.org,
+ John Hubbard <jhubbard@nvidia.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ ocfs2-devel@oss.oracle.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gU3VuLCBNYXIgMjIsIDIwMjAgYXQgMDk6MTg6NTZQTSArMDgwMCwgQ2hhbyBZdSB3cm90ZToK
-PiBIaSwKPiAKPiBPbiAyMDIwLTMtMjIgMjA6MTQsIE9uZMWZZWogSmlybWFuIHdyb3RlOgo+ID4g
-SGVsbG8sCj4gPiAKPiA+IE9uIFN1biwgTWFyIDIyLCAyMDIwIGF0IDA2OjEzOjI3UE0gKzA4MDAs
-IENoYW8gWXUgd3JvdGU6Cj4gPiA+IEZyb206IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT4K
-PiA+ID4gCj4gPiA+IGYyZnNfaW5vZGVfaW5mby5mbGFncyBpcyB1bnNpZ25lZCBsb25nIHZhcmlh
-YmxlLCBpdCBoYXMgMzIgYml0cwo+ID4gPiBpbiAzMmJpdCBhcmNoaXRlY3R1cmUsIHNpbmNlIHdl
-IGludHJvZHVjZWQgRklfTU1BUF9GSUxFIGZsYWcKPiA+ID4gd2hlbiB3ZSBzdXBwb3J0IGRhdGEg
-Y29tcHJlc3Npb24sIHdlIG1heSBhY2Nlc3MgbWVtb3J5IGNyb3NzCj4gPiA+IHRoZSBib3JkZXIg
-b2YgLmZsYWdzIGZpZWxkLCBjb3JydXB0aW5nIC5pX3NlbSBmaWVsZCwgcmVzdWx0IGluCj4gPiA+
-IGJlbG93IGRlYWRsb2NrLgo+ID4gPiAKPiA+ID4gVG8gZml4IHRoaXMgaXNzdWUsIGxldCdzIGlu
-dHJvZHVjZSAuZXh0cmFfZmxhZ3MgdG8gZ3JhYiBleHRyYQo+ID4gPiBzcGFjZSB0byBzdG9yZSB0
-aG9zZSBuZXcgZmxhZ3MuCj4gPiA+IAo+ID4gPiBDYWxsIFRyYWNlOgo+ID4gPiAgX19zY2hlZHVs
-ZSsweDhkMC8weDEzZmMKPiA+ID4gID8gbWFya19oZWxkX2xvY2tzKzB4YWMvMHgxMDAKPiA+ID4g
-IHNjaGVkdWxlKzB4Y2MvMHgyNjAKPiA+ID4gIHJ3c2VtX2Rvd25fd3JpdGVfc2xvd3BhdGgrMHgz
-YWIvMHg2NWQKPiA+ID4gIGRvd25fd3JpdGUrMHhjNy8weGUwCj4gPiA+ICBmMmZzX2Ryb3Bfbmxp
-bmsrMHgzZC8weDYwMCBbZjJmc10KPiA+ID4gIGYyZnNfZGVsZXRlX2lubGluZV9lbnRyeSsweDMw
-MC8weDQ0MCBbZjJmc10KPiA+ID4gIGYyZnNfZGVsZXRlX2VudHJ5KzB4M2ExLzB4N2YwIFtmMmZz
-XQo+ID4gPiAgZjJmc191bmxpbmsrMHg1MDAvMHg3OTAgW2YyZnNdCj4gPiA+ICB2ZnNfdW5saW5r
-KzB4MjExLzB4NDkwCj4gPiA+ICBkb191bmxpbmthdCsweDQ4My8weDUyMAo+ID4gPiAgc3lzX3Vu
-bGluaysweDRhLzB4NzAKPiA+ID4gIGRvX2Zhc3Rfc3lzY2FsbF8zMisweDEyYi8weDY4Mwo+ID4g
-PiAgZW50cnlfU1lTRU5URVJfMzIrMHhhYS8weDEwMgo+ID4gPiAKPiA+ID4gRml4ZXM6IDRjOGZm
-NzA5NWJlZiAoImYyZnM6IHN1cHBvcnQgZGF0YSBjb21wcmVzc2lvbiIpCj4gPiA+IFNpZ25lZC1v
-ZmYtYnk6IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT4KPiA+ID4gLS0tCj4gPiA+ICBmcy9m
-MmZzL2YyZnMuaCAgfCAyNiArKysrKysrKysrKysrKysrKysrKy0tLS0tLQo+ID4gPiAgZnMvZjJm
-cy9pbm9kZS5jIHwgIDEgKwo+ID4gPiAgMiBmaWxlcyBjaGFuZ2VkLCAyMSBpbnNlcnRpb25zKCsp
-LCA2IGRlbGV0aW9ucygtKQo+ID4gPiAKPiA+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZjJmcy5o
-IGIvZnMvZjJmcy9mMmZzLmgKPiA+ID4gaW5kZXggZmNhZmE2ODIxMmViLi5mY2QyMmRmMmU5Y2Eg
-MTAwNjQ0Cj4gPiA+IC0tLSBhL2ZzL2YyZnMvZjJmcy5oCj4gPiA+ICsrKyBiL2ZzL2YyZnMvZjJm
-cy5oCj4gPiA+IEBAIC02OTUsNiArNjk1LDcgQEAgc3RydWN0IGYyZnNfaW5vZGVfaW5mbyB7Cj4g
-PiA+IAo+ID4gPiAgCS8qIFVzZSBiZWxvdyBpbnRlcm5hbGx5IGluIGYyZnMqLwo+ID4gPiAgCXVu
-c2lnbmVkIGxvbmcgZmxhZ3M7CQkvKiB1c2UgdG8gcGFzcyBwZXItZmlsZSBmbGFncyAqLwo+ID4g
-PiArCXVuc2lnbmVkIGxvbmcgZXh0cmFfZmxhZ3M7CS8qIGV4dHJhIGZsYWdzICovCj4gPiA+ICAJ
-c3RydWN0IHJ3X3NlbWFwaG9yZSBpX3NlbTsJLyogcHJvdGVjdCBmaSBpbmZvICovCj4gPiA+ICAJ
-YXRvbWljX3QgZGlydHlfcGFnZXM7CQkvKiAjIG9mIGRpcnR5IHBhZ2VzICovCj4gPiA+ICAJZjJm
-c19oYXNoX3QgY2hhc2g7CQkvKiBoYXNoIHZhbHVlIG9mIGdpdmVuIGZpbGUgbmFtZSAqLwo+ID4g
-PiBAQCAtMjU2OSw3ICsyNTcwLDcgQEAgZW51bSB7Cj4gPiA+ICB9Owo+ID4gPiAKPiA+ID4gIHN0
-YXRpYyBpbmxpbmUgdm9pZCBfX21hcmtfaW5vZGVfZGlydHlfZmxhZyhzdHJ1Y3QgaW5vZGUgKmlu
-b2RlLAo+ID4gPiAtCQkJCQkJaW50IGZsYWcsIGJvb2wgc2V0KQo+ID4gPiArCQkJCQl1bnNpZ25l
-ZCBsb25nIGxvbmcgZmxhZywgYm9vbCBzZXQpCj4gPiA+ICB7Cj4gPiA+ICAJc3dpdGNoIChmbGFn
-KSB7Cj4gPiA+ICAJY2FzZSBGSV9JTkxJTkVfWEFUVFI6Cj4gPiA+IEBAIC0yNTg4LDIwICsyNTg5
-LDMzIEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBfX21hcmtfaW5vZGVfZGlydHlfZmxhZyhzdHJ1Y3Qg
-aW5vZGUgKmlub2RlLAo+ID4gPiAKPiA+ID4gIHN0YXRpYyBpbmxpbmUgdm9pZCBzZXRfaW5vZGVf
-ZmxhZyhzdHJ1Y3QgaW5vZGUgKmlub2RlLCBpbnQgZmxhZykKPiA+ID4gIHsKPiA+ID4gLQlpZiAo
-IXRlc3RfYml0KGZsYWcsICZGMkZTX0koaW5vZGUpLT5mbGFncykpCj4gPiA+IC0JCXNldF9iaXQo
-ZmxhZywgJkYyRlNfSShpbm9kZSktPmZsYWdzKTsKPiA+ID4gKwlpZiAoKDEgPDwgZmxhZykgPD0g
-c2l6ZW9mKHVuc2lnbmVkIGxvbmcpKSB7Cj4gPiAKPiA+IF4gdGhpcyBpcyB3cm9uZy4gTWF5YmUg
-eW91IG1lYW50IGZsYWcgPD0gQklUU19QRVJfTE9ORwo+IAo+IE9oLCBteSBiYWQsIEkgbWVhbnQg
-dGhhdCwgdGhhbmtzIGZvciBwb2ludGluZyBvdXQgdGhpcy4gOikKPiAKPiA+IAo+ID4gQW5kIGRp
-dHRvIGZvciB0aGUgc2FtZSBjaGVja3MgYmVsb3cuIE1heWJlIHlvdSBjYW4gbWFrZSBmbGFncyBh
-biBhcnJheSBvZgo+ID4gQklUX1dPUkQobWF4X2ZsYWdfdmFsdWUpICsgMSBhbmQgc2tpcCB0aGUg
-YnJhbmNoZXMgYWx0b2dldGhlcj8KCkkndmUgZm91bmQgbWF5YmUgYSBjbGVhcmVyIG1hY3JvIGZv
-ciB0aGlzOiAKCiAgaHR0cHM6Ly9lbGl4aXIuYm9vdGxpbi5jb20vbGludXgvbGF0ZXN0L3NvdXJj
-ZS9pbmNsdWRlL2xpbnV4L2JpdG9wcy5oI0wxNQoKICBCSVRTX1RPX0xPTkdTKG5yKQoKQnV0IGl0
-IHRha2VzIHRoZSBudW1iZXIgb2YgYml0cyBpbiB0aGUgYml0bWFwLCB3aGljaCB3b3VsZCBiZSAK
-Im1heF9mbGFnX3ZhbHVlICsgMSIuCgpyZWdhcmRzLAoJby4KCj4gVGhhdCB3aWxsIGJlIGJldHRl
-ciwgbGV0IG1lIHJldmlzZSB0aGlzIHBhdGNoLgo+IAo+IFRoYW5rcywKPiAKPiA+IAo+ID4gdGhh
-bmsgeW91IGFuZCByZWdhcmRzLAo+ID4gCW8uCj4gPiAKPiA+ID4gKwkJaWYgKCF0ZXN0X2JpdChm
-bGFnLCAmRjJGU19JKGlub2RlKS0+ZmxhZ3MpKQo+ID4gPiArCQkJc2V0X2JpdChmbGFnLCAmRjJG
-U19JKGlub2RlKS0+ZmxhZ3MpOwo+ID4gPiArCX0gZWxzZSB7Cj4gPiA+ICsJCWlmICghdGVzdF9i
-aXQoZmxhZyAtIDMyLCAmRjJGU19JKGlub2RlKS0+ZXh0cmFfZmxhZ3MpKQo+ID4gPiArCQkJc2V0
-X2JpdChmbGFnIC0gMzIsICZGMkZTX0koaW5vZGUpLT5leHRyYV9mbGFncyk7Cj4gPiA+ICsJfQo+
-ID4gPiAgCV9fbWFya19pbm9kZV9kaXJ0eV9mbGFnKGlub2RlLCBmbGFnLCB0cnVlKTsKPiA+ID4g
-IH0KPiA+ID4gCj4gPiA+ICBzdGF0aWMgaW5saW5lIGludCBpc19pbm9kZV9mbGFnX3NldChzdHJ1
-Y3QgaW5vZGUgKmlub2RlLCBpbnQgZmxhZykKPiA+ID4gIHsKPiA+ID4gLQlyZXR1cm4gdGVzdF9i
-aXQoZmxhZywgJkYyRlNfSShpbm9kZSktPmZsYWdzKTsKPiA+ID4gKwlpZiAoKDEgPDwgZmxhZykg
-PD0gc2l6ZW9mKHVuc2lnbmVkIGxvbmcpKQo+ID4gPiArCQlyZXR1cm4gdGVzdF9iaXQoZmxhZywg
-JkYyRlNfSShpbm9kZSktPmZsYWdzKTsKPiA+ID4gKwllbHNlCj4gPiA+ICsJCXJldHVybiB0ZXN0
-X2JpdChmbGFnIC0gMzIsICZGMkZTX0koaW5vZGUpLT5leHRyYV9mbGFncyk7Cj4gPiA+ICB9Cj4g
-PiA+IAo+ID4gPiAgc3RhdGljIGlubGluZSB2b2lkIGNsZWFyX2lub2RlX2ZsYWcoc3RydWN0IGlu
-b2RlICppbm9kZSwgaW50IGZsYWcpCj4gPiA+ICB7Cj4gPiA+IC0JaWYgKHRlc3RfYml0KGZsYWcs
-ICZGMkZTX0koaW5vZGUpLT5mbGFncykpCj4gPiA+IC0JCWNsZWFyX2JpdChmbGFnLCAmRjJGU19J
-KGlub2RlKS0+ZmxhZ3MpOwo+ID4gPiArCWlmICgoMSA8PCBmbGFnKSA8PSBzaXplb2YodW5zaWdu
-ZWQgbG9uZykpIHsKPiA+ID4gKwkJaWYgKHRlc3RfYml0KGZsYWcsICZGMkZTX0koaW5vZGUpLT5m
-bGFncykpCj4gPiA+ICsJCQljbGVhcl9iaXQoZmxhZywgJkYyRlNfSShpbm9kZSktPmZsYWdzKTsK
-PiA+ID4gKwl9IGVsc2Ugewo+ID4gPiArCQlpZiAodGVzdF9iaXQoZmxhZyAtIDMyLCAmRjJGU19J
-KGlub2RlKS0+ZXh0cmFfZmxhZ3MpKQo+ID4gPiArCQkJY2xlYXJfYml0KGZsYWcgLSAzMiwgJkYy
-RlNfSShpbm9kZSktPmV4dHJhX2ZsYWdzKTsKPiA+ID4gKwl9Cj4gPiA+ICAJX19tYXJrX2lub2Rl
-X2RpcnR5X2ZsYWcoaW5vZGUsIGZsYWcsIGZhbHNlKTsKPiA+ID4gIH0KPiA+ID4gCj4gPiA+IGRp
-ZmYgLS1naXQgYS9mcy9mMmZzL2lub2RlLmMgYi9mcy9mMmZzL2lub2RlLmMKPiA+ID4gaW5kZXgg
-NDRlMDhiZjJlMmI0Li5jYTkyNGQ3ZTBlMzAgMTAwNjQ0Cj4gPiA+IC0tLSBhL2ZzL2YyZnMvaW5v
-ZGUuYwo+ID4gPiArKysgYi9mcy9mMmZzL2lub2RlLmMKPiA+ID4gQEAgLTM2Myw2ICszNjMsNyBA
-QCBzdGF0aWMgaW50IGRvX3JlYWRfaW5vZGUoc3RydWN0IGlub2RlICppbm9kZSkKPiA+ID4gIAlp
-ZiAoU19JU1JFRyhpbm9kZS0+aV9tb2RlKSkKPiA+ID4gIAkJZmktPmlfZmxhZ3MgJj0gfkYyRlNf
-UFJPSklOSEVSSVRfRkw7Cj4gPiA+ICAJZmktPmZsYWdzID0gMDsKPiA+ID4gKwlmaS0+ZXh0cmFf
-ZmxhZ3MgPSAwOwo+ID4gPiAgCWZpLT5pX2FkdmlzZSA9IHJpLT5pX2FkdmlzZTsKPiA+ID4gIAlm
-aS0+aV9waW5vID0gbGUzMl90b19jcHUocmktPmlfcGlubyk7Cj4gPiA+ICAJZmktPmlfZGlyX2xl
-dmVsID0gcmktPmlfZGlyX2xldmVsOwo+ID4gPiAtLQo+ID4gPiAyLjIyLjAKPiA+ID4gCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1k
-ZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQK
-aHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1k
-ZXZlbAo=
+On Fri, Mar 20, 2020 at 11:24:52AM -0700, Eric Biggers wrote:
+> On Fri, Mar 20, 2020 at 11:11:32AM -0700, Matthew Wilcox wrote:
+> > On Fri, Mar 20, 2020 at 11:00:17AM -0700, Eric Biggers wrote:
+> > > But then if someone passes index=0 and nr_to_read=0, this underflows and the
+> > > entire file gets read.
+> > 
+> > nr_to_read == 0 doesn't make sense ... I thought we filtered that out
+> > earlier, but I can't find anywhere that does that right now.  I'd
+> > rather return early from __do_page_cache_readahead() to fix that.
+> > 
+> > > The page cache isn't actually supposed to contain a page at index ULONG_MAX,
+> > > since MAX_LFS_FILESIZE is at most ((loff_t)ULONG_MAX << PAGE_SHIFT), right?  So
+> > > I don't think we need to worry about reading the page with index ULONG_MAX.
+> > > I.e. I think it's fine to limit nr_to_read to 'ULONG_MAX - index', if that makes
+> > > it easier to avoid an overflow or underflow in the next check.
+> > 
+> > I think we can get a page at ULONG_MAX on 32-bit systems?  I mean, we can buy
+> > hard drives which are larger than 16TiB these days:
+> > https://www.pcmag.com/news/seagate-will-ship-18tb-and-20tb-hard-drives-in-2020
+> > (even ignoring RAID devices)
+> 
+> The max file size is ((loff_t)ULONG_MAX << PAGE_SHIFT) which means the maximum
+> page *index* is ULONG_MAX - 1, not ULONG_MAX.
+
+I see where we set that for _files_ ... I can't find anywhere that we prevent
+i_size getting that big for block devices.  Maybe I'm missing something.
+
+> Anyway, I think we may be making this much too complicated.  How about just:
+> 
+> 	pgoff_t i_nrpages = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
+> 
+> 	if (index >= i_nrpages)
+> 		return;
+> 	/* Don't read past the end of the file */
+> 	nr_to_read = min(nr_to_read, i_nrpages - index);
+> 
+> That's 2 branches instead of 4.  (Note that assigning to i_nrpages can't
+> overflow, since the max number of pages is ULONG_MAX not ULONG_MAX + 1.)
+
+I like where you're going with this.  Just to be on the safe side, I'd
+prefer to do this:
+
+@@ -266,11 +266,8 @@ void __do_page_cache_readahead(struct address_space *mapping,
+        end_index = (isize - 1) >> PAGE_SHIFT;
+        if (index > end_index)
+                return;
+-       /* Avoid wrapping to the beginning of the file */
+-       if (index + nr_to_read < index)
+-               nr_to_read = ULONG_MAX - index + 1;
+        /* Don't read past the page containing the last byte of the file */
+-       if (index + nr_to_read >= end_index)
++       if (nr_to_read > end_index - index)
+                nr_to_read = end_index - index + 1;
+ 
+        page_cache_readahead_unbounded(mapping, file, index, nr_to_read,
+
+end_index - index + 1 could only overflow if end_index is ULONG_MAX
+and index is 0.  But if end_index is ULONG_MAX and index is 0, then
+nr_to_read is necessarily <= ULONG_MAX, so the condition is false.
+And if nr_to_read is 0, then the condition is also false, so it won't
+increase nr_to_read from 0 to 1.  It might assign x to nr_to_read when
+nr_to_read is already x, but that's harmless.
+
+Thanks!
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
