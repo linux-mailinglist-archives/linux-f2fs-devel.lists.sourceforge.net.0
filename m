@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D4BA18EEAF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 04:55:24 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D467818EECF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 05:12:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGEBO-0004Km-S9; Mon, 23 Mar 2020 03:55:22 +0000
+	id 1jGERY-0003Zp-29; Mon, 23 Mar 2020 04:12:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jGEBN-0004KY-L3
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:55:21 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jGERT-0003ZM-7f
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 04:12:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8D3MNI2RZ/V2nx63rlywJECLYaSXFytZgoECfhePimg=; b=WU6RhcMS0ZS7vlet0MsiPxS7OL
- 5nv/ncgwkYHbFC32xGPavNu1YaAN1RkpIZv7fPJPjbdaF4GZMErxv8+jJPTH9/HlD819xza2hcIP3
- PekyGyetP73T7nMjGGEx/xgijmsMGoVie/3Mw4fDEe1j575tNoG4ngA7a447pWtkYkfI=;
+ bh=V6pU8/w5ss1G+1Qm2GCi6rimWE1cs1oAOZ5bO2o4S8Y=; b=Od9x036o8dC2i/CT/Y1JjKl4i5
+ Akg+goZ0oSxa5K5dIaVdKTWenwviy3FfBUQhpoWnIvVykmZjHqi44HsF+S4pIP48V2J8YW0VsYyRv
+ s7UVRB9w/4ACOI2agScBgln7F7sZm5/cgZjDkbqbGCJV57nMcPap34v3UPPrbNZ0dqMs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,45 +29,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8D3MNI2RZ/V2nx63rlywJECLYaSXFytZgoECfhePimg=; b=UaeHEHSGN6Auk2zGhjJPQpCNDZ
- CnMFJ64K1EcCHyNfcK/SSu5PaJ5VStvMIq7uM1thq3xM1DlwJM9ypx8PiMc8sJnGcrg3ETdOTS8fQ
- XVju9/L8nTqrvVIKhn0r8XOVagTUJLbI9IO0PlMbfXP32wilU67lnT4OL3kJJBohxsBk=;
+ bh=V6pU8/w5ss1G+1Qm2GCi6rimWE1cs1oAOZ5bO2o4S8Y=; b=gGtdz2efTP89Rpzh8ru4aoG2b8
+ K5FhyHTqv2nzln+PxTRgD+rvJTM4TvmB/cPHe++cJUNbif5EFfOAP1tXOeOQPanLzW9o0YSQuF7eT
+ DagA9ILeUyT4ZRiVxW2HvcYmMbMXG5cTbj5GP6cpQF3Cws+8OPdvij7nf0JMKDmiQdAk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGEBL-00DOsn-LN
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:55:21 +0000
+ id 1jGERQ-00DPa5-NN
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 04:11:59 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 04B1020714;
- Mon, 23 Mar 2020 03:55:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 06F0D206C3;
+ Mon, 23 Mar 2020 04:11:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584935714;
- bh=OBh+ukoepnmNeA3oMd1EdG4Mc4HasSJLB13qq51fjOw=;
+ s=default; t=1584936704;
+ bh=DADM8VMsduu8mVDAOeA48RoYO+h/xSQwej1QUYpXsRw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=2RIgaoUzayp3K2mrLmxEfpZnPBGYXfecqHr2qwjblMK4RPe+BMbLPE/aBbutEpaIu
- Tpfbqcy/uitSMVJ30uYS3Gpj/Uw3uEZsPyE+cFcFce6x3Z0haNwq7b+TJcLJZJboQo
- AMtD2tgQpg1UuWaN1hPX/huPUg6p+S40+z68Px34=
-Date: Sun, 22 Mar 2020 20:55:13 -0700
+ b=ai43BOV9doo++q7t9tzDswKmOQNqLP7ZmvifOBH7FIciYqo46+pcaYiL/noJ+ZxsY
+ PnPOhrGqjQzOKGOGUDGpZwxrzCEspsDTbNIKbBdA5KSNdA4obDau/j0SFMkz6wOhYK
+ rtVtmIcgcWgJt2vby3FkwvmyQylrnW92kE8Jwy4o=
+Date: Sun, 22 Mar 2020 21:11:43 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200323035513.GB147648@google.com>
-References: <20200320142231.2402-1-willy@infradead.org>
- <20200320142231.2402-23-willy@infradead.org>
+To: John <graysky@archlinux.us>
+Message-ID: <20200323041143.GC147648@google.com>
+References: <CAO_nJAYw+-+n584gg2-rRp3KoAsPT5mpD5yRCrwM7hiDMD=PJg@mail.gmail.com>
+ <78bdaf48-9699-3a04-efec-95e1a670bfe4@huawei.com>
+ <CAO_nJAZ_bW1Bor-sUb8Ouz4VQV28KPZR23njH4VV+eH=BgwR=Q@mail.gmail.com>
+ <418f4ee8-14ed-bdfa-d16c-f68c2992f234@huawei.com>
+ <CAO_nJAYTbPqWKAnG1+i2J1jnEKN6QtiMV_CxVyranZ-AWK9Agg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200320142231.2402-23-willy@infradead.org>
+In-Reply-To: <CAO_nJAYTbPqWKAnG1+i2J1jnEKN6QtiMV_CxVyranZ-AWK9Agg@mail.gmail.com>
 User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -75,9 +78,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jGEBL-00DOsn-LN
-Subject: Re: [f2fs-dev] [PATCH v9 22/25] f2fs: Convert from readpages to
- readahead
+X-Headers-End: 1jGERQ-00DPa5-NN
+Subject: Re: [f2fs-dev] fstrim does not recognize FSVER=1.13 of F2FS
+ partitions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,193 +92,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: cluster-devel@redhat.com, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- ocfs2-devel@oss.oracle.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/20, Matthew Wilcox wrote:
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> 
-> Use the new readahead operation in f2fs
-> 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> Reviewed-by: William Kucharski <william.kucharski@oracle.com>
+On 03/18, John wrote:
+> On Mon, Mar 16, 2020 at 9:44 PM Chao Yu <yuchao0@huawei.com> wrote:
+> >
+> > On 2020/3/16 17:52, John wrote:
+> > > On Sun, Mar 15, 2020 at 9:24 PM Chao Yu <yuchao0@huawei.com> wrote:
+> > >>
+> > >> What's your mount option and mkfs option on those two partitions, and what's
+> > >> your kernel version?
+> > >
+> > > I am mounting the partitions with systemd like so (/etc/fstab entry):
+> > >   LABEL=incoming         /incoming     f2fs  noauto,x-systemd.automount  0 0
+> > >
+> > > But I can reproduce this if I totally remove the entries within
+> > > /etc/fstab, reboot, and mount manually like this:
+> > >   mount LABEL=incoming /incoming
+> >
+> > However, the directory where you trigger trim is "/mnt/media"?
+> >
+> > Quoted:
+> > "Invoking it manually on the newer one gives this:
+> > # fstrim -v /mnt/media
+> > fstrim: /mnt/media: the discard operation is not supported"
 
-Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Hmm, could you share cat /proc/mounts?
 
-> ---
->  fs/f2fs/data.c              | 47 +++++++++++++++----------------------
->  include/trace/events/f2fs.h |  6 ++---
->  2 files changed, 22 insertions(+), 31 deletions(-)
+> >
+> > Could you give more details about that? What device is behind /mnt/media?
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 8e9aa2254490..237dff36fe73 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -2160,8 +2160,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->   * from read-ahead.
->   */
->  static int f2fs_mpage_readpages(struct address_space *mapping,
-> -			struct list_head *pages, struct page *page,
-> -			unsigned nr_pages, bool is_readahead)
-> +		struct readahead_control *rac, struct page *page)
->  {
->  	struct bio *bio = NULL;
->  	sector_t last_block_in_bio = 0;
-> @@ -2179,6 +2178,7 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  		.nr_cpages = 0,
->  	};
->  #endif
-> +	unsigned nr_pages = rac ? readahead_count(rac) : 1;
->  	unsigned max_nr_pages = nr_pages;
->  	int ret = 0;
->  
-> @@ -2192,15 +2192,9 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  	map.m_may_create = false;
->  
->  	for (; nr_pages; nr_pages--) {
-> -		if (pages) {
-> -			page = list_last_entry(pages, struct page, lru);
-> -
-> +		if (rac) {
-> +			page = readahead_page(rac);
->  			prefetchw(&page->flags);
-> -			list_del(&page->lru);
-> -			if (add_to_page_cache_lru(page, mapping,
-> -						  page_index(page),
-> -						  readahead_gfp_mask(mapping)))
-> -				goto next_page;
->  		}
->  
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
-> @@ -2210,7 +2204,7 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  				ret = f2fs_read_multi_pages(&cc, &bio,
->  							max_nr_pages,
->  							&last_block_in_bio,
-> -							is_readahead);
-> +							rac);
->  				f2fs_destroy_compress_ctx(&cc);
->  				if (ret)
->  					goto set_error_page;
-> @@ -2233,7 +2227,7 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  #endif
->  
->  		ret = f2fs_read_single_page(inode, page, max_nr_pages, &map,
-> -					&bio, &last_block_in_bio, is_readahead);
-> +					&bio, &last_block_in_bio, rac);
->  		if (ret) {
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
->  set_error_page:
-> @@ -2242,8 +2236,10 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  			zero_user_segment(page, 0, PAGE_SIZE);
->  			unlock_page(page);
->  		}
-> +#ifdef CONFIG_F2FS_FS_COMPRESSION
->  next_page:
-> -		if (pages)
-> +#endif
-> +		if (rac)
->  			put_page(page);
->  
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
-> @@ -2253,16 +2249,15 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
->  				ret = f2fs_read_multi_pages(&cc, &bio,
->  							max_nr_pages,
->  							&last_block_in_bio,
-> -							is_readahead);
-> +							rac);
->  				f2fs_destroy_compress_ctx(&cc);
->  			}
->  		}
->  #endif
->  	}
-> -	BUG_ON(pages && !list_empty(pages));
->  	if (bio)
->  		__submit_bio(F2FS_I_SB(inode), bio, DATA);
-> -	return pages ? 0 : ret;
-> +	return ret;
->  }
->  
->  static int f2fs_read_data_page(struct file *file, struct page *page)
-> @@ -2281,28 +2276,24 @@ static int f2fs_read_data_page(struct file *file, struct page *page)
->  	if (f2fs_has_inline_data(inode))
->  		ret = f2fs_read_inline_data(inode, page);
->  	if (ret == -EAGAIN)
-> -		ret = f2fs_mpage_readpages(page_file_mapping(page),
-> -						NULL, page, 1, false);
-> +		ret = f2fs_mpage_readpages(page_file_mapping(page), NULL, page);
->  	return ret;
->  }
->  
-> -static int f2fs_read_data_pages(struct file *file,
-> -			struct address_space *mapping,
-> -			struct list_head *pages, unsigned nr_pages)
-> +static void f2fs_readahead(struct readahead_control *rac)
->  {
-> -	struct inode *inode = mapping->host;
-> -	struct page *page = list_last_entry(pages, struct page, lru);
-> +	struct inode *inode = rac->mapping->host;
->  
-> -	trace_f2fs_readpages(inode, page, nr_pages);
-> +	trace_f2fs_readpages(inode, readahead_index(rac), readahead_count(rac));
->  
->  	if (!f2fs_is_compress_backend_ready(inode))
-> -		return 0;
-> +		return;
->  
->  	/* If the file has inline data, skip readpages */
->  	if (f2fs_has_inline_data(inode))
-> -		return 0;
-> +		return;
->  
-> -	return f2fs_mpage_readpages(mapping, pages, NULL, nr_pages, true);
-> +	f2fs_mpage_readpages(rac->mapping, rac, NULL);
->  }
->  
->  int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
-> @@ -3784,7 +3775,7 @@ static void f2fs_swap_deactivate(struct file *file)
->  
->  const struct address_space_operations f2fs_dblock_aops = {
->  	.readpage	= f2fs_read_data_page,
-> -	.readpages	= f2fs_read_data_pages,
-> +	.readahead	= f2fs_readahead,
->  	.writepage	= f2fs_write_data_page,
->  	.writepages	= f2fs_write_data_pages,
->  	.write_begin	= f2fs_write_begin,
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index 67a97838c2a0..d72da4a33883 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -1375,9 +1375,9 @@ TRACE_EVENT(f2fs_writepages,
->  
->  TRACE_EVENT(f2fs_readpages,
->  
-> -	TP_PROTO(struct inode *inode, struct page *page, unsigned int nrpage),
-> +	TP_PROTO(struct inode *inode, pgoff_t start, unsigned int nrpage),
->  
-> -	TP_ARGS(inode, page, nrpage),
-> +	TP_ARGS(inode, start, nrpage),
->  
->  	TP_STRUCT__entry(
->  		__field(dev_t,	dev)
-> @@ -1389,7 +1389,7 @@ TRACE_EVENT(f2fs_readpages,
->  	TP_fast_assign(
->  		__entry->dev	= inode->i_sb->s_dev;
->  		__entry->ino	= inode->i_ino;
-> -		__entry->start	= page->index;
-> +		__entry->start	= start;
->  		__entry->nrpage	= nrpage;
->  	),
->  
-> -- 
-> 2.25.1
+> The SSD has two partitions on it formatted to F2FS.
+> LABEL=incoming was created with f2fs-tools v1.12.0
+> LABEL=media was created with f2fs-tools v1.13.0
 > 
+> The physical device is a Samsung 860 EVO 2TB SSD.
+> 
+> > > Inspecting my shell history, I created them both with this command:
+> > >   mkfs.f2fs -l incoming /dev/sdb2
+> > >
+> > > I am running 5.5.9 on Arch Linux, but I believe I experienced this
+> > > under previous 5.5.x series as well.
+> > >
+> > > If you create a F2FS partition using the latest stable release of
+> > > f2fs-tools (1.13.0) are you able to reproduce the inability to trim?
+> >
+> > I can't, and also there is such option in mkfs to disable trim functionality
+> > during format.
+> >
+> 
+> I might be misunderstanding.  When you said "I can't" does that mean
+> when you created a partition with f2fstools v1.13.0, mounted it, and
+> then ran the fstrim on it, fstrim completed successfully?  Which
+> version of fstrim do you have installed?  I am using util-linux
+> 2.35.1.
 > 
 > 
 > _______________________________________________
