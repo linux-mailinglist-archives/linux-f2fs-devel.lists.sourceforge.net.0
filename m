@@ -2,71 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADFFD18EDB2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 02:42:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D068018EDB7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 02:51:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGC6t-0005QK-3B; Mon, 23 Mar 2020 01:42:35 +0000
+	id 1jGCEz-0003Fb-8z; Mon, 23 Mar 2020 01:50:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jGC6r-0005QC-M4
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 01:42:33 +0000
+ (envelope-from <megi@xff.cz>) id 1jGCEt-0003FO-U2
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 01:50:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DwNS2HPcjR3jO69i8hfNtxf58En8mmuAqK859VaYiUI=; b=jyvzI3b3gvqP2zcekVLJw5cdeT
- 0z7XKNzoPQJ37yoI84Gn1HcHyFqqm+iGrIl+CVnZiMQI/Xv6IOI+59W/khh0h6eujYBE3bM/C0esT
- zm1sTjfx1jNLK5oeKzIuxyH2PEwfVtS3bek1LVyfHPF7O/EzKP3aI4AG33TJf31FEzaQ=;
+ bh=8SLsMW47j3XkXoi43JnisWomCv/kF8xRgMCVOPZ4FUI=; b=gq3HRciatjKXDS5PNcoND8e1YL
+ Q8DVPKd0nGpI+8uw2ET1p0gwRL7QabNkSAsHUJDiMuynhhG6xNa/0Ml3r9SXnRhgqvVAyJIYI+nzS
+ O8jJJWT/quH9jP1w98HNIzqAi5eQokWynlAVSZlon7jsgZg2jOWYJ01dqqrL+TzQrEqM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DwNS2HPcjR3jO69i8hfNtxf58En8mmuAqK859VaYiUI=; b=dGgnHCWIu1e15FCt5WclESmiMu
- oq1iqOB53t3pb9FPpTojndBZa0YyNvdpDRU+64Pg0rifcDAdagf3vTthG4TReAcQnPhiKX72wEwvw
- ip/Cl3bkhPT/pB/pkZZUuVjlY4/6CLi7REN1f377L1ljsywt1c16eZx8fm3sARnTTABo=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=8SLsMW47j3XkXoi43JnisWomCv/kF8xRgMCVOPZ4FUI=; b=HCrS2htDq07whwFMgB44ZTCB7N
+ Yc9Pm0FqKh4HRvtGmcbMe1nNV0mjCb//9v0mN+/BWqQoALHzZqZkj+7MuSbl8ffVbgQWvrzi62PG/
+ Zl1abe6TB0TRWGB4uvo6+vgmj7Lvf0gF7QEBnYkDGzHN9AQRV/92UcOAvBwC87p74+io=;
+Received: from vps.xff.cz ([195.181.215.36])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGC6l-000Nhm-Rm
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 01:42:33 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 188EEA22B45C05522922;
- Mon, 23 Mar 2020 09:42:21 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
- 2020 09:42:18 +0800
-To: chenying <chen.ying153@zte.com.cn>, <jaegeuk@kernel.org>
-References: <1584754308-39299-1-git-send-email-chen.ying153@zte.com.cn>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <26f11617-92e4-1dc5-38fd-5048e92e059e@huawei.com>
-Date: Mon, 23 Mar 2020 09:42:17 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1jGCEp-0045vM-5i
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 01:50:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xff.cz; s=mail;
+ t=1584928236; bh=1N30fcEiZZHKBwEnOj8WWoevPWmYxyTUVcPdUGEd8VE=;
+ h=Date:From:To:Cc:Subject:References:X-My-GPG-KeyId:From;
+ b=RWwGJOKfp8Gr8AiVOHHK7dNKWIZF6ArzehJDlzDMofSgs5dGvdFPbF8uLA46sy7+d
+ FC6NjOMYhiCFGsUgEimFwvK1Pohb6g+OehoXJ8QMdkjysSzdA41/i5Qhs/sCE/behe
+ qJnW95oq0YmXDfKASbPTNv7dvLxQKugaEmHkMMSE=
+Date: Mon, 23 Mar 2020 02:50:36 +0100
+From: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200323015036.pniupuucfl3dug4m@core.my.home>
+Mail-Followup-To: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>,
+ Chao Yu <yuchao0@huawei.com>, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, chao@kernel.org
+References: <20200323012519.41536-1-yuchao0@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <1584754308-39299-1-git-send-email-chen.ying153@zte.com.cn>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200323012519.41536-1-yuchao0@huawei.com>
+X-My-GPG-KeyId: EBFBDDE11FB918D44D1F56C1F9F0A873BE9777ED
+ <https://xff.cz/key.txt>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: zte.com.cn]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ for more information. [URIs: bootlin.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jGC6l-000Nhm-Rm
-Subject: Re: [f2fs-dev] [PATCH] ENOSPC returned but there still many free
- segments
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jGCEp-0045vM-5i
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix potential .flags overflow on
+ 32bit architecture
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,91 +85,76 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wang.yi59@zte.com.cn, jiang.xuexin@zte.com.cn, linux-kernel@vger.kernel.org,
- xue.zhihong@zte.com.cn, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/3/21 9:31, chenying wrote:
-> I write data to a compressed file when the disk space is almost full
-> and it return -ENOSPC error, but cat /sys/kernel/debug/f2fs/status
-> shows that there still many free segments.
+Hello Chao Yu,
 
-free segments include reserved segments, so its value should never be zero,
-otherwise there should be a bug.
-
-BTW, could you check result in 'stat -f <your_mountpoint>' rather than f2fs
-status in debugfs?
-
-> 
-> Signed-off-by: chenying <chen.ying153@zte.com.cn>
-> ---
->  fs/f2fs/compress.c | 5 ++++-
->  fs/f2fs/file.c     | 4 ++++
->  2 files changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index d8a64be..6ca058b 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -854,6 +854,8 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
->  				fio.compr_blocks++;
->  			if (__is_valid_data_blkaddr(blkaddr))
->  				f2fs_invalidate_blocks(sbi, blkaddr);
-> +			else if (blkaddr != NULL_ADDR)
-> +				dec_valid_block_count(sbi, dn.inode, 1);
->  			f2fs_update_data_blkaddr(&dn, COMPRESS_ADDR);
->  			goto unlock_continue;
->  		}
-> @@ -865,7 +867,8 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
->  			if (__is_valid_data_blkaddr(blkaddr)) {
->  				f2fs_invalidate_blocks(sbi, blkaddr);
->  				f2fs_update_data_blkaddr(&dn, NEW_ADDR);
-> -			}
-> +			} else if (blkaddr != NULL_ADDR)
-> +				dec_valid_block_count(sbi, dn.inode, 1);
-
-I don't think this is correct, you could check message in git pull of 5.6:
-
-Quoted:
-
-"f2fs-for-5.6
-
-In this series, we've implemented transparent compression experimentally. It
-supports LZO and LZ4, but will add more later as we investigate in the field
-more. At this point, the feature doesn't expose compressed space to user
-directly in order to guarantee potential data updates later to the space.
-Instead, the main goal is to reduce data writes to flash disk as much as
-possible, resulting in extending disk life time as well as relaxing IO
-congestion. Alternatively, we're also considering to add ioctl() to reclaim
-compressed space and show it to user after putting the immutable bit.
-"
-
-That means we will keep reserved blocks in compressed cluster until user
-release them via ioctl.
-
-Thanks,
-
->  			goto unlock_continue;
->  		}
+On Mon, Mar 23, 2020 at 09:25:19AM +0800, Chao Yu wrote:
+> [snip]
 >  
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 0d4da64..f07c9e2 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -589,6 +589,10 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
->  			clear_inode_flag(dn->inode, FI_FIRST_BLOCK_WRITTEN);
->  
->  		f2fs_invalidate_blocks(sbi, blkaddr);
-> +		if (compressed_cluster &&
-> +			(blkaddr == NEW_ADDR || blkaddr == COMPRESS_ADDR))
-> +			continue;
+> +static inline void __set_inode_flag(struct inode *inode, int flag)
+> +{
+> +	test_and_set_bit(flag % BITS_PER_LONG,
+> +			&F2FS_I(inode)->flags[BIT_WORD(flag)]);
+
+This can simply be:
+
+    test_and_set_bit(flag, F2FS_I(inode)->flags);
+
+all of these bitmap manipulation functions already will do the
+right thing to access the correct location in the flags array:
+
+  https://elixir.bootlin.com/linux/latest/source/include/asm-generic/bitops/atomic.h#L32
+
+see BIT_MASK and BIT_WORD use in that function.
+
+> +}
 > +
->  		nr_free++;
->  	}
+>  static inline void set_inode_flag(struct inode *inode, int flag)
+>  {
+> -	if (!test_bit(flag, &F2FS_I(inode)->flags))
+> -		set_bit(flag, &F2FS_I(inode)->flags);
+> +	__set_inode_flag(inode, flag);
+>  	__mark_inode_dirty_flag(inode, flag, true);
+>  }
 >  
-> 
+>  static inline int is_inode_flag_set(struct inode *inode, int flag)
+>  {
+> -	return test_bit(flag, &F2FS_I(inode)->flags);
+> +	return test_bit(flag % BITS_PER_LONG,
+> +				&F2FS_I(inode)->flags[BIT_WORD(flag)]);
+
+ditto
+
+>  }
+>  
+>  static inline void clear_inode_flag(struct inode *inode, int flag)
+>  {
+> -	if (test_bit(flag, &F2FS_I(inode)->flags))
+> -		clear_bit(flag, &F2FS_I(inode)->flags);
+> +	test_and_clear_bit(flag % BITS_PER_LONG,
+> +				&F2FS_I(inode)->flags[BIT_WORD(flag)]);
+
+ditto
+
+I'm going to test the patch. It looks like that this was really
+the root cause of all those locking issues I was seeing on my
+32-bit tablet. It seems to explain why my 64-bit systems were
+not affected, and why reverting compession fixed it too.
+Great job figuring this out.
+
+I'll let you know soon.
+
+thank you and regards,
+	o.
+
+>  	__mark_inode_dirty_flag(inode, flag, false);
+>  }
+>  
 
 
 _______________________________________________
