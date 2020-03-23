@@ -2,79 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C58918FEB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 21:23:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8BE718FFD3
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 21:50:16 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGTbS-00044X-SS; Mon, 23 Mar 2020 20:23:18 +0000
+	id 1jGU1U-0005P2-7p; Mon, 23 Mar 2020 20:50:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1jGTbL-00043d-Ou
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:23:11 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jGU1S-0005Ou-Qq
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:50:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DcQHOlgwNqeEPN3fiAW/rNxfySxuJVhOd+sF/+JeQ6E=; b=nLjoXp1a/ur6ICbT5hqwFk42Xy
- inbsOco3oeXpe62er7YYgiS9bFXp2RqPMPquOgCjrkKsiGDFoQNIE7q/kW5zmKkowzEaPLpWjbi3X
- S5nTIjRlusH316raAEa7vMfVY7eCtlXMf+0J4nkXoQq861KHyazNYNZdK8trc6fXvbVc=;
+ bh=6RPSoUj8dY2FPV9gYfJK4mJFPEwbHVU4hURZ7E2n1oo=; b=YvegEYQdguT6ykT2UaJrKXF+E9
+ MF9TOWjj7mDbIUYq9NZxBCHfsbQCBFM3iZ6LBGRMWRZxcj+fdN3TrY+2TWcXezqJHvsriWky8qoUE
+ EzBES7KD27zWoAQKubIPXok7UP99AKjRx2TzlJDWqCwGCVpqRd/lb1p6ZgZDR8mDdv8o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DcQHOlgwNqeEPN3fiAW/rNxfySxuJVhOd+sF/+JeQ6E=; b=RoG4xvr0mMrsFrDLwLX1yCanqt
- 9YL/ThljHRAnQDI0RA7tH+8PqY+gJKRWpIi5mHtkIvnmUnubeXUzxGUTSsfhZh0tPcK+1UKZYIUK1
- /qVc41PTjGjWB/nEglytmqCKDRajXM3y5KNGW3u5mpToAvCnGjZgEW0ICxPCygVNJ4KY=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=6RPSoUj8dY2FPV9gYfJK4mJFPEwbHVU4hURZ7E2n1oo=; b=lmb27oIV9DLj+7kATjaJqdxbJB
+ 0GF2wI44gOjN3td2LTgPpwHirVjpj0cw7GMT6N+0OUOVEmoQKscJZY1a3k+/yqtV08mFhRmfPYTrf
+ 9q3U72R2cwCx8H/c7pMsKvxW6rqYvRBDkYFzJJIHPhBc2YRA4AMpVTG/iS6jDkmKTL2E=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGTbJ-00EMZw-Rh
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:23:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=DcQHOlgwNqeEPN3fiAW/rNxfySxuJVhOd+sF/+JeQ6E=; b=TPybKGkTlLYjObv6dPcawhPHLm
- RCByjj/hE7TkPru+cXnpw/Ez0mfGPUyiOwAzcH9xWgftIj9QABRpbFkbBMXgsaQjG959xgTmnBfW0
- CXLy7eljwHojUJRAA9lMX//CykIsqgQVVHaP8SKOxFCJmVXoLE4EaStMc1H3zvk+9NoSGNaZSWkng
- /4ntS/huqrVKoEi51RWPz0U1a0bvMTmCsm/ZDVgddtOV5ZnRpXj/3XB332HzsZ6L9tCe1SBvyEPrY
- ZpvUzn8SNbHPQKWaU52mPoMTbQrCCv9cvb4r8ogKVeGD9DfAQgsS9XaDdjNbrEPbX6lMgCyE1FuSb
- 0MbqwdWw==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jGTbC-0003WB-7j; Mon, 23 Mar 2020 20:23:02 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Date: Mon, 23 Mar 2020 13:22:59 -0700
-Message-Id: <20200323202259.13363-26-willy@infradead.org>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200323202259.13363-1-willy@infradead.org>
+ id 1jGU1O-0051Vr-Vy
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:50:10 +0000
+Received: from gmail.com (unknown [104.132.1.76])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2370A20719;
+ Mon, 23 Mar 2020 20:49:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1584996596;
+ bh=uca8lceeryIzQMAk4G4iarM7sj/2pw+KF5opo+TrNGY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=coWkHNesJ3VgUDx8upr085r4HZYltqISo1yUGjJ/WXKfvNR+04jgsegcd1wxMZodR
+ fQGiy5Lk9Drq+w7ah2QA9gYBnXswZgZRIqxSJS3M98zDeMk86vooA8s3ntT5pmzqG+
+ 0iFnw5waVySEm2t9URBP8tlPK7izf9Vhqov96a5c=
+Date: Mon, 23 Mar 2020 13:49:54 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200323204954.GB61708@gmail.com>
 References: <20200323202259.13363-1-willy@infradead.org>
+ <20200323202259.13363-13-willy@infradead.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20200323202259.13363-13-willy@infradead.org>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: infradead.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jGTbJ-00EMZw-Rh
-Subject: [f2fs-dev] [PATCH v10 25/25] iomap: Convert from readpages to
- readahead
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1jGU1O-0051Vr-Vy
+Subject: Re: [f2fs-dev] [PATCH v10 12/25] mm: Move end_index check out of
+ readahead loop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,276 +88,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, William Kucharski <william.kucharski@oracle.com>,
- "Darrick J . Wong" <darrick.wong@oracle.com>, linux-kernel@vger.kernel.org,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+Cc: cluster-devel@redhat.com, linux-mm@kvack.org,
+ John Hubbard <jhubbard@nvidia.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org
+ ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+On Mon, Mar 23, 2020 at 01:22:46PM -0700, Matthew Wilcox wrote:
+> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+> 
+> By reducing nr_to_read, we can eliminate this check from inside the loop.
+> 
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+> Reviewed-by: William Kucharski <william.kucharski@oracle.com>
+> ---
+>  mm/readahead.c | 14 ++++++++------
+>  1 file changed, 8 insertions(+), 6 deletions(-)
+> 
+> diff --git a/mm/readahead.c b/mm/readahead.c
+> index d01531ef9f3c..998fdd23c0b1 100644
+> --- a/mm/readahead.c
+> +++ b/mm/readahead.c
+> @@ -167,8 +167,6 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  		unsigned long lookahead_size)
+>  {
+>  	struct inode *inode = mapping->host;
+> -	struct page *page;
+> -	unsigned long end_index;	/* The last page we want to read */
+>  	LIST_HEAD(page_pool);
+>  	loff_t isize = i_size_read(inode);
+>  	gfp_t gfp_mask = readahead_gfp_mask(mapping);
+> @@ -178,22 +176,26 @@ void __do_page_cache_readahead(struct address_space *mapping,
+>  		._index = index,
+>  	};
+>  	unsigned long i;
+> +	pgoff_t end_index;	/* The last page we want to read */
+>  
+>  	if (isize == 0)
+>  		return;
+>  
+> -	end_index = ((isize - 1) >> PAGE_SHIFT);
+> +	end_index = (isize - 1) >> PAGE_SHIFT;
+> +	if (index > end_index)
+> +		return;
+> +	/* Don't read past the page containing the last byte of the file */
+> +	if (nr_to_read > end_index - index)
+> +		nr_to_read = end_index - index + 1;
+>  
+>  	/*
+>  	 * Preallocate as many pages as we will need.
+>  	 */
+>  	for (i = 0; i < nr_to_read; i++) {
+> -		if (index + i > end_index)
+> -			break;
+> +		struct page *page = xa_load(&mapping->i_pages, index + i);
+>  
+>  		BUG_ON(index + i != rac._index + rac._nr_pages);
+>  
+> -		page = xa_load(&mapping->i_pages, index + i);
+>  		if (page && !xa_is_value(page)) {
+>  			/*
+>  			 * Page already present?  Kick off the current batch of
+> -- 
 
-Use the new readahead operation in iomap.  Convert XFS and ZoneFS to
-use it.
+Reviewed-by: Eric Biggers <ebiggers@google.com>
 
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
-Reviewed-by: William Kucharski <william.kucharski@oracle.com>
----
- fs/iomap/buffered-io.c | 90 +++++++++++++++---------------------------
- fs/iomap/trace.h       |  2 +-
- fs/xfs/xfs_aops.c      | 13 +++---
- fs/zonefs/super.c      |  7 ++--
- include/linux/iomap.h  |  3 +-
- 5 files changed, 41 insertions(+), 74 deletions(-)
-
-diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index e7928678564f..1734d79acc0a 100644
---- a/fs/iomap/buffered-io.c
-+++ b/fs/iomap/buffered-io.c
-@@ -214,9 +214,8 @@ iomap_read_end_io(struct bio *bio)
- struct iomap_readpage_ctx {
- 	struct page		*cur_page;
- 	bool			cur_page_in_bio;
--	bool			is_readahead;
- 	struct bio		*bio;
--	struct list_head	*pages;
-+	struct readahead_control *rac;
- };
- 
- static void
-@@ -307,11 +306,11 @@ iomap_readpage_actor(struct inode *inode, loff_t pos, loff_t length, void *data,
- 		if (ctx->bio)
- 			submit_bio(ctx->bio);
- 
--		if (ctx->is_readahead) /* same as readahead_gfp_mask */
-+		if (ctx->rac) /* same as readahead_gfp_mask */
- 			gfp |= __GFP_NORETRY | __GFP_NOWARN;
- 		ctx->bio = bio_alloc(gfp, min(BIO_MAX_PAGES, nr_vecs));
- 		ctx->bio->bi_opf = REQ_OP_READ;
--		if (ctx->is_readahead)
-+		if (ctx->rac)
- 			ctx->bio->bi_opf |= REQ_RAHEAD;
- 		ctx->bio->bi_iter.bi_sector = sector;
- 		bio_set_dev(ctx->bio, iomap->bdev);
-@@ -367,36 +366,8 @@ iomap_readpage(struct page *page, const struct iomap_ops *ops)
- }
- EXPORT_SYMBOL_GPL(iomap_readpage);
- 
--static struct page *
--iomap_next_page(struct inode *inode, struct list_head *pages, loff_t pos,
--		loff_t length, loff_t *done)
--{
--	while (!list_empty(pages)) {
--		struct page *page = lru_to_page(pages);
--
--		if (page_offset(page) >= (u64)pos + length)
--			break;
--
--		list_del(&page->lru);
--		if (!add_to_page_cache_lru(page, inode->i_mapping, page->index,
--				GFP_NOFS))
--			return page;
--
--		/*
--		 * If we already have a page in the page cache at index we are
--		 * done.  Upper layers don't care if it is uptodate after the
--		 * readpages call itself as every page gets checked again once
--		 * actually needed.
--		 */
--		*done += PAGE_SIZE;
--		put_page(page);
--	}
--
--	return NULL;
--}
--
- static loff_t
--iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
-+iomap_readahead_actor(struct inode *inode, loff_t pos, loff_t length,
- 		void *data, struct iomap *iomap, struct iomap *srcmap)
- {
- 	struct iomap_readpage_ctx *ctx = data;
-@@ -410,10 +381,7 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
- 			ctx->cur_page = NULL;
- 		}
- 		if (!ctx->cur_page) {
--			ctx->cur_page = iomap_next_page(inode, ctx->pages,
--					pos, length, &done);
--			if (!ctx->cur_page)
--				break;
-+			ctx->cur_page = readahead_page(ctx->rac);
- 			ctx->cur_page_in_bio = false;
- 		}
- 		ret = iomap_readpage_actor(inode, pos + done, length - done,
-@@ -423,32 +391,43 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
- 	return done;
- }
- 
--int
--iomap_readpages(struct address_space *mapping, struct list_head *pages,
--		unsigned nr_pages, const struct iomap_ops *ops)
-+/**
-+ * iomap_readahead - Attempt to read pages from a file.
-+ * @rac: Describes the pages to be read.
-+ * @ops: The operations vector for the filesystem.
-+ *
-+ * This function is for filesystems to call to implement their readahead
-+ * address_space operation.
-+ *
-+ * Context: The @ops callbacks may submit I/O (eg to read the addresses of
-+ * blocks from disc), and may wait for it.  The caller may be trying to
-+ * access a different page, and so sleeping excessively should be avoided.
-+ * It may allocate memory, but should avoid costly allocations.  This
-+ * function is called with memalloc_nofs set, so allocations will not cause
-+ * the filesystem to be reentered.
-+ */
-+void iomap_readahead(struct readahead_control *rac, const struct iomap_ops *ops)
- {
-+	struct inode *inode = rac->mapping->host;
-+	loff_t pos = readahead_pos(rac);
-+	loff_t length = readahead_length(rac);
- 	struct iomap_readpage_ctx ctx = {
--		.pages		= pages,
--		.is_readahead	= true,
-+		.rac	= rac,
- 	};
--	loff_t pos = page_offset(list_entry(pages->prev, struct page, lru));
--	loff_t last = page_offset(list_entry(pages->next, struct page, lru));
--	loff_t length = last - pos + PAGE_SIZE, ret = 0;
- 
--	trace_iomap_readpages(mapping->host, nr_pages);
-+	trace_iomap_readahead(inode, readahead_count(rac));
- 
- 	while (length > 0) {
--		ret = iomap_apply(mapping->host, pos, length, 0, ops,
--				&ctx, iomap_readpages_actor);
-+		loff_t ret = iomap_apply(inode, pos, length, 0, ops,
-+				&ctx, iomap_readahead_actor);
- 		if (ret <= 0) {
- 			WARN_ON_ONCE(ret == 0);
--			goto done;
-+			break;
- 		}
- 		pos += ret;
- 		length -= ret;
- 	}
--	ret = 0;
--done:
-+
- 	if (ctx.bio)
- 		submit_bio(ctx.bio);
- 	if (ctx.cur_page) {
-@@ -456,15 +435,8 @@ iomap_readpages(struct address_space *mapping, struct list_head *pages,
- 			unlock_page(ctx.cur_page);
- 		put_page(ctx.cur_page);
- 	}
--
--	/*
--	 * Check that we didn't lose a page due to the arcance calling
--	 * conventions..
--	 */
--	WARN_ON_ONCE(!ret && !list_empty(ctx.pages));
--	return ret;
- }
--EXPORT_SYMBOL_GPL(iomap_readpages);
-+EXPORT_SYMBOL_GPL(iomap_readahead);
- 
- /*
-  * iomap_is_partially_uptodate checks whether blocks within a page are
-diff --git a/fs/iomap/trace.h b/fs/iomap/trace.h
-index 4df19c66f597..5693a39d52fb 100644
---- a/fs/iomap/trace.h
-+++ b/fs/iomap/trace.h
-@@ -39,7 +39,7 @@ DEFINE_EVENT(iomap_readpage_class, name,	\
- 	TP_PROTO(struct inode *inode, int nr_pages), \
- 	TP_ARGS(inode, nr_pages))
- DEFINE_READPAGE_EVENT(iomap_readpage);
--DEFINE_READPAGE_EVENT(iomap_readpages);
-+DEFINE_READPAGE_EVENT(iomap_readahead);
- 
- DECLARE_EVENT_CLASS(iomap_range_class,
- 	TP_PROTO(struct inode *inode, unsigned long off, unsigned int len),
-diff --git a/fs/xfs/xfs_aops.c b/fs/xfs/xfs_aops.c
-index 9d9cebf18726..1fd4fb7a607c 100644
---- a/fs/xfs/xfs_aops.c
-+++ b/fs/xfs/xfs_aops.c
-@@ -621,14 +621,11 @@ xfs_vm_readpage(
- 	return iomap_readpage(page, &xfs_read_iomap_ops);
- }
- 
--STATIC int
--xfs_vm_readpages(
--	struct file		*unused,
--	struct address_space	*mapping,
--	struct list_head	*pages,
--	unsigned		nr_pages)
-+STATIC void
-+xfs_vm_readahead(
-+	struct readahead_control	*rac)
- {
--	return iomap_readpages(mapping, pages, nr_pages, &xfs_read_iomap_ops);
-+	iomap_readahead(rac, &xfs_read_iomap_ops);
- }
- 
- static int
-@@ -644,7 +641,7 @@ xfs_iomap_swapfile_activate(
- 
- const struct address_space_operations xfs_address_space_operations = {
- 	.readpage		= xfs_vm_readpage,
--	.readpages		= xfs_vm_readpages,
-+	.readahead		= xfs_vm_readahead,
- 	.writepage		= xfs_vm_writepage,
- 	.writepages		= xfs_vm_writepages,
- 	.set_page_dirty		= iomap_set_page_dirty,
-diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
-index 69aee3dfb660..546aee6283c8 100644
---- a/fs/zonefs/super.c
-+++ b/fs/zonefs/super.c
-@@ -78,10 +78,9 @@ static int zonefs_readpage(struct file *unused, struct page *page)
- 	return iomap_readpage(page, &zonefs_iomap_ops);
- }
- 
--static int zonefs_readpages(struct file *unused, struct address_space *mapping,
--			    struct list_head *pages, unsigned int nr_pages)
-+static void zonefs_readahead(struct readahead_control *rac)
- {
--	return iomap_readpages(mapping, pages, nr_pages, &zonefs_iomap_ops);
-+	iomap_readahead(rac, &zonefs_iomap_ops);
- }
- 
- /*
-@@ -128,7 +127,7 @@ static int zonefs_writepages(struct address_space *mapping,
- 
- static const struct address_space_operations zonefs_file_aops = {
- 	.readpage		= zonefs_readpage,
--	.readpages		= zonefs_readpages,
-+	.readahead		= zonefs_readahead,
- 	.writepage		= zonefs_writepage,
- 	.writepages		= zonefs_writepages,
- 	.set_page_dirty		= iomap_set_page_dirty,
-diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-index 8b09463dae0d..bc20bd04c2a2 100644
---- a/include/linux/iomap.h
-+++ b/include/linux/iomap.h
-@@ -155,8 +155,7 @@ loff_t iomap_apply(struct inode *inode, loff_t pos, loff_t length,
- ssize_t iomap_file_buffered_write(struct kiocb *iocb, struct iov_iter *from,
- 		const struct iomap_ops *ops);
- int iomap_readpage(struct page *page, const struct iomap_ops *ops);
--int iomap_readpages(struct address_space *mapping, struct list_head *pages,
--		unsigned nr_pages, const struct iomap_ops *ops);
-+void iomap_readahead(struct readahead_control *, const struct iomap_ops *ops);
- int iomap_set_page_dirty(struct page *page);
- int iomap_is_partially_uptodate(struct page *page, unsigned long from,
- 		unsigned long count);
--- 
-2.25.1
-
+- Eric
 
 
 _______________________________________________
