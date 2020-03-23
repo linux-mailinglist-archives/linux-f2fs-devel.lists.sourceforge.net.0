@@ -2,67 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEF1918EE6B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 04:18:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6288118EE6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 04:19:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGDbs-0001Ay-7e; Mon, 23 Mar 2020 03:18:40 +0000
+	id 1jGDcG-0007HN-WB; Mon, 23 Mar 2020 03:19:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jGDbo-0001AW-QL
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:18:36 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jGDcF-0007HA-Qg
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:19:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ka/nIDDi5G8tdi+YkaickxMJCYIFeRy8BYjl4CjuvOc=; b=WASbEOudbdVlEI3at+CffxolrW
- 0ig0MaBNRvyoT6H9G+JX80ai6kjZwcikbirieuTNOhFBY7Ep7GGLt7iLuoXHF7shAip81jXZ5Ikq/
- ui24Hi667fbhuLAW2Bbk7OtoaDrv6rFbdVL2CN2rIsA7ROniN1K/Hb75uQV6i/Pnr/Mo=;
+ bh=w2UU4YoiVzu92mLagLnqIAHa1ZooljmumlDvi8ydch4=; b=M+ABg38GS9codBGtak8jlvFd5A
+ eYNEJtlDV2XeYHaOsyZY2ETJT02aTAH+fIEMABKfLJVIABpAnhasZMccYDDJ+rvik4P+uN7JDTs9m
+ uLIxIf5FVtw8M9X3sssOk+NDjerYblZ6vnJNaT5yInL9lmD7d8P6SzMIa76VhS/BIGHU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ka/nIDDi5G8tdi+YkaickxMJCYIFeRy8BYjl4CjuvOc=; b=M
- Zq+FjJgz+Bpxrq8hyVhooRYnhjJSj9Tqe281xGqlWAXMqa3cw3yyIrdyQDWDuKwsFvSoZUK1t7Dd2
- WQ+IAvR1zHufl5JI7Ecm6x7sNEPaXvvHAVO9L8a9Goe0wTqPIlpYaVQKQBB3SF0KUBtsYAbC87rM6
- WUpHOkk6eYyQb3kk=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=w2UU4YoiVzu92mLagLnqIAHa1ZooljmumlDvi8ydch4=; b=WH1ZmVEblzAN6YCHalOA2Ci8nO
+ 1w5FNW/WzX6kRgsha1s6pfv1a7cBHnOdQ1FRBgN7lIM05hEhCqDqECWZvKe1ndOJkN5q7NydY9ilJ
+ OfIyWs4jE7aOBTRO21xI1A625zeje7vrA8BC5gQHgxcpuzSM8AJi+ZmpW5xbRBnxRn/8=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGDbk-0048gs-N0
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:18:36 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id EAB31DE167A3E9B8ECDF;
- Mon, 23 Mar 2020 11:18:22 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 23 Mar 2020 11:18:13 +0800
+ id 1jGDcC-000QnL-S6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:19:03 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 06C8BED25348B3E7DE8B;
+ Mon, 23 Mar 2020 11:18:52 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
+ 2020 11:18:51 +0800
+To: =?UTF-8?Q?Ond=c5=99ej_Jirman?= <megi@xff.cz>, <jaegeuk@kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>,
+ <chao@kernel.org>
+References: <20200323024109.60967-1-yuchao0@huawei.com>
+ <20200323030549.rwlexq76ng4nq7nt@core.my.home>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Mon, 23 Mar 2020 11:18:07 +0800
-Message-ID: <20200323031807.94473-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+Message-ID: <02e925ca-86a3-a2a8-5879-de7c2364413c@huawei.com>
+Date: Mon, 23 Mar 2020 11:18:50 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <20200323030549.rwlexq76ng4nq7nt@core.my.home>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: megous.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jGDbk-0048gs-N0
-Subject: [f2fs-dev] [PATCH v5] f2fs: fix potential .flags overflow on 32bit
- architecture
+ 1.0 CTE_8BIT_MISMATCH      Header says 7bits but body disagrees
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jGDcC-000QnL-S6
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: fix potential .flags overflow on
+ 32bit architecture
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,219 +83,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs_inode_info.flags is unsigned long variable, it has 32 bits
-in 32bit architecture, since we introduced FI_MMAP_FILE flag
-when we support data compression, we may access memory cross
-the border of .flags field, corrupting .i_sem field, result in
-below deadlock.
-
-To fix this issue, let's expand .flags as an array to grab enough
-space to store new flags.
-
-Call Trace:
- __schedule+0x8d0/0x13fc
- ? mark_held_locks+0xac/0x100
- schedule+0xcc/0x260
- rwsem_down_write_slowpath+0x3ab/0x65d
- down_write+0xc7/0xe0
- f2fs_drop_nlink+0x3d/0x600 [f2fs]
- f2fs_delete_inline_entry+0x300/0x440 [f2fs]
- f2fs_delete_entry+0x3a1/0x7f0 [f2fs]
- f2fs_unlink+0x500/0x790 [f2fs]
- vfs_unlink+0x211/0x490
- do_unlinkat+0x483/0x520
- sys_unlink+0x4a/0x70
- do_fast_syscall_32+0x12b/0x683
- entry_SYSENTER_32+0xaa/0x102
-
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
-Tested-by: Ondrej Jirman <megous@megous.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v5:
-- get rid of FI_ARRAY_SIZE
-- use bitmap_zero for cleanup
- fs/f2fs/f2fs.h  | 99 ++++++++++++++++++++++++-------------------------
- fs/f2fs/inode.c |  2 +-
- 2 files changed, 50 insertions(+), 51 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index fcafa68212eb..2049e258bfbd 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -682,6 +682,44 @@ enum {
- 	MAX_GC_FAILURE
- };
- 
-+/* used for f2fs_inode_info->flags */
-+enum {
-+	FI_NEW_INODE,		/* indicate newly allocated inode */
-+	FI_DIRTY_INODE,		/* indicate inode is dirty or not */
-+	FI_AUTO_RECOVER,	/* indicate inode is recoverable */
-+	FI_DIRTY_DIR,		/* indicate directory has dirty pages */
-+	FI_INC_LINK,		/* need to increment i_nlink */
-+	FI_ACL_MODE,		/* indicate acl mode */
-+	FI_NO_ALLOC,		/* should not allocate any blocks */
-+	FI_FREE_NID,		/* free allocated nide */
-+	FI_NO_EXTENT,		/* not to use the extent cache */
-+	FI_INLINE_XATTR,	/* used for inline xattr */
-+	FI_INLINE_DATA,		/* used for inline data*/
-+	FI_INLINE_DENTRY,	/* used for inline dentry */
-+	FI_APPEND_WRITE,	/* inode has appended data */
-+	FI_UPDATE_WRITE,	/* inode has in-place-update data */
-+	FI_NEED_IPU,		/* used for ipu per file */
-+	FI_ATOMIC_FILE,		/* indicate atomic file */
-+	FI_ATOMIC_COMMIT,	/* indicate the state of atomical committing */
-+	FI_VOLATILE_FILE,	/* indicate volatile file */
-+	FI_FIRST_BLOCK_WRITTEN,	/* indicate #0 data block was written */
-+	FI_DROP_CACHE,		/* drop dirty page cache */
-+	FI_DATA_EXIST,		/* indicate data exists */
-+	FI_INLINE_DOTS,		/* indicate inline dot dentries */
-+	FI_DO_DEFRAG,		/* indicate defragment is running */
-+	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
-+	FI_NO_PREALLOC,		/* indicate skipped preallocated blocks */
-+	FI_HOT_DATA,		/* indicate file is hot */
-+	FI_EXTRA_ATTR,		/* indicate file has extra attribute */
-+	FI_PROJ_INHERIT,	/* indicate file inherits projectid */
-+	FI_PIN_FILE,		/* indicate file should not be gced */
-+	FI_ATOMIC_REVOKE_REQUEST, /* request to drop atomic data */
-+	FI_VERITY_IN_PROGRESS,	/* building fs-verity Merkle tree */
-+	FI_COMPRESSED_FILE,	/* indicate file's data can be compressed */
-+	FI_MMAP_FILE,		/* indicate file was mmapped */
-+	FI_MAX,			/* max flag, never be used */
-+};
-+
- struct f2fs_inode_info {
- 	struct inode vfs_inode;		/* serve a vfs inode */
- 	unsigned long i_flags;		/* keep an inode flags for ioctl */
-@@ -694,7 +732,7 @@ struct f2fs_inode_info {
- 	umode_t i_acl_mode;		/* keep file acl mode temporarily */
- 
- 	/* Use below internally in f2fs*/
--	unsigned long flags;		/* use to pass per-file flags */
-+	unsigned long flags[BITS_TO_LONGS(FI_MAX)];	/* use to pass per-file flags */
- 	struct rw_semaphore i_sem;	/* protect fi info */
- 	atomic_t dirty_pages;		/* # of dirty pages */
- 	f2fs_hash_t chash;		/* hash value of given file name */
-@@ -2531,43 +2569,6 @@ static inline __u32 f2fs_mask_flags(umode_t mode, __u32 flags)
- 		return flags & F2FS_OTHER_FLMASK;
- }
- 
--/* used for f2fs_inode_info->flags */
--enum {
--	FI_NEW_INODE,		/* indicate newly allocated inode */
--	FI_DIRTY_INODE,		/* indicate inode is dirty or not */
--	FI_AUTO_RECOVER,	/* indicate inode is recoverable */
--	FI_DIRTY_DIR,		/* indicate directory has dirty pages */
--	FI_INC_LINK,		/* need to increment i_nlink */
--	FI_ACL_MODE,		/* indicate acl mode */
--	FI_NO_ALLOC,		/* should not allocate any blocks */
--	FI_FREE_NID,		/* free allocated nide */
--	FI_NO_EXTENT,		/* not to use the extent cache */
--	FI_INLINE_XATTR,	/* used for inline xattr */
--	FI_INLINE_DATA,		/* used for inline data*/
--	FI_INLINE_DENTRY,	/* used for inline dentry */
--	FI_APPEND_WRITE,	/* inode has appended data */
--	FI_UPDATE_WRITE,	/* inode has in-place-update data */
--	FI_NEED_IPU,		/* used for ipu per file */
--	FI_ATOMIC_FILE,		/* indicate atomic file */
--	FI_ATOMIC_COMMIT,	/* indicate the state of atomical committing */
--	FI_VOLATILE_FILE,	/* indicate volatile file */
--	FI_FIRST_BLOCK_WRITTEN,	/* indicate #0 data block was written */
--	FI_DROP_CACHE,		/* drop dirty page cache */
--	FI_DATA_EXIST,		/* indicate data exists */
--	FI_INLINE_DOTS,		/* indicate inline dot dentries */
--	FI_DO_DEFRAG,		/* indicate defragment is running */
--	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
--	FI_NO_PREALLOC,		/* indicate skipped preallocated blocks */
--	FI_HOT_DATA,		/* indicate file is hot */
--	FI_EXTRA_ATTR,		/* indicate file has extra attribute */
--	FI_PROJ_INHERIT,	/* indicate file inherits projectid */
--	FI_PIN_FILE,		/* indicate file should not be gced */
--	FI_ATOMIC_REVOKE_REQUEST, /* request to drop atomic data */
--	FI_VERITY_IN_PROGRESS,	/* building fs-verity Merkle tree */
--	FI_COMPRESSED_FILE,	/* indicate file's data can be compressed */
--	FI_MMAP_FILE,		/* indicate file was mmapped */
--};
--
- static inline void __mark_inode_dirty_flag(struct inode *inode,
- 						int flag, bool set)
- {
-@@ -2588,20 +2589,18 @@ static inline void __mark_inode_dirty_flag(struct inode *inode,
- 
- static inline void set_inode_flag(struct inode *inode, int flag)
- {
--	if (!test_bit(flag, &F2FS_I(inode)->flags))
--		set_bit(flag, &F2FS_I(inode)->flags);
-+	test_and_set_bit(flag, F2FS_I(inode)->flags);
- 	__mark_inode_dirty_flag(inode, flag, true);
- }
- 
- static inline int is_inode_flag_set(struct inode *inode, int flag)
- {
--	return test_bit(flag, &F2FS_I(inode)->flags);
-+	return test_bit(flag, F2FS_I(inode)->flags);
- }
- 
- static inline void clear_inode_flag(struct inode *inode, int flag)
- {
--	if (test_bit(flag, &F2FS_I(inode)->flags))
--		clear_bit(flag, &F2FS_I(inode)->flags);
-+	test_and_clear_bit(flag, F2FS_I(inode)->flags);
- 	__mark_inode_dirty_flag(inode, flag, false);
- }
- 
-@@ -2692,19 +2691,19 @@ static inline void get_inline_info(struct inode *inode, struct f2fs_inode *ri)
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
- 
- 	if (ri->i_inline & F2FS_INLINE_XATTR)
--		set_bit(FI_INLINE_XATTR, &fi->flags);
-+		set_bit(FI_INLINE_XATTR, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DATA)
--		set_bit(FI_INLINE_DATA, &fi->flags);
-+		set_bit(FI_INLINE_DATA, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DENTRY)
--		set_bit(FI_INLINE_DENTRY, &fi->flags);
-+		set_bit(FI_INLINE_DENTRY, fi->flags);
- 	if (ri->i_inline & F2FS_DATA_EXIST)
--		set_bit(FI_DATA_EXIST, &fi->flags);
-+		set_bit(FI_DATA_EXIST, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DOTS)
--		set_bit(FI_INLINE_DOTS, &fi->flags);
-+		set_bit(FI_INLINE_DOTS, fi->flags);
- 	if (ri->i_inline & F2FS_EXTRA_ATTR)
--		set_bit(FI_EXTRA_ATTR, &fi->flags);
-+		set_bit(FI_EXTRA_ATTR, fi->flags);
- 	if (ri->i_inline & F2FS_PIN_FILE)
--		set_bit(FI_PIN_FILE, &fi->flags);
-+		set_bit(FI_PIN_FILE, fi->flags);
- }
- 
- static inline void set_raw_inline(struct inode *inode, struct f2fs_inode *ri)
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 44e08bf2e2b4..fded4b342346 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -362,7 +362,7 @@ static int do_read_inode(struct inode *inode)
- 	fi->i_flags = le32_to_cpu(ri->i_flags);
- 	if (S_ISREG(inode->i_mode))
- 		fi->i_flags &= ~F2FS_PROJINHERIT_FL;
--	fi->flags = 0;
-+	bitmap_zero(fi->flags, BITS_TO_LONGS(FI_MAX));
- 	fi->i_advise = ri->i_advise;
- 	fi->i_pino = le32_to_cpu(ri->i_pino);
- 	fi->i_dir_level = ri->i_dir_level;
--- 
-2.18.0.rc1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMC8zLzIzIDExOjA1LCBPbmTFmWVqIEppcm1hbiB3cm90ZToKPiBIZWxsbywKPiAKPiBP
+biBNb24sIE1hciAyMywgMjAyMCBhdCAxMDo0MTowOUFNICswODAwLCBDaGFvIFl1IHdyb3RlOgo+
+PiBmMmZzX2lub2RlX2luZm8uZmxhZ3MgaXMgdW5zaWduZWQgbG9uZyB2YXJpYWJsZSwgaXQgaGFz
+IDMyIGJpdHMKPj4gaW4gMzJiaXQgYXJjaGl0ZWN0dXJlLCBzaW5jZSB3ZSBpbnRyb2R1Y2VkIEZJ
+X01NQVBfRklMRSBmbGFnCj4+IHdoZW4gd2Ugc3VwcG9ydCBkYXRhIGNvbXByZXNzaW9uLCB3ZSBt
+YXkgYWNjZXNzIG1lbW9yeSBjcm9zcwo+PiB0aGUgYm9yZGVyIG9mIC5mbGFncyBmaWVsZCwgY29y
+cnVwdGluZyAuaV9zZW0gZmllbGQsIHJlc3VsdCBpbgo+PiBiZWxvdyBkZWFkbG9jay4KPj4KPj4g
+VG8gZml4IHRoaXMgaXNzdWUsIGxldCdzIGV4cGFuZCAuZmxhZ3MgYXMgYW4gYXJyYXkgdG8gZ3Jh
+YiBlbm91Z2gKPj4gc3BhY2UgdG8gc3RvcmUgbmV3IGZsYWdzLgo+Pgo+PiBDYWxsIFRyYWNlOgo+
+PiAgX19zY2hlZHVsZSsweDhkMC8weDEzZmMKPj4gID8gbWFya19oZWxkX2xvY2tzKzB4YWMvMHgx
+MDAKPj4gIHNjaGVkdWxlKzB4Y2MvMHgyNjAKPj4gIHJ3c2VtX2Rvd25fd3JpdGVfc2xvd3BhdGgr
+MHgzYWIvMHg2NWQKPj4gIGRvd25fd3JpdGUrMHhjNy8weGUwCj4+ICBmMmZzX2Ryb3Bfbmxpbmsr
+MHgzZC8weDYwMCBbZjJmc10KPj4gIGYyZnNfZGVsZXRlX2lubGluZV9lbnRyeSsweDMwMC8weDQ0
+MCBbZjJmc10KPj4gIGYyZnNfZGVsZXRlX2VudHJ5KzB4M2ExLzB4N2YwIFtmMmZzXQo+PiAgZjJm
+c191bmxpbmsrMHg1MDAvMHg3OTAgW2YyZnNdCj4+ICB2ZnNfdW5saW5rKzB4MjExLzB4NDkwCj4+
+ICBkb191bmxpbmthdCsweDQ4My8weDUyMAo+PiAgc3lzX3VubGluaysweDRhLzB4NzAKPj4gIGRv
+X2Zhc3Rfc3lzY2FsbF8zMisweDEyYi8weDY4Mwo+PiAgZW50cnlfU1lTRU5URVJfMzIrMHhhYS8w
+eDEwMgo+Pgo+PiBGaXhlczogNGM4ZmY3MDk1YmVmICgiZjJmczogc3VwcG9ydCBkYXRhIGNvbXBy
+ZXNzaW9uIikKPj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8eXVjaGFvMEBodWF3ZWkuY29tPgo+
+IAo+IFRlc3RlZC1ieTogT25kcmVqIEppcm1hbiA8bWVnb3VzQG1lZ291cy5jb20+CgpUaGFua3Mg
+Zm9yIHF1aWNrIHRlc3QsIEkndmUgYWRkZWQgdGhpcyB0YWcgaW4gdjUuIDopCgpUaGFua3MsCgo+
+IAo+IFRoaXMgcGF0Y2ggYWxvbmUgYWxzbyBmaXhlcyBhbGwgdGhlIG90aGVyIGxvY2t1cHMgSSBy
+ZXBvcnRlZCByZWNlbnRseSwKPiB0aGF0IHdlcmUgZWFzaWVyIHRvIHRyaWdnZXIgdGhhbiB0aGlz
+IG9uZS4KPiAKPiB0aGFua3MsCj4gCW8uCj4gLgo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Ckxp
+bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNl
+Zm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
