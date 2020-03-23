@@ -2,74 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6288118EE6E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 04:19:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C2FB18EE7A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 04:22:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGDcG-0007HN-WB; Mon, 23 Mar 2020 03:19:05 +0000
+	id 1jGDfS-0001Mp-Le; Mon, 23 Mar 2020 03:22:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jGDcF-0007HA-Qg
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:19:03 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jGDfR-0001Ma-CM
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:22:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=w2UU4YoiVzu92mLagLnqIAHa1ZooljmumlDvi8ydch4=; b=M+ABg38GS9codBGtak8jlvFd5A
- eYNEJtlDV2XeYHaOsyZY2ETJT02aTAH+fIEMABKfLJVIABpAnhasZMccYDDJ+rvik4P+uN7JDTs9m
- uLIxIf5FVtw8M9X3sssOk+NDjerYblZ6vnJNaT5yInL9lmD7d8P6SzMIa76VhS/BIGHU=;
+ bh=KgKgfVDIaLdHok6e03vavGFfQrzRhyf0kPcQZrhNjq0=; b=dptOQxQNfex8JSwce9r/C4Z/Yi
+ kzm6uYOv0gaRVfNj48W11HZ9msTalO/4Iib44aGpu4bR1bEIFrXhAStBaNDMwatEjKsKaS+0dDljW
+ C/Lq41NbLVEa+/Lhr+sZA0YTjfrAN3ZY5ciSIKyqDGVkPB5vz5bjdQv8d32mnCVBWPlk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=w2UU4YoiVzu92mLagLnqIAHa1ZooljmumlDvi8ydch4=; b=WH1ZmVEblzAN6YCHalOA2Ci8nO
- 1w5FNW/WzX6kRgsha1s6pfv1a7cBHnOdQ1FRBgN7lIM05hEhCqDqECWZvKe1ndOJkN5q7NydY9ilJ
- OfIyWs4jE7aOBTRO21xI1A625zeje7vrA8BC5gQHgxcpuzSM8AJi+ZmpW5xbRBnxRn/8=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=KgKgfVDIaLdHok6e03vavGFfQrzRhyf0kPcQZrhNjq0=; b=CB2voA90BRyP9/WyXMz7faYbVM
+ V9ViPVSz8aKIN44o7wAW2R930UHqWdvJNoLHT8jz+ti0xxmkk5z5+/AV03aTteupxd0k4OVePmC3X
+ xv2a6E5Xl9JYCHs1oCWrAULCM7oAKIYfOPZvneLKWx3Yz6IW7xjiDKOSoxKlZjKoDXes=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGDcC-000QnL-S6
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:19:03 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 06C8BED25348B3E7DE8B;
- Mon, 23 Mar 2020 11:18:52 +0800 (CST)
+ id 1jGDfP-0048se-QH
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 03:22:21 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 4129B9EA7CDED3C0FD5D;
+ Mon, 23 Mar 2020 11:22:07 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
- 2020 11:18:51 +0800
-To: =?UTF-8?Q?Ond=c5=99ej_Jirman?= <megi@xff.cz>, <jaegeuk@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>,
- <chao@kernel.org>
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
+ 2020 11:22:02 +0800
+To: Joe Perches <joe@perches.com>, <jaegeuk@kernel.org>
 References: <20200323024109.60967-1-yuchao0@huawei.com>
- <20200323030549.rwlexq76ng4nq7nt@core.my.home>
+ <8d435607bd79f518bd9420d68894ddda521bac5a.camel@perches.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <02e925ca-86a3-a2a8-5879-de7c2364413c@huawei.com>
-Date: Mon, 23 Mar 2020 11:18:50 +0800
+Message-ID: <aaa065c4-5c15-38a1-f2ea-73b4226fb203@huawei.com>
+Date: Mon, 23 Mar 2020 11:22:01 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200323030549.rwlexq76ng4nq7nt@core.my.home>
+In-Reply-To: <8d435607bd79f518bd9420d68894ddda521bac5a.camel@perches.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
-X-Spam-Score: 0.5 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: megous.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 1.0 CTE_8BIT_MISMATCH      Header says 7bits but body disagrees
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jGDcC-000QnL-S6
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jGDfP-0048se-QH
 Subject: Re: [f2fs-dev] [PATCH v4] f2fs: fix potential .flags overflow on
  32bit architecture
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -83,34 +76,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMC8zLzIzIDExOjA1LCBPbmTFmWVqIEppcm1hbiB3cm90ZToKPiBIZWxsbywKPiAKPiBP
-biBNb24sIE1hciAyMywgMjAyMCBhdCAxMDo0MTowOUFNICswODAwLCBDaGFvIFl1IHdyb3RlOgo+
-PiBmMmZzX2lub2RlX2luZm8uZmxhZ3MgaXMgdW5zaWduZWQgbG9uZyB2YXJpYWJsZSwgaXQgaGFz
-IDMyIGJpdHMKPj4gaW4gMzJiaXQgYXJjaGl0ZWN0dXJlLCBzaW5jZSB3ZSBpbnRyb2R1Y2VkIEZJ
-X01NQVBfRklMRSBmbGFnCj4+IHdoZW4gd2Ugc3VwcG9ydCBkYXRhIGNvbXByZXNzaW9uLCB3ZSBt
-YXkgYWNjZXNzIG1lbW9yeSBjcm9zcwo+PiB0aGUgYm9yZGVyIG9mIC5mbGFncyBmaWVsZCwgY29y
-cnVwdGluZyAuaV9zZW0gZmllbGQsIHJlc3VsdCBpbgo+PiBiZWxvdyBkZWFkbG9jay4KPj4KPj4g
-VG8gZml4IHRoaXMgaXNzdWUsIGxldCdzIGV4cGFuZCAuZmxhZ3MgYXMgYW4gYXJyYXkgdG8gZ3Jh
-YiBlbm91Z2gKPj4gc3BhY2UgdG8gc3RvcmUgbmV3IGZsYWdzLgo+Pgo+PiBDYWxsIFRyYWNlOgo+
-PiAgX19zY2hlZHVsZSsweDhkMC8weDEzZmMKPj4gID8gbWFya19oZWxkX2xvY2tzKzB4YWMvMHgx
-MDAKPj4gIHNjaGVkdWxlKzB4Y2MvMHgyNjAKPj4gIHJ3c2VtX2Rvd25fd3JpdGVfc2xvd3BhdGgr
-MHgzYWIvMHg2NWQKPj4gIGRvd25fd3JpdGUrMHhjNy8weGUwCj4+ICBmMmZzX2Ryb3Bfbmxpbmsr
-MHgzZC8weDYwMCBbZjJmc10KPj4gIGYyZnNfZGVsZXRlX2lubGluZV9lbnRyeSsweDMwMC8weDQ0
-MCBbZjJmc10KPj4gIGYyZnNfZGVsZXRlX2VudHJ5KzB4M2ExLzB4N2YwIFtmMmZzXQo+PiAgZjJm
-c191bmxpbmsrMHg1MDAvMHg3OTAgW2YyZnNdCj4+ICB2ZnNfdW5saW5rKzB4MjExLzB4NDkwCj4+
-ICBkb191bmxpbmthdCsweDQ4My8weDUyMAo+PiAgc3lzX3VubGluaysweDRhLzB4NzAKPj4gIGRv
-X2Zhc3Rfc3lzY2FsbF8zMisweDEyYi8weDY4Mwo+PiAgZW50cnlfU1lTRU5URVJfMzIrMHhhYS8w
-eDEwMgo+Pgo+PiBGaXhlczogNGM4ZmY3MDk1YmVmICgiZjJmczogc3VwcG9ydCBkYXRhIGNvbXBy
-ZXNzaW9uIikKPj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8eXVjaGFvMEBodWF3ZWkuY29tPgo+
-IAo+IFRlc3RlZC1ieTogT25kcmVqIEppcm1hbiA8bWVnb3VzQG1lZ291cy5jb20+CgpUaGFua3Mg
-Zm9yIHF1aWNrIHRlc3QsIEkndmUgYWRkZWQgdGhpcyB0YWcgaW4gdjUuIDopCgpUaGFua3MsCgo+
-IAo+IFRoaXMgcGF0Y2ggYWxvbmUgYWxzbyBmaXhlcyBhbGwgdGhlIG90aGVyIGxvY2t1cHMgSSBy
-ZXBvcnRlZCByZWNlbnRseSwKPiB0aGF0IHdlcmUgZWFzaWVyIHRvIHRyaWdnZXIgdGhhbiB0aGlz
-IG9uZS4KPiAKPiB0aGFua3MsCj4gCW8uCj4gLgo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Ckxp
-bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNl
-Zm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 2020/3/23 10:57, Joe Perches wrote:
+> On Mon, 2020-03-23 at 10:41 +0800, Chao Yu wrote:
+>> f2fs_inode_info.flags is unsigned long variable, it has 32 bits
+>> in 32bit architecture, since we introduced FI_MMAP_FILE flag
+>> when we support data compression, we may access memory cross
+>> the border of .flags field, corrupting .i_sem field, result in
+>> below deadlock.
+> []
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> []
+>> @@ -682,6 +682,47 @@ enum {
+> []
+>> +/* used for f2fs_inode_info->flags */
+>> +enum {
+> []
+>> +	FI_MAX,			/* max flag, never be used */
+>> +};
+>> +
+>> +/* f2fs_inode_info.flags array size */
+>> +#define FI_ARRAY_SIZE		(BITS_TO_LONGS(FI_MAX))
+> 
+> Perhaps FI_ARRAY_SIZE isn't necessary.
+> 
+>> +
+>>  struct f2fs_inode_info {
+>>  	struct inode vfs_inode;		/* serve a vfs inode */
+>>  	unsigned long i_flags;		/* keep an inode flags for ioctl */
+>> @@ -694,7 +735,7 @@ struct f2fs_inode_info {
+>>  	umode_t i_acl_mode;		/* keep file acl mode temporarily */
+>>  
+>>  	/* Use below internally in f2fs*/
+>> -	unsigned long flags;		/* use to pass per-file flags */
+>> +	unsigned long flags[FI_ARRAY_SIZE];	/* use to pass per-file flags */
+> 
+> and BITS_TO_LONGS should be used here.
+> 
+>> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> []
+>> @@ -362,7 +363,8 @@ static int do_read_inode(struct inode *inode)
+>>  	fi->i_flags = le32_to_cpu(ri->i_flags);
+>>  	if (S_ISREG(inode->i_mode))
+>>  		fi->i_flags &= ~F2FS_PROJINHERIT_FL;
+>> -	fi->flags = 0;
+>> +	for (i = 0; i < FI_ARRAY_SIZE; i++)
+>> +		fi->flags[i] = 0;
+> 
+> And this could become
+> 
+> 	bitmap_zero(fi->flags, BITS_TO_LONG(FI_MAX));
+> 
+> Is FI_ARRAY_SIZE used anywhere else?
+
+Updated in v5, thanks.
+
+Thanks,
+
+> 
+> .
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
