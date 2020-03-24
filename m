@@ -2,70 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E18B19195A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2020 19:43:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C46C4191C8C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2020 23:10:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGoWk-0005Oc-Ks; Tue, 24 Mar 2020 18:43:50 +0000
+	id 1jGrkM-0001PI-1I; Tue, 24 Mar 2020 22:10:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1jGoWg-0005OP-B8
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 18:43:48 +0000
+ (envelope-from <samokojere@remittance.com>) id 1jGrkH-0001Oj-1k
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 22:10:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=w2bzsIjamKvVisM0eov33d9gRrDmGIEUJJVr/0iVlNg=; b=lwmrNa2pNrOaDQX1ayg6ZXIVG6
- wwH9Nj5BP+fB4JtMvyIcnTIr2/bla4pdsbKQcBYFBFHawhLSUif2ieiqeM14pIrw3dOv5oO+zIkcf
- ZPnu2ApsZREJCzhRYpWAmawtYULdkNl20ljQ1dwAU9uNEZiGA/bjzGkG9P5QjkPCFZ8Q=;
+ bh=HoWrRjup2LzMpzWBhZG3XKu1q9eruPbw5yZzFqsR2p8=; b=X7mYJNNej8wXKOLBrXcPV8+TQ0
+ DW9fIj2J/V/uhq9KrZj7gicCBNQC8mAuCjkGzFaSh09kAX6CZVr4aFXc0u/QSddvJ+XlRLjCjEh+m
+ aoHDz1Esmpw/zNDTzFiOTsgh8fXbyjaFja5lR1uuixyRmfBEFE8Hi6HVU9vflfRiTq/g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=w2bzsIjamKvVisM0eov33d9gRrDmGIEUJJVr/0iVlNg=; b=mGK0hQqVV1LszCuSxS+15Ay7+Q
- jYNr2h4xcN2H/+yUxd4D5/I7HohRc9A/Bj3660xMIkXIcRo9Jwt+fsCc0tOYi1IXiYKKMWSxugEow
- 6do3mfFxNW6c3gl8Oj0PIhpwn8ITjqhb4+KFiaOcvIbSmGCaKfoF97pT0c3MvJ80SFQQ=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGoWd-0029dT-B9
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 18:43:46 +0000
-Received: from callcc.thunk.org (pool-72-93-95-157.bstnma.fios.verizon.net
- [72.93.95.157]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 02OIhPC4017362
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Mar 2020 14:43:25 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 3E068420EBA; Tue, 24 Mar 2020 14:43:25 -0400 (EDT)
-Date: Tue, 24 Mar 2020 14:43:25 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200324184325.GF53396@mit.edu>
-References: <20200320024639.GH1067245@mit.edu>
- <20200320025255.1705972-1-tytso@mit.edu>
- <20200320025255.1705972-2-tytso@mit.edu>
- <20200323175838.GA7133@mit.edu>
- <20200324083759.GA32036@infradead.org>
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=HoWrRjup2LzMpzWBhZG3XKu1q9eruPbw5yZzFqsR2p8=; b=T
+ UCWQzL+xtdTEsqd9Vj6WOaha6mRge+ekjmeDwi1dycxpt8oyuPyMIlF6D+AnPUpTPSwK8r5sTh+je
+ Zp+M8J/vs4KyQSypw5XbhPd4YBDUceG6H/6apE5dSUJnUUlliZkHTVs2UcSeFmxG8Nlcb281eoMc+
+ kTloJtqI6YVtq8qY=;
+Received: from smtphost103.smtphosting.sk ([185.14.255.193])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1jGrkF-0061l4-Rm
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 22:10:01 +0000
+Received: from remittance.com (unknown [180.214.239.142])
+ by smtphost103.smtphosting.sk (Postfix) with ESMTP id 6A94E6FF64
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 24 Mar 2020 22:51:47 +0100 (CET)
+From: Mr.  Samuel Chukwuyem Okojere <samokojere@remittance.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: 24 Mar 2020 14:51:45 -0700
+Message-ID: <20200324145145.F80FB2123178DF22@remittance.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200324083759.GA32036@infradead.org>
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: 6.3 (++++++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 1.2 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in bl.spamcop.net
+ [Blocked - see <https://www.spamcop.net/bl.shtml?185.14.255.193>]
+ 1.5 RCVD_IN_PSBL           RBL: Received via a relay in PSBL
+ [185.14.255.193 listed in psbl.surriel.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jGoWd-0029dT-B9
-Subject: Re: [f2fs-dev] [PATCH 2/2] writeback,
- xfs: call dirty_inode() with I_DIRTY_TIME_EXPIRED when appropriate
+ 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
+ (samokojere250[at]gmail.com)
+ 1.3 RCVD_IN_RP_RNBL        RBL: Relay in RNBL,
+ https://senderscore.org/blacklistlookup/
+ [185.14.255.193 listed in bl.score.senderscore.com]
+ 0.0 HK_NAME_MR_MRS         No description available.
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+ 0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal information
+ 0.0 FORM_FRAUD_5           Fill a form and many fraud phrases
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jGrkF-0061l4-Rm
+Subject: [f2fs-dev] Your Fund.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,32 +77,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org,
- Ext4 Developers List <linux-ext4@vger.kernel.org>,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net
+Reply-To: samokojere250@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Mar 24, 2020 at 01:37:59AM -0700, Christoph Hellwig wrote:
-> On Mon, Mar 23, 2020 at 01:58:38PM -0400, Theodore Y. Ts'o wrote:
-> > Christoph, Dave --- does this give you the notification that you were
-> > looking such that XFS could get the notification desired that it was
-> > the timestamps need to be written back?
-> 
-> I need to look at it in more detail as it seems convoluted.  Also the
-> order seems like you regress XFS in patch 1 and then fix it in patch 2?
+Attention:
 
-In patch one we send I_DIRTY_SYNC as we had been doing as before.  So
-I don't believe that patch #1 would regress XFS; can you confirm?
+In consonance with the Central (Apex) Banks of West African 
+countries (BENIN, BURKINA FASO, CAPE VERDE, COTE D'IVOIRE, 
+GAMBIA, GHANA, GUINEA, GUINEA BISSAU, LIBERIA, MALI, NIGER, 
+NIGERIA, SENEGAL, SIERRA LEONE,TOGO),we are committed to 
+identifying beneficiaries/payments for eventual unconditional 
+transfer to beneficiaries.
 
-My thinking was to move ahead with patch 1 so that it fixed the bug
-which Eric Biffers had reported for f2fs, but only to move forward
-with patch #2 if it would be useful for XFS.
+I, respectfully wish to draw your attention to the following that 
+you have been identified as a beneficiary of outstanding Fund 
+currently long overdue and to help / facilitate our on going 
+exercise, preparing to the unconditional transfer of your funds, 
+You need to urgently reconfirm your details and requisite 
+information viz,
 
-Cheers,
+(a) Full names and address and telephone.
+(b) Copy of your identity.
+(c) Essential documents pertaining to your funds and your claim 
+for payment.
 
-     	      	    	     	    - Ted
+Note:   You are quickly advised to stop communication with any 
+other person whatsoever.Finally, endeavor to treat this mail as 
+imperative and urgent and also to maintain confidentiality on it 
+at all times and in all places until you have received your 
+funds.
+
+Finally, endeavor to treat this mail as imperative and urgent and 
+also to maintain confidentiality on it at all times and in all 
+places until you have received your funds.
+
+Sincerely Yours,
+
+Mr. Samuel Chukwuyem Okojere
+Director,Payment Systems Management Department
+Central Bank of Nigeria
+Plot 33,Abubakar Tafawa Balewa Way 
+Central Business District,Cadastral Zone,
+Abuja,Federal Capital Territory,Nigeria 
+P.M.B. 0187,Garki Abuja. 
+Nigeria
 
 
 _______________________________________________
