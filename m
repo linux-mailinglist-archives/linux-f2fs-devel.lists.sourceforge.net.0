@@ -2,81 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8BE718FFD3
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2020 21:50:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBAE8190397
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2020 03:32:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGU1U-0005P2-7p; Mon, 23 Mar 2020 20:50:12 +0000
+	id 1jGZMz-0006iu-HE; Tue, 24 Mar 2020 02:32:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jGU1S-0005Ou-Qq
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:50:10 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jGZMx-0006ih-NK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 02:32:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6RPSoUj8dY2FPV9gYfJK4mJFPEwbHVU4hURZ7E2n1oo=; b=YvegEYQdguT6ykT2UaJrKXF+E9
- MF9TOWjj7mDbIUYq9NZxBCHfsbQCBFM3iZ6LBGRMWRZxcj+fdN3TrY+2TWcXezqJHvsriWky8qoUE
- EzBES7KD27zWoAQKubIPXok7UP99AKjRx2TzlJDWqCwGCVpqRd/lb1p6ZgZDR8mDdv8o=;
+ bh=9ajAV89zNc2YyUfSAkfAJcelhHdThA8TXEojsfoQLYs=; b=YOiNFiF1uQvxqUqrE46y2LIzh3
+ GGN31nlaKvSP3fzlLa/fSwi7SRzp/iX/shjrPRk5CxzKJtIrGsOlaVM3P6i1T6ErxMbzPlPAtDTvf
+ UXSKsuHZ/mOQ/128+kueBCIUq75FeVelXUMNMOky+060HfXPpbig+/F/47c29pbz4HzQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6RPSoUj8dY2FPV9gYfJK4mJFPEwbHVU4hURZ7E2n1oo=; b=lmb27oIV9DLj+7kATjaJqdxbJB
- 0GF2wI44gOjN3td2LTgPpwHirVjpj0cw7GMT6N+0OUOVEmoQKscJZY1a3k+/yqtV08mFhRmfPYTrf
- 9q3U72R2cwCx8H/c7pMsKvxW6rqYvRBDkYFzJJIHPhBc2YRA4AMpVTG/iS6jDkmKTL2E=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=9ajAV89zNc2YyUfSAkfAJcelhHdThA8TXEojsfoQLYs=; b=K3grtp0u7++BuaH31zp5u1Isi9
+ 2IsfbmmjEcb5waz1rq0dYpNSMz+KijqSdflAg2HdMSAEtS5mImygBcApnY/MtddJpcV0Oi1ee2p9N
+ C8b4kQvvnmBT4VbCm/fCYQjNMXpfZGFDKLgOiNSpDjrHFRpLFHPQQFdWNhn9WsIR+3NQ=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGU1O-0051Vr-Vy
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Mar 2020 20:50:10 +0000
-Received: from gmail.com (unknown [104.132.1.76])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2370A20719;
- Mon, 23 Mar 2020 20:49:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584996596;
- bh=uca8lceeryIzQMAk4G4iarM7sj/2pw+KF5opo+TrNGY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=coWkHNesJ3VgUDx8upr085r4HZYltqISo1yUGjJ/WXKfvNR+04jgsegcd1wxMZodR
- fQGiy5Lk9Drq+w7ah2QA9gYBnXswZgZRIqxSJS3M98zDeMk86vooA8s3ntT5pmzqG+
- 0iFnw5waVySEm2t9URBP8tlPK7izf9Vhqov96a5c=
-Date: Mon, 23 Mar 2020 13:49:54 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20200323204954.GB61708@gmail.com>
-References: <20200323202259.13363-1-willy@infradead.org>
- <20200323202259.13363-13-willy@infradead.org>
+ id 1jGZMt-00Efnb-QN
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 02:32:43 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 60D0FAE250B3DCC57A39;
+ Tue, 24 Mar 2020 10:32:32 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 24 Mar
+ 2020 10:32:26 +0800
+To: John <graysky@archlinux.us>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <CAO_nJAYw+-+n584gg2-rRp3KoAsPT5mpD5yRCrwM7hiDMD=PJg@mail.gmail.com>
+ <78bdaf48-9699-3a04-efec-95e1a670bfe4@huawei.com>
+ <CAO_nJAZ_bW1Bor-sUb8Ouz4VQV28KPZR23njH4VV+eH=BgwR=Q@mail.gmail.com>
+ <418f4ee8-14ed-bdfa-d16c-f68c2992f234@huawei.com>
+ <CAO_nJAYTbPqWKAnG1+i2J1jnEKN6QtiMV_CxVyranZ-AWK9Agg@mail.gmail.com>
+ <20200323041143.GC147648@google.com>
+ <CAO_nJAYEGp1129PsFwMdU0ZdjC75DoL60nXhY7KaATgSPz-2DA@mail.gmail.com>
+ <20200323150205.GA119787@google.com>
+ <CAO_nJAbyEcTR4wFytJp1HQmQBDzpwycKhA_-FUwo39WVMceuZw@mail.gmail.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <8b47e963-9e12-c945-e40e-a9d54a412d52@huawei.com>
+Date: Tue, 24 Mar 2020 10:32:26 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200323202259.13363-13-willy@infradead.org>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <CAO_nJAbyEcTR4wFytJp1HQmQBDzpwycKhA_-FUwo39WVMceuZw@mail.gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jGU1O-0051Vr-Vy
-Subject: Re: [f2fs-dev] [PATCH v10 12/25] mm: Move end_index check out of
- readahead loop
+X-Headers-End: 1jGZMt-00Efnb-QN
+Subject: Re: [f2fs-dev] fstrim does not recognize FSVER=1.13 of F2FS
+ partitions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,78 +82,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: cluster-devel@redhat.com, linux-mm@kvack.org,
- John Hubbard <jhubbard@nvidia.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- William Kucharski <william.kucharski@oracle.com>, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- ocfs2-devel@oss.oracle.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Mar 23, 2020 at 01:22:46PM -0700, Matthew Wilcox wrote:
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+On 2020/3/24 4:12, John wrote:
+> On Mon, Mar 23, 2020 at 11:02 AM Jaegeuk Kim <jaegeuk@kernel.org> wrote:
+>>> /dev/mapper/media-crypt /mnt/media f2fs
+>>> rw,lazytime,relatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,fsync_mode=posix
+>>
+>> - media-crypt means dm-crypt? Any chance to try raw sda?
 > 
-> By reducing nr_to_read, we can eliminate this check from inside the loop.
+> Yes, it is dm-crypt.
 > 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> Reviewed-by: John Hubbard <jhubbard@nvidia.com>
-> Reviewed-by: William Kucharski <william.kucharski@oracle.com>
-> ---
->  mm/readahead.c | 14 ++++++++------
->  1 file changed, 8 insertions(+), 6 deletions(-)
+>> Could you try this?
+>> - mount -o remount,nodiscard
+>>  : The reason is, as f2fs uses async discard feature with -o discard, it doesn't
+>>    give 0 bytes on fstrim sometimes.
 > 
-> diff --git a/mm/readahead.c b/mm/readahead.c
-> index d01531ef9f3c..998fdd23c0b1 100644
-> --- a/mm/readahead.c
-> +++ b/mm/readahead.c
-> @@ -167,8 +167,6 @@ void __do_page_cache_readahead(struct address_space *mapping,
->  		unsigned long lookahead_size)
->  {
->  	struct inode *inode = mapping->host;
-> -	struct page *page;
-> -	unsigned long end_index;	/* The last page we want to read */
->  	LIST_HEAD(page_pool);
->  	loff_t isize = i_size_read(inode);
->  	gfp_t gfp_mask = readahead_gfp_mask(mapping);
-> @@ -178,22 +176,26 @@ void __do_page_cache_readahead(struct address_space *mapping,
->  		._index = index,
->  	};
->  	unsigned long i;
-> +	pgoff_t end_index;	/* The last page we want to read */
->  
->  	if (isize == 0)
->  		return;
->  
-> -	end_index = ((isize - 1) >> PAGE_SHIFT);
-> +	end_index = (isize - 1) >> PAGE_SHIFT;
-> +	if (index > end_index)
-> +		return;
-> +	/* Don't read past the page containing the last byte of the file */
-> +	if (nr_to_read > end_index - index)
-> +		nr_to_read = end_index - index + 1;
->  
->  	/*
->  	 * Preallocate as many pages as we will need.
->  	 */
->  	for (i = 0; i < nr_to_read; i++) {
-> -		if (index + i > end_index)
-> -			break;
-> +		struct page *page = xa_load(&mapping->i_pages, index + i);
->  
->  		BUG_ON(index + i != rac._index + rac._nr_pages);
->  
-> -		page = xa_load(&mapping->i_pages, index + i);
->  		if (page && !xa_is_value(page)) {
->  			/*
->  			 * Page already present?  Kick off the current batch of
-> -- 
+> I can confirm it is mounted now with the nodiscard option, but fstrim
+> still claims discard is not supported.
 
-Reviewed-by: Eric Biggers <ebiggers@google.com>
+Can you try below command and show us the result to see whether device supports discard:
 
-- Eric
+strace blkdiscard -o 0 -l 4096 /dev/mapper/media-crypt
+
+It may discard first 4k block which is first superblock of f2fs, for safety, it will
+be better to backup all your data before executing the command.
+
+Thanks,
+
+> 
+> % mount | grep crypt
+> /dev/mapper/media-crypt on /mnt/media type f2fs
+> (rw,relatime,lazytime,background_gc=on,nodiscard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,fsync_mode=posix,x-systemd.automount)
+> 
+> # fstrim -v /mnt/media
+> fstrim: /mnt/media: the discard operation is not supported
+> .
+> 
 
 
 _______________________________________________
