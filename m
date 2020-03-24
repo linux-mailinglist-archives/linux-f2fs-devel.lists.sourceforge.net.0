@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CCA91914CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2020 16:40:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9929019152E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2020 16:43:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jGlez-0005Xu-Lq; Tue, 24 Mar 2020 15:40:09 +0000
+	id 1jGliJ-0000GL-8W; Tue, 24 Mar 2020 15:43:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jGley-0005Xm-1U
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 15:40:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jGliG-0000G8-Bx
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 15:43:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FPGxPYCsW51MQQhRPitWFRu+1qQJ1PE724DEsYMgSik=; b=YSm6uWVPcUaqDK1duCo2BJHHcq
- EBByI7WWRnvucWts9il0GjwiLR6+iIvFHQ22IxmRmrXFW4HsQJnjxgSHsCBpROHgP9SRFdW4/dXSD
- d4N/a4/wHFmiCZPPmUkhlx9Ku6VxOKlB5YSkxwvbWdQZFrN1kVwa/dHZAbU8pImEWblA=;
+ bh=Nm+gU9VKA730ZriGe3rKuK/ZdFwG1lvrE8H9tBhUCWk=; b=llouse5qYNqugwa3I//n/owLBS
+ Qq6Dy31umLTM5WAkaRUWrfosJgkwxYAfn/hIswy/yybkhRvej6CLzxLWPgTx/sxT+xGvOmBn1GeVJ
+ xzGlRYZ5JmNXhDBxMG3ddhOsnct9DFyr4W5Jf9kZB4d+FX0wyMPexaYZoDY+I8dF9Uc4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,54 +29,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FPGxPYCsW51MQQhRPitWFRu+1qQJ1PE724DEsYMgSik=; b=VuEmhUDXXDgh48B2SPTUeY4rHG
- fG+IuqCNGpSeCn9fTLMUnMfJ6sbDHFWjIBChVwk93vsGwPddWpVtduCcVxqfBiaEeLmeW3LOwkM12
- Ux6pWUapoPuuaL0A1wOh5L+cjhgMJchkeUrZVw+U1tDPXdz/AqIOI3CcNaAHgi7KIEdk=;
+ bh=Nm+gU9VKA730ZriGe3rKuK/ZdFwG1lvrE8H9tBhUCWk=; b=X2JsXCn1wqvpMGYGjtyEDyr190
+ mRBxMO1FNIOhFQJQ34W/YGhoav9oLxFu3yLDGpE/DC49zz7x20NgshGLp55PeYzBGpCHR677ssoZo
+ fiBvWVWN72e9NBBjMO5saa+6m3GaAYUGvrI1EMDi8DxQraMO1ICZqbjx/ypvLqnjdeNU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jGleu-0023BU-5s
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 15:40:07 +0000
+ id 1jGliC-00FK0z-Fw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Mar 2020 15:43:32 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 66AC120714;
- Tue, 24 Mar 2020 15:39:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D41C020714;
+ Tue, 24 Mar 2020 15:43:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585064398;
- bh=lGDpf82yhyBXP69b0NUOoaMPEW8UINXiLyyIVIv/9FI=;
+ s=default; t=1585064602;
+ bh=Qv9VoaJbPxXb6ifsksLylG5aLk2K8GMbJDDMXCV0fjc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TBo0lPlwRXSdnDE+bhsL/UEUB7N0XVLgFH+hU/exJbLOlwW6l8RIeGAHBtqAGTcn8
- oRxxbw7wAaDleMZ7E11AEcjWbIIcAik+kexPMsReTLLghhpUoZSXSPR06MU6lp5L61
- iJudVQ+Bw7LlGuG6kKh4jPNdimy8Zce/k4zMC+JQ=
-Date: Tue, 24 Mar 2020 08:39:57 -0700
+ b=Db7a4hxBMH6eTuRq4g4f/SP8qeiY1OeXIglgiiJ8R6LPnJmd0IqRJtQZ0/iNu3TxT
+ F3t180Ea6Mp/IKTYldRu4jZnCH6mZkRdFBJveCbCVoHEkZbYNmAVhEadf1lKoCh02Z
+ GoAT/zBpm+7YXYrUYpJszrUX/wfU13ebDuydDRgk=
+Date: Tue, 24 Mar 2020 08:43:22 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200324153957.GA198420@google.com>
-References: <20200303094602.50372-1-yuchao0@huawei.com>
- <1ee0c565-930b-2379-b22b-40ddca271de3@huawei.com>
+Message-ID: <20200324154322.GB198420@google.com>
+References: <20200229104906.12061-1-yuchao0@huawei.com>
+ <6aab59b9-6e33-5b01-acf8-ccbacd9318e3@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1ee0c565-930b-2379-b22b-40ddca271de3@huawei.com>
+In-Reply-To: <6aab59b9-6e33-5b01-acf8-ccbacd9318e3@huawei.com>
 User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jGleu-0023BU-5s
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress: support zstd compress
- algorithm
+X-Headers-End: 1jGliC-00FK0z-Fw
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove redundant compress inode check
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,25 +93,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 03/24, Chao Yu wrote:
-> Hi Jaegeuk,
+> Jaegeuk,
 > 
-> On 2020/3/3 17:46, Chao Yu wrote:
-> > Add zstd compress algorithm support, use "compress_algorithm=zstd"
-> > mountoption to enable it.
+> Missed to apply this patch?
+> 
+> On 2020/2/29 18:49, Chao Yu wrote:
+> > due to f2fs_post_read_required() has did that.
 > > 
 > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
 > > ---
-> > v2:
-> > - avoid accessing invalid address
-> > - introduce .{init,destroy}_{,de}compress_ctx callback functions.
-> 
-> I guess we merged related patches with wrong sequence as this patch
-> depends on ("f2fs: compress: add .{init,destroy}_decompress_ctx callback").
+> >  fs/f2fs/f2fs.h | 2 --
+> >  1 file changed, 2 deletions(-)
+> > 
+> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > index f4bcbbd5e9ed..882f9ad3445b 100644
+> > --- a/fs/f2fs/f2fs.h
+> > +++ b/fs/f2fs/f2fs.h
+> > @@ -4006,8 +4006,6 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+> >  		return true;
+> >  	if (f2fs_is_multi_device(sbi))
+> >  		return true;
+> > -	if (f2fs_compressed_file(inode))
+> > -		return true;
 
-Done.
+I thought that we can keep this to avoid any confusion when porting to old
+production kernel which uses ICE.
 
-> 
-> Thanks,
+> >  	/*
+> >  	 * for blkzoned device, fallback direct IO to buffered IO, so
+> >  	 * all IOs can be serialized by log-structured write.
+> > 
 
 
 _______________________________________________
