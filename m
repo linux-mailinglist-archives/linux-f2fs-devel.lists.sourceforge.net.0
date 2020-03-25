@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF78A192C7F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:29:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AF5C192C98
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:32:52 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jH7y0-0005KG-7H; Wed, 25 Mar 2020 15:29:16 +0000
+	id 1jH81S-0005VV-OV; Wed, 25 Mar 2020 15:32:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jH7xz-0005K9-Ea
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:29:15 +0000
+ (envelope-from <willy@infradead.org>) id 1jH81Q-0005VL-SJ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:32:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s9o1YcFIkmflqsWaxbFgkp4az0GTva1vt7Qz7uMqp0U=; b=YMyIOcJ+Rr8C4vg8NarZtAMxBx
- EvB8JGg2TNJeWzWBQyhy8UwubFhbmadJx0SXqWSAEsAzHlrSpkv1bcsJ7+wQ+ia0Tgm/sCyIu4XlX
- A8F+wRVoChT6g3wLeZVLjgfhXCmyaZupxBbjmOzJVF2AgaItZk3LFWZPBuir4vqssK/E=;
+ bh=L8UzQwxATOZdjWZ+3tNM04b2mH/5tj4IRSDfIFAnCq4=; b=A9ERRu7af6JyjpwEtg0j6esX3J
+ WDbWIj7mCxVHQP5sWJ9YsRy5qosZdWxNax5wf5PAWgtJnQ3B3Zw4PLzIiSLg5Z10NnX46DgRqYzUH
+ ixXmNa+G6lNsEks2a0sErAf2R/+xmBsmVD1sU9LVEhp43nz44g6aMRuZgWaXA6ktgwBw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,62 +29,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=s9o1YcFIkmflqsWaxbFgkp4az0GTva1vt7Qz7uMqp0U=; b=D3ovFGdP7KO3XP+jcH2Fp4HzP3
- Y973xyA+7UaVQBV1b4FYrCkDxUREx1iMA7VHPmL8joR03J0Kh+97LcPIHdiIZb6MsTVA+Sd7CfBZG
- L/r4nyrHOBt1xr9AFqUwfRwXlvQV5P3KqGtWJLoZjCDlH01zVWryWIK2P1hAHTD34mjg=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=L8UzQwxATOZdjWZ+3tNM04b2mH/5tj4IRSDfIFAnCq4=; b=WMID8SOlCr39n6MWZVSKlTXCgn
+ qBEgDDBq3zRzTh8d9rboGJK/UUZ8gXDe3ogOMJz3dY4p7WfRHsvTRj7ruep95glWC7FRwsjkqHFaG
+ tInmoV8kkKfJTQ3N+iCyEdZBe+vvJujL+ZfFCH3akXWlc1W0YDJTAfjCroYO45ZrDmxc=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jH7xu-00GXto-OG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:29:15 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3320520409;
- Wed, 25 Mar 2020 15:29:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585150140;
- bh=go8gp5X5K5OQI1lxpw0RRcIOUv+vtN2Xt4lszINpSVo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OYFuAIgDSELsbPZkjA7m82K7TGTMyRQ9dbkvkHK09E9tTOsldIet9fDTIy4pGYP4A
- Awd2zJ44Bpanck72XTb913evoBw8wuTDBPbvhMUIqZDRBVAn+QfGRMcRg7eayqe5ON
- dJKAAlOJ89KRGs1gVzN62bGnOQpdl5uQJqeOcv1Y=
-Date: Wed, 25 Mar 2020 08:28:59 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: John <graysky@archlinux.us>
-Message-ID: <20200325152859.GA65658@google.com>
-References: <418f4ee8-14ed-bdfa-d16c-f68c2992f234@huawei.com>
- <CAO_nJAYTbPqWKAnG1+i2J1jnEKN6QtiMV_CxVyranZ-AWK9Agg@mail.gmail.com>
- <20200323041143.GC147648@google.com>
- <CAO_nJAYEGp1129PsFwMdU0ZdjC75DoL60nXhY7KaATgSPz-2DA@mail.gmail.com>
- <20200323150205.GA119787@google.com>
- <CAO_nJAbyEcTR4wFytJp1HQmQBDzpwycKhA_-FUwo39WVMceuZw@mail.gmail.com>
- <8b47e963-9e12-c945-e40e-a9d54a412d52@huawei.com>
- <CAO_nJAYWQWrWaQVfUmVpJGFtOeKKE76im-AkLUDTJm8DN4VAgA@mail.gmail.com>
- <2292eb8d-8357-227f-5448-d1d03b33c042@huawei.com>
- <CAO_nJAaNxRfC6SHQrr0BCDnA2H6HHkz1Pk5vJMCVfGqUSP0u1Q@mail.gmail.com>
+ id 1jH81N-006lbF-99
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:32:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=L8UzQwxATOZdjWZ+3tNM04b2mH/5tj4IRSDfIFAnCq4=; b=nwr8fvcCAKrcOHuwe8r/p16lMc
+ bZh3DEdAU9aGBWN3F5ynv1Ne93Ij03ZhftdP2p/j/SwKFdDbTLj5/ZaltpVeKwhDVOtZpmt6dBgOM
+ Y5kNAkTDyJM9LmxIOgZivD4BtHVK41PC4z2UtEwA8qUzMYjVHQwzjfESuvsJdyTL91AdLqA/lHmDm
+ b4ONx8n6tUgKbzMesC9PHNx/tJe345Szba01BQVbNkeQ4aBKyS9/rqkTgJMFlzt5JsbGeTzjBPG19
+ tW79XBGQHh8i08Okr8byBxVFG1QH7u5q9rAcay5PaTaRDoWupoIchhUNkRzhk4f/AQVLTP2rNvR7K
+ 5pnTChzQ==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jH816-0004oZ-U3; Wed, 25 Mar 2020 15:32:28 +0000
+Date: Wed, 25 Mar 2020 08:32:28 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Miklos Szeredi <miklos@szeredi.hu>
+Message-ID: <20200325153228.GB22483@bombadil.infradead.org>
+References: <20200323202259.13363-1-willy@infradead.org>
+ <20200323202259.13363-25-willy@infradead.org>
+ <CAJfpegu7EFcWrg3bP+-2BX_kb52RrzBCo_U3QKYzUkZfe4EjDA@mail.gmail.com>
+ <20200325120254.GA22483@bombadil.infradead.org>
+ <CAJfpegshssCJiA8PBcq2XvBj3mR8dufHb0zWRFvvKKv82VQYsw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAO_nJAaNxRfC6SHQrr0BCDnA2H6HHkz1Pk5vJMCVfGqUSP0u1Q@mail.gmail.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <CAJfpegshssCJiA8PBcq2XvBj3mR8dufHb0zWRFvvKKv82VQYsw@mail.gmail.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jH7xu-00GXto-OG
-Subject: Re: [f2fs-dev] fstrim does not recognize FSVER=1.13 of F2FS
- partitions
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jH81N-006lbF-99
+Subject: Re: [f2fs-dev] [PATCH v10 24/25] fuse: Convert from readpages to
+ readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,68 +86,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs <linux-xfs@vger.kernel.org>,
+ William Kucharski <william.kucharski@oracle.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
+ Dave Chinner <dchinner@redhat.com>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linux-ext4@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/25, John wrote:
-> On Tue, Mar 24, 2020 at 9:01 PM Chao Yu <yuchao0@huawei.com> wrote:
-> > I guess ssd should support discard, however I saw sdb was wrapped with device
-> > mapper, which may have different character, just want to check that whether
-> > device mapper disable the discard.
+On Wed, Mar 25, 2020 at 03:43:02PM +0100, Miklos Szeredi wrote:
 > >
-> > If backup/restore is hard for you, how about let me add some logs on fstrim
-> > interface? then we could retry fstrim to see where we actually fail.
+> > -       while ((page = readahead_page(rac))) {
+> > -               if (fuse_readpages_fill(&data, page) != 0)
+> > +               nr_pages = min(readahead_count(rac), fc->max_pages);
 > 
-> I have an older totally different SSD for testing that seems to support discard:
-> # hdparm -I /dev/sdc | grep TRIM
->    * Data Set Management TRIM supported (limit 8 blocks)
->    * Deterministic read ZEROs after TRIM
-> 
-> As I test, I created two f2fs partitions on this different SSD:
-> 1) /dev/sdc2 normal F2FS
-> 2) /dev/sdc3 encrypted with LUKS (dm-crypt) then formatted to F2FS
-> 
-> Results:
-> 1) Regular F2FS
-> # fstrim -v /regular
-> /regular: 0 B (0 bytes) trimmed
+> Missing fc->max_read clamp.
 
-This is normal.
+Yeah, I realised that.  I ended up doing ...
 
++       unsigned int i, max_pages, nr_pages = 0;
+...
++       max_pages = min(fc->max_pages, fc->max_read / PAGE_SIZE);
+
+> > +               ia = fuse_io_alloc(NULL, nr_pages);
+> > +               if (!ia)
+> >                         return;
+> > +               ap = &ia->ap;
+> > +               __readahead_batch(rac, ap->pages, nr_pages);
 > 
-> 2) Encrypted F2FS
-> # fstrim -v /encrypted
-> fstrim: /encrypted: the discard operation is not supported
+> nr_pages = __readahead_batch(...)?
 
-It seems dm-crypt has discard-related support, ie., "allow_discards", in ctrl.
-But, FWIW, the target simply doesn't support discard at all.
+That's the other bug ... this was designed for btrfs which has a fixed-size
+buffer.  But you want to dynamically allocate fuse_io_args(), so we need to
+figure out the number of pages beforehand, which is a little awkward.  I've
+settled on this for the moment:
 
-# grep discards_supported drivers/md/*
-drivers/md/dm-cache-target.c:	ti->discards_supported = true;
-drivers/md/dm-clone-target.c:	ti->discards_supported = true;
-drivers/md/dm-log-writes.c:	ti->discards_supported = true;
-drivers/md/dm-table.c:	if (!tgt->num_discard_bios && tgt->discards_supported)
-drivers/md/dm-table.c:		DMWARN("%s: %s: ignoring discards_supported because num_discard_bios is zero.",
-drivers/md/dm-table.c:		 * 'discards_supported') or it relies on _all_ data devices having
-drivers/md/dm-table.c:		if (!ti->discards_supported &&
-drivers/md/dm-thin.c:		 * Setting 'discards_supported' circumvents the normal
-drivers/md/dm-thin.c:		ti->discards_supported = true;
-drivers/md/dm-thin.c:		ti->discards_supported = true;
-drivers/md/dm-zoned-target.c:	ti->discards_supported = true;
+        for (;;) {
+               struct fuse_io_args *ia;
+                struct fuse_args_pages *ap;
 
+                nr_pages = readahead_count(rac) - nr_pages;
+                if (nr_pages > max_pages)
+                        nr_pages = max_pages;
+                if (nr_pages == 0)
+                        break;
+                ia = fuse_io_alloc(NULL, nr_pages);
+                if (!ia)
+                        return;
+                ap = &ia->ap;
+                __readahead_batch(rac, ap->pages, nr_pages);
+                for (i = 0; i < nr_pages; i++) {
+                        fuse_wait_on_page_writeback(inode,
+                                                    readahead_index(rac) + i);
+                        ap->descs[i].length = PAGE_SIZE;
+                }
+                ap->num_pages = nr_pages;
+                fuse_send_readpages(ia, rac->file);
+        }
 
-> 
-> Can we conclude that the device mapper is some how spoofing fstrim
-> into thinking the device doesn't support trim?  Happy to hear your
-> thoughts.
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+but I'm not entirely happy with that either.  Pondering better options.
+
+> This will give consecutive pages, right?
+
+readpages() was already being called with consecutive pages.  Several
+filesystems had code to cope with the pages being non-consecutive, but
+that wasn't how the core code worked; if there was a discontiguity it
+would send off the pages that were consecutive and start a new batch.
+
+__readahead_batch() can't return fewer than nr_pages, so you don't need
+to check for that.
 
 
 _______________________________________________
