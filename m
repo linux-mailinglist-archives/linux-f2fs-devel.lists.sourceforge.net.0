@@ -2,67 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7F321923DF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 10:18:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 022961923ED
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 10:21:15 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jH2BU-0008V1-70; Wed, 25 Mar 2020 09:18:48 +0000
+	id 1jH2Dp-0000sd-Jq; Wed, 25 Mar 2020 09:21:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jH2BS-0008UP-DH
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 09:18:46 +0000
+ (envelope-from
+ <BATV+51ae3af3ded1af5ce3db+6058+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1jH2Do-0000sJ-0T
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 09:21:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1EhaVgNbSIrx2FjuHM+REZ2qRvWdblU1YnsAgIGlO9Q=; b=MYhjxaUsrpwbcuYkwiygLTK8OX
- JPtdkXo4QvZKBoTJbntnWsjc9i0gNqYkwU+WCetnhlDibzG/oLZvyfyvhEsNyZUOScqU2luYWxXjH
- JpTDtyRsj3MkdwI1cqvVfi8Tf5JK2sSZpABzZ0ICrhKHIp/UUBfSk0/dNJD5S7uE4uoc=;
+ bh=ihmJv1brBj6wrslrN130WrjYRLeKs/TEzo95JedDuQE=; b=EjrQDirz9CQvrP4f/EfUsDXXhp
+ XUz47nCG0STSRdk0wsDhzNSc7ou4FYQGZj1eNgUBi0QzrasYl5/Fjgxq9EnS8CG4hS48iIkVMPyXF
+ 4bMCxjdl6UTXePjZiz0GQe1sIUJ4KYvfP/4Mdk160lvjOfAmWi06UxW8xNrFfJDzARJ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1EhaVgNbSIrx2FjuHM+REZ2qRvWdblU1YnsAgIGlO9Q=; b=h
- HYSChHHllF4xoHQ/E23wO2v5BBWWwK/QlhDKDumZiq0vwZ2zX64OaesUuWgldnLr3vleFeFWC2lu9
- /kouC/WthaaaRR5jsrX/i9+R+hpYS9WulUmwDxhMBMCUev16EZE5+u8BQx1Qi4Yv+NkDqw1XCtWJN
- 9tlnPzkf0jhYZh2I=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ihmJv1brBj6wrslrN130WrjYRLeKs/TEzo95JedDuQE=; b=TEZwOIPjg1MoYvD0dEHloITv2l
+ LX/6Dx6sn/qQFpg9jsGInrddCuFQIrzurR7hcg1FgxY8Rm9wXvWeomJ6gYbH/dVOUjkkhF/0HQyYh
+ Za2FTXbqNdzCJvK1OqNBeehqJunDYBgTzpXLhWR+bc8H6rIHGGD6tZyuJkT01GmXmCQw=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jH2BP-002lAP-RS
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 09:18:46 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id DF0359B4CF8D141A553E;
- Wed, 25 Mar 2020 17:18:31 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS401-HUB.china.huawei.com (10.3.19.201) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 25 Mar 2020 17:18:24 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Wed, 25 Mar 2020 17:18:11 +0800
-Message-ID: <20200325091811.60725-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+ id 1jH2Dl-002lKv-U2
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 09:21:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=ihmJv1brBj6wrslrN130WrjYRLeKs/TEzo95JedDuQE=; b=VVlJCPTl9HltfIO3OxAs3HGKKD
+ He4wfn0kQ0/ruQxdwMVfjLoSAGF7abkRzLDEAJB1mHKK41KXdDr7w9ypakrVILxJ+sWAA6BGQgp1B
+ tIaSkl4ws+rsTbDsYee8L8j7aKDEmsLPPvI1LHL6KbYqsDvr/hRDlV2R4mjpKG4u1OLGOXcfPIZDw
+ dokRf09ZHgKcM51G5iRWjzAjQfzZTtOtNgWZLBvecwCJEHRAJicb8A5+fCHJKSLdE8A/Prekl5ST/
+ kpzaVDgGq+zc7FTuc5VDR3oZQyrCmn28eJV4L+rs2N0OSzexbC7zy1S32sZBkZVVhCqRpvJc1U3z9
+ NNqrU3gA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jH2DZ-0002sC-3w; Wed, 25 Mar 2020 09:20:57 +0000
+Date: Wed, 25 Mar 2020 02:20:57 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Theodore Ts'o <tytso@mit.edu>
+Message-ID: <20200325092057.GA25483@infradead.org>
+References: <20200320024639.GH1067245@mit.edu>
+ <20200320025255.1705972-1-tytso@mit.edu>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200320025255.1705972-1-tytso@mit.edu>
+L: linux-mtd@lists.infradead.org
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jH2BP-002lAP-RS
-Subject: [f2fs-dev] [PATCH v2 3/5] f2fs: fix to avoid NULL pointer
- dereference
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jH2Dl-002lKv-U2
+Subject: Re: [f2fs-dev] [PATCH 1/2] writeback: avoid double-writing the
+ inode on a lazytime expiration
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,52 +88,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, Eric Biggers <ebiggers@kernel.org>,
+ Ext4 Developers List <linux-ext4@vger.kernel.org>,
+ Richard Weinberger <richard@nod.at>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Unable to handle kernel NULL pointer dereference at virtual address 00000000
-PC is at f2fs_free_dic+0x60/0x2c8
-LR is at f2fs_decompress_pages+0x3c4/0x3e8
-f2fs_free_dic+0x60/0x2c8
-f2fs_decompress_pages+0x3c4/0x3e8
-__read_end_io+0x78/0x19c
-f2fs_post_read_work+0x6c/0x94
-process_one_work+0x210/0x48c
-worker_thread+0x2e8/0x44c
-kthread+0x110/0x120
-ret_from_fork+0x10/0x18
+>  	spin_unlock(&inode->i_lock);
+>  
+> -	if (dirty & I_DIRTY_TIME)
+> -		mark_inode_dirty_sync(inode);
+> +	/* This was a lazytime expiration; we need to tell the file system */
+> +	if (dirty & I_DIRTY_TIME_EXPIRED && inode->i_sb->s_op->dirty_inode)
+> +		inode->i_sb->s_op->dirty_inode(inode, I_DIRTY_SYNC);
 
-In f2fs_free_dic(), we can not use f2fs_put_page(,1) to release dic->tpages[i],
-as the page's mapping is NULL.
+I think this needs a very clear comment explaining why we don't go
+through __mark_inode_dirty.
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v2:
-- fix to skip release tpages[i] if it is NULL in error path.
- fs/f2fs/compress.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index ef7dd04312fe..6e10800729b6 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1137,7 +1137,10 @@ void f2fs_free_dic(struct decompress_io_ctx *dic)
- 		for (i = 0; i < dic->cluster_size; i++) {
- 			if (dic->rpages[i])
- 				continue;
--			f2fs_put_page(dic->tpages[i], 1);
-+			if (!dic->tpages[i])
-+				continue;
-+			unlock_page(dic->tpages[i]);
-+			put_page(dic->tpages[i]);
- 		}
- 		kfree(dic->tpages);
- 	}
--- 
-2.18.0.rc1
-
+But as said before I'd rather have a new lazytime_expired operation that
+makes it very clear what is happening.  We currenly have 4 file systems
+(ext4, f2fs, ubifs and xfs) that support lazytime, so this won't really
+be a major churn.
 
 
 _______________________________________________
