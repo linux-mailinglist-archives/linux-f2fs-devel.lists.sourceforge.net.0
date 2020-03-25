@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04383192C15
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:18:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 426A7192C23
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:21:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jH7nk-0004mZ-Ly; Wed, 25 Mar 2020 15:18:40 +0000
+	id 1jH7qV-0005it-UU; Wed, 25 Mar 2020 15:21:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hch@lst.de>) id 1jH7ni-0004mP-OW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:18:38 +0000
+ (envelope-from <tytso@mit.edu>) id 1jH7qU-0005iY-HW
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:21:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wI2iEhqXH5FunWtdKhJ1mMQW5BBNtoO0FFpOPXy3Ip4=; b=DimtcOv+n/AOK5S1aaeR7WEpxk
- wZsyXeEEf16S/Ivc2s1anbkAP58hlstKUBUnJVqA/PxHibfGoqnqb6f0AqDiy4tj6NBIaGN92w+ha
- DZpTdHzyZ4W4GIBUQAGZYWKu+HS5iXw5eDukilXc6OAahrsrchpRA/AS8RCCrkKsT+zg=;
+ bh=jVx77pDPVETvoruFobaG2sAK3NbxhBdFGSL6pbLZHUs=; b=jX2qMztv4yGS2gURIH1HRpAPN/
+ Av6P7Zodqgx/3d6MH4JMhJ3oEuLzAAqOWxzen10519aDuE6N/sFqCxWMPFLVdb3L/kgHM6PH+3Wvp
+ UR/7kb6D1Fl/qz/J0heyV29ODig/VUySUTHFuKmwnsJh5UI24dm6lTR5fswYpCW0t+5w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,39 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wI2iEhqXH5FunWtdKhJ1mMQW5BBNtoO0FFpOPXy3Ip4=; b=b4f+eXe6QfUMYo3ZT1nK4SOJVu
- 5yM7bivetO+3/QnMUlYTL3cEeHfNLLvq/W7YDD2WfUsOeoboN+/1oAovO79KeWtM1yPltxfU2SdOG
- 27RFT8rzk/82RxkrxCCJq9OVWCF+jN639RuelvxximpNX3mQsdgDtIv1TicSsElEP9aw=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=jVx77pDPVETvoruFobaG2sAK3NbxhBdFGSL6pbLZHUs=; b=Xf6UNg6dHg8A6C+xeIe+pgULR6
+ noiZmriSNP4iH4F5dGolbQCQWXqe/jiUMZ+g/uy9HWXpykpf5jda77iyFEngvG932ZI5TqSuBHDpN
+ CXqW2Lm8yirtxd0eCsmDoel0jVP28djp040kH8SbdGINtIknp6101vJ2BACzReXNmE3E=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jH7ng-006ka0-QE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:18:38 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 6EDE168B05; Wed, 25 Mar 2020 16:01:08 +0100 (CET)
-Date: Wed, 25 Mar 2020 16:01:08 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Theodore Ts'o <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>, Al Viro <viro@zeniv.linux.org.uk>,
- Richard Weinberger <richard@nod.at>, linux-xfs@vger.kernel.org
-Message-ID: <20200325150108.GA14435@lst.de>
-References: <20200325122825.1086872-1-hch@lst.de>
- <20200325122825.1086872-3-hch@lst.de>
+ id 1jH7qS-00GXSR-Fp
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:21:30 +0000
+Received: from callcc.thunk.org (pool-72-93-95-157.bstnma.fios.verizon.net
+ [72.93.95.157]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 02PFLDxG006021
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Mar 2020 11:21:14 -0400
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+ id C131B420EBA; Wed, 25 Mar 2020 11:21:13 -0400 (EDT)
+Date: Wed, 25 Mar 2020 11:21:13 -0400
+From: "Theodore Y. Ts'o" <tytso@mit.edu>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200325152113.GK53396@mit.edu>
+References: <20200320024639.GH1067245@mit.edu>
+ <20200320025255.1705972-1-tytso@mit.edu>
+ <20200325092057.GA25483@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200325122825.1086872-3-hch@lst.de>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: -0.4 (/)
+In-Reply-To: <20200325092057.GA25483@infradead.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [213.95.11.211 listed in list.dnswl.org]
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jH7ng-006ka0-QE
-Subject: Re: [f2fs-dev] [PATCH 2/4] fs: avoid double-writing the inode on a
- lazytime expiration
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jH7qS-00GXSR-Fp
+Subject: Re: [f2fs-dev] [PATCH 1/2] writeback: avoid double-writing the
+ inode on a lazytime expiration
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,27 +75,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, linux-mtd@lists.infradead.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-xfs@vger.kernel.org, Eric Biggers <ebiggers@kernel.org>,
+ Ext4 Developers List <linux-ext4@vger.kernel.org>,
+ Richard Weinberger <richard@nod.at>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Mar 25, 2020 at 01:28:23PM +0100, Christoph Hellwig wrote:
-> --- a/fs/ext4/super.c
-> +++ b/fs/ext4/super.c
-> @@ -1448,6 +1448,11 @@ static struct dquot **ext4_get_dquots(struct inode *inode)
->  	return EXT4_I(inode)->i_dquot;
->  }
->  
-> +static void ext4_lazytime_expired(struct inode *inode)
-> +{
-> +	return ext4_dirty_inode(inode, I_DIRTY_SYNC);
-> +}
+On Wed, Mar 25, 2020 at 02:20:57AM -0700, Christoph Hellwig wrote:
+> >  	spin_unlock(&inode->i_lock);
+> >  
+> > -	if (dirty & I_DIRTY_TIME)
+> > -		mark_inode_dirty_sync(inode);
+> > +	/* This was a lazytime expiration; we need to tell the file system */
+> > +	if (dirty & I_DIRTY_TIME_EXPIRED && inode->i_sb->s_op->dirty_inode)
+> > +		inode->i_sb->s_op->dirty_inode(inode, I_DIRTY_SYNC);
+> 
+> I think this needs a very clear comment explaining why we don't go
+> through __mark_inode_dirty.
 
-FYI: this is inside an #ifdef CONFIG_QUOTA, so I'll have to respin even
-if the overall approach looks good.
+I can take the explanation which is in the git commit description and
+move it into the comment.
+
+> But as said before I'd rather have a new lazytime_expired operation that
+> makes it very clear what is happening.  We currenly have 4 file systems
+> (ext4, f2fs, ubifs and xfs) that support lazytime, so this won't really
+> be a major churn.
+
+Again, I believe patch #2 does what you want; if it doesn't can you
+explain why passing I_DIRTY_TIME_EXPIRED to s_op->dirty_inode() isn't
+"a new lazytime expired operation that makes very clear what is
+happening"?
+
+I separated out patch #1 and patch #2 because patch #1 preserves
+current behavior, and patch #2 modifies XFS code, which I don't want
+to push Linus without an XFS reviewed-by.
+
+N.b.  None of the other file systems required a change for patch #2,
+so if you want, we can have the XFS tree carry patch #2, and/or
+combine that with whatever other simplifying changes that you want.
+Or I can combine patch #1 and patch #2, with an XFS Reviewed-by, and
+send it through the ext4 tree.
+
+What's your pleasure?
+
+					- Ted
+
 
 
 _______________________________________________
