@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 426A7192C23
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:21:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF78A192C7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2020 16:29:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jH7qV-0005it-UU; Wed, 25 Mar 2020 15:21:31 +0000
+	id 1jH7y0-0005KG-7H; Wed, 25 Mar 2020 15:29:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1jH7qU-0005iY-HW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:21:30 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jH7xz-0005K9-Ea
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:29:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jVx77pDPVETvoruFobaG2sAK3NbxhBdFGSL6pbLZHUs=; b=jX2qMztv4yGS2gURIH1HRpAPN/
- Av6P7Zodqgx/3d6MH4JMhJ3oEuLzAAqOWxzen10519aDuE6N/sFqCxWMPFLVdb3L/kgHM6PH+3Wvp
- UR/7kb6D1Fl/qz/J0heyV29ODig/VUySUTHFuKmwnsJh5UI24dm6lTR5fswYpCW0t+5w=;
+ bh=s9o1YcFIkmflqsWaxbFgkp4az0GTva1vt7Qz7uMqp0U=; b=YMyIOcJ+Rr8C4vg8NarZtAMxBx
+ EvB8JGg2TNJeWzWBQyhy8UwubFhbmadJx0SXqWSAEsAzHlrSpkv1bcsJ7+wQ+ia0Tgm/sCyIu4XlX
+ A8F+wRVoChT6g3wLeZVLjgfhXCmyaZupxBbjmOzJVF2AgaItZk3LFWZPBuir4vqssK/E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,41 +29,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jVx77pDPVETvoruFobaG2sAK3NbxhBdFGSL6pbLZHUs=; b=Xf6UNg6dHg8A6C+xeIe+pgULR6
- noiZmriSNP4iH4F5dGolbQCQWXqe/jiUMZ+g/uy9HWXpykpf5jda77iyFEngvG932ZI5TqSuBHDpN
- CXqW2Lm8yirtxd0eCsmDoel0jVP28djp040kH8SbdGINtIknp6101vJ2BACzReXNmE3E=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=s9o1YcFIkmflqsWaxbFgkp4az0GTva1vt7Qz7uMqp0U=; b=D3ovFGdP7KO3XP+jcH2Fp4HzP3
+ Y973xyA+7UaVQBV1b4FYrCkDxUREx1iMA7VHPmL8joR03J0Kh+97LcPIHdiIZb6MsTVA+Sd7CfBZG
+ L/r4nyrHOBt1xr9AFqUwfRwXlvQV5P3KqGtWJLoZjCDlH01zVWryWIK2P1hAHTD34mjg=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jH7qS-00GXSR-Fp
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:21:30 +0000
-Received: from callcc.thunk.org (pool-72-93-95-157.bstnma.fios.verizon.net
- [72.93.95.157]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 02PFLDxG006021
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 25 Mar 2020 11:21:14 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id C131B420EBA; Wed, 25 Mar 2020 11:21:13 -0400 (EDT)
-Date: Wed, 25 Mar 2020 11:21:13 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200325152113.GK53396@mit.edu>
-References: <20200320024639.GH1067245@mit.edu>
- <20200320025255.1705972-1-tytso@mit.edu>
- <20200325092057.GA25483@infradead.org>
+ id 1jH7xu-00GXto-OG
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Mar 2020 15:29:15 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3320520409;
+ Wed, 25 Mar 2020 15:29:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1585150140;
+ bh=go8gp5X5K5OQI1lxpw0RRcIOUv+vtN2Xt4lszINpSVo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OYFuAIgDSELsbPZkjA7m82K7TGTMyRQ9dbkvkHK09E9tTOsldIet9fDTIy4pGYP4A
+ Awd2zJ44Bpanck72XTb913evoBw8wuTDBPbvhMUIqZDRBVAn+QfGRMcRg7eayqe5ON
+ dJKAAlOJ89KRGs1gVzN62bGnOQpdl5uQJqeOcv1Y=
+Date: Wed, 25 Mar 2020 08:28:59 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: John <graysky@archlinux.us>
+Message-ID: <20200325152859.GA65658@google.com>
+References: <418f4ee8-14ed-bdfa-d16c-f68c2992f234@huawei.com>
+ <CAO_nJAYTbPqWKAnG1+i2J1jnEKN6QtiMV_CxVyranZ-AWK9Agg@mail.gmail.com>
+ <20200323041143.GC147648@google.com>
+ <CAO_nJAYEGp1129PsFwMdU0ZdjC75DoL60nXhY7KaATgSPz-2DA@mail.gmail.com>
+ <20200323150205.GA119787@google.com>
+ <CAO_nJAbyEcTR4wFytJp1HQmQBDzpwycKhA_-FUwo39WVMceuZw@mail.gmail.com>
+ <8b47e963-9e12-c945-e40e-a9d54a412d52@huawei.com>
+ <CAO_nJAYWQWrWaQVfUmVpJGFtOeKKE76im-AkLUDTJm8DN4VAgA@mail.gmail.com>
+ <2292eb8d-8357-227f-5448-d1d03b33c042@huawei.com>
+ <CAO_nJAaNxRfC6SHQrr0BCDnA2H6HHkz1Pk5vJMCVfGqUSP0u1Q@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200325092057.GA25483@infradead.org>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <CAO_nJAaNxRfC6SHQrr0BCDnA2H6HHkz1Pk5vJMCVfGqUSP0u1Q@mail.gmail.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jH7qS-00GXSR-Fp
-Subject: Re: [f2fs-dev] [PATCH 1/2] writeback: avoid double-writing the
- inode on a lazytime expiration
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jH7xu-00GXto-OG
+Subject: Re: [f2fs-dev] fstrim does not recognize FSVER=1.13 of F2FS
+ partitions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,52 +96,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, Eric Biggers <ebiggers@kernel.org>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>,
- Richard Weinberger <richard@nod.at>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Mar 25, 2020 at 02:20:57AM -0700, Christoph Hellwig wrote:
-> >  	spin_unlock(&inode->i_lock);
-> >  
-> > -	if (dirty & I_DIRTY_TIME)
-> > -		mark_inode_dirty_sync(inode);
-> > +	/* This was a lazytime expiration; we need to tell the file system */
-> > +	if (dirty & I_DIRTY_TIME_EXPIRED && inode->i_sb->s_op->dirty_inode)
-> > +		inode->i_sb->s_op->dirty_inode(inode, I_DIRTY_SYNC);
+On 03/25, John wrote:
+> On Tue, Mar 24, 2020 at 9:01 PM Chao Yu <yuchao0@huawei.com> wrote:
+> > I guess ssd should support discard, however I saw sdb was wrapped with device
+> > mapper, which may have different character, just want to check that whether
+> > device mapper disable the discard.
+> >
+> > If backup/restore is hard for you, how about let me add some logs on fstrim
+> > interface? then we could retry fstrim to see where we actually fail.
 > 
-> I think this needs a very clear comment explaining why we don't go
-> through __mark_inode_dirty.
+> I have an older totally different SSD for testing that seems to support discard:
+> # hdparm -I /dev/sdc | grep TRIM
+>    * Data Set Management TRIM supported (limit 8 blocks)
+>    * Deterministic read ZEROs after TRIM
+> 
+> As I test, I created two f2fs partitions on this different SSD:
+> 1) /dev/sdc2 normal F2FS
+> 2) /dev/sdc3 encrypted with LUKS (dm-crypt) then formatted to F2FS
+> 
+> Results:
+> 1) Regular F2FS
+> # fstrim -v /regular
+> /regular: 0 B (0 bytes) trimmed
 
-I can take the explanation which is in the git commit description and
-move it into the comment.
+This is normal.
 
-> But as said before I'd rather have a new lazytime_expired operation that
-> makes it very clear what is happening.  We currenly have 4 file systems
-> (ext4, f2fs, ubifs and xfs) that support lazytime, so this won't really
-> be a major churn.
+> 
+> 2) Encrypted F2FS
+> # fstrim -v /encrypted
+> fstrim: /encrypted: the discard operation is not supported
 
-Again, I believe patch #2 does what you want; if it doesn't can you
-explain why passing I_DIRTY_TIME_EXPIRED to s_op->dirty_inode() isn't
-"a new lazytime expired operation that makes very clear what is
-happening"?
+It seems dm-crypt has discard-related support, ie., "allow_discards", in ctrl.
+But, FWIW, the target simply doesn't support discard at all.
 
-I separated out patch #1 and patch #2 because patch #1 preserves
-current behavior, and patch #2 modifies XFS code, which I don't want
-to push Linus without an XFS reviewed-by.
+# grep discards_supported drivers/md/*
+drivers/md/dm-cache-target.c:	ti->discards_supported = true;
+drivers/md/dm-clone-target.c:	ti->discards_supported = true;
+drivers/md/dm-log-writes.c:	ti->discards_supported = true;
+drivers/md/dm-table.c:	if (!tgt->num_discard_bios && tgt->discards_supported)
+drivers/md/dm-table.c:		DMWARN("%s: %s: ignoring discards_supported because num_discard_bios is zero.",
+drivers/md/dm-table.c:		 * 'discards_supported') or it relies on _all_ data devices having
+drivers/md/dm-table.c:		if (!ti->discards_supported &&
+drivers/md/dm-thin.c:		 * Setting 'discards_supported' circumvents the normal
+drivers/md/dm-thin.c:		ti->discards_supported = true;
+drivers/md/dm-thin.c:		ti->discards_supported = true;
+drivers/md/dm-zoned-target.c:	ti->discards_supported = true;
 
-N.b.  None of the other file systems required a change for patch #2,
-so if you want, we can have the XFS tree carry patch #2, and/or
-combine that with whatever other simplifying changes that you want.
-Or I can combine patch #1 and patch #2, with an XFS Reviewed-by, and
-send it through the ext4 tree.
 
-What's your pleasure?
-
-					- Ted
-
+> 
+> Can we conclude that the device mapper is some how spoofing fstrim
+> into thinking the device doesn't support trim?  Happy to hear your
+> thoughts.
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
