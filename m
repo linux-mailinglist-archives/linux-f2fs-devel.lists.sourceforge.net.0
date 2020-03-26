@@ -2,71 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88192193BF1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Mar 2020 10:35:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F6AE193C14
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Mar 2020 10:42:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jHOv3-0003YH-68; Thu, 26 Mar 2020 09:35:21 +0000
+	id 1jHP2E-0004m0-Ip; Thu, 26 Mar 2020 09:42:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jHOv2-0003Y0-5W
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:35:20 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jHP2D-0004lg-0C
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:42:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1Dgk26+ga1imxVl88UdJNYF/M7NFE95vSbj0YEIPx7c=; b=RvqhVI2wf4bXWYDI/bKRiFRU9n
- 5b3G/eKRpohK9Eh2Jh4TvabljojCQZ2MJApOFnx4UYVwkkbK1pBX0IUSper52H8gg6oPDsK1IHgg0
- lvw5EMDP1pdM81xFLUsCXEmxITc+oFUJYbrmhzsjsrDpjZ29K6J3Jh9v6bqc3/CC7lJw=;
+ bh=Ou6+JEBUw7wIS1MIu2jlzjib4QzUUzty13uSLhnbNRc=; b=YuuzV9iKB7om5lGYProh5grRhh
+ +Z74G1YiclAikpnwp5Im9lPvh3OPs4ZeNe6Z6xIYme9ai9CqBaC6iB4nQmB02B1KM1zgYf20le7vz
+ gzNvfxmI5i2gI4NAc90rceY59d9sjbWAGOFDnT/xgdYKIeszlyGDc2akR3TEuOSXC3+Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1Dgk26+ga1imxVl88UdJNYF/M7NFE95vSbj0YEIPx7c=; b=Jiakz8Y4J6/W42iluziP1gNfo4
- Sy+5Llvtz6P/p/YC0m1iTSQIi60rKkX5XNQee1lvyqESb1YEeHT5sGUjW/EHTQ+W/Bmz9euF1KPvO
- smGt/tk8LC5QWGZDeZ9mSbZy7ivkuSBTFexyclTbdx2EBCkiq53Xpwo4mDY/8L459fQI=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Ou6+JEBUw7wIS1MIu2jlzjib4QzUUzty13uSLhnbNRc=; b=Y
+ 3QicF4b3tyoLjqcf8ZBDVqiX4/FA+NEXzaREsHo1BlHYSjSiNL67fH59TnV3TlNpH+8QsSULFbf/Z
+ LWO7sur/8H/i97dWC8zfVrFdWY3MGgPZUPrJjFnUP1NdicG/7+vmLRlU2Sp1uceI1YkrVA9lAvMUd
+ 5RLdWGGNynncWenc=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jHOuz-004IqQ-U0
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:35:20 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 7644EDB1CEFD789CD5B1;
- Thu, 26 Mar 2020 17:35:08 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 26 Mar
- 2020 17:35:04 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200325092754.63411-1-yuchao0@huawei.com>
- <20200325155806.GC65658@google.com>
+ id 1jHP2B-004J3K-9P
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:42:44 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id E7DE44E00AA4FAA74072;
+ Thu, 26 Mar 2020 17:42:34 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 26 Mar 2020 17:42:28 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <87d715d0-a5c4-7b54-95bb-9b627d163271@huawei.com>
-Date: Thu, 26 Mar 2020 17:35:03 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Thu, 26 Mar 2020 17:42:26 +0800
+Message-ID: <20200326094226.81358-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20200325155806.GC65658@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
-X-Headers-End: 1jHOuz-004IqQ-U0
-Subject: Re: [f2fs-dev] [PATCH RFC] f2fs: don't inline compressed inode
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1jHP2B-004J3K-9P
+Subject: [f2fs-dev] [PATCH] f2fs: fix to verify tpage before releasing in
+ f2fs_free_dic()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,50 +79,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/3/25 23:58, Jaegeuk Kim wrote:
-> On 03/25, Chao Yu wrote:
->> f2fs_may_inline_data() only check compressed flag on current inode
->> rather than on parent inode, however at this time compressed flag
->> has not been inherited yet.
-> 
-> When write() or other allocation happens, it'll be reset.
+In below error path, tpages[i] could be NULL, fix to check it before
+releasing it.
+- f2fs_read_multi_pages
+ - f2fs_alloc_dic
+  - f2fs_free_dic
 
-Yeah, all tests are fine w/o this RFC patch, anyway, will let you know if
-I find something incompatible.
+Fixes: 61fbae2b2b12 ("f2fs: fix to avoid NULL pointer dereference")
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/compress.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 1d692108dbbb..8d025fe6d60c 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1339,6 +1339,8 @@ void f2fs_free_dic(struct decompress_io_ctx *dic)
+ 		for (i = 0; i < dic->cluster_size; i++) {
+ 			if (dic->rpages[i])
+ 				continue;
++			if (!dic->tpages[i])
++				continue;
+ 			unlock_page(dic->tpages[i]);
+ 			put_page(dic->tpages[i]);
+ 		}
+-- 
+2.18.0.rc1
 
-> 
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>
->> Jaegeuk,
->>
->> I'm not sure about this, whether inline_data flag can be compatible with
->> compress flag, thoughts?
->>
->>  fs/f2fs/namei.c | 3 ++-
->>  1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
->> index f54119da2217..3807d1b4c4bc 100644
->> --- a/fs/f2fs/namei.c
->> +++ b/fs/f2fs/namei.c
->> @@ -86,7 +86,8 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
->>  	if (test_opt(sbi, INLINE_XATTR))
->>  		set_inode_flag(inode, FI_INLINE_XATTR);
->>  
->> -	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
->> +	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode) &&
->> +					!f2fs_compressed_file(dir))
->>  		set_inode_flag(inode, FI_INLINE_DATA);
->>  	if (f2fs_may_inline_dentry(inode))
->>  		set_inode_flag(inode, FI_INLINE_DENTRY);
->> -- 
->> 2.18.0.rc1
-> .
-> 
 
 
 _______________________________________________
