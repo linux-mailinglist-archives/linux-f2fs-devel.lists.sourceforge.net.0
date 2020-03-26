@@ -2,51 +2,51 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F6AE193C14
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Mar 2020 10:42:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92462193C1C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Mar 2020 10:43:57 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jHP2E-0004m0-Ip; Thu, 26 Mar 2020 09:42:46 +0000
+	id 1jHP3J-00052G-Qs; Thu, 26 Mar 2020 09:43:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jHP2D-0004lg-0C
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:42:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jHP3G-00051Q-SX
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:43:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
  CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ou6+JEBUw7wIS1MIu2jlzjib4QzUUzty13uSLhnbNRc=; b=YuuzV9iKB7om5lGYProh5grRhh
- +Z74G1YiclAikpnwp5Im9lPvh3OPs4ZeNe6Z6xIYme9ai9CqBaC6iB4nQmB02B1KM1zgYf20le7vz
- gzNvfxmI5i2gI4NAc90rceY59d9sjbWAGOFDnT/xgdYKIeszlyGDc2akR3TEuOSXC3+Y=;
+ bh=WH35F32fkoCaGM243sprqT48URJo7pwQiDocwSvRzJc=; b=TVpT7bSPaIZlZC9/XtDrNIUeXQ
+ jD96BlOBiULVFR3geipb5GQPktfshvPXV79ZT+TpyzcHyxIf+KUaDHfH+lX3aLKDiypLUaBYPrA24
+ WXOh0uIb7eH83bxpUCg80i6s748zmeBzO8c4uhVVpa2LXgdcqKNjdmD6q5usF4a6tQ0U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Ou6+JEBUw7wIS1MIu2jlzjib4QzUUzty13uSLhnbNRc=; b=Y
- 3QicF4b3tyoLjqcf8ZBDVqiX4/FA+NEXzaREsHo1BlHYSjSiNL67fH59TnV3TlNpH+8QsSULFbf/Z
- LWO7sur/8H/i97dWC8zfVrFdWY3MGgPZUPrJjFnUP1NdicG/7+vmLRlU2Sp1uceI1YkrVA9lAvMUd
- 5RLdWGGNynncWenc=;
+ List-Owner:List-Archive; bh=WH35F32fkoCaGM243sprqT48URJo7pwQiDocwSvRzJc=; b=a
+ P/J9ZAx6O9QrJpErW1J9OnXxWeIlytyD8W3bTtiSC6t1fKoxDsaKMPFDEZLsoByk58ZFH6w4M4CoZ
+ eRNuiwpTmq8xRDVy4H8N8eRn1GHp8cXw0UWQr2nJAz6qfKrHZIKvYA3945ccoCuyBefl0lQqQEDDq
+ eoiMJrpT1GG0t+v4=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jHP2B-004J3K-9P
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:42:44 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id E7DE44E00AA4FAA74072;
- Thu, 26 Mar 2020 17:42:34 +0800 (CST)
+ id 1jHP3C-000Nqh-3H
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Mar 2020 09:43:50 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 3A5ADECA0A74F860A0BF;
+ Thu, 26 Mar 2020 17:43:39 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 26 Mar 2020 17:42:28 +0800
+ DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 26 Mar 2020 17:43:31 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Thu, 26 Mar 2020 17:42:26 +0800
-Message-ID: <20200326094226.81358-1-yuchao0@huawei.com>
+Date: Thu, 26 Mar 2020 17:43:28 +0800
+Message-ID: <20200326094328.83818-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
@@ -60,9 +60,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jHP2B-004J3K-9P
-Subject: [f2fs-dev] [PATCH] f2fs: fix to verify tpage before releasing in
- f2fs_free_dic()
+X-Headers-End: 1jHP3C-000Nqh-3H
+Subject: [f2fs-dev] [PATCH] f2fs: add missing CONFIG_F2FS_FS_COMPRESSION
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,31 +78,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In below error path, tpages[i] could be NULL, fix to check it before
-releasing it.
-- f2fs_read_multi_pages
- - f2fs_alloc_dic
-  - f2fs_free_dic
+Compression sysfs node should not be shown if f2fs module disables
+compression feature.
 
-Fixes: 61fbae2b2b12 ("f2fs: fix to avoid NULL pointer dereference")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/compress.c | 2 ++
+ fs/f2fs/sysfs.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 1d692108dbbb..8d025fe6d60c 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1339,6 +1339,8 @@ void f2fs_free_dic(struct decompress_io_ctx *dic)
- 		for (i = 0; i < dic->cluster_size; i++) {
- 			if (dic->rpages[i])
- 				continue;
-+			if (!dic->tpages[i])
-+				continue;
- 			unlock_page(dic->tpages[i]);
- 			put_page(dic->tpages[i]);
- 		}
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 5f4fec83a6c6..5bf155a3a8d1 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -662,7 +662,9 @@ static struct attribute *f2fs_feat_attrs[] = {
+ #endif
+ 	ATTR_LIST(sb_checksum),
+ 	ATTR_LIST(casefold),
++#ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	ATTR_LIST(compression),
++#endif
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs_feat);
 -- 
 2.18.0.rc1
 
