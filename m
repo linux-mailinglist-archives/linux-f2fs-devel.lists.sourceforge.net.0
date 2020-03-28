@@ -2,80 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 494BA195ED6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Mar 2020 20:32:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5CA5196481
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Mar 2020 09:38:34 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jHuif-0005ps-Mp; Fri, 27 Mar 2020 19:32:41 +0000
+	id 1jI6z1-00038z-DI; Sat, 28 Mar 2020 08:38:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jHuie-0005pf-FL
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Mar 2020 19:32:40 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jI6yz-00037n-7W
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 08:38:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/HMMyirqvp+PVUVaPvmDMQ4oNIOCk9gieu2P+uqNYyg=; b=aOiF+rKd/916xsChMdVBMAkeuG
- R5dcRglI4bjV22wethYIxkftSLgj2Z1Px5tLW38E2NHkTT0qUKBDjMK4VnG/Abm3E5S+geQeDeGoT
- xmNi5VESAPmtiiFs/L5jA06IleCCCpzzadS9/l4ZPGsgw8O/L/+sjsPU6JypLNMfdYSI=;
+ bh=A3P5dXxyLgdy4jO1RuGsH1TCygZeQcqeYw5b16s+E9k=; b=BrZDrad6epNEmNARf5eeLimIzG
+ H6i3fIGfghrzRbYGnW9KWpYPi3aUelOGsMYH7pQ4jcf7LxbjKPIFx/lnIFASWrMvODiwBOhT+kLdC
+ 5KL/FxLAaExgjiNDIpNqJUki5MpLU3rgmrmzO2SoVdYWd+uuSyQP/1nfU0LfcjVqmyic=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/HMMyirqvp+PVUVaPvmDMQ4oNIOCk9gieu2P+uqNYyg=; b=ByArXSG6kURSFFByhm+oeDzmeh
- b1kxAri5z2Iey1EhpwsPJPlq5YxTkV0t59Iy/5isyn+SAM8qqXswE20DSV+iYquWuKUHVpO3+wYov
- sIhXHBShSijl663T1P0e6TMDBTDubVRtGLOIdfb3/t94yGsJyiwcLv922R/rF/J7CmJQ=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=A3P5dXxyLgdy4jO1RuGsH1TCygZeQcqeYw5b16s+E9k=; b=G9I3An1wa1mVgHoPqOj9I8o4VJ
+ DNZGuMsjaJYfLN6oTmqaulTV7lh0h7RUgO+PRBqWJ5xsaCCxB7EDwJh4GVLXN4IsYAwSy5wQlrHuD
+ wU4xvMQewPXxF91fW/Y0jS0YDCNrcZp9PNFHiUSJbYuj/Y7SGha71xjPRN2rkdtKfm9Q=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jHuid-003Fte-AE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Mar 2020 19:32:40 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8F43F20575;
- Fri, 27 Mar 2020 19:32:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585337553;
- bh=wWoAjZwt2nR5X1UPX0ZZp4acCT8N6K2BluWge4uJRGQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZIdX+zVLGrFZGp9dBUOVypptkgXVWdke59yk8jKqMZpdpClIGzxKm2WW990B2Xq3w
- Ycgwyu0RSSByNv0YKGZ2hWNga+DXU4+PwFWzck9gYDldbJWpDsfE1qHVMH/JkWe4Ha
- IniH6OY7izr4MJGs8sp2auOMJRfD+eAD4WKlRqOI=
-Date: Fri, 27 Mar 2020 12:32:33 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200327193233.GB186975@google.com>
-References: <20200327102953.104035-1-yuchao0@huawei.com>
- <20200327102953.104035-3-yuchao0@huawei.com>
+ id 1jI6yt-008BRV-Vi
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 08:38:21 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 02B6B1F41F22422873C7;
+ Sat, 28 Mar 2020 16:38:05 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sat, 28 Mar
+ 2020 16:38:01 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Sahitya Tummala <stummala@codeaurora.org>
+References: <1585219019-24831-1-git-send-email-stummala@codeaurora.org>
+ <20200327192412.GA186975@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <397da8a6-fdb4-9637-c6ea-803492c408a2@huawei.com>
+Date: Sat, 28 Mar 2020 16:38:00 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200327102953.104035-3-yuchao0@huawei.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200327192412.GA186975@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jHuid-003Fte-AE
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: fix to check
- f2fs_compressed_file() in f2fs_bmap()
+ for more information. [URIs: codeaurora.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1jI6yt-008BRV-Vi
+Subject: Re: [f2fs-dev] [PATCH] f2fs: prevent meta updates while checkpoint
+ is in progress
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,33 +84,89 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/27, Chao Yu wrote:
-> Otherwise, for compressed inode, returned physical block address
-> may be wrong.
+Hi all,
 
-We can use bmap to check the allocated (non)compressed blocks.
+On 2020/3/28 3:24, Jaegeuk Kim wrote:
+> Hi Sahitya,
+> 
+> On 03/26, Sahitya Tummala wrote:
+>> allocate_segment_for_resize() can cause metapage updates if
+>> it requires to change the current node/data segments for resizing.
+>> Stop these meta updates when there is a checkpoint already
+>> in progress to prevent inconsistent CP data.
+> 
+> Doesn't freeze|thaw_bdev(sbi->sb->s_bdev); work for you?
+
+That can avoid foreground ops racing? rather than background ops like
+balance_fs() from kworker?
+
+BTW, I found that {freeze,thaw}_bdev is not enough to freeze all
+foreground fs ops, it needs to use {freeze,thaw}_super instead.
+
+---
+ fs/f2fs/gc.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 26248c8936db..acdc8b99b543 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1538,7 +1538,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		return -EINVAL;
+ 	}
+
+-	freeze_bdev(sbi->sb->s_bdev);
++	freeze_super(sbi->sb);
+
+ 	shrunk_blocks = old_block_count - block_count;
+ 	secs = div_u64(shrunk_blocks, BLKS_PER_SEC(sbi));
+@@ -1551,7 +1551,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		sbi->user_block_count -= shrunk_blocks;
+ 	spin_unlock(&sbi->stat_lock);
+ 	if (err) {
+-		thaw_bdev(sbi->sb->s_bdev, sbi->sb);
++		thaw_super(sbi->sb);
+ 		return err;
+ 	}
+
+@@ -1613,6 +1613,6 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	}
+ 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	mutex_unlock(&sbi->resize_mutex);
+-	thaw_bdev(sbi->sb->s_bdev, sbi->sb);
++	thaw_super(sbi->sb);
+ 	return err;
+ }
+-- 
+2.18.0.rc1
 
 > 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/data.c | 2 ++
->  1 file changed, 2 insertions(+)
+>>
+>> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+>> ---
+>>  fs/f2fs/gc.c | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index 5bca560..6122bad 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -1399,8 +1399,10 @@ static int free_segment_range(struct f2fs_sb_info *sbi, unsigned int start,
+>>  	int err = 0;
+>>  
+>>  	/* Move out cursegs from the target range */
+>> +	f2fs_lock_op(sbi);
+>>  	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_TYPE; type++)
+>>  		allocate_segment_for_resize(sbi, type, start, end);
+>> +	f2fs_unlock_op(sbi);
+>>  
+>>  	/* do GC to move out valid blocks in the range */
+>>  	for (segno = start; segno <= end; segno += sbi->segs_per_sec) {
+>> -- 
+>> Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+>> Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+> .
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 24643680489b..f22f3ba10a48 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3591,6 +3591,8 @@ static sector_t f2fs_bmap(struct address_space *mapping, sector_t block)
->  
->  	if (f2fs_has_inline_data(inode))
->  		return 0;
-> +	if (f2fs_compressed_file(inode))
-> +		return 0;
->  
->  	/* make sure allocating whole blocks */
->  	if (mapping_tagged(mapping, PAGECACHE_TAG_DIRTY))
-> -- 
-> 2.18.0.rc1
 
 
 _______________________________________________
