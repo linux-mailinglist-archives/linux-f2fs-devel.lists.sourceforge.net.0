@@ -2,51 +2,51 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F7511964CE
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Mar 2020 10:34:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 328931964D1
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Mar 2020 10:41:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jI7qp-0002Co-Fn; Sat, 28 Mar 2020 09:33:59 +0000
+	id 1jI7xh-0008AR-DW; Sat, 28 Mar 2020 09:41:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jI7qk-0002CX-7A
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 09:33:56 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jI7xh-0008AK-2o
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 09:41:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
  CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=14sXR6QfZx1Z2fdmMzel6ckTdP03unzS6uGy2sTVPIs=; b=Wn6Pvtf91cAtSOrZQ0WyetE49s
- 97Kn8SeMSE+Nt+oCUOL6vjxvqd1tjqy5W0UAb4CYRgv2drOdSFUqJucGFIv+oRlyccWm6qYu39Prc
- U7YFsogKFAUCgCVMhqSAS5Dsxlls/N70GKACWnyYRNMF5vj9ggKLoih501f1zDaVQfvA=;
+ bh=AahqtJvm4u1PiDqQ5CZN8phQgonk6zK2hZ8AJ/e3Ezc=; b=Z1PLPyYw3yKn5X7dEy+G7fxIN4
+ MhZ4gonTlvzTE/UDtQUavTXwtCzRUdICXFsQVJVWdwtHkjXH/DUg7sWK5LICRZTMU6ywKzExHTwPa
+ eNxqk7PKFPE82VWerpH0y3C1bR8KRkT9NuQRsgDrQ+CvbF8/FYtw+yFNLlUbButNkMOc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=14sXR6QfZx1Z2fdmMzel6ckTdP03unzS6uGy2sTVPIs=; b=Z
- Pcynf7IBjEL0VNKXZaRh9SuM2nhfCjR34TvkblNQqKCDt4os0aAbLPYXKXwl9jJmsLRS8R7fAZi3i
- cQB0c1nkvR6QjpPhKrYnqzDAgeltk5I37qwBv5NErfJCTSpfd8BFNEB6394SADJZ5tZYfiiEHqItk
- yOujO80fD9qnJ/lA=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=AahqtJvm4u1PiDqQ5CZN8phQgonk6zK2hZ8AJ/e3Ezc=; b=C
+ 0a8hFNgbkK5w4tFhNsS4BMCE1nSG8DhuTKNS/M3wiWQuLmqMuFEgfr68OCXP4cXXOcyg1cKXGvjZ5
+ hQ4F7k3zDy2+VNDN5dVUSCpUDChCknMeFN1mTElC5EssVDH5APJwFur1XE4Fl21VrJeO95jfqC3bD
+ S/0sfhuUJxd7eS4s=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jI7qg-00C2Xr-3t
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 09:33:54 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 87C9AAC658DD25D9171B;
- Sat, 28 Mar 2020 17:33:39 +0800 (CST)
+ id 1jI7xe-008MYS-H8
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 28 Mar 2020 09:41:05 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 24377F02718C82F69AF3;
+ Sat, 28 Mar 2020 17:40:54 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
- 14.3.487.0; Sat, 28 Mar 2020 17:33:30 +0800
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.487.0; Sat, 28 Mar 2020 17:40:47 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Sat, 28 Mar 2020 17:33:23 +0800
-Message-ID: <20200328093323.130902-1-yuchao0@huawei.com>
+Date: Sat, 28 Mar 2020 17:40:40 +0800
+Message-ID: <20200328094040.3785-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
@@ -60,8 +60,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jI7qg-00C2Xr-3t
-Subject: [f2fs-dev] [PATCH] f2fs: clean up {cic,dic}.ref handling
+X-Headers-End: 1jI7xe-008MYS-H8
+Subject: [f2fs-dev] [PATCH WIP] f2fs: support fiemap on compressed inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,84 +78,112 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-{cic,dic}.ref should be initialized to number of compressed pages,
-let's initialize it directly rather than doing w/
-f2fs_set_compressed_page().
+Map normal/compressed cluster of compressed inode correctly, and give
+the right fiemap flag FIEMAP_EXTENT_ENCODED on mapped compressed extent.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/compress.c | 16 ++++++----------
- 1 file changed, 6 insertions(+), 10 deletions(-)
+ fs/f2fs/data.c | 55 ++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 53 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 9cc279ea3bfb..c0e7ba245c74 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -55,7 +55,7 @@ bool f2fs_is_compressed_page(struct page *page)
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 89b73ee74120..363f7f1b6dc0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1808,6 +1808,25 @@ static int f2fs_xattr_fiemap(struct inode *inode,
+ 	return (err < 0 ? err : 0);
  }
  
- static void f2fs_set_compressed_page(struct page *page,
--		struct inode *inode, pgoff_t index, void *data, refcount_t *r)
-+		struct inode *inode, pgoff_t index, void *data)
++static loff_t max_inode_blocks(struct inode *inode)
++{
++	loff_t result = ADDRS_PER_INODE(inode);
++	loff_t leaf_count = ADDRS_PER_BLOCK(inode);
++
++	/* two direct node blocks */
++	result += (leaf_count * 2);
++
++	/* two indirect node blocks */
++	leaf_count *= NIDS_PER_BLOCK;
++	result += (leaf_count * 2);
++
++	/* one double indirect node block */
++	leaf_count *= NIDS_PER_BLOCK;
++	result += leaf_count;
++
++	return result;
++}
++
+ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 		u64 start, u64 len)
  {
- 	SetPagePrivate(page);
- 	set_page_private(page, (unsigned long)data);
-@@ -63,8 +63,6 @@ static void f2fs_set_compressed_page(struct page *page,
- 	/* i_crypto_info and iv index */
- 	page->index = index;
- 	page->mapping = inode->i_mapping;
--	if (r)
--		refcount_inc(r);
- }
+@@ -1817,6 +1836,8 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	u64 logical = 0, phys = 0, size = 0;
+ 	u32 flags = 0;
+ 	int ret = 0;
++	bool compr_cluster = false;
++	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
  
- static void f2fs_put_compressed_page(struct page *page)
-@@ -662,7 +660,7 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
- 		cops->destroy_decompress_ctx(dic);
- out_free_dic:
- 	if (verity)
--		refcount_add(dic->nr_cpages - 1, &dic->ref);
-+		refcount_set(&dic->ref, dic->nr_cpages);
- 	if (!verity)
- 		f2fs_decompress_end_io(dic->rpages, dic->cluster_size,
- 								ret, false);
-@@ -1067,7 +1065,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	if (fieinfo->fi_flags & FIEMAP_FLAG_CACHE) {
+ 		ret = f2fs_precache_extents(inode);
+@@ -1851,6 +1872,9 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	memset(&map_bh, 0, sizeof(struct buffer_head));
+ 	map_bh.b_size = len;
  
- 	cic->magic = F2FS_COMPRESSED_PAGE_MAGIC;
- 	cic->inode = inode;
--	refcount_set(&cic->ref, 1);
-+	refcount_set(&cic->ref, cc->nr_cpages);
- 	cic->rpages = f2fs_kzalloc(sbi, sizeof(struct page *) <<
- 			cc->log_cluster_size, GFP_NOFS);
- 	if (!cic->rpages)
-@@ -1077,8 +1075,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
++	if (compr_cluster)
++		map_bh.b_size = blk_to_logical(inode, cluster_size - 1);
++
+ 	ret = get_data_block(inode, start_blk, &map_bh, 0,
+ 					F2FS_GET_BLOCK_FIEMAP, &next_pgofs);
+ 	if (ret)
+@@ -1861,7 +1885,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 		start_blk = next_pgofs;
  
- 	for (i = 0; i < cc->nr_cpages; i++) {
- 		f2fs_set_compressed_page(cc->cpages[i], inode,
--					cc->rpages[i + 1]->index,
--					cic, i ? &cic->ref : NULL);
-+					cc->rpages[i + 1]->index, cic);
- 		fio.compressed_page = cc->cpages[i];
- 		if (fio.encrypted) {
- 			fio.page = cc->rpages[i + 1];
-@@ -1328,7 +1325,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ 		if (blk_to_logical(inode, start_blk) < blk_to_logical(inode,
+-					F2FS_I_SB(inode)->max_file_blocks))
++						max_inode_blocks(inode)))
+ 			goto prep_next;
  
- 	dic->magic = F2FS_COMPRESSED_PAGE_MAGIC;
- 	dic->inode = cc->inode;
--	refcount_set(&dic->ref, 1);
-+	refcount_set(&dic->ref, cc->nr_cpages);
- 	dic->cluster_idx = cc->cluster_idx;
- 	dic->cluster_size = cc->cluster_size;
- 	dic->log_cluster_size = cc->log_cluster_size;
-@@ -1352,8 +1349,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
- 			goto out_free;
+ 		flags |= FIEMAP_EXTENT_LAST;
+@@ -1873,11 +1897,38 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
  
- 		f2fs_set_compressed_page(page, cc->inode,
--					start_idx + i + 1,
--					dic, i ? &dic->ref : NULL);
-+					start_idx + i + 1, dic);
- 		dic->cpages[i] = page;
+ 		ret = fiemap_fill_next_extent(fieinfo, logical,
+ 				phys, size, flags);
++		if (ret)
++			goto out;
++		size = 0;
  	}
  
+-	if (start_blk > last_blk || ret)
++	if (start_blk > last_blk)
+ 		goto out;
+ 
++	if (compr_cluster) {
++		compr_cluster = false;
++
++
++		logical = blk_to_logical(inode, start_blk - 1);
++		phys = blk_to_logical(inode, map_bh.b_blocknr);
++		size = blk_to_logical(inode, cluster_size);
++
++		flags |= FIEMAP_EXTENT_ENCODED;
++
++		start_blk += cluster_size - 1;
++
++		if (start_blk > last_blk)
++			goto out;
++
++		goto prep_next;
++	}
++
++	if (map_bh.b_blocknr == COMPRESS_ADDR) {
++		compr_cluster = true;
++		start_blk++;
++		goto prep_next;
++	}
++
+ 	logical = blk_to_logical(inode, start_blk);
+ 	phys = blk_to_logical(inode, map_bh.b_blocknr);
+ 	size = map_bh.b_size;
 -- 
 2.18.0.rc1
 
