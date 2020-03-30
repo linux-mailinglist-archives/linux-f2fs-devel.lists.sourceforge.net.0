@@ -2,70 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71A4F198391
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 Mar 2020 20:42:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D407D198466
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 Mar 2020 21:25:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jIzMv-00010Q-0s; Mon, 30 Mar 2020 18:42:41 +0000
+	id 1jJ02S-0000UP-69; Mon, 30 Mar 2020 19:25:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jIzMt-00010H-3h
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Mar 2020 18:42:39 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jJ02Q-0000UD-Bc
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Mar 2020 19:25:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=amd0o95aGKaVMZ1pZri0Y1mvVLHwYjLGGDkIJVWq2K0=; b=WZUSRDOOTmvBL/Baz6IBni7LkO
- xDjfZTm8siifG4/3KeW6JkYVJUch3CY3NpSu+0KzWPtOpTWzNPiDF7HXp2s0Dom22bGS18ahxI8V2
- U8JYWmNpZ9zNquRJxZOOEsc/LjXQUMmc4G5YQqL2RMvoMt45RLQaa4RbY9pnMnEfUEFg=;
+ bh=y6gSVL3/E8p4ZqhVdctvaK5PD0QVElVpaxRmKvaP2QI=; b=ckNn04azKiDPYO377X2H4bFqlZ
+ lRmfjC7hOvPtFSVRZ+48nbvhgbiAPswH9gesRRMiZsxJ4VWXR0MWzX5HCPChFY3pVKqBSntI91EHM
+ ypngsVxUMilHV0fr95gJt42NXioJoFU7Z+fdD3sq5WzuuHYy7ty9OIZGcHKzxxsYcIoQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=amd0o95aGKaVMZ1pZri0Y1mvVLHwYjLGGDkIJVWq2K0=; b=QU6FarxmRAwIHLoSaZc2IREKGo
- 8FMLEKxxw9yONpn2Qgx0oLHSxxpRBiLMpvV2Idp4adzp6c8D4JH+ykycYmgiv4BPcWVrwF/MTildW
- 7eJqQA8j3BZGyqGcEmgOmKEUwzD1ZAsCLY9xUI/8bR8gl9ShvWrynC5ZgBO0pEm1JEvE=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=y6gSVL3/E8p4ZqhVdctvaK5PD0QVElVpaxRmKvaP2QI=; b=R
+ E8VVwpo2zEpC9yJpV65VPwbcsjNjf7VrwN/c3OZdakAf+NrmvJulO1ex2rlZBAp8wffxiNJDYTAkN
+ glPgqV47cxC4EQOaxCbIXMpMqzq+20CqjaMi2+NHJ/0MOlmILzlCIon+NbHzN37oRXsUtKut2o1jt
+ nrEfA/PiSvVRLAZs=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jIzMq-00FcIr-SY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Mar 2020 18:42:39 +0000
+ id 1jJ02P-00ClPS-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Mar 2020 19:25:34 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3871B20774;
- Mon, 30 Mar 2020 18:42:31 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2A5382072E;
+ Mon, 30 Mar 2020 19:25:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585593751;
- bh=ky8oqS2D9aucEdrvPjghrup/o5e1FPaMSb4LcB9kc/s=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Ihm1Aj7OHwbH5KzDf6gFBAhyj+dgMF1mi0F6DzS/JWav3xpLMgocwbpU1Fhtbn3N2
- QNOeaf4wr3qdAm5VGxWxyS67ocsPjtijSy12sqUu/aJ63t4U+enDA1k/gElbm824ul
- E1UE4Xb+TUtTRTLPYa27WeP6GXGREf3wpa54Ei5c=
-Date: Mon, 30 Mar 2020 11:42:30 -0700
+ s=default; t=1585596325;
+ bh=FPKJsyCnEC0nCygZD91NxrJ+36I26GDU630Lpsm7G0M=;
+ h=From:To:Cc:Subject:Date:From;
+ b=j7oyKBsXXcnrCA0J+ZyG1ppm1m+rxwnrrBGAqcPMCYtKTnr0mzuk/jYS82VJvCTJB
+ 0jRmJDf8jQJ86e++y6wgjBTBxFf4GKROSNtH8s79r7XGktbRFkd/3AeJOViRR1T2x/
+ oCyyYSR7NFgC7zIBBfYIDd1/19Jht54g3AZdVrUg=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200330184230.GB34947@google.com>
-References: <20200330100349.56127-1-yuchao0@huawei.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 30 Mar 2020 12:25:24 -0700
+Message-Id: <20200330192524.8931-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.26.0.rc2.310.g2932bb562d-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200330100349.56127-1-yuchao0@huawei.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -73,8 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jIzMq-00FcIr-SY
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use round_up()/DIV_ROUND_UP()
+X-Headers-End: 1jJ02P-00ClPS-9M
+Subject: [f2fs-dev] [PATCH] f2fscrypt: show more information of policy
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,131 +80,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/30, Chao Yu wrote:
-> .i_cluster_size should be power of 2, so we can use round_up() instead
-> of roundup() to enhance the calculation.
-> 
-> In addition, use DIV_ROUND_UP to clean up codes.
-> 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/data.c | 16 ++++++----------
->  fs/f2fs/file.c | 17 +++++------------
->  2 files changed, 11 insertions(+), 22 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 0a829a89f596..8257d5e7aa3b 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1969,8 +1969,6 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
->  					bool is_readahead)
->  {
->  	struct bio *bio = *bio_ret;
-> -	const unsigned blkbits = inode->i_blkbits;
-> -	const unsigned blocksize = 1 << blkbits;
->  	sector_t block_in_file;
->  	sector_t last_block;
->  	sector_t last_block_in_file;
-> @@ -1979,8 +1977,8 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
->  
->  	block_in_file = (sector_t)page_index(page);
->  	last_block = block_in_file + nr_pages;
-> -	last_block_in_file = (f2fs_readpage_limit(inode) + blocksize - 1) >>
-> -							blkbits;
-> +	last_block_in_file = DIV_ROUND_UP(f2fs_readpage_limit(inode),
-> +								PAGE_SIZE);
+From: Jaegeuk Kim <jaegeuk@google.com>
 
-What if PAGE_SIZE is bigger than 4KB?
+This patch gives more information of encryption policy.
 
->  	if (last_block > last_block_in_file)
->  		last_block = last_block_in_file;
->  
-> @@ -2062,7 +2060,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
->  	 */
->  	f2fs_wait_on_block_writeback(inode, block_nr);
->  
-> -	if (bio_add_page(bio, page, blocksize, 0) < blocksize)
-> +	if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
->  		goto submit_and_realloc;
->  
->  	inc_page_count(F2FS_I_SB(inode), F2FS_RD_DATA);
-> @@ -2091,16 +2089,14 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->  	struct bio *bio = *bio_ret;
->  	unsigned int start_idx = cc->cluster_idx << cc->log_cluster_size;
->  	sector_t last_block_in_file;
-> -	const unsigned blkbits = inode->i_blkbits;
-> -	const unsigned blocksize = 1 << blkbits;
->  	struct decompress_io_ctx *dic = NULL;
->  	int i;
->  	int ret = 0;
->  
->  	f2fs_bug_on(sbi, f2fs_cluster_is_empty(cc));
->  
-> -	last_block_in_file = (f2fs_readpage_limit(inode) +
-> -					blocksize - 1) >> blkbits;
-> +	last_block_in_file = DIV_ROUND_UP(f2fs_readpage_limit(inode),
-> +								PAGE_SIZE);
->  
->  	/* get rid of pages beyond EOF */
->  	for (i = 0; i < cc->cluster_size; i++) {
-> @@ -2197,7 +2193,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->  
->  		f2fs_wait_on_block_writeback(inode, blkaddr);
->  
-> -		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
-> +		if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
->  			goto submit_and_realloc;
->  
->  		inc_page_count(sbi, F2FS_RD_DATA);
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index c2d38a1c4972..0f8be076620c 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -736,16 +736,9 @@ int f2fs_truncate_blocks(struct inode *inode, u64 from, bool lock)
->  	 * for compressed file, only support cluster size
->  	 * aligned truncation.
->  	 */
-> -	if (f2fs_compressed_file(inode)) {
-> -		size_t cluster_shift = PAGE_SHIFT +
-> -					F2FS_I(inode)->i_log_cluster_size;
-> -		size_t cluster_mask = (1 << cluster_shift) - 1;
-> -
-> -		free_from = from >> cluster_shift;
-> -		if (from & cluster_mask)
-> -			free_from++;
-> -		free_from <<= cluster_shift;
-> -	}
-> +	if (f2fs_compressed_file(inode))
-> +		free_from = round_up(from,
-> +				F2FS_I(inode)->i_cluster_size << PAGE_SHIFT);
->  #endif
->  
->  	err = f2fs_do_truncate_blocks(inode, free_from, lock);
-> @@ -3537,7 +3530,7 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
->  
->  		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
->  		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
-> -		count = roundup(count, F2FS_I(inode)->i_cluster_size);
-> +		count = round_up(count, F2FS_I(inode)->i_cluster_size);
->  
->  		ret = release_compress_blocks(&dn, count);
->  
-> @@ -3689,7 +3682,7 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
->  
->  		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
->  		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
-> -		count = roundup(count, F2FS_I(inode)->i_cluster_size);
-> +		count = round_up(count, F2FS_I(inode)->i_cluster_size);
->  
->  		ret = reserve_compress_blocks(&dn, count);
->  
-> -- 
-> 2.18.0.rc1
+Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
+Change-Id: I04a6826aa4497554ce79d884d495b3dda1b64fac
+---
+ tools/f2fscrypt.c | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+
+diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
+index fe3e0ff..bb3e70f 100644
+--- a/tools/f2fscrypt.c
++++ b/tools/f2fscrypt.c
+@@ -63,6 +63,8 @@
+ #define F2FS_ENCRYPTION_MODE_AES_256_GCM	2
+ #define F2FS_ENCRYPTION_MODE_AES_256_CBC	3
+ #define F2FS_ENCRYPTION_MODE_AES_256_CTS	4
++#define F2FS_ENCRYPTION_MODE_ADIANTUM		9
++#define F2FS_ENCRYPTION_MODE_PRIVATE		127
+ 
+ #define F2FS_AES_256_XTS_KEY_SIZE		64
+ #define F2FS_AES_256_GCM_KEY_SIZE		32
+@@ -531,6 +533,33 @@ static void get_passphrase(char *passphrase, int len)
+ 	*p = '\0';
+ }
+ 
++struct enc_mode_map {
++	int mode;
++	char name[255];
++};
++
++static const struct enc_mode_map enc_mode_str[] = {
++	{F2FS_ENCRYPTION_MODE_INVALID, "invalid"},
++	{F2FS_ENCRYPTION_MODE_AES_256_XTS, "aes_256_xts"},
++	{F2FS_ENCRYPTION_MODE_AES_256_GCM, "aes_256_gcm"},
++	{F2FS_ENCRYPTION_MODE_AES_256_CBC, "aes_256_cbc"},
++	{F2FS_ENCRYPTION_MODE_AES_256_CTS, "aes_256_cts"},
++	{F2FS_ENCRYPTION_MODE_ADIANTUM, "adiantum"},
++	{F2FS_ENCRYPTION_MODE_PRIVATE, "ice"},
++};
++
++static const char *get_crypt_mode(int mode)
++{
++	int i;
++
++	for (i = 0; i < (sizeof(enc_mode_str) / sizeof(enc_mode_str[0])); ++i) {
++		if (mode == enc_mode_str[i].mode) {
++			return enc_mode_str[i].name;
++		}
++	}
++	return "N/A";
++}
++
+ struct keyring_map {
+ 	char name[4];
+ 	size_t name_len;
+@@ -827,6 +856,11 @@ static void do_get_policy(int argc, char **argv, const struct cmd_desc *cmd)
+ 		for (j = 0; j < F2FS_KEY_DESCRIPTOR_SIZE; j++) {
+ 			printf("%02x", (unsigned char) policy.master_key_descriptor[j]);
+ 		}
++		printf("\tversion: %u\n", policy.version);
++		printf("\tcontents_encryption_mode : %s\n",
++			get_crypt_mode(policy.contents_encryption_mode));
++		printf("\tfilenames_encryption_mode: %s\n",
++			get_crypt_mode(policy.filenames_encryption_mode));
+ 		fputc('\n', stdout);
+ 	}
+ 	exit(0);
+-- 
+2.26.0.rc2.310.g2932bb562d-goog
+
 
 
 _______________________________________________
