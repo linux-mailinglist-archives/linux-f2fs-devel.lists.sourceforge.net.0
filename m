@@ -2,73 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE4E719B702
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Apr 2020 22:34:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B690019BB95
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Apr 2020 08:17:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jJk44-00044H-UC; Wed, 01 Apr 2020 20:34:20 +0000
+	id 1jJtAW-00068I-76; Thu, 02 Apr 2020 06:17:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jJk42-000449-TJ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Apr 2020 20:34:18 +0000
+ (envelope-from <yanaijie@huawei.com>) id 1jJtAU-000683-Oc
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Apr 2020 06:17:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4siS1G9b/n2qqTjMg+AgviucCECqukTxdaB8Z3+ZHuI=; b=AbmQfgSRTJIjqLKkDGPk5rtNn2
- yrWejdVCClWhuWr4uhJOYGpceDBUJWCsejMxOBnBVGU5jYbD+RqTAou/ntsFwKF/ugNOdkmkQxkBD
- S+bixvRrBqoh6WdhZMm97wyR3zaBl8I3EMs9goBUHNvVlxSLpvwRjCw9WrYyp4AjHwIY=;
+ bh=OttPPWIF4yDjAbuyvNp+afaOQJ9Hbn9SWsVoOh3P9Sw=; b=PEcO20DxDRWrwz4D479Z6o1Njv
+ 3oAzGnAX9JnOb8kBGo0OeG0ISzqtW9NTjkOwSSRm9GsnpuHU322QcX37avltLssrsGRdIoumznnI5
+ qCFXylbiEfeJZlm+H10YzKxfHpzNw8MU0+4GtvUbx0XsizRM93S3YVUtkpB5FSwOR67Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=4siS1G9b/n2qqTjMg+AgviucCECqukTxdaB8Z3+ZHuI=; b=Z
- M41k3ntXv7gIQws0I/DrZfPZDC/WrkluOynbvw7Sq0yNvgSLami+o6N0P07vLr66rXCAOpicPHyAf
- E9fzTZjMeD2YXIupAb3poH11JoQ069qbkjcGsZK5PdFDunSeaSaNjTun2uQWm0VkcD2hfmnQsW7OH
- rUX6nCrKWWQVF/x8=;
-Received: from mail.kernel.org ([198.145.29.99])
+ List-Owner:List-Archive; bh=OttPPWIF4yDjAbuyvNp+afaOQJ9Hbn9SWsVoOh3P9Sw=; b=Q
+ HPujbuvqE22IeCR6jDfhpfANlZFaIFU63IpfPT8kQAjEn8zAxK3v4kknfMEQaRj0NIOEaKQ/7kIbf
+ bVfc41jDrTY6zIhn634ERQDRASwKG4vagJ6Dqj1JoE3RqOg8hxSfm2fEWuvRXo5DKBiVYc4RmhSBd
+ ZCDyAGQcszkbzRzI=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jJk3y-000gqZ-1E
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Apr 2020 20:34:18 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8281920719;
- Wed,  1 Apr 2020 20:34:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585773243;
- bh=XC+AtajwUC6IDsT4/XELWta5ALZ3ng8u+6vOSyVsBU8=;
- h=From:To:Cc:Subject:Date:From;
- b=X4XijlIrG3caLQgCuEMPHfDhb09jfEnRZz8dI1Iakzmh8RweIKcWckcxfwa3NglQO
- PThiAFbi6uQprrQ204SKwLxic8DVOPtO1knEbU27WPPDNLjiaXeJDcvk79R7s5aNS4
- QNVwgdqaCeaPbeo4Mb+ccTysPQyAuWfm+jPXM/Po=
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed,  1 Apr 2020 13:33:23 -0700
-Message-Id: <20200401203323.72092-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.26.0.rc2.310.g2932bb562d-goog
+ id 1jJtAP-00114Z-CP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Apr 2020 06:17:34 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 5DA1D78E4EF831D79B48;
+ Thu,  2 Apr 2020 14:17:15 +0800 (CST)
+Received: from huawei.com (10.175.124.28) by DGGEMS405-HUB.china.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server id 14.3.487.0; Thu, 2 Apr 2020
+ 14:17:08 +0800
+From: Jason Yan <yanaijie@huawei.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
+Date: Thu, 2 Apr 2020 14:15:45 +0800
+Message-ID: <20200402061545.23208-1-yanaijie@huawei.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.175.124.28]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jJk3y-000gqZ-1E
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: quick fix of CLOCK_BOOTTIME in mac
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jJtAP-00114Z-CP
+Subject: [f2fs-dev] [PATCH -next] f2fs: remove set but not used variable
+ 'params'
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,78 +72,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jason Yan <yanaijie@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This fixes build error on mac.
+Fix the following gcc warning:
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+fs/f2fs/compress.c:375:18: warning: variable 'params' set but not used [-Wunused-but-set-variable]
+  ZSTD_parameters params;
+                  ^~~~~~
+
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Jason Yan <yanaijie@huawei.com>
 ---
- configure.ac |  1 +
- fsck/f2fs.h  |  3 +++
- fsck/main.c  | 14 +++++++++++++-
- 3 files changed, 17 insertions(+), 1 deletion(-)
+ fs/f2fs/compress.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/configure.ac b/configure.ac
-index 9b0e872..9ac0c24 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -93,6 +93,7 @@ AC_CHECK_HEADERS(m4_flatten([
- 	linux/posix_acl.h
- 	linux/types.h
- 	linux/xattr.h
-+	mach/mach_time.h
- 	mntent.h
- 	scsi/sg.h
- 	stdlib.h
-diff --git a/fsck/f2fs.h b/fsck/f2fs.h
-index 55d6b07..2a00d35 100644
---- a/fsck/f2fs.h
-+++ b/fsck/f2fs.h
-@@ -22,6 +22,9 @@
- #ifdef HAVE_MNTENT_H
- #include <mntent.h>
- #endif
-+#ifdef HAVE_MACH_TIME_H
-+#include <mach/mach_time.h>
-+#endif
- #include <sys/stat.h>
- #include <sys/ioctl.h>
- #include <sys/mount.h>
-diff --git a/fsck/main.c b/fsck/main.c
-index c481ce4..9a1596f 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -801,12 +801,24 @@ static int do_sload(struct f2fs_sb_info *sbi)
- 	return f2fs_sload(sbi);
- }
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index f05ecf4cb899..df7b2d15eacd 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -372,12 +372,10 @@ static int zstd_compress_pages(struct compress_ctx *cc)
  
--static u64 get_boottime_ns() {
-+#if defined(__APPLE__)
-+static u64 get_boottime_ns()
-+{
-+#ifdef HAVE_MACH_TIME_H
-+	return mach_absolute_time();
-+#else
-+	return 0;
-+#endif
-+}
-+#else
-+static u64 get_boottime_ns()
-+{
- 	struct timespec t;
- 	t.tv_sec = t.tv_nsec = 0;
- 	clock_gettime(CLOCK_BOOTTIME, &t);
- 	return (u64)t.tv_sec * 1000000000LL + t.tv_nsec;
- }
-+#endif
- 
- int main(int argc, char **argv)
+ static int zstd_init_decompress_ctx(struct decompress_io_ctx *dic)
  {
+-	ZSTD_parameters params;
+ 	ZSTD_DStream *stream;
+ 	void *workspace;
+ 	unsigned int workspace_size;
+ 
+-	params = ZSTD_getParams(F2FS_ZSTD_DEFAULT_CLEVEL, dic->clen, 0);
+ 	workspace_size = ZSTD_DStreamWorkspaceBound(MAX_COMPRESS_WINDOW_SIZE);
+ 
+ 	workspace = f2fs_kvmalloc(F2FS_I_SB(dic->inode),
 -- 
-2.26.0.rc2.310.g2932bb562d-goog
+2.17.2
 
 
 
