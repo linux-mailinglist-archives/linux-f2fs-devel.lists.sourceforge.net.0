@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E286519CED7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Apr 2020 05:20:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 012F919D049
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Apr 2020 08:37:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jKCst-00065R-7F; Fri, 03 Apr 2020 03:20:43 +0000
+	id 1jKFxH-0001Lj-1f; Fri, 03 Apr 2020 06:37:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <kilobyte@angband.pl>) id 1jKCsp-00064y-HU
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Apr 2020 03:20:39 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jKFxF-0001Lc-To
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Apr 2020 06:37:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fPtkKNQoPMMmWlExdCV/WY/MiIJ8irL7A1My86XI3lI=; b=bzJTINgimr0Is4plBbc/eXbJox
- QsEWIYkh4N3s68hizmXqwoH9y5BdcVSkAK1I6Jw+6mxz+rDRYlw47UXO1o8RBTAQMSx1faCj5Whvd
- 8Cml4Q12IjXQaCILi4Nv8AN2SqPEh8XjObghGx41cd6BkyeNmIdD0BBCl62Xbqm/VbZ8=;
+ bh=uV0Qx0cSUNHryUdwbP6G9fcQSWLJFE0G96ERylKGgjQ=; b=T343TU9+Xyc5DsxSUu1oZjgAya
+ MTxp8GRZhcT2Dnv2PZ1U+ekjKcn1TQZiUxFMHwfMGKylzRIYK9C6/XjTl3CKY9YjklGldcHT48O5A
+ xwbZyaiFJ/8hq6BrTTn1yE5lB5TOQmaXDgiw0+XJKdxEzeOqJza+MAWJ1Wj2gjaJEEyM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fPtkKNQoPMMmWlExdCV/WY/MiIJ8irL7A1My86XI3lI=; b=AhtYOhZkavQHE1h4FjJJeNsCFA
- yEwwHCDNu2DsU1rhN/ADgUmf7dkMQCkUNnFduK7hD5DKF7w5fhATGczoVdAcFLRWhsbbXzf+xBVkI
- P2H6KSL2Nl/Er57Q3q7V3+IEN3iJvs2xslpqexiwt5V08k4WsUkupuMKXhsvIgVCZoM0=;
-Received: from tartarus.angband.pl ([54.37.238.230])
+ bh=uV0Qx0cSUNHryUdwbP6G9fcQSWLJFE0G96ERylKGgjQ=; b=IY47nEnqcbICxqtKHWU8iF2oGE
+ mRp/VvCVBJsXmdW5AjLXUZMFBEgi4Xe99GKiDPUlMhpUAbTYsmUPuXKzYjfxgQRye9+EDhEAYvZkP
+ 8W9uFSzl3gcWoX0bjmu12RHXy6m9+ZAxQFHqMkeVXkIp3EDTcLVBe7EYMPdMQmDJKTA0=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jKCsl-00HTQE-8X
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Apr 2020 03:20:39 +0000
-Received: from kilobyte by tartarus.angband.pl with local (Exim 4.92)
- (envelope-from <kilobyte@angband.pl>)
- id 1jKCKt-0003XY-9M; Fri, 03 Apr 2020 04:45:35 +0200
-Date: Fri, 3 Apr 2020 04:45:35 +0200
-From: Adam Borowski <kilobyte@angband.pl>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20200403024535.GA23417@angband.pl>
+ id 1jKFxB-0001KT-R7
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Apr 2020 06:37:25 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 41E81811A40B2A8B225F;
+ Fri,  3 Apr 2020 14:37:11 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 3 Apr 2020
+ 14:37:10 +0800
+To: Adam Borowski <kilobyte@angband.pl>, "Theodore Y. Ts'o" <tytso@mit.edu>
 References: <158582888648.9053.2167684001695943018.reportbug@umbar.angband.pl>
- <20200402191658.GR768293@mit.edu>
+ <20200402191658.GR768293@mit.edu> <20200403024535.GA23417@angband.pl>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <58dd64a1-4f2b-3201-6cb7-215b420f804b@huawei.com>
+Date: Fri, 3 Apr 2020 14:37:09 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200402191658.GR768293@mit.edu>
-X-Junkbait: aaron@angband.pl, zzyx@angband.pl
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: kilobyte@angband.pl
-X-SA-Exim-Scanned: No (on tartarus.angband.pl); SAEximRunCond expanded to false
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20200403024535.GA23417@angband.pl>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1jKCsl-00HTQE-8X
+X-Headers-End: 1jKFxB-0001KT-R7
 Subject: Re: [f2fs-dev] Bug#955549: f2fs-tools: fsck.f2fs segfaults
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -73,58 +75,69 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: 955549@bugs.debian.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVGh1LCBBcHIgMDIsIDIwMjAgYXQgMDM6MTY6NThQTSAtMDQwMCwgVGhlb2RvcmUgWS4gVHMn
-byB3cm90ZToKPiBPbiBUaHUsIEFwciAwMiwgMjAyMCBhdCAwMjowMToyNlBNICswMjAwLCBBZGFt
-IEJvcm93c2tpIHdyb3RlOgo+ID4KPiA+IEFmdGVyIGEgbG90IG9mIG91dHB1dCBvbiBhIGRhbWFn
-ZWQgZmlsZXN5c3RlbSAoU0QgY2FyZCBjb3BpZWQgdG8gYW4gaW1hZ2UpCj4gPiBmc2NrLmYyZnMg
-ZGllcyB3aXRoOgo+ID4gCj4gPiAgLSBGaWxlIG5hbWUgICAgICAgICA6IG1rZnMuZXh0My5kcGtn
-LW5ldwo+ID4gIC0gRmlsZSBzaXplICAgICAgICAgOiA2IChieXRlcykKPiA+IAo+ID4gUHJvZ3Jh
-bSByZWNlaXZlZCBzaWduYWwgU0lHU0VHViwgU2VnbWVudGF0aW9uIGZhdWx0Lgo+ID4gMHgwMDAw
-NTU1NTU1NTU5M2VjIGluIG1lbWNweSAoX19sZW49MTg0NDY3NDQwNzMzMjM4OTI3MzYsIF9fc3Jj
-PTB4NTU1NTU1NjA3NjBjLCBfX2Rlc3Q9MHg3ZmZmZmZmZmUwMDApIGF0IC91c3IvaW5jbHVkZS94
-ODZfNjQtbGludXgtZ251L2JpdHMvc3RyaW5nX2ZvcnRpZmllZC5oOjM0Cj4gPiAzNAkgIHJldHVy
-biBfX2J1aWx0aW5fX19tZW1jcHlfY2hrIChfX2Rlc3QsIF9fc3JjLCBfX2xlbiwgX19ib3MwIChf
-X2Rlc3QpKTsKCj4gPiAjMCAgMHgwMDAwNTU1NTU1NTU5M2VjIGluIG1lbWNweSAoX19sZW49MTg0
-NDY3NDQwNzMzMjM4OTI3MzYsIF9fc3JjPTB4NTU1NTU1NjA3NjBjLCBfX2Rlc3Q9MHg3ZmZmZmZm
-ZmUwMDApIGF0IC91c3IvaW5jbHVkZS94ODZfNjQtbGludXgtZ251L2JpdHMvc3RyaW5nX2ZvcnRp
-ZmllZC5oOjM0Cj4gPiAjMSAgY29udmVydF9lbmNyeXB0ZWRfbmFtZSAobmFtZT1uYW1lQGVudHJ5
-PTB4NTU1NTU1NjA3NjBjICIgIiwgbGVuPS0zODU2NTg4ODAsIG5ldz1uZXdAZW50cnk9MHg3ZmZm
-ZmZmZmUwMDAgIiAiLCBlbmNfbmFtZT08b3B0aW1pemVkIG91dD4pIGF0IGZzY2suYzoxMTMyCj4g
-PiAjMiAgMHgwMDAwNTU1NTU1NTYyMjg2IGluIHByaW50X2lub2RlX2luZm8gKHNiaT0weDU1NTU1
-NTU3ZGIyMCA8Z2ZzY2s+LCBub2RlPTB4NTU1NTU1NjA3NWIwLCBuYW1lPTEpIGF0IG1vdW50LmM6
-MTgzCj4gPiAjMyAgMHgwMDAwNTU1NTU1NTYyYTQ2IGluIHByaW50X25vZGVfaW5mbyAoc2JpPTxv
-cHRpbWl6ZWQgb3V0Piwgbm9kZV9ibG9jaz08b3B0aW1pemVkIG91dD4sIHZlcmJvc2U9PG9wdGlt
-aXplZCBvdXQ+KSBhdCBtb3VudC5jOjI3Nwo+ID4gIzQgIDB4MDAwMDU1NTU1NTU2MGQzZiBpbiBk
-dW1wX25vZGUgKHNiaT1zYmlAZW50cnk9MHg1NTU1NTU1N2RiMjAgPGdmc2NrPiwgbmlkPW5pZEBl
-bnRyeT0yNDI3NCwgZm9yY2U9Zm9yY2VAZW50cnk9MSkgYXQgZHVtcC5jOjUyMAo+ID4gIzUgIDB4
-MDAwMDU1NTU1NTU1ZTk0YyBpbiBmc2NrX3ZlcmlmeSAoc2JpPTB4NTU1NTU1NTdkYjIwIDxnZnNj
-az4pIGF0IGZzY2suYzoyNTY4Cj4gPiAjNiAgMHgwMDAwNTU1NTU1NTU2OTliIGluIGRvX2ZzY2sg
-KHNiaT0weDU1NTU1NTU3ZGIyMCA8Z2ZzY2s+KSBhdCBtYWluLmM6NTY5Cgo+ID4gSSBoYXZlIGEg
-Y29weSBvZiB0aGUgZmlsZXN5c3RlbSBpbiBxdWVzdGlvbiBmcm9tIGJlZm9yZSBhbnkgcmVwYWly
-IGF0dGVtcHRzLiAKPiA+IEl0IGhhcyBubyBzZW5zaXRpdmUgZGF0YSBvbiBpdCwgdGh1cyBJIGNh
-biBzaGFyZSBpZiBuZWVkZWQgLS0gMTRHQi4KPiAKPiBUaGFua3MgZm9yIHRoZSBidWcgcmVwb3J0
-LiAgQ2FuIHlvdSBtYWtlIHRoZSBmaWxlIHN5c3RlbSBpbWFnZQo+IGF2YWlsYWJsZSBzb21laG93
-PyAgTWF5YmUgZm9yIGRvd25sb2FkIGF0IHNvbWUgVVJMPyAgSG93IHdlbGwgZG9lcyBpdAo+IGNv
-bXByZXNzPwoKOTE2TUIgLS0gaHR0cHM6Ly9hbmdiYW5kLnBsL3JpZ2VsLmYyZnMueHouZ3BnClRo
-ZSBtYWNoaW5lIHNlcnZlcyBhcyBhIHNlcmlhbCBjb25zb2xlIGxvZ2dlci9tYW5hZ2VtZW50IGZv
-ciBhIGJ1bmNoIG9mCmJveGVzOyBhIHJvb3Qgc2Vzc2lvbiBpcyB1bmxpa2VseSB0byBoYXZlIGFu
-eXRoaW5nIEknZCBub3Qgc2hhcmUgd2l0aApkZXZlbG9wZXJzIGJ1dCBpcyBub3Qgc29tZXRoaW5n
-IHRvIHJlbGVhc2UgdG8gdGhlIHdpZGUgd29ybGQuICBUaHVzLCBJCnN5bWV0cmljYWxseSBlbmNy
-eXB0ZWQgdGhlIGltYWdlLCBJJ2xsIHNlbmQgeW91IHRoZSBwYXNzd29yZCBwcml2YXRlbHkgLS0K
-ZmVlbCBmcmVlIHRvIHNoYXJlIGl0IHdpdGggYW55b25lIHNlbWktdHJ1c3RlZC4KClRoZSBmaWxl
-c3lzdGVtIHdhcyBvbiBhIFNEIGNhcmQsIHdpdGggdmVyeSBsaWdodCB1c2UgKGFwcGVuZCksIG5v
-IGlzc3VlcywKcmFuIGtlcm5lbCA0LjEzIHVudGlsIDkgZGF5cyBhZ28gLS0gdGhlbiBJJ3ZlIHVw
-Z3JhZGVkIHRvIDUuNS4xMSB3aXRoIG5vCm90aGVyIGNoYW5nZXMuICBUaGUgY29ycnVwdGlvbiBp
-cyBwcm9iYWJseSBjYXVzZWQgYnkgdGhhdCwgYnV0IHRoZXJlJ3MKYWx3YXlzIGEgY2hhbmNlIG9m
-IFNEIGJlaW5nIFNELgoKCk1lb3chCi0tIAriooDio7TioL7ioLviorbio6bioIAK4qO+4qCB4qKg
-4qCS4qCA4qO/4qGBIGluIHRoZSBiZWdpbm5pbmcgd2FzIHRoZSBib290IGFuZCByb290IGZsb3Bw
-aWVzIGFuZCB0aGV5IHdlcmUgZ29vZC4K4qK/4qGE4qCY4qC34qCa4qCL4qCAICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgLS0gPHdpbGxtb3JlPiBvbiAjbGludXgtc3VueGkK
-4qCI4qCz4qOE4qCA4qCA4qCA4qCACgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1k
-ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
-bGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+Thanks for forwarding, Ted.
+
+On 2020/4/3 10:45, Adam Borowski wrote:
+> On Thu, Apr 02, 2020 at 03:16:58PM -0400, Theodore Y. Ts'o wrote:
+>> On Thu, Apr 02, 2020 at 02:01:26PM +0200, Adam Borowski wrote:
+>>>
+>>> After a lot of output on a damaged filesystem (SD card copied to an image)
+>>> fsck.f2fs dies with:
+>>>
+>>>  - File name         : mkfs.ext3.dpkg-new
+>>>  - File size         : 6 (bytes)
+>>>
+>>> Program received signal SIGSEGV, Segmentation fault.
+>>> 0x00005555555593ec in memcpy (__len=18446744073323892736, __src=0x55555560760c, __dest=0x7fffffffe000) at /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
+>>> 34	  return __builtin___memcpy_chk (__dest, __src, __len, __bos0 (__dest));
+> 
+>>> #0  0x00005555555593ec in memcpy (__len=18446744073323892736, __src=0x55555560760c, __dest=0x7fffffffe000) at /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
+
+At a glance, immediate reason of this issue is we didn't check inode.i_namelen's
+validation.
+
+>>> #1  convert_encrypted_name (name=name@entry=0x55555560760c " ", len=-385658880, new=new@entry=0x7fffffffe000 " ", enc_name=<optimized out>) at fsck.c:1132
+>>> #2  0x0000555555562286 in print_inode_info (sbi=0x55555557db20 <gfsck>, node=0x5555556075b0, name=1) at mount.c:183
+>>> #3  0x0000555555562a46 in print_node_info (sbi=<optimized out>, node_block=<optimized out>, verbose=<optimized out>) at mount.c:277
+>>> #4  0x0000555555560d3f in dump_node (sbi=sbi@entry=0x55555557db20 <gfsck>, nid=nid@entry=24274, force=force@entry=1) at dump.c:520
+>>> #5  0x000055555555e94c in fsck_verify (sbi=0x55555557db20 <gfsck>) at fsck.c:2568
+>>> #6  0x000055555555699b in do_fsck (sbi=0x55555557db20 <gfsck>) at main.c:569
+> 
+>>> I have a copy of the filesystem in question from before any repair attempts. 
+>>> It has no sensitive data on it, thus I can share if needed -- 14GB.
+>>
+>> Thanks for the bug report.  Can you make the file system image
+>> available somehow?  Maybe for download at some URL?  How well does it
+>> compress?
+> 
+> 916MB -- https://angband.pl/rigel.f2fs.xz.gpg
+> The machine serves as a serial console logger/management for a bunch of
+> boxes; a root session is unlikely to have anything I'd not share with
+> developers but is not something to release to the wide world.  Thus, I
+> symetrically encrypted the image, I'll send you the password privately --
+> feel free to share it with anyone semi-trusted.
+
+Would you mind sharing the password with me (chao@kernel.org)? I guess
+I can take a look at this issue.
+
+Thanks,
+
+> 
+> The filesystem was on a SD card, with very light use (append), no issues,
+> ran kernel 4.13 until 9 days ago -- then I've upgraded to 5.5.11 with no
+> other changes.  The corruption is probably caused by that, but there's
+> always a chance of SD being SD.
+> 
+> 
+> Meow!
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
