@@ -2,72 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 082EA1A0AFA
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Apr 2020 12:22:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BF501A1723
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Apr 2020 23:05:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jLlNX-0002xf-4G; Tue, 07 Apr 2020 10:22:47 +0000
+	id 1jLvPT-0007Ei-Bs; Tue, 07 Apr 2020 21:05:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jLlNU-0002x3-Q2
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Apr 2020 10:22:44 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1jLvPR-0007Ea-Da
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Apr 2020 21:05:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dBtst/fgbuqADR2GWl4E0mTCM3KoJKgMJukmwrmHFB8=; b=A/dPXFqFjLFF5tZxIAzzWC8eDQ
- k58T/4eeV88CztI4nFxsze8Vy67T7HHodIbqGACawYG+6s/2510ejAxnTWOWTIPYonbltu5XvGBUF
- wj+2OC5IEFvvNzAWGrZkTMZ1D/Sb+C2upk/lFYtkrQZcg1rjgX2igArEqTiGUrB/3uhY=;
+ bh=oFOILjPXNtbyzUoAndseMtoUceHaf0B/r5tjBQTrDfo=; b=Lw0FG6vWhnXgiAhzbUyDA0hxUd
+ Mng/+LUcoq2NrR727aM+THhI5tefMPhY0/KtCqxw6365cR7NwhghEccLiS53TDQhFtghshluV6C2P
+ PgphLEj5PXSnR1jaezBWEoYmV+sxehlJsztm+ZWehnuSnle0w3i98cAcWaRxh8waQY7w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dBtst/fgbuqADR2GWl4E0mTCM3KoJKgMJukmwrmHFB8=; b=iYaVVx8axJgipBIIAEKAmT2OCw
- EHnsUjkNHUPD1F9eD369D7OsEJOFbaRTW82sQXaCmZhRGRAkULRp+TY5U0QUzVwW57K/7x9ERzStK
- PePrszP2mm2W710gPIdyhxvnI2xtBHBNUbt1roFUYttzuHrdHNkxcY6eAn/GVy6/KCtc=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=oFOILjPXNtbyzUoAndseMtoUceHaf0B/r5tjBQTrDfo=; b=KE9jvqUwFaGPLjndeL77Nnzw4K
+ +6DjuPArN5oxwhcol5yKn1BNt5AKrttgZAv9jxqS0va+usRBOcoUsZXaMBBTDAa85k4qvnscj/RsI
+ M1erd2eC8Tq/syQBZAFrpSUmRgAiFuuzITOjUyYCDHoZsnuhvm1cXCu8Zno4CrzttD24=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jLlNQ-006LHw-I2
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Apr 2020 10:22:44 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 07712603C8F26CAD14DB;
- Tue,  7 Apr 2020 18:22:33 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 7 Apr 2020
- 18:22:20 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: Adam Borowski <kilobyte@angband.pl>, "Theodore Y. Ts'o" <tytso@mit.edu>
-References: <158582888648.9053.2167684001695943018.reportbug@umbar.angband.pl>
- <20200402191658.GR768293@mit.edu> <20200403024535.GA23417@angband.pl>
- <58dd64a1-4f2b-3201-6cb7-215b420f804b@huawei.com>
-Message-ID: <45149351-4c07-ba55-dec3-9a0872bb159f@huawei.com>
-Date: Tue, 7 Apr 2020 18:22:19 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <58dd64a1-4f2b-3201-6cb7-215b420f804b@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ id 1jLvPN-006dgd-6E
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Apr 2020 21:05:25 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1586293509;
+ bh=pvmHCQ2cmTRceXWYDcPbXLhXd1UfxQq9lm0jyvFB9+c=;
+ h=From:In-Reply-To:References:Date:To:Cc:From;
+ b=XmX5OVHgRfs3WrWlcGT6y0yy3Pv+vhkGkBfX4Cb7cw9489YdO1WQ9vvxakEXeivL5
+ qmHEvUpYkB+u3XrqatEEp7Tt+NNCypN9hX9wBr6MNRyyzCvOYlQT0wEldM85J+slDV
+ lr7i2LXwwrQKyZHSqtbeRqKQ8NYd0PrVCkRbz6TI=
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20200311162735.GA152176@google.com>
+References: <20200311162735.GA152176@google.com>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20200311162735.GA152176@google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.6-rc6
+X-PR-Tracked-Commit-Id: 2536ac6872e5265b4d9d263122cee02e3d5cae1d
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: c6d5789bea5187c2716959f8954a1e00b8a7835d
+Message-Id: <158629350986.19531.17911572712226508781.pr-tracker-bot@kernel.org>
+Date: Tue, 07 Apr 2020 21:05:09 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: angband.pl]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jLlNQ-006LHw-I2
-Subject: Re: [f2fs-dev] Bug#955549: f2fs-tools: fsck.f2fs segfaults
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jLvPN-006dgd-6E
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.6-rc6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,102 +83,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: 955549@bugs.debian.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Adam,
+The pull request you sent on Wed, 11 Mar 2020 09:27:35 -0700:
 
-I figured out two patches to fix segfault issues, could you please have
-a try:
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.6-rc6
 
-	fsck.f2fs: fix to check validation of i_xattr_nid
-	fsck.f2fs: fix to check validation of block address
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/c6d5789bea5187c2716959f8954a1e00b8a7835d
 
-In addition, I found that fsck main flow failed because it can not load root
-inode based on wrong block address in nat, so I wrote another patch to enable
-fsck to lookup root inode by traversing all nodes in f2fs main area, and relink
-nat to root inode correctly.
+Thank you!
 
-	fsck.f2fs: lookup and relink root inode
-
-With this patch, image can be fixed and mounted later, although, most of files
-were deleted due to seriously damaged f2fs metadata....
-
-The patches were made on top of dev-test branch of Jaegeuk's tree:
-
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git/log/?h=dev-test
-
-Let me know if you have problem with above patches.
-
-Thanks,
-
-On 2020/4/3 14:37, Chao Yu wrote:
-> Thanks for forwarding, Ted.
-> 
-> On 2020/4/3 10:45, Adam Borowski wrote:
->> On Thu, Apr 02, 2020 at 03:16:58PM -0400, Theodore Y. Ts'o wrote:
->>> On Thu, Apr 02, 2020 at 02:01:26PM +0200, Adam Borowski wrote:
->>>>
->>>> After a lot of output on a damaged filesystem (SD card copied to an image)
->>>> fsck.f2fs dies with:
->>>>
->>>>  - File name         : mkfs.ext3.dpkg-new
->>>>  - File size         : 6 (bytes)
->>>>
->>>> Program received signal SIGSEGV, Segmentation fault.
->>>> 0x00005555555593ec in memcpy (__len=18446744073323892736, __src=0x55555560760c, __dest=0x7fffffffe000) at /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
->>>> 34	  return __builtin___memcpy_chk (__dest, __src, __len, __bos0 (__dest));
->>
->>>> #0  0x00005555555593ec in memcpy (__len=18446744073323892736, __src=0x55555560760c, __dest=0x7fffffffe000) at /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34
-> 
-> At a glance, immediate reason of this issue is we didn't check inode.i_namelen's
-> validation.
-> 
->>>> #1  convert_encrypted_name (name=name@entry=0x55555560760c " ", len=-385658880, new=new@entry=0x7fffffffe000 " ", enc_name=<optimized out>) at fsck.c:1132
->>>> #2  0x0000555555562286 in print_inode_info (sbi=0x55555557db20 <gfsck>, node=0x5555556075b0, name=1) at mount.c:183
->>>> #3  0x0000555555562a46 in print_node_info (sbi=<optimized out>, node_block=<optimized out>, verbose=<optimized out>) at mount.c:277
->>>> #4  0x0000555555560d3f in dump_node (sbi=sbi@entry=0x55555557db20 <gfsck>, nid=nid@entry=24274, force=force@entry=1) at dump.c:520
->>>> #5  0x000055555555e94c in fsck_verify (sbi=0x55555557db20 <gfsck>) at fsck.c:2568
->>>> #6  0x000055555555699b in do_fsck (sbi=0x55555557db20 <gfsck>) at main.c:569
->>
->>>> I have a copy of the filesystem in question from before any repair attempts. 
->>>> It has no sensitive data on it, thus I can share if needed -- 14GB.
->>>
->>> Thanks for the bug report.  Can you make the file system image
->>> available somehow?  Maybe for download at some URL?  How well does it
->>> compress?
->>
->> 916MB -- https://angband.pl/rigel.f2fs.xz.gpg
->> The machine serves as a serial console logger/management for a bunch of
->> boxes; a root session is unlikely to have anything I'd not share with
->> developers but is not something to release to the wide world.  Thus, I
->> symetrically encrypted the image, I'll send you the password privately --
->> feel free to share it with anyone semi-trusted.
-> 
-> Would you mind sharing the password with me (chao@kernel.org)? I guess
-> I can take a look at this issue.
-> 
-> Thanks,
-> 
->>
->> The filesystem was on a SD card, with very light use (append), no issues,
->> ran kernel 4.13 until 9 days ago -- then I've upgraded to 5.5.11 with no
->> other changes.  The corruption is probably caused by that, but there's
->> always a chance of SD being SD.
->>
->>
->> Meow!
->>
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.wiki.kernel.org/userdoc/prtracker
 
 
 _______________________________________________
