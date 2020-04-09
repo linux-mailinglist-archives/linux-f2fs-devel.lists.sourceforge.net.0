@@ -2,67 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 030E21A2077
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Apr 2020 13:56:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FB2C1A2D93
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Apr 2020 04:20:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jM9KA-0003X2-Qj; Wed, 08 Apr 2020 11:56:54 +0000
+	id 1jMMnm-0003gw-NW; Thu, 09 Apr 2020 02:20:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jM9KA-0003Wv-4e
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Apr 2020 11:56:54 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jMMnk-0003gp-NH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Apr 2020 02:20:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kggf/5IbJZ3U7faVADMtGO1Jwo0nedQKpy9jes9S7RM=; b=EMcNrlMu1NgJ/dSgvaO7o40H7Y
- 2EYSrosxpSp5B9XOhQaNJ208+HfARQRTWecxglW6aAmhvR/+peOJNnnkxPtK9oEYZybd5HAYRzKCg
- 9q1Qc+/1zDYHFB47qJc3x0KDcMRerS2Ki4ZGroNf2ld/nibZHpAsBS3zLtv060hsLa6E=;
+ bh=5B3/1lxiR7tGX58dHoWRwHdYoLWjDQIqa2ei9mV0dXk=; b=EpgOVRBJDu/HP0VDIVqKI9/lKl
+ xwCxBwIx+27Qi0glcUpmAkWsohHlG1NXJeapTCZU41idn+53FVej3X19e1ciw4AcueqCt1DbetY3X
+ yHCC4FnYfuEn95Xl1VTrnBwlJWnjsHA/qb0fz0wo33qCNWtBnFvtOOLyFsBgyCbWwPGg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kggf/5IbJZ3U7faVADMtGO1Jwo0nedQKpy9jes9S7RM=; b=m
- VkWyg/7APu3ToH2mf3JQmSeemb6N3YwTVC+wfLOTcOVzAG7wpoU2+CO5+s/4SytmtoVjiUyZhQT/7
- AXdEJ+rN8G1jOdzqs0VM8gqT4psj8mEBjb/4PQLx2TTAZ7X8TPa/M3cAG7PcPHF/qysYsDJT4cz0g
- D4gvL+flwpcgQnnc=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=5B3/1lxiR7tGX58dHoWRwHdYoLWjDQIqa2ei9mV0dXk=; b=KQjWhigUamDmZozVylSJrqPGFY
+ yXfu7q4P7qmWmZCnEvCsHRH9j+3EsBY8FEGTc8t0dGOaxGJKIe8yJQFa6++mrxSsgPBoie4Dc5iwo
+ g8hVvizt+BXQF6EuLfr9oZnFKm+BkSgGLTRLjOVjGrF9HlqDd4kWElhCuFXVf/YBXEeI=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jM9K6-0082Ox-AH
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Apr 2020 11:56:54 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id D9C8B1FD422C2A0619FE;
- Wed,  8 Apr 2020 19:56:40 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 8 Apr 2020 19:56:34 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Wed, 8 Apr 2020 19:56:32 +0800
-Message-ID: <20200408115632.15712-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+ id 1jMMng-009DNj-Q2
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Apr 2020 02:20:20 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3BE0320787;
+ Thu,  9 Apr 2020 02:20:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1586398806;
+ bh=iRS5nfmtHWdMeMQ5MMWQ1/T5MoTdMmVI2Mbi5yLgKhQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ACbBXXd38FtV4VhKl0MWHR0q4Y+e4IV7cslrqwoctBNV5vZT16q3K93cC0sjOYJod
+ tPk8p1+2u9zCVFnSQv0R/xTEWctzYjj5vYSt915BjPzL3QXcyD9sybo+Tj6K5RfGg5
+ +o0cSPAEOKYjeA8MgfVzMWPw8Vyx+5yHySijxdUg=
+Date: Wed, 8 Apr 2020 19:20:05 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200409022005.GA110440@google.com>
+References: <20200403161249.68385-1-jaegeuk@kernel.org>
+ <0e627c29-7fb0-5bd6-c1d9-b96a94df62ae@huawei.com>
+ <20200407025913.GB137081@google.com>
+ <2ca452cd-073a-29fa-1884-99ad1199bb97@huawei.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <2ca452cd-073a-29fa-1884-99ad1199bb97@huawei.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jM9K6-0082Ox-AH
-Subject: [f2fs-dev] [PATCH] f2fs: compress: support lzo-rle compress
- algorithm
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jMMng-009DNj-Q2
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce sysfs/data_io_flag to attach
+ REQ_META/FUA
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,161 +86,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-LZO-RLE extension (run length encoding) was introduced to improve
-performance of LZO algorithm in scenario of data contains many zeros,
-zram has changed to use this extended algorithm by default, this
-patch adds to support this algorithm extension, to enable this
-extension, it needs to enable F2FS_FS_LZO and F2FS_FS_LZORLE config,
-and specifies "compress_algorithm=lzo-rle" mountoption.
+On 04/07, Chao Yu wrote:
+> On 2020/4/7 10:59, Jaegeuk Kim wrote:
+> > On 04/07, Chao Yu wrote:
+> >> On 2020/4/4 0:12, Jaegeuk Kim wrote:
+> >>> This patch introduces a way to attach REQ_META/FUA explicitly
+> >>> to all the data writes given temperature.
+> >>>
+> >>> -> attach REQ_FUA to Hot Data writes
+> >>>
+> >>> -> attach REQ_FUA to Hot|Warm Data writes
+> >>>
+> >>> -> attach REQ_FUA to Hot|Warm|Cold Data writes
+> >>>
+> >>> -> attach REQ_FUA to Hot|Warm|Cold Data writes as well as
+> >>>           REQ_META to Hot Data writes
+> >>
+> >> Out of curiosity, what scenario it is used for?
+> > 
+> > It's testing purpose to compare the bandwidths per different IO flags.
+> 
+> Thanks for the hint. :)
+> 
+> As nobarrier was set in Android, so REQ_PREFLUSH will not be considered in
+> this sysfs interface?
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- Documentation/filesystems/f2fs.txt |  2 +-
- fs/f2fs/Kconfig                    | 10 ++++++++++
- fs/f2fs/compress.c                 | 30 ++++++++++++++++++++++++++++++
- fs/f2fs/f2fs.h                     |  1 +
- fs/f2fs/super.c                    |  7 +++++++
- include/trace/events/f2fs.h        |  3 ++-
- 6 files changed, 51 insertions(+), 2 deletions(-)
+I don't see any diff on performance, so not interesting. :)
 
-diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-index b1a66cf0e967..f3f1184cca29 100644
---- a/Documentation/filesystems/f2fs.txt
-+++ b/Documentation/filesystems/f2fs.txt
-@@ -236,7 +236,7 @@ checkpoint=%s[:%u[%]]     Set to "disable" to turn off checkpointing. Set to "en
-                        would be unusable can be viewed at /sys/fs/f2fs/<disk>/unusable
-                        This space is reclaimed once checkpoint=enable.
- compress_algorithm=%s  Control compress algorithm, currently f2fs supports "lzo",
--                       "lz4" and "zstd" algorithm.
-+                       "lz4", "zstd" and "lzo-rle" algorithm.
- compress_log_size=%u   Support configuring compress cluster size, the size will
-                        be 4KB * (1 << %u), 16KB is minimum size, also it's
-                        default size.
-diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
-index bb68d21e1f8c..d13c5c6a9787 100644
---- a/fs/f2fs/Kconfig
-+++ b/fs/f2fs/Kconfig
-@@ -127,3 +127,13 @@ config F2FS_FS_ZSTD
- 	default y
- 	help
- 	  Support ZSTD compress algorithm, if unsure, say Y.
-+
-+config F2FS_FS_LZORLE
-+	bool "LZO-RLE compression support"
-+	depends on F2FS_FS_COMPRESSION
-+	depends on F2FS_FS_LZO
-+	select LZO_COMPRESS
-+	select LZO_DECOMPRESS
-+	default y
-+	help
-+	  Support LZO-RLE compress algorithm, if unsure, say Y.
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index ac265c6c40b5..498e0c2ba6ea 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -442,6 +442,31 @@ static const struct f2fs_compress_ops f2fs_zstd_ops = {
- };
- #endif
- 
-+#ifdef CONFIG_F2FS_FS_LZO
-+#ifdef CONFIG_F2FS_FS_LZORLE
-+static int lzorle_compress_pages(struct compress_ctx *cc)
-+{
-+	int ret;
-+
-+	ret = lzorle1x_1_compress(cc->rbuf, cc->rlen, cc->cbuf->cdata,
-+					&cc->clen, cc->private);
-+	if (ret != LZO_E_OK) {
-+		printk_ratelimited("%sF2FS-fs (%s): lzo-rle compress failed, ret:%d\n",
-+				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id, ret);
-+		return -EIO;
-+	}
-+	return 0;
-+}
-+
-+static const struct f2fs_compress_ops f2fs_lzorle_ops = {
-+	.init_compress_ctx	= lzo_init_compress_ctx,
-+	.destroy_compress_ctx	= lzo_destroy_compress_ctx,
-+	.compress_pages		= lzorle_compress_pages,
-+	.decompress_pages	= lzo_decompress_pages,
-+};
-+#endif
-+#endif
-+
- static const struct f2fs_compress_ops *f2fs_cops[COMPRESS_MAX] = {
- #ifdef CONFIG_F2FS_FS_LZO
- 	&f2fs_lzo_ops,
-@@ -458,6 +483,11 @@ static const struct f2fs_compress_ops *f2fs_cops[COMPRESS_MAX] = {
- #else
- 	NULL,
- #endif
-+#if defined(CONFIG_F2FS_FS_LZO) && defined(CONFIG_F2FS_FS_LZORLE)
-+	&f2fs_lzorle_ops,
-+#else
-+	NULL,
-+#endif
- };
- 
- bool f2fs_is_compress_backend_ready(struct inode *inode)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e0d520f2c142..f2071bb72deb 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1272,6 +1272,7 @@ enum compress_algorithm_type {
- 	COMPRESS_LZO,
- 	COMPRESS_LZ4,
- 	COMPRESS_ZSTD,
-+	COMPRESS_LZORLE,
- 	COMPRESS_MAX,
- };
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9ad927c4d259..a321d78e8601 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -833,6 +833,10 @@ static int parse_options(struct super_block *sb, char *options)
- 					!strcmp(name, "zstd")) {
- 				F2FS_OPTION(sbi).compress_algorithm =
- 								COMPRESS_ZSTD;
-+			} else if (strlen(name) == 7 &&
-+					!strcmp(name, "lzo-rle")) {
-+				F2FS_OPTION(sbi).compress_algorithm =
-+								COMPRESS_LZORLE;
- 			} else {
- 				kfree(name);
- 				return -EINVAL;
-@@ -1426,6 +1430,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
- 	case COMPRESS_ZSTD:
- 		algtype = "zstd";
- 		break;
-+	case COMPRESS_LZORLE:
-+		algtype = "lzo-rle";
-+		break;
- 	}
- 	seq_printf(seq, ",compress_algorithm=%s", algtype);
- 
-diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index d97adfc327f0..226ac89cf7c9 100644
---- a/include/trace/events/f2fs.h
-+++ b/include/trace/events/f2fs.h
-@@ -154,7 +154,8 @@ TRACE_DEFINE_ENUM(CP_PAUSE);
- 	__print_symbolic(type,						\
- 		{ COMPRESS_LZO,		"LZO" },			\
- 		{ COMPRESS_LZ4,		"LZ4" },			\
--		{ COMPRESS_ZSTD,	"ZSTD" })
-+		{ COMPRESS_ZSTD,	"ZSTD" },			\
-+		{ COMPRESS_LZORLE,	"LZO-RLE" })
- 
- struct f2fs_sb_info;
- struct f2fs_io_info;
--- 
-2.18.0.rc1
-
+> 
+> Thanks,
+> 
+> > 
+> >>
+> >> Thanks,
+> > .
+> > 
 
 
 _______________________________________________
