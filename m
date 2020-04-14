@@ -2,78 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 392031A80A8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 17:02:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E2641A87E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 19:46:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jON5Q-0001UJ-BP; Tue, 14 Apr 2020 15:02:52 +0000
+	id 1jOPdU-0006jh-SS; Tue, 14 Apr 2020 17:46:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1jON5P-0001Tl-IA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jOPdU-0006ja-4A
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 17:46:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8CSxJs5NVt2AZBlzfOgaObiBYjfOa9z/9K9z930zZnw=; b=aa1Nu2/W2leiPdmYoCf65KZSD2
- qJ1UI2zM6jKB/Vt5X+me+g3PweCR9sXkZJNvm2ZzuiBBZRyRxs/u51IrdcRsdlifGiEYvf4Ubglz8
- wOcfLIy4qlFtZ1C2MlCcItokMaZJ/gUgJAXW7Zv04jrvWl+rNqVkUuo/oUNSqbVjU2Nc=;
+ bh=cBcpZeBZoLbiSgHo8DiiMTw9Qc4/OiS3wja/GxJ8H/E=; b=AxTIbFKO4tJY6aSRHUu0FzuiB0
+ mPEI8w8oGCNla+sa7RA0fGcHqx6coiUVsfX3iEsV+L0bjeoA1GYbwH/3AgM2WGrtHRTNX3Wwrg/t7
+ jGYjqXs0vEPqeU9tiZfY0hGXrKOeO9bNHXg/on13t1PpWuzBhquTvFhf4nQ5YUOnGDFw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8CSxJs5NVt2AZBlzfOgaObiBYjfOa9z/9K9z930zZnw=; b=e7A4xq4MQbmEoinSeo3E20Abmm
- 0gR+KtgEDNVTI9lBQn9vy+K8c2+nGMZTpg8beYddjUFWqmXuDm9VJvtAVUlJEzsXvYAQslpnyepIp
- VLPxa3KqgjG8g0bxwkhjQDCiRXs9Uveqa0KW9UOXwSjuaDvBtm/QHQXX7xNEwhBsEGCA=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=cBcpZeBZoLbiSgHo8DiiMTw9Qc4/OiS3wja/GxJ8H/E=; b=aQ4HwTCEkiq+dtq5vERP8wHdKl
+ uKp7fvY7FjpaHEhBTT11LN/VzWEF/lnJbrnyJUEuLH7sbXo+2l4S3HYQBe4Ij6Mj6xHdLh/E30e9S
+ jBfMlD9AFPgTxnBZgiHjNceC4mxjdATKqKMi8yf8r+wkhG4DdgjAOgeKiEWv1RjsgNg0=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jON5N-000rVq-Bq
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=8CSxJs5NVt2AZBlzfOgaObiBYjfOa9z/9K9z930zZnw=; b=HcByNLQ8OMucOiUPfiIKeCbPCz
- wFXixMkIo0dx4YFWT67+Szb0l7uSHJc6UcxWfGNebNCEjIpTGLvVartx3cWeEvZAhs+a22h3/jf8o
- qRkyk1Hf0V6pNkCgXvcJRG79/IBrsm0jsRA+CoN5X+ngQmivqWqSm3MB3FoQKKMr9+BpawWiZqXjc
- Bm5fhWv3mun6KdHChAnvhImXT6fmE9gSm+29n/WdIxSy0A4iQQzOgXqoEvIrrjiGOIBKixygQDG7R
- mO3doYAilju7Ky0tax5Sof4DfrzqQJBLDh9dXcrSJ1eucceKNohzHFaO7UfbZ45GbyctHC8oF3UCC
- ULVGmG/Q==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jON5A-0006Pj-Kb; Tue, 14 Apr 2020 15:02:36 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Date: Tue, 14 Apr 2020 08:02:33 -0700
-Message-Id: <20200414150233.24495-26-willy@infradead.org>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200414150233.24495-1-willy@infradead.org>
-References: <20200414150233.24495-1-willy@infradead.org>
+ id 1jOPdM-00112s-UK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 17:46:12 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 47D462074D;
+ Tue, 14 Apr 2020 17:45:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1586886359;
+ bh=qYSI8frT4eWihABoeqWhVlHDSowvM6DDYFpgUiw/9sE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BLMFmr4aFEeJfc86aSsImNuVCWPMPxZSiH+hFZZDf/ol9SbmHGr2RDtK5HO0jzkLs
+ CIHv8LfZoM3oDqSX0HjcrOt8e/RcsYNZJnfqJ3rW3jT5BokSD3mtGXYAlLb6rrBe9p
+ HiakH9ViIiqAf9BDB68x6DN8QWlXe7JUYURaoTUA=
+Date: Tue, 14 Apr 2020 10:45:58 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Sahitya Tummala <stummala@codeaurora.org>
+Message-ID: <20200414174558.GA115366@google.com>
+References: <1585550730-1858-1-git-send-email-stummala@codeaurora.org>
+ <20200331184655.GB198665@google.com>
+ <20200401092201.GB20234@codeaurora.org>
+ <20200403171943.GC68460@google.com>
+ <20200408090024.GC20234@codeaurora.org>
+ <20200409022928.GD110440@google.com>
+ <20200409114756.GD20234@codeaurora.org>
+ <20200413165229.GA39092@google.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200413165229.GA39092@google.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ for more information. [URIs: codeaurora.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jON5N-000rVq-Bq
-Subject: [f2fs-dev] [PATCH v11 25/25] iomap: Convert from readpages to
- readahead
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1jOPdM-00112s-UK
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix long latency due to discard
+ during umount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,280 +93,293 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, William Kucharski <william.kucharski@oracle.com>,
- "Darrick J . Wong" <darrick.wong@oracle.com>, linux-kernel@vger.kernel.org,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Hi Sahitya,
 
-Use the new readahead operation in iomap.  Convert XFS and ZoneFS to
-use it.
+Could you please post the revised patch?
 
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
-Reviewed-by: William Kucharski <william.kucharski@oracle.com>
----
- fs/iomap/buffered-io.c | 90 +++++++++++++++---------------------------
- fs/iomap/trace.h       |  2 +-
- fs/xfs/xfs_aops.c      | 13 +++---
- fs/zonefs/super.c      |  7 ++--
- include/linux/iomap.h  |  3 +-
- 5 files changed, 41 insertions(+), 74 deletions(-)
+Thanks,
 
-diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index 075db1e71b14..890c8fcda4f3 100644
---- a/fs/iomap/buffered-io.c
-+++ b/fs/iomap/buffered-io.c
-@@ -214,9 +214,8 @@ iomap_read_end_io(struct bio *bio)
- struct iomap_readpage_ctx {
- 	struct page		*cur_page;
- 	bool			cur_page_in_bio;
--	bool			is_readahead;
- 	struct bio		*bio;
--	struct list_head	*pages;
-+	struct readahead_control *rac;
- };
- 
- static void
-@@ -308,7 +307,7 @@ iomap_readpage_actor(struct inode *inode, loff_t pos, loff_t length, void *data,
- 		if (ctx->bio)
- 			submit_bio(ctx->bio);
- 
--		if (ctx->is_readahead) /* same as readahead_gfp_mask */
-+		if (ctx->rac) /* same as readahead_gfp_mask */
- 			gfp |= __GFP_NORETRY | __GFP_NOWARN;
- 		ctx->bio = bio_alloc(gfp, min(BIO_MAX_PAGES, nr_vecs));
- 		/*
-@@ -319,7 +318,7 @@ iomap_readpage_actor(struct inode *inode, loff_t pos, loff_t length, void *data,
- 		if (!ctx->bio)
- 			ctx->bio = bio_alloc(orig_gfp, 1);
- 		ctx->bio->bi_opf = REQ_OP_READ;
--		if (ctx->is_readahead)
-+		if (ctx->rac)
- 			ctx->bio->bi_opf |= REQ_RAHEAD;
- 		ctx->bio->bi_iter.bi_sector = sector;
- 		bio_set_dev(ctx->bio, iomap->bdev);
-@@ -375,36 +374,8 @@ iomap_readpage(struct page *page, const struct iomap_ops *ops)
- }
- EXPORT_SYMBOL_GPL(iomap_readpage);
- 
--static struct page *
--iomap_next_page(struct inode *inode, struct list_head *pages, loff_t pos,
--		loff_t length, loff_t *done)
--{
--	while (!list_empty(pages)) {
--		struct page *page = lru_to_page(pages);
--
--		if (page_offset(page) >= (u64)pos + length)
--			break;
--
--		list_del(&page->lru);
--		if (!add_to_page_cache_lru(page, inode->i_mapping, page->index,
--				GFP_NOFS))
--			return page;
--
--		/*
--		 * If we already have a page in the page cache at index we are
--		 * done.  Upper layers don't care if it is uptodate after the
--		 * readpages call itself as every page gets checked again once
--		 * actually needed.
--		 */
--		*done += PAGE_SIZE;
--		put_page(page);
--	}
--
--	return NULL;
--}
--
- static loff_t
--iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
-+iomap_readahead_actor(struct inode *inode, loff_t pos, loff_t length,
- 		void *data, struct iomap *iomap, struct iomap *srcmap)
- {
- 	struct iomap_readpage_ctx *ctx = data;
-@@ -418,10 +389,7 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
- 			ctx->cur_page = NULL;
- 		}
- 		if (!ctx->cur_page) {
--			ctx->cur_page = iomap_next_page(inode, ctx->pages,
--					pos, length, &done);
--			if (!ctx->cur_page)
--				break;
-+			ctx->cur_page = readahead_page(ctx->rac);
- 			ctx->cur_page_in_bio = false;
- 		}
- 		ret = iomap_readpage_actor(inode, pos + done, length - done,
-@@ -431,32 +399,43 @@ iomap_readpages_actor(struct inode *inode, loff_t pos, loff_t length,
- 	return done;
- }
- 
--int
--iomap_readpages(struct address_space *mapping, struct list_head *pages,
--		unsigned nr_pages, const struct iomap_ops *ops)
-+/**
-+ * iomap_readahead - Attempt to read pages from a file.
-+ * @rac: Describes the pages to be read.
-+ * @ops: The operations vector for the filesystem.
-+ *
-+ * This function is for filesystems to call to implement their readahead
-+ * address_space operation.
-+ *
-+ * Context: The @ops callbacks may submit I/O (eg to read the addresses of
-+ * blocks from disc), and may wait for it.  The caller may be trying to
-+ * access a different page, and so sleeping excessively should be avoided.
-+ * It may allocate memory, but should avoid costly allocations.  This
-+ * function is called with memalloc_nofs set, so allocations will not cause
-+ * the filesystem to be reentered.
-+ */
-+void iomap_readahead(struct readahead_control *rac, const struct iomap_ops *ops)
- {
-+	struct inode *inode = rac->mapping->host;
-+	loff_t pos = readahead_pos(rac);
-+	loff_t length = readahead_length(rac);
- 	struct iomap_readpage_ctx ctx = {
--		.pages		= pages,
--		.is_readahead	= true,
-+		.rac	= rac,
- 	};
--	loff_t pos = page_offset(list_entry(pages->prev, struct page, lru));
--	loff_t last = page_offset(list_entry(pages->next, struct page, lru));
--	loff_t length = last - pos + PAGE_SIZE, ret = 0;
- 
--	trace_iomap_readpages(mapping->host, nr_pages);
-+	trace_iomap_readahead(inode, readahead_count(rac));
- 
- 	while (length > 0) {
--		ret = iomap_apply(mapping->host, pos, length, 0, ops,
--				&ctx, iomap_readpages_actor);
-+		loff_t ret = iomap_apply(inode, pos, length, 0, ops,
-+				&ctx, iomap_readahead_actor);
- 		if (ret <= 0) {
- 			WARN_ON_ONCE(ret == 0);
--			goto done;
-+			break;
- 		}
- 		pos += ret;
- 		length -= ret;
- 	}
--	ret = 0;
--done:
-+
- 	if (ctx.bio)
- 		submit_bio(ctx.bio);
- 	if (ctx.cur_page) {
-@@ -464,15 +443,8 @@ iomap_readpages(struct address_space *mapping, struct list_head *pages,
- 			unlock_page(ctx.cur_page);
- 		put_page(ctx.cur_page);
- 	}
--
--	/*
--	 * Check that we didn't lose a page due to the arcance calling
--	 * conventions..
--	 */
--	WARN_ON_ONCE(!ret && !list_empty(ctx.pages));
--	return ret;
- }
--EXPORT_SYMBOL_GPL(iomap_readpages);
-+EXPORT_SYMBOL_GPL(iomap_readahead);
- 
- /*
-  * iomap_is_partially_uptodate checks whether blocks within a page are
-diff --git a/fs/iomap/trace.h b/fs/iomap/trace.h
-index 4df19c66f597..5693a39d52fb 100644
---- a/fs/iomap/trace.h
-+++ b/fs/iomap/trace.h
-@@ -39,7 +39,7 @@ DEFINE_EVENT(iomap_readpage_class, name,	\
- 	TP_PROTO(struct inode *inode, int nr_pages), \
- 	TP_ARGS(inode, nr_pages))
- DEFINE_READPAGE_EVENT(iomap_readpage);
--DEFINE_READPAGE_EVENT(iomap_readpages);
-+DEFINE_READPAGE_EVENT(iomap_readahead);
- 
- DECLARE_EVENT_CLASS(iomap_range_class,
- 	TP_PROTO(struct inode *inode, unsigned long off, unsigned int len),
-diff --git a/fs/xfs/xfs_aops.c b/fs/xfs/xfs_aops.c
-index 9d9cebf18726..1fd4fb7a607c 100644
---- a/fs/xfs/xfs_aops.c
-+++ b/fs/xfs/xfs_aops.c
-@@ -621,14 +621,11 @@ xfs_vm_readpage(
- 	return iomap_readpage(page, &xfs_read_iomap_ops);
- }
- 
--STATIC int
--xfs_vm_readpages(
--	struct file		*unused,
--	struct address_space	*mapping,
--	struct list_head	*pages,
--	unsigned		nr_pages)
-+STATIC void
-+xfs_vm_readahead(
-+	struct readahead_control	*rac)
- {
--	return iomap_readpages(mapping, pages, nr_pages, &xfs_read_iomap_ops);
-+	iomap_readahead(rac, &xfs_read_iomap_ops);
- }
- 
- static int
-@@ -644,7 +641,7 @@ xfs_iomap_swapfile_activate(
- 
- const struct address_space_operations xfs_address_space_operations = {
- 	.readpage		= xfs_vm_readpage,
--	.readpages		= xfs_vm_readpages,
-+	.readahead		= xfs_vm_readahead,
- 	.writepage		= xfs_vm_writepage,
- 	.writepages		= xfs_vm_writepages,
- 	.set_page_dirty		= iomap_set_page_dirty,
-diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
-index 3ce9829a6936..dba874a61fc5 100644
---- a/fs/zonefs/super.c
-+++ b/fs/zonefs/super.c
-@@ -78,10 +78,9 @@ static int zonefs_readpage(struct file *unused, struct page *page)
- 	return iomap_readpage(page, &zonefs_iomap_ops);
- }
- 
--static int zonefs_readpages(struct file *unused, struct address_space *mapping,
--			    struct list_head *pages, unsigned int nr_pages)
-+static void zonefs_readahead(struct readahead_control *rac)
- {
--	return iomap_readpages(mapping, pages, nr_pages, &zonefs_iomap_ops);
-+	iomap_readahead(rac, &zonefs_iomap_ops);
- }
- 
- /*
-@@ -128,7 +127,7 @@ static int zonefs_writepages(struct address_space *mapping,
- 
- static const struct address_space_operations zonefs_file_aops = {
- 	.readpage		= zonefs_readpage,
--	.readpages		= zonefs_readpages,
-+	.readahead		= zonefs_readahead,
- 	.writepage		= zonefs_writepage,
- 	.writepages		= zonefs_writepages,
- 	.set_page_dirty		= iomap_set_page_dirty,
-diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-index 8b09463dae0d..bc20bd04c2a2 100644
---- a/include/linux/iomap.h
-+++ b/include/linux/iomap.h
-@@ -155,8 +155,7 @@ loff_t iomap_apply(struct inode *inode, loff_t pos, loff_t length,
- ssize_t iomap_file_buffered_write(struct kiocb *iocb, struct iov_iter *from,
- 		const struct iomap_ops *ops);
- int iomap_readpage(struct page *page, const struct iomap_ops *ops);
--int iomap_readpages(struct address_space *mapping, struct list_head *pages,
--		unsigned nr_pages, const struct iomap_ops *ops);
-+void iomap_readahead(struct readahead_control *, const struct iomap_ops *ops);
- int iomap_set_page_dirty(struct page *page);
- int iomap_is_partially_uptodate(struct page *page, unsigned long from,
- 		unsigned long count);
--- 
-2.25.1
-
+On 04/13, Jaegeuk Kim wrote:
+> On 04/09, Sahitya Tummala wrote:
+> > On Wed, Apr 08, 2020 at 07:29:28PM -0700, Jaegeuk Kim wrote:
+> > > On 04/08, Sahitya Tummala wrote:
+> > > > Hi Jaegeuk,
+> > > > 
+> > > > On Fri, Apr 03, 2020 at 10:19:43AM -0700, Jaegeuk Kim wrote:
+> > > > > On 04/01, Sahitya Tummala wrote:
+> > > > > > Hi Jaegeuk,
+> > > > > > 
+> > > > > > On Tue, Mar 31, 2020 at 11:46:55AM -0700, Jaegeuk Kim wrote:
+> > > > > > > On 03/30, Sahitya Tummala wrote:
+> > > > > > > > F2FS already has a default timeout of 5 secs for discards that
+> > > > > > > > can be issued during umount, but it can take more than the 5 sec
+> > > > > > > > timeout if the underlying UFS device queue is already full and there
+> > > > > > > > are no more available free tags to be used. In that case, submit_bio()
+> > > > > > > > will wait for the already queued discard requests to complete to get
+> > > > > > > > a free tag, which can potentially take way more than 5 sec.
+> > > > > > > > 
+> > > > > > > > Fix this by submitting the discard requests with REQ_NOWAIT
+> > > > > > > > flags during umount. This will return -EAGAIN for UFS queue/tag full
+> > > > > > > > scenario without waiting in the context of submit_bio(). The FS can
+> > > > > > > > then handle these requests by retrying again within the stipulated
+> > > > > > > > discard timeout period to avoid long latencies.
+> > > > > > > 
+> > > > > > > Sorry, Sahitya, but, do we really need to do like this? How about just
+> > > > > > > controlling # of outstanding discarding bios in __issue_discard_cmd()?
+> > > > > > 
+> > > > > > Do you mean something like this?
+> > > > > > 
+> > > > > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > > > > index 1a62b27..860dd43 100644
+> > > > > > --- a/fs/f2fs/segment.c
+> > > > > > +++ b/fs/f2fs/segment.c
+> > > > > > @@ -1099,7 +1099,7 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+> > > > > >         } else if (discard_type == DPOLICY_FSTRIM) {
+> > > > > >                 dpolicy->io_aware = false;
+> > > > > >         } else if (discard_type == DPOLICY_UMOUNT) {
+> > > > > > -               dpolicy->max_requests = UINT_MAX;
+> > > > > > +               dpolicy->max_requests = 30;
+> > > > > 
+> > > > > Can we use max queue depth of the block device?
+> > > > 
+> > > > I think it should be limited to 8 or 16 as Chao suggested, so that we can have
+> > > > better control on the given timeout value? Thoughts?
+> > > 
+> > > Where is 8 or 16 coming from? What about SSD? Sorry, it's unclear to me.
+> > 
+> > With this patch we now wait for a batch of discard requests in __issue_discard_cmd()
+> > with a upper timeout of 5 sec. So, I thought that having a smaller batch of
+> > discard requests would help us to avoid queuing more requests and end up waiting
+> > for more time in __wait_all_discard_cmd(). Today we have DEF_MAX_DISCARD_REQUEST
+> > as 8 for default max discard requests. If it too less, may be for umount
+> > we can use 16 instead. But the idea is to avoid more wait time.
+> 
+> Ok, then, it seems we can just remove this line to use dpolicy->max_requests,
+> and retry issuing all the discard commands like below. Later, I thnk it'd be
+> fine to tune the max_requests based on bd_queue->queue_depth.
+> 
+> > 
+> > If you would like to propose to use max queue depth, we can get it from bdev as 
+> > sbi->sb->s_bdev->bd_queue->queue_depth. Is it okay to use it in our FS? or you
+> > think it should be hardcoded to 32 (as most UFS/eMMC devices will have this as
+> > its queue depth)? Please let me know.
+> > 
+> > Thanks,
+> > 
+> > > 
+> > > > 
+> > > > Thanks,
+> > > > 
+> > > > > 
+> > > > > >                 dpolicy->io_aware = false;
+> > > > > >                 /* we need to issue all to keep CP_TRIMMED_FLAG */
+> > > > > >                 dpolicy->granularity = 1;
+> > > > > > @@ -1470,12 +1470,14 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > >         struct list_head *pend_list;
+> > > > > >         struct discard_cmd *dc, *tmp;
+> > > > > >         struct blk_plug plug;
+> > > > > > -       int i, issued = 0;
+> > > > > > +       int i, issued;
+> > > > > >         bool io_interrupted = false;
+> > > > > > 
+> > > > > >         if (dpolicy->timeout != 0)
+> > > > > >                 f2fs_update_time(sbi, dpolicy->timeout);
+> > > > > > 
+> > > > > > +retry:
+> > > > > > +       issued = 0;
+> > > > > >         for (i = MAX_PLIST_NUM - 1; i >= 0; i--) {
+> > > > > >                 if (dpolicy->timeout != 0 &&
+> > > > > >                                 f2fs_time_over(sbi, dpolicy->timeout))
+> > > > > > @@ -1522,6 +1524,11 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > >                         break;
+> > > > > >         }
+> > > > > > 
+> > > > > > +       if (dpolicy->type == DPOLICY_UMOUNT && issued) {
+> > > > > > +               __wait_all_discard_cmd(sbi, dpolicy);
+> > > > > > +               goto retry;
+> > > > > > +       }
+> > > > > > +
+> > > > > >         if (!issued && io_interrupted)
+> > > > > >                 issued = -1;
+> > > > > > 
+> > > > > > Thanks,
+> > > > > > 
+> > > > > > > 
+> > > > > > > > 
+> > > > > > > > Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> > > > > > > > ---
+> > > > > > > > v3:
+> > > > > > > > -Handle the regression reported by Chao with v2.
+> > > > > > > > -simplify the logic to split the dc with multiple bios incase any bio returns
+> > > > > > > >  EAGAIN and retry those new dc within 5 sec timeout.
+> > > > > > > > 
+> > > > > > > >  fs/f2fs/segment.c | 65 +++++++++++++++++++++++++++++++++++++++++++------------
+> > > > > > > >  1 file changed, 51 insertions(+), 14 deletions(-)
+> > > > > > > > 
+> > > > > > > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > > > > > > index fb3e531..55d18c7 100644
+> > > > > > > > --- a/fs/f2fs/segment.c
+> > > > > > > > +++ b/fs/f2fs/segment.c
+> > > > > > > > @@ -1029,13 +1029,16 @@ static void f2fs_submit_discard_endio(struct bio *bio)
+> > > > > > > >  	struct discard_cmd *dc = (struct discard_cmd *)bio->bi_private;
+> > > > > > > >  	unsigned long flags;
+> > > > > > > >  
+> > > > > > > > -	dc->error = blk_status_to_errno(bio->bi_status);
+> > > > > > > > -
+> > > > > > > >  	spin_lock_irqsave(&dc->lock, flags);
+> > > > > > > > +	if (!dc->error)
+> > > > > > > > +		dc->error = blk_status_to_errno(bio->bi_status);
+> > > > > > > > +
+> > > > > > > >  	dc->bio_ref--;
+> > > > > > > > -	if (!dc->bio_ref && dc->state == D_SUBMIT) {
+> > > > > > > > -		dc->state = D_DONE;
+> > > > > > > > -		complete_all(&dc->wait);
+> > > > > > > > +	if (!dc->bio_ref) {
+> > > > > > > > +		if (dc->error || dc->state == D_SUBMIT) {
+> > > > > > > > +			dc->state = D_DONE;
+> > > > > > > > +			complete_all(&dc->wait);
+> > > > > > > > +		}
+> > > > > > > >  	}
+> > > > > > > >  	spin_unlock_irqrestore(&dc->lock, flags);
+> > > > > > > >  	bio_put(bio);
+> > > > > > > > @@ -1124,10 +1127,13 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
+> > > > > > > >  	struct list_head *wait_list = (dpolicy->type == DPOLICY_FSTRIM) ?
+> > > > > > > >  					&(dcc->fstrim_list) : &(dcc->wait_list);
+> > > > > > > > -	int flag = dpolicy->sync ? REQ_SYNC : 0;
+> > > > > > > > +	int flag;
+> > > > > > > >  	block_t lstart, start, len, total_len;
+> > > > > > > >  	int err = 0;
+> > > > > > > >  
+> > > > > > > > +	flag = dpolicy->sync ? REQ_SYNC : 0;
+> > > > > > > > +	flag |= dpolicy->type == DPOLICY_UMOUNT ? REQ_NOWAIT : 0;
+> > > > > > > > +
+> > > > > > > >  	if (dc->state != D_PREP)
+> > > > > > > >  		return 0;
+> > > > > > > >  
+> > > > > > > > @@ -1192,10 +1198,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  		dc->bio_ref++;
+> > > > > > > >  		spin_unlock_irqrestore(&dc->lock, flags);
+> > > > > > > >  
+> > > > > > > > -		atomic_inc(&dcc->queued_discard);
+> > > > > > > > -		dc->queued++;
+> > > > > > > > -		list_move_tail(&dc->list, wait_list);
+> > > > > > > > -
+> > > > > > > >  		/* sanity check on discard range */
+> > > > > > > >  		__check_sit_bitmap(sbi, lstart, lstart + len);
+> > > > > > > >  
+> > > > > > > > @@ -1203,6 +1205,29 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  		bio->bi_end_io = f2fs_submit_discard_endio;
+> > > > > > > >  		bio->bi_opf |= flag;
+> > > > > > > >  		submit_bio(bio);
+> > > > > > > > +		if (flag & REQ_NOWAIT) {
+> > > > > > > > +			if (dc->error == -EAGAIN) {
+> > > > > > > > +				spin_lock_irqsave(&dc->lock, flags);
+> > > > > > > > +				dc->len -= len;
+> > > > > > > > +				if (!dc->len) {
+> > > > > > > > +					dc->len = total_len;
+> > > > > > > > +					dc->state = D_PREP;
+> > > > > > > > +					reinit_completion(&dc->wait);
+> > > > > > > > +				} else {
+> > > > > > > > +					dcc->undiscard_blks -= total_len;
+> > > > > > > > +					if (dc->state == D_PARTIAL)
+> > > > > > > > +						dc->state = D_SUBMIT;
+> > > > > > > > +				}
+> > > > > > > > +				err = dc->error;
+> > > > > > > > +				dc->error = 0;
+> > > > > > > > +				spin_unlock_irqrestore(&dc->lock, flags);
+> > > > > > > > +				break;
+> > > > > > > > +			}
+> > > > > > > > +		}
+> > > > > > > > +
+> > > > > > > > +		atomic_inc(&dcc->queued_discard);
+> > > > > > > > +		dc->queued++;
+> > > > > > > > +		list_move_tail(&dc->list, wait_list);
+> > > > > > > >  
+> > > > > > > >  		atomic_inc(&dcc->issued_discard);
+> > > > > > > >  
+> > > > > > > > @@ -1214,8 +1239,9 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  		len = total_len;
+> > > > > > > >  	}
+> > > > > > > >  
+> > > > > > > > -	if (!err && len)
+> > > > > > > > -		__update_discard_tree_range(sbi, bdev, lstart, start, len);
+> > > > > > > > +	if ((!err || err == -EAGAIN) && total_len && dc->start != start)
+> > > > > > > > +		__update_discard_tree_range(sbi, bdev, lstart, start,
+> > > > > > > > +					total_len);
+> > > > > > > >  	return err;
+> > > > > > > >  }
+> > > > > > > >  
+> > > > > > > > @@ -1470,12 +1496,15 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  	struct list_head *pend_list;
+> > > > > > > >  	struct discard_cmd *dc, *tmp;
+> > > > > > > >  	struct blk_plug plug;
+> > > > > > > > -	int i, issued = 0;
+> > > > > > > > +	int i, err, issued = 0;
+> > > > > > > >  	bool io_interrupted = false;
+> > > > > > > > +	bool retry;
+> > > > > > > >  
+> > > > > > > >  	if (dpolicy->timeout != 0)
+> > > > > > > >  		f2fs_update_time(sbi, dpolicy->timeout);
+> > > > > > > >  
+> > > > > > > > +retry:
+> > > > > > > > +	retry = false;
+> > > > > > > >  	for (i = MAX_PLIST_NUM - 1; i >= 0; i--) {
+> > > > > > > >  		if (dpolicy->timeout != 0 &&
+> > > > > > > >  				f2fs_time_over(sbi, dpolicy->timeout))
+> > > > > > > > @@ -1509,7 +1538,12 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  				break;
+> > > > > > > >  			}
+> > > > > > > >  
+> > > > > > > > -			__submit_discard_cmd(sbi, dpolicy, dc, &issued);
+> > > > > > > > +			err = __submit_discard_cmd(sbi, dpolicy, dc, &issued);
+> > > > > > > > +			if (err == -EAGAIN) {
+> > > > > > > > +				congestion_wait(BLK_RW_ASYNC,
+> > > > > > > > +						DEFAULT_IO_TIMEOUT);
+> > > > > > > > +				retry = true;
+> > > > > > > > +			}
+> > > > > > > >  
+> > > > > > > >  			if (issued >= dpolicy->max_requests)
+> > > > > > > >  				break;
+> > > > > > > > @@ -1522,6 +1556,9 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+> > > > > > > >  			break;
+> > > > > > > >  	}
+> > > > > > > >  
+> > > > > > > > +	if (retry)
+> > > > > > > > +		goto retry;
+> > > > > > > > +
+> > > > > > > >  	if (!issued && io_interrupted)
+> > > > > > > >  		issued = -1;
+> > > > > > > >  
+> > > > > > > > -- 
+> > > > > > > > Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+> > > > > > > > Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+> > > > > > 
+> > > > > > -- 
+> > > > > > --
+> > > > > > Sent by a consultant of the Qualcomm Innovation Center, Inc.
+> > > > > > The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
+> > > > 
+> > > > -- 
+> > > > --
+> > > > Sent by a consultant of the Qualcomm Innovation Center, Inc.
+> > > > The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
+> > 
+> > -- 
+> > --
+> > Sent by a consultant of the Qualcomm Innovation Center, Inc.
+> > The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
