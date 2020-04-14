@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 999261A80C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 17:03:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 973691A80AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 17:02:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jON5a-0001Yx-DV; Tue, 14 Apr 2020 15:03:02 +0000
+	id 1jON5Q-0001U9-8S; Tue, 14 Apr 2020 15:02:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1jON5S-0001Vu-SY
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:54 +0000
+ (envelope-from <willy@infradead.org>) id 1jON5P-0001Tk-Hv
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vVZzy/wo5GT119Pk8wsTZ72fWKLWcOEqAlTxnpE9eWc=; b=VIidpyW6s5uY2yohO+5jLu9w5w
- uII2r/jzl2q700tnSegu6YcFQNeTjJ4axzsF4mpU8WqqcyTs/n587GXrwMBDqOHcrjZwHsEeVY72A
- hUw+DJV47+MFk3azCWbbGyeNZPMdxhxa/3S2G4DTg2+0BEEQPRTTc+W6bHTtDjakAeEM=;
+ bh=4eFuEtFIx5sdDH8888Ox3V688ScSD2mYzByZubNZjxM=; b=fcTvEkYex42bS6m8aaZmoOEf3p
+ ooqYEEklF87lVlUxmboVuMbT17I/ZDsN1AL37EBYKzSfiNnP8I3pclrePEjylP1Dw6rsISmxYyit2
+ BmUFBWunETv0Qr+/zyDQnGjpwyyWkivC34Kc8T4VnB3tD2RupwNgvjGsq9kgkn5QFcbA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vVZzy/wo5GT119Pk8wsTZ72fWKLWcOEqAlTxnpE9eWc=; b=az9BHAeyyvo2kfs1JavJXryNyn
- P7u+ZcfRjI4mkXBq4OBfdTgB/tF/6CPPA6CUYbhnCXj70YR3/rCM3fLp/1XjZ7hrry0APPmdQrj9U
- mlyFCvhXCPC4aWnvXs543klio9fsQ1iVXlH17XOz5WMp6Wtqe9heKjtjTyUZIWIfz0TQ=;
+ bh=4eFuEtFIx5sdDH8888Ox3V688ScSD2mYzByZubNZjxM=; b=R4l0gVxIyY8DTU7ziHJ3gaDbtN
+ WXCN3Lg4tog9uN3P2DavQqGzr++a8VhygSk+Ie7IjZ+Ba0cOt4Ys+LKKmt5Jch7s90M7L903/5m6G
+ 489I1ZiqqmjvkY8NdkfrHaVS0KQMM7PrNKC54slIMG5+BKJ2tMwAKxkxPGkKprZVA0ZM=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jON5Q-00EmGZ-6D
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:54 +0000
+ id 1jON5N-000rVk-9K
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=vVZzy/wo5GT119Pk8wsTZ72fWKLWcOEqAlTxnpE9eWc=; b=O1GTXnG4tewdn3Zh9gA6VrsxNz
- HwDx/AO8L9v+LjoGZSHL79ov8Vt634A42qvZorLmlG9OpkgqBT8F7Wp7Cmx/gTg5wydmJurkXkGBs
- XeMGxj9a30kwN7b4/vtULNq5MxDpL0h/edUGZBahgcd4nhNVozYXNEDC1nxwRMc7NLX46Nw4lU2Sn
- M+VqsGWYeq03qtrZRYNL8gLsYV69OtXKlhBWbx+XbPB7KS/aSSrOvGp9RZ8YdI2WNvHmcujOx8AWd
- 9zPSP/lnxPn8FT9IuKnj9k5UxbYgYnmnP0zvizdGWAJj75I9icH6U3vWA/E6ZPug3P7CpCRz3Spph
- KbjOkFMA==;
+ bh=4eFuEtFIx5sdDH8888Ox3V688ScSD2mYzByZubNZjxM=; b=gWambYunuvWQI2G+VNQYnmJr1Z
+ TKL6e0+Hz76y6vKTOxSOfADUrM5WCLIQWnN1/g0Fai9ncbP2geBYa12d6sXOFrLkQP9CY2k3676Wl
+ H+U6h4ravj3a2BDbUk+8I5w8cPfnD8JmchogfWiM5dibK3wuxfCWNk6jDwHpyfrpA0ThYrxG2rC8z
+ QQu9YDaZaL9cJRi0KRgDZ24q7rdnWMeXyZ1VxbmhCX2BAvBEzzUFZMPjyOZDcjGsRaetSzEWZuDQo
+ e/792B1Z9I/dZ6qKEyDgMrvRd0hOPInOsEJQnwG5XF3aah3f3EKj4sWn7mT2sY8c0+dcyOpGEwFmt
+ PpGG3+Nw==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jON5A-0006PO-EO; Tue, 14 Apr 2020 15:02:36 +0000
+ Hat Linux)) id 1jON5A-0006PS-Fc; Tue, 14 Apr 2020 15:02:36 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Tue, 14 Apr 2020 08:02:28 -0700
-Message-Id: <20200414150233.24495-21-willy@infradead.org>
+Date: Tue, 14 Apr 2020 08:02:29 -0700
+Message-Id: <20200414150233.24495-22-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200414150233.24495-1-willy@infradead.org>
 References: <20200414150233.24495-1-willy@infradead.org>
@@ -71,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jON5Q-00EmGZ-6D
-Subject: [f2fs-dev] [PATCH v11 20/25] ext4: Convert from readpages to
- readahead
+X-Headers-End: 1jON5N-000rVk-9K
+Subject: [f2fs-dev] [PATCH v11 21/25] ext4: Pass the inode to
+ ext4_mpage_readpages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,163 +98,73 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-Use the new readahead operation in ext4
+This function now only uses the mapping argument to look up the inode,
+and both callers already have the inode, so just pass the inode instead
+of the mapping.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 Reviewed-by: William Kucharski <william.kucharski@oracle.com>
 Reviewed-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/ext4.h     |  3 +--
- fs/ext4/inode.c    | 21 +++++++++------------
- fs/ext4/readpage.c | 22 ++++++++--------------
- 3 files changed, 18 insertions(+), 28 deletions(-)
+ fs/ext4/ext4.h     | 2 +-
+ fs/ext4/inode.c    | 4 ++--
+ fs/ext4/readpage.c | 3 +--
+ 3 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index 91eb4381cae5..9f2d3cd1df81 100644
+index 9f2d3cd1df81..a47a98942626 100644
 --- a/fs/ext4/ext4.h
 +++ b/fs/ext4/ext4.h
-@@ -3317,8 +3317,7 @@ static inline void ext4_set_de_type(struct super_block *sb,
+@@ -3316,7 +3316,7 @@ static inline void ext4_set_de_type(struct super_block *sb,
+ }
  
  /* readpages.c */
- extern int ext4_mpage_readpages(struct address_space *mapping,
--				struct list_head *pages, struct page *page,
--				unsigned nr_pages, bool is_readahead);
-+		struct readahead_control *rac, struct page *page);
+-extern int ext4_mpage_readpages(struct address_space *mapping,
++extern int ext4_mpage_readpages(struct inode *inode,
+ 		struct readahead_control *rac, struct page *page);
  extern int __init ext4_init_post_read_processing(void);
  extern void ext4_exit_post_read_processing(void);
- 
 diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index e416096fc081..fafd2862d7cd 100644
+index fafd2862d7cd..604ad98758fe 100644
 --- a/fs/ext4/inode.c
 +++ b/fs/ext4/inode.c
-@@ -3224,23 +3224,20 @@ static int ext4_readpage(struct file *file, struct page *page)
+@@ -3224,7 +3224,7 @@ static int ext4_readpage(struct file *file, struct page *page)
  		ret = ext4_readpage_inline(inode, page);
  
  	if (ret == -EAGAIN)
--		return ext4_mpage_readpages(page->mapping, NULL, page, 1,
--						false);
-+		return ext4_mpage_readpages(page->mapping, NULL, page);
+-		return ext4_mpage_readpages(page->mapping, NULL, page);
++		return ext4_mpage_readpages(inode, NULL, page);
  
  	return ret;
  }
- 
--static int
--ext4_readpages(struct file *file, struct address_space *mapping,
--		struct list_head *pages, unsigned nr_pages)
-+static void ext4_readahead(struct readahead_control *rac)
- {
--	struct inode *inode = mapping->host;
-+	struct inode *inode = rac->mapping->host;
- 
--	/* If the file has inline data, no need to do readpages. */
-+	/* If the file has inline data, no need to do readahead. */
+@@ -3237,7 +3237,7 @@ static void ext4_readahead(struct readahead_control *rac)
  	if (ext4_has_inline_data(inode))
--		return 0;
-+		return;
+ 		return;
  
--	return ext4_mpage_readpages(mapping, pages, NULL, nr_pages, true);
-+	ext4_mpage_readpages(rac->mapping, rac, NULL);
+-	ext4_mpage_readpages(rac->mapping, rac, NULL);
++	ext4_mpage_readpages(inode, rac, NULL);
  }
  
  static void ext4_invalidatepage(struct page *page, unsigned int offset,
-@@ -3605,7 +3602,7 @@ static int ext4_set_page_dirty(struct page *page)
- 
- static const struct address_space_operations ext4_aops = {
- 	.readpage		= ext4_readpage,
--	.readpages		= ext4_readpages,
-+	.readahead		= ext4_readahead,
- 	.writepage		= ext4_writepage,
- 	.writepages		= ext4_writepages,
- 	.write_begin		= ext4_write_begin,
-@@ -3622,7 +3619,7 @@ static const struct address_space_operations ext4_aops = {
- 
- static const struct address_space_operations ext4_journalled_aops = {
- 	.readpage		= ext4_readpage,
--	.readpages		= ext4_readpages,
-+	.readahead		= ext4_readahead,
- 	.writepage		= ext4_writepage,
- 	.writepages		= ext4_writepages,
- 	.write_begin		= ext4_write_begin,
-@@ -3638,7 +3635,7 @@ static const struct address_space_operations ext4_journalled_aops = {
- 
- static const struct address_space_operations ext4_da_aops = {
- 	.readpage		= ext4_readpage,
--	.readpages		= ext4_readpages,
-+	.readahead		= ext4_readahead,
- 	.writepage		= ext4_writepage,
- 	.writepages		= ext4_writepages,
- 	.write_begin		= ext4_da_write_begin,
 diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
-index c1769afbf799..66275f25235d 100644
+index 66275f25235d..5761e9961682 100644
 --- a/fs/ext4/readpage.c
 +++ b/fs/ext4/readpage.c
-@@ -7,8 +7,8 @@
-  *
-  * This was originally taken from fs/mpage.c
-  *
-- * The intent is the ext4_mpage_readpages() function here is intended
-- * to replace mpage_readpages() in the general case, not just for
-+ * The ext4_mpage_readpages() function here is intended to
-+ * replace mpage_readahead() in the general case, not just for
-  * encrypted files.  It has some limitations (see below), where it
-  * will fall back to read_block_full_page(), but these limitations
-  * should only be hit when page_size != block_size.
-@@ -222,8 +222,7 @@ static inline loff_t ext4_readpage_limit(struct inode *inode)
+@@ -221,13 +221,12 @@ static inline loff_t ext4_readpage_limit(struct inode *inode)
+ 	return i_size_read(inode);
  }
  
- int ext4_mpage_readpages(struct address_space *mapping,
--			 struct list_head *pages, struct page *page,
--			 unsigned nr_pages, bool is_readahead)
-+		struct readahead_control *rac, struct page *page)
+-int ext4_mpage_readpages(struct address_space *mapping,
++int ext4_mpage_readpages(struct inode *inode,
+ 		struct readahead_control *rac, struct page *page)
  {
  	struct bio *bio = NULL;
  	sector_t last_block_in_bio = 0;
-@@ -241,6 +240,7 @@ int ext4_mpage_readpages(struct address_space *mapping,
- 	int length;
- 	unsigned relative_block = 0;
- 	struct ext4_map_blocks map;
-+	unsigned int nr_pages = rac ? readahead_count(rac) : 1;
  
- 	map.m_pblk = 0;
- 	map.m_lblk = 0;
-@@ -251,14 +251,9 @@ int ext4_mpage_readpages(struct address_space *mapping,
- 		int fully_mapped = 1;
- 		unsigned first_hole = blocks_per_page;
- 
--		if (pages) {
--			page = lru_to_page(pages);
--
-+		if (rac) {
-+			page = readahead_page(rac);
- 			prefetchw(&page->flags);
--			list_del(&page->lru);
--			if (add_to_page_cache_lru(page, mapping, page->index,
--				  readahead_gfp_mask(mapping)))
--				goto next_page;
- 		}
- 
- 		if (page_has_buffers(page))
-@@ -381,7 +376,7 @@ int ext4_mpage_readpages(struct address_space *mapping,
- 			bio->bi_iter.bi_sector = blocks[0] << (blkbits - 9);
- 			bio->bi_end_io = mpage_end_io;
- 			bio_set_op_attrs(bio, REQ_OP_READ,
--						is_readahead ? REQ_RAHEAD : 0);
-+						rac ? REQ_RAHEAD : 0);
- 		}
- 
- 		length = first_hole << blkbits;
-@@ -406,10 +401,9 @@ int ext4_mpage_readpages(struct address_space *mapping,
- 		else
- 			unlock_page(page);
- 	next_page:
--		if (pages)
-+		if (rac)
- 			put_page(page);
- 	}
--	BUG_ON(pages && !list_empty(pages));
- 	if (bio)
- 		submit_bio(bio);
- 	return 0;
+-	struct inode *inode = mapping->host;
+ 	const unsigned blkbits = inode->i_blkbits;
+ 	const unsigned blocks_per_page = PAGE_SIZE >> blkbits;
+ 	const unsigned blocksize = 1 << blkbits;
 -- 
 2.25.1
 
