@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1BC01A80BD
+	by mail.lfdr.de (Postfix) with ESMTPS id AB6151A80BE
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 17:03:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jON5X-0003i9-F3; Tue, 14 Apr 2020 15:02:59 +0000
+	id 1jON5W-0003g0-CM; Tue, 14 Apr 2020 15:02:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1jON5V-0003ft-JA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:57 +0000
+ (envelope-from <willy@infradead.org>) id 1jON5P-0003et-Hr
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a3v6yDLu6YVVgdwzNLLzwkeJ8vT0YawbuKhMcViKfm0=; b=h24ly0fJnNVEcRMczrJy2acNBz
- aEyw6Id22jHFaL2WZhD5yiEU1Xd1sMwvcKTQJtKb5VBXi4T1SC4jtnOqazdco2KCH5V6Lg1W4FGHF
- DOrprLZO4ydZX2JLbJkZ05LVk3rOZC78D5z+9qrih4l50OsnfF1x7iNEmN+kmxA43juA=;
+ bh=yWCBnvZVE3mmN89bJgz6VBayzBfFVIn+l+u0xcbyIA0=; b=T8mDowQqWn/xPoDg/VIMrNlIgU
+ lNQZelT7XNoNLQrMuFYzY8TMncYU9A/xquoYNoc2m0c2NMaRmP3lxL3DCowG+wRiW+oa0FgpGgKBJ
+ nhu6u7ybmqmymX6A3uPdss3qVjuGYDT0MTvPPXSsxVo/jN4+BFnmWsdYZukNk6C4tWpA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=a3v6yDLu6YVVgdwzNLLzwkeJ8vT0YawbuKhMcViKfm0=; b=h2HejokmVV6oqV86bZ6a/dr1aL
- B9gUJ8nOAFMMHVuzA8iKIvoSLAJbh38b+J1Bojr2F8FUcJme4kPUM7CcDhEtEvndk90HsdJkJVIpS
- xnH4hFGx0wbKmbc6svdU6fJ3d1RAFHcBUHgUEeRfCFPKLqqadbbe4Ez3p65IAW2jlT5g=;
+ bh=yWCBnvZVE3mmN89bJgz6VBayzBfFVIn+l+u0xcbyIA0=; b=mPylwSmMjgEf4pgQo7TjEQnrnb
+ iJ22WiJM6d5gvd1Q/q/nkE65QKz1uXrgcXEEynWd/Awz+9mAs4fYplEtRaXJEb/p5mv3AvVAexwIR
+ oI3M8gNZlW0YzJe5x9KowazooCva3nRmAwM8a1NTphHMSKIlQmLe8TTzu8q8y1pSAJss=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jON5P-00Fv7Z-SY
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:57 +0000
+ id 1jON5N-000rVU-EO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 15:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=a3v6yDLu6YVVgdwzNLLzwkeJ8vT0YawbuKhMcViKfm0=; b=JF06wYtSwL1/xSUUuID+BwdjlM
- 1NYosnZkLH42PLmhP3iMKOqAlZszbhrqz4D+kq7FA2pgvQhft14Lm+6SRBGUSSv1a8P5HTEtG+7mV
- xBnPeuqODdxGkFtC31NnJHGdcW2kl5gAuW5wuW6Zy5B4d/dCDTGZMWeKU50cYs0y6JG3WkZykQJhO
- g1SQUuso+kDJd1ICcMsmBWTDTrfyPgb9Q924l433/98srGm/NmJYOv35sk3Oeeo9qSyvh/Ib97jci
- IZdGfINaRsh/KW/SHDZpDVM2DvdFp5M5cIQlkjOqLiQXR4qs0QwF0saDh4eOiv7TFcJY6KvRbSjc8
- GYuwfeNg==;
+ bh=yWCBnvZVE3mmN89bJgz6VBayzBfFVIn+l+u0xcbyIA0=; b=rxsNXTI6N2R0/LpKQ7BNJg/gk2
+ 0yITPvDQDE2V8Dr6ZRvEscnLB9UyPimRkq7PGGSDZFqBRRMVYBwmYQ3r+ycynfXwu/lgRI0dGhBNs
+ ymS2j79bQT9lAHH0g6CTRq1NfdxAeCeciwVyd+AuVXoR3NFXfIsLiQ5A3uwDHFFTO7n9ie4HqhDoi
+ Ijz4vD2rdHIKI4P2DRmChWKXUwX9cc7srwuVYhhuDfRZFAtxtSPdLfrSyFhOdwKx0YdBjzmW+tW/6
+ +6ZfJDgCHOkIuQww7hF+NBUYzMi2pL2NIKfESk9JbsvFstHJagzoq1clFanhIz8jF/5g4eC66mzoy
+ uDt3EiFg==;
 Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jON59-0006OS-Vg; Tue, 14 Apr 2020 15:02:35 +0000
+ Hat Linux)) id 1jON5A-0006OX-0c; Tue, 14 Apr 2020 15:02:36 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Tue, 14 Apr 2020 08:02:16 -0700
-Message-Id: <20200414150233.24495-9-willy@infradead.org>
+Date: Tue, 14 Apr 2020 08:02:17 -0700
+Message-Id: <20200414150233.24495-10-willy@infradead.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200414150233.24495-1-willy@infradead.org>
 References: <20200414150233.24495-1-willy@infradead.org>
@@ -71,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jON5P-00Fv7Z-SY
-Subject: [f2fs-dev] [PATCH v11 08/25] mm: rename readahead loop variable to
- 'i'
+X-Headers-End: 1jON5N-000rVU-EO
+Subject: [f2fs-dev] [PATCH v11 09/25] mm: Remove 'page_offset' from
+ readahead loop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,66 +89,53 @@ Cc: linux-xfs@vger.kernel.org, William Kucharski <william.kucharski@oracle.com>,
  John Hubbard <jhubbard@nvidia.com>, linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
- Dave Chinner <dchinner@redhat.com>, linux-fsdevel@vger.kernel.org,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+ Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
-Change the type of page_idx to unsigned long, and rename it -- it's
-just a loop counter, not a page index.
+Replace the page_offset variable with 'index + i'.
 
-Suggested-by: John Hubbard <jhubbard@nvidia.com>
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Dave Chinner <dchinner@redhat.com>
+Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: William Kucharski <william.kucharski@oracle.com>
 ---
- mm/readahead.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ mm/readahead.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/mm/readahead.c b/mm/readahead.c
-index 8a65d6bd97e0..7ce320854bad 100644
+index 7ce320854bad..ddc63d3b07b8 100644
 --- a/mm/readahead.c
 +++ b/mm/readahead.c
-@@ -163,13 +163,13 @@ void __do_page_cache_readahead(struct address_space *mapping,
- 	struct page *page;
- 	unsigned long end_index;	/* The last page we want to read */
- 	LIST_HEAD(page_pool);
--	int page_idx;
- 	loff_t isize = i_size_read(inode);
- 	gfp_t gfp_mask = readahead_gfp_mask(mapping);
- 	struct readahead_control rac = {
- 		.mapping = mapping,
- 		.file = filp,
- 	};
-+	unsigned long i;
- 
- 	if (isize == 0)
- 		return;
-@@ -179,8 +179,8 @@ void __do_page_cache_readahead(struct address_space *mapping,
- 	/*
+@@ -180,12 +180,10 @@ void __do_page_cache_readahead(struct address_space *mapping,
  	 * Preallocate as many pages as we will need.
  	 */
--	for (page_idx = 0; page_idx < nr_to_read; page_idx++) {
--		pgoff_t page_offset = index + page_idx;
-+	for (i = 0; i < nr_to_read; i++) {
-+		pgoff_t page_offset = index + i;
+ 	for (i = 0; i < nr_to_read; i++) {
+-		pgoff_t page_offset = index + i;
+-
+-		if (page_offset > end_index)
++		if (index + i > end_index)
+ 			break;
  
- 		if (page_offset > end_index)
+-		page = xa_load(&mapping->i_pages, page_offset);
++		page = xa_load(&mapping->i_pages, index + i);
+ 		if (page && !xa_is_value(page)) {
+ 			/*
+ 			 * Page already present?  Kick off the current batch of
+@@ -199,7 +197,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
+ 		page = __page_cache_alloc(gfp_mask);
+ 		if (!page)
  			break;
-@@ -201,7 +201,7 @@ void __do_page_cache_readahead(struct address_space *mapping,
- 			break;
- 		page->index = page_offset;
+-		page->index = page_offset;
++		page->index = index + i;
  		list_add(&page->lru, &page_pool);
--		if (page_idx == nr_to_read - lookahead_size)
-+		if (i == nr_to_read - lookahead_size)
+ 		if (i == nr_to_read - lookahead_size)
  			SetPageReadahead(page);
- 		rac._nr_pages++;
- 	}
 -- 
 2.25.1
 
