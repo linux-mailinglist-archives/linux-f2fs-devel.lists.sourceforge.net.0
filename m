@@ -2,106 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB8C81A77F7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 11:59:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 456B41A79D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Apr 2020 13:45:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOILe-0006o0-EE; Tue, 14 Apr 2020 09:59:18 +0000
+	id 1jOJzp-0003OK-JJ; Tue, 14 Apr 2020 11:44:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1jOILd-0006nf-AU
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 09:59:17 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jOJzo-0003OC-5d
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 11:44:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BLLVlSgmfYUJ+bwK2UjQ2hzsnFPdLJsgynl3jAxM3BI=; b=BtOPmzHXICOf1QyY90Gi2UqQO/
- 3Fdtvr6koIS/PW3XtEkqWykQuoSpGm+GEAiD5O0stOvbZrXeuC5ag7uz8CY7vPwCy81985x3R5ydC
- ciBYNg3wF2wuL+bnQ1RSd9IgDJ9qPYcYf352KHKj/jfSu1vdqGlmWF/KPoHkSes8ARLs=;
+ bh=G3VB5fX7Otr2bFw6+pIWOFPWL6ndEstwMqnrp/c//uo=; b=JvpEwY6VCSKPZTRUp3hiHQ29e4
+ jsVThSGOORYpQO3EFV67tFJ5MTAPFfX7N/iMK943HidiX/LsIw3BZ2p82P9sRCQ7I7awHMFYt4wE3
+ cNYPShkS3D73bEfs/xV5XdAhF5OSj+IbVZWvTtY26EVH2sK3ix4ab7FsBenF5BwGplGY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BLLVlSgmfYUJ+bwK2UjQ2hzsnFPdLJsgynl3jAxM3BI=; b=a8CyEo3MvUDsphMc3opIkMb9nl
- UDTBYa9F0EX898l3v4+xEdwx6z2YE3i35f/X6dcursZPlDreDQhWHZsID87sJhYlIxrfVO3eP+Um2
- MxmyAv3A6bSZCNIY/Ic1ka5t4hAe4EO0AvjQNUMvIz6LMsVUAtqhPkokb9kQj9Xd57Dw=;
-Received: from mail26.static.mailgun.info ([104.130.122.26])
+ bh=G3VB5fX7Otr2bFw6+pIWOFPWL6ndEstwMqnrp/c//uo=; b=FVDvDuqHkCs4INU28U6rarMs88
+ 5P6hpUXUQcuhN/sMfk0J8ECUihpBsjaYE/9Yz5zV2EvAMJ4uwFxz4FbkaVGFwDM9vBVmwXW0emEo5
+ oZ7cD0BT7JYHFMMyy0ftHRq23oBj+TwAezcw0ni3d3zVZjOir5dHh8gPeaA0fg22TXXg=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jOILX-00EZHh-Re
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 09:59:17 +0000
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1586858351; h=In-Reply-To: Content-Type: MIME-Version:
- References: Message-ID: Subject: Cc: To: From: Date: Sender;
- bh=BLLVlSgmfYUJ+bwK2UjQ2hzsnFPdLJsgynl3jAxM3BI=;
- b=XCzTYt2r5shnd8E/VtkaRNfHb0xaLMiW7792XXW18N+8MJ65+zBnKcw8apcBqPvBHtsEYKs4
- fiqtdiFojz5Ucf2ztl2Lyc2DBy6v+IcElD1P2w2eSTfzFSIgrZrrYHUz9nKQZL3tjh3kweuT
- PoWl4AkADi1A18/Dyi4MI1m1Eho=
-X-Mailgun-Sending-Ip: 104.130.122.26
-X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
- by mxa.mailgun.org with ESMTP id 5e958967.7f4785202ca8-smtp-out-n01;
- Tue, 14 Apr 2020 09:59:03 -0000 (UTC)
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 1A4ECC432C2; Tue, 14 Apr 2020 09:59:02 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
- autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher DHE-RSA-AES128-SHA (128/128 bits))
- (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id AB591C433F2;
- Tue, 14 Apr 2020 09:58:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org AB591C433F2
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-Date: Tue, 14 Apr 2020 15:28:44 +0530
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20200414095844.GE20234@codeaurora.org>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jOJzm-00EdbS-2w
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Apr 2020 11:44:52 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id B47DF5584F2A41682894;
+ Tue, 14 Apr 2020 19:44:42 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 14 Apr
+ 2020 19:44:38 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Sahitya Tummala <stummala@codeaurora.org>
 References: <1585219019-24831-1-git-send-email-stummala@codeaurora.org>
- <20200331035419.GB79749@google.com>
- <20200331090608.GZ20234@codeaurora.org>
- <20200331184307.GA198665@google.com>
- <20200401050801.GA20234@codeaurora.org>
- <20200403171727.GB68460@google.com>
- <20200403172750.GD68460@google.com>
+ <20200331035419.GB79749@google.com> <20200331090608.GZ20234@codeaurora.org>
+ <20200331184307.GA198665@google.com> <20200401050801.GA20234@codeaurora.org>
+ <20200403171727.GB68460@google.com> <20200403172750.GD68460@google.com>
  <20200413174237.GC39092@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <34baaa43-fdc7-68e8-0a72-724e3bf5a717@huawei.com>
+Date: Tue, 14 Apr 2020 19:44:26 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
 In-Reply-To: <20200413174237.GC39092@google.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Score: 0.0 (/)
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: codeaurora.org]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [104.130.122.26 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1jOILX-00EZHh-Re
+X-Headers-End: 1jOJzm-00EdbS-2w
 Subject: Re: [f2fs-dev] [PATCH] f2fs: prevent meta updates while checkpoint
  is in progress
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -120,25 +87,25 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Apr 13, 2020 at 10:42:37AM -0700, Jaegeuk Kim wrote:
+On 2020/4/14 1:42, Jaegeuk Kim wrote:
 > On 04/03, Jaegeuk Kim wrote:
-> > On 04/03, Jaegeuk Kim wrote:
-> > > On 04/01, Sahitya Tummala wrote:
-> > > > Hi Jaegeuk,
-> > > > 
-> > > > Got it.
-> > > > The diff below looks good to me.
-> > > > Would you like me to test it and put a patch for this?
-> > > 
-> > > Sahitya, Chao,
-> > > 
-> > > Could you please take a look at this patch and test intensively?
-> > > 
-> > > Thanks,
+>> On 04/03, Jaegeuk Kim wrote:
+>>> On 04/01, Sahitya Tummala wrote:
+>>>> Hi Jaegeuk,
+>>>>
+>>>> Got it.
+>>>> The diff below looks good to me.
+>>>> Would you like me to test it and put a patch for this?
+>>>
+>>> Sahitya, Chao,
+>>>
+>>> Could you please take a look at this patch and test intensively?
+>>>
+>>> Thanks,
 > v3:
 >  - fix gc_lock
 > 
-> From d10c09dfedc7a10cef7dd34493ddbd7c27889033 Mon Sep 17 00:00:00 2001
+>>From d10c09dfedc7a10cef7dd34493ddbd7c27889033 Mon Sep 17 00:00:00 2001
 > From: Jaegeuk Kim <jaegeuk@kernel.org>
 > Date: Tue, 31 Mar 2020 11:43:07 -0700
 > Subject: [PATCH] f2fs: refactor resize_fs to avoid meta updates in progress
@@ -329,6 +296,21 @@ On Mon, Apr 13, 2020 at 10:42:37AM -0700, Jaegeuk Kim wrote:
 > +	f2fs_lock_op(sbi);
 > +	err = free_segment_range(sbi, secs, true);
 > +	f2fs_unlock_op(sbi);
+
+There will be ABBA deadlock:
+
+- lock_op()
+ - free_segment_range()
+					- f2fs_sync_fs()
+					 - down_write(gc_lock)
+  - down_write(gc_lock)
+   - do_garbage_collect()
+					  - f2fs_write_checkpoint()
+					   - block_operations()
+					    - f2fs_lock_all()
+
+Thanks,
+
 > +	if (err)
 > +		return err;
 > +
@@ -336,12 +318,6 @@ On Mon, Apr 13, 2020 at 10:42:37AM -0700, Jaegeuk Kim wrote:
 > +
 > +	freeze_super(sbi->sb);
 > +	down_write(&sbi->gc_lock);
-
-free_segment_range() tries to acquire the gc_lock before do_garbage_collect().
-It can deadlock.
-
-Thanks,
-
 > +	mutex_lock(&sbi->cp_mutex);
 > +
 >  	spin_lock(&sbi->stat_lock);
@@ -462,14 +438,7 @@ Thanks,
 >  
 >  #define show_fsync_cpreason(type)					\
 >  	__print_symbolic(type,						\
-> -- 
-> 2.26.0.110.g2183baf09c-goog
 > 
-
--- 
---
-Sent by a consultant of the Qualcomm Innovation Center, Inc.
-The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
 
 
 _______________________________________________
