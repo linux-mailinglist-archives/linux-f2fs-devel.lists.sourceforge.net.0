@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF58F1A9C68
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA39E1A9C6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgK7-00034n-NN; Wed, 15 Apr 2020 11:35:19 +0000
+	id 1jOgKS-00009s-GN; Wed, 15 Apr 2020 11:35:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgK1-00034J-FW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:13 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgKQ-00009a-Qa
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c9/V/6oRSlgIA4zRytOoF3D6DED5OULll5Zm3Cvzpsw=; b=ZCS6nCakGIyxktzBBXDdEpeZdk
- B3c2TAW+M7IV6vhQoZFTCD1cDXwY32y31F6S1Q2upboggYTBBf1A74HCeS7RjsTLMLFp2cky4kyJ8
- 3HEUD8ru/5CcwfAfL4nqtRBXnH/PN5aH4/xPMpq4YlL3Vucpceza/8gS8citjdP4ijDE=;
+ bh=kdfPM/OK2XhCnv4Voh43Cxh3kQMGE8yR2sSMTIT48AI=; b=cUWqLPXvnhJJZkKXSd0VbRxxgA
+ tT9xOZ/NtJibHtc83Tjr2IcYS45aO3iB4wOX+jPfVosv1R5xMnZHqiuGbJZ/ONVkFeN20oXV+5B+h
+ 7jEfEk1fvKDUZHd9VSilkf7cQZRx2hyAUfRAu953JWGPA3/YC1O4q89Ys1tzrxHHNvBg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c9/V/6oRSlgIA4zRytOoF3D6DED5OULll5Zm3Cvzpsw=; b=QG3SqeAt827J/+HvO9jmIZrstp
- nywpbXKQu1CmKjHbMraPvxC7vCLuNeKdINDDXoN0KbZvPF+zVuQVNU62Sx6ZDXrQLjSdJvsBwSkEZ
- PxpOoE83hO83SbEXqv5+AJRYYettP9zCJ6twkiShw7GjdIYU2pZPie2glcMkCM5XcVJY=;
+ bh=kdfPM/OK2XhCnv4Voh43Cxh3kQMGE8yR2sSMTIT48AI=; b=bOlHZ5j3HXMlq+w7nb4LuNJlxL
+ WBufk8U/0dbnKLkKeXkn4zk+4J2JjciBoFePSGrewkGPGcdSA82/EtVPqocaPt+fnkRE8+YpO7VI2
+ ZG9c7iQCwy8W2jhH8Me+mM1rD+2q4BcYs2SMhBny62P5k22URN+YO47ixj053xGDUKSY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgJx-000F0e-Ix
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:13 +0000
+ id 1jOgKP-000F5w-Ka
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:38 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EAEA520857;
- Wed, 15 Apr 2020 11:35:01 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 772AD2076D;
+ Wed, 15 Apr 2020 11:35:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950502;
- bh=Pk3LH+KtmLOnF31lo8mARZysIUUWRRZBhV3Ch4KKeVI=;
+ s=default; t=1586950532;
+ bh=ZuDZLax0A1vB86vHwIF4QBPimeLqvY8IwBXTHs8dYVQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gCQkZOt18wS5nOnSEVmt6zMpF4xPoszlNzFqPApeVIREvWSKvQj6LkWKI/lE2bt35
- H5/+DFtW6ECEPc+7rbwNCUUKGuNgqDD0bn1p28QjAX29R5zQ+CA2V3LfQr8O7fvtzi
- RMrEt8TlWp7RAArRoRiLUly9dGKpaIF6jS+MBSXQ=
+ b=nPVK744Wbu9mM7vyHPB1L7P7Ga5IMBJCYDKICScm08EfTT+2FIc5/oc2RXpvbe0WU
+ tV7yZ/QBGyYdIZ4yhUUBTFioabQfnL10D1SGIHULlfFfvkKPD76EGs3cVSEPnX3AMi
+ 0XTgS9pfIi1OC9JeXjtmMq+NT61t1tWP3nbNcRkY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:32:49 -0400
-Message-Id: <20200415113445.11881-14-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:33:15 -0400
+Message-Id: <20200415113445.11881-40-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
 References: <20200415113445.11881-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgJx-000F0e-Ix
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 014/129] f2fs: fix to avoid
- use-after-free in f2fs_write_multi_pages()
+X-Headers-End: 1jOgKP-000F5w-Ka
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 040/129] f2fs: fix to show norecovery
+ mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,54 +99,63 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 95978caa138948054e06d00bfc3432b518699f1b ]
+[ Upstream commit a9117eca1de6b738e713d2142126db2cfbf6fb36 ]
 
-In compress cluster, if physical block number is less than logic
-page number, race condition will cause use-after-free issue as
-described below:
+Previously, 'norecovery' mount option will be shown as
+'disable_roll_forward', fix to show original option name correctly.
 
-- f2fs_write_compressed_pages
- - fio.page = cic->rpages[0];
- - f2fs_outplace_write_data
-					- f2fs_compress_write_end_io
-					 - kfree(cic->rpages);
-					 - kfree(cic);
- - fio.page = cic->rpages[1];
-
-f2fs_write_multi_pages+0xfd0/0x1a98
-f2fs_write_data_pages+0x74c/0xb5c
-do_writepages+0x64/0x108
-__writeback_single_inode+0xdc/0x4b8
-writeback_sb_inodes+0x4d0/0xa68
-__writeback_inodes_wb+0x88/0x178
-wb_writeback+0x1f0/0x424
-wb_workfn+0x2f4/0x574
-process_one_work+0x210/0x48c
-worker_thread+0x2e8/0x44c
-kthread+0x110/0x120
-ret_from_fork+0x10/0x18
-
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/compress.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/f2fs.h  | 1 +
+ fs/f2fs/super.c | 7 +++++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index c847523ab4a2e..927db1205bd81 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -845,7 +845,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index d39f5de114208..64caa46f0c8bd 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -100,6 +100,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+ #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
+ #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
+ #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
++#define F2FS_MOUNT_NORECOVERY		0x04000000
  
- 		blkaddr = datablock_addr(dn.inode, dn.node_page,
- 							dn.ofs_in_node);
--		fio.page = cic->rpages[i];
-+		fio.page = cc->rpages[i];
- 		fio.old_blkaddr = blkaddr;
+ #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+ #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 686f5402660ed..3669f060b6257 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -446,7 +446,7 @@ static int parse_options(struct super_block *sb, char *options)
+ 			break;
+ 		case Opt_norecovery:
+ 			/* this option mounts f2fs with ro */
+-			set_opt(sbi, DISABLE_ROLL_FORWARD);
++			set_opt(sbi, NORECOVERY);
+ 			if (!f2fs_readonly(sb))
+ 				return -EINVAL;
+ 			break;
+@@ -1446,6 +1446,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ 	}
+ 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
+ 		seq_puts(seq, ",disable_roll_forward");
++	if (test_opt(sbi, NORECOVERY))
++		seq_puts(seq, ",norecovery");
+ 	if (test_opt(sbi, DISCARD))
+ 		seq_puts(seq, ",discard");
+ 	else
+@@ -3598,7 +3600,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		goto reset_checkpoint;
  
- 		/* cluster header */
+ 	/* recover fsynced data */
+-	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
++	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
++			!test_opt(sbi, NORECOVERY)) {
+ 		/*
+ 		 * mount should be failed, when device has readonly mode, and
+ 		 * previous checkpoint was not done by clean system shutdown.
 -- 
 2.20.1
 
