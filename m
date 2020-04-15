@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8437F1A9C73
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ED161A9C78
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgKX-0003Hh-B7; Wed, 15 Apr 2020 11:35:45 +0000
+	id 1jOgKe-0000Bk-Qg; Wed, 15 Apr 2020 11:35:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgKW-0003HM-5F
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:44 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgKa-0000BK-RX
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8YtXGMq+5lLKSInTJzG62AmiDWnTbvZ9jp3qKFuhjNI=; b=GD20MTcI65k4d5qIxyuQr4++xT
- DnEmPIln/PNzEbjexR822osdxEODP11CFwZfjdm3GTjqcVIv7wLQsBxXad+1NI4NjPJ0u3/o87LbI
- 0TQPPfpeRBa23vh9qh2i/58di1ktMQLAFpsxc2VWZS3IguQidqSzscI4B70ejWosLhFk=;
+ bh=Z2i99+0XfL+a9jNTDzMq/wa2Lk7iWBDP6uWT5knmUvw=; b=GMMVMA4DySceLkUjaf+k+u3TC1
+ 9epL0cd1sz4j47S7TkFH/GA83nT1PrUVPBQrrtB7yvnEhc0Vd9+A0SyGAUud5jwbW4z5eVz+Ezeen
+ +J6hikwk4LfVlyies3mBOiTOOX60RrXbzLArpUZVndirQ9nMzji0XnCOf0R6VNk2dt24=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8YtXGMq+5lLKSInTJzG62AmiDWnTbvZ9jp3qKFuhjNI=; b=Zagx6q6TkwVCLuWQmC5cYbBw2g
- bYnERiG73Ow47KZbSms/SdOPOK/5PF/XTCC6Z3Y8kf4toGM61zpFWz3VeqpzORFPwi+Pbd/CDo9lO
- Ac8VtuqTrhtq/xJbaQ6SjRyqA2WMqF3rz9ImAzYIChnotyHXEWZwjvWSQx1x9woDpD7g=;
+ bh=Z2i99+0XfL+a9jNTDzMq/wa2Lk7iWBDP6uWT5knmUvw=; b=QpXThPJrkeRPRpJhmOT8bvkmxE
+ D9U4+rZDJiCgiKh4OuWREn/08kmTCVrayJpiJtJzLPzSXqyvJMKPqjuVkZWKip21WoB/0J58wD7zn
+ ef+wAhUVSPHrOIdF94GQqOwgwCrR01poZDAQ/KBmwhhIjPBNxEheMciCkvw+oehtMXag=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgKU-002XSR-1Z
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:44 +0000
+ id 1jOgKV-002XSX-BF
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:47 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D27C720737;
- Wed, 15 Apr 2020 11:35:35 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D7D2A20936;
+ Wed, 15 Apr 2020 11:35:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950536;
- bh=gyrgOBtnruqsRqwFRaUPLR8jArzCvKh/o+Fs5Qs5DSA=;
+ s=default; t=1586950537;
+ bh=0H5qTCo9MCcBp0sS1kS6EKUNGIM5n9EoGASG7YstmfQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SBeDPkNzfw5+pi5zn64wqerDKZU6LHJNpMUSq65VcaBPReEqElgCjEB6I3lQXqixL
- IvI+txdEbPc13GLA2tkKMbyFez4D+GPkWkew6mt8zb/uXiIXz1x4nvHQlnxTPUshmG
- wGCpCmZdO6zIi0b9XCTU3L97jX0vkB8CKwsVzOtM=
+ b=WUrA3MaI94uMqVlpAoZEBD6LOx2C7UOFngShb6ph+GHbPZkA8Nliy1lo7PFhiRkK5
+ PWSw6gXJwDvS6dP0CqQpRh5Sgg8G90K+uOZ/w7Ic1zmpu//NG06qFaqA/o5eX21bka
+ fap22JLI9+6MBYHf42Ej5B6hPV+reawojua1b80M=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:33:19 -0400
-Message-Id: <20200415113445.11881-44-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:33:20 -0400
+Message-Id: <20200415113445.11881-45-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
 References: <20200415113445.11881-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgKU-002XSR-1Z
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 044/129] f2fs: fix to update
- f2fs_super_block fields under sb_lock
+X-Headers-End: 1jOgKV-002XSX-BF
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 045/129] f2fs: Fix mount failure due
+ to SPO after a successful online resize FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,58 +97,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Sahitya Tummala <stummala@codeaurora.org>
 
-[ Upstream commit a4ba5dfc5c88e49bb03385abfdd28c5a0acfbb54 ]
+[ Upstream commit 682756827501dc52593bf490f2d437c65ec9efcb ]
 
-Fields in struct f2fs_super_block should be updated under coverage
-of sb_lock, fix to adjust update_sb_metadata() for that rule.
+Even though online resize is successfully done, a SPO immediately
+after resize, still causes below error in the next mount.
 
-Fixes: 04f0b2eaa3b3 ("f2fs: ioctl for removing a range from F2FS")
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+[   11.294650] F2FS-fs (sda8): Wrong user_block_count: 2233856
+[   11.300272] F2FS-fs (sda8): Failed to get valid F2FS checkpoint
+
+This is because after FS metadata is updated in update_fs_metadata()
+if the SBI_IS_DIRTY is not dirty, then CP will not be done to reflect
+the new user_block_count.
+
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/gc.c | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
+ fs/f2fs/gc.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index db8725d473b52..9cff2502e3bc6 100644
+index 9cff2502e3bc6..2f645c591a000 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -1434,12 +1434,19 @@ static int free_segment_range(struct f2fs_sb_info *sbi, unsigned int start,
- static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
- {
- 	struct f2fs_super_block *raw_sb = F2FS_RAW_SUPER(sbi);
--	int section_count = le32_to_cpu(raw_sb->section_count);
--	int segment_count = le32_to_cpu(raw_sb->segment_count);
--	int segment_count_main = le32_to_cpu(raw_sb->segment_count_main);
--	long long block_count = le64_to_cpu(raw_sb->block_count);
-+	int section_count;
-+	int segment_count;
-+	int segment_count_main;
-+	long long block_count;
- 	int segs = secs * sbi->segs_per_sec;
- 
-+	down_write(&sbi->sb_lock);
-+
-+	section_count = le32_to_cpu(raw_sb->section_count);
-+	segment_count = le32_to_cpu(raw_sb->segment_count);
-+	segment_count_main = le32_to_cpu(raw_sb->segment_count_main);
-+	block_count = le64_to_cpu(raw_sb->block_count);
-+
- 	raw_sb->section_count = cpu_to_le32(section_count + secs);
- 	raw_sb->segment_count = cpu_to_le32(segment_count + segs);
- 	raw_sb->segment_count_main = cpu_to_le32(segment_count_main + segs);
-@@ -1453,6 +1460,8 @@ static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
- 		raw_sb->devs[last_dev].total_segments =
- 						cpu_to_le32(dev_segs + segs);
+@@ -1579,11 +1579,17 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		goto out;
  	}
-+
-+	up_write(&sbi->sb_lock);
- }
  
- static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
++	mutex_lock(&sbi->cp_mutex);
+ 	update_fs_metadata(sbi, -secs);
+ 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
++	set_sbi_flag(sbi, SBI_IS_DIRTY);
++	mutex_unlock(&sbi->cp_mutex);
++
+ 	err = f2fs_sync_fs(sbi->sb, 1);
+ 	if (err) {
++		mutex_lock(&sbi->cp_mutex);
+ 		update_fs_metadata(sbi, secs);
++		mutex_unlock(&sbi->cp_mutex);
+ 		update_sb_metadata(sbi, secs);
+ 		f2fs_commit_super(sbi, false);
+ 	}
 -- 
 2.20.1
 
