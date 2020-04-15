@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E31341A9D45
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:44:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A7301A9D49
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:45:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgTR-0003dF-NZ; Wed, 15 Apr 2020 11:44:57 +0000
+	id 1jOgTj-0005La-Qb; Wed, 15 Apr 2020 11:45:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgTR-0003d3-2E
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:44:57 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgTi-0005LJ-W1
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lp3b5/ViHX/6EL+tEiN98P5XEFu9YWOiBOb4l9XQZY8=; b=G96ta/9vf+2iH3Ay1eGLu8Fr2C
- lLOhR8TulC0rs89U3DeUXPqpHxtmuHLvU0w//rRp8HXa5mefSkS95bvMUogywjiHrDybYPRYItkXq
- RIxRWga4/HL7pNyGBzlx9Ci0IpywOkpXHkxLGCuIMJxSHam40DqBHQrSIIvom8NGKOjw=;
+ bh=27Q4LfdW+YSoR1h6rv3oRp9sDU2NJ3hvvtE3jINfWvQ=; b=QnBa/62YVnb7i0U5UL6HPOBzpH
+ 1fMhS391BR8Tk4Q/KTeyNLKS8y2jLfB1DmwGWgWDwOGlQF3RfS6R6kHxkVpDi63h+m9wFfx55lwYQ
+ EwsjdGpwESFr1DJc7nz5iI6J8HwpiUoF+jQYvgD8Ux1TzCdWKqfjA5lbJJYDEXYVQW7g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lp3b5/ViHX/6EL+tEiN98P5XEFu9YWOiBOb4l9XQZY8=; b=WpXnao2xbm9OJlDshrVUFCkYt1
- ZMBrq6lT2Z+lySUWVI7MW3Ewagb0XlGdfFdTsKY7+Kyw3jJerjeSZDhDz42HAAS+GTGTJAexNhQQ1
- Zuu0n6N8xFXPmLIldt3YrfZ9FWh9Prm9M/Tz/GCY84ElXlEmTJKMDYSbmTkdgXGuozsY=;
+ bh=27Q4LfdW+YSoR1h6rv3oRp9sDU2NJ3hvvtE3jINfWvQ=; b=RrMIYDkyVd6uK4FhpkMkkWMfmt
+ 1ZUNY46oGN62br2nKh7Q+PAjYMq5OCdS1xPM7Vin/VjEsynEiLNscC3e+NyMO+JkATvHIADPr453e
+ OxjLyi+VFKJz7R1ApFB/Re+QiujMSRgspZ8XPW/rmLFuTwg9eavRY5FA5ayd0QLXFv3k=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgTO-00GU0Q-4X
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:44:55 +0000
+ id 1jOgTh-00GU3m-2W
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:14 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CF16F20768;
- Wed, 15 Apr 2020 11:44:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D8E7A20737;
+ Wed, 15 Apr 2020 11:45:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586951088;
- bh=aVfigafMAvv1hgwZCshZyIH+wEjppUtP4c/qdhe1li8=;
+ s=default; t=1586951107;
+ bh=5SeT3hiRI9bcQ3mKwLYKdi/OeOWo9IX8PWvS3M83jsc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=NBY1kkjINEGxyARbbaM9Df0l9lZwIsMnAkZXJsT3jLO1c43hI5tx8AZAAcmjg+aZK
- 4KERsWhqil5jAu2B5L+yl6kEwuhRRl+uyUevExfcb2WTqb0hKwuAsiYX8u4O7xnwUk
- p34OMG1DF6Hxu8q5kD98WLdwWPV3k9t2dUjyot1s=
+ b=18n1J5QIVm3A+nB7H+heFmNlJj4qgwaNIgV2JOJvvPv+K6/rA5ZQXnq4IUtdZft7r
+ xZ5PvQEIvraUu1RzQy0CuHb5/DsRByt69YdalwfmWf2wJWfw19IQH4l6CuF7gazZGS
+ qheSZ32Vat5LsVH7VZACS9QFtW1N/r/w6aqmob6A=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:43:22 -0400
-Message-Id: <20200415114442.14166-5-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:43:39 -0400
+Message-Id: <20200415114442.14166-22-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415114442.14166-1-sashal@kernel.org>
 References: <20200415114442.14166-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgTO-00GU0Q-4X
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 05/84] f2fs: fix the panic in
- do_checkpoint()
+X-Headers-End: 1jOgTh-00GU3m-2W
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 22/84] f2fs: fix to show norecovery
+ mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,133 +97,65 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Sahitya Tummala <stummala@codeaurora.org>
+From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit bf22c3cc8ce71454dddd772284773306a68031d8 ]
+[ Upstream commit a9117eca1de6b738e713d2142126db2cfbf6fb36 ]
 
-There could be a scenario where f2fs_sync_meta_pages() will not
-ensure that all F2FS_DIRTY_META pages are submitted for IO. Thus,
-resulting in the below panic in do_checkpoint() -
+Previously, 'norecovery' mount option will be shown as
+'disable_roll_forward', fix to show original option name correctly.
 
-f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
-				!f2fs_cp_error(sbi));
-
-This can happen in a low-memory condition, where shrinker could
-also be doing the writepage operation (stack shown below)
-at the same time when checkpoint is running on another core.
-
-schedule
-down_write
-f2fs_submit_page_write -> by this time, this page in page cache is tagged
-			as PAGECACHE_TAG_WRITEBACK and PAGECACHE_TAG_DIRTY
-			is cleared, due to which f2fs_sync_meta_pages()
-			cannot sync this page in do_checkpoint() path.
-f2fs_do_write_meta_page
-__f2fs_write_meta_page
-f2fs_write_meta_page
-shrink_page_list
-shrink_inactive_list
-shrink_node_memcg
-shrink_node
-kswapd
-
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/checkpoint.c | 16 +++++++---------
- fs/f2fs/f2fs.h       |  2 +-
- fs/f2fs/super.c      |  2 +-
- 3 files changed, 9 insertions(+), 11 deletions(-)
+ fs/f2fs/f2fs.h  | 1 +
+ fs/f2fs/super.c | 7 +++++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index a0eef95b9e0ed..410f5c2c6ef17 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1250,20 +1250,20 @@ static void unblock_operations(struct f2fs_sb_info *sbi)
- 	f2fs_unlock_all(sbi);
- }
- 
--void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi)
-+void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
- {
- 	DEFINE_WAIT(wait);
- 
- 	for (;;) {
- 		prepare_to_wait(&sbi->cp_wait, &wait, TASK_UNINTERRUPTIBLE);
- 
--		if (!get_pages(sbi, F2FS_WB_CP_DATA))
-+		if (!get_pages(sbi, type))
- 			break;
- 
- 		if (unlikely(f2fs_cp_error(sbi)))
- 			break;
- 
--		io_schedule_timeout(5*HZ);
-+		io_schedule_timeout(HZ/50);
- 	}
- 	finish_wait(&sbi->cp_wait, &wait);
- }
-@@ -1384,8 +1384,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 
- 	/* Flush all the NAT/SIT pages */
- 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
--	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
--					!f2fs_cp_error(sbi));
- 
- 	/*
- 	 * modify checkpoint
-@@ -1493,11 +1491,11 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 
- 	/* Here, we have one bio having CP pack except cp pack 2 page */
- 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
--	f2fs_bug_on(sbi, get_pages(sbi, F2FS_DIRTY_META) &&
--					!f2fs_cp_error(sbi));
-+	/* Wait for all dirty meta pages to be submitted for IO */
-+	f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META);
- 
- 	/* wait for previous submitted meta pages writeback */
--	f2fs_wait_on_all_pages_writeback(sbi);
-+	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
- 
- 	/* flush all device cache */
- 	err = f2fs_flush_device_cache(sbi);
-@@ -1506,7 +1504,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 
- 	/* barrier and flush checkpoint cp pack 2 page if it can */
- 	commit_checkpoint(sbi, ckpt, start_blk);
--	f2fs_wait_on_all_pages_writeback(sbi);
-+	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
- 
- 	/*
- 	 * invalidate intermediate page cache borrowed from meta inode
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 9046432b87c2d..1a8b68ceaa62f 100644
+index 1a8b68ceaa62f..3edde3d6d089d 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -3185,7 +3185,7 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi);
- void f2fs_update_dirty_page(struct inode *inode, struct page *page);
- void f2fs_remove_dirty_inode(struct inode *inode);
- int f2fs_sync_dirty_inodes(struct f2fs_sb_info *sbi, enum inode_type type);
--void f2fs_wait_on_all_pages_writeback(struct f2fs_sb_info *sbi);
-+void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type);
- int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc);
- void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi);
- int __init f2fs_create_checkpoint_caches(void);
+@@ -100,6 +100,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+ #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
+ #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
+ #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
++#define F2FS_MOUNT_NORECOVERY		0x04000000
+ 
+ #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+ #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index ea8dbf1458c99..28441f4971b8d 100644
+index 28441f4971b8d..94caf26901e0b 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -1105,7 +1105,7 @@ static void f2fs_put_super(struct super_block *sb)
- 	/* our cp_error case, we can wait for any writeback page */
- 	f2fs_flush_merged_writes(sbi);
+@@ -439,7 +439,7 @@ static int parse_options(struct super_block *sb, char *options)
+ 			break;
+ 		case Opt_norecovery:
+ 			/* this option mounts f2fs with ro */
+-			set_opt(sbi, DISABLE_ROLL_FORWARD);
++			set_opt(sbi, NORECOVERY);
+ 			if (!f2fs_readonly(sb))
+ 				return -EINVAL;
+ 			break;
+@@ -1348,6 +1348,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ 	}
+ 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
+ 		seq_puts(seq, ",disable_roll_forward");
++	if (test_opt(sbi, NORECOVERY))
++		seq_puts(seq, ",norecovery");
+ 	if (test_opt(sbi, DISCARD))
+ 		seq_puts(seq, ",discard");
+ 	else
+@@ -3488,7 +3490,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		goto reset_checkpoint;
  
--	f2fs_wait_on_all_pages_writeback(sbi);
-+	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
- 
- 	f2fs_bug_on(sbi, sbi->fsync_node_num);
- 
+ 	/* recover fsynced data */
+-	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
++	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
++			!test_opt(sbi, NORECOVERY)) {
+ 		/*
+ 		 * mount should be failed, when device has readonly mode, and
+ 		 * previous checkpoint was not done by clean system shutdown.
 -- 
 2.20.1
 
