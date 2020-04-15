@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AC071A93EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 09:15:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42D211A9474
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 09:41:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOcGg-0004mv-7m; Wed, 15 Apr 2020 07:15:30 +0000
+	id 1jOcfT-0000Pu-Ey; Wed, 15 Apr 2020 07:41:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jOcGe-0004mn-Qm
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 07:15:28 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jOcfR-0000PT-63
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 07:41:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
@@ -33,10 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  liGLZQ87mKquVq4IU0TDi9IMKNc5+iuV4m0cPsLNNr1q3azzUQgRS8dFMjm2T+jcP6ckjdWWmAQ3b
  C5SumMWy3F00JyZZWTwGSXXhqeO3E8+JhFBv6Go7uZ3puHy6OqYozd/d2lget40kjR6s=;
 Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOcGZ-001s7b-SA
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 07:15:28 +0000
+ id 1jOcfL-00Fqqo-Ro
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 07:41:05 +0000
 Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
  by Forcepoint Email with ESMTP id EF9D0294396DEF9D0493
  for <linux-f2fs-devel@lists.sourceforge.net>;
@@ -65,7 +65,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jOcGZ-001s7b-SA
+X-Headers-End: 1jOcfL-00Fqqo-Ro
 Subject: Re: [f2fs-dev] [question] ZBC/ZAC Offline/read-only zone support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
