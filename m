@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD79C1A9C93
+	by mail.lfdr.de (Postfix) with ESMTPS id 69BA31A9C92
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:36:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgLc-0003XO-Mf; Wed, 15 Apr 2020 11:36:52 +0000
+	id 1jOgLc-0003Bf-1f; Wed, 15 Apr 2020 11:36:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgLa-0003X0-KB
+ (envelope-from <sashal@kernel.org>) id 1jOgLa-0003BR-La
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vcGupc0w1OpR0UgbjI2UXdhR7i6mDTANJQQoOiMRVQk=; b=H8hlGPbmclIBYGnYYyAP5USD4D
- ttP3s8X9f3JHX6uNN3EEwA8Q9PSzIapAsQIc64DOCVl8X0/MLyVE+GGHhmhRRTjOgxHW+38fZ201j
- byTYM0uX5FW8Zkw2rvAbmh4Vamay2zGSF9et9O90qmy6w2sFBag5GaQu0WZcmsf+slEo=;
+ bh=KrzlPI601mCHwBRVRtmRoXZT89n6zQTVrPuIlTlolTA=; b=DG7hdBmnnPQ/ixp2zBExdLLm26
+ 1MxZYRiejTyOYwnII9whArPexwFfkpZdnDzV9T+T8BE4akYpny/1IQPIcywAGbRXQd5BvTgyP82E0
+ nSg82of1e+1jNYSYKN5yxscpAuXAIZ1xceSdweRl/wVkF49fPU4K8+2J0CRBJhwzLxeQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vcGupc0w1OpR0UgbjI2UXdhR7i6mDTANJQQoOiMRVQk=; b=hpeRrKhfgNG2K+ddBqYD84+pCZ
- NgX4Ou7s2fV25xnpAVBsabGxNK4DuqILGgKgRS9bmuAczsyX+SdgakdVR0Tcp2Ijuw66jj07g1LS7
- 9NPwThBCXdopIKIC/ENTA0zVeJOeAs+hA5hNy2ppZvP6iVNxvQjV581fOGWU0Iu9xpbQ=;
+ bh=KrzlPI601mCHwBRVRtmRoXZT89n6zQTVrPuIlTlolTA=; b=hWbLAdnOTWj00m7BFmypLcj3vt
+ 8vG8/eezLKQZTJ8fxq74SdAS04iG5jge4zOFUgZkw0U3LP5VDtEC7RSzOo/TXgkjJYBUJKApaVavv
+ sXr8YCAsesXcECbae8kmHM+Bgt/styL9RtzvjDkvdB7ELpsVJgQ3okvsQv50MsWmBlaM=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgLY-000FIM-Fh
+ id 1jOgLZ-00GSjt-Hq
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:50 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4C49220936;
- Wed, 15 Apr 2020 11:36:42 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5FE36208FE;
+ Wed, 15 Apr 2020 11:36:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950603;
- bh=YLXBwgw3/Lm1c+qH8DOQy+FDCzjJEKmau8CPH+MDC5E=;
+ s=default; t=1586950604;
+ bh=aYUuWPfJpzqoqPVjphiZ2zRMzjSHaBbquwqd8TH1J4o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=QiCK4FXusW5AcJ/AAPFy4hB78r5rogA3Geb5jUh1lpVRD+HhdAg0H+K5332jqv0WU
- psxtlSLb/+IkFoFIiVh9j2VSQ6b8NH5dDKv/5XQURqHIvKqQLSoZjupkBnpebM0MBw
- CjHU3lpxXdbNLLrhXedhrt5ywwg9kaW9ar07SdxA=
+ b=bEumCFXf9h/Y9yyGJqLu2/LODsCDKUDua9KsN5GD4s9RqHJrZEAG53cdyC2GoUB1b
+ 7QGOr7aCS3SZt0Gv1UCcrO0qu42H9Ie5xgnPQtQd3ozfi/QnRGgU3CviXiMdAKaeEt
+ EcpiZZfCRTcq9PAp0F+1YN1ynBc9vgD415/GmPdE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:34:13 -0400
-Message-Id: <20200415113445.11881-98-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:34:14 -0400
+Message-Id: <20200415113445.11881-99-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
 References: <20200415113445.11881-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgLY-000FIM-Fh
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 098/129] f2fs: fix NULL pointer
- dereference in f2fs_verity_work()
+X-Headers-End: 1jOgLZ-00GSjt-Hq
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 099/129] f2fs: fix NULL pointer
+ dereference in f2fs_write_begin()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,100 +99,73 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 79bbefb19f1359fb2cbd144d5a054649e7e583be ]
+[ Upstream commit 62f63eea291b50a5677ae7503ac128803174698a ]
 
-If both compression and fsverity feature is on, generic/572 will
-report below NULL pointer dereference bug.
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+RIP: 0010:f2fs_write_begin+0x823/0xb90 [f2fs]
+Call Trace:
+ f2fs_quota_write+0x139/0x1d0 [f2fs]
+ write_blk+0x36/0x80 [quota_tree]
+ get_free_dqblk+0x42/0xa0 [quota_tree]
+ do_insert_tree+0x235/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ do_insert_tree+0x26e/0x4a0 [quota_tree]
+ qtree_write_dquot+0x70/0x190 [quota_tree]
+ v2_write_dquot+0x43/0x90 [quota_v2]
+ dquot_acquire+0x77/0x100
+ f2fs_dquot_acquire+0x2f/0x60 [f2fs]
+ dqget+0x310/0x450
+ dquot_transfer+0x7e/0x120
+ f2fs_setattr+0x11a/0x4a0 [f2fs]
+ notify_change+0x349/0x480
+ chown_common+0x168/0x1c0
+ do_fchownat+0xbc/0xf0
+ __x64_sys_fchownat+0x20/0x30
+ do_syscall_64+0x5f/0x220
+ entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
- BUG: kernel NULL pointer dereference, address: 0000000000000018
- RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
- #PF: supervisor read access in kernel mode
- Workqueue: fsverity_read_queue f2fs_verity_work [f2fs]
- RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
- Call Trace:
-  process_one_work+0x16c/0x3f0
-  worker_thread+0x4c/0x440
-  ? rescuer_thread+0x350/0x350
-  kthread+0xf8/0x130
-  ? kthread_unpark+0x70/0x70
-  ret_from_fork+0x35/0x40
-
-There are two issue in f2fs_verity_work():
-- it needs to traverse and verify all pages in bio.
-- if pages in bio belong to non-compressed cluster, accessing
-decompress IO context stored in page private will cause NULL
-pointer dereference.
-
-Fix them.
+Passing fsdata parameter to .write_{begin,end} in f2fs_quota_write(),
+so that if quota file is compressed one, we can avoid above NULL
+pointer dereference when updating quota content.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/compress.c |  2 ++
- fs/f2fs/data.c     | 35 ++++++++++++++++++++++++++++++-----
- 2 files changed, 32 insertions(+), 5 deletions(-)
+ fs/f2fs/super.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 1a86e483b0907..eb84c13c1182c 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -476,6 +476,8 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
- out_vunmap_rbuf:
- 	vunmap(dic->rbuf);
- out_free_dic:
-+	if (verity)
-+		refcount_add(dic->nr_cpages - 1, &dic->ref);
- 	if (!verity)
- 		f2fs_decompress_end_io(dic->rpages, dic->cluster_size,
- 								ret, false);
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index b27b721079116..34990866cfe96 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -191,12 +191,37 @@ static void f2fs_verify_pages(struct page **rpages, unsigned int cluster_size)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 3669f060b6257..8deb0a260d928 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1929,6 +1929,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 	int offset = off & (sb->s_blocksize - 1);
+ 	size_t towrite = len;
+ 	struct page *page;
++	void *fsdata = NULL;
+ 	char *kaddr;
+ 	int err = 0;
+ 	int tocopy;
+@@ -1938,7 +1939,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 								towrite);
+ retry:
+ 		err = a_ops->write_begin(NULL, mapping, off, tocopy, 0,
+-							&page, NULL);
++							&page, &fsdata);
+ 		if (unlikely(err)) {
+ 			if (err == -ENOMEM) {
+ 				congestion_wait(BLK_RW_ASYNC, HZ/50);
+@@ -1954,7 +1955,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 		flush_dcache_page(page);
  
- static void f2fs_verify_bio(struct bio *bio)
- {
--	struct page *page = bio_first_page_all(bio);
--	struct decompress_io_ctx *dic =
--			(struct decompress_io_ctx *)page_private(page);
-+	struct bio_vec *bv;
-+	struct bvec_iter_all iter_all;
-+
-+	bio_for_each_segment_all(bv, bio, iter_all) {
-+		struct page *page = bv->bv_page;
-+		struct decompress_io_ctx *dic;
-+
-+		dic = (struct decompress_io_ctx *)page_private(page);
-+
-+		if (dic) {
-+			if (refcount_dec_not_one(&dic->ref))
-+				continue;
-+			f2fs_verify_pages(dic->rpages,
-+						dic->cluster_size);
-+			f2fs_free_dic(dic);
-+			continue;
-+		}
-+
-+		if (bio->bi_status || PageError(page))
-+			goto clear_uptodate;
- 
--	f2fs_verify_pages(dic->rpages, dic->cluster_size);
--	f2fs_free_dic(dic);
-+		if (fsverity_verify_page(page)) {
-+			SetPageUptodate(page);
-+			goto unlock;
-+		}
-+clear_uptodate:
-+		ClearPageUptodate(page);
-+		ClearPageError(page);
-+unlock:
-+		unlock_page(page);
-+	}
- }
- #endif
- 
+ 		a_ops->write_end(NULL, mapping, off, tocopy, tocopy,
+-						page, NULL);
++						page, fsdata);
+ 		offset = 0;
+ 		towrite -= tocopy;
+ 		off += tocopy;
 -- 
 2.20.1
 
