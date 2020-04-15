@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5193C1A9DAC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:47:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 596051A9DB0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:47:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgVa-0003q1-59; Wed, 15 Apr 2020 11:47:10 +0000
+	id 1jOgVj-0000ze-0r; Wed, 15 Apr 2020 11:47:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgVY-0003pn-DN
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:47:08 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgVh-0000zX-Gm
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:47:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jbd1RCsL0q3yaYtLXyJxL7sf5g/LsjH/jHXGkj7GhZo=; b=mFUKBHHuN0BpRDOLNaBKKRVM0R
- jiCKIUL3bipnDXZfq+hmyWInkTYYyyRKZ6Qnv2t3r02gJz/1b7lgnTdwbTgHE0IQ0176khshKJ/I5
- Isy3yb4L9/ZctoLsvMAwxqwYHsj3NyhDTDdbhITSHHE/rdkQewiaj5rr0U+es+ExwVjQ=;
+ bh=BmaIL9AHXQoY9Gvpq2TxL5oHhkr12OzGdLrsCBFg9qc=; b=hTAGIuBGTYIqf972iajjAI8PwD
+ xj+II4RrObpluJh/7ous/gjLF7LTPXPKKrDWAQ5qFc8G77XpriCgDL3pbF+5S2S+teYb1qWfEo+Ob
+ mSF0QAbiK86PFtnxRT8T56OA0KgzgCuPzxVdsnZPqUQbvDqr5DgfdsIPd3c59+ovFw6k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jbd1RCsL0q3yaYtLXyJxL7sf5g/LsjH/jHXGkj7GhZo=; b=SF4W0kD6LlUekLhhLlioaxpKWB
- JUXS7nXZGQBWzPIbVsgJFUzpp+dsPPwcys0/Y+xf5Hqy7NOUGDm5wARhP1FEhoXTlcvHW3bekuJ8u
- ynjULE4nmqDm+LHdS6HDYyo2plGLwX5oXV+N/Z28yvy98bza+sWIwpHDWLIlYCa1p+/E=;
+ bh=BmaIL9AHXQoY9Gvpq2TxL5oHhkr12OzGdLrsCBFg9qc=; b=OVmOOu9XqUYlNSP+xPNXo0PvIV
+ PLJZEVgXFuKOq9yEUI1CHUkCIuwwtbbzhKgslT00YkeEzWCQNlbvCnBVxxlpOz7pOhCw07xFWLl/H
+ b8+amcL5XfEwFyQ1ImN+hrC7iawAP/HP9Khsuek1EpsMpbCckAUWeRJH436iIRBraNgM=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgVU-000H16-Ir
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:47:08 +0000
+ id 1jOgVf-000H3A-FP
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:47:17 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6828D21582;
- Wed, 15 Apr 2020 11:46:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 523B121582;
+ Wed, 15 Apr 2020 11:47:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586951219;
- bh=J2Tscg0fW3pcCyob+6YGj5QCeCv1qdJ+BxsxnfTJYBA=;
+ s=default; t=1586951230;
+ bh=gijuMuXAk82YOcDVXOKELxZqLlkkMSKbpQf1l7DG7WE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=k1x68miR8+PVvj5NLAWUSdsuP7Dw5TMFzxtFDlS6In6dgAMhxqK+ECefGAItwNfqf
- jdd9wXoVaWi9VWnA95y50aZFwK4uDwEKa0kNuCTaSO8RXH3v3AgFhfvnXfctxAsVy2
- LfMqHiBn9ornQwXhVYjMXeRxLoh6r8914i2aq/Nk=
+ b=x6YRUBfD32iKXTGFDAke5bJg1x2WB5myvHcZ1jTg+XQGI2s8T56c1ST3R8oIdyWeZ
+ MLlRi5g+IvzL+1Gw7H2i3ReUZI7npBdeNq0QUGTvx4gtrCHpZHimlvz8OJYLUtAemZ
+ Jmk+IKnsvYlQBF5PWpcH3a1O582HrUy9+9XS9npA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:46:13 -0400
-Message-Id: <20200415114623.14972-30-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:46:23 -0400
+Message-Id: <20200415114623.14972-40-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415114623.14972-1-sashal@kernel.org>
 References: <20200415114623.14972-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgVU-000H16-Ir
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 30/40] f2fs: fix NULL pointer
- dereference in f2fs_write_begin()
+X-Headers-End: 1jOgVf-000H3A-FP
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 40/40] f2fs: fix to wait all node
+ page writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,73 +99,54 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 62f63eea291b50a5677ae7503ac128803174698a ]
+[ Upstream commit dc5a941223edd803f476a153abd950cc3a83c3e1 ]
 
-BUG: kernel NULL pointer dereference, address: 0000000000000000
-RIP: 0010:f2fs_write_begin+0x823/0xb90 [f2fs]
-Call Trace:
- f2fs_quota_write+0x139/0x1d0 [f2fs]
- write_blk+0x36/0x80 [quota_tree]
- get_free_dqblk+0x42/0xa0 [quota_tree]
- do_insert_tree+0x235/0x4a0 [quota_tree]
- do_insert_tree+0x26e/0x4a0 [quota_tree]
- do_insert_tree+0x26e/0x4a0 [quota_tree]
- do_insert_tree+0x26e/0x4a0 [quota_tree]
- qtree_write_dquot+0x70/0x190 [quota_tree]
- v2_write_dquot+0x43/0x90 [quota_v2]
- dquot_acquire+0x77/0x100
- f2fs_dquot_acquire+0x2f/0x60 [f2fs]
- dqget+0x310/0x450
- dquot_transfer+0x7e/0x120
- f2fs_setattr+0x11a/0x4a0 [f2fs]
- notify_change+0x349/0x480
- chown_common+0x168/0x1c0
- do_fchownat+0xbc/0xf0
- __x64_sys_fchownat+0x20/0x30
- do_syscall_64+0x5f/0x220
- entry_SYSCALL_64_after_hwframe+0x44/0xa9
+There is a race condition that we may miss to wait for all node pages
+writeback, fix it.
 
-Passing fsdata parameter to .write_{begin,end} in f2fs_quota_write(),
-so that if quota file is compressed one, we can avoid above NULL
-pointer dereference when updating quota content.
+- fsync()				- shrink
+ - f2fs_do_sync_file
+					 - __write_node_page
+					  - set_page_writeback(page#0)
+					  : remove DIRTY/TOWRITE flag
+  - f2fs_fsync_node_pages
+  : won't find page #0 as TOWRITE flag was removeD
+  - f2fs_wait_on_node_pages_writeback
+  : wont' wait page #0 writeback as it was not in fsync_node_list list.
+					   - f2fs_add_fsync_node_entry
 
+Fixes: 50fa53eccf9f ("f2fs: fix to avoid broken of dnode block list")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/super.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ fs/f2fs/node.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index da348cf4ff56a..45f8f6ec22a55 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1648,6 +1648,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
- 	int offset = off & (sb->s_blocksize - 1);
- 	size_t towrite = len;
- 	struct page *page;
-+	void *fsdata = NULL;
- 	char *kaddr;
- 	int err = 0;
- 	int tocopy;
-@@ -1657,7 +1658,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
- 								towrite);
- retry:
- 		err = a_ops->write_begin(NULL, mapping, off, tocopy, 0,
--							&page, NULL);
-+							&page, &fsdata);
- 		if (unlikely(err)) {
- 			if (err == -ENOMEM) {
- 				congestion_wait(BLK_RW_ASYNC, HZ/50);
-@@ -1672,7 +1673,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
- 		flush_dcache_page(page);
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index e5d474681471c..f0714c1258c79 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1559,15 +1559,16 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 	if (atomic && !test_opt(sbi, NOBARRIER))
+ 		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
  
- 		a_ops->write_end(NULL, mapping, off, tocopy, tocopy,
--						page, NULL);
-+						page, fsdata);
- 		offset = 0;
- 		towrite -= tocopy;
- 		off += tocopy;
+-	set_page_writeback(page);
+-	ClearPageError(page);
+-
++	/* should add to global list before clearing PAGECACHE status */
+ 	if (f2fs_in_warm_node_list(sbi, page)) {
+ 		seq = f2fs_add_fsync_node_entry(sbi, page);
+ 		if (seq_id)
+ 			*seq_id = seq;
+ 	}
+ 
++	set_page_writeback(page);
++	ClearPageError(page);
++
+ 	fio.old_blkaddr = ni.blk_addr;
+ 	f2fs_do_write_node_page(nid, &fio);
+ 	set_node_addr(sbi, &ni, fio.new_blkaddr, is_fsync_dnode(page));
 -- 
 2.20.1
 
