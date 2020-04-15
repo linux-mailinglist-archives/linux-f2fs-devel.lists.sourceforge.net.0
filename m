@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0ED161A9C78
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E8191A9C76
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:35:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgKe-0000Bk-Qg; Wed, 15 Apr 2020 11:35:52 +0000
+	id 1jOgKd-00037b-Sg; Wed, 15 Apr 2020 11:35:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgKa-0000BK-RX
+ (envelope-from <sashal@kernel.org>) id 1jOgKa-00037O-Ra
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z2i99+0XfL+a9jNTDzMq/wa2Lk7iWBDP6uWT5knmUvw=; b=GMMVMA4DySceLkUjaf+k+u3TC1
- 9epL0cd1sz4j47S7TkFH/GA83nT1PrUVPBQrrtB7yvnEhc0Vd9+A0SyGAUud5jwbW4z5eVz+Ezeen
- +J6hikwk4LfVlyies3mBOiTOOX60RrXbzLArpUZVndirQ9nMzji0XnCOf0R6VNk2dt24=;
+ bh=UAzVMcuT3GQfm+kQDJ1+/wbjtMOA6IAy1VolI5KMRl8=; b=B2gXqnAoKR7hEoSlEQjXYyBJ3z
+ 4mFl1xGcJGgkdsvabo/aT7tTpdFzqKuQBY5+X2aM4pQLfKVAuGdVRcDTRFBT4rArnB0ZMuWAaVZxb
+ Mh1iAU786Dxcfmx1dBfLWhEag8lnirAwV8N5YtSjVBkEQLgN8q781krx9K7Ee+ZbqdXk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Z2i99+0XfL+a9jNTDzMq/wa2Lk7iWBDP6uWT5knmUvw=; b=QpXThPJrkeRPRpJhmOT8bvkmxE
- D9U4+rZDJiCgiKh4OuWREn/08kmTCVrayJpiJtJzLPzSXqyvJMKPqjuVkZWKip21WoB/0J58wD7zn
- ef+wAhUVSPHrOIdF94GQqOwgwCrR01poZDAQ/KBmwhhIjPBNxEheMciCkvw+oehtMXag=;
+ bh=UAzVMcuT3GQfm+kQDJ1+/wbjtMOA6IAy1VolI5KMRl8=; b=Ze+bcye4JGkFvRDp9JMY+BTaMA
+ 1aaw3L+G1CxGNYIY1CepZA2GrFE3DjiV+7e5X2LAiNW+7m8Cv5QSHCltX5apQd2NKi1lzUoISw5hh
+ Wv4+o9+FnU+TiLAqUw5jZnF2vovn3yg1hJnq+JdJr0QyLB1ltQ8S1jjXXcpt3whQ1PKw=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgKV-002XSX-BF
+ id 1jOgKX-002XSs-9H
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:35:47 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D7D2A20936;
- Wed, 15 Apr 2020 11:35:36 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 06D84214AF;
+ Wed, 15 Apr 2020 11:35:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950537;
- bh=0H5qTCo9MCcBp0sS1kS6EKUNGIM5n9EoGASG7YstmfQ=;
+ s=default; t=1586950538;
+ bh=z2JrKhRoKKS+q6sD+25g7H8YHyXTUOaWkucZGm0Hnhg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WUrA3MaI94uMqVlpAoZEBD6LOx2C7UOFngShb6ph+GHbPZkA8Nliy1lo7PFhiRkK5
- PWSw6gXJwDvS6dP0CqQpRh5Sgg8G90K+uOZ/w7Ic1zmpu//NG06qFaqA/o5eX21bka
- fap22JLI9+6MBYHf42Ej5B6hPV+reawojua1b80M=
+ b=ARV1J8j9WhAIFeB+TZVMJz0tozcxA0hewsYEVEfPk+J3m7JQ/mpz1CX2QhhKn1555
+ ySh4beyq0w0XOoMLLBHwoDTkuqlUT5YydEftn22CvjH4c13eccj0RFN9hrc9WKPHS8
+ yY5wKS38ToXzgQzW3M+QG70SBKOqDa2WoXb6Ji8M=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:33:20 -0400
-Message-Id: <20200415113445.11881-45-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:33:21 -0400
+Message-Id: <20200415113445.11881-46-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
 References: <20200415113445.11881-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgKV-002XSX-BF
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 045/129] f2fs: Fix mount failure due
- to SPO after a successful online resize FS
+X-Headers-End: 1jOgKX-002XSs-9H
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 046/129] f2fs: Add a new CP flag to
+ help fsck fix resize SPO issues
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,48 +99,60 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Sahitya Tummala <stummala@codeaurora.org>
 
-[ Upstream commit 682756827501dc52593bf490f2d437c65ec9efcb ]
+[ Upstream commit c84ef3c5e65ccf99a7a91a4d731ebb5d6331a178 ]
 
-Even though online resize is successfully done, a SPO immediately
-after resize, still causes below error in the next mount.
+Add and set a new CP flag CP_RESIZEFS_FLAG during
+online resize FS to help fsck fix the metadata mismatch
+that may happen due to SPO during resize, where SB
+got updated but CP data couldn't be written yet.
 
-[   11.294650] F2FS-fs (sda8): Wrong user_block_count: 2233856
-[   11.300272] F2FS-fs (sda8): Failed to get valid F2FS checkpoint
-
-This is because after FS metadata is updated in update_fs_metadata()
-if the SBI_IS_DIRTY is not dirty, then CP will not be done to reflect
-the new user_block_count.
+fsck errors -
+Info: CKPT version = 6ed7bccb
+        Wrong user_block_count(2233856)
+[f2fs_do_mount:3365] Checkpoint is polluted
 
 Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/gc.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/f2fs/checkpoint.c    | 8 ++++++--
+ include/linux/f2fs_fs.h | 1 +
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 9cff2502e3bc6..2f645c591a000 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1579,11 +1579,17 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 		goto out;
- 	}
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 9c88fb3d255a2..79aaf06004f65 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1301,10 +1301,14 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 	else
+ 		__clear_ckpt_flags(ckpt, CP_ORPHAN_PRESENT_FLAG);
  
-+	mutex_lock(&sbi->cp_mutex);
- 	update_fs_metadata(sbi, -secs);
- 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
-+	set_sbi_flag(sbi, SBI_IS_DIRTY);
-+	mutex_unlock(&sbi->cp_mutex);
+-	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK) ||
+-		is_sbi_flag_set(sbi, SBI_IS_RESIZEFS))
++	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
+ 		__set_ckpt_flags(ckpt, CP_FSCK_FLAG);
+ 
++	if (is_sbi_flag_set(sbi, SBI_IS_RESIZEFS))
++		__set_ckpt_flags(ckpt, CP_RESIZEFS_FLAG);
++	else
++		__clear_ckpt_flags(ckpt, CP_RESIZEFS_FLAG);
 +
- 	err = f2fs_sync_fs(sbi->sb, 1);
- 	if (err) {
-+		mutex_lock(&sbi->cp_mutex);
- 		update_fs_metadata(sbi, secs);
-+		mutex_unlock(&sbi->cp_mutex);
- 		update_sb_metadata(sbi, secs);
- 		f2fs_commit_super(sbi, false);
- 	}
+ 	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED))
+ 		__set_ckpt_flags(ckpt, CP_DISABLED_FLAG);
+ 	else
+diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+index ac3f4888b3dfa..3c383ddd92ddd 100644
+--- a/include/linux/f2fs_fs.h
++++ b/include/linux/f2fs_fs.h
+@@ -125,6 +125,7 @@ struct f2fs_super_block {
+ /*
+  * For checkpoint
+  */
++#define CP_RESIZEFS_FLAG		0x00004000
+ #define CP_DISABLED_QUICK_FLAG		0x00002000
+ #define CP_DISABLED_FLAG		0x00001000
+ #define CP_QUOTA_NEED_FSCK_FLAG		0x00000800
 -- 
 2.20.1
 
