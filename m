@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A7301A9D49
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:45:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17BFE1A9D4B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:45:23 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgTj-0005La-Qb; Wed, 15 Apr 2020 11:45:15 +0000
+	id 1jOgTo-0005NE-VY; Wed, 15 Apr 2020 11:45:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgTi-0005LJ-W1
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:14 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgTn-0005Mf-FG
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=27Q4LfdW+YSoR1h6rv3oRp9sDU2NJ3hvvtE3jINfWvQ=; b=QnBa/62YVnb7i0U5UL6HPOBzpH
- 1fMhS391BR8Tk4Q/KTeyNLKS8y2jLfB1DmwGWgWDwOGlQF3RfS6R6kHxkVpDi63h+m9wFfx55lwYQ
- EwsjdGpwESFr1DJc7nz5iI6J8HwpiUoF+jQYvgD8Ux1TzCdWKqfjA5lbJJYDEXYVQW7g=;
+ bh=cAa3jvd6YB3LQBsFFIH2ITg+Rzc+7wI7mh7ECopLIRE=; b=V8lXVOG6U6orbGHdn1e9/+n81h
+ 6BM2+rUmXpm5o0hro32vW6sT/waiB8zIgpWpSzRxbunUCs8XB+9XrU7e1tLzpC3FS9+h9rKdVy5Aq
+ gfvBpo7uMsg+U8UV+4f0Nbyvfxe5m/vQ5lH4/CLKNBeREWIsPMksTxTxta5Io1j+dJz4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=27Q4LfdW+YSoR1h6rv3oRp9sDU2NJ3hvvtE3jINfWvQ=; b=RrMIYDkyVd6uK4FhpkMkkWMfmt
- 1ZUNY46oGN62br2nKh7Q+PAjYMq5OCdS1xPM7Vin/VjEsynEiLNscC3e+NyMO+JkATvHIADPr453e
- OxjLyi+VFKJz7R1ApFB/Re+QiujMSRgspZ8XPW/rmLFuTwg9eavRY5FA5ayd0QLXFv3k=;
+ bh=cAa3jvd6YB3LQBsFFIH2ITg+Rzc+7wI7mh7ECopLIRE=; b=ljGNYCce81zY5xaxCz4tr/QMOz
+ BEflsVcqa9kKEpOgbRPO/MYRSTHUOHGkPtkTnan4Bla1H9GsbpWkMOliBKkdddzUadOfjiTOnKjr8
+ 8YdxHJlMH84ZPve+sz4rskGfyYF3AuBELMNxtDuEREt+1TQsCzpxmN1GIEtp6OWqSKsc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgTh-00GU3m-2W
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:14 +0000
+ id 1jOgTk-00GU4N-84
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:45:19 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D8E7A20737;
- Wed, 15 Apr 2020 11:45:06 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id EC0D6206A2;
+ Wed, 15 Apr 2020 11:45:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586951107;
- bh=5SeT3hiRI9bcQ3mKwLYKdi/OeOWo9IX8PWvS3M83jsc=;
+ s=default; t=1586951110;
+ bh=PXaOv0pa7SYg7uqpUX7Vx5OsF7uktHKosvPTWaBldIk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=18n1J5QIVm3A+nB7H+heFmNlJj4qgwaNIgV2JOJvvPv+K6/rA5ZQXnq4IUtdZft7r
- xZ5PvQEIvraUu1RzQy0CuHb5/DsRByt69YdalwfmWf2wJWfw19IQH4l6CuF7gazZGS
- qheSZ32Vat5LsVH7VZACS9QFtW1N/r/w6aqmob6A=
+ b=MUDwrySGzWtPQ8N1dIbgDzeE04EaS3WwQoUGsHYRB3DiCFiEShJJ0rTW1nMVeMImi
+ Nr6efAydZ566Iallin7rmR55kdCNUSFAZtb1jO9seS6Gv3VzCo5qDVIxyYjQDoMAGo
+ WHq+++Rif8kAioNATPn2CRuRu66GUgJpXVeAstgg=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:43:39 -0400
-Message-Id: <20200415114442.14166-22-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:43:42 -0400
+Message-Id: <20200415114442.14166-25-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415114442.14166-1-sashal@kernel.org>
 References: <20200415114442.14166-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgTh-00GU3m-2W
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 22/84] f2fs: fix to show norecovery
- mount option
+X-Headers-End: 1jOgTk-00GU4N-84
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 25/84] f2fs: Fix mount failure due to
+ SPO after a successful online resize FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,65 +97,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Sahitya Tummala <stummala@codeaurora.org>
 
-[ Upstream commit a9117eca1de6b738e713d2142126db2cfbf6fb36 ]
+[ Upstream commit 682756827501dc52593bf490f2d437c65ec9efcb ]
 
-Previously, 'norecovery' mount option will be shown as
-'disable_roll_forward', fix to show original option name correctly.
+Even though online resize is successfully done, a SPO immediately
+after resize, still causes below error in the next mount.
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+[   11.294650] F2FS-fs (sda8): Wrong user_block_count: 2233856
+[   11.300272] F2FS-fs (sda8): Failed to get valid F2FS checkpoint
+
+This is because after FS metadata is updated in update_fs_metadata()
+if the SBI_IS_DIRTY is not dirty, then CP will not be done to reflect
+the new user_block_count.
+
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h  | 1 +
- fs/f2fs/super.c | 7 +++++--
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ fs/f2fs/gc.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 1a8b68ceaa62f..3edde3d6d089d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -100,6 +100,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
- #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
- #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
-+#define F2FS_MOUNT_NORECOVERY		0x04000000
- 
- #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
- #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 28441f4971b8d..94caf26901e0b 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -439,7 +439,7 @@ static int parse_options(struct super_block *sb, char *options)
- 			break;
- 		case Opt_norecovery:
- 			/* this option mounts f2fs with ro */
--			set_opt(sbi, DISABLE_ROLL_FORWARD);
-+			set_opt(sbi, NORECOVERY);
- 			if (!f2fs_readonly(sb))
- 				return -EINVAL;
- 			break;
-@@ -1348,6 +1348,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 5877bd7296896..e611d768efde3 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1532,11 +1532,17 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		goto out;
  	}
- 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
- 		seq_puts(seq, ",disable_roll_forward");
-+	if (test_opt(sbi, NORECOVERY))
-+		seq_puts(seq, ",norecovery");
- 	if (test_opt(sbi, DISCARD))
- 		seq_puts(seq, ",discard");
- 	else
-@@ -3488,7 +3490,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		goto reset_checkpoint;
  
- 	/* recover fsynced data */
--	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
-+	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
-+			!test_opt(sbi, NORECOVERY)) {
- 		/*
- 		 * mount should be failed, when device has readonly mode, and
- 		 * previous checkpoint was not done by clean system shutdown.
++	mutex_lock(&sbi->cp_mutex);
+ 	update_fs_metadata(sbi, -secs);
+ 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
++	set_sbi_flag(sbi, SBI_IS_DIRTY);
++	mutex_unlock(&sbi->cp_mutex);
++
+ 	err = f2fs_sync_fs(sbi->sb, 1);
+ 	if (err) {
++		mutex_lock(&sbi->cp_mutex);
+ 		update_fs_metadata(sbi, secs);
++		mutex_unlock(&sbi->cp_mutex);
+ 		update_sb_metadata(sbi, secs);
+ 		f2fs_commit_super(sbi, false);
+ 	}
 -- 
 2.20.1
 
