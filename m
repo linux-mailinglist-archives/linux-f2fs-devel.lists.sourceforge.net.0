@@ -2,79 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C0391A9081
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 03:34:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6527A1A90CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 04:13:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOWwe-0007WR-N0; Wed, 15 Apr 2020 01:34:28 +0000
+	id 1jOXYg-0003Kj-Ms; Wed, 15 Apr 2020 02:13:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <akpm@linux-foundation.org>) id 1jOWwc-0007WI-SB
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 01:34:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jOXYe-0003KX-PJ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 02:13:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
- :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jQeXrHMSB4muOGa9bIWb5FzCcoGTEEOSoGfj3H++h3E=; b=XWvKhqKpkyn0uIx0gLOkM4DG7n
- Y0p/q7AGQvl51cu4aizEKn6FXRGCAOPsh/YFU6gPp8ESTduQ9II8x7gVbQ6XSyGq6zEZYWWGK32Xt
- CYiPiuRJQiXRq3/QOkqAdFRJv36KSUJ+QJJTWOFpvEvXyAZIG8aWiYwre6FkXzwpFbJ0=;
+ bh=LVAQ9J7ES0gVdEpWuTTGWknTSsSV4mYXh79p5m57x78=; b=QqETtyA+FubDYnzPj5XFeCG4KX
+ 6SYUqA2eD+GawUyCzEYzojBmpGbDeP2hDpnCd88L+bgRtY7Y38OobMXHtOK9KVhkDX7vxxIGs/qpO
+ A95UR/iJ3R+oQ31FqBHKHbC0aG3t0i00VMARXK+zy3lasBzoPv7VvZc/KHqzbSPO3sNM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
- In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jQeXrHMSB4muOGa9bIWb5FzCcoGTEEOSoGfj3H++h3E=; b=hJBO1I9k0HWMDkUcKZjd08/wyq
- RmsmIL4QTUGY99E7w4oPT6yNMO7krZ2RnV1XMV5BajeGXke6EYhsG/r5ybIncWrWIubZopz3MYRbM
- BC0aEQbmpf7TPptzJ8yhz6JoX/CBkIfloZpqsf+iABzwM1un8gN5V48tCUGNtZPxlW6o=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=LVAQ9J7ES0gVdEpWuTTGWknTSsSV4mYXh79p5m57x78=; b=b
+ bDIcT3qJQi2CWCYioTVPI23z3Y79XsPj4tTPJQ3eGKcAVRJkdO+cshJmqSNXHi5Lc3ugA9NzK+v5E
+ kpdQUaKNtTQVXJiad98M7o+xMA3nEPlakpD6WJQ02INqBxVtqXHkoth43W8jgKW+UMYOsfR2+Jmtw
+ 5NIucYWsA5YIBiBo=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOWwb-00FQpF-H6
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 01:34:26 +0000
-Received: from localhost.localdomain (c-73-231-172-41.hsd1.ca.comcast.net
- [73.231.172.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5CD58206D9;
- Wed, 15 Apr 2020 01:17:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586913426;
- bh=Z8t12Kri4dLkYoQfBj9LeTBHSVbJC29k8QLFe4WYAn0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=trHGKNCxzakSMiiFFW7h7ipr5l5ZPqXMRMACUtk4YKpwd8Pg1RJ2PiBsRP5nCE9+1
- fCvzyZDvGOZsZH+JWcOhF2bmZOk4UdQ9IgBloKo9E4jlYJXAc0OSn746DXLsWt7WBJ
- s1ct6x0rSpHRCfj/HRWtfY1TDdkeieGLLTsLzoWE=
-Date: Tue, 14 Apr 2020 18:17:05 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Matthew Wilcox <willy@infradead.org>
-Message-Id: <20200414181705.bfc4c0087092051a9475141e@linux-foundation.org>
-In-Reply-To: <20200414150233.24495-6-willy@infradead.org>
-References: <20200414150233.24495-1-willy@infradead.org>
- <20200414150233.24495-6-willy@infradead.org>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-X-Spam-Score: -0.4 (/)
+ id 1jOXYZ-00FRyT-7U
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 02:13:44 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 6234E7247FE3D8DBD1C0;
+ Wed, 15 Apr 2020 10:13:27 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
+ 14.3.487.0; Wed, 15 Apr 2020 10:13:21 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Wed, 15 Apr 2020 10:13:13 +0800
+Message-ID: <20200415021313.95538-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
+MIME-Version: 1.0
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOWwb-00FQpF-H6
-Subject: Re: [f2fs-dev] [PATCH v11 05/25] mm: Add new readahead_control API
+X-Headers-End: 1jOXYZ-00FRyT-7U
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix to avoid page count leak
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,37 +73,85 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, William Kucharski <william.kucharski@oracle.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, Christoph Hellwig <hch@lst.de>,
- linux-btrfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, 14 Apr 2020 08:02:13 -0700 Matthew Wilcox <willy@infradead.org> wrote:
+In f2fs_read_data_pages(), once we add page into radix tree, we need to
+release reference count of that page, however when f2fs_read_multi_pages()
+fails, we didn't handle that case correctly, fix it.
 
-> From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-> 
-> Filesystems which implement the upcoming ->readahead method will get
-> their pages by calling readahead_page() or readahead_page_batch().
-> These functions support large pages, even though none of the filesystems
-> to be converted do yet.
-> 
-> +static inline struct page *readahead_page(struct readahead_control *rac)
-> +static inline unsigned int __readahead_batch(struct readahead_control *rac,
-> +		struct page **array, unsigned int array_sz)
+Fixes: 4c8ff7095bef ("f2fs: support data compression")
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v2:
+- add Fixes tag
+- improve commit message a bit
+ fs/f2fs/compress.c | 2 +-
+ fs/f2fs/data.c     | 6 +++++-
+ fs/f2fs/f2fs.h     | 1 +
+ 3 files changed, 7 insertions(+), 2 deletions(-)
 
-These are large functions.  Was it correct to inline them?
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 498e0c2ba6ea..dbe3fa359a29 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -79,7 +79,7 @@ static void f2fs_drop_rpages(struct compress_ctx *cc, int len, bool unlock)
+ 	}
+ }
+ 
+-static void f2fs_put_rpages(struct compress_ctx *cc)
++void f2fs_put_rpages(struct compress_ctx *cc)
+ {
+ 	f2fs_drop_rpages(cc, cc->cluster_size, false);
+ }
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 1139d8cf4b8d..22a31e2401cf 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2138,7 +2138,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 		} else if (!PageUptodate(page)) {
+ 			continue;
+ 		}
+-		unlock_page(page);
++		f2fs_put_page(page, 1);
+ 		cc->rpages[i] = NULL;
+ 		cc->nr_rpages--;
+ 	}
+@@ -2303,6 +2303,8 @@ int f2fs_mpage_readpages(struct address_space *mapping,
+ 							max_nr_pages,
+ 							&last_block_in_bio,
+ 							is_readahead, false);
++				if (ret)
++					f2fs_put_rpages(&cc);
+ 				f2fs_destroy_compress_ctx(&cc);
+ 				if (ret)
+ 					goto set_error_page;
+@@ -2346,6 +2348,8 @@ int f2fs_mpage_readpages(struct address_space *mapping,
+ 							max_nr_pages,
+ 							&last_block_in_bio,
+ 							is_readahead, false);
++				if (ret)
++					f2fs_put_rpages(&cc);
+ 				f2fs_destroy_compress_ctx(&cc);
+ 			}
+ 		}
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index da5e9dd747fa..94d044feffd0 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3803,6 +3803,7 @@ static inline bool f2fs_post_read_required(struct inode *inode)
+  */
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ bool f2fs_is_compressed_page(struct page *page);
++void f2fs_put_rpages(struct compress_ctx *cc);
+ struct page *f2fs_compress_control_page(struct page *page);
+ int f2fs_prepare_compress_overwrite(struct inode *inode,
+ 			struct page **pagep, pgoff_t index, void **fsdata);
+-- 
+2.18.0.rc1
 
-The batching API only appears to be used by fuse?  If so, do we really
-need it?  Does it provide some functional need, or is it a performance
-thing?  If the latter, how significant is it?
-
-The code adds quite a few (inlined!) VM_BUG_ONs.  Can we plan to remove
-them at some stage?  Such as, before Linus shouts at us :)
 
 
 _______________________________________________
