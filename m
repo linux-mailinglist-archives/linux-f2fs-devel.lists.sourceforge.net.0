@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4B341A9D0E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:43:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E3651A9D1C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:43:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgRk-0000kP-8c; Wed, 15 Apr 2020 11:43:12 +0000
+	id 1jOgRq-0003VX-1F; Wed, 15 Apr 2020 11:43:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgRj-0000kJ-Kj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:43:11 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgRp-0003VR-HR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:43:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LchKNXrbEj08UFDhwvJhiCeab/vP6C1pCzO+KknGDC0=; b=lC2/JEi2UJPd/zq5oAAG8vuGam
- qXtsU+0t9WS+qPGUKA6nqX7BH7GxfFsGfRoJAN6z7frCulvLYFi2vdbJApg0qWYk6XCcBKWR85z4e
- 2aW3ds7/kHlxFzagSjl8w1lXGxvGiTuOtdBmnhIdnV4oI8JsYNhHuUDIDX3jJCTL1deg=;
+ bh=KFwP3scTAKF78Lco/+z0m3Drf/7qS5OgwMW4nAqVEeE=; b=Qd2KmIkABkCMa5FK0RneGQTiyQ
+ wCrp8JmlqtET+1RWbMogSMmQTn7cvH2rvJq3qobt0rRLqzGRN+MTZ7QF7xXqouHcZ6FyZGrMMMWP4
+ shXd0+7B+4vbRdZe1YidAuFYGmQeUgJmrnYoOZ2ktJprqjuF/6Dmjycr1a35uqwBdzpE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LchKNXrbEj08UFDhwvJhiCeab/vP6C1pCzO+KknGDC0=; b=SovfBPhj6ESI0jqEjykm+liKSV
- /AgjTsLy/d+v03i9HxLKYDngX5oR9h8RyUx1BwjvVlaaRDQV0zwE0/c8GrNHKFPFC+DE5Ph3x0HLw
- CB5u0MgVKE3e//FndNtOpUdLvnF9B6xneqTDNZP0amD5UAvzHKks1lNG3hct8dD33QIQ=;
+ bh=KFwP3scTAKF78Lco/+z0m3Drf/7qS5OgwMW4nAqVEeE=; b=iqmDBqUmW7PJh6v+t8O0Z2dcEC
+ 3ryX8YWVNOzdGlnUyecQCU2pPfWusr9Q6NLcUpwdzOSiTBMssBn4eVxlZMOopUjiyTN4f4N/22Fu4
+ B5CWfzkjgX/B6AJSPjpju9JYF0Ce2v/2JMHOldWbFvIvAAi4UjRTRdB1H4z4NpHNPDM4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgRi-00GTiI-Df
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:43:11 +0000
+ id 1jOgRn-002Yc9-Ra
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:43:17 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 35C6D20775;
- Wed, 15 Apr 2020 11:43:04 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9916F20936;
+ Wed, 15 Apr 2020 11:43:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950984;
- bh=SLx+8Doplj29R1VJ6jV+nfPg3iJ+iqYQ9SdTzhFzqJ0=;
+ s=default; t=1586950989;
+ bh=hTRxnYZ1co6Pn1/bWbg7KuCbkL9xS1F43IkbvJiqbr8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qJ9ysCC3jZV5gYmbcGWgo+Gc/PDOoyGN6xs9t9P3j5NyiYtL/2/Ry2byzOVXCFAZX
- hQudjNDI/W1Nz68VjyIAhct5WXTzMhIthWEycPAoD7e/5iqMPtfbjQYZOanX2hXpuk
- ioUWre9XwnRUUcrXTLUorE27aTTCd/fZoOlRzl54=
+ b=o0lA0kIPPz7CW97jnwF097bOd5rsyywi/F4nCqOnEKr9eYQqLpwC9Qw0XjJGSzEHs
+ kcPrtZ4/kmG9GSQTd3PduBX/tDj/97Ex0pg2RNu1Kkgprh5XlYmQQQWU4urb4ceJrU
+ csICgW4R0jwex1ARmoeWgfkwKR1IoolhMy7BJqH8=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:41:12 -0400
-Message-Id: <20200415114226.13103-32-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:41:16 -0400
+Message-Id: <20200415114226.13103-36-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415114226.13103-1-sashal@kernel.org>
 References: <20200415114226.13103-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgRi-00GTiI-Df
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.5 032/106] f2fs: fix to show norecovery
- mount option
+X-Headers-End: 1jOgRn-002Yc9-Ra
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.5 036/106] f2fs: fix to update
+ f2fs_super_block fields under sb_lock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,63 +99,56 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit a9117eca1de6b738e713d2142126db2cfbf6fb36 ]
+[ Upstream commit a4ba5dfc5c88e49bb03385abfdd28c5a0acfbb54 ]
 
-Previously, 'norecovery' mount option will be shown as
-'disable_roll_forward', fix to show original option name correctly.
+Fields in struct f2fs_super_block should be updated under coverage
+of sb_lock, fix to adjust update_sb_metadata() for that rule.
 
+Fixes: 04f0b2eaa3b3 ("f2fs: ioctl for removing a range from F2FS")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h  | 1 +
- fs/f2fs/super.c | 7 +++++--
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ fs/f2fs/gc.c | 17 +++++++++++++----
+ 1 file changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b0e0535f7f56a..647f8b31b268b 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -100,6 +100,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00800000
- #define F2FS_MOUNT_RESERVE_ROOT		0x01000000
- #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
-+#define F2FS_MOUNT_NORECOVERY		0x04000000
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index b3d3996232901..d6705ded0141a 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1432,12 +1432,19 @@ static int free_segment_range(struct f2fs_sb_info *sbi, unsigned int start,
+ static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
+ {
+ 	struct f2fs_super_block *raw_sb = F2FS_RAW_SUPER(sbi);
+-	int section_count = le32_to_cpu(raw_sb->section_count);
+-	int segment_count = le32_to_cpu(raw_sb->segment_count);
+-	int segment_count_main = le32_to_cpu(raw_sb->segment_count_main);
+-	long long block_count = le64_to_cpu(raw_sb->block_count);
++	int section_count;
++	int segment_count;
++	int segment_count_main;
++	long long block_count;
+ 	int segs = secs * sbi->segs_per_sec;
  
- #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
- #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index a0a2f46f450dc..b2f8b934d8fc5 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -439,7 +439,7 @@ static int parse_options(struct super_block *sb, char *options)
- 			break;
- 		case Opt_norecovery:
- 			/* this option mounts f2fs with ro */
--			set_opt(sbi, DISABLE_ROLL_FORWARD);
-+			set_opt(sbi, NORECOVERY);
- 			if (!f2fs_readonly(sb))
- 				return -EINVAL;
- 			break;
-@@ -1348,6 +1348,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
++	down_write(&sbi->sb_lock);
++
++	section_count = le32_to_cpu(raw_sb->section_count);
++	segment_count = le32_to_cpu(raw_sb->segment_count);
++	segment_count_main = le32_to_cpu(raw_sb->segment_count_main);
++	block_count = le64_to_cpu(raw_sb->block_count);
++
+ 	raw_sb->section_count = cpu_to_le32(section_count + secs);
+ 	raw_sb->segment_count = cpu_to_le32(segment_count + segs);
+ 	raw_sb->segment_count_main = cpu_to_le32(segment_count_main + segs);
+@@ -1451,6 +1458,8 @@ static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
+ 		raw_sb->devs[last_dev].total_segments =
+ 						cpu_to_le32(dev_segs + segs);
  	}
- 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
- 		seq_puts(seq, ",disable_roll_forward");
-+	if (test_opt(sbi, NORECOVERY))
-+		seq_puts(seq, ",norecovery");
- 	if (test_opt(sbi, DISCARD))
- 		seq_puts(seq, ",discard");
- 	else
-@@ -3499,7 +3501,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		goto reset_checkpoint;
++
++	up_write(&sbi->sb_lock);
+ }
  
- 	/* recover fsynced data */
--	if (!test_opt(sbi, DISABLE_ROLL_FORWARD)) {
-+	if (!test_opt(sbi, DISABLE_ROLL_FORWARD) &&
-+			!test_opt(sbi, NORECOVERY)) {
- 		/*
- 		 * mount should be failed, when device has readonly mode, and
- 		 * previous checkpoint was not done by clean system shutdown.
+ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
 -- 
 2.20.1
 
