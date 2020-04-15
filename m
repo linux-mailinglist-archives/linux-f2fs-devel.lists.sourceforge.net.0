@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C31D1A9CA0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:37:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD79C1A9C93
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Apr 2020 13:36:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jOgLr-0003DJ-4s; Wed, 15 Apr 2020 11:37:07 +0000
+	id 1jOgLc-0003XO-Mf; Wed, 15 Apr 2020 11:36:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jOgLb-0003BX-65
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:51 +0000
+ (envelope-from <sashal@kernel.org>) id 1jOgLa-0003X0-KB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TS1JB7dr1SwnB6X3RDgecYGQtTza7oY7w1Kl7cYrGIc=; b=AQBb3uLsDHxrYqkUAiLZBws4OM
- KBMDZ9OUtLz7XMe4AYfeXNkqWof+sTxH2xiQRAg+/4w/9ykNeFPd4DfsJ+I7n965lEjYQF14L/3dZ
- 6hIR7W/Bgc171EZgF1dGF9BzbQeRF2DR/vndBeyXZV+hfjyXUTtsRawibvnoR6mcirmw=;
+ bh=vcGupc0w1OpR0UgbjI2UXdhR7i6mDTANJQQoOiMRVQk=; b=H8hlGPbmclIBYGnYYyAP5USD4D
+ ttP3s8X9f3JHX6uNN3EEwA8Q9PSzIapAsQIc64DOCVl8X0/MLyVE+GGHhmhRRTjOgxHW+38fZ201j
+ byTYM0uX5FW8Zkw2rvAbmh4Vamay2zGSF9et9O90qmy6w2sFBag5GaQu0WZcmsf+slEo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TS1JB7dr1SwnB6X3RDgecYGQtTza7oY7w1Kl7cYrGIc=; b=egDBDuEi249wMC5TVF5RcWfpIl
- nWUEaTDeFfrmjdiyr9XkMs2FtKnGSYK6zrtTOUUOm0OHLJtXvpvl5S3oZZPIYj+II/pcjUKcqtckU
- ekcS9duEyKP6tG9iFVnYmkBC5i/eS2jAEffTx9Ia4LjFkM5pEadg5+fRvgPSc8wQmNX0=;
+ bh=vcGupc0w1OpR0UgbjI2UXdhR7i6mDTANJQQoOiMRVQk=; b=hpeRrKhfgNG2K+ddBqYD84+pCZ
+ NgX4Ou7s2fV25xnpAVBsabGxNK4DuqILGgKgRS9bmuAczsyX+SdgakdVR0Tcp2Ijuw66jj07g1LS7
+ 9NPwThBCXdopIKIC/ENTA0zVeJOeAs+hA5hNy2ppZvP6iVNxvQjV581fOGWU0Iu9xpbQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jOgLX-00GSjU-Cz
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:51 +0000
+ id 1jOgLY-000FIM-Fh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Apr 2020 11:36:50 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2031A20768;
- Wed, 15 Apr 2020 11:36:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4C49220936;
+ Wed, 15 Apr 2020 11:36:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950601;
- bh=W3JfxGtuYZ3e4P6WQe47wolTMldvgQkjlDJEiIf6qR8=;
+ s=default; t=1586950603;
+ bh=YLXBwgw3/Lm1c+qH8DOQy+FDCzjJEKmau8CPH+MDC5E=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YKCF3yiXIU73mMRcpdO3nCXtsbmvMuI2s9j1qUcHaMgZvK2YfyXgDMvI6DKx8wJ8b
- /1t3QP29G25vbqzEcnrUEf1kmPchwuT4sUVZvGOCvjjclC/KDORu7aCc237YpLT8ZC
- HDZVxI6PNR1tLf4HD3PdRSMlCCupOXuyfEGbW6q4=
+ b=QiCK4FXusW5AcJ/AAPFy4hB78r5rogA3Geb5jUh1lpVRD+HhdAg0H+K5332jqv0WU
+ psxtlSLb/+IkFoFIiVh9j2VSQ6b8NH5dDKv/5XQURqHIvKqQLSoZjupkBnpebM0MBw
+ CjHU3lpxXdbNLLrhXedhrt5ywwg9kaW9ar07SdxA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 15 Apr 2020 07:34:12 -0400
-Message-Id: <20200415113445.11881-97-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:34:13 -0400
+Message-Id: <20200415113445.11881-98-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
 References: <20200415113445.11881-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jOgLX-00GSjU-Cz
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 097/129] f2fs: fix potential .flags
- overflow on 32bit architecture
+X-Headers-End: 1jOgLY-000FIM-Fh
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.6 098/129] f2fs: fix NULL pointer
+ dereference in f2fs_verity_work()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,217 +91,108 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Ondrej Jirman <megous@megous.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Sasha Levin <sashal@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 7653b9d87516ed65e112d2273c65eca6f97d0a27 ]
+[ Upstream commit 79bbefb19f1359fb2cbd144d5a054649e7e583be ]
 
-f2fs_inode_info.flags is unsigned long variable, it has 32 bits
-in 32bit architecture, since we introduced FI_MMAP_FILE flag
-when we support data compression, we may access memory cross
-the border of .flags field, corrupting .i_sem field, result in
-below deadlock.
+If both compression and fsverity feature is on, generic/572 will
+report below NULL pointer dereference bug.
 
-To fix this issue, let's expand .flags as an array to grab enough
-space to store new flags.
+ BUG: kernel NULL pointer dereference, address: 0000000000000018
+ RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
+ #PF: supervisor read access in kernel mode
+ Workqueue: fsverity_read_queue f2fs_verity_work [f2fs]
+ RIP: 0010:f2fs_verity_work+0x60/0x90 [f2fs]
+ Call Trace:
+  process_one_work+0x16c/0x3f0
+  worker_thread+0x4c/0x440
+  ? rescuer_thread+0x350/0x350
+  kthread+0xf8/0x130
+  ? kthread_unpark+0x70/0x70
+  ret_from_fork+0x35/0x40
 
-Call Trace:
- __schedule+0x8d0/0x13fc
- ? mark_held_locks+0xac/0x100
- schedule+0xcc/0x260
- rwsem_down_write_slowpath+0x3ab/0x65d
- down_write+0xc7/0xe0
- f2fs_drop_nlink+0x3d/0x600 [f2fs]
- f2fs_delete_inline_entry+0x300/0x440 [f2fs]
- f2fs_delete_entry+0x3a1/0x7f0 [f2fs]
- f2fs_unlink+0x500/0x790 [f2fs]
- vfs_unlink+0x211/0x490
- do_unlinkat+0x483/0x520
- sys_unlink+0x4a/0x70
- do_fast_syscall_32+0x12b/0x683
- entry_SYSENTER_32+0xaa/0x102
+There are two issue in f2fs_verity_work():
+- it needs to traverse and verify all pages in bio.
+- if pages in bio belong to non-compressed cluster, accessing
+decompress IO context stored in page private will cause NULL
+pointer dereference.
 
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
-Tested-by: Ondrej Jirman <megous@megous.com>
+Fix them.
+
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h  | 99 ++++++++++++++++++++++++-------------------------
- fs/f2fs/inode.c |  2 +-
- 2 files changed, 50 insertions(+), 51 deletions(-)
+ fs/f2fs/compress.c |  2 ++
+ fs/f2fs/data.c     | 35 ++++++++++++++++++++++++++++++-----
+ 2 files changed, 32 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 64caa46f0c8bd..71801a1709f0f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -676,6 +676,44 @@ enum {
- 	MAX_GC_FAILURE
- };
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 1a86e483b0907..eb84c13c1182c 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -476,6 +476,8 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+ out_vunmap_rbuf:
+ 	vunmap(dic->rbuf);
+ out_free_dic:
++	if (verity)
++		refcount_add(dic->nr_cpages - 1, &dic->ref);
+ 	if (!verity)
+ 		f2fs_decompress_end_io(dic->rpages, dic->cluster_size,
+ 								ret, false);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index b27b721079116..34990866cfe96 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -191,12 +191,37 @@ static void f2fs_verify_pages(struct page **rpages, unsigned int cluster_size)
  
-+/* used for f2fs_inode_info->flags */
-+enum {
-+	FI_NEW_INODE,		/* indicate newly allocated inode */
-+	FI_DIRTY_INODE,		/* indicate inode is dirty or not */
-+	FI_AUTO_RECOVER,	/* indicate inode is recoverable */
-+	FI_DIRTY_DIR,		/* indicate directory has dirty pages */
-+	FI_INC_LINK,		/* need to increment i_nlink */
-+	FI_ACL_MODE,		/* indicate acl mode */
-+	FI_NO_ALLOC,		/* should not allocate any blocks */
-+	FI_FREE_NID,		/* free allocated nide */
-+	FI_NO_EXTENT,		/* not to use the extent cache */
-+	FI_INLINE_XATTR,	/* used for inline xattr */
-+	FI_INLINE_DATA,		/* used for inline data*/
-+	FI_INLINE_DENTRY,	/* used for inline dentry */
-+	FI_APPEND_WRITE,	/* inode has appended data */
-+	FI_UPDATE_WRITE,	/* inode has in-place-update data */
-+	FI_NEED_IPU,		/* used for ipu per file */
-+	FI_ATOMIC_FILE,		/* indicate atomic file */
-+	FI_ATOMIC_COMMIT,	/* indicate the state of atomical committing */
-+	FI_VOLATILE_FILE,	/* indicate volatile file */
-+	FI_FIRST_BLOCK_WRITTEN,	/* indicate #0 data block was written */
-+	FI_DROP_CACHE,		/* drop dirty page cache */
-+	FI_DATA_EXIST,		/* indicate data exists */
-+	FI_INLINE_DOTS,		/* indicate inline dot dentries */
-+	FI_DO_DEFRAG,		/* indicate defragment is running */
-+	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
-+	FI_NO_PREALLOC,		/* indicate skipped preallocated blocks */
-+	FI_HOT_DATA,		/* indicate file is hot */
-+	FI_EXTRA_ATTR,		/* indicate file has extra attribute */
-+	FI_PROJ_INHERIT,	/* indicate file inherits projectid */
-+	FI_PIN_FILE,		/* indicate file should not be gced */
-+	FI_ATOMIC_REVOKE_REQUEST, /* request to drop atomic data */
-+	FI_VERITY_IN_PROGRESS,	/* building fs-verity Merkle tree */
-+	FI_COMPRESSED_FILE,	/* indicate file's data can be compressed */
-+	FI_MMAP_FILE,		/* indicate file was mmapped */
-+	FI_MAX,			/* max flag, never be used */
-+};
+ static void f2fs_verify_bio(struct bio *bio)
+ {
+-	struct page *page = bio_first_page_all(bio);
+-	struct decompress_io_ctx *dic =
+-			(struct decompress_io_ctx *)page_private(page);
++	struct bio_vec *bv;
++	struct bvec_iter_all iter_all;
 +
- struct f2fs_inode_info {
- 	struct inode vfs_inode;		/* serve a vfs inode */
- 	unsigned long i_flags;		/* keep an inode flags for ioctl */
-@@ -688,7 +726,7 @@ struct f2fs_inode_info {
- 	umode_t i_acl_mode;		/* keep file acl mode temporarily */
++	bio_for_each_segment_all(bv, bio, iter_all) {
++		struct page *page = bv->bv_page;
++		struct decompress_io_ctx *dic;
++
++		dic = (struct decompress_io_ctx *)page_private(page);
++
++		if (dic) {
++			if (refcount_dec_not_one(&dic->ref))
++				continue;
++			f2fs_verify_pages(dic->rpages,
++						dic->cluster_size);
++			f2fs_free_dic(dic);
++			continue;
++		}
++
++		if (bio->bi_status || PageError(page))
++			goto clear_uptodate;
  
- 	/* Use below internally in f2fs*/
--	unsigned long flags;		/* use to pass per-file flags */
-+	unsigned long flags[BITS_TO_LONGS(FI_MAX)];	/* use to pass per-file flags */
- 	struct rw_semaphore i_sem;	/* protect fi info */
- 	atomic_t dirty_pages;		/* # of dirty pages */
- 	f2fs_hash_t chash;		/* hash value of given file name */
-@@ -2498,43 +2536,6 @@ static inline __u32 f2fs_mask_flags(umode_t mode, __u32 flags)
- 		return flags & F2FS_OTHER_FLMASK;
+-	f2fs_verify_pages(dic->rpages, dic->cluster_size);
+-	f2fs_free_dic(dic);
++		if (fsverity_verify_page(page)) {
++			SetPageUptodate(page);
++			goto unlock;
++		}
++clear_uptodate:
++		ClearPageUptodate(page);
++		ClearPageError(page);
++unlock:
++		unlock_page(page);
++	}
  }
+ #endif
  
--/* used for f2fs_inode_info->flags */
--enum {
--	FI_NEW_INODE,		/* indicate newly allocated inode */
--	FI_DIRTY_INODE,		/* indicate inode is dirty or not */
--	FI_AUTO_RECOVER,	/* indicate inode is recoverable */
--	FI_DIRTY_DIR,		/* indicate directory has dirty pages */
--	FI_INC_LINK,		/* need to increment i_nlink */
--	FI_ACL_MODE,		/* indicate acl mode */
--	FI_NO_ALLOC,		/* should not allocate any blocks */
--	FI_FREE_NID,		/* free allocated nide */
--	FI_NO_EXTENT,		/* not to use the extent cache */
--	FI_INLINE_XATTR,	/* used for inline xattr */
--	FI_INLINE_DATA,		/* used for inline data*/
--	FI_INLINE_DENTRY,	/* used for inline dentry */
--	FI_APPEND_WRITE,	/* inode has appended data */
--	FI_UPDATE_WRITE,	/* inode has in-place-update data */
--	FI_NEED_IPU,		/* used for ipu per file */
--	FI_ATOMIC_FILE,		/* indicate atomic file */
--	FI_ATOMIC_COMMIT,	/* indicate the state of atomical committing */
--	FI_VOLATILE_FILE,	/* indicate volatile file */
--	FI_FIRST_BLOCK_WRITTEN,	/* indicate #0 data block was written */
--	FI_DROP_CACHE,		/* drop dirty page cache */
--	FI_DATA_EXIST,		/* indicate data exists */
--	FI_INLINE_DOTS,		/* indicate inline dot dentries */
--	FI_DO_DEFRAG,		/* indicate defragment is running */
--	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
--	FI_NO_PREALLOC,		/* indicate skipped preallocated blocks */
--	FI_HOT_DATA,		/* indicate file is hot */
--	FI_EXTRA_ATTR,		/* indicate file has extra attribute */
--	FI_PROJ_INHERIT,	/* indicate file inherits projectid */
--	FI_PIN_FILE,		/* indicate file should not be gced */
--	FI_ATOMIC_REVOKE_REQUEST, /* request to drop atomic data */
--	FI_VERITY_IN_PROGRESS,	/* building fs-verity Merkle tree */
--	FI_COMPRESSED_FILE,	/* indicate file's data can be compressed */
--	FI_MMAP_FILE,		/* indicate file was mmapped */
--};
--
- static inline void __mark_inode_dirty_flag(struct inode *inode,
- 						int flag, bool set)
- {
-@@ -2556,20 +2557,18 @@ static inline void __mark_inode_dirty_flag(struct inode *inode,
- 
- static inline void set_inode_flag(struct inode *inode, int flag)
- {
--	if (!test_bit(flag, &F2FS_I(inode)->flags))
--		set_bit(flag, &F2FS_I(inode)->flags);
-+	test_and_set_bit(flag, F2FS_I(inode)->flags);
- 	__mark_inode_dirty_flag(inode, flag, true);
- }
- 
- static inline int is_inode_flag_set(struct inode *inode, int flag)
- {
--	return test_bit(flag, &F2FS_I(inode)->flags);
-+	return test_bit(flag, F2FS_I(inode)->flags);
- }
- 
- static inline void clear_inode_flag(struct inode *inode, int flag)
- {
--	if (test_bit(flag, &F2FS_I(inode)->flags))
--		clear_bit(flag, &F2FS_I(inode)->flags);
-+	test_and_clear_bit(flag, F2FS_I(inode)->flags);
- 	__mark_inode_dirty_flag(inode, flag, false);
- }
- 
-@@ -2660,19 +2659,19 @@ static inline void get_inline_info(struct inode *inode, struct f2fs_inode *ri)
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
- 
- 	if (ri->i_inline & F2FS_INLINE_XATTR)
--		set_bit(FI_INLINE_XATTR, &fi->flags);
-+		set_bit(FI_INLINE_XATTR, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DATA)
--		set_bit(FI_INLINE_DATA, &fi->flags);
-+		set_bit(FI_INLINE_DATA, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DENTRY)
--		set_bit(FI_INLINE_DENTRY, &fi->flags);
-+		set_bit(FI_INLINE_DENTRY, fi->flags);
- 	if (ri->i_inline & F2FS_DATA_EXIST)
--		set_bit(FI_DATA_EXIST, &fi->flags);
-+		set_bit(FI_DATA_EXIST, fi->flags);
- 	if (ri->i_inline & F2FS_INLINE_DOTS)
--		set_bit(FI_INLINE_DOTS, &fi->flags);
-+		set_bit(FI_INLINE_DOTS, fi->flags);
- 	if (ri->i_inline & F2FS_EXTRA_ATTR)
--		set_bit(FI_EXTRA_ATTR, &fi->flags);
-+		set_bit(FI_EXTRA_ATTR, fi->flags);
- 	if (ri->i_inline & F2FS_PIN_FILE)
--		set_bit(FI_PIN_FILE, &fi->flags);
-+		set_bit(FI_PIN_FILE, fi->flags);
- }
- 
- static inline void set_raw_inline(struct inode *inode, struct f2fs_inode *ri)
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 78c3f1d70f1dc..901e9f4ce12b5 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -345,7 +345,7 @@ static int do_read_inode(struct inode *inode)
- 	fi->i_flags = le32_to_cpu(ri->i_flags);
- 	if (S_ISREG(inode->i_mode))
- 		fi->i_flags &= ~F2FS_PROJINHERIT_FL;
--	fi->flags = 0;
-+	bitmap_zero(fi->flags, FI_MAX);
- 	fi->i_advise = ri->i_advise;
- 	fi->i_pino = le32_to_cpu(ri->i_pino);
- 	fi->i_dir_level = ri->i_dir_level;
 -- 
 2.20.1
 
