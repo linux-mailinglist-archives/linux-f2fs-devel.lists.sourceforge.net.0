@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57C6A1B1CBD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Apr 2020 05:25:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 947C91B1E44
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Apr 2020 07:42:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jQjXM-0000op-BB; Tue, 21 Apr 2020 03:25:28 +0000
+	id 1jQlft-0003GO-8A; Tue, 21 Apr 2020 05:42:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jQjXK-0000oW-CI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 03:25:26 +0000
+ (envelope-from <akpm@linux-foundation.org>) id 1jQlfr-0003G8-Lu
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 05:42:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
+ :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yMiQgSp6+44yHi8Y/SiNH79yEV2BxaTZglsheeQ2n48=; b=dJtcYWwN5RP2/cc7PZ7TnhqnPs
- VhiQSWF/EpNBXYQm1EPNKM3dZOL1j9rkgXhePqWCgs8+oeVEMrbyyP+ybrCUhqZ0uGpJfIlgFS/x/
- pjk/xaTUxHg3RD+OV4RUoaMSN2AG1oFEbKocFPCppVARbMSZjNyFYQlQ/IJZX8hlm1nc=;
+ bh=yr6ssK8ab6EUKLC3DcpN5N3K3cf7FZNy+a4Rp1/y714=; b=Y3/3uvh0JpFcM1jpejuUi00Gtc
+ avvxcvoSjwTL/klnt6JxIMY9ncJ2xP1NZ839eRebaTEyM1Q0A7pyv4+FKrDWoEPbrzFttRfhJ958i
+ x4BkZsA9y7nTgZ555FnJwO0fmJfjcqpRUtfVInruM82ujso2doIj2DotfBxS62dm/liY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
+ In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yMiQgSp6+44yHi8Y/SiNH79yEV2BxaTZglsheeQ2n48=; b=lHCYbnIHWwb6/WdsHj/OVgueL5
- MUpr0M2F/YNDx3i1OgQqUOK5jFt69V4mMxsm9JQaCRGcWNiPrfUl1KeHLUTtjGkKpiObimdgtGAM7
- aEcHik3v7YFnda7nmhZBKGCxiixoerp+GqxdYvWoehRfwWOMkmZKpFJ415TbehHTHCcg=;
+ bh=yr6ssK8ab6EUKLC3DcpN5N3K3cf7FZNy+a4Rp1/y714=; b=DAuDqXIYJS8UXrCTP0CBPvhKAN
+ 3ShWcc1zKg5PlXrkAmOqNDOlHkAHpz9TyksOPKc5KVGHp69W2OptAY7wfAzngluhWb5lSaT1fTV1S
+ B8A6w2r/8d5FYIZij7z6llYuHi0zDH0Rrh6BCgPI8ZtLp9GoV0xjVqWciJiW89mLvvaU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jQjXI-0050L1-FO
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 03:25:26 +0000
-Received: from localhost (unknown [104.132.1.66])
+ id 1jQlfq-00863U-Fl
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 05:42:23 +0000
+Received: from localhost.localdomain (c-73-231-172-41.hsd1.ca.comcast.net
+ [73.231.172.41])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8C310206F9;
- Tue, 21 Apr 2020 03:25:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7544A2084D;
+ Tue, 21 Apr 2020 05:42:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1587439513;
- bh=H29oCtqsrJtGWyg/QmRKF2AXzQxEwBYJaGQqfrdaBIc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=JG7FSWTdN2QwjRKOyL04yifSxZUp8D6NrGwqKaBut9eS5w882u7MYS5c1iXvZaWzV
- p6tdkBdfSdH31LdypXsi3BPb4bgmWo4E830nbs5CKfm6qn8/WOZAKBZhpkwSk3yFB7
- bmkquRPoaiAVVlV68lzal/m9OjYpn2eYa4YVTveI=
-Date: Mon, 20 Apr 2020 20:25:13 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200421032513.GA134303@google.com>
-References: <20200415021313.95538-1-yuchao0@huawei.com>
- <634e3958-ee48-90b1-f32f-60e2bc4ca88e@huawei.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <634e3958-ee48-90b1-f32f-60e2bc4ca88e@huawei.com>
-X-Spam-Score: -0.1 (/)
+ s=default; t=1587447732;
+ bh=2gulgVkFfAjn3Pl1PNqXRXmkM/QzduOVT11dMu8o86o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ApJOmYR1uYAyNlSBQToll/A86aHlF3kQ/tdWHawXyGpKjOxTqiRWCqHSR3WazJzIA
+ 4L+nLEixqzeyYNqXfuV8TjK7idDUh5mHndFGgD9WMc/H8gSw+Vy/J9jJ49qwecfb3F
+ M7IdSAdFh4D9we0/ZFSI3sw35uAquW5tJmZTokec=
+Date: Mon, 20 Apr 2020 22:42:10 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Matthew Wilcox <willy@infradead.org>
+Message-Id: <20200420224210.dff005bc62957a4d81d58226@linux-foundation.org>
+In-Reply-To: <20200414150233.24495-20-willy@infradead.org>
+References: <20200414150233.24495-1-willy@infradead.org>
+ <20200414150233.24495-20-willy@infradead.org>
+X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jQjXI-0050L1-FO
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to avoid page count leak
+X-Headers-End: 1jQlfq-00863U-Fl
+Subject: Re: [f2fs-dev] [PATCH v11 19/25] erofs: Convert compressed files
+ from readpages to readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,27 +82,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, William Kucharski <william.kucharski@oracle.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ cluster-devel@redhat.com, linux-mm@kvack.org, ocfs2-devel@oss.oracle.com,
+ Dave Chinner <dchinner@redhat.com>, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 04/21, Chao Yu wrote:
-> Hi Jaegeuk,
-> 
-> Let's drop this patch, I encounter bad page state (nonzero refcount) reported
-> by vm w/ this patch.
-
-Ok.
+On Tue, 14 Apr 2020 08:02:27 -0700 Matthew Wilcox <willy@infradead.org> wrote:
 
 > 
-> On 2020/4/15 10:13, Chao Yu wrote:
-> > In f2fs_read_data_pages(), once we add page into radix tree, we need to
-> > release reference count of that page, however when f2fs_read_multi_pages()
-> > fails, we didn't handle that case correctly, fix it.
-> > 
-> > Fixes: 4c8ff7095bef ("f2fs: support data compression")
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> Use the new readahead operation in erofs.
+> 
+
+Well this is exciting.
+
+fs/erofs/data.c: In function erofs_raw_access_readahead:
+fs/erofs/data.c:149:18: warning: last_block may be used uninitialized in this function [-Wmaybe-uninitialized]
+	*last_block + 1 != current_block) {
+
+It seems to be a preexisting bug, which your patch prompted gcc-7.2.0
+to notice.
+
+erofs_read_raw_page() goes in and uses *last_block, but neither of its
+callers has initialized it.  Could the erofs maintainers please take a
+look?
 
 
 _______________________________________________
