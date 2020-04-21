@@ -2,8 +2,8 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C2D21B1FD8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Apr 2020 09:31:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9016E1B1FD6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Apr 2020 09:31:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
@@ -13,15 +13,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	 bh=ryZcWEudIzBBQVi5t0QX+2ov5sIdnQ8UfFTdG0v8sM8=; b=j+ljbL6m47xkMHbuxLkfPlQEw
 	cAQRYbtQX3rIfHzmuDIz9+JBJcyWb7yjfAQmR0BRnEn/mXZOM8tbVhoQWdaeP8lAhFvJY4Ek+D2qj
 	H/NZAQ9Ffd5XgPgcg40qYgQRx6MbRUWhHFF1ozy7MhwVRWlpUbNbvkEAENyTHfSRPHJDU=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jQnNE-0000l5-Cl; Tue, 21 Apr 2020 07:31:16 +0000
+	id 1jQnN8-0002PZ-GA; Tue, 21 Apr 2020 07:31:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hsiangkao@aol.com>) id 1jQnND-0000kg-3d
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 07:31:15 +0000
+ (envelope-from <hsiangkao@aol.com>) id 1jQnN7-0002PI-AC
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 07:31:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -42,10 +42,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Nebphieq6+QhEXnKhTOAzwgGccVS4P/Y3A/XjqwUy2h2AF8VnzlCzmrfBADiWoK9/pcVAj4S+eYgQ
  V+H1ccwfT44/tuswR5JxnEz3KJ5JxbsJcV/vTj2Iu+8TjUJ9ZzjlPF1nGPSU854y8hKs=;
 Received: from sonic309-49.consmr.mail.ne1.yahoo.com ([66.163.184.175])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jQnN6-008ASa-3n
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 07:31:15 +0000
+ id 1jQnN5-008nxR-8X
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Apr 2020 07:31:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
  t=1587454261; bh=8SaBe657SUqzMIHOQXCqE8E7juFfQ/VceplMPZo+D8w=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Subject;
@@ -91,10 +91,10 @@ X-Mailer: WebService/1.1.15739 hermes Apache-HttpAsyncClient/4.1.4
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [66.163.184.175 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (hsiangkao[at]aol.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [66.163.184.175 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -102,7 +102,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jQnN6-008ASa-3n
+X-Headers-End: 1jQnN5-008nxR-8X
 Subject: Re: [f2fs-dev] [PATCH v11 19/25] erofs: Convert compressed files
  from readpages to readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
