@@ -2,62 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30F271B58BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2020 12:03:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 691751B58E4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2020 12:14:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jRYhg-0003UA-7v; Thu, 23 Apr 2020 10:03:32 +0000
+	id 1jRYsS-0006W4-Nu; Thu, 23 Apr 2020 10:14:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jRYhe-0003To-Qr
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Apr 2020 10:03:30 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1jRYsR-0006Vv-2k
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Apr 2020 10:14:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PKg4zZNdJMLQ6wNmbdntTOpLaV/6PbVO2oG7yF+06Tc=; b=f+LAx9MhRDxs8bgQA0NzaclecV
- 5uN8CuTFnZD/oTlK2+pjdQETX6+ThtyeCnG1X0Sa2SWPXICGUvHXacGV9H+fSxEXLDnwUNWGZvVQS
- iZ/jKnqPpsczajoTsTcYz0qqZCgb7shSyb7aP06DWt/znvBjgA1qKipdaGcr1sXOpOng=;
+ bh=XkTvNo/jbkM19vHDq0zRKvy3gJ3iYXjBL0TBCr698Hs=; b=Lp0OcYvC2Xm1cM4S4hf0quzQPI
+ J/hnW8N5x0lwTkamkBbhBYJe3Y62oVzNZySvKVOaqmETg1Vso0jlnh6Ofb8ELnfhB7IOSTjRVQFrx
+ 5OBS17acOJTUZ6tkWIKklDy6g/h4X2NzBdcW2QkacG9j0LUMgHViHA2j/mN2yAQdztz4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=PKg4zZNdJMLQ6wNmbdntTOpLaV/6PbVO2oG7yF+06Tc=; b=H
- j4ueRNqxh4IMOgq3s8CqFkRNaGJh0/6ErWtOZd6dcBw6rypzgWrpK2V/LkaRINu6kYxeO9q8Zf1e5
- n1puOAygkZMBbnOHKmxjEMXcwbsNzzYQzxFqPhNWXK0wrTNVB+GXSS1jBPosHaCRprx/x8V0GV3Q1
- a1Dmr6ZbugoS9Jbo=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jRYhc-00B4TT-MK
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Apr 2020 10:03:30 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 305877B68F68317747C4;
- Thu, 23 Apr 2020 18:03:21 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 23 Apr 2020 18:03:13 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Thu, 23 Apr 2020 18:03:06 +0800
-Message-ID: <20200423100306.8817-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
-MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XkTvNo/jbkM19vHDq0zRKvy3gJ3iYXjBL0TBCr698Hs=; b=ho8XllsXBQh9MrE5ODbSg8l+qM
+ rJcpMiGWf4LFq6HojDVTKE722AAedmF+iXccRLMfIBLtD/epHtpdWrki+0aMYKG6BQobuHOS8H19Z
+ Um0CfJTE98JyT1a5n1we889eb0b8MId4w53JmVQq5ym/hTTyzdMtJfSyduBOqlLU43z8=;
+Received: from mail26.static.mailgun.info ([104.130.122.26])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jRYsI-00B8bS-E3
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Apr 2020 10:14:39 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1587636875; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=XkTvNo/jbkM19vHDq0zRKvy3gJ3iYXjBL0TBCr698Hs=;
+ b=hNWyVtbR4OLRXN6mRAQpoRd7ytaT7inh8JedvUw32570dGjmmk/tvBGzo67g97MSY8LZ1Hwu
+ 6KtyOF7PD6b1VDeRh5waNromVL1VpdsR/cxPEaQSNYBrK+YagDxz+IWmkSSep9OtXYstDNST
+ 07KHucOBiJcqfsa3bJK7aNVfGJ8=
+X-Mailgun-Sending-Ip: 104.130.122.26
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
+ by mxa.mailgun.org with ESMTP id 5ea16a6f.7f3bbae7b7a0-smtp-out-n02;
+ Thu, 23 Apr 2020 10:14:07 -0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id D3A98C432C2; Thu, 23 Apr 2020 10:14:06 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
+ autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from sayalil-linux.qualcomm.com
+ (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: sayalil)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 4318FC433D2;
+ Thu, 23 Apr 2020 10:14:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 4318FC433D2
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=sayalil@codeaurora.org
+From: Sayali Lokhande <sayalil@codeaurora.org>
+To: jaegeuk@kernel.org, yuchao0@huawei.com,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 23 Apr 2020 15:43:52 +0530
+Message-Id: <1587636832-17939-1-git-send-email-sayalil@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [104.130.122.26 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jRYhc-00B4TT-MK
-Subject: [f2fs-dev] [PATCH] f2fs: add compressed/gc data read IO stat
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jRYsI-00B8bS-E3
+Subject: [f2fs-dev] [PATCH] f2fs: Avoid double lock for cp_rwsem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,154 +99,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-in order to account data read IOs more accurately.
+Call stack :
+f2fs_write_checkpoint()
+-> block_operations(sbi)
+    f2fs_lock_all(sbi);
+     down_write(&sbi->cp_rwsem); => write lock held
+<>
+-> f2fs_sync_node_pages()
+    if (is_inline_node(page))
+     flush_inline_data()
+	page = f2fs_pagecache_get_page()
+         if (!page)
+           goto iput_out;
+	iput_out:
+	 iput(inode);
+          -> f2fs_evict_inode()
+	      f2fs_truncate_blocks()
+	       f2fs_lock_op()
+	        down_read(&sbi->cp_rwsem); => read lock fail
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Sayali Lokhande <sayalil@codeaurora.org>
 ---
+ fs/f2fs/checkpoint.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-Jaegeuk, merge this patch into ("f2fs: support read iostat") will
-be okay to me as well.
-
- fs/f2fs/data.c              |  1 +
- fs/f2fs/f2fs.h              |  2 ++
- fs/f2fs/gc.c                |  2 ++
- fs/f2fs/sysfs.c             |  7 +++++++
- include/trace/events/f2fs.h | 11 ++++++++---
- 5 files changed, 20 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 199877cb57fe..8dd48c5b6c0d 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2176,6 +2176,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 
- 		inc_page_count(sbi, F2FS_RD_DATA);
- 		f2fs_update_iostat(sbi, FS_DATA_READ_IO, F2FS_BLKSIZE);
-+		f2fs_update_iostat(sbi, FS_CDATA_READ_IO, F2FS_BLKSIZE);
- 		ClearPageError(page);
- 		*last_block_in_bio = blkaddr;
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 5ba649e..5c504cf 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1219,21 +1219,19 @@ static int block_operations(struct f2fs_sb_info *sbi)
+ 		goto retry_flush_quotas;
  	}
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 3b9603266a2a..c154651335cd 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1108,6 +1108,8 @@ enum iostat_type {
- 	APP_READ_IO,			/* app read IOs */
- 	APP_MAPPED_READ_IO,		/* app mapped read IOs */
- 	FS_DATA_READ_IO,		/* data read IOs */
-+	FS_GDATA_READ_IO,		/* data read IOs from background gc */
-+	FS_CDATA_READ_IO,		/* compressed data read IOs */
- 	FS_NODE_READ_IO,		/* node read IOs */
- 	FS_META_READ_IO,		/* meta read IOs */
  
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 28a8c79c8bdc..a4c02bf61f8a 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -739,6 +739,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 	f2fs_put_page(page, 1);
+-retry_flush_nodes:
+ 	down_write(&sbi->node_write);
  
- 	f2fs_update_iostat(sbi, FS_DATA_READ_IO, F2FS_BLKSIZE);
-+	f2fs_update_iostat(sbi, FS_GDATA_READ_IO, F2FS_BLKSIZE);
+ 	if (get_pages(sbi, F2FS_DIRTY_NODES)) {
+ 		up_write(&sbi->node_write);
++		f2fs_unlock_all(sbi);
+ 		atomic_inc(&sbi->wb_sync_req[NODE]);
+ 		err = f2fs_sync_node_pages(sbi, &wbc, false, FS_CP_NODE_IO);
+ 		atomic_dec(&sbi->wb_sync_req[NODE]);
+-		if (err) {
+-			up_write(&sbi->node_change);
+-			f2fs_unlock_all(sbi);
++		up_write(&sbi->node_change);
++		if (err)
+ 			goto out;
+-		}
+ 		cond_resched();
+-		goto retry_flush_nodes;
++		goto retry_flush_quotas;
+ 	}
  
- 	return 0;
- put_encrypted_page:
-@@ -845,6 +846,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 		}
- 
- 		f2fs_update_iostat(fio.sbi, FS_DATA_READ_IO, F2FS_BLKSIZE);
-+		f2fs_update_iostat(fio.sbi, FS_GDATA_READ_IO, F2FS_BLKSIZE);
- 
- 		lock_page(mpage);
- 		if (unlikely(mpage->mapping != META_MAPPING(fio.sbi) ||
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index eaf8088548f0..a117ae1f9d5f 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -803,6 +803,7 @@ static int __maybe_unused iostat_info_seq_show(struct seq_file *seq,
- 	seq_printf(seq, "time:		%-16llu\n", now);
- 
- 	/* print app write IOs */
-+	seq_puts(seq, "[WRITE]\n");
- 	seq_printf(seq, "app buffered:	%-16llu\n",
- 				sbi->rw_iostat[APP_BUFFERED_IO]);
- 	seq_printf(seq, "app direct:	%-16llu\n",
-@@ -829,6 +830,7 @@ static int __maybe_unused iostat_info_seq_show(struct seq_file *seq,
- 				sbi->rw_iostat[FS_CP_META_IO]);
- 
- 	/* print app read IOs */
-+	seq_puts(seq, "[READ]\n");
- 	seq_printf(seq, "app buffered:	%-16llu\n",
- 				sbi->rw_iostat[APP_BUFFERED_READ_IO]);
- 	seq_printf(seq, "app direct:	%-16llu\n",
-@@ -839,12 +841,17 @@ static int __maybe_unused iostat_info_seq_show(struct seq_file *seq,
- 	/* print fs read IOs */
- 	seq_printf(seq, "fs data:	%-16llu\n",
- 				sbi->rw_iostat[FS_DATA_READ_IO]);
-+	seq_printf(seq, "fs gc data:	%-16llu\n",
-+				sbi->rw_iostat[FS_GDATA_READ_IO]);
-+	seq_printf(seq, "fs compr_data:	%-16llu\n",
-+				sbi->rw_iostat[FS_CDATA_READ_IO]);
- 	seq_printf(seq, "fs node:	%-16llu\n",
- 				sbi->rw_iostat[FS_NODE_READ_IO]);
- 	seq_printf(seq, "fs meta:	%-16llu\n",
- 				sbi->rw_iostat[FS_META_READ_IO]);
- 
- 	/* print other IOs */
-+	seq_puts(seq, "[OTHER]\n");
- 	seq_printf(seq, "fs discard:	%-16llu\n",
- 				sbi->rw_iostat[FS_DISCARD]);
- 
-diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index 417a486f5c8a..9ef8dea5c833 100644
---- a/include/trace/events/f2fs.h
-+++ b/include/trace/events/f2fs.h
-@@ -1837,6 +1837,8 @@ TRACE_EVENT(f2fs_iostat,
- 		__field(unsigned long long,	app_rio)
- 		__field(unsigned long long,	app_mrio)
- 		__field(unsigned long long,	fs_drio)
-+		__field(unsigned long long,	fs_gdrio)
-+		__field(unsigned long long,	fs_cdrio)
- 		__field(unsigned long long,	fs_nrio)
- 		__field(unsigned long long,	fs_mrio)
- 		__field(unsigned long long,	fs_discard)
-@@ -1861,6 +1863,8 @@ TRACE_EVENT(f2fs_iostat,
- 		__entry->app_rio	= iostat[APP_READ_IO];
- 		__entry->app_mrio	= iostat[APP_MAPPED_READ_IO];
- 		__entry->fs_drio	= iostat[FS_DATA_READ_IO];
-+		__entry->fs_gdrio	= iostat[FS_GDATA_READ_IO];
-+		__entry->fs_cdrio	= iostat[FS_CDATA_READ_IO];
- 		__entry->fs_nrio	= iostat[FS_NODE_READ_IO];
- 		__entry->fs_mrio	= iostat[FS_META_READ_IO];
- 		__entry->fs_discard	= iostat[FS_DISCARD];
-@@ -1872,15 +1876,16 @@ TRACE_EVENT(f2fs_iostat,
- 		"gc [data=%llu, node=%llu], "
- 		"cp [data=%llu, node=%llu, meta=%llu], "
- 		"app [read=%llu (direct=%llu, buffered=%llu), mapped=%llu], "
--		"fs [data=%llu, node=%llu, meta=%llu]",
-+		"fs [data=%llu, (gc_data=%llu, compr_data=%llu), "
-+		"node=%llu, meta=%llu]",
- 		show_dev(__entry->dev), __entry->app_wio, __entry->app_dio,
- 		__entry->app_bio, __entry->app_mio, __entry->fs_dio,
- 		__entry->fs_nio, __entry->fs_mio, __entry->fs_discard,
- 		__entry->fs_gc_dio, __entry->fs_gc_nio, __entry->fs_cp_dio,
- 		__entry->fs_cp_nio, __entry->fs_cp_mio,
- 		__entry->app_rio, __entry->app_drio, __entry->app_brio,
--		__entry->app_mrio, __entry->fs_drio, __entry->fs_nrio,
--		__entry->fs_mrio)
-+		__entry->app_mrio, __entry->fs_drio, __entry->fs_gdrio,
-+		__entry->fs_cdrio, __entry->fs_nrio, __entry->fs_mrio)
- );
- 
- #endif /* _TRACE_F2FS_H */
+ 	/*
 -- 
-2.18.0.rc1
-
+The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
+a Linux Foundation Collaborative Project
 
 
 _______________________________________________
