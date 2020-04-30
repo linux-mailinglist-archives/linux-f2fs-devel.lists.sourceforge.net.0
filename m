@@ -2,78 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C9081BF149
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Apr 2020 09:24:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2B461BF4E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Apr 2020 12:07:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jU3Yv-0003V8-7W; Thu, 30 Apr 2020 07:24:49 +0000
+	id 1jU66D-0004fo-BT; Thu, 30 Apr 2020 10:07:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jU3Yt-0003V1-W7
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 07:24:48 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1jU66B-0004fR-Ta
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 10:07:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y9lD0wQhqEQexxRZtHrOgrBXdARxyEjrN9bpeHP9MMw=; b=a5M4tuRyGiYxpw12XLLGNFVQkO
- 21sUq+r2RvMUKa4k/LmzIRrEV/dV0QI/3O0dd7bcLKt7DX+E/Orfwp6mjChDzihd9dA6Anqpxq3s2
- +Mg9xq9lrQTBYJ3pYFv3QXnSwNKzJyvW4CwYN+zJcNBw7vBg36ETTMs156QrSeubGjns=;
+ bh=J1aAaLwfymtTSJ5DCuryIxkiQKiJb3MkkpGzHGgV1tA=; b=SN2PHbaVssbrilSLwCuf+9FHqd
+ y7s0JHxSTgQewiUHaXJfU/xIjxe1RqX51UmKRq6hwA3FeUwZppLLbszmhwAlFEBad3OXJQVaHny1b
+ 3EivAdL5rYBAx/Zzyvd1aXLeneVRULPW/tUaSdRiRe9oufgMqxqZvCfa2RN/ZqUDOneI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y9lD0wQhqEQexxRZtHrOgrBXdARxyEjrN9bpeHP9MMw=; b=B00176ubVBCX4A3dfDP2AwqObV
- Qm0OnaOO/G5cYak3p3yTCmrlq+ao/EfAaH317hMXHSkicTZbbljaxKwyqGnhFsVKzMSGSjCPM5pSo
- OxjNEoYoY7ICvUM8VaLpa3zYUOlatV8KF5cmqkNkBRYKwyuJLZGNPdGhYlqF/UdsQGSM=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jU3Yn-00H3GD-PA
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 07:24:47 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DD94A20838;
- Thu, 30 Apr 2020 07:24:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588231476;
- bh=B1510mH7/QkNFP5gDC7/BK6EbcgbEzV8MhuqKtudeLQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=0jSbTpTIKAp8HftBanaummT3PLxHjd7KNLv7h+rLMtW46sSj4rCYu67IuaiurcWub
- ndocTRCyPFh7Efb03EY75Tg1wlk8hu+ayQEYKpXdfI7SxyfnlakHfBB7OpKfdPw94L
- V7tN58WoWf9C3V0q2eTm9gEr1x9xbLPnT2nk/B90=
-Date: Thu, 30 Apr 2020 00:24:34 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200430072434.GD16238@sol.localdomain>
-References: <20200429072121.50094-1-satyat@google.com>
- <20200429072121.50094-11-satyat@google.com>
+ bh=J1aAaLwfymtTSJ5DCuryIxkiQKiJb3MkkpGzHGgV1tA=; b=RpFrUsqID11LxJ1s+SY8uCpG0m
+ mWVqY5G4w2Drmi2/OD7dwZ/tAhtRE1JC7cG/xHnZfyg+6ERgW+6HfbM6e2aBTQtBEX1trp9EpOexI
+ uGZru91WMUsNkOZveMYp/o5x5Ef03yhQf7x4IxWYc1mEjXq1pxchs3tNJXrT8QN3AT3U=;
+Received: from mail27.static.mailgun.info ([104.130.122.27])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jU662-0056F1-JI
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 10:07:19 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1588241233; h=Content-Transfer-Encoding: Content-Type:
+ In-Reply-To: MIME-Version: Date: Message-ID: From: References: Cc: To:
+ Subject: Sender; bh=J1aAaLwfymtTSJ5DCuryIxkiQKiJb3MkkpGzHGgV1tA=;
+ b=Rv0DAMMr4bub+575MC8gE0KxfvjI2Dn/q+4GvTo0xtdQwf2tUVQYFoMowyT5MIEz7dIt0ln1
+ kdAX1WxZZ4F7h3rSQISwX5w5BjSgVOuY3pm2PdKQsynPwOkERn0gC+8bYHhejwQp2E+VwVYg
+ h5P/+af7VXbDsjq3NbvCQzI9UZA=
+X-Mailgun-Sending-Ip: 104.130.122.27
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
+ by mxa.mailgun.org with ESMTP id 5eaaa338.7f0124d50538-smtp-out-n01;
+ Thu, 30 Apr 2020 10:06:48 -0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id 6F9D4C433F2; Thu, 30 Apr 2020 10:06:47 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
+ autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from [192.168.0.103] (unknown [183.83.143.172])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: sayalil)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 37D3CC433D2;
+ Thu, 30 Apr 2020 10:06:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 37D3CC433D2
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=sayalil@codeaurora.org
+To: Chao Yu <yuchao0@huawei.com>, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <1588179630-22819-1-git-send-email-sayalil@codeaurora.org>
+ <7c68cd6d-d858-f80c-f258-e5e1340b9aa3@huawei.com>
+From: Sayali Lokhande <sayalil@codeaurora.org>
+Message-ID: <4a601e70-8738-df5b-c642-7fd1800026cc@codeaurora.org>
+Date: Thu, 30 Apr 2020 15:36:42 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200429072121.50094-11-satyat@google.com>
-X-Spam-Score: -0.4 (/)
+In-Reply-To: <7c68cd6d-d858-f80c-f258-e5e1340b9aa3@huawei.com>
+Content-Language: en-US
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: codeaurora.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [104.130.122.27 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [104.130.122.27 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jU3Yn-00H3GD-PA
-Subject: Re: [f2fs-dev] [PATCH v11 10/12] fscrypt: add inline encryption
- support
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jU662-0056F1-JI
+Subject: Re: [f2fs-dev] [PATCH V3] f2fs: Avoid double lock for cp_rwsem
+ during checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,173 +113,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 29, 2020 at 07:21:19AM +0000, Satya Tangirala wrote:
-> +/**
-> + * fscrypt_inode_uses_inline_crypto - test whether an inode uses inline
-> + *				      encryption
-> + * @inode: an inode
 
-I think this should also mention that the key must be setup, like
-
- * @inode: an inode.  If encrypted, its key must be set up.
-
-Likewise in fscrypt_inode_uses_fs_layer_crypto().
-
-> + *
-> + * Return: true if the inode requires file contents encryption and if the
-> + *	   encryption should be done in the block layer via blk-crypto rather
-> + *	   than in the filesystem layer.
-> + */
-> +bool fscrypt_inode_uses_inline_crypto(const struct inode *inode)
-> +{
-> +	return fscrypt_needs_contents_encryption(inode) &&
-> +	       inode->i_crypt_info->ci_inlinecrypt;
-> +}
-> +EXPORT_SYMBOL_GPL(fscrypt_inode_uses_inline_crypto);
-> +
-> +/**
-> + * fscrypt_inode_uses_fs_layer_crypto - test whether an inode uses fs-layer
-> + *					encryption
-> + * @inode: an inode
-> + *
-> + * Return: true if the inode requires file contents encryption and if the
-> + *	   encryption should be done in the filesystem layer rather than in the
-> + *	   block layer via blk-crypto.
-> + */
-> +bool fscrypt_inode_uses_fs_layer_crypto(const struct inode *inode)
-> +{
-> +	return fscrypt_needs_contents_encryption(inode) &&
-> +	       !inode->i_crypt_info->ci_inlinecrypt;
-> +}
-> +EXPORT_SYMBOL_GPL(fscrypt_inode_uses_fs_layer_crypto);
-
-It might also make sense to implement these as inline functions in fscrypt.h:
-
-diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-index 0676832817a74a..6d44d89087b4e5 100644
---- a/fs/crypto/inline_crypt.c
-+++ b/fs/crypto/inline_crypt.c
-@@ -178,37 +178,10 @@ void fscrypt_destroy_inline_crypt_key(struct fscrypt_prepared_key *prep_key)
- 	}
- }
- 
--/**
-- * fscrypt_inode_uses_inline_crypto - test whether an inode uses inline
-- *				      encryption
-- * @inode: an inode
-- *
-- * Return: true if the inode requires file contents encryption and if the
-- *	   encryption should be done in the block layer via blk-crypto rather
-- *	   than in the filesystem layer.
-- */
--bool fscrypt_inode_uses_inline_crypto(const struct inode *inode)
--{
--	return fscrypt_needs_contents_encryption(inode) &&
--	       inode->i_crypt_info->ci_inlinecrypt;
--}
--EXPORT_SYMBOL_GPL(fscrypt_inode_uses_inline_crypto);
--
--/**
-- * fscrypt_inode_uses_fs_layer_crypto - test whether an inode uses fs-layer
-- *					encryption
-- * @inode: an inode
-- *
-- * Return: true if the inode requires file contents encryption and if the
-- *	   encryption should be done in the filesystem layer rather than in the
-- *	   block layer via blk-crypto.
-- */
--bool fscrypt_inode_uses_fs_layer_crypto(const struct inode *inode)
-+bool __fscrypt_inode_uses_inline_crypto(const struct inode *inode)
- {
--	return fscrypt_needs_contents_encryption(inode) &&
--	       !inode->i_crypt_info->ci_inlinecrypt;
-+	return inode->i_crypt_info->ci_inlinecrypt;
- }
--EXPORT_SYMBOL_GPL(fscrypt_inode_uses_fs_layer_crypto);
- 
- static void fscrypt_generate_dun(const struct fscrypt_info *ci, u64 lblk_num,
- 				 u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE])
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index e02820b8e981e1..df30d3dde6ce02 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -508,9 +508,7 @@ static inline void fscrypt_set_ops(struct super_block *sb,
- 
- /* inline_crypt.c */
- #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
--extern bool fscrypt_inode_uses_inline_crypto(const struct inode *inode);
--
--extern bool fscrypt_inode_uses_fs_layer_crypto(const struct inode *inode);
-+extern bool __fscrypt_inode_uses_inline_crypto(const struct inode *inode);
- 
- extern void fscrypt_set_bio_crypt_ctx(struct bio *bio,
- 				      const struct inode *inode,
-@@ -527,16 +525,11 @@ extern bool fscrypt_mergeable_bio_bh(struct bio *bio,
- 				     const struct buffer_head *next_bh);
- 
- #else /* CONFIG_FS_ENCRYPTION_INLINE_CRYPT */
--static inline bool fscrypt_inode_uses_inline_crypto(const struct inode *inode)
-+static inline bool __fscrypt_inode_uses_inline_crypto(const struct inode *inode)
- {
- 	return false;
- }
- 
--static inline bool fscrypt_inode_uses_fs_layer_crypto(const struct inode *inode)
--{
--	return fscrypt_needs_contents_encryption(inode);
--}
--
- static inline void fscrypt_set_bio_crypt_ctx(struct bio *bio,
- 					     const struct inode *inode,
- 					     u64 first_lblk, gfp_t gfp_mask) { }
-@@ -560,6 +553,36 @@ static inline bool fscrypt_mergeable_bio_bh(struct bio *bio,
- }
- #endif /* !CONFIG_FS_ENCRYPTION_INLINE_CRYPT */
- 
-+/**
-+ * fscrypt_inode_uses_inline_crypto - test whether an inode uses inline
-+ *				      encryption
-+ * @inode: an inode.  If encrypted, its key must be set up.
-+ *
-+ * Return: true if the inode requires file contents encryption and if the
-+ *	   encryption should be done in the block layer via blk-crypto rather
-+ *	   than in the filesystem layer.
-+ */
-+static inline bool fscrypt_inode_uses_inline_crypto(const struct inode *inode)
-+{
-+	return fscrypt_needs_contents_encryption(inode) &&
-+	       __fscrypt_inode_uses_inline_crypto(inode);
-+}
-+
-+/**
-+ * fscrypt_inode_uses_fs_layer_crypto - test whether an inode uses fs-layer
-+ *					encryption
-+ * @inode: an inode.  If encrypted, its key must be set up.
-+ *
-+ * Return: true if the inode requires file contents encryption and if the
-+ *	   encryption should be done in the filesystem layer rather than in the
-+ *	   block layer via blk-crypto.
-+ */
-+static inline bool fscrypt_inode_uses_fs_layer_crypto(const struct inode *inode)
-+{
-+	return fscrypt_needs_contents_encryption(inode) &&
-+	       !__fscrypt_inode_uses_inline_crypto(inode);
-+}
-+
- /**
-  * fscrypt_require_key - require an inode's encryption key
-  * @inode: the inode we need the key for
-
+On 4/30/2020 6:41 AM, Chao Yu wrote:
+> On 2020/4/30 1:00, Sayali Lokhande wrote:
+>> There could be a scenario where f2fs_sync_node_pages gets
+>> called during checkpoint, which in turn tries to flush
+>> inline data and calls iput(). This results in deadlock as
+>> iput() tries to hold cp_rwsem, which is already held at the
+>> beginning by checkpoint->block_operations().
+>>
+>> Call stack :
+>>
+>> Thread A		Thread B
+>> f2fs_write_checkpoint()
+>> - block_operations(sbi)
+>>   - f2fs_lock_all(sbi);
+>>    - down_write(&sbi->cp_rwsem);
+>>
+>>                          - open()
+>>                           - igrab()
+>>                          - write() write inline data
+>>                          - unlink()
+>> - f2fs_sync_node_pages()
+>>   - if (is_inline_node(page))
+>>    - flush_inline_data()
+>>     - ilookup()
+>>       page = f2fs_pagecache_get_page()
+>>       if (!page)
+>>        goto iput_out;
+>>       iput_out:
+>> 			-close()
+>> 			-iput()
+>>         iput(inode);
+>>         - f2fs_evict_inode()
+>>          - f2fs_truncate_blocks()
+>>           - f2fs_lock_op()
+>>             - down_read(&sbi->cp_rwsem);
+>>
+>> Fixes: 399368372ed9 ("f2fs: introduce a new global lock scheme")
+> IMO, it should be
+>
+> 2049d4fcb057 ("f2fs: avoid multiple node page writes due to inline_data")
+>
+> It brings iput() to checkpoint process for the first time.
+>
+> Thanks,
+Agreed. will update it.
+>> Signed-off-by: Sayali Lokhande <sayalil@codeaurora.org>
+>> ---
+>>   fs/f2fs/checkpoint.c | 10 ++++------
+>>   1 file changed, 4 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>> index 5ba649e..97b6378 100644
+>> --- a/fs/f2fs/checkpoint.c
+>> +++ b/fs/f2fs/checkpoint.c
+>> @@ -1219,21 +1219,19 @@ static int block_operations(struct f2fs_sb_info *sbi)
+>>   		goto retry_flush_quotas;
+>>   	}
+>>   
+>> -retry_flush_nodes:
+>>   	down_write(&sbi->node_write);
+>>   
+>>   	if (get_pages(sbi, F2FS_DIRTY_NODES)) {
+>>   		up_write(&sbi->node_write);
+>> +		up_write(&sbi->node_change);
+>> +		f2fs_unlock_all(sbi);
+>>   		atomic_inc(&sbi->wb_sync_req[NODE]);
+>>   		err = f2fs_sync_node_pages(sbi, &wbc, false, FS_CP_NODE_IO);
+>>   		atomic_dec(&sbi->wb_sync_req[NODE]);
+>> -		if (err) {
+>> -			up_write(&sbi->node_change);
+>> -			f2fs_unlock_all(sbi);
+>> +		if (err)
+>>   			goto out;
+>> -		}
+>>   		cond_resched();
+>> -		goto retry_flush_nodes;
+>> +		goto retry_flush_quotas;
+>>   	}
+>>   
+>>   	/*
+>>
 
 
 _______________________________________________
