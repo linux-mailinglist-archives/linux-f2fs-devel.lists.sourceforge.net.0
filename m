@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D7E1C0379
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Apr 2020 19:02:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C7D41C0386
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Apr 2020 19:04:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jUCaJ-0005lD-UR; Thu, 30 Apr 2020 17:02:51 +0000
+	id 1jUCbj-0005rR-6W; Thu, 30 Apr 2020 17:04:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jUCaI-0005l6-1K
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 17:02:50 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jUCbi-0005rI-Bv
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 17:04:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eF2DXmfYQk6t5PoLdD48i07e2Y+iz5swgCojWjgZLoo=; b=ONgk0pSObs0OTBl8jHUyawee5w
- Thsk90t7yPCGcpravK/Jr7UZsD5HpKlFMmwQpJkETHnLLjoCeLkt8knC5pwguctlzUrm3yVKXm+5l
- d8O/+g4T2PxqLvQWF1hmYgYW2yE4wK3IpJL63SPCDqfxMZK4S0aEWpaeja6OPtCg9uyQ=;
+ bh=8jT+oAhzMuJqAne7dFVfnXp+ioB7bZEr1dniZjoj8qs=; b=H/dye7OmgE2WbTxdy/pMHmM5sx
+ rUsOCDlWtQJthhjKytKReb9+24AG8zAILEe+gj3sK6T8r6MyiaQH9tM4bCgDQupV/ZAZ/lBTC+gun
+ 4SXMih+MuvDoUVryE3UXz8FHHQ8zj7GAPoQ9/1bu/c9El2AnmAbo1zpWrIeP6XxhIhqc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eF2DXmfYQk6t5PoLdD48i07e2Y+iz5swgCojWjgZLoo=; b=hBvlUfTWbJTKa7JoZSLJgcnKUs
- LQxFO5oEZj9aqKKGAIhwOuaAzg8ZeuTaSdvJvfeaVMI8u0TjLv55OzRcRUm2D7WY/ZUjwZ0UraJYk
- oVG1Oc4wLSmluN4B99g7vXhog6e+yylhJm1v5jGSPh2jTTBIscd1RvTzIVCL0voEesGA=;
+ bh=8jT+oAhzMuJqAne7dFVfnXp+ioB7bZEr1dniZjoj8qs=; b=Ekn0Rjp1b3tyVeoh2twBshDWd+
+ GXpnCUHNPXjzTpAEH6szVTyJDUVWk+VTlXgQTUmmijQDuEWkx+vhZVxV6m3oX2oggdLXI06hP2nLz
+ FKj7NQ5kBbj7cZ6jXqXCoXP5qziGq++3Bh9KG+MlGOCd+7ZYPuAdnOwkhVgdxVS0zKoA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jUCaG-003XCP-TV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 17:02:49 +0000
+ id 1jUCbh-00HUnR-Cr
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Apr 2020 17:04:18 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2A4B720787;
- Thu, 30 Apr 2020 17:02:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 76FDC20787;
+ Thu, 30 Apr 2020 17:04:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588266160;
- bh=KyZuJnDBqEdGS6iPd0QsY0M5oYS5mvkpln5O+Lo+8+w=;
+ s=default; t=1588266251;
+ bh=p3PY8v4K9MXDL2QVIbKch9hnHXPDV5bO+Bl4Z5ompNM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MLXYWxhR97lhm1QqB4s/La6Baka75kWzkYwMsHuQcUnNEUisGpvdwC8LrmJ+1L5Hh
- kbu7U8SLxdXVpPtxUXUEG0B46G8E9DAOYRz+0I7pW7zMpZjvXOeEDIiPKi8UBcYYmI
- rBPBZEqP7AS27RXTEObKuIwLfjDPZF+M4NANJcxg=
-Date: Thu, 30 Apr 2020 10:02:33 -0700
+ b=ofvd7GuJV37V4vJOvUKnWq4C/v1xbd3mvDBxUw04u6XfgRrJHLihJ0khXJpzsYWJi
+ 42MtVUtsO8njIXQJ+P2HBeIv9z+8wKQu4dFy5SmhhU7L7TKGpapze5VAxJq/l2mj2u
+ wzpYGjYJmtlYiphZ0ZzWlzBBFWVL9FLJT4lb9OkY=
+Date: Thu, 30 Apr 2020 10:04:08 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200430170233.GA1003@sol.localdomain>
+Message-ID: <20200430170408.GB1003@sol.localdomain>
 References: <20200430115959.238073-1-satyat@google.com>
+ <20200430115959.238073-11-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200430115959.238073-1-satyat@google.com>
+In-Reply-To: <20200430115959.238073-11-satyat@google.com>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jUCaG-003XCP-TV
-Subject: Re: [f2fs-dev] [PATCH v12 00/12] Inline Encryption Support
+X-Headers-End: 1jUCbh-00HUnR-Cr
+Subject: Re: [f2fs-dev] [PATCH v12 10/12] fscrypt: add inline encryption
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,14 +95,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Apr 30, 2020 at 11:59:47AM +0000, Satya Tangirala wrote:
-> This patch series adds support for Inline Encryption to the block layer,
-> UFS, fscrypt, f2fs and ext4.
+On Thu, Apr 30, 2020 at 11:59:57AM +0000, Satya Tangirala wrote:
+> +bool __fscrypt_inode_uses_inline_crypto(const struct inode *inode)
+> +{
+> +	return inode->i_crypt_info->ci_inlinecrypt;
+> +}
+> +EXPORT_SYMBOL_GPL(fscrypt_inode_uses_inline_crypto);
 
-Thanks, that was fast!  As usual I pushed this out to
-
-        Repo: https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
-        Tag: inline-encryption-v12
+Right, this still needs to be exported (I missed that in the diff I suggested).
+But the export needs to be fixed to use the double-underscore name.
 
 - Eric
 
