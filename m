@@ -2,72 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 656C31C0A34
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 May 2020 00:14:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69FF91C0BFD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 May 2020 04:12:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jUHRd-0003ry-Ph; Thu, 30 Apr 2020 22:14:13 +0000
+	id 1jUL9y-0006N1-Gn; Fri, 01 May 2020 02:12:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>)
- id 1jUHRb-0003rc-Ms; Thu, 30 Apr 2020 22:14:11 +0000
+ (envelope-from <viro@ftp.linux.org.uk>)
+ id 1jUL9x-0006Mj-7V; Fri, 01 May 2020 02:12:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bd0ZsvJx0qN41jGJdx6Q3uDOBTPr2hBuuON/tmj1OPE=; b=XkO+KfmgWhS43hjIylO9KapXmo
- UbktEFIpG7c2lJBIYPNrskcD6GFcD73ioZhg6GHgg4MeN2l3ei9B18bcHI+JXkSBMf8Jbeaa1lnNV
- s8lcMnzE/oMQ2C5A4+wGSrSTdqRT3dw4Dw2HB9NpEE5Z7IwkEeIOfKD8L343u8wZ0AvU=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=trbOd/sxn9XGUMmyAPbB0ZJZPfTeuKcn+Urwjio32oY=; b=YhYjNv2SCPHYIapcYZsp1MG0s
+ JBnWYVhXIaYyhWhBj5TQvtEPkLwsp7cJKcSWvx9/zD30InCw3npBx11v8wFKupIdseOdSaK0Be6sk
+ rbRp0Zjl0XUWtaPx9H4kcTYjvjlnsH0Zye9WTaKWm/wvVULeIccyYnAKSeTRmuE2Fk+gk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bd0ZsvJx0qN41jGJdx6Q3uDOBTPr2hBuuON/tmj1OPE=; b=G0OB0cI2KfPJ6ezMCBUjva6a9X
- PFqv77HlBO+uTPH2KHWTjnm0vLGfvbdCaUjVmsY/1pV5hsyOPQhvHO4n0khiEkzpKRtzu2SP+2g1a
- 7YT7IwopL3BY2vtJ0kfxhfr2cYiJ1e4MQTk0pspoMfcDhQHewREH+25OqvmsTng0aTqo=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=trbOd/sxn9XGUMmyAPbB0ZJZPfTeuKcn+Urwjio32oY=; b=OPBXcf7ZapfFsEytvB8zKXbemb
+ NUMC0AsyGmcmVER4kUUsGjnhPe2xWdAmmuJmZh07eiXbHY+F6CdCfMHomIgWMFmAhR2cC/hoBx02A
+ KsbZm+yhJXwiwoZHY48fPUk1Xh0CqGdM01jnGF77FGqssZJV1qmtLTW2q8QYGxqO2Rmk=;
+Received: from zeniv.linux.org.uk ([195.92.253.2])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jUHRa-003ngT-G8; Thu, 30 Apr 2020 22:14:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=bd0ZsvJx0qN41jGJdx6Q3uDOBTPr2hBuuON/tmj1OPE=; b=Xh5T5/zf36Iun9lfkNlEeXo/27
- qpj6KB4345/Cc/m+7HWNU07yHSitTsHNxf43w29pLdFOLHOfVTYjI9tDCKGec6cEk83PJ5GqWyrFw
- xCVrZDz49/b0wB7Yapm/GbhfIo0w0D60cKkNHaoxbLCv70va07R3hB3AxdrLrli8dB87fDS0Ndm9j
- m+USiBB+G6dkvHAgLi3/Sy2qxmHFNVeKf9RAg+FPui7Hgtq0Ig17TaGN1/AGUg4WEKCDRMHpCrK7u
- 9rIqjC7QpANlp3+ie8aKQDzn2D4NAtlZhS85GUMY3G9CNKyyxd/3mIlLD0DRHnazAYqhFC6STfv7G
- vA7SVRlQ==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jUHR4-0007zt-IY; Thu, 30 Apr 2020 22:13:38 +0000
-Date: Thu, 30 Apr 2020 15:13:38 -0700
-From: Matthew Wilcox <willy@infradead.org>
-To: Guoqing Jiang <guoqing.jiang@cloud.ionos.com>
-Message-ID: <20200430221338.GY29705@bombadil.infradead.org>
+ id 1jUL9v-000MyB-U9; Fri, 01 May 2020 02:12:13 +0000
+Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1jUKhB-00FVTz-IU; Fri, 01 May 2020 01:42:29 +0000
+Date: Fri, 1 May 2020 02:42:29 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20200501014229.GB23230@ZenIV.linux.org.uk>
 References: <20200430214450.10662-1-guoqing.jiang@cloud.ionos.com>
  <20200430214450.10662-2-guoqing.jiang@cloud.ionos.com>
+ <20200430221338.GY29705@bombadil.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200430214450.10662-2-guoqing.jiang@cloud.ionos.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200430221338.GY29705@bombadil.infradead.org>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.92.253.2 listed in wl.mailspike.net]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1jUHRa-003ngT-G8
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jUL9v-000MyB-U9
 Subject: Re: [f2fs-dev] [RFC PATCH V2 1/9] include/linux/pagemap.h:
  introduce attach/clear_page_private
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -88,9 +77,10 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  "Darrick J. Wong" <darrick.wong@oracle.com>, Chris Mason <clm@fb.com>,
  hch@infradead.org, devel@lists.orangefs.org,
  Josef Bacik <josef@toxicpanda.com>, linux-raid@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
- Anton Altaparmakov <anton@tuxera.com>, Andreas Dilger <adilger@dilger.ca>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Anton Altaparmakov <anton@tuxera.com>,
+ Andreas Dilger <adilger@dilger.ca>,
+ Guoqing Jiang <guoqing.jiang@cloud.ionos.com>,
  Yang Shi <yang.shi@linux.alibaba.com>,
  William Kucharski <william.kucharski@oracle.com>,
  linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
@@ -102,47 +92,19 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Apr 30, 2020 at 11:44:42PM +0200, Guoqing Jiang wrote:
-> +/**
-> + * attach_page_private - attach data to page's private field and set PG_private.
-> + * @page: page to be attached and set flag.
-> + * @data: data to attach to page's private field.
-> + *
-> + * Need to take reference as mm.h said "Setting PG_private should also increment
-> + * the refcount".
-> + */
+On Thu, Apr 30, 2020 at 03:13:38PM -0700, Matthew Wilcox wrote:
 
-I don't think this will read well when added to the API documentation.
-Try this:
+> > +/**
+> > + * clear_page_private - clear page's private field and PG_private.
+> > + * @page: page to be cleared.
+> > + *
+> > + * The counterpart function of attach_page_private.
+> > + * Return: private data of page or NULL if page doesn't have private data.
+> > + */
+> 
+> Seems to me that the opposite of "attach" is "detach", not "clear".
 
-/**
- * attach_page_private - Attach private data to a page.
- * @page: Page to attach data to.
- * @data: Data to attach to page.
- *
- * Attaching private data to a page increments the page's reference count.
- * The data must be detached before the page will be freed.
- */
-
-> +/**
-> + * clear_page_private - clear page's private field and PG_private.
-> + * @page: page to be cleared.
-> + *
-> + * The counterpart function of attach_page_private.
-> + * Return: private data of page or NULL if page doesn't have private data.
-> + */
-
-Seems to me that the opposite of "attach" is "detach", not "clear".
-
-/**
- * detach_page_private - Detach private data from a page.
- * @page: Page to detach data from.
- *
- * Removes the data that was previously attached to the page and decrements
- * the refcount on the page.
- *
- * Return: Data that was attached to the page.
- */
+Or "remove", perhaps...
 
 
 _______________________________________________
