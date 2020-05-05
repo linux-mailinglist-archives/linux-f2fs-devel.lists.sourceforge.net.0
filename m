@@ -2,61 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 760B71C6241
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 May 2020 22:49:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E42D21C6448
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 May 2020 01:06:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jW4Ur-0005XS-GA; Tue, 05 May 2020 20:48:57 +0000
+	id 1jW6dp-00065H-Jw; Tue, 05 May 2020 23:06:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jW4Uq-0005XK-NL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 20:48:56 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jW6do-000656-8m
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 23:06:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2I1WYjCGCKdXN3P6f35TzPRl0gi9R6hQZR9nci49ZLc=; b=U1iKFwPkoem3RulG6FiDDoXn05
- dXKmBBLgBJMfX9O1fI0iETnZJe7hJ5CKiHPf0odwknpoSKSiboczYSkGn7Tfd5C34ZbF2C+QGbOsD
- UElzi6sONhe35f82prIpBhsfQbWvCeBXqrU/Ms5MRYTQhiphs63WLxGK9J4QO9WIG5Dc=;
+ bh=4Z7mJ6bN/CmngZBaANbQ32K0HDTtu/qt8k8LmwghV50=; b=GXIoMd7SBg6jMdHZ8GyzErbJ+i
+ bRuX1MxGuKJdDZk0vHCmcvyQR4k0JI1b+VfP0tkdGXrhJxSkzVU3ZTQEhWujNNhiJ3Ucm1ZVV3O9j
+ FXNVG+3bqWf7RTIeD30NazVACp9PC+ZG2TkzY4npJAhfJstfSoYd58KPayWK0ZKT39c4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
- Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=2I1WYjCGCKdXN3P6f35TzPRl0gi9R6hQZR9nci49ZLc=; b=Y
- ViK879e78+vfxjme8LOF/QA65fQLPGs4BFCxGbzmdjzjDxASX0/XojKnSM0ICGK8ZlbpNa3s3NwY0
- s/l2z1VgI1PILjxT5YQ8INSD/KWSPVWLoS2sqmU09xAh3aEAT+WAiRuL20PcSMJEs9cBG0uWIacBT
- DIRzRuLK+8maAbhw=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=4Z7mJ6bN/CmngZBaANbQ32K0HDTtu/qt8k8LmwghV50=; b=bOdvipRi5YtVAogupndo0dI5Zv
+ z71O4kpm0axpxAmgvQpUCD2KeJuzpNlJifeLTvEQq8o8HC1paDdYUebEkDVRa3R7z3UOgJ8dQunDA
+ 736K+Cdy3CcEooQAl2UmG0tGwlq+f6VCY/ReFc7TcJECeJquVvqaGl6c3DyH5BqkLsgI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jW4Um-00BoMU-D5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 20:48:56 +0000
-Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 1jW6dj-00F58v-0V
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 23:06:20 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D9BE4206B8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  5 May 2020 20:48:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8E68420658;
+ Tue,  5 May 2020 23:05:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588711721;
- bh=aHxOENTyvBlM8KstbbPdjrVGwV1MzNw0lHP5MueNGCo=;
- h=From:To:Subject:Date:From;
- b=szErmoi4uLZc9iYIqW/uIH6LbV5zuQWIYDqzlgU7fuX1efKywuocZgDVQV0y2WNGx
- 6Bv3Ot+6Jok2StH6Mzo+4nyZVdRCXD0CnYbxcGuzjh9ayUQsaZPSa10+CB7e4ZoObB
- oCyCiYNlCshW+S0khfb4gglgySnoz/zHwfmc6ocE=
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  5 May 2020 13:48:23 -0700
-Message-Id: <20200505204823.211214-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.26.2
+ s=default; t=1588719959;
+ bh=PNbwCvW8rBgUyy4cSZedXBMUal8bA25Ko1sv2PzKrbU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=o0oW0T0rIrr4DOBGJsvU1rN5sR2bB9IgnwHUf7LfKJ/z/xSNZ0+w60U6Vpoo/IqOK
+ srPE+BquCr0CQJNmqk+wni0ty2ZiHPiuBVVAG6hR5nB38Fwl4IYaxL9G79RzMJetLi
+ n1BzgsqYqW6MsARJZReLj7yQP+AcaigeH3fnZq7s=
+Date: Tue, 5 May 2020 16:05:59 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20200505230559.GA203407@google.com>
+References: <20200504143039.155644-1-jaegeuk@kernel.org>
+ <7177aab9-630e-e077-7005-0023c93134b3@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <7177aab9-630e-e077-7005-0023c93134b3@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,9 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jW4Um-00BoMU-D5
-Subject: [f2fs-dev] [PATCH] f2fs: don't return vmalloc() memory from
- f2fs_kmalloc()
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jW6dj-00F58v-0V
+Subject: Re: [f2fs-dev] [PATCH] f2fs: change maximum zstd compression buffer
+ size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,100 +84,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On 05/05, Chao Yu wrote:
+> On 2020-5-4 22:30, Jaegeuk Kim wrote:
+> > From: Daeho Jeong <daehojeong@google.com>
+> > 
+> > Current zstd compression buffer size is one page and header size less
+> > than cluster size. By this, zstd compression always succeeds even if
+> > the real compression data is failed to fit into the buffer size, and
+> > eventually reading the cluster returns I/O error with the corrupted
+> > compression data.
+> 
+> What's the root cause of this issue? I didn't get it.
+> 
+> > 
+> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> > ---
+> >  fs/f2fs/compress.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> > index 4c7eaeee52336..a9fa8049b295f 100644
+> > --- a/fs/f2fs/compress.c
+> > +++ b/fs/f2fs/compress.c
+> > @@ -313,7 +313,7 @@ static int zstd_init_compress_ctx(struct compress_ctx *cc)
+> >  	cc->private = workspace;
+> >  	cc->private2 = stream;
+> > 
+> > -	cc->clen = cc->rlen - PAGE_SIZE - COMPRESS_HEADER_SIZE;
+> > +	cc->clen = ZSTD_compressBound(PAGE_SIZE << cc->log_cluster_size);
+> 
+> In my machine, the value is 66572 which is much larger than size of dst
+> buffer, so, in where we can tell the real size of dst buffer to zstd
+> compressor? Otherwise, if compressed data size is larger than dst buffer
+> size, when we flush compressed data into dst buffer, we may suffer overflow.
 
-kmalloc() returns kmalloc'ed memory, and kvmalloc() returns either
-kmalloc'ed or vmalloc'ed memory.  But the f2fs wrappers, f2fs_kmalloc()
-and f2fs_kvmalloc(), both return both kinds of memory.
+Could you give it a try compress_log_size=2 and check decompression works?
 
-It's redundant to have two functions that do the same thing, and also
-breaking the standard naming convention is causing bugs since people
-assume it's safe to kfree() memory allocated by f2fs_kmalloc().  See
-e.g. the various allocations in fs/f2fs/compress.c.
-
-Fix this by making f2fs_kmalloc() just use kmalloc().  And to avoid
-re-introducing the allocation failures that the vmalloc fallback was
-intended to fix, convert the largest allocations to use f2fs_kvmalloc().
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/f2fs/checkpoint.c | 4 ++--
- fs/f2fs/f2fs.h       | 8 +-------
- fs/f2fs/node.c       | 8 ++++----
- 3 files changed, 7 insertions(+), 13 deletions(-)
-
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 97b6378554b406..ac5b47f15f5e77 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -895,8 +895,8 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
- 	int i;
- 	int err;
- 
--	sbi->ckpt = f2fs_kzalloc(sbi, array_size(blk_size, cp_blks),
--				 GFP_KERNEL);
-+	sbi->ckpt = f2fs_kvzalloc(sbi, array_size(blk_size, cp_blks),
-+				  GFP_KERNEL);
- 	if (!sbi->ckpt)
- 		return -ENOMEM;
- 	/*
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d036a31a97e84e..bc4c5b9b1bf14c 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2953,18 +2953,12 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
- static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
- 					size_t size, gfp_t flags)
- {
--	void *ret;
--
- 	if (time_to_inject(sbi, FAULT_KMALLOC)) {
- 		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
- 		return NULL;
- 	}
- 
--	ret = kmalloc(size, flags);
--	if (ret)
--		return ret;
--
--	return kvmalloc(size, flags);
-+	return kmalloc(size, flags);
- }
- 
- static inline void *f2fs_kzalloc(struct f2fs_sb_info *sbi,
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 4da0d8713df5cb..e660af55565c61 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2934,7 +2934,7 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
- 		return 0;
- 
- 	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
--	nm_i->nat_bits = f2fs_kzalloc(sbi,
-+	nm_i->nat_bits = f2fs_kvzalloc(sbi,
- 			nm_i->nat_bits_blocks << F2FS_BLKSIZE_BITS, GFP_KERNEL);
- 	if (!nm_i->nat_bits)
- 		return -ENOMEM;
-@@ -3067,9 +3067,9 @@ static int init_free_nid_cache(struct f2fs_sb_info *sbi)
- 	int i;
- 
- 	nm_i->free_nid_bitmap =
--		f2fs_kzalloc(sbi, array_size(sizeof(unsigned char *),
--					     nm_i->nat_blocks),
--			     GFP_KERNEL);
-+		f2fs_kvzalloc(sbi, array_size(sizeof(unsigned char *),
-+					      nm_i->nat_blocks),
-+			      GFP_KERNEL);
- 	if (!nm_i->free_nid_bitmap)
- 		return -ENOMEM;
- 
--- 
-2.26.2
-
+> 
+> >  	return 0;
+> >  }
+> > 
+> > @@ -330,7 +330,7 @@ static int zstd_compress_pages(struct compress_ctx *cc)
+> >  	ZSTD_inBuffer inbuf;
+> >  	ZSTD_outBuffer outbuf;
+> >  	int src_size = cc->rlen;
+> > -	int dst_size = src_size - PAGE_SIZE - COMPRESS_HEADER_SIZE;
+> > +	int dst_size = cc->clen;
+> >  	int ret;
+> > 
+> >  	inbuf.pos = 0;
+> > 
 
 
 _______________________________________________
