@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9863A1C5FEE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 May 2020 20:20:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3D5F1C5FF3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 May 2020 20:20:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jW2Ai-0001a6-2a; Tue, 05 May 2020 18:20:00 +0000
+	id 1jW2BX-0001gW-8i; Tue, 05 May 2020 18:20:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jW2Ag-0001Zz-EH
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 18:19:58 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jW2BV-0001gN-Fw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 18:20:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iGbDrwlFd2S5ugc+um9phevaBc9VrrTOyV/oCEz5viY=; b=LJeZsk6yrrNyWQP8FlxXqYBXPw
- GFfKG8Wpk3ZZC3ktUCbtJPyHQfKjB19JEd4Oe6rRIsD+RNR2ctqYgXemRKxMnpQoUBpOWtIh0Rrow
- xWC22tEyZwNvz6JL9XWd9R7TNf0KN9Bn2IM67vDjM/e41n/ULQqD4K8Iiy3LIiB1rYk4=;
+ bh=bNaxx0yuaf2UkfknBkRZsPaRG1HO/OXT517qn9PJ93w=; b=aQCA2aSHF2prjWJpgLrEQ3Z2Um
+ 1s5lJoWDqHG4uLfPxY/4cy9cnRyzt2hdHYSoE0+in+o1d2Eqh5VEBX0rdPXdTvt90tnwT6m2ql6QA
+ OZnEWwKGle00YFTywzuubCyLPah55LpQOvD9W+bxrP69nTZxO1e7GqUw0gOAqadpuwfc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iGbDrwlFd2S5ugc+um9phevaBc9VrrTOyV/oCEz5viY=; b=Kp+nTFqFZ6QJ3j5vpoBM7unyve
- XKeTETBBL/5kBD1nWaA3vR8NMF2wXfzn60CmUuodWVTZzy4yky4Xs7KzoonaSp4LbJE34nTbZ+bK7
- n7sPLERQ3xjYy2PR/XGm9XUz7tsqE5fvXYJfKDtfUMgm2XpkbSCzthzNAJBX5FvDQ0n0=;
+ bh=bNaxx0yuaf2UkfknBkRZsPaRG1HO/OXT517qn9PJ93w=; b=Wt7+VrbbFBnXcx4xphD5ct+gzb
+ z5v0JOxEbZGN6gwNxi/ZlBPYzm/d2gL/yfl7z7IoUVyUxu3rNS3WGiJG+MAhNkqFx8iQ7/n7iuQR9
+ psG8rJd2ER8GGv5NRC8DDDw7rrNkAsECN8i1SqGfjG+I8zxIeqzWwjn08thYZXjFcowk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jW2Ad-008Yrf-GV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 18:19:58 +0000
-Received: from gmail.com (unknown [104.132.1.76])
+ id 1jW2BU-00Eivl-CR
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 May 2020 18:20:49 +0000
+Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A218E20663;
- Tue,  5 May 2020 18:19:42 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BF34120663;
+ Tue,  5 May 2020 18:20:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588702782;
- bh=yZzkSmvvKpe0G5yUuD0K6ah1YcmbfcINzZSizvYm2fE=;
+ s=default; t=1588702842;
+ bh=ZeZCawDZUxiAGh0E3Qdw7+DHNfklBHHQq4cW7/Bml1U=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=R67Z/lbPtsO5THBxKzX2UlLhSUm2vt0TOUX9sbZh4djBdEvxdDZsZKamROXY/lUDk
- 45RwmPjXsu/PJUGCFkivx2adACAXmQgXLE9PpopTyfNZZUgoXkvJRiKgv2s65OjKWz
- ZxQGDWUnKqLxY8xjBuFDHX627MfXB7blez9pNJvE=
-Date: Tue, 5 May 2020 11:19:41 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20200505181941.GC98848@gmail.com>
+ b=Qr8sn+d/XkZ7CgQ1XtQVpjFRuDwIcGITLQPkbrbVzG5PSjG6JGHdc/ShQxFBdAV5V
+ gw2WRMZ5iN+VkVXnZ3C7AfsCUyVLU8TGOQrOTGHeE4P9FPT/TTS59GUv94ZIqMIABI
+ MbmoyN8KRbxCwflXMmYOETX6jNAL3NCyNirFJkk8=
+Date: Tue, 5 May 2020 11:20:42 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20200505182042.GB55221@google.com>
 References: <20200505153139.201697-1-jaegeuk@kernel.org>
  <20200505165847.GA98848@gmail.com>
- <20200505181323.GA55221@google.com>
+ <20200505175907.GB98848@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200505181323.GA55221@google.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200505175907.GB98848@gmail.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,8 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jW2Ad-008Yrf-GV
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jW2BU-00Eivl-CR
 Subject: Re: [f2fs-dev] [PATCH] f2fs: get parent inode when recovering pino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -90,8 +90,8 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, May 05, 2020 at 11:13:23AM -0700, Jaegeuk Kim wrote:
-> On 05/05, Eric Biggers wrote:
+On 05/05, Eric Biggers wrote:
+> On Tue, May 05, 2020 at 09:58:47AM -0700, Eric Biggers wrote:
 > > On Tue, May 05, 2020 at 08:31:39AM -0700, Jaegeuk Kim wrote:
 > > > We had to grab the inode before retrieving i_ino.
 > > > 
@@ -125,9 +125,6 @@ On Tue, May 05, 2020 at 11:13:23AM -0700, Jaegeuk Kim wrote:
 > > > +	*pino = parent->i_ino;
 > > > +	iput(parent);
 > > >  	return 1;
-> 
-> Hi Eric,
-> 
 > > 
 > > This doesn't appear to be necessary.  parent_ino() is:
 > > 
@@ -136,9 +133,6 @@ On Tue, May 05, 2020 at 11:13:23AM -0700, Jaegeuk Kim wrote:
 > > 	spin_unlock(&dentry->d_lock);
 > > 
 > > Since dentry is locked and referenced, ->d_parent is stable and positive.
-> 
-> I see, thanks. :)
-> 
 > > 
 > > In the encrypt+casefold patch I was reviewing, it's indeed necessary, but only
 > > because there was a check of inode->i_flags added outside the locked region.
@@ -149,108 +143,23 @@ On Tue, May 05, 2020 at 11:13:23AM -0700, Jaegeuk Kim wrote:
 > >         *pino = dir->i_ino;
 > >         needs_recovery = IS_ENCRYPTED(dir) && IS_CASEFOLDED(dir);
 > >         spin_unlock(&dentry->d_lock);
-> 
-> Ack.
-> 
 > > 
 > > BTW, d_find_any_alias() is unnecessary too.  This code should just be using
 > > file_dentry(file) from f2fs_do_sync_file().
+> > 
 > 
-> How about this?
+> Also, what is this code trying to accomplish?  If it's trying to find the parent
+> directory of an inode with i_nlink == 1, this isn't the correct way to do it.
+> The fsync could be done via a deleted file, which would make the wrong p_ino be
+> set.  I think the correct approach would be to iterate through all the dentry's
+> aliases, and choose the parent directory that's !IS_DEADDIR().
+
+The intention is to give a chance to recover the pino to avoid performance
+drop on fsync() by avoiding checkpoint(). And the purpose of this is to
+find a file having single linked file. Otherwise, we'll do checkpoint().
+
 > 
-> From 9aee969a413b1ed22b48573071bc93fbb4a2002d Mon Sep 17 00:00:00 2001
-> From: Jaegeuk Kim <jaegeuk@kernel.org>
-> Date: Tue, 5 May 2020 11:08:58 -0700
-> Subject: [PATCH] f2fs: remove unnecessary dentry locks
-> 
-> As Eric commented, let's kill unnecessary dentry ops when recovering
-> parent inode number.
-> 
-> Suggested-by: Eric Biggers <ebiggers@kernel.org>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->  fs/f2fs/file.c | 26 ++++++--------------------
->  1 file changed, 6 insertions(+), 20 deletions(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index a0a4413d6083b..711cebad36fc5 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -165,21 +165,6 @@ static const struct vm_operations_struct f2fs_file_vm_ops = {
->  	.page_mkwrite	= f2fs_vm_page_mkwrite,
->  };
->  
-> -static int get_parent_ino(struct inode *inode, nid_t *pino)
-> -{
-> -	struct dentry *dentry;
-> -
-> -	inode = igrab(inode);
-> -	dentry = d_find_any_alias(inode);
-> -	iput(inode);
-> -	if (!dentry)
-> -		return 0;
-> -
-> -	*pino = parent_ino(dentry);
-> -	dput(dentry);
-> -	return 1;
-> -}
-> -
->  static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
->  {
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> @@ -223,14 +208,15 @@ static bool need_inode_page_update(struct f2fs_sb_info *sbi, nid_t ino)
->  	return ret;
->  }
->  
-> -static void try_to_fix_pino(struct inode *inode)
-> +static void try_to_fix_pino(struct dentry *dentry)
->  {
-> +	struct inode *inode = d_inode(dentry);
->  	struct f2fs_inode_info *fi = F2FS_I(inode);
-> -	nid_t pino;
->  
->  	down_write(&fi->i_sem);
-> -	if (file_wrong_pino(inode) && inode->i_nlink == 1 &&
-> -			get_parent_ino(inode, &pino)) {
-> +	if (file_wrong_pino(inode) && inode->i_nlink == 1) {
-> +		nid_t pino = parent_ino(dentry);
-> +
->  		f2fs_i_pino_write(inode, pino);
->  		file_got_pino(inode);
->  	}
-> @@ -310,7 +296,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
->  		 * We've secured consistency through sync_fs. Following pino
->  		 * will be used only for fsynced inodes after checkpoint.
->  		 */
-> -		try_to_fix_pino(inode);
-> +		try_to_fix_pino(file_dentry(file));
->  		clear_inode_flag(inode, FI_APPEND_WRITE);
->  		clear_inode_flag(inode, FI_UPDATE_WRITE);
->  		goto out;
-
-Actually, I think this is wrong because the fsync can be done via a file
-descriptor that was opened to a now-deleted link to the file.
-
-We need to find the dentry whose parent directory is still exists, i.e. the
-parent directory that is counting towards 'inode->i_nlink == 1'.
-
-I think d_find_alias() is what we're looking for.
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 6ab8f621a3c5..855f27468baa 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -165,13 +165,13 @@ static int get_parent_ino(struct inode *inode, nid_t *pino)
- {
-        struct dentry *dentry;
-
--       inode = igrab(inode);
--       dentry = d_find_any_alias(inode);
--       iput(inode);
-+       dentry = d_find_alias(inode);
-        if (!dentry)
-                return 0;
-
+> - Eric
 
 
 _______________________________________________
