@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD5C71C7302
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 May 2020 16:39:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8372D1C730C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 May 2020 16:41:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jWLDG-0002VC-ST; Wed, 06 May 2020 14:39:54 +0000
+	id 1jWLEH-00023Z-3Q; Wed, 06 May 2020 14:40:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jWLDF-0002V4-IB
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:39:53 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jWLEF-00023D-Q0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:40:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MUYnGuIkDHpNd0Wath5rg148Ner5oUZ42h012zDKtWM=; b=hen6qdgttHGY6A8N83MZTeD3UL
- EnaEglvBnVz53UeJ0RDNzDW7A1N3Qoyj4ESJC/ZWB1mCU95ZCBpA7xAHrvST9uOPCgWlF6qD2UQ35
- +mrHU33XjB6fCf3Iiwh8hfowlxeXETGskQcDiHOxIydIa4dRM+FWoeNQXDRk2OyGCiHg=;
+ bh=Jz5d4sy19eeUKnWJuN1OpT8jLV2waeEmCRqvNciiefU=; b=jTPnb95hnMi8g2nKq3AL1KgZO0
+ MvMllSvTeYeMLXpvKHP4YWu12joRcD9l+gyiOjmFOFgK7UOhHbGQ2kw0JvEPhLnGc4tNIE+LXgEio
+ EnHxKlACqHkjM2Og416EQVSyb/wNmnNIPCxspmCmFhyH3uF00ykCul4JzD4TzN9HwlDU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MUYnGuIkDHpNd0Wath5rg148Ner5oUZ42h012zDKtWM=; b=a15pI6ASq/fvDtov5U8fuGvT0Y
- 1X7+kutXp/UzeGP76JVpodL/s1UkxplQ43RyyH3uheioJlOM+a4uSRWS72qFhj9OSxQiii8bQLKO1
- 6kss5XnYQ/bVrZFeaBRt+ayHW4HwZfN+aiiFNiuewELDINLWfzf2c2V0qF+SpkS1eZR0=;
+ bh=Jz5d4sy19eeUKnWJuN1OpT8jLV2waeEmCRqvNciiefU=; b=d5zM8XBzSpFMyyBFReY1caP3Pz
+ 53EFO+Euv/BTg2tBD5Dv84GoxHZbCX6phUijuqJDt6M8NFsC9Ts0WxpF96WVnM29byn4K+rXYuwh4
+ S0ZpUuRgkL9Bk2VorNhzfSc6EDkr444qljldr670JL40xvVwGOX10DqVLaCUD9+8FzkY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jWLDD-00Cygk-Kc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:39:53 +0000
+ id 1jWLEC-00GIDN-Cv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:40:55 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F378F20836;
- Wed,  6 May 2020 14:39:45 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id ADF8420836;
+ Wed,  6 May 2020 14:40:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588775986;
- bh=00NCqV3s7AJ76+/S2VCAXmsuFQ+L+Y8sue8TCPa+yKY=;
+ s=default; t=1588776046;
+ bh=9U62jgahJdR8GAtK62CMoQe0Ovl5NACA8i7JfHZthGE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Z67GinlxMw2MITs4E40InAj7jBrcx65adTSB88vEB2HfiZIyixDy9eyX2IhBewabr
- BJ43HbN5FWiUx+oTv92CrSAa8Y35BmH8gQ9jv8+NhJVMBJUnMcQsr1w0uG1reygiRU
- p2CbayD+XgCtIP59LdlkuGY+doPuFD1YEk+xrsAk=
-Date: Wed, 6 May 2020 07:39:45 -0700
+ b=vHW2zqs1qHsKqGoUSp+2/Z6QdYcq8WpW5a/UGmwIMIw/4g3TWXm1lwnRfgb6oUaMP
+ 8oVnEXD0Fz77VY0W6Tr/m17aZlkLP7gpPYT3uiDzQmFGAyNPEIfgHGW2r50M4raxxR
+ m6SEJy8ppvu98jLun+V97ey8G9P+PZ4l1AV8FRwA=
+Date: Wed, 6 May 2020 07:40:46 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200506143945.GA107238@google.com>
+Message-ID: <20200506144046.GB107238@google.com>
 References: <20200502002920.76569-1-jaegeuk@kernel.org>
- <66e59a2f-c877-6952-cae6-645ba18f9f75@huawei.com>
+ <20200502002920.76569-3-jaegeuk@kernel.org>
+ <38429e30-cd8c-6169-2d4f-90e56a9d202f@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <66e59a2f-c877-6952-cae6-645ba18f9f75@huawei.com>
+In-Reply-To: <38429e30-cd8c-6169-2d4f-90e56a9d202f@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,9 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jWLDD-00Cygk-Kc
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs_io: add fsync
+X-Headers-End: 1jWLEC-00GIDN-Cv
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs_io: show more flags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,58 +92,85 @@ On 05/06, Chao Yu wrote:
 > On 2020/5/2 8:29, Jaegeuk Kim wrote:
 > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 > > ---
-> >  tools/f2fs_io/f2fs_io.c | 25 +++++++++++++++++++++++++
-> >  1 file changed, 25 insertions(+)
+> >  tools/f2fs_io/f2fs_io.c | 28 ++++++++++++++++++++++++++++
+> >  tools/f2fs_io/f2fs_io.h | 12 ++++++++++++
+> >  2 files changed, 40 insertions(+)
 > > 
 > > diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-> > index c1edef1..c84b6ab 100644
+> > index 9be99f0..d1889ff 100644
 > > --- a/tools/f2fs_io/f2fs_io.c
 > > +++ b/tools/f2fs_io/f2fs_io.c
-> > @@ -130,6 +130,30 @@ static void full_write(int fd, const void *buf, size_t count)
+> > @@ -186,6 +186,10 @@ static void do_set_verity(int argc, char **argv, const struct cmd_desc *cmd)
+> >  "f2fs_io getflags [file]\n\n"					\
+> >  "get a flag given the file\n"					\
+> >  "flag can show \n"						\
+> > +"  encryption\n"						\
+> > +"  nocow(pinned)\n"						\
+> > +"  inline_data\n"						\
+> > +"  verity\n"							\
+> >  "  casefold\n"							\
+> >  "  compression\n"						\
+> >  "  nocompression\n"
+> > @@ -222,6 +226,30 @@ static void do_getflags(int argc, char **argv, const struct cmd_desc *cmd)
+> >  		printf("nocompression");
+> >  		exist = 1;
 > >  	}
-> >  }
-> >  
-> > +#define fsync_desc "fsync"
-> > +#define fsync_help						\
-> > +"f2fs_io fsync [file]\n\n"					\
-> 
-> What about supporting fdatasync via an additional argument here?
-
-I prefer to add another command "fdatasync" for simplicity. :P
-
-> 
-> > +"fsync given the file\n"					\
-> > +
-> > +static void do_fsync(int argc, char **argv, const struct cmd_desc *cmd)
-> > +{
-> > +	int fd;
-> > +
-> > +	if (argc != 2) {
-> > +		fputs("Excess arguments\n\n", stderr);
-> > +		fputs(cmd->cmd_help, stderr);
-> > +		exit(1);
+> > +	if (flag & FS_ENCRYPT_FL) {
+> > +		if (exist)
+> > +			printf(",");
+> > +		printf("encrypt");
+> > +		exist = 1;
 > > +	}
-> > +
-> > +	fd = xopen(argv[1], O_WRONLY, 0);
-> > +
-> > +	if (fsync(fd) != 0)
-> > +		die_errno("fsync failed");
-> > +
-> > +	printf("fsync a file\n");
-> > +	exit(0);
-> > +}
-> > +
-> >  #define set_verity_desc "Set fs-verity"
-> >  #define set_verity_help					\
-> >  "f2fs_io set_verity [file]\n\n"				\
-> > @@ -780,6 +804,7 @@ static void do_reserve_cblocks(int argc, char **argv, const struct cmd_desc *cmd
-> >  static void do_help(int argc, char **argv, const struct cmd_desc *cmd);
-> >  const struct cmd_desc cmd_list[] = {
-> >  	_CMD(help),
-> > +	CMD(fsync),
-> >  	CMD(set_verity),
-> >  	CMD(getflags),
-> >  	CMD(setflags),
+> > +	if (flag & FS_VERITY_FL) {
+> > +		if (exist)
+> > +			printf(",");
+> > +		printf("verity");
+> > +		exist = 1;
+> > +	}
+> > +	if (flag & FS_INLINE_DATA_FL) {
+> > +		if (exist)
+> > +			printf(",");
+> > +		printf("inline_data");
+> > +		exist = 1;
+> > +	}
+> > +	if (flag & FS_NOCOW_FL) {
+> > +		if (exist)
+> > +			printf(",");
+> > +		printf("nocow(pinned)");
+> > +		exist = 1;
+> > +	}
+> >  	if (!exist)
+> >  		printf("none");
+> >  	printf("\n");
+> > diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
+> > index c6ea7ff..2c828bc 100644
+> > --- a/tools/f2fs_io/f2fs_io.h
+> > +++ b/tools/f2fs_io/f2fs_io.h
+> > @@ -110,6 +110,18 @@ typedef u32	__be32;
+> >  #define F2FS_IOC_FSGETXATTR		FS_IOC_FSGETXATTR
+> >  #define F2FS_IOC_FSSETXATTR		FS_IOC_FSSETXATTR
+> >  
+> > +#ifndef FS_ENCRYPT_FL
+> > +#define FS_ENCRYPT_FL			0x00000800 /* Encrypted file */
+> > +#endif
+> > +#ifndef FS_VERITY_FL
+> > +#define FS_VERITY_FL			0x00100000 /* Verity protected inode */
+> > +#endif
+> > +#ifndef FS_INLINE_DATA_FL
+> > +#define FS_INLINE_DATA_FL		0x10000000 /* Reserved for ext4 */
+> 
+> /* Inline data regular/symlink */
+
+Done.
+
+> 
+> > +#endif
+> > +#ifndef FS_NOCOW_FL
+> > +#define FS_NOCOW_FL			0x00800000 /* Do not cow file */
+> > +#endif
+> >  #ifndef FS_NOCOMP_FL
+> >  #define FS_NOCOMP_FL			0x00000400 /* Don't compress */
+> >  #endif
 > > 
 
 
