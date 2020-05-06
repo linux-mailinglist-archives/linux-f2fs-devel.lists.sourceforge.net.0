@@ -2,66 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 713161C6EAC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 May 2020 12:46:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD5C71C7302
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 May 2020 16:39:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jWHZI-0002nl-3K; Wed, 06 May 2020 10:46:24 +0000
+	id 1jWLDG-0002VC-ST; Wed, 06 May 2020 14:39:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jWHZG-0002nZ-8V
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 10:46:22 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jWLDF-0002V4-IB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:39:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0FFDsM5W9DnQM0SQZ7/kIO10fvdu/gXICi6d2RcOrm8=; b=iFRFqLFko8yssTPHhKRWjJwYpn
- WAXTpBvsPdw8skRyef8tUHbv3U0btjJ7Em1h8rPihkJO4QKxwv3ArnulykkftS1pLswipcLt7mv78
- ok98xb+fRKNArWeAVqIw80mchj++Wk7Yuc19ToFM3pQ5ataZw0QgHji9ekLpc0hiL3h8=;
+ bh=MUYnGuIkDHpNd0Wath5rg148Ner5oUZ42h012zDKtWM=; b=hen6qdgttHGY6A8N83MZTeD3UL
+ EnaEglvBnVz53UeJ0RDNzDW7A1N3Qoyj4ESJC/ZWB1mCU95ZCBpA7xAHrvST9uOPCgWlF6qD2UQ35
+ +mrHU33XjB6fCf3Iiwh8hfowlxeXETGskQcDiHOxIydIa4dRM+FWoeNQXDRk2OyGCiHg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=0FFDsM5W9DnQM0SQZ7/kIO10fvdu/gXICi6d2RcOrm8=; b=W
- xDaTHJaCWxPbbX+l7G55CN0Cn4uo0CdPBTiYQIjb6Lw6b4hg/ncLirsNW5b+FWyEmEgWCrP8PTnUG
- OP/nOZ1MpBMft/SZDbVjht7j9ZWWgWUO7cam//nsVerZddPpBSQm9LLje7+GhTDLpHPab1XAnojfu
- QHSxr9bxiDLY5ank=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=MUYnGuIkDHpNd0Wath5rg148Ner5oUZ42h012zDKtWM=; b=a15pI6ASq/fvDtov5U8fuGvT0Y
+ 1X7+kutXp/UzeGP76JVpodL/s1UkxplQ43RyyH3uheioJlOM+a4uSRWS72qFhj9OSxQiii8bQLKO1
+ 6kss5XnYQ/bVrZFeaBRt+ayHW4HwZfN+aiiFNiuewELDINLWfzf2c2V0qF+SpkS1eZR0=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jWHZE-00Fxhi-Jn
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 10:46:22 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id BC9F388DE92295BC2E09;
- Wed,  6 May 2020 18:46:08 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 6 May 2020 18:45:58 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Wed, 6 May 2020 18:45:42 +0800
-Message-ID: <20200506104542.123575-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.18.0.rc1
+ id 1jWLDD-00Cygk-Kc
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 May 2020 14:39:53 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id F378F20836;
+ Wed,  6 May 2020 14:39:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1588775986;
+ bh=00NCqV3s7AJ76+/S2VCAXmsuFQ+L+Y8sue8TCPa+yKY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Z67GinlxMw2MITs4E40InAj7jBrcx65adTSB88vEB2HfiZIyixDy9eyX2IhBewabr
+ BJ43HbN5FWiUx+oTv92CrSAa8Y35BmH8gQ9jv8+NhJVMBJUnMcQsr1w0uG1reygiRU
+ p2CbayD+XgCtIP59LdlkuGY+doPuFD1YEk+xrsAk=
+Date: Wed, 6 May 2020 07:39:45 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200506143945.GA107238@google.com>
+References: <20200502002920.76569-1-jaegeuk@kernel.org>
+ <66e59a2f-c877-6952-cae6-645ba18f9f75@huawei.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <66e59a2f-c877-6952-cae6-645ba18f9f75@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jWHZE-00Fxhi-Jn
-Subject: [f2fs-dev] [PATCH v2] f2fs: shrink spinlock coverage
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jWLDD-00Cygk-Kc
+Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs_io: add fsync
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,64 +83,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In f2fs_try_to_free_nids(), .nid_list_lock spinlock critical region will
-increase as expected shrink number increase, to avoid spining other CPUs
-for long time, it's better to implement like extent cache and nats
-shrinker.
+On 05/06, Chao Yu wrote:
+> On 2020/5/2 8:29, Jaegeuk Kim wrote:
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > ---
+> >  tools/f2fs_io/f2fs_io.c | 25 +++++++++++++++++++++++++
+> >  1 file changed, 25 insertions(+)
+> > 
+> > diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> > index c1edef1..c84b6ab 100644
+> > --- a/tools/f2fs_io/f2fs_io.c
+> > +++ b/tools/f2fs_io/f2fs_io.c
+> > @@ -130,6 +130,30 @@ static void full_write(int fd, const void *buf, size_t count)
+> >  	}
+> >  }
+> >  
+> > +#define fsync_desc "fsync"
+> > +#define fsync_help						\
+> > +"f2fs_io fsync [file]\n\n"					\
+> 
+> What about supporting fdatasync via an additional argument here?
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v2:
-- fix unlock wrong spinlock.
- fs/f2fs/node.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+I prefer to add another command "fdatasync" for simplicity. :P
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 4da0d8713df5..ad0b14f4dab8 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2488,7 +2488,6 @@ void f2fs_alloc_nid_failed(struct f2fs_sb_info *sbi, nid_t nid)
- int f2fs_try_to_free_nids(struct f2fs_sb_info *sbi, int nr_shrink)
- {
- 	struct f2fs_nm_info *nm_i = NM_I(sbi);
--	struct free_nid *i, *next;
- 	int nr = nr_shrink;
- 
- 	if (nm_i->nid_cnt[FREE_NID] <= MAX_FREE_NIDS)
-@@ -2498,14 +2497,22 @@ int f2fs_try_to_free_nids(struct f2fs_sb_info *sbi, int nr_shrink)
- 		return 0;
- 
- 	spin_lock(&nm_i->nid_list_lock);
--	list_for_each_entry_safe(i, next, &nm_i->free_nid_list, list) {
--		if (nr_shrink <= 0 ||
--				nm_i->nid_cnt[FREE_NID] <= MAX_FREE_NIDS)
-+	while (nr_shrink) {
-+		struct free_nid *i;
-+
-+		if (nm_i->nid_cnt[FREE_NID] <= MAX_FREE_NIDS)
- 			break;
- 
-+		i = list_first_entry(&nm_i->free_nid_list,
-+					struct free_nid, list);
-+		list_del(&i->list);
-+		spin_unlock(&nm_i->nid_list_lock);
-+
- 		__remove_free_nid(sbi, i, FREE_NID);
- 		kmem_cache_free(free_nid_slab, i);
- 		nr_shrink--;
-+
-+		spin_lock(&nm_i->nid_list_lock);
- 	}
- 	spin_unlock(&nm_i->nid_list_lock);
- 	mutex_unlock(&nm_i->build_lock);
--- 
-2.18.0.rc1
-
+> 
+> > +"fsync given the file\n"					\
+> > +
+> > +static void do_fsync(int argc, char **argv, const struct cmd_desc *cmd)
+> > +{
+> > +	int fd;
+> > +
+> > +	if (argc != 2) {
+> > +		fputs("Excess arguments\n\n", stderr);
+> > +		fputs(cmd->cmd_help, stderr);
+> > +		exit(1);
+> > +	}
+> > +
+> > +	fd = xopen(argv[1], O_WRONLY, 0);
+> > +
+> > +	if (fsync(fd) != 0)
+> > +		die_errno("fsync failed");
+> > +
+> > +	printf("fsync a file\n");
+> > +	exit(0);
+> > +}
+> > +
+> >  #define set_verity_desc "Set fs-verity"
+> >  #define set_verity_help					\
+> >  "f2fs_io set_verity [file]\n\n"				\
+> > @@ -780,6 +804,7 @@ static void do_reserve_cblocks(int argc, char **argv, const struct cmd_desc *cmd
+> >  static void do_help(int argc, char **argv, const struct cmd_desc *cmd);
+> >  const struct cmd_desc cmd_list[] = {
+> >  	_CMD(help),
+> > +	CMD(fsync),
+> >  	CMD(set_verity),
+> >  	CMD(getflags),
+> >  	CMD(setflags),
+> > 
 
 
 _______________________________________________
