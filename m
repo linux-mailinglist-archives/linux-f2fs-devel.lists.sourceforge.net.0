@@ -2,61 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7F3E1C8426
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 May 2020 10:02:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 133721C8428
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 May 2020 10:02:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jWbTz-0004W6-Qu; Thu, 07 May 2020 08:02:15 +0000
+	id 1jWbU9-00087N-DM; Thu, 07 May 2020 08:02:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jWbTy-0004Va-Nq
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 May 2020 08:02:14 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jWbU1-00086F-7s
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 May 2020 08:02:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3YJzPBm6IYFDloMYW7IxomYb64yom6inso4U8I7pbBE=; b=Ijj9jVUxq4L3K8gGdUXemmTlWZ
- VR5kiJEc91MqjYr1OCFLZ/IMV0N+J5XiHmq1ihLnjBDYGv7queLa1DAt/1V9rLM5Q4u7HJgVLHrgf
- XY3+KRc5dU699hBu+wdpPlhYVPRlje3ggB4A2DRYztQuQwDlUO3lRp39JcYpiRQair3c=;
+ bh=TV3dhiouaG9irHiZPTAmDTGRefQJcc+KN+sKXM7xwt4=; b=Kvt8ZIwm9+cYvAbicMuKAuj3rf
+ c/9gKOw7kwf4UKAyPuqPTl2QDRDGB9Ik0vPTLwDZvGscqjLPnaTKLPno9KQLJp68+U/5WFxf7XmiA
+ S58Zkg7u7KmWnP4TjftRAvNBK4ay7/U6GLr1b4cBORdU+C0LN51TTThOzOMBFKrCSftY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=3YJzPBm6IYFDloMYW7IxomYb64yom6inso4U8I7pbBE=; b=V
- 63Pny0NaYawLB/I8+OmM9USwn17ZoCwK19jb56qDCGjd/XudjGDMqFJtmKylgsvRwU8yXvUo9ie9F
- 4/1O35z04zPJ41wHoX3gluuKhWu45A7X5fYutyOdQm9s3bh952arjO1IPm2qpb+Wg4uC3aSm34MX+
- f4X5md2rOKOCN3+8=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=TV3dhiouaG9irHiZPTAmDTGRefQJcc+KN+sKXM7xwt4=; b=fgjpFz9/WsIba0dJtj/7pmSXV9
+ gCrrw2V+Xv5E2l0Ra6Tw9ftU3diZdlG5eiEf43GCl/VphN+RqSIC7OUmm6pAAfLKuvOrpIYMwP/ZV
+ 0WDBERqEMGxgy8ZSFChV09UH1klmw/xbdfSTePgybMlTEP02yeoQs7hX4fuQ5zYNWb90=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jWbTv-00AsGG-22
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 May 2020 08:02:14 +0000
+ id 1jWbTv-00HQwD-6X
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 May 2020 08:02:17 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2E55D20753;
+ by mail.kernel.org (Postfix) with ESMTPSA id 789012083B;
  Thu,  7 May 2020 08:02:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1588838525;
- bh=8lxPu1GJKKrJRy1UQ0dnX2QT0LRqToRw9cNPct9sjzk=;
- h=From:To:Cc:Subject:Date:From;
- b=IU4KDFFnoexDsKP4WOWlZEb7iBX27h0ePrYPQ6zhAYK/UEQxP4R5NDjaEMXfrGnrQ
- z13uPdrFA3/0DYgUkfGM6LW/AHQXyC3ooKXZf6WX4N3xNP4PyxjxBuLc99f8b4CGom
- OHSum1KEDBr1tX4L9OJ5SIY65QHyJQM+jIejr3bs=
+ bh=5KW/p1GbhRBZezjeN6Jxtl3o/jDLJ8jnDdhbn7WS9zI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=SUI0uGI4UpXv2rTaeWxVIAmqMXoCfCwc+fCMmUclotlv9JZ167jjDT8HxOo4WNyGT
+ WaZijTF07p1quUYHyyg8X5af/6RawBkPjtrC5l97K0yz7hZW0CZMn6ChGBhKpHVyrR
+ r80zLDH/MSgNwOLAUJahxyoPU5u6SKiElgcwXrgo=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  7 May 2020 00:59:01 -0700
-Message-Id: <20200507075905.953777-1-ebiggers@kernel.org>
+Date: Thu,  7 May 2020 00:59:02 -0700
+Message-Id: <20200507075905.953777-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200507075905.953777-1-ebiggers@kernel.org>
+References: <20200507075905.953777-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -67,9 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jWbTv-00AsGG-22
-Subject: [f2fs-dev] [PATCH 0/4] f2fs: rework filename handling
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jWbTv-00HQwD-6X
+Subject: [f2fs-dev] [PATCH 1/4] f2fs: don't leak filename in
+ f2fs_try_convert_inline_dir()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,41 +85,52 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-fscrypt@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>,
+ Gabriel Krisman Bertazi <krisman@collabora.com>, stable@vger.kernel.org,
  Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patchset reworks f2fs's handling of filenames to make it much
-easier to correctly implement all combinations of normal, encrypted,
-casefolded, and encrypted+casefolded directories.  It also optimizes all
-filesystem operations to compute the dirhash and casefolded name only
-once, rather than once per directory level or directory block.
+From: Eric Biggers <ebiggers@google.com>
 
-Patch 4 is RFC and shows how we can add support for encrypted+casefolded
-directories fairly easily after this rework -- including support for
-roll-forward recovery.  (It's incomplete as it doesn't include the
-needed dentry_ops -- those can be found in Daniel's patchset
-https://lkml.kernel.org/r/20200307023611.204708-1-drosen@google.com)
+We need to call fscrypt_free_filename() to free the memory allocated by
+fscrypt_setup_filename().
 
-So far this is only lightly tested, e.g. with the xfstests in the
-'encrypt' and 'casefold' groups.  I haven't tested patch 4 yet.
+Fixes: b06af2aff28b ("f2fs: convert inline_dir early before starting rename")
+Cc: <stable@vger.kernel.org> # v5.6+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/inline.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Eric Biggers (4):
-  f2fs: don't leak filename in f2fs_try_convert_inline_dir()
-  f2fs: split f2fs_d_compare() from f2fs_match_name()
-  f2fs: rework filename handling
-  f2fs: Handle casefolding with Encryption (INCOMPLETE)
-
- fs/f2fs/dir.c      | 415 +++++++++++++++++++++++++++------------------
- fs/f2fs/f2fs.h     |  85 +++++++---
- fs/f2fs/hash.c     |  87 +++++-----
- fs/f2fs/inline.c   |  49 +++---
- fs/f2fs/namei.c    |   6 +-
- fs/f2fs/recovery.c |  61 +++++--
- 6 files changed, 430 insertions(+), 273 deletions(-)
-
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 4167e540815185..59a4b7ff11e17a 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -559,12 +559,12 @@ int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry)
+ 	ipage = f2fs_get_node_page(sbi, dir->i_ino);
+ 	if (IS_ERR(ipage)) {
+ 		err = PTR_ERR(ipage);
+-		goto out;
++		goto out_fname;
+ 	}
+ 
+ 	if (f2fs_has_enough_room(dir, ipage, &fname)) {
+ 		f2fs_put_page(ipage, 1);
+-		goto out;
++		goto out_fname;
+ 	}
+ 
+ 	inline_dentry = inline_data_addr(dir, ipage);
+@@ -572,6 +572,8 @@ int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry)
+ 	err = do_convert_inline_dir(dir, ipage, inline_dentry);
+ 	if (!err)
+ 		f2fs_put_page(ipage, 1);
++out_fname:
++	fscrypt_free_filename(&fname);
+ out:
+ 	f2fs_unlock_op(sbi);
+ 	return err;
 -- 
 2.26.2
 
