@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D439F1CB0C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 May 2020 15:47:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18BE31CB0EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 May 2020 15:48:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jX3Lu-0003Pm-75; Fri, 08 May 2020 13:47:46 +0000
+	id 1jX3Ms-0007gc-LQ; Fri, 08 May 2020 13:48:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jX3Ls-0003PX-Dt
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:47:44 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jX3Mr-0007gK-LX
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:48:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XgNLaYee7Zf/lAj40vwKqc9YGH7B6pbTm2i+PYDq7+Y=; b=LSF1pzwFkklGHRJTRpnBt7XYvT
- mSfSrTUA+ipzxL4gljkBExaZggTas3cpH9W+jcIIqSyikom5cvBd3zmjIZU4XJzYGJePanORBErS+
- SiH9YCYXZs7aSE69kWLmEefdoQ/7qegvIZFQMJFyyqUzNLHP1nnq70LX0IqCO6nPMm6E=;
+ bh=E3iNtgRe9tz7HUEfShrhXrZY+umlVh6JLS4nBkYPNas=; b=T/3m//ci+MZcgddpI4M+KqQKQx
+ sY9XNCKKOJwK8HUn4UGIbFvabJXIidggnKTEHn8e2QZemJFoa/Cf9RP2qk3hB5uPISE20LiuQ56Tl
+ +22B3jEe5xnMqK6MONr8UAS1gsfgBRA3V0/SjQFhxdoec4sSaucJF3ZLo12iRUTlrU2g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XgNLaYee7Zf/lAj40vwKqc9YGH7B6pbTm2i+PYDq7+Y=; b=JvbeE2AMH7Du3f3I6502DzdeqZ
- VqmxOiqb6EPtuw3niyjhvQHd7zmxE362HfMsQASLVPdNVP5401ZEw6eQjYKYZEckBlUIGq+iGKh5M
- p3hWTytPbzFteCXt79aVGh/+ap6UiukJkHOV9uP7ORIsx/AEMFzYJIXTJBf3Gl6rwAD0=;
+ bh=E3iNtgRe9tz7HUEfShrhXrZY+umlVh6JLS4nBkYPNas=; b=JwwVLFDifxzoPuFgnqsbjmKSgk
+ lMkp39+UNVMKK6OzYIRRmNyDJBVMigtJLaLS2kb0Ov7ubrgYMlSpEItsrRp/aldR85475qUEm6ml7
+ XqoleUyBmXwLj+5tLVUodml8d/UYLUMLkI/wnfPhkt902mTCwHRxAo6RjsMbLzx9+Cpg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jX3Lp-001tUW-Jy
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:47:44 +0000
+ id 1jX3Mj-001te4-Kn
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:48:38 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8658B2070B;
- Fri,  8 May 2020 13:47:32 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 05BEF2070B;
+ Fri,  8 May 2020 13:48:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588945652;
- bh=KyLkw4FIQ448eGd/+tb293VAzGUQcL3eG6cYNMKrqBc=;
+ s=default; t=1588945712;
+ bh=XLYgNTMXtmFb0FJ9foky3Qoqw7m/zpE9+WXErs/+2Hw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nWywNIbjc5ts/cFIwMEi575SnVZ7yaork2GJhTjQUeWWLm0Z3A1nX5eYr/2P0Hqrr
- ybNJxdo/sNYCLcDvuZNOhYi84IlG5FhmWdhm3xWKEoDOPIhwLUsTcndqkWsd8vOhb6
- apl2Bi1eTCu0d2tGp8ThYNf4gMbuYaa41yu+cYw0=
-Date: Fri, 8 May 2020 06:47:32 -0700
+ b=OZQYXOfQ1msmCOmNcREhTW7pzGzMwCkYfd2tB25GL5d92WtSBdl4/2RfCCAo1REQ+
+ Onfz9ddUoucGIfbCvre1J25AVvC9VzAIv2rRH6PSo5Bx4qM9aJoGMQ+xqLZxafHGvb
+ Rn/TzHsILigxCPAQ2UQwCdqcvPMlQbNpimM07cMg=
+Date: Fri, 8 May 2020 06:48:31 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20200508134732.GA88927@google.com>
-References: <20200508092921.208447-1-daeho43@gmail.com>
+Message-ID: <20200508134831.GB88927@google.com>
+References: <20200508115652.226158-1-daeho43@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200508092921.208447-1-daeho43@gmail.com>
+In-Reply-To: <20200508115652.226158-1-daeho43@gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,8 +68,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jX3Lp-001tUW-Jy
+X-Headers-End: 1jX3Mj-001te4-Kn
 Subject: Re: [f2fs-dev] [PATCH] f2fs: remove race condition in releasing
  cblocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -89,12 +88,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Daeho,
-
-Please let me integrate this patch into the original patch since it is still in
-the dev branch.
-
-Thanks,
+Is this v2?
 
 On 05/08, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
@@ -108,6 +102,7 @@ On 05/08, Daeho Jeong wrote:
 > without being interfered by writepages path.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
 > ---
 >  fs/f2fs/file.c | 34 ++++++++++++++++++++++++----------
 >  1 file changed, 24 insertions(+), 10 deletions(-)
