@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD5FE1CB136
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 May 2020 15:58:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 796241CB463
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 May 2020 18:11:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jX3WR-0005D8-Hc; Fri, 08 May 2020 13:58:39 +0000
+	id 1jX5ae-0001Vx-95; Fri, 08 May 2020 16:11:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jX3WP-0005Cf-Dz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:58:37 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jX5ad-0001Vp-E0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 16:11:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/Y05BmAddQ9gRMP3JIqyVTMufkDOqm92tAcpUgLTWeM=; b=nBeq8E3zedDiZoJaWOUWdgk6qb
- o2F2WTbJ0UcrX9UNRJXYN76q1tVUhK7B3gEyADvEBoVsHBp4Mxbcx82fSt2qbeKUR7UmSj3V25mYa
- MiGc5gYawXBH/ta9zvy0K/ELlmbyCsp+ZntFHIcwZ+gJNVc1g1JcTTrF2SheY2HOtq7g=;
+ bh=2oBFHESUV6LZ4ysh1mnwnoclw8pghTfGbTZvip9FZEw=; b=DN4+hTP5zcka0ASq6HLhs7gA7+
+ 4G6+aJx4LfAsrYp+L3BBbwM5t1YODvwX+LfWCAOnJiolNRvk1x4DnFIQqFz8KIhrksuaSFPtr/UfR
+ +ovE8aTG2jFnwM1nU6Q7p3143n7PN3Lg7uM06oct+6lA/aA7cZ87H8BvsiShaa2G3pzY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/Y05BmAddQ9gRMP3JIqyVTMufkDOqm92tAcpUgLTWeM=; b=ObLsxpvgnUP+VBoC00Lc7jNiCO
- cb7mi/3HXlyc+6/EknBdBb92nx309J3SiGBdSbq7QYc9qxyGW0/BxFU3W12wMng5bF7HuZWf+pLOV
- r69EC9UrSpjMieYEqkylduHRVUXkeFoof3iaqz5kqKFmoyxCesvVfB6JQl4tiAIWWpO8=;
+ bh=2oBFHESUV6LZ4ysh1mnwnoclw8pghTfGbTZvip9FZEw=; b=Lggzv7XYZr1M84dhz82Oy2lGIW
+ Dc5/VtOvj/GjNCiPvqTmsY/8RjhzyFCPJdm9/m/GC+KLi/4SGpj5tV7M+Hf03/oYE5X39yIxsQrXK
+ 0onfuZHFS6fpB0rSLWRlQEexPYntM47qJHf0P7jWoylKuYdmhjsUq0s1md5ulkzWKAxY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jX3WO-001uVs-5D
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 13:58:37 +0000
+ id 1jX5ab-00CkEm-IJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 May 2020 16:11:07 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 894CC20708;
- Fri,  8 May 2020 13:58:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C6A6921473;
+ Fri,  8 May 2020 16:10:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588946310;
- bh=75BmgCekDDypHYhl8o0x+TB4D5woIZ1Ys7LUl8vhFAw=;
+ s=default; t=1588954252;
+ bh=CngiETS7U8ogJRzhIAr/EkeUvISa1C5VP4Jj6loUtak=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HewYAn1MgOghlslV5NEvlvRIrxjL6i/gdFStGYGfAXyRB4D2xL9derTW0LsYUs55M
- ifD71YM0bSU0y1i6il2Ridf6DQpnFY0buL3Sj0liYRv8/kocrJaj6OBxI7tNvuu2Cb
- bR2y0R+9DttltXTV9dKLdNnfiUcdqtPF66s/5l8k=
-Date: Fri, 8 May 2020 06:58:30 -0700
+ b=oStbxdglOMtUlQGeVwfj1nbCiFYPbNAyqYsWAckLKAfCrntEbOxHnepG8AU/EuuQP
+ S9Ys7M4l6CEpsTsKd7OZ5UgO6WuMZhMM73CLZu+avs+f4q6nDVoC6LcqkOORyGx2m4
+ yir+WIq2rwTMo5QWsw757cHq67kWjTtLeBKTFl58=
+Date: Fri, 8 May 2020 09:10:52 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20200508135830.GC88927@google.com>
-References: <20200508115652.226158-1-daeho43@gmail.com>
- <20200508134831.GB88927@google.com>
+To: Sayali Lokhande <sayalil@codeaurora.org>
+Message-ID: <20200508161052.GA49579@google.com>
+References: <1588244309-1468-1-git-send-email-sayalil@codeaurora.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200508134831.GB88927@google.com>
+In-Reply-To: <1588244309-1468-1-git-send-email-sayalil@codeaurora.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jX3WO-001uVs-5D
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove race condition in releasing
- cblocks
+X-Headers-End: 1jX5ab-00CkEm-IJ
+Subject: Re: [f2fs-dev] [PATCH V4] f2fs: Avoid double lock for cp_rwsem
+ during checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,109 +82,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel@vger.kernel.org, kernel-team@android.com,
- Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/08, Jaegeuk Kim wrote:
-> Is this v2?
+Hi Sayali,
 
-nvm. it seems the same version.
+In order to address the perf regression, how about this?
 
-> 
-> On 05/08, Daeho Jeong wrote:
-> > From: Daeho Jeong <daehojeong@google.com>
-> > 
-> > Now, if writing pages and releasing compress blocks occur
-> > simultaneously, and releasing cblocks is executed more than one time
-> > to a file, then total block count of filesystem and block count of the
-> > file could be incorrect and damaged.
-> > 
-> > We have to execute releasing compress blocks only one time for a file
-> > without being interfered by writepages path.
-> > 
-> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> > Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> >  fs/f2fs/file.c | 34 ++++++++++++++++++++++++----------
-> >  1 file changed, 24 insertions(+), 10 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > index 4aab4b42d8ba..f7de2a1da528 100644
-> > --- a/fs/f2fs/file.c
-> > +++ b/fs/f2fs/file.c
-> > @@ -3488,6 +3488,7 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
-> >  	pgoff_t page_idx = 0, last_idx;
-> >  	unsigned int released_blocks = 0;
-> >  	int ret;
-> > +	int writecount;
-> >  
-> >  	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
-> >  		return -EOPNOTSUPP;
-> > @@ -3502,20 +3503,33 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
-> >  	if (ret)
-> >  		return ret;
-> >  
-> > -	if (!F2FS_I(inode)->i_compr_blocks)
-> > -		goto out;
-> > -
-> >  	f2fs_balance_fs(F2FS_I_SB(inode), true);
-> >  
-> >  	inode_lock(inode);
-> >  
-> > -	if (!IS_IMMUTABLE(inode)) {
-> > -		F2FS_I(inode)->i_flags |= F2FS_IMMUTABLE_FL;
-> > -		f2fs_set_inode_flags(inode);
-> > -		inode->i_ctime = current_time(inode);
-> > -		f2fs_mark_inode_dirty_sync(inode, true);
-> > +	writecount = atomic_read(&inode->i_writecount);
-> > +	if ((filp->f_mode & FMODE_WRITE && writecount != 1) || writecount) {
-> > +		ret = -EBUSY;
-> > +		goto out;
-> >  	}
-> >  
-> > +	if (IS_IMMUTABLE(inode)) {
-> > +		ret = -EINVAL;
-> > +		goto out;
-> > +	}
-> > +
-> > +	ret = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
-> > +	if (ret)
-> > +		goto out;
-> > +
-> > +	if (!F2FS_I(inode)->i_compr_blocks)
-> > +		goto out;
-> > +
-> > +	F2FS_I(inode)->i_flags |= F2FS_IMMUTABLE_FL;
-> > +	f2fs_set_inode_flags(inode);
-> > +	inode->i_ctime = current_time(inode);
-> > +	f2fs_mark_inode_dirty_sync(inode, true);
-> > +
-> >  	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> >  	down_write(&F2FS_I(inode)->i_mmap_sem);
-> >  
-> > @@ -3554,9 +3568,9 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
-> >  
-> >  	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> >  	up_write(&F2FS_I(inode)->i_mmap_sem);
-> > -
-> > -	inode_unlock(inode);
-> >  out:
-> > +	inode_unlock(inode);
-> > +
-> >  	mnt_drop_write_file(filp);
-> >  
-> >  	if (ret >= 0) {
-> > -- 
-> > 2.26.2.645.ge9eca65c58-goog
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+From 48418af635884803ffb35972df7958a2e6649322 Mon Sep 17 00:00:00 2001
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Fri, 8 May 2020 09:08:37 -0700
+Subject: [PATCH] f2fs: avoid double lock for cp_rwsem during checkpoint
+
+There could be a scenario where f2fs_sync_node_pages gets
+called during checkpoint, which in turn tries to flush
+inline data and calls iput(). This results in deadlock as
+iput() tries to hold cp_rwsem, which is already held at the
+beginning by checkpoint->block_operations().
+
+Call stack :
+
+Thread A		Thread B
+f2fs_write_checkpoint()
+- block_operations(sbi)
+ - f2fs_lock_all(sbi);
+  - down_write(&sbi->cp_rwsem);
+
+                        - open()
+                         - igrab()
+                        - write() write inline data
+                        - unlink()
+- f2fs_sync_node_pages()
+ - if (is_inline_node(page))
+  - flush_inline_data()
+   - ilookup()
+     page = f2fs_pagecache_get_page()
+     if (!page)
+      goto iput_out;
+     iput_out:
+			-close()
+			-iput()
+       iput(inode);
+       - f2fs_evict_inode()
+        - f2fs_truncate_blocks()
+         - f2fs_lock_op()
+           - down_read(&sbi->cp_rwsem);
+
+Fixes: 2049d4fcb057 ("f2fs: avoid multiple node page writes due to inline_data")
+Signed-off-by: Sayali Lokhande <sayalil@codeaurora.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/node.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 1db8cabf727ef..626d7daca09de 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1870,8 +1870,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 				goto continue_unlock;
+ 			}
+ 
+-			/* flush inline_data */
+-			if (is_inline_node(page)) {
++			/* flush inline_data, if it's not sync path. */
++			if (do_balance && is_inline_node(page)) {
+ 				clear_inline_node(page);
+ 				unlock_page(page);
+ 				flush_inline_data(sbi, ino_of_node(page));
+-- 
+2.26.2.645.ge9eca65c58-goog
+
 
 
 _______________________________________________
