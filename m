@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A8151D1D36
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 20:16:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BF891D1D3D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 20:17:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jYvvf-0006JR-3i; Wed, 13 May 2020 18:16:27 +0000
+	id 1jYvwR-00045k-Ts; Wed, 13 May 2020 18:17:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jYvvd-0006JK-Po
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 18:16:25 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jYvwQ-00045V-J3
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 18:17:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8jKfxt998Pi+5fZanZG8tQW8Rgngq6MexczIKBG+3jU=; b=JdroFNuxz21Jwb4d4T/Wizz1NK
- g6Xt+23dayBXN1eYV80pKCr+VnLSSjQPXsv2G0et1QwaGs67z2e30/jeYt+qG8GTs66rRDuxT/KJh
- cbVzNx351uLZEwEyphpMk2XoBZmATdR2ZcLzsDcNCHz0GltAdsZzUjq8mT43b/6nTYmY=;
+ bh=F9o68Uxu9D8jMvM7fsMCc03ytJoSDNBYlEYa0yTo4XQ=; b=QfdFtSD4OrI/ts11k+Cw31i0XN
+ KadY3uZ/VnQHfbSigVkT1HufTqqZG/l/cbYbqCbnDsPzQzm6xODBmm467g3rQ5Cn3T1a89Tre2m++
+ dq5GU6CTZvqC8C3TdFQnPO6HNXgjrUEH1JiDjVjUK2x1+5vMZpgh8ZTSuhoW8GiD3QeA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8jKfxt998Pi+5fZanZG8tQW8Rgngq6MexczIKBG+3jU=; b=MKY8JhN5tQdxVTd3yu7tBrTbf/
- SQ+nevf7iuzF4WK4b7f99EfyrvyKVtFDx1dXBtu+WrD2LL1smHyEbgRCrM8DjUHfQv7tzmipHKTFY
- 75HDXN56XefJD7LkNWk29sV8ehkeippZ1GU3EJMBgk2VT2r81St0QMu3sI9zdnq1CyNg=;
+ bh=F9o68Uxu9D8jMvM7fsMCc03ytJoSDNBYlEYa0yTo4XQ=; b=SXre2jTzS0Qu3bY5byXMqv+j2+
+ 6rmlnaT7eCqrhQdW25NYqv637a2ZZXaI6qC5uc/+xCJR+7j0XR/RED+uY+zZivkusryPsSGggtbrz
+ 5VmTBrAoraFHYrUH5gxbFXSO/jd9kDwhR0Oq7FL017RKm9cROE0llaXDgTZg18jHVJuM=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jYvvc-008tns-OZ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 18:16:25 +0000
+ id 1jYvwO-008tqu-Hw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 18:17:14 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5141A20659;
- Wed, 13 May 2020 18:16:17 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7312820659;
+ Wed, 13 May 2020 18:17:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589393777;
- bh=NzWZMwcALO2Ink36HyIe2Q6IAjI7yALGFMtqrR20MkY=;
+ s=default; t=1589393820;
+ bh=7OdZ4IZArUi+L4mY8bHUPOZTuTiNZ3U2f/N6r1sYvNA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Cq1KZYO+yqMKqCVJa5a+qSnmOdDeU9MYSCzy91/uXLdy/BkeajpPJD0xzF62BtUSi
- v0car04IsUZjOGWn3W2aZ+zTtfHX798CRa97jEknrFuB/IMQB9tCptjZNaol5OyNRV
- 0MPR7cNoSo5OM4BXzpqeaG6ZWtVSZ8K9dfVGyYm8=
-Date: Wed, 13 May 2020 11:16:15 -0700
+ b=tksfnANLVmlXEvwcksk10I0WQqNWoydzaZczzHwya8RjqTwR39GMXOEVvQV4MIX04
+ 35pvgssetPaGXSG5fZwqJf9km87mgDBWNsN3BLyEF2BGTjgo3GA1B5IhhFkpr9wl3K
+ a7yYuAlxQnWqha8R1PhibTiiwD1Xy5rYh4/0/Evc=
+Date: Wed, 13 May 2020 11:16:58 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200513181615.GF1243@sol.localdomain>
+Message-ID: <20200513181658.GG1243@sol.localdomain>
 References: <20200430115959.238073-1-satyat@google.com>
- <20200430115959.238073-7-satyat@google.com>
+ <20200430115959.238073-8-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200430115959.238073-7-satyat@google.com>
+In-Reply-To: <20200430115959.238073-8-satyat@google.com>
 X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,9 +71,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jYvvc-008tns-OZ
-Subject: Re: [f2fs-dev] [PATCH v12 06/12] scsi: ufs: UFS driver v2.1 spec
- crypto additions
+X-Headers-End: 1jYvwO-008tqu-Hw
+Subject: Re: [f2fs-dev] [PATCH v12 07/12] scsi: ufs: UFS crypto API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,36 +94,23 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Apr 30, 2020 at 11:59:53AM +0000, Satya Tangirala wrote:
-> Add the crypto registers and structs defined in v2.1 of the JEDEC UFSHCI
-> specification in preparation to add support for inline encryption to
-> UFS.
+On Thu, Apr 30, 2020 at 11:59:54AM +0000, Satya Tangirala wrote:
+> Introduce functions to manipulate UFS inline encryption hardware
+> in line with the JEDEC UFSHCI v2.1 specification and to work with the
+> block keyslot manager.
+> 
+> The UFS crypto API will assume by default that a vendor driver doesn't
+> support UFS crypto, even if the hardware advertises the capability, because
+> a lot of hardware requires some special handling that's not specified in
+> the aforementioned JEDEC spec. Each vendor driver must explicity set
+> hba->caps |= UFSHCD_CAP_CRYPTO before ufshcd_hba_init_crypto is called to
+> opt-in to UFS crypto support.
 > 
 > Signed-off-by: Satya Tangirala <satyat@google.com>
 
 Looks good, you can add:
 
     Reviewed-by: Eric Biggers <ebiggers@google.com>
-
-One nit:
-
-> diff --git a/drivers/scsi/ufs/ufshcd.h b/drivers/scsi/ufs/ufshcd.h
-> index 6ffc08ad85f63..1eebb589159d6 100644
-> --- a/drivers/scsi/ufs/ufshcd.h
-> +++ b/drivers/scsi/ufs/ufshcd.h
-> @@ -555,6 +555,12 @@ enum ufshcd_caps {
->  	 * for userspace to control the power management.
->  	 */
->  	UFSHCD_CAP_RPM_AUTOSUSPEND			= 1 << 6,
-> +
-> +	/*
-> +	 * This capability allows the host controller driver to use the
-> +	 * inline crypto engine, if it is present
-> +	 */
-> +	UFSHCD_CAP_CRYPTO				= (1 << 7),
->  };
-
-The other values of this enum don't use parentheses.
 
 - Eric
 
