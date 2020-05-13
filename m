@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAD001D040F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 02:55:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FC521D053B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 05:06:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jYfgi-0002oG-G7; Wed, 13 May 2020 00:55:56 +0000
+	id 1jYhjF-0005oU-VW; Wed, 13 May 2020 03:06:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1jYfgh-0002o6-BT
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 00:55:55 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jYhjF-0005oO-5r
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:06:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1TXqjayUvCrme096A8vo5dxTea3J4uSqpdNM3rup1aM=; b=YxtCRJjF8tLgrEolMUUXUqUPZC
- Y8HTXenReLQC6mxxu+Xf/44nbxcSfgVE+VrHLg80dFeZRFUfTwRaXPvdacCOagFmJmb3R9EDKjfVP
- p4YIOszfwesswJetTCSAdVv9Vg1h0KlYukieSORjS1DZe3QA8U0zYacbPOMtAutPYcyI=;
+ bh=6lRc527hDqspTAGWlA6FJhwYcAYZ8v4zl7cyozxRSg0=; b=fDYuo/i/G2hN2YIZDR6gEoyEgL
+ /+aLlEIQM2Cl0XyBIrM/Axj33WgavP0hEagtrxw4dJO9scK/Io5ftz0Wbo1tmFgH7SnpPcF0SyGi9
+ owQr++pEDXmVltnwxv8h5J0eBYCVEZqqOtOwSFQWDrSlXEd6YaZbjYqqRvyWgi4TED3s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,38 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1TXqjayUvCrme096A8vo5dxTea3J4uSqpdNM3rup1aM=; b=fTXMj6EEJPX65yBWMJNPwsAHm/
- gSZTPbSJxR8gZOjqmR4r8KlnTIpkW/3zFDSyaG/W2u21wlfwXViSEbDvFGiRcG7vcw4OR8pBm6VyT
- AQKJ5nimB8fn2f2h8VFBaRE4ySxrW9aNRgreEm6dJTWNzwubftn7PXj8R29bDrtqW538=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=6lRc527hDqspTAGWlA6FJhwYcAYZ8v4zl7cyozxRSg0=; b=Lxcgkiwbwr2OO0D0WqI+y5eVY3
+ iqLYgAVoDSHZ91p+XbNB+v4gvHhhIja5k0L1yZ8So5VBxjyuieJiYe4b9pviQ9l+jHwoGY6Qv1ACp
+ Hc5UTaE7dBvperc7VQv3Mx4mCA35kKxd13dZ+14vjUGFE9/vrbbEfeEUsygf/7veEVmQ=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jYfgd-00C9n8-8w
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 00:55:55 +0000
-Received: from callcc.thunk.org (pool-100-0-195-244.bstnma.fios.verizon.net
- [100.0.195.244]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 04D0tcEU000849
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 May 2020 20:55:39 -0400
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id C4B6E4202E4; Tue, 12 May 2020 20:55:38 -0400 (EDT)
-Date: Tue, 12 May 2020 20:55:38 -0400
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200513005538.GF1596452@mit.edu>
+ id 1jYhj9-00480L-OJ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:06:41 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 49BB12176D;
+ Wed, 13 May 2020 03:06:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1589339190;
+ bh=6a9BGuNMOSYRQS1ZxzXqpxbWopV28GpPsuZDDKjLf68=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=XBJ5YQv7zqIJqlTjbjaek7JZn8sJW0TLMnzrCErzt8wrRpY3oPrNjyxb0OPeeMqSk
+ J7mESAq77RDWvpR4KYxFwjufOwYWSMjMRikq8ikdt6xIqRsUf1E8LNfMFo0hyAabxQ
+ F+wijFS5G4ipYowVWG4YYuPKAKHqAiVwa0ui+PRA=
+Date: Tue, 12 May 2020 20:06:29 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: "Theodore Y. Ts'o" <tytso@mit.edu>
+Message-ID: <20200513030629.GA108075@google.com>
 References: <20200512233251.118314-1-ebiggers@kernel.org>
- <20200512233251.118314-3-ebiggers@kernel.org>
+ <20200512233251.118314-2-ebiggers@kernel.org>
+ <20200513005355.GE1596452@mit.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200512233251.118314-3-ebiggers@kernel.org>
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20200513005355.GE1596452@mit.edu>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1jYfgd-00C9n8-8w
-Subject: Re: [f2fs-dev] [PATCH 2/4] fscrypt: add fscrypt_add_test_dummy_key()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jYhj9-00480L-OJ
+Subject: Re: [f2fs-dev] [PATCH 1/4] linux/parser.h: add include guards
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,43 +84,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-fscrypt@vger.kernel.org,
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
  linux-ext4@vger.kernel.org, Daniel Rosenberg <drosen@google.com>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, May 12, 2020 at 04:32:49PM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On 05/12, Theodore Y. Ts'o wrote:
+> On Tue, May 12, 2020 at 04:32:48PM -0700, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > <linux/parser.h> is missing include guards.  Add them.
+> > 
+> > This is needed to allow declaring a function in <linux/fscrypt.h> that
+> > takes a substring_t parameter.
+> > 
+> > Signed-off-by: Eric Biggers <ebiggers@google.com>
 > 
-> Currently, the test_dummy_encryption mount option (which is used for
-> encryption I/O testing with xfstests) uses v1 encryption policies, and
-> it relies on userspace inserting a test key into the session keyring.
-> 
-> We need test_dummy_encryption to support v2 encryption policies too.
-> Requiring userspace to add the test key doesn't work well with v2
-> policies, since v2 policies only support the filesystem keyring (not the
-> session keyring), and keys in the filesystem keyring are lost when the
-> filesystem is unmounted.  Hooking all test code that unmounts and
-> re-mounts the filesystem would be difficult.
-> 
-> Instead, let's make the filesystem automatically add the test key to its
-> keyring when test_dummy_encryption is enabled.
-> 
-> That puts the responsibility for choosing the test key on the kernel.
-> We could just hard-code a key.  But out of paranoia, let's first try
-> using a per-boot random key, to prevent this code from being misused.
-> A per-boot key will work as long as no one expects dummy-encrypted files
-> to remain accessible after a reboot.  (gce-xfstests doesn't.)
-> 
-> Therefore, this patch adds a function fscrypt_add_test_dummy_key() which
-> implements the above.  The next patch will use it.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Reviewed-by: Theodore Ts'o <tytso@mit.edu>
 
-Reviewed-by: Theodore Ts'o <tytso@mit.edu>
-
+Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 
 _______________________________________________
