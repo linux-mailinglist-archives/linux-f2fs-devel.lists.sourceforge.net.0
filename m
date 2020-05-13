@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FC521D053B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 05:06:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A3F1D053E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2020 05:07:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jYhjF-0005oU-VW; Wed, 13 May 2020 03:06:41 +0000
+	id 1jYhjq-0007ox-68; Wed, 13 May 2020 03:07:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jYhjF-0005oO-5r
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:06:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jYhjp-0007oq-3q
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:07:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6lRc527hDqspTAGWlA6FJhwYcAYZ8v4zl7cyozxRSg0=; b=fDYuo/i/G2hN2YIZDR6gEoyEgL
- /+aLlEIQM2Cl0XyBIrM/Axj33WgavP0hEagtrxw4dJO9scK/Io5ftz0Wbo1tmFgH7SnpPcF0SyGi9
- owQr++pEDXmVltnwxv8h5J0eBYCVEZqqOtOwSFQWDrSlXEd6YaZbjYqqRvyWgi4TED3s=;
+ bh=PVdFjVNairqkes2ZWDUf2+D3kpmUfJlI0ZWDfJzOBJk=; b=BrXRW6kGTVmjCSRfeTH4iLDnf7
+ nIsGx/Dqt45VtXufgV7jmJ+sWzpKha9mx1A9O5k/OQ3n0O+84gkPFTOF3eCXRfdEngPTummuSvco0
+ afwvLYbatjypQYBIicAhZxSqGK6YMt81QniliWA5vYNuwcPhhzb+I78rmujkcDS6G9v0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6lRc527hDqspTAGWlA6FJhwYcAYZ8v4zl7cyozxRSg0=; b=Lxcgkiwbwr2OO0D0WqI+y5eVY3
- iqLYgAVoDSHZ91p+XbNB+v4gvHhhIja5k0L1yZ8So5VBxjyuieJiYe4b9pviQ9l+jHwoGY6Qv1ACp
- Hc5UTaE7dBvperc7VQv3Mx4mCA35kKxd13dZ+14vjUGFE9/vrbbEfeEUsygf/7veEVmQ=;
+ bh=PVdFjVNairqkes2ZWDUf2+D3kpmUfJlI0ZWDfJzOBJk=; b=KzoqI5I2SQflhWwQiEUG+HQgJM
+ 0gzAgrXe1WCyH3eVXMjz5qVPPh3JLs9IhKG+zgoDG1Jnua9AIZKSWmLxIt+M/7TIch76vtHYwhHuI
+ oorgQwpRpaO7i2z3tNflh3aEqj/elgg4KXhWJMBxhO+/j0Pt6g+9I0TKLZ+DlbXR+1Ws=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jYhj9-00480L-OJ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:06:41 +0000
+ id 1jYhjj-00CJsM-4i
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 May 2020 03:07:17 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 49BB12176D;
- Wed, 13 May 2020 03:06:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id A843D2176D;
+ Wed, 13 May 2020 03:07:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589339190;
- bh=6a9BGuNMOSYRQS1ZxzXqpxbWopV28GpPsuZDDKjLf68=;
+ s=default; t=1589339225;
+ bh=mf0A77JO/o1Mk6zUTHq9K+pvz3bYpz5zIclotccg+Fo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XBJ5YQv7zqIJqlTjbjaek7JZn8sJW0TLMnzrCErzt8wrRpY3oPrNjyxb0OPeeMqSk
- J7mESAq77RDWvpR4KYxFwjufOwYWSMjMRikq8ikdt6xIqRsUf1E8LNfMFo0hyAabxQ
- F+wijFS5G4ipYowVWG4YYuPKAKHqAiVwa0ui+PRA=
-Date: Tue, 12 May 2020 20:06:29 -0700
+ b=yoPvoPvrtTgr0s5g4gLXEiIOsQf1dxfj/oBrrGa+nwoA6dE2mGMBtdWeohFt+yKvn
+ 4KlSpBlNspt1Pg1OVOViCkzUUafX+woN5Q0mQkMWH2ysQ77USKFxfJNTgDaMtkx6hS
+ UGIOguCPrp8uo1y+tI6zLJ6p8n4VHZjG9dmJvNI0=
+Date: Tue, 12 May 2020 20:07:05 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20200513030629.GA108075@google.com>
+Message-ID: <20200513030705.GB108075@google.com>
 References: <20200512233251.118314-1-ebiggers@kernel.org>
- <20200512233251.118314-2-ebiggers@kernel.org>
- <20200513005355.GE1596452@mit.edu>
+ <20200512233251.118314-3-ebiggers@kernel.org>
+ <20200513005538.GF1596452@mit.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200513005355.GE1596452@mit.edu>
+In-Reply-To: <20200513005538.GF1596452@mit.edu>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,8 +71,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jYhj9-00480L-OJ
-Subject: Re: [f2fs-dev] [PATCH 1/4] linux/parser.h: add include guards
+X-Headers-End: 1jYhjj-00CJsM-4i
+Subject: Re: [f2fs-dev] [PATCH 2/4] fscrypt: add fscrypt_add_test_dummy_key()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,13 +92,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 05/12, Theodore Y. Ts'o wrote:
-> On Tue, May 12, 2020 at 04:32:48PM -0700, Eric Biggers wrote:
+> On Tue, May 12, 2020 at 04:32:49PM -0700, Eric Biggers wrote:
 > > From: Eric Biggers <ebiggers@google.com>
 > > 
-> > <linux/parser.h> is missing include guards.  Add them.
+> > Currently, the test_dummy_encryption mount option (which is used for
+> > encryption I/O testing with xfstests) uses v1 encryption policies, and
+> > it relies on userspace inserting a test key into the session keyring.
 > > 
-> > This is needed to allow declaring a function in <linux/fscrypt.h> that
-> > takes a substring_t parameter.
+> > We need test_dummy_encryption to support v2 encryption policies too.
+> > Requiring userspace to add the test key doesn't work well with v2
+> > policies, since v2 policies only support the filesystem keyring (not the
+> > session keyring), and keys in the filesystem keyring are lost when the
+> > filesystem is unmounted.  Hooking all test code that unmounts and
+> > re-mounts the filesystem would be difficult.
+> > 
+> > Instead, let's make the filesystem automatically add the test key to its
+> > keyring when test_dummy_encryption is enabled.
+> > 
+> > That puts the responsibility for choosing the test key on the kernel.
+> > We could just hard-code a key.  But out of paranoia, let's first try
+> > using a per-boot random key, to prevent this code from being misused.
+> > A per-boot key will work as long as no one expects dummy-encrypted files
+> > to remain accessible after a reboot.  (gce-xfstests doesn't.)
+> > 
+> > Therefore, this patch adds a function fscrypt_add_test_dummy_key() which
+> > implements the above.  The next patch will use it.
 > > 
 > > Signed-off-by: Eric Biggers <ebiggers@google.com>
 > 
