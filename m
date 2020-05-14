@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA9AA1D2688
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 May 2020 07:11:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 040E81D268F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 May 2020 07:12:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jZ69E-0002Cw-Ov; Thu, 14 May 2020 05:11:08 +0000
+	id 1jZ6AI-0005q1-L9; Thu, 14 May 2020 05:12:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jZ69D-0002Cp-RN
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 May 2020 05:11:07 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jZ6AH-0005pp-KA
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 May 2020 05:12:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aRUYfH1npGUt0W6zi8sjTImq1S1FjUnkANXJktv4/fQ=; b=F60OiqBy73Fic04/52jlNa7lsY
- XHejC1v1vnW7zYaoFusmctwEByAnoqjnUt63yY7y5e+1KFTXfS5z8CKePW53ja5s37Wk2T9DKT9s/
- Pqfv8Yglu1Fvxt+WKzzD9NwL7SL1YeFFkpwXCqpacFEhAFtp7N1NbhhbtWYreDOop7rA=;
+ bh=iLnjW5So/aASTgO4zG8UU4fFOhwrzDK8dFwRBVvn/70=; b=ehrVUvDSBApIacynDqf3ZoFxzt
+ y1vyXxtnAKKrssHd7E7KTy8vk4oF0ogbThGcsBhG9R2fIbOmPeJF0+1BObjDA7NLXrqQxW40SFVev
+ hVNBQURtRrbBJwyDsym38tcIWacRLoTqO6fqqcYosURObpGv6d9Rj2JRSdznFmrsklW0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aRUYfH1npGUt0W6zi8sjTImq1S1FjUnkANXJktv4/fQ=; b=j6ITS2CMU3rtyadHeywcRRcaHi
- ImqPdBz6e+AMpLs5ruIS2MYXXKDojx9aWAspTMXZfftjFFuqde0DHqrd5u3AnHl/TtqH8FYJnNfaX
- TYpoWfTedaa0jKFSx8DMUYrwyBWIn+ic0JWT6CMC+YMuaFvVYvtJqPuWv6ChOD2cvtgc=;
+ bh=iLnjW5So/aASTgO4zG8UU4fFOhwrzDK8dFwRBVvn/70=; b=VajpvcglR2PfGRKhrll/fLRxRZ
+ XWv8K9P4fz2gAd+xq516zkmib/sUu9RkMoFYMbHHkUb+2g4Dt8BFk7pSlEua5ltIQgL9rnin7ESiR
+ bsjhNlpl1iPcR9zzqe380GiHuRUJnar10Ia7f4KNV25Haut3zLnmL5uufOyP6C6ecklA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jZ69C-009Q5J-IT
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 May 2020 05:11:07 +0000
+ id 1jZ6AG-009Q8d-Fe
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 May 2020 05:12:13 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 36449206D4;
- Thu, 14 May 2020 05:10:55 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D5DFF206D4;
+ Thu, 14 May 2020 05:12:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589433055;
- bh=+7Nv0uff65CHEgSOICQgU3aX0Fv+NjHfAe+0Cmtlgvw=;
+ s=default; t=1589433127;
+ bh=cdFrV7nh7pJqlqa0/pkPvBaYElxzoq3V+cr3ke1Ix5g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=vwp8gJPPTHeKccZV7k1yrahp5FPT66Y2DslfqT+lmRhxMP08GBwTz6gcKkzO/spv5
- dhRVa4d1xmYyCiUYotjlwDl+6Yx1Cl63diCalWTluZtVzGJY6PAaIGGs0O5HxHccw8
- N7KmznuBnLJh5eiG0UuJOhCVU3xxHn0DpMuEAsGQ=
-Date: Wed, 13 May 2020 22:10:53 -0700
+ b=k2VsDoJve1gy0nqVqVKZHvP2YadsKWdsfOk2d6wWgvoInglUMeVyOX0D6k15HOULg
+ hcQOk+F1+efu8V0RnZHR/Nwlcpp1qBS8gbxG5coCW4XjhFQ315KR+Vl4v6XHWurap+
+ yjR+HEitPXERvDZN0i8LtInW04GRKwswvZBdqjes=
+Date: Wed, 13 May 2020 22:12:05 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>, Jens Axboe <axboe@kernel.dk>
-Message-ID: <20200514051053.GA14829@sol.localdomain>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20200514051205.GB14829@sol.localdomain>
 References: <20200514003727.69001-1-satyat@google.com>
+ <20200514003727.69001-9-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200514003727.69001-1-satyat@google.com>
+In-Reply-To: <20200514003727.69001-9-satyat@google.com>
 X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jZ69C-009Q5J-IT
-Subject: Re: [f2fs-dev] [PATCH v13 00/12] Inline Encryption Support
+X-Headers-End: 1jZ6AG-009Q8d-Fe
+Subject: Re: [f2fs-dev] [PATCH v13 08/12] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,24 +95,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, May 14, 2020 at 12:37:15AM +0000, Satya Tangirala wrote:
-> This patch series adds support for Inline Encryption to the block layer,
-> UFS, fscrypt, f2fs and ext4. It has been rebased onto linux-block/for-next.
+On Thu, May 14, 2020 at 12:37:23AM +0000, Satya Tangirala wrote:
+> Wire up ufshcd.c with the UFS Crypto API, the block layer inline
+> encryption additions and the keyslot manager.
 > 
-> Note that the patches in this series for the block layer (i.e. patches 1,
-> 2, 3, 4 and 5) can be applied independently of the subsequent patches in
-> this series.
+> Signed-off-by: Satya Tangirala <satyat@google.com>
 
-Thanks, the (small) changes from v12 look good.  As usual, I made this available
-in git at:
+Looks good, you can add:
 
-        Repo: https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
-        Tag: inline-encryption-v13
-
-Jens, do you have any feedback on this patchset?  Is there any chance at taking
-the block layer part (patches 1-5) for 5.8?  That part needs to go upstream
-first, since patches 6-12 depend on them.  Then patches 6-12 can go upstream via
-the SCSI and fscrypt trees in the following release.
+    Reviewed-by: Eric Biggers <ebiggers@google.com>
 
 - Eric
 
