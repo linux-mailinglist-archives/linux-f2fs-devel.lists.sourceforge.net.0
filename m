@@ -2,28 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2225C1D5208
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 16:42:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD2441D5236
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 16:45:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jZbXr-0003Ma-Kd; Fri, 15 May 2020 14:42:39 +0000
+	id 1jZbaY-0005ZZ-N2; Fri, 15 May 2020 14:45:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+e5f7f93d3739a79b60a3+6109+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1jZbXq-0003MQ-HM
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:42:38 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jZbaW-0005ZK-PJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:45:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3iIrLwrSNZL+S3txYZ5ooYztJBCNqoUdcfH+RABdtvQ=; b=bnz6WDYTgLuDW2k/dhxgEYhzZu
- aNkerO4Zb6jRU49cGvDmAHom3JxQ6Qz5ekmezwrFmQfqmczSiSD0ZVjjlYa5sG3yj+EKufbLL9Nlp
- u65ImAeW25uBbZSKGb8Teqt/bLcUyDzfJvx42/4pQyoLzo+DwrI7EbgztzOFhcRRpMrw=;
+ bh=ZuLKfa1i0o4pX+jejinnEWf/074esPkh6gLMlbRgmFg=; b=D2VHWF3Bt4UUYG3UuY2KNyklmy
+ R+9zCScpbJl4ApowyCEf1l1xqhGVRZbCgoROyup8o5AGLUH5Y04VLU1GoWND8R2HcXCy1YxPlwP0f
+ tGerRPNGQm/1iwGrGY7myvY9G25yK6e2hkXDKUX5v63qeDRGcD5exDC0Yy1WOoa5oM7E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,52 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3iIrLwrSNZL+S3txYZ5ooYztJBCNqoUdcfH+RABdtvQ=; b=GIUrYFr/F0Boq37SHJvtjP0vun
- jK9gRs9qnA3qL8erPVUQ/R0zn18lpSe4BD6h6o5YT80wyMhQaMlaGEy6zNqLiWcFgkt3Gg0TO9tGU
- yYDOtdSX/sGPoaVmAdcjuROnoFHdH5L5DsLpumJmOVs8THP1sYLSnBj5ioEVs4FkvOQs=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=ZuLKfa1i0o4pX+jejinnEWf/074esPkh6gLMlbRgmFg=; b=C672zB5mhVOG36wpQEckMZeVFJ
+ /qxfTpGbSZ4DKXcJklS4gwaIYClCwZbStOjoNIMl8mpXt3fMvDTn+pp0RLEapU7PHYGhi9gA2R98q
+ +0NN9wIze7EMF5gVuF4eAYJdAobgz7K7jJ/cVLc02qvJEm68d8xoXc9/0F16iUsSqAVY=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jZbXm-00Bhfu-5g
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:42:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=3iIrLwrSNZL+S3txYZ5ooYztJBCNqoUdcfH+RABdtvQ=; b=UR/nOTlnhIjsUEaBJZCcE3BngJ
- mfu05i2j+WxKcr7aadUXmtCEMRqOGo8WlZiQcx/CF8O8Rt7VlltOFibGIiO9P22FMxwIm7yBF8pe9
- eEuctwJJMTPdOLuB8TUsI66Z8LbJfV8pRhC6x0MIbl2R5sDpGINXt46eX1O7UBNhHMd1KH7QjKpiZ
- /5Zl8grCV+zYizEQ8IUVoKnDv4so/Q+I9YBcJP6FHitob64xgOTqY8THukAMIu6SoYdmnPlFrqER/
- Sz/OPP9samLEqnBB+HoFo8cCU8Zk0RqWmPgXOuI9l/9nOTkQMdZWW+2MZHgH6F/gb7Upu6y68wMpy
- mKCQoBMg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jZbXc-00040w-57; Fri, 15 May 2020 14:42:24 +0000
-Date: Fri, 15 May 2020 07:42:24 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200515144224.GA12040@infradead.org>
-References: <20200514003727.69001-1-satyat@google.com>
- <20200514051053.GA14829@sol.localdomain>
- <8fa1aafe-1725-e586-ede3-a3273e674470@kernel.dk>
- <20200515074127.GA13926@infradead.org>
- <20200515122540.GA143740@google.com>
+ id 1jZbaN-00BhrJ-BT
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:45:24 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id B5F4320671;
+ Fri, 15 May 2020 14:45:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1589553909;
+ bh=11QCz4wj0IRYOsP8TSzEDA1ar1cIM8puU3El5/WrkVs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OlAW9ahgqgxfR8cXxImDaOO46Cnzdv4vh2+mbxjE0y3uKG1qx3xRCPMMS8HG7NDh5
+ tkFYpwUohUuIUa1bP+R9mvELw7n4OMAfJM/hA4bgvqyII4yEi5SE3BeQv/JBw20yf0
+ KOpRb93VlfcGn9OzGvNVWjSgbBApluGmHdFqCPWM=
+Date: Fri, 15 May 2020 07:45:09 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200515144509.GA46028@google.com>
+References: <20200515021554.226835-1-jaegeuk@kernel.org>
+ <9ba6e5ef-068d-a925-1eb9-107b0523666c@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200515122540.GA143740@google.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <9ba6e5ef-068d-a925-1eb9-107b0523666c@huawei.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jZbXm-00Bhfu-5g
-Subject: Re: [f2fs-dev] [PATCH v13 00/12] Inline Encryption Support
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jZbaN-00BhrJ-BT
+Subject: Re: [f2fs-dev] [PATCH] f2fs: flush dirty meta pages when flushing
+ them
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,26 +84,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- linux-scsi@vger.kernel.org, Eric Biggers <ebiggers@kernel.org>,
- Kuohong Wang <kuohong.wang@mediatek.com>, Kim Boojin <boojin.kim@samsung.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, May 15, 2020 at 12:25:40PM +0000, Satya Tangirala wrote:
-> One of the nice things about the current design is that regardless of what
-> request queue an FS sends an encrypted bio to, blk-crypto will be able to handle
-> the encryption (whether by using hardware inline encryption, or using the
-> blk-crypto-fallback). The FS itself does not need to worry about what the
-> request queue is.
+On 05/15, Chao Yu wrote:
+> On 2020/5/15 10:15, Jaegeuk Kim wrote:
+> > Let's guarantee flusing dirty meta pages to avoid infinite loop.
+> 
+> What's the root cause? Race case or meta page flush failure?
 
-True.  Which just makes me despise that design with the pointless
-fallback even more..
+Investigating, but at least, this can avoid the inifinite loop there.
+
+V2:
+
+From c60ce8e7178004fd6cba96e592247e43b5fd98d8 Mon Sep 17 00:00:00 2001
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Wed, 13 May 2020 21:12:53 -0700
+Subject: [PATCH] f2fs: flush dirty meta pages when flushing them
+
+Let's guarantee flusing dirty meta pages to avoid infinite loop.
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/checkpoint.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 620a386d82c1a..3dc3ac6fe1432 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1266,6 +1266,9 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
+ 		if (unlikely(f2fs_cp_error(sbi)))
+ 			break;
+ 
++		if (type == F2FS_DIRTY_META)
++			f2fs_sync_meta_pages(sbi, META, LONG_MAX,
++							FS_CP_META_IO);
+ 		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+ 	}
+ 	finish_wait(&sbi->cp_wait, &wait);
+-- 
+2.26.2.761.g0e0b3e54be-goog
+
 
 
 _______________________________________________
