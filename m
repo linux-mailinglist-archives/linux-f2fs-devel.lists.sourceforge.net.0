@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEB2F1D45FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 08:35:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB51B1D472A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 09:37:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jZTwj-0005mT-OQ; Fri, 15 May 2020 06:35:49 +0000
+	id 1jZUuS-0000bn-GS; Fri, 15 May 2020 07:37:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <stanley.chu@mediatek.com>) id 1jZTwf-0005m9-FX
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 06:35:45 +0000
+ (envelope-from <stanley.chu@mediatek.com>) id 1jZUuR-0000bb-Fq
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 07:37:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
  :References:In-Reply-To:Date:CC:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dnVzAwZEKYSKKY4z6dkr6lk8gdmk1Zn9tS3rjZChFxw=; b=hyXgG1TVmTgt3ZbHl6ZMYDU6jY
- DzCQV4LE1oHR0QkqVwLVPuAmmrk+ucChS6mp3GS6Fx9+VwVGDcX+aYLcGXuPaPnEZbqzQcpc/tP4p
- yPR3Uf8N471SU7sDLJ9JU/+LEpmBTn/0ds+2E9f9gFwwKhyWPEuj4enxfCrCYmBaw2lY=;
+ bh=/DCO/zS7sesB2PVRfTMTsSwE8pj4v6mVVtmNsnUpisY=; b=JlU95PynKVaLpTKZi1z1hRgmQw
+ r5T01WeKB1I8pRROMS3Lq19QceA2HLprCrtjuFmoQIOILD7D76rLHLriLi1KEcBK/DsoPy4Fc2PzD
+ UWTv5UhZVKI1gOGAsY8iSazdKAGrNXF47nR2iKgloANRsSVKt7oPEi95XUyFPKi2ZQWo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
@@ -29,39 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dnVzAwZEKYSKKY4z6dkr6lk8gdmk1Zn9tS3rjZChFxw=; b=jfccXDcnRd1U2pGb7AVF7yr/E1
- Q1WadFsO16aiI8Gus6HPnaAf8vJWJEZvjn8HMLazUrFOhDmyVIcdhbgKBvleEcaCbgUOLO8g4h9CI
- oCei27qEh5GKxHGthAJuM8d1+g2QiXpPyOE4eJzam3yeNnzAS80kizBYRShZrH0CMWuE=;
+ bh=/DCO/zS7sesB2PVRfTMTsSwE8pj4v6mVVtmNsnUpisY=; b=Dy42rc2oqyTVdHqstM9HYqjbCq
+ 0fk1d1oGg2jRoTbAarpFR56B5SZArDbTl1s/ZIhGbtBFveQwaj41Je/wUByFC7CU/9w3n1xrl6jXW
+ bwvZBlOHJbTLc7ZrPlSdF83HuYleSqXemX4tU2iU9VPISqUAwAqEjX8zcFiJXe/7sfLI=;
 Received: from [210.61.82.184] (helo=mailgw02.mediatek.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1jZTwX-00H1Ff-QA
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 06:35:42 +0000
-X-UUID: a627162ab9be4896a6a78854bb275d10-20200515
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
+ id 1jZUuM-008HbN-Cc
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 07:37:31 +0000
+X-UUID: 592f197f268745128398747fa762b992-20200515
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=dnVzAwZEKYSKKY4z6dkr6lk8gdmk1Zn9tS3rjZChFxw=; 
- b=kwP3dkT2wnhIK6hP6had2V0Z7rwvK+3/mjplUJSj+Y2YTlsYDUe1aNcX60PT1zJsQI+DGMO5AOQuCjtilA4TxJRcvm/jQ4MZXj4SIX54zHioqFt/GT2+ucgVaVjbC/X8ONuXj0OGZArn4uLYaSbrzzSD73g88Df20DCAmLwlh5U=;
-X-UUID: a627162ab9be4896a6a78854bb275d10-20200515
-Received: from mtkexhb02.mediatek.inc [(172.21.101.103)] by
- mailgw02.mediatek.com (envelope-from <stanley.chu@mediatek.com>)
+ bh=/DCO/zS7sesB2PVRfTMTsSwE8pj4v6mVVtmNsnUpisY=; 
+ b=mc53IrWVbJ+QF+yITq9W+RJtiRzw/Im0K8UCmXksgoT20zYkNPfdBnBiDEemIfDnQnt2H3YNc7uARzMCvDYBH4p7wCZKMDWVvoe4trS35E7ICLkv+vNXWRV01seYMGFC8/GgBzTsI6rOkU4iv1+LT5PZ6vbeikuIROOKSCQZ6Vs=;
+X-UUID: 592f197f268745128398747fa762b992-20200515
+Received: from mtkcas10.mediatek.inc [(172.21.101.39)] by mailgw02.mediatek.com
+ (envelope-from <stanley.chu@mediatek.com>)
  (Cellopoint E-mail Firewall v4.1.10 Build 0809 with TLS)
- with ESMTP id 782748912; Fri, 15 May 2020 14:35:27 +0800
+ with ESMTP id 1287260482; Fri, 15 May 2020 15:37:16 +0800
 Received: from mtkcas07.mediatek.inc (172.21.101.84) by
- mtkmbs02n1.mediatek.inc (172.21.101.77) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2; Fri, 15 May 2020 14:35:24 +0800
+ mtkmbs02n2.mediatek.inc (172.21.101.101) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.2; Fri, 15 May 2020 15:37:06 +0800
 Received: from [172.21.77.33] (172.21.77.33) by mtkcas07.mediatek.inc
  (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Fri, 15 May 2020 14:35:24 +0800
-Message-ID: <1589524526.3197.110.camel@mtkswgap22>
+ Transport; Fri, 15 May 2020 15:37:06 +0800
+Message-ID: <1589528228.3197.114.camel@mtkswgap22>
 From: Stanley Chu <stanley.chu@mediatek.com>
 To: Satya Tangirala <satyat@google.com>
-Date: Fri, 15 May 2020 14:35:26 +0800
-In-Reply-To: <20200514003727.69001-8-satyat@google.com>
+Date: Fri, 15 May 2020 15:37:08 +0800
+In-Reply-To: <20200514003727.69001-9-satyat@google.com>
 References: <20200514003727.69001-1-satyat@google.com>
- <20200514003727.69001-8-satyat@google.com>
+ <20200514003727.69001-9-satyat@google.com>
 X-Mailer: Evolution 3.2.3-0ubuntu6 
 MIME-Version: 1.0
+X-TM-SNTS-SMTP: 3162AC34A7748C1611374E99FEE9C8C991AB3926776566336456D27B7D911DA92000:8
 X-MTK: N
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -76,8 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
  -0.8 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jZTwX-00H1Ff-QA
-Subject: Re: [f2fs-dev] [PATCH v13 07/12] scsi: ufs: UFS crypto API
+X-Headers-End: 1jZUuM-008HbN-Cc
+Subject: Re: [f2fs-dev] [PATCH v13 08/12] scsi: ufs: Add inline encryption
+ support to UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,8 +92,8 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>, Eric
- Biggers <ebiggers@google.com>, Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
  linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org
@@ -102,24 +104,21 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 Hi Satya,
 
 On Thu, 2020-05-14 at 00:37 +0000, Satya Tangirala wrote:
-> Introduce functions to manipulate UFS inline encryption hardware
-> in line with the JEDEC UFSHCI v2.1 specification and to work with the
-> block keyslot manager.
-> 
-> The UFS crypto API will assume by default that a vendor driver doesn't
-> support UFS crypto, even if the hardware advertises the capability, because
-> a lot of hardware requires some special handling that's not specified in
-> the aforementioned JEDEC spec. Each vendor driver must explicity set
-
-explicitly
-
-> hba->caps |= UFSHCD_CAP_CRYPTO before ufshcd_hba_init_crypto is called to
-> opt-in to UFS crypto support.
+> Wire up ufshcd.c with the UFS Crypto API, the block layer inline
+> encryption additions and the keyslot manager.
 > 
 > Signed-off-by: Satya Tangirala <satyat@google.com>
-> Reviewed-by: Eric Biggers <ebiggers@google.com>
 
 Reviewed-by: Stanley Chu <stanley.chu@mediatek.com>
+
+Thanks Satya and Eric so much to make inline encryption upstreamed.
+
+I will provide essential MediaTek vops patch to adopt this framework
+soon.
+
+Thanks,
+Stanley Chu
+
 
 
 _______________________________________________
