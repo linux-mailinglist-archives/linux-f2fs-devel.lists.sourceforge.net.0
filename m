@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD2441D5236
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 16:45:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 186471D56F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 May 2020 19:01:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jZbaY-0005ZZ-N2; Fri, 15 May 2020 14:45:26 +0000
+	id 1jZdiP-0003fv-Jw; Fri, 15 May 2020 17:01:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jZbaW-0005ZK-PJ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:45:24 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jZdiO-0003fo-5S
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 17:01:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZuLKfa1i0o4pX+jejinnEWf/074esPkh6gLMlbRgmFg=; b=D2VHWF3Bt4UUYG3UuY2KNyklmy
- R+9zCScpbJl4ApowyCEf1l1xqhGVRZbCgoROyup8o5AGLUH5Y04VLU1GoWND8R2HcXCy1YxPlwP0f
- tGerRPNGQm/1iwGrGY7myvY9G25yK6e2hkXDKUX5v63qeDRGcD5exDC0Yy1WOoa5oM7E=;
+ bh=lhzU/vRTYZ03WxCfQn7IJ6o1FMCBejUuhkVIDxUqj1Q=; b=irIzrQVa4Q6Kq5Uss4UyNcKrkM
+ V4N5DypwakdxP1jJhRcGhOLpE/zH7lvlz3wY9gwKogPv2Ot64FGP2a1D8SRvtvqHtVglKVQKMDC8D
+ udHfQtn6VSqitVttQ5bR4uNaqLelTfJt+NlWcmStBPsaR2iCnONzM5qql2SX4/JOL7B8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZuLKfa1i0o4pX+jejinnEWf/074esPkh6gLMlbRgmFg=; b=C672zB5mhVOG36wpQEckMZeVFJ
- /qxfTpGbSZ4DKXcJklS4gwaIYClCwZbStOjoNIMl8mpXt3fMvDTn+pp0RLEapU7PHYGhi9gA2R98q
- +0NN9wIze7EMF5gVuF4eAYJdAobgz7K7jJ/cVLc02qvJEm68d8xoXc9/0F16iUsSqAVY=;
+ bh=lhzU/vRTYZ03WxCfQn7IJ6o1FMCBejUuhkVIDxUqj1Q=; b=euCnYHxE8J1ePLVOA5W77vbmBG
+ WsflLkAf7QS1+AdY4PLaoYcvgZaDVOhu8jYWZyDy3JvApU2wvtTrw1t+eFgH+Xa3vMY1nnJw8Xun1
+ JaqXvU0Hvbjv5uidDcejrJyWAMaanM/jX6Ivrgb6lX7SFRQZtyKcNxm/0Vud3ZgYMIFE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jZbaN-00BhrJ-BT
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 14:45:24 +0000
-Received: from localhost (unknown [104.132.1.66])
+ id 1jZdiL-00Br0M-Tc
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 May 2020 17:01:40 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B5F4320671;
- Fri, 15 May 2020 14:45:09 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 50779206C0;
+ Fri, 15 May 2020 17:01:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589553909;
- bh=11QCz4wj0IRYOsP8TSzEDA1ar1cIM8puU3El5/WrkVs=;
+ s=default; t=1589562080;
+ bh=L//wP+MT78GfEJiCI4QlGMGDDzxZTlmk/idX3FTcIRY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OlAW9ahgqgxfR8cXxImDaOO46Cnzdv4vh2+mbxjE0y3uKG1qx3xRCPMMS8HG7NDh5
- tkFYpwUohUuIUa1bP+R9mvELw7n4OMAfJM/hA4bgvqyII4yEi5SE3BeQv/JBw20yf0
- KOpRb93VlfcGn9OzGvNVWjSgbBApluGmHdFqCPWM=
-Date: Fri, 15 May 2020 07:45:09 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200515144509.GA46028@google.com>
-References: <20200515021554.226835-1-jaegeuk@kernel.org>
- <9ba6e5ef-068d-a925-1eb9-107b0523666c@huawei.com>
+ b=jddSpVkyXHBGXItg77bdv0TcwbfgMVMe7Q2SEgJSoRcLF+hg+keRPqsZMu/YO1rmZ
+ I8ELGSK3mDMWTnLtifx6EDg1r10Vo10Ir8EHH01XWJC8mm89kmSMuAIYFJHvh1sxPN
+ 9EBOPbPYajXxJZoBC2mjpLyEbAzfjzQKOwDPVGe0=
+Date: Fri, 15 May 2020 10:00:59 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200515170059.GA1009@sol.localdomain>
+References: <20200514003727.69001-1-satyat@google.com>
+ <20200514051053.GA14829@sol.localdomain>
+ <8fa1aafe-1725-e586-ede3-a3273e674470@kernel.dk>
+ <20200515074127.GA13926@infradead.org>
+ <20200515122540.GA143740@google.com>
+ <20200515144224.GA12040@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <9ba6e5ef-068d-a925-1eb9-107b0523666c@huawei.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20200515144224.GA12040@infradead.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,10 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jZbaN-00BhrJ-BT
-Subject: Re: [f2fs-dev] [PATCH] f2fs: flush dirty meta pages when flushing
- them
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jZdiL-00Br0M-Tc
+Subject: Re: [f2fs-dev] [PATCH v13 00/12] Inline Encryption Support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,51 +88,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+Cc: Jens Axboe <axboe@kernel.dk>, linux-ext4@vger.kernel.org,
+ linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
+ Kuohong Wang <kuohong.wang@mediatek.com>,
+ Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
+ Satya Tangirala <satyat@google.com>, linux-block@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/15, Chao Yu wrote:
-> On 2020/5/15 10:15, Jaegeuk Kim wrote:
-> > Let's guarantee flusing dirty meta pages to avoid infinite loop.
+On Fri, May 15, 2020 at 07:42:24AM -0700, Christoph Hellwig wrote:
+> On Fri, May 15, 2020 at 12:25:40PM +0000, Satya Tangirala wrote:
+> > One of the nice things about the current design is that regardless of what
+> > request queue an FS sends an encrypted bio to, blk-crypto will be able to handle
+> > the encryption (whether by using hardware inline encryption, or using the
+> > blk-crypto-fallback). The FS itself does not need to worry about what the
+> > request queue is.
 > 
-> What's the root cause? Race case or meta page flush failure?
+> True.  Which just makes me despise that design with the pointless
+> fallback even more..
 
-Investigating, but at least, this can avoid the inifinite loop there.
+The fallback is actually really useful.  First, for testing: it allows all the
+filesystem code that uses inline crypto to be tested using gce-xfstests and
+kvm-xfstests, so that it's covered by the usual ext4 and f2fs regression testing
+and it's much easier to develop patches for.  It also allowed us to enable the
+inlinecrypt mount option in Cuttlefish, which is the virtual Android device used
+to test the Android common kernels.  So, it gets the kernel test platform as
+similar to a real Android device as possible.
 
-V2:
+Ideally we'd implement virtualized inline encryption as you suggested.  But
+these platforms use a mix of VMM's (QEMU, GCE, and crosvm) and storage types
+(virtio-blk, virtio-scsi, and maybe others; none of these even have an inline
+encryption standard defined yet).  So it's not currently feasible.
 
-From c60ce8e7178004fd6cba96e592247e43b5fd98d8 Mon Sep 17 00:00:00 2001
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed, 13 May 2020 21:12:53 -0700
-Subject: [PATCH] f2fs: flush dirty meta pages when flushing them
+Second, it creates a clean design where users can just use blk-crypto, and not
+have to implement a second encryption implementation.  For example, I'd
+eventually like to switch fscrypt over to just use blk-crypto.  That would
+remove the duplicate code that you're concerned about.  It would also make it
+much easier to implement direct I/O support in fscrypt which is something that
+people have been requesting for a long time.
 
-Let's guarantee flusing dirty meta pages to avoid infinite loop.
+The reason the fscrypt conversion isn't yet part of the patchset is just that I
+consider it super important that we don't cause any regressions in fscrypt and
+that it doesn't use inline encryption hardware by default.  So it's not quite
+time to switch over for real yet, especially while the current patches are still
+pending upstream.  But I think it will come eventually, especially if we see
+that most Linux distros are enabling CONFIG_BLK_INLINE_ENCRYPTION anyway.  The
+inlinecrypt mount option will thten start controlling whether blk-crypto is
+allowed to to use real hardware or not, not whether blk-crypto is used or not.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/checkpoint.c | 3 +++
- 1 file changed, 3 insertions(+)
+Also, in the coming months we're planning to implement filesystem metadata
+encryption that is properly integrated with the fscrypt key derivation so that
+file contents don't have to be encrypted twice (as would be the case with
+dm-crypt + fscrypt).  That's going to involve adding lots of encryption hooks to
+code in ext4, f2fs, and places like fs/buffer.c.  blk-crypto-fallback is super
+helpful for this, since it will allow us to simply call
+fscrypt_set_bio_crypt_ctx() everywhere, and not have to both do that *and*
+implement a second case where we do all the crypto work scheduling, bounce page
+allocation, crypto API calls, etc. at the filesystem level.
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 620a386d82c1a..3dc3ac6fe1432 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1266,6 +1266,9 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
- 		if (unlikely(f2fs_cp_error(sbi)))
- 			break;
- 
-+		if (type == F2FS_DIRTY_META)
-+			f2fs_sync_meta_pages(sbi, META, LONG_MAX,
-+							FS_CP_META_IO);
- 		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
- 	}
- 	finish_wait(&sbi->cp_wait, &wait);
--- 
-2.26.2.761.g0e0b3e54be-goog
-
+- Eric
 
 
 _______________________________________________
