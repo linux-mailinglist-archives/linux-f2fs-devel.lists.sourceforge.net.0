@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 695A81D822F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 May 2020 19:54:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 702541D83B4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 May 2020 20:07:11 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jajxr-0002df-0T; Mon, 18 May 2020 17:54:11 +0000
+	id 1jakAP-0003K1-AG; Mon, 18 May 2020 18:07:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jajxp-0002dG-OO
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 May 2020 17:54:09 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jakAM-0003Jn-E7
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 May 2020 18:07:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rik9AjREJ8Zw+GwFtnQnVJuu6aWcJW/PaAkQTnnqj6Q=; b=N3xHm3Pujyj9u1KBFgmg0XZrjd
- 27Pjsc+34A9wRORTfQrNmhp5ZaIxy3WAMDZQ0DJiJ6tYXqoVhnZ9TcJsCsCo2Diyo1BtuBdnpRfv4
- ArkL8pzWK1NakZxtZbxqvuVyVvu4REi+M/v1LAwomCgeRB0CXLzSfBVZUNz9vQJEql5I=;
+ bh=6PV4Q75UmjfrhJZ+TtwYe5kK00mLvf2ecVMb5FWCwK4=; b=MIGaGPJqtCkcOUdFc/OyrmE9j0
+ 3uGkjYeZJ+HvfPJYdP7tsS7zwcb+DaURr3V3WGOeifclujdUG0cg+juGPz3/KhkkCib7H5aP1jlsM
+ DOzqk9+tczCGYURuLB8rMU8PzA1FfFUTCHMuCjp9k298rl7IC9QaGSturXSStz0hckqQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rik9AjREJ8Zw+GwFtnQnVJuu6aWcJW/PaAkQTnnqj6Q=; b=ZuLANFI5OUmJX4YwhpdXpktklx
- mp/fMkJC67Viprhl8dOaK4i0F83SL0Xa6PTiUqKdKylelwJcSBshSCZTxoT1tL7CvPPwliazpZEw9
- kLbSjZpQq68fT9iwgGkX7O7ib3ekIgsLAnw/v1W3ZrWiOsnSOFgoL2jk43dpnCGzymXU=;
+ bh=6PV4Q75UmjfrhJZ+TtwYe5kK00mLvf2ecVMb5FWCwK4=; b=K/tm1bNJBUWX99UfPmOGMYK27A
+ 2Z2ts8KS8j45ip+BJ3A+suAB99eD3Fd0BPx0WjJNfH18v77T1iByXTyKTY5ObwpHRyMviV1aDslc3
+ qE1g/XZO/hBEU4mugZ6QAHQfKMjbGeexuzLdgHklTajoXRt6u21uu/5amOMLXr2tW8JI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jajxo-00EDsc-1L
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 May 2020 17:54:09 +0000
+ id 1jakAK-00HH5r-EZ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 May 2020 18:07:06 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EB45220826;
- Mon, 18 May 2020 17:54:00 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 730E5207D3;
+ Mon, 18 May 2020 18:06:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589824441;
- bh=FGetf+iVgy0vcrFX5izmqoZB7XMZZxHn5IEkcjsJXMY=;
+ s=default; t=1589825208;
+ bh=0t5XyQefUUL24DWESK2XXYLe5nHTuuT/8UE4UguAhGU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nyph8D8EtgCp2cujLjccSTM+tAFK5nAoCfNCnEw1Hu786e9LMfic2dssZoVavfoEx
- LhGiKRQxbUfg1E+TjlgUbRoRTdasRXmGPceJ9d2dxt5nn4hsvEWAGsuSt3JLOTVpuO
- aVjJOs7d0f3qaMejLDDZFFUKGak54OZHObqMUKBw=
-Date: Mon, 18 May 2020 10:54:00 -0700
+ b=u+0P1hiutz1sSwKd64TfnPFMZ47grouIIUAo8hrS4c22W/zrTew0w0nwdj9QOs1gP
+ uLM3MOMiFZd68ET8k/jyWIY1HWr6DFwg03devChbJwIJBXzzJ/2z5W4JMqYIkfuUot
+ ZTU1STC1QbI0GIRTmViQIRkgE2g0+CB9lFB/h03w=
+Date: Mon, 18 May 2020 11:06:48 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200518175400.GA218254@google.com>
-References: <20200515021554.226835-1-jaegeuk@kernel.org>
- <9ba6e5ef-068d-a925-1eb9-107b0523666c@huawei.com>
- <20200515144509.GA46028@google.com>
- <cd964a56-b2a7-48de-97a6-5d89d9a590a3@huawei.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20200518180648.GB218254@google.com>
+References: <20200505204823.211214-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <cd964a56-b2a7-48de-97a6-5d89d9a590a3@huawei.com>
+In-Reply-To: <20200505204823.211214-1-ebiggers@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -72,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jajxo-00EDsc-1L
-Subject: Re: [f2fs-dev] [PATCH] f2fs: flush dirty meta pages when flushing
- them
+X-Headers-End: 1jakAK-00HH5r-EZ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't return vmalloc() memory from
+ f2fs_kmalloc()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,62 +83,112 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/18, Chao Yu wrote:
-> On 2020/5/15 22:45, Jaegeuk Kim wrote:
-> > On 05/15, Chao Yu wrote:
-> >> On 2020/5/15 10:15, Jaegeuk Kim wrote:
-> >>> Let's guarantee flusing dirty meta pages to avoid infinite loop.
-> >>
-> >> What's the root cause? Race case or meta page flush failure?
-> > 
-> > Investigating, but at least, this can avoid the inifinite loop there.
+On 05/05, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Hmm... this fix may cover the root cause..
+> kmalloc() returns kmalloc'ed memory, and kvmalloc() returns either
+> kmalloc'ed or vmalloc'ed memory.  But the f2fs wrappers, f2fs_kmalloc()
+> and f2fs_kvmalloc(), both return both kinds of memory.
+> 
+> It's redundant to have two functions that do the same thing, and also
+> breaking the standard naming convention is causing bugs since people
+> assume it's safe to kfree() memory allocated by f2fs_kmalloc().  See
+> e.g. the various allocations in fs/f2fs/compress.c.
+> 
+> Fix this by making f2fs_kmalloc() just use kmalloc().  And to avoid
+> re-introducing the allocation failures that the vmalloc fallback was
+> intended to fix, convert the largest allocations to use f2fs_kvmalloc().
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/f2fs/checkpoint.c | 4 ++--
+>  fs/f2fs/f2fs.h       | 8 +-------
+>  fs/f2fs/node.c       | 8 ++++----
+>  3 files changed, 7 insertions(+), 13 deletions(-)
+> 
+> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> index 97b6378554b406..ac5b47f15f5e77 100644
+> --- a/fs/f2fs/checkpoint.c
+> +++ b/fs/f2fs/checkpoint.c
+> @@ -895,8 +895,8 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
+>  	int i;
+>  	int err;
+>  
+> -	sbi->ckpt = f2fs_kzalloc(sbi, array_size(blk_size, cp_blks),
+> -				 GFP_KERNEL);
+> +	sbi->ckpt = f2fs_kvzalloc(sbi, array_size(blk_size, cp_blks),
+> +				  GFP_KERNEL);
+>  	if (!sbi->ckpt)
+>  		return -ENOMEM;
+>  	/*
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index d036a31a97e84e..bc4c5b9b1bf14c 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -2953,18 +2953,12 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
+>  static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
+>  					size_t size, gfp_t flags)
+>  {
+> -	void *ret;
+> -
+>  	if (time_to_inject(sbi, FAULT_KMALLOC)) {
+>  		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
+>  		return NULL;
+>  	}
+>  
+> -	ret = kmalloc(size, flags);
+> -	if (ret)
+> -		return ret;
+> -
+> -	return kvmalloc(size, flags);
+> +	return kmalloc(size, flags);
 
-We're getting reached out to one related to this issue where single SSA
-page is dirtied at the moment. Anyway, I think it'd be fine to get this
-as we can detect any fs consistency issue by fsck. So far, I haven't seen
-any problem in all my local stress tests.
+IIRC, sometimes, we suffered from ENOMEM from kmalloc, as some structures
+depended on the disk capacity. I can't remember exactly which structure tho.
 
+>  }
+>  
+>  static inline void *f2fs_kzalloc(struct f2fs_sb_info *sbi,
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 4da0d8713df5cb..e660af55565c61 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -2934,7 +2934,7 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
+>  		return 0;
+>  
+>  	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
+> -	nm_i->nat_bits = f2fs_kzalloc(sbi,
+> +	nm_i->nat_bits = f2fs_kvzalloc(sbi,
+>  			nm_i->nat_bits_blocks << F2FS_BLKSIZE_BITS, GFP_KERNEL);
+>  	if (!nm_i->nat_bits)
+>  		return -ENOMEM;
+> @@ -3067,9 +3067,9 @@ static int init_free_nid_cache(struct f2fs_sb_info *sbi)
+>  	int i;
+>  
+>  	nm_i->free_nid_bitmap =
+> -		f2fs_kzalloc(sbi, array_size(sizeof(unsigned char *),
+> -					     nm_i->nat_blocks),
+> -			     GFP_KERNEL);
+> +		f2fs_kvzalloc(sbi, array_size(sizeof(unsigned char *),
+> +					      nm_i->nat_blocks),
+> +			      GFP_KERNEL);
+>  	if (!nm_i->free_nid_bitmap)
+>  		return -ENOMEM;
+>  
+> -- 
+> 2.26.2
 > 
-> Thanks,
 > 
-> > 
-> > V2:
-> > 
-> >>From c60ce8e7178004fd6cba96e592247e43b5fd98d8 Mon Sep 17 00:00:00 2001
-> > From: Jaegeuk Kim <jaegeuk@kernel.org>
-> > Date: Wed, 13 May 2020 21:12:53 -0700
-> > Subject: [PATCH] f2fs: flush dirty meta pages when flushing them
-> > 
-> > Let's guarantee flusing dirty meta pages to avoid infinite loop.
-> > 
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > ---
-> >  fs/f2fs/checkpoint.c | 3 +++
-> >  1 file changed, 3 insertions(+)
-> > 
-> > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > index 620a386d82c1a..3dc3ac6fe1432 100644
-> > --- a/fs/f2fs/checkpoint.c
-> > +++ b/fs/f2fs/checkpoint.c
-> > @@ -1266,6 +1266,9 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
-> >  		if (unlikely(f2fs_cp_error(sbi)))
-> >  			break;
-> >  
-> > +		if (type == F2FS_DIRTY_META)
-> > +			f2fs_sync_meta_pages(sbi, META, LONG_MAX,
-> > +							FS_CP_META_IO);
-> >  		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
-> >  	}
-> >  	finish_wait(&sbi->cp_wait, &wait);
-> > 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
