@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE3731D8E27
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 May 2020 05:19:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83CCD1D916E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 May 2020 09:52:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jasmu-0002xo-Cm; Tue, 19 May 2020 03:19:28 +0000
+	id 1jax3D-00067b-BO; Tue, 19 May 2020 07:52:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jasms-0002xY-QG
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 May 2020 03:19:26 +0000
+ (envelope-from <mstsxfx@gmail.com>) id 1jax3C-00067P-1v
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 May 2020 07:52:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2L181ohuSrHVxND4bnDbEKGORzujVWIj4C/ZtVxoAW4=; b=Zy3hR3nMecpr6HbILTxJLF/xI1
- /QfFJBaORffRlAq8w1PgzHjL8u6LESOP5viz9D2+BY4WpCO/eRIMZWlhTM93WWmcFwVeyFkJURO4l
- ckQirQUoFrAZ2hwvexg6Kqie/ZQInNo23JDbhSQxOED8A47jmDYaxBnMpIAsFPiXsKpM=;
+ bh=q9ehllzv4GXD6PHjLq8rxZ0NEvwuAG+BryL3jyLoW3I=; b=cxxK+Q9Zr3TaHjKX5irdA7Btcq
+ ER2diG8e30IAuyDi1D9zHfdu/lDHwjOuA40WfjAvCEnwmTRDnOQkvV785IWSuGfdRrk2ecENE88ti
+ QSYTHd0yctVkszmOmrvOk27wmQbOjpqLdZteFqQBmcAmG4Uhrb5wI0Lwct5a4kxc2pi8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,51 +29,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2L181ohuSrHVxND4bnDbEKGORzujVWIj4C/ZtVxoAW4=; b=nLJ+GUZKGuUAfqqBWODrCpRPZW
- 9FrOSUMk0CdOaB4NkjFzOMo51LpuzgZvuMR7+YU28hLMXQFeKX3A8je1VCOsJahmCJRgLOdU3LHOL
- Ab+Hff6dJReQWm3fgh5P+cAfsRYCT5Y6CKuRjGY3qzn0ONiQhWJt6tPHRbHwpYtgDH8M=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jasmr-00EhRd-HN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 May 2020 03:19:26 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DED49206C3;
- Tue, 19 May 2020 03:19:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589858348;
- bh=PllARKm9f4ccZ/gUJMOlC7odKltZnclKy8uutdPb+k0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=JRoNLpVnWz3SGXLNQ6Ppoj9p+wnKByVI+HT8sOgdeK0039aW0gKbfCEykPZnjexzU
- L7rCc55PGqNEjqLvpNkePRNd/vy3IeeMsiJa3f+jnlIeDwpzYlwUJHfAEq+ckKh3MG
- D9mLh/mIFFPJhgxULyW2K34Bovp+5a9G0pHi2J5Y=
-Date: Mon, 18 May 2020 20:19:07 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200519031907.GA155398@google.com>
-References: <20200512233251.118314-1-ebiggers@kernel.org>
- <20200512233251.118314-4-ebiggers@kernel.org>
- <20200519025355.GC2396055@mit.edu>
- <20200519030205.GB954@sol.localdomain>
- <20200519031115.GC954@sol.localdomain>
+ bh=q9ehllzv4GXD6PHjLq8rxZ0NEvwuAG+BryL3jyLoW3I=; b=YdtYuVK1n3WIwlMHRns6lY/cpL
+ W9e628za68DylyTq9HZTBlk+pfMMQAvsp8ZtEBw0OHmch9Uy5ACi59QHf/C6k9kTQluDEfh20pn7z
+ l9KnB6oDcBefYqSWiIPQx7JOJ2PHMGQA1TSRiX2fZ+jiJVviIuXa0iltkClYrGmgKNGY=;
+Received: from mail-wm1-f67.google.com ([209.85.128.67])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jax38-000N3D-4X
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 May 2020 07:52:33 +0000
+Received: by mail-wm1-f67.google.com with SMTP id h4so1985880wmb.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 19 May 2020 00:52:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=q9ehllzv4GXD6PHjLq8rxZ0NEvwuAG+BryL3jyLoW3I=;
+ b=rbQOwbcf1qfCd6TuSBz7/zk3GxnZDpJ/NMDKek/OtLPS/Zv3Z3aEqPSMfSvb7bp7X5
+ qJImr3WHBGy3ZcHA0de/eXrFihGFUJQnJDnCX/dIqorJipkohkRUBLXuMe1/CbFtQ6q0
+ kJesK5A+P75Zpy4oJpvFGieaO/5eJwoZJkUgctmBx8KyLqnDHaMg/lvObKEUzml4NXq/
+ 77nXzFoyOx5oqJgMqi6WxzJnbNcxMILb+PZrO1uHIUg/T7CMRYZMkMX0J3BvEMQbG30y
+ +mr0se7OdFbCWL7nSoEy9o1avvJP2/d2cQGYlFQm2SmWkXmk0L2SEt91W6tpFPBpZY4q
+ ZXZA==
+X-Gm-Message-State: AOAM533r6vKn/5FHvXz4aGWxxQsTyN19kKxz5rxDEm6z4W83XGZmIIVr
+ OWoANkVAXDdKE7/w9N7RQv8=
+X-Google-Smtp-Source: ABdhPJzhMPJJ+bOTnb0XzxprTwcOOTMoZpRkuCsUFILfWTJFhfoKhfdBOE3Io5xf2x700pgQq1fN2w==
+X-Received: by 2002:a1c:1902:: with SMTP id 2mr3881648wmz.178.1589874736792;
+ Tue, 19 May 2020 00:52:16 -0700 (PDT)
+Received: from localhost (ip-37-188-176-234.eurotel.cz. [37.188.176.234])
+ by smtp.gmail.com with ESMTPSA id q2sm19274851wrx.60.2020.05.19.00.52.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2020 00:52:15 -0700 (PDT)
+Date: Tue, 19 May 2020 09:52:13 +0200
+From: Michal Hocko <mhocko@kernel.org>
+To: Naresh Kamboju <naresh.kamboju@linaro.org>
+Message-ID: <20200519075213.GF32497@dhcp22.suse.cz>
+References: <CA+G9fYu2ruH-8uxBHE0pdE6RgRTSx4QuQPAN=Nv3BCdRd2ouYA@mail.gmail.com>
+ <20200501135806.4eebf0b92f84ab60bba3e1e7@linux-foundation.org>
+ <CA+G9fYsiZ81pmawUY62K30B6ue+RXYod854RS91R2+F8ZO7Xvw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200519031115.GC954@sol.localdomain>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <CA+G9fYsiZ81pmawUY62K30B6ue+RXYod854RS91R2+F8ZO7Xvw@mail.gmail.com>
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (mstsxfx[at]gmail.com)
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.67 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.128.67 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jasmr-00EhRd-HN
-Subject: Re: [f2fs-dev] [PATCH 3/4] fscrypt: support test_dummy_encryption=v2
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and EnvelopeFrom
+ freemail headers are different
+X-Headers-End: 1jax38-000N3D-4X
+Subject: Re: [f2fs-dev] mm: mkfs.ext4 invoked oom-killer on i386 -
+ pagecache_get_page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,121 +99,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- "Theodore Y. Ts'o" <tytso@mit.edu>, Daniel Rosenberg <drosen@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Andrea Arcangeli <aarcange@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
+ Arnd Bergmann <arnd@arndb.de>, Hugh Dickins <hughd@google.com>,
+ open list <linux-kernel@vger.kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-block <linux-block@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
+ Linux-Next Mailing List <linux-next@vger.kernel.org>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, lkft-triage@lists.linaro.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ linux-ext4 <linux-ext4@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/18, Eric Biggers wrote:
-> On Mon, May 18, 2020 at 08:02:05PM -0700, Eric Biggers wrote:
-> > On Mon, May 18, 2020 at 10:53:55PM -0400, Theodore Y. Ts'o wrote:
-> > > On Tue, May 12, 2020 at 04:32:50PM -0700, Eric Biggers wrote:
-> > > > From: Eric Biggers <ebiggers@google.com>
-> > > > 
-> > > > v1 encryption policies are deprecated in favor of v2, and some new
-> > > > features (e.g. encryption+casefolding) are only being added for v2.
-> > > > 
-> > > > Therefore, the "test_dummy_encryption" mount option (which is used for
-> > > > encryption I/O testing with xfstests) needs to support v2 policies.
-> > > > 
-> > > > To do this, extend its syntax to be "test_dummy_encryption=v1" or
-> > > > "test_dummy_encryption=v2".  The existing "test_dummy_encryption" (no
-> > > > argument) also continues to be accepted, to specify the default setting
-> > > > -- currently v1, but the next patch changes it to v2.
-> > > > 
-> > > > To cleanly support both v1 and v2 while also making it easy to support
-> > > > specifying other encryption settings in the future (say, accepting
-> > > > "$contents_mode:$filenames_mode:v2"), make ext4 and f2fs maintain a
-> > > > pointer to the dummy fscrypt_context rather than using mount flags.
-> > > > 
-> > > > To avoid concurrency issues, don't allow test_dummy_encryption to be set
-> > > > or changed during a remount.  (The former restriction is new, but
-> > > > xfstests doesn't run into it, so no one should notice.)
-> > > > 
-> > > > Tested with 'gce-xfstests -c {ext4,f2fs}/encrypt -g auto'.  On ext4,
-> > > > there are two regressions, both of which are test bugs: ext4/023 and
-> > > > ext4/028 fail because they set an xattr and expect it to be stored
-> > > > inline, but the increase in size of the fscrypt_context from
-> > > > 24 to 40 bytes causes this xattr to be spilled into an external block.
-> > > > 
-> > > > Signed-off-by: Eric Biggers <ebiggers@google.com>
-> > > 
-> > > Signed-off-by: Theodore Ts'o <tytso@mit.edu>
-> > > 
-> > > Looks good, but could you do me a favor and merge in this?
-> > > 
-> > > diff --git a/fs/ext4/sysfs.c b/fs/ext4/sysfs.c
-> > > index 04bfaf63752c..6c9fc9e21c13 100644
-> > > --- a/fs/ext4/sysfs.c
-> > > +++ b/fs/ext4/sysfs.c
-> > > @@ -293,6 +293,7 @@ EXT4_ATTR_FEATURE(batched_discard);
-> > >  EXT4_ATTR_FEATURE(meta_bg_resize);
-> > >  #ifdef CONFIG_FS_ENCRYPTION
-> > >  EXT4_ATTR_FEATURE(encryption);
-> > > +EXT4_ATTR_FEATURE(test_dummy_encryption_v2);
-> > >  #endif
-> > >  #ifdef CONFIG_UNICODE
-> > >  EXT4_ATTR_FEATURE(casefold);
-> > > @@ -308,6 +309,7 @@ static struct attribute *ext4_feat_attrs[] = {
-> > >  	ATTR_LIST(meta_bg_resize),
-> > >  #ifdef CONFIG_FS_ENCRYPTION
-> > >  	ATTR_LIST(encryption),
-> > > +	ATTR_LIST(test_dummy_encryption_v2),
-> > >  #endif
-> > >  #ifdef CONFIG_UNICODE
-> > >  	ATTR_LIST(casefold),
-> > > 
-> > > This will make it easier to have the gce-xfstests test runner know
-> > > whether or not test_dummy_encryption=v1 / test_dummy_encryption=v2
-> > > will work, and whether test_dummy_encryption tests v1 or v2.
-> > > 
-> > 
-> > Thanks, I'll add that.  I assume you meant "Reviewed-by"?
+On Mon 18-05-20 19:40:55, Naresh Kamboju wrote:
+> Thanks for looking into this problem.
 > 
-> Jaegeuk, do you want /sys/fs/f2fs/features/test_dummy_encryption_v2 as well, to
-> match what Ted wants for ext4?  It would be the following change:
+> On Sat, 2 May 2020 at 02:28, Andrew Morton <akpm@linux-foundation.org> wrote:
+> >
+> > On Fri, 1 May 2020 18:08:28 +0530 Naresh Kamboju <naresh.kamboju@linaro.org> wrote:
+> >
+> > > mkfs -t ext4 invoked oom-killer on i386 kernel running on x86_64 device
+> > > and started happening on linux -next master branch kernel tag next-20200430
+> > > and next-20200501. We did not bisect this problem.
+[...]
+> Creating journal (131072 blocks): [   31.251333] mkfs.ext4 invoked
+> oom-killer: gfp_mask=0x101cc0(GFP_USER|__GFP_WRITE), order=0,
+> oom_score_adj=0
+[...]
+> [   31.500943] DMA free:187396kB min:22528kB low:28160kB high:33792kB
+> reserved_highatomic:0KB active_anon:0kB inactive_anon:0kB
+> active_file:4736kB inactive_file:431688kB unevictable:0kB
+> writepending:62020kB present:783360kB managed:668264kB mlocked:0kB
+> kernel_stack:888kB pagetables:0kB bounce:0kB free_pcp:880kB
+> local_pcp:216kB free_cma:163840kB
 
-Yes, please. Thank you.
+This is really unexpected. You are saying this is a regular i386 and DMA
+should be bottom 16MB while yours is 780MB and the rest of the low mem
+is in the Normal zone which is completely missing here. How have you got
+to that configuration? I have to say I haven't seen anything like that
+on i386.
 
-> 
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index e3bbbef9b4f09e4..3162f46b3c9bfc1 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -446,6 +446,7 @@ enum feat_id {
->  	FEAT_SB_CHECKSUM,
->  	FEAT_CASEFOLD,
->  	FEAT_COMPRESSION,
-> +	FEAT_TEST_DUMMY_ENCRYPTION_V2,
->  };
->  
->  static ssize_t f2fs_feature_show(struct f2fs_attr *a,
-> @@ -466,6 +467,7 @@ static ssize_t f2fs_feature_show(struct f2fs_attr *a,
->  	case FEAT_SB_CHECKSUM:
->  	case FEAT_CASEFOLD:
->  	case FEAT_COMPRESSION:
-> +	case FEAT_TEST_DUMMY_ENCRYPTION_V2:
->  		return sprintf(buf, "supported\n");
->  	}
->  	return 0;
-> @@ -563,6 +565,7 @@ F2FS_GENERAL_RO_ATTR(avg_vblocks);
->  
->  #ifdef CONFIG_FS_ENCRYPTION
->  F2FS_FEATURE_RO_ATTR(encryption, FEAT_CRYPTO);
-> +F2FS_FEATURE_RO_ATTR(test_dummy_encryption_v2, FEAT_TEST_DUMMY_ENCRYPTION_V2);
->  #endif
->  #ifdef CONFIG_BLK_DEV_ZONED
->  F2FS_FEATURE_RO_ATTR(block_zoned, FEAT_BLKZONED);
-> @@ -647,6 +650,7 @@ ATTRIBUTE_GROUPS(f2fs);
->  static struct attribute *f2fs_feat_attrs[] = {
->  #ifdef CONFIG_FS_ENCRYPTION
->  	ATTR_LIST(encryption),
-> +	ATTR_LIST(test_dummy_encryption_v2),
->  #endif
->  #ifdef CONFIG_BLK_DEV_ZONED
->  	ATTR_LIST(block_zoned),
+The failing request is GFP_USER so highmem is not really allowed but
+free pages are way above watermarks so the allocation should have just
+succeeded.
+
+-- 
+Michal Hocko
+SUSE Labs
 
 
 _______________________________________________
