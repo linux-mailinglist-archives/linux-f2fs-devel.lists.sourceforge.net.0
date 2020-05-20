@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F6081DBFE0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2020 22:06:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CADBF1DC25D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 May 2020 00:52:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jbUyq-0003PO-6M; Wed, 20 May 2020 20:06:20 +0000
+	id 1jbXZR-0002KR-4b; Wed, 20 May 2020 22:52:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chris@chrisdown.name>) id 1jbUyo-0003PH-Mb
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 May 2020 20:06:18 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jbXZQ-0002KK-9E
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 May 2020 22:52:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tl5hNSaq9jwtAfQ3H4b6ZmG+ScLEKqnmbeQTtX38GBs=; b=AgFSRAZ+5XmNBYYgJScgZcS8Kb
- nXvMRX/t4R3EQOf2mo4ZwkQoE7P9w61mq7n+J+j6DRtfIJidJGLpQS6zEJEJecFoma2VV03hgMdCF
- kWk8J5ioSrmx+SKjJPrv12mITTQUCuX+N0M6KJgAFUgpsp6Wc5N7lCmdW5L9gzj2f+EA=;
+ bh=1k9dPbpSTer4C/ycvJ7+IweWQFk7HDRsMJk8qir9Mu4=; b=ZBTRjgVLCLrxJw3UTud3Z7NBis
+ Cx2dG1GPpX4LF87xJeYkG6DwGZeeG8zhShc1HG9zQtt+9/z8HdNG8BEF/i0/eGC+BMtg63dXblLkW
+ VmhFL994Jt8pvXJRj9ve6vevfju9oBmQbG9VJX8hqYtVvdTncj8JMnI/t9/9dqirm3Kg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,77 +29,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tl5hNSaq9jwtAfQ3H4b6ZmG+ScLEKqnmbeQTtX38GBs=; b=Mi9oXbXmTLsqSQJiFAeVIUjr1P
- Sqp26ZNN5fr49LQW2v5hzH7MSai7UukHptZyN3Wk2qywZsQgy4aBqjZ76HdWsi25UeEmmVVhAqscz
- fS9ZcuozRUb/+p8G22FYLmGBbjapuBq8bqvXETq1mFfczIbeAyygKtbH7ZIsjAH/TG5o=;
-Received: from mail-ed1-f68.google.com ([209.85.208.68])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jbUyl-002TJz-2t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 May 2020 20:06:18 +0000
-Received: by mail-ed1-f68.google.com with SMTP id i16so4560439edv.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 20 May 2020 13:06:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chrisdown.name; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=tl5hNSaq9jwtAfQ3H4b6ZmG+ScLEKqnmbeQTtX38GBs=;
- b=ejWrZ/jfJqN1W3XBa5rEh8Lk4R2pGtjUsAfERal12GI7QfCZfWLDd9UtMrTSYE1/tI
- FovDCSwIGfbaaHj8cZJ1IKJDULyXaqYHAyGtIE65kUKbthWtIjz/KQGrx+y85v2kRRQb
- 81QOjyfbBp6VHvsSe4y3k88jU+q/CRx/ohQyM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=tl5hNSaq9jwtAfQ3H4b6ZmG+ScLEKqnmbeQTtX38GBs=;
- b=B0PB3B2PktFkTgJy8scqdoAmsIARkpDGp4HnzYfW5pm//0z8oRNvLTVHaTtH6FEXiE
- 0OIACfBColRe8Nc6g2qznx2ukX8hgBLZpuXPhLB98aFvrLpnB820AUaDC+v40C6LuK2l
- Ux3lQAZag50j7kxJcDXeqIYf6tm/riF/B5tN4dKyasY0jtMbeEhTzN7rKcwYdDZ0WULT
- FHqlkcDq0e0dOpmXtb4k7qB7JZEyw6Vj9dUFqTkG/pjaRl2/tn1g+JO0CJM7TTO8UF3o
- LgD0SRNNy1HoIsDw+7nFrbv9d2nFtFkJzzh7UcjfdLGDhz1nAbBqHCW8olCDJbJI0ryZ
- iBWQ==
-X-Gm-Message-State: AOAM53162qv4xeqngNCS4xuEKs0QWQNrBMpMQMgSQgE+qRZgTpX6l/jD
- 71MEbfg7nYp6Jel2DJkx5TlNDarH1uipF5is
-X-Google-Smtp-Source: ABdhPJweTP3W62AzAZrqweXxsUYkSWvtaZ1Wr8JxuA7F/wzgya+W3/hBf6pFGJ7YDBt9fmp3P99NeQ==
-X-Received: by 2002:a50:9312:: with SMTP id m18mr4674386eda.252.1590001748698; 
- Wed, 20 May 2020 12:09:08 -0700 (PDT)
-Received: from localhost ([2620:10d:c093:400::5:758d])
- by smtp.gmail.com with ESMTPSA id g21sm2514869edw.9.2020.05.20.12.09.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2020 12:09:08 -0700 (PDT)
-Date: Wed, 20 May 2020 20:09:06 +0100
-From: Chris Down <chris@chrisdown.name>
-To: Naresh Kamboju <naresh.kamboju@linaro.org>
-Message-ID: <20200520190906.GA558281@chrisdown.name>
-References: <CA+G9fYu2ruH-8uxBHE0pdE6RgRTSx4QuQPAN=Nv3BCdRd2ouYA@mail.gmail.com>
- <20200501135806.4eebf0b92f84ab60bba3e1e7@linux-foundation.org>
- <CA+G9fYsiZ81pmawUY62K30B6ue+RXYod854RS91R2+F8ZO7Xvw@mail.gmail.com>
- <20200519075213.GF32497@dhcp22.suse.cz>
- <CAK8P3a2T_j-Ynvhsqe_FCqS2-ZdLbo0oMbHhHChzMbryE0izAQ@mail.gmail.com>
- <20200519084535.GG32497@dhcp22.suse.cz>
- <CA+G9fYvzLm7n1BE7AJXd8_49fOgPgWWTiQ7sXkVre_zoERjQKg@mail.gmail.com>
- <CA+G9fYsXnwyGetj-vztAKPt8=jXrkY8QWe74u5EEA3XPW7aikQ@mail.gmail.com>
+ bh=1k9dPbpSTer4C/ycvJ7+IweWQFk7HDRsMJk8qir9Mu4=; b=T5kzw7GJ7PG/2oM05fVJmTJd3j
+ 2gvEspAJVUwSkgATrwuE5uiytQG9eJVjTOtpIBTLMSFbC8F6H9AscYAyCFX2n313xgATlbiClHT6O
+ 1lTwdSbtWBJjVFnTGOVC7gDibt+qGFlZiQbTUvhiM2Lh54atgGWSZN60j/irkle3AgZ0=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jbXZK-00HDIw-DY
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 May 2020 22:52:16 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id B404B20708;
+ Wed, 20 May 2020 22:51:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1590015117;
+ bh=6M3UYo+lP4Q5z8KTNc19X5qmKIkadqyM78V5Jg8RXbk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=NPehf3XhcpNB7X6B3CiBoI7ZapLjg/nHI9yc9SOZCLTPYGTvrUEX3TRqF5urCONVK
+ USocpsRQnusCnpqILdPycSQVoAycXT6zYTzN7NkzClff5GwImZ0Lw5+pzY5doXvIPQ
+ aMff7m8l+ehp2CY09IEyUY+NBdO5ULxIlnq8KQEw=
+Date: Wed, 20 May 2020 15:51:56 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <20200520225156.GA19246@sol.localdomain>
+References: <20200511191358.53096-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CA+G9fYsXnwyGetj-vztAKPt8=jXrkY8QWe74u5EEA3XPW7aikQ@mail.gmail.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200511191358.53096-1-ebiggers@kernel.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.68 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.68 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1jbUyl-002TJz-2t
-Subject: Re: [f2fs-dev] mm: mkfs.ext4 invoked oom-killer on i386 -
- pagecache_get_page
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jbXZK-00HDIw-DY
+Subject: Re: [f2fs-dev] [PATCH 0/3] fscrypt: misc cleanups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,56 +83,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: lkft-triage@lists.linaro.org, Michal Hocko <mhocko@kernel.org>,
- linux-mm <linux-mm@kvack.org>, Yafang Shao <laoar.shao@gmail.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, cgroups@vger.kernel.org,
- Andrea Arcangeli <aarcange@redhat.com>,
- Anders Roxell <anders.roxell@linaro.org>, Hugh Dickins <hughd@google.com>,
- Matthew Wilcox <willy@infradead.org>,
- Linux-Next Mailing List <linux-next@vger.kernel.org>,
- linux-ext4 <linux-ext4@vger.kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- linux-block <linux-block@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, open list <linux-kernel@vger.kernel.org>,
- "Linux F2FS DEV, Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Andrew Morton <akpm@linux-foundation.org>, Roman Gushchin <guro@fb.com>
+Cc: linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Naresh,
+On Mon, May 11, 2020 at 12:13:55PM -0700, Eric Biggers wrote:
+> In fs/crypto/ and fscrypt.h, fix all kerneldoc warnings, and fix some
+> coding style inconsistencies in function declarations.
+> 
+> Eric Biggers (3):
+>   fscrypt: fix all kerneldoc warnings
+>   fscrypt: name all function parameters
+>   fscrypt: remove unnecessary extern keywords
+> 
+>  fs/crypto/crypto.c          |   9 +-
+>  fs/crypto/fname.c           |  52 +++++++++---
+>  fs/crypto/fscrypt_private.h |  88 +++++++++----------
+>  fs/crypto/hooks.c           |   4 +-
+>  fs/crypto/keysetup.c        |   9 +-
+>  fs/crypto/policy.c          |  19 ++++-
+>  include/linux/fscrypt.h     | 165 ++++++++++++++++++------------------
+>  7 files changed, 193 insertions(+), 153 deletions(-)
+> 
 
-Naresh Kamboju writes:
->As a part of investigation on this issue LKFT teammate Anders Roxell
->git bisected the problem and found bad commit(s) which caused this problem.
->
->The following two patches have been reverted on next-20200519 and retested the
->reproducible steps and confirmed the test case mkfs -t ext4 got PASS.
->( invoked oom-killer is gone now)
->
->Revert "mm, memcg: avoid stale protection values when cgroup is above
->protection"
->    This reverts commit 23a53e1c02006120f89383270d46cbd040a70bc6.
->
->Revert "mm, memcg: decouple e{low,min} state mutations from protection
->checks"
->    This reverts commit 7b88906ab7399b58bb088c28befe50bcce076d82.
+All applied to fscrypt.git#master for 5.8.
 
-Thanks Anders and Naresh for tracking this down and reverting.
-
-I'll take a look tomorrow. I don't see anything immediately obviously wrong in 
-either of those commits from a (very) cursory glance, but they should only be 
-taking effect if protections are set.
-
-Since you have i386 hardware available, and I don't, could you please apply 
-only "avoid stale protection" again and check if it only happens with that 
-commit, or requires both? That would help narrow down the suspects.
-
-Do you use any memcg protections in these tests?
-
-Thank you!
-
-Chris
+- Eric
 
 
 _______________________________________________
