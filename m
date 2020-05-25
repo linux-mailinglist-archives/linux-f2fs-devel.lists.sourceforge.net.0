@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AB761E1152
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 May 2020 17:11:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12FD51E11D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 May 2020 17:33:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jdEks-0005eh-VS; Mon, 25 May 2020 15:11:06 +0000
+	id 1jdF6x-0005ki-Ap; Mon, 25 May 2020 15:33:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jdEks-0005eW-CS
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 May 2020 15:11:06 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jdF6v-0005kZ-Qq
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 May 2020 15:33:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L5kEY8PwPG6XNzlvi7Ph5gIxunvHIv7Jg5HIdAX/lKE=; b=Ogrzv5c0iduIhzxzBPdJnfZOdJ
- rhG1dYfPB76VT4k8lEpHrJJYu8VD0RSn8CbE/bk5Tj1U7Tt+vY57TmXLH8dSSkbTWgFsUR9LDW40L
- m6GTpaomVGLwll2jIToNoNVX9G+TexV6wWf3TbAqoeo1DQcXrteKYFmHp+xnM+ezO8dM=;
+ bh=jQKLjUh/QGT1GLbCPOkHX0KapVw9OLvm4DKpf9aOWkU=; b=VC61VgbqhlQab9xWeGFOLvAVYm
+ iNvN//noWaSrbuD8LA0wVx8t7QcmbblAm4fACpeXrsNVYGQnqtx7ZOsbKB6phIdLSWejvjlw85Hrc
+ P2VufuEREecDKoDa1+41WEQqr/OBZiqZo2sgSUV7Vp5bV9ABKErHvEKqUDEYbN2VuQfY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,53 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L5kEY8PwPG6XNzlvi7Ph5gIxunvHIv7Jg5HIdAX/lKE=; b=QKzevL6WdNqwdXz1Af7aQKDQDX
- GO+Bd2Xp1oScCrDc+WEJtsmpN59zy8c0hL0/bt+FF/V5ug9YT2XGc4OtpQ4ao6dnl9MKNxn6olMTk
- GRtOZaCSFzBAcp757B4u04rugaNNYNdHAXMHrIkU9hWkNSw+eHPTk8+h0aXNGe+65BHc=;
+ bh=jQKLjUh/QGT1GLbCPOkHX0KapVw9OLvm4DKpf9aOWkU=; b=kFP4CQ2TE8Yob1zc0dMo1QR6e9
+ JSjIUPE0Rj1HE8S9P0OO80n/Xn8Jva0Zb0uryzrtPdUGg6AfgJIXgp+iXVoWRhRxnLtKEG+20X0Dw
+ LNju8D1Q7cQcwrXI7+6G7xLy4bOX49eU/jGwD2XgW21HDjcTY8qxhWun0NeFDD6uKpYU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jdEkp-00EuXr-73
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 May 2020 15:11:06 +0000
-Received: from localhost (unknown [104.132.1.66])
+ id 1jdF6t-005oGt-SH
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 25 May 2020 15:33:53 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BBF552073B;
- Mon, 25 May 2020 15:10:57 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0D41B2071A;
+ Mon, 25 May 2020 15:33:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590419457;
- bh=kWDchJjRAEJVbNKSENl4Ienf/7DpzmUVEB1I8GSDrEo=;
+ s=default; t=1590420814;
+ bh=/lRcApMN9bchgxQmdRuHru0M8nV62fiOyAvgNyyKOqE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=fpCzqg8Tp9ZS4H8j9ZJ4ccZdUup73PHLuYGsjSAm4AUzRDJ5CyxKsrCnhsLNShcme
- jqzUNZEUdhHw3s5Zl2/m1xK4+nyFHwrEDSsdJOC9bb1E2W55jF1nxTUhuj/rJXhZKF
- iCSCqKIKFFwEcZbPkJAFH54VOxZUQAeYk8NY2vqE=
-Date: Mon, 25 May 2020 08:10:57 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200525151057.GB55033@google.com>
-References: <20200507075905.953777-1-ebiggers@kernel.org>
- <20200507075905.953777-4-ebiggers@kernel.org>
- <9c18ded1-06cb-1187-1eac-5ba354eebee1@huawei.com>
+ b=FkSvkKrkHrQNmOS5J/o9VjrQqOrK15S4n8hbD/X0fyIUhr7F42waBhGQOqj/6HAJx
+ tyzcpYbp9yyCxo7RvSbHabJpYOQEmcyfJ+E1oVol2cFd97D1c/VRNotZIGgME0uUKv
+ pVg9kv2JyeNisFfbKjtrNkuNbJM87euAu3sXNQ6I=
+Date: Mon, 25 May 2020 08:33:20 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <20200525153320.GA2152@sol.localdomain>
+References: <20200515204141.251098-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <9c18ded1-06cb-1187-1eac-5ba354eebee1@huawei.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200515204141.251098-1-ebiggers@kernel.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jdEkp-00EuXr-73
-Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: rework filename handling
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jdF6t-005oGt-SH
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: add support for IV_INO_LBLK_32
+ policies
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,57 +84,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>,
- Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Satya Tangirala <satyat@google.com>, "Theodore Y . Ts'o" <tytso@mit.edu>,
+ linux-mmc@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Paul Crowley <paulcrowley@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/25, Chao Yu wrote:
-> On 2020/5/7 15:59, Eric Biggers wrote:
-> > From: Eric Biggers <ebiggers@google.com>
-> > 
-> > Rework f2fs's handling of filenames to use a new 'struct f2fs_filename'.
-> > Similar to 'struct ext4_filename', this stores the usr_fname, disk_name,
-> > dirhash, crypto_buf, and casefolded name.  Some of these names can be
-> > NULL in some cases.  'struct f2fs_filename' differs from
-> > 'struct fscrypt_name' mainly in that the casefolded name is included.
-> > 
-> > For user-initiated directory operations like lookup() and create(),
-> > initialize the f2fs_filename by translating the corresponding
-> > fscrypt_name, then computing the dirhash and casefolded name if needed.
-> > 
-> > This makes the dirhash and casefolded name be cached for each syscall,
-> > so we don't have to recompute them repeatedly.  (Previously, f2fs
-> > computed the dirhash once per directory level, and the casefolded name
-> > once per directory block.)  This improves performance.
-> > 
-> > This rework also makes it much easier to correctly handle all
-> > combinations of normal, encrypted, casefolded, and encrypted+casefolded
-> > directories.  (The fourth isn't supported yet but is being worked on.)
-> > 
-> > The only other cases where an f2fs_filename gets initialized are for two
-> > filesystem-internal operations: (1) when converting an inline directory
-> > to a regular one, we grab the needed disk_name and hash from an existing
-> > f2fs_dir_entry; and (2) when roll-forward recovering a new dentry, we
-> > grab the needed disk_name from f2fs_inode::i_name and compute the hash.
-> > 
-> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+On Fri, May 15, 2020 at 01:41:41PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Reviewed-by: Chao Yu <yuchao0@huawei.com>
+> The eMMC inline crypto standard will only specify 32 DUN bits (a.k.a. IV
+> bits), unlike UFS's 64.  IV_INO_LBLK_64 is therefore not applicable, but
+> an encryption format which uses one key per policy and permits the
+> moving of encrypted file contents (as f2fs's garbage collector requires)
+> is still desirable.
+> 
+> To support such hardware, add a new encryption format IV_INO_LBLK_32
+> that makes the best use of the 32 bits: the IV is set to
+> 'SipHash-2-4(inode_number) + file_logical_block_number mod 2^32', where
+> the SipHash key is derived from the fscrypt master key.  We hash only
+> the inode number and not also the block number, because we need to
+> maintain contiguity of DUNs to merge bios.
+> 
+> Unlike with IV_INO_LBLK_64, with this format IV reuse is possible; this
+> is unavoidable given the size of the DUN.  This means this format should
+> only be used where the requirements of the first paragraph apply.
+> However, the hash spreads out the IVs in the whole usable range, and the
+> use of a keyed hash makes it difficult for an attacker to determine
+> which files use which IVs.
+> 
+> Besides the above differences, this flag works like IV_INO_LBLK_64 in
+> that on ext4 it is only allowed if the stable_inodes feature has been
+> enabled to prevent inode numbers and the filesystem UUID from changing.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  Documentation/filesystems/fscrypt.rst | 33 +++++++++--
+>  fs/crypto/crypto.c                    |  6 +-
+>  fs/crypto/fscrypt_private.h           | 20 +++++--
+>  fs/crypto/keyring.c                   |  5 +-
+>  fs/crypto/keysetup.c                  | 85 +++++++++++++++++++++------
+>  fs/crypto/policy.c                    | 51 +++++++++++-----
+>  include/uapi/linux/fscrypt.h          |  3 +-
+>  7 files changed, 157 insertions(+), 46 deletions(-)
 
-Thanks, but it's quite late to rebase stacked patches for this update when
-considering we have only 1 week for pull request. :)
+Applied to fscrypt.git#master for 5.8.
 
-> 
-> Thanks,
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+- Eric
 
 
 _______________________________________________
