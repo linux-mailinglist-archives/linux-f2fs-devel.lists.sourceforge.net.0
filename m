@@ -2,80 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D33CD1E3691
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 May 2020 05:33:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 250B11E36CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 May 2020 06:03:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jdmp7-0000kY-Mu; Wed, 27 May 2020 03:33:45 +0000
+	id 1jdnHU-00039E-6d; Wed, 27 May 2020 04:03:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1jdmp6-0000kL-DL
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 03:33:44 +0000
+ (envelope-from <daeho43@gmail.com>) id 1jdnHM-00038a-Hr
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 04:02:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zzVBYe1nVhSYnRyfMU4C5iudcF8edWINrDPqE70Sdn4=; b=SqNVKoFmcbMFkBosXwCNPwC9a7
- TVQem3XMbPX19A1Ft8nV08JU836DULJwIjY5BmZUI4S2twCVGmMVvP6YnEbe741djhd7Bis/2ewTo
- TqNYKNg9RFupyxr+FmoXZmcD0fAiVbHdKRqF69nk9AAnjTVphKrwFe8yDqLNAfRH0VFQ=;
+ bh=DyZwm58RJro1kic/9IoyyoaUkdPO3Lyg3bl6Kx/XiJU=; b=H2lGh73ctiz1FkGzi+sfF54+96
+ GETVCca0Vo3w4/7XjGVglNeOu/wolh7VbyMRd//Pe+ciJhDA1f5aKJJznkMoxH0646HqJoT0bJ6/m
+ qbzq8yaHkPA16iHkT42WlN9eyUMzjkYvlp8KH43XfUysUzleHqF8KkAoJJ37BheWUjYk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zzVBYe1nVhSYnRyfMU4C5iudcF8edWINrDPqE70Sdn4=; b=d
- RqNB5AqRoq/6DyEx6jiUK1Urgr0/VG0Y0SqsBbg8DR0w+ySYQpwRFl56uyQO9G/V8JL6/pskLSMLZ
- X3ZUmjGa0NCZGljWHazGYYNkZTz3o/8S4WKOXBbsQrFjqfXGwPijotEcHZ1EaaYVpJ0VO5ukFf244
- ripH0WpkVk4g67mo=;
-Received: from mail-pj1-f66.google.com ([209.85.216.66])
+ List-Owner:List-Archive; bh=DyZwm58RJro1kic/9IoyyoaUkdPO3Lyg3bl6Kx/XiJU=; b=A
+ 8Rno5JVClzvA59RU7uJxYksM0p2t65qhNhbVKLGxmKJ9z2fiyJjZXr1RpA+HvqU8pyp9gOQvYswv8
+ 4gCb+EJ7cNbKUNwUZd/3Yeyklckc71Xg24wfB9HDdZkfh+0spcEiRpBCNib6H2XgAUk/lDgQTuT5e
+ /dUI+gvmO3slMRbw=;
+Received: from mail-pj1-f68.google.com ([209.85.216.68])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jdmp4-00ELbd-H7
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 03:33:44 +0000
-Received: by mail-pj1-f66.google.com with SMTP id n15so802749pjt.4
+ id 1jdnHL-00EN4T-4c
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 04:02:56 +0000
+Received: by mail-pj1-f68.google.com with SMTP id ci23so892795pjb.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 26 May 2020 20:33:42 -0700 (PDT)
+ Tue, 26 May 2020 21:02:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=zzVBYe1nVhSYnRyfMU4C5iudcF8edWINrDPqE70Sdn4=;
- b=ljqZTQ2j7sJ7C+2xM32EI2LuRydqRWTC40gpGpcg0ghk+Pm65CHhX66VhgefqOi0Hf
- XhmKXGUkHTK7mvk8CXhDcD/DzJNWjKArDMFSc9H/or+BTZ+Fx7YfnfJ1eSz9yDdYh8A/
- LTst7/kKtZFXVCmxzFz2/pERjm5HA6kCIJZxY36mxaYvnLJKhOWKaAcXIGa4l5eb04NS
- XNdjtSJZsGmUaVkxFuud3s9eXJjzKTD5SjnENK8B6LWwf8TN14UQ+pAUq/jcJUMqcASm
- cWvAVUc8qd6TDi3ErcRWnltVTQ/9dNtAHzszaRj5m6Zxbw2B2EoW9IvOnCDimWgTvJOf
- OH1Q==
+ bh=DyZwm58RJro1kic/9IoyyoaUkdPO3Lyg3bl6Kx/XiJU=;
+ b=Ea5b/yOr0ZEjDMlwSBwK+l5ZsIJ+PqMFEO5MA6TfdyDCcSENA+WOIflT3B1Cw10fPh
+ 5sYGtgm8uMBE1czEC+5Q6RLS0zaBKiqdE9iidYWuF5MzBuNa/zGyLan6r6Yj7JOAul0o
+ 8oxwT7bfUiv3s6hXNHqdx5Ww8LPIN2YGVVH1uF/Gcdf55Yl7252/xsI9umtSJKpEQVYF
+ ur+ZElsaZjcmPCG9nvmfFaIsBCOoo1mhZjc+RxnXlWXAb2ojz/40Kn7cb2Jfe1RI9VPG
+ UHwdBSuDqL3qhWbxHm9NMp3VZaSxzFJps7F/tY/jhPTW6pSWbxUw9m1Zu4Nw2QmiFX2n
+ 6GRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=zzVBYe1nVhSYnRyfMU4C5iudcF8edWINrDPqE70Sdn4=;
- b=k+X8I3BhxAK+5HT5FLY3YHqJQbZhv3n/Q5x4nfIIjuic9QCoYRnI5zZXuR8/NVu7w7
- CmuHQWytlJmHpH9eG8lcHTBrZt57wozQmBKVaO9VZdP6S6uNtbM18cnyWKY7+jyw4QLb
- OPVRUDyZqbVstH8d6d1LjIMqBur7V4zSPEKe6bf0FMhVubLfkEGQ98y34psUYRbfAKw6
- GgYRenhTBPmwsrh5vvc7tSHRGFZf2T5fu7Vc0ZIdSeaGd/eVZE37nd1+V2jyhcW9+byo
- W5kzlj6H3omK4P6MTJ0jut4Y6polC4owghJu+JWXfQ911NaOuvTT12Rn8ztLRB746CEX
- Npog==
-X-Gm-Message-State: AOAM530PBJyt3vho2Eaoav7OBPASKBD0tDWf/Biidz/sQdsCzZwOCpmP
- bV+XOG7p59iWUVDiCgpaSNM97Q6T5w1tVg==
-X-Google-Smtp-Source: ABdhPJwkPoyqWldlXbqpt35KJ4e7Ct57XWL4wtawxVVnvwkcCYkKZHhP72IupFyZKEfyAIGhvzTRRA==
-X-Received: by 2002:a17:90a:7bcb:: with SMTP id
- d11mr2542069pjl.209.1590550416387; 
- Tue, 26 May 2020 20:33:36 -0700 (PDT)
+ bh=DyZwm58RJro1kic/9IoyyoaUkdPO3Lyg3bl6Kx/XiJU=;
+ b=CZCJct0JAs4v5XgY09wqA3hZGevcUKF9Y5aaJmJa2cHnlkuCIO9kwt7yvyUIpSqQbp
+ fFdRy3gLaKq1j4xxeWWY9XLsPiqHbKt26bE2iW+PYgCHBVHNoBdsQT90RzglmozjKYBK
+ 9Z5hYpJh3S7YbBxGQtQjX2gEcqSKefwNXJiOk/0ttIuKbFh73fpeha7t8hhibykejU7x
+ 3dosrdUzR2t+F4ZNSmbg2qZ0GrmKoiHxo2aZEQ6BEQtU489hCCwlvaqZK0JFBBkGnS8q
+ DaQXhOhqMMvBMM9XONWz8zRJiiR+jJuOkJFGPmzrl3N+nCwyb28FZeGOehlu8159VzxB
+ IEtg==
+X-Gm-Message-State: AOAM531TRNaUeWONqNhTlJJHFiP9CfMP5J4LDt+7UQodju7nCELtnTMx
+ 5wHI1x414u5F4w0k6wLhet0=
+X-Google-Smtp-Source: ABdhPJysSqvqnQ/9Ue5bcz7zpgWjHw34v7o+0V7YTkhJb2z749Hqtu/41w7UlNOK9ngfynNsYL22Dw==
+X-Received: by 2002:a17:902:7c16:: with SMTP id
+ x22mr4072964pll.244.1590552162218; 
+ Tue, 26 May 2020 21:02:42 -0700 (PDT)
 Received: from daehojeong1.seo.corp.google.com
  ([2401:fa00:d:1:b8f4:bbde:37ba:20bd])
- by smtp.gmail.com with ESMTPSA id s94sm930977pjb.20.2020.05.26.20.33.34
+ by smtp.gmail.com with ESMTPSA id e5sm797494pfe.121.2020.05.26.21.02.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2020 20:33:35 -0700 (PDT)
+ Tue, 26 May 2020 21:02:41 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 27 May 2020 12:33:13 +0900
-Message-Id: <20200527033313.22391-1-daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed, 27 May 2020 13:02:31 +0900
+Message-Id: <20200527040231.70891-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.27.0.rc0.183.gde8f92d652-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.2 (/)
@@ -84,9 +85,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (daeho43[at]gmail.com)
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.66 listed in list.dnswl.org]
+ trust [209.85.216.68 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.66 listed in wl.mailspike.net]
+ [209.85.216.68 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
@@ -97,8 +98,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jdmp4-00ELbd-H7
-Subject: [f2fs-dev] [PATCH] f2fs_io: add randread
+X-Headers-End: 1jdnHL-00EN4T-4c
+Subject: [f2fs-dev] [PATCH] f2fs: protect new segment allocation in
+ expand_inode_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,95 +119,37 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daeho Jeong <daehojeong@google.com>
 
-I've added a new command to evaluate random read.
+Found a new segemnt allocation without f2fs_lock_op() in
+expand_inode_data(). So, when we do fallocate() for a pinned file
+and trigger checkpoint very frequently and simultaneously. F2FS gets
+stuck in the below code of do_checkpoint() forever.
+
+  f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+  /* Wait for all dirty meta pages to be submitted for IO */
+                                                <= if fallocate() here,
+  f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META); <= it'll wait forever.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- tools/f2fs_io/f2fs_io.c | 64 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 64 insertions(+)
+ fs/f2fs/file.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index d1889ff..30544c1 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -551,6 +551,69 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	exit(0);
- }
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index f7de2a1da528..14ace885baa9 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1660,7 +1660,11 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
  
-+#define randread_desc "random read data from file"
-+#define randread_help					\
-+"f2fs_io randread [chunk_size in 4kb] [count] [IO] [file_path]\n\n"	\
-+"Do random read data in file_path\n"		\
-+"IO can be\n"						\
-+"  buffered : buffered IO\n"				\
-+"  dio      : direct IO\n"				\
+ 		down_write(&sbi->pin_sem);
+ 		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
 +
-+static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
-+{
-+	u64 buf_size = 0, ret = 0, read_cnt = 0;
-+	u64 idx, end_idx, aligned_size;
-+	char *buf = NULL;
-+	unsigned bs, count, i;
-+	int flags = 0;
-+	int fd;
-+	time_t t;
-+	struct stat stbuf;
++		f2fs_lock_op(sbi);
+ 		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
++		f2fs_unlock_op(sbi);
 +
-+	if (argc != 5) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	bs = atoi(argv[1]);
-+	if (bs > 1024)
-+		die("Too big chunk size - limit: 4MB");
-+	buf_size = bs * 4096;
-+
-+	buf = aligned_xalloc(4096, buf_size);
-+
-+	count = atoi(argv[2]);
-+	if (!strcmp(argv[3], "dio"))
-+		flags |= O_DIRECT;
-+	else if (strcmp(argv[3], "buffered"))
-+		die("Wrong IO type");
-+
-+	fd = xopen(argv[4], O_RDONLY | flags, 0);
-+
-+	if (fstat(fd, &stbuf) != 0)
-+		die_errno("fstat of source file failed");
-+
-+	aligned_size = (u64)stbuf.st_size & ~((u64)(4096 - 1));
-+	if (aligned_size < buf_size)
-+		die("File is too small to random read");
-+	end_idx = (u64)(aligned_size - buf_size) / (u64)4096 + 1;
-+
-+	srand((unsigned) time(&t));
-+
-+	for (i = 0; i < count; i++) {
-+		idx = rand() % end_idx;
-+
-+		ret = pread(fd, buf, buf_size, 4096 * idx);
-+		if (ret != buf_size)
-+			break;
-+
-+		read_cnt += ret;
-+	}
-+	printf("Read %"PRIu64" bytes\n", read_cnt);
-+	exit(0);
-+}
-+
- struct file_ext {
- 	__u32 f_pos;
- 	__u32 start_blk;
-@@ -841,6 +904,7 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(fallocate),
- 	CMD(write),
- 	CMD(read),
-+	CMD(randread),
- 	CMD(fiemap),
- 	CMD(gc_urgent),
- 	CMD(defrag_file),
+ 		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
+ 		up_write(&sbi->pin_sem);
+ 
 -- 
 2.27.0.rc0.183.gde8f92d652-goog
 
