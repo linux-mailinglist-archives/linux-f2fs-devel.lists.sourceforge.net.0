@@ -2,101 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E86331E3578
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 May 2020 04:21:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96EB21E35BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 May 2020 04:35:50 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jdlhB-0007IC-SN; Wed, 27 May 2020 02:21:29 +0000
+	id 1jdlv0-0007uC-AX; Wed, 27 May 2020 02:35:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1jdlh9-0007I4-Lc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 02:21:27 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jdluz-0007u5-1S
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 02:35:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hiWqnMh4e/b60m6l+Rli4gyEkCZHAr24/SZOnCCR4Z4=; b=UldBn/P0lZ+2OhVWbCCWm/FcjB
- NcJgw05kvCXm5qoNOrFHe4B96mrq/Xyic8SXG2mBqbJdunFCK/qX+87YJk71ZGj1hu47PgGX7irdy
- +NdjBfQ2d/8M1zZ2T4y7Apx4GQbr0EQ7R+2rN8CcbDgPKAFXqaoSnr7RxyKVz8u36LAM=;
+ bh=ECvW5mzt381sRa6btTvwKp66UY4TyyiEt3pCB1FSamI=; b=Llu1VzGt4NdUtOMaoTur513RvG
+ 8dcE5fQtJW1mUzzLtWucEeEwkgn4YGX9V4wZgTBGVlAJ4bCHrvAyP4BcSE2x5kRz/Y3E5p76WV9dE
+ rQ1UNX9Ja8ZbWHj3SezsWHBKSlg7LD1uzunB/FGNmI8i6UHRn2qtRHt2G2G1xRGjK8NM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hiWqnMh4e/b60m6l+Rli4gyEkCZHAr24/SZOnCCR4Z4=; b=Ub2Kma1YpIBZmIiSQnxQgt3+A+
- FxZ/Ts4SBMagpsRUI4DgYiu7GrC+JjHVnXCgluWmmYkhA7DCXc0NCg/phiN20cz/0F/QMHBWm6mTY
- Z59CR24ML1o5PoNXaIMbZxxjqvpOZFM2qLTx/lWhoFxi8Go87KaMqSvi8sPihNl/aIEY=;
-Received: from mail27.static.mailgun.info ([104.130.122.27])
+ bh=ECvW5mzt381sRa6btTvwKp66UY4TyyiEt3pCB1FSamI=; b=nUKqDcxJTtLi8hXQ7UkR2aKf/q
+ G6X+vVgIumVUPJ/47Onk74eh1U62gw6HTafqD9xRi7DSB7fzZTb/xQ76HqZPNzLUMVYEkTo61hcCl
+ 5DA/A6I7LUQpk1tAs9ED1SsWbuuOWYDYEl/Vh9/TTpJ/Z8IGfQ4UQgth0nwY9yJqseRU=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jdlh6-00EI1k-8t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 02:21:27 +0000
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1590546084; h=Message-Id: Date: Subject: Cc: To: From:
- Sender; bh=hiWqnMh4e/b60m6l+Rli4gyEkCZHAr24/SZOnCCR4Z4=;
- b=lifywIpl0g+8Kx0+qXew2g52QfoSTl5hrFLsErzjN6BCRoWrPS1TAv8V5YZsk1qvnfhRr65C
- dMNAQAq420exs4EFddqdY1Rt1xpxTuHiemec2SMT/S3VDxx6b5A8DzA6Ld6F5L5c5N8/dGvZ
- 08f3Ru96yK2Irqe8r/ZdJL0jOY0=
-X-Mailgun-Sending-Ip: 104.130.122.27
-X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n04.prod.us-east-1.postgun.com with SMTP id
- 5ecdce9927386861263bd832 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Wed, 27 May 2020 02:21:13
- GMT
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 8D749C43387; Wed, 27 May 2020 02:21:12 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
- URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from codeaurora.org
- (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 36215C433C9;
- Wed, 27 May 2020 02:21:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 36215C433C9
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 27 May 2020 07:50:56 +0530
-Message-Id: <1590546056-17871-1-git-send-email-stummala@codeaurora.org>
-X-Mailer: git-send-email 1.9.1
-X-Spam-Score: 0.0 (/)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jdluw-00EIuB-Tw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 May 2020 02:35:44 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 3A84687391F412890586;
+ Wed, 27 May 2020 10:35:36 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 27 May
+ 2020 10:35:35 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20200522144752.216197-1-jaegeuk@kernel.org>
+ <20200522233243.GA94020@google.com> <20200525035655.GA135148@google.com>
+ <565af47c-8364-d910-8d1c-93645c12e660@huawei.com>
+ <20200525150608.GA55033@google.com>
+ <92afae8b-2dd3-171a-562c-404a67f9aab2@huawei.com>
+ <a44f9c2e-3859-6c5d-6f06-7c4c6b4c01c5@huawei.com>
+ <20200526015650.GA207949@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <765a1ac5-a318-14d6-666f-eab46f892d01@huawei.com>
+Date: Wed, 27 May 2020 10:35:35 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20200526015650.GA207949@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [104.130.122.27 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [104.130.122.27 listed in list.dnswl.org]
+ [45.249.212.191 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jdlh6-00EI1k-8t
-Subject: [f2fs-dev] [PATCH] f2fs: fix retry logic in f2fs_write_cache_pages()
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jdluw-00EIuB-Tw
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: avoid inifinite loop to wait for
+ flushing node pages at cp_error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,43 +84,152 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
-MIME-Version: 1.0
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In case a compressed file is getting overwritten, the current retry
-logic doesn't include the current page to be retried now as it sets
-the new start index as 0 and new end index as writeback_index - 1.
-This causes the corresponding cluster to be uncompressed and written
-as normal pages without compression. Fix this by allowing writeback to
-be retried for the current page as well (in case of compressed page
-getting retried due to index mismatch with cluster index). So that
-this cluster can be written compressed in case of overwrite.
+On 2020/5/26 9:56, Jaegeuk Kim wrote:
+> On 05/26, Chao Yu wrote:
+>> On 2020/5/26 9:11, Chao Yu wrote:
+>>> On 2020/5/25 23:06, Jaegeuk Kim wrote:
+>>>> On 05/25, Chao Yu wrote:
+>>>>> On 2020/5/25 11:56, Jaegeuk Kim wrote:
+>>>>>> Shutdown test is somtimes hung, since it keeps trying to flush dirty node pages
 
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
----
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+    71.07%     0.01%  kworker/u256:1+  [kernel.kallsyms]  [k] wb_writeback
+            |
+             --71.06%--wb_writeback
+                       |
+                       |--68.96%--__writeback_inodes_wb
+                       |          |
+                       |           --68.95%--writeback_sb_inodes
+                       |                     |
+                       |                     |--65.08%--__writeback_single_inode
+                       |                     |          |
+                       |                     |           --64.35%--do_writepages
+                       |                     |                     |
+                       |                     |                     |--59.83%--f2fs_write_node_pages
+                       |                     |                     |          |
+                       |                     |                     |           --59.74%--f2fs_sync_node_pages
+                       |                     |                     |                     |
+                       |                     |                     |                     |--27.91%--pagevec_lookup_range_tag
+                       |                     |                     |                     |          |
+                       |                     |                     |                     |           --27.90%--find_get_pages_range_tag
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 4af5fcd..bfd1df4 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -3024,7 +3024,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
- 	if ((!cycled && !done) || retry) {
- 		cycled = 1;
- 		index = 0;
--		end = writeback_index - 1;
-+		end = retry ? -1 : writeback_index - 1;
- 		goto retry;
- 	}
- 	if (wbc->range_cyclic || (range_whole && wbc->nr_to_write > 0))
--- 
-Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+Before umount, kworker will always hold one core, that looks not reasonable,
+to avoid that, could we just allow node write, since it's out-place-update,
+and cp is not allowed, we don't need to worry about its effect on data on
+previous checkpoint, and it can decrease memory footprint cost by node pages.
 
+Thanks,
+
+>>>>>
+>>>>> IMO, for umount case, we should drop dirty reference and dirty pages on meta/data
+>>>>> pages like we change for node pages to avoid potential dead loop...
+>>>>
+>>>> I believe we're doing for them. :P
+>>>
+>>> Actually, I mean do we need to drop dirty meta/data pages explicitly as below:
+>>>
+>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>>> index 3dc3ac6fe143..4c08fd0a680a 100644
+>>> --- a/fs/f2fs/checkpoint.c
+>>> +++ b/fs/f2fs/checkpoint.c
+>>> @@ -299,8 +299,15 @@ static int __f2fs_write_meta_page(struct page *page,
+>>>
+>>>  	trace_f2fs_writepage(page, META);
+>>>
+>>> -	if (unlikely(f2fs_cp_error(sbi)))
+>>> +	if (unlikely(f2fs_cp_error(sbi))) {
+>>> +		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
+>>> +			ClearPageUptodate(page);
+>>> +			dec_page_count(sbi, F2FS_DIRTY_META);
+>>> +			unlock_page(page);
+>>> +			return 0;
+>>> +		}
+>>>  		goto redirty_out;
+>>> +	}
+>>>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+>>>  		goto redirty_out;
+>>>  	if (wbc->for_reclaim && page->index < GET_SUM_BLOCK(sbi, 0))
+>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+>>> index 48a622b95b76..94b342802513 100644
+>>> --- a/fs/f2fs/data.c
+>>> +++ b/fs/f2fs/data.c
+>>> @@ -2682,6 +2682,12 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+>>>
+>>>  	/* we should bypass data pages to proceed the kworkder jobs */
+>>>  	if (unlikely(f2fs_cp_error(sbi))) {
+>>> +		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
+>>> +			ClearPageUptodate(page);
+>>> +			inode_dec_dirty_pages(inode);
+>>> +			unlock_page(page);
+>>> +			return 0;
+>>> +		}
+>>
+>> Oh, I notice previously, we will drop non-directory inode's dirty pages directly,
+>> however, during umount, we'd better drop directory inode's dirty pages as well, right?
+> 
+> Hmm, I remember I dropped them before. Need to double check.
+> 
+>>
+>>>  		mapping_set_error(page->mapping, -EIO);
+>>>  		/*
+>>>  		 * don't drop any dirty dentry pages for keeping lastest
+>>>
+>>>>
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>>> in an inifinite loop. Let's drop dirty pages at umount in that case.
+>>>>>>
+>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>>>> ---
+>>>>>> v3:
+>>>>>>  - fix wrong unlock
+>>>>>>
+>>>>>> v2:
+>>>>>>  - fix typos
+>>>>>>
+>>>>>>  fs/f2fs/node.c | 9 ++++++++-
+>>>>>>  1 file changed, 8 insertions(+), 1 deletion(-)
+>>>>>>
+>>>>>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+>>>>>> index e632de10aedab..e0bb0f7e0506e 100644
+>>>>>> --- a/fs/f2fs/node.c
+>>>>>> +++ b/fs/f2fs/node.c
+>>>>>> @@ -1520,8 +1520,15 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+>>>>>>  
+>>>>>>  	trace_f2fs_writepage(page, NODE);
+>>>>>>  
+>>>>>> -	if (unlikely(f2fs_cp_error(sbi)))
+>>>>>> +	if (unlikely(f2fs_cp_error(sbi))) {
+>>>>>> +		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
+>>>>>> +			ClearPageUptodate(page);
+>>>>>> +			dec_page_count(sbi, F2FS_DIRTY_NODES);
+>>>>>> +			unlock_page(page);
+>>>>>> +			return 0;
+>>>>>> +		}
+>>>>>>  		goto redirty_out;
+>>>>>> +	}
+>>>>>>  
+>>>>>>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+>>>>>>  		goto redirty_out;
+>>>>>>
+>>>> .
+>>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Linux-f2fs-devel mailing list
+>>> Linux-f2fs-devel@lists.sourceforge.net
+>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+>>> .
+>>>
+> .
+> 
 
 
 _______________________________________________
