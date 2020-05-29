@@ -2,81 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D34BA1E75FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 May 2020 08:37:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67B7F1E7977
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 May 2020 11:30:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jeYdz-0004eB-HF; Fri, 29 May 2020 06:37:27 +0000
+	id 1jebLK-0004uH-9j; Fri, 29 May 2020 09:30:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jeYdy-0004dn-RD
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 May 2020 06:37:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jebLI-0004u8-Hf
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 May 2020 09:30:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Qvrr7o33fRRfecKJfkC5A4YC376w3Q5bxLwXgWxRMcA=; b=QstIyvmXPLKElArhzzkunM42zQ
- NgB0HmHlgOztziK3W9qcGZeuJU7oGkML+oinUapA2UDVgfKYEnCk1Av0Rsvi7BWalNuZS05/5Eh+l
- 1eQKC8zcw6LZnuHG3nkssCB8CewbVrf/CkEZNOQqHDXiprLlSNNbsDSCYOA0+BAx7MVE=;
+ bh=b3Or16xs2x04h/6DmDDduRlsDcQKAsV66L9oNLVBFAg=; b=gZfQ/ky4lUB+F46ZjnAcaSGcoq
+ f8jPIobhYBZU9132lG7KR/fXuYzFStNnlDXEPqBXgwA+03bawr8HaOLpPoBw2Eo3pY7ABHryVrsgK
+ rYUMk5mF8FeqybQU6X29JwmgpDguxScf5rvrfon+xSqNZaGjZC3TmoyMqNrWiEQSJxb4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Qvrr7o33fRRfecKJfkC5A4YC376w3Q5bxLwXgWxRMcA=; b=DKWZu19US6VC/48lWs2T09jeeJ
- vq4DaqhzHJhJ+h6zpF9+UO96ZT3k286sStJN0Yu4Yex1CYKTmcyfHEy3L8kvbikGJnDOSrUfUeWgv
- Ybl9iqBX6oXPX8/XVPIb7C+FhNo0m0sVANzm1EJfcHhUNauHGg2ozR1FFtqRuvAirzhk=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=b3Or16xs2x04h/6DmDDduRlsDcQKAsV66L9oNLVBFAg=; b=l
+ tcqB1RCCh83X6EhVxV+vh/13sxbDl2wtjMPO9pOL6goaPjstg2MCvpoRC8DyKdSwu+GsVfKgCHw+8
+ oElX295tcmNtQO417TBvnVu4sbSeyhR4TL4Tqnn1XzMxWY08OhyeOc7VOFEuq1OUNBB5B5jx6XeGo
+ 3Zl9MJDBXdPr4Fi0=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jeYdw-00Gwxp-4D
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 May 2020 06:37:26 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id E832D5B84A409C22E219;
- Fri, 29 May 2020 14:37:05 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 29 May
- 2020 14:37:04 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200527102753.15743-1-yuchao0@huawei.com>
- <20200527102753.15743-3-yuchao0@huawei.com>
- <20200527210233.GC206249@google.com>
- <23245f6e-528d-43ab-57b6-4ca16db43fe5@huawei.com>
- <20200528012615.GA232094@google.com>
- <8e30b18d-bf8e-dd2f-35fa-08bbfd1b507e@huawei.com>
- <20200528190010.GA162605@google.com>
+ id 1jebLE-002Xnp-M6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 May 2020 09:30:20 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 9C4A5505144E1C536119;
+ Fri, 29 May 2020 17:30:06 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS405-HUB.china.huawei.com (10.3.19.205) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 29 May 2020 17:30:00 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <9fa465a0-70b5-7d17-baf4-21224196e2bc@huawei.com>
-Date: Fri, 29 May 2020 14:37:02 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Fri, 29 May 2020 17:29:47 +0800
+Message-ID: <20200529092947.7890-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.18.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <20200528190010.GA162605@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jeYdw-00Gwxp-4D
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: fix to cover meta flush with
- cp_lock
+X-Headers-End: 1jebLE-002Xnp-M6
+Subject: [f2fs-dev] [PATCH] Revert "f2fs: fix quota_sync failure due to
+ f2fs_lock_op"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,75 +83,92 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/5/29 3:00, Jaegeuk Kim wrote:
-> On 05/28, Chao Yu wrote:
->> On 2020/5/28 9:26, Jaegeuk Kim wrote:
->>> On 05/28, Chao Yu wrote:
->>>> On 2020/5/28 5:02, Jaegeuk Kim wrote:
->>>>> On 05/27, Chao Yu wrote:
->>>>>> meta inode page should be flushed under cp_lock, fix it.
->>>>>
->>>>> It doesn't matter for this case, yes?
->>>>
->>>> It's not related to discard issue.
->>>
->>> I meant we really need this or not. :P
->>
->> Yes, let's keep that rule: flush meta pages under cp_lock, otherwise
->> checkpoint flush order may be broken due to race, right? as checkpoint
->> should write 2rd cp park page after flushing all meta pages.
-> 
-> Well, this is for shutdown test, and thus we don't need to sync up here.
+Under heavy fsstress, we may triggle panic while issuing discard,
+because __check_sit_bitmap() detects that discard command may earse
+valid data blocks, the root cause is as below race stack described,
+since we removed lock when flushing quota data, quota data writeback
+may race with write_checkpoint(), so that it causes inconsistency in
+between cached discard entry and segment bitmap.
 
-I'm a little worried about race condition:
+- f2fs_write_checkpoint
+ - block_operations
+  - set_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH)
+ - f2fs_flush_sit_entries
+  - add_discard_addrs
+   - __set_bit_le(i, (void *)de->discard_map);
+						- f2fs_write_data_pages
+						 - f2fs_write_single_data_page
+						   : inode is quota one, cp_rwsem won't be locked
+						  - f2fs_do_write_data_page
+						   - f2fs_allocate_data_block
+						    - f2fs_wait_discard_bio
+						      : discard entry has not been added yet.
+						    - update_sit_entry
+ - f2fs_clear_prefree_segments
+  - f2fs_issue_discard
+  : add discard entry
 
-f2fs_write_checkpoint
- do_checkpoint
-  ...
-					shutdown
-					f2fs_sync_meta_pages
-					stop_checkpoint
-  ...
+This patch fixes this issue by reverting 435cbab95e39 ("f2fs: fix quota_sync
+failure due to f2fs_lock_op").
 
-Though, I haven't figure out potential damage of their racing.
+Fixes: 435cbab95e39 ("f2fs: fix quota_sync failure due to f2fs_lock_op")
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/compress.c | 8 +++-----
+ fs/f2fs/data.c     | 4 ++--
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-> 
->>
->>>
->>>>
->>>> Now, I got some progress, I can reproduce that bug occasionally.
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>> ---
->>>>>>  fs/f2fs/file.c | 2 ++
->>>>>>  1 file changed, 2 insertions(+)
->>>>>>
->>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>> index f7de2a1da528..0fcae4d90074 100644
->>>>>> --- a/fs/f2fs/file.c
->>>>>> +++ b/fs/f2fs/file.c
->>>>>> @@ -2260,7 +2260,9 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
->>>>>>  		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
->>>>>>  		break;
->>>>>>  	case F2FS_GOING_DOWN_METAFLUSH:
->>>>>> +		mutex_lock(&sbi->cp_mutex);
->>>>>>  		f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_META_IO);
->>>>>> +		mutex_unlock(&sbi->cp_mutex);
->>>>>>  		f2fs_stop_checkpoint(sbi, false);
->>>>>>  		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
->>>>>>  		break;
->>>>>> -- 
->>>>>> 2.18.0.rc1
->>>>> .
->>>>>
->>> .
->>>
-> .
-> 
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index a53578a89211..62c4857ae46d 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1097,7 +1097,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	loff_t psize;
+ 	int i, err;
+ 
+-	if (!IS_NOQUOTA(inode) && !f2fs_trylock_op(sbi))
++	if (!f2fs_trylock_op(sbi))
+ 		return -EAGAIN;
+ 
+ 	set_new_dnode(&dn, cc->inode, NULL, NULL, 0);
+@@ -1204,8 +1204,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 		set_inode_flag(inode, FI_FIRST_BLOCK_WRITTEN);
+ 
+ 	f2fs_put_dnode(&dn);
+-	if (!IS_NOQUOTA(inode))
+-		f2fs_unlock_op(sbi);
++	f2fs_unlock_op(sbi);
+ 
+ 	spin_lock(&fi->i_size_lock);
+ 	if (fi->last_disk_size < psize)
+@@ -1231,8 +1230,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ out_put_dnode:
+ 	f2fs_put_dnode(&dn);
+ out_unlock_op:
+-	if (!IS_NOQUOTA(inode))
+-		f2fs_unlock_op(sbi);
++	f2fs_unlock_op(sbi);
+ 	return -EAGAIN;
+ }
+ 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 999a36ff05f1..d983ad54f318 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2724,8 +2724,8 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 			f2fs_available_free_memory(sbi, BASE_CHECK))))
+ 		goto redirty_out;
+ 
+-	/* Dentry/quota blocks are controlled by checkpoint */
+-	if (S_ISDIR(inode->i_mode) || IS_NOQUOTA(inode)) {
++	/* Dentry blocks are controlled by checkpoint */
++	if (S_ISDIR(inode->i_mode)) {
+ 		fio.need_lock = LOCK_DONE;
+ 		err = f2fs_do_write_data_page(&fio);
+ 		goto done;
+-- 
+2.18.0.rc1
+
 
 
 _______________________________________________
