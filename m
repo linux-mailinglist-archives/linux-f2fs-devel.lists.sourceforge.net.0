@@ -2,62 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B90681E92FD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 19:59:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DAF21E93A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 22:41:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jf5la-0006aR-If; Sat, 30 May 2020 17:59:30 +0000
+	id 1jf8Ii-0007Jh-Tg; Sat, 30 May 2020 20:41:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <viro@ftp.linux.org.uk>) id 1jf5lY-0006Zs-K6
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 17:59:28 +0000
+ (envelope-from <willy@infradead.org>) id 1jf8Ig-0007JP-0G
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 20:41:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I4Sl+k52E/CqXyjyic29wBCN4bpKoi5wMYDvduKAFNw=; b=QczUUmoC8g09fntmqPf8pimNg
- u+gsDamk65cCVYMurdPLTYPycqi8KYFrjS99Br2fL3fqXsg4b+u1xpyGi5OOXH6fCMRU21ow7sT7L
- A6OwvEB3XqiDf39faMWO70jMmY53sf+uJx8ML6pANgqHP37uSi8zXZs1Mx9RdkqYRXAeE=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=4OdrZK2pGyMVHZP9dBAVdzAWc40dh9XQscP29VyVrvM=; b=NPZO8sJ+vZ+NUu2D/hwh9aKMHM
+ DMgTBGNt2vQmcbANPOmf+Hfbplkeeilnz2qc6Dtds8E11kmtdNzTW8eIPXPL/O3i7ZGF9C2HsQDIK
+ cwLsrqjIhBGsjM1rL6MzWss8ni+z6+CU2SVcxHPb6FYTUHjgQy9doo3QrD3cUuKMHg4w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=I4Sl+k52E/CqXyjyic29wBCN4bpKoi5wMYDvduKAFNw=; b=ClsWKUvE/xaJiIHrI3CMv3++x0
- 2szJp6DMPN4f3cbSjoqX5IRZXN2wSl9XGuMWckVxvOSXYKah/UYeunmUhvVgCI11Q15rlBXf93Os6
- INMFkg/8lzlkDYKhrL9oH8MRgBoqDIkRq3JwB2/uy2R3+2KVzr8D/TI/mU2tZ49NslbI=;
-Received: from zeniv.linux.org.uk ([195.92.253.2])
+ bh=4OdrZK2pGyMVHZP9dBAVdzAWc40dh9XQscP29VyVrvM=; b=SNFgnQAAPOTzE+OClkU0fsk/d8
+ aL8/O2BSZLwHQw7NbYLRl1KlDEe/jqivyO6PG9o6rVkNq1n8ZF5siiFxTZpu34WITU2uyvHWxuE7I
+ 10BuX2cagz1ZF43ThAI+vfpKEBCRT6aXmK0OjGrInxl0TWS7C2lKTnf5IUIpB0uK1Qd4=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jf5lW-00199f-V8
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 17:59:28 +0000
-Received: from viro by ZenIV.linux.org.uk with local (Exim 4.93 #3 (Red Hat
- Linux)) id 1jf5lD-000X31-I7; Sat, 30 May 2020 17:59:07 +0000
-Date: Sat, 30 May 2020 18:59:07 +0100
-From: Al Viro <viro@zeniv.linux.org.uk>
+ id 1jf8Ib-001F31-E6
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 20:41:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=4OdrZK2pGyMVHZP9dBAVdzAWc40dh9XQscP29VyVrvM=; b=HZvQiU2YlUtBkyi6j0X0sBvcK6
+ YZbb6RElwJlDvQSoI8EnGgMdqBHoihEOfco2ouCjUP4Lrt9K1yHxN8OR5Caaio7SnY2tGtjpu2vng
+ jr1IQnGoevyNcal8I/kgEqEGTu3l+Zwlh5LVZwcZgiHGb4WD6ut/ABzyv8M2MhE68B0QNvidpnC3Q
+ 2Lj81yDjMRBVamW438WZSQXqIyI6NJY97hDAeLt7m7VQQfHf4EELlTmQSzzKspRVXWPOK0cCOwljZ
+ sJ9Nep2Dn0XzCi79koJwJFZzSkEGkTSq4HO0sQ6syXZ7aNRGYBeUxnVBXkgbEbKIIudGg/NB/2i+7
+ XqHaEaWg==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jf8IO-0000XW-Qx; Sat, 30 May 2020 20:41:32 +0000
+Date: Sat, 30 May 2020 13:41:32 -0700
+From: Matthew Wilcox <willy@infradead.org>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200530175907.GP23230@ZenIV.linux.org.uk>
+Message-ID: <20200530204132.GE19604@bombadil.infradead.org>
 References: <20200530060216.221456-1-ebiggers@kernel.org>
  <20200530171814.GD19604@bombadil.infradead.org>
  <20200530173547.GA12299@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20200530173547.GA12299@sol.localdomain>
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.92.253.2 listed in wl.mailspike.net]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jf5lW-00199f-V8
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jf8Ib-001F31-E6
 Subject: Re: [f2fs-dev] [PATCH] ext4: avoid utf8_strncasecmp() with unstable
  name
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -72,7 +84,7 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Al Viro <viro@zeniv.linux.org.uk>,
  linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
  Gabriel Krisman Bertazi <krisman@collabora.co.uk>
 Content-Type: text/plain; charset="us-ascii"
@@ -101,8 +113,10 @@ On Sat, May 30, 2020 at 10:35:47AM -0700, Eric Biggers wrote:
 > 
 > Do you have any suggestions that don't involve undefined behavior?
 
-Even memcpy(strbuf, (volatile void *)str, len)?  It's been a while since I've
-looked at these parts of C99...
+void *memcpy_unsafe(void *dst, volatile void *src, __kernel_size_t);
+
+It can just call memcpy() of course, but the compiler can't reason about
+this function because it's not a stdlib function.
 
 
 _______________________________________________
