@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1559B1E923C
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 17:08:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 445AF1E924B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 17:18:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jf35j-0001Gs-TO; Sat, 30 May 2020 15:08:07 +0000
+	id 1jf3Fv-0006RK-Jy; Sat, 30 May 2020 15:18:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jf35j-0001Gl-EP
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:08:07 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jf3Fu-0006R1-8E
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:18:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eVesJ8cPCjkj5eG79k6N0na8z3E+d5AAUAYTSPL1o0M=; b=c1kBgkdhg5Nk1hM1LNJFIC7jk+
- fk/IRpFweqUjgjK1iLnJ6s5PqaYOpqHmVRrptm2xR4Y0DRVGn2bQ6OxK8Gpkee6dsIOZQf9RwmjLp
- KwbRastkrHdiibrS9TdvWhRXB/Q2DzDhdzhEUbSSYE6Gc7eAOFnUXerCimAff56KO2Kc=;
+ bh=MJerivIJDbIdnMNFJJYcMlbSniUfcnMWgBgOXG7ejWQ=; b=WfzY+A/nGoRPWdKrYTfFy7ZXQu
+ zfZt0Q6rp7yqFITPwuGOoa/sde6/fvTZ6YGG8B+dAO/uvG2yWlkUFgRb2ONR0RpsKG9NUXPbTEJ8W
+ uo99ZzqdLgEGlyKRrxertPISPL6rKNTJcOV1OLPT3+V9bH2b92zQVouICCxdbWTIjynY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,53 +29,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eVesJ8cPCjkj5eG79k6N0na8z3E+d5AAUAYTSPL1o0M=; b=CuxxQrMZKpHfFYs0/yqDd6KZ7k
- k4122BlPxy1LRcd3vIm2LZjfimEo3heKl22i1bgldD2gYgcKPbJOU3h6xS77aQ92XPX4Oz/1eoEvd
- QGg/Fc+3hzAcnGLxRKz+vPOQWQPCYAqlRZxQ7m2wq99oUE6sVP/NWLLOVN8jAOjbusC8=;
+ bh=MJerivIJDbIdnMNFJJYcMlbSniUfcnMWgBgOXG7ejWQ=; b=i9DOJ73+Z00zVTxYPTrPn8p4oE
+ aD7sj5wmfc5R8kxurUYx5lT57Lb0I6/YmaNEy+JEOnbQnn9cZBmxffRQTrBzRZLF9slGSnuOav/1c
+ keG96LmYS0KIT8zphjFy9Ui8GttNx2Z/7ERqRAKnsPzzFzuogJSWGjH9+k65HYp2JuVE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jf35f-00120r-Tl
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:08:07 +0000
+ id 1jf3Ft-0012WG-2g
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:18:38 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0848E20715;
- Sat, 30 May 2020 15:07:50 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 96A6320715;
+ Sat, 30 May 2020 15:18:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590851271;
- bh=VFC2e2QDPFdOJxydI3qWtpXTrKif7HwS+5L0IvnfvA0=;
+ s=default; t=1590851911;
+ bh=GuykneO4xF7E2ZbE2PUonWUpUelDYrhMz+9mZESaYos=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QU8rTwEO5UY8g832e8Juk2CySLLj8tTS0HmL+BgnaqGyakKYO97n+mG84Saq0PngC
- /WZEjiLYtZ1/USS/PLqjOliTkCoDlk+W0hOmpe28n4Lqhlz5N7ZhIfkOqWp0Z67lBF
- XwZdlN/y1PeZAE7UNpeDCouJg7qdIcMa8qkvHYTA=
-Date: Sat, 30 May 2020 08:07:50 -0700
+ b=hRKTXQ5rDaU9SXV9ZhQuBJk1mt00L5xTlldVKnIYuemR7auiWuFd5AcecJJCqSN6c
+ N3KE6R+kD0ruC/ckFHsN6jH4xCL4AgMdY6sIzPEAgznS8JMpGnzJS4VdM0C3dqJy7B
+ 85PUSCMRs4J306DSF/qJBF6K5oP5OYCl5YsMjHP0=
+Date: Sat, 30 May 2020 08:18:31 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200530150750.GA184700@google.com>
-References: <20200530060418.221707-1-ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200530151831.GB184700@google.com>
+References: <20200529092947.7890-1-yuchao0@huawei.com>
+ <20200529223426.GA249109@google.com>
+ <96ba756e-a354-1ee8-689e-211f63c294e6@huawei.com>
+ <20200530014926.GA39950@google.com>
+ <dcd3564c-16c3-4e4c-a21f-7fec46cec181@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200530060418.221707-1-ebiggers@kernel.org>
+In-Reply-To: <dcd3564c-16c3-4e4c-a21f-7fec46cec181@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux.org.uk]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jf35f-00120r-Tl
-Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid utf8_strncasecmp() with unstable
- name
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jf3Ft-0012WG-2g
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: fix quota_sync failure due to
+ f2fs_lock_op"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,76 +87,97 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Al Viro <viro@zeniv.linux.org.uk>,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.co.uk>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/29, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On 05/30, Chao Yu wrote:
+> On 2020/5/30 9:49, Jaegeuk Kim wrote:
+> > On 05/30, Chao Yu wrote:
+> >> On 2020/5/30 6:34, Jaegeuk Kim wrote:
+> >>> On 05/29, Chao Yu wrote:
+> >>>> Under heavy fsstress, we may triggle panic while issuing discard,
+> >>>> because __check_sit_bitmap() detects that discard command may earse
+> >>>> valid data blocks, the root cause is as below race stack described,
+> >>>> since we removed lock when flushing quota data, quota data writeback
+> >>>> may race with write_checkpoint(), so that it causes inconsistency in
+> >>>> between cached discard entry and segment bitmap.
+> >>>>
+> >>>> - f2fs_write_checkpoint
+> >>>>  - block_operations
+> >>>>   - set_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH)
+> >>>>  - f2fs_flush_sit_entries
+> >>>>   - add_discard_addrs
+> >>>>    - __set_bit_le(i, (void *)de->discard_map);
+> >>>> 						- f2fs_write_data_pages
+> >>>> 						 - f2fs_write_single_data_page
+> >>>> 						   : inode is quota one, cp_rwsem won't be locked
+> >>>> 						  - f2fs_do_write_data_page
+> >>>> 						   - f2fs_allocate_data_block
+> >>>> 						    - f2fs_wait_discard_bio
+> >>>> 						      : discard entry has not been added yet.
+> >>>> 						    - update_sit_entry
+> >>>>  - f2fs_clear_prefree_segments
+> >>>>   - f2fs_issue_discard
+> >>>>   : add discard entry
+> >>>>
+> >>>> This patch fixes this issue by reverting 435cbab95e39 ("f2fs: fix quota_sync
+> >>>> failure due to f2fs_lock_op").
+> >>>>
+> >>>> Fixes: 435cbab95e39 ("f2fs: fix quota_sync failure due to f2fs_lock_op")
+> >>>
+> >>> The previous patch fixes quota_sync gets EAGAIN all the time.
+> >>> How about this? It seems this works for fsstress test.
+> >>>
+> > 
+> > Then this?
+> > 
+> > ---
+> >  fs/f2fs/segment.c | 11 +++++++++++
+> >  1 file changed, 11 insertions(+)
+> > 
+> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > index ebbadde6cbced..ed11dcf2d69ed 100644
+> > --- a/fs/f2fs/segment.c
+> > +++ b/fs/f2fs/segment.c
+> > @@ -3107,6 +3107,14 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+> >  		type = CURSEG_COLD_DATA;
+> >  	}
+> >  
+> > +	/*
+> > +	 * We need to wait for node_write to avoid block allocation during
+> > +	 * checkpoint. This can only happen to quota writes which can cause
+> > +	 * the below discard race condition.
+> > +	 */
+> > +	if (IS_DATASEG(type))
+> > +		down_write(&sbi->node_write);
+> > +
+> >  	down_read(&SM_I(sbi)->curseg_lock);
+> >  
+> >  	mutex_lock(&curseg->curseg_mutex);
+> > @@ -3174,6 +3182,9 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 > 
-> If the dentry name passed to ->d_compare() fits in dentry::d_iname, then
-> it may be concurrently modified by a rename.  This can cause undefined
-> behavior (possibly out-of-bounds memory accesses or crashes) in
-> utf8_strncasecmp(), since fs/unicode/ isn't written to handle strings
-> that may be concurrently modified.
+> Minor thing: unlock order.
 > 
-> Fix this by first copying the filename to a stack buffer if needed.
-> This way we get a stable snapshot of the filename.
+> if (IS_DATASEG(type))
+> 	up_write(&sbi->node_write);
 > 
-> Fixes: 2c2eb7a300cd ("f2fs: Support case-insensitive file name lookups")
-> Cc: <stable@vger.kernel.org> # v5.4+
-> Cc: Al Viro <viro@zeniv.linux.org.uk>
-> Cc: Daniel Rosenberg <drosen@google.com>
-> Cc: Gabriel Krisman Bertazi <krisman@collabora.co.uk>
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Could you merge the diff into this patch?
 
-Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Pushed in dev branch. Thanks.
 
-> ---
->  fs/f2fs/dir.c | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
 > 
-> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-> index 44bfc464df787..5c179b72eb8a8 100644
-> --- a/fs/f2fs/dir.c
-> +++ b/fs/f2fs/dir.c
-> @@ -1083,6 +1083,7 @@ static int f2fs_d_compare(const struct dentry *dentry, unsigned int len,
->  	struct qstr qstr = {.name = str, .len = len };
->  	const struct dentry *parent = READ_ONCE(dentry->d_parent);
->  	const struct inode *inode = READ_ONCE(parent->d_inode);
-> +	char strbuf[DNAME_INLINE_LEN];
->  
->  	if (!inode || !IS_CASEFOLDED(inode)) {
->  		if (len != name->len)
-> @@ -1090,6 +1091,22 @@ static int f2fs_d_compare(const struct dentry *dentry, unsigned int len,
->  		return memcmp(str, name->name, len);
->  	}
->  
-> +	/*
-> +	 * If the dentry name is stored in-line, then it may be concurrently
-> +	 * modified by a rename.  If this happens, the VFS will eventually retry
-> +	 * the lookup, so it doesn't matter what ->d_compare() returns.
-> +	 * However, it's unsafe to call utf8_strncasecmp() with an unstable
-> +	 * string.  Therefore, we have to copy the name into a temporary buffer.
-> +	 */
-> +	if (len <= DNAME_INLINE_LEN - 1) {
-> +		unsigned int i;
-> +
-> +		for (i = 0; i < len; i++)
-> +			strbuf[i] = READ_ONCE(str[i]);
-> +		strbuf[len] = 0;
-> +		qstr.name = strbuf;
-> +	}
-> +
->  	return f2fs_ci_compare(inode, name, &qstr, false);
->  }
->  
-> -- 
-> 2.26.2
+> >  
+> >  	if (put_pin_sem)
+> >  		up_read(&sbi->pin_sem);
+> > +
+> > +	if (IS_DATASEG(type))
+> > +		up_write(&sbi->node_write);
+> >  }
+> >  
+> >  static void update_device_state(struct f2fs_io_info *fio)
+> > 
 
 
 _______________________________________________
