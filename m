@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 445AF1E924B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 17:18:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 635651E92D2
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2020 19:18:34 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jf3Fv-0006RK-Jy; Sat, 30 May 2020 15:18:39 +0000
+	id 1jf57t-0008Hz-HO; Sat, 30 May 2020 17:18:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jf3Fu-0006R1-8E
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:18:38 +0000
+ (envelope-from <willy@infradead.org>) id 1jf57s-0008Hn-Af
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 17:18:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MJerivIJDbIdnMNFJJYcMlbSniUfcnMWgBgOXG7ejWQ=; b=WfzY+A/nGoRPWdKrYTfFy7ZXQu
- zfZt0Q6rp7yqFITPwuGOoa/sde6/fvTZ6YGG8B+dAO/uvG2yWlkUFgRb2ONR0RpsKG9NUXPbTEJ8W
- uo99ZzqdLgEGlyKRrxertPISPL6rKNTJcOV1OLPT3+V9bH2b92zQVouICCxdbWTIjynY=;
+ bh=L01rcThTXQGPtzbd1sl02vy/AZKkMVDpxcktglSDj/Y=; b=OgW5b1va76iy56Zv+WGEjLw+y0
+ YDFJTBl0K3F+CyGBcQzkQuyyT4hlsH8uOBYsorLN6xAMNXECxC7b9TZD0ehZvOf49AvKKUsiO0a1s
+ Z4LP/N5EKLf2oj5zkdNUimuHWtWdOJcD7TiYGJ+TJfa9eGUwUa++v7h50dWNWllySMl8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,53 +29,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MJerivIJDbIdnMNFJJYcMlbSniUfcnMWgBgOXG7ejWQ=; b=i9DOJ73+Z00zVTxYPTrPn8p4oE
- aD7sj5wmfc5R8kxurUYx5lT57Lb0I6/YmaNEy+JEOnbQnn9cZBmxffRQTrBzRZLF9slGSnuOav/1c
- keG96LmYS0KIT8zphjFy9Ui8GttNx2Z/7ERqRAKnsPzzFzuogJSWGjH9+k65HYp2JuVE=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=L01rcThTXQGPtzbd1sl02vy/AZKkMVDpxcktglSDj/Y=; b=JU512Fk+2DU8YzWRO+kEF2UpKR
+ UeBkn52ZEKU4klkMg+7UAQ2XlR6ugItrL2v0q8TqxS8HLpPCXvxY8NdWtqrJyy8eKhiaYmeMlKusn
+ ZyshOyFAqvw2T6x5gTdECAhxoBopCaQ/fckxJAzJYRVpnbhkPwO+pMMtfV6PzyXn/114=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jf3Ft-0012WG-2g
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 15:18:38 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 96A6320715;
- Sat, 30 May 2020 15:18:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590851911;
- bh=GuykneO4xF7E2ZbE2PUonWUpUelDYrhMz+9mZESaYos=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hRKTXQ5rDaU9SXV9ZhQuBJk1mt00L5xTlldVKnIYuemR7auiWuFd5AcecJJCqSN6c
- N3KE6R+kD0ruC/ckFHsN6jH4xCL4AgMdY6sIzPEAgznS8JMpGnzJS4VdM0C3dqJy7B
- 85PUSCMRs4J306DSF/qJBF6K5oP5OYCl5YsMjHP0=
-Date: Sat, 30 May 2020 08:18:31 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200530151831.GB184700@google.com>
-References: <20200529092947.7890-1-yuchao0@huawei.com>
- <20200529223426.GA249109@google.com>
- <96ba756e-a354-1ee8-689e-211f63c294e6@huawei.com>
- <20200530014926.GA39950@google.com>
- <dcd3564c-16c3-4e4c-a21f-7fec46cec181@huawei.com>
+ id 1jf57q-0017P1-Il
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 May 2020 17:18:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=L01rcThTXQGPtzbd1sl02vy/AZKkMVDpxcktglSDj/Y=; b=HBJu6SnmC5B1P9o9UOfR2HZWJF
+ AiFIR3Id9rSPCYStLx2L6hC4V6jDcbiu2BxjaA+pTXEFjbHsWlPqYF25uodE12GuP/0Zjgf8XvKbr
+ hkL7GP7CwiJ0FSMTYk56M9ldfCihszDY4LJyfIzZwp5nNDg78qvwF/iFloICjidC7u1E0w3Uzr2/K
+ TZuae9dpDqIxbBro4CThKmqZe6WoJMmo4MK7+xZeHi0fm6uiYFPk0QST0Vn5gMNPD584cNn4pMYw5
+ 6WeizdsrEO7j/X/cGP42rGjJ72GVK1oOyKRVLfZBzMSJEIylXmZGTL1DribFuW5jTuegTqrgmdUMl
+ dZRvZHBw==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jf57e-0000cg-Ga; Sat, 30 May 2020 17:18:14 +0000
+Date: Sat, 30 May 2020 10:18:14 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20200530171814.GD19604@bombadil.infradead.org>
+References: <20200530060216.221456-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <dcd3564c-16c3-4e4c-a21f-7fec46cec181@huawei.com>
+In-Reply-To: <20200530060216.221456-1-ebiggers@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: qstr.name]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jf3Ft-0012WG-2g
-Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: fix quota_sync failure due to
- f2fs_lock_op"
+X-Headers-End: 1jf57q-0017P1-Il
+Subject: Re: [f2fs-dev] [PATCH] ext4: avoid utf8_strncasecmp() with unstable
+ name
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,97 +85,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Al Viro <viro@zeniv.linux.org.uk>,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.co.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/30, Chao Yu wrote:
-> On 2020/5/30 9:49, Jaegeuk Kim wrote:
-> > On 05/30, Chao Yu wrote:
-> >> On 2020/5/30 6:34, Jaegeuk Kim wrote:
-> >>> On 05/29, Chao Yu wrote:
-> >>>> Under heavy fsstress, we may triggle panic while issuing discard,
-> >>>> because __check_sit_bitmap() detects that discard command may earse
-> >>>> valid data blocks, the root cause is as below race stack described,
-> >>>> since we removed lock when flushing quota data, quota data writeback
-> >>>> may race with write_checkpoint(), so that it causes inconsistency in
-> >>>> between cached discard entry and segment bitmap.
-> >>>>
-> >>>> - f2fs_write_checkpoint
-> >>>>  - block_operations
-> >>>>   - set_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH)
-> >>>>  - f2fs_flush_sit_entries
-> >>>>   - add_discard_addrs
-> >>>>    - __set_bit_le(i, (void *)de->discard_map);
-> >>>> 						- f2fs_write_data_pages
-> >>>> 						 - f2fs_write_single_data_page
-> >>>> 						   : inode is quota one, cp_rwsem won't be locked
-> >>>> 						  - f2fs_do_write_data_page
-> >>>> 						   - f2fs_allocate_data_block
-> >>>> 						    - f2fs_wait_discard_bio
-> >>>> 						      : discard entry has not been added yet.
-> >>>> 						    - update_sit_entry
-> >>>>  - f2fs_clear_prefree_segments
-> >>>>   - f2fs_issue_discard
-> >>>>   : add discard entry
-> >>>>
-> >>>> This patch fixes this issue by reverting 435cbab95e39 ("f2fs: fix quota_sync
-> >>>> failure due to f2fs_lock_op").
-> >>>>
-> >>>> Fixes: 435cbab95e39 ("f2fs: fix quota_sync failure due to f2fs_lock_op")
-> >>>
-> >>> The previous patch fixes quota_sync gets EAGAIN all the time.
-> >>> How about this? It seems this works for fsstress test.
-> >>>
-> > 
-> > Then this?
-> > 
-> > ---
-> >  fs/f2fs/segment.c | 11 +++++++++++
-> >  1 file changed, 11 insertions(+)
-> > 
-> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> > index ebbadde6cbced..ed11dcf2d69ed 100644
-> > --- a/fs/f2fs/segment.c
-> > +++ b/fs/f2fs/segment.c
-> > @@ -3107,6 +3107,14 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
-> >  		type = CURSEG_COLD_DATA;
-> >  	}
-> >  
-> > +	/*
-> > +	 * We need to wait for node_write to avoid block allocation during
-> > +	 * checkpoint. This can only happen to quota writes which can cause
-> > +	 * the below discard race condition.
-> > +	 */
-> > +	if (IS_DATASEG(type))
-> > +		down_write(&sbi->node_write);
-> > +
-> >  	down_read(&SM_I(sbi)->curseg_lock);
-> >  
-> >  	mutex_lock(&curseg->curseg_mutex);
-> > @@ -3174,6 +3182,9 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
-> 
-> Minor thing: unlock order.
-> 
-> if (IS_DATASEG(type))
-> 	up_write(&sbi->node_write);
-> 
-> Could you merge the diff into this patch?
+On Fri, May 29, 2020 at 11:02:16PM -0700, Eric Biggers wrote:
+> +	if (len <= DNAME_INLINE_LEN - 1) {
+> +		unsigned int i;
+> +
+> +		for (i = 0; i < len; i++)
+> +			strbuf[i] = READ_ONCE(str[i]);
+> +		strbuf[len] = 0;
 
-Pushed in dev branch. Thanks.
+This READ_ONCE is going to force the compiler to use byte accesses.
+What's wrong with using a plain memcpy()?
 
+> +		qstr.name = strbuf;
+> +	}
+> +
+>  	return ext4_ci_compare(inode, name, &qstr, false);
+>  }
+>  
+> -- 
+> 2.26.2
 > 
-> >  
-> >  	if (put_pin_sem)
-> >  		up_read(&sbi->pin_sem);
-> > +
-> > +	if (IS_DATASEG(type))
-> > +		up_write(&sbi->node_write);
-> >  }
-> >  
-> >  static void update_device_state(struct f2fs_io_info *fio)
-> > 
 
 
 _______________________________________________
