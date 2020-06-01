@@ -2,60 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E9F21E9E48
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 08:32:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DA981E9E6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 08:45:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jfdzM-0005nZ-SV; Mon, 01 Jun 2020 06:32:00 +0000
+	id 1jfeCK-000144-0m; Mon, 01 Jun 2020 06:45:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jfdzK-0005n7-De
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 06:31:58 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jfeCI-00013x-CY
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 06:45:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lEOoO6wRVduQYyCrJVVLsQppTeR18HR8WiWFXP/VekU=; b=f/t1h9HFuGOD5tc81h2eAk4on/
- P5C8VYmaAW5fsYC0krOsxPqL+YjuABBKwYMou3tML8UKMsHrZQt4MqU4FmjUw7siGylvmk/lt2k/J
- w83+2TCb0jat76iGObyToEChj4vnMv30fRRvcvvXAZkjWUB3F/Ca8Or3fOs5byyw3Eko=;
+ bh=V3Muhqi4RgIADnlgY17wOFAb5vUds6UnImNsEuAM8kM=; b=d0n3keIdWMkMFbew3530DoBLZc
+ 6X/48MrP94VcsM95GuHEBPq8Txmxmya9b3w6jorIKmNoa2Wfd0YVeX/Ve81qo83ywuHXojkT5vjww
+ vwl9+ovby5099I2B1eQECvhp3SbbT3yzkeAvaJLfn71BbmaslRvYclXYkhXAEIHC2Vu0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=lEOoO6wRVduQYyCrJVVLsQppTeR18HR8WiWFXP/VekU=; b=P
- U8bON8PAoNU/PqNOBbpfyF32spB3apPPLEXggRrY5/6XMcBYETLTIGkZjgiBXBs3xRyGqn3nKxYzt
- V2CxF2EsMannAxlhlCNXthAB84qd+fOu80drCo8jI6ZiN9vhW7C9ZRqlS7YJdrH/8MRwdeV7dXL9v
- nw8MT4UyOkSiAKzM=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=V3Muhqi4RgIADnlgY17wOFAb5vUds6UnImNsEuAM8kM=; b=HJ6XmzbSR9A/3G/YCWqrriRr+P
+ ama6h4jgOFaEJSE2aYrz5g7rrXqoIa0EeLP/Jopy/auxy7CcHCnR9JNoHTJLEMY3EBbAjWxL0Iqfn
+ K/cj0KyTPUdX6iDPpan2EkCbvOcNy98gm8az8qWKL97lepPZcIXYYz0Aq9M+DNi8sQSU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jfdzJ-0067ix-3U
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 06:31:58 +0000
+ id 1jfeCH-0038ks-96
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 06:45:22 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7B1612074B;
- Mon,  1 Jun 2020 06:31:51 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 72D46206C3;
+ Mon,  1 Jun 2020 06:45:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590993111;
- bh=zAUnY41Sgc7xpNLHu9M0CHlSS/dkDaYIV+HRhlmWnpY=;
- h=Date:From:To:Cc:Subject:From;
- b=CSFPCFQ3+RJAVJDO4ksMLGmjHP29cVIclWcjuK6+F4Ot2xJRz4+VzIz7cME+w5T/k
- XKMGsKBtOlf3e9DVbH1EixVTg6hzJY4FtRDZP/N1ybdBVTd9ZqER4G6mJR6DHs9xlo
- hFDZw+49i6TGMILwmJq3J6QlRd/w3rKhBecJHFjI=
-Date: Sun, 31 May 2020 23:31:50 -0700
+ s=default; t=1590993915;
+ bh=zfYAnnOMkuQXZpA+G/MMKrf7YexWrDaV0EqmTcf7Kaw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FFKfplnDcJ3+nxndceXPwzR2M/jR5K/qxfXBsvkZAJzdDCb74SueskNAYqAs33Vk3
+ aepTFVKI0QPR+J5wWfSJQF5/tsz99wlBYoa9QC69vAvtmGepUojbFvMA5EA8HXV/l+
+ 7Z1fKoGzdAEknCR10jfE8XtiTzQs3f6/WMt4QQEE=
+Date: Sun, 31 May 2020 23:45:14 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20200601063150.GB11054@sol.localdomain>
+To: Al Viro <viro@zeniv.linux.org.uk>
+Message-ID: <20200601064514.GC11054@sol.localdomain>
+References: <20200530060216.221456-1-ebiggers@kernel.org>
+ <20200530171814.GD19604@bombadil.infradead.org>
+ <20200530173547.GA12299@sol.localdomain>
+ <20200530175907.GP23230@ZenIV.linux.org.uk>
 MIME-Version: 1.0
 Content-Disposition: inline
+In-Reply-To: <20200530175907.GP23230@ZenIV.linux.org.uk>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,8 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jfdzJ-0067ix-3U
-Subject: [f2fs-dev] [GIT PULL] fsverity updates for 5.8
+X-Headers-End: 1jfeCH-0038ks-96
+Subject: Re: [f2fs-dev] [PATCH] ext4: avoid utf8_strncasecmp() with unstable
+ name
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,44 +87,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org
+Cc: Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Matthew Wilcox <willy@infradead.org>,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.co.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The following changes since commit 2ef96a5bb12be62ef75b5828c0aab838ebb29cb8:
+On Sat, May 30, 2020 at 06:59:07PM +0100, Al Viro wrote:
+> On Sat, May 30, 2020 at 10:35:47AM -0700, Eric Biggers wrote:
+> > On Sat, May 30, 2020 at 10:18:14AM -0700, Matthew Wilcox wrote:
+> > > On Fri, May 29, 2020 at 11:02:16PM -0700, Eric Biggers wrote:
+> > > > +	if (len <= DNAME_INLINE_LEN - 1) {
+> > > > +		unsigned int i;
+> > > > +
+> > > > +		for (i = 0; i < len; i++)
+> > > > +			strbuf[i] = READ_ONCE(str[i]);
+> > > > +		strbuf[len] = 0;
+> > > 
+> > > This READ_ONCE is going to force the compiler to use byte accesses.
+> > > What's wrong with using a plain memcpy()?
+> > > 
+> > 
+> > It's undefined behavior when the source can be concurrently modified.
+> > 
+> > Compilers can assume that it's not, and remove the memcpy() (instead just using
+> > the source data directly) if they can prove that the destination array is never
+> > modified again before it goes out of scope.
+> > 
+> > Do you have any suggestions that don't involve undefined behavior?
+> 
+> Even memcpy(strbuf, (volatile void *)str, len)?  It's been a while since I've
+> looked at these parts of C99...
 
-  Linux 5.7-rc5 (2020-05-10 15:16:58 -0700)
+That doesn't make sense.  memcpy() takes a non-volatile pointer, so the pointer
+just gets implicitly cast back to (void *), and you get a compiler warning.
 
-are available in the Git repository at:
-
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
-
-for you to fetch changes up to 9cd6b593cfc9eaa476c9a3fa768b08bca73213d0:
-
-  fs-verity: remove unnecessary extern keywords (2020-05-12 16:44:00 -0700)
-
-----------------------------------------------------------------
-
-Fix kerneldoc warnings and some coding style inconsistencies.
-This mirrors the similar cleanups being done in fs/crypto/.
-
-----------------------------------------------------------------
-Eric Biggers (2):
-      fs-verity: fix all kerneldoc warnings
-      fs-verity: remove unnecessary extern keywords
-
- fs/verity/enable.c           |  2 ++
- fs/verity/fsverity_private.h |  4 ++--
- fs/verity/measure.c          |  2 ++
- fs/verity/open.c             |  1 +
- fs/verity/signature.c        |  3 +++
- fs/verity/verify.c           |  3 +++
- include/linux/fsverity.h     | 19 +++++++++++--------
- 7 files changed, 24 insertions(+), 10 deletions(-)
+- Eric
 
 
 _______________________________________________
