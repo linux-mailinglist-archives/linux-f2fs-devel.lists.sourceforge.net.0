@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17F311EA0F7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 11:27:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A64B21EA0E5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 11:21:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jfgii-0000Mj-HC; Mon, 01 Jun 2020 09:27:00 +0000
+	id 1jfgdS-0008Vz-5c; Mon, 01 Jun 2020 09:21:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1jfgih-0000Mb-3m
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:26:59 +0000
+ id 1jfgdR-0008Vr-4E
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:21:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=; b=JX1N3wsuihteEUM/sbSOO9GsiA
- EIzZm991BNnLDQc/oMfaTqiHefWHur5N6RvcGzgVrLw743BYeFWpfZY95ywdvXe4jjKsBo9gi82wx
- h/5d9I+ikHqoUNXdQcH4RVQCBrmh/2x8M8bktklqnu42mGfYDwX8HfT3w2Pl5sIV9ibE=;
+ bh=3RAKjlGcuDdlgY3UdyIvXzPvzbwdPRgP11x9khawDuw=; b=RB6Ti6pHoDQutbxgVfhx2DPdnx
+ caPbTottVKTZUdEemnHCmQBzdZK59JvmwgJWxd8QXpQINioxf/x8nfZk9N3DjPhdepDvXItxOUPae
+ 2AfsmnKFFoNxmyA59k4NEEBt4e8mGNxc30x1BL8ZfrK6bplSkN6Oe5B8db9BQoCsqr1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=; b=Pu0LSMMLR9F04MTixa5xFyWQ+i
- qCeCP1/z4uOMRosk9EL9+JVHJ9KMbXxqeBVFnMxqPqYv4yuUGFa86AdCf+VVD9xRvRV2sFZSffQkE
- zvbskplX+udUYvvQJar0njx9cMLAq1fRTO0bTjRN/LbCZEumqkJOWvtw6XAvL5kxFSxU=;
+ bh=3RAKjlGcuDdlgY3UdyIvXzPvzbwdPRgP11x9khawDuw=; b=REySW5PRju/1my2ak713kiSN3k
+ VuAjZ6YlddBr7L0evfHT7ZNCYjvf1iljsqnEHyrefnZaw34syfZO/FgrI0l48z2ZMEbjBExjbNuJm
+ qPs522+ciUmR6VNooh7XqwuczmFKroVjFVmUi8DbgBj/rcdjALREYxExc8pewBeSMYE8=;
 Received: from mail27.static.mailgun.info ([104.130.122.27])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jfgid-00GqIV-GK
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:26:59 +0000
+ id 1jfgdK-00GpXJ-9b
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:21:33 +0000
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
  q=dns/txt; 
- s=smtp; t=1591003616; h=In-Reply-To: Content-Type: MIME-Version:
+ s=smtp; t=1591003286; h=In-Reply-To: Content-Type: MIME-Version:
  References: Message-ID: Subject: Cc: To: From: Date: Sender;
- bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=;
- b=GgcmHDn3hSSHJ4xJfpm/p3ehFnERXReWrz+e/zisnGspy6XD5khIprbYjYQ5FYxj45rgikNo
- 2uXSoA6szH3TK5scoJLFlKccLm6d6yrTpalg/VYX0qUaMMbTQGokKYJLa0U+wxZu0Gr7xDtE
- ETcoMQNhjXcq7Dc/XlMEmnO8HYU=
+ bh=3RAKjlGcuDdlgY3UdyIvXzPvzbwdPRgP11x9khawDuw=;
+ b=QUkihOr+URUX6pxCDAosJV+yOkR8WTw0e5rsoSSiHJqcK1lb8UTVz6P6bu6Goyn8x1/y+6DA
+ xIkfrZMYCsuZUJpexWAwgbCzRS18xg5B+ZRNNRabKHT88gjkeJrpAczYeXkpZGBKeZUju8Ba
+ w5LpIMomZDhME6t7a5L2ewGJlSk=
 X-Mailgun-Sending-Ip: 104.130.122.27
 X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
 Received: from smtp.codeaurora.org
  (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n01.prod.us-west-2.postgun.com with SMTP id
- 5ed4c764bf0e32d2544dd34c (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 01 Jun 2020 09:16:20
+ smtp-out-n09.prod.us-west-2.postgun.com with SMTP id
+ 5ed4c88dc6d4683243da4d8e (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 01 Jun 2020 09:21:17
  GMT
 Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id F20EFC43395; Mon,  1 Jun 2020 09:16:19 +0000 (UTC)
+ id 2ACB0C433B2; Mon,  1 Jun 2020 09:21:17 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
  aws-us-west-2-caf-mail-1.web.codeaurora.org
 X-Spam-Level: 
@@ -66,17 +66,17 @@ Received: from codeaurora.org
  (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
  (using TLSv1.2 with cipher DHE-RSA-AES128-SHA (128/128 bits))
  (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 57644C433CA;
- Mon,  1 Jun 2020 09:16:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 57644C433CA
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 6F1F3C433CB;
+ Mon,  1 Jun 2020 09:21:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 6F1F3C433CB
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
  dmarc=none (p=none dis=none) header.from=codeaurora.org
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
  spf=none smtp.mailfrom=stummala@codeaurora.org
-Date: Mon, 1 Jun 2020 14:45:50 +0530
+Date: Mon, 1 Jun 2020 14:50:35 +0530
 From: Sahitya Tummala <stummala@codeaurora.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20200601091549.GG20234@codeaurora.org>
+Message-ID: <20200601092035.GA19831@codeaurora.org>
 References: <1590546056-17871-1-git-send-email-stummala@codeaurora.org>
  <1d54379e-35c7-76e0-0c8a-d89bfcecb935@huawei.com>
  <78d2f29b-3ec0-39bc-46cf-88e82f1970c9@huawei.com>
@@ -103,7 +103,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jfgid-00GqIV-GK
+X-Headers-End: 1jfgdK-00GpXJ-9b
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix retry logic in
  f2fs_write_cache_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -124,8 +124,8 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hi Chao,
 
-Can you please help review below diff given by Jaegeuk?
-If it looks good, I can send a v2.
+Can you please help review the diff given by Jaegeuk below?
+If it looks good, I can post a v2.
 
 Thanks,
 
