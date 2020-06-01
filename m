@@ -2,26 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 817861EA042
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 10:44:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17F311EA0F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Jun 2020 11:27:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jfg3s-0008AE-J1; Mon, 01 Jun 2020 08:44:48 +0000
+	id 1jfgii-0000Mj-HC; Mon, 01 Jun 2020 09:27:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <gregkh@linuxfoundation.org>) id 1jfg3q-00089X-T2
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 08:44:46 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1jfgih-0000Mb-3m
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:26:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LUeDKl9lu4Ts/3E6O2r0fpaff2XnrGzDNWCZFZrIToY=; b=RrzgWRJZ9JuMDwqZIbsttKu5b1
- 05PuF4oYYUDvXhMgplz8briMy/Ss1C7ZchmQUFXFmcP6Zb8UDSkHdRjfkv+jrxykj67R/XwrIiiwE
- HfQVchqmdNom+kWpyrhcA7hr1ab0GzSFGygmYtWKM9mkGIH433fgX8n4WrlH2Wa2EqAk=;
+ bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=; b=JX1N3wsuihteEUM/sbSOO9GsiA
+ EIzZm991BNnLDQc/oMfaTqiHefWHur5N6RvcGzgVrLw743BYeFWpfZY95ywdvXe4jjKsBo9gi82wx
+ h/5d9I+ikHqoUNXdQcH4RVQCBrmh/2x8M8bktklqnu42mGfYDwX8HfT3w2Pl5sIV9ibE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,54 +31,81 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LUeDKl9lu4Ts/3E6O2r0fpaff2XnrGzDNWCZFZrIToY=; b=PQ8eTfOl5I8/VzCPge8yncXO+y
- 8EpbZyHHuaIqc5X6Gybfv5W5S2lOu2ZacDQcodqzz5ho4oDKMoR82UoxL4ka6QFRPM10dbb6BO1Kq
- KTXs6qLTEzhg2S761T05s1Ha3mQtVVIce0g4/xF9pIlGnlbeDrJ2i3YgPRifS6PD0BQ8=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jfg3k-006MCS-Td
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 08:44:46 +0000
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B0D94206E2;
- Mon,  1 Jun 2020 08:44:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591001068;
- bh=++2cB/ePJhne1YRp0fru1zBYoji5d1nprT5N9O4udpk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=wVfow37nJUctQuczEjtuvdKVbO338MPrWmtxn6qzZZHMLNELwOQlIvzJoFUuF/1kq
- q5DWi1Wf0naUXbCdA1uSgSP2CWJRK7dS8k1Y+Djaw8xRkHX+tVonEUHstDVdezlly+
- CKUb/UU3oTLuSzgUFnUcgt1pHUYemwJpSNjNMHJk=
-Date: Mon, 1 Jun 2020 10:44:26 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Tao pilgrim <pilgrimtao@gmail.com>
-Message-ID: <20200601084426.GB1667318@kroah.com>
-References: <20200529141100.37519-1-pilgrimtao@gmail.com>
- <c8412d98-0328-0976-e5f9-5beddc148a35@kernel.dk>
- <CAAWJmAZOQQQeNiTr48OSRRdO2pG+q4c=6gjT55CkWC5FN=HXmA@mail.gmail.com>
+ bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=; b=Pu0LSMMLR9F04MTixa5xFyWQ+i
+ qCeCP1/z4uOMRosk9EL9+JVHJ9KMbXxqeBVFnMxqPqYv4yuUGFa86AdCf+VVD9xRvRV2sFZSffQkE
+ zvbskplX+udUYvvQJar0njx9cMLAq1fRTO0bTjRN/LbCZEumqkJOWvtw6XAvL5kxFSxU=;
+Received: from mail27.static.mailgun.info ([104.130.122.27])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jfgid-00GqIV-GK
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Jun 2020 09:26:59 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1591003616; h=In-Reply-To: Content-Type: MIME-Version:
+ References: Message-ID: Subject: Cc: To: From: Date: Sender;
+ bh=Z1DEgGAFeyjkj2r68HTxRbGMmwFPf9VSMnCHwAuxjok=;
+ b=GgcmHDn3hSSHJ4xJfpm/p3ehFnERXReWrz+e/zisnGspy6XD5khIprbYjYQ5FYxj45rgikNo
+ 2uXSoA6szH3TK5scoJLFlKccLm6d6yrTpalg/VYX0qUaMMbTQGokKYJLa0U+wxZu0Gr7xDtE
+ ETcoMQNhjXcq7Dc/XlMEmnO8HYU=
+X-Mailgun-Sending-Ip: 104.130.122.27
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n01.prod.us-west-2.postgun.com with SMTP id
+ 5ed4c764bf0e32d2544dd34c (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 01 Jun 2020 09:16:20
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id F20EFC43395; Mon,  1 Jun 2020 09:16:19 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
+ autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from codeaurora.org
+ (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+ (No client certificate requested) (Authenticated sender: stummala)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 57644C433CA;
+ Mon,  1 Jun 2020 09:16:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 57644C433CA
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=none smtp.mailfrom=stummala@codeaurora.org
+Date: Mon, 1 Jun 2020 14:45:50 +0530
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20200601091549.GG20234@codeaurora.org>
+References: <1590546056-17871-1-git-send-email-stummala@codeaurora.org>
+ <1d54379e-35c7-76e0-0c8a-d89bfcecb935@huawei.com>
+ <78d2f29b-3ec0-39bc-46cf-88e82f1970c9@huawei.com>
+ <20200528191839.GA180586@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAAWJmAZOQQQeNiTr48OSRRdO2pG+q4c=6gjT55CkWC5FN=HXmA@mail.gmail.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200528191839.GA180586@google.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: kernel.dk]
+ for more information. [URIs: codeaurora.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [104.130.122.27 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [104.130.122.27 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jfg3k-006MCS-Td
-Subject: Re: [f2fs-dev] [PATCH v2] blkdev: Replace blksize_bits() with
- ilog2()
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jfgid-00GqIV-GK
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix retry logic in
+ f2fs_write_cache_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,82 +117,120 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hoeppner@linux.ibm.com, heiko.carstens@de.ibm.com,
- linux-nvme@lists.infradead.org, dhowells@redhat.com, clm@fb.com,
- deepa.kernel@gmail.com, houtao1@huawei.com, hch@lst.de,
- linux-s390@vger.kernel.org, bvanassche@acm.org, darrick.wong@oracle.com,
- Mark Fasheh <mark@fasheh.com>, satyat@google.com, hch@infradead.org,
- borntraeger@de.ibm.com, gor@linux.ibm.com, chaitanya.kulkarni@wdc.com,
- Josef Bacik <josef@toxicpanda.com>, ming.lei@redhat.com,
- viro@zeniv.linux.org.uk, Muchun Song <songmuchun@bytedance.com>,
- dsterba@suse.com, jaegeuk@kernel.org, jlbec@evilplan.org, sagi@grimberg.me,
- Jens Axboe <axboe@kernel.dk>, balbi@kernel.org, damien.lemoal@wdc.com,
- martin.petersen@oracle.com, joseph.qi@linux.alibaba.com,
- linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- asml.silence@gmail.com, linux-btrfs@vger.kernel.org, sth@linux.ibm.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 01, 2020 at 03:22:01PM +0800, Tao pilgrim wrote:
-> On Fri, May 29, 2020 at 10:13 PM Jens Axboe <axboe@kernel.dk> wrote:
-> >
-> > On 5/29/20 8:11 AM, Kaitao Cheng wrote:
-> > > There is a function named ilog2() exist which can replace blksize.
-> > > The generated code will be shorter and more efficient on some
-> > > architecture, such as arm64. And ilog2() can be optimized according
-> > > to different architecture.
-> >
-> > When you posted this last time, I said:
-> >
-> > "I like the simplification, but do you have any results to back up
-> >  that claim? Is the generated code shorter? Runs faster?"
-> >
-> 
-> Hi  Jens Axboe:
-> 
-> I did a test on ARM64.
-> unsigned int ckt_blksize(int size)
-> {
->    return blksize_bits(size);
-> }
-> unsigned int ckt_ilog2(int size)
-> {
->     return ilog2(size);
-> }
-> 
-> When I compiled it into assembly code, I got the following result,
-> 
-> 0000000000000088 <ckt_blksize>:
->       88: 2a0003e8 mov w8, w0
->       8c: 321d03e0 orr w0, wzr, #0x8
->       90: 11000400 add w0, w0, #0x1
->       94: 7108051f cmp w8, #0x201
->       98: 53017d08 lsr w8, w8, #1
->       9c: 54ffffa8 b.hi 90 <ckt_blksize+0x8>
->       a0: d65f03c0 ret
->       a4: d503201f nop
-> 
-> 00000000000000a8 <ckt_ilog2>:
->       a8: 320013e8 orr w8, wzr, #0x1f
->       ac: 5ac01009 clz w9, w0
->       b0: 4b090108 sub w8, w8, w9
->       b4: 7100001f cmp w0, #0x0
->       b8: 5a9f1100 csinv w0, w8, wzr, ne
->       bc: d65f03c0 ret
-> 
-> The generated code of ilog2  is shorter , and  runs faster
+Hi Chao,
 
-But does this code path actually show up anywhere that is actually
-measurable as mattering?
+Can you please help review below diff given by Jaegeuk?
+If it looks good, I can send a v2.
 
-If so, please show that benchmark results.
+Thanks,
 
-thanks,
+On Thu, May 28, 2020 at 12:18:39PM -0700, Jaegeuk Kim wrote:
+> On 05/28, Chao Yu wrote:
+> > On 2020/5/28 10:45, Chao Yu wrote:
+> > > On 2020/5/27 10:20, Sahitya Tummala wrote:
+> > >> In case a compressed file is getting overwritten, the current retry
+> > >> logic doesn't include the current page to be retried now as it sets
+> > >> the new start index as 0 and new end index as writeback_index - 1.
+> > >> This causes the corresponding cluster to be uncompressed and written
+> > >> as normal pages without compression. Fix this by allowing writeback to
+> > >> be retried for the current page as well (in case of compressed page
+> > >> getting retried due to index mismatch with cluster index). So that
+> > >> this cluster can be written compressed in case of overwrite.
+> > >>
+> > >> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> > >> ---
+> > >>  fs/f2fs/data.c | 2 +-
+> > >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > >> index 4af5fcd..bfd1df4 100644
+> > >> --- a/fs/f2fs/data.c
+> > >> +++ b/fs/f2fs/data.c
+> > >> @@ -3024,7 +3024,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+> > >>  	if ((!cycled && !done) || retry) {
+> > > 
+> > > IMO, we add retry logic in wrong place, you can see that cycled value is
+> > > zero only if wbc->range_cyclic is true, in that case writeback_index is valid.
+> > > 
+> > > However if retry is true and wbc->range_cyclic is false, then writeback_index
+> > > would be uninitialized variable.
+> > > 
+> > > Thoughts?
+> > > 
+> > > Thanks,
+> > > 
+> > >>  		cycled = 1;
+> > >>  		index = 0;
+> > >> -		end = writeback_index - 1;
+> > 
+> > BTW, I notice that range_cyclic writeback flow was refactored in below commit,
+> > and skeleton of f2fs.writepages was copied from mm/page-writeback.c::write_cache_pages(),
+> > I guess we need follow that change.
+> > 
+> > 64081362e8ff ("mm/page-writeback.c: fix range_cyclic writeback vs writepages deadlock")
+> 
+> Is that something like this?
+> 
+> ---
+>  fs/f2fs/data.c | 11 ++---------
+>  1 file changed, 2 insertions(+), 9 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 48a622b95b76e..28fcdf0d4dcb9 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2861,7 +2861,6 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  	pgoff_t index;
+>  	pgoff_t end;		/* Inclusive */
+>  	pgoff_t done_index;
+> -	int cycled;
+>  	int range_whole = 0;
+>  	xa_mark_t tag;
+>  	int nwritten = 0;
+> @@ -2879,17 +2878,12 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  	if (wbc->range_cyclic) {
+>  		writeback_index = mapping->writeback_index; /* prev offset */
+>  		index = writeback_index;
+> -		if (index == 0)
+> -			cycled = 1;
+> -		else
+> -			cycled = 0;
+>  		end = -1;
+>  	} else {
+>  		index = wbc->range_start >> PAGE_SHIFT;
+>  		end = wbc->range_end >> PAGE_SHIFT;
+>  		if (wbc->range_start == 0 && wbc->range_end == LLONG_MAX)
+>  			range_whole = 1;
+> -		cycled = 1; /* ignore range_cyclic tests */
+>  	}
+>  	if (wbc->sync_mode == WB_SYNC_ALL || wbc->tagged_writepages)
+>  		tag = PAGECACHE_TAG_TOWRITE;
+> @@ -3054,10 +3048,9 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  		}
+>  	}
+>  #endif
+> -	if ((!cycled && !done) || retry) {
+> -		cycled = 1;
+> +	if (retry) {
+>  		index = 0;
+> -		end = writeback_index - 1;
+> +		end = -1;
+>  		goto retry;
+>  	}
+>  	if (wbc->range_cyclic || (range_whole && wbc->nr_to_write > 0))
+> -- 
+> 2.27.0.rc0.183.gde8f92d652-goog
+> 
 
-greg k-h
+-- 
+--
+Sent by a consultant of the Qualcomm Innovation Center, Inc.
+The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum.
 
 
 _______________________________________________
