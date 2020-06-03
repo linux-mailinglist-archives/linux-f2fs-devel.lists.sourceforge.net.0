@@ -2,78 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30D2E1EC71A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Jun 2020 04:08:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65E8C1EC9DC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Jun 2020 08:59:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jgIoy-0001hz-IU; Wed, 03 Jun 2020 02:08:00 +0000
+	id 1jgNMm-0008GL-9l; Wed, 03 Jun 2020 06:59:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jgIox-0001ht-Us
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jun 2020 02:07:59 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jgNMk-0008G4-Eq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jun 2020 06:59:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tEFdXShQJ0up1pN37XQdL2Osut/PFZARmSLjyY6TQgA=; b=iyTqJVcGQPyDWJDoDwQJOhSiYu
- qFhBkRBfqg65acG/AbYdtp2M0NU8rbvcDbRgL1WHQ70/bVrUqgr+S2QbydhoQXnI7WdUBfwafUmyE
- NaeeCGoGRbgF9pgo5ZqeIGSI/f1nxUiCmcVHzYFuSSmnUWlONmL7q5OSk25gWfepoafM=;
+ bh=+EG+4fgRfrmwvdJ0nqUCJ9b0uPw2VCPX7Y2FIBOKePc=; b=lGietwmnBPB8JA3Szd3Gp6bZVP
+ F9xr48AMy2jvgcC4YvvmoACbqNw70hR8F22ew5PpPRNIrKPnjzon7mNMCFfw0U4z67jpUtnqMpLai
+ 95QjOyWcHUamDJMu2zBs0W2PcI9qZSf5omSQD3YgCqay1353xfBLlaiFCwp1q3uF5p2I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tEFdXShQJ0up1pN37XQdL2Osut/PFZARmSLjyY6TQgA=; b=JwhGvAj1yldGbYARD/+0A3j75r
- HWcLCgxv9KZBZUh+o/cwfqBrudRB0+3D7sMRPrkDN62pJFJ6b3GNA1koxM8czbSiRewyu7qdLguAw
- pckzLFe/tApmaYLgmpzugBFMpmMKzekJiN5HcAOs4gLcwYqz7HWaH9W2sSEpMxrve0iE=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=+EG+4fgRfrmwvdJ0nqUCJ9b0uPw2VCPX7Y2FIBOKePc=; b=QAWIgpp7v5t7OYTHUUxKDEC5mw
+ AfC/AAEV4m/7Gm2PX6wv9QhtX+Er5iDXkrdOU/NQnA09RmG/Zk6m5GKZn5DLjDWT5f8fwiHidSrKc
+ sukNT0DRRN7KAj9E/OJ9AQBDyAAosXNQRU6AyLYMY9Qrl3lP+SRxH2yXU1g2Y53rT+8Q=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jgIos-006zvW-NE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jun 2020 02:07:59 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 32A502072F;
- Wed,  3 Jun 2020 02:07:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591150064;
- bh=qLcUIqg4MkGQXm/ALUeDTBM4qZrROCTmpgT+XERn3Wo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aq1ZrZwQU3kRCrtJOZAwJUWVfYq2+bOd3t19aKhFjRpZJjQ7d+Ws0QDXHtHTp4POk
- R8bz/dDLIX+5ng8Qi7HF7HQhyQniQJZPjcc7IzSHpZ0zGN5s5i/2EhPAsNVyErNBhD
- imgt4H8pvVTVYE1AU9KFtJHzqyXDQxsAq7RLeOCY=
-Date: Tue, 2 Jun 2020 19:07:42 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200603020742.GA50072@sol.localdomain>
-References: <20200514003727.69001-1-satyat@google.com>
- <20200514003727.69001-11-satyat@google.com>
+ id 1jgNMi-00ABsr-DP
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Jun 2020 06:59:10 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 2F0F931527F4F3D44C1C;
+ Wed,  3 Jun 2020 14:58:53 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 3 Jun 2020
+ 14:58:47 +0800
+To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20200601030347.112984-1-daeho43@gmail.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <daed6176-fb7d-bd4d-9662-735cc3cda2e0@huawei.com>
+Date: Wed, 3 Jun 2020 14:58:46 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200514003727.69001-11-satyat@google.com>
-X-Spam-Score: -0.4 (/)
+In-Reply-To: <20200601030347.112984-1-daeho43@gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jgIos-006zvW-NE
-Subject: Re: [f2fs-dev] [PATCH v13 10/12] fscrypt: add inline encryption
- support
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jgNMi-00ABsr-DP
+Subject: Re: [f2fs-dev] [PATCH] f2fs: protect new segment allocation in
+ expand_inode_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,57 +78,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-scsi@vger.kernel.org, Kim Boojin <boojin.kim@samsung.com>,
- Kuohong Wang <kuohong.wang@mediatek.com>,
- Barani Muthukumaran <bmuthuku@qti.qualcomm.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-One more thing:
+On 2020/6/1 11:03, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Found a new segemnt allocation without f2fs_lock_op() in
+> expand_inode_data(). So, when we do fallocate() for a pinned file
+> and trigger checkpoint very frequently and simultaneously. F2FS gets
+> stuck in the below code of do_checkpoint() forever.
+> 
+>   f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+>   /* Wait for all dirty meta pages to be submitted for IO */
+>                                                 <= if fallocate() here,
+>   f2fs_wait_on_all_pages(sbi, F2FS_DIRTY_META); <= it'll wait forever.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-On Thu, May 14, 2020 at 12:37:25AM +0000, Satya Tangirala wrote:
-> +/* Enable inline encryption for this file if supported. */
-> +void fscrypt_select_encryption_impl(struct fscrypt_info *ci)
-> +{
-> +	const struct inode *inode = ci->ci_inode;
-> +	struct super_block *sb = inode->i_sb;
-> +	struct blk_crypto_config crypto_cfg;
-> +	int num_devs;
-> +	struct request_queue **devs;
-> +	int i;
-> +
-> +	/* The file must need contents encryption, not filenames encryption */
-> +	if (!fscrypt_needs_contents_encryption(inode))
-> +		return;
-> +
-> +	/* The crypto mode must be valid */
-> +	if (ci->ci_mode->blk_crypto_mode == BLK_ENCRYPTION_MODE_INVALID)
-> +		return;
-> +
-> +	/* The filesystem must be mounted with -o inlinecrypt */
-> +	if (!(sb->s_flags & SB_INLINECRYPT))
-> +		return;
-> +
-> +	/*
-> +	 * blk-crypto must support the crypto configuration we'll use for the
-> +	 * inode on all devices in the sb
-> +	 */
-> +	crypto_cfg.crypto_mode = ci->ci_mode->blk_crypto_mode;
-> +	crypto_cfg.data_unit_size = sb->s_blocksize;
-> +	crypto_cfg.dun_bytes = fscrypt_get_dun_bytes(ci);
-> +	num_devs = fscrypt_get_num_devices(sb);
-> +	devs = kmalloc_array(num_devs, sizeof(*devs), GFP_NOFS);
-> +	if (!devs)
-> +		return;
+Daeho,
 
-This function needs to return an error code, so that if this memory allocation
-fails, the error is not ignored.
+I guess Jaegeuk could add the tag when merging this patch, we don't have
+to resend the patch if there is no updates on code and message.
 
-- Eric
+Thanks,
+
+> ---
+>  fs/f2fs/file.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index f7de2a1da528..14ace885baa9 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1660,7 +1660,11 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+>  
+>  		down_write(&sbi->pin_sem);
+>  		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+> +
+> +		f2fs_lock_op(sbi);
+>  		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
+> +		f2fs_unlock_op(sbi);
+> +
+>  		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
+>  		up_write(&sbi->pin_sem);
+>  
+> 
 
 
 _______________________________________________
