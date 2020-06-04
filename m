@@ -2,66 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD2EE1EECCA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Jun 2020 23:07:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E17021EEE82
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Jun 2020 01:50:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jgx4j-0002oY-7L; Thu, 04 Jun 2020 21:06:57 +0000
+	id 1jgzdO-0002Ik-Mn; Thu, 04 Jun 2020 23:50:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jgx4i-0002oS-MG
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Jun 2020 21:06:56 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jgzdE-0002HS-Nf
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Jun 2020 23:50:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xgWYnP0wIAvtZ3thPLVdLkBQNwxihvirLTJpvp94MLI=; b=L59xuAdcqSX7bj8ERNmp2IJbE+
- Rhv6hXVp9JGMVwxCnEpsuRk8zVxOpId1AR+5vlize/H+7lc0pGJiJfHvm+93yiZbMF4PNVk7jbFjf
- 3alNvyEilVtncbQhCuJ0qFkhbXKO+Db/DXmu0uRpFNqFi+Oo9tH3m8PhrGkwTc9CiiYc=;
+ bh=yKFaCzrhkiL4pCRf1P3Y8zoiGOsXqNhQ//2yKnWwrvU=; b=GN3XuIObPMp9KB8txQs5SckXiG
+ Up960e25ZGpCb4IK3dAHHI9+XnmsWXqVUURw0n2KLuZHh0+UnJVJBR4G6+KCOn1qrT2jT9WeH13xf
+ MO4pRTPz3Q672CBxs044fzhJHsAdS0S5AQ2q8YYNArDP7UX/AYB6i2VlYaan9iDzvO4g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=xgWYnP0wIAvtZ3thPLVdLkBQNwxihvirLTJpvp94MLI=; b=ihW0xSxeeglxXVXQXsdTuLj6w4
- 0a0DYdAjF31P8qcAeZeVKRKgoLXTf+gT6fTIuUxsAh4PdEFMXmp/ICn0yhxQpYClGnR0x9AaJxvcq
- 6d1PGJ9ka5XGe5Hf5RHC1e29AcVUVagoONH7emnghKCLIftGdywm2z5Rtyf9isX0yPKI=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=yKFaCzrhkiL4pCRf1P3Y8zoiGOsXqNhQ//2yKnWwrvU=; b=C
+ f93mPJ5GZ1/hd2VY1rZ3RuHxy/Q2FI49PAYJcu1FvwDaeCJgtq5bu1x57pK9npzSRMK/UrLZmbt3D
+ 0EZ7i5nmCi8qXqpkN8+zcUau76I33x0ayQFvK2yST3yMfMaWWeweHOS95UCcIYcGIbzhY+eQZUIqq
+ CZhHthT5e3AJo20U=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jgx4f-00C7FM-0s
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Jun 2020 21:06:56 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
+ id 1jgzd7-00CEfg-K7
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Jun 2020 23:50:44 +0000
+Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8C5DC2067B;
- Thu,  4 Jun 2020 21:06:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D72D0206DC;
+ Thu,  4 Jun 2020 23:50:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591304807;
- bh=g/gdyeFpBHokLKrQe6xCW/yCnhqXNIihjrHwcCcMn3s=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Tw1VGIo2Hu5KJlkvMxls7SKhk++Yml4QtUfWxudQ6SxE+xOokTNjw4YDhZSlrNEDU
- 8Qp0rN8tf3RwpsitWIwnHLSnvlXMyx73SPCQqq4JzhfPZQGRQQ7gcIjvlmqW4UPmbC
- WNfaFT63HnoKtnNSv35MCJdmQW5wAKWMX5CQKpx4=
-Date: Thu, 4 Jun 2020 14:06:46 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20200604210646.GA855@sol.localdomain>
-References: <20200505204823.211214-1-ebiggers@kernel.org>
- <20200518180648.GB218254@google.com>
- <20200518183542.GA121709@gmail.com>
- <20200518191016.GA182581@google.com>
+ s=default; t=1591314624;
+ bh=ND4kZKs0ckKJG227yGmyY5tVeZis8uDKb/AjmQgSe5E=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Z82FfCo8VpvMzN+Q5BfD+99zxNEKMEMVSMOucvDn3D7LsKheLfDHM06gKuJgjHBwg
+ XdS8gjilKZzAHaOu5oZ5jKNANulbg7C0iUpF16jsULH/JwmO1SIhnfGaxxQCKO9AYA
+ JXF0U6CXPd+dnnkGBh3RnFch02RNUqUlURDwr0t0=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Thu,  4 Jun 2020 16:50:22 -0700
+Message-Id: <20200604235023.1954-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.27.0.278.ge193c7cf3a9-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200518191016.GA182581@google.com>
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -72,10 +67,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jgx4f-00C7FM-0s
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't return vmalloc() memory from
- f2fs_kmalloc()
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jgzd7-00CEfg-K7
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: add node_io_flag for bio flags
+ likewise data_io_flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,99 +82,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, May 18, 2020 at 12:10:16PM -0700, Jaegeuk Kim wrote:
-> On 05/18, Eric Biggers wrote:
-> > On Mon, May 18, 2020 at 11:06:48AM -0700, Jaegeuk Kim wrote:
-> > > On 05/05, Eric Biggers wrote:
-> > > > From: Eric Biggers <ebiggers@google.com>
-> > > > 
-> > > > kmalloc() returns kmalloc'ed memory, and kvmalloc() returns either
-> > > > kmalloc'ed or vmalloc'ed memory.  But the f2fs wrappers, f2fs_kmalloc()
-> > > > and f2fs_kvmalloc(), both return both kinds of memory.
-> > > > 
-> > > > It's redundant to have two functions that do the same thing, and also
-> > > > breaking the standard naming convention is causing bugs since people
-> > > > assume it's safe to kfree() memory allocated by f2fs_kmalloc().  See
-> > > > e.g. the various allocations in fs/f2fs/compress.c.
-> > > > 
-> > > > Fix this by making f2fs_kmalloc() just use kmalloc().  And to avoid
-> > > > re-introducing the allocation failures that the vmalloc fallback was
-> > > > intended to fix, convert the largest allocations to use f2fs_kvmalloc().
-> > > > 
-> > > > Signed-off-by: Eric Biggers <ebiggers@google.com>
-> > > > ---
-> > > >  fs/f2fs/checkpoint.c | 4 ++--
-> > > >  fs/f2fs/f2fs.h       | 8 +-------
-> > > >  fs/f2fs/node.c       | 8 ++++----
-> > > >  3 files changed, 7 insertions(+), 13 deletions(-)
-> > > > 
-> > > > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > > > index 97b6378554b406..ac5b47f15f5e77 100644
-> > > > --- a/fs/f2fs/checkpoint.c
-> > > > +++ b/fs/f2fs/checkpoint.c
-> > > > @@ -895,8 +895,8 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
-> > > >  	int i;
-> > > >  	int err;
-> > > >  
-> > > > -	sbi->ckpt = f2fs_kzalloc(sbi, array_size(blk_size, cp_blks),
-> > > > -				 GFP_KERNEL);
-> > > > +	sbi->ckpt = f2fs_kvzalloc(sbi, array_size(blk_size, cp_blks),
-> > > > +				  GFP_KERNEL);
-> > > >  	if (!sbi->ckpt)
-> > > >  		return -ENOMEM;
-> > > >  	/*
-> > > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > > index d036a31a97e84e..bc4c5b9b1bf14c 100644
-> > > > --- a/fs/f2fs/f2fs.h
-> > > > +++ b/fs/f2fs/f2fs.h
-> > > > @@ -2953,18 +2953,12 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
-> > > >  static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
-> > > >  					size_t size, gfp_t flags)
-> > > >  {
-> > > > -	void *ret;
-> > > > -
-> > > >  	if (time_to_inject(sbi, FAULT_KMALLOC)) {
-> > > >  		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
-> > > >  		return NULL;
-> > > >  	}
-> > > >  
-> > > > -	ret = kmalloc(size, flags);
-> > > > -	if (ret)
-> > > > -		return ret;
-> > > > -
-> > > > -	return kvmalloc(size, flags);
-> > > > +	return kmalloc(size, flags);
-> > > 
-> > > IIRC, sometimes, we suffered from ENOMEM from kmalloc, as some structures
-> > > depended on the disk capacity. I can't remember exactly which structure tho.
-> > > 
-> > 
-> > I think this patch already addresses that, by changing the large allocations to
-> > use f2fs_kvmalloc().
-> 
-> Hmm, I worried a bit whether it covers every cases.
-> 
+This patch adds another way to attach bio flags to node writes.
 
-I went through every remaining caller of f2fs_kmalloc() and f2fs_kzalloc().  I
-think we're fine, except for possibly the allocation of blkz_seq in
-init_blkz_info().  How many zones can we expect on a zoned block device?
+Description:   Give a way to attach REQ_META|FUA to node writes
+               given temperature-based bits. Now the bits indicate:
+               *      REQ_META     |      REQ_FUA      |
+               *    5 |    4 |   3 |    2 |    1 |   0 |
+               * Cold | Warm | Hot | Cold | Warm | Hot |
 
-Other than that, the largest fixed-size allocation is 8536 bytes
-(struct discard_cmd_control).  And the variable-size allocations are all a page
-or less, except for xattr buffers which maybe can be larger, but the VFS uses
-kmalloc() for those too.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs |  9 ++++++
+ fs/f2fs/data.c                          | 39 ++++++++++++++++++-------
+ fs/f2fs/f2fs.h                          |  1 +
+ fs/f2fs/sysfs.c                         |  2 ++
+ 4 files changed, 40 insertions(+), 11 deletions(-)
 
-Anyway, f2fs used to allocate megabytes with kmalloc(), so I'm not surprised you
-had issues before.  But that's not a good reason to make *every* caller
-potentially get vmalloc()'ed memory, in the process introducing bugs where
-vmalloc() memory isn't handled correctly.
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 427f5b45c67f1..4bb93a06d8abc 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -333,6 +333,15 @@ Description:	Give a way to attach REQ_META|FUA to data writes
+ 		*    5 |    4 |   3 |    2 |    1 |   0 |
+ 		* Cold | Warm | Hot | Cold | Warm | Hot |
+ 
++What:		/sys/fs/f2fs/<disk>/node_io_flag
++Date:		June 2020
++Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
++Description:	Give a way to attach REQ_META|FUA to node writes
++		given temperature-based bits. Now the bits indicate:
++		*      REQ_META     |      REQ_FUA      |
++		*    5 |    4 |   3 |    2 |    1 |   0 |
++		* Cold | Warm | Hot | Cold | Warm | Hot |
++
+ What:		/sys/fs/f2fs/<disk>/iostat_period_ms
+ Date:		April 2020
+ Contact:	"Daeho Jeong" <daehojeong@google.com>
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index a65bfc07ddb97..2f5293eb5e52a 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -514,26 +514,43 @@ void f2fs_submit_bio(struct f2fs_sb_info *sbi,
+ 	__submit_bio(sbi, bio, type);
+ }
+ 
+-static void __attach_data_io_flag(struct f2fs_io_info *fio)
++static void __attach_io_flag(struct f2fs_io_info *fio)
+ {
+ 	struct f2fs_sb_info *sbi = fio->sbi;
+ 	unsigned int temp_mask = (1 << NR_TEMP_TYPE) - 1;
+-	unsigned int fua_flag = sbi->data_io_flag & temp_mask;
+-	unsigned int meta_flag = (sbi->data_io_flag >> NR_TEMP_TYPE) &
+-								temp_mask;
++
+ 	/*
+ 	 * data io flag bits per temp:
+ 	 *      REQ_META     |      REQ_FUA      |
+ 	 *    5 |    4 |   3 |    2 |    1 |   0 |
+ 	 * Cold | Warm | Hot | Cold | Warm | Hot |
+ 	 */
+-	if (fio->type != DATA)
+-		return;
++	if (fio->type == DATA) {
++		unsigned int fua_flag = sbi->data_io_flag & temp_mask;
++		unsigned int meta_flag = (sbi->data_io_flag >> NR_TEMP_TYPE) &
++								temp_mask;
+ 
+-	if ((1 << fio->temp) & meta_flag)
+-		fio->op_flags |= REQ_META;
+-	if ((1 << fio->temp) & fua_flag)
+-		fio->op_flags |= REQ_FUA;
++		if ((1 << fio->temp) & meta_flag)
++			fio->op_flags |= REQ_META;
++		if ((1 << fio->temp) & fua_flag)
++			fio->op_flags |= REQ_FUA;
++	}
++	/*
++	 * node io flag bits per temp:
++	 *      REQ_META     |      REQ_FUA      |
++	 *    5 |    4 |   3 |    2 |    1 |   0 |
++	 * Cold | Warm | Hot | Cold | Warm | Hot |
++	 */
++	if (fio->type == NODE) {
++		unsigned int fua_flag = sbi->node_io_flag & temp_mask;
++		unsigned int meta_flag = (sbi->node_io_flag >> NR_TEMP_TYPE) &
++								temp_mask;
++
++		if ((1 << fio->temp) & meta_flag)
++			fio->op_flags |= REQ_META;
++		if ((1 << fio->temp) & fua_flag)
++			fio->op_flags |= REQ_FUA;
++	}
+ }
+ 
+ static void __submit_merged_bio(struct f2fs_bio_info *io)
+@@ -543,7 +560,7 @@ static void __submit_merged_bio(struct f2fs_bio_info *io)
+ 	if (!io->bio)
+ 		return;
+ 
+-	__attach_data_io_flag(fio);
++	__attach_io_flag(fio);
+ 	bio_set_op_attrs(io->bio, fio->op, fio->op_flags);
+ 
+ 	if (is_read_io(fio->op))
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index fb180020e175c..50e6cdf20b733 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1568,6 +1568,7 @@ struct f2fs_sb_info {
+ 
+ 	/* to attach REQ_META|REQ_FUA flags */
+ 	unsigned int data_io_flag;
++	unsigned int node_io_flag;
+ 
+ 	/* For sysfs suppport */
+ 	struct kobject s_kobj;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index a117ae1f9d5f1..fc4a46b689040 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -554,6 +554,7 @@ F2FS_RW_ATTR(FAULT_INFO_RATE, f2fs_fault_info, inject_rate, inject_rate);
+ F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
+ #endif
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
++F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
+ F2FS_GENERAL_RO_ATTR(dirty_segments);
+ F2FS_GENERAL_RO_ATTR(free_segments);
+ F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+@@ -635,6 +636,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(inject_type),
+ #endif
+ 	ATTR_LIST(data_io_flag),
++	ATTR_LIST(node_io_flag),
+ 	ATTR_LIST(dirty_segments),
+ 	ATTR_LIST(free_segments),
+ 	ATTR_LIST(unusable),
+-- 
+2.27.0.278.ge193c7cf3a9-goog
 
-- Eric
 
 
 _______________________________________________
