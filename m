@@ -2,116 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C7641F01D6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Jun 2020 23:36:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=OXgba3aQECQD/ib9fCMHVmvfho4sfgEFhVZeF+a8ki8=; b=Vfw2YoVSqh/dt4KHmaaK73pItr
-	0KgQtE12FaD66QRSGURYXFboxXzshmfn5DlcDGOnajmkq+V7DhYOsaPkyT5UpY7rNJkXMSfvi9QGo
-	93FbDymbYr5i6JguXPjBpS9SKBzBpN3b9CuZFzKigwjRzXJOUvlehHyzFCjeKdRlRAZE=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38C571F0FF4
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  7 Jun 2020 23:18:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jhK1C-0002GW-EN; Fri, 05 Jun 2020 21:36:50 +0000
+	id 1ji2g6-0001N0-B4; Sun, 07 Jun 2020 21:18:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ndesaulniers@google.com>) id 1jhK1B-0002GI-2Y
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Jun 2020 21:36:49 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ji2g4-0001Mf-Sj
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jun 2020 21:18:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+CPlFvNq/YrKeB3Ps3Y0hn9p5nUQHpZCR2F66xpo1f4=; b=RNXLxITJbzkguZ7U+AP1Y09qp6
- 1xE4mmnA7vmit6LQGV7Rak/QnjI7vZOEp/3cEmWYvSgZeLX8CQb5Zc0kA9umSAfB6gcgclPpDt3Pi
- jvxGyttUOIASaTEpvnTmty0IMyrhA2p/XGKdjPvIAIo7kJo2WnxIWTklYVciLXdefoyY=;
+ bh=0pykINq2SlpdIayM1Zh9U+ARKvifFPAdipc9Tilm3Aw=; b=itTl9eFv9z42pfTSCK1ZH36DXW
+ XhX+ZUkNSbGHMLF4rbPMyB9hNiKXmeU/V+XGelB5zVqIegxqREBTJz/OfG0TUWwAijhfvXiBxrAeG
+ OuIa/8xhJUixC3dda6DQmuwKRzbf6GatbkkwjmEaaCkKu68T9Q4WTqp2M9OPiLfJV6T8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+CPlFvNq/YrKeB3Ps3Y0hn9p5nUQHpZCR2F66xpo1f4=; b=Raix5E+YB+ZxqHys9BRsJv1iap
- eZJ+fzHQuLVI8u94yGnkzWSPKdlPdufzjP2MBcnG3NCFH7JhE9bZNABk4eVv1Tu0eFZ9NHNzaHdwi
- pPhFfFexZR5rSwfeq/seAAEbhHDh2B8UTmZhUXOruNyi95nawjhht7rMUdtVhbmkcQkA=;
-Received: from mail-pg1-f169.google.com ([209.85.215.169])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jhK17-007YwH-4C
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Jun 2020 21:36:49 +0000
-Received: by mail-pg1-f169.google.com with SMTP id m1so5813518pgk.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 05 Jun 2020 14:36:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+CPlFvNq/YrKeB3Ps3Y0hn9p5nUQHpZCR2F66xpo1f4=;
- b=orKrtezCBksodek6XJh2w6Dk0H5voOgw6OJBGyH3KQxMC6Obw/mcYlxsOJmtY5LCVu
- LlhyT2vi3DuCv3ucOaPxIYerBfnqlBSS3Wm/5vF82ppHj31V9JVjhsr4pJ1i5nwya6Wn
- yESXnLVlPh3FE2/6N4RJ68HInD1vXC6vaoUIq3MecGn5slG2ZHZ0tf05tE/MQopHr0Lw
- bCmsRQq7+SNori/NYtmcc2u2Wr6lrWHjuQtIN8xsxOP17Kc1ckTkRCDIgzOTKcprOalc
- 4rcNKVMvo/CkSFtAN5YJDjnWN34muckwQLvXbBuxM31NX4q5CuuueKFhdH11zX+4ZuVu
- 9Nzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+CPlFvNq/YrKeB3Ps3Y0hn9p5nUQHpZCR2F66xpo1f4=;
- b=HK4IALd3Inkes9jXsJUPtDUKXpg99cKjQ4hpPVcqe/re2XOmV7EoviY9OxlYpNX25V
- p7eJz5ijRof5fbudTeN+Pd+mWKS5imjQDEI6Eue2YJiQEhyvKR+pjMm0b+4la5ZRmu8K
- tF/+dtyfiP47kw249uUOYcSae64aWG8LnHK3O2DDlArRXLbfIufRuchAVJSxO8rUSxYH
- hASxU5rNPhZJRyAS9yVL/IUFoBbzgX78+MrdrLTbVUCo73+REF7EKkqYhpvq+47ukrw6
- 51pzvmfFh1CfjmO++oJDXcnd+Fq19ukMDpxVpUfVeHbGtJxpu9AIpPekYc5uqjGMuMok
- WkmA==
-X-Gm-Message-State: AOAM531Mv99dLvFiw1d6M06PvZg0XF1H+/QwTZnFsIsWDvpZ9vh8fSZy
- FCV15Ipk6Cg/1GQfpdFlig5xWv8atcj/X5Oi7kpkgD+dupo=
-X-Google-Smtp-Source: ABdhPJyKB1TltvDygDL3PUAsE23KowC77IbnW/+7/3TWxe0RJXajOg7LS5IBDYB3N7XD4Muv7iNINvVPuAlnuWiDzlA=
-X-Received: by 2002:a17:902:341:: with SMTP id
- 59mr11022457pld.119.1591392535271; 
- Fri, 05 Jun 2020 14:28:55 -0700 (PDT)
+ bh=0pykINq2SlpdIayM1Zh9U+ARKvifFPAdipc9Tilm3Aw=; b=XGIxjG4kMQDeHmAtVx79OzCr60
+ uyNxgytJLbBLfkT0vUBwuHrT5QhNIKL8Fa0EZYG/xRdK3/MvLNRanZcjmkJPHCaqh4u8M4whe84D8
+ x9YhKIqluyrwpJhxEzmNZZSeOX133kTfe5VlLHXa+vvS8EvxdNvyOrr93DpNUWHdSREI=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ji2g2-00CONf-Rg
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 07 Jun 2020 21:18:00 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7AA602067B;
+ Sun,  7 Jun 2020 21:17:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591564668;
+ bh=wEivynlQPef/VO9ow2cpwEO2SaJr8PZ0KsNxmupY4ow=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ZoH/4EUI9REPKk0bBji19GyKSCDMvacGfoanlTwN0pj+3YTM0gblFj4c9cHA2Od+4
+ /dZfB+D0a+nb4P4Npvv5HLrdPKof+oT2cMsZCK2Gj6OhDG/dyJPk4GmPmlDSB6cn3e
+ ZkGERTwXJIhckZoQZR2xdDghrPONm4k3e7tsJbGc=
+Date: Sun, 7 Jun 2020 14:17:48 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200607211748.GA26785@google.com>
+References: <20200605085453.45717-1-yuchao0@huawei.com>
 MIME-Version: 1.0
-References: <202006051725.63EW72i7%lkp@intel.com>
- <20200605145546.GA227721@google.com>
- <20200605160830.GB1373@sol.localdomain>
- <CAKwvOdm1Ew1dBVcmxDHtKWp383Dsrxjhaweek=-LDomfKnj7Qg@mail.gmail.com>
- <20200605193359.GK1373@sol.localdomain>
- <CAKwvOdmE_59v6-W+Sk8SGrrXJ4dx5ANWEpD5GL_hrw0ja0w1kg@mail.gmail.com>
- <20200605195713.GL1373@sol.localdomain>
- <CAKwvOdm_EfEuhb8QVNzbFhVnTN+q5tkDkWPxOpC+rfzOVxpWVg@mail.gmail.com>
- <20200605203340.GM1373@sol.localdomain>
-In-Reply-To: <20200605203340.GM1373@sol.localdomain>
-Date: Fri, 5 Jun 2020 14:28:44 -0700
-Message-ID: <CAKwvOdn-s5n-z1vnh_Mt4+WHsb9oZSVpNxe33ZuMPiY0=wcECw@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: -15.6 (---------------)
+Content-Disposition: inline
+In-Reply-To: <20200605085453.45717-1-yuchao0@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.169 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.169 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jhK17-007YwH-4C
-Subject: Re: [f2fs-dev] [f2fs:dev-test 48/48] fs/f2fs/super.c:3303:12:
- warning: stack frame size of 2064 bytes in function 'f2fs_fill_super'
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1ji2g2-00CONf-Rg
+Subject: Re: [f2fs-dev] [PATCH] f2fs: allow writeback on error status
+ filesystem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,134 +83,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Nick Desaulniers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Nick Desaulniers <ndesaulniers@google.com>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- kbuild-all@lists.01.org, kernel test robot <lkp@intel.com>,
- clang-built-linux <clang-built-linux@googlegroups.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 5, 2020 at 1:33 PM Eric Biggers <ebiggers@kernel.org> wrote:
->
-> On Fri, Jun 05, 2020 at 01:02:54PM -0700, Nick Desaulniers wrote:
-> > Right, so my script would have printed out the list of all local
-> > variables in f2fs_fill_super() and their sizes.  With that information
-> > handy, we could assess if there were any smoking guns of clearly
-> > incorrect large stack allocations vs death by a thousand cuts.  Your
-> > change may not have added a new large local allocation, simply tipped
-> > the scale or changed inlining decisions.  They may be other local
-> > variables in this call chain that we should reassess allocation
-> > strategy; ie. dynamic or static rather than local, to avoid the
-> > potential for exhausting kernel stack.
->
-> For comparison, I also tried building for x86_64 (with gcc 10.1.0) and running
-> your script.  But it crashed:
->
-> f2fs_fill_super:
->         8       struct f2fs_sb_info*    sbi
->         8       struct f2fs_super_block*        raw_super
->         8       struct inode*           root
->         4       int                     err
-> Unsupported type info for bool, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'bool', raw_value=2068, offset=691)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=695)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=30, raw_value=30, offset=696)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=17, raw_value=17, offset=697)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=702, raw_value=702, offset=698)
+On 06/05, Chao Yu wrote:
+>     71.07%     0.01%  kworker/u256:1+  [kernel.kallsyms]  [k] wb_writeback
+>             |
+>              --71.06%--wb_writeback
+>                        |
+>                        |--68.96%--__writeback_inodes_wb
+>                        |          |
+>                        |           --68.95%--writeback_sb_inodes
+>                        |                     |
+>                        |                     |--65.08%--__writeback_single_inode
+>                        |                     |          |
+>                        |                     |           --64.35%--do_writepages
+>                        |                     |                     |
+>                        |                     |                     |--59.83%--f2fs_write_node_pages
+>                        |                     |                     |          |
+>                        |                     |                     |           --59.74%--f2fs_sync_node_pages
+>                        |                     |                     |                     |
+>                        |                     |                     |                     |--27.91%--pagevec_lookup_range_tag
+>                        |                     |                     |                     |          |
+>                        |                     |                     |                     |           --27.90%--find_get_pages_range_tag
+> 
+> If filesystem was injected w/ checkpoint errror, before umount, kworker
+> will always hold one core in order to writeback a large number of node
+> pages, that looks not reasonable, to avoid that, we can allow data/node
+> write in such case, since we can force all data/node writes with OPU mode,
+> and clear recovery flag on node, and checkpoint is not allowed as well,
+> so we don't need to worry about writeback's effect on data/node in
+> previous checkpoint, then with this way, it can decrease memory footprint
+> cost by node/data pages and avoid looping into data/node writeback
+> process.
 
-Thanks for the report, I've added support for parsing DW_TAG_typedef
-tags, and...
+This patch breaks fault injection test with filesystem corruption. Please check.
 
->
->         0       None                    skip_recovery
-> Unsupported type info for bool, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'bool', raw_value=2068, offset=691)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=695)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=30, raw_value=30, offset=696)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=17, raw_value=17, offset=697)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=702, raw_value=702, offset=698)
->
->         0       None                    need_fsck
->         8       char*                   options
->         4       int                     recovery
->         4       int                     i
->         4       int                     valid_super_block
->         8       struct curseg_info*     seg_i
->         4       int                     retry_cnt
->         0       struct lock_class_key   __key
->         0       struct lock_class_key   __key
->         0       struct lock_class_key   __key
->         0       struct lock_class_key   __key
->         0       struct lock_class_key   __key
->         4       int                     n
->         4       int                     j
->         0       struct lock_class_key   __key
->         0       struct lock_class_key   __key
-> array_size:
-> Unsupported type info for size_t, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'size_t', raw_value=1942, offset=746)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=750)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=55, raw_value=55, offset=751)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=26, raw_value=26, offset=752)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=441, raw_value=441, offset=753)
->
->         0       None                    bytes
-> Unsupported type info for size_t, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'size_t', raw_value=1942, offset=746)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=750)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=55, raw_value=55, offset=751)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=26, raw_value=26, offset=752)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=441, raw_value=441, offset=753)
->
->         0       None                    __a
-> Unsupported type info for size_t, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'size_t', raw_value=1942, offset=746)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=750)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=55, raw_value=55, offset=751)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=26, raw_value=26, offset=752)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=441, raw_value=441, offset=753)
->
->         0       None                    __b
-> Unsupported type info for size_t, implement me!
-> DIE DW_TAG_typedef, size=12, has_children=False
->     |DW_AT_name        :  AttributeValue(name='DW_AT_name', form='DW_FORM_strp', value=b'size_t', raw_value=1942, offset=746)
->     |DW_AT_decl_file   :  AttributeValue(name='DW_AT_decl_file', form='DW_FORM_data1', value=36, raw_value=36, offset=750)
->     |DW_AT_decl_line   :  AttributeValue(name='DW_AT_decl_line', form='DW_FORM_data1', value=55, raw_value=55, offset=751)
->     |DW_AT_decl_column :  AttributeValue(name='DW_AT_decl_column', form='DW_FORM_data1', value=26, raw_value=26, offset=752)
->     |DW_AT_type        :  AttributeValue(name='DW_AT_type', form='DW_FORM_ref4', value=441, raw_value=441, offset=753)
->
-> Traceback (most recent call last):
->   File "/home/e/src/frame-larger-than/frame_larger_than.py", line 147, in <module>
->     parse_file(elffile.get_dwarf_info(), sys.argv[2])
->   File "/home/e/src/frame-larger-than/frame_larger_than.py", line 129, in parse_file
->     parse_file(dwarf_info, get_name(ti))
->   File "/home/e/src/frame-larger-than/frame_larger_than.py", line 125, in parse_file
->     print_var(dwarf_info, DIE)
->   File "/home/e/src/frame-larger-than/frame_larger_than.py", line 111, in print_var
->     type_string = get_type_string(dwarf_info, type_info)
->   File "/home/e/src/frame-larger-than/frame_larger_than.py", line 85, in get_type_string
->     return get_type_string(dwarf_info, pointed_to_type) + '*'
-> TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
->
-
-looks like broken debug info was generated, a DW_TAG_const_type tag
-with no base type.  As if you typed `const x = 10;` in C where `x` was
-not a typedef, but an identifier.  I added a workaround, and should
-investigate and report to GCC that broken debug info was generated.
-If you pull the latest version and rerun it shouldn't crash for that
-input.
-
--- 
-Thanks,
-~Nick Desaulniers
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/data.c | 19 ++++++++++++-------
+>  fs/f2fs/node.c |  7 +++++--
+>  2 files changed, 17 insertions(+), 9 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 9d40db50cd65..2b3c846181bb 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2519,6 +2519,8 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+>  {
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  
+> +	if (unlikely(f2fs_cp_error(sbi)))
+> +		return true;
+>  	if (f2fs_lfs_mode(sbi))
+>  		return true;
+>  	if (S_ISDIR(inode->i_mode))
+> @@ -2702,13 +2704,16 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+>  	/* we should bypass data pages to proceed the kworkder jobs */
+>  	if (unlikely(f2fs_cp_error(sbi))) {
+>  		mapping_set_error(page->mapping, -EIO);
+> -		/*
+> -		 * don't drop any dirty dentry pages for keeping lastest
+> -		 * directory structure.
+> -		 */
+> -		if (S_ISDIR(inode->i_mode))
+> -			goto redirty_out;
+> -		goto out;
+> +
+> +		if (has_not_enough_free_secs(sbi, 0, 0)) {
+> +			/*
+> +			 * don't drop any dirty dentry pages for keeping lastest
+> +			 * directory structure.
+> +			 */
+> +			if (S_ISDIR(inode->i_mode))
+> +				goto redirty_out;
+> +			goto out;
+> +		}
+>  	}
+>  
+>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 03e24df1c84f..372c04efad38 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -1527,7 +1527,10 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+>  			unlock_page(page);
+>  			return 0;
+>  		}
+> -		goto redirty_out;
+> +		if (has_not_enough_free_secs(sbi, 0, 0))
+> +			goto redirty_out;
+> +		set_fsync_mark(page, 0);
+> +		set_dentry_mark(page, 0);
+>  	}
+>  
+>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+> @@ -1568,7 +1571,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+>  		goto redirty_out;
+>  	}
+>  
+> -	if (atomic && !test_opt(sbi, NOBARRIER))
+> +	if (atomic && !test_opt(sbi, NOBARRIER) && !f2fs_cp_error(sbi))
+>  		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
+>  
+>  	/* should add to global list before clearing PAGECACHE status */
+> -- 
+> 2.18.0.rc1
 
 
 _______________________________________________
