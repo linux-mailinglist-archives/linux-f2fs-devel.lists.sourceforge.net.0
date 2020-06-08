@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D893A1F1867
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Jun 2020 14:03:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DFBE1F1868
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Jun 2020 14:03:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jiGVB-0007mN-FF; Mon, 08 Jun 2020 12:03:41 +0000
+	id 1jiGVJ-0007DO-6f; Mon, 08 Jun 2020 12:03:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jiGVA-0007mB-Uw
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jun 2020 12:03:40 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jiGVG-0007Cx-7R
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jun 2020 12:03:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BgWPhl31xNcBCsTp/ggDePKeBpsZiMkBo4gtmTYIdGQ=; b=Vc7EbachAcQ7VQDROn4Z2baxi4
- fZg/LsMRqdgUvke7rOBpcZIbKoU/Oq9VbdJL7U0k068eL/SAMYNkkbVe2l01+ujOul3wvglk569u/
- f3OPCT1SwM+Mr0MpNNeviM+wRCFX5KLNhUlW+av7a+pRKXWhJANJYjVeToRK2F3EWY2w=;
+ bh=KMY2txQq5UkBvoIs13HsGjnQ7mvFTBcJ54dDX2bdEro=; b=OU+N2GEE6TvCLD6YgQmH7T4qf1
+ Mu79nFXAFHEWgIRtpaKfU8fEsrVQCNs9shxz0ypw/5wAAhpnJ+0I7k7qIbzgP9nS0zJrFNk9OOy4Y
+ rALl8Rf8ESC2aOKRUuNMzYjwacJyZiJ1OmHX+WGn0O3aHL9S4QLjP+itWpRiG/sRK7RU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=BgWPhl31xNcBCsTp/ggDePKeBpsZiMkBo4gtmTYIdGQ=; b=P
- //QAkCoqudfQfoVJW6V/amgfARXDoF5+2KqMG731HYYy2UMJmImePDy3vOV7fs2hBhchzKMmeeHcN
- L4AHoIUgQgZ/BijM8THDSd+4SQLhVek0NJeJx1lJGjA/l8+XwR+J7tBDlU+xgOka8yN32H13YKJIC
- K9g5W5jULRZvBufY=;
+ h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KMY2txQq5UkBvoIs13HsGjnQ7mvFTBcJ54dDX2bdEro=; b=C54yxPPCwbVs7X8YC7G/G78owy
+ UVqrzUjg6qCoYs9UsgY58ke47a1v4i7ntqjnBShaJUDdY1EYmDhaHqBFWMEM9IEVUaq7R7wDLtr0S
+ odEgNyFqOVMoA1PfA/JRD0Cb88kjikMhh4wO0XFSf08Pbij8+PsI0iQNUWDZcqYDtxrs=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jiGV9-00BJdS-7r
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jun 2020 12:03:40 +0000
+ id 1jiGVE-00GOur-U5
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Jun 2020 12:03:46 +0000
 Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id C52F1D00F0C2F91A7409;
+ by Forcepoint Email with ESMTP id CA372969A77F174BC765;
  Mon,  8 Jun 2020 20:03:29 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS410-HUB.china.huawei.com (10.3.19.210) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 8 Jun 2020 20:03:19 +0800
+ 14.3.487.0; Mon, 8 Jun 2020 20:03:20 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Mon, 8 Jun 2020 20:03:16 +0800
-Message-ID: <20200608120317.6716-1-yuchao0@huawei.com>
+Date: Mon, 8 Jun 2020 20:03:17 +0800
+Message-ID: <20200608120317.6716-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.18.0.rc1
+In-Reply-To: <20200608120317.6716-1-yuchao0@huawei.com>
+References: <20200608120317.6716-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -64,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jiGV9-00BJdS-7r
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: handle readonly filesystem in
- f2fs_ioc_shutdown()
+X-Headers-End: 1jiGVE-00GOur-U5
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: remove unused parameter of
+ f2fs_put_rpages_mapping()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,36 +85,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If mountpoint is readonly, we should allow shutdowning filesystem
-successfully, this fixes issue found by generic/599 testcase of
-xfstest.
+Just cleanup, no logic change.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/file.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ fs/f2fs/compress.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index bcca22752ebe..dbf4a342c02b 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2232,8 +2232,15 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index a53578a89211..1e02a8c106b0 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -89,8 +89,7 @@ static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
+ 	f2fs_drop_rpages(cc, len, true);
+ }
  
- 	if (in != F2FS_GOING_DOWN_FULLSYNC) {
- 		ret = mnt_want_write_file(filp);
--		if (ret)
-+		if (ret) {
-+			if (ret == -EROFS) {
-+				ret = 0;
-+				f2fs_stop_checkpoint(sbi, false);
-+				set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
-+				trace_f2fs_shutdown(sbi, in, ret);
-+			}
- 			return ret;
-+		}
- 	}
+-static void f2fs_put_rpages_mapping(struct compress_ctx *cc,
+-				struct address_space *mapping,
++static void f2fs_put_rpages_mapping(struct address_space *mapping,
+ 				pgoff_t start, int len)
+ {
+ 	int i;
+@@ -942,7 +941,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
  
- 	switch (in) {
+ 		if (!PageUptodate(page)) {
+ 			f2fs_unlock_rpages(cc, i + 1);
+-			f2fs_put_rpages_mapping(cc, mapping, start_idx,
++			f2fs_put_rpages_mapping(mapping, start_idx,
+ 					cc->cluster_size);
+ 			f2fs_destroy_compress_ctx(cc);
+ 			goto retry;
+@@ -977,7 +976,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+ unlock_pages:
+ 	f2fs_unlock_rpages(cc, i);
+ release_pages:
+-	f2fs_put_rpages_mapping(cc, mapping, start_idx, i);
++	f2fs_put_rpages_mapping(mapping, start_idx, i);
+ 	f2fs_destroy_compress_ctx(cc);
+ 	return ret;
+ }
 -- 
 2.18.0.rc1
 
