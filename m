@@ -2,63 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 742921F465E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Jun 2020 20:35:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2E201F480D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Jun 2020 22:28:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jij64-0005Rk-Ha; Tue, 09 Jun 2020 18:35:40 +0000
+	id 1jikrM-00040A-BI; Tue, 09 Jun 2020 20:28:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1jij63-0005RV-1s
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Jun 2020 18:35:39 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jikrK-0003zs-S7
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Jun 2020 20:28:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZF/yx3pChqGKeLtRteya+Zmo7kyfjlS4nb51PpTFGqk=; b=FFH9sJUL9pmbwW3LAuqEVEze/F
- hhDLCM1qY6F5PbaCUeozntQKB5fJjr/IcmZF4lFHorTvtnTX8bRc0OJBNGcgA2GgvTaWjwyLHSuJe
- QJBXxSVD4lPuI34VijP4DVOn3+wf4lnvSwJZk2iWooZf+8BdqtwBPSd4FKmhV2UBYzGA=;
+ bh=+nGOUuwUm4OFMEjc70BUu/umLDgPAvkbw28M/iO+29A=; b=gKfzYz/R0kXQGIfLr5Qu08/MUb
+ Qan5pxLkkK9UDVyDJxl7WoTQk/X1RXyiBBFrTxDM5Km0IPdgIxxlQnmyo4nb8mKSz713Nd+A+dCWa
+ kREMVGkwoJ3yTSOmuHPIHx0nRCFEGx1scmTuhOymaZlLXqWUmLm3moZiRsOYOX7xi7Yk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZF/yx3pChqGKeLtRteya+Zmo7kyfjlS4nb51PpTFGqk=; b=jNAGXXglb62DhbZX234GwYqU/B
- aY4Xk66awyyz1ckRbP5jmCgo83LrkEgSHxYRWL6LCDx85DmfMKfr83kiRA2KTydtxw+W17Y4veSoC
- iWiwQgkDRJn2mRtpkOdQKw74tHmMuIwf0Ex7U9s4Pj9LA7h130D1PRonSiAY4n5SoLbA=;
+ bh=+nGOUuwUm4OFMEjc70BUu/umLDgPAvkbw28M/iO+29A=; b=jYVwYvtfw54A8CPV9uKZ5EjA3W
+ 5ifAToUGU0LYY0wl46ZEWyCtYFCdjYqyO4Le/vfzrvlRMC1110RLaW6xqPyPtyv22YNNijRRFPaE+
+ ImGzsAS+v+3SdCNRBrz36JS/v+MQ2TF/sW3M5QHasKrAhdFWPV48o0+3N6Is2dT84fA0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jij5y-000G8m-6C
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Jun 2020 18:35:38 +0000
+ id 1jikrJ-00F0LF-0S
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Jun 2020 20:28:34 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7DB8A206C3;
+ Tue,  9 Jun 2020 20:28:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591727724;
- bh=qhY+jtDr7eGsdtq/KDAUivjzemoTiVK0XkiET1MON44=;
- h=From:In-Reply-To:References:Date:To:Cc:From;
- b=dpV8+DRzDqLXNKYku543i6f97gTekyIwRdhghnG1DsfVYLkCHo3NgnG0KcHyLZ6YW
- SMYQ1riEEmwD1yFbmx9jtWYqTdU1G69lmbGSj6cdqv2Vr2Iqw3KeEoZAuC07EhIjts
- VtEN+fwFtMZvfClNOsASynONb54VTgcyPuVUeMEY=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20200609145544.GA171717@google.com>
-References: <20200609145544.GA171717@google.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20200609145544.GA171717@google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-5.8
-X-PR-Tracked-Commit-Id: b7b911d59dacb47511a1e604bbfa901beb108305
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 42612e7763315cf5d43c4422781e75f9ee57597a
-Message-Id: <159172772393.12427.4644781740736919074.pr-tracker-bot@kernel.org>
-Date: Tue, 09 Jun 2020 18:35:23 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -0.6 (/)
+ s=default; t=1591734502;
+ bh=H/1jyA2ENEl76fko3i9AUC1qpu0Coz7F0CswtYS3WFg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=P4T3MvRrVMmtF3DbaNR6Vf9oaL5Jydxxzs2uKXV09TAGaRgb3FsE2ef7SwvZALph5
+ oLzKqq/yk82ZVm20+xmwMUS0IlcojUDB+UExygverfwT7n9SSgELPQgUAZuSMTp3+/
+ zSn333TkeHIJXbPbfcPqt0I9lUR/Dp6eiEyNsjFA=
+Date: Tue, 9 Jun 2020 13:28:21 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Theodore Ts'o <tytso@mit.edu>
+Message-ID: <20200609202821.GB1105@sol.localdomain>
+References: <20200601200543.59417-1-ebiggers@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200601200543.59417-1-ebiggers@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jij5y-000G8m-6C
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.8-rc1
+X-Headers-End: 1jikrJ-00F0LF-0S
+Subject: Re: [f2fs-dev] [PATCH v2] ext4: avoid utf8_strncasecmp() with
+ unstable name
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,26 +83,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
+Cc: Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Al Viro <viro@zeniv.linux.org.uk>,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.co.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Tue, 9 Jun 2020 07:55:44 -0700:
+On Mon, Jun 01, 2020 at 01:05:43PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> If the dentry name passed to ->d_compare() fits in dentry::d_iname, then
+> it may be concurrently modified by a rename.  This can cause undefined
+> behavior (possibly out-of-bounds memory accesses or crashes) in
+> utf8_strncasecmp(), since fs/unicode/ isn't written to handle strings
+> that may be concurrently modified.
+> 
+> Fix this by first copying the filename to a stack buffer if needed.
+> This way we get a stable snapshot of the filename.
+> 
+> Fixes: b886ee3e778e ("ext4: Support case-insensitive file name lookups")
+> Cc: <stable@vger.kernel.org> # v5.2+
+> Cc: Al Viro <viro@zeniv.linux.org.uk>
+> Cc: Daniel Rosenberg <drosen@google.com>
+> Cc: Gabriel Krisman Bertazi <krisman@collabora.co.uk>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+> 
+> v2: use memcpy() + barrier() instead of a byte-by-byte copy.
+> 
+>  fs/ext4/dir.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.8
+Ted, could you take this through the ext4 tree as a fix for 5.8?
+The f2fs patch has been merged already.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/42612e7763315cf5d43c4422781e75f9ee57597a
-
-Thank you!
-
--- 
-Deet-doot-dot, I am a bot.
-https://korg.wiki.kernel.org/userdoc/prtracker
+- Eric
 
 
 _______________________________________________
