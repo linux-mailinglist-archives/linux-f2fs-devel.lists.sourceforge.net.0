@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B43C71F6C12
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jun 2020 18:19:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B67D71F6C2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jun 2020 18:27:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jjPvJ-00041n-Lq; Thu, 11 Jun 2020 16:19:25 +0000
+	id 1jjQ3G-0004Nh-4e; Thu, 11 Jun 2020 16:27:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jjPvH-00041c-LT
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jun 2020 16:19:23 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jjQ3E-0004Na-KU
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jun 2020 16:27:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hQ6/oH6BXdgxeNManMv2lSDXH4b/FyRvt9rTjSZcj7Q=; b=RsycJ7TWfoqmOVf35VKs+aq2ew
- nFHzQYWeRChVpKfj/6Be8/1wSoBbADu9iWiMxBJtPHmD+xCGrN5Lb/widHpPBQcZ5TSjJ1eQZ3Hjc
- Od7mn0iWu1coA+yrH117bZ6FZql0cnKYDfUDjTUGGQGUjmID88fAQc26L/IBhtSBxozw=;
+ bh=WkwqhkBpyTGlJbizq83r0K/xb1w2pMHHyTxGcWlyq7M=; b=SFL7Q3pQb61a5zxj7ql/KyDeSb
+ LUl73o+G4emAhzIwAabz8SH0vAaiYbDBmUCkCZqazb89TuWAO22gbpA5j/vkj+RPPsswia/KqgoDH
+ N7FvRNLdqMRzedu1+MudBcvkP9OQVUqJhCbVE1xXTHrOouIFSw4lvG9k+YTzn2CpP2D8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hQ6/oH6BXdgxeNManMv2lSDXH4b/FyRvt9rTjSZcj7Q=; b=SwAoT5NiSF5jI2eIWDLsQdqrux
- KpZ1rd8FMj4/qfD9ooQgh/Ssw9+yfDc/88sWXdDTZYxtZbDV7IWTHM/C0NzQesoZJ9wVsiIszhafD
- SWaUaIYCr0XSKsY0zE+lXHLoZyAym99lrVtHsMIOrKJznjtL8xoy3UxlfYgXE275RdKE=;
+ bh=WkwqhkBpyTGlJbizq83r0K/xb1w2pMHHyTxGcWlyq7M=; b=iI+6v4oq3mGlrCpHfyEvaMnXQ6
+ xYgju6Csc6QmREppWHVuEi0woOJkz767BjPVd1+1GcAiy8prt9mNZ+H+gPlSwWYr1WYOQP6bIDPVI
+ UpnFvPRfKN2FD43UONyg69609s6a6DhxFcJz6cy6HGIlNq3wUT2TdosbJk9pRGvahy78=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jjPvE-00Gnz4-MV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jun 2020 16:19:23 +0000
+ id 1jjQ3D-00GoTf-BO
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Jun 2020 16:27:36 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 21955206DC;
- Thu, 11 Jun 2020 16:19:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9BA5D20792;
+ Thu, 11 Jun 2020 16:27:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591892355;
- bh=wsH+kYUlpHN3cnHucYD34glIdihIFPxxoNjrZUi41cM=;
+ s=default; t=1591892842;
+ bh=7Vh2eMKAqsqarBEFvSteTBIrjnkfpF7p21JR7SHTWnU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=FQsgT8ChS41POrJ2L2DcuW4Puplj8vZ0UDnA2JkwL48aZ46XTeEZm5fx2Q9o2I4/d
- xunID26zloLK1DunIahtFYmMDEJkP4ED/cD3pme+/Bf+P6AoT8fwhmiMRLTA642EAg
- LaoSe/Lf6G4s31j9bhkbo7ypNF39wEVTN9WkHGVE=
-Date: Thu, 11 Jun 2020 09:19:13 -0700
+ b=loimR59ESifvGt9gJ/k3lNBbw2wz/KxaR8VRsFjmkzEE2gwVAEKMbUxbZxwC0zh8G
+ IHOznBOCpQyR83dvEhg/xor9v5dDFIEziXXV9DM7mHWM//FUw1Y351w+jlomXLLxYm
+ 1IB2eJK6fZTtEHbyFEQ79PmS6+uggD2KfvnuDJnA=
+Date: Thu, 11 Jun 2020 09:27:21 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20200611161913.GA1152@sol.localdomain>
+Message-ID: <20200611162721.GB1152@sol.localdomain>
 References: <20200611031652.200401-1-daeho43@gmail.com>
- <2eeaf889-da2c-0dac-c60b-fc5e68f2d402@huawei.com>
- <CACOAw_zyNFMYC3pTK3dT4yRgqp+-6yy3m2E64dkDkpNFKZicfQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACOAw_zyNFMYC3pTK3dT4yRgqp+-6yy3m2E64dkDkpNFKZicfQ@mail.gmail.com>
+In-Reply-To: <20200611031652.200401-1-daeho43@gmail.com>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -72,7 +70,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jjPvE-00Gnz4-MV
+X-Headers-End: 1jjQ3D-00GoTf-BO
 Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add F2FS_IOC_SEC_TRIM_FILE ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -85,74 +83,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, Daeho Jeong <daehojeong@google.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 11, 2020 at 08:04:06PM +0900, Daeho Jeong wrote:
-> > > +static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
-> > > +{
-> > > +     struct inode *inode = file_inode(filp);
-> > > +     struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> > > +     struct address_space *mapping = inode->i_mapping;
-> > > +     struct block_device *prev_bdev = NULL;
-> > > +     pgoff_t index, pg_start = 0, pg_end;
-> > > +     block_t prev_block = 0, len = 0;
-> > > +     u32 flags;
-> > > +     int ret = 0;
-> > > +
-> > > +     if (!(filp->f_mode & FMODE_WRITE))
-> > > +             return -EBADF;
-> > > +
-> > > +     if (get_user(flags, (u32 __user *)arg))
-> > > +             return -EFAULT;
-> > > +     if (flags == 0 || (flags & ~F2FS_TRIM_FILE_MASK))
-> > > +             return -EINVAL;
-> > > +
-> > > +     if ((flags & F2FS_TRIM_FILE_DISCARD) && !f2fs_hw_support_discard(sbi))
-> > > +             return -EOPNOTSUPP;
-> > > +
-> > > +     file_start_write(filp);
-> >
-> > Now, I'm a little confused about when we need to call __mnt_want_write_file(),
-> > you know, vfs_write() still will call this function when updating time.
-> > - __generic_file_write_iter
-> >  - file_update_time
-> >   - __mnt_want_write_file
-> >
-> > And previously, f2fs ioctl uses mnt_{want,drop}_write_file() whenever there is
-> > any updates on fs/file, if Eric is correct, we need to clean up most of ioctl
-> > interface as well.
-> 
-> I also saw most filesytem codes use just mnt_{want,drop}_write_file()
-> and actually it doesn't affect code working. It's a matter of doing a
-> redundant job or not.
-> AFAIUI, if the file is not open for writing (FMODE_WRITE), we have to
-> call mnt_want_write_file() to increase mnt_writers.
-> In this case, we already checked it has FMODE_WRITE flag.
+On Thu, Jun 11, 2020 at 12:16:52PM +0900, Daeho Jeong wrote:
+> +	for (index = pg_start; index < pg_end;) {
+> +		struct dnode_of_data dn;
+> +		unsigned int end_offset;
+> +
+> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
+> +		ret = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+> +		if (ret)
+> +			goto out;
+> +
+> +		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
+> +		if (pg_end < end_offset + index)
+> +			end_offset = pg_end - index;
+> +
+> +		for (; dn.ofs_in_node < end_offset;
+> +				dn.ofs_in_node++, index++) {
+> +			struct block_device *cur_bdev;
+> +			block_t blkaddr = f2fs_data_blkaddr(&dn);
+> +
+> +			if (__is_valid_data_blkaddr(blkaddr)) {
+> +				if (!f2fs_is_valid_blkaddr(F2FS_I_SB(inode),
+> +					blkaddr, DATA_GENERIC_ENHANCE)) {
+> +					ret = -EFSCORRUPTED;
+> +					goto out;
+> +				}
+> +			} else
+> +				continue;
+> +
+> +			cur_bdev = f2fs_target_device(sbi, blkaddr, NULL);
+> +			if (f2fs_is_multi_device(sbi)) {
+> +				int i = f2fs_target_device_index(sbi, blkaddr);
+> +
+> +				blkaddr -= FDEV(i).start_blk;
+> +			}
+> +
+> +			if (len) {
+> +				if (prev_bdev == cur_bdev &&
+> +					blkaddr == prev_block + len) {
+> +					len++;
+> +				} else {
+> +					ret = f2fs_secure_erase(prev_bdev,
+> +							prev_block, len, flags);
+> +					if (ret)
+> +						goto out;
+> +
+> +					len = 0;
+> +				}
+> +			}
+> +
+> +			if (!len) {
+> +				prev_bdev = cur_bdev;
+> +				prev_block = blkaddr;
+> +				len = 1;
+> +			}
+> +		}
+> +
+> +		f2fs_put_dnode(&dn);
+> +	}
 
-If the fd isn't writable (or may not be writable), mnt_want_write_file() is
-needed.  That includes all ioctls that operate (or may operate) on directories,
-since directories can't be opened for writing.
+This loop processes the entire file, which may be very large.  So it could take
+a very long time to execute.
 
-But when the fd is guaranteed to be writable, incrementing mnt_writers is
-pointless.  I'm trying to clean this up in the VFS:
-https://lkml.kernel.org/r/20200611160534.55042-1-ebiggers@kernel.org.
+It should at least use the following to make the task killable and preemptible:
 
-mnt_want_write_file() still does the freeze protection, which file_start_write()
-achieves more directly.
+		if (fatal_signal_pending(current)) {
+			err = -EINTR;
+			goto out;
+		}
+		cond_resched();
 
-The only other thing that mnt_want_write_file() does is the check for emergency
-remount r/o, which I doubt is very important.  It's racy, so the filesystem
-needs to detect it in other places too.
-
-I'm not sure why file_update_time() uses __mnt_want_write_file().  Either it
-assumes the fd might not be writable, or it just wants the check for emergency
-remount r/o, or it's just a mistake.  Note also that mtime isn't always updated,
-so just because file_update_time() calls __mnt_want_write_file() doesn't mean
-that write() always calls __mnt_want_write_file().
+Also, perhaps this ioctl should be made incremental, i.e. take in an
+(offset, length) like pwrite()?
 
 - Eric
 
