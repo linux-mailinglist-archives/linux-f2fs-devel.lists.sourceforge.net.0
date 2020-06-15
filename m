@@ -2,58 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C33011F9F13
+	by mail.lfdr.de (Postfix) with ESMTPS id C043C1F9F12
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 20:08:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jktXS-0005OJ-4f; Mon, 15 Jun 2020 18:08:54 +0000
+	id 1jktXU-0001w8-EC; Mon, 15 Jun 2020 18:08:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jktXR-0005OC-LA
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:53 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jktXS-0001vy-B2
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SH10DJC/iJaaUkdDhrWcwQTM+di964rf5mrBL63GDaU=; b=XTMSTDGdWp+t6wRXpu78SExj7B
- KlxMARSCN1Fpa5EZ8TGO+HinsXIx2dVje/tzZvSV+xS/zTcm89lX/fCVCX0+j7z0RV62Q1udKNswm
- TRRNwhg/LOUSMpZgMeWyImcVIsA3QPjZo5snKYtj4SNYtVIdSBAx9jTXTp6q1V8TYWuE=;
+ bh=hAn/ETTbE8sGJ5Ex7qUmbXM1iWClbVAtvNgQ8RE+XFs=; b=k3BtMsQ2+MszxcyqG+cjPZFAT6
+ w+wUBkwioic3UKnQ8E03Xf8uMD4TJ2omVGMfCyVTLyiAWZ0sWPGbexTX0PnmnfGgGrjb1kbxEhoSz
+ vlMerwtoW2y7XSDRC2CMeuO0azpU+k6t+92Ijv/sO81GPO0ybcXRyWpdE3wRnU0XfDFs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SH10DJC/iJaaUkdDhrWcwQTM+di964rf5mrBL63GDaU=; b=g
- pEP0P6mJKZrGVALmR5eve+7VYB15Z3QvW0SwUaxyMz2X83mLpWK44XImyhffK77zY5nRPFBWYP613
- rYIShYFkGLhkqbzKH2Xy2sBFjYXSfxvCUVt3w6oxLVx8AOqDHX3j3NTOeo7CbGabbPz54oTIH4RCQ
- bCCohjoazvo3ikXM=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=hAn/ETTbE8sGJ5Ex7qUmbXM1iWClbVAtvNgQ8RE+XFs=; b=lz7yEkqdsiZlA9mXpmZKmGkh5w
+ uehDZHztKMsoxiYArCQGDZd1nYb/5kli89DeCoFBUauGmFwQKIR0plzWEQduuCcwB4S46ik9o7QWN
+ eq9IiEHtCqtzFvIwUPOE505eeInX1UHqT6QiD8eHpElsdFTqJyGKp6R3Yp9dKIQbt6no=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jktXN-006sUe-O8
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:53 +0000
+ id 1jktXO-006sUh-Do
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:54 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 457AB2080D;
+ by mail.kernel.org (Postfix) with ESMTPSA id E226220810;
  Mon, 15 Jun 2020 18:08:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592244524;
- bh=H6ByfuUMaJAM/lM6rgniPUUj+UozvovESjKF5RPg+1s=;
- h=From:To:Cc:Subject:Date:From;
- b=X4afVY61GHznG2tt3RcSqPT2Sc9JkaRZtytIZXm36KQO0rTEBh5aeq+0GZ7D8Bm1a
- AH+WW3PecU3/SlRcNpaGxkyq/IokTGTDb9iK2Il27hqCEkNySz6pLa+Zp+/FK0IV5D
- Xzsd+ZLMpE1mMMnkW56DhQgRJ6LqVUby/cLNsW7g=
+ s=default; t=1592244525;
+ bh=vQQY3ryymkSZQbX5+01NqooffyfjpyJ36nsgxqhhK1A=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=i+oxWjkWFVU6FVl4CLYyB6Xn1c0WlVtg4fGWShd73ADrNfMtPpMESCtc4wvPNr4WL
+ rn+IBIkxjdl1cpIlh1h0Wn7bbRa2keU8R8aGpEvXCuJoJvH0g7zHNqBOFQ1OWRwTwA
+ u3blfEmjgq3rOdxsIuFW/8NsBqG3QXUqSdFmRBwI=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 15 Jun 2020 11:08:40 -0700
-Message-Id: <20200615180843.153299-1-jaegeuk@kernel.org>
+Date: Mon, 15 Jun 2020 11:08:41 -0700
+Message-Id: <20200615180843.153299-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.27.0.290.gba653c62da-goog
+In-Reply-To: <20200615180843.153299-1-jaegeuk@kernel.org>
+References: <20200615180843.153299-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -67,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jktXN-006sUe-O8
-Subject: [f2fs-dev] [PATCH 1/4] lib: fix include path for uuid.h
+X-Headers-End: 1jktXO-006sUh-Do
+Subject: [f2fs-dev] [PATCH 2/4] lib: fix include path for blkid.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,60 +89,32 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Rolf Eike Beer <eb@emlix.com>
 
-$ pkg-config --cflags uuid
--I/usr/include/uuid
+$ pkg-config --cflags blkid
+-I/usr/include/blkid
 
-The "uuid/" directory is actually part of the include path. This usually still
+The "blkid/" directory is actually part of the include path. This usually still
 works because most people have the path one level up in their default include
 path.
 
 Signed-off-by: Rolf Eike Beer <eb@emlix.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- mkfs/f2fs_format.c      | 2 +-
  mkfs/f2fs_format_main.c | 2 +-
- tools/f2fscrypt.c       | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 44575e0..4999cac 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -18,7 +18,7 @@
- #include <sys/mount.h>
- #endif
- #include <time.h>
--#include <uuid/uuid.h>
-+#include <uuid.h>
- 
- #include "f2fs_fs.h"
- #include "quota.h"
 diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index 204a410..282c94e 100644
+index 282c94e..3d86c44 100644
 --- a/mkfs/f2fs_format_main.c
 +++ b/mkfs/f2fs_format_main.c
-@@ -18,7 +18,7 @@
- #include <sys/mount.h>
- #endif
- #include <time.h>
--#include <uuid/uuid.h>
-+#include <uuid.h>
- #include <errno.h>
+@@ -23,7 +23,7 @@
  
  #include "config.h"
-diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
-index fe3e0ff..d5bc3c5 100644
---- a/tools/f2fscrypt.c
-+++ b/tools/f2fscrypt.c
-@@ -43,7 +43,7 @@
- #ifdef __KERNEL__
- #include <linux/fs.h>
+ #ifdef HAVE_LIBBLKID
+-#  include <blkid/blkid.h>
++#  include <blkid.h>
  #endif
--#include <uuid/uuid.h>
-+#include <uuid.h>
  
- #if !defined(HAVE_ADD_KEY) || !defined(HAVE_KEYCTL)
- #include <sys/syscall.h>
+ #include "f2fs_fs.h"
 -- 
 2.27.0.290.gba653c62da-goog
 
