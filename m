@@ -2,114 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5AF11F8DC0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 08:24:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=zAtDzMThUP1wF1tFkBSz6e6PSVk7iDWBF0odU8Oxg6I=; b=O+WkPp4EKXqLrMrU3qB6izxJ/
-	+CPNiliDbPSjr6zEtg80jijHjXh6q4t+NAECR8GYRMIvjieitgYDONH4MLVbFC1HWLM+FkJOsEdrT
-	vtImVsFfOiOrALBiX23rww7UXgHhv8uLxhajJaZVekSxP1jZNWB4zYqr6j3Sx4k8Rj020=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00BD21F8E17
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 08:47:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jkiXP-0006Ed-Ma; Mon, 15 Jun 2020 06:24:07 +0000
+	id 1jkiu2-0002gy-MR; Mon, 15 Jun 2020 06:47:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <satyat@google.com>) id 1jkiXM-0006EP-RN
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 06:24:04 +0000
+ (envelope-from <mchehab@kernel.org>) id 1jkitz-0002gn-Ar
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 06:47:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jQnh8n/QMbG/KY8+2fwcsYdBxm8Yr1sjt67xh0POWuI=; b=U6bVfJEfiyPTgOfJ0UJ04vNNUE
- SIkrCRZc2Rd9LaQTS3XmuXlXDuPBvTGXoMUN1J4uNQMNbBsi8XJJJU0XgxxwlB1VQvuqS3ISf1jMv
- pKlgY1c3+SHnV3rHQIQGqERJgfHGdU8XrTn9RxCfFv9Zo9L3sh5SWvP+C1Z32541ZnEw=;
+ bh=NM9B5cLok6jXcY4Ox9DT1pLFN5xhmuT2OpZKyoOfihM=; b=DmT8AnnTIh1LVLjko3ysKB4TMV
+ sKuzg4ho/AkOd4uke+YgL3n89DpSXq5Xn9j0DP1zvWZ9/1FK6acTTv98KzKEvf3nCS/ucj2UFsxfm
+ ye6w5Mf7E2ErzB9l/c/Z/RGuL3JwmtPllxhORzVE70FLsDqRYZm5lv3OMtBb9QMlUahc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jQnh8n/QMbG/KY8+2fwcsYdBxm8Yr1sjt67xh0POWuI=; b=lMFdeh7WCLRLmYl/HdZDIjxcnv
- BmQXX4IB/AcwJf+q84LTQbqqfsxBFOoOCYNa944lygM3hwbctMgriEwJAh23ymz/IQkxnFMLsCDR8
- F5i4RGCmu/PgcA1nDQf7iDNxFBxsB9eBO0iEiijMIp1iPg+iiGgItsIA5JxEMIbJRW6M=;
-Received: from mail-oi1-f194.google.com ([209.85.167.194])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jkiXI-0067Pt-Gc
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 06:24:04 +0000
-Received: by mail-oi1-f194.google.com with SMTP id k4so14919077oik.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 14 Jun 2020 23:24:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=jQnh8n/QMbG/KY8+2fwcsYdBxm8Yr1sjt67xh0POWuI=;
- b=lrKudiPQB0CLKUvJA/TnrAsEFmwty5S59ZooeKMDTbpfrFG3TOapvHtfyv6iQVGUny
- 4CYJ0IUmeet7IRcvueAWrLFDM0fRvoxDQm/dmOx7biytr0lEpWOONk87ghRpZy7t2QD3
- pH+u7euAHvDQ15zAY/4wyPu9Q0d+xXIYhPrsONsgMYtbXdvTaNNKkdhb1Er2Bw91agLn
- EwrQ9MT1lEzJpvGHH5enT4AzrCJO9I//dtBXQ5KqAZbG37uuerhinz7i1vuGCqNOiTWJ
- vYMGII5NG+mVdjH9I28c6d6xjLYSgYqkfYr2huOgx1PKJiatReoLpeu6ezkQKXNDV6EN
- OYiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=jQnh8n/QMbG/KY8+2fwcsYdBxm8Yr1sjt67xh0POWuI=;
- b=BuEf5mUjcnuVB/ORPb02kSsc1+ufuJTdNbbgppdhiw8gLNwySLrFnlXgiAdMiMZo8a
- t/XR4/Kp+7XmZVMad0djJIVtZHEztKmeOIHOOH8x7fDMuaUwowYkoLUX/TzuGuTeK9oN
- aeipgl7w4hkqPylIjRohqcyhqLoY+1S+QNCm6TJ2wJUjXUOlajV2Yv3vKaNs9o6Vuu6O
- 02/MhQnGXePgnrMN7HwnoCDQbvUah7+LZIHJB4M0dtRQ9BW2R7bGq2Zk20e8V0406JPi
- lOcbvCnlOBydQNnONDslCA09/fN8t70AoUtcHI6pKp6cMYHU96EqEy5NeVF5OXrU+nmQ
- o0Yg==
-X-Gm-Message-State: AOAM533BmldGv+jy6RbvlE2XXrJbbrYBYJtwFJ1+0EhbtrSxh12aRBeZ
- ndSbRb1T1HC8SEviengXDBapDAjq3Eo=
-X-Google-Smtp-Source: ABdhPJxYcTZDdnNgTntYrnEdWNaWDVzRwcJjFoDiNqaWBCIpO2i8QPifcl1dDVTPqKQAlZ5ZNXWuRg==
-X-Received: by 2002:a17:90a:ae11:: with SMTP id
- t17mr11042311pjq.157.1592201797965; 
- Sun, 14 Jun 2020 23:16:37 -0700 (PDT)
-Received: from google.com (124.190.199.35.bc.googleusercontent.com.
- [35.199.190.124])
- by smtp.gmail.com with ESMTPSA id 27sm11621381pjg.19.2020.06.14.23.16.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jun 2020 23:16:37 -0700 (PDT)
-Date: Mon, 15 Jun 2020 06:16:33 +0000
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200615061633.GA23467@google.com>
-References: <1592193588-21701-1-git-send-email-stummala@codeaurora.org>
- <20200615050019.GA3100@sol.localdomain>
+ h=Sender:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:
+ To:From:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=NM9B5cLok6jXcY4Ox9DT1pLFN5xhmuT2OpZKyoOfihM=; b=h
+ kbWQEor95zVla75aQt+qLvZNqDZVy7/XCJZUyq2Yj7o6nW5hMuWAcwvsvbzYqTeMO3Um5RNsWLjmH
+ oM4OaV7oX/dHuamh9Np7xyh3TdPYibCRXuNEc5Yj0SAwlcdXjR08+0RysbbQIOgEyRGXYoukkKLbb
+ 3MXbcDehO0ynsqLs=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jkity-0030dS-1V
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 06:47:27 +0000
+Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de
+ [95.90.213.197])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 75D7A2074D;
+ Mon, 15 Jun 2020 06:47:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592203635;
+ bh=GF2Otkk8GeL8AnPZYKuZzCwG9PVKg5Z7DVVHgebQ7f0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=fkfERACX/KYWbqRV8t7NVva9Lz8x+VqHnC1VM5w/C1EyVHebhNifzo3dQ171xOJrK
+ ObPfrHwHwEruPskgn2YnHQnGtDn4XjWbifORQiGr9U4Hg5yLGrpHKAr1xeGQuJNFXe
+ zUj9yUXIVup3rTuDe9+3oIQlqZcYnzoQlAjH9YrI=
+Received: from mchehab by mail.kernel.org with local (Exim 4.93)
+ (envelope-from <mchehab@kernel.org>)
+ id 1jkith-009nlx-C3; Mon, 15 Jun 2020 08:47:09 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Date: Mon, 15 Jun 2020 08:46:39 +0200
+Message-Id: <cover.1592203542.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200615050019.GA3100@sol.localdomain>
-X-Spam-Score: -15.6 (---------------)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.194 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
-X-Headers-End: 1jkiXI-0067Pt-Gc
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix use-after-free when accessing
- bio->bi_crypt_context
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jkity-0030dS-1V
+Subject: [f2fs-dev] [PATCH 00/29] Documentation fixes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,197 +84,186 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Satya Tangirala via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Satya Tangirala <satyat@google.com>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.or,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Linus Walleij <linus.walleij@linaro.org>, dri-devel@lists.freedesktop.org,
+ Paul Mackerras <paulus@samba.org>, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>, linux-arch@vger.kernel.org,
+ Mike Snitzer <snitzer@redhat.com>,
+ Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, kasan-dev@googlegroups.com,
+ Ingo Molnar <mingo@redhat.com>, Alan Stern <stern@rowland.harvard.edu>,
+ NXP Linux Team <linux-imx@nxp.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Thomas Gleixner <tglx@linutronix.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ linux-spi@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
+ David Airlie <airlied@linux.ie>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Eric Dumazet <edumazet@google.com>, keyrings@vger.kernel.org,
+ Shuah Khan <shuah@kernel.org>, Alasdair Kergon <agk@redhat.com>,
+ Daniel Kiss <daniel.kiss@arm.com>, Stephen Rothwell <sfr@canb.auug.org.au>,
+ Fabio Estevam <festevam@gmail.com>, Helge Deller <deller@gmx.de>,
+ linux-rockchip@lists.infradead.org, linux-media@vger.kernel.org,
+ Andrea Parri <parri.andrea@gmail.com>, linux-arm-msm@vger.kernel.org,
+ Sean Wang <sean.wang@mediatek.com>, linux-gpio@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
+ Tony Luck <tony.luck@intel.com>, dm-devel@redhat.com,
+ Alexey Gladkov <gladkov.alexey@gmail.com>,
+ Arnaud Pouliquen <arnaud.pouliquen@st.com>, Sandy Huang <hjc@rock-chips.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-renesas-soc@vger.kernel.org,
+ "Eric W. Biederman" <ebiederm@xmission.com>,
+ Mike Kravetz <mike.kravetz@oracle.com>, linux-pci@vger.kernel.org,
+ Akira Yokosawa <akiyks@gmail.com>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+ Dave Hansen <dave.hansen@intel.com>, linux-kselftest@vger.kernel.org,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Sukadev Bhattiprolu <sukadev@linux.ibm.com>, Will Deacon <will@kernel.org>,
+ Florian Fainelli <f.fainelli@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Haren Myneni <haren@linux.ibm.com>,
+ Gerald Schaefer <gerald.schaefer@de.ibm.com>,
+ Federico Vaga <federico.vaga@vaga.pv.it>, Jade Alglave <j.alglave@ucl.ac.uk>,
+ Alexey Dobriyan <adobriyan@gmail.com>, Fenghua Yu <fenghua.yu@intel.com>,
+ Marco Elver <elver@google.com>, Kees Cook <keescook@chromium.org>,
+ Josh Triplett <josh@joshtriplett.org>, Steven Rostedt <rostedt@goodmis.org>,
+ rcu@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Luc Maranget <luc.maranget@inria.fr>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
+ Jeff Layton <jlayton@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ iommu@lists.linux-foundation.org, netdev@vger.kernel.org,
+ Shawn Guo <shawnguo@kernel.org>, "David S. Miller" <davem@davemloft.net>,
+ Thiago Jung Bauermann <bauerman@linux.ibm.com>, Jan Kara <jack@suse.cz>,
+ "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ Sandipan Das <sandipan@linux.ibm.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, x86@kernel.org,
+ Russell King <linux@armlinux.org.uk>, Andy Gross <agross@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>,
+ devicetree@vger.kernel.org, Philipp Zabel <p.zabel@pengutronix.de>,
+ "Paul E. McKenney" <paulmck@kernel.org>, Daniel Lustig <dlustig@nvidia.com>,
+ Lubomir Rintel <lkundrak@v3.sk>, Rob Herring <robh+dt@kernel.org>,
+ linux-mediatek@lists.infradead.org, Matthias Brugger <matthias.bgg@gmail.com>,
+ Dmitry Vyukov <dvyukov@google.com>, Robin Murphy <robin.murphy@arm.com>,
+ Akira Shimahara <akira215corp@gmail.com>, linux-mips@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+ Borislav Petkov <bp@alien8.de>, linuxppc-dev@lists.ozlabs.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Jun 14, 2020 at 10:00:19PM -0700, Eric Biggers wrote:
-> On Mon, Jun 15, 2020 at 09:29:48AM +0530, Sahitya Tummala wrote:
-> > There could be a potential race between these two paths below,
-> > leading to use-after-free when accessing bio->bi_crypt_context.
-> > 
-> > f2fs_write_cache_pages
-> > ->f2fs_do_write_data_page on page#1
-> >   ->f2fs_inplace_write_data
-> >     ->f2fs_merge_page_bio
-> >       ->add_bio_entry
-> > ->f2fs_do_write_data_page on page#2
-> >   ->f2fs_inplace_write_data
-> >     ->f2fs_merge_page_bio
-> >       ->f2fs_crypt_mergeable_bio
-> >         ->fscrypt_mergeable_bio
-> >   				       f2fs_write_begin on page#1
-> > 				       ->f2fs_wait_on_page_writeback
-> > 				         ->f2fs_submit_merged_ipu_write
-> > 					   ->__submit_bio
-> > 					The bio gets completed, calling
-> > 					bio_endio
-> > 					->bio_uninit
-> > 					  ->bio_crypt_free_ctx
-> > 	  ->use-after-free issue
-> > 
-> > Fix this by moving f2fs_crypt_mergeable_bio() check within
-> > add_ipu_page() so that it's done under bio_list_lock to prevent
-> > the above race.
-> > 
-> > Fixes: 15e76ad23e72 ("f2fs: add inline encryption support")
-> > Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> > ---
-> > This fix is rebased to the tip of fscrypt git -
-> > https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
-> > branch - inline-encryption
-> > 
-> >  fs/f2fs/data.c | 26 ++++++++++++++++++--------
-> >  1 file changed, 18 insertions(+), 8 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 0dfa8d3..3b53554 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -762,9 +762,10 @@ static void del_bio_entry(struct bio_entry *be)
-> >  	kmem_cache_free(bio_entry_slab, be);
-> >  }
-> >  
-> > -static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
-> > -							struct page *page)
-> > +static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
-> > +				struct page *page, int *bio_needs_submit)
-> >  {
-> > +	struct f2fs_sb_info *sbi = fio->sbi;
-> >  	enum temp_type temp;
-> >  	bool found = false;
-> >  	int ret = -EAGAIN;
-> > @@ -780,6 +781,15 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
-> >  				continue;
-> >  
-> >  			found = true;
-> > +			if (*bio && (!page_is_mergeable(sbi, *bio,
-> > +					*fio->last_block, fio->new_blkaddr) ||
-> > +				    !f2fs_crypt_mergeable_bio(*bio,
-> > +					  fio->page->mapping->host,
-> > +					  fio->page->index, fio))) {
-> > +				ret = 0;
-> > +				*bio_needs_submit = 1;
-> > +				break;
-> > +			}
-> >  
-> >  			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
-> >  							PAGE_SIZE) {
-> > @@ -864,6 +874,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
-> >  	struct bio *bio = *fio->bio;
-> >  	struct page *page = fio->encrypted_page ?
-> >  			fio->encrypted_page : fio->page;
-> > +	int bio_needs_submit = 0;
-> >  
-> >  	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
-> >  			__is_meta_io(fio) ? META_GENERIC : DATA_GENERIC))
-> > @@ -872,11 +883,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
-> >  	trace_f2fs_submit_page_bio(page, fio);
-> >  	f2fs_trace_ios(fio, 0);
-> >  
-> > -	if (bio && (!page_is_mergeable(fio->sbi, bio, *fio->last_block,
-> > -				       fio->new_blkaddr) ||
-> > -		    !f2fs_crypt_mergeable_bio(bio, fio->page->mapping->host,
-> > -					      fio->page->index, fio)))
-> > -		f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
-> >  alloc_new:
-> >  	if (!bio) {
-> >  		bio = __bio_alloc(fio, BIO_MAX_PAGES);
-> > @@ -886,8 +892,12 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
-> >  
-> >  		add_bio_entry(fio->sbi, bio, page, fio->temp);
-> >  	} else {
-> > -		if (add_ipu_page(fio->sbi, &bio, page))
-> > +		if (add_ipu_page(fio, &bio, page, &bio_needs_submit))
-> > +			goto alloc_new;
-> > +		if (bio_needs_submit) {
-> > +			f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
-> >  			goto alloc_new;
-> > +		}
-> >  	}
-> >  
-> >  	if (fio->io_wbc)
-> 
-> Thanks, I'm still trying to understand this part of the code, but it's looking
-> like this is a real bug.  Do you also have a reproducer that produces a KASAN
-> report, or did you find this another way?
-> 
-> One comment: add_ipu_page() already submits the bio if it's full.  Wouldn't it
-> be better to use that instead of f2fs_submit_merged_ipu_write()?  I.e.:
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index e9dcda80e599..d7a51dbe208b 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -762,9 +762,10 @@ static void del_bio_entry(struct bio_entry *be)
->  	kmem_cache_free(bio_entry_slab, be);
->  }
->  
-> -static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
-> +static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
->  							struct page *page)
->  {
-> +	struct f2fs_sb_info *sbi = fio->sbi;
->  	enum temp_type temp;
->  	bool found = false;
->  	int ret = -EAGAIN;
-> @@ -780,14 +781,18 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
->  				continue;
->  
->  			found = true;
-> -
-> -			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
-> -							PAGE_SIZE) {
-> +			if (page_is_mergeable(sbi, *bio, *fio->last_block,
-> +					      fio->new_blkaddr) &&
-> +			    f2fs_crypt_mergeable_bio(*bio,
-> +						      fio->page->mapping->host,
-> +						      fio->page->index, fio) &&
-> +			    bio_add_page(*bio, page,
-> +					 PAGE_SIZE, 0) == PAGE_SIZE) {
->  				ret = 0;
->  				break;
->  			}
->  
-> -			/* bio is full */
-> +			/* page can't be merged into bio; submit the bio */
->  			del_bio_entry(be);
->  			__submit_bio(sbi, *bio, DATA);
->  			break;
-> @@ -872,11 +877,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
->  	trace_f2fs_submit_page_bio(page, fio);
->  	f2fs_trace_ios(fio, 0);
->  
-> -	if (bio && (!page_is_mergeable(fio->sbi, bio, *fio->last_block,
-> -				       fio->new_blkaddr) ||
-> -		    !f2fs_crypt_mergeable_bio(bio, fio->page->mapping->host,
-> -					      fio->page->index, fio)))
-> -		f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
->  alloc_new:
->  	if (!bio) {
->  		bio = __bio_alloc(fio, BIO_MAX_PAGES);
-> @@ -886,7 +886,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
->  
->  		add_bio_entry(fio->sbi, bio, page, fio->temp);
->  	} else {
-> -		if (add_ipu_page(fio->sbi, &bio, page))
-> +		if (add_ipu_page(fio, &bio, page))
->  			goto alloc_new;
->  	}
->  
-Thanks a lot for looking into this Sahitya! After reading the ipu code,
-I do think it's a bug. Regarding the patch itself, I was going to type
-out basically the same suggestion as Eric, so I definitely second his
-proposal :).
+Hi Jon,
 
-Should I fold this change into the original patch? Or keep it as a
-separate patch when I send out the fscrypt/f2fs inline encryption
-patches?
+That's a bunch of files I have to be applied on the top of v5.8-rc1 fixing
+documentation warnings. I already removed some duplicated stuff.
+
+Regards,
+Mauro
+
+Mauro Carvalho Chehab (29):
+  mm: vmalloc.c: remove a kernel-doc annotation from a removed parameter
+  net: dev: add a missing kernel-doc annotation
+  net: netdevice.h: add a description for napi_defer_hard_irqs
+  scripts/kernel-doc: parse __ETHTOOL_DECLARE_LINK_MODE_MASK
+  net: pylink.h: add kernel-doc descriptions for new fields at
+    phylink_config
+  scripts/kernel-doc: handle function pointer prototypes
+  fs: fs.h: fix a kernel-doc parameter description
+  gpio: driver.h: fix kernel-doc markup
+  kcsan: fix a kernel-doc warning
+  rcu: fix some kernel-doc warnings
+  fs: docs: f2fs.rst: fix a broken table
+  dt: update a reference for reneases pcar file renamed to yaml
+  dt: fix broken links due to txt->yaml renames
+  dt: Fix broken references to renamed docs
+  dt: fix reference to olpc,xo1.75-ec.txt
+  selftests/vm/keys: fix a broken reference at protection_keys.c
+  docs: hugetlbpage.rst: fix some warnings
+  docs: powerpc: fix some issues at vas-api.rst
+  docs: driver-model: remove a duplicated markup at driver.rst
+  docs: watch_queue.rst: supress some Sphinx warnings and move to
+    core-api
+  docs: device-mapper: add dm-ebs.rst to an index file
+  docs: it_IT: add two missing references
+  docs: ABI: fix a typo when pointing to w1-generic.rst
+  docs: fs: locking.rst: fix a broken table
+  docs: add bus-virt-phys-mapping.txt to core-api
+  docs: fix references for DMA*.txt files
+  docs: dt: minor adjustments at writing-schema.rst
+  docs: fs: proc.rst: fix a warning due to a merge conflict
+  docs: fs: proc.rst: convert a new chapter to ReST
+
+ .../ABI/testing/sysfs-driver-w1_therm         |   2 +-
+ Documentation/PCI/pci.rst                     |   6 +-
+ .../admin-guide/device-mapper/index.rst       |   1 +
+ Documentation/admin-guide/mm/hugetlbpage.rst  |  25 ++-
+ Documentation/block/biodoc.rst                |   2 +-
+ .../bus-virt-phys-mapping.rst}                |   2 +-
+ Documentation/core-api/dma-api.rst            |   6 +-
+ Documentation/core-api/dma-isa-lpc.rst        |   2 +-
+ Documentation/core-api/index.rst              |   2 +
+ Documentation/{ => core-api}/watch_queue.rst  |  34 ++--
+ .../bindings/arm/freescale/fsl,scu.txt        |   2 +-
+ .../bindings/display/bridge/sii902x.txt       |   2 +-
+ .../bindings/display/imx/fsl-imx-drm.txt      |   4 +-
+ .../devicetree/bindings/display/imx/ldb.txt   |   4 +-
+ .../display/rockchip/rockchip-drm.yaml        |   2 +-
+ .../bindings/misc/olpc,xo1.75-ec.txt          |   2 +-
+ .../bindings/net/mediatek-bluetooth.txt       |   2 +-
+ .../bindings/pinctrl/renesas,pfc-pinctrl.txt  |   2 +-
+ .../bindings/sound/audio-graph-card.txt       |   2 +-
+ .../bindings/sound/st,sti-asoc-card.txt       |   2 +-
+ .../bindings/spi/qcom,spi-geni-qcom.txt       |   2 +-
+ Documentation/devicetree/writing-schema.rst   |   9 +-
+ .../driver-api/driver-model/driver.rst        |   2 -
+ Documentation/driver-api/usb/dma.rst          |   6 +-
+ Documentation/filesystems/f2fs.rst            | 150 ++++++++++++------
+ Documentation/filesystems/locking.rst         |   6 +-
+ Documentation/filesystems/proc.rst            |  46 +++---
+ Documentation/memory-barriers.txt             |   6 +-
+ Documentation/mips/ingenic-tcu.rst            |   2 +-
+ Documentation/powerpc/vas-api.rst             |  23 ++-
+ Documentation/security/keys/core.rst          |   2 +-
+ .../it_IT/process/management-style.rst        |   2 +
+ .../it_IT/process/submitting-patches.rst      |   2 +
+ .../translations/ko_KR/memory-barriers.txt    |   6 +-
+ MAINTAINERS                                   |   8 +-
+ arch/ia64/hp/common/sba_iommu.c               |  12 +-
+ arch/parisc/kernel/pci-dma.c                  |   2 +-
+ arch/x86/include/asm/dma-mapping.h            |   4 +-
+ arch/x86/kernel/amd_gart_64.c                 |   2 +-
+ drivers/parisc/sba_iommu.c                    |  14 +-
+ include/linux/dma-mapping.h                   |   2 +-
+ include/linux/fs.h                            |   2 +-
+ include/linux/gpio/driver.h                   |   2 +-
+ include/linux/kcsan-checks.h                  |  10 +-
+ include/linux/netdevice.h                     |   2 +
+ include/linux/phylink.h                       |   4 +
+ include/linux/rculist.h                       |   2 +-
+ include/linux/watch_queue.h                   |   2 +-
+ include/media/videobuf-dma-sg.h               |   2 +-
+ init/Kconfig                                  |   2 +-
+ kernel/dma/debug.c                            |   2 +-
+ kernel/watch_queue.c                          |   2 +-
+ mm/vmalloc.c                                  |   1 -
+ net/core/dev.c                                |   1 +
+ scripts/kernel-doc                            |   7 +
+ tools/testing/selftests/vm/protection_keys.c  |   2 +-
+ 56 files changed, 282 insertions(+), 175 deletions(-)
+ rename Documentation/{bus-virt-phys-mapping.txt => core-api/bus-virt-phys-mapping.rst} (99%)
+ rename Documentation/{ => core-api}/watch_queue.rst (94%)
+
+-- 
+2.26.2
+
+
 
 
 _______________________________________________
