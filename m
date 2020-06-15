@@ -2,68 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C3551F8CCD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 06:01:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D32FA1F8D31
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 07:00:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jkgJM-0004Ao-7a; Mon, 15 Jun 2020 04:01:28 +0000
+	id 1jkhEh-0007N3-9Y; Mon, 15 Jun 2020 05:00:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yanaijie@huawei.com>) id 1jkgJI-0004Ae-RC
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 04:01:24 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jkhEe-0007Mn-Mu
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 05:00:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PGFCrrXVfzFkAUpAWBNqrpgn3P4kdd0msJucARoOQ5g=; b=OKPeKj4TwoKRFozo87TY/X46WQ
- Xd1iqP47dyY519dz9Zf4Zbopr+yb69aEwMouWkbIOPB6xRJizHa0MQyAX9MP7epUtq3ylnDqP65Mh
- yhvRSWj6XClJjj8mADsjZhCLRNob964e3cGae6RrSkDsy0KD/zMQUiVrc4muXE6EllO0=;
+ bh=JeBseYSLxlDSsJUkriYbXB0ZdWbK1dnXJhY+Vgsw+mE=; b=URWsgOc9rE+snnJUxO3qZ1omGH
+ 4XoG5KX/twUpDJZxZbSZtMm0lXKGd7YwkBY4yToFz4Cd1sa/umZV6YL0TMZHO+pa1icMMtG7cyoYS
+ VGuNS+cSwtTGsqQrv18vAPHhO2risWxdGALKqb0zD7mn+Rau/3oge/fJVcGHRRfUoLas=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=PGFCrrXVfzFkAUpAWBNqrpgn3P4kdd0msJucARoOQ5g=; b=G
- znetlscnkgt5Aeab3rqnW01rCOB6Rhoi9KrRkZU4X8dQ0XZ+juQSs4Oz+EXQWYO3gY12OQYUqUmeU
- Wz7wO5EmWoWvmFTm89WGH7LmcpaaUhtZD24mJtD/rGmHrf+05FZrxEazXUmBp58k1R1M6cz7P3iGS
- 4nkxP2F+F4qGDa9M=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JeBseYSLxlDSsJUkriYbXB0ZdWbK1dnXJhY+Vgsw+mE=; b=lYwDUwil5Kpynd0RArgjRGY56U
+ 1PxxuMyeFbHPXgZC2g7I16PUYEEP3aPoUGQE4trCxiCm56iv4Kz2HLLI6IazmwRSwIfbJGqX1pSHl
+ 2ljuoVfUnAmWDFE4MvDtOxRxuvQ+P10dyaP4TEAWXIvLRJyVtx7eqe55Uw2rgzMHDQ1Q=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jkgJG-0031Gz-Qx
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 04:01:24 +0000
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 19F9550E8D3BCF69A728;
- Mon, 15 Jun 2020 12:01:02 +0800 (CST)
-Received: from huawei.com (10.175.127.227) by DGGEMS406-HUB.china.huawei.com
- (10.3.19.206) with Microsoft SMTP Server id 14.3.487.0; Mon, 15 Jun 2020
- 12:00:53 +0800
-From: Jason Yan <yanaijie@huawei.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
-Date: Mon, 15 Jun 2020 12:02:12 +0800
-Message-ID: <20200615040212.3681503-1-yanaijie@huawei.com>
-X-Mailer: git-send-email 2.25.4
+ id 1jkhEc-0062TH-Gw
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 05:00:40 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D550420679;
+ Mon, 15 Jun 2020 05:00:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592197221;
+ bh=dlRSD7KUddKDHdGp8MMwoC0K8/oR6aMNFG3417RecFg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=0d/igJr7Zl9t8AMvUgeVQqag7FjglJsBPk6Q/gUbtjxvmdkpjZ9arRZIwPf0xensf
+ ACQkVUCroO+mnQHpW+62JlUaNxksZSjcYZn628T3tly92WUnLTAgS0F2gVGeMbcajv
+ yhtkZJENHX23Uf/kf241NaSsS1DXDX2gzNuhjZpE=
+Date: Sun, 14 Jun 2020 22:00:19 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Sahitya Tummala <stummala@codeaurora.org>
+Message-ID: <20200615050019.GA3100@sol.localdomain>
+References: <1592193588-21701-1-git-send-email-stummala@codeaurora.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.127.227]
-X-CFilter-Loop: Reflected
+Content-Disposition: inline
+In-Reply-To: <1592193588-21701-1-git-send-email-stummala@codeaurora.org>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jkgJG-0031Gz-Qx
-Subject: [f2fs-dev] [PATCH] f2fs: Eliminate usage of uninitialized_var()
- macro
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jkhEc-0062TH-Gw
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix use-after-free when accessing
+ bio->bi_crypt_context
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,52 +84,185 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jason Yan <yanaijie@huawei.com>, Kees Cook <keescook@chromium.org>,
- kernel-hardening@lists.openwall.com
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.or,
+ linux-f2fs-devel@lists.sourceforge.net, Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is an effort to eliminate the uninitialized_var() macro[1].
+On Mon, Jun 15, 2020 at 09:29:48AM +0530, Sahitya Tummala wrote:
+> There could be a potential race between these two paths below,
+> leading to use-after-free when accessing bio->bi_crypt_context.
+> 
+> f2fs_write_cache_pages
+> ->f2fs_do_write_data_page on page#1
+>   ->f2fs_inplace_write_data
+>     ->f2fs_merge_page_bio
+>       ->add_bio_entry
+> ->f2fs_do_write_data_page on page#2
+>   ->f2fs_inplace_write_data
+>     ->f2fs_merge_page_bio
+>       ->f2fs_crypt_mergeable_bio
+>         ->fscrypt_mergeable_bio
+>   				       f2fs_write_begin on page#1
+> 				       ->f2fs_wait_on_page_writeback
+> 				         ->f2fs_submit_merged_ipu_write
+> 					   ->__submit_bio
+> 					The bio gets completed, calling
+> 					bio_endio
+> 					->bio_uninit
+> 					  ->bio_crypt_free_ctx
+> 	  ->use-after-free issue
+> 
+> Fix this by moving f2fs_crypt_mergeable_bio() check within
+> add_ipu_page() so that it's done under bio_list_lock to prevent
+> the above race.
+> 
+> Fixes: 15e76ad23e72 ("f2fs: add inline encryption support")
+> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> ---
+> This fix is rebased to the tip of fscrypt git -
+> https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
+> branch - inline-encryption
+> 
+>  fs/f2fs/data.c | 26 ++++++++++++++++++--------
+>  1 file changed, 18 insertions(+), 8 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 0dfa8d3..3b53554 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -762,9 +762,10 @@ static void del_bio_entry(struct bio_entry *be)
+>  	kmem_cache_free(bio_entry_slab, be);
+>  }
+>  
+> -static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+> -							struct page *page)
+> +static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+> +				struct page *page, int *bio_needs_submit)
+>  {
+> +	struct f2fs_sb_info *sbi = fio->sbi;
+>  	enum temp_type temp;
+>  	bool found = false;
+>  	int ret = -EAGAIN;
+> @@ -780,6 +781,15 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+>  				continue;
+>  
+>  			found = true;
+> +			if (*bio && (!page_is_mergeable(sbi, *bio,
+> +					*fio->last_block, fio->new_blkaddr) ||
+> +				    !f2fs_crypt_mergeable_bio(*bio,
+> +					  fio->page->mapping->host,
+> +					  fio->page->index, fio))) {
+> +				ret = 0;
+> +				*bio_needs_submit = 1;
+> +				break;
+> +			}
+>  
+>  			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
+>  							PAGE_SIZE) {
+> @@ -864,6 +874,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  	struct bio *bio = *fio->bio;
+>  	struct page *page = fio->encrypted_page ?
+>  			fio->encrypted_page : fio->page;
+> +	int bio_needs_submit = 0;
+>  
+>  	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
+>  			__is_meta_io(fio) ? META_GENERIC : DATA_GENERIC))
+> @@ -872,11 +883,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  	trace_f2fs_submit_page_bio(page, fio);
+>  	f2fs_trace_ios(fio, 0);
+>  
+> -	if (bio && (!page_is_mergeable(fio->sbi, bio, *fio->last_block,
+> -				       fio->new_blkaddr) ||
+> -		    !f2fs_crypt_mergeable_bio(bio, fio->page->mapping->host,
+> -					      fio->page->index, fio)))
+> -		f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
+>  alloc_new:
+>  	if (!bio) {
+>  		bio = __bio_alloc(fio, BIO_MAX_PAGES);
+> @@ -886,8 +892,12 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  
+>  		add_bio_entry(fio->sbi, bio, page, fio->temp);
+>  	} else {
+> -		if (add_ipu_page(fio->sbi, &bio, page))
+> +		if (add_ipu_page(fio, &bio, page, &bio_needs_submit))
+> +			goto alloc_new;
+> +		if (bio_needs_submit) {
+> +			f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
+>  			goto alloc_new;
+> +		}
+>  	}
+>  
+>  	if (fio->io_wbc)
 
-The use of this macro is the wrong solution because it forces off ANY
-analysis by the compiler for a given variable. It even masks "unused
-variable" warnings.
+Thanks, I'm still trying to understand this part of the code, but it's looking
+like this is a real bug.  Do you also have a reproducer that produces a KASAN
+report, or did you find this another way?
 
-Quoted from Linus[2]:
-
-"It's a horrible thing to use, in that it adds extra cruft to the
-source code, and then shuts up a compiler warning (even the _reliable_
-warnings from gcc)."
-
-The gcc option "-Wmaybe-uninitialized" has been disabled and this change
-will not produce any warnnings even with "make W=1".
-
-[1] https://github.com/KSPP/linux/issues/81
-[2] https://lore.kernel.org/lkml/CA+55aFz2500WfbKXAx8s67wrm9=yVJu65TpLgN_ybYNv0VEOKA@mail.gmail.com/
-
-Cc: Kees Cook <keescook@chromium.org>
-Signed-off-by: Jason Yan <yanaijie@huawei.com>
----
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+One comment: add_ipu_page() already submits the bio if it's full.  Wouldn't it
+be better to use that instead of f2fs_submit_merged_ipu_write()?  I.e.:
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 326c63879ddc..e6ec61274d76 100644
+index e9dcda80e599..d7a51dbe208b 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2856,7 +2856,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
- 	};
- #endif
- 	int nr_pages;
--	pgoff_t uninitialized_var(writeback_index);
-+	pgoff_t writeback_index;
- 	pgoff_t index;
- 	pgoff_t end;		/* Inclusive */
- 	pgoff_t done_index;
--- 
-2.25.4
-
+@@ -762,9 +762,10 @@ static void del_bio_entry(struct bio_entry *be)
+ 	kmem_cache_free(bio_entry_slab, be);
+ }
+ 
+-static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
++static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+ 							struct page *page)
+ {
++	struct f2fs_sb_info *sbi = fio->sbi;
+ 	enum temp_type temp;
+ 	bool found = false;
+ 	int ret = -EAGAIN;
+@@ -780,14 +781,18 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+ 				continue;
+ 
+ 			found = true;
+-
+-			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
+-							PAGE_SIZE) {
++			if (page_is_mergeable(sbi, *bio, *fio->last_block,
++					      fio->new_blkaddr) &&
++			    f2fs_crypt_mergeable_bio(*bio,
++						      fio->page->mapping->host,
++						      fio->page->index, fio) &&
++			    bio_add_page(*bio, page,
++					 PAGE_SIZE, 0) == PAGE_SIZE) {
+ 				ret = 0;
+ 				break;
+ 			}
+ 
+-			/* bio is full */
++			/* page can't be merged into bio; submit the bio */
+ 			del_bio_entry(be);
+ 			__submit_bio(sbi, *bio, DATA);
+ 			break;
+@@ -872,11 +877,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+ 	trace_f2fs_submit_page_bio(page, fio);
+ 	f2fs_trace_ios(fio, 0);
+ 
+-	if (bio && (!page_is_mergeable(fio->sbi, bio, *fio->last_block,
+-				       fio->new_blkaddr) ||
+-		    !f2fs_crypt_mergeable_bio(bio, fio->page->mapping->host,
+-					      fio->page->index, fio)))
+-		f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
+ alloc_new:
+ 	if (!bio) {
+ 		bio = __bio_alloc(fio, BIO_MAX_PAGES);
+@@ -886,7 +886,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+ 
+ 		add_bio_entry(fio->sbi, bio, page, fio->temp);
+ 	} else {
+-		if (add_ipu_page(fio->sbi, &bio, page))
++		if (add_ipu_page(fio, &bio, page))
+ 			goto alloc_new;
+ 	}
+ 
 
 
 _______________________________________________
