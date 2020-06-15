@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 647981F9413
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 11:57:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E91D1F945B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 12:11:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jkls9-0004SA-1C; Mon, 15 Jun 2020 09:57:45 +0000
+	id 1jkm5p-0008Vi-0x; Mon, 15 Jun 2020 10:11:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1jkls7-0004Rt-NV
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 09:57:43 +0000
+ id 1jkm5n-0008VU-Ji
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 10:11:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x4pbcEfTHQQiuFcc3iK26RbpCmgWr/+nQ32We6j78BY=; b=jX1rsUMbTXk2dHmXHwNyQ55UuT
- 41yPMqPKoNsGK6ENQXINJcJAWm50vwKu7nAesuWsfMWmXpq0CTrnhgkPHSdc7Byx4Ax6tDNcvPbuo
- v0kMOdxMf1Sd/9CLj3xNECD1SbfThMx56w/YcGwCMdFFCW3Pn5qYpzu+jUito6/clBiw=;
+ bh=dLNkkb4smtmoselpWMZR4QCq3/ssl+2heJjtaJdJDAo=; b=iNRMDuqWOfVHHAF9XlUxHlDsUd
+ DeSNXXV9ybKLkD1DkyBLS1jT6+BAqc0FJv/Cl1zNBuLhPQnxL1xsBB1rEl+qTrIrL6GPhAS6zwaAm
+ gob226fKxYSa8xO8iFa9uHFMQ4/02i3s5LcOn/o44AszHc84sweiyVXBP1uzRhvcQpIE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=x4pbcEfTHQQiuFcc3iK26RbpCmgWr/+nQ32We6j78BY=; b=YKk+VBbQWTZiWXQsRmdrAjcaMN
- nYL8xVDb00tQF20Lgk7TxsUDbPZ3uC3NOa2XM99ShoK7Mq+5L7bUzFJGlyqRhZzvCRdNYWrN9qpOl
- KBobm93xcYIHlyKg5VTu9AyhYFuitxQkHaDoo6+TlWc7dpZx/MDQEaqGVFdX0faFe4ic=;
+ bh=dLNkkb4smtmoselpWMZR4QCq3/ssl+2heJjtaJdJDAo=; b=GGhtxOEz8OOM5nrCdptlbegYY2
+ pcq/Ysb4IZbL2l6Z5tQtHfHM/z87U8PS0OM9254c4cklmx7WFhvoL/lPYRu37s2s1uL/X51PqhPjt
+ 1DhoYrMowkEODyrOEaqnN/zTil/3JAZ/3LaA3RkXwyhrNnPnRm1iOaedkstk/Sb6L8kQ=;
 Received: from mail27.static.mailgun.info ([104.130.122.27])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jkls6-006M0Q-9W
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 09:57:43 +0000
+ id 1jkm5k-003Gq8-1m
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 10:11:51 +0000
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
  q=dns/txt; 
- s=smtp; t=1592215062; h=Message-Id: Date: Subject: Cc: To: From:
- Sender; bh=x4pbcEfTHQQiuFcc3iK26RbpCmgWr/+nQ32We6j78BY=;
- b=dY7sb1ZloJSCE/gImGKORLDNJw6LyPhh8XWVlnzocEZrrlwoQJPGnLwuxxmT1g0FfV3wG1Ku
- Ngmi4ekNxklYWTXld3VXG9c5a8P5aclIPEPtb8CzJCH6fke940o3lc3a1ETvxoIzhqX3T3iw
- gr+v+Ceik6JBuKkmOoVYzLb+VIA=
+ s=smtp; t=1592215910; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=dLNkkb4smtmoselpWMZR4QCq3/ssl+2heJjtaJdJDAo=;
+ b=manFQp7MR61RYPxzWd9CVQBkMKXu2iH1Wai7eI90GpIohTWjJFZvZX82iW6QDvpBaUMuZQrU
+ xi32IHRzFIe4Gjvoe87JDXoywTYZqS2aHX9DkQtgLlMTBrFX9nu02gQPYKW1SsLNED52L4hP
+ NtcwQxUV7bi+Hj07bLFtBWEh21Y=
 X-Mailgun-Sending-Ip: 104.130.122.27
 X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
 Received: from smtp.codeaurora.org
  (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n13.prod.us-east-1.postgun.com with SMTP id
- 5ee7460c86de6ccd443739db (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 15 Jun 2020 09:57:32
+ smtp-out-n04.prod.us-west-2.postgun.com with SMTP id
+ 5ee7495aad153efa3416ae4b (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 15 Jun 2020 10:11:38
  GMT
 Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 584B9C433C8; Mon, 15 Jun 2020 09:57:31 +0000 (UTC)
+ id 04021C43387; Mon, 15 Jun 2020 10:11:37 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
  aws-us-west-2-caf-mail-1.web.codeaurora.org
 X-Spam-Level: 
@@ -65,9 +65,9 @@ Received: from codeaurora.org
  (blr-c-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.19.19])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 40C02C433CA;
- Mon, 15 Jun 2020 09:57:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 40C02C433CA
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id E5B0BC433CA;
+ Mon, 15 Jun 2020 10:11:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org E5B0BC433CA
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
  dmarc=none (p=none dis=none) header.from=codeaurora.org
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
@@ -76,24 +76,24 @@ From: Sahitya Tummala <stummala@codeaurora.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
  Eric Biggers <ebiggers@kernel.org>, Satya Tangirala <satyat@google.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 15 Jun 2020 15:27:15 +0530
-Message-Id: <1592215035-27365-1-git-send-email-stummala@codeaurora.org>
+Date: Mon, 15 Jun 2020 15:41:27 +0530
+Message-Id: <1592215887-2744-1-git-send-email-stummala@codeaurora.org>
 X-Mailer: git-send-email 1.9.1
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
  trust [104.130.122.27 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
  [104.130.122.27 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jkls6-006M0Q-9W
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix use-after-free when accessing
+X-Headers-End: 1jkm5k-003Gq8-1m
+Subject: [f2fs-dev] [PATCH v3] f2fs: fix use-after-free when accessing
  bio->bi_crypt_context
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -142,15 +142,18 @@ the above race.
 Fixes: 15e76ad23e72 ("f2fs: add inline encryption support")
 Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
 ---
+v3:
+  - remove duplicate bio_add_page(), which was missed in v2 by mistake
+
 v2:
   - simplify the logic as per Eric's suggestion to submit the bio in
     add_ipu_page() itself instead of using f2fs_submit_merged_ipu_write()
 
- fs/f2fs/data.c | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
+ fs/f2fs/data.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 0dfa8d3..9710555 100644
+index 0dfa8d3..ea543f6 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
 @@ -762,9 +762,10 @@ static void del_bio_entry(struct bio_entry *be)
@@ -165,10 +168,13 @@ index 0dfa8d3..9710555 100644
  	enum temp_type temp;
  	bool found = false;
  	int ret = -EAGAIN;
-@@ -780,6 +781,16 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+@@ -780,14 +781,18 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
  				continue;
  
  			found = true;
+-
+-			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
+-							PAGE_SIZE) {
 +			if (page_is_mergeable(sbi, *bio, *fio->last_block,
 +						fio->new_blkaddr) &&
 +			    f2fs_crypt_mergeable_bio(*bio,
@@ -176,13 +182,7 @@ index 0dfa8d3..9710555 100644
 +						    fio->page->index, fio) &&
 +			    bio_add_page(*bio, page, PAGE_SIZE, 0) ==
 +					    PAGE_SIZE) {
-+				ret = 0;
-+				break;
-+			}
- 
- 			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
- 							PAGE_SIZE) {
-@@ -787,7 +798,7 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+ 				ret = 0;
  				break;
  			}
  
@@ -191,7 +191,7 @@ index 0dfa8d3..9710555 100644
  			del_bio_entry(be);
  			__submit_bio(sbi, *bio, DATA);
  			break;
-@@ -872,11 +883,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+@@ -872,11 +877,6 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
  	trace_f2fs_submit_page_bio(page, fio);
  	f2fs_trace_ios(fio, 0);
  
@@ -203,7 +203,7 @@ index 0dfa8d3..9710555 100644
  alloc_new:
  	if (!bio) {
  		bio = __bio_alloc(fio, BIO_MAX_PAGES);
-@@ -886,7 +892,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+@@ -886,7 +886,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
  
  		add_bio_entry(fio->sbi, bio, page, fio->temp);
  	} else {
