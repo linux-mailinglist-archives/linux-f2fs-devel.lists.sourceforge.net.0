@@ -2,63 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFCD31F9EE6
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 19:58:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C33011F9F13
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2020 20:08:57 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jktNG-0004w5-6F; Mon, 15 Jun 2020 17:58:22 +0000
+	id 1jktXS-0005OJ-4f; Mon, 15 Jun 2020 18:08:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jktNF-0004vr-HU
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 17:58:21 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jktXR-0005OC-LA
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/DVT1KKJsuUqFvkFf47xqYBDJ8or9vALjKMTx11OR0Q=; b=b9rueo5/h46OrInznM+9w/r7vd
- PApv/YQf2k5wJEUL39WdEsZVPv37CIXjvyB6V8lruTxDh9c6p/OQ+D744m3ELZSTWkq9KC/+nBvuN
- 7mVqPKp7Z/xugGTqfqRLTz9UEMD9J0e7QLZJ0OwF79I+03pVW2WPNGr46gJPJHuHhLmo=;
+ bh=SH10DJC/iJaaUkdDhrWcwQTM+di964rf5mrBL63GDaU=; b=XTMSTDGdWp+t6wRXpu78SExj7B
+ KlxMARSCN1Fpa5EZ8TGO+HinsXIx2dVje/tzZvSV+xS/zTcm89lX/fCVCX0+j7z0RV62Q1udKNswm
+ TRRNwhg/LOUSMpZgMeWyImcVIsA3QPjZo5snKYtj4SNYtVIdSBAx9jTXTp6q1V8TYWuE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/DVT1KKJsuUqFvkFf47xqYBDJ8or9vALjKMTx11OR0Q=; b=UGjah5LuTbR9z5E9TvlrBJ2X5Z
- 4dLN+0nmpHspIYvI2e6PTKvyycwS/42stQNYHjbNaXvu1MoeYw33QHbWryu5LnFfVTbsVo3tFJ+vu
- gG1cTUELLeMCA/1SeeM86C0fsi70F++k09yvuD3zRgb648EPQwsCtUrUvBoqJNxWxsi8=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SH10DJC/iJaaUkdDhrWcwQTM+di964rf5mrBL63GDaU=; b=g
+ pEP0P6mJKZrGVALmR5eve+7VYB15Z3QvW0SwUaxyMz2X83mLpWK44XImyhffK77zY5nRPFBWYP613
+ rYIShYFkGLhkqbzKH2Xy2sBFjYXSfxvCUVt3w6oxLVx8AOqDHX3j3NTOeo7CbGabbPz54oTIH4RCQ
+ bCCohjoazvo3ikXM=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jktNC-006rj5-SJ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 17:58:21 +0000
+ id 1jktXN-006sUe-O8
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Jun 2020 18:08:53 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 70F16206F1;
- Mon, 15 Jun 2020 17:58:01 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 457AB2080D;
+ Mon, 15 Jun 2020 18:08:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592243881;
- bh=sNn6POHHZDQ9IACdImpskz4O92eeG7vzTpa1ghfyuIA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=vBF2Zxx90O2zggkzdqrAvirH4V7LShHUF+GDy3ptW5L7oxSbyT8KVN/EdksTccAvq
- uehEHRNxZHyTfjZ9B8RFvonWNW/QM+E0eGz2XLZ8mOvann9+NoXAHxcX/HlQLvQocE
- 7gstnuq2N80VfOQLZgPpIUx6uS69D+ihemIeoGcI=
-Date: Mon, 15 Jun 2020 10:58:00 -0700
+ s=default; t=1592244524;
+ bh=H6ByfuUMaJAM/lM6rgniPUUj+UozvovESjKF5RPg+1s=;
+ h=From:To:Cc:Subject:Date:From;
+ b=X4afVY61GHznG2tt3RcSqPT2Sc9JkaRZtytIZXm36KQO0rTEBh5aeq+0GZ7D8Bm1a
+ AH+WW3PecU3/SlRcNpaGxkyq/IokTGTDb9iK2Il27hqCEkNySz6pLa+Zp+/FK0IV5D
+ Xzsd+ZLMpE1mMMnkW56DhQgRJ6LqVUby/cLNsW7g=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200615175800.GA117170@google.com>
-References: <20200605181533.73113-1-efremov@linux.com>
- <20200609221446.24537-1-efremov@linux.com>
- <20200609222546.GA24766@sol.localdomain>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 15 Jun 2020 11:08:40 -0700
+Message-Id: <20200615180843.153299-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.27.0.290.gba653c62da-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200609222546.GA24766@sol.localdomain>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jktNC-006rj5-SJ
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: use kfree() instead of kvfree() to
- free superblock data
+X-Headers-End: 1jktXN-006sUe-O8
+Subject: [f2fs-dev] [PATCH 1/4] lib: fix include path for uuid.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,34 +80,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Denis Efremov <efremov@linux.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Rolf Eike Beer <eb@emlix.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/09, Eric Biggers wrote:
-> On Wed, Jun 10, 2020 at 01:14:46AM +0300, Denis Efremov wrote:
-> > Use kfree() instead of kvfree() to free super in read_raw_super_block()
-> > because the memory is allocated with kzalloc() in the function.
-> > Use kfree() instead of kvfree() to free sbi, raw_super in
-> > f2fs_fill_super() and f2fs_put_super() because the memory is allocated
-> > with kzalloc().
-> > 
-> > Fixes: 5222595d093e ("f2fs: use kvmalloc, if kmalloc is failed")
-> > Signed-off-by: Denis Efremov <efremov@linux.com>
-> 
-> I don't think "Fixes" is appropriate here.
+From: Rolf Eike Beer <eb@emlix.com>
 
-Agreed. I queued this Cl without it. :)
-Thanks,
+$ pkg-config --cflags uuid
+-I/usr/include/uuid
 
-> 
-> kvfree() still works on kmalloc'ed memory; it's just not preferred.
-> 
-> So this is more a cleanup than a fix.
-> 
-> - Eric
+The "uuid/" directory is actually part of the include path. This usually still
+works because most people have the path one level up in their default include
+path.
+
+Signed-off-by: Rolf Eike Beer <eb@emlix.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ mkfs/f2fs_format.c      | 2 +-
+ mkfs/f2fs_format_main.c | 2 +-
+ tools/f2fscrypt.c       | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 44575e0..4999cac 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -18,7 +18,7 @@
+ #include <sys/mount.h>
+ #endif
+ #include <time.h>
+-#include <uuid/uuid.h>
++#include <uuid.h>
+ 
+ #include "f2fs_fs.h"
+ #include "quota.h"
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 204a410..282c94e 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -18,7 +18,7 @@
+ #include <sys/mount.h>
+ #endif
+ #include <time.h>
+-#include <uuid/uuid.h>
++#include <uuid.h>
+ #include <errno.h>
+ 
+ #include "config.h"
+diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
+index fe3e0ff..d5bc3c5 100644
+--- a/tools/f2fscrypt.c
++++ b/tools/f2fscrypt.c
+@@ -43,7 +43,7 @@
+ #ifdef __KERNEL__
+ #include <linux/fs.h>
+ #endif
+-#include <uuid/uuid.h>
++#include <uuid.h>
+ 
+ #if !defined(HAVE_ADD_KEY) || !defined(HAVE_KEYCTL)
+ #include <sys/syscall.h>
+-- 
+2.27.0.290.gba653c62da-goog
+
 
 
 _______________________________________________
