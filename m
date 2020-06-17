@@ -2,75 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 195CF1FC440
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2020 04:54:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlODU-0008Jy-1Q; Wed, 17 Jun 2020 02:54:20 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jlODS-0008Jr-Bg
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Jun 2020 02:54:18 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id DD0A01FC80A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2020 09:57:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=H/fXE1TLoTZU3tRmoOSuBZn24slklrcBictzsHv5mkI=; b=UF83CKvht9CMNSt+G8YQFRX8Pc
+	v0fIFY0X1dhGtSZTX/CPvd0q6i4Jc0RT6cvjXQM236cN/kqYIhKfrSibjfn4sNEkuUGtbpez8FKgg
+	NhVi4d/5fpJxuQoe+QfWs63Y/skWcF37U8V7uQIFd5mnxGJt6pK3o7uWc6TbnnocaqDc=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1jlSxI-0007Fe-N6; Wed, 17 Jun 2020 07:57:56 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <38MzpXgYKAC8dLejLeRZZRWP.NZX@flex--satyat.bounces.google.com>)
+ id 1jlSxG-0007FR-On
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Jun 2020 07:57:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R6DmJLrwCHHyf3RLjqR2ShPeBEHFK8xm2dQAYqTU/Q8=; b=DWRAISzIb/DleqLbdR1zhgRLvo
- 0Z0kUGAdcYMUBvmPKUETBK0Utj+tSgP++eHj8wp9U57ye9nHSuhx+5C0McZMy2p1mEFXO9gO5MG8P
- 6tbTWE9z1FJNIGIBInMe5moVCJEHYWKapLHEhfepIhnua/j+IF7CRvatLQY2g0iwQ1Y8=;
+ bh=YrGLoue5k9cA5koD7/PO4iQoD6IjWXOUupBIS3VbDWk=; b=ZqxYcMGWTjScay/RvAII9UBZIa
+ 2aFaBg2StWcVlI5blaj/XNUpLTarQEu6gAGmwuxfWbPpm0hG6wUWAtuEEdCcqdwuRZmjnnMFr4Pdi
+ mKixLt2rW+Z1yYEJ/wx1OmaHFAfoi4qnCVXZcstnxfO4aaaNaq8ZDRvje3oN1VWtRRgQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=R6DmJLrwCHHyf3RLjqR2ShPeBEHFK8xm2dQAYqTU/Q8=; b=KuO0DkQBqdlTFcQh40b03c2rWK
- /ex09SR90v6advtnUgvohh8hU9v5NMFmFJEMr/S97LI05PAeNhLEviBdL58k5D7xr2m7LkckOrbrV
- BDUL2yXRA0n2iXATHdPp03+AeyLODm0UlvCe0vQZO0v29IMtX0rqlglA56THEIKin0Bs=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jlODN-006CZ2-HB
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Jun 2020 02:54:18 +0000
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id B634F31B6863C48191F5
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=YrGLoue5k9cA5koD7/PO4iQoD6IjWXOUupBIS3VbDWk=; b=e
+ nDyGJcP8BhC68Yd6uNcXf3IWxj5vO6Ne2YfzBCm2W7jsbIsfMnj8GoBSTo7IUE/+kAPzcAe9Qr/pr
+ dWqJ3L8IWBrKFosTsJN1B6DlCfZ2Z/x/qtoUC3kX7OIjfLIxy2j3td1kg8pbOC6ouUIathBOTO0XO
+ gp2UkCpG33rxbt/U=;
+Received: from mail-yb1-f202.google.com ([209.85.219.202])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jlSxB-0094B3-UN
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Jun 2020 07:57:54 +0000
+Received: by mail-yb1-f202.google.com with SMTP id p22so1574100ybg.21
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 17 Jun 2020 10:53:58 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 17 Jun
- 2020 10:53:52 +0800
-To: Jack Qiu <jack.qiu@huawei.com>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20200616134642.39168-1-jack.qiu@huawei.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <cfa17c07-0b6e-eff8-2ec2-ca59c506a293@huawei.com>
-Date: Wed, 17 Jun 2020 10:53:52 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20200616134642.39168-1-jack.qiu@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+ Wed, 17 Jun 2020 00:57:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=YrGLoue5k9cA5koD7/PO4iQoD6IjWXOUupBIS3VbDWk=;
+ b=iFNqldV2E0w+7bBQ385IjyHcqfjU9mHdgYgoOylqrDwynqv0FkaVUtzHYnx9jORWBx
+ nqLhO71PXhAxR/dettLy3H8elFoRNQ1xrwhbvwSjSMpTnH6Z3jQ1IJTsOZv7+sTTeATu
+ ewCeVTcWVzetIlVH5/jaGuMBKUpHxMpGioqjOhAzRFBPHmVm36fnLoOaHDgjrTe4Vq5W
+ WkrYAx7DiBNschMNjM2VxKdeL1pAKB/MwZJao3YSAovK798PHpRlhrY11GWKavUHDcr7
+ aypJl1ncfu6qAqOj9ec3P89dwmhW89iV6fJz4PAYy3IWXtr9brGu8umUFOvmmF5C0398
+ MWGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=YrGLoue5k9cA5koD7/PO4iQoD6IjWXOUupBIS3VbDWk=;
+ b=tbMnlT7Y6a4sZcBoqyHeSWHiLOO2+4NhhO2LVtVv3Fib5Qt8YJyqI6nTCFSmfz8Vaw
+ mGAhTmt6sGVMRZ1yLXylGSl0oTlEnRWY3JI1XYku8bMn67qYofw0dbmPlMvAlzBNbCQp
+ PP2u9kM/ucE/Bl7+qjIEtPd/2EHtcGbND/naAa5ZTFLVA+Fu8pBJ3X8MpYp02WHn2bd8
+ cu54pYANk485/rhBjlzqh3B39qa4swrgzXbg/jtIvXCyko9Pgwuc5GH8VVbvSYT5zgq/
+ 07fgFDZWT8t8E1fF259EpSBXnNTPWBDPQOrpWD9zG1qDMpS7+Lljb+k3pddapnayBC/o
+ bmCw==
+X-Gm-Message-State: AOAM533BMK5rOoEREKqIcQXb4eJjc7bORuULKuGaUK1mToFxM/I0N4TF
+ 1IFywHsJ0uScylcBOJUReCc1UEs3Vk4=
+X-Google-Smtp-Source: ABdhPJyi+r7Mo3g9hSD3snev85cZk7qSVEtvV2RBZ+GdzakmAaT064tsDCrF7yalJdTdipPDsMh0KpvnBYc=
+X-Received: by 2002:a25:cbcc:: with SMTP id b195mr10932034ybg.91.1592380656942; 
+ Wed, 17 Jun 2020 00:57:36 -0700 (PDT)
+Date: Wed, 17 Jun 2020 07:57:28 +0000
+Message-Id: <20200617075732.213198-1-satyat@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.27.0.290.gba653c62da-goog
+To: linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-ext4@vger.kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.219.202 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.202 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jlODN-006CZ2-HB
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: get the right gc victim section
- when section has several segments
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1jlSxB-0094B3-UN
+Subject: [f2fs-dev] [PATCH 0/4] Inline Encryption Support for fscrypt
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,312 +109,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Satya Tangirala via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Satya Tangirala <satyat@google.com>
+Cc: Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/16 21:46, Jack Qiu wrote:
-> Assume each section has 4 segment:
->      .___________________________.
->      |_Segment0_|_..._|_Segment3_|
->      .                          .
->      .                  .
->      .__________.
->      |_section0_|
-> 
-> Segment 0~2 has 0 valid block, segment 3 has 512 valid blocks.
-> It will fail if we want to gc section0 in this scenes,
-> because all 4 segments in section0 is not dirty.
-> So we should use dirty section bitmap instead of dirty segment bitmap
-> to get right victim section.
+This patch series adds support for Inline Encryption to fscrypt, f2fs
+and ext4. It builds on the inline encryption support now present in
+the block layer, and has been rebased on v5.8-rc1.
 
-Nice catch.
+Patch 1 introduces the SB_INLINECRYPT sb options, which filesystems
+should set if they want to use blk-crypto for file content en/decryption.
 
-> 
-> Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
-> ---
->  fs/f2fs/gc.c      | 41 +++++++++++++++++++++++----------------
->  fs/f2fs/segment.c | 49 ++++++++++++++++++++++++++++++++++++++++++++++-
->  fs/f2fs/segment.h |  6 +++++-
->  3 files changed, 78 insertions(+), 18 deletions(-)
-> 
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 5b95d5a146eb..0fc5cc41a310 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -21,6 +21,11 @@
->  #include "gc.h"
->  #include <trace/events/f2fs.h>
-> 
-> +#define DIRTY_UNIT_MAP(p)	(((p)->ofs_unit > 1) ? \
-> +				((p)->dirty_secmap) : ((p)->dirty_segmap))
-> +static unsigned int count_bits(const unsigned long *addr,
-> +				unsigned int offset, unsigned int len);
-> +
->  static int gc_thread_func(void *data)
->  {
->  	struct f2fs_sb_info *sbi = data;
-> @@ -192,9 +197,15 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
->  		p->ofs_unit = 1;
->  	} else {
->  		p->gc_mode = select_gc_type(sbi, gc_type);
-> -		p->dirty_segmap = dirty_i->dirty_segmap[DIRTY];
-> -		p->max_search = dirty_i->nr_dirty[DIRTY];
->  		p->ofs_unit = sbi->segs_per_sec;
-> +		if (p->ofs_unit > 1) {
-> +			p->dirty_segmap = dirty_i->dirty_secmap;
-> +			p->max_search = count_bits(p->dirty_secmap,
-> +						0, MAIN_SECS(sbi));
-> +		} else {
-> +			p->dirty_segmap = dirty_i->dirty_segmap[DIRTY];
-> +			p->max_search = dirty_i->nr_dirty[DIRTY];
-> +		}
->  	}
-> 
->  	/*
-> @@ -365,10 +376,14 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->  	}
-> 
->  	while (1) {
-> -		unsigned long cost;
-> -		unsigned int segno;
-> -
-> -		segno = find_next_bit(p.dirty_segmap, last_segment, p.offset);
-> +		unsigned long cost, *dirty_bitmap;
-> +		unsigned int unit_no, segno;
-> +
-> +		dirty_bitmap = DIRTY_UNIT_MAP(&p);
-> +		unit_no = find_next_bit(dirty_bitmap,
-> +				last_segment / p.ofs_unit,
-> +				p.offset / p.ofs_unit);
-> +		segno = unit_no * p.ofs_unit;
->  		if (segno >= last_segment) {
->  			if (sm->last_victim[p.gc_mode]) {
->  				last_segment =
-> @@ -381,14 +396,7 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->  		}
-> 
->  		p.offset = segno + p.ofs_unit;
-> -		if (p.ofs_unit > 1) {
-> -			p.offset -= segno % p.ofs_unit;
-> -			nsearched += count_bits(p.dirty_segmap,
-> -						p.offset - p.ofs_unit,
-> -						p.ofs_unit);
-> -		} else {
-> -			nsearched++;
-> -		}
-> +		nsearched++;
-> 
->  #ifdef CONFIG_F2FS_CHECK_FS
->  		/*
-> @@ -421,9 +429,10 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->  next:
->  		if (nsearched >= p.max_search) {
->  			if (!sm->last_victim[p.gc_mode] && segno <= last_victim)
-> -				sm->last_victim[p.gc_mode] = last_victim + 1;
-> +				sm->last_victim[p.gc_mode] =
-> +					last_victim + p.ofs_unit;
->  			else
-> -				sm->last_victim[p.gc_mode] = segno + 1;
-> +				sm->last_victim[p.gc_mode] = segno + p.ofs_unit;
->  			sm->last_victim[p.gc_mode] %=
->  				(MAIN_SECS(sbi) * sbi->segs_per_sec);
->  			break;
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 196f31503511..60bd70a68447 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -778,6 +778,7 @@ static void __locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->  		enum dirty_type dirty_type)
->  {
->  	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
-> +	unsigned short valid_blocks;
-> 
->  	/* need not be added */
->  	if (IS_CURSEG(sbi, segno))
-> @@ -796,6 +797,16 @@ static void __locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->  		}
->  		if (!test_and_set_bit(segno, dirty_i->dirty_segmap[t]))
->  			dirty_i->nr_dirty[t]++;
-> +
+Patch 2 adds inline encryption support to fscrypt. To use inline
+encryption with fscrypt, the filesystem must set the above mentioned
+SB_INLINECRYPT sb option. When this option is set, the contents of
+encrypted files will be en/decrypted using blk-crypto.
 
-if (__is_large_section()) {
-	unsigned short valid_blocks = get_valid_blocks(sbi, segno, true);
-	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+Patches 3 and 4 wire up f2fs and ext4 respectively to fscrypt support for
+inline encryption, and e.g ensure that bios are submitted with blocks
+that not only are contiguous, but also have contiguous DUNs.
 
-	f2fs_bug_on(sbi, unlikely(...));
+Eric Biggers (1):
+  ext4: add inline encryption support
 
-	if (IS_CURSEC(sbi, secno))
-		set_bit(secno, dirty_i->dirty_secmap);
-}
+Satya Tangirala (3):
+  fs: introduce SB_INLINECRYPT
+  fscrypt: add inline encryption support
+  f2fs: add inline encryption support
 
-> +		valid_blocks = get_valid_blocks(sbi, segno, true);
-> +		if (valid_blocks == 0 || valid_blocks == sbi->blocks_per_seg *
-> +				sbi->segs_per_sec) {
+ Documentation/admin-guide/ext4.rst |   6 +
+ Documentation/filesystems/f2fs.rst |   7 +-
+ fs/buffer.c                        |   7 +-
+ fs/crypto/Kconfig                  |   6 +
+ fs/crypto/Makefile                 |   1 +
+ fs/crypto/bio.c                    |  50 +++++
+ fs/crypto/crypto.c                 |   2 +-
+ fs/crypto/fname.c                  |   4 +-
+ fs/crypto/fscrypt_private.h        | 118 +++++++++-
+ fs/crypto/inline_crypt.c           | 349 +++++++++++++++++++++++++++++
+ fs/crypto/keyring.c                |   6 +-
+ fs/crypto/keysetup.c               |  68 ++++--
+ fs/crypto/keysetup_v1.c            |  16 +-
+ fs/ext4/inode.c                    |   4 +-
+ fs/ext4/page-io.c                  |   6 +-
+ fs/ext4/readpage.c                 |  11 +-
+ fs/ext4/super.c                    |   9 +
+ fs/f2fs/compress.c                 |   2 +-
+ fs/f2fs/data.c                     |  81 +++++--
+ fs/f2fs/super.c                    |  32 +++
+ fs/proc_namespace.c                |   1 +
+ include/linux/fs.h                 |   1 +
+ include/linux/fscrypt.h            |  82 +++++++
+ 23 files changed, 794 insertions(+), 75 deletions(-)
+ create mode 100644 fs/crypto/inline_crypt.c
 
-should be replaced w/ BLKS_PER_SEC(sbi)
+-- 
+2.27.0.290.gba653c62da-goog
 
-> +			f2fs_bug_on(sbi, 1);
-> +		} else {
-> +			if (!IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
-> +				set_bit(GET_SEC_FROM_SEG(sbi, segno),
-> +						dirty_i->dirty_secmap);
-> +		}
->  	}
->  }
-> 
-> @@ -803,6 +814,7 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->  		enum dirty_type dirty_type)
->  {
->  	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
-> +	unsigned short valid_blocks;
-> 
->  	if (test_and_clear_bit(segno, dirty_i->dirty_segmap[dirty_type]))
->  		dirty_i->nr_dirty[dirty_type]--;
-> @@ -814,13 +826,23 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
->  		if (test_and_clear_bit(segno, dirty_i->dirty_segmap[t]))
->  			dirty_i->nr_dirty[t]--;
-> 
-> -		if (get_valid_blocks(sbi, segno, true) == 0) {
-> +		valid_blocks = get_valid_blocks(sbi, segno, true);
-> +		if (valid_blocks == 0) {
->  			clear_bit(GET_SEC_FROM_SEG(sbi, segno),
->  						dirty_i->victim_secmap);
->  #ifdef CONFIG_F2FS_CHECK_FS
->  			clear_bit(segno, SIT_I(sbi)->invalid_segmap);
->  #endif
->  		}
-
-Ditto, could you clean up below codes as above?
-
-if (__is_large_section()) {
-	if ( == 0 || == BLKS_PER_SEC) {
-		clear_bit();
-		return;
-	}
-
-	if (!IS_CURSEC)
-		set_bit();
-}
-
-> +		if (valid_blocks == 0 || valid_blocks == sbi->blocks_per_seg *
-> +				sbi->segs_per_sec) {
-> +			clear_bit(GET_SEC_FROM_SEG(sbi, segno),
-> +					dirty_i->dirty_secmap);
-> +		} else {
-> +			if (!IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
-> +				set_bit(GET_SEC_FROM_SEG(sbi, segno),
-> +						dirty_i->dirty_secmap);
-> +		}
->  	}
->  }
-> 
-> @@ -4313,6 +4335,22 @@ static void init_dirty_segmap(struct f2fs_sb_info *sbi)
->  		__locate_dirty_segment(sbi, segno, DIRTY);
->  		mutex_unlock(&dirty_i->seglist_lock);
->  	}
-> +
-> +	segno = 0;
-> +	mutex_lock(&dirty_i->seglist_lock);
-> +	while (1) {
-> +		if (segno >= MAIN_SECS(sbi))
-> +			break;
-> +		valid_blocks = get_valid_blocks(sbi, segno, true);
-> +		if (!(valid_blocks == 0 || valid_blocks == sbi->blocks_per_seg *
-> +						sbi->segs_per_sec)) {
-> +			if (!IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
-> +				set_bit(GET_SEC_FROM_SEG(sbi, segno),
-> +						dirty_i->dirty_secmap);
-> +		}
-> +		segno += sbi->segs_per_sec;
-> +	}
-
-blks_per_sec = BLKS_PER_SEC(sbi);
-
-for (segno = 0; segno < MAIN_SECS(sbi); segno += sbi->segs_per_sec) {
-	valid_blocks = get_valid_blocks(sbi, segno, true);
-	secno = GET_SEC_FROM_SEG(sbi, segno);
-
-	if (!valid_blocks || valid_blocks == blks_per_sec))
-		continue;
-	if (IS_CURSEC(sbi, secno)
-		continue;
-	set_bit(secno, dirty_i->dirty_secmap);
-}
-
-> +	mutex_unlock(&dirty_i->seglist_lock);
->  }
-> 
->  static int init_victim_secmap(struct f2fs_sb_info *sbi)
-> @@ -4349,6 +4387,11 @@ static int build_dirty_segmap(struct f2fs_sb_info *sbi)
->  			return -ENOMEM;
->  	}
-> 
-
-We only need to allocate/free such memory if one section contains multi segments.
-
-> +	bitmap_size = f2fs_bitmap_size(MAIN_SECS(sbi));
-> +	dirty_i->dirty_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
-> +	if (!dirty_i->dirty_secmap)
-> +		return -ENOMEM;
-> +
->  	init_dirty_segmap(sbi);
->  	return init_victim_secmap(sbi);
->  }
-> @@ -4775,6 +4818,10 @@ static void destroy_dirty_segmap(struct f2fs_sb_info *sbi)
->  	for (i = 0; i < NR_DIRTY_TYPE; i++)
->  		discard_dirty_segmap(sbi, i);
-> 
-> +	mutex_lock(&dirty_i->seglist_lock);
-> +	kvfree(dirty_i->dirty_secmap);
-> +	mutex_unlock(&dirty_i->seglist_lock);
-> +
->  	destroy_victim_secmap(sbi);
->  	SM_I(sbi)->dirty_info = NULL;
->  	kvfree(dirty_i);
-> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-> index cba16cca5189..5037c4f54be2 100644
-> --- a/fs/f2fs/segment.h
-> +++ b/fs/f2fs/segment.h
-> @@ -166,7 +166,10 @@ enum {
->  struct victim_sel_policy {
->  	int alloc_mode;			/* LFS or SSR */
->  	int gc_mode;			/* GC_CB or GC_GREEDY */
-> -	unsigned long *dirty_segmap;	/* dirty segment bitmap */
-
-IMO, we don't need to use union, one common bitmap pointer is enough?
-
-unsigned long *dirty_bitmap;	/* dirty segment/section bitmap */
-
-> +	union {
-> +		unsigned long *dirty_segmap;	/* dirty segment bitmap */
-> +		unsigned long *dirty_secmap;	/* dirty section bitmap */
-> +	};
->  	unsigned int max_search;	/* maximum # of segments to search */
-
-/* maximum # of segments/sections to search */
-
->  	unsigned int offset;		/* last scanned bitmap offset */
->  	unsigned int ofs_unit;		/* bitmap search unit */
-> @@ -266,6 +269,7 @@ enum dirty_type {
->  struct dirty_seglist_info {
->  	const struct victim_selection *v_ops;	/* victim selction operation */
->  	unsigned long *dirty_segmap[NR_DIRTY_TYPE];
-> +	unsigned long *dirty_secmap;
->  	struct mutex seglist_lock;		/* lock for segment bitmaps */
->  	int nr_dirty[NR_DIRTY_TYPE];		/* # of dirty segments */
->  	unsigned long *victim_secmap;		/* background GC victims */
-> --
-> 2.17.1
-> 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
 
 
 _______________________________________________
