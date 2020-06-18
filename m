@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 204CD1FDC46
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:18:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3A351FDCC8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:22:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jljCE-0004uo-IO; Thu, 18 Jun 2020 01:18:26 +0000
+	id 1jljFm-0002oA-MS; Thu, 18 Jun 2020 01:22:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jljCD-0004uY-8O
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:18:25 +0000
+ (envelope-from <sashal@kernel.org>) id 1jljFl-0002ny-6T
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:22:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gcYDArAl02t7K7NGt1bs4qeERFyVWb0MQRhXz/ZDzdM=; b=TJbtgsHsVskClv+CGNeRlyaI/c
- xHZjXc/eaxT5UChgRd2gj7DhbQar+vJaGQ8YP836INn5aMtH47JSst1cXZGSc5ApEhDnx22WMzcRk
- cPL+afpVN/w+/J5RiQhMC55ne1gW+SJFfvjxQ25ozobv4h+KNrQfzUBuh8JCM471q8hg=;
+ bh=qcwhVV/2WLR9rehJzQQHPist/NjYL1VMSDizrQo2zJQ=; b=YtHx9NtmXwhq7Qwe1d3ii++8cO
+ PYsLabxZ/yWrQYXzl7M0MqakmCSoskq0MKtqs3CwoT93VqHULCsgY2fFLATHFROBXVoYmiFfUdGjb
+ uyPrcrVUdVGpWTeVhePRPxDctQH+WzmW6+Kfza+8q18tf8ZEB3WiKDNkShwpUvrrDOuk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gcYDArAl02t7K7NGt1bs4qeERFyVWb0MQRhXz/ZDzdM=; b=E3KQGnRrbGHYNglVxtli2aom2Z
- fg8Vo+eutF6a2cpy2xW7tj4OGslLsamfq+OVO9KNdGf1tLFY7CAE0IeFUimfEuFLdEjFoDkUX+4Ab
- RNUeJxUZNq1jjUzNN1Zpv+oXYSc4I9SyBcEB05cx2ck/XLYw2esEfzxNeWO2/GhXhOLw=;
+ bh=qcwhVV/2WLR9rehJzQQHPist/NjYL1VMSDizrQo2zJQ=; b=K0C43OUND3RpMBS+PCVZqgQ3iE
+ 3kBPlta4okLrkGFh1KQcVm3GEhvoajikS6CafvInBk6MM5N9YwGOGtrGpXXjMAOTgeIgSbpjcWsIY
+ 8YJwALoVo+UprAu01LyaWFVqoIGfFWasxqqlf/UCJ/1jFSEhv1IzdNjPvE1iTWjJ9LVQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jljCC-007ei7-6T
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:18:25 +0000
+ id 1jljFj-00A0Ym-Ur
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:22:05 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2384B206F1;
- Thu, 18 Jun 2020 01:18:18 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8583420776;
+ Thu, 18 Jun 2020 01:21:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592443098;
- bh=GjNpput/gcM8jX7KUPi8n1vW83BRAOzjo5dxH0l7Gb0=;
+ s=default; t=1592443311;
+ bh=qNfRzoFZrOzjgbcMHH04QE5ij3D1rRRHm7GgniBf53A=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hhcikRJ2+6C9hEM4B+3IuLVa85jcyZKnZSvwN98Nj7JDQ5tsHC2Layzo4n/WcF3ce
- cOIaokg/NTEChvf45T3JUgTYDymGdG6Tku9YdsDkOghJ+d3jd/kLBIchFX2jhDR3rX
- W08KgGKUFNXAINDdrg1b2lMaomNhJt66MiW+6frs=
+ b=g1pMu1Ik0X9HGlUOBTXwR7yznUyPBHjXuyKFEptXrddBg8OWFB10meMFTjGFaMWQz
+ 0csdnVo6h0abKrzoLf9tm61zWV199goxfSr4LyiotLv90xD/soimmfyfzjNW6yPtEM
+ sC7R6+JMJ/LF/UHKlS7Ce7mnpcnZSYeC42GRPj4M=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:13:23 -0400
-Message-Id: <20200618011631.604574-78-sashal@kernel.org>
+Date: Wed, 17 Jun 2020 21:16:13 -0400
+Message-Id: <20200618011631.604574-248-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200618011631.604574-1-sashal@kernel.org>
 References: <20200618011631.604574-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jljCC-007ei7-6T
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 078/266] f2fs: handle readonly
- filesystem in f2fs_ioc_shutdown()
+X-Headers-End: 1jljFj-00A0Ym-Ur
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 248/266] f2fs: don't return vmalloc()
+ memory from f2fs_kmalloc()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,47 +92,117 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Eric Biggers <ebiggers@google.com>
 
-[ Upstream commit 8626441f05dc45a2f4693ee6863d02456ce39e60 ]
+[ Upstream commit 0b6d4ca04a86b9dababbb76e58d33c437e127b77 ]
 
-If mountpoint is readonly, we should allow shutdowning filesystem
-successfully, this fixes issue found by generic/599 testcase of
-xfstest.
+kmalloc() returns kmalloc'ed memory, and kvmalloc() returns either
+kmalloc'ed or vmalloc'ed memory.  But the f2fs wrappers, f2fs_kmalloc()
+and f2fs_kvmalloc(), both return both kinds of memory.
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+It's redundant to have two functions that do the same thing, and also
+breaking the standard naming convention is causing bugs since people
+assume it's safe to kfree() memory allocated by f2fs_kmalloc().  See
+e.g. the various allocations in fs/f2fs/compress.c.
+
+Fix this by making f2fs_kmalloc() just use kmalloc().  And to avoid
+re-introducing the allocation failures that the vmalloc fallback was
+intended to fix, convert the largest allocations to use f2fs_kvmalloc().
+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/file.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ fs/f2fs/checkpoint.c | 4 ++--
+ fs/f2fs/f2fs.h       | 8 +-------
+ fs/f2fs/node.c       | 8 ++++----
+ fs/f2fs/super.c      | 2 +-
+ 4 files changed, 8 insertions(+), 14 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index c3a9da79ac99..5d94abe467a4 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2056,8 +2056,15 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index a28ffecc0f95..bbd07fe8a492 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -892,8 +892,8 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
+ 	int i;
+ 	int err;
  
- 	if (in != F2FS_GOING_DOWN_FULLSYNC) {
- 		ret = mnt_want_write_file(filp);
--		if (ret)
-+		if (ret) {
-+			if (ret == -EROFS) {
-+				ret = 0;
-+				f2fs_stop_checkpoint(sbi, false);
-+				set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
-+				trace_f2fs_shutdown(sbi, in, ret);
-+			}
- 			return ret;
-+		}
+-	sbi->ckpt = f2fs_kzalloc(sbi, array_size(blk_size, cp_blks),
+-				 GFP_KERNEL);
++	sbi->ckpt = f2fs_kvzalloc(sbi, array_size(blk_size, cp_blks),
++				  GFP_KERNEL);
+ 	if (!sbi->ckpt)
+ 		return -ENOMEM;
+ 	/*
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 3edde3d6d089..3c7a4df5cdf0 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2789,18 +2789,12 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
+ static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
+ 					size_t size, gfp_t flags)
+ {
+-	void *ret;
+-
+ 	if (time_to_inject(sbi, FAULT_KMALLOC)) {
+ 		f2fs_show_injection_info(FAULT_KMALLOC);
+ 		return NULL;
  	}
  
- 	switch (in) {
+-	ret = kmalloc(size, flags);
+-	if (ret)
+-		return ret;
+-
+-	return kvmalloc(size, flags);
++	return kmalloc(size, flags);
+ }
+ 
+ static inline void *f2fs_kzalloc(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index f14401a77d60..90a20bd12961 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -2933,7 +2933,7 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
+ 		return 0;
+ 
+ 	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
+-	nm_i->nat_bits = f2fs_kzalloc(sbi,
++	nm_i->nat_bits = f2fs_kvzalloc(sbi,
+ 			nm_i->nat_bits_blocks << F2FS_BLKSIZE_BITS, GFP_KERNEL);
+ 	if (!nm_i->nat_bits)
+ 		return -ENOMEM;
+@@ -3066,9 +3066,9 @@ static int init_free_nid_cache(struct f2fs_sb_info *sbi)
+ 	int i;
+ 
+ 	nm_i->free_nid_bitmap =
+-		f2fs_kzalloc(sbi, array_size(sizeof(unsigned char *),
+-					     nm_i->nat_blocks),
+-			     GFP_KERNEL);
++		f2fs_kvzalloc(sbi, array_size(sizeof(unsigned char *),
++					      nm_i->nat_blocks),
++			      GFP_KERNEL);
+ 	if (!nm_i->free_nid_bitmap)
+ 		return -ENOMEM;
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 47bfa5f2b75d..b530db25f2f2 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2889,7 +2889,7 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
+ 	if (nr_sectors & (bdev_zone_sectors(bdev) - 1))
+ 		FDEV(devi).nr_blkz++;
+ 
+-	FDEV(devi).blkz_seq = f2fs_kzalloc(sbi,
++	FDEV(devi).blkz_seq = f2fs_kvzalloc(sbi,
+ 					BITS_TO_LONGS(FDEV(devi).nr_blkz)
+ 					* sizeof(unsigned long),
+ 					GFP_KERNEL);
 -- 
 2.25.1
 
