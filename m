@@ -2,71 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EBEB1FE926
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 04:59:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Cc:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive
-	:List-Unsubscribe:List-Id:Subject:Message-Id:Date:To:Sender:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Eo0WEIyRZLHocst2kQup1Ez7TX5V3H72vvzHP08BUak=; b=cpzS2rBcJK+cX0GEv3+YX1atEY
-	u8ADlgLJyE+jjrhAXrhrIFDNVyzipYW+vqMALWZlryDHi+31c5ax5cXfQRHBf0fJx9XnYH/x02wDQ
-	lv/kCL9qecA+9vH7puEHsKOMEGlWOcUnBBR/NHqDDyBfBypGoFVXJX9w1Q7s7K11zVlA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19BEF1FE94E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 05:19:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlkld-0001Hf-CA; Thu, 18 Jun 2020 02:59:05 +0000
+	id 1jll5h-0001hg-Jw; Thu, 18 Jun 2020 03:19:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <zhaowuyun@wingtech.com>) id 1jlkla-0001H7-CB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 02:59:02 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jll5g-0001ha-HZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 03:19:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E7Q9j/54vfVCBZaeelalQ4IPAU4RYXo3IDU/yqZJFlM=; b=ImsfWsvjNm/H/CdlAZqusBum17
- Fo31ZBGPlmGz2W2fqLhmVi2dBMwsatzP+VoyefoqDpbDvDf+YU6dPiTvzYoMEJfFV4TvrHNLQEZMu
- vKXuqTEqF2szSy9p0+dd+I3L16jFIJXHlSvw2UrpWtq+S6uiB4uolOjVxuLruxVJ6aRo=;
+ bh=Www09a6bFx38w4GfVPRKKs55jTJaVd2JT+jKpc98YOg=; b=RCpNoMGnK9GHn4s+lWiriGQKHE
+ EanSmBx51MxwElrf7FtCdZMVAgxMoMtE4xv/BNK07cnom3OCbclIEkRAGgNF/UfEBYLc2mJqCpVzf
+ /0Ecc2jq97+isc69N5dltDOJvPpulZyJFA5lQ9rOSTDfaA9hW55S623bAST6Qm82BhVE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E7Q9j/54vfVCBZaeelalQ4IPAU4RYXo3IDU/yqZJFlM=; b=meYUkpwlfArwkHifeWb31FPYlx
- x3idNSeh7uDD3GYIcoMsGZBCuptlH+Wp54RbuviCSH6RGfjt6R6Ww4uQlGL7K/dvRemlxvTugKZPw
- aNW1z5W0HGgt139SZz3WLpIJP4ubWNvpVxp+vt6BX4XWGwBeqoq/fjX1ddj0QwEh/p08=;
-Received: from mx.wingtech.com ([180.166.216.14] helo=mail.wingtech.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.92.2) id 1jlklY-007jqD-Fn
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 02:59:02 +0000
-Received: from mx.wingtech.com ([192.168.2.43])
- by mail.wingtech.com  with SMTP id 05I2wfu0027698-05I2wfu1027698
- for <linux-f2fs-devel@lists.sourceforge.net>; Thu, 18 Jun 2020 10:58:41 +0800
-Received: from 192.168.51.143 (HELO ZHAOWUYUN.WINGTECH.COM);
- Thu, 18 Jun 2020 10:58:38 +0800
-To: yuchao0@huawei.com, jaegeuk@kernel.org
-Date: Thu, 18 Jun 2020 10:58:37 +0800
-Message-Id: <1592449117-209-1-git-send-email-zhaowuyun@wingtech.com>
-X-Mailer: git-send-email 2.7.4
-X-Spam-Score: 0.0 (/)
+ bh=Www09a6bFx38w4GfVPRKKs55jTJaVd2JT+jKpc98YOg=; b=abSVc0Ry3fecno3sXXXo8wncob
+ ONGhUs1Mtf9DF16v+OXqggoa2jLo9c/gPxCAMM65o8QgrjhUc7yU0GrIC8h6QsMmHiNNGwrQfFamH
+ AB0+QdRMxUAT5kdUO1kTicKPM/jQSTEUu4b8DbYadT0LuokxQCtxkfzG9h38zTyJXChA=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jll5f-0076SI-7b
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 03:19:48 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id CA20121655;
+ Thu, 18 Jun 2020 03:19:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592450377;
+ bh=tb8eihrC/QSLy1DAOwhuACWDwQVJ7zu3gsQrF0KN6W8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=a5nCURSUqqX0UUIMT3I1h+OR1Z2Lak9E0lXPKq4jwQjzuth5mpakN9gMWOWgW28le
+ iBadBT/YYRVhbmROBTA8eyC4fXxTYGMBV6FXAkaHv0RPZTWMbFzIkffZxMoC7MZbDp
+ pHdoOal6ViKvmNvO1MAYr0rTmaoWUMSAjjssWUlE=
+Date: Wed, 17 Jun 2020 20:19:35 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Dave Chinner <david@fromorbit.com>
+Message-ID: <20200618031935.GE1138@sol.localdomain>
+References: <20200617075732.213198-1-satyat@google.com>
+ <20200617075732.213198-2-satyat@google.com>
+ <20200618011912.GA2040@dread.disaster.area>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200618011912.GA2040@dread.disaster.area>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1jlklY-007jqD-Fn
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix a race condition between
- f2fs_write_end_io and f2fs_del_fsync_node_entry
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jll5f-0076SI-7b
+Subject: Re: [f2fs-dev] [PATCH 1/4] fs: introduce SB_INLINECRYPT
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,89 +85,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: zhaowuyun--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: zhaowuyun@wingtech.com
-Cc: zhaowuyun@wingtech.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
+Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Wuyun Zhao <zhaowuyun@wingtech.com>
+On Thu, Jun 18, 2020 at 11:19:12AM +1000, Dave Chinner wrote:
+> On Wed, Jun 17, 2020 at 07:57:29AM +0000, Satya Tangirala wrote:
+> > Introduce SB_INLINECRYPT, which is set by filesystems that wish to use
+> > blk-crypto for file content en/decryption. This flag maps to the
+> > '-o inlinecrypt' mount option which multiple filesystems will implement,
+> > and code in fs/crypto/ needs to be able to check for this mount option
+> > in a filesystem-independent way.
+> > 
+> > Signed-off-by: Satya Tangirala <satyat@google.com>
+> > ---
+> >  fs/proc_namespace.c | 1 +
+> >  include/linux/fs.h  | 1 +
+> >  2 files changed, 2 insertions(+)
+> > 
+> > diff --git a/fs/proc_namespace.c b/fs/proc_namespace.c
+> > index 3059a9394c2d..e0ff1f6ac8f1 100644
+> > --- a/fs/proc_namespace.c
+> > +++ b/fs/proc_namespace.c
+> > @@ -49,6 +49,7 @@ static int show_sb_opts(struct seq_file *m, struct super_block *sb)
+> >  		{ SB_DIRSYNC, ",dirsync" },
+> >  		{ SB_MANDLOCK, ",mand" },
+> >  		{ SB_LAZYTIME, ",lazytime" },
+> > +		{ SB_INLINECRYPT, ",inlinecrypt" },
+> >  		{ 0, NULL }
+> >  	};
+> >  	const struct proc_fs_opts *fs_infop;
+> 
+> NACK.
+> 
+> SB_* flgs are for functionality enabled on the superblock, not for
+> indicating mount options that have been set by the user.
 
-Under some condition, the __write_node_page will submit a page which is not
-f2fs_in_warm_node_list and will not call f2fs_add_fsync_node_entry.
-f2fs_gc continue to run to invoke f2fs_iget -> do_read_inode to read the same node page
-and set code node, which make f2fs_in_warm_node_list become true,
-that will cause f2fs_bug_on in f2fs_del_fsync_node_entry when f2fs_write_end_io called.
+That's an interesting claim, given that most SB_* flags are for mount options.
+E.g.:
 
-- f2fs_write_end_io
-					- f2fs_iget
-					 - do_read_inode
-					  - set_cold_node
-					  recover cold node flag
- - f2fs_in_warm_node_list
-  - is_cold_node
-  if node is cold, assume we have added
-  node to fsync_node_list during writepages()
- - f2fs_del_fsync_node_entry
-  - f2fs_bug_on() due to node page
-  is not in fsync_node_list
+	ro => SB_RDONLY
+	nosuid => SB_NOSUID
+	nodev => SB_NODEV
+	noexec => SB_NOEXEC
+	sync => SB_SYNCHRONOUS
+	mand => SB_MANDLOCK
+	noatime => SB_NOATIME
+	nodiratime => SB_NODIRATIME
+	lazytime => SB_LAZYTIME
 
-[   34.966133] Call trace:
-[   34.969902]  f2fs_del_fsync_node_entry+0x100/0x108
-[   34.976071]  f2fs_write_end_io+0x1e0/0x288
-[   34.981539]  bio_endio+0x248/0x270
-[   34.986289]  blk_update_request+0x2b0/0x4d8
-[   34.991841]  scsi_end_request+0x40/0x440
-[   34.997126]  scsi_io_completion+0xa4/0x748
-[   35.002593]  scsi_finish_command+0xdc/0x110
-[   35.008143]  scsi_softirq_done+0x118/0x150
-[   35.013610]  blk_done_softirq+0x8c/0xe8
-[   35.018811]  __do_softirq+0x2e8/0x578
-[   35.023828]  irq_exit+0xfc/0x120
-[   35.028398]  handle_IPI+0x1d8/0x330
-[   35.033233]  gic_handle_irq+0x110/0x1d4
-[   35.038433]  el1_irq+0xb4/0x130
-[   35.042917]  kmem_cache_alloc+0x3f0/0x418
-[   35.048288]  radix_tree_node_alloc+0x50/0xf8
-[   35.053933]  __radix_tree_create+0xf8/0x188
-[   35.059484]  __radix_tree_insert+0x3c/0x128
-[   35.065035]  add_gc_inode+0x90/0x118
-[   35.069967]  f2fs_gc+0x1b80/0x2d70
-[   35.074718]  f2fs_disable_checkpoint+0x94/0x1d0
-[   35.080621]  f2fs_fill_super+0x10c4/0x1b88
-[   35.086088]  mount_bdev+0x194/0x1e0
-[   35.090923]  f2fs_mount+0x40/0x50
-[   35.095589]  mount_fs+0xb4/0x190
-[   35.100159]  vfs_kern_mount+0x80/0x1d8
-[   35.105260]  do_mount+0x478/0xf18
-[   35.109926]  ksys_mount+0x90/0xd0
-[   35.114592]  __arm64_sys_mount+0x24/0x38
+> 
+> If the mount options are directly parsed by the filesystem option
+> parser (as is done later in this patchset), then the mount option
+> setting should be emitted by the filesystem's ->show_options
+> function, not a generic function.
+> 
+> The option string must match what the filesystem defines, not
+> require separate per-filesystem and VFS definitions of the same
+> option that people could potentially get wrong (*cough* i_version vs
+> iversion *cough*)....
 
-Signed-off-by: Wuyun Zhao <zhaowuyun@wingtech.com>
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/inode.c | 1 +
- 1 file changed, 1 insertion(+)
+Are you objecting to the use of a SB_* flag, or just to showing the flag in
+show_sb_opts() instead of in the individual filesystems?  Note that the SB_*
+flag was requested by Christoph
+(https://lkml.kernel.org/r/20191031183217.GF23601@infradead.org/,
+https://lkml.kernel.org/r/20191031212103.GA6244@infradead.org/).  We originally
+used a function fscrypt_operations::inline_crypt_enabled() instead.
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index be6ac33..0df5c8c 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -402,6 +402,7 @@ static int do_read_inode(struct inode *inode)
- 
- 	/* try to recover cold bit for non-dir inode */
- 	if (!S_ISDIR(inode->i_mode) && !is_cold_node(node_page)) {
-+		f2fs_wait_on_page_writeback(node_page, NODE, true, true);
- 		set_cold_node(node_page, false);
- 		set_page_dirty(node_page);
- 	}
--- 
-2.7.4
-
+- Eric
 
 
 _______________________________________________
