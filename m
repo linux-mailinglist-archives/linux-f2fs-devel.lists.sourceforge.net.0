@@ -2,69 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 388151FEE78
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 11:19:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 691D01FEF47
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 12:06:27 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlqhr-0004Wd-RZ; Thu, 18 Jun 2020 09:19:35 +0000
+	id 1jlrRA-0003eS-Mq; Thu, 18 Jun 2020 10:06:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jlqhq-0004WI-ED
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 09:19:34 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jlrR8-0003e4-KL
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 10:06:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NmxmwlRnHX6RK55wpECprS9NxkkOyDKWN1skmG52fPo=; b=XD3pUc0NMGXGwruxRBumD2sgYB
- wzTZ/1Dl2SgBbEDOEuW2j99bm2dKMS/95A0/e9J01AW2WnAPcciv4ExsrP/cGsONWofc8ql6fceu1
- 5FYpziioazGwHnScx7Tm7Bah4U3h6L1jOpmg64czoybOPcMF6UJzT9M2CojBi9ljavOw=;
+ bh=8GntDmKBr4FKlWMu7qCadQwvPjkigO5HpUYBfSfTRY4=; b=CKFxjWGv3ayfoBxWRmlvHoXBS3
+ qTL5xcLDOR66TEssajqAe9l5JwGCdrCdrnoA8WlSfuEWaEX7PW49T0E5UF/2UzBk8ywmd4Ri5dwY9
+ Ce123tWSieJjE0taboIf9Fazzq69MtrhsRhvDdEJWqvFeKAtfHDiWgsz8b3w4zWULrJY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NmxmwlRnHX6RK55wpECprS9NxkkOyDKWN1skmG52fPo=; b=HDqRUxc4ZN9NKVMoNTlD2jRkQl
- Ehl2JhqPRuqIeJZknWpkDD3Qb+TC24STqmXM2U/kqeAYumtOBhbySPLLzhnvHOwG9Mze7tgtpP8Tg
- rE3/9RB1n8dbKABbJypjnFWR6BsxHqJKSw+wxlzHJ5wfiZTmz446Sz74ani9YD3+f+R0=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=8GntDmKBr4FKlWMu7qCadQwvPjkigO5HpUYBfSfTRY4=; b=Us1qYTep/SEt/qlcFiHfTnDhJj
+ RiWEAcDgtpt7DApntfwK+FT6M+Gw8XdB8PpfD2oOsN5L0OUclCl8GnAhGYhd++du9OS444LWtgCl1
+ 535YD9n48sTYzmsJ0XrYyBS5ijnmdyU2ebf6YSG2UHmH2EIV1vyj0aGpi7MFDz2G048U=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jlqhn-007SDV-Jr
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 09:19:34 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id B4A106DCA60A85C439D7;
- Thu, 18 Jun 2020 17:19:22 +0800 (CST)
+ id 1jlrR4-008Eiu-Lg
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 10:06:22 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id C94E18C9742A71BE527C;
+ Thu, 18 Jun 2020 18:06:08 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 18 Jun
- 2020 17:19:21 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20200616234216.21115-1-jaegeuk@kernel.org>
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 18 Jun
+ 2020 18:06:03 +0800
+To: Satya Tangirala <satyat@google.com>, <linux-fscrypt@vger.kernel.org>,
+ <linux-fsdevel@vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>,
+ <linux-ext4@vger.kernel.org>
+References: <20200617075732.213198-1-satyat@google.com>
+ <20200617075732.213198-4-satyat@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <f289a376-91ca-0fab-3ffa-1d60c89a624c@huawei.com>
-Date: Thu, 18 Jun 2020 17:19:21 +0800
+Message-ID: <5e78e1be-f948-d54c-d28e-50f1f0a92ab3@huawei.com>
+Date: Thu, 18 Jun 2020 18:06:02 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200616234216.21115-1-jaegeuk@kernel.org>
+In-Reply-To: <20200617075732.213198-4-satyat@google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: codeaurora.org]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jlqhn-007SDV-Jr
-Subject: Re: [f2fs-dev] [PATCH] fsck: prevent buffer overrun in quota code
+X-Headers-End: 1jlrR4-008Eiu-Lg
+Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: add inline encryption support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,356 +83,357 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Eric Biggers <ebiggers@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/17 7:42, Jaegeuk Kim wrote:
-> From: Robin Hsu <robinhsu@google.com>
+On 2020/6/17 15:57, Satya Tangirala wrote:
+> Wire up f2fs to support inline encryption via the helper functions which
+> fs/crypto/ now provides.  This includes:
 > 
-> A maliciously corrupted file systems can trigger buffer overruns in
-> the quota code used by fsck.
+> - Adding a mount option 'inlinecrypt' which enables inline encryption
+>   on encrypted files where it can be used.
 > 
-> To fix it, quota file sizes are checked against real allocated
-> block index tables (inode, direct nodes, indirect nodes, double
-> indirect nodes).  If the size mismatches, the quota file is considered
-> corrupted and will be regenerated.
+> - Setting the bio_crypt_ctx on bios that will be submitted to an
+>   inline-encrypted file.
 > 
-> Signed-off-by: Robin Hsu <robinhsu@google.com>
+> - Not adding logically discontiguous data to bios that will be submitted
+>   to an inline-encrypted file.
+> 
+> - Not doing filesystem-layer crypto on inline-encrypted files.
+> 
+> This patch includes a fix for a race during IPU by
+> Sahitya Tummala <stummala@codeaurora.org>
+> 
+> Co-developed-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Satya Tangirala <satyat@google.com>
 > ---
->  fsck/fsck.c         | 21 +++++++++++++++++-
->  fsck/fsck.h         |  2 ++
->  fsck/mkquota.c      |  1 +
->  fsck/quotaio.c      | 10 ++++++++-
->  fsck/quotaio.h      | 13 ++++++++++-
->  fsck/quotaio_tree.c | 14 +++++++-----
->  fsck/quotaio_v2.c   | 53 +++++++++++++++++++++++++++++++++++++++++----
->  fsck/segment.c      | 21 ++++++++++++++++++
->  8 files changed, 122 insertions(+), 13 deletions(-)
+>  Documentation/filesystems/f2fs.rst |  7 ++-
+>  fs/f2fs/compress.c                 |  2 +-
+>  fs/f2fs/data.c                     | 81 ++++++++++++++++++++++++------
+>  fs/f2fs/super.c                    | 32 ++++++++++++
+>  4 files changed, 104 insertions(+), 18 deletions(-)
 > 
-> diff --git a/fsck/fsck.c b/fsck/fsck.c
-> index c249dfa..9a537af 100644
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -792,6 +792,8 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 099d45ac8d8f..4dc36143ff82 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -258,7 +258,12 @@ compress_extension=%s  Support adding specified extension, so that f2fs can enab
+>                         on compression extension list and enable compression on
+>                         these file by default rather than to enable it via ioctl.
+>                         For other files, we can still enable compression via ioctl.
+> -====================== ============================================================
+> +inlinecrypt
+> +                       Encrypt/decrypt the contents of encrypted files using the
+> +                       blk-crypto framework rather than filesystem-layer encryption.
+> +                       This allows the use of inline encryption hardware. The on-disk
+> +                       format is unaffected. For more details, see
+> +                       Documentation/block/inline-encryption.rst.
 >  
->  	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
->  		unsigned int inline_size = MAX_INLINE_DATA(node_blk);
-> +		if (cur_qtype != -1)
-> +			qf_szchk_type[cur_qtype] = QF_SZCHK_INLINE;
->  		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
->  
->  		if (blkaddr != 0) {
-> @@ -860,6 +862,15 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  	}
->  
->  	/* check data blocks in inode */
-> +	if (cur_qtype != -1) {
-> +		qf_szchk_type[cur_qtype] = QF_SZCHK_REGFILE;
-> +		qf_maxsize[cur_qtype] = (ADDRS_PER_INODE(&node_blk->i) +
-> +				2 * ADDRS_PER_BLOCK(&node_blk->i) +
-> +				2 * ADDRS_PER_BLOCK(&node_blk->i) *
-> +				NIDS_PER_BLOCK +
-> +				(u64) ADDRS_PER_BLOCK(&node_blk->i) *
-> +				NIDS_PER_BLOCK * NIDS_PER_BLOCK) * F2FS_BLKSIZE;
-> +	}
->  	for (idx = 0; idx < ADDRS_PER_INODE(&node_blk->i);
->  						idx++, child.pgofs++) {
->  		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs + idx]);
-> @@ -884,6 +895,8 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  					file_is_encrypt(&node_blk->i));
->  			if (!ret) {
->  				*blk_cnt = *blk_cnt + 1;
-> +				if (cur_qtype != -1 && blkaddr != NEW_ADDR)
-> +					qf_size_chk[cur_qtype] = child.pgofs;
->  			} else if (c.fix_on) {
->  				node_blk->i.i_addr[ofs + idx] = 0;
->  				need_fix = 1;
-> @@ -1126,6 +1139,8 @@ int fsck_chk_dnode_blk(struct f2fs_sb_info *sbi, struct f2fs_inode *inode,
->  			file_is_encrypt(inode));
->  		if (!ret) {
->  			*blk_cnt = *blk_cnt + 1;
-> +			if (cur_qtype != -1 && blkaddr != NEW_ADDR)
-> +				qf_size_chk[cur_qtype] = child->pgofs;
->  		} else if (c.fix_on) {
->  			node_blk->dn.addr[idx] = 0;
->  			need_fix = 1;
-> @@ -1794,6 +1809,7 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
->  	u32 blk_cnt = 0;
->  
->  	for (qtype = 0; qtype < F2FS_MAX_QUOTAS; qtype++) {
-> +		cur_qtype = qtype;
->  		if (sb->qf_ino[qtype] == 0)
->  			continue;
->  		nid_t ino = QUOTA_INO(sb, qtype);
-> @@ -1811,10 +1827,13 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
->  		}
->  		ret = fsck_chk_node_blk(sbi, NULL, ino,
->  				F2FS_FT_REG_FILE, TYPE_INODE, &blk_cnt, NULL);
-> -		if (ret)
-> +		if (ret) {
->  			ASSERT_MSG("wrong quota inode, qtype [%d] ino [0x%x]",
->  								qtype, ino);
-> +			qf_szchk_type[qtype] = QF_SZCHK_ERR;
-> +		}
->  	}
-> +	cur_qtype = -1;
->  	return ret;
+>  Debugfs Entries
+>  ===============
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 1e02a8c106b0..29e50fbe7eca 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1086,7 +1086,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>  		.submitted = false,
+>  		.io_type = io_type,
+>  		.io_wbc = wbc,
+> -		.encrypted = f2fs_encrypted_file(cc->inode),
+> +		.encrypted = fscrypt_inode_uses_fs_layer_crypto(cc->inode),
+>  	};
+>  	struct dnode_of_data dn;
+>  	struct node_info ni;
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 326c63879ddc..6955ea6fa1b6 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -14,6 +14,7 @@
+>  #include <linux/pagevec.h>
+>  #include <linux/blkdev.h>
+>  #include <linux/bio.h>
+> +#include <linux/blk-crypto.h>
+>  #include <linux/swap.h>
+>  #include <linux/prefetch.h>
+>  #include <linux/uio.h>
+> @@ -459,6 +460,33 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+>  	return bio;
 >  }
 >  
-> diff --git a/fsck/fsck.h b/fsck/fsck.h
-> index 2de6f62..bc6a435 100644
-> --- a/fsck/fsck.h
-> +++ b/fsck/fsck.h
-> @@ -266,6 +266,8 @@ block_t new_node_block(struct f2fs_sb_info *,
->  					struct dnode_of_data *, unsigned int);
->  
->  /* segment.c */
-> +struct quota_file;
-> +u64 f2fs_quota_size(struct quota_file *);
->  u64 f2fs_read(struct f2fs_sb_info *, nid_t, u8 *, u64, pgoff_t);
->  u64 f2fs_write(struct f2fs_sb_info *, nid_t, u8 *, u64, pgoff_t);
->  void f2fs_filesize_update(struct f2fs_sb_info *, nid_t, u64);
-> diff --git a/fsck/mkquota.c b/fsck/mkquota.c
-> index 84f9d3d..c419a0f 100644
-> --- a/fsck/mkquota.c
-> +++ b/fsck/mkquota.c
-> @@ -378,6 +378,7 @@ errcode_t quota_compare_and_update(struct f2fs_sb_info *sbi,
->  	err = quota_file_open(sbi, &qh, qtype, 0);
->  	if (err) {
->  		log_debug("Open quota file failed");
-> +		*usage_inconsistent = 1;
->  		goto out;
->  	}
->  
-> diff --git a/fsck/quotaio.c b/fsck/quotaio.c
-> index cc517bd..759c9e1 100644
-> --- a/fsck/quotaio.c
-> +++ b/fsck/quotaio.c
-> @@ -33,6 +33,14 @@ struct disk_dqheader {
->  	__le32 dqh_version;
->  } __attribute__ ((packed));
->  
-> +int cur_qtype = -1;
-> +u32 qf_size_chk[MAXQUOTAS] = {0, 0, 0};
-> +enum qf_szchk_type_t qf_szchk_type[MAXQUOTAS] =
+> +static void f2fs_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
+> +				  pgoff_t first_idx,
+> +				  const struct f2fs_io_info *fio,
+> +				  gfp_t gfp_mask)
 > +{
-> +	QF_SZCHK_NONE, QF_SZCHK_NONE, QF_SZCHK_NONE
-> +};
-> +u64 qf_maxsize[MAXQUOTAS];
+> +	/*
+> +	 * The f2fs garbage collector sets ->encrypted_page when it wants to
+> +	 * read/write raw data without encryption.
+> +	 */
+> +	if (!fio || !fio->encrypted_page)
+> +		fscrypt_set_bio_crypt_ctx(bio, inode, first_idx, gfp_mask);
+> +}
 > +
->  /**
->   * Convert type of quota to written representation
->   */
-> @@ -140,7 +148,7 @@ errcode_t quota_file_open(struct f2fs_sb_info *sbi, struct quota_handle *h,
->  		goto errout;
->  	}
->  
-> -	if (h->qh_ops->init_io && (h->qh_ops->init_io(h) < 0)) {
-> +	if (h->qh_ops->init_io && (h->qh_ops->init_io(h, qtype) < 0)) {
->  		log_err("qh_ops->init_io failed");
->  		err = EIO;
->  		goto errout;
-> diff --git a/fsck/quotaio.h b/fsck/quotaio.h
-> index 8087309..4a366ce 100644
-> --- a/fsck/quotaio.h
-> +++ b/fsck/quotaio.h
-> @@ -46,6 +46,17 @@ enum quota_type {
->  #error "cannot have more than 32 quota types to fit in qtype_bits"
->  #endif
->  
-> +enum qf_szchk_type_t {
-> +	QF_SZCHK_NONE,
-> +	QF_SZCHK_ERR,
-> +	QF_SZCHK_INLINE,
-> +	QF_SZCHK_REGFILE,
-> +};
+> +static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
+> +				     pgoff_t next_idx,
+> +				     const struct f2fs_io_info *fio)
+> +{
+> +	/*
+> +	 * The f2fs garbage collector sets ->encrypted_page when it wants to
+> +	 * read/write raw data without encryption.
+> +	 */
+> +	if (fio && fio->encrypted_page)
+> +		return !bio_has_crypt_ctx(bio);
 > +
-> +extern int cur_qtype;
-> +extern u32 qf_size_chk[];
-> +extern enum qf_szchk_type_t qf_szchk_type[];
-> +extern u64 qf_maxsize[];
->  
->  #define QUOTA_USR_BIT (1 << USRQUOTA)
->  #define QUOTA_GRP_BIT (1 << GRPQUOTA)
-> @@ -154,7 +165,7 @@ struct quotafile_ops {
->  	/* Check whether quotafile is in our format */
->  	int (*check_file) (struct quota_handle *h, int type);
->  	/* Open quotafile */
-> -	int (*init_io) (struct quota_handle *h);
-> +	int (*init_io) (struct quota_handle *h, enum quota_type qtype);
->  	/* Create new quotafile */
->  	int (*new_io) (struct quota_handle *h);
->  	/* Write all changes and close quotafile */
-> diff --git a/fsck/quotaio_tree.c b/fsck/quotaio_tree.c
-> index de25a60..c203400 100644
-> --- a/fsck/quotaio_tree.c
-> +++ b/fsck/quotaio_tree.c
-> @@ -568,7 +568,7 @@ static int report_block(struct dquot *dquot, unsigned int blk, char *bitmap,
->  	int entries, i;
->  
->  	if (!buf)
-> -		return 0;
-> +		return -1;
->  
->  	set_bit(bitmap, blk);
->  	read_blk(dquot->dq_h, blk, buf);
-> @@ -593,9 +593,7 @@ static int report_block(struct dquot *dquot, unsigned int blk, char *bitmap,
->  static int check_reference(struct quota_handle *h, unsigned int blk)
+> +	return fscrypt_mergeable_bio(bio, inode, next_idx);
+> +}
+> +
+>  static inline void __submit_bio(struct f2fs_sb_info *sbi,
+>  				struct bio *bio, enum page_type type)
 >  {
->  	if (blk >= h->qh_info.u.v2_mdqi.dqi_qtree.dqi_blocks) {
-> -		log_err("Illegal reference (%u >= %u) in %s quota file. "
-> -			"Quota file is probably corrupted.\n"
-> -			"Please run fsck (8) to fix it.",
-> +		log_err("Illegal reference (%u >= %u) in %s quota file",
->  			blk,
->  			h->qh_info.u.v2_mdqi.dqi_qtree.dqi_blocks,
->  			quota_type2name(h->qh_type));
-> @@ -627,9 +625,13 @@ static int report_tree(struct dquot *dquot, unsigned int blk, int depth,
+> @@ -684,6 +712,9 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
+>  	/* Allocate a new bio */
+>  	bio = __bio_alloc(fio, 1);
+>  
+> +	f2fs_set_bio_crypt_ctx(bio, fio->page->mapping->host,
+> +			       fio->page->index, fio, GFP_NOIO);
+> +
+>  	if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE) {
+>  		bio_put(bio);
+>  		return -EFAULT;
+> @@ -763,9 +794,10 @@ static void del_bio_entry(struct bio_entry *be)
+>  	kmem_cache_free(bio_entry_slab, be);
+>  }
+>  
+> -static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+> +static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+>  							struct page *page)
+>  {
+> +	struct f2fs_sb_info *sbi = fio->sbi;
+>  	enum temp_type temp;
+>  	bool found = false;
+>  	int ret = -EAGAIN;
+> @@ -782,13 +814,18 @@ static int add_ipu_page(struct f2fs_sb_info *sbi, struct bio **bio,
+>  
+>  			found = true;
+>  
+> -			if (bio_add_page(*bio, page, PAGE_SIZE, 0) ==
+> -							PAGE_SIZE) {
+> +			if (page_is_mergeable(sbi, *bio, *fio->last_block,
+> +					fio->new_blkaddr) &&
+> +			    f2fs_crypt_mergeable_bio(*bio,
+> +					fio->page->mapping->host,
+> +					fio->page->index, fio) &&
+> +			    bio_add_page(*bio, page, PAGE_SIZE, 0) ==
+> +					PAGE_SIZE) {
+>  				ret = 0;
+>  				break;
+>  			}
+>  
+> -			/* bio is full */
+> +			 /* page can't be merged into bio; submit the bio */
+
+One more unneeded space before '/'.
+
+>  			del_bio_entry(be);
+>  			__submit_bio(sbi, *bio, DATA);
 >  			break;
+> @@ -873,18 +910,17 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  	trace_f2fs_submit_page_bio(page, fio);
+>  	f2fs_trace_ios(fio, 0);
 >  
->  		if (depth == QT_TREEDEPTH - 1) {
-> -			if (!get_bit(bitmap, blk))
-> -				*entries += report_block(dquot, blk, bitmap,
-> +			if (!get_bit(bitmap, blk)) {
-> +				int num_entry = report_block(dquot, blk, bitmap,
->  							process_dquot, data);
-> +				if (num_entry < 0)
-> +					break;
-> +				*entries += num_entry;
-> +			}
->  		} else {
->  			if (report_tree(dquot, blk, depth + 1, bitmap, entries,
->  						process_dquot, data))
-> diff --git a/fsck/quotaio_v2.c b/fsck/quotaio_v2.c
-> index 1404332..0f8672b 100644
-> --- a/fsck/quotaio_v2.c
-> +++ b/fsck/quotaio_v2.c
-> @@ -20,7 +20,7 @@
->  #include "quotaio_tree.h"
->  
->  static int v2_check_file(struct quota_handle *h, int type);
-> -static int v2_init_io(struct quota_handle *h);
-> +static int v2_init_io(struct quota_handle *h, enum quota_type qtype);
->  static int v2_new_io(struct quota_handle *h);
->  static int v2_write_info(struct quota_handle *h);
->  static struct dquot *v2_read_dquot(struct quota_handle *h, qid_t id);
-> @@ -170,19 +170,64 @@ static int v2_check_file(struct quota_handle *h, int type)
->  /*
->   * Open quotafile
->   */
-> -static int v2_init_io(struct quota_handle *h)
-> +static int v2_init_io(struct quota_handle *h, enum quota_type qtype)
->  {
->  	struct v2_disk_dqinfo ddqinfo;
-> +	struct v2_mem_dqinfo *info;
-> +	u64 filesize;
-> +	struct quota_file *qf = &h->qh_qf;
->  
->  	h->qh_info.u.v2_mdqi.dqi_qtree.dqi_entry_size =
->  		sizeof(struct v2r1_disk_dqblk);
->  	h->qh_info.u.v2_mdqi.dqi_qtree.dqi_ops = &v2r1_fmt_ops;
->  
->  	/* Read information about quotafile */
-> -	if (h->read(&h->qh_qf, V2_DQINFOOFF, &ddqinfo,
-> -			 sizeof(ddqinfo)) != sizeof(ddqinfo))
-> +	if (h->read(qf, V2_DQINFOOFF, &ddqinfo,
-> +			sizeof(ddqinfo)) != sizeof(ddqinfo))
->  		return -1;
->  	v2_disk2memdqinfo(&h->qh_info, &ddqinfo);
-> +
-> +	/* Check to make sure quota file info is sane */
-> +	info = &h->qh_info.u.v2_mdqi;
-> +	filesize = qf->filesize = f2fs_quota_size(qf);
-> +	u32 qf_szchk = qf_size_chk[qtype];
-> +	if (qf_szchk_type[qtype] == QF_SZCHK_REGFILE &&
-> +			((filesize + F2FS_BLKSIZE - 1) >> F2FS_BLKSIZE_BITS <
-> +			qf_szchk + 1 || filesize > qf_maxsize[qtype])) {
-> +		/*
-> +		 * reqular: qf_szchk is now the last block index,
-> +		 * including the hole's index
+> -	if (bio && !page_is_mergeable(fio->sbi, bio, *fio->last_block,
+> -						fio->new_blkaddr))
+> -		f2fs_submit_merged_ipu_write(fio->sbi, &bio, NULL);
 
-If so, I guess qf_last_blkofs will be more proper for the variable name.
+I prefer to keep this condition for non-inlinecrypt case to avoid unneeded lock
+contention in add_ipu_page().
 
-> +		 */
-> +		log_err("Quota inode %u corrupted: file size %" PRIu64
-> +			" does not match page offset %" PRIu32,
-> +			h->qh_qf.ino,
-> +			filesize,
-> +			qf_szchk);
-> +		filesize = (qf_szchk + 1) << F2FS_BLKSIZE_BITS;
-> +		f2fs_filesize_update(qf->sbi, qf->ino, filesize);
-> +	}
-> +
-> +	if ((info->dqi_qtree.dqi_blocks >
-> +			(filesize + QT_BLKSIZE - 1) >> QT_BLKSIZE_BITS)) {
-> +		log_err("Quota inode %u corrupted: file size %" PRId64 "; "
-> +				"dqi_blocks %u", h->qh_qf.ino,
-> +				filesize, info->dqi_qtree.dqi_blocks);
-> +		return -1;
-> +	}
-> +	if (info->dqi_qtree.dqi_free_blk >= info->dqi_qtree.dqi_blocks) {
-> +		log_err("Quota inode %u corrupted: free_blk %u;"
-> +				" dqi_blocks %u",
-> +				h->qh_qf.ino, info->dqi_qtree.dqi_free_blk,
-> +				info->dqi_qtree.dqi_blocks);
-> +		return -1;
-> +	}
-> +	if (info->dqi_qtree.dqi_free_entry >= info->dqi_qtree.dqi_blocks) {
-> +		log_err("Quota inode %u corrupted: free_entry %u; "
-> +				"dqi_blocks %u", h->qh_qf.ino,
-> +				info->dqi_qtree.dqi_free_entry,
-> +				info->dqi_qtree.dqi_blocks);
-> +		return -1;
-> +	}
->  	return 0;
->  }
+>  alloc_new:
+>  	if (!bio) {
+>  		bio = __bio_alloc(fio, BIO_MAX_PAGES);
+>  		__attach_io_flag(fio);
+> +		f2fs_set_bio_crypt_ctx(bio, fio->page->mapping->host,
+> +				       fio->page->index, fio, GFP_NOIO);
+>  		bio_set_op_attrs(bio, fio->op, fio->op_flags);
 >  
-> diff --git a/fsck/segment.c b/fsck/segment.c
-> index b7cf245..a5dc556 100644
-> --- a/fsck/segment.c
-> +++ b/fsck/segment.c
-> @@ -15,6 +15,7 @@
->   */
->  #include "fsck.h"
->  #include "node.h"
-> +#include "quotaio.h"
+>  		add_bio_entry(fio->sbi, bio, page, fio->temp);
+>  	} else {
+> -		if (add_ipu_page(fio->sbi, &bio, page))
+> +		if (add_ipu_page(fio, &bio, page))
+>  			goto alloc_new;
+>  	}
 >  
->  int reserve_new_block(struct f2fs_sb_info *sbi, block_t *to,
->  			struct f2fs_summary *sum, int type, bool is_inode)
-> @@ -124,6 +125,26 @@ int new_data_block(struct f2fs_sb_info *sbi, void *block,
->  	return 0;
->  }
+> @@ -936,8 +972,11 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
 >  
-> +u64 f2fs_quota_size(struct quota_file *qf)
-> +{
-> +	struct node_info ni;
-> +	struct f2fs_node *inode;
-> +	u64 filesize;
-> +
-> +	inode = (struct f2fs_node *) calloc(BLOCK_SZ, 1);
-> +	ASSERT(inode);
-> +
-> +	/* Read inode */
-> +	get_node_info(qf->sbi, qf->ino, &ni);
-> +	ASSERT(dev_read_block(inode, ni.blk_addr) >= 0);
-> +	ASSERT(!S_ISDIR(le16_to_cpu(inode->i.i_mode)));
-> +	ASSERT(!S_ISLNK(le16_to_cpu(inode->i.i_mode)));
+>  	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
+>  
+> -	if (io->bio && !io_is_mergeable(sbi, io->bio, io, fio,
+> -			io->last_block_in_bio, fio->new_blkaddr))
+> +	if (io->bio &&
+> +	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
+> +			      fio->new_blkaddr) ||
+> +	     !f2fs_crypt_mergeable_bio(io->bio, fio->page->mapping->host,
+> +				       fio->page->index, fio)))
 
-Why not ASSERT(S_ISREG())? or we can introduce another function to repair
-such fuzzed quota inode?
+bio_page->index, fio)))
+
+>  		__submit_merged_bio(io);
+>  alloc_new:
+>  	if (io->bio == NULL) {
+> @@ -949,6 +988,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  			goto skip;
+>  		}
+>  		io->bio = __bio_alloc(fio, BIO_MAX_PAGES);
+> +		f2fs_set_bio_crypt_ctx(io->bio, fio->page->mapping->host,
+> +				       fio->page->index, fio, GFP_NOIO);
+
+bio_page->index, fio, GFP_NOIO);
 
 Thanks,
 
+>  		io->fio = *fio;
+>  	}
+>  
+> @@ -993,11 +1034,14 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+>  								for_write);
+>  	if (!bio)
+>  		return ERR_PTR(-ENOMEM);
 > +
-> +	filesize = le64_to_cpu(inode->i.i_size);
-> +	free(inode);
-> +	return filesize;
+> +	f2fs_set_bio_crypt_ctx(bio, inode, first_idx, NULL, GFP_NOFS);
+> +
+>  	f2fs_target_device(sbi, blkaddr, bio);
+>  	bio->bi_end_io = f2fs_read_end_io;
+>  	bio_set_op_attrs(bio, REQ_OP_READ, op_flag);
+>  
+> -	if (f2fs_encrypted_file(inode))
+> +	if (fscrypt_inode_uses_fs_layer_crypto(inode))
+>  		post_read_steps |= 1 << STEP_DECRYPT;
+>  	if (f2fs_compressed_file(inode))
+>  		post_read_steps |= 1 << STEP_DECOMPRESS_NOWQ;
+> @@ -2073,8 +2117,9 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+>  	 * This page will go to BIO.  Do we need to send this
+>  	 * BIO off first?
+>  	 */
+> -	if (bio && !page_is_mergeable(F2FS_I_SB(inode), bio,
+> -				*last_block_in_bio, block_nr)) {
+> +	if (bio && (!page_is_mergeable(F2FS_I_SB(inode), bio,
+> +				       *last_block_in_bio, block_nr) ||
+> +		    !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL))) {
+>  submit_and_realloc:
+>  		__submit_bio(F2FS_I_SB(inode), bio, DATA);
+>  		bio = NULL;
+> @@ -2204,8 +2249,9 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+>  						dn.ofs_in_node + i + 1);
+>  
+> -		if (bio && !page_is_mergeable(sbi, bio,
+> -					*last_block_in_bio, blkaddr)) {
+> +		if (bio && (!page_is_mergeable(sbi, bio,
+> +					*last_block_in_bio, blkaddr) ||
+> +		    !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL))) {
+>  submit_and_realloc:
+>  			__submit_bio(sbi, bio, DATA);
+>  			bio = NULL;
+> @@ -2421,6 +2467,9 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
+>  	/* wait for GCed page writeback via META_MAPPING */
+>  	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
+>  
+> +	if (fscrypt_inode_uses_inline_crypto(inode))
+> +		return 0;
+> +
+>  retry_encrypt:
+>  	fio->encrypted_page = fscrypt_encrypt_pagecache_blocks(page,
+>  					PAGE_SIZE, 0, gfp_flags);
+> @@ -2594,7 +2643,7 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+>  			f2fs_unlock_op(fio->sbi);
+>  		err = f2fs_inplace_write_data(fio);
+>  		if (err) {
+> -			if (f2fs_encrypted_file(inode))
+> +			if (fscrypt_inode_uses_fs_layer_crypto(inode))
+>  				fscrypt_finalize_bounce_page(&fio->encrypted_page);
+>  			if (PageWriteback(page))
+>  				end_page_writeback(page);
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 20e56b0fa46a..3621969b2665 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -138,6 +138,7 @@ enum {
+>  	Opt_alloc,
+>  	Opt_fsync,
+>  	Opt_test_dummy_encryption,
+> +	Opt_inlinecrypt,
+>  	Opt_checkpoint_disable,
+>  	Opt_checkpoint_disable_cap,
+>  	Opt_checkpoint_disable_cap_perc,
+> @@ -204,6 +205,7 @@ static match_table_t f2fs_tokens = {
+>  	{Opt_fsync, "fsync_mode=%s"},
+>  	{Opt_test_dummy_encryption, "test_dummy_encryption=%s"},
+>  	{Opt_test_dummy_encryption, "test_dummy_encryption"},
+> +	{Opt_inlinecrypt, "inlinecrypt"},
+>  	{Opt_checkpoint_disable, "checkpoint=disable"},
+>  	{Opt_checkpoint_disable_cap, "checkpoint=disable:%u"},
+>  	{Opt_checkpoint_disable_cap_perc, "checkpoint=disable:%u%%"},
+> @@ -833,6 +835,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  			if (ret)
+>  				return ret;
+>  			break;
+> +		case Opt_inlinecrypt:
+> +#ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
+> +			sb->s_flags |= SB_INLINECRYPT;
+> +#else
+> +			f2fs_info(sbi, "inline encryption not supported");
+> +#endif
+> +			break;
+>  		case Opt_checkpoint_disable_cap_perc:
+>  			if (args->from && match_int(args, &arg))
+>  				return -EINVAL;
+> @@ -1624,6 +1633,8 @@ static void default_options(struct f2fs_sb_info *sbi)
+>  	F2FS_OPTION(sbi).compress_ext_cnt = 0;
+>  	F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_ON;
+>  
+> +	sbi->sb->s_flags &= ~SB_INLINECRYPT;
+> +
+>  	set_opt(sbi, INLINE_XATTR);
+>  	set_opt(sbi, INLINE_DATA);
+>  	set_opt(sbi, INLINE_DENTRY);
+> @@ -2470,6 +2481,25 @@ static void f2fs_get_ino_and_lblk_bits(struct super_block *sb,
+>  	*lblk_bits_ret = 8 * sizeof(block_t);
+>  }
+>  
+> +static int f2fs_get_num_devices(struct super_block *sb)
+> +{
+> +	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> +
+> +	if (f2fs_is_multi_device(sbi))
+> +		return sbi->s_ndevs;
+> +	return 1;
 > +}
 > +
->  u64 f2fs_read(struct f2fs_sb_info *sbi, nid_t ino, u8 *buffer,
->  					u64 count, pgoff_t offset)
->  {
+> +static void f2fs_get_devices(struct super_block *sb,
+> +			     struct request_queue **devs)
+> +{
+> +	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> +	int i;
+> +
+> +	for (i = 0; i < sbi->s_ndevs; i++)
+> +		devs[i] = bdev_get_queue(FDEV(i).bdev);
+> +}
+> +
+>  static const struct fscrypt_operations f2fs_cryptops = {
+>  	.key_prefix		= "f2fs:",
+>  	.get_context		= f2fs_get_context,
+> @@ -2479,6 +2509,8 @@ static const struct fscrypt_operations f2fs_cryptops = {
+>  	.max_namelen		= F2FS_NAME_LEN,
+>  	.has_stable_inodes	= f2fs_has_stable_inodes,
+>  	.get_ino_and_lblk_bits	= f2fs_get_ino_and_lblk_bits,
+> +	.get_num_devices	= f2fs_get_num_devices,
+> +	.get_devices		= f2fs_get_devices,
+>  };
+>  #endif
+>  
 > 
 
 
