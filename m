@@ -2,107 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39AA51FF5FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 17:00:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E1F81FF619
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 17:03:44 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlw1t-000167-RG; Thu, 18 Jun 2020 15:00:37 +0000
+	id 1jlw4q-0001EZ-7s; Thu, 18 Jun 2020 15:03:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <laoar.shao@gmail.com>) id 1jlw1r-00015y-WF
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 15:00:36 +0000
+ (envelope-from <willy@infradead.org>) id 1jlw4o-0001ES-QS
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 15:03:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NtwtfirPIaj3hQKqt5NnTqLzfoXadlYH6xaXhH3mB+s=; b=k+cpJOUr42LfXl6cxPmL4rQXY7
- eUU1yLHhghmEciqiY+wRSTQC9B41L6QTR0Ns9OY6ZUhjJ1O3rCpQkj9onOvfoy/xksomA/o6nj/VR
- WsbPg/Njuht46YTSxDMFtS+WLZIWmocsRzyLmWyPVDiigxPfTvbZQ5FPI2MGfUQ0tQhQ=;
+ bh=UL+8ApV4cJJsaL9i1XR4k0qibz3XspT8vONGVk524kc=; b=N+gdDBJJoSJ2GgPRFVxZaraT/7
+ LzAYod0ZEnhoj9xJR/PIFKZDKzqAkEBVN86FchtH6azqGMOm0GOgoGHibPwD8V0mUSfrY4n+OgdnM
+ yAdQ7Nw6TqHoY1Yv5weZD8DHJbtQYVz9xf2pJeZcshKWzmG06yT0LGXVE11CezfYv1hY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NtwtfirPIaj3hQKqt5NnTqLzfoXadlYH6xaXhH3mB+s=; b=RxXNlEXq0/04R6Xsd3g/K+FaCt
- ZYQIasej4aCz+bstWpsDRxHS3ekGWPNbKO/3OeMQOgzbrQ41f53C1wRc2dLbTXo6luk0wyY9HIWdN
- uFQmZEOHJINs0+losnJ4f9U/oTLqXdLydzVxp9+66CerJ/UT3/SU0x0K8a6gMjRiQrWQ=;
-Received: from mail-io1-f67.google.com ([209.85.166.67])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jlw1c-008bc5-0j
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 15:00:35 +0000
-Received: by mail-io1-f67.google.com with SMTP id x189so7346170iof.9
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 18 Jun 2020 08:00:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NtwtfirPIaj3hQKqt5NnTqLzfoXadlYH6xaXhH3mB+s=;
- b=kYwPKZdp0pHLg9nzSkXLUjXIWhhGSDK+lUsX3kvZKhpx/abFTtNYjkojW4sVVt7bHm
- qZGTxARuFd3WI6EfU1eBN6+4gj/yCc7G3VU2n21gea6aS3fkUz/uMmbZ6zjhs6dF/ctG
- mtQLDzrh6EKtHb9OSOEmMjo3N7fWi8hwmYyXXXcwlEWheXzJEY46FsRDyYJ/YXapbZEL
- GAjWeoKd6sh4vm2KkDp99cfVll6l6Xz1jcMVSif5RsT91SxuUdRKKCZShkXiMxJfDPO2
- mEQ03gbiIGbBmN1vxaEfCsHPJle351uahP3BtuY+Amj/uplhgSOrlPpU1WHGNLMkS4iC
- lVIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NtwtfirPIaj3hQKqt5NnTqLzfoXadlYH6xaXhH3mB+s=;
- b=fIhf9OunC5dGO6tRiXkDFtrwOz8oIIc1pFyccFg7SpsrAjqphOKMw8+frnANOXPDVF
- hMAEA5iXEbCh11Kykf1x+cmUbhO/tq/uAPYS05gNO8PloFN6nq33eOuUgWt6uUV63+1Y
- X3C3NPK6usCDToe7QfZ/XW+kpbZEhSiMgFN0xEMU5HUreXX2lDfajZRLWa6G4BsWepVJ
- JbypFRmw++j98jr4txnVAq5sKRVTkZRsEop5YKWnbM9BlLvoeoKI9Jej0vxR3boGviMG
- R+P8hXOUx3DYqJ3YjeizHZ8YQXw8FVIj0GHk/Ce4FFqO78ebGlKt2jqBCgvIb+Rso/jI
- RWeA==
-X-Gm-Message-State: AOAM531jVMxDjyUwm3BVuZ+cY2chZbra9EI2H69R90nW3Fhk6NlyX0Xl
- vwN34GmFvKnHNvONjYygjKgT6Yril9PdlgflAOtjoZVQq/GmvSEG
-X-Google-Smtp-Source: ABdhPJyxduBF4FPnbsePTb+IJMrnaO574t87lgH7MXGDrxKnm7Fm0uPL20a9JpNnhO5AEW9mefqTwucGCC8avIECgKo=
-X-Received: by 2002:a05:6602:2dd4:: with SMTP id
- l20mr5412675iow.13.1592492407237; 
- Thu, 18 Jun 2020 08:00:07 -0700 (PDT)
+ bh=UL+8ApV4cJJsaL9i1XR4k0qibz3XspT8vONGVk524kc=; b=Fllzm2kJE8eIfE7zAva+3bNsod
+ yTUQCMLilfJ5JG7d/epUSHpB86FjFkhRs5jm/YpQhGPJfyKMYsK7BpbDrlUoOLmpis8AGJu3fwYjW
+ apgp48SqpTuxLsOy5t9p7aQcNaMXV0I6RJSAtUmmV42o3b/oUQLR+DFgs75zWgXKQiWk=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jlw4n-007p1S-94
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 15:03:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Transfer-Encoding
+ :Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+ Sender:Reply-To:Content-ID:Content-Description;
+ bh=UL+8ApV4cJJsaL9i1XR4k0qibz3XspT8vONGVk524kc=; b=EuLHMlaVNrGT+gpgg4ZOy214Lf
+ /NetdKt4msEGn/SdU6wS7Vb3Nicec9n/1E16Pv5CLgJpT25JAXyLZqTClcv5dthiCzHK32BiNFyNn
+ 2Vtkj1cmYSbWiXKfh18xDTiF4w22UEYWsdQ5WG/abzsVteDtOAX8vWZ3bKmb0ydVHdoW/dmfLoAdv
+ rcWXcFdBrgdT+0Rnct9YP5xWZ5E6pNPsBKwkf9wU8u6uAxjlRbX/tFeF4hooENdTFNAX/QSEm8LMc
+ hZs29nl0IRtyQgR2KBWEayJ7IYD2dzdJAKDyw0r1yoEP6TVl666nT/5G8UpJw9LpuF0WelqGPXar4
+ ortJ5rhQ==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jlw4L-0003On-LK; Thu, 18 Jun 2020 15:03:09 +0000
+Date: Thu, 18 Jun 2020 08:03:09 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Andreas Gruenbacher <agruenba@redhat.com>
+Message-ID: <20200618150309.GP8681@bombadil.infradead.org>
+References: <20200414150233.24495-1-willy@infradead.org>
+ <20200414150233.24495-17-willy@infradead.org>
+ <CAHc6FU4m1M7Tv4scX0UxSiVBqkL=Vcw_z-R7SufL8k7Bw=qPOw@mail.gmail.com>
+ <20200617003216.GC8681@bombadil.infradead.org>
+ <CAHpGcMK6Yu0p-FO8CciiySqh+qcWLG-t3hEaUg-rqJnS=2uhqg@mail.gmail.com>
+ <20200617022157.GF8681@bombadil.infradead.org>
+ <CAHc6FU7NLRHKRJJ6c2kQT0ig8ed1n+3qR-YcSCWzXOeJCUsLbA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200521095515.GK6462@dhcp22.suse.cz>
- <20200521163450.GV6462@dhcp22.suse.cz>
- <CA+G9fYsdsgRmwLtSKJSzB1eWcUQ1z-_aaU+BNcQpker34XT6_w@mail.gmail.com>
- <20200617135758.GA548179@chrisdown.name>
- <20200617141155.GQ9499@dhcp22.suse.cz>
- <CA+G9fYu+FB1PE0AMmE-9MrHpayE9kChwTyc3zfM6V83uQ0zcQA@mail.gmail.com>
- <20200617160624.GS9499@dhcp22.suse.cz>
- <CA+G9fYtCXrVGVtRTwxiqgfFNDDf_H4aNH=VpWLhsV4n_mCTLGg@mail.gmail.com>
- <20200617210935.GA578452@chrisdown.name>
- <CALOAHbBp7Ytd-Hta9NH-_HJtVTAsR5Pw2RYrVScp7PPezCEv2w@mail.gmail.com>
- <20200618123743.GA694719@chrisdown.name>
-In-Reply-To: <20200618123743.GA694719@chrisdown.name>
-From: Yafang Shao <laoar.shao@gmail.com>
-Date: Thu, 18 Jun 2020 22:59:28 +0800
-Message-ID: <CALOAHbCPd407z45e809VE5c8vP6ewqwkDkY9nrMP5TyP5cjG+A@mail.gmail.com>
-To: Chris Down <chris@chrisdown.name>
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <CAHc6FU7NLRHKRJJ6c2kQT0ig8ed1n+3qR-YcSCWzXOeJCUsLbA@mail.gmail.com>
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (laoar.shao[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.67 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: chrisdown.name]
- 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
- CUSTOM_MED
+ for more information. [URIs: infradead.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1jlw1c-008bc5-0j
-Subject: Re: [f2fs-dev] mm: mkfs.ext4 invoked oom-killer on i386 -
- pagecache_get_page
+ 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jlw4n-007p1S-94
+Subject: Re: [f2fs-dev] [Cluster-devel] [PATCH v11 16/25] fs: Convert
+ mpage_readpages to mpage_readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,55 +92,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: lkft-triage@lists.linaro.org, Michal Hocko <mhocko@kernel.org>,
- linux-mm <linux-mm@kvack.org>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Cgroups <cgroups@vger.kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
- Anders Roxell <anders.roxell@linaro.org>,
- Naresh Kamboju <naresh.kamboju@linaro.org>, Hugh Dickins <hughd@google.com>,
- Matthew Wilcox <willy@infradead.org>,
- Linux-Next Mailing List <linux-next@vger.kernel.org>,
- linux-ext4 <linux-ext4@vger.kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- linux-block <linux-block@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, open list <linux-kernel@vger.kernel.org>,
- "Linux F2FS DEV, Mailing List" <linux-f2fs-devel@lists.sourceforge.net>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Andrew Morton <akpm@linux-foundation.org>, Roman Gushchin <guro@fb.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: cluster-devel <cluster-devel@redhat.com>,
+ linux-ext4 <linux-ext4@vger.kernel.org>,
+ Steven Whitehouse <swhiteho@redhat.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, John Hubbard <jhubbard@nvidia.com>,
+ Andreas =?iso-8859-1?Q?Gr=FCnbacher?= <andreas.gruenbacher@gmail.com>,
+ LKML <linux-kernel@vger.kernel.org>, Junxiao Bi <junxiao.bi@oracle.com>,
+ linux-xfs <linux-xfs@vger.kernel.org>,
+ William Kucharski <william.kucharski@oracle.com>,
+ Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-erofs@lists.ozlabs.org,
+ Linux-MM <linux-mm@kvack.org>, ocfs2-devel@oss.oracle.com,
+ Bob Peterson <rpeterso@redhat.com>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 18, 2020 at 8:37 PM Chris Down <chris@chrisdown.name> wrote:
->
-> Yafang Shao writes:
-> >On Thu, Jun 18, 2020 at 5:09 AM Chris Down <chris@chrisdown.name> wrote:
-> >>
-> >> Naresh Kamboju writes:
-> >> >After this patch applied the reported issue got fixed.
-> >>
-> >> Great! Thank you Naresh and Michal for helping to get to the bottom of this :-)
-> >>
-> >> I'll send out a new version tomorrow with the fixes applied and both of you
-> >> credited in the changelog for the detection and fix.
+On Thu, Jun 18, 2020 at 02:46:03PM +0200, Andreas Gruenbacher wrote:
+> On Wed, Jun 17, 2020 at 4:22 AM Matthew Wilcox <willy@infradead.org> wrot=
+e:
+> > On Wed, Jun 17, 2020 at 02:57:14AM +0200, Andreas Gr=FCnbacher wrote:
+> > > Right, the approach from the following thread might fix this:
+> > >
+> > > https://lore.kernel.org/linux-fsdevel/20191122235324.17245-1-agruenba=
+@redhat.com/T/#t
 > >
-> >As we have already found that the usage around memory.{emin, elow} has
-> >many limitations, I think memory.{emin, elow} should be used for
-> >memcg-tree internally only, that means they can only be used to
-> >calculate the protection of a memcg in a specified memcg-tree but
-> >should not be exposed to other MM parts.
->
-> I agree that the current semantics are mentally taxing and we should generally
-> avoid exposing the implementation details outside of memcg where possible. Do
-> you have a suggested rework? :-)
+> > In general, I think this is a sound approach.
+> >
+> > Specifically, I think FAULT_FLAG_CACHED can go away.  map_pages()
+> > will bring in the pages which are in the page cache, so when we get to
+> > gfs2_fault(), we know there's a reason to acquire the glock.
+> =
 
-Keeping the mem_cgroup_protected() as-is is my suggestion. Anyway I
-think it is bad to put memory.{emin, elow} here and there.
-If we don't have any better idea by now, just putting all the
-references of memory.{emin, elow}  into one
-wrapper(mem_cgroup_protected()) is the reasonable solution.
+> We'd still be grabbing a glock while holding a dependent page lock.
+> Another process could be holding the glock and could try to grab the
+> same page lock (i.e., a concurrent writer), leading to the same kind
+> of deadlock.
 
--- 
-Thanks
-Yafang
+What I'm saying is that gfs2_fault should just be:
+
++static vm_fault_t gfs2_fault(struct vm_fault *vmf)
++{
++	struct inode *inode =3D file_inode(vmf->vma->vm_file);
++	struct gfs2_inode *ip =3D GFS2_I(inode);
++	struct gfs2_holder gh;
++	vm_fault_t ret;
++	int err;
++
++	gfs2_holder_init(ip->i_gl, LM_ST_SHARED, 0, &gh);
++	err =3D gfs2_glock_nq(&gh);
++	if (err) {
++		ret =3D block_page_mkwrite_return(err);
++		goto out_uninit;
++	}
++	ret =3D filemap_fault(vmf);
++	gfs2_glock_dq(&gh);
++out_uninit:
++	gfs2_holder_uninit(&gh);
++	return ret;
++}
+
+because by the time gfs2_fault() is called, map_pages() has already been
+called and has failed to insert the necessary page, so we should just
+acquire the glock now instead of trying again to look for the page in
+the page cache.
 
 
 _______________________________________________
