@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C05341FDCD3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:23:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B55571FDD71
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:26:37 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jljGd-0005DU-IV; Thu, 18 Jun 2020 01:22:59 +0000
+	id 1jljK7-0005O3-UQ; Thu, 18 Jun 2020 01:26:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jljGc-0005DI-68
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:22:58 +0000
+ (envelope-from <sashal@kernel.org>) id 1jljK6-0005Nw-LC
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:26:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3xn3BjJyIhKn4Q47Z8eJ5qWSAlbA0NBhj1VLMBImSvY=; b=PDGQRZLilXfQTOxaT3mRj6sdig
- y44ik/UDlu+bXzwdsuZIsIR9FyPLt7EG4t0ewqUU45shmyuhCOmt9aL9JGq0/gHQDoMfanbIKryi3
- cwFJHcR8yRCglcJGnULBqU+ptTouyP/UmzPzdIj/0jD1qKE3gCUMz372pEWX84MR0eQY=;
+ bh=TyDaALy7b9GA9AqxQCMPmlpaC/NOCq8JlC/FAJ11fSk=; b=OmxRJz/Eg9bE5lzXiCd3LuHzrD
+ qToPtZd5Z7gdl8JMHPOVkJanRSg7PNJAachZP/SVUSzan1pnzaM8gDYYMiJrm1YTd7yIBnQKGZISn
+ ekur30X9gUigqUpYPLxd7BO1PImvx/Wjgz6xA1/a/6E/di9e90M28ArjJYgLpaMDLxQM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3xn3BjJyIhKn4Q47Z8eJ5qWSAlbA0NBhj1VLMBImSvY=; b=RnSOzwKK1blBX4rVIxE5CLvqq9
- R8VixlwbpzaYcMUT8InS+u9tUuEknyo3CHjWEvYJHj6OjD4+tWa4S9FuzHSG2jVldR6WAOot5NFb2
- L77h+4ZAF/dl1fWec4pVPclZ0Y1aW8Nfu4fXjJULqOtqIHoIWispA0CNyRBVpOVc0A6s=;
+ bh=TyDaALy7b9GA9AqxQCMPmlpaC/NOCq8JlC/FAJ11fSk=; b=fz2ZptKH14jitl44yewxgqv44Y
+ LSwJN74I8Gi11cC958yp5VAv2WXhq4NO3vtAgkr4iAHmiJoXApz56mz11lcGxZK8PIR5Pv0wN3MEh
+ oJkC7sVqETFw6LXHurKNXVtsVHhAdvx9arP99gsMw00TA3dVbwfBaEGveXAGo3ilfHNY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jljGa-0071zG-MW
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:22:58 +0000
+ id 1jljK5-0072Ck-H0
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:26:34 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 70B7520FC3;
- Thu, 18 Jun 2020 01:22:43 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3113E20776;
+ Thu, 18 Jun 2020 01:26:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592443364;
- bh=eA5Cn37u1sfoM/u0eqjABoeZC7g3Uj2f/ifAxgr7le0=;
+ s=default; t=1592443581;
+ bh=nf9nzU35c55tX/xzhfgZMXmzLhWaHU1Nh+8LWMvq+ZM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oeIHRv6tul8EjjLqjU2W25NsGBzbFMTTvDU0pgexb+Tx2vdUFSKbni4NEyaHYXP9l
- o29EkX7LhrzVUnzikmnTjtgNGvD3q/+dnkSO+o6JSe6FwCU851/7OGkjwcpHL+H7iv
- Bfz8TbiuJUJ9SxGhQO+imjNKWxYlbP68WkMKN4YM=
+ b=nN/JeaZoC65itd9bfcNrngaSXpebAWzuAiZez1XCHoKuS8qF2zCDD7CbKW91GMEIE
+ PG30Z0cCGmzgQfyrhrCCVYbDyHz3v93dYcIcfhF6uajhW6K8/QmoER67JxGT50rBh/
+ eZiWt1uJJCxFAEyudg6KoYrT3nBKGG5nq2Ug6sDI=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:19:46 -0400
-Message-Id: <20200618012218.607130-20-sashal@kernel.org>
+Date: Wed, 17 Jun 2020 21:24:28 -0400
+Message-Id: <20200618012600.608744-16-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200618012218.607130-1-sashal@kernel.org>
-References: <20200618012218.607130-1-sashal@kernel.org>
+In-Reply-To: <20200618012600.608744-1-sashal@kernel.org>
+References: <20200618012600.608744-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,8 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jljGa-0071zG-MW
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 020/172] f2fs: report delalloc
+X-Headers-End: 1jljK5-0072Ck-H0
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 016/108] f2fs: report delalloc
  reserve as non-free in statfs for project quota
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -118,10 +118,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 45f8f6ec22a5..9782250c9815 100644
+index 2d021a33914a..89319c352406 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -1154,7 +1154,8 @@ static int f2fs_statfs_project(struct super_block *sb,
+@@ -918,7 +918,8 @@ static int f2fs_statfs_project(struct super_block *sb,
  		limit >>= sb->s_blocksize_bits;
  
  	if (limit && buf->f_blocks > limit) {
