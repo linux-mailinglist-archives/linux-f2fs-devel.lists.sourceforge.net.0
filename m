@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B651FDB1C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:10:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C87D41FDB57
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:12:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlj4a-0004Xb-6U; Thu, 18 Jun 2020 01:10:32 +0000
+	id 1jlj6R-0002NQ-Kj; Thu, 18 Jun 2020 01:12:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jlj4Y-0004XQ-4A
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:10:30 +0000
+ (envelope-from <sashal@kernel.org>) id 1jlj6Q-0002N2-FC
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:12:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cgQQ0/pVSRPRvgif/tflM86gLkZSdgJBm5TrMiuRjzk=; b=ZPCx/xXBNXL2/2xU1CKm/vdy0Q
- EuybI/5HqnIh9LBuE3a5747CwaIAEtPv5VusiuOJ63k/1FOY+MDIUAHMhuKMU5deAk1KN84cYVybB
- 3oLDLB/ZZiOS5ezKc0HgXOIXzBsp0lHhlhUOmNId7Ynu3ndqPrm5vbqtJVquw64WP9qo=;
+ bh=AH6kFDJAeMQ7AdVXgGFFHt5YchHMR6lSgm/cNK+EAIA=; b=GzXG1Aq2GfZnkn0/l292k8dnxh
+ Dk0OKyyUsnlGbsohe5kYaz3B+3+x2C3MBy7N8bJkLVpIC7ZVWkKHvK2+A1zt1n4ZcSKlurAYrggSD
+ BOro9xdgt7muv2AdYPuKSygYe/VEdzWbWPvvQXDjjpSV06NOzc1KZS78SV59xXn44D/E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cgQQ0/pVSRPRvgif/tflM86gLkZSdgJBm5TrMiuRjzk=; b=RojuxNbDEr4Bm4+AgOKIF0r8nz
- qDsRkO7RQxkIA4TR8dC1qEwjw5QTHqY4L3j7aLc9oEbqiPrdbl2dMd+2WkWveGVF0+ZMzzZtxJa4/
- xFclRLq1nB1zyFrTUWlFxxqUehO2nu5QQL24Fd3fh2QH0fftY+ig6rg5ZDfG0E2Gktlo=;
+ bh=AH6kFDJAeMQ7AdVXgGFFHt5YchHMR6lSgm/cNK+EAIA=; b=gG88eXalUAEL2slYCeqVO6Yqhk
+ hpX2HlxnuNqjXwBZdlQiaXO5HZE85XesbD+blWCQphyUz72WXxWDtOnaWpnmjC3ltQGdXgaIYY7Vv
+ ifcQbeyzAm91Pv8ldsuTZ3ZF0845mUFHrAeMrGBr3V/70e9z741mMvVsL8H1LhYs0g/Y=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jlj4W-007eI2-VL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:10:30 +0000
+ id 1jlj6P-00A09T-Cm
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:12:26 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 31C6F20CC7;
- Thu, 18 Jun 2020 01:10:21 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1F55C20EDD;
+ Thu, 18 Jun 2020 01:12:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592442621;
- bh=BbJ617bFOG+Jd2fPEGqvE+hziquN3k6VXqs2Y9KUipg=;
+ s=default; t=1592442732;
+ bh=nd3Q9O8wgiC7/4gHtMEUgLr+DTz8kVmOYU9qM77/DeI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=q941rdESgU4LRztrie8L0aE0drD7vLvHqiHCq+8TbJ1JYPfbZkISTHmWmQ5cQrQX4
- ML7Q9U6sZad9VMH9Gpz0/fIOT4eD4j7+swDZYSgGE3PzkcGvankFjOgbtdaPPYMguK
- +ey2uMtitT4hNVsswLdA36s4O/biOe4D/w67URT4=
+ b=hlA392vWciZNKg5D8uxXs5EA2E5r8zLmyhwgTNJ9GKnWVnBuwNhaStiGksFBZUJuU
+ lerr4ehVmcTByc5pJAWWZz7Mm3Ebu9u7H1SuB2Iy0e1+4KRJYG8WYViO41HO0hb9kD
+ QsuGMCu9g4K9BsqseQna5VfGQ7S61nvCKFKXYOIQ=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:03:18 -0400
-Message-Id: <20200618010805.600873-101-sashal@kernel.org>
+Date: Wed, 17 Jun 2020 21:04:45 -0400
+Message-Id: <20200618010805.600873-188-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200618010805.600873-1-sashal@kernel.org>
 References: <20200618010805.600873-1-sashal@kernel.org>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jlj4W-007eI2-VL
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.7 101/388] f2fs: handle readonly
- filesystem in f2fs_ioc_shutdown()
+X-Headers-End: 1jlj6P-00A09T-Cm
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.7 188/388] f2fs: Fix wrong stub helper
+ update_sit_info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,47 +92,40 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+ YueHaibing <yuehaibing@huawei.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: YueHaibing <yuehaibing@huawei.com>
 
-[ Upstream commit 8626441f05dc45a2f4693ee6863d02456ce39e60 ]
+[ Upstream commit 48abe91ac1ad27cd5a5709f983dcf58f2b9a6b70 ]
 
-If mountpoint is readonly, we should allow shutdowning filesystem
-successfully, this fixes issue found by generic/599 testcase of
-xfstest.
+update_sit_info should be f2fs_update_sit_info,
+otherwise build fails while no CONFIG_F2FS_STAT_FS.
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Fixes: fc7100ea2a52 ("f2fs: Add f2fs stats to sysfs")
+Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/file.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ fs/f2fs/f2fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 6ab8f621a3c5..30b35915fa3a 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2219,8 +2219,15 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index ba470d5687fe..1f8ae28d7ccf 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3655,7 +3655,7 @@ static inline int f2fs_build_stats(struct f2fs_sb_info *sbi) { return 0; }
+ static inline void f2fs_destroy_stats(struct f2fs_sb_info *sbi) { }
+ static inline void __init f2fs_create_root_stats(void) { }
+ static inline void f2fs_destroy_root_stats(void) { }
+-static inline void update_sit_info(struct f2fs_sb_info *sbi) {}
++static inline void f2fs_update_sit_info(struct f2fs_sb_info *sbi) {}
+ #endif
  
- 	if (in != F2FS_GOING_DOWN_FULLSYNC) {
- 		ret = mnt_want_write_file(filp);
--		if (ret)
-+		if (ret) {
-+			if (ret == -EROFS) {
-+				ret = 0;
-+				f2fs_stop_checkpoint(sbi, false);
-+				set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
-+				trace_f2fs_shutdown(sbi, in, ret);
-+			}
- 			return ret;
-+		}
- 	}
- 
- 	switch (in) {
+ extern const struct file_operations f2fs_dir_operations;
 -- 
 2.25.1
 
