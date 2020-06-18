@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4CFC1FDADF
+	by mail.lfdr.de (Postfix) with ESMTPS id CB3591FDAE0
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jun 2020 03:09:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jlj36-0002DC-O3; Thu, 18 Jun 2020 01:09:00 +0000
+	id 1jlj38-0004Sa-SC; Thu, 18 Jun 2020 01:09:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1jlj35-0002D5-CH
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:08:59 +0000
+ (envelope-from <sashal@kernel.org>) id 1jlj36-0004SF-6f
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:09:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4LnRiSm3QmtEiITy4NyjAIss6/TSoDTg6hz1/U6Klp0=; b=Yf+CT0aGFmBjpab8lMJV+6P7UM
- eIgbL+IFHbr+73a3VqahElBRPIKVm6ecntfFliQkAkL0S1r1zF+pY/HrOm//kWEyazt90WTKWVlSO
- ejLgYEdTHTycv/q/drLVnaRhqvsMc5N7yeBtKppm6x3/Z4A6+nz6wnPnK1M4QgP7WNvc=;
+ bh=YX0+EyvzS0HPB0nX1PA7XmwYKhluB26e1CnepWsUJZs=; b=VaK+KnOa6yuvlT6Mt8eqS1W8jb
+ Rsqb8ceGDN3UYsAQHvhqY+DgI8C99ZNXHWeWjYNpI/OD4ofRiGt9AHkVzdE59o6XgFcTIL95KFWXR
+ D7hXxGBofDfegCETsqU9fHw7x5tA1IUV3rcoHheZe4GA5rny/n4CHznlBXJV6SW9Ap98=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,57 +29,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4LnRiSm3QmtEiITy4NyjAIss6/TSoDTg6hz1/U6Klp0=; b=HG7Gu8pF8eaQTadinyeoTA88uZ
- ooXpV/1NCOeywiHbsMG0fYln2erp9ojxwhy1ZtVgQLrSn1+Wf61/JGVymHdu9UPwIvAYhsoii76K7
- xGSdL4gd76/m5iqBcZD683HkFKignyw212K7k29rpOa/f4jETTjGbkAT8YL8MAl3Ob7s=;
+ bh=YX0+EyvzS0HPB0nX1PA7XmwYKhluB26e1CnepWsUJZs=; b=k0EY8Dbka0J15D9st+q7cSQAik
+ rSZ8n8+eW6xMhbEXKvobHWX9urChDZC2NYF9MzAdFmP6/5nC3ApzmxxGyMNvO9CeZVxDtTLTv5Z3r
+ CxeCZxdI/ZaqgdsfxtqRztjRFqLSm6eAt4Nw5QMNTtQJ6WjT68RRfznsY58WFbWXysP8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jlj34-00A00Z-2U
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:08:59 +0000
+ id 1jlj35-00A00b-4z
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 18 Jun 2020 01:09:00 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BEF8F21D6C;
- Thu, 18 Jun 2020 01:08:51 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0D8E721D7A;
+ Thu, 18 Jun 2020 01:08:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592442532;
- bh=ekHxHA0/0+ucEtW0CwYzY4lQSV0nX8LCO1zOta4a1Pc=;
+ s=default; t=1592442533;
+ bh=3nkSWgAAPcJChv3MakksNPZN+UPpc4ypgp0uwpNGb5c=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uAZggeOkvT3ekpDhaLarJ6ZVm9oI74gI8HmlIOJYTf1udMgvAr2bP0Iev9Yk7HgVL
- MFTQ9BxAALllkpPeKIpQRusI4JcKsxem/fZMPZoyq1KK3OO1Qa8c0rkQi7+XKavliY
- ZidYMIE3NHoVWHUimbhtxtMbZxX5wqjHBv/Ic8P8=
+ b=qLVmMrDVP/M2tb2i+qV4wKgGY769x3RjaabNWibOX1SbPeev9hyh8G688TxP7A82X
+ Ib9IULJw3I687icBR9W5YxfD/bzkzk0rgE++BjkLCP1roEF0w5qk1e6L8QEUnveF8u
+ WbTB9ivPQmmWsKE3vWgKVLfICnaRzAyNWxiyVq4Y=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:02:12 -0400
-Message-Id: <20200618010805.600873-35-sashal@kernel.org>
+Date: Wed, 17 Jun 2020 21:02:13 -0400
+Message-Id: <20200618010805.600873-36-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200618010805.600873-1-sashal@kernel.org>
 References: <20200618010805.600873-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jlj34-00A00Z-2U
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.7 035/388] f2fs: compress: let lz4
- compressor handle output buffer budget properly
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jlj35-00A00b-4z
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.7 036/388] f2fs: report delalloc
+ reserve as non-free in statfs for project quota
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,69 +91,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Konstantin Khlebnikov <khlebnikov@yandex-team.ru>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Sasha Levin <sashal@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+From: Konstantin Khlebnikov <khlebnikov@yandex-team.ru>
 
-[ Upstream commit f6644143c63f2eac88973f7fea087582579b0189 ]
+[ Upstream commit baaa7ebf25c78c5cb712fac16b7f549100beddd3 ]
 
-Commonly, in order to handle lz4 worst compress case, caller should
-allocate buffer with size of LZ4_compressBound(inputsize) for target
-compressed data storing, however in this case, if caller didn't
-allocate enough space, lz4 compressor still can handle output buffer
-budget properly, and end up compressing when left space in output
-buffer is not enough.
+This reserved space isn't committed yet but cannot be used for
+allocations. For userspace it has no difference from used space.
 
-So we don't have to allocate buffer with size for worst case, then
-we can avoid 2 * 4KB size intermediate buffer allocation when
-log_cluster_size is 2, and avoid unnecessary compressing work of
-compressor if we can not save at least 4KB space.
+See the same fix in ext4 commit f06925c73942 ("ext4: report delalloc
+reserve as non-free in statfs for project quota").
 
-Suggested-by: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Fixes: ddc34e328d06 ("f2fs: introduce f2fs_statfs_project")
+Signed-off-by: Konstantin Khlebnikov <khlebnikov@yandex-team.ru>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/compress.c | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
+ fs/f2fs/super.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index df7b2d15eacd..c05801758a35 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -236,7 +236,12 @@ static int lz4_init_compress_ctx(struct compress_ctx *cc)
- 	if (!cc->private)
- 		return -ENOMEM;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index f2dfc21c6abb..c5e8cb31626f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1292,7 +1292,8 @@ static int f2fs_statfs_project(struct super_block *sb,
+ 		limit >>= sb->s_blocksize_bits;
  
--	cc->clen = LZ4_compressBound(PAGE_SIZE << cc->log_cluster_size);
-+	/*
-+	 * we do not change cc->clen to LZ4_compressBound(inputsize) to
-+	 * adapt worst compress case, because lz4 compressor can handle
-+	 * output budget properly.
-+	 */
-+	cc->clen = cc->rlen - PAGE_SIZE - COMPRESS_HEADER_SIZE;
- 	return 0;
- }
- 
-@@ -252,11 +257,9 @@ static int lz4_compress_pages(struct compress_ctx *cc)
- 
- 	len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
- 						cc->clen, cc->private);
--	if (!len) {
--		printk_ratelimited("%sF2FS-fs (%s): lz4 compress failed\n",
--				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id);
--		return -EIO;
--	}
-+	if (!len)
-+		return -EAGAIN;
-+
- 	cc->clen = len;
- 	return 0;
- }
+ 	if (limit && buf->f_blocks > limit) {
+-		curblock = dquot->dq_dqb.dqb_curspace >> sb->s_blocksize_bits;
++		curblock = (dquot->dq_dqb.dqb_curspace +
++			    dquot->dq_dqb.dqb_rsvspace) >> sb->s_blocksize_bits;
+ 		buf->f_blocks = limit;
+ 		buf->f_bfree = buf->f_bavail =
+ 			(buf->f_blocks > curblock) ?
 -- 
 2.25.1
 
