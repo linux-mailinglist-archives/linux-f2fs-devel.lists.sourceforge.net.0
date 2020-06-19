@@ -2,71 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E460F200536
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 11:34:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Cc:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive
-	:List-Unsubscribe:List-Id:Subject:Message-Id:Date:To:Sender:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=FjdzKPqmbp0RM/m/ZbHRCriA6VyXjuWz/ukEB2BUGkI=; b=Is7J8lD+lyQkNThwbmvY11Ai0M
-	+RlwlD432ZPv4vzltHRdPPQwxk5cRwQYntI0S+5OOItXlK3/P7cBfnsOtdpZSszc2+BoCXMxp0hgg
-	EXu8QLKVbCLiCvmeH1lSz2FkOIxu/UZDkNLG/97Ph8+om/fmWM0joWNFKIFvYrEeJ6TU=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 1969B20056A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 11:40:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jmDPK-0000Ma-By; Fri, 19 Jun 2020 09:33:58 +0000
+	id 1jmDVC-0000h9-Nu; Fri, 19 Jun 2020 09:40:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <zhaowuyun@wingtech.com>) id 1jmDPJ-0000MT-6T
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 09:33:57 +0000
+ (envelope-from <agruenba@redhat.com>) id 1jmDVB-0000gk-CK
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 09:40:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EPanF3W2hy/iUW4tJSZclpcUR5SWOiW1RbzihWstZOA=; b=UnbzOQDnsWArdT76mtwVXRoHr7
- uP5YIv+X2vWXxTHUN+wVdxhNF60F9hWmcaMgp5HwTbL6o5dtCiqjUmY7WnvvqFMbbbxV+8hOS44sA
- yY4gKPhRhdMiV9Sc+qnQZtJhVtGawqiYvG1XLXZYvUo6V52YnlSguUVKdvgPyCsU9Eco=;
+ bh=owa0qFAPsKpu74jXgvEbAGd5tDvX5jYwWR6WKxTC83E=; b=DxkSq7Wd1iakkbdcaXQ7mhXdAd
+ yMTeUwKYiqwVUwn1IpgCgnhfVaGpb7M/2+H5I+iIHPlzOlDsK6uEpW6NZAP5VrS27En8d0PQgxo1q
+ AKINXgTK5u/whjE9LbfQpEQ/KWLbkuWTauXFspUWYNnXjPesJQbOR8eHj3PuT7tkXDMs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=EPanF3W2hy/iUW4tJSZclpcUR5SWOiW1RbzihWstZOA=; b=INiiceRYq6xPRMYNT8pNp6/xp1
- tCB+6eYu2lobM9lwkRRBo+ao7IcnmrbCFU8HT/AvcsXP8wuW24lpa58TWSIOZ6cqqyueJbYsOYnch
- ZUPYfehMgnPAPjYTGhFmlmSjk7kggnNDLdp+mp9OJz6yDon8Q7I0B6tzgCHaPRJVsnSI=;
-Received: from mx.wingtech.com ([180.166.216.14] helo=mail.wingtech.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.92.2) id 1jmDPF-00BoTC-Ke
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 09:33:57 +0000
-Received: from mx.wingtech.com ([192.168.2.43])
- by mail.wingtech.com  with SMTP id 05J9XhX8022460-05J9XhX9022460
- for <linux-f2fs-devel@lists.sourceforge.net>; Fri, 19 Jun 2020 17:33:43 +0800
-Received: from 192.168.51.143 (HELO ZHAOWUYUN.WINGTECH.COM);
- Fri, 19 Jun 2020 17:33:41 +0800
-To: yuchao0@huawei.com, jaegeuk@kernel.org
-Date: Fri, 19 Jun 2020 17:33:30 +0800
-Message-Id: <1592559210-2379-1-git-send-email-zhaowuyun@wingtech.com>
-X-Mailer: git-send-email 2.7.4
-X-Spam-Score: 0.0 (/)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=owa0qFAPsKpu74jXgvEbAGd5tDvX5jYwWR6WKxTC83E=; b=P
+ Vcex9Xiazl0clAg6w+pzIKYio5JXCZDq8IAcnTp8ZRL1jSy1bgWRswmQeVqxb9ufLVyEHUxpqMFkd
+ 0ApcKirhklJImjPu82d7hjRbqSV3/OFR1L3sYWa/50lA8L62yqCxSrLLygxjrBvnhKKo1YZsp4djH
+ zKkrxcXSgcSnqNAE=;
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]
+ helo=us-smtp-1.mimecast.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1jmDV9-009rmX-Rg
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 09:40:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592559586;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=owa0qFAPsKpu74jXgvEbAGd5tDvX5jYwWR6WKxTC83E=;
+ b=CzuMDJKrIk4NcOZh/icmX3Kuzi/b+3kayq7WRD0/HO22uZw6dJjERw5tdLkD1tfEkdL0W1
+ aJTybG7PLn+r2nVQUKvhDTfPYBrSWQC3I4Uq2lsskm75po+wM/v2rmAOH3QpHY0Fjk+vdW
+ 0hqfGw2h4p7mV5YR9YCJsr9RTVh7vXw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-263-E2DQ6Q59N3WWMbSJVCOn4A-1; Fri, 19 Jun 2020 05:39:29 -0400
+X-MC-Unique: E2DQ6Q59N3WWMbSJVCOn4A-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BE7B8107B265;
+ Fri, 19 Jun 2020 09:39:26 +0000 (UTC)
+Received: from max.home.com (unknown [10.40.195.140])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4E9A15D9E8;
+ Fri, 19 Jun 2020 09:39:18 +0000 (UTC)
+From: Andreas Gruenbacher <agruenba@redhat.com>
+To: Matthew Wilcox <willy@infradead.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>
+Date: Fri, 19 Jun 2020 11:39:14 +0200
+Message-Id: <20200619093916.1081129-1-agruenba@redhat.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [207.211.31.120 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [207.211.31.120 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1jmDPF-00BoTC-Ke
-Subject: [f2fs-dev] [PATCH v4] f2fs-tools: introduce set_node_footer to
- initialize node footer
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jmDV9-009rmX-Rg
+Subject: [f2fs-dev] [RFC PATCH 0/2] gfs2 readahead regression in v5.8-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,198 +97,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: zhaowuyun--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: zhaowuyun@wingtech.com
-Cc: zhaowuyun@wingtech.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
+Cc: cluster-devel@redhat.com, linux-ext4@vger.kernel.org,
+ Andreas Gruenbacher <agruenba@redhat.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, John Hubbard <jhubbard@nvidia.com>,
+ linux-kernel@vger.kernel.org, Junxiao Bi <junxiao.bi@oracle.com>,
+ linux-xfs <linux-xfs@vger.kernel.org>,
+ William Kucharski <william.kucharski@oracle.com>,
+ Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-erofs@lists.ozlabs.org,
+ linux-mm@kvack.org, ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Wuyun Zhao <zhaowuyun@wingtech.com>
+Hello,
 
-the filesystem will use the cold flag, so deal with it to avoid
-potential issue of inconsistency
+can the two patches in this set still be considered for v5.8?
 
-Signed-off-by: Wuyun Zhao <zhaowuyun@wingtech.com>
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
----
- fsck/dir.c         |  7 ++-----
- fsck/node.c        | 12 +++++-------
- include/f2fs_fs.h  | 23 +++++++++++++++++++++++
- mkfs/f2fs_format.c | 34 +++++++++++++---------------------
- 4 files changed, 43 insertions(+), 33 deletions(-)
+Commit d4388340ae0b ("fs: convert mpage_readpages to mpage_readahead")
+which converts gfs2 and other filesystems to use the new ->readahead
+address space operation is leading to deadlocks between the inode glocks
+and page locks: ->readahead is called with the pages to readahead
+already locked.  When gfs2_readahead then tries to lock the associated
+inode glock, another process already holding the inode glock may be
+trying to lock the same pages.
 
-diff --git a/fsck/dir.c b/fsck/dir.c
-index 5f4f75e..b067aec 100644
---- a/fsck/dir.c
-+++ b/fsck/dir.c
-@@ -517,11 +517,8 @@ static void init_inode_block(struct f2fs_sb_info *sbi,
- 	}
- 
- 	set_file_temperature(sbi, node_blk, de->name);
--
--	node_blk->footer.ino = cpu_to_le32(de->ino);
--	node_blk->footer.nid = cpu_to_le32(de->ino);
--	node_blk->footer.flag = 0;
--	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
-+	set_node_footer(node_blk, de->ino, de->ino, 0,
-+			le64_to_cpu(ckpt->checkpoint_ver), 0, S_ISDIR(mode));
- 
- 	if (S_ISDIR(mode)) {
- 		make_empty_dir(sbi, node_blk);
-diff --git a/fsck/node.c b/fsck/node.c
-index 229a99c..ef7ed0b 100644
---- a/fsck/node.c
-+++ b/fsck/node.c
-@@ -61,7 +61,7 @@ void set_data_blkaddr(struct dnode_of_data *dn)
- block_t new_node_block(struct f2fs_sb_info *sbi,
- 				struct dnode_of_data *dn, unsigned int ofs)
- {
--	struct f2fs_node *f2fs_inode;
-+	struct f2fs_node *f2fs_inode = dn->inode_blk;
- 	struct f2fs_node *node_blk;
- 	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
- 	struct f2fs_summary sum;
-@@ -69,16 +69,14 @@ block_t new_node_block(struct f2fs_sb_info *sbi,
- 	block_t blkaddr = NULL_ADDR;
- 	int type;
- 	int ret;
--
--	f2fs_inode = dn->inode_blk;
-+	nid_t ino = le32_to_cpu(f2fs_inode->footer.ino);
-+	u64 cp_ver = le64_to_cpu(ckpt->checkpoint_ver);
- 
- 	node_blk = calloc(BLOCK_SZ, 1);
- 	ASSERT(node_blk);
- 
--	node_blk->footer.nid = cpu_to_le32(dn->nid);
--	node_blk->footer.ino = f2fs_inode->footer.ino;
--	node_blk->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
--	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
-+	set_node_footer(node_blk, dn->nid, ino, ofs, cp_ver, 0,
-+			S_ISDIR(le16_to_cpu(f2fs_inode->i.i_mode)));
- 
- 	type = CURSEG_COLD_NODE;
- 	if (IS_DNODE(node_blk)) {
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 709bfd8..ab19eb7 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -923,6 +923,29 @@ struct f2fs_node {
- 	struct node_footer footer;
- } __attribute__((packed));
- 
-+static inline void set_cold_node(struct f2fs_node *rn, bool is_dir)
-+{
-+	unsigned int flag = le32_to_cpu(rn->footer.flag);
-+
-+	if (is_dir)
-+		flag &= ~(0x1 << COLD_BIT_SHIFT);
-+	else
-+		flag |= (0x1 << COLD_BIT_SHIFT);
-+	rn->footer.flag = cpu_to_le32(flag);
-+}
-+
-+static inline void set_node_footer(struct f2fs_node *rn, nid_t nid, nid_t ino,
-+					u32 ofs, u64 ver, block_t blkaddr,
-+					bool is_dir)
-+{
-+	rn->footer.nid = cpu_to_le32(nid);
-+	rn->footer.ino = cpu_to_le32(ino);
-+	rn->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
-+	rn->footer.cp_ver = cpu_to_le64(ver);
-+	rn->footer.next_blkaddr = cpu_to_le32(blkaddr);
-+	set_cold_node(rn, is_dir);
-+}
-+
- /*
-  * For NAT entries
-  */
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 44575e0..656023a 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -1094,6 +1094,9 @@ static int f2fs_write_root_inode(void)
- 	struct f2fs_node *raw_node = NULL;
- 	u_int64_t blk_size_bytes, data_blk_nor;
- 	u_int64_t main_area_node_seg_blk_offset = 0;
-+	nid_t nid = le32_to_cpu(sb->root_ino);
-+	block_t blkaddr = get_sb(main_blkaddr) +
-+				c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg + 1;
- 
- 	raw_node = calloc(F2FS_BLKSIZE, 1);
- 	if (raw_node == NULL) {
-@@ -1101,13 +1104,7 @@ static int f2fs_write_root_inode(void)
- 		return -1;
- 	}
- 
--	raw_node->footer.nid = sb->root_ino;
--	raw_node->footer.ino = sb->root_ino;
--	raw_node->footer.cp_ver = cpu_to_le64(1);
--	raw_node->footer.next_blkaddr = cpu_to_le32(
--			get_sb(main_blkaddr) +
--			c.cur_seg[CURSEG_HOT_NODE] *
--			c.blks_per_seg + 1);
-+	set_node_footer(raw_node, nid, nid, 0, 1, blkaddr, 1);
- 
- 	raw_node->i.i_mode = cpu_to_le16(0x41ed);
- 	if (c.lpf_ino)
-@@ -1256,6 +1253,10 @@ static int f2fs_write_qf_inode(int qtype)
- 	u_int64_t main_area_node_seg_blk_offset = 0;
- 	__le32 raw_id;
- 	int i;
-+	nid_t qf_ino = le32_to_cpu(sb->qf_ino[qtype]);
-+	block_t blkaddr = get_sb(main_blkaddr) +
-+					c.cur_seg[CURSEG_HOT_NODE] *
-+					c.blks_per_seg + 1 + qtype + 1;
- 
- 	raw_node = calloc(F2FS_BLKSIZE, 1);
- 	if (raw_node == NULL) {
-@@ -1263,13 +1264,7 @@ static int f2fs_write_qf_inode(int qtype)
- 		return -1;
- 	}
- 
--	raw_node->footer.nid = sb->qf_ino[qtype];
--	raw_node->footer.ino = sb->qf_ino[qtype];
--	raw_node->footer.cp_ver = cpu_to_le64(1);
--	raw_node->footer.next_blkaddr = cpu_to_le32(
--			get_sb(main_blkaddr) +
--			c.cur_seg[CURSEG_HOT_NODE] *
--			c.blks_per_seg + 1 + qtype + 1);
-+	set_node_footer(raw_node, qf_ino, qf_ino, 0, 1, blkaddr, 0);
- 
- 	raw_node->i.i_mode = cpu_to_le16(0x8180);
- 	raw_node->i.i_links = cpu_to_le32(1);
-@@ -1447,6 +1442,9 @@ static int f2fs_write_lpf_inode(void)
- 	struct f2fs_node *raw_node;
- 	u_int64_t blk_size_bytes, main_area_node_seg_blk_offset;
- 	block_t data_blk_nor;
-+	block_t blkaddr = get_sb(main_blkaddr) +
-+				c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
-+				1 + c.quota_inum + 1;
- 	int err = 0;
- 
- 	ASSERT(c.lpf_ino);
-@@ -1457,13 +1455,7 @@ static int f2fs_write_lpf_inode(void)
- 		return -1;
- 	}
- 
--	raw_node->footer.nid = cpu_to_le32(c.lpf_ino);
--	raw_node->footer.ino = raw_node->footer.nid;
--	raw_node->footer.cp_ver = cpu_to_le64(1);
--	raw_node->footer.next_blkaddr = cpu_to_le32(
--			get_sb(main_blkaddr) +
--			c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
--			1 + c.quota_inum + 1);
-+	set_node_footer(raw_node, c.lpf_ino, c.lpf_ino, 0, 1, blkaddr, 1);
- 
- 	raw_node->i.i_mode = cpu_to_le16(0x41c0); /* 0700 */
- 	raw_node->i.i_links = cpu_to_le32(2);
+We could work around this in gfs by using a LM_FLAG_TRY lock in
+->readahead for now.  The real reason for this deadlock is that gfs2
+shouldn't be taking the inode glock in ->readahead in the first place
+though, so I'd prefer to fix this "properly" instead.  Unfortunately,
+this depends on a new IOCB_CACHED flag for generic_file_read_iter.
+
+A previous version was posted in November:
+
+https://lore.kernel.org/linux-fsdevel/20191122235324.17245-1-agruenba@redhat.com/
+
+Thanks,
+Andreas
+
+Andreas Gruenbacher (2):
+  fs: Add IOCB_CACHED flag for generic_file_read_iter
+  gfs2: Rework read and page fault locking
+
+ fs/gfs2/aops.c     | 27 ++------------------
+ fs/gfs2/file.c     | 61 ++++++++++++++++++++++++++++++++++++++++++++--
+ include/linux/fs.h |  1 +
+ mm/filemap.c       | 16 ++++++++++--
+ 4 files changed, 76 insertions(+), 29 deletions(-)
+
+
+base-commit: af42d3466bdc8f39806b26f593604fdc54140bcb
 -- 
-2.7.4
+2.26.2
 
 
 
