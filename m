@@ -2,76 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C99701FFFD7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 03:45:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jm65Z-0000DV-I4; Fri, 19 Jun 2020 01:45:05 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jm65Y-0000DO-48
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 01:45:04 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id B4AFD200026
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 04:21:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:In-Reply-To:
+	References:To:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=ZILLs09CpsvqrhUXW8Qa2Osu/wGmzS+aX+Mobel6gRE=; b=T80160H3TLQrHSqxr6xGkbroI1
+	V1DgF/bGxyS34yhVUTcomcqDVtMhHjwSO8gMWoLmf2kuPbvbeG3HalIwl7GuMfNQEz94eWSyH/fI9
+	VqiCUEZl9N76V/D54Y4V+HatfJCIBlEsYq3Cg2rbpYOk9Ra04cfO0ruvXVopP+yA8sjc=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1jm6ei-0006So-W7; Fri, 19 Jun 2020 02:21:24 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <zhaowuyun@wingtech.com>) id 1jm6eh-0006Sc-LH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 02:21:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gqBTPjh8xdeAijITViEkMbrMiEPlvez2gLVvo1bKCCs=; b=EAIwHTuMTkOF/3VGFEPRDCUP8s
- ppzYZfMNJYEM09vpzyQZHdVqzDce+GO86w3n8I/c0kMVmEVwuddjuooOjhcsX3I61TevSTQEBQXsl
- qzhxiMB0CpeQpx3GYvaVvONEUGjqHJylSESutIMB/jgaiw9svpJt60WT75m5MbjMsKj8=;
+ bh=FuaBSGjArEM462JpNiI9C1xyN9l4ipJxBnksGnsEOck=; b=VEml77pXcp2RUPbaAcA/QZb1xq
+ J5ATvHQ5/MF9n4Q69X24BVDdVZIGg53BKenXkXXiuBW8rX+WThDbZhv6IVTRWcnI0QSZGb/uEi19R
+ NjAmI5SR/K3zTF9/Ea67G3ZFBCHJRBN3boLqBNNfR8XI1IAD2CkY870XD8VJ/i264bwg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gqBTPjh8xdeAijITViEkMbrMiEPlvez2gLVvo1bKCCs=; b=PZPnjPVtjUhzWg3zMNyzvQtshh
- pwKK3yaWDTLzrAk9HWWiPNr9VGqO9TSuN8ST/nKiHunBLLjAz8UjjPQKKSMXkXm7i4nz0Ra6z9UEO
- 8M0lPxf+YX2N592rDIMzzgRxQUzFz+SDxRnr6HuNk7DrZ8/IylKBQRKxSOppcycBXr80=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ bh=FuaBSGjArEM462JpNiI9C1xyN9l4ipJxBnksGnsEOck=; b=MgQU7PsKHROMqw7stTYDf1e24z
+ KQhcvRhHhQ2SPkr99cG458MAo9v8N84X6rdHpD96UQXP38BlHeCVaKKM/eDY+oyTS8HnNezhoEHxq
+ NYhhjvU0C5ogmscsWJXF5fUhghSx149Z3dx7KsOtdBrcnPl/wlrN76Sj6Op7i5SdjufU=;
+Received: from mx.wingtech.com ([180.166.216.14] helo=mail.wingtech.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jm65V-009NoW-Vj
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 01:45:04 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 8EC574B4AE2FF67EA064;
- Fri, 19 Jun 2020 09:44:53 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 19 Jun
- 2020 09:44:50 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200618063625.110273-1-yuchao0@huawei.com>
- <20200618235932.GA227771@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <f5bbb14b-52a0-9697-a8fe-c3e39f78b0a5@huawei.com>
-Date: Fri, 19 Jun 2020 09:44:50 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.92.2) id 1jm6ef-009Pjv-GM
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 02:21:23 +0000
+Received: from mx.wingtech.com ([192.168.2.43])
+ by mail.wingtech.com  with SMTP id 05J2L87p011291-05J2L87q011291
+ for <linux-f2fs-devel@lists.sourceforge.net>; Fri, 19 Jun 2020 10:21:08 +0800
+Received: from 192.168.51.143 (HELO ZHAOWUYUN); Fri, 19 Jun 2020 10:21:05 +0800
+To: "'Chao Yu'" <yuchao0@huawei.com>, <jaegeuk@kernel.org>
+References: <1592484487-12072-1-git-send-email-zhaowuyun@wingtech.com>
+ <4a2d19c4-1ede-0172-fe50-c8464ee341df@huawei.com>
+In-Reply-To: <4a2d19c4-1ede-0172-fe50-c8464ee341df@huawei.com>
+Date: Fri, 19 Jun 2020 10:21:07 +0800
+Message-ID: <000001d645e0$4aa645d0$dff2d170$@wingtech.com>
 MIME-Version: 1.0
-In-Reply-To: <20200618235932.GA227771@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQF0xRpWUfEou3rvdx9uok8+PtRkbQEd45q7qZlDPFA=
+Content-Language: zh-cn
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ for more information. [URIs: wingtech.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jm65V-009NoW-Vj
-Subject: Re: [f2fs-dev] [PATCH 1/5] f2fs: fix to wait page writeback before
- update
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1jm6ef-009Pjv-GM
+Subject: [f2fs-dev] =?gb2312?b?u9i4tDogW1BBVENIXSBmMmZzLXRvb2xzOiBzZXQg?=
+	=?gb2312?b?Y29sZCBmbGFnIGZvciBub24tZGlyIG5vZGU=?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,167 +83,109 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Zac via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zac <zhaowuyun@wingtech.com>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jaegeuk,
-
-On 2020/6/19 7:59, Jaegeuk Kim wrote:
-> Hi Chao,
+> On 2020/6/18 20:48, zhaowuyun@wingtech.com wrote:
+> > From: Wuyun Zhao <zhaowuyun@wingtech.com>
 > 
-> On 06/18, Chao Yu wrote:
->> to make page content stable for special device like raid.
+> Thanks for the patch. :)
 > 
-> Could you elaborate the problem a bit?
+> Please add commit message here.
 
-Some devices like raid5 wants page content to be stable, because
-it will calculate parity info based page content, if page is not
-stable, parity info could be corrupted, result in data inconsistency
-in stripe.
+OK
 
-Thanks,
-
+> >
+> > Signed-off-by: Wuyun Zhao <zhaowuyun@wingtech.com>
+> > ---
+> >  fsck/dir.c  |  1 +
+> >  fsck/node.c |  1 +
+> >  fsck/node.h | 11 +++++++++++
+> >  3 files changed, 13 insertions(+)
+> >
+> > diff --git a/fsck/dir.c b/fsck/dir.c
+> > index 5f4f75e..dc03c98 100644
+> > --- a/fsck/dir.c
+> > +++ b/fsck/dir.c
+> > @@ -522,6 +522,7 @@ static void init_inode_block(struct f2fs_sb_info
+> *sbi,
+> >  	node_blk->footer.nid = cpu_to_le32(de->ino);
+> >  	node_blk->footer.flag = 0;
+> >  	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
+> > +	set_cold_node(node_blk, S_ISDIR(mode));
+> >
+> >  	if (S_ISDIR(mode)) {
+> >  		make_empty_dir(sbi, node_blk);
+> > diff --git a/fsck/node.c b/fsck/node.c
+> > index 229a99c..1d291ca 100644
+> > --- a/fsck/node.c
+> > +++ b/fsck/node.c
+> > @@ -79,6 +79,7 @@ block_t new_node_block(struct f2fs_sb_info *sbi,
+> >  	node_blk->footer.ino = f2fs_inode->footer.ino;
+> >  	node_blk->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
+> >  	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
+> > +	set_cold_node(node_blk, S_ISDIR(le16_to_cpu(f2fs_inode->i.i_mode)));
 > 
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  fs/f2fs/dir.c          |  2 ++
->>  fs/f2fs/extent_cache.c | 18 +++++++++---------
->>  fs/f2fs/f2fs.h         |  2 +-
->>  fs/f2fs/file.c         |  1 +
->>  fs/f2fs/inline.c       |  2 ++
->>  fs/f2fs/inode.c        |  3 +--
->>  6 files changed, 16 insertions(+), 12 deletions(-)
->>
->> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
->> index d35976785e8c..91e86747a604 100644
->> --- a/fs/f2fs/dir.c
->> +++ b/fs/f2fs/dir.c
->> @@ -495,6 +495,8 @@ static int make_empty_dir(struct inode *inode,
->>  	if (IS_ERR(dentry_page))
->>  		return PTR_ERR(dentry_page);
->>  
->> +	f2fs_bug_on(F2FS_I_SB(inode), PageWriteback(dentry_page));
->> +
->>  	dentry_blk = page_address(dentry_page);
->>  
->>  	make_dentry_ptr_block(NULL, &d, dentry_blk);
->> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
->> index e60078460ad1..686c68b98610 100644
->> --- a/fs/f2fs/extent_cache.c
->> +++ b/fs/f2fs/extent_cache.c
->> @@ -325,9 +325,10 @@ static void __drop_largest_extent(struct extent_tree *et,
->>  }
->>  
->>  /* return true, if inode page is changed */
->> -static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext)
->> +static void __f2fs_init_extent_tree(struct inode *inode, struct page *ipage)
->>  {
->>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->> +	struct f2fs_extent *i_ext = ipage ? &F2FS_INODE(ipage)->i_ext : NULL;
->>  	struct extent_tree *et;
->>  	struct extent_node *en;
->>  	struct extent_info ei;
->> @@ -335,16 +336,18 @@ static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_e
->>  	if (!f2fs_may_extent_tree(inode)) {
->>  		/* drop largest extent */
->>  		if (i_ext && i_ext->len) {
->> +			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
->>  			i_ext->len = 0;
->> -			return true;
->> +			set_page_dirty(ipage);
->> +			return;
->>  		}
->> -		return false;
->> +		return;
->>  	}
->>  
->>  	et = __grab_extent_tree(inode);
->>  
->>  	if (!i_ext || !i_ext->len)
->> -		return false;
->> +		return;
->>  
->>  	get_extent_info(&ei, i_ext);
->>  
->> @@ -360,17 +363,14 @@ static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_e
->>  	}
->>  out:
->>  	write_unlock(&et->lock);
->> -	return false;
->>  }
->>  
->> -bool f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext)
->> +void f2fs_init_extent_tree(struct inode *inode, struct page *ipage)
->>  {
->> -	bool ret =  __f2fs_init_extent_tree(inode, i_ext);
->> +	__f2fs_init_extent_tree(inode, ipage);
->>  
->>  	if (!F2FS_I(inode)->extent_tree)
->>  		set_inode_flag(inode, FI_NO_EXTENT);
->> -
->> -	return ret;
->>  }
->>  
->>  static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
->> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->> index b35a50f4953c..326c12fa0da5 100644
->> --- a/fs/f2fs/f2fs.h
->> +++ b/fs/f2fs/f2fs.h
->> @@ -3795,7 +3795,7 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
->>  bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
->>  						struct rb_root_cached *root);
->>  unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink);
->> -bool f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext);
->> +void f2fs_init_extent_tree(struct inode *inode, struct page *ipage);
->>  void f2fs_drop_extent_tree(struct inode *inode);
->>  unsigned int f2fs_destroy_extent_node(struct inode *inode);
->>  void f2fs_destroy_extent_tree(struct inode *inode);
->> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->> index 3268f8dd59bb..1862073b96d2 100644
->> --- a/fs/f2fs/file.c
->> +++ b/fs/f2fs/file.c
->> @@ -1250,6 +1250,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
->>  				f2fs_put_page(psrc, 1);
->>  				return PTR_ERR(pdst);
->>  			}
->> +			f2fs_wait_on_page_writeback(pdst, DATA, true, true);
->>  			f2fs_copy_page(psrc, pdst);
->>  			set_page_dirty(pdst);
->>  			f2fs_put_page(pdst, 1);
->> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
->> index dbade310dc79..4bcbc486c9e2 100644
->> --- a/fs/f2fs/inline.c
->> +++ b/fs/f2fs/inline.c
->> @@ -340,6 +340,8 @@ int f2fs_make_empty_inline_dir(struct inode *inode, struct inode *parent,
->>  	struct f2fs_dentry_ptr d;
->>  	void *inline_dentry;
->>  
->> +	f2fs_wait_on_page_writeback(ipage, NODE, true, true);
->> +
->>  	inline_dentry = inline_data_addr(inode, ipage);
->>  
->>  	make_dentry_ptr_inline(inode, &d, inline_dentry);
->> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
->> index 44582a4db513..7c156eb26dd7 100644
->> --- a/fs/f2fs/inode.c
->> +++ b/fs/f2fs/inode.c
->> @@ -367,8 +367,7 @@ static int do_read_inode(struct inode *inode)
->>  	fi->i_pino = le32_to_cpu(ri->i_pino);
->>  	fi->i_dir_level = ri->i_dir_level;
->>  
->> -	if (f2fs_init_extent_tree(inode, &ri->i_ext))
->> -		set_page_dirty(node_page);
->> +	f2fs_init_extent_tree(inode, node_page);
->>  
->>  	get_inline_info(inode, ri);
->>  
->> -- 
->> 2.18.0.rc1
-> .
+> How about wrapping these node footer fields assignment into a function?
+> then
+> we can reuse this in other places.
 > 
+> void set_node_footer(nid, ino, ofs, ver, is_dir)
+> {
+> 	node_blk->footer.nid = cpu_to_le32(nid);
+> 	node_blk->footer.ino = f2fs_inode->footer.ino;
+> 	node_blk->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
+> 	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
+> 	set_cold_node(node_blk, S_ISDIR(le16_to_cpu(f2fs_inode->i.i_mode)));
+> }
+
+Ok, That's good.
+
+> >
+> >  	type = CURSEG_COLD_NODE;
+> >  	if (IS_DNODE(node_blk)) {
+> > diff --git a/fsck/node.h b/fsck/node.h
+> > index 6bce1fb..99139b1 100644
+> > --- a/fsck/node.h
+> > +++ b/fsck/node.h
+> > @@ -161,6 +161,17 @@ static inline int is_node(struct f2fs_node
+> *node_blk, int type)
+> >  	return le32_to_cpu(node_blk->footer.flag) & (1 << type);
+> >  }
+> 
+> Beside this, I think we need to use set_node_footer() in:
+> - f2fs_write_root_inode
+> - f2fs_write_qf_inode
+> - f2fs_write_lpf_inode
+> 
+> as well to fix mkfs bugs.
+
+the root inode and the lpf inode is dir, need to set cold flag? 
+
+> Thanks,
+> 
+> >
+> > +static inline void set_cold_node(struct f2fs_node *rn, bool is_dir)
+> > +{
+> > +	unsigned int flag = le32_to_cpu(rn->footer.flag);
+> > +
+> > +	if (is_dir)
+> > +		flag &= ~(0x1 << COLD_BIT_SHIFT);
+> > +	else
+> > +		flag |= (0x1 << COLD_BIT_SHIFT);
+> > +	rn->footer.flag = cpu_to_le32(flag);
+> > +}
+> > +
+> >  #define is_fsync_dnode(node_blk)	is_node(node_blk, FSYNC_BIT_SHIFT)
+> >  #define is_dent_dnode(node_blk)		is_node(node_blk,
+> DENT_BIT_SHIFT)
+> >
+> >
+
 
 
 _______________________________________________
