@@ -2,60 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01771200067
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 04:48:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFC9F2000AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 05:20:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jm756-0004eA-6l; Fri, 19 Jun 2020 02:48:40 +0000
+	id 1jm7aJ-0000TT-FE; Fri, 19 Jun 2020 03:20:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jm755-0004e3-5W
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 02:48:39 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jm7aH-0000TJ-WD
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 03:20:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=r/rGgoONKt0zGhx61U8mdVRYgg+z4TVVtvsAF9oixL4=; b=mB3QzZE76fDbAiUT2bpX/sndYu
- mmZgwmTbSf/j4GlygclxVL7eEsm7eQFnl0QBjznZM8mc6wt/wcClUMRtEA5lDgzFfxjn0ptnpgT1U
- 7fuR3iMyYhH+xt3uC1PTqZHlM1YIBAs6Fn7VbobdvroiU0V27QXGIT2GEqnNc2gQokBc=;
+ bh=fV/5+NpcCsKqglUr2Ejb0jT3pFORmzbo10ntol7tVXg=; b=ICGz65l9FdbmcqnhCLBNxsqrXG
+ MTw3aqWV72TPrp92sFIWAXu2Ccy6TG9jB1qZpjPxMViztT3UrwgO1eW9nTONlXRDrQFwlw0DaWAc6
+ nTyTI1FXkrow07/k23Aq3zfbyHxT3VkwWwQ9KRTJzqHYag0tHDosxthcglk3SQy/lPxc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=r/rGgoONKt0zGhx61U8mdVRYgg+z4TVVtvsAF9oixL4=; b=hN32WXZTZftJAscEIEUZm4fmBu
- 2lf/dp8kDuQeUW3eLyOKWvPL4Mp7MeCkoCUB9XCBHegGrGfh8TWgDTWKEc/bwBYkeERtDEYO8Ks0n
- s+oyS1akcfgxnJyiJ0trwR/wm0/if3ETjDgT5naCAJT8GiP6AZ1fedNAA+hUC8n8UQp4=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fV/5+NpcCsKqglUr2Ejb0jT3pFORmzbo10ntol7tVXg=; b=T
+ HXZSWez550RfKe2M/iQ4TtOGZFGaYesOpGsCMDBgRrluf20/3NJ8wnG28LzjlFMgoRBpzC2Q7UD/v
+ V8tD1bDyDNSRXeUWUD3E7HCXv8k6ydfKrbkIPdRz6bO9hNnyHlaQFsgcrK17ReHtXpxyc0nNpFoA1
+ yo8qy27Z/CKB7ioU=;
 Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jm752-009RUl-RP
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 02:48:39 +0000
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 91C94DE41C02577A07ED;
- Fri, 19 Jun 2020 10:48:20 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 19 Jun
- 2020 10:48:16 +0800
-To: Zac <zhaowuyun@wingtech.com>, <jaegeuk@kernel.org>
-References: <1592484487-12072-1-git-send-email-zhaowuyun@wingtech.com>
- <4a2d19c4-1ede-0172-fe50-c8464ee341df@huawei.com>
- <000001d645e0$4aa645d0$dff2d170$@wingtech.com>
+ id 1jm7aD-00BVPQ-8l
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 03:20:53 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 967527602E7B5BB0B482;
+ Fri, 19 Jun 2020 11:20:42 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 19 Jun 2020 11:20:36 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <ffcc8474-f2af-1934-9219-f4de6757e4a7@huawei.com>
-Date: Fri, 19 Jun 2020 10:48:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Fri, 19 Jun 2020 11:20:28 +0800
+Message-ID: <20200619032028.128668-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <000001d645e0$4aa645d0$dff2d170$@wingtech.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -63,16 +57,16 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: wingtech.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
  [45.249.212.191 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jm752-009RUl-RP
-Subject: Re: [f2fs-dev] =?utf-8?b?5Zue5aSNOiBbUEFUQ0hdIGYyZnMtdG9vbHM6IHNl?=
- =?utf-8?q?t_cold_flag_for_non-dir_node?=
+X-Headers-End: 1jm7aD-00BVPQ-8l
+Subject: [f2fs-dev] [PATCH] f2fs: fix to document reserved special
+ compression extension
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,110 +83,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/19 10:21, Zac wrote:
->> On 2020/6/18 20:48, zhaowuyun@wingtech.com wrote:
->>> From: Wuyun Zhao <zhaowuyun@wingtech.com>
->>
->> Thanks for the patch. :)
->>
->> Please add commit message here.
-> 
-> OK
-> 
->>>
->>> Signed-off-by: Wuyun Zhao <zhaowuyun@wingtech.com>
->>> ---
->>>  fsck/dir.c  |  1 +
->>>  fsck/node.c |  1 +
->>>  fsck/node.h | 11 +++++++++++
->>>  3 files changed, 13 insertions(+)
->>>
->>> diff --git a/fsck/dir.c b/fsck/dir.c
->>> index 5f4f75e..dc03c98 100644
->>> --- a/fsck/dir.c
->>> +++ b/fsck/dir.c
->>> @@ -522,6 +522,7 @@ static void init_inode_block(struct f2fs_sb_info
->> *sbi,
->>>  	node_blk->footer.nid = cpu_to_le32(de->ino);
->>>  	node_blk->footer.flag = 0;
->>>  	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
->>> +	set_cold_node(node_blk, S_ISDIR(mode));
->>>
->>>  	if (S_ISDIR(mode)) {
->>>  		make_empty_dir(sbi, node_blk);
->>> diff --git a/fsck/node.c b/fsck/node.c
->>> index 229a99c..1d291ca 100644
->>> --- a/fsck/node.c
->>> +++ b/fsck/node.c
->>> @@ -79,6 +79,7 @@ block_t new_node_block(struct f2fs_sb_info *sbi,
->>>  	node_blk->footer.ino = f2fs_inode->footer.ino;
->>>  	node_blk->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
->>>  	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
->>> +	set_cold_node(node_blk, S_ISDIR(le16_to_cpu(f2fs_inode->i.i_mode)));
->>
->> How about wrapping these node footer fields assignment into a function?
->> then
->> we can reuse this in other places.
->>
->> void set_node_footer(nid, ino, ofs, ver, is_dir)
->> {
->> 	node_blk->footer.nid = cpu_to_le32(nid);
->> 	node_blk->footer.ino = f2fs_inode->footer.ino;
->> 	node_blk->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
->> 	node_blk->footer.cp_ver = ckpt->checkpoint_ver;
->> 	set_cold_node(node_blk, S_ISDIR(le16_to_cpu(f2fs_inode->i.i_mode)));
->> }
-> 
-> Ok, That's good.
-> 
->>>
->>>  	type = CURSEG_COLD_NODE;
->>>  	if (IS_DNODE(node_blk)) {
->>> diff --git a/fsck/node.h b/fsck/node.h
->>> index 6bce1fb..99139b1 100644
->>> --- a/fsck/node.h
->>> +++ b/fsck/node.h
->>> @@ -161,6 +161,17 @@ static inline int is_node(struct f2fs_node
->> *node_blk, int type)
->>>  	return le32_to_cpu(node_blk->footer.flag) & (1 << type);
->>>  }
->>
->> Beside this, I think we need to use set_node_footer() in:
->> - f2fs_write_root_inode
->> - f2fs_write_qf_inode
->> - f2fs_write_lpf_inode
->>
->> as well to fix mkfs bugs.
-> 
-> the root inode and the lpf inode is dir, need to set cold flag? 
+There is one reserved special compression extension: '*', which
+could be set via 'compress_extension="*"' mount option to enable
+compression for all files.
 
-No, but it is worth to use set_node_footer(..., is_dir:true) for cleanup.
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ Documentation/filesystems/f2fs.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index 099d45ac8d8f..535021c46260 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -258,6 +258,8 @@ compress_extension=%s  Support adding specified extension, so that f2fs can enab
+                        on compression extension list and enable compression on
+                        these file by default rather than to enable it via ioctl.
+                        For other files, we can still enable compression via ioctl.
++                       Note that, there is one reserved special extension '*', it
++                       can be set to enable compression for all files.
+ ====================== ============================================================
+ 
+ Debugfs Entries
+-- 
+2.26.2
 
-> 
->> Thanks,
->>
->>>
->>> +static inline void set_cold_node(struct f2fs_node *rn, bool is_dir)
->>> +{
->>> +	unsigned int flag = le32_to_cpu(rn->footer.flag);
->>> +
->>> +	if (is_dir)
->>> +		flag &= ~(0x1 << COLD_BIT_SHIFT);
->>> +	else
->>> +		flag |= (0x1 << COLD_BIT_SHIFT);
->>> +	rn->footer.flag = cpu_to_le32(flag);
->>> +}
->>> +
->>>  #define is_fsync_dnode(node_blk)	is_node(node_blk, FSYNC_BIT_SHIFT)
->>>  #define is_dent_dnode(node_blk)		is_node(node_blk,
->> DENT_BIT_SHIFT)
->>>
->>>
-> 
-> .
-> 
 
 
 _______________________________________________
