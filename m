@@ -2,75 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDF8E20082B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 13:56:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1063201A98
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2020 20:44:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jmFcw-0006lS-L1; Fri, 19 Jun 2020 11:56:10 +0000
+	id 1jmLzf-0006rc-AZ; Fri, 19 Jun 2020 18:44:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1jmFcu-0006kt-GN
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 11:56:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jmLzd-0006rS-Cu
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 18:44:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qkiSuMBHq1jJPg79H69BLQzOTNgh3NSXy1sjSUD7sso=; b=bDvuVociXwWhmwmSGq+s+iwUn4
- c/x0/WWwtyeRZohXu5rhfSuMeeayz9zCN1q50VdDJww6AmAAdEpUgsJza1GhO1CD0MTwl2aNBZ4Ax
- puis8kfHMXxyw8yfVugP5oPwaJzI0t7JPOSwopK8ZlvCCaogWDmPRhzG6Uk7kGSjzBz8=;
+ bh=I8jZRxKkC/tED7jx5f8IHZLW3PjB1GM6++T8daD7xc8=; b=amxM9NxlH5ZmPtXbxRME+DKK40
+ 1wnLNi8nnh4gHw9RdGD2pgxnq32vQa5Lw+tYia0UVwGmk8Ztjh6+q2zyoWGQl8L7ywTmWGoAUSvwM
+ l+u3jXtIWHw5PQe9tW7jYYPQCQNRhEUIklhEZWhn7UaVChbVaSRmvTvT/MeZOU83GTxM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=qkiSuMBHq1jJPg79H69BLQzOTNgh3NSXy1sjSUD7sso=; b=VJQIusxTCLW2NyvgkwLZ9w/zD+
- 2PYeGyHP0IXgERmNYHdIfa6kUD5atDbQGABIPRZm22BbfTVCYqG+dg2kufJfB3iFgKlNZGSnA8HkE
- 1xB0goPozuI6RMpmJ/kBp/aFW7XhkgBWXlgbVz+mz0bduxEQvz9dHnw4tkjrRnMGaqGQ=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=I8jZRxKkC/tED7jx5f8IHZLW3PjB1GM6++T8daD7xc8=; b=a
+ p8u6ilfySUYNnL5VJXG0SdX4ZrswdxOqxGZam5H51eTLcbMqg2GqBOU31IPZP8FYtGseIsxqLJcsU
+ Y7dBm1h4hwlxtmd5QWrtAVlrH0OIJLxxkQQKFS/lb7BNz27LDIa1t9UllQIDY9DT4gEdU8TaREVEK
+ GoDtSO9we8It/OhA=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jmFcs-008wDO-QC
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 11:56:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=qkiSuMBHq1jJPg79H69BLQzOTNgh3NSXy1sjSUD7sso=; b=YmQH+Tq34JCOA4Fpp+Ct6KEZnt
- 8L0h3XQhFTfcl+EZx9PD/QmFfjIZnpy4HoPgNnfBqHv64Iq5KfuRrtvHpLcfBtAlvvzZLZIa6wd8f
- WBdUMayWL2szYgJzuQAOr0qIZuM5ocftxFPIzNGVjJSWVMSlvpoZeOYI4S4AGQO8Nb0yis8YPFDTs
- gFrJkRAnXtTDuea5wOUzzuns5noEUpSfRbZfvMS0JhmrqudLco3NaWgMJzebBPpoOvVOvwgRaFW3F
- NclEHximP3q4U57rebPA25c4PcGKBj5TM+IBkvwcGuWphYM+ITP6Po2I7wixaC/wuvOd6BghDK1It
- 5dgYN/wg==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jmFcc-0002c8-O0; Fri, 19 Jun 2020 11:55:50 +0000
-Date: Fri, 19 Jun 2020 04:55:50 -0700
-From: Matthew Wilcox <willy@infradead.org>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Message-ID: <20200619115550.GY8681@bombadil.infradead.org>
-References: <20200619093916.1081129-1-agruenba@redhat.com>
- <20200619093916.1081129-3-agruenba@redhat.com>
+ id 1jmLzX-00AQgk-NH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Jun 2020 18:44:01 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id AE6EF204EA;
+ Fri, 19 Jun 2020 18:43:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592592227;
+ bh=vOHKXczDTbc+sSiZba/293T3SnL//O652Cb+7Xy3ZzM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=2OKmFy2u1H3NGGHYZUf1xB8aB8CMC3RvY43EsP5Nd24NIL2pL1ctom4jYDcknVgDU
+ FRMjdnpLtMKxARQuxQ4xAvEhkwU15UuoDcIXl3yLNUttevNj3+cScumpjzBc85iykc
+ +vr3TfLLp65IbmP4WNSgBpnk8L0ET8OnUISogn/o=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 19 Jun 2020 11:43:46 -0700
+Message-Id: <20200619184346.56536-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.27.0.111.gc72c7da667-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200619093916.1081129-3-agruenba@redhat.com>
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jmFcs-008wDO-QC
-Subject: Re: [f2fs-dev] [PATCH 2/2] gfs2: Rework read and page fault locking
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jmLzX-00AQgk-NH
+Subject: [f2fs-dev] [PATCH] fsck.f2fs: Fix slow fsck in auto-fix mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,150 +80,142 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: cluster-devel@redhat.com, linux-ext4@vger.kernel.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, John Hubbard <jhubbard@nvidia.com>,
- linux-erofs@lists.ozlabs.org, linux-kernel@vger.kernel.org,
- Junxiao Bi <junxiao.bi@oracle.com>, linux-xfs <linux-xfs@vger.kernel.org>,
- William Kucharski <william.kucharski@oracle.com>,
- Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- linux-f2fs-devel@lists.sourceforge.net,
- Linus Torvalds <torvalds@linux-foundation.org>, linux-mm@kvack.org,
- ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 19, 2020 at 11:39:16AM +0200, Andreas Gruenbacher wrote:
->  static int gfs2_readpage(struct file *file, struct page *page)
->  {
-> -	struct address_space *mapping = page->mapping;
-> -	struct gfs2_inode *ip = GFS2_I(mapping->host);
-> -	struct gfs2_holder gh;
->  	int error;
->  
-> -	unlock_page(page);
-> -	gfs2_holder_init(ip->i_gl, LM_ST_SHARED, 0, &gh);
-> -	error = gfs2_glock_nq(&gh);
-> -	if (unlikely(error))
-> -		goto out;
-> -	error = AOP_TRUNCATED_PAGE;
-> -	lock_page(page);
-> -	if (page->mapping == mapping && !PageUptodate(page))
-> -		error = __gfs2_readpage(file, page);
-> -	else
-> -		unlock_page(page);
-> -	gfs2_glock_dq(&gh);
-> -out:
-> -	gfs2_holder_uninit(&gh);
-> -	if (error && error != AOP_TRUNCATED_PAGE)
-> +	error = __gfs2_readpage(file, page);
-> +	if (error)
->  		lock_page(page);
->  	return error;
+From: Robin Hsu <robinhsu@google.com>
 
-I don't think this is right.  If you return an error from ->readpage, I'm
-pretty sure you're supposed to unlock that page.  Looking at
-generic_file_buffered_read():
+Split f2fs_init_nid_bitmap() into two disjoint parts:
+	f2fs_early_init_nid_bitmap(), and
+	f2fs_late_init_nid_bitmap(),
+where f2fs_late_init_nid_bitmap() won't be called in auto-fix mode, when
+no errors were found.
 
-                error = mapping->a_ops->readpage(filp, page);
-                if (unlikely(error)) {
-                        if (error == AOP_TRUNCATED_PAGE) {
-                                put_page(page);
-                                error = 0;
-                                goto find_page;
-                        }
-                        goto readpage_error;
-                }
-...
-readpage_error:
-                put_page(page);
-                goto out;
-...
-out:
-        ra->prev_pos = prev_index;
-        ra->prev_pos <<= PAGE_SHIFT;
-        ra->prev_pos |= prev_offset;
+f2fs_late_init_nid_bitmap() contains the loop to create NID bitmap from
+NAT. which is the main reason for slow fsck.
 
-        *ppos = ((loff_t)index << PAGE_SHIFT) + offset;
-        file_accessed(filp);
-        return written ? written : error;
+Signed-off-by: Robin Hsu <robinhsu@google.com>
+---
+ fsck/mount.c | 69 ++++++++++++++++++++++++++++++++--------------------
+ 1 file changed, 43 insertions(+), 26 deletions(-)
 
-so we don't call unlock_page() in generic code, which means the next time
-we try to get this page, we'll do ...
-
-                page = find_get_page(mapping, index);
-...
-                if (!PageUptodate(page)) {
-                        error = wait_on_page_locked_killable(page);
-and presumably we'll wait forever because nobody is going to unlock this
-page?
-
-> @@ -598,16 +582,9 @@ static void gfs2_readahead(struct readahead_control *rac)
->  {
->  	struct inode *inode = rac->mapping->host;
->  	struct gfs2_inode *ip = GFS2_I(inode);
-> -	struct gfs2_holder gh;
->  
-> -	gfs2_holder_init(ip->i_gl, LM_ST_SHARED, 0, &gh);
-> -	if (gfs2_glock_nq(&gh))
-> -		goto out_uninit;
->  	if (!gfs2_is_stuffed(ip))
->  		mpage_readahead(rac, gfs2_block_map);
-> -	gfs2_glock_dq(&gh);
-> -out_uninit:
-> -	gfs2_holder_uninit(&gh);
->  }
-
-Not for this patch, obviously, but why do you go to the effort of using
-iomap_readpage() to implement gfs2_readpage(), but don't use iomap for
-gfs2_readahead()?  Far more pages are brought in through ->readahead
-than are brought in through ->readpage.
-
->  static ssize_t gfs2_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
->  {
-> +	struct gfs2_inode *ip;
-> +	struct gfs2_holder gh;
-> +	size_t written = 0;
->  	ssize_t ret;
->  
-> +	gfs2_holder_mark_uninitialized(&gh);
->  	if (iocb->ki_flags & IOCB_DIRECT) {
->  		ret = gfs2_file_direct_read(iocb, to);
-
-Again, future work, but you probably want to pass in &gh here so you
-don't have to eat up another 32 bytes or so of stack space on an unused
-gfs2_holder.
-
->  		if (likely(ret != -ENOTBLK))
->  			return ret;
->  		iocb->ki_flags &= ~IOCB_DIRECT;
->  	}
-> -	return generic_file_read_iter(iocb, to);
-> +	iocb->ki_flags |= IOCB_CACHED;
-> +	ret = generic_file_read_iter(iocb, to);
-> +	iocb->ki_flags &= ~IOCB_CACHED;
-> +	if (ret >= 0) {
-> +		if (!iov_iter_count(to))
-> +			return ret;
-> +		written = ret;
-> +	} else {
-> +		switch(ret) {
-> +		case -EAGAIN:
-> +			if (iocb->ki_flags & IOCB_NOWAIT)
-> +				return ret;
-> +			break;
-> +		case -ECANCELED:
-> +			break;
-> +		default:
-> +			return ret;
-> +		}
-> +	}
-
-I'm wondering if we want to do this in common code rather than making it
-something special only a few filesystems do (either because they care
-about workloads with many threads accessing the same file, or because
-their per-file locks are very heavy-weight).
+diff --git a/fsck/mount.c b/fsck/mount.c
+index fb45941..d0f2eab 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -1288,15 +1288,14 @@ pgoff_t current_nat_addr(struct f2fs_sb_info *sbi, nid_t start, int *pack)
+ 	return block_addr;
+ }
+ 
+-static int f2fs_init_nid_bitmap(struct f2fs_sb_info *sbi)
++/* will not init nid_bitmap from nat */
++static int f2fs_early_init_nid_bitmap(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_nm_info *nm_i = NM_I(sbi);
+ 	int nid_bitmap_size = (nm_i->max_nid + BITS_PER_BYTE - 1) / BITS_PER_BYTE;
+ 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
+ 	struct f2fs_summary_block *sum = curseg->sum_blk;
+ 	struct f2fs_journal *journal = &sum->journal;
+-	struct f2fs_nat_block *nat_block;
+-	block_t start_blk;
+ 	nid_t nid;
+ 	int i;
+ 
+@@ -1310,28 +1309,6 @@ static int f2fs_init_nid_bitmap(struct f2fs_sb_info *sbi)
+ 	/* arbitrarily set 0 bit */
+ 	f2fs_set_bit(0, nm_i->nid_bitmap);
+ 
+-	nat_block = malloc(F2FS_BLKSIZE);
+-	if (!nat_block) {
+-		free(nm_i->nid_bitmap);
+-		return -ENOMEM;
+-	}
+-
+-	f2fs_ra_meta_pages(sbi, 0, NAT_BLOCK_OFFSET(nm_i->max_nid),
+-							META_NAT);
+-
+-	for (nid = 0; nid < nm_i->max_nid; nid++) {
+-		if (!(nid % NAT_ENTRY_PER_BLOCK)) {
+-			int ret;
+-
+-			start_blk = current_nat_addr(sbi, nid, NULL);
+-			ret = dev_read_block(nat_block, start_blk);
+-			ASSERT(ret >= 0);
+-		}
+-
+-		if (nat_block->entries[nid % NAT_ENTRY_PER_BLOCK].block_addr)
+-			f2fs_set_bit(nid, nm_i->nid_bitmap);
+-	}
+-
+ 	if (nats_in_cursum(journal) > NAT_JOURNAL_ENTRIES) {
+ 		MSG(0, "\tError: f2fs_init_nid_bitmap truncate n_nats(%u) to "
+ 			"NAT_JOURNAL_ENTRIES(%lu)\n",
+@@ -1361,6 +1338,41 @@ static int f2fs_init_nid_bitmap(struct f2fs_sb_info *sbi)
+ 		if (addr != NULL_ADDR)
+ 			f2fs_set_bit(nid, nm_i->nid_bitmap);
+ 	}
++	return 0;
++}
++
++/* will init nid_bitmap from nat */
++static int f2fs_late_init_nid_bitmap(struct f2fs_sb_info *sbi)
++{
++	struct f2fs_nm_info *nm_i = NM_I(sbi);
++	struct f2fs_nat_block *nat_block;
++	block_t start_blk;
++	nid_t nid;
++
++	if (!(c.func == SLOAD || c.func == FSCK))
++		return 0;
++
++	nat_block = malloc(F2FS_BLKSIZE);
++	if (!nat_block) {
++		free(nm_i->nid_bitmap);
++		return -ENOMEM;
++	}
++
++	f2fs_ra_meta_pages(sbi, 0, NAT_BLOCK_OFFSET(nm_i->max_nid),
++							META_NAT);
++	for (nid = 0; nid < nm_i->max_nid; nid++) {
++		if (!(nid % NAT_ENTRY_PER_BLOCK)) {
++			int ret;
++
++			start_blk = current_nat_addr(sbi, nid, NULL);
++			ret = dev_read_block(nat_block, start_blk);
++			ASSERT(ret >= 0);
++		}
++
++		if (nat_block->entries[nid % NAT_ENTRY_PER_BLOCK].block_addr)
++			f2fs_set_bit(nid, nm_i->nid_bitmap);
++	}
++
+ 	free(nat_block);
+ 	return 0;
+ }
+@@ -1565,7 +1577,7 @@ int init_node_manager(struct f2fs_sb_info *sbi)
+ 
+ 	/* copy version bitmap */
+ 	memcpy(nm_i->nat_bitmap, version_bitmap, nm_i->bitmap_size);
+-	return f2fs_init_nid_bitmap(sbi);
++	return f2fs_early_init_nid_bitmap(sbi);
+ }
+ 
+ int build_node_manager(struct f2fs_sb_info *sbi)
+@@ -3463,6 +3475,11 @@ int f2fs_do_mount(struct f2fs_sb_info *sbi)
+ 	if (!f2fs_should_proceed(sb, get_cp(ckpt_flags)))
+ 		return 1;
+ 
++	if (f2fs_late_init_nid_bitmap(sbi)) {
++		ERR_MSG("f2fs_late_init_nid_bitmap failed\n");
++		return -1;
++	}
++
+ 	/* Check nat_bits */
+ 	if (c.func == FSCK && is_set_ckpt_flags(cp, CP_NAT_BITS_FLAG)) {
+ 		if (check_nat_bits(sbi, sb, cp) && c.fix_on)
+-- 
+2.27.0.111.gc72c7da667-goog
 
 
 
