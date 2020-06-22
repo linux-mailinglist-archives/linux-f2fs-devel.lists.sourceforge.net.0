@@ -2,82 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACF7A202DFB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2020 02:51:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8776B203397
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2020 11:39:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jnAgO-0007Ob-UR; Mon, 22 Jun 2020 00:51:32 +0000
+	id 1jnIv6-0004oG-WF; Mon, 22 Jun 2020 09:39:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jnAgN-0007OT-76
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jun 2020 00:51:31 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jnIv5-0004nj-GK
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jun 2020 09:39:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ZT/GCm4pgMAwxc8/17AyfX20UAxPj5jlWR/A6WZbkI=; b=U9yZP3OXjSluUG1VBSbNTjsxE1
- C2yeAHOpMw15apgfLrOAFShQPZqcjhvvsC8DZeAWH0yl0wbuB177jIr0PYOjIQu/mTh/c7095hzB9
- fHBlRt+pgz4ttSDKnlg1OsxF/QfwIoaMQQQT7rabCSaAntg6dnNgHtNBdVd5bm0EsME4=;
+ bh=T0EyXREC0HQddzN+AV75+uEpiQPXOm4HqxbZUhTKLJQ=; b=VSoopkLF1HwVOjTlSQxAhlFU/L
+ mCsjg8R+LfvmJRsdOygS3gkRyR5pNwIZ4wuJjx2t+rAqK1+mFJCGoWeJzZmzxva7ZJtSzSFXXUm64
+ HBz+M5u9FSgVxY/oPQPwlPut8dHN0tDf0HNsZo+NMU0Mglx3xdb3AfofQM9WWUng8oew=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0ZT/GCm4pgMAwxc8/17AyfX20UAxPj5jlWR/A6WZbkI=; b=YXam3gmVcBdQ74zHwPrB8BP69G
- YLv3zXOc5gw2JvTwdgvxf2yJcZVdKf+sZ2EX+wGfUD4no+nL+qWfoR6/su3mj7A8JoHczx18vrpOI
- 15/wksqHFxkLn5Jz/Js+D1kSA1ZdHjnCNk2Mu7D5lw6ZZer69+dC51yFbfFvuPrmAX0w=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=T0EyXREC0HQddzN+AV75+uEpiQPXOm4HqxbZUhTKLJQ=; b=n
+ A6gdGgn5WxqAEIxiHPHlFGNeoXhtMuD3KlC6b3CCDGaHtfQsDpA32P3r54R8ffIxtgUbyv6S5oO+I
+ K7MVVLO+x0ZMerGs0+CVh8dXuMofpomeuEuJchCb3djS0jHCy7uXo+ZoNB+rlf27sgPhzHIss7NUK
+ ZjTjjJwGcBASeQ6Q=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jnAgI-00DCAN-T6
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jun 2020 00:51:31 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 5AF49F8EC32CCE0C7263;
- Mon, 22 Jun 2020 08:51:18 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 22 Jun
- 2020 08:51:15 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200618063625.110273-1-yuchao0@huawei.com>
- <20200618235932.GA227771@google.com>
- <f5bbb14b-52a0-9697-a8fe-c3e39f78b0a5@huawei.com>
- <20200619054922.GC227771@google.com>
- <3634ef79-5903-449d-0d52-3d5566481863@huawei.com>
- <20200619224755.GA60059@google.com>
- <3f49539a-7be1-be90-d13a-2f66a8483458@huawei.com>
- <20200621163834.GA36924@google.com>
+ id 1jnIv1-00Dh4Q-SV
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Jun 2020 09:39:15 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 4495D8EE0C1133803FFC;
+ Mon, 22 Jun 2020 17:38:57 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS410-HUB.china.huawei.com (10.3.19.210) with Microsoft SMTP Server id
+ 14.3.487.0; Mon, 22 Jun 2020 17:38:51 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <da9df754-2e19-132c-9791-cac0361a1aad@huawei.com>
-Date: Mon, 22 Jun 2020 08:51:14 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Mon, 22 Jun 2020 17:38:48 +0800
+Message-ID: <20200622093849.35684-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20200621163834.GA36924@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jnAgI-00DCAN-T6
-Subject: Re: [f2fs-dev] [PATCH 1/5] f2fs: fix to wait page writeback before
- update
+X-Headers-End: 1jnIv1-00Dh4Q-SV
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: split f2fs_allocate_new_segments()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,214 +82,117 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/22 0:38, Jaegeuk Kim wrote:
-> On 06/20, Chao Yu wrote:
->> On 2020/6/20 6:47, Jaegeuk Kim wrote:
->>> On 06/19, Chao Yu wrote:
->>>> On 2020/6/19 13:49, Jaegeuk Kim wrote:
->>>>> On 06/19, Chao Yu wrote:
->>>>>> Hi Jaegeuk,
->>>>>>
->>>>>> On 2020/6/19 7:59, Jaegeuk Kim wrote:
->>>>>>> Hi Chao,
->>>>>>>
->>>>>>> On 06/18, Chao Yu wrote:
->>>>>>>> to make page content stable for special device like raid.
->>>>>>>
->>>>>>> Could you elaborate the problem a bit?
->>>>>>
->>>>>> Some devices like raid5 wants page content to be stable, because
->>>>>> it will calculate parity info based page content, if page is not
->>>>>> stable, parity info could be corrupted, result in data inconsistency
->>>>>> in stripe.
->>>>>
->>>>> I don't get the point, since those pages are brand new pages which were not
->>>>> modified before. If it's on writeback, we should not modify them regardless
->>>>> of whatever raid configuration. For example, f2fs_new_node_page() waits for
->>>>> writeback. Am I missing something?
->>>>
->>>> I think we should use f2fs_bug_on(, PageWriteback()) rather than
->>>> f2fs_wait_on_page_writeback() for brand new page which is allocated just now.
->>>> For other paths, we can keep rule that waiting for writeback before updating.
->>>>
->>>> How do you think?
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>>
->>>>>>>>
->>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>>>> ---
->>>>>>>>  fs/f2fs/dir.c          |  2 ++
->>>>>>>>  fs/f2fs/extent_cache.c | 18 +++++++++---------
->>>>>>>>  fs/f2fs/f2fs.h         |  2 +-
->>>>>>>>  fs/f2fs/file.c         |  1 +
->>>>>>>>  fs/f2fs/inline.c       |  2 ++
->>>>>>>>  fs/f2fs/inode.c        |  3 +--
->>>>>>>>  6 files changed, 16 insertions(+), 12 deletions(-)
->>>>>>>>
->>>>>>>> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
->>>>>>>> index d35976785e8c..91e86747a604 100644
->>>>>>>> --- a/fs/f2fs/dir.c
->>>>>>>> +++ b/fs/f2fs/dir.c
->>>>>>>> @@ -495,6 +495,8 @@ static int make_empty_dir(struct inode *inode,
->>>>>>>>  	if (IS_ERR(dentry_page))
->>>>>>>>  		return PTR_ERR(dentry_page);
->>>>>>>>  
->>>>>>>> +	f2fs_bug_on(F2FS_I_SB(inode), PageWriteback(dentry_page));
->>>>>>>> +
->>>>>>>>  	dentry_blk = page_address(dentry_page);
->>>>>>>>  
->>>>>>>>  	make_dentry_ptr_block(NULL, &d, dentry_blk);
->>>>>>>> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
->>>>>>>> index e60078460ad1..686c68b98610 100644
->>>>>>>> --- a/fs/f2fs/extent_cache.c
->>>>>>>> +++ b/fs/f2fs/extent_cache.c
->>>>>>>> @@ -325,9 +325,10 @@ static void __drop_largest_extent(struct extent_tree *et,
->>>>>>>>  }
->>>>>>>>  
->>>>>>>>  /* return true, if inode page is changed */
->>>>>>>> -static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext)
->>>>>>>> +static void __f2fs_init_extent_tree(struct inode *inode, struct page *ipage)
->>>>>>>>  {
->>>>>>>>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->>>>>>>> +	struct f2fs_extent *i_ext = ipage ? &F2FS_INODE(ipage)->i_ext : NULL;
->>>>>>>>  	struct extent_tree *et;
->>>>>>>>  	struct extent_node *en;
->>>>>>>>  	struct extent_info ei;
->>>>>>>> @@ -335,16 +336,18 @@ static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_e
->>>>>>>>  	if (!f2fs_may_extent_tree(inode)) {
->>>>>>>>  		/* drop largest extent */
->>>>>>>>  		if (i_ext && i_ext->len) {
->>>>>>>> +			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
->>>>>>>>  			i_ext->len = 0;
->>>>>>>> -			return true;
->>>>>>>> +			set_page_dirty(ipage);
->>>>>>>> +			return;
->>>>>>>>  		}
->>>>>>>> -		return false;
->>>>>>>> +		return;
->>>>>>>>  	}
->>>>>>>>  
->>>>>>>>  	et = __grab_extent_tree(inode);
->>>>>>>>  
->>>>>>>>  	if (!i_ext || !i_ext->len)
->>>>>>>> -		return false;
->>>>>>>> +		return;
->>>>>>>>  
->>>>>>>>  	get_extent_info(&ei, i_ext);
->>>>>>>>  
->>>>>>>> @@ -360,17 +363,14 @@ static bool __f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_e
->>>>>>>>  	}
->>>>>>>>  out:
->>>>>>>>  	write_unlock(&et->lock);
->>>>>>>> -	return false;
->>>>>>>>  }
->>>>>>>>  
->>>>>>>> -bool f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext)
->>>>>>>> +void f2fs_init_extent_tree(struct inode *inode, struct page *ipage)
->>>>>>>>  {
->>>>>>>> -	bool ret =  __f2fs_init_extent_tree(inode, i_ext);
->>>>>>>> +	__f2fs_init_extent_tree(inode, ipage);
->>>>>>>>  
->>>>>>>>  	if (!F2FS_I(inode)->extent_tree)
->>>>>>>>  		set_inode_flag(inode, FI_NO_EXTENT);
->>>>>>>> -
->>>>>>>> -	return ret;
->>>>>>>>  }
->>>>>>>>  
->>>>>>>>  static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
->>>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>>>> index b35a50f4953c..326c12fa0da5 100644
->>>>>>>> --- a/fs/f2fs/f2fs.h
->>>>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>>>> @@ -3795,7 +3795,7 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
->>>>>>>>  bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
->>>>>>>>  						struct rb_root_cached *root);
->>>>>>>>  unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink);
->>>>>>>> -bool f2fs_init_extent_tree(struct inode *inode, struct f2fs_extent *i_ext);
->>>>>>>> +void f2fs_init_extent_tree(struct inode *inode, struct page *ipage);
->>>>>>>>  void f2fs_drop_extent_tree(struct inode *inode);
->>>>>>>>  unsigned int f2fs_destroy_extent_node(struct inode *inode);
->>>>>>>>  void f2fs_destroy_extent_tree(struct inode *inode);
->>>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>>>> index 3268f8dd59bb..1862073b96d2 100644
->>>>>>>> --- a/fs/f2fs/file.c
->>>>>>>> +++ b/fs/f2fs/file.c
->>>>>>>> @@ -1250,6 +1250,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
->>>>>>>>  				f2fs_put_page(psrc, 1);
->>>>>>>>  				return PTR_ERR(pdst);
->>>>>>>>  			}
->>>>>>>> +			f2fs_wait_on_page_writeback(pdst, DATA, true, true);
->>>
->>> Do you mean pdst can be under writeback?
->>
->> Use f2fs_bug_on(, dirty || writeback) here?
->>
->>>
->>>>>>>>  			f2fs_copy_page(psrc, pdst);
->>>>>>>>  			set_page_dirty(pdst);
->>>>>>>>  			f2fs_put_page(pdst, 1);
->>>>>>>> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
->>>>>>>> index dbade310dc79..4bcbc486c9e2 100644
->>>>>>>> --- a/fs/f2fs/inline.c
->>>>>>>> +++ b/fs/f2fs/inline.c
->>>>>>>> @@ -340,6 +340,8 @@ int f2fs_make_empty_inline_dir(struct inode *inode, struct inode *parent,
->>>>>>>>  	struct f2fs_dentry_ptr d;
->>>>>>>>  	void *inline_dentry;
->>>>>>>>  
->>>>>>>> +	f2fs_wait_on_page_writeback(ipage, NODE, true, true);
->>
->> f2fs_bug_on(, writeback)?
-> 
-> So, which case do you suspect unstable page for raid?
+to two independent functions:
+- f2fs_allocate_new_segment() for specified type segment allocation
+- f2fs_allocate_new_segments() for all data type segments allocation
 
-- gc_node_segment
- - f2fs_move_node_page
-  - __write_node_page
-   - set_page_writeback
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/f2fs.h     |  3 ++-
+ fs/f2fs/file.c     |  2 +-
+ fs/f2fs/recovery.c |  2 +-
+ fs/f2fs/segment.c  | 39 +++++++++++++++++++++++----------------
+ 4 files changed, 27 insertions(+), 19 deletions(-)
 
-- do_read_inode
- - f2fs_init_extent_tree
-  - __f2fs_init_extent_tree
-    i_ext->len = 0;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 70565d81320b..07290943e91d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3327,7 +3327,8 @@ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
+ int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
+ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+ 					unsigned int start, unsigned int end);
+-void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type);
++void f2fs_allocate_new_segment(struct f2fs_sb_info *sbi, int type);
++void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
+ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
+ bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
+ 					struct cp_control *cpc);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index f196187159e9..67c65e40b22b 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1659,7 +1659,7 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+ 		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+ 
+ 		f2fs_lock_op(sbi);
+-		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
++		f2fs_allocate_new_segment(sbi, CURSEG_COLD_DATA_PINNED);
+ 		f2fs_unlock_op(sbi);
+ 
+ 		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index ae5310f02e7f..af974ba273b3 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -742,7 +742,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+ 		f2fs_put_page(page, 1);
+ 	}
+ 	if (!err)
+-		f2fs_allocate_new_segments(sbi, NO_CHECK_TYPE);
++		f2fs_allocate_new_segments(sbi);
+ 	return err;
+ }
+ 
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 113114f98087..f15711e8ee5b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2707,28 +2707,35 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+ 	up_read(&SM_I(sbi)->curseg_lock);
+ }
+ 
+-void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type)
++void __allocate_new_segment(struct f2fs_sb_info *sbi, int type)
+ {
+-	struct curseg_info *curseg;
++	struct curseg_info *curseg = CURSEG_I(sbi, type);
+ 	unsigned int old_segno;
+-	int i;
+ 
+-	down_write(&SIT_I(sbi)->sentry_lock);
++	if (!curseg->next_blkoff &&
++		!get_valid_blocks(sbi, curseg->segno, false) &&
++		!get_ckpt_valid_blocks(sbi, curseg->segno))
++		return;
+ 
+-	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
+-		if (type != NO_CHECK_TYPE && i != type)
+-			continue;
++	old_segno = curseg->segno;
++	SIT_I(sbi)->s_ops->allocate_segment(sbi, type, true);
++	locate_dirty_segment(sbi, old_segno);
++}
+ 
+-		curseg = CURSEG_I(sbi, i);
+-		if (type == NO_CHECK_TYPE || curseg->next_blkoff ||
+-				get_valid_blocks(sbi, curseg->segno, false) ||
+-				get_ckpt_valid_blocks(sbi, curseg->segno)) {
+-			old_segno = curseg->segno;
+-			SIT_I(sbi)->s_ops->allocate_segment(sbi, i, true);
+-			locate_dirty_segment(sbi, old_segno);
+-		}
+-	}
++void f2fs_allocate_new_segment(struct f2fs_sb_info *sbi, int type)
++{
++	down_write(&SIT_I(sbi)->sentry_lock);
++	__allocate_new_segment(sbi, type);
++	up_write(&SIT_I(sbi)->sentry_lock);
++}
+ 
++void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
++{
++	int i;
++
++	down_write(&SIT_I(sbi)->sentry_lock);
++	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++)
++		__allocate_new_segment(sbi, i);
+ 	up_write(&SIT_I(sbi)->sentry_lock);
+ }
+ 
+-- 
+2.26.2
 
-> 
->>
->> Thanks,
->>
->>>>>>>> +
->>>>>>>>  	inline_dentry = inline_data_addr(inode, ipage);
->>>>>>>>  
->>>>>>>>  	make_dentry_ptr_inline(inode, &d, inline_dentry);
->>>>>>>> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
->>>>>>>> index 44582a4db513..7c156eb26dd7 100644
->>>>>>>> --- a/fs/f2fs/inode.c
->>>>>>>> +++ b/fs/f2fs/inode.c
->>>>>>>> @@ -367,8 +367,7 @@ static int do_read_inode(struct inode *inode)
->>>>>>>>  	fi->i_pino = le32_to_cpu(ri->i_pino);
->>>>>>>>  	fi->i_dir_level = ri->i_dir_level;
->>>>>>>>  
->>>>>>>> -	if (f2fs_init_extent_tree(inode, &ri->i_ext))
->>>>>>>> -		set_page_dirty(node_page);
->>>>>>>> +	f2fs_init_extent_tree(inode, node_page);
->>>>>>>>  
->>>>>>>>  	get_inline_info(inode, ri);
->>>>>>>>  
->>>>>>>> -- 
->>>>>>>> 2.18.0.rc1
->>>>>>> .
->>>>>>>
->>>>> .
->>>>>
->>> .
->>>
-> .
-> 
 
 
 _______________________________________________
