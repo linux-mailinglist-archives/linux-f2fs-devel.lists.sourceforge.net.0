@@ -2,76 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96D8B204967
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2020 07:58:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 172E6204A7E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2020 09:08:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jnbwi-0006Qo-Ao; Tue, 23 Jun 2020 05:58:12 +0000
+	id 1jnd2P-0007AK-0a; Tue, 23 Jun 2020 07:08:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <mchehab+huawei@kernel.org>) id 1jnbwh-0006Qh-6x
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jun 2020 05:58:11 +0000
+ (envelope-from <zhangqilong3@huawei.com>) id 1jnd2N-0007AC-Ee
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jun 2020 07:08:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j2m5ohLbtZ1mvRbVasGQ9L6Y3yHQpT/yNKGksQno8wY=; b=cqihwAawWM3COcpcP5tMYPPLFt
- eGObkVoZC/JOTyCuQ6WL5CTYSjhSQ2uJNpVM0XwOkx+zbDTAEQamfMcGmYKgeIHKFs6JoFxFmJq4O
- aBV+2b9tZW0VqGgU4ItTsMTKj+AojrWzbxikytSGdWJKhQ8s1IqQunsRyQuWioOFuAk0=;
+ bh=uKLsUR0R7P6FqdQKRrf9vPTzlAf/0J+kVbt9qr6u5GA=; b=hjRcLkLZezwXIQABPazv5cM6PK
+ GpUwjXrORFHG/WLQBP1Ytn2W1Jy8Tm6nk1sd4bZz+KHLi7kZycgQF9R4EqYn9RIzdR9oQoRCZVxze
+ b4o4hUKnltQaRqSiQ08iEipD22e4oKbGeAXyqnH4AuDcMV74Ikuz0kd7yDWwsYAwDVvo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=j2m5ohLbtZ1mvRbVasGQ9L6Y3yHQpT/yNKGksQno8wY=; b=O1DnUjOoyetrRi7TjK/28mgs7I
- 5t+QEJMC1ERYRfLkZsOJjT9r7KynAt/p2EIRQ62yGQeTEqzV+LfgTrB5wqmCtTtgzIaCzHyh0jqwS
- 6lvIktL2ohmgFXU3ReQBauOnmd2WtsspQ2/XJ+5MwYUZQFZcbCZtfdT6/5b2DqakX4N0=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=uKLsUR0R7P6FqdQKRrf9vPTzlAf/0J+kVbt9qr6u5GA=; b=N
+ QQAKy53v1FFTGkdgruom7jj4KAZH6jnrxiPSlio8z3DOv9Sn+Nf+FUVfybhgfyzk53s+wPn3KPaD9
+ 9k92QefCV3q/0eD5rB6sOVp1Xc2JRxg0fPSm6F+KVcopjSillBYVoe0N2AjvcvWVn5wyeOF+xuZ7i
+ fKPcwTI7JAE6dWh4=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jnbwf-00EpZl-Ih
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jun 2020 05:58:10 +0000
-Received: from coco.lan (unknown [95.90.213.197])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BC79420771;
- Tue, 23 Jun 2020 05:57:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592891879;
- bh=EfflRxj25NuPu89Qp7zFoEN+RP1nGLfWlSv3BKJ7o5Q=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=rXGvdonrD5hEQkEz9LbQof80d8YnLVIDTJ4Orxg1gdqGCf/e4WAsC4OcCEstQOPhT
- K+QVNya8zcZF3jBBTjD6o5Ig7WPjAjnaRD6zS9ArNg6Wkl+LRyqu5VhT/7i56VtWtk
- bGHs40qB1sp1IPzsmH+YcwQbJs8P1Mkn/mnfQFEg=
-Date: Tue, 23 Jun 2020 07:57:54 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Message-ID: <20200623075754.093c476d@coco.lan>
-In-Reply-To: <20200622112209.71990f9c@lwn.net>
-References: <20200622073907.7608a73a@lwn.net>
- <20200622171106.GA192855@gmail.com>
- <20200622112209.71990f9c@lwn.net>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+ id 1jnd2J-00FhCg-AP
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Jun 2020 07:08:07 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id E7D642AD93EBF7E9D49C;
+ Tue, 23 Jun 2020 15:07:52 +0800 (CST)
+Received: from huawei.com (10.90.53.225) by DGGEMS412-HUB.china.huawei.com
+ (10.3.19.212) with Microsoft SMTP Server id 14.3.487.0; Tue, 23 Jun 2020
+ 15:07:46 +0800
+From: z00520423 <zhangqilong3@huawei.com>
+To: <yuchao0@huawei.com>, <jaegeuk@kernel.org>
+Date: Tue, 23 Jun 2020 15:14:45 +0800
+Message-ID: <20200623071446.44106-1-zhangqilong3@huawei.com>
+X-Mailer: git-send-email 2.26.0.106.g9fadedd
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Originating-IP: [10.90.53.225]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jnbwf-00EpZl-Ih
-Subject: Re: [f2fs-dev] [PATCH] docs: f2fs: fix a broken table
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jnd2J-00FhCg-AP
+Subject: [f2fs-dev] [PATCH -next] f2fs: add f2fs_gc exception handle in
+ f2fs_ioc_gc_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,77 +73,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-doc@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: zhangqilong3@huawei.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Em Mon, 22 Jun 2020 11:22:09 -0600
-Jonathan Corbet <corbet@lwn.net> escreveu:
+From: Qilong Zhang <zhangqilong3@huawei.com>
 
-> On Mon, 22 Jun 2020 10:11:06 -0700
-> Eric Biggers <ebiggers@kernel.org> wrote:
-> 
-> > Someone already sent out a fix for this:
-> > https://lkml.kernel.org/linux-doc/52f851cb5c9fd2ecae97deec7e168e66b8c295c3.1591137229.git.mchehab+huawei@kernel.org/
+When f2fs_ioc_gc_range performs multiple segments gc ops, the return
+value of f2fs_ioc_gc_range is determined by the last segment gc ops.
+If its ops failed, the f2fs_ioc_gc_range will be considered to be failed
+despite some of previous segments gc ops succeeded. Therefore, so we
+fix: only all of segments gc ops are finished will return success.
 
-No problem from my side.
+Signed-off-by: Qilong Zhang <zhangqilong3@huawei.com>
+---
+ fs/f2fs/file.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-> > 
-> > Is it intentional that you're sending out a different fix rather than applying
-> > that one?  
-> 
-> It wasn't, actually, I'm just finding myself more than usually challenged
-> these days.
-> 
-> That said, removing the table entirely seems ... excessive.  It's not
-> terrible the way it is, or we could make it:
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 3268f8dd59bb..b81fcf9b123d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2527,6 +2527,10 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
+ 	}
+ 
+ 	ret = f2fs_gc(sbi, range.sync, true, GET_SEGNO(sbi, range.start));
++	if (ret) {
++		ret = -EAGAIN;
++		goto out;
++	}
+ 	range.start += BLKS_PER_SEC(sbi);
+ 	if (range.start <= end)
+ 		goto do_more;
+-- 
+2.17.1
 
-Jon,
-
-I actually tried a patch close to yours before the patch I actually sent
-upstream.
-
-On my previous version, I was doing:
-
-======================== =======================================================
-...
-test_dummy_encryption
-test_dummy_encryption=%s Enable dummy encryption, which provides a fake fscrypt
-			 context. The fake fscrypt context is used by xfstests.
-			 The argument may be either "v1" or "v2", in order to
-			 select the corresponding fscrypt policy version.
-...
-======================== =======================================================
-
-The problem with the above is that Sphinx understood the first line as one row,
-and the second one as a different one. So, the HTML output would be like:
-
-<table>
-...
-<tr><td>test_dummy_encryption</td></tr>
-<tr><td>test_dummy_encryption=%s</td>
-<td>Enable dummy encryption, which provides a fake fscrypt
-    context. The fake fscrypt context is used by xfstests.
-    The argument may be either "v1" or "v2", in order to
-    select the corresponding fscrypt policy version.</td>
-</tr>
-
-(e. g. it would look like the first parameter lacks description)
-
-Which is not the intended result. I was unable to identify a way 
-to teach Sphinx that the second line was a continuation of the
-first (A ReST equivalent to placing a \ at the end of a line).
-
-Still, the html output with the above is not that bad, and it should be clear
-for readers that the description of the second parameter is also valid for the
-first.
-
-
-Thanks,
-Mauro
 
 
 _______________________________________________
