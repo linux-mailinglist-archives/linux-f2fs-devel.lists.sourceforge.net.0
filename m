@@ -2,97 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B1BF20966F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jun 2020 00:36:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F6E207F52
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jun 2020 00:31:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1joE0D-00068O-Sm; Wed, 24 Jun 2020 22:36:21 +0000
+	id 1joDvO-0005Xs-Rp; Wed, 24 Jun 2020 22:31:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <didier@slint.fr>) id 1joE0C-00067s-Hd
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 22:36:20 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1joDvN-0005Xl-Fh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 22:31:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FLKIjClgrJ5Y54XASWKY45OMA2iqTm3odNz4huJ2AC4=; b=j4/ntlyEDnDNIdTqbzdxaZIRH6
- 7VjkMUt8mkyExczeii4d+JDO4u+VES0B44ElAmQBh1Dexdyl3IIeQ0cxiSw7qho5ND7ggJzdacb+2
- JuTcsByDDhprDSiiQTgZjx9v7gEYsUzEsLoQMg9MT25VAE3l4efq9/Rxlor/ew4KsVqo=;
+ bh=DRVugW/SjbjElfzegAHJUAh6m8n1qPIPxnfOvw+iXVc=; b=A3D+dxTMHtuVknfiwui/xktiCd
+ 9lvOLZeFot8H/FlkXEXg35p3XY02edXnn3g/zcOm16fYilhBVkUnllUytD1gd+FfUIB4Oioh/RRga
+ BH6/vbmrvr5mjw42nlj+quUXIo0GwwctLbsgrZ2ArLt3XhOKBDBtfvr0Y2MexG2Ryo58=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
- Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FLKIjClgrJ5Y54XASWKY45OMA2iqTm3odNz4huJ2AC4=; b=T
- RhruWWkONVeWEMoXFho3Z57NWrYPqSzG7jlW52K2fzZ29mKa0tQ88ukyWJ9bqmnV+LJDuDV7UDXXf
- 93DzuwQzaG6AQbl23mfCiPl/IEADtPmHbQuiSSM5Qa2+4cuHFrLf/qwBCoI8gQ1DtDEyTZAmSeaqu
- wrsJ9GznvFAqHgDM=;
-Received: from darkstar.slint.fr ([172.105.89.79])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1joE09-00HPLx-Aw
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 22:36:20 +0000
-Received: from darkstar.slint.fr
- (men75-h08-176-172-247-100.dsl.sta.abo.bbox.fr [176.172.247.100])
- by darkstar.slint.fr (Postfix) with ESMTPSA id 3FB4EBE7DC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Jun 2020 23:17:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=slint.fr; s=default;
- t=1593033446; bh=PpSlgE5thHMGXuXNYT3X4vKjU61GJG+aEmZ2gPB2AQ0=;
- h=To:From:Subject:Date:From;
- b=WqNTmGqzpaJsh0/8v8VeWtAVYhN959fCe9teHFmeXj6QI5cwk40IKZORV6YzD7ny1
- ICDG0kKu6oUfpteLUy84UYfbbcSnfq6RG8q1ltfn81h3nMixrGgNldH8GjsEVUBOfb
- chFLh8sJwGRWHd6pHPWIOx6MDs3hA3yhcQMLTogr1TlPsty+Lp0YMw5wxQ9mqaPgmK
- VBngzoObAji4xc+KXv57rowyJ/nyRwAaK/+w+BDbAKjOIcavZ+Dw4/3Kx9CdgtjTuj
- iHJHidRwtbl0KKBo3I07Zpx80UxUHtmwmkAg8hQumXeNBtsO6Em4gV3QcsPvLTf+PZ
- oM2xShPw/ZXTQ==
-To: linux-f2fs-devel@lists.sourceforge.net
-From: Didier Spaier <didier@slint.fr>
-Autocrypt: addr=didier@slint.fr; prefer-encrypt=mutual; keydata=
- xsBNBFY6fG8BCADH4Hf/OaE2MwXRFMrU/9oDd+YPqR/wkhmIv0veDio84fsWA5qMz1De7TEv
- dNuxIVYTznuVOd/9lpdfxQ1KV9rgD7yoBPLmjbQA1vVjB+1QylIQUV0B9AYFUsxZP32Ic2pg
- TS3US/WiZyx+/jS50ri4kvT9iDtIEu7WBWFr8YMOoq3oLkHI8Y7gBG0WsK9XYN09glhtI+bA
- jLPr/ezwEg5M3FDb4U7XFq7GcA6EEzanKMAOHdZl3lta7dv5gpgdj+38j5jPfV1cJW+J1fha
- 63X72xxXGs7V6J7NGpnW7SAKfTAMXsPXZwwGIuqMQs1Z89I+2ZPJPOoV8zMncTsWzHStABEB
- AAHNH0RpZGllciBTcGFpZXIgPGRpZGllckBzbGludC5mcj7CwH8EEwEKACkCGwMHCwkIBwMC
- AQYVCAIJCgsEFgIDAQIeAQIXgAUCXcBjnwUJGlHqEgAKCRDVAgLvYMA+6v/ICAC8Oa2zXOne
- zyuFrPtNsciJWYwWamW+g5TNaY9NPnyMRNKDi7IcP6PoDwHRI8YBgo+Z9w0qFKQ/WVSI/O6s
- gm7LnOX7OEHjnub4sjrr5PHcsPRjm6iJFIgGgD+waz0K5fxcc65ti3lgHLH1tkhORyiT5EFp
- 0VllWDQfPHw5avm9oopJv1FuPfZhSlFT6QhjD2ARmOrxfFBjELQZjDidckOYf/8Stoh+aK5F
- 5q69DpF+bSZzOtCht+S6LT+Im5zqMgq1Dfqb3FpnVO3MyhSLeGI2nB+OFNTBGByRFKHYRsHc
- VaQBjtfsr4HnC0UR2P/bDIk/oxLnIN9nHJuL6btcf9M6zsBNBFY6fG8BCACqDQKHSw0ElDkw
- PPpNguL0ujOyygO30xlLyfW9pWOEycHSLhLzvDTlFkvr5IxvyCDBIFBdzpkeQqh1+ZxrFliw
- Wyj+9/roJlIjxeAyNs2xQZ7tQM6K5xtbUs8O5YtkCCO3OegAiLgmzzgxes79Qy+V3ciKbl+v
- rsNu7T9ro3zZhyinci1eOCcKEtXFPQW5P4woB+6+JheN9pIiDkjojmdC+xkvDadP7kJYKp19
- Itys/CbNvxEoOLsgeJhsZSmNU2QNhXkLfr7+AC99fb/c5ZDTNPRBqgLJCp+gTxn1QVJrAbq2
- OP3refmSRxdA3yUDMjxEeHwDNZJL9aEtTDlTzPk5ABEBAAHCwGUEGAEKAA8CGwwFAl1EQo4F
- CQjq+XYACgkQ1QIC72DAPurGhAf+LKNM5AajZNNnccq3bWawqsY1P5ZtFvZLPxMbx2xsnYaM
- 8UPe/tGfuxp+q1ouCRKgvtefjd2eBLGXaysCA5r3Jv+hgdjPKEJut3rARhTJMaDwjKOcOTHG
- AhFtpsjBkVXuCBxEpNBEypyis3w4kQUCxP7nro4yzdXY7s6EbadNd8nG4B8qFt4JxnqJnZWl
- 97mBQFJjFXlkAM+0eAkpF+rYzL6QKCKydO2Xcz7UTSMe/blXtZUjHxyr8Nh1G+ywEbkmQP+l
- QhcxJYJbK+q4zNM0U64zzLRwIvVknpdEzJKiFXsydnm9VFE9tzC6a+h40du2OdhkoNDVuFSq
- aG2M5OmN/Q==
-Message-ID: <13e19af7-69d5-6db3-441e-3be4921983de@slint.fr>
-Date: Thu, 25 Jun 2020 00:17:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=DRVugW/SjbjElfzegAHJUAh6m8n1qPIPxnfOvw+iXVc=; b=Qxmyku8S9P144m+JxO2Ytw+hi2
+ bSo8lCQ3G0YXm/fRnheYQknnVGQf6VqoiBCOMsgRM414L0+PkzbJOT7dFurXmIxXF6lRsbPMZm4FQ
+ fD3e4VlHKt4ujLoPy2T2FpDUmT8ke29UPNdSg5NT0TxDumtSNr3zxnTrnl6YjYQTo0mg=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1joDvM-00HPBl-5G
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 22:31:21 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id A9FB220720;
+ Wed, 24 Jun 2020 22:31:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1593037874;
+ bh=b0I9CFl8gqSvhvJoPFAwk/2J/WfPhv+Dp/MUWb6bqRo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=S2jZBOw1an015d2mFROHqozGpByKNC6X91ofYiYPEAKrFqKRRA1B7T1t+lRYWi8Lp
+ q9pfGhQDE6XE0y4hUVuPs6xld30rY/zuBTy5I7St0zsXoyAnIABMwq/MdeLsCa0oaY
+ tJT2vJ/qLbc/H7vIMVhSSwB5rSRA8eCu2Z4eIjy8=
+Date: Wed, 24 Jun 2020 15:31:14 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200624223114.GA192472@google.com>
+References: <20200618063625.110273-1-yuchao0@huawei.com>
+ <20200618063625.110273-5-yuchao0@huawei.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Spam-Score: 0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20200618063625.110273-5-yuchao0@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1joE09-00HPLx-Aw
-Subject: [f2fs-dev] Questions about using f2fs to format the root partition
- during Slint installation.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1joDvM-00HPBl-5G
+Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: show more debug info for
+ per-temperature log
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,64 +83,147 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello list,
+On 06/18, Chao Yu wrote:
+> - Add to account and show per-log dirty_seg, full_seg and valid_blocks
+> in debugfs.
+> - reformat printed info.
+> 
+>     TYPE            segno    secno   zoneno  dirty_seg   full_seg  valid_blk
+>   - COLD   data:     1523     1523     1523          1          0        399
+>   - WARM   data:      769      769      769         20        255     133098
+>   - HOT    data:      767      767      767          9          0        167
+>   - Dir   dnode:       22       22       22          3          0         70
+>   - File  dnode:      722      722      722         14         10       6505
+>   - Indir nodes:        2        2        2          1          0          3
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/debug.c | 67 ++++++++++++++++++++++++++++++++++++++++---------
+>  fs/f2fs/f2fs.h  |  3 +++
+>  2 files changed, 58 insertions(+), 12 deletions(-)
+> 
+> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+> index 0dbcb0f9c019..aa1fd2de11ba 100644
+> --- a/fs/f2fs/debug.c
+> +++ b/fs/f2fs/debug.c
+> @@ -174,6 +174,29 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+>  	for (i = META_CP; i < META_MAX; i++)
+>  		si->meta_count[i] = atomic_read(&sbi->meta_count[i]);
+>  
+> +	for (i = 0; i < NO_CHECK_TYPE; i++) {
+> +		si->dirty_seg[i] = 0;
+> +		si->full_seg[i] = 0;
+> +		si->valid_blks[i] = 0;
+> +	}
+> +
+> +	for (i = 0; i < MAIN_SEGS(sbi); i++) {
+> +		int blks = get_seg_entry(sbi, i)->valid_blocks;
+> +		int type = get_seg_entry(sbi, i)->type;
+> +
+> +		if (!blks)
+> +			continue;
+> +
+> +		if (IS_CURSEG(sbi, i))
+> +			continue;
 
-this email is a follow-up of:
-https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg14390.html
+How about adding current segments as well? Especially, it's hard to see any
+valid blocks for cold node with this.
 
-I will number the questions Q1, Q2 etc.
-
-To summarize the context and goal: I want that the Slint installer
-format the root partition with f2fs when appropriate, if possible
-without asking questions to the user about the device.
-
-I target usage of f2fs for the root file system in cases of USB flash
-drives aka USB sticks, SD cards, eMMC, as if I understand correctly
-these kinds of devices benefit the most of wear minimization and
-increase of performance when using f2fs. I plan to use ext4 for SSD
-(including NVMe) and hard disks.
-
-This leads to several questions:
-
-Q1: Comments about this choice of target devices for f2fs, knowing that
-I favor security over performances and that the "auto" option of the
-installer is intended for your grand-mother? I am a grand father myself
-<smile>.
-
-Q2. How-to determine if the drive fall in one of the types listed above
-without asking the user if possible?
-
-I have considered using the output of lsblk and/or "udevadm info" but
-that doesn't seem to provide enough information on the device.
-
-As an aside, I have seen rota=1 for an USB boot stick. ??? 
-
-Q3. What would be the safest options to include in the relevant line of
-/etc/fstab forthe root partition using f2fs?
-
-Q4. do you confirm the statement below? it is a quote of web page:
-https://wiki.gentoo.org/wiki/F2FS
-> When using f2fs > When using f2fs as rootfs fsck fails on boot.
-> Solutions are either disabling fsck in /etc/fstab (setting the last
-> number to 0) or enabling the force-flag for fsck in /etc/conf.d/fsck.
-> See bug #671786
-
-Q5. I am correct f2fs can be expanded but not shrinked. Is it still
-true? Will it planned to bring this feature?
-
-Q6. Currently we ship a 4.19 kernel. Would it be preferable to ship a
-5.4 one instead shipped in Slackware-current at time of writing, knowing
-that we ship an no patched (aka vanilla) kernel and what would be the
-benefit of doing so wrt f2fs?
-
-Have a good day,
-
-Didier
-
+> +
+> +		if (blks == sbi->blocks_per_seg)
+> +			si->full_seg[type]++;
+> +		else
+> +			si->dirty_seg[type]++;
+> +		si->valid_blks[type] += blks;
+> +	}
+> +
+>  	for (i = 0; i < 2; i++) {
+>  		si->segment_count[i] = sbi->segment_count[i];
+>  		si->block_count[i] = sbi->block_count[i];
+> @@ -329,30 +352,50 @@ static int stat_show(struct seq_file *s, void *v)
+>  		seq_printf(s, "\nMain area: %d segs, %d secs %d zones\n",
+>  			   si->main_area_segs, si->main_area_sections,
+>  			   si->main_area_zones);
+> -		seq_printf(s, "  - COLD  data: %d, %d, %d\n",
+> +		seq_printf(s, "    TYPE         %8s %8s %8s %10s %10s %10s\n",
+> +			   "segno", "secno", "zoneno", "dirty_seg", "full_seg", "valid_blk");
+> +		seq_printf(s, "  - COLD   data: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_COLD_DATA],
+>  			   si->cursec[CURSEG_COLD_DATA],
+> -			   si->curzone[CURSEG_COLD_DATA]);
+> -		seq_printf(s, "  - WARM  data: %d, %d, %d\n",
+> +			   si->curzone[CURSEG_COLD_DATA],
+> +			   si->dirty_seg[CURSEG_COLD_DATA],
+> +			   si->full_seg[CURSEG_COLD_DATA],
+> +			   si->valid_blks[CURSEG_COLD_DATA]);
+> +		seq_printf(s, "  - WARM   data: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_WARM_DATA],
+>  			   si->cursec[CURSEG_WARM_DATA],
+> -			   si->curzone[CURSEG_WARM_DATA]);
+> -		seq_printf(s, "  - HOT   data: %d, %d, %d\n",
+> +			   si->curzone[CURSEG_WARM_DATA],
+> +			   si->dirty_seg[CURSEG_WARM_DATA],
+> +			   si->full_seg[CURSEG_WARM_DATA],
+> +			   si->valid_blks[CURSEG_WARM_DATA]);
+> +		seq_printf(s, "  - HOT    data: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_HOT_DATA],
+>  			   si->cursec[CURSEG_HOT_DATA],
+> -			   si->curzone[CURSEG_HOT_DATA]);
+> -		seq_printf(s, "  - Dir   dnode: %d, %d, %d\n",
+> +			   si->curzone[CURSEG_HOT_DATA],
+> +			   si->dirty_seg[CURSEG_HOT_DATA],
+> +			   si->full_seg[CURSEG_HOT_DATA],
+> +			   si->valid_blks[CURSEG_HOT_DATA]);
+> +		seq_printf(s, "  - Dir   dnode: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_HOT_NODE],
+>  			   si->cursec[CURSEG_HOT_NODE],
+> -			   si->curzone[CURSEG_HOT_NODE]);
+> -		seq_printf(s, "  - File   dnode: %d, %d, %d\n",
+> +			   si->curzone[CURSEG_HOT_NODE],
+> +			   si->dirty_seg[CURSEG_HOT_NODE],
+> +			   si->full_seg[CURSEG_HOT_NODE],
+> +			   si->valid_blks[CURSEG_HOT_NODE]);
+> +		seq_printf(s, "  - File  dnode: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_WARM_NODE],
+>  			   si->cursec[CURSEG_WARM_NODE],
+> -			   si->curzone[CURSEG_WARM_NODE]);
+> -		seq_printf(s, "  - Indir nodes: %d, %d, %d\n",
+> +			   si->curzone[CURSEG_WARM_NODE],
+> +			   si->dirty_seg[CURSEG_WARM_NODE],
+> +			   si->full_seg[CURSEG_WARM_NODE],
+> +			   si->valid_blks[CURSEG_WARM_NODE]);
+> +		seq_printf(s, "  - Indir nodes: %8d %8d %8d %10u %10u %10u\n",
+>  			   si->curseg[CURSEG_COLD_NODE],
+>  			   si->cursec[CURSEG_COLD_NODE],
+> -			   si->curzone[CURSEG_COLD_NODE]);
+> +			   si->curzone[CURSEG_COLD_NODE],
+> +			   si->dirty_seg[CURSEG_COLD_NODE],
+> +			   si->full_seg[CURSEG_COLD_NODE],
+> +			   si->valid_blks[CURSEG_COLD_NODE]);
+>  		seq_printf(s, "\n  - Valid: %d\n  - Dirty: %d\n",
+>  			   si->main_area_segs - si->dirty_count -
+>  			   si->prefree_count - si->free_segs,
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 72a667f1d678..70565d81320b 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3536,6 +3536,9 @@ struct f2fs_stat_info {
+>  	int curseg[NR_CURSEG_TYPE];
+>  	int cursec[NR_CURSEG_TYPE];
+>  	int curzone[NR_CURSEG_TYPE];
+> +	unsigned int dirty_seg[NR_CURSEG_TYPE];
+> +	unsigned int full_seg[NR_CURSEG_TYPE];
+> +	unsigned int valid_blks[NR_CURSEG_TYPE];
+>  
+>  	unsigned int meta_count[META_MAX];
+>  	unsigned int segment_count[2];
+> -- 
+> 2.18.0.rc1
 
 
 _______________________________________________
