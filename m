@@ -2,65 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ABDF206BE7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2020 07:43:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6940B206C0D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2020 07:57:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jnyC9-0008Sq-8K; Wed, 24 Jun 2020 05:43:37 +0000
+	id 1jnyPO-0001uo-P6; Wed, 24 Jun 2020 05:57:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <krisman@collabora.com>) id 1jnyC8-0008Sj-6Q
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 05:43:36 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jnyPN-0001uN-7u
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 05:57:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
- Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xB+6J0O4jzl4NVJI8LmAon6D5LOR+VQ3DLNB2klpNMw=; b=dRfIhpODzevqDr0IYU5BPSc+Ye
- ORjlCAc8dQROhpR6MtndfAXvgVEaFlISd4NntK/ziUXeFI2pQu/4ZJaC/6yUBnaMTTihvuN1QCqEy
- Y4eAKuFKx/cjkwdox/ey9jISp3zP4Kdtmuw9k7aGmY8vpjEydEQoDvYiwBseuqolxW1c=;
+ bh=/23GMzip4Kt9lmgmCCQOvpfWu0Zm9wR0A2TL/GZ2xhw=; b=KCUzYv1t0WndHjpJLwGnzF3mne
+ PPlAYUzdW63Wg5DrydMLMNX91Cwss45qN+2tfy86aFDPp9kE5LAYBG51fJgC+UecBAV+06AKQ14ME
+ j18E4kIgKqjxXC7BRW7lhTNdqLSLTiPwxQn1LLytBCIsBVsZoAcBW0GCmfqrARCElEgk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xB+6J0O4jzl4NVJI8LmAon6D5LOR+VQ3DLNB2klpNMw=; b=bduxOYUDJKvy0tCzWNUSLitecL
- aXmRV5Dq+kKj3DH3OReGH8wM1FCuJJNZPjRVmNxDVvUcW0vMmX1/0gvLk0E5kXTcPYFhdwFhIn6Uq
- m22T0wmN3L7omauPC0B7T3PRQ8UT8mKH9YU+BC7L3TaN4gThagSVozKRXz+87g3DxCUE=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ bh=/23GMzip4Kt9lmgmCCQOvpfWu0Zm9wR0A2TL/GZ2xhw=; b=T4S/UfmGOAmojxKKHWuQP0ihUa
+ lsxgu1To5glSk8gaF3ymq0UjNM7vNtScESg+K352e38XmxvOPxfREAfmXmgWLbQ6nvFWb0kZLMEmf
+ VU7a51ePunEzR+V9acJ7t6/CS/VmLGQkuHB1Fc/F9PUmcykEG9s6GGLfbVcdOsZ5Hyfg=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jnyC6-00GBva-NC
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 05:43:36 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 640412A4015
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
+ id 1jnyPL-00GCdA-62
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 05:57:17 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4DCC22085B;
+ Wed, 24 Jun 2020 05:57:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592978229;
+ bh=2lsFqyU8P0hr8E82YY+KRZpjYFvt+d061bicFKiQlRc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=lbxsf9ik4Ybnb1VNbbAkDP+AkNKZAjMqErfEG+Qv5FJjpqdXBrE0v20o6fKaxGDjU
+ 6IbwyTMIIAryhYBDmhFPRgTRIvcrOwKn8x8VQtZkIfd6G07QWTXk8aEvAPsrzSaFLQ
+ hTu4hRjCUpgjrPNmucpIRCRbHtnLrLbiJjgdLxRY=
+Date: Tue, 23 Jun 2020 22:57:07 -0700
+From: Eric Biggers <ebiggers@kernel.org>
 To: Daniel Rosenberg <drosen@google.com>
-Organization: Collabora
+Message-ID: <20200624055707.GG844@sol.localdomain>
 References: <20200624043341.33364-1-drosen@google.com>
- <20200624043341.33364-5-drosen@google.com>
-Date: Wed, 24 Jun 2020 01:43:22 -0400
-In-Reply-To: <20200624043341.33364-5-drosen@google.com> (Daniel Rosenberg's
- message of "Tue, 23 Jun 2020 21:33:41 -0700")
-Message-ID: <877dvxggsl.fsf@collabora.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.3 (gnu/linux)
+ <20200624043341.33364-3-drosen@google.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <20200624043341.33364-3-drosen@google.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [46.235.227.227 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jnyC6-00GBva-NC
-Subject: Re: [f2fs-dev] [PATCH v9 4/4] ext4: Use generic casefolding support
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jnyPL-00GCdA-62
+Subject: Re: [f2fs-dev] [PATCH v9 2/4] fs: Add standard casefolding support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,48 +84,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, Jonathan Corbet <corbet@lwn.net>,
- Richard Weinberger <richard@nod.at>, Andreas Dilger <adilger.kernel@dilger.ca>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+Cc: kernel-team@android.com, Theodore Ts'o <tytso@mit.edu>,
+ Jonathan Corbet <corbet@lwn.net>, Richard Weinberger <richard@nod.at>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
  Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- kernel-team@android.com
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Daniel Rosenberg <drosen@google.com> writes:
+On Tue, Jun 23, 2020 at 09:33:39PM -0700, Daniel Rosenberg wrote:
+> This adds general supporting functions for filesystems that use
+> utf8 casefolding. It provides standard dentry_operations and adds the
+> necessary structures in struct super_block to allow this standardization.
+> 
+> Ext4 and F2fs will switch to these common implementations.
+> 
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
+>  fs/libfs.c         | 101 +++++++++++++++++++++++++++++++++++++++++++++
+>  include/linux/fs.h |  22 ++++++++++
+>  2 files changed, 123 insertions(+)
+> 
+> diff --git a/fs/libfs.c b/fs/libfs.c
+> index 4d08edf19c782..f7345a5ed562f 100644
+> --- a/fs/libfs.c
+> +++ b/fs/libfs.c
+> @@ -20,6 +20,8 @@
+>  #include <linux/fs_context.h>
+>  #include <linux/pseudo_fs.h>
+>  #include <linux/fsnotify.h>
+> +#include <linux/unicode.h>
+> +#include <linux/fscrypt.h>
+>  
+>  #include <linux/uaccess.h>
+>  
+> @@ -1363,3 +1365,102 @@ bool is_empty_dir_inode(struct inode *inode)
+>  	return (inode->i_fop == &empty_dir_operations) &&
+>  		(inode->i_op == &empty_dir_inode_operations);
+>  }
+> +
+> +#ifdef CONFIG_UNICODE
+> +/**
+> + * needs_casefold - generic helper to determine if a filename should be casefolded
+> + * @dir: Parent directory
+> + *
+> + * Generic helper for filesystems to use to determine if the name of a dentry
+> + * should be casefolded. It does not make sense to casefold the no-key token of
+> + * an encrypted filename.
+> + *
+> + * Return: if names will need casefolding
+> + */
+> +bool needs_casefold(const struct inode *dir)
+> +{
+> +	return IS_CASEFOLDED(dir) && dir->i_sb->s_encoding &&
+> +			(!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir));
+> +}
+> +EXPORT_SYMBOL(needs_casefold);
 
-> -
->  const struct dentry_operations ext4_dentry_ops = {
-> -	.d_hash = ext4_d_hash,
-> -	.d_compare = ext4_d_compare,
-> +	.d_hash = generic_ci_d_hash,
-> +	.d_compare = generic_ci_d_compare,
->  };
->  #endif
+Note that the '!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir)' check can
+be racy, because a process can be looking up a no-key token in a directory while
+concurrently another process initializes the directory's ->i_crypt_info, causing
+fscrypt_has_encryption_key(dir) to suddenly start returning true.
 
-Can you make the structure generic since it is the same for f2fs and
-ext4, which let you drop the code guards?  Unless that becomes a problem for
-d_revalidate with fscrypt, it is fine like this.
+In my rework of filename handling in f2fs, I actually ended up removing all
+calls to needs_casefold(), thus avoiding this race.  f2fs now decides whether
+the name is going to need casefolding early on, in __f2fs_setup_filename(),
+where it knows in a race-free way whether the filename is a no-key token or not.
 
->  #ifdef CONFIG_UNICODE
-> -	sbi = EXT4_SB(sb);
-> -	if (ext4_has_strict_mode(sbi) && IS_CASEFOLDED(dir) &&
-> -	    sbi->s_encoding && utf8_validate(sbi->s_encoding, &dentry->d_name))
-> +	if (sb_has_enc_strict_mode(sb) && IS_CASEFOLDED(dir) &&
+Perhaps ext4 should work the same way?  It did look like there would be some
+extra complexity due to how the ext4 directory hashing works in comparison to
+f2fs's, but I haven't had a chance to properly investigate it.
 
-I keep reading the 'enc' in sb_has_enc_strict_mode() as 'encryption'.  What do
-you think about renaming it to sb_has_strict_encoding()?
-
-These comments apply equally to patches 3 and 4.  Other than that,
-
-Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
-
--- 
-Gabriel Krisman Bertazi
+- Eric
 
 
 _______________________________________________
