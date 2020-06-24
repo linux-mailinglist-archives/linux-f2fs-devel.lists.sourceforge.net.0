@@ -2,76 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0AFB20692F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2020 02:55:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2E1720696F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2020 03:22:05 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jnthC-0005xq-2n; Wed, 24 Jun 2020 00:55:22 +0000
+	id 1jnu70-000735-R8; Wed, 24 Jun 2020 01:22:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1jnth9-0005xj-VU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 00:55:19 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jnu70-00072z-C9
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 01:22:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=plU283mgriunc3GrZO0jw5nUnd52uxqS/qp3IRde8Ls=; b=CB+1ua9BdC9tLzorfuPXQFar/d
- 1aQ59522nbCsNzjXFp8wxpENwvS7XqcjMqVCfqwNBfpFLRO30erGkmIIj74oN6xWHRFVaGF43lPpp
- pElC/O+4eO/VYq20H1AwJtL6CscKYkrYAiMgTs/C7k/daAbyDdtz1yeuPRerT5nKpw1o=;
+ bh=3D2Pjzl6zLc6+mLJTP+WGzveq780PCi0s+2HpfDKIdg=; b=QYMV1EsYOhRiO9l6XH3x21j79J
+ 8qDr9iolP4xwaiq4zJMYxAIF/nKwrAKQr7cmuMxaHYs9+g0pkofSj0+iConXC432yYSFs1ughBzMq
+ qRZJatqZWZZvbBWCwlF4NPBC6zGAbU7OcbpuSBXDHo+QhrpGYO3+gTTWl67SX8MCEU4s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=plU283mgriunc3GrZO0jw5nUnd52uxqS/qp3IRde8Ls=; b=fxIN/ZNkeNhM/eUYpyFuSbQkl4
- faCQRC8Hsp4FCDxdNgGMMBGXuZ8bjMlPIzh/T/bXAiIraPoGAkHensOCU7lwlBuB5AatGpz+i3LG4
- tnlMv1KYg7GTZM1KG+6yB4CuV8ARtwQItsEJV4qdNUaGvM9fxBA6AJQ67i7TkuBq4wOI=;
-Received: from mail109.syd.optusnet.com.au ([211.29.132.80])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1jnth7-00GWa3-Lj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 00:55:19 +0000
-Received: from dread.disaster.area (pa49-180-124-177.pa.nsw.optusnet.com.au
- [49.180.124.177])
- by mail109.syd.optusnet.com.au (Postfix) with ESMTPS id 3A00CD7B989;
- Wed, 24 Jun 2020 10:55:10 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1jntgz-0001dO-9M; Wed, 24 Jun 2020 10:55:09 +1000
-Date: Wed, 24 Jun 2020 10:55:09 +1000
-From: Dave Chinner <david@fromorbit.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200624005509.GA5369@dread.disaster.area>
-References: <20200617075732.213198-1-satyat@google.com>
- <20200617075732.213198-2-satyat@google.com>
- <20200618011912.GA2040@dread.disaster.area>
- <20200618031935.GE1138@sol.localdomain>
- <20200623004636.GE2040@dread.disaster.area>
- <20200623015017.GA844@sol.localdomain>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3D2Pjzl6zLc6+mLJTP+WGzveq780PCi0s+2HpfDKIdg=; b=T
+ h8qzPWD3wY/Sen7dxiQpsd9hTfTReJEQZHk12m/lHlNYKlC8U5qKmM4uBVmQrglkwV6MM/r9fm2D/
+ eCNVfPe1BrleovE6qaYCXSRe10/IP4r8IYXJLzifjrlS+mJge5nh4aeLmWaBYGl3XLbDV2nEOlEmW
+ UehpJ2l1PTVj/vaM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jnu6u-00GXZ5-3Y
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Jun 2020 01:22:02 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id A54C72098B;
+ Wed, 24 Jun 2020 01:21:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592961710;
+ bh=q4Pi3kNmO4FJ+5AKsS68CryMsRDMWC3DAutTzeZ9fAw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PrCwI/LGSBreBr49BTTIywyZJN9Dvn7jpBRbXUfo97cuaDA0tll3lTbCSa8SyErdt
+ XuDZKR49M8rDSLypdOALdd8kR/vt0GIEwvgIbUhLmZmbruoNlznbt+oR0advniYmzz
+ GeZivfeGLVLerbasPB+phfMIVySvy24cSljoJUSU=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue, 23 Jun 2020 18:21:48 -0700
+Message-Id: <20200624012148.180050-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.27.0.111.gc72c7da667-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200623015017.GA844@sol.localdomain>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=QIgWuTDL c=1 sm=1 tr=0
- a=k3aV/LVJup6ZGWgigO6cSA==:117 a=k3aV/LVJup6ZGWgigO6cSA==:17
- a=kj9zAlcOel0A:10 a=nTHF0DUjJn0A:10 a=VwQbUJbxAAAA:8 a=JfrnYn6hAAAA:8
- a=7-415B0cAAAA:8 a=_JHsV_7MbDpF1hl6ON4A:9 a=CjuIK1q_8ugA:10
- a=AjGcO6oz07-iQ99wixmX:22 a=1CNFftbPRP8L7MoqJWF3:22
- a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jnth7-00GWa3-Lj
-Subject: Re: [f2fs-dev] [PATCH 1/4] fs: introduce SB_INLINECRYPT
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1jnu6u-00GXZ5-3Y
+Subject: [f2fs-dev] [PATCH] f2fs: avoid readahead race condition
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,89 +80,91 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Satya Tangirala <satyat@google.com>,
- linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 22, 2020 at 06:50:17PM -0700, Eric Biggers wrote:
-> On Tue, Jun 23, 2020 at 10:46:36AM +1000, Dave Chinner wrote:
-> > On Wed, Jun 17, 2020 at 08:19:35PM -0700, Eric Biggers wrote:
-> > > Are you objecting to the use of a SB_* flag, or just to showing the flag in
-> > > show_sb_opts() instead of in the individual filesystems?  Note that the SB_*
-> > > flag was requested by Christoph
-> > > (https://lkml.kernel.org/r/20191031183217.GF23601@infradead.org/,
-> > > https://lkml.kernel.org/r/20191031212103.GA6244@infradead.org/).  We originally
-> > > used a function fscrypt_operations::inline_crypt_enabled() instead.
-> > 
-> > I'm objecting to the layering violations of having the filesystem
-> > control the mount option parsing and superblock feature flags, but
-> > then having no control over whether features that the filesystem has
-> > indicated to the VFS it is using get emitted as a mount option or
-> > not, and then having the VFS code unconditionally override the
-> > functionality that the filesystem uses because it thinks it's a
-> > mount option the filesystem supports....
-> > 
-> > For example, the current mess that has just come to light:
-> > filesystems like btrfs and XFS v5 which set SB_IVERSION
-> > unconditionally (i.e. it's not a mount option!) end up having that
-> > functionality turned off on remount because the VFS conflates
-> > MS_IVERSION with SB_IVERSION and so unconditionally clears
-> > SB_IVERSION because MS_IVERSION is not set on remount by userspace.
-> > Which userspace will never set be because the filesystems don't put
-> > "iversion" in their mount option strings because -its not a mount
-> > option- for those filesystems.
-> > 
-> > See the problem?  MS_IVERSION should be passed to the filesystem to
-> > deal with as a mount option, not treated as a flag to directly
-> > change SB_IVERSION in the superblock.
-> > 
-> > We really need to stop with the "global mount options for everyone
-> > at the VFS" and instead pass everything down to the filesystems to
-> > parse appropriately. Yes, provide generic helper functions to deal
-> > with the common flags that everything supports, but the filesystems
-> > should be masking off mount options they doesn't support changing
-> > before changing their superblock feature support mask....
-> 
-> I think the MS_* flags are best saved for mount options that are applicable to
-> many/most filesystems and are mostly/entirely implementable at the VFS level.
+If two readahead threads having same offset enter in readpages, every read
+IOs are split and issued to the disk which giving lower bandwidth.
 
-That's the theory, but so far it's caused nothing but pain.
+This patch tries to avoid redundant readahead calls.
 
-In reality, I think ithe only sane way forward if to stop mount
-option parsing in userspace (i.e. no new MS_* flags) for any new
-functionality as it only leads to future pain. i.e. all new mount
-options should be parsed entirely in the kernel by the filesystem
-parsing code....
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/data.c  | 15 +++++++++++++++
+ fs/f2fs/f2fs.h  |  1 +
+ fs/f2fs/super.c |  2 ++
+ 3 files changed, 18 insertions(+)
 
-> I don't think "inlinecrypt" qualifies, since while it will be shared by the
-> block device-based filesystems that support fscrypt, that is only 2 filesystems
-> currently; and while some of the code needed to implement it is shared in
-> fs/crypto/, there are still substantial filesystem-specific hooks needed.
-
-Right. I wasn't suggesting this patchset should use an MS_ flag -
-it was pointing out the problem with the VFS code using SB_ flags to
-indicate enabled filesystem functionality unconditionally as a mount
-option that can be changed by userspace.
-
-> Hence this patchset intentionally does *not* allocate an MS_INLINECRYPT flag.
-> 
-> I believe that already addresses half of your concern, as it means
-> SB_INLINECRYPT can only be set/cleared by the filesystem itself, not by the VFS.
-> (But the commit message could use an explanation of this.)
-> 
-> The other half would be addressed by the following change, right?
-
-Yes, it does. Thanks, Eric!
-
-Cheers,
-
-Dave.
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index dfd3225153570..1886d83bc5f15 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2292,6 +2292,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+ 	unsigned max_nr_pages = nr_pages;
+ 	int ret = 0;
++	bool drop_ra = false;
+ 
+ 	map.m_pblk = 0;
+ 	map.m_lblk = 0;
+@@ -2302,6 +2303,17 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 	map.m_seg_type = NO_CHECK_TYPE;
+ 	map.m_may_create = false;
+ 
++	/*
++	 * Two readahead threads for same address range can cause race condition
++	 * which fragments sequential read IOs. So let's avoid each other.
++	 */
++	if (rac && readahead_count(rac)) {
++		if (F2FS_I(inode)->ra_offset == readahead_index(rac))
++			drop_ra = true;
++		else
++			F2FS_I(inode)->ra_offset = readahead_index(rac);
++	}
++
+ 	for (; nr_pages; nr_pages--) {
+ 		if (rac) {
+ 			page = readahead_page(rac);
+@@ -2368,6 +2380,9 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 	}
+ 	if (bio)
+ 		__submit_bio(F2FS_I_SB(inode), bio, DATA);
++
++	if (rac && readahead_count(rac) && !drop_ra)
++		F2FS_I(inode)->ra_offset = -1;
+ 	return ret;
+ }
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 7fb2a1a334388..753782426feac 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -809,6 +809,7 @@ struct f2fs_inode_info {
+ 	struct list_head inmem_pages;	/* inmemory pages managed by f2fs */
+ 	struct task_struct *inmem_task;	/* store inmemory task */
+ 	struct mutex inmem_lock;	/* lock for inmemory pages */
++	pgoff_t ra_offset;		/* ongoing readahead offset */
+ 	struct extent_tree *extent_tree;	/* cached extent_tree entry */
+ 
+ 	/* avoid racing between foreground op and gc */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 7326522057378..80cb7cd358f84 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1015,6 +1015,8 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
+ 	/* Will be used by directory only */
+ 	fi->i_dir_level = F2FS_SB(sb)->dir_level;
+ 
++	fi->ra_offset = -1;
++
+ 	return &fi->vfs_inode;
+ }
+ 
 -- 
-Dave Chinner
-david@fromorbit.com
+2.27.0.111.gc72c7da667-goog
+
 
 
 _______________________________________________
