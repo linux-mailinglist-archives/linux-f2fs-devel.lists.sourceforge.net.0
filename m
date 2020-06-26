@@ -2,87 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1315D209E98
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jun 2020 14:40:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=KG6tE0/FRuHvCR3UJjH7eb6PgxBbso8B+LHUYeCWOUs=; b=ev/oz79RZORQONxgPOHC/oEapf
-	9+Kzpg3RUn9mH8f90TcHyGCfEiYu8qtufQAjwCjZkejuzUS0cfPtoyX8rhf+2rh/y3b7901aARm4O
-	qcegK1wihZXH9U21rMCD4fg7XXwsmgQDiz7M91Gex+Mv9/KhLRB5jix6MbQMLNElx7wM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98BE220AFA2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2020 12:23:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1joRBL-0007CT-IR; Thu, 25 Jun 2020 12:40:43 +0000
+	id 1jolVi-00040q-Aq; Fri, 26 Jun 2020 10:23:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <fishland@aliyun.com>) id 1joRBJ-0007CG-U2
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jun 2020 12:40:42 +0000
+ (envelope-from <SRS0=yT37=AH=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
+ id 1jolVh-00040i-AX
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jun 2020 10:23:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OrUK9NlrDcqjCu5GwHoEIoauj09eZSsplfxNdAoL6+o=; b=Xj4YLF5hNPkQxMkfAbJwPF5I1o
- p1fzgqERd42u64owCQ+gwHXNW8JfM2FGS445R2ZthrvATZA45qtRfZHk8epIxdGFeKWZoVa3DSAP8
- jLjhnaFTLZFPut8nkeqb1xxGBalpY4fnaCRk/ulmoH2uCBgTZpeDX074onkuvwZTV8IU=;
+ bh=EiaVhQJY8odOkVqjC5iqgUFEGhNHgHkoUztfSTvDCqA=; b=AEQQZTUIGb6UKg55aA/8V+UY2N
+ EeR+m2ON2b7rn+FadIaumCckCYn/s0/FDlVx/mVWn2aI9l49hktD1W08QL34ISjM9lh3BpF9SL62P
+ eNn7jXC8+Rj8NWcxQFcaUzkrg7MWq9NlPxD/2GnFWsCdlEabgjcybtzk7Q54wUMA3bgc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=OrUK9NlrDcqjCu5GwHoEIoauj09eZSsplfxNdAoL6+o=; b=J
- L/rqMEtXE/qseydm3bzHYKB2Elv/jH9OlRrZ2JfyJpcV2mZGuQ3iMBgIkUNxhp2hMUqHbv1fAeV39
- 1LxB9V7DAU7qCDdDITaWwVBmHamOGPAHoPPkne4LdMyT+El1dT3f0vne+8ypS8hu4DLrUznffslXF
- 9Rs4qOesXlkPEHDM=;
-Received: from out30-28.freemail.mail.aliyun.com ([115.124.30.28])
+ List-Owner:List-Archive; bh=EiaVhQJY8odOkVqjC5iqgUFEGhNHgHkoUztfSTvDCqA=; b=l
+ mbzqf+HntEf1JxOmmJvgay73p7mNyEyv5Ay5N0pUnu0jMiMfAOiRe4Rd8biXdQ80YFTeDI8m70yCz
+ wvAO+zPcxP2aDvz6a5iiQHz9uZ5Jg2q03yU5Gn2u/DYyQZvt/x7glqvWfoLRgvb0t1TNWooFSwgoX
+ MPK+GarBNPDV0o6o=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1joRBH-000Vqt-Bh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Jun 2020 12:40:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aliyun.com; s=s1024;
- t=1593088819; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=OrUK9NlrDcqjCu5GwHoEIoauj09eZSsplfxNdAoL6+o=;
- b=sXJDwku6JJSnoTMc8N0uS6FVkcuiSk5C1oRNzc/56SOsK5VuhvpVtJ/Yl0jM84xMSn2g/CaOduGtwdd5FSsqMq5ENm2Dsv1GuaDQOCsqx/4IbnjqmPpvRKIVrE5ETZ46St4MbSYFqORkVUB0GVLkETk7+OUeJ1b8tDQB59VBh1w=
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1650266|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0132381-0.000659421-0.986103;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01e01422; MF=fishland@aliyun.com; NM=1; PH=DS; RN=5;
- RT=5; SR=0; TI=SMTPD_---0U0ggW-2_1593088813; 
-Received: from localhost.localdomain(mailfrom:fishland@aliyun.com
- fp:SMTPD_---0U0ggW-2_1593088813) by smtp.aliyun-inc.com(127.0.0.1);
- Thu, 25 Jun 2020 20:40:19 +0800
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Thu, 25 Jun 2020 20:40:11 +0800
-Message-Id: <20200625124011.8072-1-fishland@aliyun.com>
-X-Mailer: git-send-email 2.20.1
+ id 1jolVg-001reV-6c
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Jun 2020 10:23:05 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 26 Jun 2020 10:22:46 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: zKqri0@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression
+Message-ID: <bug-208325-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (fishland[at]aliyun.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [115.124.30.28 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [115.124.30.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1joRBH-000Vqt-Bh
-Subject: [f2fs-dev] [PATCH] f2fs: fix typo in comment of f2fs_do_add_link
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jolVg-001reV-6c
+Subject: [f2fs-dev] [Bug 208325] New: f2fs inconsistent node block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,38 +83,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Liu Song via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Liu Song <fishland@aliyun.com>
-Cc: Liu Song <fishland@aliyun.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-stakable/stackable
+https://bugzilla.kernel.org/show_bug.cgi?id=208325
 
-Signed-off-by: Liu Song <fishland@aliyun.com>
----
- fs/f2fs/dir.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+            Bug ID: 208325
+           Summary: f2fs inconsistent node block
+           Product: File System
+           Version: 2.5
+    Kernel Version: 5.7.2-arch1-1
+          Hardware: All
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: normal
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: zKqri0@gmail.com
+        Regression: No
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index d35976785e8c..069f498af1e3 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -779,7 +779,7 @@ int f2fs_do_add_link(struct inode *dir, const struct qstr *name,
- 		return err;
- 
- 	/*
--	 * An immature stakable filesystem shows a race condition between lookup
-+	 * An immature stackable filesystem shows a race condition between lookup
- 	 * and create. If we have same task when doing lookup and create, it's
- 	 * definitely fine as expected by VFS normally. Otherwise, let's just
- 	 * verify on-disk dentry one more time, which guarantees filesystem
+i was working with an android kernel tree and once when i was trying to build i
+started getting errors like "make[1]: stat: drivers/input/touchscreen/Kconfig:
+Invalid argument". checked my laptop's dmesg and there were a bunch of errors
+like "F2FS-fs (sda2): inconsistent node block, nid:1761978,
+node_footer[nid:540703074,ino:1937074503,ofs:212733452,cpver:7020105085017473824,blkaddr:1008758642]".
+
+
+rebooted and the problem is still there whenever i try to build that kernel
+tree. probably could just delete and clone it again but i kept it in case
+having it will help with finding what caused this bug. its probably not caused
+by ssd failure as i didnt get any sata errors and ive never got files corrupted
+before and after this happened.
+
 -- 
-2.20.1
-
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
