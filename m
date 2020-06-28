@@ -2,58 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8B1820C52E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jun 2020 03:36:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE16B20C56F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jun 2020 04:36:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpMEp-0002He-0i; Sun, 28 Jun 2020 01:36:07 +0000
+	id 1jpNAn-0005gq-1e; Sun, 28 Jun 2020 02:36:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jpMEn-0002HV-7V
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 01:36:05 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jpNAk-0005gb-TC
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 02:35:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EpwmVa5kSPHAU1ZAw6F9CUaeOefyil0ZoGq2WqevXOw=; b=DAvLQuzCycgZY+V/2UqRHfJm6Y
- eNMPXFZK2Va2IEbKnecuL5+9tjnAXAWwSvs+BDWopeFAJtaU/efK4qrHcXAtu/c56fxDZIim0maQC
- ZO5PwKS8mNVVoyn/z4x4iVbY8kkKhZeSZ/QVPwPiBb7xix9r48ZBvzr8gA0jdDolKBR8=;
+ bh=ABWCs4IV8ComMsnAcjUX5giVH2vd/VhM2/vXpjkQhCQ=; b=hIsoMHAsb/ocGnGc/IXHIXBVUk
+ c2zFt1DPrFPC5lEqDanPofKBMSoVPxnJIN/rSUDW5/pqJBhVnRGD2MSO51N2QsEBH5qPzJ/2JIirI
+ FMbPsSOe+ugV0uTtoP55W9zHNMaaUlVTa2pWf6PkaLdZ7pFMjzU4Sthwi6HrGx4jNXjY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EpwmVa5kSPHAU1ZAw6F9CUaeOefyil0ZoGq2WqevXOw=; b=gl3wUFT5+Yn6rPluxeCOL2e+nX
- 17nSSTgRUcTXEAY1uYUA6innwkHmR+SKEGK6FR/8JAL/xTALT/AZ694tQRszXJqx4Eo182emh9wlt
- wy2IZ6ORb9IT/JiWq+blz5pLX3WfjUcVIB69s2DCvjdVkYueLLLxWOa+ouaoSfG75Clo=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=ABWCs4IV8ComMsnAcjUX5giVH2vd/VhM2/vXpjkQhCQ=; b=k37t7hyoHDgQYF9609jFTzlm8H
+ vFuOSIbcuyDxmtx73txbGherKDKYiOo7/VSrtC6kcxTFq68CP02sX7vjtPLCflKXI3W5/pErZaYt3
+ ZfpDb4F9XRj1q/haQZuGKXeAVs4OBTWlv7ckpNM/arTJrAuk0ieVo4Z0EldOij8y6fqA=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jpMEk-00072s-OT
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 01:36:05 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 7930CCAC7C623C057F9A;
- Sun, 28 Jun 2020 09:35:54 +0800 (CST)
+ id 1jpNAi-0037qG-Q5
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 02:35:58 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 9B1649CC2879B92F08CD;
+ Sun, 28 Jun 2020 10:35:32 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sun, 28 Jun
- 2020 09:35:53 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200618063625.110273-1-yuchao0@huawei.com>
- <20200618063625.110273-5-yuchao0@huawei.com>
- <20200624223114.GA192472@google.com>
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sun, 28 Jun
+ 2020 10:35:27 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20200624012148.180050-1-jaegeuk@kernel.org>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <6d0d3aad-98ac-7cca-7d76-525a82f99184@huawei.com>
-Date: Sun, 28 Jun 2020 09:35:52 +0800
+Message-ID: <368cf853-0411-c237-f0ad-481f78a1eef3@huawei.com>
+Date: Sun, 28 Jun 2020 10:35:26 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200624223114.GA192472@google.com>
+In-Reply-To: <20200624012148.180050-1-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -61,17 +60,12 @@ X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.191 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jpMEk-00072s-OT
-Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: show more debug info for
- per-temperature log
+X-Headers-End: 1jpNAi-0037qG-Q5
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid readahead race condition
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,152 +77,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/25 6:31, Jaegeuk Kim wrote:
-> On 06/18, Chao Yu wrote:
->> - Add to account and show per-log dirty_seg, full_seg and valid_blocks
->> in debugfs.
->> - reformat printed info.
->>
->>     TYPE            segno    secno   zoneno  dirty_seg   full_seg  valid_blk
->>   - COLD   data:     1523     1523     1523          1          0        399
->>   - WARM   data:      769      769      769         20        255     133098
->>   - HOT    data:      767      767      767          9          0        167
->>   - Dir   dnode:       22       22       22          3          0         70
->>   - File  dnode:      722      722      722         14         10       6505
->>   - Indir nodes:        2        2        2          1          0          3
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  fs/f2fs/debug.c | 67 ++++++++++++++++++++++++++++++++++++++++---------
->>  fs/f2fs/f2fs.h  |  3 +++
->>  2 files changed, 58 insertions(+), 12 deletions(-)
->>
->> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
->> index 0dbcb0f9c019..aa1fd2de11ba 100644
->> --- a/fs/f2fs/debug.c
->> +++ b/fs/f2fs/debug.c
->> @@ -174,6 +174,29 @@ static void update_general_status(struct f2fs_sb_info *sbi)
->>  	for (i = META_CP; i < META_MAX; i++)
->>  		si->meta_count[i] = atomic_read(&sbi->meta_count[i]);
->>  
->> +	for (i = 0; i < NO_CHECK_TYPE; i++) {
->> +		si->dirty_seg[i] = 0;
->> +		si->full_seg[i] = 0;
->> +		si->valid_blks[i] = 0;
->> +	}
->> +
->> +	for (i = 0; i < MAIN_SEGS(sbi); i++) {
->> +		int blks = get_seg_entry(sbi, i)->valid_blocks;
->> +		int type = get_seg_entry(sbi, i)->type;
->> +
->> +		if (!blks)
->> +			continue;
->> +
->> +		if (IS_CURSEG(sbi, i))
->> +			continue;
+On 2020/6/24 9:21, Jaegeuk Kim wrote:
+> If two readahead threads having same offset enter in readpages, every read
+> IOs are split and issued to the disk which giving lower bandwidth.
 > 
-> How about adding current segments as well? Especially, it's hard to see any
-> valid blocks for cold node with this.
-
-Better, let me update this patch.
-
+> This patch tries to avoid redundant readahead calls.
 > 
->> +
->> +		if (blks == sbi->blocks_per_seg)
->> +			si->full_seg[type]++;
->> +		else
->> +			si->dirty_seg[type]++;
->> +		si->valid_blks[type] += blks;
->> +	}
->> +
->>  	for (i = 0; i < 2; i++) {
->>  		si->segment_count[i] = sbi->segment_count[i];
->>  		si->block_count[i] = sbi->block_count[i];
->> @@ -329,30 +352,50 @@ static int stat_show(struct seq_file *s, void *v)
->>  		seq_printf(s, "\nMain area: %d segs, %d secs %d zones\n",
->>  			   si->main_area_segs, si->main_area_sections,
->>  			   si->main_area_zones);
->> -		seq_printf(s, "  - COLD  data: %d, %d, %d\n",
->> +		seq_printf(s, "    TYPE         %8s %8s %8s %10s %10s %10s\n",
->> +			   "segno", "secno", "zoneno", "dirty_seg", "full_seg", "valid_blk");
->> +		seq_printf(s, "  - COLD   data: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_COLD_DATA],
->>  			   si->cursec[CURSEG_COLD_DATA],
->> -			   si->curzone[CURSEG_COLD_DATA]);
->> -		seq_printf(s, "  - WARM  data: %d, %d, %d\n",
->> +			   si->curzone[CURSEG_COLD_DATA],
->> +			   si->dirty_seg[CURSEG_COLD_DATA],
->> +			   si->full_seg[CURSEG_COLD_DATA],
->> +			   si->valid_blks[CURSEG_COLD_DATA]);
->> +		seq_printf(s, "  - WARM   data: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_WARM_DATA],
->>  			   si->cursec[CURSEG_WARM_DATA],
->> -			   si->curzone[CURSEG_WARM_DATA]);
->> -		seq_printf(s, "  - HOT   data: %d, %d, %d\n",
->> +			   si->curzone[CURSEG_WARM_DATA],
->> +			   si->dirty_seg[CURSEG_WARM_DATA],
->> +			   si->full_seg[CURSEG_WARM_DATA],
->> +			   si->valid_blks[CURSEG_WARM_DATA]);
->> +		seq_printf(s, "  - HOT    data: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_HOT_DATA],
->>  			   si->cursec[CURSEG_HOT_DATA],
->> -			   si->curzone[CURSEG_HOT_DATA]);
->> -		seq_printf(s, "  - Dir   dnode: %d, %d, %d\n",
->> +			   si->curzone[CURSEG_HOT_DATA],
->> +			   si->dirty_seg[CURSEG_HOT_DATA],
->> +			   si->full_seg[CURSEG_HOT_DATA],
->> +			   si->valid_blks[CURSEG_HOT_DATA]);
->> +		seq_printf(s, "  - Dir   dnode: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_HOT_NODE],
->>  			   si->cursec[CURSEG_HOT_NODE],
->> -			   si->curzone[CURSEG_HOT_NODE]);
->> -		seq_printf(s, "  - File   dnode: %d, %d, %d\n",
->> +			   si->curzone[CURSEG_HOT_NODE],
->> +			   si->dirty_seg[CURSEG_HOT_NODE],
->> +			   si->full_seg[CURSEG_HOT_NODE],
->> +			   si->valid_blks[CURSEG_HOT_NODE]);
->> +		seq_printf(s, "  - File  dnode: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_WARM_NODE],
->>  			   si->cursec[CURSEG_WARM_NODE],
->> -			   si->curzone[CURSEG_WARM_NODE]);
->> -		seq_printf(s, "  - Indir nodes: %d, %d, %d\n",
->> +			   si->curzone[CURSEG_WARM_NODE],
->> +			   si->dirty_seg[CURSEG_WARM_NODE],
->> +			   si->full_seg[CURSEG_WARM_NODE],
->> +			   si->valid_blks[CURSEG_WARM_NODE]);
->> +		seq_printf(s, "  - Indir nodes: %8d %8d %8d %10u %10u %10u\n",
->>  			   si->curseg[CURSEG_COLD_NODE],
->>  			   si->cursec[CURSEG_COLD_NODE],
->> -			   si->curzone[CURSEG_COLD_NODE]);
->> +			   si->curzone[CURSEG_COLD_NODE],
->> +			   si->dirty_seg[CURSEG_COLD_NODE],
->> +			   si->full_seg[CURSEG_COLD_NODE],
->> +			   si->valid_blks[CURSEG_COLD_NODE]);
->>  		seq_printf(s, "\n  - Valid: %d\n  - Dirty: %d\n",
->>  			   si->main_area_segs - si->dirty_count -
->>  			   si->prefree_count - si->free_segs,
->> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->> index 72a667f1d678..70565d81320b 100644
->> --- a/fs/f2fs/f2fs.h
->> +++ b/fs/f2fs/f2fs.h
->> @@ -3536,6 +3536,9 @@ struct f2fs_stat_info {
->>  	int curseg[NR_CURSEG_TYPE];
->>  	int cursec[NR_CURSEG_TYPE];
->>  	int curzone[NR_CURSEG_TYPE];
->> +	unsigned int dirty_seg[NR_CURSEG_TYPE];
->> +	unsigned int full_seg[NR_CURSEG_TYPE];
->> +	unsigned int valid_blks[NR_CURSEG_TYPE];
->>  
->>  	unsigned int meta_count[META_MAX];
->>  	unsigned int segment_count[2];
->> -- 
->> 2.18.0.rc1
-> .
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  fs/f2fs/data.c  | 15 +++++++++++++++
+>  fs/f2fs/f2fs.h  |  1 +
+>  fs/f2fs/super.c |  2 ++
+>  3 files changed, 18 insertions(+)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index dfd3225153570..1886d83bc5f15 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2292,6 +2292,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>  	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+>  	unsigned max_nr_pages = nr_pages;
+>  	int ret = 0;
+> +	bool drop_ra = false;
+>  
+>  	map.m_pblk = 0;
+>  	map.m_lblk = 0;
+> @@ -2302,6 +2303,17 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>  	map.m_seg_type = NO_CHECK_TYPE;
+>  	map.m_may_create = false;
+>  
+> +	/*
+> +	 * Two readahead threads for same address range can cause race condition
+> +	 * which fragments sequential read IOs. So let's avoid each other.
+> +	 */
+> +	if (rac && readahead_count(rac)) {
+> +		if (F2FS_I(inode)->ra_offset == readahead_index(rac))
+> +			drop_ra = true;
+
+I guess you missed to return at somewhere when drop_ra is true?
+
+thanks,
+
+> +		else
+> +			F2FS_I(inode)->ra_offset = readahead_index(rac);
+> +	}
+> +
+>  	for (; nr_pages; nr_pages--) {
+>  		if (rac) {
+>  			page = readahead_page(rac);
+> @@ -2368,6 +2380,9 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>  	}
+>  	if (bio)
+>  		__submit_bio(F2FS_I_SB(inode), bio, DATA);
+> +
+> +	if (rac && readahead_count(rac) && !drop_ra)
+> +		F2FS_I(inode)->ra_offset = -1;
+>  	return ret;
+>  }
+>  
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 7fb2a1a334388..753782426feac 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -809,6 +809,7 @@ struct f2fs_inode_info {
+>  	struct list_head inmem_pages;	/* inmemory pages managed by f2fs */
+>  	struct task_struct *inmem_task;	/* store inmemory task */
+>  	struct mutex inmem_lock;	/* lock for inmemory pages */
+> +	pgoff_t ra_offset;		/* ongoing readahead offset */
+>  	struct extent_tree *extent_tree;	/* cached extent_tree entry */
+>  
+>  	/* avoid racing between foreground op and gc */
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 7326522057378..80cb7cd358f84 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1015,6 +1015,8 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
+>  	/* Will be used by directory only */
+>  	fi->i_dir_level = F2FS_SB(sb)->dir_level;
+>  
+> +	fi->ra_offset = -1;
+> +
+>  	return &fi->vfs_inode;
+>  }
+>  
 > 
 
 
