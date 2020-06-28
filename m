@@ -2,54 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE7B320C57E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jun 2020 04:59:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96BCF20C67D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Jun 2020 08:32:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpNXM-00067m-Gu; Sun, 28 Jun 2020 02:59:20 +0000
+	id 1jpQs3-0005M6-O2; Sun, 28 Jun 2020 06:32:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jpNXK-00067e-OQ
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 02:59:18 +0000
+ (envelope-from <zhangqilong3@huawei.com>) id 1jpQs2-0005Lz-CF
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 06:32:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DFlerNebeHsgudg97alknSn6y1iVmxrqQUgO/nhsbVQ=; b=meMARCFfGDcn/OjQOlFPONW22j
- B2vqLLv1Vh7SwVcRYW8lZI3neyjTzjG61pjXnrYBdwD0Kwy8Sz3Vea4LJqgYW8hEsVsJhXpRDJEx+
- 2aH7aBw/sblOb7SnIZ2Uq4vZCo4p2ErNFkY4NkI9TQyaFdpUlBPeS1K+LQ0rw0WdLbWM=;
+ bh=IN/AQmdxC4xDo9krbCWm1o0I36lZjFmW5/YD0aSBi+c=; b=kWxlrOCsQpV69IZoSVnnaIa8M5
+ FLBBkT55l581vgHPC1TwkVeb260BCapv9g1keTGVZ0EHvEMWjQq9ZckJv+YjdjxrYInyF/oNvgnvA
+ SsG2egkjE5Z3nuaOmDHicbunA3Z9EbsPBtSBDerVz8nQPZfdVEl1BIt4NpL22Huwpgz8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
  Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DFlerNebeHsgudg97alknSn6y1iVmxrqQUgO/nhsbVQ=; b=C
- szLqahSyqXt602dmDsWKl7c+45q3iyDmNH6J3Uv6unWF3+ZsWK72E0C9YXNUhMS4T3afGW1tfzkuQ
- jnLyTct7bCuoJ8GRKLZeMN7fzEePXrc3T8qljNGqAmuSiQs7pny9NykJoHDXzdkoLmbeZ2mFNaYW+
- vGuoHirc+K+2oHjc=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ List-Owner:List-Archive; bh=IN/AQmdxC4xDo9krbCWm1o0I36lZjFmW5/YD0aSBi+c=; b=U
+ +dnsXaKv4EruiCVKuAd3fGdbFXm+J02XA8FXfZVt0cs3MSCQ33ak9xJoiGwT8rRk3TvTG12ZSBxLr
+ MN11yDJ8HXRZG6EYtSiUiuLPAO3YSPW3I8ibRK0dzBLgwjaIWtDOOe3/sNjOqnuciwdAYlq4d0fca
+ i3I61MQ1tGYB8pDQ=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jpNXJ-003oCf-Ao
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 02:59:18 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 8684C82A6CEB93331B4C;
- Sun, 28 Jun 2020 10:59:03 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS410-HUB.china.huawei.com (10.3.19.210) with Microsoft SMTP Server id
- 14.3.487.0; Sun, 28 Jun 2020 10:58:54 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Sun, 28 Jun 2020 10:58:44 +0800
-Message-ID: <20200628025844.90785-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
+ id 1jpQs0-0040XH-7f
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 28 Jun 2020 06:32:54 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 224BEE0CE3C82AD74FB6;
+ Sun, 28 Jun 2020 14:32:39 +0800 (CST)
+Received: from huawei.com (10.90.53.225) by DGGEMS411-HUB.china.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server id 14.3.487.0; Sun, 28 Jun 2020
+ 14:32:28 +0800
+From: Qilong Zhang <zhangqilong3@huawei.com>
+To: <yuchao0@huawei.com>, <jaegeuk@kernel.org>
+Date: Sun, 28 Jun 2020 14:39:27 +0800
+Message-ID: <20200628063927.125546-1-zhangqilong3@huawei.com>
+X-Mailer: git-send-email 2.26.0.106.g9fadedd
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+X-Originating-IP: [10.90.53.225]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -59,13 +59,13 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.191 listed in wl.mailspike.net]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1jpNXJ-003oCf-Ao
-Subject: [f2fs-dev] [PATCH v2 5/5] f2fs: show more debug info for
- per-temperature log
+X-Headers-End: 1jpQs0-0040XH-7f
+Subject: [f2fs-dev] [PATCH v4] f2fs: add f2fs_gc exception handle in
+ f2fs_ioc_gc_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,141 +77,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: zhangqilong3@huawei.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-- Add to account and show per-log dirty_seg, full_seg and valid_blocks
-in debugfs.
-- reformat printed info.
+When f2fs_ioc_gc_range performs multiple segments gc ops, the return
+value of f2fs_ioc_gc_range is determined by the last segment gc ops.
+If its ops failed, the f2fs_ioc_gc_range will be considered to be failed
+despite some of previous segments gc ops succeeded. Therefore, so we
+fix: Redefine the return value of getting victim ops and add exception
+handle for f2fs_gc. In particular, 1).if target has no valid block, it
+will go on. 2).if target sectoion has valid block(s), but it is current
+section, we will reminder the caller.
 
-    TYPE            segno    secno   zoneno  dirty_seg   full_seg  valid_blk
-  - COLD   data:     1523     1523     1523          1          0        399
-  - WARM   data:      769      769      769         20        255     133098
-  - HOT    data:      767      767      767          9          0        167
-  - Dir   dnode:       22       22       22          3          0         70
-  - File  dnode:      722      722      722         14         10       6505
-  - Indir nodes:        2        2        2          1          0          3
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Qilong Zhang <zhangqilong3@huawei.com>
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 ---
-v2:
-- account debug info for current segments.
- fs/f2fs/debug.c | 64 +++++++++++++++++++++++++++++++++++++++----------
- fs/f2fs/f2fs.h  |  3 +++
- 2 files changed, 55 insertions(+), 12 deletions(-)
+ fs/f2fs/file.c    |  5 +++++
+ fs/f2fs/gc.c      | 19 +++++++++++++------
+ fs/f2fs/segment.c |  4 ++--
+ 3 files changed, 20 insertions(+), 8 deletions(-)
 
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index 0dbcb0f9c019..4276c0f79beb 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -174,6 +174,26 @@ static void update_general_status(struct f2fs_sb_info *sbi)
- 	for (i = META_CP; i < META_MAX; i++)
- 		si->meta_count[i] = atomic_read(&sbi->meta_count[i]);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 3268f8dd59bb..fe006477a4e4 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2527,6 +2527,11 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
+ 	}
  
-+	for (i = 0; i < NO_CHECK_TYPE; i++) {
-+		si->dirty_seg[i] = 0;
-+		si->full_seg[i] = 0;
-+		si->valid_blks[i] = 0;
+ 	ret = f2fs_gc(sbi, range.sync, true, GET_SEGNO(sbi, range.start));
++	if (ret) {
++		if (ret == -EBUSY)
++			ret = -EAGAIN;
++		goto out;
 +	}
+ 	range.start += BLKS_PER_SEC(sbi);
+ 	if (range.start <= end)
+ 		goto do_more;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 5b95d5a146eb..71cb4a02aeee 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -321,6 +321,7 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+ 	unsigned int secno, last_victim;
+ 	unsigned int last_segment;
+ 	unsigned int nsearched = 0;
++	int ret;
+ 
+ 	mutex_lock(&dirty_i->seglist_lock);
+ 	last_segment = MAIN_SECS(sbi) * sbi->segs_per_sec;
+@@ -332,12 +333,18 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+ 	p.min_cost = get_max_cost(sbi, &p);
+ 
+ 	if (*result != NULL_SEGNO) {
+-		if (get_valid_blocks(sbi, *result, false) &&
+-			!sec_usage_check(sbi, GET_SEC_FROM_SEG(sbi, *result)))
++		ret = 0;
++		if (!get_valid_blocks(sbi, *result, false))
++			goto out;
 +
-+	for (i = 0; i < MAIN_SEGS(sbi); i++) {
-+		int blks = get_seg_entry(sbi, i)->valid_blocks;
-+		int type = get_seg_entry(sbi, i)->type;
-+
-+		if (!blks)
-+			continue;
-+
-+		if (blks == sbi->blocks_per_seg)
-+			si->full_seg[type]++;
++		if (sec_usage_check(sbi, GET_SEC_FROM_SEG(sbi, *result)))
++			ret = -EBUSY;
 +		else
-+			si->dirty_seg[type]++;
-+		si->valid_blks[type] += blks;
-+	}
-+
- 	for (i = 0; i < 2; i++) {
- 		si->segment_count[i] = sbi->segment_count[i];
- 		si->block_count[i] = sbi->block_count[i];
-@@ -329,30 +349,50 @@ static int stat_show(struct seq_file *s, void *v)
- 		seq_printf(s, "\nMain area: %d segs, %d secs %d zones\n",
- 			   si->main_area_segs, si->main_area_sections,
- 			   si->main_area_zones);
--		seq_printf(s, "  - COLD  data: %d, %d, %d\n",
-+		seq_printf(s, "    TYPE         %8s %8s %8s %10s %10s %10s\n",
-+			   "segno", "secno", "zoneno", "dirty_seg", "full_seg", "valid_blk");
-+		seq_printf(s, "  - COLD   data: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_COLD_DATA],
- 			   si->cursec[CURSEG_COLD_DATA],
--			   si->curzone[CURSEG_COLD_DATA]);
--		seq_printf(s, "  - WARM  data: %d, %d, %d\n",
-+			   si->curzone[CURSEG_COLD_DATA],
-+			   si->dirty_seg[CURSEG_COLD_DATA],
-+			   si->full_seg[CURSEG_COLD_DATA],
-+			   si->valid_blks[CURSEG_COLD_DATA]);
-+		seq_printf(s, "  - WARM   data: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_WARM_DATA],
- 			   si->cursec[CURSEG_WARM_DATA],
--			   si->curzone[CURSEG_WARM_DATA]);
--		seq_printf(s, "  - HOT   data: %d, %d, %d\n",
-+			   si->curzone[CURSEG_WARM_DATA],
-+			   si->dirty_seg[CURSEG_WARM_DATA],
-+			   si->full_seg[CURSEG_WARM_DATA],
-+			   si->valid_blks[CURSEG_WARM_DATA]);
-+		seq_printf(s, "  - HOT    data: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_HOT_DATA],
- 			   si->cursec[CURSEG_HOT_DATA],
--			   si->curzone[CURSEG_HOT_DATA]);
--		seq_printf(s, "  - Dir   dnode: %d, %d, %d\n",
-+			   si->curzone[CURSEG_HOT_DATA],
-+			   si->dirty_seg[CURSEG_HOT_DATA],
-+			   si->full_seg[CURSEG_HOT_DATA],
-+			   si->valid_blks[CURSEG_HOT_DATA]);
-+		seq_printf(s, "  - Dir   dnode: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_HOT_NODE],
- 			   si->cursec[CURSEG_HOT_NODE],
--			   si->curzone[CURSEG_HOT_NODE]);
--		seq_printf(s, "  - File   dnode: %d, %d, %d\n",
-+			   si->curzone[CURSEG_HOT_NODE],
-+			   si->dirty_seg[CURSEG_HOT_NODE],
-+			   si->full_seg[CURSEG_HOT_NODE],
-+			   si->valid_blks[CURSEG_HOT_NODE]);
-+		seq_printf(s, "  - File  dnode: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_WARM_NODE],
- 			   si->cursec[CURSEG_WARM_NODE],
--			   si->curzone[CURSEG_WARM_NODE]);
--		seq_printf(s, "  - Indir nodes: %d, %d, %d\n",
-+			   si->curzone[CURSEG_WARM_NODE],
-+			   si->dirty_seg[CURSEG_WARM_NODE],
-+			   si->full_seg[CURSEG_WARM_NODE],
-+			   si->valid_blks[CURSEG_WARM_NODE]);
-+		seq_printf(s, "  - Indir nodes: %8d %8d %8d %10u %10u %10u\n",
- 			   si->curseg[CURSEG_COLD_NODE],
- 			   si->cursec[CURSEG_COLD_NODE],
--			   si->curzone[CURSEG_COLD_NODE]);
-+			   si->curzone[CURSEG_COLD_NODE],
-+			   si->dirty_seg[CURSEG_COLD_NODE],
-+			   si->full_seg[CURSEG_COLD_NODE],
-+			   si->valid_blks[CURSEG_COLD_NODE]);
- 		seq_printf(s, "\n  - Valid: %d\n  - Dirty: %d\n",
- 			   si->main_area_segs - si->dirty_count -
- 			   si->prefree_count - si->free_segs,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d8bf07ba159c..7fb2a1a33438 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3551,6 +3551,9 @@ struct f2fs_stat_info {
- 	int curseg[NR_CURSEG_TYPE];
- 	int cursec[NR_CURSEG_TYPE];
- 	int curzone[NR_CURSEG_TYPE];
-+	unsigned int dirty_seg[NR_CURSEG_TYPE];
-+	unsigned int full_seg[NR_CURSEG_TYPE];
-+	unsigned int valid_blks[NR_CURSEG_TYPE];
+ 			p.min_segno = *result;
+ 		goto out;
+ 	}
  
- 	unsigned int meta_count[META_MAX];
- 	unsigned int segment_count[2];
++	ret = -ENODATA;
+ 	if (p.max_search == 0)
+ 		goto out;
+ 
+@@ -440,6 +447,7 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+ 			else
+ 				set_bit(secno, dirty_i->victim_secmap);
+ 		}
++		ret = 0;
+ 
+ 	}
+ out:
+@@ -449,7 +457,7 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+ 				prefree_segments(sbi), free_segments(sbi));
+ 	mutex_unlock(&dirty_i->seglist_lock);
+ 
+-	return (p.min_segno == NULL_SEGNO) ? 0 : 1;
++	return ret;
+ }
+ 
+ static const struct victim_selection default_v_ops = {
+@@ -1333,10 +1341,9 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+ 		ret = -EINVAL;
+ 		goto stop;
+ 	}
+-	if (!__get_victim(sbi, &segno, gc_type)) {
+-		ret = -ENODATA;
++	ret = __get_victim(sbi, &segno, gc_type);
++	if (ret)
+ 		goto stop;
+-	}
+ 
+ 	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type);
+ 	if (gc_type == FG_GC && seg_freed == sbi->segs_per_sec)
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 196f31503511..b9fd93761b0a 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2605,7 +2605,7 @@ static int get_ssr_segment(struct f2fs_sb_info *sbi, int type)
+ 	bool reversed = false;
+ 
+ 	/* f2fs_need_SSR() already forces to do this */
+-	if (v_ops->get_victim(sbi, &segno, BG_GC, type, SSR)) {
++	if (!v_ops->get_victim(sbi, &segno, BG_GC, type, SSR)) {
+ 		curseg->next_segno = segno;
+ 		return 1;
+ 	}
+@@ -2632,7 +2632,7 @@ static int get_ssr_segment(struct f2fs_sb_info *sbi, int type)
+ 	for (; cnt-- > 0; reversed ? i-- : i++) {
+ 		if (i == type)
+ 			continue;
+-		if (v_ops->get_victim(sbi, &segno, BG_GC, i, SSR)) {
++		if (!v_ops->get_victim(sbi, &segno, BG_GC, i, SSR)) {
+ 			curseg->next_segno = segno;
+ 			return 1;
+ 		}
 -- 
-2.26.2
+2.17.1
 
 
 
