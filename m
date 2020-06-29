@@ -2,52 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A6C820CE77
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 14:13:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16D7C20CE78
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 14:13:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpsfS-0000Fb-BY; Mon, 29 Jun 2020 12:13:46 +0000
+	id 1jpsfY-0007wI-Qh; Mon, 29 Jun 2020 12:13:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jpsfR-0000FT-FK
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:45 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jpsfW-0007wA-PQ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QtcHJuX6xYR8W+974zoB2LYgZtbZk6PbuKR4Z/lYWN4=; b=cqnHyGoiA3PVB+paYVqyzSUW/d
- tLxeCtkStkG26LnHeQSSmy8+KUp9Gd0zSZ+1n8cW3wtioTpqwgplyHq6y0A4yG01IuGtKIaWzabIp
- 2mv6RhoyADRuAh8EmiAoiXE/gFr4MfQAattj+DiKEC4PFLaJe6UIZmTVqqZ2VGFept3s=;
+ bh=ibV2NGj6KGnFNT7MmIlk5jfeyCRmAv3Q/U3sj5b5uoA=; b=lh1VTPS7bmUEee2gdWa1Wka5sj
+ Cvj0M9GOSZ4CTSzoKtIE5yt4IlZoNT25psEF1qprW5FoqnPvRCuXmNExqU5X/FiXvswD+qNvvC6uQ
+ UJlvt09xjQeb+h/RbWxFCLWY38ZT35u73GTZMFBEVHWFnUKrvpAh3B41RXqMeDErjHzg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=QtcHJuX6xYR8W+974zoB2LYgZtbZk6PbuKR4Z/lYWN4=; b=P
- tSiSGceeVBbBRPeD7Nbl2nToeU/0a81RJVYkeehRkgwkkBrl+nM8W5oy5dISCfqlS3+39uTwJx6xu
- 0XIH77TX6ZglarcNHVjV1CjQfI+zQ3EgLbKX++Degbbn0SJom8ZHpHeHyRSlehEoyuJgkcx4Y3WJw
- JfimL5umX9Mx+HkI=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ibV2NGj6KGnFNT7MmIlk5jfeyCRmAv3Q/U3sj5b5uoA=; b=cH6IECNam9Q4g0HWUhypShvgbm
+ 3Jg77ADrKu6fK04icj3OQYYd9HstqhCdhGKP4OHHZfqq3YHVR7vm4r14CrtstSsqphY95srXi8Imc
+ M3JTMfMGMFhBKKWpGAL0siQ5Bd6ommK4uG+Z+Mz481y/3uCmESD1MsaEjgRfGYz0mRsk=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jpsfP-0050BC-7T
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:45 +0000
+ id 1jpsfV-0064Kf-8E
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:50 +0000
 Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id F099BE347D5E59611496;
+ by Forcepoint Email with ESMTP id EB34C1AEC8048B373B37;
  Mon, 29 Jun 2020 20:13:34 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
  DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 29 Jun 2020 20:13:27 +0800
+ 14.3.487.0; Mon, 29 Jun 2020 20:13:28 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Mon, 29 Jun 2020 20:13:12 +0800
-Message-ID: <20200629121313.68072-1-yuchao0@huawei.com>
+Date: Mon, 29 Jun 2020 20:13:13 +0800
+Message-ID: <20200629121313.68072-2-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200629121313.68072-1-yuchao0@huawei.com>
+References: <20200629121313.68072-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -60,8 +62,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jpsfP-0050BC-7T
-Subject: [f2fs-dev] [PATCH v2 2/3] f2fs: support to trace f2fs_bmap()
+X-Headers-End: 1jpsfV-0064Kf-8E
+Subject: [f2fs-dev] [PATCH v2 3/3] f2fs: support to trace f2fs_fiemap()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,71 +80,94 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-to show f2fs_bmap()'s result as below:
+to show f2fs_fiemap()'s result as below:
 
-f2fs_bmap: dev = (251,0), ino = 7, lblock:0, pblock:396800
+f2fs_fiemap: dev = (251,0), ino = 7, lblock:0, pblock:1625292800, len:2097152, flags:0, ret:0
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
 v2:
 - use show_dev_ino() to avoid compile warning.
- fs/f2fs/data.c              | 14 +++++++++++---
- include/trace/events/f2fs.h | 26 ++++++++++++++++++++++++++
- 2 files changed, 37 insertions(+), 3 deletions(-)
+ fs/f2fs/data.c              |  6 +++++-
+ fs/f2fs/inline.c            |  2 ++
+ include/trace/events/f2fs.h | 37 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 44 insertions(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 91dc7b598961..c07a50e4d967 100644
+index c07a50e4d967..995cf78b23c5 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -3713,18 +3713,26 @@ static sector_t f2fs_bmap_compress(struct inode *inode, sector_t block)
- static sector_t f2fs_bmap(struct address_space *mapping, sector_t block)
- {
- 	struct inode *inode = mapping->host;
-+	struct buffer_head tmp = {
-+		.b_size = i_blocksize(inode),
-+	};
-+	sector_t blknr = 0;
+@@ -1813,6 +1813,7 @@ static int f2fs_xattr_fiemap(struct inode *inode,
+ 			flags |= FIEMAP_EXTENT_LAST;
  
- 	if (f2fs_has_inline_data(inode))
--		return 0;
-+		goto out;
+ 		err = fiemap_fill_next_extent(fieinfo, 0, phys, len, flags);
++		trace_f2fs_fiemap(inode, 0, phys, len, flags, err);
+ 		if (err || err == 1)
+ 			return err;
+ 	}
+@@ -1836,8 +1837,10 @@ static int f2fs_xattr_fiemap(struct inode *inode,
+ 		flags = FIEMAP_EXTENT_LAST;
+ 	}
  
- 	/* make sure allocating whole blocks */
- 	if (mapping_tagged(mapping, PAGECACHE_TAG_DIRTY))
- 		filemap_write_and_wait(mapping);
+-	if (phys)
++	if (phys) {
+ 		err = fiemap_fill_next_extent(fieinfo, 0, phys, len, flags);
++		trace_f2fs_fiemap(inode, 0, phys, len, flags, err);
++	}
  
- 	if (f2fs_compressed_file(inode))
--		return f2fs_bmap_compress(inode, block);
-+		blknr = f2fs_bmap_compress(inode, block);
- 
--	return generic_block_bmap(mapping, block, get_data_block_bmap);
-+	if (!get_data_block_bmap(inode, block, &tmp, 0))
-+		blknr = tmp.b_blocknr;
-+out:
-+	trace_f2fs_bmap(inode, block, blknr);
-+	return blknr;
+ 	return (err < 0 ? err : 0);
  }
+@@ -1931,6 +1934,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
  
- #ifdef CONFIG_MIGRATION
+ 		ret = fiemap_fill_next_extent(fieinfo, logical,
+ 				phys, size, flags);
++		trace_f2fs_fiemap(inode, logical, phys, size, flags, ret);
+ 		if (ret)
+ 			goto out;
+ 		size = 0;
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index dbade310dc79..def4b8481883 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -12,6 +12,7 @@
+ 
+ #include "f2fs.h"
+ #include "node.h"
++#include <trace/events/f2fs.h>
+ 
+ bool f2fs_may_inline_data(struct inode *inode)
+ {
+@@ -776,6 +777,7 @@ int f2fs_inline_data_fiemap(struct inode *inode,
+ 	byteaddr += (char *)inline_data_addr(inode, ipage) -
+ 					(char *)F2FS_INODE(ipage);
+ 	err = fiemap_fill_next_extent(fieinfo, start, byteaddr, ilen, flags);
++	trace_f2fs_fiemap(inode, start, byteaddr, ilen, flags, err);
+ out:
+ 	f2fs_put_page(ipage, 1);
+ 	return err;
 diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index 8639ab962a71..2e8713a52d76 100644
+index 2e8713a52d76..8a1c1311acac 100644
 --- a/include/trace/events/f2fs.h
 +++ b/include/trace/events/f2fs.h
-@@ -1891,6 +1891,32 @@ TRACE_EVENT(f2fs_iostat,
- 		__entry->fs_cdrio, __entry->fs_nrio, __entry->fs_mrio)
+@@ -1917,6 +1917,43 @@ TRACE_EVENT(f2fs_bmap,
+ 		(unsigned long long)__entry->pblock)
  );
  
-+TRACE_EVENT(f2fs_bmap,
++TRACE_EVENT(f2fs_fiemap,
 +
-+	TP_PROTO(struct inode *inode, sector_t lblock, sector_t pblock),
++	TP_PROTO(struct inode *inode, sector_t lblock, sector_t pblock,
++		unsigned long long len, unsigned int flags, int ret),
 +
-+	TP_ARGS(inode, lblock, pblock),
++	TP_ARGS(inode, lblock, pblock, len, flags, ret),
 +
 +	TP_STRUCT__entry(
 +		__field(dev_t, dev)
 +		__field(ino_t, ino)
 +		__field(sector_t, lblock)
 +		__field(sector_t, pblock)
++		__field(unsigned long long, len)
++		__field(unsigned int, flags)
++		__field(int, ret)
 +	),
 +
 +	TP_fast_assign(
@@ -150,12 +175,19 @@ index 8639ab962a71..2e8713a52d76 100644
 +		__entry->ino		= inode->i_ino;
 +		__entry->lblock		= lblock;
 +		__entry->pblock		= pblock;
++		__entry->len		= len;
++		__entry->flags		= flags;
++		__entry->ret		= ret;
 +	),
 +
-+	TP_printk("dev = (%d,%d), ino = %lu, lblock:%lld, pblock:%lld",
++	TP_printk("dev = (%d,%d), ino = %lu, lblock:%lld, pblock:%lld, "
++		"len:%llu, flags:%u, ret:%d",
 +		show_dev_ino(__entry),
 +		(unsigned long long)__entry->lblock,
-+		(unsigned long long)__entry->pblock)
++		(unsigned long long)__entry->pblock,
++		__entry->len,
++		__entry->flags,
++		__entry->ret)
 +);
 +
  #endif /* _TRACE_F2FS_H */
