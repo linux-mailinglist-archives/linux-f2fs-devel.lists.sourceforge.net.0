@@ -2,79 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1167220D2C5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 21:08:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 109B620DCB4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 22:20:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpz91-0002WM-7N; Mon, 29 Jun 2020 19:08:43 +0000
+	id 1jq0Fz-0005ra-RT; Mon, 29 Jun 2020 20:19:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sandeen@redhat.com>) id 1jpz90-0002WE-HQ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 19:08:42 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jq0Fz-0005rT-5W
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 20:19:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-ID:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=; b=eetQwMD6p/cvh+SrBVMA55pUy1
- QCwbXClIKiPP3QogCDzuvmEVSC1QhI7Cv9TwjOgfSdGaXMoRQHbSeQw1yWrWkOBTHbUdEDryi732N
- 11BhF7RTAUn46P0BDhxbA3BlXrS8uU+uaPLcdcr5zu4FtQYG/zeQF+7QlHIMRvakFghA=;
+ bh=5hpkygmezL/aQSLfF8Y46ht7lxGBATmNWUouLo42wqI=; b=kmVH4CJooiAkr3t3mLGc/Kl9Yx
+ DQAYkJ95IyrRe22z201IPZatT4XgVeBLQwr+jxkdM4+8nd1KMGpn1voJplewKCDqP5h4KZT3x4YXy
+ hCLAF0PxP1jp8fHoaNYqMMy1s035cufY+4KE8BGHf/jhwablgZL+sSIm9ImsIJJp8Knc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=; b=D
- 63uHhMeI119tID3CAUGZeGwdJI1uaecRJqdSOloLdx98+fwPGSh0lkWbecOVUF01g5zncEtj6HroY
- jMLBRpT8+vErdZjowkbQnp3MMNYw+hbnrdHtc2cgl8Qdeu+f3HbK0BLaHWRrBdmOkscGD3KRrYlRR
- 095gLn0/kanJWHkU=;
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]
- helo=us-smtp-1.mimecast.com)
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=5hpkygmezL/aQSLfF8Y46ht7lxGBATmNWUouLo42wqI=; b=mPoLUdUnE6oXrJ8s6qz5iLPqfS
+ +KA9dZGpdfprSiG0jo/Yx0ynBhLYu++ZNYngrA9noE3vEcEpYeaqyfls9oMNN1zW4jKx53fn1VeJd
+ HWCpUxbpuA3RMQHy5JnKrOeMexHYY3R0j+hsVTd2TlPhi927XLiOGilfEukEvdbrKDP8=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1jpz8w-006Rxk-1r
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 19:08:42 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593457711;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=;
- b=XRjYU5JimiubO2FeaY1ODPYLy1lh4ZTy9jCOhS2q3e8RiaATO26qd19t5ulzYMEHI6WrH0
- txN9ZBuM76ECH3B1iM94HRck+okZP6iYC6y4xDIrqRKId0+R6cL/MvdHk38m46m5PVYQF6
- Mol/G0ksWY75Wa9VGlPl+pO9Ihmd9Y4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-240-L3fpmOSlM7CetVm3iyl5YQ-1; Mon, 29 Jun 2020 15:08:13 -0400
-X-MC-Unique: L3fpmOSlM7CetVm3iyl5YQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jq0Fx-006WJ8-VH
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 20:19:59 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B3B1210059A3;
- Mon, 29 Jun 2020 19:08:11 +0000 (UTC)
-Received: from [IPv6:::1] (ovpn04.gateway.prod.ext.phx2.redhat.com [10.5.9.4])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 074F960BF3;
- Mon, 29 Jun 2020 19:08:10 +0000 (UTC)
-From: Eric Sandeen <sandeen@redhat.com>
-To: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Jonathan Corbet <corbet@lwn.net>
-Message-ID: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
-Date: Mon, 29 Jun 2020 14:08:09 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.9.0
+ by mail.kernel.org (Postfix) with ESMTPSA id 4F40120656;
+ Mon, 29 Jun 2020 20:19:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1593461985;
+ bh=Q+nb5q1cvvwhLMQRTlsmjm6i6AodKrYeamR2WgN/o9Y=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OfapS9P/M1RT/W0yP+3qKkf31PJT12faFLUknJbUW3G0vqei9SL47icfW/aG1ExQP
+ /fsWyiNZXV7T8068iwQ/GDuJwIdgmjm9SY6wmo3ey9AR8Bpq3m/g/BUrvFF6Rop0a0
+ gRs3feFy5Ahc5Nu0Dj10yYxE71EWwQPkN5PPS5+Y=
+Date: Mon, 29 Jun 2020 13:19:43 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200629201943.GB1117827@google.com>
+References: <20200622093849.35684-1-yuchao0@huawei.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Spam-Score: -0.5 (/)
+Content-Disposition: inline
+In-Reply-To: <20200622093849.35684-1-yuchao0@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [205.139.110.120 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -82,14 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [205.139.110.120 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jpz8w-006Rxk-1r
-Subject: [f2fs-dev] [PATCH] doc: cgroup: add f2fs and xfs to supported list
- for writeback
+X-Headers-End: 1jq0Fx-006WJ8-VH
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: split f2fs_allocate_new_segments()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,43 +81,146 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs <linux-xfs@vger.kernel.org>, cgroups@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs and xfs have both added support for cgroup writeback:
+On 06/22, Chao Yu wrote:
+> to two independent functions:
+> - f2fs_allocate_new_segment() for specified type segment allocation
+> - f2fs_allocate_new_segments() for all data type segments allocation
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/f2fs.h     |  3 ++-
+>  fs/f2fs/file.c     |  2 +-
+>  fs/f2fs/recovery.c |  2 +-
+>  fs/f2fs/segment.c  | 39 +++++++++++++++++++++++----------------
+>  4 files changed, 27 insertions(+), 19 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 70565d81320b..07290943e91d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3327,7 +3327,8 @@ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
+>  int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
+>  void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+>  					unsigned int start, unsigned int end);
+> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type);
+> +void f2fs_allocate_new_segment(struct f2fs_sb_info *sbi, int type);
+> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
+>  int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
+>  bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
+>  					struct cp_control *cpc);
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index f196187159e9..67c65e40b22b 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1659,7 +1659,7 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+>  		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+>  
+>  		f2fs_lock_op(sbi);
+> -		f2fs_allocate_new_segments(sbi, CURSEG_COLD_DATA);
+> +		f2fs_allocate_new_segment(sbi, CURSEG_COLD_DATA_PINNED);
 
-578c647 f2fs: implement cgroup writeback support
-adfb5fb xfs: implement cgroup aware writeback
+This should be CURSEG_COLD_DATA. Otherwise it causes the below kernel panic.
+I fixed this in the -dev, so let me know, if you have other concern.
 
-so add them to the supported list in the docs.
+  259 Unable to handle kernel NULL pointer dereference at virtual address 00000008
+  259 task: 0000000082b4de99 task.stack: 00000000c6b39dbf
+  259 pc : f2fs_do_write_data_page+0x2b4/0x794
+  259 lr : f2fs_do_write_data_page+0x290/0x794
+  259 sp : ffffff800c83b5a0 pstate : 60c00145
+  259 Call trace:
+  259  f2fs_do_write_data_page+0x2b4/0x794
+  259  f2fs_write_single_data_page+0x4a4/0x764
+  259  f2fs_write_data_pages+0x4dc/0x968
+  259  do_writepages+0x60/0x124
+  259  __writeback_single_inode+0xd8/0x490
+  259  writeback_sb_inodes+0x3a8/0x6e4
+  259  __writeback_inodes_wb+0xa4/0x14c
+  259  wb_writeback+0x218/0x434
+  259  wb_workfn+0x2bc/0x57c
+  259  process_one_work+0x25c/0x440
+  259  worker_thread+0x24c/0x480
+  259  kthread+0x11c/0x12c
+  259  ret_from_fork+0x10/0x18
 
-Signed-off-by: Eric Sandeen <sandeen@redhat.com>
----
-
-TBH I wonder about the wisdom of having this detail in
-the doc, as it apparently gets missed quite often ...
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index ce3e05e..4f82afa 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1684,9 +1684,9 @@ per-cgroup dirty memory states are examined and the more restrictive
- of the two is enforced.
- 
- cgroup writeback requires explicit support from the underlying
--filesystem.  Currently, cgroup writeback is implemented on ext2, ext4
--and btrfs.  On other filesystems, all writeback IOs are attributed to
--the root cgroup.
-+filesystem.  Currently, cgroup writeback is implemented on ext2, ext4,
-+btrfs, f2fs, and xfs.  On other filesystems, all writeback IOs are 
-+attributed to the root cgroup.
- 
- There are inherent differences in memory and writeback management
- which affects how cgroup ownership is tracked.  Memory is tracked per
-
+>  		f2fs_unlock_op(sbi);
+>  
+>  		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
+> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+> index ae5310f02e7f..af974ba273b3 100644
+> --- a/fs/f2fs/recovery.c
+> +++ b/fs/f2fs/recovery.c
+> @@ -742,7 +742,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+>  		f2fs_put_page(page, 1);
+>  	}
+>  	if (!err)
+> -		f2fs_allocate_new_segments(sbi, NO_CHECK_TYPE);
+> +		f2fs_allocate_new_segments(sbi);
+>  	return err;
+>  }
+>  
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 113114f98087..f15711e8ee5b 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2707,28 +2707,35 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
+>  	up_read(&SM_I(sbi)->curseg_lock);
+>  }
+>  
+> -void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi, int type)
+> +void __allocate_new_segment(struct f2fs_sb_info *sbi, int type)
+>  {
+> -	struct curseg_info *curseg;
+> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
+>  	unsigned int old_segno;
+> -	int i;
+>  
+> -	down_write(&SIT_I(sbi)->sentry_lock);
+> +	if (!curseg->next_blkoff &&
+> +		!get_valid_blocks(sbi, curseg->segno, false) &&
+> +		!get_ckpt_valid_blocks(sbi, curseg->segno))
+> +		return;
+>  
+> -	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
+> -		if (type != NO_CHECK_TYPE && i != type)
+> -			continue;
+> +	old_segno = curseg->segno;
+> +	SIT_I(sbi)->s_ops->allocate_segment(sbi, type, true);
+> +	locate_dirty_segment(sbi, old_segno);
+> +}
+>  
+> -		curseg = CURSEG_I(sbi, i);
+> -		if (type == NO_CHECK_TYPE || curseg->next_blkoff ||
+> -				get_valid_blocks(sbi, curseg->segno, false) ||
+> -				get_ckpt_valid_blocks(sbi, curseg->segno)) {
+> -			old_segno = curseg->segno;
+> -			SIT_I(sbi)->s_ops->allocate_segment(sbi, i, true);
+> -			locate_dirty_segment(sbi, old_segno);
+> -		}
+> -	}
+> +void f2fs_allocate_new_segment(struct f2fs_sb_info *sbi, int type)
+> +{
+> +	down_write(&SIT_I(sbi)->sentry_lock);
+> +	__allocate_new_segment(sbi, type);
+> +	up_write(&SIT_I(sbi)->sentry_lock);
+> +}
+>  
+> +void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
+> +{
+> +	int i;
+> +
+> +	down_write(&SIT_I(sbi)->sentry_lock);
+> +	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++)
+> +		__allocate_new_segment(sbi, i);
+>  	up_write(&SIT_I(sbi)->sentry_lock);
+>  }
+>  
+> -- 
+> 2.26.2
 
 
 _______________________________________________
