@@ -2,68 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16D7C20CE78
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 14:13:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C71C520CE88
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 14:31:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=hpemYDDIl3rcO2LGTxXbk271G7+0TBmxBTHqwi92vt8=; b=czW5Lm6IeesxParGxY8mDSIRDW
+	QXaFc8uC3RdcEvZjjDApCkzatUNFDbuDf0sPUEj5Yc7NzWqMCJNiWCioMUMbl8OwGik5foVQe7Sh9
+	0Br99smVxYsujxvnzsPVSfgMB7eeVEputeX3HoOz1j9ayzI4anuOA8vwpRm1zXLNfSFA=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpsfY-0007wI-Qh; Mon, 29 Jun 2020 12:13:52 +0000
+	id 1jpswo-0000Iu-6I; Mon, 29 Jun 2020 12:31:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jpsfW-0007wA-PQ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:50 +0000
+ (envelope-from <3vNj5XgYKAFMDvEJvE19916z.x97@flex--satyat.bounces.google.com>)
+ id 1jpswn-0000If-DN
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:31:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ibV2NGj6KGnFNT7MmIlk5jfeyCRmAv3Q/U3sj5b5uoA=; b=lh1VTPS7bmUEee2gdWa1Wka5sj
- Cvj0M9GOSZ4CTSzoKtIE5yt4IlZoNT25psEF1qprW5FoqnPvRCuXmNExqU5X/FiXvswD+qNvvC6uQ
- UJlvt09xjQeb+h/RbWxFCLWY38ZT35u73GTZMFBEVHWFnUKrvpAh3B41RXqMeDErjHzg=;
+ bh=OgrownsdciRkQfHLu2Mfy3btRxxtBKOX+y4E3Oqteos=; b=C+3V716y4pC0ra9ZEFe2fpxSNJ
+ cUrBS7UHsgUgvDS14NV0SUDIhaSfI27oh8MHbag+DwH6fiBNNXvu/q6fTLpsFy4Qo65VcBx2eovlw
+ hP+mhTSL2FQYW6MduhoEmTIXARnUm4RuRgsu6D6ncWT6S9td5VGkHYjePgVDxk1+/3Xc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ibV2NGj6KGnFNT7MmIlk5jfeyCRmAv3Q/U3sj5b5uoA=; b=cH6IECNam9Q4g0HWUhypShvgbm
- 3Jg77ADrKu6fK04icj3OQYYd9HstqhCdhGKP4OHHZfqq3YHVR7vm4r14CrtstSsqphY95srXi8Imc
- M3JTMfMGMFhBKKWpGAL0siQ5Bd6ommK4uG+Z+Mz481y/3uCmESD1MsaEjgRfGYz0mRsk=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jpsfV-0064Kf-8E
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:13:50 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id EB34C1AEC8048B373B37;
- Mon, 29 Jun 2020 20:13:34 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 29 Jun 2020 20:13:28 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Mon, 29 Jun 2020 20:13:13 +0800
-Message-ID: <20200629121313.68072-2-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200629121313.68072-1-yuchao0@huawei.com>
-References: <20200629121313.68072-1-yuchao0@huawei.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=OgrownsdciRkQfHLu2Mfy3btRxxtBKOX+y4E3Oqteos=; b=F
+ 8dHHPywIFYXUcWaurEMXg9Xtpa9j0HKfXTKuiReafzITyOqE5Bbo8PejTdR7fB7CKaVRCMbCppLH2
+ Dx5tTLOtxgaRYot8ec3yZSQ8cvS79yi+MXQD8kcU/QRhDAbtGN3Z6bCtCNgP2/Fx1jm29Gx4pYFh5
+ Nk9rXSm35cYwHrtY=;
+Received: from mail-qk1-f202.google.com ([209.85.222.202])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jpswl-0022ri-U1
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 12:31:41 +0000
+Received: by mail-qk1-f202.google.com with SMTP id u186so12181219qka.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 29 Jun 2020 05:31:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=OgrownsdciRkQfHLu2Mfy3btRxxtBKOX+y4E3Oqteos=;
+ b=gBiZCVlEO4XDHJNS23BhAsQTP1jO1/1YSpaH/WgvMSS3FuMlqd+4vKZrSzJYaWnl/Y
+ 1n1gSdCt3z+pNV3CigPeOXG4eWXKbpivWBuPyrfPGp1RIgFeEDVv/cPemO6wV3JCho0e
+ jtOIYCZIL5m5allS+ROBU+GL06J1VYIuxb9Z5y9RT3Zi8IiwzIYN+bmBk1wt2JfYac8c
+ Ye2I8lshSh/FtnYECOI3yuRPOKNSi/QlD9zFMx5r0MsMNroQ3ZPLZjUGeLkHYYQ4sm3/
+ 3luLSZG+zTmBtBG1Ed7XTgsbFfmZSkITPVvXtYQ1D95XhQY/gcG72x8y0aBQeNDpQhaa
+ CvEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=OgrownsdciRkQfHLu2Mfy3btRxxtBKOX+y4E3Oqteos=;
+ b=HrUtAFLM7hdHGKBsiKlw5lplMu9KncI4x8S9CY7zrcQ/S+4eNd7M+P7aMIHyx8IV7L
+ 2bL08wxbC7KjMkkWKqd81MllLkpCa67qKHNvvC1wT7JZFxEjLhikuyk7198KpVqb6exs
+ 4PTxHJqZAZ/t4Xrx4tFM1to+9y3G3foQvc+0G0nre+v5v75DV49nr0KF1mjhaENabk9e
+ nBxH+qDyo/n56LwG9MFAjaFrEZ7V/BZRZeD2lWVxQFT/BvnyOTbYCcxDDTlhbhQoWt8I
+ sBKJ0+QDXmyYfhzT1qu59ncT5pRuiZ0Fpbru0K8TdbVBNN9IezYUrIfOOG/BzI0yXw7H
+ U0yQ==
+X-Gm-Message-State: AOAM5303Lb+VQTN2xjhuszEdx7lsJ80GriUh9oDXDNXz8b5tUJBU0Qxd
+ a3vzkal8wEvfeALGLTqCAJbMfQsSryY=
+X-Google-Smtp-Source: ABdhPJwYLTVSt9n1XjUVygrqIZ2mKYtW5G+8LSUlIBRmnIEmdQxeGLDbPT+he1blzav1wz1DLUaRqIPqKYM=
+X-Received: by 2002:a17:902:c408:: with SMTP id
+ k8mr13536731plk.279.1593432252439; 
+ Mon, 29 Jun 2020 05:04:12 -0700 (PDT)
+Date: Mon, 29 Jun 2020 12:04:01 +0000
+Message-Id: <20200629120405.701023-1-satyat@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.27.0.212.ge8ba1cc988-goog
+To: linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-ext4@vger.kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jpsfV-0064Kf-8E
-Subject: [f2fs-dev] [PATCH v2 3/3] f2fs: support to trace f2fs_fiemap()
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.202 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.202 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1jpswl-0022ri-U1
+Subject: [f2fs-dev] [PATCH v2 0/4] Inline Encryption Support for fscrypt
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,126 +110,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Satya Tangirala via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Satya Tangirala <satyat@google.com>
+Cc: Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-to show f2fs_fiemap()'s result as below:
+This patch series adds support for Inline Encryption to fscrypt, f2fs
+and ext4. It builds on the inline encryption support now present in
+the block layer, and has been rebased on v5.8-rc3.
 
-f2fs_fiemap: dev = (251,0), ino = 7, lblock:0, pblock:1625292800, len:2097152, flags:0, ret:0
+This patch series previously went though a number of iterations as part
+of the "Inline Encryption Support" patchset (last version was v13:
+https://lkml.kernel.org/r/20200514003727.69001-1-satyat@google.com).
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v2:
-- use show_dev_ino() to avoid compile warning.
- fs/f2fs/data.c              |  6 +++++-
- fs/f2fs/inline.c            |  2 ++
- include/trace/events/f2fs.h | 37 +++++++++++++++++++++++++++++++++++++
- 3 files changed, 44 insertions(+), 1 deletion(-)
+Patch 1 introduces the SB_INLINECRYPT sb options, which filesystems
+should set if they want to use blk-crypto for file content en/decryption.
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index c07a50e4d967..995cf78b23c5 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1813,6 +1813,7 @@ static int f2fs_xattr_fiemap(struct inode *inode,
- 			flags |= FIEMAP_EXTENT_LAST;
+Patch 2 adds inline encryption support to fscrypt. To use inline
+encryption with fscrypt, the filesystem must set the above mentioned
+SB_INLINECRYPT sb option. When this option is set, the contents of
+encrypted files will be en/decrypted using blk-crypto.
+
+Patches 3 and 4 wire up f2fs and ext4 respectively to fscrypt support for
+inline encryption, and e.g ensure that bios are submitted with blocks
+that not only are contiguous, but also have continuous DUNs.
+
+This patchset was tested by running xfstests with the "inlinecrypt" mount
+option on ext4 and f2fs with test dummy encryption (the actual
+en/decryption of file contents was handled by the blk-crypto-fallback). It
+was also tested along with the UFS patches from the original series on some
+Qualcomm and Mediatek chipsets with hardware inline encryption support
+(refer to
+https://lkml.kernel.org/linux-scsi/20200501045111.665881-1-ebiggers@kernel.org/
+and
+https://lkml.kernel.org/linux-scsi/20200304022101.14165-1-stanley.chu@mediatek.com/
+for more details on those tests).
+
+Changes v1 => v2
+ - SB_INLINECRYPT mount option is shown by individual filesystems instead
+   of by the common VFS code since the option is parsed by filesystem
+   specific code, and is not a mount option applicable generically to
+   all filesystems.
+ - Make fscrypt_select_encryption_impl() return error code when it fails
+   to allocate memory.
+ - cleanups
  
- 		err = fiemap_fill_next_extent(fieinfo, 0, phys, len, flags);
-+		trace_f2fs_fiemap(inode, 0, phys, len, flags, err);
- 		if (err || err == 1)
- 			return err;
- 	}
-@@ -1836,8 +1837,10 @@ static int f2fs_xattr_fiemap(struct inode *inode,
- 		flags = FIEMAP_EXTENT_LAST;
- 	}
- 
--	if (phys)
-+	if (phys) {
- 		err = fiemap_fill_next_extent(fieinfo, 0, phys, len, flags);
-+		trace_f2fs_fiemap(inode, 0, phys, len, flags, err);
-+	}
- 
- 	return (err < 0 ? err : 0);
- }
-@@ -1931,6 +1934,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
- 
- 		ret = fiemap_fill_next_extent(fieinfo, logical,
- 				phys, size, flags);
-+		trace_f2fs_fiemap(inode, logical, phys, size, flags, ret);
- 		if (ret)
- 			goto out;
- 		size = 0;
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index dbade310dc79..def4b8481883 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -12,6 +12,7 @@
- 
- #include "f2fs.h"
- #include "node.h"
-+#include <trace/events/f2fs.h>
- 
- bool f2fs_may_inline_data(struct inode *inode)
- {
-@@ -776,6 +777,7 @@ int f2fs_inline_data_fiemap(struct inode *inode,
- 	byteaddr += (char *)inline_data_addr(inode, ipage) -
- 					(char *)F2FS_INODE(ipage);
- 	err = fiemap_fill_next_extent(fieinfo, start, byteaddr, ilen, flags);
-+	trace_f2fs_fiemap(inode, start, byteaddr, ilen, flags, err);
- out:
- 	f2fs_put_page(ipage, 1);
- 	return err;
-diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index 2e8713a52d76..8a1c1311acac 100644
---- a/include/trace/events/f2fs.h
-+++ b/include/trace/events/f2fs.h
-@@ -1917,6 +1917,43 @@ TRACE_EVENT(f2fs_bmap,
- 		(unsigned long long)__entry->pblock)
- );
- 
-+TRACE_EVENT(f2fs_fiemap,
-+
-+	TP_PROTO(struct inode *inode, sector_t lblock, sector_t pblock,
-+		unsigned long long len, unsigned int flags, int ret),
-+
-+	TP_ARGS(inode, lblock, pblock, len, flags, ret),
-+
-+	TP_STRUCT__entry(
-+		__field(dev_t, dev)
-+		__field(ino_t, ino)
-+		__field(sector_t, lblock)
-+		__field(sector_t, pblock)
-+		__field(unsigned long long, len)
-+		__field(unsigned int, flags)
-+		__field(int, ret)
-+	),
-+
-+	TP_fast_assign(
-+		__entry->dev		= inode->i_sb->s_dev;
-+		__entry->ino		= inode->i_ino;
-+		__entry->lblock		= lblock;
-+		__entry->pblock		= pblock;
-+		__entry->len		= len;
-+		__entry->flags		= flags;
-+		__entry->ret		= ret;
-+	),
-+
-+	TP_printk("dev = (%d,%d), ino = %lu, lblock:%lld, pblock:%lld, "
-+		"len:%llu, flags:%u, ret:%d",
-+		show_dev_ino(__entry),
-+		(unsigned long long)__entry->lblock,
-+		(unsigned long long)__entry->pblock,
-+		__entry->len,
-+		__entry->flags,
-+		__entry->ret)
-+);
-+
- #endif /* _TRACE_F2FS_H */
- 
-  /* This part must be outside protection */
+Changes v13 in original patchset => v1
+ - rename struct fscrypt_info::ci_key to ci_enc_key
+ - set dun bytes more precisely in fscrypt
+ - cleanups
+
+Eric Biggers (1):
+  ext4: add inline encryption support
+
+Satya Tangirala (3):
+  fs: introduce SB_INLINECRYPT
+  fscrypt: add inline encryption support
+  f2fs: add inline encryption support
+
+ Documentation/admin-guide/ext4.rst    |   6 +
+ Documentation/filesystems/f2fs.rst    |   7 +
+ Documentation/filesystems/fscrypt.rst |   3 +
+ fs/buffer.c                           |   7 +-
+ fs/crypto/Kconfig                     |   6 +
+ fs/crypto/Makefile                    |   1 +
+ fs/crypto/bio.c                       |  50 ++++
+ fs/crypto/crypto.c                    |   2 +-
+ fs/crypto/fname.c                     |   4 +-
+ fs/crypto/fscrypt_private.h           | 115 ++++++++-
+ fs/crypto/inline_crypt.c              | 351 ++++++++++++++++++++++++++
+ fs/crypto/keyring.c                   |   6 +-
+ fs/crypto/keysetup.c                  |  70 +++--
+ fs/crypto/keysetup_v1.c               |  16 +-
+ fs/ext4/inode.c                       |   4 +-
+ fs/ext4/page-io.c                     |   6 +-
+ fs/ext4/readpage.c                    |  11 +-
+ fs/ext4/super.c                       |  12 +
+ fs/f2fs/compress.c                    |   2 +-
+ fs/f2fs/data.c                        |  78 +++++-
+ fs/f2fs/super.c                       |  35 +++
+ include/linux/fs.h                    |   1 +
+ include/linux/fscrypt.h               |  82 ++++++
+ 23 files changed, 804 insertions(+), 71 deletions(-)
+ create mode 100644 fs/crypto/inline_crypt.c
+
 -- 
-2.26.2
+2.27.0.212.ge8ba1cc988-goog
 
 
 
