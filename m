@@ -2,66 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE66720D2B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 20:53:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1167220D2C5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jun 2020 21:08:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jpyuV-00037W-6O; Mon, 29 Jun 2020 18:53:43 +0000
+	id 1jpz91-0002WM-7N; Mon, 29 Jun 2020 19:08:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jpyuS-00037M-Ll
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 18:53:40 +0000
+ (envelope-from <sandeen@redhat.com>) id 1jpz90-0002WE-HQ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 19:08:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Date:Message-ID:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jQJf8LHmMUXt50NU+avX3dMtH4TRcIqcMmjj5D6zJRo=; b=bCOp3dSIF7vlDl6rI2BORbEd9L
- KbArNuhVHROEZtmbtNDKZTSyriqvPXhs/+348swnWXUXLjYOADOKh0rPbBRyz1j3Nf8S5VlWAKGPG
- H1XyWvcoLK7PyPELzYLJbWGlKoAMR4dWTCYNFXilBH/BlzgsqAHh6/Y+vRpTpbdKUM3Y=;
+ bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=; b=eetQwMD6p/cvh+SrBVMA55pUy1
+ QCwbXClIKiPP3QogCDzuvmEVSC1QhI7Cv9TwjOgfSdGaXMoRQHbSeQw1yWrWkOBTHbUdEDryi732N
+ 11BhF7RTAUn46P0BDhxbA3BlXrS8uU+uaPLcdcr5zu4FtQYG/zeQF+7QlHIMRvakFghA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jQJf8LHmMUXt50NU+avX3dMtH4TRcIqcMmjj5D6zJRo=; b=UNUAu7hnwEvL9N1GR6wrVkc+3R
- mqb3hIxrTS2ASfFqS1/ecAWV8X3gxNAsN0oUKovdgyVarVaTIEsmXWIzUt8Ie7XmFYG+5orhE+Gh6
- VRq/Ncl+R3gvaguZ4awOP7k3rDC9EEeKxcfj6X3tH1hHfQvFTVQN6BT9Us2aZw3esst4=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jpyuM-002Jcz-L7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 18:53:40 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=; b=D
+ 63uHhMeI119tID3CAUGZeGwdJI1uaecRJqdSOloLdx98+fwPGSh0lkWbecOVUF01g5zncEtj6HroY
+ jMLBRpT8+vErdZjowkbQnp3MMNYw+hbnrdHtc2cgl8Qdeu+f3HbK0BLaHWRrBdmOkscGD3KRrYlRR
+ 095gLn0/kanJWHkU=;
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]
+ helo=us-smtp-1.mimecast.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1jpz8w-006Rxk-1r
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Jun 2020 19:08:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1593457711;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=n2qVe7QVtMWlsu3tW293XYJBZ3r5SYGfqQyhGd9NB2s=;
+ b=XRjYU5JimiubO2FeaY1ODPYLy1lh4ZTy9jCOhS2q3e8RiaATO26qd19t5ulzYMEHI6WrH0
+ txN9ZBuM76ECH3B1iM94HRck+okZP6iYC6y4xDIrqRKId0+R6cL/MvdHk38m46m5PVYQF6
+ Mol/G0ksWY75Wa9VGlPl+pO9Ihmd9Y4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-240-L3fpmOSlM7CetVm3iyl5YQ-1; Mon, 29 Jun 2020 15:08:13 -0400
+X-MC-Unique: L3fpmOSlM7CetVm3iyl5YQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D1E37204EC;
- Mon, 29 Jun 2020 18:53:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593456802;
- bh=W1gAL231GdpfTzeSawMbnT+/vhlibbLVm5O4BlAr+To=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gKjmzYSiQ96d+bPzFXbNs1Z1D7M6nBioD7k2Kk8wAD8D1sdT0KwrP+7dRymuowCMk
- W1GS85/L4li6HodUiqTV1+eyHgI6f+hLnjoWdVc8se4XffmDaW3gEVcjeX4I5DiRhT
- ryu6Fs1b9zJdpFPcejncKZrU0eIuvxpXWkQEFnC8=
-Date: Mon, 29 Jun 2020 11:53:20 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200629185320.GH20492@sol.localdomain>
-References: <20200629120405.701023-1-satyat@google.com>
- <20200629120405.701023-4-satyat@google.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B3B1210059A3;
+ Mon, 29 Jun 2020 19:08:11 +0000 (UTC)
+Received: from [IPv6:::1] (ovpn04.gateway.prod.ext.phx2.redhat.com [10.5.9.4])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 074F960BF3;
+ Mon, 29 Jun 2020 19:08:10 +0000 (UTC)
+From: Eric Sandeen <sandeen@redhat.com>
+To: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Jonathan Corbet <corbet@lwn.net>
+Message-ID: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
+Date: Mon, 29 Jun 2020 14:08:09 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200629120405.701023-4-satyat@google.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [205.139.110.120 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -69,10 +82,14 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [205.139.110.120 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jpyuM-002Jcz-L7
-Subject: Re: [f2fs-dev] [PATCH v2 3/4] f2fs: add inline encryption support
+X-Headers-End: 1jpz8w-006Rxk-1r
+Subject: [f2fs-dev] [PATCH] doc: cgroup: add f2fs and xfs to supported list
+ for writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,66 +101,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+Cc: linux-xfs <linux-xfs@vger.kernel.org>, cgroups@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 29, 2020 at 12:04:04PM +0000, Satya Tangirala via Linux-f2fs-devel wrote:
-> Wire up f2fs to support inline encryption via the helper functions which
-> fs/crypto/ now provides.  This includes:
-> 
-> - Adding a mount option 'inlinecrypt' which enables inline encryption
->   on encrypted files where it can be used.
-> 
-> - Setting the bio_crypt_ctx on bios that will be submitted to an
->   inline-encrypted file.
-> 
-> - Not adding logically discontiguous data to bios that will be submitted
->   to an inline-encrypted file.
-> 
-> - Not doing filesystem-layer crypto on inline-encrypted files.
-> 
-> This patch includes a fix for a race during IPU by
-> Sahitya Tummala <stummala@codeaurora.org>
-> 
-> Co-developed-by: Eric Biggers <ebiggers@google.com>
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> Signed-off-by: Satya Tangirala <satyat@google.com>
-> Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+f2fs and xfs have both added support for cgroup writeback:
 
-Reviewed-by: Eric Biggers <ebiggers@google.com>
+578c647 f2fs: implement cgroup writeback support
+adfb5fb xfs: implement cgroup aware writeback
 
-> ---
->  Documentation/filesystems/f2fs.rst |  7 +++
->  fs/f2fs/compress.c                 |  2 +-
->  fs/f2fs/data.c                     | 78 +++++++++++++++++++++++++-----
->  fs/f2fs/super.c                    | 35 ++++++++++++++
->  4 files changed, 108 insertions(+), 14 deletions(-)
-> 
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index 099d45ac8d8f..8b4fac44f4e1 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -258,6 +258,13 @@ compress_extension=%s  Support adding specified extension, so that f2fs can enab
->                         on compression extension list and enable compression on
->                         these file by default rather than to enable it via ioctl.
->                         For other files, we can still enable compression via ioctl.
-> +inlinecrypt
-> +                       When possible, encrypt/decrypt the contents of encrypted
-> +                       files using the blk-crypto framework rather than
-> +                       filesystem-layer encryption. This allows the use of
-> +                       inline encryption hardware. The on-disk format is
-> +                       unaffected. For more details, see
-> +                       Documentation/block/inline-encryption.rst.
->  ====================== ============================================================
+so add them to the supported list in the docs.
 
-Last time I suggested adding "When possible, ", and it got added here but not in
-the ext4 patch.  It should go in both.
+Signed-off-by: Eric Sandeen <sandeen@redhat.com>
+---
 
-- Eric
+TBH I wonder about the wisdom of having this detail in
+the doc, as it apparently gets missed quite often ...
+
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index ce3e05e..4f82afa 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -1684,9 +1684,9 @@ per-cgroup dirty memory states are examined and the more restrictive
+ of the two is enforced.
+ 
+ cgroup writeback requires explicit support from the underlying
+-filesystem.  Currently, cgroup writeback is implemented on ext2, ext4
+-and btrfs.  On other filesystems, all writeback IOs are attributed to
+-the root cgroup.
++filesystem.  Currently, cgroup writeback is implemented on ext2, ext4,
++btrfs, f2fs, and xfs.  On other filesystems, all writeback IOs are 
++attributed to the root cgroup.
+ 
+ There are inherent differences in memory and writeback management
+ which affects how cgroup ownership is tracked.  Memory is tracked per
+
 
 
 _______________________________________________
