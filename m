@@ -2,76 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C04520F6BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 16:09:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A504B20F9C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 18:47:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jqGwU-0005yh-4s; Tue, 30 Jun 2020 14:08:58 +0000
+	id 1jqJQ8-0008N9-Br; Tue, 30 Jun 2020 16:47:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <SRS0=NpI4=AL=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1jqGwS-0005yR-Ij
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:08:56 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jqJQ7-0008My-2O
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 16:47:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9xypL324OQN9wPCDzwOztngLE9V7tOc99oCFoSeI5uo=; b=Jt4kZcb9OfC+JAJSQ31+ZugvbH
- GewcRr717QU3CEJVJFFEa8yR7yC6PjzwdW045BzjeJCA29AastJGYgeH5WjsSwM+NObg7FhyGX/LE
- 2VSxyiqp/O9AXeCa199K54N4mMIF1XjLc4ANrCYE842IwFMUW5bzzneQr9wRG6W7cpT8=;
+ bh=cBl1KPAhGjOpYgUSe2Jz/w7rZPhZIlDpKF6DmGKobIE=; b=glTnKhVYguTNS6bpiNXHCieueL
+ uiYEdc8wvu96LVZP+6/MyNFqh3uCocmxViOLnNt91T7jauxqeqzC+jazGY9ls/DlibZFdouqJ6h6t
+ OL3ruh/hbSggPvGzPBv+d5J4b/+vCDZ+RitHnf046ETXUPMx8IHAPPbyyYCbZdp+0MZc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9xypL324OQN9wPCDzwOztngLE9V7tOc99oCFoSeI5uo=; b=BhcOpr7VHwnRMdrmZD1mUD/K2J
- xWAm1dz4X4uUuyokERdnhkJPe8xzL6j3B2ka2XlBgJ25SDjTsAWmIakc04n8dd3HJbojcFUhqeE/P
- Go3yGSvwzi/cokXL5a1H1RoDZKF21yJOQpOPXmks0IqF7/KERwre9TwKUKEpKm+Rp6cg=;
+ bh=cBl1KPAhGjOpYgUSe2Jz/w7rZPhZIlDpKF6DmGKobIE=; b=DK0U2ZQw0xpUn1GQjP4dIdua/K
+ 6HNZU3VXoNeAey1FaceHVuvf8Uyju2e5kynMq4k+RtM98wmzdvJX4H5o57ogjQHZ2vfaerKerms/m
+ PCZg/cDDMR93RKHKEzPISE7++CEk0PPr3Aj6Rg4NQEMqsQDv8ZgSBC+3JA6SAZyJrj8U=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqGwR-007Srk-Bf
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:08:56 +0000
-From: bugzilla-daemon@bugzilla.kernel.org
-Authentication-Results: mail.kernel.org;
- dkim=permerror (bad message/signature format)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 30 Jun 2020 14:08:37 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: NEEDINFO
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-208325-202145-t9Slikzq2V@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-208325-202145@https.bugzilla.kernel.org/>
-References: <bug-208325-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1jqJQ1-007fjV-0h
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 16:47:42 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6EE04206B6;
+ Tue, 30 Jun 2020 16:47:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1593535651;
+ bh=SPqL4E1Wb8DiXConglbiJ9f0pTWiyShFbuJGvYwg4FM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=jUUm0ploIzeASPPBp1of1yMAXdN9YKrBhlba/3QmKAhL/6UOXl1G69OZ4Pj7BfhYY
+ 7b/Z/DfOeam1LbovRk3PNaeHkAxo0IlGT3owcrfvyBSwM7u1PWqewhHRqe5pwkqUqD
+ L+TPDB4GVbwzFJKmPeOtekr9NEFnFs4qs/mUYkEo=
+Date: Tue, 30 Jun 2020 09:47:30 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20200630164730.GB837@sol.localdomain>
+References: <20200630121438.891320-1-satyat@google.com>
+ <20200630121438.891320-3-satyat@google.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200630121438.891320-3-satyat@google.com>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqGwR-007Srk-Bf
-Subject: [f2fs-dev] [Bug 208325] f2fs inconsistent node block
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jqJQ1-007fjV-0h
+Subject: Re: [f2fs-dev] [PATCH v3 2/4] fscrypt: add inline encryption support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,37 +84,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=208325
-
---- Comment #3 from Chao Yu (chao@kernel.org) ---
-(In reply to zKqri0 from comment #2)
-> Mount options are "/dev/sda2 on / type f2fs
-> (rw,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,
-> inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,
-> mode=adaptive,active_logs=6,alloc_mode=default,fsync_mode=posix)".
-
-It looks it's default mount options.
-
-Did you use any special mkfs options? like -O [feature_name]?
-
+On Tue, Jun 30, 2020 at 12:14:36PM +0000, Satya Tangirala via Linux-f2fs-devel wrote:
+> Add support for inline encryption to fs/crypto/.  With "inline
+> encryption", the block layer handles the decryption/encryption as part
+> of the bio, instead of the filesystem doing the crypto itself via
+> Linux's crypto API. This model is needed in order to take advantage of
+> the inline encryption hardware present on most modern mobile SoCs.
 > 
-> I patched my laptop's kernel with those patches but I don't see anything in
-> "trace_pipe" while I'm getting invalid argument errors. Also I noticed that
-> the "nid" and "node_footer" are the same always in the error so its only one
-> node block that's messed up. 
+> To use inline encryption, the filesystem needs to be mounted with
+> '-o inlinecrypt'. Blk-crypto will then be used instead of the traditional
+> filesystem-layer crypto whenever possible to encrypt the contents
+> of any encrypted files in that filesystem. Fscrypt still provides the key
+> and IV to use, and the actual ciphertext on-disk is still the same;
+> therefore it's testable using the existing fscrypt ciphertext verification
+> tests.
 > 
-> Maybe a raw copy of that node block will help find what caused it ?
+> Note that since blk-crypto has a fallback to Linux's crypto API, and
+> also supports all the encryption modes currently supported by fscrypt,
+> this feature is usable and testable even without actual inline
+> encryption hardware.
+> 
+> Per-filesystem changes will be needed to set encryption contexts when
+> submitting bios and to implement the 'inlinecrypt' mount option.  This
+> patch just adds the common code.
+> 
+> Co-developed-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Satya Tangirala <satyat@google.com>
+> Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Yes, please, I can parse it with dentry_block, inode or dnode structure to see
-what it looks like, and what kind of fields are corrupted.
+Reviewed-by: Eric Biggers <ebiggers@google.com>
 
--- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
