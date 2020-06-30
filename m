@@ -2,78 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25F2820EDFD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 08:03:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32C2020EFD1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 09:48:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jq9MX-0003pr-SV; Tue, 30 Jun 2020 06:03:21 +0000
+	id 1jqAzx-00008Z-4B; Tue, 30 Jun 2020 07:48:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+6924b7a40190c3e6aa68+6155+infradead.org+hch@casper.srs.infradead.org>)
- id 1jq9MU-0003pj-Gj
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 06:03:18 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jqAzv-00008R-6P
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 07:48:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=10n6fkJT5YFknRXlHwj9gjNGg/R91/iiEmizqFo2Wwo=; b=A1FAyFMs48v17d+OGzW+xpOznL
- 5DVm9K946w2xEwQSvJ+8VG+b8WnNCDq85lLzCjmpM8Q9V3B4jPVIN4oDR60HcYaJD0NIygh0K5wU/
- OnEBse9b7iB1y1dLQcHDQgylDL5ZAuxNorchnC/C9vdzlPojqZ3p/4oL0CG+d6wbXJGw=;
+ bh=9qHjoGzk6N93j2sKfzots5j672V3UlZr4q0RAwpTRug=; b=F/EV4KSXbzOFP10L7LF9W5V+sk
+ C1wSZXRi7qslxp1dz/T+DAEj3P6MyGPIuBbnZ8xrxrzikporSAzF943KsqWS4xyxlQfC010XAAnSA
+ fllS+6QHbHWPnygv2a9kKlVNFYziOHxL5+YollWTfqiYnJhxf/bdixNrDph5HmgHeL0o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=10n6fkJT5YFknRXlHwj9gjNGg/R91/iiEmizqFo2Wwo=; b=WmIbNa51IaVNPVG3xadymXgAQS
- XkzOIGYl1eC0BgXifDG0zTh2pPhCSyfIAX7gWQQ/trLFPwF+L5SI3PmnVxgRq2EdL3XXimro+InKU
- 3XNXtPGR9SUj/IiC+PdRFVzL1X23dYZT80gAjNKh90xuInJbFcbOssoHKNEZaM9vhxQk=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=9qHjoGzk6N93j2sKfzots5j672V3UlZr4q0RAwpTRug=; b=leFzlfepGSEqxgJK7jp0bPfpHZ
+ c7cpKxLkzO8cTI/gg+1ENCmXBRMjlz2X6mj3++KGv6LkzmabnLDr6oizVXGOgG+BcLG0OKWz1odQM
+ OTz09nB+BN8gUlcfjYT2Z0QgRqpOsgGhO4u+YMeq851//YfLpehfbYP9g9oZhpIaLUeY=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jq9MP-006vn7-Nl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 06:03:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=10n6fkJT5YFknRXlHwj9gjNGg/R91/iiEmizqFo2Wwo=; b=KS/1RcoO2tBOxUo26C2OeBpqjl
- OB2sVaGqmZWJ+kuE7+75OHOwksmtSEVZNf0KN2lNbbk0YFvsUp8g7rb33mF9Rygtv5wn3lgzZTqcQ
- khfetKq77lCf6uZ5aoegLeRgrbxkfD9th0T/zwET+2XNS6OaFaYwljTfGureLmMCEM6xUmlALsOn6
- 64lRKuziJU6P4RoeTfLQ1YJWx3PW+uzU5MLFefV1CBVi5nANFuxRSC3wsLmhnzFHvJOpDKlVhyZlz
- HPSfid7WCsQEdj3nRsPpNptdaSIlJen04FrqdMpG9XIJEksoqGon0zcHUxo8koUf5NuQ15sP9H+H+
- 76vP82GA==;
-Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat
- Linux)) id 1jq929-0007BL-K3; Tue, 30 Jun 2020 05:42:17 +0000
-Date: Tue, 30 Jun 2020 06:42:17 +0100
-From: Christoph Hellwig <hch@infradead.org>
-To: Eric Sandeen <sandeen@redhat.com>
-Message-ID: <20200630054217.GA27221@infradead.org>
-References: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
+ id 1jqAzs-005j0r-Oj
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 07:48:07 +0000
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id BDBDCAE3EB74445900F9;
+ Tue, 30 Jun 2020 15:47:54 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 30 Jun
+ 2020 15:47:48 +0800
+To: Jia Yang <jiayang5@huawei.com>, <chao@kernel.org>, <jaegeuk@kernel.org>
+References: <20200630044504.24148-1-jiayang5@huawei.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <53ec5160-3d0f-970c-f146-d36a957f599e@huawei.com>
+Date: Tue, 30 Jun 2020 15:47:48 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200630044504.24148-1-jiayang5@huawei.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1jq9MP-006vn7-Nl
-Subject: Re: [f2fs-dev] [PATCH] doc: cgroup: add f2fs and xfs to supported
- list for writeback
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jqAzs-005j0r-Oj
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove unused parameter in
+ f2fs_get_read_data_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,29 +81,90 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
- linux-mm@kvack.org, cgroups@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 29, 2020 at 02:08:09PM -0500, Eric Sandeen wrote:
-> f2fs and xfs have both added support for cgroup writeback:
-> 
-> 578c647 f2fs: implement cgroup writeback support
-> adfb5fb xfs: implement cgroup aware writeback
-> 
-> so add them to the supported list in the docs.
-> 
-> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
-> ---
-> 
-> TBH I wonder about the wisdom of having this detail in
-> the doc, as it apparently gets missed quite often ...
+On 2020/6/30 12:45, Jia Yang wrote:
+> The parameter "op_flags" is not used in f2fs_get_read_data_page(),
+> so it can be removed.
 
-I'd rather remove the list of file systems.  It has no chance of
-staying uptodate.
+I don't think so, there is one missing case as below, in where op_flag
+was set incorrectly in f2fs_grab_read_bio(), we need to add one more
+parameter to pass op_flag value.
+
+- gc_data_segment
+ - f2fs_get_read_data_page(.., op_flag = REQ_RAHEAD,..)
+  - f2fs_submit_page_read
+   - f2fs_grab_read_bio(.., op_flag = 0, ..)
+
+> 
+> Signed-off-by: Jia Yang <jiayang5@huawei.com>
+> ---
+>  fs/f2fs/data.c | 6 +++---
+>  fs/f2fs/f2fs.h | 2 +-
+>  fs/f2fs/gc.c   | 2 +-
+>  3 files changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 326c63879ddc..f1b85185e9df 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1157,7 +1157,7 @@ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
+>  }
+>  
+>  struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+> -						int op_flags, bool for_write)
+> +						bool for_write)
+>  {
+>  	struct address_space *mapping = inode->i_mapping;
+>  	struct dnode_of_data dn;
+> @@ -1237,7 +1237,7 @@ struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index)
+>  		return page;
+>  	f2fs_put_page(page, 0);
+>  
+> -	page = f2fs_get_read_data_page(inode, index, 0, false);
+> +	page = f2fs_get_read_data_page(inode, index, false);
+>  	if (IS_ERR(page))
+>  		return page;
+>  
+> @@ -1263,7 +1263,7 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
+>  	struct address_space *mapping = inode->i_mapping;
+>  	struct page *page;
+>  repeat:
+> -	page = f2fs_get_read_data_page(inode, index, 0, for_write);
+> +	page = f2fs_get_read_data_page(inode, index, for_write);
+>  	if (IS_ERR(page))
+>  		return page;
+>  
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index b35a50f4953c..41ef50714a39 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3441,7 +3441,7 @@ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
+>  int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *from);
+>  int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
+>  struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+> -			int op_flags, bool for_write);
+> +			bool for_write);
+>  struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index);
+>  struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
+>  			bool for_write);
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 5b95d5a146eb..487f75d9136c 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1094,7 +1094,7 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>  			}
+>  
+>  			data_page = f2fs_get_read_data_page(inode,
+> -						start_bidx, REQ_RAHEAD, true);
+> +						start_bidx, true);
+>  			up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>  			if (IS_ERR(data_page)) {
+>  				iput(inode);
+> 
 
 
 _______________________________________________
