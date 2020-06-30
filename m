@@ -2,106 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7C5A20F6EE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 16:15:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C04520F6BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2020 16:09:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jqH36-0000pn-C3; Tue, 30 Jun 2020 14:15:48 +0000
+	id 1jqGwU-0005yh-4s; Tue, 30 Jun 2020 14:08:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sandeen@sandeen.net>) id 1jqH34-0000pe-MR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:15:46 +0000
+ (envelope-from <SRS0=NpI4=AL=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
+ id 1jqGwS-0005yR-Ij
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:08:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OySc5e5StZ48sBVPqFBEXiC/5CIRDIRp81ZeC7aQIbo=; b=WLVk8klcDMsocm/Tw1z68gSuFk
- bfHLVDPYYbVqmIuMxVgl9PusI6R2Nt+fmIDdqWNIuDFAObTVLsB/uUggPGrL2sIf4H8OA9jMuEsau
- TguK9Odm+l77N3Ey8lNuUh55cW7Z6O0+b5LYWNFtA8J+pCVA/g3RRSwYF6GF3Qberw70=;
+ bh=9xypL324OQN9wPCDzwOztngLE9V7tOc99oCFoSeI5uo=; b=Jt4kZcb9OfC+JAJSQ31+ZugvbH
+ GewcRr717QU3CEJVJFFEa8yR7yC6PjzwdW045BzjeJCA29AastJGYgeH5WjsSwM+NObg7FhyGX/LE
+ 2VSxyiqp/O9AXeCa199K54N4mMIF1XjLc4ANrCYE842IwFMUW5bzzneQr9wRG6W7cpT8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OySc5e5StZ48sBVPqFBEXiC/5CIRDIRp81ZeC7aQIbo=; b=QeYYVUBNB3B7EJvb1kjlfE/sb6
- robdADAtaQQP6k7uh9D/FySNWe0MTsHx3rT+gbMHwwQr+YyyRWxAigFOha/LNE8OVuChXmCAGtcv0
- iqGKW6d/02VX22A8DkRWDkE4aAuLD8p6yGfK/3WYPqWW6JyFFSKGNLO/d7Qx1ohSJIBc=;
-Received: from sandeen.net ([63.231.237.45])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1jqH33-0065ao-0p
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:15:46 +0000
-Received: from [10.0.0.11] (liberator [10.0.0.11])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by sandeen.net (Postfix) with ESMTPSA id 9E5AB4CB;
- Tue, 30 Jun 2020 08:59:31 -0500 (CDT)
-To: Christoph Hellwig <hch@infradead.org>, Eric Sandeen <sandeen@redhat.com>
-References: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
- <20200630054217.GA27221@infradead.org>
-From: Eric Sandeen <sandeen@sandeen.net>
-Autocrypt: addr=sandeen@sandeen.net; prefer-encrypt=mutual; keydata=
- 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 pA==
-Message-ID: <59265a9d-ee0f-4432-3f86-00d076aeb8e8@sandeen.net>
-Date: Tue, 30 Jun 2020 08:59:34 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.9.0
+ bh=9xypL324OQN9wPCDzwOztngLE9V7tOc99oCFoSeI5uo=; b=BhcOpr7VHwnRMdrmZD1mUD/K2J
+ xWAm1dz4X4uUuyokERdnhkJPe8xzL6j3B2ka2XlBgJ25SDjTsAWmIakc04n8dd3HJbojcFUhqeE/P
+ Go3yGSvwzi/cokXL5a1H1RoDZKF21yJOQpOPXmks0IqF7/KERwre9TwKUKEpKm+Rp6cg=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jqGwR-007Srk-Bf
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Jun 2020 14:08:56 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 30 Jun 2020 14:08:37 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: NEEDINFO
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-208325-202145-t9Slikzq2V@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-208325-202145@https.bugzilla.kernel.org/>
+References: <bug-208325-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20200630054217.GA27221@infradead.org>
-Content-Language: en-US
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1jqH33-0065ao-0p
-Subject: Re: [f2fs-dev] [PATCH] doc: cgroup: add f2fs and xfs to supported
- list for writeback
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jqGwR-007Srk-Bf
+Subject: [f2fs-dev] [Bug 208325] f2fs inconsistent node block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,37 +83,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs <linux-xfs@vger.kernel.org>,
- linux-mm@kvack.org, cgroups@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/30/20 12:42 AM, Christoph Hellwig wrote:
-> On Mon, Jun 29, 2020 at 02:08:09PM -0500, Eric Sandeen wrote:
->> f2fs and xfs have both added support for cgroup writeback:
->>
->> 578c647 f2fs: implement cgroup writeback support
->> adfb5fb xfs: implement cgroup aware writeback
->>
->> so add them to the supported list in the docs.
->>
->> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
->> ---
->>
->> TBH I wonder about the wisdom of having this detail in
->> the doc, as it apparently gets missed quite often ...
+https://bugzilla.kernel.org/show_bug.cgi?id=208325
+
+--- Comment #3 from Chao Yu (chao@kernel.org) ---
+(In reply to zKqri0 from comment #2)
+> Mount options are "/dev/sda2 on / type f2fs
+> (rw,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,
+> inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,
+> mode=adaptive,active_logs=6,alloc_mode=default,fsync_mode=posix)".
+
+It looks it's default mount options.
+
+Did you use any special mkfs options? like -O [feature_name]?
+
 > 
-> I'd rather remove the list of file systems.  It has no chance of
-> staying uptodate.
+> I patched my laptop's kernel with those patches but I don't see anything in
+> "trace_pipe" while I'm getting invalid argument errors. Also I noticed that
+> the "nid" and "node_footer" are the same always in the error so its only one
+> node block that's messed up. 
+> 
+> Maybe a raw copy of that node block will help find what caused it ?
 
-Is there any way for a user to know whether a filesytem does or doesn't
-support it, in practice?
+Yes, please, I can parse it with dentry_block, inode or dnode structure to see
+what it looks like, and what kind of fields are corrupted.
 
-Thanks,
--Eric
-
+-- 
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
