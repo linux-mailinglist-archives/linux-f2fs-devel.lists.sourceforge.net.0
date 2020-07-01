@@ -2,70 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E77F21028E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 05:36:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82B452102AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 06:13:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jqTXY-0003I9-8r; Wed, 01 Jul 2020 03:36:04 +0000
+	id 1jqU7Q-0001Rt-9C; Wed, 01 Jul 2020 04:13:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jqTXV-0003Hw-WD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 03:36:02 +0000
+ (envelope-from <daeho43@gmail.com>) id 1jqU7P-0001Rn-U0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 04:13:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FyxIqerkIqV2e//pGAeN/rjFGLz2BdFj9xKhu8UCZNM=; b=TTfhGchJUFbp79dVhgpAdjxjE1
- N+WWwMzfsYuN+d9BVNXRjoXfpWZW9+4qzEWdPTdaq8IUmgvx3rz1CN221BWSRGMtTw/FU4sT6hUer
- mdE0z1EmTighU/q2Z1sh2vYtLFZdr6jyxf6oO0jAc+XKsas9AvSwS3HITs1DlTJPMSMc=;
+ bh=A6rUzlISrs34S85/JGWbESTTDuKcTfeZ4SL0WqYY/u0=; b=TgsuCZAZJdmmQlG4PKWMG/QrRW
+ wKls9kdEZ12OZcE7rwKJm0nEo+D4hb7SDjJJnKchj9wgJfB6+beG/VRXwJAc+AZK4Obz889o1btJR
+ eqjejNSfIgRYou2NecW70xR6K4xaY0L5CjLNBsOd+DUboPX1/hsCuOth+BI7SNs+g5ks=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FyxIqerkIqV2e//pGAeN/rjFGLz2BdFj9xKhu8UCZNM=; b=V+48a/zPLLhoN+m5cAycEHX/9V
- zBJEUDkDSXk1RvGTWyrhhhaA25ktThOED+ANuze84n9/kWTm196JOMqTYhVH3ekxjw8hOX9oEyDBM
- 6PRfdYRd8LMxsizFJVduHbMJG/aR7DYCGiTdsL0+zEATD4053GyUBy03SFkfc+MukTic=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqTXT-003hhi-SZ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 03:36:01 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 4DC499D97A5B2F500D19;
- Wed,  1 Jul 2020 11:35:51 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 1 Jul 2020
- 11:35:45 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20200630005422.2389686-1-daeho43@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <a10baad2-350a-ea1b-c338-63b2bc58a26a@huawei.com>
-Date: Wed, 1 Jul 2020 11:35:45 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=A6rUzlISrs34S85/JGWbESTTDuKcTfeZ4SL0WqYY/u0=; b=Xrr09FUgqncQPbB1VQLiT1V9QM
+ U6ikzlrKfCXgFCyqQMtmDWyPFl3viCc1cPfDSeKBo/Z7gBMDf0pwyLM7ouhw/mGv3mg5se0s6RARQ
+ D2xMo4RO07KnsESqnMQSz2neBUBIJ4P1uGIRKOhbTXvetAfywSgQRSOZupaEndCln6BQ=;
+Received: from mail-lj1-f194.google.com ([209.85.208.194])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jqU7O-006h3G-3g
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 04:13:07 +0000
+Received: by mail-lj1-f194.google.com with SMTP id z24so390250ljn.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 Jun 2020 21:13:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=A6rUzlISrs34S85/JGWbESTTDuKcTfeZ4SL0WqYY/u0=;
+ b=DNtLk0VnUIIBJTq1Eoxv9t88gHW8Ptc6CdP9QpJt8jvvdaPrs/OoPHk202tbiLztbM
+ /EJVRE/Qq74hIdO7pVtEiyR8rybRiAiLf1NnJ1M4vkDD0YJQAfy/MRI72bEkMgptTOhL
+ KCihf1cTUhbY3QOihwQGZWHDWb7E8gRl7poU5uM5qn9/OXNrbi6f1ymQ9LzMVzuGVR8t
+ K4du5sbTXfrh8YbzYpTiQh2ZW2EG5u/hvR0RBFUPUDdlH8oJ6poUxl1ShBq2gKQJtaQV
+ zz9CfWISnE27H+ZGonrmnrNNghR8D4k8cHWGcvlAXx3pVuB3jw26FY5Vp28u6UPK7o6Q
+ 0B9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=A6rUzlISrs34S85/JGWbESTTDuKcTfeZ4SL0WqYY/u0=;
+ b=ra1MnlUiaB+uyFiqTPp0/vX8NUMPNOq1Ro9G5cvKtl9OXSS5hgOmJaZJbfNj+r0onx
+ C/NEbN1XAMk3I7/IFhBfQgE4DMcNWRxs4AcmFpQ0r1XlQ0r+4FmjgX6rjuEkGLtGHqLZ
+ 6FapiQGrMlczOHbkumJS7Ng2Tm3Ar3DERpSEnocCBeFHYB3XvmCrDOWT3D9b5+galDQ7
+ MtR2qDZKKeRpyEEgl5m9/PCMG8k19gRL0XupUBMu7C+W20C+5UzH8n6c2khtpSjqObEQ
+ 4kvhB4+onUOoOG9XBg1NpgHjjBQNe2VE2XDCV/vXp6ROztN4NQuoEQvO4TB2o61CVRAd
+ dygA==
+X-Gm-Message-State: AOAM532J9TAEN5Zr6Sh8s7QnJ5gvp13ceAIkh0w4kf6PV6YFyxRPgVL+
+ FfxXJMIs8Sin2pPJcCvAP01qUdjTGYMHBFOkHOo=
+X-Google-Smtp-Source: ABdhPJzSy2lK5wKJ+mBYqHetY1JduBex8mf28+evh5uyBni9bihb3pH+/Qmds/5JkCnlJdhp0gemROMclKjRaQKYHgI=
+X-Received: by 2002:a2e:8e68:: with SMTP id t8mr5618287ljk.335.1593576779321; 
+ Tue, 30 Jun 2020 21:12:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200630005422.2389686-1-daeho43@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+References: <20200630005422.2389686-1-daeho43@gmail.com>
+ <a10baad2-350a-ea1b-c338-63b2bc58a26a@huawei.com>
+In-Reply-To: <a10baad2-350a-ea1b-c338-63b2bc58a26a@huawei.com>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Wed, 1 Jul 2020 13:12:48 +0900
+Message-ID: <CACOAw_wPVQP7qrXwb9fG-+450e6e0XF5MOv-5cpRuhiEWN_cCw@mail.gmail.com>
+To: Chao Yu <yuchao0@huawei.com>
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqTXT-003hhi-SZ
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.194 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.194 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jqU7O-006h3G-3g
 Subject: Re: [f2fs-dev] [PATCH] f2fs: add GC_URGENT_LOW mode in gc_urgent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -78,180 +109,134 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/6/30 8:54, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> Added a new gc_urgent mode, GC_URGENT_LOW, in which mode
-> F2FS will lower the bar of checking idle in order to
-> process outstanding discard commands and GC a little bit
-> aggressively.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs |  4 +++-
->  fs/f2fs/f2fs.h                          | 10 ++++++++--
->  fs/f2fs/gc.c                            |  6 +++---
->  fs/f2fs/segment.c                       |  4 ++--
->  fs/f2fs/sysfs.c                         |  6 ++++--
->  5 files changed, 20 insertions(+), 10 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index 4bb93a06d8ab..7f730c4c8df2 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -229,7 +229,9 @@ Date:		August 2017
->  Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
->  Description:	Do background GC agressively when set. When gc_urgent = 1,
->  		background thread starts to do GC by given gc_urgent_sleep_time
-> -		interval. It is set to 0 by default.
-> +		interval. When gc_urgent = 2, F2FS will lower the bar of
-> +		checking idle in order to process outstanding discard commands
-> +		and GC a little bit aggressively. It is set to 0 by default.
->  
->  What:		/sys/fs/f2fs/<disk>/gc_urgent_sleep_time
->  Date:		August 2017
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index e6e47618a357..4b28fd42fdbc 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1283,7 +1283,8 @@ enum {
->  	GC_NORMAL,
->  	GC_IDLE_CB,
->  	GC_IDLE_GREEDY,
-> -	GC_URGENT,
-> +	GC_URGENT_HIGH,
-> +	GC_URGENT_LOW,
->  };
->  
->  enum {
-> @@ -1540,6 +1541,7 @@ struct f2fs_sb_info {
->  	unsigned int cur_victim_sec;		/* current victim section num */
->  	unsigned int gc_mode;			/* current GC state */
->  	unsigned int next_victim_seg[2];	/* next segment in victim section */
-> +
->  	/* for skip statistic */
->  	unsigned int atomic_files;              /* # of opened atomic file */
->  	unsigned long long skipped_atomic_files[2];	/* FG_GC and BG_GC */
-> @@ -2480,7 +2482,7 @@ static inline void *f2fs_kmem_cache_alloc(struct kmem_cache *cachep,
->  
->  static inline bool is_idle(struct f2fs_sb_info *sbi, int type)
->  {
-> -	if (sbi->gc_mode == GC_URGENT)
-> +	if (sbi->gc_mode == GC_URGENT_HIGH)
->  		return true;
->  
->  	if (get_pages(sbi, F2FS_RD_DATA) || get_pages(sbi, F2FS_RD_NODE) ||
-> @@ -2498,6 +2500,10 @@ static inline bool is_idle(struct f2fs_sb_info *sbi, int type)
->  			atomic_read(&SM_I(sbi)->fcc_info->queued_flush))
->  		return false;
->  
-> +	if (sbi->gc_mode == GC_URGENT_LOW &&
-> +			(type == DISCARD_TIME || type == GC_TIME))
-> +		return true;
-> +
->  	return f2fs_time_over(sbi, type);
->  }
->  
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 6eec3b2d606d..3b718da69910 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -82,7 +82,7 @@ static int gc_thread_func(void *data)
->  		 * invalidated soon after by user update or deletion.
->  		 * So, I'd like to wait some time to collect dirty segments.
->  		 */
-> -		if (sbi->gc_mode == GC_URGENT) {
-> +		if (sbi->gc_mode == GC_URGENT_HIGH) {
->  			wait_ms = gc_th->urgent_sleep_time;
->  			down_write(&sbi->gc_lock);
->  			goto do_gc;
-> @@ -176,7 +176,7 @@ static int select_gc_type(struct f2fs_sb_info *sbi, int gc_type)
->  		gc_mode = GC_CB;
->  		break;
->  	case GC_IDLE_GREEDY:
-> -	case GC_URGENT:
-> +	case GC_URGENT_HIGH:
->  		gc_mode = GC_GREEDY;
->  		break;
->  	}
-> @@ -211,7 +211,7 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
->  	 * foreground GC and urgent GC cases.
->  	 */
->  	if (gc_type != FG_GC &&
-> -			(sbi->gc_mode != GC_URGENT) &&
-> +			(sbi->gc_mode != GC_URGENT_HIGH) &&
->  			p->max_search > sbi->max_victim_search)
->  		p->max_search = sbi->max_victim_search;
->  
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index b45e473508a9..5924b3965ae4 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -174,7 +174,7 @@ bool f2fs_need_SSR(struct f2fs_sb_info *sbi)
->  
->  	if (f2fs_lfs_mode(sbi))
->  		return false;
-> -	if (sbi->gc_mode == GC_URGENT)
-> +	if (sbi->gc_mode == GC_URGENT_HIGH)
->  		return true;
->  	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
->  		return true;
-> @@ -1759,7 +1759,7 @@ static int issue_discard_thread(void *data)
->  			continue;
->  		}
->  
-> -		if (sbi->gc_mode == GC_URGENT)
-> +		if (sbi->gc_mode == GC_URGENT_HIGH)
->  			__init_discard_policy(sbi, &dpolicy, DPOLICY_FORCE, 1);
->  
->  		sb_start_intwrite(sbi->sb);
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index e877c59b9fdb..ab40e1f89f23 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -350,14 +350,16 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->  		return -EINVAL;
->  
->  	if (!strcmp(a->attr.name, "gc_urgent")) {
-> -		if (t >= 1) {
-> -			sbi->gc_mode = GC_URGENT;
-> +		if (t == 1) {
-> +			sbi->gc_mode = GC_URGENT_HIGH;
->  			if (sbi->gc_thread) {
->  				sbi->gc_thread->gc_wake = 1;
->  				wake_up_interruptible_all(
->  					&sbi->gc_thread->gc_wait_queue_head);
->  				wake_up_discard_thread(sbi, true);
->  			}
-> +		} else if (t == 2) {
-> +			sbi->gc_mode = GC_URGENT_LOW;
->  		} else {
->  			sbi->gc_mode = GC_NORMAL;
-
-As functionality description in sysfs doc, shouldn't it be:
-
-if (t == 0) {
-	sbi->gc_mode = GC_NORMAL;
-} else if (t == 1) {
-	sbi->gc_mode = GC_URGENT_HIGH;
-	...
-} else if (t == 2) {
-	sbi->gc_mode = GC_URGENT_LOW;
-} else {
-	return -EINVAL;
-}
-return count;
-
->  		}
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+WWVzLCBpdCdzIGNvcnJlY3QuCgoyMDIw64WEIDfsm5QgMeydvCAo7IiYKSDsmKTtm4QgMTI6MzUs
+IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT7ri5jsnbQg7J6R7ISxOgo+Cj4gT24gMjAyMC82
+LzMwIDg6NTQsIERhZWhvIEplb25nIHdyb3RlOgo+ID4gRnJvbTogRGFlaG8gSmVvbmcgPGRhZWhv
+amVvbmdAZ29vZ2xlLmNvbT4KPiA+Cj4gPiBBZGRlZCBhIG5ldyBnY191cmdlbnQgbW9kZSwgR0Nf
+VVJHRU5UX0xPVywgaW4gd2hpY2ggbW9kZQo+ID4gRjJGUyB3aWxsIGxvd2VyIHRoZSBiYXIgb2Yg
+Y2hlY2tpbmcgaWRsZSBpbiBvcmRlciB0bwo+ID4gcHJvY2VzcyBvdXRzdGFuZGluZyBkaXNjYXJk
+IGNvbW1hbmRzIGFuZCBHQyBhIGxpdHRsZSBiaXQKPiA+IGFnZ3Jlc3NpdmVseS4KPiA+Cj4gPiBT
+aWduZWQtb2ZmLWJ5OiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgo+ID4gLS0t
+Cj4gPiAgRG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1mcy1mMmZzIHwgIDQgKysrLQo+
+ID4gIGZzL2YyZnMvZjJmcy5oICAgICAgICAgICAgICAgICAgICAgICAgICB8IDEwICsrKysrKysr
+LS0KPiA+ICBmcy9mMmZzL2djLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNiArKyst
+LS0KPiA+ICBmcy9mMmZzL3NlZ21lbnQuYyAgICAgICAgICAgICAgICAgICAgICAgfCAgNCArKy0t
+Cj4gPiAgZnMvZjJmcy9zeXNmcy5jICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDYgKysrKy0t
+Cj4gPiAgNSBmaWxlcyBjaGFuZ2VkLCAyMCBpbnNlcnRpb25zKCspLCAxMCBkZWxldGlvbnMoLSkK
+PiA+Cj4gPiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1mcy1m
+MmZzIGIvRG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1mcy1mMmZzCj4gPiBpbmRleCA0
+YmI5M2EwNmQ4YWIuLjdmNzMwYzRjOGRmMiAxMDA2NDQKPiA+IC0tLSBhL0RvY3VtZW50YXRpb24v
+QUJJL3Rlc3Rpbmcvc3lzZnMtZnMtZjJmcwo+ID4gKysrIGIvRG9jdW1lbnRhdGlvbi9BQkkvdGVz
+dGluZy9zeXNmcy1mcy1mMmZzCj4gPiBAQCAtMjI5LDcgKzIyOSw5IEBAIERhdGU6ICAgICAgICAg
+ICAgIEF1Z3VzdCAyMDE3Cj4gPiAgQ29udGFjdDogICAgICJKYWVnZXVrIEtpbSIgPGphZWdldWtA
+a2VybmVsLm9yZz4KPiA+ICBEZXNjcmlwdGlvbjogRG8gYmFja2dyb3VuZCBHQyBhZ3Jlc3NpdmVs
+eSB3aGVuIHNldC4gV2hlbiBnY191cmdlbnQgPSAxLAo+ID4gICAgICAgICAgICAgICBiYWNrZ3Jv
+dW5kIHRocmVhZCBzdGFydHMgdG8gZG8gR0MgYnkgZ2l2ZW4gZ2NfdXJnZW50X3NsZWVwX3RpbWUK
+PiA+IC0gICAgICAgICAgICAgaW50ZXJ2YWwuIEl0IGlzIHNldCB0byAwIGJ5IGRlZmF1bHQuCj4g
+PiArICAgICAgICAgICAgIGludGVydmFsLiBXaGVuIGdjX3VyZ2VudCA9IDIsIEYyRlMgd2lsbCBs
+b3dlciB0aGUgYmFyIG9mCj4gPiArICAgICAgICAgICAgIGNoZWNraW5nIGlkbGUgaW4gb3JkZXIg
+dG8gcHJvY2VzcyBvdXRzdGFuZGluZyBkaXNjYXJkIGNvbW1hbmRzCj4gPiArICAgICAgICAgICAg
+IGFuZCBHQyBhIGxpdHRsZSBiaXQgYWdncmVzc2l2ZWx5LiBJdCBpcyBzZXQgdG8gMCBieSBkZWZh
+dWx0Lgo+ID4KPiA+ICBXaGF0OiAgICAgICAgICAgICAgICAvc3lzL2ZzL2YyZnMvPGRpc2s+L2dj
+X3VyZ2VudF9zbGVlcF90aW1lCj4gPiAgRGF0ZTogICAgICAgICAgICAgICAgQXVndXN0IDIwMTcK
+PiA+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2YyZnMuaCBiL2ZzL2YyZnMvZjJmcy5oCj4gPiBpbmRl
+eCBlNmU0NzYxOGEzNTcuLjRiMjhmZDQyZmRiYyAxMDA2NDQKPiA+IC0tLSBhL2ZzL2YyZnMvZjJm
+cy5oCj4gPiArKysgYi9mcy9mMmZzL2YyZnMuaAo+ID4gQEAgLTEyODMsNyArMTI4Myw4IEBAIGVu
+dW0gewo+ID4gICAgICAgR0NfTk9STUFMLAo+ID4gICAgICAgR0NfSURMRV9DQiwKPiA+ICAgICAg
+IEdDX0lETEVfR1JFRURZLAo+ID4gLSAgICAgR0NfVVJHRU5ULAo+ID4gKyAgICAgR0NfVVJHRU5U
+X0hJR0gsCj4gPiArICAgICBHQ19VUkdFTlRfTE9XLAo+ID4gIH07Cj4gPgo+ID4gIGVudW0gewo+
+ID4gQEAgLTE1NDAsNiArMTU0MSw3IEBAIHN0cnVjdCBmMmZzX3NiX2luZm8gewo+ID4gICAgICAg
+dW5zaWduZWQgaW50IGN1cl92aWN0aW1fc2VjOyAgICAgICAgICAgIC8qIGN1cnJlbnQgdmljdGlt
+IHNlY3Rpb24gbnVtICovCj4gPiAgICAgICB1bnNpZ25lZCBpbnQgZ2NfbW9kZTsgICAgICAgICAg
+ICAgICAgICAgLyogY3VycmVudCBHQyBzdGF0ZSAqLwo+ID4gICAgICAgdW5zaWduZWQgaW50IG5l
+eHRfdmljdGltX3NlZ1syXTsgICAgICAgIC8qIG5leHQgc2VnbWVudCBpbiB2aWN0aW0gc2VjdGlv
+biAqLwo+ID4gKwo+ID4gICAgICAgLyogZm9yIHNraXAgc3RhdGlzdGljICovCj4gPiAgICAgICB1
+bnNpZ25lZCBpbnQgYXRvbWljX2ZpbGVzOyAgICAgICAgICAgICAgLyogIyBvZiBvcGVuZWQgYXRv
+bWljIGZpbGUgKi8KPiA+ICAgICAgIHVuc2lnbmVkIGxvbmcgbG9uZyBza2lwcGVkX2F0b21pY19m
+aWxlc1syXTsgICAgIC8qIEZHX0dDIGFuZCBCR19HQyAqLwo+ID4gQEAgLTI0ODAsNyArMjQ4Miw3
+IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCAqZjJmc19rbWVtX2NhY2hlX2FsbG9jKHN0cnVjdCBrbWVt
+X2NhY2hlICpjYWNoZXAsCj4gPgo+ID4gIHN0YXRpYyBpbmxpbmUgYm9vbCBpc19pZGxlKHN0cnVj
+dCBmMmZzX3NiX2luZm8gKnNiaSwgaW50IHR5cGUpCj4gPiAgewo+ID4gLSAgICAgaWYgKHNiaS0+
+Z2NfbW9kZSA9PSBHQ19VUkdFTlQpCj4gPiArICAgICBpZiAoc2JpLT5nY19tb2RlID09IEdDX1VS
+R0VOVF9ISUdIKQo+ID4gICAgICAgICAgICAgICByZXR1cm4gdHJ1ZTsKPiA+Cj4gPiAgICAgICBp
+ZiAoZ2V0X3BhZ2VzKHNiaSwgRjJGU19SRF9EQVRBKSB8fCBnZXRfcGFnZXMoc2JpLCBGMkZTX1JE
+X05PREUpIHx8Cj4gPiBAQCAtMjQ5OCw2ICsyNTAwLDEwIEBAIHN0YXRpYyBpbmxpbmUgYm9vbCBp
+c19pZGxlKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwgaW50IHR5cGUpCj4gPiAgICAgICAgICAg
+ICAgICAgICAgICAgYXRvbWljX3JlYWQoJlNNX0koc2JpKS0+ZmNjX2luZm8tPnF1ZXVlZF9mbHVz
+aCkpCj4gPiAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKPiA+Cj4gPiArICAgICBpZiAoc2Jp
+LT5nY19tb2RlID09IEdDX1VSR0VOVF9MT1cgJiYKPiA+ICsgICAgICAgICAgICAgICAgICAgICAo
+dHlwZSA9PSBESVNDQVJEX1RJTUUgfHwgdHlwZSA9PSBHQ19USU1FKSkKPiA+ICsgICAgICAgICAg
+ICAgcmV0dXJuIHRydWU7Cj4gPiArCj4gPiAgICAgICByZXR1cm4gZjJmc190aW1lX292ZXIoc2Jp
+LCB0eXBlKTsKPiA+ICB9Cj4gPgo+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZ2MuYyBiL2ZzL2Yy
+ZnMvZ2MuYwo+ID4gaW5kZXggNmVlYzNiMmQ2MDZkLi4zYjcxOGRhNjk5MTAgMTAwNjQ0Cj4gPiAt
+LS0gYS9mcy9mMmZzL2djLmMKPiA+ICsrKyBiL2ZzL2YyZnMvZ2MuYwo+ID4gQEAgLTgyLDcgKzgy
+LDcgQEAgc3RhdGljIGludCBnY190aHJlYWRfZnVuYyh2b2lkICpkYXRhKQo+ID4gICAgICAgICAg
+ICAgICAgKiBpbnZhbGlkYXRlZCBzb29uIGFmdGVyIGJ5IHVzZXIgdXBkYXRlIG9yIGRlbGV0aW9u
+Lgo+ID4gICAgICAgICAgICAgICAgKiBTbywgSSdkIGxpa2UgdG8gd2FpdCBzb21lIHRpbWUgdG8g
+Y29sbGVjdCBkaXJ0eSBzZWdtZW50cy4KPiA+ICAgICAgICAgICAgICAgICovCj4gPiAtICAgICAg
+ICAgICAgIGlmIChzYmktPmdjX21vZGUgPT0gR0NfVVJHRU5UKSB7Cj4gPiArICAgICAgICAgICAg
+IGlmIChzYmktPmdjX21vZGUgPT0gR0NfVVJHRU5UX0hJR0gpIHsKPiA+ICAgICAgICAgICAgICAg
+ICAgICAgICB3YWl0X21zID0gZ2NfdGgtPnVyZ2VudF9zbGVlcF90aW1lOwo+ID4gICAgICAgICAg
+ICAgICAgICAgICAgIGRvd25fd3JpdGUoJnNiaS0+Z2NfbG9jayk7Cj4gPiAgICAgICAgICAgICAg
+ICAgICAgICAgZ290byBkb19nYzsKPiA+IEBAIC0xNzYsNyArMTc2LDcgQEAgc3RhdGljIGludCBz
+ZWxlY3RfZ2NfdHlwZShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGludCBnY190eXBlKQo+ID4g
+ICAgICAgICAgICAgICBnY19tb2RlID0gR0NfQ0I7Cj4gPiAgICAgICAgICAgICAgIGJyZWFrOwo+
+ID4gICAgICAgY2FzZSBHQ19JRExFX0dSRUVEWToKPiA+IC0gICAgIGNhc2UgR0NfVVJHRU5UOgo+
+ID4gKyAgICAgY2FzZSBHQ19VUkdFTlRfSElHSDoKPiA+ICAgICAgICAgICAgICAgZ2NfbW9kZSA9
+IEdDX0dSRUVEWTsKPiA+ICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiAgICAgICB9Cj4gPiBAQCAt
+MjExLDcgKzIxMSw3IEBAIHN0YXRpYyB2b2lkIHNlbGVjdF9wb2xpY3koc3RydWN0IGYyZnNfc2Jf
+aW5mbyAqc2JpLCBpbnQgZ2NfdHlwZSwKPiA+ICAgICAgICAqIGZvcmVncm91bmQgR0MgYW5kIHVy
+Z2VudCBHQyBjYXNlcy4KPiA+ICAgICAgICAqLwo+ID4gICAgICAgaWYgKGdjX3R5cGUgIT0gRkdf
+R0MgJiYKPiA+IC0gICAgICAgICAgICAgICAgICAgICAoc2JpLT5nY19tb2RlICE9IEdDX1VSR0VO
+VCkgJiYKPiA+ICsgICAgICAgICAgICAgICAgICAgICAoc2JpLT5nY19tb2RlICE9IEdDX1VSR0VO
+VF9ISUdIKSAmJgo+ID4gICAgICAgICAgICAgICAgICAgICAgIHAtPm1heF9zZWFyY2ggPiBzYmkt
+Pm1heF92aWN0aW1fc2VhcmNoKQo+ID4gICAgICAgICAgICAgICBwLT5tYXhfc2VhcmNoID0gc2Jp
+LT5tYXhfdmljdGltX3NlYXJjaDsKPiA+Cj4gPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zZWdtZW50
+LmMgYi9mcy9mMmZzL3NlZ21lbnQuYwo+ID4gaW5kZXggYjQ1ZTQ3MzUwOGE5Li41OTI0YjM5NjVh
+ZTQgMTAwNjQ0Cj4gPiAtLS0gYS9mcy9mMmZzL3NlZ21lbnQuYwo+ID4gKysrIGIvZnMvZjJmcy9z
+ZWdtZW50LmMKPiA+IEBAIC0xNzQsNyArMTc0LDcgQEAgYm9vbCBmMmZzX25lZWRfU1NSKHN0cnVj
+dCBmMmZzX3NiX2luZm8gKnNiaSkKPiA+Cj4gPiAgICAgICBpZiAoZjJmc19sZnNfbW9kZShzYmkp
+KQo+ID4gICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7Cj4gPiAtICAgICBpZiAoc2JpLT5nY19t
+b2RlID09IEdDX1VSR0VOVCkKPiA+ICsgICAgIGlmIChzYmktPmdjX21vZGUgPT0gR0NfVVJHRU5U
+X0hJR0gpCj4gPiAgICAgICAgICAgICAgIHJldHVybiB0cnVlOwo+ID4gICAgICAgaWYgKHVubGlr
+ZWx5KGlzX3NiaV9mbGFnX3NldChzYmksIFNCSV9DUF9ESVNBQkxFRCkpKQo+ID4gICAgICAgICAg
+ICAgICByZXR1cm4gdHJ1ZTsKPiA+IEBAIC0xNzU5LDcgKzE3NTksNyBAQCBzdGF0aWMgaW50IGlz
+c3VlX2Rpc2NhcmRfdGhyZWFkKHZvaWQgKmRhdGEpCj4gPiAgICAgICAgICAgICAgICAgICAgICAg
+Y29udGludWU7Cj4gPiAgICAgICAgICAgICAgIH0KPiA+Cj4gPiAtICAgICAgICAgICAgIGlmIChz
+YmktPmdjX21vZGUgPT0gR0NfVVJHRU5UKQo+ID4gKyAgICAgICAgICAgICBpZiAoc2JpLT5nY19t
+b2RlID09IEdDX1VSR0VOVF9ISUdIKQo+ID4gICAgICAgICAgICAgICAgICAgICAgIF9faW5pdF9k
+aXNjYXJkX3BvbGljeShzYmksICZkcG9saWN5LCBEUE9MSUNZX0ZPUkNFLCAxKTsKPiA+Cj4gPiAg
+ICAgICAgICAgICAgIHNiX3N0YXJ0X2ludHdyaXRlKHNiaS0+c2IpOwo+ID4gZGlmZiAtLWdpdCBh
+L2ZzL2YyZnMvc3lzZnMuYyBiL2ZzL2YyZnMvc3lzZnMuYwo+ID4gaW5kZXggZTg3N2M1OWI5ZmRi
+Li5hYjQwZTFmODlmMjMgMTAwNjQ0Cj4gPiAtLS0gYS9mcy9mMmZzL3N5c2ZzLmMKPiA+ICsrKyBi
+L2ZzL2YyZnMvc3lzZnMuYwo+ID4gQEAgLTM1MCwxNCArMzUwLDE2IEBAIHN0YXRpYyBzc2l6ZV90
+IF9fc2JpX3N0b3JlKHN0cnVjdCBmMmZzX2F0dHIgKmEsCj4gPiAgICAgICAgICAgICAgIHJldHVy
+biAtRUlOVkFMOwo+ID4KPiA+ICAgICAgIGlmICghc3RyY21wKGEtPmF0dHIubmFtZSwgImdjX3Vy
+Z2VudCIpKSB7Cj4gPiAtICAgICAgICAgICAgIGlmICh0ID49IDEpIHsKPiA+IC0gICAgICAgICAg
+ICAgICAgICAgICBzYmktPmdjX21vZGUgPSBHQ19VUkdFTlQ7Cj4gPiArICAgICAgICAgICAgIGlm
+ICh0ID09IDEpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICBzYmktPmdjX21vZGUgPSBHQ19V
+UkdFTlRfSElHSDsKPiA+ICAgICAgICAgICAgICAgICAgICAgICBpZiAoc2JpLT5nY190aHJlYWQp
+IHsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNiaS0+Z2NfdGhyZWFkLT5nY193
+YWtlID0gMTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdha2VfdXBfaW50ZXJy
+dXB0aWJsZV9hbGwoCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZz
+YmktPmdjX3RocmVhZC0+Z2Nfd2FpdF9xdWV1ZV9oZWFkKTsKPiA+ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHdha2VfdXBfZGlzY2FyZF90aHJlYWQoc2JpLCB0cnVlKTsKPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICB9Cj4gPiArICAgICAgICAgICAgIH0gZWxzZSBpZiAodCA9PSAyKSB7
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgc2JpLT5nY19tb2RlID0gR0NfVVJHRU5UX0xPVzsK
+PiA+ICAgICAgICAgICAgICAgfSBlbHNlIHsKPiA+ICAgICAgICAgICAgICAgICAgICAgICBzYmkt
+PmdjX21vZGUgPSBHQ19OT1JNQUw7Cj4KPiBBcyBmdW5jdGlvbmFsaXR5IGRlc2NyaXB0aW9uIGlu
+IHN5c2ZzIGRvYywgc2hvdWxkbid0IGl0IGJlOgo+Cj4gaWYgKHQgPT0gMCkgewo+ICAgICAgICAg
+c2JpLT5nY19tb2RlID0gR0NfTk9STUFMOwo+IH0gZWxzZSBpZiAodCA9PSAxKSB7Cj4gICAgICAg
+ICBzYmktPmdjX21vZGUgPSBHQ19VUkdFTlRfSElHSDsKPiAgICAgICAgIC4uLgo+IH0gZWxzZSBp
+ZiAodCA9PSAyKSB7Cj4gICAgICAgICBzYmktPmdjX21vZGUgPSBHQ19VUkdFTlRfTE9XOwo+IH0g
+ZWxzZSB7Cj4gICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiB9Cj4gcmV0dXJuIGNvdW50Owo+Cj4g
+PiAgICAgICAgICAgICAgIH0KPiA+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1k
+ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
+bGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
