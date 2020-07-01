@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7352D211064
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 18:16:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DF1D211076
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 18:19:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jqfPP-0004Da-8W; Wed, 01 Jul 2020 16:16:27 +0000
+	id 1jqfSR-0004nV-Qr; Wed, 01 Jul 2020 16:19:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jqfPN-0004DT-TE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 16:16:25 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jqfSQ-0004nO-Gn
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 16:19:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mPw/p1xXbLS/CD/LUAU8v1WJB//c5fXBBWbzYECQg6k=; b=c5qBa3vReBKujHsFMtOz9dfEW4
- JFpG8TZNCTuAAi6yx6COvJwh26veuD7/r5sXfstpS4EsAMWG7FrPoVzIYY7Wc4dhg1YojGWukNUId
- KkHhb/gCYDWJmeDWkZC1IPvI8qqu+Yi8eGcq3clJSa5vzsq3gHLYMTvsah0s1iOJQii0=;
+ bh=hN+bWmvhLyYMQqJwoiEqRT71K8opl4HQO++ciXq3Rt4=; b=QUX5F4io+PWYdjjpxJYLzMyX0K
+ mIXvFjbYA6gx4bQ1R8+B1zQlpt2ImYDdnfFz9e3i7EHL9J9PtFlqEqHTWiWRCaAsuOWVnXz1bqT89
+ Ad1eGQRUNrR04/Pr1oNn3a843sjHd2meQiDT6Eywxkp8ev09M8tej45LRAgtEU5U6ytw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mPw/p1xXbLS/CD/LUAU8v1WJB//c5fXBBWbzYECQg6k=; b=Cjy4NxaL11m0CAy+Jf6Mg74Cxu
- VridrvIqcjTE6Idst2qFF1P+ySCKBv/cWfuGK5AoaXsAcXL4P7bOmVt/P1iibSA5EILNBczjlIfX0
- hQKy3XBA9qOpbRGBQVbXO9lP+CuK19jsmf2zM/ypsWUp7+aF3/cSV8VxMuZb4FPghapc=;
+ bh=hN+bWmvhLyYMQqJwoiEqRT71K8opl4HQO++ciXq3Rt4=; b=KKuFjrNUt9MKKc9fIys0J7FBri
+ l5ifXJJ4I3kzTV/wS9rytJpi8+PqfG6ot7A9Tv/+CnvfUEQI1Ys/xV4jYcIgKXNz67TIXaYQxOmUQ
+ DCnyTotS+H1/wF+aC4ZR2EZ66BKTynRxX5SzlmPMwIPKCyOtZPKFLmT/08CxMZqqw57s=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqfPM-0079mH-GU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 16:16:25 +0000
+ id 1jqfSP-004Bf7-BJ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 16:19:34 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 13C0220760;
- Wed,  1 Jul 2020 16:16:19 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DDAC7207BB;
+ Wed,  1 Jul 2020 16:19:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593620179;
- bh=biSVuLSqQZyLre5EwX6Uvz2QqPXPFeUjqpSTrZwznjA=;
+ s=default; t=1593620368;
+ bh=2zNupGrsJWVvIy1EGdDug2tvMr8j7918+kyHDf++ejA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=vTOyYkkPatGqGjoHMBGchOV0BardXrrM+BzIJEzXyQxiNomH2hqFL2adPpq6OToav
- Cf2JycIVfByZm7leXmWxcjfCQHnOaRQDOa5CBFXvCuj4Pu3DiTem2Pit5CeT+gq328
- HZZbrDbvyOd0P2PBditYnnsoA2OQILBqdy6qMKJw=
-Date: Wed, 1 Jul 2020 09:16:18 -0700
+ b=KHDPOc0FLDP3WLnhF3VbexIDJ4vOZBhmmYCWfOGkeAvEzeZAlnQFI9ozskQG1IBio
+ c0UByb07z0wVjS5DmK3dTO14yPvWnf5hFOz7qdeQMQcOBfWfPFvNEXweF6F3J5pImm
+ /jMBf9Kpd7HLKQKcvg4J3TLlnnZg7dOBAbWdCRVo=
+Date: Wed, 1 Jul 2020 09:19:27 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Wei Yongjun <weiyongjun1@huawei.com>
-Message-ID: <20200701161618.GC1724572@google.com>
-References: <20200701152858.50516-1-weiyongjun1@huawei.com>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20200701161927.GD1724572@google.com>
+References: <20200630100428.19105-1-yuchao0@huawei.com>
+ <20200630100428.19105-2-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200701152858.50516-1-weiyongjun1@huawei.com>
+In-Reply-To: <20200630100428.19105-2-yuchao0@huawei.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -73,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqfPM-0079mH-GU
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: make __allocate_new_segment()
- static
+X-Headers-End: 1jqfSP-004Bf7-BJ
+Subject: Re: [f2fs-dev] [PATCH RFC 2/5] f2fs: record average update time of
+ segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,44 +88,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hulkcommits@huawei.com, Hulk Robot <hulkci@huawei.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/01, Wei Yongjun wrote:
-> From: Hulk Robot <hulkci@huawei.com>
+On 06/30, Chao Yu wrote:
+> Previously, once we update one block in segment, we will update mtime of
+> segment to last time, making aged segment becoming freshest, result in
+> that GC with cost benefit algorithm missing such segment, So this patch
+> changes to record mtime as average block updating time instead of last
+> updating time.
 > 
-> From: Hulk Robot <hulkci@huawei.com>
+> It's not needed to reset mtime for prefree segment, as se->valid_blocks
+> is zero, then old se->mtime won't take any weight with below calculation:
 > 
-> Fix sparse build warning:
+> 	se->mtime = (se->mtime * se->valid_blocks + mtime) /
+> 				(se->valid_blocks + 1);
 > 
-> fs/f2fs/segment.c:2736:6: warning:
->  symbol '__allocate_new_segment' was not declared. Should it be static?
-
-It was fixed.
-https://lore.kernel.org/linux-f2fs-devel/20200701042222.GA1539525@google.com/T/#m9667447e4d37672e26dee7e30896d129eac1c479
-
-> 
-> Signed-off-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
 > ---
->  fs/f2fs/segment.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  fs/f2fs/segment.c | 21 ++++++++++++++++++---
+>  1 file changed, 18 insertions(+), 3 deletions(-)
 > 
 > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index b45e473508a9..c35614d255e1 100644
+> index 863ec6f1fb87..906c313835ad 100644
 > --- a/fs/f2fs/segment.c
 > +++ b/fs/f2fs/segment.c
-> @@ -2733,7 +2733,7 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
->  	up_read(&SM_I(sbi)->curseg_lock);
+> @@ -2150,6 +2150,22 @@ static void __set_sit_entry_type(struct f2fs_sb_info *sbi, int type,
+>  		__mark_sit_entry_dirty(sbi, segno);
 >  }
 >  
-> -void __allocate_new_segment(struct f2fs_sb_info *sbi, int type)
-> +static void __allocate_new_segment(struct f2fs_sb_info *sbi, int type)
+> +static void update_segment_mtime(struct f2fs_sb_info *sbi, block_t blkaddr)
+> +{
+> +	unsigned int segno = GET_SEGNO(sbi, blkaddr);
+> +	struct seg_entry *se = get_seg_entry(sbi, segno);
+> +	unsigned long long mtime = get_mtime(sbi, false);
+> +
+> +	if (!se->mtime) {
+
+Don't need {}.
+
+> +		se->mtime = mtime;
+> +	} else {
+> +		se->mtime = (se->mtime * se->valid_blocks + mtime) /
+> +						(se->valid_blocks + 1);
+> +	}
+> +	if (mtime > SIT_I(sbi)->max_mtime)
+> +		SIT_I(sbi)->max_mtime = mtime;
+> +}
+> +
+>  static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
 >  {
->  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->  	unsigned int old_segno;
+>  	struct seg_entry *se;
+> @@ -2169,10 +2185,9 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
+>  	f2fs_bug_on(sbi, (new_vblocks >> (sizeof(unsigned short) << 3) ||
+>  				(new_vblocks > sbi->blocks_per_seg)));
+>  
+> +	update_segment_mtime(sbi, blkaddr);
+> +
+>  	se->valid_blocks = new_vblocks;
+> -	se->mtime = get_mtime(sbi, false);
+> -	if (se->mtime > SIT_I(sbi)->max_mtime)
+> -		SIT_I(sbi)->max_mtime = se->mtime;
+>  
+>  	/* Update valid block bitmap */
+>  	if (del > 0) {
+> -- 
+> 2.26.2
 
 
 _______________________________________________
