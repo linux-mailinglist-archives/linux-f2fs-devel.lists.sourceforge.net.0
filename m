@@ -2,79 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AF1921054C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 09:48:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A04F21063F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jul 2020 10:32:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jqXTj-0004g6-8h; Wed, 01 Jul 2020 07:48:23 +0000
+	id 1jqYAf-0007fB-1m; Wed, 01 Jul 2020 08:32:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jqXTh-0004fz-Ve
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 07:48:22 +0000
+ (envelope-from
+ <BATV+501e1de201b53739768b+6156+infradead.org+hch@casper.srs.infradead.org>)
+ id 1jqYAd-0007ey-Rq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 08:32:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1/qHIZLbEIiAxHRdDfQAjsONUaAq3qM4ycjTeWgqibA=; b=WPfn/akzHjFC/JF2IWxAC5imoK
- nd96yFvHeVaC1HfBPht9v9aTiTroU58c168oGZ+qrdAyW0yHo4v746UsUmM20UZHiFugvxB1xrXOC
- dwHjEDIx0ix2XvWzHmg6uzPbs5Z0u49oQpOr7Ekzbtr4m2umDB1NAw73kzUW6tvnmjgY=;
+ bh=vXiGSDx0OBTNUoDDVLCHJpE3R5npVOLQYlpMjYD89gk=; b=fYQiruI8Sg50/JWxwimN+6gCYf
+ JxPGhB7NLY2ChEQFFaGnsYI4nx0wVxWnKhtYkt3BexU1n+U7NxLCW/+9Va21GH+l2oTjjVFrw98tV
+ p6+3N7Av6Wb+vvhkBQRXtBRBEqzi8hI5Mtk01VS3v1Mg33U2GjCIGqK5rhy0qsp0gI4g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1/qHIZLbEIiAxHRdDfQAjsONUaAq3qM4ycjTeWgqibA=; b=bc2XX1vMFeDdd4l4sx/3kXd6pZ
- pvbTHB1QD2pGXR8A7TMr/M5Eo7pBEoTwQiqk54MxcMK97lBF5X6D7FV8GSRbczodsyk24tvyh5nsl
- VYLgjRhaWvnhk/qvGgA98EkJjg9nxBzUegv6YAJ4vlG+b/dXUDemWztUHxEvpjjaHEDw=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ bh=vXiGSDx0OBTNUoDDVLCHJpE3R5npVOLQYlpMjYD89gk=; b=fyryTxfhQqGSvwOLt5UiL4N+bp
+ jdyH76n771/FET5OEmZ4eKSNCOhCCBYySwdkPRVQIWNE/Ji9pKjQWjlfiNvMPh6tO0oLfAwKndfVZ
+ rIYRvvR4ZhEbaOqSrbRE/ZkznrorR24TIH4L2QnLH9P4WIzNa8j7Us4xmFS3vo09t/ag=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jqXTf-006ndv-P3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 07:48:21 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id CD71E9B8C42A25890AA8;
- Wed,  1 Jul 2020 15:48:04 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 1 Jul 2020
- 15:48:00 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Nathan Chancellor
- <natechancellor@gmail.com>
-References: <20200624012148.180050-1-jaegeuk@kernel.org>
- <20200629150323.GA3293033@google.com> <20200629202720.GA230664@google.com>
- <20200630204348.GA2504307@ubuntu-s3-xlarge-x86>
- <20200630205635.GB1396584@google.com>
- <285a4e16-2cbc-d1e9-8464-8a06bacbaaa0@huawei.com>
-Message-ID: <d496f4b9-e4fa-1366-61a9-38ee59c20e15@huawei.com>
-Date: Wed, 1 Jul 2020 15:47:59 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1jqYAa-006pLu-LV
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jul 2020 08:32:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=vXiGSDx0OBTNUoDDVLCHJpE3R5npVOLQYlpMjYD89gk=; b=qdapIMox4Ek2eTE/n0txbbOjGF
+ oJGKiOEgDQ9amafICkn7wMpGQazpixnCsCP9vzB1sWllWfYlQ8DIw/BDrv8it538xchboPP1a3fnT
+ /r7lFtLJtFEe6qnkJAw62zmPT8rzrymyJ0nyAnw3cv66pExz0H6f2mtFbMKtbsSNR4N0LR36rhtwO
+ F0i0ZUtDzzu+A9TrM/ZBHha+soKQAt4lO4WQQDJtMr2tjHFNu5+PkR/hO/DfBja+fSrsZGFpUIUZL
+ IBFfzOqiowRXWGc4J2ORzoUaahAdW3PFVchNzsU3fVXrakWnQC9lWtXr6awjsuselgLhI1YRCo/YC
+ rWe3CgMQ==;
+Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1jqYAK-0006UI-BJ; Wed, 01 Jul 2020 08:32:24 +0000
+Date: Wed, 1 Jul 2020 09:32:24 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Eric Sandeen <sandeen@sandeen.net>
+Message-ID: <20200701083224.GI20101@infradead.org>
+References: <c8271324-9132-388c-5242-d7699f011892@redhat.com>
+ <20200630054217.GA27221@infradead.org>
+ <59265a9d-ee0f-4432-3f86-00d076aeb8e8@sandeen.net>
 MIME-Version: 1.0
-In-Reply-To: <285a4e16-2cbc-d1e9-8464-8a06bacbaaa0@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <59265a9d-ee0f-4432-3f86-00d076aeb8e8@sandeen.net>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jqXTf-006ndv-P3
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: avoid readahead race condition
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jqYAa-006pLu-LV
+Subject: Re: [f2fs-dev] [PATCH] doc: cgroup: add f2fs and xfs to supported
+ list for writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,70 +87,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Eric Sandeen <sandeen@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
+ cgroups@vger.kernel.org, linux-xfs <linux-xfs@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMC83LzEgOTo1OSwgQ2hhbyBZdSB3cm90ZToKPiBPbiAyMDIwLzcvMSA0OjU2LCBKYWVn
-ZXVrIEtpbSB3cm90ZToKPj4gT24gMDYvMzAsIE5hdGhhbiBDaGFuY2VsbG9yIHdyb3RlOgo+Pj4g
-T24gTW9uLCBKdW4gMjksIDIwMjAgYXQgMDE6Mjc6MjBQTSAtMDcwMCwgSmFlZ2V1ayBLaW0gd3Jv
-dGU6Cj4+Pj4gSWYgdHdvIHJlYWRhaGVhZCB0aHJlYWRzIGhhdmluZyBzYW1lIG9mZnNldCBlbnRl
-ciBpbiByZWFkcGFnZXMsIGV2ZXJ5IHJlYWQKPj4+PiBJT3MgYXJlIHNwbGl0IGFuZCBpc3N1ZWQg
-dG8gdGhlIGRpc2sgd2hpY2ggZ2l2aW5nIGxvd2VyIGJhbmR3aWR0aC4KPj4+Pgo+Pj4+IFRoaXMg
-cGF0Y2ggdHJpZXMgdG8gYXZvaWQgcmVkdW5kYW50IHJlYWRhaGVhZCBjYWxscy4KPj4+Pgo+Pj4+
-IFNpZ25lZC1vZmYtYnk6IEphZWdldWsgS2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+Cj4+Pj4gLS0t
-Cj4+Pj4gdjM6Cj4+Pj4gIC0gdXNlIFJFQUR8V1JJVEVfT05DRQo+Pj4+IHYyOgo+Pj4+ICAgLSBh
-ZGQgbWlzc2luZyBjb2RlIHRvIGJ5cGFzcyByZWFkCj4+Pj4gIAo+Pj4+ICBmcy9mMmZzL2RhdGEu
-YyAgfCAxOCArKysrKysrKysrKysrKysrKysKPj4+PiAgZnMvZjJmcy9mMmZzLmggIHwgIDEgKwo+
-Pj4+ICBmcy9mMmZzL3N1cGVyLmMgfCAgMiArKwo+Pj4+ICAzIGZpbGVzIGNoYW5nZWQsIDIxIGlu
-c2VydGlvbnMoKykKPj4+Pgo+Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2RhdGEuYyBiL2ZzL2Yy
-ZnMvZGF0YS5jCj4+Pj4gaW5kZXggOTk1Y2Y3OGIyM2M1ZS4uMzYwYjRjOTA4MGQ5NyAxMDA2NDQK
-Pj4+PiAtLS0gYS9mcy9mMmZzL2RhdGEuYwo+Pj4+ICsrKyBiL2ZzL2YyZnMvZGF0YS5jCj4+Pj4g
-QEAgLTIyOTYsNiArMjI5Niw3IEBAIHN0YXRpYyBpbnQgZjJmc19tcGFnZV9yZWFkcGFnZXMoc3Ry
-dWN0IGlub2RlICppbm9kZSwKPj4+PiAgCXVuc2lnbmVkIG5yX3BhZ2VzID0gcmFjID8gcmVhZGFo
-ZWFkX2NvdW50KHJhYykgOiAxOwo+Pj4+ICAJdW5zaWduZWQgbWF4X25yX3BhZ2VzID0gbnJfcGFn
-ZXM7Cj4+Pj4gIAlpbnQgcmV0ID0gMDsKPj4+PiArCWJvb2wgZHJvcF9yYSA9IGZhbHNlOwo+Pj4+
-ICAKPj4+PiAgCW1hcC5tX3BibGsgPSAwOwo+Pj4+ICAJbWFwLm1fbGJsayA9IDA7Cj4+Pj4gQEAg
-LTIzMDYsMTAgKzIzMDcsMjQgQEAgc3RhdGljIGludCBmMmZzX21wYWdlX3JlYWRwYWdlcyhzdHJ1
-Y3QgaW5vZGUgKmlub2RlLAo+Pj4+ICAJbWFwLm1fc2VnX3R5cGUgPSBOT19DSEVDS19UWVBFOwo+
-Pj4+ICAJbWFwLm1fbWF5X2NyZWF0ZSA9IGZhbHNlOwo+Pj4+ICAKPj4+PiArCS8qCj4+Pj4gKwkg
-KiBUd28gcmVhZGFoZWFkIHRocmVhZHMgZm9yIHNhbWUgYWRkcmVzcyByYW5nZSBjYW4gY2F1c2Ug
-cmFjZSBjb25kaXRpb24KPj4+PiArCSAqIHdoaWNoIGZyYWdtZW50cyBzZXF1ZW50aWFsIHJlYWQg
-SU9zLiBTbyBsZXQncyBhdm9pZCBlYWNoIG90aGVyLgo+Pj4+ICsJICovCj4+Pj4gKwlpZiAocmFj
-ICYmIHJlYWRhaGVhZF9jb3VudChyYWMpKSB7Cj4+Pj4gKwkJaWYgKFJFQURfT05DRShGMkZTX0ko
-aW5vZGUpLT5yYV9vZmZzZXQpID09IHJlYWRhaGVhZF9pbmRleChyYWMpKQo+Pj4+ICsJCQlkcm9w
-X3JhID0gdHJ1ZTsKPj4+PiArCQllbHNlCj4+Pj4gKwkJCVdSSVRFX09OQ0UoRjJGU19JKGlub2Rl
-KS0+cmFfb2Zmc2V0LAo+Pj4+ICsJCQkJCQlyZWFkYWhlYWRfaW5kZXgocmFjKSk7Cj4+Pj4gKwl9
-Cj4+Pj4gKwo+Pj4+ICAJZm9yICg7IG5yX3BhZ2VzOyBucl9wYWdlcy0tKSB7Cj4+Pj4gIAkJaWYg
-KHJhYykgewo+Pj4+ICAJCQlwYWdlID0gcmVhZGFoZWFkX3BhZ2UocmFjKTsKPj4+PiAgCQkJcHJl
-ZmV0Y2h3KCZwYWdlLT5mbGFncyk7Cj4+Pj4gKwkJCWlmIChkcm9wX3JhKQo+Pj4+ICsJCQkJZ290
-byBuZXh0X3BhZ2U7Cj4+Pgo+Pj4gV2hlbiBDT05GSUdfRjJGU19GU19DT01QUkVTU0lPTiBpcyBu
-b3Qgc2V0IChpLmUuIHg4Nl82NCBkZWZjb25maWcgKwo+Pj4gQ09ORklHX0YyRlNfRlM9eSk6Cj4+
-Pgo+Pj4gJCBtYWtlIC1za2oiJChucHJvYykiIE89b3V0IGRpc3RjbGVhbiBkZWZjb25maWcgZnMv
-ZjJmcy9kYXRhLm8KPj4+IC4uL2ZzL2YyZnMvZGF0YS5jOiBJbiBmdW5jdGlvbiDigJhmMmZzX21w
-YWdlX3JlYWRwYWdlc+KAmToKPj4+IC4uL2ZzL2YyZnMvZGF0YS5jOjIzMjc6NTogZXJyb3I6IGxh
-YmVsIOKAmG5leHRfcGFnZeKAmSB1c2VkIGJ1dCBub3QgZGVmaW5lZAo+Pj4gIDIzMjcgfCAgICAg
-Z290byBuZXh0X3BhZ2U7Cj4+PiAgICAgICB8ICAgICBefn5+Cj4+PiAuLi4KPj4KPj4gVGhhbmtz
-LiBJIHB1c2hlZCB0aGUgZml4IGZvciAtbmV4dC4KPj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcv
-bGludXgtZjJmcy1kZXZlbC8xYmUxODM5Ny03ZmM2LTcwM2UtMTIxYi1lMjEwZTEwMTM1N2ZAaW5m
-cmFkZWFkLm9yZy9ULyN0CgpJdCB3aWxsIGhhbmcgdGhlIGtlcm5lbCBiZWNhdXNlIHdlIG1pc3Nl
-ZCB0byB1bmxvY2sgdGhvc2UgY2FjaGVkIHBhZ2VzLApJIGNoYW5nZWQgdG8gJ2dvdG8gc2V0X2Vy
-cm9yX3BhZ2UnLCB0aGUgaXNzdWUgd2FzIGdvbmUuCgpUaGFua3MsCgo+IAo+IFJldmlld2VkLWJ5
-OiBDaGFvIFl1IDx5dWNoYW8wQGh1YXdlaS5jb20+Cj4gCj4gVGhhbmtzLAo+IAo+Pgo+PiBUaGFu
-a3MsCj4+Cj4+Pgo+Pj4gQ2hlZXJzLAo+Pj4gTmF0aGFuCj4+Pgo+Pj4KPj4+IF9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4+PiBMaW51eC1mMmZzLWRldmVs
-IG1haWxpbmcgbGlzdAo+Pj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQK
-Pj4+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYy
-ZnMtZGV2ZWwKPj4KPj4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KPj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPj4gTGludXgtZjJmcy1k
-ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKPj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
-ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo+Pgo+IAo+IAo+IF9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBt
-YWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0
-dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2
-ZWwKPiAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
-aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
-ZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9s
-aW51eC1mMmZzLWRldmVsCg==
+On Tue, Jun 30, 2020 at 08:59:34AM -0500, Eric Sandeen wrote:
+> On 6/30/20 12:42 AM, Christoph Hellwig wrote:
+> > On Mon, Jun 29, 2020 at 02:08:09PM -0500, Eric Sandeen wrote:
+> >> f2fs and xfs have both added support for cgroup writeback:
+> >>
+> >> 578c647 f2fs: implement cgroup writeback support
+> >> adfb5fb xfs: implement cgroup aware writeback
+> >>
+> >> so add them to the supported list in the docs.
+> >>
+> >> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
+> >> ---
+> >>
+> >> TBH I wonder about the wisdom of having this detail in
+> >> the doc, as it apparently gets missed quite often ...
+> > 
+> > I'd rather remove the list of file systems.  It has no chance of
+> > staying uptodate.
+> 
+> Is there any way for a user to know whether a filesytem does or doesn't
+> support it, in practice?
+
+git-grep SB_I_CGROUPWB
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
