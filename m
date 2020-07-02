@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23416212911
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jul 2020 18:10:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D511212912
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jul 2020 18:10:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jr1mz-0002d6-VA; Thu, 02 Jul 2020 16:10:17 +0000
+	id 1jr1n4-0001T7-3D; Thu, 02 Jul 2020 16:10:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=44573aa05=aravind.ramesh@wdc.com>)
- id 1jr1mz-0002cw-0h
+ id 1jr1mz-0001SS-0o
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Jul 2020 16:10:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -20,9 +20,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xCKjIlPaA7JFTATK0obclbXby+jF7EY7JMfly+LykHo=; b=d2Vq3f6p9HQeMOvAYOOVLJUGfZ
- cjSUr7+yhgBD9+n8I2GJTRBMp+kIhqSfRvhLXPUMSGGfoWHzMbZG5o/WOqO22VOnyVZQICTJ+ntZX
- kFqKHBK3n7nTbS1tetX0PKqa/K6Kav33XZDQBCXOpUAaoE3X3W1h3g9dhtTlwIp0/GDg=;
+ bh=puU+/7lkn1vCSY13moeAjROJef0CfzwzuYwuiNDA7q8=; b=KZ6cHqm7D+eHY9IIF72zrCSNW9
+ o4dcNF4ILPRnOe64T5bJPkKf6dBGtzUQQxXuKgF3RYj6B2NeIQvjH3YINwaYs18IISGq5yYITrUDV
+ qhdvRETFHV6C3W/9zXoZN+JHtZ7XKQ1HNsJEfsftpxWzGiIK87rL9lPshzpphbc0+c44=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,56 +30,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xCKjIlPaA7JFTATK0obclbXby+jF7EY7JMfly+LykHo=; b=nONnwnthRc4fgp0jrFjJLJJprD
- xp5S5oIhyLsNg6un5+bTcIma/U8wBW5ipnplmVoFC3o5rhTwFg95aah/uWcSAe1sPTEt0lndWXYcj
- hVK0JkB3LfeovkLPGqaL5Ts1IITyrhdxd3jLQJBmz/zxvehUQ+Z0WBuA3KlEhnx3MJVE=;
+ bh=puU+/7lkn1vCSY13moeAjROJef0CfzwzuYwuiNDA7q8=; b=PW8G9eQ4tJrzwtpUsBUGQtGVbV
+ BWcEP5CBZBprDoethfSR9nFVmbHm1mtGdHDnRqCTcBpnlr+e9LjjNhZUk7vndF++b+0yCuRBwej5+
+ rmVNwvw5et0GaXAq3m5jE7XAbir0FPIDVfkf1Xz5y+C9Es+Ts3s5wZuHQRX8qQ5mYN5Y=;
 Received: from esa3.hgst.iphmx.com ([216.71.153.141])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jr1mv-008t5N-6w
+ id 1jr1mx-005v6l-J1
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Jul 2020 16:10:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1593706213; x=1625242213;
+ t=1593706215; x=1625242215;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qcxNNA8zMpGAEr7DVYkjjU/qY0WOgivgsY/X9fFqK3Q=;
- b=EKi9uIXafcfrVpGUo3xUNty7A/Kq763rtzeOz6ioL1vfxabCvSg6ceL4
- tcDCCuEg1F5tUoMuTAhDiMVPc9+VQZ/VuMv5P3Iss8s4Z01Jj+qWQ/Ut1
- RsCATshVK7YUGGk3R9TuidSWPvmCJSX3ep4MRGBNwjG+dk6CHY/nownFY
- E1LjKHf5iy/OJOUMoXX1WD1LqZz9yGbscadYv484A+U8CEEVOidCNOJH2
- pROHVDvBLBEoMi7bu4Exbel/DgZu/83z1/zQUk7DvbH2CngYznhUnzQar
- 4mDpJaJyVnpOij67h1PTVV/fNlhTTXnDtGhQJb0PjwBIQSE6fr+PQJC13 Q==;
-IronPort-SDR: nXgeX1wINxx8WnO2J/FanDcGhOS1bY0vIk0y6AuoNG2LRW+36WNizlqBsNwOfFnHKIhurhZuCT
- xBk+XOdc1t/QDobSQrPq5RY7qYOvy9UG9qidcPuWJPqcOBhSUhTz0kbykxOj+vbU3Xcp0oVsmb
- ZunB+ztt38CQctk+wbgeGmT8CNyWjSu0uthCSl/ayLptbmFrlCnLl1fTU5HTfvHhB9noW71HyS
- yrrB5bgrbOx/78NfBHKq3SWG2c/QiY104wkspfJH81BKKomWHKO3pYediitgDJrz4eOgmOehQq
- Dxo=
-X-IronPort-AV: E=Sophos;i="5.75,304,1589212800"; d="scan'208";a="145822155"
+ bh=psDU1BnTjNuSBGsSZ/FFG4sR+Ydmjys7jN+WlJPAh1s=;
+ b=KVDwIbPJkmfJOy2AHezGGO3FoSlZi3OZ1nw4iv+CQTkSDDc0qyRgu43m
+ 81KtKjlokrxdiOc0PexTwCybVGO+vyCjUW4zxZylk7DjPT/EiloxJUtt7
+ /D3ftJ1VEXRvvSIZb4QHv2Fb/N9HheEmkkIIwVdjDmuUHYngoL7WtR8LA
+ 7PkCrqvZ1nxdWQQpG9WGjSGSHgRSnliUDVxgR8cKfA7XJAsiNE/FsOdg/
+ orvdiXEYg9rdMsZoYmo4tzuxcYIs59mBOgCupL09HTMaK73rOd1xIbw1F
+ a4HBuKjh7Ob2BEu2t8I6lCAkPcszZ+yx3EV5TdLYAMtQPK5tVFueNRc+5 w==;
+IronPort-SDR: puUhvi208yGx/CpDo6FM4QkJFIF7u4u6XrdQuNzxxFSJ9YziDzmOeuK0SsopcBvSv2AWNQJ6QK
+ JAV6YZwlR563XRca1UjF5ZosnCnvYLVvwIUNkHvG4MKMP9OoH7nqwgsaSAELJWegJl1H/2J+Nj
+ thfEkWN5LQp08QB4Kz3suL7d1Loe1O/zJ3Zgy5rH3PXnsdpZsFzPoXjW2mUJo/N39yia4DLLK8
+ MMJXx18XYEr0GTW3mHJZKSRiuwX76kZ6FM7krREbj5+IA5GUr49Gy4yzyAJo7HXqe7xGJEwj6O
+ tCg=
+X-IronPort-AV: E=Sophos;i="5.75,304,1589212800"; d="scan'208";a="145822163"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2020 23:54:36 +0800
-IronPort-SDR: b3vBug7Zj+RXvfK9R9bbYrWnQREVM/wcHu6McQXAwmrX3/8cMEKbTeQb7N8+D39JEbZxhZfjOw
- 0k32PVSgm5Nc7HRe9EzBtnjsibFgm7GwQ=
+ by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2020 23:54:39 +0800
+IronPort-SDR: qlcb52qrfhS2dkazJAKO3hGLDjwmFNDEOvurKZbhzqFGr0ttBxWWuORSbyCSgk3QNIlV+9eGuf
+ 4i3yWMC7DEtWe828N7xdFDGq67vkIFU8I=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Jul 2020 08:42:49 -0700
-IronPort-SDR: oehjMbT6UoYVCoGn5Xz6XApvU+Ty+ijPaYeJsFYQN5w4yg3UgbNVIErKo+j+bEjeDsABRI57pu
- eBdTBIGHfF6Q==
+ 02 Jul 2020 08:42:52 -0700
+IronPort-SDR: uF/hZqYV+V87QseFdoRDz0hipicLlAcdjchV98G63CHTvaaHfDLOtQPzU++UJW7KvDCo8IvHvf
+ 8tBThzrK+yFA==
 WDCIronportException: Internal
 Received: from aravind-workstation.hgst.com (HELO localhost.localdomain)
  ([10.64.18.44])
- by uls-op-cesaip01.wdc.com with ESMTP; 02 Jul 2020 08:54:33 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 02 Jul 2020 08:54:36 -0700
 From: Aravind Ramesh <aravind.ramesh@wdc.com>
 To: jaegeuk@kernel.org, yuchao0@huawei.com,
  linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  2 Jul 2020 21:24:26 +0530
-Message-Id: <20200702155427.13372-2-aravind.ramesh@wdc.com>
+Date: Thu,  2 Jul 2020 21:24:27 +0530
+Message-Id: <20200702155427.13372-3-aravind.ramesh@wdc.com>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20200702155427.13372-1-aravind.ramesh@wdc.com>
 References: <20200702155427.13372-1-aravind.ramesh@wdc.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -94,8 +94,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jr1mv-008t5N-6w
-Subject: [f2fs-dev] [PATCH 1/2] mkfs.f2fs: zns zone-capacity support.
+X-Headers-End: 1jr1mx-005v6l-J1
+Subject: [f2fs-dev] [PATCH 2/2] fsck.f2fs: validate free seg count on zns
+ device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,288 +113,156 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-NVM Express Zoned Namespace (ZNS) devices can have zone-capacity(zc) less
-than the zone-size. ZNS defines a per zone capacity which can be equal
-or less than the zone-size. Zone-capacity is the number of usable blocks
-in the zone. In such cases, the filesystem should not write/read beyond the
-zone-capacity. Update the super block with the usable number of blocks
-and free segment count in the ZNS device zones, if zone-capacity is less
-than zone-size. Set reserved segment count and overprovision ratio based
-on the usable segments in the zone.
+NVMe Zoned Namespace devices can have zone-capacity less than zone-size.
+Zone-capacity indicates the number of usable blocks in a zone, if
+zone-capacity is less than zone-size, then the segments which start
+at/after zone-capacity are considered unusable. Only those segments
+which start before the zone-capacity are considered as usable and added
+to the free_segment_count and free_segment_bitmap of the kernel.
+
+Allow fsck to find the free_segment_count based on the zone-capacity and
+compare with checkpoint values.
 
 Signed-off-by: Aravind Ramesh <aravind.ramesh@wdc.com>
 Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
 ---
- configure.ac        |  4 ++++
- include/f2fs_fs.h   | 40 +++++++++++++++++++++++++++++++----
- lib/libf2fs_io.c    |  1 +
- lib/libf2fs_zoned.c | 51 +++++++++++++++++++++++++++++++++++++++++++--
- mkfs/f2fs_format.c  | 26 ++++++++++++++++++-----
- 5 files changed, 111 insertions(+), 11 deletions(-)
+ fsck/fsck.c  |  5 ++--
+ fsck/fsck.h  |  2 ++
+ fsck/mount.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 78 insertions(+), 4 deletions(-)
 
-diff --git a/configure.ac b/configure.ac
-index 9ac0c24..e9acd1a 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -213,6 +213,10 @@ AC_CONFIG_FILES([
- 	tools/f2fs_io/Makefile
- ])
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index e110f3d..ba2340d 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -1905,11 +1905,12 @@ int fsck_chk_meta(struct f2fs_sb_info *sbi)
+ 		if (IS_NODESEG(se->type))
+ 			sit_node_blks += se->valid_blocks;
+ 	}
+-	if (fsck->chk.sit_free_segs + sit_valid_segs != TOTAL_SEGS(sbi)) {
++	if (fsck->chk.sit_free_segs + sit_valid_segs !=
++				get_usable_seg_count(sbi)) {
+ 		ASSERT_MSG("SIT usage does not match: sit_free_segs %u, "
+ 				"sit_valid_segs %u, total_segs %u",
+ 			fsck->chk.sit_free_segs, sit_valid_segs,
+-			TOTAL_SEGS(sbi));
++			get_usable_seg_count(sbi));
+ 		return -EINVAL;
+ 	}
  
-+AC_CHECK_MEMBER([struct blk_zone.capacity],
-+		[AC_DEFINE(HAVE_BLK_ZONE_REP_V2, [1], [report zones includes zone capacity])],
-+		[], [[#include <linux/blkzoned.h>]])
-+
- # export library version info for mkfs/libf2fs_format_la
- AC_SUBST(FMT_CURRENT, 6)
- AC_SUBST(FMT_REVISION, 0)
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 709bfd8..40165ed 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -332,6 +332,7 @@ struct device_info {
- 	u_int32_t nr_zones;
- 	u_int32_t nr_rnd_zones;
- 	size_t zone_blocks;
-+	size_t *zone_cap_blocks;
- };
+diff --git a/fsck/fsck.h b/fsck/fsck.h
+index bc6a435..e86730c 100644
+--- a/fsck/fsck.h
++++ b/fsck/fsck.h
+@@ -224,6 +224,8 @@ extern u32 update_nat_bits_flags(struct f2fs_super_block *,
+ 				struct f2fs_checkpoint *, u32);
+ extern void write_nat_bits(struct f2fs_sb_info *, struct f2fs_super_block *,
+ 			struct f2fs_checkpoint *, int);
++extern unsigned int get_usable_seg_count(struct f2fs_sb_info *);
++extern bool is_usable_seg(struct f2fs_sb_info *, unsigned int);
  
- typedef struct {
-@@ -1324,13 +1325,42 @@ blk_zone_cond_str(struct blk_zone *blkz)
- 	return "Unknown-cond";
- }
- 
--#define blk_zone_empty(z)	(blk_zone_cond(z) == BLK_ZONE_COND_EMPTY)
-+/*
-+ * Handle kernel zone capacity support
-+ */
-+#ifndef HAVE_BLK_ZONE_REP_V2
-+#define BLK_ZONE_REP_CAPACITY   (1 << 0)
-+struct blk_zone_v2 {
-+	__u64   start;          /* Zone start sector */
-+	__u64   len;            /* Zone length in number of sectors */
-+	__u64   wp;             /* Zone write pointer position */
-+	__u8    type;           /* Zone type */
-+	__u8    cond;           /* Zone condition */
-+	__u8    non_seq;        /* Non-sequential write resources active */
-+	__u8    reset;          /* Reset write pointer recommended */
-+	__u8    resv[4];
-+	__u64   capacity;       /* Zone capacity in number of sectors */
-+	__u8    reserved[24];
-+};
-+#define blk_zone blk_zone_v2
- 
-+struct blk_zone_report_v2 {
-+	__u64   sector;
-+	__u32   nr_zones;
-+	__u32   flags;
-+struct blk_zone zones[0];
-+};
-+#define blk_zone_report blk_zone_report_v2
-+#endif /* HAVE_BLK_ZONE_REP_V2 */
-+
-+#define blk_zone_empty(z)	(blk_zone_cond(z) == BLK_ZONE_COND_EMPTY)
- #define blk_zone_sector(z)	(z)->start
- #define blk_zone_length(z)	(z)->len
- #define blk_zone_wp_sector(z)	(z)->wp
- #define blk_zone_need_reset(z)	(int)(z)->reset
- #define blk_zone_non_seq(z)	(int)(z)->non_seq
-+#define blk_zone_capacity(z, f) ((f & BLK_ZONE_REP_CAPACITY) ? \
-+					(z)->capacity : (z)->len)
- 
+ /* dump.c */
+ struct dump_option {
+diff --git a/fsck/mount.c b/fsck/mount.c
+index d0f2eab..72ca0cb 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -30,6 +30,76 @@
+ #define ACL_OTHER		(0x20)
  #endif
  
-@@ -1342,6 +1372,7 @@ extern int f2fs_report_zones(int, report_zones_cb_t *, void *);
- extern int f2fs_check_zones(int);
- int f2fs_reset_zone(int, void *);
- extern int f2fs_reset_zones(int);
-+extern uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb);
- 
- #define SIZE_ALIGN(val, size)	((val) + (size) - 1) / (size)
- #define SEG_ALIGN(blks)		SIZE_ALIGN(blks, c.blks_per_seg)
-@@ -1352,6 +1383,7 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- {
- 	double reserved, ovp, candidate, end, diff, space;
- 	double max_ovp = 0, max_space = 0;
-+	u_int32_t usable_main_segs = f2fs_get_usable_segments(sb);
- 
- 	if (get_sb(segment_count_main) < 256) {
- 		candidate = 10;
-@@ -1365,9 +1397,9 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- 
- 	for (; candidate <= end; candidate += diff) {
- 		reserved = (2 * (100 / candidate + 1) + 6) *
--						get_sb(segs_per_sec);
--		ovp = (get_sb(segment_count_main) - reserved) * candidate / 100;
--		space = get_sb(segment_count_main) - reserved - ovp;
-+				(usable_main_segs / get_sb(section_count));
-+		ovp = (usable_main_segs - reserved) * candidate / 100;
-+		space = usable_main_segs - reserved - ovp;
- 		if (max_space < space) {
- 			max_space = space;
- 			max_ovp = candidate;
-diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
-index 1f597a9..138285d 100644
---- a/lib/libf2fs_io.c
-+++ b/lib/libf2fs_io.c
-@@ -784,6 +784,7 @@ int f2fs_finalize_device(void)
- 			break;
- 		}
- 		free(c.devices[i].path);
-+		free(c.devices[i].zone_cap_blocks);
- 	}
- 	close(c.kd);
- 
-diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
-index efc687c..f98fcdb 100644
---- a/lib/libf2fs_zoned.c
-+++ b/lib/libf2fs_zoned.c
-@@ -291,6 +291,13 @@ int f2fs_check_zones(int j)
- 		return -ENOMEM;
- 	}
- 
-+	dev->zone_cap_blocks = malloc(dev->nr_zones * sizeof(size_t));
-+	if (!dev->zone_cap_blocks) {
-+		ERR_MSG("No memory for zone capacity list.\n");
-+		return -ENOMEM;
-+	}
-+	memset(dev->zone_cap_blocks, 0, (dev->nr_zones * sizeof(size_t)));
-+
- 	dev->nr_rnd_zones = 0;
- 	sector = 0;
- 	total_sectors = (dev->total_sectors * c.sector_size) >> 9;
-@@ -335,10 +342,15 @@ int f2fs_check_zones(int j)
- 				    blk_zone_cond_str(blkz),
- 				    blk_zone_sector(blkz),
- 				    blk_zone_length(blkz));
-+				dev->zone_cap_blocks[n] =
-+					blk_zone_length(blkz) >>
-+					(F2FS_BLKSIZE_BITS - SECTOR_SHIFT);
- 			} else {
- 				DBG(2,
--				    "Zone %05u: type 0x%x (%s), cond 0x%x (%s), need_reset %d, "
--				    "non_seq %d, sector %llu, %llu sectors, wp sector %llu\n",
-+				    "Zone %05u: type 0x%x (%s), cond 0x%x (%s),"
-+				    " need_reset %d, non_seq %d, sector %llu,"
-+				    " %llu sectors, capacity %llu,"
-+				    " wp sector %llu\n",
- 				    n,
- 				    blk_zone_type(blkz),
- 				    blk_zone_type_str(blkz),
-@@ -348,7 +360,11 @@ int f2fs_check_zones(int j)
- 				    blk_zone_non_seq(blkz),
- 				    blk_zone_sector(blkz),
- 				    blk_zone_length(blkz),
-+				    blk_zone_capacity(blkz, rep->flags),
- 				    blk_zone_wp_sector(blkz));
-+				dev->zone_cap_blocks[n] =
-+					blk_zone_capacity(blkz, rep->flags) >>
-+					(F2FS_BLKSIZE_BITS - SECTOR_SHIFT);
- 			}
- 
- 			sector = blk_zone_sector(blkz) + blk_zone_length(blkz);
-@@ -473,6 +489,33 @@ out:
- 	return ret;
- }
- 
-+uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb)
++static int get_device_idx(struct f2fs_sb_info *sbi, u_int32_t segno)
 +{
-+#ifdef HAVE_BLK_ZONE_REP_V2
-+	int i, j;
-+	uint32_t usable_segs = 0, zone_segs;
-+	for (i = 0; i < c.ndevs; i++) {
-+		if (c.devices[i].zoned_model != F2FS_ZONED_HM) {
-+			usable_segs += c.devices[i].total_segments;
-+			continue;
-+		}
-+		for (j = 0; j < c.devices[i].nr_zones; j++) {
-+			zone_segs = c.devices[i].zone_cap_blocks[j] >>
-+					get_sb(log_blocks_per_seg);
-+			if (c.devices[i].zone_cap_blocks[j] %
-+						DEFAULT_BLOCKS_PER_SEGMENT)
-+				usable_segs += zone_segs + 1;
-+			else
-+				usable_segs += zone_segs;
-+		}
-+	}
-+	usable_segs -= (get_sb(main_blkaddr) - get_sb(segment0_blkaddr)) >>
-+						get_sb(log_blocks_per_seg);
-+	return usable_segs;
++	block_t seg_start_blkaddr;
++	int i;
++
++	seg_start_blkaddr = SM_I(sbi)->main_blkaddr +
++				segno * DEFAULT_BLOCKS_PER_SEGMENT;
++	for (i = 0; i < c.ndevs; i++)
++		if (c.devices[i].start_blkaddr <= seg_start_blkaddr &&
++			c.devices[i].end_blkaddr > seg_start_blkaddr)
++			return i;
++	return 0;
++}
++
++#ifdef HAVE_LINUX_BLKZONED_H
++
++static int get_zone_idx_from_dev(struct f2fs_sb_info *sbi,
++					u_int32_t segno, u_int32_t dev_idx)
++{
++	block_t seg_start_blkaddr = START_BLOCK(sbi, segno);
++
++	return (seg_start_blkaddr - c.devices[dev_idx].start_blkaddr) >>
++			log_base_2(sbi->segs_per_sec * sbi->blocks_per_seg);
++}
++
++bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
++{
++	unsigned int secno = segno / sbi->segs_per_sec;
++	block_t seg_start = START_BLOCK(sbi, segno);
++	block_t blocks_per_sec = sbi->blocks_per_seg * sbi->segs_per_sec;
++	unsigned int dev_idx = get_device_idx(sbi, segno);
++	unsigned int zone_idx = get_zone_idx_from_dev(sbi, segno, dev_idx);
++	unsigned int sec_off = SM_I(sbi)->main_blkaddr >>
++						log_base_2(blocks_per_sec);
++
++	if (zone_idx < c.devices[dev_idx].nr_rnd_zones)
++		return true;
++
++	if (c.devices[dev_idx].zoned_model != F2FS_ZONED_HM)
++		return true;
++
++	return seg_start < ((sec_off + secno) * blocks_per_sec) +
++				c.devices[dev_idx].zone_cap_blocks[zone_idx];
++}
++
++unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
++{
++	unsigned int i, usable_seg_count = 0;
++
++	for (i = 0; i < TOTAL_SEGS(sbi); i++)
++		if (is_usable_seg(sbi, i))
++			usable_seg_count++;
++
++	return usable_seg_count;
++}
++
++#else
++
++bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
++{
++	return true;
++}
++
++unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
++{
++	return TOTAL_SEGS(sbi);
++}
++
 +#endif
-+	return get_sb(segment_count_main);
-+}
 +
- #else
+ u32 get_free_segments(struct f2fs_sb_info *sbi)
+ {
+ 	u32 i, free_segs = 0;
+@@ -37,7 +107,8 @@ u32 get_free_segments(struct f2fs_sb_info *sbi)
+ 	for (i = 0; i < TOTAL_SEGS(sbi); i++) {
+ 		struct seg_entry *se = get_seg_entry(sbi, i);
  
- int f2fs_report_zone(int i, u_int64_t UNUSED(sector), void *UNUSED(blkzone))
-@@ -527,5 +570,9 @@ int f2fs_reset_zones(int i)
- 	return -1;
- }
+-		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i))
++		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i) &&
++							is_usable_seg(sbi, i))
+ 			free_segs++;
+ 	}
+ 	return free_segs;
+@@ -2337,7 +2408,7 @@ void build_sit_area_bitmap(struct f2fs_sb_info *sbi)
+ 		memcpy(ptr, se->cur_valid_map, SIT_VBLOCK_MAP_SIZE);
+ 		ptr += SIT_VBLOCK_MAP_SIZE;
  
-+uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb)
-+{
-+	return get_sb(segment_count_main);
-+}
- #endif
- 
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 4999cac..74a81c8 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -425,13 +425,19 @@ static int f2fs_prepare_super_block(void)
- 
- 	set_sb(segment_count_main, get_sb(section_count) * c.segs_per_sec);
- 
--	/* Let's determine the best reserved and overprovisioned space */
-+	/*
-+	 * Let's determine the best reserved and overprovisioned space.
-+	 * For Zoned device, if zone capacity less than zone size, the segments
-+	 * starting after the zone capacity are unusable in each zone. So get
-+	 * overprovision ratio and reserved seg count based on avg usable
-+	 * segs_per_sec.
-+	 */
- 	if (c.overprovision == 0)
- 		c.overprovision = get_best_overprovision(sb);
- 
- 	c.reserved_segments =
--			(2 * (100 / c.overprovision + 1) + NR_CURSEG_TYPE)
--			* c.segs_per_sec;
-+			(2 * (100 / c.overprovision + 1) + NR_CURSEG_TYPE) *
-+			(f2fs_get_usable_segments(sb) / get_sb(section_count));
- 
- 	if (c.overprovision == 0 || c.total_segments < F2FS_MIN_SEGMENTS ||
- 		(c.devices[0].total_sectors *
-@@ -672,19 +678,29 @@ static int f2fs_write_check_point_pack(void)
- 	set_cp(valid_block_count, 2 + c.quota_inum + c.quota_dnum +
- 			c.lpf_inum + c.lpf_dnum);
- 	set_cp(rsvd_segment_count, c.reserved_segments);
--	set_cp(overprov_segment_count, (get_sb(segment_count_main) -
-+
-+	/*
-+	 * For zoned devices, if zone capacity less than zone size, get
-+	 * overprovision segment count based on usable segments in the device.
-+	 */
-+	set_cp(overprov_segment_count, (f2fs_get_usable_segments(sb) -
- 			get_cp(rsvd_segment_count)) *
- 			c.overprovision / 100);
- 	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
- 			get_cp(rsvd_segment_count));
- 
-+	if (f2fs_get_usable_segments(sb) < (get_cp(rsvd_segment_count) +
-+					get_cp(overprov_segment_count))) {
-+		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
-+		goto free_nat_bits;
-+	}
- 	MSG(0, "Info: Overprovision ratio = %.3lf%%\n", c.overprovision);
- 	MSG(0, "Info: Overprovision segments = %u (GC reserved = %u)\n",
- 					get_cp(overprov_segment_count),
- 					c.reserved_segments);
- 
- 	/* main segments - reserved segments - (node + data segments) */
--	set_cp(free_segment_count, get_sb(segment_count_main) - 6);
-+	set_cp(free_segment_count, f2fs_get_usable_segments(sb) - 6);
- 	set_cp(user_block_count, ((get_cp(free_segment_count) + 6 -
- 			get_cp(overprov_segment_count)) * c.blks_per_seg));
- 	/* cp page (2), data summaries (1), node summaries (3) */
+-		if (se->valid_blocks == 0x0) {
++		if (se->valid_blocks == 0x0 && is_usable_seg(sbi, segno)) {
+ 			if (le32_to_cpu(sbi->ckpt->cur_node_segno[0]) == segno ||
+ 				le32_to_cpu(sbi->ckpt->cur_data_segno[0]) == segno ||
+ 				le32_to_cpu(sbi->ckpt->cur_node_segno[1]) == segno ||
 -- 
 2.19.1
 
