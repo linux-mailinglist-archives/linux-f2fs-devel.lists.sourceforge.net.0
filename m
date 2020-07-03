@@ -2,101 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D511212912
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jul 2020 18:10:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B7AE2130CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Jul 2020 03:02:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=2Kq/OqN6uJ7YeMbFcZ75ZmLSYf/65pylFJ2P80h25xk=; b=glBuZgM6IJbNJRQBTsUOgGI+pm
+	wWji/xpmUg/ApXRlL/UWjs9SvrXpkqOxvIXR0lDfAbH61qU4EP7BC+BiqaXI3pFFGMmnlnzaXgw6B
+	FIZhWIv6LPxgfBH0hPNm45IkJAQqu4/gOZM0FXwVoiArt4kxbgCKAM+AdwwhQdAUVe60=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jr1n4-0001T7-3D; Thu, 02 Jul 2020 16:10:22 +0000
+	id 1jrA5W-000131-9R; Fri, 03 Jul 2020 01:01:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=44573aa05=aravind.ramesh@wdc.com>)
- id 1jr1mz-0001SS-0o
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Jul 2020 16:10:17 +0000
+ (envelope-from <drosen@google.com>) id 1jrA5U-00012t-Bo
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jul 2020 01:01:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=puU+/7lkn1vCSY13moeAjROJef0CfzwzuYwuiNDA7q8=; b=KZ6cHqm7D+eHY9IIF72zrCSNW9
- o4dcNF4ILPRnOe64T5bJPkKf6dBGtzUQQxXuKgF3RYj6B2NeIQvjH3YINwaYs18IISGq5yYITrUDV
- qhdvRETFHV6C3W/9zXoZN+JHtZ7XKQ1HNsJEfsftpxWzGiIK87rL9lPshzpphbc0+c44=;
+ bh=+0u5TnXqElmJHIUbIwfyg0UnTaWODXR+GC+hM1QsUz4=; b=e3cqaFkzNUTFHUdg8ctBWwOr9u
+ 71me8AK11iwgPK+bmKUqVj9d4Nos7sNWVjsxLsKe5/PYNqB2tYSzWUoYMzqHLsi0go0lX4CYDjxor
+ Ycf1ZEGp21kjgnNhzNLTAAOO+LMXkJnyW67T/Kl3YwFtY9Y+4cBtUtXQKqJJzdy1n5RA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=puU+/7lkn1vCSY13moeAjROJef0CfzwzuYwuiNDA7q8=; b=PW8G9eQ4tJrzwtpUsBUGQtGVbV
- BWcEP5CBZBprDoethfSR9nFVmbHm1mtGdHDnRqCTcBpnlr+e9LjjNhZUk7vndF++b+0yCuRBwej5+
- rmVNwvw5et0GaXAq3m5jE7XAbir0FPIDVfkf1Xz5y+C9Es+Ts3s5wZuHQRX8qQ5mYN5Y=;
-Received: from esa3.hgst.iphmx.com ([216.71.153.141])
+ bh=+0u5TnXqElmJHIUbIwfyg0UnTaWODXR+GC+hM1QsUz4=; b=jOrNmDWWlLhpXbjM9nRqCmBOGB
+ oM+wt3eDWkxXb/U6/QceaveMci4XM58LtvG6MyqCPe8Usd7LerKhrtCYNyh5fdYAhPrmPGuz3skVT
+ 6WjKx5dRX4sbuRch/+9IA1yrEwdhZ72en++EnTbR0/lSfI1+7vduhh8kRAsPUOe5vV+A=;
+Received: from mail-ot1-f67.google.com ([209.85.210.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jr1mx-005v6l-J1
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Jul 2020 16:10:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1593706215; x=1625242215;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=psDU1BnTjNuSBGsSZ/FFG4sR+Ydmjys7jN+WlJPAh1s=;
- b=KVDwIbPJkmfJOy2AHezGGO3FoSlZi3OZ1nw4iv+CQTkSDDc0qyRgu43m
- 81KtKjlokrxdiOc0PexTwCybVGO+vyCjUW4zxZylk7DjPT/EiloxJUtt7
- /D3ftJ1VEXRvvSIZb4QHv2Fb/N9HheEmkkIIwVdjDmuUHYngoL7WtR8LA
- 7PkCrqvZ1nxdWQQpG9WGjSGSHgRSnliUDVxgR8cKfA7XJAsiNE/FsOdg/
- orvdiXEYg9rdMsZoYmo4tzuxcYIs59mBOgCupL09HTMaK73rOd1xIbw1F
- a4HBuKjh7Ob2BEu2t8I6lCAkPcszZ+yx3EV5TdLYAMtQPK5tVFueNRc+5 w==;
-IronPort-SDR: puUhvi208yGx/CpDo6FM4QkJFIF7u4u6XrdQuNzxxFSJ9YziDzmOeuK0SsopcBvSv2AWNQJ6QK
- JAV6YZwlR563XRca1UjF5ZosnCnvYLVvwIUNkHvG4MKMP9OoH7nqwgsaSAELJWegJl1H/2J+Nj
- thfEkWN5LQp08QB4Kz3suL7d1Loe1O/zJ3Zgy5rH3PXnsdpZsFzPoXjW2mUJo/N39yia4DLLK8
- MMJXx18XYEr0GTW3mHJZKSRiuwX76kZ6FM7krREbj5+IA5GUr49Gy4yzyAJo7HXqe7xGJEwj6O
- tCg=
-X-IronPort-AV: E=Sophos;i="5.75,304,1589212800"; d="scan'208";a="145822163"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2020 23:54:39 +0800
-IronPort-SDR: qlcb52qrfhS2dkazJAKO3hGLDjwmFNDEOvurKZbhzqFGr0ttBxWWuORSbyCSgk3QNIlV+9eGuf
- 4i3yWMC7DEtWe828N7xdFDGq67vkIFU8I=
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Jul 2020 08:42:52 -0700
-IronPort-SDR: uF/hZqYV+V87QseFdoRDz0hipicLlAcdjchV98G63CHTvaaHfDLOtQPzU++UJW7KvDCo8IvHvf
- 8tBThzrK+yFA==
-WDCIronportException: Internal
-Received: from aravind-workstation.hgst.com (HELO localhost.localdomain)
- ([10.64.18.44])
- by uls-op-cesaip01.wdc.com with ESMTP; 02 Jul 2020 08:54:36 -0700
-From: Aravind Ramesh <aravind.ramesh@wdc.com>
-To: jaegeuk@kernel.org, yuchao0@huawei.com,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  2 Jul 2020 21:24:27 +0530
-Message-Id: <20200702155427.13372-3-aravind.ramesh@wdc.com>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20200702155427.13372-1-aravind.ramesh@wdc.com>
-References: <20200702155427.13372-1-aravind.ramesh@wdc.com>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jrA5S-006QXH-Vh
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Jul 2020 01:01:56 +0000
+Received: by mail-ot1-f67.google.com with SMTP id n24so23316015otr.13
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 02 Jul 2020 18:01:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+0u5TnXqElmJHIUbIwfyg0UnTaWODXR+GC+hM1QsUz4=;
+ b=oOqDzf9UhdHQiWfizW6yxKYuiXycU3fWLPwduq8AH7hV/7gSiEHYYCaf1R8F2ctgqG
+ Ctt5zAILp2PI93b4Q9sIqk+bct1cHbzT8Yw9+IcOxwWKgWbCaachSWq9et+Yf8XtLZAo
+ 4PfjLQ2EBIkG8ZapbfVu6Be6/Vu8TcYpCdwMqVXiYNjxd4suP9wdDfoO3oqnw035dU8n
+ /R6DDvFq0BMQXLdQ3Ov60bKRizaMZFmcKMO6VN+JDo/z+/DFAUQ/rBIJ0OdRJmHbICOW
+ lVBzFxBYsXOkdcGMH5/fGPjcJF+UWV/JV1fhleZLJ4KwG6qXoSH5MyKRsJ+/bO2HGygC
+ mIWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+0u5TnXqElmJHIUbIwfyg0UnTaWODXR+GC+hM1QsUz4=;
+ b=QQ+EdtHCoTJ89lUUDcdjm5IG5Wy4c+Xz8Y4bajVWTGozje5Au2LHzXofIecKfa4kBO
+ ZuF77+b9wfX4CtIl9OeiGYudbXn9NdpsDH2SKZzfs8F1y5hrHUK6TudBM/AXa3QQKGDt
+ He6StM9dKfNgOBq/12ggknFQO4N2EhuzIWE9AYLujzXV3zkvCajOaUCCDDzSu+KQjaAj
+ ASYtlHqlGASuGzRSQgPh4llOBUowDPrlca5YrV0SembJTVJPen/3o8RBi3dH48GAVx97
+ INGASbXGZQHTOPEjI5PY4eh3BdLE6CtDj7FZT0UohunP/9HZFLN84flxMkVmrDsrJmDw
+ 1AUg==
+X-Gm-Message-State: AOAM530X9yJ6JqeNMtYuKF57c/TWYm/a1FGuBQ+Q0Q+1H0GabSp2Yiak
+ Fw7DX5zR8SwvEmaGL4dRhEmibItGHI3mP4aaF2RCOg==
+X-Google-Smtp-Source: ABdhPJxyzjPijsRL1V11XOG//slLi4ypOVvA8gCAeJn23Y/3chvpbEFZmi5lFQBGL/hRDveD1WrFac5iKC6RBaNTr+k=
+X-Received: by 2002:a9d:6d98:: with SMTP id x24mr18707612otp.93.1593738109138; 
+ Thu, 02 Jul 2020 18:01:49 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+References: <20200624043341.33364-1-drosen@google.com>
+ <20200624043341.33364-3-drosen@google.com>
+ <20200624055707.GG844@sol.localdomain>
+In-Reply-To: <20200624055707.GG844@sol.localdomain>
+Date: Thu, 2 Jul 2020 18:01:37 -0700
+Message-ID: <CA+PiJmTDXTKnccJdADX=ir+PtqsDD72xHGbzObpntkjkVmKHxQ@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: -15.6 (---------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: wdc.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.67 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jr1mx-005v6l-J1
-Subject: [f2fs-dev] [PATCH 2/2] fsck.f2fs: validate free seg count on zns
- device
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1jrA5S-006QXH-Vh
+Subject: Re: [f2fs-dev] [PATCH v9 2/4] fs: Add standard casefolding support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,164 +114,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Aravind Ramesh <aravind.ramesh@wdc.com>, matias.bjorling@wdc.com
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: kernel-team@android.com, Theodore Ts'o <tytso@mit.edu>,
+ Jonathan Corbet <corbet@lwn.net>, Richard Weinberger <richard@nod.at>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-NVMe Zoned Namespace devices can have zone-capacity less than zone-size.
-Zone-capacity indicates the number of usable blocks in a zone, if
-zone-capacity is less than zone-size, then the segments which start
-at/after zone-capacity are considered unusable. Only those segments
-which start before the zone-capacity are considered as usable and added
-to the free_segment_count and free_segment_bitmap of the kernel.
+On Tue, Jun 23, 2020 at 10:57 PM Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> Note that the '!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir)' check can
+> be racy, because a process can be looking up a no-key token in a directory while
+> concurrently another process initializes the directory's ->i_crypt_info, causing
+> fscrypt_has_encryption_key(dir) to suddenly start returning true.
+>
+> In my rework of filename handling in f2fs, I actually ended up removing all
+> calls to needs_casefold(), thus avoiding this race.  f2fs now decides whether
+> the name is going to need casefolding early on, in __f2fs_setup_filename(),
+> where it knows in a race-free way whether the filename is a no-key token or not.
+>
+> Perhaps ext4 should work the same way?  It did look like there would be some
+> extra complexity due to how the ext4 directory hashing works in comparison to
+> f2fs's, but I haven't had a chance to properly investigate it.
+>
+> - Eric
 
-Allow fsck to find the free_segment_count based on the zone-capacity and
-compare with checkpoint values.
-
-Signed-off-by: Aravind Ramesh <aravind.ramesh@wdc.com>
-Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
----
- fsck/fsck.c  |  5 ++--
- fsck/fsck.h  |  2 ++
- fsck/mount.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++--
- 3 files changed, 78 insertions(+), 4 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index e110f3d..ba2340d 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1905,11 +1905,12 @@ int fsck_chk_meta(struct f2fs_sb_info *sbi)
- 		if (IS_NODESEG(se->type))
- 			sit_node_blks += se->valid_blocks;
- 	}
--	if (fsck->chk.sit_free_segs + sit_valid_segs != TOTAL_SEGS(sbi)) {
-+	if (fsck->chk.sit_free_segs + sit_valid_segs !=
-+				get_usable_seg_count(sbi)) {
- 		ASSERT_MSG("SIT usage does not match: sit_free_segs %u, "
- 				"sit_valid_segs %u, total_segs %u",
- 			fsck->chk.sit_free_segs, sit_valid_segs,
--			TOTAL_SEGS(sbi));
-+			get_usable_seg_count(sbi));
- 		return -EINVAL;
- 	}
- 
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index bc6a435..e86730c 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -224,6 +224,8 @@ extern u32 update_nat_bits_flags(struct f2fs_super_block *,
- 				struct f2fs_checkpoint *, u32);
- extern void write_nat_bits(struct f2fs_sb_info *, struct f2fs_super_block *,
- 			struct f2fs_checkpoint *, int);
-+extern unsigned int get_usable_seg_count(struct f2fs_sb_info *);
-+extern bool is_usable_seg(struct f2fs_sb_info *, unsigned int);
- 
- /* dump.c */
- struct dump_option {
-diff --git a/fsck/mount.c b/fsck/mount.c
-index d0f2eab..72ca0cb 100644
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -30,6 +30,76 @@
- #define ACL_OTHER		(0x20)
- #endif
- 
-+static int get_device_idx(struct f2fs_sb_info *sbi, u_int32_t segno)
-+{
-+	block_t seg_start_blkaddr;
-+	int i;
-+
-+	seg_start_blkaddr = SM_I(sbi)->main_blkaddr +
-+				segno * DEFAULT_BLOCKS_PER_SEGMENT;
-+	for (i = 0; i < c.ndevs; i++)
-+		if (c.devices[i].start_blkaddr <= seg_start_blkaddr &&
-+			c.devices[i].end_blkaddr > seg_start_blkaddr)
-+			return i;
-+	return 0;
-+}
-+
-+#ifdef HAVE_LINUX_BLKZONED_H
-+
-+static int get_zone_idx_from_dev(struct f2fs_sb_info *sbi,
-+					u_int32_t segno, u_int32_t dev_idx)
-+{
-+	block_t seg_start_blkaddr = START_BLOCK(sbi, segno);
-+
-+	return (seg_start_blkaddr - c.devices[dev_idx].start_blkaddr) >>
-+			log_base_2(sbi->segs_per_sec * sbi->blocks_per_seg);
-+}
-+
-+bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
-+{
-+	unsigned int secno = segno / sbi->segs_per_sec;
-+	block_t seg_start = START_BLOCK(sbi, segno);
-+	block_t blocks_per_sec = sbi->blocks_per_seg * sbi->segs_per_sec;
-+	unsigned int dev_idx = get_device_idx(sbi, segno);
-+	unsigned int zone_idx = get_zone_idx_from_dev(sbi, segno, dev_idx);
-+	unsigned int sec_off = SM_I(sbi)->main_blkaddr >>
-+						log_base_2(blocks_per_sec);
-+
-+	if (zone_idx < c.devices[dev_idx].nr_rnd_zones)
-+		return true;
-+
-+	if (c.devices[dev_idx].zoned_model != F2FS_ZONED_HM)
-+		return true;
-+
-+	return seg_start < ((sec_off + secno) * blocks_per_sec) +
-+				c.devices[dev_idx].zone_cap_blocks[zone_idx];
-+}
-+
-+unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
-+{
-+	unsigned int i, usable_seg_count = 0;
-+
-+	for (i = 0; i < TOTAL_SEGS(sbi); i++)
-+		if (is_usable_seg(sbi, i))
-+			usable_seg_count++;
-+
-+	return usable_seg_count;
-+}
-+
-+#else
-+
-+bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
-+{
-+	return true;
-+}
-+
-+unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
-+{
-+	return TOTAL_SEGS(sbi);
-+}
-+
-+#endif
-+
- u32 get_free_segments(struct f2fs_sb_info *sbi)
- {
- 	u32 i, free_segs = 0;
-@@ -37,7 +107,8 @@ u32 get_free_segments(struct f2fs_sb_info *sbi)
- 	for (i = 0; i < TOTAL_SEGS(sbi); i++) {
- 		struct seg_entry *se = get_seg_entry(sbi, i);
- 
--		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i))
-+		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i) &&
-+							is_usable_seg(sbi, i))
- 			free_segs++;
- 	}
- 	return free_segs;
-@@ -2337,7 +2408,7 @@ void build_sit_area_bitmap(struct f2fs_sb_info *sbi)
- 		memcpy(ptr, se->cur_valid_map, SIT_VBLOCK_MAP_SIZE);
- 		ptr += SIT_VBLOCK_MAP_SIZE;
- 
--		if (se->valid_blocks == 0x0) {
-+		if (se->valid_blocks == 0x0 && is_usable_seg(sbi, segno)) {
- 			if (le32_to_cpu(sbi->ckpt->cur_node_segno[0]) == segno ||
- 				le32_to_cpu(sbi->ckpt->cur_data_segno[0]) == segno ||
- 				le32_to_cpu(sbi->ckpt->cur_node_segno[1]) == segno ||
--- 
-2.19.1
-
+Hm. I think I should be able to just check for DCACHE_ENCRYPTED_NAME
+in the dentry here, right? I'm just trying to avoid casefolding the
+no-key token, and that flag should indicate that.
+I'll see if I can rework the ext4 patches to not need needs_casefold
+as well, since then there'd be no need to export it.
+-Daniel
 
 
 _______________________________________________
