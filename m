@@ -2,66 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D5F8215577
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jul 2020 12:24:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16D3E215580
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jul 2020 12:27:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jsOI3-0006C8-Fe; Mon, 06 Jul 2020 10:23:59 +0000
+	id 1jsOLY-0002O8-Lc; Mon, 06 Jul 2020 10:27:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jsOI1-0006Bz-FD
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jul 2020 10:23:57 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jsOLX-0002Ll-5h
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jul 2020 10:27:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DafbOPZXse2qG9mU/zPzLC9NZXxdax8B6ydi2oS0r2Q=; b=lCdmQ0zDgGITBJu4BZyeQ58FjP
- baQ3u4wm0WYU3eZ2kkjh4vpqyAgd3v6ohZ8gr06av+WqPzeEWMecSOgJJvO0tIF5iHJH7qu6LRM+J
- zMKqZzZOP6GToqHjgKpZexBUF30HhYGvGkQ5y5efGH56BDlq/STcKgAhilDUd0/5kWnw=;
+ bh=I2QPj3z5h5fBq7GENne+Ts78iaWb38XwPQyD0YN+/lw=; b=mjWHsRgl2WUx2eGUgnKct2lmL3
+ Gmjd8MEQLCXV6mFakNoBwoEEzXBoxLrqtFlxm0imJ6LPMBBZG/INXOA4nnupwbgecIu7Et1njHjje
+ hQ61HYDrHfht7LSPeMfc5PFrJbwBYm+K6H0S+31tnM4JnXbNgyLk18GBBmmtkca4dJ84=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DafbOPZXse2qG9mU/zPzLC9NZXxdax8B6ydi2oS0r2Q=; b=L
- NohWP4CjT9Lvhi3Uxmn3yCqyX3Yc807SXVJe9liQ2xfTTTv12W6VFmn+vTw/vTWfB2S4lzgqCR4+e
- GpJzeWPCso41z8eC8M+X3wsISoH4UWUHcfHK7OPSf8XWoQbF9eVyVBLdWRavfvrbFek3cF266/IzQ
- Jkoqu+7bMyj/bJzs=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=I2QPj3z5h5fBq7GENne+Ts78iaWb38XwPQyD0YN+/lw=; b=BJwEt+EmWiQ67w3TwmJKabFw3r
+ ATnnooew20f3r7isVYptb8KVgreuXbVX+5otEYFSP9iAYu9fzOz2LM4+YDZx22zerwzv8icQHD2sw
+ iMpK2zggE5BZI2D1xXTIe6wREHnIwUVKwHsRNQK3yFnBqTgpSGo8QdS99nYzV9TtfCNM=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsOHy-00CB4h-W2
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jul 2020 10:23:57 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 4E3004593BAAE09BC4BC;
- Mon,  6 Jul 2020 18:23:47 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS413-HUB.china.huawei.com (10.3.19.213) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 6 Jul 2020 18:23:40 +0800
+ id 1jsOLS-00CBEI-Lq
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jul 2020 10:27:35 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 33B7A4505541926D5931;
+ Mon,  6 Jul 2020 18:27:24 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 6 Jul 2020
+ 18:27:21 +0800
+To: lampahome <pahome.chen@mirlab.org>
+References: <CAB3eZfvyo4OzN_odXsnvDO6E=YHTt4qe5CXqQUyG7Mrk+MhzaQ@mail.gmail.com>
+ <0ea89e42-8ea7-5557-8717-26d2e6965104@huawei.com>
+ <CAB3eZfsjaNxMK+0HqYNAQQgksgGZNOO7QAXoT_Lgqr1+mPss3w@mail.gmail.com>
+ <a80be8b3-75d1-33c8-a4da-b4c336ae53be@huawei.com>
+ <CAB3eZfuVcAz56N5Cb8+BEsdRtfLWxxd0O+=aY8+qFhFaiAZWLw@mail.gmail.com>
+ <2b4fc09f-126c-9f33-9f56-4e72d51eb012@huawei.com>
+ <CAB3eZfumC+gx2ccnhOqG7ZLx+6bd0VLuBOS6G2WNqz843vC_+A@mail.gmail.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Mon, 6 Jul 2020 18:23:36 +0800
-Message-ID: <20200706102336.16955-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
+Message-ID: <7dafaedf-1efa-6e78-f3c4-fea93f4045a9@huawei.com>
+Date: Mon, 6 Jul 2020 18:27:21 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <CAB3eZfumC+gx2ccnhOqG7ZLx+6bd0VLuBOS6G2WNqz843vC_+A@mail.gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsOHy-00CB4h-W2
-Subject: [f2fs-dev] [PATCH] f2fs: fix error path in do_recover_data()
+X-Headers-End: 1jsOLS-00CBEI-Lq
+Subject: Re: [f2fs-dev] Can I know if now is gc-ing or checkpointing?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,166 +83,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-- don't panic kernel if f2fs_get_node_page() fails in
-f2fs_recover_inline_data() or f2fs_recover_inline_xattr();
-- return error number of f2fs_truncate_blocks() to
-f2fs_recover_inline_data()'s caller;
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/f2fs.h     |  4 ++--
- fs/f2fs/inline.c   | 19 ++++++++++++-------
- fs/f2fs/node.c     |  6 ++++--
- fs/f2fs/recovery.c | 10 ++++++++--
- 4 files changed, 26 insertions(+), 13 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b3905cbbf731..ef4babc96723 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3345,7 +3345,7 @@ bool f2fs_alloc_nid(struct f2fs_sb_info *sbi, nid_t *nid);
- void f2fs_alloc_nid_done(struct f2fs_sb_info *sbi, nid_t nid);
- void f2fs_alloc_nid_failed(struct f2fs_sb_info *sbi, nid_t nid);
- int f2fs_try_to_free_nids(struct f2fs_sb_info *sbi, int nr_shrink);
--void f2fs_recover_inline_xattr(struct inode *inode, struct page *page);
-+int f2fs_recover_inline_xattr(struct inode *inode, struct page *page);
- int f2fs_recover_xattr_data(struct inode *inode, struct page *page);
- int f2fs_recover_inode_page(struct f2fs_sb_info *sbi, struct page *page);
- int f2fs_restore_node_summary(struct f2fs_sb_info *sbi,
-@@ -3820,7 +3820,7 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page);
- int f2fs_convert_inline_inode(struct inode *inode);
- int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry);
- int f2fs_write_inline_data(struct inode *inode, struct page *page);
--bool f2fs_recover_inline_data(struct inode *inode, struct page *npage);
-+int f2fs_recover_inline_data(struct inode *inode, struct page *npage);
- struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
- 					const struct f2fs_filename *fname,
- 					struct page **res_page);
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index def4b8481883..102df444f623 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -254,7 +254,7 @@ int f2fs_write_inline_data(struct inode *inode, struct page *page)
- 	return 0;
- }
- 
--bool f2fs_recover_inline_data(struct inode *inode, struct page *npage)
-+int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct f2fs_inode *ri = NULL;
-@@ -276,7 +276,8 @@ bool f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 			ri && (ri->i_inline & F2FS_INLINE_DATA)) {
- process_inline:
- 		ipage = f2fs_get_node_page(sbi, inode->i_ino);
--		f2fs_bug_on(sbi, IS_ERR(ipage));
-+		if (IS_ERR(ipage))
-+			return PTR_ERR(ipage);
- 
- 		f2fs_wait_on_page_writeback(ipage, NODE, true, true);
- 
-@@ -289,21 +290,25 @@ bool f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 
- 		set_page_dirty(ipage);
- 		f2fs_put_page(ipage, 1);
--		return true;
-+		return 1;
- 	}
- 
- 	if (f2fs_has_inline_data(inode)) {
- 		ipage = f2fs_get_node_page(sbi, inode->i_ino);
--		f2fs_bug_on(sbi, IS_ERR(ipage));
-+		if (IS_ERR(ipage))
-+			return PTR_ERR(ipage);
- 		f2fs_truncate_inline_inode(inode, ipage, 0);
- 		clear_inode_flag(inode, FI_INLINE_DATA);
- 		f2fs_put_page(ipage, 1);
- 	} else if (ri && (ri->i_inline & F2FS_INLINE_DATA)) {
--		if (f2fs_truncate_blocks(inode, 0, false))
--			return false;
-+		int ret;
-+
-+		ret = f2fs_truncate_blocks(inode, 0, false);
-+		if (ret)
-+			return ret;
- 		goto process_inline;
- 	}
--	return false;
-+	return 0;
- }
- 
- struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 6551d5e35c05..85ebdd0e3e7c 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2572,7 +2572,7 @@ int f2fs_try_to_free_nids(struct f2fs_sb_info *sbi, int nr_shrink)
- 	return nr - nr_shrink;
- }
- 
--void f2fs_recover_inline_xattr(struct inode *inode, struct page *page)
-+int f2fs_recover_inline_xattr(struct inode *inode, struct page *page)
- {
- 	void *src_addr, *dst_addr;
- 	size_t inline_size;
-@@ -2580,7 +2580,8 @@ void f2fs_recover_inline_xattr(struct inode *inode, struct page *page)
- 	struct f2fs_inode *ri;
- 
- 	ipage = f2fs_get_node_page(F2FS_I_SB(inode), inode->i_ino);
--	f2fs_bug_on(F2FS_I_SB(inode), IS_ERR(ipage));
-+	if (IS_ERR(ipage))
-+		return PTR_ERR(ipage);
- 
- 	ri = F2FS_INODE(page);
- 	if (ri->i_inline & F2FS_INLINE_XATTR) {
-@@ -2599,6 +2600,7 @@ void f2fs_recover_inline_xattr(struct inode *inode, struct page *page)
- update_inode:
- 	f2fs_update_inode(inode, ipage);
- 	f2fs_put_page(ipage, 1);
-+	return 0;
- }
- 
- int f2fs_recover_xattr_data(struct inode *inode, struct page *page)
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index af974ba273b3..4f12ade6410a 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -544,7 +544,9 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 
- 	/* step 1: recover xattr */
- 	if (IS_INODE(page)) {
--		f2fs_recover_inline_xattr(inode, page);
-+		err = f2fs_recover_inline_xattr(inode, page);
-+		if (err)
-+			goto out;
- 	} else if (f2fs_has_xattr_block(ofs_of_node(page))) {
- 		err = f2fs_recover_xattr_data(inode, page);
- 		if (!err)
-@@ -553,8 +555,12 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 	}
- 
- 	/* step 2: recover inline data */
--	if (f2fs_recover_inline_data(inode, page))
-+	err = f2fs_recover_inline_data(inode, page);
-+	if (err) {
-+		if (err == 1)
-+			err = 0;
- 		goto out;
-+	}
- 
- 	/* step 3: recover data indices */
- 	start = f2fs_start_bidx_of_node(ofs_of_node(page), inode);
--- 
-2.26.2
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMC83LzYgMTY6NTgsIGxhbXBhaG9tZSB3cm90ZToKPiBDaGFvIFl1IDx5dWNoYW8wQGh1
+YXdlaS5jb20+IOaWvCAyMDIw5bm0N+aciDbml6Ug6YCx5LiAIOS4i+WNiDQ6NTHlr6vpgZPvvJoK
+Pj4KPj4gT24gMjAyMC83LzYgMTY6MTEsIGxhbXBhaG9tZSB3cm90ZToKPj4+IEJyaWVmIHByb2Nl
+ZHVyZXM6Cj4+PiBwYXJ0ZWQgL2Rldi9zZGQxIGFzIDE2MEdCIGRpc2sKPj4+IG1rZnMgLXQgZjJm
+cyAvZGV2L3NkZDEKPj4+IG1vdW50IC9kZXYvc2RkMSAvbW50L2YyZnNkaXIKPj4+Cj4+PiBJIHVz
+ZSBzaGVsbCBzY3JpcHQgdG8gY3JlYXRlIDIwIGZpbyBjb25jdXJyZW50bHkgYW5kIHdhaXQgZm9y
+IGZpbmlzaC4KPj4+IGZpbyBjb21tYW5kOgo+Pj4gZmlvIC1icz00ayAtaW9kZXB0aD00IC1ydz13
+cml0ZSAtaW9lbmdpbmU9bGliYWlvIC1uYW1lPW15IC1kaXJlY3Q9MAo+Pgo+PiBXaHkgbm90IHVz
+aW5nIGRpcmVjdD0xIGNvbWJpbmluZyB3aXRoIGxpYmFpbz8gb3RoZXJ3aXNlIGRhdGEgd2FzIG9u
+bHkKPj4gd3JpdHRlbiB0byBjYWNoZS4KPj4KPiBTbyBkaXJlY3RJTyBoZWxwIHBlcmZvcm1hbmNl
+PwoKSSBndWVzcyBsaWJhaW8gKyBkaXJlY3RpbyBzaG93cyByZWFsIGRldmljZSBwZXJmb3JtYW5j
+ZSwgcmF0aGVyIHRoYW4gbWVtb3J5CnBlcmZvcm1hbmNlIHdoZW4gdXNpbmcgbGliYWlvICsgYnVm
+ZmVyZWRpbyBpZiB5b3VyIG1lbW9yeSBpcyBsYXJnZSBlbm91Z2guLi4KCj4gCj4+IEJlbG93IGlu
+Zm8gc2hvd3MgR0Mgb3IgQ1AgZGlkbid0IGFmZmVjdCB0aGUgdGVzdCByZXN1bHQuCj4gV2h5PyBT
+byB0aGUgR0MgYW5kIENQIHdvcmtzIG5vcm1hbGx5Pwo+IENvdWxkIHlvdSB0ZWxsIG1lIGluIGRl
+dGFpbD8gdGhhbmtzCgpUaGUgR0MgYW5kIENQIHZhbHVlIGlzIHZlcnkgc21hbGwsIEkgZG9uJ3Qg
+dGhpbmsgdGhhdCBjb3VsZCBhZmZlY3QgcGVyZm9ybWFuY2UuCgo+IC4KPiAKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1h
+aWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczov
+L2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
