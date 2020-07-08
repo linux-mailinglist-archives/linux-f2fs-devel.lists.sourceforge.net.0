@@ -2,112 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92D7D21833C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jul 2020 11:13:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
-	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=rg+9K0kzPIahaehrtUn8jSXFuy2SAQIvPZNSsMXrP7k=; b=F5FHy1LK2eKeh7smwsK7nWU/R
-	hrOVgLiaxHnPWdBDRLJIEQBr5p8ZfQ8mbJqPyyhW4C1erzWTniIWdjb88wTsZrDVcOI5CAA6RV1qn
-	XVfqtcokSbZ6m1BU0RLVZhm5bEszFPb0mNNzQXEBhcFJevEFB6YTxaMPzYV3hPJJaYmL0=;
+	by mail.lfdr.de (Postfix) with ESMTPS id 03E7B2184A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jul 2020 12:05:49 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jt68P-0004Ry-UK; Wed, 08 Jul 2020 09:12:57 +0000
+	id 1jt6xR-000483-Qo; Wed, 08 Jul 2020 10:05:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3EI4FXwYKAEEgurvhqjrrjoh.frp@flex--drosen.bounces.google.com>)
- id 1jt68N-0004RJ-WD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 09:12:56 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1jt6xP-00045j-Ue
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 10:05:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
- Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G27tBbHNYNifBmu52vtQ20nF/LRgtln5mcnSaFhYvNA=; b=a/5B9yTncri/Az6qmVtUIIwrw
- l/9Q+cmxNkpg7d2LTaaTo6ERb+D9YSlqUGmOwGlLxUku679tScJW9cNIl68/OW52L7ozhruml29gG
- ID9iIyBTK4ufcprYm9LDzUyFK7z95bjpiaG48amIEyF/qAzhZGd5KshQILwMdC2AaOaGI=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=oJKfhpS2TAv3dfAMEih1hdrRNJEaMuKN0Xzg9BWeoSo=; b=e9Yg7u+aBgFflqQgzT4GWFiYym
+ rULnohbwh80HYOv41rI0pZVmAxqIzyaFw5+hzqVmiIpvNFN++eKVbx8xe3jDSgDbEct0CmQsJCsOj
+ LUDXk2O0OItsKVmdu3j4KRMpZvk50QX//nfqw/obAEru982PmiXZK1qr+4qE0/mwx6OM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G27tBbHNYNifBmu52vtQ20nF/LRgtln5mcnSaFhYvNA=; b=GIegTrigIDD8x7+0JBUfYuLYRB
- YQgzmy5+RzpNfiRzN7wtlenZfqQCb4SWc684pK2KFLIY/mCKdNw3TMDJkLnfxnYryL7dZReuExtsv
- B2LQDU+Yu0Uyp/qpFu8J62JkUoQgtFr/8f5GVG4X2x/6yKSZifoxSRUmAsmyywEy1NMY=;
-Received: from mail-yb1-f202.google.com ([209.85.219.202])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jt68M-00E1sD-Lq
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 09:12:55 +0000
-Received: by mail-yb1-f202.google.com with SMTP id i203so21011515yba.9
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 08 Jul 2020 02:12:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:in-reply-to:message-id:mime-version:references:subject:from:to
- :cc; bh=G27tBbHNYNifBmu52vtQ20nF/LRgtln5mcnSaFhYvNA=;
- b=MCvAY1r0tg2KNlhBNHwa4FmZI/JDOeD8E1Qz9Bjy+4t269B1ELLxPezhwRQCrmrtMr
- zib8+EOtig5o4036DexrEDkGcuwJQgflCTWOprQqqh7aVIBNW24TkRkgFOHToJl3IzJr
- gvP5CTgcwS83/AhgdX+YorCbEbrp5tiATT26GRle8Aq/RuC9JisAsRRxRX1X0VMcY0SQ
- LtUr4dyLe/rjhpCDfCiizRZo8UBl8QIBDNIjhUlKoTpUbrFqK0IbQvjFLY+iivU0Yi/h
- 1zSrNZM1mvsHPGM3uCzyJcyQR8usdiaaXfBc3/2m2wpOuJg4XycqvvlkME/loT1xJEYc
- KVSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:in-reply-to:message-id:mime-version
- :references:subject:from:to:cc;
- bh=G27tBbHNYNifBmu52vtQ20nF/LRgtln5mcnSaFhYvNA=;
- b=IZ3D9Us31PU7ID8H5pWXCLTlzkwTSHRvTryRhzN1jBTaJE1xhdHU+mCsu2FgcSZcUm
- HRkQ7RGvByVekq+47slWIXgWvfjOiUdjurVO/uCnl9POGuMAnFAq0LD3BOZYiVm9MbZw
- MXzT9oK6WFrWginXpH7Yp/evd/lMB7Vj1jsIQuqXNdwwWd+1a2XBA31SOvhhTxOqWg9w
- /7M3X4sgfZNe//q1kCAZ/r9QXA5k4P1WNIWXagTxe0ljQxT2EuLvytWleqbIkI53rCaE
- +u2squDWn6PazxU/fHOI0qRrjhBKxBjfLKuLROR0uVUi1eHtnxRtSmXIJMpBUXVC4+Yp
- l8mQ==
-X-Gm-Message-State: AOAM531XpelTF7RomGflPrDnmz/4CWMPowaarQEPqYbhogPQgt2gL2Ff
- M8GviuRLlNkaXT8Vt76xZ6etQZTgF4A=
-X-Google-Smtp-Source: ABdhPJxf1epHe6nmiESpGCBy6JFbRzONIPywKJRs4kLP4auImyHIPDwplJs0w9/dCa0KGKzBD1D/r9VS45U=
-X-Received: by 2002:a25:8802:: with SMTP id c2mr4206421ybl.444.1594199568898; 
- Wed, 08 Jul 2020 02:12:48 -0700 (PDT)
-Date: Wed,  8 Jul 2020 02:12:37 -0700
-In-Reply-To: <20200708091237.3922153-1-drosen@google.com>
-Message-Id: <20200708091237.3922153-5-drosen@google.com>
-Mime-Version: 1.0
-References: <20200708091237.3922153-1-drosen@google.com>
-X-Mailer: git-send-email 2.27.0.383.g050319c2ae-goog
-To: "Theodore Ts'o" <tytso@mit.edu>, linux-ext4@vger.kernel.org, 
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, 
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>, 
- linux-fscrypt@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
-X-Spam-Score: -7.6 (-------)
+ bh=oJKfhpS2TAv3dfAMEih1hdrRNJEaMuKN0Xzg9BWeoSo=; b=fX9lsDrFCERteebNLEi43SpVnE
+ f1P0IFjW7OgqdfzlL4ukJy/qrtw4L7OxJISEh5Ac0Lj3TGXfDWe6KMq8XT0Zxg7N5MOuG7bKHa9XZ
+ DRsgruovmMBe65qdithtGKaJ7T0QpSODNnitfrhV7F7EE0L9yYjvvcBtrbBDsgcliPmU=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jt6xO-00B3dO-7O
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 10:05:39 +0000
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8B6CA204EC;
+ Wed,  8 Jul 2020 10:05:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1594202731;
+ bh=yTKUIgGMoXAh3uS6fiL+0DHrR3iq2vwf7Im4h1Eez5A=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=O8OClbpMbY9OCMuHPR8z/AuEAjgWpqOX7j8VzUdtfTaahbtr4MtPYKhaOBXiw6sg+
+ MWc3Jgcpu1fCrkNyH5b7QbY3pkYE3aNGJGn/l1f6N0H7EGaVSbdJjdk9D6xJg7dinV
+ ecIALBSNJXAlmjN1/7LbgOjOH8YdGRKqMCebod6w=
+Date: Wed, 8 Jul 2020 12:05:27 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20200708100527.GA448589@kroah.com>
+References: <20200703065420.3544269-1-daeho43@gmail.com>
+ <20200703141359.GA2953162@kroah.com>
+ <CACOAw_yweR--34vBXBV07xEGxGhO2r9o_XYVw6h9dMP=C6zp5Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CACOAw_yweR--34vBXBV07xEGxGhO2r9o_XYVw6h9dMP=C6zp5Q@mail.gmail.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.219.202 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.202 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: qstr.name]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jt68M-00E1sD-Lq
-Subject: [f2fs-dev] [PATCH v12 4/4] ext4: Use generic casefolding support
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jt6xO-00B3dO-7O
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add symbolic link to kobject in
+ sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,279 +84,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Rosenberg via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Rosenberg <drosen@google.com>
-Cc: Daniel Rosenberg <drosen@google.com>, Eric Biggers <ebiggers@google.com>,
- kernel-team@android.com, linux-kernel@vger.kernel.org,
- Andreas Dilger <adilger.kernel@dilger.ca>, linux-fsdevel@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This switches ext4 over to the generic support provided in
-the previous patch.
+On Mon, Jul 06, 2020 at 08:47:07AM +0900, Daeho Jeong wrote:
+> > No Documentation/ABI/ entry for your new sysfs file/link?
+> 
+> This is for adding a symbolic link to a pre-existed
+> /sys/fs/f2fs/<disk> directory and it means /sys/fs/f2fs/<mount> points
+> to /sys/fs/f2fs/<disk>. I already added the description of this in
+> Documentation/filesystems/f2fs.rst.
 
-Since casefolded dentries behave the same in ext4 and f2fs, we decrease
-the maintenance burden by unifying them, and any optimizations will
-immediately apply to both.
+Ok, but that's not the standard location for sysfs file documentation.
 
-Signed-off-by: Daniel Rosenberg <drosen@google.com>
-Reviewed-by: Eric Biggers <ebiggers@google.com>
----
- fs/ext4/dir.c   | 64 ++-----------------------------------------------
- fs/ext4/ext4.h  | 12 ----------
- fs/ext4/hash.c  |  2 +-
- fs/ext4/namei.c | 20 +++++++---------
- fs/ext4/super.c | 12 +++++-----
- 5 files changed, 17 insertions(+), 93 deletions(-)
+> > And what does this help with?
+> 
+> Some system daemons in Android access with the pre-defined sysfs entry
+> name in the json file. So whenever the project changes and the
+> partition layout is changed, we have to follow up the changes and
+> modify /sys/fs/f2fs/<disk> name in the json file accordingly.
 
-diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
-index 1d82336b1cd4..b437120f0b3f 100644
---- a/fs/ext4/dir.c
-+++ b/fs/ext4/dir.c
-@@ -669,68 +669,8 @@ const struct file_operations ext4_dir_operations = {
- };
- 
- #ifdef CONFIG_UNICODE
--static int ext4_d_compare(const struct dentry *dentry, unsigned int len,
--			  const char *str, const struct qstr *name)
--{
--	struct qstr qstr = {.name = str, .len = len };
--	const struct dentry *parent = READ_ONCE(dentry->d_parent);
--	const struct inode *inode = READ_ONCE(parent->d_inode);
--	char strbuf[DNAME_INLINE_LEN];
--
--	if (!inode || !IS_CASEFOLDED(inode) ||
--	    !EXT4_SB(inode->i_sb)->s_encoding) {
--		if (len != name->len)
--			return -1;
--		return memcmp(str, name->name, len);
--	}
--
--	/*
--	 * If the dentry name is stored in-line, then it may be concurrently
--	 * modified by a rename.  If this happens, the VFS will eventually retry
--	 * the lookup, so it doesn't matter what ->d_compare() returns.
--	 * However, it's unsafe to call utf8_strncasecmp() with an unstable
--	 * string.  Therefore, we have to copy the name into a temporary buffer.
--	 */
--	if (len <= DNAME_INLINE_LEN - 1) {
--		memcpy(strbuf, str, len);
--		strbuf[len] = 0;
--		qstr.name = strbuf;
--		/* prevent compiler from optimizing out the temporary buffer */
--		barrier();
--	}
--
--	return ext4_ci_compare(inode, name, &qstr, false);
--}
--
--static int ext4_d_hash(const struct dentry *dentry, struct qstr *str)
--{
--	const struct ext4_sb_info *sbi = EXT4_SB(dentry->d_sb);
--	const struct unicode_map *um = sbi->s_encoding;
--	const struct inode *inode = READ_ONCE(dentry->d_inode);
--	unsigned char *norm;
--	int len, ret = 0;
--
--	if (!inode || !IS_CASEFOLDED(inode) || !um)
--		return 0;
--
--	norm = kmalloc(PATH_MAX, GFP_ATOMIC);
--	if (!norm)
--		return -ENOMEM;
--
--	len = utf8_casefold(um, str, norm, PATH_MAX);
--	if (len < 0) {
--		if (ext4_has_strict_mode(sbi))
--			ret = -EINVAL;
--		goto out;
--	}
--	str->hash = full_name_hash(dentry, norm, len);
--out:
--	kfree(norm);
--	return ret;
--}
--
- const struct dentry_operations ext4_dentry_ops = {
--	.d_hash = ext4_d_hash,
--	.d_compare = ext4_d_compare,
-+	.d_hash = generic_ci_d_hash,
-+	.d_compare = generic_ci_d_compare,
- };
- #endif
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index 42f5060f3cdf..5cd8be24a4fd 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -1393,14 +1393,6 @@ struct ext4_super_block {
- 
- #define EXT4_ENC_UTF8_12_1	1
- 
--/*
-- * Flags for ext4_sb_info.s_encoding_flags.
-- */
--#define EXT4_ENC_STRICT_MODE_FL	(1 << 0)
--
--#define ext4_has_strict_mode(sbi) \
--	(sbi->s_encoding_flags & EXT4_ENC_STRICT_MODE_FL)
--
- /*
-  * fourth extended-fs super-block data in memory
-  */
-@@ -1450,10 +1442,6 @@ struct ext4_sb_info {
- 	struct kobject s_kobj;
- 	struct completion s_kobj_unregister;
- 	struct super_block *s_sb;
--#ifdef CONFIG_UNICODE
--	struct unicode_map *s_encoding;
--	__u16 s_encoding_flags;
--#endif
- 
- 	/* Journaling */
- 	struct journal_s *s_journal;
-diff --git a/fs/ext4/hash.c b/fs/ext4/hash.c
-index 3e133793a5a3..143b0073b3f4 100644
---- a/fs/ext4/hash.c
-+++ b/fs/ext4/hash.c
-@@ -275,7 +275,7 @@ int ext4fs_dirhash(const struct inode *dir, const char *name, int len,
- 		   struct dx_hash_info *hinfo)
- {
- #ifdef CONFIG_UNICODE
--	const struct unicode_map *um = EXT4_SB(dir->i_sb)->s_encoding;
-+	const struct unicode_map *um = dir->i_sb->s_encoding;
- 	int r, dlen;
- 	unsigned char *buff;
- 	struct qstr qstr = {.name = name, .len = len };
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index 56738b538ddf..6ffd53e6455e 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -1286,8 +1286,8 @@ static void dx_insert_block(struct dx_frame *frame, u32 hash, ext4_lblk_t block)
- int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
- 		    const struct qstr *entry, bool quick)
- {
--	const struct ext4_sb_info *sbi = EXT4_SB(parent->i_sb);
--	const struct unicode_map *um = sbi->s_encoding;
-+	const struct super_block *sb = parent->i_sb;
-+	const struct unicode_map *um = sb->s_encoding;
- 	int ret;
- 
- 	if (quick)
-@@ -1299,7 +1299,7 @@ int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
- 		/* Handle invalid character sequence as either an error
- 		 * or as an opaque byte sequence.
- 		 */
--		if (ext4_has_strict_mode(sbi))
-+		if (sb_has_strict_encoding(sb))
- 			return -EINVAL;
- 
- 		if (name->len != entry->len)
-@@ -1316,7 +1316,7 @@ void ext4_fname_setup_ci_filename(struct inode *dir, const struct qstr *iname,
- {
- 	int len;
- 
--	if (!IS_CASEFOLDED(dir) || !EXT4_SB(dir->i_sb)->s_encoding) {
-+	if (!IS_CASEFOLDED(dir) || !dir->i_sb->s_encoding) {
- 		cf_name->name = NULL;
- 		return;
- 	}
-@@ -1325,7 +1325,7 @@ void ext4_fname_setup_ci_filename(struct inode *dir, const struct qstr *iname,
- 	if (!cf_name->name)
- 		return;
- 
--	len = utf8_casefold(EXT4_SB(dir->i_sb)->s_encoding,
-+	len = utf8_casefold(dir->i_sb->s_encoding,
- 			    iname, cf_name->name,
- 			    EXT4_NAME_LEN);
- 	if (len <= 0) {
-@@ -1362,7 +1362,7 @@ static inline bool ext4_match(const struct inode *parent,
- #endif
- 
- #ifdef CONFIG_UNICODE
--	if (EXT4_SB(parent->i_sb)->s_encoding && IS_CASEFOLDED(parent)) {
-+	if (parent->i_sb->s_encoding && IS_CASEFOLDED(parent)) {
- 		if (fname->cf_name.name) {
- 			struct qstr cf = {.name = fname->cf_name.name,
- 					  .len = fname->cf_name.len};
-@@ -2171,9 +2171,6 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
- 	struct buffer_head *bh = NULL;
- 	struct ext4_dir_entry_2 *de;
- 	struct super_block *sb;
--#ifdef CONFIG_UNICODE
--	struct ext4_sb_info *sbi;
--#endif
- 	struct ext4_filename fname;
- 	int	retval;
- 	int	dx_fallback=0;
-@@ -2190,9 +2187,8 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
- 		return -EINVAL;
- 
- #ifdef CONFIG_UNICODE
--	sbi = EXT4_SB(sb);
--	if (ext4_has_strict_mode(sbi) && IS_CASEFOLDED(dir) &&
--	    sbi->s_encoding && utf8_validate(sbi->s_encoding, &dentry->d_name))
-+	if (sb_has_strict_encoding(sb) && IS_CASEFOLDED(dir) &&
-+	    sb->s_encoding && utf8_validate(sb->s_encoding, &dentry->d_name))
- 		return -EINVAL;
- #endif
- 
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 330957ed1f05..d097771a374f 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -1102,7 +1102,7 @@ static void ext4_put_super(struct super_block *sb)
- 	fs_put_dax(sbi->s_daxdev);
- 	fscrypt_free_dummy_context(&sbi->s_dummy_enc_ctx);
- #ifdef CONFIG_UNICODE
--	utf8_unload(sbi->s_encoding);
-+	utf8_unload(sb->s_encoding);
- #endif
- 	kfree(sbi);
- }
-@@ -4035,7 +4035,7 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
- 		goto failed_mount;
- 
- #ifdef CONFIG_UNICODE
--	if (ext4_has_feature_casefold(sb) && !sbi->s_encoding) {
-+	if (ext4_has_feature_casefold(sb) && !sb->s_encoding) {
- 		const struct ext4_sb_encodings *encoding_info;
- 		struct unicode_map *encoding;
- 		__u16 encoding_flags;
-@@ -4066,8 +4066,8 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
- 			 "%s-%s with flags 0x%hx", encoding_info->name,
- 			 encoding_info->version?:"\b", encoding_flags);
- 
--		sbi->s_encoding = encoding;
--		sbi->s_encoding_flags = encoding_flags;
-+		sb->s_encoding = encoding;
-+		sb->s_encoding_flags = encoding_flags;
- 	}
- #endif
- 
-@@ -4678,7 +4678,7 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
- 	}
- 
- #ifdef CONFIG_UNICODE
--	if (sbi->s_encoding)
-+	if (sb->s_encoding)
- 		sb->s_d_op = &ext4_dentry_ops;
- #endif
- 
-@@ -4873,7 +4873,7 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
- 		crypto_free_shash(sbi->s_chksum_driver);
- 
- #ifdef CONFIG_UNICODE
--	utf8_unload(sbi->s_encoding);
-+	utf8_unload(sb->s_encoding);
- #endif
- 
- #ifdef CONFIG_QUOTA
--- 
-2.27.0.383.g050319c2ae-goog
+That's what partition names are for, you should never depend on a
+"random number".
 
+> This will help them access all the f2fs sysfs entries consistently
+> without requiring to know those changes.
+
+No, please use a partition name, that is the only way to always know you
+are mounting the correct partition.  You have created a random number
+here that might, or might not, change between boots depending on the
+order of the filesystem being mounted.  It is not persistant or
+deterministic at all, please do not treat it as such.
+
+> > If it's really needed, why don't we do this for all filesystem types?
+> 
+> This is for the daemon to change the mode of only F2FS with the power
+> hint of Android.
+
+Again, the point is that a filesystem type is not unique, this, if
+really really needed, should be an attribute for ALL filesystem types,
+f2fs is not special here at all.
+
+Please do not rely on this number ever being the same across boots,
+because your code is such that you can not guarantee that.
+
+And again, if you really want to know the partition you are mounting
+really is the partition you think you are mounting, use the partition
+label name, that is what it is there for, and is why we have been
+relying on that for decades.  A new special per-filesystem-attribute
+that is semi-random is not the correct solution for the problem you are
+describing as far as I can determine.
+
+thanks,
+
+greg k-h
 
 
 _______________________________________________
