@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15888217CBF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jul 2020 03:44:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DA19217CFC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jul 2020 04:18:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jsz8j-0005aj-KP; Wed, 08 Jul 2020 01:44:49 +0000
+	id 1jszfN-0003Yo-71; Wed, 08 Jul 2020 02:18:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jsz8i-0005aa-5W
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 01:44:48 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jszfL-0003Yg-Qt
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 02:18:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gRJllKWRsmcrnIHnVViDVaNCOTPfTHpCJpntiUVZzS8=; b=jZ5x+H+aWJoucs7TmCH1eFAhFv
- K0DTYZ6xpbnlMSI7YV3GC+NV/hXFFfszYxujw+qeXEO+tDntZMDZGZra2WN0SUBo7RCgD9BeajeAi
- mR9UjJk9+CYrOTpA0LZ6VWOga+E6tlPWkm1HwEs8/wt7+xAyDolsOGFkrkIJpO8LtHZQ=;
+ bh=Ji/pvoJnruxZ5NTjsh4X71yxAbd7TNOpl18z5+X561M=; b=gfoOR9sMQA0rL5JP0lryAYvV/z
+ TX6PcGoo8KT8R5GXqvhvolebhUktFcaWdRQ3AhFuGt2o/tiRGps/ou/KaX/kAIj/oqIyGkQcJOQRP
+ 7Cpzb+NUbnNlOn99MKgPAQN0jKqbtl4xSXX/pryZqgX8UoI1zZmlbFAy5EaEXbaxz3HI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gRJllKWRsmcrnIHnVViDVaNCOTPfTHpCJpntiUVZzS8=; b=LlQ/FmoTNzWkEYAveD5BdksQKJ
- MAU3EAURmVNpY1SkQ/wtjVqBYqSO0qjIUyJq8sj3m1Rj6Qij5WTIIC2MlcskNx5m7ySriGKSq/VFt
- MXYG2FRmBroGmQGCP2ySGZ8h1egSBxxCaM6x1/TExM1E209dZUBefTFefWGddrvQ8LKI=;
+ bh=Ji/pvoJnruxZ5NTjsh4X71yxAbd7TNOpl18z5+X561M=; b=P9KEgEKjuRb6bZ0cagVjFoCzGB
+ uFtYz3+T62Lj3oxjOnKhxOoDiQWicwwa59gVbzNm8jzWvIF8/0+Uqetj2GIwxbFWaM43qSjRU/Qor
+ MbCZd2aOVQmhBxmDiNl1TepR17w4+wJYQgHnEfcoOyZS7WwoDGCPD7G4RoE8qOSYgTRA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jsz8h-00DkpM-2x
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 01:44:48 +0000
+ id 1jszfK-00Alc9-N0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 02:18:31 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 50755206DF;
- Wed,  8 Jul 2020 01:44:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2F15720708;
+ Wed,  8 Jul 2020 02:18:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594172681;
- bh=pc9r2MlQ4YV78AG0esE4ppDqeMfOm93xI5UmXgp5gqY=;
+ s=default; t=1594174705;
+ bh=tmDaVR1PNrJoafm9vwgEyEGPyx5FVMi3bRneTLieczc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QA5sGO5qUiLKD4ECswpWLjjMFqRtnVqe1TpN2o5l+JL6AMbY49ekIgI2f+lN+1OzN
- CpYzIZysoQcDNnfJWfLju4xO+Q6RkMAy4njljS9zJ24uFFljUEDXTXsHuSFPA9bRdu
- ocaEleHjB6OsO9CNhqwYyabxBcbLRQwGKW2j0Aco=
-Date: Tue, 7 Jul 2020 18:44:39 -0700
+ b=Qm0NEvdHgBIvBYQ0kZRa9x8UC5hkczTLyfUPIZtS4ULBj+sQfa9A5Z27URXj1jJvf
+ RUslpdDbm8ypKaJ8FhMNxWW2eq09Q3TCg7uN7eJ6r2DwgffiICQRSzPCAA9mG5rEFg
+ QMMPAobt7Sa+Opu8cuWkX8xa0c1cacPM6oF/YtV8=
+Date: Tue, 7 Jul 2020 19:18:23 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20200708014439.GH839@sol.localdomain>
-References: <20200707113123.3429337-1-drosen@google.com>
- <20200707113123.3429337-5-drosen@google.com>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20200708021823.GJ839@sol.localdomain>
+References: <20200618125152.84099-1-daeho43@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200707113123.3429337-5-drosen@google.com>
+In-Reply-To: <20200618125152.84099-1-daeho43@gmail.com>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,8 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jsz8h-00DkpM-2x
-Subject: Re: [f2fs-dev] [PATCH v10 4/4] ext4: Use generic casefolding support
+X-Headers-End: 1jszfK-00Alc9-N0
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: add F2FS_IOC_SEC_TRIM_FILE ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,37 +83,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jul 07, 2020 at 04:31:23AM -0700, Daniel Rosenberg wrote:
-> This switches ext4 over to the generic support provided in
-> the previous patch.
-> 
-> Since casefolded dentries behave the same in ext4 and f2fs, we decrease
-> the maintenance burden by unifying them, and any optimizations will
-> immediately apply to both.
-> 
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> ---
->  fs/ext4/dir.c   | 64 ++-----------------------------------------------
->  fs/ext4/ext4.h  | 12 ----------
->  fs/ext4/hash.c  |  2 +-
->  fs/ext4/namei.c | 20 +++++++---------
->  fs/ext4/super.c | 12 +++++-----
->  5 files changed, 17 insertions(+), 93 deletions(-)
-> 
+Hi Daeho,
 
-Looks good, you can add:
+On Thu, Jun 18, 2020 at 09:51:52PM +0900, Daeho Jeong wrote:
+> +static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	struct address_space *mapping = inode->i_mapping;
+> +	struct block_device *prev_bdev = NULL;
+> +	struct f2fs_sectrim_range range;
+> +	pgoff_t index, pg_end;
+> +	block_t prev_block = 0, len = 0;
+> +	u64 end_addr;
+> +	bool to_end;
+> +	int ret = 0;
+> +
+> +	if (!(filp->f_mode & FMODE_WRITE))
+> +		return -EBADF;
+> +
+> +	if (copy_from_user(&range, (struct f2fs_sectrim_range __user *)arg,
+> +				sizeof(range)))
+> +		return -EFAULT;
+> +
+> +	if (range.flags == 0 || (range.flags & ~F2FS_TRIM_FILE_MASK) ||
+> +			!S_ISREG(inode->i_mode))
+> +		return -EINVAL;
+> +
+> +	if ((range.flags & F2FS_TRIM_FILE_DISCARD) &&
+> +			!f2fs_hw_support_discard(sbi))
+> +		return -EOPNOTSUPP;
+> +
+> +	file_start_write(filp);
+> +	inode_lock(inode);
+> +
+> +	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode)) {
+> +		ret = -EINVAL;
+> +		goto err;
+> +	}
+> +
+> +	if (inode->i_size == 0)
+> +		goto err;
+> +
+> +	end_addr = range.start + range.len;
+> +	if (end_addr > inode->i_size) {
+> +		ret = -EINVAL;
+> +		goto err;
+> +	}
 
-    Reviewed-by: Eric Biggers <ebiggers@google.com>
+This is missing a check that range.start + range.len doesn't overflow.
 
 - Eric
 
