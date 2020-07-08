@@ -2,82 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45C98217D4B
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E3E0217D4A
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jul 2020 05:06:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=jbPPB+oVMKW2/fGIAQZhZlEQKekpRapvspIGjH1TANc=; b=hk4aY4mhdgI/QucgeWtwwzRQuv
-	AvYgnCddc6KObeE7tu8LtDnQwJGZL0Nroy9cn+fthGLEyAK+r5q3RWz8ocO4SWeb5nj1Ta+lAPTWn
-	x/Ni82oFm9e0cQZutludKuZp2wDEs15scnJCRx1GnckPNlKNrjD+zKPkH+sYz8m86pDw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
+	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=2y7qm4n1Vgfka795TqiAuHCOqS4RjnRDfb4Vznkygfg=; b=TeAGWCq0ggSEXhnm4hW8i8UjN
+	gcezOXi+u0AAtXOvLW3yX5syQCI5+P3MkuVPi0gylVEsxmtMtxvK9jd1ATH8mhZ+LvBKa6wC6XN9I
+	OqKeYyjTVHbe1qE904Pzx33ObpMlWksS5ud5B9kgNKQxki2h+lSysOFScy9hWdeTlfUlg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jt0PV-0003ly-M6; Wed, 08 Jul 2020 03:06:13 +0000
+	id 1jt0PW-0005eF-AX; Wed, 08 Jul 2020 03:06:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3FDgFXwYKAJc4IFJ5E7FF7C5.3FD@flex--drosen.bounces.google.com>)
- id 1jt0PT-0003lq-LD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 03:06:11 +0000
+ (envelope-from <3FjgFXwYKAJk6KHL7G9HH9E7.5HF@flex--drosen.bounces.google.com>)
+ id 1jt0PU-0005e2-Tk
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 03:06:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sxoy6q+HxdTygJctVhkj+Ncax7HD8YrVRDBUHbmI/GA=; b=eb5m+m4MyXGnticXeUkVu1n/C9
- a6jTbf9smav8Y0YKatTfDRPMeO3b+c80vVzK9chZG0iiNQJ/30dRLLlUNYsugN9fybL4E0dJ4LEUk
- wrqTJToTaEdFbwDnjOye84X1WB0MSimBC3CDVbs2o81Keow7wSzjiEBqU6/SKt6Zg6E4=;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
+ Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=wV4Dlp1PtfRWNCEDy3OUVmwFuHR/znQviVm4udIzuj8=; b=RSmunvq+LyLQNn76wbHpppnqU
+ 1LRdKOVW+X92bDLnsUa1Lwp/fK6N9qgudkpoCdcG5ko+CNdlZ+z/C/iLWV8z4HYPvlyI8phvLrDdh
+ UrAeHRYIzZ8M9MlRFPyUXm5sQ1L4GZff9lFx0rtPGfrmyuvHgn2JBzBrV9CJd1AEdZRqw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sxoy6q+HxdTygJctVhkj+Ncax7HD8YrVRDBUHbmI/GA=; b=f
- uj9ZHKrpk38c8eCVNQO/NMrtktZkzsguNOlCUlv19UTay547d3mevdfRlOxeztoL7/iIZpY4rysW1
- L1leOkjjGBgVUAbLs726/reau+QBJqpOGrfu3WdhGTGDoqPqKaj5tbnY0S7hREbdbs0aVAgzPV/6U
- /8EPswxqMnQpTH9Q=;
-Received: from mail-pg1-f202.google.com ([209.85.215.202])
+ h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
+ In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=wV4Dlp1PtfRWNCEDy3OUVmwFuHR/znQviVm4udIzuj8=; b=W2WRrEMHRC68xRBCVMI42x79kR
+ cy4UHf3k+NfXpxrIotq4dzT7WzLeIJFKUGJCBGfgBNwhoXHl8pv3o/QmEs7hVqAMegywurgmtNsYc
+ xqb9g71Bt7OSovATX6FNTasXDnd0lDL6/4LQPsvPU8vkwfKcsPCtpUuAB33tAOkyCh2A=;
+Received: from mail-pj1-f74.google.com ([209.85.216.74])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jt0PR-00Dnna-JT
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 03:06:11 +0000
-Received: by mail-pg1-f202.google.com with SMTP id o15so34008995pgn.15
+ id 1jt0PT-00Dnnc-KC
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jul 2020 03:06:12 +0000
+Received: by mail-pj1-f74.google.com with SMTP id e14so904206pjt.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 07 Jul 2020 20:06:09 -0700 (PDT)
+ Tue, 07 Jul 2020 20:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:message-id:mime-version:subject:from:to:cc;
- bh=sxoy6q+HxdTygJctVhkj+Ncax7HD8YrVRDBUHbmI/GA=;
- b=jvxGSCDzgqCSzD3A5CZ6zoxEY3HwELi8FObL00AmNlxQWLpvrUeBFZBc3B9zB5etbX
- mYEpJX0jRgUUJ4S9ot+BQk61eRDjpYkKZjXS5FkMSOUavjWBlMPiA5+LW/699y0iXpQC
- s8ynNf8lIHMTPkHzVRmSAVfDowYI++DiMfl/exKk9l+l/8eEG3w0s91A1Ycqqyju5MfB
- hrssrkk130gtKV4YYHCQ2dycaO4RT4XQHdC+kpGmlUYHSXN8zNcGMq9fWspZLGH9mYPU
- dePpa1pDLmtFFKbvxkZX6SahRyc7gjEHircUdtQBKPXrVPw+ESEA+mxA7Fqh1xXzohzl
- +nKg==
+ h=date:in-reply-to:message-id:mime-version:references:subject:from:to
+ :cc; bh=wV4Dlp1PtfRWNCEDy3OUVmwFuHR/znQviVm4udIzuj8=;
+ b=cfqa4ZI0uBxj1JWd8dAGqnZFXA438OEfTLCcfqHSddxLMr8U1C1o3sty7pkLZivxV9
+ k2SLkAZmTm86qL76MMu0rWCsjw2KGoVfUpcu2Skz+1RJ2HRxepy9PS+oJHBH6EAIiKT0
+ SriweU9dx43A69vye8MbQ/7x6celwyfbxtDCje7B/pL2YOYpnBZAXmG4R6XlmFBlpzHU
+ zIIB+JCbamdhEvMVnfZqSc8WEq8Ob08h3jKHTybWQtf0DWwoHE/q1x+7PQ4gsYCnSPgg
+ nGLeVC26zVJq9dt0SaFj68BsveNgcD72gE+9VWRDJhJ5LkwFf2660LZxMJDrcdwQGjSi
+ 7aVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
- bh=sxoy6q+HxdTygJctVhkj+Ncax7HD8YrVRDBUHbmI/GA=;
- b=Pnnma3SxD0MAr9D3bBlQOabvZGztQHcNYSjwnpBY/CDPs5RXuP26MNuyW4mOxOv7gt
- pKZ4DLhMrH6Lcr0F3pj35kiu9ayGI241FlHC6r2jmMiept++Zhsh5IKKrrPOq6bn7wG0
- zKvTjZx6ZC+DS4+5Zb7kH5V8joIscDJnj+/6dEn921YW2CM4QyU4ryUICyOSPwbniiys
- l4PRL6M8UCbKSG06K/XEGa2cPbuxMc/mgw+0YmQz6BgYlGHOUZQsE6VCLr2ma7DXRwFt
- YQ2rC2lgwgToaCuYgIs63BfoKvHSmN0IXehW+qfPNy3NDQ5c4nTXHWp5QjWrofcUhIwz
- ZpDw==
-X-Gm-Message-State: AOAM531EYISrYL1eFNOZeOlDmFEySveOBDdI2KcM1ufjYPaJD9b8yuz5
- 7Q39zXtR5Xezffkq1k0r0dcsVepXnLo=
-X-Google-Smtp-Source: ABdhPJxHc+FKhRyKZRaUpdsFwS/kCIg/eIMdmz1LxIxSnZIjP9Kv5YSfmEOlULOG9PgVuLCQSbtYJSctP7g=
-X-Received: by 2002:a17:90a:1fcb:: with SMTP id
- z11mr1032734pjz.1.1594177556279; 
- Tue, 07 Jul 2020 20:05:56 -0700 (PDT)
-Date: Tue,  7 Jul 2020 20:05:48 -0700
-Message-Id: <20200708030552.3829094-1-drosen@google.com>
+ h=x-gm-message-state:date:in-reply-to:message-id:mime-version
+ :references:subject:from:to:cc;
+ bh=wV4Dlp1PtfRWNCEDy3OUVmwFuHR/znQviVm4udIzuj8=;
+ b=UMLq5Xb5Cs1cEpjbepuQa8DzCTTCatU+15uWu5Z/Ob71dh7OmJLAgBLMnFu8Y++oxh
+ Acpzts1IJUkUMzszzeQQ4l3THLE23srClKh9NiSY6+D9eATHdk//FdA5lT5YsO1hPa4f
+ IpLPtlvWoe0BLlNdTDoI6F11TZfTHH2PJaNPBF9EQ4+/YcJ+G02JqezcTqt8dQFkbAT2
+ qfjimB2WSnb9swm3pvRmLMHBTddHTITqsy/efw63yJItl/9fF/oL3zSjp/QrQkPViqJo
+ ZJCPG6uCwN7xhQ0+R3b1j6B8OMhgV6gfoiF3wd2zrS5IRvRrW8RdEfX4PRpIDxJlYbzR
+ CWLg==
+X-Gm-Message-State: AOAM532qzm6vllWLePTLU9j/xkd3RhFy8Vei2nfMEy1OK9zNATy6jaY2
+ 4KN8l8IrD/wxwPamb5R4d51RsHt+SVo=
+X-Google-Smtp-Source: ABdhPJzqov5JL3MTCYCUXsgN1WMwA/rTbUQMcSdZ1sJWb3HhqSUyDy2izboLJgJ3fC9ih0rA4dvnY2hb6wM=
+X-Received: by 2002:a17:902:744c:: with SMTP id
+ e12mr39192696plt.337.1594177558861; 
+ Tue, 07 Jul 2020 20:05:58 -0700 (PDT)
+Date: Tue,  7 Jul 2020 20:05:49 -0700
+In-Reply-To: <20200708030552.3829094-1-drosen@google.com>
+Message-Id: <20200708030552.3829094-2-drosen@google.com>
 Mime-Version: 1.0
+References: <20200708030552.3829094-1-drosen@google.com>
 X-Mailer: git-send-email 2.27.0.383.g050319c2ae-goog
 To: "Theodore Ts'o" <tytso@mit.edu>, linux-ext4@vger.kernel.org, 
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, 
@@ -86,24 +89,27 @@ To: "Theodore Ts'o" <tytso@mit.edu>, linux-ext4@vger.kernel.org,
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.74 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.74 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.202 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.202 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jt0PR-00Dnna-JT
-Subject: [f2fs-dev] [PATCH v11 0/4] Prepare for upcoming
- Casefolding/Encryption patches
+X-Headers-End: 1jt0PT-00Dnnc-KC
+Subject: [f2fs-dev] [PATCH v11 1/4] unicode: Add utf8_casefold_hash
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,43 +124,86 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Daniel Rosenberg via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Daniel Rosenberg <drosen@google.com>
-Cc: Daniel Rosenberg <drosen@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- linux-fsdevel@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Daniel Rosenberg <drosen@google.com>, Eric Biggers <ebiggers@google.com>,
+ kernel-team@android.com, linux-kernel@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-fsdevel@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This lays the ground work for enabling casefolding and encryption at the
-same time for ext4 and f2fs. A future set of patches will enable that
-functionality.
+This adds a case insensitive hash function to allow taking the hash
+without needing to allocate a casefolded copy of the string.
 
-These unify the highly similar dentry_operations that ext4 and f2fs both
-use for casefolding. In addition, they improve d_hash by not requiring a
-new string allocation.
+The existing d_hash implementations for casefolding allocate memory
+within rcu-walk, by avoiding it we can be more efficient and avoid
+worrying about a failed allocation.
 
-Daniel Rosenberg (4):
-  unicode: Add utf8_casefold_hash
-  fs: Add standard casefolding support
-  f2fs: Use generic casefolding support
-  ext4: Use generic casefolding support
+Signed-off-by: Daniel Rosenberg <drosen@google.com>
+Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+Reviewed-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/unicode/utf8-core.c  | 23 ++++++++++++++++++++++-
+ include/linux/unicode.h |  3 +++
+ 2 files changed, 25 insertions(+), 1 deletion(-)
 
- fs/ext4/dir.c           | 64 +---------------------------
- fs/ext4/ext4.h          | 12 ------
- fs/ext4/hash.c          |  2 +-
- fs/ext4/namei.c         | 20 ++++-----
- fs/ext4/super.c         | 12 +++---
- fs/f2fs/dir.c           | 84 ++++--------------------------------
- fs/f2fs/f2fs.h          |  4 --
- fs/f2fs/super.c         | 10 ++---
- fs/f2fs/sysfs.c         | 10 +++--
- fs/libfs.c              | 94 +++++++++++++++++++++++++++++++++++++++++
- fs/unicode/utf8-core.c  | 23 +++++++++-
- include/linux/f2fs_fs.h |  3 --
- include/linux/fs.h      | 16 +++++++
- include/linux/unicode.h |  3 ++
- 14 files changed, 172 insertions(+), 185 deletions(-)
-
+diff --git a/fs/unicode/utf8-core.c b/fs/unicode/utf8-core.c
+index 2a878b739115..dc25823bfed9 100644
+--- a/fs/unicode/utf8-core.c
++++ b/fs/unicode/utf8-core.c
+@@ -6,6 +6,7 @@
+ #include <linux/parser.h>
+ #include <linux/errno.h>
+ #include <linux/unicode.h>
++#include <linux/stringhash.h>
+ 
+ #include "utf8n.h"
+ 
+@@ -122,9 +123,29 @@ int utf8_casefold(const struct unicode_map *um, const struct qstr *str,
+ 	}
+ 	return -EINVAL;
+ }
+-
+ EXPORT_SYMBOL(utf8_casefold);
+ 
++int utf8_casefold_hash(const struct unicode_map *um, const void *salt,
++		       struct qstr *str)
++{
++	const struct utf8data *data = utf8nfdicf(um->version);
++	struct utf8cursor cur;
++	int c;
++	unsigned long hash = init_name_hash(salt);
++
++	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
++		return -EINVAL;
++
++	while ((c = utf8byte(&cur))) {
++		if (c < 0)
++			return -EINVAL;
++		hash = partial_name_hash((unsigned char)c, hash);
++	}
++	str->hash = end_name_hash(hash);
++	return 0;
++}
++EXPORT_SYMBOL(utf8_casefold_hash);
++
+ int utf8_normalize(const struct unicode_map *um, const struct qstr *str,
+ 		   unsigned char *dest, size_t dlen)
+ {
+diff --git a/include/linux/unicode.h b/include/linux/unicode.h
+index 990aa97d8049..74484d44c755 100644
+--- a/include/linux/unicode.h
++++ b/include/linux/unicode.h
+@@ -27,6 +27,9 @@ int utf8_normalize(const struct unicode_map *um, const struct qstr *str,
+ int utf8_casefold(const struct unicode_map *um, const struct qstr *str,
+ 		  unsigned char *dest, size_t dlen);
+ 
++int utf8_casefold_hash(const struct unicode_map *um, const void *salt,
++		       struct qstr *str);
++
+ struct unicode_map *utf8_load(const char *version);
+ void utf8_unload(struct unicode_map *um);
+ 
 -- 
 2.27.0.383.g050319c2ae-goog
 
