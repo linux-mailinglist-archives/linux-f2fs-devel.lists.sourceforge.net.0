@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1C4421AA83
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 00:30:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BD0521AABB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 00:46:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jtf46-0003qh-7T; Thu, 09 Jul 2020 22:30:50 +0000
+	id 1jtfJ5-0004UF-VA; Thu, 09 Jul 2020 22:46:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jtf44-0003qZ-NL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:30:48 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jtfJ3-0004U5-VT
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:46:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7dqJz7HGmtaLQ2ePle3NJl+4ZCkTyDnaQwDTdbZVg0U=; b=A8cJvO24wMq7ySSjKniFzRy3kb
- fUcv5Adk1TCFRqsL9Q7cIXAaLM93yivAmPnEQtc0yAalrorXOhOO5AGRULZ+qA9gvWSc40vlTqpDR
- U6DCkJ6wcWEwQVtVDpCNAf3FQY8/Lla3G+Be8X6sVU5yj40z11jpUkVDgcetHBNPUmDI=;
+ bh=xamRBiR2vsIZHdRIqsSF/LZqSnudIci9c8EUS+KPAXc=; b=ftUPnVbEhStdhk1nD20k0jL/RB
+ 779cW85aNkOyTmcczOCd5kxj/D3zq4nF3P2jxM2V5Wx/aS7IL4wkFYdPNJaZI3itzxomWqlc13g9O
+ FLO2h8CVYtSm8KLTtuduaRah5EedLEkCxgk002emS/oFfKYr5kmQzjDkfYM71Kp1COU0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7dqJz7HGmtaLQ2ePle3NJl+4ZCkTyDnaQwDTdbZVg0U=; b=Yk7zzuLGa1ptei1Dd66XSZz7/R
- DzXyzqHF9CZS4fmi6nn2u6Y61IkCLzqKN/2nnW+rj9WB0X96bV05uMiuVCtuQc2uYiqWvxuEMxMru
- 76CT9ahph6wt5C6/T0fYqKG05VFte5me2TB8ldXBOIgx7apBakIXmsjigLoGWS313aDk=;
+ bh=xamRBiR2vsIZHdRIqsSF/LZqSnudIci9c8EUS+KPAXc=; b=hNWoDvcQjp7DwFPcJTAU1X9EvQ
+ 0AvWmYP4xcbV2n6v4infYeWS+uuj/gxm2XwsFcetO3bpKKwa9+8ujZ4h8DPbH++YXzeutDbGns8cE
+ bTai9WggJhB9Jq08D0IaGmYwTOB1ptNUZb2dncKutjwxCFnnJe824PyJfwsYXKVHWUgc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jtf42-00FdI5-37
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:30:48 +0000
+ id 1jtfJ2-00Cdvo-Og
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:46:17 +0000
 Received: from gmail.com (unknown [104.132.1.76])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8540B2070E;
- Thu,  9 Jul 2020 22:30:35 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 405FE206E2;
+ Thu,  9 Jul 2020 22:46:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594333835;
- bh=Dpn69SR1yUFPn66W7Fbbk1lCZ1fQTf5VGLdHh2L6pHU=;
+ s=default; t=1594334771;
+ bh=dllc0mNQLui62MxdLGsYVQ0KPlrkGuocjRq3Z70d4xg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=m+WR+Y2LanZRhq8MC5xduHojOk8O3+XkAMqrAcK0GJHm1Uegqx4r0qOxZTCnB4eo+
- 8Pz68buk00ixvCYM+O7sDEZwr/AFjVyiAAk7rL6gakndlg3018/druWwbuN6YlXRPs
- fEjJFYMNpIrs+615pkKDogPMr21H+id2N31Liccg=
-Date: Thu, 9 Jul 2020 15:30:34 -0700
+ b=xvDIPC57zh3Q9WVIHSKHkAsCSM6aAI047xfy8fejKV0QhiMZ7VZ8/UwZmuDEAVmTi
+ VxJnjd+/iQeXu9RqWowkQxgCnxyVtCOnLm+E1OUsprA9HEDc5V8LrIfscbZjHANAS7
+ qITlXpZ46+T3AzBMvAcTLL3qacPrDc6ArNn+VhKw=
+Date: Thu, 9 Jul 2020 15:46:09 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200709223034.GE3855682@gmail.com>
+Message-ID: <20200709224609.GF3855682@gmail.com>
 References: <20200709194751.2579207-1-satyat@google.com>
- <20200709194751.2579207-5-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200709194751.2579207-5-satyat@google.com>
+In-Reply-To: <20200709194751.2579207-1-satyat@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jtf42-00FdI5-37
-Subject: Re: [f2fs-dev] [PATCH 4/5] ext4: support direct I/O with fscrypt
+X-Headers-End: 1jtfJ2-00Cdvo-Og
+Subject: Re: [f2fs-dev] [PATCH 0/5] add support for direct I/O with fscrypt
  using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -90,31 +89,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 09, 2020 at 07:47:50PM +0000, Satya Tangirala wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On Thu, Jul 09, 2020 at 07:47:46PM +0000, Satya Tangirala wrote:
+> This patch series adds support for direct I/O with fscrypt using
+> blk-crypto. It has been rebased on fscrypt/inline-encryption.
+
+Nit: use fscrypt/master instead.  (Eventually I'll delete the
+"inline-encryption" branch.)
+
+> Patch 1 adds two functions to fscrypt that need to be called to determine
+> if direct I/O is supported for a request.
 > 
-> Wire up ext4 with fscrypt direct I/O support.
+> Patches 2 and 3 wire up direct-io and iomap respectively with the functions
+> introduced in Patch 1 and set bio crypt contexts on bios when appropriate
+> by calling into fscrypt.
 > 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> Signed-off-by: Satya Tangirala <satyat@google.com>
+> Patches 4 and 5 allow ext4 and f2fs direct I/O to support fscrypt without
+> falling back to buffered I/O.
+> 
+> This patch series was tested by running xfstests with test_dummy_encryption
+> with and without the 'inlinecrypt' mount option, and there were no
+> meaningful regressions. The only regression was for generic/587 on ext4,
+> but that test isn't compatible with test_dummy_encryption in the first
+> place, and the test "incorrectly" passes without the 'inlinecrypt' mount
+> option - a patch will be sent out to exclude that test when
+> test_dummy_encryption is turned on with ext4 (like the other quota related
+> tests that use user visible quota files).
 
-This commit message could use some more details.  I think it should clarify that
-the direct I/O support is limited to cases where the filesystem has been mounted
-with '-o inlinecrypt' and CONFIG_BLK_INLINE_ENCRYPTION has been enabled, along
-with CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK if hardware support isn't present.
+Note that xfstests has a check that prevents most of the direct I/O tests from
+running when the 'test_dummy_encryption' mount option was specified:
 
-As-is, it sounds a bit over-promising.
+_require_odirect()
+{
+        if [ $FSTYP = "ext4" ] || [ $FSTYP = "f2fs" ] ; then
+                if echo "$MOUNT_OPTIONS" | grep -q "test_dummy_encryption"; then
+                        _notrun "$FSTYP encryption doesn't support O_DIRECT"
+                fi
+        fi
 
-Likewise for f2fs.
-
-We need to properly document this too.  At the very least, in the fscrypt patch,
-Documentation/filesystems/fscrypt.rst needs to be updated because it currently
-says "Direct I/O is not supported on encrypted files."
-
-fscrypt.rst could also use some information about inline encryption.  Currently
-inline encryption for fscrypt is only documented in the ext4 and f2fs
-documentation in the context of the inlinecrypt mount option.  (Though, this
-suggestion applies even without direct I/O support.)
+We should try changing that check to not skip the test if the 'inlinecrypt'
+mount option was also specified.
 
 - Eric
 
