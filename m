@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B047521AA15
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jul 2020 23:59:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1C4421AA83
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 00:30:53 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jtea0-0002Xh-TM; Thu, 09 Jul 2020 21:59:44 +0000
+	id 1jtf46-0003qh-7T; Thu, 09 Jul 2020 22:30:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jteZz-0002XT-IB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 21:59:43 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jtf44-0003qZ-NL
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:30:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UpizV3eUjznsRXHyyR7jt8g4SPMGiQiskfyP9tnifAY=; b=OWjqSBuqb/zAahWAVmSOsL3oVl
- j3uNlz/owza7bV4jsfYDoU5RbXPtADoGDz7WMp8TPMYGlRXkClp15l8Mpl8M8e/o2iujWq1p95Z1D
- KrBB5vqAaK4iptHbgyrylJnE8V4J73JOZ4/eczWuHoNNM5/0fGZ09p+2R/jdfSOSbKsM=;
+ bh=7dqJz7HGmtaLQ2ePle3NJl+4ZCkTyDnaQwDTdbZVg0U=; b=A8cJvO24wMq7ySSjKniFzRy3kb
+ fUcv5Adk1TCFRqsL9Q7cIXAaLM93yivAmPnEQtc0yAalrorXOhOO5AGRULZ+qA9gvWSc40vlTqpDR
+ U6DCkJ6wcWEwQVtVDpCNAf3FQY8/Lla3G+Be8X6sVU5yj40z11jpUkVDgcetHBNPUmDI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UpizV3eUjznsRXHyyR7jt8g4SPMGiQiskfyP9tnifAY=; b=ZDO40ND1NZKs6OIEybAaBRAQbP
- DKjJNO3cu4ZreOJ0FzqZNUE+H2MrZVdaepNad24oPftOwV/k58Ot3a61bryfRynv+VrzBJ/zojVaI
- 0a7fz5ULx6gdgJhnAA/IGfX6XuGPCqeu9GL8lDN7bAqcDT4O1v2vWNIr2qXMHqQGK2FQ=;
+ bh=7dqJz7HGmtaLQ2ePle3NJl+4ZCkTyDnaQwDTdbZVg0U=; b=Yk7zzuLGa1ptei1Dd66XSZz7/R
+ DzXyzqHF9CZS4fmi6nn2u6Y61IkCLzqKN/2nnW+rj9WB0X96bV05uMiuVCtuQc2uYiqWvxuEMxMru
+ 76CT9ahph6wt5C6/T0fYqKG05VFte5me2TB8ldXBOIgx7apBakIXmsjigLoGWS313aDk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jteZt-00Fbf7-PG
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 21:59:43 +0000
+ id 1jtf42-00FdI5-37
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:30:48 +0000
 Received: from gmail.com (unknown [104.132.1.76])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F1C8120672;
- Thu,  9 Jul 2020 21:59:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8540B2070E;
+ Thu,  9 Jul 2020 22:30:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594331965;
- bh=PcF5ZLXsR+T1pZugOPirxGijT4fToIElCeEXDGjGu5w=;
+ s=default; t=1594333835;
+ bh=Dpn69SR1yUFPn66W7Fbbk1lCZ1fQTf5VGLdHh2L6pHU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oby6MxtV20D13kOVSTaJgUYG5nAAo8sH23d7/SoK4aWHc7Ptd5247NMgYqJyG6nrH
- XhStnvd4gWMxCHoszwNn+BzsvvVto+8XUWVlYPw9Oku9bfgcfXmdp9HnZIWwWHGC96
- +u803Hssn6Q/Pn1ZsRhLkOHPWPzbQiigBf37ZXFg=
-Date: Thu, 9 Jul 2020 14:59:23 -0700
+ b=m+WR+Y2LanZRhq8MC5xduHojOk8O3+XkAMqrAcK0GJHm1Uegqx4r0qOxZTCnB4eo+
+ 8Pz68buk00ixvCYM+O7sDEZwr/AFjVyiAAk7rL6gakndlg3018/druWwbuN6YlXRPs
+ fEjJFYMNpIrs+615pkKDogPMr21H+id2N31Liccg=
+Date: Thu, 9 Jul 2020 15:30:34 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200709215923.GD3855682@gmail.com>
+Message-ID: <20200709223034.GE3855682@gmail.com>
 References: <20200709194751.2579207-1-satyat@google.com>
- <20200709194751.2579207-4-satyat@google.com>
+ <20200709194751.2579207-5-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200709194751.2579207-4-satyat@google.com>
+In-Reply-To: <20200709194751.2579207-5-satyat@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,14 +68,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: get_maintainer.pl]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jteZt-00Fbf7-PG
-Subject: Re: [f2fs-dev] [PATCH 3/5] iomap: support direct I/O with fscrypt
+X-Headers-End: 1jtf42-00FdI5-37
+Subject: Re: [f2fs-dev] [PATCH 4/5] ext4: support direct I/O with fscrypt
  using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -94,25 +90,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 09, 2020 at 07:47:49PM +0000, Satya Tangirala wrote:
+On Thu, Jul 09, 2020 at 07:47:50PM +0000, Satya Tangirala wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Wire up iomap direct I/O with the fscrypt additions for direct I/O,
-> and set bio crypt contexts on bios when appropriate.
-
-It might be useful to mention why the calls to fscrypt_limit_dio_pages() are
-needed.  (It's because the iomap code works directly with logical ranges, so it
-doesn't have a chance to do fscrypt_mergeable_bio() on every page.)
-
+> Wire up ext4 with fscrypt direct I/O support.
 > 
 > Signed-off-by: Eric Biggers <ebiggers@google.com>
 > Signed-off-by: Satya Tangirala <satyat@google.com>
-> ---
->  fs/iomap/direct-io.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
 
-You probably should add linux-xfs@vger.kernel.org to Cc, as per
-'./scripts/get_maintainer.pl fs/iomap/'.
+This commit message could use some more details.  I think it should clarify that
+the direct I/O support is limited to cases where the filesystem has been mounted
+with '-o inlinecrypt' and CONFIG_BLK_INLINE_ENCRYPTION has been enabled, along
+with CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK if hardware support isn't present.
+
+As-is, it sounds a bit over-promising.
+
+Likewise for f2fs.
+
+We need to properly document this too.  At the very least, in the fscrypt patch,
+Documentation/filesystems/fscrypt.rst needs to be updated because it currently
+says "Direct I/O is not supported on encrypted files."
+
+fscrypt.rst could also use some information about inline encryption.  Currently
+inline encryption for fscrypt is only documented in the ext4 and f2fs
+documentation in the context of the inlinecrypt mount option.  (Though, this
+suggestion applies even without direct I/O support.)
 
 - Eric
 
