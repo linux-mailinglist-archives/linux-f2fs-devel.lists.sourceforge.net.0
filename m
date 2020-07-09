@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D3F421A80F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jul 2020 21:48:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89D3721A8B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jul 2020 22:09:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
 	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=E/Gul437mnvka+9u6GF3vjVF0QjBP+g/bTXmUDkECik=; b=UY99FQSYAuQQl7WgkxgUbG9yX
-	35of4bZmIsW3W+v7LwWY9jYW34nZJugcpkA8jOJMkvMV2AsW07KgCvJ6B8PgyQ2xwshiRxIfTKMsl
-	6R5cesu8s4gQ1twZiztb/j17TGUzme70jAFTtxGRr7o42ts/dg9SvLbuclT4io1+Qw0os=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	 bh=KgyIkRFAWKsJEznRqcpo+924w2VGy20g3gwLA1eWYDc=; b=VCcyBkRzYwOEe6oDqcYqApt6P
+	GLWqIZq0Z6ZcPsDRO5WHbE8AtVuyGKlinI65fk6CN+w4D6jTmNMG+R/aCmPjhjTk2ogr2P3EWxzBC
+	bcIf/XR2I/HHxS9awBe9DKusbQR+UAA2DEWFIo63AoOitmatGugaSU06pRxAyk9ZQ2G5s=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jtcWf-0004yJ-0V; Thu, 09 Jul 2020 19:48:09 +0000
+	id 1jtcri-0000YG-IH; Thu, 09 Jul 2020 20:09:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3b3QHXwYKAHQkSlqSlYggYdW.Uge@flex--satyat.bounces.google.com>)
- id 1jtcWc-0004yB-P1
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 19:48:06 +0000
+ (envelope-from <3cHQHXwYKAHUlTmrTmZhhZeX.Vhf@flex--satyat.bounces.google.com>)
+ id 1jtcrg-0000Xq-Sc
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 20:09:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
  Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ypiy4fZMSHzKt5otJAVuZ4wRDcklaH0IoN6SqVj7WRE=; b=ktkcwLJDuqQ8KNHRmTYTY+dNT
- 1LS66pEL5OfXU+MGJgNchFN7t7Qdm/+e3bjULWZcmrVYD+cP6UaU6TWyfZQ+6/zOygz5r3cxahL1S
- Uv/iObRrAguHs/Wv/+GgP8h9qHsPknmnl9FwrGolLhKKiUNY0OB5cwnkH7k9wmAYcCBos=;
+ bh=F8Vh+2Oj0e1Bz4p4CaEpLpu89IEB8oilLTMr2JnBHtA=; b=VKqDi7Fz3YDChirDCDJyEUezA
+ jNFd8ADBt3MzPwuM8NGVVsjbFvVbQtfTC6xER+CKbNwf/c1HIAnXl3JUHUPUokqi04zLPd7Q54r3e
+ iWAm9q5EdzQE3etidehgZXiM8uNIcBm/DBxoydeZENe6y1buDr6PQUM7FJrrWq2Lm7r70=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
@@ -39,46 +39,46 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ypiy4fZMSHzKt5otJAVuZ4wRDcklaH0IoN6SqVj7WRE=; b=HcBgctlXqPEaDyODLLA7eSPS50
- LOhjYjS+2ANjYKgdFupTFod0efSxUuq5E+GibF584B6J3uq7v+2NFQPAZOeamUvOh4PQ8F/CucvZF
- 1725DpIC05xUudlUgFGlxylTMjUf0pldzk0NXv7HVP01bMkOiN6rc+rajyccKrFOEP38=;
-Received: from mail-yb1-f202.google.com ([209.85.219.202])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=F8Vh+2Oj0e1Bz4p4CaEpLpu89IEB8oilLTMr2JnBHtA=; b=eYA+HGw+7O1zzpeo8q4j7+3xja
+ FT9FXir50OJHzjU+OQaOhuu4FlDj68wIIUTPByF+uK8j4Vn+otG/0U47gGy9U5N8QJN2EmIBJPrvk
+ Ni26tTIAgnVAEMe679fqw6hy8fgy+Co3DEHpkAZZfD39y4WL8M4WHfkKoy4gfdeiyOp0=;
+Received: from mail-qk1-f201.google.com ([209.85.222.201])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jtcWa-00FUFK-TB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 19:48:06 +0000
-Received: by mail-yb1-f202.google.com with SMTP id u64so4082942ybf.13
+ id 1jtcrf-00CVTZ-MK
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 20:09:52 +0000
+Received: by mail-qk1-f201.google.com with SMTP id o26so2670552qko.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 09 Jul 2020 12:48:04 -0700 (PDT)
+ Thu, 09 Jul 2020 13:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:in-reply-to:message-id:mime-version:references:subject:from:to
- :cc; bh=ypiy4fZMSHzKt5otJAVuZ4wRDcklaH0IoN6SqVj7WRE=;
- b=XSToy1Un+kanZIP/v7I36gilu8B8WWrWl9iO24C66p3jtXJiKaYdsyayZ1DDUtA8RR
- VjWimECct82y/QACP32b1OKg2j4nO6PH8dRrhvXaTUpYW7LqFORAfQuUQSELOVMEeX9+
- cRFRCr+eHO0opvt9lKdKzlMPg5NBfhW52yQ6Ytib5ylohaZ5FQjuBy0ZAh3JnopzzD6R
- 4ZD6oa3W8S+TwWlZEOqU3Af3wfN811e60QYmu9DNPY2q1b5jUfVFHVuVdv43lzO4cahH
- Nr/6VPCIs+Dpz1Fxjr15ZWXbxDyZiyfA3UeVPLzA2zZbVhh0XDsOYm2ODMqmVBbRR70t
- 0lPQ==
+ :cc; bh=F8Vh+2Oj0e1Bz4p4CaEpLpu89IEB8oilLTMr2JnBHtA=;
+ b=n/XchN266fqGBoCIT70QRrbSKL8BhsIGh3atkfrL+0wfDq/ITuCBBAwQFiwD29zrHo
+ RjO2JizNIiO3Rvwi0LtaaItm6GvUOons1saevQ9aIy9GCDsecu+O5x3aZvIqzhIwt6Ap
+ jwBA+lkwIT8AlS4+zuBI2BDea413RQdLMek8QcT8+eMzDoxlqYty2NGOEtoAgG3ViD5k
+ uLRAbg36Cjuz6m/+QQmmfQPX3S/WRrOaid2M3uJ0/+vad0TZ6VHnsBsCgxr4A4AoOHK0
+ omL+w4IbITj0XhF1IO0CaTO2QXaxuLEqIMNw+IgjiorB+/s2cF9r9dCip0/PmtPIZn/l
+ w6ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:in-reply-to:message-id:mime-version
  :references:subject:from:to:cc;
- bh=ypiy4fZMSHzKt5otJAVuZ4wRDcklaH0IoN6SqVj7WRE=;
- b=nygq/pCJh3QPgK/y6HEZXS5iat2HahfzGUSCgJLTxwfIUgPscC+TY1+1QXsjzly6gO
- 4EZpEGo/iW5ZbHEfoxDFnEkgcBnpHHBZiPZL0g8DWRzwQFQVuXmGgI3r0or0w49NA/cB
- avYISXnYZStLB+2oO6fXPmHxR+1+1AVHDDKM+Jl8r/zwR1DI5LH/qRTvvY9EcwobpjOf
- RZkr1UphNreqg8DDF+Q5OdoqlC4RCD5UFt7BTXLvBaTo5Csow1Z8sI96LTlkxOHseZ2d
- s493XTDhYw1MtmBVDGmTc84B/q5fJlexYv6/2tjgm/YW7FvIK1ZB7OfkiGG2AEWjwo2h
- QygQ==
-X-Gm-Message-State: AOAM532WBtS5KGezgay9vHTQRtQs4BBLGB4XhP+jrCDfSqEbDigDcKCa
- 5+3f0E3plAiFIJwop/+aJAQ9xyW82/E=
-X-Google-Smtp-Source: ABdhPJwH95zt89pXB801EtQRqTBhoBOukmXpLUJNIbCr8au8pzQNgzGnXZYLrnCTro9o7o1SjhJQrRugcl8=
-X-Received: by 2002:a25:56c3:: with SMTP id
- k186mr79785452ybb.183.1594324079089; 
- Thu, 09 Jul 2020 12:47:59 -0700 (PDT)
-Date: Thu,  9 Jul 2020 19:47:48 +0000
+ bh=F8Vh+2Oj0e1Bz4p4CaEpLpu89IEB8oilLTMr2JnBHtA=;
+ b=pX/5ryWbuVW7p7df24Qv1kbFxss9E2rfEw4+8NtxRqKT1/fxYTNF6w31tD3fQCjJAj
+ uBVcoSp2gDv9DkDdr6stARQL5F2/cURWLejM8MoaFsLEHqLJEZiBYof5cC6qSMDaDq5g
+ UqmZKYs3c/wczdhwsU1FBkyBD5zoXZ2sUwO5LllA8VOszAf0X+z8SSY1rCOZIrrBT6+m
+ Qr5BRgHF0JWvOAmF0ZH5gcVnw3OQ/HN2StgCPnGw6Z8leZxaQrYp3A8uctz07FzeAKkE
+ aozwTqKEmBAzxI3sXfHjmzFCp9ouX34VwMPLn+zTASyltf5JCHB6oHbkyI6Jgzb7gnoU
+ gwPQ==
+X-Gm-Message-State: AOAM531bcyNaH0QqE5gOpX1Jrdmm3KeE08umMC5vSab2t9cJI8Y0j+GO
+ NMFdBjdV1w0QW0x4vguo//gyGy9+RAU=
+X-Google-Smtp-Source: ABdhPJwgF0eduoVEqL+5EnB4NT5k175DYmVz+vnVdiaT3ayIkgmltIZBeFIoEPNUTNM+7geNefWVH9TuAAQ=
+X-Received: by 2002:a17:902:a50c:: with SMTP id
+ s12mr41269918plq.119.1594324080790; 
+ Thu, 09 Jul 2020 12:48:00 -0700 (PDT)
+Date: Thu,  9 Jul 2020 19:47:49 +0000
 In-Reply-To: <20200709194751.2579207-1-satyat@google.com>
-Message-Id: <20200709194751.2579207-3-satyat@google.com>
+Message-Id: <20200709194751.2579207-4-satyat@google.com>
 Mime-Version: 1.0
 References: <20200709194751.2579207-1-satyat@google.com>
 X-Mailer: git-send-email 2.27.0.383.g050319c2ae-goog
@@ -87,22 +87,22 @@ To: linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.219.202 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.202 listed in wl.mailspike.net]
+ [209.85.222.201 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.201 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
  0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jtcWa-00FUFK-TB
-Subject: [f2fs-dev] [PATCH 2/5] direct-io: add support for fscrypt using
+X-Headers-End: 1jtcrf-00CVTZ-MK
+Subject: [f2fs-dev] [PATCH 3/5] iomap: support direct I/O with fscrypt using
  blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,67 +125,67 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Set bio crypt contexts on bios by calling into fscrypt when required,
-and explicitly check for DUN continuity when adding pages to the bio.
-(While DUN continuity is usually implied by logical block contiguity,
-this is not the case when using certain fscrypt IV generation methods
-like IV_INO_LBLK_32).
+Wire up iomap direct I/O with the fscrypt additions for direct I/O,
+and set bio crypt contexts on bios when appropriate.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 Signed-off-by: Satya Tangirala <satyat@google.com>
 ---
- fs/direct-io.c | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ fs/iomap/direct-io.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/fs/direct-io.c b/fs/direct-io.c
-index 6d5370eac2a8..f27f7e3780ee 100644
---- a/fs/direct-io.c
-+++ b/fs/direct-io.c
-@@ -24,6 +24,7 @@
+diff --git a/fs/iomap/direct-io.c b/fs/iomap/direct-io.c
+index ec7b78e6feca..1e123d785199 100644
+--- a/fs/iomap/direct-io.c
++++ b/fs/iomap/direct-io.c
+@@ -6,6 +6,7 @@
  #include <linux/module.h>
- #include <linux/types.h>
+ #include <linux/compiler.h>
  #include <linux/fs.h>
 +#include <linux/fscrypt.h>
- #include <linux/mm.h>
- #include <linux/slab.h>
- #include <linux/highmem.h>
-@@ -411,6 +412,7 @@ dio_bio_alloc(struct dio *dio, struct dio_submit *sdio,
- 	      sector_t first_sector, int nr_vecs)
+ #include <linux/iomap.h>
+ #include <linux/backing-dev.h>
+ #include <linux/uio.h>
+@@ -183,11 +184,14 @@ static void
+ iomap_dio_zero(struct iomap_dio *dio, struct iomap *iomap, loff_t pos,
+ 		unsigned len)
  {
++	struct inode *inode = file_inode(dio->iocb->ki_filp);
+ 	struct page *page = ZERO_PAGE(0);
+ 	int flags = REQ_SYNC | REQ_IDLE;
  	struct bio *bio;
-+	struct inode *inode = dio->inode;
  
- 	/*
- 	 * bio_alloc() is guaranteed to return a bio when allowed to sleep and
-@@ -418,6 +420,9 @@ dio_bio_alloc(struct dio *dio, struct dio_submit *sdio,
- 	 */
- 	bio = bio_alloc(GFP_KERNEL, nr_vecs);
- 
-+	fscrypt_set_bio_crypt_ctx(bio, inode,
-+				  sdio->cur_page_fs_offset >> inode->i_blkbits,
+ 	bio = bio_alloc(GFP_KERNEL, 1);
++	fscrypt_set_bio_crypt_ctx(bio, inode, pos >> inode->i_blkbits,
 +				  GFP_KERNEL);
- 	bio_set_dev(bio, bdev);
- 	bio->bi_iter.bi_sector = first_sector;
- 	bio_set_op_attrs(bio, dio->op, dio->op_flags);
-@@ -782,9 +787,17 @@ static inline int dio_send_cur_page(struct dio *dio, struct dio_submit *sdio,
- 		 * current logical offset in the file does not equal what would
- 		 * be the next logical offset in the bio, submit the bio we
- 		 * have.
-+		 *
-+		 * When fscrypt inline encryption is used, data unit number
-+		 * (DUN) contiguity is also required.  Normally that's implied
-+		 * by logical contiguity.  However, certain IV generation
-+		 * methods (e.g. IV_INO_LBLK_32) don't guarantee it.  So, we
-+		 * must explicitly check fscrypt_mergeable_bio() too.
- 		 */
- 		if (sdio->final_block_in_bio != sdio->cur_page_block ||
--		    cur_offset != bio_next_offset)
-+		    cur_offset != bio_next_offset ||
-+		    !fscrypt_mergeable_bio(sdio->bio, dio->inode,
-+					   cur_offset >> dio->inode->i_blkbits))
- 			dio_bio_submit(dio, sdio);
+ 	bio_set_dev(bio, iomap->bdev);
+ 	bio->bi_iter.bi_sector = iomap_sector(iomap, pos);
+ 	bio->bi_private = dio;
+@@ -253,6 +257,7 @@ iomap_dio_bio_actor(struct inode *inode, loff_t pos, loff_t length,
+ 		ret = nr_pages;
+ 		goto out;
  	}
++	nr_pages = fscrypt_limit_dio_pages(inode, pos, nr_pages);
  
+ 	if (need_zeroout) {
+ 		/* zero out from the start of the block to the write offset */
+@@ -270,6 +275,8 @@ iomap_dio_bio_actor(struct inode *inode, loff_t pos, loff_t length,
+ 		}
+ 
+ 		bio = bio_alloc(GFP_KERNEL, nr_pages);
++		fscrypt_set_bio_crypt_ctx(bio, inode, pos >> inode->i_blkbits,
++					  GFP_KERNEL);
+ 		bio_set_dev(bio, iomap->bdev);
+ 		bio->bi_iter.bi_sector = iomap_sector(iomap, pos);
+ 		bio->bi_write_hint = dio->iocb->ki_hint;
+@@ -307,6 +314,7 @@ iomap_dio_bio_actor(struct inode *inode, loff_t pos, loff_t length,
+ 		copied += n;
+ 
+ 		nr_pages = iov_iter_npages(dio->submit.iter, BIO_MAX_PAGES);
++		nr_pages = fscrypt_limit_dio_pages(inode, pos, nr_pages);
+ 		iomap_dio_submit_bio(dio, iomap, bio, pos);
+ 		pos += n;
+ 	} while (nr_pages);
 -- 
 2.27.0.383.g050319c2ae-goog
 
