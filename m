@@ -2,78 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AC9B21AD88
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 05:31:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FB1421AD93
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 05:33:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jtjkk-0003Zu-K1; Fri, 10 Jul 2020 03:31:10 +0000
+	id 1jtjnG-0005o6-5k; Fri, 10 Jul 2020 03:33:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jtjkj-0003Zf-G1
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 03:31:09 +0000
+ (envelope-from <pahome.chen@mirlab.org>) id 1jtjnE-0005nz-V6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 03:33:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:Subject:Message-ID:Date:From:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Iw+3Quj3C5dDsE12ypUSHhs9I5Qc1irPlcsB8GVM8sA=; b=G4I4yjddqTYac323+LmGLBQ7yx
- k/X8Vc31UySffwPo0QaPmmU6ro3Y8leguOvZd8dLO85PQnXVvvUt6mfOttCDrmhlY9jVS6zr7/fqW
- fBk833YENrJqQ/GsJQM+V2sGiapD+fwMGt8ExOg00AMw/rYlJkcTMyJgvRd479hEXZN8=;
+ bh=FMBV4Nk27FzGelkIUha4opGJdr+5fx37xiez/wnPzaw=; b=SaDrO87QpbgDMK9AiiRrfFrxLW
+ VYyu0hEUGVYJnoUPROkygY704Xj43gJUqzvVBthziUKBa14kLthLJktHQJKT1wvlxGxeuE/ckp1rb
+ wfL7J5VfasSnSlD+P5swRi9I6+jHzcK0oMhXSlve/1vAZDScpD74661gh5kPtFrK+LSQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Iw+3Quj3C5dDsE12ypUSHhs9I5Qc1irPlcsB8GVM8sA=; b=iHFIICfTVnF50PrKg2iWNeosqf
- izwANlvtsjmDwVL8Ydt29r9ZdoUCjPnuLTH/4RrDoxcs5LE4rgMVnwp6mRZo/6GZTPpE1zPhmlxtq
- mAdyNP3p3RxwjVER94EISFFYgg1DEjhN7HzjrV+txpfpriCD5gYf5dwA3Ntv5FuLE5+M=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jtjkg-00Coqz-NM
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 03:31:08 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4531C2065C;
- Fri, 10 Jul 2020 03:31:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594351861;
- bh=ILavezJ1kqmIAMle7McKsxU2p5mV+aIXAmscvoxnkMI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CkHIPNE8U17BHuDs91m8OGWElFvGmzeK7I5hBmt8C3ewaBgRSVyGEu80dXF4PBAuT
- tMwio2MeKkFz3jw/0NzxhG2ZCJpiJ+E7Y43hLe5+lGNM2Ld7MZN7E2GcMaOxjr1Gv8
- Bn1IKACaBsGiPVdCiwW3O7nqr75PIsdc8XuPcyms=
-Date: Thu, 9 Jul 2020 20:31:00 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20200710033100.GE545837@google.com>
-References: <20200710021505.2405872-1-daeho43@gmail.com>
- <20200710030246.GA545837@google.com>
- <62c9dd7a-5d18-8bb6-8e43-c055fcff51cc@huawei.com>
+ h=Content-Type:To:Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=FMBV4Nk27FzGelkIUha4opGJdr+5fx37xiez/wnPzaw=; b=i
+ CtQycF14GFy9BZLmdEM6PiJ9mQ+mkdoEe/WVLdJhgGd2v+Zii2sStbiSGqAv60mKOax+x2LSWiLQw
+ 64a8SJbSrzWHW4Z0EOrxf+L5QWZNAG/LDbIo/GwMsQCxym/TNY7nUn2eS9N3lKDzMd7t8D7DMBxW/
+ iVpjsJ0hGRaQTrCA=;
+Received: from mail-ej1-f51.google.com ([209.85.218.51])
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jtjn0-00Fouw-5q
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 03:33:44 +0000
+Received: by mail-ej1-f51.google.com with SMTP id n26so4501014ejx.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 09 Jul 2020 20:33:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mirlab-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=FMBV4Nk27FzGelkIUha4opGJdr+5fx37xiez/wnPzaw=;
+ b=qo3G6tscTRRMHiJeuZo8iFsOi40nCYGYY3Nj+fe0vyhurR9hvuu8Gq2BRHug3IcCXZ
+ MmnjqIBijAgmcMo4mL29grPbl71H62A75rMibxUQ1/WYQoLkDloclIU+5vHuQ0TcyFjc
+ O0s23+jQ/ptDEFuCQlQfweUg3dHi69ovsLKO6+VnXPL+vwnTCVvHtdUZ0iPKqYWS01lZ
+ 214G6/pPYsQ6v/WAeFryEr0JX0AUuVhiDQHSb2SvmNgQiebYYIXxW/r+8C6CbATO8rJg
+ S9rpnqERlYborPwAie1W01kFgtdqjNDaYNuPGfmP4+YDWgQe0qJ+/kWnPtS3A/1L6LeR
+ W3hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=FMBV4Nk27FzGelkIUha4opGJdr+5fx37xiez/wnPzaw=;
+ b=KQpGx0ydvAtbRmtrPzTXJYCovccB4qo9BAtGPGBcDRY4zobCEDBNwPsJ11HZbclEKh
+ aJD0pG44x8Gr+4/gnFwWr2nnRxpGlJXOHBlJ4pR+oDDdTiwyxePSPc9RnwKjc5JAyBmq
+ QRSrQOguywu/HJBbD2c1NK60l3aeggRzPvL8vc3t2UjlRVn2i8QlW9IZBmfDKvg/VZ0j
+ pAEkpnyZnPl7fd3jQX4FNVLUxNVhf6c0d6mzKWAfwWy23BhLehEH0gTGf2NDRDqFumHP
+ 52y/KAzwa5TdW5AU0cLZzPVkhv77BK7diGwRe8fG9SJVYctQaTYwJGsNBYcagAClOXaN
+ DLBg==
+X-Gm-Message-State: AOAM533zooHyvw2zbo04vZcmlfaa3PYqVMl0URchtsl3C0+I4r6Ruxya
+ IutDF4rggTvwZjcccqIEtJwmXdQSjhXy322L0WP3PJfY
+X-Google-Smtp-Source: ABdhPJzgw0ddMepMd8MyScjBPAp7BMRqzi1dBo6SQxzFVq7W8kPylHuIe13V8QosXrPSTEjCYvmXZTPj75YvdNG9MZE=
+X-Received: by 2002:a17:906:f88a:: with SMTP id
+ lg10mr58147044ejb.317.1594351999467; 
+ Thu, 09 Jul 2020 20:33:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <62c9dd7a-5d18-8bb6-8e43-c055fcff51cc@huawei.com>
-X-Spam-Score: -0.2 (/)
+From: lampahome <pahome.chen@mirlab.org>
+Date: Fri, 10 Jul 2020 11:33:07 +0800
+Message-ID: <CAB3eZftzcywNU-cf7mRWqtj-74VqgzLHC32a6v_CycVcRsiu0A@mail.gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.218.51 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.51 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jtjkg-00Coqz-NM
-Subject: Re: [f2fs-dev] [PATCH] f2fs: change the way of handling range.len
- in F2FS_IOC_SEC_TRIM_FILE
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1jtjn0-00Fouw-5q
+Subject: [f2fs-dev] possible to allocate a full segment for a direct IO with
+ blocksize 2MB?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,98 +98,19 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com,
- Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/10, Chao Yu wrote:
-> On 2020/7/10 11:02, Jaegeuk Kim wrote:
-> > On 07/10, Daeho Jeong wrote:
-> >> From: Daeho Jeong <daehojeong@google.com>
-> >>
-> >> Changed the way of handling range.len of F2FS_IOC_SEC_TRIM_FILE.
-> >>  1. Added -1 value support for range.len to signify the end of file.
-> >>  2. If the end of the range passes over the end of file, it means until
-> >>     the end of file.
-> >>  3. ignored the case of that range.len is zero to prevent the function
-> >>     from making end_addr zero and triggering different behaviour of
-> >>     the function.
-> >>
-> >> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> >> ---
-> >>  fs/f2fs/file.c | 16 +++++++---------
-> >>  1 file changed, 7 insertions(+), 9 deletions(-)
-> >>
-> >> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> >> index 368c80f8e2a1..1c4601f99326 100644
-> >> --- a/fs/f2fs/file.c
-> >> +++ b/fs/f2fs/file.c
-> >> @@ -3813,21 +3813,19 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
-> >>  	file_start_write(filp);
-> >>  	inode_lock(inode);
-> >>  
-> >> -	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode)) {
-> >> +	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode) ||
-> >> +			range.start >= inode->i_size) {
-> >>  		ret = -EINVAL;
-> >>  		goto err;
-> >>  	}
-> >>  
-> >> -	if (range.start >= inode->i_size) {
-> >> -		ret = -EINVAL;
-> >> +	if (range.len == 0)
-> >>  		goto err;
-> >> -	}
-> >>  
-> >> -	if (inode->i_size - range.start < range.len) {
-> >> -		ret = -E2BIG;
-> >> -		goto err;
-> >> -	}
-> >> -	end_addr = range.start + range.len;
-> >> +	if (range.len == (u64)-1 || inode->i_size - range.start < range.len)
-> >> +		end_addr = inode->i_size;
-> 
-> We can remove 'range.len == (u64)-1' condition since later condition can cover
-> this?
-> 
-> > 
-> > Hmm, what if there are blocks beyond i_size? Do we need to check i_blocks for
-> 
-> The blocks beyond i_size will never be written, there won't be any valid message
-> there, so we don't need to worry about that.
+I create 3 dd job write 1GB file with directIO and blocksize is 2MB
+equal to segment size.
 
-I don't think we have a way to guarantee the order of i_size and block
-allocation in f2fs. See f2fs_write_begin and f2fs_write_end.
+But it seems the each IO of three job's physical block address maybe
+in different segment.
 
-> 
-> Thanks,
-> 
-> > ending criteria?
-> > 
-> >> +	else
-> >> +		end_addr = range.start + range.len;
-> >>  
-> >>  	to_end = (end_addr == inode->i_size);
-> >>  	if (!IS_ALIGNED(range.start, F2FS_BLKSIZE) ||
-> >> -- 
-> >> 2.27.0.383.g050319c2ae-goog
-> >>
-> >>
-> >>
-> >> _______________________________________________
-> >> Linux-f2fs-devel mailing list
-> >> Linux-f2fs-devel@lists.sourceforge.net
-> >> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > 
-> > 
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > .
-> > 
+If I can get full segment for one directIO, I thought performance will be up.
+
+Is that possible?
 
 
 _______________________________________________
