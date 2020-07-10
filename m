@@ -2,75 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BD0521AABB
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 00:46:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09BC321AC5D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2020 03:05:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jtfJ5-0004UF-VA; Thu, 09 Jul 2020 22:46:19 +0000
+	id 1jthTz-0002hY-Cq; Fri, 10 Jul 2020 01:05:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jtfJ3-0004U5-VT
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:46:17 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jthTx-0002hM-H0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 01:05:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xamRBiR2vsIZHdRIqsSF/LZqSnudIci9c8EUS+KPAXc=; b=ftUPnVbEhStdhk1nD20k0jL/RB
- 779cW85aNkOyTmcczOCd5kxj/D3zq4nF3P2jxM2V5Wx/aS7IL4wkFYdPNJaZI3itzxomWqlc13g9O
- FLO2h8CVYtSm8KLTtuduaRah5EedLEkCxgk002emS/oFfKYr5kmQzjDkfYM71Kp1COU0=;
+ bh=zMJt2oHDQTeIEA875koCf2tNiffAseeDk/QiW3XUHRs=; b=AWV+4OftG72bQ5sy0Xzkp8j4Pr
+ AjnN0Ojktpz3nLmropu0HDqu4iU76voOtZiMA89sN7tbnCaD8RORZy7n4BzIebogxUIKXrucrXUVh
+ 2xFvBh6cgib7/CAhqMSkGV/vt4W8qOhwxheECLV4kkFzRQP1p/Di0Kr7iRUZJSJheYZ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xamRBiR2vsIZHdRIqsSF/LZqSnudIci9c8EUS+KPAXc=; b=hNWoDvcQjp7DwFPcJTAU1X9EvQ
- 0AvWmYP4xcbV2n6v4infYeWS+uuj/gxm2XwsFcetO3bpKKwa9+8ujZ4h8DPbH++YXzeutDbGns8cE
- bTai9WggJhB9Jq08D0IaGmYwTOB1ptNUZb2dncKutjwxCFnnJe824PyJfwsYXKVHWUgc=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=zMJt2oHDQTeIEA875koCf2tNiffAseeDk/QiW3XUHRs=; b=ABXCaLyp+Qlf+wXXLAJ0kVMdex
+ hDjz9TgnnlxQT7yP5MFymBTJO7tUWgS6Pepy7Aqm7WHO8RKoQ47Qrr6M59uwiKshmLaFFuYTAZ19Z
+ rVpxG81Uqupn7o4uoUOgeX+2vWLdVzH2eiwdWVgoWCrOQxzWpV4uAvi6kA+J9PG/W78Q=;
+Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jtfJ2-00Cdvo-Og
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jul 2020 22:46:17 +0000
-Received: from gmail.com (unknown [104.132.1.76])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 405FE206E2;
- Thu,  9 Jul 2020 22:46:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594334771;
- bh=dllc0mNQLui62MxdLGsYVQ0KPlrkGuocjRq3Z70d4xg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xvDIPC57zh3Q9WVIHSKHkAsCSM6aAI047xfy8fejKV0QhiMZ7VZ8/UwZmuDEAVmTi
- VxJnjd+/iQeXu9RqWowkQxgCnxyVtCOnLm+E1OUsprA9HEDc5V8LrIfscbZjHANAS7
- qITlXpZ46+T3AzBMvAcTLL3qacPrDc6ArNn+VhKw=
-Date: Thu, 9 Jul 2020 15:46:09 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20200709224609.GF3855682@gmail.com>
+ id 1jthTt-00CjfV-G5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jul 2020 01:05:41 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id CEECEF12BB245A9D0CA7;
+ Fri, 10 Jul 2020 09:05:28 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 10 Jul
+ 2020 09:05:24 +0800
+To: Satya Tangirala <satyat@google.com>, <linux-fscrypt@vger.kernel.org>,
+ <linux-fsdevel@vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>,
+ <linux-ext4@vger.kernel.org>
 References: <20200709194751.2579207-1-satyat@google.com>
+ <20200709194751.2579207-6-satyat@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <560266ca-0164-c02e-18ea-55564683d13e@huawei.com>
+Date: Fri, 10 Jul 2020 09:05:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200709194751.2579207-1-satyat@google.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200709194751.2579207-6-satyat@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.191 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jtfJ2-00Cdvo-Og
-Subject: Re: [f2fs-dev] [PATCH 0/5] add support for direct I/O with fscrypt
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jthTt-00CjfV-G5
+Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: support direct I/O with fscrypt
  using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -83,53 +81,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Eric Biggers <ebiggers@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 09, 2020 at 07:47:46PM +0000, Satya Tangirala wrote:
-> This patch series adds support for direct I/O with fscrypt using
-> blk-crypto. It has been rebased on fscrypt/inline-encryption.
-
-Nit: use fscrypt/master instead.  (Eventually I'll delete the
-"inline-encryption" branch.)
-
-> Patch 1 adds two functions to fscrypt that need to be called to determine
-> if direct I/O is supported for a request.
+On 2020/7/10 3:47, Satya Tangirala wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Patches 2 and 3 wire up direct-io and iomap respectively with the functions
-> introduced in Patch 1 and set bio crypt contexts on bios when appropriate
-> by calling into fscrypt.
+> Wire up f2fs with fscrypt direct I/O support.
 > 
-> Patches 4 and 5 allow ext4 and f2fs direct I/O to support fscrypt without
-> falling back to buffered I/O.
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Satya Tangirala <satyat@google.com>
+> ---
+>  fs/f2fs/f2fs.h | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> This patch series was tested by running xfstests with test_dummy_encryption
-> with and without the 'inlinecrypt' mount option, and there were no
-> meaningful regressions. The only regression was for generic/587 on ext4,
-> but that test isn't compatible with test_dummy_encryption in the first
-> place, and the test "incorrectly" passes without the 'inlinecrypt' mount
-> option - a patch will be sent out to exclude that test when
-> test_dummy_encryption is turned on with ext4 (like the other quota related
-> tests that use user visible quota files).
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index b35a50f4953c..6d662a37b445 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4082,7 +4082,9 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  	int rw = iov_iter_rw(iter);
+>  
+> -	if (f2fs_post_read_required(inode))
+> +	if (!fscrypt_dio_supported(iocb, iter))
+> +		return true;
+> +	if (fsverity_active(inode))
 
-Note that xfstests has a check that prevents most of the direct I/O tests from
-running when the 'test_dummy_encryption' mount option was specified:
-
-_require_odirect()
+static inline bool f2fs_post_read_required(struct inode *inode)
 {
-        if [ $FSTYP = "ext4" ] || [ $FSTYP = "f2fs" ] ; then
-                if echo "$MOUNT_OPTIONS" | grep -q "test_dummy_encryption"; then
-                        _notrun "$FSTYP encryption doesn't support O_DIRECT"
-                fi
-        fi
+	return f2fs_encrypted_file(inode) || fsverity_active(inode) ||
+		f2fs_compressed_file(inode);
+}
 
-We should try changing that check to not skip the test if the 'inlinecrypt'
-mount option was also specified.
+That's not correct, missed to check compression condition.
 
-- Eric
+>  		return true;
+>  	if (f2fs_is_multi_device(sbi))
+>  		return true;
+> 
 
 
 _______________________________________________
