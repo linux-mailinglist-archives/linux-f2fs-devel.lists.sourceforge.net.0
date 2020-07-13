@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CFBD21DFCE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2020 20:36:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 508F921E078
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2020 21:07:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jv3JV-0003IG-3I; Mon, 13 Jul 2020 18:36:29 +0000
+	id 1jv3nn-00039L-9U; Mon, 13 Jul 2020 19:07:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1jv3JT-0003I5-P6
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:36:27 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jv3nm-000392-3j
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 19:07:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TgxwhWKCCEJCn7Oev1MTPAFT7zq8gAwnfwpx6qwmZWI=; b=d5hFg38rWiYGRRcK+3UnDMBGvG
- uFex4KS/40OEuyvJvixmQwLIRg5WlJs4FOoafObUTOeJVyx1MHA3n6naIlcg0ahnxeT6S1Voyocf9
- jvF3Tg0K3MEKHH97SLc1xCRbxQQ+UkriEVPPnWG1upYSSq/x0/7i1rRzW7eGmJWBK33k=;
+ bh=HYQHpFVNcByfgihHwkoyg8IKKdM/w8PTZqQYdsMuVyM=; b=NeQoGi6crarM/lbo/2zQbfkZgu
+ BWRCbQDSlJ76BgHr2IAR+Nj+gfgA1Yk4O3BJtS/iGu9/jPhAdt5a7gpPXpcTBN9D4EYOXIHuRZFLh
+ 8NgkytbBSjLJVUq7RWPM5SMqO+MQCzR1gFlkV9BJsUte3m7siUN1s9dL1Q0E1KvYhaeo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TgxwhWKCCEJCn7Oev1MTPAFT7zq8gAwnfwpx6qwmZWI=; b=JQaBuKKargROULbbB3OakrinI/
- PminPc0SYFHOXAL+Eolr2SA3pLtwlRlw8P5RVf+4Ct0EQEKT8cnalBgPvqTXvGG9XPAlOOGjOGWAU
- rADbTXpQawxnosD7attWMydhj8l4HTrfCGa8nC5AvUAfuRFMJpqrYx30mMXxWLevVIiE=;
+ bh=HYQHpFVNcByfgihHwkoyg8IKKdM/w8PTZqQYdsMuVyM=; b=FqaVWy9TIwhRfGLGpzrnFBPDbg
+ 7dU9pNarqA0Hwt++Iq61HYlZcdEFDvxucY/bQZlXY7QC9KA8qU0zW7/CDmGmLXZqu/WztOw26uGjg
+ Lf5T9cwybOLyIM7TOrMrt+B8Z4KbHa3YsI5/GfAKB8yX2m3rY641XufEd2HuBlwrng6g=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jv3JS-00GRIW-N4
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:36:27 +0000
-Received: from gmail.com (unknown [104.132.1.76])
+ id 1jv3nk-001sgH-Kx
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 19:07:46 +0000
+Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 30864206F0;
- Mon, 13 Jul 2020 18:36:21 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9ABF220738;
+ Mon, 13 Jul 2020 19:07:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594665381;
- bh=BLeUpT0iFaXku/efoG1DhWrwtysiF8mjsyAhDbJwYvY=;
+ s=default; t=1594667256;
+ bh=uzfPu6IvaZx9X/DHGJTrvNJ2a2aolgVBujJ6P/u34bU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KM7PMsU9e+2DXZLJqUFe2XogR1FnNqbehLX3k0+pOhOi5vpA45U7N7wQoDAv2d3fd
- c3qXgNVc47g0YliQJzKPx38hA8WIeHdc4f4jYHsyQnBOYMVLu/KOwJbE/pqKejSJYH
- 8azn8SCxy5mt3B+hvpZpiei6Tl7lLZ+R9SfKbQpA=
-Date: Mon, 13 Jul 2020 11:36:19 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20200713183619.GC722906@gmail.com>
-References: <20200709194751.2579207-1-satyat@google.com>
- <20200709194751.2579207-3-satyat@google.com>
- <20200710053406.GA25530@infradead.org>
+ b=BsgteGo+73Gre8l32YfWZeYMbtD+WqY/eUzugufsUfCb23l3xKjKwc/NHfKt/FYF6
+ Pj5VJCXE+fcMGyi8sBlA1oGQWA0COjQPq6lUSudHTVj3F5ABy79p7UuA5FUvmwNCxO
+ R7g2SBOYEo3f0mAhRjueTOOrHFQqi5QW619qkIAc=
+Date: Mon, 13 Jul 2020 12:07:36 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Aravind Ramesh <aravind.ramesh@wdc.com>
+Message-ID: <20200713190736.GA3131494@google.com>
+References: <20200702155427.13372-1-aravind.ramesh@wdc.com>
+ <20200702155427.13372-3-aravind.ramesh@wdc.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200710053406.GA25530@infradead.org>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20200702155427.13372-3-aravind.ramesh@wdc.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,10 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jv3JS-00GRIW-N4
-Subject: Re: [f2fs-dev] [PATCH 2/5] direct-io: add support for fscrypt using
- blk-crypto
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jv3nk-001sgH-Kx
+Subject: Re: [f2fs-dev] [PATCH 2/2] fsck.f2fs: validate free seg count on
+ zns device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,45 +84,183 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Satya Tangirala <satyat@google.com>
+Cc: matias.bjorling@wdc.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 10, 2020 at 06:34:06AM +0100, Christoph Hellwig wrote:
-> On Thu, Jul 09, 2020 at 07:47:48PM +0000, Satya Tangirala wrote:
-> > From: Eric Biggers <ebiggers@google.com>
-> > 
-> > Set bio crypt contexts on bios by calling into fscrypt when required,
-> > and explicitly check for DUN continuity when adding pages to the bio.
-> > (While DUN continuity is usually implied by logical block contiguity,
-> > this is not the case when using certain fscrypt IV generation methods
-> > like IV_INO_LBLK_32).
+Hi Aravind,
+
+On 07/02, Aravind Ramesh wrote:
+> NVMe Zoned Namespace devices can have zone-capacity less than zone-size.
+> Zone-capacity indicates the number of usable blocks in a zone, if
+> zone-capacity is less than zone-size, then the segments which start
+> at/after zone-capacity are considered unusable. Only those segments
+> which start before the zone-capacity are considered as usable and added
+> to the free_segment_count and free_segment_bitmap of the kernel.
 > 
-> I know it is asking you for more work, but instead of adding more
-> features to the legacy direct I/O code, could you just switch the user
-> of it (I guess this is for f2f2?) to the iomap one?
+> Allow fsck to find the free_segment_count based on the zone-capacity and
+> compare with checkpoint values.
+> 
+> Signed-off-by: Aravind Ramesh <aravind.ramesh@wdc.com>
+> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+> ---
+>  fsck/fsck.c  |  5 ++--
+>  fsck/fsck.h  |  2 ++
+>  fsck/mount.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++--
+>  3 files changed, 78 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index e110f3d..ba2340d 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -1905,11 +1905,12 @@ int fsck_chk_meta(struct f2fs_sb_info *sbi)
+>  		if (IS_NODESEG(se->type))
+>  			sit_node_blks += se->valid_blocks;
+>  	}
+> -	if (fsck->chk.sit_free_segs + sit_valid_segs != TOTAL_SEGS(sbi)) {
+> +	if (fsck->chk.sit_free_segs + sit_valid_segs !=
+> +				get_usable_seg_count(sbi)) {
+>  		ASSERT_MSG("SIT usage does not match: sit_free_segs %u, "
+>  				"sit_valid_segs %u, total_segs %u",
+>  			fsck->chk.sit_free_segs, sit_valid_segs,
+> -			TOTAL_SEGS(sbi));
+> +			get_usable_seg_count(sbi));
+>  		return -EINVAL;
+>  	}
+>  
+> diff --git a/fsck/fsck.h b/fsck/fsck.h
+> index bc6a435..e86730c 100644
+> --- a/fsck/fsck.h
+> +++ b/fsck/fsck.h
+> @@ -224,6 +224,8 @@ extern u32 update_nat_bits_flags(struct f2fs_super_block *,
+>  				struct f2fs_checkpoint *, u32);
+>  extern void write_nat_bits(struct f2fs_sb_info *, struct f2fs_super_block *,
+>  			struct f2fs_checkpoint *, int);
+> +extern unsigned int get_usable_seg_count(struct f2fs_sb_info *);
+> +extern bool is_usable_seg(struct f2fs_sb_info *, unsigned int);
+>  
+>  /* dump.c */
+>  struct dump_option {
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index d0f2eab..72ca0cb 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -30,6 +30,76 @@
+>  #define ACL_OTHER		(0x20)
+>  #endif
+>  
+> +static int get_device_idx(struct f2fs_sb_info *sbi, u_int32_t segno)
+> +{
+> +	block_t seg_start_blkaddr;
+> +	int i;
+> +
+> +	seg_start_blkaddr = SM_I(sbi)->main_blkaddr +
+> +				segno * DEFAULT_BLOCKS_PER_SEGMENT;
+> +	for (i = 0; i < c.ndevs; i++)
+> +		if (c.devices[i].start_blkaddr <= seg_start_blkaddr &&
+> +			c.devices[i].end_blkaddr > seg_start_blkaddr)
+> +			return i;
+> +	return 0;
+> +}
+> +
+> +#ifdef HAVE_LINUX_BLKZONED_H
+> +
+> +static int get_zone_idx_from_dev(struct f2fs_sb_info *sbi,
+> +					u_int32_t segno, u_int32_t dev_idx)
+> +{
+> +	block_t seg_start_blkaddr = START_BLOCK(sbi, segno);
+> +
+> +	return (seg_start_blkaddr - c.devices[dev_idx].start_blkaddr) >>
+> +			log_base_2(sbi->segs_per_sec * sbi->blocks_per_seg);
+> +}
+> +
+> +bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
+> +{
+> +	unsigned int secno = segno / sbi->segs_per_sec;
+> +	block_t seg_start = START_BLOCK(sbi, segno);
+> +	block_t blocks_per_sec = sbi->blocks_per_seg * sbi->segs_per_sec;
+> +	unsigned int dev_idx = get_device_idx(sbi, segno);
+> +	unsigned int zone_idx = get_zone_idx_from_dev(sbi, segno, dev_idx);
+> +	unsigned int sec_off = SM_I(sbi)->main_blkaddr >>
+> +						log_base_2(blocks_per_sec);
+> +
+> +	if (zone_idx < c.devices[dev_idx].nr_rnd_zones)
+> +		return true;
+> +
+> +	if (c.devices[dev_idx].zoned_model != F2FS_ZONED_HM)
+> +		return true;
+> +
+> +	return seg_start < ((sec_off + secno) * blocks_per_sec) +
+> +				c.devices[dev_idx].zone_cap_blocks[zone_idx];
+> +}
+> +
+> +unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
+> +{
+> +	unsigned int i, usable_seg_count = 0;
+> +
+> +	for (i = 0; i < TOTAL_SEGS(sbi); i++)
+> +		if (is_usable_seg(sbi, i))
+> +			usable_seg_count++;
+> +
+> +	return usable_seg_count;
+> +}
+> +
+> +#else
+> +
+> +bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
 
-Eventually we should do that, as well as convert f2fs's fiemap, bmap, and llseek
-to use iomap.  However there's a nontrivial barrier to entry, at least for
-someone who isn't an expert in iomap, especially since f2fs currently doesn't
-use iomap at all and thus doesn't have an iomap_ops implementation.  And using
-ext4 as an example, there will be some subtle cases that need to be handled.
+I've applied the below small change to avoid Android build error.
 
-Satya says he's looking into it; we'll see what he can come up with and what the
-f2fs developers say.
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -88,7 +88,7 @@ unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
 
-If it turns out to be difficult and people think this patchset is otherwise
-ready, we probably shouldn't hold it up on that.  This is a very small patch,
-and Satya and I have to maintain it for years in downstream kernels anyway, so
-it will be used and tested regardless.  It would also be nice to allow userspace
-(e.g. xfstests) to assume that if the inlinecrypt mount option is supported,
-then direct I/O is supported too, without having to handle intermediate kernel
-releases where inlinecrypt was supported but not direct I/O.
+ #else
 
-- Eric
+-bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
++bool is_usable_seg(struct f2fs_sb_info *UNUSED(sbi), unsigned int UNUSED(segno))
+ {
+        return true;
+ }
+
+Thanks,
+
+> +{
+> +	return true;
+> +}
+> +
+> +unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
+> +{
+> +	return TOTAL_SEGS(sbi);
+> +}
+> +
+> +#endif
+> +
+>  u32 get_free_segments(struct f2fs_sb_info *sbi)
+>  {
+>  	u32 i, free_segs = 0;
+> @@ -37,7 +107,8 @@ u32 get_free_segments(struct f2fs_sb_info *sbi)
+>  	for (i = 0; i < TOTAL_SEGS(sbi); i++) {
+>  		struct seg_entry *se = get_seg_entry(sbi, i);
+>  
+> -		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i))
+> +		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i) &&
+> +							is_usable_seg(sbi, i))
+>  			free_segs++;
+>  	}
+>  	return free_segs;
+> @@ -2337,7 +2408,7 @@ void build_sit_area_bitmap(struct f2fs_sb_info *sbi)
+>  		memcpy(ptr, se->cur_valid_map, SIT_VBLOCK_MAP_SIZE);
+>  		ptr += SIT_VBLOCK_MAP_SIZE;
+>  
+> -		if (se->valid_blocks == 0x0) {
+> +		if (se->valid_blocks == 0x0 && is_usable_seg(sbi, segno)) {
+>  			if (le32_to_cpu(sbi->ckpt->cur_node_segno[0]) == segno ||
+>  				le32_to_cpu(sbi->ckpt->cur_data_segno[0]) == segno ||
+>  				le32_to_cpu(sbi->ckpt->cur_node_segno[1]) == segno ||
+> -- 
+> 2.19.1
 
 
 _______________________________________________
