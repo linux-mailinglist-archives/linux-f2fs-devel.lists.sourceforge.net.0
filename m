@@ -2,77 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 508F921E078
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2020 21:07:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C74AC21E2FE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jul 2020 00:24:59 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jv3nn-00039L-9U; Mon, 13 Jul 2020 19:07:47 +0000
+	id 1jv6sZ-0001iz-QG; Mon, 13 Jul 2020 22:24:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jv3nm-000392-3j
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 19:07:46 +0000
+ (envelope-from <nroycea@gmail.com>) id 1jv6sY-0001ir-P8
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 22:24:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HYQHpFVNcByfgihHwkoyg8IKKdM/w8PTZqQYdsMuVyM=; b=NeQoGi6crarM/lbo/2zQbfkZgu
- BWRCbQDSlJ76BgHr2IAR+Nj+gfgA1Yk4O3BJtS/iGu9/jPhAdt5a7gpPXpcTBN9D4EYOXIHuRZFLh
- 8NgkytbBSjLJVUq7RWPM5SMqO+MQCzR1gFlkV9BJsUte3m7siUN1s9dL1Q0E1KvYhaeo=;
+ bh=OcHsM2BvDJutedC1r/JVX8yoOxfS5PqyzzhHipn6B9A=; b=ewYm9EQF9e6oO25Z93Q5xcP+G3
+ aZtFHqGiNkS5Ub2iH3arMu0+AvAM6URgmyUEXcNYPO32aQ+iU9tz14tLqLzcV+pEP+rvbWrwZRx8t
+ 5u01ZNpBzNJwvRbSflildw0h+pIbQfzNoJa/1dcHuE0PWnmHbaPqeYYPFSXkgwsBtMuE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=HYQHpFVNcByfgihHwkoyg8IKKdM/w8PTZqQYdsMuVyM=; b=FqaVWy9TIwhRfGLGpzrnFBPDbg
- 7dU9pNarqA0Hwt++Iq61HYlZcdEFDvxucY/bQZlXY7QC9KA8qU0zW7/CDmGmLXZqu/WztOw26uGjg
- Lf5T9cwybOLyIM7TOrMrt+B8Z4KbHa3YsI5/GfAKB8yX2m3rY641XufEd2HuBlwrng6g=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jv3nk-001sgH-Kx
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 19:07:46 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9ABF220738;
- Mon, 13 Jul 2020 19:07:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594667256;
- bh=uzfPu6IvaZx9X/DHGJTrvNJ2a2aolgVBujJ6P/u34bU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=BsgteGo+73Gre8l32YfWZeYMbtD+WqY/eUzugufsUfCb23l3xKjKwc/NHfKt/FYF6
- Pj5VJCXE+fcMGyi8sBlA1oGQWA0COjQPq6lUSudHTVj3F5ABy79p7UuA5FUvmwNCxO
- R7g2SBOYEo3f0mAhRjueTOOrHFQqi5QW619qkIAc=
-Date: Mon, 13 Jul 2020 12:07:36 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Aravind Ramesh <aravind.ramesh@wdc.com>
-Message-ID: <20200713190736.GA3131494@google.com>
-References: <20200702155427.13372-1-aravind.ramesh@wdc.com>
- <20200702155427.13372-3-aravind.ramesh@wdc.com>
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=OcHsM2BvDJutedC1r/JVX8yoOxfS5PqyzzhHipn6B9A=; b=F
+ gCTMcf/IAdrhA7/MIQGXTd6BworugJ62ZTx09NKHaGB2Brx3fWuSraU1BbWh0esSe/YdJd4ukl06m
+ zE0gYVo64+jafqutNI4CkgvLrdmtTaaIfC8aYspHGHoKSW5rQyYu2t3vg8HzpFyIyqv6VCAxvhAlB
+ JeYwiVkgCT5cdIiw=;
+Received: from mail-qk1-f181.google.com ([209.85.222.181])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1jv6sV-00GfDL-0A
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 22:24:54 +0000
+Received: by mail-qk1-f181.google.com with SMTP id q198so13891611qka.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 13 Jul 2020 15:24:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=OcHsM2BvDJutedC1r/JVX8yoOxfS5PqyzzhHipn6B9A=;
+ b=JaNR1TLSKZ1KaEsgcdcLgp0I8nK+ZjumVOIMW8Hlc2bTvH20yd13nv5rKA1NOBNCXa
+ ho6iUoOSbxkFc3KdcwwFzzhuynWrfY8Fr5bnFExJPPir5EX7bm7wgYZVpIO6O3Ec7dY6
+ n1FqlBf/yRFC2XfQ/eqbcQCQqaubqUGSJ8fPEA0yYVhiwfQ8b4M8zqLB5eA6rn2JnNfZ
+ T8dOjaoKqAi5G3qcf6yhQivmskrCoBomsaR11sO1CYo10Ya/KKLnR5ZCB2fl1mPX+Xy7
+ BKgNP7Wj2Ce3wz/NW9PlTc7UoPLbJT0ppESPCvgkzws7shU+PDoThWTK6/Yn0qMNH/ZC
+ 7J3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=OcHsM2BvDJutedC1r/JVX8yoOxfS5PqyzzhHipn6B9A=;
+ b=kmCV1B+yXiMPrJFnps9sNr+S+j6XFxJb9+/s4iXuq8nNwcFHjDF9Z1e/z7Tk66c0cI
+ +RB0fBRS0eRLbBxC5w0HKRUpamw5vS9PR8IJzEYSNFOxKys9CvlaZcLXGUaQKfPNyMJe
+ JPL21QE9lYiIFEYjZzFCuxf2SKjBSAuwnHSSkdBWAN2ljaffunFP2OCUuyWpfe312O86
+ LEvltaiaxm95IQrhX4dGKfghuBv9t3/5F9Epbbp7I4mGlJQ4YdUodTZmDDjYWlx0xQKi
+ LCpq6oV1iU79IPXBmze7yd13GGzCFyuZJ/l0x7AW1HaKOG692yGIHb+YsUZwNWCU6wUk
+ IBEQ==
+X-Gm-Message-State: AOAM533CCWV617M5DbVbJa0OUNYKqUn4ZIKUhwnepNjXLneMFmWwm4Vt
+ Nop7C32ypzjX3UaleLSidXSEsmjTs98BSa+LRWQ=
+X-Google-Smtp-Source: ABdhPJzIBhaNuCKwKcWrv7zpOoTN6FH3FI/H6EL1Q9xcFhfLzY8lI+cZI4JnEdCE/gbdEzrIDbPfRFI0JZgpGMSxSVQ=
+X-Received: by 2002:a37:7dc3:: with SMTP id y186mr1598119qkc.160.1594679085217; 
+ Mon, 13 Jul 2020 15:24:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200702155427.13372-3-aravind.ramesh@wdc.com>
-X-Spam-Score: -0.2 (/)
+From: Nathan Royce <nroycea+kernel@gmail.com>
+Date: Mon, 13 Jul 2020 17:24:34 -0500
+Message-ID: <CALaQ_hosk7627nTx97+xSSsGiN-qt=pTGNW4DZn4TOcAeRSC8g@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (nroycea[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.222.181 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.181 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jv3nk-001sgH-Kx
-Subject: Re: [f2fs-dev] [PATCH 2/2] fsck.f2fs: validate free seg count on
- zns device
+X-Headers-End: 1jv6sV-00GfDL-0A
+Subject: [f2fs-dev] F2FS Segmentation Fault
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,183 +98,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: matias.bjorling@wdc.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Aravind,
+I won't re-format unless I hear something within a few days in case
+you want me to try something.
 
-On 07/02, Aravind Ramesh wrote:
-> NVMe Zoned Namespace devices can have zone-capacity less than zone-size.
-> Zone-capacity indicates the number of usable blocks in a zone, if
-> zone-capacity is less than zone-size, then the segments which start
-> at/after zone-capacity are considered unusable. Only those segments
-> which start before the zone-capacity are considered as usable and added
-> to the free_segment_count and free_segment_bitmap of the kernel.
-> 
-> Allow fsck to find the free_segment_count based on the zone-capacity and
-> compare with checkpoint values.
-> 
-> Signed-off-by: Aravind Ramesh <aravind.ramesh@wdc.com>
-> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-> ---
->  fsck/fsck.c  |  5 ++--
->  fsck/fsck.h  |  2 ++
->  fsck/mount.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++--
->  3 files changed, 78 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fsck/fsck.c b/fsck/fsck.c
-> index e110f3d..ba2340d 100644
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -1905,11 +1905,12 @@ int fsck_chk_meta(struct f2fs_sb_info *sbi)
->  		if (IS_NODESEG(se->type))
->  			sit_node_blks += se->valid_blocks;
->  	}
-> -	if (fsck->chk.sit_free_segs + sit_valid_segs != TOTAL_SEGS(sbi)) {
-> +	if (fsck->chk.sit_free_segs + sit_valid_segs !=
-> +				get_usable_seg_count(sbi)) {
->  		ASSERT_MSG("SIT usage does not match: sit_free_segs %u, "
->  				"sit_valid_segs %u, total_segs %u",
->  			fsck->chk.sit_free_segs, sit_valid_segs,
-> -			TOTAL_SEGS(sbi));
-> +			get_usable_seg_count(sbi));
->  		return -EINVAL;
->  	}
->  
-> diff --git a/fsck/fsck.h b/fsck/fsck.h
-> index bc6a435..e86730c 100644
-> --- a/fsck/fsck.h
-> +++ b/fsck/fsck.h
-> @@ -224,6 +224,8 @@ extern u32 update_nat_bits_flags(struct f2fs_super_block *,
->  				struct f2fs_checkpoint *, u32);
->  extern void write_nat_bits(struct f2fs_sb_info *, struct f2fs_super_block *,
->  			struct f2fs_checkpoint *, int);
-> +extern unsigned int get_usable_seg_count(struct f2fs_sb_info *);
-> +extern bool is_usable_seg(struct f2fs_sb_info *, unsigned int);
->  
->  /* dump.c */
->  struct dump_option {
-> diff --git a/fsck/mount.c b/fsck/mount.c
-> index d0f2eab..72ca0cb 100644
-> --- a/fsck/mount.c
-> +++ b/fsck/mount.c
-> @@ -30,6 +30,76 @@
->  #define ACL_OTHER		(0x20)
->  #endif
->  
-> +static int get_device_idx(struct f2fs_sb_info *sbi, u_int32_t segno)
-> +{
-> +	block_t seg_start_blkaddr;
-> +	int i;
-> +
-> +	seg_start_blkaddr = SM_I(sbi)->main_blkaddr +
-> +				segno * DEFAULT_BLOCKS_PER_SEGMENT;
-> +	for (i = 0; i < c.ndevs; i++)
-> +		if (c.devices[i].start_blkaddr <= seg_start_blkaddr &&
-> +			c.devices[i].end_blkaddr > seg_start_blkaddr)
-> +			return i;
-> +	return 0;
-> +}
-> +
-> +#ifdef HAVE_LINUX_BLKZONED_H
-> +
-> +static int get_zone_idx_from_dev(struct f2fs_sb_info *sbi,
-> +					u_int32_t segno, u_int32_t dev_idx)
-> +{
-> +	block_t seg_start_blkaddr = START_BLOCK(sbi, segno);
-> +
-> +	return (seg_start_blkaddr - c.devices[dev_idx].start_blkaddr) >>
-> +			log_base_2(sbi->segs_per_sec * sbi->blocks_per_seg);
-> +}
-> +
-> +bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
-> +{
-> +	unsigned int secno = segno / sbi->segs_per_sec;
-> +	block_t seg_start = START_BLOCK(sbi, segno);
-> +	block_t blocks_per_sec = sbi->blocks_per_seg * sbi->segs_per_sec;
-> +	unsigned int dev_idx = get_device_idx(sbi, segno);
-> +	unsigned int zone_idx = get_zone_idx_from_dev(sbi, segno, dev_idx);
-> +	unsigned int sec_off = SM_I(sbi)->main_blkaddr >>
-> +						log_base_2(blocks_per_sec);
-> +
-> +	if (zone_idx < c.devices[dev_idx].nr_rnd_zones)
-> +		return true;
-> +
-> +	if (c.devices[dev_idx].zoned_model != F2FS_ZONED_HM)
-> +		return true;
-> +
-> +	return seg_start < ((sec_off + secno) * blocks_per_sec) +
-> +				c.devices[dev_idx].zone_cap_blocks[zone_idx];
-> +}
-> +
-> +unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
-> +{
-> +	unsigned int i, usable_seg_count = 0;
-> +
-> +	for (i = 0; i < TOTAL_SEGS(sbi); i++)
-> +		if (is_usable_seg(sbi, i))
-> +			usable_seg_count++;
-> +
-> +	return usable_seg_count;
-> +}
-> +
-> +#else
-> +
-> +bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
+Preface: There was a notable power outage a couple of nights ago.
+When the power returned, everything seemed fine. No issues during
+bootup or anything.
+Then today, I went to open an application and my system started
+schitzing out with programs suddenly closing(/crashing?).
+I switched tty and tried to log in but was unable to even be allowed
+to enter in my password.
+I switched to another and tried logging in as root which succeeded (somehow).
+I looked at the journal and saw an entry saying something about
+/bin/login not being a valid exec format.
+I went to reboot and when it got to fsck part of initramfs, it failed
+and I was kicked to root.
+I ran fsck and saw a bunch of issues, but I guess nothing could get
+resolved enough to let me reboot.
+Oh, in case you're wondering, my / (system) is on a 64GB SDHC card.
+I just happened to also have an older / system on my mechanical drive
+using BTRFS which I could boot to (which I'm on now).
+I ran fsck from this older system and it seems I got the same results:
 
-I've applied the below small change to avoid Android build error.
+*****
+Info: Fix the reported corruption.
+Info: Force to fix corruption
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 124168159 (60628 MB)
+Info: MKFS version
+  "Linux version 5.1.15.a-1-hardened (builduser@slave-1) (gcc version
+9.1.0 (GCC)) #1 SMP PREEMPT Thu Jun 27 11:33:04 CEST 2019"
+Info: FSCK version
+  from "Linux version 4.19.13-dirty (userName@computerName) (gcc
+version 8.2.1 20181127 (GCC)) #2 SMP PREEMPT Mon Dec 31 00:15:50 CST
+2018"
+    to "Linux version 4.19.13-dirty (userName@computerName) (gcc
+version 8.2.1 20181127 (GCC)) #2 SMP PREEMPT Mon Dec 31 00:15:50 CST
+2018"
+Info: superblock features = 0 :
+Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
+Info: total FS sectors = 124168152 (60628 MB)
+Info: CKPT version = 63f2b4a
+Info: checkpoint state = 55 :  crc fsck compacted_summary unmount
 
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -88,7 +88,7 @@ unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
+NID[0x18eca] is unreachable, blkaddr:0xcf1d9d3c
+NID[0x18ecb] is unreachable, blkaddr:0x5db5f91f
+NID[0x18ecc] is unreachable, blkaddr:0x4653d
+NID[0x18ee3] is unreachable, blkaddr:0x144dc401
+NID[0x18ee4] is unreachable, blkaddr:0x558cfba9
+NID[0x18ee5] is unreachable, blkaddr:0x45553
+NID[0x18f78] is unreachable, blkaddr:0x560555ac
+NID[0x18f79] is unreachable, blkaddr:0x58cccb0d
+NID[0x18f7a] is unreachable, blkaddr:0x53d84
+NID[0x4d621] is unreachable, blkaddr:0x4fc1d
+NID[0x4d622] is unreachable, blkaddr:0x4fc1e
+NID[0x7fa32] is unreachable, blkaddr:0x20b0ca3a
+NID[0x7fa33] is unreachable, blkaddr:0xf71b60
+[FSCK] Unreachable nat entries                        [Fail] [0xd]
+[FSCK] SIT valid block bitmap checking                [Fail]
+[FSCK] Hard link checking for regular file            [Ok..] [0x4f6]
+[FSCK] valid_block_count matching with CP             [Fail] [0x736fcb]
+[FSCK] valid_node_count matcing with CP (de lookup)   [Fail] [0x70327]
+[FSCK] valid_node_count matcing with CP (nat lookup)  [Ok..] [0x70334]
+[FSCK] valid_inode_count matched with CP              [Fail] [0x6f09e]
+[FSCK] free segment_count matched with CP             [Ok..] [0x3bfc]
+[FSCK] next block offset is free                      [Ok..]
+[FSCK] fixing SIT types
+[FSCK] other corrupted bugs                           [Fail]
 
- #else
+Do you want to restore lost files into ./lost_found/? [Y/N] Y
+Segmentation fault
+*****
 
--bool is_usable_seg(struct f2fs_sb_info *sbi, unsigned int segno)
-+bool is_usable_seg(struct f2fs_sb_info *UNUSED(sbi), unsigned int UNUSED(segno))
- {
-        return true;
- }
+*****
+       Message: Process 3425 (fsck.f2fs) of user 0 dumped core.
 
-Thanks,
+                Stack trace of thread 3425:
+                #0  0x000055f8515739c8 n/a (fsck.f2fs)
+                #1  0x000055f851575261 n/a (fsck.f2fs)
+                #2  0x000055f851572c56 n/a (fsck.f2fs)
+                #3  0x000055f85156a3f0 n/a (fsck.f2fs)
+                #4  0x00007f51420feee3 __libc_start_main (libc.so.6)
+                #5  0x000055f85156a95e n/a (fsck.f2fs)
+*****
 
-> +{
-> +	return true;
-> +}
-> +
-> +unsigned int get_usable_seg_count(struct f2fs_sb_info *sbi)
-> +{
-> +	return TOTAL_SEGS(sbi);
-> +}
-> +
-> +#endif
-> +
->  u32 get_free_segments(struct f2fs_sb_info *sbi)
->  {
->  	u32 i, free_segs = 0;
-> @@ -37,7 +107,8 @@ u32 get_free_segments(struct f2fs_sb_info *sbi)
->  	for (i = 0; i < TOTAL_SEGS(sbi); i++) {
->  		struct seg_entry *se = get_seg_entry(sbi, i);
->  
-> -		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i))
-> +		if (se->valid_blocks == 0x0 && !IS_CUR_SEGNO(sbi, i) &&
-> +							is_usable_seg(sbi, i))
->  			free_segs++;
->  	}
->  	return free_segs;
-> @@ -2337,7 +2408,7 @@ void build_sit_area_bitmap(struct f2fs_sb_info *sbi)
->  		memcpy(ptr, se->cur_valid_map, SIT_VBLOCK_MAP_SIZE);
->  		ptr += SIT_VBLOCK_MAP_SIZE;
->  
-> -		if (se->valid_blocks == 0x0) {
-> +		if (se->valid_blocks == 0x0 && is_usable_seg(sbi, segno)) {
->  			if (le32_to_cpu(sbi->ckpt->cur_node_segno[0]) == segno ||
->  				le32_to_cpu(sbi->ckpt->cur_data_segno[0]) == segno ||
->  				le32_to_cpu(sbi->ckpt->cur_node_segno[1]) == segno ||
-> -- 
-> 2.19.1
+So if you want more information or need me to try something, let me
+know soon if you would. Otherwise, I'll just be reformatting my card
+in a few days.
+It just could've been a fluke occurred because of the power outage but
+didn't manifest itself until today.
 
 
 _______________________________________________
