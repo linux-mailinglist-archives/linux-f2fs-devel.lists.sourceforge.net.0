@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9602221DF65
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2020 20:12:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CFBD21DFCE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2020 20:36:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jv2vo-000284-MZ; Mon, 13 Jul 2020 18:12:00 +0000
+	id 1jv3JV-0003IG-3I; Mon, 13 Jul 2020 18:36:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jv2vn-00027w-HB
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:11:59 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jv3JT-0003I5-P6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:36:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xSOP0QFOG5fFneajdFhrd/NuffTypQWDrXBYpLC2h54=; b=l7wBAHOi8ZlAtQfkpIcdavg5oC
- rM6S4WaCANItBWKe5Bdf8yViNqm9AT3gzpi4STb101Y3daohAmmKnHRwpEmE2FyvelsFQZGUnWsbF
- 8a8BwWIAIS4LDNsA1UlynCVZgTi4qNaZ0qHvvv8IIYFkSBfnntUMn9r8zVyr1p2BBCss=;
+ bh=TgxwhWKCCEJCn7Oev1MTPAFT7zq8gAwnfwpx6qwmZWI=; b=d5hFg38rWiYGRRcK+3UnDMBGvG
+ uFex4KS/40OEuyvJvixmQwLIRg5WlJs4FOoafObUTOeJVyx1MHA3n6naIlcg0ahnxeT6S1Voyocf9
+ jvF3Tg0K3MEKHH97SLc1xCRbxQQ+UkriEVPPnWG1upYSSq/x0/7i1rRzW7eGmJWBK33k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xSOP0QFOG5fFneajdFhrd/NuffTypQWDrXBYpLC2h54=; b=JX93vYBMMSUvG8ILiXFg6F8EfO
- YZ0IhP+VB9YyhbIONi9pE1AuiyLOfyz58hrXIvJ171tNMQ7NbEpzf7KKw4LBVhcjTOWqxGE2+CIXx
- Lc+2QLBbCAT4M4qzyB2n4ocQnzqoBM+Qjs1wvDcFuYfvcExbCTGS5i8ADn7daoK3f648=;
+ bh=TgxwhWKCCEJCn7Oev1MTPAFT7zq8gAwnfwpx6qwmZWI=; b=JQaBuKKargROULbbB3OakrinI/
+ PminPc0SYFHOXAL+Eolr2SA3pLtwlRlw8P5RVf+4Ct0EQEKT8cnalBgPvqTXvGG9XPAlOOGjOGWAU
+ rADbTXpQawxnosD7attWMydhj8l4HTrfCGa8nC5AvUAfuRFMJpqrYx30mMXxWLevVIiE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jv2vm-005lkD-4a
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:11:59 +0000
-Received: from localhost (unknown [104.132.1.66])
+ id 1jv3JS-00GRIW-N4
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jul 2020 18:36:27 +0000
+Received: from gmail.com (unknown [104.132.1.76])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A1DC92067D;
- Mon, 13 Jul 2020 18:11:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 30864206F0;
+ Mon, 13 Jul 2020 18:36:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594663912;
- bh=EU4XBUKixkiBQkaZjve6Zl3d8EFVm2Xr3DvAAaRr9v8=;
+ s=default; t=1594665381;
+ bh=BLeUpT0iFaXku/efoG1DhWrwtysiF8mjsyAhDbJwYvY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=u3FM4191eqbzPrCOk4wonTAFKU839z1y72CQ7CG/VQrqIhDysamckyPYvP2M5CG9x
- QqUkL6WCl4ZUrs6hVIJkYShQ346si7hwOtESi9PWTx43Q0inHqphIWL2KRkYcKBkUs
- i79cEVoYHX/hPgGFKVqMSjQgQaC9iV6lqbANXEms=
-Date: Mon, 13 Jul 2020 11:11:52 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20200713181152.GC2910046@google.com>
-References: <20200713031252.3873546-1-daeho43@gmail.com>
+ b=KM7PMsU9e+2DXZLJqUFe2XogR1FnNqbehLX3k0+pOhOi5vpA45U7N7wQoDAv2d3fd
+ c3qXgNVc47g0YliQJzKPx38hA8WIeHdc4f4jYHsyQnBOYMVLu/KOwJbE/pqKejSJYH
+ 8azn8SCxy5mt3B+hvpZpiei6Tl7lLZ+R9SfKbQpA=
+Date: Mon, 13 Jul 2020 11:36:19 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200713183619.GC722906@gmail.com>
+References: <20200709194751.2579207-1-satyat@google.com>
+ <20200709194751.2579207-3-satyat@google.com>
+ <20200710053406.GA25530@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200713031252.3873546-1-daeho43@gmail.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20200710053406.GA25530@infradead.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -68,10 +70,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jv2vm-005lkD-4a
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change the way of handling
- range.len in F2FS_IOC_SEC_TRIM_FILE
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jv3JS-00GRIW-N4
+Subject: Re: [f2fs-dev] [PATCH 2/5] direct-io: add support for fscrypt using
+ blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,99 +85,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Daeho,
-
-Please take a look at this.
-
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=35245180459aebf6d70fde88a538f0400a794aa6
-
-Thanks,
-
-On 07/13, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Fri, Jul 10, 2020 at 06:34:06AM +0100, Christoph Hellwig wrote:
+> On Thu, Jul 09, 2020 at 07:47:48PM +0000, Satya Tangirala wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > Set bio crypt contexts on bios by calling into fscrypt when required,
+> > and explicitly check for DUN continuity when adding pages to the bio.
+> > (While DUN continuity is usually implied by logical block contiguity,
+> > this is not the case when using certain fscrypt IV generation methods
+> > like IV_INO_LBLK_32).
 > 
-> Changed the way of handling range.len of F2FS_IOC_SEC_TRIM_FILE.
->  1. Added -1 value support for range.len to secure trim the whole blocks
->     starting from range.start regardless of i_size.
->  2. If the end of the range passes over the end of file, it means until
->     the end of file (i_size).
->  3. ignored the case of that range.len is zero to prevent the function
->     from making end_addr zero and triggering different behaviour of
->     the function.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> Changes in v2:
->  - Changed -1 range.len option to mean the whole blocks starting from
->    range.start regardless of i_size
-> ---
->  fs/f2fs/file.c | 23 ++++++++++++-----------
->  1 file changed, 12 insertions(+), 11 deletions(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 368c80f8e2a1..2485841e3b2d 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3792,7 +3792,7 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
->  	pgoff_t index, pg_end;
->  	block_t prev_block = 0, len = 0;
->  	loff_t end_addr;
-> -	bool to_end;
-> +	bool to_end = false;
->  	int ret = 0;
->  
->  	if (!(filp->f_mode & FMODE_WRITE))
-> @@ -3813,23 +3813,23 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
->  	file_start_write(filp);
->  	inode_lock(inode);
->  
-> -	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode)) {
-> +	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode) ||
-> +			range.start >= inode->i_size) {
->  		ret = -EINVAL;
->  		goto err;
->  	}
->  
-> -	if (range.start >= inode->i_size) {
-> -		ret = -EINVAL;
-> +	if (range.len == 0)
->  		goto err;
-> -	}
->  
-> -	if (inode->i_size - range.start < range.len) {
-> -		ret = -E2BIG;
-> -		goto err;
-> +	if (inode->i_size - range.start > range.len) {
-> +		end_addr = range.start + range.len;
-> +	} else {
-> +		end_addr = range.len == (u64)-1 ?
-> +			sbi->sb->s_maxbytes : inode->i_size;
-> +		to_end = true;
->  	}
-> -	end_addr = range.start + range.len;
->  
-> -	to_end = (end_addr == inode->i_size);
->  	if (!IS_ALIGNED(range.start, F2FS_BLKSIZE) ||
->  			(!to_end && !IS_ALIGNED(end_addr, F2FS_BLKSIZE))) {
->  		ret = -EINVAL;
-> @@ -3846,7 +3846,8 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
->  	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->  	down_write(&F2FS_I(inode)->i_mmap_sem);
->  
-> -	ret = filemap_write_and_wait_range(mapping, range.start, end_addr - 1);
-> +	ret = filemap_write_and_wait_range(mapping, range.start,
-> +			to_end ? LLONG_MAX : end_addr - 1);
->  	if (ret)
->  		goto out;
->  
-> -- 
-> 2.27.0.383.g050319c2ae-goog
+> I know it is asking you for more work, but instead of adding more
+> features to the legacy direct I/O code, could you just switch the user
+> of it (I guess this is for f2f2?) to the iomap one?
+
+Eventually we should do that, as well as convert f2fs's fiemap, bmap, and llseek
+to use iomap.  However there's a nontrivial barrier to entry, at least for
+someone who isn't an expert in iomap, especially since f2fs currently doesn't
+use iomap at all and thus doesn't have an iomap_ops implementation.  And using
+ext4 as an example, there will be some subtle cases that need to be handled.
+
+Satya says he's looking into it; we'll see what he can come up with and what the
+f2fs developers say.
+
+If it turns out to be difficult and people think this patchset is otherwise
+ready, we probably shouldn't hold it up on that.  This is a very small patch,
+and Satya and I have to maintain it for years in downstream kernels anyway, so
+it will be used and tested regardless.  It would also be nice to allow userspace
+(e.g. xfstests) to assume that if the inlinecrypt mount option is supported,
+then direct I/O is supported too, without having to handle intermediate kernel
+releases where inlinecrypt was supported but not direct I/O.
+
+- Eric
 
 
 _______________________________________________
