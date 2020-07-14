@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AA0121F0A1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jul 2020 14:15:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F209121F1DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jul 2020 14:49:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jvJpt-0006Af-Lk; Tue, 14 Jul 2020 12:15:01 +0000
+	id 1jvKN3-0008Ni-Hw; Tue, 14 Jul 2020 12:49:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jvJpr-0006AN-Pk
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jul 2020 12:14:59 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jvKN1-0008I9-4o
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jul 2020 12:49:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3dL3C21PbUvVQf++q1GWTLjvdAbES7Mh2glL2DAAaGM=; b=XM/a0ZSE7sMjz613e3gIMwDUWH
- o4dtmSZWGRSR5yGIYRGfJttGRmA7zEzeRj2+6IRDk5WbcrUGAp9KNicY1AO5U7TV2hummI0IoXBMK
- 2FceMC2fzR9BMJUt5WmHfWaV9r7elGeRrr/QDVPMIVB1MuGhCQL1zKHB+5HYb7LFB9mk=;
+ bh=2zIfUcj9fz85h6yvWkycPud2ao6ImmQdV5ODS2b6af8=; b=K1WvCQ45qBakgJMrS9ZWd4OSwO
+ MKAgzyj0ib89fbJpRi85FM26rnHUbmkZU74kJTH0CZOGXNF2bbyHZ+kb0n0J7pBcaXIa9aGCu5Txe
+ K5JvYAFlaaPxUSUpFrbGytzNJ640IEHIx+1sEFAfJbQCPbSedXO4ZSUH7s/VEcRs+MDw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,37 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3dL3C21PbUvVQf++q1GWTLjvdAbES7Mh2glL2DAAaGM=; b=MgXE6V7W8UVQ0aMrG2mRueH+CG
- Xd+SJFvumePq3gIRLfjlwsz2nbC+004xEMoy6QuBnfyfip+XVeIPQn20wPrF5qRTyJVWa7WC1k8rD
- WA/GvMxv0xtHmC3mCJwzpkOI0yrYfR6JR0GszwBW4Yfx0lz/Yz+f1AjK8AOqPnaJtCYI=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=2zIfUcj9fz85h6yvWkycPud2ao6ImmQdV5ODS2b6af8=; b=j10VUAzDRLxdIKYMLeKIpblAso
+ 6TEhzTTkDZl0tUTeJ4tOR+c19PZqd7L7Vlem0pAy9tcWi6g/SrhR2G/57JDkAQFZ3+E5eIslVE8nG
+ 8bBaCIp8OSg9MrX7EQyuWjkTL26aQFtrd/Auf1W/+YR8jlR3mg9v7ovj0tuuqVzOJ/hI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jvJpq-006tZv-9E
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jul 2020 12:14:59 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 58425836413EE0F587DD;
- Tue, 14 Jul 2020 20:14:49 +0800 (CST)
+ id 1jvKAx-002pwG-NJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jul 2020 12:36:52 +0000
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id E489B6DA7482A55E837A;
+ Tue, 14 Jul 2020 20:36:37 +0800 (CST)
 Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
  (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 14 Jul
- 2020 20:14:47 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200709053027.351974-1-jaegeuk@kernel.org>
- <2f4207db-57d1-5b66-f1ee-3532feba5d1f@huawei.com>
- <20200709190545.GA3001066@google.com>
- <ae1a3e8a-6209-8d4b-7235-5c8897076501@huawei.com>
- <20200710032616.GC545837@google.com>
- <01d0db54-eee1-f6cd-76c3-ebe59a7abae4@huawei.com>
- <20200710035053.GH545837@google.com>
- <77041117-f615-e6e6-591c-b02bf99e58c2@huawei.com>
- <20200713175926.GB2910046@google.com>
+ 2020 20:36:32 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daeho43@gmail.com>
+References: <20200713031252.3873546-1-daeho43@gmail.com>
+ <20200713181152.GC2910046@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <d8645371-f1d6-f5a2-01a9-19708fe3861b@huawei.com>
-Date: Tue, 14 Jul 2020 20:14:46 +0800
+Message-ID: <3b02263d-a5e1-136c-40ed-514d34e4c895@huawei.com>
+Date: Tue, 14 Jul 2020 20:36:31 +0800
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200713175926.GB2910046@google.com>
+In-Reply-To: <20200713181152.GC2910046@google.com>
 Content-Language: en-US
 X-Originating-IP: [10.134.22.195]
 X-CFilter-Loop: Reflected
@@ -67,14 +60,15 @@ X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jvJpq-006tZv-9E
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't skip writeback of quota data
+X-Headers-End: 1jvKAx-002pwG-NJ
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change the way of handling
+ range.len in F2FS_IOC_SEC_TRIM_FILE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,148 +80,113 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com,
+ Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/7/14 1:59, Jaegeuk Kim wrote:
-> On 07/10, Chao Yu wrote:
->> On 2020/7/10 11:50, Jaegeuk Kim wrote:
->>> On 07/10, Chao Yu wrote:
->>>> On 2020/7/10 11:26, Jaegeuk Kim wrote:
->>>>> On 07/10, Chao Yu wrote:
->>>>>> On 2020/7/10 3:05, Jaegeuk Kim wrote:
->>>>>>> On 07/09, Chao Yu wrote:
->>>>>>>> On 2020/7/9 13:30, Jaegeuk Kim wrote:
->>>>>>>>> It doesn't need to bypass flushing quota data in background.
->>>>>>>>
->>>>>>>> The condition is used to flush quota data in batch to avoid random
->>>>>>>> small-sized udpate, did you hit any problem here?
->>>>>>>
->>>>>>> I suspect this causes fault injection test being stuck by waiting for inode
->>>>>>> writeback completion. With this patch, it has been running w/o any issue so far.
->>>>>>> I keep an eye on this.
->>>>>>
->>>>>> Hmmm.. so that this patch may not fix the root cause, and it may hiding the
->>>>>> issue deeper.
->>>>>>
->>>>>> How about just keeping this patch in our private branch to let fault injection
->>>>>> test not be stuck? until we find the root cause in upstream codes.
->>>>>
->>>>> Well, I don't think this hides something. When the issue happens, I saw inodes
->>>>> being stuck due to writeback while only quota has some dirty data. At that time,
->>>>> there was no dirty data page from other inodes.
->>>>
->>>> Okay,
->>>>
->>>>>
->>>>> More specifically, I suspect __writeback_inodes_sb_nr() gives WB_SYNC_NONE and
->>>>> waits for wb_wait_for_completion().
->>>>
->>>> Did you record any callstack after the issue happened?
->>>
->>> I found this.
->>>
->>> [213389.297642]  __schedule+0x2dd/0x780^M
->>> [213389.299224]  schedule+0x55/0xc0^M
->>> [213389.300745]  wb_wait_for_completion+0x56/0x90^M
->>> [213389.302469]  ? wait_woken+0x80/0x80^M
->>> [213389.303997]  __writeback_inodes_sb_nr+0xa8/0xd0^M
->>> [213389.305760]  writeback_inodes_sb+0x4b/0x60^M
->>> [213389.307439]  sync_filesystem+0x2e/0xa0^M
->>> [213389.308999]  generic_shutdown_super+0x27/0x110^M
->>> [213389.310738]  kill_block_super+0x27/0x50^M
->>> [213389.312327]  kill_f2fs_super+0x76/0xe0 [f2fs]^M
->>> [213389.314014]  deactivate_locked_super+0x3b/0x80^M
->>> [213389.315692]  deactivate_super+0x3e/0x50^M
->>> [213389.317226]  cleanup_mnt+0x109/0x160^M
->>> [213389.318718]  __cleanup_mnt+0x12/0x20^M
->>> [213389.320177]  task_work_run+0x70/0xb0^M
->>> [213389.321609]  exit_to_usermode_loop+0x131/0x160^M
->>> [213389.323306]  do_syscall_64+0x170/0x1b0^M
->>> [213389.324762]  entry_SYSCALL_64_after_hwframe+0x44/0xa9^M
->>> [213389.326477] RIP: 0033:0x7fc4b5e6a35b^M
->>
->> Does this only happen during umount? If so, will below change help?
->>
->> 	if ((S_ISDIR(inode->i_mode) || IS_NOQUOTA(inode)) &&
->> +			!is_sbi_flag_set(sbi, SBI_IS_CLOSE) &&
->> 			wbc->sync_mode == WB_SYNC_NONE &&
->> 			get_dirty_pages(inode) < nr_pages_to_skip(sbi, DATA) &&
->> 			f2fs_available_free_memory(sbi, DIRTY_DENTS))
->> 		goto skip_write;
+On 2020/7/14 2:11, Jaegeuk Kim wrote:
+> Hi Daeho,
 > 
-> Hmm, this doesn't work. The writeback was called before put_super?
+> Please take a look at this.
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=35245180459aebf6d70fde88a538f0400a794aa6
 
-Oops, still be confused about this issue. :(
+I'm curious about what will happen if we call
+sec_trim_file(F2FS_TRIM_FILE_ZEROOUT) on an encrypted file, will
+it use zero bits covering encrypted data on disk?
 
 Thanks,
 
-> I'll try the original patch one more time.
 > 
+> Thanks,
+> 
+> On 07/13, Daeho Jeong wrote:
+>> From: Daeho Jeong <daehojeong@google.com>
 >>
->>>
->>>>
->>>> Still I'm confused that why directory's data written could be skipped, but
->>>> quota's data couldn't, what's the difference?
->>>
->>> I suspect different blocking timing from cp_error between quota and dentry.
->>> e.g., we block dir operations right after cp_error, while quota can make
+>> Changed the way of handling range.len of F2FS_IOC_SEC_TRIM_FILE.
+>>  1. Added -1 value support for range.len to secure trim the whole blocks
+>>     starting from range.start regardless of i_size.
+>>  2. If the end of the range passes over the end of file, it means until
+>>     the end of file (i_size).
+>>  3. ignored the case of that range.len is zero to prevent the function
+>>     from making end_addr zero and triggering different behaviour of
+>>     the function.
 >>
->> No guarantee that there is no dirty dentry being created after
->> cp_error, right?
+>> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+>> ---
+>> Changes in v2:
+>>  - Changed -1 range.len option to mean the whole blocks starting from
+>>    range.start regardless of i_size
+>> ---
+>>  fs/f2fs/file.c | 23 ++++++++++++-----------
+>>  1 file changed, 12 insertions(+), 11 deletions(-)
 >>
->> e.g.
->>
->> Thread A				Thread B
->> - f2fs_create
->> - bypass f2fs_cp_error
->> 					- set cp_error
->> - create dirty dentry
->>
->> BTW, do you know what __writeback_inodes_sb_nr is waiting for?
->>
->>> dirty pages in more fine granularity.
->>>
->>>>
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>>
->>>>>>> Thanks,
->>>>>>>
->>>>>>>>
->>>>>>>> Thanks,
->>>>>>>>
->>>>>>>>>
->>>>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>>>>>>> ---
->>>>>>>>>  fs/f2fs/data.c | 2 +-
->>>>>>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>>>>>
->>>>>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>>>>> index 44645f4f914b6..72e8b50e588c1 100644
->>>>>>>>> --- a/fs/f2fs/data.c
->>>>>>>>> +++ b/fs/f2fs/data.c
->>>>>>>>> @@ -3148,7 +3148,7 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
->>>>>>>>>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
->>>>>>>>>  		goto skip_write;
->>>>>>>>>  
->>>>>>>>> -	if ((S_ISDIR(inode->i_mode) || IS_NOQUOTA(inode)) &&
->>>>>>>>> +	if (S_ISDIR(inode->i_mode) &&
->>>>>>>>>  			wbc->sync_mode == WB_SYNC_NONE &&
->>>>>>>>>  			get_dirty_pages(inode) < nr_pages_to_skip(sbi, DATA) &&
->>>>>>>>>  			f2fs_available_free_memory(sbi, DIRTY_DENTS))
->>>>>>>>>
->>>>>>> .
->>>>>>>
->>>>> .
->>>>>
->>> .
->>>
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 368c80f8e2a1..2485841e3b2d 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -3792,7 +3792,7 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+>>  	pgoff_t index, pg_end;
+>>  	block_t prev_block = 0, len = 0;
+>>  	loff_t end_addr;
+>> -	bool to_end;
+>> +	bool to_end = false;
+>>  	int ret = 0;
+>>  
+>>  	if (!(filp->f_mode & FMODE_WRITE))
+>> @@ -3813,23 +3813,23 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+>>  	file_start_write(filp);
+>>  	inode_lock(inode);
+>>  
+>> -	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode)) {
+>> +	if (f2fs_is_atomic_file(inode) || f2fs_compressed_file(inode) ||
+>> +			range.start >= inode->i_size) {
+>>  		ret = -EINVAL;
+>>  		goto err;
+>>  	}
+>>  
+>> -	if (range.start >= inode->i_size) {
+>> -		ret = -EINVAL;
+>> +	if (range.len == 0)
+>>  		goto err;
+>> -	}
+>>  
+>> -	if (inode->i_size - range.start < range.len) {
+>> -		ret = -E2BIG;
+>> -		goto err;
+>> +	if (inode->i_size - range.start > range.len) {
+>> +		end_addr = range.start + range.len;
+>> +	} else {
+>> +		end_addr = range.len == (u64)-1 ?
+>> +			sbi->sb->s_maxbytes : inode->i_size;
+>> +		to_end = true;
+>>  	}
+>> -	end_addr = range.start + range.len;
+>>  
+>> -	to_end = (end_addr == inode->i_size);
+>>  	if (!IS_ALIGNED(range.start, F2FS_BLKSIZE) ||
+>>  			(!to_end && !IS_ALIGNED(end_addr, F2FS_BLKSIZE))) {
+>>  		ret = -EINVAL;
+>> @@ -3846,7 +3846,8 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+>>  	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+>>  	down_write(&F2FS_I(inode)->i_mmap_sem);
+>>  
+>> -	ret = filemap_write_and_wait_range(mapping, range.start, end_addr - 1);
+>> +	ret = filemap_write_and_wait_range(mapping, range.start,
+>> +			to_end ? LLONG_MAX : end_addr - 1);
+>>  	if (ret)
+>>  		goto out;
+>>  
+>> -- 
+>> 2.27.0.383.g050319c2ae-goog
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 > .
 > 
 
