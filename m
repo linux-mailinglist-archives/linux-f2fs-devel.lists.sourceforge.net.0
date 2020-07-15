@@ -2,81 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86C4C220CDB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Jul 2020 14:25:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DB57221289
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Jul 2020 18:42:42 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jvgT3-0006Se-Ot; Wed, 15 Jul 2020 12:24:57 +0000
+	id 1jvkUQ-0001lg-DP; Wed, 15 Jul 2020 16:42:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <SRS0=fEu5=A2=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1jvgT2-0006SU-Ep
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Jul 2020 12:24:56 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1jvkUP-0001lZ-Cy
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Jul 2020 16:42:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JYpyqBzVTonq++Lt6T5OviRqCB5/sggFiIqp7OVZ6KE=; b=Nzern4wtIl/jSll/1dKWndtHzy
- e9xMaH1T6lcdhYTs+ALhKFulJNgKBTGB+gyttrlzok2jaCIYHRRJYL5JZfxjJLws+FH9WGZs8Ipwr
- n4IQqRUj1x10FTgR0btIQwUAJUsJkFQrcr2SGrBNDUJE4emL2EXa4lp2ivYrlvKEBQYc=;
+ bh=F66Pz1zIyliX/dWUswzKGzCswBFwUjJgsk7DRRn2eUw=; b=ak6SLTLPS1YFjELSFcrW48ipvS
+ l42ZEgDbJqZ9kJvLf75sqiPoKJA+NVfUR9ltkZ2ytkuCwzaQWxZnUih0EbRVhfxW6mVROf9rkXivI
+ tv3rvNN1ogFQgFXU0faA+8M1Vecb4d/8Hg/QDf5H/7EPJ+Gcox9Uq6urML0G81Cses2Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JYpyqBzVTonq++Lt6T5OviRqCB5/sggFiIqp7OVZ6KE=; b=j
- j52oHJ9bUaHU7IK555neltCc+1L7k/9qgMJ1bNVUYPXgU7lxg+4cFes8qSsbZgdl9rC7gsoFmq0Aw
- WLEvBZdA/u2eKETLuw3ZG+bPea+MeQ7ghmlPC5+4mRpMTEkZTJTiMrW+1ODlOPvoTi7nVGvvcTbfR
- 8kJa6TsALTmeUha4=;
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=F66Pz1zIyliX/dWUswzKGzCswBFwUjJgsk7DRRn2eUw=; b=JSXFRE+v185rUUxVFL80aNSvqV
+ 8BJOTbDIL6x3SmSiwocxrGheFJ+AS6pq+D41m4o5n/ksYibQjQU/tepfaIPUVqoYg98XxIh8KPqHp
+ sciygfqIR+OC48tzrAyXu03Jc+R0yEH7XNjUUohYRfLCQccez+WuRNBFp9Re2xmr/zoc=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jvgT0-004RU8-SG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Jul 2020 12:24:56 +0000
-From: bugzilla-daemon@bugzilla.kernel.org
-Authentication-Results: mail.kernel.org;
- dkim=permerror (bad message/signature format)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 15 Jul 2020 12:24:37 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: Zhiguo.Niu@unisoc.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-208565-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1jvkUN-008xh8-Qf
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Jul 2020 16:42:37 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3798120658;
+ Wed, 15 Jul 2020 16:42:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1594831342;
+ bh=ED5t9A4zYRl2ppiYuYOQoWbYJVj84a6IYOD4Vjh9qcw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=dQA5TiCjdpTjdRjyFo64GaYmcJ38VZ98DmESuH3bIc7IwBm+v5kPqFNCfamABR9ad
+ juc1949N82lTQqEXq8UtZ8CEbj9YS6CApPxNuKJZjUnXctZlMrROfyWVI3oPc7nkke
+ bgJOSl8Vf6rDJvb6pGJKcpTQJ6zKF3hQOrGgCfOk=
+Date: Wed, 15 Jul 2020 09:42:20 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20200715164220.GC1167@sol.localdomain>
+References: <20200713031252.3873546-1-daeho43@gmail.com>
+ <20200713181152.GC2910046@google.com>
+ <3b02263d-a5e1-136c-40ed-514d34e4c895@huawei.com>
+ <CACOAw_wBD_ourGJSdRTDM-wzeH97aGE966QDB6bpjiyXRrh47A@mail.gmail.com>
+ <f4a594a1-464f-3a74-90cb-fd536bed9962@huawei.com>
+ <CACOAw_w3OWDVXSYHuTEEVv1HaBZir1CWcRAmxOt00MB4vXBKVg@mail.gmail.com>
+ <1d84bc01-fece-df55-6e33-07a705cfb432@huawei.com>
+ <CACOAw_xaS7qB22EPsZvHoC=uPiPtqGMAK5cP4Vk20xO21GQ-Kg@mail.gmail.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <CACOAw_xaS7qB22EPsZvHoC=uPiPtqGMAK5cP4Vk20xO21GQ-Kg@mail.gmail.com>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: googlesource.com]
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jvgT0-004RU8-SG
-Subject: [f2fs-dev] [Bug 208565] New: There may be dead lock for cp_rwsem
- during checkpoint
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jvkUN-008xh8-Qf
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change the way of handling
+ range.len in F2FS_IOC_SEC_TRIM_FILE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,97 +95,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
+ kernel-team@android.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=208565
-
-            Bug ID: 208565
-           Summary: There may be dead lock for cp_rwsem during checkpoint
-           Product: File System
-           Version: 2.5
-    Kernel Version: 4.14.181
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: high
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: Zhiguo.Niu@unisoc.com
-        Regression: No
-
-A deadlock may happens in the following scenario, backtrace is:
-
-PID: 257    TASK: ecdd0000  CPU: 0   COMMAND: "init"
- #0 [<c0b420ec>] (__schedule) from [<c0b423c8>]
- #1 [<c0b423c8>] (schedule) from [<c0b459d4>]
- #2 [<c0b459d4>] (rwsem_down_read_failed) from [<c0b44fa0>]
- #3 [<c0b44fa0>] (down_read) from [<c044233c>]
- #4 [<c044233c>] (f2fs_truncate_blocks) from [<c0442890>]
- #5 [<c0442890>] (f2fs_truncate) from [<c044d408>]
- #6 [<c044d408>] (f2fs_evict_inode) from [<c030be18>]
- #7 [<c030be18>] (evict) from [<c030a558>]
- #8 [<c030a558>] (iput) from [<c047c600>]
- #9 [<c047c600>] (f2fs_sync_node_pages) from [<c0465414>]
-#10 [<c0465414>] (f2fs_write_checkpoint) from [<c04575f4>]
-#11 [<c04575f4>] (f2fs_sync_fs) from [<c0441918>]
-#12 [<c0441918>] (f2fs_do_sync_file) from [<c0441098>]
-#13 [<c0441098>] (f2fs_sync_file) from [<c0323fa0>]
-#14 [<c0323fa0>] (vfs_fsync_range) from [<c0324294>]
-#15 [<c0324294>] (do_fsync) from [<c0324014>]
-#16 [<c0324014>] (sys_fsync) from [<c0108bc0>]
-
-f2fs_sync_node_pages tries to flush dirty inode and calls iput(). This results
-in deadlock as iput() tries to hold cp_rwsem, which is already held at the
-beginning by checkpoint->block_operations().
-
-There is a similar issue and patch in android.googlesource.com with commit id
-is 82cc5e607b56abea4ea77023650247f5ae41b515, but the call trace is:
-
-- f2fs_sync_node_pages()
- - if (is_inline_node(page))
->  - flush_inline_data()
-   - ilookup()
-     page = f2fs_pagecache_get_page()
-     if (!page)
-      goto iput_out;
-     iput_out:
-                        -close()
-                        -iput()
-       iput(inode);
-       - f2fs_evict_inode()
-        - f2fs_truncate_blocks()
-         - f2fs_lock_op()
-           - down_read(&sbi->cp_rwsem);
-
-it seems than this patch has not cover current deadlock scenario, the current
-deadlock call trace is:
-- f2fs_sync_node_pages()
-
->  - if (flush_dirty_inode(page))
-
-  - iput(inode);
-
-       - f2fs_evict_inode()
-
-        - f2fs_truncate_blocks()
-
-         - f2fs_lock_op()
-
-           - down_read(&sbi->cp_rwsem);
-
-please help check and confirm.
-
-thanks!
-
--- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gV2VkLCBKdWwgMTUsIDIwMjAgYXQgMDc6MjU6MTNQTSArMDkwMCwgRGFlaG8gSmVvbmcgd3Jv
+dGU6Cj4gQ2hhbywKPiAKPiBJIGNhbid0IGZpbmQgZnNjcnlwdF96ZXJvb3V0X3JhbmdlX2lubGlu
+ZV9jcnlwdCgpIGZ1bmN0aW9uLiBEbyB5b3UKPiBtZWFuIHdlIG5lZWQgdG8gaW1wbGVtZW50IHRo
+aXMgb25lIGZvciBpbmxpbmUgZW5jcnlwdGlvbj8KPiAKPiAyMDIw64WEIDfsm5QgMTXsnbwgKOyI
+mCkg7Jik7ZuEIDQ6MTcsIENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT7ri5jsnbQg7J6R7ISx
+Ogo+ID4KPiA+IE9uIDIwMjAvNy8xNSAxNDo1NCwgRGFlaG8gSmVvbmcgd3JvdGU6Cj4gPiA+IFlv
+dSBtZWFuIHdlIGNhbiBzdXBwb3J0IFpFUk9PVVQgb3B0aW9uIG9ubHkgZm9yIGVuY3J5cHRlZCBm
+aWxlcyBvZgo+ID4gPiBub24tbXVsdGlkZXZpY2UgZjJmcywKPiA+ID4gYW5kIHJldHVybiAtRU9Q
+Tk9UU1VQUCBpbiB0aGUgbXVsdGlkZXZpY2UgY2FzZSwgcmlnaHQgbm93Pwo+ID4KPiA+IFllcywg
+c29tZXRoaW5nIGxpa2U6Cj4gPgo+ID4gZjJmc19zZWNfdHJpbV9maWxlKCkKPiA+Cj4gPiBpZiAo
+KHJhbmdlLmZsYWdzICYgRjJGU19UUklNX0ZJTEVfWkVST09VVCkgJiYKPiA+ICAgICAgICAgZjJm
+c19lbmNyeXB0ZWRfZmlsZSgpICYmIGYyZnNfaXNfbXVsdGlfZGV2aWNlKCkpCj4gPiAgICAgICAg
+IHJldHVybiAtRU9QTk9UU1VQUDsKPiA+Cj4gPgo+ID4gZjJmc19zZWN1cmVfZXJhc2UoKQo+ID4K
+PiA+IGlmICghcmV0ICYmIChmbGFncyAmIEYyRlNfVFJJTV9GSUxFX1pFUk9PVVQpKSB7Cj4gPiAg
+ICAgICAgIGlmIChmMmZzX2VuY3J5cHRlZF9maWxlKCkpIHsKPiA+ICAgICAgICAgICAgICAgICBp
+ZiAoZnNjcnlwdF9pbm9kZV91c2VzX2ZzX2xheWVyX2NyeXB0bykKPiA+ICAgICAgICAgICAgICAg
+ICAgICAgICAgIHJldCA9IGZzY3J5cHRfemVyb291dF9yYW5nZSgpOwo+ID4gICAgICAgICAgICAg
+ICAgIGVsc2UKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIHJldCA9IGZzY3J5cHRfemVyb291
+dF9yYW5nZV9pbmxpbmVfY3J5cHQoKTsKPiA+ICAgICAgICAgfSBlbHNlIHsKPiA+ICAgICAgICAg
+ICAgICAgICByZXQgPSBibGtkZXZfaXNzdWVfemVyb291dCgpOwo+ID4gICAgICAgICB9Cj4gPiB9
+Cgpmc2NyeXB0X3plcm9vdXRfcmFuZ2VfaW5saW5lX2NyeXB0KCkgaXMgYmVpbmcgYWRkZWQgYnkK
+ImZzY3J5cHQ6IGFkZCBpbmxpbmUgZW5jcnlwdGlvbiBzdXBwb3J0Iiwgd2hpY2ggaXMgcXVldWVk
+IGluIHRoZSBmc2NyeXB0IHRyZWUKKHRoZSBtYXN0ZXIgYnJhbmNoIG9mIGh0dHBzOi8vZ2l0Lmtl
+cm5lbC5vcmcvcHViL3NjbS9mcy9mc2NyeXB0L2ZzY3J5cHQuZ2l0KS4KCkJ1dCB0aGF0J3Mgbm90
+IGFjdHVhbGx5IHJlbGV2YW50IGhlcmUgYmVjYXVzZSBmc2NyeXB0X3plcm9vdXRfcmFuZ2UoKSBj
+YWxscwpmc2NyeXB0X3plcm9vdXRfcmFuZ2VfaW5saW5lX2NyeXB0KCkgd2hlbiBuZWVkZWQuCgpK
+dXN0IHVzZSBmc2NyeXB0X3plcm9vdXRfcmFuZ2UoKS4KCi0gRXJpYwoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGlu
+ZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlz
+dHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
