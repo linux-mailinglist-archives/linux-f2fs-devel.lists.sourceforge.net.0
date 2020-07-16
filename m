@@ -2,65 +2,138 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D012F221964
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jul 2020 03:25:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B8CD22231A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Jul 2020 14:57:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jvse2-0003fQ-6L; Thu, 16 Jul 2020 01:25:06 +0000
+	id 1jw3Rs-0008Ir-HA; Thu, 16 Jul 2020 12:57:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1jvse1-0003fK-5W
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jul 2020 01:25:05 +0000
+ (envelope-from <prvs=45955ca59=Aravind.Ramesh@wdc.com>)
+ id 1jw3Rq-0008Id-6R
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jul 2020 12:57:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NzCMWcCS/U/zzFWr5BMxkujFHDNjbDIOiw8jVoDDJV0=; b=mO937q7PQzDb2FSeN1NSGefMR8
- mKuwl+92DtrGv1uy7aToAfdRKU4X++/QF6+o3IRhfFQdt+HmjhDlyAgYBmEqR/ljJ6u3wEAdN8ENQ
- hFvBWTcKcpDmswvb4OR93o1Igic3ZNuEIb0ZTQ9qDUFtoI5U1BUM8RYpdAn7jP2ETRsg=;
+ bh=mLO046rDAArkcyGam2W7sNSJFgDvlTgAkUcr/viw+Zo=; b=VM2XUqloOU7Leo5I2Xw6AKTu31
+ obZ7Gwpyobb9byR/vo5aqSBcgL3MIkGfhUruWjr5+yfK4B0WTMccO0OCDSWrHh5aEZdWJSmSczYp1
+ vc8iV7kuxn+jMj/KUGgkagg+NBfSyM5s6FvoUwdIDiT/QTjRPnwZCMvbmNUTy7NGcmw8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NzCMWcCS/U/zzFWr5BMxkujFHDNjbDIOiw8jVoDDJV0=; b=evfzT9R7L0vFZx2xGARnZuR400
- 7+18T8uj004sN7I9PWuP9r3d+9bYzUnoNZlXGvTmz9HW/8Isp6ghalj2jYWKxO4U8uvQsNfP9MvWe
- t+QZpos58m5H8oEh5Rqg8zjB4lrpXTnUaC/h9tqWtYGtVlfMWytsEGGVXYO94E1i/JxQ=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=mLO046rDAArkcyGam2W7sNSJFgDvlTgAkUcr/viw+Zo=; b=IUjjkZ2JDXRd+arqDChXZxslj1
+ wTYfdnWpcaHfMoQVG1RsIliqs7flURGDEllObT1PZefykK1m6fninAoKK04LXK/iJ064UJD5m4RtT
+ cqQzuR2/f6rTbbk6bYLUvtEgUp9wFci7cxgK2UwnWFSvEHYBPfyMPDu76EaBdVxYsb3Y=;
+Received: from esa1.hgst.iphmx.com ([68.232.141.245])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jvsdy-0059uZ-By
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jul 2020 01:25:05 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 9E6BC33A0330AA2F70EB;
- Thu, 16 Jul 2020 09:24:47 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 16 Jul
- 2020 09:24:47 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200630100428.19105-1-yuchao0@huawei.com>
- <20200707032106.GA3139161@google.com>
- <f0aee719-1ead-f816-52ec-9f1f913495fa@huawei.com>
- <20200707035142.GB3142230@google.com>
- <a18e3ef5-e93a-a558-a066-829d37bd3cc5@huawei.com>
- <20200715190707.GA2232118@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <976f6a9d-84ad-f269-e210-4326b2ea6a28@huawei.com>
-Date: Thu, 16 Jul 2020 09:24:45 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20200715190707.GA2232118@google.com>
+ id 1jw3Ri-00ALQA-VI
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Jul 2020 12:57:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1594904226; x=1626440226;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=nnrSUmlaPvumNbuo5gEa0jXKnDFdtNKg3w64txYtHu8=;
+ b=jqcEOm1J+iLD+dNBkeA5huXouPmsUTaCoU35L/ppp43kBqw1s8hklTvK
+ HdZR0dssYH0QK/2zC6hMEgpesRXX4WArWtKJ6Ix7Gu3txFlKtvF1xXwAX
+ rvjXKlwyuQEs6ZmofcUBQyPj7lGNl6Gh9byN4xluLz+AKlwD83OrpXW+z
+ BKKaH8SVvWSK2jjxW4F84OhItX8tC/Qw9L7P7MwY9gas3U9Kj+PqrvQaF
+ hndkUsmehuXjUdniFxAUBFYrADe61gx/YVO3Tn3QTjCqsSPP4pgT2brFn
+ ZgunAbQG84sZUToBPT4452Mwg03ujyIq/lt93/B/VwtmntLseIWmP6Z8P w==;
+IronPort-SDR: 6BAFf6BjQH6FGfDYQZQPIop9gprPxc37F5m+c7hHX2xJVRpIuQsiDvG+j8zPUVIG0Oe5DIFjF8
+ QPBjOKh3O/R/ac1L303fzFn3rqMS23UOUYs+3JOURlW1nDLpyKi6+Z9rWHgj+cKFdV3mxk5pcz
+ +p7vWsxs5l92UU9L9AnAyo4l9DIKugqzw7bcYOdCCvcT63yfWi3IdNdyTzjk5/Crle1hCjtmJ+
+ g3I2AWNOUAXYmVMWuguIyhU8I86sCiankVZWfnLXXgsxON7XWq0qXvyPbzuJEMhF8p/AGOvFSv
+ fCs=
+X-IronPort-AV: E=Sophos;i="5.75,359,1589212800"; d="scan'208";a="251874249"
+Received: from mail-dm6nam10lp2106.outbound.protection.outlook.com (HELO
+ NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.106])
+ by ob1.hgst.iphmx.com with ESMTP; 16 Jul 2020 20:56:55 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IAXWvZEHGMf6DplKxqe3vdoaAkdjElq9nONf3k+qQOROGCTKh5sosucMgaXEOS89ZiDSazTy5XRjKKBWOziUNOAJSweQOFAqMsnXExFoIk7EKZjPRHl7jI+qD6okxXNYqNcKJaTYNdyRTMHFsP8E1HpqHingB2CqGC5gBUN2NoCXsbrn0EJY54su8+mwakOIYlXJ3NpIk53UL9Jg3VIuUIL6GDKibx+0U6a4GtlCIuxy/uy6By9Szt+fjDghnVHFwhTvVyFJA/G2GDulbgOHfLopbUKe/IbQm6Wekt/XOppGE9W57JFdwkb/UY1+uEL577W393/I6xCeQYOpzo6WxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mLO046rDAArkcyGam2W7sNSJFgDvlTgAkUcr/viw+Zo=;
+ b=l1mD677xBRQWnvbvfiQX8WfpR62TE/JoFNVHK4QwOlNvSRBNwbrl2goL1AAlHxG7Bhk6i6YXJg1nUpfDPi6XMOEODpYmWQxL2TV/3i0zWa2jHFn2D13sHO5fidG1isiBmKPtAPZgJPN/jJ3hawa3Dmq3TxozyWRKNum9ARvKByVfDtfMotuSxaeMz3b+H6BBCXPMqXpsTF30cSO5NKw+2qI2EsF32Wj/zLlyZffoUCnjNwwlX9f9a0ClQ8QiLSw/EUpQJD73ziuY3zlGO7DxmbXCwN8UbtpXuq6VljifrGp4cBgKRWv1m0/q6pXiVaoyEyfZcWaF3n9HSC8UnqlOsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mLO046rDAArkcyGam2W7sNSJFgDvlTgAkUcr/viw+Zo=;
+ b=qAogMcxkehezCPshk3qujZoRoYGlAtEgAzlBHT27naAu6a+tytswYRfH61gCdyw1ikoRvs+3KMpan3nhiDW98g3w2GYyIwGIWzjqA5aETny037FEyDi6nLldNA/2jEyp96CVytWiChrabgtKWequU4QH/qEdcRNaTM15TDujtvc=
+Received: from BY5PR04MB6995.namprd04.prod.outlook.com (2603:10b6:a03:22c::12)
+ by BYAPR04MB5719.namprd04.prod.outlook.com (2603:10b6:a03:111::25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.23; Thu, 16 Jul
+ 2020 12:56:54 +0000
+Received: from BY5PR04MB6995.namprd04.prod.outlook.com
+ ([fe80::f813:2bba:2c5c:a63b]) by BY5PR04MB6995.namprd04.prod.outlook.com
+ ([fe80::f813:2bba:2c5c:a63b%7]) with mapi id 15.20.3174.026; Thu, 16 Jul 2020
+ 12:56:54 +0000
+From: Aravind Ramesh <Aravind.Ramesh@wdc.com>
+To: Chao Yu <yuchao0@huawei.com>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, "hch@lst.de" <hch@lst.de>
+Thread-Topic: [PATCH v2 1/1] f2fs: support zone capacity less than zone size
+Thread-Index: AQHWVuG8df1cHLlYCEqjMFhbHkjwLakG/kWAgABix9CAAIkQgIACQjYw
+Date: Thu, 16 Jul 2020 12:56:53 +0000
+Message-ID: <BY5PR04MB6995C8D8BCB5BEE887F8A1A88C7F0@BY5PR04MB6995.namprd04.prod.outlook.com>
+References: <20200710174353.21988-1-aravind.ramesh@wdc.com>
+ <20200710174353.21988-2-aravind.ramesh@wdc.com>
+ <c9d121e3-294d-189f-9314-01dc0b0b7ab5@huawei.com>
+ <BY5PR04MB69955AA241F77C37D6020CCE8C610@BY5PR04MB6995.namprd04.prod.outlook.com>
+ <af3f4ce5-5653-38f8-9fce-06efbaae09d5@huawei.com>
+In-Reply-To: <af3f4ce5-5653-38f8-9fce-06efbaae09d5@huawei.com>
+Accept-Language: en-US
 Content-Language: en-US
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.2 (/)
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: huawei.com; dkim=none (message not signed)
+ header.d=none;huawei.com; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [49.207.56.64]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: bd6ab940-68d8-4d02-f80e-08d82987b6fa
+x-ms-traffictypediagnostic: BYAPR04MB5719:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BYAPR04MB57196AE8573FC95B17F9D9B58C7F0@BYAPR04MB5719.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:6790;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: vZaZ7OJud9jwJnXW81dC4qKZqgg5YabFAyBK1siQ+kkyMTixYwdUcplg19ObZ+LZtQArzozo5g52AfbzGwxMYZ+J8a+5GmnCzmif+ZJXE2nK5uFmU7QNSXdxIc6QM6hsOyTJtJLsal2BC6MU3u+IBfwpEJ4kI0g2jwoR0GeviaxbpMKmtpnU/oJ9tQj91xaGTRjeUGFSUyQbmS7JHceZxzwpLzjXVJ5jqWEz1CiC7G2MHMpNlBWs8qRqTLUQBAhqxXSJ1zgujEGOtJxYj7kc/z0nYVIjwyEWCRZtaPCV6lfU6Ao67zXh5/1qvWsJw73OAj6rMDKGfrXuX79vibF3XQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY5PR04MB6995.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(396003)(376002)(39860400002)(136003)(346002)(366004)(52536014)(4326008)(71200400001)(55016002)(66946007)(66446008)(30864003)(66476007)(54906003)(66556008)(76116006)(110136005)(64756008)(7696005)(83380400001)(8676002)(5660300002)(478600001)(9686003)(33656002)(186003)(2906002)(55236004)(53546011)(316002)(8936002)(6506007)(26005)(86362001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: 40AqKBFcCYP3297uZ+SDeOn3jzr0nqhprG5O6rogKjbmI01tKzh3+2+IWunP75V47slinPTrH28CofX6MxCUVHauaEuYFqGbjprTABpBNy+Ft4yjgM+n/zYZgoZaTlxUrWypKaiJA7Je/mIj+PtkHcuSJSRYzYuwzo9eVKkh91+f6Cao/wfMzeWltHp2w/9PesytSUzy6X5ieTqoaV/LgyKmo7xUTnM66t58GrVVN9E5aLN89slcmNYsM3Pi/E0NkOtJV1UcMXpgnXt1W+kNDVwDQuI/+QmAEx5KMfJhYeyropyLGCRqPhTRsicU/EJSpUWMYGjKpuboBeftOxLIsxoLEJvLrqkMjocdGPlAuwEmkZE8jEbTmW5F/u23ktJocvbJHWNh/joVNpD3kpm3emiF8AiSz10MzFvXY6nKSW/U+b/hGIXhmqEU2XLZ+z2GnVUwgXkJSfjUZUQoxFCQutL95nBaJ+havBEr2L7jUso=
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR04MB6995.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd6ab940-68d8-4d02-f80e-08d82987b6fa
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jul 2020 12:56:53.7720 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: twyo3mKXeYD1EaHTNfWBb2iDvAvZoUy2xdQ5h6BwRdlL4Al45WV0P5N7ty5LYfqfxonjARoItzQMRdEy+pyDKg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5719
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -68,14 +141,18 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
+ [68.232.141.245 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jvsdy-0059uZ-By
-Subject: Re: [f2fs-dev] [PATCH RFC 1/5] f2fs: introduce inmem curseg
+X-Headers-End: 1jw3Ri-00ALQA-VI
+Subject: Re: [f2fs-dev] [PATCH v2 1/1] f2fs: support zone capacity less than
+ zone size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,573 +164,337 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Niklas Cassel <Niklas.Cassel@wdc.com>,
+ Damien Le Moal <Damien.LeMoal@wdc.com>,
+ Matias Bjorling <Matias.Bjorling@wdc.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/7/16 3:07, Jaegeuk Kim wrote:
-> On 07/15, Chao Yu wrote:
->> On 2020/7/7 11:51, Jaegeuk Kim wrote:
->>> On 07/07, Chao Yu wrote:
->>>> On 2020/7/7 11:21, Jaegeuk Kim wrote:
->>>>> Hi Chao,
->>>>>
->>>>> Do you have any brief design doc to present the idea?
->>>>
->>>> Hi Jaegeuk,
->>>>
->>>> You mean this whole patchset, right?
->>>>
->>>> I can add a brief design description in patch 0/5.
->>>
->>> Yeah, it's a bit hard to understand the whole flow.
->>
->> Jaegeuk,
->>
->> Do you have time to take a look at this idea summarized in
->> [PATCH 0/5]'s cover letter?
-> 
-> Sorry, I couldn't afford to sitting down to review the design.
-> Let me give it a try soon.
 
-Alright, let me know if you have any question about the idea.
+> -----Original Message-----
+> From: Chao Yu <yuchao0@huawei.com>
+> Sent: Wednesday, July 15, 2020 7:32 AM
+> To: Aravind Ramesh <Aravind.Ramesh@wdc.com>; jaegeuk@kernel.org; linux-
+> fsdevel@vger.kernel.org; linux-f2fs-devel@lists.sourceforge.net; hch@lst.de
+> Cc: Damien Le Moal <Damien.LeMoal@wdc.com>; Niklas Cassel
+> <Niklas.Cassel@wdc.com>; Matias Bjorling <Matias.Bjorling@wdc.com>
+> Subject: Re: [PATCH v2 1/1] f2fs: support zone capacity less than zone size
+> 
+> On 2020/7/15 2:40, Aravind Ramesh wrote:
+> > Thanks for the valuable feedback.
+> > My comments are inline.
+> > Will send the V3 with the feedback incorporated.
+> >
+> > Regards,
+> > Aravind
+> >
+> >> -----Original Message-----
+> >> From: Chao Yu <yuchao0@huawei.com>
+> >> Sent: Tuesday, July 14, 2020 5:28 PM
+> >> To: Aravind Ramesh <Aravind.Ramesh@wdc.com>; jaegeuk@kernel.org;
+> >> linux- fsdevel@vger.kernel.org;
+> >> linux-f2fs-devel@lists.sourceforge.net; hch@lst.de
+> >> Cc: Damien Le Moal <Damien.LeMoal@wdc.com>; Niklas Cassel
+> >> <Niklas.Cassel@wdc.com>; Matias Bjorling <Matias.Bjorling@wdc.com>
+> >> Subject: Re: [PATCH v2 1/1] f2fs: support zone capacity less than
+> >> zone size
+> >>
+[snip..]
+       /*
+> >>> +	* zone-capacity can be less than zone-size in zoned devices,
+> >>> +	* resulting in less than expected usable segments in the zone,
+> >>> +	* calculate the end segno in the zone which can be garbage collected
+> >>> +	*/
+> >>> +	if (f2fs_sb_has_blkzoned(sbi))
+> >>> +		end_segno -= sbi->segs_per_sec -
+> >>> +					f2fs_usable_segs_in_sec(sbi, segno);
+> >>> +
+> >>> +	else if (__is_large_section(sbi))
+> >>>  		end_segno = rounddown(end_segno, sbi->segs_per_sec);
+> >>
+> >> end_segno could be beyond end of section, so below calculation could
+> >> adjust it to the end of section first, then adjust to zone-capacity boundary.
+> >>
+> >> 	if (__is_large_section(sbi))
+> >> 		end_segno = rounddown(end_segno, sbi->segs_per_sec);
+> >>
+> >> 	if (f2fs_sb_has_blkzoned(sbi))
+> >> 		end_segno -= sbi->segs_per_sec -
+> >> 				f2fs_usable_segs_in_sec(sbi, segno);
+> > Ok, will change it.
+> >>
+> >>>
+> >>>  	/* readahead multi ssa blocks those have contiguous address */ @@
+> >>> -1356,7 +1368,8 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+> >>>  		goto stop;
+> >>>
+> >>>  	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type);
+> >>> -	if (gc_type == FG_GC && seg_freed == sbi->segs_per_sec)
+> >>> +	if (gc_type == FG_GC &&
+> >>> +		seg_freed == f2fs_usable_segs_in_sec(sbi, segno))
+> >>>  		sec_freed++;
+> >>>  	total_freed += seg_freed;
+> >>>
+> >>> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h index
+> >>> db3c61046aa4..463b4e38b864 100644
+> >>> --- a/fs/f2fs/gc.h
+> >>> +++ b/fs/f2fs/gc.h
+> >>> @@ -44,13 +44,47 @@ struct gc_inode_list {
+> >>>  /*
+> >>>   * inline functions
+> >>>   */
+> >>> +
+> >>> +/*
+> >>> + * On a Zoned device zone-capacity can be less than zone-size and
+> >>> +if
+> >>> + * zone-capacity is not aligned to f2fs segment size(2MB), then the
+> >>> +segment
+> >>> + * starting just before zone-capacity has some blocks spanning
+> >>> +across the
+> >>> + * zone-capacity, these blocks are not usable.
+> >>> + * Such spanning segments can be in free list so calculate the sum
+> >>> +of usable
+> >>> + * blocks in currently free segments including normal and spanning segments.
+> >>> + */
+> >>> +static inline block_t free_segs_blk_count_zoned(struct f2fs_sb_info
+> >>> +*sbi) {
+> >>> +	block_t free_seg_blks = 0;
+> >>> +	struct free_segmap_info *free_i = FREE_I(sbi);
+> >>> +	int j;
+> >>> +
+> >>
+> >> spin_lock(&free_i->segmap_lock);
+> > Ok
+> >>
+> >>> +	for (j = 0; j < MAIN_SEGS(sbi); j++)
+> >>> +		if (!test_bit(j, free_i->free_segmap))
+> >>> +			free_seg_blks += f2fs_usable_blks_in_seg(sbi, j);
+> >>
+> >> spin_unlock(&free_i->segmap_lock);
+> > Ok
+> >>
+> >>> +
+> >>> +	return free_seg_blks;
+> >>> +}
+> >>> +
+> >>> +static inline block_t free_segs_blk_count(struct f2fs_sb_info *sbi) {
+> >>> +	if (f2fs_sb_has_blkzoned(sbi))
+> >>> +		return free_segs_blk_count_zoned(sbi);
+> >>> +
+> >>> +	return free_segments(sbi) << sbi->log_blocks_per_seg; }
+> >>> +
+> >>>  static inline block_t free_user_blocks(struct f2fs_sb_info *sbi)  {
+> >>> -	if (free_segments(sbi) < overprovision_segments(sbi))
+> >>> +	block_t free_blks, ovp_blks;
+> >>> +
+> >>> +	free_blks = free_segs_blk_count(sbi);
+> >>> +	ovp_blks = overprovision_segments(sbi) << sbi->log_blocks_per_seg;
+> >>> +
+> >>> +	if (free_blks < ovp_blks)
+> >>>  		return 0;
+> >>> -	else
+> >>> -		return (free_segments(sbi) - overprovision_segments(sbi))
+> >>> -			<< sbi->log_blocks_per_seg;
+> >>> +
+> >>> +	return free_blks - ovp_blks;
+> >>>  }
+> >>>
+> >>>  static inline block_t limit_invalid_user_blocks(struct f2fs_sb_info
+> >>> *sbi) diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c index
+> >>> c35614d255e1..d75c1849dc83 100644
+> >>> --- a/fs/f2fs/segment.c
+> >>> +++ b/fs/f2fs/segment.c
+> >>> @@ -869,10 +869,10 @@ static void locate_dirty_segment(struct
+> >>> f2fs_sb_info
+> >> *sbi, unsigned int segno)
+> >>>  	ckpt_valid_blocks = get_ckpt_valid_blocks(sbi, segno);
+> >>
+> >> unsigned int usable_blocks = f2fs_usable_blks_in_seg(sbi, segno);
+> >>
+> >>>
+> >>>  	if (valid_blocks == 0 && (!is_sbi_flag_set(sbi, SBI_CP_DISABLED) ||
+> >>> -				ckpt_valid_blocks == sbi->blocks_per_seg)) {
+> >>
+> >> ckpt_valid_blocks == usable_blocks
+> >>
+> >>> +		ckpt_valid_blocks == f2fs_usable_blks_in_seg(sbi, segno))) {
+> >>>  		__locate_dirty_segment(sbi, segno, PRE);
+> >>>  		__remove_dirty_segment(sbi, segno, DIRTY);
+> >>> -	} else if (valid_blocks < sbi->blocks_per_seg) {
+> >>> +	} else if (valid_blocks < f2fs_usable_blks_in_seg(sbi, segno)) {
+> >>
+> >> } else if (valid_blocks < usable_blocks) {
+> >>
+> > Ok.
+> >>
+> >> BTW, would you consider to add a field as below to avoid calculation
+> >> whenever we want to get usable_blocks in segment:
+> >
+> > The reason to do it like this is that f2fs supports using multiple devices to create a
+> volume.
+> > So, if 2 ZNS devices are used where both have same zone-size but
+> > different zone capacity, then having this single field to indicate
+> > usable blocks will not work, as usable blocks of zones
+> 
+> The field @usable_blocks in 'struct seg_entry' is per-segment, that's not single, it can
+> be initialized to 0 or blocks_per_seg or 'sec_cap_blkaddr - seg_start' based on its
+> locatation in which zone of device during build_sit_entries().
+
+I see that it is per segment entry, sorry about that.
 
 > 
->>
->>>
->>> Thanks,
->>>
->>>>
->>>>>
->>>>> Thanks,
->>>>>
->>>>> On 06/30, Chao Yu wrote:
->>>>>> Previous implementation of aligned pinfile allocation will:
->>>>>> - allocate new segment on cold data log no matter whether last used
->>>>>> segment is partially used or not, it makes IOs more random;
->>>>>> - force concurrent cold data/GCed IO going into warm data area, it
->>>>>> can make a bad effect on hot/cold data separation;
->>>>>>
->>>>>> In this patch, we introduce a new type of log named 'inmem curseg',
->>>>>> the differents from normal curseg is:
->>>>>> - it reuses existed segment type (CURSEG_XXX_NODE/DATA);
->>>>>> - it only exists in memory, its segno, blkofs, summary will not b
->>>>>>  persisted into checkpoint area;
->>>>>>
->>>>>> With this new feature, we can enhance scalability of log, special
->>>>>> allocators can be created for purposes:
->>>>>> - pure lfs allocator for aligned pinfile allocation or file
->>>>>> defragmentation
->>>>>> - pure ssr allocator for later feature
->>>>>>
->>>>>> So that, let's update aligned pinfile allocation to use this new
->>>>>> inmem curseg fwk.
->>>>>>
->>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>> ---
->>>>>>  fs/f2fs/checkpoint.c |   7 ++-
->>>>>>  fs/f2fs/debug.c      |   6 ++-
->>>>>>  fs/f2fs/f2fs.h       |  12 +++--
->>>>>>  fs/f2fs/file.c       |   3 +-
->>>>>>  fs/f2fs/gc.c         |   2 +-
->>>>>>  fs/f2fs/segment.c    | 107 ++++++++++++++++++++++++++++++-------------
->>>>>>  fs/f2fs/segment.h    |  17 ++++---
->>>>>>  fs/f2fs/super.c      |   9 ++--
->>>>>>  8 files changed, 112 insertions(+), 51 deletions(-)
->>>>>>
->>>>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>>>>> index 1bb8278a1c4a..644a914af25a 100644
->>>>>> --- a/fs/f2fs/checkpoint.c
->>>>>> +++ b/fs/f2fs/checkpoint.c
->>>>>> @@ -1623,11 +1623,16 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>>>  
->>>>>>  	f2fs_flush_sit_entries(sbi, cpc);
->>>>>>  
->>>>>> +	/* save inmem log status */
->>>>>> +	f2fs_save_inmem_curseg(sbi, CURSEG_COLD_DATA_PINNED);
->>>>>> +
->>>>>>  	err = do_checkpoint(sbi, cpc);
->>>>>>  	if (err)
->>>>>>  		f2fs_release_discard_addrs(sbi);
->>>>>>  	else
->>>>>>  		f2fs_clear_prefree_segments(sbi, cpc);
->>>>>> +
->>>>>> +	f2fs_restore_inmem_curseg(sbi, CURSEG_COLD_DATA_PINNED);
->>>>>>  stop:
->>>>>>  	unblock_operations(sbi);
->>>>>>  	stat_inc_cp_count(sbi->stat_info);
->>>>>> @@ -1658,7 +1663,7 @@ void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi)
->>>>>>  	}
->>>>>>  
->>>>>>  	sbi->max_orphans = (sbi->blocks_per_seg - F2FS_CP_PACKS -
->>>>>> -			NR_CURSEG_TYPE - __cp_payload(sbi)) *
->>>>>> +			NR_CURSEG_PERSIST_TYPE - __cp_payload(sbi)) *
->>>>>>  				F2FS_ORPHANS_PER_BLOCK;
->>>>>>  }
->>>>>>  
->>>>>> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
->>>>>> index 4276c0f79beb..41a91aa8c262 100644
->>>>>> --- a/fs/f2fs/debug.c
->>>>>> +++ b/fs/f2fs/debug.c
->>>>>> @@ -164,7 +164,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
->>>>>>  		* 100 / (int)(sbi->user_block_count >> sbi->log_blocks_per_seg)
->>>>>>  		/ 2;
->>>>>>  	si->util_invalid = 50 - si->util_free - si->util_valid;
->>>>>> -	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_NODE; i++) {
->>>>>> +	for (i = CURSEG_HOT_DATA; i < NO_CHECK_TYPE; i++) {
->>>>>>  		struct curseg_info *curseg = CURSEG_I(sbi, i);
->>>>>>  		si->curseg[i] = curseg->segno;
->>>>>>  		si->cursec[i] = GET_SEC_FROM_SEG(sbi, curseg->segno);
->>>>>> @@ -393,6 +393,10 @@ static int stat_show(struct seq_file *s, void *v)
->>>>>>  			   si->dirty_seg[CURSEG_COLD_NODE],
->>>>>>  			   si->full_seg[CURSEG_COLD_NODE],
->>>>>>  			   si->valid_blks[CURSEG_COLD_NODE]);
->>>>>> +		seq_printf(s, "  - Pinned file: %8d %8d %8d\n",
->>>>>> +			   si->curseg[CURSEG_COLD_DATA_PINNED],
->>>>>> +			   si->cursec[CURSEG_COLD_DATA_PINNED],
->>>>>> +			   si->curzone[CURSEG_COLD_DATA_PINNED]);
->>>>>>  		seq_printf(s, "\n  - Valid: %d\n  - Dirty: %d\n",
->>>>>>  			   si->main_area_segs - si->dirty_count -
->>>>>>  			   si->prefree_count - si->free_segs,
->>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>> index 7d6c5f8ce16b..f06c77066284 100644
->>>>>> --- a/fs/f2fs/f2fs.h
->>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>> @@ -996,7 +996,9 @@ static inline void set_new_dnode(struct dnode_of_data *dn, struct inode *inode,
->>>>>>   */
->>>>>>  #define	NR_CURSEG_DATA_TYPE	(3)
->>>>>>  #define NR_CURSEG_NODE_TYPE	(3)
->>>>>> -#define NR_CURSEG_TYPE	(NR_CURSEG_DATA_TYPE + NR_CURSEG_NODE_TYPE)
->>>>>> +#define NR_CURSEG_INMEM_TYPE	(1)
->>>>>> +#define NR_CURSEG_PERSIST_TYPE	(NR_CURSEG_DATA_TYPE + NR_CURSEG_NODE_TYPE)
->>>>>> +#define NR_CURSEG_TYPE		(NR_CURSEG_INMEM_TYPE + NR_CURSEG_PERSIST_TYPE)
->>>>>>  
->>>>>>  enum {
->>>>>>  	CURSEG_HOT_DATA	= 0,	/* directory entry blocks */
->>>>>> @@ -1005,8 +1007,10 @@ enum {
->>>>>>  	CURSEG_HOT_NODE,	/* direct node blocks of directory files */
->>>>>>  	CURSEG_WARM_NODE,	/* direct node blocks of normal files */
->>>>>>  	CURSEG_COLD_NODE,	/* indirect node blocks */
->>>>>> -	NO_CHECK_TYPE,
->>>>>> -	CURSEG_COLD_DATA_PINNED,/* cold data for pinned file */
->>>>>> +	NR_PERSISTENT_LOG,	/* number of persistent log */
->>>>>> +	CURSEG_COLD_DATA_PINNED = NR_PERSISTENT_LOG,
->>>>>> +				/* pinned file that needs consecutive block address */
->>>>>> +	NO_CHECK_TYPE,		/* number of persistent & inmem log */
->>>>>>  };
->>>>>>  
->>>>>>  struct flush_cmd {
->>>>>> @@ -3359,6 +3363,8 @@ block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
->>>>>>  int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
->>>>>>  void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
->>>>>>  int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
->>>>>> +void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi, int type);
->>>>>> +void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi, int type);
->>>>>>  void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
->>>>>>  					unsigned int start, unsigned int end);
->>>>>>  void f2fs_allocate_new_segment(struct f2fs_sb_info *sbi, int type);
->>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>> index c10e82806c2a..8611ade06018 100644
->>>>>> --- a/fs/f2fs/file.c
->>>>>> +++ b/fs/f2fs/file.c
->>>>>> @@ -1656,13 +1656,14 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
->>>>>>  		}
->>>>>>  
->>>>>>  		down_write(&sbi->pin_sem);
->>>>>> -		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
->>>>>>  
->>>>>>  		f2fs_lock_op(sbi);
->>>>>>  		f2fs_allocate_new_segment(sbi, CURSEG_COLD_DATA);
->>>>>>  		f2fs_unlock_op(sbi);
->>>>>>  
->>>>>> +		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
->>>>>>  		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
->>>>>> +
->>>>>>  		up_write(&sbi->pin_sem);
->>>>>>  
->>>>>>  		done += map.m_len;
->>>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>>>>> index 3b718da69910..84807abe4e00 100644
->>>>>> --- a/fs/f2fs/gc.c
->>>>>> +++ b/fs/f2fs/gc.c
->>>>>> @@ -1448,7 +1448,7 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
->>>>>>  	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
->>>>>>  
->>>>>>  	/* Move out cursegs from the target range */
->>>>>> -	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_TYPE; type++)
->>>>>> +	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++)
->>>>>>  		f2fs_allocate_segment_for_resize(sbi, type, start, end);
->>>>>>  
->>>>>>  	/* do GC to move out valid blocks in the range */
->>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>>>> index 5924b3965ae4..863ec6f1fb87 100644
->>>>>> --- a/fs/f2fs/segment.c
->>>>>> +++ b/fs/f2fs/segment.c
->>>>>> @@ -1958,7 +1958,7 @@ static void set_prefree_as_free_segments(struct f2fs_sb_info *sbi)
->>>>>>  
->>>>>>  	mutex_lock(&dirty_i->seglist_lock);
->>>>>>  	for_each_set_bit(segno, dirty_i->dirty_segmap[PRE], MAIN_SEGS(sbi))
->>>>>> -		__set_test_and_free(sbi, segno);
->>>>>> +		__set_test_and_free(sbi, segno, false);
->>>>>>  	mutex_unlock(&dirty_i->seglist_lock);
->>>>>>  }
->>>>>>  
->>>>>> @@ -2496,6 +2496,7 @@ static void reset_curseg(struct f2fs_sb_info *sbi, int type, int modified)
->>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>>  	struct summary_footer *sum_footer;
->>>>>>  
->>>>>> +	curseg->inited = true;
->>>>>>  	curseg->segno = curseg->next_segno;
->>>>>>  	curseg->zone = GET_ZONE_FROM_SEG(sbi, curseg->segno);
->>>>>>  	curseg->next_blkoff = 0;
->>>>>> @@ -2503,24 +2504,31 @@ static void reset_curseg(struct f2fs_sb_info *sbi, int type, int modified)
->>>>>>  
->>>>>>  	sum_footer = &(curseg->sum_blk->footer);
->>>>>>  	memset(sum_footer, 0, sizeof(struct summary_footer));
->>>>>> -	if (IS_DATASEG(type))
->>>>>> +	if (IS_DATASEG(curseg->seg_type))
->>>>>>  		SET_SUM_TYPE(sum_footer, SUM_TYPE_DATA);
->>>>>> -	if (IS_NODESEG(type))
->>>>>> +	if (IS_NODESEG(curseg->seg_type))
->>>>>>  		SET_SUM_TYPE(sum_footer, SUM_TYPE_NODE);
->>>>>> -	__set_sit_entry_type(sbi, type, curseg->segno, modified);
->>>>>> +	__set_sit_entry_type(sbi, curseg->seg_type, curseg->segno, modified);
->>>>>>  }
->>>>>>  
->>>>>>  static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->>>>>>  {
->>>>>> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> +
->>>>>>  	/* if segs_per_sec is large than 1, we need to keep original policy. */
->>>>>>  	if (__is_large_section(sbi))
->>>>>> -		return CURSEG_I(sbi, type)->segno;
->>>>>> +		return curseg->segno;
->>>>>> +
->>>>>> +	/* inmem log may not locate on any segment after mount */
->>>>>> +	if (!curseg->inited)
->>>>>> +		return 0;
->>>>>>  
->>>>>>  	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
->>>>>>  		return 0;
->>>>>>  
->>>>>>  	if (test_opt(sbi, NOHEAP) &&
->>>>>> -		(type == CURSEG_HOT_DATA || IS_NODESEG(type)))
->>>>>> +		(curseg->seg_type == CURSEG_HOT_DATA ||
->>>>>> +		IS_NODESEG(curseg->seg_type)))
->>>>>>  		return 0;
->>>>>>  
->>>>>>  	if (SIT_I(sbi)->last_victim[ALLOC_NEXT])
->>>>>> @@ -2530,7 +2538,7 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->>>>>>  	if (F2FS_OPTION(sbi).alloc_mode == ALLOC_MODE_REUSE)
->>>>>>  		return 0;
->>>>>>  
->>>>>> -	return CURSEG_I(sbi, type)->segno;
->>>>>> +	return curseg->segno;
->>>>>>  }
->>>>>>  
->>>>>>  /*
->>>>>> @@ -2540,12 +2548,14 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->>>>>>  static void new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
->>>>>>  {
->>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> +	unsigned short seg_type = curseg->seg_type;
->>>>>>  	unsigned int segno = curseg->segno;
->>>>>>  	int dir = ALLOC_LEFT;
->>>>>>  
->>>>>> -	write_sum_page(sbi, curseg->sum_blk,
->>>>>> +	if (curseg->inited)
->>>>>> +		write_sum_page(sbi, curseg->sum_blk,
->>>>>>  				GET_SUM_BLOCK(sbi, segno));
->>>>>> -	if (type == CURSEG_WARM_DATA || type == CURSEG_COLD_DATA)
->>>>>> +	if (seg_type == CURSEG_WARM_DATA || seg_type == CURSEG_COLD_DATA)
->>>>>>  		dir = ALLOC_RIGHT;
->>>>>>  
->>>>>>  	if (test_opt(sbi, NOHEAP))
->>>>>> @@ -2622,6 +2632,43 @@ static void change_curseg(struct f2fs_sb_info *sbi, int type)
->>>>>>  	f2fs_put_page(sum_page, 1);
->>>>>>  }
->>>>>>  
->>>>>> +void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi, int type)
->>>>>> +{
->>>>>> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> +
->>>>>> +	mutex_lock(&curseg->curseg_mutex);
->>>>>> +	if (!curseg->inited)
->>>>>> +		goto out;
->>>>>> +
->>>>>> +	if (get_valid_blocks(sbi, curseg->segno, false)) {
->>>>>> +		write_sum_page(sbi, curseg->sum_blk,
->>>>>> +				GET_SUM_BLOCK(sbi, curseg->segno));
->>>>>> +	} else {
->>>>>> +		mutex_lock(&DIRTY_I(sbi)->seglist_lock);
->>>>>> +		__set_test_and_free(sbi, curseg->segno, true);
->>>>>> +		mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
->>>>>> +	}
->>>>>> +out:
->>>>>> +	mutex_unlock(&curseg->curseg_mutex);
->>>>>> +}
->>>>>> +
->>>>>> +void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi, int type)
->>>>>> +{
->>>>>> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> +
->>>>>> +	mutex_lock(&curseg->curseg_mutex);
->>>>>> +	if (!curseg->inited)
->>>>>> +		goto out;
->>>>>> +	if (get_valid_blocks(sbi, curseg->segno, false))
->>>>>> +		goto out;
->>>>>> +
->>>>>> +	mutex_lock(&DIRTY_I(sbi)->seglist_lock);
->>>>>> +	__set_test_and_inuse(sbi, curseg->segno);
->>>>>> +	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
->>>>>> +out:
->>>>>> +	mutex_unlock(&curseg->curseg_mutex);
->>>>>> +}
->>>>>> +
->>>>>>  static int get_ssr_segment(struct f2fs_sb_info *sbi, int type)
->>>>>>  {
->>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> @@ -2738,11 +2785,15 @@ void __allocate_new_segment(struct f2fs_sb_info *sbi, int type)
->>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>>  	unsigned int old_segno;
->>>>>>  
->>>>>> +	if (!curseg->inited)
->>>>>> +		goto alloc;
->>>>>> +
->>>>>>  	if (!curseg->next_blkoff &&
->>>>>>  		!get_valid_blocks(sbi, curseg->segno, false) &&
->>>>>>  		!get_ckpt_valid_blocks(sbi, curseg->segno))
->>>>>>  		return;
->>>>>>  
->>>>>> +alloc:
->>>>>>  	old_segno = curseg->segno;
->>>>>>  	SIT_I(sbi)->s_ops->allocate_segment(sbi, type, true);
->>>>>>  	locate_dirty_segment(sbi, old_segno);
->>>>>> @@ -3126,19 +3177,6 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>  {
->>>>>>  	struct sit_info *sit_i = SIT_I(sbi);
->>>>>>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>>>>> -	bool put_pin_sem = false;
->>>>>> -
->>>>>> -	if (type == CURSEG_COLD_DATA) {
->>>>>> -		/* GC during CURSEG_COLD_DATA_PINNED allocation */
->>>>>> -		if (down_read_trylock(&sbi->pin_sem)) {
->>>>>> -			put_pin_sem = true;
->>>>>> -		} else {
->>>>>> -			type = CURSEG_WARM_DATA;
->>>>>> -			curseg = CURSEG_I(sbi, type);
->>>>>> -		}
->>>>>> -	} else if (type == CURSEG_COLD_DATA_PINNED) {
->>>>>> -		type = CURSEG_COLD_DATA;
->>>>>> -	}
->>>>>>  
->>>>>>  	down_read(&SM_I(sbi)->curseg_lock);
->>>>>>  
->>>>>> @@ -3204,9 +3242,6 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>  	mutex_unlock(&curseg->curseg_mutex);
->>>>>>  
->>>>>>  	up_read(&SM_I(sbi)->curseg_lock);
->>>>>> -
->>>>>> -	if (put_pin_sem)
->>>>>> -		up_read(&sbi->pin_sem);
->>>>>>  }
->>>>>>  
->>>>>>  static void update_device_state(struct f2fs_io_info *fio)
->>>>>> @@ -3574,7 +3609,7 @@ static int read_normal_summaries(struct f2fs_sb_info *sbi, int type)
->>>>>>  		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[type -
->>>>>>  							CURSEG_HOT_DATA]);
->>>>>>  		if (__exist_node_summaries(sbi))
->>>>>> -			blk_addr = sum_blk_addr(sbi, NR_CURSEG_TYPE, type);
->>>>>> +			blk_addr = sum_blk_addr(sbi, NR_CURSEG_PERSIST_TYPE, type);
->>>>>>  		else
->>>>>>  			blk_addr = sum_blk_addr(sbi, NR_CURSEG_DATA_TYPE, type);
->>>>>>  	} else {
->>>>>> @@ -3652,8 +3687,9 @@ static int restore_curseg_summaries(struct f2fs_sb_info *sbi)
->>>>>>  	}
->>>>>>  
->>>>>>  	if (__exist_node_summaries(sbi))
->>>>>> -		f2fs_ra_meta_pages(sbi, sum_blk_addr(sbi, NR_CURSEG_TYPE, type),
->>>>>> -					NR_CURSEG_TYPE - type, META_CP, true);
->>>>>> +		f2fs_ra_meta_pages(sbi,
->>>>>> +				sum_blk_addr(sbi, NR_CURSEG_PERSIST_TYPE, type),
->>>>>> +				NR_CURSEG_PERSIST_TYPE - type, META_CP, true);
->>>>>>  
->>>>>>  	for (; type <= CURSEG_COLD_NODE; type++) {
->>>>>>  		err = read_normal_summaries(sbi, type);
->>>>>> @@ -4155,14 +4191,14 @@ static int build_curseg(struct f2fs_sb_info *sbi)
->>>>>>  	struct curseg_info *array;
->>>>>>  	int i;
->>>>>>  
->>>>>> -	array = f2fs_kzalloc(sbi, array_size(NR_CURSEG_TYPE, sizeof(*array)),
->>>>>> -			     GFP_KERNEL);
->>>>>> +	array = f2fs_kzalloc(sbi, array_size(NR_CURSEG_TYPE,
->>>>>> +					sizeof(*array)), GFP_KERNEL);
->>>>>>  	if (!array)
->>>>>>  		return -ENOMEM;
->>>>>>  
->>>>>>  	SM_I(sbi)->curseg_array = array;
->>>>>>  
->>>>>> -	for (i = 0; i < NR_CURSEG_TYPE; i++) {
->>>>>> +	for (i = 0; i < NO_CHECK_TYPE; i++) {
->>>>>>  		mutex_init(&array[i].curseg_mutex);
->>>>>>  		array[i].sum_blk = f2fs_kzalloc(sbi, PAGE_SIZE, GFP_KERNEL);
->>>>>>  		if (!array[i].sum_blk)
->>>>>> @@ -4172,8 +4208,13 @@ static int build_curseg(struct f2fs_sb_info *sbi)
->>>>>>  				sizeof(struct f2fs_journal), GFP_KERNEL);
->>>>>>  		if (!array[i].journal)
->>>>>>  			return -ENOMEM;
->>>>>> +		if (i < NR_PERSISTENT_LOG)
->>>>>> +			array[i].seg_type = CURSEG_HOT_DATA + i;
->>>>>> +		else if (i == CURSEG_COLD_DATA_PINNED)
->>>>>> +			array[i].seg_type = CURSEG_COLD_DATA;
->>>>>>  		array[i].segno = NULL_SEGNO;
->>>>>>  		array[i].next_blkoff = 0;
->>>>>> +		array[i].inited = false;
->>>>>>  	}
->>>>>>  	return restore_curseg_summaries(sbi);
->>>>>>  }
->>>>>> @@ -4408,7 +4449,7 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
->>>>>>  	 * In LFS/SSR curseg, .next_blkoff should point to an unused blkaddr;
->>>>>>  	 * In LFS curseg, all blkaddr after .next_blkoff should be unused.
->>>>>>  	 */
->>>>>> -	for (i = 0; i < NO_CHECK_TYPE; i++) {
->>>>>> +	for (i = 0; i < NR_PERSISTENT_LOG; i++) {
->>>>>>  		struct curseg_info *curseg = CURSEG_I(sbi, i);
->>>>>>  		struct seg_entry *se = get_seg_entry(sbi, curseg->segno);
->>>>>>  		unsigned int blkofs = curseg->next_blkoff;
->>>>>> @@ -4637,7 +4678,7 @@ int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
->>>>>>  {
->>>>>>  	int i, ret;
->>>>>>  
->>>>>> -	for (i = 0; i < NO_CHECK_TYPE; i++) {
->>>>>> +	for (i = 0; i < NR_PERSISTENT_LOG; i++) {
->>>>>>  		ret = fix_curseg_write_pointer(sbi, i);
->>>>>>  		if (ret)
->>>>>>  			return ret;
->>>>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
->>>>>> index f261e3e6a69b..8ff261550cbb 100644
->>>>>> --- a/fs/f2fs/segment.h
->>>>>> +++ b/fs/f2fs/segment.h
->>>>>> @@ -22,7 +22,7 @@
->>>>>>  #define GET_R2L_SEGNO(free_i, segno)	((segno) + (free_i)->start_segno)
->>>>>>  
->>>>>>  #define IS_DATASEG(t)	((t) <= CURSEG_COLD_DATA)
->>>>>> -#define IS_NODESEG(t)	((t) >= CURSEG_HOT_NODE)
->>>>>> +#define IS_NODESEG(t)	((t) >= CURSEG_HOT_NODE && (t) <= CURSEG_COLD_NODE)
->>>>>>  
->>>>>>  #define IS_HOT(t)	((t) == CURSEG_HOT_NODE || (t) == CURSEG_HOT_DATA)
->>>>>>  #define IS_WARM(t)	((t) == CURSEG_WARM_NODE || (t) == CURSEG_WARM_DATA)
->>>>>> @@ -34,7 +34,8 @@
->>>>>>  	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_DATA)->segno) ||	\
->>>>>>  	 ((seg) == CURSEG_I(sbi, CURSEG_HOT_NODE)->segno) ||	\
->>>>>>  	 ((seg) == CURSEG_I(sbi, CURSEG_WARM_NODE)->segno) ||	\
->>>>>> -	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_NODE)->segno))
->>>>>> +	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_NODE)->segno) ||	\
->>>>>> +	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_DATA_PINNED)->segno))
->>>>>>  
->>>>>>  #define IS_CURSEC(sbi, secno)						\
->>>>>>  	(((secno) == CURSEG_I(sbi, CURSEG_HOT_DATA)->segno /		\
->>>>>> @@ -48,7 +49,9 @@
->>>>>>  	 ((secno) == CURSEG_I(sbi, CURSEG_WARM_NODE)->segno /		\
->>>>>>  	  (sbi)->segs_per_sec) ||	\
->>>>>>  	 ((secno) == CURSEG_I(sbi, CURSEG_COLD_NODE)->segno /		\
->>>>>> -	  (sbi)->segs_per_sec))	\
->>>>>> +	  (sbi)->segs_per_sec) ||	\
->>>>>> +	 ((secno) == CURSEG_I(sbi, CURSEG_COLD_DATA_PINNED)->segno /	\
->>>>>> +	  (sbi)->segs_per_sec))
->>>>>>  
->>>>>>  #define MAIN_BLKADDR(sbi)						\
->>>>>>  	(SM_I(sbi) ? SM_I(sbi)->main_blkaddr : 				\
->>>>>> @@ -288,10 +291,12 @@ struct curseg_info {
->>>>>>  	struct rw_semaphore journal_rwsem;	/* protect journal area */
->>>>>>  	struct f2fs_journal *journal;		/* cached journal info */
->>>>>>  	unsigned char alloc_type;		/* current allocation type */
->>>>>> +	unsigned short seg_type;		/* segment type like CURSEG_XXX_TYPE */
->>>>>>  	unsigned int segno;			/* current segment number */
->>>>>>  	unsigned short next_blkoff;		/* next block offset to write */
->>>>>>  	unsigned int zone;			/* current zone number */
->>>>>>  	unsigned int next_segno;		/* preallocated segment */
->>>>>> +	bool inited;				/* indicate inmem log is inited */
->>>>>>  };
->>>>>>  
->>>>>>  struct sit_entry_set {
->>>>>> @@ -305,8 +310,6 @@ struct sit_entry_set {
->>>>>>   */
->>>>>>  static inline struct curseg_info *CURSEG_I(struct f2fs_sb_info *sbi, int type)
->>>>>>  {
->>>>>> -	if (type == CURSEG_COLD_DATA_PINNED)
->>>>>> -		type = CURSEG_COLD_DATA;
->>>>>>  	return (struct curseg_info *)(SM_I(sbi)->curseg_array + type);
->>>>>>  }
->>>>>>  
->>>>>> @@ -438,7 +441,7 @@ static inline void __set_inuse(struct f2fs_sb_info *sbi,
->>>>>>  }
->>>>>>  
->>>>>>  static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
->>>>>> -		unsigned int segno)
->>>>>> +		unsigned int segno, bool inmem)
->>>>>>  {
->>>>>>  	struct free_segmap_info *free_i = FREE_I(sbi);
->>>>>>  	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
->>>>>> @@ -449,7 +452,7 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
->>>>>>  	if (test_and_clear_bit(segno, free_i->free_segmap)) {
->>>>>>  		free_i->free_segments++;
->>>>>>  
->>>>>> -		if (IS_CURSEC(sbi, secno))
->>>>>> +		if (!inmem && IS_CURSEC(sbi, secno))
->>>>>>  			goto skip_free;
->>>>>>  		next = find_next_bit(free_i->free_segmap,
->>>>>>  				start_segno + sbi->segs_per_sec, start_segno);
->>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>>>> index 80cb7cd358f8..0fefa130585f 100644
->>>>>> --- a/fs/f2fs/super.c
->>>>>> +++ b/fs/f2fs/super.c
->>>>>> @@ -575,7 +575,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->>>>>>  		case Opt_active_logs:
->>>>>>  			if (args->from && match_int(args, &arg))
->>>>>>  				return -EINVAL;
->>>>>> -			if (arg != 2 && arg != 4 && arg != NR_CURSEG_TYPE)
->>>>>> +			if (arg != 2 && arg != 4 &&
->>>>>> +				arg != NR_CURSEG_PERSIST_TYPE)
->>>>>>  				return -EINVAL;
->>>>>>  			F2FS_OPTION(sbi).active_logs = arg;
->>>>>>  			break;
->>>>>> @@ -981,7 +982,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->>>>>>  	}
->>>>>>  
->>>>>>  	/* Not pass down write hints if the number of active logs is lesser
->>>>>> -	 * than NR_CURSEG_TYPE.
->>>>>> +	 * than NR_CURSEG_PERSIST_TYPE.
->>>>>>  	 */
->>>>>>  	if (F2FS_OPTION(sbi).active_logs != NR_CURSEG_TYPE)
->>>>>>  		F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
->>>>>> @@ -1614,7 +1615,7 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->>>>>>  static void default_options(struct f2fs_sb_info *sbi)
->>>>>>  {
->>>>>>  	/* init some FS parameters */
->>>>>> -	F2FS_OPTION(sbi).active_logs = NR_CURSEG_TYPE;
->>>>>> +	F2FS_OPTION(sbi).active_logs = NR_CURSEG_PERSIST_TYPE;
->>>>>>  	F2FS_OPTION(sbi).inline_xattr_size = DEFAULT_INLINE_XATTR_ADDRS;
->>>>>>  	F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
->>>>>>  	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
->>>>>> @@ -2946,7 +2947,7 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
->>>>>>  	cp_payload = __cp_payload(sbi);
->>>>>>  	if (cp_pack_start_sum < cp_payload + 1 ||
->>>>>>  		cp_pack_start_sum > blocks_per_seg - 1 -
->>>>>> -			NR_CURSEG_TYPE) {
->>>>>> +			NR_CURSEG_PERSIST_TYPE) {
->>>>>>  		f2fs_err(sbi, "Wrong cp_pack_start_sum: %u",
->>>>>>  			 cp_pack_start_sum);
->>>>>>  		return 1;
->>>>>> -- 
->>>>>> 2.26.2
->>>>> .
->>>>>
->>> .
->>>
-> .
+> > from different devices are not same. In such a scenario, we would need
+> > to maintain an array, which stores the usable blocks of each zone based on its
+> zone-capacity.
+> > This approach can eliminate the calculation.
+> >
+> > So we actually implemented this approach with a buffer and at mount
+> > time this buffer would be allocated and populated with all the zone's
+> > usable_blocks information and would be read from this buffer
+> > subsequently. But we did not see any performance difference when
+> > compared to current approach and concluded that the overhead of
+> > calculation was negligible and also current approach does not need to modify core
+> data structure, as this field will be used only when using a ZNS drive and if that drive
+> has zone capacity less than zone size.
+> > And for all other cases, the function f2fs_usable_blks_in_seg() just
+> > returns sbi->blocks_per_seg without any calculation.
+> >
+> > If you think, like the calculation overhead is more, then we need to
+> > add a pointer and allocate memory to it to accommodate all zone's
+> > zone-capacity info. In my opinion, the gain is very less because of the reasons
+> stated above. However, I am open to change it based on your feedback.
 > 
+> I just thought those fixed size could be recorded in advance to avoid redundant
+> calculation, but the change I suggested is not critical, and I do agree that it will not
+> help performance a bit.
+> 
+> Anyway, I'm not against with keeping it as it is, let's go ahead. :)
+
+Ok, thanks :)
+
+> 
+> >
+> >>
+> >> struct seg_entry {
+> >> 	unsigned long long type:6;		/* segment type like
+
+[snip...]
+
+> >>> @@ -546,8 +548,8 @@ static inline bool
+> >>> has_curseg_enough_space(struct
+> >> f2fs_sb_info *sbi)
+> >>>  	/* check current node segment */
+> >>>  	for (i = CURSEG_HOT_NODE; i <= CURSEG_COLD_NODE; i++) {
+> >>>  		segno = CURSEG_I(sbi, i)->segno;
+> >>> -		left_blocks = sbi->blocks_per_seg -
+> >>> -			get_seg_entry(sbi, segno)->ckpt_valid_blocks;
+> >>> +		left_blocks = f2fs_usable_blks_in_seg(sbi, segno) -
+> >>> +				get_seg_entry(sbi, segno)->ckpt_valid_blocks;
+> >>>
+> >>>  		if (node_blocks > left_blocks)
+> >>>  			return false;
+> >>> @@ -555,7 +557,7 @@ static inline bool
+> >>> has_curseg_enough_space(struct f2fs_sb_info *sbi)
+> >>>
+> >>>  	/* check current data segment */
+> >>>  	segno = CURSEG_I(sbi, CURSEG_HOT_DATA)->segno;
+> >>> -	left_blocks = sbi->blocks_per_seg -
+> >>> +	left_blocks = f2fs_usable_blks_in_seg(sbi, segno) -
+> >>>  			get_seg_entry(sbi, segno)->ckpt_valid_blocks;
+> >>>  	if (dent_blocks > left_blocks)
+> >>>  		return false;
+> >>> @@ -677,21 +679,22 @@ static inline int check_block_count(struct
+> >>> f2fs_sb_info
+> >> *sbi,
+> >>>  	bool is_valid  = test_bit_le(0, raw_sit->valid_map) ? true : false;
+> >>>  	int valid_blocks = 0;
+> >>>  	int cur_pos = 0, next_pos;
+> >>> +	unsigned int usable_blks_per_seg = f2fs_usable_blks_in_seg(sbi,
+> >>> +segno);
+> >>>
+> >>>  	/* check bitmap with valid block count */
+> >>>  	do {
+> >>>  		if (is_valid) {
+> >>>  			next_pos = find_next_zero_bit_le(&raw_sit->valid_map,
+> >>> -					sbi->blocks_per_seg,
+> >>> +					usable_blks_per_seg,
+> >>>  					cur_pos);
+> >>>  			valid_blocks += next_pos - cur_pos;
+> >>>  		} else
+> >>>  			next_pos = find_next_bit_le(&raw_sit->valid_map,
+> >>> -					sbi->blocks_per_seg,
+> >>> +					usable_blks_per_seg,
+> >>>  					cur_pos);
+> >>>  		cur_pos = next_pos;
+> >>>  		is_valid = !is_valid;
+> >>> -	} while (cur_pos < sbi->blocks_per_seg);
+> >>> +	} while (cur_pos < usable_blks_per_seg);
+> >>
+> >> I meant we need to check that there should be no valid slot locates
+> >> beyond zone- capacity in bitmap:
+> > Ahh, ok. Got it. Will change.
+
+I have retained the other checks also and added the condition to
+check for set bits after the zone capacity, as you suggested.
+Let me know if you feel the other checks are not necessary.
+
+ [snip...]
+
+> >>> @@ -3078,12 +3093,26 @@ static int init_blkz_info(struct
+> >>> f2fs_sb_info *sbi, int
+> >> devi)
+> >>>  	if (!FDEV(devi).blkz_seq)
+> >>>  		return -ENOMEM;
+> >>>
+> >>> -	/* Get block zones type */
+> >>> +	/* Get block zones type and zone-capacity */
+> >>> +	FDEV(devi).zone_capacity_blocks = f2fs_kzalloc(sbi,
+> >>> +					FDEV(devi).nr_blkz * sizeof(block_t),
+> >>> +					GFP_KERNEL);
+> >>> +	if (!FDEV(devi).zone_capacity_blocks)
+> >>> +		return -ENOMEM;
+> >>> +
+> >>> +	rep_zone_arg.dev = &FDEV(devi);
+> >>> +	rep_zone_arg.zone_cap_mismatch = false;
+> >>> +
+> >>>  	ret = blkdev_report_zones(bdev, 0, BLK_ALL_ZONES, f2fs_report_zone_cb,
+> >>> -				  &FDEV(devi));
+> >>> +				  &rep_zone_arg);
+> >>>  	if (ret < 0)
+> >>
+> >> kfree(FDEV(devi).zone_capacity_blocks);
+> > Actually, we do not need to free this here, because if error (ret < 0)
+> > is returned, then the control goes back to
+> > destroy_device_list() and deallocates the buffer.
+> 
+> Confirmed.
+> 
+> Thanks,
+> 
+Thanks again for the review feedback.
+Have sent v3 with all the recommended changes.
+
+Thanks,
+Aravind
+
+> >
+> >>
+> >> Thanks,
+> >>
+> >>>  		return ret;
+> >>>
+> >>> +	if (!rep_zone_arg.zone_cap_mismatch) {
+> >>> +		kfree(FDEV(devi).zone_capacity_blocks);
+> >>> +		FDEV(devi).zone_capacity_blocks = NULL;
+> >>> +	}
+> >>> +
+> >>>  	return 0;
+> >>>  }
+> >>>  #endif
+> >>>
+> > .
+> >
 
 
 _______________________________________________
