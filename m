@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3E472273DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Jul 2020 02:38:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ACB52273DF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Jul 2020 02:39:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jxgJ1-00034O-53; Tue, 21 Jul 2020 00:38:51 +0000
+	id 1jxgJ9-0001xm-3Y; Tue, 21 Jul 2020 00:38:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1jxgIy-00034F-RU
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jul 2020 00:38:48 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1jxgJ6-0001xU-Ub
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jul 2020 00:38:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/Hvjf5HKygyV8tOMoX1FuAwJqq13t26rkA10z2/hRtI=; b=ZSneMnafaJop4zGVdKupUwQjau
- das67SAzeRbqHbopMeykHTY1/89QoDrYK6QVqYEjGRx1T04bwTbGkbHD9FahRPuG8Vj+UXEe2ogoJ
- mi02YoHkrZjeFvWMKQY10MxJtQ8nGLEkcMgRz3tP/lUp+JRI12mG8bTz5FSQ6dUXRFyU=;
+ bh=fHU7VA/wPSNoLmG5H7gikP92BMekn7GQDju2dXqxwiM=; b=OrLhn+ovUXTZB0tqNpu6Q7HawL
+ 0ncC5EZaNu9MezIJrH1G6ZsiJmbqAImnq8HtT2igMxceM43Q5kZcJEILDUEuQQ6ZzX/kx/eeMkOde
+ y7BvHr5NjMcJWbgTpG8FIywgtfS5CYvdytYr09JRgK0aVJE2QBvqnU0qcrrdJcIllzCI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/Hvjf5HKygyV8tOMoX1FuAwJqq13t26rkA10z2/hRtI=; b=FHPbZwB1pcJZFpPx9gU9R1DgCS
- ytGyYxz29qfuz/i8vPj1KdBkXQnwm6gFNwdMGPR1vG7FvVvLFgC26+Cy5EPCDKTDOeXKvvONM6aWg
- w7N8CxTTNEwayAwc5WIVZHbzYHOb288FoHr1xMERDMxJuWwQ1+qKbdwi4+ZR8NZnKSKA=;
+ bh=fHU7VA/wPSNoLmG5H7gikP92BMekn7GQDju2dXqxwiM=; b=GxfV2AbWHUSBrH6Vwd+9aP8GUP
+ uBCxOw+QNtWORWKXL/we72p+r/yEf2GvaRV2QA3wlme06JFro0EGM/9c42cbHNiZ8UGZ5JtVV0cfw
+ jkoqcwyoACs19SKVliWmHxuZROTBctK0fAupi/3ZHQsdzroT+X+AVmoZSXHpoFTrhVzQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jxgIx-00ERMJ-M0
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jul 2020 00:38:48 +0000
+ id 1jxgJ5-002Hc7-SG
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jul 2020 00:38:56 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0EB5921702;
+ by mail.kernel.org (Postfix) with ESMTPSA id 85F2422BF3;
  Tue, 21 Jul 2020 00:38:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1595291917;
- bh=6ek6ZwxKZwVe89KBB2SMuKPpwhN0QziEQpIeSfiBXtg=;
+ bh=HF6DCjx8VaTCJvzrMIJoKhfL8ZtCe+CY/bxHsAIyt9M=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YkNbMGnr7Tj9YBuMr7yPyDygsQ4MfZ8zk/cEuCptF8NXKI7ByPe/NMNYKkLOp1m0P
- c8nZ5O2zGKSA7ECoUyy5ob1Sqf19bfY34HvyOb765ULFcmTHbv/pPM7zah7YlphnwH
- Q+b79QGang9oTWyPPIQoNdUYkCQphwvNgCZdGos4=
+ b=0o3eNHT2WXs9Fp4orlSRqzSTDb/rBokNmoxfJRUfJd6WxonODLCz8KX25Fa/wZVSk
+ Aw3OFdZOWQ3jWCoMa8nufBhN1ij3OfGpc4n/aA6IDqzqanWoB1EXA/0dh+zvzXLAgA
+ 7Dp8h8G2O0nf7OEgNo82eOK/rKFObipIGKnsrWJ8=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 20 Jul 2020 17:38:33 -0700
-Message-Id: <20200721003834.2754992-2-jaegeuk@kernel.org>
+Date: Mon, 20 Jul 2020 17:38:34 -0700
+Message-Id: <20200721003834.2754992-3-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.28.0.rc0.105.gf9edc3c819-goog
 In-Reply-To: <20200721003834.2754992-1-jaegeuk@kernel.org>
 References: <20200721003834.2754992-1-jaegeuk@kernel.org>
@@ -68,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1jxgIx-00ERMJ-M0
-Subject: [f2fs-dev] [PATCH 2/3] mkfs.f2fs: should initialize sparse file in
- Windows
+X-Headers-End: 1jxgJ5-002Hc7-SG
+Subject: [f2fs-dev] [PATCH 3/3] mkfs.f2fs: add casefolding and project quota
+ config
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,26 +87,81 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Otherwise it fails to format in Windows.
+This can be used for Android build support.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- lib/libf2fs.c | 2 ++
- 1 file changed, 2 insertions(+)
+ include/f2fs_fs.h       |  1 +
+ lib/libf2fs.c           | 11 +++++++++++
+ mkfs/f2fs_format_main.c | 14 ++++++++++++++
+ 3 files changed, 26 insertions(+)
 
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index c38a60c..71d1c57 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -1563,6 +1563,7 @@ extern const struct f2fs_nls_table *f2fs_load_nls_table(int encoding);
+ #define F2FS_ENC_UTF8_12_0	1
+ 
+ extern int f2fs_str2encoding(const char *string);
++extern char *f2fs_encoding2str(const int encoding);
+ extern int f2fs_get_encoding_flags(int encoding);
+ extern int f2fs_str2encoding_flags(char **param, __u16 *flags);
+ 
 diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index 55d3a5c..5937076 100644
+index 5937076..55fa391 100644
 --- a/lib/libf2fs.c
 +++ b/lib/libf2fs.c
-@@ -1158,6 +1158,8 @@ int get_device_info(int i)
- 	c.sectors_per_blk = F2FS_BLKSIZE / c.sector_size;
- 	c.total_sectors += dev->total_sectors;
- 
-+	if (c.sparse_mode && f2fs_init_sparse_file())
-+		return -1;
- 	return 0;
+@@ -1306,6 +1306,17 @@ int f2fs_str2encoding(const char *string)
+ 	return -EINVAL;
  }
- #endif
+ 
++char *f2fs_encoding2str(const int encoding)
++{
++	int i;
++
++	for (i = 0 ; i < ARRAY_SIZE(f2fs_encoding_map); i++)
++		if (f2fs_encoding_map[i].encoding_magic == encoding)
++			return f2fs_encoding_map[i].name;
++
++	return NULL;
++}
++
+ int f2fs_get_encoding_flags(int encoding)
+ {
+ 	int i;
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 7176db1..27c1f1d 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -90,6 +90,12 @@ static void f2fs_show_info()
+ 
+ 	if (c.defset == CONF_ANDROID)
+ 		MSG(0, "Info: Set conf for android\n");
++
++	if (c.feature & le32_to_cpu(F2FS_FEATURE_CASEFOLD))
++		MSG(0, "Info: Enable %s with casefolding\n",
++					f2fs_encoding2str(c.s_encoding));
++	if (c.feature & le32_to_cpu(F2FS_FEATURE_PRJQUOTA))
++		MSG(0, "Info: Enable Project quota\n");
+ }
+ 
+ static void add_default_options(void)
+@@ -106,6 +112,14 @@ static void add_default_options(void)
+ 		c.root_uid = c.root_gid = 0;
+ 		break;
+ 	}
++#ifdef CONF_CASEFOLD
++	c.s_encoding = F2FS_ENC_UTF8_12_1;
++	c.feature |= cpu_to_le32(F2FS_FEATURE_CASEFOLD);
++#endif
++#ifdef CONF_PROJID
++	c.feature |= cpu_to_le32(F2FS_FEATURE_PRJQUOTA);
++	c.feature |= cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR);
++#endif
+ }
+ 
+ static void f2fs_parse_options(int argc, char *argv[])
 -- 
 2.28.0.rc0.105.gf9edc3c819-goog
 
