@@ -2,81 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B244F22BB8F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 03:31:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 617A922BB93
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 03:34:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jymYd-0007cE-GI; Fri, 24 Jul 2020 01:31:31 +0000
+	id 1jymbR-0007bA-MK; Fri, 24 Jul 2020 01:34:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <SRS0=EU6e=BD=bugzilla.kernel.org=bugzilla-daemon@kernel.org>)
- id 1jymYb-0007c5-Hw
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 01:31:29 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1jymbP-0007ay-Bi
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 01:34:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wtT1hH1dHeOVIyvDmj/tehDsvm4ckefASR8TI4Wsbpw=; b=KjArdz0nBDK+4QznJ2MTDlJl1J
- W85nzoMLLfyQd7Yznw+2qgsn4zUSuB9XHEDee7NMFkcimOOdhiptuwniF1fgRKaO6Hx0o3dAFMWYO
- EffIzAC3anqyAao34U7jS3gElKZxFMLaawyr16EcRy87VI5tIs4ifOKl7KU3pmhAsm+o=;
+ bh=WRsabkQFzg5c9P5jZM11Awyczt+XrhuGc7rlgnhhg9o=; b=cQNEsn1VZY8a1mAQlF1iYv7DrS
+ q7D96cUmwA352Z4XiM1N6ZHOnxBN91FvCyc4un5TO47kjIo8QIVmZ/JWHSz9XBI2hCj/C6khx5IIA
+ FrX+Qvt39wOsOQDvVwNVkAAyQqmxJcN6HTHSznVWE1nKYN9aSDK5Wvuhc8cykAG3pbBA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wtT1hH1dHeOVIyvDmj/tehDsvm4ckefASR8TI4Wsbpw=; b=FYpV5jnltG4K8+rNmmHVAyQyuT
- h5vCN4awXcbiAIkU4xU0Z5PE4AU+36c3Mb8CcTmuKwwoHTIpP9kmrQ1OG8SmaGdSW6tVozQsJyTAW
- wHkLvEb2pfnLPt3TsLzSzV2HxhxpvFPz8J92dYmNQ8yEnGbFEkWz+iZ0uBTL64KMJJyI=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=WRsabkQFzg5c9P5jZM11Awyczt+XrhuGc7rlgnhhg9o=; b=m7hTY0c6vk3oYE8ktDmf26o4Ra
+ bicFpfaxCeS7PUUQQ5JEACis3t9aNGrsgbPABib0rsfE/VcoEt1B0GmDF9ugZL1hSpMfdJ0xFUt0a
+ PNW6lTtev7k+Sg3z1a+e+ESMqxfs1auQtLErttZ3WCDwY8zTS2CjVQO+0KwZ06f/8+NA=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1jymYa-00FV6v-7J
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 01:31:29 +0000
-From: bugzilla-daemon@bugzilla.kernel.org
-Authentication-Results: mail.kernel.org;
- dkim=permerror (bad message/signature format)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 24 Jul 2020 01:31:17 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: yuchao0@huawei.com
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-208565-202145-PxLvlH3D7N@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-208565-202145@https.bugzilla.kernel.org/>
-References: <bug-208565-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1jymbM-000w4t-Tv
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 01:34:23 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id BA1EE62DF0D20449AD60;
+ Fri, 24 Jul 2020 09:34:12 +0800 (CST)
+Received: from [10.164.122.247] (10.164.122.247) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 24 Jul
+ 2020 09:34:04 +0800
+To: Jia Yang <jiayang5@huawei.com>, <jaegeuk@kernel.org>
+References: <20200721034914.51210-1-jiayang5@huawei.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <11953828-cbdb-a5f4-b054-556640516d0a@huawei.com>
+Date: Fri, 24 Jul 2020 09:34:04 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20200721034914.51210-1-jiayang5@huawei.com>
+Content-Language: en-US
+X-Originating-IP: [10.164.122.247]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jymYa-00FV6v-7J
-Subject: [f2fs-dev] [Bug 208565] There may be dead lock for cp_rwsem during
- checkpoint
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jymbM-000w4t-Tv
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Change the type of
+ f2fs_flush_inline_data() to void
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,65 +83,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=208565
+On 2020/7/21 11:49, Jia Yang wrote:
+> The return value of f2fs_flush_inline_data() is not used,
+> so delete it.
+> 
+> Signed-off-by: Jia Yang <jiayang5@huawei.com>
 
---- Comment #7 from yuchao0@huawei.com ---
-On 2020/7/17 1:15, bugzilla-daemon@bugzilla.kernel.org wrote:
-> https://bugzilla.kernel.org/show_bug.cgi?id=208565
-> 
-> Jaegeuk Kim (jaegeuk@kernel.org) changed:
-> 
->             What    |Removed                     |Added
-> ----------------------------------------------------------------------------
->                   CC|                            |jaegeuk@kernel.org
-> 
-> --- Comment #1 from Jaegeuk Kim (jaegeuk@kernel.org) ---
-> Thank you for the report.
-> 
-> I think this is valid point that we need to fix.
-> I'm testing a RFC patch like this. Thanks.
+The patch looks good to me, however f2fs_flush_inline_data() should be
+reverted, so let's see...
 
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-Shouldn't we revert 34c061ad85a2 ("f2fs: Avoid double lock for cp_rwsem during
-checkpoint")
-at the same time?
+Thanks,
 
+> ---
+>   fs/f2fs/f2fs.h | 2 +-
+>   fs/f2fs/node.c | 4 +---
+>   2 files changed, 2 insertions(+), 4 deletions(-)
 > 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index b35a50f4953c..cf808aa749bc 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3275,7 +3275,7 @@ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
+>   struct page *f2fs_get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid);
+>   struct page *f2fs_get_node_page_ra(struct page *parent, int start);
+>   int f2fs_move_node_page(struct page *node_page, int gc_type);
+> -int f2fs_flush_inline_data(struct f2fs_sb_info *sbi);
+> +void f2fs_flush_inline_data(struct f2fs_sb_info *sbi);
+>   int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+>   			struct writeback_control *wbc, bool atomic,
+>   			unsigned int *seq_id);
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 03e24df1c84f..6a95bbcb8313 100644
 > --- a/fs/f2fs/node.c
 > +++ b/fs/f2fs/node.c
-> @@ -1926,8 +1926,12 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
->                                  goto continue_unlock;
->                          }
+> @@ -1814,12 +1814,11 @@ static bool flush_dirty_inode(struct page *page)
+>   	return true;
+>   }
+>   
+> -int f2fs_flush_inline_data(struct f2fs_sb_info *sbi)
+> +void f2fs_flush_inline_data(struct f2fs_sb_info *sbi)
+>   {
+>   	pgoff_t index = 0;
+>   	struct pagevec pvec;
+>   	int nr_pages;
+> -	int ret = 0;
+>   
+>   	pagevec_init(&pvec);
+>   
+> @@ -1858,7 +1857,6 @@ int f2fs_flush_inline_data(struct f2fs_sb_info *sbi)
+>   		pagevec_release(&pvec);
+>   		cond_resched();
+>   	}
+> -	return ret;
+>   }
+>   
+>   int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
 > 
-> -                       /* flush inline_data, if it's async context. */
-> -                       if (do_balance && is_inline_node(page)) {
-> +                       /* flush inline_data/inode, if it's async context. */
-> +                       if (!do_balance)
-> +                               goto write_node;
-> +
-> +                       /* flush inline_data */
-> +                       if (is_inline_node(page)) {
->                                  clear_inline_node(page);
->                                  unlock_page(page);
->                                  flush_inline_data(sbi, ino_of_node(page));
-> @@ -1940,7 +1944,7 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
->                                  if (flush_dirty_inode(page))
->                                          goto lock_node;
->                          }
-> -
-> +write_node:
->                          f2fs_wait_on_page_writeback(page, NODE, true, true);
-> 
->                          if (!clear_page_dirty_for_io(page))
->
 
--- 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
