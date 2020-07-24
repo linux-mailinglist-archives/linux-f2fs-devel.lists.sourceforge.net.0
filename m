@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BED622CE1A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 20:45:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2724D22CE1C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 20:45:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
 	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=p40Y8Xk+Bc9WgI2eVbj6rDi2c1NV8Gj++SvbT1ghHrM=; b=BhPZjHRstL2KMkA69qtItPsLQ
-	w+B0YtoCQq3NVUQR99SW+RPeEbPTDEutB0qCLZOCEG+YyTwgjt27iHt2PjiEdfPneQLP8cmvtvHiQ
-	SykfRNinqJo2ewpZvtidfH4RaH6mm8rm7LZ/YylJ7njw2Dzt5pSnoe9inrOaX4V7bAdSc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	 bh=0iK5hE3Vs7/jxIjCKclNDfMiSfzjEUxnLURo8N97DbY=; b=liKici59oEyXWq9ITVbeFrAM5
+	oS4L3J1LSVx18MJA0dcj6wTWMBXu2bHdUhZNggQnfc4j5gO7YxEE8mSJUj1z5VFq6kBsfZDrLZY1C
+	MZcqhwhMtNgenYDBZ5purfz7eW6FTzFN6uNdX+XEzK1Coc+WnNOKF21gQmmoXCWqpEEKw=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jz2hH-0004D3-1P; Fri, 24 Jul 2020 18:45:31 +0000
+	id 1jz2hH-0003kJ-Uy; Fri, 24 Jul 2020 18:45:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3OiwbXwYKAP0xfy3fylttlqj.htr@flex--satyat.bounces.google.com>)
- id 1jz2h7-0004CA-54
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 18:45:21 +0000
+ (envelope-from <3PCwbXwYKAAEtbuzbuhpphmf.dpn@flex--satyat.bounces.google.com>)
+ id 1jz2hF-0003jH-Sa
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 18:45:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
  Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oZN8SnIpsU7aOjS5+8MoI/0a82Ym0e3d0O/7K4J6ac4=; b=De4UCjeVLoo0/5AUzQvGH1FeD
- VWABG1Fm22zllSL6SQKD8t2OCeYuSSsFhIIFtlGqRrNPAdHVzGZz0erAiaN98ulAqbKqximjfs6nw
- 6mjdwVg5bfuIAX9NOUBFnVVag8wUtM2Yi1xvsNarvKw3KgJw+7u6/WZVcYgrbsEKJ8CR4=;
+ bh=ak9b1MetrNwz8tkXgMNDeTUR8YoZBpQh5jjz0bYRY0M=; b=bgEDfl/aspv2GtNvAz0jVq3W3
+ iv1+Om8jDcZutgVljLjT3Rvkv/1foG2JXKVMZI5ledS8/C2Uh65ySKzNsYtl9U+jutKQC3kHj/Zvu
+ AweSbkTG9rwgcDOJowNPJf8bmOPa5dqhRzojf9vb07MWg+pYtu8EGiTQ9wRGevBxAvWDA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
@@ -39,46 +39,46 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oZN8SnIpsU7aOjS5+8MoI/0a82Ym0e3d0O/7K4J6ac4=; b=KWpUn6WYG4aXnBGR51GcR2QMiQ
- 5EYgFxeOqtU19mvs8JbsUW3jx0ZXUbwq1S/gmNoe/s//zL8p8dI5SAAaAoAPqvKX61Z7krfX9qB1d
- M1Fq5IdPKGHV9ka9YQC6bBfsGMALalTbxvIWhBLwoo1p6YgRL27a4h+dS0cSk1yXG40s=;
+ bh=ak9b1MetrNwz8tkXgMNDeTUR8YoZBpQh5jjz0bYRY0M=; b=kYdWPX853R1LlWTk6IcQfHmbz8
+ uzZRL8LaK9AdTLa5waSiUY5cc4p6fVKslCFvZN76xzIj/3S3V5lCNlUmfAZ4/Q+++YdwtBrRx5CAH
+ mV42qDc93ofhriE8jr77nzohc2u/JiS19GR2SiGFE4Vqm8XCi5SvX1rJmtgZrq2TM6iM=;
 Received: from mail-yb1-f202.google.com ([209.85.219.202])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1jz2h6-00GEOW-0U
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 18:45:21 +0000
-Received: by mail-yb1-f202.google.com with SMTP id a14so2913899ybm.13
+ id 1jz2h7-00GEOZ-PF
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 18:45:23 +0000
+Received: by mail-yb1-f202.google.com with SMTP id 8so11468123ybc.23
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 24 Jul 2020 11:45:19 -0700 (PDT)
+ Fri, 24 Jul 2020 11:45:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:in-reply-to:message-id:mime-version:references:subject:from:to
- :cc; bh=oZN8SnIpsU7aOjS5+8MoI/0a82Ym0e3d0O/7K4J6ac4=;
- b=wIgyWZnmLwySzWDZSlBrKLMi9o7JvXabuPmirleI8ql4xoXo7sERCN6n1iqc7ulrPe
- +0bTFhJB6lh8er/OHOe2MXTTa4FGq9Z3I6vsRXEScezsqzlDDr2vnow9hUL76dFd4t73
- LSY7AXOCLmvkf5lykey7j+KVR2MMALlndNl2R6YrkZFHfXwGZkrfnHwyHn1h/uaaOf9l
- uJnX4cyIXqW+w1n+7Eb7Pxn4EQVXztt3YcG5WdnGQg5++z/bnqsVqqqlx/TYg5agIJhj
- WavGB7UKwBzo7jCeULL7RegHdYo0aLeV9COGmhAu19Pyol/rjfmG50iF+cCQ2zkbz44I
- mBmA==
+ :cc; bh=ak9b1MetrNwz8tkXgMNDeTUR8YoZBpQh5jjz0bYRY0M=;
+ b=ITpDF03zh4gAXQ80IgtXYXSVSudg/gU9rVN57XZQKro+oG5FczxsGGWDIk19KaZUlG
+ Hkjz42c4BcWVc7yDHolMXgpncUUqKjalZEP7MuFByMe4pNel/xhE7ghREp4QClDZsKCO
+ Ephfn9OUfGkQ4PQc3FpjFY9Q1OGvIPi/WWbgtYnXgbmI+ypPpmWm4E1cZWktwV5WV/Hk
+ 1r6DAzau+34Tj4JZDNQ+kk85DecV+mTqhpQFF3eVxMwgJIAB1/H/e1XTzvZ6sLHGhsNn
+ MhBrQ+GdgjovyQoTISpziTf1X9MqGb/stJUXrK9lxtfQ2BpP77C5c3tsRK5M0QJCJHHC
+ 0gLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:in-reply-to:message-id:mime-version
  :references:subject:from:to:cc;
- bh=oZN8SnIpsU7aOjS5+8MoI/0a82Ym0e3d0O/7K4J6ac4=;
- b=LNP5ODXiRxzb7RA8sxJhqFpGWvi+VTk67zhf7DiXTIFEEDhkfsFraoItlkM4wbrRqA
- C9axgio3dKVpRKBIH5YYnkqyk40HWC8a/JYSKcXpZTcmDD2m/gXMTIZfFnjYhnXu40PV
- AVdPe7C0K9CygpGy41v+BIYCR47BGPwKccM10tIFVl2FjvBZ/X4f17LcVWi7BytQixEX
- 4tCtU2gJJO51JL3SYXONlQ/OzazmQewSmdpldV0tr/ZwVO2MCiH8VlAIDO00/A4GJiSb
- hfaeGiqdxR/5xnRF2b9mlekTsBJ+22/TXRxZfl6JKJDh0i7GmInhuSaXdROJ7Gzsy4wu
- yWRg==
-X-Gm-Message-State: AOAM532/0UF+oH1Gaj5TFY0LuTbtCeVEI+S9d2SN+6xLfFStqX8/pkdm
- JqPVOW75KkD59hX+AFtWCKBj7Tb4XrA=
-X-Google-Smtp-Source: ABdhPJzmZ43+VRZcOd+tePRiD99mq4GfMup1JpMkWtUBzFz9rcQiFfN2MHUCR4TgOqatdZ2Tf8jsOOl0B2c=
-X-Received: by 2002:a25:c483:: with SMTP id
- u125mr16946975ybf.194.1595616314284; 
- Fri, 24 Jul 2020 11:45:14 -0700 (PDT)
-Date: Fri, 24 Jul 2020 18:44:59 +0000
+ bh=ak9b1MetrNwz8tkXgMNDeTUR8YoZBpQh5jjz0bYRY0M=;
+ b=PADomI6K++n7uzxM3oY9nAd5q93lgtneCrLs7bl4ha0Ae3E52sZJXNS5pEGhc6Yrgm
+ RCbCOMDhYs2hwGsCsEq+WqzjlXbZVLuEyLIMQUXtktcqKhYsEtNPy4+nyb1xbmfrf4zL
+ IJIJXQHVcL0I2ZJEGOa6p23SrYjdDwJwqvNQwsmzCUWGT1keTlzwsTomYBDt7B/uhSV7
+ ZSHEbR+7Q2qRyr8C8Y62zwgnpbKZx1x6s5kvWGTtR2jF5Tcs7a4yki/9TAGXw9Y54xWa
+ I3PS8hGzwFZkZWesI3ukMoMzc+hxVMaU/bv+nMIj7sorT7L9kIADdDHhUfPHOnB4NSab
+ kYKQ==
+X-Gm-Message-State: AOAM532e74G9dPOOrW4SaHxhYdVOjz7PSfzX727uPOFwGcoUcLfcNp7b
+ mU3QA5CYwksTDCGMLyPBCUTSOQ7bM3s=
+X-Google-Smtp-Source: ABdhPJwseKqiZHZW7R0lAN2FfflJ1727vAQQkCjVmAbzoVzFBnjTpAAyolnIjYFGGURfVI9rNc5tdpoHwlY=
+X-Received: by 2002:a25:2b89:: with SMTP id
+ r131mr16541745ybr.131.1595616316063; 
+ Fri, 24 Jul 2020 11:45:16 -0700 (PDT)
+Date: Fri, 24 Jul 2020 18:45:00 +0000
 In-Reply-To: <20200724184501.1651378-1-satyat@google.com>
-Message-Id: <20200724184501.1651378-6-satyat@google.com>
+Message-Id: <20200724184501.1651378-7-satyat@google.com>
 Mime-Version: 1.0
 References: <20200724184501.1651378-1-satyat@google.com>
 X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
@@ -101,9 +101,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
  0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jz2h6-00GEOW-0U
-Subject: [f2fs-dev] [PATCH v6 5/7] f2fs: support direct I/O with fscrypt
- using blk-crypto
+X-Headers-End: 1jz2h7-00GEOZ-PF
+Subject: [f2fs-dev] [PATCH v6 6/7] fscrypt: document inline encryption
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,47 +119,54 @@ From: Satya Tangirala via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Satya Tangirala <satyat@google.com>
 Cc: linux-xfs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Satya Tangirala <satyat@google.com>, Eric Biggers <ebiggers@google.com>
+ Eric Biggers <ebiggers@google.com>, Satya Tangirala <satyat@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+Update the fscrypt documentation file for inline encryption support.
 
-Wire up f2fs with fscrypt direct I/O support. direct I/O with fscrypt is
-only supported through blk-crypto (i.e. CONFIG_BLK_INLINE_ENCRYPTION must
-have been enabled, the 'inlinecrypt' mount option must have been specified,
-and either hardware inline encryption support must be present or
-CONFIG_BLK_INLINE_ENCYRPTION_FALLBACK must have been enabled). Further,
-direct I/O on encrypted files is only supported when I/O is aligned
-to the filesystem block size (which is *not* necessarily the same as the
-block device's block size).
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
-Co-developed-by: Satya Tangirala <satyat@google.com>
 Signed-off-by: Satya Tangirala <satyat@google.com>
-Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Reviewed-by: Eric Biggers <ebiggers@google.com>
+Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/f2fs.h | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ Documentation/filesystems/fscrypt.rst | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b35a50f4953c..978130b5a195 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4082,7 +4082,11 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	int rw = iov_iter_rw(iter);
+diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
+index 1a6ad6f736b5..423c5a0daf45 100644
+--- a/Documentation/filesystems/fscrypt.rst
++++ b/Documentation/filesystems/fscrypt.rst
+@@ -1204,6 +1204,18 @@ buffer.  Some filesystems, such as UBIFS, already use temporary
+ buffers regardless of encryption.  Other filesystems, such as ext4 and
+ F2FS, have to allocate bounce pages specially for encryption.
  
--	if (f2fs_post_read_required(inode))
-+	if (!fscrypt_dio_supported(iocb, iter))
-+		return true;
-+	if (fsverity_active(inode))
-+		return true;
-+	if (f2fs_compressed_file(inode))
- 		return true;
- 	if (f2fs_is_multi_device(sbi))
- 		return true;
++Fscrypt is also able to use inline encryption hardware instead of the
++kernel crypto API for en/decryption of file contents.  When possible,
++and if directed to do so (by specifying the 'inlinecrypt' mount option
++for an ext4/F2FS filesystem), it adds encryption contexts to bios and
++uses blk-crypto to perform the en/decryption instead of making use of
++the above read/write path changes.  Of course, even if directed to
++make use of inline encryption, fscrypt will only be able to do so if
++either hardware inline encryption support is available for the
++selected encryption algorithm or CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK
++is selected.  If neither is the case, fscrypt will fall back to using
++the above mentioned read/write path changes for en/decryption.
++
+ Filename hashing and encoding
+ -----------------------------
+ 
+@@ -1250,7 +1262,9 @@ Tests
+ 
+ To test fscrypt, use xfstests, which is Linux's de facto standard
+ filesystem test suite.  First, run all the tests in the "encrypt"
+-group on the relevant filesystem(s).  For example, to test ext4 and
++group on the relevant filesystem(s).  One can also run the tests
++with the 'inlinecrypt' mount option to test the implementation for
++inline encryption support.  For example, to test ext4 and
+ f2fs encryption using `kvm-xfstests
+ <https://github.com/tytso/xfstests-bld/blob/master/Documentation/kvm-quickstart.md>`_::
+ 
 -- 
 2.28.0.rc0.142.g3c755180ce-goog
 
