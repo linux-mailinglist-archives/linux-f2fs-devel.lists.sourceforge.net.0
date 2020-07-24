@@ -2,85 +2,145 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36BF822BD7F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 07:31:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE96222BDE0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jul 2020 08:05:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1jyqJ9-0008Nb-2Z; Fri, 24 Jul 2020 05:31:47 +0000
+	id 1jyqpV-0002Oh-9T; Fri, 24 Jul 2020 06:05:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1jyqJ3-0008NO-Kz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 05:31:41 +0000
+ (envelope-from <Markus.Elfring@web.de>) id 1jyqpU-0002OW-2N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 06:05:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Date:Message-ID:From:Subject:Cc:To:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wVr9Tfj933vWRatH5+evrjC5CpK4VaUZUV8NxL/34EQ=; b=MgbgIaU0e5NaIDmW5jNDml7S2e
- RWzKUDWCzPssatXg34UjS1gbtaw7Vn+Vq4BALYXXZPL3bdmPI6vUBX9v1hil6arfZVOQams1SjhP7
- dO7apOUArtPhytmpW+tew4Gq6pSCW045FytRjbJJfAhU1S/IpeUf37MC20RAAknVGypo=;
+ bh=IZqya46lb9WZbs07Xpn4biD4AoQ4Sq63+0pbH+Tqyuk=; b=eUya8help688OTP/MU4CUCX8az
+ RaYMR+kB4ThaV0wse5LXpPfIHGBMd+LYianinBSNfN7yapLuWWBEDVNZUTujL+s6yRV+PiRH1Frqx
+ 2IvCvqqRlvufv4ZMM276rlVmxhGqf5HWDycbgDh7mFM8HAHaSFIfKtwfBVikcPgiYePo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=wVr9Tfj933vWRatH5+evrjC5CpK4VaUZUV8NxL/34EQ=; b=Wdwc8Fc4QFaSgaAAZX2bcTLXR5
- IHFhb2LM8xubzss8CZS/Az72H+7qbF0pZt/JFLKiw0oo1C3nV85PxD2yCAI6CW7/aueqslnSaPBmH
- pIbZY5r7J0qL3RtnrQa8wMZ2bjXXLaK1KeXg+5hNhwFmbbhkYLUT+ZvNAnYGcffw3J3M=;
-Received: from mail109.syd.optusnet.com.au ([211.29.132.80])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1jyqJ1-0014jV-GR
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 05:31:41 +0000
-Received: from dread.disaster.area (pa49-180-53-24.pa.nsw.optusnet.com.au
- [49.180.53.24])
- by mail109.syd.optusnet.com.au (Postfix) with ESMTPS id 3E0F1D7ADE7;
- Fri, 24 Jul 2020 15:31:32 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1jyqIs-0003Xl-Rk; Fri, 24 Jul 2020 15:31:30 +1000
-Date: Fri, 24 Jul 2020 15:31:30 +1000
-From: Dave Chinner <david@fromorbit.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20200724053130.GO2005@dread.disaster.area>
-References: <20200720233739.824943-1-satyat@google.com>
- <20200720233739.824943-4-satyat@google.com>
- <20200722211629.GE2005@dread.disaster.area>
- <20200722223404.GA76479@sol.localdomain>
- <20200723220752.GF2005@dread.disaster.area>
- <20200723230345.GB870@sol.localdomain>
- <20200724013910.GH2005@dread.disaster.area>
- <20200724034628.GC870@sol.localdomain>
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:From:
+ Subject:Cc:To:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IZqya46lb9WZbs07Xpn4biD4AoQ4Sq63+0pbH+Tqyuk=; b=d
+ ffi7CRnTDlM68+9C/neDSFWHTdoAJ07PbCkwUb8awe/by36/5xsw/XDCyZGZL1GplI6nVGZ8a79De
+ jpUgaK31WPFMLUlQRT3OmC03UWiBS28cbWmBii/NnCstOlxaKSYiqFiIGcOxJuwCLHyqAKvt24E6s
+ jLjJz7b7eCtHwBTQ=;
+Received: from mout.web.de ([212.227.15.14])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1jyqpO-007CV4-ED
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 24 Jul 2020 06:05:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+ s=dbaedf251592; t=1595570685;
+ bh=IZqya46lb9WZbs07Xpn4biD4AoQ4Sq63+0pbH+Tqyuk=;
+ h=X-UI-Sender-Class:To:Cc:Subject:From:Date;
+ b=Uxi47DSO2n8rhSUqGdX1MaPAryFyj/aN2xSOqPHLCRxio92uSIbQAEysVGydF1TTz
+ u5NWnu5NsXhdbAMpHjkNhaWv3cYv8TRYhLJXg/XR2Jf3+S9NZjaQJONPSXJe9wYyxQ
+ wlvU5qBfskrL1qBk6eteUapnJLN5Kxi36rlkX90Y=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [192.168.1.2] ([93.132.46.40]) by smtp.web.de (mrweb002
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 0MVLsk-1kJ4ok3OgA-00YfDv; Fri, 24
+ Jul 2020 08:04:44 +0200
+To: Li Guifu <bluce.liguifu@huawei.com>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+From: Markus Elfring <Markus.Elfring@web.de>
+Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
+ 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 FEE=
+Message-ID: <9236e712-cd98-1f6c-4bcd-4dcabbae6461@web.de>
+Date: Fri, 24 Jul 2020 08:04:38 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200724034628.GC870@sol.localdomain>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=QKgWuTDL c=1 sm=1 tr=0
- a=moVtWZxmCkf3aAMJKIb/8g==:117 a=moVtWZxmCkf3aAMJKIb/8g==:17
- a=kj9zAlcOel0A:10 a=_RQrkK6FrEwA:10 a=7-415B0cAAAA:8
- a=qgdjzU_bvmtCALAiQDgA:9 a=abFM6lBaT0MdK4Jk:21 a=bpKwr00CVUWniEzF:21
- a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.2 (/)
+Content-Language: en-GB
+X-Provags-ID: V03:K1:fuzp87DJDEQCI6qvpTtr9jdI+2HbuahdBu9BeD36lTkaR5Ahprk
+ XZweJZFWJA4q4bCCZGrgMvg1vSbyk/osrT/RKh+yyxsMZDqNqgrqNCpO+rBff3gfCireqor
+ I0IoT4w2gylJOOUR4JTetXStW47DbKE4V+5JwYsqkpx1oy8BbFawxK5zoKor5WJ7ZiGp79E
+ 54cJgYD3IJwkVdh3TX42Q==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:/7M/G5g1ptM=:R4yt1ZNic3t7hRP5xF48Bu
+ zhnFdY1w+XdFCZsA3ZSNO9zK003NXMEjHM1Y2rgVpln0NjQ6LAMn/IUE9XC1/DKEwggGSyJPb
+ EJ67m5KCYWviqw0lU2AJGyiDhkR78weGWhMzYDvyVlysIHuk6Dd8ZK6NOGrMuzxBOyQSVNxkS
+ Runiaf6XRArXGFh6IEtzpm14WL068MoSWtWDA2ewvan3gGDl+sOFZvld3H1QgNNbTBaXWr1NL
+ StzZ7IBWv+BqVZ6znMRkW5NXc2ixaAM+44jysAMEojJkvs1i6N0TkAZIx+y+CU92l7jhxgDIS
+ Btvt6jVpo2hkrVPsdJSvj2dtB2Ywg1mrd6RUloxWEG8HlhpUZL4ANIkoO4mwqB5f0Ikukeki2
+ esoGtaTaN9jB5tELehpy06g3qpycbL8F3NXB2nWDpRzE7Ym/AYqSgicZEX9nBI3ZuunzQ6p2j
+ /JxtdRWu/2z/zuHuld98qD3fyljTG3su3n0tfPp8UCO3mee2mugZhl4XasgdIaJRmACn/Pt/I
+ zLqhvlc5h2mTGaW5Lgn70vWsAxy5MV4lKhtEHWB2AivH1df1Q7W/PGrA97mNhpYyixiRXVJhP
+ AkIAmTkX4isz2ElPHcoYG9Q/+4DO7Qg44fWoVxqUGRaebANu+Xf/akQWkoEJ5L+zLmfOve5ZS
+ vubJWO/u5J3rVtMCOsO7BljUp3zNz2waIlTb5Sjs+ompzKMvVddpSS4aOfEGeJ1hT3z7ouNBW
+ G1W3pDCXjlYrkS/Qf5QciLOpIL6dJ4R76Xpa2zEgBGYOnxJkDLxk9fTy5rPkORXfK0/IM6cSQ
+ hpPI9dvNKR9NwquMWSwRV3keJvJ/WTcGXQpcusRgJRKRHx+KCk+is8lO6S0hezXQ7B9o3m+1h
+ Bm6aBWf5Ao6Ahi3vGblrto5R2fPP9LmFPHkdtbcf3lpU3LxRqNk86SXcFtiZdBsQLXLjwh3rj
+ xLBiOwk2eoDM6VV4R/qjq9LD7Fdwsz/vcr5Am6OTDntJ1reM/u3LqBcdyv909fqwlRDUjTNkl
+ v1XXLZAJUyiUaERdR6rQ+fE8Gv0QWh03hpzXlGPpAiiQxajcIwOdiGm77GHPZGXnrQ7r4dq0m
+ 3GOe3Y6Zgu72hA9jnxOtKKy8FtUfzQyChFUyj1a1bm5TLOu6h8pAJfCvb5Uej3L3JO1MOmjcK
+ 3JBv9KgBQiNIgbNwko0I8KiS3lZH7QFG6xjhsr+iunaF44jok43WOgg8hXHriSrZQonWX6F6k
+ 4BuHB9v9b7x+SZKPW9+DPg9B6CHM6dZUN7zxwQA==
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_L5      RBL: Very bad reputation (-5)
- [211.29.132.80 listed in bl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fromorbit.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_BL      Mailspike blacklisted
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1jyqJ1-0014jV-GR
-Subject: Re: [f2fs-dev] [PATCH v4 3/7] iomap: support direct I/O with
- fscrypt using blk-crypto
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (markus.elfring[at]web.de)
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [212.227.15.14 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1jyqpO-007CV4-ED
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix use-after-free issue in
+ f2fs_put_super()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,114 +152,19 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyat@google.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 23, 2020 at 08:46:28PM -0700, Eric Biggers wrote:
-> On Fri, Jul 24, 2020 at 11:39:10AM +1000, Dave Chinner wrote:
-> > fscrypt_inode_uses_inline_crypto() ends up being:
-> > 
-> > 	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode) &&
-> > 	    inode->i_crypt_info->ci_inlinecrypt)
-> > 
-> > I note there are no checks for inode->i_crypt_info being non-null,
-> > and I note that S_ENCRYPTED is set on the inode when the on-disk
-> > encrypted flag is encountered, not when inode->i_crypt_info is set.
-> > 
-> 
-> ->i_crypt_info is set when the file is opened, so it's guaranteed to be set for
-> any I/O.  So the case you're concerned about just doesn't happen.
-
-Ok. The connection is not obvious to someone who doesn't know the
-fscrypt code inside out.
-
-> > > Note that currently, I don't think iomap_dio_bio_actor() would handle an
-> > > encrypted file with blocksize > PAGE_SIZE correctly, as the I/O could be split
-> > > in the middle of a filesystem block (even after the filesystem ensures that
-> > > direct I/O on encrypted files is fully filesystem-block-aligned, which we do ---
-> > > see the rest of this patchset), which isn't allowed on encrypted files.
-> > 
-> > That can already happen unless you've specifically restricted DIO
-> > alignments in the filesystem code. i.e. Direct IO already supports
-> > sub-block ranges and alignment, and we can already do user DIO on
-> > sub-block, sector aligned ranges just fine. And the filesystem can
-> > already split the iomap on sub-block alignments and ranges if it
-> > needs to because the iomap uses byte range addressing, not sector or
-> > block based addressing.
-> > 
-> > So either you already have a situation where the 2^32 offset can
-> > land *inside* a filesystem block, or the offset is guaranteed to be
-> > filesystem block aligned and so you'll never get this "break an IO
-> > on sub-block alignment" problem regardless of the filesystem block
-> > size...
-> > 
-> > Either way, it's not an iomap problem - it's a filesystem mapping
-> > problem...
-> > 
-> 
-> I think you're missing the point here.  Currently, the granularity of encryption
-> (a.k.a. "data unit size") is always filesystem blocks, so that's the minimum we
-> can directly read or write to an encrypted file.  This has nothing to do with
-> the IV wraparound case also being discussed.
-
-So when you change the subject, please make it *really obvious* so
-that people don't think you are still talking about the same issue.
-
-> For example, changing a single bit in the plaintext of a filesystem block may
-> result in the entire block's ciphertext changing.  (The exact behavior depends
-> on the cryptographic algorithm that is used.)
-> 
-> That's why this patchset makes ext4 only allow direct I/O on encrypted files if
-> the I/O is fully filesystem-block-aligned.  Note that this might be a more
-> strict alignment requirement than the bdev_logical_block_size().
-> 
-> As long as the iomap code only issues filesystem-block-aligned bios, *given
-> fully filesystem-block-aligned inputs*, we're fine.  That appears to be the case
-> currently.
-
-The actual size and shape of the bios issued by direct IO (both old
-code and newer iomap code) is determined by the user supplied iov,
-the size of the biovec array allocated in the bio, and the IO
-constraints of the underlying hardware.  Hence direct IO does not
-guarantee alignment to anything larger than the underlying block
-device logical sector size because there's no guarantee when or
-where a bio will fill up.
-
-To guarantee alignment of what ends up at the hardware, you have to
-set the block device parameters (e.g. logical sector size)
-appropriately all the way down the stack. You also need to ensure
-that the filesystem is correctly aligned on the block device so that
-filesystem blocks don't overlap things like RAID stripe boundaires,
-linear concat boundaries, etc.
-
-IOWs, to constrain alignment in the IO path, you need to configure
-you system correct so that the information provided to iomap for IO
-alignment matches your requirements. This is not somethign iomap can
-do itself; everything from above needs to be constrained by the
-filesystem using iomap, everything sent below by iomap is
-constrained by the block device config.
-
-> (It's possible that in the future we'll support other encryption data unit
-> sizes, perhaps powers of 2 from 512 to filesystem block size.  But for now the
-> filesystem block size has been good enough for everyone,
-
-Not the case. fscrypt use in enterprise environments needs support
-for block size < page size so that it can be deployed on 64kB page
-size machines without requiring 64kB filesystem block sizes.
-
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+PiBEdXJpbmcgdW1vdW50LCDigKYKCkRvIHlvdSByZWZlciB0byB0aGUgYWN0aW9uIOKAnHVubW91
+bnTigJ0gaGVyZT8KCgo+IGYyZnNfZGVzdHJveV9zZWdtZW50X21hbmFnZXIoKSwgaXQgbWF5IGNh
+dXNlIOKApgoKV29yZGluZyBhZGp1c3RtZW50czoKZjJmc19kZXN0cm95X3NlZ21lbnRfbWFuYWdl
+cigpLiBJdCBtaWdodCBjYXVzZSDigKYKCgo+IOKApiB3aXRoIHByb2NmcyBhY2Nlc3NpbmcsIOKA
+pgoKQXZvaWQgYW5vdGhlciB0eXBvPzoK4oCmIHdpdGggcHJvY2ZzIGFjY2Vzc2VzLCDigKYKCgo+
+IOKApiwgZml4IGl0IGJ5IOKApgoKUGxlYXNlIHJlcGxhY2UgdGhpcyB3b3JkaW5nIGJ5IHRoZSB0
+YWcg4oCcRml4ZXPigJ0uCgpSZWdhcmRzLApNYXJrdXMKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
+aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
+ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
