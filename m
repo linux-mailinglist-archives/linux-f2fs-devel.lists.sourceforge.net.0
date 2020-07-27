@@ -2,61 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E797522F3D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jul 2020 17:28:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 896F322F57E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jul 2020 18:35:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k052t-0005lV-JA; Mon, 27 Jul 2020 15:28:07 +0000
+	id 1k0669-0000FK-T3; Mon, 27 Jul 2020 16:35:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <bevan@bi-co.net>) id 1k052s-0005lO-MU
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 15:28:06 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1k0668-0000F7-JW
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:35:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1897gRpuDRhCayoLAHbvsJmka5u5Fyietxk26kYdxeE=; b=CcUou4SzgyG9tyO2tgfcSawDBC
- AYhIvR8ihnmQJHY9RBeocEB25maAkXGFIuggIp4AUf9gJ7nDmIgaKvDkVMCx9uerEsTtLx/VPkT+g
- iLqEFxsiw8lTK6k5NHdtPLHeCS4up59Nf57tp5NuAtI7YfTZmVH63t6uQLvdOCehH+e0=;
+ bh=WQrdSmfWJwHKxLAllG8YVV/hXXHdJqHitN7Sb2kUl14=; b=IJ6nhXgbsTvKBdNaGPX139ZUQr
+ d7ermpC0/QX7EsNDPossAmf5W+IU0OnxpeTfIzebGa70Ig2cRAgppExa1vIlOEwpRJZEjdHMRfK3z
+ +kw93GgEykeZFAjAcFVMHR4iVnI9caFpAO04wtWy2RqtAMm5hh7/WHjoD55pRq2sMsXQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1897gRpuDRhCayoLAHbvsJmka5u5Fyietxk26kYdxeE=; b=Ijbo8IUd/eD78h7SEHN5ytvO10
- udOBNKgcSnyiKGH63qBwDBoQBVxDVHRsMfy3fTWn7FURVOwX+Opa8Mh26CuFZ/HhA8qOdyLFqmEu5
- phAHEpsnM6xm7Tal6V3wO2eD9rlWJDnIpBnanuaoFUH6/bIMhRIgZegU0unWJ7nRBgBg=;
-Received: from voltaic.bi-co.net ([134.119.3.22])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ bh=WQrdSmfWJwHKxLAllG8YVV/hXXHdJqHitN7Sb2kUl14=; b=fufdoT619WTeru7Gksz5eXVtkY
+ T6VHBcbkoKPyk0+ZCNXuI7vKJeRnP3oRCxaG8OI+zuMdITDAhdq5MXe7JwmWnIESGrJIKA4blL6Tn
+ hkqWyb3yHRRIEGOrHKUBCS8UIjoww12avsejah4KcgdUR45BgCjQMvls5lUzpq00rV8o=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k052n-004C8P-Vy
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 15:28:06 +0000
-Received: from zenpad (aftr-95-222-27-128.unity-media.net [95.222.27.128])
- by voltaic.bi-co.net (Postfix) with ESMTPSA id C7D5220937;
- Mon, 27 Jul 2020 17:02:54 +0200 (CEST)
-Message-ID: <8e0c3d4372c46ba587e26f5633d3eadf21fb648c.camel@bi-co.net>
-From: Michael =?ISO-8859-1?Q?La=DF?= <bevan@bi-co.net>
-To: Chao Yu <yuchao0@huawei.com>, Norbert Lange <nolange79@gmail.com>
-Date: Mon, 27 Jul 2020 17:02:54 +0200
-In-Reply-To: <c05c0e81-ea55-99e0-0060-df803b3586b6@huawei.com>
-References: <f3094e40-13ff-ea31-faf1-9e78867f4a8d@huawei.com>
- <20200724081125.3376-1-nolange79@gmail.com>
- <c05c0e81-ea55-99e0-0060-df803b3586b6@huawei.com>
-User-Agent: Evolution 3.36.4 
+ id 1k0667-001GQ8-EL
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:35:32 +0000
+Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
+ [107.3.166.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1886C20729;
+ Mon, 27 Jul 2020 16:35:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595867721;
+ bh=Najnwn6ct2tS23uzjWWO8aAe31i35Vpz52OO8sKRDZM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sqfNr5jE3Q7DGAj+IYToNrMuvjqaJg4KuB2rk+RFFpAP619xIZIVo/IX2AgfYRtM4
+ kDT90jODcRriTGURbrxNmJqDJgz+f0UZW2l2hhzEEhOYmz24f7ML6RDyfgrzsrRyll
+ 3XYnn3SR8g5gboxlByBVl86Y9Q622I7sE2y9BDPg=
+Date: Mon, 27 Jul 2020 09:35:19 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <20200727163519.GB1138@sol.localdomain>
+References: <20200721181012.39308-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200721181012.39308-1-ebiggers@kernel.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1k052n-004C8P-Vy
-Subject: Re: [f2fs-dev] Possible issues with fsck of f2fs root
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k0667-001GQ8-EL
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: restrict IV_INO_LBLK_* to
+ AES-256-XTS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,55 +84,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Satya Tangirala <satyat@google.com>, Paul Crowley <paulcrowley@google.com>,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Am Samstag, den 25.07.2020, 10:06 +0800 schrieb Chao Yu:
-> On 2020/7/24 16:11, Norbert Lange wrote:
-> > 
-> > $ fsck.f2fs -a /dev/mmcblk0p5; echo $?
-> > Info: Fix the reported corruption.
-> > Info: Mounted device!
-> > Info: Check FS only on RO mounted device
-> > Error: Failed to open the device!
-> > 255
+On Tue, Jul 21, 2020 at 11:10:12AM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> I tried ext4, it acts the same as f2fs... except different return
-> value.
+> IV_INO_LBLK_* exist only because of hardware limitations, and currently
+> the only known use case for them involves AES-256-XTS.  Therefore, for
+> now only allow them in combination with AES-256-XTS.  This way we don't
+> have to worry about them being combined with other encryption modes.
 > 
-> fsck -t ext4 -a /dev/zram1; echo $?
-> fsck 1.45.0 (6-Mar-2019)
-> /dev/zram1 is mounted.
-> e2fsck: Cannot continue, aborting.
+> (To be clear, combining IV_INO_LBLK_* with other encryption modes
+> *should* work just fine.  It's just not being tested, so we can't be
+> 100% sure it works.  So with no known use case, it's best to disallow it
+> for now, just like we don't allow other weird combinations like
+> AES-256-XTS contents encryption with Adiantum filenames encryption.)
 > 
+> This can be relaxed later if a use case for other combinations arises.
 > 
-> 8
+> Fixes: b103fb7653ff ("fscrypt: add support for IV_INO_LBLK_64 policies")
+> Fixes: e3b1078bedd3 ("fscrypt: add support for IV_INO_LBLK_32 policies")
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/crypto/policy.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 > 
-> fsck -t ext4 -a -f /dev/zram1; echo $?
-> fsck 1.45.0 (6-Mar-2019)
-> Warning!  /dev/zram1 is mounted.
-> /dev/zram1: 11/1179648 files (0.0% non-contiguous), 118065/4718592
-> blocks
-> 0
-> 
-> I'd like to know what behavior of fsck does systemd expect?
-> fsck -a should work (check & report or check & report & repaire)
-> on readonly mounted device?
+> diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
+> index 8a8ad0e44bb8..8e667aadf271 100644
+> --- a/fs/crypto/policy.c
+> +++ b/fs/crypto/policy.c
+> @@ -77,6 +77,20 @@ static bool supported_iv_ino_lblk_policy(const struct fscrypt_policy_v2 *policy,
+>  	struct super_block *sb = inode->i_sb;
+>  	int ino_bits = 64, lblk_bits = 64;
+>  
+> +	/*
+> +	 * IV_INO_LBLK_* exist only because of hardware limitations, and
+> +	 * currently the only known use case for them involves AES-256-XTS.
+> +	 * That's also all we test currently.  For these reasons, for now only
+> +	 * allow AES-256-XTS here.  This can be relaxed later if a use case for
+> +	 * IV_INO_LBLK_* with other encryption modes arises.
+> +	 */
+> +	if (policy->contents_encryption_mode != FSCRYPT_MODE_AES_256_XTS) {
+> +		fscrypt_warn(inode,
+> +			     "Can't use %s policy with contents mode other than AES-256-XTS",
+> +			     type);
+> +		return false;
+> +	}
+> +
+>  	/*
+>  	 * It's unsafe to include inode numbers in the IVs if the filesystem can
+>  	 * potentially renumber inodes, e.g. via filesystem shrinking.
+> -- 
 
-I think the return value is exactly the problem here. See fsck(8) (
-https://linux.die.net/man/8/fsck) which specifies the return values.
-Systemd looks at these and decides how to proceed:
+Applied to fscrypt.git#master for 5.9.
 
-https://github.com/systemd/systemd/blob/a859abf062cef1511e4879c4ee39c6036ebeaec8/src/fsck/fsck.c#L407
-
-That means, if fsck.f2fs returns 255, then
-the FSCK_SYSTEM_SHOULD_REBOOT bit is set and systemd will reboot.
-
-Best regards,
-Michael
-
+- Eric
 
 
 _______________________________________________
