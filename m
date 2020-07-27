@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69D5F22F587
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jul 2020 18:38:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6357A22F597
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jul 2020 18:43:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k0690-0000OC-7N; Mon, 27 Jul 2020 16:38:30 +0000
+	id 1k06Dg-0000k9-Qa; Mon, 27 Jul 2020 16:43:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1k068y-0000O3-RB
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:38:28 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1k06Dg-0000k3-5z
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:43:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MzofXxDe7AZW6cf2UnYEmIUmWUNHq7P9QlV99up0igI=; b=kV/r70tsKb2ZXJUICuDJpC2fo3
- LGxgmPDhyM60qJ0EpOF74d2ohb/W7RyB9bldKNnFe247tYbeM4leGC8BXBT85jHjvy2Ugz4KmwI2r
- 6u6Q1g34fDRy+1g853OS2FA59zEX1EGSQ9e4umFwlgDGysN1uTiosMznryBwJzbAypc4=;
+ bh=cGCYX5cp2EM+MhfWUUVGNJkbVh6W13QIdEuDBeimAaw=; b=LU89Djw5ky2tqwj7pb2PQbnaTk
+ Hx1MmKwwtJPUOyUWlKmi5YPJ5fSQ88klqysnM+Qh+rUuH3yaiM7BoSyBgJbDLN+dsdthYt7j+Mx8g
+ Ope/Nn4oMyIiImuBu5fYRApH8KHslCoyoO+e7cL8nivr3BU1pMg3zhuvztVsCn2DPtx8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MzofXxDe7AZW6cf2UnYEmIUmWUNHq7P9QlV99up0igI=; b=KYyOvP/pVNxeDSSDD5HrcR79LB
- NE2+LkLvsM0c8K6tBq5RZHEJl7TRfVVmA6dqO5JK4zqx/3pnSHhK0CwBv+01UkvoGm+J236eLF0ae
- 7bqFWw/K+LPbtmkIFRz23l4dWJYXrYVZdM3v3b6XCMouYdJqM0puwzbEZyQf9AiZ8YPg=;
+ bh=cGCYX5cp2EM+MhfWUUVGNJkbVh6W13QIdEuDBeimAaw=; b=mB47/zF+0D9NEMC1XfPPma1/UF
+ 7FT8lvrLiNrNcdCwmMdoJF+mtxtpoYQeNqGRoZ4pZET7cjqXHZ894QuAFCKCHjrlCLegX8OLVIint
+ ISpWYBuo6g1YCu+1OadAkdaOkiWiZx3dCJigQVoCYpvHCug0FMlGn/JM1kGFJ7mCF6Sc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k068x-001GX9-KP
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:38:28 +0000
+ id 1k06Dd-001Gib-Uo
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 16:43:20 +0000
 Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 16C6B20729;
- Mon, 27 Jul 2020 16:38:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 584542073E;
+ Mon, 27 Jul 2020 16:43:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1595867902;
- bh=c5eT5k11z1+CS85OE5I4gSjQlV7ygf3FjoF9oxLpRMs=;
+ s=default; t=1595868192;
+ bh=WCH9zfyg8tmZ1CDKwMEvUMAMGGTDY/5uLOBdgMEDeOU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MsmG70EFO0Xk7VnJqu5etQ5rAiSv75DK06bQvyYv+PKhPMp1qfqnS6omgE0sBtJwL
- El6ORUUQeMuqPbPX0PxioKkQ6+lj0j1qGL+YWnhuYLnUnlWMrAsq0ocatwnjlVwm0n
- 12trzm+Ou4H+PIqNUs8r/jIbo99Jt+GizD78QPDY=
-Date: Mon, 27 Jul 2020 09:38:20 -0700
+ b=R6aKlvnwdyjHmrcM++1cTpF4QI1KZKk6ArDU/w7++2I/AKBbnfSS5KX619WzGAKPJ
+ 1paTP8Uy6DubwHcQksRt0Gm1lV+Kxy/VPtRRHVXW7BOvi5gEiU7/sR5eJG40Vn/7UR
+ YHh0Memr/gx3lWSCnXiYRCsI8iA/F9AQYM0APa5A=
+Date: Mon, 27 Jul 2020 09:43:10 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Message-ID: <20200727163820.GC1138@sol.localdomain>
-References: <20200721225920.114347-1-ebiggers@kernel.org>
+To: Satya Tangirala <satyat@google.com>
+Message-ID: <20200727164310.GD1138@sol.localdomain>
+References: <20200724184501.1651378-1-satyat@google.com>
+ <20200724184501.1651378-7-satyat@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200721225920.114347-1-ebiggers@kernel.org>
+In-Reply-To: <20200724184501.1651378-7-satyat@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,8 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k068x-001GX9-KP
-Subject: Re: [f2fs-dev] [PATCH 0/5] fscrypt, fs-verity: one-time init fixes
+X-Headers-End: 1k06Dd-001Gib-Uo
+Subject: Re: [f2fs-dev] [PATCH v6 6/7] fscrypt: document inline encryption
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,53 +85,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Satya Tangirala <satyat@google.com>,
- linux-ext4@vger.kernel.org, Daniel Rosenberg <drosen@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jul 21, 2020 at 03:59:15PM -0700, Eric Biggers wrote:
-> This series fixes up some cases in fs/crypto/ and fs/verity/ where
-> "one-time init" is implemented using READ_ONCE() instead of
-> smp_load_acquire() but it's not obviously correct.
+On Fri, Jul 24, 2020 at 06:45:00PM +0000, Satya Tangirala wrote:
+> Update the fscrypt documentation file for inline encryption support.
 > 
-> One case is fixed by using a better approach that removes the need to
-> initialize anything.  The others are fixed by upgrading READ_ONCE() to
-> smp_load_acquire().  I've also improved the comments.
+> Signed-off-by: Satya Tangirala <satyat@google.com>
+> Reviewed-by: Eric Biggers <ebiggers@google.com>
+> Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  Documentation/filesystems/fscrypt.rst | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
 > 
-> This is motivated by the discussions at 
-> https://lkml.kernel.org/linux-fsdevel/20200713033330.205104-1-ebiggers@kernel.org/T/#u
-> and
-> https://lkml.kernel.org/linux-fsdevel/20200717044427.68747-1-ebiggers@kernel.org/T/#u
-> 
-> These fixes are improvements over the status quo, so I'd prefer to apply
-> them now, without waiting for any potential new generic one-time-init
-> macros (which based on the latest discussion, won't be flexible enough
-> to handle most of these cases anyway).
-> 
-> Eric Biggers (5):
->   fscrypt: switch fscrypt_do_sha256() to use the SHA-256 library
->   fscrypt: use smp_load_acquire() for fscrypt_prepared_key
->   fscrypt: use smp_load_acquire() for ->s_master_keys
->   fscrypt: use smp_load_acquire() for ->i_crypt_info
->   fs-verity: use smp_load_acquire() for ->i_verity_info
-> 
->  fs/crypto/Kconfig           |  2 +-
->  fs/crypto/fname.c           | 41 +++++++++----------------------------
->  fs/crypto/fscrypt_private.h | 15 ++++++++------
->  fs/crypto/inline_crypt.c    |  6 ++++--
->  fs/crypto/keyring.c         | 15 +++++++++++---
->  fs/crypto/keysetup.c        | 18 +++++++++++++---
->  fs/crypto/policy.c          |  4 ++--
->  fs/verity/open.c            | 15 +++++++++++---
->  include/linux/fscrypt.h     | 29 +++++++++++++++++++++-----
->  include/linux/fsverity.h    |  9 ++++++--
->  10 files changed, 96 insertions(+), 58 deletions(-)
+> diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
+> index 1a6ad6f736b5..423c5a0daf45 100644
+> --- a/Documentation/filesystems/fscrypt.rst
+> +++ b/Documentation/filesystems/fscrypt.rst
+> @@ -1204,6 +1204,18 @@ buffer.  Some filesystems, such as UBIFS, already use temporary
+>  buffers regardless of encryption.  Other filesystems, such as ext4 and
+>  F2FS, have to allocate bounce pages specially for encryption.
+>  
+> +Fscrypt is also able to use inline encryption hardware instead of the
+> +kernel crypto API for en/decryption of file contents.  When possible,
+> +and if directed to do so (by specifying the 'inlinecrypt' mount option
+> +for an ext4/F2FS filesystem), it adds encryption contexts to bios and
+> +uses blk-crypto to perform the en/decryption instead of making use of
+> +the above read/write path changes.  Of course, even if directed to
+> +make use of inline encryption, fscrypt will only be able to do so if
+> +either hardware inline encryption support is available for the
+> +selected encryption algorithm or CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK
+> +is selected.  If neither is the case, fscrypt will fall back to using
+> +the above mentioned read/write path changes for en/decryption.
+> +
+>  Filename hashing and encoding
+>  -----------------------------
+>  
+> @@ -1250,7 +1262,9 @@ Tests
+>  
+>  To test fscrypt, use xfstests, which is Linux's de facto standard
+>  filesystem test suite.  First, run all the tests in the "encrypt"
+> -group on the relevant filesystem(s).  For example, to test ext4 and
+> +group on the relevant filesystem(s).  One can also run the tests
+> +with the 'inlinecrypt' mount option to test the implementation for
+> +inline encryption support.  For example, to test ext4 and
+>  f2fs encryption using `kvm-xfstests
+>  <https://github.com/tytso/xfstests-bld/blob/master/Documentation/kvm-quickstart.md>`_::
 
-Patches 1-4 applied to fscrypt.git#master for 5.9.
-Patch 5 applied to fscrypt.git#fsverity for 5.9.
+Since this patch is separate from the direct I/O support, I've applied it to
+fscrypt.git#master for 5.9.  I'm not applying the direct I/O patches yet.
 
 - Eric
 
