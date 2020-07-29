@@ -2,68 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2458C2316D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jul 2020 02:39:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6567F2319FE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jul 2020 09:03:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k0a7i-000404-Vi; Wed, 29 Jul 2020 00:39:11 +0000
+	id 1k0g76-0001wO-J9; Wed, 29 Jul 2020 07:02:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jack.qiu@huawei.com>) id 1k0a7h-0003zv-8y
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 00:39:09 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1k0g74-0001wC-Sh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 07:02:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- To:From:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p08Vk1EVdSzKmz4iiOifsaruuo3Aka9Dx1cMGUhPNOo=; b=N0WUA8qEEerTY8Lf0etT7ohMb8
- ZQMmq/3KL+q3C1Ka/2gPOTuHK6eeL+sRBFzZuhFPEhs9zoEWdCxZ9J3tdpjD+fS74BD65+gFfeapu
- HqHMtJUk7rafN8hsBGiHYK8XATpFEPIQoF3crFY0QMqSjR+J8QLD/ouQkWeUT8/ypgZ8=;
+ bh=O0Qs6FNPWR3Uw7NQQ64Eec1/TRTmwikPksHxVzrFFaA=; b=PdNX7QsbUqJYZKTQNZw/vca7ZD
+ P9yr7KJwnCanZDY2w5r9MkwC+hnO5MzzKXDcmoXN6cOlyB5KnTyi/BAm1y+jKOXc+hlWb8EWd9/Cm
+ cbKbZO7rN9rkCobCsbj2e9LQaax8S7ITXxQzRg2mV2au1IrdO2ADeKp7cSYCnxoCMD1E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:To:From:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=p08Vk1EVdSzKmz4iiOifsaruuo3Aka9Dx1cMGUhPNOo=; b=A
- Ft2wJq0OsUNzMeBRYVUCjR/lJ/g9qrmf9JRY3z9dvA3xYkJN362ichRn2RyZI+s8CJloq7He9rMTY
- UM1xyHmT40RjAbdPG+bo1LSSRFtp8XBnlVcon5smC2Szr58MC02J9LFKQ2EbR0gW/baYvcJX36V5s
- PIymKk1nlS48tobE=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=O0Qs6FNPWR3Uw7NQQ64Eec1/TRTmwikPksHxVzrFFaA=; b=a
+ IdElEoKt18NzmanEZeUKJHyu2UJSmXez82A0mrrLI9af/gDzlyaKwYCOSbP7qbyObHKVB9xfLw0qK
+ DL5mt0ICjLypbR7GFe8e/YAO7KDflKe9pjirldhGE5HgUDyVaUqZIovLyuHIv5OIKTrzeWzykohaY
+ CP0KR2PeZ0ivMYZA=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k0a7c-005b4Y-5J
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 00:39:09 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id A90F884C02907908A7BA
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 29 Jul 2020 08:38:48 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by DGGEMS411-HUB.china.huawei.com
- (10.3.19.211) with Microsoft SMTP Server id 14.3.487.0; Wed, 29 Jul 2020
- 08:38:42 +0800
-From: Jack Qiu <jack.qiu@huawei.com>
-To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Wed, 29 Jul 2020 09:29:01 +0800
-Message-ID: <20200729012901.29151-1-jack.qiu@huawei.com>
-X-Mailer: git-send-email 2.17.1
+ id 1k0g73-002vlP-15
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 07:02:54 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D99112070B;
+ Wed, 29 Jul 2020 07:02:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1596006166;
+ bh=PsG28ZKBgOwqSDbxUyTDDzHrSZ08sLR2QQcOJCPJkbg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=KlNOKaUxeBPVXLkj+pydQcG5m7sPnUW6DnUrO1n1hlDwdy6+BUgLgBCkM9dPrv6uh
+ o6+5xOO/UsOYrvMc97JJNWyz1cNIUoHVG6BIf+NEkzghCrLt81UkA6YZQSWmcmfEZp
+ /JJ3LPd10QyBCUSEbkgjBSsvpB+t/zQe3qdvyi/g=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed, 29 Jul 2020 00:02:44 -0700
+Message-Id: <20200729070244.584518-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.175.101.6]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k0a7c-005b4Y-5J
-Subject: [f2fs-dev] [PATCH v2] f2fs: use macro instead of f2fs verity version
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1k0g73-002vlP-15
+Subject: [f2fs-dev] [PATCH] f2fs: fix deadlock between quota writes and
+ checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,51 +81,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Because fsverity_descriptor_location.version is constant,
-so use macro for better reading.
+f2fs_write_data_pages(quota_mapping)
+ __f2fs_write_data_pages             f2fs_write_checkpoint
+  * blk_start_plug(&plug);
+  * add bio in write_io[DATA]
+                                      - block_operations
+                                      - skip syncing quota by
+                                                >DEFAULT_RETRY_QUOTA_FLUSH_COUNT
+                                      - down_write(&sbi->node_write);
+  - f2fs_write_single_data_page
+    - f2fs_do_write_data_page
+      - f2fs_outplace_write_data
+        - do_write_page
+           - f2fs_allocate_data_block
+            - down_write(node_write)
+                                      - f2fs_wait_on_all_pages(F2FS_WB_CP_DATA);
 
-Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/verity.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ fs/f2fs/checkpoint.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index 865c9fb774fb..9eb0dba851e8 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -29,6 +29,8 @@
- #include "f2fs.h"
- #include "xattr.h"
-
-+#define F2FS_VERIFY_VER	(1)
-+
- static inline loff_t f2fs_verity_metadata_pos(const struct inode *inode)
- {
- 	return round_up(inode->i_size, 65536);
-@@ -152,7 +154,7 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
- 	struct inode *inode = file_inode(filp);
- 	u64 desc_pos = f2fs_verity_metadata_pos(inode) + merkle_tree_size;
- 	struct fsverity_descriptor_location dloc = {
--		.version = cpu_to_le32(1),
-+		.version = cpu_to_le32(F2FS_VERIFY_VER),
- 		.size = cpu_to_le32(desc_size),
- 		.pos = cpu_to_le64(desc_pos),
- 	};
-@@ -199,7 +201,7 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
- 			    F2FS_XATTR_NAME_VERITY, &dloc, sizeof(dloc), NULL);
- 	if (res < 0 && res != -ERANGE)
- 		return res;
--	if (res != sizeof(dloc) || dloc.version != cpu_to_le32(1)) {
-+	if (res != sizeof(dloc) || dloc.version != cpu_to_le32(F2FS_VERIFY_VER)) {
- 		f2fs_warn(F2FS_I_SB(inode), "unknown verity xattr format");
- 		return -EINVAL;
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 8c782d3f324f0..99c8061da55b9 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1269,6 +1269,8 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
+ 		if (type == F2FS_DIRTY_META)
+ 			f2fs_sync_meta_pages(sbi, META, LONG_MAX,
+ 							FS_CP_META_IO);
++		else if (type == F2FS_WB_CP_DATA)
++			f2fs_submit_merged_write(sbi, DATA);
+ 		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
  	}
---
-2.17.1
+ 	finish_wait(&sbi->cp_wait, &wait);
+-- 
+2.28.0.rc0.142.g3c755180ce-goog
 
 
 
