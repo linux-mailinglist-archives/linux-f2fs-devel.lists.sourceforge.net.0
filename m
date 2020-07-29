@@ -2,86 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AB9222F667
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jul 2020 19:16:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 152A32316C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jul 2020 02:30:41 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k06jn-0007qK-Az; Mon, 27 Jul 2020 17:16:31 +0000
+	id 1k0ZzR-0000NW-O4; Wed, 29 Jul 2020 00:30:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1k06jm-0007qE-K5
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 17:16:30 +0000
+ (envelope-from <jack.qiu@huawei.com>) id 1k0ZzQ-0000NK-2q
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 00:30:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iPezfk9xfssaa9eUc2HLVC1zPwzKJ/lpVDtGaugFXLg=; b=SiBJTMwilM8Wha9z/EQxKJPkC2
- g/GqYvp0Z3jYZYOfbqfvSbbpEfUffV3nC48NCDf5KuIklFXaVNWi/tq/0O1GunjQYKhmNZLPc12W8
- C7h4cF5rm0fpJ1nZYM9Ug0/cSlmA7k/WrTxyxpZ2duQ7tZkNAtADAbQ7JnthOEeHwf38=;
+ bh=BogeDhS4Qoc1AQLaDXV500Qb/wYEuPjDVHgebFkIiU8=; b=Fo1wtnKlYpT987gSocXhmS1vTL
+ RodFeksokG5lvus7fC6NPlAz0KD4om97LlwblLQrtzzdBpgrK0wH9H9LC/xLRpdO13el6YfTXm5Q/
+ kkXSp6Gd60TYNUmOeIfV0rN96o6CDmUuvZcqOJrDxe+DPoaMpImm4mXlP5Xaw1CYUcCw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=iPezfk9xfssaa9eUc2HLVC1zPwzKJ/lpVDtGaugFXLg=; b=gsaprLWl+vQhSGGx6Z35sioqWk
- flIwzl1DOMtGO1D364ZpAm0XJHHpw0eoO4SdW47Bmuy6wILDa8sWYw0ytSIy3ficWT+P14//z443Q
- rUFHw7qRHfEAh9UTH1kPn5QQbPoozylfkF/6Y50z5h0X9L4auTpsWQSu8/Ry6+Icrocw=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BogeDhS4Qoc1AQLaDXV500Qb/wYEuPjDVHgebFkIiU8=; b=N
+ 8TtIbJFdCGgDF9Hz2aDG8gNXCIIiXbrRukB5j5F1fwiA9bXv82MIunVVUWBZFPmLNhrlyEV/7h5qP
+ pvu87AfPPdPHcfizutdfC+JSJ3zuZ+uD9+XhpWbtGqhr7/BVeTREUh9EvOAO5DhdRPxQlBGkt6qxv
+ tN+6m2vb8OSqvQIA=;
+Received: from szxga03-in.huawei.com ([45.249.212.189] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k06jl-004Gvu-Bj
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 27 Jul 2020 17:16:30 +0000
-Received: from sol.localdomain (c-107-3-166-239.hsd1.ca.comcast.net
- [107.3.166.239])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A9042206E7;
- Mon, 27 Jul 2020 17:16:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1595870176;
- bh=7UCQgSoiooCyBil8fOSJp8RobRWZr1sCpOea8qGPx3c=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xLeAxijvamdVYBWP2+Xvnj2jRciZbuOyQV+Kr2OvyHP74SUbz5bInn0yjxVioK8iA
- 8RWxuGNDB39zHQEMFVvnNN+Y241XtQ8jBcC1cBB46iXnudHmAJqjUxgGzvnF30XsHK
- t5+RylcDIYaB/36yRNq39qkw5MkMKxUWNmCGlon4=
-Date: Mon, 27 Jul 2020 10:16:15 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Dave Chinner <david@fromorbit.com>
-Message-ID: <20200727171615.GJ1138@sol.localdomain>
-References: <20200722211629.GE2005@dread.disaster.area>
- <20200722223404.GA76479@sol.localdomain>
- <20200723220752.GF2005@dread.disaster.area>
- <20200723230345.GB870@sol.localdomain>
- <20200724013910.GH2005@dread.disaster.area>
- <20200724034628.GC870@sol.localdomain>
- <20200724053130.GO2005@dread.disaster.area>
- <20200724174132.GB819@sol.localdomain>
- <20200725234751.GR2005@dread.disaster.area>
- <20200726024211.GA14321@sol.localdomain>
+ id 1k0ZzL-002dPH-Rr
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 00:30:36 +0000
+Received: from DGGEMM404-HUB.china.huawei.com (unknown [172.30.72.53])
+ by Forcepoint Email with ESMTP id 810E547945BCEF8C70D4;
+ Wed, 29 Jul 2020 08:30:24 +0800 (CST)
+Received: from DGGEMM513-MBX.china.huawei.com ([169.254.1.141]) by
+ DGGEMM404-HUB.china.huawei.com ([10.3.20.212]) with mapi id 14.03.0487.000;
+ Wed, 29 Jul 2020 08:30:23 +0800
+From: "Qiujie (Jack)" <jack.qiu@huawei.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Thread-Topic: [f2fs-dev] [PATCH] f2fs: use macro instead of f2fs verity version
+Thread-Index: AdZlP2zbrY2LUScHTI64N+0tHktWvQ==
+Date: Wed, 29 Jul 2020 00:30:23 +0000
+Message-ID: <9E81852FD51EDB42A790F24E63A53FC0B186F821@dggemm513-mbx.china.huawei.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.179.179]
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200726024211.GA14321@sol.localdomain>
-X-Spam-Score: -0.3 (/)
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.189 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k06jl-004Gvu-Bj
-Subject: Re: [f2fs-dev] [PATCH v4 3/7] iomap: support direct I/O with
- fscrypt using blk-crypto
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1k0ZzL-002dPH-Rr
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use macro instead of f2fs verity
+ version
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,108 +82,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyat@google.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Jul 25, 2020 at 07:42:11PM -0700, Eric Biggers wrote:
-> > Exactly my point. Requiring infrastructure and storage layers to
-> > obey completely new, undefined, undiscoverable, opaque and variable
-> > definition of the block devices' "atomic unit of IO", then that's
-> > simply a non-starter. That requires a complete re-architecture of
-> > the block layers and how things interface and transmit information
-> > through them. At minimum, high level IO alignment constraints must
-> > be generic and not be hidden in context specific crypto structures.
+> On 07/25, Jack Qiu wrote:
+> > Because fsverity_descriptor_location.version is constant, so use macro
+> > for better reading.
+> >
+> > Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
+> > ---
+> >  fs/f2fs/verity.c | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c index
+> > 865c9fb774fb..5be8a5790907 100644
+> > --- a/fs/f2fs/verity.c
+> > +++ b/fs/f2fs/verity.c
+> > @@ -29,6 +29,8 @@
+> >  #include "f2fs.h"
+> >  #include "xattr.h"
+> >
+> > +#define F2FS_VERIFY_VER	cpu_to_le32(1)
 > 
-> Do you have any specific examples in mind of where *encrypted* I/O may broken at
-> only a logical_block_size boundary?  Remember that encrypted I/O with a
-> particular data_unit_size is only issued if the request_queue has declared that
-> it supports encryption with that data_unit_size.  In the case of a layered
-> device, that means that every layer would have to opt-into supporting encryption
-> as well as the specific data_unit_size.
+> Should be like this?
 > 
-> Also, the alignment requirement is already passed down the stack as part of the
-> bio_crypt_ctx.  If there do turn out to be places that need to use it, we could
-> easily define generic helper functions:
+> #define F2FS_VERITY_VER		1
 > 
-> unsigned int bio_required_alignment(struct bio *bio)
-> {
->         unsigned int alignmask = queue_logical_block_size(bio->bi_disk->queue) - 1;
+> And, use cpu_to_le32(F2FS_VERITY_VER) below?
 > 
-> #ifdef CONFIG_BLK_INLINE_ENCRYPTION
->         if (bio->bi_crypt_context)
->                 alignmask |= bio->bi_crypt_context->bc_key->crypto_cfg.data_unit_size - 1;
-> #endif
-> 
->         return alignmask + 1;
-> }
-> 
-> unsigned int rq_required_alignment(struct request *rq)
-> {
->         unsigned int alignmask = queue_logical_block_size(rq->q) - 1;
-> 
-> #ifdef CONFIG_BLK_INLINE_ENCRYPTION
->         if (rq->crypt_ctx)
->                 alignmask |= rq->crypt_ctx->bc_key->crypto_cfg.data_unit_size - 1;
-> #endif
-> 
->         return alignmask + 1;
-> }
-> 
-> Sure, we could also add a new alignment_required field to struct bio and struct
-> request, but it would be unnecessary since all the information is already there.
-> 
-> > > Is it your opinion that inline encryption should only be supported when
-> > > data_unit_size <= logical_block_size?  The problems with that are
-> > 
-> > Pretty much.
-> > 
-> > >     (a) Using an unnecessarily small data_unit_size degrades performance a
-> > > 	lot -- for *all* I/O, not just direct I/O.  This is because there are a
-> > > 	lot more separate encryptions/decryptions to do, and there's a fixed
-> > > 	overhead to each one (much of which is intrinsic in the crypto
-> > > 	algorithms themselves, i.e. this isn't simply an implementation quirk).
-> > 
-> > Performance is irrelevant if correctness is not possible.
-> > 
-> 
-> As far as I know, data_unit_size > logical_block_size is working for everyone
-> who has used it so far.
-> 
-> So again, I'm curious if you have any specific examples in mind.  Is this a
-> real-world problem, or just a theoretical case where (in the future) someone
-> could declare support for some data_unit_size in their 'struct request_queue'
-> (possibly for a layered device) without correctly handling alignment in all
-> cases?
-> 
-> I do see that logical_block_size is used for discard, write_same, and zeroout.
-> But that isn't encrypted I/O.
-> 
-> BTW, there might very well be hardware that *only* supports
-> data_unit_size > logical_block_size.
 
-I found get_max_io_size() in block/blk-merge.c.  I'll check if that needs to be
-updated.
+OK, I will revise this in next version, Thanks.
 
-Let me know if you have any objection to the fscrypt inline encryption patches
-*without direct I/O support* going into 5.9.  Note that fscrypt doesn't directly
-care about this block layer stuff at all; instead it uses
-blk_crypto_config_supported() to check whether inline encryption with the
-specified (crypto_mode, data_unit_size, dun_bytes) combination is supported on
-the filesystem's device(s).  Only then will fscrypt use inline encryption
-instead of the traditional filesystem-layer encryption.
-
-So if blk_crypto_config_supported() is saying that some crypto configuration is
-supported when it isn't, then that's a bug in the blk-crypto patches that went
-into the block layer in 5.8, which we need to fix there.  (Ideally by fixing any
-cases where encrypted I/O may be split in the middle of a data unit.  But in the
-worst case, we could easily make blk_crypto_config_supported() return false when
-'data_unit_size > logical_block_size' for now.)
-
-- Eric
+> > +
+> >  static inline loff_t f2fs_verity_metadata_pos(const struct inode
+> > *inode)  {
+> >  	return round_up(inode->i_size, 65536); @@ -152,7 +154,7 @@ static
+> > int f2fs_end_enable_verity(struct file *filp, const void *desc,
+> >  	struct inode *inode = file_inode(filp);
+> >  	u64 desc_pos = f2fs_verity_metadata_pos(inode) + merkle_tree_size;
+> >  	struct fsverity_descriptor_location dloc = {
+> > -		.version = cpu_to_le32(1),
+> > +		.version = F2FS_VERIFY_VER,
+> >  		.size = cpu_to_le32(desc_size),
+> >  		.pos = cpu_to_le64(desc_pos),
+> >  	};
+> > @@ -199,7 +201,7 @@ static int f2fs_get_verity_descriptor(struct inode
+> *inode, void *buf,
+> >  			    F2FS_XATTR_NAME_VERITY, &dloc, sizeof(dloc), NULL);
+> >  	if (res < 0 && res != -ERANGE)
+> >  		return res;
+> > -	if (res != sizeof(dloc) || dloc.version != cpu_to_le32(1)) {
+> > +	if (res != sizeof(dloc) || dloc.version != F2FS_VERIFY_VER) {
+> >  		f2fs_warn(F2FS_I_SB(inode), "unknown verity xattr format");
+> >  		return -EINVAL;
+> >  	}
+> > --
+> > 2.17.1
+> >
+> >
+> >
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
