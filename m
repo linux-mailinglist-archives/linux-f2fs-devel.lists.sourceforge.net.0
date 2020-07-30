@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B077232C40
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Jul 2020 09:09:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C452232C45
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Jul 2020 09:10:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k12h6-0000bR-N7; Thu, 30 Jul 2020 07:09:36 +0000
+	id 1k12hk-0001Gm-Cc; Thu, 30 Jul 2020 07:10:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1k12h5-0000bI-Ip
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 07:09:35 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1k12hi-0001GW-5w
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 07:10:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=k6tySseC8MeRVewi2tFyT7xgHK3ULrJawk6wwEC3CS0=; b=ZmALxH2M7vXifxAFG9rpb13egI
- NN5ra7C5fA2eYhzvg46PovvcMAwmMuXSFGzqhmRynnaBXj9EK/yQkkej9zj7e+Sk7BhIbXeqlMH51
- LbB4joORgL6wWNKLHyEnraC/p69i7VyViYrcd3pfxTAPUZJIUxkDJtaphD9zFAGMkK6w=;
+ bh=Cns8VwXC3G+xOeT0UZKsW6Sof1reNIDL6lvhwO4+GIk=; b=YP6wvUg8wf2kSNJA3a1W1tgqHG
+ NidoxT2fkwcJfJoW6EHDEhPtPsW55Wq+OzGXsE1JJERU6hYP08J6RZ8Gg/1JpDUOXaE2nWrpfhE1k
+ TcR9yZt/aWbXE1DucmQCrP8whbz8CFkGXe24raL4P20hUC//4zDx0MJl9ibyGD8oca5s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=k6tySseC8MeRVewi2tFyT7xgHK3ULrJawk6wwEC3CS0=; b=UiZcamR/kK6WpSJS16vxRpNlq+
- DPeNtHhfeJoG4tMjziE04cKsaa9AHGk759h9qA283FLJddElO0rTesDDz0Bnzma7x4m9CoZbPHuSZ
- FQou/evYbegghQkXJFj668LUzY4RklLTmX4Z58ZLlKheekPwzQGSBihXL3pWvUPSj4lM=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=Cns8VwXC3G+xOeT0UZKsW6Sof1reNIDL6lvhwO4+GIk=; b=RzqebYVxdFQ4gtaj2VkWbBcJwD
+ gst+3elD2ErOQIKcR9dWZbaIEgrj3TtgIMf6IC5oHBrAxgK5GLIWb+r9D/pcsIPpf8R+z9TWJgp3Z
+ 3obMiVEvVAHO8W3KhxlOZZ97UVkyzCvCINWoSQ+ETPrQEAHnJemBh8nUzNMtIteDNvtU=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k12gx-00439a-Jh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 07:09:35 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id C317FC19DF8D1A4F8355
+ id 1k12hg-00EPaN-Ce
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 07:10:14 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 02941ECF4156EA5097E8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 30 Jul 2020 15:09:16 +0800 (CST)
+ Thu, 30 Jul 2020 15:09:49 +0800 (CST)
 Received: from [10.164.122.247] (10.164.122.247) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 30 Jul
- 2020 15:09:08 +0800
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 30 Jul
+ 2020 15:09:41 +0800
 To: Jack Qiu <jack.qiu@huawei.com>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20200725100527.8297-1-jack.qiu@huawei.com>
+References: <20200729012901.29151-1-jack.qiu@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <55ef5bf1-bb12-3c3e-60d5-89f92792cf03@huawei.com>
-Date: Thu, 30 Jul 2020 15:09:08 +0800
+Message-ID: <545a37a5-e0d6-6d81-61d3-a3d96baea1e7@huawei.com>
+Date: Thu, 30 Jul 2020 15:09:41 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200725100527.8297-1-jack.qiu@huawei.com>
+In-Reply-To: <20200729012901.29151-1-jack.qiu@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.164.122.247]
 X-CFilter-Loop: Reflected
@@ -63,15 +63,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.8 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1k12gx-00439a-Jh
-Subject: Re: [f2fs-dev] [PATCH] f2fs: correct comment of
- f2fs_exist_written_data
+X-Headers-End: 1k12hg-00EPaN-Ce
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: use macro instead of f2fs verity
+ version
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,22 +87,15 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/7/25 18:05, Jack Qiu wrote:
-> Function parameter mode could be TRANS_DIR_INO.
+On 2020/7/29 9:29, Jack Qiu wrote:
+> Because fsverity_descriptor_location.version is constant,
+> so use macro for better reading.
 > 
-> Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
+> Signed-off-by: Jack Qiu<jack.qiu@huawei.com>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
-
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
 
 
 _______________________________________________
