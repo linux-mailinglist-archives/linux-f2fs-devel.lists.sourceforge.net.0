@@ -2,81 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B993923227A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jul 2020 18:22:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDA09232B2C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Jul 2020 07:09:53 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k0oq8-0003Li-Dz; Wed, 29 Jul 2020 16:22:00 +0000
+	id 1k10pA-0003rE-4S; Thu, 30 Jul 2020 05:09:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1k0oq7-0003La-6l
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 16:21:59 +0000
+ (envelope-from <daeho43@gmail.com>) id 1k10p9-0003r7-4g
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 05:09:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FjwOx/1YMnYWkBs5w+sbZtNz9UnliXhLhIMvmLD2uk0=; b=eSJZN0Zyfs3ANURBIBeAY9Anr4
- QiD9pZoKISYpuqKyVgkDSV0P6FDSKi6LMslNTIeckfKAuCigAEajvWyY0jQc+bQu8pMDjXlMfb9Ht
- AuDJCTnZtG9ViWxkG5eli9u/4VbkyWFGc2Y/YQsN5pL7VOvuj8tOkXtTMF9i1ioD0QYk=;
+ bh=sRoZs4D1CNYfrOlS/aIbzgfYQ1SktXdRegTngPqrg14=; b=IY/admx3SYkRiFTprkPCnQ9ont
+ TPqgIlay56fRx6Efw2vLwzKcEcO5o83DT4eYkEEfuhcrfh3FyKdCiZF1Fwiu0f5cJHqPT7OegYOZy
+ KHqNleY9bKRvKv40cWN0sVcdKY5hke7aUO6jQRnbYyiFcObfwMs7/Dih4OnBd/j66Cxc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=FjwOx/1YMnYWkBs5w+sbZtNz9UnliXhLhIMvmLD2uk0=; b=WrQWEHD7V0GScBlEfvkNu/rEdD
- 0JLi42a4l30majgQj2TNpbuANLjZiQSCoLCYmIztFpQ+5cmnFnqOA4X4M+3t/8Q0si9HROFWtxh5b
- oW9Nf/QS60d+36i9w/s/5jwJsZ+uaBIRsqqjf3cT/tumTt1TGlKUrmS39kkgtorKyfhs=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k0oq5-006KP1-UY
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 29 Jul 2020 16:21:59 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4FA8F2075D;
- Wed, 29 Jul 2020 16:21:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596039705;
- bh=kU7UT3i0MXW7gqzbaCFlt/VbDV/ZBUwOIl76CXUqX2c=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Byo40t5PhbmfTgovNn4pTryjQyJPinICU2cOtioUZM9MofRtpmqMkeY+Cri6Gb+R9
- uKjxjiG4JQdUMbNG1WjF+crg9tQ8vQvJ0hDGyKOcWMtTP/Vy6nk9OYz2qE8gy+vo6Q
- z5/2p7KaXf1M0R8ovcuf5rS/UWswH3NSXXsA9NKI=
-Date: Wed, 29 Jul 2020 09:21:44 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20200729162144.GA1460954@google.com>
-References: <20200729070244.584518-1-jaegeuk@kernel.org>
- <054f161c-05db-73b7-3d83-be7addcd6015@kernel.org>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=sRoZs4D1CNYfrOlS/aIbzgfYQ1SktXdRegTngPqrg14=; b=Z
+ 28iLYhWF+2CrU+BDaZYYpojo7sk+ffgIwOWT/5uyoSlZ2x1z3UwlNGxCuhwTVJlm5Wb5pGphbJsec
+ J0hl5/trlRye+HnenlJ1cFyTT2ENmJzEqO+OrQOPBhyIB5XZ7nMIdrTMQ0nuKR36UkCuGGYZCeWWg
+ sPseDvtmfCmCclMQ=;
+Received: from mail-pj1-f66.google.com ([209.85.216.66])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1k10p4-003xuZ-NF
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 30 Jul 2020 05:09:47 +0000
+Received: by mail-pj1-f66.google.com with SMTP id ha11so3550680pjb.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 29 Jul 2020 22:09:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=sRoZs4D1CNYfrOlS/aIbzgfYQ1SktXdRegTngPqrg14=;
+ b=fdyooRrCV2FclnceL3/Yy52L/nRYSE9ERsZFzzFuLa3JmRzvQwUDzkKA7/vTPmKPJ9
+ Caeb7dcjTkKReY5z4JeUlDtndhMDeNlHdqSVIhtH3otK8TY1/2N6EUsLwv2eFSbw/C4R
+ OwsdfK2BJMI25F1/ytu4jlRYHSyR1eAlbOZiWVO2x9DTyNEOBqS12k7Zlx12Bbv89L5u
+ r2DWb2jJ3w6AMa35/wrUiSSuB5n8ewiT40jWARpeXMLeh66v/y/DNDzRS+yC5x2iDLYi
+ RfMuO1bo1wAtts0VaskgEoIhQcbSgUrglP1bbuzoTQK38R9sQOVCFIm1P5kE3bv6Bgj9
+ 2GMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=sRoZs4D1CNYfrOlS/aIbzgfYQ1SktXdRegTngPqrg14=;
+ b=aubOVJfw2Oqbx4rnMLUxJ1dpBP3ejWIPoz0qu7RA0iAFQMTqSWPBx8QccGxsEKvraC
+ b5PcpmvjA+QFAQ7Oke6n5MCQuAGu90uZowDOTmX+GCcAk1nMXolksbiV+mzPrkICNLzl
+ QqSFZ6VzrnreFEzRMWFFDb3Yk3NFH3lxzqv1vkufsJIFlSR2FdJHAhxKpQNhqcSZt9xk
+ KHIwe99UudwVumM2/kE3wQEMHjZ4UG2NKlO4Lx3a27+Ym5/DtGsz/tAaFWgKTLETpdQ4
+ UEwOVjcygYHVVOlM2aTRFHH8WC+3G0UIOQ1+kzIwN1Ql0Z+kXJKFxPkKP2TlDk1T7ApI
+ RGsQ==
+X-Gm-Message-State: AOAM530MHngVjIpjglUVUMHnezlnOn1htYXjtT79yvFr7j1/AQXJSMy/
+ c9WUpgyI0QHexLLyx0bEJ6Q=
+X-Google-Smtp-Source: ABdhPJzhloODSlqZ3SGmchjbJDqStVbAQ+Gk407WqgbI1VfbjtKH+UMNMIzktYU3EmXJczDNA+Tfng==
+X-Received: by 2002:a17:902:7d90:: with SMTP id
+ a16mr29784015plm.226.1596085776116; 
+ Wed, 29 Jul 2020 22:09:36 -0700 (PDT)
+Received: from daehojeong1.seo.corp.google.com
+ ([2401:fa00:d:1:a6ae:11ff:fe18:6ce2])
+ by smtp.gmail.com with ESMTPSA id q3sm3690057pjo.16.2020.07.29.22.09.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2020 22:09:35 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Thu, 30 Jul 2020 14:09:28 +0900
+Message-Id: <20200730050928.356916-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <054f161c-05db-73b7-3d83-be7addcd6015@kernel.org>
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.66 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k0oq5-006KP1-UY
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix deadlock between quota writes and
- checkpoint
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.66 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1k10p4-003xuZ-NF
+Subject: [f2fs-dev] [PATCH] f2fs: make file immutable even if releasing zero
+ compression block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,68 +112,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/29, Chao Yu wrote:
-> On 2020-7-29 15:02, Jaegeuk Kim wrote:
-> > f2fs_write_data_pages(quota_mapping)
-> >  __f2fs_write_data_pages             f2fs_write_checkpoint
-> >   * blk_start_plug(&plug);
-> >   * add bio in write_io[DATA]
-> >                                       - block_operations
-> >                                       - skip syncing quota by
-> >                                                 >DEFAULT_RETRY_QUOTA_FLUSH_COUNT
-> >                                       - down_write(&sbi->node_write);
-> >   - f2fs_write_single_data_page
-> 
-> After commit 79963d967b49 ("f2fs: shrink node_write lock coverage"),
-> node_write lock was moved to f2fs_write_single_data_page() and
-> f2fs_write_compressed_pages().
-> 
-> So it needs to update the callstack.
-> 
-> - down_write(node_write)
+From: Daeho Jeong <daehojeong@google.com>
 
-Yeah, applied. :)
+When we use F2FS_IOC_RELEASE_COMPRESS_BLOCKS ioctl, if we can't find
+any compressed blocks in the file even with large file size, the
+ioctl just ends up without changing the file's status as immutable.
+It makes the user, who expects that the file is immutable when it
+returns successfully, confused.
 
-> 
-> Otherwise it looks good to me.
-> 
-> Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> 
-> Thanks,
-> 
-> >     - f2fs_do_write_data_page
-> >       - f2fs_outplace_write_data
-> >         - do_write_page
-> >            - f2fs_allocate_data_block
-> >             - down_write(node_write)
-> >                                       - f2fs_wait_on_all_pages(F2FS_WB_CP_DATA);
-> > 
-> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > ---
-> >  fs/f2fs/checkpoint.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > index 8c782d3f324f0..99c8061da55b9 100644
-> > --- a/fs/f2fs/checkpoint.c
-> > +++ b/fs/f2fs/checkpoint.c
-> > @@ -1269,6 +1269,8 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
-> >  		if (type == F2FS_DIRTY_META)
-> >  			f2fs_sync_meta_pages(sbi, META, LONG_MAX,
-> >  							FS_CP_META_IO);
-> > +		else if (type == F2FS_WB_CP_DATA)
-> > +			f2fs_submit_merged_write(sbi, DATA);
-> >  		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
-> >  	}
-> >  	finish_wait(&sbi->cp_wait, &wait);
-> > 
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/file.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index cc7f5670390f..8a422400e824 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3535,14 +3535,14 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+ 	if (ret)
+ 		goto out;
+ 
+-	if (!F2FS_I(inode)->i_compr_blocks)
+-		goto out;
+-
+ 	F2FS_I(inode)->i_flags |= F2FS_IMMUTABLE_FL;
+ 	f2fs_set_inode_flags(inode);
+ 	inode->i_ctime = current_time(inode);
+ 	f2fs_mark_inode_dirty_sync(inode, true);
+ 
++	if (!F2FS_I(inode)->i_compr_blocks)
++		goto out;
++
+ 	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 	down_write(&F2FS_I(inode)->i_mmap_sem);
+ 
+-- 
+2.28.0.rc0.142.g3c755180ce-goog
+
 
 
 _______________________________________________
