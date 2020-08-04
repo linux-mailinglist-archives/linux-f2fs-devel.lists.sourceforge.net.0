@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B69C323B1F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Aug 2020 02:56:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43A1923B1F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Aug 2020 02:57:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k2lG4-0003ZX-Gs; Tue, 04 Aug 2020 00:56:48 +0000
+	id 1k2lGb-0005zO-7s; Tue, 04 Aug 2020 00:57:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1k2lG3-0003ZQ-JN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Aug 2020 00:56:47 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1k2lGZ-0005zG-Ke
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Aug 2020 00:57:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FjJMTE4KvXMpCY/67/12lkJPPVrCfLy8z1pCeu/QPi0=; b=kA6eosiXIkRo2mtK2Dgtml4jbG
- plVZtLIRPQZLUkIum6A1bPD7a100eChk8AaQBRuc+zoAgtvIugy6gwyLQdCb4uYczttUPgDv3Cve4
- KiC1UNzi3s59w0bAPG5B8Lxk8fhsarYFZcXoHrYvoCVRoGJftGWsDwp8zloGnp1mACGc=;
+ bh=n4zejEUXrEkBoI8FqV0oFwpgV2rE+o1FnFdE9HswZZc=; b=QY5icZQIOy93aqKldGuDclM3Zz
+ uSj8hMGUoSytQVobYKDRP9JVBqbsHaPEmtbkHkPr3BONDrTQczeDvpXmrNV9xcE6gdaV6l0fMOjwT
+ +5bHqXEj3GLqG+BRANIX+90akZXW2BrIzzkBq11FKo2CYEwn4V0Ti21XVD7T5oZcRe+0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,50 +29,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FjJMTE4KvXMpCY/67/12lkJPPVrCfLy8z1pCeu/QPi0=; b=dvfuRnaU6aWtxrbzj0YozWYFOL
- uAyTqVDQrWoeeT9YHE8PU88XhJZkiJ64wcsntUx0j3y9qWvp+KmNPzChdheHh5BxAywomFZVM8Ti8
- JIYBkzGAOnotWv+ZCLhdz5mdsq4ObK+4MmZciWGEc5lVUolgpHbLbbvZ+0Ax1yMFCFus=;
-Received: from szxga05-in.huawei.com ([45.249.212.191] helo=huawei.com)
+ bh=n4zejEUXrEkBoI8FqV0oFwpgV2rE+o1FnFdE9HswZZc=; b=fWCRftUhtSHxzKMzvv1YXcmzSI
+ eiamNf0DJqwVmxvlxnoSwIJiczDRqK0G6VZcQirpoMYlcnPB3tjikt2a6TArCuYyth858o1gLXz73
+ Cp1KBGQFy8qWtm/tYxauBctXUZUN0gGSKBEUqqOUcqBpMrSWyheEPeiduo+DvVfvqGBQ=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k2lG2-00BBkb-64
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Aug 2020 00:56:47 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 5F284BA27CE62047C1C4;
- Tue,  4 Aug 2020 08:56:37 +0800 (CST)
+ id 1k2lGY-00BBlc-9U
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Aug 2020 00:57:19 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 73459B9F4BC73A91C11D;
+ Tue,  4 Aug 2020 08:57:04 +0800 (CST)
 Received: from [10.164.122.247] (10.164.122.247) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 4 Aug 2020
- 08:56:34 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20200730050928.356916-1-daeho43@gmail.com>
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 4 Aug 2020
+ 08:56:56 +0800
+To: Yufen Yu <yuyufen@huawei.com>, <jaegeuk@kernel.org>, <chao@kernel.org>
+References: <20200731061813.3791834-1-yuyufen@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <3dd96915-51f1-e8ab-ad2d-29bfda68a635@huawei.com>
-Date: Tue, 4 Aug 2020 08:56:34 +0800
+Message-ID: <3070f5af-1899-fc31-e2ba-9f333ce73a2b@huawei.com>
+Date: Tue, 4 Aug 2020 08:56:56 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200730050928.356916-1-daeho43@gmail.com>
+In-Reply-To: <20200731061813.3791834-1-yuyufen@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.164.122.247]
 X-CFilter-Loop: Reflected
 X-Spam-Score: -1.7 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.191 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -1.5 NICE_REPLY_A           Looks like a legit reply (A)
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k2lG2-00BBkb-64
-Subject: Re: [f2fs-dev] [PATCH] f2fs: make file immutable even if releasing
- zero compression block
+ -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k2lGY-00BBlc-9U
+Subject: Re: [f2fs-dev] [PATCH] f2fs: replace test_and_set/clear_bit() with
+ set/clear_bit()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,21 +83,16 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/7/30 13:09, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On 2020/7/31 14:18, Yufen Yu wrote:
+> Since set/clear_inode_flag() don't need to return value to show
+> if flag is set, we can just call set/clear_bit() here.
 > 
-> When we use F2FS_IOC_RELEASE_COMPRESS_BLOCKS ioctl, if we can't find
-> any compressed blocks in the file even with large file size, the
-> ioctl just ends up without changing the file's status as immutable.
-> It makes the user, who expects that the file is immutable when it
-> returns successfully, confused.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Yufen Yu <yuyufen@huawei.com>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
