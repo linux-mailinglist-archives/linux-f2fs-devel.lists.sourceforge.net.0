@@ -2,93 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 729E023DB6A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Aug 2020 17:44:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=7v3/73/1FA4WTrgWMPdn0vH2ikonbwoylB6SYI0YT20=; b=NeHPd1qtbkU8Aps2qSDDvItW6b
-	g9PSnSUjJqpz7inNh77ee1aru9C4mBXCI8ixMx1g34/Gnwepx3cne+g/igv6PS+rGIdK7shVYedZn
-	AJn1dS7CcxXwDQwOV8aVlcGcmatijNP3TqWP8gbyFDQjQVRSEnr3Nl6WJl/72fuUPuWc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EE2023E57E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Aug 2020 03:23:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k3i4C-0004qV-4o; Thu, 06 Aug 2020 15:44:28 +0000
+	id 1k3r6m-0007uy-FQ; Fri, 07 Aug 2020 01:23:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <fishland@aliyun.com>) id 1k3i49-0004qI-RR
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Aug 2020 15:44:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1k3r6k-0007un-EO
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 Aug 2020 01:23:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mq0PLdHuUhsdLPy84DKhxWUpdkOd9pLaT9kDHiohl1g=; b=jRjAmPTH5Ej43UaPwVc3Glw/3v
- nrThI7swedtdThK9PHjU0L4+jq2queOO5iN/6C303+V83HvruQp7UQAXUxYn8sUGDJv+LnQ5kXtPv
- q6Yh+oickC3mikR6ceyFmXYm/d7hGfawjOQ7P8c9RPdeeRwBJpkAukcYQSAOVqsEwbdw=;
+ bh=fMmMsRAiYbegQ4YyFSLfeMf+JYYVPiq01gXxyd8u6kU=; b=jVFD26liFZJ9rxIsjQsN0x6+EB
+ H++FRQ3GkamQGGnjYF/lcpdavX62ZPdJkoRMi7ib7Z2oCo2cFkdHwC+iOgNbjIbzgoFjssRGFjx8t
+ g7swMgXaOxGcZtDxjOXEw22ncGLRmlWLVyq+AmnBJ1/XEfJA0IcSK9sBfCH0EeA4Hd5k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=mq0PLdHuUhsdLPy84DKhxWUpdkOd9pLaT9kDHiohl1g=; b=d
- H6aWNxgX1Hs7B00bcoeXqqkZNJWBMBL6fRmH3w/K1OzEvEDqwWlgwvTy1LAX48vNavMkxRLKtA3IU
- gGOAY85f6djsP+DT2MUfjDi7AqLRNcwt2vPp8YWd14u6vF6RPC3cQYQW0ydz+XffZEO9odlXGf3nd
- IMEGosvQedSh2ZP4=;
-Received: from out30-17.freemail.mail.aliyun.com ([115.124.30.17])
- by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=fMmMsRAiYbegQ4YyFSLfeMf+JYYVPiq01gXxyd8u6kU=; b=G
+ JhYAk/Tj4qi29ohxjVUDER9PU18oars8BrZf3eFmhbrJRh/VrjVU9/azwL3Qfje95H51tzEgv2UQN
+ lfc3dy7xD0QYYGcylBJOx3h9pmguFcZd+NvX+zV6cLmHkMhhdU1mL2QOwCcQHcOwHsGHTNg1PB/nt
+ QGjDtS6Ik0XccDxY=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k3i47-00011F-N0
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 06 Aug 2020 15:44:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aliyun.com; s=s1024;
- t=1596728655; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=mq0PLdHuUhsdLPy84DKhxWUpdkOd9pLaT9kDHiohl1g=;
- b=kCaG4tMDCWgH6Q3TTFdJCimttDWO/BGMBKTJt37BNu1NIJs7xhmwy5lO/IHojI6HkoKKbSoKzg3X4kXbDi2qVWKsoAvcfzW9M1CcyyDDqMviTAf/tM77aQRRrkJctAkOMd9ltoOKtlOsJKw/F8fbKP42ND3yHEDGGAG4YKk5NnE=
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09460482|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0594221-0.000428066-0.94015;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01e01422; MF=fishland@aliyun.com; NM=1; PH=DS; RN=5;
- RT=5; SR=0; TI=SMTPD_---0U4ws2.C_1596726201; 
-Received: from localhost.localdomain(mailfrom:fishland@aliyun.com
- fp:SMTPD_---0U4ws2.C_1596726201) by smtp.aliyun-inc.com(127.0.0.1);
- Thu, 06 Aug 2020 23:03:31 +0800
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Thu,  6 Aug 2020 23:03:17 +0800
-Message-Id: <20200806150317.34618-1-fishland@aliyun.com>
-X-Mailer: git-send-email 2.20.1
+ id 1k3r6e-009S8N-UW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 Aug 2020 01:23:42 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 231C2A365779A84C8704;
+ Fri,  7 Aug 2020 09:23:24 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 7 Aug 2020 09:23:13 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Fri, 7 Aug 2020 09:23:10 +0800
+Message-ID: <20200807012310.112639-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (fishland[at]aliyun.com)
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: zte.com.cn]
+ for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [115.124.30.17 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [115.124.30.17 listed in list.dnswl.org]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1k3i47-00011F-N0
-Subject: [f2fs-dev] [PATCH] f2fs: remove unnecessary judgment in
- f2fs_drop_inode
+ -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k3r6e-009S8N-UW
+Subject: [f2fs-dev] [PATCH] f2fs: compress: remove unneeded code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,39 +77,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Liu Song via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Liu Song <fishland@aliyun.com>
-Cc: liu.song11@zte.com.cn, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Liu Song <liu.song11@zte.com.cn>
+- f2fs_write_multi_pages
+ - f2fs_compress_pages
+  - init_compress_ctx
+  - compress_pages
+  - destroy_compress_ctx  --- 1
+ - f2fs_write_compressed_pages
+ - destroy_compress_ctx  --- 2
 
-Inode hash has been removed in "make_bad_inode". If inode_unhashed
-is false, it must not be a bad inode.
+destroy_compress_ctx() in f2fs_write_multi_pages() is redundant, remove
+it.
 
-Signed-off-by: Liu Song <liu.song11@zte.com.cn>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/super.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/compress.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 20e56b0fa46a..ee01d15effe3 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1043,7 +1043,7 @@ static int f2fs_drop_inode(struct inode *inode)
- 	 *       - inode_wait_for_writeback(inode)
- 	 */
- 	if ((!inode_unhashed(inode) && inode->i_state & I_SYNC)) {
--		if (!inode->i_nlink && !is_bad_inode(inode)) {
-+		if (!inode->i_nlink) {
- 			/* to avoid evict_inode call simultaneously */
- 			atomic_inc(&inode->i_count);
- 			spin_unlock(&inode->i_lock);
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 6e7db450006c..3bb112e91cf6 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1388,9 +1388,6 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+ 					struct writeback_control *wbc,
+ 					enum iostat_type io_type)
+ {
+-	struct f2fs_inode_info *fi = F2FS_I(cc->inode);
+-	const struct f2fs_compress_ops *cops =
+-			f2fs_cops[fi->i_compress_algorithm];
+ 	int err;
+ 
+ 	*submitted = 0;
+@@ -1405,7 +1402,6 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+ 
+ 		err = f2fs_write_compressed_pages(cc, submitted,
+ 							wbc, io_type);
+-		cops->destroy_compress_ctx(cc);
+ 		kfree(cc->cpages);
+ 		cc->cpages = NULL;
+ 		if (!err)
 -- 
-2.20.1
+2.26.2
 
 
 
