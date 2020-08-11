@@ -2,105 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BBC1241560
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Aug 2020 05:38:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21CC6241706
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Aug 2020 09:16:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k5L7C-0000XL-0D; Tue, 11 Aug 2020 03:38:18 +0000
+	id 1k5OWI-0006dy-9Q; Tue, 11 Aug 2020 07:16:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1k5L7A-0000XE-Aw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Aug 2020 03:38:16 +0000
+ (envelope-from <hsiangkao@redhat.com>) id 1k5OWD-0006dh-QB
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Aug 2020 07:16:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uvnYmX5PBlwpImHnXxxWchHoc30rMXnuTKNbFFXi55o=; b=UX7uDYZ1Ee0VunX5SKgs95Ogwx
- Ju8Kk+fMlaRr1zB80G0q9ouZiucPdcody+P1o7FMuQuNErERswbPRZmsGrVIDueCbflWfhMXYU9TD
- vvokRpAaohgENvhz5OjNm6Iq1saStmP5AhMk5L/NBDXcy0jMTGBUJz+TBvADk2sdnzt0=;
+ bh=Xrv8XZP8H/ArYsyMct/psi+RXUwQ58EUZbmfZHuJsQY=; b=L07n2bs+En6x2kg6TzSNCK7udj
+ Fbi18zkKDmkz4qpsHCUEJQ2quLa51rwEnSTXM64Ld+7m/sEhfEaMuS+WlZQVLLHa0kQehNavX0/iS
+ 7DTi5jKGV3crtOu4I2SFtrV5SLGkojAtxAExnTbcRZh+V/38kjGA/tZ3MZ2w5JV411o0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uvnYmX5PBlwpImHnXxxWchHoc30rMXnuTKNbFFXi55o=; b=J
- 3n/tDwcIKOeEoi6cnpw2eaMt/qNQFCQH1MIWtpVB8LqFR9oURrgLpt8jZGn8KxvRGPfDC5pcQw1Vj
- l/sch4Csn7ELeqOgGkr1Zg+bO9XMBOLFfEz7I6DGqeZXWKSuBtVqLJL4HDXl8lV6OBLjKV+Oid8FS
- tlz+IKE4n//pqrUM=;
-Received: from mail-pl1-f194.google.com ([209.85.214.194])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k5L78-00GwpB-VD
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Aug 2020 03:38:16 +0000
-Received: by mail-pl1-f194.google.com with SMTP id f10so6143840plj.8
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Xrv8XZP8H/ArYsyMct/psi+RXUwQ58EUZbmfZHuJsQY=; b=mDU4qbUfy7nQ7VCtcpbBdvISwa
+ lEBmBNQ2HjGaOiIwR7HjHFPU1btE8lbYXbI1YIKIWdcAZsmEU4F0R+jLxRekJdoZgYl5CD2ojmZr+
+ JshHGfbGffYDR5PnxIpK1z3Wcu2vlabkgduJ67v84zje0wRs9sWDE+a/3pr+pF+eIlDI=;
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]
+ helo=us-smtp-delivery-1.mimecast.com)
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1k5OWB-007aLj-Nw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 Aug 2020 07:16:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597130166;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xrv8XZP8H/ArYsyMct/psi+RXUwQ58EUZbmfZHuJsQY=;
+ b=KD96iiW7TtRROg+YmLBdRODQG95b0wcP5+/5o2baJfGFS03jNPcVvGGHmrjRiTBmEY5ODJ
+ 94AOeeQOi0kE5C5keAybIAtcrrrEYcpmg/IJJu4teGhjUEpIxkGYM9zhfF737J525o1mq0
+ bquuBFpKhLF6z7Yn7deXU4VAvHHncUA=
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-472-8vSRreQsN5O7pNL9nbU_bw-1; Tue, 11 Aug 2020 03:16:04 -0400
+X-MC-Unique: 8vSRreQsN5O7pNL9nbU_bw-1
+Received: by mail-pj1-f69.google.com with SMTP id t13so1712762pjd.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Aug 2020 20:38:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=uvnYmX5PBlwpImHnXxxWchHoc30rMXnuTKNbFFXi55o=;
- b=JuLJo6yVUGZojVryoUBe6GbWigpZF/q+mCKcpHEwcXIJ8jU7evVbMDRdm8h80V9Yk2
- VxkElGRUdfxwnBeeoHJ2ismfNOhXh7yy2g4UqgKY7Jk5MVSK5ZbNvb9XLHD5tzoacOl1
- 4Y+yYHoXnSxLzNZv+oQ1ITAXY45dRAEZb5DwrG0gmjk/rdDuyDU+ZjZ4HjYVvHdRKOI/
- 6pbMDuR+Yx0GhqFVwzC1q4fPFk0LsA5X/+0n+P6Q+zLqddz5lfUTSXx9uDYSxNAAbtLe
- hdVx6IylxTk3jVXeVyLfHCfj8arrME6AJdBFmfwCaqBs0NRd1sFjpSmMUTo8kEDn8ZIB
- YT1A==
+ Tue, 11 Aug 2020 00:16:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=uvnYmX5PBlwpImHnXxxWchHoc30rMXnuTKNbFFXi55o=;
- b=fwrhxNE0c+GMsLABp7v5Y7hb7LFOFI1uFRcVJjF+UgrrePe4LQtIP+L9tKZT8mWGsa
- k8i3+d4XC5x/xiuTaQSvdlNP+dER720rs+IvQF2apOTTphxUPk4sy2vmLyoZKz0G9A6j
- Q4U6IWrscYJOKYZaCzWR2ouolANP3EJF0Agle/7FzxIYU8ea19FqrNqMtpHAV4c5DWYI
- IN/s0tzOzpL9fMvXlzaMdoI5cCFr2HHsoHBmEscLVIlWZMCMX/WBr66o3W3kiCLKq4Nu
- XSa5DA/o82AJtWq6vGKfGXXh9w1Gtlb6R2RYK1sOLQfMLjwG4JsRCIi5sSnTq22Plhu0
- pdJw==
-X-Gm-Message-State: AOAM530ijMVDGu08w39m6+lT0FjncNjWeddA8MHLX0kBWs4zvTXK5IGd
- r582IsvtTJeWZ9X1PwiXCGA=
-X-Google-Smtp-Source: ABdhPJxId44YKFt1dP26u0IpbkikiLFA5z6pJm4cqWwvbFvtVNjGOeRyzD/l2ipwCHY0sWi3Ogs62A==
-X-Received: by 2002:a17:90b:94c:: with SMTP id
- dw12mr2592970pjb.214.1597117082121; 
- Mon, 10 Aug 2020 20:38:02 -0700 (PDT)
-Received: from daehojeong1.seo.corp.google.com
- ([2401:fa00:d:1:a6ae:11ff:fe18:6ce2])
- by smtp.gmail.com with ESMTPSA id e22sm19307183pgi.62.2020.08.10.20.37.59
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=Xrv8XZP8H/ArYsyMct/psi+RXUwQ58EUZbmfZHuJsQY=;
+ b=c0OAwPJO2f6w+V0psaoKknfxvzoLi8PiugqNZn5yhYp2NBjdmB0xKVXoXzsXAjHzxQ
+ W7n05nVs4UNy8A830yWM30eALkfwqSOLflSZPNayJkQneFuJ0tkkca4uTxKraJkT9MPF
+ 42eoa8qOs7tZxrC8bLHMoFiraZbDuzA1GBWsoSID1vMUgAFk3au/MR+knc9FnxOtimD4
+ q5MKlEQs4uQGqztbO/jgGFVHq2uZyPmxxuOQUHg3MW6MTNxXhatrgrCSW6pa9mjz8iuT
+ zQ6LXg42yTr6ph+XXL5eoscpXTZn+2zTeIpZQ7klcZ4IZ5GSQCfXst4SrA+OAUc5fFh7
+ 5Bwg==
+X-Gm-Message-State: AOAM532KQrgjLu0skUuPIO1HJqPYFpcaesul5jnuK2K6v8ZqYhECBd6b
+ ngsh3nD4aUi/uDF4mq1HO1l2uAqQs0Qim+dB97CojFAdRl1d73gil91GzDgHu294PKugRR2vVdV
+ JzDiEQuqQnpRIqay1fBpQ20tTWAi1dsXFeDpu6w==
+X-Received: by 2002:aa7:8c42:: with SMTP id e2mr4736673pfd.181.1597130163792; 
+ Tue, 11 Aug 2020 00:16:03 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzf1G31CFvGYO57m79ydCITVqNOalSz5r3SbZByWQFEL0s50DMTAQKFGbGKQ3vkFoGu7rqr6g==
+X-Received: by 2002:aa7:8c42:: with SMTP id e2mr4736653pfd.181.1597130163573; 
+ Tue, 11 Aug 2020 00:16:03 -0700 (PDT)
+Received: from xiangao.remote.csb ([209.132.188.80])
+ by smtp.gmail.com with ESMTPSA id n13sm1685916pjb.20.2020.08.11.00.16.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2020 20:38:01 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue, 11 Aug 2020 12:37:53 +0900
-Message-Id: <20200811033753.783276-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.28.0.236.gb10cc79966-goog
+ Tue, 11 Aug 2020 00:16:03 -0700 (PDT)
+Date: Tue, 11 Aug 2020 15:15:52 +0800
+From: Gao Xiang <hsiangkao@redhat.com>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20200811071552.GA8365@xiangao.remote.csb>
+References: <20200811033753.783276-1-daeho43@gmail.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20200811033753.783276-1-daeho43@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hsiangkao@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.194 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.214.194 listed in list.dnswl.org]
+ trust [205.139.110.61 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1k5L78-00GwpB-VD
-Subject: [f2fs-dev] [PATCH] f2fs: change virtual mapping way for compression
- pages
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [205.139.110.61 listed in wl.mailspike.net]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1k5OWB-007aLj-Nw
+Subject: Re: [f2fs-dev] [PATCH] f2fs: change virtual mapping way for
+ compression pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,144 +119,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On Tue, Aug 11, 2020 at 12:37:53PM +0900, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> By profiling f2fs compression works, I've found vmap() callings are
+> bottlenecks of f2fs decompression path. Changing these with
+> vm_map_ram(), we can enhance f2fs decompression speed pretty much.
+> 
+> [Verification]
+> dd if=/dev/zero of=dummy bs=1m count=1000
+> echo 3 > /proc/sys/vm/drop_caches
+> dd if=dummy of=/dev/zero bs=512k
+> 
+> - w/o compression -
+> 1048576000 bytes (0.9 G) copied, 1.999384 s, 500 M/s
+> 1048576000 bytes (0.9 G) copied, 2.035988 s, 491 M/s
+> 1048576000 bytes (0.9 G) copied, 2.039457 s, 490 M/s
+> 
+> - before patch -
+> 1048576000 bytes (0.9 G) copied, 9.146217 s, 109 M/s
+> 1048576000 bytes (0.9 G) copied, 9.997542 s, 100 M/s
+> 1048576000 bytes (0.9 G) copied, 10.109727 s, 99 M/s
+> 
+> - after patch -
+> 1048576000 bytes (0.9 G) copied, 2.253441 s, 444 M/s
+> 1048576000 bytes (0.9 G) copied, 2.739764 s, 365 M/s
+> 1048576000 bytes (0.9 G) copied, 2.185649 s, 458 M/s
 
-By profiling f2fs compression works, I've found vmap() callings are
-bottlenecks of f2fs decompression path. Changing these with
-vm_map_ram(), we can enhance f2fs decompression speed pretty much.
-
-[Verification]
-dd if=/dev/zero of=dummy bs=1m count=1000
-echo 3 > /proc/sys/vm/drop_caches
-dd if=dummy of=/dev/zero bs=512k
-
-- w/o compression -
-1048576000 bytes (0.9 G) copied, 1.999384 s, 500 M/s
-1048576000 bytes (0.9 G) copied, 2.035988 s, 491 M/s
-1048576000 bytes (0.9 G) copied, 2.039457 s, 490 M/s
-
-- before patch -
-1048576000 bytes (0.9 G) copied, 9.146217 s, 109 M/s
-1048576000 bytes (0.9 G) copied, 9.997542 s, 100 M/s
-1048576000 bytes (0.9 G) copied, 10.109727 s, 99 M/s
-
-- after patch -
-1048576000 bytes (0.9 G) copied, 2.253441 s, 444 M/s
-1048576000 bytes (0.9 G) copied, 2.739764 s, 365 M/s
-1048576000 bytes (0.9 G) copied, 2.185649 s, 458 M/s
-
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
- fs/f2fs/compress.c | 42 ++++++++++++++++++++++++++++++++----------
- 1 file changed, 32 insertions(+), 10 deletions(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 6e7db450006c..46b7e359f313 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -554,6 +554,8 @@ static void f2fs_compress_free_page(struct page *page)
- 	mempool_free(page, compress_page_pool);
- }
- 
-+#define MAX_VMAP_RETRIES	3
-+
- static int f2fs_compress_pages(struct compress_ctx *cc)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(cc->inode);
-@@ -590,13 +592,23 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
- 		}
- 	}
- 
--	cc->rbuf = vmap(cc->rpages, cc->cluster_size, VM_MAP, PAGE_KERNEL_RO);
-+	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
-+		cc->rbuf = vm_map_ram(cc->rpages, cc->cluster_size, -1);
-+		if (cc->rbuf)
-+			break;
-+		vm_unmap_aliases();
-+	}
- 	if (!cc->rbuf) {
- 		ret = -ENOMEM;
- 		goto out_free_cpages;
- 	}
- 
--	cc->cbuf = vmap(cc->cpages, cc->nr_cpages, VM_MAP, PAGE_KERNEL);
-+	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
-+		cc->cbuf = vm_map_ram(cc->cpages, cc->nr_cpages, -1);
-+		if (cc->cbuf)
-+			break;
-+		vm_unmap_aliases();
-+	}
- 	if (!cc->cbuf) {
- 		ret = -ENOMEM;
- 		goto out_vunmap_rbuf;
-@@ -624,8 +636,8 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
- 	memset(&cc->cbuf->cdata[cc->clen], 0,
- 	       (nr_cpages * PAGE_SIZE) - (cc->clen + COMPRESS_HEADER_SIZE));
- 
--	vunmap(cc->cbuf);
--	vunmap(cc->rbuf);
-+	vm_unmap_ram(cc->cbuf, cc->nr_cpages);
-+	vm_unmap_ram(cc->rbuf, cc->cluster_size);
- 
- 	for (i = nr_cpages; i < cc->nr_cpages; i++) {
- 		f2fs_compress_free_page(cc->cpages[i]);
-@@ -642,9 +654,9 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
- 	return 0;
- 
- out_vunmap_cbuf:
--	vunmap(cc->cbuf);
-+	vm_unmap_ram(cc->cbuf, cc->nr_cpages);
- out_vunmap_rbuf:
--	vunmap(cc->rbuf);
-+	vm_unmap_ram(cc->rbuf, cc->cluster_size);
- out_free_cpages:
- 	for (i = 0; i < cc->nr_cpages; i++) {
- 		if (cc->cpages[i])
-@@ -715,13 +727,23 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
- 			goto out_free_dic;
- 	}
- 
--	dic->rbuf = vmap(dic->tpages, dic->cluster_size, VM_MAP, PAGE_KERNEL);
-+	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
-+		dic->rbuf = vm_map_ram(dic->tpages, dic->cluster_size, -1);
-+		if (dic->rbuf)
-+			break;
-+		vm_unmap_aliases();
-+	}
- 	if (!dic->rbuf) {
- 		ret = -ENOMEM;
- 		goto destroy_decompress_ctx;
- 	}
- 
--	dic->cbuf = vmap(dic->cpages, dic->nr_cpages, VM_MAP, PAGE_KERNEL_RO);
-+	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
-+		dic->cbuf = vm_map_ram(dic->cpages, dic->nr_cpages, -1);
-+		if (dic->cbuf)
-+			break;
-+		vm_unmap_aliases();
-+	}
- 	if (!dic->cbuf) {
- 		ret = -ENOMEM;
- 		goto out_vunmap_rbuf;
-@@ -738,9 +760,9 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
- 	ret = cops->decompress_pages(dic);
- 
- out_vunmap_cbuf:
--	vunmap(dic->cbuf);
-+	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
- out_vunmap_rbuf:
--	vunmap(dic->rbuf);
-+	vm_unmap_ram(dic->rbuf, dic->cluster_size);
- destroy_decompress_ctx:
- 	if (cops->destroy_decompress_ctx)
- 		cops->destroy_decompress_ctx(dic);
--- 
-2.28.0.236.gb10cc79966-goog
+Indeed, vmap() approach has some impact on the whole
+workflow. But I don't think the gap is such significant,
+maybe it relates to unlocked cpufreq (and big little
+core difference if it's on some arm64 board).
 
 
 
