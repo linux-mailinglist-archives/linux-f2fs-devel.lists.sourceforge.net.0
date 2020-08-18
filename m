@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 071242480FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 10:56:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB01124811C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 10:58:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k7xPv-0005HJ-P8; Tue, 18 Aug 2020 08:56:27 +0000
+	id 1k7xRM-0006Av-DZ; Tue, 18 Aug 2020 08:57:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1k7xPu-0005Gh-Rb
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:56:26 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1k7xRK-0006AY-W2
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:57:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=jiiPXpH/mE4eufKwpBWrfukMis
- ByuUyUxwaYdEDKm2TsOzXuoJ1APtE1R8w/v6kLDKuThB5/ovzMviueX9Xg7U3XKb2uMLS6PGfSBBQ
- M2NMj2aKPW9tIugjuV9pactwpUSG1oDX/qdQwI2RkRPRaGph1tXeglPcWYw7ssIylqEc=;
+ bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=jt7man2wHBqFwTZjIX7sbYm55X
+ tvt5thXzmB9db9JCPsGYxIEutgK8+rB41RBEf3TPXcwkymtmkA92hz70oyIr3lHgJTY+bJlC7abxY
+ LHBWIgPasNvVGSCRb3rUaxrpXuX+cHzWSqHS77nTSsDhbAU8P071GlCjtMOeXA0JYh9Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,29 +29,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=EKcZyYlJv6DDyQ6MZjjNz/fQ7F
- NHwd2WoIZWumbL9WbNTfavVBIzsyecl1tSvOtDaBn8WajcfdmgiP6kY8kOW7ilepvpMphlqE0xtte
- 2N0cXdSPwBJlliqIrueSwFzSYi35fSC/ZNCH7xBnqaF/7I9zArlU404HBkpSoq764CxE=;
+ bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=SQ2gEoC/sRXgHlJK26ZBru0y/v
+ kfWWqbd9AjvvXGTBmJ412sDMLDcKJh7oZOp8gxOq4dKbdNby4kEMnMD505CxCbjvj0t+7wnZbfdcL
+ +p+xglNLWxZcsepi2GA/Ih4e+c7kQU+LXycTX/L8Sb5QDaDvsprM8sGzYIdmG8TZryuY=;
 Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k7xPr-00BEHH-Bv
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:56:26 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 0AC317576BAB106334CA;
- Tue, 18 Aug 2020 16:56:14 +0800 (CST)
+ id 1k7xRJ-00F5i0-OE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:57:54 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 8AFDFDAF5C2C877999F5;
+ Tue, 18 Aug 2020 16:57:38 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 18 Aug
- 2020 16:56:11 +0800
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 18 Aug
+ 2020 16:57:36 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20200814201811.702661-1-jaegeuk@kernel.org>
+References: <20200814201838.729542-1-jaegeuk@kernel.org>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <df090a32-8373-dede-3d5d-3833d93b911a@huawei.com>
-Date: Tue, 18 Aug 2020 16:56:11 +0800
+Message-ID: <11327eab-6752-22ec-fddf-403a04d44fed@huawei.com>
+Date: Tue, 18 Aug 2020 16:57:35 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200814201811.702661-1-jaegeuk@kernel.org>
+In-Reply-To: <20200814201838.729542-1-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -68,8 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -2.9 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1k7xPr-00BEHH-Bv
-Subject: Re: [f2fs-dev] [PATCH] f2fs_io: measure performance of write()
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1k7xRJ-00F5i0-OE
+Subject: Re: [f2fs-dev] [PATCH] f2fs_io: add OSYNC option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
