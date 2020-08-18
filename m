@@ -2,100 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B8BA24832C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 12:37:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 288DA2483BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 13:19:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=M4JRtDZJF4UBeN0J4qGJsE8wMmvJhAH5HRXANG7q9I4=; b=QdT3B2+2GehXP1wZ0T/8ZEqHH6
+	EnoRAfOFRtWe+Xhu2UTpaCEUU/3i+RSxwS1UpBUz959fcZaBgmGo6EedS6xo8i9s2sr/cpaMl7R7C
+	X8HZNcqp6egIS7qNN9JJuxqItiafNjQWowlJF4iZspVPoPVKNH8HQewUfdNgzQZPOzg4=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k7yzG-0002Q9-3x; Tue, 18 Aug 2020 10:37:02 +0000
+	id 1k7ze6-0002C2-B2; Tue, 18 Aug 2020 11:19:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
- <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1k7yzE-0002Ps-5W
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 10:37:00 +0000
+ <3Hrk7XwcKAH8wfrpehvjrrjoh.frp@flex--tcombes.bounces.google.com>)
+ id 1k7ze4-0002Bf-MU
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 11:19:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZqdfiOl3V2XHQ+7fvDCyYwpDqR8H0z0A3Kkm9UxBNwU=; b=NHgCBsRZMLDcz1rL5Jw6rNP2LI
- oyFgbbYw+hpdR4HHOGx/uUvW8AwpGWB1oG8HspBVmiUd0bVyEW+Lpd0quqPzrhYq9kE7F70p9VNAP
- DRFVlCds0Q9yfnOs6h5Q+8ThSibX98nokzVh5W/jdM9THOeEDWvBqSPbDqGJjCih8Rds=;
+ bh=C1AZ06khjR5ZBXYXL4pjQb6+Fab0fQIRrBREkP1N7Ig=; b=DDBnqaPVBFvLtDzQMvXyC+nzB4
+ yubeYltKPJKMHd4uxhgOKw2zVX5GeApn4xqHUFjaBdBt0weGii6PSNa73tgNqGm5Q0gYHGQbJoMNJ
+ 07EsPSV8mTwZbKt2gWLE5EYqHdKRyGn3Owo96A2GSFza+GnRTGhRp9fHZNIgY93D5o8I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ZqdfiOl3V2XHQ+7fvDCyYwpDqR8H0z0A3Kkm9UxBNwU=; b=OmFz2AscfvpyhlbZWxURKzBbFc
- drPDLDsVC7ME1WasYvONg1V2GsXBx+TpG0YVdsyHE313Yl9W5TPx6XEs/M6f8D2DwP8I2Eemg+mDD
- NF+NnAchbEgq0rPTwZXA7FATGUFR+w+PS+giMryh365e+syxi5k/xKdKcxe+9iuLC4r4=;
-Received: from m43-7.mailgun.net ([69.72.43.7])
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=C1AZ06khjR5ZBXYXL4pjQb6+Fab0fQIRrBREkP1N7Ig=; b=S
+ rTHzA5q4gHYxZq99uMtKB0Nk8HNqlpc7evMyV6GrJg7ZndkSR1GtFEDosaFKtNoD7vx1TYCe0q2LG
+ R9twohl5jos7lhM42JppMR9hSacGp0NW4MujF3PGlFcjMrHzEW3EKfavdm43nOVca1AZZsu6EOKOF
+ 5iiYEtsBio/UV3+M=;
+Received: from mail-wr1-f74.google.com ([209.85.221.74])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1k7yz8-00FAfW-05
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 10:37:00 +0000
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1597747013; h=Message-Id: Date: Subject: Cc: To: From:
- Sender; bh=ZqdfiOl3V2XHQ+7fvDCyYwpDqR8H0z0A3Kkm9UxBNwU=;
- b=UkD9+wTkaBzIY6NKNxM4PE9ng6UKZQrrjbytqaBwqYnf/6pwHWPnC1M3OxzQPm84Gyp+dc0z
- Pguo9yVdwhnxEFdsHEhFBDEC6IZaswqaxydGVPMuxE+TMVhhjbzDX3DuN8fSB0uaKqEbqPN0
- Zg35X737fRl5NdvX0t0LDklXMI8=
-X-Mailgun-Sending-Ip: 69.72.43.7
-X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n09.prod.us-east-1.postgun.com with SMTP id
- 5f3ba925440a07969ae42c23 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Tue, 18 Aug 2020 10:10:45
- GMT
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 1BB62C433AD; Tue, 18 Aug 2020 10:10:44 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE,
- URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from codeaurora.org (unknown [202.46.22.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: stummala)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id CE0ADC433CB;
- Tue, 18 Aug 2020 10:10:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org CE0ADC433CB
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=stummala@codeaurora.org
-From: Sahitya Tummala <stummala@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 18 Aug 2020 15:40:14 +0530
-Message-Id: <1597745414-13135-1-git-send-email-stummala@codeaurora.org>
-X-Mailer: git-send-email 1.9.1
-X-Spam-Score: 0.0 (/)
+ id 1k7ze3-00FCKN-7T
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 11:19:12 +0000
+Received: by mail-wr1-f74.google.com with SMTP id s23so8114466wrb.12
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Aug 2020 04:19:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=C1AZ06khjR5ZBXYXL4pjQb6+Fab0fQIRrBREkP1N7Ig=;
+ b=gmNLTknt0vvsuh64h9rHL6PHRUnZhNXcVIYHXto+D0aNEGOxB501Q+ivNdxeiH9akc
+ sWhaNwqyk8DRoVwNaM03suUjt1kslMj8hXPqIe4TC5xuzj7Lh8QPg0+S1DPkUPq7qJo4
+ 9K5RNWpCHw3qWBYtck2W+DM2V8Bh8bqzeKNlZs+vp442mXuE/hp+B8XV/cQFTRnLR9iu
+ e+c2XedDlEveS5o8dDG2IFSLVa+yMTZiEwU+oaJBb0mxdpc+wJw2j8QfxQXaaXCCuP8C
+ 2RgcvTDO9vLt7XdsDxp44cYK5PRhg+tcVqstkDD3MpnByZmhf6TcYkzZhF6PQPZis4YB
+ uO0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=C1AZ06khjR5ZBXYXL4pjQb6+Fab0fQIRrBREkP1N7Ig=;
+ b=Vvfzl0kIwoQm5DST8ZYZFsJPEv13rblIDpYY2WO+4ytdYLFclheFRXCGWmfPJWRwYz
+ JqM1aOhnrXWS1hH/3Ot/7CehED/Vu4pYdnz1eIPLRKYkmJF8MMjWgGWuRmxQ5I0oUeoc
+ lkP9GSLg5ZHGPV8sojjXP6WTAZok4GXYzWJz0SMK9y+jUZqa9ee4rZLb4+b60ZTFMHto
+ Ro6my06wfT88cvjdF9KHeZEZhCSXONKdZh+IBu5BcycgJnoJZcBltLhGGvp+UtVRzuzj
+ P8o4EzWU6R/o5xLO/Tnvto8UzBfPoMphz291ryESCHUuIp04Nv9ZpHZ4c+mRHQByDttS
+ voHw==
+X-Gm-Message-State: AOAM533kImjX+tQZYU4WiSF9mWMGATxLFErkHH0aiMhD2tNJCVhGj5qz
+ Eb9DkFB8AwEShGrQWmXPHH5cGd+aWwb0PyGH0Hgnp3/0AkPwbm6M4NEU1TMQTqDCr13eKmQj/Gd
+ 3t8p/z+XT1lBtXv6UQ37Qj84+zkDL4umT7/OvBxPy4lcrnRGVBc+CyB9s5yVU3BpDTM11FUrRiU
+ iGuHgtRH2S
+X-Google-Smtp-Source: ABdhPJw23gHAQmGZSLIYUvDjnn0Y3ql9B42B1fW4oq+1fOQUmNqSQQNhJAZOYUgEUF5ZbiePXyfqhh9QdRQt
+X-Received: by 2002:adf:efce:: with SMTP id i14mr20033044wrp.359.1597749534434; 
+ Tue, 18 Aug 2020 04:18:54 -0700 (PDT)
+Date: Tue, 18 Aug 2020 11:18:50 +0000
+Message-Id: <20200818111850.3288644-1-tcombes@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.220.ged08abb693-goog
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [69.72.43.7 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [69.72.43.7 listed in list.dnswl.org]
+ trust [209.85.221.74 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.74 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1k7yz8-00FAfW-05
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix indefinite loop scanning for free
- nid
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1k7ze3-00FCKN-7T
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs: add -T flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,52 +111,179 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
-MIME-Version: 1.0
+From: Theotime Combes via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Theotime Combes <tcombes@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the sbi->ckpt->next_free_nid is not NAT block aligned and if there
-are free nids in that NAT block between the start of the block and
-next_free_nid, then those free nids will not be scanned in scan_nat_page().
-This results into mismatch between nm_i->available_nids and the sum of
-nm_i->free_nid_count of all NAT blocks scanned. And nm_i->available_nids
-will always be greater than the sum of free nids in all the blocks.
-Under this condition, if we use all the currently scanned free nids,
-then it will loop forever in f2fs_alloc_nid() as nm_i->available_nids
-is still not zero but nm_i->free_nid_count of that partially scanned
-NAT block is zero.
+T flag sets timestamps to a given value
 
-Fix this to align the nm_i->next_scan_nid to the first nid of the
-corresponding NAT block.
-
-Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+Signed-off-by: Theotime Combes <tcombes@google.com>
 ---
-v2:
-- address Chao's comments to move the check to beginning of function
-and to add unlikely 
+ include/f2fs_fs.h       |  2 +-
+ man/mkfs.f2fs.8         |  8 ++++++++
+ mkfs/f2fs_format.c      | 25 ++++++++++++++-----------
+ mkfs/f2fs_format_main.c |  6 +++++-
+ 4 files changed, 28 insertions(+), 13 deletions(-)
 
- fs/f2fs/node.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 9bbaa26..a2ddca1 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2373,6 +2373,9 @@ static int __f2fs_build_free_nids(struct f2fs_sb_info *sbi,
- 	if (unlikely(nid >= nm_i->max_nid))
- 		nid = 0;
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index a9982f0..3750e56 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -405,6 +405,7 @@ struct f2fs_configuration {
+ 	int large_nat_bitmap;
+ 	int fix_chksum;			/* fix old cp.chksum position */
+ 	__le32 feature;			/* defined features */
++	time_t fixed_time;
  
-+	if (unlikely(nid % NAT_ENTRY_PER_BLOCK))
-+		nid = NAT_BLOCK_OFFSET(nid) * NAT_ENTRY_PER_BLOCK;
+ 	/* mkfs parameters */
+ 	u_int32_t next_free_nid;
+@@ -427,7 +428,6 @@ struct f2fs_configuration {
+ 	char *mount_point;
+ 	char *target_out_dir;
+ 	char *fs_config_file;
+-	time_t fixed_time;
+ #ifdef HAVE_LIBSELINUX
+ 	struct selinux_opt seopt_file[8];
+ 	int nr_opt;
+diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+index 022941f..729afdf 100644
+--- a/man/mkfs.f2fs.8
++++ b/man/mkfs.f2fs.8
+@@ -74,6 +74,10 @@ mkfs.f2fs \- create an F2FS file system
+ .I nodiscard/discard
+ ]
+ [
++.B \-T
++.I timestamp
++]
++[
+ .B \-w
+ .I wanted-sector-size
+ ]
+@@ -228,6 +232,10 @@ Enable sparse mode.
+ Specify 1 or 0 to enable or disable discard policy, respectively.
+ The default value is 1.
+ .TP
++.BI \-T " timestamp"
++Set inodes times to a given timestamp. By default, the current time will be used.
++This behaviour corresponds to the value -1.
++.TP
+ .BI \-w " wanted-sector-size"
+ Specify the sector size in bytes.
+ Without it, the sectors will be calculated by device sector size.
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 1639752..7414b00 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -35,6 +35,9 @@ struct f2fs_checkpoint *cp;
+ #define last_zone(cur)		((cur - 1) * c.segs_per_zone)
+ #define last_section(cur)	(cur + (c.secs_per_zone - 1) * c.segs_per_sec)
+ 
++/* Return time fixed by the user or current time by default */
++#define mkfs_time ((c.fixed_time == -1) ? time(NULL) : c.fixed_time)
 +
- 	/* Enough entries */
- 	if (nm_i->nid_cnt[FREE_NID] >= NAT_ENTRY_PER_BLOCK)
- 		return 0;
+ static unsigned int quotatype_bits = 0;
+ 
+ const char *media_ext_lists[] = {
+@@ -1192,11 +1195,11 @@ static int f2fs_write_root_inode(void)
+ 	raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes); /* dentry */
+ 	raw_node->i.i_blocks = cpu_to_le64(2);
+ 
+-	raw_node->i.i_atime = cpu_to_le32(time(NULL));
++	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_atime_nsec = 0;
+-	raw_node->i.i_ctime = cpu_to_le32(time(NULL));
++	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_ctime_nsec = 0;
+-	raw_node->i.i_mtime = cpu_to_le32(time(NULL));
++	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_mtime_nsec = 0;
+ 	raw_node->i.i_generation = 0;
+ 	raw_node->i.i_xattr_nid = 0;
+@@ -1213,7 +1216,7 @@ static int f2fs_write_root_inode(void)
+ 		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
+ 
+ 	if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
+-		raw_node->i.i_crtime = cpu_to_le32(time(NULL));
++		raw_node->i.i_crtime = cpu_to_le32(mkfs_time);
+ 		raw_node->i.i_crtime_nsec = 0;
+ 	}
+ 
+@@ -1350,11 +1353,11 @@ static int f2fs_write_qf_inode(int qtype)
+ 	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
+ 	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
+ 
+-	raw_node->i.i_atime = cpu_to_le32(time(NULL));
++	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_atime_nsec = 0;
+-	raw_node->i.i_ctime = cpu_to_le32(time(NULL));
++	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_ctime_nsec = 0;
+-	raw_node->i.i_mtime = cpu_to_le32(time(NULL));
++	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_mtime_nsec = 0;
+ 	raw_node->i.i_generation = 0;
+ 	raw_node->i.i_xattr_nid = 0;
+@@ -1545,11 +1548,11 @@ static int f2fs_write_lpf_inode(void)
+ 	raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes);
+ 	raw_node->i.i_blocks = cpu_to_le64(2);
+ 
+-	raw_node->i.i_atime = cpu_to_le32(time(NULL));
++	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_atime_nsec = 0;
+-	raw_node->i.i_ctime = cpu_to_le32(time(NULL));
++	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_ctime_nsec = 0;
+-	raw_node->i.i_mtime = cpu_to_le32(time(NULL));
++	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
+ 	raw_node->i.i_mtime_nsec = 0;
+ 	raw_node->i.i_generation = 0;
+ 	raw_node->i.i_xattr_nid = 0;
+@@ -1569,7 +1572,7 @@ static int f2fs_write_lpf_inode(void)
+ 		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
+ 
+ 	if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
+-		raw_node->i.i_crtime = cpu_to_le32(time(NULL));
++		raw_node->i.i_crtime = cpu_to_le32(mkfs_time);
+ 		raw_node->i.i_crtime_nsec = 0;
+ 	}
+ 
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 27c1f1d..9433223 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -63,6 +63,7 @@ static void mkfs_usage()
+ 	MSG(0, "  -s # of segments per section [default:1]\n");
+ 	MSG(0, "  -S sparse mode\n");
+ 	MSG(0, "  -t 0: nodiscard, 1: discard [default:1]\n");
++	MSG(0, "  -T timestamps\n");
+ 	MSG(0, "  -w wanted sector size\n");
+ 	MSG(0, "  -z # of sections per zone [default:1]\n");
+ 	MSG(0, "  -V print the version number and exit\n");
+@@ -124,7 +125,7 @@ static void add_default_options(void)
+ 
+ static void f2fs_parse_options(int argc, char *argv[])
+ {
+-	static const char *option_string = "qa:c:C:d:e:E:g:il:mo:O:p:R:s:S:z:t:U:Vfw:";
++	static const char *option_string = "qa:c:C:d:e:E:g:il:mo:O:p:R:s:S:z:t:T:U:Vfw:";
+ 	int32_t option=0;
+ 	int val;
+ 	char *token;
+@@ -205,6 +206,9 @@ static void f2fs_parse_options(int argc, char *argv[])
+ 		case 't':
+ 			c.trim = atoi(optarg);
+ 			break;
++		case 'T':
++			c.fixed_time = strtoul(optarg, NULL, 0);
++			break;
+ 		case 'U':
+ 			c.vol_uuid = strdup(optarg);
+ 			break;
 -- 
-Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
-Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
+2.28.0.220.ged08abb693-goog
 
 
 
