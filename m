@@ -2,75 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60AFC248151
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 11:05:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k7xYB-0008HH-Tk; Tue, 18 Aug 2020 09:04:59 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1k7xYA-0008Ga-2q
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 09:04:58 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 1440E248222
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 11:44:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=AA7JuCSbh8chBH7o9Tfb6VW9WbKl68NgAps8CugQ6tQ=; b=hVyBBgzJNYSPJcEEd+c9WCCZYd
+	FztGepwW+cfBrra0nAJDcMegz/3dy74o6G8jgD8rrfX7arjrbNUzPGmWjhSB8eibt6qMmDjEwPqlS
+	SnexZ1Za8xhn/YRuU4p2fa/i//gtMULfofDnkeMLZRAF8pgAi8vzJnLpyvEAxmqA/uG8=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1k7yAC-0008Oe-Rf; Tue, 18 Aug 2020 09:44:16 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <tcombes@google.com>) id 1k7yAA-0008OW-Cj
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 09:44:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C9ZC6fhiccZ0xTICmRgMiFknyO4yTm9DCkuUnYEOSCU=; b=AQ5unHBkVXUQUILH63Kj6qQ0jH
- BZpNaHOPgcUmxVR6Z9XofQLUxCeD2tP2cMN24rbFKBuxmhN1E4PZtA2kPUtbbHAPZ8O+HBmhRfrCL
- sDt9ZuLSzs5B9ZdmQPQgzXpwG3Wmqxk8OlOOCXHEmeGrarZQyV1x6hcEg9yHj+J/PXPo=;
+ bh=DCFn5qxq0qR8AW5JPh4s40D0BQZmQsyvgNyso+AYnx4=; b=iFFQkxJUtqAsgW+sL6a94wkmoX
+ CJ4KqDdyoekkWkFJtonRzuD8XQUlbGP+dEh3Ro/9HiZeHOg7vuT4rqz8TH30Inb3kvx+hx12oP2B1
+ Ko0MRozk6/YQH30tFAjokEjhPXuM/nSXQQDeWIXjxPL01A6LG671teJQUdxPmpXgBVzo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C9ZC6fhiccZ0xTICmRgMiFknyO4yTm9DCkuUnYEOSCU=; b=EvbJBIpUXyiOlJSYQIcjdnUT04
- b09PssCepFRZTdKA5G8oGKnn9gzS48wzGWCB1//QuAZIzB/LW4nGbpyO0Z2Gx1bpTdu2p7k/NTDuK
- 5d/O1qTFBV6nyzfvk6UzA3j+i3HZzrldsOnjbZp5TBL3cE4XqihlSPa3TmPQ3WsGxUWE=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
+ bh=DCFn5qxq0qR8AW5JPh4s40D0BQZmQsyvgNyso+AYnx4=; b=lxI9rrZ90mO+K2b9SAQZY7Sx98
+ yvRuM03+Y7STuQQbiSdx6Ne6dmNSNf5APrrn9XiexXRigE7dsQIHdYzyaBK7800krtmaefkIJjzoG
+ rbfGjbmDJXTPKPtN17SrykTVkfToM4Ua+G2Z/24MGfUsVQ0j/C3nnwXci9cDFSc+BTq4=;
+Received: from mail-il1-f196.google.com ([209.85.166.196])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k7xY8-00BEnS-Fc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 09:04:58 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id B413ECF1AFBA64835D15;
- Tue, 18 Aug 2020 17:04:44 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 18 Aug
- 2020 17:04:39 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200805080913.48133-1-yuchao0@huawei.com>
- <20200818065206.GA3751716@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <e1c15f51-7ee5-5791-d7e1-af2aee0a2057@huawei.com>
-Date: Tue, 18 Aug 2020 17:04:38 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1k7yA8-00BH9s-Pi
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 09:44:14 +0000
+Received: by mail-il1-f196.google.com with SMTP id q14so17049784ilj.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Aug 2020 02:44:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=DCFn5qxq0qR8AW5JPh4s40D0BQZmQsyvgNyso+AYnx4=;
+ b=Xu2wcDYpRWRTQr8/YuZ8BEm08Pb1wrvbaikINwMh5JwVgwa0QHb7xNhWVsu0vsWjM2
+ C8q0OSFbS397NuO/Jtn7vbe0/LDoz+eKgDoNlViNRjT1pmN66RZboIh5sb5GAGIZzFAs
+ 8B1bF4EwrfAtRo2uwZ/3eJ3CWH/tUfZTQV/8oNr/ACXXYu5M2XW4cno2AHIIZ4TD9RN/
+ ESdJOqs3eSlH8oq9BDHPVmMrsuoOY1IOQBQ8h9LdV4A8nQBwL1+0LaOnqmISsGlKfyo4
+ dN2JM2Kv1Q5lY6QvzfuItvA9rvupxH6RdiWD8ZffnwcQ5SaXnHdRzhm3Hyupr/h5xCaz
+ Z6jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=DCFn5qxq0qR8AW5JPh4s40D0BQZmQsyvgNyso+AYnx4=;
+ b=fWaBC4hsZSmdSydxJkBJ4foz99PzyKL+YJbQLD57yQRg4w45KOHSHJ9wpogw/fyUTg
+ rL2Etp1T8zNy45cp09Nn0GM8SKt9T3I4DteEWf4R+QWJXZzeTuGyeR4wZZBPgSqgSwab
+ QxON8WmSAFoNgpchDqodcYKfxWclYZ+VFBN50wlj3tRUkXC/usU4fYrZolpnhbPaExJr
+ sEnlAVH7ekhfuzj+YSu+Wp1ZM1tsRlM6C+7KDE8mr97U8ipWbtdnPKbXPE8HBIz7RWvY
+ Q0ko3DhTahC6pdt2pQ3iNBND4Fggtsi204cu3Fn1kriyp+QTWb96M5qcwy4qpELZau9d
+ /GeA==
+X-Gm-Message-State: AOAM532SCgR1Res/KYFCsSm7pHjfQBwVCyXzhebMMRkk0ZdJR8vwgkuI
+ uhZ0X6DJKk64wBjze6D0uQODcHixz3xB6Sl1BP1s
+X-Google-Smtp-Source: ABdhPJy0mta6w36a3TKlKttCClGSKNtLR+7tfLZklXQkerhDDWFIOezvYdg/KjAMIKUTA/T7jiH2jI0mLASYOBxb100=
+X-Received: by 2002:a05:6e02:587:: with SMTP id
+ c7mr17626722ils.84.1597743846913; 
+ Tue, 18 Aug 2020 02:44:06 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200818065206.GA3751716@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.9 (--)
+References: <20200813084202.2838098-1-tcombes@google.com>
+ <5aa7a3bd-2bfc-f6a5-f08d-2a5b6c12be61@huawei.com>
+In-Reply-To: <5aa7a3bd-2bfc-f6a5-f08d-2a5b6c12be61@huawei.com>
+Date: Tue, 18 Aug 2020 11:43:55 +0200
+Message-ID: <CACGU_wB4kESZ0iqbfbSEO=FLkSRHoJOWESTi1uFHc8hEce9d=w@mail.gmail.com>
+To: Chao Yu <yuchao0@huawei.com>
+X-Spam-Score: -15.6 (---------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.166.196 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.9 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1k7xY8-00BEnS-Fc
-Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: correct return value
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium sender
+X-Headers-End: 1k7yA8-00BH9s-Pi
+Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: add -r (fake_seed) and -T flags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,206 +117,248 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: nolange79@gmail.com, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="windows-1252"; Format="flowed"
+From: Theotime Combes via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Theotime Combes <tcombes@google.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/8/18 14:52, Jaegeuk Kim wrote:
-> On 08/05, Chao Yu wrote:
->> As Norbert Lange reported:
->>
->> "
->> $ fsck.f2fs -a /dev/mmcblk0p5; echo $?
->> Info: Fix the reported corruption.
->> Info: Mounted device!
->> Info: Check FS only on RO mounted device
->> Error: Failed to open the device!
->> 255
->> "
->>
->> Michael La=DF reminds:
->>
->> "
->> I think the return value is exactly the problem here. See fsck(8) (
->> https://linux.die.net/man/8/fsck) which specifies the return values.
->> Systemd looks at these and decides how to proceed:
->>
->> https://github.com/systemd/systemd/blob/a859abf062cef1511e4879c4ee39c603=
-6ebeaec8/src/fsck/fsck.c#L407
->>
->> That means, if fsck.f2fs returns 255, then
->> the FSCK_SYSTEM_SHOULD_REBOOT bit is set and systemd will reboot.
->> "
->>
->> So the problem here is fsck.f2fs didn't return correct value to userspace
->> apps, result in later unexpected behavior of rebooting, let's fix this.
->>
->> Reported-by: Norbert Lange <nolange79@gmail.com>
->> Reported-by: Michael La=DF <bevan@bi-co.net>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>   fsck/fsck.h | 11 +++++++++++
->>   fsck/main.c | 27 +++++++++++++++++++++------
->>   2 files changed, 32 insertions(+), 6 deletions(-)
->>
->> diff --git a/fsck/fsck.h b/fsck/fsck.h
->> index e86730c34fc4..c5e85fefa07b 100644
->> --- a/fsck/fsck.h
->> +++ b/fsck/fsck.h
->> @@ -13,6 +13,17 @@
->>   =
+On Tue, Aug 18, 2020 at 10:26 AM Chao Yu <yuchao0@huawei.com> wrote:
+> On 2020/8/13 16:42, Theotime Combes via Linux-f2fs-devel wrote:
+> > r flag sets the checkpointing seed to 0 (initially used to
+> > remove randomness for apex generation).
+> > T flag sets timestamps to a given value.
+>
+> Normally, we introduce one feature in one patch...it helps review,
+> merge or revert patches more easily, how about splitting this into two.
+>
 
->>   #include "f2fs.h"
->>   =
+Sure, I'll split it into two.
 
->> +enum {
->> +	FSCK_SUCCESS                 =3D 0,
->> +	FSCK_ERROR_CORRECTED         =3D 1 << 0,
->> +	FSCK_SYSTEM_SHOULD_REBOOT    =3D 1 << 1,
->> +	FSCK_ERRORS_LEFT_UNCORRECTED =3D 1 << 2,
->> +	FSCK_OPERATIONAL_ERROR       =3D 1 << 3,
->> +	FSCK_USAGE_OR_SYNTAX_ERROR   =3D 1 << 4,
->> +	FSCK_USER_CANCELLED          =3D 1 << 5,
->> +	FSCK_SHARED_LIB_ERROR        =3D 1 << 7,
->> +};
->> +
->>   struct quota_ctx;
->>   =
+> >
+> > Signed-off-by: Theotime Combes <tcombes@google.com>
+> > ---
+> >   include/f2fs_fs.h       |  3 ++-
+> >   man/mkfs.f2fs.8         | 13 +++++++++++++
+> >   mkfs/f2fs_format.c      | 26 ++++++++++++++------------
+> >   mkfs/f2fs_format_main.c | 10 +++++++++-
+> >   4 files changed, 38 insertions(+), 14 deletions(-)
+> >
+> > diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> > index a9982f0..76db3bf 100644
+> > --- a/include/f2fs_fs.h
+> > +++ b/include/f2fs_fs.h
+> > @@ -405,8 +405,10 @@ struct f2fs_configuration {
+> >       int large_nat_bitmap;
+> >       int fix_chksum;                 /* fix old cp.chksum position */
+> >       __le32 feature;                 /* defined features */
+> > +     time_t fixed_time;
+> >
+> >       /* mkfs parameters */
+> > +     int fake_seed;
+> >       u_int32_t next_free_nid;
+> >       u_int32_t quota_inum;
+> >       u_int32_t quota_dnum;
+> > @@ -427,7 +429,6 @@ struct f2fs_configuration {
+> >       char *mount_point;
+> >       char *target_out_dir;
+> >       char *fs_config_file;
+> > -     time_t fixed_time;
+> >   #ifdef HAVE_LIBSELINUX
+> >       struct selinux_opt seopt_file[8];
+> >       int nr_opt;
+> > diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+> > index 022941f..5266dfd 100644
+> > --- a/man/mkfs.f2fs.8
+> > +++ b/man/mkfs.f2fs.8
+> > @@ -59,6 +59,9 @@ mkfs.f2fs \- create an F2FS file system
+> >   .B \-q
+> >   ]
+> >   [
+> > +.B \-r
+> > +]
+> > +[
+> >   .B \-R
+> >   .I root_owner
+> >   ]
+> > @@ -74,6 +77,10 @@ mkfs.f2fs \- create an F2FS file system
+> >   .I nodiscard/discard
+> >   ]
+> >   [
+> > +.B \-T
+> > +.I timestamp
+> > +]
+> > +[
+> >   .B \-w
+> >   .I wanted-sector-size
+> >   ]
+> > @@ -212,6 +219,9 @@ Default is disabled.
+> >   Quiet mode.
+> >   With it, mkfs.f2fs does not show any messages, including the basic messages.
+> >   .TP
+> > +.BI \-r
+> > +Sets the checkpointing srand seed to 0.
+> > +.TP
+> >   .BI \-R
+> >   Give root_owner option for initial uid/gid assignment.
+> >   Default is set by getuid()/getgid(), and assigned by "-R $uid:$gid".
+> > @@ -228,6 +238,9 @@ Enable sparse mode.
+> >   Specify 1 or 0 to enable or disable discard policy, respectively.
+> >   The default value is 1.
+> >   .TP
+> > +.BI \-T " timestamp"
+> > +Set inodes times to a given timestamp.
+>
+> Can we set this value to -1?
+>
 
->>   #define FSCK_UNMATCHED_EXTENT		0x00000001
->> diff --git a/fsck/main.c b/fsck/main.c
->> index 9a1596f35e79..11d472b9941c 100644
->> --- a/fsck/main.c
->> +++ b/fsck/main.c
->> @@ -630,7 +630,7 @@ void f2fs_parse_options(int argc, char *argv[])
->>   	error_out(prog);
->>   }
->>   =
+-1 is used as an init value, therefore setting this value to -1 will
+fall back to using the current time. Should I specify it here ?
 
->> -static void do_fsck(struct f2fs_sb_info *sbi)
->> +static int do_fsck(struct f2fs_sb_info *sbi)
->>   {
->>   	struct f2fs_checkpoint *ckpt =3D F2FS_CKPT(sbi);
->>   	u32 flag =3D le32_to_cpu(ckpt->ckpt_flags);
->> @@ -655,7 +655,7 @@ static void do_fsck(struct f2fs_sb_info *sbi)
->>   			} else {
->>   				MSG(0, "[FSCK] F2FS metadata   [Ok..]");
->>   				fsck_free(sbi);
->> -				return;
->> +				return FSCK_SUCCESS;
->>   			}
->>   =
+> > +.TP
+> >   .BI \-w " wanted-sector-size"
+> >   Specify the sector size in bytes.
+> >   Without it, the sectors will be calculated by device sector size.
+> > diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> > index 1639752..e711982 100644
+> > --- a/mkfs/f2fs_format.c
+> > +++ b/mkfs/f2fs_format.c
+> > @@ -692,7 +692,7 @@ static int f2fs_write_check_point_pack(void)
+> >       }
+> >
+> >       /* 1. cp page 1 of checkpoint pack 1 */
+> > -     srand(time(NULL));
+> > +     srand((c.fake_seed) ? 0 : time(NULL));
+> >       cp->checkpoint_ver = cpu_to_le64(rand() | 0x1);
+> >       set_cp(cur_node_segno[0], c.cur_seg[CURSEG_HOT_NODE]);
+> >       set_cp(cur_node_segno[1], c.cur_seg[CURSEG_WARM_NODE]);
+> > @@ -1192,11 +1192,11 @@ static int f2fs_write_root_inode(void)
+> >       raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes); /* dentry */
+> >       raw_node->i.i_blocks = cpu_to_le64(2);
+> >
+> > -     raw_node->i.i_atime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_atime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+>
+> How about wrapping
+>
+> (c.fixed_time == -1) ? time(NULL) : c.fixed_time)
+>
+> to inline function or macro?
 
->>   			if (!c.ro)
->> @@ -687,7 +687,7 @@ static void do_fsck(struct f2fs_sb_info *sbi)
->>   		ret =3D quota_init_context(sbi);
->>   		if (ret) {
->>   			ASSERT_MSG("quota_init_context failure: %d", ret);
->> -			return;
->> +			return FSCK_OPERATIONAL_ERROR;
->>   		}
->>   	}
->>   	fsck_chk_orphan_node(sbi);
->> @@ -695,8 +695,14 @@ static void do_fsck(struct f2fs_sb_info *sbi)
->>   			F2FS_FT_DIR, TYPE_INODE, &blk_cnt, NULL);
->>   	fsck_chk_quota_files(sbi);
->>   =
+I'll replace it with a macro in the new patch (once split),
+Thanks for the review!
 
->> -	fsck_verify(sbi);
->> +	ret =3D fsck_verify(sbi);
->>   	fsck_free(sbi);
->> +
->> +	if (!c.bug_on)
->> +		return FSCK_SUCCESS;
->> +	if (!ret)
->> +		return FSCK_ERROR_CORRECTED;
-> =
-
-> I applied this to get FSCK_ERROR_CORRECTED.
-> =
-
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -3165,6 +3165,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
->                          is_set_ckpt_flags(cp, CP_QUOTA_NEED_FSCK_FLAG)) {
->                          write_checkpoints(sbi);
->                  }
-> +               /* to return FSCK_ERROR_CORRECTED */
-> +               ret =3D 0;
-
-Correct, thanks. :)
-
-Thanks,
-
->          }
->          return ret;
->   }
-> =
-
->> +	return FSCK_ERRORS_LEFT_UNCORRECTED;
->>   }
->>   =
-
->>   static void do_dump(struct f2fs_sb_info *sbi)
->> @@ -833,11 +839,15 @@ int main(int argc, char **argv)
->>   	if (c.func !=3D DUMP && f2fs_devs_are_umounted() < 0) {
->>   		if (errno =3D=3D EBUSY) {
->>   			ret =3D -1;
->> +			if (c.func =3D=3D FSCK)
->> +				ret =3D FSCK_OPERATIONAL_ERROR;
->>   			goto quick_err;
->>   		}
->>   		if (!c.ro || c.func =3D=3D DEFRAG) {
->>   			MSG(0, "\tError: Not available on mounted device!\n");
->>   			ret =3D -1;
->> +			if (c.func =3D=3D FSCK)
->> +				ret =3D FSCK_OPERATIONAL_ERROR;
->>   			goto quick_err;
->>   		}
->>   =
-
->> @@ -854,6 +864,8 @@ int main(int argc, char **argv)
->>   	/* Get device */
->>   	if (f2fs_get_device_info() < 0) {
->>   		ret =3D -1;
->> +		if (c.func =3D=3D FSCK)
->> +			ret =3D FSCK_OPERATIONAL_ERROR;
->>   		goto quick_err;
->>   	}
->>   =
-
->> @@ -873,7 +885,7 @@ fsck_again:
->>   =
-
->>   	switch (c.func) {
->>   	case FSCK:
->> -		do_fsck(sbi);
->> +		ret =3D do_fsck(sbi);
->>   		break;
->>   #ifdef WITH_DUMP
->>   	case DUMP:
->> @@ -935,8 +947,11 @@ retry:
->>   		}
->>   	}
->>   	ret =3D f2fs_finalize_device();
->> -	if (ret < 0)
->> +	if (ret) {
->> +		if (c.func =3D=3D FSCK)
->> +			return FSCK_OPERATIONAL_ERROR;
->>   		return ret;
->> +	}
->>   =
-
->>   	printf("\nDone: %lf secs\n", (get_boottime_ns() - start) / 1000000000=
-.0);
->>   	return 0;
->> -- =
-
->> 2.26.2
-> .
-> =
-
+>
+> Thanks,
+>
+> >       raw_node->i.i_atime_nsec = 0;
+> > -     raw_node->i.i_ctime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_ctime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_ctime_nsec = 0;
+> > -     raw_node->i.i_mtime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_mtime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_mtime_nsec = 0;
+> >       raw_node->i.i_generation = 0;
+> >       raw_node->i.i_xattr_nid = 0;
+> > @@ -1213,7 +1213,8 @@ static int f2fs_write_root_inode(void)
+> >               raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
+> >
+> >       if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
+> > -             raw_node->i.i_crtime = cpu_to_le32(time(NULL));
+> > +             raw_node->i.i_crtime = cpu_to_le32(
+> > +                     (c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >               raw_node->i.i_crtime_nsec = 0;
+> >       }
+> >
+> > @@ -1350,11 +1351,11 @@ static int f2fs_write_qf_inode(int qtype)
+> >       raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
+> >       raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
+> >
+> > -     raw_node->i.i_atime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_atime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_atime_nsec = 0;
+> > -     raw_node->i.i_ctime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_ctime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_ctime_nsec = 0;
+> > -     raw_node->i.i_mtime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_mtime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_mtime_nsec = 0;
+> >       raw_node->i.i_generation = 0;
+> >       raw_node->i.i_xattr_nid = 0;
+> > @@ -1545,11 +1546,11 @@ static int f2fs_write_lpf_inode(void)
+> >       raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes);
+> >       raw_node->i.i_blocks = cpu_to_le64(2);
+> >
+> > -     raw_node->i.i_atime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_atime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_atime_nsec = 0;
+> > -     raw_node->i.i_ctime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_ctime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_ctime_nsec = 0;
+> > -     raw_node->i.i_mtime = cpu_to_le32(time(NULL));
+> > +     raw_node->i.i_mtime = cpu_to_le32((c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >       raw_node->i.i_mtime_nsec = 0;
+> >       raw_node->i.i_generation = 0;
+> >       raw_node->i.i_xattr_nid = 0;
+> > @@ -1569,7 +1570,8 @@ static int f2fs_write_lpf_inode(void)
+> >               raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
+> >
+> >       if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
+> > -             raw_node->i.i_crtime = cpu_to_le32(time(NULL));
+> > +             raw_node->i.i_crtime = cpu_to_le32(
+> > +                     (c.fixed_time == -1) ? time(NULL) : c.fixed_time);
+> >               raw_node->i.i_crtime_nsec = 0;
+> >       }
+> >
+> > diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+> > index 27c1f1d..4acc42a 100644
+> > --- a/mkfs/f2fs_format_main.c
+> > +++ b/mkfs/f2fs_format_main.c
+> > @@ -59,10 +59,12 @@ static void mkfs_usage()
+> >       MSG(0, "  -C [encoding[:flag1,...]] Support casefolding with optional flags\n");
+> >       MSG(0, "  -p number of pinned segments (2MB) [default:0]\n");
+> >       MSG(0, "  -q quiet mode\n");
+> > +     MSG(0, "  -r set checkpointing seed (srand()) to 0\n");
+> >       MSG(0, "  -R root_owner [default: 0:0]\n");
+> >       MSG(0, "  -s # of segments per section [default:1]\n");
+> >       MSG(0, "  -S sparse mode\n");
+> >       MSG(0, "  -t 0: nodiscard, 1: discard [default:1]\n");
+> > +     MSG(0, "  -T timestamps\n");
+> >       MSG(0, "  -w wanted sector size\n");
+> >       MSG(0, "  -z # of sections per zone [default:1]\n");
+> >       MSG(0, "  -V print the version number and exit\n");
+> > @@ -124,7 +126,7 @@ static void add_default_options(void)
+> >
+> >   static void f2fs_parse_options(int argc, char *argv[])
+> >   {
+> > -     static const char *option_string = "qa:c:C:d:e:E:g:il:mo:O:p:R:s:S:z:t:U:Vfw:";
+> > +     static const char *option_string = "qa:c:C:d:e:E:g:il:mo:O:p:rR:s:S:z:t:T:U:Vfw:";
+> >       int32_t option=0;
+> >       int val;
+> >       char *token;
+> > @@ -187,6 +189,9 @@ static void f2fs_parse_options(int argc, char *argv[])
+> >               case 'p':
+> >                       c.pinned_segments = atof(optarg);
+> >                       break;
+> > +             case 'r':
+> > +                     c.fake_seed = 1;
+> > +                     break;
+> >               case 'R':
+> >                       if (parse_root_owner(optarg, &c.root_uid, &c.root_gid))
+> >                               mkfs_usage();
+> > @@ -205,6 +210,9 @@ static void f2fs_parse_options(int argc, char *argv[])
+> >               case 't':
+> >                       c.trim = atoi(optarg);
+> >                       break;
+> > +             case 'T':
+> > +                     c.fixed_time = strtoul(optarg, NULL, 0);
+> > +                     break;
+> >               case 'U':
+> >                       c.vol_uuid = strdup(optarg);
+> >                       break;
+> >
 
 
 _______________________________________________
