@@ -2,57 +2,56 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41CD0248097
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 10:29:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 071242480FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Aug 2020 10:56:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k7wzj-0003hz-L6; Tue, 18 Aug 2020 08:29:23 +0000
+	id 1k7xPv-0005HJ-P8; Tue, 18 Aug 2020 08:56:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1k7wzi-0003hd-Qz
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:29:22 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1k7xPu-0005Gh-Rb
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:56:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lgDyWsPerPdG2yn4uustZzIDfVGmN1Sp7RPgpQI/Q6o=; b=T50Y2V3vEHiCnU8Mkn/rL//+LH
- lpJX64ZGvwnM4Of+ZpxPGKFDP+QdEuCerxXG29rm0daAxkJy3gZ3scJY0tPFUuhsA6OTbpu+EICgN
- zqemCWsLm645/g1SPCpT9EnJow2BtRatEsXiWnjje5z5g1dxqyoWglogFdzoRd2fJP8c=;
+ bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=jiiPXpH/mE4eufKwpBWrfukMis
+ ByuUyUxwaYdEDKm2TsOzXuoJ1APtE1R8w/v6kLDKuThB5/ovzMviueX9Xg7U3XKb2uMLS6PGfSBBQ
+ M2NMj2aKPW9tIugjuV9pactwpUSG1oDX/qdQwI2RkRPRaGph1tXeglPcWYw7ssIylqEc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lgDyWsPerPdG2yn4uustZzIDfVGmN1Sp7RPgpQI/Q6o=; b=BxvuCblIKh6Vcn+25I0+sF66nK
- YFuU3aPT9XURhQfLM7OuMxGFJB9xU4X3vH6wuoUT/CUqDe2ZHxTQzzku73iMG8ab5ZjijO7LVIY/b
- rtYxOv0MOvaUeW1ZitPpL1kE7gPE1JE4NJ5tcw0vv0XmxtA2Wz143JJE6wQgCjkmB3mI=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=/h19zl7DyYROFeVYaSGAImB7iFENFVsLjv8SzDn1veE=; b=EKcZyYlJv6DDyQ6MZjjNz/fQ7F
+ NHwd2WoIZWumbL9WbNTfavVBIzsyecl1tSvOtDaBn8WajcfdmgiP6kY8kOW7ilepvpMphlqE0xtte
+ 2N0cXdSPwBJlliqIrueSwFzSYi35fSC/ZNCH7xBnqaF/7I9zArlU404HBkpSoq764CxE=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k7wzd-00F49P-Pf
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:29:22 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id E2CAB93B21F94BEC3230;
- Tue, 18 Aug 2020 16:29:08 +0800 (CST)
+ id 1k7xPr-00BEHH-Bv
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 Aug 2020 08:56:26 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 0AC317576BAB106334CA;
+ Tue, 18 Aug 2020 16:56:14 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 18 Aug
- 2020 16:29:06 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>, Jaegeuk Kim
- <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <1597392335-4998-1-git-send-email-stummala@codeaurora.org>
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 18 Aug
+ 2020 16:56:11 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20200814201811.702661-1-jaegeuk@kernel.org>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <e1251327-bd48-215d-e558-08780474bddb@huawei.com>
-Date: Tue, 18 Aug 2020 16:29:05 +0800
+Message-ID: <df090a32-8373-dede-3d5d-3833d93b911a@huawei.com>
+Date: Tue, 18 Aug 2020 16:56:11 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <1597392335-4998-1-git-send-email-stummala@codeaurora.org>
+In-Reply-To: <20200814201811.702661-1-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -62,16 +61,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: codeaurora.org]
+ for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -2.9 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1k7wzd-00F49P-Pf
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix indefinite loop scanning for free
- nid
+X-Headers-End: 1k7xPr-00BEHH-Bv
+Subject: Re: [f2fs-dev] [PATCH] f2fs_io: measure performance of write()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,53 +81,16 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/8/14 16:05, Sahitya Tummala wrote:
-> If the sbi->ckpt->next_free_nid is not NAT block aligned and if there
-> are free nids in that NAT block between the start of the block and
-> next_free_nid, then those free nids will not be scanned in scan_nat_page().
-> This results into mismatch between nm_i->available_nids and the sum of
-> nm_i->free_nid_count of all NAT blocks scanned. And nm_i->available_nids
-> will always be greater than the sum of free nids in all the blocks.
-> Under this condition, if we use all the currently scanned free nids,
-> then it will loop forever in f2fs_alloc_nid() as nm_i->available_nids
-> is still not zero but nm_i->free_nid_count of that partially scanned
-> NAT block is zero.
-> 
-> Fix this to align the nm_i->next_scan_nid to the first nid of the
-> corresponding NAT block.
-> 
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> ---
->   fs/f2fs/node.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 9bbaa26..d615e59 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -2402,6 +2402,8 @@ static int __f2fs_build_free_nids(struct f2fs_sb_info *sbi,
->   			if (IS_ERR(page)) {
->   				ret = PTR_ERR(page);
->   			} else {
-> +				if (nid % NAT_ENTRY_PER_BLOCK)
-> +					nid = NAT_BLOCK_OFFSET(nid) * NAT_ENTRY_PER_BLOCK;
+On 2020/8/15 4:18, Jaegeuk Kim wrote:
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-How about moving this logic to the beginning of __f2fs_build_free_nids(),
-after nid reset?
-
-BTW, it looks we can add unlikely in this judgment condition?
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
-
->   				ret = scan_nat_page(sbi, page, nid);
->   				f2fs_put_page(page, 1);
->   			}
-> 
 
 
 _______________________________________________
