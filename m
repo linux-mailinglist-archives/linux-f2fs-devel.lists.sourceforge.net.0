@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A6D424D9B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 18:15:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E631324D9D9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 18:16:44 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k99hY-0002gS-7Y; Fri, 21 Aug 2020 16:15:36 +0000
+	id 1k99iV-0002kF-DC; Fri, 21 Aug 2020 16:16:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1k99hX-0002gM-NV
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:15:35 +0000
+ (envelope-from <sashal@kernel.org>) id 1k99iU-0002k5-N0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:16:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JhTB0IRLtEDawVNLGA3XSfBf9xvFIZ7PeqnyFOAGAbs=; b=EA1xr9g0OW/GaFhPvPHFTfamas
- VKsagzgGfXZygz6u++8uPGN6bgJiKeI4lzOZK4ZGaocBmBuyciauuBu+o/VrC6jl39yo4+BKhyx2X
- YuOHUMSPBsD728tzVzXUg4bZ9FgRGlRKFqpPO/OeI/RyPR7+1N+/Qeea2s6qa4GvaQzE=;
+ bh=4FkvpA7G1L00LWU62+KqDjtEId2jIm0cVq0/yEZl/e0=; b=A5fWXXvSKTG5WuAwYcSi3T3lH2
+ N9KiPkNQinFnZOWdo5ZS5PyS+MHhaSLeErf86wcwNf4hssMPko3SoMw7VdYc6j2AHO7hor0g1JYQ+
+ 3x8bSe35QebnUT+LMViVIPccxmJpB+xYpsAzASED3WYTGanpxI6VDwFjpLu5ZCnrydrU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JhTB0IRLtEDawVNLGA3XSfBf9xvFIZ7PeqnyFOAGAbs=; b=Ss04CDmosKNkD3oSltjCFGYZb9
- A7s7Tpjz50SfE19kq1wtBLFiU8k501iYp1ZjCEAKJ4F89J3Oy0pAUtUQq5e5a4MI1VrKiVQyXNr94
- x1lsa2mxRivo3mEuuk9gmIfHvarcTdyjtCgYZg10PwOJHeHsQHg55ZqtilacQosgl4iU=;
+ bh=4FkvpA7G1L00LWU62+KqDjtEId2jIm0cVq0/yEZl/e0=; b=TWGG96yavGmA1yVG3x8zwqr+sx
+ C3jGRtq8R5y2kyiBEa8GqVuLhVRd3SL/TzmqA2D4E19egmT2h+uJWOIKf27Jba9736hXXv1FrftzU
+ PmFjqRvE1QVTtj5EuaZlkBBKRWerNo6RZ0Lmj32og1MrPwyRk4K0+iXa2obz3EjaCeKE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k99hR-00Edr8-My
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:15:35 +0000
+ id 1k99iT-000ScS-Jw
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:16:34 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 69E2C21741;
- Fri, 21 Aug 2020 16:15:23 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4AA3121741;
+ Fri, 21 Aug 2020 16:16:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598026524;
- bh=4P0E1TdwEUvHFMgvNrSm/DXS5S0ovHvkEWD5HGQ/MOA=;
+ s=default; t=1598026588;
+ bh=QszXdQB0Avp1Tr/tdkVd8mVJbGwNpUlPoaFiPsLqGto=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZZCJjL9Zj5J6cnTtuS7R5txtxAvHS2wjGPeb1SvKdU18XZgduni6tLj/MVWIDPAp2
- Sx6YWE+KzqMGtKWbJLsOVobZAX/868WwDirgT1UbHFZkPeg/NFuKPrdzCx7ijhlSvP
- Y9AUMP6hcKGV245REWMBcDF98CFJlkxL+lHX9yPo=
+ b=xmhHf3Rj7hDidiYHaj4RiCNbGxoeOfLlu+O8Xd0ZEtXUDq1lPOx2gbMNcLK7nqz2c
+ y3JiF8PMUMb51Qo3qRqcz1mhVjWkHNO8nlfz7KrfWWj3+SfP/pPpOiS5LVf+eBETUi
+ CGFNRFp0dFkOq55V7HwMGoFyuZqolsXPBJmxmff8=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 21 Aug 2020 12:14:08 -0400
-Message-Id: <20200821161423.347071-47-sashal@kernel.org>
+Date: Fri, 21 Aug 2020 12:15:18 -0400
+Message-Id: <20200821161545.347622-34-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200821161423.347071-1-sashal@kernel.org>
-References: <20200821161423.347071-1-sashal@kernel.org>
+In-Reply-To: <20200821161545.347622-1-sashal@kernel.org>
+References: <20200821161545.347622-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,8 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k99hR-00Edr8-My
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.8 47/62] f2fs: fix use-after-free issue
+X-Headers-End: 1k99iT-000ScS-Jw
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.7 34/61] f2fs: remove write attribute
+ of main_blkaddr sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,54 +91,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Sasha Levin <sashal@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Li Guifu <bluce.liguifu@huawei.com>
+From: Dehe Gu <gudehe@huawei.com>
 
-[ Upstream commit 99c787cfd2bd04926f1f553b30bd7dcea2caaba1 ]
+[ Upstream commit ffcde4b29a5f20ddca6fe559b48f345818bf1d91 ]
 
-During umount, f2fs_put_super() unregisters procfs entries after
-f2fs_destroy_segment_manager(), it may cause use-after-free
-issue when umount races with procfs accessing, fix it by relocating
-f2fs_unregister_sysfs().
+Fuzzing main_blkaddr sysfs node will corrupt this field's value,
+causing kernel panic, remove its write attribute to avoid potential
+security risk.
 
-[Chao Yu: change commit title/message a bit]
+[Chao Yu: add description]
 
-Signed-off-by: Li Guifu <bluce.liguifu@huawei.com>
+Signed-off-by: Dehe Gu <gudehe@huawei.com>
+Signed-off-by: Daiyue Zhang <zhangdaiyue1@huawei.com>
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/super.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ fs/f2fs/sysfs.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 20e56b0fa46a9..0deb839da0a03 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1173,6 +1173,9 @@ static void f2fs_put_super(struct super_block *sb)
- 	int i;
- 	bool dropped;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index e3bbbef9b4f09..66e8b243e48eb 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -222,6 +222,13 @@ static ssize_t avg_vblocks_show(struct f2fs_attr *a,
+ }
+ #endif
  
-+	/* unregister procfs/sysfs entries in advance to avoid race case */
-+	f2fs_unregister_sysfs(sbi);
++static ssize_t main_blkaddr_show(struct f2fs_attr *a,
++				struct f2fs_sb_info *sbi, char *buf)
++{
++	return snprintf(buf, PAGE_SIZE, "%llu\n",
++			(unsigned long long)MAIN_BLKADDR(sbi));
++}
 +
- 	f2fs_quota_off_umount(sb);
- 
- 	/* prevent remaining shrinker jobs */
-@@ -1238,8 +1241,6 @@ static void f2fs_put_super(struct super_block *sb)
- 
- 	kvfree(sbi->ckpt);
- 
--	f2fs_unregister_sysfs(sbi);
--
- 	sb->s_fs_info = NULL;
- 	if (sbi->s_chksum_driver)
- 		crypto_free_shash(sbi->s_chksum_driver);
+ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+ 			struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -511,7 +518,6 @@ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_no_gc_sleep_time, no_gc_sleep_time);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle, gc_mode);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent, gc_mode);
+ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, reclaim_segments, rec_prefree_segments);
+-F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, main_blkaddr, main_blkaddr);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_small_discards, max_discards);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
+ F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
+@@ -551,6 +557,7 @@ F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+ F2FS_GENERAL_RO_ATTR(unusable);
+ F2FS_GENERAL_RO_ATTR(encoding);
+ F2FS_GENERAL_RO_ATTR(mounted_time_sec);
++F2FS_GENERAL_RO_ATTR(main_blkaddr);
+ #ifdef CONFIG_F2FS_STAT_FS
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
 -- 
 2.25.1
 
