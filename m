@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E00C24DA26
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 18:18:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E8D624DA46
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 18:19:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k99kj-0000pd-8p; Fri, 21 Aug 2020 16:18:53 +0000
+	id 1k99lQ-0000sQ-GK; Fri, 21 Aug 2020 16:19:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1k99kh-0000pV-NE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:18:51 +0000
+ (envelope-from <sashal@kernel.org>) id 1k99lO-0000sD-NZ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:19:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/UsyY/W7BPhqJaeBDlCRJ4/9wJExSYoogbilvcRHUuc=; b=YIkZu8Q+ETWnYdfykQlPhMBAu1
- G+2DRyd0SVh3o6dxmY+8MKDEVrQ7gmbjc62qGtkDssulThsilGSQwT1tVRRkBri00IS2QAEF8xVUO
- cmcNvqp8/ZKEordi2hN31Epd4SVYl3z4JULBG2VuP8FxDH/tqsYq1Y5gtX8jMN8MopkI=;
+ bh=F28S4Ms9MZBN4P5PjpooJenn7++BbwU4zPTsNhMcFoc=; b=hQipDYKaVVRY53JKi2P2D3K0nZ
+ 0d+se8ETxUZ8yytzEloLbmYMpzDhHcupdRNwZvMPr6OIawseIScu1/wGnIpVR0NQ3wQhixB8nHNvX
+ +POtk6xe9t94Rq5ulwAfuwnPadtdzsky8yeakKsE3Hd/weCjauZhnOGG0f8qZ91lNZ8k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/UsyY/W7BPhqJaeBDlCRJ4/9wJExSYoogbilvcRHUuc=; b=kjWthB2X8y/JDDUtw6Hztcec6i
- PPIEN+NEDTKtNO/pTM/27FAbhl+2BEVjxDG3JabUroPtpRv+fEU6j02f+1YadsZfOPM1oFzrJwMnm
- +bTKkoTTxJwH1SsuwzLVd0d3wUHAGBdcUgKM8EetmwctPLKuKHcSX/sVHzJLPpGr9vS8=;
+ bh=F28S4Ms9MZBN4P5PjpooJenn7++BbwU4zPTsNhMcFoc=; b=i6JZQ/wGQkNfVlUIn7SzofeSCx
+ XKHkNCle/o5HmWKqhntibrUmxBHkcGJ22ThWFNYwkyutK7Yhe1G6zbSOnbB4yFxMklzJrtyLrrygx
+ aWI2jroTNVAsU+x1GfV7REXbddRAZDiXWxW2aDYtxcrUoUQE/2QWAM01dEhUEIh1bmCQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1k99kg-00Ee7L-G6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:18:51 +0000
+ id 1k99lN-003I84-HI
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 16:19:34 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5763A22D3E;
- Fri, 21 Aug 2020 16:18:44 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5FA1020FC3;
+ Fri, 21 Aug 2020 16:19:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598026725;
- bh=wWypa74ApxnbJrtT25Hj2RfEkG8HY3F1rSeh2fTUozo=;
+ s=default; t=1598026768;
+ bh=x7OVgJvlaRrLCQacPk05iX576FtirOsPaf9wehDa5GQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gzlVBmI17jbS8pTdYpdzoJltmUjsQ1JDGQpGUEJfZYQYPt5PgYrFRAE81qnlzK18S
- MII43YMI3kt8UhWaY0HgzOMTVwAFkIpmhHDU/JZVJ6DHOAboPiZ77saB3iKnUrKjuO
- ZBAoAofbRPI84VLVmODplVVJPR+PiDbNAbr6eRm4=
+ b=LCdMu8OiEeVjm6dslMfZum+s0EZ6096SG8kGXbDlNZ01H4026etZMklUkvryfRIec
+ FXk4c9FWU0yjLBPXw6EFDmxdg9HnWFM6cdnOyj+2dZ0OJFDwBkkQGZFonazwyeg18c
+ SoiEQRsIXouXvv7W0VfENWNT4roztd9suy5kkt6o=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 21 Aug 2020 12:17:58 -0400
-Message-Id: <20200821161807.348600-29-sashal@kernel.org>
+Date: Fri, 21 Aug 2020 12:18:50 -0400
+Message-Id: <20200821161857.348955-23-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200821161807.348600-1-sashal@kernel.org>
-References: <20200821161807.348600-1-sashal@kernel.org>
+In-Reply-To: <20200821161857.348955-1-sashal@kernel.org>
+References: <20200821161857.348955-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -77,8 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
  -0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1k99kg-00Ee7L-G6
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 29/38] f2fs: fix use-after-free issue
+X-Headers-End: 1k99lN-003I84-HI
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 23/30] f2fs: fix use-after-free issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,12 +116,12 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9782250c98156..161ce0eb8891a 100644
+index 89319c3524061..990339c538b0a 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -1004,6 +1004,9 @@ static void f2fs_put_super(struct super_block *sb)
+@@ -782,6 +782,9 @@ static void f2fs_put_super(struct super_block *sb)
+ 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
  	int i;
- 	bool dropped;
  
 +	/* unregister procfs/sysfs entries in advance to avoid race case */
 +	f2fs_unregister_sysfs(sbi);
@@ -129,7 +129,7 @@ index 9782250c98156..161ce0eb8891a 100644
  	f2fs_quota_off_umount(sb);
  
  	/* prevent remaining shrinker jobs */
-@@ -1067,8 +1070,6 @@ static void f2fs_put_super(struct super_block *sb)
+@@ -834,8 +837,6 @@ static void f2fs_put_super(struct super_block *sb)
  
  	kfree(sbi->ckpt);
  
