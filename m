@@ -2,76 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B32B524CC9A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 06:23:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B49F124CC9B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Aug 2020 06:23:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1k8yaP-0002TI-Cj; Fri, 21 Aug 2020 04:23:29 +0000
+	id 1k8yaa-00044R-Hr; Fri, 21 Aug 2020 04:23:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <dan@dlrobertson.com>) id 1k8yaO-0002TB-0e
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 04:23:28 +0000
+ (envelope-from <dan@dlrobertson.com>) id 1k8yaY-00044J-N5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 04:23:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q7vc1bp7hPJ7acbQFf4g1oMpjc5/6uB6sBcbsD/m9IY=; b=G2nDM5MFIR0qOS4H6SSG9W4RPQ
- OYd+GgAWftxXFlNVuL8ibgkQMsIybbn8lwAIpSUabrOB6th6aNVdr9vXFz0uBc4zdNMLVxo5r/Kt4
- ypfcZVXZEl+DBptb1m8G09o2kTlweXvpJJjqHU4YhHsW4Jn019GIa3uCXbcBDjwIjCec=;
+ bh=HRkFGsgkQ9FqQvyDIxNzkUcnu+l2LajC/lH21HFOpXA=; b=TooyxiVBv0JhpZ2GLIYjhY3oQS
+ XtWD/39yKS8aQnMAxOjCm38fLEP8bW9kfOpWOz0R82Lc4wwW8pzZZI0W5GwHbbcCUOUvr3ZcJwXDB
+ dC/so08oDNfdiYlK5vEvv7LniSQIK7ytPVUjXHnPQmA+zxETuN4c4AK3zkHw4tjwhtYA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Date:Subject:
- Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Q7vc1bp7hPJ7acbQFf4g1oMpjc5/6uB6sBcbsD/m9IY=; b=hhZFX2jxvIWzUI+XKEVnVuQaW7
- DTkOV76UpWgPyYShTVGF/9TW5vR1oIIPJ6smVGWkU/q+0C+pNtVEFHMMTgnfqNSCE6JkSs8qsEY69
- VC+TwFlOWWWfv+4IWiiOuWV2cjL3IYOx22lrETqV4pcdzFUh4p3oPCrntoszI+yHEO8I=;
+ bh=HRkFGsgkQ9FqQvyDIxNzkUcnu+l2LajC/lH21HFOpXA=; b=Zrnsqxd5xryvcTLWbtYgJTgtz7
+ faOL6e5oGJViL+eljHIMN4NWxWMh35id5BcvRwmjZQRhd40BiRicH7YA+xKOtdtUMEXnNCP3jx96i
+ fjqCrjM6MMjT3GagWRWAh/ISVJaboYCZxPVh/5LnUEC48hn4RGUePDPO11TWCk3ELifg=;
 Received: from sender4-op-o14.zoho.com ([136.143.188.14])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1k8yaM-0000aj-Kw
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 04:23:27 +0000
-ARC-Seal: i=1; a=rsa-sha256; t=1597982867; cv=none; 
+ id 1k8yaW-00E7do-N1
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Aug 2020 04:23:38 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1597982876; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=iKRDrpid2CISPexjdKgwPVe5/rIj14W5AKH+hzCfQktWzU9VYU00Kjb8keon72DIfngExe/SWVDb284qCsunwuvAyX87vPuEVZEC+pO42MmyrFG83xm+q0Db2ukB5BaDE1hgVKv41lZvmQpwNhw2uXbwbAJ3CDuj/2ouuJ46/aw=
+ b=i1CZnU0iqhpzE1jrhl0Xg4oAvLnOl6lx82oSyC/P8BkDsrtJkOOUytSpdyGPsonQipCeFGfFzeiN+tBi0XtAKFZgRbLqp0x0H5fEhxuOyxlpU4Fvp5/nwEZu1/HZmgfhLi3v4013zihEBzJmJgciIsbbaYwyM3ASK71l5Das90o=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1597982867;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=Q7vc1bp7hPJ7acbQFf4g1oMpjc5/6uB6sBcbsD/m9IY=; 
- b=Fo6mUxXPhmYgP1le+KONxcucwXjX7FVGq2YSRFij4vd1aQxJJ1M2RPWAxxvIByxWAiIzQlUKEv8MB52sZtMlibri8SOOyk4j7vwM2fcDoYDrBABStOR/LaA6D54RYPcOXM4df74RPexVTbg3X4QRFGxhgzVstmA0pH/Ujm+PQm0=
+ s=zohoarc; t=1597982876;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=HRkFGsgkQ9FqQvyDIxNzkUcnu+l2LajC/lH21HFOpXA=; 
+ b=ZqP+XtgYeNXFSbx0FsQywbyaBAl4Px19I1dzS7HQLteE2CvnrbZNCpf/CObUNkq7eAiwhtpNK6tis9H9JVctH3M01VLtGmsImqV5OCqad2o8oiYiwzHOz4/maKKDh483ryPqXZ9pIHSbo8fbP942Q31NsqsuJNRppUA5T1g6q44=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  spf=pass  smtp.mailfrom=dan@dlrobertson.com;
  dmarc=pass header.from=<dan@dlrobertson.com> header.from=<dan@dlrobertson.com>
 Received: from localhost (pool-108-28-30-30.washdc.fios.verizon.net
  [108.28.30.30]) by mx.zohomail.com
- with SMTPS id 1597982865564153.02167245062083;
- Thu, 20 Aug 2020 21:07:45 -0700 (PDT)
+ with SMTPS id 1597982872103315.1741309858347;
+ Thu, 20 Aug 2020 21:07:52 -0700 (PDT)
 From: Dan Robertson <dan@dlrobertson.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Message-ID: <20200821034732.18182-1-dan@dlrobertson.com>
-Date: Fri, 21 Aug 2020 03:47:31 +0000
+Message-ID: <20200821034732.18182-2-dan@dlrobertson.com>
+Date: Fri, 21 Aug 2020 03:47:32 +0000
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200821034732.18182-1-dan@dlrobertson.com>
+References: <20200821034732.18182-1-dan@dlrobertson.com>
 MIME-Version: 1.0
 X-ZohoMailClient: External
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [136.143.188.14 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
  [136.143.188.14 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: dlrobertson.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [136.143.188.14 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1k8yaM-0000aj-Kw
-Subject: [f2fs-dev] [PATCH 0/1] f2fs: check output position in move range
+X-Headers-End: 1k8yaW-00E7do-N1
+Subject: [f2fs-dev] [PATCH 1/1] f2fs: check output position in move range
  ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -89,48 +95,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If a negative value is provided as the output position to the
-F2FS_IOC_MOVE_RANGE ioctl, f2fs_get_dnode_of_data may hit a memory
-bug like the following:
+When the move range ioctl is used, check the output position and ensure
+that it is a non-negative value. Without this check f2fs_get_dnode_of_data
+may hit a memmory bug.
 
-BUG: unable to handle page fault for address: ffffed10b30435a4
-[...]
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009) ...
-[...]
-Call Trace:
- f2fs_get_dnode_of_data+0xa68/0xde0
-[...]
- f2fs_reserve_block+0x3b/0x230
- f2fs_get_new_data_page+0xf0/0x8b0
- ? f2fs_get_lock_data_page+0x1f0/0x1f0
- ? rwsem_down_write_slowpath+0x8d0/0x8d0
- ? rwsem_down_read_slowpath+0x830/0x830
- ? ___might_sleep+0xba/0xd0
- ? f2fs_get_lock_data_page+0x17a/0x1f0
- __exchange_data_block+0x11bf/0x24d0
- ? f2fs_ioc_release_volatile_write+0x170/0x170
- ? __might_sleep+0x31/0xd0
- ? ___might_sleep+0xba/0xd0
- ? rwsem_down_read_slowpath+0x830/0x830
- ? __init_rwsem+0xa0/0xa0
- f2fs_ioctl+0x469c/0x6980
-
-I am reletively inexperienced with F2FS, so I may have missed something,
-but I think a simple check of the output position to ensuring that it
-isn't a negative value should resolve this issue. The simple test
-reproducer I wrote no longer triggers the memmory error after the patch.
-Comments and feedback would be appreciated :-)
-
-Cheers,
-
- - Dan
-
-Dan Robertson (1):
-  f2fs: check output position in move range ioctl
-
+Signed-off-by: Dan Robertson <dan@dlrobertson.com>
+---
  fs/f2fs/file.c | 2 ++
  1 file changed, 2 insertions(+)
 
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 8a422400e824..62f9625299ca 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2798,6 +2798,8 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 	}
+ 
+ 	ret = -EINVAL;
++	if (pos_out < 0)
++		goto out_unlock;
+ 	if (pos_in + len > src->i_size || pos_in + len < pos_in)
+ 		goto out_unlock;
+ 	if (len == 0)
 
 
 
