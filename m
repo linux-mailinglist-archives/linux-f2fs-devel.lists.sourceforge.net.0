@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEE5424F264
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 08:18:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3900F24F274
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 08:18:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kA5oT-0000vE-NE; Mon, 24 Aug 2020 06:18:37 +0000
+	id 1kA5ob-0004en-3h; Mon, 24 Aug 2020 06:18:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kA5oR-0000v0-Jr
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:35 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kA5oX-0004eE-FF
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5hAA+wCyPe8fM5j4dMXVkijwsZ/Ria5XYU8I4epx544=; b=jRex+FiB+FtWTQlT9BCm4bkNLr
- LgqDte7D0z0U2WdjKy6DjHcqMHNgHHmbfdcaN2oZ9mTiMK+IpADizD+ThUhhPPVchcvZsdeya/RZl
- gTSrYKrvi8IqX9NuVGKHLB53GMLajZoIrzNNOH9QVr9UnnrrrHsF/QHlrYfwagsufn28=;
+ bh=e2NAFtP66KQ9JzVlVB/ltZCwvPQtqGx7V7n5jjchn20=; b=VAKoZGHnLvwYWU2U3W2tpyGACr
+ Qt6JbgnT3VUO503ZviSqEzW98GeE7G9VYVeQk1vPg4avIdikK0Fo/7L13Do147VN6dCJY2bAqHmiK
+ qnny1WMt6iJsg1I00EwVxU4WcV/qOVewb2Qr9d1cOb9xYo0xyA433DNjgtZayifzkJJE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5hAA+wCyPe8fM5j4dMXVkijwsZ/Ria5XYU8I4epx544=; b=m0qtE0Yxw8rt2Fi7QCYX20OZAM
- Qf5frKnduer5Uj1mW4qBg+JSaoUOg711zB6YEeltGdbA6SfFeW0KOkJHVXOLybfIQSpzId8yp6IBR
- SU+6aEeR59LseFTi9FP29i6Ds73VKwlm79zodR39uOjcKQxfQQYHHHYIdNphofCaP+NA=;
+ bh=e2NAFtP66KQ9JzVlVB/ltZCwvPQtqGx7V7n5jjchn20=; b=B1gy8042KcACiK7t9FB/6kIfx4
+ j3TtX/pFIycjhe9+tMbBerY6lBhqJTUuZsAIPkyZ6yleHM81ilh3ETxK0ptx+LbnLp0X/mJF5+Wth
+ GQzylGmuM95TeGXz5YmiIv6KpMo0KfAVQAral4yVz9bhuz71zrsYCaaDcefYR0vQbypI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kA5oQ-002Evl-Ff
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:35 +0000
+ id 1kA5oV-0053ww-AU
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:41 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 92272214F1;
+ by mail.kernel.org (Postfix) with ESMTPSA id E52FA22B3F;
  Mon, 24 Aug 2020 06:18:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598249899;
- bh=z1QylT8I+NmBP0tutYhzY5oX1yelfT7mim0uD9smtgw=;
+ s=default; t=1598249900;
+ bh=pIJmvup/1NleSfxl2m1+2qODicItN3VVq+lhGxjetoU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=J03KdJQJPdY77kdOSQzv1oF4glUgsguRLqZPw0bmItnjV4mkJE5kE2RoajSp2OA2U
- 27gS97vYGnq70XXtnvPMkPnmelOpJ2j1BFFb6SLZjQ7BCzkaB8YdwP8CBA5bGWNP6A
- Kp0XyIGXauI0bFNXQVHCYVjI6Ho7Gg6A1rHVfTck=
+ b=s1qf4bw7OzIhw2/GHG8djl8PDMxSjLTOyniDndG+OavXM3SB413ffm3u+jx22B71h
+ cvDSDtULDtHOJuHzs25NU0a4oxzPGs1bm7o4WXxd46oeti/Bc2CJIcXuWk/FwxpDD+
+ se+eF27vWpLQ3Zxk5GkkVvP14wSVYw+0gacJdnnY=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 23 Aug 2020 23:17:09 -0700
-Message-Id: <20200824061712.195654-6-ebiggers@kernel.org>
+Date: Sun, 23 Aug 2020 23:17:10 -0700
+Message-Id: <20200824061712.195654-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824061712.195654-1-ebiggers@kernel.org>
 References: <20200824061712.195654-1-ebiggers@kernel.org>
@@ -69,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kA5oQ-002Evl-Ff
-Subject: [f2fs-dev] [RFC PATCH 5/8] f2fs: use fscrypt_prepare_new_inode()
+X-Headers-End: 1kA5oV-0053ww-AU
+Subject: [f2fs-dev] [RFC PATCH 6/8] ubifs: use fscrypt_prepare_new_inode()
  and fscrypt_set_context()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -92,92 +92,77 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Convert f2fs to use the new functions fscrypt_prepare_new_inode() and
-fscrypt_set_context().  This avoids calling
-fscrypt_get_encryption_info() from under f2fs_lock_op(), which can
-deadlock because fscrypt_get_encryption_info() isn't GFP_NOFS-safe.
+Convert ubifs to use the new functions fscrypt_prepare_new_inode() and
+fscrypt_set_context().
 
-For more details about this problem, see the earlier patch
-"fscrypt: add fscrypt_prepare_new_inode() and fscrypt_set_context()".
+Unlike ext4 and f2fs, this doesn't appear to fix any deadlock bug.  But
+it does shorten the code slightly and get all filesystems using the same
+helper functions, so that fscrypt_inherit_context() can be removed.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/dir.c   |  2 +-
- fs/f2fs/f2fs.h  | 16 ----------------
- fs/f2fs/namei.c |  7 ++++++-
- 3 files changed, 7 insertions(+), 18 deletions(-)
+ fs/ubifs/dir.c | 26 ++++++++++----------------
+ 1 file changed, 10 insertions(+), 16 deletions(-)
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 069f498af1e38..d627ca97fc500 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -537,7 +537,7 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
- 			goto put_error;
+diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
+index 9d042942d8b29..26739ae3ffee7 100644
+--- a/fs/ubifs/dir.c
++++ b/fs/ubifs/dir.c
+@@ -81,19 +81,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
+ 	struct ubifs_inode *ui;
+ 	bool encrypted = false;
  
- 		if (IS_ENCRYPTED(inode)) {
--			err = fscrypt_inherit_context(dir, inode, page, false);
-+			err = fscrypt_set_context(inode, page);
- 			if (err)
- 				goto put_error;
- 		}
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 16322ea5b4630..eb37d1974ba8e 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4022,22 +4022,6 @@ static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
- 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
- }
- 
--static inline bool f2fs_may_encrypt(struct inode *dir, struct inode *inode)
--{
--#ifdef CONFIG_FS_ENCRYPTION
--	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
--	umode_t mode = inode->i_mode;
+-	if (IS_ENCRYPTED(dir)) {
+-		err = fscrypt_get_encryption_info(dir);
+-		if (err) {
+-			ubifs_err(c, "fscrypt_get_encryption_info failed: %i", err);
+-			return ERR_PTR(err);
+-		}
 -
--	/*
--	 * If the directory encrypted or dummy encryption enabled,
--	 * then we should encrypt the inode.
--	 */
--	if (IS_ENCRYPTED(dir) || DUMMY_ENCRYPTION_ENABLED(sbi))
--		return (S_ISREG(mode) || S_ISDIR(mode) || S_ISLNK(mode));
--#endif
--	return false;
--}
+-		if (!fscrypt_has_encryption_key(dir))
+-			return ERR_PTR(-EPERM);
 -
- static inline bool f2fs_may_compress(struct inode *inode)
- {
- 	if (IS_SWAPFILE(inode) || f2fs_is_pinned_file(inode) ||
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 84e4bbc1a64de..45f324511a19e 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -28,6 +28,7 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
- 	nid_t ino;
- 	struct inode *inode;
- 	bool nid_free = false;
-+	bool encrypt = false;
- 	int xattr_size = 0;
- 	int err;
+-		encrypted = true;
+-	}
+-
+ 	inode = new_inode(c->vfs_sb);
+ 	ui = ubifs_inode(inode);
+ 	if (!inode)
+@@ -112,6 +99,14 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
+ 			 current_time(inode);
+ 	inode->i_mapping->nrpages = 0;
  
-@@ -69,13 +70,17 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
- 		F2FS_I(inode)->i_projid = make_kprojid(&init_user_ns,
- 							F2FS_DEF_PROJID);
- 
-+	err = fscrypt_prepare_new_inode(dir, inode, &encrypt);
-+	if (err)
-+		goto fail_drop;
++	err = fscrypt_prepare_new_inode(dir, inode, &encrypted);
++	if (err) {
++		ubifs_err(c, "fscrypt_prepare_new_inode failed: %i", err);
++		make_bad_inode(inode);
++		iput(inode);
++		return ERR_PTR(err);
++	}
 +
- 	err = dquot_initialize(inode);
- 	if (err)
- 		goto fail_drop;
+ 	switch (mode & S_IFMT) {
+ 	case S_IFREG:
+ 		inode->i_mapping->a_ops = &ubifs_file_address_operations;
+@@ -131,7 +126,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
+ 	case S_IFBLK:
+ 	case S_IFCHR:
+ 		inode->i_op  = &ubifs_file_inode_operations;
+-		encrypted = false;
+ 		break;
+ 	default:
+ 		BUG();
+@@ -171,9 +165,9 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
+ 	spin_unlock(&c->cnt_lock);
  
- 	set_inode_flag(inode, FI_NEW_INODE);
- 
--	if (f2fs_may_encrypt(dir, inode))
-+	if (encrypt)
- 		f2fs_set_encrypted_inode(inode);
- 
- 	if (f2fs_sb_has_extra_attr(sbi)) {
+ 	if (encrypted) {
+-		err = fscrypt_inherit_context(dir, inode, &encrypted, true);
++		err = fscrypt_set_context(inode, NULL);
+ 		if (err) {
+-			ubifs_err(c, "fscrypt_inherit_context failed: %i", err);
++			ubifs_err(c, "fscrypt_set_context failed: %i", err);
+ 			make_bad_inode(inode);
+ 			iput(inode);
+ 			return ERR_PTR(err);
 -- 
 2.28.0
 
