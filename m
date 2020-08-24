@@ -2,72 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D71C8250B1C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 23:49:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E338250B50
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Aug 2020 00:03:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kAKKq-0006M1-Cl; Mon, 24 Aug 2020 21:49:00 +0000
+	id 1kAKZB-0002bR-KN; Mon, 24 Aug 2020 22:03:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1kAKKp-0006Lu-7U
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 21:48:59 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kAKZ9-0002bK-U6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 22:03:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DBR5Fp4FeMLTXbHKHs/oT7OXQ2LJWa8ts52qpCNQqq0=; b=ityMFduBxybWIdFBMkSePvcdus
- BO4Sub0QVZwt80V+B8x8NbunbqlnhztdSwZPLEgj4YG2CAAT0H9m/FnYPrBKU2c5J708b/u9bDviq
- InZpTVDcCcSW24TzuD9R6IJyeYPS+K3Xw7XVA2szs7arGYj/7mHzWbwDB1YX2Uinhi2Q=;
+ bh=/NNGPGPNkk3YgZO92RraK/sKX8QBPhdwH8xNnpyvgho=; b=AgiayHP/vvAxu9nXZidj/pyR1+
+ IFN9zXU0iNGpVdl3FelLFCqlVrNlgO7I70khBmOat5egQIL6jatfzC8kG7le7WUpzO0qWznPWRXC8
+ vFMp5e0weMCqtOLHwBPv9QQIsIvEvCtiW+e99fkY/cuXC1OZRKQVnNbBHu/EeDvIQNZA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DBR5Fp4FeMLTXbHKHs/oT7OXQ2LJWa8ts52qpCNQqq0=; b=b
- VXralG2EdKqyRAjcai8GQ0l1/HbW61KaHyzUYcgI3M17gMg62BWcNOdFzbvG8VIQFeMLLhvbz6Zea
- +rjEFyBfOXe4+BwCZsbdyzRCjakVQNr+1cO+KYGVNTCQrRbPazSdIaJDKUbeYsfMCMRmE19BkHJT+
- 9RdqZqobbTHtMSVY=;
-Received: from casper.infradead.org ([90.155.50.34])
+ List-Owner:List-Archive; bh=/NNGPGPNkk3YgZO92RraK/sKX8QBPhdwH8xNnpyvgho=; b=i
+ iutuyGbNYt8dNpPaVx4+gO6YCvmu05iJHyZu/DvEC3NziiJlg7b3ASX9en3KNR5JKSYLpl9FMcNp/
+ cpxfCJ35euOQKc8MjSNh2o9sscyEktNY7TWXMHuadTVi8ZvqwboBY09IzcTVI/Ydn+d1yTElfIoNu
+ 3mE2fLd4fgDhKp9A=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kAKKn-005bxF-1e
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 21:48:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=DBR5Fp4FeMLTXbHKHs/oT7OXQ2LJWa8ts52qpCNQqq0=; b=WeGEh6d1ORkwoAM1hC8njVK2wf
- mH1I2kwXEzglmzZ+gMpy5JZFSRsVVYeT1ii0no5STYlh/bD3fwK0QzP9ect+nLrb9OK6nXAp5PUi5
- R6HxJwiligukjP3KHds+Ccuec3uV7boGPG3wY2lNmKlcXaCvh3pe1VHgTHoKLXpAvtMFZR3MJ0NQD
- 75RavrHPVaeua9hSfLU2H2j83Q/suoMB5DkM83fTaeRfkPXJfDM72gH8NjVbK9oiZU97oyKlTSCE1
- svWoxHi64X3crotSmrHAQSXI8hn/4Fik5Up8R0Ql+tTnU8UX7BpiVxPx+Ib68kE5ceWQdya7DJKf8
- iF8bdU+A==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1kAKKY-0004T5-Dl; Mon, 24 Aug 2020 21:48:42 +0000
-From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Mon, 24 Aug 2020 22:48:41 +0100
-Message-Id: <20200824214841.17132-1-willy@infradead.org>
-X-Mailer: git-send-email 2.21.3
+ id 1kAKZ5-005cNK-Kn
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 22:03:47 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2AF3E20706;
+ Mon, 24 Aug 2020 22:03:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1598306618;
+ bh=Wyr5CqDqSr09PGAHE7MnPQ/1D0TmISzN4bf1TCYLcZc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=jtSjrVIL031yaSIOi45auNzjosKWg6PaB8/BQOOaIRx6dR/r7xheEjc6ezm44GWJP
+ UjfYh1C8a/iFmHQZjhYKVW0COS+NfleZFX6MGi4PG8ap+yKD9aRV2FNfDNxC7oKBc9
+ Z2vPXPhvGF9/RbEtWa2PIbaQwugEnfX3fZdK9ImU=
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 24 Aug 2020 15:03:20 -0700
+Message-Id: <20200824220320.39331-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.28.0.297.g1956fa8f8d-goog
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kAKKn-005bxF-1e
-Subject: [f2fs-dev] [PATCH] f2fs: Simplify SEEK_DATA implementation
+ -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1kAKZ5-005cNK-Kn
+Subject: [f2fs-dev] [PATCH] f2fs-tools: release 1.14.0
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,94 +79,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Instead of finding the first dirty page and then seeing if it matches
-the index of a block that is NEW_ADDR, delay the lookup of the dirty
-bit until we've actually found a block that's NEW_ADDR.
+This release includes mainly, but not limited to:
+ - add IO cache to speed up fsck.f2fs run
+ - support casefolding
+ - support data compression
+ - support zns zone-capacity
+ - enhance fsck.f2fs for zoned device
+ - enhance f2fs_io tool
 
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/file.c | 35 ++++++++---------------------------
- 1 file changed, 8 insertions(+), 27 deletions(-)
+ VERSION      | 4 ++--
+ configure.ac | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 8a422400e824..14f478871698 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -376,32 +376,15 @@ int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
- 	return f2fs_do_sync_file(file, start, end, datasync, false);
- }
+diff --git a/VERSION b/VERSION
+index 3ccde23..9043463 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1,2 +1,2 @@
+-1.13.0
+-2019-09-24
++1.14.0
++2020-08-24
+diff --git a/configure.ac b/configure.ac
+index e9acd1a..1e5619d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -218,12 +218,12 @@ AC_CHECK_MEMBER([struct blk_zone.capacity],
+ 		[], [[#include <linux/blkzoned.h>]])
  
--static pgoff_t __get_first_dirty_index(struct address_space *mapping,
--						pgoff_t pgofs, int whence)
--{
--	struct page *page;
--	int nr_pages;
--
--	if (whence != SEEK_DATA)
--		return 0;
--
--	/* find first dirty page index */
--	nr_pages = find_get_pages_tag(mapping, &pgofs, PAGECACHE_TAG_DIRTY,
--				      1, &page);
--	if (!nr_pages)
--		return ULONG_MAX;
--	pgofs = page->index;
--	put_page(page);
--	return pgofs;
--}
--
--static bool __found_offset(struct f2fs_sb_info *sbi, block_t blkaddr,
--				pgoff_t dirty, pgoff_t pgofs, int whence)
-+static bool __found_offset(struct address_space *mapping, block_t blkaddr,
-+				pgoff_t index, int whence)
- {
- 	switch (whence) {
- 	case SEEK_DATA:
--		if ((blkaddr == NEW_ADDR && dirty == pgofs) ||
--			__is_valid_data_blkaddr(blkaddr))
-+		if (__is_valid_data_blkaddr(blkaddr))
-+			return true;
-+		if (blkaddr == NEW_ADDR &&
-+		    xa_get_mark(&mapping->i_pages, index, PAGECACHE_TAG_DIRTY))
- 			return true;
- 		break;
- 	case SEEK_HOLE:
-@@ -417,7 +400,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
- 	struct inode *inode = file->f_mapping->host;
- 	loff_t maxbytes = inode->i_sb->s_maxbytes;
- 	struct dnode_of_data dn;
--	pgoff_t pgofs, end_offset, dirty;
-+	pgoff_t pgofs, end_offset;
- 	loff_t data_ofs = offset;
- 	loff_t isize;
- 	int err = 0;
-@@ -437,8 +420,6 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
+ # export library version info for mkfs/libf2fs_format_la
+-AC_SUBST(FMT_CURRENT, 6)
++AC_SUBST(FMT_CURRENT, 7)
+ AC_SUBST(FMT_REVISION, 0)
+ AC_SUBST(FMT_AGE, 0)
  
- 	pgofs = (pgoff_t)(offset >> PAGE_SHIFT);
+ # export library version info for lib/libf2fs_la
+-AC_SUBST(LIBF2FS_CURRENT, 7)
++AC_SUBST(LIBF2FS_CURRENT, 8)
+ AC_SUBST(LIBF2FS_REVISION, 0)
+ AC_SUBST(LIBF2FS_AGE, 0)
  
--	dirty = __get_first_dirty_index(inode->i_mapping, pgofs, whence);
--
- 	for (; data_ofs < isize; data_ofs = (loff_t)pgofs << PAGE_SHIFT) {
- 		set_new_dnode(&dn, inode, NULL, NULL, 0);
- 		err = f2fs_get_dnode_of_data(&dn, pgofs, LOOKUP_NODE);
-@@ -471,7 +452,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
- 				goto fail;
- 			}
- 
--			if (__found_offset(F2FS_I_SB(inode), blkaddr, dirty,
-+			if (__found_offset(file->f_mapping, blkaddr,
- 							pgofs, whence)) {
- 				f2fs_put_dnode(&dn);
- 				goto found;
 -- 
-2.28.0
+2.28.0.297.g1956fa8f8d-goog
 
 
 
