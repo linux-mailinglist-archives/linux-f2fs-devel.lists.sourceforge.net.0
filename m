@@ -2,60 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AE1A250A28
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 22:40:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83F58250A4C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 22:49:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kAJGF-0007Ka-Bw; Mon, 24 Aug 2020 20:40:11 +0000
+	id 1kAJPD-0003hI-Ps; Mon, 24 Aug 2020 20:49:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kAJGE-0007KT-RE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 20:40:10 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kAJPC-0003hA-Ji
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 20:49:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TMey2BaqufQNu77Nui9BTxAw3aejwxrjr/yC3pKsgq4=; b=gXLS8Hnhq76PgXZuQfV9D52nxl
- 66ssia882sCbyYB1Tqxs5S/Lkb3pQgHVN4bYMayd22Ap96Dyq/ZF61rvUVo2MFzC7/YngkzCpuKEc
- VTHi7PBoYuaftlRGQh7CzV/e4zbq8a5faiqnWYeqoHiwOfjFDj8ogRij6VNYk4awi9lc=;
+ bh=EIkdVfYAXZ0nF63I2+0jyZKFVY03yR4ihWoXcoRKcn8=; b=VXcOGZ15y9ClIiWmZKOBGRtOwO
+ RKyZ2937QpQ+PiUV9mPMIACnltcpMmkuIdXkhpXnNJRONjdedhj6qnTvRK0Tt0lZAhwssJc65V3v6
+ CIlf40IKjBU15yalrkJl3e5H3A4sRWh+tsILspFXoqis6N0EEQ4d2jM6u928UCpTBiRM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=TMey2BaqufQNu77Nui9BTxAw3aejwxrjr/yC3pKsgq4=; b=F
- FK9lo8UdGZZp3NLuCTy5TuYPjNkVVrc59dIgnkxDpUuWOD1dSFC7UMiDvYckBlAzzAAEu3kcMGWL/
- /NYjyhdeUiUWjs+bu2JmWmgNgS12/JUJEekWGap6FOMLYYpS6tE3UOOzY8bINUo2duHcDhCdBhhcE
- BMAt6bby+HfOQtSM=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=EIkdVfYAXZ0nF63I2+0jyZKFVY03yR4ihWoXcoRKcn8=; b=lv6lkzsm2ndhvveyQFc4RzFXOj
+ SOhMoKYH0bzlJ00GA09yPr+JmsXpkJd5CupvvRqCwA6XEpyOzT6Y1bG/knS9C/RxFcbJ0J7awp7mk
+ I21cMEx5XnXAW74au/cwrQKDt3wUpGg6nHTg2u21RYC5MU65QPbg1UJFtcoLAaRpklp0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kAJG9-00HNL1-R7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 20:40:10 +0000
-Received: from ebiggers-linuxstation.mtv.corp.google.com (unknown
- [104.132.1.76])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 1kAJPA-005a6r-He
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 20:49:26 +0000
+Received: from gmail.com (unknown [104.132.1.76])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 78602204EA;
- Mon, 24 Aug 2020 20:39:55 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 195B02067C;
+ Mon, 24 Aug 2020 20:49:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598301595;
- bh=zHQu1QiHr7iVn0rq76g38CunRcQjlkL2Kf014Bwuc7s=;
- h=From:To:Cc:Subject:Date:From;
- b=cPQ7lTxBHONc8YbjaD0+ygL3GyeWYgL4xN3Pp5d46W7ddtHaJwQBbxIxXNMlq18wo
- 7Y5dr0f+5vc/rf/nITn+ry5bzZdlzZfxYI7H/QTZBT99XOu7vC8nGOZ3GNi70aE98k
- YkExiMvQUVnEAkYTJd96mcugbme25lKWhnsOkxCM=
+ s=default; t=1598302154;
+ bh=PDF5FB3f/iX6KmB9XrlWFrnk42OQsjSRBtJ1FLkbKmk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=jUh/EXYBZSsJDdmVjLNI9Ide1YTidVvRvP57Wf4SyWXTEaa/Oq3Sun1fEYKw2zPbo
+ aKCpyYiHp520+hjmEuKybQsRGqMfFfEWdJnjuX5r1U5Kobvoccm1Wqv2sA2JRBKfsY
+ /d8CDZHgd3G1/Lq1Dw0aWx5EI4uNe9CYC6tcvDpQ=
+Date: Mon, 24 Aug 2020 13:49:12 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Mon, 24 Aug 2020 13:38:41 -0700
-Message-Id: <20200824203841.1707847-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.28.0.297.g1956fa8f8d-goog
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20200824204912.GD1650861@gmail.com>
+References: <20200824061712.195654-1-ebiggers@kernel.org>
+ <20200824061712.195654-2-ebiggers@kernel.org>
+ <0cf5638796e7cddacc38dcd1e967368b99f0069a.camel@kernel.org>
+ <20200824182114.GB1650861@gmail.com>
+ <06a7d9562b84354eb72bd67c9d4b7262dac53457.camel@kernel.org>
+ <20200824190221.GC1650861@gmail.com>
+ <fe81c713ed827b91004b0e2838800684da33e60c.camel@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <fe81c713ed827b91004b0e2838800684da33e60c.camel@kernel.org>
 X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -67,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kAJG9-00HNL1-R7
-Subject: [f2fs-dev] [PATCH] fscrypt: restrict IV_INO_LBLK_32 to ino_bits <=
- 32
+X-Headers-End: 1kAJPA-005a6r-He
+Subject: Re: [f2fs-dev] [RFC PATCH 1/8] fscrypt: add
+ fscrypt_prepare_new_inode() and fscrypt_set_context()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,68 +88,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Paul Crowley <paulcrowley@google.com>, linux-ext4@vger.kernel.org,
- Jeff Layton <jlayton@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-mtd@lists.infradead.org, ceph-devel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Mon, Aug 24, 2020 at 03:42:59PM -0400, Jeff Layton wrote:
+> On Mon, 2020-08-24 at 12:02 -0700, Eric Biggers wrote:
+> > On Mon, Aug 24, 2020 at 02:47:07PM -0400, Jeff Layton wrote:
+> > > On Mon, 2020-08-24 at 11:21 -0700, Eric Biggers wrote:
+> > > > On Mon, Aug 24, 2020 at 12:48:48PM -0400, Jeff Layton wrote:
+> > > > > > +void fscrypt_hash_inode_number(struct fscrypt_info *ci,
+> > > > > > +			       const struct fscrypt_master_key *mk)
+> > > > > > +{
+> > > > > > +	WARN_ON(ci->ci_inode->i_ino == 0);
+> > > > > > +	WARN_ON(!mk->mk_ino_hash_key_initialized);
+> > > > > > +
+> > > > > > +	ci->ci_hashed_ino = (u32)siphash_1u64(ci->ci_inode->i_ino,
+> > > > > > +					      &mk->mk_ino_hash_key);
+> > > > > 
+> > > > > i_ino is an unsigned long. Will this produce a consistent results on
+> > > > > arches with 32 and 64 bit long values? I think it'd be nice to ensure
+> > > > > that we can access an encrypted directory created on a 32-bit host from
+> > > > > (e.g.) a 64-bit host.
+> > > > 
+> > > > The result is the same regardless of word size and endianness.
+> > > > siphash_1u64(v, k) is equivalent to:
+> > > > 
+> > > > 	__le64 x = cpu_to_le64(v);
+> > > > 	siphash(&x, 8, k);
+> > > > 
+> > > 
+> > > In the case where you have an (on-storage) inode number that is larger
+> > > than 2^32, x will almost certainly be different on a 32 vs. 64-bit
+> > > wordsize.
+> > > 
+> > > On the box with the 32-bit wordsize, you'll end up promoting i_ino to a
+> > > 64-bit word and the upper 32 bits will be zeroed out. So it seems like
+> > > this means that if you're using inline hardware you're going to end up
+> > > with a result that won't work correctly across different wordsizes.
+> > 
+> > That's only possible if the VFS is truncating the inode number, which would also
+> > break userspace in lots of ways like making applications think that files are
+> > hard-linked together when they aren't.  Also, IV_INO_LBLK_64 would break.
+> > 
+> > The correct fix for that would be to make inode::i_ino 64-bit.
+> > 
+> 
+> ...or just ask the filesystem for the 64-bit inode number via ->getattr
+> or a new op. You could also just truncate it down to 32 bits or xor the
+> top and bottom bits together first, etc...
+> 
+> > Note that ext4 and f2fs (currently the only filesystems that support the
+> > IV_INO_LBLK_* flags) only support 32-bit inode numbers.
+> > 
+> 
+> Ahh, ok. That explains why it's not been an issue so far. Still, if
+> you're reworking this code anyway, you might want to consider avoiding
+> i_ino here.
 
-When an encryption policy has the IV_INO_LBLK_32 flag set, the IV
-generation method involves hashing the inode number.  This is different
-from fscrypt's other IV generation methods, where the inode number is
-either not used at all or is included directly in the IVs.
+Let's just enforce ino_bits <= 32 for IV_INO_LBLK_32 for now,
+like is done for IV_INO_LBLK_64:
+https://lkml.kernel.org/r/20200824203841.1707847-1-ebiggers@kernel.org
 
-Therefore, in principle IV_INO_LBLK_32 can work with any length inode
-number.  However, currently fscrypt gets the inode number from
-inode::i_ino, which is 'unsigned long'.  So currently the implementation
-limit is actually 32 bits (like IV_INO_LBLK_64), since longer inode
-numbers will have been truncated by the VFS on 32-bit platforms.
+There's no need to add extra complexity for something that no one wants yet.
 
-Fix fscrypt_supported_v2_policy() to enforce the correct limit.
+(And as mentioned, this won't prevent ceph or other filesystems with 64-bit
+inode numbers from adding support for fscrypt, as IV_INO_LBLK_32 support is
+optional and has a pretty specific use case.)
 
-This doesn't actually matter currently, since only ext4 and f2fs support
-IV_INO_LBLK_32, and they both only support 32-bit inode numbers.  But we
-might as well fix it in case it matters in the future.
-
-Ideally inode::i_ino would instead be made 64-bit, but for now it's not
-needed.  (Note, this limit does *not* prevent filesystems with 64-bit
-inode numbers from adding fscrypt support, since IV_INO_LBLK_* support
-is optional and is useful only on certain hardware.)
-
-Fixes: e3b1078bedd3 ("fscrypt: add support for IV_INO_LBLK_32 policies")
-Reported-by: Jeff Layton <jlayton@kernel.org>
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/crypto/policy.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index 2d73fd39ad96..b92f34523178 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -192,10 +192,15 @@ static bool fscrypt_supported_v2_policy(const struct fscrypt_policy_v2 *policy,
- 					  32, 32))
- 		return false;
- 
-+	/*
-+	 * IV_INO_LBLK_32 hashes the inode number, so in principle it can
-+	 * support any ino_bits.  However, currently the inode number is gotten
-+	 * from inode::i_ino which is 'unsigned long'.  So for now the
-+	 * implementation limit is 32 bits.
-+	 */
- 	if ((policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32) &&
--	    /* This uses hashed inode numbers, so ino_bits doesn't matter. */
- 	    !supported_iv_ino_lblk_policy(policy, inode, "IV_INO_LBLK_32",
--					  INT_MAX, 32))
-+					  32, 32))
- 		return false;
- 
- 	if (memchr_inv(policy->__reserved, 0, sizeof(policy->__reserved))) {
--- 
-2.28.0.297.g1956fa8f8d-goog
-
+- Eric
 
 
 _______________________________________________
