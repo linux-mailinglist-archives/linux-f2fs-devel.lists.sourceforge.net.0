@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2ABB24F25F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 08:18:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DE3324F263
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Aug 2020 08:18:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kA5oN-0004cW-S2; Mon, 24 Aug 2020 06:18:31 +0000
+	id 1kA5oS-0002Ce-1p; Mon, 24 Aug 2020 06:18:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kA5oL-0004cI-IR
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kA5oP-0002Bv-9Z
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0Ma7bCGSoZX+OSiFDtANEBca4CPVGMAYtVyJcs0UB3s=; b=Y5NWpbFjBTmNXeLgptwc+U6pcz
- CWH1MfFYnDXKiDyKUq/7vVqO+hmYHOQmPqHYbKRVDIt3mfmtt5uuKnaYrJQmp3LnDiOLJ8uJM+/jO
- E50f7PRjZty9iBt3+KMMgWy+1bWlMYoyKLXHHzrVJSLrMVo89PkwO88HSnxpUVzNKEw0=;
+ bh=MP8qlXNuL1EiYOJAiD5rlAIIVRNLl5s58ky8k1GHPlY=; b=YqKtMUb76rC/VEe53McnTpBtnw
+ r/3cudeFAPje+kjRLRKxi157Qfn/4HKD9ln0VY3m8WNU9wbJ6wIebIOt7HA2w9lESz4piAMxt9n0L
+ oMLhmcIlmNMXcK3WrNg1fZQ8eMG6QEW81uj8yfQMM/ctiLmlkPdtzpwHrH1FhQKrgxlo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0Ma7bCGSoZX+OSiFDtANEBca4CPVGMAYtVyJcs0UB3s=; b=LGxtt8yJT9Lht+ZKwXwJwHC1bn
- QZS3gR/qfNgANx8OTYt/oi2HiIp0aMx4QA5ZcA+JHTz+n5dNMZ6YuhQRoXfQ3e8vqprx3fM9woHXU
- qr6Cb24eQGUNqt+/nNSivOW9c2buciro359BIvYMjLTjNwp+XO4okwV3aPaSdijMQLlM=;
+ bh=MP8qlXNuL1EiYOJAiD5rlAIIVRNLl5s58ky8k1GHPlY=; b=P6ArYrolP3p8fEpj4Ls822GhH5
+ rN7Z1VlAJZd389/OAQj7tBAdOv989kozNSuJkopPFg2DqejtqP3lkgJLzEu4aDk5I5RukKKEyJsqS
+ +wsmqHlMFMf2tP07AUwhaDemFpHK5Am/0GnZbGah4G/Y8dAqLaLb9DOQZhPgYfUi0iJw=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kA5oH-00GmMQ-QL
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:29 +0000
+ id 1kA5oN-002Evf-Jd
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Aug 2020 06:18:33 +0000
 Received: from sol.hsd1.ca.comcast.net (c-107-3-166-239.hsd1.ca.comcast.net
  [107.3.166.239])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 90CA6207D3;
+ by mail.kernel.org (Postfix) with ESMTPSA id E15422087D;
  Mon, 24 Aug 2020 06:18:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598249898;
- bh=QdONhA25GuQQJmapNTQIWWWGH7achN6FFOfpot5lMGg=;
+ s=default; t=1598249899;
+ bh=IH6sTOwkbzPMf4x5Li5gjFgkfm2HNIgk1xMl8TNxDTc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=e2050mad+4BMjzCtGT254bX32Y57ZVPtbWQMoQ32OT3m9nxLEs1AyyyqNgsRbiXRZ
- QT/l38bY56Ows6Dz77k+6jZZieKpGieGImYQ2x0upL1GsY64XNmbcCCuQTqD6nxcy5
- EOd44g73ySC7xMwhc5Xioy2YrWtVXRk3pKMU+uk4=
+ b=JDKODAQpPTq5huUKShVPhJTG2Df1AHur6QPxO7Njy/ZJwbOEtmt/3AwrwdxS7/TVN
+ ZMC92UTKIOeYa+JwpYJPxIO128wY9hOL8oTYduzs1O3YrW9UDLUMuf7TCoC739bDtJ
+ CfMQrNc+4ZGVgY9GdtXke3sxODPPYPwCrcKZmOoM=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 23 Aug 2020 23:17:06 -0700
-Message-Id: <20200824061712.195654-3-ebiggers@kernel.org>
+Date: Sun, 23 Aug 2020 23:17:07 -0700
+Message-Id: <20200824061712.195654-4-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824061712.195654-1-ebiggers@kernel.org>
 References: <20200824061712.195654-1-ebiggers@kernel.org>
@@ -69,8 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kA5oH-00GmMQ-QL
-Subject: [f2fs-dev] [RFC PATCH 2/8] ext4: factor out
+X-Headers-End: 1kA5oN-002Evf-Jd
+Subject: [f2fs-dev] [RFC PATCH 3/8] ext4: remove some #ifdefs in
  ext4_xattr_credits_for_new_inode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -92,128 +92,45 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-To compute a new inode's xattr credits, we need to know whether the
-inode will be encrypted or not.  When we switch to use the new helper
-function fscrypt_prepare_new_inode(), we won't find out whether the
-inode will be encrypted until slightly later than is currently the case,
-which requires moving the code block that computes the xattr credits.
-
-To make this easier and reduce the length of __ext4_new_inode(), move
-this code block into a new function ext4_xattr_credits_for_new_inode().
+We don't need #ifdefs for CONFIG_SECURITY and CONFIG_INTEGRITY;
+IS_ENABLED() is sufficient.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/ialloc.c | 90 +++++++++++++++++++++++++++---------------------
- 1 file changed, 51 insertions(+), 39 deletions(-)
+ fs/ext4/ialloc.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/fs/ext4/ialloc.c b/fs/ext4/ialloc.c
-index df25d38d65393..0cc576005a923 100644
+index 0cc576005a923..3e9c50eb857be 100644
 --- a/fs/ext4/ialloc.c
 +++ b/fs/ext4/ialloc.c
-@@ -742,6 +742,53 @@ static int find_inode_bit(struct super_block *sb, ext4_group_t group,
- 	return 1;
- }
- 
-+static int ext4_xattr_credits_for_new_inode(struct inode *dir, mode_t mode,
-+					    bool encrypt)
-+{
-+	struct super_block *sb = dir->i_sb;
-+	int nblocks = 0;
-+#ifdef CONFIG_EXT4_FS_POSIX_ACL
-+	struct posix_acl *p = get_acl(dir, ACL_TYPE_DEFAULT);
-+
-+	if (IS_ERR(p))
-+		return PTR_ERR(p);
-+	if (p) {
-+		int acl_size = p->a_count * sizeof(ext4_acl_entry);
-+
-+		nblocks += (S_ISDIR(mode) ? 2 : 1) *
-+			__ext4_xattr_set_credits(sb, NULL /* inode */,
-+						 NULL /* block_bh */, acl_size,
-+						 true /* is_create */);
-+		posix_acl_release(p);
-+	}
-+#endif
-+
-+#ifdef CONFIG_SECURITY
-+	{
-+		int num_security_xattrs = 1;
-+
-+#ifdef CONFIG_INTEGRITY
-+		num_security_xattrs++;
-+#endif
-+		/*
-+		 * We assume that security xattrs are never more than 1k.
-+		 * In practice they are under 128 bytes.
-+		 */
-+		nblocks += num_security_xattrs *
-+			__ext4_xattr_set_credits(sb, NULL /* inode */,
-+						 NULL /* block_bh */, 1024,
-+						 true /* is_create */);
-+	}
-+#endif
-+	if (encrypt)
-+		nblocks += __ext4_xattr_set_credits(sb,
-+						    NULL /* inode */,
-+						    NULL /* block_bh */,
-+						    FSCRYPT_SET_CONTEXT_MAX_SIZE,
-+						    true /* is_create */);
-+	return nblocks;
-+}
-+
- /*
-  * There are two policies for allocating an inode.  If the new inode is
-  * a directory, then a forward search is made for a block group with both
-@@ -796,45 +843,10 @@ struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
+@@ -763,13 +763,12 @@ static int ext4_xattr_credits_for_new_inode(struct inode *dir, mode_t mode,
  	}
+ #endif
  
- 	if (!handle && sbi->s_journal && !(i_flags & EXT4_EA_INODE_FL)) {
--#ifdef CONFIG_EXT4_FS_POSIX_ACL
--		struct posix_acl *p = get_acl(dir, ACL_TYPE_DEFAULT);
--
--		if (IS_ERR(p))
--			return ERR_CAST(p);
--		if (p) {
--			int acl_size = p->a_count * sizeof(ext4_acl_entry);
--
--			nblocks += (S_ISDIR(mode) ? 2 : 1) *
--				__ext4_xattr_set_credits(sb, NULL /* inode */,
--					NULL /* block_bh */, acl_size,
--					true /* is_create */);
--			posix_acl_release(p);
--		}
--#endif
--
 -#ifdef CONFIG_SECURITY
--		{
--			int num_security_xattrs = 1;
--
--#ifdef CONFIG_INTEGRITY
--			num_security_xattrs++;
--#endif
--			/*
--			 * We assume that security xattrs are never
--			 * more than 1k.  In practice they are under
--			 * 128 bytes.
--			 */
--			nblocks += num_security_xattrs *
--				__ext4_xattr_set_credits(sb, NULL /* inode */,
--					NULL /* block_bh */, 1024,
--					true /* is_create */);
--		}
--#endif
--		if (encrypt)
--			nblocks += __ext4_xattr_set_credits(sb,
--					NULL /* inode */, NULL /* block_bh */,
--					FSCRYPT_SET_CONTEXT_MAX_SIZE,
--					true /* is_create */);
-+		ret2 = ext4_xattr_credits_for_new_inode(dir, mode, encrypt);
-+		if (ret2 < 0)
-+			return ERR_PTR(ret2);
-+		nblocks += ret2;
- 	}
+-	{
++	if (IS_ENABLED(CONFIG_SECURITY)) {
+ 		int num_security_xattrs = 1;
  
- 	ngroups = ext4_get_groups_count(sb);
+-#ifdef CONFIG_INTEGRITY
+-		num_security_xattrs++;
+-#endif
++		if (IS_ENABLED(CONFIG_INTEGRITY))
++			num_security_xattrs++;
++
+ 		/*
+ 		 * We assume that security xattrs are never more than 1k.
+ 		 * In practice they are under 128 bytes.
+@@ -779,7 +778,7 @@ static int ext4_xattr_credits_for_new_inode(struct inode *dir, mode_t mode,
+ 						 NULL /* block_bh */, 1024,
+ 						 true /* is_create */);
+ 	}
+-#endif
++
+ 	if (encrypt)
+ 		nblocks += __ext4_xattr_set_credits(sb,
+ 						    NULL /* inode */,
 -- 
 2.28.0
 
