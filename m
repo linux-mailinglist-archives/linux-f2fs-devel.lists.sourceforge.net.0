@@ -2,78 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B448256ACA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 30 Aug 2020 01:44:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52617256AF8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 30 Aug 2020 02:56:15 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kCAWV-0007RK-8i; Sat, 29 Aug 2020 23:44:39 +0000
+	id 1kCBdj-0001mp-1v; Sun, 30 Aug 2020 00:56:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kCAWU-0007Qx-3H
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 29 Aug 2020 23:44:38 +0000
+ (envelope-from <dan@dlrobertson.com>) id 1kCBdh-0001mc-Un
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 30 Aug 2020 00:56:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Date:Subject:Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=83Iz99SHGFnxWdZNnURe7yKQIiJNbe/r+PVI6vGEjo4=; b=FksIOHHDmEDNNiIYUatfqhEfYw
- y2YQDboxg8TBfgdKogir499qZNIkoDm9V8tZ1JF6N9oB3/rPGX6SRCte0uLQjlHTBLfrd5pAeIAF+
- jkp/5/r3ZDLJICvM2gMPQ3LduUUfoebwIyY9TMB5EZeyw0tLjweJmi87EQWhMXP8H3zs=;
+ bh=uUqLR9oT2n12Yp+03B9g3oPlkoxl7gyLGZ/i/fFmgcc=; b=Up1wpDpBE2fbJn3efZjAW8FrpJ
+ wnY43OYLIw7I++t4UGw6dT2WUzGGz8EytJf8ozTl+NELOOKKRx2ae1EbYyx6wYCtA5u4+1+CuCgMD
+ FDatFkm5fXq1v0hYMoU93caDp/ohYA4rIIdWzqJlH/kSM2YUEhx/UmdqWihdl3JUVO70=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Date:Subject:
+ Message-ID:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=83Iz99SHGFnxWdZNnURe7yKQIiJNbe/r+PVI6vGEjo4=; b=a0JrWgg4TC92VygmWH8GzzxR0F
- c1xtzbJ4vQrAUq9YiGrJfYM5JhXhAA41CxFhUfLbfx6INwLLQ+PgAWt8+Xo8yz+nlB3ab14lwABAQ
- 3slyOAsNREvMzDvTBz/ngFy3JUyuuWDb6HLzWb0PwN1QpQ0lytRLWm/I1g85TRTFuHn0=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=uUqLR9oT2n12Yp+03B9g3oPlkoxl7gyLGZ/i/fFmgcc=; b=MWu/r11b7F/HYT+SAFoo7LzO/a
+ 0orbyAKVutRdWI+WwAzDZXYkOWjXIcaruZwv+1UGLgqBQpw1msZNI91f4LZ8sPaf26hyzjX2OThvk
+ D5oBD7OKSUjtQMe+DZkiq2O/SZm3uHtT1Iwnq4UF6UrsXnQ3B01Pe9+O9BrlGsRbRa8Y=;
+Received: from sender4-op-o14.zoho.com ([136.143.188.14])
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kCAWO-009Yzp-27
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 29 Aug 2020 23:44:38 +0000
-Received: from [192.168.0.108] (unknown [49.65.245.85])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A889F20776;
- Sat, 29 Aug 2020 23:44:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598744661;
- bh=T86btTIeJaz0WbqNY52QJxthzlK/IGB8x+5hfU2xFp8=;
- h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
- b=zFklHNGvPl0pOPdTnZD3JhNvOL4h4+J49XNOxGF2GJBikhRfXdEW2W4OpoA4TR/xG
- NB3vt3NUBVzHIWKFtPd8F3Ot1VclaeQZT7ofqsEz8ZuppSFOTDZ5u/iGBD6RLTpafH
- xi9N4F8Oddy+Meu4Al3H6+Ngz/h1R1rlG9nOVZHo=
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20200828034953.354267-1-daeho43@gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <44f8d9f3-9438-fdfe-bbc3-f5347a9aaa29@kernel.org>
-Date: Sun, 30 Aug 2020 07:44:09 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.8.0
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1kCBde-009b63-Mn
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 30 Aug 2020 00:56:09 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1598748954; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=S2QX7yzQPJCZibqlCyq6dF1UxdXMVkbj+EV6Z6tUeUC6syE5Ie7TZPxkY3CAjMvib9b20pANME8yV7yevs/nu9RLDy2KcQoAFpz09w9F4CGB9/nmCOUCjOwhAPlvl7PLCJ+ljN3CNliKPi7lUMQSmUz1Ej/QBQ5HmGQ6I9Ywq78=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1598748954;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
+ bh=uUqLR9oT2n12Yp+03B9g3oPlkoxl7gyLGZ/i/fFmgcc=; 
+ b=YcRSX6shQ0OOC4NzWKgBxaeWdsDdUMt7WXz6k3AGwfqztAJWBFx3s86YqTzI52AEAyZAF9Mq9OBFjBn9lbGZ4lEyZHWTGXtNFxsZpsIUSKxYRjaWvbM2Sqhs7b6e0T6zI4BD6CkphCds0WUKWAYaUdSJ4EfzQ5HEuDdszsZ7rFs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=dan@dlrobertson.com;
+ dmarc=pass header.from=<dan@dlrobertson.com> header.from=<dan@dlrobertson.com>
+Received: from localhost (pool-108-28-30-30.washdc.fios.verizon.net
+ [108.28.30.30]) by mx.zohomail.com
+ with SMTPS id 159874895136455.57581622016562;
+ Sat, 29 Aug 2020 17:55:51 -0700 (PDT)
+From: Dan Robertson <dan@dlrobertson.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Message-ID: <20200830003520.6542-1-dan@dlrobertson.com>
+Date: Sun, 30 Aug 2020 00:35:19 +0000
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <20200828034953.354267-1-daeho43@gmail.com>
-X-Spam-Score: -1.9 (-)
+X-ZohoMailClient: External
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [136.143.188.14 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [136.143.188.14 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.8 NICE_REPLY_A           Looks like a legit reply (A)
- -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kCAWO-009Yzp-27
-Subject: Re: [f2fs-dev] [PATCH] f2fs: make fibmap consistent with fiemap for
- compression chunk
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kCBde-009b63-Mn
+Subject: [f2fs-dev] [PATCH v2 0/1] f2fs: check output position in move range
+ ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,94 +84,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: Dan Robertson <dan@dlrobertson.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020-8-28 11:49, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
->
-> Currently fibmap returns zero address for compression chunk. But it
-> is not consistent with the output of fiemap, since fiemap returns
-> real pysical block address related to the compression chunk. Therefore
-> I suggest fibmap returns the same output with fiemap.
+Changes in v2:
+ - Moved check of output position before we lock the source or
+   destination inode.
 
-We can return real physical block address in fiemap, because we have set
-FIEMAP_EXTENT_ENCODED flag in extent.fe_flags, then user can be noticed that he 
-can not just read/write that block address for access/update in-there data.
+If a negative value is provided as the output position to the
+F2FS_IOC_MOVE_RANGE ioctl, f2fs_get_dnode_of_data may hit a memory
+bug like the following:
 
-Quoted from Documentation/filesystems/fiemap.rst
-"
-FIEMAP_EXTENT_ENCODED
-   This extent does not consist of plain filesystem blocks but is
-   encoded (e.g. encrypted or compressed).  Reading the data in this
-   extent via I/O to the block device will have undefined results.
-"
+BUG: unable to handle page fault for address: ffffed10b30435a4
+[...]
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009) ...
+[...]
+Call Trace:
+ f2fs_get_dnode_of_data+0xa68/0xde0
+[...]
+ f2fs_reserve_block+0x3b/0x230
+ f2fs_get_new_data_page+0xf0/0x8b0
+ ? f2fs_get_lock_data_page+0x1f0/0x1f0
+ ? rwsem_down_write_slowpath+0x8d0/0x8d0
+ ? rwsem_down_read_slowpath+0x830/0x830
+ ? ___might_sleep+0xba/0xd0
+ ? f2fs_get_lock_data_page+0x17a/0x1f0
+ __exchange_data_block+0x11bf/0x24d0
+ ? f2fs_ioc_release_volatile_write+0x170/0x170
+ ? __might_sleep+0x31/0xd0
+ ? ___might_sleep+0xba/0xd0
+ ? rwsem_down_read_slowpath+0x830/0x830
+ ? __init_rwsem+0xa0/0xa0
+ f2fs_ioctl+0x469c/0x6980
 
-However, there is no such flag in fibmap interface, so I just return block 
-address for those logical pages in non-compressed cluster.
+Dan Robertson (1):
+  f2fs: check output position in move range ioctl
 
-Thanks,
+ fs/f2fs/file.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
->
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
->  fs/f2fs/data.c | 33 ---------------------------------
->  1 file changed, 33 deletions(-)
->
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index c1b676be67b9..8c26c5d0c778 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3708,36 +3708,6 @@ static int f2fs_set_data_page_dirty(struct page *page)
->  	return 0;
->  }
->
-> -
-> -static sector_t f2fs_bmap_compress(struct inode *inode, sector_t block)
-> -{
-> -#ifdef CONFIG_F2FS_FS_COMPRESSION
-> -	struct dnode_of_data dn;
-> -	sector_t start_idx, blknr = 0;
-> -	int ret;
-> -
-> -	start_idx = round_down(block, F2FS_I(inode)->i_cluster_size);
-> -
-> -	set_new_dnode(&dn, inode, NULL, NULL, 0);
-> -	ret = f2fs_get_dnode_of_data(&dn, start_idx, LOOKUP_NODE);
-> -	if (ret)
-> -		return 0;
-> -
-> -	if (dn.data_blkaddr != COMPRESS_ADDR) {
-> -		dn.ofs_in_node += block - start_idx;
-> -		blknr = f2fs_data_blkaddr(&dn);
-> -		if (!__is_valid_data_blkaddr(blknr))
-> -			blknr = 0;
-> -	}
-> -
-> -	f2fs_put_dnode(&dn);
-> -	return blknr;
-> -#else
-> -	return 0;
-> -#endif
-> -}
-> -
-> -
->  static sector_t f2fs_bmap(struct address_space *mapping, sector_t block)
->  {
->  	struct inode *inode = mapping->host;
-> @@ -3753,9 +3723,6 @@ static sector_t f2fs_bmap(struct address_space *mapping, sector_t block)
->  	if (mapping_tagged(mapping, PAGECACHE_TAG_DIRTY))
->  		filemap_write_and_wait(mapping);
->
-> -	if (f2fs_compressed_file(inode))
-> -		blknr = f2fs_bmap_compress(inode, block);
-> -
->  	if (!get_data_block_bmap(inode, block, &tmp, 0))
->  		blknr = tmp.b_blocknr;
->  out:
->
+
 
 
 _______________________________________________
