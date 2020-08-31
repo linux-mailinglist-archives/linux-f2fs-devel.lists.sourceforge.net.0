@@ -2,73 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE2F8257190
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Aug 2020 03:31:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ECF3257192
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Aug 2020 03:32:44 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kCYfa-0006o4-1p; Mon, 31 Aug 2020 01:31:38 +0000
+	id 1kCYgd-0006sE-8c; Mon, 31 Aug 2020 01:32:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kCYfZ-0006nx-JT
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 31 Aug 2020 01:31:37 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kCYgc-0006s7-MB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 31 Aug 2020 01:32:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yx0IcaD0JAhC03S/ijGjcg2j59zN7xSalvsBPP6n+nU=; b=EVY4Fa7i0PzwulA7C42l6Q0daQ
- JiOlM2s/gkg+y32vj/KqKVMVwbf4GTFF8FdGMPOZY333bDa7sWQtCV9B3mLoQyWyO8+48A5pNXIbv
- MssfQqfFz+hbS4wQUPpgsw0KKaukGgRByxR6JXxl1/2+mN4p8s0aKCK7qEk6gaKIUdkU=;
+ bh=xWEACkzGA11f7SsR8FJrzfz+soTOjRfYNuiWexv1FNU=; b=hx7Kq4E58UrP/oU9eTPtE8XFVi
+ AQ87nR9SWPts903seIqolh8a6vRtYApwdzK5KXfv+Zth2CoEreU9+nNOVSOXJui9z9VbqoZ0n46MQ
+ 6iYtiePKYwzNkHz0EufHzk4C82caHTxlUVvns8UKb+O3l0vmAWv9wzxnq4Id+eUatMtg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Yx0IcaD0JAhC03S/ijGjcg2j59zN7xSalvsBPP6n+nU=; b=Nehwb0hKbmzEULqktgBW70GDBe
- c7RY/98rfeMa00SVv2X1Ws7yRGR9+aN24ArdAydnGv4kMXxqmkR6VjPVoB2Jkqeuz5IgptvsrJbWU
- t3ey4HS1zowXQvmM/Z7p9bMg9zj/PAmRYr0/mnrYDjVSnPXGlieid89xZOkmbvyeCUr4=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ bh=xWEACkzGA11f7SsR8FJrzfz+soTOjRfYNuiWexv1FNU=; b=hziBfYG2R573X0WfCuTf/Qvb0S
+ PftoyGAgU06ZdnsNAQi9cYuZs9TMRWe0q4pIi2uOTqSwPKet0iOltKeqEifdk70xAT0k1Wbux+Fw5
+ MFbJiC5BrZqUftfpzGwqiZDrCnQiK1w/Ug3JQcvWGSGJ8tUPvl0QSJwHsCWcVrUgQPp4=;
+Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
  by sfi-mx-4.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kCYfX-00AHh6-Af
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 31 Aug 2020 01:31:37 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 67D6D8F9667E1003F23B;
- Mon, 31 Aug 2020 09:31:23 +0800 (CST)
+ id 1kCYga-00AHjF-MN
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 31 Aug 2020 01:32:42 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 54E75297693EA7D97288
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 31 Aug 2020 09:32:24 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
  (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 31 Aug
- 2020 09:31:22 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20200831002401.3159134-1-daeho43@gmail.com>
+ 2020 09:32:17 +0800
+To: Jack Qiu <jack.qiu@huawei.com>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20200831015802.34005-1-jack.qiu@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <f77fcb09-9293-60cb-8cb2-a0d5571c4857@huawei.com>
-Date: Mon, 31 Aug 2020 09:31:22 +0800
+Message-ID: <b506b2dd-6998-30d3-c139-2ee32879ab37@huawei.com>
+Date: Mon, 31 Aug 2020 09:32:17 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200831002401.3159134-1-daeho43@gmail.com>
+In-Reply-To: <20200831015802.34005-1-jack.qiu@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.2 NICE_REPLY_A           Looks like a legit reply (A)
- -0.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1kCYfX-00AHh6-Af
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add block address limit check to
- compressed file
+ -0.4 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1kCYga-00AHjF-MN
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: correct statistic of
+ APP_DIRECT_IO/APP_DIRECT_READ_IO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,18 +80,16 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/8/31 8:24, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On 2020/8/31 9:58, Jack Qiu wrote:
+> Miss to update APP_DIRECT_IO/APP_DIRECT_READ_IO when receiving async DIO.
+> For example: fio -filename=/data/test.0 -bs=1m -ioengine=libaio -direct=1
+> 		-name=fill -size=10m -numjobs=1 -iodepth=32 -rw=write
 > 
-> Need to add block address range check to compressed file case and
-> avoid calling get_data_block_bmap() for compressed file.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
