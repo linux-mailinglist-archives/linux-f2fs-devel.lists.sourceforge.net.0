@@ -2,79 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABF91258628
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Sep 2020 05:25:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A61A025863C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Sep 2020 05:37:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kCwv5-0001Ui-KI; Tue, 01 Sep 2020 03:25:15 +0000
+	id 1kCx6k-0001yQ-90; Tue, 01 Sep 2020 03:37:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kCwv3-0001UA-FK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Sep 2020 03:25:13 +0000
+ (envelope-from <daeho43@gmail.com>) id 1kCx6i-0001yG-IO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Sep 2020 03:37:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lHpvDGUrng92G5YQHwAZR+SMvAxyrcoHrL54o5UkWm4=; b=A3evxB0v/Z6Ng8xv1XhDujjFz7
- FXHDsQKU1Z9+akpq6wl4MzGvy9LmXzpxg1dkdq0eSJcMbcjmyYbOzi1fPBiCE48CxR2HZ++vRY/Bb
- CwlQV541rlnpSLCvinYRf9bTEZPIykOLxzuqUy6c0xp4udE5v8xB3TK6R9XzCEwDv4fY=;
+ bh=W26WVAXDUgciA/+TeC3PK4FPBrRKOiUHfGEjVhYQoT4=; b=ISdwdFZGRAHIrZ3BhDRfrmXiZ3
+ XyGaNHqb8xKltDULOV3jHlyqPQN9MG9cTIZKOqkPedmsfjRdMSkxB7Hu90ZP0lxhIiW2vDfK/vW0N
+ 7Sh2V7yGM+WMnwNspxxEpFZE88B9IQtHdKxD4kuu0pf+2Zy7QJdLSRcr8+2jy7dzZxf0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=lHpvDGUrng92G5YQHwAZR+SMvAxyrcoHrL54o5UkWm4=; b=jV2Ckxol4vA5DpKoLO0s7DVEF+
- Z5d1YcgS4t3Se7KIDIzrJBeQgWKlPX3APypaFp7gt9Vs8FZx0tEcFIGhDga0N6+XTicsONvk3qpMq
- lGKqcDiaRiJrl9NpggiL1sYZ+Mf2sujrC0NpXj7nFlH+ogmsltBrmgrITIcopXv0Gi+0=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=W26WVAXDUgciA/+TeC3PK4FPBrRKOiUHfGEjVhYQoT4=; b=l
+ fLIRnUcex+AEnBlCpfC1ZNgKmNKrJynrX18EFjBGPMw44vBvT9cWyAQ/cWTjehsG5rMijzPLIFl/j
+ 0roZuw5JmW3ZCDDxVPNw6FlNKwgHIgQudkCGTZZ0CKAoiERCMdBtkyIK3eh3N8vwkY78dgC4+jwo/
+ fpCzrQQrzOEdYElg=;
+Received: from mail-pg1-f194.google.com ([209.85.215.194])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kCwv1-008U15-4I
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Sep 2020 03:25:13 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id A96FA5A6C5AE8FD7E644;
- Tue,  1 Sep 2020 11:25:01 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 1 Sep 2020
- 11:24:59 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200804131449.50517-1-yuchao0@huawei.com>
- <20200804131449.50517-6-yuchao0@huawei.com>
- <20200825193404.GA2614120@google.com>
- <7986af8c-1fe9-7140-f1c0-d8b4a58f702c@huawei.com>
- <20200831180143.GB3665231@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <33105d88-3e8d-b70a-f035-49dbc4a7a6f8@huawei.com>
-Date: Tue, 1 Sep 2020 11:24:58 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kCx6b-008USZ-4G
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Sep 2020 03:37:16 +0000
+Received: by mail-pg1-f194.google.com with SMTP id 67so1902409pgd.12
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 31 Aug 2020 20:37:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=W26WVAXDUgciA/+TeC3PK4FPBrRKOiUHfGEjVhYQoT4=;
+ b=dBxEqQQ3095dghBPKUh9gCXDyal1RoSdhpwqd/IjukYcdI38ro/lYHXfOrb4TPksV9
+ eFVWRTzNWB8PQj0uNB3ZLV/vCuEP5wv9x5vhJhv/385/wEzF1huSSEsKCaHxNMuQSRfl
+ ScO8VZHVsv6Nqo1PA0zP9xJvRNAT+QfEWzl6FQZcNv8t3VgWXW4QZQSQlQc7ALGrYUed
+ SY1DbTreiRH5DOuD5kyUFkOL6PMHmaReporqtlasYKqSvVTvvat2i2eoc/I5KhC9Kvmf
+ GwEtC56eq4ywmQYUPUviVLCRJDRnLsiM4/vt4tyZbHFcxyRbhk5wMsFhIPsgu9E5cjlf
+ tlnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=W26WVAXDUgciA/+TeC3PK4FPBrRKOiUHfGEjVhYQoT4=;
+ b=VI6Ele2hnjgetXs+WXNU4AZJE6JmN3B0VMYeUNmkeAvILo/46QQmrr/6sA3o3geBJS
+ gAr0dcWIK4fLc8cw9NJ6HvAVSKjSydxzbKZs5MZf8iNkPMx/cISyUJDvYtWPPrXVpgcE
+ yGvHmq6NAvr2GEtJzNAitEPfoJgLZzXWBfRAE43Sdc15avjaz+srFcPOMW3wcSeq1IbR
+ pNOTjjoKi3NXG7iJcXyaOqoCMXpp66u4r72uQAAHpOo+TpexWOBNScq4AYCajEOpLVbx
+ hYDXQziuaky2CSQNXXxVHVUGpp/GA2BTMPgF4EgdS7DHlZlZDdi4BGdpRm2PXZDCLMQp
+ dUvg==
+X-Gm-Message-State: AOAM533Q7SrZ6AcZkEDS6Pkei5KqpE9hnHPGq4jfELQO7AfH15lyGTtD
+ u9epu4B31N+b65YwPiFWU9894GCfV4I=
+X-Google-Smtp-Source: ABdhPJzHL/fB3/6V9e3aMtAeKB4BHtSk5Yyx6A9gHBy+FfYVk67CUblb8DDq0iNC6kQV89ld8GgWsg==
+X-Received: by 2002:a62:8003:: with SMTP id j3mr4016608pfd.221.1598931423108; 
+ Mon, 31 Aug 2020 20:37:03 -0700 (PDT)
+Received: from daehojeong1.seo.corp.google.com
+ ([2401:fa00:d:1:a6ae:11ff:fe18:6ce2])
+ by smtp.gmail.com with ESMTPSA id g5sm1052747pjx.53.2020.08.31.20.37.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 31 Aug 2020 20:37:02 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue,  1 Sep 2020 12:36:49 +0900
+Message-Id: <20200901033649.3537459-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.28.0.402.g5ffc5be6b7-goog
 MIME-Version: 1.0
-In-Reply-To: <20200831180143.GB3665231@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.1 (--)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.194 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.194 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kCwv1-008U15-4I
-Subject: Re: [f2fs-dev] [PATCH v2 5/5] f2fs: support age threshold based
- garbage collection
+X-Headers-End: 1kCx6b-008USZ-4G
+Subject: [f2fs-dev] [PATCH] f2fs_io: change fibmap to fiemap
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,113 +109,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jaegeuk,  I missed one ')' in this diff, thanks for fixing in upstream.
+From: Daeho Jeong <daehojeong@google.com>
 
-Thanks,
+Currently we support fiemap command using fibmap. It's simple and
+easy to use, but we cannot use this for compressed file. To support
+more different types of files, we need to change this to use fiemap.
 
-On 2020/9/1 2:01, Jaegeuk Kim wrote:
-> Hi Chao,
-> 
-> Applied. Thanks.
-> 
-> On 08/31, Chao Yu wrote:
->> Hi Jaegeuk,
->>
->> I've changed code a bit to fix some bugs, including:
->> - gc_idle = 3 (GC_IDLE_AT) description
->> - disallow set gc_idle to 3 if atgc is off
->> - keep compatibility with checkpoint disabling
->>
->> Could you please check and merge below diff?
->>
->> From: Chao Yu <yuchao0@huawei.com>
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>   Documentation/ABI/testing/sysfs-fs-f2fs |  3 ++-
->>   fs/f2fs/gc.c                            | 12 +++++++++++-
->>   fs/f2fs/sysfs.c                         | 11 ++++++++---
->>   3 files changed, 21 insertions(+), 5 deletions(-)
->>
->> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
->> index 7f730c4c8df2..834d0becae6d 100644
->> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
->> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
->> @@ -22,7 +22,8 @@ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
->>   Description:	Controls the victim selection policy for garbage collection.
->>   		Setting gc_idle = 0(default) will disable this option. Setting
->>   		gc_idle = 1 will select the Cost Benefit approach & setting
->> -		gc_idle = 2 will select the greedy approach.
->> +		gc_idle = 2 will select the greedy approach & setting
->> +		gc_idle = 3 will select the age-threshold based approach.
->>
->>   What:		/sys/fs/f2fs/<disk>/reclaim_segments
->>   Date:		October 2013
->> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->> index 6413886e52d4..3c0edb8b4cc5 100644
->> --- a/fs/f2fs/gc.c
->> +++ b/fs/f2fs/gc.c
->> @@ -388,6 +388,16 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
->>   	unsigned long long mtime = 0;
->>   	unsigned int i;
->>
->> +	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
->> +		if (p->gc_mode == GC_AT &&
->> +			get_valid_blocks(sbi, segno, true) == 0)
->> +			return;
->> +
->> +		if (p->alloc_mode == AT_SSR &&
->> +			get_seg_entry(sbi, segno)->ckpt_valid_blocks == 0)
->> +			return;
->> +	}
->> +
->>   	for (i = 0; i < sbi->segs_per_sec; i++)
->>   		mtime += get_seg_entry(sbi, start + i)->mtime;
->>   	mtime = div_u64(mtime, sbi->segs_per_sec);
->> @@ -721,7 +731,7 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->>   		/* Don't touch checkpointed data */
->>   		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
->>   					get_ckpt_valid_blocks(sbi, segno) &&
->> -					p.alloc_mode != SSR))
->> +					p.alloc_mode == LFS))
->>   			goto next;
->>   		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
->>   			goto next;
->> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
->> index 88ed9969cc86..bacfa9c35e6b 100644
->> --- a/fs/f2fs/sysfs.c
->> +++ b/fs/f2fs/sysfs.c
->> @@ -375,12 +375,17 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->>   		return count;
->>   	}
->>   	if (!strcmp(a->attr.name, "gc_idle")) {
->> -		if (t == GC_IDLE_CB)
->> +		if (t == GC_IDLE_CB) {
->>   			sbi->gc_mode = GC_IDLE_CB;
->> -		else if (t == GC_IDLE_GREEDY)
->> +		} else if (t == GC_IDLE_GREEDY) {
->>   			sbi->gc_mode = GC_IDLE_GREEDY;
->> -		else
->> +		} else if (t == GC_IDLE_AT) {
->> +			if (!sbi->am.atgc_enabled)
->> +				return -EINVAL;
->> +			sbi->gc_mode = GC_AT;
->> +		} else {
->>   			sbi->gc_mode = GC_NORMAL;
->> +		}
->>   		return count;
->>   	}
->>
->> -- 
->> 2.26.2
->>
-> .
-> 
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ tools/f2fs_io/f2fs_io.c | 56 ++++++++++++++++++++++++++++-------------
+ 1 file changed, 39 insertions(+), 17 deletions(-)
+
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index abb655a..fc81b93 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -631,27 +631,42 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+ 	exit(0);
+ }
+ 
+-struct file_ext {
+-	__u32 f_pos;
+-	__u32 start_blk;
+-	__u32 end_blk;
+-	__u32 blk_count;
++struct fiemap_extent {
++	__u64 fe_logical;
++	__u64 fe_physical;
++	__u64 fe_length;
++	__u64 fe_reserved64[2];
++	__u32 fe_flags;
++	__u32 fe_reserved[3];
+ };
+ 
+-#ifndef FIBMAP
+-#define FIBMAP          _IO(0x00, 1)    /* bmap access */
++struct fiemap {
++	__u64 fm_start;
++	__u64 fm_length;
++	__u32 fm_flags;
++	__u32 fm_mapped_extents;
++	__u32 fm_extent_count;
++	__u32 fm_reserved;
++	struct fiemap_extent fm_extent[0];
++};
++
++#ifndef FIEMAP
++#define FIEMAP		_IOWR('f', 11, struct fiemap)
+ #endif
+ 
++#define NEW_ADDR	0xFFFFFFFF
++
+ #define fiemap_desc "get block address in file"
+ #define fiemap_help					\
+ "f2fs_io fiemap [offset in 4kb] [count] [file_path]\n\n"\
+ 
+ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ {
+-	u64 offset;
+-	u32 blknum;
+ 	unsigned count, i;
+ 	int fd;
++	__u64 phy_addr;
++	struct fiemap *fm = xmalloc(sizeof(struct fiemap) +
++			sizeof(struct fiemap_extent));
+ 
+ 	if (argc != 4) {
+ 		fputs("Excess arguments\n\n", stderr);
+@@ -659,21 +674,28 @@ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ 		exit(1);
+ 	}
+ 
+-	offset = atoi(argv[1]);
++	fm->fm_start = atoi(argv[1]) * 4096;
++	fm->fm_length = 4096;
++	fm->fm_extent_count = 1;
+ 	count = atoi(argv[2]);
+ 
+ 	fd = xopen(argv[3], O_RDONLY | O_LARGEFILE, 0);
+ 
+-	printf("Fiemap: offset = %08"PRIx64" len = %d\n", offset, count);
++	printf("Fiemap: offset = %08"PRIx64" len = %d\n",
++						fm->fm_start / 4096, count);
+ 	for (i = 0; i < count; i++) {
+-		blknum = offset + i;
+-
+-		if (ioctl(fd, FIBMAP, &blknum) < 0)
+-			die_errno("FIBMAP failed");
+-
+-		printf("%u ", blknum);
++		if (ioctl(fd, FIEMAP, fm) < 0)
++			die_errno("FIEMAP failed");
++
++		phy_addr = fm->fm_extent[0].fe_physical / 4096;
++		if (phy_addr == NEW_ADDR)
++			printf("NEW_ADDR ");
++		else
++			printf("%llu ", phy_addr);
++		fm->fm_start += 4096;
+ 	}
+ 	printf("\n");
++	free(fm);
+ 	exit(0);
+ }
+ 
+-- 
+2.28.0.402.g5ffc5be6b7-goog
+
 
 
 _______________________________________________
