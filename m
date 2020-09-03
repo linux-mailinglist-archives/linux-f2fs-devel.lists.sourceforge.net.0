@@ -2,55 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CC8925C6D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Sep 2020 18:30:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E855925C82D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Sep 2020 19:40:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kDs8O-00049Z-Jc; Thu, 03 Sep 2020 16:30:48 +0000
+	id 1kDtDl-0000Av-UA; Thu, 03 Sep 2020 17:40:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <corbet@lwn.net>) id 1kDs8N-00049S-9g
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 16:30:47 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kDtDk-0000Ak-1H
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 17:40:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aJ18mFMmlVWjsvOhtkCF3X3vCFyITfRQyA41MgzPFW8=; b=ZIJC6UoaAqL1LiLFxFyKrx2pGw
- w0X+CI8bCM5bZ3/zwztVBweKfCuCGygnfdl1xNOTaoSSJFx8X9T9IQD9jWPE9MiTlpkCkq2W33x1P
- e1zEC2Hh26DRGl2c4vf4q7xJbsz8gQr8erxx2heP7kDX22Gk6bsM8CoyZa76IqgDfdmw=;
+ bh=YMb0Xjf85gD6BhNCEqTuHmQatgbgEA7NCUMhXpA8jHQ=; b=fnN3hB63DEFEDVj0Ifi4LGBDE3
+ Zf9O7YesDOZY5E1PucFihN1ODvyszoUgXaAMRsGcIWJ0MZn7Z4Ap9jbk5uP2D3RcPUerBePIxYYWo
+ P+Mu2oxN5GDQdanIOXdkG0XmAf+AY6ppagNXgoiOagbIkjnaJT8hhAKqfMEBm6WLrq9s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aJ18mFMmlVWjsvOhtkCF3X3vCFyITfRQyA41MgzPFW8=; b=D63vZU351JqktwcTx9C6GuaPA7
- V0Cy3fKFi+17yXSAwayc9hbGViKIaQaI37gcgG7r61LBy8vZ6uvTAkMV/8Ju78cLx+t1ogfgYsNE8
- 2mwJOx2DzyGxgR7FR7apFRN6yqNTLHtsaKBjBL82vVbnDtaCUNYWIP5cWLqivIdlbhO8=;
-Received: from ms.lwn.net ([45.79.88.28])
+ bh=YMb0Xjf85gD6BhNCEqTuHmQatgbgEA7NCUMhXpA8jHQ=; b=Gax2KTFj5xAda7eqTl1AjAybDN
+ LFWzKV3u6dyuL/KQmICw0Q7KjxWJdc9kh3oj1yM1EKWwLG0YjNhUA+fxR9DV8TPKc3wjB/ajqzLsw
+ CW9TTZ8T0zE87kBrbAMmKFdRhqBMCiLxeABWF1PtgTZ2ZvH8grZ+J418K08LRf1WcPeM=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kDs8K-00AkL8-Mc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 16:30:47 +0000
-Received: from lwn.net (localhost [127.0.0.1])
+ id 1kDtDe-00AoyB-6J
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 17:40:23 +0000
+Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ms.lwn.net (Postfix) with ESMTPSA id 93B047DA;
- Thu,  3 Sep 2020 16:30:28 +0000 (UTC)
-Date: Thu, 3 Sep 2020 10:30:27 -0600
-From: Jonathan Corbet <corbet@lwn.net>
-To: Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <20200903103027.4c8d0b07@lwn.net>
-In-Reply-To: <96f99afb-c54e-8f46-ebac-80a62f65b876@infradead.org>
+ by mail.kernel.org (Postfix) with ESMTPSA id E692620722;
+ Thu,  3 Sep 2020 17:40:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1599154808;
+ bh=he/icALJc5nxcmM8oVZBySI9LjdCFoBo+OczlPqUxkM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=nzCsy3xVMtMVKsfdqUr58p7DNzmt/RChq1Nup4j1boBs2CpaBeZOyBPJLtypL0k0o
+ 3bwHzfsh8AalyuKNtr9tOeDrjRqgFFekkbLYvHxID3SoeNcIgsTzdbqoObs1/yK3iv
+ gY6JI3E6k0uQ6RQA4DZnd2me70ySJhiuu+yKVXQk=
+Date: Thu, 3 Sep 2020 10:40:07 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Message-ID: <20200903174007.GA3619770@google.com>
 References: <96f99afb-c54e-8f46-ebac-80a62f65b876@infradead.org>
-Organization: LWN.net
+ <20200903103027.4c8d0b07@lwn.net>
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20200903103027.4c8d0b07@lwn.net>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -59,9 +67,13 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [45.79.88.28 listed in list.dnswl.org]
-X-Headers-End: 1kDs8K-00AkL8-Mc
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1kDtDe-00AoyB-6J
 Subject: Re: [f2fs-dev] [PATCH] f2fs: Documentation edits/fixes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -74,38 +86,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- LKML <linux-kernel@vger.kernel.org>,
+Cc: Randy Dunlap <rdunlap@infradead.org>, LKML <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net,
  "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 2 Sep 2020 17:08:31 -0700
-Randy Dunlap <rdunlap@infradead.org> wrote:
+On 09/03, Jonathan Corbet wrote:
+> On Wed, 2 Sep 2020 17:08:31 -0700
+> Randy Dunlap <rdunlap@infradead.org> wrote:
+> 
+> > From: Randy Dunlap <rdunlap@infradead.org>
+> > 
+> > Correct grammar and spelling.
+> > 
+> > Drop duplicate section for resize.f2fs.
+> > 
+> > Change one occurrence of F2fs to F2FS for consistency.
+> > 
+> > Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> > Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> > Cc: Chao Yu <yuchao0@huawei.com>
+> > Cc: linux-f2fs-devel@lists.sourceforge.net
+> > ---
+> >  Documentation/filesystems/f2fs.rst |   53 +++++++++++----------------
+> >  1 file changed, 23 insertions(+), 30 deletions(-)
+> 
+> So this, I guess, needs to go through the f2fs tree since it doesn't apply
+> to docs-next currently.
 
-> From: Randy Dunlap <rdunlap@infradead.org>
-> 
-> Correct grammar and spelling.
-> 
-> Drop duplicate section for resize.f2fs.
-> 
-> Change one occurrence of F2fs to F2FS for consistency.
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Cc: Chao Yu <yuchao0@huawei.com>
-> Cc: linux-f2fs-devel@lists.sourceforge.net
-> ---
->  Documentation/filesystems/f2fs.rst |   53 +++++++++++----------------
->  1 file changed, 23 insertions(+), 30 deletions(-)
-
-So this, I guess, needs to go through the f2fs tree since it doesn't apply
-to docs-next currently.
-
+Yup, I applied in f2fs tree.
 Thanks,
 
-jon
+> 
+> Thanks,
+> 
+> jon
 
 
 _______________________________________________
