@@ -2,51 +2,51 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A69A25B89F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Sep 2020 04:15:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4B2425B8A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Sep 2020 04:16:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kDeml-0001e3-5f; Thu, 03 Sep 2020 02:15:35 +0000
+	id 1kDenJ-0008Tn-Kv; Thu, 03 Sep 2020 02:16:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kDemi-0001dr-Ox
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 02:15:32 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kDenH-0008Tf-KE
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 02:16:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iUJr+RWgFGUDUU9y3dcy1tsnmOca4eVSu+g7KHmJvHw=; b=JOWOAI/mgdutX5sUBAD9h5rT+y
- ZPUU4YJWRn7uSwXh/a3bbZeVAIVxtRH1ZLJCLv1LmA7CeoGwISSBO5jqSH9ZXcHiCIgV/uijEuAge
- 2Zte2HkMtAGBvmV+U+6ZZxWy8fGItPIZ4GnwK+GPav3jrDHQLOpHbVO66YrL0SiDhS20=;
+ bh=t0IePvJctJfetc/ucsuJuX+2hUgrZTDweCX/BlngD90=; b=gFAyE2/BW3SNm0zOxA+GTKddSX
+ Uv2laqjlImhWQV84mJKF2vUI2cXaCzGvwI0+SiLZ365fFyjZHMvuoWB+8LU4nxkSR1zX6pzi8kAKz
+ YA++u7bClYHSgqeeoDe1HG+/Fe7+QQ8Z2rm9Z8iqvsTqEoGNXF7gYkh3I/443m3Jl2e0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
  Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iUJr+RWgFGUDUU9y3dcy1tsnmOca4eVSu+g7KHmJvHw=; b=g
- NrqfaeazLWBqkxKGyNhndzfTTnr70sRhuEi8CI0tZ8AyR8DaD5eBh1mtgX4/DOdSdwUtBgAFfhllQ
- +piraJDh19DYw2kr7uR8LCX3E493wlFynWI5FTB3CdB3yxKRWr8xXtDYDgHFX0f9Ff55qCcELzb3I
- K5Ix6w7hkRwxxVA0=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=t0IePvJctJfetc/ucsuJuX+2hUgrZTDweCX/BlngD90=; b=R
+ Pj8PRW4MnmbBjzeroBJT4m5FrwTErYuGSVgmO9+iOeBVHw3gz+m+l7YZXLQAGCCyBPxfu9MuOHs7u
+ AGvIgHnmjowycFEHxbJAS2/sEufLRQ4jqckwV0X7/96nGhq4CSQj3m6ej1zeTfX5k0fSHaTuw7Qbf
+ o7dEym+TbBldKSCk=;
+Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kDemd-00ArOm-NK
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 02:15:32 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 8C1F6282EE4D954215D6;
- Thu,  3 Sep 2020 10:15:19 +0800 (CST)
+ id 1kDenF-009uOD-0q
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Sep 2020 02:16:07 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 8658E86DF3E6611CB73A;
+ Thu,  3 Sep 2020 10:15:45 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS414-HUB.china.huawei.com (10.3.19.214) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 3 Sep 2020 10:15:12 +0800
+ DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 3 Sep 2020 10:15:38 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Thu, 3 Sep 2020 10:14:41 +0800
-Message-ID: <20200903021441.100226-1-yuchao0@huawei.com>
+Date: Thu, 3 Sep 2020 10:15:15 +0800
+Message-ID: <20200903021515.100621-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
@@ -61,11 +61,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ [45.249.212.32 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kDemd-00ArOm-NK
-Subject: [f2fs-dev] [PATCH] f2fs: ignore compress mount option on image w/o
- compression feature
+X-Headers-End: 1kDenF-009uOD-0q
+Subject: [f2fs-dev] [PATCH] f2fs: trace: fix typo
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,59 +76,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Kyungmin Park <kyungmin.park@samsung.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-to keep consistent with behavior when passing compress mount option
-to kernel w/o compression feature, so that mount may not fail on
-such condition.
+Fixes a typo from 'compreesed' to 'compressed'.
 
-Reported-by: Kyungmin Park <kyungmin.park@samsung.com>
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/super.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ include/trace/events/f2fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index ae0b351671f4..9d4da2d13ab4 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -871,8 +871,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- 		case Opt_compress_algorithm:
- 			if (!f2fs_sb_has_compression(sbi)) {
--				f2fs_err(sbi, "Compression feature if off");
--				return -EINVAL;
-+				f2fs_info(sbi, "Image doesn't support compression");
-+				break;
- 			}
- 			name = match_strdup(&args[0]);
- 			if (!name)
-@@ -897,8 +897,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 			break;
- 		case Opt_compress_log_size:
- 			if (!f2fs_sb_has_compression(sbi)) {
--				f2fs_err(sbi, "Compression feature is off");
--				return -EINVAL;
-+				f2fs_info(sbi, "Image doesn't support compression");
-+				break;
- 			}
- 			if (args->from && match_int(args, &arg))
- 				return -EINVAL;
-@@ -912,8 +912,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 			break;
- 		case Opt_compress_extension:
- 			if (!f2fs_sb_has_compression(sbi)) {
--				f2fs_err(sbi, "Compression feature is off");
--				return -EINVAL;
-+				f2fs_info(sbi, "Image doesn't support compression");
-+				break;
- 			}
- 			name = match_strdup(&args[0]);
- 			if (!name)
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 06c73f3f6dd2..f8f1e85ff130 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -136,7 +136,7 @@ TRACE_DEFINE_ENUM(CP_RESIZE);
+ 	__print_symbolic(type,						\
+ 		{ CP_NO_NEEDED,		"no needed" },			\
+ 		{ CP_NON_REGULAR,	"non regular" },		\
+-		{ CP_COMPRESSED,	"compreesed" },			\
++		{ CP_COMPRESSED,	"compressed" },			\
+ 		{ CP_HARDLINK,		"hardlink" },			\
+ 		{ CP_SB_NEED_CP,	"sb needs cp" },		\
+ 		{ CP_WRONG_PINO,	"wrong pino" },			\
 -- 
 2.26.2
 
