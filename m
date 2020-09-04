@@ -2,56 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5808C25CFAC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Sep 2020 05:11:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FC8E25D1D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Sep 2020 09:12:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kE28c-0007jt-6P; Fri, 04 Sep 2020 03:11:42 +0000
+	id 1kE5sz-00013c-8n; Fri, 04 Sep 2020 07:11:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kE28a-0007jm-Sa
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 03:11:40 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kE5sx-00013V-OH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 07:11:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t/azfHFVrMaB+7BLUxyx2nQP5uZssVi+3Y5iVZdIlKk=; b=YCh2ubHvW4yH3TUPPES+B3vffQ
- mNZwcJJuMwucRYXtXnZWy6cq3nFjh2waXBGfHc1bYS7CSnOCu6LCKiFb71DuP3IwYxVmWoZT7fBFa
- D8I4NkAXfwQPdvGved5e2o5BFsRnWxKqUxqDDNLIFWQrbdW8loRNJzDMx2TIdLwj3juA=;
+ bh=YzjkDwC/rgAQLUcQwgG+TisYQ0b3C5xranMO+VXF/eU=; b=Q6+rCeq2FceLhrX9st7qimV7NZ
+ VlDwsezCxD6BoYgS+biRElUXrPSLHJxD0Q6SHV9hb1oSBG77iEz7j3pBbyXk6WdnXK/VrbwpfjHA5
+ Ykfe9XNq0tC7aKgdM/DY6Zj49jNyupvx+9v6JoOYTTz8SIyDPPdUTWqXe8yu0+ucD6uQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t/azfHFVrMaB+7BLUxyx2nQP5uZssVi+3Y5iVZdIlKk=; b=WlRGttLJPzB8gdW/XqZDTdomwb
- 7Ul9CarsK2/5Qauy96hkRBUjeqzNqe7vtFslrhbGft6chLcSHYB2o2yuODcZyI3IXW47yFOH29BIC
- eFmciDwqI4hs7QAng1i7QyYKh3femMn8Ab5EhgBDqRaxHT0VzA4Uy1bASuMqAJYt1WhU=;
+ bh=YzjkDwC/rgAQLUcQwgG+TisYQ0b3C5xranMO+VXF/eU=; b=ScSzJjeXeLjo7vHxptOzmuTMrW
+ 8SeEU0yTd7cYw89LZIaEkgSRKPa7Vy1SDeV5j1kMiaxYc3FgCGLePrHL6ak3HfUC/k0JyaAjG0sDA
+ 4hzhjEIOZ/7tUZQ1uAVfg4MH6Ri21AXO+isnEetnVoeZp8TvxflAIKzmwsibTTKPoRKs=;
 Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kE28V-00BMQM-Lq
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 03:11:40 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 80256DDCAD3CB82EB68C;
- Fri,  4 Sep 2020 11:11:17 +0800 (CST)
+ id 1kE5su-00BZlu-EF
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 07:11:47 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 6F775E2F219C921F5B33;
+ Fri,  4 Sep 2020 15:11:28 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 4 Sep 2020
- 11:11:12 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20200903024442.296703-1-daeho43@gmail.com>
+ (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 4 Sep 2020
+ 15:11:27 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <4c5dcf19-4495-5181-1695-fddf05c3bf24@huawei.com>
-Date: Fri, 4 Sep 2020 11:11:12 +0800
+To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20200812051711.2147716-1-daeho43@gmail.com>
+ <b201452d-b1dd-146c-3a1a-c199d9a5974c@huawei.com>
+Message-ID: <f7de60a9-c1bc-1c45-1d1e-e6c79406a387@huawei.com>
+Date: Fri, 4 Sep 2020 15:11:26 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200903024442.296703-1-daeho43@gmail.com>
+In-Reply-To: <b201452d-b1dd-146c-3a1a-c199d9a5974c@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -60,12 +62,17 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
  [45.249.212.32 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -2.4 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kE28V-00BMQM-Lq
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs_io: change fibmap to fiemap
+X-Headers-End: 1kE5su-00BZlu-EF
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: change virtual mapping way for
+ compression pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,146 +89,69 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Hi Daeho,
 
+Could you please clean up a bit on this patch, we can wrap vm_map_ram
+loop logic into f2fs_vmap() as below:
 
-On 2020/9/3 10:44, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> Currently we support fiemap command using fibmap. It's simple and
-> easy to use, but we cannot use this for compressed file. To support
-> more different types of files, we need to change this to use fiemap.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> Changes in v2:
->   - Move declaration to header file
-> ---
->   tools/f2fs_io/f2fs_io.c | 37 +++++++++++++++++--------------------
->   tools/f2fs_io/f2fs_io.h | 26 ++++++++++++++++++++++++++
->   2 files changed, 43 insertions(+), 20 deletions(-)
-> 
-> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-> index abb655a..9a651c0 100644
-> --- a/tools/f2fs_io/f2fs_io.c
-> +++ b/tools/f2fs_io/f2fs_io.c
-> @@ -631,27 +631,17 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
->   	exit(0);
->   }
->   
-> -struct file_ext {
-> -	__u32 f_pos;
-> -	__u32 start_blk;
-> -	__u32 end_blk;
-> -	__u32 blk_count;
-> -};
-> -
-> -#ifndef FIBMAP
-> -#define FIBMAP          _IO(0x00, 1)    /* bmap access */
-> -#endif
-> -
->   #define fiemap_desc "get block address in file"
->   #define fiemap_help					\
->   "f2fs_io fiemap [offset in 4kb] [count] [file_path]\n\n"\
->   
->   static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
->   {
-> -	u64 offset;
-> -	u32 blknum;
->   	unsigned count, i;
->   	int fd;
-> +	__u64 phy_addr;
-> +	struct fiemap *fm = xmalloc(sizeof(struct fiemap) +
-> +			sizeof(struct fiemap_extent));
->   
->   	if (argc != 4) {
->   		fputs("Excess arguments\n\n", stderr);
-> @@ -659,21 +649,28 @@ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
->   		exit(1);
->   	}
->   
-> -	offset = atoi(argv[1]);
-> +	fm->fm_start = atoi(argv[1]) * F2FS_BLKSIZE;
-> +	fm->fm_length = F2FS_BLKSIZE;
-> +	fm->fm_extent_count = 1;
->   	count = atoi(argv[2]);
->   
->   	fd = xopen(argv[3], O_RDONLY | O_LARGEFILE, 0);
->   
-> -	printf("Fiemap: offset = %08"PRIx64" len = %d\n", offset, count);
-> +	printf("Fiemap: offset = %08"PRIx64" len = %d\n",
-> +					fm->fm_start / F2FS_BLKSIZE, count);
->   	for (i = 0; i < count; i++) {
-> -		blknum = offset + i;
-> -
-> -		if (ioctl(fd, FIBMAP, &blknum) < 0)
-> -			die_errno("FIBMAP failed");
-> +		if (ioctl(fd, FIEMAP, fm) < 0)
-> +			die_errno("FIEMAP failed");
->   
-> -		printf("%u ", blknum);
-> +		phy_addr = fm->fm_extent[0].fe_physical / F2FS_BLKSIZE;
-> +		if (phy_addr == NEW_ADDR)
-> +			printf("NEW_ADDR ");
-> +		else
-> +			printf("%llu ", phy_addr);
-> +		fm->fm_start += F2FS_BLKSIZE;
->   	}
->   	printf("\n");
-> +	free(fm);
->   	exit(0);
->   }
->   
-> diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-> index bd19ff9..62d6e7b 100644
-> --- a/tools/f2fs_io/f2fs_io.h
-> +++ b/tools/f2fs_io/f2fs_io.h
-> @@ -38,6 +38,9 @@ typedef u16	__be16;
->   typedef u32	__be32;
->   #endif
->   
-> +#define F2FS_BLKSIZE	4096
-> +#define NEW_ADDR	0xFFFFFFFF
-> +
->   #ifndef FS_IOC_GETFLAGS
->   #define FS_IOC_GETFLAGS			_IOR('f', 1, long)
->   #endif
-> @@ -132,6 +135,29 @@ typedef u32	__be32;
->   #define FS_CASEFOLD_FL			0x40000000 /* Folder is case insensitive */
->   #endif
->   
-> +struct fiemap_extent {
-> +	u64 fe_logical;
-> +	u64 fe_physical;
-> +	u64 fe_length;
-> +	u64 fe_reserved64[2];
-> +	u32 fe_flags;
-> +	u32 fe_reserved[3];
-> +};
-> +
-> +struct fiemap {
-> +	u64 fm_start;
-> +	u64 fm_length;
-> +	u32 fm_flags;
-> +	u32 fm_mapped_extents;
-> +	u32 fm_extent_count;
-> +	u32 fm_reserved;
-> +	struct fiemap_extent fm_extent[0];
-> +};
+f2fs_vmap()
+{
+	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
+		cc->cbuf = vm_map_ram(cc->cpages, cc->nr_cpages, -1);
+		if (cc->cbuf)
+			break;
+		vm_unmap_aliases();
+	}
+}
 
-We don't need to copy & paste fiemap related structure here.
-
-Let's just include <linux/fiemap.h> in f2fs_io.h
+How do you think of this?
 
 Thanks,
 
-> +
-> +#ifndef FIEMAP
-> +#define FIEMAP				_IOWR('f', 11, struct fiemap)
-> +#endif
-> +
->   struct f2fs_gc_range {
->   	u32 sync;
->   	u64 start;
+On 2020/8/13 17:09, Chao Yu wrote:
+> On 2020/8/12 13:17, Daeho Jeong wrote:
+>> From: Daeho Jeong <daehojeong@google.com>
+>>
+>> By profiling f2fs compression works, I've found vmap() callings have
+>> unexpected hikes in the execution time in our test environment and
+>> those are bottlenecks of f2fs decompression path. Changing these with
+>> vm_map_ram(), we can enhance f2fs decompression speed pretty much.
+>>
+>> [Verification]
+>> Android Pixel 3(ARM64, 6GB RAM, 128GB UFS)
+>> Turned on only 0-3 little cores(at 1.785GHz)
+>>
+>> dd if=/dev/zero of=dummy bs=1m count=1000
+>> echo 3 > /proc/sys/vm/drop_caches
+>> dd if=dummy of=/dev/zero bs=512k
+>>
+>> - w/o compression -
+>> 1048576000 bytes (0.9 G) copied, 2.082554 s, 480 M/s
+>> 1048576000 bytes (0.9 G) copied, 2.081634 s, 480 M/s
+>> 1048576000 bytes (0.9 G) copied, 2.090861 s, 478 M/s
+>>
+>> - before patch -
+>> 1048576000 bytes (0.9 G) copied, 7.407527 s, 135 M/s
+>> 1048576000 bytes (0.9 G) copied, 7.283734 s, 137 M/s
+>> 1048576000 bytes (0.9 G) copied, 7.291508 s, 137 M/s
+>>
+>> - after patch -
+>> 1048576000 bytes (0.9 G) copied, 1.998959 s, 500 M/s
+>> 1048576000 bytes (0.9 G) copied, 1.987554 s, 503 M/s
+>> 1048576000 bytes (0.9 G) copied, 1.986380 s, 503 M/s
+>>
+>> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> 
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
+> 
+> Thanks,
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
 > 
 
 
