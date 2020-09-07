@@ -2,77 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FC8E25D1D0
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Sep 2020 09:12:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kE5sz-00013c-8n; Fri, 04 Sep 2020 07:11:49 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kE5sx-00013V-OH
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 07:11:48 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 81FB825F295
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Sep 2020 06:51:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Message-Id:Content-Transfer-Encoding:
+	Content-Type:Cc:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive
+	:List-Unsubscribe:List-Id:Subject:Date:To:Content-Description:MIME-Version:
+	Sender:Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:
+	Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=WT5EWmn5aOk7L72bRDt9ZD0amfxlHx5CVYTqInjtPSg=; b=ZMsqP/uSM4zCrAER761V1GK9Mb
+	H2irPjjX+bWxZeI8R9b9+gs99ZRnII5aJfkZdluwtKVKYiInY8MHlWYM/exbDy9Pxv4c7VV2bEtZw
+	6ojUFAha07bQRCuZ/ocizl5IotZFTk9c5dyjadreZ9dNgHhU2i6LXOLpgMHzLaYYBaBs=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1kF987-0004Dp-KD; Mon, 07 Sep 2020 04:51:47 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <info@unituscapital.com>) id 1kF986-0004DN-5k
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Sep 2020 04:51:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Reply-To:Date:From:To:Subject:Content-Description:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Message-ID:Cc:
+ Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:
+ Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YzjkDwC/rgAQLUcQwgG+TisYQ0b3C5xranMO+VXF/eU=; b=Q6+rCeq2FceLhrX9st7qimV7NZ
- VlDwsezCxD6BoYgS+biRElUXrPSLHJxD0Q6SHV9hb1oSBG77iEz7j3pBbyXk6WdnXK/VrbwpfjHA5
- Ykfe9XNq0tC7aKgdM/DY6Zj49jNyupvx+9v6JoOYTTz8SIyDPPdUTWqXe8yu0+ucD6uQ=;
+ bh=Jv0mY1QY5098IZ8naThhABFUPGYlhCFLZcPwBHl+D3k=; b=iLuGhWC2RwCm28quBYV2DSXThy
+ dm2o6+0AY6GF76A4HiQGtZ6Kqkc2FdOLrBZ1jYP04/UzQIjSnqPGIslphdMb28hv2QWKqAEBQlblp
+ LankZLvvk08Ge3gHP5KOlj913zbT+ocSXWoB4vi++utmpkLa0DuSVCk2rP2IU838ay1A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=YzjkDwC/rgAQLUcQwgG+TisYQ0b3C5xranMO+VXF/eU=; b=ScSzJjeXeLjo7vHxptOzmuTMrW
- 8SeEU0yTd7cYw89LZIaEkgSRKPa7Vy1SDeV5j1kMiaxYc3FgCGLePrHL6ak3HfUC/k0JyaAjG0sDA
- 4hzhjEIOZ/7tUZQ1uAVfg4MH6Ri21AXO+isnEetnVoeZp8TvxflAIKzmwsibTTKPoRKs=;
-Received: from szxga06-in.huawei.com ([45.249.212.32] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ ; h=Reply-To:Date:From:To:Subject:Content-Description:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Message-ID:Cc:
+ Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:
+ Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Jv0mY1QY5098IZ8naThhABFUPGYlhCFLZcPwBHl+D3k=; b=IaGIy379CE5jUWKVhZ2pnuOsMx
+ AYYYjVWjUxh4u+sw0puwGJ4crlWds5Qm96v8C3P8orPtkM3f34xs/KFwI4N/6vS9XKKtt5bUCSFu+
+ OSxrmcSjaBSDl2COoJREWlW12TJkXWgYCJPi8eI+HcFsLp7W7nWgcW3RSIRanyZbvUb0=;
+Received: from [165.22.66.44] (helo=mail.seen.ps)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kE5su-00BZlu-EF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Sep 2020 07:11:47 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 6F775E2F219C921F5B33;
- Fri,  4 Sep 2020 15:11:28 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 4 Sep 2020
- 15:11:27 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20200812051711.2147716-1-daeho43@gmail.com>
- <b201452d-b1dd-146c-3a1a-c199d9a5974c@huawei.com>
-Message-ID: <f7de60a9-c1bc-1c45-1d1e-e6c79406a387@huawei.com>
-Date: Fri, 4 Sep 2020 15:11:26 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1kF983-00FKkH-6y
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Sep 2020 04:51:46 +0000
+Received: from [192.168.8.10] (ip168-243-231-195.intercom.com.sv
+ [168.243.231.195])
+ by mail.seen.ps (Postfix) with ESMTPA id 4B6B714D1E4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  7 Sep 2020 07:42:52 +0300 (IDT)
 MIME-Version: 1.0
-In-Reply-To: <b201452d-b1dd-146c-3a1a-c199d9a5974c@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.4 (--)
+Content-Description: Mail message body
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 06 Sep 2020 22:42:49 -0600
+X-Spam-Score: 7.5 (+++++++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.4 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kE5su-00BZlu-EF
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: change virtual mapping way for
- compression pages
+ 1.3 RCVD_IN_RP_RNBL        RBL: Relay in RNBL,
+ https://senderscore.org/blacklistlookup/
+ [165.22.66.44 listed in bl.score.senderscore.com]
+ 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
+ 0.5 SUBJ_ALL_CAPS          Subject is all capitals
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
+ (andrewmacklin12[at]gmail.com)
+ 1.0 MISSING_MID            Missing Message-Id: header
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+ 0.0 LOTS_OF_MONEY          Huge... sums of money
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Headers-End: 1kF983-00FKkH-6y
+Subject: [f2fs-dev] GREETINGS TO YOU.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,78 +82,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+From: Angel Investors via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: andrewmacklin12@gmail.com
+Cc: Angel Investors <info@unituscapital.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
+Message-Id: <E1kF987-0004Dp-KD@sfs-ml-1.v29.lw.sourceforge.com>
 
-Hi Daeho,
-
-Could you please clean up a bit on this patch, we can wrap vm_map_ram
-loop logic into f2fs_vmap() as below:
-
-f2fs_vmap()
-{
-	for (i = 0; i < MAX_VMAP_RETRIES; i++) {
-		cc->cbuf = vm_map_ram(cc->cpages, cc->nr_cpages, -1);
-		if (cc->cbuf)
-			break;
-		vm_unmap_aliases();
-	}
-}
-
-How do you think of this?
-
-Thanks,
-
-On 2020/8/13 17:09, Chao Yu wrote:
-> On 2020/8/12 13:17, Daeho Jeong wrote:
->> From: Daeho Jeong <daehojeong@google.com>
->>
->> By profiling f2fs compression works, I've found vmap() callings have
->> unexpected hikes in the execution time in our test environment and
->> those are bottlenecks of f2fs decompression path. Changing these with
->> vm_map_ram(), we can enhance f2fs decompression speed pretty much.
->>
->> [Verification]
->> Android Pixel 3(ARM64, 6GB RAM, 128GB UFS)
->> Turned on only 0-3 little cores(at 1.785GHz)
->>
->> dd if=/dev/zero of=dummy bs=1m count=1000
->> echo 3 > /proc/sys/vm/drop_caches
->> dd if=dummy of=/dev/zero bs=512k
->>
->> - w/o compression -
->> 1048576000 bytes (0.9 G) copied, 2.082554 s, 480 M/s
->> 1048576000 bytes (0.9 G) copied, 2.081634 s, 480 M/s
->> 1048576000 bytes (0.9 G) copied, 2.090861 s, 478 M/s
->>
->> - before patch -
->> 1048576000 bytes (0.9 G) copied, 7.407527 s, 135 M/s
->> 1048576000 bytes (0.9 G) copied, 7.283734 s, 137 M/s
->> 1048576000 bytes (0.9 G) copied, 7.291508 s, 137 M/s
->>
->> - after patch -
->> 1048576000 bytes (0.9 G) copied, 1.998959 s, 500 M/s
->> 1048576000 bytes (0.9 G) copied, 1.987554 s, 503 M/s
->> 1048576000 bytes (0.9 G) copied, 1.986380 s, 503 M/s
->>
->> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> 
-> Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> 
-> Thanks,
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+QXR0ZW50aW9uIFRvIEVtYWlsIDogbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQKR29vZCBEYXkgU2lyLApPdXIgR3JvdXAgaGF2ZSB0aGUgZmluYW5jaWFsIGNhcGFiaWxpdHkg
+dG8gZmluYW5jZSBhbnkgaW52ZXN0bWVudCBwb3J0Zm9saW8gYXMgZmFyIGFzIGlzIGdlbnVpbmUs
+IGFsbCB3ZSBuZWVkIGlzIGEgY2FwYWJsZSBidXNpbmVzcyBwYXJ0bmVyIHRoYXQgcG9zc2Vzc2Vz
+IGludmVzdG1lbnQgc3RyYXRlZ2llcyBmb3IgcHJvZml0YWJsZSBidXNpbmVzcyBpbmZvcm1hdGlv
+biBmb3IgZ29vZCB0dXJuIG92ZXIgd2l0aGluIDEwLTMweWVhcnMuIE91ciBQYXJ0bmVycyBhcmUg
+d2lsbGluZyB0byBpbnZlc3QgMTBtaWxsaW9uIOKAlCA1YmlsbG9uIFVTRC4gV2UgY2FuIHByb3Zp
+ZGUgcHJvb2Ygb2YgZnVuZHMgb24gZGVtYW5kLCBhZnRlciBjZXJ0aWZpY2F0aW9uIG9mIHlvdXIg
+ZG9jdW1lbnRzL2RldGFpbHMuIFBsZWFzZSB3cml0ZSBtZSBiYWNrIGlmIHlvdSBjYW4gd29yayB3
+aXRoIG1lIG9uIHRoaXMgcHJvamVjdC4gVGhhbmsgWW91LApCZXN0IFJlZ2FyZHMKQW5kcmV3IE1h
+Y2tsaW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
+ZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9s
+aW51eC1mMmZzLWRldmVsCg==
