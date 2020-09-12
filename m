@@ -2,75 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB8342677E5
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Sep 2020 06:45:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B234226782F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Sep 2020 08:20:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kGxQ4-0005nG-16; Sat, 12 Sep 2020 04:45:48 +0000
+	id 1kGytH-0000bt-HI; Sat, 12 Sep 2020 06:20:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chris.ruehl@gtsys.com.hk>) id 1kGxPx-0005ma-9E
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Sep 2020 04:45:41 +0000
+ (envelope-from <chris.ruehl@gtsys.com.hk>) id 1kGytG-0000bl-85
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Sep 2020 06:20:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0haw4clbZKQGjgGoYFwCph2wDIPx/nj2UshC6o1CNaA=; b=SeT81f/gdYtaPQlhLWU5m8seRU
- V9dJedFnRDyv4lejqqolqYRqrqFb+Y9fx81AEKXlAqZ+CETRW1jg/ldsXfjo5kTskeM8R/aJmAnKN
- MDryAHWg6u+sAmhPp8X54agJGL0EAv13y/yUfltuq3Ql4S647W8f04LMJ0RPiz8X8XBM=;
+ bh=W5f2qTrr94gpYfeOt0I0woVUvi7vm1mkNylmUr9zc7Y=; b=bMYVsbBq0Kg4G5FXtw2eHDMcfD
+ TRQOfAIjzWNaLfG43dWRbPTJBJXugpz6x6f9BaAWKpkgA66NWH7Imd6UQlYXa+jNV/+Gs49nJ/xro
+ axPkYIr9noMUec+eWTcqNThk/mWE5UpVVViY9f7VMcbJ0hwzIK5B1CQAv5cxMKNO63eI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
- Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=0haw4clbZKQGjgGoYFwCph2wDIPx/nj2UshC6o1CNaA=; b=Y
- xc1e0ahEcv0U+SzvRXjGBVhgZIAWF11Z8uHMZrinu1+oQOaYYLbjUdSmXt4EN7p+duZgdS7BnCiXH
- t0AFlQVQLRjT2qC6aAQjK4ADMuqpT3dXTmCvdY9a7YBnBNnQ7JS2wqEucvIT7bjbVueSb9Tk43a4u
- fK5o7lahRa5zIMzQ=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=W5f2qTrr94gpYfeOt0I0woVUvi7vm1mkNylmUr9zc7Y=; b=Uf9u3ag2qVEqPiPkhdB7GxQ9eY
+ Aa7w03EdtoDumWa1IIM5P5bTgqG/pnPCpD+PzpbDVWHuo7DPwd9SF5WWEeq3NspDQMZghJ7Nd4UOE
+ 5UqQhaHriBjW+rHWnkrTwy+Bt3N/3cnyvYbfn9gjNQ/bayRgZAsEc8PHbHPy2ctowblQ=;
 Received: from [27.111.83.178] (helo=mail.gtsys.com.hk)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kGxPr-005GOt-UM
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Sep 2020 04:45:41 +0000
+ id 1kGytA-005kca-Hb
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Sep 2020 06:20:02 +0000
 Received: from localhost (localhost [127.0.0.1])
- by mail.gtsys.com.hk (Postfix) with ESMTP id 7FBEA2008B23
+ by mail.gtsys.com.hk (Postfix) with ESMTP id 2681D20460E7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 12 Sep 2020 12:20:18 +0800 (HKT)
+ Sat, 12 Sep 2020 14:19:40 +0800 (HKT)
 X-Virus-Scanned: Debian amavisd-new at gtsys.com.hk
 Received: from mail.gtsys.com.hk ([127.0.0.1])
  by localhost (mail.gtsys.com.hk [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MRhiv9UJr0hb
+ with ESMTP id FD8PEO6gknmh
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 12 Sep 2020 12:20:18 +0800 (HKT)
+ Sat, 12 Sep 2020 14:19:40 +0800 (HKT)
 Received: from s01.gtsys.com.hk (unknown [10.128.4.2])
- by mail.gtsys.com.hk (Postfix) with ESMTP id 5F4EA2009096
+ by mail.gtsys.com.hk (Postfix) with ESMTP id 062DD20460E6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 12 Sep 2020 12:20:18 +0800 (HKT)
+ Sat, 12 Sep 2020 14:19:40 +0800 (HKT)
 Received: from [10.128.2.32] (unknown [124.217.188.80])
- by s01.gtsys.com.hk (Postfix) with ESMTPSA id 3A4F7C019F4
+ by s01.gtsys.com.hk (Postfix) with ESMTPSA id D789DC019F4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 12 Sep 2020 12:20:18 +0800 (HKT)
+ Sat, 12 Sep 2020 14:19:39 +0800 (HKT)
 To: linux-f2fs-devel@lists.sourceforge.net
+References: <b278baec-65df-312e-5d26-89dc1ea25c86@gtsys.com.hk>
 From: Chris Ruehl <chris.ruehl@gtsys.com.hk>
-Message-ID: <b278baec-65df-312e-5d26-89dc1ea25c86@gtsys.com.hk>
-Date: Sat, 12 Sep 2020 12:20:17 +0800
+Message-ID: <fbd0fa14-f7a8-f6ff-abd4-37310228f694@gtsys.com.hk>
+Date: Sat, 12 Sep 2020 14:19:39 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
+In-Reply-To: <b278baec-65df-312e-5d26-89dc1ea25c86@gtsys.com.hk>
 Content-Language: en-US
-X-Spam-Score: 1.0 (+)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Headers-End: 1kGxPr-005GOt-UM
-Subject: [f2fs-dev] F2fs failed on fresh installation 1st boot
+ -1.5 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kGytA-005kca-Hb
+Subject: Re: [f2fs-dev] F2fs failed on fresh installation 1st boot
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,89 +85,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
-
-we encounter random crash on new installed partition at
-first boot.
-Kernel: 4.9.235
-Kernel: 5.4.64 (blow)
-f2fs-tools: 1.4.0
-
-[    1.520829] mmc1: new DDR MMC card at address 0001 
- 
-
-[    1.526223] mmcblk1: mmc1:0001 DG4008 7.28 GiB 
- 
-
-[    1.531037] mmcblk1boot0: mmc1:0001 DG4008 partition 1 4.00 MiB 
- 
-
-[    1.537244] mmcblk1boot1: mmc1:0001 DG4008 partition 2 4.00 MiB 
- 
-
-[    1.543416] mmcblk1rpmb: mmc1:0001 DG4008 partition 3 4.00 MiB, chardev 
-(247:0) 
-
-[    1.554445]  mmcblk1: p1 p2 
- 
-
-[    1.572323] F2FS-fs (mmcblk1p2): Mismatch valid blocks 512 vs. 508 
- 
-
-[    1.578552] F2FS-fs (mmcblk1p2): Failed to initialize F2FS segment manager 
-(-117) 
-
-[    1.586374] VFS: Cannot open root device "mmcblk1p2" or unknown-block(179,2): 
-error -117 
-
-[    1.594496] Please append a correct "root=" boot option; here are the 
-available partitions:
-
-I reboot into the installation SDCard and run the fsck.f2fs with no errors
-
-root@ba81ba8b6125:~# fsck.f2fs /dev/mmcblk1p2
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: sector size = 512
-Info: total sectors = 7520000 (3671 MB)
-Info: MKFS version
-   "Linux version 5.4.64 (xxx) (gcc version 8.3.0 (Debian 8.3.0-2)) #74 SMP Sat 
-Sep 12 10:56:24 HKT 2020"
-Info: FSCK version
-   from "Linux version 5.4.64 (xxx) (gcc version 8.3.0 (Debian 8.3.0-2)) #74 SMP 
-Sat Sep 12 10:56:24 HKT 2020"
-     to "Linux version 5.4.64 (xxx) (gcc version 8.3.0 (Debian 8.3.0-2)) #74 SMP 
-Sat Sep 12 10:56:24 HKT 2020"
-Info: superblock features = 0 :
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: total FS sectors = 7520000 (3671 MB)
-Info: CKPT version = 14f987b7
-Info: Checked valid nat_bits in checkpoint
-Info: checkpoint state = 1c5 :  trimmed nat_bits crc compacted_summary unmount
-
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0x7]
-[FSCK] valid_block_count matching with CP             [Ok..] [0x1c29f]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x596b]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x596b]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x5953]
-[FSCK] free segment_count matched with CP             [Ok..] [0x625]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Ok..]
-
-Done: 5.592724 secs
-
-Regards
-Chris
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+VXBkYXRlCk9uIDEyLzkvMjAyMCAxMjoyMCBwbSwgQ2hyaXMgUnVlaGwgd3JvdGU6Cj4gSGksCj4g
+Cj4gd2UgZW5jb3VudGVyIHJhbmRvbSBjcmFzaCBvbiBuZXcgaW5zdGFsbGVkIHBhcnRpdGlvbiBh
+dAo+IGZpcnN0IGJvb3QuCj4gS2VybmVsOiA0LjkuMjM1Cj4gS2VybmVsOiA1LjQuNjQgKGJsb3cp
+Cj4gZjJmcy10b29sczogMS40LjAKPiAKPiBbwqDCoMKgIDEuNTIwODI5XSBtbWMxOiBuZXcgRERS
+IE1NQyBjYXJkIGF0IGFkZHJlc3MgMDAwMQo+IAo+IFvCoMKgwqAgMS41MjYyMjNdIG1tY2JsazE6
+IG1tYzE6MDAwMSBERzQwMDggNy4yOCBHaUIKPiAKPiBbwqDCoMKgIDEuNTMxMDM3XSBtbWNibGsx
+Ym9vdDA6IG1tYzE6MDAwMSBERzQwMDggcGFydGl0aW9uIDEgNC4wMCBNaUIKPiAKPiBbwqDCoMKg
+IDEuNTM3MjQ0XSBtbWNibGsxYm9vdDE6IG1tYzE6MDAwMSBERzQwMDggcGFydGl0aW9uIDIgNC4w
+MCBNaUIKPiAKPiBbwqDCoMKgIDEuNTQzNDE2XSBtbWNibGsxcnBtYjogbW1jMTowMDAxIERHNDAw
+OCBwYXJ0aXRpb24gMyA0LjAwIE1pQiwgY2hhcmRldiAoMjQ3OjApCj4gW8KgwqDCoCAxLjU1NDQ0
+NV3CoCBtbWNibGsxOiBwMSBwMgo+IAo+IFvCoMKgwqAgMS41NzIzMjNdIEYyRlMtZnMgKG1tY2Js
+azFwMik6IE1pc21hdGNoIHZhbGlkIGJsb2NrcyA1MTIgdnMuIDUwOAo+IAo+IFvCoMKgwqAgMS41
+Nzg1NTJdIEYyRlMtZnMgKG1tY2JsazFwMik6IEZhaWxlZCB0byBpbml0aWFsaXplIEYyRlMgc2Vn
+bWVudCBtYW5hZ2VyIAo+ICgtMTE3KQo+IFvCoMKgwqAgMS41ODYzNzRdIFZGUzogQ2Fubm90IG9w
+ZW4gcm9vdCBkZXZpY2UgIm1tY2JsazFwMiIgb3IgdW5rbm93bi1ibG9jaygxNzksMik6IAo+IGVy
+cm9yIC0xMTcKPiBbwqDCoMKgIDEuNTk0NDk2XSBQbGVhc2UgYXBwZW5kIGEgY29ycmVjdCAicm9v
+dD0iIGJvb3Qgb3B0aW9uOyBoZXJlIGFyZSB0aGUgCj4gYXZhaWxhYmxlIHBhcnRpdGlvbnM6Cj4g
+Cj4gSSByZWJvb3QgaW50byB0aGUgaW5zdGFsbGF0aW9uIFNEQ2FyZCBhbmQgcnVuIHRoZSBmc2Nr
+LmYyZnMgd2l0aCBubyBlcnJvcnMKPiAKPiByb290QGJhODFiYThiNjEyNTp+IyBmc2NrLmYyZnMg
+L2Rldi9tbWNibGsxcDIKPiBJbmZvOiBTZWdtZW50cyBwZXIgc2VjdGlvbiA9IDEKPiBJbmZvOiBT
+ZWN0aW9ucyBwZXIgem9uZSA9IDEKPiBJbmZvOiBzZWN0b3Igc2l6ZSA9IDUxMgo+IEluZm86IHRv
+dGFsIHNlY3RvcnMgPSA3NTIwMDAwICgzNjcxIE1CKQo+IEluZm86IE1LRlMgdmVyc2lvbgo+ICDC
+oCAiTGludXggdmVyc2lvbiA1LjQuNjQgKHh4eCkgKGdjYyB2ZXJzaW9uIDguMy4wIChEZWJpYW4g
+OC4zLjAtMikpICM3NCBTTVAgU2F0IAo+IFNlcCAxMiAxMDo1NjoyNCBIS1QgMjAyMCIKPiBJbmZv
+OiBGU0NLIHZlcnNpb24KPiAgwqAgZnJvbSAiTGludXggdmVyc2lvbiA1LjQuNjQgKHh4eCkgKGdj
+YyB2ZXJzaW9uIDguMy4wIChEZWJpYW4gOC4zLjAtMikpICM3NCBTTVAgCj4gU2F0IFNlcCAxMiAx
+MDo1NjoyNCBIS1QgMjAyMCIKPiAgwqDCoMKgIHRvICJMaW51eCB2ZXJzaW9uIDUuNC42NCAoeHh4
+KSAoZ2NjIHZlcnNpb24gOC4zLjAgKERlYmlhbiA4LjMuMC0yKSkgIzc0IFNNUCAKPiBTYXQgU2Vw
+IDEyIDEwOjU2OjI0IEhLVCAyMDIwIgo+IEluZm86IHN1cGVyYmxvY2sgZmVhdHVyZXMgPSAwIDoK
+PiBJbmZvOiBzdXBlcmJsb2NrIGVuY3J5cHQgbGV2ZWwgPSAwLCBzYWx0ID0gMDAwMDAwMDAwMDAw
+MDAwMDAwMDAwMDAwMDAwMDAwMDAKPiBJbmZvOiB0b3RhbCBGUyBzZWN0b3JzID0gNzUyMDAwMCAo
+MzY3MSBNQikKPiBJbmZvOiBDS1BUIHZlcnNpb24gPSAxNGY5ODdiNwo+IEluZm86IENoZWNrZWQg
+dmFsaWQgbmF0X2JpdHMgaW4gY2hlY2twb2ludAo+IEluZm86IGNoZWNrcG9pbnQgc3RhdGUgPSAx
+YzUgOsKgIHRyaW1tZWQgbmF0X2JpdHMgY3JjIGNvbXBhY3RlZF9zdW1tYXJ5IHVubW91bnQKPiAK
+PiBbRlNDS10gVW5yZWFjaGFibGUgbmF0IGVudHJpZXPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXSBbMHgwXQo+IFtGU0NLXSBTSVQgdmFsaWQgYmxv
+Y2sgYml0bWFwIGNoZWNraW5nwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXQo+
+IFtGU0NLXSBIYXJkIGxpbmsgY2hlY2tpbmcgZm9yIHJlZ3VsYXIgZmlsZcKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgW09rLi5dIFsweDddCj4gW0ZTQ0tdIHZhbGlkX2Jsb2NrX2NvdW50IG1hdGNoaW5n
+IHdpdGggQ1DCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dIFsweDFjMjlmXQo+IFtGU0NL
+XSB2YWxpZF9ub2RlX2NvdW50IG1hdGNoaW5nIHdpdGggQ1AgKGRlIGxvb2t1cCnCoCBbT2suLl0g
+WzB4NTk2Yl0KPiBbRlNDS10gdmFsaWRfbm9kZV9jb3VudCBtYXRjaGluZyB3aXRoIENQIChuYXQg
+bG9va3VwKSBbT2suLl0gWzB4NTk2Yl0KPiBbRlNDS10gdmFsaWRfaW5vZGVfY291bnQgbWF0Y2hl
+ZCB3aXRoIENQwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dIFsweDU5NTNdCj4gW0ZT
+Q0tdIGZyZWUgc2VnbWVudF9jb3VudCBtYXRjaGVkIHdpdGggQ1DCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgW09rLi5dIFsweDYyNV0KPiBbRlNDS10gbmV4dCBibG9jayBvZmZzZXQgaXMgZnJlZcKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBbT2suLl0KPiBbRlNDS10g
+Zml4aW5nIFNJVCB0eXBlcwo+IFtGU0NLXSBvdGhlciBjb3JydXB0ZWQgYnVnc8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dCj4gCj4gRG9u
+ZTogNS41OTI3MjQgc2Vjcwo+IAo+IFJlZ2FyZHMKPiBDaHJpcwo+IAo+IAo+IF9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBt
+YWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0
+dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2
+ZWwKCkNPTkZJR19ISU1FTSBpcyBub3Qgc2V0CkNPTkZJR19QUkVFTVBUX05PTkUgaXMgc2V0LgoK
+UHJvYmxlbSBub3Qgc2VlbiB3aGVuIHNldApDT05GSUdfUFJFRU1QVAoKSWYgdGhhdCBoZWxwIHRv
+IHBvaW50IHRvIHRoZSBidWcuCgotQ2hyaXMKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1m
+MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
+Lm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
