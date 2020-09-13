@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52D92267EA7
+	by mail.lfdr.de (Postfix) with ESMTPS id 5627B267EA8
 	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 13 Sep 2020 10:38:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kHNWi-0001B9-PY; Sun, 13 Sep 2020 08:38:24 +0000
+	id 1kHNWj-0001BM-0W; Sun, 13 Sep 2020 08:38:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kHNWg-0001AZ-BG
+ (envelope-from <ebiggers@kernel.org>) id 1kHNWg-0001Aa-BI
  for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jkNrjTt8shjtg+o0ygBkC+ogiOmaLBRtatna970dw3w=; b=K2LXSId/TXW9NV3wBOf9gtF/Qv
- iThNfe140zNjyDatuL0uMCr6h4I8RMcYQTvgINK9ndjyJzsIanrk/407TU3clJawS5cG+6SEc4HQU
- 7Td3lGSoBswmVr2UH91YUB1Aqq58yTQ9uABtsW6+YfZoxNx6v0HWOuDP7hx3DxBwgDx8=;
+ bh=EOL42wPeURqtTV7VNYY5CnaXebGzA/DaDOZ4xYhkxcw=; b=eSRJQhJWnAABeIwpIiYXGbpmrE
+ k1IjlrinnQ+zg5zkB196iW5xMUFv6nDWxLtDJQp1KZJVlwmREB2cySg8oLTrTsJRX+6fxkVYhbqws
+ QP9wkAqua3XDmm6J5cHxHIJBtw/69UpISL2AdRIa8hwQ5ujqrM3NjqX7/REFJbKCRl+Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jkNrjTt8shjtg+o0ygBkC+ogiOmaLBRtatna970dw3w=; b=cPA1+hpCRte+wUnedm5WKx8W7G
- G8ct4i+dToK7nbmZq9zH8lmJSj5+887ZBqE2h01ior3lh1QMA0Y6M/2Jy2kU+n3MX3JRPfgTi7daY
- Db+eFCWRvoEipXZioXfxlpMrOr5TOH+6MbKM1GDExVup5i6ARiu6Ss7qUZ0tC3e+HVSQ=;
+ bh=EOL42wPeURqtTV7VNYY5CnaXebGzA/DaDOZ4xYhkxcw=; b=ZrAUMcpmyxAsnEzb0vLFv28+di
+ qfZXeV912eQRgGTwKS7LZ/cqsaj0gh1MqzKk+avXdDMWhXQoTsoJn3mKEIJNFdqPYgveNDCrg2n1G
+ kYAwAnQUeml+KtMpTEnWXGRDhhOxIUYlgVx87WPaIsDX+nFd+32dgBq0tJq47DyllrzI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kHNWc-007Pf7-8j
+ id 1kHNWc-006qAq-8c
  for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:22 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1F82221974;
+ by mail.kernel.org (Postfix) with ESMTPSA id 668D421D1A;
  Sun, 13 Sep 2020 08:37:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1599986279;
- bh=kONvZL9ec2SBbE4EAel9mci0YCQN1pZc7hmFt/F6qwY=;
+ bh=QcAYVOOtDATZpIRqzv/LkDypHnDI6SB1ZfPpGvjEMKo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Dt37vv3oahYtgL3ZyctM6QKg97LdSKU34ArCqE9y/U84AQImmjJjp3IWpIeQl2boS
- KR5a1PsbxdPL8JYbUIX8BxdraDjfMGMuehFFlmoxAmRLN8Iu8UVTjj0WRil4BKsjzY
- V8lffoJKumHVSbQOwdTzejpV6lXUi6DoBaK6UQQ4=
+ b=oUtAxnwOQeM7Dr2kgVlV4dfly4HkPpXojureiWqD3KugJJtonikaBJ/0WmS3mzwuK
+ qMm4vt2DVIHEOZTV+hdqzAxhm6zjVO48B+OZgoviTP4C8OaMEwnUsQFSxeKIaiKp0X
+ OfnRS1CorFgwModQHk4r5wqxh3MkMjhLTDRNgh6Y=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 13 Sep 2020 01:36:14 -0700
-Message-Id: <20200913083620.170627-6-ebiggers@kernel.org>
+Date: Sun, 13 Sep 2020 01:36:15 -0700
+Message-Id: <20200913083620.170627-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200913083620.170627-1-ebiggers@kernel.org>
 References: <20200913083620.170627-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.7 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kHNWc-007Pf7-8j
-Subject: [f2fs-dev] [PATCH v2 05/11] ubifs: use fscrypt_prepare_new_inode()
- and fscrypt_set_context()
+X-Headers-End: 1kHNWc-006qAq-8c
+Subject: [f2fs-dev] [PATCH v2 06/11] fscrypt: remove
+ fscrypt_inherit_context()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,103 +92,91 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Convert ubifs to use the new functions fscrypt_prepare_new_inode() and
-fscrypt_set_context().
-
-Unlike ext4 and f2fs, this doesn't appear to fix any deadlock bug.  But
-it does shorten the code slightly and get all filesystems using the same
-helper functions, so that fscrypt_inherit_context() can be removed.
-
-It also fixes an incorrect error code where ubifs returned EPERM instead
-of the expected ENOKEY.
+Now that all filesystems have been converted to use
+fscrypt_prepare_new_inode() and fscrypt_set_context(),
+fscrypt_inherit_context() is no longer used.  Remove it.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ubifs/dir.c | 38 ++++++++++++++++----------------------
- 1 file changed, 16 insertions(+), 22 deletions(-)
+ fs/crypto/policy.c      | 37 -------------------------------------
+ include/linux/fscrypt.h |  9 ---------
+ 2 files changed, 46 deletions(-)
 
-diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
-index a9c1f5a9c9bdd..155521e51ac57 100644
---- a/fs/ubifs/dir.c
-+++ b/fs/ubifs/dir.c
-@@ -81,19 +81,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	struct ubifs_inode *ui;
- 	bool encrypted = false;
+diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
+index 7e96953d385ec..4ff893f7b030a 100644
+--- a/fs/crypto/policy.c
++++ b/fs/crypto/policy.c
+@@ -628,43 +628,6 @@ int fscrypt_has_permitted_context(struct inode *parent, struct inode *child)
+ }
+ EXPORT_SYMBOL(fscrypt_has_permitted_context);
  
--	if (IS_ENCRYPTED(dir)) {
--		err = fscrypt_get_encryption_info(dir);
--		if (err) {
--			ubifs_err(c, "fscrypt_get_encryption_info failed: %i", err);
--			return ERR_PTR(err);
--		}
+-/**
+- * fscrypt_inherit_context() - Sets a child context from its parent
+- * @parent: Parent inode from which the context is inherited.
+- * @child:  Child inode that inherits the context from @parent.
+- * @fs_data:  private data given by FS.
+- * @preload:  preload child i_crypt_info if true
+- *
+- * Return: 0 on success, -errno on failure
+- */
+-int fscrypt_inherit_context(struct inode *parent, struct inode *child,
+-						void *fs_data, bool preload)
+-{
+-	u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
+-	union fscrypt_context ctx;
+-	int ctxsize;
+-	struct fscrypt_info *ci;
+-	int res;
 -
--		if (!fscrypt_has_encryption_key(dir))
--			return ERR_PTR(-EPERM);
+-	res = fscrypt_get_encryption_info(parent);
+-	if (res < 0)
+-		return res;
 -
--		encrypted = true;
--	}
+-	ci = fscrypt_get_info(parent);
+-	if (ci == NULL)
+-		return -ENOKEY;
 -
- 	inode = new_inode(c->vfs_sb);
- 	ui = ubifs_inode(inode);
- 	if (!inode)
-@@ -112,6 +99,12 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 			 current_time(inode);
- 	inode->i_mapping->nrpages = 0;
+-	get_random_bytes(nonce, FSCRYPT_FILE_NONCE_SIZE);
+-	ctxsize = fscrypt_new_context(&ctx, &ci->ci_policy, nonce);
+-
+-	BUILD_BUG_ON(sizeof(ctx) != FSCRYPT_SET_CONTEXT_MAX_SIZE);
+-	res = parent->i_sb->s_cop->set_context(child, &ctx, ctxsize, fs_data);
+-	if (res)
+-		return res;
+-	return preload ? fscrypt_get_encryption_info(child): 0;
+-}
+-EXPORT_SYMBOL(fscrypt_inherit_context);
+-
+ /**
+  * fscrypt_set_context() - Set the fscrypt context of a new inode
+  * @inode: a new inode
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index 9cf7ca90f3abb..81d6ded243288 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -156,8 +156,6 @@ int fscrypt_ioctl_get_policy(struct file *filp, void __user *arg);
+ int fscrypt_ioctl_get_policy_ex(struct file *filp, void __user *arg);
+ int fscrypt_ioctl_get_nonce(struct file *filp, void __user *arg);
+ int fscrypt_has_permitted_context(struct inode *parent, struct inode *child);
+-int fscrypt_inherit_context(struct inode *parent, struct inode *child,
+-			    void *fs_data, bool preload);
+ int fscrypt_set_context(struct inode *inode, void *fs_data);
  
-+	err = fscrypt_prepare_new_inode(dir, inode, &encrypted);
-+	if (err) {
-+		ubifs_err(c, "fscrypt_prepare_new_inode failed: %i", err);
-+		goto out_iput;
-+	}
-+
- 	switch (mode & S_IFMT) {
- 	case S_IFREG:
- 		inode->i_mapping->a_ops = &ubifs_file_address_operations;
-@@ -131,7 +124,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	case S_IFBLK:
- 	case S_IFCHR:
- 		inode->i_op  = &ubifs_file_inode_operations;
--		encrypted = false;
- 		break;
- 	default:
- 		BUG();
-@@ -151,9 +143,8 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 		if (c->highest_inum >= INUM_WATERMARK) {
- 			spin_unlock(&c->cnt_lock);
- 			ubifs_err(c, "out of inode numbers");
--			make_bad_inode(inode);
--			iput(inode);
--			return ERR_PTR(-EINVAL);
-+			err = -EINVAL;
-+			goto out_iput;
- 		}
- 		ubifs_warn(c, "running out of inode numbers (current %lu, max %u)",
- 			   (unsigned long)c->highest_inum, INUM_WATERMARK);
-@@ -171,16 +162,19 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	spin_unlock(&c->cnt_lock);
- 
- 	if (encrypted) {
--		err = fscrypt_inherit_context(dir, inode, &encrypted, true);
-+		err = fscrypt_set_context(inode, NULL);
- 		if (err) {
--			ubifs_err(c, "fscrypt_inherit_context failed: %i", err);
--			make_bad_inode(inode);
--			iput(inode);
--			return ERR_PTR(err);
-+			ubifs_err(c, "fscrypt_set_context failed: %i", err);
-+			goto out_iput;
- 		}
- 	}
- 
- 	return inode;
-+
-+out_iput:
-+	make_bad_inode(inode);
-+	iput(inode);
-+	return ERR_PTR(err);
+ struct fscrypt_dummy_context {
+@@ -343,13 +341,6 @@ static inline int fscrypt_has_permitted_context(struct inode *parent,
+ 	return 0;
  }
  
- static int dbg_check_name(const struct ubifs_info *c,
+-static inline int fscrypt_inherit_context(struct inode *parent,
+-					  struct inode *child,
+-					  void *fs_data, bool preload)
+-{
+-	return -EOPNOTSUPP;
+-}
+-
+ static inline int fscrypt_set_context(struct inode *inode, void *fs_data)
+ {
+ 	return -EOPNOTSUPP;
 -- 
 2.28.0
 
