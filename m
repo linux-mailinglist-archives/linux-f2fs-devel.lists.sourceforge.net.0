@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5627B267EA8
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 13 Sep 2020 10:38:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EA27267EAE
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 13 Sep 2020 10:38:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kHNWj-0001BM-0W; Sun, 13 Sep 2020 08:38:25 +0000
+	id 1kHNWq-0001Cy-4b; Sun, 13 Sep 2020 08:38:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kHNWg-0001Aa-BI
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:22 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kHNWo-0001CH-8z
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EOL42wPeURqtTV7VNYY5CnaXebGzA/DaDOZ4xYhkxcw=; b=eSRJQhJWnAABeIwpIiYXGbpmrE
- k1IjlrinnQ+zg5zkB196iW5xMUFv6nDWxLtDJQp1KZJVlwmREB2cySg8oLTrTsJRX+6fxkVYhbqws
- QP9wkAqua3XDmm6J5cHxHIJBtw/69UpISL2AdRIa8hwQ5ujqrM3NjqX7/REFJbKCRl+Y=;
+ bh=AGEkovunS7dU2Ykk0C3iWfQOmlfDqLZBafXQ/zScJJ8=; b=J6j7n0pKUMMWSFO2Yeoe/oKSSD
+ FqsYu9qLDwio2JxO+mSrff5Hjy7HHp9930B57Lg3cl4wz2ZDSHqifCkRZTaCxPkq/OxthLSiVddaW
+ 92aXzm+W03C/kRpqP+lfdiVHAhhzqzHuID+0pe4h7lGzbm9QwTioZ2jvg8x9djQ4d5d8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EOL42wPeURqtTV7VNYY5CnaXebGzA/DaDOZ4xYhkxcw=; b=ZrAUMcpmyxAsnEzb0vLFv28+di
- qfZXeV912eQRgGTwKS7LZ/cqsaj0gh1MqzKk+avXdDMWhXQoTsoJn3mKEIJNFdqPYgveNDCrg2n1G
- kYAwAnQUeml+KtMpTEnWXGRDhhOxIUYlgVx87WPaIsDX+nFd+32dgBq0tJq47DyllrzI=;
+ bh=AGEkovunS7dU2Ykk0C3iWfQOmlfDqLZBafXQ/zScJJ8=; b=PqoZjwk96ba88+XbjjDqpWh4rJ
+ STEwX/Pvqs55uGW0ijpU7wsjmDWTbZupMFD57pYy50bi6zFMe5JIWfzfdKyYV1n5h4Xyx5593LTlu
+ OwHow1SNiRE5OhCD/yJD1x5NUmTd/CLyntToJS6Pe6NgTdebSt/c3qCubleuOnmu3GZ8=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kHNWc-006qAq-8c
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:22 +0000
+ id 1kHNWj-007PgC-Ax
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 13 Sep 2020 08:38:29 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 668D421D1A;
+ by mail.kernel.org (Postfix) with ESMTPSA id ADEDA21897;
  Sun, 13 Sep 2020 08:37:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1599986279;
- bh=QcAYVOOtDATZpIRqzv/LkDypHnDI6SB1ZfPpGvjEMKo=;
+ bh=ZzMv1pUhY0NvnbJHjrS2ra7ESt6vtXPBJHTWIdsGFCY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oUtAxnwOQeM7Dr2kgVlV4dfly4HkPpXojureiWqD3KugJJtonikaBJ/0WmS3mzwuK
- qMm4vt2DVIHEOZTV+hdqzAxhm6zjVO48B+OZgoviTP4C8OaMEwnUsQFSxeKIaiKp0X
- OfnRS1CorFgwModQHk4r5wqxh3MkMjhLTDRNgh6Y=
+ b=htn5yvO7LimZHQRe0sNzsC6HWpNV2ozCcjLCoxA2U9dMCvVUhX+F3sLgJGNsNeThm
+ Qpm56LCeKLX/y+YPmuNFV3XiL6WWzw4EGH/L7x1ZgQem4c6oYP9lj9QNygbClngGw9
+ gIDlHOloDtyrRG1uzwwilmGP9u8I6vN0pvLAbntk=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 13 Sep 2020 01:36:15 -0700
-Message-Id: <20200913083620.170627-7-ebiggers@kernel.org>
+Date: Sun, 13 Sep 2020 01:36:16 -0700
+Message-Id: <20200913083620.170627-8-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200913083620.170627-1-ebiggers@kernel.org>
 References: <20200913083620.170627-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.7 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kHNWc-006qAq-8c
-Subject: [f2fs-dev] [PATCH v2 06/11] fscrypt: remove
- fscrypt_inherit_context()
+X-Headers-End: 1kHNWj-007PgC-Ax
+Subject: [f2fs-dev] [PATCH v2 07/11] fscrypt: require that
+ fscrypt_encrypt_symlink() already has key
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,90 +93,37 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 From: Eric Biggers <ebiggers@google.com>
 
 Now that all filesystems have been converted to use
-fscrypt_prepare_new_inode() and fscrypt_set_context(),
-fscrypt_inherit_context() is no longer used.  Remove it.
+fscrypt_prepare_new_inode(), the encryption key for new symlink inodes
+is now already set up whenever we try to encrypt the symlink target.
+Enforce this rather than try to set up the key again when it may be too
+late to do so safely.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/policy.c      | 37 -------------------------------------
- include/linux/fscrypt.h |  9 ---------
- 2 files changed, 46 deletions(-)
+ fs/crypto/hooks.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index 7e96953d385ec..4ff893f7b030a 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -628,43 +628,6 @@ int fscrypt_has_permitted_context(struct inode *parent, struct inode *child)
- }
- EXPORT_SYMBOL(fscrypt_has_permitted_context);
+diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
+index 491b252843eb9..7748db5092409 100644
+--- a/fs/crypto/hooks.c
++++ b/fs/crypto/hooks.c
+@@ -217,9 +217,13 @@ int __fscrypt_encrypt_symlink(struct inode *inode, const char *target,
+ 	struct fscrypt_symlink_data *sd;
+ 	unsigned int ciphertext_len;
  
--/**
-- * fscrypt_inherit_context() - Sets a child context from its parent
-- * @parent: Parent inode from which the context is inherited.
-- * @child:  Child inode that inherits the context from @parent.
-- * @fs_data:  private data given by FS.
-- * @preload:  preload child i_crypt_info if true
-- *
-- * Return: 0 on success, -errno on failure
-- */
--int fscrypt_inherit_context(struct inode *parent, struct inode *child,
--						void *fs_data, bool preload)
--{
--	u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
--	union fscrypt_context ctx;
--	int ctxsize;
--	struct fscrypt_info *ci;
--	int res;
--
--	res = fscrypt_get_encryption_info(parent);
--	if (res < 0)
--		return res;
--
--	ci = fscrypt_get_info(parent);
--	if (ci == NULL)
--		return -ENOKEY;
--
--	get_random_bytes(nonce, FSCRYPT_FILE_NONCE_SIZE);
--	ctxsize = fscrypt_new_context(&ctx, &ci->ci_policy, nonce);
--
--	BUILD_BUG_ON(sizeof(ctx) != FSCRYPT_SET_CONTEXT_MAX_SIZE);
--	res = parent->i_sb->s_cop->set_context(child, &ctx, ctxsize, fs_data);
--	if (res)
--		return res;
--	return preload ? fscrypt_get_encryption_info(child): 0;
--}
--EXPORT_SYMBOL(fscrypt_inherit_context);
--
- /**
-  * fscrypt_set_context() - Set the fscrypt context of a new inode
-  * @inode: a new inode
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 9cf7ca90f3abb..81d6ded243288 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -156,8 +156,6 @@ int fscrypt_ioctl_get_policy(struct file *filp, void __user *arg);
- int fscrypt_ioctl_get_policy_ex(struct file *filp, void __user *arg);
- int fscrypt_ioctl_get_nonce(struct file *filp, void __user *arg);
- int fscrypt_has_permitted_context(struct inode *parent, struct inode *child);
--int fscrypt_inherit_context(struct inode *parent, struct inode *child,
--			    void *fs_data, bool preload);
- int fscrypt_set_context(struct inode *inode, void *fs_data);
+-	err = fscrypt_require_key(inode);
+-	if (err)
+-		return err;
++	/*
++	 * fscrypt_prepare_new_inode() should have already set up the new
++	 * symlink inode's encryption key.  We don't wait until now to do it,
++	 * since we may be in a filesystem transaction now.
++	 */
++	if (WARN_ON_ONCE(!fscrypt_has_encryption_key(inode)))
++		return -ENOKEY;
  
- struct fscrypt_dummy_context {
-@@ -343,13 +341,6 @@ static inline int fscrypt_has_permitted_context(struct inode *parent,
- 	return 0;
- }
- 
--static inline int fscrypt_inherit_context(struct inode *parent,
--					  struct inode *child,
--					  void *fs_data, bool preload)
--{
--	return -EOPNOTSUPP;
--}
--
- static inline int fscrypt_set_context(struct inode *inode, void *fs_data)
- {
- 	return -EOPNOTSUPP;
+ 	if (disk_link->name) {
+ 		/* filesystem-provided buffer */
 -- 
 2.28.0
 
