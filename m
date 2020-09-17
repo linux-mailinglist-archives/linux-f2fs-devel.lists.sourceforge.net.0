@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7EA926D21C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 06:13:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D597C26D220
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 06:13:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kIlIZ-0006cl-Ku; Thu, 17 Sep 2020 04:13:31 +0000
+	id 1kIlIk-0006Dl-Ja; Thu, 17 Sep 2020 04:13:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kIlIW-0006cO-57
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:28 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kIlIe-0006CY-V2
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jkNrjTt8shjtg+o0ygBkC+ogiOmaLBRtatna970dw3w=; b=VDXYiFTjv83ryz3I7U20PuLxUD
- ln/7jVKALKGyjYgZYVtAbdIRMt8q5QyBkA+TZZFGFhl5Rtu3M+BhCscvV9F4BX3Axw4Y6i+vPhOLo
- 8KwF6S5rkp1dkuCesr7xFn7UEevmJs/WQD42+K7je5nSlb8WJgaE64uuZfBt/Hh6qMs8=;
+ bh=dlZh8CacO0jmMHNg0hq1/LPjo+9l+arjszSTZwB7Chg=; b=CJwBmzBOjCRScdCV+tICTYeCxC
+ sH8RETXUfCa2gVfeO5pLjBeTHBwdVp2MtF9h9OEqRHqLEHgVgLgsHiswbbFf0fSqoYMO2LokfH87h
+ 5td6b6jeof7Pdr1rvX8oToQCXzHa1Bh759fszPM99beYb+lHwu3j4u6QMLy7b0XLOerA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jkNrjTt8shjtg+o0ygBkC+ogiOmaLBRtatna970dw3w=; b=e2NhxZoCfIIs2/Vv/OaDWMxbtw
- J4751nWFxbRh1Kewhu8esZasedYY9l2gWazRnkHKy8RdivvOSF7F/+fh7qgec368Tsf9O2yVWTKLn
- FShj1Q6d6nmhc84MAk4aaHMCYipksoQip5NT1Z76QsukYkaTmHFerAEz0HCyoditYIW8=;
+ bh=dlZh8CacO0jmMHNg0hq1/LPjo+9l+arjszSTZwB7Chg=; b=FcbNLLDMc5yjOG7TKc+hHcgOTq
+ gDtCfTlDSWxSAkAWbDmn8VPh2UR4vqDSYtRS8of5mJ3JBDRBb3g0xm7awq7BmdrVvyW3mKBn5Ayvh
+ tRw6er+StZmFT5gEd5AytGA7kPa/QvwHWXPzI3xmepPZiPInIOTCto2mbNWFQBTNgKK0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kIlIU-00CRbs-EM
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:28 +0000
+ id 1kIlIb-00DZed-JJ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:36 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 53BB021D1B;
+ by mail.kernel.org (Postfix) with ESMTPSA id 9750121D41;
  Thu, 17 Sep 2020 04:13:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1600315989;
- bh=kONvZL9ec2SBbE4EAel9mci0YCQN1pZc7hmFt/F6qwY=;
+ bh=pcuDTH9STD/mcWVjY9xk4V3olh0O7QdLKYJXVZYhQo8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=UV/WrbzmMh/m1GcJfVh/IfrXQYzbYI++xzjHNF1UVeIGheoZk8x4jPK18g8sIGotG
- CbC5PHYju1c79ieBLnAf26mkx6hB5TXPaWBq2uxvQ+NKofgZXvuUg5y5OThKsE4CBu
- fosUQqDRp3/xsmxSqVSrTDuIO8vQ3CRlBZZ7H3ws=
+ b=WjOZn/iFKAnidcOCFe+ysawmOaq+wZI9ahIoTC+JpTCuGheF3T5BHxOwXh1kL3zCZ
+ 3bymu2kDogYINSoFHUgY+sOPCKrKs0XS/Hi5wozjy5gL6kj6NUPkMa8IZcCNDveVRT
+ WvDDwm829kBpdreaI9WfPgzWgY3w2UuXhMRU3Kk4=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Wed, 16 Sep 2020 21:11:28 -0700
-Message-Id: <20200917041136.178600-6-ebiggers@kernel.org>
+Date: Wed, 16 Sep 2020 21:11:29 -0700
+Message-Id: <20200917041136.178600-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200917041136.178600-1-ebiggers@kernel.org>
 References: <20200917041136.178600-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kIlIU-00CRbs-EM
-Subject: [f2fs-dev] [PATCH v3 05/13] ubifs: use fscrypt_prepare_new_inode()
- and fscrypt_set_context()
+X-Headers-End: 1kIlIb-00DZed-JJ
+Subject: [f2fs-dev] [PATCH v3 06/13] fscrypt: adjust logging for in-creation
+ inodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,103 +92,63 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Convert ubifs to use the new functions fscrypt_prepare_new_inode() and
-fscrypt_set_context().
-
-Unlike ext4 and f2fs, this doesn't appear to fix any deadlock bug.  But
-it does shorten the code slightly and get all filesystems using the same
-helper functions, so that fscrypt_inherit_context() can be removed.
-
-It also fixes an incorrect error code where ubifs returned EPERM instead
-of the expected ENOKEY.
+Now that a fscrypt_info may be set up for inodes that are currently
+being created and haven't yet had an inode number assigned, avoid
+logging confusing messages about "inode 0".
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ubifs/dir.c | 38 ++++++++++++++++----------------------
- 1 file changed, 16 insertions(+), 22 deletions(-)
+ fs/crypto/crypto.c  | 4 +++-
+ fs/crypto/keyring.c | 9 +++++++--
+ 2 files changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
-index a9c1f5a9c9bdd..155521e51ac57 100644
---- a/fs/ubifs/dir.c
-+++ b/fs/ubifs/dir.c
-@@ -81,19 +81,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	struct ubifs_inode *ui;
- 	bool encrypted = false;
+diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
+index 9212325763b0f..4ef3f714046aa 100644
+--- a/fs/crypto/crypto.c
++++ b/fs/crypto/crypto.c
+@@ -343,9 +343,11 @@ void fscrypt_msg(const struct inode *inode, const char *level,
+ 	va_start(args, fmt);
+ 	vaf.fmt = fmt;
+ 	vaf.va = &args;
+-	if (inode)
++	if (inode && inode->i_ino)
+ 		printk("%sfscrypt (%s, inode %lu): %pV\n",
+ 		       level, inode->i_sb->s_id, inode->i_ino, &vaf);
++	else if (inode)
++		printk("%sfscrypt (%s): %pV\n", level, inode->i_sb->s_id, &vaf);
+ 	else
+ 		printk("%sfscrypt: %pV\n", level, &vaf);
+ 	va_end(args);
+diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
+index e74f239c44280..53cc552a7b8fd 100644
+--- a/fs/crypto/keyring.c
++++ b/fs/crypto/keyring.c
+@@ -817,6 +817,7 @@ static int check_for_busy_inodes(struct super_block *sb,
+ 	struct list_head *pos;
+ 	size_t busy_count = 0;
+ 	unsigned long ino;
++	char ino_str[50] = "";
  
--	if (IS_ENCRYPTED(dir)) {
--		err = fscrypt_get_encryption_info(dir);
--		if (err) {
--			ubifs_err(c, "fscrypt_get_encryption_info failed: %i", err);
--			return ERR_PTR(err);
--		}
--
--		if (!fscrypt_has_encryption_key(dir))
--			return ERR_PTR(-EPERM);
--
--		encrypted = true;
--	}
--
- 	inode = new_inode(c->vfs_sb);
- 	ui = ubifs_inode(inode);
- 	if (!inode)
-@@ -112,6 +99,12 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 			 current_time(inode);
- 	inode->i_mapping->nrpages = 0;
+ 	spin_lock(&mk->mk_decrypted_inodes_lock);
  
-+	err = fscrypt_prepare_new_inode(dir, inode, &encrypted);
-+	if (err) {
-+		ubifs_err(c, "fscrypt_prepare_new_inode failed: %i", err);
-+		goto out_iput;
-+	}
-+
- 	switch (mode & S_IFMT) {
- 	case S_IFREG:
- 		inode->i_mapping->a_ops = &ubifs_file_address_operations;
-@@ -131,7 +124,6 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	case S_IFBLK:
- 	case S_IFCHR:
- 		inode->i_op  = &ubifs_file_inode_operations;
--		encrypted = false;
- 		break;
- 	default:
- 		BUG();
-@@ -151,9 +143,8 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 		if (c->highest_inum >= INUM_WATERMARK) {
- 			spin_unlock(&c->cnt_lock);
- 			ubifs_err(c, "out of inode numbers");
--			make_bad_inode(inode);
--			iput(inode);
--			return ERR_PTR(-EINVAL);
-+			err = -EINVAL;
-+			goto out_iput;
- 		}
- 		ubifs_warn(c, "running out of inode numbers (current %lu, max %u)",
- 			   (unsigned long)c->highest_inum, INUM_WATERMARK);
-@@ -171,16 +162,19 @@ struct inode *ubifs_new_inode(struct ubifs_info *c, struct inode *dir,
- 	spin_unlock(&c->cnt_lock);
- 
- 	if (encrypted) {
--		err = fscrypt_inherit_context(dir, inode, &encrypted, true);
-+		err = fscrypt_set_context(inode, NULL);
- 		if (err) {
--			ubifs_err(c, "fscrypt_inherit_context failed: %i", err);
--			make_bad_inode(inode);
--			iput(inode);
--			return ERR_PTR(err);
-+			ubifs_err(c, "fscrypt_set_context failed: %i", err);
-+			goto out_iput;
- 		}
+@@ -838,11 +839,15 @@ static int check_for_busy_inodes(struct super_block *sb,
  	}
+ 	spin_unlock(&mk->mk_decrypted_inodes_lock);
  
- 	return inode;
++	/* If the inode is currently being created, ino may still be 0. */
++	if (ino)
++		snprintf(ino_str, sizeof(ino_str), ", including ino %lu", ino);
 +
-+out_iput:
-+	make_bad_inode(inode);
-+	iput(inode);
-+	return ERR_PTR(err);
+ 	fscrypt_warn(NULL,
+-		     "%s: %zu inode(s) still busy after removing key with %s %*phN, including ino %lu",
++		     "%s: %zu inode(s) still busy after removing key with %s %*phN%s",
+ 		     sb->s_id, busy_count, master_key_spec_type(&mk->mk_spec),
+ 		     master_key_spec_len(&mk->mk_spec), (u8 *)&mk->mk_spec.u,
+-		     ino);
++		     ino_str);
+ 	return -EBUSY;
  }
  
- static int dbg_check_name(const struct ubifs_info *c,
 -- 
 2.28.0
 
