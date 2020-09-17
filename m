@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5B9F26D224
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 06:13:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87FB226D223
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 06:13:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kIlIr-0006F3-OF; Thu, 17 Sep 2020 04:13:49 +0000
+	id 1kIlIp-0002xA-Av; Thu, 17 Sep 2020 04:13:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kIlIk-0006E3-OG
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:42 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kIlIc-0002vL-JH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MeFdlZ1Zc+j+QV9sEDOqxZw3iYcmodY/9EJZm8jbvjc=; b=Q4fjm+i37r35uTThTjRK2gzVXc
- yM3t1g7cPfQCCHS2qZ6HeIx5qzKY+YAOnJ2ig9uhuObgDwGSR/61eC5fZQiSS0HNPZJy+rI/vz4ve
- TYGh2HlSEHZrzGjR6P6IJPpcGy2Je+H+fW82MfmcBIfvwpvQJYWf7pxiSe+hN7jlkZbo=;
+ bh=EyjFKoST5U0kuWnqnUhGCsU4YqesdRAlUpxPIzb2lI0=; b=evpX8Ww6C2pgSPLLKrUGZgjUU4
+ pfUWyg4Y94yJAe9ZDmeT+KbUynKXc/UGATTYfnxSZLTfVOZ+NcGKk1XRpFPpvY3tF74ch0QnrbjR6
+ /nTcRRH/Qxi3SaWPJrYDhbzHROCDrhdOb8abrFuOqlDQQPZOss0ANby5bvmEqFoxAMOI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MeFdlZ1Zc+j+QV9sEDOqxZw3iYcmodY/9EJZm8jbvjc=; b=MQhVlhxHnu1O/6WnpflB1vYrri
- NguDB3BatUQDI0ebVkr71WBJx+iOaFnUMVwdk3Tr0NqUbqjMQ5YAwOycnYZ/0eKmpYBZtGZmuyiFV
- P+Htp4je+sOFBXsxxTkDKJEWb7NImVKGI/fBT30VNJgXjTUmcRNs8AvxCKVyM6j5aJy0=;
+ bh=EyjFKoST5U0kuWnqnUhGCsU4YqesdRAlUpxPIzb2lI0=; b=RC7k4wEPod9JhqEud0SWJ/qBIH
+ 1BGK+F0n6BNb+fVZcwK2ifYY21OUawaIjuiJbNHwDZ9D3GCaJo1zXoucS81tX2itKDCT7A+9rz+Wl
+ 01oE2hW/TS2lUzRbVUqSwtWjio7cmuavLWmYzP46F4ySV05bho27vhx7gojut21Ro0/A=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kIlIf-00DZf2-FJ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:42 +0000
+ id 1kIlIY-00DZe7-Ar
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:34 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6C80B21D90;
+ by mail.kernel.org (Postfix) with ESMTPSA id AF604221E7;
  Thu, 17 Sep 2020 04:13:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1600315990;
- bh=Zv8MicOcvA0+y63kXTTqywuXMtLNvAnTX16qi88FxYc=;
+ bh=7wQf9Y1Ge/SR2fWtRDGBHBDQ9VcJIvgAiZJHiDlXVEw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=PZc7GCUjYD5h/bNMeNcrWQz+gvVcL2w+pv6xfU6b2En26SS8LBtAXV8xXjjRzBpIj
- YJcuPpLETgZpzhrpZa0X4b5L+Q/8ZidJ4CmeEnoZoW/zona/QfTOXhtHoWHt3+/BqT
- VhxyefdisJOSDSop/xr7WQru8BqpBRIbiwngobaQ=
+ b=KuwrpsyKR6Az33Os8au9dNORztVK5lPaO//5B4B9GGkqISAfjzCoMKvSaFMdYkK+H
+ cTfwdylHR5zS/tWU4yj+Sm4uxrUgf/O1/jB19DUFCvaoNPk/KtcTePbae7Dup7hHHg
+ AlchzaMoe4dDGfi2GfcedI9GWx9Qsvh1eLld4LG4=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Wed, 16 Sep 2020 21:11:32 -0700
-Message-Id: <20200917041136.178600-10-ebiggers@kernel.org>
+Date: Wed, 16 Sep 2020 21:11:33 -0700
+Message-Id: <20200917041136.178600-11-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200917041136.178600-1-ebiggers@kernel.org>
 References: <20200917041136.178600-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1kIlIf-00DZf2-FJ
-Subject: [f2fs-dev] [PATCH v3 09/13] fscrypt: stop pretending that key setup
- is nofs-safe
+X-Headers-End: 1kIlIY-00DZe7-Ar
+Subject: [f2fs-dev] [PATCH v3 10/13] fscrypt: make "#define fscrypt_policy"
+ user-only
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,117 +92,73 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-fscrypt_get_encryption_info() has never actually been safe to call in a
-context that needs GFP_NOFS, since it calls crypto_alloc_skcipher().
+The fscrypt UAPI header defines fscrypt_policy to fscrypt_policy_v1,
+for source compatibility with old userspace programs.
 
-crypto_alloc_skcipher() isn't GFP_NOFS-safe, even if called under
-memalloc_nofs_save().  This is because it may load kernel modules, and
-also because it internally takes crypto_alg_sem.  Other tasks can do
-GFP_KERNEL allocations while holding crypto_alg_sem for write.
+Internally, the kernel doesn't want that compatibility definition.
+Instead, fscrypt_private.h #undefs it and re-defines it to a union.
 
-The use of fscrypt_init_mutex isn't GFP_NOFS-safe either.
+That works for now.  However, in order to add
+fscrypt_operations::get_dummy_policy(), we'll need to forward declare
+'union fscrypt_policy' in include/linux/fscrypt.h.  That would cause
+build errors because "fscrypt_policy" is used in ioctl numbers.
 
-So, stop pretending that fscrypt_get_encryption_info() is nofs-safe.
-I.e., when it allocates memory, just use GFP_KERNEL instead of GFP_NOFS.
+To avoid this, modify the UAPI header to make the fscrypt_policy
+compatibility definition conditional on !__KERNEL__, and make the ioctls
+use fscrypt_policy_v1 instead of fscrypt_policy.
 
-Note, another reason to do this is that GFP_NOFS is deprecated in favor
-of using memalloc_nofs_save() in the proper places.
+Note that this doesn't change the actual ioctl numbers.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/inline_crypt.c | 7 ++-----
- fs/crypto/keysetup.c     | 2 +-
- fs/crypto/keysetup_v1.c  | 8 ++++----
- 3 files changed, 7 insertions(+), 10 deletions(-)
+ fs/crypto/fscrypt_private.h  | 1 -
+ include/uapi/linux/fscrypt.h | 6 +++---
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-index faa25541ccb68..89bffa82ed74a 100644
---- a/fs/crypto/inline_crypt.c
-+++ b/fs/crypto/inline_crypt.c
-@@ -106,7 +106,7 @@ int fscrypt_select_encryption_impl(struct fscrypt_info *ci)
- 	crypto_cfg.data_unit_size = sb->s_blocksize;
- 	crypto_cfg.dun_bytes = fscrypt_get_dun_bytes(ci);
- 	num_devs = fscrypt_get_num_devices(sb);
--	devs = kmalloc_array(num_devs, sizeof(*devs), GFP_NOFS);
-+	devs = kmalloc_array(num_devs, sizeof(*devs), GFP_KERNEL);
- 	if (!devs)
- 		return -ENOMEM;
- 	fscrypt_get_devices(sb, num_devs, devs);
-@@ -135,9 +135,8 @@ int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
- 	struct fscrypt_blk_crypto_key *blk_key;
- 	int err;
- 	int i;
--	unsigned int flags;
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index 355f6d9377517..ac3352086ee44 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -97,7 +97,6 @@ static inline const u8 *fscrypt_context_nonce(const union fscrypt_context *ctx)
+ 	return NULL;
+ }
  
--	blk_key = kzalloc(struct_size(blk_key, devs, num_devs), GFP_NOFS);
-+	blk_key = kzalloc(struct_size(blk_key, devs, num_devs), GFP_KERNEL);
- 	if (!blk_key)
- 		return -ENOMEM;
+-#undef fscrypt_policy
+ union fscrypt_policy {
+ 	u8 version;
+ 	struct fscrypt_policy_v1 v1;
+diff --git a/include/uapi/linux/fscrypt.h b/include/uapi/linux/fscrypt.h
+index 7875709ccfebf..e5de603369381 100644
+--- a/include/uapi/linux/fscrypt.h
++++ b/include/uapi/linux/fscrypt.h
+@@ -45,7 +45,6 @@ struct fscrypt_policy_v1 {
+ 	__u8 flags;
+ 	__u8 master_key_descriptor[FSCRYPT_KEY_DESCRIPTOR_SIZE];
+ };
+-#define fscrypt_policy	fscrypt_policy_v1
  
-@@ -166,10 +165,8 @@ int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
- 		}
- 		queue_refs++;
+ /*
+  * Process-subscribed "logon" key description prefix and payload format.
+@@ -156,9 +155,9 @@ struct fscrypt_get_key_status_arg {
+ 	__u32 __out_reserved[13];
+ };
  
--		flags = memalloc_nofs_save();
- 		err = blk_crypto_start_using_key(&blk_key->base,
- 						 blk_key->devs[i]);
--		memalloc_nofs_restore(flags);
- 		if (err) {
- 			fscrypt_err(inode,
- 				    "error %d starting to use blk-crypto", err);
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index 6159168972146..47f19061ba10e 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -488,7 +488,7 @@ fscrypt_setup_encryption_info(struct inode *inode,
- 	if (res)
- 		return res;
+-#define FS_IOC_SET_ENCRYPTION_POLICY		_IOR('f', 19, struct fscrypt_policy)
++#define FS_IOC_SET_ENCRYPTION_POLICY		_IOR('f', 19, struct fscrypt_policy_v1)
+ #define FS_IOC_GET_ENCRYPTION_PWSALT		_IOW('f', 20, __u8[16])
+-#define FS_IOC_GET_ENCRYPTION_POLICY		_IOW('f', 21, struct fscrypt_policy)
++#define FS_IOC_GET_ENCRYPTION_POLICY		_IOW('f', 21, struct fscrypt_policy_v1)
+ #define FS_IOC_GET_ENCRYPTION_POLICY_EX		_IOWR('f', 22, __u8[9]) /* size + version */
+ #define FS_IOC_ADD_ENCRYPTION_KEY		_IOWR('f', 23, struct fscrypt_add_key_arg)
+ #define FS_IOC_REMOVE_ENCRYPTION_KEY		_IOWR('f', 24, struct fscrypt_remove_key_arg)
+@@ -170,6 +169,7 @@ struct fscrypt_get_key_status_arg {
  
--	crypt_info = kmem_cache_zalloc(fscrypt_info_cachep, GFP_NOFS);
-+	crypt_info = kmem_cache_zalloc(fscrypt_info_cachep, GFP_KERNEL);
- 	if (!crypt_info)
- 		return -ENOMEM;
- 
-diff --git a/fs/crypto/keysetup_v1.c b/fs/crypto/keysetup_v1.c
-index a3cb52572b05c..2762c53504323 100644
---- a/fs/crypto/keysetup_v1.c
-+++ b/fs/crypto/keysetup_v1.c
-@@ -60,7 +60,7 @@ static int derive_key_aes(const u8 *master_key,
- 		goto out;
- 	}
- 	crypto_skcipher_set_flags(tfm, CRYPTO_TFM_REQ_FORBID_WEAK_KEYS);
--	req = skcipher_request_alloc(tfm, GFP_NOFS);
-+	req = skcipher_request_alloc(tfm, GFP_KERNEL);
- 	if (!req) {
- 		res = -ENOMEM;
- 		goto out;
-@@ -99,7 +99,7 @@ find_and_lock_process_key(const char *prefix,
- 	const struct user_key_payload *ukp;
- 	const struct fscrypt_key *payload;
- 
--	description = kasprintf(GFP_NOFS, "%s%*phN", prefix,
-+	description = kasprintf(GFP_KERNEL, "%s%*phN", prefix,
- 				FSCRYPT_KEY_DESCRIPTOR_SIZE, descriptor);
- 	if (!description)
- 		return ERR_PTR(-ENOMEM);
-@@ -228,7 +228,7 @@ fscrypt_get_direct_key(const struct fscrypt_info *ci, const u8 *raw_key)
- 		return dk;
- 
- 	/* Nope, allocate one. */
--	dk = kzalloc(sizeof(*dk), GFP_NOFS);
-+	dk = kzalloc(sizeof(*dk), GFP_KERNEL);
- 	if (!dk)
- 		return ERR_PTR(-ENOMEM);
- 	refcount_set(&dk->dk_refcount, 1);
-@@ -272,7 +272,7 @@ static int setup_v1_file_key_derived(struct fscrypt_info *ci,
- 	 * This cannot be a stack buffer because it will be passed to the
- 	 * scatterlist crypto API during derive_key_aes().
- 	 */
--	derived_key = kmalloc(ci->ci_mode->keysize, GFP_NOFS);
-+	derived_key = kmalloc(ci->ci_mode->keysize, GFP_KERNEL);
- 	if (!derived_key)
- 		return -ENOMEM;
- 
+ /* old names; don't add anything new here! */
+ #ifndef __KERNEL__
++#define fscrypt_policy			fscrypt_policy_v1
+ #define FS_KEY_DESCRIPTOR_SIZE		FSCRYPT_KEY_DESCRIPTOR_SIZE
+ #define FS_POLICY_FLAGS_PAD_4		FSCRYPT_POLICY_FLAGS_PAD_4
+ #define FS_POLICY_FLAGS_PAD_8		FSCRYPT_POLICY_FLAGS_PAD_8
 -- 
 2.28.0
 
