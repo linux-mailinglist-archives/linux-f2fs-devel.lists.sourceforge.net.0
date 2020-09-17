@@ -2,76 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C109E26D1F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 05:54:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3361F26D21D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Sep 2020 06:13:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kIl0F-0005Kq-NW; Thu, 17 Sep 2020 03:54:35 +0000
+	id 1kIlIZ-0006cX-G8; Thu, 17 Sep 2020 04:13:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <wangxiaojun11@huawei.com>) id 1kIl0E-0005HI-IA
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 03:54:34 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kIlIT-0006cG-N8
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tC0fZ3FavrW06sBUspf920opbQMiuozOUof2KncmX3U=; b=a4hJSU2nH7J9ruPz5OUwuptIcA
- HfgWHp7cbp6d5lpULMCt/2od9lrd6a5eZ3+RlgQnCh7kzui4sl9/F30Swlp937qLW5odo3Flcla9S
- JsCoaFw8RSo0TkiMfMvC6TUgfcDvPSZPxseCntN7vKGCc4zQ4sQrIh7zj+XzQyCy/gjA=;
+ bh=6ht1lFzh88X3SO77TvjmM0ey1DtMo+r/fSH8/iGhhl8=; b=d3xU71prFodIrfjKUmaXuHjAw+
+ +TOoBsInq0q2ajlHfdiD9Q20JOlgdW/Ir2QC2/PReCl9/oNz5WF2vfZk70a5KyVR9q6upFL35OtET
+ +Nnfe2xi3Bfn57sf5dHpkIyVOWVSwQDUwRtw2D7G2TETceCVzF4MdDl/EtUKlkv27nvM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:Message-ID
- :Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=tC0fZ3FavrW06sBUspf920opbQMiuozOUof2KncmX3U=; b=T
- yDB/MKgJJQrHHZqgRQMkQENHyVcZTSY1y8LTyHvcuFy/zwfhVHZZKIP/6dZiXZ/VK9t5no/6qMZBV
- KDblbjX30sYUOaMDli0ECTwEGIqk8m7/C4hF8BYB1fOAsthRObB8LUDgod0atPnMzIG/hiMprWoSL
- MurzEAzy18jHd0Ek=;
-Received: from szxga03-in.huawei.com ([45.249.212.189] helo=huawei.com)
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=6ht1lFzh88X3SO77TvjmM0ey1DtMo+r/fSH8/iGhhl8=; b=i
+ 4BHOrLD4+9FFL0TUfQgxI6Hwzn9s8vYylvh77TWJQAr0YO9wcH1cLYRYRKP7FzOD03MBzLVu08KFv
+ vm7zuuThzxmKLVdNbhCXJsz/d1s8eC+NPj/RfVKuQCCozPVgqzZJnh49SoL/GlDCpdvrgYook58Tm
+ 0XqBaUm6AmZfs5WE=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kIl0B-00CPUr-CY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 03:54:34 +0000
-Received: from dggeml406-hub.china.huawei.com (unknown [172.30.72.54])
- by Forcepoint Email with ESMTP id CAC5BAF5127805EA7C6F;
- Thu, 17 Sep 2020 11:54:18 +0800 (CST)
-Received: from DGGEML422-HUB.china.huawei.com (10.1.199.39) by
- dggeml406-hub.china.huawei.com (10.3.17.50) with Microsoft SMTP Server (TLS)
- id 14.3.487.0; Thu, 17 Sep 2020 11:54:18 +0800
-Received: from DGGEML531-MBX.china.huawei.com ([169.254.6.224]) by
- dggeml422-hub.china.huawei.com ([10.1.199.39]) with mapi id 14.03.0487.000;
- Thu, 17 Sep 2020 11:54:11 +0800
-From: "wangxiaojun (N)" <wangxiaojun11@huawei.com>
-To: "Yuchao (T)" <yuchao0@huawei.com>, "jaegeuk@kernel.org"
- <jaegeuk@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Thread-Topic: [PATCH] f2fs: fix wrong total_sections check
-Thread-Index: AQHWi9UQ/+csPOjKN0qV4RXXgcAYAg==
-Date: Thu, 17 Sep 2020 03:54:11 +0000
-Message-ID: <6FEAADAF081CC14C95AF288712F254AE1D6EEB15@dggeml531-mbx.china.huawei.com>
-References: <20200916015410.4135737-1-wangxiaojun11@huawei.com>
- <3041cb44-8666-1db2-7474-367cf19f46c7@huawei.com>
- <6FEAADAF081CC14C95AF288712F254AE1D6CBA0A@dggeml531-mbx.china.huawei.com>
- <35370655-1c32-c2d9-2952-08a36e959dde@huawei.com>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.179.148]
+ id 1kIlIO-00DZcj-IU
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Sep 2020 04:13:25 +0000
+Received: from sol.attlocal.net
+ (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D2A412074B;
+ Thu, 17 Sep 2020 04:13:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1600315988;
+ bh=tM/vVKpgIq/1E/c7scgrL37P+3enf/GVwfCXmp+Qo8Q=;
+ h=From:To:Cc:Subject:Date:From;
+ b=aOK1PhygiTi9wUZF8AW5bf7XQaiWHY70xLWcdjs/iUgFVpU9gqRwuzZbiVuk7AtBi
+ B2NqUu4X6lglthhCtvW3oOX7A0+0La/otShJwsVcyQZEDOZPwfQ1DaevY6r+cGNDNn
+ hNDwgQ+tusdACi9w+UAOmem3muqIGfgD5mdFkFnE=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Wed, 16 Sep 2020 21:11:23 -0700
+Message-Id: <20200917041136.178600-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -3.1 (---)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1kIl0B-00CPUr-CY
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix wrong total_sections check
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -3.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
+X-Headers-End: 1kIlIO-00DZcj-IU
+Subject: [f2fs-dev] [PATCH v3 00/13] fscrypt: improve file creation flow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,79 +80,104 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="iso-2022-jp"
+Cc: Daniel Rosenberg <drosen@google.com>, Jeff Layton <jlayton@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
+ ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-在 2020/9/16 17:49, Yuchao (T) 写道:
-> On 2020/9/16 14:56, wangxiaojun (N) wrote:
->> 在 2020/9/16 10:57, Yuchao (T) 写道:
->>> On 2020/9/16 9:54, Xiaojun Wang wrote:
->>>> Meta area is not included in section_count computation.
->>>> The code in mkfs/f2fs_format.c is:
->>>> 	total_zones = get_sb(segment_count) / (c.segs_per_zone) -
->>>> 					total_meta_zones;
->>>> 	set_sb(section_count, total_zones * c.secs_per_zone);
->>>>
->>>> So the minimum total_sections is 1.
->>>>
->>>> Signed-off-by: Xiaojun Wang <wangxiaojun11@huawei.com>
->>>> ---
->>>>    fs/f2fs/super.c | 3 +--
->>>>    1 file changed, 1 insertion(+), 2 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>> index dfa072fa8081..a450c8589841 100644
->>>> --- a/fs/f2fs/super.c
->>>> +++ b/fs/f2fs/super.c
->>>> @@ -2799,8 +2799,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
->>>>    		return -EFSCORRUPTED;
->>>>    	}
->>>>    
->>>> -	if (total_sections > segment_count ||
->>>> -			total_sections < F2FS_MIN_SEGMENTS ||
->>>> +	if (total_sections > segment_count || total_sections < 1 ||
->>>>    			segs_per_sec > segment_count || !segs_per_sec) {
->>> Here, we try to check sanity on segs_per_sec config directly and indirectly:
->>> - directly: check raw_super->segs_per_sec field
->>> - indirectly: check whether segment_count / total_sections is less than 1
->>>
->>> So I guess that first condition is wrong as well, should change it like?
->>>
->>> if (total_sections > segment_count - 'total_meta_segment_count' ||
->>>
->>> Thoughts?
->>>
->>> Thanks,
->> Hi Chao, aggree with you.
->>
->> 'total_meta_segment_count' = le32_to_cpu(raw_super->segment_count_ckpt) +
->> 			le32_to_cpu(raw_super->segment_count_sit) +
->> 			le32_to_cpu(raw_super->segment_count_nat) +
->> 			le32_to_cpu(raw_super->segment_count_ssa)
->> But the above values will be checked in sanity_check_area_boundary() which will be called later.
->> So can we move the total_sections checking to sanity_check_area_boundary
-> I think we'd better keep segs_per_sec check in sanity_check_raw_super(), as
-> it's a field of superblock.
-OK
->>   ensure the 'total_meta_segment_count' is correct ?
-> It looks the condition below is wrong as well for the same reason you mentioned
-> in commit message?
->
-> if (unlikely(fsmeta < F2FS_MIN_SEGMENTS ||
->
-> Thanks,
+Hello,
 
-Will updated in V2
+This series reworks the implementation of creating new encrypted files
+by introducing new helper functions that allow filesystems to set up the
+inodes' keys earlier, prior to taking too many filesystem locks.
 
-Thanks,
+This fixes deadlocks that are possible during memory reclaim because
+fscrypt_get_encryption_info() isn't GFP_NOFS-safe, yet it's called
+during an ext4 transaction or under f2fs_lock_op().  It also fixes a
+similar deadlock where f2fs can try to recursively lock a page when the
+test_dummy_encryption mount option is in use.
 
->>>>    		f2fs_info(sbi, "Invalid segment/section count (%u, %u x %u)",
->>>>    			  segment_count, total_sections, segs_per_sec);
->>>>
->>
->> .
->>
+It also solves an ordering problem that the ceph support for fscrypt
+will have.  For more details about this ordering problem, see the
+discussion on Jeff Layton's RFC patchsets for ceph fscrypt support
+(v1: https://lkml.kernel.org/linux-fscrypt/20200821182813.52570-1-jlayton@kernel.org/T/#u
+ v2: https://lkml.kernel.org/linux-fscrypt/20200904160537.76663-1-jlayton@kernel.org/T/#u
+ v3: https://lkml.kernel.org/linux-fscrypt/20200914191707.380444-1-jlayton@kernel.org/T/#u)
+Note that v3 of the ceph patchset is based on v2 of this patchset.
+
+Patch 1 adds the above-mentioned new helper functions.  Patches 2-5
+convert ext4, f2fs, and ubifs to use them, and patches 6-9 clean up a
+few things afterwards.
+
+Finally, patches 10-13 change the implementation of
+test_dummy_encryption to no longer set up an encryption key for
+unencrypted directories, which was confusing and was causing problems.
+
+This patchset applies to the master branch of
+https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git.
+It can also be retrieved from tag "fscrypt-file-creation-v3" of
+https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git.
+
+I'm looking to apply this for 5.10; reviews are greatly appreciated!
+
+Changed v2 => v3:
+  - Added patch that changes fscrypt_set_test_dummy_encryption() to take
+    a 'const char *'.  (Needed by ceph.)
+  - Fixed bug where fscrypt_prepare_new_inode() succeeded even if the
+    new inode's key couldn't be set up.
+  - Fixed bug where fscrypt_prepare_new_inode() wouldn't derive the
+    dirhash key for new casefolded directories.
+  - Made warning messages account for i_ino possibly being 0 now.
+
+Changed v1 => v2:
+  - Added mention of another deadlock this fixes.
+  - Added patches to improve the test_dummy_encryption implementation.
+  - Dropped an ext4 cleanup patch that can be done separately later.
+  - Lots of small cleanups, and a couple small fixes.
+
+Eric Biggers (13):
+  fscrypt: add fscrypt_prepare_new_inode() and fscrypt_set_context()
+  ext4: factor out ext4_xattr_credits_for_new_inode()
+  ext4: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+  f2fs: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+  ubifs: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+  fscrypt: adjust logging for in-creation inodes
+  fscrypt: remove fscrypt_inherit_context()
+  fscrypt: require that fscrypt_encrypt_symlink() already has key
+  fscrypt: stop pretending that key setup is nofs-safe
+  fscrypt: make "#define fscrypt_policy" user-only
+  fscrypt: move fscrypt_prepare_symlink() out-of-line
+  fscrypt: handle test_dummy_encryption in more logical way
+  fscrypt: make fscrypt_set_test_dummy_encryption() take a 'const char
+    *'
+
+ fs/crypto/crypto.c           |   4 +-
+ fs/crypto/fname.c            |  11 +-
+ fs/crypto/fscrypt_private.h  |  10 +-
+ fs/crypto/hooks.c            |  65 ++++++++----
+ fs/crypto/inline_crypt.c     |   7 +-
+ fs/crypto/keyring.c          |   9 +-
+ fs/crypto/keysetup.c         | 182 +++++++++++++++++++++++--------
+ fs/crypto/keysetup_v1.c      |   8 +-
+ fs/crypto/policy.c           | 200 ++++++++++++++++++++---------------
+ fs/ext4/ext4.h               |   6 +-
+ fs/ext4/ialloc.c             | 119 +++++++++++----------
+ fs/ext4/super.c              |  17 +--
+ fs/f2fs/dir.c                |   2 +-
+ fs/f2fs/f2fs.h               |  25 +----
+ fs/f2fs/namei.c              |   7 +-
+ fs/f2fs/super.c              |  16 +--
+ fs/ubifs/dir.c               |  38 +++----
+ include/linux/fscrypt.h      | 120 +++++++--------------
+ include/uapi/linux/fscrypt.h |   6 +-
+ 19 files changed, 474 insertions(+), 378 deletions(-)
+
+
+base-commit: 5e895bd4d5233cb054447d0491d4e63c8496d419
+-- 
+2.28.0
 
 
 
