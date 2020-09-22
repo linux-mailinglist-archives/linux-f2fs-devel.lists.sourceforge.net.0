@@ -2,103 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22F84273FF7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Sep 2020 12:54:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=NO06jLI7SiyehXO2TT9FaEfB+ulmFp4Zcni81Y83lbU=; b=UZOurgZ/F0qF/pRa7uNZJGQOeF
-	3t8/jHQJMQCMZjlJRRuGvAaOjeTxnI3CsZqJ3ydVc6iFRhh+0QQgEPPmcUClMok5b2PWzMB5JEchC
-	KmEn55Z/rhkvo9GA6rGSOqD388F5qBdYvHf0kuNFsVc7jeKKR0lAAOQAYvacN7cgpDP0=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD1CC2740D3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Sep 2020 13:30:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kKfvz-0006HX-Di; Tue, 22 Sep 2020 10:54:07 +0000
+	id 1kKgUs-0005ua-2D; Tue, 22 Sep 2020 11:30:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <drosen@android.com>) id 1kKfvx-0006HO-Ti
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 10:54:05 +0000
+ (envelope-from <jlayton@kernel.org>) id 1kKgUq-0005uE-Ik
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 11:30:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=; b=UXQO3ZFLkh51JTLJHLl4VDajq+
- eCvFjHLJH7PWkMABKUnok82zOIwShylt113Rwnnz5K6LBsRVPzI8JDYwH6HPEAP8aTfwY+p2QJD90
- N7hy1yWP6nFv0Z5oQGnzeBqhYiAKscGvX9EliQRC3uHRgelvikUh02MbeemqRoR08Wd8=;
+ bh=PTgk8inJBgIdl1kjf/vzKImY9EkEKaUVdnKdHjzlMQ0=; b=mPdnE3EunUcZGtPsWJZXSF/blI
+ CiwJzrf/wwK4mYEkzC2YxQ4InwUoOuCKP5FFc7aHKeOtHrSiSnm0XIOsGXAUvywV/clcUW3uYO2zf
+ N0RFZfa87M5/MPHkdRgkCd3dG02/Z4l41Dzs5l7/dx2BlKaqXqC3Jbhufpk/KY65UFFQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=; b=A
- YQUeLWC+Z5UEGL29Frev2JDcKTR63Lflj3W0KRu6DOubRDg6o4lfN459PPccsptXHfJk9um2IJD2E
- 9yYuU6xqBdj4PcUQtiy7yoG1GHFBuNs8f7B6hmbEa5wwCNReExgBjeEmARks9nL/48LTfNuGtLSuQ
- Sr4ngdM11K680lH0=;
-Received: from mail-oi1-f193.google.com ([209.85.167.193])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kKfvt-001E4A-1m
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 10:54:05 +0000
-Received: by mail-oi1-f193.google.com with SMTP id a3so20585337oib.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 22 Sep 2020 03:54:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=android.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=;
- b=cjBL0njHm+8zUypttYPB1lyQmH9E2S3jK9rf/cmZXEh6EGhIdRL9gIUk/vQojZYKYn
- IihVstLnA999VhtdeYb2+OGsEINb8d80uZmj0iYuYKmjzqdzEUI76X8MpUdm0QgCwDJk
- oPFPSJ3Z+Ng/XKbFdKJfbc2uQyDB1AM3XB46PycPUVTODJj7MfvUhH1c9SOBH6hy3fN7
- +MmI5yEbIvmoO31Bcs6jUoukXNaA5DDoZecxGw2h+gJmXdQsHQE99QS9XqsD892baliJ
- wjhdtIqH6uXDr1VRf4Cpg35fClhascX89HcZ86PTKJaI3hQP1+2H5OmowlFkWHmQUA8X
- 0uXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=;
- b=UEOetMyYa7F4uWgB85jHbtpYiBjGhgO20N5Vvtquv0fMaOa1fIWkb+TK55lT8YREdX
- mBnN/kKxBv2pbDiSMbBsuRJbBfvEKyvgsDqlDqwvRDOjozkbvzpAXS3Chsmh2C1ilSNG
- eXtBttyGqxHF5N3ycAqnqSEwTYXOf7c4SFwMgqvsB0C2WYxZbpsP6pATuoVmRYALYkX5
- XssAco6NUWqIvjhiVTypMgm4xFarjm6ye1vYhLX4CARodUwXJqqzC16E+uyIHIWE3C50
- +t0ybnfo4a7HnIDdmZlwKN0kywsPYqLNvzQ0FjFnbQMbEC0xb0rgCQ53GnTmdzIif+cH
- EnLg==
-X-Gm-Message-State: AOAM530FrduvSkAyqxQcvLyolOElgwTLMuc9s4rQBb8qOehI4KHz0u1L
- 02QitYbFRQSSAuN6c0bbQeiX+BGGuYXB0X+7ehA=
-X-Google-Smtp-Source: ABdhPJxmaXOIQxSeBKkx6n6E73BxPgRUl72SH7IqG1Psmqep24Gl/+025pnEfhuIqXdYNK3DnALwOg==
-X-Received: by 2002:a17:90a:e10:: with SMTP id
- v16mr3235865pje.84.1600771699965; 
- Tue, 22 Sep 2020 03:48:19 -0700 (PDT)
-Received: from localhost.localdomain (c-73-231-5-90.hsd1.ca.comcast.net.
- [73.231.5.90])
- by smtp.gmail.com with ESMTPSA id kk17sm1958427pjb.31.2020.09.22.03.48.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Sep 2020 03:48:19 -0700 (PDT)
-To: "Theodore Y . Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Eric Biggers <ebiggers@kernel.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Chao Yu <chao@kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Richard Weinberger <richard@nod.at>, linux-fscrypt@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 22 Sep 2020 03:48:02 -0700
-Message-Id: <20200922104807.912914-1-drosen@android.com>
-X-Mailer: git-send-email 2.28.0.681.g6f77f65b4e-goog
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PTgk8inJBgIdl1kjf/vzKImY9EkEKaUVdnKdHjzlMQ0=; b=RneLfYCMOxs5Hqd+/spzHlLqQX
+ p/M+MEzP75s/PGEW93ECXGNBER3KcYe1hwlMHYsRBAzit5Ka+ebYq2bXE1Wz95zJQcuXzLeOtOik5
+ IWrUaXY914Y1p4pyy0C26ds2sig7ZxpQe8RixQc9eFEum1CyYYJwTKonEvzhf0upWMXI=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kKgUj-0037tV-0a
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 11:30:08 +0000
+Received: from tleilax.poochiereds.net
+ (68-20-15-154.lightspeed.rlghnc.sbcglobal.net [68.20.15.154])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id AAA4C23600;
+ Tue, 22 Sep 2020 11:29:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1600774187;
+ bh=Rtabf4pcHe8DkWlrQYiZax+IoE7elEphUCXD07p8Kv8=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=TPVYvWlDl1nk+c/kNwxb4OaJKxHSZNcKrEYanb7OZHJvzfNLZ0TIQ57LGZSs4g/oo
+ O/3hYdyIcAupQB0Fevm3j0VJCAFLwy4mkQOJFoDvqTEz5rlRrzPMEc8mdMpmWp3m2r
+ qZfC5SE8JLVtwzT0a38q9VlsacraVJ8dJUmL6c5g=
+Message-ID: <da7f608e01cd8725d8da668f1c4a847b29b9de68.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org
+Date: Tue, 22 Sep 2020 07:29:45 -0400
+In-Reply-To: <20200921223509.GB844@sol.localdomain>
+References: <20200917041136.178600-1-ebiggers@kernel.org>
+ <20200921223509.GB844@sol.localdomain>
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
 MIME-Version: 1.0
 X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.167.193 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -107,9 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kKfvt-001E4A-1m
-Subject: [f2fs-dev] [PATCH 0/5] Add support for Encryption and Casefolding
- in F2FS
+X-Headers-End: 1kKgUj-0037tV-0a
+Subject: Re: [f2fs-dev] [PATCH v3 00/13] fscrypt: improve file creation flow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,63 +83,90 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Rosenberg via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Rosenberg <drosen@android.com>
-Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>,
- Daniel Rosenberg <drosen@android.com>
+Cc: ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-mtd@lists.infradead.org, Daniel Rosenberg <drosen@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-These patches are on top of the f2fs dev branch
+On Mon, 2020-09-21 at 15:35 -0700, Eric Biggers wrote:
+> On Wed, Sep 16, 2020 at 09:11:23PM -0700, Eric Biggers wrote:
+> > Hello,
+> > 
+> > This series reworks the implementation of creating new encrypted files
+> > by introducing new helper functions that allow filesystems to set up the
+> > inodes' keys earlier, prior to taking too many filesystem locks.
+> > 
+> > This fixes deadlocks that are possible during memory reclaim because
+> > fscrypt_get_encryption_info() isn't GFP_NOFS-safe, yet it's called
+> > during an ext4 transaction or under f2fs_lock_op().  It also fixes a
+> > similar deadlock where f2fs can try to recursively lock a page when the
+> > test_dummy_encryption mount option is in use.
+> > 
+> > It also solves an ordering problem that the ceph support for fscrypt
+> > will have.  For more details about this ordering problem, see the
+> > discussion on Jeff Layton's RFC patchsets for ceph fscrypt support
+> > (v1: https://lkml.kernel.org/linux-fscrypt/20200821182813.52570-1-jlayton@kernel.org/T/#u
+> >  v2: https://lkml.kernel.org/linux-fscrypt/20200904160537.76663-1-jlayton@kernel.org/T/#u
+> >  v3: https://lkml.kernel.org/linux-fscrypt/20200914191707.380444-1-jlayton@kernel.org/T/#u)
+> > Note that v3 of the ceph patchset is based on v2 of this patchset.
+> > 
+> > Patch 1 adds the above-mentioned new helper functions.  Patches 2-5
+> > convert ext4, f2fs, and ubifs to use them, and patches 6-9 clean up a
+> > few things afterwards.
+> > 
+> > Finally, patches 10-13 change the implementation of
+> > test_dummy_encryption to no longer set up an encryption key for
+> > unencrypted directories, which was confusing and was causing problems.
+> > 
+> > This patchset applies to the master branch of
+> > https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git.
+> > It can also be retrieved from tag "fscrypt-file-creation-v3" of
+> > https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git.
+> > 
+> > I'm looking to apply this for 5.10; reviews are greatly appreciated!
+> > 
+> > Changed v2 => v3:
+> >   - Added patch that changes fscrypt_set_test_dummy_encryption() to take
+> >     a 'const char *'.  (Needed by ceph.)
+> >   - Fixed bug where fscrypt_prepare_new_inode() succeeded even if the
+> >     new inode's key couldn't be set up.
+> >   - Fixed bug where fscrypt_prepare_new_inode() wouldn't derive the
+> >     dirhash key for new casefolded directories.
+> >   - Made warning messages account for i_ino possibly being 0 now.
+> > 
+> > Changed v1 => v2:
+> >   - Added mention of another deadlock this fixes.
+> >   - Added patches to improve the test_dummy_encryption implementation.
+> >   - Dropped an ext4 cleanup patch that can be done separately later.
+> >   - Lots of small cleanups, and a couple small fixes.
+> > 
+> > Eric Biggers (13):
+> >   fscrypt: add fscrypt_prepare_new_inode() and fscrypt_set_context()
+> >   ext4: factor out ext4_xattr_credits_for_new_inode()
+> >   ext4: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+> >   f2fs: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+> >   ubifs: use fscrypt_prepare_new_inode() and fscrypt_set_context()
+> >   fscrypt: adjust logging for in-creation inodes
+> >   fscrypt: remove fscrypt_inherit_context()
+> >   fscrypt: require that fscrypt_encrypt_symlink() already has key
+> >   fscrypt: stop pretending that key setup is nofs-safe
+> >   fscrypt: make "#define fscrypt_policy" user-only
+> >   fscrypt: move fscrypt_prepare_symlink() out-of-line
+> >   fscrypt: handle test_dummy_encryption in more logical way
+> >   fscrypt: make fscrypt_set_test_dummy_encryption() take a 'const char
+> >     *'
+> 
+> All applied to fscrypt.git#master for 5.10.
+> 
+> I'd still really appreciate more reviews and acks, though.
+> 
 
-F2FS currently supports casefolding and encryption, but not at
-the same time. These patches aim to rectify that. In a later follow up,
-this will be added for Ext4 as well. I've included one ext4 patch from
-the previous set since it isn't in the f2fs branch, but is needed for the
-fscrypt changes.
+You can add this to all of the fscrypt: patches. I've tested this under
+the ceph patchset and it seems to do the right thing:
 
-The f2fs-tools changes have already been applied.
-
-Since both fscrypt and casefolding require their own dentry operations,
-I've moved the responsibility of setting the dentry operations from fscrypt
-to the filesystems and provided helper functions that should work for most
-cases.
-
-These are a follow-up to the previously sent patch set
-"[PATCH v12 0/4] Prepare for upcoming Casefolding/Encryption patches"
-
-Daniel Rosenberg (5):
-  ext4: Use generic casefolding support
-  fscrypt: Export fscrypt_d_revalidate
-  libfs: Add generic function for setting dentry_ops
-  fscrypt: Have filesystems handle their d_ops
-  f2fs: Handle casefolding with Encryption
-
- fs/crypto/fname.c       |  7 ++---
- fs/crypto/hooks.c       |  1 -
- fs/ext4/dir.c           | 67 -----------------------------------------
- fs/ext4/ext4.h          | 16 ----------
- fs/ext4/hash.c          |  2 +-
- fs/ext4/namei.c         | 21 ++++++-------
- fs/ext4/super.c         | 15 +++------
- fs/f2fs/dir.c           | 64 ++++++++++++++++++++++++++++++---------
- fs/f2fs/f2fs.h          | 11 +++----
- fs/f2fs/hash.c          | 11 ++++++-
- fs/f2fs/namei.c         |  1 +
- fs/f2fs/recovery.c      | 12 +++++++-
- fs/f2fs/super.c         |  7 -----
- fs/libfs.c              | 49 ++++++++++++++++++++++++++++++
- fs/ubifs/dir.c          |  1 +
- include/linux/fs.h      |  1 +
- include/linux/fscrypt.h |  6 ++--
- 17 files changed, 148 insertions(+), 144 deletions(-)
-
--- 
-2.28.0.681.g6f77f65b4e-goog
+Acked-by: Jeff Layton <jlayton@kernel.org>
 
 
 
