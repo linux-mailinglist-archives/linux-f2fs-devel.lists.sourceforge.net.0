@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C85742743B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Sep 2020 16:00:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3973A2745F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Sep 2020 18:02:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kKipq-0001SO-TZ; Tue, 22 Sep 2020 13:59:58 +0000
+	id 1kKkjt-0002yf-EN; Tue, 22 Sep 2020 16:01:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kKipo-0001SD-Ud
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 13:59:56 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kKkjs-0002yU-8J
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 16:01:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SGvZC2QezjjaYnC71zIov+KEXEiVTOWXoGhhZRUteAs=; b=LpYEpAAW404behaxaZOOHl7zOy
- 6uJ8+kKxSzdY0uO798ILFTM+Naglg+fKwzEs0lPXK21j2+4IL/7D4xES6gMdyKBMZ3+/wjYmGG1S1
- 0Z/3t2V0hWRCrH49DifdvH9f+Zswdt5ZX5fMJZPuVBGkpf/LyyHMx33AeenmKGpnf+ss=;
+ bh=U53o4Nf/mJvxOqSmrcekJr3kj4Ffi5I5PbQ32Cxwwfo=; b=cLplDiI7OS2Lq/KdEtmErPgMRs
+ IAkhzL4BG3X7RMtVr+ktSAUsgiq51V1M7InWz1ec6GUJmlkIHhXGlX+ke5ywOOi7WuLR8EV+Jvbw/
+ 2tin+ZM8RCZk4HFhGuV+XeAsb6LaZ927V6pl13w5rKi9CrDcywTXiuugetyc5S4k9HK8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SGvZC2QezjjaYnC71zIov+KEXEiVTOWXoGhhZRUteAs=; b=R0+2G+549KMJBK3cawJEmBNIx/
- ZLofy24i1CbLLXcRc1m0DV7NUuoJmnSNSQQqNk8tVTfWULq/d1LWcEYMqQRi2pq68sXDC3RuJCuSa
- dtekUdyL37ySXGJMvBsTzKgPHP9tgZXit56FgJAG7NOhbziXU0TUEmYxnu2hmjLJAvV4=;
+ bh=U53o4Nf/mJvxOqSmrcekJr3kj4Ffi5I5PbQ32Cxwwfo=; b=OdttV5A2P7xFq/KmWmirjNswGY
+ C9Q3WI/KH9YYqBBoE+3Vlok5V/k8RifJGCbH25XtQ7B4C8YWQtssBNvvPWMaCfZ8pgNKcXDQZ2YGB
+ tGQDw1I1WHyu/8rjvHZOCnCpTg0htOjDGAnbZYcv50YwXeDHrFn4DVkeFZUgekHzUGA0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kKipf-001MxI-UD
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 13:59:56 +0000
-Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
- [172.10.235.113])
+ id 1kKkjq-003NNd-46
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Sep 2020 16:01:56 +0000
+Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2F9E82395B;
- Tue, 22 Sep 2020 13:59:42 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B00672399A;
+ Tue, 22 Sep 2020 16:01:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1600783182;
- bh=QZcVh5MsLEAkJhv8rXGSERXGP+Kcpy8xb1voces3kF4=;
+ s=default; t=1600790499;
+ bh=+JbPuKTQwLYiRtLrv7dRgf3ndqTICplWlXGxANCBloY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=2SIdh3EPinOGyX1wa83F79NKal4CcdgPe+iBvXbKehuPk1iADxvtdhnvPg4MWa/Vx
- x1D97quKAyb4TlbiZCkVC5jJgddGSD/IbAb3UWtUYSXWLUV6QJmONcveY+AHNO2pwe
- WN2CXsLaFkXonf0gZO98/T7IwYthUpA0NfUcz20Q=
-Date: Tue, 22 Sep 2020 06:59:40 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Daniel Rosenberg <drosen@android.com>
-Message-ID: <20200922135940.GB5599@sol.localdomain>
+ b=UIYsmBEGgBG28a67cc36efeTmr+VyZEYubJkA1CnDNucRlSPGUUMf82astmsgTQ1B
+ oNOuT+s12Ov2S/HKXGJWAeiuAaMlIRPqbOrYPRIKP1mi3oYwgjJ2ObNlSgaMEDeXVp
+ P6br8rNFA/3F7DPqLISqW6RMXWF8Emrl79vwMOdQ=
+Date: Tue, 22 Sep 2020 09:01:39 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20200922160139.GA3718581@google.com>
 References: <20200922104807.912914-1-drosen@android.com>
+ <20200922135940.GB5599@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200922104807.912914-1-drosen@android.com>
+In-Reply-To: <20200922135940.GB5599@sol.localdomain>
 X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,7 +69,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kKipf-001MxI-UD
+X-Headers-End: 1kKkjq-003NNd-46
 Subject: Re: [f2fs-dev] [PATCH 0/5] Add support for Encryption and
  Casefolding in F2FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -87,43 +87,48 @@ Cc: kernel-team@android.com, "Theodore Y . Ts'o" <tytso@mit.edu>,
  Richard Weinberger <richard@nod.at>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
  Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-mtd@lists.infradead.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>,
+ Daniel Rosenberg <drosen@android.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Sep 22, 2020 at 03:48:02AM -0700, Daniel Rosenberg wrote:
-> These patches are on top of the f2fs dev branch
+On 09/22, Eric Biggers wrote:
+> On Tue, Sep 22, 2020 at 03:48:02AM -0700, Daniel Rosenberg wrote:
+> > These patches are on top of the f2fs dev branch
+> > 
+> > F2FS currently supports casefolding and encryption, but not at
+> > the same time. These patches aim to rectify that. In a later follow up,
+> > this will be added for Ext4 as well. I've included one ext4 patch from
+> > the previous set since it isn't in the f2fs branch, but is needed for the
+> > fscrypt changes.
+> > 
+> > The f2fs-tools changes have already been applied.
+> > 
+> > Since both fscrypt and casefolding require their own dentry operations,
+> > I've moved the responsibility of setting the dentry operations from fscrypt
+> > to the filesystems and provided helper functions that should work for most
+> > cases.
+> > 
+> > These are a follow-up to the previously sent patch set
+> > "[PATCH v12 0/4] Prepare for upcoming Casefolding/Encryption patches"
+> > 
+> > Daniel Rosenberg (5):
+> >   ext4: Use generic casefolding support
+> >   fscrypt: Export fscrypt_d_revalidate
+> >   libfs: Add generic function for setting dentry_ops
+> >   fscrypt: Have filesystems handle their d_ops
+> >   f2fs: Handle casefolding with Encryption
 > 
-> F2FS currently supports casefolding and encryption, but not at
-> the same time. These patches aim to rectify that. In a later follow up,
-> this will be added for Ext4 as well. I've included one ext4 patch from
-> the previous set since it isn't in the f2fs branch, but is needed for the
-> fscrypt changes.
-> 
-> The f2fs-tools changes have already been applied.
-> 
-> Since both fscrypt and casefolding require their own dentry operations,
-> I've moved the responsibility of setting the dentry operations from fscrypt
-> to the filesystems and provided helper functions that should work for most
-> cases.
-> 
-> These are a follow-up to the previously sent patch set
-> "[PATCH v12 0/4] Prepare for upcoming Casefolding/Encryption patches"
-> 
-> Daniel Rosenberg (5):
->   ext4: Use generic casefolding support
->   fscrypt: Export fscrypt_d_revalidate
->   libfs: Add generic function for setting dentry_ops
->   fscrypt: Have filesystems handle their d_ops
->   f2fs: Handle casefolding with Encryption
+> I only received the cover letter, not the actual patches.  Same for the lore
+> archives; they only have the cover letter.
 
-I only received the cover letter, not the actual patches.  Same for the lore
-archives; they only have the cover letter.
+Me too. :)
 
-- Eric
+> 
+> - Eric
 
 
 _______________________________________________
