@@ -2,106 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 113F8274AC5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Sep 2020 23:07:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kKpVE-0004C5-Sd; Tue, 22 Sep 2020 21:07:08 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <nickrterrell@gmail.com>)
- id 1kKpVC-0004Be-Hh; Tue, 22 Sep 2020 21:07:06 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DFBE274E89
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Sep 2020 03:38:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=NO06jLI7SiyehXO2TT9FaEfB+ulmFp4Zcni81Y83lbU=; b=WhcggQsXeC5RtSz17Ded/qg5pA
+	vcWkVxC+DimrwC/egXTfeiVKj+QC8gGqaLkaOouOt2WtR1nm9bGwS/ZX9fc/bzjX57x3BalrQAHRM
+	u2MC17uEgqzhN/9XqNi+sFBymDD3YUy3nWorV5Q9K75GiqwUc6LloEkHY8SLV03dFs3o=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1kKtjn-0004vX-21; Wed, 23 Sep 2020 01:38:27 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <3PqBqXwYKACsKYVZLUNVVNSL.JVT@flex--drosen.bounces.google.com>)
+ id 1kKtjl-0004vG-Iq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 01:38:25 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=l6kc3VuNqpLTco6YDHC8kNNjvn
- GBASvoR69V9LbH2tUvLDlXq8yo4SNn1YbG59uq+KZYL7yH6I+mdaFOiuVModLV4xStF12QQzSpyB9
- GDb5o1lJCWkLFFvMQertNhabq9NH5Lon9NY6Ie+ZtxGNStX4H2UVbEHqB4ynR6FUf1Ss=;
+ bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=; b=kV5XMmpe7RXigfYN+/1N7b+MCg
+ FyKJ/goVRZjenVfg5F8FiA3k8pcA+HvDqz8e2r2z6KWmNvgW4uprXEo6tPdZFvaFQHezLv95QFaSl
+ vjpbs52kmL0LjRCiOlWaI8avON/hQHFZ2Xb4Bqla+bPhdvEWDZWjRVOIM/Cj+yU5DLRI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=eIEIOmFGdd+03VliQRH6jgt7l/
- H/HBY6/zKBzt5lmaMdRLJo+HkyD6vw9HHjjv/f7gREDLuH5PRbPApk1M3E6F8y2V4ENr3elDLAVld
- GnFAAAAHLUKMQehZNOyYkyhxmomPPCIVXWGqhMeBj47LAANPtRfKx3MH8D0a6U+Vu2Og=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=; b=F
+ BqbYock5Ub1uA7BhXosJlA9+O+pjVi4HvLAVOSPr+RscAJA5bCXo+a9GTl1z9od2rnsnlGLNbDQwY
+ nIP/4EnCEKU2LyxKkTnbU4t2v5FBaoO/oTxf2GAIeZqTWG3nzZDjhE/s5T3OPp2E583Ghde6WaMiA
+ M2arATVsL2Ako4Gk=;
+Received: from mail-yb1-f202.google.com ([209.85.219.202])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kKpV5-001iu3-87; Tue, 22 Sep 2020 21:07:06 +0000
-Received: by mail-pg1-f194.google.com with SMTP id y1so12991684pgk.8;
- Tue, 22 Sep 2020 14:06:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
- b=lRIEw3LIKpK43VEPPd4xH2mox+Cahw0bTKVkceOo4e4tsWnt5YzukXsfzlUNgRv9rX
- ZCl62JqQcu/+AzptIeEUCJ11pojyLp62XOrlMaTVNn9lCfe/ffIP6+RmmcR3uv3OKRF4
- jNnFhLVl1f+5wv+iMlTTIzAe25W9N1BZMJ6loO/LdtXqJmPVN+KCGn/JDdnTP8ejlNqV
- dDdKSRfBL4fY1GZAZ2hXSXAnSLH9TU4avltFpZHyyXiN4qKziIXMgnY+0hDHktBy3w7V
- Yw5zbps37F/hmIAR7uIAuNYIQDvvot4GkiFWKxLolgxnriU/+Ii9AzDDmFvr5R1btozD
- uHNQ==
+ id 1kKtjd-001vFR-0e
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 01:38:25 +0000
+Received: by mail-yb1-f202.google.com with SMTP id e190so17912096ybf.18
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 22 Sep 2020 18:38:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=sender:date:message-id:mime-version:subject:from:to:cc;
+ bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=;
+ b=VzYml5mRARymBMqJuBNvlalVRmIpcIRL7rCYhdalEJ6bKiRq37APrmAer+cndQz7ow
+ HDgQ8sObYp4idOZvJsIB8XMBdAbJDoPCXf8RcjD8zqSkhEpxPKkDqW19XQG4XFjZvJaz
+ 8jEIjxaKoJcRnQ8fhGfMGPAbu8NwMdXX1LmNNI+9aYl3v1FIDXUdjNESPhuk/al8UMRu
+ iwH+o2SnESdtrDrKMurtAfxp8eGbb3YAnwpecd7/CBg1WdTaJUzuh/5gxIJHiCHdeBs/
+ OuNNmgOyE5L/7V98+v4aCcawDaDAqbTrPsoF6o6qWk/oSi7nQACkmrj0atUkhEeP/rkK
+ mCjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
- b=AQDtFdZibr00tS6IEWH7yb37EzuhtC3mwLnZs6RsEnKhHKaUl4Rquk3vzfeNL7w9qW
- 2yGkqLHSVw3N8MnflD5Jq80FkxSuYVf80Ohw67N3LBLXbDXmQQ1IL/7XJZ3FPtBU6rBY
- jwN6kFQJKufhHsOoR5fIfw/T0DbBOz5y0JnMGuRE0Mhh2wcP1OU40EVv7CC6+Hp14cwd
- AEA8xbnQg9UddW47dgXJ2YkrDtddVypUfWINIX3VEjbKyP1J6V7UNoXrmj0WwAmqrRE2
- 41WvIzGH/sWC3yBfOegA6Ce6l7c4TRT+qKif/6uDO2g1iXxNVw+/gP821SLQ5AYUyKlP
- 4lIw==
-X-Gm-Message-State: AOAM531uDDps7UQzbomuHtDVT5wiAn3/5hgx8M8T8V9Bj30zhkDAKOcO
- yLKom/A4cIPg72lUb+VbltouBm+GUVQ=
-X-Google-Smtp-Source: ABdhPJyTivGi+ISDXozBH1tMjx78d74kOuBv8lXeZEL7dpO1lsp2fJNTibT4pdbAXO+tflxBsJijqw==
-X-Received: by 2002:aa7:9850:0:b029:142:2501:34f0 with SMTP id
- n16-20020aa798500000b0290142250134f0mr5610701pfq.73.1600808813520; 
- Tue, 22 Sep 2020 14:06:53 -0700 (PDT)
-Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
- [98.33.101.203])
- by smtp.gmail.com with ESMTPSA id i15sm16118945pfk.145.2020.09.22.14.06.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Sep 2020 14:06:52 -0700 (PDT)
-From: Nick Terrell <nickrterrell@gmail.com>
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Date: Tue, 22 Sep 2020 14:09:24 -0700
-Message-Id: <20200922210924.1725-10-nickrterrell@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200922210924.1725-1-nickrterrell@gmail.com>
-References: <20200922210924.1725-1-nickrterrell@gmail.com>
-MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+ h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+ :to:cc;
+ bh=gd9BXK6Qogm8GWzcEx/RRuoN03o4stNhU2BMPs3db+g=;
+ b=W2dl2DN3Qtf0YV0ob16pMDKs3agpiJrqVJW/uuKWhZPJUXZWXa9cue3xdCYxAjJARB
+ 5gBqrFp0hH0wxHcLJzJPuv8B1XT6yuvQBFxx7FAVKSG7OYVB0EtHYfMWrtRMlP5rf+hy
+ ac+X+1btHILtV2kbKfdG+320ZeDtvVeaFZcrnKt8ZhFygn+E7oMsCbhIMUYl/bJzdnOM
+ 1dMKZ36i70PD85Rs6Xd2sxYVv85t84CtW31iqH7e0vRS1aP37OL7DOmK2SbX4eXKwLwW
+ +ZkfLC7aTDnl3EmF+XOdrJJoJznB53CfpoyfkfAfyp8UoHZwnRYbMe3g3WfqJsONAiEo
+ NyvQ==
+X-Gm-Message-State: AOAM5306qfeg5t3ijo4J/vMJptkS5OK7qSoubcP4R7+iQNp9h1Sav2kW
+ HEsYI2J1PzUOKSE98dbSoKu5Omsr58g=
+X-Google-Smtp-Source: ABdhPJw5IYwBppbdbWip5F74kDHHvTSDqolnxLv2PtjxebJu9eXnJbODevPPAagFkTBzSK+vbQomxUmmEHU=
+X-Received: from drosen.c.googlers.com ([fda3:e722:ac3:10:24:72f4:c0a8:4e6f])
+ (user=drosen job=sendgmr) by 2002:a25:6dc6:: with SMTP id
+ i189mr10208913ybc.355.1600823358686; 
+ Tue, 22 Sep 2020 18:09:18 -0700 (PDT)
+Date: Wed, 23 Sep 2020 01:01:46 +0000
+Message-Id: <20200923010151.69506-1-drosen@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.681.g6f77f65b4e-goog
+To: "Theodore Y . Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>, 
+ Eric Biggers <ebiggers@kernel.org>, Andreas Dilger <adilger.kernel@dilger.ca>, 
+ Chao Yu <chao@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Richard Weinberger <richard@nod.at>, linux-fscrypt@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fb.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.202 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (nickrterrell[at]gmail.com)
+ trust [209.85.219.202 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kKpV5-001iu3-87
-Subject: [f2fs-dev] [PATCH v2 9/9] lib: zstd: Remove zstd compatibility
- wrapper
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1kKtjd-001vFR-0e
+Subject: [f2fs-dev] [PATCH 0/5] Add support for Encryption and Casefolding
+ in F2FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,152 +116,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: squashfs-devel@lists.sourceforge.net, Johannes Weiner <jweiner@fb.com>,
- Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Petr Malat <oss@malat.biz>, Chris Mason <clm@fb.com>,
- Nick Terrell <terrelln@fb.com>, linux-crypto@vger.kernel.org,
- Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
- linux-btrfs@vger.kernel.org
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: Daniel Rosenberg <drosen@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-fsdevel@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Nick Terrell <terrelln@fb.com>
+These patches are on top of the f2fs dev branch
 
-All callers have been transitioned to the new zstd-1.4.6 API. There are
-no more callers of the zstd compatibility wrapper, so delete it.
+F2FS currently supports casefolding and encryption, but not at
+the same time. These patches aim to rectify that. In a later follow up,
+this will be added for Ext4 as well. I've included one ext4 patch from
+the previous set since it isn't in the f2fs branch, but is needed for the
+fscrypt changes.
 
-Signed-off-by: Nick Terrell <terrelln@fb.com>
----
- include/linux/zstd_compat.h | 116 ------------------------------------
- 1 file changed, 116 deletions(-)
- delete mode 100644 include/linux/zstd_compat.h
+The f2fs-tools changes have already been applied.
 
-diff --git a/include/linux/zstd_compat.h b/include/linux/zstd_compat.h
-deleted file mode 100644
-index cda9208bf04a..000000000000
---- a/include/linux/zstd_compat.h
-+++ /dev/null
-@@ -1,116 +0,0 @@
--/*
-- * Copyright (c) 2016-present, Facebook, Inc.
-- * All rights reserved.
-- *
-- * This source code is licensed under the BSD-style license found in the
-- * LICENSE file in the root directory of https://github.com/facebook/zstd.
-- * An additional grant of patent rights can be found in the PATENTS file in the
-- * same directory.
-- *
-- * This program is free software; you can redistribute it and/or modify it under
-- * the terms of the GNU General Public License version 2 as published by the
-- * Free Software Foundation. This program is dual-licensed; you may select
-- * either version 2 of the GNU General Public License ("GPL") or BSD license
-- * ("BSD").
-- */
--
--#ifndef ZSTD_COMPAT_H
--#define ZSTD_COMPAT_H
--
--#include <linux/zstd.h>
--
--#if defined(ZSTD_VERSION_NUMBER) && (ZSTD_VERSION_NUMBER >= 10406)
--/*
-- * This header provides backwards compatibility for the zstd-1.4.6 library
-- * upgrade. This header allows us to upgrade the zstd library version without
-- * modifying any callers. Then we will migrate callers from the compatibility
-- * wrapper one at a time until none remain. At which point we will delete this
-- * header.
-- *
-- * It is temporary and will be deleted once the upgrade is complete.
-- */
--
--#include <linux/zstd_errors.h>
--
--static inline size_t ZSTD_CCtxWorkspaceBound(ZSTD_compressionParameters compression_params)
--{
--    return ZSTD_estimateCCtxSize_usingCParams(compression_params);
--}
--
--static inline size_t ZSTD_CStreamWorkspaceBound(ZSTD_compressionParameters compression_params)
--{
--    return ZSTD_estimateCStreamSize_usingCParams(compression_params);
--}
--
--static inline size_t ZSTD_DCtxWorkspaceBound(void)
--{
--    return ZSTD_estimateDCtxSize();
--}
--
--static inline size_t ZSTD_DStreamWorkspaceBound(unsigned long long window_size)
--{
--    return ZSTD_estimateDStreamSize(window_size);
--}
--
--static inline ZSTD_CCtx* ZSTD_initCCtx(void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    return ZSTD_initStaticCCtx(wksp, wksp_size);
--}
--
--static inline ZSTD_CStream* ZSTD_initCStream_compat(ZSTD_parameters params, uint64_t pledged_src_size, void* wksp, size_t wksp_size)
--{
--    ZSTD_CStream* cstream;
--    size_t ret;
--
--    if (wksp == NULL)
--        return NULL;
--
--    cstream = ZSTD_initStaticCStream(wksp, wksp_size);
--    if (cstream == NULL)
--        return NULL;
--
--    /* 0 means unknown in old API but means 0 in new API */
--    if (pledged_src_size == 0)
--        pledged_src_size = ZSTD_CONTENTSIZE_UNKNOWN;
--
--    ret = ZSTD_initCStream_advanced(cstream, NULL, 0, params, pledged_src_size);
--    if (ZSTD_isError(ret))
--        return NULL;
--
--    return cstream;
--}
--#define ZSTD_initCStream ZSTD_initCStream_compat
--
--static inline ZSTD_DCtx* ZSTD_initDCtx(void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    return ZSTD_initStaticDCtx(wksp, wksp_size);
--}
--
--static inline ZSTD_DStream* ZSTD_initDStream_compat(unsigned long long window_size, void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    (void)window_size;
--    return ZSTD_initStaticDStream(wksp, wksp_size);
--}
--#define ZSTD_initDStream ZSTD_initDStream_compat
--
--typedef ZSTD_frameHeader ZSTD_frameParams;
--
--static inline size_t ZSTD_getFrameParams(ZSTD_frameParams* frame_params, const void* src, size_t src_size)
--{
--    return ZSTD_getFrameHeader(frame_params, src, src_size);
--}
--
--static inline size_t ZSTD_compressCCtx_compat(ZSTD_CCtx* cctx, void* dst, size_t dst_capacity, const void* src, size_t src_size, ZSTD_parameters params)
--{
--    return ZSTD_compress_advanced(cctx, dst, dst_capacity, src, src_size, NULL, 0, params);
--}
--#define ZSTD_compressCCtx ZSTD_compressCCtx_compat
--
--#endif /* ZSTD_VERSION_NUMBER >= 10406 */
--#endif /* ZSTD_COMPAT_H */
+Since both fscrypt and casefolding require their own dentry operations,
+I've moved the responsibility of setting the dentry operations from fscrypt
+to the filesystems and provided helper functions that should work for most
+cases.
+
+These are a follow-up to the previously sent patch set
+"[PATCH v12 0/4] Prepare for upcoming Casefolding/Encryption patches"
+
+Daniel Rosenberg (5):
+  ext4: Use generic casefolding support
+  fscrypt: Export fscrypt_d_revalidate
+  libfs: Add generic function for setting dentry_ops
+  fscrypt: Have filesystems handle their d_ops
+  f2fs: Handle casefolding with Encryption
+
+ fs/crypto/fname.c       |  7 ++---
+ fs/crypto/hooks.c       |  1 -
+ fs/ext4/dir.c           | 67 -----------------------------------------
+ fs/ext4/ext4.h          | 16 ----------
+ fs/ext4/hash.c          |  2 +-
+ fs/ext4/namei.c         | 21 ++++++-------
+ fs/ext4/super.c         | 15 +++------
+ fs/f2fs/dir.c           | 64 ++++++++++++++++++++++++++++++---------
+ fs/f2fs/f2fs.h          | 11 +++----
+ fs/f2fs/hash.c          | 11 ++++++-
+ fs/f2fs/namei.c         |  1 +
+ fs/f2fs/recovery.c      | 12 +++++++-
+ fs/f2fs/super.c         |  7 -----
+ fs/libfs.c              | 49 ++++++++++++++++++++++++++++++
+ fs/ubifs/dir.c          |  1 +
+ include/linux/fs.h      |  1 +
+ include/linux/fscrypt.h |  6 ++--
+ 17 files changed, 148 insertions(+), 144 deletions(-)
+
 -- 
-2.28.0
+2.28.0.681.g6f77f65b4e-goog
 
 
 
