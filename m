@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22549275137
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Sep 2020 08:09:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04CBB2751B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Sep 2020 08:39:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kKxyO-0001aJ-IU; Wed, 23 Sep 2020 06:09:48 +0000
+	id 1kKyQs-0007sx-HK; Wed, 23 Sep 2020 06:39:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kKxyM-0001a1-T6
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 06:09:46 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kKyQr-0007ov-M0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 06:39:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wC1l39Crc6+dnJ+NW4DTHXCyn7MP1O4sKMrX3p4WjVk=; b=E6bvSqWctG/+xcfnTuiyzYGE5P
- 7agpaV4SV2BwLUp/9GDrYN34soy604nvR34Om36Tm7e4EcTzoSxdC/YLkT9j/d0Qjigd6IZNTICdB
- 9fbmEIzG7VwUbFzngAPACf9k/n8Q8fGUPNbvGSxugyhYQcfzy4UbzGigpEtRTJMIY8Mo=;
+ bh=wXK90ToFbg5J1LEwUL56i8TYd/Ua5rEdc8TTENUxoQc=; b=LbVlsUwCKS7RCVVJKehuyaklvI
+ 4Z7IqqaZ4KKwZ0RMHLHfET75LxGeYo/AIQP2vKGozMbbw/cIzLMmkoiqPV98rohMYyx7ffqk1z7ZZ
+ txjXS3pGb6EAZ7QU2bIuIHexEOnPes+9iBlkKnQXTnAbD/VXYJwspwUnWCOHPAniyKFg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wC1l39Crc6+dnJ+NW4DTHXCyn7MP1O4sKMrX3p4WjVk=; b=BkaondJFVTyqXDM7TCMvi7wlhv
- LXOom5FeVdKIyo1wWlMozD9HFVgH99M3DBbtrw0EG0isLSqXaaNqhJqjY5g0k2tw8FXawXuLaMnaw
- VZcesW5xnL1cFcZ/5ITiDj4gJsw3C/H2CuEtcEYwG/Lg7f/1X6EqHTSG404b85gmNxkE=;
+ bh=wXK90ToFbg5J1LEwUL56i8TYd/Ua5rEdc8TTENUxoQc=; b=YguVkS0T1N5r9u5VBd8g9sYVHa
+ vKGyjvbF0gmqSacigD2HOdYd4zskeUigw2jPYJOJm/aAKDnPGJCmgtuj7GbB69QJa1RdW0eTf28Dx
+ +0eTyPEbtptk6eMa1kLw175jd66TjQzGoRJt0yLJKEbecq0hGOZ9C+P861PlP8jvOZag=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kKxyG-00268I-AB
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 06:09:46 +0000
+ id 1kKyD9-0026lQ-Vw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Sep 2020 06:25:19 +0000
 Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
  [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7F30F20739;
- Wed, 23 Sep 2020 06:09:34 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 425FC21D43;
+ Wed, 23 Sep 2020 06:24:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1600841374;
- bh=rjWKuYvC72TU64CYHQyAAX1xM5QOixLenvyV0KeM5yg=;
+ s=default; t=1600842298;
+ bh=EH8hBpeiETHC+h9j5rcOQFLvuMpOSGcVeSqcrnJIr+M=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Fc7Cr1TWw1F2Gy7YQ+eg4Uql7gHXrzuWWK7Gmm1QnZl4nQc2qIxuRa5x17FtV//kK
- Gv7IlZwRiDUYRuyL5wbNG13Rd4FQfR+8pNAW2s/lLo1dKAIgcBsOSY1maq7fKr4ahl
- 9NIfE+GlWzOJjeZRBvT8MLy1WsoerMqdur6RkwhA=
-Date: Tue, 22 Sep 2020 23:09:33 -0700
+ b=o9hZFORZJfS43AD9qs/eouYS9H2lmfwPF3ydoBftcuORWrWFA+Oosf8DKY1mk3Zm3
+ cIZCITTnRgEk6JhC/F6wZsXxGJPNPdgYJYJhHDaphw687jIKp1UHYaNhlwigfbmU7Y
+ swkdL+l/hvzPy8OCNZxj+GedL3eT8qcF1ZOoGSNU=
+Date: Tue, 22 Sep 2020 23:24:56 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <20200923060933.GE9538@sol.localdomain>
+Message-ID: <20200923062456.GF9538@sol.localdomain>
 References: <20200923010151.69506-1-drosen@google.com>
- <20200923010151.69506-5-drosen@google.com>
+ <20200923010151.69506-6-drosen@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200923010151.69506-5-drosen@google.com>
-X-Spam-Score: -1.3 (-)
+In-Reply-To: <20200923010151.69506-6-drosen@google.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,10 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kKxyG-00268I-AB
-Subject: Re: [f2fs-dev] [PATCH 4/5] fscrypt: Have filesystems handle their
- d_ops
+X-Headers-End: 1kKyD9-0026lQ-Vw
+Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: Handle casefolding with Encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,24 +93,67 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Sep 23, 2020 at 01:01:50AM +0000, Daniel Rosenberg wrote:
-> This shifts the responsibility of setting up dentry operations from
-> fscrypt to the individual filesystems, allowing them to have their own
-> operations while still setting fscrypt's d_revalidate as appropriate.
+On Wed, Sep 23, 2020 at 01:01:51AM +0000, Daniel Rosenberg wrote:
+> Expand f2fs's casefolding support to include encrypted directories.  To
+> index casefolded+encrypted directories, we use the SipHash of the
+> casefolded name, keyed by a key derived from the directory's fscrypt
+> master key.  This ensures that the dirhash doesn't leak information
+> about the plaintext filenames.
 > 
-> Most filesystems can just use generic_set_encrypted_ci_d_ops, unless
-> they have their own specific dentry operations as well. That operation
-> will set the minimal d_ops required under the circumstances.
+> Encryption keys are unavailable during roll-forward recovery, so we
+> can't compute the dirhash when recovering a new dentry in an encrypted +
+> casefolded directory.  To avoid having to force a checkpoint when a new
+> file is fsync'ed, store the dirhash on-disk appended to i_name.
 > 
-> Since the fscrypt d_ops are set later on, we must set all d_ops there,
-> since we cannot adjust those later on. This should not result in any
-> change in behavior.
+> This patch incorporates work by Eric Biggers <ebiggers@google.com>
+> and Jaegeuk Kim <jaegeuk@kernel.org>.
 > 
+> Co-developed-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 > Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
 
-Looks good,
+Generally looks good.  If it's needed, you can add:
 
 Reviewed-by: Eric Biggers <ebiggers@google.com>
+
+(Though, some may claim I can't give Reviewed-by since this patch already has my
+Co-developed-by.)
+
+One comment below, though:
+
+> @@ -218,9 +219,28 @@ static bool f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
+>  {
+>  	const struct super_block *sb = dir->i_sb;
+>  	const struct unicode_map *um = sb->s_encoding;
+> +	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
+>  	struct qstr entry = QSTR_INIT(de_name, de_name_len);
+>  	int res;
+>  
+> +	if (IS_ENCRYPTED(dir)) {
+> +		const struct fscrypt_str encrypted_name =
+> +			FSTR_INIT((u8 *)de_name, de_name_len);
+> +
+> +		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
+> +			return false;
+> +
+> +		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
+> +		if (!decrypted_name.name)
+> +			return false;
+> +		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
+> +						&decrypted_name);
+> +		if (res < 0)
+> +			goto out;
+
+We probably should be passing up errors from here to f2fs_match_name(), then to
+f2fs_find_target_dentry(), then to f2fs_find_in_inline_dir() or find_in_block().
+
+Ignoring the filename may be okay if fscrypt_fname_disk_to_usr() returns
+-EUCLEAN, indicating that it's invalid.  However, if the error is -ENOMEM,
+either from the kmalloc() or from fscrypt_fname_disk_to_usr(), then the caller
+should receive an error rather than the filename being ignored.
+
+- Eric
 
 
 _______________________________________________
