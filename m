@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FB522763EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Sep 2020 00:39:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 475A32763EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Sep 2020 00:39:27 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLDPw-000647-Sp; Wed, 23 Sep 2020 22:39:16 +0000
+	id 1kLDQ6-000668-1R; Wed, 23 Sep 2020 22:39:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <nickrterrell@gmail.com>)
- id 1kLDPu-00063l-Ut; Wed, 23 Sep 2020 22:39:14 +0000
+ id 1kLDQ4-00065n-1V; Wed, 23 Sep 2020 22:39:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2E/IwoJzArQOI0tLeIWcAV63W6gwJ92+ohjyeEw8pg8=; b=OBC6ptzid4EYEzZnKeM+FuuodM
- aKTJL1N1q7g5ioaNNoqcOD4RoA4U5mkl/Wg3k8wh2bLUYTOqCkkZk4uc08Og7p+AEe7q6lTmQw2/4
- 1H2OvQCgYi8f5yFUzlAUV9RAgbW7hvs29dge3hT89DjgwGVedb+8lxh7O0KEnxNQn0Ek=;
+ bh=sx8gkWC2/W3tgh9YK60ypbpCcfln3QjdLnGplGzjxCM=; b=b4T8D+TFll70xzMtJfMaL4gjaz
+ m89zuCK1ehuwMIJWpD5mN7Fjvtcw9KzfrU3W0oC68bMEe69yaRCa+pca8Oj/AA/ooyxmLKiTQ7zm8
+ 9EtAKg2MAuk3Qkvm5XIvPlRN/xIcwao9iW8Qb+p4DSUly0JpKH5Bfzh/QGfAya9oVpjE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,51 +29,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2E/IwoJzArQOI0tLeIWcAV63W6gwJ92+ohjyeEw8pg8=; b=B6Mz/YtdnubaG09W/o9Uhm2d6X
- hE1mdysRKJgCx5lUmIEzQxIuYKWduaAvHlVVbuX2uoR4p1EZUSsGQomB1OliV6KBYWYCpJus00AlD
- KUzvWLWMw/ed1hBGcPHrGNYSUfwH2hIIOtVo4oHCTeDQS83EFId4Ocm6jObGzVoWfIJs=;
-Received: from mail-pj1-f66.google.com ([209.85.216.66])
+ bh=sx8gkWC2/W3tgh9YK60ypbpCcfln3QjdLnGplGzjxCM=; b=Z+YY/TOmZ98Efn2XBOSX+C6Xt/
+ kAtUrlsBtV4+rLMDsN8oH6M6AobI2TucQnvgnV/ZM58qTJpMByDeKjC7O3Dt+ni3kHGCY90G2YE7t
+ 3mM1424XSFuLGOyPANrWjYunynvCDjMt9HwA25nKERjwTFpx2ipKaEkNjPUditX74I+E=;
+Received: from mail-pl1-f195.google.com ([209.85.214.195])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kLDPq-0038IV-Ty; Wed, 23 Sep 2020 22:39:14 +0000
-Received: by mail-pj1-f66.google.com with SMTP id fa1so523146pjb.0;
- Wed, 23 Sep 2020 15:39:10 -0700 (PDT)
+ id 1kLDPx-0038It-Aw; Wed, 23 Sep 2020 22:39:23 +0000
+Received: by mail-pl1-f195.google.com with SMTP id bd2so509504plb.7;
+ Wed, 23 Sep 2020 15:39:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=2E/IwoJzArQOI0tLeIWcAV63W6gwJ92+ohjyeEw8pg8=;
- b=VH6EOPQmKosAZfOq6MnV38EH2WAOAT2/ct907J+IN6F1/UzyBRymrfg8mu4toh/gHz
- dnCfW0Gwac94AqG3iX63bDY9gwaVeHHo1ws/CLHJtn8lqdccOMUGUAoO060nthG/xJFH
- ibtLlKqnHKZJrfnLzTVVGSCcnmd1Zey12yJOntQMEkyY8iQykMy73rFgZhMJ0Z844Oi0
- 8C+RV0grr4N556T9lwPBbDMKtHQTX81iI9NawFSPBMSgHbxghwQyQbO38ko45bl9G61N
- mFNKN8Cm1lQRlg1NbJqz5u9DNc7Jc6EIJGu54UlJqThrXQkXc6wHz8e0PlIGQrGgR/uM
- idBQ==
+ bh=sx8gkWC2/W3tgh9YK60ypbpCcfln3QjdLnGplGzjxCM=;
+ b=qvQ/xnrj7PSkIjlq4rXSHLoKfQMXhyl9/83UuOG+/d7tBbTiqhBtkhEWcJj2akF3/X
+ sGOzqhtN8bnV3+eoMz5u1hrIB0tAwRI2wlm4D6PiUt5y5m1NW1fl0oyP9Axrctu3casc
+ G/8VYv4VG1ZoCSx8bR2UyApV3yQnC8wt57M42nwJcrW4F6uVYjMUM4HrqNhw9lVFbBVB
+ 3aZdrRsDhGcddsEZ8QrSmRah9Lbf0S58k+yyItu6DBZBb7OB49ys07LUVLwq4YV2a3Hp
+ amagtD7cLySkXL8Q3kRR7vksfPKW6iIP4RgVBwmOI8Szz9rAHDFjjf1aZ/Bl/dAKxqHo
+ c4Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=2E/IwoJzArQOI0tLeIWcAV63W6gwJ92+ohjyeEw8pg8=;
- b=MP6A1rQj7/J5ckZzwniQqlhaDlqNoMipDKOS6YE31E5jSB8GbRQqZHWakhN1AyTR34
- ghyMGhKhmACgdStfMun2ZbPvkyhjpNT7IGNHEtWMO7mKDQsyDtbWwggH1NWICE8bbJrb
- DxdlEhrgOPgDtDEL8eSy+dKDvNC8DqLoh4G8xMweK7jHl5O68iGnfXmvxduMHYdGmxm9
- 0vBM28YhjlSV415ktY77ccpuhqyV2XBm7R6OWYsVQv9HbAdtlxq0OBYXLycAzgCrve16
- S0StqMbB/K0CjNVCctkGnu2vmBPRxIYlfUYndz8KO3zHIFkh/+e/Txj4LiCXdvZy1hH7
- GChg==
-X-Gm-Message-State: AOAM530GPZQuDk1c97hXT9T1zAoyBXk+KBtDBjWQfyiJHixR2U9zPufF
- 8XgOLn7XrkTCRaQBZ2g6YdM=
-X-Google-Smtp-Source: ABdhPJzDWI/mbcX42TC+/4O3aSHIBlfav2a3RWmG58FNqPe6MvKubUjLbH6Git2smBvBjQofx3aS6g==
-X-Received: by 2002:a17:90a:6903:: with SMTP id
- r3mr1241734pjj.169.1600900745341; 
- Wed, 23 Sep 2020 15:39:05 -0700 (PDT)
+ bh=sx8gkWC2/W3tgh9YK60ypbpCcfln3QjdLnGplGzjxCM=;
+ b=KW8w7s3RlyvBK0iBbYg03ldDeiHOG+3EWGLgnjzZhWhUSibOZGKby9eJYAD3pYoLaR
+ O52JE8HdAso2tnIIsq/UGUzBIboDyw+DB906D7MdrxM6xJ3gSthmSJ5qew7GYSmJHSxq
+ hJr50RAl7GIOAAOJYIjIrx2CxnsvBgp8fhPWKlGEQchlHVxn0H5T/cou1z4W0zzI1ScB
+ xqLoQ/CS+OO032CokBJCSr3oiIWvxj4J5pGaHzFEFOFFAtozll16jTqsWKDvqbFTxqih
+ aA8v8dF3h454CArTwpnj/+q5rgWq77txHKyKEzoxnsRlLRC0/ct957BUPcGPYcW+IZpd
+ eY7A==
+X-Gm-Message-State: AOAM5322YF9VDHotd/0GHIUEopOuPgkzDTHOjTJIfjwHQhyKShQPSiyH
+ SsjAL3niMdtn9o9dDVmYSJI=
+X-Google-Smtp-Source: ABdhPJyUXCVNxcGs2ink7+3P+XHNqdgRgUtXCEM9ymE/nASMuTlDtoP6Q3pB9TVWUiGTxIJ+OWFlfQ==
+X-Received: by 2002:a17:90a:1b62:: with SMTP id
+ q89mr1340373pjq.74.1600900751702; 
+ Wed, 23 Sep 2020 15:39:11 -0700 (PDT)
 Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
  [98.33.101.203])
- by smtp.gmail.com with ESMTPSA id d20sm417964pjv.39.2020.09.23.15.39.04
+ by smtp.gmail.com with ESMTPSA id d20sm417964pjv.39.2020.09.23.15.39.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2020 15:39:04 -0700 (PDT)
+ Wed, 23 Sep 2020 15:39:11 -0700 (PDT)
 From: Nick Terrell <nickrterrell@gmail.com>
 To: Herbert Xu <herbert@gondor.apana.org.au>
-Date: Wed, 23 Sep 2020 15:42:02 -0700
-Message-Id: <20200923224206.68968-6-nickrterrell@gmail.com>
+Date: Wed, 23 Sep 2020 15:42:03 -0700
+Message-Id: <20200923224206.68968-7-nickrterrell@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200923224206.68968-1-nickrterrell@gmail.com>
 References: <20200923224206.68968-1-nickrterrell@gmail.com>
@@ -86,21 +86,21 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: fb.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.66 listed in list.dnswl.org]
+ trust [209.85.214.195 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (nickrterrell[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.66 listed in wl.mailspike.net]
+ [209.85.214.195 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kLDPq-0038IV-Ty
-Subject: [f2fs-dev] [PATCH v3 5/9] btrfs: zstd: Switch to the zstd-1.4.6 API
+X-Headers-End: 1kLDPx-0038It-Aw
+Subject: [f2fs-dev] [PATCH v3 6/9] f2fs: zstd: Switch to the zstd-1.4.6 API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,134 +126,204 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 From: Nick Terrell <terrelln@fb.com>
 
 Move away from the compatibility wrapper to the zstd-1.4.6 API. This
-code is functionally equivalent.
+code is more efficient because it uses the single-pass API instead of
+the streaming API. The streaming API is not necessary because the whole
+input and output buffers are available. This saves memory because we
+don't need to allocate a buffer for the window. It is also more
+efficient because it saves unnecessary memcpy calls.
+
+Compression memory increases from 168 KB to 204 KB because upstream
+uses slightly more memory. Decompression memory decreases from 1.4 MB
+to 158 KB.
 
 Signed-off-by: Nick Terrell <terrelln@fb.com>
 ---
- fs/btrfs/zstd.c | 48 ++++++++++++++++++++++++++++--------------------
- 1 file changed, 28 insertions(+), 20 deletions(-)
+ fs/f2fs/compress.c | 102 +++++++++++++++++----------------------------
+ 1 file changed, 38 insertions(+), 64 deletions(-)
 
-diff --git a/fs/btrfs/zstd.c b/fs/btrfs/zstd.c
-index a7367ff573d4..6b466e090cd7 100644
---- a/fs/btrfs/zstd.c
-+++ b/fs/btrfs/zstd.c
-@@ -16,7 +16,7 @@
- #include <linux/refcount.h>
- #include <linux/sched.h>
- #include <linux/slab.h>
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index e056f3a2b404..b79efce81651 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -11,7 +11,8 @@
+ #include <linux/backing-dev.h>
+ #include <linux/lzo.h>
+ #include <linux/lz4.h>
 -#include <linux/zstd_compat.h>
 +#include <linux/zstd.h>
- #include "misc.h"
- #include "compression.h"
- #include "ctree.h"
-@@ -159,8 +159,8 @@ static void zstd_calc_ws_mem_sizes(void)
- 			zstd_get_btrfs_parameters(level, ZSTD_BTRFS_MAX_INPUT);
- 		size_t level_size =
- 			max_t(size_t,
--			      ZSTD_CStreamWorkspaceBound(params.cParams),
--			      ZSTD_DStreamWorkspaceBound(ZSTD_BTRFS_MAX_INPUT));
-+			      ZSTD_estimateCStreamSize_usingCParams(params.cParams),
-+			      ZSTD_estimateDStreamSize(ZSTD_BTRFS_MAX_INPUT));
++#include <linux/zstd_errors.h>
  
- 		max_size = max_t(size_t, max_size, level_size);
- 		zstd_ws_mem_sizes[level - 1] = max_size;
-@@ -389,13 +389,23 @@ int zstd_compress_pages(struct list_head *ws, struct address_space *mapping,
- 	*total_in = 0;
+ #include "f2fs.h"
+ #include "node.h"
+@@ -298,21 +299,21 @@ static const struct f2fs_compress_ops f2fs_lz4_ops = {
+ static int zstd_init_compress_ctx(struct compress_ctx *cc)
+ {
+ 	ZSTD_parameters params;
+-	ZSTD_CStream *stream;
++	ZSTD_CCtx *ctx;
+ 	void *workspace;
+ 	unsigned int workspace_size;
  
- 	/* Initialize the stream */
--	stream = ZSTD_initCStream(params, len, workspace->mem,
--			workspace->size);
-+	stream = ZSTD_initStaticCStream(workspace->mem, workspace->size);
- 	if (!stream) {
--		pr_warn("BTRFS: ZSTD_initCStream failed\n");
-+		pr_warn("BTRFS: ZSTD_initStaticCStream failed\n");
- 		ret = -EIO;
- 		goto out;
+ 	params = ZSTD_getParams(F2FS_ZSTD_DEFAULT_CLEVEL, cc->rlen, 0);
+-	workspace_size = ZSTD_CStreamWorkspaceBound(params.cParams);
++	workspace_size = ZSTD_estimateCCtxSize_usingCParams(params.cParams);
+ 
+ 	workspace = f2fs_kvmalloc(F2FS_I_SB(cc->inode),
+ 					workspace_size, GFP_NOFS);
+ 	if (!workspace)
+ 		return -ENOMEM;
+ 
+-	stream = ZSTD_initCStream(params, 0, workspace, workspace_size);
+-	if (!stream) {
+-		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_initCStream failed\n",
++	ctx = ZSTD_initStaticCCtx(workspace, workspace_size);
++	if (!ctx) {
++		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_inittaticCStream failed\n",
+ 				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id,
+ 				__func__);
+ 		kvfree(workspace);
+@@ -320,7 +321,7 @@ static int zstd_init_compress_ctx(struct compress_ctx *cc)
  	}
-+	{
-+		size_t ret2;
+ 
+ 	cc->private = workspace;
+-	cc->private2 = stream;
++	cc->private2 = ctx;
+ 
+ 	cc->clen = cc->rlen - PAGE_SIZE - COMPRESS_HEADER_SIZE;
+ 	return 0;
+@@ -335,65 +336,48 @@ static void zstd_destroy_compress_ctx(struct compress_ctx *cc)
+ 
+ static int zstd_compress_pages(struct compress_ctx *cc)
+ {
+-	ZSTD_CStream *stream = cc->private2;
+-	ZSTD_inBuffer inbuf;
+-	ZSTD_outBuffer outbuf;
+-	int src_size = cc->rlen;
+-	int dst_size = src_size - PAGE_SIZE - COMPRESS_HEADER_SIZE;
+-	int ret;
+-
+-	inbuf.pos = 0;
+-	inbuf.src = cc->rbuf;
+-	inbuf.size = src_size;
+-
+-	outbuf.pos = 0;
+-	outbuf.dst = cc->cbuf->cdata;
+-	outbuf.size = dst_size;
+-
+-	ret = ZSTD_compressStream(stream, &outbuf, &inbuf);
+-	if (ZSTD_isError(ret)) {
+-		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_compressStream failed, ret: %d\n",
+-				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id,
+-				__func__, ZSTD_getErrorCode(ret));
+-		return -EIO;
+-	}
+-
+-	ret = ZSTD_endStream(stream, &outbuf);
++	ZSTD_CCtx *ctx = cc->private2;
++	const size_t src_size = cc->rlen;
++	const size_t dst_size = src_size - PAGE_SIZE - COMPRESS_HEADER_SIZE;
++	ZSTD_parameters params = ZSTD_getParams(F2FS_ZSTD_DEFAULT_CLEVEL, src_size, 0);
++	size_t ret;
 +
-+		ret2 = ZSTD_initCStream_advanced(stream, NULL, 0, params, len);
-+		if (ZSTD_isError(ret2)) {
-+			pr_warn("BTRFS: ZSTD_initCStream_advanced returned %s\n",
-+					ZSTD_getErrorName(ret2));
-+			ret = -EIO;
-+			goto out;
-+		}
-+	}
- 
- 	/* map in the first page of input data */
- 	in_page = find_get_page(mapping, start >> PAGE_SHIFT);
-@@ -421,8 +431,8 @@ int zstd_compress_pages(struct list_head *ws, struct address_space *mapping,
- 		ret2 = ZSTD_compressStream(stream, &workspace->out_buf,
- 				&workspace->in_buf);
- 		if (ZSTD_isError(ret2)) {
--			pr_debug("BTRFS: ZSTD_compressStream returned %d\n",
--					ZSTD_getErrorCode(ret2));
-+			pr_debug("BTRFS: ZSTD_compressStream returned %s\n",
-+					ZSTD_getErrorName(ret2));
- 			ret = -EIO;
- 			goto out;
- 		}
-@@ -489,8 +499,8 @@ int zstd_compress_pages(struct list_head *ws, struct address_space *mapping,
- 
- 		ret2 = ZSTD_endStream(stream, &workspace->out_buf);
- 		if (ZSTD_isError(ret2)) {
--			pr_debug("BTRFS: ZSTD_endStream returned %d\n",
--					ZSTD_getErrorCode(ret2));
-+			pr_debug("BTRFS: ZSTD_endStream returned %s\n",
-+					ZSTD_getErrorName(ret2));
- 			ret = -EIO;
- 			goto out;
- 		}
-@@ -557,10 +567,9 @@ int zstd_decompress_bio(struct list_head *ws, struct compressed_bio *cb)
- 	unsigned long buf_start;
- 	unsigned long total_out = 0;
- 
--	stream = ZSTD_initDStream(
--			ZSTD_BTRFS_MAX_INPUT, workspace->mem, workspace->size);
-+	stream = ZSTD_initStaticDStream(workspace->mem, workspace->size);
- 	if (!stream) {
--		pr_debug("BTRFS: ZSTD_initDStream failed\n");
-+		pr_debug("BTRFS: ZSTD_initStaticDStream failed\n");
- 		ret = -EIO;
- 		goto done;
++	ret = ZSTD_compress_advanced(
++			ctx, cc->cbuf->cdata, dst_size, cc->rbuf, src_size, NULL, 0, params);
+ 	if (ZSTD_isError(ret)) {
+-		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_endStream returned %d\n",
++		/*
++		 * there is compressed data remained in intermediate buffer due to
++		 * no more space in cbuf.cdata
++		 */
++		if (ZSTD_getErrorCode(ret) == ZSTD_error_dstSize_tooSmall)
++			return -EAGAIN;
++		/* other compression errors return -EIO */
++		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_compress_advanced failed, err: %s\n",
+ 				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id,
+-				__func__, ZSTD_getErrorCode(ret));
++				__func__, ZSTD_getErrorName(ret));
+ 		return -EIO;
  	}
-@@ -579,8 +588,8 @@ int zstd_decompress_bio(struct list_head *ws, struct compressed_bio *cb)
- 		ret2 = ZSTD_decompressStream(stream, &workspace->out_buf,
- 				&workspace->in_buf);
- 		if (ZSTD_isError(ret2)) {
--			pr_debug("BTRFS: ZSTD_decompressStream returned %d\n",
--					ZSTD_getErrorCode(ret2));
-+			pr_debug("BTRFS: ZSTD_decompressStream returned %s\n",
-+					ZSTD_getErrorName(ret2));
- 			ret = -EIO;
- 			goto done;
- 		}
-@@ -633,10 +642,9 @@ int zstd_decompress(struct list_head *ws, unsigned char *data_in,
- 	unsigned long pg_offset = 0;
- 	char *kaddr;
  
--	stream = ZSTD_initDStream(
--			ZSTD_BTRFS_MAX_INPUT, workspace->mem, workspace->size);
-+	stream = ZSTD_initStaticDStream(workspace->mem, workspace->size);
- 	if (!stream) {
--		pr_warn("BTRFS: ZSTD_initDStream failed\n");
-+		pr_warn("BTRFS: ZSTD_initStaticDStream failed\n");
- 		ret = -EIO;
- 		goto finish;
+-	/*
+-	 * there is compressed data remained in intermediate buffer due to
+-	 * no more space in cbuf.cdata
+-	 */
+-	if (ret)
+-		return -EAGAIN;
+-
+-	cc->clen = outbuf.pos;
++	cc->clen = ret;
+ 	return 0;
+ }
+ 
+ static int zstd_init_decompress_ctx(struct decompress_io_ctx *dic)
+ {
+-	ZSTD_DStream *stream;
++	ZSTD_DCtx *ctx;
+ 	void *workspace;
+ 	unsigned int workspace_size;
+ 
+-	workspace_size = ZSTD_DStreamWorkspaceBound(MAX_COMPRESS_WINDOW_SIZE);
++	workspace_size = ZSTD_estimateDCtxSize();
+ 
+ 	workspace = f2fs_kvmalloc(F2FS_I_SB(dic->inode),
+ 					workspace_size, GFP_NOFS);
+ 	if (!workspace)
+ 		return -ENOMEM;
+ 
+-	stream = ZSTD_initDStream(MAX_COMPRESS_WINDOW_SIZE,
+-					workspace, workspace_size);
+-	if (!stream) {
+-		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_initDStream failed\n",
++	ctx = ZSTD_initStaticDCtx(workspace, workspace_size);
++	if (!ctx) {
++		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_initStaticDCtx failed\n",
+ 				KERN_ERR, F2FS_I_SB(dic->inode)->sb->s_id,
+ 				__func__);
+ 		kvfree(workspace);
+@@ -401,7 +385,7 @@ static int zstd_init_decompress_ctx(struct decompress_io_ctx *dic)
  	}
-@@ -667,8 +675,8 @@ int zstd_decompress(struct list_head *ws, unsigned char *data_in,
- 		ret2 = ZSTD_decompressStream(stream, &workspace->out_buf,
- 				&workspace->in_buf);
- 		if (ZSTD_isError(ret2)) {
--			pr_debug("BTRFS: ZSTD_decompressStream returned %d\n",
--					ZSTD_getErrorCode(ret2));
-+			pr_debug("BTRFS: ZSTD_decompressStream returned %s\n",
-+					ZSTD_getErrorName(ret2));
- 			ret = -EIO;
- 			goto finish;
- 		}
+ 
+ 	dic->private = workspace;
+-	dic->private2 = stream;
++	dic->private2 = ctx;
+ 
+ 	return 0;
+ }
+@@ -415,28 +399,18 @@ static void zstd_destroy_decompress_ctx(struct decompress_io_ctx *dic)
+ 
+ static int zstd_decompress_pages(struct decompress_io_ctx *dic)
+ {
+-	ZSTD_DStream *stream = dic->private2;
+-	ZSTD_inBuffer inbuf;
+-	ZSTD_outBuffer outbuf;
+-	int ret;
+-
+-	inbuf.pos = 0;
+-	inbuf.src = dic->cbuf->cdata;
+-	inbuf.size = dic->clen;
+-
+-	outbuf.pos = 0;
+-	outbuf.dst = dic->rbuf;
+-	outbuf.size = dic->rlen;
++	ZSTD_DCtx *ctx = dic->private2;
++	size_t ret;
+ 
+-	ret = ZSTD_decompressStream(stream, &outbuf, &inbuf);
++	ret = ZSTD_decompressDCtx(ctx, dic->rbuf, dic->rlen, dic->cbuf->cdata, dic->clen);
+ 	if (ZSTD_isError(ret)) {
+-		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_compressStream failed, ret: %d\n",
++		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD_decompressDCtx failed, err: %s\n",
+ 				KERN_ERR, F2FS_I_SB(dic->inode)->sb->s_id,
+-				__func__, ZSTD_getErrorCode(ret));
++				__func__, ZSTD_getErrorName(ret));
+ 		return -EIO;
+ 	}
+ 
+-	if (dic->rlen != outbuf.pos) {
++	if (dic->rlen != ret) {
+ 		printk_ratelimited("%sF2FS-fs (%s): %s ZSTD invalid rlen:%zu, "
+ 				"expected:%lu\n", KERN_ERR,
+ 				F2FS_I_SB(dic->inode)->sb->s_id,
 -- 
 2.28.0
 
