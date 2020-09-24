@@ -2,61 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05A142767E0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Sep 2020 06:29:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E90527688F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Sep 2020 07:49:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLIsm-0005ir-KF; Thu, 24 Sep 2020 04:29:24 +0000
+	id 1kLK7x-0007KA-Mg; Thu, 24 Sep 2020 05:49:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kLIsl-0005ic-J1
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Sep 2020 04:29:23 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kLK7w-0007K3-PB
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Sep 2020 05:49:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TbrEBwUdVvDU1tRzSSgU5l3vBRGb0g9W1miMXRIMUJk=; b=ai/ipnT7oCBP2UNpx7Trmy/+BY
- gEqgcSTlxTespcLXMUUvKILjcD4jyzkus5MqopQlfgGVWdpibPM8k5cwW9MYz8mHH7vtcffgUyLbk
- tZT4MArl6vQOY08osS8enimTsVsJALYsbam4PfQL86Q5HZXR6/TMYAybqJVrK1h9UkTM=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TbrEBwUdVvDU1tRzSSgU5l3vBRGb0g9W1miMXRIMUJk=; b=ZDqf2W3L8kp9xnNI7IPBBVjV0h
- ys87lI8CqcXfWBB11SQf1M9JO8h2osw86LxQBeGPhmKviXD0bhJMEfWR3OF3URtFLBGS4huEYFAqL
- jwdt+95WGEKvnr38dUzT7b7PWWixVPI304Otsf7FqCWs7IYRjkKGAO/A+BhYlORof+qk=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=c7aW+8cZACN44YLRMWk1O6KQuOWu71Q6nAoJ2At+2/w=; b=ZY3aCRK7pkjT63SbNKNFY784bA
+ k/Uo3S1ocnB93SMj2sDAALmfwz3rnrBTIOFzJyxVHsy0x3CGADsjlJ95SIvTsDADn9nLsPnTpnfG/
+ 2hL0MXLHCmns/U1EMA117QpKLAKkZfYWf9Dbsw2fEGCISqy0UZtpy4eGSJZ9P98YmTCE=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=c7aW+8cZACN44YLRMWk1O6KQuOWu71Q6nAoJ2At+2/w=; b=T
+ yjsDYTGCnlNzKgi9mxEvtozHjOAVt53wl6qrgQA0O5pOIkmi8L8zLySO4n28b7eFUpap2EObv/DCB
+ iv0UvBLFaGPjbFh88m2tG0v7sWXSLDCkFf79fm76b2ZXZnwxwR7kJBWE9Qk0/lXSPBM+p1PxId+CI
+ 1RktF2qHef5GnEpY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kLIsc-005Y0V-5d
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Sep 2020 04:29:23 +0000
+ id 1kLK7m-003Vgy-7i
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Sep 2020 05:49:08 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 67FAA238E4;
- Thu, 24 Sep 2020 04:29:01 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5527A235FD;
+ Thu, 24 Sep 2020 05:48:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1600921741;
- bh=zkbK3kc+vjesm/oo0BR3v4YFB7mgYl6/SjNVtaJC49I=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Tf+3f9n9whDLE3nRQBGBiXSBPyJBU5+wbl0Pzxy1oCesqnjN+hwcu1TZ3Crt7oe8w
- +VrERYCOeGY6zv1gmE8R4l1E5n4V+56OUhJTmCp+u35lAl+nOOoxMwnY0FVDRfpiKR
- lmE8PryChQoOaSxuK9i2Ja8Q4GUSoNu1QyPdPDhE=
+ s=default; t=1600926527;
+ bh=ZBd12iiaWrJLLa5wlKz4XAdvI+v27GCLwdJDLWNHLIY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=yxcfpsFWdaISRwAI+JVWSVcxnMGJEi4ShtKIgyoJgyvWOVArjZfAHg8LIHipiUC6V
+ QMGF7qU5twNettIbNqxJCnUBLmarGE/ysxglhg3oHN61q/vyHwjZyzoCBNs0tdGBKd
+ hdHf1ETiZYCxPPjHI7/27bpsdedx2WvOrXU8y9L0=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Wed, 23 Sep 2020 21:26:24 -0700
-Message-Id: <20200924042624.98439-3-ebiggers@kernel.org>
+Date: Wed, 23 Sep 2020 22:47:21 -0700
+Message-Id: <20200924054721.187797-1-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200924042624.98439-1-ebiggers@kernel.org>
-References: <20200924042624.98439-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -1.3 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -69,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kLIsc-005Y0V-5d
-Subject: [f2fs-dev] [PATCH 2/2] fscrypt: rename DCACHE_ENCRYPTED_NAME to
- DCACHE_NOKEY_NAME
+X-Headers-End: 1kLK7m-003Vgy-7i
+Subject: [f2fs-dev] [PATCH] fscrypt: export fscrypt_d_revalidate()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,118 +80,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
- Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Jeff Layton <jlayton@kernel.org>, Daniel Rosenberg <drosen@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Originally we used the term "encrypted name" or "ciphertext name" to
-mean the encoded filename that is shown when an encrypted directory is
-listed without its key.  But these terms are ambiguous since they also
-mean the filename stored on-disk.  "Encrypted name" is especially
-ambiguous since it could also be understood to mean "this filename is
-encrypted on-disk", similar to "encrypted file".
+Dentries that represent no-key names must have a dentry_operations that
+includes fscrypt_d_revalidate().  Currently, this is handled by
+fscrypt_prepare_lookup() installing fscrypt_d_ops.
 
-So we've started calling these encoded names "no-key names" instead.
+However, ceph support for encryption
+(https://lore.kernel.org/r/20200914191707.380444-1-jlayton@kernel.org)
+can't use fscrypt_d_ops, since ceph already has its own
+dentry_operations.
 
-Therefore, rename DCACHE_ENCRYPTED_NAME to DCACHE_NOKEY_NAME to avoid
-confusion about what this flag means.
+Similarly, ext4 and f2fs support for directories that are both encrypted
+and casefolded
+(https://lore.kernel.org/r/20200923010151.69506-1-drosen@google.com)
+can't use fscrypt_d_ops either, since casefolding requires some dentry
+operations too.
+
+To satisfy both users, we need to move the responsibility of installing
+the dentry_operations to filesystems.
+
+In preparation for this, export fscrypt_d_revalidate() and give it a
+!CONFIG_FS_ENCRYPTION stub.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/fname.c       |  2 +-
- fs/crypto/hooks.c       |  7 +++----
- include/linux/dcache.h  |  2 +-
- include/linux/fscrypt.h | 12 ++++++------
- 4 files changed, 11 insertions(+), 12 deletions(-)
+
+Compared to the versions of this patch from Jeff and Daniel, I've
+improved the commit message and added a !CONFIG_FS_ENCRYPTION stub,
+which was missing.  I'm planning to apply this for 5.10 in preparation
+for both the ceph patchset and the encrypt+casefold patchset.
+
+
+ fs/crypto/fname.c       | 3 ++-
+ include/linux/fscrypt.h | 7 +++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/fs/crypto/fname.c b/fs/crypto/fname.c
-index 391acea4bc96..c65979452844 100644
+index c65979452844..1fbe6c24d705 100644
 --- a/fs/crypto/fname.c
 +++ b/fs/crypto/fname.c
-@@ -541,7 +541,7 @@ static int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags)
- 	 * reverting to no-key names without evicting the directory's inode
- 	 * -- which implies eviction of the dentries in the directory.
- 	 */
--	if (!(dentry->d_flags & DCACHE_ENCRYPTED_NAME))
-+	if (!(dentry->d_flags & DCACHE_NOKEY_NAME))
- 		return 1;
+@@ -530,7 +530,7 @@ EXPORT_SYMBOL_GPL(fscrypt_fname_siphash);
+  * Validate dentries in encrypted directories to make sure we aren't potentially
+  * caching stale dentries after a key has been added.
+  */
+-static int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags)
++int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags)
+ {
+ 	struct dentry *dir;
+ 	int err;
+@@ -569,6 +569,7 @@ static int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags)
  
- 	/*
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index ca996e1c92d9..20b0df47fe6a 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -61,7 +61,7 @@ int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
- 		return err;
+ 	return valid;
+ }
++EXPORT_SYMBOL_GPL(fscrypt_d_revalidate);
  
- 	/* ... in case we looked up no-key name before key was added */
--	if (dentry->d_flags & DCACHE_ENCRYPTED_NAME)
-+	if (dentry->d_flags & DCACHE_NOKEY_NAME)
- 		return -ENOKEY;
- 
- 	if (!fscrypt_has_permitted_context(dir, inode))
-@@ -86,8 +86,7 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
- 		return err;
- 
- 	/* ... in case we looked up no-key name(s) before key was added */
--	if ((old_dentry->d_flags | new_dentry->d_flags) &
--	    DCACHE_ENCRYPTED_NAME)
-+	if ((old_dentry->d_flags | new_dentry->d_flags) & DCACHE_NOKEY_NAME)
- 		return -ENOKEY;
- 
- 	if (old_dir != new_dir) {
-@@ -116,7 +115,7 @@ int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
- 
- 	if (fname->is_nokey_name) {
- 		spin_lock(&dentry->d_lock);
--		dentry->d_flags |= DCACHE_ENCRYPTED_NAME;
-+		dentry->d_flags |= DCACHE_NOKEY_NAME;
- 		spin_unlock(&dentry->d_lock);
- 		d_set_d_op(dentry, &fscrypt_d_ops);
- 	}
-diff --git a/include/linux/dcache.h b/include/linux/dcache.h
-index 65d975bf9390..6f95c3300cbb 100644
---- a/include/linux/dcache.h
-+++ b/include/linux/dcache.h
-@@ -213,7 +213,7 @@ struct dentry_operations {
- 
- #define DCACHE_MAY_FREE			0x00800000
- #define DCACHE_FALLTHRU			0x01000000 /* Fall through to lower layer */
--#define DCACHE_ENCRYPTED_NAME		0x02000000 /* Encrypted name (dir key was unavailable) */
-+#define DCACHE_NOKEY_NAME		0x02000000 /* Encrypted name encoded without key */
- #define DCACHE_OP_REAL			0x04000000
- 
- #define DCACHE_PAR_LOOKUP		0x10000000 /* being looked up (with parent locked shared) */
+ const struct dentry_operations fscrypt_d_ops = {
+ 	.d_revalidate = fscrypt_d_revalidate,
 diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index bc9ec727e993..f1757e73162d 100644
+index f1757e73162d..a8f7a43f031b 100644
 --- a/include/linux/fscrypt.h
 +++ b/include/linux/fscrypt.h
-@@ -100,15 +100,15 @@ static inline bool fscrypt_needs_contents_encryption(const struct inode *inode)
+@@ -197,6 +197,7 @@ int fscrypt_fname_disk_to_usr(const struct inode *inode,
+ bool fscrypt_match_name(const struct fscrypt_name *fname,
+ 			const u8 *de_name, u32 de_name_len);
+ u64 fscrypt_fname_siphash(const struct inode *dir, const struct qstr *name);
++int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags);
+ 
+ /* bio.c */
+ void fscrypt_decrypt_bio(struct bio *bio);
+@@ -454,6 +455,12 @@ static inline u64 fscrypt_fname_siphash(const struct inode *dir,
+ 	return 0;
  }
  
- /*
-- * When d_splice_alias() moves a directory's encrypted alias to its decrypted
-- * alias as a result of the encryption key being added, DCACHE_ENCRYPTED_NAME
-- * must be cleared.  Note that we don't have to support arbitrary moves of this
-- * flag because fscrypt doesn't allow encrypted aliases to be the source or
-- * target of a rename().
-+ * When d_splice_alias() moves a directory's no-key alias to its plaintext alias
-+ * as a result of the encryption key being added, DCACHE_NOKEY_NAME must be
-+ * cleared.  Note that we don't have to support arbitrary moves of this flag
-+ * because fscrypt doesn't allow no-key names to be the source or target of a
-+ * rename().
-  */
- static inline void fscrypt_handle_d_move(struct dentry *dentry)
++static inline int fscrypt_d_revalidate(struct dentry *dentry,
++				       unsigned int flags)
++{
++	return 1;
++}
++
+ /* bio.c */
+ static inline void fscrypt_decrypt_bio(struct bio *bio)
  {
--	dentry->d_flags &= ~DCACHE_ENCRYPTED_NAME;
-+	dentry->d_flags &= ~DCACHE_NOKEY_NAME;
- }
- 
- /* crypto.c */
 -- 
 2.28.0
 
