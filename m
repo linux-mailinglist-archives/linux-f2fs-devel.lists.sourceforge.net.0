@@ -2,65 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88F8127949B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Sep 2020 01:17:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E732D2794A8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Sep 2020 01:23:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLwxv-0006Og-53; Fri, 25 Sep 2020 23:17:23 +0000
+	id 1kLx48-0001bq-Mz; Fri, 25 Sep 2020 23:23:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kLwxu-0006OW-8w
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:17:22 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kLx47-0001bk-Pq
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:23:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Oyh25OuZvW0UMEw/2/qZc4PPTE7Vw5zNXswj7d0ZD08=; b=ZbTi/cLDxmaCQLMwLLJLegnVwj
- 4SYsV/RnzxKX7mNi2CSZ0yHjJ5W35vJ8DsjHtQ2iSfdwT/8ldMPe0LNUVytWFMZb4LjNdr+4X5Bi0
- DDSGxizmASE/kx6lVIRH/esT1bwb+uVaCfb5+iHqH4wvfm8qj1msR06cPEtN/AxL7lYQ=;
+ bh=IuNckGPHQwa3h7wM7e8FVssxgnxbdIRXmBDEVxvQhBo=; b=Hjc8WqfBrr/BTdpJH4aaTpa0iu
+ k12RtIP7jr+bZpWeSlKKa9qFIK6jUjDl9LYOFl4qb78jhxTvNQ3rC2ehRq640ibydnGELs/nyw5pP
+ d2/luv4H/Dy0YrcwYhUyNqOi0Ynh3SQuH8yvWgCQSTFgdSfWE4+8Dxa5d1TppTQXRpo4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Oyh25OuZvW0UMEw/2/qZc4PPTE7Vw5zNXswj7d0ZD08=; b=MvZsGib5YOFv8L6YDRIjqMqfzi
- A2kGWZq8fHgwhP8a7j7bqBU//FjCqCqWqEDOR7F0NUE2Tf/6TKqZYejWyhhHfapJZ1tKoKHC1sRLW
- MeVeeKagCbzmUTG45jQOabLwAY1/HMrdZowbRo7lI8DaW9nJp73H/UTIFnlHtuiuZdeg=;
+ bh=IuNckGPHQwa3h7wM7e8FVssxgnxbdIRXmBDEVxvQhBo=; b=VQWT6VVJwjujo6Oy4VREm4e07o
+ EC8re6yd6Yg60istYKKun4HZuK4eKz3VMTnBxYmbK1bdMAYrndW5Ss+bIACifN1IyMt0LM6739SoH
+ meR42yGlJzhiJ6sS17mNBGORZy2jR2gzNkFRpp6KhfIYFWa9dLcrjytlI0+EktViPW6M=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kLwxs-0066eq-AN
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:17:22 +0000
-Received: from [192.168.0.108] (unknown [49.65.245.23])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 1kLx3y-008TXN-Ki
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:23:47 +0000
+Received: from localhost (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 71D042074B;
- Fri, 25 Sep 2020 23:17:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2B81A2076B;
+ Fri, 25 Sep 2020 23:23:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1601075834;
- bh=EbJfwvBeHXIYBXTTELse8un9TJ2c/bhePB4Xfufh4yI=;
- h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
- b=sGBG9THcIeHUpPQzlCVRHKRzBldFa0OoegE5xBKJJDE09XngNv7EhKTWvzGyqXUJP
- SReJNDgIo2CBwnM1FFUKm9UpgaEZW/roKBqoHjNFHaB2AdddeTjFF6VPx0IbP0AgfT
- Trqfe2ACwHH/Wd3NfuSZIbJVEjuvWVL4XUac/Ki8=
-To: Eric Biggers <ebiggers@kernel.org>, Chao Yu <yuchao0@huawei.com>
-References: <000000000000f9f80905b01c7185@google.com>
- <eb03a5c9-eb77-eb91-e17f-8a3273aab7da@huawei.com>
- <20200925163819.GA3315208@gmail.com> <20200925164538.GB3315208@gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <36d3ddc1-e8d1-6d0e-c1ea-aff198740182@kernel.org>
-Date: Sat, 26 Sep 2020 07:17:09 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.8.0
+ s=default; t=1601076213;
+ bh=9h3Es5DbacCecRORY2UEsf2jaLh38zTsfqbF3XbXIWo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=0bDUp42jqb2QSqIbG5ZJkEGGI+gdaohr1N+jcPs1HpgdLL8GtA351r/4wRV4mLx7F
+ nXOAT07sAYzOsQCNIJtRuCap3Hsh0yD9FzAxvTN95O22TvE6EeQikM5csmHeO/l6JS
+ 54WVdN4zO8IGpERoPZ+F8Nkv/xhEca6LnMqii1Ec=
+Date: Fri, 25 Sep 2020 16:23:32 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20200925232332.GA4136545@google.com>
+References: <20200918030349.19667-1-yuchao0@huawei.com>
+ <20200924200305.GA2568648@google.com>
+ <dbf3a532-cd38-2b31-e4ab-e83505c6c9c4@huawei.com>
+ <7a072554-9d64-b4ac-b85b-de0acd9e507f@huawei.com>
+ <20200925170729.GA2843966@google.com>
+ <d05174f0-4ca6-c492-8ce3-ac8f146e177c@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200925164538.GB3315208@gmail.com>
-X-Spam-Score: -1.5 (-)
+Content-Disposition: inline
+In-Reply-To: <d05174f0-4ca6-c492-8ce3-ac8f146e177c@kernel.org>
+X-Spam-Score: -1.3 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,10 +72,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 NICE_REPLY_A           Looks like a legit reply (A)
  -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kLwxs-0066eq-AN
-Subject: Re: [f2fs-dev] KMSAN: uninit-value in f2fs_lookup
+X-Headers-End: 1kLx3y-008TXN-Ki
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: fix to disallow enabling
+ compress on non-empty file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,34 +87,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot <syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com>,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, glider@google.com, jaegeuk@kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020-9-26 0:45, Eric Biggers wrote:
-> On Fri, Sep 25, 2020 at 09:38:19AM -0700, Eric Biggers wrote:
->> On Fri, Sep 25, 2020 at 05:06:33PM +0800, Chao Yu wrote:
->>> Hi,
->>>
->>> I don't see any problem here, thanks for your report. :)
->>>
->>> Thanks,
->>
->> What about if max_depth == 0 in __f2fs_find_entry()?  Then __f2fs_find_entry()
->> would return NULL without initializing *res_page.
->
-> ... and I now see Dan Carpenter already pointed this out.  I was a bit late!
+On 09/26, Chao Yu wrote:
+> On 2020-9-26 1:07, Jaegeuk Kim wrote:
+> > On 09/25, Chao Yu wrote:
+> > > Jaegeuk,
+> > > 
+> > > I noticed that in dev branch there are several patches which have not been
+> > > sent to mailing list, could you please send them out?
+> > 
+> > Chao, which patches?
+> 
+> Jaegeuk, they are
+> 
+> 	f2fs: point man pages for some f2fs utils
 
-Thanks for your check as well. :)
+Ah, just sent.
 
-Thanks,
+> 	f2fs: fix slab leak of rpages pointer
 
->
-> - Eric
->
+I did before?
+
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Thanks,
+> > 
+> > 
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > 
 
 
 _______________________________________________
