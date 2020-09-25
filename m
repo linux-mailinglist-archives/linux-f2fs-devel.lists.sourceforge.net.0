@@ -2,67 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0DCC278BE3
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Sep 2020 17:02:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39085278C66
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Sep 2020 17:20:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLpEu-0001vp-Vn; Fri, 25 Sep 2020 15:02:24 +0000
+	id 1kLpWU-0006BA-3a; Fri, 25 Sep 2020 15:20:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kLpEu-0001vZ-0K
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 15:02:24 +0000
+ (envelope-from <chao@kernel.org>) id 1kLpWT-0006Ay-CE
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 15:20:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BgRlW7xKt+zZtsbSllbd7U1mSS8m91RnlLQtBOs8JwI=; b=NvsoY5nIL6JTjbhYIZ5ZigbAsp
- 8ItlPM7kxRaRQdY40eXAC+YC3Ohfy6CuJYrbfU0Yl1yNFNFOfG45ecnCXcaTP52t11Bw87YckXzJJ
- ZggAxtOcIsEQKd0kzogWdBq3om6sucIjEMF1KxINmz0rr7QP/VpK4iVglLAn6UhvJVNQ=;
+ bh=KQvEPrAXoM1hIwNpgq6by6jtuWiXnQJZc0jNpQgf6KE=; b=ce4ujMLm821QelGcrXwXMgGmCt
+ aTHYP+W6qTdYD0noVCOoabHvOC/f48CAKW05K3WpfXKGv3PhSiyJ6AIclK16IRvBnUNLgrbNMDFsU
+ sjAeyJDE8GWoLj46aPnmqTmIEnO16T2HSwwR/WaOAlR5YGsVgTuWyLoTRtuMQnFSLFHo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BgRlW7xKt+zZtsbSllbd7U1mSS8m91RnlLQtBOs8JwI=; b=mTYI6AZ4tNBrECvllVbVkb79mk
- /dK/W7Tk+uzeCycX81C3wmLU8IyiShbPndx80Zg664NHbPdU0uNl+B/AXgUEygWRmXp3MaMomy75K
- HQYKd0xeS3gfCanUw8ycNRbQBNh87a0pZoFe93vMy8FUHZk8R+kM4ydptUiG8zalT9oc=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=KQvEPrAXoM1hIwNpgq6by6jtuWiXnQJZc0jNpQgf6KE=; b=F
+ 0PyHouliKZ9w2kt4y3vpEBks8SYZ1xecUBXSwcdNUb8ddsYhrlRw4A8V5d9cyYYkf6WwDmio+NnxA
+ xQ71n9RubCRiIQ/Ult393HreVKVFLP3j8ffoPVFEq2pv9zNXd8C8p7SWS/HdtzCrE6mF9+aNEUkRz
+ p/kUu/DbiFEE3/Mg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kLpEr-005ccB-Nh
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 15:02:23 +0000
-Received: from [192.168.0.108] (unknown [49.65.245.23])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 1kLpWO-005ddM-O6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 15:20:33 +0000
+Received: from localhost.localdomain (unknown [49.65.245.23])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3144C20715;
- Fri, 25 Sep 2020 15:02:00 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id A2E6920878;
+ Fri, 25 Sep 2020 15:20:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1601046124;
- bh=9WgaLGTAfx9N0SLsi5CS0bjEUFlWHvpW0Sz8nLg7jis=;
- h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
- b=mtT/WbyI46MM40nBYZjXtBkn8QJAxuMV+gtHdAFQQ0mM7mKT658kRZcddoD7/8hOf
- vuMPR0Db20xI8R17kxp5/vMXin1+t8fj4OdYg3sevEbq648BwFVCUgX9UUKlZpg7L7
- qDQsxeoYIuyKGih53wpnxxZamdJoImDGjQF7Sum4=
-To: Dan Carpenter <dan.carpenter@oracle.com>, Chao Yu <yuchao0@huawei.com>
-References: <000000000000f9f80905b01c7185@google.com>
- <eb03a5c9-eb77-eb91-e17f-8a3273aab7da@huawei.com>
- <20200925105758.GN4282@kadam>
+ s=default; t=1601047223;
+ bh=Rgt+BCsL/KkkjWh67h04RmRvHL8oKTtmyN9/5r6atMk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=hOqrxJj5Obzg0ZU5+txEcT2yZGWeyxDoFafMpLkO/+iVH/m/IbE/2M3lZILid/53J
+ BWbwFDldm3t5e/aaZSbZIeu2I7P8GOLbAV0aWhNPmSvWMKgU805cQVWRsxGVnfyWtZ
+ 3BhyuV0yDCkdig6njBZJlWvFQAuZ2nkGgB4yMsWo=
 From: Chao Yu <chao@kernel.org>
-Message-ID: <27500993-7fbd-bbe7-1d6e-83e0e12b4a3e@kernel.org>
-Date: Fri, 25 Sep 2020 23:01:55 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.8.0
+To: jaegeuk@kernel.org
+Date: Fri, 25 Sep 2020 23:19:26 +0800
+Message-Id: <20200925151926.2658-1-chao@kernel.org>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-In-Reply-To: <20200925105758.GN4282@kadam>
-X-Spam-Score: -1.5 (-)
+X-Spam-Score: -1.3 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -70,10 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 NICE_REPLY_A           Looks like a legit reply (A)
  -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kLpEr-005ccB-Nh
-Subject: Re: [f2fs-dev] KMSAN: uninit-value in f2fs_lookup
+X-Headers-End: 1kLpWO-005ddM-O6
+Subject: [f2fs-dev] [PATCH] f2fs: fix uninit-value in f2fs_lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,84 +83,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot <syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com>,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, glider@google.com, jaegeuk@kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Dan,
+From: Chao Yu <yuchao0@huawei.com>
 
-On 2020-9-25 18:57, Dan Carpenter wrote:
-> On Fri, Sep 25, 2020 at 05:06:33PM +0800, Chao Yu wrote:
->> Hi,
->>
->> I don't see any problem here, thanks for your report. :)
->>
->
-> I bet the uninitialize value is because "max_depth" is zero.
+As syzbot reported:
 
-I agree with you, thanks for the hint. :)
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x21c/0x280 lib/dump_stack.c:118
+ kmsan_report+0xf7/0x1e0 mm/kmsan/kmsan_report.c:122
+ __msan_warning+0x58/0xa0 mm/kmsan/kmsan_instr.c:219
+ f2fs_lookup+0xe05/0x1a80 fs/f2fs/namei.c:503
+ lookup_open fs/namei.c:3082 [inline]
+ open_last_lookups fs/namei.c:3177 [inline]
+ path_openat+0x2729/0x6a90 fs/namei.c:3365
+ do_filp_open+0x2b8/0x710 fs/namei.c:3395
+ do_sys_openat2+0xa88/0x1140 fs/open.c:1168
+ do_sys_open fs/open.c:1184 [inline]
+ __do_compat_sys_openat fs/open.c:1242 [inline]
+ __se_compat_sys_openat+0x2a4/0x310 fs/open.c:1240
+ __ia32_compat_sys_openat+0x56/0x70 fs/open.c:1240
+ do_syscall_32_irqs_on arch/x86/entry/common.c:80 [inline]
+ __do_fast_syscall_32+0x129/0x180 arch/x86/entry/common.c:139
+ do_fast_syscall_32+0x6a/0xc0 arch/x86/entry/common.c:162
+ do_SYSENTER_32+0x73/0x90 arch/x86/entry/common.c:205
+ entry_SYSENTER_compat_after_hwframe+0x4d/0x5c
 
-Thanks,
+In f2fs_lookup(), @res_page could be used before being initialized,
+because in __f2fs_find_entry(), once F2FS_I(dir)->i_current_depth was
+been fuzzed to zero, then @res_page will never be initialized, causing
+this kmsan warning, relocating @res_page initialization place to fix
+this bug.
 
->
->
->    352  struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
->    353                                           const struct f2fs_filename *fname,
->    354                                           struct page **res_page)
->                                                                ^^^^^^^^
-> The stack trace says this isn't initialized.
->
->    355  {
->    356          unsigned long npages = dir_blocks(dir);
->    357          struct f2fs_dir_entry *de = NULL;
->    358          unsigned int max_depth;
->    359          unsigned int level;
->    360
->    361          if (f2fs_has_inline_dentry(dir)) {
->    362                  *res_page = NULL;
->    363                  de = f2fs_find_in_inline_dir(dir, fname, res_page);
->    364                  goto out;
->    365          }
->    366
->    367          if (npages == 0) {
->    368                  *res_page = NULL;
->    369                  goto out;
->    370          }
->    371
->    372          max_depth = F2FS_I(dir)->i_current_depth;
->    373          if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
->    374                  f2fs_warn(F2FS_I_SB(dir), "Corrupted max_depth of %lu: %u",
->    375                            dir->i_ino, max_depth);
->    376                  max_depth = MAX_DIR_HASH_DEPTH;
->    377                  f2fs_i_depth_write(dir, max_depth);
->    378          }
->    379
->    380          for (level = 0; level < max_depth; level++) {
->                                 ^^^^^^^^^^^^^^^^^
-> If "max_depth" is zero, then we never enter this loop.
->
->    381                  *res_page = NULL;
->    382                  de = find_in_level(dir, level, fname, res_page);
->    383                  if (de || IS_ERR(*res_page))
->    384                          break;
->    385          }
->    386  out:
->    387          /* This is to increase the speed of f2fs_create */
->    388          if (!de)
->    389                  F2FS_I(dir)->task = current;
->    390          return de;
->
-> Which means that we return a NULL "de" and "*res_page" is uninitialized
-> and that matches what syzbot found throug runtime testing.
->
->    391  }
->
-> regards,
-> dan carpenter
->
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/dir.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 703cf8e21fc0..83630341ffa3 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -357,16 +357,15 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+ 	unsigned int max_depth;
+ 	unsigned int level;
+ 
++	*res_page = NULL;
++
+ 	if (f2fs_has_inline_dentry(dir)) {
+-		*res_page = NULL;
+ 		de = f2fs_find_in_inline_dir(dir, fname, res_page);
+ 		goto out;
+ 	}
+ 
+-	if (npages == 0) {
+-		*res_page = NULL;
++	if (npages == 0)
+ 		goto out;
+-	}
+ 
+ 	max_depth = F2FS_I(dir)->i_current_depth;
+ 	if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
+-- 
+2.22.0
+
 
 
 _______________________________________________
