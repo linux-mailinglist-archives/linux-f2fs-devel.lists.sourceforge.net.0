@@ -2,60 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D0812794D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Sep 2020 01:38:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACD4C2794DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Sep 2020 01:42:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLxIj-0000U8-Se; Fri, 25 Sep 2020 23:38:53 +0000
+	id 1kLxM9-0000y2-Dt; Fri, 25 Sep 2020 23:42:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kLxIi-0000Tr-1r
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:38:52 +0000
+ (envelope-from <chao@kernel.org>) id 1kLxM7-0000xk-QL
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:42:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Iprg85kL662sNel/SpheLE2A7em0E9Rwm1vkqi36VUU=; b=E7k4/6A8cYAQ8N+hl0X3L/WwQP
- RzG4KpdODeicO6kNfD7OQDKdvJDd7VOruYq7ECvuTs7bK4Nx423Q1W2MqS8Y6NouKWpLj0L5RJx0w
- V1aDIm9BZYPJ9/Onglf9REvNUt4N3Aud2dgqOegFClGWBcE50fGOnW9uL8vyNx41OwL4=;
+ bh=t2Rfx6mldKzB6x94dI6EfYKXsEl9D2/HGt7ptWZ4RjA=; b=MmMxbUJNeczq4H9kT4/HL/YgwM
+ tXXr2ZCYU8FGG3+eNvMLaURn83F7JBWNRmVeFb8OaeSOFZiP/fNRicC1bHY5uotZPS6ruVStJJ6eC
+ ksMzNerETm7bO3aBD/JXo+HQ/fyHQiYj1M4s2685DEw/1NEjteD91cbjpuismLiN+MXM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Iprg85kL662sNel/SpheLE2A7em0E9Rwm1vkqi36VUU=; b=n
- TYz26Er8K6FvWGAmm8iIuN/ELBuxYiVpPnA9Dr8ac61fTxvvjSOwcraMsERiceW09tf9N/CXJwgl6
- /WV9Za7rekZAWx3TR4bA3xF4dS9sGDCsPr8hhvZJq3QRy8HPaBQlNimg3RmmzookIXhcLFF/gUvVr
- x6rz3+/esng+8b08=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=t2Rfx6mldKzB6x94dI6EfYKXsEl9D2/HGt7ptWZ4RjA=; b=SKqZyYChifW3tdjbUbIoHADUZa
+ 9DlWdzhalIXaUeExqQ8UtCM/byFQnMdZyWO3CgClj6bpZJpmNscFk3jslXjr0yXkbEtSzSmFSoZNM
+ jq4scTgPrCew+4RldcBDGrKMwAwNE+1i4v6KsOeZwKWLG1F9GjtyA8wP7GeXtLwhBWXE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kLxIe-008UC5-8v
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:38:51 +0000
-Received: from localhost.localdomain (unknown [49.65.245.23])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ id 1kLxM3-008ULj-F0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Sep 2020 23:42:23 +0000
+Received: from [192.168.0.108] (unknown [49.65.245.23])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DFB822086A;
- Fri, 25 Sep 2020 23:38:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C25692086A;
+ Fri, 25 Sep 2020 23:42:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1601077122;
- bh=0bc/ZZ9RzXPMpYSuuwZdLtHaz3Vw2fYVYpKBV4xmp8k=;
- h=From:To:Cc:Subject:Date:From;
- b=AszYa/eHC3wdUYY+4tiuZ2roUOyzjo8GmGWbhM7zIwoHYxVn2/RAPUy7k4ZhCbkpC
- 86uNF6CSN0taNKsy7YkuDrIUEK2b+jvs1Dslqp1Ms2unY5Fjo0FR2IOzIx6i4EEakx
- meB/SDpvDBEF1NesIvrpBmVYjRM42nBAQn/2PBUU=
+ s=default; t=1601077326;
+ bh=3kCVceXDX01WOddg2crYrZ9DLByiFCKMEKFeVfDj/Gw=;
+ h=Subject:To:References:From:Date:In-Reply-To:From;
+ b=JTCvxzL3mV3O0VR+dwoi4ylyKP6OMtYN/vd70+pA4VIFSKOr2jZ1n8m+JBgLDdaNq
+ Qt67PehmYg9RazI9svmGjhksLE/BmRM1m8+NGi/VaH8oidSxMUsSqX/iaoR2qEwMsI
+ 7fh139318M2GiKuA6nLnnFfdvmNShuBMh7ulytD0=
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20200923084512.2947439-1-jaegeuk@kernel.org>
+ <20200925232550.GB4136545@google.com>
 From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Sat, 26 Sep 2020 07:38:19 +0800
-Message-Id: <20200925233819.5359-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.0
+Message-ID: <f1f04328-f5b3-a349-fe51-e341e5e3d4cb@kernel.org>
+Date: Sat, 26 Sep 2020 07:42:01 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
 MIME-Version: 1.0
-X-Spam-Score: -1.3 (-)
+In-Reply-To: <20200925232550.GB4136545@google.com>
+X-Spam-Score: -1.5 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -69,9 +74,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.2 NICE_REPLY_A           Looks like a legit reply (A)
  -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kLxIe-008UC5-8v
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix uninit-value in f2fs_lookup
+X-Headers-End: 1kLxM3-008ULj-F0
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix slab leak of rpages pointer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,84 +89,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+On 2020-9-26 7:25, Jaegeuk Kim wrote:
+> I missed the f2fs mailing list by gitconfig. :)
+>
+> On 09/23, Jaegeuk Kim wrote:
+>> This fixes the below mem leak.
+>>
+>> [  130.157600] =============================================================================
+>> [  130.159662] BUG f2fs_page_array_entry-252:16 (Tainted: G        W  O     ): Objects remaining in f2fs_page_array_entry-252:16 on __kmem_cache_shutdown()
+>> [  130.162742] -----------------------------------------------------------------------------
+>> [  130.162742]
+>> [  130.164979] Disabling lock debugging due to kernel taint
+>> [  130.166188] INFO: Slab 0x000000009f5a52d2 objects=22 used=4 fp=0x00000000ba72c3e9 flags=0xfffffc0010200
+>> [  130.168269] CPU: 7 PID: 3560 Comm: umount Tainted: G    B   W  O      5.9.0-rc4+ #35
+>> [  130.170019] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1 04/01/2014
+>> [  130.171941] Call Trace:
+>> [  130.172528]  dump_stack+0x74/0x9a
+>> [  130.173298]  slab_err+0xb7/0xdc
+>> [  130.174044]  ? kernel_poison_pages+0xc0/0xc0
+>> [  130.175065]  ? on_each_cpu_cond_mask+0x48/0x90
+>> [  130.176096]  __kmem_cache_shutdown.cold+0x34/0x141
+>> [  130.177190]  kmem_cache_destroy+0x59/0x100
+>> [  130.178223]  f2fs_destroy_page_array_cache+0x15/0x20 [f2fs]
+>> [  130.179527]  f2fs_put_super+0x1bc/0x380 [f2fs]
+>> [  130.180538]  generic_shutdown_super+0x72/0x110
+>> [  130.181547]  kill_block_super+0x27/0x50
+>> [  130.182438]  kill_f2fs_super+0x76/0xe0 [f2fs]
+>> [  130.183448]  deactivate_locked_super+0x3b/0x80
+>> [  130.184456]  deactivate_super+0x3e/0x50
+>> [  130.185363]  cleanup_mnt+0x109/0x160
+>> [  130.186179]  __cleanup_mnt+0x12/0x20
+>> [  130.187003]  task_work_run+0x70/0xb0
+>> [  130.187841]  exit_to_user_mode_prepare+0x18f/0x1b0
+>> [  130.188917]  syscall_exit_to_user_mode+0x31/0x170
+>> [  130.189989]  do_syscall_64+0x45/0x90
+>> [  130.190828]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>> [  130.191986] RIP: 0033:0x7faf868ea2eb
+>> [  130.192815] Code: 7b 0c 00 f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 31 f6 e9 05 00 00 00 0f 1f 44 00 00 f3 0f 1e fa b8 a6 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 75 7b 0c 00 f7 d8 64 89 01
+>> [  130.196872] RSP: 002b:00007fffb7edb478 EFLAGS: 00000246 ORIG_RAX: 00000000000000a6
+>> [  130.198494] RAX: 0000000000000000 RBX: 00007faf86a18204 RCX: 00007faf868ea2eb
+>> [  130.201021] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 000055971df71c50
+>> [  130.203415] RBP: 000055971df71a40 R08: 0000000000000000 R09: 00007fffb7eda1f0
+>> [  130.205772] R10: 00007faf86a04339 R11: 0000000000000246 R12: 000055971df71c50
+>> [  130.208150] R13: 0000000000000000 R14: 000055971df71b38 R15: 0000000000000000
+>> [  130.210515] INFO: Object 0x00000000a980843a @offset=744
+>> [  130.212476] INFO: Allocated in page_array_alloc+0x3d/0xe0 [f2fs] age=1572 cpu=0 pid=3297
+>> [  130.215030] 	__slab_alloc+0x20/0x40
+>> [  130.216566] 	kmem_cache_alloc+0x2a0/0x2e0
+>> [  130.218217] 	page_array_alloc+0x3d/0xe0 [f2fs]
+>> [  130.219940] 	f2fs_init_compress_ctx+0x1f/0x40 [f2fs]
+>> [  130.221736] 	f2fs_write_cache_pages+0x3db/0x860 [f2fs]
+>> [  130.223591] 	f2fs_write_data_pages+0x2c9/0x300 [f2fs]
+>> [  130.225414] 	do_writepages+0x43/0xd0
+>> [  130.226907] 	__filemap_fdatawrite_range+0xd5/0x110
+>> [  130.228632] 	filemap_write_and_wait_range+0x48/0xb0
+>> [  130.230336] 	__generic_file_write_iter+0x18a/0x1d0
+>> [  130.232035] 	f2fs_file_write_iter+0x226/0x550 [f2fs]
+>> [  130.233737] 	new_sync_write+0x113/0x1a0
+>> [  130.235204] 	vfs_write+0x1a6/0x200
+>> [  130.236579] 	ksys_write+0x67/0xe0
+>> [  130.237898] 	__x64_sys_write+0x1a/0x20
+>> [  130.239309] 	do_syscall_64+0x38/0x90
+>>
+>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-As syzbot reported:
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-Call Trace:
- __dump_stack lib/dump_stack.c:77 [inline]
- dump_stack+0x21c/0x280 lib/dump_stack.c:118
- kmsan_report+0xf7/0x1e0 mm/kmsan/kmsan_report.c:122
- __msan_warning+0x58/0xa0 mm/kmsan/kmsan_instr.c:219
- f2fs_lookup+0xe05/0x1a80 fs/f2fs/namei.c:503
- lookup_open fs/namei.c:3082 [inline]
- open_last_lookups fs/namei.c:3177 [inline]
- path_openat+0x2729/0x6a90 fs/namei.c:3365
- do_filp_open+0x2b8/0x710 fs/namei.c:3395
- do_sys_openat2+0xa88/0x1140 fs/open.c:1168
- do_sys_open fs/open.c:1184 [inline]
- __do_compat_sys_openat fs/open.c:1242 [inline]
- __se_compat_sys_openat+0x2a4/0x310 fs/open.c:1240
- __ia32_compat_sys_openat+0x56/0x70 fs/open.c:1240
- do_syscall_32_irqs_on arch/x86/entry/common.c:80 [inline]
- __do_fast_syscall_32+0x129/0x180 arch/x86/entry/common.c:139
- do_fast_syscall_32+0x6a/0xc0 arch/x86/entry/common.c:162
- do_SYSENTER_32+0x73/0x90 arch/x86/entry/common.c:205
- entry_SYSENTER_compat_after_hwframe+0x4d/0x5c
-
-In f2fs_lookup(), @res_page could be used before being initialized,
-because in __f2fs_find_entry(), once F2FS_I(dir)->i_current_depth was
-been fuzzed to zero, then @res_page will never be initialized, causing
-this kmsan warning, relocating @res_page initialization place to fix
-this bug.
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v2:
-- remove *res_page assignment in a loop.
- fs/f2fs/dir.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
-
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 069f498af1e3..ceb4431b5669 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -357,16 +357,15 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
- 	unsigned int max_depth;
- 	unsigned int level;
- 
-+	*res_page = NULL;
-+
- 	if (f2fs_has_inline_dentry(dir)) {
--		*res_page = NULL;
- 		de = f2fs_find_in_inline_dir(dir, fname, res_page);
- 		goto out;
- 	}
- 
--	if (npages == 0) {
--		*res_page = NULL;
-+	if (npages == 0)
- 		goto out;
--	}
- 
- 	max_depth = F2FS_I(dir)->i_current_depth;
- 	if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
-@@ -377,7 +376,6 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
- 	}
- 
- 	for (level = 0; level < max_depth; level++) {
--		*res_page = NULL;
- 		de = find_in_level(dir, level, fname, res_page);
- 		if (de || IS_ERR(*res_page))
- 			break;
--- 
-2.22.0
-
+Thanks,
 
 
 _______________________________________________
