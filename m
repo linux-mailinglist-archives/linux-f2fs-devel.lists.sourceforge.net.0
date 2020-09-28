@@ -2,77 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB7E6279587
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Sep 2020 02:21:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3333F27AA73
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Sep 2020 11:13:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kLxxv-0006oy-Vg; Sat, 26 Sep 2020 00:21:27 +0000
+	id 1kMpDo-0007UD-Mm; Mon, 28 Sep 2020 09:13:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kLxxv-0006os-Io
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 26 Sep 2020 00:21:27 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kMpDn-0007U1-B7
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Sep 2020 09:13:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T1DVnTV/Iyvac1kNC77Y1KhUVre2fhWMO1Q8QNAxYQ4=; b=eHVNgSo8KTpZ6l5XVvjN6JsGtA
- sO1FjmurRlUZcikRLnvLCrzRbTfBFMJDhahUEcmBTmfrr5qVoQhKpU6DMVWhYX7wUSmDYVK0Sqp5y
- pVk5XXtrpoe4lUCc5FAohKAaQ6HPUVIf17iKgfhQMbADDSytsf1d3NQqel7c5+4Ol6/M=;
+ bh=QXkgxiZNCM4cdHPejnwHEPNFq2qLL2MMmNHvELfFrgA=; b=fiDI3eRRCIxIPpHo6LOGfXayqc
+ 3q8Pc+shEi010oovjNW5uq3O2SbvIkIDKDYV54OfflHWUzsPxBvxkQfJ8L100nMT9hxI6Kkup5COK
+ H8AXbnxtSvUF5qMx0NDYm8eASsQNsuIULeMNqek32AxxYqQM/BrAm610tfTo815JkZS4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=T1DVnTV/Iyvac1kNC77Y1KhUVre2fhWMO1Q8QNAxYQ4=; b=T
- b4DCLvTiT6+1LI63kGsqZh3jLq8VgGkb6XZXRt9Lex3o8tzfnsOowqqdmiGOUBcwyd4GNNmRkBS7r
- GTTVlouU/iKjw+BTv7AjdS5hbqJIpjBl0eAYk0VhSwg5y0PiEhxKIq3RzCPjC2/ofhn4IsMZtXvlF
- 80+1H6Pry47DHySg=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=QXkgxiZNCM4cdHPejnwHEPNFq2qLL2MMmNHvELfFrgA=; b=i
+ Eu9iCoNCil7GnQFPeWRFMq5+DZ6LvVYU0t36zSP8GO6qDtUU+X61Ld3DBRElRQd4peFNOkFx05fdB
+ 5suFg0Tbz/JQUo4uHdlmmNQ2u2XcwrL7Y0sEbcKFwiUxO9FmSmrvinl5cEa2zGn+xy7cgL+UFxqAJ
+ eVslSyRMZ4METRdE=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kLxxr-008WN0-E0
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 26 Sep 2020 00:21:27 +0000
-Received: from localhost.localdomain (unknown [49.65.245.23])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B6ADD20708;
- Sat, 26 Sep 2020 00:21:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1601079670;
- bh=w3xgP3gAwRlU3vYJVUANpQQUeyeF3V/RiVdViNeNL1I=;
- h=From:To:Cc:Subject:Date:From;
- b=MEqMR1fJJSFuBupHaRkT/QxkloTXml0X4aPZtjmQL2HY5wvyhGg0EnRppPBWfEG5w
- MeYrJO/NM/2mMdryIZWeP5L1qRJOwCyX1AHGK2zr2AQyU/dl0gbKCwE63Su1geYdHt
- dxFObno/6muCr3JKV0D0vtz+NXtvKtemEx00aAJI=
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Sat, 26 Sep 2020 08:20:46 +0800
-Message-Id: <20200926002046.6560-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.0
+ id 1kMpDh-008Zes-Ga
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Sep 2020 09:13:23 +0000
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 4DC9563DB87378A19FDE;
+ Mon, 28 Sep 2020 17:13:07 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
+ 14.3.487.0; Mon, 28 Sep 2020 17:12:58 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Mon, 28 Sep 2020 17:12:54 +0800
+Message-ID: <20200928091254.60750-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-Spam-Score: -1.3 (-)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kLxxr-008WN0-E0
-Subject: [f2fs-dev] [PATCH] f2fs: remove unneeded parameter in
- find_in_block()
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kMpDh-008Zes-Ga
+Subject: [f2fs-dev] [PATCH] f2fs: fix to check segment boundary during SIT
+ page readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,61 +78,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+As syzbot reported:
 
-We can relocate @res_page assignment in find_in_block() to
-its caller, so unneeded parameter could be removed for cleanup.
+kernel BUG at fs/f2fs/segment.h:657!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN
+CPU: 1 PID: 16220 Comm: syz-executor.0 Not tainted 5.9.0-rc5-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
+RIP: 0010:f2fs_ra_meta_pages+0xa51/0xdc0 fs/f2fs/segment.h:657
+Call Trace:
+ build_sit_entries fs/f2fs/segment.c:4195 [inline]
+ f2fs_build_segment_manager+0x4b8a/0xa3c0 fs/f2fs/segment.c:4779
+ f2fs_fill_super+0x377d/0x6b80 fs/f2fs/super.c:3633
+ mount_bdev+0x32e/0x3f0 fs/super.c:1417
+ legacy_get_tree+0x105/0x220 fs/fs_context.c:592
+ vfs_get_tree+0x89/0x2f0 fs/super.c:1547
+ do_new_mount fs/namespace.c:2875 [inline]
+ path_mount+0x1387/0x2070 fs/namespace.c:3192
+ do_mount fs/namespace.c:3205 [inline]
+ __do_sys_mount fs/namespace.c:3413 [inline]
+ __se_sys_mount fs/namespace.c:3390 [inline]
+ __x64_sys_mount+0x27f/0x300 fs/namespace.c:3390
+ do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
+ entry_SYSCALL_64_after_hwframe+0x44/0xa9
+
+@blkno in f2fs_ra_meta_pages could exceed max segment count, causing panic
+in following sanity check in current_sit_addr(), add check condition to
+avoid this issue.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/dir.c | 17 ++++++-----------
- 1 file changed, 6 insertions(+), 11 deletions(-)
+ fs/f2fs/checkpoint.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index ceb4431b5669..8d98597d3960 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -190,21 +190,15 @@ static unsigned long dir_block_index(unsigned int level,
- static struct f2fs_dir_entry *find_in_block(struct inode *dir,
- 				struct page *dentry_page,
- 				const struct f2fs_filename *fname,
--				int *max_slots,
--				struct page **res_page)
-+				int *max_slots)
- {
- 	struct f2fs_dentry_block *dentry_blk;
--	struct f2fs_dir_entry *de;
- 	struct f2fs_dentry_ptr d;
- 
- 	dentry_blk = (struct f2fs_dentry_block *)page_address(dentry_page);
- 
- 	make_dentry_ptr_block(dir, &d, dentry_blk);
--	de = f2fs_find_target_dentry(&d, fname, max_slots);
--	if (de)
--		*res_page = dentry_page;
--
--	return de;
-+	return f2fs_find_target_dentry(&d, fname, max_slots);
- }
- 
- #ifdef CONFIG_UNICODE
-@@ -330,10 +324,11 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
- 			}
- 		}
- 
--		de = find_in_block(dir, dentry_page, fname, &max_slots,
--				   res_page);
--		if (de)
-+		de = find_in_block(dir, dentry_page, fname, &max_slots);
-+		if (de) {
-+			*res_page = dentry_page;
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 3c6fd7a2a819..f18386d30f03 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -243,6 +243,8 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+ 					blkno * NAT_ENTRY_PER_BLOCK);
  			break;
-+		}
- 
- 		if (max_slots >= s)
- 			room = true;
+ 		case META_SIT:
++			if (unlikely(blkno >= TOTAL_SEGS(sbi)))
++				goto out;
+ 			/* get sit block addr */
+ 			fio.new_blkaddr = current_sit_addr(sbi,
+ 					blkno * SIT_ENTRY_PER_BLOCK);
 -- 
-2.22.0
+2.26.2
 
 
 
