@@ -2,77 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5695127C923
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Sep 2020 14:08:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AA3E27E1B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Sep 2020 08:49:57 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kNEQN-0001V5-E3; Tue, 29 Sep 2020 12:08:03 +0000
+	id 1kNVvy-0008TS-R8; Wed, 30 Sep 2020 06:49:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kNEQK-0001UV-0U
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Sep 2020 12:08:00 +0000
+ (envelope-from <nickrterrell@gmail.com>)
+ id 1kNVvv-0008TF-Bo; Wed, 30 Sep 2020 06:49:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dK9YcN+ZhwySd0heCQK9vQHqQ5J8zPDPm7jsavhRyng=; b=g4KUq/WyQeZjkEUbn33061gtvZ
- oyIMZiWz11oZczuesQqYWttTC8mXORDNwyKGPVn4OhQhwFNqwVrh2cwXJ02C7Q8NW2qzXrbfdRh9F
- vXyzASPI9kV+OhgZ06cGTIGGEW/SvC23z16vgfVP648WYRNAqQiWo/X7jQw5ph8mW6DQ=;
+ bh=3dpk4F10Sq+8+jlIVSQVEdlXnjO7G74k25DCau7DH8A=; b=BzEumWeGYuOO5Dyx7hI8H++Yfc
+ acNFK1oZa846QdZ4phK29BPpi6NysxHi1UbHK11mNHGVq64/RE1lGFXGGyNw49rNtmUJGB85MTLnv
+ Sh7zTBzJa9dG3DbI0BCo/jag2mQIeh67btyXJCvlYFrA3fCne+gjM0VdJWNYB44U2j+g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=dK9YcN+ZhwySd0heCQK9vQHqQ5J8zPDPm7jsavhRyng=; b=dz8rpZGbRIqs5sMJ07oiuqor54
- skKP4xLKldXswGlLW7fWJ0ZFMwuNWYpZR/MsazAgB6HAxyhlmO/27nL/kEi1gMPemZHLetZvL+iVI
- JgHluxzLj+SzhVaZzYEBbEGk6XIFLcXD7MGUx2sHwKXD9U5wQtaHevfNCAdq7eLMbgN0=;
-Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kNEQ8-00CtNL-DX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 29 Sep 2020 12:07:59 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 2C9FB6FBC48F72C23B8B;
- Tue, 29 Sep 2020 20:07:37 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 29 Sep
- 2020 20:07:31 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20200914090514.50102-1-yuchao0@huawei.com>
- <20200929082306.GA1567825@google.com>
- <6e7639db-9120-d406-0a46-ec841845bb28@huawei.com>
- <20200929084739.GB1567825@google.com>
- <1b9774da-b2a8-2009-7796-9c576af1b4c4@huawei.com>
- <5872f50c-4f3c-84bb-636f-6a6bd748c25f@huawei.com>
- <20200929094605.GD1567825@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <4d203fa5-1814-bdd3-da31-7ee207b4bdd8@huawei.com>
-Date: Tue, 29 Sep 2020 20:07:31 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3dpk4F10Sq+8+jlIVSQVEdlXnjO7G74k25DCau7DH8A=; b=W
+ fQ9/AMEHTUMLhU1pbQQZD9DthVX3Nk5DbhNeV9MgYakrz30n29jjjDuwmaHixRWUuRgsIy4xkI0ws
+ xgH8vnWYrINPJFrUZHacq0bYZ6coq1GmkyYB9DVJ+Ij/kLgNDgYzADuoQRzGiV+T6qTmz9rdBmnoP
+ 8vYZd/ixdq+yFPAg=;
+Received: from mail-pl1-f193.google.com ([209.85.214.193])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kNVvl-00B185-DI; Wed, 30 Sep 2020 06:49:47 +0000
+Received: by mail-pl1-f193.google.com with SMTP id x5so420041plo.6;
+ Tue, 29 Sep 2020 23:49:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=3dpk4F10Sq+8+jlIVSQVEdlXnjO7G74k25DCau7DH8A=;
+ b=SSfOHR1YY662ZjOsb+xjJOiFX4wDrx+5gW9p6RwNykrw6rW3NVdT4bQZ/EYrOKQOmG
+ sfrEUf6SD1Ig/qCI0hdIrePhtCCSd2ZkzzQ99MeFcKXzIFZ+3euGGS5XrAhVwVIiRjHG
+ dHQS3beskON6wru+IxUBIzX61lpY0oV1Bn41VS5DYyhH4zDIMR1cWFeBCHxDPOb4Q9bV
+ OniJmbGBQGaF3N0TV7XUZGOSD6JodQsLHjjym9gs8hpUGHHQycs5guQjBrWUv8Anl+iC
+ nSYnhMUn8IPcAR98mYgX6QuJBvbCEcZPGh+d2mjIVwUvbyQbGJTGvsqTT0dJu1fDiT4k
+ TCFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=3dpk4F10Sq+8+jlIVSQVEdlXnjO7G74k25DCau7DH8A=;
+ b=XiUvh3hPnhgRqRft4NG37Mx9fWEdIlTOqj1FMGaO94doxifzS6eH6yJ7fD+YBDCUns
+ f082tpYkXrqAPdBbo4N/6f7x46lHslJyaQ/6kHhhognBfLXo8Tz2oomBls/G6c4+Wkyh
+ 8eW4PWHD7T5FJlzokOzdvBOAGrlsX59Yy127R1EY8damdKo9fotWNnfaF1YPbXLQOu56
+ cQUcTWcUP17Txj4wAFLHL5qDhVO8N3tDBNnPacrNK/NQrekZ+wBTW02s9cfsWWXh2YTy
+ TNkyuKaei3XfbKpC1zooF6VsVV+hxWUGt6lzaP3pnITNhNZLX9b8krdFi6t809OY+42I
+ NZIw==
+X-Gm-Message-State: AOAM532z4opyNjTHHQ2iY98rwAW9vN3NBHy6qIOWsFbZbMB4jDd0Y03a
+ m2YfqxYrZKWNcwIj672ffSk=
+X-Google-Smtp-Source: ABdhPJwIYslE/MqBnBWMunLBZdmdUpG78ARevrXp0vQzmOI0qb3WlQRnb+MbRxr+v8h8+uosCyObAQ==
+X-Received: by 2002:a17:90a:fa88:: with SMTP id
+ cu8mr1277030pjb.92.1601448571528; 
+ Tue, 29 Sep 2020 23:49:31 -0700 (PDT)
+Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
+ [98.33.101.203])
+ by smtp.gmail.com with ESMTPSA id 190sm1100865pfy.22.2020.09.29.23.49.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Sep 2020 23:49:30 -0700 (PDT)
+From: Nick Terrell <nickrterrell@gmail.com>
+To: Herbert Xu <herbert@gondor.apana.org.au>
+Date: Tue, 29 Sep 2020 23:53:09 -0700
+Message-Id: <20200930065318.3326526-1-nickrterrell@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <20200929094605.GD1567825@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: fb.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.214.193 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.193 listed in wl.mailspike.net]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (nickrterrell[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kNEQ8-00CtNL-DX
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: compress: introduce page array
- slab cache
+X-Headers-End: 1kNVvl-00B185-DI
+Subject: [f2fs-dev] [PATCH v4 0/9] Update to zstd-1.4.6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,267 +110,281 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: squashfs-devel@lists.sourceforge.net, Johannes Weiner <jweiner@fb.com>,
+ Christoph Hellwig <hch@infradead.org>, Nick Terrell <nickrterrell@gmail.com>,
+ Yann Collet <cyan@fb.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
+ Chris Mason <clm@fb.com>, Nick Terrell <terrelln@fb.com>,
+ linux-crypto@vger.kernel.org, Kernel Team <Kernel-team@fb.com>,
+ Niket Agarwal <niketa@fb.com>, linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/9/29 17:46, Jaegeuk Kim wrote:
-> On 09/29, Chao Yu wrote:
->> On 2020/9/29 17:15, Chao Yu wrote:
->>> On 2020/9/29 16:47, Jaegeuk Kim wrote:
->>>> On 09/29, Chao Yu wrote:
->>>>> On 2020/9/29 16:23, Jaegeuk Kim wrote:
->>>>>> I found a bug related to the number of page pointer allocation related to
->>>>>> nr_cpages.
->>>>>
->>>>> Jaegeuk,
->>>>>
->>>>> If I didn't miss anything, you mean that nr_cpages could be larger
->>>>> than nr_rpages, right? the problematic case here is lzo/lzo-rle:
->>>>>
->>>>> cc->clen = lzo1x_worst_compress(PAGE_SIZE << cc->log_cluster_size);
->>>>>
->>>>> As we can't limited clen as we did for lz4/zstd:
->>>>>
->>>>> cc->clen = cc->rlen - PAGE_SIZE - COMPRESS_HEADER_SIZE;
->>>>
->>>> Yes, I've seen some memory corruption in lzo test. Here is another patch to fix
->>>> mem leak.
->>>>
->>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>> ---
->>>>     fs/f2fs/compress.c | 67 ++++++++++++++++++++++++++++------------------
->>>>     1 file changed, 41 insertions(+), 26 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>> index f086ac43ca825..ba2d4897744d8 100644
->>>> --- a/fs/f2fs/compress.c
->>>> +++ b/fs/f2fs/compress.c
->>>> @@ -20,22 +20,20 @@
->>>>     static struct kmem_cache *cic_entry_slab;
->>>>     static struct kmem_cache *dic_entry_slab;
->>>> -static void *page_array_alloc(struct inode *inode)
->>>> +static void *page_array_alloc(struct inode *inode, int nr)
->>>>     {
->>>>     	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->>>> -	unsigned int size = sizeof(struct page *) <<
->>>> -				F2FS_I(inode)->i_log_cluster_size;
->>>> +	unsigned int size = sizeof(struct page *) * nr;
->>>>     	if (likely(size == sbi->page_array_slab_size))
->>>>     		return kmem_cache_zalloc(sbi->page_array_slab, GFP_NOFS);
->>>>     	return f2fs_kzalloc(sbi, size, GFP_NOFS);
->>>>     }
->>>> -static void page_array_free(struct inode *inode, void *pages)
->>>> +static void page_array_free(struct inode *inode, void *pages, int nr)
->>>>     {
->>>>     	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->>>> -	unsigned int size = sizeof(struct page *) <<
->>>> -				F2FS_I(inode)->i_log_cluster_size;
->>>> +	unsigned int size = sizeof(struct page *) * nr;
->>>>     	if (!pages)
->>>>     		return;
->>>> @@ -162,13 +160,13 @@ int f2fs_init_compress_ctx(struct compress_ctx *cc)
->>>>     	if (cc->rpages)
->>>>     		return 0;
->>>> -	cc->rpages = page_array_alloc(cc->inode);
->>>> +	cc->rpages = page_array_alloc(cc->inode, cc->cluster_size);
->>>>     	return cc->rpages ? 0 : -ENOMEM;
->>>>     }
->>>>     void f2fs_destroy_compress_ctx(struct compress_ctx *cc)
->>>>     {
->>>> -	page_array_free(cc->inode, cc->rpages);
->>>> +	page_array_free(cc->inode, cc->rpages, cc->cluster_size);
->>>>     	cc->rpages = NULL;
->>>>     	cc->nr_rpages = 0;
->>>>     	cc->nr_cpages = 0;
->>>> @@ -602,7 +600,8 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     	struct f2fs_inode_info *fi = F2FS_I(cc->inode);
->>>>     	const struct f2fs_compress_ops *cops =
->>>>     				f2fs_cops[fi->i_compress_algorithm];
->>>> -	unsigned int max_len, nr_cpages;
->>>> +	unsigned int max_len, new_nr_cpages;
->>>> +	struct page **new_cpages;
->>>>     	int i, ret;
->>>>     	trace_f2fs_compress_pages_start(cc->inode, cc->cluster_idx,
->>>> @@ -617,7 +616,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     	max_len = COMPRESS_HEADER_SIZE + cc->clen;
->>>>     	cc->nr_cpages = DIV_ROUND_UP(max_len, PAGE_SIZE);
->>>> -	cc->cpages = page_array_alloc(cc->inode);
->>>> +	cc->cpages = page_array_alloc(cc->inode, cc->nr_cpages);
->>>
->>> Well, cc->nr_cpages will be set to cc->nr_rpages - 1 for zstd/lz4 cases, so
->>> this will make cpages allocation fallback to kmalloc, which can cause more
->>> memory use.
->>
->> Could we handle cpages allocation for lzo/lzo-rle separately as:
->>
->> force_xxx = is_lzo/lzo-rle_algorithm and is_cpages_array_allocation
->>
->> page_array_alloc(, force_kmalloc)
->> page_array_free(, force_kfree)
-> 
-> What about:
->    if (likely(size <= sbi->page_array_slab_size))
-> 	  return kmem_cache_zalloc(sbi->page_array_slab, GFP_NOFS);
+From: Nick Terrell <terrelln@fb.com>
 
-Better, :)
+This patchset upgrades the zstd library to the latest upstream release. The
+current zstd version in the kernel is a modified version of upstream zstd-1.3.1.
+At the time it was integrated, zstd wasn't ready to be used in the kernel as-is.
+But, it is now possible to use upstream zstd directly in the kernel.
 
-Thanks,
+I have not yet release zstd-1.4.6 upstream. I want the zstd version in the kernel
+to match up with a known upstream release, so we know exactly what code is
+running. Whenever this patchset is ready for merge, I will cut a release at the
+upstream commit that gets merged. This should not be necessary for future
+releases.
 
-> 
->>
->> Thanks,
->>
->>>
->>> Thanks,
->>>
->>>>     	if (!cc->cpages) {
->>>>     		ret = -ENOMEM;
->>>>     		goto destroy_compress_ctx;
->>>> @@ -659,16 +658,28 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
->>>>     		cc->cbuf->reserved[i] = cpu_to_le32(0);
->>>> -	nr_cpages = DIV_ROUND_UP(cc->clen + COMPRESS_HEADER_SIZE, PAGE_SIZE);
->>>> +	new_nr_cpages = DIV_ROUND_UP(cc->clen + COMPRESS_HEADER_SIZE, PAGE_SIZE);
->>>> +
->>>> +	/* Now we're going to cut unnecessary tail pages */
->>>> +	new_cpages = page_array_alloc(cc->inode, new_nr_cpages);
->>>> +	if (new_cpages) {
->>>> +		ret = -ENOMEM;
->>>> +		goto out_vunmap_cbuf;
->>>> +	}
->>>>     	/* zero out any unused part of the last page */
->>>>     	memset(&cc->cbuf->cdata[cc->clen], 0,
->>>> -	       (nr_cpages * PAGE_SIZE) - (cc->clen + COMPRESS_HEADER_SIZE));
->>>> +			(new_nr_cpages * PAGE_SIZE) -
->>>> +			(cc->clen + COMPRESS_HEADER_SIZE));
->>>>     	vm_unmap_ram(cc->cbuf, cc->nr_cpages);
->>>>     	vm_unmap_ram(cc->rbuf, cc->cluster_size);
->>>> -	for (i = nr_cpages; i < cc->nr_cpages; i++) {
->>>> +	for (i = 0; i < cc->nr_cpages; i++) {
->>>> +		if (i < new_nr_cpages) {
->>>> +			new_cpages[i] = cc->cpages[i];
->>>> +			continue;
->>>> +		}
->>>>     		f2fs_compress_free_page(cc->cpages[i]);
->>>>     		cc->cpages[i] = NULL;
->>>>     	}
->>>> @@ -676,7 +687,9 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     	if (cops->destroy_compress_ctx)
->>>>     		cops->destroy_compress_ctx(cc);
->>>> -	cc->nr_cpages = nr_cpages;
->>>> +	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
->>>> +	cc->cpages = new_cpages;
->>>> +	cc->nr_cpages = new_nr_cpages;
->>>>     	trace_f2fs_compress_pages_end(cc->inode, cc->cluster_idx,
->>>>     							cc->clen, ret);
->>>> @@ -691,7 +704,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     		if (cc->cpages[i])
->>>>     			f2fs_compress_free_page(cc->cpages[i]);
->>>>     	}
->>>> -	page_array_free(cc->inode, cc->cpages);
->>>> +	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
->>>>     	cc->cpages = NULL;
->>>>     destroy_compress_ctx:
->>>>     	if (cops->destroy_compress_ctx)
->>>> @@ -730,7 +743,7 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
->>>>     		goto out_free_dic;
->>>>     	}
->>>> -	dic->tpages = page_array_alloc(dic->inode);
->>>> +	dic->tpages = page_array_alloc(dic->inode, dic->cluster_size);
->>>>     	if (!dic->tpages) {
->>>>     		ret = -ENOMEM;
->>>>     		goto out_free_dic;
->>>> @@ -1203,7 +1216,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
->>>>     	cic->magic = F2FS_COMPRESSED_PAGE_MAGIC;
->>>>     	cic->inode = inode;
->>>>     	atomic_set(&cic->pending_pages, cc->nr_cpages);
->>>> -	cic->rpages = page_array_alloc(cc->inode);
->>>> +	cic->rpages = page_array_alloc(cc->inode, cc->cluster_size);
->>>>     	if (!cic->rpages)
->>>>     		goto out_put_cic;
->>>> @@ -1297,11 +1310,13 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
->>>>     	spin_unlock(&fi->i_size_lock);
->>>>     	f2fs_put_rpages(cc);
->>>> +	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
->>>> +	cc->cpages = NULL;
->>>>     	f2fs_destroy_compress_ctx(cc);
->>>>     	return 0;
->>>>     out_destroy_crypt:
->>>> -	page_array_free(cc->inode, cic->rpages);
->>>> +	page_array_free(cc->inode, cic->rpages, cc->cluster_size);
->>>>     	for (--i; i >= 0; i--)
->>>>     		fscrypt_finalize_bounce_page(&cc->cpages[i]);
->>>> @@ -1310,6 +1325,8 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
->>>>     			continue;
->>>>     		f2fs_put_page(cc->cpages[i], 1);
->>>>     	}
->>>> +	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
->>>> +	cc->cpages = NULL;
->>>>     out_put_cic:
->>>>     	kmem_cache_free(cic_entry_slab, cic);
->>>>     out_put_dnode:
->>>> @@ -1345,7 +1362,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
->>>>     		end_page_writeback(cic->rpages[i]);
->>>>     	}
->>>> -	page_array_free(cic->inode, cic->rpages);
->>>> +	page_array_free(cic->inode, cic->rpages, cic->nr_rpages);
->>>>     	kmem_cache_free(cic_entry_slab, cic);
->>>>     }
->>>> @@ -1442,8 +1459,6 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
->>>>     		err = f2fs_write_compressed_pages(cc, submitted,
->>>>     							wbc, io_type);
->>>> -		page_array_free(cc->inode, cc->cpages);
->>>> -		cc->cpages = NULL;
->>>>     		if (!err)
->>>>     			return 0;
->>>>     		f2fs_bug_on(F2FS_I_SB(cc->inode), err != -EAGAIN);
->>>> @@ -1468,7 +1483,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
->>>>     	if (!dic)
->>>>     		return ERR_PTR(-ENOMEM);
->>>> -	dic->rpages = page_array_alloc(cc->inode);
->>>> +	dic->rpages = page_array_alloc(cc->inode, cc->cluster_size);
->>>>     	if (!dic->rpages) {
->>>>     		kmem_cache_free(dic_entry_slab, dic);
->>>>     		return ERR_PTR(-ENOMEM);
->>>> @@ -1487,7 +1502,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
->>>>     		dic->rpages[i] = cc->rpages[i];
->>>>     	dic->nr_rpages = cc->cluster_size;
->>>> -	dic->cpages = page_array_alloc(dic->inode);
->>>> +	dic->cpages = page_array_alloc(dic->inode, dic->nr_cpages);
->>>>     	if (!dic->cpages)
->>>>     		goto out_free;
->>>> @@ -1522,7 +1537,7 @@ void f2fs_free_dic(struct decompress_io_ctx *dic)
->>>>     				continue;
->>>>     			f2fs_compress_free_page(dic->tpages[i]);
->>>>     		}
->>>> -		page_array_free(dic->inode, dic->tpages);
->>>> +		page_array_free(dic->inode, dic->tpages, dic->cluster_size);
->>>>     	}
->>>>     	if (dic->cpages) {
->>>> @@ -1531,10 +1546,10 @@ void f2fs_free_dic(struct decompress_io_ctx *dic)
->>>>     				continue;
->>>>     			f2fs_compress_free_page(dic->cpages[i]);
->>>>     		}
->>>> -		page_array_free(dic->inode, dic->cpages);
->>>> +		page_array_free(dic->inode, dic->cpages, dic->nr_cpages);
->>>>     	}
->>>> -	page_array_free(dic->inode, dic->rpages);
->>>> +	page_array_free(dic->inode, dic->rpages, dic->nr_rpages);
->>>>     	kmem_cache_free(dic_entry_slab, dic);
->>>>     }
->>>>
->>>
->>>
->>> _______________________________________________
->>> Linux-f2fs-devel mailing list
->>> Linux-f2fs-devel@lists.sourceforge.net
->>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>> .
->>>
-> .
-> 
+The kernel zstd library is automatically generated from upstream zstd. A script
+makes the necessary changes and imports it into the kernel. The changes are:
+
+1. Replace all libc dependencies with kernel replacements and rewrite includes.
+2. Remove unncessary portability macros like: #if defined(_MSC_VER).
+3. Use the kernel xxhash instead of bundling it.
+
+This automation gets tested every commit by upstream's continuous integration.
+When we cut a new zstd release, we will submit a patch to the kernel to update
+the zstd version in the kernel.
+
+I've updated zstd to upstream with one big patch because every commit must build,
+so that precludes partial updates. Since the commit is 100% generated, I hope the
+review burden is lightened. I considered replaying upstream commits, but that is
+not possible because there have been ~3500 upstream commits since the last zstd
+import, and the commits don't all build individually. The bulk update preserves
+bisectablity because bugs can be bisected to the zstd version update. At that
+point the update can be reverted, and we can work with upstream to find and fix
+the bug. After this big switch in how the kernel consumes zstd, future patches
+will be smaller, because they will only have one upstream release worth of
+changes each.
+
+This patchset changes the zstd API from a custom kernel API to the upstream API.
+I considered wrapping the upstream API with a wrapper that is closer to the
+kernel style guide. Following advise from https://lkml.org/lkml/2020/9/17/814
+I've chosen to use the upstream API directly, to minimize opportunities to
+introduce bugs, and because using the upstream API directly makes debugging and
+communication with upstream easier.
+
+This patchset comes in 3 parts:
+1. The first 2 patches prepare for the zstd upgrade. The first patch adds a
+   compatibility wrapper so zstd can be upgraded without modifying any callers.
+   The second patch adds an indirection for the lib/decompress_unzstd.c including
+   of all decompression source files.
+2. Import zstd-1.4.6. This patch is completely generated from upstream using
+   automated tooling.
+3. Update all callers to the zstd-1.4.6 API then delete the compatibility
+   wrapper.
+
+I tested every caller of zstd on x86_64. I tested both after the 1.4.6 upgrade
+using the compatibility wrapper, and after the final patch in this series. 
+
+I tested kernel and initramfs decompression in i386 and arm.
+
+I ran benchmarks to compare the current zstd in the kernel with zstd-1.4.6.
+I benchmarked on x86_64 using QEMU with KVM enabled on an Intel i9-9900k.
+I found:
+* BtrFS zstd compression at levels 1 and 3 is 5% faster
+* BtrFS zstd decompression+read is 15% faster
+* SquashFS zstd decompression+read is 15% faster
+* F2FS zstd compression+write at level 3 is 8% faster
+* F2FS zstd decompression+read is 20% faster
+* ZRAM decompression+read is 30% faster
+* Kernel zstd decompression is 35% faster
+* Initramfs zstd decompression+build is 5% faster
+
+The latest zstd also offers bug fixes and a 1 KB reduction in stack uage during
+compression. For example the recent problem with large kernel decompression has
+been fixed upstream for over 2 years https://lkml.org/lkml/2020/9/29/27.
+
+Please let me know if there is anything that I can do to ease the way for these
+patches. I think it is important because it gets large performance improvements,
+contains bug fixes, and is switching to a more maintainable model of consuming
+upstream zstd directly, making it easy to keep up to date.
+
+Best,
+Nick Terrell
+
+v1 -> v2:
+* Successfully tested F2FS with help from Chao Yu to fix my test.
+* (1/9) Fix ZSTD_initCStream() wrapper to handle pledged_src_size=0 means unknown.
+  This fixes F2FS with the zstd-1.4.6 compatibility wrapper, exposed by the test.
+
+v2 -> v3:
+* (3/9) Silence warnings by Kernel Test Robot:
+  https://github.com/facebook/zstd/pull/2324
+  Stack size warnings remain, but these aren't new, and the functions it warns on
+  are either unused or not in the maximum stack path. This patchset reduces zstd
+  compression stack usage by 1 KB overall. I've gotten the low hanging fruit, and
+  more stack reduction would require significant changes that have the potential
+  to introduce new bugs. However, I do hope to continue to reduce zstd stack
+  usage in future versions.
+
+v3 -> v4:
+* (3/9) Fix errors and warnings reported by Kernel Test Robot:
+  https://github.com/facebook/zstd/pull/2326
+  - Replace mem.h with a custom kernel implementation that matches the current
+    lib/zstd/mem.h in the kernel. This avoids calls to __builtin_bswap*() which
+    don't work on certain architectures, as exposed by the Kernel Test Robot.
+  - Remove ASAN/MSAN (un)poisoning code which doesn't work in the kernel, as
+    exposed by the Kernel Test Robot.
+  - I've fixed all of the valid cppcheck warnings reported, but there were many
+    false positives, where cppcheck was incorrectly analyzing the situation,
+    which I did not fix. I don't believe it is reasonable to expect that upstream
+    zstd silences all the static analyzer false positives. Upstream zstd uses
+    clang scan-build for its static analysis. We find that supporting multiple
+    static analysis tools multiplies the burden of silencing false positives,
+    without providing enough marginal value over running a single static analysis
+    tool.
+
+Nick Terrell (9):
+  lib: zstd: Add zstd compatibility wrapper
+  lib: zstd: Add decompress_sources.h for decompress_unzstd
+  lib: zstd: Upgrade to latest upstream zstd version 1.4.6
+  crypto: zstd: Switch to zstd-1.4.6 API
+  btrfs: zstd: Switch to the zstd-1.4.6 API
+  f2fs: zstd: Switch to the zstd-1.4.6 API
+  squashfs: zstd: Switch to the zstd-1.4.6 API
+  lib: unzstd: Switch to the zstd-1.4.6 API
+  lib: zstd: Remove zstd compatibility wrapper
+
+ crypto/zstd.c                                 |   22 +-
+ fs/btrfs/zstd.c                               |   46 +-
+ fs/f2fs/compress.c                            |  100 +-
+ fs/squashfs/zstd_wrapper.c                    |    7 +-
+ include/linux/zstd.h                          | 3021 ++++++++----
+ include/linux/zstd_errors.h                   |   76 +
+ lib/decompress_unzstd.c                       |   44 +-
+ lib/zstd/Makefile                             |   35 +-
+ lib/zstd/bitstream.h                          |  379 --
+ lib/zstd/common/bitstream.h                   |  437 ++
+ lib/zstd/common/compiler.h                    |  150 +
+ lib/zstd/common/cpu.h                         |  194 +
+ lib/zstd/common/debug.c                       |   24 +
+ lib/zstd/common/debug.h                       |  101 +
+ lib/zstd/common/entropy_common.c              |  355 ++
+ lib/zstd/common/error_private.c               |   55 +
+ lib/zstd/common/error_private.h               |   66 +
+ lib/zstd/common/fse.h                         |  709 +++
+ lib/zstd/common/fse_decompress.c              |  380 ++
+ lib/zstd/common/huf.h                         |  352 ++
+ lib/zstd/common/mem.h                         |  258 +
+ lib/zstd/common/zstd_common.c                 |   83 +
+ lib/zstd/common/zstd_deps.h                   |  124 +
+ lib/zstd/common/zstd_internal.h               |  438 ++
+ lib/zstd/compress.c                           | 3485 --------------
+ lib/zstd/compress/fse_compress.c              |  625 +++
+ lib/zstd/compress/hist.c                      |  165 +
+ lib/zstd/compress/hist.h                      |   75 +
+ lib/zstd/compress/huf_compress.c              |  764 +++
+ lib/zstd/compress/zstd_compress.c             | 4157 +++++++++++++++++
+ lib/zstd/compress/zstd_compress_internal.h    | 1103 +++++
+ lib/zstd/compress/zstd_compress_literals.c    |  158 +
+ lib/zstd/compress/zstd_compress_literals.h    |   29 +
+ lib/zstd/compress/zstd_compress_sequences.c   |  433 ++
+ lib/zstd/compress/zstd_compress_sequences.h   |   54 +
+ lib/zstd/compress/zstd_compress_superblock.c  |  849 ++++
+ lib/zstd/compress/zstd_compress_superblock.h  |   32 +
+ lib/zstd/compress/zstd_cwksp.h                |  465 ++
+ lib/zstd/compress/zstd_double_fast.c          |  521 +++
+ lib/zstd/compress/zstd_double_fast.h          |   32 +
+ lib/zstd/compress/zstd_fast.c                 |  496 ++
+ lib/zstd/compress/zstd_fast.h                 |   31 +
+ lib/zstd/compress/zstd_lazy.c                 | 1138 +++++
+ lib/zstd/compress/zstd_lazy.h                 |   61 +
+ lib/zstd/compress/zstd_ldm.c                  |  619 +++
+ lib/zstd/compress/zstd_ldm.h                  |  104 +
+ lib/zstd/compress/zstd_opt.c                  | 1200 +++++
+ lib/zstd/compress/zstd_opt.h                  |   50 +
+ lib/zstd/decompress.c                         | 2531 ----------
+ lib/zstd/decompress/huf_decompress.c          | 1205 +++++
+ lib/zstd/decompress/zstd_ddict.c              |  241 +
+ lib/zstd/decompress/zstd_ddict.h              |   44 +
+ lib/zstd/decompress/zstd_decompress.c         | 1836 ++++++++
+ lib/zstd/decompress/zstd_decompress_block.c   | 1540 ++++++
+ lib/zstd/decompress/zstd_decompress_block.h   |   62 +
+ .../decompress/zstd_decompress_internal.h     |  195 +
+ lib/zstd/decompress_sources.h                 |   18 +
+ lib/zstd/entropy_common.c                     |  243 -
+ lib/zstd/error_private.h                      |   53 -
+ lib/zstd/fse.h                                |  575 ---
+ lib/zstd/fse_compress.c                       |  795 ----
+ lib/zstd/fse_decompress.c                     |  325 --
+ lib/zstd/huf.h                                |  212 -
+ lib/zstd/huf_compress.c                       |  772 ---
+ lib/zstd/huf_decompress.c                     |  960 ----
+ lib/zstd/mem.h                                |  151 -
+ lib/zstd/zstd_common.c                        |   75 -
+ lib/zstd/zstd_compress_module.c               |   79 +
+ lib/zstd/zstd_decompress_module.c             |   79 +
+ lib/zstd/zstd_internal.h                      |  273 --
+ lib/zstd/zstd_opt.h                           | 1014 ----
+ 71 files changed, 24368 insertions(+), 13012 deletions(-)
+ create mode 100644 include/linux/zstd_errors.h
+ delete mode 100644 lib/zstd/bitstream.h
+ create mode 100644 lib/zstd/common/bitstream.h
+ create mode 100644 lib/zstd/common/compiler.h
+ create mode 100644 lib/zstd/common/cpu.h
+ create mode 100644 lib/zstd/common/debug.c
+ create mode 100644 lib/zstd/common/debug.h
+ create mode 100644 lib/zstd/common/entropy_common.c
+ create mode 100644 lib/zstd/common/error_private.c
+ create mode 100644 lib/zstd/common/error_private.h
+ create mode 100644 lib/zstd/common/fse.h
+ create mode 100644 lib/zstd/common/fse_decompress.c
+ create mode 100644 lib/zstd/common/huf.h
+ create mode 100644 lib/zstd/common/mem.h
+ create mode 100644 lib/zstd/common/zstd_common.c
+ create mode 100644 lib/zstd/common/zstd_deps.h
+ create mode 100644 lib/zstd/common/zstd_internal.h
+ delete mode 100644 lib/zstd/compress.c
+ create mode 100644 lib/zstd/compress/fse_compress.c
+ create mode 100644 lib/zstd/compress/hist.c
+ create mode 100644 lib/zstd/compress/hist.h
+ create mode 100644 lib/zstd/compress/huf_compress.c
+ create mode 100644 lib/zstd/compress/zstd_compress.c
+ create mode 100644 lib/zstd/compress/zstd_compress_internal.h
+ create mode 100644 lib/zstd/compress/zstd_compress_literals.c
+ create mode 100644 lib/zstd/compress/zstd_compress_literals.h
+ create mode 100644 lib/zstd/compress/zstd_compress_sequences.c
+ create mode 100644 lib/zstd/compress/zstd_compress_sequences.h
+ create mode 100644 lib/zstd/compress/zstd_compress_superblock.c
+ create mode 100644 lib/zstd/compress/zstd_compress_superblock.h
+ create mode 100644 lib/zstd/compress/zstd_cwksp.h
+ create mode 100644 lib/zstd/compress/zstd_double_fast.c
+ create mode 100644 lib/zstd/compress/zstd_double_fast.h
+ create mode 100644 lib/zstd/compress/zstd_fast.c
+ create mode 100644 lib/zstd/compress/zstd_fast.h
+ create mode 100644 lib/zstd/compress/zstd_lazy.c
+ create mode 100644 lib/zstd/compress/zstd_lazy.h
+ create mode 100644 lib/zstd/compress/zstd_ldm.c
+ create mode 100644 lib/zstd/compress/zstd_ldm.h
+ create mode 100644 lib/zstd/compress/zstd_opt.c
+ create mode 100644 lib/zstd/compress/zstd_opt.h
+ delete mode 100644 lib/zstd/decompress.c
+ create mode 100644 lib/zstd/decompress/huf_decompress.c
+ create mode 100644 lib/zstd/decompress/zstd_ddict.c
+ create mode 100644 lib/zstd/decompress/zstd_ddict.h
+ create mode 100644 lib/zstd/decompress/zstd_decompress.c
+ create mode 100644 lib/zstd/decompress/zstd_decompress_block.c
+ create mode 100644 lib/zstd/decompress/zstd_decompress_block.h
+ create mode 100644 lib/zstd/decompress/zstd_decompress_internal.h
+ create mode 100644 lib/zstd/decompress_sources.h
+ delete mode 100644 lib/zstd/entropy_common.c
+ delete mode 100644 lib/zstd/error_private.h
+ delete mode 100644 lib/zstd/fse.h
+ delete mode 100644 lib/zstd/fse_compress.c
+ delete mode 100644 lib/zstd/fse_decompress.c
+ delete mode 100644 lib/zstd/huf.h
+ delete mode 100644 lib/zstd/huf_compress.c
+ delete mode 100644 lib/zstd/huf_decompress.c
+ delete mode 100644 lib/zstd/mem.h
+ delete mode 100644 lib/zstd/zstd_common.c
+ create mode 100644 lib/zstd/zstd_compress_module.c
+ create mode 100644 lib/zstd/zstd_decompress_module.c
+ delete mode 100644 lib/zstd/zstd_internal.h
+ delete mode 100644 lib/zstd/zstd_opt.h
+
+-- 
+2.28.0
+
 
 
 _______________________________________________
