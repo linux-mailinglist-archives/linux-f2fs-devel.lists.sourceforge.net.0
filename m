@@ -2,61 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE4C27F6A7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Oct 2020 02:25:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEFDE27F6A9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Oct 2020 02:26:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kNmPp-000060-Pf; Thu, 01 Oct 2020 00:25:45 +0000
+	id 1kNmPz-0006Ee-WB; Thu, 01 Oct 2020 00:25:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kNmPo-00005q-WB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Oct 2020 00:25:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kNmPu-0006EJ-Ob
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Oct 2020 00:25:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kRtxq8gJmfxz0mhUJuVNUHg5jinArg9Ff20MhJui8i4=; b=iCcbbjAY1uHGng51cAF6do7kiC
- m5LgvXD7jMjy43Ee+FUZl1BfC4DNqLxBgADM3NrqFzwlzDAc2tor/Xs9PsJkDRA0MznLEcNLBPkOm
- LrKdvC2MVnl/X7UufIj8/sVRh46b+FCQn5LVP2L8OBpRH0x/2tJJlhiQCBw4eVDuwk7M=;
+ bh=s1RlqnI8foTGWUwraIaP9AM6TLYo8V2DTXrJms10Q1A=; b=FriNCYHmPWi6y6KDESEapg6G08
+ hhFC2C1HsDvB9M8AqspCFNwMrsPZ0DZeavBrp3hNAK5k7L0mq5mlOgsDzNiSJJ2icacbKFT9XjB+6
+ JHuR/SPVP0xdBPOgGWiCsETN8jxPJ6ijuulmM4bu7pNMjr4HtEsy3yno60mAt29+imNg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kRtxq8gJmfxz0mhUJuVNUHg5jinArg9Ff20MhJui8i4=; b=Q
- cGaQRMxlehnFU42LosKlXbiCO5c4UKwhaJSMEpNBqon9lrTWBmOcJ4ULcxCBrmjjaokTz8VTbYwgc
- MXvWiZmb8hBGHukG+kPyvF2co/T1Z7IPSbpyaNUavo7aCJ8vdUP9TNx+SPj2RYvEAX8xnN9o6gY+g
- nKVZnH9LBoq2gSLw=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=s1RlqnI8foTGWUwraIaP9AM6TLYo8V2DTXrJms10Q1A=; b=h4zZOWzhoAl40y+6fIfumYhr+p
+ 0IsTtyFre8PK37kwQvAiNErKvvfN3927CUr89ln2UEhCrpmGqxiHVLtg/2lTS9uapgiPzjnTSrrK1
+ 7ZLqhsP1tIB0FnS4NZhcmoHr5g9QJBw4vuo5o9Kyw3A4xDnb2cFUgrcr+eganhrxKeYI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kNmPn-00CB7p-Fb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Oct 2020 00:25:44 +0000
+ id 1kNmPn-00FF7z-W7
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Oct 2020 00:25:50 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D37B7207C3;
- Thu,  1 Oct 2020 00:25:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2805420578;
+ Thu,  1 Oct 2020 00:25:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1601511931;
- bh=0ZXQunnvSZDQ/e9Aytg6MPPYrB6sjkc8ANjRO0l0B4g=;
- h=From:To:Cc:Subject:Date:From;
- b=ssk904+Yq8tSueatsyQZWHUra5Qgs4eCILMidgS/OG8v6WQV5RwTqQTyOF/olOt+u
- ZsYeBsmujJ3CGM7eby3AtVa9ELEwbNP9sn74ye54P0SFMeQposLtwNawu5Nxb5tr3B
- GOOmgHpO/fGFgIsB2sq0vc3siwUnQO6cEvP0uTqw=
+ bh=/nNZ5RevJQaMc15vRjvv8jrBatzCUxzaN3jBuV22Zr8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=G6m1Y03NmMKIk6azX9TyBZkc6TzIBTIdebrPSPYsg5sI3wKQo4jwXfJw+kUAH0eAD
+ rPYOc9u75/qvgzpmhc3UQs62L6MJsh3tjJaVumqM9O9Ya84gGqxcThwywaNSGnMnBN
+ 3Ec82EHRpnE2YZyr60rUI0dwY3ytBEygxPbTMefs=
 From: Eric Biggers <ebiggers@kernel.org>
 To: fstests@vger.kernel.org
-Date: Wed, 30 Sep 2020 17:25:02 -0700
-Message-Id: <20201001002508.328866-1-ebiggers@kernel.org>
+Date: Wed, 30 Sep 2020 17:25:03 -0700
+Message-Id: <20201001002508.328866-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20201001002508.328866-1-ebiggers@kernel.org>
+References: <20201001002508.328866-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -66,9 +68,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kNmPn-00CB7p-Fb
-Subject: [f2fs-dev] [PATCH 0/5] xfstests: test f2fs compression+encryption
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kNmPn-00FF7z-W7
+Subject: [f2fs-dev] [PATCH 1/5] fscrypt-crypt-util: clean up parsing
+ --block-size and --inode-number
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,41 +89,92 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add a test which verifies that encryption is done correctly when a file
-on f2fs uses both compression and encryption at the same time.
+From: Eric Biggers <ebiggers@google.com>
 
-Patches 1-4 add prerequisites for the test, while patch 5 adds the
-actual test.  Patch 2 also fixes a bug which could cause the existing
-test generic/602 to fail in extremely rare cases.  See the commit
-messages for details.
+For --block-size, check for strtoul() reporting an overflow.
 
-The new test passes both with and without the inlinecrypt mount option.
-It requires CONFIG_F2FS_FS_COMPRESSION=y.
+For --inode-number, check for strtoull() reporting an overflow.
 
-I'd appreciate the f2fs developers taking a look.
+Also, move the check for 32-bit inode numbers into a more logical place
+(the place where we check the encryption format-specific limitations).
 
-Note, there is a quirk where the IVs in compressed files are off by one
-from the "natural" values.  It's still secure, though it made the test
-slightly harder to write.  I'm not sure how intentional this quirk was.
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ src/fscrypt-crypt-util.c | 25 ++++++++++---------------
+ 1 file changed, 10 insertions(+), 15 deletions(-)
 
-Eric Biggers (5):
-  fscrypt-crypt-util: clean up parsing --block-size and --inode-number
-  fscrypt-crypt-util: fix IV incrementing for --iv-ino-lblk-32
-  fscrypt-crypt-util: add --block-number option
-  common/f2fs: add _require_scratch_f2fs_compression()
-  f2fs: verify ciphertext of compressed+encrypted file
-
- common/config            |   1 +
- common/f2fs              |  27 +++++
- src/fscrypt-crypt-util.c |  98 ++++++++++++------
- tests/f2fs/002           | 217 +++++++++++++++++++++++++++++++++++++++
- tests/f2fs/002.out       |  21 ++++
- tests/f2fs/group         |   1 +
- 6 files changed, 334 insertions(+), 31 deletions(-)
- create mode 100644 common/f2fs
- create mode 100755 tests/f2fs/002
- create mode 100644 tests/f2fs/002.out
-
+diff --git a/src/fscrypt-crypt-util.c b/src/fscrypt-crypt-util.c
+index ce9da85d..d9189346 100644
+--- a/src/fscrypt-crypt-util.c
++++ b/src/fscrypt-crypt-util.c
+@@ -26,6 +26,7 @@
+ #include <linux/types.h>
+ #include <stdarg.h>
+ #include <stdbool.h>
++#include <stdint.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -1756,18 +1757,6 @@ static u8 parse_mode_number(const char *arg)
+ 	return num;
+ }
+ 
+-static u32 parse_inode_number(const char *arg)
+-{
+-	char *tmp;
+-	unsigned long long num = strtoull(arg, &tmp, 10);
+-
+-	if (num <= 0 || *tmp)
+-		die("Invalid inode number: %s", arg);
+-	if ((u32)num != num)
+-		die("Inode number %s is too large; must be 32-bit", arg);
+-	return num;
+-}
+-
+ struct key_and_iv_params {
+ 	u8 master_key[MAX_KEY_SIZE];
+ 	int master_key_size;
+@@ -1777,7 +1766,7 @@ struct key_and_iv_params {
+ 	bool file_nonce_specified;
+ 	bool iv_ino_lblk_64;
+ 	bool iv_ino_lblk_32;
+-	u32 inode_number;
++	u64 inode_number;
+ 	u8 fs_uuid[UUID_SIZE];
+ 	bool fs_uuid_specified;
+ };
+@@ -1842,6 +1831,8 @@ static void get_key_and_iv(const struct key_and_iv_params *params,
+ 			die("%s requires --inode-number", opt);
+ 		if (params->mode_num == 0)
+ 			die("%s requires --mode-num", opt);
++		if (params->inode_number > UINT32_MAX)
++			die("%s can't use --inode-number > UINT32_MAX", opt);
+ 	}
+ 
+ 	switch (params->kdf) {
+@@ -1957,8 +1948,9 @@ int main(int argc, char *argv[])
+ 	while ((c = getopt_long(argc, argv, "", longopts, NULL)) != -1) {
+ 		switch (c) {
+ 		case OPT_BLOCK_SIZE:
++			errno = 0;
+ 			block_size = strtoul(optarg, &tmp, 10);
+-			if (block_size <= 0 || *tmp)
++			if (block_size <= 0 || *tmp || errno)
+ 				die("Invalid block size: %s", optarg);
+ 			break;
+ 		case OPT_DECRYPT:
+@@ -1980,7 +1972,10 @@ int main(int argc, char *argv[])
+ 			usage(stdout);
+ 			return 0;
+ 		case OPT_INODE_NUMBER:
+-			params.inode_number = parse_inode_number(optarg);
++			errno = 0;
++			params.inode_number = strtoull(optarg, &tmp, 10);
++			if (params.inode_number <= 0 || *tmp || errno)
++				die("Invalid inode number: %s", optarg);
+ 			break;
+ 		case OPT_IV_INO_LBLK_32:
+ 			params.iv_ino_lblk_32 = true;
 -- 
 2.28.0
 
