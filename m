@@ -2,26 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10B752808CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Oct 2020 22:51:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE647280DB5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Oct 2020 08:55:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kO5Y5-0001ks-Ds; Thu, 01 Oct 2020 20:51:33 +0000
+	id 1kOEyq-000405-W0; Fri, 02 Oct 2020 06:55:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <lkp@intel.com>)
- id 1kO5Y2-0001kf-6j; Thu, 01 Oct 2020 20:51:30 +0000
+ (envelope-from
+ <BATV+27a5ecbc8e1e54150000+6249+infradead.org+hch@casper.srs.infradead.org>)
+ id 1kOEyX-0003zA-Jr; Fri, 02 Oct 2020 06:55:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GudAcBfO2aHwVvPZH6uHcPJdmR4/X7WkRhgHdvLJ5S8=; b=KjcfZvmRjTgS4GG4fcCdaW7WmV
- dF7gyzkRPIls6sFLKvAVdMAbcJ74KT50Ww4SANQDykeNc52DF9SdJcQXvKtJcEYUgYcttyiquYTcl
- zs6B+wtF3fTL4jjCA79qA3OuIiMHVMw/M6Q0pjKPkJOnETEgdyp+SYkSTaMUnVzxRIiE=;
+ bh=wsszzdNdt8/s5qmse2DtQE9T6ptZdmllS5Ln6Q6wU9w=; b=nVXnAWsZ71xuMg0P2cWswsoPap
+ S3GL4epL5cSeohoBU/BgmMgOMNKvsyhtuHDMqU5mbb/JKZxCsZ+V12IGFyPDd7Eebt9Hji/93FU7H
+ aBho59dcNJGr4JNCh9WW88/E+/YaBcyA7NSiYMUJyHrHH4Sxm+6kxAHfbVVHF1RHOFSY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,56 +30,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GudAcBfO2aHwVvPZH6uHcPJdmR4/X7WkRhgHdvLJ5S8=; b=asx2KrxHbJe05dmGmIBr4+TJl8
- jbQ2/2CmZux3x+cK0ToX5RQ+FflzqJLIHBGLD0qyaA0A+JGgKrYy2w8pDNgnS+eR1xZWBRU7tSpsq
- ji53Y1/wq6L0ZmqnAwABQZX5cEETk1TqzI2Ndmj8LTq2sWlkjQk2CK5/7meGyM4BErEA=;
-Received: from mga09.intel.com ([134.134.136.24])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=wsszzdNdt8/s5qmse2DtQE9T6ptZdmllS5Ln6Q6wU9w=; b=TWTzQjxer6UANyvBQ6Bi8k0rIi
+ N4JO2DYPp0OFst4XJEJAq1zGddOlAhPyjp7GV09aef3BRpOXfL2uHKcapbQqa0H5ADiqmF6VapiWJ
+ z3dhsJJrJ5lvyd47PsgEnyC2HjwSDLrv5+TkKMW1OBt5KloQ5TflSpd9RQ1LPjgrv8as=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kO5Xx-00GWCV-N5; Thu, 01 Oct 2020 20:51:30 +0000
-IronPort-SDR: hfDtq88zA8Gqt1leyX/3buGIIswzznG80YnZL2tkedUP74B3dozmGQNS/JuKwI6g8JN98/KpIY
- nxH19ffQJMaQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9761"; a="163690500"
-X-IronPort-AV: E=Sophos;i="5.77,325,1596524400"; d="scan'208";a="163690500"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Oct 2020 13:51:10 -0700
-IronPort-SDR: 1WoWD3tSYbFzQBWeDTTaPfvEOu+7ixNbKFfbkUjqGno6QjTOAq4jaTjd3jXSQ7+Ly60CB5l7FW
- 2VRpEozO+XCA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.77,325,1596524400"; d="scan'208";a="339703561"
-Received: from lkp-server02.sh.intel.com (HELO de448af6ea1b) ([10.239.97.151])
- by fmsmga004.fm.intel.com with ESMTP; 01 Oct 2020 13:51:08 -0700
-Received: from kbuild by de448af6ea1b with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1kO5Xf-0000kE-FY; Thu, 01 Oct 2020 20:51:07 +0000
-Date: Fri, 2 Oct 2020 04:50:49 +0800
-From: kernel test robot <lkp@intel.com>
-To: Nick Terrell <nickrterrell@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>
-Message-ID: <20201001205049.GA6920@f58d09cd8e1e>
-References: <20200930065318.3326526-4-nickrterrell@gmail.com>
+ id 1kOEyL-00DnNN-5u; Fri, 02 Oct 2020 06:55:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=wsszzdNdt8/s5qmse2DtQE9T6ptZdmllS5Ln6Q6wU9w=; b=dPcWs/vek1tL6i1nQlvOrE1uA7
+ 8xNJ8Oje5kX7lSLWTZyOtzuVqtVFyeYSK1k+YIC4hGdDMAVJix1JWLikC5X5IMWqei9i4rHgZwVGd
+ SD0S05U3c/JiwtVUkoPuwiYZEYROVD9jo7aNA0uZo8FMJLUmj6UXjrCS4I45G+y+s0isM6bwvh7dP
+ Mb6tKl+tTbGqe6MJsL9Z5CDppphb88mIwyztnvEAI6ZVtZ3QFkMZaFBUXwFdYq3zWn+lXU7X1M9Hz
+ qUm9iN54MuQJB97nh2XBZhPFT665ncwJylT4Br6ojvvNBQiuEsWumjLPjZeirdZDZIV/cZjn1eiSn
+ 472YLMnw==;
+Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1kOExy-0007q1-6R; Fri, 02 Oct 2020 06:54:54 +0000
+Date: Fri, 2 Oct 2020 07:54:54 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Nick Terrell <terrelln@fb.com>
+Message-ID: <20201002065454.GA29993@infradead.org>
+References: <20200930065318.3326526-1-nickrterrell@gmail.com>
+ <20200930065336.GA13656@infradead.org>
+ <8743398B-0BBB-424E-A6A7-9D8AE4EFE8ED@fb.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200930065318.3326526-4-nickrterrell@gmail.com>
-X-Patchwork-Hint: ignore
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <8743398B-0BBB-424E-A6A7-9D8AE4EFE8ED@fb.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fb.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [134.134.136.24 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ for more information. [URIs: infradead.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kO5Xx-00GWCV-N5
-Subject: [f2fs-dev] [PATCH] lib: zstd: fix semicolon.cocci warnings
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kOEyL-00DnNN-5u
+Subject: Re: [f2fs-dev] [PATCH v4 0/9] Update to zstd-1.4.6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,46 +88,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: squashfs-devel@lists.sourceforge.net,
- Chris Mason <chris.mason@fusionio.com>, kbuild-all@lists.01.org,
- Nick Terrell <nickrterrell@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
- linux-crypto@vger.kernel.org, Kernel Team <Kernel-team@fb.com>,
- linux-btrfs@vger.kernel.org
+Cc: "squashfs-devel@lists.sourceforge.net"
+ <squashfs-devel@lists.sourceforge.net>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
+ Petr Malat <oss@malat.biz>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ Christoph Hellwig <hch@infradead.org>, Chris Mason <clm@fb.com>,
+ "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
+ Btrfs BTRFS <linux-btrfs@vger.kernel.org>, Johannes Weiner <jweiner@fb.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: kernel test robot <lkp@intel.com>
+On Wed, Sep 30, 2020 at 08:05:45PM +0000, Nick Terrell wrote:
+> 
+> 
+> > On Sep 29, 2020, at 11:53 PM, Christoph Hellwig <hch@infradead.org> wrote:
+> > 
+> > As you keep resend this I keep retelling you that should not do it.
+> > Please provide a proper Linux API, and switch to that.  Versioned APIs
+> > have absolutely no business in the Linux kernel.
+> 
+> The API is not versioned. We provide a stable ABI for a large section of our API,
+> and the parts that aren???t ABI stable don???t change in semantics, and undergo long
+> deprecation periods before being removed.
+> 
+> The change of callers is a one-time change to transition from the existing API
+> in the kernel, which was never upstream's API, to upstream's API.
 
-lib/zstd/compress/zstd_compress.c:3248:24-25: Unneeded semicolon
-
-
- Remove unneeded semicolon.
-
-Generated by: scripts/coccinelle/misc/semicolon.cocci
-
-CC: Nick Terrell <terrelln@fb.com>
-Signed-off-by: kernel test robot <lkp@intel.com>
----
-
-url:    https://github.com/0day-ci/linux/commits/Nick-Terrell/Update-to-zstd-1-4-6/20200930-145157
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux.git for-next
-
- zstd_compress.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
---- a/lib/zstd/compress/zstd_compress.c
-+++ b/lib/zstd/compress/zstd_compress.c
-@@ -3245,7 +3245,7 @@ size_t ZSTD_compress(void* dst, size_t d
-     ZSTD_CCtx* cctx = ZSTD_createCCtx();
-     RETURN_ERROR_IF(!cctx, memory_allocation, "ZSTD_createCCtx failed");
-     result = ZSTD_compressCCtx(cctx, dst, dstCapacity, src, srcSize, compressionLevel);
--    ZSTD_freeCCtx(cctx);;
-+    ZSTD_freeCCtx(cctx);
-     return result;
- }
- 
+Again, please transition it to a sane kernel API.  We don't have an
+"upstream" in this case.
 
 
 _______________________________________________
