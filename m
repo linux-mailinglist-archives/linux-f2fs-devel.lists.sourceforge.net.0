@@ -2,94 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37090283185
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  5 Oct 2020 10:08:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C8E3283186
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  5 Oct 2020 10:08:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=37gTr7LxbQdey7ZManBo+c3b3P/BI2piyVs2KzwwKKE=; b=im9F1PyoydeqgY06fVcNGRTOp5
-	Lfyb3XcRIVDefhlogpkzqyQDJMoxvra3V7UID3elpSmwqABtSjKfNDVpvtQb1AjDGs+TTTqorpk3b
-	7cfovuUwQIcYH3DTU+Q4G4OY3J9/sl9DH9B2v5nGxxeWpa1skqPnfslu2RYTZj5NZPA8=;
+	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
+	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=4CTjcCBAHiIOuWhllVvA8dYYJg1VfqSlXbZtusmvgW8=; b=dl6qiZVAmCR4Y6ngc0v22Pyqc
+	d5qLppU7456rkk0/kmvCvXl1D6D2qY1bPD4zcanmLftnmLluDJf86DXN8IUkw6jt1sveM46OblW9C
+	Gb63jMZcxxTlqdqN7LVhL2ik1n26PFIpERufH9Y+PdTggfLnuI58IIq/otrGhbG3XSjqI=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kPLXf-0000y4-5j; Mon, 05 Oct 2020 08:08:19 +0000
+	id 1kPLXu-00014m-NT; Mon, 05 Oct 2020 08:08:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <37cx6XwYKAHQkSlqSlYggYdW.Uge@flex--satyat.bounces.google.com>)
- id 1kPLXd-0000xL-Ou
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Oct 2020 08:08:17 +0000
+ (envelope-from <378x6XwYKAHYmUnsUnaiiafY.Wig@flex--satyat.bounces.google.com>)
+ id 1kPLXs-000147-LX
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Oct 2020 08:08:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bLEC7Itfwt/vTBCBtwVmtMMOr1PQX84du7+WuinK0VQ=; b=NKmKpiNmnOLzSOzB7rfCUHz9tt
- HJzn5ysaDo3/MxFXi159w9N9OMKnv7AkKNE8FqLv5Z2v8x1lyJ79wx69XUwvEqUGvlm5PdSBCIUM0
- c9kCqQZTKoyqwJxq+uyobLm5QS1K0qlSL67J3vugq9jZeuAVT2jvn+VcB7Lz28ATW2ls=;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
+ Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=+f82j/3GlQU62Y+UZX8Y8sm58itldJWXgxM/FZt85xk=; b=P8iPBqsL78Bh+5SE/AUEWcoda
+ Nqp8Tkg8hbcj2yh5yS1RZPQsDhMbOLMv2K1rKJrBWVo06pMybwc3QDuMcByFwxbDMCUVTBisT95m9
+ 29BNvOihofVwm0gvETlKJ+CPNINjiTh7s86fRaD0ULGICvpVSM3/zUgYoNCowp5PdVoG0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bLEC7Itfwt/vTBCBtwVmtMMOr1PQX84du7+WuinK0VQ=; b=U
- OwpWp8WXIP3NCEDnGeEZc1ERGaELPALXLKFXi9Rk8of1JxO02uCiEVNaRnUGqcDIziLz4e19XQON7
- Fgmuitcvq96gPIbjNoL2+iN+8YxKbUB4irTvdEbLE+ooJxvB48ahUuD8xicbBWIVGQM37wslJghNr
- Sf7AnVloWzamKCHw=;
-Received: from mail-oo1-f73.google.com ([209.85.161.73])
+ h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
+ In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+f82j/3GlQU62Y+UZX8Y8sm58itldJWXgxM/FZt85xk=; b=kh6MqSjmeiqqzBY6HgYIv7x7x8
+ TXHyZlUZ9QQSUQ1boekfR6VQoIwaprOHRtuRiTp+URvA3D9Nt+a6vkQXToPD/nAlrfZf3SVN657xi
+ cgQcfolNXUmuuf+3IYh1uJtfz4IHcmOc40qQdoktP3Ks0TXLsPWKEb6BKkCvEaumqY7I=;
+Received: from mail-yb1-f202.google.com ([209.85.219.202])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kPLXU-0034oo-IT
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Oct 2020 08:08:17 +0000
-Received: by mail-oo1-f73.google.com with SMTP id p6so4824424ooo.0
+ id 1kPLXk-0034py-0k
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Oct 2020 08:08:32 +0000
+Received: by mail-yb1-f202.google.com with SMTP id s128so8939380ybc.21
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 05 Oct 2020 01:08:08 -0700 (PDT)
+ Mon, 05 Oct 2020 01:08:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=sender:date:message-id:mime-version:subject:from:to:cc;
- bh=bLEC7Itfwt/vTBCBtwVmtMMOr1PQX84du7+WuinK0VQ=;
- b=HV6ym01K6y8BOz1GIxrCnw53fIUAS3awJUA7m9Z3ZlkOp5tuQKJ11SG2ntvCAnJUrm
- A/LRe4di/5HTVp1kuFcw6lod0tqBwi9AKovXncUB7nRs13Iyv+O7hU9XYUXW5nAEd588
- wC0O5FjvB0VbzoCZ/1zL3M+BKnbxKHEEcG6UIyQYU/OR66xiczJXtUw+ey2lvFeiHMjG
- OoEqBgy6iTVVju+xW9bb7gbqWn2KOxs0Ju7tkzwornb7aQXpHavJw5nB9Fi1FQfCX7IQ
- 6bLtHS+ZfjPZUimtDeddRxX+PerODtxNYWvz5iPRZiez2yUVGTf31iy/ReL/jqQievKx
- ++cg==
+ h=sender:date:in-reply-to:message-id:mime-version:references:subject
+ :from:to:cc; bh=+f82j/3GlQU62Y+UZX8Y8sm58itldJWXgxM/FZt85xk=;
+ b=a+/jJaTTU96Kl2L3e8OrrWdHr+OeqqOVvfjVHr7exfq0mYagEabyuFkeH1edmSYUio
+ iO1flJe0v7aQmci2hmcQcxy0csarT7zJCvNK0vBXsSjH+mBq8iRt9uwBNQIGSsggGBtu
+ kiD8XIRgunHpbeTHY2IrThmrDGDGheQj/xhPHg1hVuJOZOtn/LSpSGsV0QFEtA1FBpK0
+ hI26d2U0BrBEr6f6ocgT5kBwIahP2deWttKPvE7akKTBL6hwmoP/xm/DUQKQ0h47UVRd
+ 9ntNvM0LQd58/HDvR0Yuhw8s1bhbYFOEbQPQPm7kag+HoRS9gP6a6ECLBiO/4/PbHzRq
+ u9/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
- :to:cc;
- bh=bLEC7Itfwt/vTBCBtwVmtMMOr1PQX84du7+WuinK0VQ=;
- b=fHBBNvNB09zRvc4DRZ2oifKrsuBRtaBj36MAkjosNh8yF1naEkevtmjpAxvsyGhams
- PdhCu7SrXUvOrkq+VfBPo3nMJWQm9EAzXdPpOowP9LsmCbudZIne28D/8OaxGglhzaqG
- ifUqkTpsNttJdYusxpshkhW5XKrYIH7B+FGBatBbd8pFoVbkB7TLn/sI8ymCr/OlhspK
- 06x9ydo7CG7T+/0fyb+pla2aNuzu/9fWsu+9mvM9Oj6B+VWrjfCZT922kARH3Y7SQfWI
- DdEKo3KA3f32F552qN+yiU07eyaMSGnMNOXPr5n84XmWAQL+JNRuINSjf/JjleRWL7vl
- Ck9w==
-X-Gm-Message-State: AOAM532RlU5tQaYBM8ef5jkGYZs/ruAtFboW6+Nn40knki/W8/c8MZ5V
- YBdsCJ8IfMv/MUSPATSK7xd/8t8hnZ0=
-X-Google-Smtp-Source: ABdhPJzJGbGYLMsgB9X9c+qhb2fFNPXy1LQlJv8XkQxZGAvle6p4UqaXXWl6X4IRPgmB12jFV/RqtEYP/l0=
+ h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
+ :references:subject:from:to:cc;
+ bh=+f82j/3GlQU62Y+UZX8Y8sm58itldJWXgxM/FZt85xk=;
+ b=KDr40ubzHje/00VO6Y75Zx1az/eGwXweyg3/rNci4/xQDa2ka0W7l6RbC3a3FkYTfO
+ QZRupuHMB5zgvSPd2YVehtVseef66EBZxXPjaPMSTjpKBlu7GV06Qc688yAalbxHO/gU
+ NcKKva90KyG0PYz86/imxUl0UQqAzonPQg7Kt+8QUXwyJsOJH665nktG0wOncRoCekuf
+ tvoHoZj1tGoatBrajdCS0vtoiKty83LQTQ7sYkZ79nGRs5U+84kFIkgyh7OwHAerPTqu
+ Nk6WxMHaATSANW/kALbqa8PLbmYhmRdd5tLBimnjH4uJ+tpaeELn2EwCJM1WC02HEr5V
+ ej7Q==
+X-Gm-Message-State: AOAM532gQIfziScbVCKjyUGwBDbpuACF4Mt75qESh39pYgrSXMOAUi9h
+ T/jGhq37g+I4802c59Z7wnY6eEY2X00=
+X-Google-Smtp-Source: ABdhPJwkz/io1x0y+WIuy1g8ndag+QHgzZX9J3u1S7xLPdsLKURB4BMyOE+QUxPwR3tjcapzSV74oh2t+3E=
 X-Received: from satyaprateek.c.googlers.com
  ([fda3:e722:ac3:10:24:72f4:c0a8:1092])
- (user=satyat job=sendgmr) by 2002:a17:90b:608:: with SMTP id
- gb8mr2322362pjb.6.1601883373853; Mon, 05 Oct 2020 00:36:13 -0700 (PDT)
-Date: Mon,  5 Oct 2020 07:36:03 +0000
-Message-Id: <20201005073606.1949772-1-satyat@google.com>
+ (user=satyat job=sendgmr) by 2002:a25:454:: with SMTP id
+ 81mr16674210ybe.297.1601883375806; 
+ Mon, 05 Oct 2020 00:36:15 -0700 (PDT)
+Date: Mon,  5 Oct 2020 07:36:04 +0000
+In-Reply-To: <20201005073606.1949772-1-satyat@google.com>
+Message-Id: <20201005073606.1949772-2-satyat@google.com>
 Mime-Version: 1.0
+References: <20201005073606.1949772-1-satyat@google.com>
 X-Mailer: git-send-email 2.28.0.806.g8561365e88-goog
 To: "Theodore Y . Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>, 
  Eric Biggers <ebiggers@kernel.org>, Chao Yu <chao@kernel.org>
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.73 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.161.73 listed in list.dnswl.org]
+ trust [209.85.219.202 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -98,10 +99,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.202 listed in wl.mailspike.net]
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1kPLXU-0034oo-IT
-Subject: [f2fs-dev] [PATCH 0/3] add support for metadata encryption to F2FS
+X-Headers-End: 1kPLXk-0034py-0k
+Subject: [f2fs-dev] [PATCH 1/3] fscrypt,
+ f2fs: replace fscrypt_get_devices with fscrypt_get_device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,71 +125,151 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch series adds support for metadata encryption to F2FS using
-blk-crypto.
+The new function takes the super_block and the index of a device, and
+returns the request_queue of the device at that index (whereas the old
+function would take a pointer to an array of request_queues and fill them
+all up). This allows callers to avoid allocating an array of request_queues
+in some cases (when they don't need the array for anything else).
 
-Patch 1 replaces fscrypt_get_devices (which took an array of request_queues
-and filled it up) with fscrypt_get_device, which takes a index of the
-desired device and returns the device at that index (so the index passed
-to fscrypt_get_device must be between 0 and (fscrypt_get_num_devices() - 1)
-inclusive). This allows callers to avoid having to allocate an array to
-pass to fscrypt_get_devices() when they only need to iterate through
-each element in the array (and have no use for the array itself).
+Signed-off-by: Satya Tangirala <satyat@google.com>
+---
+ fs/crypto/inline_crypt.c | 33 ++++++++++++++-------------------
+ fs/f2fs/super.c          | 16 ++++++++++------
+ include/linux/fscrypt.h  |  4 ++--
+ 3 files changed, 26 insertions(+), 27 deletions(-)
 
-Patch 2 introduces some functions to fscrypt that help filesystems perform
-metadata encryption. Any filesystem that wants to use metadata encryption
-can call fscrypt_setup_metadata_encryption() with the super_block of the
-filesystem, the encryption algorithm and the descriptor of the encryption
-key. The descriptor is looked up in the logon keyring of the current
-session with "fscrypt:" as the prefix of the descriptor.
-
-The patch also introduces fscrypt_metadata_crypt_bio() which an FS should
-call on a bio that the FS wants metadata crypted. The function will add
-an encryption context with the metadata encryption key set up by the call
-to the above mentioned fscrypt_setup_metadata_encryption().
-
-The patch also introduces fscrypt_metadata_crypt_prepare_all_devices().
-Filesystems that use multiple devices should call this function once all
-the underlying devices have been determined. An FS might only be able to
-determine all the underlying devices after some initial processing that
-might already require metadata en/decryption, which is why this function
-is separate from fscrypt_setup_metadata_encryption().
-
-Patch 3 wires up F2FS with the functions introduced in Patch 2. F2FS
-will encrypt every block (that's not being encrypted by some other
-encryption key, e.g. a per-file key) with the metadata encryption key
-except the superblock (and the redundant copy of the superblock). The DUN
-of a block is the offset of the block from the start of the F2FS
-filesystem.
-
-Please refer to the commit message for why the superblock was excluded from
-en/decryption, and other limitations. The superblock and its copy are
-stored in plaintext on disk. The encryption algorithm used for metadata
-encryption is stored within the superblock itself. Changes to the userspace
-tools (that are required to test out metadata encryption with F2FS) are
-also being sent out - I'll post a link as a reply to this mail once it's
-out.
-
-Satya Tangirala (3):
-  fscrypt, f2fs: replace fscrypt_get_devices with fscrypt_get_device
-  fscrypt: Add metadata encryption support
-  f2fs: Add metadata encryption support
-
- Documentation/filesystems/f2fs.rst |  12 ++
- fs/crypto/Kconfig                  |   6 +
- fs/crypto/Makefile                 |   1 +
- fs/crypto/fscrypt_private.h        |  19 +++
- fs/crypto/inline_crypt.c           |  37 +----
- fs/crypto/metadata_crypt.c         | 220 +++++++++++++++++++++++++++++
- fs/f2fs/data.c                     |  24 ++--
- fs/f2fs/f2fs.h                     |   2 +
- fs/f2fs/super.c                    |  83 +++++++++--
- include/linux/f2fs_fs.h            |   3 +-
- include/linux/fs.h                 |   3 +
- include/linux/fscrypt.h            |  51 ++++++-
- 12 files changed, 410 insertions(+), 51 deletions(-)
- create mode 100644 fs/crypto/metadata_crypt.c
-
+diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
+index faa25541ccb6..5bbce79df638 100644
+--- a/fs/crypto/inline_crypt.c
++++ b/fs/crypto/inline_crypt.c
+@@ -33,13 +33,15 @@ static int fscrypt_get_num_devices(struct super_block *sb)
+ 	return 1;
+ }
+ 
+-static void fscrypt_get_devices(struct super_block *sb, int num_devs,
+-				struct request_queue **devs)
++static struct request_queue *fscrypt_get_device(struct super_block *sb,
++						unsigned int device_index)
+ {
+-	if (num_devs == 1)
+-		devs[0] = bdev_get_queue(sb->s_bdev);
++	if (sb->s_cop->get_device)
++		return sb->s_cop->get_device(sb, device_index);
++	else if (WARN_ON_ONCE(device_index != 0))
++		return NULL;
+ 	else
+-		sb->s_cop->get_devices(sb, devs);
++		return bdev_get_queue(sb->s_bdev);
+ }
+ 
+ static unsigned int fscrypt_get_dun_bytes(const struct fscrypt_info *ci)
+@@ -70,7 +72,7 @@ int fscrypt_select_encryption_impl(struct fscrypt_info *ci)
+ 	struct super_block *sb = inode->i_sb;
+ 	struct blk_crypto_config crypto_cfg;
+ 	int num_devs;
+-	struct request_queue **devs;
++	struct request_queue *dev;
+ 	int i;
+ 
+ 	/* The file must need contents encryption, not filenames encryption */
+@@ -106,20 +108,14 @@ int fscrypt_select_encryption_impl(struct fscrypt_info *ci)
+ 	crypto_cfg.data_unit_size = sb->s_blocksize;
+ 	crypto_cfg.dun_bytes = fscrypt_get_dun_bytes(ci);
+ 	num_devs = fscrypt_get_num_devices(sb);
+-	devs = kmalloc_array(num_devs, sizeof(*devs), GFP_NOFS);
+-	if (!devs)
+-		return -ENOMEM;
+-	fscrypt_get_devices(sb, num_devs, devs);
+ 
+ 	for (i = 0; i < num_devs; i++) {
+-		if (!blk_crypto_config_supported(devs[i], &crypto_cfg))
+-			goto out_free_devs;
++		dev = fscrypt_get_device(sb, i);
++		if (!dev || !blk_crypto_config_supported(dev, &crypto_cfg))
++			return 0;
+ 	}
+ 
+ 	ci->ci_inlinecrypt = true;
+-out_free_devs:
+-	kfree(devs);
+-
+ 	return 0;
+ }
+ 
+@@ -141,9 +137,6 @@ int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
+ 	if (!blk_key)
+ 		return -ENOMEM;
+ 
+-	blk_key->num_devs = num_devs;
+-	fscrypt_get_devices(sb, num_devs, blk_key->devs);
+-
+ 	err = blk_crypto_init_key(&blk_key->base, raw_key, crypto_mode,
+ 				  fscrypt_get_dun_bytes(ci), sb->s_blocksize);
+ 	if (err) {
+@@ -158,8 +151,10 @@ int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
+ 	 * aren't destroyed until after the filesystem was already unmounted
+ 	 * (namely, the per-mode keys in struct fscrypt_master_key).
+ 	 */
++	blk_key->num_devs = num_devs;
+ 	for (i = 0; i < num_devs; i++) {
+-		if (!blk_get_queue(blk_key->devs[i])) {
++		blk_key->devs[i] = fscrypt_get_device(sb, i);
++		if (!blk_key->devs[i] || !blk_get_queue(blk_key->devs[i])) {
+ 			fscrypt_err(inode, "couldn't get request_queue");
+ 			err = -EAGAIN;
+ 			goto fail;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index dfa072fa8081..9a6d375cbe4b 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2509,14 +2509,18 @@ static int f2fs_get_num_devices(struct super_block *sb)
+ 	return 1;
+ }
+ 
+-static void f2fs_get_devices(struct super_block *sb,
+-			     struct request_queue **devs)
++static struct request_queue *f2fs_get_device(struct super_block *sb,
++					     unsigned int device_index)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+-	int i;
+ 
+-	for (i = 0; i < sbi->s_ndevs; i++)
+-		devs[i] = bdev_get_queue(FDEV(i).bdev);
++	if (WARN_ON_ONCE(device_index >= f2fs_get_num_devices(sb)))
++		return NULL;
++
++	if (!f2fs_is_multi_device(sbi))
++		return bdev_get_queue(sb->s_bdev);
++
++	return bdev_get_queue(FDEV(device_index).bdev);
+ }
+ 
+ static const struct fscrypt_operations f2fs_cryptops = {
+@@ -2529,7 +2533,7 @@ static const struct fscrypt_operations f2fs_cryptops = {
+ 	.has_stable_inodes	= f2fs_has_stable_inodes,
+ 	.get_ino_and_lblk_bits	= f2fs_get_ino_and_lblk_bits,
+ 	.get_num_devices	= f2fs_get_num_devices,
+-	.get_devices		= f2fs_get_devices,
++	.get_device		= f2fs_get_device,
+ };
+ #endif
+ 
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index 991ff8575d0e..d835fd19a20a 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -70,8 +70,8 @@ struct fscrypt_operations {
+ 	void (*get_ino_and_lblk_bits)(struct super_block *sb,
+ 				      int *ino_bits_ret, int *lblk_bits_ret);
+ 	int (*get_num_devices)(struct super_block *sb);
+-	void (*get_devices)(struct super_block *sb,
+-			    struct request_queue **devs);
++	struct request_queue *(*get_device)(struct super_block *sb,
++					    unsigned int dev_index);
+ };
+ 
+ static inline struct fscrypt_info *fscrypt_get_info(const struct inode *inode)
 -- 
 2.28.0.806.g8561365e88-goog
 
