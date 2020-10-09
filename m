@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08D70289294
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Oct 2020 21:51:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A2482892B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Oct 2020 21:51:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kQyQK-0001Ba-QX; Fri, 09 Oct 2020 19:51:28 +0000
+	id 1kQyQS-0005yx-4m; Fri, 09 Oct 2020 19:51:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <ira.weiny@intel.com>)
- id 1kQyQJ-0001BF-TG; Fri, 09 Oct 2020 19:51:27 +0000
+ id 1kQyQP-0005xv-1e; Fri, 09 Oct 2020 19:51:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YRIKYmxc6UZQaNDNDt7ZbhBGcrM8JXT8RwEcpigZ4aI=; b=fdUYlGoRj7XtInFF2C9xQGB54x
- oNfjyB4tnyuSrgaiFzWO+Yi7MAIfs5QlvAfaNX6jV5JkmsqPVGTcJxKrQET91M/gWa+FG8GMHqjcX
- YxGACPyYTTdOYL1uWXMDMRIkFDlymI44wIy95Smu9NJYkZl7K5Xthn+9wJ9vytVzvnpo=;
+ bh=j2Eoso3z08sB/uznl84rcpJTXny4r18CXdmTTOoO4L4=; b=Fkl77s6z31dFElOMOHobDPPeXQ
+ Hmxy89hzIuyfJI2BIvaTa7CFw6Iytu04zuK3TF3uhdxPuxlqnsNyaBP2TrF9xRNWPQd0eQNoVyerf
+ kWSLNrlPLSuLJ2XUkw6HAW2gV3n9cuPdTNvPCP12RNp1lL+B3fu0lsl9XQz1xsw9KJ0k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YRIKYmxc6UZQaNDNDt7ZbhBGcrM8JXT8RwEcpigZ4aI=; b=ZmVlXyUKLVAeMiFvWPj/L6jqWr
- l/2KbPJVwhUb7TPswziOTvN5UVq5WHTop+rnQ/o38PO8yWoIAc9sGpAaprH96+NfQ/LsRbOlHMeSH
- lu15iGgeKuXE6FOynM8Ix8TugsOImTsicPtOwaOdI17jZe/IqjdAEk/HjyLUmVfGFv6s=;
-Received: from mga18.intel.com ([134.134.136.126])
+ bh=j2Eoso3z08sB/uznl84rcpJTXny4r18CXdmTTOoO4L4=; b=OhlZ6KlZ2IHkuqLwXTlIelWXD7
+ O7HGd85n60DhnCotyhgQiyZwyb90G/VhJMxTBZWmQZjSK5ou8oFzhTGwYwK3jVwH0+54FEBV+523b
+ 2nyVt12MfoTBRSSSiZXGpSLRLLR+Y7aTMQfoKvq3i/26jv0wOIqx0zmfKXRHfmNelVpg=;
+Received: from mga17.intel.com ([192.55.52.151])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kQyQG-008rhr-AP; Fri, 09 Oct 2020 19:51:27 +0000
-IronPort-SDR: HToXs/RKgfjtGj6T3Om1r7jdNLEsx9LcOV0AzZBovrxSx9WKNIm36X2jFMpNolmGZa7nLTWPGu
- vI0hA0BRYs1w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="153363389"
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="153363389"
+ id 1kQyQK-008rjR-PQ; Fri, 09 Oct 2020 19:51:32 +0000
+IronPort-SDR: ZeM/lMa9cs+3oc9/SzIb3OR6Qx8f7BM+p/TCOLSwT7rNaY2DcTq2Tw6W7GKxrWaBYBRjLO86op
+ aLXnukhEwecg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="145397262"
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="145397262"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:11 -0700
-IronPort-SDR: 7ZsxuYrd4RIh+I9L87qE8QKpDxHdxlIArpw96UL8x0WQ0i4hLag3NZ1m816qhb9i0FMTl4f1za
- dG2KA2sC/NWA==
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="312652519"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:16 -0700
+IronPort-SDR: JrRKqLJV6Da/4fMbj+O46I413eP5nzJr39umbL7Y1s6mKMem5hJdGDAmJBrAS4XWsKikzHiU+3
+ eSwE6XBZdj5A==
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="518800998"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:09 -0700
+ by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:15 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
  Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
  Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
  Peter Zijlstra <peterz@infradead.org>
-Date: Fri,  9 Oct 2020 12:49:42 -0700
-Message-Id: <20201009195033.3208459-8-ira.weiny@intel.com>
+Date: Fri,  9 Oct 2020 12:49:43 -0700
+Message-Id: <20201009195033.3208459-9-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -71,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: intel.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kQyQG-008rhr-AP
-Subject: [f2fs-dev] [PATCH RFC PKS/PMEM 07/58] drivers/drbd: Utilize new
- kmap_thread()
+X-Headers-End: 1kQyQK-008rjR-PQ
+Subject: [f2fs-dev] [PATCH RFC PKS/PMEM 08/58] drivers/firmware_loader:
+ Utilize new kmap_thread()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,10 +103,10 @@ Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
  ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
  reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
  linux-bcache@vger.kernel.org, Dan Williams <dan.j.williams@intel.com>,
- io-uring@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- netdev@vger.kernel.org, linux-mmc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ io-uring@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-ntfs-dev@lists.sourceforge.net, netdev@vger.kernel.org,
+ linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Luis Chamberlain <mcgrof@kernel.org>,
  linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
  linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
@@ -119,80 +119,52 @@ The kmap() calls in this driver are localized to a single thread.  To
 avoid the over head of global PKRS updates use the new kmap_thread()
 call.
 
-Cc: Jens Axboe <axboe@kernel.dk>
+Cc: Luis Chamberlain <mcgrof@kernel.org>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/block/drbd/drbd_main.c     |  4 ++--
- drivers/block/drbd/drbd_receiver.c | 12 ++++++------
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ drivers/base/firmware_loader/fallback.c | 4 ++--
+ drivers/base/firmware_loader/main.c     | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/block/drbd/drbd_main.c b/drivers/block/drbd/drbd_main.c
-index 573dbf6f0c31..f0d0c6b0745e 100644
---- a/drivers/block/drbd/drbd_main.c
-+++ b/drivers/block/drbd/drbd_main.c
-@@ -1532,9 +1532,9 @@ static int _drbd_no_send_page(struct drbd_peer_device *peer_device, struct page
- 	int err;
+diff --git a/drivers/base/firmware_loader/fallback.c b/drivers/base/firmware_loader/fallback.c
+index 283ca2de76d4..22dea9ba7a37 100644
+--- a/drivers/base/firmware_loader/fallback.c
++++ b/drivers/base/firmware_loader/fallback.c
+@@ -322,14 +322,14 @@ static void firmware_rw(struct fw_priv *fw_priv, char *buffer,
+ 		int page_ofs = offset & (PAGE_SIZE-1);
+ 		int page_cnt = min_t(size_t, PAGE_SIZE - page_ofs, count);
  
- 	socket = peer_device->connection->data.socket;
--	addr = kmap(page) + offset;
-+	addr = kmap_thread(page) + offset;
- 	err = drbd_send_all(peer_device->connection, socket, addr, size, msg_flags);
--	kunmap(page);
-+	kunmap_thread(page);
- 	if (!err)
- 		peer_device->device->send_cnt += size >> 9;
- 	return err;
-diff --git a/drivers/block/drbd/drbd_receiver.c b/drivers/block/drbd/drbd_receiver.c
-index 422363daa618..4704bc0564e2 100644
---- a/drivers/block/drbd/drbd_receiver.c
-+++ b/drivers/block/drbd/drbd_receiver.c
-@@ -1951,13 +1951,13 @@ read_in_block(struct drbd_peer_device *peer_device, u64 id, sector_t sector,
- 	page = peer_req->pages;
- 	page_chain_for_each(page) {
- 		unsigned len = min_t(int, ds, PAGE_SIZE);
--		data = kmap(page);
-+		data = kmap_thread(page);
- 		err = drbd_recv_all_warn(peer_device->connection, data, len);
- 		if (drbd_insert_fault(device, DRBD_FAULT_RECEIVE)) {
- 			drbd_err(device, "Fault injection: Corrupting data on receive\n");
- 			data[0] = data[0] ^ (unsigned long)-1;
- 		}
+-		page_data = kmap(fw_priv->pages[page_nr]);
++		page_data = kmap_thread(fw_priv->pages[page_nr]);
+ 
+ 		if (read)
+ 			memcpy(buffer, page_data + page_ofs, page_cnt);
+ 		else
+ 			memcpy(page_data + page_ofs, buffer, page_cnt);
+ 
+-		kunmap(fw_priv->pages[page_nr]);
++		kunmap_thread(fw_priv->pages[page_nr]);
+ 		buffer += page_cnt;
+ 		offset += page_cnt;
+ 		count -= page_cnt;
+diff --git a/drivers/base/firmware_loader/main.c b/drivers/base/firmware_loader/main.c
+index 63b9714a0154..cc884c9f8742 100644
+--- a/drivers/base/firmware_loader/main.c
++++ b/drivers/base/firmware_loader/main.c
+@@ -409,11 +409,11 @@ static int fw_decompress_xz_pages(struct device *dev, struct fw_priv *fw_priv,
+ 
+ 		/* decompress onto the new allocated page */
+ 		page = fw_priv->pages[fw_priv->nr_pages - 1];
+-		xz_buf.out = kmap(page);
++		xz_buf.out = kmap_thread(page);
+ 		xz_buf.out_pos = 0;
+ 		xz_buf.out_size = PAGE_SIZE;
+ 		xz_ret = xz_dec_run(xz_dec, &xz_buf);
 -		kunmap(page);
 +		kunmap_thread(page);
- 		if (err) {
- 			drbd_free_peer_req(device, peer_req);
- 			return NULL;
-@@ -1992,7 +1992,7 @@ static int drbd_drain_block(struct drbd_peer_device *peer_device, int data_size)
- 
- 	page = drbd_alloc_pages(peer_device, 1, 1);
- 
--	data = kmap(page);
-+	data = kmap_thread(page);
- 	while (data_size) {
- 		unsigned int len = min_t(int, data_size, PAGE_SIZE);
- 
-@@ -2001,7 +2001,7 @@ static int drbd_drain_block(struct drbd_peer_device *peer_device, int data_size)
- 			break;
- 		data_size -= len;
- 	}
--	kunmap(page);
-+	kunmap_thread(page);
- 	drbd_free_pages(peer_device->device, page, 0);
- 	return err;
- }
-@@ -2033,10 +2033,10 @@ static int recv_dless_read(struct drbd_peer_device *peer_device, struct drbd_req
- 	D_ASSERT(peer_device->device, sector == bio->bi_iter.bi_sector);
- 
- 	bio_for_each_segment(bvec, bio, iter) {
--		void *mapped = kmap(bvec.bv_page) + bvec.bv_offset;
-+		void *mapped = kmap_thread(bvec.bv_page) + bvec.bv_offset;
- 		expect = min_t(int, data_size, bvec.bv_len);
- 		err = drbd_recv_all_warn(peer_device->connection, mapped, expect);
--		kunmap(bvec.bv_page);
-+		kunmap_thread(bvec.bv_page);
- 		if (err)
- 			return err;
- 		data_size -= expect;
+ 		fw_priv->size += xz_buf.out_pos;
+ 		/* partial decompression means either end or error */
+ 		if (xz_buf.out_pos != PAGE_SIZE)
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
