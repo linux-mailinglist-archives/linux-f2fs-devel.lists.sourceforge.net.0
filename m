@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FA1A289485
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Oct 2020 21:54:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 810AD28949A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Oct 2020 21:54:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kQyT0-0002Ag-Hi; Fri, 09 Oct 2020 19:54:14 +0000
+	id 1kQyTE-0002EP-72; Fri, 09 Oct 2020 19:54:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <ira.weiny@intel.com>)
- id 1kQySy-0002AD-HX; Fri, 09 Oct 2020 19:54:12 +0000
+ id 1kQyTA-0002Da-S2; Fri, 09 Oct 2020 19:54:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Cds4+JszdD6fKEWddCf/cFxVEOgX+d1DlbrAjq4X3vE=; b=kXUkE3SI84Rw4WfD5DrLKvLAMI
- im/6OCrggDgkvgZbBo/LrMHisgOQGHYTqR/f83fHEHSXkELZCuc1W+aGqkOasm9ptOO6mwru2D1ZF
- 4NvlBypyiJ32gOm1JwJBSiWhEzSRiuVWeIXDfrwSeZkJUpj0Z70tOToNnSkjN1YtJVX4=;
+ bh=nAcApbTuHNvexDy6MnL+FDxzHaL/eZ+GQDmnJGnP7ic=; b=PRRUe22zqWk1w7MdZZ2QUh5dnb
+ U/wxthAV7J4OB/C8a7sBSTYu3z7HjtmSsmBAoHyA+Yna+/GE8BKuYfqAXwexWfTBxg533Du3qlp4h
+ b08LckHsp9F4g2gUy/91e7HQ6rJ1uekf8ZfFcOorBJKmhmV4sQMS7QUuHBVPHnGvawEY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Cds4+JszdD6fKEWddCf/cFxVEOgX+d1DlbrAjq4X3vE=; b=H6B1XIMFQjzrvv95D/ajivs7nz
- ijC/Vgc0MNzHkun6E9pWL+tiSVyRW+cPPL3y8E9gR2ZNVhv8TwWobEusU4/z11Sm51zqq6Uap2EIJ
- sLeZ4GbiZsWlkF/w3cHuCVjXI9MW8SfkKkKZQ+Kn5Ta9NACj31yWhboQO/tBbZGTD5BE=;
-Received: from mga04.intel.com ([192.55.52.120])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=nAcApbTuHNvexDy6MnL+FDxzHaL/eZ+GQDmnJGnP7ic=; b=XEB9MaZn+GPHmVdHUXv0l+0qW/
+ nA+NH95nDcgw65+i09wBBQBVUQsIoOMilxpZ+7oVpUBmu1SS2wFYpatIgovXNiDiFxPFR4ThYcBcK
+ ja27TywHADN+JK2h8XqlAOFk2eAevr+v7q8j8CG0W6fQEiRUfaRU3HXq/r1n/BC2PxHw=;
+Received: from mga06.intel.com ([134.134.136.31])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kQySw-004abB-9d; Fri, 09 Oct 2020 19:54:12 +0000
-IronPort-SDR: ekdguEddnGkqTPTYfUBlaWeco5UyZUoisKcSwYchwOf042tTiHCX2xmQxsMFJajlWRc5AAsHlo
- gZMKq2vJnHIg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="162893720"
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="162893720"
+ id 1kQyT1-008s8G-N4; Fri, 09 Oct 2020 19:54:24 +0000
+IronPort-SDR: 9SX0XOa5+H8DZ57c8VARJS6C0G/D2YwL2z311+BiGQu5AzxIfUULO0SpFKdOi8oRSmRv/PqHXK
+ BAjZGNgu3y/Q==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="227179228"
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="227179228"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:04 -0700
-IronPort-SDR: NEiErKYZfPZGqrWyxIZ0z43ef9+IKjrcXd9NJIRckxXQwdDEMd5poh/dknsqhifod6Ym/UoaZd
- Mu4h9c7DJvbA==
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="462301216"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:54:07 -0700
+IronPort-SDR: src9VKOvZKZdzmhAmOplZF/CbXKWViy2IZEce2k3Dk75HVdMa01qWYEbu8ywq24hGpakhLlrfI
+ iYxmJaXcxtuw==
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; d="scan'208";a="519847335"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:03 -0700
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:54:06 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
  Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
  Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
  Peter Zijlstra <peterz@infradead.org>
-Date: Fri,  9 Oct 2020 12:50:31 -0700
-Message-Id: <20201009195033.3208459-57-ira.weiny@intel.com>
+Date: Fri,  9 Oct 2020 12:50:32 -0700
+Message-Id: <20201009195033.3208459-58-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -71,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: intel.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kQySw-004abB-9d
-Subject: [f2fs-dev] [PATCH RFC PKS/PMEM 56/58] dax: Stray access protection
- for dax_direct_access()
+X-Headers-End: 1kQyT1-008s8G-N4
+Subject: [f2fs-dev] [PATCH RFC PKS/PMEM 57/58] nvdimm/pmem: Stray access
+ protection for pmem->virt_addr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,42 +115,45 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-dax_direct_access() is a special case of accessing pmem via a page
-offset and without a struct page.
-
-Because the dax driver is well aware of the special protections it has
-mapped memory with, call dev_access_[en|dis]able() directly instead of
-the unnecessary overhead of trying to get a page to kmap.
-
-Similar to kmap, we leverage existing functions, dax_read_[un]lock(),
-because they are already required to surround the use of the memory
-returned from dax_direct_access().
+The pmem driver uses a cached virtual address to access its memory
+directly.  Because the nvdimm driver is well aware of the special
+protections it has mapped memory with, we call dev_access_[en|dis]able()
+around the direct pmem->virt_addr (pmem_addr) usage instead of the
+unnecessary overhead of trying to get a page to kmap.
 
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/dax/super.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/nvdimm/pmem.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/dax/super.c b/drivers/dax/super.c
-index e84070b55463..0ddb3ee73e36 100644
---- a/drivers/dax/super.c
-+++ b/drivers/dax/super.c
-@@ -30,6 +30,7 @@ static DEFINE_SPINLOCK(dax_host_lock);
+diff --git a/drivers/nvdimm/pmem.c b/drivers/nvdimm/pmem.c
+index fab29b514372..e4dc1ae990fc 100644
+--- a/drivers/nvdimm/pmem.c
++++ b/drivers/nvdimm/pmem.c
+@@ -148,7 +148,9 @@ static blk_status_t pmem_do_read(struct pmem_device *pmem,
+ 	if (unlikely(is_bad_pmem(&pmem->bb, sector, len)))
+ 		return BLK_STS_IOERR;
  
- int dax_read_lock(void)
- {
 +	dev_access_enable(false);
- 	return srcu_read_lock(&dax_srcu);
- }
- EXPORT_SYMBOL_GPL(dax_read_lock);
-@@ -37,6 +38,7 @@ EXPORT_SYMBOL_GPL(dax_read_lock);
- void dax_read_unlock(int id)
- {
- 	srcu_read_unlock(&dax_srcu, id);
+ 	rc = read_pmem(page, page_off, pmem_addr, len);
 +	dev_access_disable(false);
+ 	flush_dcache_page(page);
+ 	return rc;
  }
- EXPORT_SYMBOL_GPL(dax_read_unlock);
+@@ -180,11 +182,13 @@ static blk_status_t pmem_do_write(struct pmem_device *pmem,
+ 	 * after clear poison.
+ 	 */
+ 	flush_dcache_page(page);
++	dev_access_enable(false);
+ 	write_pmem(pmem_addr, page, page_off, len);
+ 	if (unlikely(bad_pmem)) {
+ 		rc = pmem_clear_poison(pmem, pmem_off, len);
+ 		write_pmem(pmem_addr, page, page_off, len);
+ 	}
++	dev_access_disable(false);
  
+ 	return rc;
+ }
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
