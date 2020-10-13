@@ -2,91 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 035D028D413
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 20:53:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DBE228D4A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 21:38:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kSPPs-00057R-KA; Tue, 13 Oct 2020 18:52:56 +0000
+	id 1kSQ7c-0004hd-Q9; Tue, 13 Oct 2020 19:38:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <nico@fluxnic.net>)
- id 1kSPPr-00057D-Ae; Tue, 13 Oct 2020 18:52:55 +0000
+ (envelope-from <dan.j.williams@intel.com>) id 1kSQ7a-0004hL-Vc
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 19:38:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:Message-ID:
- In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wb+DfRPVzMDbs/N26lo3GedT3mnvIXiv5dg7XviFZiQ=; b=G7/9lC2FgdvxmVcE/wLy6bH1jn
- lRw+2AATcdfGHXCArtMSqprYBKCuCLbQIAnArfKAnhYij0HNI0iZ8+R4QuG6kHajE0lqW4OebBc4G
- B9bA049twM3JDDFWUymfIP2RO3c1iIbh9/IzVSYucE/vEmCQ/930YQtGKAIWQDF1yyHc=;
+ bh=ACWQZXFIYAYZvPtA0kqqET9/h2VeNuWUmvFkuiSdGDk=; b=CwlG+ZOlmoleD4MXVl+erPGd5n
+ xfwsYCtJ7gTxD/4AGPKI8kRecz1v1Bj7Jj9Nz6Dg7qGKbuKXYgCO/yns4dgUJxcI4cVwA/ZxirkGm
+ o2qQmCuVTPFAklrZu1uCgZk0DDRn+zJjWEe1eCqQfoDhepW/FO7WSzPOxOa1UnckzgVk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:Message-ID:In-Reply-To:Subject:cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wb+DfRPVzMDbs/N26lo3GedT3mnvIXiv5dg7XviFZiQ=; b=NJXgT1XLlYt/5ttz0FvM0E2PQ4
- xk5uVsdbtk6881XWU02EkuyxxoGk0DkloNSgkq4Vaz6S/C7MmWjT9gIVdYqd/DOMq5IdDps3ASbJr
- F9iR8+qZ6ncAbIO4zO62iK1iL1QTEXlwdSyQ8+anZerRXqEP30FtpCDnQDpCaOV0G+DI=;
-Received: from pb-sasl-trial2.pobox.com ([64.147.108.86])
+ bh=ACWQZXFIYAYZvPtA0kqqET9/h2VeNuWUmvFkuiSdGDk=; b=AtxDA5VI8NUrTyPgj0z0X/pscu
+ fF5Qs4EZ2wEGFR26gSW/PZym5KA/G0RCRIh8JjAr/pg+ihIaz/KqFkE3xpQ458L0mejLGVppBN1Uu
+ ubzoB40jACLF+YgBQRt4pWQTLNH1xhpMTwQBgXjtG4gZEajrFTUFzDqYSU9hWQYEuxxY=;
+Received: from mail-ej1-f67.google.com ([209.85.218.67])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kSPPm-008zov-C5; Tue, 13 Oct 2020 18:52:55 +0000
-Received: from pb-sasl-trial2.pobox.com (localhost.local [127.0.0.1])
- by pb-sasl-trial2.pobox.com (Postfix) with ESMTP id B35092F08C;
- Tue, 13 Oct 2020 14:36:58 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=pobox.com; h=date:from:to
- :cc:subject:in-reply-to:message-id:references:mime-version
- :content-type; s=sasl; bh=1qdRcPgrMg9PaaTRWeHMHkWBgn4=; b=Epy+q5
- ans9ahJwXxlQvxdjICPrBYTo3ECIn9AzWxzmuo835zX7Go5RA+la+QVdJswbYHqY
- OA9uOWP+RHqwo1f/1Hjwskkbh9itwsmr5IKrZUme2Q4YRp5bQABuumhmd/Yh0NKM
- sMhZUgbkZQs79wJJn2wtIPZ7EN0v5uRSG8bTQ=
-Received: from pb-smtp1.nyi.icgroup.com (pb-smtp1.pobox.com [10.90.30.53])
- by pb-sasl-trial2.pobox.com (Postfix) with ESMTP id 7910C2F08B;
- Tue, 13 Oct 2020 14:36:58 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=fluxnic.net;
- h=date:from:to:cc:subject:in-reply-to:message-id:references:mime-version:content-type;
- s=2016-12.pbsmtp; bh=/xoWviDLFg5PKRQ9rObRWDXVC++pmZtYhfbDb0DFq7E=;
- b=v5OoWtflZD131TYsBl2A9g0L/PCRe2nu6sy2IJY2ys8stI3sGPGydjk9hbVpZeTUKIjemrnRhLwKFlAM+dXEIGXz5t0LfwSiRA8m7hrB4WLH79+9F2ww8ICEhYu0fLjFgoDc1lKWqG4ZKNRDYjtbn/p6CJBipu1Te7ZvLuk/HMw=
-Received: from yoda.home (unknown [24.203.50.76])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by pb-smtp1.pobox.com (Postfix) with ESMTPSA id CD98F955F4;
- Tue, 13 Oct 2020 14:36:57 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-Received: from xanadu.home (xanadu.home [192.168.2.2])
- by yoda.home (Postfix) with ESMTPSA id CF7492DA0BC7;
- Tue, 13 Oct 2020 14:36:56 -0400 (EDT)
-Date: Tue, 13 Oct 2020 14:36:56 -0400 (EDT)
-From: Nicolas Pitre <nico@fluxnic.net>
-To: Ira Weiny <ira.weiny@intel.com>
-In-Reply-To: <20201009195033.3208459-34-ira.weiny@intel.com>
-Message-ID: <nycvar.YSQ.7.78.906.2010131436200.2184@knanqh.ubzr>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kSQ7Q-0092HT-OI
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 19:38:06 +0000
+Received: by mail-ej1-f67.google.com with SMTP id ce10so1449738ejc.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Oct 2020 12:37:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ACWQZXFIYAYZvPtA0kqqET9/h2VeNuWUmvFkuiSdGDk=;
+ b=DayNIijN9rJ4wynxycYBrXAQR84x3xjByl1z2VFzt7YCa69TNkAlkIdWKG0xwP6Yp3
+ 3F/H2nz44gihJO9JHyXWzYL4P1dc46CKqiaNR3yRo/w37eMMjkAo/koyRg9J9cet4J5o
+ 8pAZLke452kN1ce4bdWIlGHc47qEL6KSVsDbeqJDAMDzDUrFyC9OKIrNu9C/VaSoREWg
+ 9B9an2yfiyuzSelcHqdOabrCOxSG6vx+IObNMb98zyieMNME4f/11W7Es7O7m/+Kevvk
+ a0bkM4fWgVplo/2Lunr6iSwR8tSVOWAyX1+gyP4UJdvdg+R8/4qIc/xXlFMWt9dzq4A3
+ WVxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ACWQZXFIYAYZvPtA0kqqET9/h2VeNuWUmvFkuiSdGDk=;
+ b=tAMOhhS+yNlm6OkkD/N7HKOIaVnluadCJm3f2qNgvdlMagHm+3RjLtjvxDKln0TOEK
+ Cea3Eq8ZUFR1VjF9o8yNHVZTBJwqW6Ci6ctiScdHd2aryFmDivsb4T02Xod4KbsNBftc
+ K22uS0VWDKl+vkvXOjf+zwHBGzhoripY5/HQHRjSai/OtAUi3Q8YAxddoz11wCIRMGHR
+ plIK4kMGywXf9H/gdnlhW+FZSVSgbxdxCBQZ6pI2IFiiQIYj0uqo+5j6JUF7S5j0i2yk
+ jNhIGEUWYprwdnNh603/u/TcEYbGfTb59QWu3PrfVZLVV2xaB5rKt2ykBRQDWsi5+VWa
+ KKnw==
+X-Gm-Message-State: AOAM531e7US9pMsXRwNhHEdsHRVta/Bq0Yb2oodVqOgkm0Dh7/nCq3jD
+ TRCiZrDpg6dWrMs2NwQ4LJKWyTrxcY4lD++210oWGu4784s=
+X-Google-Smtp-Source: ABdhPJx/D4CFI8iBKDneanR6scqyHSM4b5ae7bBsGU7JbHG59bZqw8grXz+3fxsJ2hpJPfBR1HipQc3XH+/A2xgb2Ys=
+X-Received: by 2002:a50:8e1e:: with SMTP id 30mr1027503edw.354.1602614681174; 
+ Tue, 13 Oct 2020 11:44:41 -0700 (PDT)
+MIME-Version: 1.0
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
  <20201009195033.3208459-34-ira.weiny@intel.com>
-MIME-Version: 1.0
-X-Pobox-Relay-ID: 13301A02-0D83-11EB-84D0-D152C8D8090B-78420484!pb-smtp1.pobox.com
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20201009195033.3208459-34-ira.weiny@intel.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Tue, 13 Oct 2020 11:44:29 -0700
+Message-ID: <CAPcyv4gL3jfw4d+SJGPqAD3Dp4F_K=X3domuN4ndAA1FQDGcPg@mail.gmail.com>
+To: "Weiny, Ira" <ira.weiny@intel.com>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: fluxnic.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.218.67 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kSPPm-008zov-C5
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kSQ7Q-0092HT-OI
 Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 33/58] fs/cramfs: Utilize new
  kmap_thread()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -100,95 +105,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-kselftest@vger.kernel.org, samba-technical@lists.samba.org,
- Thomas Gleixner <tglx@linutronix.de>, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- ceph-devel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- io-uring@vger.kernel.org, cluster-devel@redhat.com,
- Ingo Molnar <mingo@redhat.com>, intel-wired-lan@lists.osuosl.org,
- xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
- Fenghua Yu <fenghua.yu@intel.com>, linux-afs@lists.infradead.org,
- linux-um@lists.infradead.org, intel-gfx@lists.freedesktop.org,
- ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
- Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
+Cc: linux-aio@kvack.org, linux-efi <linux-efi@vger.kernel.org>,
+ KVM list <kvm@vger.kernel.org>,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Peter Zijlstra <peterz@infradead.org>, linux-mmc@vger.kernel.org,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Linux MM <linux-mm@kvack.org>, target-devel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-kselftest@vger.kernel.org,
+ samba-technical@lists.samba.org, ceph-devel@vger.kernel.org,
+ drbd-dev@lists.linbit.com, devel@driverdev.osuosl.org,
+ linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ linux-scsi <linux-scsi@vger.kernel.org>,
+ linux-nvdimm <linux-nvdimm@lists.01.org>,
+ linux-rdma <linux-rdma@vger.kernel.org>, X86 ML <x86@kernel.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, io-uring@vger.kernel.org,
+ cluster-devel@redhat.com, Ingo Molnar <mingo@redhat.com>,
+ intel-wired-lan@lists.osuosl.org, xen-devel <xen-devel@lists.xenproject.org>,
+ linux-ext4 <linux-ext4@vger.kernel.org>, Fenghua Yu <fenghua.yu@intel.com>,
+ linux-afs@lists.infradead.org, linux-um@lists.infradead.org,
+ intel-gfx@lists.freedesktop.org, ecryptfs@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, reiserfs-devel@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
+ Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
  Andrew Morton <akpm@linux-foundation.org>, linux-cachefs@redhat.com,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- netdev@vger.kernel.org, kexec@lists.infradead.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
+ linux-nfs@vger.kernel.org, Nicolas Pitre <nico@fluxnic.net>,
+ linux-ntfs-dev@lists.sourceforge.net, Netdev <netdev@vger.kernel.org>,
+ Kexec Mailing List <kexec@lists.infradead.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>, bpf@vger.kernel.org,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ linux-btrfs <linux-btrfs@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, 9 Oct 2020, ira.weiny@intel.com wrote:
-
+On Fri, Oct 9, 2020 at 12:52 PM <ira.weiny@intel.com> wrote:
+>
 > From: Ira Weiny <ira.weiny@intel.com>
-> 
+>
 > The kmap() calls in this FS are localized to a single thread.  To avoid
 > the over head of global PKRS updates use the new kmap_thread() call.
-> 
+>
 > Cc: Nicolas Pitre <nico@fluxnic.net>
 > Signed-off-by: Ira Weiny <ira.weiny@intel.com>
-
-Acked-by: Nicolas Pitre <nico@fluxnic.net>
-
+> ---
 >  fs/cramfs/inode.c | 10 +++++-----
 >  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
+>
 > diff --git a/fs/cramfs/inode.c b/fs/cramfs/inode.c
 > index 912308600d39..003c014a42ed 100644
 > --- a/fs/cramfs/inode.c
 > +++ b/fs/cramfs/inode.c
 > @@ -247,8 +247,8 @@ static void *cramfs_blkdev_read(struct super_block *sb, unsigned int offset,
->  		struct page *page = pages[i];
->  
->  		if (page) {
-> -			memcpy(data, kmap(page), PAGE_SIZE);
-> -			kunmap(page);
-> +			memcpy(data, kmap_thread(page), PAGE_SIZE);
-> +			kunmap_thread(page);
->  			put_page(page);
->  		} else
->  			memset(data, 0, PAGE_SIZE);
-> @@ -826,7 +826,7 @@ static int cramfs_readpage(struct file *file, struct page *page)
->  
->  	maxblock = (inode->i_size + PAGE_SIZE - 1) >> PAGE_SHIFT;
->  	bytes_filled = 0;
-> -	pgdata = kmap(page);
-> +	pgdata = kmap_thread(page);
->  
->  	if (page->index < maxblock) {
->  		struct super_block *sb = inode->i_sb;
-> @@ -914,13 +914,13 @@ static int cramfs_readpage(struct file *file, struct page *page)
->  
->  	memset(pgdata + bytes_filled, 0, PAGE_SIZE - bytes_filled);
->  	flush_dcache_page(page);
-> -	kunmap(page);
-> +	kunmap_thread(page);
->  	SetPageUptodate(page);
->  	unlock_page(page);
->  	return 0;
->  
->  err:
-> -	kunmap(page);
-> +	kunmap_thread(page);
->  	ClearPageUptodate(page);
->  	SetPageError(page);
->  	unlock_page(page);
-> -- 
-> 2.28.0.rc0.12.gb6a658bd00c9
-> 
-> 
+>                 struct page *page = pages[i];
+>
+>                 if (page) {
+> -                       memcpy(data, kmap(page), PAGE_SIZE);
+> -                       kunmap(page);
+> +                       memcpy(data, kmap_thread(page), PAGE_SIZE);
+> +                       kunmap_thread(page);
+
+Why does this need a sleepable kmap? This looks like a textbook
+kmap_atomic() use case.
 
 
 _______________________________________________
