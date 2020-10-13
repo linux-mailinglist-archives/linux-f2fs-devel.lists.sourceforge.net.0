@@ -2,106 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8D8A28C71D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 04:25:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72E6A28C71F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 04:28:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kS9zw-0001Tj-Lr; Tue, 13 Oct 2020 02:25:08 +0000
+	id 1kSA37-000723-1X; Tue, 13 Oct 2020 02:28:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kS9zv-0001TZ-BH
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:25:07 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1kSA36-00071s-37
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:28:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eEV/cWEF/JYPft5qQa3SDqcnDv+itkYtghzo7XBgFNs=; b=VVm4uucXwRG36NxMAzParyJ4hG
- OZ9NG6MNJKBbq6KDHTg/n701aNP7qQggJHGPFNMHvAO3K4HyOgPFBFBhejEUHuGWtkyo4DdydwPxQ
- xmurJRFfjWlCalC2IR3T0OdFzK6H3I0+Za1VZ1F/Ijmy0VPCXoysxGvQR8IBaThB+Wf0=;
+ bh=0T3asWHfqUWz0zED1P6OmUdTOLJk2ixaklQ7SuPi8Uc=; b=Ypke5pmuGP5jRPw60KjBb5DTX2
+ ESWBqnPmxokDElOzfR6TNmLHN736cGSffK+EOQMB23N+uVDvRFe7rbZDOND2ongLmNvD4p7q5OVJ5
+ s+EYzZFYRPJ7TXg3TpEZgG7vIpaXgDzBIokx4mYxVCcQZe+c958Z/GOnKvdnUF1Fds9Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eEV/cWEF/JYPft5qQa3SDqcnDv+itkYtghzo7XBgFNs=; b=ezcE5faWmXlCWe3teumtTT7mFA
- QBBc6AZyZJOOowjqnW3F1CwOgsPTdq/+gUeb0MideyL31pDjrTZje9t1w5usbfxKtzCcI2GY+1pne
- sQ9YzNDekc3s8fpusNdvP2Wdel0IhMaYumtzJjoCWDZgneCGx8It0cyI6a7xakepKEVQ=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kS9zm-0089fV-4x
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:25:07 +0000
-Received: by mail-pg1-f194.google.com with SMTP id q21so5175238pgi.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Oct 2020 19:24:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=eEV/cWEF/JYPft5qQa3SDqcnDv+itkYtghzo7XBgFNs=;
- b=GWOTVtAdo8DKLCg2sfVY/T+Lny64tP5ZynNSLR/cL67sSFaJyP6GD/dKjlhcsAyceo
- d3hNAVF5U5SwXvV5b4XPZG4+8CZRqeP4RUjKqRW1Y7Dk+Mq3BgVTfRi/FrP7w/A+pAHV
- 0oW60V5PPlUMK8I6VxYREn5YzJHO9LTug1tiwOfNO6/YiNTFJAe8QbrGbUF1VhXLBA1v
- LTd56ImOOqEBn+OdQsG9FVG93lh9DJPSeReGva2hrAPQlqnq9dFKqcnKHe3DzCCb0Urw
- VmV/MnJM9QgEgrqjJ0ZhNGeNaHQcTQWrIxgUBfbEaq9iPp7K7a+YW455cueLbEaxufv6
- fF2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=eEV/cWEF/JYPft5qQa3SDqcnDv+itkYtghzo7XBgFNs=;
- b=kl6SKkIFkBjN4hDG7is8J4agWrzKPyE2tawXwQ9N2FgZlzG6OocHVkevEjhgC0yLc8
- /YT2Nw3tULzGzaE8P50C+yD+RhT1dPyTNRn0HbHvOAm/3ahSJ+mtzkNNuQ4P9ea2AeyD
- bvAlBi6vRrpdL0vH8t79eqPTu9/UmVTo2TOU3MfkJmD9BwyqDi2N6Mf1GhRaT0F37rFu
- 2ln8eicQBpoe6CSF8GfbPEjGbGljvXXYTJGvdbPjQiMHvB7UgxXuV3fP0gFrZZFeVGMq
- Uz0UNM1pDjrDHoBcAwnbewbMuZs0tyUim7n1awpQcTiA2Ka4Wex48l6OtbORNf8uUGlF
- eUwQ==
-X-Gm-Message-State: AOAM533Kj/Mna17gVEV+DWEtq/AA3Vhn9RfpolS5PBcKd17uzJrLnAFy
- C9H2Jt7kUAJkhlpSF7K4fcU=
-X-Google-Smtp-Source: ABdhPJyZCW3khH+xOjDpor/Y+i/yJb2TjIDKDk0jJX4xd86Ae/x4Beb8doS1Lj5v6QMZNu/PcQ34lw==
-X-Received: by 2002:a05:6a00:8c5:b029:142:2501:39e6 with SMTP id
- s5-20020a056a0008c5b0290142250139e6mr26902826pfu.53.1602555885313; 
- Mon, 12 Oct 2020 19:24:45 -0700 (PDT)
-Received: from daehojeong1.seo.corp.google.com
- ([2401:fa00:d:1:a6ae:11ff:fe18:6ce2])
- by smtp.gmail.com with ESMTPSA id d194sm10581110pfd.172.2020.10.12.19.24.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2020 19:24:44 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue, 13 Oct 2020 11:24:29 +0900
-Message-Id: <20201013022429.454161-2-daeho43@gmail.com>
-X-Mailer: git-send-email 2.28.0.1011.ga647a8990f-goog
-In-Reply-To: <20201013022429.454161-1-daeho43@gmail.com>
+ bh=0T3asWHfqUWz0zED1P6OmUdTOLJk2ixaklQ7SuPi8Uc=; b=QExy4Azvbnp4YRpeKahQsRDUae
+ UAU7UL/olrvdkvpggyQvqJdsgF6yHcXuoUetL7K285G7H67LJz4JWL1kJA5Kgv3r9XlqEBE3StvjP
+ wnXitzux5IXtNsmXrRdt17cpZmT5Zvqv0pxhaWQ9wATxKVayCQ+ld1v4Pmt30wGwWSbw=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kSA2z-00CvLy-0y
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:28:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+ :Reply-To:Content-ID:Content-Description;
+ bh=0T3asWHfqUWz0zED1P6OmUdTOLJk2ixaklQ7SuPi8Uc=; b=W2otGeGilNTb+3EnbAVR4yGnzD
+ 09fF9YkPwWDnEmU53QuASiGFLJJDQoyUv+mPN8d9BePXHZI7wg7FVdTPzMVUe/iPA6nf3Cvo0hUr7
+ IFAyx9rfusnQAw/Oa7zkosjTemjcSI4+hI8FAdZVNQotH8+CasvFgAYsBhF9wTIa2QxFcfnoNfhqD
+ W9s65jYyot111qbyaTVaAVoJrvO6hTXu+42eng/IV4F85AncBm5ec0LYEIcid6/dSKhC57hEgyvlP
+ tmktxHEp469oqAT6BsnRyTNyVYSPa6+u3m+mhjtYc+VV29ylezZcy7/A18HsEVMyrRchuv/jUXUwl
+ VHTJ68EQ==;
+Received: from [2601:1c0:6280:3f0::507c]
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kSA2c-0005Sn-D0; Tue, 13 Oct 2020 02:27:55 +0000
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
 References: <20201013022429.454161-1-daeho43@gmail.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <55a72698-014a-da39-e573-a8e9e9b52ce6@infradead.org>
+Date: Mon, 12 Oct 2020 19:27:51 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20201013022429.454161-1-daeho43@gmail.com>
+Content-Language: en-US
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kS9zm-0089fV-4x
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: add F2FS_IOC_SET_COMPRESS_OPTION ioctl
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kSA2z-00CvLy-0y
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: add F2FS_IOC_GET_COMPRESS_OPTION
+ ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,113 +91,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On 10/12/20 7:24 PM, Daeho Jeong wrote:
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 53fe2853579c..a33c90cf979b 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -433,6 +433,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+>  					_IOR(F2FS_IOCTL_MAGIC, 19, __u64)
+>  #define F2FS_IOC_SEC_TRIM_FILE		_IOW(F2FS_IOCTL_MAGIC, 20,	\
+>  						struct f2fs_sectrim_range)
+> +#define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
+> +						struct f2fs_comp_option)
 
-Added a new F2FS_IOC_SET_COMPRESS_OPTION ioctl to change file
-compression option of a file.
+Hi,
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
- fs/f2fs/f2fs.h |  2 ++
- fs/f2fs/file.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+F2FS_IOCTL_MAGIC should be listed in
+Documentation/userspace-api/ioctl/ioctl-number.rst.
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index a33c90cf979b..5ee8a4859b62 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -435,6 +435,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
- 						struct f2fs_sectrim_range)
- #define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
- 						struct f2fs_comp_option)
-+#define F2FS_IOC_SET_COMPRESS_OPTION	_IOW(F2FS_IOCTL_MAGIC, 22,	\
-+						struct f2fs_comp_option)
- 
- /*
-  * should be same as XFS_IOC_GOINGDOWN.
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 7e64259f6f5e..6c265c66ddd4 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3963,6 +3963,59 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
- 	return 0;
- }
- 
-+static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-+{
-+	struct inode *inode = file_inode(filp);
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_comp_option option;
-+	int ret;
-+	int writecount;
-+
-+	if (!f2fs_sb_has_compression(sbi))
-+		return -EOPNOTSUPP;
-+
-+	if (!f2fs_compressed_file(inode) || IS_IMMUTABLE(inode))
-+		return -EINVAL;
-+
-+	if (f2fs_readonly(sbi->sb))
-+		return -EROFS;
-+
-+	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
-+				sizeof(option)))
-+		return -EFAULT;
-+
-+	if (option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
-+			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
-+			option.algorithm >= COMPRESS_MAX)
-+		return -EINVAL;
-+
-+	ret = mnt_want_write_file(filp);
-+	if (ret)
-+		return ret;
-+
-+	inode_lock(inode);
-+
-+	writecount = atomic_read(&inode->i_writecount);
-+	if ((filp->f_mode & FMODE_WRITE && writecount != 1) ||
-+			(!(filp->f_mode & FMODE_WRITE) && writecount)) {
-+		ret = -EBUSY;
-+		goto out;
-+	}
-+
-+	if (get_dirty_pages(inode) || inode->i_size) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
-+	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
-+	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
-+	f2fs_mark_inode_dirty_sync(inode, true);
-+out:
-+	inode_unlock(inode);
-+	return ret;
-+}
-+
- long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- {
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
-@@ -4053,6 +4106,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 		return f2fs_sec_trim_file(filp, arg);
- 	case F2FS_IOC_GET_COMPRESS_OPTION:
- 		return f2fs_ioc_get_compress_option(filp, arg);
-+	case F2FS_IOC_SET_COMPRESS_OPTION:
-+		return f2fs_ioc_set_compress_option(filp, arg);
- 	default:
- 		return -ENOTTY;
- 	}
-@@ -4224,6 +4279,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
- 	case F2FS_IOC_SEC_TRIM_FILE:
- 	case F2FS_IOC_GET_COMPRESS_OPTION:
-+	case F2FS_IOC_SET_COMPRESS_OPTION:
- 		break;
- 	default:
- 		return -ENOIOCTLCMD;
+Please add it there.
+
+thanks.
 -- 
-2.28.0.1011.ga647a8990f-goog
+~Randy
 
 
 
