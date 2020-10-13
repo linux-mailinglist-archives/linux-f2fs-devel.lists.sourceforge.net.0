@@ -2,88 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED2F528C77E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 05:09:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B478328C792
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 05:33:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kSAgc-0003KW-K7; Tue, 13 Oct 2020 03:09:14 +0000
+	id 1kSB3Z-0004Px-Ub; Tue, 13 Oct 2020 03:32:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kSAgb-0003KO-7k
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:09:13 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kSB3X-0004Pl-8D
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:32:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QqOsa9dyYrxpW2x6F4lxbHKShJ+rzWhwJeywPIuBGVI=; b=QrfTXh4BxnHrli4GwIyLAufwId
- f80v7Dz8nDy5indDlNQ643eqdICUvcwWeAbpEFqfVdMzKzMz7oFQ5CeviZCO1Tqo0UPnFMmyzTZsi
- MTyu0vqKl5eqOoMMMJlU7a2Enx8czo4pzqQpGJ4B9tRfmWqM8JyVTS0ktqgL44CsrzIA=;
+ bh=WI/puVJEv2eYPVHCW0hYP69TVavyuNjMOPuS4GZheIM=; b=M8xRjBXmZETr1IpIA8Jv3//h+c
+ CRA8RiDE00L1xey+76YDD0nQE14SX/dQxTHFx0gPFcYSWO7EI/Kr8ycJn4hQEDcHlf5m5YisW+Xxu
+ V+T18cI0iRM2DRsLH3dtuN6cw6pwHx2jFYr9TZxef9cuZIH0CEgmPWSicDrZhp1zPwd8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QqOsa9dyYrxpW2x6F4lxbHKShJ+rzWhwJeywPIuBGVI=; b=Hz25eekQAVAvB200Pet8Bicfvf
- OaozmH/9Wl3da7oLzwpH4HG1KwPAYS66ypq5Qz7TQ+QXSY/PWVFeH/rMrntK6nhjUZT/5lg2cHEiJ
- aiHwCniFRuldY/HYywM1rYkoEe0bp9nltC5CEv3ty4hFwh2E46nJhR+b1a21wdDcX7o8=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=WI/puVJEv2eYPVHCW0hYP69TVavyuNjMOPuS4GZheIM=; b=ZslouJeyipLPFx0Nml+DTmK+Iw
+ etoFZhhV9S2SzdXAhcYzbTTdZQvF6XcmTMkSiPVE8MDvdOZFkFrCrhvkdrUjWHLOslsy7oFUUAzFh
+ saey15PIJuJIb3RPBDV+MJ1Vx7cRjAdXG0X1AB5maUPBK96xHmeZ7DW/pMnH7CJ0kkgg=;
+Received: from szxga07-in.huawei.com ([45.249.212.35] helo=huawei.com)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kSAgM-00Cx08-QS
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:09:13 +0000
-Received: from localhost (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4859020797;
- Tue, 13 Oct 2020 03:08:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1602558526;
- bh=AJHpKMUJIcw11Gyz1KpytJxDA6dnO7UshnzQjlHsm/M=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=y0LmppGGwxqV3x7CInRGNW3xlTfPR9OZEQcWkKmoTH6PZYTZjHGmf/uefQ93XxMwE
- dK6fPi99zf1pqhnRd6esaK2yAkfu8YVppx+JNKImx6W3JDIMuMqzxRxbAf+CzgxwVe
- qMbwrTpWgGLNw193WY27hv1YU/Ejyzd4DE3r2IqA=
-Date: Mon, 12 Oct 2020 20:08:45 -0700
-From: jaegeuk@kernel.org
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <20201013030845.GA3373865@google.com>
-References: <000000000000432c5405b1113296@google.com>
- <20201007213253.GD1530638@gmail.com>
- <20201007215305.GA714500@google.com>
- <c7baef0d-d459-114f-7146-627f0c4159ad@huawei.com>
- <20201009015015.GA1931838@google.com>
- <8fa4f9fe-5ca5-f3a3-c8f4-e800373c1e46@huawei.com>
- <20201009043237.GB1973455@google.com>
- <a842eec8-2dbb-aa01-cc64-c513d59cad24@huawei.com>
- <20201009145626.GA2186792@google.com>
- <70faa161-bcd7-64a3-4a6c-04963c0784b6@huawei.com>
+ id 1kSB3U-008CCm-EN
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:32:55 +0000
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 684A4C094766F82F398A;
+ Tue, 13 Oct 2020 11:32:41 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 13 Oct
+ 2020 11:32:40 +0800
+To: Jamie Iles <jamie@nuviainc.com>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20201012130948.58321-1-jamie@nuviainc.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <1a62804d-5e5a-8205-54d7-4401a43e2bc5@huawei.com>
+Date: Tue, 13 Oct 2020 11:32:40 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <70faa161-bcd7-64a3-4a6c-04963c0784b6@huawei.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20201012130948.58321-1-jamie@nuviainc.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: syzkaller.appspot.com]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kSAgM-00Cx08-QS
-Subject: Re: [f2fs-dev] [f2fs bug] infinite loop in
- f2fs_get_meta_page_nofail()
+ for more information. [URIs: nuviainc.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kSB3U-008CCm-EN
+Subject: Re: [f2fs-dev] [PATCH 2/5] f2fs: wait for sysfs kobject removal
+ before freeing f2fs_sb_info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,120 +82,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@kernel.org>,
- syzbot+ee250ac8137be41d7b13@syzkaller.appspotmail.com,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/13, Chao Yu wrote:
-> Jaegeuk,
+On 2020/10/12 21:09, Jamie Iles wrote:
+> syzkaller found that with CONFIG_DEBUG_KOBJECT_RELEASE=y, unmounting an
+> f2fs filesystem could result in the following splat:
 > 
-> I guess you missed sending last applied patch to mailing list?
+>    kobject: 'loop5' ((____ptrval____)): kobject_release, parent 0000000000000000 (delayed 250)
+>    kobject: 'f2fs_xattr_entry-7:5' ((____ptrval____)): kobject_release, parent 0000000000000000 (delayed 750)
+>    ------------[ cut here ]------------
+>    ODEBUG: free active (active state 0) object type: timer_list hint: delayed_work_timer_fn+0x0/0x98
+>    WARNING: CPU: 0 PID: 699 at lib/debugobjects.c:485 debug_print_object+0x180/0x240
+>    Kernel panic - not syncing: panic_on_warn set ...
+>    CPU: 0 PID: 699 Comm: syz-executor.5 Tainted: G S                5.9.0-rc8+ #101
+>    Hardware name: linux,dummy-virt (DT)
+>    Call trace:
+>     dump_backtrace+0x0/0x4d8
+>     show_stack+0x34/0x48
+>     dump_stack+0x174/0x1f8
+>     panic+0x360/0x7a0
+>     __warn+0x244/0x2ec
+>     report_bug+0x240/0x398
+>     bug_handler+0x50/0xc0
+>     call_break_hook+0x160/0x1d8
+>     brk_handler+0x30/0xc0
+>     do_debug_exception+0x184/0x340
+>     el1_dbg+0x48/0xb0
+>     el1_sync_handler+0x170/0x1c8
+>     el1_sync+0x80/0x100
+>     debug_print_object+0x180/0x240
+>     debug_check_no_obj_freed+0x200/0x430
+>     slab_free_freelist_hook+0x190/0x210
+>     kfree+0x13c/0x460
+>     f2fs_put_super+0x624/0xa58
+>     generic_shutdown_super+0x120/0x300
+>     kill_block_super+0x94/0xf8
+>     kill_f2fs_super+0x244/0x308
+>     deactivate_locked_super+0x104/0x150
+>     deactivate_super+0x118/0x148
+>     cleanup_mnt+0x27c/0x3c0
+>     __cleanup_mnt+0x28/0x38
+>     task_work_run+0x10c/0x248
+>     do_notify_resume+0x9d4/0x1188
+>     work_pending+0x8/0x34c
+> 
+> Like the error handling for f2fs_register_sysfs(), we need to wait for
+> the kobject to be destroyed before returning to prevent a potential
+> use-after-free.
+> 
+> Fixes: bf9e697ecd4 ("f2fs: expose features to sysfs entry")
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Cc: Chao Yu <chao@kernel.org>
+> Signed-off-by: Jamie Iles <jamie@nuviainc.com>
 
-I was testing locally and supposed to post it soon before pull request. Putting
-it in -dev can give some soak time in -next.
-
-No worries.
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
-
-> 
-> Thanks,
-> 
-> On 2020/10/9 22:56, jaegeuk@kernel.org wrote:
-> > On 10/09, Chao Yu wrote:
-> > > On 2020/10/9 12:32, jaegeuk@kernel.org wrote:
-> > > > On 10/09, Chao Yu wrote:
-> > > > > On 2020/10/9 9:50, jaegeuk@kernel.org wrote:
-> > > > > > On 10/09, Chao Yu wrote:
-> > > > > > > On 2020/10/8 5:53, jaegeuk@kernel.org wrote:
-> > > > > > > > On 10/07, Eric Biggers wrote:
-> > > > > > > > > [moved linux-fsdevel to Bcc]
-> > > > > > > > > 
-> > > > > > > > > On Wed, Oct 07, 2020 at 02:18:19AM -0700, syzbot wrote:
-> > > > > > > > > > Hello,
-> > > > > > > > > > 
-> > > > > > > > > > syzbot found the following issue on:
-> > > > > > > > > > 
-> > > > > > > > > > HEAD commit:    a804ab08 Add linux-next specific files for 20201006
-> > > > > > > > > > git tree:       linux-next
-> > > > > > > > > > console output: https://syzkaller.appspot.com/x/log.txt?x=17fe30bf900000
-> > > > > > > > > > kernel config:  https://syzkaller.appspot.com/x/.config?x=26c1b4cc4a62ccb
-> > > > > > > > > > dashboard link: https://syzkaller.appspot.com/bug?extid=ee250ac8137be41d7b13
-> > > > > > > > > > compiler:       gcc (GCC) 10.1.0-syz 20200507
-> > > > > > > > > > syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1336413b900000
-> > > > > > > > > > C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=12f7392b900000
-> > > > > > > > > > 
-> > > > > > > > > > The issue was bisected to:
-> > > > > > > > > > 
-> > > > > > > > > > commit eede846af512572b1f30b34f9889d7df64c017d4
-> > > > > > > > > > Author: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > > > > > > > Date:   Fri Oct 2 21:17:35 2020 +0000
-> > > > > > > > > > 
-> > > > > > > > > >         f2fs: f2fs_get_meta_page_nofail should not be failed
-> > > > > > > > > > 
-> > > > > > > > > 
-> > > > > > > > > Jaegeuk, it looks like the loop you added in the above commit doesn't terminate
-> > > > > > > > > if the requested page is beyond the end of the device.
-> > > > > > > > 
-> > > > > > > > Yes, that will go infinite loop. Otherwise, it will trigger a panic during
-> > > > > > > > the device reboot. Let me think how to avoid that before trying to get the
-> > > > > > > > wrong lba access.
-> > > > > > > 
-> > > > > > > Delivering f2fs_get_sum_page()'s return value needs a lot of codes change, I think
-> > > > > > > we can just zeroing sum_page in error case, as we have already shutdown f2fs via
-> > > > > > > calling f2fs_stop_checkpoint(), then f2fs_cp_error() will stop all updates to
-> > > > > > > filesystem data including summary pages.
-> > > > > > 
-> > > > > > That sounds like one solution tho, I'm afraid of getting another panic by
-> > > > > > wrong zero'ed summary page.
-> > > > > 
-> > > > > What case do you mean? maybe I missed some corner cases?
-> > > > 
-> > > > I sent v2 to fix syzbot issue, which fixes wrong use of
-> > > > f2fs_get_meta_page_nofail.
-> > > 
-> > > I agreed to fix that case, however we may encounter deadloop in other
-> > > places where we call f2fs_get_meta_page_nofail()? like the case that
-> > > filesystem will always see EIO after we shutdown device via dmflakey?
-> > 
-> > We may need another option to deal with this. At least, however, it's literally
-> > _nofail function which should guarantee no error, instead of hiding the error
-> > with zero'ed page.
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > 
-> > > > > > > 
-> > > > > > > Thoughts?
-> > > > > > > 
-> > > > > > > Thanks,
-> > > > > > > 
-> > > > > > > > 
-> > > > > > > > > 
-> > > > > > > > > - Eric
-> > > > > > > > 
-> > > > > > > > 
-> > > > > > > > _______________________________________________
-> > > > > > > > Linux-f2fs-devel mailing list
-> > > > > > > > Linux-f2fs-devel@lists.sourceforge.net
-> > > > > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > > > > > > > .
-> > > > > > > > 
-> > > > > > .
-> > > > > > 
-> > > > .
-> > > > 
-> > .
-> > 
 
 
 _______________________________________________
