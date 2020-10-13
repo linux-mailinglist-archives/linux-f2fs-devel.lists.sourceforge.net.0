@@ -2,76 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6859D28C793
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 05:33:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6715828C88C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 08:12:23 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kSB4H-0004Sy-2Q; Tue, 13 Oct 2020 03:33:41 +0000
+	id 1kSDXk-0002X9-Am; Tue, 13 Oct 2020 06:12:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kSB4G-0004So-BO
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:33:40 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kSDXf-0002Wy-Ir
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 06:12:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wcewrc5sdIBqLz9enNeu4/LLvkMbOAefHVdXopCf4YE=; b=cr9gUKHYXaaSgp3BDSUUU67hc6
- ACFTCZ/yhVfOVqixADPIRhkapo+zn4SuAX2MwaN39QbNfxQDfUV0G+f4kcBbxdg6Dg/kC4cldEbtS
- 12Zc3765pNa2M+RaQzSJpTB0PEBB/m7O77Pn6mWuZwzbqmx8ffIpdg2Qsj5ptmlnZstg=;
+ bh=M9/lLwnBF7yXNwHohRYwGNffSmSATQf7C7Ez4C3qndE=; b=OCNkQgMj4uGO7vHfIcAW0Qflgj
+ YoDIMMfml4akfV74tg8tvIJMKB8T1OQ59HnLLimadLoN1zGVAfEgvuns8rmYlzdXG0guXObyZ/nJE
+ fAxiGO39fiA/SF+xY1H9webVjigsQ4NSlraz0sqfinJeM9dxCArfJZPZ5pKjgn+yTnmY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wcewrc5sdIBqLz9enNeu4/LLvkMbOAefHVdXopCf4YE=; b=Z5smFSyWMxOH20LPu9l994hR2S
- q9IDQEYQj794nl2dhQC9dwLjSWdKhORa+g1hOmm3sJU49SpqzJ9ugRo8vSbLnhiY/oK7JtLyrtLZ5
- uWf4lC+Yaai+DWtze5w3eyzOEi6RFn7iPHQu3YTPvJsPkuFrcBvQ+7SGq+6q8mwXdS1M=;
-Received: from szxga04-in.huawei.com ([45.249.212.190] helo=huawei.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=M9/lLwnBF7yXNwHohRYwGNffSmSATQf7C7Ez4C3qndE=; b=Py5Dfl1BJ1uuCoP1Fwnbbg0/qv
+ NYP8uXkqnjHhistvqB7zZ83Gfz0w/CMfOqVztm150Rjf5JchfvejA+aqXiwCcFnBYgM1SYsJ1n3yo
+ pUHM61Tp7Dn6T6pF8kBKgW4IlsHBVblYotgmtmeQR5uMTXlC5JpWKbH/LFL8rIZdKSI0=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kSB4A-00Cy5A-Tn
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 03:33:40 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 960A5F0FA0B57421A7BE;
- Tue, 13 Oct 2020 11:33:24 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 13 Oct
- 2020 11:33:20 +0800
-To: Chengguang Xu <cgxu519@mykernel.net>, <jaegeuk@kernel.org>,
- <chao@kernel.org>
-References: <20201012224921.3829713-1-cgxu519@mykernel.net>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <520a5fcb-3ec8-edc0-ac9c-16affddfead1@huawei.com>
-Date: Tue, 13 Oct 2020 11:33:19 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1kSDXY-008Itl-Ql
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 06:12:11 +0000
+Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
+ [172.10.235.113])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1F404208D5;
+ Tue, 13 Oct 2020 06:11:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1602569512;
+ bh=RdcM42RUsQgguE+mIVddBaOAVmC+EXsrSMwUWlEemcw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=dvQLuMcn0duMSVgVY9alkWGVdxZK6COUr8i+kqrKvo/2LbZZRDPt3b+Pd1W2xrntr
+ Q9LgG383D6Aexv1HMTNm24LTYZU5RPmLyqhnBGyKv0G/bZui/I4VVA6BLDJEyl+H7J
+ OXB5B+BRP4lIbLQiDgnyPb3LeE8CHGmUa1dQMoQY=
+Date: Mon, 12 Oct 2020 23:11:50 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20201013061150.GC1062@sol.localdomain>
+References: <20201013022429.454161-1-daeho43@gmail.com>
+ <20201013022429.454161-2-daeho43@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20201012224921.3829713-1-cgxu519@mykernel.net>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20201013022429.454161-2-daeho43@gmail.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kSB4A-00Cy5A-Tn
-Subject: Re: [f2fs-dev] [PATCH] f2fs: code cleanup by removing unnecessary
- check
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kSDXY-008Itl-Ql
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: add F2FS_IOC_SET_COMPRESS_OPTION
+ ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,20 +84,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/10/13 6:49, Chengguang Xu wrote:
-> f2fs_seek_block() is only used for regular file,
-> so don't have to check inline dentry in it.
-> 
-> Signed-off-by: Chengguang Xu <cgxu519@mykernel.net>
+On Tue, Oct 13, 2020 at 11:24:29AM +0900, Daeho Jeong wrote:
+> +static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	struct f2fs_comp_option option;
+> +	int ret;
+> +	int writecount;
+> +
+> +	if (!f2fs_sb_has_compression(sbi))
+> +		return -EOPNOTSUPP;
+> +
+> +	if (!f2fs_compressed_file(inode) || IS_IMMUTABLE(inode))
+> +		return -EINVAL;
+> +
+> +	if (f2fs_readonly(sbi->sb))
+> +		return -EROFS;
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+f2fs_readonly() is redundant with mnt_want_write_file().
 
-Thanks,
+Also, shouldn't this require a writable file descriptor?  As-is, this ioctl can
+be called on a file owned by another user, as long as the caller has read
+access.
+
+Note: if you change this to require a writable file descriptor, then
+f2fs_readonly(), mnt_want_write_file(), and IS_IMMUTABLE() all would no longer
+be needed.
+
+> +
+> +	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
+> +				sizeof(option)))
+> +		return -EFAULT;
+> +
+> +	if (option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
+> +			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
+> +			option.algorithm >= COMPRESS_MAX)
+> +		return -EINVAL;
+
+What if f2fs_cops[options.algorithm] == NULL, e.g. COMPRESS_LZ4 without
+CONFIG_F2FS_FS_LZ4?  Shouldn't the caller get an error then?
+
+> +
+> +	ret = mnt_want_write_file(filp);
+> +	if (ret)
+> +		return ret;
+> +
+> +	inode_lock(inode);
+> +
+> +	writecount = atomic_read(&inode->i_writecount);
+> +	if ((filp->f_mode & FMODE_WRITE && writecount != 1) ||
+> +			(!(filp->f_mode & FMODE_WRITE) && writecount)) {
+> +		ret = -EBUSY;
+> +		goto out;
+> +	}
+
+I don't think the check for i_writecount == 1 accomplishes anything because it
+just means there are no *other* writable file descriptors.  It doesn't mean that
+some other thread isn't concurrently trying to write to this same file
+descriptor.  So the lock needs to be enough.  Is it?
+
+- Eric
 
 
 _______________________________________________
