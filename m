@@ -2,81 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C80A328C547
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 01:31:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1879B28C71C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 04:25:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kS7IG-0002Xh-3z; Mon, 12 Oct 2020 23:31:52 +0000
+	id 1kS9zl-0001Sa-Ez; Tue, 13 Oct 2020 02:24:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ira.weiny@intel.com>)
- id 1kS7IE-0002XX-Lr; Mon, 12 Oct 2020 23:31:50 +0000
+ (envelope-from <daeho43@gmail.com>) id 1kS9zk-0001SP-6u
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:24:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wvDlxvaoJ4chIXgbS1aaRoZISueetVlj2QCusyvia78=; b=h1t8BXyZRqS9JBrOPpq73q6hGs
- TAovfST1s7gabgd46l2TDvc6Voup5ro3fDej7NCAhTRjRiCkrTcj5QOmiomqH91uca2xpqE4I2iYO
- IFH18MxQnyI/3wpjstHHIl9OOmvvsOth+uCG44GdG3VA/bYsGlZ7mOjdR8WdXBjTNIIU=;
+ bh=s5asbHEXOVzz3KY0nwEzagtPhdb/NuvhbToUoYEnsfg=; b=Q0oMEFZB/UrE1NtNzeyyOIjef0
+ xWhZhSggXaavY/Iiwpv1aLfE2hLtFMBE7LqM60BHvUXwkiIRL/Nx52/ckZMj6OIAes/BtItTZFTYS
+ 8DVSYOAY45PouqNEnkK+ZqwyqZAr/LmPazhzqfUJ58zzzKWIBTNon0v7nYTPBpfMaDIU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=wvDlxvaoJ4chIXgbS1aaRoZISueetVlj2QCusyvia78=; b=RmFHdWF6NaA9Vfh51Gs27gEF5O
- DV/32zLPNejC/siwk/ipJySwrD+Y7TfMCTQaisxXvPdho5xWMJBV7PJ75t69UrgSN1B/Esq8DM5fw
- AKaTrulb6U7yPcD00mmoYIuQSCzOKfBcrIGdhhiCey/X//RFxJRWpv83G7B9RgMLjahM=;
-Received: from mga18.intel.com ([134.134.136.126])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kS7I6-00ClFa-9e; Mon, 12 Oct 2020 23:31:50 +0000
-IronPort-SDR: 25KM4Uxp7k2XlkXJ//jT/xVMkraXKk1bp7mHKa1ZE7Y4xc9/7ZpaajdznvrASZHD3VAoB1OfWf
- 4C1pDGZgyZoQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9772"; a="153648412"
-X-IronPort-AV: E=Sophos;i="5.77,368,1596524400"; d="scan'208";a="153648412"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Oct 2020 16:31:28 -0700
-IronPort-SDR: tYujEEKuwB7pwkDEJNgfSBtOh7hwJ+YZEVhRvoIibttlBusG3o0pRElwiIGjx+C70rOitVdHyl
- N8yvUi3stUVQ==
-X-IronPort-AV: E=Sophos;i="5.77,368,1596524400"; d="scan'208";a="313606559"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Oct 2020 16:31:27 -0700
-Date: Mon, 12 Oct 2020 16:31:26 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20201012233126.GD2046448@iweiny-DESK2.sc.intel.com>
-References: <20201009195033.3208459-23-ira.weiny@intel.com>
- <20201009213434.GA839@sol.localdomain>
- <20201010003954.GW20115@casper.infradead.org>
- <20201010013036.GD1122@sol.localdomain>
- <20201012065635.GB2046448@iweiny-DESK2.sc.intel.com>
- <20201012161946.GA858@sol.localdomain>
- <5d621db9-23d4-e140-45eb-d7fca2093d2b@intel.com>
- <20201012164438.GA20115@casper.infradead.org>
- <20201012195354.GC2046448@iweiny-DESK2.sc.intel.com>
- <20201012200254.GB20115@casper.infradead.org>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=s5asbHEXOVzz3KY0nwEzagtPhdb/NuvhbToUoYEnsfg=; b=R
+ edYXrtHSGSv7Byb9rISIP7d+OnfTRwCVg/wJQ/F+XY8z4v7P0Dmt0hQMFOJ1AbvVcBmYeAr0HpOT1
+ Gxu/BWs9rrIWMHGaNMqVEFo5bIsw+08yKfpWg48shRUys2fZgEExlEftiJBjUSX/2ApSy5ZyqdeZ6
+ rgLs8vd5fgmYCPrE=;
+Received: from mail-pg1-f195.google.com ([209.85.215.195])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kS9zZ-0089f1-Qk
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Oct 2020 02:24:56 +0000
+Received: by mail-pg1-f195.google.com with SMTP id o3so6392332pgr.11
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Oct 2020 19:24:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=s5asbHEXOVzz3KY0nwEzagtPhdb/NuvhbToUoYEnsfg=;
+ b=WkgVHQGOeM7r/o0qnnDRFFZnzNkzTsnpK+MIc3bNt/s2RdULSgIQA74WP6KBoPQlwD
+ 8hbEiqvcENmWYe51UJqlI4JuDQ/Di4InhZ7+mu6ye6wVuzrvUfJ3esRm5YuW1GdInWua
+ XtSyOrCfEuZA6v5IYPhmYzEN+s9PmGcHPa0deTkiu986kHh9Pf7BbXdqG7Bu9N7cxEV0
+ epNTn9K9osF9fjOXBRssQdhNxBprsaronaZ3Ddh4+hRtxES6kqjvNefH4mxp98QQGqzu
+ mBgCFAZLwbbikuKRAtH4NQJdXJkHv0gGXoOzaKdxADoS9e4M/LBZQDFFi5mEelvf0PH/
+ 6ubw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=s5asbHEXOVzz3KY0nwEzagtPhdb/NuvhbToUoYEnsfg=;
+ b=mRd6X14CyHp246qnX8Lhkobiq16ED0Lkkkk+sTMbeRvI3BGmjPMw2Yls9BL8Hp5b3T
+ h/hUgPw+hAVP8D13Rgxz/w9TpbbF7Ia/bzNzgx3f6KaMtRlvIbxWJIANyagJYehc1pSl
+ xPOPCwXguUeCYjMnE4RQP9RLAHeSQzyvyxrKtlqRhUfyZvgtNcJrXDif785rSyrLzaeB
+ GqFTmAUa9pM9+Xml3mmZlK8gzUD6ABzqHXcku+Yu9f6Blsj4wvmrB4Tijq1hR1QBFZa3
+ e3V6++LayT45g+bzB1IIcrw/+dLE9uF2C3RQnitqzFK5oSy2Mmp8/3iCnmLuFV5NO8Cx
+ oDNQ==
+X-Gm-Message-State: AOAM533oYKKv2RkjuU38UOy2Lv9lVZUApH/YgrOHwgT9K775+mra0mYx
+ e3E1oZ5ZAtd+twttMHrtxyk=
+X-Google-Smtp-Source: ABdhPJx0t8zTOmfObjOqfTTfSf717fNFPX2PMEkJ9ekbnUlvasAMRR4wPqYuUdxrOAMqHwJUISqTXw==
+X-Received: by 2002:a62:7cd4:0:b029:154:f9ee:320b with SMTP id
+ x203-20020a627cd40000b0290154f9ee320bmr26690911pfc.26.1602555880156; 
+ Mon, 12 Oct 2020 19:24:40 -0700 (PDT)
+Received: from daehojeong1.seo.corp.google.com
+ ([2401:fa00:d:1:a6ae:11ff:fe18:6ce2])
+ by smtp.gmail.com with ESMTPSA id d194sm10581110pfd.172.2020.10.12.19.24.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2020 19:24:39 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue, 13 Oct 2020 11:24:28 +0900
+Message-Id: <20201013022429.454161-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.28.0.1011.ga647a8990f-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201012200254.GB20115@casper.infradead.org>
-User-Agent: Mutt/1.11.1 (2018-12-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.195 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.195 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kS7I6-00ClFa-9e
-Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 22/58] fs/f2fs: Utilize new
- kmap_thread()
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kS9zZ-0089f1-Qk
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: add F2FS_IOC_GET_COMPRESS_OPTION ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,101 +111,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Dave Hansen <dave.hansen@intel.com>,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-kselftest@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Thomas Gleixner <tglx@linutronix.de>, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, linux-afs@lists.infradead.org,
- Eric Biggers <ebiggers@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- intel-wired-lan@lists.osuosl.org, kexec@lists.infradead.org,
- xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
- bpf@vger.kernel.org, Dan Williams <dan.j.williams@intel.com>,
- Fenghua Yu <fenghua.yu@intel.com>, intel-gfx@lists.freedesktop.org,
- ecryptfs@vger.kernel.org, linux-um@lists.infradead.org,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
- Andy Lutomirski <luto@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, io-uring@vger.kernel.org, linux-cachefs@redhat.com,
- linux-nfs@vger.kernel.org, linux-mm@kvack.org,
- linux-ntfs-dev@lists.sourceforge.net, netdev@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, cluster-devel@redhat.com,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Oct 12, 2020 at 09:02:54PM +0100, Matthew Wilcox wrote:
-> On Mon, Oct 12, 2020 at 12:53:54PM -0700, Ira Weiny wrote:
-> > On Mon, Oct 12, 2020 at 05:44:38PM +0100, Matthew Wilcox wrote:
-> > > On Mon, Oct 12, 2020 at 09:28:29AM -0700, Dave Hansen wrote:
-> > > > kmap_atomic() is always preferred over kmap()/kmap_thread().
-> > > > kmap_atomic() is _much_ more lightweight since its TLB invalidation is
-> > > > always CPU-local and never broadcast.
-> > > > 
-> > > > So, basically, unless you *must* sleep while the mapping is in place,
-> > > > kmap_atomic() is preferred.
-> > > 
-> > > But kmap_atomic() disables preemption, so the _ideal_ interface would map
-> > > it only locally, then on preemption make it global.  I don't even know
-> > > if that _can_ be done.  But this email makes it seem like kmap_atomic()
-> > > has no downsides.
-> > 
-> > And that is IIUC what Thomas was trying to solve.
-> > 
-> > Also, Linus brought up that kmap_atomic() has quirks in nesting.[1]
-> > 
-> > >From what I can see all of these discussions support the need to have something
-> > between kmap() and kmap_atomic().
-> > 
-> > However, the reason behind converting call sites to kmap_thread() are different
-> > between Thomas' patch set and mine.  Both require more kmap granularity.
-> > However, they do so with different reasons and underlying implementations but
-> > with the _same_ resulting semantics; a thread local mapping which is
-> > preemptable.[2]  Therefore they each focus on changing different call sites.
-> > 
-> > While this patch set is huge I think it serves a valuable purpose to identify a
-> > large number of call sites which are candidates for this new semantic.
-> 
-> Yes, I agree.  My problem with this patch-set is that it ties it to
-> some Intel feature that almost nobody cares about.
+From: Daeho Jeong <daehojeong@google.com>
 
-I humbly disagree.  At this level the only thing this is tied to is the idea
-that there are additional memory protections available which can be enabled
-quickly on a per-thread basis.  PKS on Intel is but 1 implementation of that.
+Added a new F2FS_IOC_GET_COMPRESS_OPTION ioctl to get file compression
+option of a file.
 
-Even the kmap code only has knowledge that there is something which needs to be
-done special on a devm page.
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/f2fs.h |  7 +++++++
+ fs/f2fs/file.c | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
 
->
-> Maybe we should
-> care about it, but you didn't try very hard to make anyone care about
-> it in the cover letter.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 53fe2853579c..a33c90cf979b 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -433,6 +433,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+ 					_IOR(F2FS_IOCTL_MAGIC, 19, __u64)
+ #define F2FS_IOC_SEC_TRIM_FILE		_IOW(F2FS_IOCTL_MAGIC, 20,	\
+ 						struct f2fs_sectrim_range)
++#define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
++						struct f2fs_comp_option)
+ 
+ /*
+  * should be same as XFS_IOC_GOINGDOWN.
+@@ -481,6 +483,11 @@ struct f2fs_sectrim_range {
+ 	u64 flags;
+ };
+ 
++struct f2fs_comp_option {
++	u8 algorithm;
++	u8 log_cluster_size;
++};
++
+ /* for inline stuff */
+ #define DEF_INLINE_RESERVED_SIZE	1
+ static inline int get_extra_isize(struct inode *inode);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index ef5a844de53f..7e64259f6f5e 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3936,6 +3936,33 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+ 	return ret;
+ }
+ 
++static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
++{
++	struct inode *inode = file_inode(filp);
++	struct f2fs_comp_option option;
++
++	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
++		return -EOPNOTSUPP;
++
++	inode_lock(inode);
++
++	if (!f2fs_compressed_file(inode)) {
++		inode_unlock(inode);
++		return -EINVAL;
++	}
++
++	option.algorithm = F2FS_I(inode)->i_compress_algorithm;
++	option.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
++
++	inode_unlock(inode);
++
++	if (copy_to_user((struct f2fs_comp_option __user *)arg, &option,
++				sizeof(option)))
++		return -EFAULT;
++
++	return 0;
++}
++
+ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ {
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
+@@ -4024,6 +4051,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+ 		return f2fs_reserve_compress_blocks(filp, arg);
+ 	case F2FS_IOC_SEC_TRIM_FILE:
+ 		return f2fs_sec_trim_file(filp, arg);
++	case F2FS_IOC_GET_COMPRESS_OPTION:
++		return f2fs_ioc_get_compress_option(filp, arg);
+ 	default:
+ 		return -ENOTTY;
+ 	}
+@@ -4194,6 +4223,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
+ 	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
+ 	case F2FS_IOC_SEC_TRIM_FILE:
++	case F2FS_IOC_GET_COMPRESS_OPTION:
+ 		break;
+ 	default:
+ 		return -ENOIOCTLCMD;
+-- 
+2.28.0.1011.ga647a8990f-goog
 
-Ok my bad.  We have customers who care very much about restricting access to
-the PMEM pages to prevent bugs in the kernel from causing permanent damage to
-their data/file systems.  I'll reword the cover letter better.
-
-> 
-> For a future patch-set, I'd like to see you just introduce the new
-> API.  Then you can optimise the Intel implementation of it afterwards.
-> Those patch-sets have entirely different reviewers.
-
-I considered doing this.  But this seemed more logical because the feature is
-being driven by PMEM which is behind the kmap interface not by the users of the
-API.
-
-I can introduce a patch set with a kmap_thread() call which does nothing if
-that is more palatable but it seems wrong to me to do so.
-
-Ira
 
 
 _______________________________________________
