@@ -2,74 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B46C28D605
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Oct 2020 22:54:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E346028D810
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Oct 2020 03:40:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kSRJ1-0000cP-B0; Tue, 13 Oct 2020 20:53:59 +0000
+	id 1kSVlr-00068s-AQ; Wed, 14 Oct 2020 01:40:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ira.weiny@intel.com>)
- id 1kSRIz-0000c9-Ob; Tue, 13 Oct 2020 20:53:57 +0000
+ (envelope-from <daeho43@gmail.com>) id 1kSVlp-000685-Aw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Oct 2020 01:40:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fZre2bRQ/7sOvrrsqK7aN8e64kZkXZGQhTB489eKB6c=; b=Fj6c8Ba/fHdV0xfkv43rbpnMd0
- cZYoDvqiAHgbfAubXgsAP9vWD5ZB6RQ5EpRJ09owM0D3FSiYVYKrSyYGEWkU5VNzvOE6aDLLh8isr
- 6cWcbaaLmkWrqKEg7dXh/Q3K4nwEfi8tciABQl27zTaP/LudzQ64oRJc77ioxVff5tbU=;
+ bh=nST+EHp6dPUeIzQMe4qF0Zs7iUx4bZTLvqvuYC7qQyE=; b=S0T8tuo2iaRNAaD3QkEmQ1oUCy
+ bs5bYgo9pUzK7UeGA913oL4vnw+S2qb2fHtJSQLEU5hNQJ0xCY6sc8H/ZMxHFa92EYuik5M+w78zt
+ MSy0umQNCxWYjnIc0Ze9/CityMUC+9r2FBuT+3Rmv2xxBphqRu21MyCcs7eDkuZwnbO8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fZre2bRQ/7sOvrrsqK7aN8e64kZkXZGQhTB489eKB6c=; b=Tk7BZxLR4h28nf/QxQ9YDxiAlw
- nVqgNk0MEFF4HxUDBVZ1CV3HudXSr+dNjcMucYuT1eaxZQ4rGQQOvq5DVm7UIHYKQQMeAmEUBquMK
- EY8KVpwShFsoxsgORuFsE4POSvqEuw4uECQWt6+d+OUMZPBTYmqCXLdquqdmkG9NYQPs=;
-Received: from mga18.intel.com ([134.134.136.126])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kSRIk-00DycU-6h; Tue, 13 Oct 2020 20:53:57 +0000
-IronPort-SDR: N1xgiQ0SctgH10cYFMls7qh9mve7mI7VBSk4r4v+CEgTsRiH1mxaDsV6sQhRf9TkZUf8ZWDXs9
- SORTHL/NBnAw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9773"; a="153815882"
-X-IronPort-AV: E=Sophos;i="5.77,371,1596524400"; d="scan'208";a="153815882"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Oct 2020 13:53:36 -0700
-IronPort-SDR: 6pC5EU5QwoXbsJ9AhSALdpEnefHex0iyEFu7THvX1eaSFNd77CbWePaQQdxa3yUvYDZ6VBgRvg
- Vwn0OOQPMwwA==
-X-IronPort-AV: E=Sophos;i="5.77,371,1596524400"; d="scan'208";a="313946459"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Oct 2020 13:53:35 -0700
-Date: Tue, 13 Oct 2020 13:52:49 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20201013205248.GJ2046448@iweiny-DESK2.sc.intel.com>
-References: <20201009195033.3208459-1-ira.weiny@intel.com>
- <20201009195033.3208459-25-ira.weiny@intel.com>
- <20201013112544.GA5249@infradead.org>
+ bh=nST+EHp6dPUeIzQMe4qF0Zs7iUx4bZTLvqvuYC7qQyE=; b=KrMTJR1Rdi7wSCB/86VGy4B2Re
+ QOu7A1bHWpIVWAWZkFXKYI8X8Xuxs30Ae9s8GNEsGp31UxO2bYxYEieS/Xqebs84L/clKqSN9wlSb
+ steJCo8UbJSOIweBRwB75SIe5Hs60xWJPwi0PU4nCV2eCNurAG/KB8quklCO4P3/46TQ=;
+Received: from mail-lj1-f196.google.com ([209.85.208.196])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kSVlj-009JyE-Dy
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Oct 2020 01:40:01 +0000
+Received: by mail-lj1-f196.google.com with SMTP id x16so1457674ljh.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Oct 2020 18:39:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=nST+EHp6dPUeIzQMe4qF0Zs7iUx4bZTLvqvuYC7qQyE=;
+ b=rCGpZ855CTranpUFcirWGNIsI75YqvWIhNjARsOl9zN9XmEvfT2jT91KULVFecfhNQ
+ BJpGVeWZFF+l/zvXEDZV59cO5+WSsnKN4HugS41JNn0DN3C270FNKsK95lOTiHkf8aL1
+ vqbGlyHLaCwRtROTbdcQB3Ju8BSfm4e54DOSijnhGiN8tpFBiFxKIQlPPbhlhYwXbkWS
+ nAlUn+pJuQKvd09hS9QX0Y/FogU+3mGZOiQS6tAIQYDNh5lFCycllMSj1FrJPJD/zSCk
+ j2tVkm5WpunxDupSCJyrmHR5ovW8zbfnPf+VJ3NTAvIdsNfq1XJvt83/d4bf0FMB7RWd
+ /JnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=nST+EHp6dPUeIzQMe4qF0Zs7iUx4bZTLvqvuYC7qQyE=;
+ b=QpwfE+p+sNlGMAFmEh3RpnDKgNzBkPpI03Hs8DQh2KA3mIpHWGoB/upDpwzdQ7C6Gi
+ Ws4JjymqcWgBKdaR35BMt7gXUOM2YqMgbPe3TcbfZpaIxXu1r3zpWvVJjMdzjFAHSOs9
+ eQTVlCOkeJ4c0z/qmTSKmB0qKOmDZhqNeawLGiK9LzpxF5xzRw8iMTXozsvCFnksNxwU
+ cEbifGaM9a1FTdbaF0Gtd04yQgAFO99vzpC243vLeBiddhjB3/N2Y85krpM96/sm8UsV
+ kEPHox9s4EStwJBQfwN899uqY43O1VgWE6lsjXtE1V26VbeYiErsPmiYQfGFPB3UKCGz
+ SJAg==
+X-Gm-Message-State: AOAM530i7tz2BXkjeQ6kduzk6NxAo6/jKXdoF4h3NccZ1kc3NpPVNuOH
+ 0Nzo7BwiUuk0LkG80NvRCb3ul8RzS1eT1ppjN+9E2ixFJP0=
+X-Google-Smtp-Source: ABdhPJwaNNbSZxzioyJbjjgd2dSxq6cBGclMu8gyNcLMFIpJxFZFgY03rPUPfLfAtEaGzQTiAzksbCB1CPY7KsuQALU=
+X-Received: by 2002:a2e:45d6:: with SMTP id s205mr856725lja.333.1602639581643; 
+ Tue, 13 Oct 2020 18:39:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201013112544.GA5249@infradead.org>
-User-Agent: Mutt/1.11.1 (2018-12-01)
-X-Spam-Score: 0.0 (/)
+References: <20201013022429.454161-1-daeho43@gmail.com>
+ <20201013061349.GD1062@sol.localdomain>
+In-Reply-To: <20201013061349.GD1062@sol.localdomain>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Wed, 14 Oct 2020 10:39:30 +0900
+Message-ID: <CACOAw_wZ7=cThwsXL+Yd+r26QdXaUoa-QQ6XLDTeqixdMWA=2g@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.208.196 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.196 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kSRIk-00DycU-6h
-Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 24/58] fs/freevxfs: Utilize new
- kmap_thread()
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kSVlj-009JyE-Dy
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: add F2FS_IOC_GET_COMPRESS_OPTION
+ ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,63 +106,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-kselftest@vger.kernel.org, samba-technical@lists.samba.org,
- Thomas Gleixner <tglx@linutronix.de>, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- ceph-devel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- io-uring@vger.kernel.org, cluster-devel@redhat.com,
- Ingo Molnar <mingo@redhat.com>, intel-wired-lan@lists.osuosl.org,
- xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
- Fenghua Yu <fenghua.yu@intel.com>, linux-afs@lists.infradead.org,
- linux-um@lists.infradead.org, intel-gfx@lists.freedesktop.org,
- ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
- Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-cachefs@redhat.com,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- netdev@vger.kernel.org, kexec@lists.infradead.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Oct 13, 2020 at 12:25:44PM +0100, Christoph Hellwig wrote:
-> > -	kaddr = kmap(pp);
-> > +	kaddr = kmap_thread(pp);
-> >  	memcpy(kaddr, vip->vii_immed.vi_immed + offset, PAGE_SIZE);
-> > -	kunmap(pp);
-> > +	kunmap_thread(pp);
-> 
-> You only Cced me on this particular patch, which means I have absolutely
-> no idea what kmap_thread and kunmap_thread actually do, and thus can't
-> provide an informed review.
-
-Sorry the list was so big I struggled with who to CC and on which patches.
-
-> 
-> That being said I think your life would be a lot easier if you add
-> helpers for the above code sequence and its counterpart that copies
-> to a potential hughmem page first, as that hides the implementation
-> details from most users.
-
-Matthew Wilcox and Al Viro have suggested similar ideas.
-
-https://lore.kernel.org/lkml/20201013205012.GI2046448@iweiny-DESK2.sc.intel.com/
-
-Ira
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+UmFuZHksCkknbGwgdGFsayB3aXRoIEYyRlMgbWFpbnRhaW5lcnMgYWJvdXQgdGhpcy4KCkVyaWMs
+ClN1cmUsIEknbGwgYWRkIGl0IGluIHRoZSBjb21taXQgbWVzc2FnZS4KCjIwMjDrhYQgMTDsm5Qg
+MTPsnbwgKO2ZlCkg7Jik7ZuEIDM6MTMsIEVyaWMgQmlnZ2VycyA8ZWJpZ2dlcnNAa2VybmVsLm9y
+Zz7ri5jsnbQg7J6R7ISxOgo+Cj4gT24gVHVlLCBPY3QgMTMsIDIwMjAgYXQgMTE6MjQ6MjhBTSAr
+MDkwMCwgRGFlaG8gSmVvbmcgd3JvdGU6Cj4gPiBGcm9tOiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9u
+Z0Bnb29nbGUuY29tPgo+ID4KPiA+IEFkZGVkIGEgbmV3IEYyRlNfSU9DX0dFVF9DT01QUkVTU19P
+UFRJT04gaW9jdGwgdG8gZ2V0IGZpbGUgY29tcHJlc3Npb24KPiA+IG9wdGlvbiBvZiBhIGZpbGUu
+Cj4gPgo+Cj4gRm9yIG5ldyBpb2N0bHMgcGxlYXNlIG1lbnRpb24gdGhlIGRvY3VtZW50YXRpb24s
+IHRlc3RzLCBhbmQgdXNlIGNhc2VzLgo+Cj4gLSBFcmljCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QK
+TGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
