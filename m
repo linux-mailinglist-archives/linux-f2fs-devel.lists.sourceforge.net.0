@@ -2,102 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F400528FC64
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Oct 2020 04:24:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BFFF28FD95
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Oct 2020 07:15:30 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kTFQA-0006Uc-Q2; Fri, 16 Oct 2020 02:24:42 +0000
+	id 1kTI5O-0005Ge-93; Fri, 16 Oct 2020 05:15:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kTFQ9-0006UK-BT
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Oct 2020 02:24:41 +0000
+ (envelope-from <daeho43@gmail.com>) id 1kTI5M-0005GN-E6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Oct 2020 05:15:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tHQr2iuUUuKS6ZqLQFzBOpeZW+ePtyM/Tpt0/nOhWSg=; b=kzgWMhiuuVhHWBzI+VONl05Mio
- 1B6teolny7+sUp7IzUvPZ4yVv/lsHU8cf611Mclmf4A7QdjTVyZ7pkrkI3q6h+gVmzZU0aqBy7UzX
- d4PXx+9EXsi4MCgKJedCmB+1uyRIDwvnCg/hSCSDCPXi0SfPmc51L4yoX2m7s4rUIslg=;
+ bh=pPRKGwCWlhzW2fZpjziEJb0M3iHjtjmgnX8F6uX861E=; b=WgDceYal6qzLl48adljNNXnDCE
+ 6cCl699OetmpowgcVyf7uYhy5Z2QjFYyaUALAnXIeYwYJjLbwDS7FjhxxjbBAas3t0ArvV7lnBul2
+ L8dyn4lfQT1Z3GFXIrMm9jqQQehmntezllPusuGLoOolwEqHpUmde1KGPHcCLmjFErJs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tHQr2iuUUuKS6ZqLQFzBOpeZW+ePtyM/Tpt0/nOhWSg=; b=eXnqs9A8jof9k4UjYxyEGcSjiH
- IB4/NexUwM52riIRzqbSugfao5Si1LkpIqHGF/j8IJzwDZJ+30XiBBG0BDnESxa7ilARGt0MayDNz
- ZKGsBYv7A6viZ/CaYkCoa2g5YxRwXSasMe9MBc02med34Yj1SF83au/G3mRNFOzj9r0s=;
-Received: from mail-lj1-f193.google.com ([209.85.208.193])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=pPRKGwCWlhzW2fZpjziEJb0M3iHjtjmgnX8F6uX861E=; b=k
+ VAzc61VBw0wfMGFZ4wRPOhmOQWi/kxqj4vu+yas/FgU+bhrG/IQYKj1EaM7qkgcv3nHiJaEoGLLTG
+ OvqsC09VJjruYTh/hcNGT6BTuPo5KeMiDnXL/ZmDOrtLzrlXCQOWmNcTGckEOoWVmxppNtBidAqDP
+ zMAQ+QXULozS8fTA=;
+Received: from mail-pf1-f193.google.com ([209.85.210.193])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kTFPz-00HJb7-D5
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Oct 2020 02:24:41 +0000
-Received: by mail-lj1-f193.google.com with SMTP id x16so871178ljh.2
+ id 1kTI5D-00HRPh-4y
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Oct 2020 05:15:24 +0000
+Received: by mail-pf1-f193.google.com with SMTP id b26so806407pff.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 15 Oct 2020 19:24:31 -0700 (PDT)
+ Thu, 15 Oct 2020 22:15:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=tHQr2iuUUuKS6ZqLQFzBOpeZW+ePtyM/Tpt0/nOhWSg=;
- b=hPEuUDwLiIvi9stOqZSvKWqYrVJlDOmIRwXHdFp4t7OkJdBIpaw5LeV5s3oY7eiDFF
- d9BgKOjbsQRpTIHYAFjrhSvdSZnjFmju+QpnSDQ9Ygn0golCdMoQtL9YdYWAbcX/NIAH
- u+ziV6ohy7T8e47F5s1dGBcZxHQG54pqiYAn33ytUj5jHq4mF4UCz9GMb41bAUGkrP5D
- q8vZodnJYSJe1lB4i02B6uMPpsWbo9C6huV7wfBAHCL9zsc3JaRKuyN0vYY9VFqM6IL2
- LQYYo28x6y1n4sZjn8o/60OsQd5zflEafkDampFvVXppdK18F2jE2Rx4AvfMBZI6edBT
- Jr9g==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=pPRKGwCWlhzW2fZpjziEJb0M3iHjtjmgnX8F6uX861E=;
+ b=HyQm0F1Ds6YoQolTS544JgaLlzxxYxEJVA0HZFcTVEa0eKtX8IU2WfIKowIIlGlp80
+ jJD9su0lBNh7fhLAY6BbMfyVwJU7egk6MdA4xhSiH0oyD3325wjY2VWzJwBuIb+tmVSb
+ NVyHEx4eLTrfJ2+/P3klgnjbhwKdysoSnYyhJnL1Dvth5MiYz1RL7QZDwXzRB0hmYe71
+ x46P3b0bxBjoeEXQs8tzgK+NE45chbib18jZIbBP2pzgyt+8lpDTI3a2MicJxrn+QA6b
+ elUB4ZgQCym2YYWYlmWW8WEqOWfyO0IDjYPb8ZO+xYoGQ41lLTwlE8bhmxfsYr5bmZNd
+ f/fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=tHQr2iuUUuKS6ZqLQFzBOpeZW+ePtyM/Tpt0/nOhWSg=;
- b=ThEKfvWKu/Kgrg1U5j6gCIteuciWNEqEerpfbH668ArmZahrmuzZaB5LnvBEkQVYvw
- kRtc/T9grtA1CmbfRgHgRmz3bC3t2v9XDbhkt6DgXjyqQrLtmYDb1BcK17ibwRtRMpG5
- pA61ejLp6ZHG4S9vT2TAsPVFK9+0pDPzUOHzU3DzP2ZiszvKQqu0UjS8o55LltejiVV1
- 9S8WBEPq1ftgxubMHE18PLqoECnNDKQfvoBQ7l3wQlBYHCiZ8evgk+At8/jNTXXs9hTP
- pKU504tJwMNIPPUnvdX8l8a/bdSWdcDimmXz6KUjbwcHOGlaKLxP8hJFoLZkpdQKgEiR
- 53tg==
-X-Gm-Message-State: AOAM530Ebe1i5dV9Rvtv0QBJRPT8UuxE8Aa4qcJJPMj1Kc2CMFaVGKXA
- CTWxERIUL7O3wH318mwCSxpts10QaukdMxUuSTY=
-X-Google-Smtp-Source: ABdhPJwDPLOrvRnXPi+NPgbt826KelE2x5kzV7+p59dS7vXsDBw3/HHPgHo3+3uzuQZnvtLipwyqV4PzeU/vCqDb+vw=
-X-Received: by 2002:a2e:584e:: with SMTP id x14mr518341ljd.335.1602815057503; 
- Thu, 15 Oct 2020 19:24:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201013022429.454161-1-daeho43@gmail.com>
- <20201013022429.454161-2-daeho43@gmail.com>
- <20201013061150.GC1062@sol.localdomain>
- <CACOAw_y31yAu=AGAEqvyo2Ankt-ux80E6g6m_sWnz6LyUgBXSg@mail.gmail.com>
- <20201015040441.GA834@sol.localdomain>
-In-Reply-To: <20201015040441.GA834@sol.localdomain>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=pPRKGwCWlhzW2fZpjziEJb0M3iHjtjmgnX8F6uX861E=;
+ b=UH8a/K7awIHXCwH/OZmUe2JYyM+PR3IejBzcFH1BRRMKDJN1XFrou4y+5OvfPi0c1Z
+ qfLKojwKLNnyXR4pX7xaWGRxx+vSqRXDJu+yNsf5h+IGnDkC52r2v0vmo4kWBuz3p73m
+ Qoav3jiJUI2Ypu6ne9fKm5VQEbroJ3iIHpTlg4U/RpdFWQ2BQbt4JTNHK8oEC5Cb5CDQ
+ B/LgxGW3H0afqj/jxR/sUqLyTZ98ZHuNBAWzVixRV8OOBSFiV7M9tOzPS7rQ/W/K58Ic
+ bD9P0780SJxKyQ/cOqjt1NCdSeiTSOf3ha+LXPTXe0H6SdJfdXNiNMhdKroB+TYDRBsE
+ SVuw==
+X-Gm-Message-State: AOAM532oaMStMk66K8CRwLUPkUId2QBsF6hJycL6WohVpuWVbXeB760u
+ ak7QrhNoK7OrEt5JKyzL6IWyES+osKs=
+X-Google-Smtp-Source: ABdhPJzUutEPt92K6TaLg/1fFgd8kxj4nhUPYUPqPgwM9EbegeLWlstMp7eXArbq5ZNTTFQkLlSvxw==
+X-Received: by 2002:a62:5215:0:b029:156:6a80:a257 with SMTP id
+ g21-20020a6252150000b02901566a80a257mr2003516pfb.63.1602825302319; 
+ Thu, 15 Oct 2020 22:15:02 -0700 (PDT)
+Received: from daehojeong1.seo.corp.google.com
+ ([2401:fa00:d:11:a6ae:11ff:fe18:6ce2])
+ by smtp.gmail.com with ESMTPSA id m3sm1139218pjv.52.2020.10.15.22.15.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Oct 2020 22:15:01 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
-Date: Fri, 16 Oct 2020 11:24:06 +0900
-Message-ID: <CACOAw_wNWw2bcZy5kg0hoo1GQhrst6bEe87Dp4Q_uR+p7ZBkyA@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: 0.1 (/)
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 16 Oct 2020 14:14:55 +0900
+Message-Id: <20201016051455.1913795-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.29.0.rc1.297.gfa9743e501-goog
+MIME-Version: 1.0
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.193 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.193 listed in wl.mailspike.net]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (daeho43[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.193 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.193 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kTFPz-00HJb7-D5
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: add F2FS_IOC_SET_COMPRESS_OPTION
- ioctl
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kTI5D-00HRPh-4y
+Subject: [f2fs-dev] [PATCH] f2fs: add compr_inode and compr_blocks sysfs
+ nodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,70 +112,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-PiBtbnRfd2FudF93cml0ZV9maWxlKCkgY2hlY2tzIGZvciB3cml0ZSBwZXJtaXNzaW9uIHRvIHRo
-ZSBtb3VudCwgbm90IHRvIHRoZSBmaWxlLgo+Cj4gSSB0aGluayB0aGlzIGlvY3RsIHdhbnRzIHdo
-YXQgZjJmc19zZWNfdHJpbV9maWxlKCkgZG9lczoKPgo+ICAgICAgICAgaWYgKCEoZmlscC0+Zl9t
-b2RlICYgRk1PREVfV1JJVEUpKQo+ICAgICAgICAgICAgICAgICByZXR1cm4gLUVCQURGOwo+Cj4g
-ICAgICAgICBmaWxlX3N0YXJ0X3dyaXRlKGZpbHApOwo+ICAgICAgICAgaW5vZGVfbG9jayhpbm9k
-ZSk7Cj4gICAgICAgICAuLi4KPiAgICAgICAgIGlub2RlX3VubG9jayhpbm9kZSk7Cj4gICAgICAg
-ICBmaWxlX2VuZF93cml0ZShmaWxwKTsKPgo+Cj4gQWZ0ZXIgYWxsIHlvdSBzaG91bGRuJ3QgYmUg
-YWJsZSB0byBjaGFuZ2UgdGhlIGNvbXByZXNzaW9uIG9wdGlvbnMgb2YgYSBmaWxlCj4gZ2l2ZW4g
-b25seSByZWFkIGFjY2VzcyB0byBpdCwgcmlnaHQ/CgpZZXAsIHRoaXMgbG9va3MgbW9yZSBhY2N1
-cmF0ZS4KCj4gV2VsbCwgYXMgSSBzYWlkLCBpX3dyaXRlY291bnQgPT0gMSBkb2Vzbid0IGd1YXJh
-bnRlZSB0aGF0IG90aGVyIHRocmVhZHMgYXJlbid0Cj4gbW1hcCdpbmcgb3Igd3JpdGluZyB0byB0
-aGUgZmlsZS4gIEl0IGp1c3QgZ3VhcmFudGVlcyB0aGF0IHRoZXJlIGFyZW4ndCBhbnkgb3RoZXIK
-PiB3cml0YWJsZSBmaWxlIGRlc2NyaXB0b3JzLiAgKEFjdHVhbGx5LCBmaWxlIGRlc2NyaXB0aW9u
-cy4pICBNdWx0aXBsZSB0aHJlYWRzIGNhbgo+IGJlIHVzaW5nIHRoZSBzYW1lIGZpbGUgZGVzY3Jp
-cHRvciAob3IgdGhlIHNhbWUgZmlsZSBkZXNjcmlwdGlvbikgY29uY3VycmVudGx5LgoKWWVwLCBJ
-IGFncmVlIHRoaXMgaXMgbm90IGEgcHJvcGVyIHdheS4gSSB0aGluayB3ZSBkb24ndCBuZWVkIHRo
-aXMKY2hlY2sgaGVyZSwgYmVjYXVzZQpjb21wcmVzcyByb3V0aW5lIGRvZXNuJ3QgY29tcHJlc3Mg
-YW55IGZpbGUgZGF0YSB3aGVuIGl0IGRldGVjdHMgdGhlCmZpbGUgaXMgbW1hcGVkCnVzaW5nIGYy
-ZnNfaXNfbW1hcF9maWxlKCkuCgpUaGFua3N+CgoKMjAyMOuFhCAxMOyblCAxNeydvCAo66qpKSDs
-mKTtm4QgMTowNCwgRXJpYyBCaWdnZXJzIDxlYmlnZ2Vyc0BrZXJuZWwub3JnPuuLmOydtCDsnpHs
-hLE6Cj4KPiBPbiBXZWQsIE9jdCAxNCwgMjAyMCBhdCAxMToyNzozMEFNICswOTAwLCBEYWVobyBK
-ZW9uZyB3cm90ZToKPiA+ID4gZjJmc19yZWFkb25seSgpIGlzIHJlZHVuZGFudCB3aXRoIG1udF93
-YW50X3dyaXRlX2ZpbGUoKS4KPiA+ID4KPiA+ID4gQWxzbywgc2hvdWxkbid0IHRoaXMgcmVxdWly
-ZSBhIHdyaXRhYmxlIGZpbGUgZGVzY3JpcHRvcj8gIEFzLWlzLCB0aGlzIGlvY3RsIGNhbgo+ID4g
-PiBiZSBjYWxsZWQgb24gYSBmaWxlIG93bmVkIGJ5IGFub3RoZXIgdXNlciwgYXMgbG9uZyBhcyB0
-aGUgY2FsbGVyIGhhcyByZWFkCj4gPiA+IGFjY2Vzcy4KPiA+ID4KPiA+ID4gTm90ZTogaWYgeW91
-IGNoYW5nZSB0aGlzIHRvIHJlcXVpcmUgYSB3cml0YWJsZSBmaWxlIGRlc2NyaXB0b3IsIHRoZW4K
-PiA+ID4gZjJmc19yZWFkb25seSgpLCBtbnRfd2FudF93cml0ZV9maWxlKCksIGFuZCBJU19JTU1V
-VEFCTEUoKSBhbGwgd291bGQgbm8gbG9uZ2VyCj4gPiA+IGJlIG5lZWRlZC4KPiA+Cj4gPiBJIGFn
-cmVlIHRoYXQgZjJmc19yZWFkb25seSgpIGlzIHJlZHVuZGFudC4KPiA+IEJ1dCwgc29ycnksIEkg
-ZG9uJ3QgZ2V0IHRoZSByZXN0LiBJIHRob3VnaHQgbW50X3dhbnRfd3JpdGVfZmlsZSgpIGlzIGEK
-PiA+IHdheSB0byBjaGVjayB3aGV0aGVyIHRoZSBjYWxsZXIgaGFzIGEgcHJvcGVyIHdyaXRlIHBl
-cm1pc3Npb24gb3Igbm90Lgo+ID4gSSB0aGluayBqdXN0IHVzaW5nIG1udF93YW50X3dyaXRlX2Zp
-bGUoKSBpcyBlbm91Z2ggZm9yIHRoaXMgaW9jdGwuIEFtCj4gPiBJIG1pc3Npbmcgc29tZXRoaW5n
-Pwo+Cj4gbW50X3dhbnRfd3JpdGVfZmlsZSgpIGNoZWNrcyBmb3Igd3JpdGUgcGVybWlzc2lvbiB0
-byB0aGUgbW91bnQsIG5vdCB0byB0aGUgZmlsZS4KPgo+IEkgdGhpbmsgdGhpcyBpb2N0bCB3YW50
-cyB3aGF0IGYyZnNfc2VjX3RyaW1fZmlsZSgpIGRvZXM6Cj4KPiAgICAgICAgIGlmICghKGZpbHAt
-PmZfbW9kZSAmIEZNT0RFX1dSSVRFKSkKPiAgICAgICAgICAgICAgICAgcmV0dXJuIC1FQkFERjsK
-Pgo+ICAgICAgICAgZmlsZV9zdGFydF93cml0ZShmaWxwKTsKPiAgICAgICAgIGlub2RlX2xvY2so
-aW5vZGUpOwo+ICAgICAgICAgLi4uCj4gICAgICAgICBpbm9kZV91bmxvY2soaW5vZGUpOwo+ICAg
-ICAgICAgZmlsZV9lbmRfd3JpdGUoZmlscCk7Cj4KPgo+IEFmdGVyIGFsbCB5b3Ugc2hvdWxkbid0
-IGJlIGFibGUgdG8gY2hhbmdlIHRoZSBjb21wcmVzc2lvbiBvcHRpb25zIG9mIGEgZmlsZQo+IGdp
-dmVuIG9ubHkgcmVhZCBhY2Nlc3MgdG8gaXQsIHJpZ2h0Pwo+Cj4gPiA+IEkgZG9uJ3QgdGhpbmsg
-dGhlIGNoZWNrIGZvciBpX3dyaXRlY291bnQgPT0gMSBhY2NvbXBsaXNoZXMgYW55dGhpbmcgYmVj
-YXVzZSBpdAo+ID4gPiBqdXN0IG1lYW5zIHRoZXJlIGFyZSBubyAqb3RoZXIqIHdyaXRhYmxlIGZp
-bGUgZGVzY3JpcHRvcnMuICBJdCBkb2Vzbid0IG1lYW4gdGhhdAo+ID4gPiBzb21lIG90aGVyIHRo
-cmVhZCBpc24ndCBjb25jdXJyZW50bHkgdHJ5aW5nIHRvIHdyaXRlIHRvIHRoaXMgc2FtZSBmaWxl
-Cj4gPiA+IGRlc2NyaXB0b3IuICBTbyB0aGUgbG9jayBuZWVkcyB0byBiZSBlbm91Z2guICBJcyBp
-dD8KPiA+Cj4gPiBUaGlzIGlzIHRvIGRldGVjdCBhbnkgcG9zc2liaWxpdHkgb2Ygb3RoZXIgdGhy
-ZWFkcyBtbWFwLWluZyBhbmQKPiA+IHdyaXRpbmcgdGhlIGZpbGUuCj4gPiBVc2luZyBvbmx5IGlu
-b2RlIGxvY2sgaXMgbm90IGVub3VnaCB0byBwcmV2ZW50IHRoZW0gZnJvbSBtYWtpbmcgZGlydHkg
-cGFnZXMuCj4KPiBXZWxsLCBhcyBJIHNhaWQsIGlfd3JpdGVjb3VudCA9PSAxIGRvZXNuJ3QgZ3Vh
-cmFudGVlIHRoYXQgb3RoZXIgdGhyZWFkcyBhcmVuJ3QKPiBtbWFwJ2luZyBvciB3cml0aW5nIHRv
-IHRoZSBmaWxlLiAgSXQganVzdCBndWFyYW50ZWVzIHRoYXQgdGhlcmUgYXJlbid0IGFueSBvdGhl
-cgo+IHdyaXRhYmxlIGZpbGUgZGVzY3JpcHRvcnMuICAoQWN0dWFsbHksIGZpbGUgZGVzY3JpcHRp
-b25zLikgIE11bHRpcGxlIHRocmVhZHMgY2FuCj4gYmUgdXNpbmcgdGhlIHNhbWUgZmlsZSBkZXNj
-cmlwdG9yIChvciB0aGUgc2FtZSBmaWxlIGRlc2NyaXB0aW9uKSBjb25jdXJyZW50bHkuCj4KPiAt
-IEVyaWMKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
-aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
-ZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9s
-aW51eC1mMmZzLWRldmVsCg==
+From: Daeho Jeong <daehojeong@google.com>
+
+Added compr_inode to show compressed inode count and compr_blocks to
+show compressed block count in sysfs.
+
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 10 ++++++++++
+ fs/f2fs/sysfs.c                         | 17 +++++++++++++++++
+ 2 files changed, 27 insertions(+)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 834d0becae6d..a01c26484c69 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -350,3 +350,13 @@ Date:		April 2020
+ Contact:	"Daeho Jeong" <daehojeong@google.com>
+ Description:	Give a way to change iostat_period time. 3secs by default.
+ 		The new iostat trace gives stats gap given the period.
++
++What:		/sys/fs/f2fs/<disk>/compr_inode
++Date:		October 2020
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show compressed inode count
++
++What:		/sys/fs/f2fs/<disk>/compr_blocks
++Date:		October 2020
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show compressed block count
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 94c98e412aa1..7139a29a00d3 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -223,6 +223,19 @@ static ssize_t avg_vblocks_show(struct f2fs_attr *a,
+ 	f2fs_update_sit_info(sbi);
+ 	return sprintf(buf, "%llu\n", (unsigned long long)(si->avg_vblocks));
+ }
++
++static ssize_t compr_inode_show(struct f2fs_attr *a,
++				struct f2fs_sb_info *sbi, char *buf)
++{
++	return sprintf(buf, "%u\n", atomic_read(&sbi->compr_inode));
++}
++
++static ssize_t compr_blocks_show(struct f2fs_attr *a,
++				struct f2fs_sb_info *sbi, char *buf)
++{
++	return sprintf(buf, "%llu\n", atomic64_read(&sbi->compr_blocks));
++}
++
+ #endif
+ 
+ static ssize_t main_blkaddr_show(struct f2fs_attr *a,
+@@ -591,6 +604,8 @@ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_background_calls, bg_gc);
+ F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+ F2FS_GENERAL_RO_ATTR(moved_blocks_foreground);
+ F2FS_GENERAL_RO_ATTR(avg_vblocks);
++F2FS_GENERAL_RO_ATTR(compr_inode);
++F2FS_GENERAL_RO_ATTR(compr_blocks);
+ #endif
+ 
+ #ifdef CONFIG_FS_ENCRYPTION
+@@ -675,6 +690,8 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(moved_blocks_foreground),
+ 	ATTR_LIST(moved_blocks_background),
+ 	ATTR_LIST(avg_vblocks),
++	ATTR_LIST(compr_inode),
++	ATTR_LIST(compr_blocks),
+ #endif
+ 	NULL,
+ };
+-- 
+2.29.0.rc1.297.gfa9743e501-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
