@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B86C294784
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Oct 2020 06:52:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CF71294787
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Oct 2020 06:53:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kV679-0005zT-Jb; Wed, 21 Oct 2020 04:52:43 +0000
+	id 1kV67c-0008EC-OV; Wed, 21 Oct 2020 04:53:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kV677-0005z5-D7
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Oct 2020 04:52:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kV67b-0008E1-9I
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Oct 2020 04:53:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=agHTVvWNaKczg4axC2mU1BzPKPXMplVP4siwW0qHZkM=; b=dF6LrjWmfKdQN64x5P5sx33uLJ
- 3XyfKUC1BGyOgf0fWtEJMlz48hXZmfdrZpPKbTvUrpCRMn7wIiRAN2s1TggAB9X+OOoo7Hc1PEfJ2
- wnIhVt5uWwko3TlfplOe7hDikSxCt5FsM8fwl/DaiBKVAZOPu2AjJCGiLTd29+IEd9Aw=;
+ bh=QzVy02rz/R8AWIaTwnjHayt1MdHuFzNS5Poi8ZMTdmc=; b=gJ6IMG35NPGqk9d8JnjthJ95Y/
+ GWjHG9uNNQYTqlQibmkYPTH1FdixdqHlrh5gM816nY6ibTuZG9GIXJWA/y0wQHbbobEOD16d6cnhJ
+ L4A8bTkH6q7fToSvGeZ4lDVCx97tghGpL76kgm37siYRdjTgOrYelF+JC1YMjDYpjq2c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=agHTVvWNaKczg4axC2mU1BzPKPXMplVP4siwW0qHZkM=; b=biSVk0/J1o86/wSdH++S80QFDY
- nM2yEk0YAvxMvjsl1J4tZrJE0YvrWEixqavfzPKXlLhpRfx4bvBKs+XOP6W1VfgdQ1JqAK4YsK+PB
- Xo5Icmot+kmeq2DQr9F7UWZ32xTT/QJ3dr3tTQrVf/A6iUaGy3uTCXJaauINUjXvhQqo=;
+ bh=QzVy02rz/R8AWIaTwnjHayt1MdHuFzNS5Poi8ZMTdmc=; b=G4O0RAWaXJcGRHubwnJyU2xs6K
+ 5Otlmt5qUsICNIHOYGk3SxOKIigVGu8K337UYi/kGdjPyNvIbvgeNu7933qhrMHwBqhU1OjY7XSoR
+ lAYqVQWlvLqtendlfuRlP4IE+wIP6UE12LulHPiDmfEI5juzilSLw79fDXXRxAj4AMsQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kV66s-000f5b-LQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Oct 2020 04:52:41 +0000
+ id 1kV67T-006ZNh-BP
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 21 Oct 2020 04:53:11 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C788D22200;
- Wed, 21 Oct 2020 04:52:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id A664C207FF;
+ Wed, 21 Oct 2020 04:52:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603255933;
- bh=Uxranx5I3OGhkPHJfsPFLNiWaCpoSwTMv15+EX3IyVg=;
+ s=default; t=1603255977;
+ bh=UraehopB91mJB0sVQ3c9WR4rOSBImtDbOcY3TERhXzY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=2RG30yAT64+MikDZWgfeUXZeTbDEo6N56hFWAK5sLWxFvpVhyL8Dpgf9GRL2ASc+s
- w2WVwgIIXqVuZ0qTH3KxBqDN2HkWvQdmmKcg81cfrjS2RqLJ0KtmwXTMnv/kdeYavk
- nzVMccfgvlCvP2FEQd/2e7k7pn0RdOHv6FMUE+y8=
-Date: Tue, 20 Oct 2020 21:52:13 -0700
+ b=jzl/5GKkO/PhDhfyZu328++s/nVgy36QFKK22ppo1rhvoc1zgHe/EnBUycMrPUDAS
+ i3Zg8DC1oamM9qGPQlZWVqiQwOD8+fbK7fdU6vHAcqnzJ+/U2lctcou2YzNghVDlBA
+ qGWKjMHG494eqO6sf5GjzZWFgxt7GYtY3UFUV34I=
+Date: Tue, 20 Oct 2020 21:52:57 -0700
 From: jaegeuk@kernel.org
 To: Can Guo <cang@codeaurora.org>
-Message-ID: <20201021045213.GB3004521@google.com>
+Message-ID: <20201021045257.GC3004521@google.com>
 References: <20201020195258.2005605-1-jaegeuk@kernel.org>
- <20201020195258.2005605-6-jaegeuk@kernel.org>
- <2a8ecc4185b3a5411077f4e3fc66000f@codeaurora.org>
+ <20201020195258.2005605-4-jaegeuk@kernel.org>
+ <d6e794548891f81a579cda138cd1529e@codeaurora.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <2a8ecc4185b3a5411077f4e3fc66000f@codeaurora.org>
+In-Reply-To: <d6e794548891f81a579cda138cd1529e@codeaurora.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -74,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kV66s-000f5b-LQ
-Subject: Re: [f2fs-dev] [PATCH v2 5/5] scsi: ufs: fix clkgating on/off
- correctly
+X-Headers-End: 1kV67T-006ZNh-BP
+Subject: Re: [f2fs-dev] [PATCH v2 3/5] scsi: ufs: use WQ_HIGHPRI for gating
+ work
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,77 +97,46 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 10/21, Can Guo wrote:
 > On 2020-10-21 03:52, Jaegeuk Kim wrote:
-> > The below call stack prevents clk_gating at every IO completion.
-> > We can remove the condition, ufshcd_any_tag_in_use(), since
-> > clkgating_work
-> > will check it again.
+> > From: Jaegeuk Kim <jaegeuk@google.com>
+> > 
+> > Must have WQ_MEM_RECLAIM
+> > ``WQ_MEM_RECLAIM``
+> >   All wq which might be used in the memory reclaim paths **MUST**
+> >   have this flag set.  The wq is guaranteed to have at least one
+> >   execution context regardless of memory pressure.
 > > 
 > 
-> I think checking ufshcd_any_tag_in_use() in either ufshcd_release() or
-> gate_work() can break UFS clk gating's functionality.
-> 
-> ufshcd_any_tag_in_use() was introduced to replace hba->lrb_in_use. However,
-> they are not exactly same - ufshcd_any_tag_in_use() returns true if any tag
-> assigned from block layer is still in use, but tags are released
-> asynchronously
-> (through block softirq), meaning it does not reflect the real occupation of
-> UFS host.
-> That is after UFS host finishes all tasks, ufshcd_any_tag_in_use() can still
-> return true.
-> 
-> This change only removes the check of ufshcd_any_tag_in_use() in
-> ufshcd_release(),
-> but having the check of it in gate_work() can still prevent gating from
-> happening.
-> The current change works for you maybe because the tags are release before
-> hba->clk_gating.delay_ms expires, but if hba->clk_gating.delay_ms is shorter
-> or
-> somehow block softirq is retarded, gate_work() may have chance to see
-> ufshcd_any_tag_in_use()
-> returns true. What do you think?
+> You misunderstood my point. I meant you need to give more info about why
+> we are adding WQ_HIGHPRI flag but not why WQ_MEM_RECLAIM must be there.
 
-I don't think this breaks clkgating, but fix the wrong condition check which
-prevented gate_work at all. As you mentioned, even if this schedules gate_work
-by racy conditions, gate_work will handle it as a last resort.
+Oh, I thought that WQ_HIGHPRI is telling everything tho.
 
 > 
 > Thanks,
 > 
 > Can Guo.
 > 
-> In __ufshcd_transfer_req_compl
-> Ihba->lrb_in_use is cleared immediately when UFS driver
-> finishes all tasks
-> 
-> > ufshcd_complete_requests(struct ufs_hba *hba)
-> >   ufshcd_transfer_req_compl()
-> >     __ufshcd_transfer_req_compl()
-> >       __ufshcd_release(hba)
-> >         if (ufshcd_any_tag_in_use() == 1)
-> >            return;
-> >   ufshcd_tmc_handler(hba);
-> >     blk_mq_tagset_busy_iter();
-> > 
 > > Cc: Alim Akhtar <alim.akhtar@samsung.com>
 > > Cc: Avri Altman <avri.altman@wdc.com>
 > > Cc: Can Guo <cang@codeaurora.org>
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
 > > ---
 > >  drivers/scsi/ufs/ufshcd.c | 2 +-
 > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > 
 > > diff --git a/drivers/scsi/ufs/ufshcd.c b/drivers/scsi/ufs/ufshcd.c
-> > index b5ca0effe636..cecbd4ace8b4 100644
+> > index feb10ebf7a35..0858c0b55eac 100644
 > > --- a/drivers/scsi/ufs/ufshcd.c
 > > +++ b/drivers/scsi/ufs/ufshcd.c
-> > @@ -1746,7 +1746,7 @@ static void __ufshcd_release(struct ufs_hba *hba)
+> > @@ -1867,7 +1867,7 @@ static void ufshcd_init_clk_gating(struct ufs_hba
+> > *hba)
+> >  	snprintf(wq_name, ARRAY_SIZE(wq_name), "ufs_clk_gating_%d",
+> >  		 hba->host->host_no);
+> >  	hba->clk_gating.clk_gating_workq = alloc_ordered_workqueue(wq_name,
+> > -							   WQ_MEM_RECLAIM);
+> > +					WQ_MEM_RECLAIM | WQ_HIGHPRI);
 > > 
-> >  	if (hba->clk_gating.active_reqs || hba->clk_gating.is_suspended ||
-> >  	    hba->ufshcd_state != UFSHCD_STATE_OPERATIONAL ||
-> > -	    ufshcd_any_tag_in_use(hba) || hba->outstanding_tasks ||
-> > +	    hba->outstanding_tasks ||
-> >  	    hba->active_uic_cmd || hba->uic_async_done)
-> >  		return;
+> >  	hba->clk_gating.is_enabled = true;
 
 
 _______________________________________________
