@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A4D3299B97
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:52:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A66AD299B9E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:52:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kXCHw-0000Ro-TN; Mon, 26 Oct 2020 23:52:32 +0000
+	id 1kXCI4-000496-Dx; Mon, 26 Oct 2020 23:52:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1kXCHv-0000Qu-3A
+ (envelope-from <sashal@kernel.org>) id 1kXCHv-00048g-39
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:52:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v0rGW9GjUzHcP9d2HMwFfukuAwitZTkYC7CF2ZTX86s=; b=HVG50AIKgRyJdn6/owoYkqJrBZ
- xb/hQeWpTtdImckf1zr5XhkD06jd//3PuoDLZzF2rSCAY3+4Er9p0yp/9KqlntZ8bGxOUDFQV38Tk
- WcXPivO41xF2n8ERSdCXM2IWOsxZYhnISgmvnoB1IV6lMAgK5X+PIgCY2QKAgpPLJ6/U=;
+ bh=UUmKT3pkzS5HGPCI4i7NiznTO+CWvAQcCeq9Qxe1GYQ=; b=iJAZC2RgR36AVdsnDa2FtGbRip
+ eVht70WxWEuALjZeeYMuio6gVeLW2TZwNrul8AIoSqMeNtubRA0oBvknShXeYFxlNyLoQVVFxYFt5
+ CoCZ/d6Ah2roGyMTzfe/0M2fh6ezgofgHez/5dC5C9gl6m31nLkT9Ez+4SiEehC3ztiY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=v0rGW9GjUzHcP9d2HMwFfukuAwitZTkYC7CF2ZTX86s=; b=EWbhv57egLVpmUPRi/YBlNL02L
- UFwatYpziwNfAKkQ/q5+JD7WAhk5HO/4fe07pVphIsWQW9C+Gsv7v0w9+LzWI8awsYfxwSw2BoT5W
- 9xvu7pRIVzY2UHVooX6B2/TKZBucrsK40KO4VQyrRtcN5dHNOdGH29nTac0DB5vGlBhI=;
+ bh=UUmKT3pkzS5HGPCI4i7NiznTO+CWvAQcCeq9Qxe1GYQ=; b=e6Ip0BMQRUFmdWL+AVwMcxdCZP
+ csegB60CfrfTFas9XVAXUkpueZAGK1Vf0afJAIXfBII1pejM3D6P87Dcpn1zy3Ta/wkRdF4xjXrrq
+ i6i93l1pe2HXCJN4jko5FR2uwCfezA3tTUCTtKo22P1JgOFioDIqmBD92MNDo328G6ok=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kXCHl-00Eu9H-OG
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:52:25 +0000
+ id 1kXCHm-00Eu9J-Q5
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:52:27 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B092C217A0;
- Mon, 26 Oct 2020 23:52:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BACA821D41;
+ Mon, 26 Oct 2020 23:52:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603756336;
- bh=9tZeHih8e7Uh4LwY8MPzkfHHfIefV9R/hNqCIllSfx0=;
+ s=default; t=1603756337;
+ bh=8Z9jchd33DQJs31NN60Fj74YhSBCJwiqF2Ue3VPMBb8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SvqDNmtDZ2ONNJTsdldX6NnxZHRUqICrlPseNLkXCEKyKbqcZHlgflrPDTCF4tGlB
- 7AkxanL/z7iZSqyuGdJdhZwk1pF9J8oQFW7qREaTtyve+o49D5rwO7R5giKz0P/y9e
- rErGH3thfr928Wg53m97+cW6jkGKCx7u1FcQMVOo=
+ b=H9Q+rlRd3n0Wu3AmlntvijCjCKSQaDt71RnlZsoZXZzPibiYZpiUigb15jfi5h+KR
+ ZvCuKph9Nz4nwXoAlOKJSacpXuz25BF02OROjAzDw5iDrdKzTQFm+wNKVTp8SKftbc
+ 0m65hd8lvhJZmNZqC3+CFCha7L7SNoBN0EmVz4B0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 26 Oct 2020 19:50:01 -0400
-Message-Id: <20201026235205.1023962-9-sashal@kernel.org>
+Date: Mon, 26 Oct 2020 19:50:02 -0400
+Message-Id: <20201026235205.1023962-10-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201026235205.1023962-1-sashal@kernel.org>
 References: <20201026235205.1023962-1-sashal@kernel.org>
@@ -72,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kXCHl-00Eu9H-OG
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.8 009/132] f2fs: do sanity check on
- zoned block device path
+X-Headers-End: 1kXCHm-00Eu9J-Q5
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.8 010/132] f2fs: fix uninit-value in
+ f2fs_lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,66 +86,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Sasha Levin <sashal@kernel.org>,
+ syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 07eb1d699452de04e9d389ff17fb8fc9e975d7bf ]
+[ Upstream commit 6d7ab88a98c1b7a47c228f8ffb4f44d631eaf284 ]
 
-sbi->devs would be initialized only if image enables multiple device
-feature or blkzoned feature, if blkzoned feature flag was set by fuzz
-in non-blkzoned device, we will suffer below panic:
+As syzbot reported:
 
-get_zone_idx fs/f2fs/segment.c:4892 [inline]
-f2fs_usable_zone_blks_in_seg fs/f2fs/segment.c:4943 [inline]
-f2fs_usable_blks_in_seg+0x39b/0xa00 fs/f2fs/segment.c:4999
 Call Trace:
- check_block_count+0x69/0x4e0 fs/f2fs/segment.h:704
- build_sit_entries fs/f2fs/segment.c:4403 [inline]
- f2fs_build_segment_manager+0x51da/0xa370 fs/f2fs/segment.c:5100
- f2fs_fill_super+0x3880/0x6ff0 fs/f2fs/super.c:3684
- mount_bdev+0x32e/0x3f0 fs/super.c:1417
- legacy_get_tree+0x105/0x220 fs/fs_context.c:592
- vfs_get_tree+0x89/0x2f0 fs/super.c:1547
- do_new_mount fs/namespace.c:2896 [inline]
- path_mount+0x12ae/0x1e70 fs/namespace.c:3216
- do_mount fs/namespace.c:3229 [inline]
- __do_sys_mount fs/namespace.c:3437 [inline]
- __se_sys_mount fs/namespace.c:3414 [inline]
- __x64_sys_mount+0x27f/0x300 fs/namespace.c:3414
- do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x21c/0x280 lib/dump_stack.c:118
+ kmsan_report+0xf7/0x1e0 mm/kmsan/kmsan_report.c:122
+ __msan_warning+0x58/0xa0 mm/kmsan/kmsan_instr.c:219
+ f2fs_lookup+0xe05/0x1a80 fs/f2fs/namei.c:503
+ lookup_open fs/namei.c:3082 [inline]
+ open_last_lookups fs/namei.c:3177 [inline]
+ path_openat+0x2729/0x6a90 fs/namei.c:3365
+ do_filp_open+0x2b8/0x710 fs/namei.c:3395
+ do_sys_openat2+0xa88/0x1140 fs/open.c:1168
+ do_sys_open fs/open.c:1184 [inline]
+ __do_compat_sys_openat fs/open.c:1242 [inline]
+ __se_compat_sys_openat+0x2a4/0x310 fs/open.c:1240
+ __ia32_compat_sys_openat+0x56/0x70 fs/open.c:1240
+ do_syscall_32_irqs_on arch/x86/entry/common.c:80 [inline]
+ __do_fast_syscall_32+0x129/0x180 arch/x86/entry/common.c:139
+ do_fast_syscall_32+0x6a/0xc0 arch/x86/entry/common.c:162
+ do_SYSENTER_32+0x73/0x90 arch/x86/entry/common.c:205
+ entry_SYSENTER_compat_after_hwframe+0x4d/0x5c
 
-Add sanity check to inconsistency on factors: blkzoned flag, device
-path and device character to avoid above panic.
+In f2fs_lookup(), @res_page could be used before being initialized,
+because in __f2fs_find_entry(), once F2FS_I(dir)->i_current_depth was
+been fuzzed to zero, then @res_page will never be initialized, causing
+this kmsan warning, relocating @res_page initialization place to fix
+this bug.
 
+Reported-by: syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/super.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/f2fs/dir.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 0deb839da0a03..28ab6cf26954a 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2782,6 +2782,12 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 					segment_count, dev_seg_count);
- 			return -EFSCORRUPTED;
- 		}
-+	} else {
-+		if (__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_BLKZONED) &&
-+					!bdev_is_zoned(sbi->sb->s_bdev)) {
-+			f2fs_info(sbi, "Zoned block device path is missing");
-+			return -EFSCORRUPTED;
-+		}
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index d35976785e8c5..961d41fb84a57 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -357,16 +357,15 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+ 	unsigned int max_depth;
+ 	unsigned int level;
+ 
++	*res_page = NULL;
++
+ 	if (f2fs_has_inline_dentry(dir)) {
+-		*res_page = NULL;
+ 		de = f2fs_find_in_inline_dir(dir, fname, res_page);
+ 		goto out;
  	}
  
- 	if (secs_per_zone > total_sections || !secs_per_zone) {
+-	if (npages == 0) {
+-		*res_page = NULL;
++	if (npages == 0)
+ 		goto out;
+-	}
+ 
+ 	max_depth = F2FS_I(dir)->i_current_depth;
+ 	if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
+@@ -377,7 +376,6 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+ 	}
+ 
+ 	for (level = 0; level < max_depth; level++) {
+-		*res_page = NULL;
+ 		de = find_in_level(dir, level, fname, res_page);
+ 		if (de || IS_ERR(*res_page))
+ 			break;
 -- 
 2.25.1
 
