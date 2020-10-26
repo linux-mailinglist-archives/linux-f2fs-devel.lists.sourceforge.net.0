@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8505B299A2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:06:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0383D299A67
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:27:32 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kXBZI-0007MN-3w; Mon, 26 Oct 2020 23:06:24 +0000
+	id 1kXBth-0008Vb-12; Mon, 26 Oct 2020 23:27:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kXBZG-0007ME-B3
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:06:22 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kXBtf-0008VU-A2
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:27:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U88gpj0RjfWZ+7UwQd8GENwEVkP3wpl6UeK7NjmYAtQ=; b=NwduMItsCIcG06dO5Jm4HP4Nc2
- +LGvQULzlOLsnoIQtXMwSCIb9yutUxJztmIy59ElvFUF4kOYRVGUR4MrIv4juhVFIW3um+hAOoX1P
- KvKBzp6s+wTNE5jNxal+4rgGa2tzAPHXL0T6htGTY2rhXN8u0uOu1mYNxvHpKpPrvlqQ=;
+ bh=8vfMmsVFUemh8lPXQF261JFlhfalPz+hbOSD8jGch8A=; b=ch+qq7S8rudfK6EkiSoeNbWe13
+ VbYu9L47LbHPmSPT8xYtIe676telivZoz+FihicaHIw4AiSIrpKbJjWW6qt9zkrsl0DuPVdXV5oMI
+ l55VZUJTQ02wj95hMe62uI15EKXNzQQPwV+f0HApETAnBn8BoGEpwcuiRlu/3I5DlEw4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=U88gpj0RjfWZ+7UwQd8GENwEVkP3wpl6UeK7NjmYAtQ=; b=Jkj6UbVXIRpHf/4+95WlszGeMz
- UI0smAjeb//5dNhrO0vdyP2+b2rm/mOMdcrWeN4bH4J0KLgwYOBVeS2vXHD86APIYiY4zwMgZLX1/
- zAJXjzjIHxEqJd6k5jhTTwhDuMIPBwGZvz6YwCl+MSHfbgOEN+s04rds7L9RvDpwJmzc=;
+ bh=8vfMmsVFUemh8lPXQF261JFlhfalPz+hbOSD8jGch8A=; b=Q2xTE0LRSWkZGgyqUjjaOnojUp
+ hO3r8VSgq7pCxtdRiLG13VPMbSAnJDeWlwBhGkcqP1Ib9gEf4lf9W7GzMgkSRxFdSbYi0DHsb/m85
+ W94YZVR2gAkYlsJjJuzDu1iYDja0qljJf9FoaFgQLH2Mt29ee7Zx36zXp9WtDmoMmM7E=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kXBZ8-00ErsE-Nd
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:06:22 +0000
+ id 1kXBtX-00EswE-Px
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:27:27 +0000
 Received: from gmail.com (unknown [104.132.1.76])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D50220708;
- Mon, 26 Oct 2020 23:05:57 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 37F7120809;
+ Mon, 26 Oct 2020 23:27:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603753557;
- bh=buPKfI0LODfxV6G8Mb2QH2W7D0RNdKWV1mnYWK+ZD4w=;
+ s=default; t=1603754834;
+ bh=7R6MsrFar+nmsUiiC6n6KOo/0FDbgQKAEj1UliSyDmw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aLNQE8/FKDRMdQzhaiUWlC52n2l8ThNOlkegMMRY42bQUEvvJ0hTKCP08XYrNdylM
- 0ftsXqtUj0lAvQpmVR+57fCNCeEsgEP7CqOb/PilPdVGmJNSSnz6irn+ca8Z9cEVDk
- S5SpcdaF0dOtnh0u5xXdRV2b3W1yC6eznWIoxRyg=
-Date: Mon, 26 Oct 2020 16:05:55 -0700
+ b=RqMbf+cjR7kx1wnbJkfENG701riA0xCpQYOaDs2AOvIcuZGMbXFTZWa0ASd/BTFjp
+ G2Jdy91akh+rfCm7qSr/U1JvBrR5PLTwTwLwy4Io1/ZkQQ0py8at5H4VdHyWeZRXDu
+ iHjdCgxdiWb9ckqiX76UUOwiPdPhJEmlrewOZ+E0=
+Date: Mon, 26 Oct 2020 16:27:12 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20201026230555.GB1947033@gmail.com>
+Message-ID: <20201026232712.GC1947033@gmail.com>
 References: <20201026041656.2785980-1-daeho43@gmail.com>
  <20201026190406.GL858@sol.localdomain>
  <CACOAw_xFijZOokM4R1XYKoFvRthk-ZfC+hNz0c-HqQuurjp87g@mail.gmail.com>
+ <20201026230555.GB1947033@gmail.com>
+ <CACOAw_wLE_om3YChs_jsBTORrOsp2M6SZ+t2arP9tHQeojsgKQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACOAw_xFijZOokM4R1XYKoFvRthk-ZfC+hNz0c-HqQuurjp87g@mail.gmail.com>
+In-Reply-To: <CACOAw_wLE_om3YChs_jsBTORrOsp2M6SZ+t2arP9tHQeojsgKQ@mail.gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,7 +72,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kXBZ8-00ErsE-Nd
+X-Headers-End: 1kXBtX-00EswE-Px
 Subject: Re: [f2fs-dev] [PATCH v3 1/2] f2fs: add
  F2FS_IOC_GET_COMPRESS_OPTION ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -90,17 +92,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Oct 27, 2020 at 08:02:18AM +0900, Daeho Jeong wrote:
-> I thought I gave the information about that in the commit message. Is
-> this not enough for you?
-> Actually, there is no space for F2FS ioctl documentation now. :(
+On Tue, Oct 27, 2020 at 08:18:44AM +0900, Daeho Jeong wrote:
+> I checked that. We seem to need to complement missing parts including
+> other ioctls in Documentation/filesystems/fscrypt.rst.
+> 
+> Thanks~
 > 
 
-The commit message doesn't really matter.  What I am asking for are actual
-documentation and tests.
-
-The fscrypt ioctls, for example, are all documented in
-Documentation/filesystems/fscrypt.rst, and they have tests in xfstests.
+Well, the f2fs-specific ioctls should probably be documented in
+Documentation/filesystems/f2fs.rst.
 
 - Eric
 
