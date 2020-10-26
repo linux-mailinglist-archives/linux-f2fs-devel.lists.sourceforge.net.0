@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1AD0299B1F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:49:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35C90299B73
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 00:51:35 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kXCFJ-00083d-OM; Mon, 26 Oct 2020 23:49:49 +0000
+	id 1kXCGz-0000JE-O3; Mon, 26 Oct 2020 23:51:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1kXCFF-00080N-7B
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:49:45 +0000
+ (envelope-from <sashal@kernel.org>) id 1kXCGx-0000Iv-RB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:51:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LVAIl3ygS9h1d4d8x7huFyn/Qq/o1De3Dlhwdm2zwjk=; b=ZwUHWjW52C0mtmfOLCioUuSuX7
- GDdRCpfFqu1AjNiaeP6DIbBqNStX1rcKCnOoZZy4abBRscCMEMw/cD42gBUBxkoR3SWAi30xvRQaK
- LbgD/0a+JuczX7eeav3IAQJTR3hinchr4cUAkkqMQnTh2eLzGqd/jUjdZBazAamLhMkI=;
+ bh=qHUdLXVErMbGelZOAuqWxxoRrWGEVMeU7Iw5vOUsBkc=; b=AVDszLR6epLLMevp821M8tn0gN
+ aKRv2AWgRAhVhILVYj7qJ7iG7yql0YQSDHLwstmDOafU8+t7sLAzQphEaaApHaGNobCRzUlCqv/eg
+ 2IxX/irLPNa94DT7l03K3jWJjoLURoX2hd3H7ZaX16fSeqbxjIdwx2bLZr6321wp3Rgc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LVAIl3ygS9h1d4d8x7huFyn/Qq/o1De3Dlhwdm2zwjk=; b=Ih5UwG9vT7hkq49TTGtO+JQPfy
- BjzVLlOPRtLqUmMjn2Co6D3GLOWU/xofpOJEepYvb21e7MJ/umnhKQuqv7j1I8kc/BwTgOXmnwstm
- UpymS0bmrZAC/bn51HPwhZReiHi3ZglYM0qfdCdEGVLkSFhe30f6OVCyTKWmgpVIDUwY=;
+ bh=qHUdLXVErMbGelZOAuqWxxoRrWGEVMeU7Iw5vOUsBkc=; b=PpoWecFmGZlFOW0or2mp9KV6Rw
+ jyt0pAoj4wqRiAooJOxJs+LSNba0j5GSedNq5p6gSkop5Qhw7TDn3Dkw5fV1ID2Ikw2mJxexAm+I2
+ KCtqugmsqKBNw1DITUzyTydgKpsXyzKCIhMZYhVhKZ6jbBWrYbrmQ9KvhbyHQ9Z0PVSU=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kXCFA-00EtzY-8l
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:49:45 +0000
+ id 1kXCGm-008C5o-0q
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 23:51:31 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D9F4721655;
- Mon, 26 Oct 2020 23:49:26 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id EB4FD221F7;
+ Mon, 26 Oct 2020 23:51:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603756167;
- bh=zA3TN2s9EocaOBBFvSSP2eqBB7DlwkuhEswl9PDTfiY=;
+ s=default; t=1603756274;
+ bh=DriNn/C243SA7vKnjcnOtZOi+39F3FDPSQWb2qe5UWE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=woOELujzToHTz2/GCKhzpIzsfEcT2vyl94Z018bjiNBygFJcwhACiWlweIcXdJugb
- JMktW4qymaNoKVGLK2JnpBzsrb1K+fFnRKh3lTalaX8LAYXwUYaYEOc9P34JKdIgn5
- dRBVZS9jFR0KuFOHrBdGCMsn2UuNWCU074IUaI8I=
+ b=k7QMhEoIUJL9ZBVBOGKlsdVTngbqoblQAJ2exMar1dYTc9obtWHS4cWxngSr0Vli5
+ AJy80mkRJGzRBCWAgVRf47b1tD+y2w6Usjpe18xbPZZatdAhYVZjFyLeSUAHdXWenh
+ fZOQWUL126IO8TlmVGuNFbvoci6msEzcAxc0gy/0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 26 Oct 2020 19:46:55 -0400
-Message-Id: <20201026234905.1022767-17-sashal@kernel.org>
+Date: Mon, 26 Oct 2020 19:48:24 -0400
+Message-Id: <20201026234905.1022767-106-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201026234905.1022767-1-sashal@kernel.org>
 References: <20201026234905.1022767-1-sashal@kernel.org>
@@ -72,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kXCFA-00EtzY-8l
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.9 017/147] f2fs: handle errors of
- f2fs_get_meta_page_nofail
+X-Headers-End: 1kXCGm-008C5o-0q
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.9 106/147] f2fs: fix to set
+ SBI_NEED_FSCK flag for inconsistent inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,136 +86,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot+ee250ac8137be41d7b13@syzkaller.appspotmail.com,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Sasha Levin <sashal@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 86f33603f8c51537265ff7ac0320638fd2cbdb1b ]
+[ Upstream commit d662fad143c0470ad7f46ea7b02da539f613d7d7 ]
 
-First problem is we hit BUG_ON() in f2fs_get_sum_page given EIO on
-f2fs_get_meta_page_nofail().
+If compressed inode has inconsistent fields on i_compress_algorithm,
+i_compr_blocks and i_log_cluster_size, we missed to set SBI_NEED_FSCK
+to notice fsck to repair the inode, fix it.
 
-Quick fix was not to give any error with infinite loop, but syzbot caught
-a case where it goes to that loop from fuzzed image. In turned out we abused
-f2fs_get_meta_page_nofail() like in the below call stack.
-
-- f2fs_fill_super
- - f2fs_build_segment_manager
-  - build_sit_entries
-   - get_current_sit_page
-
-INFO: task syz-executor178:6870 can't die for more than 143 seconds.
-task:syz-executor178 state:R
- stack:26960 pid: 6870 ppid:  6869 flags:0x00004006
-Call Trace:
-
-Showing all locks held in the system:
-1 lock held by khungtaskd/1179:
- #0: ffffffff8a554da0 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x53/0x260 kernel/locking/lockdep.c:6242
-1 lock held by systemd-journal/3920:
-1 lock held by in:imklog/6769:
- #0: ffff88809eebc130 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0xe9/0x100 fs/file.c:930
-1 lock held by syz-executor178/6870:
- #0: ffff8880925120e0 (&type->s_umount_key#47/1){+.+.}-{3:3}, at: alloc_super+0x201/0xaf0 fs/super.c:229
-
-Actually, we didn't have to use _nofail in this case, since we could return
-error to mount(2) already with the error handler.
-
-As a result, this patch tries to 1) remove _nofail callers as much as possible,
-2) deal with error case in last remaining caller, f2fs_get_sum_page().
-
-Reported-by: syzbot+ee250ac8137be41d7b13@syzkaller.appspotmail.com
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/checkpoint.c |  2 +-
- fs/f2fs/f2fs.h       |  2 +-
- fs/f2fs/node.c       |  2 +-
- fs/f2fs/segment.c    | 12 +++++++++---
- 4 files changed, 12 insertions(+), 6 deletions(-)
+ fs/f2fs/inode.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 0b7aec059f112..4a97fe4ddf789 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -107,7 +107,7 @@ struct page *f2fs_get_meta_page(struct f2fs_sb_info *sbi, pgoff_t index)
- 	return __get_meta_page(sbi, index, true);
- }
- 
--struct page *f2fs_get_meta_page_nofail(struct f2fs_sb_info *sbi, pgoff_t index)
-+struct page *f2fs_get_meta_page_retry(struct f2fs_sb_info *sbi, pgoff_t index)
- {
- 	struct page *page;
- 	int count = 0;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 98c4b166f192b..d44c6c36de678 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3385,7 +3385,7 @@ enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
- void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io);
- struct page *f2fs_grab_meta_page(struct f2fs_sb_info *sbi, pgoff_t index);
- struct page *f2fs_get_meta_page(struct f2fs_sb_info *sbi, pgoff_t index);
--struct page *f2fs_get_meta_page_nofail(struct f2fs_sb_info *sbi, pgoff_t index);
-+struct page *f2fs_get_meta_page_retry(struct f2fs_sb_info *sbi, pgoff_t index);
- struct page *f2fs_get_tmp_page(struct f2fs_sb_info *sbi, pgoff_t index);
- bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type);
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index cb1b5b61a1dab..cc4700f6240db 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -109,7 +109,7 @@ static void clear_node_page_dirty(struct page *page)
- 
- static struct page *get_current_nat_page(struct f2fs_sb_info *sbi, nid_t nid)
- {
--	return f2fs_get_meta_page_nofail(sbi, current_nat_addr(sbi, nid));
-+	return f2fs_get_meta_page(sbi, current_nat_addr(sbi, nid));
- }
- 
- static struct page *get_next_nat_page(struct f2fs_sb_info *sbi, nid_t nid)
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index e247a5ef3713f..2628406f43f64 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2344,7 +2344,9 @@ int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra)
-  */
- struct page *f2fs_get_sum_page(struct f2fs_sb_info *sbi, unsigned int segno)
- {
--	return f2fs_get_meta_page_nofail(sbi, GET_SUM_BLOCK(sbi, segno));
-+	if (unlikely(f2fs_cp_error(sbi)))
-+		return ERR_PTR(-EIO);
-+	return f2fs_get_meta_page_retry(sbi, GET_SUM_BLOCK(sbi, segno));
- }
- 
- void f2fs_update_meta_page(struct f2fs_sb_info *sbi,
-@@ -2616,7 +2618,11 @@ static void change_curseg(struct f2fs_sb_info *sbi, int type)
- 	__next_free_blkoff(sbi, curseg, 0);
- 
- 	sum_page = f2fs_get_sum_page(sbi, new_segno);
--	f2fs_bug_on(sbi, IS_ERR(sum_page));
-+	if (IS_ERR(sum_page)) {
-+		/* GC won't be able to use stale summary pages by cp_error */
-+		memset(curseg->sum_blk, 0, SUM_ENTRY_SIZE);
-+		return;
-+	}
- 	sum_node = (struct f2fs_summary_block *)page_address(sum_page);
- 	memcpy(curseg->sum_blk, sum_node, SUM_ENTRY_SIZE);
- 	f2fs_put_page(sum_page, 1);
-@@ -3781,7 +3787,7 @@ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
- static struct page *get_current_sit_page(struct f2fs_sb_info *sbi,
- 					unsigned int segno)
- {
--	return f2fs_get_meta_page_nofail(sbi, current_sit_addr(sbi, segno));
-+	return f2fs_get_meta_page(sbi, current_sit_addr(sbi, segno));
- }
- 
- static struct page *get_next_sit_page(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 66969ae852b97..84c67409b1c96 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -292,6 +292,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
+ 						i_log_cluster_size)) {
+ 		if (ri->i_compress_algorithm >= COMPRESS_MAX) {
++			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
+ 				"compress algorithm: %u, run fsck to fix",
+ 				  __func__, inode->i_ino,
+@@ -300,6 +301,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		}
+ 		if (le64_to_cpu(ri->i_compr_blocks) >
+ 				SECTOR_TO_BLOCK(inode->i_blocks)) {
++			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) has inconsistent "
+ 				"i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
+ 				  __func__, inode->i_ino,
+@@ -309,6 +311,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		}
+ 		if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
+ 			ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
++			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
+ 				"log cluster size: %u, run fsck to fix",
+ 				  __func__, inode->i_ino,
 -- 
 2.25.1
 
