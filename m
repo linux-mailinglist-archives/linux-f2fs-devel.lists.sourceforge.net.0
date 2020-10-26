@@ -2,95 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B4F729870C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Oct 2020 07:44:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BC5A2989FA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Oct 2020 11:05:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=as/wjTmPZI0bim/RuifJ2Z48yrb361dvPPsPreHCOJc=; b=CBPJnf2jVrLyxCkQE/YhS37rSE
+	sv8H170p0HrpgstJcPCIzScs/+Fn7zdkcCIQuJ54QIw5/A4osH7WJ+ZrFUQ3I63w16qC76R1t4CmJ
+	FA/K5SCdaFXnaPlu2q02GQ1E/JT6oGLPkMsj960cpTny+LhiK3ZCAd7s/daPaAJyjG6s=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kWwEy-0006q9-Ki; Mon, 26 Oct 2020 06:44:24 +0000
+	id 1kWzNG-00045n-6a; Mon, 26 Oct 2020 10:05:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
- <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
- id 1kWwEx-0006pq-HJ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 06:44:23 +0000
+ <3UZmWXwgKAOATQDKPJUWIQQING.EQO@flex--robinhsu.bounces.google.com>)
+ id 1kWzNF-00045g-7t
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 10:05:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
- From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
+ Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1AFvyPUTwsQZGCwbJvPbwKXzpvY11ZKrNGDvUKm7z2U=; b=kWmLLJzakqDXaytcJ06gmLyNZ2
- JjmEoJY5tEwjApesgNUC4gWtoP6VDjwR5/CO7U3nA0UsDhLYjGDlyPTaZyCSCz8vtGQSs4oVeB6CO
- 8QsnJEwM3ZOs10vj/5wVQFq31JKZu9W72qnRW2ZTEeRjL6gAKDaj7sF/01E2zmP/VFOU=;
+ bh=sqeklWdICtGUlm4BzSZyDT81vCJHA9YvFrN0eJR+mck=; b=he9ZJ25Z7xzlsT+TzQrOHg3m9e
+ Qfyvp8f+9d+Ps6Tef1uG36iSUnm/pHpXt+UGaho9oidwgQdT2Yu2b9dnzD7ANTkgi6amPjTuVdeRo
+ FbYdDRa5ykoNtmPICKzKSjgcUvnCL/Uqj9gzOlzgKVOf/OHPMGdHOnP/0o9SQP1gPdtU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1AFvyPUTwsQZGCwbJvPbwKXzpvY11ZKrNGDvUKm7z2U=; b=UOziexWv/mrpM21PWZylN/2inz
- MibXw7HDZxSQLx1q6KKMSDXWrv0Bs8fbxzI16Lc3RMY53vNuUwcXZ45TVwwfL9Qq9GNxvhLKMALbe
- LpoEfXfVAP4Y2Q0+altRUTg5HhQhxV1sQXYREbwt3KSwFirYAJ8LG2WohmIjpzbmLeEQ=;
-Received: from z5.mailgun.us ([104.130.96.5])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ ;
+ h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=sqeklWdICtGUlm4BzSZyDT81vCJHA9YvFrN0eJR+mck=; b=K
+ pi2pGxxATHkHnm1tKwu3MPXPAqwM1w/U9YakWw2Y8byrTX/ee0ZT0xqOvrxFeWZpJQq6FGLUCxTOR
+ Y81IBvHJs+ackbsT9seiP/fL7IXVwnSvEdemizsozPqhV6FwEiWbAiFViUw6M6jlXPi68+kClqrRs
+ 5+dImEA3YLg+V/E0=;
+Received: from mail-yb1-f201.google.com ([209.85.219.201])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kWwEk-007Exw-PW
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 06:44:23 +0000
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1603694650; h=Message-ID: References: In-Reply-To: Subject:
- Cc: To: From: Date: Content-Transfer-Encoding: Content-Type:
- MIME-Version: Sender; bh=1AFvyPUTwsQZGCwbJvPbwKXzpvY11ZKrNGDvUKm7z2U=;
- b=BqDttWzha9KCtBT7Ck87QDSiBMkVzva4HhL//w9dn++WAEKJOrXpOEluryO9tCMuv3JtwNaW
- /FSAWAK+OaV1eL9h5juDc9S4ORr8oDRR2Tfc/hHFkVZQSC0p7O8VJZ+AS/fSYIRRNaDH5sDM
- ZsWA7CzD5sMKyYfjU4rMk7hyDAg=
-X-Mailgun-Sending-Ip: 104.130.96.5
-X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n07.prod.us-west-2.postgun.com with SMTP id
- 5f96702a9400d41fa99741ab (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 26 Oct 2020 06:43:54
- GMT
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id A9B01C43385; Mon, 26 Oct 2020 06:43:54 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00
- autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from mail.codeaurora.org (localhost.localdomain [127.0.0.1])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (No client certificate requested) (Authenticated sender: cang)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id F06F0C433F0;
- Mon, 26 Oct 2020 06:43:53 +0000 (UTC)
-MIME-Version: 1.0
-Date: Mon, 26 Oct 2020 14:43:53 +0800
-From: Can Guo <cang@codeaurora.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-In-Reply-To: <20201026061313.GA2517102@google.com>
-References: <20201024150646.1790529-1-jaegeuk@kernel.org>
- <20201024150646.1790529-2-jaegeuk@kernel.org>
- <68cf5fe17691653f07544db5fe390c97@codeaurora.org>
- <20201026061313.GA2517102@google.com>
-Message-ID: <6c029b64cb4d78e7624bc896f9c9f16d@codeaurora.org>
-X-Sender: cang@codeaurora.org
-User-Agent: Roundcube Webmail/1.3.9
-X-Spam-Score: 1.2 (+)
+ id 1kWzN5-00E1bP-9G
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 10:05:09 +0000
+Received: by mail-yb1-f201.google.com with SMTP id u13so3041966ybk.9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 26 Oct 2020 03:04:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=sender:date:message-id:mime-version:subject:from:to:cc;
+ bh=sqeklWdICtGUlm4BzSZyDT81vCJHA9YvFrN0eJR+mck=;
+ b=q0uzHGPNjB5m1DuTHX4iXRw0kDatf3gJdNLuyPAoc/OoZMHn82lSqBSuYL377RR528
+ /bVZeqM166p83zgSj11HJKhhW9gUo7lXKl9RdfDAa+7AOY/3sKVIK5BTZtg8ByhHHkjm
+ WH6zCR0CC2P4FYzZRF/RpMbfC2W1Te6ineAHUoWCh2su8MJua+sbQWk3svw7IUvmchYa
+ yutOjAhUpFSu/S9jKvDNjHnRAvPgiZz4gUWp9UBEmswxChldZq/prb3tgQKfe3nIbDhz
+ 0+kUfEceCsFlW9fViKpWTGJGVSdlJcBVReSuJvgTCjZ91b/56ULdH0rTB4rz26NdxgZx
+ so4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+ :to:cc;
+ bh=sqeklWdICtGUlm4BzSZyDT81vCJHA9YvFrN0eJR+mck=;
+ b=BvaEWaicrTFZjiLoPFGFcLcQY69LH4Zew5gZpGrwUeYp/2A7U6Zx0KjMRFxLV6aXGL
+ r1ePtRjFnVOI5icV4QQvYADjlhKMU6hqiYy2gVBCVqI/YLfM1b87+h77Iryquc8EyL3N
+ eZ1wF08cxQZwHL/iD8oFIKGZts8HL5BuYtq0Zc3ljwR8nbXzeLDhe0AS4oY/RgKVs/N1
+ OXnxer+jtl0gHfH7ktWxGDn3ODGPY5mvSkJS40wwqvKo5JSOYXPPij6SML0yZt36AJW5
+ SRkctZwEzwBSUG7aTEPC05M6jXLdrlQIKRJuskgh8b5Wt8bFN/JqNSs7UNHVtJZCIjWb
+ jGvQ==
+X-Gm-Message-State: AOAM5324UStf/yjZYbhOTjAqcvo5IuVaC+CSPsa4BZniE3tQPq/92EsK
+ a+71Qq9yUcw8O1gpfpKr66yhnsK6dvvjXc7JS4CjxcTAYnRlln5WLxTTtHscT8nZGh4wXHHFwLA
+ NepS4vAqmm+Zl490XOBHTwbG7HrMEm2B/um0dq2VkfdDe6pF0MmLlrSdYvtf05lwNV9uA4VSR88
+ kyFidibrmoL00m
+X-Google-Smtp-Source: ABdhPJz/h1idORhGUhGdrHKqXxETBi3Ayx3ZvwrPgqcdXpBVB/CzsBES44aCJ+epbOE6UDkQOQsramwRYyPHbw==
+X-Received: from robinhsu-p520.ntc.corp.google.com
+ ([2401:fa00:fc:202:1ea0:b8ff:fe77:fe45])
+ (user=robinhsu job=sendgmr) by 2002:a25:da4e:: with SMTP id
+ n75mr21019061ybf.425.1603705169605; Mon, 26 Oct 2020 02:39:29 -0700 (PDT)
+Date: Mon, 26 Oct 2020 17:39:05 +0800
+Message-Id: <20201026093905.1498859-1-robinhsu@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.29.0.rc2.309.g374f81d7ae-goog
+To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, 
+ chao@kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 1.2 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in bl.spamcop.net
- [Blocked - see <https://www.spamcop.net/bl.shtml?104.130.96.5>]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.219.201 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.201 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kWwEk-007Exw-PW
-Subject: Re: [f2fs-dev] [PATCH v3 1/5] scsi: ufs: atomic update for
- clkgating_enable
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1kWzN5-00E1bP-9G
+Subject: [f2fs-dev] [PATCH 0/1] f2fs-tools:fsck.f2fs Fix bad return value
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,123 +115,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: bvanassche@acm.org, linux-scsi@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- avri.altman@wdc.com, alim.akhtar@samsung.com, kernel-team@android.com
+From: Robin Hsu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Robin Hsu <robinhsu@google.com>
+Cc: linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020-10-26 14:13, Jaegeuk Kim wrote:
-> On 10/26, Can Guo wrote:
->> On 2020-10-24 23:06, Jaegeuk Kim wrote:
->> > From: Jaegeuk Kim <jaegeuk@google.com>
->> >
->> > When giving a stress test which enables/disables clkgating, we hit
->> > device
->> > timeout sometimes. This patch avoids subtle racy condition to address
->> > it.
->> >
->> > If we use __ufshcd_release(), I've seen that gate_work can be called in
->> > parallel
->> > with ungate_work, which results in UFS timeout when doing hibern8.
->> > Should avoid it.
->> >
->> 
->> I don't understand this comment. gate_work and ungate_work are queued 
->> on
->> an ordered workqueue and an ordered workqueue executes at most one 
->> work item
->> at any given time in the queued order. How can the two run in 
->> parallel?
-> 
-> When I hit UFS stuck, I saw this by clkgating tracepoint.
-> 
-> - REQ_CLK_OFF
-> - CLKS_OFF
-> - REQ_CLK_OFF
-> - REQ_CLKS_ON
-> ..
-> 
+f2fs-tools:fsck.f2fs: Fix always return 1 (error) after asking user to restore
+           lost files into ./lost_found
 
-I don't see how can you tell that the two works are running in parallel
-just from above trace. May I know what is the exact error by "UFS 
-timeout
-when doing hibern8"?
+Robin Hsu (1):
+  f2fs-toos:fsck.f2fs Fix bad return value
 
-By using __ufshcd_release() here, I do see one potential issue if your 
-test
-quickly toggles on/off of clk_gating - disable it, enable it, disable it 
-and
-enable it, which will cause that __ufshcd_release() being called twice, 
-meaning
-we queue two gate_works back to back. So can you try below code and let 
-me know
-if it helps or not? I am OK with your current change, but I would like 
-to
-understand the problem. Thanks.
+ fsck/fsck.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/scsi/ufs/ufshcd.c b/drivers/scsi/ufs/ufshcd.c
-index 1791bce..3eee438 100644
---- a/drivers/scsi/ufs/ufshcd.c
-+++ b/drivers/scsi/ufs/ufshcd.c
-@@ -2271,6 +2271,8 @@ static void ufshcd_gate_work(struct work_struct 
-*work)
-         unsigned long flags;
+-- 
+2.29.0.rc2.309.g374f81d7ae-goog
 
-         spin_lock_irqsave(hba->host->host_lock, flags);
-+       if (hba->clk_gating.state == CLKS_OFF)
-+               goto rel_lock;
-         /*
-          * In case you are here to cancel this work the gating state
-          * would be marked as REQ_CLKS_ON. In this case save time by
-
-Regards,
-
-Can Guo.
-
-> By using active_req, I don't see any problem.
-> 
->> 
->> Thanks,
->> 
->> Can Guo.
->> 
->> > Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
->> > ---
->> >  drivers/scsi/ufs/ufshcd.c | 12 ++++++------
->> >  1 file changed, 6 insertions(+), 6 deletions(-)
->> >
->> > diff --git a/drivers/scsi/ufs/ufshcd.c b/drivers/scsi/ufs/ufshcd.c
->> > index b8f573a02713..e0b479f9eb8a 100644
->> > --- a/drivers/scsi/ufs/ufshcd.c
->> > +++ b/drivers/scsi/ufs/ufshcd.c
->> > @@ -1807,19 +1807,19 @@ static ssize_t
->> > ufshcd_clkgate_enable_store(struct device *dev,
->> >  		return -EINVAL;
->> >
->> >  	value = !!value;
->> > +
->> > +	spin_lock_irqsave(hba->host->host_lock, flags);
->> >  	if (value == hba->clk_gating.is_enabled)
->> >  		goto out;
->> >
->> > -	if (value) {
->> > -		ufshcd_release(hba);
->> > -	} else {
->> > -		spin_lock_irqsave(hba->host->host_lock, flags);
->> > +	if (value)
->> > +		hba->clk_gating.active_reqs--;
->> > +	else
->> >  		hba->clk_gating.active_reqs++;
->> > -		spin_unlock_irqrestore(hba->host->host_lock, flags);
->> > -	}
->> >
->> >  	hba->clk_gating.is_enabled = value;
->> >  out:
->> > +	spin_unlock_irqrestore(hba->host->host_lock, flags);
->> >  	return count;
->> >  }
 
 
 _______________________________________________
