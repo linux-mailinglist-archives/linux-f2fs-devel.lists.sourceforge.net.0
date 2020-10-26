@@ -2,109 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07964298C08
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Oct 2020 12:23:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Mime-Version:Message-Id:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=xn9iJH2Gi2wU8V2EpdHb3hDps1RbC8OoutgBt+xlxeI=; b=fxxMxNb2S7GYA77kZuxbDFQAvw
-	Eo/rHPDvUxBJvqVwi58+XhPxlTi/r3YMl7Tkq/TwWyHcmBLD+j2UTtTpnvlkiYK7Fii4pBFR2dnPN
-	+Axg7LVfheH1VZw85IrebJbc3Wyk3WgbZJdVhLifmCC4/sc/zjYXbCh2iXTecFDANnws=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65CDC29953E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Oct 2020 19:26:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kX0ai-0007oy-6r; Mon, 26 Oct 2020 11:23:08 +0000
+	id 1kX7C2-000768-JK; Mon, 26 Oct 2020 18:26:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
- <3fpmWXwgKAA863qx2w79v33v0t.r31@flex--robinhsu.bounces.google.com>)
- id 1kX0ag-0007og-Gz
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 11:23:06 +0000
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1kX7C1-00075g-1U
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 18:26:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-ID:References:In-Reply-To:Subject:Cc:To:
+ From:Date:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iuncRZU/n/qdgI7S//uwAQmqKe3LmFdZ5wVUdpPMh/w=; b=fSIjG68Yqx/KTFuzbw7hLXctFf
- uWESP1Yhp49NV2ceaTxcE7bzY2NFEXzZU8BEJH+YN8kXre3NfTc4nSX3Ot0Frea7RqsOsK5rh5ZN+
- Kdlu4KYRSmKBqGrbWvokX5iepZ/T1kOwa1LPMSJBvhD5B+oW3WqGpwkWNQqbVS0is5/4=;
+ bh=G0eqTb28YUCQE6wydCPTKC1qYreOL0mpGP289xk3vI0=; b=eNXIrzZL5yjgsNRakpmtftIrmb
+ ABhCFRAoy6N18/IzzZPO43LngdyxZHh8/aSI2RjIVb6x/8VEIvcdimZ5Q/mDg6fUon0o0ZGuIrjQR
+ eBEvWDnF8KNiI59MNx3WXMsJLVnu2axQHj8lZ+2xvyL0EBz+sphUtgjEXUDqGWtrEm7c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iuncRZU/n/qdgI7S//uwAQmqKe3LmFdZ5wVUdpPMh/w=; b=Y
- HEFwLXACS5btHE//JGLOTYGuAa9lK6FdCSiZo3FLuTg8FDNtni+uyXc3W1OewRtYBqKoNaxBqsE3E
- Ff1OsUn1dLRLJIWjcfUzWCWxba7qNlhz3OWUCJQaUkgNy3Jkaf1AYGzWY3q2FzvqNE6rPEeab5OML
- AiqaOco5FodLd1mQ=;
-Received: from mail-pj1-f73.google.com ([209.85.216.73])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ ; h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=G0eqTb28YUCQE6wydCPTKC1qYreOL0mpGP289xk3vI0=; b=OHKgY63fFOtfJwVCO2k3ld4ufO
+ VMf7ZI+Ejlua/gpqoKESaVhhLgLyDHHsW4FEyaX1FjDIhkP9SsQmQebCEfyzvbOSyUfSRy92wsrLs
+ /iweVlYmAWRRlbVjYQAC3dM/4S6pIG0Evvtdg/jG3PlLNdO2quM8AEtA/cRNx3MmbNko=;
+Received: from m42-4.mailgun.net ([69.72.42.4])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kX0ab-00E6Cv-AE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 11:23:06 +0000
-Received: by mail-pj1-f73.google.com with SMTP id bp7so2504086pjb.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 26 Oct 2020 04:23:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=sender:date:message-id:mime-version:subject:from:to:cc;
- bh=iuncRZU/n/qdgI7S//uwAQmqKe3LmFdZ5wVUdpPMh/w=;
- b=hmJWGdpqiRn4Qj3L1IygZpzGMSUe6R8DMaJrpkXSHQNw39KBa6RMIe5uzIiB6ALHx6
- 7mf+S0RUDSiwwxcgUUs2g6tU+OdLYm1nKIqq5KDm6ufIwwB0GIU1jQKNY/1b7RjRCnxP
- 5Y4ejCYnwj0alqRFXaHpjum/4p0iNzF2DB9ksst+SKHVKXZqfeJI5gWldJTvvAU/kl2X
- lkvCJ4do2DG/ivLaxOTCeXASrBgPukGqE1x6TWKC+Vm+f8ZGS54j9kCS/fF+YnD1VuPU
- yENvmvyMy1Tn74qP91YQFTRR4CPScRNkvVnq/ITJEE9/ncpgTc1eudPTKtluTEgNMexN
- LKFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
- :to:cc;
- bh=iuncRZU/n/qdgI7S//uwAQmqKe3LmFdZ5wVUdpPMh/w=;
- b=d+OF2UU52Yn3tbfBEU6GynPcSgh3dYkBADc4Zfh4umR7HlBnQkgZt/IJYSD27ZuIjp
- Y5cdmfnqMVXhwrTHMuPGvHT3XDVYGeE8ytS39NdoxuzUijEqVi3gyawKcBh1inaT3W4W
- iDRc+jULSVKUUFQ45IiqQphyZBeE6xSSzP9ySRLx53iuN7uslZB7YDv30a5gwCyqRlRp
- usQa0L4t5NhqcJ4hBUwcXaGixsSQU+tNde/4kHUEVOvnVg7Zur+ODrrBNH5W5HJAPPIX
- h9xo9rhwyQ59S1WeOXdw5mS4c1aPsjuzCZhxopZj7CCOMJxISl5npcbeCHId32riz/zB
- nWfw==
-X-Gm-Message-State: AOAM533vYQuHiIEy/Ly3aNGV/Z4S/8jKzLD4vfiuemRsxueKuKhg3CFv
- yBfgEsSoe4dzGrA4rxUMi69TdDvgoAf1y19jlLjUmh4pK4TLotu6FSQg9tjBahIcqBpdsfbmPTw
- jgeZLck2WzfDVRHlHFmGFoGnw/uv1eK03bdZGQRpy8McInklTsOMDbU4gcRHqrSfNR92ss9MHmO
- ZHnQWU27HnPDFS
-X-Google-Smtp-Source: ABdhPJy+mI0vnmKylwtlFsmVxcnM1tY+7eaIo+ulq7WWs25n80yx/lSw9fa2rKak9PfsRXDP0qke3U9F+1cAUQ==
-X-Received: from robinhsu-p520.ntc.corp.google.com
- ([2401:fa00:fc:202:1ea0:b8ff:fe77:fe45])
- (user=robinhsu job=sendgmr) by 2002:a0c:e054:: with SMTP id
- y20mr16670180qvk.30.1603705214218; Mon, 26 Oct 2020 02:40:14 -0700 (PDT)
-Date: Mon, 26 Oct 2020 17:40:00 +0800
-Message-Id: <20201026094000.1500425-1-robinhsu@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.29.0.rc2.309.g374f81d7ae-goog
-To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, 
- chao@kernel.org
-X-Spam-Score: -7.6 (-------)
+ id 1kX7Bn-007uYu-T6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 26 Oct 2020 18:26:04 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1603736751; h=Message-ID: References: In-Reply-To: Subject:
+ Cc: To: From: Date: Content-Transfer-Encoding: Content-Type:
+ MIME-Version: Sender; bh=G0eqTb28YUCQE6wydCPTKC1qYreOL0mpGP289xk3vI0=;
+ b=X5mNbbP4NBYsYvy3p7rAa2sfoT18dnviWG35ZsYHbd1sN38ogtTKd9IXVKzsuz8i6EfZtSh8
+ 04afISlAUwIgQ90dQ8ZS363m2oOsJWSz8ZR8WGhteBvVl/cbqLRhVAvXIZG1B8QNsNMoKP4r
+ gOWEyYEbMe8463K7/ha1scLDKJ4=
+X-Mailgun-Sending-Ip: 69.72.42.4
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n01.prod.us-east-1.postgun.com with SMTP id
+ 5f97149fd20d12d202644f54 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 26 Oct 2020 18:25:35
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id F1155C43385; Mon, 26 Oct 2020 18:25:34 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00
+ autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from mail.codeaurora.org (localhost.localdomain [127.0.0.1])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (No client certificate requested) (Authenticated sender: asutoshd)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id BA587C433FE;
+ Mon, 26 Oct 2020 18:25:32 +0000 (UTC)
+MIME-Version: 1.0
+Date: Mon, 26 Oct 2020 11:25:32 -0700
+From: asutoshd@codeaurora.org
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+In-Reply-To: <20201024150646.1790529-3-jaegeuk@kernel.org>
+References: <20201024150646.1790529-1-jaegeuk@kernel.org>
+ <20201024150646.1790529-3-jaegeuk@kernel.org>
+Message-ID: <84bad19305642b7faf21a1a48eb3e46f@codeaurora.org>
+X-Sender: asutoshd@codeaurora.org
+User-Agent: Roundcube Webmail/1.3.9
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.73 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.73 listed in wl.mailspike.net]
+ trust [69.72.42.4 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1kX0ab-00E6Cv-AE
-Subject: [f2fs-dev] [PATCH 1/1] f2fs-toos:fsck.f2fs Fix bad return value
+X-Headers-End: 1kX7Bn-007uYu-T6
+Subject: Re: [f2fs-dev] [PATCH v3 2/5] scsi: ufs: clear UAC for FFU and RPMB
+ LUNs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,38 +100,152 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Robin Hsu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Robin Hsu <robinhsu@google.com>
-Cc: linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: bvanassche@acm.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-@vger.kernel.org,
+ avri.altman@wdc.com, cang@codeaurora.org, alim.akhtar@samsung.com,
+ kernel-team@android.com, Jaegeuk Kim <jaegeuk@google.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-'ret' should not have been used here: otherwise, it would be wrongly used
-as the error code and then be returned from main().
+On 2020-10-24 08:06, Jaegeuk Kim wrote:
+> From: Jaegeuk Kim <jaegeuk@google.com>
+> 
+> In order to conduct FFU or RPMB operations, UFS needs to clear UAC. 
+> This patch
+> clears it explicitly, so that we could get no failure given early 
+> execution.
+> 
 
-Signed-off-by: Robin Hsu <robinhsu@google.com>
----
- fsck/fsck.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+What's the meaning of 'given early execution'?
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index f97e9fb..66e4e3f 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -3137,8 +3137,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 		char ans[255] = {0};
- 
- 		printf("\nDo you want to restore lost files into ./lost_found/? [Y/N] ");
--		ret = scanf("%s", ans);
--		ASSERT(ret >= 0);
-+		ASSERT(scanf("%s", ans) >= 0);
- 		if (!strcasecmp(ans, "y")) {
- 			for (i = 0; i < fsck->nr_nat_entries; i++) {
- 				if (f2fs_test_bit(i, fsck->nat_area_bitmap))
--- 
-2.29.0.rc2.309.g374f81d7ae-goog
-
+> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
+> ---
+>  drivers/scsi/ufs/ufshcd.c | 70 +++++++++++++++++++++++++++++++++++----
+>  drivers/scsi/ufs/ufshcd.h |  1 +
+>  2 files changed, 65 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/scsi/ufs/ufshcd.c b/drivers/scsi/ufs/ufshcd.c
+> index e0b479f9eb8a..011e80a21170 100644
+> --- a/drivers/scsi/ufs/ufshcd.c
+> +++ b/drivers/scsi/ufs/ufshcd.c
+> @@ -7057,7 +7057,6 @@ static inline void
+> ufshcd_blk_pm_runtime_init(struct scsi_device *sdev)
+>  static int ufshcd_scsi_add_wlus(struct ufs_hba *hba)
+>  {
+>  	int ret = 0;
+> -	struct scsi_device *sdev_rpmb;
+>  	struct scsi_device *sdev_boot;
+> 
+>  	hba->sdev_ufs_device = __scsi_add_device(hba->host, 0, 0,
+> @@ -7070,14 +7069,14 @@ static int ufshcd_scsi_add_wlus(struct ufs_hba 
+> *hba)
+>  	ufshcd_blk_pm_runtime_init(hba->sdev_ufs_device);
+>  	scsi_device_put(hba->sdev_ufs_device);
+> 
+> -	sdev_rpmb = __scsi_add_device(hba->host, 0, 0,
+> +	hba->sdev_rpmb = __scsi_add_device(hba->host, 0, 0,
+>  		ufshcd_upiu_wlun_to_scsi_wlun(UFS_UPIU_RPMB_WLUN), NULL);
+> -	if (IS_ERR(sdev_rpmb)) {
+> -		ret = PTR_ERR(sdev_rpmb);
+> +	if (IS_ERR(hba->sdev_rpmb)) {
+> +		ret = PTR_ERR(hba->sdev_rpmb);
+>  		goto remove_sdev_ufs_device;
+>  	}
+> -	ufshcd_blk_pm_runtime_init(sdev_rpmb);
+> -	scsi_device_put(sdev_rpmb);
+> +	ufshcd_blk_pm_runtime_init(hba->sdev_rpmb);
+> +	scsi_device_put(hba->sdev_rpmb);
+> 
+>  	sdev_boot = __scsi_add_device(hba->host, 0, 0,
+>  		ufshcd_upiu_wlun_to_scsi_wlun(UFS_UPIU_BOOT_WLUN), NULL);
+> @@ -7601,6 +7600,63 @@ static int ufshcd_add_lus(struct ufs_hba *hba)
+>  	return ret;
+>  }
+> 
+> +static int
+> +ufshcd_send_request_sense(struct ufs_hba *hba, struct scsi_device 
+> *sdp);
+> +
+> +static int ufshcd_clear_ua_wlun(struct ufs_hba *hba, u8 wlun)
+> +{
+> +	struct scsi_device *sdp;
+> +	unsigned long flags;
+> +	int ret = 0;
+> +
+> +	spin_lock_irqsave(hba->host->host_lock, flags);
+> +	if (wlun  == UFS_UPIU_UFS_DEVICE_WLUN)
+> +		sdp = hba->sdev_ufs_device;
+> +	else if (wlun  == UFS_UPIU_RPMB_WLUN)
+> +		sdp = hba->sdev_rpmb;
+> +	else
+> +		BUG_ON(1);
+> +	if (sdp) {
+> +		ret = scsi_device_get(sdp);
+> +		if (!ret && !scsi_device_online(sdp)) {
+> +			ret = -ENODEV;
+> +			scsi_device_put(sdp);
+> +		}
+> +	} else {
+> +		ret = -ENODEV;
+> +	}
+> +	spin_unlock_irqrestore(hba->host->host_lock, flags);
+> +	if (ret)
+> +		goto out_err;
+> +
+> +	ret = ufshcd_send_request_sense(hba, sdp);
+> +	scsi_device_put(sdp);
+> +out_err:
+> +	if (ret)
+> +		dev_err(hba->dev, "%s: UAC clear LU=%x ret = %d\n",
+> +				__func__, wlun, ret);
+> +	return ret;
+> +}
+> +
+> +static int ufshcd_clear_ua_wluns(struct ufs_hba *hba)
+> +{
+> +	int ret = 0;
+> +
+> +	if (!hba->wlun_dev_clr_ua)
+> +		goto out;
+> +
+> +	ret = ufshcd_clear_ua_wlun(hba, UFS_UPIU_UFS_DEVICE_WLUN);
+> +	if (!ret)
+> +		ret = ufshcd_clear_ua_wlun(hba, UFS_UPIU_RPMB_WLUN);
+> +	if (!ret)
+> +		hba->wlun_dev_clr_ua = false;
+> +out:
+> +	if (ret)
+> +		dev_err(hba->dev, "%s: Failed to clear UAC WLUNS ret = %d\n",
+> +				__func__, ret);
+> +	return ret;
+> +}
+> +
+>  /**
+>   * ufshcd_probe_hba - probe hba to detect device and initialize
+>   * @hba: per-adapter instance
+> @@ -7720,6 +7776,8 @@ static void ufshcd_async_scan(void *data,
+> async_cookie_t cookie)
+>  		pm_runtime_put_sync(hba->dev);
+>  		ufshcd_exit_clk_scaling(hba);
+>  		ufshcd_hba_exit(hba);
+> +	} else {
+> +		ufshcd_clear_ua_wluns(hba);
+>  	}
+>  }
+> 
+> diff --git a/drivers/scsi/ufs/ufshcd.h b/drivers/scsi/ufs/ufshcd.h
+> index 47eb1430274c..718881d038f5 100644
+> --- a/drivers/scsi/ufs/ufshcd.h
+> +++ b/drivers/scsi/ufs/ufshcd.h
+> @@ -681,6 +681,7 @@ struct ufs_hba {
+>  	 * "UFS device" W-LU.
+>  	 */
+>  	struct scsi_device *sdev_ufs_device;
+> +	struct scsi_device *sdev_rpmb;
+> 
+>  	enum ufs_dev_pwr_mode curr_dev_pwr_mode;
+>  	enum uic_link_state uic_link_state;
 
 
 _______________________________________________
