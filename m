@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 244D2299D21
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 01:04:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AFF2299D24
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Oct 2020 01:04:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kXCTf-00027a-U3; Tue, 27 Oct 2020 00:04:39 +0000
+	id 1kXCTh-0001xC-St; Tue, 27 Oct 2020 00:04:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1kXCTc-000279-Ix
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Oct 2020 00:04:36 +0000
+ (envelope-from <sashal@kernel.org>) id 1kXCTf-0001ws-Jy
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Oct 2020 00:04:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RkksFtznyruFC16ML9+uVQRN8P+XHfXZpFV1fUxN7FY=; b=SMHj043mnNHYvY3AbzhRnJk37I
- 1VPGmWMEHlD1vF8q5mjzepfhjtIVVd8DlxxYMj/TY3FoormsNwu8G+LuZd5Rcn3Yv9xH46os1sVt+
- NT23KIxYzhkMVisVYfE6wHW4j5WKd5Sg95dlsF/9E7aAN3JoU+7uzglZnJnO+hzReUA4=;
+ bh=/6sFmqzyH6dhpwvy2lrHSSTEbGzLWTWP2Em0YKguMdw=; b=LlZSpkiYxOlLM8/DLkINSpPogx
+ ogDKHLJuNxgzeXQamvabENFftWIZM/T001G4UhvOxkT1DiAICxdM0n3xm3ckV3IE2nevhXLUxFlO1
+ vNJIi301VzqT9+nBBS7oDmVz1mbUDBmJEPRpaLFOf2pA7AhqNKcViGZ/bT9wX95Mybmw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RkksFtznyruFC16ML9+uVQRN8P+XHfXZpFV1fUxN7FY=; b=ZDbfn5Xrs9PX3ga9zOJ7dHIpxx
- lBYgeqimd72a2BY3j6PL4uOO+/QbGmrH1mGpCKtwebfhUxt4HHlCR3pLXwSjiVv5aSkJDkiX4JX+5
- 5PC6vMcXOUkgEvadmFmcREGKqYyfNHnTVYTroSiErRqWgDcfNsNNukKD0Grj07rRECjk=;
+ bh=/6sFmqzyH6dhpwvy2lrHSSTEbGzLWTWP2Em0YKguMdw=; b=PHrTwmCjCMzBqgrxwsF9b3I2t+
+ MNZMBAsF3yv/tXUZtClWDsJiisdOPCE5hMHuO1nWH4JQxRtteEBfxRs1fkVED6gHlPON0WQ5WMgwa
+ c+5NNENTTdhqovGC5lZcod3htHDxNgudmSKzFHQK/lIH7BRHXgzqttebTShtOLFL142k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kXCTT-00Eus9-Vo
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Oct 2020 00:04:36 +0000
+ id 1kXCTc-008CoW-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Oct 2020 00:04:39 +0000
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CC3AE216FD;
- Tue, 27 Oct 2020 00:04:21 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 050982151B;
+ Tue, 27 Oct 2020 00:04:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603757062;
- bh=/XWHNUe4UB4Jc6MLjtzp3LEflhrCcdVlFVbYGFBGxTs=;
+ s=default; t=1603757063;
+ bh=TARGDbAaAlKc1+55PA+jLbp4rpnQynCxEokv5CCJSwA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SN1FWwICI/7yycpWyg+r2Hgjq1duwIKrIYPSP4Fwxr0646G0tzwFX6+7Us6M73/5i
- NkpNnYKBw/jEcmHYAphoLbf9zs457trGLcp6k1r3b+NFmqI4QUxrpp2vV7Nh4fUm2C
- R2zDC6u0hEwlBq7AcVF6P0YghZZCYLZfAXkIY4sk=
+ b=Klwbcd/JsdW669js1kKKIfQfKRKkn0SS9vffCXxKubxcfvpjn3K4rvQom9rHZKjfz
+ zZDuxwGXueifUnCySXc/Hx8kn6QkrnTO8tiRsxxcdgh0runkqmtKnzSCpLEH+hoA9k
+ b6IxcZmZmcQ5fvgrTSyGhYPscm2dVtWSw/m6TZg4=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 26 Oct 2020 20:03:20 -0400
-Message-Id: <20201027000415.1026364-5-sashal@kernel.org>
+Date: Mon, 26 Oct 2020 20:03:21 -0400
+Message-Id: <20201027000415.1026364-6-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201027000415.1026364-1-sashal@kernel.org>
 References: <20201027000415.1026364-1-sashal@kernel.org>
@@ -76,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kXCTT-00Eus9-Vo
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 05/60] f2fs: fix uninit-value in
- f2fs_lookup
+X-Headers-End: 1kXCTc-008CoW-9M
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 06/60] f2fs: fix to check segment
+ boundary during SIT page readahead
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,86 +90,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>,
- syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ syzbot+3698081bcf0bb2d12174@syzkaller.appspotmail.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <yuchao0@huawei.com>
 
-[ Upstream commit 6d7ab88a98c1b7a47c228f8ffb4f44d631eaf284 ]
+[ Upstream commit 6a257471fa42c8c9c04a875cd3a2a22db148e0f0 ]
 
 As syzbot reported:
 
+kernel BUG at fs/f2fs/segment.h:657!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN
+CPU: 1 PID: 16220 Comm: syz-executor.0 Not tainted 5.9.0-rc5-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
+RIP: 0010:f2fs_ra_meta_pages+0xa51/0xdc0 fs/f2fs/segment.h:657
 Call Trace:
- __dump_stack lib/dump_stack.c:77 [inline]
- dump_stack+0x21c/0x280 lib/dump_stack.c:118
- kmsan_report+0xf7/0x1e0 mm/kmsan/kmsan_report.c:122
- __msan_warning+0x58/0xa0 mm/kmsan/kmsan_instr.c:219
- f2fs_lookup+0xe05/0x1a80 fs/f2fs/namei.c:503
- lookup_open fs/namei.c:3082 [inline]
- open_last_lookups fs/namei.c:3177 [inline]
- path_openat+0x2729/0x6a90 fs/namei.c:3365
- do_filp_open+0x2b8/0x710 fs/namei.c:3395
- do_sys_openat2+0xa88/0x1140 fs/open.c:1168
- do_sys_open fs/open.c:1184 [inline]
- __do_compat_sys_openat fs/open.c:1242 [inline]
- __se_compat_sys_openat+0x2a4/0x310 fs/open.c:1240
- __ia32_compat_sys_openat+0x56/0x70 fs/open.c:1240
- do_syscall_32_irqs_on arch/x86/entry/common.c:80 [inline]
- __do_fast_syscall_32+0x129/0x180 arch/x86/entry/common.c:139
- do_fast_syscall_32+0x6a/0xc0 arch/x86/entry/common.c:162
- do_SYSENTER_32+0x73/0x90 arch/x86/entry/common.c:205
- entry_SYSENTER_compat_after_hwframe+0x4d/0x5c
+ build_sit_entries fs/f2fs/segment.c:4195 [inline]
+ f2fs_build_segment_manager+0x4b8a/0xa3c0 fs/f2fs/segment.c:4779
+ f2fs_fill_super+0x377d/0x6b80 fs/f2fs/super.c:3633
+ mount_bdev+0x32e/0x3f0 fs/super.c:1417
+ legacy_get_tree+0x105/0x220 fs/fs_context.c:592
+ vfs_get_tree+0x89/0x2f0 fs/super.c:1547
+ do_new_mount fs/namespace.c:2875 [inline]
+ path_mount+0x1387/0x2070 fs/namespace.c:3192
+ do_mount fs/namespace.c:3205 [inline]
+ __do_sys_mount fs/namespace.c:3413 [inline]
+ __se_sys_mount fs/namespace.c:3390 [inline]
+ __x64_sys_mount+0x27f/0x300 fs/namespace.c:3390
+ do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
+ entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-In f2fs_lookup(), @res_page could be used before being initialized,
-because in __f2fs_find_entry(), once F2FS_I(dir)->i_current_depth was
-been fuzzed to zero, then @res_page will never be initialized, causing
-this kmsan warning, relocating @res_page initialization place to fix
-this bug.
+@blkno in f2fs_ra_meta_pages could exceed max segment count, causing panic
+in following sanity check in current_sit_addr(), add check condition to
+avoid this issue.
 
-Reported-by: syzbot+0eac6f0bbd558fd866d7@syzkaller.appspotmail.com
+Reported-by: syzbot+3698081bcf0bb2d12174@syzkaller.appspotmail.com
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/dir.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ fs/f2fs/checkpoint.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index ebe19894884be..2cd85ce3e4502 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -208,16 +208,15 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
- 	unsigned int max_depth;
- 	unsigned int level;
- 
-+	*res_page = NULL;
-+
- 	if (f2fs_has_inline_dentry(dir)) {
--		*res_page = NULL;
- 		de = f2fs_find_in_inline_dir(dir, fname, res_page);
- 		goto out;
- 	}
- 
--	if (npages == 0) {
--		*res_page = NULL;
-+	if (npages == 0)
- 		goto out;
--	}
- 
- 	max_depth = F2FS_I(dir)->i_current_depth;
- 	if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
-@@ -229,7 +228,6 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
- 	}
- 
- 	for (level = 0; level < max_depth; level++) {
--		*res_page = NULL;
- 		de = find_in_level(dir, level, fname, res_page);
- 		if (de || IS_ERR(*res_page))
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index d412fc150988c..a563de5ccd217 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -218,6 +218,8 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+ 					blkno * NAT_ENTRY_PER_BLOCK);
  			break;
+ 		case META_SIT:
++			if (unlikely(blkno >= TOTAL_SEGS(sbi)))
++				goto out;
+ 			/* get sit block addr */
+ 			fio.new_blkaddr = current_sit_addr(sbi,
+ 					blkno * SIT_ENTRY_PER_BLOCK);
 -- 
 2.25.1
 
