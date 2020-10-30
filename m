@@ -2,74 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B3ED29FDB7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Oct 2020 07:14:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A579E29FE6B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Oct 2020 08:27:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kYNfy-0000JB-6o; Fri, 30 Oct 2020 06:14:14 +0000
+	id 1kYOoQ-0002ou-C0; Fri, 30 Oct 2020 07:27:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kYNfw-0000It-Uj
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Oct 2020 06:14:12 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kYOoL-0002oa-Uo
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Oct 2020 07:26:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=J7Tj/BTf9QRWHlR/0njNFv4VpEfe4w37bXNfBsHM8BM=; b=Z6E1SIV4r5ADFRBTWzd3QFPdeJ
- xWHx5xyfRCQhO2+YYFFjJ8vXqPm/9iwlVEvRXQELBvyD7Z7rj1S5JxhW/94i2RujdSt/2VVI68P36
- nZDTmByatXXqJsYdeWdnHxn5mjWW+T2ZTWGZ1XqRVFbm1emy6h5g6OPrvzMXz5GD02ks=;
+ bh=uRX4RnZR3iR43LRtUNe6V9Uy5Bf+eCgpLlq3c7pKkgg=; b=DGXBz1noru0AgUwTRJoZDD5kuw
+ hSEnmL41LV/Ku8LIRTITC2Bg0s1DB3vBohGFULM9pY+m3JC1XRtDktgOsidRi6Qx6fKZXp24TDQzk
+ emS75F9mSUhO3F8DgZleHfBAXdRLYkRhvGaZvnj51YF0a8+O+9uFgN0GtxO6BHkmF+Y8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=J7Tj/BTf9QRWHlR/0njNFv4VpEfe4w37bXNfBsHM8BM=; b=EtB/rs12BdMg1juN5i4wKEjkaC
- RAaL+w1O/55+V0vCcVGulMf2B1lOMk8MlHG/mEmXXIu1DWrq5jb/57fA//BRp+skImp0RyetoxflS
- CPFqBNUvZb3lS1U8UqIoVu09AAib4jy+NCu79qnlf4hz/fGF03UkpKXptzVL6Z3MCEg0=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=uRX4RnZR3iR43LRtUNe6V9Uy5Bf+eCgpLlq3c7pKkgg=; b=h
+ UA7w0qL2GIlZacAWvVS/vZlBPAAKk+mh7oGN4vDizIVm3frZdvfklmav/6wNXID48Mis/rK70Wd9d
+ xJV/tGz53dpCexemEr6asM5rJiUoG6jXIqbPGhzspY6V6R5M1MNodFy+l8AB9K0uG9V3NlyxyIr6s
+ fCS7nY7HZNjWMg3g=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kYNfp-0026oB-Io
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Oct 2020 06:14:12 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CMsSv20dFzLqst;
- Fri, 30 Oct 2020 14:13:51 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 30 Oct
- 2020 14:13:48 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20201030041035.394565-1-daeho43@gmail.com>
- <20201030041035.394565-2-daeho43@gmail.com>
+ id 1kYOo5-002Aut-0A
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Oct 2020 07:26:57 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CMv4f20ktzkbgM;
+ Fri, 30 Oct 2020 15:26:26 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS414-HUB.china.huawei.com (10.3.19.214) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 30 Oct 2020 15:26:16 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <25d164b5-278a-1065-e9ab-4da3232b3b97@huawei.com>
-Date: Fri, 30 Oct 2020 14:13:48 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Fri, 30 Oct 2020 15:26:10 +0800
+Message-ID: <20201030072610.57155-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20201030041035.394565-2-daeho43@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.3 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kYNfp-0026oB-Io
-Subject: Re: [f2fs-dev] [PATCH v7 2/2] f2fs: add
- F2FS_IOC_SET_COMPRESS_OPTION ioctl
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kYOo5-002Aut-0A
+Subject: [f2fs-dev] [PATCH v2] f2fs: move ioctl interface definitions to
+ separated file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,182 +77,249 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Daeho,
+Like other filesystem does, we introduce a new file f2fs.h in path of
+include/uapi/linux/, and move f2fs-specified ioctl interface definitions
+to that file, after then, in order to use those definitions, userspace
+developer only need to include the new header file rather than
+copy & paste definitions from fs/f2fs/f2fs.h.
 
-If there is no change, we are used to not resend the patch with updated
-version.
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v2: add missing "WITH Linux-syscall-note" for SPDX-License-Identifier
+ MAINTAINERS                 |  1 +
+ fs/f2fs/f2fs.h              | 79 ----------------------------------
+ fs/f2fs/file.c              |  1 +
+ include/trace/events/f2fs.h |  1 +
+ include/uapi/linux/f2fs.h   | 86 +++++++++++++++++++++++++++++++++++++
+ 5 files changed, 89 insertions(+), 79 deletions(-)
+ create mode 100644 include/uapi/linux/f2fs.h
 
-Thanks,
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d1d4e49a695a..b79a911f1e32 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6686,6 +6686,7 @@ F:	Documentation/filesystems/f2fs.rst
+ F:	fs/f2fs/
+ F:	include/linux/f2fs_fs.h
+ F:	include/trace/events/f2fs.h
++F:	include/uapi/linux/f2fs.h
+ 
+ F71805F HARDWARE MONITORING DRIVER
+ M:	Jean Delvare <jdelvare@suse.com>
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index cb700d797296..99bcf4b44a9c 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -402,85 +402,6 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+ 	return size <= MAX_SIT_JENTRIES(journal);
+ }
+ 
+-/*
+- * f2fs-specific ioctl commands
+- */
+-#define F2FS_IOCTL_MAGIC		0xf5
+-#define F2FS_IOC_START_ATOMIC_WRITE	_IO(F2FS_IOCTL_MAGIC, 1)
+-#define F2FS_IOC_COMMIT_ATOMIC_WRITE	_IO(F2FS_IOCTL_MAGIC, 2)
+-#define F2FS_IOC_START_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 3)
+-#define F2FS_IOC_RELEASE_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 4)
+-#define F2FS_IOC_ABORT_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 5)
+-#define F2FS_IOC_GARBAGE_COLLECT	_IOW(F2FS_IOCTL_MAGIC, 6, __u32)
+-#define F2FS_IOC_WRITE_CHECKPOINT	_IO(F2FS_IOCTL_MAGIC, 7)
+-#define F2FS_IOC_DEFRAGMENT		_IOWR(F2FS_IOCTL_MAGIC, 8,	\
+-						struct f2fs_defragment)
+-#define F2FS_IOC_MOVE_RANGE		_IOWR(F2FS_IOCTL_MAGIC, 9,	\
+-						struct f2fs_move_range)
+-#define F2FS_IOC_FLUSH_DEVICE		_IOW(F2FS_IOCTL_MAGIC, 10,	\
+-						struct f2fs_flush_device)
+-#define F2FS_IOC_GARBAGE_COLLECT_RANGE	_IOW(F2FS_IOCTL_MAGIC, 11,	\
+-						struct f2fs_gc_range)
+-#define F2FS_IOC_GET_FEATURES		_IOR(F2FS_IOCTL_MAGIC, 12, __u32)
+-#define F2FS_IOC_SET_PIN_FILE		_IOW(F2FS_IOCTL_MAGIC, 13, __u32)
+-#define F2FS_IOC_GET_PIN_FILE		_IOR(F2FS_IOCTL_MAGIC, 14, __u32)
+-#define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
+-#define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
+-#define F2FS_IOC_GET_COMPRESS_BLOCKS	_IOR(F2FS_IOCTL_MAGIC, 17, __u64)
+-#define F2FS_IOC_RELEASE_COMPRESS_BLOCKS				\
+-					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
+-#define F2FS_IOC_RESERVE_COMPRESS_BLOCKS				\
+-					_IOR(F2FS_IOCTL_MAGIC, 19, __u64)
+-#define F2FS_IOC_SEC_TRIM_FILE		_IOW(F2FS_IOCTL_MAGIC, 20,	\
+-						struct f2fs_sectrim_range)
+-
+-/*
+- * should be same as XFS_IOC_GOINGDOWN.
+- * Flags for going down operation used by FS_IOC_GOINGDOWN
+- */
+-#define F2FS_IOC_SHUTDOWN	_IOR('X', 125, __u32)	/* Shutdown */
+-#define F2FS_GOING_DOWN_FULLSYNC	0x0	/* going down with full sync */
+-#define F2FS_GOING_DOWN_METASYNC	0x1	/* going down with metadata */
+-#define F2FS_GOING_DOWN_NOSYNC		0x2	/* going down */
+-#define F2FS_GOING_DOWN_METAFLUSH	0x3	/* going down with meta flush */
+-#define F2FS_GOING_DOWN_NEED_FSCK	0x4	/* going down to trigger fsck */
+-
+-/*
+- * Flags used by F2FS_IOC_SEC_TRIM_FILE
+- */
+-#define F2FS_TRIM_FILE_DISCARD		0x1	/* send discard command */
+-#define F2FS_TRIM_FILE_ZEROOUT		0x2	/* zero out */
+-#define F2FS_TRIM_FILE_MASK		0x3
+-
+-struct f2fs_gc_range {
+-	u32 sync;
+-	u64 start;
+-	u64 len;
+-};
+-
+-struct f2fs_defragment {
+-	u64 start;
+-	u64 len;
+-};
+-
+-struct f2fs_move_range {
+-	u32 dst_fd;		/* destination fd */
+-	u64 pos_in;		/* start position in src_fd */
+-	u64 pos_out;		/* start position in dst_fd */
+-	u64 len;		/* size to move */
+-};
+-
+-struct f2fs_flush_device {
+-	u32 dev_num;		/* device number to flush */
+-	u32 segments;		/* # of segments to flush */
+-};
+-
+-struct f2fs_sectrim_range {
+-	u64 start;
+-	u64 len;
+-	u64 flags;
+-};
+-
+ /* for inline stuff */
+ #define DEF_INLINE_RESERVED_SIZE	1
+ static inline int get_extra_isize(struct inode *inode);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index ee861c6d9ff0..d898f1e2764b 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -31,6 +31,7 @@
+ #include "gc.h"
+ #include "trace.h"
+ #include <trace/events/f2fs.h>
++#include <uapi/linux/f2fs.h>
+ 
+ static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+ {
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index f8f1e85ff130..56b113e3cd6a 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -6,6 +6,7 @@
+ #define _TRACE_F2FS_H
+ 
+ #include <linux/tracepoint.h>
++#include <uapi/linux/f2fs.h>
+ 
+ #define show_dev(dev)		MAJOR(dev), MINOR(dev)
+ #define show_dev_ino(entry)	show_dev(entry->dev), (unsigned long)entry->ino
+diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
+new file mode 100644
+index 000000000000..ad25786feaa1
+--- /dev/null
++++ b/include/uapi/linux/f2fs.h
+@@ -0,0 +1,86 @@
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
++#ifndef _UAPI_LINUX_F2FS_H
++#define _UAPI_LINUX_F2FS_H
++
++#include <linux/ioctl.h>
++
++/*
++ * f2fs-specific ioctl commands
++ */
++#define F2FS_IOCTL_MAGIC		0xf5
++#define F2FS_IOC_START_ATOMIC_WRITE	_IO(F2FS_IOCTL_MAGIC, 1)
++#define F2FS_IOC_COMMIT_ATOMIC_WRITE	_IO(F2FS_IOCTL_MAGIC, 2)
++#define F2FS_IOC_START_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 3)
++#define F2FS_IOC_RELEASE_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 4)
++#define F2FS_IOC_ABORT_VOLATILE_WRITE	_IO(F2FS_IOCTL_MAGIC, 5)
++#define F2FS_IOC_GARBAGE_COLLECT	_IOW(F2FS_IOCTL_MAGIC, 6, __u32)
++#define F2FS_IOC_WRITE_CHECKPOINT	_IO(F2FS_IOCTL_MAGIC, 7)
++#define F2FS_IOC_DEFRAGMENT		_IOWR(F2FS_IOCTL_MAGIC, 8,	\
++						struct f2fs_defragment)
++#define F2FS_IOC_MOVE_RANGE		_IOWR(F2FS_IOCTL_MAGIC, 9,	\
++						struct f2fs_move_range)
++#define F2FS_IOC_FLUSH_DEVICE		_IOW(F2FS_IOCTL_MAGIC, 10,	\
++						struct f2fs_flush_device)
++#define F2FS_IOC_GARBAGE_COLLECT_RANGE	_IOW(F2FS_IOCTL_MAGIC, 11,	\
++						struct f2fs_gc_range)
++#define F2FS_IOC_GET_FEATURES		_IOR(F2FS_IOCTL_MAGIC, 12, __u32)
++#define F2FS_IOC_SET_PIN_FILE		_IOW(F2FS_IOCTL_MAGIC, 13, __u32)
++#define F2FS_IOC_GET_PIN_FILE		_IOR(F2FS_IOCTL_MAGIC, 14, __u32)
++#define F2FS_IOC_PRECACHE_EXTENTS	_IO(F2FS_IOCTL_MAGIC, 15)
++#define F2FS_IOC_RESIZE_FS		_IOW(F2FS_IOCTL_MAGIC, 16, __u64)
++#define F2FS_IOC_GET_COMPRESS_BLOCKS	_IOR(F2FS_IOCTL_MAGIC, 17, __u64)
++#define F2FS_IOC_RELEASE_COMPRESS_BLOCKS				\
++					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
++#define F2FS_IOC_RESERVE_COMPRESS_BLOCKS				\
++					_IOR(F2FS_IOCTL_MAGIC, 19, __u64)
++#define F2FS_IOC_SEC_TRIM_FILE		_IOW(F2FS_IOCTL_MAGIC, 20,	\
++						struct f2fs_sectrim_range)
++
++/*
++ * should be same as XFS_IOC_GOINGDOWN.
++ * Flags for going down operation used by FS_IOC_GOINGDOWN
++ */
++#define F2FS_IOC_SHUTDOWN	_IOR('X', 125, __u32)	/* Shutdown */
++#define F2FS_GOING_DOWN_FULLSYNC	0x0	/* going down with full sync */
++#define F2FS_GOING_DOWN_METASYNC	0x1	/* going down with metadata */
++#define F2FS_GOING_DOWN_NOSYNC		0x2	/* going down */
++#define F2FS_GOING_DOWN_METAFLUSH	0x3	/* going down with meta flush */
++#define F2FS_GOING_DOWN_NEED_FSCK	0x4	/* going down to trigger fsck */
++
++/*
++ * Flags used by F2FS_IOC_SEC_TRIM_FILE
++ */
++#define F2FS_TRIM_FILE_DISCARD		0x1	/* send discard command */
++#define F2FS_TRIM_FILE_ZEROOUT		0x2	/* zero out */
++#define F2FS_TRIM_FILE_MASK		0x3
++
++struct f2fs_gc_range {
++	u32 sync;
++	u64 start;
++	u64 len;
++};
++
++struct f2fs_defragment {
++	u64 start;
++	u64 len;
++};
++
++struct f2fs_move_range {
++	u32 dst_fd;		/* destination fd */
++	u64 pos_in;		/* start position in src_fd */
++	u64 pos_out;		/* start position in dst_fd */
++	u64 len;		/* size to move */
++};
++
++struct f2fs_flush_device {
++	u32 dev_num;		/* device number to flush */
++	u32 segments;		/* # of segments to flush */
++};
++
++struct f2fs_sectrim_range {
++	u64 start;
++	u64 len;
++	u64 flags;
++};
++
++#endif /* _UAPI_LINUX_F2FS_H */
+-- 
+2.26.2
 
-On 2020/10/30 12:10, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> Added a new F2FS_IOC_SET_COMPRESS_OPTION ioctl to change file
-> compression option of a file.
-> 
-> struct f2fs_comp_option {
->      u8 algorithm;         => compression algorithm
->                            => 0:lzo, 1:lz4, 2:zstd, 3:lzorle
->      u8 log_cluster_size;  => log scale cluster size
->                            => 2 ~ 8
-> };
-> 
-> struct f2fs_comp_option option;
-> 
-> option.algorithm = 1;
-> option.log_cluster_size = 7;
-> 
-> ioctl(fd, F2FS_IOC_SET_COMPRESS_OPTION, &option);
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> 
-> v6: changed the function name of checking compression algorithm validity.
-> v5: allowed to set algorithm which is not currently enabled by kernel.
-> v4: changed commit message.
-> v3: changed the error number more specific.
->      folded in fix for build breakage reported by kernel test robot
->      <lkp@intel.com> and Dan Carpenter <dan.carpenter@oracle.com>.
-> v2: added ioctl description.
-> ---
->   fs/f2fs/compress.c |  5 +++++
->   fs/f2fs/f2fs.h     |  7 ++++++
->   fs/f2fs/file.c     | 54 ++++++++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 66 insertions(+)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 7895186cc765..b0144670d320 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -514,6 +514,11 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
->   	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
->   }
->   
-> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
-> +{
-> +	return f2fs_cops[algorithm] != NULL;
-> +}
-> +
->   static mempool_t *compress_page_pool;
->   static int num_compress_pages = 512;
->   module_param(num_compress_pages, uint, 0444);
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index a33c90cf979b..70a8a2196888 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -435,6 +435,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
->   						struct f2fs_sectrim_range)
->   #define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
->   						struct f2fs_comp_option)
-> +#define F2FS_IOC_SET_COMPRESS_OPTION	_IOW(F2FS_IOCTL_MAGIC, 22,	\
-> +						struct f2fs_comp_option)
->   
->   /*
->    * should be same as XFS_IOC_GOINGDOWN.
-> @@ -3915,6 +3917,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
->   int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
->   void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
->   bool f2fs_is_compress_backend_ready(struct inode *inode);
-> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm);
->   int f2fs_init_compress_mempool(void);
->   void f2fs_destroy_compress_mempool(void);
->   void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity);
-> @@ -3945,6 +3948,10 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
->   	/* not support compression */
->   	return false;
->   }
-> +static inline bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
-> +{
-> +	return false;
-> +}
->   static inline struct page *f2fs_compress_control_page(struct page *page)
->   {
->   	WARN_ON_ONCE(1);
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index bd52df84219d..be56702e4939 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3963,6 +3963,57 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
->   	return 0;
->   }
->   
-> +static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-> +{
-> +	struct inode *inode = file_inode(filp);
-> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> +	struct f2fs_comp_option option;
-> +	int ret = 0;
-> +
-> +	if (!f2fs_sb_has_compression(sbi))
-> +		return -EOPNOTSUPP;
-> +
-> +	if (!(filp->f_mode & FMODE_WRITE))
-> +		return -EBADF;
-> +
-> +	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
-> +				sizeof(option)))
-> +		return -EFAULT;
-> +
-> +	if (!f2fs_compressed_file(inode) ||
-> +			option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
-> +			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
-> +			option.algorithm >= COMPRESS_MAX)
-> +		return -EINVAL;
-> +
-> +	file_start_write(filp);
-> +	inode_lock(inode);
-> +
-> +	if (f2fs_is_mmap_file(inode) || get_dirty_pages(inode)) {
-> +		ret = -EBUSY;
-> +		goto out;
-> +	}
-> +
-> +	if (inode->i_size != 0) {
-> +		ret = -EFBIG;
-> +		goto out;
-> +	}
-> +
-> +	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
-> +	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
-> +	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
-> +	f2fs_mark_inode_dirty_sync(inode, true);
-> +
-> +	if (!f2fs_is_compress_algorithm_valid(option.algorithm))
-> +		f2fs_warn(sbi, "compression algorithm is successfully set, "
-> +			"but current kernel doesn't support this algorithm.");
-> +out:
-> +	inode_unlock(inode);
-> +	file_end_write(filp);
-> +
-> +	return ret;
-> +}
-> +
->   long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   {
->   	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
-> @@ -4053,6 +4104,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   		return f2fs_sec_trim_file(filp, arg);
->   	case F2FS_IOC_GET_COMPRESS_OPTION:
->   		return f2fs_ioc_get_compress_option(filp, arg);
-> +	case F2FS_IOC_SET_COMPRESS_OPTION:
-> +		return f2fs_ioc_set_compress_option(filp, arg);
->   	default:
->   		return -ENOTTY;
->   	}
-> @@ -4224,6 +4277,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
->   	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
->   	case F2FS_IOC_SEC_TRIM_FILE:
->   	case F2FS_IOC_GET_COMPRESS_OPTION:
-> +	case F2FS_IOC_SET_COMPRESS_OPTION:
->   		break;
->   	default:
->   		return -ENOIOCTLCMD;
-> 
 
 
 _______________________________________________
