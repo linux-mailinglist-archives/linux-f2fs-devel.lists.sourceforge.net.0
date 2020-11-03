@@ -2,79 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 874E12A4F7D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 19:58:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F7122A5A9C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Nov 2020 00:36:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ka1Vk-0002LD-Dy; Tue, 03 Nov 2020 18:58:28 +0000
+	id 1ka5r2-0000aR-Ts; Tue, 03 Nov 2020 23:36:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ka1Vj-0002L0-3w
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 18:58:27 +0000
+ (envelope-from <daeho43@gmail.com>) id 1ka5r1-0000aE-Rp
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 23:36:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R5a3yvopw53ViYWisVs8Lhri7Gzjm2ITxMaeDeIN6XQ=; b=jIvFhDIRdzPhbOVSxUPn+Np3yu
- p8bTq2KmFrqXSZQ6ETeecqAIjG536HkjJFwftswXcsDkSB+bFdZPS4xUjJTq3CjtvGqDh5NsAAqd0
- u3yON1E/ch5TCQIv4VPEuflZapSm6SIqTNPx6gsBwvC+hLP9zVC7R2g+LkP6yuglxZj0=;
+ bh=S0+bzA9s7UKxsAZSBmq5cQ30e/XxfLYDpoojIw6IapI=; b=dHrNVVbzwwCptonYgufpxv176E
+ vRK9769CmsD2pnlWJKWoNv4DvrRCWhAAIP3E4gJcTQWMkYWrG04kHETdoaq/oS+HZEEcNUDiU80VB
+ BPCRBAmTEPm0OwylxHL/zX2s2qVyLzIqCeg4VI84qgzCtFLAAm3pMucLd2XXfOMXu6lI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=R5a3yvopw53ViYWisVs8Lhri7Gzjm2ITxMaeDeIN6XQ=; b=M27nsvoFlvOZyR+x6JXPVWXVZM
- BUXMd5hmSMCPendZ7ELIZMDL1Lmm+qF8UNg/iUYqbCS7HSoJfoPW/1dYrFE9CV30BVTxF/RlDwewg
- Zq3Y6D/qLfmVQF6GjuC91oiUoBBPs9sPaIWddDEeeHlus8kSgAPng/09fJTPoGVQsJ9o=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ka1VY-000HJV-1O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 18:58:27 +0000
-Received: from google.com (unknown [104.132.1.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0B5F720786;
- Tue,  3 Nov 2020 18:58:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1604429890;
- bh=a0Obnq7zFjA7+lJwjIGr/YVojARoM/224HrcQIDvg3M=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=AAAhpE2eeEd8Ww6QiU17UcSdXQtMQaV6V3GiM1FJdX9ZIo2YFvu3bY+EqmmkvDHq+
- 7ZgUWywksrRGDTqaJWSpAF6JMLHtvlLW42IEgNN4U2eBR511nlCmmlEKbXIkNJA0+b
- 7AbNJ104CZham7e7CQnHDsHqORmx7TCudoIn5kBs=
-Date: Tue, 3 Nov 2020 10:58:08 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daejun Park <daejun7.park@samsung.com>
-Message-ID: <20201103185808.GB1273166@google.com>
-References: <CGME20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
- <20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=S0+bzA9s7UKxsAZSBmq5cQ30e/XxfLYDpoojIw6IapI=; b=m
+ WmkjFziIM7aZWaDTHvja8WNou86gNfj+x5R7W7bCt/BZRNSkhv6poLKQttE7dqqwRmDaF5tvS3tZd
+ GRo9yMtWU8N0NAH1HcjDaiBkknB4+vMnGS5rxfFTCVNH89J2SMPe4U8LDLZ3yKtNWMFeprK9wtyA/
+ uz87NkYxuvzk8N90=;
+Received: from mail-pf1-f196.google.com ([209.85.210.196])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1ka5qw-008QMp-ET
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 23:36:43 +0000
+Received: by mail-pf1-f196.google.com with SMTP id e7so15689465pfn.12
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 03 Nov 2020 15:36:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=S0+bzA9s7UKxsAZSBmq5cQ30e/XxfLYDpoojIw6IapI=;
+ b=GnkgjZ4V8Mpuxwh8634uGhR4JY+mTyktfUh0yGEX+giA0w25biqOVecK0archgURGw
+ hGuWsUwxs8FpU6UAZqTmhWRtmDLabujEZm0bk9ZKZkPwKl5oCnXNpF1+SZJCloIitcVJ
+ tbLXvsM1at5qYb9MBK9U4fBMXgMWceUXsnRgfJjjAl3o7RowiQpHjpRU5UICiCJ3DEID
+ OtCRbhJSQEz0KJMlESnjNv8ThDvs+an9nR4PRHaHiD6r2RBE2qeHJVweGGpT/TAbZNyG
+ bTbiHY4p9dGrK44NNeV+sS2Ej2dGhiFbRTcdODHETL9C9pEEkXo71DLNPV0cf4BKp4f8
+ EpKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=S0+bzA9s7UKxsAZSBmq5cQ30e/XxfLYDpoojIw6IapI=;
+ b=VRZGEncdInGxlLUL9pAY6ipcQZFKilT/qbn8YTNkQCRQOWk1LOBBh1+CS2mNK31oGL
+ gDWFym0ksmr01nlnfgV0muz71pEL+r5kJjkrjnhKb3aDQe9grtb7qXemR5tBLK5NlhaY
+ oFfc9mFQVarJEB8ISqhi8KvC2prN0uGi4Hx/IbK7KyPRhcBUGz9GlFUDvm+vzjWY/gOW
+ i4PuPbdPH16O6HsgbudnKj8yN04GEvQqlNBK0C6uGzFxG26altEUXAOPCydPFxwJN4m1
+ 6AWOZ7EiBG0mWTZlcOTKJYRkADZJ7LEc4ZJsAUnO7whjGP2hy5bhnwSQxOc7I47ZM28z
+ Pxeg==
+X-Gm-Message-State: AOAM533RRkKXcripDH+ewvaKkuHqc4yjX0VAkr8+oG9BbjgdHmvMgPid
+ k9asbxKhuL5bnVLXNe3ngbg=
+X-Google-Smtp-Source: ABdhPJwMOnE5FwtsYa0OytLzoxFJWsQq7QuLt7z6A7c10GT9ViKR4VQQfU/TU2qz7t9r4qfNS+RjNA==
+X-Received: by 2002:a62:e40b:0:b029:18b:2d21:45cd with SMTP id
+ r11-20020a62e40b0000b029018b2d2145cdmr6231150pfh.36.1604446585723; 
+ Tue, 03 Nov 2020 15:36:25 -0800 (PST)
+Received: from daehojeong1.seo.corp.google.com
+ ([2401:fa00:d:11:a6ae:11ff:fe18:6ce2])
+ by smtp.gmail.com with ESMTPSA id cm20sm237082pjb.18.2020.11.03.15.36.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Nov 2020 15:36:24 -0800 (PST)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed,  4 Nov 2020 08:36:14 +0900
+Message-Id: <20201103233614.2092498-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.29.1.341.ge80a0c044ae-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.196 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ka1VY-000HJV-1O
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change write_hint for hot/warm nodes
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.196 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1ka5qw-008QMp-ET
+Subject: [f2fs-dev] [PATCH v2] f2fs_io: add get/set compression option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,94 +111,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: yongmyung lee <ymhungry.lee@samsung.com>,
- Jieon Seol <jieon.seol@samsung.com>, Mankyu PARK <manq.park@samsung.com>,
- Sung-Jun Park <sungjun07.park@samsung.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- Keoseong Park <keosung.park@samsung.com>,
- Sang-yoon Oh <sangyoon.oh@samsung.com>,
- SEUNGUK SHIN <seunguk.shin@samsung.com>,
- Jinyoung CHOI <j-young.choi@samsung.com>,
- Jaemyung Lee <jaemyung.lee@samsung.com>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/03, Daejun Park wrote:
-> In the fs-based mode of F2FS, the mapping of hot/warm node to
-> WRITE_LIFE_NOT_SET should be changed to WRITE_LIFE_SHORT.
-> 
-> As a result of analyzing the write pattern of f2fs using real workload,
-> hot/warm nodes have high update ratio close to hot data.[*]
-> However, F2FS passes write hints for hot/warm nodes as WRITE_LIFE_NOT_SET.
+From: Daeho Jeong <daehojeong@google.com>
 
-I prefer to keep it as is, since basically node blocks should be separatly
-stored from data blocks in different erase blocks in order to match F2FS GC
-and FTL GC units. And, we don't do IPU for node blocks which doesn't make sense
-to say *update ratio*.
+Added new commands, get_coption and set_coption, to support
+F2FS_IOC_GET_COMPRESS_OPTION and F2FS_IOC_SET_COMPRESS_OPTION.
 
-> 
-> Furthermore, WRITE_LIFE_NOT_SET is a default value of write hint when it is
-> not provided from the file system.
-> In storage, write_hint is used to distinguish streams (e.g. NVMe).
-> So, the hot/warm node of F2FS is not distinguished from other write_hints,
-> which can make the wrong stream seperation.
-> 
-> * Liang, Yu, et al. "An empirical study of F2FS on mobile devices." 2017
-> IEEE 23rd International Conference on Embedded and Real-Time Computing
-> Systems and Applications (RTCSA).
-> 
-> Signed-off-by: Daejun Park <daejun7.park@samsung.com>
-> ---
-> v2: update documentation and comments
-> ---
->  Documentation/filesystems/f2fs.rst | 4 ++--
->  fs/f2fs/segment.c                  | 6 +++---
->  2 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index b8ee761c9922..afa3da7cfade 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -717,8 +717,8 @@ WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
->  ===================== ======================== ===================
->  User                  F2FS                     Block
->  ===================== ======================== ===================
-> -                      META                     WRITE_LIFE_MEDIUM;
-> -                      HOT_NODE                 WRITE_LIFE_NOT_SET
-> +                      META                     WRITE_LIFE_MEDIUM
-> +                      HOT_NODE                 WRITE_LIFE_SHORT
->                        WARM_NODE                "
->                        COLD_NODE                WRITE_LIFE_NONE
->  ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 1596502f7375..577ab7516c6b 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3160,8 +3160,8 @@ int f2fs_rw_hint_to_seg_type(enum rw_hint hint)
->   *
->   * User                  F2FS                     Block
->   * ----                  ----                     -----
-> - *                       META                     WRITE_LIFE_MEDIUM;
-> - *                       HOT_NODE                 WRITE_LIFE_NOT_SET
-> + *                       META                     WRITE_LIFE_MEDIUM
-> + *                       HOT_NODE                 WRITE_LIFE_SHORT
->   *                       WARM_NODE                "
->   *                       COLD_NODE                WRITE_LIFE_NONE
->   * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
-> @@ -3208,7 +3208,7 @@ enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
->  				return WRITE_LIFE_EXTREME;
->  		} else if (type == NODE) {
->  			if (temp == WARM || temp == HOT)
-> -				return WRITE_LIFE_NOT_SET;
-> +				return WRITE_LIFE_SHORT;
->  			else if (temp == COLD)
->  				return WRITE_LIFE_NONE;
->  		} else if (type == META) {
-> -- 
-> 2.25.1
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+
+v2: changed the file open option of set_coption to write only.
+---
+ tools/f2fs_io/f2fs_io.c | 61 +++++++++++++++++++++++++++++++++++++++++
+ tools/f2fs_io/f2fs_io.h |  9 ++++++
+ 2 files changed, 70 insertions(+)
+
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 5a2d06e..7e6cfd8 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -905,6 +905,65 @@ static void do_reserve_cblocks(int argc, char **argv, const struct cmd_desc *cmd
+ 	exit(0);
+ }
+ 
++#define get_coption_desc "get compression option of a compressed file"
++#define get_coption_help						\
++"f2fs_io get_coption [file]\n\n"	\
++"  algorithm        : compression algorithm (0:lzo, 1: lz4, 2:zstd, 3:lzorle)\n"	\
++"  log_cluster_size : compression cluster log size (2 <= log_size <= 8)\n"
++
++static void do_get_coption(int argc, char **argv, const struct cmd_desc *cmd)
++{
++	struct f2fs_comp_option option;
++	int ret, fd;
++
++	if (argc != 2) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
++	}
++
++	fd = xopen(argv[1], O_RDONLY, 0);
++
++	ret = ioctl(fd, F2FS_IOC_GET_COMPRESS_OPTION, &option);
++	if (ret < 0)
++		die_errno("F2FS_IOC_GET_COMPRESS_OPTION failed");
++
++	printf("compression algorithm:%u\n", option.algorithm);
++	printf("compression cluster log size:%u\n", option.log_cluster_size);
++
++	exit(0);
++}
++
++#define set_coption_desc "set compression option of a compressed file"
++#define set_coption_help						\
++"f2fs_io set_coption [algorithm] [log_cluster_size] [file_path]\n\n"	\
++"  algorithm        : compression algorithm (0:lzo, 1: lz4, 2:zstd, 3:lzorle)\n"	\
++"  log_cluster_size : compression cluster log size (2 <= log_size <= 8)\n"
++
++static void do_set_coption(int argc, char **argv, const struct cmd_desc *cmd)
++{
++	struct f2fs_comp_option option;
++	int fd, ret;
++
++	if (argc != 4) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
++	}
++
++	option.algorithm = atoi(argv[1]);
++	option.log_cluster_size = atoi(argv[2]);
++
++	fd = xopen(argv[3], O_WRONLY, 0);
++
++	ret = ioctl(fd, F2FS_IOC_SET_COMPRESS_OPTION, &option);
++	if (ret < 0)
++		die_errno("F2FS_IOC_SET_COMPRESS_OPTION failed");
++
++	printf("set compression option: algorithm=%u, log_cluster_size=%u\n",
++			option.algorithm, option.log_cluster_size);
++	exit(0);
++}
+ 
+ #define CMD_HIDDEN 	0x0001
+ #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+@@ -930,6 +989,8 @@ const struct cmd_desc cmd_list[] = {
+ 	CMD(get_cblocks),
+ 	CMD(release_cblocks),
+ 	CMD(reserve_cblocks),
++	CMD(get_coption),
++	CMD(set_coption),
+ 	{ NULL, NULL, NULL, NULL, 0 }
+ };
+ 
+diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
+index 05d4cfe..cb56e8c 100644
+--- a/tools/f2fs_io/f2fs_io.h
++++ b/tools/f2fs_io/f2fs_io.h
+@@ -84,6 +84,10 @@ typedef u32	__be32;
+ 					_IOR(F2FS_IOCTL_MAGIC, 18, __u64)
+ #define F2FS_IOC_RESERVE_COMPRESS_BLOCKS				\
+ 					_IOR(F2FS_IOCTL_MAGIC, 19, __u64)
++#define F2FS_IOC_GET_COMPRESS_OPTION    _IOR(F2FS_IOCTL_MAGIC, 21,      \
++						struct f2fs_comp_option)
++#define F2FS_IOC_SET_COMPRESS_OPTION    _IOW(F2FS_IOCTL_MAGIC, 22,      \
++						struct f2fs_comp_option)
+ 
+ #define F2FS_IOC_SET_ENCRYPTION_POLICY	FS_IOC_SET_ENCRYPTION_POLICY
+ #define F2FS_IOC_GET_ENCRYPTION_POLICY	FS_IOC_GET_ENCRYPTION_POLICY
+@@ -164,3 +168,8 @@ struct f2fs_flush_device {
+ 	u32 dev_num;		/* device number to flush */
+ 	u32 segments;		/* # of segments to flush */
+ };
++
++struct f2fs_comp_option {
++	u8 algorithm;
++	u8 log_cluster_size;
++};
+-- 
+2.29.1.341.ge80a0c044ae-goog
+
 
 
 _______________________________________________
