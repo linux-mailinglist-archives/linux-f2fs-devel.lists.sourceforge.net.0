@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 348092A3C74
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 07:02:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C01472A3C7E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 07:02:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kZpP6-00084i-U7; Tue, 03 Nov 2020 06:02:48 +0000
+	id 1kZpPC-0004ya-Hb; Tue, 03 Nov 2020 06:02:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <nickrterrell@gmail.com>)
- id 1kZpP3-00083k-Ut; Tue, 03 Nov 2020 06:02:45 +0000
+ id 1kZpOz-0004wv-II; Tue, 03 Nov 2020 06:02:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=z11dyIW9wYOT1WRGrY3n/HRYqfGSZJkJPYcfMlfSK1k=; b=cuXf3FWPACmdWCe64olUtY8uwi
- kIFAUuygf1KN45whl8PA5T3u1f+Bi2WhncTNkHivu1BUEsDNtwkzcqfwc/SFMKkjG66x9qaRKkPZC
- NrE/MScFUdyJDlQgvJN6tuS6h4TCvwc2CHHBVhZEYjQQi7Fbq+PkIwaagiGT9Wct2KTA=;
+ bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=h1fLSUOYdjkTFDWsstj77xMruw
+ kp+55ewG93NEZwqYjAb1+t9i68NI9aH8yoPlGm7JjO8y8K9gcmhXmvwQdog47blbtUCu0yRYgjXU0
+ 7YTyD8p4We+pk05hnI+GAqFeY6ZxYpnLNJmidGLj40CzsNHrmsKb69ogWxM0RW73mzNs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,51 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=z11dyIW9wYOT1WRGrY3n/HRYqfGSZJkJPYcfMlfSK1k=; b=OdzWdSL5x6Brk1O+1k0fFblGbc
- aRyehr6owJxLjkGVZWnXNJgEoO+umszC9IyVcOF2GNNse9aw7joNrVz4ie5zXES8CBpRg73DTZFS+
- Q8eVC/x1xFMGrueE+HMDE26zQyh6PGtsQZSaeZiNxv6+T2woiOt6HhXPBt1cXiDAQ1dg=;
-Received: from mail-pg1-f193.google.com ([209.85.215.193])
+ bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=Vvru93oIw8itjd4WrTpKpFHd/X
+ UiHL8rJI3VfOaYe2smEikh9O64ZvvnugoAXP5GrvAAEPcHWqMKYQG0H0kLsExvYM4EvPSEYHZpaSb
+ vzbDMez7fZMYL64tGGnIEjQcjivj3/U/tJMCk5rpRISqLw0sFZfwCBAzK6Bi+XknhmsE=;
+Received: from mail-pg1-f195.google.com ([209.85.215.195])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kZpOx-007Kju-Hw; Tue, 03 Nov 2020 06:02:45 +0000
-Received: by mail-pg1-f193.google.com with SMTP id x13so12827809pgp.7;
- Mon, 02 Nov 2020 22:02:39 -0800 (PST)
+ id 1kZpOs-007Kja-VS; Tue, 03 Nov 2020 06:02:41 +0000
+Received: by mail-pg1-f195.google.com with SMTP id w4so2614650pgg.13;
+ Mon, 02 Nov 2020 22:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=z11dyIW9wYOT1WRGrY3n/HRYqfGSZJkJPYcfMlfSK1k=;
- b=fqlEVbK35EPh+UkmbfTOML9wO/Yu6UWciXnYiqqdEFBWDytHVrYmbYSbG12dv3lj29
- ijQLun9BJcZFWXiFfb7KP6SyOle0F7XUCtEdyucxYLOXj8HjJeyih7omsHvYll7LqUXo
- Ezth8S3rW1LfHcLdV+yztMhArCw4MGetq8yF2xgV953ex+dYZdd95rMdMI/ZjReJM31v
- OLpBsuFM19OuIh9mQqk1Ibz47smDqth/3X5EdOHwsL24siNZb4S+19Bxoqf/gbZeNE66
- tS4lJIZ8sg6y5/BkJic3oQgWYhl+xHOgAJppgO4t86xw4TwHcW3qcydvarNH2ufdjq/e
- DuxA==
+ bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
+ b=p7KlBBGLft8dFPRJKfCutgbwfRd5yWhKlvBFON2+wv9VJrvR36DECWzNPpd/n36IED
+ ZY0e3i7ASgkz8//vQFonbgL6nACypaK/9bB/rFS8/mbs+s99xOsmELOb7X76+AY87EkX
+ rfN5NkpWRgMGfMNIN2yHfvMIluVdHup00vUJg3V0N+NaVvWtWdoDex4v71QSWSbtedcO
+ +MhF/WSvq3paW4XfKrZKn+p0I3jhwaRoji0S1tA2iCFfy/ows40uFc/cGQVycZZ0Kr9F
+ nt3F6WSayHQmY7NOWGOttU7E+CmTdBR9oQ3w1cC/n9+gzDo2m3549nYpRVaXg9VAm07U
+ kkVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=z11dyIW9wYOT1WRGrY3n/HRYqfGSZJkJPYcfMlfSK1k=;
- b=CdI0Ls3GWOxRCYEBEmsvT/joy69sJMfpBc2WwRLpkT49QkOoV0oGzzHVqVg3cMd0wK
- w167fFf2KF+uRCbRodfHxShGbFH82pAPZ4ks+36F/xTGyNip2ntsjlBg5mBZQoZXof5N
- HYusebdscVWQMyL/V5neDFxAv9vGPhDV4Du6A1LZyYnWceSxsUVaK8n6WFM9ftzcRfSW
- 1PPPDkGZJqu/NnUhwOXlk2W8mz1DMv6z/A/Qug1HCMZD+kwigoeplGTMTdrONeiIdYt2
- zS8PleQwGrsHJdP0KbPDRGVUlluAjEv7LfpRXIvUrID/Mctv8wriC/NT4D/GuAxv9y/Y
- tYwg==
-X-Gm-Message-State: AOAM530NT5HndjgUx+8H9LDskaylVLZYJC6her3c20Po1mRwYxZ1i7UY
- 4AvSHDGI6KvHbriXR+aoAcoa116IWrY=
-X-Google-Smtp-Source: ABdhPJzczT8OSnH39dRzgGhVfqu8jd5/AMVdwt8aIEY9Xprsdx50dQXpPz4sAoL7yZ+FMm8SFeMYSw==
-X-Received: by 2002:a62:4e0f:0:b029:156:13e0:efa7 with SMTP id
- c15-20020a624e0f0000b029015613e0efa7mr24248296pfb.73.1604383346862; 
- Mon, 02 Nov 2020 22:02:26 -0800 (PST)
+ bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
+ b=Vz3DngX6QdDTFqeId3lAclpxhNu4k+037dojCOvFMLbxlhUje31g6yRPjUVGOc9PUa
+ 3IK5FeNeLcNEy/iBzvSs7sh4kRBuEt7Y/Or2pRflg9NaW0ctVlszC/+I7li3cKyi0kPk
+ xpBT7gj1n8mImubRfvvSZKGHzXjr4wXUaT4csRgv/ShkiY4aefSbyEYqqB+rzstM5OFC
+ HMkwzjWOk1f4VkuDt27gDFMyQ61FFRdUDHLRP4baFELwNb7sq6FGlvLG8Qp0dPKymUfQ
+ +lrt2Q73vDld/QS2W7aMQ9HP521n11JGnGvWRWPoxyYb2yrmq4PcnO6hr225yJMInGtt
+ J1FQ==
+X-Gm-Message-State: AOAM531ZXE0V6coc4h7R188yaH8a94P3XIilzrmy/z8PjIQuPSOewMnR
+ 8jn/uJlIvhasvyyQuZzW89s=
+X-Google-Smtp-Source: ABdhPJyyTjet0hB3i5D2u5kVje2efJwJ6tBaH7zXqSEo7vAbmIbW8YoDfZXAeBtfOOYzUqpvwNqNeQ==
+X-Received: by 2002:a63:d46:: with SMTP id 6mr9709661pgn.227.1604383349363;
+ Mon, 02 Nov 2020 22:02:29 -0800 (PST)
 Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
  [98.33.101.203])
- by smtp.gmail.com with ESMTPSA id b16sm15647269pfp.195.2020.11.02.22.02.25
+ by smtp.gmail.com with ESMTPSA id b16sm15647269pfp.195.2020.11.02.22.02.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Nov 2020 22:02:26 -0800 (PST)
+ Mon, 02 Nov 2020 22:02:28 -0800 (PST)
 From: Nick Terrell <nickrterrell@gmail.com>
 To: Herbert Xu <herbert@gondor.apana.org.au>
-Date: Mon,  2 Nov 2020 22:05:34 -0800
-Message-Id: <20201103060535.8460-9-nickrterrell@gmail.com>
+Date: Mon,  2 Nov 2020 22:05:35 -0800
+Message-Id: <20201103060535.8460-10-nickrterrell@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201103060535.8460-1-nickrterrell@gmail.com>
 References: <20201103060535.8460-1-nickrterrell@gmail.com>
@@ -85,22 +84,23 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: fb.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.193 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (nickrterrell[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.195 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.193 listed in wl.mailspike.net]
+ [209.85.215.195 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kZpOx-007Kju-Hw
-Subject: [f2fs-dev] [PATCH v5 8/9] lib: unzstd: Switch to the zstd-1.4.6 API
+X-Headers-End: 1kZpOs-007Kja-VS
+Subject: [f2fs-dev] [PATCH v5 9/9] lib: zstd: Remove zstd compatibility
+ wrapper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,95 +125,137 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Nick Terrell <terrelln@fb.com>
 
-Move away from the compatibility wrapper to the zstd-1.4.6 API. This
-code is functionally equivalent.
+All callers have been transitioned to the new zstd-1.4.6 API. There are
+no more callers of the zstd compatibility wrapper, so delete it.
 
 Signed-off-by: Nick Terrell <terrelln@fb.com>
 ---
- lib/decompress_unzstd.c | 40 ++++++++++++++--------------------------
- 1 file changed, 14 insertions(+), 26 deletions(-)
+ include/linux/zstd_compat.h | 116 ------------------------------------
+ 1 file changed, 116 deletions(-)
+ delete mode 100644 include/linux/zstd_compat.h
 
-diff --git a/lib/decompress_unzstd.c b/lib/decompress_unzstd.c
-index 3c6ad01ffcd5..efbe66501b34 100644
---- a/lib/decompress_unzstd.c
-+++ b/lib/decompress_unzstd.c
-@@ -73,7 +73,8 @@
- 
- #include <linux/decompress/mm.h>
- #include <linux/kernel.h>
--#include <linux/zstd_compat.h>
-+#include <linux/zstd.h>
-+#include <linux/zstd_errors.h>
- 
- /* 128MB is the maximum window size supported by zstd. */
- #define ZSTD_WINDOWSIZE_MAX	(1 << ZSTD_WINDOWLOG_MAX)
-@@ -120,9 +121,9 @@ static int INIT decompress_single(const u8 *in_buf, long in_len, u8 *out_buf,
- 				  long out_len, long *in_pos,
- 				  void (*error)(char *x))
- {
--	const size_t wksp_size = ZSTD_DCtxWorkspaceBound();
-+	const size_t wksp_size = ZSTD_estimateDCtxSize();
- 	void *wksp = large_malloc(wksp_size);
--	ZSTD_DCtx *dctx = ZSTD_initDCtx(wksp, wksp_size);
-+	ZSTD_DCtx *dctx = ZSTD_initStaticDCtx(wksp, wksp_size);
- 	int err;
- 	size_t ret;
- 
-@@ -165,7 +166,6 @@ static int INIT __unzstd(unsigned char *in_buf, long in_len,
- {
- 	ZSTD_inBuffer in;
- 	ZSTD_outBuffer out;
--	ZSTD_frameParams params;
- 	void *in_allocated = NULL;
- 	void *out_allocated = NULL;
- 	void *wksp = NULL;
-@@ -234,36 +234,24 @@ static int INIT __unzstd(unsigned char *in_buf, long in_len,
- 	out.size = out_len;
- 
- 	/*
--	 * We need to know the window size to allocate the ZSTD_DStream.
--	 * Since we are streaming, we need to allocate a buffer for the sliding
--	 * window. The window size varies from 1 KB to ZSTD_WINDOWSIZE_MAX
--	 * (8 MB), so it is important to use the actual value so as not to
--	 * waste memory when it is smaller.
-+	 * Zstd determines the workspace size from the window size written
-+	 * into the frame header. This ensures that we use the minimum value
-+	 * possible, since the window size varies from 1 KB to ZSTD_WINDOWSIZE_MAX
-+	 * (1 GB), so it is very important to use the actual value.
- 	 */
--	ret = ZSTD_getFrameParams(&params, in.src, in.size);
-+	wksp_size = ZSTD_estimateDStreamSize_fromFrame(in.src, in.size);
- 	err = handle_zstd_error(ret, error);
- 	if (err)
- 		goto out;
--	if (ret != 0) {
--		error("ZSTD-compressed data has an incomplete frame header");
--		err = -1;
--		goto out;
--	}
--	if (params.windowSize > ZSTD_WINDOWSIZE_MAX) {
--		error("ZSTD-compressed data has too large a window size");
-+	wksp = large_malloc(wksp_size);
-+	if (wksp == NULL) {
-+		error("Out of memory while allocating ZSTD_DStream");
- 		err = -1;
- 		goto out;
- 	}
+diff --git a/include/linux/zstd_compat.h b/include/linux/zstd_compat.h
+deleted file mode 100644
+index cda9208bf04a..000000000000
+--- a/include/linux/zstd_compat.h
++++ /dev/null
+@@ -1,116 +0,0 @@
+-/*
+- * Copyright (c) 2016-present, Facebook, Inc.
+- * All rights reserved.
+- *
+- * This source code is licensed under the BSD-style license found in the
+- * LICENSE file in the root directory of https://github.com/facebook/zstd.
+- * An additional grant of patent rights can be found in the PATENTS file in the
+- * same directory.
+- *
+- * This program is free software; you can redistribute it and/or modify it under
+- * the terms of the GNU General Public License version 2 as published by the
+- * Free Software Foundation. This program is dual-licensed; you may select
+- * either version 2 of the GNU General Public License ("GPL") or BSD license
+- * ("BSD").
+- */
 -
--	/*
--	 * Allocate the ZSTD_DStream now that we know how much memory is
--	 * required.
--	 */
--	wksp_size = ZSTD_DStreamWorkspaceBound(params.windowSize);
--	wksp = large_malloc(wksp_size);
--	dstream = ZSTD_initDStream(params.windowSize, wksp, wksp_size);
-+	dstream = ZSTD_initStaticDStream(wksp, wksp_size);
- 	if (dstream == NULL) {
--		error("Out of memory while allocating ZSTD_DStream");
-+		error("ZSTD_initStaticDStream failed");
- 		err = -1;
- 		goto out;
- 	}
+-#ifndef ZSTD_COMPAT_H
+-#define ZSTD_COMPAT_H
+-
+-#include <linux/zstd.h>
+-
+-#if defined(ZSTD_VERSION_NUMBER) && (ZSTD_VERSION_NUMBER >= 10406)
+-/*
+- * This header provides backwards compatibility for the zstd-1.4.6 library
+- * upgrade. This header allows us to upgrade the zstd library version without
+- * modifying any callers. Then we will migrate callers from the compatibility
+- * wrapper one at a time until none remain. At which point we will delete this
+- * header.
+- *
+- * It is temporary and will be deleted once the upgrade is complete.
+- */
+-
+-#include <linux/zstd_errors.h>
+-
+-static inline size_t ZSTD_CCtxWorkspaceBound(ZSTD_compressionParameters compression_params)
+-{
+-    return ZSTD_estimateCCtxSize_usingCParams(compression_params);
+-}
+-
+-static inline size_t ZSTD_CStreamWorkspaceBound(ZSTD_compressionParameters compression_params)
+-{
+-    return ZSTD_estimateCStreamSize_usingCParams(compression_params);
+-}
+-
+-static inline size_t ZSTD_DCtxWorkspaceBound(void)
+-{
+-    return ZSTD_estimateDCtxSize();
+-}
+-
+-static inline size_t ZSTD_DStreamWorkspaceBound(unsigned long long window_size)
+-{
+-    return ZSTD_estimateDStreamSize(window_size);
+-}
+-
+-static inline ZSTD_CCtx* ZSTD_initCCtx(void* wksp, size_t wksp_size)
+-{
+-    if (wksp == NULL)
+-        return NULL;
+-    return ZSTD_initStaticCCtx(wksp, wksp_size);
+-}
+-
+-static inline ZSTD_CStream* ZSTD_initCStream_compat(ZSTD_parameters params, uint64_t pledged_src_size, void* wksp, size_t wksp_size)
+-{
+-    ZSTD_CStream* cstream;
+-    size_t ret;
+-
+-    if (wksp == NULL)
+-        return NULL;
+-
+-    cstream = ZSTD_initStaticCStream(wksp, wksp_size);
+-    if (cstream == NULL)
+-        return NULL;
+-
+-    /* 0 means unknown in old API but means 0 in new API */
+-    if (pledged_src_size == 0)
+-        pledged_src_size = ZSTD_CONTENTSIZE_UNKNOWN;
+-
+-    ret = ZSTD_initCStream_advanced(cstream, NULL, 0, params, pledged_src_size);
+-    if (ZSTD_isError(ret))
+-        return NULL;
+-
+-    return cstream;
+-}
+-#define ZSTD_initCStream ZSTD_initCStream_compat
+-
+-static inline ZSTD_DCtx* ZSTD_initDCtx(void* wksp, size_t wksp_size)
+-{
+-    if (wksp == NULL)
+-        return NULL;
+-    return ZSTD_initStaticDCtx(wksp, wksp_size);
+-}
+-
+-static inline ZSTD_DStream* ZSTD_initDStream_compat(unsigned long long window_size, void* wksp, size_t wksp_size)
+-{
+-    if (wksp == NULL)
+-        return NULL;
+-    (void)window_size;
+-    return ZSTD_initStaticDStream(wksp, wksp_size);
+-}
+-#define ZSTD_initDStream ZSTD_initDStream_compat
+-
+-typedef ZSTD_frameHeader ZSTD_frameParams;
+-
+-static inline size_t ZSTD_getFrameParams(ZSTD_frameParams* frame_params, const void* src, size_t src_size)
+-{
+-    return ZSTD_getFrameHeader(frame_params, src, src_size);
+-}
+-
+-static inline size_t ZSTD_compressCCtx_compat(ZSTD_CCtx* cctx, void* dst, size_t dst_capacity, const void* src, size_t src_size, ZSTD_parameters params)
+-{
+-    return ZSTD_compress_advanced(cctx, dst, dst_capacity, src, src_size, NULL, 0, params);
+-}
+-#define ZSTD_compressCCtx ZSTD_compressCCtx_compat
+-
+-#endif /* ZSTD_VERSION_NUMBER >= 10406 */
+-#endif /* ZSTD_COMPAT_H */
 -- 
 2.28.0
 
