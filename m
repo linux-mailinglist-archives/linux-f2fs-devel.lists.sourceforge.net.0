@@ -2,76 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1000C2A3F8B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 10:02:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B23E2A4369
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 11:51:25 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kZsCX-00072h-PR; Tue, 03 Nov 2020 09:02:01 +0000
+	id 1kZtuI-0003uX-Ib; Tue, 03 Nov 2020 10:51:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kZsCS-00072W-QL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 09:01:56 +0000
+ (envelope-from <david.laight@aculab.com>) id 1kZtuG-0003uA-FL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 10:51:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=o12VY5wEqyIvKiVy7gQYf6mEI936BrgLpo94W8Ng4DI=; b=Rs1C+yC2ucu8wPbagYpAsMEV2B
- mJ3+HlQOrz3zgzdPA4TerbQ/OkYRrDAX6qaYpWNlgb/pBw+FVJ9Y0XSnBS/VeQc+83BtWT61di7M9
- RSYIrWTUqe/37+AUWX2cfBTqvDVhp7tTGrjs5UndUfRD+eVqFIniAYpGooC5bVZYprIc=;
+ bh=mSvVQTbtMPKQ0goqCVLx9Q0dnFv9sZFEjIiudUE8VXA=; b=XA2vw5BSPCes3emVQOOMMuWFiq
+ KTdISsPOHx0n62SqbqHWfQ+tl03Qlozy0AX0XbGfAx5VlsY8QyrJyvc2Ov0ncUw5oPWu36cvpaQ7q
+ 56P+6njkKK/ZFXlpFcpPuVl6phIFo6A19wbYadwNSjkDUSSWrIDWNIGEeo5yxFeKuoSk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=o12VY5wEqyIvKiVy7gQYf6mEI936BrgLpo94W8Ng4DI=; b=mh2P8xCJDx6Dy9X1oOt3+lObBf
- 2RKNNhW9LFj9MV+/PoZmcbxTUKYfq5FgSllMGD/T70m2kbE8vDwwW7WOSjpT2T/wxeqrw4Xc1o6Ss
- I15ouPlMcMf6MLwkPMIBOlk6r8LdOXyGilnpiZ4f2q+5t6FzP+OKXdd5SWLF2PhpQqTM=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ bh=mSvVQTbtMPKQ0goqCVLx9Q0dnFv9sZFEjIiudUE8VXA=; b=N24w1tcFCDxmOpvXL9XfSt9snV
+ nx9fE8Ui/a+0OnoDnCWFDB7+eJIqjEiZ6qqH8eZOzwQEnGPVS5TJtqz3wzTlkbuz2LI1ws1nRABJ4
+ mDpAusNQBJs4vwkLpBdiZQx2jZA53pvey1sF5ev2q9voT55uzURzPbb7TshKpKeoFHpk=;
+Received: from eu-smtp-delivery-151.mimecast.com ([207.82.80.151])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kZsCM-007VWF-DI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 09:01:56 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CQP0c512kzkdXq;
- Tue,  3 Nov 2020 17:01:36 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 3 Nov 2020
- 17:01:36 +0800
-To: <daejun7.park@samsung.com>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "chao@kernel.org" <chao@kernel.org>
-References: <CGME20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
- <20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <c885ff38-fce2-43d2-cfe1-57e0a3a0b449@huawei.com>
-Date: Tue, 3 Nov 2020 17:01:36 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1kZtu8-007dfD-07
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 10:51:16 +0000
+Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ uk-mta-233-2rsIwucwNt6IOklb3brp3w-1; Tue, 03 Nov 2020 10:35:14 +0000
+X-MC-Unique: 2rsIwucwNt6IOklb3brp3w-1
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
+ Server (TLS) id 15.0.1347.2; Tue, 3 Nov 2020 10:35:13 +0000
+Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
+ AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
+ Tue, 3 Nov 2020 10:35:13 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Chao Yu' <yuchao0@huawei.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+Thread-Topic: [f2fs-dev] [PATCH] f2fs: compress: support chksum
+Thread-Index: AQHWsYo6GU/sZ9yvlUirgmcRS3PqXKm2M3MA
+Date: Tue, 3 Nov 2020 10:35:13 +0000
+Message-ID: <aa11afd31edb42979c03d2a27ed9e850@AcuMS.aculab.com>
+References: <20201102122333.76667-1-yuchao0@huawei.com>
+ <20201102163123.GD529594@google.com>
+ <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
+ <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
+In-Reply-To: <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-In-Reply-To: <20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
 Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [207.82.80.151 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [207.82.80.151 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kZsCM-007VWF-DI
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change write_hint for hot/warm nodes
+X-Headers-End: 1kZtu8-007dfD-07
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,43 +92,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: yongmyung lee <ymhungry.lee@samsung.com>,
- Jieon Seol <jieon.seol@samsung.com>, Sang-yoon Oh <sangyoon.oh@samsung.com>,
- Sung-Jun Park <sungjun07.park@samsung.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Mankyu PARK <manq.park@samsung.com>, Keoseong Park <keosung.park@samsung.com>,
- SEUNGUK SHIN <seunguk.shin@samsung.com>,
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- Jinyoung CHOI <j-young.choi@samsung.com>,
- Jaemyung Lee <jaemyung.lee@samsung.com>
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/11/3 16:38, Daejun Park wrote:
-> In the fs-based mode of F2FS, the mapping of hot/warm node to
-> WRITE_LIFE_NOT_SET should be changed to WRITE_LIFE_SHORT.
+From: Chao Yu
+> Sent: 03 November 2020 02:37
+...
+> >> Do we need to change fsck.f2fs to recover this?
 > 
-> As a result of analyzing the write pattern of f2fs using real workload,
-> hot/warm nodes have high update ratio close to hot data.[*]
-> However, F2FS passes write hints for hot/warm nodes as WRITE_LIFE_NOT_SET.
+> However, we don't know which one is correct, compressed data or chksum value?
+> if compressed data was corrupted, repairing chksum value doesn't help.
 > 
-> Furthermore, WRITE_LIFE_NOT_SET is a default value of write hint when it is
-> not provided from the file system.
-> In storage, write_hint is used to distinguish streams (e.g. NVMe).
-> So, the hot/warm node of F2FS is not distinguished from other write_hints,
-> which can make the wrong stream seperation.
-> 
-> * Liang, Yu, et al. "An empirical study of F2FS on mobile devices." 2017
-> IEEE 23rd International Conference on Embedded and Real-Time Computing
-> Systems and Applications (RTCSA).
-> 
-> Signed-off-by: Daejun Park <daejun7.park@samsung.com>
+> Or how about adding chksum values for both raw data and compressed data.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+What errors are you trying to detect?
 
-Thanks,
+If there are errors in the data then 'fixing' the checksum is pointless.
+(You've got garbage data - might as well not have the checksum).
+
+If you are worried about the implementation of the compression
+algorithm then a checksum of the raw data is needed.
+
+If you want to try error correcting burst errors in the compressed
+data then a crc of the compressed data can be used for error correction.
+
+OTOH the most likely error is that the file meta-data and data sector
+weren't both committed to disk when the system crashed.
+In which case the checksum has done its job and the file is corrupt.
+fsck should probably move the file to 'lost+found' for manual checking.
+
+	David
+
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
+
 
 
 _______________________________________________
