@@ -2,105 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C01472A3C7E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 07:02:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1F2E2A3CEC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Nov 2020 07:41:15 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kZpPC-0004ya-Hb; Tue, 03 Nov 2020 06:02:54 +0000
+	id 1kZq08-0006ae-Ad; Tue, 03 Nov 2020 06:41:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <nickrterrell@gmail.com>)
- id 1kZpOz-0004wv-II; Tue, 03 Nov 2020 06:02:41 +0000
+ (envelope-from <daejun7.park@samsung.com>) id 1kZq05-0006aF-B0
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 06:41:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=h1fLSUOYdjkTFDWsstj77xMruw
- kp+55ewG93NEZwqYjAb1+t9i68NI9aH8yoPlGm7JjO8y8K9gcmhXmvwQdog47blbtUCu0yRYgjXU0
- 7YTyD8p4We+pk05hnI+GAqFeY6ZxYpnLNJmidGLj40CzsNHrmsKb69ogWxM0RW73mzNs=;
+ bh=7kVoSdrz3LX9VAMCcKcXmj5eb5nlXWXkYaj3ILgRMkc=; b=ck+8GsD5+mRYT1u82Q72W3aeRD
+ vksiDr0AQRSiSOZih8WKOOtzQWSugf+OH/RTaV3qRD9x32+RJzV/NHwCXTNQe0ypS2mlt8kApPJ66
+ W7iKfrvD2xl4d6XitCA4HbQkzl9MirxBYaaEOGiU90SxC6oqEhq+BWbnhaj/X0+JJD/U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=; b=Vvru93oIw8itjd4WrTpKpFHd/X
- UiHL8rJI3VfOaYe2smEikh9O64ZvvnugoAXP5GrvAAEPcHWqMKYQG0H0kLsExvYM4EvPSEYHZpaSb
- vzbDMez7fZMYL64tGGnIEjQcjivj3/U/tJMCk5rpRISqLw0sFZfwCBAzK6Bi+XknhmsE=;
-Received: from mail-pg1-f195.google.com ([209.85.215.195])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kZpOs-007Kja-VS; Tue, 03 Nov 2020 06:02:41 +0000
-Received: by mail-pg1-f195.google.com with SMTP id w4so2614650pgg.13;
- Mon, 02 Nov 2020 22:02:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
- b=p7KlBBGLft8dFPRJKfCutgbwfRd5yWhKlvBFON2+wv9VJrvR36DECWzNPpd/n36IED
- ZY0e3i7ASgkz8//vQFonbgL6nACypaK/9bB/rFS8/mbs+s99xOsmELOb7X76+AY87EkX
- rfN5NkpWRgMGfMNIN2yHfvMIluVdHup00vUJg3V0N+NaVvWtWdoDex4v71QSWSbtedcO
- +MhF/WSvq3paW4XfKrZKn+p0I3jhwaRoji0S1tA2iCFfy/ows40uFc/cGQVycZZ0Kr9F
- nt3F6WSayHQmY7NOWGOttU7E+CmTdBR9oQ3w1cC/n9+gzDo2m3549nYpRVaXg9VAm07U
- kkVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=s2HCAxyO+XuYMLzto3YJY+q/fwyGyhZhVewL5HVF+qc=;
- b=Vz3DngX6QdDTFqeId3lAclpxhNu4k+037dojCOvFMLbxlhUje31g6yRPjUVGOc9PUa
- 3IK5FeNeLcNEy/iBzvSs7sh4kRBuEt7Y/Or2pRflg9NaW0ctVlszC/+I7li3cKyi0kPk
- xpBT7gj1n8mImubRfvvSZKGHzXjr4wXUaT4csRgv/ShkiY4aefSbyEYqqB+rzstM5OFC
- HMkwzjWOk1f4VkuDt27gDFMyQ61FFRdUDHLRP4baFELwNb7sq6FGlvLG8Qp0dPKymUfQ
- +lrt2Q73vDld/QS2W7aMQ9HP521n11JGnGvWRWPoxyYb2yrmq4PcnO6hr225yJMInGtt
- J1FQ==
-X-Gm-Message-State: AOAM531ZXE0V6coc4h7R188yaH8a94P3XIilzrmy/z8PjIQuPSOewMnR
- 8jn/uJlIvhasvyyQuZzW89s=
-X-Google-Smtp-Source: ABdhPJyyTjet0hB3i5D2u5kVje2efJwJ6tBaH7zXqSEo7vAbmIbW8YoDfZXAeBtfOOYzUqpvwNqNeQ==
-X-Received: by 2002:a63:d46:: with SMTP id 6mr9709661pgn.227.1604383349363;
- Mon, 02 Nov 2020 22:02:29 -0800 (PST)
-Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
- [98.33.101.203])
- by smtp.gmail.com with ESMTPSA id b16sm15647269pfp.195.2020.11.02.22.02.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Nov 2020 22:02:28 -0800 (PST)
-From: Nick Terrell <nickrterrell@gmail.com>
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Date: Mon,  2 Nov 2020 22:05:35 -0800
-Message-Id: <20201103060535.8460-10-nickrterrell@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201103060535.8460-1-nickrterrell@gmail.com>
-References: <20201103060535.8460-1-nickrterrell@gmail.com>
-MIME-Version: 1.0
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
+ From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=7kVoSdrz3LX9VAMCcKcXmj5eb5nlXWXkYaj3ILgRMkc=; b=A
+ PIKyvsybNx1qcpS4f/Db1ipEFP3zOZJt0eYA2G54f/hwWCpQBP0mgOl8P3YjloGh64lJTxQ39crl0
+ KcPfwpWj3EAyjHyyrkqBZqopyZupcgaMMP4EJVR05EtgxkYdtX/FxybmcqAiyLISXOkBVDKz+5wyW
+ J4JXTQcmkbDJLX3k=;
+Received: from mailout2.samsung.com ([203.254.224.25])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kZpzy-00HCGF-83
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Nov 2020 06:41:01 +0000
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20201103064043epoutp02a0732edb34c0d72c6e38d584c7f6cc9e~D7D4eGwpo1904619046epoutp027
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  3 Nov 2020 06:40:43 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20201103064043epoutp02a0732edb34c0d72c6e38d584c7f6cc9e~D7D4eGwpo1904619046epoutp027
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1604385643;
+ bh=7kVoSdrz3LX9VAMCcKcXmj5eb5nlXWXkYaj3ILgRMkc=;
+ h=Subject:Reply-To:From:To:CC:Date:References:From;
+ b=LjbaOj9OVSG8KLXVqLiG5to6J5ptrIT/Mj2uzFQJMF1VeggjkB8KnXbCpcxx5TRNn
+ YXhRRWx/lMXt1DDyJ/KkLr0bwdGE5hDEy0fr+Ng43LVJR8AXD+ftr3CjWkSRmtTeJ4
+ Gd9p1P3NDjFi76eaHxYvZcvDyQtur5nEpXrO8Wyg=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20201103064042epcas2p4b23909d8d07423d4fbd34795faa4f3b5~D7D3jwbUM1771517715epcas2p4u;
+ Tue,  3 Nov 2020 06:40:42 +0000 (GMT)
+Received: from epsmges2p2.samsung.com (unknown [182.195.40.184]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4CQKt03jzWzMqYly; Tue,  3 Nov
+ 2020 06:40:40 +0000 (GMT)
+X-AuditID: b6c32a46-1d9ff7000000dbf8-b9-5fa0fb672736
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
+ epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 9C.64.56312.76BF0AF5; Tue,  3 Nov 2020 15:40:40 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
+ <chao@kernel.org>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20201103064039epcms2p30ecac0e7cefff0d50745f2e2e61ce38e@epcms2p3>
+Date: Tue, 03 Nov 2020 15:40:39 +0900
+X-CMS-MailID: 20201103064039epcms2p30ecac0e7cefff0d50745f2e2e61ce38e
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+CMS-TYPE: 102P
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMJsWRmVeSWpSXmKPExsWy7bCmqW7G7wXxBntvMFmcnnqWyeLlIU2L
+ VQ/CLXr7t7JZPFk/i9li88ENzBbbPgtaHD/5jtHi0iJ3i8u75rBZdFz6zGQx4eUSFovbW7gs
+ OqevYbFYtHA3iwO/x6ZVnWweuxd8ZvLo27KK0ePzJrkAlqgcm4zUxJTUIoXUvOT8lMy8dFsl
+ 7+B453hTMwNDXUNLC3MlhbzE3FRbJRefAF23zBygI5UUyhJzSoFCAYnFxUr6djZF+aUlqQoZ
+ +cUltkqpBSk5BYaGBXrFibnFpXnpesn5uVaGBgZGpkCVCTkZO5eHFVzmqbj2YgNrA+NSri5G
+ Tg4JAROJL3MOsncxcnEICexglDgzYyFjFyMHB6+AoMTfHcIgNcICbhKbH/9lAbGFBJQk1l+c
+ xQ4R15O49XANI4jNJqAjMf3EfbC4iECIxOvJLUwgM5kFdrFI7G7eyQSxjFdiRvtTFghbWmL7
+ 8q2MELaGxI9lvcwQtqjEzdVv2WHs98fmQ9WISLTeOwtVIyjx4OduqLikxLHdH6Dm10tsvfOL
+ EWSxhEAPo8ThnbdYIRL6Etc6NoIt5hXwldj89iJYnEVAVWJmy1ImkIclBFwkuhdKgISZBeQl
+ tr+dwwwSZhbQlFi/Sx+iQlniyC0WmE8aNv5mR2czC/BJdBz+CxffMe8J1GVqEut+rodaJCNx
+ ax7jBEalWYhwnoVk7SyEtQsYmVcxiqUWFOempxYbFRghx+wmRnBq1XLbwTjl7Qe9Q4xMHIyH
+ GCU4mJVEeGsi58UL8aYkVlalFuXHF5XmpBYfYjQF+ncis5Rocj4wueeVxBuaGpmZGViaWpia
+ GVkoifOGruyLFxJITyxJzU5NLUgtgulj4uCUamDaIXwuUcuG03rdzLAl5+RYZUq6pGLNihf8
+ 3Oa5a0FqErNkwkKNde9sW47zRd5Z1HTBQ/ny+bZ2Jf6wTY3pwcWzm9iW13Kc/ObjmTJvx2Y3
+ jW9RBZNtt9RunLDZ0Sjo/kXOQs5pd5lvMT6ZWl7ufS8sr9y0rndy+7r6N8ufZDP6Cui9+9XN
+ 9kLvSJf1qiM/59Rstaq7f276ouqlh3027rKtnL2EZUm633KtP8wc+1zZDAKc6hIrmY5oMB5d
+ e2B7VNGCTVkZ50MSm+PKVY/uar6jGBr6+YKwntv2e2/83h8v0DjsLf5jUkV6tofD6eqXm/3O
+ +O++lblxLUd7Z9m9FsUkDqWK3EphrTdMAotPNCuxFGckGmoxFxUnAgAC32gTNgQAAA==
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20201103064039epcms2p30ecac0e7cefff0d50745f2e2e61ce38e
+References: <CGME20201103064039epcms2p30ecac0e7cefff0d50745f2e2e61ce38e@epcms2p3>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fb.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (nickrterrell[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.195 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [URIs: samsung.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.195 listed in wl.mailspike.net]
+ [203.254.224.25 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kZpOs-007Kja-VS
-Subject: [f2fs-dev] [PATCH v5 9/9] lib: zstd: Remove zstd compatibility
- wrapper
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kZpzy-00HCGF-83
+Subject: [f2fs-dev]  [PATCH] f2fs: change write_hint for hot/warm nodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,152 +133,64 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: squashfs-devel@lists.sourceforge.net, Johannes Weiner <jweiner@fb.com>,
- Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Petr Malat <oss@malat.biz>, Chris Mason <clm@fb.com>,
- Nick Terrell <terrelln@fb.com>, linux-crypto@vger.kernel.org,
- Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
- linux-btrfs@vger.kernel.org
+Reply-To: daejun7.park@samsung.com
+Cc: yongmyung lee <ymhungry.lee@samsung.com>,
+ Jieon Seol <jieon.seol@samsung.com>, Sang-yoon Oh <sangyoon.oh@samsung.com>,
+ Mankyu PARK <manq.park@samsung.com>,
+ Sung-Jun Park <sungjun07.park@samsung.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ Keoseong Park <keosung.park@samsung.com>,
+ SEUNGUK SHIN <seunguk.shin@samsung.com>,
+ Jinyoung CHOI <j-young.choi@samsung.com>,
+ Jaemyung Lee <jaemyung.lee@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Nick Terrell <terrelln@fb.com>
+From 818a76a9aee5bf225565264274d211edb07bae7d Mon Sep 17 00:00:00 2001
+From: Daejun Park <daejun7.park@samsung.com>
+Date: Tue, 3 Nov 2020 15:30:26 +0900
 
-All callers have been transitioned to the new zstd-1.4.6 API. There are
-no more callers of the zstd compatibility wrapper, so delete it.
 
-Signed-off-by: Nick Terrell <terrelln@fb.com>
+In the fs-based mode of F2FS, the mapping of hot/warm node to
+WRITE_LIFE_NOT_SET should be changed to WRITE_LIFE_SHORT.
+
+As a result of analyzing the write pattern of f2fs using real workload,
+hot/warm nodes have high update ratio close to hot data.[*]
+However, F2FS passes write hints for hot/warm nodes as WRITE_LIFE_NOT_SET.
+
+Furthermore, WRITE_LIFE_NOT_SET is a default value of write hint when it is
+not provided from the file system.
+In storage, write_hint is used to distinguish streams (e.g. NVMe).
+So, the hot/warm node of F2FS is not distinguished from other write_hints,
+which can make the wrong stream seperation.
+
+* Liang, Yu, et al. "An empirical study of F2FS on mobile devices." 2017
+IEEE 23rd International Conference on Embedded and Real-Time Computing
+Systems and Applications (RTCSA).
+
+Signed-off-by: Daejun Park <daejun7.park@samsung.com>
 ---
- include/linux/zstd_compat.h | 116 ------------------------------------
- 1 file changed, 116 deletions(-)
- delete mode 100644 include/linux/zstd_compat.h
+ fs/f2fs/segment.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/zstd_compat.h b/include/linux/zstd_compat.h
-deleted file mode 100644
-index cda9208bf04a..000000000000
---- a/include/linux/zstd_compat.h
-+++ /dev/null
-@@ -1,116 +0,0 @@
--/*
-- * Copyright (c) 2016-present, Facebook, Inc.
-- * All rights reserved.
-- *
-- * This source code is licensed under the BSD-style license found in the
-- * LICENSE file in the root directory of https://github.com/facebook/zstd.
-- * An additional grant of patent rights can be found in the PATENTS file in the
-- * same directory.
-- *
-- * This program is free software; you can redistribute it and/or modify it under
-- * the terms of the GNU General Public License version 2 as published by the
-- * Free Software Foundation. This program is dual-licensed; you may select
-- * either version 2 of the GNU General Public License ("GPL") or BSD license
-- * ("BSD").
-- */
--
--#ifndef ZSTD_COMPAT_H
--#define ZSTD_COMPAT_H
--
--#include <linux/zstd.h>
--
--#if defined(ZSTD_VERSION_NUMBER) && (ZSTD_VERSION_NUMBER >= 10406)
--/*
-- * This header provides backwards compatibility for the zstd-1.4.6 library
-- * upgrade. This header allows us to upgrade the zstd library version without
-- * modifying any callers. Then we will migrate callers from the compatibility
-- * wrapper one at a time until none remain. At which point we will delete this
-- * header.
-- *
-- * It is temporary and will be deleted once the upgrade is complete.
-- */
--
--#include <linux/zstd_errors.h>
--
--static inline size_t ZSTD_CCtxWorkspaceBound(ZSTD_compressionParameters compression_params)
--{
--    return ZSTD_estimateCCtxSize_usingCParams(compression_params);
--}
--
--static inline size_t ZSTD_CStreamWorkspaceBound(ZSTD_compressionParameters compression_params)
--{
--    return ZSTD_estimateCStreamSize_usingCParams(compression_params);
--}
--
--static inline size_t ZSTD_DCtxWorkspaceBound(void)
--{
--    return ZSTD_estimateDCtxSize();
--}
--
--static inline size_t ZSTD_DStreamWorkspaceBound(unsigned long long window_size)
--{
--    return ZSTD_estimateDStreamSize(window_size);
--}
--
--static inline ZSTD_CCtx* ZSTD_initCCtx(void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    return ZSTD_initStaticCCtx(wksp, wksp_size);
--}
--
--static inline ZSTD_CStream* ZSTD_initCStream_compat(ZSTD_parameters params, uint64_t pledged_src_size, void* wksp, size_t wksp_size)
--{
--    ZSTD_CStream* cstream;
--    size_t ret;
--
--    if (wksp == NULL)
--        return NULL;
--
--    cstream = ZSTD_initStaticCStream(wksp, wksp_size);
--    if (cstream == NULL)
--        return NULL;
--
--    /* 0 means unknown in old API but means 0 in new API */
--    if (pledged_src_size == 0)
--        pledged_src_size = ZSTD_CONTENTSIZE_UNKNOWN;
--
--    ret = ZSTD_initCStream_advanced(cstream, NULL, 0, params, pledged_src_size);
--    if (ZSTD_isError(ret))
--        return NULL;
--
--    return cstream;
--}
--#define ZSTD_initCStream ZSTD_initCStream_compat
--
--static inline ZSTD_DCtx* ZSTD_initDCtx(void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    return ZSTD_initStaticDCtx(wksp, wksp_size);
--}
--
--static inline ZSTD_DStream* ZSTD_initDStream_compat(unsigned long long window_size, void* wksp, size_t wksp_size)
--{
--    if (wksp == NULL)
--        return NULL;
--    (void)window_size;
--    return ZSTD_initStaticDStream(wksp, wksp_size);
--}
--#define ZSTD_initDStream ZSTD_initDStream_compat
--
--typedef ZSTD_frameHeader ZSTD_frameParams;
--
--static inline size_t ZSTD_getFrameParams(ZSTD_frameParams* frame_params, const void* src, size_t src_size)
--{
--    return ZSTD_getFrameHeader(frame_params, src, src_size);
--}
--
--static inline size_t ZSTD_compressCCtx_compat(ZSTD_CCtx* cctx, void* dst, size_t dst_capacity, const void* src, size_t src_size, ZSTD_parameters params)
--{
--    return ZSTD_compress_advanced(cctx, dst, dst_capacity, src, src_size, NULL, 0, params);
--}
--#define ZSTD_compressCCtx ZSTD_compressCCtx_compat
--
--#endif /* ZSTD_VERSION_NUMBER >= 10406 */
--#endif /* ZSTD_COMPAT_H */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 1596502f7375..7b42bb10c6c3 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3208,7 +3208,7 @@ enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
+ 				return WRITE_LIFE_EXTREME;
+ 		} else if (type == NODE) {
+ 			if (temp == WARM || temp == HOT)
+-				return WRITE_LIFE_NOT_SET;
++				return WRITE_LIFE_SHORT;
+ 			else if (temp == COLD)
+ 				return WRITE_LIFE_NONE;
+ 		} else if (type == META) {
 -- 
-2.28.0
+2.25.1
 
 
 
