@@ -2,59 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 390882A74C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Nov 2020 02:14:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0911F2A7600
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Nov 2020 04:16:47 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kaTqi-0001OO-99; Thu, 05 Nov 2020 01:14:00 +0000
+	id 1kaVlR-0001T6-37; Thu, 05 Nov 2020 03:16:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kaTqg-0001O5-6g
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Nov 2020 01:13:58 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kaVlM-0001SQ-Go
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Nov 2020 03:16:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JlrMWGNRlHRc1TJvxXqNMH2Py4tZ6+qE8FPphO9ewAM=; b=HG8xcyP/PpMo1zxjc5F/3YrGgD
- HWN6F1Wrn33PUz4xEDhRDliNonCJNxAnKHUv3nZMiWzvjNG+l2dMr/y4YflqsYzv0U9Ple5cpklnR
- n5R09wIhJqCTAFtUEzAHPxlD69W3tV1CMkA+f72LnT+lSr89TCqohIJyem8CRpG26hpI=;
+ bh=RO0x8HnerRhOX8IvLzZSZc0SZWuef+U8mnTfuKmi4Vo=; b=Cl51qTDQNUqbOzVS7G+VT7TWkr
+ OLTcMuRMUsu18tujuHGTGEYB6guFFFIzzTLMOxj+5jiCciiE+SeFaOB6/zhdeNN6/TRaGr8h6Ujtb
+ 11bg4QAY0i3QZfS8DDq6eGh/xr+yXDRf7ohAXObtSdHxnvL/goW3RtmYL/I/YfSBaV+E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JlrMWGNRlHRc1TJvxXqNMH2Py4tZ6+qE8FPphO9ewAM=; b=DErZ7Gw09WOj2yf/+LuPoGlwzn
- /Fle3JV0duMAQ2M5ImwdEdDL1trQ4eztnYZlZ/SQpqDCXocVDSdcBs8HwnKD4xiL6LpKf5fEO1jk/
- Kqm15Lpux4/FlR9wiVnNhDwAVEdvi8zISp73Mr5AZDJZvUkugK2A1wKV67YsDX0hZyBc=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ bh=RO0x8HnerRhOX8IvLzZSZc0SZWuef+U8mnTfuKmi4Vo=; b=mk0mVrSwcvnLa1CrRBGG5s89iU
+ 9Yzxcz0SEu3N32/WewbKnI0u1gwfxnb4vg/6ZCVaOTL1NXamjRraV04VIu1nhT5NkWMD3+0qsEOOn
+ evMOwCK3vosj553TSbNyNCotmsvpMkYhaqLU84MRYYNw+TtVLULeegYUQ/EsRbxbMuBY=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kaTqb-001q4Y-Qr
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Nov 2020 01:13:58 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CRQWg3rHTzkfS0;
- Thu,  5 Nov 2020 09:13:35 +0800 (CST)
+ id 1kaVl3-001um6-St
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Nov 2020 03:16:36 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CRTDs4F93zhclL;
+ Thu,  5 Nov 2020 11:15:57 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 5 Nov 2020
- 09:13:38 +0800
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 5 Nov 2020
+ 11:15:54 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Daejun Park <daejun7.park@samsung.com>
+References: <CGME20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
+ <20201103083832epcms2p6c8b0e4470f1392772317ab2b25256b3d@epcms2p6>
+ <20201103185808.GB1273166@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20201102122333.76667-1-yuchao0@huawei.com>
- <20201102163123.GD529594@google.com>
- <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
- <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
-Message-ID: <7d66f3d6-306c-2ab9-03e0-d47da7c79884@huawei.com>
-Date: Thu, 5 Nov 2020 09:13:38 +0800
+Message-ID: <4be2e157-fbc1-6e2c-cdd7-a32514884754@huawei.com>
+Date: Thu, 5 Nov 2020 11:15:53 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
+In-Reply-To: <20201103185808.GB1273166@google.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -64,15 +63,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: samsung.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kaTqb-001q4Y-Qr
-Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
+X-Headers-End: 1kaVl3-001um6-St
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change write_hint for hot/warm nodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,275 +83,106 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: yongmyung lee <ymhungry.lee@samsung.com>,
+ Jieon Seol <jieon.seol@samsung.com>, Sang-yoon Oh <sangyoon.oh@samsung.com>,
+ Mankyu PARK <manq.park@samsung.com>,
+ Sung-Jun Park <sungjun07.park@samsung.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ Keoseong Park <keosung.park@samsung.com>,
+ SEUNGUK SHIN <seunguk.shin@samsung.com>,
+ Jinyoung CHOI <j-young.choi@samsung.com>,
+ Jaemyung Lee <jaemyung.lee@samsung.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jaegeuk,
+On 2020/11/4 2:58, Jaegeuk Kim wrote:
+> On 11/03, Daejun Park wrote:
+>> In the fs-based mode of F2FS, the mapping of hot/warm node to
+>> WRITE_LIFE_NOT_SET should be changed to WRITE_LIFE_SHORT.
+>>
+>> As a result of analyzing the write pattern of f2fs using real workload,
+>> hot/warm nodes have high update ratio close to hot data.[*]
+>> However, F2FS passes write hints for hot/warm nodes as WRITE_LIFE_NOT_SET.
+> 
+> I prefer to keep it as is, since basically node blocks should be separatly
+> stored from data blocks in different erase blocks in order to match F2FS GC
 
-Any comments?
+Correct, I missed that the change will break HOT_DATA type and {HOT,WARM}_NODE
+type data separation in FTL.
 
-On 2020/11/3 10:36, Chao Yu wrote:
-> On 2020/11/3 10:02, Chao Yu wrote:
->> On 2020/11/3 0:31, Jaegeuk Kim wrote:
->>> On 11/02, Chao Yu wrote:
->>>> This patch supports to store chksum value with compressed
->>>> data, and verify the integrality of compressed data while
->>>> reading the data.
->>>>
->>>> The feature can be enabled through specifying mount option
->>>> 'compress_chksum'.
->>>>
->>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>> ---
->>>>     Documentation/filesystems/f2fs.rst |  1 +
->>>>     fs/f2fs/compress.c                 | 20 ++++++++++++++++++++
->>>>     fs/f2fs/f2fs.h                     | 13 ++++++++++++-
->>>>     fs/f2fs/inode.c                    |  3 +++
->>>>     fs/f2fs/super.c                    |  9 +++++++++
->>>>     include/linux/f2fs_fs.h            |  2 +-
->>>>     6 files changed, 46 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
->>>> index b8ee761c9922..985ae7d35066 100644
->>>> --- a/Documentation/filesystems/f2fs.rst
->>>> +++ b/Documentation/filesystems/f2fs.rst
->>>> @@ -260,6 +260,7 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
->>>>     			 For other files, we can still enable compression via ioctl.
->>>>     			 Note that, there is one reserved special extension '*', it
->>>>     			 can be set to enable compression for all files.
->>>> +compress_chksum		 Support verifying chksum of raw data in compressed cluster.
->>>>     inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
->>>>     			 files using the blk-crypto framework rather than
->>>>     			 filesystem-layer encryption. This allows the use of
->>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>> index 14262e0f1cd6..a4e0d2c745b6 100644
->>>> --- a/fs/f2fs/compress.c
->>>> +++ b/fs/f2fs/compress.c
->>>> @@ -602,6 +602,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     				f2fs_cops[fi->i_compress_algorithm];
->>>>     	unsigned int max_len, new_nr_cpages;
->>>>     	struct page **new_cpages;
->>>> +	u32 chksum = 0;
->>>>     	int i, ret;
->>>>     
->>>>     	trace_f2fs_compress_pages_start(cc->inode, cc->cluster_idx,
->>>> @@ -655,6 +656,11 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
->>>>     
->>>>     	cc->cbuf->clen = cpu_to_le32(cc->clen);
->>>>     
->>>> +	if (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)
->>>> +		chksum = f2fs_crc32(F2FS_I_SB(cc->inode),
->>>> +					cc->cbuf->cdata, cc->clen);
->>>> +	cc->cbuf->chksum = cpu_to_le32(chksum);
->>>> +
->>>>     	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
->>>>     		cc->cbuf->reserved[i] = cpu_to_le32(0);
->>>>     
->>>> @@ -721,6 +727,7 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
->>>>     			(struct decompress_io_ctx *)page_private(page);
->>>>     	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
->>>>     	struct f2fs_inode_info *fi= F2FS_I(dic->inode);
->>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
->>>>     	const struct f2fs_compress_ops *cops =
->>>>     			f2fs_cops[fi->i_compress_algorithm];
->>>>     	int ret;
->>>> @@ -790,6 +797,19 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
->>>>     
->>>>     	ret = cops->decompress_pages(dic);
->>>>     
->>>> +	if (!ret && fi->i_compress_flag & 1 << COMPRESS_CHKSUM) {
->>>> +		u32 provided = le32_to_cpu(dic->cbuf->chksum);
->>>> +		u32 calculated = f2fs_crc32(sbi, dic->cbuf->cdata, dic->clen);
->>>> +
->>>> +		if (provided != calculated) {
->>>> +			printk_ratelimited(
->>>> +				"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
->>>> +				KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
->>>> +				provided, calculated);
->>>> +			ret = -EFSCORRUPTED;
->>>
->>> Do we need to change fsck.f2fs to recover this?
-> 
-> However, we don't know which one is correct, compressed data or chksum value?
-> if compressed data was corrupted, repairing chksum value doesn't help.
-> 
-> Or how about adding chksum values for both raw data and compressed data.
-> 
-> #define COMPRESS_DATA_RESERVED_SIZE	3
-> struct compress_data {
-> 	__le32 clen;			/* compressed data size */
-> +	__le32 raw_chksum;		/* raw data chksum */
-> +	__le32 compress_chksum;		/* compressed data chksum */
-> 	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
-> 	u8 cdata[];			/* compressed data */
-> };
-> 
-> 	raw_chksum	compress_chksum
-> 	match		match			-> data is verified, pass
-> 	not match	match			-> repair raw_chksum
-> 	matcth		not match		-> repair compress_chksum
-> 	not match	not match		-> corrupted, can not repair
-> 
-> Thanks,
+> and FTL GC units. And, we don't do IPU for node blocks which doesn't make sense
+> to say *update ratio*.
+
+IMO, if fs discard is fast enough, both IPU and OPU will cause original blkaddr in
+FTL being invalid, we can compare update ratio on {I,O}PU IOs inside FTL; otherwise,
+we can't.
+
+Thanks,
+
 > 
 >>
->> Yes, prepared to update inode layout in fsck.f2fs w/ kernel side change. >
->> Thanks,
+>> Furthermore, WRITE_LIFE_NOT_SET is a default value of write hint when it is
+>> not provided from the file system.
+>> In storage, write_hint is used to distinguish streams (e.g. NVMe).
+>> So, the hot/warm node of F2FS is not distinguished from other write_hints,
+>> which can make the wrong stream seperation.
 >>
->>>
->>>> +		}
->>>> +	}
->>>> +
->>>>     out_vunmap_cbuf:
->>>>     	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
->>>>     out_vunmap_rbuf:
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index 99bcf4b44a9c..2ae254ab7b7d 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -147,7 +147,8 @@ struct f2fs_mount_info {
->>>>     
->>>>     	/* For compression */
->>>>     	unsigned char compress_algorithm;	/* algorithm type */
->>>> -	unsigned compress_log_size;		/* cluster log size */
->>>> +	unsigned char compress_log_size;	/* cluster log size */
->>>> +	bool compress_chksum;			/* compressed data chksum */
->>>>     	unsigned char compress_ext_cnt;		/* extension count */
->>>>     	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
->>>>     };
->>>> @@ -731,6 +732,7 @@ struct f2fs_inode_info {
->>>>     	atomic_t i_compr_blocks;		/* # of compressed blocks */
->>>>     	unsigned char i_compress_algorithm;	/* algorithm type */
->>>>     	unsigned char i_log_cluster_size;	/* log of cluster size */
->>>> +	unsigned short i_compress_flag;		/* compress flag */
->>>>     	unsigned int i_cluster_size;		/* cluster size */
->>>>     };
->>>>     
->>>> @@ -1270,9 +1272,15 @@ enum compress_algorithm_type {
->>>>     	COMPRESS_MAX,
->>>>     };
->>>>     
->>>> +enum compress_flag {
->>>> +	COMPRESS_CHKSUM,
->>>> +	COMPRESS_MAX_FLAG,
->>>> +};
->>>> +
->>>>     #define COMPRESS_DATA_RESERVED_SIZE		5
->>>>     struct compress_data {
->>>>     	__le32 clen;			/* compressed data size */
->>>> +	__le32 chksum;			/* compressed data chksum */
->>>>     	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
->>>>     	u8 cdata[];			/* compressed data */
->>>>     };
->>>> @@ -3882,6 +3890,9 @@ static inline void set_compress_context(struct inode *inode)
->>>>     			F2FS_OPTION(sbi).compress_algorithm;
->>>>     	F2FS_I(inode)->i_log_cluster_size =
->>>>     			F2FS_OPTION(sbi).compress_log_size;
->>>> +	F2FS_I(inode)->i_compress_flag =
->>>> +			F2FS_OPTION(sbi).compress_chksum ?
->>>> +				1 << COMPRESS_CHKSUM : 0;
->>>>     	F2FS_I(inode)->i_cluster_size =
->>>>     			1 << F2FS_I(inode)->i_log_cluster_size;
->>>>     	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
->>>> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
->>>> index 657db2fb6739..de8f7fc89efa 100644
->>>> --- a/fs/f2fs/inode.c
->>>> +++ b/fs/f2fs/inode.c
->>>> @@ -456,6 +456,7 @@ static int do_read_inode(struct inode *inode)
->>>>     					le64_to_cpu(ri->i_compr_blocks));
->>>>     			fi->i_compress_algorithm = ri->i_compress_algorithm;
->>>>     			fi->i_log_cluster_size = ri->i_log_cluster_size;
->>>> +			fi->i_compress_flag = ri->i_compress_flag;
->>>>     			fi->i_cluster_size = 1 << fi->i_log_cluster_size;
->>>>     			set_inode_flag(inode, FI_COMPRESSED_FILE);
->>>>     		}
->>>> @@ -634,6 +635,8 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
->>>>     					&F2FS_I(inode)->i_compr_blocks));
->>>>     			ri->i_compress_algorithm =
->>>>     				F2FS_I(inode)->i_compress_algorithm;
->>>> +			ri->i_compress_flag =
->>>> +				cpu_to_le16(F2FS_I(inode)->i_compress_flag);
->>>>     			ri->i_log_cluster_size =
->>>>     				F2FS_I(inode)->i_log_cluster_size;
->>>>     		}
->>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>> index 00eff2f51807..f8de4d83a5be 100644
->>>> --- a/fs/f2fs/super.c
->>>> +++ b/fs/f2fs/super.c
->>>> @@ -146,6 +146,7 @@ enum {
->>>>     	Opt_compress_algorithm,
->>>>     	Opt_compress_log_size,
->>>>     	Opt_compress_extension,
->>>> +	Opt_compress_chksum,
->>>>     	Opt_atgc,
->>>>     	Opt_err,
->>>>     };
->>>> @@ -214,6 +215,7 @@ static match_table_t f2fs_tokens = {
->>>>     	{Opt_compress_algorithm, "compress_algorithm=%s"},
->>>>     	{Opt_compress_log_size, "compress_log_size=%u"},
->>>>     	{Opt_compress_extension, "compress_extension=%s"},
->>>> +	{Opt_compress_chksum, "compress_chksum"},
->>>>     	{Opt_atgc, "atgc"},
->>>>     	{Opt_err, NULL},
->>>>     };
->>>> @@ -934,10 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->>>>     			F2FS_OPTION(sbi).compress_ext_cnt++;
->>>>     			kfree(name);
->>>>     			break;
->>>> +		case Opt_compress_chksum:
->>>> +			F2FS_OPTION(sbi).compress_chksum = true;
->>>> +			break;
->>>>     #else
->>>>     		case Opt_compress_algorithm:
->>>>     		case Opt_compress_log_size:
->>>>     		case Opt_compress_extension:
->>>> +		case Opt_compress_chksum:
->>>>     			f2fs_info(sbi, "compression options not supported");
->>>>     			break;
->>>>     #endif
->>>> @@ -1523,6 +1529,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
->>>>     		seq_printf(seq, ",compress_extension=%s",
->>>>     			F2FS_OPTION(sbi).extensions[i]);
->>>>     	}
->>>> +
->>>> +	if (F2FS_OPTION(sbi).compress_chksum)
->>>> +		seq_puts(seq, ",compress_chksum");
->>>>     }
->>>>     
->>>>     static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->>>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
->>>> index a5dbb57a687f..7dc2a06cf19a 100644
->>>> --- a/include/linux/f2fs_fs.h
->>>> +++ b/include/linux/f2fs_fs.h
->>>> @@ -273,7 +273,7 @@ struct f2fs_inode {
->>>>     			__le64 i_compr_blocks;	/* # of compressed blocks */
->>>>     			__u8 i_compress_algorithm;	/* compress algorithm */
->>>>     			__u8 i_log_cluster_size;	/* log of cluster size */
->>>> -			__le16 i_padding;		/* padding */
->>>> +			__le16 i_compress_flag;		/* compress flag */
->>>>     			__le32 i_extra_end[0];	/* for attribute size calculation */
->>>>     		} __packed;
->>>>     		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
->>>> -- 
->>>> 2.26.2
->>> .
->>>
+>> * Liang, Yu, et al. "An empirical study of F2FS on mobile devices." 2017
+>> IEEE 23rd International Conference on Embedded and Real-Time Computing
+>> Systems and Applications (RTCSA).
 >>
+>> Signed-off-by: Daejun Park <daejun7.park@samsung.com>
+>> ---
+>> v2: update documentation and comments
+>> ---
+>>   Documentation/filesystems/f2fs.rst | 4 ++--
+>>   fs/f2fs/segment.c                  | 6 +++---
+>>   2 files changed, 5 insertions(+), 5 deletions(-)
 >>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->> .
->>
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+>> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+>> index b8ee761c9922..afa3da7cfade 100644
+>> --- a/Documentation/filesystems/f2fs.rst
+>> +++ b/Documentation/filesystems/f2fs.rst
+>> @@ -717,8 +717,8 @@ WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+>>   ===================== ======================== ===================
+>>   User                  F2FS                     Block
+>>   ===================== ======================== ===================
+>> -                      META                     WRITE_LIFE_MEDIUM;
+>> -                      HOT_NODE                 WRITE_LIFE_NOT_SET
+>> +                      META                     WRITE_LIFE_MEDIUM
+>> +                      HOT_NODE                 WRITE_LIFE_SHORT
+>>                         WARM_NODE                "
+>>                         COLD_NODE                WRITE_LIFE_NONE
+>>   ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>> index 1596502f7375..577ab7516c6b 100644
+>> --- a/fs/f2fs/segment.c
+>> +++ b/fs/f2fs/segment.c
+>> @@ -3160,8 +3160,8 @@ int f2fs_rw_hint_to_seg_type(enum rw_hint hint)
+>>    *
+>>    * User                  F2FS                     Block
+>>    * ----                  ----                     -----
+>> - *                       META                     WRITE_LIFE_MEDIUM;
+>> - *                       HOT_NODE                 WRITE_LIFE_NOT_SET
+>> + *                       META                     WRITE_LIFE_MEDIUM
+>> + *                       HOT_NODE                 WRITE_LIFE_SHORT
+>>    *                       WARM_NODE                "
+>>    *                       COLD_NODE                WRITE_LIFE_NONE
+>>    * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+>> @@ -3208,7 +3208,7 @@ enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
+>>   				return WRITE_LIFE_EXTREME;
+>>   		} else if (type == NODE) {
+>>   			if (temp == WARM || temp == HOT)
+>> -				return WRITE_LIFE_NOT_SET;
+>> +				return WRITE_LIFE_SHORT;
+>>   			else if (temp == COLD)
+>>   				return WRITE_LIFE_NONE;
+>>   		} else if (type == META) {
+>> -- 
+>> 2.25.1
 > .
 > 
 
