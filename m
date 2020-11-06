@@ -2,153 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 043452A9CAE
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Nov 2020 19:51:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Content-ID:In-Reply-To:
-	References:Message-ID:Date:To:Sender:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=m2/lxEmXL+kC1AfrKflNgngYrrdTvOKh/E6g0ina0vY=; b=TQIshzYl/RHW+qWrJLD8MOK6U
-	6tkOeeM9iB1Y1Jmod7Gfq8PY06rBbLLiO6ioV1J1TbO2gzlRa44YWN4gYL9WjXQmaGGk1mbZ7Q8TV
-	ETMfpUv05WPd6FGLdCJd5ouhnWp9bclS6Gx30noJXcV1fA7msU8xKo/61bV0P7BOyuuvU=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E4692A9EE2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Nov 2020 22:13:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kb6pW-00005k-8u; Fri, 06 Nov 2020 18:51:22 +0000
+	id 1kb92j-0002g6-TF; Fri, 06 Nov 2020 21:13:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=8579cd6876=terrelln@fb.com>)
- id 1kb6pU-00005D-Sj; Fri, 06 Nov 2020 18:51:20 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kb92i-0002fu-E1
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Nov 2020 21:13:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G16dLQtFhCMRyr26RpSW9m/UBD3F6gQhulJDeRhz/U0=; b=lEjdarZ46AVbas5Ofg0z6KjZqW
- 3KHjVWWVia7V5L+2iHvQEnntL23G73OOjuWtwPoPtEbCax81xdWCU6Ms6fiPz/uc764SteEMKkOUO
- 4XnPtfHEafYjulF8gIVayIqJtigW3Jtg0O2QRgceoT7mUq/iO0kvE/MvAjufQNPv7oBw=;
+ bh=7No9VQe7aZPol7D/Em2vWMz+gN7gC6tawFN58azWkt4=; b=g5I24+bvQtnPnE2SR6y3Z9zjPQ
+ bS8HZrTjkK8BpRM02Sf6HNAEUB8BqFR6LqVnnOUMgU6a2b0fMXWRqxhTjxEiMm87+SdG/kB/cvMnG
+ eG7PrIRG1j43GgqUYEw0wI8OQLG3ClF4GjOhngULq2gH4R1HLAAnJ6Fbl10NFVg6JMnE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G16dLQtFhCMRyr26RpSW9m/UBD3F6gQhulJDeRhz/U0=; b=hh90gRMKSGeNcNQwFWr1z+Aq+D
- CBQwlTeofdnBPjC8rq/RC5qV9swv3p9gYikoA340/AjcrgZ3Tut8CjpsbePWD1p/JTkSNeY31ylDq
- OuT/Z0a5gZjsp+LM3V2m4UEXPHJzOwvRh/3ylINRJzBcB8oshzzU3FlmM+Aj0aqkAnno=;
-Received: from mx0a-00082601.pphosted.com ([67.231.145.42])
+ bh=7No9VQe7aZPol7D/Em2vWMz+gN7gC6tawFN58azWkt4=; b=SbnqBCBrfzP29feFd/Jv0mhQ/s
+ ggozOcKgradEWdlmbTBZN+gPh+YlbrNuC1/YXZtrBjWtmteFmDvU1keqe5Mpp5BpKr7z2VOu1k6YD
+ mBiLTeEsdit7/I2vNMke4/Fmhd3Q6zUHblkasLDsLz8PEkLVpn/Kvhfd36/ODyobEWLQ=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kb6pR-003ay3-3V; Fri, 06 Nov 2020 18:51:20 +0000
-Received: from pps.filterd (m0148461.ppops.net [127.0.0.1])
- by mx0a-00082601.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0A6ImkmH021329; Fri, 6 Nov 2020 10:51:09 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fb.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=facebook;
- bh=G16dLQtFhCMRyr26RpSW9m/UBD3F6gQhulJDeRhz/U0=;
- b=jBqZ7Xrj3qhwIDwPxBwLYepBrn03jhJg/83f4BHw8CU5HqEHnvlXsnUfN3t3CKh/tXdJ
- dXJ+JcLdUnYcWqaLPkKJlA3Fn/pG6K744jDOcEhUA+GgZJnjLiErXbqJe391KjL0oohd
- 2sh3rdGux/9qDs6DuyQwxPUWJZKr8fsBUrQ= 
-Received: from mail.thefacebook.com ([163.114.132.120])
- by mx0a-00082601.pphosted.com with ESMTP id 34mr9bdn6v-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
- Fri, 06 Nov 2020 10:51:09 -0800
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (100.104.98.9) by
- o365-in.thefacebook.com (100.104.94.231) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1979.3; Fri, 6 Nov 2020 10:51:08 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZKPox+19uYKAL7lx1erGVqHnD3ZQzQMkvadMO+p7/6GlNQVX6uvHoD5RSdPIeLDUP//3D6er4sIAMp+dQbvdYeaU8xOJxrXGbCtu15fsP2sht6y0Ef/f0lEI1GzwEBNZ9AyCAbzMqbccaKaXNm9c6sVvtfbSLjFzCzDofn/775wssZwe7Zca+i2ngriBifZwNjz4VvxqwCX6y783BSM1YRYA/LXpFmqjaamcQnMTqE83punbQph1Tn2m0MQc9XpG4KOAqLekUFWq4ldPHfYXUyoNoTthvZ8q0Vk6xU8kAQ4cC1hhdDFu8kGrCErcnJNPRLzplCjcD+vcON152KAedw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G16dLQtFhCMRyr26RpSW9m/UBD3F6gQhulJDeRhz/U0=;
- b=k46Qhw2BZas6cwkSYWbJvjiwMlvljP1qCMIRcQqUpH9E+qudAgRseC42ztrDWlHDwKk6FiexB8LHVc84B8+uVOfISSgoCEdOx8KeItuXo9yp3sw9Fo3HeW7LOOoDmqjaKNupepunt1mPm0rzotF6BG1NMaZ43fCcBGZLp7kl8dV1Xa6Y78hOtv0LGpKAP/Y8USeW6YSzlgpKevOIuLfiH5SKaDtNXDn7w+DGtZ92FOnJOresOkbVm1J9AnKon01MzTBNKCRDRkM07K2H8PVVXyp2MmIWF3x2smdAFNoBLheRTKzfTQ/Yyp3TVCBKBzDwYMFFFda8E3aNAKkdmERmJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fb.com; dmarc=pass action=none header.from=fb.com; dkim=pass
- header.d=fb.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fb.onmicrosoft.com;
- s=selector2-fb-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G16dLQtFhCMRyr26RpSW9m/UBD3F6gQhulJDeRhz/U0=;
- b=Qq0ExCqUjMUVYweygF43/YL/H1bOVQVGiIgblzL5PWcDCVS7IUvYEqqj9nyqp77pJfZwsX0AMhTzCzvmWCO5+l7rU8bNZtL8HAaiO+QcJn9WJI1xlq/Z58H+epEvBO/qxhzJz7Q14V2FnQCwKceacOq5fY5jV1/EamQilkqqmNE=
-Received: from BY5PR15MB3667.namprd15.prod.outlook.com (2603:10b6:a03:1f9::18)
- by BYAPR15MB2264.namprd15.prod.outlook.com (2603:10b6:a02:8a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21; Fri, 6 Nov
- 2020 18:51:02 +0000
-Received: from BY5PR15MB3667.namprd15.prod.outlook.com
- ([fe80::2d08:987a:126:1c9c]) by BY5PR15MB3667.namprd15.prod.outlook.com
- ([fe80::2d08:987a:126:1c9c%7]) with mapi id 15.20.3499.032; Fri, 6 Nov 2020
- 18:51:02 +0000
-To: Josef Bacik <josef@toxicpanda.com>
-Thread-Topic: [GIT PULL][PATCH v5 0/9] Update to zstd-1.4.6
-Thread-Index: AQHWsabYVo88ftkvF06GySx18fZqPqm7XZQAgAAaqYA=
-Date: Fri, 6 Nov 2020 18:51:02 +0000
-Message-ID: <6D8DAFAA-0442-470B-B58A-6EBD72E39AF6@fb.com>
-References: <20201103060535.8460-1-nickrterrell@gmail.com>
- <025719a2-2432-8204-201f-adbbd293fa9a@toxicpanda.com>
-In-Reply-To: <025719a2-2432-8204-201f-adbbd293fa9a@toxicpanda.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: toxicpanda.com; dkim=none (message not signed)
- header.d=none;toxicpanda.com; dmarc=none action=none header.from=fb.com;
-x-originating-ip: [98.33.101.203]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1279f163-95ef-46cf-3ec6-08d88284e898
-x-ms-traffictypediagnostic: BYAPR15MB2264:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <BYAPR15MB226463FAAD7A29033369470BABED0@BYAPR15MB2264.namprd15.prod.outlook.com>
-x-fb-source: Internal
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: Oyv+B4ofz8QF015alIOS08gpagp6oVGn2NU8+o2ITp7nIDatoi7gLB6uXa/ROQ++urRbr77csBkQvEYDfajyqchnvSt2zxVPvqvZub26wgiic1jbKj7VCMnft0mlf8YVoc5RMMCw7RH2GzRaddki/I0T7pHc/FyU6ryOCxVm6NltvI1V5gsMiUgys4KFohbyVi0HlnMXZ03zoXRh8ib6qd1cjbzMGh+qU4AtctoPSbJE3EVdsSU4ZrTTKhNB5/DRVPTzbbB3t0KzFIvu3DdY7J5AGa7+7qAidAIeRhACWOceP6FqdSfTjvIQxbG+RCK/gTOThUkueEeIdWzSMIjkIQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY5PR15MB3667.namprd15.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(39860400002)(376002)(346002)(136003)(396003)(366004)(33656002)(66446008)(6512007)(15650500001)(53546011)(36756003)(64756008)(6506007)(4326008)(83380400001)(26005)(186003)(76116006)(66946007)(66556008)(66476007)(2906002)(6486002)(478600001)(316002)(54906003)(8936002)(86362001)(8676002)(6916009)(5660300002)(71200400001)(2616005);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata: EbeaqRgtq5fne9H3in8ycCYIllSGRHbmdZw7ow+gSvbwx6+GH3jcJYJS7lxdaHsEc1CVF3a3yiQxbMECdrRbY9jSw9RyONMQ5EELW5B3PwQuU7lY8g7V6vriJMQr33QEfcMwpQAHF6d+Tdy52zPcXUpxWDOaBlEgm5z8gfpwZqmFK0JENzoTVTwNEUDDAGcnTPKB6oXFc0PmEm9wLy7yjkMNlDS2n0WgOSddE1a/GVOm7NXgOcLTs22uOzCNyPFEcvqoWo/uIcn2gtryQESfm7Sok4yB/0LazEVSdOmnLjx6eLuwzjhKfPMTrzlUk7NY6Df2tpc0ANlU/iJUxb09AuRoH8JAJIPPTcgNreV14iig7ZXZ7gmeOX3zod0LBhsSG1n/9XjKfOyMmbLOI23mygsyFuJqWS7CsWiINcRU5jPllsEA+i1s7FyPGwc9p7J92LcaromtWIY4HbZXTstVXnA2U9M6rwGwbR9/TeqJYwM9wF0Glx7iQ3sfwq9xbsEcYxt8uC9MuyHoiy7OQJ4klAOTYsoB0iGj67rmwONtTQVU+VZmjwEeWPzczpsdz4iGLFotDjtwpjayVR2Ubl6x0MrNbH3suWtSzW3CfhiF1p9HTN4q8lhzTCTuedNcLndALwWyIG6HU5f+be3Nkz6G7g==
-Content-ID: <2876C9A351E1824BB447C209E0C8325A@namprd15.prod.outlook.com>
+ id 1kb92b-003grQ-Kz
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Nov 2020 21:13:08 +0000
+Received: from google.com (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1479A2087E;
+ Fri,  6 Nov 2020 21:12:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1604697169;
+ bh=xOQO8Xn+8JnGusybk09mOv6uJkyJO8QsDZoUNutCuio=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FSWNAqvi+hW4YB9SnsKfAqdjo1m/b6a0zLY2mVWQuI3CjZndHKmPXZ68aDthlIvPI
+ 7aV4v+jvlCoJt3tnmHsSWraVjOQdo4SVYdOoSwn6FjyQLEguR0ziw0nikXzaF/aB7Y
+ b7Ag/c/DNPpbKc+JtD2sFrascNpgPXzYCZBHuQEQ=
+Date: Fri, 6 Nov 2020 13:12:47 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20201106211247.GA1474936@google.com>
+References: <20201102122333.76667-1-yuchao0@huawei.com>
+ <20201102163123.GD529594@google.com>
+ <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
+ <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR15MB3667.namprd15.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1279f163-95ef-46cf-3ec6-08d88284e898
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2020 18:51:02.0162 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ae927fe-1255-47a7-a2af-5f3a069daaa2
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: j1QjEP+g3GgS4NVNNO60o/a16Y3dl+eRSa8vM78dT4HjpUj/G/eEBjZ9x3vCzoeO
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR15MB2264
-X-OriginatorOrg: fb.com
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-11-06_06:2020-11-05,
- 2020-11-06 signatures=0
-X-Proofpoint-Spam-Details: rule=fb_default_notspam policy=fb_default score=0
- malwarescore=0
- phishscore=0 clxscore=1015 lowpriorityscore=0 mlxlogscore=999
- suspectscore=0 mlxscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- adultscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2011060133
-X-FB-Internal: deliver
+Content-Disposition: inline
+In-Reply-To: <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fb.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [67.231.145.42 listed in wl.mailspike.net]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -156,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kb6pR-003ay3-3V
-Subject: Re: [f2fs-dev] [GIT PULL][PATCH v5 0/9] Update to zstd-1.4.6
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kb92b-003grQ-Kz
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -170,52 +88,266 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Nick Terrell via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Nick Terrell <terrelln@fb.com>
-Cc: "squashfs-devel@lists.sourceforge.net"
- <squashfs-devel@lists.sourceforge.net>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, Petr Malat <oss@malat.biz>,
- Chris Mason <clm@fb.com>,
- "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
- Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
- "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>,
- Johannes Weiner <jweiner@fb.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-PiBPbiBOb3YgNiwgMjAyMCwgYXQgOToxNSBBTSwgSm9zZWYgQmFjaWsgPGpvc2VmQHRveGljcGFu
-ZGEuY29tPiB3cm90ZToNCj4gDQo+IE9uIDExLzMvMjAgMTowNSBBTSwgTmljayBUZXJyZWxsIHdy
-b3RlOg0KPj4gRnJvbTogTmljayBUZXJyZWxsIDx0ZXJyZWxsbkBmYi5jb20+DQo+PiBQbGVhc2Ug
-cHVsbCBmcm9tDQo+PiAgIGdpdEBnaXRodWIuY29tOnRlcnJlbGxuL2xpbnV4LmdpdCB0YWdzL3Y1
-LXpzdGQtMS40LjYNCj4+IHRvIGdldCB0aGVzZSBjaGFuZ2VzLiBBbHRlcm5hdGl2ZWx5IHRoZSBw
-YXRjaHNldCBpcyBpbmNsdWRlZC4NCj4gDQo+IFdoZXJlIGRpZCB3ZSBjb21lIGRvd24gb24gdGhl
-IGNvZGUgZm9ybWF0dGluZyBxdWVzdGlvbj8gIFBlcnNvbmFsbHkgSSdtIG9mIHRoZSBtaW5kIHRo
-YXQgYXMgbG9uZyBhcyB0aGUgY29uc3VtZXJzIHRoZW1zZWx2ZXMgYWRoZXJlIHRvIHRoZSBwcm9w
-ZXIgY29kaW5nIHN0eWxlIEknbSBmaW5lIG5vdCBtYWludGFpbmluZyB0aGUgY29kZSBzdHlsZSBh
-cyBsb25nIGFzIHdlIGdldCB0aGUgYmVuZWZpdCBvZiBlYXNpbHkgc3luY2luZyBpbiBjb2RlIGZy
-b20gdGhlIHVwc3RyZWFtIHByb2plY3QuICBUaGFua3MsDQoNClRoZSBnZW5lcmFsIGNvbnNlbnN1
-cyBvZiBldmVyeW9uZSB3aG8gaGFzIGJlZW4gaW52b2x2ZWQgaW4gdGhlIGRpc2N1c3Npb24gc28g
-ZmFyLCBzZWVtcyB0byBiZSB0aGF0IHRoZSBiZW5lZml0cyBvZiBrZWVwaW5nIHpzdGQgaW4tc3lu
-YyB3aXRoIHVwc3RyZWFtIG91dHdlaWdoIHRoZSBjb3N0IG9mIGFjY2VwdGluZyB1cHN0cmVhbeKA
-mXMgQVBJLCB0aG91Z2ggbm90IGV2ZXJ5b25lIGFncmVlcy4gVGhlIGFsdGVybmF0aXZlIGlzIHRv
-IHByb3ZpZGUgYSB3cmFwcGVyIGFyb3VuZCB1cHN0cmVhbeKAmXMgQVBJLCBidXQgdGhpcyBtYWtl
-cyBpdCBzbGlnaHRseSBoYXJkZXIgdG8gZGVidWcsIHNpbmNlIHlvdSBoYXZlIHRvIGdvIHRocm91
-Z2ggdGhlIHdyYXBwZXIgd2hvc2Ugb25seSBwdXJwb3NlIGlzIHRvIGFkYXB0IHRvIHRoZSBjb2Rp
-bmcgc3R5bGUsIGFuZCBhbGxvd3MgYnVncyB0byBzbmVhayBpbnRvIHRoZSBrZXJuZWwgaW1wbGVt
-ZW50YXRpb24sIHdoaWNoIGFyZW7igJl0IHByZXNlbnQgdXBzdHJlYW0uDQoNCkFkZGl0aW9uYWxs
-eSwgaW4gMjAxNyBMWjQgc3dpdGNoZWQgdG8gdXNpbmcgdXBzdHJlYW0gTFo04oCZcyBBUEkgaW4g
-b3JkZXIgdG8gc3RheSB1cCB0byBkYXRlIHdpdGggdXBzdHJlYW0sIHdoaWNoIHNldHMgcHJlY2Vk
-ZW50LiBJIGFsc28gaGVscCBtYWludGFpbiBMWjQsIGFuZCBvbmNlIHRoZSB6c3RkIHVwZGF0ZSBp
-cyBtZXJnZWQsIEkgcGxhbiB0byB3b3JrIG9uIG1ha2luZyBpdCBlYXNpZXIgdG8gdXBkYXRlIExa
-NCBpbiB0aGUga2VybmVsIHdoZW4gdXBzdHJlYW0gdXBkYXRlcy4gVGhhdCB3aWxsIGJlIGEgbXVj
-aCBzbWFsbGVyIGNoYW5nZSwgc2luY2UgTFo0IGlzIGFscmVhZHkgbmVhcmx5IHVzaW5nIHVwc3Ry
-ZWFt4oCZcyBjb2RlIGRpcmVjdGx5Lg0KDQpCZXN0LA0KTmljawpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 11/03, Chao Yu wrote:
+> On 2020/11/3 10:02, Chao Yu wrote:
+> > On 2020/11/3 0:31, Jaegeuk Kim wrote:
+> > > On 11/02, Chao Yu wrote:
+> > > > This patch supports to store chksum value with compressed
+> > > > data, and verify the integrality of compressed data while
+> > > > reading the data.
+> > > > 
+> > > > The feature can be enabled through specifying mount option
+> > > > 'compress_chksum'.
+> > > > 
+> > > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > > > ---
+> > > >    Documentation/filesystems/f2fs.rst |  1 +
+> > > >    fs/f2fs/compress.c                 | 20 ++++++++++++++++++++
+> > > >    fs/f2fs/f2fs.h                     | 13 ++++++++++++-
+> > > >    fs/f2fs/inode.c                    |  3 +++
+> > > >    fs/f2fs/super.c                    |  9 +++++++++
+> > > >    include/linux/f2fs_fs.h            |  2 +-
+> > > >    6 files changed, 46 insertions(+), 2 deletions(-)
+> > > > 
+> > > > diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> > > > index b8ee761c9922..985ae7d35066 100644
+> > > > --- a/Documentation/filesystems/f2fs.rst
+> > > > +++ b/Documentation/filesystems/f2fs.rst
+> > > > @@ -260,6 +260,7 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+> > > >    			 For other files, we can still enable compression via ioctl.
+> > > >    			 Note that, there is one reserved special extension '*', it
+> > > >    			 can be set to enable compression for all files.
+> > > > +compress_chksum		 Support verifying chksum of raw data in compressed cluster.
+> > > >    inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
+> > > >    			 files using the blk-crypto framework rather than
+> > > >    			 filesystem-layer encryption. This allows the use of
+> > > > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> > > > index 14262e0f1cd6..a4e0d2c745b6 100644
+> > > > --- a/fs/f2fs/compress.c
+> > > > +++ b/fs/f2fs/compress.c
+> > > > @@ -602,6 +602,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+> > > >    				f2fs_cops[fi->i_compress_algorithm];
+> > > >    	unsigned int max_len, new_nr_cpages;
+> > > >    	struct page **new_cpages;
+> > > > +	u32 chksum = 0;
+> > > >    	int i, ret;
+> > > >    	trace_f2fs_compress_pages_start(cc->inode, cc->cluster_idx,
+> > > > @@ -655,6 +656,11 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+> > > >    	cc->cbuf->clen = cpu_to_le32(cc->clen);
+> > > > +	if (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)
+> > > > +		chksum = f2fs_crc32(F2FS_I_SB(cc->inode),
+> > > > +					cc->cbuf->cdata, cc->clen);
+> > > > +	cc->cbuf->chksum = cpu_to_le32(chksum);
+> > > > +
+> > > >    	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
+> > > >    		cc->cbuf->reserved[i] = cpu_to_le32(0);
+> > > > @@ -721,6 +727,7 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+> > > >    			(struct decompress_io_ctx *)page_private(page);
+> > > >    	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+> > > >    	struct f2fs_inode_info *fi= F2FS_I(dic->inode);
+> > > > +	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+> > > >    	const struct f2fs_compress_ops *cops =
+> > > >    			f2fs_cops[fi->i_compress_algorithm];
+> > > >    	int ret;
+> > > > @@ -790,6 +797,19 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+> > > >    	ret = cops->decompress_pages(dic);
+> > > > +	if (!ret && fi->i_compress_flag & 1 << COMPRESS_CHKSUM) {
+> > > > +		u32 provided = le32_to_cpu(dic->cbuf->chksum);
+> > > > +		u32 calculated = f2fs_crc32(sbi, dic->cbuf->cdata, dic->clen);
+> > > > +
+> > > > +		if (provided != calculated) {
+> > > > +			printk_ratelimited(
+> > > > +				"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
+> > > > +				KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
+> > > > +				provided, calculated);
+> > > > +			ret = -EFSCORRUPTED;
+> > > 
+> > > Do we need to change fsck.f2fs to recover this?
+> 
+> However, we don't know which one is correct, compressed data or chksum value?
+> if compressed data was corrupted, repairing chksum value doesn't help.
+> 
+> Or how about adding chksum values for both raw data and compressed data.
+> 
+> #define COMPRESS_DATA_RESERVED_SIZE	3
+> struct compress_data {
+> 	__le32 clen;			/* compressed data size */
+> +	__le32 raw_chksum;		/* raw data chksum */
+> +	__le32 compress_chksum;		/* compressed data chksum */
+> 	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
+> 	u8 cdata[];			/* compressed data */
+> };
+> 
+> 	raw_chksum	compress_chksum
+> 	match		match			-> data is verified, pass
+> 	not match	match			-> repair raw_chksum
+> 	matcth		not match		-> repair compress_chksum
+
+I think only compress_chksum would be enough. BTW, can we give WARN_ON and
+marking a FSCK flag without returning EFSCORRUPTED, since we don't really
+know who was corrupted. If data was corrupted, we should be able to see app
+corruption. In that case, we can check the kernel log. If checksum was simply
+corrupted, next fsck will fix the checksum. So, in general, I hope to keep
+the data as is and raise a flag by the checksum.
+
+> 	not match	not match		-> corrupted, can not repair
+> 
+> Thanks,
+> 
+> > 
+> > Yes, prepared to update inode layout in fsck.f2fs w/ kernel side change. >
+> > Thanks,
+> > 
+> > > 
+> > > > +		}
+> > > > +	}
+> > > > +
+> > > >    out_vunmap_cbuf:
+> > > >    	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
+> > > >    out_vunmap_rbuf:
+> > > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > > index 99bcf4b44a9c..2ae254ab7b7d 100644
+> > > > --- a/fs/f2fs/f2fs.h
+> > > > +++ b/fs/f2fs/f2fs.h
+> > > > @@ -147,7 +147,8 @@ struct f2fs_mount_info {
+> > > >    	/* For compression */
+> > > >    	unsigned char compress_algorithm;	/* algorithm type */
+> > > > -	unsigned compress_log_size;		/* cluster log size */
+> > > > +	unsigned char compress_log_size;	/* cluster log size */
+> > > > +	bool compress_chksum;			/* compressed data chksum */
+> > > >    	unsigned char compress_ext_cnt;		/* extension count */
+> > > >    	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
+> > > >    };
+> > > > @@ -731,6 +732,7 @@ struct f2fs_inode_info {
+> > > >    	atomic_t i_compr_blocks;		/* # of compressed blocks */
+> > > >    	unsigned char i_compress_algorithm;	/* algorithm type */
+> > > >    	unsigned char i_log_cluster_size;	/* log of cluster size */
+> > > > +	unsigned short i_compress_flag;		/* compress flag */
+> > > >    	unsigned int i_cluster_size;		/* cluster size */
+> > > >    };
+> > > > @@ -1270,9 +1272,15 @@ enum compress_algorithm_type {
+> > > >    	COMPRESS_MAX,
+> > > >    };
+> > > > +enum compress_flag {
+> > > > +	COMPRESS_CHKSUM,
+> > > > +	COMPRESS_MAX_FLAG,
+> > > > +};
+> > > > +
+> > > >    #define COMPRESS_DATA_RESERVED_SIZE		5
+> > > >    struct compress_data {
+> > > >    	__le32 clen;			/* compressed data size */
+> > > > +	__le32 chksum;			/* compressed data chksum */
+> > > >    	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
+> > > >    	u8 cdata[];			/* compressed data */
+> > > >    };
+> > > > @@ -3882,6 +3890,9 @@ static inline void set_compress_context(struct inode *inode)
+> > > >    			F2FS_OPTION(sbi).compress_algorithm;
+> > > >    	F2FS_I(inode)->i_log_cluster_size =
+> > > >    			F2FS_OPTION(sbi).compress_log_size;
+> > > > +	F2FS_I(inode)->i_compress_flag =
+> > > > +			F2FS_OPTION(sbi).compress_chksum ?
+> > > > +				1 << COMPRESS_CHKSUM : 0;
+> > > >    	F2FS_I(inode)->i_cluster_size =
+> > > >    			1 << F2FS_I(inode)->i_log_cluster_size;
+> > > >    	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
+> > > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > > > index 657db2fb6739..de8f7fc89efa 100644
+> > > > --- a/fs/f2fs/inode.c
+> > > > +++ b/fs/f2fs/inode.c
+> > > > @@ -456,6 +456,7 @@ static int do_read_inode(struct inode *inode)
+> > > >    					le64_to_cpu(ri->i_compr_blocks));
+> > > >    			fi->i_compress_algorithm = ri->i_compress_algorithm;
+> > > >    			fi->i_log_cluster_size = ri->i_log_cluster_size;
+> > > > +			fi->i_compress_flag = ri->i_compress_flag;
+> > > >    			fi->i_cluster_size = 1 << fi->i_log_cluster_size;
+> > > >    			set_inode_flag(inode, FI_COMPRESSED_FILE);
+> > > >    		}
+> > > > @@ -634,6 +635,8 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
+> > > >    					&F2FS_I(inode)->i_compr_blocks));
+> > > >    			ri->i_compress_algorithm =
+> > > >    				F2FS_I(inode)->i_compress_algorithm;
+> > > > +			ri->i_compress_flag =
+> > > > +				cpu_to_le16(F2FS_I(inode)->i_compress_flag);
+> > > >    			ri->i_log_cluster_size =
+> > > >    				F2FS_I(inode)->i_log_cluster_size;
+> > > >    		}
+> > > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> > > > index 00eff2f51807..f8de4d83a5be 100644
+> > > > --- a/fs/f2fs/super.c
+> > > > +++ b/fs/f2fs/super.c
+> > > > @@ -146,6 +146,7 @@ enum {
+> > > >    	Opt_compress_algorithm,
+> > > >    	Opt_compress_log_size,
+> > > >    	Opt_compress_extension,
+> > > > +	Opt_compress_chksum,
+> > > >    	Opt_atgc,
+> > > >    	Opt_err,
+> > > >    };
+> > > > @@ -214,6 +215,7 @@ static match_table_t f2fs_tokens = {
+> > > >    	{Opt_compress_algorithm, "compress_algorithm=%s"},
+> > > >    	{Opt_compress_log_size, "compress_log_size=%u"},
+> > > >    	{Opt_compress_extension, "compress_extension=%s"},
+> > > > +	{Opt_compress_chksum, "compress_chksum"},
+> > > >    	{Opt_atgc, "atgc"},
+> > > >    	{Opt_err, NULL},
+> > > >    };
+> > > > @@ -934,10 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+> > > >    			F2FS_OPTION(sbi).compress_ext_cnt++;
+> > > >    			kfree(name);
+> > > >    			break;
+> > > > +		case Opt_compress_chksum:
+> > > > +			F2FS_OPTION(sbi).compress_chksum = true;
+> > > > +			break;
+> > > >    #else
+> > > >    		case Opt_compress_algorithm:
+> > > >    		case Opt_compress_log_size:
+> > > >    		case Opt_compress_extension:
+> > > > +		case Opt_compress_chksum:
+> > > >    			f2fs_info(sbi, "compression options not supported");
+> > > >    			break;
+> > > >    #endif
+> > > > @@ -1523,6 +1529,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+> > > >    		seq_printf(seq, ",compress_extension=%s",
+> > > >    			F2FS_OPTION(sbi).extensions[i]);
+> > > >    	}
+> > > > +
+> > > > +	if (F2FS_OPTION(sbi).compress_chksum)
+> > > > +		seq_puts(seq, ",compress_chksum");
+> > > >    }
+> > > >    static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+> > > > diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+> > > > index a5dbb57a687f..7dc2a06cf19a 100644
+> > > > --- a/include/linux/f2fs_fs.h
+> > > > +++ b/include/linux/f2fs_fs.h
+> > > > @@ -273,7 +273,7 @@ struct f2fs_inode {
+> > > >    			__le64 i_compr_blocks;	/* # of compressed blocks */
+> > > >    			__u8 i_compress_algorithm;	/* compress algorithm */
+> > > >    			__u8 i_log_cluster_size;	/* log of cluster size */
+> > > > -			__le16 i_padding;		/* padding */
+> > > > +			__le16 i_compress_flag;		/* compress flag */
+> > > >    			__le32 i_extra_end[0];	/* for attribute size calculation */
+> > > >    		} __packed;
+> > > >    		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
+> > > > -- 
+> > > > 2.26.2
+> > > .
+> > > 
+> > 
+> > 
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > .
+> > 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
