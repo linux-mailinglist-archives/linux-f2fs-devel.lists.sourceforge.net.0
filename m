@@ -2,58 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E07472AC199
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Nov 2020 17:59:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0246A2AC1A0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Nov 2020 18:00:39 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcAW4-0004xx-Jx; Mon, 09 Nov 2020 16:59:40 +0000
+	id 1kcAWz-00059T-Od; Mon, 09 Nov 2020 17:00:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kcAW3-0004xY-A9
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Nov 2020 16:59:39 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kcAWy-00059F-UR
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Nov 2020 17:00:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S1N8hyiWhEk++Gk2eBD08XSMoY3LczPkR4fWutVZMxU=; b=X78lFYtYhra8UqnM47m6Jt9Ct2
- 36CWS4/9eKRIo2QbW7xnnACg4IOCe7w5CXJ+Hc25Nzf+4JxZTuLeLc5PypD4jwVk0fSMqpvJ6SZ2u
- BRC0yk2lOLCBBZUncGAAQjYj98Ks66Pm/uDKnxmoLSXBYVFkhL03dq40LSBEk3PYEiYg=;
+ bh=7JE4QSsK9QrrB2lOOAUjCi2qEBkw9gZsyDIAx0aolVE=; b=cVShu+sab/J8f/Oen9lzviHifi
+ 1/i5bK1MGNMT9J3/c6yTD8NICdOD/i4sIGJPW3LJfg6JcEFve2qnFNNcw4mpE13G8oo5JrRyN9urz
+ C3ZXFEZ5jm3t0wSknPvxVsq56b6L3cV0IPo3u6d1BWeAeDmf8LktUeRV9hCG2Z4//GwA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=S1N8hyiWhEk++Gk2eBD08XSMoY3LczPkR4fWutVZMxU=; b=h
- VrMOLHNAjwpJbKGmcn6YcIt4IwXIB8vfbhaHXtMrZ1e8j+EnbDFyH784Oj8ve4lU6D9c0BuAb+i/y
- KmP15a45IQOidiOirVj4SlGWxlPB2g/XOXawAKqqqKHsqH2GQDEk1YhF2Fef0IkYp3BLo6I/Ikrkc
- XnUukgHu68g6kvS4=;
+ List-Owner:List-Archive; bh=7JE4QSsK9QrrB2lOOAUjCi2qEBkw9gZsyDIAx0aolVE=; b=C
+ +p1dZjM6PhQzUzRVWZVJXg66urFTcCFgsTqZrVuEEAnygRxQM2fyVouwKENBEXpEUPwIgpzX4hLRW
+ 2e4ahM1GhIqsqYF1BqdnTlLGhZ+EpIUBx9KCr5CQ6cvlSToohE1yC5v02/pTy1snCO2yggDiuDPe3
+ YJR14Y7hrwizSagQ=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kcAVx-005pbu-BH
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Nov 2020 16:59:39 +0000
+ id 1kcAWi-005pee-0O
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 09 Nov 2020 17:00:36 +0000
 Received: from localhost (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id AB17820789;
- Mon,  9 Nov 2020 16:59:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 692ED20789;
+ Mon,  9 Nov 2020 17:00:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1604941155;
- bh=WGEcmPXvVRi61x7imWKMEdS2fqmM9HkxAxRybtdcPMQ=;
+ s=default; t=1604941214;
+ bh=e1fR8c3/u8ILpeETIXysn5Lg1umCymg7KmWhq+/rSak=;
  h=From:To:Cc:Subject:Date:From;
- b=mbzMWX6TniVjfRm/Dzn3m2IZcq5w1+5WtbJ+g2OhO0bjQwetVouM6RJMdI/rRT2Ne
- WcYtRaSgGZ9qwSYy8MR8EVzova6W1sGBuPWV2LGAU8wZsDpnzcSxTBm5IlzhbCRaTp
- E2yAIdN/SO2j939M9w1a0RZPGx86HZ00RdQmipVQ=
+ b=kP5DkISnxV6x/qbDaYiMpCPbZTtX1cYBuTloAuAHYN0cKWH+492W5UCRq8ENlkNr3
+ 49ktkkiX8+QvRgbRi8zIBpxEJ+NAfzdFZA9BgT6zpzeVwRyyKk7vFi+8Wq7jzk3N22
+ iHN7yeslNZv0kO/6KHWWyFgtWbChLvIEe7te+jdo=
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Mon,  9 Nov 2020 08:59:14 -0800
-Message-Id: <20201109165914.2118360-1-jaegeuk@kernel.org>
+Date: Mon,  9 Nov 2020 09:00:12 -0800
+Message-Id: <20201109170012.2129411-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.29.2.222.g5d2a92d10f8-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
@@ -67,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kcAVx-005pbu-BH
-Subject: [f2fs-dev] [PATCH] f2fs: avoid unneeded data copy in
- f2fs_ioc_move_range()
+X-Headers-End: 1kcAWi-005pee-0O
+Subject: [f2fs-dev] [PATCH] f2fs: avoid race condition for shinker count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,39 +80,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Light Hsieh <Light.Hsieh@mediatek.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+Light reported sometimes shinker gets nat_cnt < dirty_nat_cnt resulting in
+wrong do_shinker work. Basically the two counts should not happen like that.
 
-Fields in struct f2fs_move_range won't change in f2fs_ioc_move_range(),
-let's avoid copying this structure's data to userspace.
+So, I suspect this race condtion where:
+- f2fs_try_to_free_nats            __flush_nat_entry_set
+ nat_cnt=2, dirty_nat_cnt=2
+                                   __clear_nat_cache_dirty
+                                    spin_lock(nat_list_lock)
+                                    list_move()
+                                    spin_unlock(nat_list_lock)
+ spin_lock(nat_list_lock)
+ list_del()
+ spin_unlock(nat_list_lock)
+ nat_cnt=1, dirty_nat_cnt=2
+                                   nat_cnt=1, dirty_nat_cnt=1
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
+Reported-by: Light Hsieh <Light.Hsieh@mediatek.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/file.c | 6 ------
- 1 file changed, 6 deletions(-)
+ fs/f2fs/node.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 52417a2e3f4f..22ae8ae0072f 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2898,12 +2898,6 @@ static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
- 					range.pos_out, range.len);
- 
- 	mnt_drop_write_file(filp);
--	if (err)
--		goto err_out;
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 42394de6c7eb..e8ec65e40f06 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -269,11 +269,10 @@ static void __clear_nat_cache_dirty(struct f2fs_nm_info *nm_i,
+ {
+ 	spin_lock(&nm_i->nat_list_lock);
+ 	list_move_tail(&ne->list, &nm_i->nat_entries);
+-	spin_unlock(&nm_i->nat_list_lock);
 -
--	if (copy_to_user((struct f2fs_move_range __user *)arg,
--						&range, sizeof(range)))
--		err = -EFAULT;
- err_out:
- 	fdput(dst);
- 	return err;
+ 	set_nat_flag(ne, IS_DIRTY, false);
+ 	set->entry_cnt--;
+ 	nm_i->dirty_nat_cnt--;
++	spin_unlock(&nm_i->nat_list_lock);
+ }
+ 
+ static unsigned int __gang_lookup_nat_set(struct f2fs_nm_info *nm_i,
 -- 
 2.29.2.222.g5d2a92d10f8-goog
 
