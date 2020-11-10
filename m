@@ -2,86 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63E782ACA94
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 02:39:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE2C42ACAB6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 02:53:13 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcIck-00022K-3k; Tue, 10 Nov 2020 01:39:06 +0000
+	id 1kcIqH-0002uV-OR; Tue, 10 Nov 2020 01:53:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tglx@linutronix.de>)
- id 1kcIce-00021g-AZ; Tue, 10 Nov 2020 01:39:00 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kcIqG-0002uO-RE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 01:53:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=; b=VMQNvJW3IENITahS+uLcjf4V2
- CuTsh4yZq79E1ZIJ77AWlTWfzdU5F5P66cLvrZ1K0bKVr4gfKGAS0PS798cAcd+8HuotMcqgippbs
- Y+bqF+fF06pzL4H5XJcG9720Zu9hnYR6TAkV4VGkRSihRuSWDuW7rclizdecc7m/EH+aE=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=WrH6bDqhzcjG30/FsClqDFOCoNBLoDvdNh8+zKMZd48=; b=OXa3TzqudrgvNrgEFBcIplwEBb
+ e2CuUFzABfDTMxYj98d9s73MXuZcV9BYdglSmOSdXDBAby/vy4yZLS96cGL38/FBIRaGMmvxjHmcG
+ c40aT7Z4T4YqG0Nt4i/2FqUz6giDCbMbl382i+53uG3IOo3B1uVS8jUb3gO2Qivm697A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=; b=QkdIFnSWHLKPCjZLdZlb41EiI+
- 8p4eRrbg0gHraUEbbFOqDe32GsoacjzStKmSN71AEDDylUkEk3RebECFdjWVP/PEmvIDX6UUEw8iA
- 04fVVg7584IYMjHpYlc8QKmP7XrkAKdgZLBjOgFlN/pbwk7QYNu/D3oHABCC3o/1RK20=;
-Received: from galois.linutronix.de ([193.142.43.55])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=WrH6bDqhzcjG30/FsClqDFOCoNBLoDvdNh8+zKMZd48=; b=Z//EqLu0w1khBPoYJ7WBOG4vng
+ lmH5rObjZJ0meTGEKsLeIYW0NxZ9/kj4McQW1RJ8IxZIWiGoF89mHsG12Eh8HucDDixk06rPMqY1A
+ o9Ta5TpFWg/QunsGX72s5mWxa9UYMtt9tsbGKIBoK0NLWEKCgPmmFe7HywlIj6QcwRxc=;
+Received: from szxga07-in.huawei.com ([45.249.212.35])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kcIcV-006F7K-Fk; Tue, 10 Nov 2020 01:38:57 +0000
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604970836;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=;
- b=DRjXCHfaWTV+37wSriT1BjBgrVPE6jdQ5QSgYOIapfxJkFIwaFOAyxB9axkmnF7jwFoYyj
- IwVALzvZ0PuA7RxNph9leDCS6B9rTa4rL3nKcIBy/Am24PTMh01e/A2SQWp6LTkOQfBaj6
- TPNYDFf29DCqNiv3sgD8nE6enYeIlsYkCGyKDzwB1FGN01/Y3vKoJQtpchwkYWrvNb9W70
- 4PCnBA8S0oYM/XwkwwZotKzR9vmT9oC6FdGvh5lMI1bLUaS0qdB+ZPTGprUeJSBjnvH0Xv
- xyRk7zOTS6b0OUuDBNt+X1xYcMB1KSB7gGowiPoSA5hPR5omsqQ5g20Kt4+uKg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604970836;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=;
- b=acv/dHWHYYmtT1/z0brDNSAmBtlvEk8c07ItXmS/RUDap25yEm8biO9jTMWItRsTlNRTeF
- x/KI3sqvslL8SkDg==
-To: ira.weiny@intel.com, Andrew Morton <akpm@linux-foundation.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>
-In-Reply-To: <20201009195033.3208459-6-ira.weiny@intel.com>
-References: <20201009195033.3208459-1-ira.weiny@intel.com>
- <20201009195033.3208459-6-ira.weiny@intel.com>
-Date: Tue, 10 Nov 2020 02:13:56 +0100
-Message-ID: <87h7pyhv3f.fsf@nanos.tec.linutronix.de>
+ id 1kcIq5-00ExTO-GT
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 01:53:04 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4CVW8R2Blfz75Vs;
+ Tue, 10 Nov 2020 09:52:39 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 10 Nov
+ 2020 09:52:41 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20201102122333.76667-1-yuchao0@huawei.com>
+ <20201102163123.GD529594@google.com>
+ <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
+ <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
+ <20201106211247.GA1474936@google.com>
+ <908682bb-486c-222f-bea7-43fc961ef1b0@huawei.com>
+ <20201109170625.GB2129970@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <3417aea5-ace8-74be-ec26-f491dddea676@huawei.com>
+Date: Tue, 10 Nov 2020 09:52:40 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20201109170625.GB2129970@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1kcIcV-006F7K-Fk
-Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 05/58] kmap: Introduce
- k[un]map_thread
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kcIq5-00ExTO-GT
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,106 +87,320 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-mmc@vger.kernel.org,
- Dave Hansen <dave.hansen@linux.intel.com>, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, target-devel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-kselftest@vger.kernel.org,
- samba-technical@lists.samba.org, Ira Weiny <ira.weiny@intel.com>,
- ceph-devel@vger.kernel.org, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, linux-afs@lists.infradead.org,
- cluster-devel@redhat.com, linux-cachefs@redhat.com,
- intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org,
- linux-ext4@vger.kernel.org, Fenghua Yu <fenghua.yu@intel.com>,
- linux-um@lists.infradead.org, intel-gfx@lists.freedesktop.org,
- ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Dan Williams <dan.j.williams@intel.com>,
- io-uring@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-ntfs-dev@lists.sourceforge.net, netdev@vger.kernel.org,
- Randy Dunlap <rdunlap@infradead.org>, kexec@lists.infradead.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Ira,
+On 2020/11/10 1:06, Jaegeuk Kim wrote:
+> On 11/09, Chao Yu wrote:
+>> On 2020/11/7 5:12, Jaegeuk Kim wrote:
+>>> On 11/03, Chao Yu wrote:
+>>>> On 2020/11/3 10:02, Chao Yu wrote:
+>>>>> On 2020/11/3 0:31, Jaegeuk Kim wrote:
+>>>>>> On 11/02, Chao Yu wrote:
+>>>>>>> This patch supports to store chksum value with compressed
+>>>>>>> data, and verify the integrality of compressed data while
+>>>>>>> reading the data.
+>>>>>>>
+>>>>>>> The feature can be enabled through specifying mount option
+>>>>>>> 'compress_chksum'.
+>>>>>>>
+>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>>> ---
+>>>>>>>      Documentation/filesystems/f2fs.rst |  1 +
+>>>>>>>      fs/f2fs/compress.c                 | 20 ++++++++++++++++++++
+>>>>>>>      fs/f2fs/f2fs.h                     | 13 ++++++++++++-
+>>>>>>>      fs/f2fs/inode.c                    |  3 +++
+>>>>>>>      fs/f2fs/super.c                    |  9 +++++++++
+>>>>>>>      include/linux/f2fs_fs.h            |  2 +-
+>>>>>>>      6 files changed, 46 insertions(+), 2 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+>>>>>>> index b8ee761c9922..985ae7d35066 100644
+>>>>>>> --- a/Documentation/filesystems/f2fs.rst
+>>>>>>> +++ b/Documentation/filesystems/f2fs.rst
+>>>>>>> @@ -260,6 +260,7 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+>>>>>>>      			 For other files, we can still enable compression via ioctl.
+>>>>>>>      			 Note that, there is one reserved special extension '*', it
+>>>>>>>      			 can be set to enable compression for all files.
+>>>>>>> +compress_chksum		 Support verifying chksum of raw data in compressed cluster.
+>>>>>>>      inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
+>>>>>>>      			 files using the blk-crypto framework rather than
+>>>>>>>      			 filesystem-layer encryption. This allows the use of
+>>>>>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>>>>>>> index 14262e0f1cd6..a4e0d2c745b6 100644
+>>>>>>> --- a/fs/f2fs/compress.c
+>>>>>>> +++ b/fs/f2fs/compress.c
+>>>>>>> @@ -602,6 +602,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>>>>>>>      				f2fs_cops[fi->i_compress_algorithm];
+>>>>>>>      	unsigned int max_len, new_nr_cpages;
+>>>>>>>      	struct page **new_cpages;
+>>>>>>> +	u32 chksum = 0;
+>>>>>>>      	int i, ret;
+>>>>>>>      	trace_f2fs_compress_pages_start(cc->inode, cc->cluster_idx,
+>>>>>>> @@ -655,6 +656,11 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>>>>>>>      	cc->cbuf->clen = cpu_to_le32(cc->clen);
+>>>>>>> +	if (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)
+>>>>>>> +		chksum = f2fs_crc32(F2FS_I_SB(cc->inode),
+>>>>>>> +					cc->cbuf->cdata, cc->clen);
+>>>>>>> +	cc->cbuf->chksum = cpu_to_le32(chksum);
+>>>>>>> +
+>>>>>>>      	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
+>>>>>>>      		cc->cbuf->reserved[i] = cpu_to_le32(0);
+>>>>>>> @@ -721,6 +727,7 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+>>>>>>>      			(struct decompress_io_ctx *)page_private(page);
+>>>>>>>      	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+>>>>>>>      	struct f2fs_inode_info *fi= F2FS_I(dic->inode);
+>>>>>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+>>>>>>>      	const struct f2fs_compress_ops *cops =
+>>>>>>>      			f2fs_cops[fi->i_compress_algorithm];
+>>>>>>>      	int ret;
+>>>>>>> @@ -790,6 +797,19 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+>>>>>>>      	ret = cops->decompress_pages(dic);
+>>>>>>> +	if (!ret && fi->i_compress_flag & 1 << COMPRESS_CHKSUM) {
+>>>>>>> +		u32 provided = le32_to_cpu(dic->cbuf->chksum);
+>>>>>>> +		u32 calculated = f2fs_crc32(sbi, dic->cbuf->cdata, dic->clen);
+>>>>>>> +
+>>>>>>> +		if (provided != calculated) {
+>>>>>>> +			printk_ratelimited(
+>>>>>>> +				"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
+>>>>>>> +				KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
+>>>>>>> +				provided, calculated);
+>>>>>>> +			ret = -EFSCORRUPTED;
+>>>>>>
+>>>>>> Do we need to change fsck.f2fs to recover this?
+>>>>
+>>>> However, we don't know which one is correct, compressed data or chksum value?
+>>>> if compressed data was corrupted, repairing chksum value doesn't help.
+>>>>
+>>>> Or how about adding chksum values for both raw data and compressed data.
+>>>>
+>>>> #define COMPRESS_DATA_RESERVED_SIZE	3
+>>>> struct compress_data {
+>>>> 	__le32 clen;			/* compressed data size */
+>>>> +	__le32 raw_chksum;		/* raw data chksum */
+>>>> +	__le32 compress_chksum;		/* compressed data chksum */
+>>>> 	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
+>>>> 	u8 cdata[];			/* compressed data */
+>>>> };
+>>>>
+>>>> 	raw_chksum	compress_chksum
+>>>> 	match		match			-> data is verified, pass
+>>>> 	not match	match			-> repair raw_chksum
+>>>> 	matcth		not match		-> repair compress_chksum
+>>>
+>>> I think only compress_chksum would be enough. BTW, can we give WARN_ON and
+>>> marking a FSCK flag without returning EFSCORRUPTED, since we don't really
+>>> know who was corrupted. If data was corrupted, we should be able to see app
+>>> corruption. In that case, we can check the kernel log. If checksum was simply
+>>
+>> I don't think that app will always corrupt once data was corrupted, I doubt its
+>> behavior could be slightly abnormal in some cases, e.g. it can just cause apps to
+>> show wrong number in interaction interface.
+> 
+> I didn't say we can always get it. But, it's likely to happen with something
+> like that.
+> 
+>>
+>> In this case, if we fix chksum in fsck, the wrong data will never be found due to
+>> data's chksum matches data itself after repair.
+> 
+> At least, we should see that log as a hint.
+> 
+>>
+>> IMO, the chksum and data was a whole dataset, once they are mismatch, we can
+>> not trust either of them, fsck should do nothing on them unless we store parity
+>> bits or replica.
+> 
+> Yeah, the point is those are not written as a transaction. Three concerns to me:
 
-On Fri, Oct 09 2020 at 12:49, ira weiny wrote:
-> From: Ira Weiny <ira.weiny@intel.com>
->
-> To correctly support the semantics of kmap() with Kernel protection keys
-> (PKS), kmap() may be required to set the protections on multiple
-> processors (globally).  Enabling PKS globally can be very expensive
-> depending on the requested operation.  Furthermore, enabling a domain
-> globally reduces the protection afforded by PKS.
->
-> Most kmap() (Aprox 209 of 229) callers use the map within a single thread and
-> have no need for the protection domain to be enabled globally.  However, the
-> remaining callers do not follow this pattern and, as best I can tell, expect
-> the mapping to be 'global' and available to any thread who may access the
-> mapping.[1]
->
-> We don't anticipate global mappings to pmem, however in general there is a
-> danger in changing the semantics of kmap().  Effectively, this would cause an
-> unresolved page fault with little to no information about why the failure
-> occurred.
->
-> To resolve this a number of options were considered.
->
-> 1) Attempt to change all the thread local kmap() calls to kmap_atomic()[2]
-> 2) Introduce a flags parameter to kmap() to indicate if the mapping should be
->    global or not
-> 3) Change ~20 call sites to 'kmap_global()' to indicate that they require a
->    global enablement of the pages.
-> 4) Change ~209 call sites to 'kmap_thread()' to indicate that the mapping is to
->    be used within that thread of execution only
->
-> Option 1 is simply not feasible.  Option 2 would require all of the call sites
-> of kmap() to change.  Option 3 seems like a good minimal change but there is a
-> danger that new code may miss the semantic change of kmap() and not get the
-> behavior the developer intended.  Therefore, #4 was chosen.
+Just to confirm:
 
-There is Option #5:
+> 1) agreed to see compressed data corruption by checksum
 
-Convert the thread local kmap() invocations to the proposed kmap_local()
-interface which is coming along [1].
+return EFSBADCRC always like we did as inode chksum feature.
 
-That solves a couple of issues:
+2) I don't want to see the error messages all the time
 
- 1) It relieves the current kmap_atomic() usage sites from the implict
-    pagefault/preempt disable semantics which apply even when
-    CONFIG_HIGHMEM is disabled. kmap_local() still can be invoked from
-    atomic context.
+Something like below?
 
- 2) Due to #1 it allows to replace the conditional usage of kmap() and
-    kmap_atomic() for purely thread local mappings.
+if (provided != calculated) {
+	if (!is_inode_flag_set(,FI_DATA_CORRUPTED)) {
+		printk_ratelimited();
+		WARN_ON()
+		set_inode_flag(, FI_DATA_CORRUPTED);
+	}
+	return EFSBADCRC;
+}
 
- 3) It puts the burden on the HIGHMEM inflicted systems
+3) don't touch the data, even if it was corrupted, since there's no way to fix it.
 
- 4) It is actually more efficient for most of the pure thread local use
-    cases on HIGHMEM inflicted systems because it avoids the overhead of
-    the global lock and the potential kmap slot exhaustion. A potential
-    preemption will be more expensive, but that's not really the case we
-    want to optimize for.
-
- 5) It solves the RT issue vs. kmap_atomic()
-
-So instead of creating yet another variety of kmap() which is just
-scratching the particular PKRS itch, can we please consolidate all of
-that on the wider reaching kmap_local() approach?
+It seems that we don't need to change fsck.f2fs finally...
 
 Thanks,
 
-        tglx
-     
-[1] https://lore.kernel.org/lkml/20201103092712.714480842@linutronix.de/
-
+> 
+>>
+>> Thanks,
+>>
+>>> corrupted, next fsck will fix the checksum. So, in general, I hope to keep
+>>> the data as is and raise a flag by the checksum.
+>>>
+>>>> 	not match	not match		-> corrupted, can not repair
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>> Yes, prepared to update inode layout in fsck.f2fs w/ kernel side change. >
+>>>>> Thanks,
+>>>>>
+>>>>>>
+>>>>>>> +		}
+>>>>>>> +	}
+>>>>>>> +
+>>>>>>>      out_vunmap_cbuf:
+>>>>>>>      	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
+>>>>>>>      out_vunmap_rbuf:
+>>>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>>>>> index 99bcf4b44a9c..2ae254ab7b7d 100644
+>>>>>>> --- a/fs/f2fs/f2fs.h
+>>>>>>> +++ b/fs/f2fs/f2fs.h
+>>>>>>> @@ -147,7 +147,8 @@ struct f2fs_mount_info {
+>>>>>>>      	/* For compression */
+>>>>>>>      	unsigned char compress_algorithm;	/* algorithm type */
+>>>>>>> -	unsigned compress_log_size;		/* cluster log size */
+>>>>>>> +	unsigned char compress_log_size;	/* cluster log size */
+>>>>>>> +	bool compress_chksum;			/* compressed data chksum */
+>>>>>>>      	unsigned char compress_ext_cnt;		/* extension count */
+>>>>>>>      	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
+>>>>>>>      };
+>>>>>>> @@ -731,6 +732,7 @@ struct f2fs_inode_info {
+>>>>>>>      	atomic_t i_compr_blocks;		/* # of compressed blocks */
+>>>>>>>      	unsigned char i_compress_algorithm;	/* algorithm type */
+>>>>>>>      	unsigned char i_log_cluster_size;	/* log of cluster size */
+>>>>>>> +	unsigned short i_compress_flag;		/* compress flag */
+>>>>>>>      	unsigned int i_cluster_size;		/* cluster size */
+>>>>>>>      };
+>>>>>>> @@ -1270,9 +1272,15 @@ enum compress_algorithm_type {
+>>>>>>>      	COMPRESS_MAX,
+>>>>>>>      };
+>>>>>>> +enum compress_flag {
+>>>>>>> +	COMPRESS_CHKSUM,
+>>>>>>> +	COMPRESS_MAX_FLAG,
+>>>>>>> +};
+>>>>>>> +
+>>>>>>>      #define COMPRESS_DATA_RESERVED_SIZE		5
+>>>>>>>      struct compress_data {
+>>>>>>>      	__le32 clen;			/* compressed data size */
+>>>>>>> +	__le32 chksum;			/* compressed data chksum */
+>>>>>>>      	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
+>>>>>>>      	u8 cdata[];			/* compressed data */
+>>>>>>>      };
+>>>>>>> @@ -3882,6 +3890,9 @@ static inline void set_compress_context(struct inode *inode)
+>>>>>>>      			F2FS_OPTION(sbi).compress_algorithm;
+>>>>>>>      	F2FS_I(inode)->i_log_cluster_size =
+>>>>>>>      			F2FS_OPTION(sbi).compress_log_size;
+>>>>>>> +	F2FS_I(inode)->i_compress_flag =
+>>>>>>> +			F2FS_OPTION(sbi).compress_chksum ?
+>>>>>>> +				1 << COMPRESS_CHKSUM : 0;
+>>>>>>>      	F2FS_I(inode)->i_cluster_size =
+>>>>>>>      			1 << F2FS_I(inode)->i_log_cluster_size;
+>>>>>>>      	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
+>>>>>>> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+>>>>>>> index 657db2fb6739..de8f7fc89efa 100644
+>>>>>>> --- a/fs/f2fs/inode.c
+>>>>>>> +++ b/fs/f2fs/inode.c
+>>>>>>> @@ -456,6 +456,7 @@ static int do_read_inode(struct inode *inode)
+>>>>>>>      					le64_to_cpu(ri->i_compr_blocks));
+>>>>>>>      			fi->i_compress_algorithm = ri->i_compress_algorithm;
+>>>>>>>      			fi->i_log_cluster_size = ri->i_log_cluster_size;
+>>>>>>> +			fi->i_compress_flag = ri->i_compress_flag;
+>>>>>>>      			fi->i_cluster_size = 1 << fi->i_log_cluster_size;
+>>>>>>>      			set_inode_flag(inode, FI_COMPRESSED_FILE);
+>>>>>>>      		}
+>>>>>>> @@ -634,6 +635,8 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
+>>>>>>>      					&F2FS_I(inode)->i_compr_blocks));
+>>>>>>>      			ri->i_compress_algorithm =
+>>>>>>>      				F2FS_I(inode)->i_compress_algorithm;
+>>>>>>> +			ri->i_compress_flag =
+>>>>>>> +				cpu_to_le16(F2FS_I(inode)->i_compress_flag);
+>>>>>>>      			ri->i_log_cluster_size =
+>>>>>>>      				F2FS_I(inode)->i_log_cluster_size;
+>>>>>>>      		}
+>>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>>>> index 00eff2f51807..f8de4d83a5be 100644
+>>>>>>> --- a/fs/f2fs/super.c
+>>>>>>> +++ b/fs/f2fs/super.c
+>>>>>>> @@ -146,6 +146,7 @@ enum {
+>>>>>>>      	Opt_compress_algorithm,
+>>>>>>>      	Opt_compress_log_size,
+>>>>>>>      	Opt_compress_extension,
+>>>>>>> +	Opt_compress_chksum,
+>>>>>>>      	Opt_atgc,
+>>>>>>>      	Opt_err,
+>>>>>>>      };
+>>>>>>> @@ -214,6 +215,7 @@ static match_table_t f2fs_tokens = {
+>>>>>>>      	{Opt_compress_algorithm, "compress_algorithm=%s"},
+>>>>>>>      	{Opt_compress_log_size, "compress_log_size=%u"},
+>>>>>>>      	{Opt_compress_extension, "compress_extension=%s"},
+>>>>>>> +	{Opt_compress_chksum, "compress_chksum"},
+>>>>>>>      	{Opt_atgc, "atgc"},
+>>>>>>>      	{Opt_err, NULL},
+>>>>>>>      };
+>>>>>>> @@ -934,10 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>>>>>>>      			F2FS_OPTION(sbi).compress_ext_cnt++;
+>>>>>>>      			kfree(name);
+>>>>>>>      			break;
+>>>>>>> +		case Opt_compress_chksum:
+>>>>>>> +			F2FS_OPTION(sbi).compress_chksum = true;
+>>>>>>> +			break;
+>>>>>>>      #else
+>>>>>>>      		case Opt_compress_algorithm:
+>>>>>>>      		case Opt_compress_log_size:
+>>>>>>>      		case Opt_compress_extension:
+>>>>>>> +		case Opt_compress_chksum:
+>>>>>>>      			f2fs_info(sbi, "compression options not supported");
+>>>>>>>      			break;
+>>>>>>>      #endif
+>>>>>>> @@ -1523,6 +1529,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+>>>>>>>      		seq_printf(seq, ",compress_extension=%s",
+>>>>>>>      			F2FS_OPTION(sbi).extensions[i]);
+>>>>>>>      	}
+>>>>>>> +
+>>>>>>> +	if (F2FS_OPTION(sbi).compress_chksum)
+>>>>>>> +		seq_puts(seq, ",compress_chksum");
+>>>>>>>      }
+>>>>>>>      static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+>>>>>>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+>>>>>>> index a5dbb57a687f..7dc2a06cf19a 100644
+>>>>>>> --- a/include/linux/f2fs_fs.h
+>>>>>>> +++ b/include/linux/f2fs_fs.h
+>>>>>>> @@ -273,7 +273,7 @@ struct f2fs_inode {
+>>>>>>>      			__le64 i_compr_blocks;	/* # of compressed blocks */
+>>>>>>>      			__u8 i_compress_algorithm;	/* compress algorithm */
+>>>>>>>      			__u8 i_log_cluster_size;	/* log of cluster size */
+>>>>>>> -			__le16 i_padding;		/* padding */
+>>>>>>> +			__le16 i_compress_flag;		/* compress flag */
+>>>>>>>      			__le32 i_extra_end[0];	/* for attribute size calculation */
+>>>>>>>      		} __packed;
+>>>>>>>      		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
+>>>>>>> -- 
+>>>>>>> 2.26.2
+>>>>>> .
+>>>>>>
+>>>>>
+>>>>>
+>>>>> _______________________________________________
+>>>>> Linux-f2fs-devel mailing list
+>>>>> Linux-f2fs-devel@lists.sourceforge.net
+>>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+>>>>> .
+>>>>>
+>>> .
+>>>
+> .
+> 
 
 
 _______________________________________________
