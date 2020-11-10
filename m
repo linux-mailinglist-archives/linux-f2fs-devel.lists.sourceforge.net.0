@@ -2,72 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B3FD2ACA6D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 02:26:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63E782ACA94
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 02:39:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcIQJ-0003hY-Lq; Tue, 10 Nov 2020 01:26:15 +0000
+	id 1kcIck-00022K-3k; Tue, 10 Nov 2020 01:39:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kcIQG-0003h3-Ea
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 01:26:12 +0000
+ (envelope-from <tglx@linutronix.de>)
+ id 1kcIce-00021g-AZ; Tue, 10 Nov 2020 01:39:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Qr/QSMCPvboUjVEUrIZp2agUcoZzH+bE5m9MPtmrGQU=; b=S75jqMOaSS8xGaSl/fB3HXA60s
- HEFPNIsIJgffnUPLROabx5gJbv+uiWOJe/9SNb4BuVKmETOLvECHjSI604uFYyqdt4fqqVYQUzzG9
- kj0ZT6us2qe+YDR6aZDcpCbhJYodcOYD1uTpBW54UmyD1DLByIzFWAiLzWQJ4k+re5IQ=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=; b=VMQNvJW3IENITahS+uLcjf4V2
+ CuTsh4yZq79E1ZIJ77AWlTWfzdU5F5P66cLvrZ1K0bKVr4gfKGAS0PS798cAcd+8HuotMcqgippbs
+ Y+bqF+fF06pzL4H5XJcG9720Zu9hnYR6TAkV4VGkRSihRuSWDuW7rclizdecc7m/EH+aE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Qr/QSMCPvboUjVEUrIZp2agUcoZzH+bE5m9MPtmrGQU=; b=fNwQlGSW8zH2vGyc7WWBcs+7+7
- p9ntBkfI3bfWYnxqxVVfTd6mozuLYbnkvQ8z3vgHAaK729lDC9vX9V13DlZAKTl3sUrwKlP6RNYy+
- aH+oTPlqaFKi/sus5yV6rFNx34pLguYtnTxhP2+IEgNYKN6lMGekfvOjnP0MSoBbbeQE=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
+ bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=; b=QkdIFnSWHLKPCjZLdZlb41EiI+
+ 8p4eRrbg0gHraUEbbFOqDe32GsoacjzStKmSN71AEDDylUkEk3RebECFdjWVP/PEmvIDX6UUEw8iA
+ 04fVVg7584IYMjHpYlc8QKmP7XrkAKdgZLBjOgFlN/pbwk7QYNu/D3oHABCC3o/1RK20=;
+Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kcIQ4-006E6h-5N
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 01:26:12 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4CVVYL1Mryz71B8;
- Tue, 10 Nov 2020 09:25:42 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
- 14.3.487.0; Tue, 10 Nov 2020 09:25:39 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Tue, 10 Nov 2020 09:24:37 +0800
-Message-ID: <20201110012437.26482-2-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201110012437.26482-1-yuchao0@huawei.com>
-References: <20201110012437.26482-1-yuchao0@huawei.com>
+ id 1kcIcV-006F7K-Fk; Tue, 10 Nov 2020 01:38:57 +0000
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1604970836;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=;
+ b=DRjXCHfaWTV+37wSriT1BjBgrVPE6jdQ5QSgYOIapfxJkFIwaFOAyxB9axkmnF7jwFoYyj
+ IwVALzvZ0PuA7RxNph9leDCS6B9rTa4rL3nKcIBy/Am24PTMh01e/A2SQWp6LTkOQfBaj6
+ TPNYDFf29DCqNiv3sgD8nE6enYeIlsYkCGyKDzwB1FGN01/Y3vKoJQtpchwkYWrvNb9W70
+ 4PCnBA8S0oYM/XwkwwZotKzR9vmT9oC6FdGvh5lMI1bLUaS0qdB+ZPTGprUeJSBjnvH0Xv
+ xyRk7zOTS6b0OUuDBNt+X1xYcMB1KSB7gGowiPoSA5hPR5omsqQ5g20Kt4+uKg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1604970836;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=UkwosGD4CNwpr5O4mn7FToWEjHCGounmVIqa5vjwzhQ=;
+ b=acv/dHWHYYmtT1/z0brDNSAmBtlvEk8c07ItXmS/RUDap25yEm8biO9jTMWItRsTlNRTeF
+ x/KI3sqvslL8SkDg==
+To: ira.weiny@intel.com, Andrew Morton <akpm@linux-foundation.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>
+In-Reply-To: <20201009195033.3208459-6-ira.weiny@intel.com>
+References: <20201009195033.3208459-1-ira.weiny@intel.com>
+ <20201009195033.3208459-6-ira.weiny@intel.com>
+Date: Tue, 10 Nov 2020 02:13:56 +0100
+Message-ID: <87h7pyhv3f.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
+ for more information. [URIs: intel.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kcIQ4-006E6h-5N
-Subject: [f2fs-dev] [PATCH v5 2/2] f2fs: fix compat F2FS_IOC_{MOVE,
- GARBAGE_COLLECT}_RANGE
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kcIcV-006F7K-Fk
+Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 05/58] kmap: Introduce
+ k[un]map_thread
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,296 +93,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Eric Biggers <ebiggers@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-mmc@vger.kernel.org,
+ Dave Hansen <dave.hansen@linux.intel.com>, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, target-devel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-kselftest@vger.kernel.org,
+ samba-technical@lists.samba.org, Ira Weiny <ira.weiny@intel.com>,
+ ceph-devel@vger.kernel.org, drbd-dev@lists.linbit.com,
+ devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
+ amd-gfx@lists.freedesktop.org, linux-afs@lists.infradead.org,
+ cluster-devel@redhat.com, linux-cachefs@redhat.com,
+ intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org,
+ linux-ext4@vger.kernel.org, Fenghua Yu <fenghua.yu@intel.com>,
+ linux-um@lists.infradead.org, intel-gfx@lists.freedesktop.org,
+ ecryptfs@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-bcache@vger.kernel.org, Dan Williams <dan.j.williams@intel.com>,
+ io-uring@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-ntfs-dev@lists.sourceforge.net, netdev@vger.kernel.org,
+ Randy Dunlap <rdunlap@infradead.org>, kexec@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Eric reported a ioctl bug in below link:
+Ira,
 
-https://lore.kernel.org/linux-f2fs-devel/20201103032234.GB2875@sol.localdomain/
+On Fri, Oct 09 2020 at 12:49, ira weiny wrote:
+> From: Ira Weiny <ira.weiny@intel.com>
+>
+> To correctly support the semantics of kmap() with Kernel protection keys
+> (PKS), kmap() may be required to set the protections on multiple
+> processors (globally).  Enabling PKS globally can be very expensive
+> depending on the requested operation.  Furthermore, enabling a domain
+> globally reduces the protection afforded by PKS.
+>
+> Most kmap() (Aprox 209 of 229) callers use the map within a single thread and
+> have no need for the protection domain to be enabled globally.  However, the
+> remaining callers do not follow this pattern and, as best I can tell, expect
+> the mapping to be 'global' and available to any thread who may access the
+> mapping.[1]
+>
+> We don't anticipate global mappings to pmem, however in general there is a
+> danger in changing the semantics of kmap().  Effectively, this would cause an
+> unresolved page fault with little to no information about why the failure
+> occurred.
+>
+> To resolve this a number of options were considered.
+>
+> 1) Attempt to change all the thread local kmap() calls to kmap_atomic()[2]
+> 2) Introduce a flags parameter to kmap() to indicate if the mapping should be
+>    global or not
+> 3) Change ~20 call sites to 'kmap_global()' to indicate that they require a
+>    global enablement of the pages.
+> 4) Change ~209 call sites to 'kmap_thread()' to indicate that the mapping is to
+>    be used within that thread of execution only
+>
+> Option 1 is simply not feasible.  Option 2 would require all of the call sites
+> of kmap() to change.  Option 3 seems like a good minimal change but there is a
+> danger that new code may miss the semantic change of kmap() and not get the
+> behavior the developer intended.  Therefore, #4 was chosen.
 
-That said, on some 32-bit architectures, u64 has only 32-bit alignment,
-notably i386 and x86_32, so that size of struct f2fs_gc_range compiled
-in x86_32 is 20 bytes, however the size in x86_64 is 24 bytes, binary
-compiled in x86_32 can not call F2FS_IOC_GARBAGE_COLLECT_RANGE successfully
-due to mismatched value of ioctl command in between binary and f2fs
-module, similarly, F2FS_IOC_MOVE_RANGE will fail too.
+There is Option #5:
 
-In this patch we introduce two ioctls for compatibility of above special
-32-bit binary:
-- F2FS_IOC32_GARBAGE_COLLECT_RANGE
-- F2FS_IOC32_MOVE_RANGE
+Convert the thread local kmap() invocations to the proposed kmap_local()
+interface which is coming along [1].
 
-Reported-by: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v5:
-- avoid redundant cp-related check for clean up.
- fs/f2fs/file.c | 137 +++++++++++++++++++++++++++++++++++++------------
- 1 file changed, 104 insertions(+), 33 deletions(-)
+That solves a couple of issues:
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 22ae8ae0072f..be8db06aca27 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2480,26 +2480,19 @@ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
- 	return ret;
- }
- 
--static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
-+static int __f2fs_ioc_gc_range(struct file *filp, struct f2fs_gc_range *range)
- {
--	struct inode *inode = file_inode(filp);
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct f2fs_gc_range range;
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(filp));
- 	u64 end;
- 	int ret;
- 
- 	if (!capable(CAP_SYS_ADMIN))
- 		return -EPERM;
--
--	if (copy_from_user(&range, (struct f2fs_gc_range __user *)arg,
--							sizeof(range)))
--		return -EFAULT;
--
- 	if (f2fs_readonly(sbi->sb))
- 		return -EROFS;
- 
--	end = range.start + range.len;
--	if (end < range.start || range.start < MAIN_BLKADDR(sbi) ||
-+	end = range->start + range->len;
-+	if (end < range->start || range->start < MAIN_BLKADDR(sbi) ||
- 					end >= MAX_BLKADDR(sbi))
- 		return -EINVAL;
- 
-@@ -2508,7 +2501,7 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
- 		return ret;
- 
- do_more:
--	if (!range.sync) {
-+	if (!range->sync) {
- 		if (!down_write_trylock(&sbi->gc_lock)) {
- 			ret = -EBUSY;
- 			goto out;
-@@ -2517,20 +2510,30 @@ static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
- 		down_write(&sbi->gc_lock);
- 	}
- 
--	ret = f2fs_gc(sbi, range.sync, true, GET_SEGNO(sbi, range.start));
-+	ret = f2fs_gc(sbi, range->sync, true, GET_SEGNO(sbi, range->start));
- 	if (ret) {
- 		if (ret == -EBUSY)
- 			ret = -EAGAIN;
- 		goto out;
- 	}
--	range.start += BLKS_PER_SEC(sbi);
--	if (range.start <= end)
-+	range->start += BLKS_PER_SEC(sbi);
-+	if (range->start <= end)
- 		goto do_more;
- out:
- 	mnt_drop_write_file(filp);
- 	return ret;
- }
- 
-+static int f2fs_ioc_gc_range(struct file *filp, unsigned long arg)
-+{
-+	struct f2fs_gc_range range;
-+
-+	if (copy_from_user(&range, (struct f2fs_gc_range __user *)arg,
-+							sizeof(range)))
-+		return -EFAULT;
-+	return __f2fs_ioc_gc_range(filp, &range);
-+}
-+
- static int f2fs_ioc_write_checkpoint(struct file *filp, unsigned long arg)
- {
- 	struct inode *inode = file_inode(filp);
-@@ -2867,9 +2870,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
- 	return ret;
- }
- 
--static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
-+static int __f2fs_ioc_move_range(struct file *filp,
-+				struct f2fs_move_range *range)
- {
--	struct f2fs_move_range range;
- 	struct fd dst;
- 	int err;
- 
-@@ -2877,11 +2880,7 @@ static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
- 			!(filp->f_mode & FMODE_WRITE))
- 		return -EBADF;
- 
--	if (copy_from_user(&range, (struct f2fs_move_range __user *)arg,
--							sizeof(range)))
--		return -EFAULT;
--
--	dst = fdget(range.dst_fd);
-+	dst = fdget(range->dst_fd);
- 	if (!dst.file)
- 		return -EBADF;
- 
-@@ -2894,8 +2893,8 @@ static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
- 	if (err)
- 		goto err_out;
- 
--	err = f2fs_move_file_range(filp, range.pos_in, dst.file,
--					range.pos_out, range.len);
-+	err = f2fs_move_file_range(filp, range->pos_in, dst.file,
-+					range->pos_out, range->len);
- 
- 	mnt_drop_write_file(filp);
- err_out:
-@@ -2903,6 +2902,16 @@ static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
- 	return err;
- }
- 
-+static int f2fs_ioc_move_range(struct file *filp, unsigned long arg)
-+{
-+	struct f2fs_move_range range;
-+
-+	if (copy_from_user(&range, (struct f2fs_move_range __user *)arg,
-+							sizeof(range)))
-+		return -EFAULT;
-+	return __f2fs_ioc_move_range(filp, &range);
-+}
-+
- static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
- {
- 	struct inode *inode = file_inode(filp);
-@@ -4017,13 +4026,8 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
- 	return ret;
- }
- 
--long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
-+static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- {
--	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
--		return -EIO;
--	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp))))
--		return -ENOSPC;
--
- 	switch (cmd) {
- 	case FS_IOC_GETFLAGS:
- 		return f2fs_ioc_getflags(filp, arg);
-@@ -4114,6 +4118,16 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 	}
- }
- 
-+long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
-+{
-+	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
-+		return -EIO;
-+	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(filp))))
-+		return -ENOSPC;
-+
-+	return __f2fs_ioctl(filp, cmd, arg);
-+}
-+
- static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
- {
- 	struct file *file = iocb->ki_filp;
-@@ -4230,8 +4244,63 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
- }
- 
- #ifdef CONFIG_COMPAT
-+struct compat_f2fs_gc_range {
-+	u32 sync;
-+	compat_u64 start;
-+	compat_u64 len;
-+};
-+#define F2FS_IOC32_GARBAGE_COLLECT_RANGE	_IOW(F2FS_IOCTL_MAGIC, 11,\
-+						struct compat_f2fs_gc_range)
-+
-+static int f2fs_compat_ioc_gc_range(struct file *file, unsigned long arg)
-+{
-+	struct compat_f2fs_gc_range __user *urange;
-+	struct f2fs_gc_range range;
-+	int err;
-+
-+	urange = compat_ptr(arg);
-+	err = get_user(range.sync, &urange->sync);
-+	err |= get_user(range.start, &urange->start);
-+	err |= get_user(range.len, &urange->len);
-+	if (err)
-+		return -EFAULT;
-+
-+	return __f2fs_ioc_gc_range(file, &range);
-+}
-+
-+struct compat_f2fs_move_range {
-+	u32 dst_fd;
-+	compat_u64 pos_in;
-+	compat_u64 pos_out;
-+	compat_u64 len;
-+};
-+#define F2FS_IOC32_MOVE_RANGE		_IOWR(F2FS_IOCTL_MAGIC, 9,	\
-+					struct compat_f2fs_move_range)
-+
-+static int f2fs_compat_ioc_move_range(struct file *file, unsigned long arg)
-+{
-+	struct compat_f2fs_move_range __user *urange;
-+	struct f2fs_move_range range;
-+	int err;
-+
-+	urange = compat_ptr(arg);
-+	err = get_user(range.dst_fd, &urange->dst_fd);
-+	err |= get_user(range.pos_in, &urange->pos_in);
-+	err |= get_user(range.pos_out, &urange->pos_out);
-+	err |= get_user(range.len, &urange->len);
-+	if (err)
-+		return -EFAULT;
-+
-+	return __f2fs_ioc_move_range(file, &range);
-+}
-+
- long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- {
-+	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(file)))))
-+		return -EIO;
-+	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(file_inode(file))))
-+		return -ENOSPC;
-+
- 	switch (cmd) {
- 	case FS_IOC32_GETFLAGS:
- 		cmd = FS_IOC_GETFLAGS;
-@@ -4242,6 +4311,10 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case FS_IOC32_GETVERSION:
- 		cmd = FS_IOC_GETVERSION;
- 		break;
-+	case F2FS_IOC32_GARBAGE_COLLECT_RANGE:
-+		return f2fs_compat_ioc_gc_range(file, arg);
-+	case F2FS_IOC32_MOVE_RANGE:
-+		return f2fs_compat_ioc_move_range(file, arg);
- 	case F2FS_IOC_START_ATOMIC_WRITE:
- 	case F2FS_IOC_COMMIT_ATOMIC_WRITE:
- 	case F2FS_IOC_START_VOLATILE_WRITE:
-@@ -4259,10 +4332,8 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	case FS_IOC_GET_ENCRYPTION_KEY_STATUS:
- 	case FS_IOC_GET_ENCRYPTION_NONCE:
- 	case F2FS_IOC_GARBAGE_COLLECT:
--	case F2FS_IOC_GARBAGE_COLLECT_RANGE:
- 	case F2FS_IOC_WRITE_CHECKPOINT:
- 	case F2FS_IOC_DEFRAGMENT:
--	case F2FS_IOC_MOVE_RANGE:
- 	case F2FS_IOC_FLUSH_DEVICE:
- 	case F2FS_IOC_GET_FEATURES:
- 	case FS_IOC_FSGETXATTR:
-@@ -4285,7 +4356,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	default:
- 		return -ENOIOCTLCMD;
- 	}
--	return f2fs_ioctl(file, cmd, (unsigned long) compat_ptr(arg));
-+	return __f2fs_ioctl(file, cmd, (unsigned long) compat_ptr(arg));
- }
- #endif
- 
--- 
-2.26.2
+ 1) It relieves the current kmap_atomic() usage sites from the implict
+    pagefault/preempt disable semantics which apply even when
+    CONFIG_HIGHMEM is disabled. kmap_local() still can be invoked from
+    atomic context.
+
+ 2) Due to #1 it allows to replace the conditional usage of kmap() and
+    kmap_atomic() for purely thread local mappings.
+
+ 3) It puts the burden on the HIGHMEM inflicted systems
+
+ 4) It is actually more efficient for most of the pure thread local use
+    cases on HIGHMEM inflicted systems because it avoids the overhead of
+    the global lock and the potential kmap slot exhaustion. A potential
+    preemption will be more expensive, but that's not really the case we
+    want to optimize for.
+
+ 5) It solves the RT issue vs. kmap_atomic()
+
+So instead of creating yet another variety of kmap() which is just
+scratching the particular PKRS itch, can we please consolidate all of
+that on the wider reaching kmap_local() approach?
+
+Thanks,
+
+        tglx
+     
+[1] https://lore.kernel.org/lkml/20201103092712.714480842@linutronix.de/
 
 
 
