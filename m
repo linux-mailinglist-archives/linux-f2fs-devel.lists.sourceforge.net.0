@@ -2,91 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5490B2AD5F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 13:17:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E061E2ADA6A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 16:27:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcSa8-0005GK-6u; Tue, 10 Nov 2020 12:17:04 +0000
+	id 1kcVYf-0007mE-EI; Tue, 10 Nov 2020 15:27:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david.laight@aculab.com>) id 1kcSa6-0005Fu-UV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 12:17:02 +0000
+ (envelope-from <dsterba@suse.cz>)
+ id 1kcVYf-0007m5-31; Tue, 10 Nov 2020 15:27:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=82X0+70U+jiNchLXaqjQiZ+HubwLjOWaLNuJ2KZXOos=; b=J/o6uRjmCLD5F3sru7kEB7zPD5
- 7KfnaF50K0HCMQQPTiR9IVK8ZUr3ndHJ5DfjhlAleuUJycaiLAqy0WK9VbkfGM+Ay8cadG7iDHtQ2
- WKZhW0mcBen7JuRqCKCLSgKGcqSY4QJCm4k8CF1aUdac60QGwlFXpYqeWH3w0VrsxkjM=;
+ bh=nLFmoa0aloAZvgnWh5K26JQfxjzsuVMDGq8sXagZeog=; b=OsiOOv1SYwP7PBZgxLrBWcsIEc
+ lpWnq1tgpxnIPwBbOPyVQJQGpvypg4WfVpDFqE/ZP4LlYJ+J8hE03ZV9ZELCuLCK35lk4E0vUcGDG
+ PY4x8x6gO/SKnDZ9h6ueLViagLbwu+P3wmrsIN1PoLJBxrLItj9RCNfVv8/SD4A6EEqA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
- References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=82X0+70U+jiNchLXaqjQiZ+HubwLjOWaLNuJ2KZXOos=; b=lNwIW/5aS1K1+YEPWJ8t3u3FUl
- W0qXInYo4m6DPwQHaxivymq7zcv8RiT0fxbKnIJOyQ3Zg8cZmCJkoPJMjfQ/8kDF+669LvyBR+pHu
- UckTbsXaRh+i59MjiA5muCIBziS5+xw93KlijSaM1jN3j4zL5ObbZn0ad3aNhmcfIs0o=;
-Received: from eu-smtp-delivery-151.mimecast.com ([207.82.80.151])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1kcSZr-006ftV-OS
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 12:17:02 +0000
-Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-216-ep7CIZcmM6mQ50C-RJpcMQ-1; Tue, 10 Nov 2020 12:16:37 +0000
-X-MC-Unique: ep7CIZcmM6mQ50C-RJpcMQ-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
- Server (TLS) id 15.0.1347.2; Tue, 10 Nov 2020 12:16:37 +0000
-Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
- AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
- Tue, 10 Nov 2020 12:16:37 +0000
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Chao Yu' <yuchao0@huawei.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-Thread-Topic: [f2fs-dev] [PATCH] f2fs: compress: support chksum
-Thread-Index: AQHWtyqj1VtcccaQGU+ZRA66ANZtT6nBRPmg
-Date: Tue, 10 Nov 2020 12:16:37 +0000
-Message-ID: <db1d478cda6642d1b08c3435e84944d9@AcuMS.aculab.com>
-References: <20201102122333.76667-1-yuchao0@huawei.com>
- <20201102163123.GD529594@google.com>
- <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
- <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
- <20201106211247.GA1474936@google.com>
- <908682bb-486c-222f-bea7-43fc961ef1b0@huawei.com>
- <20201109170625.GB2129970@google.com>
- <3417aea5-ace8-74be-ec26-f491dddea676@huawei.com>
- <20201110042353.GB1598246@google.com>
- <513c56d7-cefd-37a8-efdf-fa1ac8c2a1d3@huawei.com>
-In-Reply-To: <513c56d7-cefd-37a8-efdf-fa1ac8c2a1d3@huawei.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+ bh=nLFmoa0aloAZvgnWh5K26JQfxjzsuVMDGq8sXagZeog=; b=VQMevQqEABp0XNJ/STV808Neho
+ z4HYO4l/98cein6h0a+7nI2x83CRkH5r563HpZwc7f9j4pLIV640+fFJ4KF72kX/tEFyW0CHATkXj
+ NJt7ektJSQekrZfyU2QJqfa1Nf0XoLRlpVAXYK5ig+oTgmhcAlot6dZL031N4G8Qc6fQ=;
+Received: from mx2.suse.de ([195.135.220.15])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kcVYZ-00Fcn3-LM; Tue, 10 Nov 2020 15:27:45 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id DBFC2ABD1;
+ Tue, 10 Nov 2020 15:27:22 +0000 (UTC)
+Received: by ds.suse.cz (Postfix, from userid 10065)
+ id 7255CDA7D7; Tue, 10 Nov 2020 16:25:41 +0100 (CET)
+Date: Tue, 10 Nov 2020 16:25:41 +0100
+From: David Sterba <dsterba@suse.cz>
+To: Chris Mason <clm@fb.com>
+Message-ID: <20201110152541.GK6756@twin.jikos.cz>
+Mail-Followup-To: dsterba@suse.cz, Chris Mason <clm@fb.com>,
+ Christoph Hellwig <hch@infradead.org>,
+ Nick Terrell <nickrterrell@gmail.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ linux-crypto@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ squashfs-devel@lists.sourceforge.net,
+ linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, Kernel Team <Kernel-team@fb.com>,
+ Nick Terrell <terrelln@fb.com>, Petr Malat <oss@malat.biz>,
+ Johannes Weiner <jweiner@fb.com>, Niket Agarwal <niketa@fb.com>,
+ Yann Collet <cyan@fb.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20201103060535.8460-1-nickrterrell@gmail.com>
+ <20201103060535.8460-2-nickrterrell@gmail.com>
+ <20201106183846.GA28005@infradead.org>
+ <D9338FE4-1518-4C7B-8C23-DBDC542DAC35@fb.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <D9338FE4-1518-4C7B-8C23-DBDC542DAC35@fb.com>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [207.82.80.151 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [207.82.80.151 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kcSZr-006ftV-OS
-Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
+X-Headers-End: 1kcVYZ-00Fcn3-LM
+Subject: Re: [f2fs-dev] [PATCH v5 1/9] lib: zstd: Add zstd compatibility
+ wrapper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,53 +88,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: dsterba@suse.cz
+Cc: squashfs-devel@lists.sourceforge.net,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
+ Petr Malat <oss@malat.biz>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
+ Nick Terrell <terrelln@fb.com>, linux-crypto@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
+ linux-btrfs@vger.kernel.org, Johannes Weiner <jweiner@fb.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu
-> Sent: 10 November 2020 06:28
-...
-> Actually, I think the both results are the same, inode chksum doesn't match inode
-> metadata, like current case that cluster chksum doesn't match cluster data, it
-> doesn't matter how it becomes mismatched.
-> 
-> And also, in those inode corrupted cases, there should be some cases that hacker
-> or fuzz tester injects random data in chksum intentionally, or bit-flipping happed
-> on chksum value in inode, inode metadata (except inode chksum) is integrated though,
-> we can not distinguish such cases from case of inode metadata (except inode chksum)
-> corruption.
-
-If you reverse the crc algotithm on the checksum error bits and get a
-pattern with a small number of adjacent ones then that would be a burst
-error that would generate the observed crc error.
-
-So if you have a 32bit crc on an 8k byte buffer there are 64k bit positions
-so (IIRC from my university days) you can fix an assumed 16 bit error burst.
-That would be a bit dangerous through.
-OTOH if you find an 8-bit error pattern you could assume (and fix)
-a single byte corruption.
-
-Whether that is worth doing depends on any assumed mechanisms
-for generating corruptions.
-
-I don't know of any ethernet hardware that uses the 32bit crc
-to fix very short burst errors (or even single bit errors)
-even though it could be done and burst errors are quite likely.
-(Below Ge speeds.)
-
-	David
-
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gTW9uLCBOb3YgMDksIDIwMjAgYXQgMDI6MDE6NDFQTSAtMDUwMCwgQ2hyaXMgTWFzb24gd3Jv
+dGU6Cj4gT24gNiBOb3YgMjAyMCwgYXQgMTM6MzgsIENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgo+
+ID4gWW91IGp1c3Qga2VlcCByZXNlZG5pbmcgdGhpcyBjcmFwLCBkb24ndCB5b3U/ICBIYXZlbid0
+IHlvdSBiZWVuIHRvbGQKPiA+IG11bHRpcGxlIHRpbWVzIHRvIHByb3ZpZGUgYSBwcm9wZXIga2Vy
+bmVsIEFQSSBieSBub3c/Cj4gCj4gWW91IGRvIGNvbnNpc3RlbnRseSBhc2sgZm9yIGEgc2hpbSBs
+YXllciwgYnV0IHlvdSBoYXZlbuKAmXQgZXhwbGFpbmVkIAo+IHdoYXQgd2UgZ2FpbiBieSBkaXZl
+cmdpbmcgZnJvbSB0aGUgZG9jdW1lbnRlZCBhbmQgdGVzdGVkIEFQSSBvZiB0aGUgCj4gdXBzdHJl
+YW0genN0ZCBwcm9qZWN0LiAgSXTigJlzIGFuIGltcG9ydGFudCBkaXNjdXNzaW9uIGdpdmVuIHRo
+YXQgd2UgCj4gaG9wZSB0byByZWd1bGFybHkgdXBkYXRlIHRoZSBrZXJuZWwgc2lkZSBhcyB0aGV5
+IG1ha2UgaW1wcm92ZW1lbnRzIGluIAo+IHpzdGQuCj4gCj4gVGhlIG9ubHkgYmVuZWZpdCBkZXNj
+cmliZWQgc28gZmFyIHNlZW1zIHRvIGJlIGNhbWVsY2FzZSByZWxhdGVkLCBidXQgaWYgCj4gdGhl
+cmUgYXJlIHByb2JsZW1zIGluIHRoZSBBUEkgYmV5b25kIHRoYXQsIEkgaGF2ZW7igJl0IHNlZW4g
+eW91IGRlc2NyaWJlIAo+IHRoZW0uICBJIGRvbuKAmXQgdGhpbmsgdGhlIGNhbWVsY2FzZSBhbG9u
+ZSBqdXN0aWZpZXMgdGhlIGFkZGVkIGNvc3RzIG9mIAo+IHRoZSBzaGltLgoKVGhlIEFQSSBjaGFu
+Z2UgaW4gdGhpcyBwYXRjaHNldCBpcyBhZGRpbmcgY2h1cm4gdGhhdCB3b3VsZG4ndCBiZQpuZWNl
+c3NhcnkgaWYgdGhlcmUgd2VyZSBhbiB1cHN0cmVhbTwtPmtlcm5lbCBBUEkgZnJvbSB0aGUgYmVn
+aW5uaW5nLgoKVGhlIHBhdGNoIDUvOSBpcyBhbG1vc3QgZW50aXJlbHkgcmVuYW1pbmcganVzdCBz
+b21lIGludGVybmFsIGlkZW50aWZpZXJzCgotCQkJICAgICAgWlNURF9DU3RyZWFtV29ya3NwYWNl
+Qm91bmQocGFyYW1zLmNQYXJhbXMpLAotCQkJICAgICAgWlNURF9EU3RyZWFtV29ya3NwYWNlQm91
+bmQoWlNURF9CVFJGU19NQVhfSU5QVVQpKTsKKwkJCSAgICAgIFpTVERfZXN0aW1hdGVDU3RyZWFt
+U2l6ZV91c2luZ0NQYXJhbXMocGFyYW1zLmNQYXJhbXMpLAorCQkJICAgICAgWlNURF9lc3RpbWF0
+ZURTdHJlYW1TaXplKFpTVERfQlRSRlNfTUFYX0lOUFVUKSk7CgpwbHVzIHVwZGF0aW5nIHRoZSBu
+YW1lcyBpbiB0aGUgZXJyb3Igc3RyaW5ncy4gVGhlIGNvbXByZXNzaW9uIEFQSSB0aGF0CmZpbGVz
+eXN0ZW1zIG5lZWQgaXMgc2ltcGxlOgoKLSBzZXQgdXAgd29ya3NwYWNlIGFuZCBwYXJhbWV0ZXJz
+Ci0gY29tcHJlc3MgYnVmZmVyCi0gZGVjb21wcmVzcyBidWZmZXIKCldlIHJlYWxseSBzaG91bGQg
+bm90IGNhcmUgaWYgdXBzdHJlYW0gaGFzIDMgZnVuY3Rpb25zIGZvciBpbml0aWFsaXppbmcKc3Ry
+ZWFtIChaU1REX2luaXRDU3RyZWFtL1pTVERfaW5pdFN0YXRpY0NTdHJlYW0vWlNURF9pbml0Q1N0
+cmVhbV9hZHZhbmNlZCksCm9yIGlmIHRoZSBuYW1lIGNoYW5nZXMgYWdhaW4gaW4gdGhlIGZ1dHVy
+ZS4KClRoaXMgc2hvdWxkIG5vdCByZXF1aXJlIGV4cGxpY2l0IGV4cGxhbmF0aW9uLCB0aGlzIHNo
+b3VsZCBiZSBhIG5hdHVyYWwKcmVxdWlyZW1lbnQgZXNwZWNpYWxseSBmb3Igc2VwYXJhdGUgcHJv
+amVjdHMgdGhhdCBkb24ndCBzaGFyZSB0aGUgc2FtZQpjb2Rpbmcgc3R5bGUgYnV0IGhhdmUgdG8g
+YmUgaW50ZWdyYXRlZCBpbiBzb21lIHdheS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1m
+MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
+Lm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
