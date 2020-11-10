@@ -2,78 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD8AD2ACECE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 06:00:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7733F2ACF60
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 07:05:15 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcLlX-0004Sf-IL; Tue, 10 Nov 2020 05:00:23 +0000
+	id 1kcMm5-00075G-4u; Tue, 10 Nov 2020 06:05:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ira.weiny@intel.com>)
- id 1kcLlU-0004SN-20; Tue, 10 Nov 2020 05:00:20 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kcMm4-000759-1r
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 06:05:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kaJbImb6krfYaXOmwOIam7V0fj92Ik/1kVIW/vo7UI0=; b=T4aXswJt+je9WU2sO4GWbLfpUg
- lCtt/eM2OHY+wuowhgHtU3+jEQsL+ertMRD02TrfHi9gSwMhD54qjWgAzJ1F7hiOs6AMTXaDS78Nz
- z3BYt8+xrn87lN7cHzbd0xVMNhnCS4dSgO7heHIITq8lIvKJ2b6Tx47edr71HVdnFKpA=;
+ bh=eIagXMTPe/jAwt8l1Gnu91FC1PPUjoOI3WSRUQ397lM=; b=Q+XNyjyQEo30MIUWxD5ZUshTKz
+ FcVMltkUZ/KS3ZSGjKb0OizmMwngU6LtQA7GtB+TiHZ5TGoNKCgBQ6Ig/c71Z8olp3omkf2YyAVOt
+ hRfwohDYsJQwggputTa4P3xP3tSgdWoQ+n1QmPezAnhRW95KGzWmTfx9RdZneeqMmg/w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kaJbImb6krfYaXOmwOIam7V0fj92Ik/1kVIW/vo7UI0=; b=MDfd07Fg7RYRZ+Hv7eRt9lBUtL
- z7y5EJm4m2KLGVBTmQWIv6W6sajXHXSLMFIcO0YPTHXFVDTjgFOZDYIUIHoKswAjxob899OobSqYu
- HbR2UVncvdO21JaYWJvyuPA3GTz9CWyyeMo8Pemycja4j6hBJ0HmK1PXLE+ygT8zcmlM=;
-Received: from mga03.intel.com ([134.134.136.65])
+ bh=eIagXMTPe/jAwt8l1Gnu91FC1PPUjoOI3WSRUQ397lM=; b=F2IFDr70sCbPTnmCGR/xQAqr3p
+ J9o5ehYhZGdNLb8MxCnUktqpKQOEfDGHPl6dG0OHnYjHnRg/wsx7AaIWhYvC2W/acIyz18f2eu6jc
+ t2AZORXpT++wcwvalnA62ZQRzmpzaDol7Dajtc4uPzjamZJ3cTamdvw6SObXl7Le/4YA=;
+Received: from szxga07-in.huawei.com ([45.249.212.35])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kcLlJ-006M1E-6U; Tue, 10 Nov 2020 05:00:19 +0000
-IronPort-SDR: ynBdnMVf3EPni5PC8CH6Xi/RcgxSWKn3vKY3c3fZBmDuA8Qdykj9xxlcax2faMSHr4wTcAJQ/a
- lsdOepc/OaaQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9800"; a="170029637"
-X-IronPort-AV: E=Sophos;i="5.77,465,1596524400"; d="scan'208";a="170029637"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Nov 2020 20:59:55 -0800
-IronPort-SDR: hhtGbVHiYEduO62f/jUORNlQE29+PA61IlKuvPXTtZvvOlHxHT75TW+y4i0J9B1O2lrgZ7K2Sp
- gskiAxl5TCew==
-X-IronPort-AV: E=Sophos;i="5.77,465,1596524400"; d="scan'208";a="531063331"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Nov 2020 20:59:54 -0800
-Date: Mon, 9 Nov 2020 20:59:54 -0800
-From: Ira Weiny <ira.weiny@intel.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-Message-ID: <20201110045954.GL3976735@iweiny-DESK2.sc.intel.com>
-References: <20201009195033.3208459-1-ira.weiny@intel.com>
- <20201009195033.3208459-6-ira.weiny@intel.com>
- <87h7pyhv3f.fsf@nanos.tec.linutronix.de>
+ id 1kcMlp-006O6O-SB
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 06:04:59 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4CVckq1blLz74mH;
+ Tue, 10 Nov 2020 14:04:19 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 10 Nov
+ 2020 14:04:22 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20201109170012.2129411-1-jaegeuk@kernel.org>
+ <f195a4f0-34af-1594-f443-be8ba3058707@huawei.com>
+ <20201110041958.GA1598246@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <f8de28c2-da2f-f988-7fc9-6f38f19f3f41@huawei.com>
+Date: Tue, 10 Nov 2020 14:04:22 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87h7pyhv3f.fsf@nanos.tec.linutronix.de>
-User-Agent: Mutt/1.11.1 (2018-12-01)
+In-Reply-To: <20201110041958.GA1598246@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+ for more information. [URIs: mediatek.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kcLlJ-006M1E-6U
-Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 05/58] kmap: Introduce
- k[un]map_thread
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kcMlp-006O6O-SB
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid race condition for shinker count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,138 +83,85 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-kselftest@vger.kernel.org, samba-technical@lists.samba.org,
- ceph-devel@vger.kernel.org, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, io-uring@vger.kernel.org,
- cluster-devel@redhat.com, Ingo Molnar <mingo@redhat.com>,
- intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org,
- linux-ext4@vger.kernel.org, Fenghua Yu <fenghua.yu@intel.com>,
- linux-afs@lists.infradead.org, linux-um@lists.infradead.org,
- intel-gfx@lists.freedesktop.org, ecryptfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, reiserfs-devel@vger.kernel.org,
- linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
- Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-cachefs@redhat.com,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- netdev@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
- kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- bpf@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ Light Hsieh <Light.Hsieh@mediatek.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Nov 10, 2020 at 02:13:56AM +0100, Thomas Gleixner wrote:
-> Ira,
+On 2020/11/10 12:19, Jaegeuk Kim wrote:
+> On 11/10, Chao Yu wrote:
+>> On 2020/11/10 1:00, Jaegeuk Kim wrote:
+>>> Light reported sometimes shinker gets nat_cnt < dirty_nat_cnt resulting in
+>>
+>> I didn't get the problem clearly, did you mean __count_nat_entries() will
+>> give the wrong shrink count due to race condition? should there be a lock
+>> while reading these two variables?
+>>
+>>> wrong do_shinker work. Basically the two counts should not happen like that.
+>>>
+>>> So, I suspect this race condtion where:
+>>> - f2fs_try_to_free_nats            __flush_nat_entry_set
+>>>    nat_cnt=2, dirty_nat_cnt=2
+>>>                                      __clear_nat_cache_dirty
+>>>                                       spin_lock(nat_list_lock)
+>>>                                       list_move()
+>>>                                       spin_unlock(nat_list_lock)
+>>>    spin_lock(nat_list_lock)
+>>>    list_del()
+>>>    spin_unlock(nat_list_lock)
+>>>    nat_cnt=1, dirty_nat_cnt=2
+>>>                                      nat_cnt=1, dirty_nat_cnt=1
+>>
+>> nm_i->nat_cnt and nm_i->dirty_nat_cnt were protected by
+>> nm_i->nat_tree_lock, I didn't see why expanding nat_list_lock range
+>> will help... since there are still places nat_list_lock() didn't
+>> cover these two reference counts.
 > 
-> On Fri, Oct 09 2020 at 12:49, ira weiny wrote:
-> > From: Ira Weiny <ira.weiny@intel.com>
-> >
-> > To correctly support the semantics of kmap() with Kernel protection keys
-> > (PKS), kmap() may be required to set the protections on multiple
-> > processors (globally).  Enabling PKS globally can be very expensive
-> > depending on the requested operation.  Furthermore, enabling a domain
-> > globally reduces the protection afforded by PKS.
-> >
-> > Most kmap() (Aprox 209 of 229) callers use the map within a single thread and
-> > have no need for the protection domain to be enabled globally.  However, the
-> > remaining callers do not follow this pattern and, as best I can tell, expect
-> > the mapping to be 'global' and available to any thread who may access the
-> > mapping.[1]
-> >
-> > We don't anticipate global mappings to pmem, however in general there is a
-> > danger in changing the semantics of kmap().  Effectively, this would cause an
-> > unresolved page fault with little to no information about why the failure
-> > occurred.
-> >
-> > To resolve this a number of options were considered.
-> >
-> > 1) Attempt to change all the thread local kmap() calls to kmap_atomic()[2]
-> > 2) Introduce a flags parameter to kmap() to indicate if the mapping should be
-> >    global or not
-> > 3) Change ~20 call sites to 'kmap_global()' to indicate that they require a
-> >    global enablement of the pages.
-> > 4) Change ~209 call sites to 'kmap_thread()' to indicate that the mapping is to
-> >    be used within that thread of execution only
-> >
-> > Option 1 is simply not feasible.  Option 2 would require all of the call sites
-> > of kmap() to change.  Option 3 seems like a good minimal change but there is a
-> > danger that new code may miss the semantic change of kmap() and not get the
-> > behavior the developer intended.  Therefore, #4 was chosen.
-> 
-> There is Option #5:
+> Yeah, I missed nat_tree_lock, and indeed it should cover this. So, the problem
+> is Light reported subtle case of nat_cnt < dirty_nat_cnt in shrink_count.
+> We may need to use nat_tree_lock in shrink_count?
 
-There is now yes.  :-D
+change like this?
 
-> 
-> Convert the thread local kmap() invocations to the proposed kmap_local()
-> interface which is coming along [1].
+__count_nat_entries()
 
-I've been trying to follow that thread.
+	down_read(&nm_i->nat_tree_lock);
+	count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
+	up_read(&nm_i->nat_tree_lock);
+
+Thanks,
 
 > 
-> That solves a couple of issues:
+>>
+>> Thanks,
+>>
+>>>
+>>> Reported-by: Light Hsieh <Light.Hsieh@mediatek.com>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>>    fs/f2fs/node.c | 3 +--
+>>>    1 file changed, 1 insertion(+), 2 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+>>> index 42394de6c7eb..e8ec65e40f06 100644
+>>> --- a/fs/f2fs/node.c
+>>> +++ b/fs/f2fs/node.c
+>>> @@ -269,11 +269,10 @@ static void __clear_nat_cache_dirty(struct f2fs_nm_info *nm_i,
+>>>    {
+>>>    	spin_lock(&nm_i->nat_list_lock);
+>>>    	list_move_tail(&ne->list, &nm_i->nat_entries);
+>>> -	spin_unlock(&nm_i->nat_list_lock);
+>>> -
+>>>    	set_nat_flag(ne, IS_DIRTY, false);
+>>>    	set->entry_cnt--;
+>>>    	nm_i->dirty_nat_cnt--;
+>>> +	spin_unlock(&nm_i->nat_list_lock);
+>>>    }
+>>>    static unsigned int __gang_lookup_nat_set(struct f2fs_nm_info *nm_i,
+>>>
+> .
 > 
->  1) It relieves the current kmap_atomic() usage sites from the implict
->     pagefault/preempt disable semantics which apply even when
->     CONFIG_HIGHMEM is disabled. kmap_local() still can be invoked from
->     atomic context.
-> 
->  2) Due to #1 it allows to replace the conditional usage of kmap() and
->     kmap_atomic() for purely thread local mappings.
-> 
->  3) It puts the burden on the HIGHMEM inflicted systems
-> 
->  4) It is actually more efficient for most of the pure thread local use
->     cases on HIGHMEM inflicted systems because it avoids the overhead of
->     the global lock and the potential kmap slot exhaustion. A potential
->     preemption will be more expensive, but that's not really the case we
->     want to optimize for.
-> 
->  5) It solves the RT issue vs. kmap_atomic()
-> 
-> So instead of creating yet another variety of kmap() which is just
-> scratching the particular PKRS itch, can we please consolidate all of
-> that on the wider reaching kmap_local() approach?
-
-Yes I agree.  We absolutely don't want more kmap*() calls and I was hoping to
-dovetail into your kmap_local() work.[2]
-
-I've pivoted away from this work a bit to clean up all the
-kmap()/memcpy*()/kunmaps() as discussed elsewhere in the thread first.[3]  I
-was hoping your work would land and then I could s/kmap_thread()/kmap_local()/
-on all of these patches.
-
-Also, we can convert the new memcpy_*_page() calls to kmap_local() as well.
-[For now my patch just uses kmap_atomic().]
-
-I've not looked at all of the patches in your latest version.  Have you
-included converting any of the kmap() call sites?  I thought you were more
-focused on converting the kmap_atomic() to kmap_local()?
-
-Ira
-
-> 
-> Thanks,
-> 
->         tglx
->      
-> [1] https://lore.kernel.org/lkml/20201103092712.714480842@linutronix.de/
-
-[2] https://lore.kernel.org/lkml/20201012195354.GC2046448@iweiny-DESK2.sc.intel.com/
-[3] https://lore.kernel.org/lkml/20201009213434.GA839@sol.localdomain/
-    https://lore.kernel.org/lkml/20201013200149.GI3576660@ZenIV.linux.org.uk/
-
 
 
 _______________________________________________
