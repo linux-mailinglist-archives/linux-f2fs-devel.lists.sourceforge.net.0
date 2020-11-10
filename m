@@ -2,82 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 773E32AD1AA
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 09:48:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5490B2AD5F5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Nov 2020 13:17:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kcPKZ-0004jS-NZ; Tue, 10 Nov 2020 08:48:47 +0000
+	id 1kcSa8-0005GK-6u; Tue, 10 Nov 2020 12:17:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tglx@linutronix.de>)
- id 1kcPKY-0004jD-OK; Tue, 10 Nov 2020 08:48:46 +0000
+ (envelope-from <david.laight@aculab.com>) id 1kcSa6-0005Fu-UV
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 12:17:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+lFM+Dy1hrzRRrrrA3qnbGkxEtyVqIh0g4peYrriLeU=; b=TM3yuRcKsBTmG9Lyd5KVygz9P
- jRG1KrwSXy0jLHnl+4Xir1omBp6X4MXivzb3E/6Ycj+B3dFtLFy5v+FDF7g382zAItZ2Mf4/JcRAP
- nOscsGuctXwQz4v1g5EMeAYeI0ZIxbn7eZ57yoXF/IXD8GjcciAZXWuB0CX75QBf6fB5s=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=82X0+70U+jiNchLXaqjQiZ+HubwLjOWaLNuJ2KZXOos=; b=J/o6uRjmCLD5F3sru7kEB7zPD5
+ 7KfnaF50K0HCMQQPTiR9IVK8ZUr3ndHJ5DfjhlAleuUJycaiLAqy0WK9VbkfGM+Ay8cadG7iDHtQ2
+ WKZhW0mcBen7JuRqCKCLSgKGcqSY4QJCm4k8CF1aUdac60QGwlFXpYqeWH3w0VrsxkjM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+lFM+Dy1hrzRRrrrA3qnbGkxEtyVqIh0g4peYrriLeU=; b=SsiBiAmDZxN2MtZTFTSM141aVU
- T51y3zRhTHi+vl6g+g5RQlxrEhiFc/2PHw4Pv3hUrmP5bJWtAuj+avgbFZ3RsxEp5DwqWfNBWiaP6
- MSNWAUP6w3A4bVFoufHG7TxCAMRoD8RcX73g/LYu8ZatWG0m8ST1tgu9lNHBzSuwTZsg=;
-Received: from galois.linutronix.de ([193.142.43.55])
+ bh=82X0+70U+jiNchLXaqjQiZ+HubwLjOWaLNuJ2KZXOos=; b=lNwIW/5aS1K1+YEPWJ8t3u3FUl
+ W0qXInYo4m6DPwQHaxivymq7zcv8RiT0fxbKnIJOyQ3Zg8cZmCJkoPJMjfQ/8kDF+669LvyBR+pHu
+ UckTbsXaRh+i59MjiA5muCIBziS5+xw93KlijSaM1jN3j4zL5ObbZn0ad3aNhmcfIs0o=;
+Received: from eu-smtp-delivery-151.mimecast.com ([207.82.80.151])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kcPKS-006UQs-Ti; Tue, 10 Nov 2020 08:48:46 +0000
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604998111;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+lFM+Dy1hrzRRrrrA3qnbGkxEtyVqIh0g4peYrriLeU=;
- b=iuo8f+7vFglLggVRQElkiZ2WEkqCMbTG8xoMGtVyBk3DBfZOlzK9bn4iYE9n5TJlXEeyiw
- mK2AsUoeE727uJ+eyVgbEeyt2qz1CsngbkfMTC30zg6BSGbxrFxVJV/nTlcmtj9NHSMsJn
- sU38ljGJ30NJ8ooIZ53QTax6dO6NfnLLpRxklxBphTMVejdacYZZqkmCK8e4gkxhfN2Hq9
- zuGNw+h8VUH3NFZO14JlYgbkNPH833xVYFQ2lmqEAC35a4/baTqfi6uG7ey36+HQyygrEi
- Jy4I41umlX4stejJrRBLu7awPrfWhbLcelHNMzqQQSqRZrKTpO34TDntXU+02A==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604998111;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+lFM+Dy1hrzRRrrrA3qnbGkxEtyVqIh0g4peYrriLeU=;
- b=y7osrUd/437dzM5/Hc5G9cQ/HuZ2jh7vgX8EDHSswmJuPLkHyLG6iEX8rrCl2sg3XohELe
- 1aQhUu8PTNjq+DAw==
-To: Ira Weiny <ira.weiny@intel.com>
-In-Reply-To: <20201110045954.GL3976735@iweiny-DESK2.sc.intel.com>
-References: <20201009195033.3208459-1-ira.weiny@intel.com>
- <20201009195033.3208459-6-ira.weiny@intel.com>
- <87h7pyhv3f.fsf@nanos.tec.linutronix.de>
- <20201110045954.GL3976735@iweiny-DESK2.sc.intel.com>
-Date: Tue, 10 Nov 2020 09:48:31 +0100
-Message-ID: <87eel1iom8.fsf@nanos.tec.linutronix.de>
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
+ id 1kcSZr-006ftV-OS
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 10 Nov 2020 12:17:02 +0000
+Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ uk-mta-216-ep7CIZcmM6mQ50C-RJpcMQ-1; Tue, 10 Nov 2020 12:16:37 +0000
+X-MC-Unique: ep7CIZcmM6mQ50C-RJpcMQ-1
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
+ Server (TLS) id 15.0.1347.2; Tue, 10 Nov 2020 12:16:37 +0000
+Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
+ AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
+ Tue, 10 Nov 2020 12:16:37 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Chao Yu' <yuchao0@huawei.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+Thread-Topic: [f2fs-dev] [PATCH] f2fs: compress: support chksum
+Thread-Index: AQHWtyqj1VtcccaQGU+ZRA66ANZtT6nBRPmg
+Date: Tue, 10 Nov 2020 12:16:37 +0000
+Message-ID: <db1d478cda6642d1b08c3435e84944d9@AcuMS.aculab.com>
+References: <20201102122333.76667-1-yuchao0@huawei.com>
+ <20201102163123.GD529594@google.com>
+ <756e482c-b638-1c09-3868-ae45d33ed2c2@huawei.com>
+ <6b5bce0e-c967-b9cf-3544-a8e65595059c@huawei.com>
+ <20201106211247.GA1474936@google.com>
+ <908682bb-486c-222f-bea7-43fc961ef1b0@huawei.com>
+ <20201109170625.GB2129970@google.com>
+ <3417aea5-ace8-74be-ec26-f491dddea676@huawei.com>
+ <20201110042353.GB1598246@google.com>
+ <513c56d7-cefd-37a8-efdf-fa1ac8c2a1d3@huawei.com>
+In-Reply-To: <513c56d7-cefd-37a8-efdf-fa1ac8c2a1d3@huawei.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Content-Language: en-US
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [207.82.80.151 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [207.82.80.151 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1kcPKS-006UQs-Ti
-Subject: Re: [f2fs-dev] [PATCH RFC PKS/PMEM 05/58] kmap: Introduce
- k[un]map_thread
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kcSZr-006ftV-OS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: support chksum
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,53 +98,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-efi@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-kselftest@vger.kernel.org, samba-technical@lists.samba.org,
- ceph-devel@vger.kernel.org, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-nvdimm@lists.01.org, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, io-uring@vger.kernel.org,
- cluster-devel@redhat.com, Ingo Molnar <mingo@redhat.com>,
- intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org,
- linux-ext4@vger.kernel.org, Fenghua Yu <fenghua.yu@intel.com>,
- linux-afs@lists.infradead.org, linux-um@lists.infradead.org,
- intel-gfx@lists.freedesktop.org, ecryptfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, reiserfs-devel@vger.kernel.org,
- linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
- Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-cachefs@redhat.com,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- netdev@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
- kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- bpf@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 09 2020 at 20:59, Ira Weiny wrote:
-> On Tue, Nov 10, 2020 at 02:13:56AM +0100, Thomas Gleixner wrote:
-> Also, we can convert the new memcpy_*_page() calls to kmap_local() as well.
-> [For now my patch just uses kmap_atomic().]
->
-> I've not looked at all of the patches in your latest version.  Have you
-> included converting any of the kmap() call sites?  I thought you were more
-> focused on converting the kmap_atomic() to kmap_local()?
+From: Chao Yu
+> Sent: 10 November 2020 06:28
+...
+> Actually, I think the both results are the same, inode chksum doesn't match inode
+> metadata, like current case that cluster chksum doesn't match cluster data, it
+> doesn't matter how it becomes mismatched.
+> 
+> And also, in those inode corrupted cases, there should be some cases that hacker
+> or fuzz tester injects random data in chksum intentionally, or bit-flipping happed
+> on chksum value in inode, inode metadata (except inode chksum) is integrated though,
+> we can not distinguish such cases from case of inode metadata (except inode chksum)
+> corruption.
 
-I did not touch any of those yet, but it's a logical consequence to
-convert all kmap() instances which are _not_ creating a global mapping
-over to it.
+If you reverse the crc algotithm on the checksum error bits and get a
+pattern with a small number of adjacent ones then that would be a burst
+error that would generate the observed crc error.
 
-Thanks,
+So if you have a 32bit crc on an 8k byte buffer there are 64k bit positions
+so (IIRC from my university days) you can fix an assumed 16 bit error burst.
+That would be a bit dangerous through.
+OTOH if you find an 8-bit error pattern you could assume (and fix)
+a single byte corruption.
 
-        tglx
+Whether that is worth doing depends on any assumed mechanisms
+for generating corruptions.
+
+I don't know of any ethernet hardware that uses the 32bit crc
+to fix very short burst errors (or even single bit errors)
+even though it could be done and burst errors are quite likely.
+(Below Ge speeds.)
+
+	David
+
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
 
 
 
