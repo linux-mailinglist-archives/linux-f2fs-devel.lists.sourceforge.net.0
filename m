@@ -2,76 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 652192AFFF3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 07:57:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 793BA2B00C8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 09:02:33 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kd6YM-00023Q-1a; Thu, 12 Nov 2020 06:57:54 +0000
+	id 1kd7Yn-0004nV-Dw; Thu, 12 Nov 2020 08:02:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kd6YK-00023J-9x
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 06:57:52 +0000
+ (envelope-from <hyeongseok@gmail.com>) id 1kd7Yl-0004nO-Mo
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 08:02:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yL6Q11T32rKbSLFINtSC0Jx47hKoGRRO4rMIhccA//I=; b=WBcoYHkjmzGGCOMXMQNNGnhg/A
- VhAPMlcBjP9zh30aCL8GSETUmK41W2FyKc80ixmi5FMKw47a9U7nKoLd+qkSX3Y2nBnDVR11dvXPe
- hORvq6l/hfooPkOb9afp4rjpFgi/aLCtsj/Z2z/a4LlmvOZiPck5DV/0ljAKiqKAg71Y=;
+ bh=9+waUlGtlkBgYWb7wXp9DIAiajCHd+frNRohqWw+nsc=; b=ZEPsYn1/S+DPpXg+dDBoCCuVPc
+ 3U5oHc2gxrA6kabXqf16GZSAu+kxUKg4zZoilnsNg1HfkKkcjXG94mkDctX19LGH/fJ4dayPu9jFn
+ pJ4aOWhXN7Ws1lCye8enkUU3rLJ9sMx664ASlo1AoSQHhOsSte1mGsfRuPuGCSvqUVb0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=yL6Q11T32rKbSLFINtSC0Jx47hKoGRRO4rMIhccA//I=; b=Ig2CbL5Zy4DZDpx85ykYnhwEiX
- RBAA2e2CN4aa4yNlUCaQAkCRM5ucXVVlDOX8/iKnCknyOYlFd8ee7tm49sdvqlsSzFf2LS80eJdL/
- aDGopC7+PWMw2MsjFeuZZkHCXGOvz0kk9erYlrtsXNXtfFP9uuTf5/nxuVyOL3zhJqJo=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kd6Y4-008mYs-NX
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 06:57:52 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CWspy39nHzLxcb;
- Thu, 12 Nov 2020 14:57:14 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 12 Nov
- 2020 14:57:22 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20201109170012.2129411-1-jaegeuk@kernel.org>
- <20201112053414.GB3826485@google.com> <20201112054051.GA4092972@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <4aae85c2-1829-06c0-8fd1-4148100dc0b9@huawei.com>
-Date: Thu, 12 Nov 2020 14:57:22 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9+waUlGtlkBgYWb7wXp9DIAiajCHd+frNRohqWw+nsc=; b=m
+ cCvbg23A3EKGfTEleSe/QBQS4BjBZoHtzXqDBIFsrWbI2gPx5K5CnxH0QBBHd+lNbXpI0qcQj79/V
+ PdIUDmxdVJPm8q8v0+bHwOYU+Jy5SnxYaKvBxLRl/DvL+w0TO32L05RpYpPxKGI80TqTy0nDA5eRK
+ lovuPc2udg6BJ6v4=;
+Received: from mail-pg1-f194.google.com ([209.85.215.194])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kd7Yc-000ENV-AL
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 08:02:23 +0000
+Received: by mail-pg1-f194.google.com with SMTP id r186so3537106pgr.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 12 Nov 2020 00:02:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=9+waUlGtlkBgYWb7wXp9DIAiajCHd+frNRohqWw+nsc=;
+ b=micFsx3gaYn9qWYO35vPKHvVOSN9JaU5O4K8vZ2zd8v/uIbHy1aH0L+HoFWPbcss41
+ Npv61Fv22oZzvOkg4mg14PZrrhCrSLunNF07UL7jhGSIrL1qgxvGIAJ3xQ/LzAcf+utn
+ HT+/pfrf7DS+uC9DzfkLg0NJYOibf0sFVlM7Z/JjfkETcsHKTA9s8WB+/1T4gBdDWExD
+ 9ve+Czsa64lU+Jix22YQefE1Bnfozlb4r1x0c1aYA+HtkU80Q93gJfIEQeWcFj4bZhI8
+ rU0Q5EnXJ961Aqi8M4pGnP1c629ANhd5olXRQrnxQneN0AIcZYXS2xVBtnV0Y9xzWqW6
+ fYzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=9+waUlGtlkBgYWb7wXp9DIAiajCHd+frNRohqWw+nsc=;
+ b=SXXTytUQOtZpi0I/l3la2ZTAt2zbJswCbHPML+UCbs8gw8rEIgELGqWD7QmHydfiTY
+ LyoyuJvNBi+Mw+53MloiqopkmF+Pr8pTvbDLOm0S4y2NXlRtoKLWVmcBqXrjhb026vjH
+ Hhc6j4COYCa1uR4/iXyDaQdwGFmqq5n5ZdXkCAN1vD6v/xtSXNONnLGz2Gush7Wyt8jg
+ BbjwDqwzdgbzgZ0TqjCqr5QBYPdWquXcftn5lMhVt9n+HKtoZM1dxclWCjQgqQKQ8+gS
+ jEIinFdFQYZnQVVqnPi9nl8hM+3hVKKZzDC/VR7Iczr7LW63Aw2BxGHkITNUJv0WQeDV
+ YeUw==
+X-Gm-Message-State: AOAM532f0GNFlMTTBp1XwLijXqfBWf/OeCSlKZDXyJ8Xjmex2EmBO4Rl
+ qaaFQMihnkd9RwAFxIzsays=
+X-Google-Smtp-Source: ABdhPJwiNKBQvpl1OTw2k5oq8Hv8NrhoMZj7izp+r2mER1uzorFMs+LuXuXpTIalBkPcKOg1Ha5juw==
+X-Received: by 2002:a05:6a00:212b:b029:18b:ad77:1a27 with SMTP id
+ n11-20020a056a00212bb029018bad771a27mr25806979pfj.40.1605168128615; 
+ Thu, 12 Nov 2020 00:02:08 -0800 (PST)
+Received: from localhost.localdomain ([27.122.242.75])
+ by smtp.gmail.com with ESMTPSA id v3sm5170553pfn.215.2020.11.12.00.02.05
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 12 Nov 2020 00:02:08 -0800 (PST)
+From: Hyeongseok Kim <hyeongseok@gmail.com>
+To: yuchao0@huawei.com,
+	jaegeuk@kernel.org
+Date: Thu, 12 Nov 2020 17:02:01 +0900
+Message-Id: <20201112080201.149359-1-hyeongseok@gmail.com>
+X-Mailer: git-send-email 2.27.0.83.g0313f36
 MIME-Version: 1.0
-In-Reply-To: <20201112054051.GA4092972@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [45.249.212.191 listed in wl.mailspike.net]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (hyeongseok[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.194 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.194 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kd6Y4-008mYs-NX
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: avoid race condition for shinker
- count
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kd7Yc-000ENV-AL
+Subject: [f2fs-dev] [PATCH] f2fs: fix double free of unicode map
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,55 +108,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Light Hsieh <Light.Hsieh@mediatek.com>
+Cc: linux-fsdevel@vger.kernel.org, Hyeongseok Kim <hyeongseok@gmail.com>,
+ hyeongseok.kim@lge.com, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/11/12 13:40, Jaegeuk Kim wrote:
-> Light reported sometimes shinker gets nat_cnt < dirty_nat_cnt resulting in
-> wrong do_shinker work. Let's avoid to get stale data by using nat_tree_lock.
-> 
-> Reported-by: Light Hsieh <Light.Hsieh@mediatek.com>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
-> v3:
->   - fix to use NM_I(sbi)
-> 
->   fs/f2fs/shrinker.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
-> index d66de5999a26..555712ba06d8 100644
-> --- a/fs/f2fs/shrinker.c
-> +++ b/fs/f2fs/shrinker.c
-> @@ -18,7 +18,11 @@ static unsigned int shrinker_run_no;
->   
->   static unsigned long __count_nat_entries(struct f2fs_sb_info *sbi)
->   {
-> -	long count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
-> +	long count;
-> +
-> +	down_read(&NM_I(sbi)->nat_tree_lock);
-> +	count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
-> +	up_read(&NM_I(sbi)->nat_tree_lock);
->   
->   	return count > 0 ? count : 0;
+In case of retrying fill_super with skip_recovery,
+s_encoding for casefold would not be loaded again even though it's
+already been freed because it's not NULL.
+Set NULL after free to prevent double freeing when unmount.
 
-Minor thing,
+Signed-off-by: Hyeongseok Kim <hyeongseok@gmail.com>
+---
+ fs/f2fs/super.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Just return count is enough? since count should never be smaller than 0.
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 00eff2f51807..fef22e476c52 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3918,6 +3918,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 
+ #ifdef CONFIG_UNICODE
+ 	utf8_unload(sb->s_encoding);
++	sb->s_encoding = NULL;
+ #endif
+ free_options:
+ #ifdef CONFIG_QUOTA
+-- 
+2.27.0.83.g0313f36
 
-Anyway,
-
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
-
-Thanks,
-
-Thanks,
-
->   }
-> 
 
 
 _______________________________________________
