@@ -2,74 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 342C22B0236
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 10:46:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30B4E2B0F10
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 21:29:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kd9B8-0001FH-5U; Thu, 12 Nov 2020 09:46:06 +0000
+	id 1kdJDv-00041m-Ae; Thu, 12 Nov 2020 20:29:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kd9B6-0001FA-OQ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 09:46:04 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kdJDu-00041g-9U
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 20:29:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9UJftrv1fAzinfWoHyAaMdOWZ5AA+hw0UIUHJzBoyp8=; b=iWPuXBp8OichL0pqGxcIoyftPN
- rDfUBGhO1vPmwPPDBPc88ha+CXQntfJN3g4iz3xtxncgJBqjfHLGnSF8Xn+r34AUU8sQz7QiizCZv
- xO/Q8AmqTGa1HUrFX0ijHLM9EkFWHHHx8E7cxOWFDbEV+pTvUKnhQjq5yV7JHjDX7Uyk=;
+ bh=MRFSHBtmkNQLGUqSte1BXV/cqbGb7llm9IuVSAqZniU=; b=h9qTu4UWtCV7IYpQHExXGdczk0
+ 0CSpAqsHFwQVXtEMBdbLPIjVrleJLZKtlSbtE6dFL17IF6I9fG+Eea9KKmoH5oPPbi0vPgHAVELLB
+ /vKxj4aqTlGSy3vj+keQuUpD69uk78y42B8TYTnCHOM5mRPWUBXewOYPUi8IO6zDxNFs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9UJftrv1fAzinfWoHyAaMdOWZ5AA+hw0UIUHJzBoyp8=; b=A5MlxkPTybPW/U3gcxBC39Y/Pd
- QLTyq5oKYZX31UnV/dUwJ85s4g3JavENnio2rQ3g5BnuQvT+9Jhmwo3BCzycyyuwIwqAbuFqrX7e6
- 5j0wYohbkTODHeWl4gOMRZeQU+J5yJgLy+xjtjvS4sue56XPLIZn9mNBAzlOqql2A9rg=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ bh=MRFSHBtmkNQLGUqSte1BXV/cqbGb7llm9IuVSAqZniU=; b=EWSuPBvvUhlkoIc66koNr4VFvg
+ AxbT8i58eRlWo6brroQrEw+3+8wJQr6/iuyosHDRGZVaCobhzJ8ZZYj7/zqsHfIGzB8FudVU3lo3b
+ CyGmAvn8cdXWh68XpcixOOyBi3pbSI/gIK9XaETISLdHlbDie6es3TmNmvgmokmGFU+0=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kd9Az-000Lt1-Bf
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 09:46:04 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CWx5z41zSzkg2y;
- Thu, 12 Nov 2020 17:25:27 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 12 Nov
- 2020 17:25:34 +0800
-To: Hyeongseok Kim <hyeongseok@gmail.com>, <jaegeuk@kernel.org>
-References: <20201112091454.15311-1-hyeongseok@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <6a442a9c-d8ab-3e5f-fda8-fabbbca2ed32@huawei.com>
-Date: Thu, 12 Nov 2020 17:25:34 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1kdJDk-0018a0-HH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 20:29:38 +0000
+Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
+ [172.10.235.113])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id EEB0E20872;
+ Thu, 12 Nov 2020 20:29:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1605212958;
+ bh=bWaPaaa4cnOfI6CXSQAbGQrxlcQ6NMZjfJQHOkXLyqY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=zxj+dbdVku4GY7DGrqZAdldWBRvuNzq5tefJyTKzQip2wLf5yhadc4Qaiz9yQ9a1y
+ bFNhknLq0kdZj3IIaUTZL7FaUOa3rPPt6Tr32IFlLZPsMYwWxvDrCL8Iuyg0VgwBNl
+ 8uaBPgYbP4elIjL/01UquoCCoBiAL1WGDloW6tTA=
+Date: Thu, 12 Nov 2020 12:29:16 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <X62bHAMA38Iun/cp@sol.localdomain>
+References: <20201111015224.303073-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20201112091454.15311-1-hyeongseok@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20201111015224.303073-1-ebiggers@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kd9Az-000Lt1-Bf
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix double free of unicode map
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kdJDk-0018a0-HH
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: fix inline encryption not used on
+ new files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,24 +83,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, hyeongseok.kim@lge.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Satya Tangirala <satyat@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/11/12 17:14, Hyeongseok Kim wrote:
-> In case of retrying fill_super with skip_recovery,
-> s_encoding for casefold would not be loaded again even though it's
-> already been freed because it's not NULL.
-> Set NULL after free to prevent double freeing when unmount.
+On Tue, Nov 10, 2020 at 05:52:24PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Fixes: eca4873ee1b6 ("f2fs: Use generic casefolding support")
-> Signed-off-by: Hyeongseok Kim <hyeongseok@gmail.com>
+> The new helper function fscrypt_prepare_new_inode() runs before
+> S_ENCRYPTED has been set on the new inode.  This accidentally made
+> fscrypt_select_encryption_impl() never enable inline encryption on newly
+> created files, due to its use of fscrypt_needs_contents_encryption()
+> which only returns true when S_ENCRYPTED is set.
+> 
+> Fix this by using S_ISREG() directly instead of
+> fscrypt_needs_contents_encryption(), analogous to what
+> select_encryption_mode() does.
+> 
+> I didn't notice this earlier because by design, the user-visible
+> behavior is the same (other than performance, potentially) regardless of
+> whether inline encryption is used or not.
+> 
+> Fixes: a992b20cd4ee ("fscrypt: add fscrypt_prepare_new_inode() and fscrypt_set_context()")
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/crypto/inline_crypt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
+> index 89bffa82ed74a..c57bebfa48fea 100644
+> --- a/fs/crypto/inline_crypt.c
+> +++ b/fs/crypto/inline_crypt.c
+> @@ -74,7 +74,7 @@ int fscrypt_select_encryption_impl(struct fscrypt_info *ci)
+>  	int i;
+>  
+>  	/* The file must need contents encryption, not filenames encryption */
+> -	if (!fscrypt_needs_contents_encryption(inode))
+> +	if (!S_ISREG(inode->i_mode))
+>  		return 0;
+>  
+>  	/* The crypto mode must have a blk-crypto counterpart */
+> 
+> base-commit: 92cfcd030e4b1de11a6b1edb0840e55c26332d31
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+Applied to fscrypt.git#for-stable for 5.10.
 
-Thanks,
+- Eric
 
 
 _______________________________________________
