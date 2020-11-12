@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE7812AFE27
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 06:34:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 739432AFEDF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Nov 2020 06:41:15 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kd5Fi-0005oY-I3; Thu, 12 Nov 2020 05:34:34 +0000
+	id 1kd5M8-00065P-5J; Thu, 12 Nov 2020 05:41:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kd5Fd-0005oA-LO
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 05:34:29 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kd5M7-00065I-7y
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 05:41:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZBSX/EIeNSI0wkno4qCaUlGyYH2qNvUKH3YAkYEaRGg=; b=UDyPMBr0j0/E5jLnajWYRV5IY4
- h/1oeaXssY5e9/NoH3GN7NsDyr/Kvi+tic6XomMcqZeCIe3MMMU1pFNBwahI5jfnPD0wjEkIodip9
- IABVXs+jKVaIvdc1C/Buk0RLmOhrMtPJE8w8XMtCSZjqVAG2dLEJqZQZmoCQ96tmHFfM=;
+ bh=U8G0ha90t1H5cLyuGdlEV3MH/sAgCPVpXdU4qvQUHM4=; b=JlTc4vNTqnPMm3mIKh5gH9zyTX
+ N8EWtB0+PoFuoyKtPRchfah+vmlxrNAeQ+n4lX5GxNvssufl2vhDSK62mxWtZmGlhv31dK7dkH+Tz
+ 0ultiEVCDHFPHUuqp7XbEUk8DVfBCx5LljfOmF35leNqtC+w61b2sS+BYTzyvqtAJbXQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZBSX/EIeNSI0wkno4qCaUlGyYH2qNvUKH3YAkYEaRGg=; b=YmEscEqE0Y/riOW+psFTpz8XP4
- StPsUUT85trYLsR8MfUK/TQlR+5KxJvJbaYF8bJS35ZZ/oXJTl9nCe8HNSDm85hGBjlOqaxli3hME
- bGn6+u2AAx6Gaijl66SZjIK5FkE0bc4la8hLYExUj0jGySoOqhAyFiukB29nAKyPEbz8=;
+ bh=U8G0ha90t1H5cLyuGdlEV3MH/sAgCPVpXdU4qvQUHM4=; b=HxSmbWYd+S/Hjl1XURurJLhi4g
+ y0B6/0Hi4OgzdXJdL/wqM4ckELjXIxZ1d/50F/nZ2DzaasqpEw+tIk95H638srSWhchlyMs37FfTa
+ QoFr47FafQE7A8NGnH75knTw4Fnk92XAiH0N9/jPF0njXmvKubEG9XcrcgzXUNPKXXoA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kd5FV-0007Yo-DW
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 05:34:27 +0000
+ id 1kd5Lv-0007oi-An
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 Nov 2020 05:41:11 +0000
 Received: from google.com (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9A8EE2076E;
- Thu, 12 Nov 2020 05:34:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7D8D92076E;
+ Thu, 12 Nov 2020 05:40:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1605159255;
- bh=RR8tEZfeMTPWIeuF8jnjdhsKpk0uEkjI9YIlVtLy2Z8=;
+ s=default; t=1605159653;
+ bh=9ibzdXZrtU/gfZtcBKAW2NIKugLvAG+ui+6e39ewi8E=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HJHcsZG4oqKpJ00Cxo0SuPCErWUj06VNCY3Gcpn7Wy0coE6ebLG7pseJYOjMh0nMi
- TrZsYyVXrEHh0cRpK+LsOFtf3UjqZFrEwhFIJyxd0Mo4f5jnZvBtF2sqx3fs/hqVQ3
- 2ld478cO5eA1b+vc89TLNJa3VmUu5zI1ttlPX6fI=
-Date: Wed, 11 Nov 2020 21:34:14 -0800
+ b=PiKTEyLd7zkM4dAJL0JwkU4r8FD/1zGISnh1O2j6Fgg7nxWHgiYKmk3Ofx5Iv4H8m
+ CsVnvtp7UU6/v96eoYFTXpasUuFfJTiwmfNHWYS1DNFFZxwuiaZoheJVlrB8npDOnm
+ p8iTb8HE0bzhqzXGbmCRpxFi8RC2S3V/hN+6B/0I=
+Date: Wed, 11 Nov 2020 21:40:51 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Message-ID: <20201112053414.GB3826485@google.com>
+Message-ID: <20201112054051.GA4092972@google.com>
 References: <20201109170012.2129411-1-jaegeuk@kernel.org>
+ <20201112053414.GB3826485@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201109170012.2129411-1-jaegeuk@kernel.org>
+In-Reply-To: <20201112053414.GB3826485@google.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -74,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kd5FV-0007Yo-DW
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid race condition for shinker
+X-Headers-End: 1kd5Lv-0007oi-An
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: avoid race condition for shinker
  count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -99,11 +100,14 @@ wrong do_shinker work. Let's avoid to get stale data by using nat_tree_lock.
 Reported-by: Light Hsieh <Light.Hsieh@mediatek.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
+v3:
+ - fix to use NM_I(sbi)
+
  fs/f2fs/shrinker.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
-index d66de5999a26..d42245ab07f4 100644
+index d66de5999a26..555712ba06d8 100644
 --- a/fs/f2fs/shrinker.c
 +++ b/fs/f2fs/shrinker.c
 @@ -18,7 +18,11 @@ static unsigned int shrinker_run_no;
@@ -113,9 +117,9 @@ index d66de5999a26..d42245ab07f4 100644
 -	long count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
 +	long count;
 +
-+	down_read(&nm_i->nat_tree_lock);
++	down_read(&NM_I(sbi)->nat_tree_lock);
 +	count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
-+	up_read(&nm_i->nat_tree_lock);
++	up_read(&NM_I(sbi)->nat_tree_lock);
  
  	return count > 0 ? count : 0;
  }
