@@ -2,83 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 386E22B1866
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Nov 2020 10:38:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C17FF2B2769
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Nov 2020 22:46:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kdVXA-0004u1-SS; Fri, 13 Nov 2020 09:38:20 +0000
+	id 1kdgtr-0000I8-Gx; Fri, 13 Nov 2020 21:46:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <lkp@intel.com>)
- id 1kdVWl-0004ro-6M; Fri, 13 Nov 2020 09:37:55 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kdgVG-0004y4-M6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Nov 2020 21:21:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IDsZZloztLQtW6PKaiGxaWDsq1F4PCNPz8ICVF4b5Nw=; b=NdjvQhl6WT3QxBSXp3SA4+sPu0
- korna5sitIBqOh5SQxrH+ARa2K4GX86rU++14aY0fAWwrnEEBKdBsVk1Mm2b0n8yPGmNFFzzgd55g
- XjaDF02gurji8JXtOPbJ8v8krp+vrLYoJOEm0Ws+EYH4ybsk7XzfCLMcl5tD7/1Hcft0=;
+ bh=3UmNZnPkUJtCfAGR3C4bKywnnuJ/wAmhVCorgpzW9gY=; b=G+dVNbKFQKvDTtdjj+iOkMa2os
+ qJVlljzVpzeMi7/qeEEMihgawQZTFq998WZTRngzEgWSCxi8Xlnoj2O7UE/pEaZ5ayElCfyrQN3tb
+ bahYQENP2yt8vaDA5o0ymYmF/2cEi2ncdPWNUTXhktRiYuDmv8baZXDO2SYV+7K6btic=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IDsZZloztLQtW6PKaiGxaWDsq1F4PCNPz8ICVF4b5Nw=; b=EEBzN8hnVorgT7I99pbcZaaZHw
- lcAvomQjyza37Y+VpGBFBeMUA+zWatFkVEVHfyrxmsGILw9ow4GufpJlRoiOaGyb8PrivNCyIWokZ
- aM4HPEVXcOB5eOAKjbyhXEpg4nz+E9lg8kXC2z0HhopxKn7GigtZ+JZF8v0zqxTqCIgU=;
-Received: from mga09.intel.com ([134.134.136.24])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3UmNZnPkUJtCfAGR3C4bKywnnuJ/wAmhVCorgpzW9gY=; b=h
+ /+pEYWYhmbR2/CE4+kg/Hy55Yjw0a5h1Xg5Eg/l1myZlGv8McxBp9LQ7DgcSJ2GVAHFwJa7i8PABg
+ 1wv13a0T13bCTtTORznt/QOUTQW6GqiyibY6HRPqY+GvoOV4739KdMLYMqZI+G9acUWKGazGnBZ9h
+ A2RI77sW0aroMiIM=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kdVWW-00AGNl-Fl; Fri, 13 Nov 2020 09:37:53 +0000
-IronPort-SDR: 3W+qVe2Y8hFscj2Vk+pV4FGwl6AxNTd5yM25QbjU8yzxTD9Sp52XjYA68AByHX41r9xAYyi0RY
- 0q7mkoy8gsnA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9803"; a="170618557"
-X-IronPort-AV: E=Sophos;i="5.77,475,1596524400"; d="scan'208";a="170618557"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Nov 2020 01:37:16 -0800
-IronPort-SDR: pkCiIuJ3vAohRMIQ5wcxeQ8L2HvSI6/VSvhBxT8W7NUE2E1iw1mw3v91fPFaChgFHZdAo+cf8v
- jLgYvl2c9k7Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.77,475,1596524400"; d="scan'208";a="328822947"
-Received: from lkp-server02.sh.intel.com (HELO 697932c29306) ([10.239.97.151])
- by orsmga006.jf.intel.com with ESMTP; 13 Nov 2020 01:37:14 -0800
-Received: from kbuild by 697932c29306 with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1kdVW5-0000CJ-CH; Fri, 13 Nov 2020 09:37:13 +0000
-Date: Fri, 13 Nov 2020 17:36:13 +0800
-From: kernel test robot <lkp@intel.com>
-To: Nick Terrell <nickrterrell@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>
-Message-ID: <20201113093613.GA67196@d51e9608dff7>
-References: <20201103060535.8460-4-nickrterrell@gmail.com>
+ id 1kdgVA-00At49-HY
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Nov 2020 21:21:06 +0000
+Received: from sol.attlocal.net
+ (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9498F2224D;
+ Fri, 13 Nov 2020 21:20:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1605302447;
+ bh=lHG67jCwlXDOXYcH0JFV147ai3EJuiVcohNYuZtoKao=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Zofi9SqUtf/16Mc2gwiDprGXOQdGfJyGLABQRkby28VuHxeThjyzpn07RsxKY/Ucq
+ IL+KarKlG9I6CkOuWEBcl3TrgYhNO5U25I8NK7vhRUMuxup/C/cbjH0mli2KY6ubFe
+ x1wDWcM5+pChrPuMOGxVBQVn44nhp2oHnlmJqEZ8=
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Fri, 13 Nov 2020 13:19:14 -0800
+Message-Id: <20201113211918.71883-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201103060535.8460-4-nickrterrell@gmail.com>
-X-Patchwork-Hint: ignore
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: fb.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [134.134.136.24 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kdVWW-00AGNl-Fl
-Subject: [f2fs-dev] [PATCH] lib: zstd: fix semicolon.cocci warnings
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kdgVA-00At49-HY
+Subject: [f2fs-dev] [PATCH 0/4] fs-verity cleanups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,47 +80,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: squashfs-devel@lists.sourceforge.net,
- Chris Mason <chris.mason@fusionio.com>, kbuild-all@lists.01.org,
- Nick Terrell <nickrterrell@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
- linux-crypto@vger.kernel.org, Kernel Team <Kernel-team@fb.com>,
- linux-btrfs@vger.kernel.org
+Cc: Jes Sorensen <Jes.Sorensen@gmail.com>,
+ Luca Boccassi <luca.boccassi@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Paul Lawrence <paullawrence@google.com>, linux-ext4@vger.kernel.org,
+ Martijn Coenen <maco@android.com>, Victor Hsieh <victorhsieh@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: kernel test robot <lkp@intel.com>
+This patchset renames some names that have been causing confusion:
 
-lib/zstd/compress/zstd_compress.c:3248:24-25: Unneeded semicolon
+- fsverity_signed_digest is renamed to fsverity_formatted_digest
 
+- "fs-verity file measurement" is renamed to "fs-verity file digest"
 
- Remove unneeded semicolon.
+In addition, this patchset moves fsverity_descriptor and
+fsverity_formatted_digest to the UAPI header because userspace programs
+may need them in order to sign files.
 
-Generated by: scripts/coccinelle/misc/semicolon.cocci
+Eric Biggers (4):
+  fs-verity: remove filenames from file comments
+  fs-verity: rename fsverity_signed_digest to fsverity_formatted_digest
+  fs-verity: rename "file measurement" to "file digest"
+  fs-verity: move structs needed for file signing to UAPI header
 
-CC: Nick Terrell <terrelln@fb.com>
-Reported-by: kernel test robot <lkp@intel.com>
-Signed-off-by: kernel test robot <lkp@intel.com>
----
+ Documentation/filesystems/fsverity.rst | 68 ++++++++++++--------------
+ fs/verity/enable.c                     |  8 +--
+ fs/verity/fsverity_private.h           | 36 ++------------
+ fs/verity/hash_algs.c                  |  2 +-
+ fs/verity/init.c                       |  2 +-
+ fs/verity/measure.c                    | 12 ++---
+ fs/verity/open.c                       | 24 ++++-----
+ fs/verity/signature.c                  | 14 +++---
+ fs/verity/verify.c                     |  2 +-
+ include/uapi/linux/fsverity.h          | 49 +++++++++++++++++++
+ 10 files changed, 116 insertions(+), 101 deletions(-)
 
-url:    https://github.com/0day-ci/linux/commits/Nick-Terrell/lib-zstd-Add-zstd-compatibility-wrapper/20201103-150617
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/herbert/cryptodev-2.6.git master
+-- 
+2.29.2
 
- zstd_compress.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
---- a/lib/zstd/compress/zstd_compress.c
-+++ b/lib/zstd/compress/zstd_compress.c
-@@ -3245,7 +3245,7 @@ size_t ZSTD_compress(void* dst, size_t d
-     ZSTD_CCtx* cctx = ZSTD_createCCtx();
-     RETURN_ERROR_IF(!cctx, memory_allocation, "ZSTD_createCCtx failed");
-     result = ZSTD_compressCCtx(cctx, dst, dstCapacity, src, srcSize, compressionLevel);
--    ZSTD_freeCCtx(cctx);;
-+    ZSTD_freeCCtx(cctx);
-     return result;
- }
- 
 
 
 _______________________________________________
