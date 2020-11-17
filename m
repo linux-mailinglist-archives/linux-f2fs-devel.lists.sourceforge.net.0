@@ -2,110 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 413912B6846
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Nov 2020 16:10:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:References:Mime-Version:Message-Id:
-	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=jROzgE61VPIwWf4m/Yhq0t6QIJ+cRxTOGvDcssIUD4k=; b=Z9hPBp0lVEDQ0PnblSlB2kE89
-	vKVgc95iFa1XrV7Vp8LRRP4TxC5TqrB0QQaOZn8VS8cpV+mR/fHnKvDxY+vT6v+6FgCUm6aSusb8U
-	3YNqK9/sgM8JyNxCf6xYI/FpTrE+vo6c8E/1nPH5qg4OfTqoNMSs5Mf44IzpsMLw26hTc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE1A2B6A73
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Nov 2020 17:41:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kf2cT-0000gT-HH; Tue, 17 Nov 2020 15:10:09 +0000
+	id 1kf42P-0005rw-Ei; Tue, 17 Nov 2020 16:41:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <3K9mzXwYKALAiQjoQjWeeWbU.Sec@flex--satyat.bounces.google.com>)
- id 1kf2cS-0000gH-Bi
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 15:10:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kf42M-0005rf-UM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 16:40:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:References:
- Mime-Version:Message-Id:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BwiyyJFpFKuHzxO9ElSEoW591wjEhbpMFVEeLerCK4A=; b=Oye520vc3pwvKyDL6jPNQUexu
- Cg/JYPF4/3m2eVHbP7ljdl3U8DZ2mXPZJmir457iiXm8DPFzoT2jdZn/B09QBPPNMiyLWDgpbk+k+
- 6RRXyiO1ttfuYLAnJxbh6uCoClSa0pUQvTTI3OsJEI94z5p2l5h3kmXGPPg5GW0J7EYMw=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=G4nJyWOOgFVPNjN26OQYXP+EpUr8BtD9ZArelFtwfVM=; b=gBqk/K39utGQZ93Soi2xJrItcY
+ wVZpWqJ7Zpwl7ihngdXIpO4Bze075qUax86CcG1xhhyPviCG83aelH0xdZ2E3pv6OPLbQFrd7DjEi
+ A1S08BnobwOLxhmo755ISY3SsRJTK0YDR57oJPdn67oCJC6QUGUBvM2juPQI4IAb/New=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:References:Mime-Version:Message-Id:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BwiyyJFpFKuHzxO9ElSEoW591wjEhbpMFVEeLerCK4A=; b=f/CKS8T5r9BLUU9Ouh8pYUUpL+
- QeAXCXG8POlBUxQ4pSm/ZI0CBPRQkDel2aYC7RXoGOwzXQiM3QEIgw5beBkpDr1mwR5IxrNpXTN4z
- MDrexQUv6l4NzTnlzOy9V/VkzCsXQOhzy+CNkq493ZJDKx5p7pLo2LpkEVS2DIK4ALs4=;
-Received: from mail-yb1-f202.google.com ([209.85.219.202])
+ bh=G4nJyWOOgFVPNjN26OQYXP+EpUr8BtD9ZArelFtwfVM=; b=gjnDAcSuM9p0YvIgF4eE0w9nNT
+ O7wiqcF576u2jYXIIFa4sv7M8iJhM6nCOnBTvtFQwUNhVGj4OrPYfJbuU4NCJQc0wgDakOrGLHo8u
+ cE6aZjpVll2dMOjDdlDQpol626CvgxqcZc1V6o4NGizrQZiJDXyKtjhXbLtL+j4455EM=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kf2cG-000tLp-0t
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 15:10:08 +0000
-Received: by mail-yb1-f202.google.com with SMTP id c9so25503993ybs.8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 17 Nov 2020 07:09:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=sender:date:in-reply-to:message-id:mime-version:references:subject
- :from:to:cc; bh=BwiyyJFpFKuHzxO9ElSEoW591wjEhbpMFVEeLerCK4A=;
- b=B6mSrSI+KLsPLHZOubezapg1w7KyF48Gcd5KvqiZAUUomrvCt93BMFte58x4CeD/eg
- k0xlCR7goDt3KvTfbq6ZMZJTRtCUUnhHZa0njAuLo6BAWtOyT0lG1N+rkq1ohiO1t97Q
- qemqcHPO0pfn6jMj0SXbr2ZPFcNslQAZJlIrb9BwOmPHHl8x9VSfb8bJ8B9PJOSyLNxA
- sh1xch+eqx6drXfRAgiE1e5/U0BiaXHV0kNKfFjq0GDmh5MgGwrgrpp+Gb33sSAE+/7N
- uiK1X9QiX7TLKFELMTbOhucdRKr0jLm77xygNNOq76Vp9Flin7B1n7wnTkkNWd/qi3VO
- sykw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
- :references:subject:from:to:cc;
- bh=BwiyyJFpFKuHzxO9ElSEoW591wjEhbpMFVEeLerCK4A=;
- b=nhOEGSgBySNK7lwW+oP545urHsPkegwkesorbUXENrg4nzs3+Tk+dgutSkulP2yANz
- PB4GBMUEDX1JM5K6yTqIIApOTmYnnylWLlE9olOgU01OtyBflHpBSz8uKVulSho0gIac
- ri/ijbdHGP+wQ52O+YC7h12o0szkl2jyK7Ovm0nqHk3ReYXhDuk2ryr7+H7ILE0+2Ei+
- o3DV4LmNRunaI0QVXA4BsptmbKS8gRX/YaJ36W+m/kMwC3PMUWWd3LU0In0oX8B1V8PT
- 2o5n7gPkA1qlS69PJdKchB5ZmBhYsGGQb8GMEfYszFRHkSbzp3TLDQtzLylbB9IQpC3+
- lHSw==
-X-Gm-Message-State: AOAM533WbZlC1/Od1+PBGty+UMhD4iIxdGlzRLZtbot0NSDkfCRuC2Tj
- x1Qou8y+mqnueWEAZWaJqP/4Iqm8C3g=
-X-Google-Smtp-Source: ABdhPJzSl4jy6BzVHmPfkYxBH8ET6UtBl4AEksaq1fddCMgxT0uxzDjjRNZm1PxWWWwhr7bOMNiWNibk17E=
-X-Received: from satyaprateek.c.googlers.com
- ([fda3:e722:ac3:10:24:72f4:c0a8:1092])
- (user=satyat job=sendgmr) by 2002:a25:2fcf:: with SMTP id
- v198mr26506998ybv.492.1605622059376; 
- Tue, 17 Nov 2020 06:07:39 -0800 (PST)
-Date: Tue, 17 Nov 2020 14:07:07 +0000
-In-Reply-To: <20201117140708.1068688-1-satyat@google.com>
-Message-Id: <20201117140708.1068688-8-satyat@google.com>
-Mime-Version: 1.0
-References: <20201117140708.1068688-1-satyat@google.com>
-X-Mailer: git-send-email 2.29.2.299.gdc1121823c-goog
-To: "Theodore Y . Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>, 
- Eric Biggers <ebiggers@kernel.org>, Chao Yu <chao@kernel.org>,
- Jens Axboe <axboe@kernel.dk>, "Darrick J . Wong" <darrick.wong@oracle.com>
-X-Spam-Score: -7.6 (-------)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kf420-0016Xf-Ov
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 16:40:58 +0000
+Received: from google.com (unknown [104.132.1.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id AE6CA21D7E;
+ Tue, 17 Nov 2020 16:40:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1605631224;
+ bh=dVxDFAXp6FT9+XWoqU4EDdf3Oe33FE/vSylhfLqTJVk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=AplUYdKVw+5q2guEA+7SSOzhDI0mbCO+QtVbEflBbv070cX030TV4iVc6rUOziYdB
+ 27J3C+KSf4VJoMOGT0Nk5yUbx4D4xdvGG/KAwfqz3OZScMP4MBGXPAllELo+2XtJhJ
+ kMzl/pywyeWOgjdAhxxyB8m69EHSLWVV/GlQjQRo=
+Date: Tue, 17 Nov 2020 08:40:21 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <20201117164021.GA1636127@google.com>
+References: <20201109170012.2129411-1-jaegeuk@kernel.org>
+ <20201112053414.GB3826485@google.com>
+ <20201112054051.GA4092972@google.com>
+ <4aae85c2-1829-06c0-8fd1-4148100dc0b9@huawei.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <4aae85c2-1829-06c0-8fd1-4148100dc0b9@huawei.com>
+X-Spam-Score: 2.3 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.219.202 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.202 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.4 FSL_HELO_FAKE          No description available.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1kf2cG-000tLp-0t
-Subject: [f2fs-dev] [PATCH v7 7/8] f2fs: support direct I/O with fscrypt
- using blk-crypto
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1kf420-0016Xf-Ov
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: avoid race condition for shinker
+ count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,56 +88,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Satya Tangirala via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Satya Tangirala <satyat@google.com>
-Cc: linux-block@vger.kernel.org, Eric Biggers <ebiggers@google.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- Satya Tangirala <satyat@google.com>, linux-ext4@vger.kernel.org
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ Light Hsieh <Light.Hsieh@mediatek.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On 11/12, Chao Yu wrote:
+> On 2020/11/12 13:40, Jaegeuk Kim wrote:
+> > Light reported sometimes shinker gets nat_cnt < dirty_nat_cnt resulting in
+> > wrong do_shinker work. Let's avoid to get stale data by using nat_tree_lock.
+> > 
+> > Reported-by: Light Hsieh <Light.Hsieh@mediatek.com>
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > ---
+> > v3:
+> >   - fix to use NM_I(sbi)
+> > 
+> >   fs/f2fs/shrinker.c | 6 +++++-
+> >   1 file changed, 5 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
+> > index d66de5999a26..555712ba06d8 100644
+> > --- a/fs/f2fs/shrinker.c
+> > +++ b/fs/f2fs/shrinker.c
+> > @@ -18,7 +18,11 @@ static unsigned int shrinker_run_no;
+> >   static unsigned long __count_nat_entries(struct f2fs_sb_info *sbi)
+> >   {
+> > -	long count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
+> > +	long count;
+> > +
+> > +	down_read(&NM_I(sbi)->nat_tree_lock);
+> > +	count = NM_I(sbi)->nat_cnt - NM_I(sbi)->dirty_nat_cnt;
+> > +	up_read(&NM_I(sbi)->nat_tree_lock);
+> >   	return count > 0 ? count : 0;
+> 
+> Minor thing,
+> 
+> Just return count is enough? since count should never be smaller than 0.
 
-Wire up f2fs with fscrypt direct I/O support. direct I/O with fscrypt is
-only supported through blk-crypto (i.e. CONFIG_BLK_INLINE_ENCRYPTION must
-have been enabled, the 'inlinecrypt' mount option must have been specified,
-and either hardware inline encryption support must be present or
-CONFIG_BLK_INLINE_ENCYRPTION_FALLBACK must have been enabled). Further,
-direct I/O on encrypted files is only supported when the *length* of the
-I/O is aligned to the filesystem block size (which is *not* necessarily the
-same as the block device's block size).
+Yeah, but let me keep this just in case.
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
-Co-developed-by: Satya Tangirala <satyat@google.com>
-Signed-off-by: Satya Tangirala <satyat@google.com>
-Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/f2fs.h | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index cb700d797296..d518e668618e 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4120,7 +4120,11 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	int rw = iov_iter_rw(iter);
- 
--	if (f2fs_post_read_required(inode))
-+	if (!fscrypt_dio_supported(iocb, iter))
-+		return true;
-+	if (fsverity_active(inode))
-+		return true;
-+	if (f2fs_compressed_file(inode))
- 		return true;
- 	if (f2fs_is_multi_device(sbi))
- 		return true;
--- 
-2.29.2.299.gdc1121823c-goog
-
+> 
+> Anyway,
+> 
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
+> 
+> Thanks,
+> 
+> Thanks,
+> 
+> >   }
+> > 
 
 
 _______________________________________________
