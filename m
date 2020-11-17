@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 729202B6B03
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Nov 2020 18:04:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D43D2B6B6D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Nov 2020 18:13:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kf4PQ-0006YR-U9; Tue, 17 Nov 2020 17:04:48 +0000
+	id 1kf4Xt-0007F2-Sv; Tue, 17 Nov 2020 17:13:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kf4PP-0006YJ-4B
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 17:04:47 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kf4Xs-0007Eu-0b
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 17:13:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LgH0rII62okEeBVRpbUIaAa4lZCIAFlax3ntlfKVzNk=; b=fObN1UBcVAEC3oBUclE4vAVCoV
- dXTRF7M3PUD6GQlZsJyN+QqZfdhteKrY4ckItWo8MOoHRdZdXK/5JBny0Vt6xgKEaO0Q6vNmocWwL
- HHh9KNPjGuSytkGO2Nl25tmYGusPtUtSSgsPuilg3IULN3+rFp08PiX6r24F9zTjCeQw=;
+ bh=b+NrjH8p0cnRv9TTGjADv7C9ZV3sStRVHC2gCZf1GTo=; b=Tbp6y3gkWJrE0VvCHZfnvs04ng
+ o/LrRSom0aB1LuvPeuBJiSfI9lICfMzlBbepwVryEL75xDarnrfHqw3qmcwaZKf613wTVeTfWf55j
+ kcPsB5fHII62A2Wcw98dCILvy/VTpHvfGUbO0D9QU5AbWhZTT7mXJukGFyd6pN3TxRHI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LgH0rII62okEeBVRpbUIaAa4lZCIAFlax3ntlfKVzNk=; b=iLY0EkzPi5DupCseE6WFQHkgfz
- Eu036JVgR6E3dyGKCyoUoHK2xM1h/IKD1P76K0liGP7iYxsZ/fsTvx3ngTu1xSdJlinP0k1WcD30z
- 28Vtvb/Fqn4CeDIMF+6Rk8M6Hy9hOFvG4b29ehZzAR5hZoK259UK6oc2exB2HnLPkqgU=;
+ bh=b+NrjH8p0cnRv9TTGjADv7C9ZV3sStRVHC2gCZf1GTo=; b=fuWdIjUJ8ZlJB94ofSk5JzmFR4
+ 5xr3ALSBD49E1oHhnT98TFHFD7mjdWB7FF4h/VvnebIKUBpgsY6yzVjKv6QH+8AHV6J9BSxrz/e9p
+ SQ4OR7OWXtt7w8NEEviuzRlRmrsI0iGzlbZWhjd6BYJs4hvDxr7averJEH6XhiSP0OtA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kf4P8-00ApiI-82
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 17:04:46 +0000
+ id 1kf4Xk-001AZ6-K5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Nov 2020 17:13:31 +0000
 Received: from google.com (unknown [104.132.1.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9438122447;
- Tue, 17 Nov 2020 17:04:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 81AD4238E6;
+ Tue, 17 Nov 2020 17:13:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1605632654;
- bh=RI02fUAgmCDGR1I9KhbEZKJySeezxBuuog/z0BglPjE=;
+ s=default; t=1605633191;
+ bh=mIVA1fs7nl40nzaZYo7waKORB23nQYtbCh0SR3E8gz8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DBjGqfkcNFh7VnYo3RQNdBge1TQ+YYC4YKNDLYI8nPndHth5oUkMgNCidgSm2Hu0u
- KLA2crWMx3LsXcgN+T8C26/Kt+F8ujLobWFjlbLjJfxmDID5V1znx5uEEnL0pL3olq
- 21GDqIO5jmYr1HGyy4Cx80uxW0RI1rifflYbZMYQ=
-Date: Tue, 17 Nov 2020 09:04:11 -0800
+ b=xTCyTMoZH+Jse9X1iob5LC79sGQZZPhVJGi1+oD3/Iq7F5bhpVlXAX38APh6WeOn5
+ 5BSBXYuwxX2nrqtZYAok8jWZubLDbwefWeHA/FClkSrwmh0H6+VNJ5cPBuvw9QXt2j
+ aYdpgsa5b13WyLqvrm2E751Fa7az4vzeDWW7hVYo=
+Date: Tue, 17 Nov 2020 09:13:09 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <20201117170411.GC1636127@google.com>
-References: <20201117040315.28548-1-drosen@google.com>
- <20201117040315.28548-3-drosen@google.com>
- <20201117140326.GA445084@mit.edu>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <20201117171309.GA1645652@google.com>
+References: <20201117040223.858979-1-daeho43@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201117140326.GA445084@mit.edu>
+In-Reply-To: <20201117040223.858979-1-daeho43@gmail.com>
 X-Spam-Score: 2.3 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,9 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kf4P8-00ApiI-82
-Subject: Re: [f2fs-dev] [PATCH v2 2/3] fscrypt: Have filesystems handle
- their d_ops
+X-Headers-End: 1kf4Xk-001AZ6-K5
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: add disable_auto_compr mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,41 +82,183 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, Daniel Rosenberg <drosen@google.com>,
- Richard Weinberger <richard@nod.at>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/17, Theodore Y. Ts'o wrote:
-> On Tue, Nov 17, 2020 at 04:03:14AM +0000, Daniel Rosenberg wrote:
-> > This shifts the responsibility of setting up dentry operations from
-> > fscrypt to the individual filesystems, allowing them to have their own
-> > operations while still setting fscrypt's d_revalidate as appropriate.
-> > 
-> > Most filesystems can just use generic_set_encrypted_ci_d_ops, unless
-> > they have their own specific dentry operations as well. That operation
-> > will set the minimal d_ops required under the circumstances.
-> > 
-> > Since the fscrypt d_ops are set later on, we must set all d_ops there,
-> > since we cannot adjust those later on. This should not result in any
-> > change in behavior.
-> > 
-> > Signed-off-by: Daniel Rosenberg <drosen@google.com>
+On 11/17, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> Acked-by: Theodore Ts'o <tytso@mit.edu>
+> We will add a new disable_auto_compr mount option to turn off the
+> automaic compression on the compression enabled file, in order to
+> give discretion of choosing the target file and the timing of
+> compression to the user.
 
-Hi Ted/Richard,
+The aim would be getting compressed inode format but having no compressed
+blocks in file contents which will be done by coming ioctls manually by user.
 
-I'd like to pick this patch series in f2fs/dev for -next, so please let me know
-if you have any concern.
-
-Thanks,
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> ---
+>  Documentation/filesystems/f2fs.rst |  4 ++++
+>  fs/f2fs/data.c                     | 10 +++++-----
+>  fs/f2fs/f2fs.h                     |  8 ++++++++
+>  fs/f2fs/segment.c                  |  2 +-
+>  fs/f2fs/super.c                    |  9 +++++++++
+>  5 files changed, 27 insertions(+), 6 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index b8ee761c9922..c36ca1e0f7ab 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -260,6 +260,10 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+>  			 For other files, we can still enable compression via ioctl.
+>  			 Note that, there is one reserved special extension '*', it
+>  			 can be set to enable compression for all files.
+> +disable_auto_compr       Even if compression feature is enabled, this option can
+> +                         disable automaic compression on the compression enabled
+> +                         file to give discretion of choosing the target file and
+> +                         the timing of compression to the user.
+>  inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
+>  			 files using the blk-crypto framework rather than
+>  			 filesystem-layer encryption. This allows the use of
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index c31ec408bd4f..414c8370ab7e 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2896,7 +2896,7 @@ static int f2fs_write_data_page(struct page *page,
+>  	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+>  		goto out;
+>  
+> -	if (f2fs_compressed_file(inode)) {
+> +	if (f2fs_need_compress_write(inode)) {
+>  		if (f2fs_is_compressed_cluster(inode, page->index)) {
+>  			redirty_page_for_writepage(wbc, page);
+>  			return AOP_WRITEPAGE_ACTIVATE;
+> @@ -2988,7 +2988,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  readd:
+>  			need_readd = false;
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+> -			if (f2fs_compressed_file(inode)) {
+> +			if (f2fs_need_compress_write(inode)) {
+>  				ret = f2fs_init_compress_ctx(&cc);
+>  				if (ret) {
+>  					done = 1;
+> @@ -3067,7 +3067,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  				goto continue_unlock;
+>  
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+> -			if (f2fs_compressed_file(inode)) {
+> +			if (f2fs_need_compress_write(inode)) {
+>  				get_page(page);
+>  				f2fs_compress_ctx_add_page(&cc, page);
+>  				continue;
+> @@ -3120,7 +3120,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  	}
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+>  	/* flush remained pages in compress cluster */
+> -	if (f2fs_compressed_file(inode) && !f2fs_cluster_is_empty(&cc)) {
+> +	if (f2fs_need_compress_write(inode) && !f2fs_cluster_is_empty(&cc)) {
+>  		ret = f2fs_write_multi_pages(&cc, &submitted, wbc, io_type);
+>  		nwritten += submitted;
+>  		wbc->nr_to_write -= submitted;
+> @@ -3162,7 +3162,7 @@ static inline bool __should_serialize_io(struct inode *inode,
+>  	if (IS_NOQUOTA(inode))
+>  		return false;
+>  
+> -	if (f2fs_compressed_file(inode))
+> +	if (f2fs_need_compress_write(inode))
+>  		return true;
+>  	if (wbc->sync_mode != WB_SYNC_ALL)
+>  		return true;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index a33c90cf979b..c473c78699bc 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -99,6 +99,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+>  #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
+>  #define F2FS_MOUNT_NORECOVERY		0x04000000
+>  #define F2FS_MOUNT_ATGC			0x08000000
+> +#define F2FS_MOUNT_DISABLE_AUTO_COMPR	0x10000000
+>  
+>  #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+>  #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
+> @@ -2838,6 +2839,13 @@ static inline int f2fs_compressed_file(struct inode *inode)
+>  		is_inode_flag_set(inode, FI_COMPRESSED_FILE);
+>  }
+>  
+> +static inline int f2fs_need_compress_write(struct inode *inode)
+> +{
+> +	if (test_opt(F2FS_I_SB(inode), DISABLE_AUTO_COMPR))
+> +		return 0;
+> +	return f2fs_compressed_file(inode);
+> +}
+> +
+>  static inline unsigned int addrs_per_inode(struct inode *inode)
+>  {
+>  	unsigned int addrs = CUR_ADDRS_PER_INODE(inode) -
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index a0d7a7e04bc7..f56a8b6bbee7 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3245,7 +3245,7 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>  			else
+>  				return CURSEG_COLD_DATA;
+>  		}
+> -		if (file_is_cold(inode) || f2fs_compressed_file(inode))
+> +		if (file_is_cold(inode) || f2fs_need_compress_write(inode))
+>  			return CURSEG_COLD_DATA;
+>  		if (file_is_hot(inode) ||
+>  				is_inode_flag_set(inode, FI_HOT_DATA) ||
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 5bb523bf32a6..909c1543b282 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -146,6 +146,7 @@ enum {
+>  	Opt_compress_algorithm,
+>  	Opt_compress_log_size,
+>  	Opt_compress_extension,
+> +	Opt_disable_auto_compr,
+>  	Opt_atgc,
+>  	Opt_err,
+>  };
+> @@ -214,6 +215,7 @@ static match_table_t f2fs_tokens = {
+>  	{Opt_compress_algorithm, "compress_algorithm=%s"},
+>  	{Opt_compress_log_size, "compress_log_size=%u"},
+>  	{Opt_compress_extension, "compress_extension=%s"},
+> +	{Opt_disable_auto_compr, "disable_auto_compr"},
+>  	{Opt_atgc, "atgc"},
+>  	{Opt_err, NULL},
+>  };
+> @@ -934,10 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  			F2FS_OPTION(sbi).compress_ext_cnt++;
+>  			kfree(name);
+>  			break;
+> +		case Opt_disable_auto_compr:
+> +			set_opt(sbi, DISABLE_AUTO_COMPR);
+> +			break;
+>  #else
+>  		case Opt_compress_algorithm:
+>  		case Opt_compress_log_size:
+>  		case Opt_compress_extension:
+> +		case Opt_disable_auto_compr:
+>  			f2fs_info(sbi, "compression options not supported");
+>  			break;
+>  #endif
+> @@ -1511,6 +1517,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+>  		seq_printf(seq, ",compress_extension=%s",
+>  			F2FS_OPTION(sbi).extensions[i]);
+>  	}
+> +
+> +	if (test_opt(sbi, DISABLE_AUTO_COMPR))
+> +		seq_puts(seq, ",disable_auto_compr");
+>  }
+>  
+>  static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+> -- 
+> 2.29.2.299.gdc1121823c-goog
 
 
 _______________________________________________
