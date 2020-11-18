@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2B02B7762
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Nov 2020 08:58:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0346D2B7760
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Nov 2020 08:58:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kfILx-0007rf-Ag; Wed, 18 Nov 2020 07:58:09 +0000
+	id 1kfILo-0007oC-Df; Wed, 18 Nov 2020 07:58:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kfILn-0007rC-9I
+ (envelope-from <ebiggers@kernel.org>) id 1kfILn-0007o3-2q
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Nov 2020 07:57:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4WxAQadBsZpy3zOHCcC+EBnliJOW3HQ1p2Dl1lHUVn8=; b=TRb3zRO6+McF1t6zjukaCZzkVA
- fjYmVTNzqvNaCOebVdK20Bbd2HKrJfcJRMDd+LNwlOhTy/Ft343fJFcSB8uP+5Vx9KRx5XkpdGS5c
- 7klpjKGmC6atOnDjlLVvSYJpIObgjXBVlD4X+2fm1gMcf6IDQkEq0gQEZ+PWOGEnLkxo=;
+ bh=a0KVB/rbMIdZNau19lnq5suPPw9DwMZGWZwd38X2N94=; b=Tj3w7USocUviQJP9rGBFD/dg7V
+ o+bZliNdyxqtkwYCgjrWvocMmSVXl0jMQaN1qo95egXenYb70i8B5wNQGIr4bhWUECBUDXQlv0Xkw
+ ZvmUC0Yzykyc8+27PyUP9bYm3ZHXaKsqcfHBCDUKXTtc8lQuVos5XBlUeBpZoF2VVlcQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4WxAQadBsZpy3zOHCcC+EBnliJOW3HQ1p2Dl1lHUVn8=; b=OakK/kTzXMSGMAJw5OudJ4DuZP
- 3ZPiA47VEeorbeigTp8Xs4wMXkHawcfKq8H1roqSXHufyiUpJqyU42JwJqRWTPEgA7LBOHenPxlYN
- U6r/idGXChdIrkuIdnm3VFzpZIA+PU/jdcje6RBy/YWRXO0jW2tCgElhQItrFM+ov7aY=;
+ bh=a0KVB/rbMIdZNau19lnq5suPPw9DwMZGWZwd38X2N94=; b=M62EQ/voDGSZ0ggUPTi8sTanHt
+ HNed8HDPiT+rn5+7+aUE7wxWIRVsD1/JLToXqAZRabv8DLE/8LiQH/t6cleOnkzQ8xXm6rqfxXnHL
+ 8b1EiuXQkdetip6HHYb1exh0tFcENxndlRpyTSaaP1MrkMxiX65ydx1nhgezWhhHUBbg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kfILZ-002tm8-Ex
+ id 1kfILZ-00Cf8c-TQ
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Nov 2020 07:57:58 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A66B020872;
- Wed, 18 Nov 2020 07:57:39 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2419920B80;
+ Wed, 18 Nov 2020 07:57:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1605686260;
- bh=FigGyYGVqyexbkViWFXWCBw61iVGnXUSTYihGGdmkRE=;
+ bh=3OsEYdcS4OXEC4S/G7MM1sLUIzE8N1bOkGh+royk33o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=eRCSgvfsCg1QTVP5X/naFr2Dfarwmp41S1fV43iSP/OjrT5qpwoEiibmVfG5qqCO1
- Od3miTUeHxuE84xOTJx12qGLmh570Us2zeO5b5g/bqB7xJYav4yunwirLCZJXForrW
- Q7EW77lq7oHivyoQyvlOM136mx+VhyJg8ZMYengk=
+ b=c7cLjJHQpC3nSDFO4proY4QRa0P96Ih6le3z/91WWyOKE3Z5PochE5fqjTob041/2
+ brGZ+WeaJWqgDddJkzN1St9g7Zks55FLOKIMmNgj4ZyafhYDB9odDybtwvl4NrdhlV
+ /e1eD0rWkK/diWMI77ke9p3Nzz9WadhOoZc1xss0=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 17 Nov 2020 23:56:05 -0800
-Message-Id: <20201118075609.120337-2-ebiggers@kernel.org>
+Date: Tue, 17 Nov 2020 23:56:06 -0800
+Message-Id: <20201118075609.120337-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201118075609.120337-1-ebiggers@kernel.org>
 References: <20201118075609.120337-1-ebiggers@kernel.org>
@@ -69,9 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kfILZ-002tm8-Ex
-Subject: [f2fs-dev] [PATCH 1/5] fscrypt: add fscrypt_is_nokey_name()
+X-Headers-End: 1kfILZ-00Cf8c-TQ
+Subject: [f2fs-dev] [PATCH 2/5] ext4: prevent creating duplicate encrypted
+ filenames
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,112 +92,37 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-It's possible to create a duplicate filename in an encrypted directory
-by creating a file concurrently with adding the encryption key.
+As described in "fscrypt: add fscrypt_is_nokey_name()", it's possible to
+create a duplicate filename in an encrypted directory by creating a file
+concurrently with adding the directory's encryption key.
 
-Specifically, sys_open(O_CREAT) (or sys_mkdir(), sys_mknod(), or
-sys_symlink()) can lookup the target filename while the directory's
-encryption key hasn't been added yet, resulting in a negative no-key
-dentry.  The VFS then calls ->create() (or ->mkdir(), ->mknod(), or
-->symlink()) because the dentry is negative.  Normally, ->create() would
-return -ENOKEY due to the directory's key being unavailable.  However,
-if the key was added between the dentry lookup and ->create(), then the
-filesystem will go ahead and try to create the file.
+Fix this bug on ext4 by rejecting no-key dentries in ext4_add_entry().
 
-If the target filename happens to already exist as a normal name (not a
-no-key name), a duplicate filename may be added to the directory.
+Note that the duplicate check in ext4_find_dest_de() sometimes prevented
+this bug.  However in many cases it didn't, since ext4_find_dest_de()
+doesn't examine every dentry.
 
-In order to fix this, we need to fix the filesystems to prevent
-->create(), ->mkdir(), ->mknod(), and ->symlink() on no-key names.
-(->rename() and ->link() need it too, but those are already handled
-correctly by fscrypt_prepare_rename() and fscrypt_prepare_link().)
-
-In preparation for this, add a helper function fscrypt_is_nokey_name()
-that filesystems can use to do this check.  Use this helper function for
-the existing checks that fs/crypto/ does for rename and link.
-
+Fixes: 4461471107b7 ("ext4 crypto: enable filename encryption")
 Cc: stable@vger.kernel.org
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/hooks.c       |  5 +++--
- include/linux/fscrypt.h | 34 ++++++++++++++++++++++++++++++++++
- 2 files changed, 37 insertions(+), 2 deletions(-)
+ fs/ext4/namei.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index 20b0df47fe6a..061418be4b08 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -61,7 +61,7 @@ int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
- 		return err;
+diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
+index 33509266f5a0..793fc7db9d28 100644
+--- a/fs/ext4/namei.c
++++ b/fs/ext4/namei.c
+@@ -2195,6 +2195,9 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
+ 	if (!dentry->d_name.len)
+ 		return -EINVAL;
  
- 	/* ... in case we looked up no-key name before key was added */
--	if (dentry->d_flags & DCACHE_NOKEY_NAME)
 +	if (fscrypt_is_nokey_name(dentry))
- 		return -ENOKEY;
- 
- 	if (!fscrypt_has_permitted_context(dir, inode))
-@@ -86,7 +86,8 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
- 		return err;
- 
- 	/* ... in case we looked up no-key name(s) before key was added */
--	if ((old_dentry->d_flags | new_dentry->d_flags) & DCACHE_NOKEY_NAME)
-+	if (fscrypt_is_nokey_name(old_dentry) ||
-+	    fscrypt_is_nokey_name(new_dentry))
- 		return -ENOKEY;
- 
- 	if (old_dir != new_dir) {
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index a8f7a43f031b..8e1d31c959bf 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -111,6 +111,35 @@ static inline void fscrypt_handle_d_move(struct dentry *dentry)
- 	dentry->d_flags &= ~DCACHE_NOKEY_NAME;
- }
- 
-+/**
-+ * fscrypt_is_nokey_name() - test whether a dentry is a no-key name
-+ * @dentry: the dentry to check
-+ *
-+ * This returns true if the dentry is a no-key dentry.  A no-key dentry is a
-+ * dentry that was created in an encrypted directory that hasn't had its
-+ * encryption key added yet.  Such dentries may be either positive or negative.
-+ *
-+ * When a filesystem is asked to create a new filename in an encrypted directory
-+ * and the new filename's dentry is a no-key dentry, it must fail the operation
-+ * with ENOKEY.  This includes ->create(), ->mkdir(), ->mknod(), ->symlink(),
-+ * ->rename(), and ->link().  (However, ->rename() and ->link() are already
-+ * handled by fscrypt_prepare_rename() and fscrypt_prepare_link().)
-+ *
-+ * This is necessary because creating a filename requires the directory's
-+ * encryption key, but just checking for the key on the directory inode during
-+ * the final filesystem operation doesn't guarantee that the key was available
-+ * during the preceding dentry lookup.  And the key must have already been
-+ * available during the dentry lookup in order for it to have been checked
-+ * whether the filename already exists in the directory and for the new file's
-+ * dentry not to be invalidated due to it incorrectly having the no-key flag.
-+ *
-+ * Return: %true if the dentry is a no-key name
-+ */
-+static inline bool fscrypt_is_nokey_name(const struct dentry *dentry)
-+{
-+	return dentry->d_flags & DCACHE_NOKEY_NAME;
-+}
++		return -ENOKEY;
 +
- /* crypto.c */
- void fscrypt_enqueue_decrypt_work(struct work_struct *);
- 
-@@ -244,6 +273,11 @@ static inline void fscrypt_handle_d_move(struct dentry *dentry)
- {
- }
- 
-+static inline bool fscrypt_is_nokey_name(const struct dentry *dentry)
-+{
-+	return false;
-+}
-+
- /* crypto.c */
- static inline void fscrypt_enqueue_decrypt_work(struct work_struct *work)
- {
+ #ifdef CONFIG_UNICODE
+ 	if (sb_has_strict_encoding(sb) && IS_CASEFOLDED(dir) &&
+ 	    sb->s_encoding && utf8_validate(sb->s_encoding, &dentry->d_name))
 -- 
 2.29.2
 
