@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3C402C1353
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Nov 2020 19:50:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D8DA2C1860
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Nov 2020 23:31:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1khGuk-0000Xk-Tt; Mon, 23 Nov 2020 18:50:14 +0000
+	id 1khKMS-0005OF-HL; Mon, 23 Nov 2020 22:31:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1khGt6-0000SJ-HO
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Nov 2020 18:48:32 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1khKMR-0005Ny-2t
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Nov 2020 22:31:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nIx8Gbhqw1B+pAnBSnUJZq0OeejW3o9RJBuJ0feFx1w=; b=d0aeY7EMZ5hWosEYUnmOjR8EXH
- XXWJKjZrD1bIX44IlzAIwrX31s5D75nDjpD9Z4gNA1H4WlNUeUGnGQ5sq34aHyM+YTdKP939fruKq
- 2m7K4mZzSJtN/YUsiwfGXWbtQ5zZfSJmxO5BuEdC+T6mzdGUzCFY36OfDCKDrK1TIoYU=;
+ bh=XXu49o5iZyspA2ifZyeWEGWGTBk61BoVOtCr1XTfB4U=; b=J0UHXvRJEhMMytLOV2ZUXJm8xb
+ Ne0jQ9wVUdYNL/NSjVMMmi0zxwAIspBOL9HLvSiU42vUOlBpWNDBK+PWeUrW+mhFBa4JyA5mdXOeb
+ VhA6QWhZ6TjoEPO4PH56UHJinFvjut4ybzWJFDdiTZLZ+AGtrYmQcjoWzeRvmBEoexKY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nIx8Gbhqw1B+pAnBSnUJZq0OeejW3o9RJBuJ0feFx1w=; b=VXto0qTmv2X7bETebRX3I2fGo6
- AowQNrK9j4imNeWlb+KtSP+DcLpAMdQkWXKKxzc1e7QTAC1eg3spG86m1GUDEUJ2YxVf2kYjU+tW1
- iDoCOboi9l0zLWSYK4lnsmLRWkKVNg83tsD5fligXHfwS+UAbMtyCHQ5wmgpedH8Z6+g=;
+ bh=XXu49o5iZyspA2ifZyeWEGWGTBk61BoVOtCr1XTfB4U=; b=QCMUKZnOHAioFj7OKeArON/TpH
+ l2YOgAcotSz4eSEvpdn0kR8QKq7t+HIJ27RA5rcqd9rr/0UwtWpirVwZKBmuN8DrKo3/Peen64bpw
+ +DwwyyHH5iopqaP/lkg0tDY5efxh8+QQphUARP6029a5iM1ItOB7DioDTwosbKtpl4DA=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1khGt2-000uqy-EU
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Nov 2020 18:48:32 +0000
-Received: from gmail.com (unknown [104.132.1.84])
+ id 1khKMI-00C5Hl-S6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 23 Nov 2020 22:31:02 +0000
+Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
+ [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A53E120657;
- Mon, 23 Nov 2020 18:48:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 75A21206D5;
+ Mon, 23 Nov 2020 22:30:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1606157302;
- bh=5y8zxaS7HSYEX0hSfqLUMG8rA06A+WPmDFXRVahf/64=;
+ s=default; t=1606170638;
+ bh=qMsLhguUfZGHthn8o/bIe+LRx3PrKd4xYprbL94g5Es=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=uaRHRv6Mf58ZDhI+8qZXP+gdX6+8yOcMoYxj+x8S1b1vIrbKw/r2zQ7LrT/TOXzG9
- Tb17uTUZhk0dWzO5GItPJpEJCAD2sJM4+VJtUL0/2hTySeIAv+1DL8cwEV6QBbNJ4Z
- h1//GrJOKMpcsVy896j3oGN1vSJu6FjsFLqCqZ/E=
-Date: Mon, 23 Nov 2020 10:48:21 -0800
+ b=DNfDxTnuJc/9ZOQO+U1ViZqPntmi9u+PapFohdzgovjh/jy/Yy4xVB33Rww+qBRm7
+ az2CJzZnLZkYf7iatMCzDNGSHVMHyPoXq/qiSNoa3lsby8//RGmrveXMtq3Cqen2Q2
+ SidiEvRqa7Jbzx0Zmg8juZV1Q8JiUJnD9dIkecsc=
+Date: Mon, 23 Nov 2020 14:30:35 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <20201123184821.GB3694916@gmail.com>
-References: <20201123031751.36811-1-daeho43@gmail.com>
- <20201123031751.36811-2-daeho43@gmail.com>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
+Message-ID: <X7w4C8GAy+P9KNU6@sol.localdomain>
+References: <20201119060904.463807-1-drosen@google.com>
+ <20201119060904.463807-3-drosen@google.com>
+ <87y2iuj8y2.fsf@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201123031751.36811-2-daeho43@gmail.com>
+In-Reply-To: <87y2iuj8y2.fsf@collabora.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1khGt2-000uqy-EU
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: add F2FS_IOC_DECOMPRESS_FILE and
- F2FS_IOC_COMPRESS_FILE
+X-Headers-End: 1khKMI-00C5Hl-S6
+Subject: Re: [f2fs-dev] [PATCH v4 2/3] fscrypt: Have filesystems handle
+ their d_ops
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,65 +85,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: "Theodore Y . Ts'o" <tytso@mit.edu>, Daniel Rosenberg <drosen@google.com>,
+ Richard Weinberger <richard@nod.at>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-mtd@lists.infradead.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org, kernel-team@android.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 23, 2020 at 12:17:51PM +0900, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Sat, Nov 21, 2020 at 11:45:41PM -0500, Gabriel Krisman Bertazi wrote:
+> > diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+> > index 6633b20224d5..0288bedf46e1 100644
+> > --- a/fs/ext4/super.c
+> > +++ b/fs/ext4/super.c
+> > @@ -4968,11 +4968,6 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
+> >  		goto failed_mount4;
+> >  	}
+> >  
+> > -#ifdef CONFIG_UNICODE
+> > -	if (sb->s_encoding)
+> > -		sb->s_d_op = &ext4_dentry_ops;
+> > -#endif
 > 
-> Added two ioctl to decompress/compress explicitly the compression
-> enabled file in "compress_mode=user-based" mount option.
+> This change has the side-effect of removing the capability of the root
+> directory from being case-insensitive.  It is not a backward
+> incompatible change because there is no way to make the root directory
+> CI at the moment (it is never empty). But this restriction seems
+> artificial. Is there a real reason to prevent the root inode from being
+> case-insensitive?
 > 
-> Using these two ioctls, the users can make a control of compression
-> and decompression of their files.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
->  fs/f2fs/file.c            | 181 +++++++++++++++++++++++++++++++++++++-
->  include/uapi/linux/f2fs.h |   2 +
->  2 files changed, 182 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index be8db06aca27..e8f142470e87 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -4026,6 +4026,180 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
->  	return ret;
->  }
->  
-> +static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
-> +{
-> +	DEFINE_READAHEAD(ractl, NULL, inode->i_mapping, page_idx);
-> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> +	struct address_space *mapping = inode->i_mapping;
-> +	struct page *page;
-> +	pgoff_t redirty_idx = page_idx;
-> +	int i, page_len = 0, ret = 0;
-> +
-> +	page_cache_ra_unbounded(&ractl, len, 0);
 
-Using page_cache_ra_unbounded() here looks wrong.  See the comment above
-page_cache_ra_unbounded().
+The problem is that the "lost+found" directory is special in that e2fsck needs
+to be able to find it.
 
->  static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->  {
->  	switch (cmd) {
-> @@ -4113,6 +4287,10 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->  		return f2fs_ioc_get_compress_option(filp, arg);
->  	case F2FS_IOC_SET_COMPRESS_OPTION:
->  		return f2fs_ioc_set_compress_option(filp, arg);
-> +	case F2FS_IOC_DECOMPRESS_FILE:
-> +		return f2fs_ioc_decompress_file(filp, arg);
-> +	case F2FS_IOC_COMPRESS_FILE:
-> +		return f2fs_ioc_compress_file(filp, arg);
->  	default:
->  		return -ENOTTY;
->  	}
+That's the reason why ext4 doesn't allow the root directory to be encrypted.
+(And encrypting the root directory isn't really useful anyway, since if the goal
+is to encrypt a whole filesystem with one key, dm-crypt is a better solution.)
 
-Where is the documentation and tests for these new ioctls?
+Casefolding is a bit less problematic than encryption.  But it still doesn't
+entirely work, as e.g. if you name the directory "LOST+FOUND" instead (the
+directory is casefolded after all...), then e2fsck can't find it.
+
+Unless there's a real use case for the root directory being casefolded and
+people are willing to fix e2fsck, I think we should just make ext4 return an
+error when setting the casefold flag on the root directory, like it does when
+trying to enable encryption on the root directory.
 
 - Eric
 
