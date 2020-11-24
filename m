@@ -2,87 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59AAD2C20ED
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Nov 2020 10:12:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E0092C34A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 00:28:45 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1khUNG-00063v-IW; Tue, 24 Nov 2020 09:12:34 +0000
+	id 1khhjh-00034I-FV; Tue, 24 Nov 2020 23:28:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david.laight@aculab.com>) id 1khUNF-00063o-FG
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 09:12:33 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1khhjf-000344-QK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:28:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hxhsx7U6lHbJ5mC9Wsxd4zJH84fER7aqRnXZGRAP7To=; b=UHLdwtZeyZtmxt0myAwIY6r74a
- LVeRWvk9fPIYD6e14YZjDnEn14L2UDdgPlqKPd4w2hj0KE9l1DH8JHg5H/grZLD0LzqJUAxoeRsDu
- BeSbcFzIkDzPC8xJ2Zu74jfysAdUqnm+HLOuCnYyCtCJghDEebX1A8OtXErsnTfPEsLs=;
+ bh=SYDTotrULOcmhfNxpwog7TJgd42lt5e2mZ3A58vYknY=; b=ge4KL+2JzvrUyh5r+Ehd+Pi3k6
+ j87EmQHaJ7Nw7B1TMXkMWxZGXpadKGvWOLleNfsyI99bpW03Y6zp2gM/IRX43WHSLTyY1+PUM3OY9
+ 44/C9qzxeci3iIvTu7mxjxlZntf/s+dVU6vkb7CT6wQ1yIZRAY9sjqMAJlfPEmN3uu2Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
- References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hxhsx7U6lHbJ5mC9Wsxd4zJH84fER7aqRnXZGRAP7To=; b=hg4hZ+AgmB5K336ngW6pJM4YXh
- cbvRlwD9S3Y1h9jO5CBkuWDHDxdD0kFZNftXRxAlqdJrBdrNUyP8c9aY+rW343gcx+Zs6AgW9BisD
- qrOwA4V3Fa3a4QbKSQB9G7nKv7I0tt9dKa8hoqlFFU2OdbQC3+Lm77bjszmL3szQpbgM=;
-Received: from eu-smtp-delivery-151.mimecast.com ([207.82.80.151])
+ bh=SYDTotrULOcmhfNxpwog7TJgd42lt5e2mZ3A58vYknY=; b=fBKXCHaATsHlj448LW2ppjaLX3
+ UoXzjcc9y53aYQ8hTqhSpLP4vEoV8Zu6ID9otvTG4K2nAIQBuBu43m0M+RUud8NiTo9YqIR6EiYWS
+ 7Dlga6MmEK8Q1l2EjLBQAZlaFRW+1avdPU1of3LBsi/Dm2vVCQucCWPRGM874HcJhlpA=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.92.2)
- id 1khUNC-001yGM-9f
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 09:12:33 +0000
-Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-62--NW9eR5TMCq62nAf3IBhNg-1; Tue, 24 Nov 2020 09:12:12 +0000
-X-MC-Unique: -NW9eR5TMCq62nAf3IBhNg-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
- Server (TLS) id 15.0.1347.2; Tue, 24 Nov 2020 09:12:12 +0000
-Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
- AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
- Tue, 24 Nov 2020 09:12:12 +0000
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Chao Yu' <yuchao0@huawei.com>, 'Sahitya Tummala'
- <stummala@codeaurora.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Thread-Topic: [PATCH] f2fs: change to use rwsem for cp_mutex
-Thread-Index: AQHWwVm8Sokw4eOdHU6M1bsTH5HkTqnV8p0QgACp5gCAAGGJ4A==
-Date: Tue, 24 Nov 2020 09:12:12 +0000
-Message-ID: <effbe4f5edaf4d45a64d12c65e0dc6b0@AcuMS.aculab.com>
-References: <1606109312-1944-1-git-send-email-stummala@codeaurora.org>
- <7f5213fb9b334d1290f019ab8ed6ee71@AcuMS.aculab.com>
- <a1b9a134-97a8-6fb7-2fdc-d4de91dff849@huawei.com>
-In-Reply-To: <a1b9a134-97a8-6fb7-2fdc-d4de91dff849@huawei.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1khhjW-002noL-KL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:28:35 +0000
+Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
+ [172.10.235.113])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 213DF2100A;
+ Tue, 24 Nov 2020 23:28:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1606260496;
+ bh=Oo4Tlzm+6V2f+cAlPJ1FnNFARv4c7gmBZzibGJ+KTPA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=xe5/qIrgFn//Ktx8T3FzD8iH+OmarHXR72XJec5aY3dKU9ct5j77kLudzv2sZf5oJ
+ OGLz2xon5t1SKARHH1Shpa+fH+vE/ro2Dxh4IgiIiXhu9GMsszm9Js/C2MAv2yO0kf
+ +eIj3mO0kFqZH0y5k2Aj81/VXm+rLTLYJc0plIV0=
+Date: Tue, 24 Nov 2020 15:28:14 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <X72XDv89kSPWCqTQ@sol.localdomain>
+References: <20201118075609.120337-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20201118075609.120337-1-ebiggers@kernel.org>
+X-Spam-Score: 2.4 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [207.82.80.151 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [207.82.80.151 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1khUNC-001yGM-9f
-Subject: Re: [f2fs-dev] [PATCH] f2fs: change to use rwsem for cp_mutex
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1khhjW-002noL-KL
+Subject: Re: [f2fs-dev] [PATCH 0/5] fscrypt: prevent creating duplicate
+ encrypted filenames
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,57 +84,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu
-> Sent: 24 November 2020 03:12
+On Tue, Nov 17, 2020 at 11:56:04PM -0800, Eric Biggers wrote:
+> This series fixes a longstanding race condition where a duplicate
+> filename can be created in an encrypted directory if a syscall that
+> creates a new filename (e.g. open() or mkdir()) races with the
+> directory's encryption key being added.
 > 
-> On 2020/11/24 1:05, David Laight wrote:
-> > From: Sahitya Tummala
-> >> Sent: 23 November 2020 05:29
-> >>
-> >> Use rwsem to ensure serialization of the callers and to avoid
-> >> starvation of high priority tasks, when the system is under
-> >> heavy IO workload.
-> >
-> > I can't see any read lock requests.
-> >
-> > So why the change?
+> To close this race, we need to prevent creating files if the dentry is
+> still marked as a no-key name.  I.e. we need to fail the ->create() (or
+> other operation that creates a new filename) if the key wasn't available
+> when doing the dentry lookup earlier in the syscall, even if the key was
+> concurrently added between the dentry lookup and ->create().
 > 
-> Hi David,
+> See patch 1 for a more detailed explanation.
 > 
-> You can check the context of this patch in below link:
+> Patch 1 introduces a helper function required for the fix.  Patches 2-4
+> fix the bug on ext4, f2fs, and ubifs.  Patch 5 is a cleanup.
 > 
-> https://lore.kernel.org/linux-f2fs-devel/8e094021b958f9fe01df1183a2677882@codeaurora.org/T/#t
+> This fixes xfstest generic/595 on ubifs, but that test was hitting this
+> bug only accidentally.  I've also written a new xfstest which reproduces
+> this bug on both ext4 and ubifs.
 > 
-> BTW, the root cause here is that mutex lock won't serialize callers, so there
-> could be potential starvation problem when this lock is always grabbed by high
-> priority tasks.
+> Eric Biggers (5):
+>   fscrypt: add fscrypt_is_nokey_name()
+>   ext4: prevent creating duplicate encrypted filenames
+>   f2fs: prevent creating duplicate encrypted filenames
+>   ubifs: prevent creating duplicate encrypted filenames
+>   fscrypt: remove unnecessary calls to fscrypt_require_key()
+> 
+>  fs/crypto/hooks.c       | 31 +++++++++++--------------------
+>  fs/ext4/namei.c         |  3 +++
+>  fs/f2fs/f2fs.h          |  2 ++
+>  fs/ubifs/dir.c          | 17 +++++++++++++----
+>  include/linux/fscrypt.h | 37 +++++++++++++++++++++++++++++++++++--
+>  5 files changed, 64 insertions(+), 26 deletions(-)
+> 
+> 
+> base-commit: 3ceb6543e9cf6ed87cc1fbc6f23ca2db903564cd
 
-That doesn't seem right.
+All applied to fscrypt.git#master for 5.11.
 
-If I read the above correctly it was high priority tasks that were
-being 'starved' precisely because mutex lock serializes wakers.
+I'd still appreciate acks for ext4, f2fs, and ubifs though.
 
-If you have a lock that is contended so much that it is held 100%
-of the time you need a different locking strategy.
+- Eric
 
-IIRC mutex locks are 'ticket' locks so that only one thread is woken
-each time the mutex is released, and they are woken in the order
-they went to sleep.
-
-While this behaviour might not be the one you want, relying on
-rwsem (which might happen currently to work differently) doesn't
-seem the correct long term fix.
-
-	David
-
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
 
 _______________________________________________
 Linux-f2fs-devel mailing list
