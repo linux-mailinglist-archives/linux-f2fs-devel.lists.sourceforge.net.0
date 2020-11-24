@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E0092C34A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 00:28:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 585342C34BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 00:42:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1khhjh-00034I-FV; Tue, 24 Nov 2020 23:28:37 +0000
+	id 1khhxS-00036W-6h; Tue, 24 Nov 2020 23:42:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1khhjf-000344-QK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:28:35 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1khhxQ-00036N-0K
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:42:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SYDTotrULOcmhfNxpwog7TJgd42lt5e2mZ3A58vYknY=; b=ge4KL+2JzvrUyh5r+Ehd+Pi3k6
- j87EmQHaJ7Nw7B1TMXkMWxZGXpadKGvWOLleNfsyI99bpW03Y6zp2gM/IRX43WHSLTyY1+PUM3OY9
- 44/C9qzxeci3iIvTu7mxjxlZntf/s+dVU6vkb7CT6wQ1yIZRAY9sjqMAJlfPEmN3uu2Y=;
+ bh=GkTWrjY7E0DHligEXEmKvw+wCOBlKFhxJkBto8jy3oU=; b=I0uin+5uvnTIMex7Bynb3aHbtk
+ pJ2Es2QIZq8SLioY89tuji1vaIa+w8rMjTKLTY51p5YmNG37W6Wz5obT4m1uxynyaFILx2oVYZ9wv
+ nKjAIsKSH9WA5B/D/4ynC/2dnnZJIOOioG/F5HrgSppBzOHZb5XaQ6/gWTvd7ABgUHvE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SYDTotrULOcmhfNxpwog7TJgd42lt5e2mZ3A58vYknY=; b=fBKXCHaATsHlj448LW2ppjaLX3
- UoXzjcc9y53aYQ8hTqhSpLP4vEoV8Zu6ID9otvTG4K2nAIQBuBu43m0M+RUud8NiTo9YqIR6EiYWS
- 7Dlga6MmEK8Q1l2EjLBQAZlaFRW+1avdPU1of3LBsi/Dm2vVCQucCWPRGM874HcJhlpA=;
+ bh=GkTWrjY7E0DHligEXEmKvw+wCOBlKFhxJkBto8jy3oU=; b=Eb48fbAMnzXtDLleCpKwoKFO2l
+ gh6K6ucBVG4dXFJcLo17SdSD6R4JLe5ppJ+pgZfz7JOCHi4yBQoYHDdHEZFuANQ2m0pd1b/MrZus0
+ RHupUE508Q/35jenlqSeKyH1bz0sjeAzSMAQhWbuikHJPD2Mla1l4XvTGGwj7KBGWna8=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1khhjW-002noL-KL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:28:35 +0000
+ id 1khhxA-00Dz4q-Lu
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Nov 2020 23:42:47 +0000
 Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
  [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 213DF2100A;
- Tue, 24 Nov 2020 23:28:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 608562100A;
+ Tue, 24 Nov 2020 23:42:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1606260496;
- bh=Oo4Tlzm+6V2f+cAlPJ1FnNFARv4c7gmBZzibGJ+KTPA=;
+ s=default; t=1606261345;
+ bh=KAJWl0OBsGQqeiLErWrRxDNjM1Wbv9mxXjghZ+pYMxc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xe5/qIrgFn//Ktx8T3FzD8iH+OmarHXR72XJec5aY3dKU9ct5j77kLudzv2sZf5oJ
- OGLz2xon5t1SKARHH1Shpa+fH+vE/ro2Dxh4IgiIiXhu9GMsszm9Js/C2MAv2yO0kf
- +eIj3mO0kFqZH0y5k2Aj81/VXm+rLTLYJc0plIV0=
-Date: Tue, 24 Nov 2020 15:28:14 -0800
+ b=0O9/cSvw5+fLkdPBEZCzDs8Laf2SY6KdYW3Z/6HYrcr0IJ6EeqKAisLs5uEM4ePpC
+ crUJACZMk75/hZFUxitjd2eP47PoB0h7bABvIHcn2y18fIf8Eptke/KsuCFhDtWdoQ
+ bTUOA7zCF+KCeWdQdkrLvT0i9pe/CQyz18SUBjUw=
+Date: Tue, 24 Nov 2020 15:42:22 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Message-ID: <X72XDv89kSPWCqTQ@sol.localdomain>
-References: <20201118075609.120337-1-ebiggers@kernel.org>
+Message-ID: <X72aXth+cz3k7uvD@sol.localdomain>
+References: <20201117032626.320275-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201118075609.120337-1-ebiggers@kernel.org>
-X-Spam-Score: 2.4 (++)
+In-Reply-To: <20201117032626.320275-1-ebiggers@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1khhjW-002noL-KL
-Subject: Re: [f2fs-dev] [PATCH 0/5] fscrypt: prevent creating duplicate
- encrypted filenames
+X-Headers-End: 1khhxA-00Dz4q-Lu
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: simplify master key locking
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,53 +82,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-ext4@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Nov 17, 2020 at 11:56:04PM -0800, Eric Biggers wrote:
-> This series fixes a longstanding race condition where a duplicate
-> filename can be created in an encrypted directory if a syscall that
-> creates a new filename (e.g. open() or mkdir()) races with the
-> directory's encryption key being added.
+On Mon, Nov 16, 2020 at 07:26:26PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> To close this race, we need to prevent creating files if the dentry is
-> still marked as a no-key name.  I.e. we need to fail the ->create() (or
-> other operation that creates a new filename) if the key wasn't available
-> when doing the dentry lookup earlier in the syscall, even if the key was
-> concurrently added between the dentry lookup and ->create().
+> The stated reasons for separating fscrypt_master_key::mk_secret_sem from
+> the standard semaphore contained in every 'struct key' no longer apply.
 > 
-> See patch 1 for a more detailed explanation.
+> First, due to commit a992b20cd4ee ("fscrypt: add
+> fscrypt_prepare_new_inode() and fscrypt_set_context()"),
+> fscrypt_get_encryption_info() is no longer called from within a
+> filesystem transaction.
 > 
-> Patch 1 introduces a helper function required for the fix.  Patches 2-4
-> fix the bug on ext4, f2fs, and ubifs.  Patch 5 is a cleanup.
+> Second, due to commit d3ec10aa9581 ("KEYS: Don't write out to userspace
+> while holding key semaphore"), the semaphore for the "keyring" key type
+> no longer ranks above page faults.
 > 
-> This fixes xfstest generic/595 on ubifs, but that test was hitting this
-> bug only accidentally.  I've also written a new xfstest which reproduces
-> this bug on both ext4 and ubifs.
+> That leaves performance as the only possible reason to keep the separate
+> mk_secret_sem.  Specifically, having mk_secret_sem reduces the
+> contention between setup_file_encryption_key() and
+> FS_IOC_{ADD,REMOVE}_ENCRYPTION_KEY.  However, these ioctls aren't
+> executed often, so this doesn't seem to be worth the extra complexity.
 > 
-> Eric Biggers (5):
->   fscrypt: add fscrypt_is_nokey_name()
->   ext4: prevent creating duplicate encrypted filenames
->   f2fs: prevent creating duplicate encrypted filenames
->   ubifs: prevent creating duplicate encrypted filenames
->   fscrypt: remove unnecessary calls to fscrypt_require_key()
+> Therefore, simplify the locking design by just using key->sem instead of
+> mk_secret_sem.
 > 
->  fs/crypto/hooks.c       | 31 +++++++++++--------------------
->  fs/ext4/namei.c         |  3 +++
->  fs/f2fs/f2fs.h          |  2 ++
->  fs/ubifs/dir.c          | 17 +++++++++++++----
->  include/linux/fscrypt.h | 37 +++++++++++++++++++++++++++++++++++--
->  5 files changed, 64 insertions(+), 26 deletions(-)
-> 
-> 
-> base-commit: 3ceb6543e9cf6ed87cc1fbc6f23ca2db903564cd
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/crypto/fscrypt_private.h | 19 ++++++-------------
+>  fs/crypto/hooks.c           |  8 +++++---
+>  fs/crypto/keyring.c         |  8 +-------
+>  fs/crypto/keysetup.c        | 20 +++++++++-----------
+>  4 files changed, 21 insertions(+), 34 deletions(-)
 
-All applied to fscrypt.git#master for 5.11.
-
-I'd still appreciate acks for ext4, f2fs, and ubifs though.
+Applied to fscrypt.git#master for 5.11.
 
 - Eric
 
