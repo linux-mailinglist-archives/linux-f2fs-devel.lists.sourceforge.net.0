@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F5652C3551
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 01:25:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A19B72C3576
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 01:25:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1khicI-0005ag-JD; Wed, 25 Nov 2020 00:25:02 +0000
+	id 1khict-0008BF-TL; Wed, 25 Nov 2020 00:25:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1khicH-0005aQ-2g
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:01 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1khicK-00085N-4w
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NHhtqp3KgmqMWi3g0c0lrx8o2uYcVzshjaPStLB63A4=; b=F39IYjiB0of+4JMBpFM6KsqOKI
- FO0S2MmiQ2zJqrYlXApSWxc3TalnJR0clypWeszGFUpA0dqgNylfj9JgDpimwH+pAs/lh/37qh0p6
- hsHCgnRywlCN64TByyvrbiNY1z341RGZVxTJPYrDMSfLPVQxo/LhZq5W6HB1Fm/kT/7o=;
+ bh=Rz4j9oZxy0trP5Zx+eRPa28Y2vBAbJHQLW6j9D2CqpU=; b=eBrCbyqUS+FfvqIbPtmwRwVNAz
+ t3LIIXnL1ObKrzchrkW6TW9DeMM5IJfP/Tftw8dFhd6BgXU6F7WweNOsTO4WcZfiJKI/Izv/RZv9Y
+ 28IWvB3TkUx3OUC5HIFg+Ypu8U1/LoiEqJu6RV1S0wWMJFYBbJSxRpwAPMdyDdr7iHE8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NHhtqp3KgmqMWi3g0c0lrx8o2uYcVzshjaPStLB63A4=; b=fyLQ8WdA5nC/gxqL/dfSCvPJvr
- e9LBOsKJyYPlo9RVd/qjNmsZZotTUF6a2VCx2t3dsrS+TrXE4Q3cJYHJVwq0hz9vPTNivomGNdU/Z
- EqSr2xQnRi+kIL9EKlqAy49iR8Bm/Ndu1U5gPIBYF8kqysm5yjb+pqJ9R94ptSjTOtlQ=;
+ bh=Rz4j9oZxy0trP5Zx+eRPa28Y2vBAbJHQLW6j9D2CqpU=; b=OtW6akHCxW/pGQ27YykhltEGaD
+ LTG4XxacJ9CTpGTcpig6UvF6k9ev8yobDVvKZh3LBqMAMkHZRbK1C2lUzdDzQ5cIlU7zPLHq/zUww
+ +69+9VYaUq8cPwvwu/vaLunJ9856bx/NVQPt4BTz+g5gCya3aPm/wKuvWyYIXe6AChHQ=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1khicE-002qML-Mo
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:01 +0000
+ id 1khic7-002qMA-Q8
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:04 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F2DB02151B;
- Wed, 25 Nov 2020 00:24:45 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3E27A21527;
+ Wed, 25 Nov 2020 00:24:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1606263886;
- bh=rnYdUr37PtuJdOHsrO7sMu2HuLBhc/5UVpsjNmKp6y8=;
+ bh=kpsbU6nvcysiI9/MmbON23qqvHm2MWi7u1vlzska8vY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=AJl8OkUGDWFwxrxlZqEpgv4PwMCU1rjl5L7p1rg/lZNBS90ofHleDkHoORna07IZH
- L4PwZP6J+7e4F/HrUuXir6oThE5TGXcT0nQplwrbj/sZESB+7UVh4fPV9Lswxl7DZb
- 3Gx3DfYhqSUtcl/Z9Qd87ORSV1pWNXLhGd1ryKoM=
+ b=s3OE/takovt2yDXfnek5hfdpeePr6vwUSGTHUpP7IDS3ZkqY6FAGheOuo7Yjxb7DP
+ nN15RjbMCAvWsymNtQqS3XE6yjq8XBjtiiK8BPKivoiGjhF6bd6qLlBVjov0wyf33A
+ ldOVssWJJoNEU8DHoQc21MglO+vKlXsUcQloLo/A=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 24 Nov 2020 16:23:28 -0800
-Message-Id: <20201125002336.274045-2-ebiggers@kernel.org>
+Date: Tue, 24 Nov 2020 16:23:29 -0800
+Message-Id: <20201125002336.274045-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201125002336.274045-1-ebiggers@kernel.org>
 References: <20201125002336.274045-1-ebiggers@kernel.org>
@@ -70,8 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1khicE-002qML-Mo
-Subject: [f2fs-dev] [PATCH 1/9] ext4: remove ext4_dir_open()
+X-Headers-End: 1khic7-002qMA-Q8
+Subject: [f2fs-dev] [PATCH 2/9] f2fs: remove f2fs_dir_open()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,35 +101,33 @@ anymore, and so that we eliminate a use of fscrypt_get_encryption_info()
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/dir.c | 8 --------
+ fs/f2fs/dir.c | 8 --------
  1 file changed, 8 deletions(-)
 
-diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
-index ca50c90adc4c..16bfbdd5007c 100644
---- a/fs/ext4/dir.c
-+++ b/fs/ext4/dir.c
-@@ -616,13 +616,6 @@ static int ext4_dx_readdir(struct file *file, struct dir_context *ctx)
- 	return 0;
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 4b9ef8bbfa4a..47bee953fc8d 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -1081,19 +1081,11 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
+ 	return err < 0 ? err : 0;
  }
  
--static int ext4_dir_open(struct inode * inode, struct file * filp)
+-static int f2fs_dir_open(struct inode *inode, struct file *filp)
 -{
 -	if (IS_ENCRYPTED(inode))
 -		return fscrypt_get_encryption_info(inode) ? -EACCES : 0;
 -	return 0;
 -}
 -
- static int ext4_release_dir(struct inode *inode, struct file *filp)
- {
- 	if (filp->private_data)
-@@ -664,7 +657,6 @@ const struct file_operations ext4_dir_operations = {
- 	.compat_ioctl	= ext4_compat_ioctl,
- #endif
- 	.fsync		= ext4_sync_file,
--	.open		= ext4_dir_open,
- 	.release	= ext4_release_dir,
- };
- 
+ const struct file_operations f2fs_dir_operations = {
+ 	.llseek		= generic_file_llseek,
+ 	.read		= generic_read_dir,
+ 	.iterate_shared	= f2fs_readdir,
+ 	.fsync		= f2fs_sync_file,
+-	.open		= f2fs_dir_open,
+ 	.unlocked_ioctl	= f2fs_ioctl,
+ #ifdef CONFIG_COMPAT
+ 	.compat_ioctl   = f2fs_compat_ioctl,
 -- 
 2.29.2
 
