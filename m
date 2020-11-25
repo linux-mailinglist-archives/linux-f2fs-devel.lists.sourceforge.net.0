@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9386F2C3575
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 01:25:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 010332C3558
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Nov 2020 01:25:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1khict-0008BT-VH; Wed, 25 Nov 2020 00:25:39 +0000
+	id 1khicX-0005cl-OY; Wed, 25 Nov 2020 00:25:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1khicW-00087Q-Ke
+ (envelope-from <ebiggers@kernel.org>) id 1khicW-0005cb-Dx
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IzvZnvz5oJxDZIwk1zJpg72qZiJCv22uUcbJ6MkoaT8=; b=WKq8Wysc1/oZMzcHcM/AAvQrSf
- uPtg7B7y71LdWHUmK0ZNrUyi/ID6Og2HpAdOHV7LW6yGDf8gKmB3ToHvdghdKDtTZ3/ctp7WMO8CW
- g3JAie5oPm2/I1ckaSKqeWLzdHjtD7RyrSGCrci/89S8HWT56BNAC/QijOjeXrBlmkIM=;
+ bh=CkLLL8hikHfynw+9m5cwuXiG8pYsioDRQcitRb0ZROM=; b=i5Nud9vWyqj5ZU+29S9Sb8XX3m
+ Pq8VtzkO1iULwATXSRuOz1BZYtM08sL+p0QfzQ735T8WBcGEVYQGGx1xzq5obuaHuAncPS7Gvybl5
+ MmkQ99ik4GtCVIBcT8LVNBwZV7TGP0jcX2i5AW/iv6WBsc5eyvHDw9+ceTnbQWXGAAX4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IzvZnvz5oJxDZIwk1zJpg72qZiJCv22uUcbJ6MkoaT8=; b=W58f4+6pzRfNPHeFCE3YZOR3KE
- 2z/44ktHFh5DBhun3QjKOmtXgvCzhW/4+QeT4Lpvbe+Le5LiVztOfOp5v72Y/9HHeRkty9VUoar6W
- lVd6nxrLoeel723m/3HB8mYbz/KqaKoIYjE/ifjDhehWXT8m1VGrPneK8SMHy6eawRwo=;
+ bh=CkLLL8hikHfynw+9m5cwuXiG8pYsioDRQcitRb0ZROM=; b=ND0HUGfgRLEmySOwzWBaohOIEL
+ 6iIsJfBOuMfoRYbj4FlJRfxOqeRqMkWe9WgeqV7Xki00pvhWU8UqVlKeZhJASY/BjmPhZSyV7xYxZ
+ knCf7PpZEsvNY7HhrK83vAS7IxfXDZFXrXPjRWnwltkBb2H+XvArJQc4lXLo7zzRKXQo=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1khicP-00E1Rs-VM
+ id 1khicQ-00E1Ru-EH
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Nov 2020 00:25:16 +0000
 Received: from sol.attlocal.net
  (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 48A7121734;
+ by mail.kernel.org (Postfix) with ESMTPSA id 8AF542173E;
  Wed, 25 Nov 2020 00:24:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=default; t=1606263887;
- bh=GcIDgPOioF2enf4UU7puDpYrUGLkFezb8sSeAZk5UsQ=;
+ bh=ABvDlXMwjRq5govS1GsOlH9NgSkx2Q1+FWd/EUcY1U8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Or7jtegODYCPin3wnbGFqeaYo4hDY+OxiIiEAowN8CUBQ6bTDLf73iBgbHeyhFqjL
- NJcr+qxkJUxfy0EFiF5xdWTVIQE7rXw2wp0AnOyphxIZU1Z9HuAxERl6pSDZ4ZBlzu
- g5BYjw6/bP+k+SA7ND0XOIPbOngJ56i2VNYOop9w=
+ b=LXljaE/jMVXFHaMrkVVLTTRANdzCOz4et9MOVW8G6aVFZLsykL8yQST5y0NwuNDwP
+ 8vTr++uc04ONtcJUMiq+jHlS5K4vPYzlvAEWuu0e2oRUhqlKTIXzqUas8qwdmGWZ6N
+ 3m9HsnYwlQrmNxSuDRq/lS/nzCIBKAHdPUMz7s6k=
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 24 Nov 2020 16:23:33 -0800
-Message-Id: <20201125002336.274045-7-ebiggers@kernel.org>
+Date: Tue, 24 Nov 2020 16:23:34 -0800
+Message-Id: <20201125002336.274045-8-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201125002336.274045-1-ebiggers@kernel.org>
 References: <20201125002336.274045-1-ebiggers@kernel.org>
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1khicP-00E1Rs-VM
-Subject: [f2fs-dev] [PATCH 6/9] fscrypt: move body of
- fscrypt_prepare_setattr() out-of-line
+X-Headers-End: 1khicQ-00E1Ru-EH
+Subject: [f2fs-dev] [PATCH 7/9] fscrypt: move fscrypt_require_key() to
+ fscrypt_private.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,71 +92,90 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-In preparation for reducing the visibility of fscrypt_require_key() by
-moving it to fscrypt_private.h, move the call to it from
-fscrypt_prepare_setattr() to an out-of-line function.
+fscrypt_require_key() is now only used by files in fs/crypto/.  So
+reduce its visibility to fscrypt_private.h.  This is also a prerequsite
+for unexporting fscrypt_get_encryption_info().
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/hooks.c       |  8 ++++++++
- include/linux/fscrypt.h | 11 +++++++++--
- 2 files changed, 17 insertions(+), 2 deletions(-)
+ fs/crypto/fscrypt_private.h | 26 ++++++++++++++++++++++++++
+ include/linux/fscrypt.h     | 26 --------------------------
+ 2 files changed, 26 insertions(+), 26 deletions(-)
 
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index 82f351d3113a..1c16dba222d9 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -120,6 +120,14 @@ int __fscrypt_prepare_readdir(struct inode *dir)
- }
- EXPORT_SYMBOL_GPL(__fscrypt_prepare_readdir);
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index a61d4dbf0a0b..16dd55080127 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -571,6 +571,32 @@ int fscrypt_derive_dirhash_key(struct fscrypt_info *ci,
+ void fscrypt_hash_inode_number(struct fscrypt_info *ci,
+ 			       const struct fscrypt_master_key *mk);
  
-+int __fscrypt_prepare_setattr(struct dentry *dentry, struct iattr *attr)
++/**
++ * fscrypt_require_key() - require an inode's encryption key
++ * @inode: the inode we need the key for
++ *
++ * If the inode is encrypted, set up its encryption key if not already done.
++ * Then require that the key be present and return -ENOKEY otherwise.
++ *
++ * No locks are needed, and the key will live as long as the struct inode --- so
++ * it won't go away from under you.
++ *
++ * Return: 0 on success, -ENOKEY if the key is missing, or another -errno code
++ * if a problem occurred while setting up the encryption key.
++ */
++static inline int fscrypt_require_key(struct inode *inode)
 +{
-+	if (attr->ia_valid & ATTR_SIZE)
-+		return fscrypt_require_key(d_inode(dentry));
++	if (IS_ENCRYPTED(inode)) {
++		int err = fscrypt_get_encryption_info(inode);
++
++		if (err)
++			return err;
++		if (!fscrypt_has_encryption_key(inode))
++			return -ENOKEY;
++	}
 +	return 0;
 +}
-+EXPORT_SYMBOL_GPL(__fscrypt_prepare_setattr);
 +
- /**
-  * fscrypt_prepare_setflags() - prepare to change flags with FS_IOC_SETFLAGS
-  * @inode: the inode on which flags are being changed
+ /* keysetup_v1.c */
+ 
+ void fscrypt_put_direct_key(struct fscrypt_direct_key *dk);
 diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 8cbb26f55695..b20900bb829f 100644
+index b20900bb829f..a07610f27926 100644
 --- a/include/linux/fscrypt.h
 +++ b/include/linux/fscrypt.h
-@@ -243,6 +243,7 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
- int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
- 			     struct fscrypt_name *fname);
- int __fscrypt_prepare_readdir(struct inode *dir);
-+int __fscrypt_prepare_setattr(struct dentry *dentry, struct iattr *attr);
- int fscrypt_prepare_setflags(struct inode *inode,
- 			     unsigned int oldflags, unsigned int flags);
- int fscrypt_prepare_symlink(struct inode *dir, const char *target,
-@@ -543,6 +544,12 @@ static inline int __fscrypt_prepare_readdir(struct inode *dir)
- 	return -EOPNOTSUPP;
+@@ -688,32 +688,6 @@ static inline bool fscrypt_has_encryption_key(const struct inode *inode)
+ 	return fscrypt_get_info(inode) != NULL;
  }
  
-+static inline int __fscrypt_prepare_setattr(struct dentry *dentry,
-+					    struct iattr *attr)
-+{
-+	return -EOPNOTSUPP;
-+}
-+
- static inline int fscrypt_prepare_setflags(struct inode *inode,
- 					   unsigned int oldflags,
- 					   unsigned int flags)
-@@ -840,8 +847,8 @@ static inline int fscrypt_prepare_readdir(struct inode *dir)
- static inline int fscrypt_prepare_setattr(struct dentry *dentry,
- 					  struct iattr *attr)
- {
--	if (attr->ia_valid & ATTR_SIZE)
--		return fscrypt_require_key(d_inode(dentry));
-+	if (IS_ENCRYPTED(d_inode(dentry)))
-+		return __fscrypt_prepare_setattr(dentry, attr);
- 	return 0;
- }
- 
+-/**
+- * fscrypt_require_key() - require an inode's encryption key
+- * @inode: the inode we need the key for
+- *
+- * If the inode is encrypted, set up its encryption key if not already done.
+- * Then require that the key be present and return -ENOKEY otherwise.
+- *
+- * No locks are needed, and the key will live as long as the struct inode --- so
+- * it won't go away from under you.
+- *
+- * Return: 0 on success, -ENOKEY if the key is missing, or another -errno code
+- * if a problem occurred while setting up the encryption key.
+- */
+-static inline int fscrypt_require_key(struct inode *inode)
+-{
+-	if (IS_ENCRYPTED(inode)) {
+-		int err = fscrypt_get_encryption_info(inode);
+-
+-		if (err)
+-			return err;
+-		if (!fscrypt_has_encryption_key(inode))
+-			return -ENOKEY;
+-	}
+-	return 0;
+-}
+-
+ /**
+  * fscrypt_prepare_link() - prepare to link an inode into a possibly-encrypted
+  *			    directory
 -- 
 2.29.2
 
