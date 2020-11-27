@@ -2,54 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DB8D2C614A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Nov 2020 10:02:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7AD12C6225
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Nov 2020 10:44:59 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kiZdg-0000ge-UL; Fri, 27 Nov 2020 09:02:00 +0000
+	id 1kiaJD-0001F9-2z; Fri, 27 Nov 2020 09:44:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kiZde-0000gN-IW
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Nov 2020 09:01:58 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kiaJC-0001F2-8v
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Nov 2020 09:44:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EIcTIkuTYy1EtjpPVy4HnnqrlCSgJve7k1HiVCDYuS0=; b=DZm3cjCBqXK6GN2fwBEaDq0vvu
- 91stxn39MSeuvUkukkvmL43MLuxpu1WUGNs66Pc0/Oh17t8dQO7TNROJtXy878Jm3kf2RjEhX3pkb
- jG9eMjMyHLq7nT3aTUgPuN475RmdJIkJLlULotrNCOPk5OAQoHcjVAvC6V3J14vxDZhg=;
+ bh=KW+smw2diFul8LJH+4uO8WQ+c77h0DoFXNHlwoEc3+U=; b=AQMWJ+QfyRawZTDFppNQF6KMZI
+ BNcC4P8LCiaa4zpIYgxzzT4juxecrVkyEEo5BqP9zT59q3kQtlRG9XTeCFumvJZjku8uimM1Ukyx9
+ TM2OAeVz1JhkQ9u+CHoighqkLVGvdZFuruFXUMjkbH7Ep5W8p82lgVNmrNZd0Gqn3J+k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EIcTIkuTYy1EtjpPVy4HnnqrlCSgJve7k1HiVCDYuS0=; b=E
- L5UxXIuey9rvk35WCJh0Osv17LrfyC/WQAbcfs56rgKUVh1cF7ZovmrOiQ/5d4c4lWdCPaC4KUnz0
- 9SrvrpO8AToSejOE/BuYF45D/GVg96xQmNIUc8qSuanKZbrPd49lZCtJ8GV4vKhvhl8QIheFgw8CS
- pFeEBL3pu5pLl6xQ=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KW+smw2diFul8LJH+4uO8WQ+c77h0DoFXNHlwoEc3+U=; b=nJlN9IhpwRvsXX11h4Jz43aK6O
+ yFJjFP6s2s5zxSpmvnfrNXTKI9JXuijC2j0YhW6Q0N58NU8b6jxLzhj/5TA6XHK03ycf4fnNZlFeD
+ 8GPOh+U8xyq4FTKolmwjHCOOvTwBIB5fKfv0LArupDtxiA45uZxJYEYIyuLuPk3ueJvw=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kiZdR-0019a7-W9
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Nov 2020 09:01:58 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Cj7rt2TZrzkhDy;
- Fri, 27 Nov 2020 17:01:02 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS405-HUB.china.huawei.com (10.3.19.205) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 27 Nov 2020 17:01:23 +0800
+ id 1kiaJ7-001By7-AQ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 27 Nov 2020 09:44:54 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cj8pp4YjYzhZRN;
+ Fri, 27 Nov 2020 17:44:18 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 27 Nov
+ 2020 17:44:30 +0800
+To: Daeho Jeong <daeho43@gmail.com>
+References: <20201016051455.1913795-1-daeho43@gmail.com>
+ <f8359dde-7e0c-b2fc-451f-2984c50fa552@huawei.com>
+ <CACOAw_wrTSZ3DWBUJA=ePe=fDRgEgqCfsbSqKmE6+ACW8A-RQg@mail.gmail.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Fri, 27 Nov 2020 17:01:18 +0800
-Message-ID: <20201127090118.84235-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
+Message-ID: <2d354bbe-9d1e-f3e0-b918-b9ec023a93ba@huawei.com>
+Date: Fri, 27 Nov 2020 17:44:30 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <CACOAw_wrTSZ3DWBUJA=ePe=fDRgEgqCfsbSqKmE6+ACW8A-RQg@mail.gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -59,12 +65,14 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kiZdR-0019a7-W9
-Subject: [f2fs-dev] [PATCH] f2fs: introduce a new per-sb directory in sysfs
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kiaJ7-001By7-AQ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add compr_inode and compr_blocks sysfs
+ nodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,153 +84,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add a new directory 'stat' in path of /sys/fs/f2fs/<devname>/, later
-we can add new readonly stat sysfs file into this directory, it will
-make <devname> directory less mess.
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/f2fs.h  |  5 +++-
- fs/f2fs/sysfs.c | 69 +++++++++++++++++++++++++++++++++++++++++++++----
- 2 files changed, 68 insertions(+), 6 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0d38f2135016..a20059dece46 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1510,9 +1510,12 @@ struct f2fs_sb_info {
- 	unsigned int node_io_flag;
- 
- 	/* For sysfs suppport */
--	struct kobject s_kobj;
-+	struct kobject s_kobj;			/* /sys/fs/f2fs/<devname> */
- 	struct completion s_kobj_unregister;
- 
-+	struct kobject s_stat_kobj;		/* /sys/fs/f2fs/<devname>/stat */
-+	struct completion s_stat_kobj_unregister;
-+
- 	/* For shrinker support */
- 	struct list_head s_list;
- 	int s_ndevs;				/* number of devices */
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index ec77ccfea923..8c63a6e61dfd 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -708,6 +708,11 @@ static struct attribute *f2fs_feat_attrs[] = {
- };
- ATTRIBUTE_GROUPS(f2fs_feat);
- 
-+static struct attribute *f2fs_stat_attrs[] = {
-+	NULL,
-+};
-+ATTRIBUTE_GROUPS(f2fs_stat);
-+
- static const struct sysfs_ops f2fs_attr_ops = {
- 	.show	= f2fs_attr_show,
- 	.store	= f2fs_attr_store,
-@@ -736,6 +741,44 @@ static struct kobject f2fs_feat = {
- 	.kset	= &f2fs_kset,
- };
- 
-+static ssize_t f2fs_stat_attr_show(struct kobject *kobj,
-+				struct attribute *attr, char *buf)
-+{
-+	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-+								s_stat_kobj);
-+	struct f2fs_attr *a = container_of(attr, struct f2fs_attr, attr);
-+
-+	return a->show ? a->show(a, sbi, buf) : 0;
-+}
-+
-+static ssize_t f2fs_stat_attr_store(struct kobject *kobj, struct attribute *attr,
-+						const char *buf, size_t len)
-+{
-+	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-+								s_stat_kobj);
-+	struct f2fs_attr *a = container_of(attr, struct f2fs_attr, attr);
-+
-+	return a->store ? a->store(a, sbi, buf, len) : 0;
-+}
-+
-+static void f2fs_stat_kobj_release(struct kobject *kobj)
-+{
-+	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-+								s_stat_kobj);
-+	complete(&sbi->s_stat_kobj_unregister);
-+}
-+
-+static const struct sysfs_ops f2fs_stat_attr_ops = {
-+	.show	= f2fs_stat_attr_show,
-+	.store	= f2fs_stat_attr_store,
-+};
-+
-+static struct kobj_type f2fs_stat_ktype = {
-+	.default_groups = f2fs_stat_groups,
-+	.sysfs_ops	= &f2fs_stat_attr_ops,
-+	.release	= f2fs_stat_kobj_release,
-+};
-+
- static int __maybe_unused segment_info_seq_show(struct seq_file *seq,
- 						void *offset)
- {
-@@ -942,11 +985,15 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
- 	init_completion(&sbi->s_kobj_unregister);
- 	err = kobject_init_and_add(&sbi->s_kobj, &f2fs_sb_ktype, NULL,
- 				"%s", sb->s_id);
--	if (err) {
--		kobject_put(&sbi->s_kobj);
--		wait_for_completion(&sbi->s_kobj_unregister);
--		return err;
--	}
-+	if (err)
-+		goto put_sb_kobj;
-+
-+	sbi->s_stat_kobj.kset = &f2fs_kset;
-+	init_completion(&sbi->s_stat_kobj_unregister);
-+	err = kobject_init_and_add(&sbi->s_stat_kobj, &f2fs_stat_ktype,
-+						&sbi->s_kobj, "stat");
-+	if (err)
-+		goto put_stat_kobj;
- 
- 	if (f2fs_proc_root)
- 		sbi->s_proc = proc_mkdir(sb->s_id, f2fs_proc_root);
-@@ -962,6 +1009,13 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
- 				victim_bits_seq_show, sb);
- 	}
- 	return 0;
-+put_stat_kobj:
-+	kobject_put(&sbi->s_stat_kobj);
-+	wait_for_completion(&sbi->s_stat_kobj_unregister);
-+put_sb_kobj:
-+	kobject_put(&sbi->s_kobj);
-+	wait_for_completion(&sbi->s_kobj_unregister);
-+	return err;
- }
- 
- void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
-@@ -973,6 +1027,11 @@ void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
- 		remove_proc_entry("victim_bits", sbi->s_proc);
- 		remove_proc_entry(sbi->sb->s_id, f2fs_proc_root);
- 	}
-+
-+	kobject_del(&sbi->s_stat_kobj);
-+	kobject_put(&sbi->s_stat_kobj);
-+	wait_for_completion(&sbi->s_stat_kobj_unregister);
-+
- 	kobject_del(&sbi->s_kobj);
- 	kobject_put(&sbi->s_kobj);
- 	wait_for_completion(&sbi->s_kobj_unregister);
--- 
-2.26.2
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+RGFlaG8sCgpIb3cgYWJvdXQgdXBkYXRpbmcgdGhpcyBwYXRjaCBiYXNlZCBvbiBiZWxvdyBwYXRj
+aD8KCglmMmZzOiBpbnRyb2R1Y2UgYSBuZXcgcGVyLXNiIGRpcmVjdG9yeSBpbiBzeXNmcwoKT24g
+MjAyMC8xMC8yMiAxMDo1MywgRGFlaG8gSmVvbmcgd3JvdGU6Cj4gWWVwLCBJdCBzb3VuZHMgZ29v
+ZCB0byBtZS4KPiAKPiAyMDIw64WEIDEw7JuUIDIx7J28ICjsiJgpIOyYpO2bhCAzOjA4LCBDaGFv
+IFl1IDx5dWNoYW8wQGh1YXdlaS5jb20+64uY7J20IOyekeyEsToKPj4KPj4gT24gMjAyMC8xMC8x
+NiAxMzoxNCwgRGFlaG8gSmVvbmcgd3JvdGU6Cj4+PiBGcm9tOiBEYWVobyBKZW9uZyA8ZGFlaG9q
+ZW9uZ0Bnb29nbGUuY29tPgo+Pj4KPj4+IEFkZGVkIGNvbXByX2lub2RlIHRvIHNob3cgY29tcHJl
+c3NlZCBpbm9kZSBjb3VudCBhbmQgY29tcHJfYmxvY2tzIHRvCj4+PiBzaG93IGNvbXByZXNzZWQg
+YmxvY2sgY291bnQgaW4gc3lzZnMuCj4+Cj4+IEFzIHRoZXJlIGFyZSBzbyBtYW55IGVudHJpZXMg
+aW4gLi4vZjJmcy88ZGlzaz4vIGRpcmVjdG9yeSwgaXQgbG9va3MgYSBtZXNzCj4+IHRoZXJlLCBJ
+IHN1Z2dlc3QgdGhhdCB3ZSBjYW4gYWRkIGEgbmV3IGRpcmVjdG9yeSAnc3RhdHMnIGluIC4uL2Yy
+ZnMvPGRpc2s+LywKPj4gaW4gd2hlcmUgd2UgY2FuIHN0b3JlIGFsbCByZWFkb25seSBzdGF0cyBy
+ZWxhdGVkIGVudHJpZXMgdGhlcmUgbGF0ZXIuCj4+Cj4+IEhvdyBkbyB5b3UgdGhpbms/Cj4+Cj4+
+IFRoYW5rcywKPj4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9u
+Z0Bnb29nbGUuY29tPgo+Pj4gLS0tCj4+PiAgICBEb2N1bWVudGF0aW9uL0FCSS90ZXN0aW5nL3N5
+c2ZzLWZzLWYyZnMgfCAxMCArKysrKysrKysrCj4+PiAgICBmcy9mMmZzL3N5c2ZzLmMgICAgICAg
+ICAgICAgICAgICAgICAgICAgfCAxNyArKysrKysrKysrKysrKysrKwo+Pj4gICAgMiBmaWxlcyBj
+aGFuZ2VkLCAyNyBpbnNlcnRpb25zKCspCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRp
+b24vQUJJL3Rlc3Rpbmcvc3lzZnMtZnMtZjJmcyBiL0RvY3VtZW50YXRpb24vQUJJL3Rlc3Rpbmcv
+c3lzZnMtZnMtZjJmcwo+Pj4gaW5kZXggODM0ZDBiZWNhZTZkLi5hMDFjMjY0ODRjNjkgMTAwNjQ0
+Cj4+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL0FCSS90ZXN0aW5nL3N5c2ZzLWZzLWYyZnMKPj4+ICsr
+KyBiL0RvY3VtZW50YXRpb24vQUJJL3Rlc3Rpbmcvc3lzZnMtZnMtZjJmcwo+Pj4gQEAgLTM1MCwz
+ICszNTAsMTMgQEAgRGF0ZTogICAgICAgICAgICBBcHJpbCAyMDIwCj4+PiAgICBDb250YWN0OiAg
+ICAiRGFlaG8gSmVvbmciIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4+PiAgICBEZXNjcmlwdGlv
+bjogICAgICAgIEdpdmUgYSB3YXkgdG8gY2hhbmdlIGlvc3RhdF9wZXJpb2QgdGltZS4gM3NlY3Mg
+YnkgZGVmYXVsdC4KPj4+ICAgICAgICAgICAgICAgIFRoZSBuZXcgaW9zdGF0IHRyYWNlIGdpdmVz
+IHN0YXRzIGdhcCBnaXZlbiB0aGUgcGVyaW9kLgo+Pj4gKwo+Pj4gK1doYXQ6ICAgICAgICAgICAg
+ICAgIC9zeXMvZnMvZjJmcy88ZGlzaz4vY29tcHJfaW5vZGUKPj4+ICtEYXRlOiAgICAgICAgICAg
+ICAgICBPY3RvYmVyIDIwMjAKPj4+ICtDb250YWN0OiAgICAgIkRhZWhvIEplb25nIiA8ZGFlaG9q
+ZW9uZ0Bnb29nbGUuY29tPgo+Pj4gK0Rlc2NyaXB0aW9uOiBTaG93IGNvbXByZXNzZWQgaW5vZGUg
+Y291bnQKPj4+ICsKPj4+ICtXaGF0OiAgICAgICAgICAgICAgICAvc3lzL2ZzL2YyZnMvPGRpc2s+
+L2NvbXByX2Jsb2Nrcwo+Pj4gK0RhdGU6ICAgICAgICAgICAgICAgIE9jdG9iZXIgMjAyMAo+Pj4g
+K0NvbnRhY3Q6ICAgICAiRGFlaG8gSmVvbmciIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4+PiAr
+RGVzY3JpcHRpb246IFNob3cgY29tcHJlc3NlZCBibG9jayBjb3VudAo+Pj4gZGlmZiAtLWdpdCBh
+L2ZzL2YyZnMvc3lzZnMuYyBiL2ZzL2YyZnMvc3lzZnMuYwo+Pj4gaW5kZXggOTRjOThlNDEyYWEx
+Li43MTM5YTI5YTAwZDMgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZzL3N5c2ZzLmMKPj4+ICsrKyBi
+L2ZzL2YyZnMvc3lzZnMuYwo+Pj4gQEAgLTIyMyw2ICsyMjMsMTkgQEAgc3RhdGljIHNzaXplX3Qg
+YXZnX3ZibG9ja3Nfc2hvdyhzdHJ1Y3QgZjJmc19hdHRyICphLAo+Pj4gICAgICAgIGYyZnNfdXBk
+YXRlX3NpdF9pbmZvKHNiaSk7Cj4+PiAgICAgICAgcmV0dXJuIHNwcmludGYoYnVmLCAiJWxsdVxu
+IiwgKHVuc2lnbmVkIGxvbmcgbG9uZykoc2ktPmF2Z192YmxvY2tzKSk7Cj4+PiAgICB9Cj4+PiAr
+Cj4+PiArc3RhdGljIHNzaXplX3QgY29tcHJfaW5vZGVfc2hvdyhzdHJ1Y3QgZjJmc19hdHRyICph
+LAo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IGYyZnNfc2JfaW5mbyAq
+c2JpLCBjaGFyICpidWYpCj4+PiArewo+Pj4gKyAgICAgcmV0dXJuIHNwcmludGYoYnVmLCAiJXVc
+biIsIGF0b21pY19yZWFkKCZzYmktPmNvbXByX2lub2RlKSk7Cj4+PiArfQo+Pj4gKwo+Pj4gK3N0
+YXRpYyBzc2l6ZV90IGNvbXByX2Jsb2Nrc19zaG93KHN0cnVjdCBmMmZzX2F0dHIgKmEsCj4+PiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGNo
+YXIgKmJ1ZikKPj4+ICt7Cj4+PiArICAgICByZXR1cm4gc3ByaW50ZihidWYsICIlbGx1XG4iLCBh
+dG9taWM2NF9yZWFkKCZzYmktPmNvbXByX2Jsb2NrcykpOwo+Pj4gK30KPj4+ICsKPj4+ICAgICNl
+bmRpZgo+Pj4KPj4+ICAgIHN0YXRpYyBzc2l6ZV90IG1haW5fYmxrYWRkcl9zaG93KHN0cnVjdCBm
+MmZzX2F0dHIgKmEsCj4+PiBAQCAtNTkxLDYgKzYwNCw4IEBAIEYyRlNfU1RBVF9BVFRSKFNUQVRf
+SU5GTywgZjJmc19zdGF0X2luZm8sIGdjX2JhY2tncm91bmRfY2FsbHMsIGJnX2djKTsKPj4+ICAg
+IEYyRlNfR0VORVJBTF9ST19BVFRSKG1vdmVkX2Jsb2Nrc19iYWNrZ3JvdW5kKTsKPj4+ICAgIEYy
+RlNfR0VORVJBTF9ST19BVFRSKG1vdmVkX2Jsb2Nrc19mb3JlZ3JvdW5kKTsKPj4+ICAgIEYyRlNf
+R0VORVJBTF9ST19BVFRSKGF2Z192YmxvY2tzKTsKPj4+ICtGMkZTX0dFTkVSQUxfUk9fQVRUUihj
+b21wcl9pbm9kZSk7Cj4+PiArRjJGU19HRU5FUkFMX1JPX0FUVFIoY29tcHJfYmxvY2tzKTsKPj4+
+ICAgICNlbmRpZgo+Pj4KPj4+ICAgICNpZmRlZiBDT05GSUdfRlNfRU5DUllQVElPTgo+Pj4gQEAg
+LTY3NSw2ICs2OTAsOCBAQCBzdGF0aWMgc3RydWN0IGF0dHJpYnV0ZSAqZjJmc19hdHRyc1tdID0g
+ewo+Pj4gICAgICAgIEFUVFJfTElTVChtb3ZlZF9ibG9ja3NfZm9yZWdyb3VuZCksCj4+PiAgICAg
+ICAgQVRUUl9MSVNUKG1vdmVkX2Jsb2Nrc19iYWNrZ3JvdW5kKSwKPj4+ICAgICAgICBBVFRSX0xJ
+U1QoYXZnX3ZibG9ja3MpLAo+Pj4gKyAgICAgQVRUUl9MSVNUKGNvbXByX2lub2RlKSwKPj4+ICsg
+ICAgIEFUVFJfTElTVChjb21wcl9ibG9ja3MpLAo+Pj4gICAgI2VuZGlmCj4+PiAgICAgICAgTlVM
+TCwKPj4+ICAgIH07Cj4+Pgo+IC4KPiAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZz
+LWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5l
+dC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
