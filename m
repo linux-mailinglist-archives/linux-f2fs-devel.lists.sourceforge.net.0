@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B4282C99FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Dec 2020 09:56:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D1EC2C9A46
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Dec 2020 10:00:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kk1Rz-0006i4-E3; Tue, 01 Dec 2020 08:55:55 +0000
+	id 1kk1WK-0003GI-Et; Tue, 01 Dec 2020 09:00:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kk1Ru-0006hm-UJ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Dec 2020 08:55:51 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kk1WI-0003GA-KJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Dec 2020 09:00:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sLzTkatD7/o74isLMuRjBvPXdhS0+SUyildg8qtiewM=; b=TfrNPOxu+2MBn7ilSQlqgupkmr
- ULN1VFEp1N7AaLYlrSAlGxC2hjyf3PTANc6liqtmKuGH2Vb1weyljSUFvYIFqFTEsqATUxezUXEAE
- CWaYJZd+QvEzyEWD5NxqiN3Nv6EpeQs/CMAYWENRYI1D1GrHXuRQVqwwhELT7Roljfrk=;
+ bh=b+n3gCHZzEsnfyLQOnvCgPZH2J1EXIGanAaPJsVnokU=; b=BKIgS2/0iS0ZP2ImBp5rgDlqvB
+ sgEnOSVV50d7qaWOKcWgJ0hPyHN48KKbC1sUyDxKetT6vJ/q6H2sBdD/igd2uwXsQUOaTJ9Hzvmy4
+ 90bxjMTWqvn3qXkvGJsKp8zilDl2YaAMqyt+fvNfS6LrdgCd+Jwb2dsLqLJ8KBXOXtU0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sLzTkatD7/o74isLMuRjBvPXdhS0+SUyildg8qtiewM=; b=j/+JeB1Kqj0dFN1qCF3eE3WX7h
- M5QBnvcfEAArqRfjBNDzQG0XRZLCMDV/ulMV31esYnyMGM/09C7PVu4DqayRSWbfIuvrTG69o83j+
- Zd5j1UWaykLBGh7Dzw0eHbH8jGsQ+QDu9zp8TSgXaXrc8uBy9hCeC/yQjGkurwMCSSb4=;
+ bh=b+n3gCHZzEsnfyLQOnvCgPZH2J1EXIGanAaPJsVnokU=; b=S44nqqQdGkTmq7vygO2GmEeplp
+ 9R5yGS6vV15DN5TzqNEvUEOnMclWPr4fzhdozrxEA/LBYVe30hKrj+Zji3yahfILz0i/I1UG0R2NH
+ P0hO2B3mR7vRogAY0w4BfthV/FinediIRGNJnjfi/ayAulxf0EPlTJJ9dEZkeVJPsdr0=;
 Received: from szxga05-in.huawei.com ([45.249.212.191])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kk1Rp-00Dgf1-Gg
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Dec 2020 08:55:50 +0000
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4ClbXG4vwQzhlLr;
- Tue,  1 Dec 2020 16:55:10 +0800 (CST)
+ id 1kk1W9-00Dgym-Gy
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Dec 2020 09:00:22 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4ClbdT3v1SzhlNJ;
+ Tue,  1 Dec 2020 16:59:41 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.206) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 1 Dec 2020
- 16:55:31 +0800
+ (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 1 Dec 2020
+ 17:00:02 +0800
 To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
  <kernel-team@android.com>
 References: <20201126022416.3068426-1-jaegeuk@kernel.org>
- <20201201040904.GA3858797@google.com>
+ <20201126022416.3068426-2-jaegeuk@kernel.org>
+ <20201201040944.GD3858797@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <107bda4f-4fd7-2d9d-313a-f1d4bcbe13bd@huawei.com>
-Date: Tue, 1 Dec 2020 16:55:30 +0800
+Message-ID: <57ca6cbd-6378-6ede-dc4a-47e0dfc0f13a@huawei.com>
+Date: Tue, 1 Dec 2020 17:00:01 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20201201040904.GA3858797@google.com>
+In-Reply-To: <20201201040944.GD3858797@google.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -65,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kk1Rp-00Dgf1-Gg
-Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: rename logical_to_blk and
- blk_to_logical
+X-Headers-End: 1kk1W9-00Dgym-Gy
+Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: use new conversion functions
+ between blks and bytes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,12 +86,8 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2020/12/1 12:09, Jaegeuk Kim wrote:
-> Forgot to add f2fs mailing list.
-> 
 > On 11/25, Jaegeuk Kim wrote:
->> This patch renames two functions like below having u64.
->>   - logical_to_blk to bytes_to_blks
->>   - blk_to_logical to blks_to_bytes
+>> This patch cleans up blks and bytes conversions.
 >>
 >> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
