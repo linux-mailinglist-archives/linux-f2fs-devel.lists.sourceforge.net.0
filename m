@@ -2,72 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D0DD2CCCD2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 03:49:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C0122CCD1B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 04:14:54 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kkegZ-0002Qv-Hf; Thu, 03 Dec 2020 02:49:35 +0000
+	id 1kkf51-0003hj-4y; Thu, 03 Dec 2020 03:14:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kkegX-0002Qo-Qi
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:49:33 +0000
+ (envelope-from <mirq-linux@rere.qmqm.pl>)
+ id 1kkf4z-0003hZ-Ro; Thu, 03 Dec 2020 03:14:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=woP6ecB/iJP0qoyXuJEubSZ+dxsWJh+pXXyBZr2hFHw=; b=L3ZLr2LC0RC9gFtoH2DoHxL9Yk
- M7NFPky/qqWqEOmiJNDN/AhDrtjnvFHSyugkMaERYDmjXiYTeFqVRYjJESvE7hHjRV5NRfNgBn9Xe
- Uea7p/lFW52Gazl++PbnPTzC+WIlYOWqVIOP7QKnfNcVx7yMDZE2tQj5YSUJWzn+ZIBQ=;
+ bh=o7/n+cXqcfYHZjPfYt3Sl0Wq4HY2KAxNBEdItthGOJI=; b=LBbTuSke6e9r0h+Ixbdt/xSj1C
+ AXdSHYVuRUpsF3BzBOM8qPDtkPVMohEx0tfQkbi+1ZHYXMtrZkzVD61zNyPfCw521R/RAulnjfyRt
+ DmzeCjEiQW9/qmlcaNwhBWZCW/t2uJ/g7+8jwoYfwhWlfuQkwWhhyKsRkWm1a/0onn/I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=woP6ecB/iJP0qoyXuJEubSZ+dxsWJh+pXXyBZr2hFHw=; b=bupqrJxnwp872pBA1KqKVFNoX6
- MBxhHdMejOkK87v5DRegCYYaldarxXgvzNfawLgSbp/jpLmIv/VRHM1b9hOOG4CD06slWAFmfKJbq
- 7/0902Y5LIjgIseJ/A4ZPEZWWGyPVIwYhGZ7ldVdB2vLIe/4yygmCFM2cpn1qfTvak+c=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=o7/n+cXqcfYHZjPfYt3Sl0Wq4HY2KAxNBEdItthGOJI=; b=QdAko9U3MMTZBEfmH1YeTxQFdx
+ FJ99YmaTezwSuuKNUa0BgrebENNv8NLghg7sv0a4TgipspJ3+WGv0rpBmbZ7/nHrcg0sdB6vKbmZt
+ bMH1h7Zfu2eQxAhU6nuFGtmsNaxlA6ZwSC041bsLoAu7fycsbqPXVzn8hrnu8Nygv1Vs=;
+Received: from rere.qmqm.pl ([91.227.64.183])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kkegO-00Gy16-Jh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:49:33 +0000
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CmgJb6xzwz15VGW;
- Thu,  3 Dec 2020 10:48:47 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 3 Dec 2020
- 10:49:12 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <jaegeuk@kernel.org>
-References: <20201030041035.394565-1-daeho43@gmail.com>
- <20201030041035.394565-2-daeho43@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <dcf074e3-821c-6858-eb17-63dcc05e7039@huawei.com>
-Date: Thu, 3 Dec 2020 10:49:12 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1kkf4q-00CVyl-BH; Thu, 03 Dec 2020 03:14:49 +0000
+Received: from remote.user (localhost [127.0.0.1])
+ by rere.qmqm.pl (Postfix) with ESMTPSA id 4CmgtH6LsqzDf;
+ Thu,  3 Dec 2020 04:14:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
+ t=1606965273; bh=ZdAOG3NcuHGK7lFYYvnqJKsMgeqVqed0k+AuMpqBsVk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GbJ6klnUee1HbJVtw4KbzKPz4NHSRXuqMt8jfsssGDrrXWb+AvlXHq3ixQPcK78Nk
+ 9fSBwuY0GonAcufYJEOaZksH29dY7d0okUcxXy9ZRT4Rb3BRcgkUdO2PblQoR9bnrz
+ SSwooLfwoxjfsFCd/eN2JFpaAD48NXJk4NUDXxDYkJ9T01VyuVtPmbsVHlcLeKXorW
+ ATi1zQlQaXpUBMVLahgIG6Es64dQNVKOxMDLa1c+vkauJAqEQLYECYl6xFD6YjzpzS
+ yAxqcO2/Bzlh19IG28c8VBQLOgpolEx5P17ixPpGzJlyXhFNzZ6mGIPzqIvaxs80UO
+ NKWwFyrmBzQIg==
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.102.4 at mail
+Date: Thu, 3 Dec 2020 04:14:29 +0100
+From: =?iso-8859-2?Q?Micha=B3_Miros=B3aw?= <mirq-linux@rere.qmqm.pl>
+To: Nick Terrell <terrelln@fb.com>
+Message-ID: <20201203031429.GA13095@qmqm.qmqm.pl>
+References: <20201202203242.1187898-1-nickrterrell@gmail.com>
+ <20201202203242.1187898-2-nickrterrell@gmail.com>
+ <20201203011606.GA20621@qmqm.qmqm.pl>
+ <297D9C8B-5F4D-4E3B-A5FD-DA292D8BA12A@fb.com>
 MIME-Version: 1.0
-In-Reply-To: <20201030041035.394565-2-daeho43@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <297D9C8B-5F4D-4E3B-A5FD-DA292D8BA12A@fb.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kkegO-00Gy16-Jh
-Subject: Re: [f2fs-dev] [PATCH v7 2/2] f2fs: add
- F2FS_IOC_SET_COMPRESS_OPTION ioctl
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kkf4q-00CVyl-BH
+Subject: Re: [f2fs-dev] [PATCH v6 1/3] lib: zstd: Add kernel-specific API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,251 +85,122 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: "squashfs-devel@lists.sourceforge.net"
+ <squashfs-devel@lists.sourceforge.net>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ Christoph Hellwig <hch@infradead.org>, Nick Terrell <nickrterrell@gmail.com>,
+ Yann Collet <cyan@fb.com>, LKML <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, Petr Malat <oss@malat.biz>,
+ Chris Mason <clm@fb.com>,
+ "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
+ Kernel Team <Kernel-team@fb.com>, Niket Agarwal <niketa@fb.com>,
+ Btrfs BTRFS <linux-btrfs@vger.kernel.org>, Johannes Weiner <jweiner@fb.com>
+Content-Type: text/plain; charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jaegeuk, not sure, is it too late to merge this cleanup into original patch?
+On Thu, Dec 03, 2020 at 01:42:03AM +0000, Nick Terrell wrote:
+> =
 
- From a5c63ec58e0cda6eb5d186b46942eea46422b7a9 Mon Sep 17 00:00:00 2001
-From: Chao Yu <yuchao0@huawei.com>
-Date: Thu, 3 Dec 2020 10:04:26 +0800
-Subject: [PATCH] f2fs: remove f2fs_is_compress_algorithm_valid() for cleanup
+> =
 
-No logic changes.
+> > On Dec 2, 2020, at 5:16 PM, Micha=B3 Miros=B3aw <mirq-linux@rere.qmqm.p=
+l> wrote:
+> > =
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-  fs/f2fs/compress.c | 5 -----
-  fs/f2fs/f2fs.h     | 5 -----
-  fs/f2fs/file.c     | 2 +-
-  3 files changed, 1 insertion(+), 11 deletions(-)
+> > On Wed, Dec 02, 2020 at 12:32:40PM -0800, Nick Terrell wrote:
+> >> From: Nick Terrell <terrelln@fb.com>
+> >> =
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index dfadbc78946c..869b047a4801 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -574,11 +574,6 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
-  	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
-  }
+> >> This patch:
+> >> - Moves `include/linux/zstd.h` -> `lib/zstd/zstd.h`
+> >> - Adds a new API in `include/linux/zstd.h` that is functionally
+> >>  equivalent to the in-use subset of the current API. Functions are
+> >>  renamed to avoid symbol collisions with zstd, to make it clear it is
+> >>  not the upstream zstd API, and to follow the kernel style guide.
+> >> - Updates all callers to use the new API.
+> >> =
 
--bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
--{
--	return f2fs_cops[algorithm] != NULL;
--}
--
-  static mempool_t *compress_page_pool;
-  static int num_compress_pages = 512;
-  module_param(num_compress_pages, uint, 0444);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b70c8d553439..17b45c2d2b04 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3882,7 +3882,6 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
-  int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
-  void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
-  bool f2fs_is_compress_backend_ready(struct inode *inode);
--bool f2fs_is_compress_algorithm_valid(unsigned char algorithm);
-  int f2fs_init_compress_mempool(void);
-  void f2fs_destroy_compress_mempool(void);
-  void f2fs_do_decompress_pages(struct decompress_io_ctx *dic, bool verity);
-@@ -3927,10 +3926,6 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
-  	/* not support compression */
-  	return false;
-  }
--static inline bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
--{
--	return false;
--}
-  static inline struct page *f2fs_compress_control_page(struct page *page)
-  {
-  	WARN_ON_ONCE(1);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 300355fe25f0..0453b441228d 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4016,7 +4016,7 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-  	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
-  	f2fs_mark_inode_dirty_sync(inode, true);
+> >> There are no functional changes in this patch. Since there are no
+> >> functional change, I felt it was okay to update all the callers in a
+> >> single patch, since once the API is approved, the callers are
+> >> mechanically changed.
+> > [...]
+> >> --- a/lib/decompress_unzstd.c
+> >> +++ b/lib/decompress_unzstd.c
+> > [...]
+> >> static int INIT handle_zstd_error(size_t ret, void (*error)(char *x))
+> >> {
+> >> -	const int err =3D ZSTD_getErrorCode(ret);
+> >> -
+> >> -	if (!ZSTD_isError(ret))
+> >> +	if (!zstd_is_error(ret))
+> >> 		return 0;
+> >> =
 
--	if (!f2fs_is_compress_algorithm_valid(option.algorithm))
-+	if (!f2fs_is_compress_backend_ready(inode))
-  		f2fs_warn(sbi, "compression algorithm is successfully set, "
-  			"but current kernel doesn't support this algorithm.");
-  out:
--- 
-2.26.2
+> >> -	switch (err) {
+> >> -	case ZSTD_error_memory_allocation:
+> >> -		error("ZSTD decompressor ran out of memory");
+> >> -		break;
+> >> -	case ZSTD_error_prefix_unknown:
+> >> -		error("Input is not in the ZSTD format (wrong magic bytes)");
+> >> -		break;
+> >> -	case ZSTD_error_dstSize_tooSmall:
+> >> -	case ZSTD_error_corruption_detected:
+> >> -	case ZSTD_error_checksum_wrong:
+> >> -		error("ZSTD-compressed data is corrupt");
+> >> -		break;
+> >> -	default:
+> >> -		error("ZSTD-compressed data is probably corrupt");
+> >> -		break;
+> >> -	}
+> >> +	error("ZSTD decompression failed");
+> >> 	return -1;
+> >> }
+> > =
 
+> > This looses diagnostics specificity - is this intended? At least the
+> > out-of-memory condition seems useful to distinguish.
+> =
 
+> Good point. The zstd API no longer exposes the error code enum,
+> but it does expose zstd_get_error_name() which can be used here.
+> I was thinking that the string needed to be static for some reason, but
+> that is not the case. I will make that change.
+> =
 
+> >> +size_t zstd_compress_stream(zstd_cstream *cstream,
+> >> +	struct zstd_out_buffer *output, struct zstd_in_buffer *input)
+> >> +{
+> >> +	ZSTD_outBuffer o;
+> >> +	ZSTD_inBuffer i;
+> >> +	size_t ret;
+> >> +
+> >> +	memcpy(&o, output, sizeof(o));
+> >> +	memcpy(&i, input, sizeof(i));
+> >> +	ret =3D ZSTD_compressStream(cstream, &o, &i);
+> >> +	memcpy(output, &o, sizeof(o));
+> >> +	memcpy(input, &i, sizeof(i));
+> >> +	return ret;
+> >> +}
+> > =
 
+> > Is all this copying necessary? How is it different from type-punning by
+> > direct pointer cast?
+> =
 
-On 2020/10/30 12:10, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> Added a new F2FS_IOC_SET_COMPRESS_OPTION ioctl to change file
-> compression option of a file.
-> 
-> struct f2fs_comp_option {
->      u8 algorithm;         => compression algorithm
->                            => 0:lzo, 1:lz4, 2:zstd, 3:lzorle
->      u8 log_cluster_size;  => log scale cluster size
->                            => 2 ~ 8
-> };
-> 
-> struct f2fs_comp_option option;
-> 
-> option.algorithm = 1;
-> option.log_cluster_size = 7;
-> 
-> ioctl(fd, F2FS_IOC_SET_COMPRESS_OPTION, &option);
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> 
-> v6: changed the function name of checking compression algorithm validity.
-> v5: allowed to set algorithm which is not currently enabled by kernel.
-> v4: changed commit message.
-> v3: changed the error number more specific.
->      folded in fix for build breakage reported by kernel test robot
->      <lkp@intel.com> and Dan Carpenter <dan.carpenter@oracle.com>.
-> v2: added ioctl description.
-> ---
->   fs/f2fs/compress.c |  5 +++++
->   fs/f2fs/f2fs.h     |  7 ++++++
->   fs/f2fs/file.c     | 54 ++++++++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 66 insertions(+)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 7895186cc765..b0144670d320 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -514,6 +514,11 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
->   	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
->   }
->   
-> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
-> +{
-> +	return f2fs_cops[algorithm] != NULL;
-> +}
-> +
->   static mempool_t *compress_page_pool;
->   static int num_compress_pages = 512;
->   module_param(num_compress_pages, uint, 0444);
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index a33c90cf979b..70a8a2196888 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -435,6 +435,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
->   						struct f2fs_sectrim_range)
->   #define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
->   						struct f2fs_comp_option)
-> +#define F2FS_IOC_SET_COMPRESS_OPTION	_IOW(F2FS_IOCTL_MAGIC, 22,	\
-> +						struct f2fs_comp_option)
->   
->   /*
->    * should be same as XFS_IOC_GOINGDOWN.
-> @@ -3915,6 +3917,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
->   int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
->   void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
->   bool f2fs_is_compress_backend_ready(struct inode *inode);
-> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm);
->   int f2fs_init_compress_mempool(void);
->   void f2fs_destroy_compress_mempool(void);
->   void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity);
-> @@ -3945,6 +3948,10 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
->   	/* not support compression */
->   	return false;
->   }
-> +static inline bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
-> +{
-> +	return false;
-> +}
->   static inline struct page *f2fs_compress_control_page(struct page *page)
->   {
->   	WARN_ON_ONCE(1);
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index bd52df84219d..be56702e4939 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3963,6 +3963,57 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
->   	return 0;
->   }
->   
-> +static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-> +{
-> +	struct inode *inode = file_inode(filp);
-> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> +	struct f2fs_comp_option option;
-> +	int ret = 0;
-> +
-> +	if (!f2fs_sb_has_compression(sbi))
-> +		return -EOPNOTSUPP;
-> +
-> +	if (!(filp->f_mode & FMODE_WRITE))
-> +		return -EBADF;
-> +
-> +	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
-> +				sizeof(option)))
-> +		return -EFAULT;
-> +
-> +	if (!f2fs_compressed_file(inode) ||
-> +			option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
-> +			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
-> +			option.algorithm >= COMPRESS_MAX)
-> +		return -EINVAL;
-> +
-> +	file_start_write(filp);
-> +	inode_lock(inode);
-> +
-> +	if (f2fs_is_mmap_file(inode) || get_dirty_pages(inode)) {
-> +		ret = -EBUSY;
-> +		goto out;
-> +	}
-> +
-> +	if (inode->i_size != 0) {
-> +		ret = -EFBIG;
-> +		goto out;
-> +	}
-> +
-> +	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
-> +	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
-> +	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
-> +	f2fs_mark_inode_dirty_sync(inode, true);
-> +
-> +	if (!f2fs_is_compress_algorithm_valid(option.algorithm))
-> +		f2fs_warn(sbi, "compression algorithm is successfully set, "
-> +			"but current kernel doesn't support this algorithm.");
-> +out:
-> +	inode_unlock(inode);
-> +	file_end_write(filp);
-> +
-> +	return ret;
-> +}
-> +
->   long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   {
->   	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
-> @@ -4053,6 +4104,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   		return f2fs_sec_trim_file(filp, arg);
->   	case F2FS_IOC_GET_COMPRESS_OPTION:
->   		return f2fs_ioc_get_compress_option(filp, arg);
-> +	case F2FS_IOC_SET_COMPRESS_OPTION:
-> +		return f2fs_ioc_set_compress_option(filp, arg);
->   	default:
->   		return -ENOTTY;
->   	}
-> @@ -4224,6 +4277,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
->   	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
->   	case F2FS_IOC_SEC_TRIM_FILE:
->   	case F2FS_IOC_GET_COMPRESS_OPTION:
-> +	case F2FS_IOC_SET_COMPRESS_OPTION:
->   		break;
->   	default:
->   		return -ENOIOCTLCMD;
-> 
+> If breaking strict aliasing and type-punning by pointer casing is okay, t=
+hen
+> we can do that here. These memcpys will be negligible for performance, but
+> type-punning would be more succinct if allowed.
+
+Ah, this might break LTO builds due to strict aliasing violation.
+So I would suggest to just #define the ZSTD names to kernel ones
+for the library code.  Unless there is a cleaner solution...
+
+Best Regards
+Micha=B3=A0Miros=B3aw
 
 
 _______________________________________________
