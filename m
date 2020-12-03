@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1DA72CD81D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 14:46:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B40B2CDEFF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 20:33:09 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kkow5-00063v-0T; Thu, 03 Dec 2020 13:46:17 +0000
+	id 1kkuLg-0007Bd-PB; Thu, 03 Dec 2020 19:33:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <tytso@mit.edu>) id 1kkovq-00063W-5C
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 13:46:02 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kkuLf-0007BC-4f
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 19:33:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ES4ERj1cnhFwDNi2dwh/q2Gl2T9Ed+f/+AV0TUXjD2c=; b=S2oY4wJ9nbiy7TDD9KrjtjGNBg
- +x0SAaGcr4W1DCZd/ddlq7bBcnpt9HOicOsZXHbKZKcpOu4h7xwZBMixtnQgTw/wfA20Ctt4n41E8
- +Y4E6/3VBOK53EiQPXjgVEdNres0gENH83VRHWxI25/WxLvRwZsQRvZ71AQm46kpUav8=;
+ bh=oRUrQ9NDModKSNTUVouivJQb2JQyPSwe+vRQNWtVy4o=; b=QCS00n2MePg8oQHG8NWy9myK+g
+ uEvj7WRvBaKYmbAF4sT6yGPiBgXSgR4Y/5uWD0GuMHi/S0aBVy0hUmcVAF0JVp1RJfd26yway4Z5g
+ 3Gc9ARxnE0q5i6NU3BidlNxRD2/DLGj1b783kEfNMIIk/xWotNjvX52IP5Ruk/IyuBfs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,43 +29,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ES4ERj1cnhFwDNi2dwh/q2Gl2T9Ed+f/+AV0TUXjD2c=; b=RgdX1pRxlLXjJL5owiYBnFYd6r
- VGYbzCrOeW7U4AxYz6MePYAJvISJzblgq+eCmW4PDb6Ex22YBd9V4XIVjLGsSbQ2IIGNIXb0ByWQ+
- Q2gQgGT7U+n4ucRX2ddPSYkS4T2AladbjQRi0CEBVtBT7HODEGAq5y7mlf2fdkXKqTE0=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=oRUrQ9NDModKSNTUVouivJQb2JQyPSwe+vRQNWtVy4o=; b=HBIhyFYBdRU9Efs4lHtwtTVdib
+ SjlWfill3P9HbzocTA3Q1B31aIBDgmEAZHmFxo0htyMz2A+NF9JQqrQGN05QqgdC00gEsOHrN7LKO
+ EZpBz0Er34mkFkf77mE1dICU4t6i6iynWGZosWm3tnlITqadDT2LLwUepwP5h28FdB4E=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kkovm-00DTE3-W3
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 13:46:02 +0000
-Received: from callcc.thunk.org (pool-72-74-133-215.bstnma.fios.verizon.net
- [72.74.133.215]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 0B3DjdIr014834
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 3 Dec 2020 08:45:40 -0500
-Received: by callcc.thunk.org (Postfix, from userid 15806)
- id 58FF3420136; Thu,  3 Dec 2020 08:45:39 -0500 (EST)
-Date: Thu, 3 Dec 2020 08:45:39 -0500
-From: "Theodore Y. Ts'o" <tytso@mit.edu>
-To: Satya Tangirala <satyat@google.com>
-Message-ID: <20201203134539.GB441757@mit.edu>
-References: <20201117140708.1068688-1-satyat@google.com>
- <20201117140708.1068688-7-satyat@google.com>
+ id 1kkuLW-00DwM1-0q
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 19:33:02 +0000
+Date: Thu, 3 Dec 2020 11:32:34 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1607023956;
+ bh=G81b7sAQkDFZGaWOTLOclHTz9c5GLdvtf0TzZVW7prg=;
+ h=From:To:Cc:Subject:References:In-Reply-To:From;
+ b=LdJ+jcDzFI72yCDHKCUEwqPWu7KQONp/q26z8c0MOUsVFnfSnaiSnDuRfScnIR8G6
+ V5yZK8sti/fes59TgG+MqANLcXzDFwwqAmtrjgGUmDCw7Qo4AU6xGcBgZhpFN6M5Tv
+ PBxjOxlrga5pI/Q9AnPGqkChZFQAfpoUIVyRwsk5/jl2kLGFehgm4QkYHGZ+We/8pS
+ yhd+lA3U68dwZI86furD8bDekC5Pt3rarIrgGyAfj158PfGNk+0obf4j0wRv+qKrJg
+ F159Ga6F6tRstcpPGtqEt6OuauGSh3BKOVNEbjIZKwf276zl26BSHsnOM0osmiy+u2
+ m3vv0vM2bWRDw==
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <X8k9UoUKcyThlJNU@gmail.com>
+References: <20201203061715.60447-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201117140708.1068688-7-satyat@google.com>
-X-Spam-Score: 0.4 (/)
+In-Reply-To: <20201203061715.60447-1-yuchao0@huawei.com>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [18.9.28.11 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
-X-Headers-End: 1kkovm-00DTE3-W3
-Subject: Re: [f2fs-dev] [PATCH v7 6/8] ext4: support direct I/O with fscrypt
- using blk-crypto
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kkuLW-00DwM1-0q
+Subject: Re: [f2fs-dev] [PATCH v6] f2fs: compress: support compress level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,41 +79,80 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-xfs@vger.kernel.org,
- "Darrick J . Wong" <darrick.wong@oracle.com>, linux-kernel@vger.kernel.org,
- Eric Biggers <ebiggers@google.com>, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
- linux-block@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Nov 17, 2020 at 02:07:06PM +0000, Satya Tangirala wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Wire up ext4 with fscrypt direct I/O support. Direct I/O with fscrypt is
-> only supported through blk-crypto (i.e. CONFIG_BLK_INLINE_ENCRYPTION must
-> have been enabled, the 'inlinecrypt' mount option must have been specified,
-> and either hardware inline encryption support must be present or
-> CONFIG_BLK_INLINE_ENCYRPTION_FALLBACK must have been enabled). Further,
-> direct I/O on encrypted files is only supported when the *length* of the
-> I/O is aligned to the filesystem block size (which is *not* necessarily the
-> same as the block device's block size).
-> 
-> fscrypt_limit_io_blocks() is called before setting up the iomap to ensure
-> that the blocks of each bio that iomap will submit will have contiguous
-> DUNs. Note that fscrypt_limit_io_blocks() is normally a no-op, as normally
-> the DUNs simply increment along with the logical blocks. But it's needed
-> to handle an edge case in one of the fscrypt IV generation methods.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> Co-developed-by: Satya Tangirala <satyat@google.com>
-> Signed-off-by: Satya Tangirala <satyat@google.com>
-> Reviewed-by: Jaegeuk Kim <jaegeuk@kernel.org>
+On Thu, Dec 03, 2020 at 02:17:15PM +0800, Chao Yu wrote:
+> +config F2FS_FS_LZ4HC
+> +	bool "LZ4HC compression support"
+> +	depends on F2FS_FS_COMPRESSION
+> +	depends on F2FS_FS_LZ4
+> +	select LZ4HC_COMPRESS
+> +	default y
+> +	help
+> +	  Support LZ4HC compress algorithm, if unsure, say Y.
+> +
 
-Acked-by: Theodore Ts'o <tytso@mit.edu>
+It would be helpful to mention that LZ4HC is on-disk compatible with LZ4.
 
+>  static int lz4_compress_pages(struct compress_ctx *cc)
+>  {
+>  	int len;
+>  
+> +#ifdef CONFIG_F2FS_FS_LZ4HC
+> +	return lz4hc_compress_pages(cc);
+> +#endif
+
+This looks wrong; it always calls lz4hc compression even for regular lz4.
+
+>  static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  {
+>  	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> @@ -886,10 +939,22 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  			if (!strcmp(name, "lzo")) {
+>  				F2FS_OPTION(sbi).compress_algorithm =
+>  								COMPRESS_LZO;
+> -			} else if (!strcmp(name, "lz4")) {
+> +			} else if (!strncmp(name, "lz4", 3)) {
+
+strcmp() is fine, no need for strncmp().
+
+> @@ -1547,6 +1612,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+>  	}
+>  	seq_printf(seq, ",compress_algorithm=%s", algtype);
+>  
+> +	if (!F2FS_OPTION(sbi).compress_level)
+> +		seq_printf(seq, ":%d", F2FS_OPTION(sbi).compress_level);
+> +
+
+This looks wrong; it only prints compress_level if it is 0.
+
+> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+> index 55be7afeee90..2dcc63fe8494 100644
+> --- a/include/linux/f2fs_fs.h
+> +++ b/include/linux/f2fs_fs.h
+> @@ -275,6 +275,9 @@ struct f2fs_inode {
+>  			__u8 i_compress_algorithm;	/* compress algorithm */
+>  			__u8 i_log_cluster_size;	/* log of cluster size */
+>  			__le16 i_compress_flag;		/* compress flag */
+> +						/* 0 bit: chksum flag
+> +						 * [10,15] bits: compress level
+> +						 */
+
+What is the use case for storing the compression level on-disk?
+
+Keep in mind that compression levels are an implementation detail; the exact
+compressed data that is produced by a particular algorithm at a particular
+compression level is *not* a stable interface.  It can change when the
+compressor is updated, as long as the output continues to be compatible with the
+decompressor.
+
+So does compression level really belong in the on-disk format?
+
+- Eric
 
 
 _______________________________________________
