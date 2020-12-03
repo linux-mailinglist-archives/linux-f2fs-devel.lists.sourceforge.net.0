@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEEA52CCC99
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 03:27:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 283D22CCC6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 03:23:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kkeLE-0001r0-GB; Thu, 03 Dec 2020 02:27:32 +0000
+	id 1kkeH6-0007tg-Tk; Thu, 03 Dec 2020 02:23:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kkeGz-0001BZ-Hb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:23:09 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kkeH5-0007tL-Tp
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:23:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6X6xwMTJ6fDWaXuoRM6/v90+ksNOeEKuwmYl58pNSFs=; b=bYE9ZJq0pPWNBSFqOgXD5NZNuS
- jkDiy3iazrPrUUtHIqZ09wGbZKAN8E4HvMy9xg1tTw3bgVUBWDrSZfvyGjLysJvDbePIlAY8VdUip
- dYl4UOZWtmFFNrdB9j6akaYuCqxu6MIt80+PyWNEh/+IZqatKHetDSG5m6YcI+yGg3fU=;
+ bh=iBm79Vfm2YbF1EwXi4OCdx+aJMU9m5NdlLv54G3qcKU=; b=c8dE/nTmZ9uWKz+uqNRUmDTxnC
+ dVD6ZZscWQBRjvFAuJf8R+ZpA+HXfSb350YxraB6MuIN98W05KNO+3a99NEmas9N4gXSDoqOvdM6S
+ /0LUnIHlZSnMOrUo935UHyqJz2nDbFeRje5ETMCbnzRvZM9L24iYFsG7B5su+3AY+xFA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,20 +29,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6X6xwMTJ6fDWaXuoRM6/v90+ksNOeEKuwmYl58pNSFs=; b=MeXEePRSRye5OyKOelHNnnPxU8
- foDIAHY/qwIkSQCstWnFHlSWEPjTj8whsZ4HbtJuTl/WLlODuHSWe1BnYGldla+mTsPh5hbtyxNuu
- jU0QDJCQ+Qp5F547eCk7kf/ml+WN+o6BbLPz026Ad2AhdSfVRHCBGOcgdhPTu3bpgt2A=;
+ bh=iBm79Vfm2YbF1EwXi4OCdx+aJMU9m5NdlLv54G3qcKU=; b=GaMpIuspIsGN9fJtBnHDtVcGtc
+ 2zgTe7MVLUFz5oSyRwj38NdjHIAo9VlbjNG45jWlEzSb1pg1HwHy05GG9dZu/9wPH+YIXfEaAheRE
+ 4zgW6ghshMOukqa/r2PWHdV4HW0UJ46cRj1FcT/3NAdGDIYkXn4YZMjiBM61m8uEJk68=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kkeGu-00GwbU-Uj
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:23:09 +0000
+ id 1kkeH2-00CSpp-1Y
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 02:23:15 +0000
 From: Eric Biggers <ebiggers@kernel.org>
 Authentication-Results: mail.kernel.org;
  dkim=permerror (bad message/signature format)
 To: linux-fscrypt@vger.kernel.org
-Date: Wed,  2 Dec 2020 18:20:37 -0800
-Message-Id: <20201203022041.230976-6-ebiggers@kernel.org>
+Date: Wed,  2 Dec 2020 18:20:38 -0800
+Message-Id: <20201203022041.230976-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201203022041.230976-1-ebiggers@kernel.org>
 References: <20201203022041.230976-1-ebiggers@kernel.org>
@@ -53,9 +53,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
-X-Headers-End: 1kkeGu-00GwbU-Uj
-Subject: [f2fs-dev] [PATCH v2 5/9] fscrypt: introduce
- fscrypt_prepare_readdir()
+X-Headers-End: 1kkeH2-00CSpp-1Y
+Subject: [f2fs-dev] [PATCH v2 6/9] fscrypt: move body of
+ fscrypt_prepare_setattr() out-of-line
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,121 +76,54 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-The last remaining use of fscrypt_get_encryption_info() from filesystems
-is for readdir (->iterate_shared()).  Every other call is now in
-fs/crypto/ as part of some other higher-level operation.
-
-We need to add a new argument to fscrypt_get_encryption_info() to
-indicate whether the encryption policy is allowed to be unrecognized or
-not.  Doing this is easier if we can work with high-level operations
-rather than direct filesystem use of fscrypt_get_encryption_info().
-
-So add a function fscrypt_prepare_readdir() which wraps the call to
-fscrypt_get_encryption_info() for the readdir use case.
+In preparation for reducing the visibility of fscrypt_require_key() by
+moving it to fscrypt_private.h, move the call to it from
+fscrypt_prepare_setattr() to an out-of-line function.
 
 Reviewed-by: Andreas Dilger <adilger@dilger.ca>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/hooks.c       |  6 ++++++
- fs/ext4/dir.c           |  8 +++-----
- fs/ext4/namei.c         |  2 +-
- fs/f2fs/dir.c           |  2 +-
- fs/ubifs/dir.c          |  2 +-
- include/linux/fscrypt.h | 24 ++++++++++++++++++++++++
- 6 files changed, 36 insertions(+), 8 deletions(-)
+ fs/crypto/hooks.c       |  8 ++++++++
+ include/linux/fscrypt.h | 11 +++++++++--
+ 2 files changed, 17 insertions(+), 2 deletions(-)
 
 diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index c809a4afa057e..82f351d3113ac 100644
+index 82f351d3113ac..1c16dba222d95 100644
 --- a/fs/crypto/hooks.c
 +++ b/fs/crypto/hooks.c
-@@ -114,6 +114,12 @@ int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
+@@ -120,6 +120,14 @@ int __fscrypt_prepare_readdir(struct inode *dir)
  }
- EXPORT_SYMBOL_GPL(__fscrypt_prepare_lookup);
+ EXPORT_SYMBOL_GPL(__fscrypt_prepare_readdir);
  
-+int __fscrypt_prepare_readdir(struct inode *dir)
++int __fscrypt_prepare_setattr(struct dentry *dentry, struct iattr *attr)
 +{
-+	return fscrypt_get_encryption_info(dir);
++	if (attr->ia_valid & ATTR_SIZE)
++		return fscrypt_require_key(d_inode(dentry));
++	return 0;
 +}
-+EXPORT_SYMBOL_GPL(__fscrypt_prepare_readdir);
++EXPORT_SYMBOL_GPL(__fscrypt_prepare_setattr);
 +
  /**
   * fscrypt_prepare_setflags() - prepare to change flags with FS_IOC_SETFLAGS
   * @inode: the inode on which flags are being changed
-diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
-index 16bfbdd5007c7..c6d16353326a9 100644
---- a/fs/ext4/dir.c
-+++ b/fs/ext4/dir.c
-@@ -118,11 +118,9 @@ static int ext4_readdir(struct file *file, struct dir_context *ctx)
- 	struct buffer_head *bh = NULL;
- 	struct fscrypt_str fstr = FSTR_INIT(NULL, 0);
- 
--	if (IS_ENCRYPTED(inode)) {
--		err = fscrypt_get_encryption_info(inode);
--		if (err)
--			return err;
--	}
-+	err = fscrypt_prepare_readdir(inode);
-+	if (err)
-+		return err;
- 
- 	if (is_dx_dir(inode)) {
- 		err = ext4_dx_readdir(file, ctx);
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index 7b31aea3e0253..5fa8436cd5fae 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -1004,7 +1004,7 @@ static int htree_dirblock_to_tree(struct file *dir_file,
- 					   EXT4_DIR_REC_LEN(0));
- 	/* Check if the directory is encrypted */
- 	if (IS_ENCRYPTED(dir)) {
--		err = fscrypt_get_encryption_info(dir);
-+		err = fscrypt_prepare_readdir(dir);
- 		if (err < 0) {
- 			brelse(bh);
- 			return err;
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 47bee953fc8d8..049500f1e764c 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -1022,7 +1022,7 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
- 	int err = 0;
- 
- 	if (IS_ENCRYPTED(inode)) {
--		err = fscrypt_get_encryption_info(inode);
-+		err = fscrypt_prepare_readdir(inode);
- 		if (err)
- 			goto out;
- 
-diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
-index 009fbf844d3e6..1f33a5598b93f 100644
---- a/fs/ubifs/dir.c
-+++ b/fs/ubifs/dir.c
-@@ -514,7 +514,7 @@ static int ubifs_readdir(struct file *file, struct dir_context *ctx)
- 		return 0;
- 
- 	if (encrypted) {
--		err = fscrypt_get_encryption_info(dir);
-+		err = fscrypt_prepare_readdir(dir);
- 		if (err)
- 			return err;
- 
 diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 0c9e64969b736..8cbb26f556952 100644
+index 8cbb26f556952..b20900bb829fc 100644
 --- a/include/linux/fscrypt.h
 +++ b/include/linux/fscrypt.h
-@@ -242,6 +242,7 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
- 			     unsigned int flags);
+@@ -243,6 +243,7 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
  int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
  			     struct fscrypt_name *fname);
-+int __fscrypt_prepare_readdir(struct inode *dir);
+ int __fscrypt_prepare_readdir(struct inode *dir);
++int __fscrypt_prepare_setattr(struct dentry *dentry, struct iattr *attr);
  int fscrypt_prepare_setflags(struct inode *inode,
  			     unsigned int oldflags, unsigned int flags);
  int fscrypt_prepare_symlink(struct inode *dir, const char *target,
-@@ -537,6 +538,11 @@ static inline int __fscrypt_prepare_lookup(struct inode *dir,
+@@ -543,6 +544,12 @@ static inline int __fscrypt_prepare_readdir(struct inode *dir)
  	return -EOPNOTSUPP;
  }
  
-+static inline int __fscrypt_prepare_readdir(struct inode *dir)
++static inline int __fscrypt_prepare_setattr(struct dentry *dentry,
++					    struct iattr *attr)
 +{
 +	return -EOPNOTSUPP;
 +}
@@ -198,31 +131,17 @@ index 0c9e64969b736..8cbb26f556952 100644
  static inline int fscrypt_prepare_setflags(struct inode *inode,
  					   unsigned int oldflags,
  					   unsigned int flags)
-@@ -795,6 +801,24 @@ static inline int fscrypt_prepare_lookup(struct inode *dir,
+@@ -840,8 +847,8 @@ static inline int fscrypt_prepare_readdir(struct inode *dir)
+ static inline int fscrypt_prepare_setattr(struct dentry *dentry,
+ 					  struct iattr *attr)
+ {
+-	if (attr->ia_valid & ATTR_SIZE)
+-		return fscrypt_require_key(d_inode(dentry));
++	if (IS_ENCRYPTED(d_inode(dentry)))
++		return __fscrypt_prepare_setattr(dentry, attr);
  	return 0;
  }
  
-+/**
-+ * fscrypt_prepare_readdir() - prepare to read a possibly-encrypted directory
-+ * @dir: the directory inode
-+ *
-+ * If the directory is encrypted and it doesn't already have its encryption key
-+ * set up, try to set it up so that the filenames will be listed in plaintext
-+ * form rather than in no-key form.
-+ *
-+ * Return: 0 on success; -errno on error.  Note that the encryption key being
-+ *	   unavailable is not considered an error.
-+ */
-+static inline int fscrypt_prepare_readdir(struct inode *dir)
-+{
-+	if (IS_ENCRYPTED(dir))
-+		return __fscrypt_prepare_readdir(dir);
-+	return 0;
-+}
-+
- /**
-  * fscrypt_prepare_setattr() - prepare to change a possibly-encrypted inode's
-  *			       attributes
 -- 
 2.29.2
 
