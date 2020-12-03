@@ -2,54 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCC072CCF08
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 07:18:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 897B52CCF56
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Dec 2020 07:32:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kkhwX-0001Oy-7n; Thu, 03 Dec 2020 06:18:17 +0000
+	id 1kki9s-0005BY-Kv; Thu, 03 Dec 2020 06:32:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kkhwE-0001OH-M6
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 06:17:58 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kkhzg-0003yx-7g
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 06:21:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X0f0e7nOWbAaGqXzdJZL92lEjr1V0ymrcafQAkiUicg=; b=ddBkppKNu/9+V1OGARt4AXKxHl
- o8rzihrRLmhqRIH8ARpAc1rktxJruqaBXGRKP+qWrlWMu/11lw0ZQZn7NQaET0hCVD2e6DHIVFjer
- B9zTjy/zaGY21ctHmJUH1CKEN3avc+Xli6JSRr/R0jdktd/wMRAeOIGAmkk+HEB0orZU=;
+ bh=IOsuQ8SWGIS2kqdSD0hIxOxfwfwGVrAG/grdvgdD36I=; b=IVt/kWObVqkUllE+XyLCacR0GM
+ cUG/TqCAGC1x7wyKBDE0wH0PK5hUlE67LedelRRpHOjTtgoWSDi7V0XB9PvimVAxxzDfQEyaOrhdC
+ V7JMUhvrHOBT2DfG+urwq6jfuz5E3DqXbnEKUuEyfaMvkMcpB+ULI9e5IhtEf0JCPq80=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=X0f0e7nOWbAaGqXzdJZL92lEjr1V0ymrcafQAkiUicg=; b=b
- L5zPT56eQzgXZjw83pbhwP6DkVAmhBmU2uCWS7f3jA22p6eK3PwsrtmIRfGjMMddO1WTr3WdV60Ug
- 0OXq3WjosGEwqUKB7ddS/Qh6dVu4qixmLXy1g9AHvd/rKF0CYQ7IFMbjV8W9CkrFY0GLc3h0e5AL+
- ePKfXRZY1OPVfl2k=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=IOsuQ8SWGIS2kqdSD0hIxOxfwfwGVrAG/grdvgdD36I=; b=PpjEAAZBTSKFH4vmLvie1t9EpA
+ zmGvxd0SSXJiZjSrkXXAi5wL/4mpXbUS7R1FXQ7KOobr6uvdI2uaIalPMl6mRFSsrMovvA+oBYoJU
+ wsnY9RvvXNPXo1fUMvOEtVN54wVlrOkuSivelVohZGx0bVHCZqwVfaSGK5ZnC5vP6afU=;
 Received: from szxga06-in.huawei.com ([45.249.212.32])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kkhw8-00HBww-Fy
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 06:17:58 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cmlx2710QzhkBQ;
- Thu,  3 Dec 2020 14:17:10 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 3 Dec 2020 14:17:20 +0800
+ id 1kkhzV-00HCH0-O1
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Dec 2020 06:21:32 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cmm1F4g79zhYDB;
+ Thu,  3 Dec 2020 14:20:49 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 3 Dec 2020
+ 14:21:06 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20201030041035.394565-1-daeho43@gmail.com>
+ <20201030041035.394565-2-daeho43@gmail.com>
+ <dcf074e3-821c-6858-eb17-63dcc05e7039@huawei.com>
+ <X8h6XK6cYwXqGnV7@google.com> <X8iAyiB0RIgm/EgB@google.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Thu, 3 Dec 2020 14:17:15 +0800
-Message-ID: <20201203061715.60447-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.26.2
+Message-ID: <4ce24298-a531-723d-77a8-1a5eda181869@huawei.com>
+Date: Thu, 3 Dec 2020 14:21:06 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <X8iAyiB0RIgm/EgB@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -59,8 +66,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kkhw8-00HBww-Fy
-Subject: [f2fs-dev] [PATCH v6] f2fs: compress: support compress level
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kkhzV-00HCH0-O1
+Subject: Re: [f2fs-dev] [PATCH v7 2/2] f2fs: add
+ F2FS_IOC_SET_COMPRESS_OPTION ioctl
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,302 +81,271 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com,
+ Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Expand 'compress_algorithm' mount option to accept parameter as format of
-<algorithm>:<level>, by this way, it gives a way to allow user to do more
-specified config on lz4 and zstd compression level, then f2fs compression
-can provide higher compress ratio.
+On 2020/12/3 14:08, Jaegeuk Kim wrote:
+> On 12/02, Jaegeuk Kim wrote:
+>> On 12/03, Chao Yu wrote:
+>>> Jaegeuk, not sure, is it too late to merge this cleanup into original patch?
+>>
+>> Let me merge this on top of tree. Thanks. :)
+> 
+> I integrated this into the original patch since I had to revise this commit. :(
+> ("f2fs: avoid race condition for shinker count")
 
-In order to set compress level for lz4 algorithm, it needs to set
-CONFIG_LZ4HC_COMPRESS and CONFIG_F2FS_FS_LZ4HC config to enable lz4hc
-compress algorithm.
+It's fine to me. :)
 
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v6:
-- fix warning reported by checkpatch.pl
- Documentation/filesystems/f2fs.rst |  5 +++
- fs/f2fs/Kconfig                    |  9 ++++
- fs/f2fs/compress.c                 | 40 +++++++++++++++--
- fs/f2fs/f2fs.h                     |  9 ++++
- fs/f2fs/super.c                    | 72 +++++++++++++++++++++++++++++-
- include/linux/f2fs_fs.h            |  3 ++
- 6 files changed, 133 insertions(+), 5 deletions(-)
+Thanks,
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index fd413d319e93..73ab31bbf694 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -249,6 +249,11 @@ checkpoint=%s[:%u[%]]	 Set to "disable" to turn off checkpointing. Set to "enabl
- 			 This space is reclaimed once checkpoint=enable.
- compress_algorithm=%s	 Control compress algorithm, currently f2fs supports "lzo",
- 			 "lz4", "zstd" and "lzo-rle" algorithm.
-+compress_algorithm=%s:%d Control compress algorithm and its compress level, now, only
-+			 "lz4" and "zstd" support compress level config.
-+			 algorithm	level range
-+			 lz4		3 - 16
-+			 zstd		1 - 22
- compress_log_size=%u	 Support configuring compress cluster size, the size will
- 			 be 4KB * (1 << %u), 16KB is minimum size, also it's
- 			 default size.
-diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
-index d13c5c6a9787..8134b145ae4f 100644
---- a/fs/f2fs/Kconfig
-+++ b/fs/f2fs/Kconfig
-@@ -119,6 +119,15 @@ config F2FS_FS_LZ4
- 	help
- 	  Support LZ4 compress algorithm, if unsure, say Y.
- 
-+config F2FS_FS_LZ4HC
-+	bool "LZ4HC compression support"
-+	depends on F2FS_FS_COMPRESSION
-+	depends on F2FS_FS_LZ4
-+	select LZ4HC_COMPRESS
-+	default y
-+	help
-+	  Support LZ4HC compress algorithm, if unsure, say Y.
-+
- config F2FS_FS_ZSTD
- 	bool "ZSTD compression support"
- 	depends on F2FS_FS_COMPRESSION
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index db82da311fe4..dfadbc78946c 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -254,8 +254,13 @@ static const struct f2fs_compress_ops f2fs_lzo_ops = {
- #ifdef CONFIG_F2FS_FS_LZ4
- static int lz4_init_compress_ctx(struct compress_ctx *cc)
- {
--	cc->private = f2fs_kvmalloc(F2FS_I_SB(cc->inode),
--				LZ4_MEM_COMPRESS, GFP_NOFS);
-+	unsigned int size;
-+	unsigned char level = F2FS_I(cc->inode)->i_compress_flag >>
-+						COMPRESS_LEVEL_OFFSET;
-+
-+	size = level ? LZ4HC_MEM_COMPRESS : LZ4_MEM_COMPRESS;
-+
-+	cc->private = f2fs_kvmalloc(F2FS_I_SB(cc->inode), size, GFP_NOFS);
- 	if (!cc->private)
- 		return -ENOMEM;
- 
-@@ -274,10 +279,34 @@ static void lz4_destroy_compress_ctx(struct compress_ctx *cc)
- 	cc->private = NULL;
- }
- 
-+#ifdef CONFIG_F2FS_FS_LZ4HC
-+static int lz4hc_compress_pages(struct compress_ctx *cc)
-+{
-+	unsigned char level = F2FS_I(cc->inode)->i_compress_flag >>
-+						COMPRESS_LEVEL_OFFSET;
-+	int len;
-+
-+	if (level)
-+		len = LZ4_compress_HC(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-+					cc->clen, level, cc->private);
-+	else
-+		len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-+						cc->clen, cc->private);
-+	if (!len)
-+		return -EAGAIN;
-+
-+	cc->clen = len;
-+	return 0;
-+}
-+#endif
-+
- static int lz4_compress_pages(struct compress_ctx *cc)
- {
- 	int len;
- 
-+#ifdef CONFIG_F2FS_FS_LZ4HC
-+	return lz4hc_compress_pages(cc);
-+#endif
- 	len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
- 						cc->clen, cc->private);
- 	if (!len)
-@@ -327,8 +356,13 @@ static int zstd_init_compress_ctx(struct compress_ctx *cc)
- 	ZSTD_CStream *stream;
- 	void *workspace;
- 	unsigned int workspace_size;
-+	unsigned char level = F2FS_I(cc->inode)->i_compress_flag >>
-+						COMPRESS_LEVEL_OFFSET;
-+
-+	if (!level)
-+		level = F2FS_ZSTD_DEFAULT_CLEVEL;
- 
--	params = ZSTD_getParams(F2FS_ZSTD_DEFAULT_CLEVEL, cc->rlen, 0);
-+	params = ZSTD_getParams(level, cc->rlen, 0);
- 	workspace_size = ZSTD_CStreamWorkspaceBound(params.cParams);
- 
- 	workspace = f2fs_kvmalloc(F2FS_I_SB(cc->inode),
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 377a2e2bf466..76edec7483f3 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -147,6 +147,7 @@ struct f2fs_mount_info {
- 	/* For compression */
- 	unsigned char compress_algorithm;	/* algorithm type */
- 	unsigned char compress_log_size;	/* cluster log size */
-+	unsigned char compress_level;		/* compress level */
- 	bool compress_chksum;			/* compressed data chksum */
- 	unsigned char compress_ext_cnt;		/* extension count */
- 	int compress_mode;			/* compression mode */
-@@ -736,6 +737,7 @@ struct f2fs_inode_info {
- 	atomic_t i_compr_blocks;		/* # of compressed blocks */
- 	unsigned char i_compress_algorithm;	/* algorithm type */
- 	unsigned char i_log_cluster_size;	/* log of cluster size */
-+	unsigned char i_compress_level;		/* compress level (lz4hc,zstd) */
- 	unsigned short i_compress_flag;		/* compress flag */
- 	unsigned int i_cluster_size;		/* cluster size */
- };
-@@ -1308,6 +1310,8 @@ struct compress_data {
- 
- #define F2FS_COMPRESSED_PAGE_MAGIC	0xF5F2C000
- 
-+#define	COMPRESS_LEVEL_OFFSET	8
-+
- /* compress context */
- struct compress_ctx {
- 	struct inode *inode;		/* inode the context belong to */
-@@ -3959,6 +3963,11 @@ static inline void set_compress_context(struct inode *inode)
- 				1 << COMPRESS_CHKSUM : 0;
- 	F2FS_I(inode)->i_cluster_size =
- 			1 << F2FS_I(inode)->i_log_cluster_size;
-+	if (F2FS_I(inode)->i_compress_algorithm == COMPRESS_LZ4 &&
-+			F2FS_OPTION(sbi).compress_level)
-+		F2FS_I(inode)->i_compress_flag |=
-+				F2FS_OPTION(sbi).compress_level <<
-+				COMPRESS_LEVEL_OFFSET;
- 	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
- 	set_inode_flag(inode, FI_COMPRESSED_FILE);
- 	stat_inc_compr_inode(inode);
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 8442333ca0e2..44ba870bb352 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -25,6 +25,8 @@
- #include <linux/quota.h>
- #include <linux/unicode.h>
- #include <linux/part_stat.h>
-+#include <linux/zstd.h>
-+#include <linux/lz4.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -466,6 +468,57 @@ static int f2fs_set_test_dummy_encryption(struct super_block *sb,
- 	return 0;
- }
- 
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+static int f2fs_compress_set_level(struct f2fs_sb_info *sbi, const char *str,
-+						int type)
-+{
-+	unsigned int level;
-+	int len;
-+
-+	if (type == COMPRESS_LZ4)
-+		len = 3;
-+	else if (type == COMPRESS_ZSTD)
-+		len = 4;
-+	else
-+		return 0;
-+
-+	if (strlen(str) == len)
-+		return 0;
-+
-+	str += len;
-+
-+	if (str[0] != ':') {
-+		f2fs_info(sbi, "wrong format, e.g. <alg_name>:<compr_level>");
-+		return -EINVAL;
-+	}
-+	if (kstrtouint(str + 1, 10, &level))
-+		return -EINVAL;
-+	if (type == COMPRESS_LZ4) {
-+#ifdef CONFIG_F2FS_FS_LZ4HC
-+		if (level < LZ4HC_MIN_CLEVEL || level > LZ4HC_MAX_CLEVEL) {
-+			f2fs_info(sbi, "invalid lz4hc compress level: %d", level);
-+			return -EINVAL;
-+		}
-+#else
-+		f2fs_info(sbi, "doesn't support lz4hc compression");
-+		return 0;
-+#endif
-+	} else if (type == COMPRESS_ZSTD) {
-+#ifdef CONFIG_F2FS_FS_ZSTD
-+		if (!level || level > ZSTD_maxCLevel()) {
-+			f2fs_info(sbi, "invalid zstd compress level: %d", level);
-+			return -EINVAL;
-+		}
-+#else
-+		f2fs_info(sbi, "doesn't support zstd compression");
-+		return 0;
-+#endif
-+	}
-+	F2FS_OPTION(sbi).compress_level = level;
-+	return 0;
-+}
-+#endif
-+
- static int parse_options(struct super_block *sb, char *options, bool is_remount)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
-@@ -886,10 +939,22 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 			if (!strcmp(name, "lzo")) {
- 				F2FS_OPTION(sbi).compress_algorithm =
- 								COMPRESS_LZO;
--			} else if (!strcmp(name, "lz4")) {
-+			} else if (!strncmp(name, "lz4", 3)) {
-+				ret = f2fs_compress_set_level(sbi, name,
-+								COMPRESS_LZ4);
-+				if (ret) {
-+					kfree(name);
-+					return -EINVAL;
-+				}
- 				F2FS_OPTION(sbi).compress_algorithm =
- 								COMPRESS_LZ4;
--			} else if (!strcmp(name, "zstd")) {
-+			} else if (!strncmp(name, "zstd", 4)) {
-+				ret = f2fs_compress_set_level(sbi, name,
-+								COMPRESS_ZSTD);
-+				if (ret) {
-+					kfree(name);
-+					return -EINVAL;
-+				}
- 				F2FS_OPTION(sbi).compress_algorithm =
- 								COMPRESS_ZSTD;
- 			} else if (!strcmp(name, "lzo-rle")) {
-@@ -1547,6 +1612,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
- 	}
- 	seq_printf(seq, ",compress_algorithm=%s", algtype);
- 
-+	if (!F2FS_OPTION(sbi).compress_level)
-+		seq_printf(seq, ":%d", F2FS_OPTION(sbi).compress_level);
-+
- 	seq_printf(seq, ",compress_log_size=%u",
- 			F2FS_OPTION(sbi).compress_log_size);
- 
-diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-index 55be7afeee90..2dcc63fe8494 100644
---- a/include/linux/f2fs_fs.h
-+++ b/include/linux/f2fs_fs.h
-@@ -275,6 +275,9 @@ struct f2fs_inode {
- 			__u8 i_compress_algorithm;	/* compress algorithm */
- 			__u8 i_log_cluster_size;	/* log of cluster size */
- 			__le16 i_compress_flag;		/* compress flag */
-+						/* 0 bit: chksum flag
-+						 * [10,15] bits: compress level
-+						 */
- 			__le32 i_extra_end[0];	/* for attribute size calculation */
- 		} __packed;
- 		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
--- 
-2.26.2
-
+> 
+>>
+>>>
+>>>  From a5c63ec58e0cda6eb5d186b46942eea46422b7a9 Mon Sep 17 00:00:00 2001
+>>> From: Chao Yu <yuchao0@huawei.com>
+>>> Date: Thu, 3 Dec 2020 10:04:26 +0800
+>>> Subject: [PATCH] f2fs: remove f2fs_is_compress_algorithm_valid() for cleanup
+>>>
+>>> No logic changes.
+>>>
+>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>> ---
+>>>   fs/f2fs/compress.c | 5 -----
+>>>   fs/f2fs/f2fs.h     | 5 -----
+>>>   fs/f2fs/file.c     | 2 +-
+>>>   3 files changed, 1 insertion(+), 11 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>>> index dfadbc78946c..869b047a4801 100644
+>>> --- a/fs/f2fs/compress.c
+>>> +++ b/fs/f2fs/compress.c
+>>> @@ -574,11 +574,6 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
+>>>   	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
+>>>   }
+>>>
+>>> -bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
+>>> -{
+>>> -	return f2fs_cops[algorithm] != NULL;
+>>> -}
+>>> -
+>>>   static mempool_t *compress_page_pool;
+>>>   static int num_compress_pages = 512;
+>>>   module_param(num_compress_pages, uint, 0444);
+>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>> index b70c8d553439..17b45c2d2b04 100644
+>>> --- a/fs/f2fs/f2fs.h
+>>> +++ b/fs/f2fs/f2fs.h
+>>> @@ -3882,7 +3882,6 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
+>>>   int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
+>>>   void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
+>>>   bool f2fs_is_compress_backend_ready(struct inode *inode);
+>>> -bool f2fs_is_compress_algorithm_valid(unsigned char algorithm);
+>>>   int f2fs_init_compress_mempool(void);
+>>>   void f2fs_destroy_compress_mempool(void);
+>>>   void f2fs_do_decompress_pages(struct decompress_io_ctx *dic, bool verity);
+>>> @@ -3927,10 +3926,6 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
+>>>   	/* not support compression */
+>>>   	return false;
+>>>   }
+>>> -static inline bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
+>>> -{
+>>> -	return false;
+>>> -}
+>>>   static inline struct page *f2fs_compress_control_page(struct page *page)
+>>>   {
+>>>   	WARN_ON_ONCE(1);
+>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>>> index 300355fe25f0..0453b441228d 100644
+>>> --- a/fs/f2fs/file.c
+>>> +++ b/fs/f2fs/file.c
+>>> @@ -4016,7 +4016,7 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+>>>   	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
+>>>   	f2fs_mark_inode_dirty_sync(inode, true);
+>>>
+>>> -	if (!f2fs_is_compress_algorithm_valid(option.algorithm))
+>>> +	if (!f2fs_is_compress_backend_ready(inode))
+>>>   		f2fs_warn(sbi, "compression algorithm is successfully set, "
+>>>   			"but current kernel doesn't support this algorithm.");
+>>>   out:
+>>> -- 
+>>> 2.26.2
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> On 2020/10/30 12:10, Daeho Jeong wrote:
+>>>> From: Daeho Jeong <daehojeong@google.com>
+>>>>
+>>>> Added a new F2FS_IOC_SET_COMPRESS_OPTION ioctl to change file
+>>>> compression option of a file.
+>>>>
+>>>> struct f2fs_comp_option {
+>>>>       u8 algorithm;         => compression algorithm
+>>>>                             => 0:lzo, 1:lz4, 2:zstd, 3:lzorle
+>>>>       u8 log_cluster_size;  => log scale cluster size
+>>>>                             => 2 ~ 8
+>>>> };
+>>>>
+>>>> struct f2fs_comp_option option;
+>>>>
+>>>> option.algorithm = 1;
+>>>> option.log_cluster_size = 7;
+>>>>
+>>>> ioctl(fd, F2FS_IOC_SET_COMPRESS_OPTION, &option);
+>>>>
+>>>> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+>>>> ---
+>>>>
+>>>> v6: changed the function name of checking compression algorithm validity.
+>>>> v5: allowed to set algorithm which is not currently enabled by kernel.
+>>>> v4: changed commit message.
+>>>> v3: changed the error number more specific.
+>>>>       folded in fix for build breakage reported by kernel test robot
+>>>>       <lkp@intel.com> and Dan Carpenter <dan.carpenter@oracle.com>.
+>>>> v2: added ioctl description.
+>>>> ---
+>>>>    fs/f2fs/compress.c |  5 +++++
+>>>>    fs/f2fs/f2fs.h     |  7 ++++++
+>>>>    fs/f2fs/file.c     | 54 ++++++++++++++++++++++++++++++++++++++++++++++
+>>>>    3 files changed, 66 insertions(+)
+>>>>
+>>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>>>> index 7895186cc765..b0144670d320 100644
+>>>> --- a/fs/f2fs/compress.c
+>>>> +++ b/fs/f2fs/compress.c
+>>>> @@ -514,6 +514,11 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
+>>>>    	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
+>>>>    }
+>>>> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
+>>>> +{
+>>>> +	return f2fs_cops[algorithm] != NULL;
+>>>> +}
+>>>> +
+>>>>    static mempool_t *compress_page_pool;
+>>>>    static int num_compress_pages = 512;
+>>>>    module_param(num_compress_pages, uint, 0444);
+>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>>> index a33c90cf979b..70a8a2196888 100644
+>>>> --- a/fs/f2fs/f2fs.h
+>>>> +++ b/fs/f2fs/f2fs.h
+>>>> @@ -435,6 +435,8 @@ static inline bool __has_cursum_space(struct f2fs_journal *journal,
+>>>>    						struct f2fs_sectrim_range)
+>>>>    #define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
+>>>>    						struct f2fs_comp_option)
+>>>> +#define F2FS_IOC_SET_COMPRESS_OPTION	_IOW(F2FS_IOCTL_MAGIC, 22,	\
+>>>> +						struct f2fs_comp_option)
+>>>>    /*
+>>>>     * should be same as XFS_IOC_GOINGDOWN.
+>>>> @@ -3915,6 +3917,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
+>>>>    int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
+>>>>    void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
+>>>>    bool f2fs_is_compress_backend_ready(struct inode *inode);
+>>>> +bool f2fs_is_compress_algorithm_valid(unsigned char algorithm);
+>>>>    int f2fs_init_compress_mempool(void);
+>>>>    void f2fs_destroy_compress_mempool(void);
+>>>>    void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity);
+>>>> @@ -3945,6 +3948,10 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
+>>>>    	/* not support compression */
+>>>>    	return false;
+>>>>    }
+>>>> +static inline bool f2fs_is_compress_algorithm_valid(unsigned char algorithm)
+>>>> +{
+>>>> +	return false;
+>>>> +}
+>>>>    static inline struct page *f2fs_compress_control_page(struct page *page)
+>>>>    {
+>>>>    	WARN_ON_ONCE(1);
+>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>>>> index bd52df84219d..be56702e4939 100644
+>>>> --- a/fs/f2fs/file.c
+>>>> +++ b/fs/f2fs/file.c
+>>>> @@ -3963,6 +3963,57 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
+>>>>    	return 0;
+>>>>    }
+>>>> +static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+>>>> +{
+>>>> +	struct inode *inode = file_inode(filp);
+>>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>>>> +	struct f2fs_comp_option option;
+>>>> +	int ret = 0;
+>>>> +
+>>>> +	if (!f2fs_sb_has_compression(sbi))
+>>>> +		return -EOPNOTSUPP;
+>>>> +
+>>>> +	if (!(filp->f_mode & FMODE_WRITE))
+>>>> +		return -EBADF;
+>>>> +
+>>>> +	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
+>>>> +				sizeof(option)))
+>>>> +		return -EFAULT;
+>>>> +
+>>>> +	if (!f2fs_compressed_file(inode) ||
+>>>> +			option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
+>>>> +			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
+>>>> +			option.algorithm >= COMPRESS_MAX)
+>>>> +		return -EINVAL;
+>>>> +
+>>>> +	file_start_write(filp);
+>>>> +	inode_lock(inode);
+>>>> +
+>>>> +	if (f2fs_is_mmap_file(inode) || get_dirty_pages(inode)) {
+>>>> +		ret = -EBUSY;
+>>>> +		goto out;
+>>>> +	}
+>>>> +
+>>>> +	if (inode->i_size != 0) {
+>>>> +		ret = -EFBIG;
+>>>> +		goto out;
+>>>> +	}
+>>>> +
+>>>> +	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
+>>>> +	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
+>>>> +	F2FS_I(inode)->i_cluster_size = 1 << option.log_cluster_size;
+>>>> +	f2fs_mark_inode_dirty_sync(inode, true);
+>>>> +
+>>>> +	if (!f2fs_is_compress_algorithm_valid(option.algorithm))
+>>>> +		f2fs_warn(sbi, "compression algorithm is successfully set, "
+>>>> +			"but current kernel doesn't support this algorithm.");
+>>>> +out:
+>>>> +	inode_unlock(inode);
+>>>> +	file_end_write(filp);
+>>>> +
+>>>> +	return ret;
+>>>> +}
+>>>> +
+>>>>    long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>>>    {
+>>>>    	if (unlikely(f2fs_cp_error(F2FS_I_SB(file_inode(filp)))))
+>>>> @@ -4053,6 +4104,8 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>>>>    		return f2fs_sec_trim_file(filp, arg);
+>>>>    	case F2FS_IOC_GET_COMPRESS_OPTION:
+>>>>    		return f2fs_ioc_get_compress_option(filp, arg);
+>>>> +	case F2FS_IOC_SET_COMPRESS_OPTION:
+>>>> +		return f2fs_ioc_set_compress_option(filp, arg);
+>>>>    	default:
+>>>>    		return -ENOTTY;
+>>>>    	}
+>>>> @@ -4224,6 +4277,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+>>>>    	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
+>>>>    	case F2FS_IOC_SEC_TRIM_FILE:
+>>>>    	case F2FS_IOC_GET_COMPRESS_OPTION:
+>>>> +	case F2FS_IOC_SET_COMPRESS_OPTION:
+>>>>    		break;
+>>>>    	default:
+>>>>    		return -ENOIOCTLCMD;
+>>>>
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
+> 
 
 
 _______________________________________________
