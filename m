@@ -2,106 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76F5F2CE85C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Dec 2020 08:02:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21A652CE86B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Dec 2020 08:09:50 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kl56m-0000yh-AC; Fri, 04 Dec 2020 07:02:24 +0000
+	id 1kl5Dw-0004Ps-FW; Fri, 04 Dec 2020 07:09:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kl56k-0000yS-Rl
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 07:02:22 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kl5Du-0004PT-Au
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 07:09:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DGtZLLbFDWoCQqYx9LfvjHPyF73CfxgpUXIf4y83koQ=; b=LK5qKc7iVEJkHuQ8wxpIahGJyj
- L7LxMFQDBoJyvT0AagJmmz7mMLjZnCKTQUgIEPpQ2v3wQffAeSsYzCWVBfPrJDRn7XAoOBgAKxfRV
- TOU9Q+sQqpA14mCQ83+pbE5TiFd2xmDI39Qa9Zar2DOHDnYdXHgqv/3PqLvCB6qxGrhY=;
+ bh=oPZ90ldOW6+0NLIoJANTV3C11f96SA7ltJGGjNaRT5Q=; b=mMA+MmTdePZv6zWKLa5G2CKR66
+ 1U/6ohHYB5IRYJDEfzcarT4x1o/y8r/en6uDidgr8ZoBcTQWaQgFrWapMWnzuoB1hSOhF3JrhP+Rn
+ Cx8Lw/divUjdSBApZFSl3Vw5JpmQzlH31mDJoc+XW+mAW57teLClsjgeyerw+dt3KqHo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DGtZLLbFDWoCQqYx9LfvjHPyF73CfxgpUXIf4y83koQ=; b=im6LOad/SK0gm/R5NXeSDra/lw
- P6ETYrTRpCed8K51WBjPLaepdssNSkd++du4JBZ+WZoB49L8rdFXp+Qa5fwYLR7zaMnC7LzityDNL
- UJZ2V2JOFqN52FLhNIWD8Iux3SwRP8NlcpvWWR0IGa7wxPXFTRH10HcK8l+AeP+utoMM=;
-Received: from mail-lj1-f181.google.com ([209.85.208.181])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kl56g-001CNu-Pp
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 07:02:22 +0000
-Received: by mail-lj1-f181.google.com with SMTP id r18so5438407ljc.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 03 Dec 2020 23:02:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=DGtZLLbFDWoCQqYx9LfvjHPyF73CfxgpUXIf4y83koQ=;
- b=PKdyv27y3AZcNIpFmJN4IexnpXLeYF7dsYQD0hLr6Re40GrmkO6dSIBUQzFksxPrWy
- qnQaRAqgM85WhG4I9zWQzxu1CbBtXf052bshXLmR8KcrOFQ/tIQKFmuTsOrb8ZqC+yyj
- 9HwEYGuufCYCuuZsY9BEBI/tY/d5bmrUYc/LfRQpQil7msHn33KHeb7m8ftfYc5oEkqJ
- qV41Jfn0skzideGxiH9UXZILkWCwerJAqj1u60Y3UI/A8G1e77kqiAqbXiWeGcdmbJUn
- fjnffPmoeZUmL8IuMGKce+brMxyVYtbwiCVRD/nKUEhOHT70MK8G0rSunGqISv0e5gx5
- UO/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=DGtZLLbFDWoCQqYx9LfvjHPyF73CfxgpUXIf4y83koQ=;
- b=ramcj8JkshhDIeMXM0BxoZ/owSrpsjAUyFrQCd8SMpr9YZGqs3YwxgtX2IbY63YYsD
- MBvm4idnt/zIvu1Frs/Ep1J2N0AvKELmp2sot3BNh2m92jML9E+OTxk/+pFC9IWlcl7z
- 85ZSc4OrDtNZ6yWMcS7eHD7fJ9RgBXt+qIG2g7HuQ4XV3//4vL15/FdM2/U0XxiKPy5d
- pkhLJDu8dY39l6Anb2UBGAYZI2bgPsjyigCSWVFXWARTjTxnHZXBhSfxpOfIi3Uaw9gV
- IHy/guprUYnynMchHkgye1gveuKUROX5x2sMGbsLFnwp6cmYBOp3AIPx0rglKT64Sad6
- iqZA==
-X-Gm-Message-State: AOAM532JRAReq/7ruBK9ATKRwVyfgv198Y2VwwMo4gooXwxOeS6vsARA
- dmikCnynA6pWQKgnWWSYNC7NUHbPGV9J3w2pVcU=
-X-Google-Smtp-Source: ABdhPJx03vml2qZJmzdaER4GawRDs1zl5iA2sew69N6FEp9q2vwnZucI8MjZIGzQkHAh4gRehD7/1CHLqBps1MLJDB8=
-X-Received: by 2002:a2e:9707:: with SMTP id r7mr2658587lji.265.1607065324902; 
- Thu, 03 Dec 2020 23:02:04 -0800 (PST)
+ bh=oPZ90ldOW6+0NLIoJANTV3C11f96SA7ltJGGjNaRT5Q=; b=eUMjNFWXCMfzwFUoVLhkvAYfjy
+ JV7RkTT5MdQ+WzIwFJsKvcfKTh69mu5tcq9Yg86MkJJEWDjgYEdX8n3jfWrb2ubLQmjQXbWvkPLrp
+ 1jhs8GsxgK/EZlbbEkK1ntBwPD4xo6C2PHJM8ndugKf6Fy1RxSW6pekVBTdVl/yQPRcU=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kl5Dr-00EbxX-J7
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 07:09:46 +0000
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CnP2P1WrBzhlvv;
+ Fri,  4 Dec 2020 15:09:01 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 4 Dec 2020
+ 15:09:20 +0800
+To: Gao Xiang <hsiangkao@redhat.com>
+References: <20201203061715.60447-1-yuchao0@huawei.com>
+ <X8k9UoUKcyThlJNU@gmail.com> <20201204003119.GA1957051@xiangao.remote.csb>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <d713f69b-af1b-4e4a-41ad-267a3b9026ac@huawei.com>
+Date: Fri, 4 Dec 2020 15:09:20 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-References: <20201204005847.654074-1-daeho43@gmail.com>
- <X8msy1T8uqZ4Z/iR@sol.localdomain>
- <CACOAw_wTFsfgLfrWKRoM1o_HQorJE-=2ztZftQTn+comcpmHxQ@mail.gmail.com>
- <X8m0qbd7rvQyiwOt@sol.localdomain>
- <CACOAw_y2HRE8CDk-HAjA6w_HzGJpRpivPY5zKRMC4_SNYTnTGg@mail.gmail.com>
- <CACOAw_xzKjZcpVTo3aj5sJUQ_BjLr=5ZhnfuyFwYerpyzZu+aw@mail.gmail.com>
- <X8nAParf9GW9LaGV@sol.localdomain>
- <CACOAw_wOShYf23Y0txs6Fk_Qq9JGEjXGRb0MzMxrBxJpzCfLmA@mail.gmail.com>
- <X8nGvfEeTDTLa6FL@sol.localdomain>
-In-Reply-To: <X8nGvfEeTDTLa6FL@sol.localdomain>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Fri, 4 Dec 2020 16:01:54 +0900
-Message-ID: <CACOAw_wfew8xER-CibUtddRKVtcr3k_iGzjQ-bVYxqRUuEVCcw@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: 0.1 (/)
+In-Reply-To: <20201204003119.GA1957051@xiangao.remote.csb>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.181 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.181 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1kl56g-001CNu-Pp
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix race of pending_pages in
- decompression
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kl5Dr-00EbxX-J7
+Subject: Re: [f2fs-dev] [PATCH v6] f2fs: compress: support compress level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,29 +78,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+Cc: Eric Biggers <ebiggers@kernel.org>, jaegeuk@kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VGhhbmtzIGZvciB0aGUgZXhwbGFuYXRpb24gYWJvdXQgdmVyaXR5LgpJIGdvdCB5b3VyIHBvaW50
-LiBUaGFua3N+CgoyMDIw64WEIDEy7JuUIDTsnbwgKOq4iCkg7Jik7ZuEIDI6MTgsIEVyaWMgQmln
-Z2VycyA8ZWJpZ2dlcnNAa2VybmVsLm9yZz7ri5jsnbQg7J6R7ISxOgo+Cj4gT24gRnJpLCBEZWMg
-MDQsIDIwMjAgYXQgMDI6MDA6MzRQTSArMDkwMCwgRGFlaG8gSmVvbmcgd3JvdGU6Cj4gPiBJIHRo
-aW5rIEkgZG9uJ3QgdW5kZXJzdGFuZCBob3cgdmVyaXR5IHdvcmtzLgo+ID4gUmlnaHQgYWZ0ZXIg
-dmVyaXR5IGlzIGVuYWJsZWQgb24gYSBmaWxlLCBpcyB0aGUgdmVyaXR5IGxvZ2ljIHdvcmtpbmcK
-PiA+IGZvciB0aGUgd2hvbGUgZmlsZSBkYXRhIGFyZWE/Cj4gPiBPciBpdCdzIGp1c3Qgd29ya2lu
-ZyBmb3IgdGhlIGRhdGEgYXJlYSB3aGljaCBpcyB1cGRhdGVkIGFmdGVyIHZlcml0eSBpcyBlbmFi
-bGVkPwo+ID4KPgo+IEl0J3MgZm9yIHRoZSB3aG9sZSBmaWxlLgo+Cj4gTXkgcG9pbnQgaXMganVz
-dCB0aGF0IGlmIHRoZXJlIGlzIGEgYmlvIHRoYXQgc2F3IHRoYXQgdmVyaXR5IGlzbid0IGVuYWJs
-ZWQgeWV0Cj4gd2hlbiBpdCBzdGFydGVkIGFuZCB0aGVyZWZvcmUgU1RFUF9WRVJJVFkgZGlkbid0
-IGdldCBzZXQgaW4gdGhlCj4gYmlvX3Bvc3RfcmVhZF9jdHggKG9yIHRoZSBiaW9fcG9zdF9yZWFk
-X2N0eCBkaWRuJ3QgZ2V0IGFsbG9jYXRlZCBkdWUgdG8gb25lIG5vdAo+IGJlaW5nIG5lZWRlZCks
-IHRoZW4gdGhlIGZpbGVzeXN0ZW0gc2hvdWxkbid0IGNoYW5nZSBpdHMgbWluZCBhbmQgdHJ5IHRv
-IHZlcmlmeQo+IHRoZSBwYWdlcyB3aGVuIHRoZSBiaW8gY29tcGxldGVzIGlmIHZlcml0eSBoYXBw
-ZW5lZCB0byBiZSBlbmFibGVkIGNvbmN1cnJlbnRseS4KPiBJdCdzIHRvbyBsYXRlIGZvciB0aGF0
-IGJpby4KPgo+IC0gRXJpYwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxA
-bGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3Rz
-L2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 2020/12/4 8:31, Gao Xiang wrote:
+> could make more sense), could you leave some CR numbers about these
+> algorithms on typical datasets (enwik9, silisia.tar or else.) with 16k
+> cluster size?
+
+Just from a quick test with enwik9 on vm:
+
+Original blocks:	244382
+
+			lz4			lz4hc-9
+compressed blocks	170647			163270
+compress ratio		69.8%			66.8%
+speed			16.4207 s, 60.9 MB/s	26.7299 s, 37.4 MB/s
+
+compress ratio = after / before
+
+Thanks,
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
