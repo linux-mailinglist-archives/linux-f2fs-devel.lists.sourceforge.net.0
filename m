@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 044ED2CF3FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Dec 2020 19:24:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 098652CF40C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Dec 2020 19:29:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1klFkK-0001J8-8G; Fri, 04 Dec 2020 18:23:56 +0000
+	id 1klFq3-00031G-53; Fri, 04 Dec 2020 18:29:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1klFkI-0001J1-W6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 18:23:54 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1klFpy-00030f-An
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 18:29:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eNTt/g2J/AQrKvoRcpwfk5csUehOFmbNS7xhT/ipFYw=; b=N48pG9EYQspQOk3+smoXEv+Zpa
- 1blxGHZi0ZvlGjeRueKwBBrfClFSOKHVkCL/qa5O9I2lxMV+bdGM//rbI3fNCirivWsLWbIJ99cFp
- H2uF9vXWHWolswwIGEd21vEaLBAi2KEt3vF9GOtionkKCdpXAW59UA0QdVZTffcuCkoc=;
+ bh=XlgDz+ognYhUpsYv51gVfHqW2icXst9AxfcrE8j955E=; b=jcEfvPI9rIiMkIkHFohHYTLn4T
+ 4eUdgv8QsX2kxZ8+uZik0+7/72Nu0JtFJzENq/N+49sEjHsXtrofKGTqCkFm4hNUIMFyN35OpTiwS
+ wsYK0g7x0GDBXxW3/sRWaoxcrIx98ioNBeFtIWEpkXVwtY0YioXCb/Wer/Di1lKj7tHA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,33 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eNTt/g2J/AQrKvoRcpwfk5csUehOFmbNS7xhT/ipFYw=; b=mXtZJ1T62M/heqWhSc0PEI4vHW
- R3Wjv44XetJkDxZzT566WYFO7HIXEKt2Gu1/+3vO3EUzK5z9CgwFWSjcJ+vlXpDMJAHqFrfbwCFHr
- ilIDusWZbA/GEW+KUz8uwFmO8MBgxkpWlNvTxqn5uPkv/rYWTRXGzGggG7RDIdfaGdlI=;
+ bh=XlgDz+ognYhUpsYv51gVfHqW2icXst9AxfcrE8j955E=; b=MEyydFSS8hvozDjQUoNXMU5eRy
+ 7P+dqmGmvtiz3qloImXgBrVTYBWXRo43S6SGoEjmGATubwN8vjYpPd7SXAyRz9f19w0q12cyazUwc
+ 3hRVZIcE4Y4RtRIGJEZeA5hEgwrYrGD0bLkUgrdlrc7m+Y/EN0D50rFcLxUFubhN3Q/U=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1klFkH-00Fb8W-23
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 18:23:54 +0000
-Date: Fri, 4 Dec 2020 10:23:40 -0800
+ id 1klFpp-00FbY3-0v
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 18:29:46 +0000
+Date: Fri, 4 Dec 2020 10:29:22 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607106221;
- bh=frGCvVorSjGhUb+CZl2+o3Cot8SUsEXDTN1OlWl1EbQ=;
+ s=k20201202; t=1607106564;
+ bh=mblh6wVY0lJ08ec0XmcY0LDeZa2RfjpHs2gBm6g+oHI=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=IsjJ3mvp9gloogt304bTevJHpT/RfKJMsafOaPkZoK1zw7noVonG+B1aL2e24rfxR
- bg2jR9Vx9deMPl5Jn2y2f92hOP3biDihijQcU9x3uQl3LvnY17Qh98zDxckPiMQSrt
- vKrS/aAuVwFKSNHWgKIn2KQzz0voU7t/ga3n6L8T6TISDVG4mnmXoKpzvbMU91CfRS
- l75b2q4WqezSxkRMfxdBcobyy3ATkGwyXOM7g8FyRNaFbCmNPk/sJodj9Z60LqzQcn
- dMrwPs1ESjs83xgCa3Z0Q3WAX1coOqBn0McjYGAeZs3A3RTYwNZeaOd1TxmWLPm1Ls
- YpHjLEt98zS6w==
+ b=ScpVSwVead6yek1MBaQZ5HkQgQ/kQqzZx4af/u2RcpgxYulzVRv3UF9nviUN0CULo
+ goo2392zPidcjax15iva9NvjnPH6QbrV5P4Sg+8Ktph1R1YL9HkSO4WxLf6mgKoyj/
+ uwfpBySZnjijiOLCbZzT8nrc/30DzMTCREwtuVLeM09RShuUnsBxi06jFh0bbhca1q
+ HZRBvBUEQhtqyMiFZatapWNbYJKh/e1p+CC/Tv5RB2DUljBKGJpiGj0E8GH1fPmvr3
+ yeXyziperDOAjoGYKvLvNkmPyFsxJrrR7Is6uXyOTvBCr/znc32gkE+TJ+GVkglTxO
+ dy2MZa0A3TH/w==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <X8p+rK6wQsXdcG33@google.com>
-References: <20201127090118.84235-1-yuchao0@huawei.com>
- <af26ca56-1dbf-e59b-b7b0-63ce817fd94d@huawei.com>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <X8qAAiRah/zmowZB@google.com>
+References: <20201204005847.654074-1-daeho43@gmail.com>
+ <X8msy1T8uqZ4Z/iR@sol.localdomain>
+ <CACOAw_wTFsfgLfrWKRoM1o_HQorJE-=2ztZftQTn+comcpmHxQ@mail.gmail.com>
+ <X8m0qbd7rvQyiwOt@sol.localdomain>
+ <CACOAw_y2HRE8CDk-HAjA6w_HzGJpRpivPY5zKRMC4_SNYTnTGg@mail.gmail.com>
+ <CACOAw_xzKjZcpVTo3aj5sJUQ_BjLr=5ZhnfuyFwYerpyzZu+aw@mail.gmail.com>
+ <X8nAParf9GW9LaGV@sol.localdomain>
+ <CACOAw_wOShYf23Y0txs6Fk_Qq9JGEjXGRb0MzMxrBxJpzCfLmA@mail.gmail.com>
+ <X8nGvfEeTDTLa6FL@sol.localdomain>
+ <CACOAw_wfew8xER-CibUtddRKVtcr3k_iGzjQ-bVYxqRUuEVCcw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <af26ca56-1dbf-e59b-b7b0-63ce817fd94d@huawei.com>
+In-Reply-To: <CACOAw_wfew8xER-CibUtddRKVtcr3k_iGzjQ-bVYxqRUuEVCcw@mail.gmail.com>
 X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -67,9 +75,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1klFkH-00Fb8W-23
-Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce a new per-sb directory in
- sysfs
+X-Headers-End: 1klFpp-00FbY3-0v
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix race of pending_pages in
+ decompression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,151 +89,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com, Daeho Jeong <daehojeong@google.com>,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/03, Chao Yu wrote:
-> Jaegeuk,
-> 
-> Can you comment on this patch?
+On 12/04, Daeho Jeong wrote:
+> Thanks for the explanation about verity.
+> I got your point. Thanks~
 
-Waiting for use-case? :)
+Possible fix can be like this?
 
-> 
-> On 2020/11/27 17:01, Chao Yu wrote:
-> > Add a new directory 'stat' in path of /sys/fs/f2fs/<devname>/, later
-> > we can add new readonly stat sysfs file into this directory, it will
-> > make <devname> directory less mess.
-> > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> >   fs/f2fs/f2fs.h  |  5 +++-
-> >   fs/f2fs/sysfs.c | 69 +++++++++++++++++++++++++++++++++++++++++++++----
-> >   2 files changed, 68 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index 0d38f2135016..a20059dece46 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -1510,9 +1510,12 @@ struct f2fs_sb_info {
-> >   	unsigned int node_io_flag;
-> >   	/* For sysfs suppport */
-> > -	struct kobject s_kobj;
-> > +	struct kobject s_kobj;			/* /sys/fs/f2fs/<devname> */
-> >   	struct completion s_kobj_unregister;
-> > +	struct kobject s_stat_kobj;		/* /sys/fs/f2fs/<devname>/stat */
-> > +	struct completion s_stat_kobj_unregister;
-> > +
-> >   	/* For shrinker support */
-> >   	struct list_head s_list;
-> >   	int s_ndevs;				/* number of devices */
-> > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> > index ec77ccfea923..8c63a6e61dfd 100644
-> > --- a/fs/f2fs/sysfs.c
-> > +++ b/fs/f2fs/sysfs.c
-> > @@ -708,6 +708,11 @@ static struct attribute *f2fs_feat_attrs[] = {
-> >   };
-> >   ATTRIBUTE_GROUPS(f2fs_feat);
-> > +static struct attribute *f2fs_stat_attrs[] = {
-> > +	NULL,
-> > +};
-> > +ATTRIBUTE_GROUPS(f2fs_stat);
-> > +
-> >   static const struct sysfs_ops f2fs_attr_ops = {
-> >   	.show	= f2fs_attr_show,
-> >   	.store	= f2fs_attr_store,
-> > @@ -736,6 +741,44 @@ static struct kobject f2fs_feat = {
-> >   	.kset	= &f2fs_kset,
-> >   };
-> > +static ssize_t f2fs_stat_attr_show(struct kobject *kobj,
-> > +				struct attribute *attr, char *buf)
-> > +{
-> > +	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-> > +								s_stat_kobj);
-> > +	struct f2fs_attr *a = container_of(attr, struct f2fs_attr, attr);
-> > +
-> > +	return a->show ? a->show(a, sbi, buf) : 0;
-> > +}
-> > +
-> > +static ssize_t f2fs_stat_attr_store(struct kobject *kobj, struct attribute *attr,
-> > +						const char *buf, size_t len)
-> > +{
-> > +	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-> > +								s_stat_kobj);
-> > +	struct f2fs_attr *a = container_of(attr, struct f2fs_attr, attr);
-> > +
-> > +	return a->store ? a->store(a, sbi, buf, len) : 0;
-> > +}
-> > +
-> > +static void f2fs_stat_kobj_release(struct kobject *kobj)
-> > +{
-> > +	struct f2fs_sb_info *sbi = container_of(kobj, struct f2fs_sb_info,
-> > +								s_stat_kobj);
-> > +	complete(&sbi->s_stat_kobj_unregister);
-> > +}
-> > +
-> > +static const struct sysfs_ops f2fs_stat_attr_ops = {
-> > +	.show	= f2fs_stat_attr_show,
-> > +	.store	= f2fs_stat_attr_store,
-> > +};
-> > +
-> > +static struct kobj_type f2fs_stat_ktype = {
-> > +	.default_groups = f2fs_stat_groups,
-> > +	.sysfs_ops	= &f2fs_stat_attr_ops,
-> > +	.release	= f2fs_stat_kobj_release,
-> > +};
-> > +
-> >   static int __maybe_unused segment_info_seq_show(struct seq_file *seq,
-> >   						void *offset)
-> >   {
-> > @@ -942,11 +985,15 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
-> >   	init_completion(&sbi->s_kobj_unregister);
-> >   	err = kobject_init_and_add(&sbi->s_kobj, &f2fs_sb_ktype, NULL,
-> >   				"%s", sb->s_id);
-> > -	if (err) {
-> > -		kobject_put(&sbi->s_kobj);
-> > -		wait_for_completion(&sbi->s_kobj_unregister);
-> > -		return err;
-> > -	}
-> > +	if (err)
-> > +		goto put_sb_kobj;
-> > +
-> > +	sbi->s_stat_kobj.kset = &f2fs_kset;
-> > +	init_completion(&sbi->s_stat_kobj_unregister);
-> > +	err = kobject_init_and_add(&sbi->s_stat_kobj, &f2fs_stat_ktype,
-> > +						&sbi->s_kobj, "stat");
-> > +	if (err)
-> > +		goto put_stat_kobj;
-> >   	if (f2fs_proc_root)
-> >   		sbi->s_proc = proc_mkdir(sb->s_id, f2fs_proc_root);
-> > @@ -962,6 +1009,13 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
-> >   				victim_bits_seq_show, sb);
-> >   	}
-> >   	return 0;
-> > +put_stat_kobj:
-> > +	kobject_put(&sbi->s_stat_kobj);
-> > +	wait_for_completion(&sbi->s_stat_kobj_unregister);
-> > +put_sb_kobj:
-> > +	kobject_put(&sbi->s_kobj);
-> > +	wait_for_completion(&sbi->s_kobj_unregister);
-> > +	return err;
-> >   }
-> >   void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
-> > @@ -973,6 +1027,11 @@ void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi)
-> >   		remove_proc_entry("victim_bits", sbi->s_proc);
-> >   		remove_proc_entry(sbi->sb->s_id, f2fs_proc_root);
-> >   	}
-> > +
-> > +	kobject_del(&sbi->s_stat_kobj);
-> > +	kobject_put(&sbi->s_stat_kobj);
-> > +	wait_for_completion(&sbi->s_stat_kobj_unregister);
-> > +
-> >   	kobject_del(&sbi->s_kobj);
-> >   	kobject_put(&sbi->s_kobj);
-> >   	wait_for_completion(&sbi->s_kobj_unregister);
-> > 
+---
+ fs/f2fs/compress.c |  2 --
+ fs/f2fs/data.c     | 19 +++++++++++++------
+ 2 files changed, 13 insertions(+), 8 deletions(-)
+
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 89f73a7c8667..c5fee4d7ea72 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1491,8 +1491,6 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ 	dic->magic = F2FS_COMPRESSED_PAGE_MAGIC;
+ 	dic->inode = cc->inode;
+ 	atomic_set(&dic->pending_pages, cc->nr_cpages);
+-	if (fsverity_active(cc->inode))
+-		atomic_set(&dic->verity_pages, cc->nr_cpages);
+ 	dic->cluster_idx = cc->cluster_idx;
+ 	dic->cluster_size = cc->cluster_size;
+ 	dic->log_cluster_size = cc->log_cluster_size;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index e3168f32f943..657fb562d7d4 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1035,7 +1035,8 @@ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
+ 
+ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+ 				      unsigned nr_pages, unsigned op_flag,
+-				      pgoff_t first_idx, bool for_write)
++				      pgoff_t first_idx, bool for_write,
++				      bool for_verity)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct bio *bio;
+@@ -1057,7 +1058,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+ 		post_read_steps |= 1 << STEP_DECRYPT;
+ 	if (f2fs_compressed_file(inode))
+ 		post_read_steps |= 1 << STEP_DECOMPRESS_NOWQ;
+-	if (f2fs_need_verity(inode, first_idx))
++	if (for_verity && f2fs_need_verity(inode, first_idx))
+ 		post_read_steps |= 1 << STEP_VERITY;
+ 
+ 	if (post_read_steps) {
+@@ -1087,7 +1088,7 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+ 	struct bio *bio;
+ 
+ 	bio = f2fs_grab_read_bio(inode, blkaddr, 1, op_flags,
+-					page->index, for_write);
++					page->index, for_write, true);
+ 	if (IS_ERR(bio))
+ 		return PTR_ERR(bio);
+ 
+@@ -2141,7 +2142,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+ 	if (bio == NULL) {
+ 		bio = f2fs_grab_read_bio(inode, block_nr, nr_pages,
+ 				is_readahead ? REQ_RAHEAD : 0, page->index,
+-				false);
++				false, true);
+ 		if (IS_ERR(bio)) {
+ 			ret = PTR_ERR(bio);
+ 			bio = NULL;
+@@ -2188,6 +2189,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 	const unsigned blkbits = inode->i_blkbits;
+ 	const unsigned blocksize = 1 << blkbits;
+ 	struct decompress_io_ctx *dic = NULL;
++	bool for_verity = false;
+ 	int i;
+ 	int ret = 0;
+ 
+@@ -2253,6 +2255,11 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 		goto out_put_dnode;
+ 	}
+ 
++	if (fsverity_active(cc->inode)) {
++		atomic_set(&dic->verity_pages, cc->nr_cpages);
++		for_verity = true;
++	}
++
+ 	for (i = 0; i < dic->nr_cpages; i++) {
+ 		struct page *page = dic->cpages[i];
+ 		block_t blkaddr;
+@@ -2272,7 +2279,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 		if (!bio) {
+ 			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
+ 					is_readahead ? REQ_RAHEAD : 0,
+-					page->index, for_write);
++					page->index, for_write, for_verity);
+ 			if (IS_ERR(bio)) {
+ 				unsigned int remained = dic->nr_cpages - i;
+ 				bool release = false;
+@@ -2280,7 +2287,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 				ret = PTR_ERR(bio);
+ 				dic->failed = true;
+ 
+-				if (fsverity_active(inode)) {
++				if (for_verity) {
+ 					if (!atomic_sub_return(remained,
+ 						&dic->verity_pages))
+ 						release = true;
+-- 
+2.29.2.576.ga3fc446d84-goog
+
 
 
 _______________________________________________
