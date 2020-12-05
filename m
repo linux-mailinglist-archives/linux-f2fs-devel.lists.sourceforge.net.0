@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B3E2CF892
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 02:25:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5409A2CF89D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 02:29:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1klMJo-0007jx-Ke; Sat, 05 Dec 2020 01:25:00 +0000
+	id 1klMOB-0003Ay-Pm; Sat, 05 Dec 2020 01:29:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1klMJm-0007jU-IL
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:24:58 +0000
+ (envelope-from <chao@kernel.org>) id 1klMOA-0003Ar-Gk
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:29:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bD0DiImEVlgEWrAW+ipaV6kAVV3otDJBadBIPyPorQs=; b=gm5f8Xfyi/htr8k2tREY1jSjic
- gXuhrofoOZpDWtDtDmMPOueK0QDvhliDtx1ot7C4Lulp0GNzp4ty4e7fcB7qmHBhvcA38PnDbg2C0
- W9Dhfhr/kZEAyIOGgf8Q5RgPyfSmEEFjkefrdEhl/bx3nIpgiE5ZiZ5yCFk8VCNQzoO8=;
+ bh=ncnRFFhAf2bkE/qMO1vLebh3cSt8f3hDpPboPlQpgPg=; b=MY5zirbuAJHz5HzcJRXE7uEE+p
+ ZtCn8u8q+s3o/LjUNGdBFcCbZ4TacoXkzsO0Ecn+jwAOOo+hiY4u4lpB31qJhLlIQuDtflW6hraTH
+ /qnT62PDhpNeBdM5rMlbGZSDQOhv9hSjbQ8q6Fg7Ce5MgkZv+AQT2q3W2yntsLCW7T6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,34 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bD0DiImEVlgEWrAW+ipaV6kAVV3otDJBadBIPyPorQs=; b=f3svsunCkiPoeTFD3b81lZp83e
- fDQnt0UT0fJMELqHpTFyOoJhJ3PmUsJvwqr8RcQ8pvi8g0uzoGiA3yMgFnx32Fs8AsjQWa0QkAWiM
- wzN51/JTBp1DravtGc3oayw+zndejI3Hb6mN4qul3PjZxrCiFq0HKYAgCcfa64RYlpBs=;
+ bh=ncnRFFhAf2bkE/qMO1vLebh3cSt8f3hDpPboPlQpgPg=; b=XLkiC25NV/uLEuejxqad3NAk3Z
+ 54pxb+doYP3WMoAc+E6mtDdP12LsRC93UwoDxhAZTwGd8/kmNRdCoTsFA6d25Xelg31TfH2BgDcYG
+ Duww60/vWHPjidLCle01oxEMYevySip7VzSURx276h9ENuxCZmhakwr6U/kwbx9DHJb8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1klMJi-002XHw-1j
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:24:58 +0000
+ id 1klMO1-002XUA-7C
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:29:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607131480;
- bh=AtPUHOpHifjIG0tNWMDfawxqAFqBz8TWWYRbtrNwnXE=;
+ s=k20201202; t=1607131748;
+ bh=JV56CdjyUv1Rv5BMk7QaP3IuCqfsvKze12smgZ438Ts=;
  h=To:Cc:References:From:Date:In-Reply-To:From;
- b=Ma9x1jBF6INcT4TZ4ExEq+/fG9vmLT6PPb0sA05nrpru5V6px/ONF9RfEdHOA0PoY
- vtmgjIDZLDuB8FT0yXYOr9HJsC6xfXY3CNpVLCloeGn1C2oTTC8CmD7GdrVfDx095w
- h3qW9EmWyixpNU7QfPw5pfP2CrLFLiVBk4Rm7Sq6KBIGiOXEJ8th3HWup5RVNYZEdZ
- rjoLm7D3uBpq3pbSAcEPZp4/vf/B/Zggbpg6LaInNhOSfgNc6561Kvr+sBkjY9POq9
- QrqrK/gS8CDuyk7CaTIuY2k3o7kPRBkypo1CpgX4OAQsM3Ybzzhswtwyw2WhCfjw5E
- MIR79Llhp5IqQ==
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20201202145018.6505-1-chao@kernel.org>
- <X8qJKC/lKRfh/+8s@google.com>
+ b=RdgFsX88favfTDnLR2lWWvSDPoZsx9GiPHI9L6IrnBb/hzecsHGF45dgbAhkpFn9X
+ n3BlXB1hr5kB/nt+p9U6pknhjPZCGbZ7c48AtfToUyX95NnA5HjL7AtRcouvZ7lYXH
+ 8jbtP83aZlexQV+i5KUDbnydSWe4y+vkrKfx2QuQs+skPfoIWGtWKvXUfkZTkeSJrs
+ N8l2N0UXrVJneK9yatR4cm+YP59epbcNGGbp0nw54GSEXMc1jDOS1GhgtWc8FQB6SI
+ /SFRRJmtbco5qObChvuhq1pxdKvZZGkjNRT21vxy9dwUGlvdMtEdHuXhPvm/YCp9OZ
+ 9viTYkTYv3jvg==
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
+References: <20201127090118.84235-1-yuchao0@huawei.com>
+ <af26ca56-1dbf-e59b-b7b0-63ce817fd94d@huawei.com>
+ <X8p+rK6wQsXdcG33@google.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <a6fa096d-7cf3-8b39-4a40-6ba1e4613634@kernel.org>
-Date: Sat, 5 Dec 2020 09:24:37 +0800
+Message-ID: <e35d3dde-db71-27dc-88fd-fd6e2cd2b02f@kernel.org>
+Date: Sat, 5 Dec 2020 09:29:03 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <X8qJKC/lKRfh/+8s@google.com>
+In-Reply-To: <X8p+rK6wQsXdcG33@google.com>
 Content-Language: en-US
 X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -70,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1klMJi-002XHw-1j
-Subject: Re: [f2fs-dev] [PATCH v5] f2fs: compress: add compress_inode to
- cache compressed blocks
+X-Headers-End: 1klMO1-002XUA-7C
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce a new per-sb directory in
+ sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,13 +90,36 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/12/5 3:08, Jaegeuk Kim wrote:
-> Chao, could you please rebase this patch?
-
-Sure.
-
+On 2020/12/5 2:23, Jaegeuk Kim wrote:
+> On 12/03, Chao Yu wrote:
+>> Jaegeuk,
+>>
+>> Can you comment on this patch?
 > 
-> Thanks,
+> Waiting for use-case? :)
+
+How do you think of duplicating below stats into /sys/fs/f2fs/<devname>/stat/
+
+F2FS_GENERAL_RO_ATTR(dirty_segments);
+F2FS_GENERAL_RO_ATTR(free_segments);
+F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+F2FS_GENERAL_RO_ATTR(features);
+F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+F2FS_GENERAL_RO_ATTR(unusable);
+F2FS_GENERAL_RO_ATTR(encoding);
+F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+F2FS_GENERAL_RO_ATTR(main_blkaddr);
+#ifdef CONFIG_F2FS_STAT_FS
+F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
+F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
+F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_foreground_calls, call_count);
+F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_background_calls, bg_gc);
+F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+F2FS_GENERAL_RO_ATTR(moved_blocks_foreground);
+F2FS_GENERAL_RO_ATTR(avg_vblocks);
+#endif
+
+Thanks,
 
 
 _______________________________________________
