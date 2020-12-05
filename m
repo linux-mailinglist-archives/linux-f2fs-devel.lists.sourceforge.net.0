@@ -2,58 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 075AF2CF7A0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 00:40:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 747872CF891
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 02:24:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1klKgw-0006VP-5i; Fri, 04 Dec 2020 23:40:46 +0000
+	id 1klMJK-0002sH-6l; Sat, 05 Dec 2020 01:24:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1klKgu-0006VA-J4
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 23:40:44 +0000
+ (envelope-from <chao@kernel.org>) id 1klMJI-0002s7-Ch
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:24:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jp6kYnQeh/Z5eonhDtFbyk5uIVVeFbivHi5ZQH+AuwI=; b=iw3tMVMN3IuD8ZicMEesL232sB
- d3kjl9K8rxsCSK4maRql9FePJPVBgzUdj1vaHJJjKGG37ZOe7ZSkWHV2dxIbBop/KK/UZeQOyFdM1
- szidO+rCsZcpTHFrxvrAb+HEoXzmmGRGT4E1tRvZ9AzW+hxrSFhOea10VIg/fsSztHUg=;
+ bh=PKRlkteEv8tPMA3K5evuUQOyOC/0MJ0oDfftjWBgEw8=; b=AnGf7aywqiYRbxngRNWxnvtYJ0
+ 98OJk5hcv/C0SxItL0If7P5VsFJovl2SNkRZaGjbnu7RWLaIsJhUPHQxeW/LcFAl8bl17XLT3FIeM
+ n8oOLxMrypCv1k6RB/iHt6h7HM9pgW1/y9143u2TefhbT3Br7LfUa7Q1M3dybCi98Db0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jp6kYnQeh/Z5eonhDtFbyk5uIVVeFbivHi5ZQH+AuwI=; b=h
- wGl8CWD2v8aLFTiW6aZcLikI9vzl7XQYWtNNlflJB/kpAM//uU3tD45OJmTOk6b1trH6BAYng0Vyc
- Ozuu6GdkJE48J6b4kBMelYPjUkKp5CRKBTrzVvjsilFCldrqdpDhOY1ASg1Grmd4v93S5TzqDvQF2
- 7bo9DohXp/JdUjf8=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PKRlkteEv8tPMA3K5evuUQOyOC/0MJ0oDfftjWBgEw8=; b=YAkBAbuElkeKfbVX99F7yuMa0d
+ 2tHAb5OUPab7+UvzE7v/s7ULzHN9NyBEgBVxDgXO1yI0XZo711RN+5W3+oBuhhhHmKPPc0AMTza7T
+ oauE3JkvTAqApMFS0JSCTcMbZjDxQ+JrcMsL5xY37aMsAUVoxJ2j61xLjEOcufeQqehg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1klKgm-00G0v5-Rr
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Dec 2020 23:40:44 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-Authentication-Results: mail.kernel.org;
- dkim=permerror (bad message/signature format)
-To: linux-f2fs-devel@lists.sourceforge.net,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Fri,  4 Dec 2020 15:39:40 -0800
-Message-Id: <20201204233940.52144-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.29.2
+ id 1klMJB-00G7s0-Fa
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 01:24:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1607131451;
+ bh=93gxGwOSBgRtHO3BuuzrRBtxRaKxnLT1haGacM/gHN4=;
+ h=To:Cc:References:From:Date:In-Reply-To:From;
+ b=peZvBJ61wuh4l3iXG2xtjPW/Ncr8OWr/9FXEu5Cuxk+u19McMXOPa3HeYcFM3jwMT
+ sdu4q3okXvpK5A8b66g8tU4cdG/pzOKcRCVviZt3hNUXyr4cqwe5l0IEM15QQN4gmg
+ ENzo6G2MEjoe/h6sq+s9tp2s3rNEHvCuZvFRbzUqZMv4luyPWhNsH9u8814ePLZR+6
+ OWLALD4+GsdI4c//+qNRynNxIB6rN/gQCHBQucpEBvWZFKzYPvxdEF0Qfh+v0g0r/A
+ UHdemDT1qBGodqE8+f/wzpmnwpRXA7qZAb4d1F0+BUv6mZCeyKa714ursHdzAglqaI
+ /Ee00InKwl82g==
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>
+References: <20201204102423.114091-1-yuchao0@huawei.com>
+ <X8qJBdQZmZ2SyN9m@google.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <7be5abe7-af85-4941-edc6-7e9b592a5dca@kernel.org>
+Date: Sat, 5 Dec 2020 09:24:07 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <X8qJBdQZmZ2SyN9m@google.com>
+Content-Language: en-US
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1klKgm-00G0v5-Rr
-Subject: [f2fs-dev] [PATCH] libfs: unexport generic_ci_d_compare() and
- generic_ci_d_hash()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1klMJB-00G7s0-Fa
+Subject: Re: [f2fs-dev] [PATCH v7] f2fs: compress: support compress level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,91 +83,18 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>,
- Daniel Rosenberg <drosen@google.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On 2020/12/5 3:07, Jaegeuk Kim wrote:
+> 
+> I removed wrong spaces here and merged in dev-test till getting reviewed.
 
-Now that generic_set_encrypted_ci_d_ops() has been added and ext4 and
-f2fs are using it, it's no longer necessary to export
-generic_ci_d_compare() and generic_ci_d_hash() to filesystems.
+Sorry, I sent the wrong version which is based v5 + fixes... :(
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
-
-This patch applies to f2fs/dev, as it depends on "libfs: Add generic
-function for setting dentry_ops" and "fscrypt: Have filesystems handle
-their d_ops" which are queued in f2fs/dev.
-
- fs/libfs.c         | 8 +++-----
- include/linux/fs.h | 5 -----
- 2 files changed, 3 insertions(+), 10 deletions(-)
-
-diff --git a/fs/libfs.c b/fs/libfs.c
-index bac9186990220..a33bc3451d096 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1386,8 +1386,8 @@ static bool needs_casefold(const struct inode *dir)
-  *
-  * Return: 0 if names match, 1 if mismatch, or -ERRNO
-  */
--int generic_ci_d_compare(const struct dentry *dentry, unsigned int len,
--			  const char *str, const struct qstr *name)
-+static int generic_ci_d_compare(const struct dentry *dentry, unsigned int len,
-+				const char *str, const struct qstr *name)
- {
- 	const struct dentry *parent = READ_ONCE(dentry->d_parent);
- 	const struct inode *dir = READ_ONCE(parent->d_inode);
-@@ -1424,7 +1424,6 @@ int generic_ci_d_compare(const struct dentry *dentry, unsigned int len,
- 		return 1;
- 	return !!memcmp(str, name->name, len);
- }
--EXPORT_SYMBOL(generic_ci_d_compare);
- 
- /**
-  * generic_ci_d_hash - generic d_hash implementation for casefolding filesystems
-@@ -1433,7 +1432,7 @@ EXPORT_SYMBOL(generic_ci_d_compare);
-  *
-  * Return: 0 if hash was successful or unchanged, and -EINVAL on error
-  */
--int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
-+static int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
- {
- 	const struct inode *dir = READ_ONCE(dentry->d_inode);
- 	struct super_block *sb = dentry->d_sb;
-@@ -1448,7 +1447,6 @@ int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
- 		return -EINVAL;
- 	return 0;
- }
--EXPORT_SYMBOL(generic_ci_d_hash);
- 
- static const struct dentry_operations generic_ci_dentry_ops = {
- 	.d_hash = generic_ci_d_hash,
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 4a25ab4dbd3e9..f000cccaa6ac7 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -3181,11 +3181,6 @@ extern int generic_file_fsync(struct file *, loff_t, loff_t, int);
- 
- extern int generic_check_addressable(unsigned, u64);
- 
--#ifdef CONFIG_UNICODE
--extern int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str);
--extern int generic_ci_d_compare(const struct dentry *dentry, unsigned int len,
--				const char *str, const struct qstr *name);
--#endif
- extern void generic_set_encrypted_ci_d_ops(struct dentry *dentry);
- 
- #ifdef CONFIG_MIGRATION
-
-base-commit: a7f72973ac2342644fce026e01943ed0f41fcc4a
--- 
-2.29.2
-
+Thanks,
 
 
 _______________________________________________
