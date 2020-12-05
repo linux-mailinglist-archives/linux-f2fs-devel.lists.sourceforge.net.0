@@ -2,68 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA582CFA07
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 07:40:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BC4C2CFEEC
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Dec 2020 21:45:35 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1klRFS-0007gh-5V; Sat, 05 Dec 2020 06:40:50 +0000
+	id 1kleQr-0001fJ-W9; Sat, 05 Dec 2020 20:45:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jack.qiu@huawei.com>) id 1klRFQ-0007gZ-Kv
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 06:40:48 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kleOb-0001ZI-Bf
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 20:43:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rUZDnMAU/AX+skEFggllT78mJWdVA/gBhI4EcQOhu8c=; b=ExnZWCcommDlxEcoTEHg4Pr3s5
- xmhXMkIAg13U5ZhAhY3EsQhLiipIPvjHqN6E4oDunJCylLmUNo4lfRJSIOHzGUEaVZDYufDIhO/KO
- nKaEWeET2h3jwOeFnExXN0ZEA7OTlnsvnjdQZ5615hc6r3lc8yZIJmk9nCdGz81AqXug=;
+ bh=i0LyxSM1LrvzFnlp2pasnuto+Sx9P195F9agpA//1l0=; b=Lf+2j/8Rgx0OcSqDWIQWDDq+Ld
+ nT6kqMxjaWgEPctzX5ZLgqNpe6SBQFrx8ZTlWc/hK/luO+c/HUGMBLkl+J3pRO28hx2QsY0TOInaS
+ JufOMBhicWtq3ZdwYyFNTELjH4as/tYDOb6sAZrZHVErmOS0O/uaJc08Un9+63DDlb1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
- To:From:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rUZDnMAU/AX+skEFggllT78mJWdVA/gBhI4EcQOhu8c=; b=eiui4oMYz1eS1gtRqvkbqvePYT
- O/CoX/7iMrzGwTlfX89LDhp2Y5xT2Soctw/BQxM70yAb0a0OGS2Gtug2SDZi/H1XN8dZpmze4eUKH
- MuyVDaKbi+27W+mgEY9iNeonY3/AuOawQ18ZyZzV+oRMMtbgEVGEG92eU3+yOqzQuVIk=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
+ bh=i0LyxSM1LrvzFnlp2pasnuto+Sx9P195F9agpA//1l0=; b=H5J9DCJoj5mrZrz65X0YqLhAeu
+ qz5EhYU89ZBwxWJKhge+jmmGuFJ5ClXR4fgLaon4pHPo4Mj5lerwzovgr1SpLQURFS4Qa/TjiVPaI
+ VvqYJgIwWHBuRIW0A/wzacinr2y5+BrTDLK1JIoMebF0oE2Q66n+1ef79jQ7qtSEffSA=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1klRFI-002n1N-Un
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 06:40:48 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4Cp0LW62pzz78rk
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat,  5 Dec 2020 14:40:03 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by DGGEMS402-HUB.china.huawei.com
- (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Sat, 5 Dec 2020
- 14:40:27 +0800
-From: Jack Qiu <jack.qiu@huawei.com>
-To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Sat, 5 Dec 2020 15:40:55 +0800
-Message-ID: <20201205074055.31574-4-jack.qiu@huawei.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201205074055.31574-1-jack.qiu@huawei.com>
-References: <20201205074055.31574-1-jack.qiu@huawei.com>
+ id 1kleOQ-003ZY8-S7
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 05 Dec 2020 20:43:08 +0000
+Date: Sat, 5 Dec 2020 12:42:46 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1607200968;
+ bh=x7rofouDQwKdeiKgyOhN+pS04UY3hUFno5zmc3XEp/M=;
+ h=From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BSwp5oHxvRnU8AvzY71q/6TaPmFzAoz7cc+JBdhBHrVpHwV7K5lpf5geXcVR/3HVZ
+ lVy7fctqxxWna3ecKA9hfPF+/xAFXbcj9DQbYnQ/IiHSuZEXZWuEil3xMiIKNaGbls
+ pMyGXF5fDyJ3mAXndkox84Iogk8xxxVWjLuAvs1Zgl42IDkgYaXe1oCfuYA82BnUfl
+ qlAWKyhOol094Rb9TB8cOLkV0DJBv+EqPRiBxgeVNgJzyHVqtCgCcv0HmUWuCJNYwF
+ PAgaKmcD/6Ly61VLNqrCKnWFR6bxg5lplbaRDT1BGD87DAGJ0upT2EFvzD3Voy8aQA
+ 0iXtpasLtLXEA==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <X8vwxtBuFGCD/IS/@google.com>
+References: <20201127090118.84235-1-yuchao0@huawei.com>
+ <af26ca56-1dbf-e59b-b7b0-63ce817fd94d@huawei.com>
+ <X8p+rK6wQsXdcG33@google.com>
+ <e35d3dde-db71-27dc-88fd-fd6e2cd2b02f@kernel.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.101.6]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <e35d3dde-db71-27dc-88fd-fd6e2cd2b02f@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1klRFI-002n1N-Un
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: inline: fix wrong inline inode stat
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kleOQ-003ZY8-S7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce a new per-sb directory in
+ sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,40 +83,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Miss to stat inline inode in f2fs_recover_inline_data.
+On 12/05, Chao Yu wrote:
+> On 2020/12/5 2:23, Jaegeuk Kim wrote:
+> > On 12/03, Chao Yu wrote:
+> > > Jaegeuk,
+> > > 
+> > > Can you comment on this patch?
+> > 
+> > Waiting for use-case? :)
+> 
+> How do you think of duplicating below stats into /sys/fs/f2fs/<devname>/stat/
 
-Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
----
- fs/f2fs/inline.c | 2 ++
- 1 file changed, 2 insertions(+)
+We can't move them to /stat, since it requires lots of mess. Let's think
+about new ones only.
 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 4ee5b5510593..a35effbe77ed 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -299,6 +299,7 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 		if (IS_ERR(ipage))
- 			return PTR_ERR(ipage);
- 		f2fs_truncate_inline_inode(inode, ipage, 0);
-+		stat_dec_inline_inode(inode);
- 		clear_inode_flag(inode, FI_INLINE_DATA);
- 		f2fs_put_page(ipage, 1);
- 	} else if (ri && (ri->i_inline & F2FS_INLINE_DATA)) {
-@@ -307,6 +308,7 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 		ret = f2fs_truncate_blocks(inode, 0, false);
- 		if (ret)
- 			return ret;
-+		stat_inc_inline_inode(inode);
- 		goto process_inline;
- 	}
- 	return 0;
---
-2.17.1
-
+> 
+> F2FS_GENERAL_RO_ATTR(dirty_segments);
+> F2FS_GENERAL_RO_ATTR(free_segments);
+> F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+> F2FS_GENERAL_RO_ATTR(features);
+> F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+> F2FS_GENERAL_RO_ATTR(unusable);
+> F2FS_GENERAL_RO_ATTR(encoding);
+> F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+> F2FS_GENERAL_RO_ATTR(main_blkaddr);
+> #ifdef CONFIG_F2FS_STAT_FS
+> F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
+> F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
+> F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_foreground_calls, call_count);
+> F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_background_calls, bg_gc);
+> F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+> F2FS_GENERAL_RO_ATTR(moved_blocks_foreground);
+> F2FS_GENERAL_RO_ATTR(avg_vblocks);
+> #endif
+> 
+> Thanks,
 
 
 _______________________________________________
