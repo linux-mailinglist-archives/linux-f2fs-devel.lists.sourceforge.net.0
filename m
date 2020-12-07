@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75EE32D183F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 19:13:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8B592D184F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 19:17:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmL0q-0008J8-Oj; Mon, 07 Dec 2020 18:13:28 +0000
+	id 1kmL4R-0002ag-MB; Mon, 07 Dec 2020 18:17:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kmL0p-0008J1-NH
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 18:13:27 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kmL4P-0002aP-PR
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 18:17:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0BshWBmeSejK819DyzjjqY2Z/07/5z+4u5gQuDy13vU=; b=Ss4tN1D9vEqHV9xbQEvpMr80i5
- XjuziR2gMIaPtEpDCcciibaFNkmgN6TyGpFFdbUW2jdi58EaRWHTM/Pg638L6TNokt/dsqwrgG+vO
- EuHvLeANO7iHmWeo9GcymqwODdzsOHDdTLdzcixY1vKNFeYTvvDiV14BXq5OeL+sDaf8=;
+ bh=XWch1CcUVJFQ8lKjEqn6cSVVNs3MN8Sn6hJ/XwLMzOY=; b=FN86UoFPyfn0suuOPk97eQ6K29
+ bQOScN4p04yjJOB8W1F/cV4+o8PmYaZfiZnajF9+oIpCYA4j04QarSshq6sfVdwg2hGFu3Gt5RvfF
+ gByyiM3NX2fguHTA9rzpUGMiowfqEVv3Nv1E619eedetYdCoxi4janQdQLz8uWF463Lc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0BshWBmeSejK819DyzjjqY2Z/07/5z+4u5gQuDy13vU=; b=Ul5dYBDj5goJ3+GnKpcLvp3BqR
- j8YwQrFv52Q79dB1fvB/BPo9d6mg5wblysuaYCUt2d/guObnEVq9srwYAvze+5mShqanjyn9Ku1dD
- JEdnbICtsb3soabZJxfpmaiawIWzwtQDddFtqyDnFH8FK8InAf0JLYGLeBLW8kcUROI0=;
+ bh=XWch1CcUVJFQ8lKjEqn6cSVVNs3MN8Sn6hJ/XwLMzOY=; b=ZlytA5fFTH4FSYmx0qLI7Z8gqy
+ fASt9s2QQBdoWEBM2dH5TsEKMO4NoahNe65kvB/LTALo1g0FCHZ7xAsH4BrG7RrVA82wGHM6evUux
+ cP5BFxpCHjvrpY+NNpQNhf91wi5Jjq6+BIEfW0OepIe+tN7zunHEDUHapaM6YdbxCpxY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmL0b-005dsL-6F
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 18:13:27 +0000
-Date: Mon, 7 Dec 2020 10:13:06 -0800
+ id 1kmL4L-002LTG-Jr
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 18:17:09 +0000
+Date: Mon, 7 Dec 2020 10:16:53 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607364787;
- bh=WA4Z5WMSDn1c5FX1KInte6wma4gAm1WZIUR0t0bLAeA=;
+ s=k20201202; t=1607365015;
+ bh=le8vfxceC05Tky48BN1v0WaIn5E3rrFNOOcF0AF1HL4=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=MDj6p9550nh/kmo2eBV+sSK1bKA6XsgWLdqpQDky9RqdxoFAv8T07+xDVmGRAgFRi
- sAE23IFyV5G70emWahdMg6pl7bTorbHxpSFQ4SdLFqb7ll5p7fm5ZD8TqqOsGZ8Fqs
- GmjC9SmJHqh6E9KmujPd4tY+RCjeW+mRr4R27jqzV5d6Ql5gekLjwqjgAmtGlubt26
- mc2ysCjWRr9BG37SWFZAuog1V8aFIqjnxlztPkxRK3KvMmM/j5VoTlb7YsEwPOoL+N
- CH18aO/t3ffpDw39PptLXRYbl7qzaDMx8bIfUVLxIx3H5A1xFNuIj/dST+Mcv2iMaD
- jPH2t3GO84VrQ==
+ b=VRvuvDQVG1PXt8E3Pc3u2I3v3PG+NTgsIULlnokT5ZIij6isspvvrH9tQ9Pp57O8w
+ MCZ2cx7Fcypat1dqvCbepSXIQOcD2uMmw4m1NpKiqaECFcbgeQPcc3dVy2+4bpsfKl
+ BPK7YZkcDuvN1aIjYIVRPaWP4f3EsrSDjhsxn4cfsBR5NAuyNOlX3P1aAlGtWk7AgZ
+ maZmLyldh4UpG8YVt+OH5Ifd5QxVz/QMGKUU7RZjdTMcXGeoIlI/w12ZELNlRjA1e8
+ URI1KhV4Sb94eNQRbeZN486oF3xVrrdi5aE93A/3qBNsyqOn6fxU7Lp6tg1WlwlHem
+ ahSPnDha6IQrw==
 From: Eric Biggers <ebiggers@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <X85wshahXe4nR+N6@gmail.com>
-References: <20201207095220.73093-1-yuchao0@huawei.com>
+Message-ID: <X85xlc2Q0gnBywBE@gmail.com>
+References: <20201207095609.73825-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201207095220.73093-1-yuchao0@huawei.com>
+In-Reply-To: <20201207095609.73825-1-yuchao0@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -66,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kmL0b-005dsL-6F
-Subject: Re: [f2fs-dev] [PATCH v5 RESEND] f2fs: compress: add compress_inode
- to cache compressed blocks
+X-Headers-End: 1kmL4L-002LTG-Jr
+Subject: Re: [f2fs-dev] [PATCH RESEND] f2fs: compress: deny setting
+ unsupported compress algorithm
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,40 +90,38 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Dec 07, 2020 at 05:52:20PM +0800, Chao Yu wrote:
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index dae15c96e659..fd413d319e93 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -268,6 +268,9 @@ compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
->  			 choosing the target file and the timing. The user can do manual
->  			 compression/decompression on the compression enabled files using
->  			 ioctls.
-> +compress_cache		 Support to use address space of inner inode to cache
-> +			 compressed block, in order to improve cache hit ratio of
-> +			 random read.
+On Mon, Dec 07, 2020 at 05:56:09PM +0800, Chao Yu wrote:
+> If kernel doesn't support certain kinds of compress algorithm, deny to set
+> them as compress algorithm of f2fs via 'compress_algorithm=%s' mount option.
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> no changes, just rebase on dev branch.
 
-What is an "inner inode"?  Mount options should be understandable without
-understanding filesystem implementation details.
+This doesn't apply to the dev branch anymore.
 
-> +const struct address_space_operations f2fs_compress_aops = {
-> +	.releasepage = f2fs_release_page,
-> +	.invalidatepage = f2fs_invalidate_page,
-> +};
-> +
-> +struct address_space *COMPRESS_MAPPING(struct f2fs_sb_info *sbi)
-> +{
-> +	return sbi->compress_inode->i_mapping;
-> +}
-> +
-> +void invalidate_compress_page(struct f2fs_sb_info *sbi, block_t blkaddr)
-> +{
-> +	if (!sbi->compress_inode)
-> +		return;
-> +	invalidate_mapping_pages(COMPRESS_MAPPING(sbi), blkaddr, blkaddr);
-> +}
+>  fs/f2fs/super.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index e0fe72f1d2c8..662e59f32645 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -936,9 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  			if (!name)
+>  				return -ENOMEM;
+>  			if (!strcmp(name, "lzo")) {
+> +#ifdef CONFIG_F2FS_FS_LZO
+>  				F2FS_OPTION(sbi).compress_algorithm =
+>  								COMPRESS_LZO;
+> +#else
+> +				f2fs_info(sbi, "Image doesn't support lzo compression");
+> +#endif
 
-Global functions should have the "f2fs_" prefix.
+These info messages don't make sense.  It's not the filesystem image that
+doesn't support the algorithm, but rather the kernel that doesn't.
+
+Also, shouldn't these be warnings instead of "info"?
 
 - Eric
 
