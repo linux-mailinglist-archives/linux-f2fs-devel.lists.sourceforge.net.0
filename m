@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FB5A2D0CF0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 10:24:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6E9C2D0CEF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 10:24:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmCka-0007wk-8c; Mon, 07 Dec 2020 09:24:08 +0000
+	id 1kmCkS-0004WX-AO; Mon, 07 Dec 2020 09:24:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jack.qiu@huawei.com>) id 1kmCkR-0007uO-Me
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 09:23:59 +0000
+ (envelope-from <jack.qiu@huawei.com>) id 1kmCkP-0004WM-NA
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 09:23:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
  Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cjnITATTgHUAz1GwabhOGzVatTwUikDw+cYlYETKV2c=; b=TzZDzFtq4gARgHM3UcJFk5jgn5
- o5O/puEnElz1o4JGTJpos/m88925AaVn8DOCbqI+NuaJOzt1LynvT4fTFg7dSjVOFiysMkZudKc+8
- UbFoQl/Iy7dMQW8jfh594yF5yadX8KHENbptuwBP0IFGRcdHRDJliG2+p2L1ORYQSWFE=;
+ bh=/AKw3QAvKEa2lkLil6gYjKY3fePFNHBjlHWonbKaWQk=; b=hMrLfaQelUnSxw+tBSuTspl2QO
+ Mzc3H4NFzOpcEn13O5d2V0PEVUyQD6Dr+zL3TDX1vcFsww1gw94IECH1/2Lk/rskUb7syFL/H2G5H
+ SfrdqtIWNkk1aEUAy4As3tBTOfuLw8OsshkUoWbyqa1mvFiah6HxJgpSe3ivgWGSPmcE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
@@ -29,25 +29,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cjnITATTgHUAz1GwabhOGzVatTwUikDw+cYlYETKV2c=; b=ZpIDFNu9zBbZAIAI0YR8Mxy/R3
- foJuNpCoMbspOU47wjVzVpC+QJaIavvQdIzj4gCneTud1aTvq5W3N8VJZFCBZNZC4NPJ8YufvqG/b
- cRSa7l2axoulh6V9tIPSMIep7uttQGdX+I6gmB5JEAs/2qmNDVnxDrW7Da4kkbTYE/zk=;
+ bh=/AKw3QAvKEa2lkLil6gYjKY3fePFNHBjlHWonbKaWQk=; b=HR1gOZmUHK7tnC0AGT2tYF7l2x
+ K5KJwzulP/Xnr3lWwuUwxUv9Fnv8/Tdtmg76TezfMVZPew5rusQliYeDg1o1+2+F7BwA4+WsqSmx/
+ TS7U6EXkWIqwZeum/XB+CdyKeYhZZB+w+YtnaPYxVqoF+RhhW5jiJrOcp6FAddX6G6Cg=;
 Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmCkO-001kdk-TX
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 09:23:59 +0000
+ id 1kmCkK-001kdY-60
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 09:23:57 +0000
 Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CqHsr4yCqz15X0D
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CqHsr5R8dz15Yft
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Mon,  7 Dec 2020 17:23:12 +0800 (CST)
 Received: from huawei.com (10.175.101.6) by DGGEMS414-HUB.china.huawei.com
  (10.3.19.214) with Microsoft SMTP Server id 14.3.487.0; Mon, 7 Dec 2020
- 17:23:40 +0800
+ 17:23:41 +0800
 From: Jack Qiu <jack.qiu@huawei.com>
 To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Mon, 7 Dec 2020 18:24:05 +0800
-Message-ID: <20201207102407.25154-2-jack.qiu@huawei.com>
+Date: Mon, 7 Dec 2020 18:24:06 +0800
+Message-ID: <20201207102407.25154-3-jack.qiu@huawei.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201207102407.25154-1-jack.qiu@huawei.com>
 References: <20201207102407.25154-1-jack.qiu@huawei.com>
@@ -66,9 +66,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kmCkO-001kdk-TX
-Subject: [f2fs-dev] [PATCH v2 1/3] f2fs: inline: correct comment in
- f2fs_recover_inline_data
+X-Headers-End: 1kmCkK-001kdY-60
+Subject: [f2fs-dev] [PATCH v2 2/3] f2fs: inline: remove redundant
+ FI_DATA_EXIST set
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,26 +84,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In 3rd scene, it should remove data blocks instead of inline_data.
+FI_DATA_EXIST has been set in recover_inline_flags, no need set in
+f2fs_recover_inline_data again. Just remove it.
 
 Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
 ---
- fs/f2fs/inline.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/inline.c | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 70384e31788d..0399531efcd3 100644
+index 0399531efcd3..0a8f7eefca7d 100644
 --- a/fs/f2fs/inline.c
 +++ b/fs/f2fs/inline.c
-@@ -266,7 +266,7 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 	 * [prev.] [next] of inline_data flag
- 	 *    o       o  -> recover inline_data
- 	 *    o       x  -> remove inline_data, and then recover data blocks
--	 *    x       o  -> remove inline_data, and then recover inline_data
-+	 *    x       o  -> remove data blocks, and then recover inline_data
- 	 *    x       x  -> recover data blocks
- 	 */
- 	if (IS_INODE(npage))
+@@ -286,7 +286,6 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
+ 		memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
+
+ 		set_inode_flag(inode, FI_INLINE_DATA);
+-		set_inode_flag(inode, FI_DATA_EXIST);
+
+ 		set_page_dirty(ipage);
+ 		f2fs_put_page(ipage, 1);
 --
 2.17.1
 
