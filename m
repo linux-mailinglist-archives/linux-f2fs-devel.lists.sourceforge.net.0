@@ -2,74 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB4632D07F4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 00:13:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F23E2D0AD1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 07:43:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1km3DG-0004IZ-SX; Sun, 06 Dec 2020 23:13:06 +0000
+	id 1kmAFY-0000fB-31; Mon, 07 Dec 2020 06:43:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1km3DE-0004IF-J1
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 06 Dec 2020 23:13:04 +0000
+ (envelope-from <robinh3123@gmail.com>) id 1kmAFU-0000ex-Em
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 06:43:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9qZrqlaMB2tTpefeeVjxhTwoUbe/jVj6o5YOtC3GPX8=; b=TNoiXX9VrDM6Ypp9XlX8Xg0JDE
- IOAM6UTVhITjwNEph/Tw7wNiLtqDJvsrcDkwVaR9ga/AMvpArI9S4T6CKC424ODtMvyOv2TBAZEBR
- zFxR3zMHZaMTo5eEhKErufuwpmBkhwaVKpbzVn9irWeq2zVjcLA2zwVH+DhASTKsWLi0=;
+ bh=BTCFo1psICK76O3jlTgVwC+qqgFVNzRJMD15/MFmEXU=; b=DRrOdckyVopThotzt5HgeJ7J9m
+ I1o9VD3bC868prX/6FJmjaU58wVEkkIX68rBGRg1TzEywAUmdGPOSGoSQcle7rC0x0a5aPswTST+u
+ KgJSaAgDs/+x2C44DYAlC0iLAlo4/qmmHqmCn+3jc68JwbpJoLKYnjWF+W4ShjD+CNvo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9qZrqlaMB2tTpefeeVjxhTwoUbe/jVj6o5YOtC3GPX8=; b=IwiYvn2MBMctaJ8tIX4XWQ4ODz
- o10BBDu+R99xHYKr3eU9iJWwTgkMONuA1xo7uLuQ7ZhjfcgStiP3kRWVUI2nd2aJ+x0Kjf0cseDLC
- 6Tj+ttYnzsuOHKVMPs0eNqh45G3Dp++EIEZeRt7hKyLjQKUhw/JFq0tKxbvrijdmqOXM=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1km3D5-004iU2-0i
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 06 Dec 2020 23:13:04 +0000
-Date: Sun, 6 Dec 2020 15:12:25 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607296347;
- bh=wRedg1gNvQnfzRd6Sc7Ch4DYbkAvFJu/PD8ZGSHjgdQ=;
- h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=p/xjEKdNmYBgu8ertFQ3kUSFZYs3wZW1WKv60D5Oq2w7r1BqLZpkeVCObJviLcO9c
- mn+fdEsig3KRc+N+WZ0ZB3QtuvA/8UBzd+2zhfU/qvEoJzXAgwaJsTSVb4tDD0revn
- FThRM3xGsbpwK/GH4RDGh1eLB6BesQ0OXu28aTHkTl2XK/CIdOnmQT71ogyuIca+Rj
- d/G0x3Gv47eJEDJlnGLra/FTf9tKEYa7heydAUn5gFubAeTAglA/+VFvAulBht2ne/
- khg13oQdPfbl6LqgKhnsG7vNz0V/N69ZbgosskWCY2TNS/me34ryQYoL+20rOBYjIQ
- qJhC9wCHWNrvg==
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Message-ID: <X81lWZeMaSHi5gz4@sol.localdomain>
-References: <20201203022041.230976-1-ebiggers@kernel.org>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BTCFo1psICK76O3jlTgVwC+qqgFVNzRJMD15/MFmEXU=; b=f
+ GbhLFiyeIWil86+0lp8bYi7HBgjDHZbfva0fjCQDUVSJ/z5dmi9ZozNk95lz9ESrUflRsWKUByswu
+ xw+eWFix0yMkMF6dI+aXJiQc5dOYYJc11RzKjWfrPPXfJXuHb2uJ7+QD0BMNklLor373MyiasWlc1
+ v9oOosEeka6OnErQ=;
+Received: from mail-pg1-f173.google.com ([209.85.215.173])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1kmAFO-001cDr-V6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 06:43:52 +0000
+Received: by mail-pg1-f173.google.com with SMTP id g18so8099610pgk.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 06 Dec 2020 22:43:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=BTCFo1psICK76O3jlTgVwC+qqgFVNzRJMD15/MFmEXU=;
+ b=KUlqcBUkfTfoQA6Gf5V60W+KndKC9YB0nfbveaRvFN9BY5Hp+5x8XZGTmy0J4t4cOr
+ nLSBsWNbZ9aS2WFVxw8Vy+Y7Ek4AmyNY6yTXOOFM1m/a3kT1ymISp7DRLwLq066CckSU
+ v1Q5ixdMGbGF/CARhCXven0qU6pT8EhohJMFYtMvdLlqpdL9xxVL0ZEXW6rFH7dQM7kZ
+ kzaFNOzSOi0579z5jNlrWiQ+nBUk+mGc0f2E9CHhquboDmmv0DxdMfQ2hQWRPH3oIi6M
+ XDOeASpd2e/jt2bJWAt/Rr4bEfUwh56palWQZxqxs47xQnCqoNB60v91UZJA9Lcv/UWK
+ CXEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=BTCFo1psICK76O3jlTgVwC+qqgFVNzRJMD15/MFmEXU=;
+ b=dYC6Qf/c20fqCaosm3Memywbo0ABpGTTC6Y/1c3MkKDZ2fXx7OqdSmUyGo3J8GGXdk
+ z6/mTpmMu1x0j7spn9g5hLpSEsWfPMv/c5GSWoabFPAvcMi+7Ux3Kcb7n1xaUl7jn7Jd
+ oYb1x0s3qy1mSvyV99q0EIBVr7qG9MyTo47ARzV6tRKfYCYzyVIP5rfIXm41kEjJlDlJ
+ Es+dkLL09SbS7lINWaW5FyV8/IXwvAPQaiPcSCVPLbYY26UrDR19c7AHviqHiBlFEHtS
+ e/6R82MXm/S45cLmKrBnh4Hf7PuFGS+QJDCOrZgsTLNWK8qctTrqGJk+EbhJhzn5H86T
+ W55A==
+X-Gm-Message-State: AOAM533Mhlgj3E+qEVwGm3uU2gM8dEACpIz45rOSxV+f7sdWC6YXtWcl
+ fVNYPmXXtmWMXou65d5S6E1ONTw/GM0=
+X-Google-Smtp-Source: ABdhPJwZ+Lw8B9E1ooTt8TvtEBSpREUdNxzXcXVMzRfRqP+zb69cahYrJW4xPn/sBsTLYsCwxqu3Ng==
+X-Received: by 2002:a17:902:9891:b029:d8:fdf6:7c04 with SMTP id
+ s17-20020a1709029891b02900d8fdf67c04mr14700381plp.54.1607323413740; 
+ Sun, 06 Dec 2020 22:43:33 -0800 (PST)
+Received: from robinhsu-p520.ntc.corp.google.com
+ ([2401:fa00:fc:202:1ea0:b8ff:fe77:fe45])
+ by smtp.gmail.com with ESMTPSA id o9sm9079984pjl.11.2020.12.06.22.43.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 06 Dec 2020 22:43:32 -0800 (PST)
+From: Robin Hsu <robinh3123@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, chao@kernel.org
+Date: Mon,  7 Dec 2020 14:42:47 +0800
+Message-Id: <20201207064250.272240-1-robinh3123@gmail.com>
+X-Mailer: git-send-email 2.29.2.576.ga3fc446d84-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201203022041.230976-1-ebiggers@kernel.org>
-X-Spam-Score: 2.4 (++)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: makefile.am]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.173 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (robinh3123[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.173 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (robinh3123[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1km3D5-004iU2-0i
-Subject: Re: [f2fs-dev] [PATCH v2 0/9] Allow deleting files with unsupported
- encryption policy
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kmAFO-001cDr-V6
+Subject: [f2fs-dev] [PATCH v2 0/3] f2fs-tools: sload compression support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,69 +114,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 02, 2020 at 06:20:32PM -0800, Eric Biggers wrote:
-> Currently it's impossible to delete files that use an unsupported
-> encryption policy, as the kernel will just return an error when
-> performing any operation on the top-level encrypted directory, even just
-> a path lookup into the directory or opening the directory for readdir.
-> 
-> It's desirable to return errors for most operations on files that use an
-> unsupported encryption policy, but the current behavior is too strict.
-> We need to allow enough to delete files, so that people can't be stuck
-> with undeletable files when downgrading kernel versions.  That includes
-> allowing directories to be listed and allowing dentries to be looked up.
-> 
-> This series fixes this (on ext4, f2fs, and ubifs) by treating an
-> unsupported encryption policy in the same way as "key unavailable" in
-> the cases that are required for a recursive delete to work.
-> 
-> The actual fix is in patch 9, so see that for more details.
-> 
-> Patches 1-8 are cleanups that prepare for the actual fix by removing
-> direct use of fscrypt_get_encryption_info() by filesystems.
-> 
-> This patchset applies to branch "master" (commit 4a4b8721f1a5) of
-> https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git.
-> 
-> Changed since v1:
->   - Made some minor updates to commit messages.
->   - Added Reviewed-by tags.
-> 
-> Eric Biggers (9):
->   ext4: remove ext4_dir_open()
->   f2fs: remove f2fs_dir_open()
->   ubifs: remove ubifs_dir_open()
->   ext4: don't call fscrypt_get_encryption_info() from dx_show_leaf()
->   fscrypt: introduce fscrypt_prepare_readdir()
->   fscrypt: move body of fscrypt_prepare_setattr() out-of-line
->   fscrypt: move fscrypt_require_key() to fscrypt_private.h
->   fscrypt: unexport fscrypt_get_encryption_info()
->   fscrypt: allow deleting files with unsupported encryption policy
-> 
->  fs/crypto/fname.c           |  8 +++-
->  fs/crypto/fscrypt_private.h | 28 ++++++++++++++
->  fs/crypto/hooks.c           | 16 +++++++-
->  fs/crypto/keysetup.c        | 20 ++++++++--
->  fs/crypto/policy.c          | 22 +++++++----
->  fs/ext4/dir.c               | 16 ++------
->  fs/ext4/namei.c             | 10 +----
->  fs/f2fs/dir.c               | 10 +----
->  fs/ubifs/dir.c              | 11 +-----
->  include/linux/fscrypt.h     | 75 +++++++++++++++++++------------------
->  10 files changed, 126 insertions(+), 90 deletions(-)
-> 
-> 
-> base-commit: 4a4b8721f1a5e4b01e45b3153c68d5a1014b25de
+From: Robin Hsu <robinhsu@google.com>
 
-All applied to fscrypt.git#master for 5.11.
+* 3 patch set:
+  #1: added some #ifdef for easier support
+  #2: main code change
+  #3: automake changes
 
-- Eric
+v2 fix (from v1): fixed a bug and a more elegant error handling flow.
+
+Robin Hsu (3):
+  f2fs-tools: Added #ifdef WITH_func
+  f2fs-tools:sload.f2fs compression support
+  f2fs-tools:sload.f2fs compress: Fixed automake
+
+ configure.ac            |  32 +++++++
+ fsck/Makefile.am        |   9 +-
+ fsck/compress_wrapper.c | 102 ++++++++++++++++++++
+ fsck/compress_wrapper.h |  22 +++++
+ fsck/fsck.h             |  15 +++
+ fsck/main.c             | 157 ++++++++++++++++++++++++++++++-
+ fsck/segment.c          | 202 +++++++++++++++++++++++++++++++++++++---
+ fsck/sload.c            |  67 +++++++++++++
+ include/f2fs_fs.h       |  76 ++++++++++++++-
+ lib/libf2fs_io.c        |  33 +++++++
+ 10 files changed, 698 insertions(+), 17 deletions(-)
+ create mode 100644 fsck/compress_wrapper.c
+ create mode 100644 fsck/compress_wrapper.h
+
+-- 
+2.29.2.576.ga3fc446d84-goog
+
 
 
 _______________________________________________
