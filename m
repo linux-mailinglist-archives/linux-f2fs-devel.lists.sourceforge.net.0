@@ -2,110 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAF432D0AD3
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 07:44:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD2272D0AF2
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 08:05:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmAFd-0005Yg-K9; Mon, 07 Dec 2020 06:44:01 +0000
+	id 1kmAaj-0001W9-Al; Mon, 07 Dec 2020 07:05:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <robinh3123@gmail.com>) id 1kmAFc-0005YI-Cr
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 06:44:00 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kmAah-0001Vt-Ir
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 07:05:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sqbax5Dbv5yNKE4iF+gv9rom4MxEy1t7FeY7u7rK6r8=; b=WSwvd2cSRI9DqFAFB9nyRiqzrk
- qTDr4z5sE+QeY+MGS9cyVXmHHatES7oldPap0SbSjST4FToXTI/yLZNH6ErFQmitvzkZg1wB5szcX
- GvPahseFTC9nJFp1UZTlGC7x83evZYAwd3KP8zGxKuNue6cNtAY4A/riJUZhmXu0jYeI=;
+ bh=SDG0yExj+4TdY2YjjGAojEP5rFbNdBZ5zvTg07AVIE0=; b=JCPtgc2aLVa1LXc2iUnJq1puLc
+ /WlqEjZgnvBc510LuL4LJb360vKB6oLAUxxjLZOuLgS0UCutUkE6Tlydy8sqYmSje8unx+OFJcQkK
+ yF+AXD88emvBq3UyXn8m7OrRJ3J2waEvxYOQHx8W5Bo1wke0knqCZm8ELUtOSVj08P9M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sqbax5Dbv5yNKE4iF+gv9rom4MxEy1t7FeY7u7rK6r8=; b=YyDEqzrMa9jxX00PeE0u1n8wcv
- vOENdV9S+iFSQERFhgghcFTN07R6DBOpCZ1rRJ82McBoDPNj4IYIX5aPgwTb55l+26zjJifrFNGvM
- T9cp7CSJSi8zt2jjeILP9xoI6Z8YQ1FVqVbwOM/cLNSjnLAc4hIAhdiHpJLtdSLZTtrs=;
-Received: from mail-pf1-f177.google.com ([209.85.210.177])
+ bh=SDG0yExj+4TdY2YjjGAojEP5rFbNdBZ5zvTg07AVIE0=; b=QZ5vx6Vs5RB1VOWjdVVPlccAzx
+ cikhnA4Yz8XE60Iie2zzKwkxiZocB51hmqqz89VS8Rf9HFDwsctNbKl5STYOlnxyneoZzXWAz3DGc
+ QrMMFsHvpqhJQojNo27pg3fNfwlk6cOK1yWQibTFSp/E92ex13D8i8kkqd+97zikCHnA=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kmAFY-001cDz-EZ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 06:44:00 +0000
-Received: by mail-pf1-f177.google.com with SMTP id f9so8228854pfc.11
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 06 Dec 2020 22:43:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=sqbax5Dbv5yNKE4iF+gv9rom4MxEy1t7FeY7u7rK6r8=;
- b=cN+6nwPn6B7ucFgkKVAlTbfUqzFRvR/lhJrFajfA1g+nEuikU3wsc+hB3jKhoZ+9cp
- 7rvUHj8vBcmVCkne7jaNXkaz9VU0b9vQEjs/kYxoRG0TARu1XhxKJwv6gD0O+1Nmn4D5
- 44p0b5GhuDDKbBay4Z+iQe4VqowErcwB2FrzV0KmgBcBHH4iUpBxWTkgUHAV3AWs3BoF
- 4oG5V6+vlSOKKtBo4TPQojMBBLZ23kk0M0+KlSyI+hQ0CDtrg17pxB8vHYnszbPw3rx7
- n53o1pn8bbDPUGcHDYonu02d7W0TR0UnyLr1tnIVDDhkmXABS43Ivp5aEgu04aEx7tBk
- l/VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=sqbax5Dbv5yNKE4iF+gv9rom4MxEy1t7FeY7u7rK6r8=;
- b=knsGKjTVNVhPZSEe6TbSzpQEmMUOS9jUtpB2KPMhNs5Pcj7+Phm+jJdPNUpwYAhsPI
- EBLIdorFln58l+GTlprmyGN0ErlLtwOJUsUoNAPttS4SvTWGnY+XG+gSV88Bt4HCe3KK
- LS/ORfJmk5oGGZb+FOxWUx/seQWlqN03RA+2O8iDotfUeRizvd/iv11aeqX7JHe7SLEK
- Vetmf1n/I01c+qHk0Vmqom0CvWhpFBjbhBq3nLlmfzD+oeB6yLmcZ2nffVaoB54wO3Sq
- kr1gRA9c/6Ueg9gce8A6RDiY7Nir27Usw81WiyuIyJ7ulv0PBgm1YluLTCst/ta5aN4z
- tcHA==
-X-Gm-Message-State: AOAM531B6D/Vj2ZnY9saQP6EM9ggSQ3mgne5iHcIpS5QD/WQyxaN4UCM
- yXpqNzzXFKzEdUMC8cDuF4qmq2G6Br0=
-X-Google-Smtp-Source: ABdhPJzJwn5CVHyaRWkeYIswJgrj2NG64VIjXmkaMIY9sAP8Vis9NrJmmGMOnl5KBxQ5DfavM9EQCA==
-X-Received: by 2002:a17:902:b209:b029:d8:e7a4:bf10 with SMTP id
- t9-20020a170902b209b02900d8e7a4bf10mr14910473plr.77.1607323422577; 
- Sun, 06 Dec 2020 22:43:42 -0800 (PST)
-Received: from robinhsu-p520.ntc.corp.google.com
- ([2401:fa00:fc:202:1ea0:b8ff:fe77:fe45])
- by smtp.gmail.com with ESMTPSA id o9sm9079984pjl.11.2020.12.06.22.43.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Dec 2020 22:43:42 -0800 (PST)
-From: Robin Hsu <robinh3123@gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, chao@kernel.org
-Date: Mon,  7 Dec 2020 14:42:50 +0800
-Message-Id: <20201207064250.272240-4-robinh3123@gmail.com>
-X-Mailer: git-send-email 2.29.2.576.ga3fc446d84-goog
-In-Reply-To: <20201207064250.272240-1-robinh3123@gmail.com>
-References: <20201207064250.272240-1-robinh3123@gmail.com>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kmAaZ-001dK7-Bg
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 07:05:46 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CqDp84hwVzkmRk;
+ Mon,  7 Dec 2020 15:04:48 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 7 Dec 2020
+ 15:05:24 +0800
+To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20201205042626.1113600-1-daeho43@gmail.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <c3c41d53-2a99-17a2-223a-3d674613a417@huawei.com>
+Date: Mon, 7 Dec 2020 15:05:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20201205042626.1113600-1-daeho43@gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: makefile.am]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (robinh3123[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (robinh3123[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.177 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.177 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kmAFY-001cDz-EZ
-Subject: [f2fs-dev] [PATCH v2 3/3] f2fs-tools:sload.f2fs compress: Fixed
- automake
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kmAaZ-001dK7-Bg
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix race of pending_pages in
+ decompression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,108 +79,251 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Robin Hsu <robinhsu@google.com>
+On 2020/12/5 12:26, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> I found out f2fs_free_dic() is invoked in a wrong timing, but
+> f2fs_verify_bio() still needed the dic info and it triggered the
+> below kernel panic. It has been caused by the race condition of
+> pending_pages value between decompression and verity logic, when
+> the same compression cluster had been split in different bios.
+> By split bios, f2fs_verify_bio() ended up with decreasing
+> pending_pages value before it is reset to nr_cpages by
+> f2fs_decompress_pages() and caused the kernel panic.
+> 
+> [ 4416.564763] Unable to handle kernel NULL pointer dereference
+>                 at virtual address 0000000000000000
+> ...
+> [ 4416.896016] Workqueue: fsverity_read_queue f2fs_verity_work
+> [ 4416.908515] pc : fsverity_verify_page+0x20/0x78
+> [ 4416.913721] lr : f2fs_verify_bio+0x11c/0x29c
+> [ 4416.913722] sp : ffffffc019533cd0
+> [ 4416.913723] x29: ffffffc019533cd0 x28: 0000000000000402
+> [ 4416.913724] x27: 0000000000000001 x26: 0000000000000100
+> [ 4416.913726] x25: 0000000000000001 x24: 0000000000000004
+> [ 4416.913727] x23: 0000000000001000 x22: 0000000000000000
+> [ 4416.913728] x21: 0000000000000000 x20: ffffffff2076f9c0
+> [ 4416.913729] x19: ffffffff2076f9c0 x18: ffffff8a32380c30
+> [ 4416.913731] x17: ffffffc01f966d97 x16: 0000000000000298
+> [ 4416.913732] x15: 0000000000000000 x14: 0000000000000000
+> [ 4416.913733] x13: f074faec89ffffff x12: 0000000000000000
+> [ 4416.913734] x11: 0000000000001000 x10: 0000000000001000
+> [ 4416.929176] x9 : ffffffff20d1f5c7 x8 : 0000000000000000
+> [ 4416.929178] x7 : 626d7464ff286b6b x6 : ffffffc019533ade
+> [ 4416.929179] x5 : 000000008049000e x4 : ffffffff2793e9e0
+> [ 4416.929180] x3 : 000000008049000e x2 : ffffff89ecfa74d0
+> [ 4416.929181] x1 : 0000000000000c40 x0 : ffffffff2076f9c0
+> [ 4416.929184] Call trace:
+> [ 4416.929187]  fsverity_verify_page+0x20/0x78
+> [ 4416.929189]  f2fs_verify_bio+0x11c/0x29c
+> [ 4416.929192]  f2fs_verity_work+0x58/0x84
+> [ 4417.050667]  process_one_work+0x270/0x47c
+> [ 4417.055354]  worker_thread+0x27c/0x4d8
+> [ 4417.059784]  kthread+0x13c/0x320
+> [ 4417.063693]  ret_from_fork+0x10/0x18
 
-Fixed automake for sload.f2fs compression support
+Is race condition as below?
 
-./configure now will by default depends on liblzo2 and liblz4.
+Thread A			f2fs_post_read_wq		fsverity_wq
+- f2fs_read_multi_pages()
+  - f2fs_alloc_dic
+   - dic->pending_pages = 2
+   - submit_bio()
+   - submit_bio()
+				- f2fs_post_read_work() handle first bio
+				 - f2fs_decompress_work()
+				  - __read_end_io()
+				   - f2fs_decompress_pages()
+				    - dic->pending_pages--
+				 - enqueue f2fs_verity_work()
+								- f2fs_verity_work() handle first bio
+								 - f2fs_verify_bio()
+								  - dic->pending_pages--
+				- f2fs_post_read_work() handle second bio
+				 - f2fs_decompress_work()
+				 - enqueue f2fs_verity_work()
+								  - f2fs_verify_pages()
+								  - f2fs_free_dic()
+								
+								- f2fs_verity_work() handle second bio
+								 - f2fs_verfy_bio()
+								  - use-after-free on dic
+If this is correct, could you please add this into commit message?
 
-To compile without liblzo2 (and thus not support liblzo2 compression),
-run ./configure with '--without-lzo2' option.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+> v3: back to v1 and enabled verity in a unit of cluster
+> v2: merged verity_pages with pending_pages, and increased the
+>      pending_pages count only if STEP_VERITY is set on bio
+> ---
+>   fs/f2fs/compress.c |  2 --
+>   fs/f2fs/data.c     | 51 ++++++++++++++++++++++++++++++++++++----------
+>   fs/f2fs/f2fs.h     |  1 +
+>   3 files changed, 41 insertions(+), 13 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 87090da8693d..832b19986caf 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -803,8 +803,6 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
+>   	if (cops->destroy_decompress_ctx)
+>   		cops->destroy_decompress_ctx(dic);
+>   out_free_dic:
+> -	if (verity)
+> -		atomic_set(&dic->pending_pages, dic->nr_cpages);
+>   	if (!verity)
+>   		f2fs_decompress_end_io(dic->rpages, dic->cluster_size,
+>   								ret, false);
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 42254d3859c7..861e5783a5fc 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -202,7 +202,7 @@ static void f2fs_verify_bio(struct bio *bio)
+>   		dic = (struct decompress_io_ctx *)page_private(page);
+>   
+>   		if (dic) {
+> -			if (atomic_dec_return(&dic->pending_pages))
+> +			if (atomic_dec_return(&dic->verity_pages))
+>   				continue;
+>   			f2fs_verify_pages(dic->rpages,
+>   						dic->cluster_size);
+> @@ -1027,7 +1027,8 @@ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
+>   
+>   static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+>   				      unsigned nr_pages, unsigned op_flag,
+> -				      pgoff_t first_idx, bool for_write)
+> +				      pgoff_t first_idx, bool for_write,
+> +				      bool for_verity)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>   	struct bio *bio;
+> @@ -1049,7 +1050,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+>   		post_read_steps |= 1 << STEP_DECRYPT;
+>   	if (f2fs_compressed_file(inode))
+>   		post_read_steps |= 1 << STEP_DECOMPRESS_NOWQ;
+> -	if (f2fs_need_verity(inode, first_idx))
+> +	if (for_verity && f2fs_need_verity(inode, first_idx))
+>   		post_read_steps |= 1 << STEP_VERITY;
+>   
+>   	if (post_read_steps) {
+> @@ -1079,7 +1080,7 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+>   	struct bio *bio;
+>   
+>   	bio = f2fs_grab_read_bio(inode, blkaddr, 1, op_flags,
+> -					page->index, for_write);
+> +					page->index, for_write, true);
+>   	if (IS_ERR(bio))
+>   		return PTR_ERR(bio);
+>   
+> @@ -2133,7 +2134,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+>   	if (bio == NULL) {
+>   		bio = f2fs_grab_read_bio(inode, block_nr, nr_pages,
+>   				is_readahead ? REQ_RAHEAD : 0, page->index,
+> -				false);
+> +				false, true);
+>   		if (IS_ERR(bio)) {
+>   			ret = PTR_ERR(bio);
+>   			bio = NULL;
+> @@ -2180,6 +2181,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>   	const unsigned blkbits = inode->i_blkbits;
+>   	const unsigned blocksize = 1 << blkbits;
+>   	struct decompress_io_ctx *dic = NULL;
+> +	struct bio_post_read_ctx *ctx;
+> +	bool for_verity = false;
+>   	int i;
+>   	int ret = 0;
+>   
+> @@ -2245,10 +2248,22 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>   		goto out_put_dnode;
+>   	}
+>   
+> +	if (fsverity_active(cc->inode)) {
+> +		atomic_set(&dic->verity_pages, cc->nr_cpages);
+> +		for_verity = true;
+> +
+> +		if (bio) {
+> +			ctx = bio->bi_private;
+> +			if (!(ctx->enabled_steps & (1 << STEP_VERITY))) {
 
-To compile without liblz4 (and thus not support liblz4 compression),
-run ./configure with '--without-lz4' option.
+It looks like it will be better to move this into merge condition?
 
-Test: Build with automake OK on glinux
-Bug: 170918502
-Signed-off-by: Robin Hsu <robinhsu@google.com>
-Change-Id: I25d339e4cab4ca196781da89fc3df3e13f869234
----
- configure.ac     | 32 ++++++++++++++++++++++++++++++++
- fsck/Makefile.am |  9 ++++++---
- 2 files changed, 38 insertions(+), 3 deletions(-)
+		if (bio && (!page_is_mergeable(sbi, bio,
+					*last_block_in_bio, blkaddr) ||
+		    !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL) ||
+			f2fs_verify_mergeable_bio())) {
 
-diff --git a/configure.ac b/configure.ac
-index 1e5619d..3a357b2 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -44,6 +44,14 @@ AC_ARG_WITH([blkid],
- 	AS_HELP_STRING([--without-blkid],
- 	  [Ignore presence of libblkid and disable blkid support]))
- 
-+AC_ARG_WITH([lzo2],
-+	AS_HELP_STRING([--without-lzo2],
-+	  [Ignore liblzo ver.2 for sload (not supporting lzo compression)]))
-+
-+AC_ARG_WITH([lz4],
-+	AS_HELP_STRING([--without-lz4],
-+	  [Ignore liblz4 for sload (not supporting lz4 compression)]))
-+
- # Checks for programs.
- AC_PROG_CC
- AC_PROG_LIBTOOL
-@@ -52,6 +60,30 @@ AC_PATH_PROG([LDCONFIG], [ldconfig],
-        [$PATH:/sbin])
- 
- # Checks for libraries.
-+AS_IF([test "x$with_lzo2" != xno],
-+            [AC_CHECK_LIB([lzo2], [main],
-+              [AC_SUBST([liblzo2_LIBS], ["-llzo2"])
-+               AC_DEFINE([HAVE_LIBLZO2], [1],
-+                         [Define if you have liblzo2])
-+              ],
-+              [if test "x$with_lzo2" != xcheck; then
-+                 AC_MSG_FAILURE(
-+                   [--with-lzo2 was given (or by default), but test for liblzo2 failed])
-+               fi
-+              ], [])])
-+
-+AS_IF([test "x$with_lz4" != xno],
-+            [AC_CHECK_LIB([lz4], [main],
-+              [AC_SUBST([liblz4_LIBS], ["-llz4"])
-+               AC_DEFINE([HAVE_LIBLZ4], [1],
-+                         [Define if you have liblz4])
-+              ],
-+              [if test "x$with_lz4" != xcheck; then
-+                 AC_MSG_FAILURE(
-+                   [--with-lz4 was given (or by default), but test for liblz4 failed])
-+               fi
-+              ], [])])
-+
- PKG_CHECK_MODULES([libuuid], [uuid])
- 
- AS_IF([test "x$with_selinux" != "xno"],
-diff --git a/fsck/Makefile.am b/fsck/Makefile.am
-index 1fc7310..74bc4b8 100644
---- a/fsck/Makefile.am
-+++ b/fsck/Makefile.am
-@@ -3,12 +3,15 @@
- AM_CPPFLAGS = ${libuuid_CFLAGS} -I$(top_srcdir)/include
- AM_CFLAGS = -Wall
- sbin_PROGRAMS = fsck.f2fs
--noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h quotaio_tree.h quotaio_v2.h xattr.h
-+noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h \
-+		quotaio_tree.h quotaio_v2.h xattr.h compress_wrapper.h
- include_HEADERS = $(top_srcdir)/include/quota.h
- fsck_f2fs_SOURCES = main.c fsck.c dump.c mount.c defrag.c resize.c \
--		node.c segment.c dir.c sload.c xattr.c \
-+		node.c segment.c dir.c sload.c xattr.c compress_wrapper.c \
- 		dict.c mkquota.c quotaio.c quotaio_tree.c quotaio_v2.c
--fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} $(top_builddir)/lib/libf2fs.la
-+fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} \
-+	${liblzo2_LIBS} ${liblz4_LIBS} \
-+	$(top_builddir)/lib/libf2fs.la
- 
- install-data-hook:
- 	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/dump.f2fs
--- 
-2.29.2.576.ga3fc446d84-goog
+Thanks,
 
+> +				__submit_bio(sbi, bio, DATA);
+> +				bio = NULL;
+> +			}
+> +		}
+> +	}
+> +
+>   	for (i = 0; i < dic->nr_cpages; i++) {
+>   		struct page *page = dic->cpages[i];
+>   		block_t blkaddr;
+> -		struct bio_post_read_ctx *ctx;
+>   
+>   		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+>   						dn.ofs_in_node + i + 1);
+> @@ -2264,17 +2279,31 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>   		if (!bio) {
+>   			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
+>   					is_readahead ? REQ_RAHEAD : 0,
+> -					page->index, for_write);
+> +					page->index, for_write, for_verity);
+>   			if (IS_ERR(bio)) {
+> +				unsigned int remained = dic->nr_cpages - i;
+> +				bool release = false;
+> +
+>   				ret = PTR_ERR(bio);
+>   				dic->failed = true;
+> -				if (!atomic_sub_return(dic->nr_cpages - i,
+> -							&dic->pending_pages)) {
+> +
+> +				if (for_verity) {
+> +					if (!atomic_sub_return(remained,
+> +						&dic->verity_pages))
+> +						release = true;
+> +				} else {
+> +					if (!atomic_sub_return(remained,
+> +						&dic->pending_pages))
+> +						release = true;
+> +				}
+> +
+> +				if (release) {
+>   					f2fs_decompress_end_io(dic->rpages,
+> -							cc->cluster_size, true,
+> -							false);
+> +						cc->cluster_size, true,
+> +						false);
+>   					f2fs_free_dic(dic);
+>   				}
+> +
+>   				f2fs_put_dnode(&dn);
+>   				*bio_ret = NULL;
+>   				return ret;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 94d16bde5e24..f328f55fb0a0 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1341,6 +1341,7 @@ struct decompress_io_ctx {
+>   	size_t rlen;			/* valid data length in rbuf */
+>   	size_t clen;			/* valid data length in cbuf */
+>   	atomic_t pending_pages;		/* in-flight compressed page count */
+> +	atomic_t verity_pages;		/* in-flight page count for verity */
+>   	bool failed;			/* indicate IO error during decompression */
+>   	void *private;			/* payload buffer for specified decompression algorithm */
+>   	void *private2;			/* extra payload buffer */
+> 
 
 
 _______________________________________________
