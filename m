@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 879192D15DE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 17:24:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE9B2D1685
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Dec 2020 17:42:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmJIq-0002wm-Fk; Mon, 07 Dec 2020 16:23:56 +0000
+	id 1kmJam-0001l4-2K; Mon, 07 Dec 2020 16:42:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kmJIp-0002we-5Q
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 16:23:55 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kmJak-0001km-Og
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 16:42:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jbuXSXkpWZcUp/VKpjCnoXJjYIN6M0CA6TkocxY3KN8=; b=icv+6JW2bA2ztfqnr9USDds5sX
- 9+8C3IH4++Dd36bXU8LfhsxiqO7MViAOVhxnt8oNy1pWPwZdVj562Q5xg5nqUoG71RuFFyEsUDhRv
- 5st+/aqxZrT7i5jwaMWvuLsb5ny3EhttEK7vajev2b3EnI2gWWPi/ovDMBuqLjzQXdT0=;
+ bh=RDlSlUHv6RFTAHhfZdr3V3n70kGEWD5iUxt8Bi5X3Ww=; b=R6RA2u50MpcYCulXG+lqouqwMc
+ 2Kl+HaNtRBG34B5Fe55hI4uqc9mpl0R/5NbELKoeSvLF9G65XITzu09M0cpoXj//oSmxieQiPi/NT
+ jQvRbWBN3ovq1MNPTNA7AtQAc3R46DGsGiAsF4EYsIcJvrOohJVfhXszhFyuOY2hnUXM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,51 +29,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jbuXSXkpWZcUp/VKpjCnoXJjYIN6M0CA6TkocxY3KN8=; b=I7OCPxqsWgTUZHid+o1k0R+9Uv
- ZDUcnv31CnlGDr3fd90I66Y7z7jYfRWP4VCEYlOqDaFaGG6jpUyp9Hi3NEnhhVRZFGeqyl+M2MYdu
- UC/7PgH6d7pWKh5nEO8LjONZHcMkc6SiJYjqQopA5lHTgSABA943EaZ3BhtTyxWh3s4U=;
+ bh=RDlSlUHv6RFTAHhfZdr3V3n70kGEWD5iUxt8Bi5X3Ww=; b=X7pDivX7Y15hHNQORgsCupOWaT
+ TDegZtL2fMV/UtdgQxBc7ESvIvnXZOpwEOTc/uJ43dhIBQZ2mVMd7Vz049iskiwDvknxCK+AjemDt
+ CrxysK/96hgEMwXxymOU2IpDoJyqsP1lE06wUrjCQX0M/37w3ItRa9OfokJ7ef0t74Yg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmJIi-005XrU-9g
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 16:23:55 +0000
-Date: Mon, 7 Dec 2020 08:23:33 -0800
+ id 1kmJac-005Yqy-8S
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Dec 2020 16:42:26 +0000
+Date: Mon, 7 Dec 2020 08:42:11 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607358215;
- bh=RtjDqwhG7C9VhOOl+aSC4bpaP4bWy/pDESZGvoZx9zU=;
+ s=k20201202; t=1607359332;
+ bh=r39jSa7O4h4XF+mtH8ZkdKDvVNF09KuX0GRwTm1zppU=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=DU++70I+51+gNFDYK6kI4FDLSxpKQIioYgO98XUgQD5TEitNO8fdoO6ZTJvlt/1/W
- p098+X1lEHR6GVBVarJB9paZJikaNWVh9rC9zVEOnF+38dt7Cb1DVavSB3d4Ou94Lv
- 006HQuqQMKuB1t4xq9n7jvVjFRadF035QrAsnLtr19qUgWftR3pj/UUTq3AvIs1Hym
- apmeZ0zxAs9vRgvpqBojlDjk/diVfwzykjYg6t3wsQz9fbFC7g/cbazu07923RBEKI
- dLWNhiGeS/dEfhyC3uIsO3x3y69Ux7EVAFWzUmsn/F3O/o8RYgp+0G+SG6wGe1fmvi
- xEQpVuRG7eSQg==
+ b=PuveFqKDjL3pYA8tgl7/wgzAdtn5QZxJPtExTfKEto6Fl8R1rgpB37DBAbi/qGu3/
+ tfbR5z4EwZp/4pHzAhPLeGM3ObvwjjSds9IV5L22ACXP3641WlC32VzvZFwBLEsNW4
+ c8HSApyYTwiUk7v45i15/URjObZ+Lz9Zcg8n0hG5mNI9GTEavhjLAXvN95r5LlaOuc
+ wMQw6bY7YSHsemGpq4ybnbU1L8LfGFyQ1KR7XMQOCIIOs7QjUZEXl2tbDMQejryN2+
+ BUBJVZ7n3IlBXSZmhiipJB3njLMmjkq5DYAcyrrPVUVwijUGHfVu4u9IPl48vAJDOl
+ N8b1tl89Cgebw==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Robin Hsu <robinh3123@gmail.com>
-Message-ID: <X85XBTIuQghbh7Cw@google.com>
-References: <20201207064250.272240-1-robinh3123@gmail.com>
- <20201207064250.272240-4-robinh3123@gmail.com>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <X85bY0Itm0vxH3+I@google.com>
+References: <20201205042626.1113600-1-daeho43@gmail.com>
+ <c3c41d53-2a99-17a2-223a-3d674613a417@huawei.com>
+ <CACOAw_zwbmYHbUVUmzGMci9SaSVSrP8NXXavHBSSLxbAEOrMcw@mail.gmail.com>
+ <c45d327f-b669-a0ec-bd77-0c95dfd8db2c@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201207064250.272240-4-robinh3123@gmail.com>
+In-Reply-To: <c45d327f-b669-a0ec-bd77-0c95dfd8db2c@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: configure.ac]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kmJIi-005XrU-9g
-Subject: Re: [f2fs-dev] [PATCH v2 3/3] f2fs-tools:sload.f2fs compress: Fixed
- automake
+X-Headers-End: 1kmJac-005Yqy-8S
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix race of pending_pages in
+ decompression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,112 +83,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/07, Robin Hsu wrote:
-> From: Robin Hsu <robinhsu@google.com>
+On 12/07, Chao Yu wrote:
+> On 2020/12/7 15:28, Daeho Jeong wrote:
+> > > It looks like it will be better to move this into merge condition?
+> > > 
+> > >                  if (bio && (!page_is_mergeable(sbi, bio,
+> > >                                          *last_block_in_bio, blkaddr) ||
+> > >                      !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL) ||
+> > >                          f2fs_verify_mergeable_bio())) {
+> > > 
+> > 
+> > I tried this for the first time, but it requires unnecessary checks
+> > within the compression cluster.
 > 
-> Fixed automake for sload.f2fs compression support
+> We only need to check f2fs_verify_mergeable_bio for i == 0 case? something like:
 > 
-> ./configure now will by default depends on liblzo2 and liblz4.
-> 
-> To compile without liblzo2 (and thus not support liblzo2 compression),
-> run ./configure with '--without-lzo2' option.
-> 
-> To compile without liblz4 (and thus not support liblz4 compression),
-> run ./configure with '--without-lz4' option.
-> 
-> Test: Build with automake OK on glinux
-> Bug: 170918502
-> Signed-off-by: Robin Hsu <robinhsu@google.com>
-> Change-Id: I25d339e4cab4ca196781da89fc3df3e13f869234
-> ---
->  configure.ac     | 32 ++++++++++++++++++++++++++++++++
->  fsck/Makefile.am |  9 ++++++---
->  2 files changed, 38 insertions(+), 3 deletions(-)
-> 
-> diff --git a/configure.ac b/configure.ac
-> index 1e5619d..3a357b2 100644
-> --- a/configure.ac
-> +++ b/configure.ac
-> @@ -44,6 +44,14 @@ AC_ARG_WITH([blkid],
->  	AS_HELP_STRING([--without-blkid],
->  	  [Ignore presence of libblkid and disable blkid support]))
->  
-> +AC_ARG_WITH([lzo2],
-> +	AS_HELP_STRING([--without-lzo2],
-> +	  [Ignore liblzo ver.2 for sload (not supporting lzo compression)]))
-> +
-> +AC_ARG_WITH([lz4],
-> +	AS_HELP_STRING([--without-lz4],
-> +	  [Ignore liblz4 for sload (not supporting lz4 compression)]))
-> +
->  # Checks for programs.
->  AC_PROG_CC
->  AC_PROG_LIBTOOL
-> @@ -52,6 +60,30 @@ AC_PATH_PROG([LDCONFIG], [ldconfig],
->         [$PATH:/sbin])
->  
->  # Checks for libraries.
-> +AS_IF([test "x$with_lzo2" != xno],
-> +            [AC_CHECK_LIB([lzo2], [main],
-> +              [AC_SUBST([liblzo2_LIBS], ["-llzo2"])
-> +               AC_DEFINE([HAVE_LIBLZO2], [1],
-> +                         [Define if you have liblzo2])
-> +              ],
-> +              [if test "x$with_lzo2" != xcheck; then
-> +                 AC_MSG_FAILURE(
-> +                   [--with-lzo2 was given (or by default), but test for liblzo2 failed])
-> +               fi
-> +              ], [])])
-> +
-> +AS_IF([test "x$with_lz4" != xno],
-> +            [AC_CHECK_LIB([lz4], [main],
-> +              [AC_SUBST([liblz4_LIBS], ["-llz4"])
-> +               AC_DEFINE([HAVE_LIBLZ4], [1],
-> +                         [Define if you have liblz4])
-> +              ],
-> +              [if test "x$with_lz4" != xcheck; then
-> +                 AC_MSG_FAILURE(
-> +                   [--with-lz4 was given (or by default), but test for liblz4 failed])
-> +               fi
-> +              ], [])])
-> +
+> static bool f2fs_verify_mergeable_bio(struct bio *bio, bool verify, bool first_page)
+> {
+> 	if (!first_page)
 
-Please don't bother users to be aware of libraries only for sload.f2fs using
-compression.
+Agreed that we don't need to run this instruction for every pages.
 
->  PKG_CHECK_MODULES([libuuid], [uuid])
->  
->  AS_IF([test "x$with_selinux" != "xno"],
-> diff --git a/fsck/Makefile.am b/fsck/Makefile.am
-> index 1fc7310..74bc4b8 100644
-> --- a/fsck/Makefile.am
-> +++ b/fsck/Makefile.am
-> @@ -3,12 +3,15 @@
->  AM_CPPFLAGS = ${libuuid_CFLAGS} -I$(top_srcdir)/include
->  AM_CFLAGS = -Wall
->  sbin_PROGRAMS = fsck.f2fs
-> -noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h quotaio_tree.h quotaio_v2.h xattr.h
-> +noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h \
-> +		quotaio_tree.h quotaio_v2.h xattr.h compress_wrapper.h
->  include_HEADERS = $(top_srcdir)/include/quota.h
->  fsck_f2fs_SOURCES = main.c fsck.c dump.c mount.c defrag.c resize.c \
-> -		node.c segment.c dir.c sload.c xattr.c \
-> +		node.c segment.c dir.c sload.c xattr.c compress_wrapper.c \
->  		dict.c mkquota.c quotaio.c quotaio_tree.c quotaio_v2.c
-> -fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} $(top_builddir)/lib/libf2fs.la
-> +fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} \
-> +	${liblzo2_LIBS} ${liblz4_LIBS} \
-> +	$(top_builddir)/lib/libf2fs.la
->  
->  install-data-hook:
->  	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/dump.f2fs
-> -- 
-> 2.29.2.576.ga3fc446d84-goog
+> 		return false;
+> 	if (!verify)
+> 		return false;
+> 
+> 	ctx = bio->bi_private;
+> 	if (!(ctx->enabled_steps & (1 << STEP_VERITY)))
+> 		return true;
+> }
+> 
+> Thoughts?
+> 
+> > I wanted to just check one time in the beginning of the cluster.
+> > What do you think?
+> 
+> It's trivial, but I'm think about the readability... at least, one line comment
+> is needed to describe why we submit previous bio. :)
+
+I added like this. :P
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=f189a2471df2560e5834d999ab4ff68bc10853e4
+
+> 
+> Thanks,
+> 
+> > .
+> > 
 
 
 _______________________________________________
