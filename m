@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1D992D2194
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Dec 2020 04:49:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A7F42D2196
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Dec 2020 04:52:00 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmU0Z-0003Ve-Oo; Tue, 08 Dec 2020 03:49:47 +0000
+	id 1kmU2g-0003lz-0i; Tue, 08 Dec 2020 03:51:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kmU0X-0003VM-Rc
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 03:49:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kmU2d-0003lg-Ug
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 03:51:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Fu5y+4SdNUY6fES5c4juJXRA/a2B6b9V0whODR+68tI=; b=Z+eNPj9JgTf+p4KrKkXJqJU8el
- 0xUm1UkMiIUrD/fqWUzvtQNi5439L4DOUqJzvocon+rG4Z1oiGu81yg4ihhN1irJJFc3evjrkjPCv
- Z8+kwOytB4u7fpRLUg0k0DQbAMJFjHUztRc8gJ1Ue1K4C8m2+lyLIZLZFxljkBPL9m5c=;
+ bh=DLo32PKIqBM5w0wTtv7kVLHl6QZIY2IiVw8y3BJbO8I=; b=B85ZRaIO/DsU7QqpvYXodZ3t+w
+ pNOlYne97yJmY4gVIiahw1mZnZHS9IFBR1BSernJAEVl4MtGVGaxjmogqKtu6tjoFCPEnjOal9uHZ
+ kJ4pWbRNJoIczPfx+XJamrlIjZxVSZC45KeG15zHQI6gV5ZATMf5Wv+ZPot74xF2ZUuo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Fu5y+4SdNUY6fES5c4juJXRA/a2B6b9V0whODR+68tI=; b=mr1jWOV75K3sQxxoiRStg/6TWq
- RF+fyq32NzJmrMxSYZ8fJp/99I0pIDvIBKb16cIZBJ+zyzmA1elSq5Hx/nDRPYnn3Kmuu+z0FB1kA
- KpISYX68+dwTAaot9D8QvTfjhv3cBnJ3GAoobz9FqZkoypeuZi4gMf+hJTeS5EP4mr68=;
+ bh=DLo32PKIqBM5w0wTtv7kVLHl6QZIY2IiVw8y3BJbO8I=; b=kcly1PeLqHyt7tR+zJJCcYQUE+
+ nN7RvxoynTFxCO67ER6nXsE63/j2DnC7cbQZYkIgoOf4a95QgddC3Bffi6Y3B45S2O6J5vE2/Oyjz
+ gKl/OwqRXcpB5wx6tQ328D49ePuMHzr03zZgYuSUNe4uVp9vDRheo8fDxyjQ8nQthX/8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmU0R-002vmR-0S
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 03:49:45 +0000
-Date: Mon, 7 Dec 2020 19:49:15 -0800
+ id 1kmU2P-002vuU-MB
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 03:51:55 +0000
+Date: Mon, 7 Dec 2020 19:51:27 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607399373;
- bh=K+AuuBZl4hBPvkhnz+5DsdlBPwu1F5l2MO6LkZGaZhg=;
+ s=k20201202; t=1607399488;
+ bh=uwHFkmRMJNQWu5o/EktiSUuQpKFAf8s/mDCjQuqN0WU=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=m43jbMlV5Adfj+4GDftjqlqK9gsflMPNoZNr0MNhv8r7E2laJOnOhRlrbHijhOOYa
- JgTL1IJS4RlKO85/Dm6SoqZq8DakS5MNbROKyuu3D+VcoQM97Q3QB/nXM7onSTSelY
- TZKG9cYrbJIKaqsJ0hU4hp1/bC9LabTo0EnTv+4DFm/JAVYS1CMJerRQW2cb4q1uka
- cNwakO6vJoc4vFMyQYRqWZslvNfHROcig2VARRAQhn9vuie077K7YdbdP4/0W2ZGpr
- 6DM9Pt+4KSrM0xVhyO+qePsDeF78nMBdex5a+qkWEv9yvWolb7hZ8gfqot9aB9Jspy
- EKgQA9IUPI3+Q==
+ b=hj2AQrK111a4NAJdVMKLrtiByZkLgjt3j1np2yhikhW+uCESRy7eYd7DxHAtQvjBe
+ 2yDJghoslgQxsec98NCG9pdjn8o81bXne83X09b5B3h8xhLDbnAIT67F0NFH358EFc
+ 2h6ybdNfjOizuC8ETt+xjz/f41rLNhYAbFalqIEd5Ac5JLhJOWQFQiRv7s5z0Jx6R1
+ k5Y8XR3CkWT5mnyJtm/QnmZf93RgC7RJW2ZCVRGQvp6kHsnBnTI64wfSBesMwdPEUV
+ aFfHhiadgico2WlHLVtYPC4sYe8uyt9pTB1W8BG/uF1U1UDu8AZMRBo80FhT8yAE/H
+ 43O3L4Xa5pzAw==
 From: Eric Biggers <ebiggers@kernel.org>
 To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <X873u1lHmTwktniU@gmail.com>
-References: <20201203065615.402494-1-daeho43@gmail.com>
+Message-ID: <X874P2evu7SUgjBA@gmail.com>
+References: <20201201040803.3590442-1-daeho43@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201203065615.402494-1-daeho43@gmail.com>
+In-Reply-To: <20201201040803.3590442-1-daeho43@gmail.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -66,9 +66,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kmU0R-002vmR-0S
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add F2FS_IOC_DECOMPRESS_FILE and
- F2FS_IOC_COMPRESS_FILE
+X-Headers-End: 1kmU2P-002vuU-MB
+Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: add compress_mode mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,21 +85,83 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Dec 03, 2020 at 03:56:15PM +0900, Daeho Jeong wrote:
+On Tue, Dec 01, 2020 at 01:08:02PM +0900, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
 > 
-> Added two ioctl to decompress/compress explicitly the compression
-> enabled file in "compress_mode=user" mount option.
-> 
-> Using these two ioctls, the users can make a control of compression
-> and decompression of their files.
+> We will add a new "compress_mode" mount option to control file
+> compression mode. This supports "fs" and "user". In "fs" mode (default),
+> f2fs does automatic compression on the compression enabled files.
+> In "user" mode, f2fs disables the automaic compression and gives the
+> user discretion of choosing the target file and the timing. It means
+> the user can do manual compression/decompression on the compression
+> enabled files using ioctls.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
 > ---
+> v2: changed mount option name and added more explanation of mount option
+> ---
+>  Documentation/filesystems/f2fs.rst | 35 ++++++++++++++++++++++++++++++
+>  fs/f2fs/compress.c                 |  2 +-
+>  fs/f2fs/data.c                     |  2 +-
+>  fs/f2fs/f2fs.h                     | 30 +++++++++++++++++++++++++
+>  fs/f2fs/segment.c                  |  2 +-
+>  fs/f2fs/super.c                    | 23 ++++++++++++++++++++
+>  6 files changed, 91 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index b8ee761c9922..5eb8d63439ec 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -260,6 +260,13 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+>  			 For other files, we can still enable compression via ioctl.
+>  			 Note that, there is one reserved special extension '*', it
+>  			 can be set to enable compression for all files.
+> +compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
+> +			 modes. In "fs" mode (default), f2fs does automatic compression
+> +			 on the compression enabled files. In "user" mode, f2fs disables
+> +			 the automaic compression and gives the user discretion of
+> +			 choosing the target file and the timing. The user can do manual
+> +			 compression/decompression on the compression enabled files using
+> +			 ioctls.
+>  inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
+>  			 files using the blk-crypto framework rather than
+>  			 filesystem-layer encryption. This allows the use of
+> @@ -810,6 +817,34 @@ Compress metadata layout::
+>  	| data length | data chksum | reserved |      compressed data       |
+>  	+-------------+-------------+----------+----------------------------+
+>  
+> +Compression mode
+> +--------------------------
+> +
+> +f2fs supports "fs" and "user" compression modes with "compression_mode" mount option.
+> +With this option, f2fs provides a choice to select the way how to compress the
+> +compression enabled files (refer to "Compression implementation" section for how to
+> +enable compression on a regular inode).
+> +
+> +1) compress_mode=fs
+> +This is the default option. f2fs does automatic compression in the writeback of the
+> +compression enabled files.
+> +
+> +2) compress_mode=user
+> +This disables the automaic compression and gives the user discretion of choosing the
+> +target file and the timing. The user can do manual compression/decompression on the
+> +compression enabled files using F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE
+> +ioctls like the below.
+> +
+> +To decompress a file,
+> +
+> +fd = open(filename, O_WRONLY, 0);
+> +ret = ioctl(fd, F2FS_IOC_DECOMPRESS_FILE);
+> +
+> +To compress a file,
+> +
+> +fd = open(filename, O_WRONLY, 0);
+> +ret = ioctl(fd, F2FS_IOC_COMPRESS_FILE);
+> +
 
-I still don't understand the purpose of these new ioctls.  What's wrong with
-just FS_IOC_SETFLAGS(FS_COMPRESS_FL) to compress a file, or FS_IOC_SETFLAGS(0)
-to decompress a file?  That appears to already be supported...
+Why doesn't compress_mode=user just cause regular files to not inherit the
+compression flag?  Then users could set or clear the compression flag using
+FS_IOC_SETFLAGS, without any need for these new ioctls.
 
 - Eric
 
