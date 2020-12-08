@@ -2,97 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7ED62D2585
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Dec 2020 09:16:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 144A82D25D7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Dec 2020 09:27:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmYB2-0002Qo-JR; Tue, 08 Dec 2020 08:16:52 +0000
+	id 1kmYL8-0008BL-PK; Tue, 08 Dec 2020 08:27:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <robinh3123@gmail.com>) id 1kmYB1-0002QX-3S
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 08:16:51 +0000
+ (envelope-from <robinh3123@gmail.com>) id 1kmYL7-0008BE-RI
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 08:27:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jirsaBDzo/DYSNUUoXouAzzmgq1svQEaxyCrEMF0PXQ=; b=Z8hxUJh5NDCirk7/UcNNfVzAqR
- JQW70Jqj4RaihUhWZWBqGeaqPP3mCGFyY7EyqKhFNCikPO85DQIPWqcsFW5fvBZW3a4qLMln/3qc0
- 60vLA9UjlXd5pBLHfT1j+u3ZBrpf563I1q9mDjsGlo5zUuF9GVr4No4169Io735Uvw1k=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jirsaBDzo/DYSNUUoXouAzzmgq1svQEaxyCrEMF0PXQ=; b=hwqP0xfDX8hr2FfdqMSjbfY5F1
- DQqQHsPqX9XKHK+CvThjM499Acs4LfZ6ouYCBF9hYVIZI0AaDsjB4TdpHZf243IX9hRCoPpAdST/D
- n6+IqJ/0AYiu3sVgpq2YCYDF8m5a3MNeTIlLNp6q9fU/dIpzxPiQQSBWuvHm+htJ0NFQ=;
-Received: from mail-pf1-f195.google.com ([209.85.210.195])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=SLvXqcuRAnwClpMeWqo0QZa4oVJ4xTd0hMNtnI1KgKw=; b=DnjxwUytHNF1JrXgB/6gMwDeFY
+ RtTlbZukAdYSE+OACPBNBKc78uqOctermsAYtCAMcVpVAD4E729YAxTJd3Lvb2i2aiHrD5yQxNUn2
+ ESOybtmnd//ua1KMIPwXVzXn3msTe3MTLSsumhXJksPPunk9wzMsoXvzfy9/Ah575D5A=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SLvXqcuRAnwClpMeWqo0QZa4oVJ4xTd0hMNtnI1KgKw=; b=X
+ OWmE+ibe9QIzaf4N6tGjDjyGuhqWUnzOxsm4t49dbfiZLtIh1vBogqnl+dFffXU8RQYyt9joAXNAS
+ z/x2gPRZ4ka/j/H3pLSPQnkuIxwJIqBbbtvpLf7mDLw5BSi7tVcOeGEVv4RCCXItqQRK11mR8/xcn
+ JdG3LGDcZ2tbGjck=;
+Received: from mail-pf1-f170.google.com ([209.85.210.170])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kmYAx-006JMn-52
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 08:16:51 +0000
-Received: by mail-pf1-f195.google.com with SMTP id p4so7316938pfg.0
+ id 1kmYKz-003Aqt-Lf
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Dec 2020 08:27:17 +0000
+Received: by mail-pf1-f170.google.com with SMTP id d2so9337119pfq.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 08 Dec 2020 00:16:47 -0800 (PST)
+ Tue, 08 Dec 2020 00:27:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=jirsaBDzo/DYSNUUoXouAzzmgq1svQEaxyCrEMF0PXQ=;
- b=BWUgMeS7C73PPLQ+/D0+gd5Hbr1sRVwdsA4PlFl+qr6lchxiCLwvp0uThxF9xjeg2P
- 1E7rTwr9537r3Q0QrUj8BPhZIbo/cJFwXWVfZP+9pwrwHS5Dt6lbPulUwg8mthwvEqFy
- LNSptu0B/Oaoy4RvPX6TAe6HvkArtlNM9ZHsslpfjZO5IYKtQLNo+oxvM8pBtHKiYwRp
- +w2uDImsLdEEM5c2cZAIiBPAHJzzEuC2m6LWCC8ttDZHQe/vSTgTkiUJzI25H35BnHZa
- L5Byrk/Bq6/3AV7oDzHr4d3uKTzM6Z77QZiLW6THOSPwRTc6zb9f4Fjvc8gXRi3Kqxw+
- zq9Q==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=SLvXqcuRAnwClpMeWqo0QZa4oVJ4xTd0hMNtnI1KgKw=;
+ b=LnOo3u7pKqtXdNliB6dRqdNlwTv/ezGz57B78Rynd+xyI+nwouKYfb9nL9tjiy+DFH
+ 9G3l1SwfW2VU5p5QbyvCwCBNNUgtNV4+qjNGOo9Gfcux1yCOZv/FkfMf1mm42doOAGK8
+ RI8ihDDap1YziJnjM01AvdT0M3AovwVFzxMAoAu9Sg2TzC3Cd4EuyseYwzHqlE9AvYJI
+ EXaCVvVrHftxVTirhIj7+ccUw7bXYjlscWMPH74h55FBGK8qMp5GDJNjfaZujMMGoVHe
+ y0o4hU+uiMeP4bsvT/uyh70VPVWTtC662WZxWbL/SGMONHr0U3TT0jVbUUDQjk/DA1ho
+ R/PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=jirsaBDzo/DYSNUUoXouAzzmgq1svQEaxyCrEMF0PXQ=;
- b=bvZnN7dLRV+YHviMdgDdqr0PuovbS3Fev91+AMg1UvIFUN6x6B0ko0aiEgv6untmVb
- X0eQOTi1Cmp7VjiUvavEaojut9SSaNai3I26ESoYHIXRBcgz19VV2z4JS7PQSK4qPewY
- gdrv8Y5LIR9fBQC6KoVx77nFT5qsyLJpl71vq/lU7N0mMt0IXmo0zop4z2S0DpY2VJ2X
- 9lHsTwb7RL2HfsoXynxDOIzRTDeJ41c2olmG5Yywuoy6UWDXYNeLzW6+u7zJ9kdqSgFb
- Wyn8MlANYvC1eQzqSBIzjlqxhPh+xnNqeJu3a/9BtSurjLORZEyprcwS1pkfjCxNtmLu
- 4Dsg==
-X-Gm-Message-State: AOAM533zDQcsoI6sjUiwszssh27ixwDiegfJ5NGOs5NoVxiYYMFRlr1x
- nCEwvQl/tUwyuxI60I1wYJRcF4KzLAs=
-X-Google-Smtp-Source: ABdhPJyAy099yWD65prigmyuRklbUEuvGo/7MOmEQKupg1xm525YnUbf9PtN53sQtco6k7/yCo+4Yg==
-X-Received: by 2002:a17:90b:68e:: with SMTP id
- m14mr3156632pjz.228.1607415394346; 
- Tue, 08 Dec 2020 00:16:34 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=SLvXqcuRAnwClpMeWqo0QZa4oVJ4xTd0hMNtnI1KgKw=;
+ b=d7M/OI1K/Zp080cl9/l15LUi/lZ7wgRrq3SNcRNsWK9OU4h8sVM4+ynBEycnc5oddA
+ kYPmkz2i1a6ArHAco2DQ2R5PEszBa1JuEWpkbFAF6fHbRqANhEg8CpK6l04J1GuL0C7N
+ Z8522PLgeT/4BMXzh0FY9fOTRqSbbsSKU4ApW7iMn7v1t/5LyV7AaoAhSLRv34tNWT4y
+ PGWqZfa+xPcSqgBaACnS+Fk87Pb1V3TccQSs8Etu10HGoQrVEgrHUwF3bc9QThNKCE31
+ X5eODf7fME/27TH2l2/VMp5OYGG17w2tZm7/FQmIT+y8KBBmy/uxXjVsUICj6AM9a0rU
+ 7ViA==
+X-Gm-Message-State: AOAM531UixZb8NskXx6BPOuyXqU5yzbIOmqy0ESAB+EVISrrXgklIeGt
+ FOSRA3Do72lFrqGIndN6bIGsix3Pz9w=
+X-Google-Smtp-Source: ABdhPJziOWdNexMuJzJ7EUmZckZaby7roBHPZQUNSQDO2SGtNfj78YApW+l8y98ph/wfVtGutfR7uQ==
+X-Received: by 2002:a17:90b:350a:: with SMTP id
+ ls10mr3265775pjb.192.1607416023936; 
+ Tue, 08 Dec 2020 00:27:03 -0800 (PST)
 Received: from robinhsu-p520.ntc.corp.google.com
  ([2401:fa00:fc:202:1ea0:b8ff:fe77:fe45])
- by smtp.gmail.com with ESMTPSA id d4sm2093574pjz.28.2020.12.08.00.16.32
+ by smtp.gmail.com with ESMTPSA id q35sm2469483pjh.38.2020.12.08.00.27.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Dec 2020 00:16:33 -0800 (PST)
+ Tue, 08 Dec 2020 00:27:03 -0800 (PST)
 From: Robin Hsu <robinh3123@gmail.com>
 To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, chao@kernel.org
-Date: Tue,  8 Dec 2020 16:15:55 +0800
-Message-Id: <20201208081555.652932-4-robinh3123@gmail.com>
+Date: Tue,  8 Dec 2020 16:26:05 +0800
+Message-Id: <20201208082605.654422-1-robinh3123@gmail.com>
 X-Mailer: git-send-email 2.29.2.576.ga3fc446d84-goog
-In-Reply-To: <20201208081555.652932-1-robinh3123@gmail.com>
-References: <20201208081555.652932-1-robinh3123@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: configure.ac]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (robinh3123[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.195 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.195 listed in wl.mailspike.net]
+ [209.85.210.170 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.170 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
@@ -103,9 +97,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kmYAx-006JMn-52
-Subject: [f2fs-dev] [PATCH v3 3/3] f2fs-tools:sload.f2fs compress: Fixed
- automake
+X-Headers-End: 1kmYKz-003Aqt-Lf
+Subject: [f2fs-dev] Please ignore "sload compression support" patches
+ without "v3"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,65 +118,17 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Robin Hsu <robinhsu@google.com>
 
-Fixed automake for sload.f2fs compression support
+Hi, All,
 
-./configure automatcally compile in liblzo2 (for sload to support -a LZO)
-and liblz4 (for sload to support -a LZ4), whhen the libraries present.
+Due to my mistakes, patches for sload compression support were sent
+without "v3" (version 3).  That was corrected by resending them again,
+with the correct subject (with "v3").  Please ignore those emails without
+"v3".
 
-Signed-off-by: Robin Hsu <robinhsu@google.com>
----
- configure.ac     | 12 ++++++++++++
- fsck/Makefile.am |  9 ++++++---
- 2 files changed, 18 insertions(+), 3 deletions(-)
+I apologize for the inconvenience.
 
-diff --git a/configure.ac b/configure.ac
-index 1e5619d..01d1a05 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -52,6 +52,18 @@ AC_PATH_PROG([LDCONFIG], [ldconfig],
-        [$PATH:/sbin])
- 
- # Checks for libraries.
-+AC_CHECK_LIB([lzo2], [main],
-+	[AC_SUBST([liblzo2_LIBS], ["-llzo2"])
-+		AC_DEFINE([HAVE_LIBLZO2], [1],
-+		[Define if you have liblzo2])
-+	], [], [])
-+
-+AC_CHECK_LIB([lz4], [main],
-+	[AC_SUBST([liblz4_LIBS], ["-llz4"])
-+		AC_DEFINE([HAVE_LIBLZ4], [1],
-+		[Define if you have liblz4])
-+	], [], [])
-+
- PKG_CHECK_MODULES([libuuid], [uuid])
- 
- AS_IF([test "x$with_selinux" != "xno"],
-diff --git a/fsck/Makefile.am b/fsck/Makefile.am
-index 1fc7310..74bc4b8 100644
---- a/fsck/Makefile.am
-+++ b/fsck/Makefile.am
-@@ -3,12 +3,15 @@
- AM_CPPFLAGS = ${libuuid_CFLAGS} -I$(top_srcdir)/include
- AM_CFLAGS = -Wall
- sbin_PROGRAMS = fsck.f2fs
--noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h quotaio_tree.h quotaio_v2.h xattr.h
-+noinst_HEADERS = common.h dict.h dqblk_v2.h f2fs.h fsck.h node.h quotaio.h \
-+		quotaio_tree.h quotaio_v2.h xattr.h compress_wrapper.h
- include_HEADERS = $(top_srcdir)/include/quota.h
- fsck_f2fs_SOURCES = main.c fsck.c dump.c mount.c defrag.c resize.c \
--		node.c segment.c dir.c sload.c xattr.c \
-+		node.c segment.c dir.c sload.c xattr.c compress_wrapper.c \
- 		dict.c mkquota.c quotaio.c quotaio_tree.c quotaio_v2.c
--fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} $(top_builddir)/lib/libf2fs.la
-+fsck_f2fs_LDADD = ${libselinux_LIBS} ${libuuid_LIBS} \
-+	${liblzo2_LIBS} ${liblz4_LIBS} \
-+	$(top_builddir)/lib/libf2fs.la
- 
- install-data-hook:
- 	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/dump.f2fs
--- 
-2.29.2.576.ga3fc446d84-goog
+Best regards,
+Robin Hsu
 
 
 
