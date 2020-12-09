@@ -2,56 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 569462D3DE9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 09:50:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B43722D4645
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 17:04:30 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmvAz-0007fp-Ns; Wed, 09 Dec 2020 08:50:21 +0000
+	id 1kn1x4-0005Gz-UV; Wed, 09 Dec 2020 16:04:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kmvAz-0007fg-BC
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 08:50:21 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kn1x3-0005Gf-6N
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 16:04:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5+/uHEV/4P+wx54QLEOohuIr71ZJS+J5mp4gVStui5Q=; b=L0B53hzOhNx5avaVpj/dqQI7J7
- 4VvwX2cSes5bfaPSRRS1pXT9vcQ2hKgV2uuQ1racMt+9O58uICMsVBKVb7xNKbhKdiLcnut+tgm+M
- W0ENuy2gULFuTjhRm0OS7HCXUw9ZuqzJ0QUZFR2TzxN+ltpDoi1hWQrxH7Zrajvfj+wk=;
+ bh=FJaTTgvaJWkqOjWwMcScsnUqMoHQxY2/gCBuCuBJ0kE=; b=kkKtaYQQTkr9C1EUd0LF6FBh00
+ VWByLBROBSnn86P4ZtQ+AsJl/xwy6Jj3YCx0yOA2Ouy+U3q3HdQxxXTzNE/D0AUmnZDxJwfgozvNE
+ N2VF7ULflW+672E0ynGfPSsxbcrkn18CjVAMDX3G1lIzMWL9eY2KftKUTdFX63LT5+Fo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=5+/uHEV/4P+wx54QLEOohuIr71ZJS+J5mp4gVStui5Q=; b=K
- BpddhmFMU27BeKnUjCO5q6W9AIhwnrHlhkM3V/8r6f0O7feFnENIjBhKtR0vD5u5Myc66F6vyAXxh
- ot/KcxLPUi7zclaPvMgaBU/W505VkPvE13cUNSskVa1vd2wj40NkWDGjkghAwxfAvdkk81sQ25RDe
- cdkTof7iJdmr5D2g=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=FJaTTgvaJWkqOjWwMcScsnUqMoHQxY2/gCBuCuBJ0kE=; b=hYQvyvbmk0529PJPSNXWkDWNZe
+ /jXQlPQoHY8nMNwEI3SwyVL5qBi098hx2Xw0jqW3EExt1a1gSHgkXMaUtB5hPR3fo8DW3ZW8Z6E/Z
+ AFn035aKxipaRJK682uCty1Y+2u+cLEEkc1EVbcnd7gLlBq6CMmjTIdbuIabhH92o+KU=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmvAt-007XFG-Se
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 08:50:21 +0000
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CrW1r3B6Hzklr8;
- Wed,  9 Dec 2020 16:49:20 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 9 Dec 2020 16:49:52 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Wed, 9 Dec 2020 16:49:36 +0800
-Message-ID: <20201209084936.31711-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.29.2
+ id 1kn1wq-005Bog-0u
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 16:04:25 +0000
+Date: Wed, 9 Dec 2020 08:04:05 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1607529846;
+ bh=NtDeZWyjkDu4jWhhZPvnO8Q28JxAL5KgBjE0Xw0loxM=;
+ h=From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fa79wWW6HqVFAWyF0PPeCMB3jzRdDsH3bc6mtfiCGvW62HvPMHdoz8v9swq3maXQT
+ R2i5D78ex/QFcTssEFv631HS0YRIw9JQdsGKdbOZcfCCxc+ht9Sr4RDheCOo34jVuj
+ 040QklunRogmVq+Q/9Xhj90k/y3JcS6FHeduPGIJKWcxYwtkCo2Nc+XqMHVIkIgD8X
+ +rHSvC/uhAnoFX0ZYPXG2SOxZNAnPigqJ+l4OvR+GECSmtVJmyWGpzc4sa2xOVNzQE
+ B8b4O6UWD7KCxPLcw3wqBoUGdz12OA1G21/gz/Nr3YAfkM4W7AzSL5ilLswOscfxL4
+ F7SM2GHNISjxw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <X9D1dXVwKFvfHpP9@google.com>
+References: <20201209084328.30416-1-yuchao0@huawei.com>
+ <20201209084328.30416-5-yuchao0@huawei.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20201209084328.30416-5-yuchao0@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
@@ -60,12 +65,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kmvAt-007XFG-Se
-Subject: [f2fs-dev] [PATCH] f2fs: fix shift-out-of-bounds in
- sanity_check_raw_super()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kn1wq-005Bog-0u
+Subject: Re: [f2fs-dev] [PATCH RESEND v2 5/5] f2fs: introduce sb_status
+ sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,71 +85,109 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot+ca9a785f8ac472085994@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot reported a bug which could cause shift-out-of-bounds issue,
-fix it.
+On 12/09, Chao Yu wrote:
+> Introduce /sys/fs/f2fs/<devname>/stat/sb_status to show superblock
+> status in real time as below:
+> 
+> IS_DIRTY:		no
+> IS_CLOSE:		no
+> IS_SHUTDOWN:		no
+> IS_RECOVERED:		no
+> IS_RESIZEFS:		no
+> NEED_FSCK:		no
+> POR_DOING:		no
+> NEED_SB_WRITE:		no
+> NEED_CP:		no
+> CP_DISABLED:		no
+> CP_DISABLED_QUICK:	no
+> QUOTA_NEED_FLUSH:	no
+> QUOTA_SKIP_FLUSH:	no
+> QUOTA_NEED_REPAIR:	no
 
-Call Trace:
- __dump_stack lib/dump_stack.c:79 [inline]
- dump_stack+0x107/0x163 lib/dump_stack.c:120
- ubsan_epilogue+0xb/0x5a lib/ubsan.c:148
- __ubsan_handle_shift_out_of_bounds.cold+0xb1/0x181 lib/ubsan.c:395
- sanity_check_raw_super fs/f2fs/super.c:2812 [inline]
- read_raw_super_block fs/f2fs/super.c:3267 [inline]
- f2fs_fill_super.cold+0x16c9/0x16f6 fs/f2fs/super.c:3519
- mount_bdev+0x34d/0x410 fs/super.c:1366
- legacy_get_tree+0x105/0x220 fs/fs_context.c:592
- vfs_get_tree+0x89/0x2f0 fs/super.c:1496
- do_new_mount fs/namespace.c:2896 [inline]
- path_mount+0x12ae/0x1e70 fs/namespace.c:3227
- do_mount fs/namespace.c:3240 [inline]
- __do_sys_mount fs/namespace.c:3448 [inline]
- __se_sys_mount fs/namespace.c:3425 [inline]
- __x64_sys_mount+0x27f/0x300 fs/namespace.c:3425
- do_syscall_64+0x2d/0x70 arch/x86/entry/common.c:46
- entry_SYSCALL_64_after_hwframe+0x44/0xa9
+Wait, this is breaking a sysfs rule where one entry should show one value.
 
-Reported-by: syzbot+ca9a785f8ac472085994@syzkaller.appspotmail.com
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/super.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
-
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index bf96f5776f99..c0b2ea596b07 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2869,7 +2869,6 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 	block_t total_sections, blocks_per_seg;
- 	struct f2fs_super_block *raw_super = (struct f2fs_super_block *)
- 					(bh->b_data + F2FS_SUPER_OFFSET);
--	unsigned int blocksize;
- 	size_t crc_offset = 0;
- 	__u32 crc = 0;
- 
-@@ -2896,10 +2895,10 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 	}
- 
- 	/* Currently, support only 4KB block size */
--	blocksize = 1 << le32_to_cpu(raw_super->log_blocksize);
--	if (blocksize != F2FS_BLKSIZE) {
--		f2fs_info(sbi, "Invalid blocksize (%u), supports only 4KB",
--			  blocksize);
-+	if (le32_to_cpu(raw_super->log_blocksize) != F2FS_BLKSIZE_BITS) {
-+		f2fs_info(sbi, "Invalid log_blocksize (%u), supports only %u",
-+			  le32_to_cpu(raw_super->log_blocksize),
-+			  F2FS_BLKSIZE_BITS);
- 		return -EFSCORRUPTED;
- 	}
- 
--- 
-2.29.2
-
+> 
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  Documentation/ABI/testing/sysfs-fs-f2fs |  5 ++++
+>  fs/f2fs/sysfs.c                         | 36 +++++++++++++++++++++++++
+>  2 files changed, 41 insertions(+)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index 3dfee94e0618..57ab839dc3a2 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -377,3 +377,8 @@ Description:	This gives a control to limit the bio size in f2fs.
+>  		Default is zero, which will follow underlying block layer limit,
+>  		whereas, if it has a certain bytes value, f2fs won't submit a
+>  		bio larger than that size.
+> +
+> +What:		/sys/fs/f2fs/<disk>/stat/sb_status
+> +Date:		December 2020
+> +Contact:	"Chao Yu" <yuchao0@huawei.com>
+> +Description:	Show status of f2fs superblock in real time.
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index ebca0b4961e8..1b85e6d16a94 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -101,6 +101,40 @@ static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
+>  				sbi->sectors_written_start) >> 1)));
+>  }
+>  
+> +#define	SB_STATUS(s)	(s ? "yes" : "no")
+> +static ssize_t sb_status_show(struct f2fs_attr *a,
+> +		struct f2fs_sb_info *sbi, char *buf)
+> +{
+> +	return sprintf(buf, "IS_DIRTY:		%s\n"
+> +				"IS_CLOSE:		%s\n"
+> +				"IS_SHUTDOWN:		%s\n"
+> +				"IS_RECOVERED:		%s\n"
+> +				"IS_RESIZEFS:		%s\n"
+> +				"NEED_FSCK:		%s\n"
+> +				"POR_DOING:		%s\n"
+> +				"NEED_SB_WRITE:		%s\n"
+> +				"NEED_CP:		%s\n"
+> +				"CP_DISABLED:		%s\n"
+> +				"CP_DISABLED_QUICK:	%s\n"
+> +				"QUOTA_NEED_FLUSH:	%s\n"
+> +				"QUOTA_SKIP_FLUSH:	%s\n"
+> +				"QUOTA_NEED_REPAIR:	%s\n",
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_IS_DIRTY)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_IS_CLOSE)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_IS_RECOVERED)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_IS_RESIZEFS)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_NEED_FSCK)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_POR_DOING)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_NEED_SB_WRITE)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_NEED_CP)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_CP_DISABLED)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_CP_DISABLED_QUICK)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_QUOTA_NEED_FLUSH)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH)),
+> +			SB_STATUS(is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR)));
+> +}
+> +
+>  static ssize_t features_show(struct f2fs_attr *a,
+>  		struct f2fs_sb_info *sbi, char *buf)
+>  {
+> @@ -711,7 +745,9 @@ static struct attribute *f2fs_feat_attrs[] = {
+>  };
+>  ATTRIBUTE_GROUPS(f2fs_feat);
+>  
+> +F2FS_GENERAL_RO_ATTR(sb_status);
+>  static struct attribute *f2fs_stat_attrs[] = {
+> +	ATTR_LIST(sb_status),
+>  	NULL,
+>  };
+>  ATTRIBUTE_GROUPS(f2fs_stat);
+> -- 
+> 2.29.2
 
 
 _______________________________________________
