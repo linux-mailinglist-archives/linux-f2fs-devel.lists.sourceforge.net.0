@@ -2,61 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B04292D3B72
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 07:30:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBD0C2D3BA1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 07:46:03 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmszW-0005C9-Fa; Wed, 09 Dec 2020 06:30:22 +0000
+	id 1kmtEf-0005t7-3N; Wed, 09 Dec 2020 06:46:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kmszO-0005BK-Jr
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 06:30:14 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kmtEd-0005sz-92
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 06:45:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3BclyRXM2geBeJKm545oR2ZA7lNUzhK2JenG/cQESfI=; b=cKxL45OKC1lGLHwrgu0kNA/YSD
- PjkLLqO9mIHCvr7mNhQkkF6d4Qk3RNLRVZNuIqwXtEx7mhrrU1wSZRip13bDqpQcxlg9ORVdcLvy2
- pQkScWACa9E7dFWjJsm9MxNwwUsHRGRz003HiVL6znu/a/6aIRhPOR/yfJ/YUy+PTFWs=;
+ bh=xUPXBTnxuo3q8J+ZcEG+dOJDhWNwJbf56LwZL36zX/E=; b=YBuXlSRCM7AyqHUuFOlFPQR6+L
+ 2zo+ABrWyUmYP8vTy+QNPfFCfjF7TUJN4Tt90t27ePkb9U+XdF+iTgZmCVFh80T6idhH3s1ZBJoak
+ 7AABIqCwHGv25ygtqscNDHbYd5SL5xHVvoewbBFt1q5izUgrQCeR6A5/q6y0jUB2gqYI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3BclyRXM2geBeJKm545oR2ZA7lNUzhK2JenG/cQESfI=; b=BrZrxqqoKcaV42Y4IuNbOH2jgE
- 9rB7KAIjMeeImCCk2dCFREfESdX5dH+V/cnXiOxNXPf/ry2J3qGmzQgxMI4zCpdXZRcCxEarVghzk
- Hc2d9k4f9ImEQzsssBWCTayGFjVfLC8iGd//rPUwbWeqzU6PVXx7lFI1+ID2jZaz/6mI=;
+ bh=xUPXBTnxuo3q8J+ZcEG+dOJDhWNwJbf56LwZL36zX/E=; b=IPhoYshrD2wSBHBc/TlbJbQqZ2
+ WiUe3z1X38QGGw+voAgSIZC22L0GXSNn6zDz75AX8hAcAV8oYyxJPRPwvqH6mzoDFGEw/IKyfoKif
+ zYrW8oN+C6Z0FbDcc9tFyTwrMTcXbyMqspIWn8hrQ9jdERb6n53rzPXf5f3HprKsMjI4=;
 Received: from szxga05-in.huawei.com ([45.249.212.191])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmszH-007Qy6-O3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 06:30:14 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CrRwG0gyQzM06d;
- Wed,  9 Dec 2020 14:29:18 +0800 (CST)
+ id 1kmtEW-004av7-8R
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 06:45:59 +0000
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CrSGb721gzhp59;
+ Wed,  9 Dec 2020 14:45:11 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 9 Dec 2020
- 14:29:56 +0800
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 9 Dec 2020
+ 14:45:42 +0800
+To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20201203065615.402494-1-daeho43@gmail.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20201208031437.56627-1-yuchao0@huawei.com>
- <22ac4df6-53ec-fb7c-c4dd-26435352a701@huawei.com>
- <X9A7Jn+cHRRcAmIi@google.com>
- <37d89d34-add1-5254-380b-233ef7a460d4@huawei.com>
- <X9BKX9PUMFkts9bI@google.com>
- <5398c880-d4d3-81b9-f3c9-765ba1470e96@huawei.com>
-Message-ID: <0d4a20ec-f6e4-ff24-8733-94cc3762195d@huawei.com>
-Date: Wed, 9 Dec 2020 14:29:56 +0800
+Message-ID: <86651979-2c6a-59de-a03d-9c0437703de5@huawei.com>
+Date: Wed, 9 Dec 2020 14:45:42 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <5398c880-d4d3-81b9-f3c9-765ba1470e96@huawei.com>
+In-Reply-To: <20201203065615.402494-1-daeho43@gmail.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
@@ -68,8 +64,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kmszH-007Qy6-O3
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress: support chksum
+X-Headers-End: 1kmtEW-004av7-8R
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add F2FS_IOC_DECOMPRESS_FILE and
+ F2FS_IOC_COMPRESS_FILE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,22 +78,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/12/9 12:28, Chao Yu wrote:
-> On 2020/12/9 11:54, Jaegeuk Kim wrote:
->> Ah, could you please write another patch to adjust the new changes?
-> 
-> No problem, will drop "f2fs: compress:support chksum" based on your dev branch, and
-> apply all compress related patches on top of dev branch.
+On 2020/12/3 14:56, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> +	f2fs_balance_fs(F2FS_I_SB(inode), true);
 
-Jaegeuk, could you please
-- drop "f2fs: compress:support chksum",
-- manually fix conflict when applying "f2fs: add compress_mode mount option"
-- and then apply last my resent patches.
+Trivial cleanup:
+
+f2fs_balance_fs(sbi, true);
+
+> +	f2fs_balance_fs(F2FS_I_SB(inode), true);
+
+Ditto,
+
+Jaegeuk could fix this directly?
 
 Thanks,
 
