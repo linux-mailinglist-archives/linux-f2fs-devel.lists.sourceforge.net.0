@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FE622D38F6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 03:49:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01A252D38FD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Dec 2020 03:51:28 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kmpXs-0005XA-Ag; Wed, 09 Dec 2020 02:49:36 +0000
+	id 1kmpZe-0006F3-IC; Wed, 09 Dec 2020 02:51:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kmpXq-0005Wn-F3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 02:49:34 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kmpZd-0006Er-HS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 02:51:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1ZiIfAZjN8iNhSyw/x5WalNML+x6PcPcQXrKbX6IYsI=; b=hhNAyNCYiB1RByiA44H0g1lYyU
- JOZc4go5W/Br1emOwbopbBTSEUiO1cHiuSR6SXwhX6yvmj4Us7UlJEVSrD7mcq0w+oAN5k1CCem/D
- 3k4T9EzYUdoPLpPJCRDGHbp0RPLpDZcmgnUwSy3VbZOZfSZXcA14VprpP8nuGpU6Zk28=;
+ bh=fcfPQheDjkpci2YBoa2zN0iZ7Br+MBMqhjcgFhxc+Y4=; b=BVPMuahzMdISYOHprCQppGdmjx
+ eM5PshdokBM4+zfXm8muN2UPgUP8tlOvuQal0WILIEUU1rUzvoAPnSS6X2/Vq6SAww0Z3dDgrBluC
+ FFHMT29s88XWJ9swbS3w96jNaxWAWPCupN1wZDxUyW0ISAijsgk4raPHSDVUx/at4MVU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1ZiIfAZjN8iNhSyw/x5WalNML+x6PcPcQXrKbX6IYsI=; b=YTvZXr7WigxNhjzarSv00aW8Mz
- pxNHUqif49QZoneF9GcWUPCOtC6eFp+ShE07gb+IOmI4p6NUgBQXm4Th6hQqzSzSLKOWiqsiuUvl9
- 9Qy7drzJWuDEwCC5FVf+hbDyRuhI5USGvoxzTIidhGN2lGLI5YZEkeJBC7O86Gi33lzE=;
+ bh=fcfPQheDjkpci2YBoa2zN0iZ7Br+MBMqhjcgFhxc+Y4=; b=m1rqjDNaMBjMR1Cn2wJL5k0HHN
+ NRW3eJV3w7vcoC7QUqCFS7R2VVSRxbL2MODolnfD1MhAhhFXOGuoTsRlgt4a+4d2Go8xXoyBuvn9L
+ Nv6Fb5nXnbD6SPwlUmTl7khDMcYdxlEZ6Rwt5w/ELutdRyYcb0RtJ7M1dx1jmQgljpx0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kmpXh-007I4B-1z
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 02:49:34 +0000
-Date: Tue, 8 Dec 2020 18:49:10 -0800
+ id 1kmpZa-007I8r-IL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Dec 2020 02:51:25 +0000
+Date: Tue, 8 Dec 2020 18:51:08 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607482152;
- bh=KuxXncadViRsznhKUCY+zpCQhrZKpRJadDVdmtFEYiY=;
+ s=k20201202; t=1607482270;
+ bh=eUzqxJkc94iv8D1QE2huC4TiK4lK/88we3Wb3VOIgWc=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=Qr9dHCSUY7gBoqlaS6Swf+zrHiSNnMGzQjYeY9EWBLvGZEicz+GnuwVTumm/K05gc
- 6QKc2Q2FzYrZfXMU5Ph21hX+f+6tPZ5H3bkZHXKVGv+wqwHmlIX7Iom79BqjqLNKk4
- 0XovPgmk1OnKbLJGc1+44pJgCgr2RGzQqBpriVSQx7hHy8SlevO6hXG/Asw3MmC7Za
- pCsrmEv5nLTOPb1wCpoqiIlxYHYKIMqyECgmGEJWw8UITODyduymB5L0uddgdbCw/O
- pOTBBZx+wTBAgf7ULu3zUx/Nl7XsB5x5gRwVGvLLe2z4DNqigG7+ojAHJJ2GBGTQJS
- vFEb6rvFUGKFw==
+ b=c6ErC9TX3R3dvRRon4WaXUgJf2Gk2G/TE55eeQJsAel5zf33NjRaFip8u9DYyqlTO
+ BTbiwn2EaM0OQWb9Mjp66LVmOdE7QCYrkXEI3efyNiEJIPKPQkejJe73j/cq78Cz7k
+ Z0YUPKMSOgE9VNG/j2rS91EQ5909G5LH7kpURKDiOcxNfLDRRmmaqm2JkaZWse7wyC
+ RrEtAdtnag161jdt5KCQFdwvnrZDUIKt2XldxeO5bkAAa1vvzAvCqIy4aKpH26doEE
+ OrpEPWR2a5hddrjkEAHi2jSOUUSN4e1vLpTkyCJcYyCev6fZITcGJSrQMLnVfdinuR
+ vYaqXEpfzSTDg==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <X9A7Jn+cHRRcAmIi@google.com>
-References: <20201208031437.56627-1-yuchao0@huawei.com>
- <22ac4df6-53ec-fb7c-c4dd-26435352a701@huawei.com>
+Message-ID: <X9A7nBfnbVa8Ee1F@google.com>
+References: <20201207120114.25642-1-jack.qiu@huawei.com>
+ <20201207120114.25642-3-jack.qiu@huawei.com>
+ <X85dFjmqLmo/RsQn@google.com>
+ <529dd167-3951-1fb9-a1c3-9ae6cdbc8dfb@huawei.com>
+ <X87ZENVuVkTFGdRe@google.com>
+ <1c0006ea-3bb9-93ef-914b-69a8b06f902e@huawei.com>
+ <X88mThRozv5cjCFD@google.com>
+ <cbff5c7d-26c4-da2d-f706-54e7441b9855@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <22ac4df6-53ec-fb7c-c4dd-26435352a701@huawei.com>
+In-Reply-To: <cbff5c7d-26c4-da2d-f706-54e7441b9855@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kmpXh-007I4B-1z
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress: support chksum
+X-Headers-End: 1kmpZa-007I8r-IL
+Subject: Re: [f2fs-dev] [PATCH v3 2/3] f2fs: inline: remove redundant
+ FI_DATA_EXIST set
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,229 +91,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 12/09, Chao Yu wrote:
-> Hello guys,
+> On 2020/12/8 15:07, Jaegeuk Kim wrote:
+> > On 12/08, Chao Yu wrote:
+> > > On 2020/12/8 9:38, Jaegeuk Kim wrote:
+> > > > On 12/08, Chao Yu wrote:
+> > > > > On 2020/12/8 0:49, Jaegeuk Kim wrote:
+> > > > > > On 12/07, Jack Qiu wrote:
+> > > > > > > FI_DATA_EXIST has been set in recover_inline_flags, no need set in
+> > > > > > > f2fs_recover_inline_data again. Just remove it.
+> > > > > > > 
+> > > > > > > Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
+> > > > > > > ---
+> > > > > > >     fs/f2fs/inline.c | 1 -
+> > > > > > >     1 file changed, 1 deletion(-)
+> > > > > > > 
+> > > > > > > diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+> > > > > > > index 0399531efcd3..0a8f7eefca7d 100644
+> > > > > > > --- a/fs/f2fs/inline.c
+> > > > > > > +++ b/fs/f2fs/inline.c
+> > > > > > > @@ -286,7 +286,6 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
+> > > > > > >     		memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
+> > > > > > > 
+> > > > > > >     		set_inode_flag(inode, FI_INLINE_DATA);
+> > > > > > > -		set_inode_flag(inode, FI_DATA_EXIST);
+> > > > > > 
+> > > > > > Wait, recover_inline_flags() sets this based on on-disk flag, but this tries to
+> > > > > > recover it back.
+> > > > > 
+> > > > > Should this flag only be recovered with the way like __recover_inline_status()?
+> > > > > otherwise, the data_exist status may be not be consistent with real condition.
+> > > > 
+> > > > Well, we cannot say consistency on this, since user can write zero data. This
+> > > 
+> > > I can see that FI_DATA_EXIST flag only decide that whether f2fs_convert_inline_page()
+> > > will copy inline data into first page, if user write all zero data in inline area,
+> > > there is no need to do the copy, as first page contains all zero already.
+> > > 
+> > > So, IMO, the flag indicates more like a FI_NON_ZERO_DATA_EXIST status? that would be
+> > > consistent with our implementation in __recover_inline_status().
+> > 
+> > IIRC, original intention is FI_DATA_EXIST, and non-zero case was added to avoid
+> > potential inconsistency case. So, it's not intened for FI_NON_ZERO_DATA_EXIST.
 > 
-> Any further comments on compress related patches?
-> 
-> Jaegeuk, could you please queue these patches in dev-test? let me know
-> if there is any problem.
+> Why we can encounter such inconsistency? is there any bug before adding that patch?
 
-Chao, could you please rebase and post them in a series? I lost the patch order
-and got some conflicts when trying to merge.
+I can't remember exactly on it.
 
 > 
-> On 2020/12/8 11:14, Chao Yu wrote:
-> > This patch supports to store chksum value with compressed
-> > data, and verify the integrality of compressed data while
-> > reading the data.
+> > Still I don't see any problem on this, but  looking at the iteration overhead on
+> >     do_read_inode() -> __recover_inlint_status().
+> 
+> Yup, it's trivial, I'm fine to keep it as it is.
+> 
+> Thanks,
+> 
 > > 
-> > The feature can be enabled through specifying mount option
-> > 'compress_chksum'.
-> > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > ---
-> > v4:
-> > - enhance readability
-> > - remove WARN_ON_ONCE()
-> >   Documentation/filesystems/f2fs.rst |  1 +
-> >   fs/f2fs/compress.c                 | 22 ++++++++++++++++++++++
-> >   fs/f2fs/f2fs.h                     | 16 ++++++++++++++--
-> >   fs/f2fs/inode.c                    |  3 +++
-> >   fs/f2fs/super.c                    |  9 +++++++++
-> >   include/linux/f2fs_fs.h            |  2 +-
-> >   6 files changed, 50 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> > index b8ee761c9922..985ae7d35066 100644
-> > --- a/Documentation/filesystems/f2fs.rst
-> > +++ b/Documentation/filesystems/f2fs.rst
-> > @@ -260,6 +260,7 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
-> >   			 For other files, we can still enable compression via ioctl.
-> >   			 Note that, there is one reserved special extension '*', it
-> >   			 can be set to enable compression for all files.
-> > +compress_chksum		 Support verifying chksum of raw data in compressed cluster.
-> >   inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
-> >   			 files using the blk-crypto framework rather than
-> >   			 filesystem-layer encryption. This allows the use of
-> > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> > index 14262e0f1cd6..9313c8695855 100644
-> > --- a/fs/f2fs/compress.c
-> > +++ b/fs/f2fs/compress.c
-> > @@ -602,6 +602,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
-> >   				f2fs_cops[fi->i_compress_algorithm];
-> >   	unsigned int max_len, new_nr_cpages;
-> >   	struct page **new_cpages;
-> > +	u32 chksum = 0;
-> >   	int i, ret;
-> >   	trace_f2fs_compress_pages_start(cc->inode, cc->cluster_idx,
-> > @@ -655,6 +656,11 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
-> >   	cc->cbuf->clen = cpu_to_le32(cc->clen);
-> > +	if (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)
-> > +		chksum = f2fs_crc32(F2FS_I_SB(cc->inode),
-> > +					cc->cbuf->cdata, cc->clen);
-> > +	cc->cbuf->chksum = cpu_to_le32(chksum);
-> > +
-> >   	for (i = 0; i < COMPRESS_DATA_RESERVED_SIZE; i++)
-> >   		cc->cbuf->reserved[i] = cpu_to_le32(0);
-> > @@ -790,6 +796,22 @@ void f2fs_decompress_pages(struct bio *bio, struct page *page, bool verity)
-> >   	ret = cops->decompress_pages(dic);
-> > +	if (!ret && (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)) {
-> > +		u32 provided = le32_to_cpu(dic->cbuf->chksum);
-> > +		u32 calculated = f2fs_crc32(sbi, dic->cbuf->cdata, dic->clen);
-> > +
-> > +		if (provided != calculated) {
-> > +			if (!is_inode_flag_set(dic->inode, FI_COMPRESS_CORRUPT)) {
-> > +				set_inode_flag(dic->inode, FI_COMPRESS_CORRUPT);
-> > +				printk_ratelimited(
-> > +					"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
-> > +					KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
-> > +					provided, calculated);
-> > +			}
-> > +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> > +		}
-> > +	}
-> > +
-> >   out_vunmap_cbuf:
-> >   	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
-> >   out_vunmap_rbuf:
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index 0d25f5ca5618..0b314b2034d8 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -147,7 +147,8 @@ struct f2fs_mount_info {
-> >   	/* For compression */
-> >   	unsigned char compress_algorithm;	/* algorithm type */
-> > -	unsigned compress_log_size;		/* cluster log size */
-> > +	unsigned char compress_log_size;	/* cluster log size */
-> > +	bool compress_chksum;			/* compressed data chksum */
-> >   	unsigned char compress_ext_cnt;		/* extension count */
-> >   	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
-> >   };
-> > @@ -676,6 +677,7 @@ enum {
-> >   	FI_ATOMIC_REVOKE_REQUEST, /* request to drop atomic data */
-> >   	FI_VERITY_IN_PROGRESS,	/* building fs-verity Merkle tree */
-> >   	FI_COMPRESSED_FILE,	/* indicate file's data can be compressed */
-> > +	FI_COMPRESS_CORRUPT,	/* indicate compressed cluster is corrupted */
-> >   	FI_MMAP_FILE,		/* indicate file was mmapped */
-> >   	FI_MAX,			/* max flag, never be used */
-> >   };
-> > @@ -733,6 +735,7 @@ struct f2fs_inode_info {
-> >   	atomic_t i_compr_blocks;		/* # of compressed blocks */
-> >   	unsigned char i_compress_algorithm;	/* algorithm type */
-> >   	unsigned char i_log_cluster_size;	/* log of cluster size */
-> > +	unsigned short i_compress_flag;		/* compress flag */
-> >   	unsigned int i_cluster_size;		/* cluster size */
-> >   };
-> > @@ -1272,9 +1275,15 @@ enum compress_algorithm_type {
-> >   	COMPRESS_MAX,
-> >   };
-> > -#define COMPRESS_DATA_RESERVED_SIZE		5
-> > +enum compress_flag {
-> > +	COMPRESS_CHKSUM,
-> > +	COMPRESS_MAX_FLAG,
-> > +};
-> > +
-> > +#define COMPRESS_DATA_RESERVED_SIZE		4
-> >   struct compress_data {
-> >   	__le32 clen;			/* compressed data size */
-> > +	__le32 chksum;			/* compressed data chksum */
-> >   	__le32 reserved[COMPRESS_DATA_RESERVED_SIZE];	/* reserved */
-> >   	u8 cdata[];			/* compressed data */
-> >   };
-> > @@ -3888,6 +3897,9 @@ static inline void set_compress_context(struct inode *inode)
-> >   			F2FS_OPTION(sbi).compress_algorithm;
-> >   	F2FS_I(inode)->i_log_cluster_size =
-> >   			F2FS_OPTION(sbi).compress_log_size;
-> > +	F2FS_I(inode)->i_compress_flag =
-> > +			F2FS_OPTION(sbi).compress_chksum ?
-> > +				1 << COMPRESS_CHKSUM : 0;
-> >   	F2FS_I(inode)->i_cluster_size =
-> >   			1 << F2FS_I(inode)->i_log_cluster_size;
-> >   	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
-> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> > index 657db2fb6739..349d9cb933ee 100644
-> > --- a/fs/f2fs/inode.c
-> > +++ b/fs/f2fs/inode.c
-> > @@ -456,6 +456,7 @@ static int do_read_inode(struct inode *inode)
-> >   					le64_to_cpu(ri->i_compr_blocks));
-> >   			fi->i_compress_algorithm = ri->i_compress_algorithm;
-> >   			fi->i_log_cluster_size = ri->i_log_cluster_size;
-> > +			fi->i_compress_flag = le16_to_cpu(ri->i_compress_flag);
-> >   			fi->i_cluster_size = 1 << fi->i_log_cluster_size;
-> >   			set_inode_flag(inode, FI_COMPRESSED_FILE);
-> >   		}
-> > @@ -634,6 +635,8 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
-> >   					&F2FS_I(inode)->i_compr_blocks));
-> >   			ri->i_compress_algorithm =
-> >   				F2FS_I(inode)->i_compress_algorithm;
-> > +			ri->i_compress_flag =
-> > +				cpu_to_le16(F2FS_I(inode)->i_compress_flag);
-> >   			ri->i_log_cluster_size =
-> >   				F2FS_I(inode)->i_log_cluster_size;
-> >   		}
-> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > index 82baaa89c893..f3d919ee4dee 100644
-> > --- a/fs/f2fs/super.c
-> > +++ b/fs/f2fs/super.c
-> > @@ -146,6 +146,7 @@ enum {
-> >   	Opt_compress_algorithm,
-> >   	Opt_compress_log_size,
-> >   	Opt_compress_extension,
-> > +	Opt_compress_chksum,
-> >   	Opt_atgc,
-> >   	Opt_err,
-> >   };
-> > @@ -214,6 +215,7 @@ static match_table_t f2fs_tokens = {
-> >   	{Opt_compress_algorithm, "compress_algorithm=%s"},
-> >   	{Opt_compress_log_size, "compress_log_size=%u"},
-> >   	{Opt_compress_extension, "compress_extension=%s"},
-> > +	{Opt_compress_chksum, "compress_chksum"},
-> >   	{Opt_atgc, "atgc"},
-> >   	{Opt_err, NULL},
-> >   };
-> > @@ -934,10 +936,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
-> >   			F2FS_OPTION(sbi).compress_ext_cnt++;
-> >   			kfree(name);
-> >   			break;
-> > +		case Opt_compress_chksum:
-> > +			F2FS_OPTION(sbi).compress_chksum = true;
-> > +			break;
-> >   #else
-> >   		case Opt_compress_algorithm:
-> >   		case Opt_compress_log_size:
-> >   		case Opt_compress_extension:
-> > +		case Opt_compress_chksum:
-> >   			f2fs_info(sbi, "compression options not supported");
-> >   			break;
-> >   #endif
-> > @@ -1523,6 +1529,9 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
-> >   		seq_printf(seq, ",compress_extension=%s",
-> >   			F2FS_OPTION(sbi).extensions[i]);
-> >   	}
-> > +
-> > +	if (F2FS_OPTION(sbi).compress_chksum)
-> > +		seq_puts(seq, ",compress_chksum");
-> >   }
-> >   static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
-> > diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-> > index a5dbb57a687f..7dc2a06cf19a 100644
-> > --- a/include/linux/f2fs_fs.h
-> > +++ b/include/linux/f2fs_fs.h
-> > @@ -273,7 +273,7 @@ struct f2fs_inode {
-> >   			__le64 i_compr_blocks;	/* # of compressed blocks */
-> >   			__u8 i_compress_algorithm;	/* compress algorithm */
-> >   			__u8 i_log_cluster_size;	/* log of cluster size */
-> > -			__le16 i_padding;		/* padding */
-> > +			__le16 i_compress_flag;		/* compress flag */
-> >   			__le32 i_extra_end[0];	/* for attribute size calculation */
-> >   		} __packed;
-> >   		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
+> > > 
+> > > Thanks,
+> > > 
+> > > > can avoid __recover_inline_state() regardless of there-in data which is zero or
+> > > > not.
+> > > > 
+> > > > > 
+> > > > > Thanks,
+> > > > > 
+> > > > > > 
+> > > > > > > 
+> > > > > > >     		set_page_dirty(ipage);
+> > > > > > >     		f2fs_put_page(ipage, 1);
+> > > > > > > --
+> > > > > > > 2.17.1
+> > > > > > > 
+> > > > > > > 
+> > > > > > > 
+> > > > > > > _______________________________________________
+> > > > > > > Linux-f2fs-devel mailing list
+> > > > > > > Linux-f2fs-devel@lists.sourceforge.net
+> > > > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > > > > > 
+> > > > > > 
+> > > > > > _______________________________________________
+> > > > > > Linux-f2fs-devel mailing list
+> > > > > > Linux-f2fs-devel@lists.sourceforge.net
+> > > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > > > > > .
+> > > > > > 
+> > > > .
+> > > > 
+> > .
 > > 
 
 
