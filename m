@@ -2,70 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 512FC2D56AE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Dec 2020 10:21:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A59412D5FAE
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Dec 2020 16:29:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1knI8P-0002lm-OP; Thu, 10 Dec 2020 09:21:13 +0000
+	id 1knNsh-0000Ey-8R; Thu, 10 Dec 2020 15:29:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1knI8O-0002lO-De
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Dec 2020 09:21:12 +0000
+ (envelope-from <jordan@getseam.com>) id 1knNqj-0008R2-Qq
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Dec 2020 15:27:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:In-Reply-To:To:References:Date:Subject:
+ Mime-Version:Content-Transfer-Encoding:Content-Type:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ljOGx+43D4+GhBOESTCLgih0o2QhMYHESC3eyJnO6e8=; b=C07LCRkzqkE9/4HVQ2AHHMYMp/
- LyEoO5h2mw5vJIlJBBqt68Pn3Mzcy5fxHvqNp9lBQTFcJqjK0Aeu3JlsDGH4eaDk8nhUaL0oio3Uu
- KQi59eS3xdUqquNlWB5xRzFpalQnp0cl40ssjuk+HjFd5Bnftdn4TYb2X2edzdfZdH3s=;
+ bh=oOz6p6X25DOvOiWn0zXsqPe2L3UFPbP/+/Gj9m/b50c=; b=MAcJiV6V1Yjt5okox9NpBUwvIG
+ A8NeBDxi0pZb00tpiKplKBfKs3X+FS01TYrBdBK5dPbWEMolqnnqkbRRjoYrvZVLrkik7VyHJWBFf
+ XYxgfUwWdbU19N3iysI01pFXtmC+T3eZtNlXbGrDd65y8vvtefqzXlagf0DTw9xZjy3A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ljOGx+43D4+GhBOESTCLgih0o2QhMYHESC3eyJnO6e8=; b=A
- zmjrQl+kCykQcW4hNBIukybfNEoJwFJ9CuDsdCnsIOsE2+yxDRGAGOqS+yJXX/KalYYahg11qTeS1
- fvMo0Cm8yxy6zB+RLOduN4KcoxjY8Asud8pJJ5qE/ocRZqhdXxfgkhLu2vvc8SqJWRoTjZ3Q6u6Le
- ujsd7IZM7wcuXCgE=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
+ h=Message-Id:In-Reply-To:To:References:Date:Subject:Mime-Version:
+ Content-Transfer-Encoding:Content-Type:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=oOz6p6X25DOvOiWn0zXsqPe2L3UFPbP/+/Gj9m/b50c=; b=Qd0oSF+YuvhyHjD0Z+ZL1nruv3
+ oaggzioHl2GcV+1dn1NP38qmqU9/BdMW0p9rSMY+06pFKhCcBtr4y26dim6V2MZrYKf75pwCJTXn7
+ 8eXzn5ExQProzciVk5NBTGzd/E8RDtQLcIBYrkb+8kUqnDXTd73OEAYM5zg9dAeMFrHQ=;
+Received: from mail-io1-f68.google.com ([209.85.166.68])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1knI8J-008kEi-SA
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Dec 2020 09:21:12 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cs7g9024CzhqBR;
- Thu, 10 Dec 2020 17:20:21 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS403-HUB.china.huawei.com (10.3.19.203) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 10 Dec 2020 17:20:36 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Thu, 10 Dec 2020 17:20:20 +0800
-Message-ID: <20201210092020.66245-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.29.2
-MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1knNqa-0093k9-8p
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Dec 2020 15:27:21 +0000
+Received: by mail-io1-f68.google.com with SMTP id i9so5902423ioo.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Dec 2020 07:27:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=getseam-com.20150623.gappssmtp.com; s=20150623;
+ h=from:content-transfer-encoding:mime-version:subject:date:references
+ :to:in-reply-to:message-id;
+ bh=oOz6p6X25DOvOiWn0zXsqPe2L3UFPbP/+/Gj9m/b50c=;
+ b=HclfKDqlGBq1730yl0Gcvg6ElPcPC6k0XM2b7F1NSN1wxN8qmTqnLs6eKCs9VSE3GK
+ JXLhR7HcTaTZBmuaJSHuRrTPQt+2cRDeznD8krUAKHsR4oPt55wwO3RubxeXcdntD6e2
+ YTirlcomLbSz8HEAH1CBjVKHBiTUZlXnRO9TAMCrq7NvgiUBXZJf896tzyA1FvPxbg1h
+ /SxBzOrBtP2Z5F6/u+7Ye6LG3uL1qsz2Q2hWnDsOgNr/mjZyDeTJLlltqckGWBknlw6Z
+ bAzcwhPLwgMU4pQLwzHAO43pKQZnamzwAlDPuKRCSC6VWd/YktpTimcsbMFGgPGe17rl
+ WQOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:content-transfer-encoding:mime-version
+ :subject:date:references:to:in-reply-to:message-id;
+ bh=oOz6p6X25DOvOiWn0zXsqPe2L3UFPbP/+/Gj9m/b50c=;
+ b=PlPZ4Clv0ZqUd+D3sqeHO0CQAEbMAeFiX9EMCtbVsdSyFM6UsChAqUVIgWwa7LPO4D
+ 7aZIFWGCnUzgFkM0evoDXQpsWtBloAxpVtdrLWRwSwt+5pd8PYxVB9y+CJRmkbriqa4o
+ 2jbYCCiPiyu4RNugF24PyqaN50foQoZHzIy5VtD1nJI3WFvnlQUH/kO0r0NVJVtDpigI
+ FU+2uVKbJCyYI1/WHkQLWgVP8xRzLFHv10BdhuNHCXSffiRmWTYJm1rrUeqc9Zs1NzUZ
+ 0ar1dsaeF/GDdBFlhOpPW5OBT9opGV9/w8pliaBjOLXq4XPkq0H9JjrMs0FNAE+228MZ
+ SA9g==
+X-Gm-Message-State: AOAM533Mj3zGZO1fOPutGFFDfkxI5kMTo3non4kNv12aDTerEAf5La+o
+ KpGhQ67taDkNV72h28Gkqj2pcaBsCwrlQdhZ
+X-Google-Smtp-Source: ABdhPJzaVg3MV6ErMCPoyitQdRO1fDPJP5a/71aUC2EZQgk4U7xexCQmTgTo2SNusYi8txoxmB13Ww==
+X-Received: by 2002:a05:6602:93:: with SMTP id
+ h19mr8618127iob.59.1607612726348; 
+ Thu, 10 Dec 2020 07:05:26 -0800 (PST)
+Received: from dorothy.webb.haus ([24.148.31.157])
+ by smtp.gmail.com with ESMTPSA id y13sm2758645iop.14.2020.12.10.07.05.25
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 10 Dec 2020 07:05:25 -0800 (PST)
+From: Jordan Webb <jordan@getseam.com>
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.20.0.2.21\))
+Date: Thu, 10 Dec 2020 09:05:24 -0600
+References: <0D95EC1F-D44F-4AB4-BE2B-77A88E0FAFE3@getseam.com>
+ <X9GDS0ujfVrTmYnw@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+In-Reply-To: <X9GDS0ujfVrTmYnw@google.com>
+Message-Id: <AC1E3312-8B46-4948-9F9F-58DE9F592951@getseam.com>
+X-Mailer: Apple Mail (2.3654.20.0.2.21)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.166.68 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.68 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1knI8J-008kEi-SA
-Subject: [f2fs-dev] [PATCH RFC] f2fs: compress: add compress_flag in struct
- f2fs_comp_option
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1knNqa-0093k9-8p
+Subject: Re: [f2fs-dev] [PATCH] Make sload.f2fs reproduce hard links
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,60 +107,19 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add a extra field compress_flag to get/set more compress option from/to
-compressed inode.
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-
-Daeho, Jaegeuk,
-
-Could you please check whether we could add this new field to struct
-f2fs_comp_option? so we can expand to allow user to query/config more
-options of compressed inode via new ioctl.
-
-It needs to consider before original patches goes to merge window, let
-me know you have other concerns.
-
- fs/f2fs/file.c            | 1 +
- include/uapi/linux/f2fs.h | 1 +
- 2 files changed, 2 insertions(+)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 16ea10f2bcf5..fbf06311c88d 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3965,6 +3965,7 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
- 
- 	option.algorithm = F2FS_I(inode)->i_compress_algorithm;
- 	option.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
-+	option.compress_flag = F2FS_I(inode)->i_compress_flag;
- 
- 	inode_unlock_shared(inode);
- 
-diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
-index 352a822d4370..2b9c4c99ceee 100644
---- a/include/uapi/linux/f2fs.h
-+++ b/include/uapi/linux/f2fs.h
-@@ -93,6 +93,7 @@ struct f2fs_sectrim_range {
- struct f2fs_comp_option {
- 	__u8 algorithm;
- 	__u8 log_cluster_size;
-+	__u16 compress_flag;
- };
- 
- #endif /* _UAPI_LINUX_F2FS_H */
--- 
-2.29.2
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+PiBUaGFuayB5b3Ugc28gbXVjaCBmb3IgdGhlIHBhdGNoLgo+IEkndmUgdHJpZWQgYSBiaXQgd2l0
+aCByZWNlbnQgY29tcHJlc3Npb24gc3VwcG9ydCBmb3Igc2xvYWQuZjJmcywgYW5kIGZvdW5kIGFu
+Cj4gaXNzdWUgd2hlcmUgaXQgYnJlYWtzIGlfYmxvY2tzIGR1ZSB0byBidWlsZGluZyBkYXRhIGNv
+bnRlbnRzIHR3aWNlIG9uIGhhcmRsaW5rCj4gZmlsZS4gSSB3cm90ZSBhIHBhdGNoIHRvIGFkZHJl
+c3MgaXQgbGlrZSB0aGlzLCBzbyBjb3VsZCB5b3UgcGxlYXNlIGNoZWNrIGl0PwoKVGhhbmsgeW91
+IGZvciByZXZpZXdpbmchIEkganVzdCByZWFsaXplZCB0aGF0IEkgbWlzc2VkIHRoZSBleGlzdGVu
+Y2Ugb2YgdGhlIArigJxkZXbigJ0gYnJhbmNoLCBteSBwYXRjaCBpcyBvZmYgb2Yg4oCcbWFzdGVy
+4oCdIC0gSSB3aWxsIHNlbmQgYSB2MiByZWJhc2VkIG9mZiBvZgrigJxkZXbigJ0gd2l0aCB5b3Vy
+IGZpeGVzIGludGVncmF0ZWQgbGF0ZXIgdG9kYXkuCgrigJQKSm9yZGFuCgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFp
+bGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8v
+bGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
