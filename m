@@ -2,75 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27F8C2D6FFC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Dec 2020 07:09:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54AF32D83E0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Dec 2020 02:39:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:To:Date:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=uCF6gMu6RItNCd5ntqisxXt78e1pCFDWIdQ5Gn4iEt4=; b=XLMjEquEkZpe7ANYtcKJezR/5o
+	AQjUtxJnw3vySfz0FmeQIAZoyimahUhti4S7XdJE64LBg0wqFLICeIWuJcADMG0h80ZV460RD14Hf
+	mmI+XVa43qbPgrWHlwAVLMjOlYd8Rj+3917i9Xjxa7hdLTTe2pF0CJrbpDjsunh/ixe0=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1knbc6-0007SQ-7O; Fri, 11 Dec 2020 06:09:10 +0000
+	id 1kntt2-0000gY-EP; Sat, 12 Dec 2020 01:39:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1knbc4-0007SI-Ou
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Dec 2020 06:09:08 +0000
+ (envelope-from <john+kernel+f2fs-devel@zlima12.com>)
+ id 1kntt0-0000gR-BL
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Dec 2020 01:39:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VknQgfGKJKEovuHs8J06EMcb+o5l+P/2T+Cja8VEfUE=; b=ZU3Uq0x0lBtTgn3RUGwJ4WtMN0
- FynSsmSPul5NaUm22MUyVCaVRCfNU1ZcnTnrkMJeAosXBVhm0vVslozRjES45PkFQLfqxDtFZD8nM
- 3bFhUcn5kgNLnX32l8LOttGlLNo91ys1FdR6NOS5mutzFIabnRUnhIMI/+9eAVwKmu1w=;
+ bh=cuPx4PEc6PGyfqRu2rQ2B56KOVM1ECe63afoYemfQ2Q=; b=ZF3YMg8enRbtMI/rP58cGtBF09
+ uPHvjlZUyzR4VOXiHnL6iQ9YR1w2pwdHc5qIldtlR2QRwuJYyHvoKOx+6LRPDHSTeAElRCxhaMz72
+ 1hm/BMqoX9woGj0Tla6TQ585zFT1ri/GFB1QVyw/ycElW0euleq+O6nbABX4xInMkDt8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VknQgfGKJKEovuHs8J06EMcb+o5l+P/2T+Cja8VEfUE=; b=GcLvb39Hz3WCJ6RKxG2HjSju5v
- Sddi4+hDlwSCRlonuWzhvH9e8Wr/Bj3aoukR825cFlIyvf9Vu8KLZH3uid2Os3By0bq8ApFziZvd4
- 0ha04nO96BYPx2t5wOhE+mEccaL7gkj6Yh1bTuNHmPYxqpUJrN2MjlIFq6tyxMwUFLrg=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
+ h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=cuPx4PEc6PGyfqRu2rQ2B56KOVM1ECe63afoYemfQ2Q=; b=C
+ zk93CcZhODsBXDt1gwL/OLM67guUHWNULlz/DP7a37VS1J3fTQSup6e1K3hd5Wm9cplerpNWuOhsK
+ 2attjNMMLIIqJLD1Pr2k6a1wfN97dnPyZECt0YP6oON0gxxw3WN+qejVxtScYXKDUuuOnk3b7/S0p
+ Teimv2wGXnN8Qrxc=;
+Received: from smtp.zlima12.com ([107.172.191.159])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1knbbq-007UEW-KG
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Dec 2020 06:09:08 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CsgLl6zK3zM2wt;
- Fri, 11 Dec 2020 14:07:59 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 11 Dec
- 2020 14:08:37 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20201210092020.66245-1-yuchao0@huawei.com>
- <X9JZn2ELSZISEQpU@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <bfe87060-7e47-a9c8-897f-17352d0fc623@huawei.com>
-Date: Fri, 11 Dec 2020 14:08:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1kntsq-008oos-To
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 12 Dec 2020 01:39:50 +0000
+Date: Fri, 11 Dec 2020 20:39:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zlima12.com; s=dkim;
+ t=1607737166; bh=slW+o1esgodHnoZ17XrHQg0P1PEOUSZTEVSM2dfnYbY=;
+ h=Date:From:To:Subject;
+ b=Sc7y9mYUgBbSqv4M5wwRH3p/OLWIepf4zJ7/bp8Ch1qoI9rSZF875+172iAchB0Rq
+ 2kLDR/wI64tfRUHjMqaEhQL2cJZV2+lGQont2rdoqWju89jG1vP30ybzTyUxbwtLPs
+ L7r4B4cvIbocmnL94s7o7+4fuuzg13cvVV2qi1pIikHlol3yGKy0i2uGr5rXaoCQ1+
+ GSWpX3yTjdPZg57GvYhRx1X3j2qnbsw2hFKK91pu9OVNfRyp/95QgcQGjiYOUEB2OU
+ RKVZcEXXS9x/JbZUduZASTwkxI86vcfPpkfluwUSSJ+4Ptr1JguMMF7BuGVS9nI/uR
+ gHk4W5XkLzSSw==
+To: linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <20201212013923.dttfua6jyiu2wxqj@Lima-1.maple.zlima12.com>
 MIME-Version: 1.0
-In-Reply-To: <X9JZn2ELSZISEQpU@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [45.249.212.191 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: zlima12.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1knbbq-007UEW-KG
-Subject: Re: [f2fs-dev] [PATCH RFC] f2fs: compress: add compress_flag in
- struct f2fs_comp_option
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kntsq-008oos-To
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs.8: fix formatting for -l parameter in
+ man page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,70 +89,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: "John A. Leuenhagen via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "John A. Leuenhagen" <john+kernel+f2fs-devel@zlima12.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2020/12/11 1:23, Jaegeuk Kim wrote:
-> On 12/10, Chao Yu wrote:
->> Add a extra field compress_flag to get/set more compress option from/to
->> compressed inode.
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>
->> Daeho, Jaegeuk,
->>
->> Could you please check whether we could add this new field to struct
->> f2fs_comp_option? so we can expand to allow user to query/config more
->> options of compressed inode via new ioctl.
->>
->> It needs to consider before original patches goes to merge window, let
->> me know you have other concerns.
-> 
-> Chao, I think it'd hard to add this at time point, unless there's critical
-> info that we need to set very urgently.
+Signed-off-by: John A. Leuenhagen <john@zlima12.com>
+---
+ man/mkfs.f2fs.8 | 1 +
+ 1 file changed, 1 insertion(+)
 
-Oops, so it needs extra ioctl interface to get/set newly added chksum and
-compress_level configs...
-
-Thanks,
-
-> 
->>
->>   fs/f2fs/file.c            | 1 +
->>   include/uapi/linux/f2fs.h | 1 +
->>   2 files changed, 2 insertions(+)
->>
->> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->> index 16ea10f2bcf5..fbf06311c88d 100644
->> --- a/fs/f2fs/file.c
->> +++ b/fs/f2fs/file.c
->> @@ -3965,6 +3965,7 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
->>   
->>   	option.algorithm = F2FS_I(inode)->i_compress_algorithm;
->>   	option.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
->> +	option.compress_flag = F2FS_I(inode)->i_compress_flag;
->>   
->>   	inode_unlock_shared(inode);
->>   
->> diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
->> index 352a822d4370..2b9c4c99ceee 100644
->> --- a/include/uapi/linux/f2fs.h
->> +++ b/include/uapi/linux/f2fs.h
->> @@ -93,6 +93,7 @@ struct f2fs_sectrim_range {
->>   struct f2fs_comp_option {
->>   	__u8 algorithm;
->>   	__u8 log_cluster_size;
->> +	__u16 compress_flag;
->>   };
->>   
->>   #endif /* _UAPI_LINUX_F2FS_H */
->> -- 
->> 2.29.2
-> .
-> 
+diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+index 0aca4dc..8c57216 100644
+--- a/man/mkfs.f2fs.8
++++ b/man/mkfs.f2fs.8
+@@ -141,6 +141,7 @@ Add default Android options.
+ .TP
+ .BI \-i
+ Enable extended node bitmap.
++.TP
+ .BI \-l " volume-label"
+ Specify the volume label to the partition mounted as F2FS.
+ .TP
+-- 
+2.29.2
 
 
 _______________________________________________
