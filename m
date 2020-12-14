@@ -2,55 +2,55 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C3542D9305
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Dec 2020 06:55:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 877B92D92FF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Dec 2020 06:53:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kogpw-0003Eq-UH; Mon, 14 Dec 2020 05:55:56 +0000
+	id 1kognu-0003SB-OQ; Mon, 14 Dec 2020 05:53:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kogkt-00030i-Fl
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Dec 2020 05:50:43 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kognt-0003Rz-W1
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Dec 2020 05:53:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
  From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zQboTwske26/GAxkTtodHnwP1cqi1wAZP6EOZVYjDRE=; b=LW9roQtW79tjoJJ31rDTnkvODh
- s+GHli+iLglJBq1OYVvF95c6sp4OrqOBz33goxUoOBY1Fd7eQJFXdQxTdGyG0iZuUs9k1jfDz+EOY
- STwQUbzM0oXlLc0IOa2TRa2JfkvR3w2IF9vZvREHQ7lxiN62EsKRIje6BTl2PWU5tZCY=;
+ bh=Dp+nU55IT4YkVFkL5ZNB+8NNZt/ADeTRdb/5UMcxfpw=; b=RX8V18oQW03NY0PgjYG5jLXswA
+ XNEJff1omh3qF6imbzKsBErb3mAFk1qoHSC2UAj8T+s/+CUQ2KRcftGEw8RWw2oKLLe9NyfwmnnjW
+ n88xSJ9fnfEOfD/1HxVPnGcki+7hqHRl8WD5YckOCoXrUx29pgcq32oRlts6mCys6DgE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zQboTwske26/GAxkTtodHnwP1cqi1wAZP6EOZVYjDRE=; b=S
- QkiWq0qTGWF/EJs7ZpOJLenTWGxv1jcBaFFad27ZLrMF45jVOwmEor7e2V1OhYnuik3n+1bzngvis
- A9bd0os2rW98J6ekGlub1pTTSxEb8d80Z6ic8SJZ+ZuCGFRdK0l9iKRO5O0jW7yvQOb8tfv4CdBG+
- 0GN2UbZ8s1Z/J++g=;
+ List-Owner:List-Archive; bh=Dp+nU55IT4YkVFkL5ZNB+8NNZt/ADeTRdb/5UMcxfpw=; b=G
+ p/YZQK1b6CzM6Gfvq+c1t+ISx6GQr+5FqyFhFl5bZekAupn/dY77+nPzoGaXbFo/uTRlcsPl9IA1L
+ 09w7SA7sU9WEUAQTnzio06txJzfKHxHweqiFWxQWyKOVGTVpE99sdMw5TH30yAGbz6/JLc+X201rM
+ tip27CKtEiIUge7Q=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kogkh-00BvRm-LM
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Dec 2020 05:50:43 +0000
-Date: Sun, 13 Dec 2020 21:50:19 -0800
+ id 1kognk-00DDqU-AR
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Dec 2020 05:53:49 +0000
+Date: Sun, 13 Dec 2020 21:53:27 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1607925021;
- bh=26wjFmCwOjxbjwCPVnXE7SyqfSynEV7b+ddO/h17k4I=;
+ s=k20201202; t=1607925209;
+ bh=i16BifUJiG908ADKX33lN3E+d1H+NPST+DKFRlua0sc=;
  h=From:To:Cc:Subject:From;
- b=n/muPa2CduuxaSl+0TEAyvxRjflWJBxicz+gMGJDNpvNXQogxADu7X/WVccGdAlqi
- xZmuIv3FwteKOr+Qlv5ddaktdmXQSJIeBxTQzP16O7fUFoPzMSDKpKdMu63zQ/rf4L
- nkHx5mxptVdfc2WBUpiRT71HanPgKK5fmug5mHDGtTbGZJ04bJI4hhRlBraAVBb4nv
- 2cZYgMGX+sIph52A0SHSdKjUYTKcBWNBX29/dwftRvi2vV6JlukFQMNZnsxn+m7tOy
- ADB2dQgI4vwseN0mcDjFLUWzBh0NPkgsiv/xrwLG41ZNV1WkrtMPXaL3OR1Cb1vFdS
- nTBmup/vMTS6A==
+ b=Vz742K6NGVNpmN1b2Mu7MfDQY8/MpslxDH3rDOKvNd87Tq2HQdUGp9Zb28PahoBTo
+ 9KPjGVineDijLgwV+U7csBNuX0nb9QN6k83hjaxFeZNk2GTahWNQFC71XfcguogXN8
+ +trPJwx0qNFUM8+41Iv05enSTy0VwY4KkCf/G/1i8NTMKV0TNzg7yRbHKXd9MN43wh
+ po+FoQ3oHkG05hHTVnwWwtKuf+W4TvAE0FIZV7YWp16KTnzUOa8xR21rrX8gQn/3lF
+ RbpB4SoHtb7EzqCCoueVr6+UL4NR02NttEHOBGIwt2+YnC4k2oUvX7yo4kzowW8Ygr
+ wlnxN5hS3PGqg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <X9b9G8p8AiRAzDwV@sol.localdomain>
+Message-ID: <X9b910/Ldj6kdljm@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
 X-Spam-Score: -0.1 (/)
@@ -64,8 +64,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kogkh-00BvRm-LM
-Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 5.11
+X-Headers-End: 1kognk-00DDqU-AR
+Subject: [f2fs-dev] [GIT PULL] fsverity updates for 5.11
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,8 +79,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -91,63 +91,38 @@ The following changes since commit 09162bc32c880a791c6c0668ce0745cf7958f576:
 
 are available in the Git repository at:
 
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
+  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
 
-for you to fetch changes up to a14d0b6764917b21ee6fdfd2a8a4c2920fbefcce:
+for you to fetch changes up to bde493349025ca0559e2fff88592935af3b8df19:
 
-  fscrypt: allow deleting files with unsupported encryption policy (2020-12-02 18:25:01 -0800)
-
-----------------------------------------------------------------
-
-This release there are some fixes for longstanding problems, as well as
-some cleanups:
-
-- Fix a race condition where a duplicate filename could be created in an
-  encrypted directory if a syscall that creates a new filename raced
-  with the directory's encryption key being added.
-
-- Allow deleting files that use an unsupported encryption policy.
-
-- Simplify the locking for 'struct fscrypt_master_key'.
-
-- Remove kernel-internal constants from the UAPI header.
-
-As usual, all these patches have been in linux-next with no reported
-issues, and I've tested them with xfstests.
+  fs-verity: move structs needed for file signing to UAPI header (2020-11-23 19:30:14 -0800)
 
 ----------------------------------------------------------------
-Eric Biggers (16):
-      fscrypt: remove kernel-internal constants from UAPI header
-      fscrypt: add fscrypt_is_nokey_name()
-      ext4: prevent creating duplicate encrypted filenames
-      f2fs: prevent creating duplicate encrypted filenames
-      ubifs: prevent creating duplicate encrypted filenames
-      fscrypt: remove unnecessary calls to fscrypt_require_key()
-      fscrypt: simplify master key locking
-      ext4: remove ext4_dir_open()
-      f2fs: remove f2fs_dir_open()
-      ubifs: remove ubifs_dir_open()
-      ext4: don't call fscrypt_get_encryption_info() from dx_show_leaf()
-      fscrypt: introduce fscrypt_prepare_readdir()
-      fscrypt: move body of fscrypt_prepare_setattr() out-of-line
-      fscrypt: move fscrypt_require_key() to fscrypt_private.h
-      fscrypt: unexport fscrypt_get_encryption_info()
-      fscrypt: allow deleting files with unsupported encryption policy
 
- fs/crypto/fname.c            |   8 +++-
- fs/crypto/fscrypt_private.h  |  56 +++++++++++++++-------
- fs/crypto/hooks.c            |  55 +++++++++++----------
- fs/crypto/keyring.c          |  10 +---
- fs/crypto/keysetup.c         |  44 +++++++++++------
- fs/crypto/policy.c           |  27 +++++++----
- fs/ext4/dir.c                |  16 ++-----
- fs/ext4/namei.c              |  13 ++---
- fs/f2fs/dir.c                |  10 +---
- fs/f2fs/f2fs.h               |   2 +
- fs/ubifs/dir.c               |  28 +++++------
- include/linux/fscrypt.h      | 112 ++++++++++++++++++++++++++++---------------
- include/uapi/linux/fscrypt.h |   5 +-
- 13 files changed, 227 insertions(+), 159 deletions(-)
+Some cleanups for fs-verity:
+
+- Rename some names that have been causing confusion.
+
+- Move structs needed for file signing to the UAPI header.
+
+----------------------------------------------------------------
+Eric Biggers (4):
+      fs-verity: remove filenames from file comments
+      fs-verity: rename fsverity_signed_digest to fsverity_formatted_digest
+      fs-verity: rename "file measurement" to "file digest"
+      fs-verity: move structs needed for file signing to UAPI header
+
+ Documentation/filesystems/fsverity.rst | 68 ++++++++++++++++------------------
+ fs/verity/enable.c                     |  8 ++--
+ fs/verity/fsverity_private.h           | 36 ++----------------
+ fs/verity/hash_algs.c                  |  2 +-
+ fs/verity/init.c                       |  2 +-
+ fs/verity/measure.c                    | 12 +++---
+ fs/verity/open.c                       | 24 ++++++------
+ fs/verity/signature.c                  | 14 +++----
+ fs/verity/verify.c                     |  2 +-
+ include/uapi/linux/fsverity.h          | 49 ++++++++++++++++++++++++
+ 10 files changed, 116 insertions(+), 101 deletions(-)
 
 
 _______________________________________________
