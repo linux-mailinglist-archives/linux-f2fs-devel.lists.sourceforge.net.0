@@ -2,68 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 212862DBDD0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Dec 2020 10:44:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45E0F2DC6BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Dec 2020 19:53:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kpTLj-0001yX-89; Wed, 16 Dec 2020 09:43:59 +0000
+	id 1kpbv7-0003DB-Ni; Wed, 16 Dec 2020 18:53:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <gregkh@linuxfoundation.org>) id 1kpTLh-0001y6-VW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:43:57 +0000
+ (envelope-from <dsterba@suse.cz>)
+ id 1kpbv6-0003Cv-Fx; Wed, 16 Dec 2020 18:53:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Wy5FLAZiJnyHzyf/bNy5QaGE9EJCI/Cy2YLJV0B9NdU=; b=Kn223oUtd4qUjY4OHR9xP0UhUV
- iDE4r0Gc5JIJ/3nvC8NPl67qkBfEjc3taH3vnt94i3ZhoWcrZwl3RW93cTD3UtPzeNfbyD6op4wer
- 3r6m4EPqpjq6yrzsxjAxjLUmOd2iNzOgP9O3fghhc63QFyKNwUUU1h8YPOiRnD5x1D1A=;
+ bh=I15UARkcFPnY4T321a9cuHB6MAWlzF1FQYj+/0maPeA=; b=VNHYdOE4pe616ZjE69T+EwDDV2
+ 8jIfXcH3hYuDkLtQrPIFvUYMFZJLRqn8FY/IIyK0eqOEK1r3GjDFm5Xdx3KatKFRY1YUcsB4fJaKA
+ MNjtt3MPSlB832c/tuJli4b8pNHYQyXgxKUHgAcmjWMYJXb9dzt6pEaR0ZpRbSoCnEO0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Wy5FLAZiJnyHzyf/bNy5QaGE9EJCI/Cy2YLJV0B9NdU=; b=Khb8uLstzFTBknfX2SqqN9u3IE
- nt6SEbIIqlELtKnSSwYwC3L0J1z5NQW4T5V2x12/pPUXRXkGrJT7nv14XHfUmcYaK3dSWOwSPiXzz
- O48yC9KuTWYHGfQm+GOFenBPb11puHCZaIrDiorIiGj73g+A+yJP7tsRJ+I6YpSaAGUA=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=I15UARkcFPnY4T321a9cuHB6MAWlzF1FQYj+/0maPeA=; b=egblJZYXjMrgc26i+pced/FwdB
+ kCkyhDEkFxZ4atJVx8NWizVArP25c9kOXkEDY0NO6F7Ke4NIOsxtCYgtyFwWYi9m9Hq0pYT1tgSZx
+ 3LyFDKhpZsu3Lu0UpQczb326nEAUP2ZfJyIrfZjxLLak+Gts1OektbRX2z0hxUUpRD64=;
+Received: from mx2.suse.de ([195.135.220.15])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kpTLa-00GDHR-IU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:43:57 +0000
-Date: Wed, 16 Dec 2020 10:44:41 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1608111820;
- bh=660qYIfVRVWxXtwPu2TkAHoXad8Rf9XKFmlXmuCsho8=;
- h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=0tnZWtFCpBAZLTEQ9XwwxzAXFAreJS5H6KHnaGfzmhomc8gHAfsQ41HtoFWNDKcnr
- taR3qJMEhF64ppdPOM9kWon8p0FTMUVUD5LGyT/ZuHZ1pyqYyRRmXZbB1H8BvpnnYz
- w/TQd5m0fj+7wDROirot6+xXkNCVYukozOvNqvws=
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <X9nXCdp1ssMHKdNI@kroah.com>
-References: <20201216091523.21411-1-yuchao0@huawei.com>
+ id 1kpbuu-00GhGn-Aw; Wed, 16 Dec 2020 18:53:04 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C406AAF0B;
+ Wed, 16 Dec 2020 18:52:32 +0000 (UTC)
+Received: by ds.suse.cz (Postfix, from userid 10065)
+ id CB5A8DA7B4; Wed, 16 Dec 2020 19:50:52 +0100 (CET)
+Date: Wed, 16 Dec 2020 19:50:52 +0100
+From: David Sterba <dsterba@suse.cz>
+To: Herbert Xu <herbert@gondor.apana.org.au>
+Message-ID: <20201216185052.GL6430@twin.jikos.cz>
+Mail-Followup-To: dsterba@suse.cz, Herbert Xu <herbert@gondor.apana.org.au>,
+ Nick Terrell <terrelln@fb.com>, Eric Biggers <ebiggers@kernel.org>,
+ Nick Terrell <nickrterrell@gmail.com>,
+ "squashfs-devel@lists.sourceforge.net" <squashfs-devel@lists.sourceforge.net>, 
+ Christoph Hellwig <hch@infradead.org>, Yann Collet <cyan@fb.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, 
+ Petr Malat <oss@malat.biz>, Chris Mason <clm@fb.com>,
+ "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
+ Kernel Team <Kernel-team@fb.com>,
+ =?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ Niket Agarwal <niketa@fb.com>,
+ Btrfs BTRFS <linux-btrfs@vger.kernel.org>,
+ Johannes Weiner <jweiner@fb.com>
+References: <20201203205114.1395668-1-nickrterrell@gmail.com>
+ <DF6B2E26-2D6E-44FF-89DB-93A37E2EA268@fb.com>
+ <X9lOHkAE67EP/sXo@sol.localdomain>
+ <B3F00261-E977-4B85-84CD-66B07DA79D9D@fb.com>
+ <20201216005806.GA26841@gondor.apana.org.au>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201216091523.21411-1-yuchao0@huawei.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20201216005806.GA26841@gondor.apana.org.au>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1kpTLa-00GDHR-IU
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix out-of-repair __setattr_copy()
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kpbuu-00GhGn-Aw
+Subject: Re: [f2fs-dev] [PATCH v7 0/3] Update to zstd-1.4.6
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,27 +91,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: dsterba@suse.cz
+Cc: Christoph Hellwig <hch@infradead.org>, Petr Malat <oss@malat.biz>,
+ "squashfs-devel@lists.sourceforge.net"
+ <squashfs-devel@lists.sourceforge.net>, Nick Terrell <nickrterrell@gmail.com>,
+ Yann Collet <cyan@fb.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, Eric Biggers <ebiggers@kernel.org>,
+ Chris Mason <clm@fb.com>, Nick Terrell <terrelln@fb.com>,
+ "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
+ Kernel Team <Kernel-team@fb.com>,
+ =?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ Niket Agarwal <niketa@fb.com>, Btrfs BTRFS <linux-btrfs@vger.kernel.org>,
+ Johannes Weiner <jweiner@fb.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 16, 2020 at 05:15:23PM +0800, Chao Yu wrote:
-> __setattr_copy() was copied from setattr_copy() in fs/attr.c, there is
-> two missing patches doesn't cover this inner function, fix it.
-> 
-> Commit 7fa294c8991c ("userns: Allow chown and setgid preservation")
-> Commit 23adbe12ef7d ("fs,userns: Change inode_capable to capable_wrt_inode_uidgid")
-
-Are these lines supposed to be "Fixes:" instead of "Commit "?
-
-thanks,
-
-greg k-h
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gV2VkLCBEZWMgMTYsIDIwMjAgYXQgMTE6NTg6MDdBTSArMTEwMCwgSGVyYmVydCBYdSB3cm90
+ZToKPiBPbiBXZWQsIERlYyAxNiwgMjAyMCBhdCAxMjo0ODo1MUFNICswMDAwLCBOaWNrIFRlcnJl
+bGwgd3JvdGU6Cj4gPgo+ID4gVGhhbmtzIGZvciB0aGUgYWR2aWNlISBUaGUgZmlyc3QgenN0ZCBw
+YXRjaGVzIHdlbnQgdGhyb3VnaCBIZXJiZXJ04oCZcyB0cmVlLCB3aGljaCBpcwo+ID4gd2h5IEni
+gJl2ZSBzZW50IHRoZW0gdGhpcyB3YXkuCj4gCj4gU29ycnksIGJ1dCBJJ20gbm90IHRvdWNoIHRo
+ZXNlIHBhdGNoZXMgYXMgQ2hyaXN0b3BoJ3Mgb2JqZWN0aW9ucwo+IGRvbid0IHNlZW0gdG8gaGF2
+ZSBiZWVuIGFkZHJlc3NlZC4KCkkgaGF2ZSBvYmplY3Rpb25zIHRvIHRoZSBjdXJyZW50IHBhdGNo
+c2V0IGFzIHdlbGwsIHRoZSBidWlsZCBib3QgaGFzCmZvdW5kIHRoYXQgc29tZSBvZiB0aGUgZnVu
+Y3Rpb24gZnJhbWVzIGFyZSBvdmVybHkgbGFyZ2UgKHVwIHRvIDM4MDAKYnl0ZXMpIFsxXSwgYmVz
+aWRlcyB0aGUgb3JpZ2luYWwgY29tcGxhaW50IHRoYXQgdGhlIHBhdGNoIDMvMyBpcyAxLjVNaUIu
+CgpbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC8yMDIwMTIwNDE0MDMxNC5HUzY0MzBA
+dHdpbi5qaWtvcy5jei8KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
+c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
+aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
