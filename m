@@ -2,54 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87E4E2DBD5F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Dec 2020 10:16:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F63D2DBD62
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Dec 2020 10:16:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kpSun-0002G2-Bs; Wed, 16 Dec 2020 09:16:09 +0000
+	id 1kpSvW-00026W-Rz; Wed, 16 Dec 2020 09:16:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kpSul-0002Ff-Sp
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:16:07 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kpSvV-000264-Rl
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:16:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rY8V6d2wtJoafzzcA/OL4uk43ByMqfYFuxCQFSuse0c=; b=DcUKTuVu9D1inEhfrr3QQlAMyq
- 8tNamlIryEMla3FxS7faupP283iR8KXEnHiDMtaL541D8odjf3IaHteRhKKQiaHsN9nKei8A5+dBC
- QC+ONpgRy64m+ZhYLh2oIkNXzc0R0rLzJdWDKGI0KRxduZPzuvS9XH9uSxglG6bPh1e0=;
+ bh=RcgQwjj/nLSvgiIN/CSoaXVfg2cGW7WB+8ZORErV85I=; b=QkuqTHcQge2Gd3Kgj5FlQSEBtm
+ vmiJBtwhMlgGIiFF17Kk+7RSWpx3y3EAwjnuEAoifM1eXbW8YCT5vy2AadPBqVZCd6aMD9VVM1F8/
+ MxOky+v1PXDBOqiuEAW8oyvLRKLc52tfFfvwGMFINBP5imDrwaWY88BKSEHmiKyXqcrc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=rY8V6d2wtJoafzzcA/OL4uk43ByMqfYFuxCQFSuse0c=; b=E
- TuWou2SY0gf4nU2fow4ISSSvI7KYrzrwBkfh2P8P1ywr2bOZSJFFVJKdxi4RSUzlbvt2h4sY5O5mW
- vaRgHhiT99M4rSWN5JdkjJp+SUQaq83OwxaNFzBGFvTDpuXL4n8f7GG24YcZAdzeyRwUVo31vEK1I
- genPn6UTvxHZKr0Y=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=RcgQwjj/nLSvgiIN/CSoaXVfg2cGW7WB+8ZORErV85I=; b=ix3+agpbDEU+IEIm7VsGwQ6mET
+ t6KcZwvrgDt58QRAwfT1gk5M9T1BDe07SvUngIZ4RpDSdEF8mXX7qFW/FJXaCjJNJvjWTW1jo3hyR
+ gvmAdcpTPTQcnEEHVZRR/eNXq/iKrvEDTkJsYHAlKOb7Q97LpPNLTRdGmObQotQE3Lb8=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kpSuh-00GBSY-OK
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:16:07 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CwqGQ5RJ2zhrS2;
- Wed, 16 Dec 2020 17:15:10 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
- 14.3.498.0; Wed, 16 Dec 2020 17:15:33 +0800
+ id 1kpSvQ-00GBWD-If
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Dec 2020 09:16:53 +0000
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CwqHC5mxgzkqS2;
+ Wed, 16 Dec 2020 17:15:51 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 16 Dec
+ 2020 17:16:34 +0800
+To: Weichao Guo <guoweichao@oppo.com>, <jaegeuk@kernel.org>, <chao@kernel.org>
+References: <1607918093-204-1-git-send-email-guoweichao@oppo.com>
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Wed, 16 Dec 2020 17:15:23 +0800
-Message-ID: <20201216091523.21411-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.29.2
+Message-ID: <3a9ee603-5ad3-8ee5-7dff-d40bd47b3f9b@huawei.com>
+Date: Wed, 16 Dec 2020 17:16:34 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <1607918093-204-1-git-send-email-guoweichao@oppo.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -59,12 +63,14 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kpSuh-00GBSY-OK
-Subject: [f2fs-dev] [PATCH] f2fs: fix out-of-repair __setattr_copy()
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kpSvQ-00GBWD-If
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to set inode->i_mode correctly for
+ posix_acl_update_mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,41 +82,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+Cc: fh@oppo.com, Bin Shu <shubin@oppo.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-__setattr_copy() was copied from setattr_copy() in fs/attr.c, there is
-two missing patches doesn't cover this inner function, fix it.
+On 2020/12/14 11:54, Weichao Guo wrote:
+> We should update the ~S_IRWXUGO part of inode->i_mode in __setattr_copy,
+> because posix_acl_update_mode updates mode based on inode->i_mode,
+> which finally overwrites the ~S_IRWXUGO part of i_acl_mode with old i_mode.
+> 
+> Testcase to reproduce this bug:
+> 0. adduser abc
+> 1. mkfs.f2fs /dev/sdd
+> 2. mount -t f2fs /dev/sdd /mnt/f2fs
+> 3. mkdir /mnt/f2fs/test
+> 4. setfacl -m u:abc:r /mnt/f2fs/test
+> 5. chmod +s /mnt/f2fs/test
 
-Commit 7fa294c8991c ("userns: Allow chown and setgid preservation")
-Commit 23adbe12ef7d ("fs,userns: Change inode_capable to capable_wrt_inode_uidgid")
+Good catch!
 
-Cc: stable@vger.kernel.org
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- fs/f2fs/file.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> Signed-off-by: Weichao Guo <guoweichao@oppo.com>
+> Signed-off-by: Bin Shu <shubin@oppo.com>
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 16ea10f2bcf5..5bcaa68f74ad 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -848,7 +848,8 @@ static void __setattr_copy(struct inode *inode, const struct iattr *attr)
- 	if (ia_valid & ATTR_MODE) {
- 		umode_t mode = attr->ia_mode;
- 
--		if (!in_group_p(inode->i_gid) && !capable(CAP_FSETID))
-+		if (!in_group_p(inode->i_gid) &&
-+			!capable_wrt_inode_uidgid(inode, CAP_FSETID))
- 			mode &= ~S_ISGID;
- 		set_acl_inode(inode, mode);
- 	}
--- 
-2.29.2
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
+Thanks,
 
 
 _______________________________________________
