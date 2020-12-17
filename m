@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C8562DCD44
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Dec 2020 08:58:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D92F02DCE1E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Dec 2020 10:15:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:To:Date:Sender:Cc:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:Cc:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=fbh3t10pVXgUlRMg5B7Fgyyg+Hk0j+IXYpaZfIYqW8o=; b=CGtjB8nUlEv6niP3tdrM1H74zi
-	7pvIL6e2g/ttz2p3IYoJ+uPBRM/4B63h++9MSjORgIOSBQj44FAyXrCZgVkrtYJZlosLloN3ZABCp
-	T1JfupbWV2OmNLGiwfBHedJgXn3M4wz5V9/hkH/DB6TfJ4xuxYmCmUnzApXq4ZB/UqK0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	bh=A8diFdekP17emVtJCTjCdcTXjK3QWzLSrRgbqgb4Dy0=; b=lvxGIYA4OuiESRukveTEjVPB7O
+	reGSxNuFo0pq/0XmRG2NBCtsEDFfejKSFjM9w8ZzS3gV9NlZ3S0d3ANrznPSsSHaX6SuK1Wa00wYX
+	eV5OyTG46NmEKaHgL8H4x0klcdW0BES8LAljeaxUpZOB6v5nrk6/vU1bcVgXdnGiFV9g=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kpoAl-0003N0-OH; Thu, 17 Dec 2020 07:58:03 +0000
+	id 1kppNe-0003fB-Jx; Thu, 17 Dec 2020 09:15:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <john+kernel+f2fs-devel@zlima12.com>)
- id 1kpoAk-0003Ms-4y
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 07:58:02 +0000
+ id 1kppNd-0003ez-H3
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 09:15:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ou0Cd+5VXhP55Yj8JaogXvrTR0hA7Ktc6pDexJ0SSPk=; b=SK6C7MdkHN469nkH4Jif1Ayc4o
- T5UYO1SvRrinGnBXaa5QYN9CjFk14FjCKXhsDorDlll+g5frPIc/Z5WLpLbpJHpKDxjvOj3LyaJSA
- myli/2bgvS0Sah+QVz9SqVCh1K9uTVGWUx8STDyk92SuscB+QIPsfd0WDu74jwiHIEWw=;
+ bh=wYPFhFjgvHqu/5l9ULgflOPbfPszsGuCONFlnb4CtSg=; b=hcxUAveYTG1j9Dl3UR2cfycdoV
+ TubfYvcgb1DnH6Zfz4rsh/zg1rK+fJkVzhrh4rhx/eoZ91OwtHl9GUgmQgAGSmshTzAT97wT0rgeL
+ njieE17kQLDR9L+R14fSKqq2aayw9asOF2WUaCVOS/4+8aQjfcwisbbJXczPuUbB8Mlk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
+ Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ou0Cd+5VXhP55Yj8JaogXvrTR0hA7Ktc6pDexJ0SSPk=; b=S
- uDmzvxqtrxeeauEKhfjFPWp000tWhXL0QBDVS4Ts4zsE6NhbvHqqIrIz+SClzrXyNwOWb9hbUCfUu
- dHYixE8wT0a1ISyI2mY/wvQwMmh7wXbolZbi/zpReYYjK86oNIK7fh6Rck6NoGMglgRtQ7rSKpaO4
- qoper+j+t+T6CYbg=;
+ List-Owner:List-Archive; bh=wYPFhFjgvHqu/5l9ULgflOPbfPszsGuCONFlnb4CtSg=; b=g
+ x/1SIC07V7gWzkg5jGG7dq/hmEUw9x5a8RLzX/tHqL0mbORnbzSWmP1nJpb+0YSKSLvPYc1FuW3+u
+ 5qIl6mVXIfdnNptP1vgFNyBpVtJooLplV4AhfT/pXMhm97oXz/j2Xp88gVfOKmhIDM2SVF/F9ZtjV
+ EDUR3XqSlx/9gxGQ=;
 Received: from smtp.zlima12.com ([107.172.191.159])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kpoAf-00HOrc-C8
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 07:58:01 +0000
-Date: Thu, 17 Dec 2020 02:57:44 -0500
+ id 1kppNU-00HVik-Be
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 09:15:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zlima12.com; s=dkim;
- t=1608191871; bh=cypJdOvuFhPcQ3rjufGYexoKffA66NWkGAQ/Sd6ccHU=;
- h=Date:From:To:Subject;
- b=IjhmTRqoSXdUeva6qb3Af2hHoVGDTQCRAtxOrCHXCbpg8JqYBb0Q1siDXCDS9d+MK
- iO4+Z+8S6qjBgYQpCzz8nXIC3dBGZa8GE+o3oWf6Qk7bW/9g39R//dvwcQnJdL6TaO
- lT0GPTZI5DhybQpG88KAXsrMX0HSlFbYTkqMdiuxL4YJkjeKiiqnQs7FEWg7Afq/j2
- Dbu7iWZpndlvEbt1Y/pRigI2ZidQwaxWf70O72yxSTJTkRl0xkiFPeqpgdGNHDEQUk
- Ovwp9HHxEOAvd0vJhizmo8RKOWlDIWfvCoerArdqXrJR53k58ZJXYcGWIxgmaBZjPa
- b3lc57e4hva2w==
+ t=1608196503; bh=KubPd4gnIzOgFcs/vCdDsNiAmQqycrG010DUXMnygB8=;
+ h=From:To:Subject:Date;
+ b=VBHmI9U8Cw92gDRFpKPB6uNrbPprAN1NExzAdUJLrDXH7b4PeLQjNMVUmFqGAPSlS
+ JxIMmcoNDSvPBo9RB8URnAyV087eUYYjTkWpt0xnqVd73oxsqX/hWPRyby7wdb+KTd
+ 8fRaSe7kpjkTRGNIC74VfiXiFWHFwPZYkJLBpzHbM+OQqHizkfoGQih5rhbJINvVl6
+ H4wC+SUIEEht3khchURRS4L2T5MliuAxQRc+/wwRw7NyWKU8q4crr/uiGmN9pgFZFq
+ r8inXrl+TWxSDGek8dBJYpAd1Y5062clApEIiOGMBFePDZIANw3NgND+WJMD4P+SaP
+ RAdIBNwCvYz1g==
 To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20201217075744.ytylmaawi2fwvxqv@Lima-1.maple.zlima12.com>
+Date: Thu, 17 Dec 2020 04:14:57 -0500
+Message-Id: <20201217091457.7807-1-john+kernel+f2fs-devel@zlima12.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Disposition: inline
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kpoAf-00HOrc-C8
-Subject: [f2fs-dev] [PATCH] mkfs.f2fs.8: Better document the -g argument.
+X-Headers-End: 1kppNU-00HVik-Be
+Subject: [f2fs-dev] [PATCH] Miscellaneous cleanup to README.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,55 +88,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: "John A. Leuenhagen via Linux-f2fs-devel"
+From: john+kernel+f2fs-devel--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: "John A. Leuenhagen" <john+kernel+f2fs-devel@zlima12.com>
+Reply-To: john+kernel+f2fs-devel@zlima12.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-To use Android defaults, you must use `-g android`. However, the man
-page previously implied that you need only use `-g`.
+From: "John A. Leuenhagen" <john@zlima12.com>
 
-Since you must specify `android`, I figured it would be appropriate
-to name that field `default-options` in the man page. If there was ever
-a reason to have a different set of default options, the `-g` option
-could be used with a new `default-options` value, i.e. `-g example`.
-
-Signed-off-by: John A. Leuenhagen <john@zlima12.com>
 ---
- man/mkfs.f2fs.8 | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ README | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
-index 0aca4dc..c90ebcc 100644
---- a/man/mkfs.f2fs.8
-+++ b/man/mkfs.f2fs.8
-@@ -32,6 +32,7 @@ mkfs.f2fs \- create an F2FS file system
- ]
- [
- .B \-g
-+.I default-options
- ]
- [
- .B \-i
-@@ -136,8 +137,14 @@ Force overwrite when an existing filesystem is detected on the device.
- By default, mkfs.f2fs will not write to the device if it suspects that
- there is a filesystem or partition table on the device already.
- .TP
--.BI \-g
--Add default Android options.
-+.BI \-g " default-options"
-+Use a default set of options.
-+The following values are supported:
-+.RS 1.2i
-+.TP 1.2i
-+.B android
-+Use default options for Android.
-+.RE
- .TP
- .BI \-i
- Enable extended node bitmap.
+diff --git a/README b/README
+index 4ea3356..afe334f 100644
+--- a/README
++++ b/README
+@@ -1,8 +1,8 @@
+-F2FS format utilility
++F2FS format utility
+ ---------------------
+ 
+-To use f2fs filesystem, you should format the storage partition
+-with this utilility. Otherwise, you cannot mount f2fs.
++To use the f2fs filesystem, you should format the storage partition
++with this utility. Otherwise, you cannot mount f2fs.
+ 
+ Before compilation
+ ------------------
+@@ -17,7 +17,7 @@ You should install the following packages.
+ Initial compilation
+ -------------------
+ 
+-Before compilation initially, autoconf/automake tools should be run.
++Before initial compilation, autoconf/automake tools should be run.
+ 
+  # ./autogen.sh
+ 
+@@ -47,4 +47,4 @@ How to run by default
+ 
+  $ mkfs.f2fs -l [LABEL] $DEV
+ 
+-For more mkfs options, see man page.
++For more mkfs options, see the man page.
 -- 
 2.26.2
 
