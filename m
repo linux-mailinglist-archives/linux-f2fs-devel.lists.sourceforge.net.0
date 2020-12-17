@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB96E2DCC6E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Dec 2020 07:25:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F34A2DCC72
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Dec 2020 07:27:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kpmij-0007lv-FV; Thu, 17 Dec 2020 06:25:01 +0000
+	id 1kpmkt-0006IE-KY; Thu, 17 Dec 2020 06:27:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1kpmii-0007lg-KL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 06:25:00 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1kpmkr-0006Hx-Mq
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 06:27:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+idwvyCp9ssGCfWrPadw/r0jal+d5oZ+bNH6Ih5AT+w=; b=K8/E20S5V+OYMV/kfEf7rroOSt
- zStqXmjPkq/gw3oRoj4JIZ/ldeP1djBOg905eZrqUtioC+J8JNAwe9OurrXIDITL6Jv/qn0VXhL/L
- NJh3akiJVP5wTlzmt7xzmGBviZZPfHk9QXqD8KNmkmOy6wbcvuWh40ABAF7mQZYNFFhM=;
+ bh=6O1PssmJXiD5G9fUigcu8UF/CqjsClUThY8ahTzPE5c=; b=ipDNnOhNjQF+5Hl7+Ai8tUsF90
+ TSeK7svbUVVxV0HVwQQXmb5JxqdDyN1tds2D4+DkgoVctLi+kB1DCqEBzTGZ0wh74DA0a1jn4Hyzp
+ O5RyFzF40nuKFf9C4uKTfyq11VGvBSi8Zyamu/1x3zZCgw1l+sXeFnhwiKXr93H3asoM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,52 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+idwvyCp9ssGCfWrPadw/r0jal+d5oZ+bNH6Ih5AT+w=; b=D1NRuedzeeEUWwyy2ydHUAY+TK
- BtuVDqVGtcmySNEEo630rkpVuxTP6UEA1kmdHG28QZzoE28qU1UR8y/aXVAhcagBkwP3cK85+CHe4
- tLHn814GhXkaLXL0jX2rw08zOYXHZKqqPBIcOmMf6ixkYUEpUIVmgU4sQvMJ6I6LDsXg=;
+ bh=6O1PssmJXiD5G9fUigcu8UF/CqjsClUThY8ahTzPE5c=; b=EN32qVo17m0NPJ0cp9AesHuZaD
+ gy3DrU63Au61AmyzPrCw0ERWDFPoDC8YHNfPftBLvPyU/6PQWjFHY+oilfEyo+YMhRk78wab832aG
+ rcQrb1T9stlbbh50poFXjnkR57ej5MWlvkWqsC0KVErJvYqdhhXq5oheJ0iM6yEOAFns=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kpmiT-00HIdg-VQ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 06:25:00 +0000
-Date: Wed, 16 Dec 2020 22:24:38 -0800
+ id 1kpmkn-00GyiD-98
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Dec 2020 06:27:13 +0000
+Date: Wed, 16 Dec 2020 22:26:54 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1608186280;
- bh=OI+1faOQWmRfP51UoZ06kZld5a7lhf9RNyDAWFziIT8=;
+ s=k20201202; t=1608186415;
+ bh=blQ9TjwzSGVLu2WJ7JajS1sME1qOEHQhDxH7XzxrnCo=;
  h=From:To:Cc:Subject:References:In-Reply-To:From;
- b=FWi6ftQj38xjFTvUrALEwTWhOjHd5nkIiqIkkxHXtmz07vAGAUw/TwR2oDkzaeI7j
- 7dBbHI28RhzCAroeVSyVYTwpJp5ql3s5h1UIPtNhg1hoYHM+Q/p+ICmrpXbvMZbB0p
- G78cKDCyga5hXknxNeDRtYMSCFRX5V9OG/IilXVfJmaCs44LC9DwGRGU4S1eRH73bJ
- eKEFo+bj68nGcdv8d1DvkonSP6RoYjogwusC9klP67YbzTKQ4byxCemXakGdczXy/i
- QvQJPtIay3R742Lu16Z2LlcNcINV979HrRAOD3lskYRemrJkr2BFkLxN6GPdQz14Z8
- 3PzZbNiD1BapQ==
+ b=M76Uw/Y5SCSdFGzGtff019b1daVNyBX3GI1Z+gAvdC1ZxfQq2Vf5xqDvxQqyBgY1M
+ anTJt88QHNkAFzTWzu67r8X8qf8f5bVRX20d+uMVB59J6BybkrYSoMcDeHGzjwSeZM
+ jF8QE5rKfb+Vb0PyUFprBGHqLADXUUn/zObT0lf1ScoMw2RxlUlMHv5NY4aWcGnRi6
+ /Vll/EDqWrCgIbJckZbNW8/V6OkpxeeJCIQa+renh7Ja/+vMniqNvext6Dv3PZDo9+
+ vc2Qv1VrPyxMxXp9s73NjV3bCFxr6NSm4FA3X/fkNL9tee2hDTyJ1NowpFMOiuzSHy
+ 23/cpgB1asdEQ==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <X9r5phvHEKL8K8RS@google.com>
-References: <1607918093-204-1-git-send-email-guoweichao@oppo.com>
- <3a9ee603-5ad3-8ee5-7dff-d40bd47b3f9b@huawei.com>
- <08854b69-717e-672e-de85-f1e41c6edd9e@huawei.com>
+To: "John A. Leuenhagen" <john+kernel+f2fs-devel@zlima12.com>
+Message-ID: <X9r6LjHCmeYv42nS@google.com>
+References: <20201215015800.u37ixmukkwihmxi2@Lima-1.maple.zlima12.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <08854b69-717e-672e-de85-f1e41c6edd9e@huawei.com>
+In-Reply-To: <20201215015800.u37ixmukkwihmxi2@Lima-1.maple.zlima12.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: zlima12.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: oppo.com]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kpmiT-00HIdg-VQ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to set inode->i_mode correctly for
- posix_acl_update_mode
+X-Headers-End: 1kpmkn-00GyiD-98
+Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: Fix behavior of -g option to
+ match the man page.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,54 +84,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fh@oppo.com, linux-f2fs-devel@lists.sourceforge.net,
- Bin Shu <shubin@oppo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/16, Chao Yu wrote:
-> Jaegeuk,
-> 
-> Do you remember why we use i_acl_mode to store acl related mode?
-> Can we get rid of it?
+Hi,
 
-IIRC, it is used for error handling, so it seems we can't remove it.
+On 12/14, John A. Leuenhagen via Linux-f2fs-devel wrote:
+> The man page states that simply specifying the -g option will use the
+> default Android options. However, mkfs.f2fs currently requires the user
+> to specify `-g android`. This makes the behavior of mkfs.f2fs match the
+> man page.
+
+I think we need to fix the manpage, since this requires to change all the
+use cases in android. :(
+
+Thanks,
 
 > 
-> Thanks,
+> Signed-off-by: John A. Leuenhagen <john@zlima12.com>
+> ---
+>  mkfs/f2fs_format_main.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 > 
-> On 2020/12/16 17:16, Chao Yu wrote:
-> > On 2020/12/14 11:54, Weichao Guo wrote:
-> > > We should update the ~S_IRWXUGO part of inode->i_mode in __setattr_copy,
-> > > because posix_acl_update_mode updates mode based on inode->i_mode,
-> > > which finally overwrites the ~S_IRWXUGO part of i_acl_mode with old i_mode.
-> > > 
-> > > Testcase to reproduce this bug:
-> > > 0. adduser abc
-> > > 1. mkfs.f2fs /dev/sdd
-> > > 2. mount -t f2fs /dev/sdd /mnt/f2fs
-> > > 3. mkdir /mnt/f2fs/test
-> > > 4. setfacl -m u:abc:r /mnt/f2fs/test
-> > > 5. chmod +s /mnt/f2fs/test
-> > 
-> > Good catch!
-> > 
-> > > 
-> > > Signed-off-by: Weichao Guo <guoweichao@oppo.com>
-> > > Signed-off-by: Bin Shu <shubin@oppo.com>
-> > 
-> > Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> > 
-> > Thanks,
-> > 
-> > 
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > .
-> > 
+> diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+> index 03eb748..8db2191 100644
+> --- a/mkfs/f2fs_format_main.c
+> +++ b/mkfs/f2fs_format_main.c
+> @@ -129,7 +129,7 @@ static void add_default_options(void)
+>  
+>  static void f2fs_parse_options(int argc, char *argv[])
+>  {
+> -	static const char *option_string = "qa:c:C:d:e:E:g:hil:mo:O:rR:s:S:z:t:T:U:Vfw:";
+> +	static const char *option_string = "qa:c:C:d:e:E:ghil:mo:O:rR:s:S:z:t:T:U:Vfw:";
+>  	static const struct option long_opts[] = {
+>  		{ .name = "help", .has_arg = 0, .flag = NULL, .val = 'h' },
+>  		{ .name = NULL, .has_arg = 0, .flag = NULL, .val = 0 }
+> @@ -169,8 +169,7 @@ static void f2fs_parse_options(int argc, char *argv[])
+>  			c.extension_list[1] = strdup(optarg);
+>  			break;
+>  		case 'g':
+> -			if (!strcmp(optarg, "android"))
+> -				c.defset = CONF_ANDROID;
+> +			c.defset = CONF_ANDROID;
+>  			break;
+>  		case 'h':
+>  			mkfs_usage();
+> -- 
+> 2.26.2
+> 
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
