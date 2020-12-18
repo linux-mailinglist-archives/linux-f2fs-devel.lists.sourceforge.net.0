@@ -2,117 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF1F02DDC40
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Dec 2020 01:05:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=GYI2hEsQH7RZUuZKCEcYyrMqjEdkewnQ2Yw6ovQcDfE=; b=FxtJiXODHSdlU/nWHpbDt5EIk
-	7/9qz43751pow0Thssvx9kUuIp0C1Epi9B6O5GG9QkkOG2fTo3m6zV6u6uG2JPC7mwB9Q+aecJNf+
-	uoGjnWJ862S4WUdmSEoYJ4HVTPjUWopQRQ78EnNcArPoOwB+4fJhjzRZns1HoTmJQIM70=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9607E2DDC86
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Dec 2020 02:04:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kq3H3-00056U-K5; Fri, 18 Dec 2020 00:05:33 +0000
+	id 1kq4CG-0006Yp-Mm; Fri, 18 Dec 2020 01:04:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <satyat@google.com>) id 1kq3H2-00056N-EY
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Dec 2020 00:05:32 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1kq4CF-0006Yh-0N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Dec 2020 01:04:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ftImLJzo43H5xhmSmjP4UoiWeHjvqDggI/0+orDetik=; b=H9TuHuSBR1jqFMAhlXlP3JuOPd
- 68ih13J+Cd0RUz/BJg6jEA9hvY8oFr485lAjI7wuEnagP34r3kBQ4tSfHoUDP49gyczzFmDPJN3p7
- maMr3BwzNhbvoM/Ezs/Eq4Z1sGdkdCXRNc/Fg/VuXQO6AA6Q5R0c2bRZbC3aKKbj48O0=;
+ bh=Cx3rxINzXoIxYxuFcE5n5+QZLpX336ADL6jiXRdFr7E=; b=ap/l8UzHkNahGnjWThqkjVPOaJ
+ 7n74NafY+N3HlCYb23xtO7lhM8nBH0pjVmcRdRQ1AoC1BtoB+QyLWnocdimmWmr2cnMHeHG7nII3r
+ TAhKApONXGFBx32Nlv3vrbzPD+yNZd5c5YK2vd1y+8evj6s2n0sMt+tnxlRlAd1HvtoU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ftImLJzo43H5xhmSmjP4UoiWeHjvqDggI/0+orDetik=; b=Q9L+YMqP1XXU7lFVb1miwysOx1
- 6AZ/cYCBuuown8YFCRHuUVOxQVKgDCuTToDTRvixicMGWgFomwnaGx0G9ryptV3Pzg7FPS/wxIA/w
- YNATTyiUMmgj4zcR8l9NFMub5mLQqgEokodaq4orUcjv3bLSM63BeqHMztbEZvkpLER8=;
-Received: from mail-pf1-f181.google.com ([209.85.210.181])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Cx3rxINzXoIxYxuFcE5n5+QZLpX336ADL6jiXRdFr7E=; b=j
+ 7Gh+c5vwR2kT/izxyZssyv01gdQW5l0hEjid8ghgaplz4sZ7x4mExK4hwrZOznihxTxJAb67f9a3V
+ qZeK3HQDad4plIeplk5X+qEU43ebhaaaLOaKYIZXUID2AYk3vGpfrmIe+Zgs69dnBYZ2WaAD4fQbK
+ EcBb/B4pJIe39tb4=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kq3Go-000fEm-4W
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Dec 2020 00:05:32 +0000
-Received: by mail-pf1-f181.google.com with SMTP id 11so432504pfu.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 17 Dec 2020 16:05:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=ftImLJzo43H5xhmSmjP4UoiWeHjvqDggI/0+orDetik=;
- b=lGUzz2DBxHqOZ3lDtOCCkd5RBICJjSiF7pJd7d7sVRkhLLTKqKGLKsCCQh83Y2DyRu
- R3Hp/kZrLyaW6w9dqBBrAVhEv3IN66sHWz9c/Bfw+5Z8wcu4NHMGbwIqL+wk5UMRsv4G
- I27gqRa/r18pf7SWXr6cl8quCCTDDBFrv6Y9/i2tGMl+BIJAT2A5z59eEJPIudq5dYWA
- IJgcSLsecYIDeumR/5soBqp8zY0vIS+8EjXWq+Macuep/4LhIjKbn9IPWV/0KIs+bLje
- 4owXXvYNfFeizvCslb0wzsQlVgTwd3w8j2YI5Ya+v8nrsLjuDr2+4wZOAS2RB1GGddcr
- ABkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=ftImLJzo43H5xhmSmjP4UoiWeHjvqDggI/0+orDetik=;
- b=apI+Q/OHNjPb2oEUSDt06NT+xpeexjg4HYNHid/zkAs5zcdvSU7Rk2lik5u6h4aDZO
- /RU7ZU3OUXEZfI6kLv8wof4Y9kmITn/oLVsx2CYywJbdMu1o8ofijmwp+Gd0+6zexNl3
- Tanz70OlpTF1uuqKHkJE7JU1rE36iNWNLckJkLKx1HwmC18TRjaUxJI2ZQSvZ9z4ud1R
- wrsykmW0QjX+m0NRvuhpU5pnzPQiGRp/1UYPhmNNMD4kxPbdhdhkvXqyCX9oV+/gzHw1
- Efvv+CRaOtSg8Ur+ZsnUZcjVLRKuPF9lw6Ux+gNeet8jXEi6B3wy/W+f8nzxDk0SnRx8
- peZw==
-X-Gm-Message-State: AOAM530gbjBg6+vociwbvzhbyHeAXeTovTeAH0y40D+vTXYWuOQ5hSrp
- nD5Y2YTLw8MOBUP6nGmehqThjg==
-X-Google-Smtp-Source: ABdhPJy7HG5nAm/M1+v6tcuBGzjRBKasXQMAtPvNHhZ0NDa8zYyozbj7OZjyp+1R37ig9gxk7wnJ8g==
-X-Received: by 2002:a62:ac09:0:b029:1a9:dd65:2f46 with SMTP id
- v9-20020a62ac090000b02901a9dd652f46mr1674893pfe.15.1608249912162; 
- Thu, 17 Dec 2020 16:05:12 -0800 (PST)
-Received: from google.com (139.60.82.34.bc.googleusercontent.com.
- [34.82.60.139])
- by smtp.gmail.com with ESMTPSA id 14sm4578052pfi.131.2020.12.17.16.05.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Dec 2020 16:05:11 -0800 (PST)
-Date: Fri, 18 Dec 2020 00:05:07 +0000
-To: "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <X9vyM0jb91Q7aBJW@google.com>
-References: <20201217150435.1505269-1-satyat@google.com>
- <X9uesUH1oetyyoA0@mit.edu> <X9vEwgHlURxvxqiM@google.com>
- <X9vrA/h8et4japdI@mit.edu>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kq4C7-000ij8-MQ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 18 Dec 2020 01:04:38 +0000
+From: bugzilla-daemon@bugzilla.kernel.org
+Authentication-Results: mail.kernel.org;
+ dkim=permerror (bad message/signature format)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 18 Dec 2020 01:04:21 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: blocking
+X-Bugzilla-Who: stefan@konink.de
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression
+Message-ID: <bug-210765-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <X9vrA/h8et4japdI@mit.edu>
-X-Spam-Score: -15.6 (---------------)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FSL_HELO_FAKE          No description available.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.181 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.181 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: konink.de]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1kq3Go-000fEm-4W
-Subject: Re: [f2fs-dev] [PATCH v2 0/3] add support for metadata encryption
- to F2FS
+X-Headers-End: 1kq4C7-000ij8-MQ
+Subject: [f2fs-dev] [Bug 210765] New: F2FS causes access invalid blkaddr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,59 +86,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Satya Tangirala via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Satya Tangirala <satyat@google.com>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Dec 17, 2020 at 06:34:27PM -0500, Theodore Y. Ts'o wrote:
-> On Thu, Dec 17, 2020 at 08:51:14PM +0000, Satya Tangirala wrote:
-> > On Thu, Dec 17, 2020 at 01:08:49PM -0500, Theodore Y. Ts'o wrote:
-> > > On Thu, Dec 17, 2020 at 03:04:32PM +0000, Satya Tangirala wrote:
-> > > > This patch series adds support for metadata encryption to F2FS using
-> > > > blk-crypto.
-> > > 
-> > > Is there a companion patch series needed so that f2fstools can
-> > > check/repair a file system with metadata encryption enabled?
-> > > 
-> > > 	       	    	   	- Ted
-> > Yes! It's at
-> > https://lore.kernel.org/linux-f2fs-devel/20201217151013.1513045-1-satyat@google.com/
-> 
-> Cool, I've been meaning to update f2fs-tools in Debian, and including
-> these patches will allow us to generate {kvm,gce,android}-xfstests
-> images with this support.  I'm hoping to get to it sometime betweeen
-> Christmas and New Year's.
-> 
-> I guess there will need to be some additional work needed to create
-> the f2fs image with a fixed keys for a particular file system in
-> xfstests-bld, and then mounting and checking said image with the
-> appropriatre keys as well.   Is that something you've put together?
-> 
-I did put something together that sets up metadata encryption on the disks
-used by kvm-xfstests. The main code changes were to add a fixed
-metadata encryption key with keyctl, and export MKFS_OPTIONS with the
-metadata encryption options.
+https://bugzilla.kernel.org/show_bug.cgi?id=210765
 
-The mkfs options are the only options that need direct modification because
-the rest of the tools (fsck/dump etc.) automatically do the right thing if
-the FS superblock has the metadata encryption options. But the rest of the
-tools do need the metadata encryption key to be present, and some
-xfstests/other parts of the harness code clear the keyrings directly, so I
-had a few more hacky changes to re-add the keys when they're cleared.
-Some more hacky changes were needed because some xfstests override
-MKFS_OPTIONS. I'll be happy to send what I have to you/put it up somewhere.
-I'll also try to clean up the code a little, but my knowledge of xfstests
-is definitely limited so it might take a little while.
-> Cheers,
-> 
-> 						- Ted
+            Bug ID: 210765
+           Summary: F2FS causes access invalid blkaddr
+           Product: File System
+           Version: 2.5
+    Kernel Version: 5.10.1
+          Hardware: x86-64
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: blocking
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: stefan@konink.de
+        Regression: No
 
+I am reporting this incident here because I noticed some recent changes within
+the F2FS layer. I'll cross post this incident at the Gentoo bugtracker, because
+I am using the gentoo patchset.
+
+I am using F2FS as my root filesystem. Today I upgraded from 5.9.11-gentoo to
+5.10.1-gentoo. After I upgraded glibc programs could not find libstdc++.so.6.
+Long story short at least /etc/env.d/00glibc and /etc/nsswitch.conf became
+corrupt, and when on kernel 5.10.1-gentoo I could consistently cause the
+problems below (twice including a reboot, filesystem checked with a LiveCD).
+When switching back to 5.9.11-gentoo, upgrading glibc did not cause any further
+issues.
+
+I am aware that non-vanilla kernels, including tainted modules, are not
+supported here.
+
+
+[  701.466276] WARNING: CPU: 4 PID: 66867 at fs/f2fs/checkpoint.c:189
+f2fs_is_valid_blkaddr+0x25f/0x270[
+[  701.469213] Modules linked in: cmac bnep joydev zfs(PO) zunicode(PO)
+zzstd(O) zlua(O) zavl(PO) icp(PO) uvcvideo videobuf2_vmalloc ath10k_pci
+videobuf2_memops videobuf2_v4l2 snd_usb_audio btusb snd_hwdep zcommon(PO) btrtl
+snd_usbmidi_lib ath10k_core videodev znvpair(PO) btbcm wmi_bmof ath snd_rawmidi
+videobuf2_common btintel spl(O) bluetooth ecdh_generic amdgpu kvm_amd
+zlib_deflate ecc zlib_inflate mac80211 kvm irqbypass snd_hda_codec_conexant
+snd_hda_codec_generic snd_hda_codec_hdmi aesni_intel crypto_simd mfd_core
+cryptd snd_hda_intel gpu_sched glue_helper snd_intel_dspcfg evdev psmouse
+snd_hda_codec ttm i2c_algo_bit sdhci_pci snd_hda_core drm_kms_helper iosf_mbi
+syscopyarea sysfillrect sysimgblt snd_pcm fb_sys_fops cec cqhci snd_timer ccp
+sdhci cfg80211 i2c_piix4 r8169 sha1_generic libarc4 mmc_core realtek
+thinkpad_acpi mdio_devres libphy nvram wireguard ledtrig_audio ip6_udp_tunnel
+snd udp_tunnel soundcore wmi rfkill ac battery video i2c_scmi button
+sch_fq_codel drm backlight i2c_core
+[  701.469299]  efivarfs
+[  701.486729] CPU: 4 PID: 66867 Comm: python3.7m Tainted: P        W  O     
+5.10.1-gentoo #1
+[  701.489555] Hardware name: LENOVO 20KU000NMH/20KU000NMH, BIOS R0UET77W (1.57
+) 04/07/2020
+[  701.492291] RIP: 0010:f2fs_is_valid_blkaddr+0x25f/0x270
+[  701.494964] Code: 41 f7 41 30 44 01 c0 39 c6 73 09 41 8b 41 5c e9 fe fe ff
+ff 89 f2 48 89 df 48 c7 c6 fa e4 f5 81 e8 80 f9 41 00 f0 80 4b 48 04 <0f> 0b 31
+c0 5b c3 0f 0b 66 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00
+[  701.497674] RSP: 0018:ffffc9000f83fe70 EFLAGS: 00010282
+[  701.500374] RAX: 0000000000000000 RBX: ffff888101a6f000 RCX:
+0000000000000000
+[  701.502979] RDX: 0000000000000000 RSI: ffff88844ef12d40 RDI:
+ffff88844ef12d40
+[  701.505524] RBP: 0000000000000001 R08: ffffffff8226b1e8 R09:
+00000000fffff7ff
+[  701.508011] R10: ffffffff8225f200 R11: 00000000fffff800 R12:
+ffff8881433d9640
+[  701.510494] R13: 0000160000000000 R14: 0000000000001000 R15:
+0000000000000003
+[  701.512878] FS:  00007f581c2ef740(0000) GS:ffff88844ef00000(0000)
+knlGS:0000000000000000
+[  701.515216] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  701.517499] CR2: 00007f581ba40000 CR3: 0000000174626000 CR4:
+00000000003506e0
+[  701.519792] Call Trace:
+[  701.521970]  f2fs_llseek+0x23e/0x490
+[  701.524089]  __x64_sys_lseek+0x82/0xc0
+[  701.526205]  do_syscall_64+0x33/0x40
+[  701.528258]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[  701.530299] RIP: 0033:0x7f581c87d377
+[  701.532256] Code: 00 00 90 48 8b 15 f1 ca 0c 00 f7 d8 64 89 02 48 c7 c0 ff
+ff ff ff eb b2 66 2e 0f 1f 84 00 00 00 00 00 90 b8 08 00 00 00 0f 05 <48> 3d 00
+f0 ff ff 77 01 c3 48 8b 15 c1 ca 0c 00 f7 d8 64 89 02 48
+[  701.534269] RSP: 002b:00007fffc5549628 EFLAGS: 00000202 ORIG_RAX:
+0000000000000008
+[  701.536267] RAX: ffffffffffffffda RBX: 0000000000000000 RCX:
+00007f581c87d377
+[  701.538258] RDX: 0000000000000003 RSI: 0000000000000000 RDI:
+0000000000000003
+[  701.540295] RBP: 00007fffc5549680 R08: 0000000000000000 R09:
+00007fffc55492f0
+[  701.542268] R10: 00007fffc55492f0 R11: 0000000000000202 R12:
+0000000000000003
+[  701.544178] R13: 0000000000000004 R14: 0000000000000002 R15:
+00007fffc5549680
+[  701.546029] ---[ end trace a0930f5707057a19 ]---
+[  701.548199] F2FS-fs (sda4): access invalid blkaddr:539167267
+[  701.550010] ------------[ cut here ]------------
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
