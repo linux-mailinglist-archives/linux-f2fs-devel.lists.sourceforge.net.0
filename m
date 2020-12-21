@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58C522DF76A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Dec 2020 02:19:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F1A2DF79C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Dec 2020 03:04:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kr9qc-0007Xt-Kz; Mon, 21 Dec 2020 01:18:50 +0000
+	id 1krAZ6-0003NU-OY; Mon, 21 Dec 2020 02:04:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1kr9qa-0007Xl-Tt
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Dec 2020 01:18:48 +0000
+ id 1krAZ4-0003NN-N0
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Dec 2020 02:04:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=slNtMFxNBwlZqwJ2Iss0n16RGkKarOfTm+GqH3tnC7U=; b=Zzq6QmoZLhYjDmobGpKGWSBzN+
- LoJlGGPf8K0OEfUEQvbf1yLnDOOHV96PZ1a51vK9Ks3/3xKd2CgdzX7QrZRV8q+6lspwIgDzudaSu
- 51nUCuNULmZQD8hxe3FX7DrNqj6AFaydcq1ZcKbbalxClJL3zCbJbWDqHUgVF4Qmhz2A=;
+ bh=aVdcknCknCWpa8gwuh6uPfemcn7eDMZeg4It+f2HEus=; b=CTUSMUNvZuLJgXJ5TyMoUs+zyH
+ gxQbYg6YazsGzTJzemvwVHdQzJbwS2/3KjuQk9y8gO4SGdpjAoqQigPYYa3O77Qo2xlHXrm3D1HiL
+ 4azysR3PZVJCh58qq2/nUG34uO8W9xZcaRzGjb7bylHC32E0KNXZodzmUJW79fm1wX4M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,19 +30,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=slNtMFxNBwlZqwJ2Iss0n16RGkKarOfTm+GqH3tnC7U=; b=Syi88tgtOhacm/YUlkCAOWETHX
- 03Hfqa80Pal3n8Z/Uh43ODC5q6Wi3r0CJjy2UObrv8LNkPPNlTm5cDv9X9NIwXcsDjvoR5VWyEfI2
- nbnDbJAbtaQod37449as8pwkI9Ja82nGIHe17KrYyaW6+67gVhimculKq6f13tZsXURk=;
+ bh=aVdcknCknCWpa8gwuh6uPfemcn7eDMZeg4It+f2HEus=; b=fifnmXfqTFMEzy0L1pKhyyzGfK
+ Nfcy2JsOWZalaBZjXRjRLnqM8EhHawbsnEF1rgiEZJl5l3saAIEmuXvWcrx/FD/Clzf2qR0YxxRft
+ NcvVyYBDkj9Uwt8fkxNHBuPsrHjrlSzMdfbz7WhKGj9wN5GKkLusJ5eRAVxeAgSKbMKk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kr9qR-003G2E-MQ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Dec 2020 01:18:48 +0000
+ id 1krAYv-004Au9-BV
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Dec 2020 02:04:46 +0000
 From: bugzilla-daemon@bugzilla.kernel.org
 Authentication-Results: mail.kernel.org;
  dkim=permerror (bad message/signature format)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 21 Dec 2020 01:18:21 +0000
+Date: Mon, 21 Dec 2020 02:04:26 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -58,9 +58,9 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-210795-202145-qeOfe8HDG4@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-210795-202145@https.bugzilla.kernel.org/>
-References: <bug-210795-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-210797-202145-fasNOZKF6y@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-210797-202145@https.bugzilla.kernel.org/>
+References: <bug-210797-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -69,10 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kr9qR-003G2E-MQ
-Subject: [f2fs-dev] [Bug 210795] fsck.f2fs - 1.14.0 - error when not
- /dev/vgXX/lvYYY path provided - [ASSERT] (init_sb_info:1017) !strcmp((char
- *)sb->devs[i].path, (char *)c.devices[i].path)
+X-Headers-End: 1krAYv-004Au9-BV
+Subject: [f2fs-dev] [Bug 210797] resize.f2fs over 2 (LVM) disks corrupts
+ whole filesystem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,7 +87,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=210795
+https://bugzilla.kernel.org/show_bug.cgi?id=210797
 
 Chao Yu (chao@kernel.org) changed:
 
@@ -98,22 +97,9 @@ Chao Yu (chao@kernel.org) changed:
                  CC|                            |chao@kernel.org
 
 --- Comment #1 from Chao Yu (chao@kernel.org) ---
-> Info: Device[0] : /dev/vgftp1a/VIRTUALa blkaddr = 0--13fffff
-> Info: [/dev/vgftp1b/VIRTUALb] Disk Model: SanDisk SDSSDXPS
-> Info: Device[1] : /dev/vgftp1b/VIRTUALb blkaddr = 1400000--27fffff
-
-You can see that in f2fs superblock, we record original paths of multipath
-instead of paths symlinks point to, when you use fsck.f2fs /dev/xxx to check
-multiple devices of f2fs image, fsck can only compare paths stored in
-superblock with parameters we passed, otherwise it will trigger ASSERT warning.
-
-So we can only use
-
-fsck.f2fs  --dry-run /dev/vgftp1a/VIRTUALa
-
-to check f2fs image, rather than using
-
-fsck.f2fs  --dry-run /dev/dm-15
+That's not a bug, resize.f2fs just doesn't support it after you change size of
+any of devices; the only possible way is do resize(expand) on a single device
+image.
 
 -- 
 You may reply to this email to add a comment.
