@@ -2,57 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5552B2E20F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Dec 2020 20:34:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DD622E2117
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Dec 2020 21:03:14 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ks9u5-0006qO-RL; Wed, 23 Dec 2020 19:34:33 +0000
+	id 1ksALk-0007v2-Jl; Wed, 23 Dec 2020 20:03:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ks9u1-0006q8-8j
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 19:34:29 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ksALj-0007uv-Lf
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 20:03:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nGcCtgdm9izN2UeaKrnGIYMjo+nxvP5bk+8tem2E0Oc=; b=BMik9Q1os5sKtXgKuP/1DrcGCo
- ujT6ktObdzGPc4WF/AzkscqiiQOBdRFPyQimY6HyMNfl0XfAA8HTVhvkcgPWWrn9zsvekgzhDUoK0
- w/CO/OejM23ktFccKViMTU23orC2l3jhU2tl9+zhpeMbzt0ndE/Ezt0IpgJnOiYGJTO4=;
+ bh=ZHCX7+4uOB3+eEPtEoMeS+65nc2tXCWaBIaKV7jYxkM=; b=YE3U7VMhqcGTRFleHdTrHD6KWN
+ 2F4fqogii49owTpvPln7ODN5+bhVKrcyf/2iMSiHCzWJHkzGcaJBXK+anDn4jX93HxFY87ISfbQUG
+ MdQqd5efauVXGRPtfYhJqwrR1WkNxBVRe0p7mBfqCFW6NgtbtNiunEtfkZt/aUQYS9Jo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=nGcCtgdm9izN2UeaKrnGIYMjo+nxvP5bk+8tem2E0Oc=; b=m
- dDiLb8tPKo6WtyituWrvhOKkJITYHomjeXMHE8xhn+rL7y+4w4ETknPRAKi9KnpKCgnebgJ5jg928
- FqNtKIdTRJcoqPvkydQZR1vRmiqSa89eOpupIIhe0g2fDsG4MXlheqKmJoOxq02Pof7zQq8UTLRbE
- ogNeIZuond5cqCQw=;
+ List-Owner:List-Archive; bh=ZHCX7+4uOB3+eEPtEoMeS+65nc2tXCWaBIaKV7jYxkM=; b=l
+ z1YjqLJQwyhgploLEAgBgur7vkcqWcwd4kHA11wEuMauEuQP+z8Kr51ryLQvdK/3gksdmkSKxeuIh
+ XvzeBp3cm7ifZq3QBQ+AS9JA7ic8uq++8vSzwP8V+V27t0wFuaER8OPYBF2qfHe5Q9s5xv3VHRt/O
+ 0ieW2WpGNP4qGMSo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ks9tw-008uTT-Ia
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 19:34:28 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2E1E42246B;
- Wed, 23 Dec 2020 19:34:14 +0000 (UTC)
+ id 1ksALe-007CCH-I4
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 20:03:07 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 119F820575;
+ Wed, 23 Dec 2020 20:02:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1608752054;
- bh=rYW80sjUPCELXNBY+oEDjRdMvxG6nvtYOT/sqJeKfbc=;
+ s=k20201202; t=1608753772;
+ bh=OzQGdhwS/4twVbEa/nGXLGrUFMVqdR1IXK6igwQCBaY=;
  h=From:To:Cc:Subject:Date:From;
- b=Q8VUsyJ/uPN24rrE9A1Mvo60OaCM/piqSMvudHFqrt91Wg3gIDSamhy6Xz/N2a5UT
- q6ei3h3mMYQl+LszCAbKUj6wMQyN0eabHpBVOY5PdTYBjDDPxoaKJxZ3hli5lY/w9i
- 8DoD6P/ga8I9AgLuFi9sXlYFeUSMpx3Ja3dw5hAw9RxfSUTUKiow67PfOsThOxphjY
- m7+FgYKWttwd2TEeiA9U0PILe9FX8vM5742UWeqCPujbf8srSotTidEOaNK2nngZX5
- a59LVFI1QdSKGJeOG98cXNCJKTyjke2cKcYuQDSU6ZeuFZi2rBKx6UczSkdkymWZz5
- ikkq3Pqz/Jb4g==
+ b=iqJNWX99Qx764DXvmwDVsolI1kGuOUhAJqcvb7dobdR0xZeRJ2LqiPRSICKTeRnw7
+ ulDaoNW/8Qjfpc/RmXhH06bY/kLQImUlj9Hrmd+EeEizahP1aXYWjhW3w+rSE8VYPe
+ JU4ryaZkcNRjaehLC3EvmquVhYqys9v8eqBLGs4YuGNSHvyjT+AGX0yM9EAFKUm+Up
+ llJQuEw3x7Ctcj4mItL68MWklO+C6i9AqLCrflvkQxZctYttOv+tvbhSDIVYS3l2r2
+ ItJymhgjrFzjDfvgSUYf7ahJ4pdoeP/sXzVQEYcTDTAixDBI8c+08vXVHMSLrwSdH1
+ QoGd5L1ZYUU0g==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 23 Dec 2020 11:34:07 -0800
-Message-Id: <20201223193407.1326271-1-jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed, 23 Dec 2020 12:02:42 -0800
+Message-Id: <20201223200242.2078243-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
@@ -66,8 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ks9tw-008uTT-Ia
-Subject: [f2fs-dev] [PATCH] f2fs-tools: fix wrong blk_zone_rep_v2 definition
+X-Headers-End: 1ksALe-007CCH-I4
+Subject: [f2fs-dev] [PATCH] f2fs: handle unallocated section and zone on
+ pinned/atgc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,26 +86,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If HAVE_BLK_ZONE_REP_V2 id defined, we should set v2.
+If we have large section/zone, unallocated segment makes them corrupted.
+
+E.g.,
+
+  - Pinned file:       -1 119304647 119304647
+  - ATGC   data:       -1 119304647 119304647
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- include/f2fs_fs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/segment.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index b9dc0b6f480e..ccf1e2b7a548 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1407,7 +1407,7 @@ blk_zone_cond_str(struct blk_zone *blkz)
- /*
-  * Handle kernel zone capacity support
-  */
--#ifndef HAVE_BLK_ZONE_REP_V2
-+#ifdef HAVE_BLK_ZONE_REP_V2
- #define BLK_ZONE_REP_CAPACITY   (1 << 0)
- struct blk_zone_v2 {
- 	__u64   start;          /* Zone start sector */
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index e81eb0748e2a..229814b4f4a6 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -101,11 +101,11 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
+ #define BLKS_PER_SEC(sbi)					\
+ 	((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
+ #define GET_SEC_FROM_SEG(sbi, segno)				\
+-	((segno) / (sbi)->segs_per_sec)
++	(((segno) == -1) ? -1: (segno) / (sbi)->segs_per_sec)
+ #define GET_SEG_FROM_SEC(sbi, secno)				\
+ 	((secno) * (sbi)->segs_per_sec)
+ #define GET_ZONE_FROM_SEC(sbi, secno)				\
+-	((secno) / (sbi)->secs_per_zone)
++	(((secno) == -1) ? -1: (secno) / (sbi)->secs_per_zone)
+ #define GET_ZONE_FROM_SEG(sbi, segno)				\
+ 	GET_ZONE_FROM_SEC(sbi, GET_SEC_FROM_SEG(sbi, segno))
+ 
 -- 
 2.29.2.729.g45daf8777d-goog
 
