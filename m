@@ -2,74 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DD622E2117
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Dec 2020 21:03:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B0EC2E23CD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Dec 2020 03:53:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ksALk-0007v2-Jl; Wed, 23 Dec 2020 20:03:08 +0000
+	id 1ksGkq-0001xq-2M; Thu, 24 Dec 2020 02:53:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1ksALj-0007uv-Lf
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 20:03:07 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1ksGkm-0001xg-1A
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Dec 2020 02:53:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZHCX7+4uOB3+eEPtEoMeS+65nc2tXCWaBIaKV7jYxkM=; b=YE3U7VMhqcGTRFleHdTrHD6KWN
- 2F4fqogii49owTpvPln7ODN5+bhVKrcyf/2iMSiHCzWJHkzGcaJBXK+anDn4jX93HxFY87ISfbQUG
- MdQqd5efauVXGRPtfYhJqwrR1WkNxBVRe0p7mBfqCFW6NgtbtNiunEtfkZt/aUQYS9Jo=;
+ bh=4Qc9YHyIeA7dXxvbIXIXGSk6w/JwTOy6UIROG6WdhPc=; b=PCaSKH57QsWSvoCnhEKR8ZTot0
+ rghzt7XfQxMn9W0XM71pR08MCfVQK3SLUkOfpSA5moef5JWC8CvoQZkWbRCaZcrpt07pAx4gaxPc0
+ g59mG2R3zUSxZfGx5lg/UGb4H4MX+0+wcNSVJMU3T2taKW1ciTtBcyZ41IfKmyuOOpTU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ZHCX7+4uOB3+eEPtEoMeS+65nc2tXCWaBIaKV7jYxkM=; b=l
- z1YjqLJQwyhgploLEAgBgur7vkcqWcwd4kHA11wEuMauEuQP+z8Kr51ryLQvdK/3gksdmkSKxeuIh
- XvzeBp3cm7ifZq3QBQ+AS9JA7ic8uq++8vSzwP8V+V27t0wFuaER8OPYBF2qfHe5Q9s5xv3VHRt/O
- 0ieW2WpGNP4qGMSo=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=4Qc9YHyIeA7dXxvbIXIXGSk6w/JwTOy6UIROG6WdhPc=; b=Na1ePjQKv1mbvnpAw3+4LLz1sU
+ Vii+PjydKyhht3QGI96ZpHVd72VNNOEPFBOTOTkaT8214jQayNCiX6muL+TsIykTHQ/RK4ozysJyD
+ nRtGlEOOnXqKJTwV5sP18HDCnTPYAyYxNYuZQEOTMC/6RD3aeVpnXtWrzxNFFJxH94/Y=;
+Received: from szxga07-in.huawei.com ([45.249.212.35])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ksALe-007CCH-I4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Dec 2020 20:03:07 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 119F820575;
- Wed, 23 Dec 2020 20:02:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1608753772;
- bh=OzQGdhwS/4twVbEa/nGXLGrUFMVqdR1IXK6igwQCBaY=;
- h=From:To:Cc:Subject:Date:From;
- b=iqJNWX99Qx764DXvmwDVsolI1kGuOUhAJqcvb7dobdR0xZeRJ2LqiPRSICKTeRnw7
- ulDaoNW/8Qjfpc/RmXhH06bY/kLQImUlj9Hrmd+EeEizahP1aXYWjhW3w+rSE8VYPe
- JU4ryaZkcNRjaehLC3EvmquVhYqys9v8eqBLGs4YuGNSHvyjT+AGX0yM9EAFKUm+Up
- llJQuEw3x7Ctcj4mItL68MWklO+C6i9AqLCrflvkQxZctYttOv+tvbhSDIVYS3l2r2
- ItJymhgjrFzjDfvgSUYf7ahJ4pdoeP/sXzVQEYcTDTAixDBI8c+08vXVHMSLrwSdH1
- QoGd5L1ZYUU0g==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed, 23 Dec 2020 12:02:42 -0800
-Message-Id: <20201223200242.2078243-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
+ id 1ksGkc-009rll-Mo
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Dec 2020 02:53:23 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4D1ZP20f55z7JrS;
+ Thu, 24 Dec 2020 10:52:22 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.498.0; Thu, 24 Dec
+ 2020 10:52:57 +0800
+To: Zheng Yongjun <zhengyongjun3@huawei.com>, <jaegeuk@kernel.org>,
+ <chao@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>,
+ <linux-kernel@vger.kernel.org>
+References: <20201222133415.19915-1-zhengyongjun3@huawei.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <36c3cca5-8bd0-19e3-9298-9a67403c5ca4@huawei.com>
+Date: Thu, 24 Dec 2020 10:52:57 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20201222133415.19915-1-zhengyongjun3@huawei.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ksALe-007CCH-I4
-Subject: [f2fs-dev] [PATCH] f2fs: handle unallocated section and zone on
- pinned/atgc
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -2.5 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1ksGkc-009rll-Mo
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: Replace expression with
+ offsetof()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,44 +80,18 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If we have large section/zone, unallocated segment makes them corrupted.
+On 2020/12/22 21:34, Zheng Yongjun wrote:
+> Use the existing offsetof() macro instead of duplicating code.
+> 
+> Signed-off-by: Zheng Yongjun <zhengyongjun3@huawei.com>
 
-E.g.,
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-  - Pinned file:       -1 119304647 119304647
-  - ATGC   data:       -1 119304647 119304647
-
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/segment.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index e81eb0748e2a..229814b4f4a6 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -101,11 +101,11 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
- #define BLKS_PER_SEC(sbi)					\
- 	((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
- #define GET_SEC_FROM_SEG(sbi, segno)				\
--	((segno) / (sbi)->segs_per_sec)
-+	(((segno) == -1) ? -1: (segno) / (sbi)->segs_per_sec)
- #define GET_SEG_FROM_SEC(sbi, secno)				\
- 	((secno) * (sbi)->segs_per_sec)
- #define GET_ZONE_FROM_SEC(sbi, secno)				\
--	((secno) / (sbi)->secs_per_zone)
-+	(((secno) == -1) ? -1: (secno) / (sbi)->secs_per_zone)
- #define GET_ZONE_FROM_SEG(sbi, segno)				\
- 	GET_ZONE_FROM_SEC(sbi, GET_SEC_FROM_SEG(sbi, segno))
- 
--- 
-2.29.2.729.g45daf8777d-goog
-
+Thanks,
 
 
 _______________________________________________
