@@ -2,51 +2,51 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECA562E2A7E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Dec 2020 09:53:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D9CF2E2A7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Dec 2020 09:53:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ksiqe-00011v-1X; Fri, 25 Dec 2020 08:53:20 +0000
+	id 1ksiqs-0003lY-V2; Fri, 25 Dec 2020 08:53:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1ksiqc-00011L-Es
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Dec 2020 08:53:18 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1ksiqr-0003lQ-LZ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Dec 2020 08:53:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JGlB7sbbJPDVaTMM7PxuEJiHXHwUWXk3IXiV5HS6nbc=; b=CnZ5ixu/7lwmiO74OPnF7+2tZA
- dR0+vIkq8Dr4BnOKER4WR0WToujHLEPNsRXLxif8BnCu3dr5qJkN4gnkxRPyg/gA2WPzrsTkhqdqN
- TON2Rt0MTQdwDlk1lAyWjjbcmrkfUd6xGP+mlJyF571DMqi2QxcXiX7Ip3Vn1MOjmOmM=;
+ bh=z1wfGqZN4/m99P16jjXHJ9H8Kr2y5CXSGn89lR43sPU=; b=Jf1ykU5C7G1M3OhepWdrLp2iLB
+ OJJptpcFiBO/mUdWEM/+gwrH6BLwKryAmg4pCVBpmnebc+2YNmnNTW1uUdEEBX63l9U/Gc4X+n69x
+ pl9RCbr3wI/siGqy+cMoDT99E3EnCAVb65GxjvbvBz9eQOKLnoGKiFON0scHeRbLID/Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
  Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JGlB7sbbJPDVaTMM7PxuEJiHXHwUWXk3IXiV5HS6nbc=; b=k
- qkTSEjf8WIz/eeOptjR3/WMgsPlHLfalp2EAN9pfV71zSqKtinNwwNopMptIBx9fBwJ1GKpVW7+wj
- e9npJKkwRqHNulf3YGZl9FBfIF0v2GfeqHTcksC4ZrUlOc/ye2dAxXfNQnwQgMzAavMzfNrgqW1NU
- IYHccfCC2SFO0Ey8=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=z1wfGqZN4/m99P16jjXHJ9H8Kr2y5CXSGn89lR43sPU=; b=Q
+ 6Cky7/FBBt3LjKgM9wDPVxkgRXoz3RcrpEz2KsC9A93BLj2kGF2I8RZUYWz69yY7RdknpJVk6KU9Z
+ zVPzgoY4rTQqZOFMFduqBPno7flRTXHwVCMtg03aXfKOjIjs3iWEBRKpucLKKptS5EgXaPV5X9nOZ
+ jWlfZTCyVY/uRguc=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ksiqV-00Bdo4-Ai
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Dec 2020 08:53:18 +0000
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4D2LKP6wDJzkwCq;
- Fri, 25 Dec 2020 16:51:53 +0800 (CST)
+ id 1ksiqn-00Dzwe-3E
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Dec 2020 08:53:33 +0000
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4D2LLC2slSzhxJW;
+ Fri, 25 Dec 2020 16:52:35 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.498.0; Fri, 25 Dec 2020 16:52:40 +0800
+ DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
+ 14.3.498.0; Fri, 25 Dec 2020 16:53:12 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Fri, 25 Dec 2020 16:52:27 +0800
-Message-ID: <20201225085227.114230-1-yuchao0@huawei.com>
+Date: Fri, 25 Dec 2020 16:53:04 +0800
+Message-ID: <20201225085304.114448-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
@@ -58,14 +58,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ksiqV-00Bdo4-Ai
-Subject: [f2fs-dev] [PATCH] f2fs: enhance to update i_mode and acl
- atomically in f2fs_setattr()
+X-Headers-End: 1ksiqn-00Dzwe-3E
+Subject: [f2fs-dev] [PATCH] f2fs: fix to keep isolation of atomic write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,123 +80,66 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Previously, in f2fs_setattr(), we don't update S_ISUID|S_ISGID|S_ISVTX
-bits with S_IRWXUGO bits and acl entries atomically, so in error path,
-chmod() may partially success, this patch enhances to make chmod() flow
-being atomical.
+ThreadA					ThreadB
+- f2fs_ioc_start_atomic_write
+- write
+- f2fs_ioc_commit_atomic_write
+ - f2fs_commit_inmem_pages
+ - f2fs_drop_inmem_pages
+ - f2fs_drop_inmem_pages
+  - __revoke_inmem_pages
+					- f2fs_vm_page_mkwrite
+					 - set_page_dirty
+					  - tag ATOMIC_WRITTEN_PAGE and add page
+					    to inmem_pages list
+  - clear_inode_flag(FI_ATOMIC_FILE)
+					- f2fs_vm_page_mkwrite
+					  - set_page_dirty
+					   - f2fs_update_dirty_page
+					    - f2fs_trace_pid
+					     - tag inmem page private to pid
+					- truncate
+					 - f2fs_invalidate_page
+					 - set page->mapping to NULL
+					  then it will cause panic once we
+					  access page->mapping
+
+The root cause is we missed to keep isolation of atomic write in the case
+of commit_atomic_write vs mkwrite, let commit_atomic_write helds i_mmap_sem
+lock to avoid this issue.
 
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/acl.c   | 23 ++++++++++++++++++++++-
- fs/f2fs/file.c  |  7 ++++---
- fs/f2fs/xattr.c | 15 +++++++++------
- 3 files changed, 35 insertions(+), 10 deletions(-)
+ fs/f2fs/file.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/acl.c b/fs/f2fs/acl.c
-index 1e5e9b1136ee..732ec10e7890 100644
---- a/fs/f2fs/acl.c
-+++ b/fs/f2fs/acl.c
-@@ -200,6 +200,27 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
- 	return __f2fs_get_acl(inode, type, NULL);
- }
- 
-+static int f2fs_acl_update_mode(struct inode *inode, umode_t *mode_p,
-+			  struct posix_acl **acl)
-+{
-+	umode_t mode = inode->i_mode;
-+	int error;
-+
-+	if (is_inode_flag_set(inode, FI_ACL_MODE))
-+		mode = F2FS_I(inode)->i_acl_mode;
-+
-+	error = posix_acl_equiv_mode(*acl, &mode);
-+	if (error < 0)
-+		return error;
-+	if (error == 0)
-+		*acl = NULL;
-+	if (!in_group_p(inode->i_gid) &&
-+	    !capable_wrt_inode_uidgid(inode, CAP_FSETID))
-+		mode &= ~S_ISGID;
-+	*mode_p = mode;
-+	return 0;
-+}
-+
- static int __f2fs_set_acl(struct inode *inode, int type,
- 			struct posix_acl *acl, struct page *ipage)
- {
-@@ -213,7 +234,7 @@ static int __f2fs_set_acl(struct inode *inode, int type,
- 	case ACL_TYPE_ACCESS:
- 		name_index = F2FS_XATTR_INDEX_POSIX_ACL_ACCESS;
- 		if (acl && !ipage) {
--			error = posix_acl_update_mode(inode, &mode, &acl);
-+			error = f2fs_acl_update_mode(inode, &mode, &acl);
- 			if (error)
- 				return error;
- 			set_acl_inode(inode, mode);
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 596778f662fd..22a0101538c0 100644
+index 22a0101538c0..1ff5fc10e1fa 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -851,7 +851,6 @@ static void __setattr_copy(struct inode *inode, const struct iattr *attr)
- 		if (!in_group_p(inode->i_gid) &&
- 			!capable_wrt_inode_uidgid(inode, CAP_FSETID))
- 			mode &= ~S_ISGID;
--		inode->i_mode = (inode->i_mode & S_IRWXUGO) | (mode & ~S_IRWXUGO);
- 		set_acl_inode(inode, mode);
+@@ -2094,10 +2094,12 @@ static int f2fs_ioc_commit_atomic_write(struct file *filp)
+ 		goto err_out;
  	}
- }
-@@ -951,8 +950,10 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
  
- 	if (attr->ia_valid & ATTR_MODE) {
- 		err = posix_acl_chmod(inode, f2fs_get_inode_mode(inode));
--		if (err || is_inode_flag_set(inode, FI_ACL_MODE)) {
--			inode->i_mode = F2FS_I(inode)->i_acl_mode;
++	down_write(&F2FS_I(inode)->i_mmap_sem);
 +
-+		if (is_inode_flag_set(inode, FI_ACL_MODE)) {
-+			if (!err)
-+				inode->i_mode = F2FS_I(inode)->i_acl_mode;
- 			clear_inode_flag(inode, FI_ACL_MODE);
- 		}
+ 	if (f2fs_is_atomic_file(inode)) {
+ 		ret = f2fs_commit_inmem_pages(inode);
+ 		if (ret)
+-			goto err_out;
++			goto up_write;
+ 
+ 		ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 0, true);
+ 		if (!ret)
+@@ -2105,6 +2107,8 @@ static int f2fs_ioc_commit_atomic_write(struct file *filp)
+ 	} else {
+ 		ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 1, false);
  	}
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 65afcc3cc68a..2086bef6c154 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -673,7 +673,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
- 		}
- 
- 		if (value && f2fs_xattr_value_same(here, value, size))
--			goto exit;
-+			goto same;
- 	} else if ((flags & XATTR_REPLACE)) {
- 		error = -ENODATA;
- 		goto exit;
-@@ -738,17 +738,20 @@ static int __f2fs_setxattr(struct inode *inode, int index,
- 	if (error)
- 		goto exit;
- 
--	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
--		inode->i_mode = F2FS_I(inode)->i_acl_mode;
--		inode->i_ctime = current_time(inode);
--		clear_inode_flag(inode, FI_ACL_MODE);
--	}
- 	if (index == F2FS_XATTR_INDEX_ENCRYPTION &&
- 			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
- 		f2fs_set_encrypted_inode(inode);
- 	f2fs_mark_inode_dirty_sync(inode, true);
- 	if (!error && S_ISDIR(inode->i_mode))
- 		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
-+
-+same:
-+	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
-+		inode->i_mode = F2FS_I(inode)->i_acl_mode;
-+		inode->i_ctime = current_time(inode);
-+		clear_inode_flag(inode, FI_ACL_MODE);
-+	}
-+
- exit:
- 	kfree(base_addr);
- 	return error;
++up_write:
++	up_write(&F2FS_I(inode)->i_mmap_sem);
+ err_out:
+ 	if (is_inode_flag_set(inode, FI_ATOMIC_REVOKE_REQUEST)) {
+ 		clear_inode_flag(inode, FI_ATOMIC_REVOKE_REQUEST);
 -- 
 2.29.2
 
