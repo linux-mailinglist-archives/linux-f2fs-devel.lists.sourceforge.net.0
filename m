@@ -2,60 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA3272E6A23
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Dec 2020 19:55:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 412692E6A4F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Dec 2020 20:13:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ktxgJ-0003d2-24; Mon, 28 Dec 2020 18:55:47 +0000
+	id 1ktxxW-0000wR-UT; Mon, 28 Dec 2020 19:13:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1ktxgH-0003cc-4E
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Dec 2020 18:55:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1ktxxW-0000wF-Cv
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Dec 2020 19:13:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GvH6XJ0eCafbyID1zTPsiYuDf8AWOwTRVhojDoXYHh8=; b=M5ZdXCKsA4As4odIrUNAF5lfh2
- DdzrdIs0Ni7hQ82LmmrRrUAPjDmTNH7XevBH8fw8imlMfnOXRTorYgZYifg9pI5XTASf3pVym4do0
- YOcqW2vRYLO8i6LgilfEh9Z0bVETvLj6ixzhnxy80QmBQ6lJqSH6+vSVtP/Njg97N6MI=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=GvH6XJ0eCafbyID1zTPsiYuDf8AWOwTRVhojDoXYHh8=; b=Sxw7Lwry3OCsI6NRvBPPCdxX6J
- f5swN49xa02NRkyCGcfq0I3mz9iD0XPATrehzLDmm73FsAbp+gDkkKIpYbBYJb4ZY7n+XKg0X1JwO
- kE5mC8WBsnoBOrysfNT472WgEKUJLC8JMWq//JR6M9Gc+7L5l1XqCMLYpxMTtbFCtovM=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=OkFfEWuU83JPFhg7R4Gkk7eoH8H9Q3HOR9fY2Rz5l5k=; b=iBoB4FCXbBgtmd5Qanu8UMRDMg
+ ewtFz+KWqGN90kxTfVTxYkwEZkQPClVKecJRIRTNeQYfwhQWdbwU+Ulx55ZRtfK1EFYAohcnbO1Xb
+ +/YcQ99XIwpIE0/NAKYVh9vVjjIgxS1LJfj5KJQT3JuVDa0OahF50AHuJfds8RzXrszI=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=OkFfEWuU83JPFhg7R4Gkk7eoH8H9Q3HOR9fY2Rz5l5k=; b=K
+ sn6QjWRKT2FUzK2mJ3vGocms4xLWFCrIzA22qAEPEnAd79J0smmbRzN6ebvfrwE/HKn9J3B3Z7lOr
+ 17cnWkryrqt94BxAq5GF5zrp0zftuQt6lntoakH84L/6uJ1stvJQMR4ZxkE3s0DVJp31dV6mEHEv2
+ 4wnFPdTkJqDGOq+c=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1ktxgB-003G45-B3
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Dec 2020 18:55:43 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7FF7822B2A;
- Mon, 28 Dec 2020 18:55:29 +0000 (UTC)
+ id 1ktxxQ-003H5r-T0
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Dec 2020 19:13:34 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 328CF229EF;
+ Mon, 28 Dec 2020 19:13:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1609181729;
- bh=AM4SZDPH0pYqGNnbfRm/8TPtkieKxQQnEo9JrY1d/L0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ay/InPrZKA8998PTQNbH6QB1A6ChsCgP3BrVvi2UdjpLhi1uwG1Yk3Dr1W57szGyR
- jk6FYEWb/RG/VdnXR5ubDKN3dbKhZTtSoD70mUuTzUGqv3d1SKQUg2JtfVryzXXmSD
- mBa7FrvEu8ZQHfDlgzoW8p5Kf3eJv7ACV4cuudo95nLhJXkGaUFEkFkS4QrYOZIfhK
- 8yl3w2Ho/lHg9DhBzCmed+LaYHdRhGvKyLzvsSJzR0Qq64NDtwLqZCP1z+N8IqXx2J
- 2JWoxKk9gztQRvpRZ6nPrMcW5o6QYQMIoT+bGOjHLZineJdFZuBkXTeEzccv4uM/zO
- tiOiQsbYk1lew==
+ s=k20201202; t=1609182796;
+ bh=WfRrNEImpr0j+Oo7HcTLI/gAY4EckaLzvRW0Nnzz9QA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QOEccFRDvvHr/4eKSIAJZC9fjOwN3vBNabeHqiWacoH3tyHdSDbB8u4lpQ+8ivZxl
+ Vj85wtNi/mrufL/iKzCrKR1/nEgU9SrebR++4bzxFl2/Mshw+ScfXbUGolntZpLcZE
+ zR/pJJuYEA50Ka0SdVTXsXN6PD2pSUJF8c7MYQoQhutE/MoeyIxxhKk6gUyxpWeFUi
+ +0bbHBksTbZrbahMx4nfKbVwhjK/ZpuA+wCDeiY7tX1IQ55bIU4t4Mgo21/1nR8+sT
+ 8+BUv+NXhmRp7IYFdAl2VBy8p/RCY7xctzJSOrcD5z4ydBVzm8Z0p4lpURPSIy4ONa
+ Ecy4xLRIL/voA==
 From: Eric Biggers <ebiggers@kernel.org>
 To: stable@vger.kernel.org
-Date: Mon, 28 Dec 2020 10:54:33 -0800
-Message-Id: <20201228185433.61129-5-ebiggers@kernel.org>
+Date: Mon, 28 Dec 2020 11:12:07 -0800
+Message-Id: <20201228191211.138300-1-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201228185433.61129-1-ebiggers@kernel.org>
-References: <20201228185433.61129-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: 2.2 (++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -69,8 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ktxgB-003G45-B3
-Subject: [f2fs-dev] [PATCH 5.4 4/4] ubifs: prevent creating duplicate
+X-Headers-End: 1ktxxQ-003H5r-T0
+Subject: [f2fs-dev] [PATCH 4.19 0/4] fscrypt: prevent creating duplicate
  encrypted filenames
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -89,88 +87,23 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+Backport four commits from v5.11-rc1.  I resolved conflicts in the first
+two.
 
-commit 76786a0f083473de31678bdb259a3d4167cf756d upstream.
+Eric Biggers (4):
+  fscrypt: add fscrypt_is_nokey_name()
+  ext4: prevent creating duplicate encrypted filenames
+  f2fs: prevent creating duplicate encrypted filenames
+  ubifs: prevent creating duplicate encrypted filenames
 
-As described in "fscrypt: add fscrypt_is_nokey_name()", it's possible to
-create a duplicate filename in an encrypted directory by creating a file
-concurrently with adding the directory's encryption key.
+ fs/crypto/hooks.c               | 10 +++++-----
+ fs/ext4/namei.c                 |  3 +++
+ fs/f2fs/f2fs.h                  |  2 ++
+ fs/ubifs/dir.c                  | 17 +++++++++++++----
+ include/linux/fscrypt_notsupp.h |  5 +++++
+ include/linux/fscrypt_supp.h    | 29 +++++++++++++++++++++++++++++
+ 6 files changed, 57 insertions(+), 9 deletions(-)
 
-Fix this bug on ubifs by rejecting no-key dentries in ubifs_create(),
-ubifs_mkdir(), ubifs_mknod(), and ubifs_symlink().
-
-Note that ubifs doesn't actually report the duplicate filenames from
-readdir, but rather it seems to replace the original dentry with a new
-one (which is still wrong, just a different effect from ext4).
-
-On ubifs, this fixes xfstest generic/595 as well as the new xfstest I
-wrote specifically for this bug.
-
-Fixes: f4f61d2cc6d8 ("ubifs: Implement encrypted filenames")
-Cc: stable@vger.kernel.org
-Link: https://lore.kernel.org/r/20201118075609.120337-5-ebiggers@kernel.org
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/ubifs/dir.c | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
-
-diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
-index 6c0e19f7a21f4..a5e5e9b9d4e31 100644
---- a/fs/ubifs/dir.c
-+++ b/fs/ubifs/dir.c
-@@ -278,6 +278,15 @@ static struct dentry *ubifs_lookup(struct inode *dir, struct dentry *dentry,
- 	return d_splice_alias(inode, dentry);
- }
- 
-+static int ubifs_prepare_create(struct inode *dir, struct dentry *dentry,
-+				struct fscrypt_name *nm)
-+{
-+	if (fscrypt_is_nokey_name(dentry))
-+		return -ENOKEY;
-+
-+	return fscrypt_setup_filename(dir, &dentry->d_name, 0, nm);
-+}
-+
- static int ubifs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
- 			bool excl)
- {
-@@ -301,7 +310,7 @@ static int ubifs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
- 	if (err)
- 		return err;
- 
--	err = fscrypt_setup_filename(dir, &dentry->d_name, 0, &nm);
-+	err = ubifs_prepare_create(dir, dentry, &nm);
- 	if (err)
- 		goto out_budg;
- 
-@@ -961,7 +970,7 @@ static int ubifs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
- 	if (err)
- 		return err;
- 
--	err = fscrypt_setup_filename(dir, &dentry->d_name, 0, &nm);
-+	err = ubifs_prepare_create(dir, dentry, &nm);
- 	if (err)
- 		goto out_budg;
- 
-@@ -1046,7 +1055,7 @@ static int ubifs_mknod(struct inode *dir, struct dentry *dentry,
- 		return err;
- 	}
- 
--	err = fscrypt_setup_filename(dir, &dentry->d_name, 0, &nm);
-+	err = ubifs_prepare_create(dir, dentry, &nm);
- 	if (err) {
- 		kfree(dev);
- 		goto out_budg;
-@@ -1130,7 +1139,7 @@ static int ubifs_symlink(struct inode *dir, struct dentry *dentry,
- 	if (err)
- 		return err;
- 
--	err = fscrypt_setup_filename(dir, &dentry->d_name, 0, &nm);
-+	err = ubifs_prepare_create(dir, dentry, &nm);
- 	if (err)
- 		goto out_budg;
- 
 -- 
 2.29.2
 
