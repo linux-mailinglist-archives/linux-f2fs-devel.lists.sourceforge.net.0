@@ -2,108 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10D2D2E7ACC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Dec 2020 16:56:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 951A42E7A76
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Dec 2020 16:41:03 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kudqC-0005e3-9w; Wed, 30 Dec 2020 15:56:48 +0000
+	id 1kudaw-0004wh-9v; Wed, 30 Dec 2020 15:41:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <greg@kroah.com>) id 1kudqA-0005dt-PG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Dec 2020 15:56:46 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1kudau-0004wQ-JV
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Dec 2020 15:41:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=InRV2t3SNNnx0dg/YV55vnEea5563XkQ8Wd0NGN+R3E=; b=JrTy470m1pvnG4hMsSCk1WWozC
- lIEzPTE9+8Yt9YI9lJCU1JKWMK1eItuBilbZuAubIQPYpG+M3A14oXmArD4JGLFgpRxKunCqWalag
- Zp9NMOVMCgRJbPx0MFuOTcII+iThuz8PkYAzrQk/DmmnfXoFtDeQPL7yQ7cfIDbdbzao=;
+ bh=4QVTBCbyEOINEOakrEWkygBt0VvqSjw43oeJYBjPArY=; b=IN1IA0mM/NynJ7+0hLnfJbwshs
+ w6mb2okC7wZvh+s8urAerWSEn7ezaMkNM6FDJxd4tu9akIaK8RocNecVmGAgSuAodXZ6qBh6tDH5Y
+ HwbsQCNNxhVRvUOUGeHKMybK6yrotigIOKzE2tv95Pp9ef6j/NafBSjj1C2V/mWFH7ZI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+ In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=InRV2t3SNNnx0dg/YV55vnEea5563XkQ8Wd0NGN+R3E=; b=QuR8MLM07o8zMJBB9A9wezwrlp
- X+MlhjfKaHcNpEzKpyoXj773AtRnc3EQBtylyp1eCDixybeOlpPKxYSBN1Y9yIVIZPpPlI19IVNYy
- mx1nKfrN5FH12z6pTluwieNdteSUfIJZztdS5WDt1kRQ3UzBYmjG8oCT76Ahub11xGao=;
-Received: from out4-smtp.messagingengine.com ([66.111.4.28])
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=4QVTBCbyEOINEOakrEWkygBt0VvqSjw43oeJYBjPArY=; b=MMaKPcoWVrrKHphKnzLDrWKR/e
+ zTeqRdaPcVsPmBuE85sSJpz26FE+YMr5NwpDblEo+iZQl0cD4VRDXf9qT0YYyJAn3/Z3X9GAzahfn
+ vH5KM6djln2OFsXpdM6+hadZGACP74LTqsW7NTjudKANjCBfnGiSxDQR/kJ6lW1qvSUk=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kudpy-00DFSY-J8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Dec 2020 15:56:46 +0000
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 2A3F85C0126;
- Wed, 30 Dec 2020 10:38:22 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Wed, 30 Dec 2020 10:38:22 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm2; bh=InRV2t3SNNnx0dg/YV55vnEea55
- 63XkQ8Wd0NGN+R3E=; b=GPBardpKLEh2z1uzWPRP+tgWvEqjk7ksnQyhmDVBoxj
- nW/wCS7TnLggbjCGqLQ/tfAG+TIxbCz17SG2wOO6Xty+4EELhGZc85EGSc9SX0cP
- bKlgrjakgKyZL9B99hxldJDV31AWHFKdEJV9Bbx8atatPCm2TtORKONcGfRMQ/ce
- RQvngOP2g9OfUFOFi9kttiExMDUuIu4X4CInI7KD4aVIELWr6y317ykEahC1vdsL
- +EwHXs3ypdA0OYjS9DR3ZGJZDa3GoHdWzyOHl0GX8Q/Tji3a6ueSfMCH5nXFW4Lf
- d9nA6w52aXITFTVEJdjmq/uCQ1g7ZxoC8Xom9OMK7cw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=InRV2t
- 3SNNnx0dg/YV55vnEea5563XkQ8Wd0NGN+R3E=; b=Jh7znz4k8pK638beSiZcKY
- hnbeW2eviCnEHu1uOqFEtJNLDZUSVQxyqbxMQXkCstNajXZpv+iLUE/wcS6dZ1we
- 71SmL+0cbO5eUncCVlVC+x5R3QWFGL8mj8edd3pHGjCdIAijP5NpdHzbtT0jcsRs
- DymUiek1ZpJsuJ65TCqdk7OnJgYwuExnotDihq/9Gt9Di2cm9GJun8FSsuySo/WE
- QfIFWP4GTKmeBlmLVJOxyNeTs6fNMaSydcJ5aSGf7QhluWfUF+lV+vchPgkC6BbR
- M3XBM0wNlFH03yM4A7ImZE3UJ0gntKJdSpLvM7uFc8NKEptVxRSFiNSylsP31YcA
- ==
-X-ME-Sender: <xms:7Z7sX7Nz4-L15lmALMZKoxMLm9S8QeKuMe_0LX7Bo74enEekjZ7cOg>
- <xme:7Z7sX16WREB5KyJl-UVokscOc0lz8BJm_2to6atX_Boj-IQdLcoMPQU5Nc-HywfRC
- wP_hLSfGDw7Hg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedujedrvddvfedgjeekucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvffukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefirhgvghcu
- mffjuceoghhrvghgsehkrhhorghhrdgtohhmqeenucggtffrrghtthgvrhhnpeevueehje
- fgfffgiedvudekvdektdelleelgefhleejieeugeegveeuuddukedvteenucfkphepkeef
- rdekiedrjeegrdeigeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
- hlfhhrohhmpehgrhgvgheskhhrohgrhhdrtghomh
-X-ME-Proxy: <xmx:7Z7sX3JvGcDgzQudF61rzqfGkl0wyBPXWs09FV3tMJIAJrAZbM2qiw>
- <xmx:7Z7sX3fMt_9mKZI_ZCkgHhA_kxVFdzg4F80PLyxfidBCKxZqnA-WTQ>
- <xmx:7Z7sXycCqMHvvv7nrqXaeuG3Qxe1Rhy2NrPeVuG2wRN21TTGmT8yJw>
- <xmx:7p7sXzLc7QbMMgrw9FJSA2QwD7Nv5dz0f69hS-drTbzNMbNUbi6wQg>
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
- by mail.messagingengine.com (Postfix) with ESMTPA id 1E5BF1080057;
- Wed, 30 Dec 2020 10:38:21 -0500 (EST)
-Date: Wed, 30 Dec 2020 16:39:24 +0100
-From: Greg KH <greg@kroah.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <X+yfLAyAw8kOcOGz@kroah.com>
-References: <20201228185433.61129-1-ebiggers@kernel.org>
+ id 1kudar-00DCO1-GL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Dec 2020 15:41:00 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A0AFF21D1B;
+ Wed, 30 Dec 2020 15:40:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1609342845;
+ bh=usovhedG93a4iaZkHPqyve6KR+G1E1NPY+mUVXbo14s=;
+ h=Subject:To:Cc:From:Date:In-Reply-To:From;
+ b=SxJxUvodbshQj/fsT2miesvKYZVK6BSmQB/7NVFXAp/lMX393PZrWKx0TeT89JjkN
+ QeXn3ELFSV2Hv3bYNDhewRP2ouDt/eW+XF6fjJnBnWvLMsB3CBR4CR9c31iongsTBl
+ 1GgZU9n7ztRhm3bEoTQnPbg2N8qRh0MV+a5nUwu8=
+To: ebiggers@google.com, ebiggers@kernel.org, gregkh@linuxfoundation.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org
+From: <gregkh@linuxfoundation.org>
+Date: Wed, 30 Dec 2020 16:42:03 +0100
+In-Reply-To: <20201228191211.138300-4-ebiggers@kernel.org>
+Message-ID: <16093429237462@kroah.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201228185433.61129-1-ebiggers@kernel.org>
+X-stable: commit
+X-Patchwork-Hint: ignore 
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [66.111.4.28 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kudpy-00DFSY-J8
-Subject: Re: [f2fs-dev] [PATCH 5.4 0/4] fscrypt: prevent creating duplicate
- encrypted filenames
+X-Headers-End: 1kudar-00DCO1-GL
+Subject: [f2fs-dev] Patch "f2fs: prevent creating duplicate encrypted
+ filenames" has been added to the 4.19-stable tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,28 +79,76 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-mtd@lists.infradead.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: stable-commits@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Dec 28, 2020 at 10:54:29AM -0800, Eric Biggers wrote:
-> Backport four commits from v5.11-rc1.  I resolved a conflict in the
-> first one.  The rest are clean cherry-picks which didn't get picked up
-> yet because they depend on the first one.
-> 
-> Eric Biggers (4):
->   fscrypt: add fscrypt_is_nokey_name()
->   ext4: prevent creating duplicate encrypted filenames
->   f2fs: prevent creating duplicate encrypted filenames
->   ubifs: prevent creating duplicate encrypted filenames
-> 
 
-All now applied, thanks.
+This is a note to let you know that I've just added the patch titled
 
-greg k-h
+    f2fs: prevent creating duplicate encrypted filenames
+
+to the 4.19-stable tree which can be found at:
+    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+
+The filename of the patch is:
+     f2fs-prevent-creating-duplicate-encrypted-filenames.patch
+and it can be found in the queue-4.19 subdirectory.
+
+If you, or anyone else, feels it should not be added to the stable tree,
+please let <stable@vger.kernel.org> know about it.
+
+
+From foo@baz Wed Dec 30 04:40:58 PM CET 2020
+From: Eric Biggers <ebiggers@kernel.org>
+Date: Mon, 28 Dec 2020 11:12:10 -0800
+Subject: f2fs: prevent creating duplicate encrypted filenames
+To: stable@vger.kernel.org
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org
+Message-ID: <20201228191211.138300-4-ebiggers@kernel.org>
+
+From: Eric Biggers <ebiggers@google.com>
+
+commit bfc2b7e8518999003a61f91c1deb5e88ed77b07d upstream.
+
+As described in "fscrypt: add fscrypt_is_nokey_name()", it's possible to
+create a duplicate filename in an encrypted directory by creating a file
+concurrently with adding the directory's encryption key.
+
+Fix this bug on f2fs by rejecting no-key dentries in f2fs_add_link().
+
+Note that the weird check for the current task in f2fs_do_add_link()
+seems to make this bug difficult to reproduce on f2fs.
+
+Fixes: 9ea97163c6da ("f2fs crypto: add filename encryption for f2fs_add_link")
+Cc: stable@vger.kernel.org
+Link: https://lore.kernel.org/r/20201118075609.120337-4-ebiggers@kernel.org
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ fs/f2fs/f2fs.h |    2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2857,6 +2857,8 @@ bool f2fs_empty_dir(struct inode *dir);
+ 
+ static inline int f2fs_add_link(struct dentry *dentry, struct inode *inode)
+ {
++	if (fscrypt_is_nokey_name(dentry))
++		return -ENOKEY;
+ 	return f2fs_do_add_link(d_inode(dentry->d_parent), &dentry->d_name,
+ 				inode, inode->i_ino, inode->i_mode);
+ }
+
+
+Patches currently in stable-queue which might be from ebiggers@kernel.org are
+
+queue-4.19/fscrypt-add-fscrypt_is_nokey_name.patch
+queue-4.19/ext4-prevent-creating-duplicate-encrypted-filenames.patch
+queue-4.19/ubifs-prevent-creating-duplicate-encrypted-filenames.patch
+queue-4.19/f2fs-prevent-creating-duplicate-encrypted-filenames.patch
 
 
 _______________________________________________
