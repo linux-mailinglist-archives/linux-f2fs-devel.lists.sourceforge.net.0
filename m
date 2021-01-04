@@ -2,77 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2E8E2E9715
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Jan 2021 15:21:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AC372E9778
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Jan 2021 15:42:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwQjR-0004ne-Sb; Mon, 04 Jan 2021 14:21:13 +0000
+	id 1kwR3v-0006Vz-Lq; Mon, 04 Jan 2021 14:42:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1kwQjL-0004nF-1S
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 04 Jan 2021 14:21:07 +0000
+ (envelope-from <colin.king@canonical.com>) id 1kwR3u-0006Vb-7v
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 04 Jan 2021 14:42:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Date:Message-ID:Subject:From:Cc:To:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cYtmhLrq1nTL5KhZkjg8Ue6/BMDKj8Xzfy6tx37ms20=; b=U8wH5cQwNbTTx0waUBQ3HYt4AR
- uFkWn8upVtjne36x73sZdCtwV4LYqnRpchDPHjO+dFso3sVXxjiRyANhvVpy/84SbfojUp50B3ky2
- jEiYcfyos7jNV7lxk5ObAPUdxGrHu6adIqFsY89aiiLdG8oLccnGTfvXR46Xa4AJDmd0=;
+ bh=RGJ+RN3GL2xk7VXhq7pPX63eRyuzrdpoBxBi8CrZcs4=; b=G963fGSHihGfabzeky5ZkqE4HJ
+ BpIcZ77epHdVSwxGOyiRnDlOBY0N0eK8R5/2Xo4XKbcn+0OxLygcMxP1MbOB3aJ6fSsDUbAGYCIM5
+ +XHLOv1ZApOT8MXa+qLnUklVmcIDVLwwTNStkWMC0W+yh78ykbxM8jqjIqABAvAJ6k/c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=cYtmhLrq1nTL5KhZkjg8Ue6/BMDKj8Xzfy6tx37ms20=; b=HynuJnqgH566IJVWJZUTij338W
- veDXR1WuGvUaAM7y9SU4yTaaXJHIjGCVj8FE0mhPfxpAl+N7LJfxog/dKtb7xlFuwcIujRB4zrib6
- 8eEFW258o/rdO+NCskrqBM203WJd151rsqh68r/9mzqOotrTp8J2UrL9fBydwi1n4TBc=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
+ Subject:From:Cc:To:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=RGJ+RN3GL2xk7VXhq7pPX63eRyuzrdpoBxBi8CrZcs4=; b=l
+ 2CUM5HUavU6dU+LF37vmvEAGf+gOHiTogMxzoYk6B+sBgIpUlDKCTCxeIumpN3/9Y+F2hao1xPj6i
+ yBTVVqaOQYD4tOCFtsoW0GWRvS1MrCR+O//QCZSJKoW/NmPo0c8QWgmDOHn8ev7CyI8bEob5idFFp
+ wLeaajMFLrVJ0f7o=;
+Received: from youngberry.canonical.com ([91.189.89.112])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kwQjB-00C1eJ-2B
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 04 Jan 2021 14:21:04 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 51C0D20784;
- Mon,  4 Jan 2021 14:20:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1609770046;
- bh=cx/RKMatwM2OwlH8Re5yHYBI7WUVFqOnWvP2MtRW//k=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=V3cf50d1aagCZotHVA4dgXCUvfplv6p4sVhPX/lNJZRn7xQbmygnAB6FqEuHWu0H/
- GL3Y0iI1g9+n/xvf3N9UtEe6Nug2Nw46OOalfV/5lmTZh93EJXmttiSnwIPH8tqElR
- yyoSzPeRy4nIKkcaTzHBPm6cly6gcaYpRjgu+HnO9zr5doEnr8vIS1c5nrqbZk0a/Q
- Pm2hWT1qtw6au4gaV2hJBF9Vbyny2YfPdSzYvyzIg0daWWt81st+1DiDyesFoMfudw
- 4tckZ7ZiuyZEvEpF7QYRO3x51oeapjPOgk39HcmjMOJ2xtY6sYAL8iNhxe2W3D7GHZ
- 8qf10EUgaYHWg==
-Date: Mon, 4 Jan 2021 09:20:44 -0500
-From: Sasha Levin <sashal@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20210104142044.GA3665355@sasha-vm>
-References: <20201230130314.3636961-1-sashal@kernel.org>
- <20201230130314.3636961-10-sashal@kernel.org>
- <X+zAlEu+0JSvXaMu@sol.localdomain>
+ (TLSv1.2:ECDHE-RSA-AES128-SHA:128) (Exim 4.92.2) id 1kwR3p-00C4RQ-Ll
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 04 Jan 2021 14:42:22 +0000
+Received: from 1.general.cking.uk.vpn ([10.172.193.212])
+ by youngberry.canonical.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <colin.king@canonical.com>)
+ id 1kwQml-0008BG-Tt; Mon, 04 Jan 2021 14:24:40 +0000
+To: Daeho Jeong <daehojeong@google.com>
+From: Colin Ian King <colin.king@canonical.com>
+Message-ID: <1acf4202-e5e6-f3fb-73c3-11bc965d3058@canonical.com>
+Date: Mon, 4 Jan 2021 14:24:39 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <X+zAlEu+0JSvXaMu@sol.localdomain>
-X-Spam-Score: -0.3 (/)
+Content-Language: en-US
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [91.189.89.112 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kwQjB-00C1eJ-2B
-Subject: Re: [f2fs-dev] [PATCH AUTOSEL 5.10 10/31] f2fs: Handle casefolding
- with Encryption
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kwR3p-00C4RQ-Ll
+Subject: Re: [f2fs-dev] f2fs: add F2FS_IOC_DECOMPRESS_FILE and
+ F2FS_IOC_COMPRESS_FILE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,48 +71,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daniel Rosenberg <drosen@google.com>,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 30, 2020 at 10:01:56AM -0800, Eric Biggers wrote:
->On Wed, Dec 30, 2020 at 08:02:52AM -0500, Sasha Levin wrote:
->> From: Daniel Rosenberg <drosen@google.com>
->>
->> [ Upstream commit 7ad08a58bf67594057362e45cbddd3e27e53e557 ]
->>
->> Expand f2fs's casefolding support to include encrypted directories.  To
->> index casefolded+encrypted directories, we use the SipHash of the
->> casefolded name, keyed by a key derived from the directory's fscrypt
->> master key.  This ensures that the dirhash doesn't leak information
->> about the plaintext filenames.
->>
->> Encryption keys are unavailable during roll-forward recovery, so we
->> can't compute the dirhash when recovering a new dentry in an encrypted +
->> casefolded directory.  To avoid having to force a checkpoint when a new
->> file is fsync'ed, store the dirhash on-disk appended to i_name.
->>
->> This patch incorporates work by Eric Biggers <ebiggers@google.com>
->> and Jaegeuk Kim <jaegeuk@kernel.org>.
->>
->> Co-developed-by: Eric Biggers <ebiggers@google.com>
->> Signed-off-by: Eric Biggers <ebiggers@google.com>
->> Signed-off-by: Daniel Rosenberg <drosen@google.com>
->> Reviewed-by: Eric Biggers <ebiggers@google.com>
->> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->> Signed-off-by: Sasha Levin <sashal@kernel.org>
->
->Please don't backport this to the LTS kernels.  This is a new feature, not a
->fix, and you missed prerequisite patches...
+Hi,
 
-Sure, I'l drop it. Thanks!
+Static analysis using Coverity has detected a potential null pointer
+dereference after a null check in the following commit:
 
--- 
-Thanks,
-Sasha
+commit 5fdb322ff2c2b4ad519f490dcb7ebb96c5439af7
+Author: Daeho Jeong <daehojeong@google.com>
+Date:   Thu Dec 3 15:56:15 2020 +0900
+
+    f2fs: add F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE
+
+The analysis is as follows:
+
+4025 static int redirty_blocks(struct inode *inode, pgoff_t page_idx,
+int len)
+4026 {
+4027        DEFINE_READAHEAD(ractl, NULL, inode->i_mapping, page_idx);
+4028        struct address_space *mapping = inode->i_mapping;
+4029        struct page *page;
+4030        pgoff_t redirty_idx = page_idx;
+4031        int i, page_len = 0, ret = 0;
+4032
+4033        page_cache_ra_unbounded(&ractl, len, 0);
+4034
+
+    1. Condition i < len, taking true branch.
+    4. Condition i < len, taking true branch.
+
+4035        for (i = 0; i < len; i++, page_idx++) {
+4036                page = read_cache_page(mapping, page_idx, NULL, NULL);
+
+    2. Condition IS_ERR(page), taking false branch.
+    5. Condition IS_ERR(page), taking true branch.
+
+4037                if (IS_ERR(page)) {
+4038                        ret = PTR_ERR(page);
+
+    6. Breaking from loop.
+
+4039                        break;
+4040                }
+4041                page_len++;
+
+    3. Jumping back to the beginning of the loop.
+
+4042        }
+4043
+
+    7. Condition i < page_len, taking true branch.
+
+4044        for (i = 0; i < page_len; i++, redirty_idx++) {
+4045                page = find_lock_page(mapping, redirty_idx);
+
+    8. Condition !page, taking true branch.
+    9. var_compare_op: Comparing page to null implies that page might be
+null.
+
+4046                if (!page)
+4047                        ret = -ENOENT;
+
+Dereference after null check (FORWARD_NULL)
+
+   10. var_deref_model: Passing null pointer page to set_page_dirty,
+which dereferences it.
+
+4048                set_page_dirty(page);
+4049                f2fs_put_page(page, 1);
+4050                f2fs_put_page(page, 0);
+4051        }
+4052
+4053        return ret;
+4054 }
+
+The !page check on line 4046 sets ret appropriately but we have a
+following call to set_page_dirty on a null page that causes the error.
+Not sure how this should be fixed, should the check bail out immediately
+or just avoid the following set_page_dirty anf f2fs_put_page calls?
+
+Colin
+
 
 
 _______________________________________________
