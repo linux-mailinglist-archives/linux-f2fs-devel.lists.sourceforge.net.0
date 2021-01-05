@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17C4D2EA1B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC7962EA1B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwadE-0008MQ-6g; Tue, 05 Jan 2021 00:55:28 +0000
+	id 1kwadN-0001a9-Oh; Tue, 05 Jan 2021 00:55:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kwadC-0008MJ-Bz
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:26 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kwadL-0001Zs-JQ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mxKsEjU/k1rAOMYFiicyp2jl0lXAM4AN2gxxyEBSJu4=; b=OZBsmJAR00Dz0CRwNdiUiD+osP
- KwJ8dM2BiRVNEQCM/dVE7KL/xY+3RqDWCw8u2bsRiy6OcISHdUPfh1mqXSkmgthBpeXKnxT1nfDPX
- Fldl+FxHfGWrtPZoXW4GhIIVFaRzEOlMylJdzCMldkVZlFjaOyCRtXYUCBbUL3euOcDk=;
+ bh=LfLz90Z1gNFOzbc2+OcX1AoZMItqZWEf3SxPBptinow=; b=QPJ3YSjehPPhBY54+MzT9ZsH/k
+ 50aV4UiJKzdN71kiN0Gz+oA1vsXmmstHIsEaWUr3Qjy+NWuYlW16wXdab81PAvBCQbxit4LQ1ij2S
+ qaiiPJhYA5dTr3uqpo5cqnjtj/jsE6bah2iaDt7M/Ej4dYuGC89YEDGjrZVlXfQyOwXg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mxKsEjU/k1rAOMYFiicyp2jl0lXAM4AN2gxxyEBSJu4=; b=HjY9bKiGtuXmk87Pa9Oi3wrmVf
- uNjNygoBIyPeNbnHLt/1uCgwEJjKQbhU6wTg6tfr1pFQj2oY1nQMIRgmb6GkaFP/2rtTmJ9HtTovM
- s8lHrpfrh0blqNSaDtNdEKQnSHAXrIZ0c3IhouEM4qiAyKB9uN7x18+pJAK4UI6gNsEg=;
+ bh=LfLz90Z1gNFOzbc2+OcX1AoZMItqZWEf3SxPBptinow=; b=Cr5O51ByoXfNuk1AsamopTF006
+ N+FkIKngI4yglltUTTrTB3wYzRKblWDhDVgd9NXTMANFtM4CHYHOCSWFexyqffA5BUB9OHHFt5iZS
+ epV1/4YX+LCWkK1onhO08bMUMF6L6VuzmealDf5uv7NvrozzNt5YfYx2znga6NEz35+w=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kwad3-00E0P0-0J
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:26 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D625F2256F;
- Tue,  5 Jan 2021 00:55:07 +0000 (UTC)
+ id 1kwadH-00E0Qx-KF
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:35 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 3073022583;
+ Tue,  5 Jan 2021 00:55:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1609808108;
- bh=gBV7rjbDvtj1IoteKM7jbO9E67+Za0GVgMCAesn4G6k=;
+ bh=WAClBs5Ob3X5/nQlX8DZm6OroHf7WCCbiACDxf5M2ho=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ASJXzrsaVLLasAKCmNGQSKOsMzoHtyRTKBaHFlVXFQWcoZqc+MWcqkJo30DvIHloH
- AQT6fY5xNbAtk+zgP7jYSZLRrOAJ4ve0S6wO5OlKd7JqhskWjzWVlZfkpD3Cf4WlE+
- 0N+puDoBQbAkS3G1vkyoVmd86/9RkrxKI5CoTed7Wx289cf491pErIMcw4G67tPHA8
- a5J36fPKHrZkxGBc4tFW4r89vKZSAxjDy5WWIk1Ep3l1oUo0Kqtv4R55KrHvZRsO78
- 7NTU8xToN3ZsCH91q93mkbVXgUg7Yt4K6c7WBIk64cBmgCNGKKaSrWQCiH9ZKxWTSC
- EM9WBiVZRtw2w==
+ b=C0Ghy59D3T6p16o0qRJhp5hBAinTsVREzKCRuF7Jexv31PEsxUz1Fkxdd/Mof9wSK
+ fyfqBNgrAPiRUcsY3ifcjZVXzeinTyrayvQMhWzDvHJiH2r3CfCYhm3KrNTVDTZnBo
+ bUJR6Loxr7pNTO0yjgTEhy1nARTJGZ8vaOjeEfZyRtTh0e//SbJcw1j7GDewwWhsAW
+ 2pKs7GeBbCtgUdPQi6M79OUMkgyGH/n1tVqn9mhaFcMZyePjTyPKcgVDLU1ZshD7dp
+ IbJNbhKZau1h/1qm5RFLnnA4oBezHm6HRZmWBOwaXMBkyuprg1GjTaH1+R65Lyez0x
+ 2Wi5IaPeb84wg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon,  4 Jan 2021 16:54:43 -0800
-Message-Id: <20210105005452.92521-5-ebiggers@kernel.org>
+Date: Mon,  4 Jan 2021 16:54:44 -0800
+Message-Id: <20210105005452.92521-6-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210105005452.92521-1-ebiggers@kernel.org>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
@@ -68,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kwad3-00E0P0-0J
-Subject: [f2fs-dev] [PATCH 04/13] fat: only specify I_DIRTY_TIME when needed
- in fat_update_time()
+X-Headers-End: 1kwadH-00E0Qx-KF
+Subject: [f2fs-dev] [PATCH 05/13] fs: don't call ->dirty_inode for lazytime
+ timestamp updates
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,53 +91,107 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-As was done for generic_update_time(), only pass I_DIRTY_TIME to
-__mark_inode_dirty() when the inode's timestamps were actually updated
-and lazytime is enabled.  This avoids a weird edge case where
-I_DIRTY_TIME could be set in i_state when lazytime isn't enabled.
+There is no need to call ->dirty_inode for lazytime timestamp updates
+(i.e. for __mark_inode_dirty(I_DIRTY_TIME)), since by the definition of
+lazytime, filesystems must ignore these updates.  Filesystems only need
+to care about the updated timestamps when they expire.
+
+Therefore, only call ->dirty_inode when I_DIRTY_INODE is set.
+
+Based on a patch from Christoph Hellwig:
+https://lore.kernel.org/r/20200325122825.1086872-4-hch@lst.de
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/fat/misc.c | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+ fs/ext4/inode.c   | 12 +-----------
+ fs/f2fs/super.c   |  3 ---
+ fs/fs-writeback.c |  6 +++---
+ fs/gfs2/super.c   |  2 --
+ 4 files changed, 4 insertions(+), 19 deletions(-)
 
-diff --git a/fs/fat/misc.c b/fs/fat/misc.c
-index f1b2a1fc2a6a4..33e1e0c9fd634 100644
---- a/fs/fat/misc.c
-+++ b/fs/fat/misc.c
-@@ -329,21 +329,22 @@ EXPORT_SYMBOL_GPL(fat_truncate_time);
- 
- int fat_update_time(struct inode *inode, struct timespec64 *now, int flags)
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index 27946882d4ce4..4cc6c7834312f 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -5933,26 +5933,16 @@ int __ext4_mark_inode_dirty(handle_t *handle, struct inode *inode,
+  * If the inode is marked synchronous, we don't honour that here - doing
+  * so would cause a commit on atime updates, which we don't bother doing.
+  * We handle synchronous inodes at the highest possible level.
+- *
+- * If only the I_DIRTY_TIME flag is set, we can skip everything.  If
+- * I_DIRTY_TIME and I_DIRTY_SYNC is set, the only inode fields we need
+- * to copy into the on-disk inode structure are the timestamp files.
+  */
+ void ext4_dirty_inode(struct inode *inode, int flags)
  {
--	int iflags = I_DIRTY_TIME;
--	bool dirty = false;
-+	int dirty_flags = 0;
+ 	handle_t *handle;
  
- 	if (inode->i_ino == MSDOS_ROOT_INO)
- 		return 0;
- 
--	fat_truncate_time(inode, now, flags);
--	if (flags & S_VERSION)
--		dirty = inode_maybe_inc_iversion(inode, false);
--	if ((flags & (S_ATIME | S_CTIME | S_MTIME)) &&
--	    !(inode->i_sb->s_flags & SB_LAZYTIME))
--		dirty = true;
-+	if (flags & (S_ATIME | S_CTIME | S_MTIME)) {
-+		fat_truncate_time(inode, now, flags);
-+		if (inode->i_sb->s_flags & SB_LAZYTIME)
-+			dirty_flags |= I_DIRTY_TIME;
-+		else
-+			dirty_flags |= I_DIRTY_SYNC;
-+	}
-+
-+	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
-+		dirty_flags |= I_DIRTY_SYNC;
- 
--	if (dirty)
--		iflags |= I_DIRTY_SYNC;
- 	__mark_inode_dirty(inode, iflags);
- 	return 0;
+-	if (flags == I_DIRTY_TIME)
+-		return;
+ 	handle = ext4_journal_start(inode, EXT4_HT_INODE, 2);
+ 	if (IS_ERR(handle))
+-		goto out;
+-
++		return;
+ 	ext4_mark_inode_dirty(handle, inode);
+-
+ 	ext4_journal_stop(handle);
+-out:
+-	return;
  }
+ 
+ int ext4_change_inode_journal_flag(struct inode *inode, int val)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b4a07fe62d1a5..cc98dc49f4a26 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1196,9 +1196,6 @@ static void f2fs_dirty_inode(struct inode *inode, int flags)
+ 			inode->i_ino == F2FS_META_INO(sbi))
+ 		return;
+ 
+-	if (flags == I_DIRTY_TIME)
+-		return;
+-
+ 	if (is_inode_flag_set(inode, FI_AUTO_RECOVER))
+ 		clear_inode_flag(inode, FI_AUTO_RECOVER);
+ 
+diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
+index 081e335cdee47..e3347fd6eb13a 100644
+--- a/fs/fs-writeback.c
++++ b/fs/fs-writeback.c
+@@ -2264,16 +2264,16 @@ void __mark_inode_dirty(struct inode *inode, int flags)
+ 	 * Don't do this for I_DIRTY_PAGES - that doesn't actually
+ 	 * dirty the inode itself
+ 	 */
+-	if (flags & (I_DIRTY_INODE | I_DIRTY_TIME)) {
++	if (flags & I_DIRTY_INODE) {
+ 		trace_writeback_dirty_inode_start(inode, flags);
+ 
+ 		if (sb->s_op->dirty_inode)
+ 			sb->s_op->dirty_inode(inode, flags);
+ 
+ 		trace_writeback_dirty_inode(inode, flags);
+-	}
+-	if (flags & I_DIRTY_INODE)
++
+ 		flags &= ~I_DIRTY_TIME;
++	}
+ 	dirtytime = flags & I_DIRTY_TIME;
+ 
+ 	/*
+diff --git a/fs/gfs2/super.c b/fs/gfs2/super.c
+index 2f56acc41c049..042b94288ff11 100644
+--- a/fs/gfs2/super.c
++++ b/fs/gfs2/super.c
+@@ -562,8 +562,6 @@ static void gfs2_dirty_inode(struct inode *inode, int flags)
+ 	int need_endtrans = 0;
+ 	int ret;
+ 
+-	if (!(flags & I_DIRTY_INODE))
+-		return;
+ 	if (unlikely(gfs2_withdrawn(sdp)))
+ 		return;
+ 	if (!gfs2_glock_is_locked_by_me(ip->i_gl)) {
 -- 
 2.30.0
 
