@@ -2,104 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D7992EA457
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 05:17:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD2702EA528
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 07:06:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwdmA-0007JL-ID; Tue, 05 Jan 2021 04:16:54 +0000
+	id 1kwfU1-00031t-9b; Tue, 05 Jan 2021 06:06:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kwdm8-0007J5-N0
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 04:16:52 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kwfTt-00031c-KN
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 06:06:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KKJkbK/0qA+AFIpsLjEXS6BAkzyO10SmGNn3wBUtxds=; b=hJd0Q6GhMxl7PjVYo3G+NLGghK
- yHG7q+/THAKUzwc89XIyYNbAyCJ0Rfm/kCt70ODggklgVuKOXKO+EyF8dKYDAJZidw/RDqreXReGb
- uIqsTdwDcsf4Dgfhkzds680+DudVp5et6/Pz4mz3gN9F6/vQdVoyV8svHVKmPYhhBwUY=;
+ bh=F9+0qI3fpdGAG4ZC8SoPjgpYPsJBDyqVsqs4lxaJUy8=; b=dYC+2tfm9bJCSJgEpkwKoQq96u
+ /iN/zODT4gwWiELwe1UVf00GNo9wwcQ7VdEcsCbI9ZzVhE5pOt6QJRsVhPjHuw2YCZfQp82SyvwfE
+ 7zg+hB+dqF+jDi4WQMeQJ1T8u1UOagt+M+Iu1/6YnijIo+MJ85KPYJgksJpfcAM29310=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KKJkbK/0qA+AFIpsLjEXS6BAkzyO10SmGNn3wBUtxds=; b=A
- QthESL1aBp2pd2yCd+8isHMzSOigWBJfYM/o4HsQd953FVLa6uyPmDB6o9EQdck1rXFubfTvPeQFm
- 9TzWNtYN0vu+GpDeTr1CI1qeq3BbMgUFn6HifH6QkSsTiBt+gnUbgWT8je5EevBOIotziCPurjEzT
- f+3Hoc0gcwkxAdu8=;
-Received: from mail-pg1-f170.google.com ([209.85.215.170])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=F9+0qI3fpdGAG4ZC8SoPjgpYPsJBDyqVsqs4lxaJUy8=; b=Xd+EKYBQi1i9v6mAHn8Oj+yTJj
+ Lso/8r3w/aqpjuGJP4SyNIOsfdcP+pg7QhKGOnvBSlWICSdj5bkNFtQhD6eJyYcleHq4YwvXB+PcM
+ FqMQk4gPLQrTb0C/ueq1fuYnsDF+LCaIoNuyZ2yXoxQSBtkY25qGX0BP4Tm55M+AqMPg=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kwdm3-00EMxl-8d
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 04:16:52 +0000
-Received: by mail-pg1-f170.google.com with SMTP id c132so9140225pga.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 04 Jan 2021 20:16:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=KKJkbK/0qA+AFIpsLjEXS6BAkzyO10SmGNn3wBUtxds=;
- b=vZHsRpHgkgF0zLNjP+xBufgtv7dHa1rQX/fu7pMroYBepvJoKeH0EEfEL7Kk92+qSb
- sSC7BPhPTxc8qh1+Mn5WGivBgcFgLBVFqZAhLsGVHMbmdQmCFExWsgwgesT6JxjUJHhN
- lM85YM6CAC9z3LXeZ28sfxWamikxJUHCEpoxEPiMyhj3H5XextGe1GlbOqGnbtmwGPdq
- +Yo2jpf1aCReEdc7eFgBkXVg/Qu9HNsQEjRzg6K8g4SpdEcGdCBudOZu2keZNJnssLeC
- 7u1xTxxl1DlJveLHtiZubKGw94x/jA0EWks1tM0w4qasSKXokW9KMEv2Lqx14nH4bewU
- ENXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=KKJkbK/0qA+AFIpsLjEXS6BAkzyO10SmGNn3wBUtxds=;
- b=VaYTNj+EQS3pz1SP38et35N8H1ot57i1XQaqHb1NAxo2BPAETJApNul13InhE3XDNg
- 3K+03YTp1Mp+oqOmlhS0IFjnoxhJwvkkngVws9ollaz2dxx+iYIc6bPgPTkU7AyqbjJ3
- KtAAIIjlc/HWmLKN+mZhsjZLjXQ8zfZB1klAc1BEgryoqELD/UGHNWRr+svE6pbpmcNR
- 7xrCHjXbb2BUvGXmjigleVLiq3WOqBx1IIoZ62bWEXmlz+LhpBSYFy/HPXLrOn7FMCYG
- XNCWssuvzyXTwO1hUpSVLexkcObJ9licL4sTj3iEECfrFWxUc/C62sytMkxXytqAS7e3
- Q48Q==
-X-Gm-Message-State: AOAM532OHBtZ86gMNohxUL49qDjk2rQOGvpl1CjdIIdi+T9TO/BQ1NLW
- 5la+NGnQccExgWXL4Anl2EI=
-X-Google-Smtp-Source: ABdhPJyuZyKbboWOveGvhjaA3osqPGnttsU+9vHA46r2c5H3DyYcaw0SWeZFljRHgwO3gYp+wF5rrw==
-X-Received: by 2002:a62:e212:0:b029:19d:8cff:f179 with SMTP id
- a18-20020a62e2120000b029019d8cfff179mr68030607pfi.44.1609820201665; 
- Mon, 04 Jan 2021 20:16:41 -0800 (PST)
-Received: from daehojeong1.seo.corp.google.com
- ([2401:fa00:d:11:a6ae:11ff:fe18:6ce2])
- by smtp.gmail.com with ESMTPSA id z23sm48634077pfj.143.2021.01.04.20.16.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Jan 2021 20:16:40 -0800 (PST)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue,  5 Jan 2021 13:16:30 +0900
-Message-Id: <20210105041630.1393157-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kwfTi-00EqWl-D9
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 06:06:09 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4D925p10F3zj2f2;
+ Tue,  5 Jan 2021 14:05:02 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 5 Jan 2021
+ 14:05:37 +0800
+To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+References: <20210105041630.1393157-1-daeho43@gmail.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <f27c3ea8-f6d7-db27-9dc3-14e0be08e5fc@huawei.com>
+Date: Tue, 5 Jan 2021 14:05:36 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20210105041630.1393157-1-daeho43@gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.170 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.170 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kwdm3-00EMxl-8d
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix null page reference in
+ -0.2 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kwfTi-00EqWl-D9
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix null page reference in
  redirty_blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -114,44 +81,23 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Colin Ian King <colin.king@canonical.com>,
  Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On 2021/1/5 12:16, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Fixed null page reference when find_lock_page() fails in
+> redirty_blocks().
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Reported-by: Colin Ian King <colin.king@canonical.com>
+> Fixes: 5fdb322ff2c2 ("f2fs: add F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE")
 
-Fixed null page reference when find_lock_page() fails in
-redirty_blocks().
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Reported-by: Colin Ian King <colin.king@canonical.com>
-Fixes: 5fdb322ff2c2 ("f2fs: add F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE")
----
-v2: changed error value and break the loop when error occurs
----
- fs/f2fs/file.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9e5275716be8..d27173c24391 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4060,8 +4060,10 @@ static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
- 
- 	for (i = 0; i < page_len; i++, redirty_idx++) {
- 		page = find_lock_page(mapping, redirty_idx);
--		if (!page)
--			ret = -ENOENT;
-+		if (!page) {
-+			ret = -ENOMEM;
-+			break;
-+		}
- 		set_page_dirty(page);
- 		f2fs_put_page(page, 1);
- 		f2fs_put_page(page, 0);
--- 
-2.29.2.729.g45daf8777d-goog
-
+Thanks,
 
 
 _______________________________________________
