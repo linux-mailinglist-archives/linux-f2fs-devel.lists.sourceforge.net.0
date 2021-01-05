@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1291E2EA1B6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48F782EA1BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwadW-0001bK-RE; Tue, 05 Jan 2021 00:55:46 +0000
+	id 1kwadd-0006RY-39; Tue, 05 Jan 2021 00:55:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kwadV-0001b6-2H
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kwada-0006Qx-U3
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v2kfiM4zm8BOd9kShD7CjV3ajdHNBCeiD0n6gOiZcug=; b=ALlMQCjI/Bow7SQALIM6aAaA72
- RinOIIK/oD213CuVwCOWiJllrrHTtZZuJFf3XsCqsFc+Jkp1D5zh3q3hFNCy1nee7W/w52FE6H8uQ
- y+JTyR5fXFe/a6Dy0UPgaWskbYoGKMeFPrinYkXt/OIEny0pev2FpfK8I30NIgZ5nAtE=;
+ bh=q4KR+kVSz7wDZQpt6pXXRdD43uMQ6Zd3Oot5Dexx9rI=; b=P9pHJh8dpMftawjX2PGKctnm1p
+ NlFYufdzDdZ3PSSH34tUYe/4EUxitgyggDUHyYrkHR5dAltSJNu5RzLH8H0JGb1Q8yBzYsA1PnIXe
+ kpwZ5cnTrd9BfidfG6Cd4N8V3Vn/rMc6CkvnLGEW/1eD1/dvqwJ+WwOLWEvCGRjLgCy0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=v2kfiM4zm8BOd9kShD7CjV3ajdHNBCeiD0n6gOiZcug=; b=aTfXi+eLfTK3g0H2ysbgi25khg
- 2mEMIqt8DBVS3brlUCdfkOOy8mROOxrGoU7xRFCBYyPWNLC+Vqvaad66MFhXgjJzdaaK86NX/Svp8
- Tu+NIIGsRN614iUasVd7HaiS8wpD05t7VQrGrUzWD7KFq38HRGknWm1AFnG+i3Pes7cw=;
+ bh=q4KR+kVSz7wDZQpt6pXXRdD43uMQ6Zd3Oot5Dexx9rI=; b=NQkZd+5Agaire+KVHEYJ7VCLcJ
+ RqaE8bMFFDp99KtK7ylykFBqee22V7IPo8oy1Yu5D6dPyOfyCoMTRtC+/znr+Tnp2sSbr6xYa7U5U
+ a43VFx/MZy35zXq13/uTZI0pLCWigMHMIhGjLhTccuDZfw89Ans/p1fI7BbbiVQlrsk0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kwadR-00E0Rx-RW
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6F647227BF;
+ id 1kwadR-008Hmb-Rm
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:50 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BE7C122955;
  Tue,  5 Jan 2021 00:55:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1609808110;
- bh=gNmDYe2Lw3Moz7fSm4TY9dr/5OhIQas+i4KMcztjpdA=;
+ bh=SwwC2tQmuzx2ECIC/aYAUe8sOHWx78XkiAxTAUcoLvs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Iue5bgzUAw8lnkQhxntcvGe1ceXoW5GSJWYIHh3cLSi/unfeetrDIk3AEiLSYzXXM
- YRQ0yms8cM/fhbIoNhu2BFHmIxs1KHKry2eno50f0+As0LpEMAFdE2jzEK6/I+t79x
- q1xCXE9vM0AMyX4uOGz6HuPfUF9wxnuqjDGTfduCP/T8y+CI8WNZF+C6o8JGDmDuRb
- 6XujVxKjL7yeDT5YHWoAHOi3U46i46aTw1Z6B/hNUFzMJq+9EuadYpNdInK2x1Ora2
- NDZjswrQjIOKf9F0DW31SasqoFVgS7ALAcH8xEZ6GQAEgUhyFzB2AoBeG23brpfA7v
- i9mSTRbrzfsTA==
+ b=Srdu4HxF1Bb9lEnR7JzmGw/pdJjgAOcpxaS4Evh8wreQR3/eN7eUek7cPFXHkcOaX
+ lP184SXS2dHBX1l/m6Xd4qXPeYU4JGmMqZHXpHz/62wMMlOf0dL21hMP0mh4xZFYrV
+ 9JXvXG7cNpFUn1xaxZHWtAbrVZdWzyWRe2/n4Mz0NBqC0ZpRVkCsF4zucS4Bgq4luo
+ SMClFaef9S/mS8BcRvOz3HVeAsvDIYQWYC6Gbxjt2fQ65CbGPeOopGXTTzKkT9UQTb
+ l9n/P27mrwnTgHDHwtEkxO2GafO5eYYSKRVI3erirNDRVNH1/EGucH2wSlAOpnUTan
+ rUAdXIJZ1qfcw==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon,  4 Jan 2021 16:54:51 -0800
-Message-Id: <20210105005452.92521-13-ebiggers@kernel.org>
+Date: Mon,  4 Jan 2021 16:54:52 -0800
+Message-Id: <20210105005452.92521-14-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210105005452.92521-1-ebiggers@kernel.org>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
@@ -68,9 +68,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kwadR-00E0Rx-RW
-Subject: [f2fs-dev] [PATCH 12/13] xfs: remove a stale comment from
- xfs_file_aio_write_checks()
+X-Headers-End: 1kwadR-008Hmb-Rm
+Subject: [f2fs-dev] [PATCH 13/13] xfs: implement lazytime_expired
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,36 +90,63 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-The comment in xfs_file_aio_write_checks() about calling file_modified()
-after dropping the ilock doesn't make sense, because the code that
-unconditionally acquires and drops the ilock was removed by
-commit 467f78992a07 ("xfs: reduce ilock hold times in
-xfs_file_aio_write_checks").
+Implement the new ->lazytime_expired method to get notified of lazytime
+timestamp expirations, instead of relying on ->dirty_inode(inode,
+I_DIRTY_SYNC) which is potentially ambiguous.
 
-Remove this outdated comment.
+This fixes a bug where XFS didn't write lazytime timestamps to disk upon
+a sync(), or after 24 hours (dirtytime_expire_interval * 2).  This is
+because it only wrote the timestamps if I_DIRTY_TIME was set in i_state.
+But actually when an inode's timestamps expire without the inode being
+marked I_DIRTY_SYNC first, then ->dirty_inode isn't called until
+__writeback_single_inode() has already cleared I_DIRTY_TIME in i_state.
 
+The new ->lazytime_expired method is unambiguous, so it removes any need
+to check for I_DIRTY_TIME, which avoids this bug.
+
+I've written an xfstest which reproduces this bug.
+
+Fixes: c3b1b13190ae ("xfs: implement the lazytime mount option")
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/xfs/xfs_file.c | 6 ------
- 1 file changed, 6 deletions(-)
+ fs/xfs/xfs_super.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
-index 5b0f93f738372..4927c6653f15d 100644
---- a/fs/xfs/xfs_file.c
-+++ b/fs/xfs/xfs_file.c
-@@ -389,12 +389,6 @@ xfs_file_aio_write_checks(
- 	} else
- 		spin_unlock(&ip->i_flags_lock);
- 
--	/*
--	 * Updating the timestamps will grab the ilock again from
--	 * xfs_fs_dirty_inode, so we have to call it after dropping the
--	 * lock above.  Eventually we should look into a way to avoid
--	 * the pointless lock roundtrip.
--	 */
- 	return file_modified(file);
+diff --git a/fs/xfs/xfs_super.c b/fs/xfs/xfs_super.c
+index 813be879a5e51..0b7623907b264 100644
+--- a/fs/xfs/xfs_super.c
++++ b/fs/xfs/xfs_super.c
+@@ -666,19 +666,13 @@ xfs_fs_destroy_inode(
  }
  
+ static void
+-xfs_fs_dirty_inode(
+-	struct inode			*inode,
+-	int				flag)
++xfs_fs_lazytime_expired(
++	struct inode			*inode)
+ {
+ 	struct xfs_inode		*ip = XFS_I(inode);
+ 	struct xfs_mount		*mp = ip->i_mount;
+ 	struct xfs_trans		*tp;
+ 
+-	if (!(inode->i_sb->s_flags & SB_LAZYTIME))
+-		return;
+-	if (flag != I_DIRTY_SYNC || !(inode->i_state & I_DIRTY_TIME))
+-		return;
+-
+ 	if (xfs_trans_alloc(mp, &M_RES(mp)->tr_fsyncts, 0, 0, 0, &tp))
+ 		return;
+ 	xfs_ilock(ip, XFS_ILOCK_EXCL);
+@@ -1108,7 +1102,7 @@ xfs_fs_free_cached_objects(
+ static const struct super_operations xfs_super_operations = {
+ 	.alloc_inode		= xfs_fs_alloc_inode,
+ 	.destroy_inode		= xfs_fs_destroy_inode,
+-	.dirty_inode		= xfs_fs_dirty_inode,
++	.lazytime_expired	= xfs_fs_lazytime_expired,
+ 	.drop_inode		= xfs_fs_drop_inode,
+ 	.put_super		= xfs_fs_put_super,
+ 	.sync_fs		= xfs_fs_sync_fs,
 -- 
 2.30.0
 
