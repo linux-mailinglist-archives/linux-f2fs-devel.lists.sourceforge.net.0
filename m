@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED7A32EA1B7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B5B62EA1B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwadY-0006Pt-OM; Tue, 05 Jan 2021 00:55:48 +0000
+	id 1kwada-0008QX-0i; Tue, 05 Jan 2021 00:55:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kwadV-0006P8-24
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kwadX-0008Q2-Rw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y36fuTeDQsKZp2GvgvyOnabI8DTgAIh35Ef7y7ERmoA=; b=Aq3YTnKalnLUASa4ntr5uuhAah
- nM/1nzEFHjB1Gvp2AVg8fq0QLxU//zKl6TmUUsSzjdaWNKmXxyAJgD2KKuryedg0VBM78wiA+0NvJ
- wZrE8teD8GW6UMACA5ChEwIknz1gl43OQsXhkDKIN6jC5lmSjkfihgjxejDBe5sfOauA=;
+ bh=CHPRcnjlwgZxLZAEUBnLsGbjkHFKxmeyVRt9FfKW6tg=; b=Tjf7ijZbVw+l2h4qmQy+AI/ZIM
+ dBCd1DCbIkyeKbQs//RuPjr7iu/cH5wZZUL5DEIXqFLu9OjHmKlaUmRtUT6SMWrve9Yi1r4b6pSAc
+ x+9EwHmV3r+Ycv8R7TmdrqnwfRSCNwN+5KcgxTmT/SlfGKK0iso2o/SokI35TQI01veg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y36fuTeDQsKZp2GvgvyOnabI8DTgAIh35Ef7y7ERmoA=; b=N4IiXS6gM3ri09Lcn1VSL9/ZJ7
- f1CmpeDjisf4IOkHAVyBmD0t2sJWk1uYw/fEJzr2vZ9R2ccIWLOk5f0nkc7FcPl/n3xWbmzNAGDiR
- xewnANipNm51/Jf4iFHzuSedE+HqfnasrtMGBYgQ7mWbMKK/omW9l+QC+k/vY0OALP7c=;
+ bh=CHPRcnjlwgZxLZAEUBnLsGbjkHFKxmeyVRt9FfKW6tg=; b=Tui7JnnA0yYpNYDyl968wP/PVC
+ vdk1nMjfB5a7woT1uHlaeX4E2qnR/TJPYLBVFKBpHqxtnbPccfWmcPaydbFKQcrZT5q34WBA2eSkS
+ yE779Fp6icWRzwkg33H0Y19r4GS+8iUbI3A+E6aZyOt63gV+Cp/hcwf1Rc0SzlLHnrH4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kwadH-00E0Qy-Mr
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CD664225AA;
- Tue,  5 Jan 2021 00:55:08 +0000 (UTC)
+ id 1kwadO-008HmH-QL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:47 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 28656225A9;
+ Tue,  5 Jan 2021 00:55:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1609808109;
- bh=H1ms59/bip1WURh53Z2hT3TghGoA+Y1uZAJZTjqPVbA=;
+ bh=Ad7xLAZQk7GaC9BkYrLopltjaA0micO7CKVPyWiuAIc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jT5YHwMUgMCR7wlwaRdowKZM9R6gvPc5q8QsYcKqluLVv9qzVzb5ZLYpj+8BJinTA
- 1tYt5wwFZVp0RDAxpBlc63HhVpNF5Rk3zgXbvdiFBSWfIpLrDX8Mmfq1MVoz9YClb1
- 9Gr2aATxyaLdxZqNOHjdmFblPWbRTyzC/RA158eyh4sD8Aa3guZw/r8EudMGbINKUJ
- w+1wvYWfRCLiPz4E7Qnid8lt7OG7jDwfbEzObQJGnso821wgCnsJYkDVJxNx555AOD
- 74UKgJtYKhCO2Xw93w+7ZABhUKMlAxqRerT5DGy3IKUeXa5hwHmJYWfpjPMb/kOHAy
- 7Gqk1iDUurBeg==
+ b=a9pN6k7eZWDzKxMNTAL16e24puJANBJqgUATkSeVAFTD1NZ47idpUHJlSPEqpBGkK
+ UqoR0jDQJOR+ODkJotclMYzN9qCk1aAU0iTIOL/17YsRFdJzHij3FPqqu6srKMpgnK
+ lcEM7vhAEfE+jrUnJyv5rdeTitXFHJKs6xmCvuKB/adz9aAiENsqhnSa3YyytLjVem
+ nXDWtC3fxXJqwb4wXSh5nX2URUIYWMazymEm3+pfyQZcF2nmpB+fVPZM5uZW2d7Sz/
+ igWIQnJAFW8cLT0v2qBsM+KXzZWW25sbQYF2d1mkJqke9RyEBq3TuiZ0lSbTFEMlUi
+ Zk5ZRbFXOQr8g==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon,  4 Jan 2021 16:54:46 -0800
-Message-Id: <20210105005452.92521-8-ebiggers@kernel.org>
+Date: Mon,  4 Jan 2021 16:54:47 -0800
+Message-Id: <20210105005452.92521-9-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210105005452.92521-1-ebiggers@kernel.org>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
@@ -68,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kwadH-00E0Qy-Mr
-Subject: [f2fs-dev] [PATCH 07/13] fs: correctly document the inode dirty
- flags
+X-Headers-End: 1kwadO-008HmH-QL
+Subject: [f2fs-dev] [PATCH 08/13] ext4: simplify i_state checks in
+ __ext4_update_other_inode_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,53 +91,37 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-The documentation for I_DIRTY_SYNC and I_DIRTY_DATASYNC is a bit
-misleading, and I_DIRTY_TIME isn't documented at all.  Fix this.
+Since I_DIRTY_TIME and I_DIRTY_INODE are mutually exclusive in i_state,
+there's no need to check for I_DIRTY_TIME && !I_DIRTY_INODE.  Just check
+for I_DIRTY_TIME.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- include/linux/fs.h | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ fs/ext4/inode.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index fd47deea7c176..45a0303b2aeb6 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -2084,8 +2084,8 @@ static inline void kiocb_clone(struct kiocb *kiocb, struct kiocb *kiocb_src,
- /*
-  * Inode state bits.  Protected by inode->i_lock
-  *
-- * Three bits determine the dirty state of the inode, I_DIRTY_SYNC,
-- * I_DIRTY_DATASYNC and I_DIRTY_PAGES.
-+ * Four bits determine the dirty state of the inode: I_DIRTY_SYNC,
-+ * I_DIRTY_DATASYNC, I_DIRTY_PAGES, and I_DIRTY_TIME.
-  *
-  * Four bits define the lifetime of an inode.  Initially, inodes are I_NEW,
-  * until that flag is cleared.  I_WILL_FREE, I_FREEING and I_CLEAR are set at
-@@ -2094,12 +2094,20 @@ static inline void kiocb_clone(struct kiocb *kiocb, struct kiocb *kiocb_src,
-  * Two bits are used for locking and completion notification, I_NEW and I_SYNC.
-  *
-  * I_DIRTY_SYNC		Inode is dirty, but doesn't have to be written on
-- *			fdatasync().  i_atime is the usual cause.
-- * I_DIRTY_DATASYNC	Data-related inode changes pending. We keep track of
-+ *			fdatasync() (unless I_DIRTY_DATASYNC is also set).
-+ *			Timestamp updates are the usual cause.
-+ * I_DIRTY_DATASYNC	Data-related inode changes pending.  We keep track of
-  *			these changes separately from I_DIRTY_SYNC so that we
-  *			don't have to write inode on fdatasync() when only
-- *			mtime has changed in it.
-+ *			e.g. the timestamps have changed.
-  * I_DIRTY_PAGES	Inode has dirty pages.  Inode itself may be clean.
-+ * I_DIRTY_TIME		The inode itself only has dirty timestamps, and the
-+ *			lazytime mount option is enabled.  We keep track of this
-+ *			separately from I_DIRTY_SYNC in order to implement
-+ *			lazytime.  This gets cleared if I_DIRTY_INODE
-+ *			(I_DIRTY_SYNC and/or I_DIRTY_DATASYNC) gets set.  I.e.
-+ *			either I_DIRTY_TIME *or* I_DIRTY_INODE can be set in
-+ *			i_state, but not both.  I_DIRTY_PAGES may still be set.
-  * I_NEW		Serves as both a mutex and completion notification.
-  *			New inodes set I_NEW.  If two processes both create
-  *			the same inode, one of them will release its inode and
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index 4cc6c7834312f..9e34541715968 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -4962,14 +4962,12 @@ static void __ext4_update_other_inode_time(struct super_block *sb,
+ 		return;
+ 
+ 	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+-			       I_DIRTY_INODE)) ||
+-	    ((inode->i_state & I_DIRTY_TIME) == 0))
++			       I_DIRTY_TIME)) != I_DIRTY_TIME)
+ 		return;
+ 
+ 	spin_lock(&inode->i_lock);
+-	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+-				I_DIRTY_INODE)) == 0) &&
+-	    (inode->i_state & I_DIRTY_TIME)) {
++	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
++			       I_DIRTY_TIME)) != I_DIRTY_TIME) {
+ 		struct ext4_inode_info	*ei = EXT4_I(inode);
+ 
+ 		inode->i_state &= ~I_DIRTY_TIME;
 -- 
 2.30.0
 
