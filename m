@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DBA92EA1AD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17C4D2EA1B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Jan 2021 01:55:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kwadD-0006LT-7A; Tue, 05 Jan 2021 00:55:27 +0000
+	id 1kwadE-0008MQ-6g; Tue, 05 Jan 2021 00:55:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kwadC-0006L7-Dd
+ (envelope-from <ebiggers@kernel.org>) id 1kwadC-0008MJ-Bz
  for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FWe+5FS4Qo4SrmCId/BqNjqaAIZ85jwflOdqAHuNDlE=; b=Bigp21DokIRDKPjqNNjgZBW4UH
- XuipiHXy4wpdI93PKXSAtRfV7r1Ox+KGsdgElUzSvBKGfcNz7XwqqKg4JtaGyvvG18K30A41cp3rC
- 3TFdKJsnXqK7K/kZSK/vBj7+1AE4Sxi9E2Bdz+eleilFGwMX5LGvbgrbIH861wJ27l/c=;
+ bh=mxKsEjU/k1rAOMYFiicyp2jl0lXAM4AN2gxxyEBSJu4=; b=OZBsmJAR00Dz0CRwNdiUiD+osP
+ KwJ8dM2BiRVNEQCM/dVE7KL/xY+3RqDWCw8u2bsRiy6OcISHdUPfh1mqXSkmgthBpeXKnxT1nfDPX
+ Fldl+FxHfGWrtPZoXW4GhIIVFaRzEOlMylJdzCMldkVZlFjaOyCRtXYUCBbUL3euOcDk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FWe+5FS4Qo4SrmCId/BqNjqaAIZ85jwflOdqAHuNDlE=; b=ipvKSx5ouQJNTfTJUuk8zoh4/A
- hqHqvMR/0vVPt4fzWidjyDHJCP9q1g4AZCiiAx4oqbDSEEdIpHVN/RTjZX6yI4PHFORRyXpH1biE5
- D0gx7EkR7Mxs7eNlZxZQ1S16Yrr2fGHJ5mS1G3QnFv1GJzpvjtPeOckeIk45kojSjABg=;
+ bh=mxKsEjU/k1rAOMYFiicyp2jl0lXAM4AN2gxxyEBSJu4=; b=HjY9bKiGtuXmk87Pa9Oi3wrmVf
+ uNjNygoBIyPeNbnHLt/1uCgwEJjKQbhU6wTg6tfr1pFQj2oY1nQMIRgmb6GkaFP/2rtTmJ9HtTovM
+ s8lHrpfrh0blqNSaDtNdEKQnSHAXrIZ0c3IhouEM4qiAyKB9uN7x18+pJAK4UI6gNsEg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kwad3-00E0Oy-0K
+ id 1kwad3-00E0P0-0J
  for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 00:55:26 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 879B722582;
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D625F2256F;
  Tue,  5 Jan 2021 00:55:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1609808107;
- bh=moPvKfHUYW5Xbk7fp9PqSrbSDfWUFwePDygO+DUtRFo=;
+ s=k20201202; t=1609808108;
+ bh=gBV7rjbDvtj1IoteKM7jbO9E67+Za0GVgMCAesn4G6k=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=odLOb9jW7zdbgQ19pnxfQeV0LZCahNWh2pJHvvskuGhaoTAJINjva3sXgUpuQUx4C
- 9Q4jVEGDvC4JAbMDOb0ntyBgGZGYCD7D5RQ+uTFsyV3drMND3coDDlh3n+eJeaDR4P
- hil5l822YPp+3ttvEctfsdcoutR9fY1zMzcy5DOf6/m5irfC1tIlgTw7cCQNZnYr2n
- osSXWG3OuD+6/7zLbzpZ0kcTNtAhXkxI9E8LYaVMNzhVDRqwBsPc/DbKgZ8L/a763U
- fTbNyD1NhYvp7LInib3/VaOfA36sk0VY6JASj7UsjCeOh2iBGsxYCeMQqSIOQuqYJT
- QcZ5iZypbSAwA==
+ b=ASJXzrsaVLLasAKCmNGQSKOsMzoHtyRTKBaHFlVXFQWcoZqc+MWcqkJo30DvIHloH
+ AQT6fY5xNbAtk+zgP7jYSZLRrOAJ4ve0S6wO5OlKd7JqhskWjzWVlZfkpD3Cf4WlE+
+ 0N+puDoBQbAkS3G1vkyoVmd86/9RkrxKI5CoTed7Wx289cf491pErIMcw4G67tPHA8
+ a5J36fPKHrZkxGBc4tFW4r89vKZSAxjDy5WWIk1Ep3l1oUo0Kqtv4R55KrHvZRsO78
+ 7NTU8xToN3ZsCH91q93mkbVXgUg7Yt4K6c7WBIk64cBmgCNGKKaSrWQCiH9ZKxWTSC
+ EM9WBiVZRtw2w==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon,  4 Jan 2021 16:54:42 -0800
-Message-Id: <20210105005452.92521-4-ebiggers@kernel.org>
+Date: Mon,  4 Jan 2021 16:54:43 -0800
+Message-Id: <20210105005452.92521-5-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210105005452.92521-1-ebiggers@kernel.org>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
@@ -68,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kwad3-00E0Oy-0K
-Subject: [f2fs-dev] [PATCH 03/13] fs: only specify I_DIRTY_TIME when needed
- in generic_update_time()
+X-Headers-End: 1kwad3-00E0P0-0J
+Subject: [f2fs-dev] [PATCH 04/13] fat: only specify I_DIRTY_TIME when needed
+ in fat_update_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,62 +91,39 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-generic_update_time() always passes I_DIRTY_TIME to
-__mark_inode_dirty(), which doesn't really make sense because (a)
-generic_update_time() might be asked to do only an i_version update, not
-also a timestamps update; and (b) I_DIRTY_TIME is only supposed to be
-set in i_state if the filesystem has lazytime enabled, so using it
-unconditionally in generic_update_time() is inconsistent.
-
-As a result there is a weird edge case where if only an i_version update
-was requested (not also a timestamps update) but it is no longer needed
-(i.e. inode_maybe_inc_iversion() returns false), then I_DIRTY_TIME will
-be set in i_state even if the filesystem isn't mounted with lazytime.
-
-Fix this by only passing I_DIRTY_TIME to __mark_inode_dirty() if the
-timestamps were updated and the filesystem has lazytime enabled.
+As was done for generic_update_time(), only pass I_DIRTY_TIME to
+__mark_inode_dirty() when the inode's timestamps were actually updated
+and lazytime is enabled.  This avoids a weird edge case where
+I_DIRTY_TIME could be set in i_state when lazytime isn't enabled.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/inode.c | 38 ++++++++++++++++++++------------------
- 1 file changed, 20 insertions(+), 18 deletions(-)
+ fs/fat/misc.c | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/fs/inode.c b/fs/inode.c
-index 6442d97d9a4ab..d0fa43d8e9d5c 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -1743,24 +1743,26 @@ static int relatime_need_update(struct vfsmount *mnt, struct inode *inode,
+diff --git a/fs/fat/misc.c b/fs/fat/misc.c
+index f1b2a1fc2a6a4..33e1e0c9fd634 100644
+--- a/fs/fat/misc.c
++++ b/fs/fat/misc.c
+@@ -329,21 +329,22 @@ EXPORT_SYMBOL_GPL(fat_truncate_time);
  
- int generic_update_time(struct inode *inode, struct timespec64 *time, int flags)
+ int fat_update_time(struct inode *inode, struct timespec64 *now, int flags)
  {
 -	int iflags = I_DIRTY_TIME;
 -	bool dirty = false;
--
--	if (flags & S_ATIME)
--		inode->i_atime = *time;
++	int dirty_flags = 0;
+ 
+ 	if (inode->i_ino == MSDOS_ROOT_INO)
+ 		return 0;
+ 
+-	fat_truncate_time(inode, now, flags);
 -	if (flags & S_VERSION)
 -		dirty = inode_maybe_inc_iversion(inode, false);
--	if (flags & S_CTIME)
--		inode->i_ctime = *time;
--	if (flags & S_MTIME)
--		inode->i_mtime = *time;
 -	if ((flags & (S_ATIME | S_CTIME | S_MTIME)) &&
 -	    !(inode->i_sb->s_flags & SB_LAZYTIME))
 -		dirty = true;
--
--	if (dirty)
--		iflags |= I_DIRTY_SYNC;
--	__mark_inode_dirty(inode, iflags);
-+	int dirty_flags = 0;
-+
 +	if (flags & (S_ATIME | S_CTIME | S_MTIME)) {
-+		if (flags & S_ATIME)
-+			inode->i_atime = *time;
-+		if (flags & S_CTIME)
-+			inode->i_ctime = *time;
-+		if (flags & S_MTIME)
-+			inode->i_mtime = *time;
-+
++		fat_truncate_time(inode, now, flags);
 +		if (inode->i_sb->s_flags & SB_LAZYTIME)
 +			dirty_flags |= I_DIRTY_TIME;
 +		else
@@ -155,11 +132,12 @@ index 6442d97d9a4ab..d0fa43d8e9d5c 100644
 +
 +	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
 +		dirty_flags |= I_DIRTY_SYNC;
-+
-+	__mark_inode_dirty(inode, dirty_flags);
+ 
+-	if (dirty)
+-		iflags |= I_DIRTY_SYNC;
+ 	__mark_inode_dirty(inode, iflags);
  	return 0;
  }
- EXPORT_SYMBOL(generic_update_time);
 -- 
 2.30.0
 
