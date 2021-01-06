@@ -2,104 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2BA52EB679
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Jan 2021 00:49:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F32822EB757
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Jan 2021 02:03:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kww5N-0006Hx-HE; Tue, 05 Jan 2021 23:49:57 +0000
+	id 1kwxEY-0001pB-5c; Wed, 06 Jan 2021 01:03:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kww5M-0006Hr-Ut
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 23:49:56 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kwxEW-0001p3-9I
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jan 2021 01:03:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=whc2U5gu5zwKqW7Z1BCd12zYqBfLakFsyLK0IzuWzP8=; b=If6P8Z8U1LvvIefZKhwLRsORmW
- FMxGxarYJWje63PpO/df0hl2FsoXNSYNm9MPrYxR0oemNG0XwR7zIrG3jaydBWQaZL1gr20Chvswn
- ki5o1fws5TViDW/y33W0p3VQt6J4F8ufRMA3/qOtDGqChqmfuPdAGawrQC27vSU3dDk4=;
+ bh=Xw9rKABBLhxipqqh0s5RPLCgWGX6LtUAOv4zKgAriNo=; b=ZDzQUDZ1JMlJICvsyuQc+Oh+97
+ 4aObwJSics7qxjs0fnOHF/TyXoBDEskqCiPgweX5lSJHvwd51EYJ5L0sVLTy+jOzDPotjZAruKssr
+ YSalg2xjskH6AZ8RTtJO+qopA3IfAfuZq7W3DJlX4OIo+CHA6DAgf3niv+r5AFqFMiWs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=whc2U5gu5zwKqW7Z1BCd12zYqBfLakFsyLK0IzuWzP8=; b=W
- AhPZJEsjLTZMSqaB1An14ppeCLGHbtE6RJfjE+vc8nr/WDv2lRaCvrKrZs6efb1jjzchU8MF15NOv
- u0RucNmWyHPd/Y2Rj8AS+4ZOymdV1wlcXyHND8Zv9qrtnJVtMbEzfqGkS4G68ionshG0STpqbNud9
- ddmHa3bE5Gl0WT1M=;
-Received: from mail-pl1-f181.google.com ([209.85.214.181])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kww5G-00CGUG-2K
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 05 Jan 2021 23:49:56 +0000
-Received: by mail-pl1-f181.google.com with SMTP id be12so618996plb.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 05 Jan 2021 15:49:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=whc2U5gu5zwKqW7Z1BCd12zYqBfLakFsyLK0IzuWzP8=;
- b=RSYt8aWDjjxG6udavDTUY19W7lHxifCi8492IhANNtipB66/pAWN4AWXhxP+tKJjzj
- NAt6EZe3Zc49FsV8iZqgXQYgJhiyWJGhH2M+FU4a+hrkDhxcKleEPmDxC/dbtEfz1xUt
- pCyc5Z1UjpWdgzYdXymMqBg4/iQss87JLDkc3GBlPcvhXS8glcjpf6uYvbc7H/RMDvu/
- CFA768T2YFosp2nuzRHipHGrkO/FmljBtLCcy/EAk49H2eGvFNq+g4C5l8ia3GpKPluR
- YyRYxluQN/pzIVaPgOrg0Aeix4rrrI4HowMzphddpO2W6+g+v6qwwgOxUHV7jgOodkf9
- oyDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=whc2U5gu5zwKqW7Z1BCd12zYqBfLakFsyLK0IzuWzP8=;
- b=RCLAUt/rxEPmZe5QsdAD/8VjVDkKW/3eHsDIn+cBVCkYAFsGrlRdfonDw1kF+Q0kHv
- LD2TbNp9Ngbf8rscOxIfQmB1MDqb/qaVEX8GXV92YIP8kvTpNLR7lU5uls3rIRN09zTH
- huvh/Jzpb8jWGA0M9B0dl6HO58Npw194uPKwVGmYih/ljvx0x0TI/5YdxupStZYguEJS
- r7FjbDNiVT9ioiga1Q8L6HBzKj4WVGx5D0TkPQ6GOwD3W3Dq9T9ijILFziQZljxEGH7X
- Wvbs1KqS1ITtMntRZxO8Lz3dP8XPMz27cWoWmuTJbdRtj3IM12WG0crkhzqSU/VX8bDJ
- /lXQ==
-X-Gm-Message-State: AOAM530yCTCyEM5QNlEIsqdi1/sPtrdpsv8JHydO7gC+I4vhTm9encIU
- 742b7UshkQLDvLw6MfzqTiw=
-X-Google-Smtp-Source: ABdhPJwL704VReSw6jgByR6yvKwqCTroZ13+bPc6/tofWoYLUxpY5mR6MoNopmnlk4n6HDG6LBwFJA==
-X-Received: by 2002:a17:902:b693:b029:da:e92c:fc23 with SMTP id
- c19-20020a170902b693b02900dae92cfc23mr1531675pls.55.1609890577267; 
- Tue, 05 Jan 2021 15:49:37 -0800 (PST)
-Received: from daehojeong1.seo.corp.google.com
- ([2401:fa00:d:11:a6ae:11ff:fe18:6ce2])
- by smtp.gmail.com with ESMTPSA id 8sm285724pgx.48.2021.01.05.15.49.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Jan 2021 15:49:36 -0800 (PST)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed,  6 Jan 2021 08:49:28 +0900
-Message-Id: <20210105234928.1598326-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Xw9rKABBLhxipqqh0s5RPLCgWGX6LtUAOv4zKgAriNo=; b=Osu6LWrYCBcamFm/10wIF+Hz9u
+ eKCtvx9dnlMmvSeUwR2zjAYoP+dufXWzEOEQOPMBDXbAMMUpqxugZ+2kJY6duwUN2o7GyKNHQHjnO
+ TpX+QohLtWyuR8Wwu8eOah08a//tTO9a1H1s33U0ufjmVUCFOb3eNwWyjQDlqnlg5e7Q=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kwxEP-000wlc-4k
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jan 2021 01:03:28 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4D9WKh0WRbzMFxr;
+ Wed,  6 Jan 2021 09:02:00 +0800 (CST)
+Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 6 Jan 2021
+ 09:03:08 +0800
+To: Daeho Jeong <daehojeong@google.com>
+References: <20210105041630.1393157-1-daeho43@gmail.com>
+ <dba4be04-70dd-d48b-391c-1f2355591097@web.de>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <6c8e6561-8a5d-010f-3d7c-8c051b4027e6@huawei.com>
+Date: Wed, 6 Jan 2021 09:03:08 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <dba4be04-70dd-d48b-391c-1f2355591097@web.de>
+Content-Language: en-US
+X-Originating-IP: [10.136.114.67]
+X-CFilter-Loop: Reflected
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.214.181 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.181 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: spinics.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kww5G-00CGUG-2K
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix null page reference in
+ -0.2 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1kwxEP-000wlc-4k
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix null page reference in
  redirty_blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,50 +82,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Colin Ian King <colin.king@canonical.com>,
- Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Markus Elfring <Markus.Elfring@web.de>,
+ Colin Ian King <colin.king@canonical.com>, kernel-team@android.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+Daeho,
 
-By Colin's static analysis, we found out there is a null page reference
-under low memory situation in redirty_blocks. I've made the page finding
-loop stop immediately and return an error not to cause further memory
-pressure when we run into a failure to find a page under low memory
-condition.
+FYI
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Reported-by: Colin Ian King <colin.king@canonical.com>
-Fixes: 5fdb322ff2c2 ("f2fs: add F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE")
----
-v2: changed error value and quit the page finding loop immediately
-    when error occurs
----
- fs/f2fs/file.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+https://www.spinics.net/lists/kernel/msg3595944.html
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9e5275716be8..d27173c24391 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4060,8 +4060,10 @@ static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
- 
- 	for (i = 0; i < page_len; i++, redirty_idx++) {
- 		page = find_lock_page(mapping, redirty_idx);
--		if (!page)
--			ret = -ENOENT;
-+		if (!page) {
-+			ret = -ENOMEM;
-+			break;
-+		}
- 		set_page_dirty(page);
- 		f2fs_put_page(page, 1);
- 		f2fs_put_page(page, 0);
--- 
-2.29.2.729.g45daf8777d-goog
-
+On 2021/1/5 20:04, Markus Elfring wrote:
+>> Fixed null page reference when find_lock_page() fails in
+>> redirty_blocks().
+> 
+> I suggest to choose an other imperative wording for this change description.
+> 
+> See also:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/submitting-patches.rst?id=36bbbd0e234d817938bdc52121a0f5473b3e58f5#n89
+> 
+> 
+>> v2: changed error value and break the loop when error occurs
+> 
+> I propose to use a return statement instead of a break in the second if branch
+> for this function implementation.
+> 
+> See also:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/coding-style.rst?id=36bbbd0e234d817938bdc52121a0f5473b3e58f5#n481
+> 
+> Regards,
+> Markus
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
+> 
 
 
 _______________________________________________
