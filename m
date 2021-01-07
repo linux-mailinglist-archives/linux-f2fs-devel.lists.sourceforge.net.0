@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB9E92ED323
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 16:01:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A81742ED726
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 20:07:10 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kxWn8-0004pE-Su; Thu, 07 Jan 2021 15:01:34 +0000
+	id 1kxaci-0005Je-UC; Thu, 07 Jan 2021 19:07:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1kxWn8-0004p7-0S
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 15:01:34 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kxach-0005JX-LD
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:07:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rlt23EkBPxKCTsUQC+ORG3e/Em19JiHhSLMj3woiVuo=; b=YJgwkpz32CrWn1HkCWWVT9xwx4
- d7nEfaxiHbw9JwoqUTFtk56qqk2LGv8JM1VpRTqTae5N6a7XY0aooHQpUr9t2dIVQa0yLkwZZbJYt
- y/rZnLKzVaE3TXcFC2Q3ARgKFjsophOiW64+Plt2HH7vVCK4ouQeffypXCnLvpBn5Y2w=;
+ bh=2/v1BqO/mLBmXs8aohWePC7KZ85MTGX/YyHi3Yum6x8=; b=dP/Ypv+0LHxgbM4SFc5bARf8nd
+ kLfNI2oSsaCwIh5MRXmBU/gORUWH3GHmFjirRENEMNYx+xD85+feSEezN1W6vchcDsvcWcoTVqvi4
+ g8L/6QvRcOlyFrpQEh6w5QfAgNtEzFXt2eHf/wmH45kHl64p8wIhuEGzbT+YsRPZkCU8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,49 +29,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rlt23EkBPxKCTsUQC+ORG3e/Em19JiHhSLMj3woiVuo=; b=b+2cl1/CFevsE15qKavPM8cvA5
- 333nphvWsG24pvYaImAnodnvn9KvSHRj8zzASFy2puOE+n36IZuJtBb7H3dIbRNe9rdCDDShe8zVA
- Pb8NIyHeZnZTGHMQyFuhieSfwW69Wm4YUrlqm55bIZBErgDAPUYwS/LQQ1EIR8mNLD38=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ bh=2/v1BqO/mLBmXs8aohWePC7KZ85MTGX/YyHi3Yum6x8=; b=F//r4P0qUf2shLsXPGEgtvcq1u
+ I2dAZfNtGUvAVJD6+eR0+7qBcQEnp0GQkPgksJvgWRRNtEftPTrmh0M6OD6lxnW50dGjv788+GXhq
+ grRtIRKLHGklVXUgfvI0SqKttfAB8CIK500wVzov1MymrBE/ScFHiqu1+ZFjYaRkpga4=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kxWmt-004U0O-Bo
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 15:01:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=rlt23EkBPxKCTsUQC+ORG3e/Em19JiHhSLMj3woiVuo=; b=vLipm221NPJuEUlgaq3Ay399v4
- TNZP5WpHweX3MPFQvCCsidDC20GzcGPuQfqv0OSzrrwx6IZNsf0baeD20EQJhHMSzJeeLB75hzYJI
- tfM94Emz3mKv/mXPn5iWdqGB35Il0rUSLpZWlMciAozBUV4IUywvuIU4w2gUermQjkH8Iyf2pvLoi
- L2FeDcbj+XoJJKUmGroW6WMmoUB2eHVo5+VOL+BCLDEAhpuU3/JbgeDWUXnn6ikjUpADaddGjIeeu
- XRnWEdnKilwM7+O/9iw5XT2v9qwsOE+/MhOwbQfePjCsyL+2Ji7B0KIGxNeQtQvmQ1F6m5+kbx6kj
- 7rOEkooQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1kxWkH-0009Mi-0g; Thu, 07 Jan 2021 14:59:13 +0000
-Date: Thu, 7 Jan 2021 14:58:37 +0000
-From: Matthew Wilcox <willy@infradead.org>
+ id 1kxacc-00CW9M-Id
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:07:03 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C66ED2343E;
+ Thu,  7 Jan 2021 19:06:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1610046413;
+ bh=TozHh8L5vYEuR54Tj/jUaA6Qe0QF9OsgDOXAbm07fiA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Q8xVK9Z8yvGQiz7qgq4RnAT33rH+kBsUlJ4SJZhUcUlZ6xyWlpOb0gNuTMgxqoICc
+ fPXQ9k7hD9U5EC2IHF1mmAwr4hjUUptnniBEZV2T7PUV1jTIO6yerBkcQhNByM91gS
+ mnu3XB+t9CAlLXDQdVaGyPtWIW8RGcmRVmCA3SpeFtmY5AmpnQywDN4T8d7XU2KoI7
+ J2Qa2lG3n5UYUbEObzt4d0xd52mFrgpzIBF4hVCVd/9gSN3+TZ5AE3pVnFQ4vRvzd0
+ 6woZyzRvt2oZbwmqEuZn79y+dpKpfqnnQ0EnqQi2uWCc+4CeP0ZZml/sOnapbgUFDR
+ eI/4T7W3lJrOQ==
+Date: Thu, 7 Jan 2021 11:06:51 -0800
+From: Eric Biggers <ebiggers@kernel.org>
 To: Jan Kara <jack@suse.cz>
-Message-ID: <20210107145837.GA5270@casper.infradead.org>
+Message-ID: <X/dbyxqr9iyf7ZbO@gmail.com>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
- <20210105005452.92521-2-ebiggers@kernel.org>
- <20210107144709.GG12990@quack2.suse.cz>
+ <20210105005452.92521-9-ebiggers@kernel.org>
+ <20210107132412.GE12990@quack2.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210107144709.GG12990@quack2.suse.cz>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20210107132412.GE12990@quack2.suse.cz>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1kxWmt-004U0O-Bo
-Subject: Re: [f2fs-dev] [PATCH 01/13] fs: avoid double-writing inodes on
- lazytime expiration
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kxacc-00CW9M-Id
+Subject: Re: [f2fs-dev] [PATCH 08/13] ext4: simplify i_state checks in
+ __ext4_update_other_inode_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,27 +84,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org,
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 07, 2021 at 03:47:09PM +0100, Jan Kara wrote:
-> I think attached patch (compile-tested only) should actually fix the
-> problem as well without this special ->dirty_inode() call. It basically
-> only moves the mark_inode_dirty_sync() before inode->i_state clearing.
-> Because conceptually mark_inode_dirty_sync() is IMO the right function to
-> call. It will take care of clearing I_DIRTY_TIME flag (because we are
-> setting I_DIRTY_SYNC), it will also not touch inode->i_io_list if the inode
-> is queued for sync (I_SYNC_QUEUED is set in that case). The only problem
-> with calling it was that it was called *after* clearing dirty bits from
-> i_state... What do you think?
+On Thu, Jan 07, 2021 at 02:24:12PM +0100, Jan Kara wrote:
+> On Mon 04-01-21 16:54:47, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > Since I_DIRTY_TIME and I_DIRTY_INODE are mutually exclusive in i_state,
+> > there's no need to check for I_DIRTY_TIME && !I_DIRTY_INODE.  Just check
+> > for I_DIRTY_TIME.
+> > 
+> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+> > ---
+> >  fs/ext4/inode.c | 8 +++-----
+> >  1 file changed, 3 insertions(+), 5 deletions(-)
+> > 
+> > diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+> > index 4cc6c7834312f..9e34541715968 100644
+> > --- a/fs/ext4/inode.c
+> > +++ b/fs/ext4/inode.c
+> > @@ -4962,14 +4962,12 @@ static void __ext4_update_other_inode_time(struct super_block *sb,
+> >  		return;
+> >  
+> >  	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> > -			       I_DIRTY_INODE)) ||
+> > -	    ((inode->i_state & I_DIRTY_TIME) == 0))
+> > +			       I_DIRTY_TIME)) != I_DIRTY_TIME)
+> >  		return;
+> 
+> This is OK.
+> 
+> >  	spin_lock(&inode->i_lock);
+> > -	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> > -				I_DIRTY_INODE)) == 0) &&
+> > -	    (inode->i_state & I_DIRTY_TIME)) {
+> > +	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> > +			       I_DIRTY_TIME)) != I_DIRTY_TIME) {
+> 
+> But this condition is negated AFAICT. We should have == I_DIRTY_TIME here
+> AFAICT.
 
-I like this patch far more, fwiw.
+Indeed, I'll fix that.  Thanks for catching this!
 
+- Eric
 
 
 _______________________________________________
