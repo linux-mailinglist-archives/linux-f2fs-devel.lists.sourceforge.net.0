@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A81742ED726
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 20:07:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFE592ED742
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 20:10:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kxaci-0005Je-UC; Thu, 07 Jan 2021 19:07:04 +0000
+	id 1kxag6-0002qN-0x; Thu, 07 Jan 2021 19:10:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kxach-0005JX-LD
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:07:03 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kxag4-0002qF-Pw
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:10:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2/v1BqO/mLBmXs8aohWePC7KZ85MTGX/YyHi3Yum6x8=; b=dP/Ypv+0LHxgbM4SFc5bARf8nd
- kLfNI2oSsaCwIh5MRXmBU/gORUWH3GHmFjirRENEMNYx+xD85+feSEezN1W6vchcDsvcWcoTVqvi4
- g8L/6QvRcOlyFrpQEh6w5QfAgNtEzFXt2eHf/wmH45kHl64p8wIhuEGzbT+YsRPZkCU8=;
+ bh=8cXvA0qY3ExeTqFee+9RP9TR8md6kCEtn3skU4MKRCA=; b=ji+YpE1FmsLm5MwRoBnYVWxCiV
+ EgEeDvWTrPapq5yEAmIryHvMYablDUio7nLSmzQYbN2Xm6OL+DQUYcTDZnqnDkg0I1K2AO6utwaf3
+ Bs0PpkiIDpSiZR4LoaBBTPlFvUBo6SzNJiYKR1Bzu5+y/Q1wgDJCDkT9dckc8PVZ/F8Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2/v1BqO/mLBmXs8aohWePC7KZ85MTGX/YyHi3Yum6x8=; b=F//r4P0qUf2shLsXPGEgtvcq1u
- I2dAZfNtGUvAVJD6+eR0+7qBcQEnp0GQkPgksJvgWRRNtEftPTrmh0M6OD6lxnW50dGjv788+GXhq
- grRtIRKLHGklVXUgfvI0SqKttfAB8CIK500wVzov1MymrBE/ScFHiqu1+ZFjYaRkpga4=;
+ bh=8cXvA0qY3ExeTqFee+9RP9TR8md6kCEtn3skU4MKRCA=; b=eVLcy8hD8XHVSVqYLj3/NBCoV3
+ F8xqL8bMjSplCfRY4KfpRX/HUSxuxfGrZtcWhkqwCN15B6PTNKy6tXnIAq3sNWveQrTLDPRqxNUTc
+ DL6TV+nU/szH0+uT3iGhEbfglskP+kZXhaJCoFlLe02dP5Hjkg35P+imbSW1NZANW23k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kxacc-00CW9M-Id
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:07:03 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C66ED2343E;
- Thu,  7 Jan 2021 19:06:52 +0000 (UTC)
+ id 1kxag0-005plr-Ph
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 19:10:32 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6CB4123432;
+ Thu,  7 Jan 2021 19:10:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610046413;
- bh=TozHh8L5vYEuR54Tj/jUaA6Qe0QF9OsgDOXAbm07fiA=;
+ s=k20201202; t=1610046609;
+ bh=ugnw0oxMzEvCu/VUG9GeA+AsDxtnUhs9qU+595smXXc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Q8xVK9Z8yvGQiz7qgq4RnAT33rH+kBsUlJ4SJZhUcUlZ6xyWlpOb0gNuTMgxqoICc
- fPXQ9k7hD9U5EC2IHF1mmAwr4hjUUptnniBEZV2T7PUV1jTIO6yerBkcQhNByM91gS
- mnu3XB+t9CAlLXDQdVaGyPtWIW8RGcmRVmCA3SpeFtmY5AmpnQywDN4T8d7XU2KoI7
- J2Qa2lG3n5UYUbEObzt4d0xd52mFrgpzIBF4hVCVd/9gSN3+TZ5AE3pVnFQ4vRvzd0
- 6woZyzRvt2oZbwmqEuZn79y+dpKpfqnnQ0EnqQi2uWCc+4CeP0ZZml/sOnapbgUFDR
- eI/4T7W3lJrOQ==
-Date: Thu, 7 Jan 2021 11:06:51 -0800
+ b=uzAA66kWcPLR+x63v+LqKAzMM+XIi7OLLeFPJnrnJr8HiXBD0cpnycMS7Qc3/itD4
+ 1RahCBIag+8k6tMafM4Y6NrdDnUHTWzvpcpEc1udfzBenqBXNFs4UGnN9lm1A4Oem7
+ 1zXX31jYIsOi8AHDvw1+aGei6dLaXkMaNRx1hI2k2adYhVV31wF9S1l6aUn9WcGniB
+ L71IfDgf/Tdi4KOkiOr/3HXW06QcTVpFyeTERgdtUitkJHusKeFuTeIpGveCOYzBYJ
+ ayT/ALAvXzfY/PMg8U8pR2z1cMP4KHNCDQljnu9ApQ7gmO/B+3I2E+vZlMWLLNT9+3
+ bV5gdGJokgPkg==
+Date: Thu, 7 Jan 2021 11:10:07 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Jan Kara <jack@suse.cz>
-Message-ID: <X/dbyxqr9iyf7ZbO@gmail.com>
+Message-ID: <X/dcjzkF0Ac4t66J@gmail.com>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
- <20210105005452.92521-9-ebiggers@kernel.org>
- <20210107132412.GE12990@quack2.suse.cz>
+ <20210105005452.92521-5-ebiggers@kernel.org>
+ <20210107131328.GC12990@quack2.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210107132412.GE12990@quack2.suse.cz>
+In-Reply-To: <20210107131328.GC12990@quack2.suse.cz>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,9 +70,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kxacc-00CW9M-Id
-Subject: Re: [f2fs-dev] [PATCH 08/13] ext4: simplify i_state checks in
- __ext4_update_other_inode_time()
+X-Headers-End: 1kxag0-005plr-Ph
+Subject: Re: [f2fs-dev] [PATCH 04/13] fat: only specify I_DIRTY_TIME when
+ needed in fat_update_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,45 +91,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 07, 2021 at 02:24:12PM +0100, Jan Kara wrote:
-> On Mon 04-01-21 16:54:47, Eric Biggers wrote:
+On Thu, Jan 07, 2021 at 02:13:28PM +0100, Jan Kara wrote:
+> On Mon 04-01-21 16:54:43, Eric Biggers wrote:
 > > From: Eric Biggers <ebiggers@google.com>
 > > 
-> > Since I_DIRTY_TIME and I_DIRTY_INODE are mutually exclusive in i_state,
-> > there's no need to check for I_DIRTY_TIME && !I_DIRTY_INODE.  Just check
-> > for I_DIRTY_TIME.
+> > As was done for generic_update_time(), only pass I_DIRTY_TIME to
+> > __mark_inode_dirty() when the inode's timestamps were actually updated
+> > and lazytime is enabled.  This avoids a weird edge case where
+> > I_DIRTY_TIME could be set in i_state when lazytime isn't enabled.
 > > 
 > > Signed-off-by: Eric Biggers <ebiggers@google.com>
-> > ---
-> >  fs/ext4/inode.c | 8 +++-----
-> >  1 file changed, 3 insertions(+), 5 deletions(-)
-> > 
-> > diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-> > index 4cc6c7834312f..9e34541715968 100644
-> > --- a/fs/ext4/inode.c
-> > +++ b/fs/ext4/inode.c
-> > @@ -4962,14 +4962,12 @@ static void __ext4_update_other_inode_time(struct super_block *sb,
-> >  		return;
+> 
+> ...
+> > +	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
+> > +		dirty_flags |= I_DIRTY_SYNC;
 > >  
-> >  	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > -			       I_DIRTY_INODE)) ||
-> > -	    ((inode->i_state & I_DIRTY_TIME) == 0))
-> > +			       I_DIRTY_TIME)) != I_DIRTY_TIME)
-> >  		return;
+> > -	if (dirty)
+> > -		iflags |= I_DIRTY_SYNC;
+> >  	__mark_inode_dirty(inode, iflags);
+> 				  ^^^ dirty_flags here?
 > 
-> This is OK.
-> 
-> >  	spin_lock(&inode->i_lock);
-> > -	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > -				I_DIRTY_INODE)) == 0) &&
-> > -	    (inode->i_state & I_DIRTY_TIME)) {
-> > +	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > +			       I_DIRTY_TIME)) != I_DIRTY_TIME) {
-> 
-> But this condition is negated AFAICT. We should have == I_DIRTY_TIME here
-> AFAICT.
+> Otherwise the change looks good to me.
 
-Indeed, I'll fix that.  Thanks for catching this!
+Yeah, I'll fix that.  I accidentally didn't have CONFIG_FAT_FS enabled.
 
 - Eric
 
