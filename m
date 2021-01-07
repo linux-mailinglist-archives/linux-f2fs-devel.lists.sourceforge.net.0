@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D3002ED082
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 14:19:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id F13932ED0A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Jan 2021 14:24:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kxVC2-0006py-Mb; Thu, 07 Jan 2021 13:19:10 +0000
+	id 1kxVH9-0006hg-AZ; Thu, 07 Jan 2021 13:24:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jack@suse.cz>) id 1kxVC0-0006pr-Cq
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 13:19:08 +0000
+ (envelope-from <jack@suse.cz>) id 1kxVH7-0006hQ-T8
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 13:24:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a6w5EPe3u2kEIsuhAHgCf//J8LlMZwRrQB5I4LCozog=; b=VbTLtklWnCUNu0T1RIKeY79i5r
- 5A38vTH6mL1l/fs9c1dDzK6NNXtDIs8Ng9kl6dexG/i5VNJpMuQ83nvzK2QU2Z9nAnjsiVXaQTer0
- H/XQo5HkoFQ9p2/TDVKvyqQqwmfOnYz7iUJf7Kwjao60q6NNBexk6MGkAsgLIBsy0FB4=;
+ bh=x6d8jTAVGAa8a1PccGOO8u0l4P48YgAakdhUKjx39dM=; b=J4ilCkdNgUji0qM6XANWG3HOVZ
+ Nyv9oFkkshym7+C7dOW3E8BmvFRfpDozXANdljS1gTXkNkTuCd0OBfdf872Uw4mc92zI+MFyhEvAk
+ PRiv0ZdKFhxOIH6MxBRW1jqHvnPNVUEgrCuuqCBs1VpS29rbn8EO6TfhSKYeEYR4p7xE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,30 +29,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=a6w5EPe3u2kEIsuhAHgCf//J8LlMZwRrQB5I4LCozog=; b=LpDbs/v9grVpUtnEqDaAP9ceXm
- RhX6Psnr1NwDJ7EOdJCKzKOpk3207ygSK2J4vQo1oe1rCbFRgXaV1XpZqawisbLN1pRet21qH+DTM
- jIiOYyd/8tv+2zU5exwFW+H1BIRMJFrpv/Ulzv3fpkV9/o6+XIsgCaw6c6Cz8Im8MRDs=;
+ bh=x6d8jTAVGAa8a1PccGOO8u0l4P48YgAakdhUKjx39dM=; b=MxKkE7wm5Jv8f7/+5VfnVGDMBu
+ BsJyeLmWhm9IARlIoNl3IduRFpEwf7qLCuspjcaX9aRwCehzFA7zo2u5841mKTPUIQXas/h4gPJCe
+ EDDc8lLpYxR+6mPiQpjbkAuFGokdRq35aT+BgvMMvkQoplaOMXK2Kr5hA10tnxKxklfM=;
 Received: from mx2.suse.de ([195.135.220.15])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kxVBs-0045tl-AS
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 13:19:08 +0000
+ id 1kxVH1-00Ak6L-JH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 07 Jan 2021 13:24:25 +0000
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 05D4CAD12;
- Thu,  7 Jan 2021 13:18:54 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 45A53AD12;
+ Thu,  7 Jan 2021 13:24:13 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id C69871E0872; Thu,  7 Jan 2021 14:18:53 +0100 (CET)
-Date: Thu, 7 Jan 2021 14:18:53 +0100
+ id 019341E0872; Thu,  7 Jan 2021 14:24:12 +0100 (CET)
+Date: Thu, 7 Jan 2021 14:24:12 +0100
 From: Jan Kara <jack@suse.cz>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20210107131853.GA10535@quack2.suse.cz>
+Message-ID: <20210107132412.GE12990@quack2.suse.cz>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
- <20210105005452.92521-6-ebiggers@kernel.org>
- <20210107131753.GD12990@quack2.suse.cz>
+ <20210105005452.92521-9-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210107131753.GD12990@quack2.suse.cz>
+In-Reply-To: <20210105005452.92521-9-ebiggers@kernel.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -66,9 +65,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kxVBs-0045tl-AS
-Subject: Re: [f2fs-dev] [PATCH 05/13] fs: don't call ->dirty_inode for
- lazytime timestamp updates
+X-Headers-End: 1kxVH1-00Ak6L-JH
+Subject: Re: [f2fs-dev] [PATCH 08/13] ext4: simplify i_state checks in
+ __ext4_update_other_inode_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,46 +86,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu 07-01-21 14:17:53, Jan Kara wrote:
-> On Mon 04-01-21 16:54:44, Eric Biggers wrote:
-> > From: Eric Biggers <ebiggers@google.com>
-> > 
-> > There is no need to call ->dirty_inode for lazytime timestamp updates
-> > (i.e. for __mark_inode_dirty(I_DIRTY_TIME)), since by the definition of
-> > lazytime, filesystems must ignore these updates.  Filesystems only need
-> > to care about the updated timestamps when they expire.
-> > 
-> > Therefore, only call ->dirty_inode when I_DIRTY_INODE is set.
-> > 
-> > Based on a patch from Christoph Hellwig:
-> > https://lore.kernel.org/r/20200325122825.1086872-4-hch@lst.de
-> > 
-> > Signed-off-by: Eric Biggers <ebiggers@google.com>
+On Mon 04-01-21 16:54:47, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> ...
+> Since I_DIRTY_TIME and I_DIRTY_INODE are mutually exclusive in i_state,
+> there's no need to check for I_DIRTY_TIME && !I_DIRTY_INODE.  Just check
+> for I_DIRTY_TIME.
 > 
-> > diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
-> > index 081e335cdee47..e3347fd6eb13a 100644
-> > --- a/fs/fs-writeback.c
-> > +++ b/fs/fs-writeback.c
-> > @@ -2264,16 +2264,16 @@ void __mark_inode_dirty(struct inode *inode, int flags)
-> >  	 * Don't do this for I_DIRTY_PAGES - that doesn't actually
-> >  	 * dirty the inode itself
-> >  	 */
-> > -	if (flags & (I_DIRTY_INODE | I_DIRTY_TIME)) {
-> > +	if (flags & I_DIRTY_INODE) {
-> >  		trace_writeback_dirty_inode_start(inode, flags);
-> >  
-> >  		if (sb->s_op->dirty_inode)
-> >  			sb->s_op->dirty_inode(inode, flags);
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/ext4/inode.c | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
 > 
-> OK, but shouldn't we pass just (flags & I_DIRTY_INODE) to ->dirty_inode().
-> Just to make it clear what the filesystem is supposed to consume in
-> 'flags'...
+> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+> index 4cc6c7834312f..9e34541715968 100644
+> --- a/fs/ext4/inode.c
+> +++ b/fs/ext4/inode.c
+> @@ -4962,14 +4962,12 @@ static void __ext4_update_other_inode_time(struct super_block *sb,
+>  		return;
+>  
+>  	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> -			       I_DIRTY_INODE)) ||
+> -	    ((inode->i_state & I_DIRTY_TIME) == 0))
+> +			       I_DIRTY_TIME)) != I_DIRTY_TIME)
+>  		return;
 
-Aha, you just did that in the following patch ;) So taking back my comment.
+This is OK.
+
+>  	spin_lock(&inode->i_lock);
+> -	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> -				I_DIRTY_INODE)) == 0) &&
+> -	    (inode->i_state & I_DIRTY_TIME)) {
+> +	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
+> +			       I_DIRTY_TIME)) != I_DIRTY_TIME) {
+
+But this condition is negated AFAICT. We should have == I_DIRTY_TIME here
+AFAICT.
 
 								Honza
+
 -- 
 Jan Kara <jack@suse.com>
 SUSE Labs, CR
