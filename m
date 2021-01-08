@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 477192EEF4B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Jan 2021 10:16:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EDCC2EEF2C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Jan 2021 10:11:07 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kxnsJ-0000L6-NC; Fri, 08 Jan 2021 09:16:03 +0000
+	id 1kxnnV-0008Up-Rm; Fri, 08 Jan 2021 09:11:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hch@lst.de>) id 1kxnsH-0000Kr-TI
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Jan 2021 09:16:01 +0000
+ (envelope-from <hch@lst.de>) id 1kxnnM-0008UD-35
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Jan 2021 09:10:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l2WBiCb5duYJRA9nKpihqrJOH1Qjg6utSrFiu8qAdtc=; b=Xrwh3KDXrSH9h/g4e+9M/kixm9
- mxWF9y8B4YTht3aCKPlC2dMSio19BHryNwwQuuwPoF7T0Bd4wfBprFQspqkvoQD8Afo66As/CMqUF
- 1krARMllukcBr6nmPbxN6C6Ap1ULzW+HgQP/lblDN8yN7eVTaCIEcaHqg4Igx9TivM4I=;
+ bh=ZDMeCoYrOdkHWZ7zu9pNB1zGZRq66p543FzmoSOc7oY=; b=er39Gb5DTebC4mCJI0UZTCnzUr
+ D9SC+qsgx8IgT9XPyTo9kF2MUDiIt6ECdKJSnAONO/8IfGgSbDbj8ZxWM0X/wTh2QgYZAH3exx7Gm
+ 2PTkN6Q28pJD8GNjAijGBbBhWxvQLn2LYq82uK/DFze5b8ut9TuWhFmokXNK/7knEwug=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,38 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=l2WBiCb5duYJRA9nKpihqrJOH1Qjg6utSrFiu8qAdtc=; b=KZdR6Jf/1Ju7JmWY5SuGI0Siqj
- E/H1JCBOVxh6+rBrKLHJhZwTZ0ENGbMQnEWCHc9CLKl+cqIclWTxGqwBahW0fzXDdFT5i2foe0tf0
- gq1Ohed7Vu0Vhy20zW6yTmU1tEh5+HtEhWxgq+msjW1GiLGhzpaVWrsXSHjzQKb+HE1M=;
+ bh=ZDMeCoYrOdkHWZ7zu9pNB1zGZRq66p543FzmoSOc7oY=; b=TrZGcfbzzUwOgt8N8pRWgVxuV6
+ 1q5ZT92Rvxq3aIVqJFNK06PaDi2PwhX1mRiua3Wgux7TFH1teaWJLaurpbDxG7iBxf/u63219weKX
+ urFPtR2tlywHZ4BCePPuIbLmRJDokKCd1yS5TyJwL06utcl8M0zAXVdwcB9MGDDIPFAA=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kxns5-009Yyo-95
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Jan 2021 09:16:01 +0000
+ id 1kxnnF-009Y5G-89
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Jan 2021 09:10:56 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id E9B8A68B02; Fri,  8 Jan 2021 09:57:12 +0100 (CET)
-Date: Fri, 8 Jan 2021 09:57:12 +0100
+ id B6DD168B05; Fri,  8 Jan 2021 10:01:33 +0100 (CET)
+Date: Fri, 8 Jan 2021 10:01:33 +0100
 From: Christoph Hellwig <hch@lst.de>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20210108085712.GC1438@lst.de>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20210108090133.GD1438@lst.de>
 References: <20210105005452.92521-1-ebiggers@kernel.org>
- <20210105005452.92521-4-ebiggers@kernel.org>
+ <20210105005452.92521-2-ebiggers@kernel.org>
+ <20210107144709.GG12990@quack2.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210105005452.92521-4-ebiggers@kernel.org>
+In-Reply-To: <20210107144709.GG12990@quack2.suse.cz>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kxns5-009Yyo-95
-Subject: Re: [f2fs-dev] [PATCH 03/13] fs: only specify I_DIRTY_TIME when
- needed in generic_update_time()
+X-Headers-End: 1kxnnF-009Y5G-89
+Subject: Re: [f2fs-dev] [PATCH 01/13] fs: avoid double-writing inodes on
+ lazytime expiration
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,16 +69,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Looks good,
+> +	/*
+> +	 * If inode has dirty timestamps and we need to write them, call
+> +	 * mark_inode_dirty_sync() to notify filesystem about it.
+> +	 */
+> +	if (inode->i_state & I_DIRTY_TIME &&
+> +	    (wbc->for_sync || wbc->sync_mode == WB_SYNC_ALL ||
+> +	     time_after(jiffies, inode->dirtied_time_when +
+> +			dirtytime_expire_interval * HZ))) {
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+If we're touching this area, it would be nice to split this condition
+into a readable helper ala:
+
+static inline bool inode_needs_timestamp_sync(struct writeback_control *wbc,
+		struct inode *inode)
+{
+	if (!(inode->i_state & I_DIRTY_TIME))
+		return false;
+	if (wbc->for_sync || wbc->sync_mode == WB_SYNC_ALL)
+		return true;
+	return time_after(jiffies, inode->dirtied_time_when +
+			  dirtytime_expire_interval * HZ);
+}
 
 
 _______________________________________________
