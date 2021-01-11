@@ -2,80 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFB002F186A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Jan 2021 15:38:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F4AC2F1896
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Jan 2021 15:46:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kyyLG-0002WN-0K; Mon, 11 Jan 2021 14:38:46 +0000
+	id 1kyySb-0003nv-JH; Mon, 11 Jan 2021 14:46:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1kyyLE-0002W9-TT
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 14:38:44 +0000
+ (envelope-from <jack@suse.cz>) id 1kyySa-0003nh-Gp
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 14:46:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MEn5D2H1DvseGnHco2QmUfP8UjBCu5RqQQV0I8FZO5s=; b=eM0dkDExqKG9nyyQBPZABIi5gp
- iaDm+mK5v18Q2HgSFa0TeHJkfn0Z3JSfmwT8YDvm+IUsvzSpygWPC0l1CFO31BRBm4EutgkZbUvdc
- zCtZ8Ojy6N9sp2k/bEV1o5BS8qawF6OaMNrneZgD2y62ouNrxJJ6qwC0trAtWv3Y1T6M=;
+ bh=igwhTWH6zHolkq1l9RtyKVpnHE+u4wZKfmznjLT6j1o=; b=i5L72kVGySYQxGl7EXoPWrLK1t
+ T2aqSLOJVXsRrCZ1ickhrdOXqjJubrtbzwWJHhBRI7QElApV4RtqwsFhVhepB59qUAJ0c0XD/N/Gl
+ oG51xUCRhlAEb/90EczqshKh4vpFrmQ6dxn/2A7KjjyrSy7FaeVE+oXJYU20ZfBuFY9s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MEn5D2H1DvseGnHco2QmUfP8UjBCu5RqQQV0I8FZO5s=; b=MatNA00WFCKPjwVILCWFnDZkY3
- AUx1jcMsHRQXvd+CY519yU5LesxNh6QEVP+8Pi2P45SGdjDlgwCMyfZxc18yVF901oCpi8ngTt0g/
- 5mVUOiySfUwkTNIYdGyw/DAZ+M4hV200bsYGS+QEjMOcR9cqRVa1rH7NNJTOS9rWkTT8=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=igwhTWH6zHolkq1l9RtyKVpnHE+u4wZKfmznjLT6j1o=; b=ZbqTwgMnCn+jNYIQJmeb1LbMIz
+ n+yEp0GN0n3tms0y4PINjuiJUlygj6L2VcYvmF1iMFWLdtSMFQHDp1h8KxZAi/0QgHhQxt8l3HjiE
+ pexXwlvt7zesnyeRH7c/hDj4fMvMApfIG8gsSHhlX9/5YUn3JEdHRvlOsgmLZeemFQTU=;
+Received: from mx2.suse.de ([195.135.220.15])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kyyL4-009Xf3-1M
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 14:38:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id F0B8721744;
- Mon, 11 Jan 2021 14:38:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610375901;
- bh=u29FyUdZFH58g/whPLDIPxaQeAlRSOYjc55k0QhxjUw=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=gQZ29FWGO8BTW6PmW+kiI9GrVMEyTk2Ud25cJSzojV1bMjQRy1hC2ByXYSjMrPIBc
- sqLaAaHpVQd8OWPGC/JueO3bCA0G1v8cWfPOUSG28jfeFzBg/IquMNFKA+q9Ol/Mxi
- MBh07J2nbXRBXRo9tYkRMtWyA3nKHnPyq98fs/K0neC8SWMqa/xOWLWp+9LQVzEd+X
- equDLVnEk3Fs6PGuuG9iEAojFJshb/L/rezLulief77ikOagbdeALcYeE/FhhjbIAS
- B9JsBhA3vzlmaJcg0PsqXebIRvxFkDUB2vCo7l0KkOoLDmTvGwq0OP67oTnXAeH/Wo
- YDjvNPXn/RNag==
-To: cgxu519@mykernel.net, Chao Yu <yuchao0@huawei.com>
-References: <1610279329-5733-1-git-send-email-cgxu519@mykernel.net>
- <cbdc0859-929b-3e8c-a5ed-4f458f6c4bcc@huawei.com>
- <176f1b3a5ee.deaba0f757366.7662150588541968972@mykernel.net>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <6f0624b3-1f22-1599-1833-eef118ae24eb@kernel.org>
-Date: Mon, 11 Jan 2021 22:38:13 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ id 1kyySW-009Yfw-Kc
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 14:46:20 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 99D83AB3E;
+ Mon, 11 Jan 2021 14:46:00 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id 509B81E0807; Mon, 11 Jan 2021 15:46:00 +0100 (CET)
+Date: Mon, 11 Jan 2021 15:46:00 +0100
+From: Jan Kara <jack@suse.cz>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20210111144600.GC808@quack2.suse.cz>
+References: <20210109075903.208222-1-ebiggers@kernel.org>
+ <20210109075903.208222-2-ebiggers@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <176f1b3a5ee.deaba0f757366.7662150588541968972@mykernel.net>
-Content-Language: en-US
-X-Spam-Score: -0.4 (/)
+Content-Disposition: inline
+In-Reply-To: <20210109075903.208222-2-ebiggers@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kyyL4-009Xf3-1M
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: using generic_file_llseek()
- instead of generic_file_llseek_size()
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kyySW-009Yfw-Kc
+Subject: Re: [f2fs-dev] [PATCH v2 01/12] fs: fix lazytime expiration
+ handling in __writeback_single_inode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,29 +75,133 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk <jaegeuk@kernel.org>,
- linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Theodore Ts'o <tytso@mit.edu>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMS8xLzExIDIxOjQ3LCBDaGVuZ2d1YW5nIFh1IHdyb3RlOgo+ICAgLS0tLSDlnKgg5pif
-5pyf5LiALCAyMDIxLTAxLTExIDE1OjM1OjA3IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNvbT4g
-5pKw5YaZIC0tLS0KPiAgID4gT24gMjAyMS8xLzEwIDE5OjQ4LCBDaGVuZ2d1YW5nIFh1IHdyb3Rl
-Ogo+ICAgPiA+IGdlbmVyaWNfZmlsZV9sbHNlZWtfc2l6ZSgpIGlzIHVzZWQgZm9yIGZpbGVzeXN0
-ZW1zIHRoYXQgaGF2ZQo+ICAgPiA+IGEgY3VzdG9tIG1heGltdW0gc2l6ZSBhbmQgYSBjdXN0b20g
-RU9GIHBvc2l0aW9uLiBzbyBpdCdzIGJldHRlcgo+ICAgPiA+IHRvIHJlcGxhY2UgaXQgdXNpbmcg
-Z2VuZXJpY19maWxlX2xsc2VlaygpLgo+ICAgPgo+ICAgPiBGMkZTIGlub2RlIG1heSBoYXZlIGRp
-ZmZlcmVudCBtYXggc2l6ZSwgZS5nLiBjb21wcmVzc2VkIGZpbGUgaGF2ZQo+ICAgPiBsZXNzIGJs
-a2FkZHIgZW50cmllcyBpbiBhbGwgaXRzIGRpcmVjdC1ub2RlIGJsb2NrcywgcmVzdWx0IGluIGJl
-aW5nCj4gICA+IHdpdGggbGVzcyBtYXggZmlsZXNpemUuCj4gICA+Cj4gICA+IEkgZ3Vlc3Mgd2Ug
-c2hvdWxkIGNvbnNpZGVyIHRoYXQgd2hlbiBjaGVja2luZyBib3VuZGFyeSB3aXRoIHNfbWF4Ynl0
-ZXMsCj4gICA+IHNvIGhvdyBhYm91dCB1c2luZyBiZWxvdyBwYXRjaCBpbnN0ZWFkOgo+ICAgPgo+
-ICAgPiBTdWJqZWN0OiBbUEFUQ0hdIGYyZnM6IGZpeCB0byB1c2UgcGVyLWlub2RlIG1heGJ5dGVz
-Cj4gCj4gSGkgQ2hhbywKPiAKPiBUaGFua3MgZm9yIHlvdXIgcmV2aWV3IGFuZCBzdWdnZXN0aW9u
-LiBJdCBsb29rcyBhIHByb3BlciBmaXguCj4gV291bGQgeW91IG1pbmQgbWUgc2VuZGluZyByZXZp
-c2VkIHBhdGNoIGZvbGxvdyB5b3VyIHN1Z2dlc3Rpb24/CgpIaSBDaGVuZ2d1YW5nLAoKSXQncyBm
-aW5lIHRvIG1lLgoKVGhhbmtzLAoKPiAKPiBUaGFua3MKPiAKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On Fri 08-01-21 23:58:52, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> When lazytime is enabled and an inode is being written due to its
+> in-memory updated timestamps having expired, either due to a sync() or
+> syncfs() system call or due to dirtytime_expire_interval having elapsed,
+> the VFS needs to inform the filesystem so that the filesystem can copy
+> the inode's timestamps out to the on-disk data structures.
+> 
+> This is done by __writeback_single_inode() calling
+> mark_inode_dirty_sync(), which then calls ->dirty_inode(I_DIRTY_SYNC).
+> 
+> However, this occurs after __writeback_single_inode() has already
+> cleared the dirty flags from ->i_state.  This causes two bugs:
+> 
+> - mark_inode_dirty_sync() redirties the inode, causing it to remain
+>   dirty.  This wastefully causes the inode to be written twice.  But
+>   more importantly, it breaks cases where sync_filesystem() is expected
+>   to clean dirty inodes.  This includes the FS_IOC_REMOVE_ENCRYPTION_KEY
+>   ioctl (as reported at
+>   https://lore.kernel.org/r/20200306004555.GB225345@gmail.com), as well
+>   as possibly filesystem freezing (freeze_super()).
+> 
+> - Since ->i_state doesn't contain I_DIRTY_TIME when ->dirty_inode() is
+>   called from __writeback_single_inode() for lazytime expiration,
+>   xfs_fs_dirty_inode() ignores the notification.  (XFS only cares about
+>   lazytime expirations, and it assumes that I_DIRTY_TIME will contain
+>   i_state during those.)  Therefore, lazy timestamps aren't persisted by
+>   sync(), syncfs(), or dirtytime_expire_interval on XFS.
+> 
+> Fix this by moving the call to mark_inode_dirty_sync() to earlier in
+> __writeback_single_inode(), before the dirty flags are cleared from
+> i_state.  This makes filesystems be properly notified of the timestamp
+> expiration, and it avoids incorrectly redirtying the inode.
+> 
+> This fixes xfstest generic/580 (which tests
+> FS_IOC_REMOVE_ENCRYPTION_KEY) when run on ext4 or f2fs with lazytime
+> enabled.  It also fixes the new lazytime xfstest I've proposed, which
+> reproduces the above-mentioned XFS bug
+> (https://lore.kernel.org/r/20210105005818.92978-1-ebiggers@kernel.org).
+> 
+> Alternatively, we could call ->dirty_inode(I_DIRTY_SYNC) directly.  But
+> due to the introduction of I_SYNC_QUEUED, mark_inode_dirty_sync() is the
+> right thing to do because mark_inode_dirty_sync() now knows not to move
+> the inode to a writeback list if it is currently queued for sync.
+> 
+> Fixes: 0ae45f63d4ef ("vfs: add support for a lazytime mount option")
+> Cc: stable@vger.kernel.org
+> Depends-on: 5afced3bf281 ("writeback: Avoid skipping inode writeback")
+> Suggested-by: Jan Kara <jack@suse.cz>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+
+Thanks for writing this fix! It looks good to me. You can add:
+
+Reviewed-by: Jan Kara <jack@suse.cz>
+
+								Honza
+
+> ---
+>  fs/fs-writeback.c | 24 +++++++++++++-----------
+>  1 file changed, 13 insertions(+), 11 deletions(-)
+> 
+> diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
+> index acfb55834af23..c41cb887eb7d3 100644
+> --- a/fs/fs-writeback.c
+> +++ b/fs/fs-writeback.c
+> @@ -1474,21 +1474,25 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
+>  	}
+>  
+>  	/*
+> -	 * Some filesystems may redirty the inode during the writeback
+> -	 * due to delalloc, clear dirty metadata flags right before
+> -	 * write_inode()
+> +	 * If the inode has dirty timestamps and we need to write them, call
+> +	 * mark_inode_dirty_sync() to notify the filesystem about it and to
+> +	 * change I_DIRTY_TIME into I_DIRTY_SYNC.
+>  	 */
+> -	spin_lock(&inode->i_lock);
+> -
+> -	dirty = inode->i_state & I_DIRTY;
+>  	if ((inode->i_state & I_DIRTY_TIME) &&
+> -	    ((dirty & I_DIRTY_INODE) ||
+> -	     wbc->sync_mode == WB_SYNC_ALL || wbc->for_sync ||
+> +	    (wbc->sync_mode == WB_SYNC_ALL || wbc->for_sync ||
+>  	     time_after(jiffies, inode->dirtied_time_when +
+>  			dirtytime_expire_interval * HZ))) {
+> -		dirty |= I_DIRTY_TIME;
+>  		trace_writeback_lazytime(inode);
+> +		mark_inode_dirty_sync(inode);
+>  	}
+> +
+> +	/*
+> +	 * Some filesystems may redirty the inode during the writeback
+> +	 * due to delalloc, clear dirty metadata flags right before
+> +	 * write_inode()
+> +	 */
+> +	spin_lock(&inode->i_lock);
+> +	dirty = inode->i_state & I_DIRTY;
+>  	inode->i_state &= ~dirty;
+>  
+>  	/*
+> @@ -1509,8 +1513,6 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
+>  
+>  	spin_unlock(&inode->i_lock);
+>  
+> -	if (dirty & I_DIRTY_TIME)
+> -		mark_inode_dirty_sync(inode);
+>  	/* Don't write the inode if only I_DIRTY_PAGES was set */
+>  	if (dirty & ~I_DIRTY_PAGES) {
+>  		int err = write_inode(inode, wbc);
+> -- 
+> 2.30.0
+> 
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
