@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1C0C2F20A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Jan 2021 21:24:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE97A2F2104
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Jan 2021 21:45:05 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kz3jR-0001if-05; Mon, 11 Jan 2021 20:24:05 +0000
+	id 1kz43k-0001yS-1v; Mon, 11 Jan 2021 20:45:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kz3jP-0001iQ-6u
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 20:24:03 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kz43h-0001y8-Vz
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 20:45:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OGupJZqMipXHR+QD3GXHFTQbgGli0bw/Aana2Vtbh+4=; b=fY8YwCBtu2tl+0n0Jt+MZIXHRo
- g6a4Ort60tFC9dNuObxOKTRMvfxlJ3emdp4qO3EogFffWmmF9REY6Mkd5mz8xWj7zATW/SPBDWrlg
- LSGKul5PfATysBxgj6jL+Z4HflnGFjpgpJSEi2kB3KiHmhxfOgEE4mYSR7l2+rfWcb30=;
+ bh=Z6isE+TAK8zzYjTpLOsSAFZnpq0rQzZjm2i7saeOLGQ=; b=jH8Il7mvqm5UGCRdq+mcubJFXZ
+ ulzOyZ+xJz/Ddsk+Eaot5ltAmg0g/HLsooAIYaJpF/drbcZBcJW2KzLoUy0gvhv+ixqOTvtnOivCh
+ BOHOZza1e69ZPmM1bPL+0QznIcVyXzevZQlhJSA254gf+QvFLKW2aifj5eYubaaz05kQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OGupJZqMipXHR+QD3GXHFTQbgGli0bw/Aana2Vtbh+4=; b=YMm3C36aAVY5RKJ6gB7Udenq0x
- DUV3r2RpPiKwWnzTtvHQrS/KzVloPdYyQGuLu24H9wuAVnVF2erSQtvnhnfdmugzAoCvUoOXoL0Vw
- TQhVLBw5s+CzpRfmU2a+FkJnoVvPSXh1sJ86dNkuMly5McC04Ims/oRtHsA4mu+uOu28=;
+ bh=Z6isE+TAK8zzYjTpLOsSAFZnpq0rQzZjm2i7saeOLGQ=; b=ay3V7Rxml0Twc8LQ5RFHwpwA8g
+ LseHLYHYg7fTEslB9x66NWn7fd6higN5PYyjWsJDCTGzf8YKguGIRSkipj0/rtqa1AnM4lphJ6l3Q
+ L8+acm+OANt5Azz9q3L2Q7K/DV/HdKbnl4yWFRWjyJVtKQZbQ6DOxXiSyiLUNqTsxT7M=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kz3jG-001ywW-Nt
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 20:24:03 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id ADBE1225AC;
- Mon, 11 Jan 2021 20:23:41 +0000 (UTC)
+ id 1kz43b-00AP1g-1z
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 11 Jan 2021 20:45:01 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0922F222B6;
+ Mon, 11 Jan 2021 20:44:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610396621;
- bh=GuikJIMMynj1JoVdFBbBDyTl6eY4ObOVr2EhJzbluqU=;
+ s=k20201202; t=1610397877;
+ bh=M1OSN1vteho8Huw58TPHtw4Wnq7VMtKCfQ1CREQhDR0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=h9UJs0tr0HoLvfoM0v704ZMwvpGKTk+NgiLZEjtFVRGKupALugn+LTjpCVAzgGoDt
- fnvgqZCF48gZoGU8LQOWMLdCBR5SUO9onTJHG74h3wmPwtP+ZqD8Uc1bVk8LPSBTxa
- yUdoD94NOU5fUPYrHZIa26l1w+y22BfW7zuWvitBcnnpKeJZ5tWmMijqpzTW2T8RBB
- v9/ZLCNXfoJCPVqOY000S6pHMovE+IDHJouQmhR6KR2ZjYAtHmgJcISwR8/kY3ESw+
- cTvhL/H7nkTKjLz0FryNvH1qL4khOQKIgNyGy1b/Ygf2RyfL1stItYLsoFgFUCLJgg
- u5yjhlG30NShA==
-Date: Mon, 11 Jan 2021 12:23:40 -0800
+ b=g6E1CBBApgNQRIvnyUYpczU4snTK3TxTIWiGp2D7l9axmxnf6NKFoHnat6vVu4e2x
+ I9XIFx85m+OaASnJa35GO1Lnq6n9jCT+wDbjGwYs6QheK3MCRNoAdJlZfYYodREnYB
+ o+3ziJVlenNjdNHZNq3EDaRlJJAlbS6mK1P7kvZryDnMiAPy1kFnfILWddwBcW6wxu
+ SELSewJq8rbzB/ndE+t+XbX/vEKHxLvi2jQezrrvts8jJ1y/+Ad2x5xKCgaHtetEX3
+ OZcpXXl3Hsh8sIV0cn0ov2lVF0/F8gETBM8QdHmHtC59U75feIsb+nL+o6/OlT3c++
+ dyjRmmLboidRg==
+Date: Mon, 11 Jan 2021 12:44:35 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <X/yzzKhysdFUY/6o@sol.localdomain>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <X/y4s12YrXiUwWfN@sol.localdomain>
 References: <20210109075903.208222-1-ebiggers@kernel.org>
- <20210109075903.208222-12-ebiggers@kernel.org>
- <20210111105342.GE2502@lst.de>
+ <20210111151517.GK18475@quack2.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210111105342.GE2502@lst.de>
+In-Reply-To: <20210111151517.GK18475@quack2.suse.cz>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -70,9 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kz3jG-001ywW-Nt
-Subject: Re: [f2fs-dev] [PATCH v2 11/12] ext4: simplify i_state checks in
- __ext4_update_other_inode_time()
+X-Headers-End: 1kz43b-00AP1g-1z
+Subject: Re: [f2fs-dev] [PATCH v2 00/12] lazytime fix and cleanups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,48 +82,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jan 11, 2021 at 11:53:42AM +0100, Christoph Hellwig wrote:
-> On Fri, Jan 08, 2021 at 11:59:02PM -0800, Eric Biggers wrote:
-> >  	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > -			       I_DIRTY_INODE)) ||
-> > -	    ((inode->i_state & I_DIRTY_TIME) == 0))
-> > +			       I_DIRTY_TIME)) != I_DIRTY_TIME)
-> >  		return;
-> >  
-> >  	spin_lock(&inode->i_lock);
-> > -	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > -				I_DIRTY_INODE)) == 0) &&
-> > -	    (inode->i_state & I_DIRTY_TIME)) {
-> > +	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
-> > +			       I_DIRTY_TIME)) == I_DIRTY_TIME) {
+On Mon, Jan 11, 2021 at 04:15:17PM +0100, Jan Kara wrote:
+> Hi!
 > 
-> I think a descriptively named inline helper in fs.h would really improve
-> this..
+> On Fri 08-01-21 23:58:51, Eric Biggers wrote:
+> > Hello,
+> > 
+> > Patch 1 fixes a bug in how __writeback_single_inode() handles lazytime
+> > expirations.  I originally reported this last year
+> > (https://lore.kernel.org/r/20200306004555.GB225345@gmail.com) because it
+> > causes the FS_IOC_REMOVE_ENCRYPTION_KEY ioctl to not work properly, as
+> > the bug causes inodes to remain dirty after a sync.
+> > 
+> > It also turns out that lazytime on XFS is partially broken because it
+> > doesn't actually write timestamps to disk after a sync() or after
+> > dirtytime_expire_interval.  This is fixed by the same fix.
+> > 
+> > This supersedes previously proposed fixes, including
+> > https://lore.kernel.org/r/20200307020043.60118-1-tytso@mit.edu and
+> > https://lore.kernel.org/r/20200325122825.1086872-3-hch@lst.de from last
+> > year (which had some issues and didn't fix the XFS bug), and v1 of this
+> > patchset which took a different approach
+> > (https://lore.kernel.org/r/20210105005452.92521-1-ebiggers@kernel.org).
+> > 
+> > Patches 2-12 then clean up various things related to lazytime and
+> > writeback, such as clarifying the semantics of ->dirty_inode() and the
+> > inode dirty flags, and improving comments.  Most of these patches could
+> > be applied independently if needed.
+> > 
+> > This patchset applies to v5.11-rc2.
+> 
+> The series look good to me. How do you plan to merge it (after resolving
+> Christoph's remarks)? I guess either Ted can take it through the ext4 tree
+> or I can take it through my tree...
+> 
 
-Do you want this even though it is specific to how ext4 opportunisticly updates
-other inodes in the same inode block as the inode being updated?  That's the
-only reason that I_FREEING|I_WILL_FREE|I_NEW need to be checked; everywhere else
-justs want I_DIRTY_TIME.
+I think taking it through your tree would be best, unless Al or Ted wants to
+take it.
 
-We could add:
-
-	static inline bool other_inode_has_dirtytime(struct inode *inode)
-	{
-		return (inode->state & (I_FREEING | I_WILL_FREE |
-					I_NEW | I_DIRTY_TIME)) == I_DIRTY_TIME;
-	}
-
-But it seems a bit weird when it's specific to ext4 at the moment.
-
-Are you thinking that other filesystems will implement the same sort of
-opportunistic update, so we should add the helper now?
+I'll probably separate out
+"xfs: remove a stale comment from xfs_file_aio_write_checks()",
+since it isn't really related anymore and could go in through the XFS tree.
 
 - Eric
 
