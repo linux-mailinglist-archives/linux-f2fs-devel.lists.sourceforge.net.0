@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 779CB2F3131
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 14:23:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BEA22F3135
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 14:25:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzJeC-0007z3-Hn; Tue, 12 Jan 2021 13:23:44 +0000
+	id 1kzJg3-00084D-2w; Tue, 12 Jan 2021 13:25:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hch@lst.de>) id 1kzJeB-0007yq-6A
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 13:23:43 +0000
+ (envelope-from <hch@lst.de>) id 1kzJg2-000846-8f
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 13:25:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eabuVjBsAa5J0KMMVi9kNri7jQ0qsf91JyCWIJ0Ohn8=; b=laNvw0boEmMvKrrtSFO2Zl0M2U
- 10nbukWGJq4quSgs9WDEdWHO9V2vNz7CDvCi0ZZcsdtq20Q6IZ8nYmI5UYTNC1QabLJWLkV/8kw6u
- ingmPfsgsfBn53T4zJ18lw3b32K6ZmOGBpS6R9lWtD6/AJRQqx0jUIEDyJbomAzjBgL0=;
+ bh=ohjhUAmEGPJC4BcqI1gjkDSNtKuZBC2S/xaU2E56EaI=; b=DvUHTME6/eUIqt/aSxYQxIMBim
+ 0o0pKSWj+9ig7zfMxadAC1+ioa1q1v3ELa0hZj2Li4wn2QcW9Y5x4Agfq+eHR8Vuf/y/AzzdRUwEJ
+ eFfdrA3mXJuEp9TFuzInqjgqiFZ+SldF3D3mj13SNBUnaGtPtchhGFxNKgRCSVZAa8X4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,39 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eabuVjBsAa5J0KMMVi9kNri7jQ0qsf91JyCWIJ0Ohn8=; b=Kz1uW93eZkp1bYIbDUCP560Z36
- Z2f2Na8e9mFN0c3oOqM8pgIiYmdezh0gNEjaTu/41RuhFZlO8dJhuOxfLKkEVokJoLqxsjTzsKJ6w
- BoDWJ0DS+WtNEWGzv63uKx/Qlv9sOlLx5ITGOhL8PxFvtynsV5ALOtcHC4UizjScuChE=;
+ bh=ohjhUAmEGPJC4BcqI1gjkDSNtKuZBC2S/xaU2E56EaI=; b=PYPXMKZV9/ZXUJiSmi51Fh7Kio
+ YjCYDEJikQlXu6GiIHuAygMpG3/ZJ7UsuJxyAhIltra0mjshWMp1F5eubeOXoOhAQo5TjkHA46GZh
+ nDzNeUX841eDVnq/AU9SftjPAp4BtQ4owvsRwCYqMSrzAYE2tCkQNzFtK/dgj4ccf2j0=;
 Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kzJe0-00ED6b-Eh
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 13:23:42 +0000
+ id 1kzJfv-0046j8-KP
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 13:25:38 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id B37E067373; Tue, 12 Jan 2021 14:23:15 +0100 (CET)
-Date: Tue, 12 Jan 2021 14:23:15 +0100
+ id 5AC0A68B02; Tue, 12 Jan 2021 14:25:21 +0100 (CET)
+Date: Tue, 12 Jan 2021 14:25:21 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20210112132315.GA13780@lst.de>
+Message-ID: <20210112132521.GB13780@lst.de>
 References: <20210109075903.208222-1-ebiggers@kernel.org>
- <20210109075903.208222-5-ebiggers@kernel.org> <20210111105201.GB2502@lst.de>
- <X/ysA8PuJ/+JXQYL@sol.localdomain>
+ <20210109075903.208222-12-ebiggers@kernel.org> <20210111105342.GE2502@lst.de>
+ <X/yzzKhysdFUY/6o@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <X/ysA8PuJ/+JXQYL@sol.localdomain>
+In-Reply-To: <X/yzzKhysdFUY/6o@sol.localdomain>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1kzJe0-00ED6b-Eh
-Subject: Re: [f2fs-dev] [PATCH v2 04/12] fat: only specify I_DIRTY_TIME when
- needed in fat_update_time()
+X-Headers-End: 1kzJfv-0046j8-KP
+Subject: Re: [f2fs-dev] [PATCH v2 11/12] ext4: simplify i_state checks in
+ __ext4_update_other_inode_time()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,25 +76,33 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jan 11, 2021 at 11:50:27AM -0800, Eric Biggers wrote:
-> On Mon, Jan 11, 2021 at 11:52:01AM +0100, Christoph Hellwig wrote:
-> > On Fri, Jan 08, 2021 at 11:58:55PM -0800, Eric Biggers wrote:
-> > > +	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
-> > > +		dirty_flags |= I_DIRTY_SYNC;
-> > 
-> > fat does not support i_version updates, so this bit can be skipped.
+On Mon, Jan 11, 2021 at 12:23:40PM -0800, Eric Biggers wrote:
+> > I think a descriptively named inline helper in fs.h would really improve
+> > this..
 > 
-> Is that really the case?  Any filesystem (including fat) can be mounted with
-> "iversion", which causes SB_I_VERSION to be set.
+> Do you want this even though it is specific to how ext4 opportunisticly updates
+> other inodes in the same inode block as the inode being updated?  That's the
+> only reason that I_FREEING|I_WILL_FREE|I_NEW need to be checked; everywhere else
+> justs want I_DIRTY_TIME.
 > 
-> A lot of filesystems (including fat) don't store i_version to disk, but it looks
-> like it will still get updated in-memory.  Could anything be relying on that?
+> We could add:
+> 
+> 	static inline bool other_inode_has_dirtytime(struct inode *inode)
+> 	{
+> 		return (inode->state & (I_FREEING | I_WILL_FREE |
+> 					I_NEW | I_DIRTY_TIME)) == I_DIRTY_TIME;
+> 	}
+> 
+> But it seems a bit weird when it's specific to ext4 at the moment.
+> 
+> Are you thinking that other filesystems will implement the same sort of
+> opportunistic update, so we should add the helper now?
 
-As Dave pointed out i_version can't really work for fat.  But I guess
-that is indeed out of scope for this series, so let's go ahead with this
-version for now:
-
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+For my taste these checks for flags is way too much black magic and will
+trivially break when people add new flags.  So having a helper next to
+the definition of the I_* flags that is well documented would be very,
+very helpful.  My preferred naming would be something along the lines
+of 'inode_is_dirty_lazytime_only()'.
 
 
 _______________________________________________
