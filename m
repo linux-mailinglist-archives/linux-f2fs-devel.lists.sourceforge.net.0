@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6654D2F396A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 20:04:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D6222F3970
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 20:04:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzOxz-0000ts-Cd; Tue, 12 Jan 2021 19:04:31 +0000
+	id 1kzOy8-0005gi-SD; Tue, 12 Jan 2021 19:04:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kzOxx-0000sm-A5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kzOy7-0005gR-2g
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZQ5TrnpCeXCPkqQKV+mVLg//hf/GI0fBr3zfSTZgNBw=; b=jzhbgs+NdJ++G4rnkenoe+hTsN
- APPPZ7yxMmMnFSpynKAoo00mlOcQFMf9FWyVTvQXlSe4rxYeBpk8aT04oeo65KeMDQI8ZVaZmm11A
- cPX543PF6iyDGJXgArKZeJhauV0jRvU5tAhTxHhlJewMaxmRIiiEV4anWezMkVCKEgLc=;
+ bh=eayOnzYxBxMQaZ/Hp+Qxcx4VXfb0GVw/Xz7jdVH0HOg=; b=fbPMBQordPyv9SgnPxiBTj6xpK
+ aB2dfrEz7EQnd8AcOIUl3J8ikVGfc/QefhgIlBNoDGD6rI5hGvaQjXuePm9U77g9y6dDgRRfzqt+S
+ RtuuCYYqyocp68zuco1eKq1sdcFnXBAOQX5N53b0fhPxKBx0k8F8TxoaJokGEU+t9HCE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZQ5TrnpCeXCPkqQKV+mVLg//hf/GI0fBr3zfSTZgNBw=; b=cDIEecJtq0gg72uAb60O8nGPfP
- vacETlmArPZNODBHrr2PhZvdfOAvKPFiHXnZR5+D2A/gXEXHZldoLafvnsUNLNAoPRNhHplq+9a0r
- YdoQJK1ZBDvXkv0tOXm6QVotHKpkCQGOY5Rt4uUHt0NEzCihj5KNWjupDpQ7Le1zgyuw=;
+ bh=eayOnzYxBxMQaZ/Hp+Qxcx4VXfb0GVw/Xz7jdVH0HOg=; b=CCkXIv0NaYgdzn1tbp5Czl+6hN
+ b5HQBXPuWrzwLuqUW8oygwxajJRTUl07/6qTzu+zpf128C3gtiEKGiC9yplqvUPfaaKk+IMStMNrM
+ EqwrCKodTptnW8iyWfKIFIr4yGaTgVNHuX3dGRD2LlQBXQWNKvYTaR8xxwkejAC5rZ4Q=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kzOxt-004zD2-7H
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:29 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 250CD23123;
+ id 1kzOy0-00Emy9-BM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:39 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id DB97D2312A;
  Tue, 12 Jan 2021 19:04:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610478250;
- bh=m55hWuVO7Kccok6ZKvWfkDaBgW4VZjCcVIhDde63id4=;
+ s=k20201202; t=1610478251;
+ bh=iS9NaJbF6WGlfwyaEVylnwoccWtqZ29B1EFuOerPM2c=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SqmyZM1Vj4rj6sk7BL3j8N7ZxNNj5YrQ6sKSXeRtRZ6nEUbcEB1ey4UKjs7cUY0QG
- 3jxnnBrbLgk4sXulh/DgD1DBjmtZ0CLGGML2I3z87lQKnRpduuqFUjsCX3QRhmejIl
- YhOFSXc6h7XSjclkhNOndP7FEHXZ03VeUzzY89KWgPTOZ038eWia/aJgKdMtDnLct+
- vu10MdmUHnd2pxllFbzEcIaFAWeVwvyYGnTmK0j+u/MnIw6B58gbgyG2O1VZVH1uxs
- iNPiJPIxWn7IrfelsMbBi6ghOsWhcPVe7NaSltWvUEXJslJnMwukVpKAcluIldXwu2
- jSTjCkEox99zw==
+ b=R9W+OfB/I0d3D9RbfhDSKnCAhk4DCLkG9op4kyVEfKGUF/Pzpt6RoHWPlcr2V/XHp
+ EV0Y3n+nH1cwsTI1KtLNKJZlgKwWAMTLtH6+/i1rp58AtnGGEQ67lHflffmmwuxk8Z
+ LQr7EsPW9Rgr35YPJBUOTGrdheviC4ThppaXO18jOO2thXuOz0sEDK0TFa5NzA24QS
+ L0GHvTobDXLFPZwcwr+uj/Faq9uFi70PgUrtKsyt4Jyhw5gMyP+bxeetwyIeeHX1b4
+ TzVeL2TBiN0d5qWOrsOcRn1PdWWYAxb6PvZIyGJ1Nr44mH5yUjWdPP6BV0CpsciDVB
+ ZVYG8cM0p0p/A==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Tue, 12 Jan 2021 11:02:49 -0800
-Message-Id: <20210112190253.64307-8-ebiggers@kernel.org>
+Date: Tue, 12 Jan 2021 11:02:50 -0800
+Message-Id: <20210112190253.64307-9-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210112190253.64307-1-ebiggers@kernel.org>
 References: <20210112190253.64307-1-ebiggers@kernel.org>
@@ -72,8 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kzOxt-004zD2-7H
-Subject: [f2fs-dev] [PATCH v3 07/11] fs: clean up __mark_inode_dirty() a bit
+X-Headers-End: 1kzOy0-00Emy9-BM
+Subject: [f2fs-dev] [PATCH v3 08/11] fs: drop redundant check from
+ __writeback_single_inode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,110 +95,29 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Improve some comments, and don't bother checking for the I_DIRTY_TIME
-flag in the case where we just cleared it.
-
-Also, warn if I_DIRTY_TIME and I_DIRTY_PAGES are passed to
-__mark_inode_dirty() at the same time, as this case isn't handled.
+wbc->for_sync implies wbc->sync_mode == WB_SYNC_ALL, so there's no need
+to check for both.  Just check for WB_SYNC_ALL.
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Jan Kara <jack@suse.cz>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/fs-writeback.c | 49 +++++++++++++++++++++++++++++------------------
- 1 file changed, 30 insertions(+), 19 deletions(-)
+ fs/fs-writeback.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
-index 2e6064012f7d3..80ee9816d9df5 100644
+index 80ee9816d9df5..cee1df6e3bd43 100644
 --- a/fs/fs-writeback.c
 +++ b/fs/fs-writeback.c
-@@ -2219,23 +2219,24 @@ static noinline void block_dump___mark_inode_dirty(struct inode *inode)
- }
- 
- /**
-- * __mark_inode_dirty -	internal function
-+ * __mark_inode_dirty -	internal function to mark an inode dirty
-  *
-  * @inode: inode to mark
-- * @flags: what kind of dirty (i.e. I_DIRTY_SYNC)
-+ * @flags: what kind of dirty, e.g. I_DIRTY_SYNC.  This can be a combination of
-+ *	   multiple I_DIRTY_* flags, except that I_DIRTY_TIME can't be combined
-+ *	   with I_DIRTY_PAGES.
-  *
-- * Mark an inode as dirty. Callers should use mark_inode_dirty or
-- * mark_inode_dirty_sync.
-+ * Mark an inode as dirty.  We notify the filesystem, then update the inode's
-+ * dirty flags.  Then, if needed we add the inode to the appropriate dirty list.
-  *
-- * Put the inode on the super block's dirty list.
-+ * Most callers should use mark_inode_dirty() or mark_inode_dirty_sync()
-+ * instead of calling this directly.
-  *
-- * CAREFUL! We mark it dirty unconditionally, but move it onto the
-- * dirty list only if it is hashed or if it refers to a blockdev.
-- * If it was not hashed, it will never be added to the dirty list
-- * even if it is later hashed, as it will have been marked dirty already.
-+ * CAREFUL!  We only add the inode to the dirty list if it is hashed or if it
-+ * refers to a blockdev.  Unhashed inodes will never be added to the dirty list
-+ * even if they are later hashed, as they will have been marked dirty already.
-  *
-- * In short, make sure you hash any inodes _before_ you start marking
-- * them dirty.
-+ * In short, ensure you hash any inodes _before_ you start marking them dirty.
-  *
-  * Note that for blockdevs, inode->dirtied_when represents the dirtying time of
-  * the block-special inode (/dev/hda1) itself.  And the ->dirtied_when field of
-@@ -2247,25 +2248,34 @@ static noinline void block_dump___mark_inode_dirty(struct inode *inode)
- void __mark_inode_dirty(struct inode *inode, int flags)
- {
- 	struct super_block *sb = inode->i_sb;
--	int dirtytime;
-+	int dirtytime = 0;
- 
- 	trace_writeback_mark_inode_dirty(inode, flags);
- 
--	/*
--	 * Don't do this for I_DIRTY_PAGES - that doesn't actually
--	 * dirty the inode itself
--	 */
- 	if (flags & I_DIRTY_INODE) {
-+		/*
-+		 * Notify the filesystem about the inode being dirtied, so that
-+		 * (if needed) it can update on-disk fields and journal the
-+		 * inode.  This is only needed when the inode itself is being
-+		 * dirtied now.  I.e. it's only needed for I_DIRTY_INODE, not
-+		 * for just I_DIRTY_PAGES or I_DIRTY_TIME.
-+		 */
- 		trace_writeback_dirty_inode_start(inode, flags);
--
- 		if (sb->s_op->dirty_inode)
- 			sb->s_op->dirty_inode(inode, flags & I_DIRTY_INODE);
--
- 		trace_writeback_dirty_inode(inode, flags);
- 
-+		/* I_DIRTY_INODE supersedes I_DIRTY_TIME. */
- 		flags &= ~I_DIRTY_TIME;
-+	} else {
-+		/*
-+		 * Else it's either I_DIRTY_PAGES, I_DIRTY_TIME, or nothing.
-+		 * (We don't support setting both I_DIRTY_PAGES and I_DIRTY_TIME
-+		 * in one call to __mark_inode_dirty().)
-+		 */
-+		dirtytime = flags & I_DIRTY_TIME;
-+		WARN_ON_ONCE(dirtytime && flags != I_DIRTY_TIME);
- 	}
--	dirtytime = flags & I_DIRTY_TIME;
- 
- 	/*
- 	 * Paired with smp_mb() in __writeback_single_inode() for the
-@@ -2288,6 +2298,7 @@ void __mark_inode_dirty(struct inode *inode, int flags)
- 
- 		inode_attach_wb(inode, NULL);
- 
-+		/* I_DIRTY_INODE supersedes I_DIRTY_TIME. */
- 		if (flags & I_DIRTY_INODE)
- 			inode->i_state &= ~I_DIRTY_TIME;
- 		inode->i_state |= flags;
+@@ -1479,7 +1479,7 @@ __writeback_single_inode(struct inode *inode, struct writeback_control *wbc)
+ 	 * change I_DIRTY_TIME into I_DIRTY_SYNC.
+ 	 */
+ 	if ((inode->i_state & I_DIRTY_TIME) &&
+-	    (wbc->sync_mode == WB_SYNC_ALL || wbc->for_sync ||
++	    (wbc->sync_mode == WB_SYNC_ALL ||
+ 	     time_after(jiffies, inode->dirtied_time_when +
+ 			dirtytime_expire_interval * HZ))) {
+ 		trace_writeback_lazytime(inode);
 -- 
 2.30.0
 
