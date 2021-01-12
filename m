@@ -2,64 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ACE92F396D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 20:04:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EC3F2F39C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Jan 2021 20:14:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzOy2-0000uw-HW; Tue, 12 Jan 2021 19:04:34 +0000
+	id 1kzP7P-0002qT-GA; Tue, 12 Jan 2021 19:14:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kzOy0-0000uK-DC
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:32 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1kzP7O-0002qE-5a
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:14:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I1d7yQJTUHPGRl1SpSvJf5KE2Awd1XcVAZZcvy3J9Vs=; b=IbgVe653j+9N1q4VNs17OEy+6d
- OlNaKO7EyBa0pvsgzLSliWRwLPSd25PtBgeVlpKK6KuAaDqeBDR9YzFpqz0RTKWISn+T0SmNJteeA
- Mo3EOweAQ7mOylHzxTWxVRaaE31ZDERagiPa2lb8633OlzhlYpXmgRKyUn+Q+u+TQLfQ=;
+ bh=xt1eHXNzUzKa+l7s3EH5/c/n/cLOc3aF5EK/QN5h4Ks=; b=S4Y4sz+gairv928sstyysUXZl2
+ wFHfldzJ4jgstQqKVlurLFUlSgqNU6SxA8Jr8crFXVUUUTmoRhS4/zcRlkgCpX0DCbzaBKOVCa3F2
+ y5JKI8wygkhwfXWiUVtN4WsyC0FMuJvqyHMJbkATMip2EdT19v6IuTUJMjyVEBO6RgGg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=I1d7yQJTUHPGRl1SpSvJf5KE2Awd1XcVAZZcvy3J9Vs=; b=FErE37VTkmjxv6d6KUG3hqVNiX
- 8yFLWStFvZlee2nhvvDOXLeqqC5bdq/VToGVyc53UcWvDaYngHm4y/taFu3bcyVadppM3l7V8t0pw
- c1uXJ4u4y2lh8LeeC0lHGudlVGTH4x4FbFOcThtTc5p12rxiwqjKieWUBbLhqcU+dpfg=;
+ bh=xt1eHXNzUzKa+l7s3EH5/c/n/cLOc3aF5EK/QN5h4Ks=; b=cvHmyKsJ+PunhOADOi2l8a1pp9
+ rBD35SR9qN6wOSKJREbhlPYKNsSITjlvLJQXeZnGsE/n+mBZk3uSo+MsZL4/ujV9lgGaZnsIJrIKy
+ tNT4mPncW6EgtESeT2nY+NH41emlACaMoLCQAPzcQpJWWFVG0avY3gFRflCuePrIKjew=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kzOxw-004zDF-9g
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:04:32 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 44D8F23134;
- Tue, 12 Jan 2021 19:04:12 +0000 (UTC)
+ id 1kzP7K-00Enob-P5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Jan 2021 19:14:14 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0E00A230F9;
+ Tue, 12 Jan 2021 19:14:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610478252;
- bh=6FqWuQrXV+HGHkzTR42Ape3on4H7NKo1rahsTeQDI4c=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RZNZ7JkkNHWRoE3L2XHIBFGDbwLmXQ+WYmrSQ2HH5mrAH3MtFyOQ0LJ3XzuG+BY4y
- Ji+rdyAJ/Veytz+4dA94ERGnUigqHy0UnTkMBHX3hMM1lpgpo62tkwB8hq57YCbBS2
- mSpxDL4QT3QnH5GgvYEHuAvdrKqC/sWHNDwlpy7hlUjEyBW/VUJPoonFZt7omR5ygJ
- u+3VdJWj6zeBFzD0LHf+ThYBySvpcxA7LHRs2EujZ9L/va74iZnRNhyVvauDdUf+To
- kefvDtvLXHBcCaVR/JzpiX8n8OVbP6jRDf4CZ8F0mW0jGMkcAqjwaEqOQF2vg/QhvM
- gWcEr3/JZZHjA==
+ s=k20201202; t=1610478845;
+ bh=HfY5AtfEjHmUSHWdZ3UwZuzVHc2NCzE56hiXY2m6e1I=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=mwoxPnudxOLM4lqnZZBSF9w9BP16SXhbLDXlKHv+2Q815g1RB89LfMpGPlj3bb2b1
+ jP6tx+iYMKc1cvw04K4Z/lv9IbVk4JyfqwsqXdGNIw5X405I2dSKyyPNiEJqzZHnJ3
+ 6XF8yEKBRhs3yDiwJ+Y2MsnLlVN0iru1OweKSNFVYYQrZPsNo/2PCJhPDteVGrpkvu
+ JReSOlUZzV6NDVYCO98pz7nGvB00P9Y00qi1osy1pSVYrSaHLnY6uHzpZ5HzQ7QHhz
+ WxTBhuTCeIGsXy4yrjq+RGf4Ss3X2UVcgspUAOLBBuQnP3tisZgpkl6xo8tRZ2ijfH
+ jkgVPrjF5N0YA==
+Date: Tue, 12 Jan 2021 11:14:03 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fsdevel@vger.kernel.org
-Date: Tue, 12 Jan 2021 11:02:53 -0800
-Message-Id: <20210112190253.64307-12-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210112190253.64307-1-ebiggers@kernel.org>
-References: <20210112190253.64307-1-ebiggers@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net,
+	Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <X/30+5rc1bv39moX@sol.localdomain>
+References: <20201228232529.45365-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.4 (/)
+Content-Disposition: inline
+In-Reply-To: <20201228232529.45365-1-ebiggers@kernel.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -68,9 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kzOxw-004zDF-9g
-Subject: [f2fs-dev] [PATCH v3 11/11] ext4: simplify i_state checks in
- __ext4_update_other_inode_time()
+X-Headers-End: 1kzP7K-00Enob-P5
+Subject: Re: [f2fs-dev] [PATCH RESEND] libfs: unexport
+ generic_ci_d_compare() and generic_ci_d_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,78 +87,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- Theodore Ts'o <tytso@mit.edu>, Christoph Hellwig <hch@lst.de>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Mon, Dec 28, 2020 at 03:25:29PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> Now that generic_set_encrypted_ci_d_ops() has been added and ext4 and
+> f2fs are using it, it's no longer necessary to export
+> generic_ci_d_compare() and generic_ci_d_hash() to filesystems.
+> 
+> Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/libfs.c         | 8 +++-----
+>  include/linux/fs.h | 5 -----
+>  2 files changed, 3 insertions(+), 10 deletions(-)
 
-Since I_DIRTY_TIME and I_DIRTY_INODE are mutually exclusive in i_state,
-there's no need to check for I_DIRTY_TIME && !I_DIRTY_INODE.  Just check
-for I_DIRTY_TIME.
+Jaegeuk, any interest in applying this given that this code came in through the
+f2fs tree in the first place?
 
-Also introduce a helper function in include/linux/fs.h to do this check.
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/ext4/inode.c    |  8 ++------
- include/linux/fs.h | 15 +++++++++++++++
- 2 files changed, 17 insertions(+), 6 deletions(-)
-
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 4cc6c7834312f..d809a06b6ef7f 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -4961,15 +4961,11 @@ static void __ext4_update_other_inode_time(struct super_block *sb,
- 	if (!inode)
- 		return;
- 
--	if ((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
--			       I_DIRTY_INODE)) ||
--	    ((inode->i_state & I_DIRTY_TIME) == 0))
-+	if (!inode_is_dirtytime_only(inode))
- 		return;
- 
- 	spin_lock(&inode->i_lock);
--	if (((inode->i_state & (I_FREEING | I_WILL_FREE | I_NEW |
--				I_DIRTY_INODE)) == 0) &&
--	    (inode->i_state & I_DIRTY_TIME)) {
-+	if (inode_is_dirtytime_only(inode)) {
- 		struct ext4_inode_info	*ei = EXT4_I(inode);
- 
- 		inode->i_state &= ~I_DIRTY_TIME;
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 45a0303b2aeb6..de0c789104c26 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -2194,6 +2194,21 @@ static inline void mark_inode_dirty_sync(struct inode *inode)
- 	__mark_inode_dirty(inode, I_DIRTY_SYNC);
- }
- 
-+/*
-+ * Returns true if the given inode itself only has dirty timestamps (its pages
-+ * may still be dirty) and isn't currently being allocated or freed.
-+ * Filesystems should call this if when writing an inode when lazytime is
-+ * enabled, they want to opportunistically write the timestamps of other inodes
-+ * located very nearby on-disk, e.g. in the same inode block.  This returns true
-+ * if the given inode is in need of such an opportunistic update.  Requires
-+ * i_lock, or at least later re-checking under i_lock.
-+ */
-+static inline bool inode_is_dirtytime_only(struct inode *inode)
-+{
-+	return (inode->i_state & (I_DIRTY_TIME | I_NEW |
-+				  I_FREEING | I_WILL_FREE)) == I_DIRTY_TIME;
-+}
-+
- extern void inc_nlink(struct inode *inode);
- extern void drop_nlink(struct inode *inode);
- extern void clear_nlink(struct inode *inode);
--- 
-2.30.0
-
+- Eric
 
 
 _______________________________________________
