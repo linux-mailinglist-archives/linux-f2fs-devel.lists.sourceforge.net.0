@@ -2,79 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF55A2F4138
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Jan 2021 02:30:54 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20A7B2F4395
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Jan 2021 06:23:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzUzq-000793-92; Wed, 13 Jan 2021 01:30:50 +0000
+	id 1kzYcY-00017g-6W; Wed, 13 Jan 2021 05:23:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1kzUzo-00078w-Li
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 01:30:48 +0000
+ (envelope-from <cgxu519@mykernel.net>) id 1kzYcU-00017O-LL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 05:23:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YLA4XiWXvIWjDXFmBRDkR8QiXWH/LAKNXQQ74MzUxrM=; b=YrBGHBn+CgtoK9TXTXYDd51kxx
- amhIhLW1bymPc9ORYDT8LNhSxi1TrqqEXKxeDdRwf3B7l7HKbOf8lU6QNt9BzjRO+x+tR2LrQNEq0
- mJFcgsMdS6Z+LyY5gdwQV0V0CUdjbI4mnRnPYfbEq8PxFxWGkAf0sFQHeECjzz4H3SUw=;
+ bh=4Fmx52W2L/JpetI0GpGYuLesSdIRKaJwJtjiIg7qgmQ=; b=CqXsuXKnLPZlSao7THeD7NXbo+
+ df/SknY7bN+tafL0hE9yPWkgBfH5c0WDlfHCnLdkxujFsWLgsqgg+9XfWd7P3YZCi8BUasxzJ7RmH
+ KTBOPzvTVO+IlVkrZKbybtEzd6Lrnlpya0saSvNU4ySIX7lkTCGy69F2tP7hOUh7g9cg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YLA4XiWXvIWjDXFmBRDkR8QiXWH/LAKNXQQ74MzUxrM=; b=foe9/QmmWN/n1lkQnsM3x4IZw5
- u5a66PzK7sNaw1GEkFtG3ShGLmmKMtExGqfvJ0f6PPNhog3OMKpD7srXdz61nBGJJr1yfq8+jsbGW
- CDjS6ZOvZIlyqRJrGgBmTMTeHgCKx0Jhep3xvrTw+KEyIVE+tAUlgcoPhntQP1hxgJf0=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ bh=4Fmx52W2L/JpetI0GpGYuLesSdIRKaJwJtjiIg7qgmQ=; b=QMJ5o+Xe//T4w4ER/pnv7CRQke
+ AMg/NfBEj18RjkgyMZ7vctRYW4vWA3a6S+GlqpU9Vef8/pQTbjJyxGmiEWbXZeyyZ+oPuuCFub1d9
+ Q8kGr2TvbaT6GZdF0EO2/SeA+SH8CTrsrocGc/Jwz+ScaE3tlFmFK67QYSKEqAVBIxSc=;
+Received: from sender2-pp-o92.zoho.com.cn ([163.53.93.251])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kzUze-005kII-CG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 01:30:48 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DFqbp5FB0zl4P4;
- Wed, 13 Jan 2021 09:29:10 +0800 (CST)
-Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 13 Jan
- 2021 09:30:22 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20201230075557.108818-1-yuchao0@huawei.com>
- <X/Y5pJr4Aaf0bBqj@google.com> <X/ZAS6oyFiudshe2@google.com>
- <X/x9kTlL8E1Wj4Dd@google.com>
- <d146348b-3bbd-c1a5-72eb-b054cbcf0b13@huawei.com>
- <X/4jZY0bzkTCbDTY@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <240391d4-c3bb-882d-0e86-1e30e2fd0ef4@huawei.com>
-Date: Wed, 13 Jan 2021 09:30:21 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <X/4jZY0bzkTCbDTY@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.114.67]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+ id 1kzYcA-006ahI-QB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 05:22:58 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1610515329; cv=none; d=zoho.com.cn; s=zohoarc; 
+ b=WwhKXPDzQy+cX2B/4/WUgNQzCbzzp/JlDVQQJPbz8SL/s9q3lF0NJbW1utvXAod2aeQBaX8NNnkAphRFD0ozUlWYUuUI5n34oNi+ElSTT6a6Oy/oKLYqbziUDkf2Jeb1w1yAww9spfjxkcOuGxQuxt3PfLdOngNSnKcU6o4pnTA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com.cn;
+ s=zohoarc; 
+ t=1610515329; h=Cc:Date:From:Message-ID:Subject:To; 
+ bh=4Fmx52W2L/JpetI0GpGYuLesSdIRKaJwJtjiIg7qgmQ=; 
+ b=D7Al6cYbn5idf1BhBtM69YYhijF1JlpHsJvpiZdFNy9h3xWFarV4GUrtBwKUONX97lYpQlILwOkGdBohwLzfMK4XaVof9AT1j5kq9Zrq44rcF/0SHxlBSzJHY+bYDMt//xxhR+Umia0AZ8PddNG8g/TCLfWgd9GIodFUK39rXfk=
+ARC-Authentication-Results: i=1; mx.zoho.com.cn;
+ dkim=pass  header.i=mykernel.net;
+ spf=pass  smtp.mailfrom=cgxu519@mykernel.net;
+ dmarc=pass header.from=<cgxu519@mykernel.net>
+ header.from=<cgxu519@mykernel.net>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1610515328; 
+ s=zohomail; d=mykernel.net; i=cgxu519@mykernel.net;
+ h=From:To:Cc:Subject:Date:Message-Id;
+ bh=4Fmx52W2L/JpetI0GpGYuLesSdIRKaJwJtjiIg7qgmQ=;
+ b=Cz1nAGrY5HSR6W7iIzip6Ud6RP7jahp1ZWjDimOXEbyvrjEGnXZt27xmIu4NSsvS
+ DvATP7pLVZovyyCpJ7tcyM7c1mDUQemi+DJTPOixoreH2UUn1KiO8zaKBJT/Squn3eK
+ plucLj3oqCt3tcJpEQ5TpZva0D42eYVFMAk59WV0=
+Received: from VM-144-5-centos.localdomain (159.75.205.129 [159.75.205.129])
+ by mx.zoho.com.cn with SMTPS id 161051532694932.612786905826056;
+ Wed, 13 Jan 2021 13:22:06 +0800 (CST)
+From: Chengguang Xu <cgxu519@mykernel.net>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Wed, 13 Jan 2021 13:21:54 +0800
+Message-Id: <1610515314-28505-1-git-send-email-cgxu519@mykernel.net>
+X-Mailer: git-send-email 1.8.3.1
+X-ZohoCNMailClient: External
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1kzUze-005kII-CG
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to keep isolation of atomic
- write
+ for more information. [URIs: mykernel.net]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1kzYcA-006ahI-QB
+Subject: [f2fs-dev] [PATCH] f2fs: fix to use per-inode maxbytes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,171 +91,141 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Chengguang Xu <cgxu519@mykernel.net>,
+ linux-f2fs-devel@lists.sourceforge.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/1/13 6:32, Jaegeuk Kim wrote:
-> On 01/12, Chao Yu wrote:
->> On 2021/1/12 0:32, Jaegeuk Kim wrote:
->>> On 01/06, Jaegeuk Kim wrote:
->>>> On 01/06, Jaegeuk Kim wrote:
->>>>> Hi Chao,
->>>>>
->>>>> With a quick test, this patch causes down_write failure resulting in blocking
->>>>> process. I didn't dig in the bug so, please check the code again. :P
->>>>
->>>> nvm. I can see it works now.
->>>
->>> Hmm, this gives a huge perf regression when running sqlite. :(
->>> We may need to check the lock coverage. Thoughts?
->>
->> I added i_mmap_sem lock only, so it can cause atomic_{start,commit,finish}
->> race with mmap and truncation operations in additionally.
->>
->> I'd like to know what's your sqlite testcase?
-> 
-> Nothing special. Just generating multiple sqlite transactions to the same db.
+F2FS inode may have different max size, e.g. compressed file have
+less blkaddr entries in all its direct-node blocks, result in being
+with less max filesize. So change to use per-inode maxbytes.
 
-I doubt that start/commit flow race with ->release/->flush interface can cause
-lower concurrency?
+Signed-off-by: Chengguang Xu <cgxu519@mykernel.net>
+---
+ fs/f2fs/data.c  |  2 +-
+ fs/f2fs/f2fs.h  |  2 +-
+ fs/f2fs/file.c  |  9 ++++++---
+ fs/f2fs/super.c | 12 ++++++++----
+ 4 files changed, 16 insertions(+), 9 deletions(-)
 
-f2fs_ioc_start_atomic_write or			->release or ->flush
-f2fs_ioc_commit_atomic_write
-						 - f2fs_drop_inmem_pages
-						  down_write(&F2FS_I(inode)->i_mmap_sem);
-down_write(&F2FS_I(inode)->i_mmap_sem);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index aa34d62..56badcb 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3831,7 +3831,7 @@ static sector_t f2fs_bmap(struct address_space *mapping, sector_t block)
+ 		filemap_write_and_wait(mapping);
+ 
+ 	/* Block number less than F2FS MAX BLOCKS */
+-	if (unlikely(block >= F2FS_I_SB(inode)->max_file_blocks))
++	if (unlikely(block >= max_file_blocks(inode)))
+ 		goto out;
+ 
+ 	if (f2fs_compressed_file(inode)) {
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index bb11759..4328b98 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1444,7 +1444,6 @@ struct f2fs_sb_info {
+ 	unsigned int total_sections;		/* total section count */
+ 	unsigned int total_node_count;		/* total node block count */
+ 	unsigned int total_valid_node_count;	/* valid node block count */
+-	loff_t max_file_blocks;			/* max block index of file */
+ 	int dir_level;				/* directory level */
+ 	int readdir_ra;				/* readahead inode in readdir */
+ 	u64 max_io_bytes;			/* max io bytes to merge IOs */
+@@ -3232,6 +3231,7 @@ static inline int f2fs_add_link(struct dentry *dentry, struct inode *inode)
+ void f2fs_inode_synced(struct inode *inode);
+ int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
+ int f2fs_quota_sync(struct super_block *sb, int type);
++loff_t max_file_blocks(struct inode *inode);
+ void f2fs_quota_off_umount(struct super_block *sb);
+ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
+ int f2fs_sync_fs(struct super_block *sb, int sync);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index f585545..5cddd23 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -483,6 +483,9 @@ static loff_t f2fs_llseek(struct file *file, loff_t offset, int whence)
+ 	struct inode *inode = file->f_mapping->host;
+ 	loff_t maxbytes = inode->i_sb->s_maxbytes;
+ 
++	if (f2fs_compressed_file(inode))
++		maxbytes = max_file_blocks(inode) << F2FS_BLKSIZE_BITS;
++
+ 	switch (whence) {
+ 	case SEEK_SET:
+ 	case SEEK_CUR:
+@@ -667,7 +670,7 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
+ 
+ 	free_from = (pgoff_t)F2FS_BLK_ALIGN(from);
+ 
+-	if (free_from >= sbi->max_file_blocks)
++	if (free_from >= max_file_blocks(inode))
+ 		goto free_partial;
+ 
+ 	if (lock)
+@@ -2730,7 +2733,7 @@ static int f2fs_ioc_defragment(struct file *filp, unsigned long arg)
+ 		return -EINVAL;
+ 
+ 	if (unlikely((range.start + range.len) >> PAGE_SHIFT >
+-					sbi->max_file_blocks))
++					max_file_blocks(inode)))
+ 		return -EINVAL;
+ 
+ 	err = mnt_want_write_file(filp);
+@@ -3293,7 +3296,7 @@ int f2fs_precache_extents(struct inode *inode)
+ 	map.m_next_extent = &m_next_extent;
+ 	map.m_seg_type = NO_CHECK_TYPE;
+ 	map.m_may_create = false;
+-	end = F2FS_I_SB(inode)->max_file_blocks;
++	end = max_file_blocks(inode);
+ 
+ 	while (map.m_lblk < end) {
+ 		map.m_len = end - map.m_lblk;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b4a07fe..9132c39 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2638,10 +2638,10 @@ static struct dentry *f2fs_fh_to_parent(struct super_block *sb, struct fid *fid,
+ 	.get_parent = f2fs_get_parent,
+ };
+ 
+-static loff_t max_file_blocks(void)
++loff_t max_file_blocks(struct inode *inode)
+ {
+ 	loff_t result = 0;
+-	loff_t leaf_count = DEF_ADDRS_PER_BLOCK;
++	loff_t leaf_count;
+ 
+ 	/*
+ 	 * note: previously, result is equal to (DEF_ADDRS_PER_INODE -
+@@ -2650,6 +2650,11 @@ static loff_t max_file_blocks(void)
+ 	 * result as zero.
+ 	 */
+ 
++	if (inode && f2fs_compressed_file(inode))
++		leaf_count = ADDRS_PER_BLOCK(inode);
++	else
++		leaf_count = DEF_ADDRS_PER_BLOCK;
++
+ 	/* two direct node blocks */
+ 	result += (leaf_count * 2);
+ 
+@@ -3533,8 +3538,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	if (err)
+ 		goto free_options;
+ 
+-	sbi->max_file_blocks = max_file_blocks();
+-	sb->s_maxbytes = sbi->max_file_blocks <<
++	sb->s_maxbytes = max_file_blocks(NULL) <<
+ 				le32_to_cpu(raw_super->log_blocksize);
+ 	sb->s_max_links = F2FS_LINK_MAX;
+ 
+-- 
+1.8.3.1
 
-How about trying this testcase again after removing i_mmap_sem lock in
-f2fs_drop_inmem_pages()?
-
-Thanks,
-
-> 
->>
->> Thanks,
->>
->>>
->>>>
->>>>>
->>>>> On 12/30, Chao Yu wrote:
->>>>>> ThreadA					ThreadB
->>>>>> - f2fs_ioc_start_atomic_write
->>>>>> - write
->>>>>> - f2fs_ioc_commit_atomic_write
->>>>>>    - f2fs_commit_inmem_pages
->>>>>>    - f2fs_drop_inmem_pages
->>>>>>    - f2fs_drop_inmem_pages
->>>>>>     - __revoke_inmem_pages
->>>>>> 					- f2fs_vm_page_mkwrite
->>>>>> 					 - set_page_dirty
->>>>>> 					  - tag ATOMIC_WRITTEN_PAGE and add page
->>>>>> 					    to inmem_pages list
->>>>>>     - clear_inode_flag(FI_ATOMIC_FILE)
->>>>>> 					- f2fs_vm_page_mkwrite
->>>>>> 					  - set_page_dirty
->>>>>> 					   - f2fs_update_dirty_page
->>>>>> 					    - f2fs_trace_pid
->>>>>> 					     - tag inmem page private to pid
->>>>>> 					- truncate
->>>>>> 					 - f2fs_invalidate_page
->>>>>> 					 - set page->mapping to NULL
->>>>>> 					  then it will cause panic once we
->>>>>> 					  access page->mapping
->>>>>>
->>>>>> The root cause is we missed to keep isolation of atomic write in the case
->>>>>> of commit_atomic_write vs mkwrite, let commit_atomic_write helds i_mmap_sem
->>>>>> lock to avoid this issue.
->>>>>>
->>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>> ---
->>>>>> v2:
->>>>>> - use i_mmap_sem to avoid mkwrite racing with below flows:
->>>>>>    * f2fs_ioc_start_atomic_write
->>>>>>    * f2fs_drop_inmem_pages
->>>>>>    * f2fs_commit_inmem_pages
->>>>>>
->>>>>>    fs/f2fs/file.c    | 3 +++
->>>>>>    fs/f2fs/segment.c | 7 +++++++
->>>>>>    2 files changed, 10 insertions(+)
->>>>>>
->>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>>>> index 4e6d4b9120a8..a48ec650d691 100644
->>>>>> --- a/fs/f2fs/file.c
->>>>>> +++ b/fs/f2fs/file.c
->>>>>> @@ -2050,6 +2050,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->>>>>>    		goto out;
->>>>>>    	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->>>>>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    	/*
->>>>>>    	 * Should wait end_io to count F2FS_WB_CP_DATA correctly by
->>>>>> @@ -2060,6 +2061,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->>>>>>    			  inode->i_ino, get_dirty_pages(inode));
->>>>>>    	ret = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
->>>>>>    	if (ret) {
->>>>>> +		up_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->>>>>>    		goto out;
->>>>>>    	}
->>>>>> @@ -2073,6 +2075,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->>>>>>    	/* add inode in inmem_list first and set atomic_file */
->>>>>>    	set_inode_flag(inode, FI_ATOMIC_FILE);
->>>>>>    	clear_inode_flag(inode, FI_ATOMIC_REVOKE_REQUEST);
->>>>>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->>>>>>    	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
->>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>>>> index d8570b0359f5..dab870d9faf6 100644
->>>>>> --- a/fs/f2fs/segment.c
->>>>>> +++ b/fs/f2fs/segment.c
->>>>>> @@ -327,6 +327,8 @@ void f2fs_drop_inmem_pages(struct inode *inode)
->>>>>>    	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->>>>>>    	struct f2fs_inode_info *fi = F2FS_I(inode);
->>>>>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>> +
->>>>>>    	while (!list_empty(&fi->inmem_pages)) {
->>>>>>    		mutex_lock(&fi->inmem_lock);
->>>>>>    		__revoke_inmem_pages(inode, &fi->inmem_pages,
->>>>>> @@ -344,6 +346,8 @@ void f2fs_drop_inmem_pages(struct inode *inode)
->>>>>>    		sbi->atomic_files--;
->>>>>>    	}
->>>>>>    	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
->>>>>> +
->>>>>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    }
->>>>>>    void f2fs_drop_inmem_page(struct inode *inode, struct page *page)
->>>>>> @@ -467,6 +471,7 @@ int f2fs_commit_inmem_pages(struct inode *inode)
->>>>>>    	f2fs_balance_fs(sbi, true);
->>>>>>    	down_write(&fi->i_gc_rwsem[WRITE]);
->>>>>> +	down_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    	f2fs_lock_op(sbi);
->>>>>>    	set_inode_flag(inode, FI_ATOMIC_COMMIT);
->>>>>> @@ -478,6 +483,8 @@ int f2fs_commit_inmem_pages(struct inode *inode)
->>>>>>    	clear_inode_flag(inode, FI_ATOMIC_COMMIT);
->>>>>>    	f2fs_unlock_op(sbi);
->>>>>> +
->>>>>> +	up_write(&F2FS_I(inode)->i_mmap_sem);
->>>>>>    	up_write(&fi->i_gc_rwsem[WRITE]);
->>>>>>    	return err;
->>>>>> -- 
->>>>>> 2.29.2
->>>>>
->>>>>
->>>>> _______________________________________________
->>>>> Linux-f2fs-devel mailing list
->>>>> Linux-f2fs-devel@lists.sourceforge.net
->>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>>>
->>>>
->>>> _______________________________________________
->>>> Linux-f2fs-devel mailing list
->>>> Linux-f2fs-devel@lists.sourceforge.net
->>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>> .
->>>
-> .
-> 
 
 
 _______________________________________________
