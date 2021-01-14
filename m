@@ -2,105 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05EB82F5AA1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Jan 2021 07:23:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6ED32F5B99
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Jan 2021 08:54:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzw2k-0002yD-Pn; Thu, 14 Jan 2021 06:23:38 +0000
+	id 1kzxSJ-0005ge-FV; Thu, 14 Jan 2021 07:54:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1kzw2i-0002xx-Pz
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 06:23:36 +0000
+ (envelope-from <mchehab@kernel.org>) id 1kzxSI-0005gY-LA
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 07:54:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y7pAoih+EszjbXCqOpKK8A31FjJDrn7uQtTq3jZ7YdU=; b=TbpPOieR7urGBl+wrlleEQGYi8
- aMZdqwVpMw8EoLNQ0sQolTv8axoF7wMjRD+/79jspO53FlTjEU8FuNK6fC6X8omQRu/h51jwnkS+A
- V5IdggpdWojhD1BWCHcYbdX8qr43IU5njn8md8+ZHEEC1A7/pRh1RFpOaCvsW4jsiMQo=;
+ bh=rZHOKWB+9rM+ZlhqnnEm3U3UqoIUvrhJQ1kvEtTRLbM=; b=CzmCVlXzNv6qokvG7AR838ROAt
+ aH9owSUvp26gEa6kkWNv/pN2GdcvERO06eS3E6JSvvgjOOFRdwqd2xPtYU8ZmUr/YFJCS8it1ewUd
+ 4dG7p2rA6jBko3B54R6w0gXRu4YxQO1YR/PrQGsFZrPyQNc9zbdXM7TiGGu3tpmkpwtQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Y7pAoih+EszjbXCqOpKK8A31FjJDrn7uQtTq3jZ7YdU=; b=NH46vSz0S3nJOFGMeuZbzyyuhC
- vdZ9K/8ve8L1t/WCH3OWfVUSP7hihCD5Ib0YT7MLvmmrBEHP4HHNku8hHUE1/8ysgYcPEzNnJT65U
- uz5BW/OmlnRE4bVR/SBWvJWlO9pFzLdHi8swfFcW32Oz7tTROEquYQA209AGB6axDLc0=;
-Received: from mail-pf1-f179.google.com ([209.85.210.179])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1kzw2W-006nmC-Al
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 06:23:36 +0000
-Received: by mail-pf1-f179.google.com with SMTP id c12so2746809pfo.10
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Jan 2021 22:23:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Y7pAoih+EszjbXCqOpKK8A31FjJDrn7uQtTq3jZ7YdU=;
- b=JljrT+W9M9iCLsH8Zlw73+3RE8x9Ts0XoHw1KdTAhn9I12JconaHiVcnSRkf+uv5Ef
- BAEIOYuubRjNEc+82orb8pBIUhMrlfpV9bFS7Z3uD9fts6aoLpUC5Rmim2c7cgzl8bSW
- jVn9MOQS1DFcbfeqgTu7O02vvIiM92q8RIdF1ehAlyWjkDYg/3GF9j0CuRBnBsxFLauH
- DbjtC58GL12GJtrwDMEj9zyQEym3YAREDmEmYCXXKyO8YwoQCsd+eViG9Uh3hnrkgy9J
- m9it1GcKqzjzH6fnAr0Q4SME06s/Nj1zlVSSt3hoIFGRGV8DbEYftAqFIhqgU1+4qAWa
- gT+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Y7pAoih+EszjbXCqOpKK8A31FjJDrn7uQtTq3jZ7YdU=;
- b=U4JJ3G+PqudanBO6ad16dR7gLgQrl9sCVd55en/SBRfGcCk7oi5M7EMYaA9nLFF0Pd
- 8TTftbr1BphNdCmvqJm4N5KElAVvDqAT8GGevRgmpZxZ/rmmpykfUF68ChFQhXqtdJQa
- gmPZgU9OiPdf42Hr+lt167Mw7iFl0bsofTG/zqRucElD5NpCXmELoMsd8RpYp2HPGnW0
- FY/bzMAFjgN1zVDOAqC/n6bff5E1pBNDf6zyk0fL86+9+ojyL7mpydSciZEvFpfZgldv
- XCDkEXAWh2QpXnV8AisM8Z3lHxMwUmJVgiyNJQy1fEF6p8fLZssA1VyyMG9anMobkdKQ
- j2BA==
-X-Gm-Message-State: AOAM5317zA+pNAoMoSJpc0I9bK0U/xnkn06cZGuU96R5SRgQ5luWOMwM
- TF9DHG1uuYy3A69naPCilhk=
-X-Google-Smtp-Source: ABdhPJy1uwBX6p87JlH5XPD/onqnpVf2uU4hU2BFH9foYFpOaL+XoL6KAjxVbQxlN+9wT3D+RfrpUQ==
-X-Received: by 2002:a63:605:: with SMTP id 5mr5812179pgg.144.1610605398374;
- Wed, 13 Jan 2021 22:23:18 -0800 (PST)
-Received: from daehojeong1.seo.corp.google.com
- ([2401:fa00:d:11:a6ae:11ff:fe18:6ce2])
- by smtp.gmail.com with ESMTPSA id g26sm4189131pfo.35.2021.01.13.22.23.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Jan 2021 22:23:17 -0800 (PST)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Thu, 14 Jan 2021 15:23:02 +0900
-Message-Id: <20210114062302.3809664-2-daeho43@gmail.com>
-X-Mailer: git-send-email 2.30.0.296.g2bfb1c46d8-goog
-In-Reply-To: <20210114062302.3809664-1-daeho43@gmail.com>
-References: <20210114062302.3809664-1-daeho43@gmail.com>
+ h=Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=rZHOKWB+9rM+ZlhqnnEm3U3UqoIUvrhJQ1kvEtTRLbM=; b=U
+ 3Bg3sPSrB1eLsn0BdC3cDlstvpJS1SsJu9FUXP01ecNI6HOh9eti5J5gZkAMw6a8eXLg6coaaahsA
+ JlA5dqBJWfaAo7pUODSqv2uW8vo0qoxcIkCQu5ll76woeUZ8D2QfesGrkw5OPQkTlq3nm7SosdGia
+ i0geF/PfUBPYmTMY=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1kzxSC-00EdjH-J7
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 07:54:06 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D4C4C239EF;
+ Thu, 14 Jan 2021 07:53:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1610610830;
+ bh=BXt2olIMSsLtD8I2dioNC1dF1gnxlCbQs+WN6FCb4nE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=s0XxntmYYJHZOMEV2ezXMlavrLQamHOON6XCuxktQJvVAECs99C5z/1aJ9vJhpL8u
+ ooeeAl2QTMZNzf+wMfEpKpWg40tk1M0qnksP48Wj5LotBytvL5l6d4s7r5DnGwrSaG
+ EH99zAztLa1B6MMeto4xMR8BJQ0ZLi5vAvwqfqQhhWEPmUUPibd3hUMclqtKjDn9OB
+ Utpv0Ju4+AOG0dmdSki7FZM9GtjIWxV8jruDU/sDouAY8GwvD2n2HBSlFqfv/WWpXP
+ DJr7Fq0cZK3daZV+WRhSNlCFNyWFUZ+j72ACR35krQCcJ9iaizMmnvIhYttJJ/HyQS
+ YKU4ctJMp8S5g==
+Received: by mail.kernel.org with local (Exim 4.94)
+ (envelope-from <mchehab@kernel.org>)
+ id 1kzxRz-00EPu1-2O; Thu, 14 Jan 2021 08:53:47 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Date: Thu, 14 Jan 2021 08:53:35 +0100
+Message-Id: <cover.1610610444.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.179 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.179 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1kzw2W-006nmC-Al
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: add ckpt_thread_ioprio sysfs node
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1kzxSC-00EdjH-J7
+Subject: [f2fs-dev] [PATCH 00/10] Fix documentation warnings at linux-next
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,177 +82,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: kvm@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ Tom Rix <trix@redhat.com>, linux-fpga@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Harry Wei <harryxiyou@gmail.com>,
+ Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ amd-gfx@lists.freedesktop.org, Peter Zijlstra <peterz@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, linux-media@vger.kernel.org,
+ Moritz Fischer <mdf@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Felipe Balbi <balbi@kernel.org>,
+ linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Daniel Vetter <daniel@ffwll.ch>,
+ Wu Hao <hao.wu@intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+This series fixes the documentation warnings found at next-20210114.
 
-Added "ckpt_thread_ioprio" sysfs node to give a way to change checkpoint
-merge daemon's io priority. Its default value is "be,3", which means
-"BE" I/O class and I/O priority "3". We can select the class between "rt"
-and "be", and set the I/O priority within valid range of it.
-"," delimiter is necessary in between I/O class and priority number.
+Most of the changes here are trivial. 
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
-v2:
-- adapt to inlining ckpt_req_control of f2fs_sb_info
----
- Documentation/ABI/testing/sysfs-fs-f2fs |  8 ++++
- fs/f2fs/checkpoint.c                    |  2 +-
- fs/f2fs/f2fs.h                          |  1 +
- fs/f2fs/sysfs.c                         | 51 +++++++++++++++++++++++++
- 4 files changed, 61 insertions(+), 1 deletion(-)
+While those patches could be merged via the docs tree during
+the next merge window, It sounds better to have those patches 
+merged directly via each maintainer's tree, where the new
+warnings were introduced.
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 3dfee94e0618..0c48b2e7dfd4 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -377,3 +377,11 @@ Description:	This gives a control to limit the bio size in f2fs.
- 		Default is zero, which will follow underlying block layer limit,
- 		whereas, if it has a certain bytes value, f2fs won't submit a
- 		bio larger than that size.
-+What:		/sys/fs/f2fs/<disk>/ckpt_thread_ioprio
-+Date:		January 2021
-+Contact:	"Daeho Jeong" <daehojeong@google.com>
-+Description:	Give a way to change checkpoint merge daemon's io priority.
-+		Its default value is "be,3", which means "BE" I/O class and
-+		I/O priority "3". We can select the class between "rt" and "be",
-+		and set the I/O priority within valid range of it. "," delimiter
-+		is necessary in between I/O class and priority number.
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index e0668cec3b80..62bd6f449bb7 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1840,7 +1840,7 @@ int f2fs_start_ckpt_thread(struct f2fs_sb_info *sbi)
- 	if (IS_ERR(cprc->f2fs_issue_ckpt))
- 		return PTR_ERR(cprc->f2fs_issue_ckpt);
- 
--	set_task_ioprio(cprc->f2fs_issue_ckpt, DEFAULT_CHECKPOINT_IOPRIO);
-+	set_task_ioprio(cprc->f2fs_issue_ckpt, cprc->ckpt_thread_ioprio);
- 
- 	return 0;
- }
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f2ae075aa723..517eb0eda638 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -276,6 +276,7 @@ struct ckpt_req {
- 
- struct ckpt_req_control {
- 	struct task_struct *f2fs_issue_ckpt;	/* checkpoint task */
-+	int ckpt_thread_ioprio;			/* checkpoint merge thread ioprio */
- 	wait_queue_head_t ckpt_wait_queue;	/* waiting queue for wake-up */
- 	atomic_t issued_ckpt;		/* # of actually issued ckpts */
- 	atomic_t total_ckpt;		/* # of total ckpts */
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 30bae57428d1..ddd70395148d 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -11,6 +11,7 @@
- #include <linux/f2fs_fs.h>
- #include <linux/seq_file.h>
- #include <linux/unicode.h>
-+#include <linux/ioprio.h>
- 
- #include "f2fs.h"
- #include "segment.h"
-@@ -34,6 +35,7 @@ enum {
- 	FAULT_INFO_TYPE,	/* struct f2fs_fault_info */
- #endif
- 	RESERVED_BLOCKS,	/* struct f2fs_sb_info */
-+	CPRC_INFO,	/* struct ckpt_req_control */
- };
- 
- struct f2fs_attr {
-@@ -70,6 +72,8 @@ static unsigned char *__struct_ptr(struct f2fs_sb_info *sbi, int struct_type)
- 	else if (struct_type == STAT_INFO)
- 		return (unsigned char *)F2FS_STAT(sbi);
- #endif
-+	else if (struct_type == CPRC_INFO)
-+		return (unsigned char *)&sbi->cprc_info;
- 	return NULL;
- }
- 
-@@ -255,6 +259,23 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 		return len;
- 	}
- 
-+	if (!strcmp(a->attr.name, "ckpt_thread_ioprio")) {
-+		struct ckpt_req_control *cprc = &sbi->cprc_info;
-+		int len = 0;
-+		int class = IOPRIO_PRIO_CLASS(cprc->ckpt_thread_ioprio);
-+		int data = IOPRIO_PRIO_DATA(cprc->ckpt_thread_ioprio);
-+
-+		if (class == IOPRIO_CLASS_RT)
-+			len += scnprintf(buf + len, PAGE_SIZE - len, "rt,");
-+		else if (class == IOPRIO_CLASS_BE)
-+			len += scnprintf(buf + len, PAGE_SIZE - len, "be,");
-+		else
-+			return -EINVAL;
-+
-+		len += scnprintf(buf + len, PAGE_SIZE - len, "%d\n", data);
-+		return len;
-+	}
-+
- 	ui = (unsigned int *)(ptr + a->offset);
- 
- 	return sprintf(buf, "%u\n", *ui);
-@@ -308,6 +329,34 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return ret ? ret : count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "ckpt_thread_ioprio")) {
-+		const char *name = strim((char *)buf);
-+		struct ckpt_req_control *cprc = &sbi->cprc_info;
-+		int class;
-+		long data;
-+		int ret;
-+
-+		if (!strncmp(name, "rt,", 3))
-+			class = IOPRIO_CLASS_RT;
-+		else if (!strncmp(name, "be,", 3))
-+			class = IOPRIO_CLASS_BE;
-+		else
-+			return -EINVAL;
-+
-+		name += 3;
-+		ret = kstrtol(name, 10, &data);
-+		if (ret)
-+			return ret;
-+		if (data >= IOPRIO_BE_NR || data < 0)
-+			return -EINVAL;
-+
-+		cprc->ckpt_thread_ioprio = IOPRIO_PRIO_VALUE(class, data);
-+		ret = set_task_ioprio(cprc->f2fs_issue_ckpt,
-+				cprc->ckpt_thread_ioprio);
-+
-+		return count;
-+	}
-+
- 	ui = (unsigned int *)(ptr + a->offset);
- 
- 	ret = kstrtoul(skip_spaces(buf), 0, &t);
-@@ -567,6 +616,7 @@ F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
- #endif
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
-+F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
- F2FS_GENERAL_RO_ATTR(dirty_segments);
- F2FS_GENERAL_RO_ATTR(free_segments);
- F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
-@@ -652,6 +702,7 @@ static struct attribute *f2fs_attrs[] = {
- #endif
- 	ATTR_LIST(data_io_flag),
- 	ATTR_LIST(node_io_flag),
-+	ATTR_LIST(ckpt_thread_ioprio),
- 	ATTR_LIST(dirty_segments),
- 	ATTR_LIST(free_segments),
- 	ATTR_LIST(unusable),
+Regards,
+Mauro
+
+Mauro Carvalho Chehab (10):
+  doc/zh_CN: fix Sphinx errors
+  ABI: sysfs-fs-f2fs: fix a table identation
+  KVM: x86: hyper-v: add a blank line to remove building warnings
+  ABI: sysfs-firmware-sgi_uv
+  docs: fpga: dfl.rst: Fix a couple building issues
+  drm: amd: amdgpu_dm.h: fix a wrong kernel-doc markup
+  dwc3: document gadget_max_speed
+  doc: zh_CN/mips: fix doc cross-references
+  media: v4l2-subdev.rst: fix a missing whitespace
+  seqlock: kernel-doc: fix a prototype
+
+ Documentation/ABI/testing/sysfs-firmware-sgi_uv       | 1 +
+ Documentation/ABI/testing/sysfs-fs-f2fs               | 3 ++-
+ Documentation/driver-api/media/v4l2-subdev.rst        | 2 +-
+ Documentation/fpga/dfl.rst                            | 4 ++--
+ Documentation/translations/zh_CN/mips/booting.rst     | 2 +-
+ Documentation/translations/zh_CN/mips/features.rst    | 2 +-
+ Documentation/translations/zh_CN/mips/index.rst       | 2 +-
+ Documentation/translations/zh_CN/mips/ingenic-tcu.rst | 6 +++---
+ Documentation/virt/kvm/api.rst                        | 1 +
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h     | 2 +-
+ drivers/usb/dwc3/core.h                               | 1 +
+ include/linux/seqlock.h                               | 2 +-
+ 12 files changed, 16 insertions(+), 12 deletions(-)
+
 -- 
-2.30.0.296.g2bfb1c46d8-goog
+2.29.2
+
 
 
 
