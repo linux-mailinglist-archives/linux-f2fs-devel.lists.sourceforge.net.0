@@ -2,75 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53E8E2F52AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Jan 2021 19:50:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 915622F55DF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Jan 2021 02:42:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1kzlDV-0000Yg-Pg; Wed, 13 Jan 2021 18:50:01 +0000
+	id 1kzreP-0007lC-8S; Thu, 14 Jan 2021 01:42:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1kzlDU-0000YL-Dp
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 18:50:00 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1kzreN-0007kp-Ke
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 01:42:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CdEBujiUpHGz2WkDpOMUr2yv+bGpugbwYeW/PEujtvI=; b=muYuyhsR5lt+1m0kpfiNIIcGqu
- QVk+2DoLtIXb1LNCrRB1/8qLv4SBIRzSpHn3FdF29lsSWfPo/QBECsvKJVFOpN5uTEc0k/9Se1ee5
- vusabiKbaPTH0EUyxMy5GJkemVoeO+cYRzqE6o3+6yXjzSC/FFRDHulqt7IruMzfEBbE=;
+ bh=kP982GQJZ/EoKBuwzb11gkUUu+V3Jas3oJDe/TaZKVA=; b=WwOaj7lF6/0CKDKmG3Sv8+rV0d
+ hhHBPGMQqSuUHCG6e76TC+sU+Di2yPrlFBx4YCqR9dqtKhOUlavh1ptvd1TYiiMggI9EGgGyxTpSp
+ OErYI66VL+1HAS1TK9O0DJu/o6kANyaBPZv+dWTlUqO1zEKwwggVnKaJfCqTO8jyuX60=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=CdEBujiUpHGz2WkDpOMUr2yv+bGpugbwYeW/PEujtvI=; b=g9+dVfVTlNqUOEmK1CAmiSmr6z
- lZUFsl1lkuJJ/xZXPfOTF/n65h/ekjUPHzi+RUjDp0QhMknA62xO2kIeNcPB8xzXo2oOfiBe2veLr
- 2lVThlLWHjc/4BVZk5SebHvmxOMmzKBDRhDNLuUTEp9ZPYTYG3++rYl2SjGUevyg0cBQ=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=kP982GQJZ/EoKBuwzb11gkUUu+V3Jas3oJDe/TaZKVA=; b=Z
+ vAaVPH6kv4CqMNpGaRkJpZdkaRTYO8TRac5wGEQxQK9JsGyXtS4vggeTEm2sUAwkseFNwLtfGk0Rr
+ D2GfET+Sd3roYrw2nBRnoPnBFGWs+u9Hr7BwEXNhU04WkoYh7McfPHMcTflnZPtkEuEYbdPlR1qB+
+ wBYCMDcLTPP5mKEk=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1kzlDN-0031Pu-4h
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Jan 2021 18:50:00 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6D0DB207A3;
- Wed, 13 Jan 2021 18:49:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610563782;
- bh=jxqvBKT6pKQlxpXnEcXRV+aAp3XKL18v0jD9gTxQod8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XRBnyiwLdpRSOKPhWinMw36N+TRus/Bi7up7HkQNZcTu2N7ZEE5asNNB3uZspYeQg
- XcCoNUuqI1V2/BmdZLbkPwyHPtPbzjGpWZw4eczh/1yXQQQGrbs8A4z3LiXQRkI5MK
- O4SkOlqoZUA7DfFx5rFh2kHxEveVBymvHDMPzvsr7WQo31jKRyCrV8y82pcbuy7nZG
- dsN2Xo37P+r1DIWl/vx3NhN6Aa9WEwnVax+49O6+LlCfiTiRrH6vhe/2U27DOG+0RX
- sf3TdtlncT9iMYdzLxzujczxx3cNDXyhlEGX4np6afd/3GFHuniQgAjnR64Gy18mt4
- MZJUIPQ0MGpPA==
-Date: Wed, 13 Jan 2021 10:49:40 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <X/9AxL5Mrt+CiKHx@sol.localdomain>
-References: <20210112190253.64307-1-ebiggers@kernel.org>
- <20210113162957.GA26686@quack2.suse.cz>
+ id 1kzreE-0058Jj-S5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 14 Jan 2021 01:42:11 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4DGRq31btxzj69R;
+ Thu, 14 Jan 2021 09:41:03 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
+ 14.3.498.0; Thu, 14 Jan 2021 09:41:45 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Thu, 14 Jan 2021 09:41:27 +0800
+Message-ID: <20210114014127.54510-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210113162957.GA26686@quack2.suse.cz>
-X-Spam-Score: -0.3 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1kzlDN-0031Pu-4h
-Subject: Re: [f2fs-dev] [PATCH v3 00/11] lazytime fix and cleanups
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1kzreE-0058Jj-S5
+Subject: [f2fs-dev] [PATCH v5 5/5] f2fs: introduce sb_status sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,49 +76,101 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jan 13, 2021 at 05:29:58PM +0100, Jan Kara wrote:
-> Hello!
-> 
-> On Tue 12-01-21 11:02:42, Eric Biggers wrote:
-> > Patch 1 fixes a bug in how __writeback_single_inode() handles lazytime
-> > expirations.  I originally reported this last year
-> > (https://lore.kernel.org/r/20200306004555.GB225345@gmail.com) because it
-> > causes the FS_IOC_REMOVE_ENCRYPTION_KEY ioctl to not work properly, as
-> > the bug causes inodes to remain dirty after a sync.
-> > 
-> > It also turns out that lazytime on XFS is partially broken because it
-> > doesn't actually write timestamps to disk after a sync() or after
-> > dirtytime_expire_interval.  This is fixed by the same fix.
-> > 
-> > This supersedes previously proposed fixes, including
-> > https://lore.kernel.org/r/20200307020043.60118-1-tytso@mit.edu and
-> > https://lore.kernel.org/r/20200325122825.1086872-3-hch@lst.de from last
-> > year (which had some issues and didn't fix the XFS bug), and v1 of this
-> > patchset which took a different approach
-> > (https://lore.kernel.org/r/20210105005452.92521-1-ebiggers@kernel.org).
-> > 
-> > Patches 2-11 then clean up various things related to lazytime and
-> > writeback, such as clarifying the semantics of ->dirty_inode() and the
-> > inode dirty flags, and improving comments.
-> > 
-> > This patchset applies to v5.11-rc2.
-> 
-> Thanks for the patches. I've picked the patches to my tree. I plan to push
-> patch 1/11 to Linus later this week, the rest of the cleanups will go to
-> him during the next merge window.
-> 
-> 								Honza
+Introduce /sys/fs/f2fs/<devname>/stat/sb_status to show superblock
+status in real time as a hexadecimal value.
 
-Sounds good, thanks!
+value           sb status macro                 description
 
-- Eric
+0x1             SBI_IS_DIRTY,                   /* dirty flag for checkpoint */
+0x2             SBI_IS_CLOSE,                   /* specify unmounting */
+0x4             SBI_NEED_FSCK,                  /* need fsck.f2fs to fix */
+0x8             SBI_POR_DOING,                  /* recovery is doing or not */
+0x10            SBI_NEED_SB_WRITE,              /* need to recover superblock */
+0x20            SBI_NEED_CP,                    /* need to checkpoint */
+0x40            SBI_IS_SHUTDOWN,                /* shutdown by ioctl */
+0x80            SBI_IS_RECOVERED,               /* recovered orphan/data */
+0x100           SBI_CP_DISABLED,                /* CP was disabled last mount */
+0x200           SBI_CP_DISABLED_QUICK,          /* CP was disabled quickly */
+0x400           SBI_QUOTA_NEED_FLUSH,           /* need to flush quota info in CP */
+0x800           SBI_QUOTA_SKIP_FLUSH,           /* skip flushing quota in current CP */
+0x1000          SBI_QUOTA_NEED_REPAIR,          /* quota file may be corrupted */
+0x2000          SBI_IS_RESIZEFS,                /* resizefs is in process */
+
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v5:
+- fix compile warning reported by Stephen:
+Documentation/ABI/testing/sysfs-fs-f2fs:382: WARNING: Malformed table.
+ Documentation/ABI/testing/sysfs-fs-f2fs | 23 +++++++++++++++++++++++
+ fs/f2fs/sysfs.c                         |  8 ++++++++
+ 2 files changed, 31 insertions(+)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 3dfee94e0618..362803901614 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -377,3 +377,26 @@ Description:	This gives a control to limit the bio size in f2fs.
+ 		Default is zero, which will follow underlying block layer limit,
+ 		whereas, if it has a certain bytes value, f2fs won't submit a
+ 		bio larger than that size.
++
++What:		/sys/fs/f2fs/<disk>/stat/sb_status
++Date:		December 2020
++Contact:	"Chao Yu" <yuchao0@huawei.com>
++Description:	Show status of f2fs superblock in real time.
++
++		====== ===================== =================================
++		value  sb status macro       description
++		0x1    SBI_IS_DIRTY          dirty flag for checkpoint
++		0x2    SBI_IS_CLOSE          specify unmounting
++		0x4    SBI_NEED_FSCK         need fsck.f2fs to fix
++		0x8    SBI_POR_DOING         recovery is doing or not
++		0x10   SBI_NEED_SB_WRITE     need to recover superblock
++		0x20   SBI_NEED_CP           need to checkpoint
++		0x40   SBI_IS_SHUTDOWN       shutdown by ioctl
++		0x80   SBI_IS_RECOVERED      recovered orphan/data
++		0x100  SBI_CP_DISABLED       CP was disabled last mount
++		0x200  SBI_CP_DISABLED_QUICK CP was disabled quickly
++		0x400  SBI_QUOTA_NEED_FLUSH  need to flush quota info in CP
++		0x800  SBI_QUOTA_SKIP_FLUSH  skip flushing quota in current CP
++		0x1000 SBI_QUOTA_NEED_REPAIR quota file may be corrupted
++		0x2000 SBI_IS_RESIZEFS       resizefs is in process
++		====== ===================== =================================
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index bd1174ed2e6f..f39874d512ea 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -96,6 +96,12 @@ static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
+ 				sbi->sectors_written_start) >> 1)));
+ }
+ 
++static ssize_t sb_status_show(struct f2fs_attr *a,
++		struct f2fs_sb_info *sbi, char *buf)
++{
++	return sprintf(buf, "%lx\n", sbi->s_flag);
++}
++
+ static ssize_t features_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -702,7 +708,9 @@ static struct attribute *f2fs_feat_attrs[] = {
+ };
+ ATTRIBUTE_GROUPS(f2fs_feat);
+ 
++F2FS_GENERAL_RO_ATTR(sb_status);
+ static struct attribute *f2fs_stat_attrs[] = {
++	ATTR_LIST(sb_status),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs_stat);
+-- 
+2.29.2
+
 
 
 _______________________________________________
