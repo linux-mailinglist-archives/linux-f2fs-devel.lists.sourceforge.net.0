@@ -2,58 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73DD52F8444
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Jan 2021 19:24:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DD872F8445
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Jan 2021 19:24:59 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l0TmG-0005FE-4c; Fri, 15 Jan 2021 18:24:52 +0000
+	id 1l0TmL-0002VY-Ke; Fri, 15 Jan 2021 18:24:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1l0TmD-0005F3-RH
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:24:49 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1l0TmG-0002Uj-TK
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:24:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=flhooEZ4m1yHUxiCjhUIm7IJx8vnss0SxBcZ3QRdqaE=; b=Ana5MShGswXwSVo8ozteeEwsz+
- q2O7jyGKlKfIbelJPjdwDmKJ3gjpJ6RdycsUXCdDJ8SbIwh0eNJ8iNT7oT/t9TWWXMCs5Sc1KSv7B
- M9eth4eTOLtPI690o4oip7tdP5JGw3iKB5MZZrbYJqBEiy6ft0cKgUmhbK0GZxKKLFnc=;
+ bh=2NG672elvREwj0br4+URvSxkR9bBrok3ZX8jw+exV24=; b=edKhjdV/n0ggDYKeKTgq23ZsY9
+ /lNIPpf3H3grrgdMzhejLTUGunHmLtvIlxM3pDvl4GgdiW17GeITpWVfY6V8kknRwOmzxg+7xfuWs
+ 5UZutGSLtJJan1dUtW3tSYWKsT+4LhOZR/nmOkXiZPFRXNiGHP7IrLOlCsZC6rHBd4qw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=flhooEZ4m1yHUxiCjhUIm7IJx8vnss0SxBcZ3QRdqaE=; b=U
- JOsk+5WCTGIJV6CcyNrvnDO9OOhk4QpAutSst7WeKK4DHVTxlZZ+tFCgxBD+k6DQNJ4vyHByquL+1
- U4jD1Y5VFJ+qlv5PNHGeAk6yvoebc7Wkdu3B03JFf/8fFsr4GG5PIB25J8UHCdpCy1Ie1hWwJ6mVX
- ZgloeYumju1wovRw=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=2NG672elvREwj0br4+URvSxkR9bBrok3ZX8jw+exV24=; b=B/oC6Mhw6Ob94lzRln2YlS3bvL
+ 8wBVKNQ4vrhxxEX44yPRTfyb8MYH1RCUfAqCs0CUSsDxya5Ws9t/LEty/r/LZms76KZ4bDXQ39E0Z
+ wsHG2DJ8mwDuHEWpY69KwSxOPTjifGaHpCh0PI9FaiViCo7hGfEvC58HNeoG/cScCBq8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l0Tm5-00GNti-4D
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:24:49 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 634A82313E;
+ id 1l0Tm5-00GNtk-Cs
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:24:52 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C41C723A58;
  Fri, 15 Jan 2021 18:24:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610735075;
- bh=JvwSrvlAR0FRVMmPnsm7OaEmCpo7wayISAk8qiI4LBU=;
- h=From:To:Cc:Subject:Date:From;
- b=Go8IrCO2QSStDmAWKolAVPcV3yRiWv+KRQST9tcks6dVPOiZXwNOTEE9NjzSxFd5G
- oJUmST3E8YS7T/lp3V+1Q3t6t7yL/dfkFHDV8mGeKAqnfQHR93hqIH8UM7MmL6gk8B
- CV2MiLas4mLbdJc/dPLcApu+L25YMI0La12iCe32RbX/Bd6dEn4fXPsWLuhb9tNIhU
- odYTbx8QYbBhrwe14kZ4+a9wo0LUZexRFOyUPKB5/Juasr5XIAnjQ8Qf5dm0Zo5SXc
- g8dQCZbnUhoDAZvWntn8HbxWPBo6O36o04tnfQYv3/ir5kBx3zlh5++ZbQZbT/KhZ3
- wH4r8FiHGLTTw==
+ s=k20201202; t=1610735076;
+ bh=74tyf/NRyjp7aV16DxHd1CVRi/GRx0Qd46mVqvrlGkQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Bmnt1spENj8MmoMybeWfmF4QggXk38vl8jZ1YhVw3SJ/x99Xf3dwVGsWJAHU2VdyO
+ 1VH06vEUULKmh5JtOfqGcK3ztJqKQfqOq9RopUBwd6G/sbjtbpnsrXRDgOgJ6EUDC1
+ gnL3wVcqUOk0rTjokAspYz9VXzJGtLSJ0lc86AmckDLgvwtR5AJS02ECmXtoWKXtmz
+ OjlWlsUFureSpe4wHWNHJf62sJXMo6XnWDiN52Vo6lX5vj0TBjwFfkbguN2tos4WlO
+ ZYJQMR8/Gt8JW/M71D9irOzVEc6OkskjU3nGpN45KH8QZm1G4/OWN6Odh3t1So6IMA
+ eMtBJJwePdPjg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Fri, 15 Jan 2021 10:24:00 -0800
-Message-Id: <20210115182402.35691-1-ebiggers@kernel.org>
+Date: Fri, 15 Jan 2021 10:24:01 -0800
+Message-Id: <20210115182402.35691-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210115182402.35691-1-ebiggers@kernel.org>
+References: <20210115182402.35691-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -66,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1l0Tm5-00GNti-4D
-Subject: [f2fs-dev] [fsverity-utils RFC PATCH 0/2] Add dump_metadata
- subcommand
+X-Headers-End: 1l0Tm5-00GNtk-Cs
+Subject: [f2fs-dev] [fsverity-utils RFC PATCH 1/2] Upgrade to latest
+ fsverity_uapi.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,24 +89,41 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add new subcommand 'fsverity dump_metadata' which wraps the proposed
-FS_IOC_READ_VERITY_METADATA ioctl
-(https://lkml.kernel.org/linux-fscrypt/20210115181819.34732-1-ebiggers@kernel.org/T/#u).
+From: Eric Biggers <ebiggers@google.com>
 
-This subcommand is useful for xfstests and for debugging.
+Add the FS_IOC_READ_VERITY_METADATA ioctl.
 
-Eric Biggers (2):
-  Upgrade to latest fsverity_uapi.h
-  programs/fsverity: Add dump_metadata subcommand
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ common/fsverity_uapi.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
- Makefile                     |   1 +
- common/fsverity_uapi.h       |  14 +++
- programs/cmd_dump_metadata.c | 167 +++++++++++++++++++++++++++++++++++
- programs/fsverity.c          |   6 ++
- programs/fsverity.h          |   6 ++
- 5 files changed, 194 insertions(+)
- create mode 100644 programs/cmd_dump_metadata.c
-
+diff --git a/common/fsverity_uapi.h b/common/fsverity_uapi.h
+index a739c9a..c59a897 100644
+--- a/common/fsverity_uapi.h
++++ b/common/fsverity_uapi.h
+@@ -85,7 +85,21 @@ struct fsverity_formatted_digest {
+ 	__u8 digest[];
+ };
+ 
++#define FS_VERITY_METADATA_TYPE_MERKLE_TREE	1
++#define FS_VERITY_METADATA_TYPE_DESCRIPTOR	2
++#define FS_VERITY_METADATA_TYPE_SIGNATURE	3
++
++struct fsverity_read_metadata_arg {
++	__u64 metadata_type;
++	__u64 offset;
++	__u64 length;
++	__u64 buf_ptr;
++	__u64 __reserved;
++};
++
+ #define FS_IOC_ENABLE_VERITY	_IOW('f', 133, struct fsverity_enable_arg)
+ #define FS_IOC_MEASURE_VERITY	_IOWR('f', 134, struct fsverity_digest)
++#define FS_IOC_READ_VERITY_METADATA \
++	_IOWR('f', 135, struct fsverity_read_metadata_arg)
+ 
+ #endif /* _UAPI_LINUX_FSVERITY_H */
 -- 
 2.30.0
 
