@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CF0C2F8463
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Jan 2021 19:30:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA3EE2F8464
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Jan 2021 19:30:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l0Trg-0005Qe-I2; Fri, 15 Jan 2021 18:30:28 +0000
+	id 1l0Trn-0002iB-0U; Fri, 15 Jan 2021 18:30:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1l0Trf-0005QF-JJ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:30:27 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1l0Tri-0002hw-KV
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:30:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kHuuc8rDmM5/mRiayUvfMQkNmVaIG5SgMqmTwMFDFfc=; b=gnimvjh8mn6ZFW8RWkFnRC08lv
- aD4xEkJTsWvTCq4bKX+kDI4xVgXbe3sN+D2OphTdAPcexDbjtFXgkT07fHP1zWOB402eWPueJB6HG
- lLNM6Se9iIBcZe3v3CZGJmLseDcoVX5OpxEZqkXtJPPjUaC70pV/nionSlEVekikm2zI=;
+ bh=WKPBHFvknLrD71ME2SKASmi3G70OJXG3V2O9wwnRgZ4=; b=NAK+9om0MK3S79jkEq/Xxa90xe
+ iKSJDHyG70SwEsonwKvnTcqnyOdFSzfk0NdijeGEWJEA56Rr2HybAV9jOo0P7Okmvx9uNsDL37Dps
+ znxR3n9nYoBjgsTYdT14sOeaTi3143+LhvbcnXDqYA5+D6T6BsaJcEbMwSo+dtylX9mg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kHuuc8rDmM5/mRiayUvfMQkNmVaIG5SgMqmTwMFDFfc=; b=cbbYjyHl8UYaudqjuqN3+uTYY7
- 6HT3H6c7yBq7HecEPSbnLZIxlQ2LSmOHDi5qcGOrqx2VEiTJ1p4X97Jz9mz1SdeaW1NgygGkdyXbR
- GkZMGEA0umLhvJ/X25XVxt+O6KegLqY+ccivgSRWi8eEnBmr5LsvHPf0jmZupsd562Ng=;
+ bh=WKPBHFvknLrD71ME2SKASmi3G70OJXG3V2O9wwnRgZ4=; b=litgAOqoH154l8kkQOm6Ia74hn
+ cNXQx4HpN9Oeqnr8iMtCvGMRAbjkeVgXoBoENxe5sRYN/gWGtRI0fAxO420bdYU3EK35gngVJtBvN
+ 108fSgGsg/co6H41yfeTuNZ7gaYLnXR/MFtqq87pj0ir6kaHrUrnVmeMcgvyoOY8zgng=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l0Tre-00GOTL-5M
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:30:27 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9833323A5A;
+ id 1l0Tre-005Qca-HG
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 15 Jan 2021 18:30:30 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EB83523A7C;
  Fri, 15 Jan 2021 18:30:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1610735420;
- bh=Zq2xXRGPcF0MfdALNvMGtqIAAiivpPFH6hP0tdwW7I4=;
+ s=k20201202; t=1610735421;
+ bh=Zx+DKeYBgI/GfjZ0hi4SNhfY3GNWutg/K/C8V9kfqdo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Vttam1w8/dE7Z0WFpoIDGXwY85jSAMLMfj/Ym60CHZwY2QyTJC5wP2arZl3oCfiqP
- TS7wk92uNSwc9j4O9+vVBP0TirvWOYQbR/cX3JqYora8gn16T+uThhgfLKZ8cLVVWR
- zBgw+z1+6dUcMtPn0qqYvBeBhT21uwqTbXUOr0b/V8dvkIQm62QMdpi9OOTxsfD96X
- N8F55CUKJrMUIV2Jv7oTxqyV+le0oxQdspVj4XRzcA/9S0lS7H1Zk7FacEEpzWB2VG
- Volu1d1UNRSRSiFz8N8p3VRC7sxbOLZl/M+OI+uQv2w3wzLM9/NlUPuvOdwbhizfMe
- JJBl+GveuOV9Q==
+ b=N0L4j8OcdiQhWhaA3lFznkCBSPrE6zUF8PqcJjOuy1RL3ttPOC2xIxraA2lLNPOWD
+ hR7vaqwtorwbVYMC5g71KuX9G821NatdnGeMVjOeHfY8L9txlCRz2kjuPQpAY0NuID
+ wNFRErvojCbHW/gQVQuFeagBwyiZ7dJWeH5yA6wps6dRULQgss1JrWJz0dR6AscPon
+ sJ1km6FSX2KsF3KAmFjS97xPA1km91yX6tofMy6L/koqPj52vinla0ljeLky5eHBSQ
+ mWVSzaPV7aJ/PqiFWrTwxeN1kN/QJ5ubDeAkCzAs30mzm+qdazEiHX/jjUROAJmWpE
+ qkIFNWUiidusQ==
 From: Eric Biggers <ebiggers@kernel.org>
 To: fstests@vger.kernel.org
-Date: Fri, 15 Jan 2021 10:28:36 -0800
-Message-Id: <20210115182837.36333-4-ebiggers@kernel.org>
+Date: Fri, 15 Jan 2021 10:28:37 -0800
+Message-Id: <20210115182837.36333-5-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210115182837.36333-1-ebiggers@kernel.org>
 References: <20210115182837.36333-1-ebiggers@kernel.org>
@@ -68,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1l0Tre-00GOTL-5M
-Subject: [f2fs-dev] [xfstests RFC PATCH 3/4] generic: test retrieving verity
- Merkle tree and descriptor
+X-Headers-End: 1l0Tre-005Qca-HG
+Subject: [f2fs-dev] [xfstests RFC PATCH 4/4] generic: test retrieving verity
+ signature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,33 +91,35 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Add a test which tests retrieving the Merkle tree and fs-verity
-descriptor of a verity file using the new FS_IOC_READ_VERITY_METADATA
-ioctl.
+Add a test which tests dumping the built-in signature of a verity file
+using the new FS_IOC_READ_VERITY_METADATA ioctl.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- tests/generic/901     | 79 +++++++++++++++++++++++++++++++++++++++++++
- tests/generic/901.out | 16 +++++++++
+ tests/generic/902     | 66 +++++++++++++++++++++++++++++++++++++++++++
+ tests/generic/902.out |  7 +++++
  tests/generic/group   |  1 +
- 3 files changed, 96 insertions(+)
- create mode 100755 tests/generic/901
- create mode 100644 tests/generic/901.out
+ 3 files changed, 74 insertions(+)
+ create mode 100644 tests/generic/902
+ create mode 100644 tests/generic/902.out
 
-diff --git a/tests/generic/901 b/tests/generic/901
-new file mode 100755
-index 00000000..24889d63
+diff --git a/tests/generic/902 b/tests/generic/902
+new file mode 100644
+index 00000000..ee1096df
 --- /dev/null
-+++ b/tests/generic/901
-@@ -0,0 +1,79 @@
++++ b/tests/generic/902
+@@ -0,0 +1,66 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0-only
 +# Copyright 2021 Google LLC
 +#
-+# FS QA Test No. 901
++# FS QA Test No. 902
 +#
-+# Test retrieving the Merkle tree and fs-verity descriptor of a verity file
-+# using FS_IOC_READ_VERITY_METADATA.
++# Test retrieving the built-in signature of a verity file using
++# FS_IOC_READ_VERITY_METADATA.
++#
++# This is separate from the other tests for FS_IOC_READ_VERITY_METADATA because
++# the fs-verity built-in signature support is optional.
 +#
 +seq=`basename $0`
 +seqres=$RESULT_DIR/$seq
@@ -142,84 +144,59 @@ index 00000000..24889d63
 +
 +_supported_fs generic
 +_require_scratch_verity
-+_disable_fsverity_signatures
-+# For the output of this test to always be the same, it has to use a specific
-+# Merkle tree block size.
-+if [ $FSV_BLOCK_SIZE != 4096 ]; then
-+	_notrun "4096-byte verity block size not supported on this platform"
-+fi
++_require_fsverity_builtin_signatures
 +
 +_scratch_mkfs_verity &>> $seqres.full
 +_scratch_mount
 +
-+echo -e "\n# Creating a verity file"
++echo -e "\n# Setting up signed verity file"
++_fsv_generate_cert $tmp.key $tmp.cert $tmp.cert.der
++_fsv_clear_keyring
++_fsv_load_cert $tmp.cert.der
 +fsv_file=$SCRATCH_MNT/file
-+# Always use the same file contents, so that the output of the test is always
-+# the same.  Also use a file that is large enough to have multiple Merkle tree
-+# levels, so that the test verifies that the blocks are returned in the expected
-+# order.  A 1 MB file with SHA-256 and a Merkle tree block size of 4096 will
-+# have 3 Merkle tree blocks (3*4096 bytes): two at level 0 and one at level 1.
-+head -c 1000000 /dev/zero > $fsv_file
-+merkle_tree_size=$((3 * FSV_BLOCK_SIZE))
-+fsverity_descriptor_size=256
-+_fsv_enable $fsv_file --salt=abcd
++echo foo > $fsv_file
++_fsv_sign $fsv_file $tmp.sig --key=$tmp.key --cert=$tmp.cert >> $seqres.full
++_fsv_enable $fsv_file --signature=$tmp.sig
 +_require_fsverity_dump_metadata $fsv_file
-+_fsv_measure $fsv_file
 +
-+echo -e "\n# Dumping Merkle tree"
-+_fsv_dump_merkle_tree $fsv_file | sha256sum
++echo -e "\n# Dumping and comparing signature"
++_fsv_dump_signature $fsv_file > $tmp.sig2
++# The signature returned by FS_IOC_READ_VERITY_METADATA should exactly match the
++# one we passed to FS_IOC_ENABLE_VERITY earlier.
++cmp $tmp.sig $tmp.sig2
 +
-+echo -e "\n# Dumping Merkle tree (in chunks)"
-+# The above test may get the whole tree in one read, so also try reading it in
-+# chunks.
-+for (( i = 0; i < merkle_tree_size; i += 997 )); do
-+	_fsv_dump_merkle_tree $fsv_file --offset=$i --length=997
-+done | sha256sum
-+
-+echo -e "\n# Dumping descriptor"
-+# Note that the hash that is printed here should be the same hash that was
-+# printed by _fsv_measure above.
-+_fsv_dump_descriptor $fsv_file | sha256sum
-+
-+echo -e "\n# Dumping descriptor (in chunks)"
-+for (( i = 0; i < fsverity_descriptor_size; i += 13 )); do
-+	_fsv_dump_descriptor $fsv_file --offset=$i --length=13
-+done | sha256sum
++echo -e "\n# Dumping and comparing signature (in chunks)"
++sig_size=$(stat -c %s $tmp.sig)
++for (( i = 0; i < sig_size; i += 13 )); do
++	_fsv_dump_signature $fsv_file --offset=$i --length=13
++done > $tmp.sig2
++cmp $tmp.sig $tmp.sig2
 +
 +# success, all done
 +status=0
 +exit
-diff --git a/tests/generic/901.out b/tests/generic/901.out
+diff --git a/tests/generic/902.out b/tests/generic/902.out
 new file mode 100644
-index 00000000..ab018052
+index 00000000..4b8d9f6e
 --- /dev/null
-+++ b/tests/generic/901.out
-@@ -0,0 +1,16 @@
-+QA output created by 901
++++ b/tests/generic/902.out
+@@ -0,0 +1,7 @@
++QA output created by 902
 +
-+# Creating a verity file
-+sha256:11e4f886bf2d70a6ef3a8b6ce8e8c62c9e5d3263208b9f120ae46791f124be73
++# Setting up signed verity file
 +
-+# Dumping Merkle tree
-+db88cdad554734cd648a1bfbb5be7f86646c54397847aab0b3f42a28829fed17  -
++# Dumping and comparing signature
 +
-+# Dumping Merkle tree (in chunks)
-+db88cdad554734cd648a1bfbb5be7f86646c54397847aab0b3f42a28829fed17  -
-+
-+# Dumping descriptor
-+11e4f886bf2d70a6ef3a8b6ce8e8c62c9e5d3263208b9f120ae46791f124be73  -
-+
-+# Dumping descriptor (in chunks)
-+11e4f886bf2d70a6ef3a8b6ce8e8c62c9e5d3263208b9f120ae46791f124be73  -
++# Dumping and comparing signature (in chunks)
 diff --git a/tests/generic/group b/tests/generic/group
-index 30a73605..3f2edfc0 100644
+index 3f2edfc0..84fec240 100644
 --- a/tests/generic/group
 +++ b/tests/generic/group
-@@ -624,3 +624,4 @@
- 619 auto rw enospc
+@@ -625,3 +625,4 @@
  620 auto mount quick
  621 auto quick encrypt
-+901 auto quick verity
+ 901 auto quick verity
++902 auto quick verity
 -- 
 2.30.0
 
