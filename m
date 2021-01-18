@@ -2,72 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDD5F2F9B88
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Jan 2021 09:51:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1F102F9BD7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Jan 2021 10:24:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l1QG1-0006XC-Gh; Mon, 18 Jan 2021 08:51:29 +0000
+	id 1l1Qm3-0007l2-Ue; Mon, 18 Jan 2021 09:24:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1l1QG0-0006Wt-3M
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jan 2021 08:51:28 +0000
+ (envelope-from <sanche209@financ.com>) id 1l1Qm3-0007kr-CD
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jan 2021 09:24:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q3JYzY3s90M/G0wFRQBt6/DEmur3EYBzMQzkx3oqzaU=; b=YRxw77JKSO9DuYlr2xn8iVqcZr
- fN5IX12nC8CQr5EE76eAHq2bk8GeXLIaqJYrE/XcjKgldWVgz4mNbhKJsR83wotZ03c00mfrpPxbQ
- BMYoyf1Xh86h5u01nYwbVmub/PdaHLDHMMs65RY4rhR0rcePm0kqwsXJ2Z2zCjJbLDbA=;
+ bh=IKRoUfgK24B/q8joqtXj6tiZYsl5mEYDaBpjd/d19wc=; b=ghzZb1QO/6FWv+kBz8oU7GKaHR
+ KmuMpgUMB8nDnK1zgxtr+XMIiMmiJ0yCtuRNowORWYDpClsW2lEGrJ6ivZFCFDYdDiv6Fm4IWMtU0
+ aMOJBIAtxxmeenQGfTeh5zbO6uM9HDW0lZDyILQH8GfOIV4LbKHdcuAMwwEiER1MEO+M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=q3JYzY3s90M/G0wFRQBt6/DEmur3EYBzMQzkx3oqzaU=; b=QrKLJ1xADDIjL2Hfw7nJQALRMn
- jcMh8fiSJgGphpWJnZxnzkZFLyyH0eWEqR2tpATX74CObG28ptfk+AuQ84QT89+IlezMK7U3p3ehT
- H1HIBBgBGPEgIH0eaNgaYHcwkURa7SnAth2Z8E+wYsB9BCVmBBiYG5liadAhl49Pv8Vg=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IKRoUfgK24B/q8joqtXj6tiZYsl5mEYDaBpjd/d19wc=; b=A
+ s0zX49qtPIY8dvM1MqwL5vQdZguMw3B32hiDQ1JKVj19e1xpEk/5VoK31ufKU2rmcuPbvqCuauAYY
+ qruvFDMy4bO0t7Jvky4y1ArQsYVHaPvb3EeptHZgYqqLE0AdaerJXVsEFvrjH9rak7mOUToHF20zR
+ S4YhH0Djk2tpq0II=;
+Received: from hpst98-56.com ([91.231.98.56])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l1QFr-00CAwy-42
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jan 2021 08:51:28 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4DK58D17M7z7Wmk;
- Mon, 18 Jan 2021 16:50:04 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 18 Jan
- 2021 16:51:03 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20210116010041.3754050-1-daeho43@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <74067d6f-45f8-3c08-1829-828a1aebddee@huawei.com>
-Date: Mon, 18 Jan 2021 16:51:03 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1l1Qlv-004yRc-Sj
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jan 2021 09:24:35 +0000
+Received: from financ.com (rrcs-71-43-247-254.se.biz.rr.com [71.43.247.254])
+ by hpst98-56.com (Postfix) with ESMTPA id 553A426A7C7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 18 Jan 2021 11:03:21 +0200 (EET)
+From: Francisco<sanche209@financ.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: 18 Jan 2021 03:54:39 -0500
+Message-ID: <20210118035439.C7A9294BA2CF532A@financ.com>
 MIME-Version: 1.0
-In-Reply-To: <20210116010041.3754050-1-daeho43@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 4.2 (++++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 1.7 DEAR_SOMETHING         BODY: Contains 'Dear (something)'
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.2 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1l1QFr-00CAwy-42
-Subject: Re: [f2fs-dev] [PATCH v3 1/2] f2fs: introduce checkpoint=merge
- mount option
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Headers-End: 1l1Qlv-004yRc-Sj
+Subject: [f2fs-dev] Business Loan
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,35 +66,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>, Daeho Jeong <daehojeong@google.com>
+Reply-To: sanchez@financier.com
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/1/16 9:00, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> We've added a new mount option "checkpoint=merge", which creates a
-> kernel daemon and makes it to merge concurrent checkpoint requests as
-> much as possible to eliminate redundant checkpoint issues. Plus, we
-> can eliminate the sluggish issue caused by slow checkpoint operation
-> when the checkpoint is done in a process context in a cgroup having
-> low i/o budget and cpu shares, and The below verification result
-> explains this.
+Dear Sir / Madam,
 
-Could you please summary and add below info into commit message and f2fs.rst?
+We offer all kind of loans - Business Loan / Real Estate Project
+-Financing
 
-"Actually, the default I/O priority of kernel thread is "4". So, we're
-going to raise this
-priority by one, because we want to give one higher priority for
-checkpointing thread
-than other normal threads. This is the same way to give a I/O priority
-to the jbd2 journaling
-thread of ext4 filesystem."
+we are comprehensive financial
+services firm committed to helping our clients improve their
+long-term financial success.
 
-Otherwise this patch looks good to me.
+Our customized programs are designed to help grow, protect, and
+conserve our client's wealth by delivering a superior level of
+personalized service.
 
-Thanks,
+We're Investment/Finance firm that specialized in project funding
+& General financial service offer.Our principal function would be
+assist you in complete financing through our reputable Lending
+Institutions.
+
+We are open to having a good business relationship with you. We
+are currently interested in funding viable businesses,
+investments or projects in the following areas of interest:
+
+* Starting up a Franchise
+* Business Acquisition
+* Business Expansion
+* Capital / Infrastructural Project
+* Commercial Real Estate purchase
+* Contract Execution
+* Trade Financing etc.
+* Want to be an Agent / Broker?
+
+- Intermediaries/Consultants/Brokers are welcome to bring their
+clients and are 100% protected.
+
+We encourage you to contact us and learn more about the loans
+service we offered.
+
+If you have any questions or want more information about this
+offer do not hesitate to contact us.
+
+We look forward to hearing from you.
+
+Regards
+Mr, Sanchez
 
 
 _______________________________________________
