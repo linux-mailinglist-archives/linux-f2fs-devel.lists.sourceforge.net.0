@@ -2,70 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 340192FE7A0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Jan 2021 11:31:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57D8F2FE830
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Jan 2021 11:58:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l2XEv-0008Ri-8h; Thu, 21 Jan 2021 10:30:57 +0000
+	id 1l2XfE-0000D4-C7; Thu, 21 Jan 2021 10:58:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1l2XEn-0008QG-Be
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Jan 2021 10:30:49 +0000
+ (envelope-from <daeho43@gmail.com>) id 1l2XfD-0000Cy-TP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Jan 2021 10:58:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NRu+SVPL7A7J3Y7+NlEcLLabf9TPW7Fo8zkUPByPb/8=; b=HAJfQfyIAgUJInaOJbD6SL72kF
- zsOpG/ahv5RN/JOulUL/16aTpXZmiJc7O32NHI4ZETdPdtJpkh8fiIqdI4Cmb7Mq3kCQg1bQg8gwS
- KvGwWNEEIGkIpf7BV5ZNuKwsAGNXWHOOpCjutMx86BGDu7mZ2awJ0F1CzccuW1eY5Qvs=;
+ bh=TOcc6smGKrQ7ZrXNRSinoNICfIztx//2OX5jd0yU1no=; b=e5yp7YuMRoCsuTpkZ3T4yq8lRF
+ Wd98sbij5Drxhg8AZEn63qpGLNVt8koAuwPHW8g0y88IJbFmHnv8VHMAuEjHHc1joTiq8bvMQCFY4
+ 5+b+QghpGSex+Oa574QoIuXde/kxtXciRSgIsUi49PinkaCm9CNSxXNiv2e3Y4X9//6Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NRu+SVPL7A7J3Y7+NlEcLLabf9TPW7Fo8zkUPByPb/8=; b=hVC2Nd+tlCVw3KaRi2z/v563+t
- I14x1d7JGu1KRe0K5ezp4XjdrRx9Jt+hl7/eY0vCucT6Xte4DPeTaoakAv6Ki9v01jFytyYfhaX0B
- wwvvaGCJHvfkUNYc8UdxeJseMIFqNrf4w1wNJI2BMarZqlU5meqGvbz3JNencjj8tuzg=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
+ bh=TOcc6smGKrQ7ZrXNRSinoNICfIztx//2OX5jd0yU1no=; b=e92qZORyqPH+LK9ggnbXhPs9gf
+ hQtw78lGd/3A1GVKKCjavtYmHrUfBYtWP9xP068PNnaIyDrG14OAEL4ORVD+tqTrHEKR/kQjmroZB
+ coK9eLvZBDF8v86aljm4MZM9duW5Lib9gtl0UqSlqwuR17HH9UzfmekshXI5U6eSDLnU=;
+Received: from mail-lf1-f48.google.com ([209.85.167.48])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l2XEc-002KFs-Qc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Jan 2021 10:30:49 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4DLzC02YL9zMNH7;
- Thu, 21 Jan 2021 18:29:00 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.498.0; Thu, 21 Jan
- 2021 18:30:23 +0800
-To: Daeho Jeong <daeho43@gmail.com>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1l2Xf3-002TSm-O5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Jan 2021 10:58:07 +0000
+Received: by mail-lf1-f48.google.com with SMTP id u25so1925006lfc.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 21 Jan 2021 02:57:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=TOcc6smGKrQ7ZrXNRSinoNICfIztx//2OX5jd0yU1no=;
+ b=mss4EFQeqFKkwsXwSPbwNZwUgDfQKoZdj/HMsTafLIT7fJ75dCqGWBbB4sS58gRW9W
+ h7Nfm29U1IGmAO4Gk1zmjxdwatxIsRd30acNBXKCeDeRq0zo2YfKm9lyRUxtWII8Utyb
+ zmap8u8qqHEFBFjtQtte9p6F4U/VMYz+SyEb9xtkfjWJKmyRvpsJlE8jrQa14IGeSTAm
+ 0OnUAw8eEVchIhCwHoB2ggsoJvOw4j7ZV/qG5/irj6V/HG2nR2qI0OF3HpCgGWTP3Fem
+ BPlTJ01vPZ6aICOvFH4oP1tYPQEQ76+y2/cI+hqGJZRMQ2st5mHfxXP9205g53AvIzRP
+ XyyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=TOcc6smGKrQ7ZrXNRSinoNICfIztx//2OX5jd0yU1no=;
+ b=S8ngzSsa3nRS4OrDwiETTBbkELFtS0iae9NUoUoqV1vAxus6KPDFVtt9m10Iqigrmk
+ pDLbJRGuYTjtTjRZlN/PamWh1LiQna+oHz0rzIH//FmTkseBMq1SnmORjX8nmZnRzbO0
+ nzk/VdU5xY3ivIxeD/4oKnNmiM2zyLrJ5gA66Da8JirhUaFfPeZK1n4sG/QfXMs8Vabh
+ 45i35ydKWvjSRNqX1UJy9Uaygc0hDzNT7wJ0mOQW1VtfirPWd8u1IWDySCpufIpzLsaY
+ mqYUDSfoF0/MnKjVFXl2E4T+t1On16yDjbK3alttDEqizKfY1ijHxNRGDb09yA8gcAYJ
+ hnHg==
+X-Gm-Message-State: AOAM5325YEp7Nb4OzWKm+wmaW8A0QiHFacg0aux1xXietVrprqqQ1w95
+ ISe3iKOqxC4cGCVl/pFjZ7TqoOhgxzmAYbTcrig=
+X-Google-Smtp-Source: ABdhPJy3wP8/k/AMEGsTc1qC6WhdFhqHnDhEZrBjupyYszXa/tZjzOqXIt9m8rUHQs3qwe3RQAvfy8lc0ejAB+prclU=
+X-Received: by 2002:a19:5052:: with SMTP id z18mr4672874lfj.554.1611226671040; 
+ Thu, 21 Jan 2021 02:57:51 -0800 (PST)
+MIME-Version: 1.0
 References: <20210114062302.3809664-1-daeho43@gmail.com>
  <20210114062302.3809664-2-daeho43@gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <d4c12d47-db33-7e76-b7ad-4d80ced1aba9@huawei.com>
-Date: Thu, 21 Jan 2021 18:30:22 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20210114062302.3809664-2-daeho43@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ <d4c12d47-db33-7e76-b7ad-4d80ced1aba9@huawei.com>
+In-Reply-To: <d4c12d47-db33-7e76-b7ad-4d80ced1aba9@huawei.com>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Thu, 21 Jan 2021 19:57:40 +0900
+Message-ID: <CACOAw_xj-=scjMAF5Gzwe82p-roT0eTWhTuaFJFCHfrazpOA9A@mail.gmail.com>
+To: Chao Yu <yuchao0@huawei.com>
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [45.249.212.191 listed in wl.mailspike.net]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1l2XEc-002KFs-Qc
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.48 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.48 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1l2Xf3-002TSm-O5
 Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: add ckpt_thread_ioprio sysfs
  node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -79,65 +111,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/1/14 14:23, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> Added "ckpt_thread_ioprio" sysfs node to give a way to change checkpoint
-> merge daemon's io priority. Its default value is "be,3", which means
-> "BE" I/O class and I/O priority "3". We can select the class between "rt"
-> and "be", and set the I/O priority within valid range of it.
-> "," delimiter is necessary in between I/O class and priority number.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> v2:
-> - adapt to inlining ckpt_req_control of f2fs_sb_info
-> ---
->   Documentation/ABI/testing/sysfs-fs-f2fs |  8 ++++
->   fs/f2fs/checkpoint.c                    |  2 +-
->   fs/f2fs/f2fs.h                          |  1 +
->   fs/f2fs/sysfs.c                         | 51 +++++++++++++++++++++++++
->   4 files changed, 61 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index 3dfee94e0618..0c48b2e7dfd4 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -377,3 +377,11 @@ Description:	This gives a control to limit the bio size in f2fs.
->   		Default is zero, which will follow underlying block layer limit,
->   		whereas, if it has a certain bytes value, f2fs won't submit a
->   		bio larger than that size.
-> +What:		/sys/fs/f2fs/<disk>/ckpt_thread_ioprio
-> +Date:		January 2021
-> +Contact:	"Daeho Jeong" <daehojeong@google.com>
-> +Description:	Give a way to change checkpoint merge daemon's io priority.
-> +		Its default value is "be,3", which means "BE" I/O class and
-> +		I/O priority "3". We can select the class between "rt" and "be",
-> +		and set the I/O priority within valid range of it. "," delimiter
-> +		is necessary in between I/O class and priority number.
-> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> index e0668cec3b80..62bd6f449bb7 100644
-> --- a/fs/f2fs/checkpoint.c
-> +++ b/fs/f2fs/checkpoint.c
-> @@ -1840,7 +1840,7 @@ int f2fs_start_ckpt_thread(struct f2fs_sb_info *sbi)
->   	if (IS_ERR(cprc->f2fs_issue_ckpt))
->   		return PTR_ERR(cprc->f2fs_issue_ckpt);
->   
-> -	set_task_ioprio(cprc->f2fs_issue_ckpt, DEFAULT_CHECKPOINT_IOPRIO);
-> +	set_task_ioprio(cprc->f2fs_issue_ckpt, cprc->ckpt_thread_ioprio);
-
-Where do we set default value of cprc->ckpt_thread_ioprio? I guess it should
-be f2fs_init_ckpt_req_control()?
-
-Thanks,
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T29wcywgaXQgZGlzYXBwZWFyZWQgd2hpbGUgdmVyc2lvbmluZyB1cC4uLgoKMjAyMeuFhCAx7JuU
+IDIx7J28ICjrqqkpIOyYpO2bhCA3OjMwLCBDaGFvIFl1IDx5dWNoYW8wQGh1YXdlaS5jb20+64uY
+7J20IOyekeyEsToKPgo+IE9uIDIwMjEvMS8xNCAxNDoyMywgRGFlaG8gSmVvbmcgd3JvdGU6Cj4g
+PiBGcm9tOiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgo+ID4KPiA+IEFkZGVk
+ICJja3B0X3RocmVhZF9pb3ByaW8iIHN5c2ZzIG5vZGUgdG8gZ2l2ZSBhIHdheSB0byBjaGFuZ2Ug
+Y2hlY2twb2ludAo+ID4gbWVyZ2UgZGFlbW9uJ3MgaW8gcHJpb3JpdHkuIEl0cyBkZWZhdWx0IHZh
+bHVlIGlzICJiZSwzIiwgd2hpY2ggbWVhbnMKPiA+ICJCRSIgSS9PIGNsYXNzIGFuZCBJL08gcHJp
+b3JpdHkgIjMiLiBXZSBjYW4gc2VsZWN0IHRoZSBjbGFzcyBiZXR3ZWVuICJydCIKPiA+IGFuZCAi
+YmUiLCBhbmQgc2V0IHRoZSBJL08gcHJpb3JpdHkgd2l0aGluIHZhbGlkIHJhbmdlIG9mIGl0Lgo+
+ID4gIiwiIGRlbGltaXRlciBpcyBuZWNlc3NhcnkgaW4gYmV0d2VlbiBJL08gY2xhc3MgYW5kIHBy
+aW9yaXR5IG51bWJlci4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBEYWVobyBKZW9uZyA8ZGFlaG9q
+ZW9uZ0Bnb29nbGUuY29tPgo+ID4gLS0tCj4gPiB2MjoKPiA+IC0gYWRhcHQgdG8gaW5saW5pbmcg
+Y2twdF9yZXFfY29udHJvbCBvZiBmMmZzX3NiX2luZm8KPiA+IC0tLQo+ID4gICBEb2N1bWVudGF0
+aW9uL0FCSS90ZXN0aW5nL3N5c2ZzLWZzLWYyZnMgfCAgOCArKysrCj4gPiAgIGZzL2YyZnMvY2hl
+Y2twb2ludC5jICAgICAgICAgICAgICAgICAgICB8ICAyICstCj4gPiAgIGZzL2YyZnMvZjJmcy5o
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxICsKPiA+ICAgZnMvZjJmcy9zeXNmcy5jICAg
+ICAgICAgICAgICAgICAgICAgICAgIHwgNTEgKysrKysrKysrKysrKysrKysrKysrKysrKwo+ID4g
+ICA0IGZpbGVzIGNoYW5nZWQsIDYxIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPiA+Cj4g
+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1mcy1mMmZzIGIv
+RG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1mcy1mMmZzCj4gPiBpbmRleCAzZGZlZTk0
+ZTA2MTguLjBjNDhiMmU3ZGZkNCAxMDA2NDQKPiA+IC0tLSBhL0RvY3VtZW50YXRpb24vQUJJL3Rl
+c3Rpbmcvc3lzZnMtZnMtZjJmcwo+ID4gKysrIGIvRG9jdW1lbnRhdGlvbi9BQkkvdGVzdGluZy9z
+eXNmcy1mcy1mMmZzCj4gPiBAQCAtMzc3LDMgKzM3NywxMSBAQCBEZXNjcmlwdGlvbjogICAgIFRo
+aXMgZ2l2ZXMgYSBjb250cm9sIHRvIGxpbWl0IHRoZSBiaW8gc2l6ZSBpbiBmMmZzLgo+ID4gICAg
+ICAgICAgICAgICBEZWZhdWx0IGlzIHplcm8sIHdoaWNoIHdpbGwgZm9sbG93IHVuZGVybHlpbmcg
+YmxvY2sgbGF5ZXIgbGltaXQsCj4gPiAgICAgICAgICAgICAgIHdoZXJlYXMsIGlmIGl0IGhhcyBh
+IGNlcnRhaW4gYnl0ZXMgdmFsdWUsIGYyZnMgd29uJ3Qgc3VibWl0IGEKPiA+ICAgICAgICAgICAg
+ICAgYmlvIGxhcmdlciB0aGFuIHRoYXQgc2l6ZS4KPiA+ICtXaGF0OiAgICAgICAgICAgICAgICAv
+c3lzL2ZzL2YyZnMvPGRpc2s+L2NrcHRfdGhyZWFkX2lvcHJpbwo+ID4gK0RhdGU6ICAgICAgICAg
+ICAgICAgIEphbnVhcnkgMjAyMQo+ID4gK0NvbnRhY3Q6ICAgICAiRGFlaG8gSmVvbmciIDxkYWVo
+b2plb25nQGdvb2dsZS5jb20+Cj4gPiArRGVzY3JpcHRpb246IEdpdmUgYSB3YXkgdG8gY2hhbmdl
+IGNoZWNrcG9pbnQgbWVyZ2UgZGFlbW9uJ3MgaW8gcHJpb3JpdHkuCj4gPiArICAgICAgICAgICAg
+IEl0cyBkZWZhdWx0IHZhbHVlIGlzICJiZSwzIiwgd2hpY2ggbWVhbnMgIkJFIiBJL08gY2xhc3Mg
+YW5kCj4gPiArICAgICAgICAgICAgIEkvTyBwcmlvcml0eSAiMyIuIFdlIGNhbiBzZWxlY3QgdGhl
+IGNsYXNzIGJldHdlZW4gInJ0IiBhbmQgImJlIiwKPiA+ICsgICAgICAgICAgICAgYW5kIHNldCB0
+aGUgSS9PIHByaW9yaXR5IHdpdGhpbiB2YWxpZCByYW5nZSBvZiBpdC4gIiwiIGRlbGltaXRlcgo+
+ID4gKyAgICAgICAgICAgICBpcyBuZWNlc3NhcnkgaW4gYmV0d2VlbiBJL08gY2xhc3MgYW5kIHBy
+aW9yaXR5IG51bWJlci4KPiA+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2NoZWNrcG9pbnQuYyBiL2Zz
+L2YyZnMvY2hlY2twb2ludC5jCj4gPiBpbmRleCBlMDY2OGNlYzNiODAuLjYyYmQ2ZjQ0OWJiNyAx
+MDA2NDQKPiA+IC0tLSBhL2ZzL2YyZnMvY2hlY2twb2ludC5jCj4gPiArKysgYi9mcy9mMmZzL2No
+ZWNrcG9pbnQuYwo+ID4gQEAgLTE4NDAsNyArMTg0MCw3IEBAIGludCBmMmZzX3N0YXJ0X2NrcHRf
+dGhyZWFkKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSkKPiA+ICAgICAgIGlmIChJU19FUlIoY3By
+Yy0+ZjJmc19pc3N1ZV9ja3B0KSkKPiA+ICAgICAgICAgICAgICAgcmV0dXJuIFBUUl9FUlIoY3By
+Yy0+ZjJmc19pc3N1ZV9ja3B0KTsKPiA+Cj4gPiAtICAgICBzZXRfdGFza19pb3ByaW8oY3ByYy0+
+ZjJmc19pc3N1ZV9ja3B0LCBERUZBVUxUX0NIRUNLUE9JTlRfSU9QUklPKTsKPiA+ICsgICAgIHNl
+dF90YXNrX2lvcHJpbyhjcHJjLT5mMmZzX2lzc3VlX2NrcHQsIGNwcmMtPmNrcHRfdGhyZWFkX2lv
+cHJpbyk7Cj4KPiBXaGVyZSBkbyB3ZSBzZXQgZGVmYXVsdCB2YWx1ZSBvZiBjcHJjLT5ja3B0X3Ro
+cmVhZF9pb3ByaW8/IEkgZ3Vlc3MgaXQgc2hvdWxkCj4gYmUgZjJmc19pbml0X2NrcHRfcmVxX2Nv
+bnRyb2woKT8KPgo+IFRoYW5rcywKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRl
+dmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
+aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
