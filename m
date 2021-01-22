@@ -2,75 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8CDB2FFF97
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jan 2021 10:57:17 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l2tBn-0006ML-UG; Fri, 22 Jan 2021 09:57:11 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1l2tBh-0006M5-L6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 09:57:05 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id B340630110B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Jan 2021 00:33:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=jUJMfi7o5rmLp5FJ604PtgAh5Jrlni2ue0jULMmtQlg=; b=DBzRJI1tLn4SenukXQdtfwz37o
+	vI3jiK/3GxgCidKl2jnOOyzvcWbdkmidhCOpU2IRy1kd0KJqgp3Wm5jy8qHUuJnNCezeIA2J9n+dZ
+	VE4q1ZctYAU3h3KFh88fpC8a6+zwKwu3zEdv9B5F+sMv3I/9WOsrS8TNDbscGzdrscnE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1l35vN-00075S-N0; Fri, 22 Jan 2021 23:33:05 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <victorhsieh@google.com>) id 1l35vM-00075K-I8
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 23:33:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4gEv32ZRpTQhWrGtggKvgx3+bR7J1XW83z2P+EiaMKc=; b=H3DGEvZEGNkNF9buiwQNk0vpbd
- BtplMNRwRo8eqUkq0LHy2Y9cEnKhdIWksbK+Rar1j2mnHshYbuBjdHxgoGoA2OHoLG2KV1zRGj6Je
- M7G77JHpVMz31qIrMJal6k+pqjNysINoYF5YmGlFALKPsEFFQoXzN1byYtlVlMpN2X+8=;
+ bh=WuooQLj08FTndW6GG4FNdPUFeSvF4QeyXpQNaZQvMQU=; b=boNWJrNLURTYXqOkYr3AS0bjsG
+ sWiwjq/3cb7lXahsqIwL3hWKp1hQkybZO7Vrnpk8uTVOh9AUapwIB3g8g1xpy2FrJD/W/R2TyW0TR
+ 9G0Ohog05bzVV0FETJKXYAUKhenMAjDrseReDuozHlT1EKseK5okXGKFsFWmApt957Mc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4gEv32ZRpTQhWrGtggKvgx3+bR7J1XW83z2P+EiaMKc=; b=mEjVVT1698F/SoTpBc/FZBZacG
- 4PnOA8rx6NxU80BGOaTVhJ+7msJNkNkUJA6dXhXBgHrnXblOqDMy/b2t47z8r9yK2OdD+URxsRCdZ
- rhg+c3kJXb+v1LBB0PFbzmiS6dpb4xZoEkCRQSmvGrOt6PN5TPQOp3WpuGgSIrsWGyYI=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l2tBV-009Si5-RQ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 09:57:05 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4DMZQC6mrtzj7xw;
- Fri, 22 Jan 2021 17:55:47 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 22 Jan
- 2021 17:56:38 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <202101191726.YGvRr4k5-lkp@intel.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <adc43f9f-583b-fdb3-adcb-0ff94de57da4@huawei.com>
-Date: Fri, 22 Jan 2021 17:56:38 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=WuooQLj08FTndW6GG4FNdPUFeSvF4QeyXpQNaZQvMQU=; b=HBdTLWboFSZYY/VrU+sftMXoe6
+ VoGvrKl/TBu9n7Q/xaVPi0ckzX3FDh2dNYKLj68Qzruhn/Gi4ScEZixu+pnsTOVqVx1ZZ/RJz5gsg
+ 6dUoh9JwyHSX+p+bHKBd9QUlwAWy8cwgiwPvn3AVoCcJKiA+W2ULcmq03FZZzFLQr5pE=;
+Received: from mail-pg1-f176.google.com ([209.85.215.176])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1l35vC-00HOFU-OC
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 23:33:04 +0000
+Received: by mail-pg1-f176.google.com with SMTP id c22so4839752pgg.13
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 22 Jan 2021 15:32:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=WuooQLj08FTndW6GG4FNdPUFeSvF4QeyXpQNaZQvMQU=;
+ b=YZ6nQ6FOxluHSewTFEdRxogFELFzJ61SLsAvjLFQZbuTGGMmwsF7JRUaxP7S0eEf3O
+ zi4YxhJ311FM5HaM9OKi926md/9trhVY4f8oQ2L69cHtC8SiOc/RvEONC0Brp8EzYXLW
+ lv6khpaUQGj21NLNM2haXeFieuHFHlPe5MsuHoJAAixyciIG/WrLFSbzGXn8urZA33tw
+ GkWrMip0Wro8nMmVc+kl4jfg0hBCevvC6rr682OGhXTOkMjl301uDZC7QbGb7Yz/vxMK
+ LBlL4RWfi61+hAnVPZfXrIwr9DYcO/sReuxxZfpkbORXS6rvMYifp7nAEYX563UTR1UV
+ Vw2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=WuooQLj08FTndW6GG4FNdPUFeSvF4QeyXpQNaZQvMQU=;
+ b=RvNEWI9zbAdDTEIi92EjDK6/2BY7qcyGDeI3XhUXX5B0TLe9z1bPJNivhPg0/YY43T
+ Q4KZIwCxFB9Ls1EWvftXl5o/Ltj2JNMsJDab9eQUK21RfB+8od7+4Dow2pg/Yd8xtHHI
+ eZJmZSFUwkgk0FzXd6gSnNyKyRRf0Wyy2jTb2TiC/Pog961Uqu+JLLSgav1+bSgZzJG+
+ sUep0bYvLrJTsGAn7srx48xD7+4b7T+aopYqestVuv2ET9v1/j0s8blBkQ952TUY2Ka9
+ mBORqyEJzKleWxBnhMQvOCh5w84SdojMf0LFO2iuwRSWOENdbFYscdyZKrb6erwNxmJz
+ 0CJw==
+X-Gm-Message-State: AOAM532a310pqWQ+ZQ8wqRkTg2hEXx4U7Egj3l6TtBY5c27giv2b6MoK
+ TDZW75Kaca+95MtafDX9wYgviXDqwkZsftcqFmlyFm82qIc=
+X-Google-Smtp-Source: ABdhPJx2/n88EpZhF9H0QRhbuIUDjLNzHy/G5ah/y4Nn1FpXH6Y4ko0ibuQnyPTD5D1W2NrSUOQ62tixsem0o23bO4I=
+X-Received: by 2002:a92:4101:: with SMTP id o1mr174997ila.82.1611358022134;
+ Fri, 22 Jan 2021 15:27:02 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <202101191726.YGvRr4k5-lkp@intel.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.2 (/)
+References: <20210115181819.34732-1-ebiggers@kernel.org>
+In-Reply-To: <20210115181819.34732-1-ebiggers@kernel.org>
+Date: Fri, 22 Jan 2021 15:26:48 -0800
+Message-ID: <CAFCauYN12bWRn2N+uP455KuRmz7CQkCBXnz0B2sr5kCQtpJo4A@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: -15.6 (---------------)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.176 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.215.176 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.32 listed in wl.mailspike.net]
+ for more information. [URIs: lwn.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.2 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1l2tBV-009Si5-RQ
-Subject: Re: [f2fs-dev] [linux-next:master 2106/4407]
- fs/f2fs/super.c:470:12: warning: unused function 'f2fs_compress_set_level'
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1l35vC-00HOFU-OC
+Subject: Re: [f2fs-dev] [PATCH 0/6] fs-verity: add an ioctl to read verity
+ metadata
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,133 +116,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+From: Victor Hsieh via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Victor Hsieh <victorhsieh@google.com>
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jaegeuk,
+LGTM. Thanks!
 
-I've fix this compile warning due to c08e95fc6466 ("f2fs: compress: support compress level")
+Reviewed-by: Victor Hsieh <victorhsieh@google.com>
 
-However the fix will conflict with
-("f2fs: compress: deny setting unsupported compress algorithm")
-
-So I rebase these two patches to 03a9a1a64a11 ("f2fs: relocate f2fs_precache_extents()")
-with reversed order as below, please apply them with the right order:
-
-1. 03a9a1a64a11 ("f2fs: relocate f2fs_precache_extents()")
-2. [PATCH v3] f2fs: compress: deny setting unsupported compress algorithm
-3. [PATCH v3] f2fs: compress: support compress level
-
-On 2021/1/19 17:01, kernel test robot wrote:
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-> head:   b4bb878f3eb3e604ebfe83bbc17eb7af8d99cbf4
-> commit: ec0d0eb347b05377ad2e03c51cb1d08d6ed35619 [2106/4407] f2fs: compress: deny setting unsupported compress algorithm
-> config: mips-randconfig-r033-20210119 (attached as .config)
-> compiler: clang version 12.0.0 (https://github.com/llvm/llvm-project 22b68440e1647e16b5ee24b924986207173c02d1)
-> reproduce (this is a W=1 build):
->          wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
->          chmod +x ~/bin/make.cross
->          # install mips cross compiling tool for clang build
->          # apt-get install binutils-mips-linux-gnu
->          # https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=ec0d0eb347b05377ad2e03c51cb1d08d6ed35619
->          git remote add linux-next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
->          git fetch --no-tags linux-next master
->          git checkout ec0d0eb347b05377ad2e03c51cb1d08d6ed35619
->          # save the attached .config to linux build tree
->          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross ARCH=mips
-> 
-> If you fix the issue, kindly add following tag as appropriate
-> Reported-by: kernel test robot <lkp@intel.com>
-> 
-> All warnings (new ones prefixed by >>):
-> 
->>> fs/f2fs/super.c:470:12: warning: unused function 'f2fs_compress_set_level'
->     static int f2fs_compress_set_level(struct f2fs_sb_info const char
->     ^
->     fatal error: error in backend: Nested variants found in inline asm string: ' .set push
->     .set mips64r2
->     .if ( 0x00 ) != -1)) 0x00 ) != -1)) : ($( static struct ftrace_branch_data __attribute__((__aligned__(4))) __attribute__((__section__("_ftrace_branch"))) __if_trace = $( .func = __func__, .file = "arch/mips/include/asm/bitops.h", .line = 105, $); 0x00 ) != -1)) : $))) ) && ( 0 ); .set push; .set mips64r2; .rept 1; sync 0x00; .endr; .set pop; .else; ; .endif
->     1: ll $0, $1
->     or $0, $2
->     sc $0, $1
->     beqz $0, 1b
->     .set pop
->     '
->     clang-12: error: clang frontend command failed with exit code 70 (use -v to see invocation)
->     clang version 12.0.0 (git://gitmirror/llvm_project 22b68440e1647e16b5ee24b924986207173c02d1)
->     Target: mipsel-unknown-linux-gnu
->     Thread model: posix
->     InstalledDir: /opt/cross/clang-22b68440e1/bin
->     clang-12: note: diagnostic msg:
->     Makefile arch fs include kernel scripts source usr
-> 
-> 
-> vim +/f2fs_compress_set_level +470 fs/f2fs/super.c
-> 
-> ed318a6cc0b62044 Eric Biggers 2020-05-12  468
-> 0ba061b9e957791e Chao Yu      2020-12-09  469  #ifdef CONFIG_F2FS_FS_COMPRESSION
-> 0ba061b9e957791e Chao Yu      2020-12-09 @470  static int f2fs_compress_set_level(struct f2fs_sb_info *sbi, const char *str,
-> 0ba061b9e957791e Chao Yu      2020-12-09  471  						int type)
-> 0ba061b9e957791e Chao Yu      2020-12-09  472  {
-> 0ba061b9e957791e Chao Yu      2020-12-09  473  	unsigned int level;
-> 0ba061b9e957791e Chao Yu      2020-12-09  474  	int len;
-> 0ba061b9e957791e Chao Yu      2020-12-09  475
-> 0ba061b9e957791e Chao Yu      2020-12-09  476  	if (type == COMPRESS_LZ4)
-> 0ba061b9e957791e Chao Yu      2020-12-09  477  		len = 3;
-> 0ba061b9e957791e Chao Yu      2020-12-09  478  	else if (type == COMPRESS_ZSTD)
-> 0ba061b9e957791e Chao Yu      2020-12-09  479  		len = 4;
-> 0ba061b9e957791e Chao Yu      2020-12-09  480  	else
-> 0ba061b9e957791e Chao Yu      2020-12-09  481  		return 0;
-> 0ba061b9e957791e Chao Yu      2020-12-09  482
-> 0ba061b9e957791e Chao Yu      2020-12-09  483  	if (strlen(str) == len)
-> 0ba061b9e957791e Chao Yu      2020-12-09  484  		return 0;
-> 0ba061b9e957791e Chao Yu      2020-12-09  485
-> 0ba061b9e957791e Chao Yu      2020-12-09  486  	str += len;
-> 0ba061b9e957791e Chao Yu      2020-12-09  487
-> 0ba061b9e957791e Chao Yu      2020-12-09  488  	if (str[0] != ':') {
-> 0ba061b9e957791e Chao Yu      2020-12-09  489  		f2fs_info(sbi, "wrong format, e.g. <alg_name>:<compr_level>");
-> 0ba061b9e957791e Chao Yu      2020-12-09  490  		return -EINVAL;
-> 0ba061b9e957791e Chao Yu      2020-12-09  491  	}
-> 0ba061b9e957791e Chao Yu      2020-12-09  492  	if (kstrtouint(str + 1, 10, &level))
-> 0ba061b9e957791e Chao Yu      2020-12-09  493  		return -EINVAL;
-> 0ba061b9e957791e Chao Yu      2020-12-09  494  	if (type == COMPRESS_LZ4) {
-> 0ba061b9e957791e Chao Yu      2020-12-09  495  #ifdef CONFIG_F2FS_FS_LZ4HC
-> 0ba061b9e957791e Chao Yu      2020-12-09  496  		if (level < LZ4HC_MIN_CLEVEL || level > LZ4HC_MAX_CLEVEL) {
-> 0ba061b9e957791e Chao Yu      2020-12-09  497  			f2fs_info(sbi, "invalid lz4hc compress level: %d", level);
-> 0ba061b9e957791e Chao Yu      2020-12-09  498  			return -EINVAL;
-> 0ba061b9e957791e Chao Yu      2020-12-09  499  		}
-> 0ba061b9e957791e Chao Yu      2020-12-09  500  #else
-> 0ba061b9e957791e Chao Yu      2020-12-09  501  		f2fs_info(sbi, "doesn't support lz4hc compression");
-> 0ba061b9e957791e Chao Yu      2020-12-09  502  		return 0;
-> 0ba061b9e957791e Chao Yu      2020-12-09  503  #endif
-> 0ba061b9e957791e Chao Yu      2020-12-09  504  	} else if (type == COMPRESS_ZSTD) {
-> 0ba061b9e957791e Chao Yu      2020-12-09  505  #ifdef CONFIG_F2FS_FS_ZSTD
-> 0ba061b9e957791e Chao Yu      2020-12-09  506  		if (!level || level > ZSTD_maxCLevel()) {
-> 0ba061b9e957791e Chao Yu      2020-12-09  507  			f2fs_info(sbi, "invalid zstd compress level: %d", level);
-> 0ba061b9e957791e Chao Yu      2020-12-09  508  			return -EINVAL;
-> 0ba061b9e957791e Chao Yu      2020-12-09  509  		}
-> 0ba061b9e957791e Chao Yu      2020-12-09  510  #else
-> 0ba061b9e957791e Chao Yu      2020-12-09  511  		f2fs_info(sbi, "doesn't support zstd compression");
-> 0ba061b9e957791e Chao Yu      2020-12-09  512  #endif
-> 0ba061b9e957791e Chao Yu      2020-12-09  513  	}
-> 0ba061b9e957791e Chao Yu      2020-12-09  514  	F2FS_OPTION(sbi).compress_level = level;
-> 0ba061b9e957791e Chao Yu      2020-12-09  515  	return 0;
-> 0ba061b9e957791e Chao Yu      2020-12-09  516  }
-> 0ba061b9e957791e Chao Yu      2020-12-09  517  #endif
-> 0ba061b9e957791e Chao Yu      2020-12-09  518
-> 
-> :::::: The code at line 470 was first introduced by commit
-> :::::: 0ba061b9e957791e8120b6acb589a26fa7bbbb53 f2fs: compress: support compress level
-> 
-> :::::: TO: Chao Yu <yuchao0@huawei.com>
-> :::::: CC: Jaegeuk Kim <jaegeuk@kernel.org>
-> 
-> ---
-> 0-DAY CI Kernel Test Service, Intel Corporation
-> https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
-> 
+On Fri, Jan 15, 2021 at 10:19 AM Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> [This patchset applies to v5.11-rc3]
+>
+> Add an ioctl FS_IOC_READ_VERITY_METADATA which allows reading verity
+> metadata from a file that has fs-verity enabled, including:
+>
+> - The Merkle tree
+> - The fsverity_descriptor (not including the signature if present)
+> - The built-in signature, if present
+>
+> This ioctl has similar semantics to pread().  It is passed the type of
+> metadata to read (one of the above three), and a buffer, offset, and
+> size.  It returns the number of bytes read or an error.
+>
+> This ioctl doesn't make any assumption about where the metadata is
+> stored on-disk.  It does assume the metadata is in a stable format, but
+> that's basically already the case:
+>
+> - The Merkle tree and fsverity_descriptor are defined by how fs-verity
+>   file digests are computed; see the "File digest computation" section
+>   of Documentation/filesystems/fsverity.rst.  Technically, the way in
+>   which the levels of the tree are ordered relative to each other wasn't
+>   previously specified, but it's logical to put the root level first.
+>
+> - The built-in signature is the value passed to FS_IOC_ENABLE_VERITY.
+>
+> This ioctl is useful because it allows writing a server program that
+> takes a verity file and serves it to a client program, such that the
+> client can do its own fs-verity compatible verification of the file.
+> This only makes sense if the client doesn't trust the server and if the
+> server needs to provide the storage for the client.
+>
+> More concretely, there is interest in using this ability in Android to
+> export APK files (which are protected by fs-verity) to "protected VMs".
+> This would use Protected KVM (https://lwn.net/Articles/836693), which
+> provides an isolated execution environment without having to trust the
+> traditional "host".  A "guest" VM can boot from a signed image and
+> perform specific tasks in a minimum trusted environment using files that
+> have fs-verity enabled on the host, without trusting the host or
+> requiring that the guest has its own trusted storage.
+>
+> Technically, it would be possible to duplicate the metadata and store it
+> in separate files for serving.  However, that would be less efficient
+> and would require extra care in userspace to maintain file consistency.
+>
+> In addition to the above, the ability to read the built-in signatures is
+> useful because it allows a system that is using the in-kernel signature
+> verification to migrate to userspace signature verification.
+>
+> This patchset has been tested by new xfstests which call this new ioctl
+> via a new subcommand for the 'fsverity' program from fsverity-utils.
+>
+> Eric Biggers (6):
+>   fs-verity: factor out fsverity_get_descriptor()
+>   fs-verity: don't pass whole descriptor to fsverity_verify_signature()
+>   fs-verity: add FS_IOC_READ_VERITY_METADATA ioctl
+>   fs-verity: support reading Merkle tree with ioctl
+>   fs-verity: support reading descriptor with ioctl
+>   fs-verity: support reading signature with ioctl
+>
+>  Documentation/filesystems/fsverity.rst |  76 ++++++++++
+>  fs/ext4/ioctl.c                        |   7 +
+>  fs/f2fs/file.c                         |  11 ++
+>  fs/verity/Makefile                     |   1 +
+>  fs/verity/fsverity_private.h           |  13 +-
+>  fs/verity/open.c                       | 133 +++++++++++------
+>  fs/verity/read_metadata.c              | 195 +++++++++++++++++++++++++
+>  fs/verity/signature.c                  |  20 +--
+>  include/linux/fsverity.h               |  12 ++
+>  include/uapi/linux/fsverity.h          |  14 ++
+>  10 files changed, 417 insertions(+), 65 deletions(-)
+>  create mode 100644 fs/verity/read_metadata.c
+>
+>
+> base-commit: 7c53f6b671f4aba70ff15e1b05148b10d58c2837
+> --
+> 2.30.0
+>
 
 
 _______________________________________________
