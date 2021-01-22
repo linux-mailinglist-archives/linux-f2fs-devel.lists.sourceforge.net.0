@@ -2,85 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E66A72FFA54
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jan 2021 03:18:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C664D2FFF5A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jan 2021 10:41:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l2m1K-00081Z-NN; Fri, 22 Jan 2021 02:17:54 +0000
+	id 1l2swF-0002uP-ND; Fri, 22 Jan 2021 09:41:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1l2m1J-00081S-Il
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 02:17:53 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1l2swF-0002uC-1p
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 09:41:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y7oqPGVlEdRER3uzur1BfeQKn4huoJJNa1YvAH3i/mM=; b=Q3mLdatX3yKZcZy1qDM2yL47Cq
- RckDgiIRTbhY50iB6v+ImiEBGtKp1qakbImrwkZbSXN7oE0sReRTM2/+8ZTePyvEyEQjpcfgdqMdD
- X8e3De2nlJpKKK2okFkfSkE3vThFg16VBOvf2CFjjrPNptbJIiqNQOkopUDiHG7ac+AA=;
+ bh=Gj3SYDbHxT0EkAoqInbH3/TOCglWZrHtq4e3k30G0iU=; b=kwSfQD1e6qQXt2DmHtuKjNUZJj
+ CusgXmIGHp3SYc6b2mZtjCcBTKcSFc5NbzbWazJS1mcRzUvExu0FNN3ZfGyMOk27Z32tK977Y2h7y
+ rPz2k5YuZfyx+9Sga1V+4BWwcE4ngScjy4B9EFS2BBgFDELqqBcuUrO1BVspvWrSgq5s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=y7oqPGVlEdRER3uzur1BfeQKn4huoJJNa1YvAH3i/mM=; b=CLoAUWJ/bfVVeU+QJYEdrB51bp
- fpLzJSEB6QGRMkfL9edJQXrsP2fX5XxufqDBVA2pL5u/GZcTUoeVaiMcfwxv+mxxmexdc0nMvMnj2
- TZWeEAoJF09S2qZEPrjpuLicnlHgeIy8kTxoYMirQmxlv0T3Nhy4nafDVm63BaVKOu1A=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Gj3SYDbHxT0EkAoqInbH3/TOCglWZrHtq4e3k30G0iU=; b=T
+ irrXELQ7iD9WylBpbO4rBVLm5q7kYarvuafD3xzK1KlV7SHtMZ+/nF86sP8x0dzvz13HjKdNCfCPy
+ J8JHlmMIH8C/3O2iDoWTw9vbqeHslttoWOsqIWk4M26SYCLgU5uYswWHWOEC57nJM0/8ogegb3KRe
+ HKx0BiT77WesM8PQ=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l2m16-0072Nf-7m
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 02:17:53 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DMND14mz3z15x9m;
- Fri, 22 Jan 2021 10:16:17 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 22 Jan
- 2021 10:17:22 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-References: <X/0DxG+AcX54730W@google.com>
- <160f2cf9-73ca-18cd-6ad0-2498821b8db6@huawei.com>
- <X/4kYf11oyoMY8P+@google.com>
- <abc09f9f-561d-df8a-b835-6b5d7a15232c@huawei.com>
- <X/8UtJU9Dy30kC7I@google.com>
- <37ba41db-2589-e155-c416-d0c8832026cb@huawei.com>
- <X//DPI10+ZXvHkYH@google.com>
- <8e88b1e2-0176-9487-b925-9c7a31a7e5cd@huawei.com>
- <YAGt0i244dWXym4H@google.com>
- <20a1dbd3-808e-e62a-53f3-7f1e2a316b3c@kernel.org>
- <YAdSTzYF8Hvxdcqy@google.com>
+ id 1l2sw8-00Fjj3-Vd
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 09:41:06 +0000
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4DMZ3G4nKBzMN5Y;
+ Fri, 22 Jan 2021 17:39:22 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
+ 14.3.498.0; Fri, 22 Jan 2021 17:40:41 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <068da0d3-18c9-53f7-0f24-63b07e1af272@huawei.com>
-Date: Fri, 22 Jan 2021 10:17:22 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Fri, 22 Jan 2021 17:40:13 +0800
+Message-ID: <20210122094013.46538-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-In-Reply-To: <YAdSTzYF8Hvxdcqy@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.190 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1l2m16-0072Nf-7m
-Subject: Re: [f2fs-dev] [PATCH v3 1/5] f2fs: compress: add compress_inode to
- cache compressed blocks
+X-Headers-End: 1l2sw8-00Fjj3-Vd
+Subject: [f2fs-dev] [PATCH v3] f2fs: compress: deny setting unsupported
+ compress algorithm
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,281 +77,62 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/1/20 5:42, Jaegeuk Kim wrote:
-> On 01/16, Chao Yu wrote:
->> On 2021/1/15 22:59, Jaegeuk Kim wrote:
->>> On 01/15, Chao Yu wrote:
->>>> On 2021/1/14 12:06, Jaegeuk Kim wrote:
->>>>> On 01/14, Chao Yu wrote:
->>>>>> On 2021/1/13 23:41, Jaegeuk Kim wrote:
->>>>>>> [58690.961685] F2FS-fs (vdb) : inject page get in f2fs_pagecache_get_page of f2fs_quota_write+0x150/0x1f0 [f2fs]
->>>>>>> [58691.071481] F2FS-fs (vdb): Inconsistent error blkaddr:31058, sit bitmap:0
->>>>>>> [58691.077338] ------------[ cut here ]------------
->>>>>>> [58691.081461] WARNING: CPU: 5 PID: 8308 at fs/f2fs/checkpoint.c:151 f2fs_is_valid_blkaddr+0x1e9/0x280 [f2fs]
->>>>>>> [58691.086734] Modules linked in: f2fs(O) quota_v2 quota_tree dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua ppdev intel_rapl_msr intel_rapl_common sb_edac kvm_intel kvm irqbypass joydev parport_pc parport input_leds serio_raw mac_hid qemu_fw_cfg sch_fq_codel ip_tables x_tables autofs4 btrfs blake2b_generic raid10 raid456 async_raid6_recov async_memcpy asy
->>>>>>> [58691.120632] CPU: 5 PID: 8308 Comm: kworker/u17:5 Tainted: G      D    O      5.11.0-rc3-custom #1
->>>>>>> [58691.125438] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-1 04/01/2014
->>>>>>> [58691.129625] Workqueue: f2fs_post_read_wq f2fs_post_read_work [f2fs]
->>>>>>> [58691.133142] RIP: 0010:f2fs_is_valid_blkaddr+0x1e9/0x280 [f2fs]
->>>>>>> [58691.136221] Code: 3c 07 b8 01 00 00 00 d3 e0 21 f8 75 57 83 fa 07 75 52 89 f2 31 c9 48 c7 c6 20 6a a7 c0 48 89 df e8 bc d6 03 00 f0 80 4b 48 04 <0f> 0b 31 c0 e9 5e fe ff ff 48 8b 57 10 8b 42 30 d3 e0 03 42 48 39
->>>>>>> [58691.143142] RSP: 0018:ffffb429047afd40 EFLAGS: 00010206
->>>>>>> [58691.145639] RAX: 0000000000000000 RBX: ffff9c3b84041000 RCX: 0000000000000000
->>>>>>> [58691.148899] RDX: 0000000000000000 RSI: ffff9c3bbbd58940 RDI: ffff9c3bbbd58940
->>>>>>> [58691.152130] RBP: ffffb429047afd48 R08: ffff9c3bbbd58940 R09: ffffb429047afaa8
->>>>>>> [58691.155266] R10: 00000000001ba090 R11: 0000000000000003 R12: 0000000000007952
->>>>>>> [58691.158304] R13: fffff5cc81266ac0 R14: 00000000000000db R15: 0000000000000000
->>>>>>> [58691.161160] FS:  0000000000000000(0000) GS:ffff9c3bbbd40000(0000) knlGS:0000000000000000
->>>>>>> [58691.164286] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
->>>>>>> [58691.166869] CR2: 00007f0fee9d3000 CR3: 000000005ee76001 CR4: 0000000000370ee0
->>>>>>> [58691.169714] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
->>>>>>> [58691.173102] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
->>>>>>> [58691.176163] Call Trace:
->>>>>>> [58691.177948]  f2fs_cache_compressed_page+0x69/0x280 [f2fs]
->>>>>>> [58691.180549]  ? newidle_balance+0x253/0x3d0
->>>>>>> [58691.183238]  f2fs_end_read_compressed_page+0x5a/0x70 [f2fs]
->>>>>>> [58691.188205]  f2fs_post_read_work+0x11d/0x120 [f2fs]
->>>>>>> [58691.192489]  process_one_work+0x221/0x3a0
->>>>>>> [58691.194482]  worker_thread+0x4d/0x3f0
->>>>>>> [58691.198867]  kthread+0x114/0x150
->>>>>>> [58691.202243]  ? process_one_work+0x3a0/0x3a0
->>>>>>> [58691.205367]  ? kthread_park+0x90/0x90
->>>>>>> [58691.208244]  ret_from_fork+0x22/0x30
->>>>>>
->>>>>> Below patch fixes two issues, I expect this can fix above warning at least.
->>>>>
->>>>> [106115.591837] general protection fault, probably for non-canonical address 0x6b6b6b6b6b6b6b73: 0000 [#1] SMP PTI
->>>>> [106115.595584] CPU: 3 PID: 10109 Comm: fsstress Tainted: G           O      5.11.0-rc3-custom #1
->>>>> [106115.601087] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-1 04/01/2014
->>>>> [106115.601087] RIP: 0010:f2fs_read_multi_pages+0x415/0xa70 [f2fs]
->>>>
->>>> Jaegeuk,
->>>>
->>>> Could you please help to run:
->>>>
->>>> gdb f2fs.ko
->>>> (gdb) l *(f2fs_read_multi_pages+0x415)
->>>>
->>>> to see where we hit the panic.
->>>
->>> It's fs/f2fs/data.c:2203
->>>
->>> 2199                 goto out_put_dnode;
->>> 2200         }
->>> 2201
->>> 2202         for (i = 0; i < dic->nr_cpages; i++) {
->>
->> I doubt when i == cc->nr_cpages, dic was released in below condition,
->> then dic->nr_cpages can be any value (may be larger than cc->nr_cpages),
->> then we may continue the loop, and will access invalid pointer dic.
->>
->> 		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
->> 			if (atomic_dec_and_test(&dic->remaining_pages))
->> 				f2fs_decompress_cluster(dic);
->> 			continue;
->> 		}
->>
->>
->> I'd like to add a condition here (in between line 2202 and line 2203) to
->> make sure whether this can happen, could you please help to verify this?
->>
->> f2fs_bug_on(sbi, i >= cc->nr_cpages);
-> 
-> No, it seems this is not the case.
+If kernel doesn't support certain kinds of compress algorithm, deny to set
+them as compress algorithm of f2fs via 'compress_algorithm=%s' mount option.
 
-Oops, could you please help to remove all below codes and do the test again
-to check whether they are the buggy codes? as I doubt there is use-after-free
-bug.
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+v3:
+- rebase to commit 03a9a1a64a11 ("f2fs: relocate f2fs_precache_extents()")
+in dev branch
+ fs/f2fs/super.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
-			if (atomic_dec_and_test(&dic->remaining_pages))
-				f2fs_decompress_cluster(dic);
-			continue;
-		}
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b4a07fe62d1a..a275bd312ae5 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -882,17 +882,33 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			if (!name)
+ 				return -ENOMEM;
+ 			if (!strcmp(name, "lzo")) {
++#ifdef CONFIG_F2FS_FS_LZO
+ 				F2FS_OPTION(sbi).compress_algorithm =
+ 								COMPRESS_LZO;
++#else
++				f2fs_info(sbi, "kernel doesn't support lzo compression");
++#endif
+ 			} else if (!strcmp(name, "lz4")) {
++#ifdef CONFIG_F2FS_FS_LZ4
+ 				F2FS_OPTION(sbi).compress_algorithm =
+ 								COMPRESS_LZ4;
++#else
++				f2fs_info(sbi, "kernel doesn't support lz4 compression");
++#endif
+ 			} else if (!strcmp(name, "zstd")) {
++#ifdef CONFIG_F2FS_FS_ZSTD
+ 				F2FS_OPTION(sbi).compress_algorithm =
+ 								COMPRESS_ZSTD;
++#else
++				f2fs_info(sbi, "kernel doesn't support zstd compression");
++#endif
+ 			} else if (!strcmp(name, "lzo-rle")) {
++#ifdef CONFIG_F2FS_FS_LZORLE
+ 				F2FS_OPTION(sbi).compress_algorithm =
+ 								COMPRESS_LZORLE;
++#else
++				f2fs_info(sbi, "kernel doesn't support lzorle compression");
++#endif
+ 			} else {
+ 				kfree(name);
+ 				return -EINVAL;
+-- 
+2.29.2
 
-Before that, please merge last fixing patch as below:
-
-https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=dev&id=2371a9b8131712276458f1991a6ae394ef6c6c90
-
-Thanks,
-
-> 
->>
->> Thanks,
->>
->>> 2203                 struct page *page = dic->cpages[i];
->>> 2204                 block_t blkaddr;
->>> 2205                 struct bio_post_read_ctx *ctx;
->>> 2206
->>> 2207                 blkaddr = data_blkaddr(dn.inode, dn.node_page,
->>> 2208                                                 dn.ofs_in_node + i + 1);
->>>
->>>
->>>>
->>>> Thanks,
->>>>
->>>>> [106115.601087] Code: ff ff ff 45 31 ff f7 d0 25 00 00 08 00 89 45 80 48 8b 45 a0 48 83 c0 6c 48 89 85 78 ff ff ff 48 8b 7d a0 49 63 c7 48 8b 57 30 <48> 8b 1c c2 8b 45 c4 8d 50 01 48 8b 45 b8 48 2b 05 c6 55 92 dc 48
->>>>> [106115.601087] RSP: 0018:ffffc0a4822f7710 EFLAGS: 00010206
->>>>> [106115.620978] RAX: 0000000000000001 RBX: ffffe801820034c0 RCX: 0000000000200000
->>>>> [106115.620978] RDX: 6b6b6b6b6b6b6b6b RSI: ffffffffc09487af RDI: ffff9bc1d87c4200
->>>>> [106115.627351] RBP: ffffc0a4822f77c0 R08: 0000000000000000 R09: 0000000000000000
->>>>> [106115.627351] R10: ffff9bc1d87c4200 R11: 0000000000000001 R12: 0000000000105343
->>>>> [106115.627351] R13: ffff9bc2d2184000 R14: 0000000000000000 R15: 0000000000000001
->>>>> [106115.635587] FS:  00007f188e909b80(0000) GS:ffff9bc2fbcc0000(0000) knlGS:0000000000000000
->>>>> [106115.635587] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
->>>>> [106115.635587] CR2: 000056446d88b358 CR3: 00000000534b4002 CR4: 0000000000370ee0
->>>>> [106115.635587] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
->>>>> [106115.635587] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
->>>>> [106115.635587] Call Trace:
->>>>> [106115.635587]  f2fs_mpage_readpages+0x4e4/0xac0 [f2fs]
->>>>> [106115.635587]  f2fs_readahead+0x47/0x90 [f2fs]
->>>>> [106115.635587]  read_pages+0x8e/0x280
->>>>> [106115.635587]  page_cache_ra_unbounded+0x11f/0x1f0
->>>>> [106115.665909]  do_page_cache_ra+0x3d/0x40
->>>>> [106115.670756]  ondemand_readahead+0x2c1/0x2e0
->>>>> [106115.671682]  page_cache_sync_ra+0xd4/0xe0
->>>>> [106115.675622]  generic_file_buffered_read_get_pages+0x126/0x8d0
->>>>> [106115.679158]  generic_file_buffered_read+0x113/0x4a0
->>>>> [106115.679158]  ? __filemap_fdatawrite_range+0xd8/0x110
->>>>> [106115.685672]  ? __mark_inode_dirty+0x98/0x330
->>>>> [106115.691168]  ? f2fs_direct_IO+0x80/0x6f0 [f2fs]
->>>>> [106115.691168]  generic_file_read_iter+0xdf/0x140
->>>>> [106115.691168]  f2fs_file_read_iter+0x34/0xb0 [f2fs]
->>>>> [106115.699450]  aio_read+0xef/0x1b0
->>>>> [106115.699450]  ? do_user_addr_fault+0x1b8/0x450
->>>>> [106115.699450]  io_submit_one+0x217/0xbc0
->>>>> [106115.699450]  ? io_submit_one+0x217/0xbc0
->>>>> [106115.699450]  __x64_sys_io_submit+0x8d/0x180
->>>>> [106115.699450]  ? __x64_sys_io_submit+0x8d/0x180
->>>>> [106115.712018]  ? exit_to_user_mode_prepare+0x3d/0x1a0
->>>>> [106115.717468]  do_syscall_64+0x38/0x90
->>>>> [106115.723157]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
->>>>>
->>>>>>
->>>>>> - detect truncation during f2fs_cache_compressed_page()
->>>>>> - don't set PageUptodate for temporary page in f2fs_load_compressed_page()
->>>>>>
->>>>>> From: Chao Yu <yuchao0@huawei.com>
->>>>>>
->>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>>>> ---
->>>>>>     fs/f2fs/compress.c | 20 +++++++++++++-------
->>>>>>     fs/f2fs/data.c     |  3 +--
->>>>>>     fs/f2fs/f2fs.h     |  6 +++---
->>>>>>     3 files changed, 17 insertions(+), 12 deletions(-)
->>>>>>
->>>>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>>>> index 0fec71e40001..f364c10c506c 100644
->>>>>> --- a/fs/f2fs/compress.c
->>>>>> +++ b/fs/f2fs/compress.c
->>>>>> @@ -1741,7 +1741,7 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     	if (!test_opt(sbi, COMPRESS_CACHE))
->>>>>>     		return;
->>>>>>
->>>>>> -	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE))
->>>>>> +	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE_READ))
->>>>>>     		return;
->>>>>>
->>>>>>     	si_meminfo(&si);
->>>>>> @@ -1774,21 +1774,25 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     		return;
->>>>>>     	}
->>>>>>
->>>>>> -	memcpy(page_address(cpage), page_address(page), PAGE_SIZE);
->>>>>> -	SetPageUptodate(cpage);
->>>>>> -
->>>>>>     	f2fs_set_page_private(cpage, ino);
->>>>>>
->>>>>> +	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE_READ))
->>>>>> +		goto out;
->>>>>> +
->>>>>> +	memcpy(page_address(cpage), page_address(page), PAGE_SIZE);
->>>>>> +	SetPageUptodate(cpage);
->>>>>> +out:
->>>>>>     	f2fs_put_page(cpage, 1);
->>>>>>     }
->>>>>>
->>>>>> -void f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>> +bool f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     								block_t blkaddr)
->>>>>>     {
->>>>>>     	struct page *cpage;
->>>>>> +	bool hitted = false;
->>>>>>
->>>>>>     	if (!test_opt(sbi, COMPRESS_CACHE))
->>>>>> -		return;
->>>>>> +		return false;
->>>>>>
->>>>>>     	cpage = f2fs_pagecache_get_page(COMPRESS_MAPPING(sbi),
->>>>>>     				blkaddr, FGP_LOCK | FGP_NOWAIT, GFP_NOFS);
->>>>>> @@ -1797,10 +1801,12 @@ void f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     			atomic_inc(&sbi->compress_page_hit);
->>>>>>     			memcpy(page_address(page),
->>>>>>     				page_address(cpage), PAGE_SIZE);
->>>>>> -			SetPageUptodate(page);
->>>>>> +			hitted = true;
->>>>>>     		}
->>>>>>     		f2fs_put_page(cpage, 1);
->>>>>>     	}
->>>>>> +
->>>>>> +	return hitted;
->>>>>>     }
->>>>>>
->>>>>>     void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi, nid_t ino)
->>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>> index b3973494b102..3705c272b76a 100644
->>>>>> --- a/fs/f2fs/data.c
->>>>>> +++ b/fs/f2fs/data.c
->>>>>> @@ -2211,8 +2211,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->>>>>>     		blkaddr = data_blkaddr(dn.inode, dn.node_page,
->>>>>>     						dn.ofs_in_node + i + 1);
->>>>>>
->>>>>> -		f2fs_load_compressed_page(sbi, page, blkaddr);
->>>>>> -		if (PageUptodate(page)) {
->>>>>> +		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
->>>>>>     			if (atomic_dec_and_test(&dic->remaining_pages))
->>>>>>     				f2fs_decompress_cluster(dic);
->>>>>>     			continue;
->>>>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>>>> index 9f79a6825f06..b807970d67b1 100644
->>>>>> --- a/fs/f2fs/f2fs.h
->>>>>> +++ b/fs/f2fs/f2fs.h
->>>>>> @@ -3951,7 +3951,7 @@ struct address_space *COMPRESS_MAPPING(struct f2fs_sb_info *sbi);
->>>>>>     void f2fs_invalidate_compress_page(struct f2fs_sb_info *sbi, block_t blkaddr);
->>>>>>     void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     						nid_t ino, block_t blkaddr);
->>>>>> -void f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>> +bool f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
->>>>>>     								block_t blkaddr);
->>>>>>     void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi, nid_t ino);
->>>>>>     #else
->>>>>> @@ -3990,8 +3990,8 @@ static inline void f2fs_invalidate_compress_page(struct f2fs_sb_info *sbi,
->>>>>>     				block_t blkaddr) { }
->>>>>>     static inline void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi,
->>>>>>     				struct page *page, nid_t ino, block_t blkaddr) { }
->>>>>> -static inline void f2fs_load_compressed_page(struct f2fs_sb_info *sbi,
->>>>>> -				struct page *page, block_t blkaddr) { }
->>>>>> +static inline bool f2fs_load_compressed_page(struct f2fs_sb_info *sbi,
->>>>>> +				struct page *page, block_t blkaddr) { return false; }
->>>>>>     static inline void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi,
->>>>>>     							nid_t ino) { }
->>>>>>     #endif
->>>>>> -- 
->>>>>> 2.29.2
->>>>> .
->>>>>
->>>
->>>
->>> _______________________________________________
->>> Linux-f2fs-devel mailing list
->>> Linux-f2fs-devel@lists.sourceforge.net
->>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>>
-> .
-> 
 
 
 _______________________________________________
