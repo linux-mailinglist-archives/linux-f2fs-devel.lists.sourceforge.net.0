@@ -2,62 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A6B12FFA11
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jan 2021 02:45:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D79AD2FFA22
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jan 2021 02:46:34 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l2lVy-0006ku-U4; Fri, 22 Jan 2021 01:45:30 +0000
+	id 1l2lWz-0006to-2p; Fri, 22 Jan 2021 01:46:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1l2lVy-0006kn-4d
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 01:45:30 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1l2lWy-0006th-5k
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 01:46:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uboQv9WxmH1a+Q8oGJjxAEHbvzYKf8U8YD/DUYVJhWo=; b=B6H1QW0x+Al1xzN8SBfUmJ+wGJ
- fjmkCY0W5cXXaPpZOHZ6QHInaghUeTQzL60ZSZ4klkBbJQUQ0AH0kKLKalNyCBpWXrRStR0ciiOfL
- 430ND3Y8i1dnktODEjaxnvLaepCSuNj0BZtOACv7ZJpI4+MnaiKokQz54JowaAbf8i8k=;
+ bh=flJnD0rRc1aXe2N7uDWPA6XQtFB03MdKSpQxgCHR3h8=; b=Qr057w7h/pKaXLas/0HToiadFG
+ 0jIgsrsl7kgTrRYcCvQc92d+PuJRaYkUATX6g3z3bxLmzZKMZF6asFS5zfuXRdSkvShxlYC93anjk
+ +NbjvfFNAGD8rA4/PGhc+YDj8oGtB9odko7Wnp9eEwduB9PRocufkipR9OlPrr62Xflo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uboQv9WxmH1a+Q8oGJjxAEHbvzYKf8U8YD/DUYVJhWo=; b=A
- FwptnYs6FGJTWqtt4CtZpgbNzH7wMOpCyeNnz0VKWiYAtiohKUi1pl0/key3tVVQerc84A1jIPJZH
- s6c1Rey4zfaC5GNIZhIRCmp1iDQx+XXTrROaneZs8vQBRId1g3YIIz+948lnaLC1TF1/+RZwL4ify
- mfZ7t2IxjXy5a9G4=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=flJnD0rRc1aXe2N7uDWPA6XQtFB03MdKSpQxgCHR3h8=; b=PtlrRfWy5VSvvIWOtpgCeHXN3u
+ GBz0U0PBTi+MkR4NVSXIZQZtZrFOvTPzk8COVuMF2xjwnngni81/h0d1r/Xgydm5F7SDKp0q28Il0
+ z25f0Stm4my6NK4AWtnrmQ1jdh4YrB/vkCNtiV8ZDSMjncQzwkA8uasbVQpC1XDj+ZWw=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l2lVo-00CQ7s-M8
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 01:45:30 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 37F63223C8;
- Fri, 22 Jan 2021 01:45:10 +0000 (UTC)
+ id 1l2lWu-00CQUG-Av
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jan 2021 01:46:32 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9392D223C8;
+ Fri, 22 Jan 2021 01:46:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1611279910;
- bh=tIZKoD9FjEGIJuhgcCASN9kC2KnJio/calleGdZuYP4=;
- h=From:To:Cc:Subject:Date:From;
- b=rqCUIPR+3AJEvhGVYBa7+P7zQet+Bsx6FaeKJ1eUl5JPf0MIgaNf4DYRtPlS07Coy
- 4wnyYditKQpqPttZE3jwcUPYosaJUOa8DTC21eU/lBxiSKnrC7tlDz14P8z/yGHDmg
- KQeJlS4lMKkdfB5ba3lm1YnEvOdPf5U8flJ7ohsq55rY4HLbbGdtV14F4goRWSC3EX
- ZZitiJJaR8WrSwG9bZS6P0Hgv0PP5U/Mb1usCWZ+PiGOalYBqXMqfLA+uI/jQNF3ug
- Xo6fInsXMXCIkU0RdzDJcXAJnblefHGYFUKJWEKwkapgoD28zbH09ojyjY9GwoEzpR
- j0VYcyJIbhY1A==
-From: Eric Biggers <ebiggers@kernel.org>
-To: fstests@vger.kernel.org
-Date: Thu, 21 Jan 2021 17:44:34 -0800
-Message-Id: <20210122014434.110196-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.30.0
+ s=k20201202; t=1611279975;
+ bh=NR25a2C6O1piR6Ehm+fIGqD0DSATqBdrURpgb5Ey/Z8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=rzQJ0PcyYPbi5n9Hj0edqpN/lOnzOhwd2ZJCe1qpCjf1xp5Cz7ycCBMqAkngkj3+V
+ JOXCO5jvce0GfmD+B48y+l44ud6etu4P7jaOVkZQ22VHj/3Z3DysyrB1oiuYm5advI
+ 5vDQo2POv4lvWzYGZITujZcETWGmFwp5RpcjwQp+YfGfJMu0hIGo6j3wLrmrhjxx1g
+ T1A0KVb9FMpdioCTqk4rJGzyaJEPHbHzrHHze8Na2dK4xnQYR+Wmb0GBJdxH82OKay
+ snbw/oXsoj3t83+yxDgReRap22/esDE+3f+xaiyO0TIsaT7Q4bvIDKPPRin+/w5hbB
+ iWw5M/mWYgf2g==
+Date: Thu, 21 Jan 2021 17:46:14 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <YAouZuYE8mgZeqho@google.com>
+References: <20210121134529.1201249-1-daeho43@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210121134529.1201249-1-daeho43@gmail.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -66,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1l2lVo-00CQ7s-M8
-Subject: [f2fs-dev] [xfstests PATCH v2] generic: test for lazytime timestamp
- updates
+X-Headers-End: 1l2lWu-00CQUG-Av
+Subject: Re: [f2fs-dev] [PATCH v5 1/2] f2fs: introduce checkpoint=merge
+ mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,338 +86,531 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+Cc: Daeho Jeong <daehojeong@google.com>, Sungjong Seo <sj1557.seo@samsung.com>,
+ kernel-team@android.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On 01/21, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> We've added a new mount option "checkpoint=merge", which creates a
+> kernel daemon and makes it to merge concurrent checkpoint requests as
+> much as possible to eliminate redundant checkpoint issues. Plus, we
+> can eliminate the sluggish issue caused by slow checkpoint operation
+> when the checkpoint is done in a process context in a cgroup having
+> low i/o budget and cpu shares. To make this do better, we set the
+> default i/o priority of the kernel daemon to "3", to give one higher
+> priority than other kernel threads. The below verification result
+> explains this.
+> The basic idea has come from https://opensource.samsung.com.
+> 
+> [Verification]
+> Android Pixel Device(ARM64, 7GB RAM, 256GB UFS)
+> Create two I/O cgroups (fg w/ weight 100, bg w/ wight 20)
+> Set "strict_guarantees" to "1" in BFQ tunables
+> 
+> In "fg" cgroup,
+> - thread A => trigger 1000 checkpoint operations
+>   "for i in `seq 1 1000`; do touch test_dir1/file; fsync test_dir1;
+>    done"
+> - thread B => gererating async. I/O
+>   "fio --rw=write --numjobs=1 --bs=128k --runtime=3600 --time_based=1
+>        --filename=test_img --name=test"
+> 
+> In "bg" cgroup,
+> - thread C => trigger repeated checkpoint operations
+>   "echo $$ > /dev/blkio/bg/tasks; while true; do touch test_dir2/file;
+>    fsync test_dir2; done"
+> 
+> We've measured thread A's execution time.
+> 
+> [ w/o patch ]
+> Elapsed Time: Avg. 68 seconds
+> [ w/  patch ]
+> Elapsed Time: Avg. 48 seconds
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Sungjong Seo <sj1557.seo@samsung.com>
+> ---
+> v2:
+> - inlined ckpt_req_control into f2fs_sb_info and collected stastics
+>   of checkpoint merge operations
+> v3:
+> - fixed some minor errors and cleaned up f2fs_sync_fs()
+> v4:
+> - added an explanation to raise the default i/o priority of the
+>   checkpoint daemon
+> ---
+>  Documentation/filesystems/f2fs.rst |  10 ++
+>  fs/f2fs/checkpoint.c               | 177 +++++++++++++++++++++++++++++
+>  fs/f2fs/debug.c                    |  12 ++
+>  fs/f2fs/f2fs.h                     |  27 +++++
+>  fs/f2fs/super.c                    |  55 +++++++--
+>  5 files changed, 273 insertions(+), 8 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index dae15c96e659..9624a0be0364 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -247,6 +247,16 @@ checkpoint=%s[:%u[%]]	 Set to "disable" to turn off checkpointing. Set to "enabl
+>  			 hide up to all remaining free space. The actual space that
+>  			 would be unusable can be viewed at /sys/fs/f2fs/<disk>/unusable
+>  			 This space is reclaimed once checkpoint=enable.
+> +			 Here is another option "merge", which creates a kernel daemon
+> +			 and makes it to merge concurrent checkpoint requests as much
+> +			 as possible to eliminate redundant checkpoint issues. Plus,
+> +			 we can eliminate the sluggish issue caused by slow checkpoint
+> +			 operation when the checkpoint is done in a process context in
+> +			 a cgroup having low i/o budget and cpu shares. To make this
+> +			 do better, we set the default i/o priority of the kernel daemon
+> +			 to "3", to give one higher priority than other kernel threads.
+> +			 This is the same way to give a I/O priority to the jbd2
+> +			 journaling thread of ext4 filesystem.
+>  compress_algorithm=%s	 Control compress algorithm, currently f2fs supports "lzo",
+>  			 "lz4", "zstd" and "lzo-rle" algorithm.
+>  compress_log_size=%u	 Support configuring compress cluster size, the size will
+> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> index 897edb7c951a..ef6ad3d1957d 100644
+> --- a/fs/f2fs/checkpoint.c
+> +++ b/fs/f2fs/checkpoint.c
+> @@ -13,6 +13,7 @@
+>  #include <linux/f2fs_fs.h>
+>  #include <linux/pagevec.h>
+>  #include <linux/swap.h>
+> +#include <linux/kthread.h>
+>  
+>  #include "f2fs.h"
+>  #include "node.h"
+> @@ -20,6 +21,8 @@
+>  #include "trace.h"
+>  #include <trace/events/f2fs.h>
+>  
+> +#define DEFAULT_CHECKPOINT_IOPRIO (IOPRIO_PRIO_VALUE(IOPRIO_CLASS_BE, 3))
+> +
+>  static struct kmem_cache *ino_entry_slab;
+>  struct kmem_cache *f2fs_inode_entry_slab;
+>  
+> @@ -1707,3 +1710,177 @@ void f2fs_destroy_checkpoint_caches(void)
+>  	kmem_cache_destroy(ino_entry_slab);
+>  	kmem_cache_destroy(f2fs_inode_entry_slab);
+>  }
+> +
+> +static int __write_checkpoint_sync(struct f2fs_sb_info *sbi)
+> +{
+> +	struct cp_control cpc = { .reason = CP_SYNC, };
+> +	int err;
+> +
+> +	down_write(&sbi->gc_lock);
+> +	err = f2fs_write_checkpoint(sbi, &cpc);
+> +	up_write(&sbi->gc_lock);
+> +
+> +	return err;
+> +}
+> +
+> +static void __checkpoint_and_complete_reqs(struct f2fs_sb_info *sbi)
+> +{
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +	struct ckpt_req *req, *next;
+> +	struct llist_node *dispatch_list;
+> +	u64 sum_diff = 0, diff, count = 0;
+> +	int ret;
+> +
+> +	dispatch_list = llist_del_all(&cprc->issue_list);
+> +	if (!dispatch_list)
+> +		return;
+> +	dispatch_list = llist_reverse_order(dispatch_list);
+> +
+> +	ret = __write_checkpoint_sync(sbi);
+> +	atomic_inc(&cprc->issued_ckpt);
+> +
+> +	llist_for_each_entry_safe(req, next, dispatch_list, llnode) {
+> +		diff = (u64)ktime_ms_delta(ktime_get(), req->queue_time);
+> +		req->ret = ret;
+> +		complete(&req->wait);
+> +
+> +		sum_diff += diff;
+> +		count++;
+> +	}
+> +	atomic_sub(count, &cprc->queued_ckpt);
+> +	atomic_add(count, &cprc->total_ckpt);
+> +
+> +	spin_lock(&cprc->stat_lock);
+> +	cprc->cur_time = (unsigned int)div64_u64(sum_diff, count);
+> +	if (cprc->peak_time < cprc->cur_time)
+> +		cprc->peak_time = cprc->cur_time;
+> +	spin_unlock(&cprc->stat_lock);
+> +}
+> +
+> +static int issue_checkpoint_thread(void *data)
+> +{
+> +	struct f2fs_sb_info *sbi = data;
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +	wait_queue_head_t *q = &cprc->ckpt_wait_queue;
+> +repeat:
+> +	if (kthread_should_stop())
+> +		return 0;
+> +
+> +	sb_start_intwrite(sbi->sb);
+> +
+> +	if (!llist_empty(&cprc->issue_list))
+> +		__checkpoint_and_complete_reqs(sbi);
+> +
+> +	sb_end_intwrite(sbi->sb);
+> +
+> +	wait_event_interruptible(*q,
+> +		kthread_should_stop() || !llist_empty(&cprc->issue_list));
+> +	goto repeat;
+> +}
+> +
+> +static void flush_remained_ckpt_reqs(struct f2fs_sb_info *sbi,
+> +		struct ckpt_req *wait_req)
+> +{
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +
+> +	if (!llist_empty(&cprc->issue_list)) {
+> +		__checkpoint_and_complete_reqs(sbi);
+> +	} else {
+> +		/* already dispatched by issue_checkpoint_thread */
+> +		if (wait_req)
+> +			wait_for_completion(&wait_req->wait);
+> +	}
+> +}
+> +
+> +static void init_ckpt_req(struct ckpt_req *req)
+> +{
+> +	memset(req, 0, sizeof(struct ckpt_req));
+> +
+> +	init_completion(&req->wait);
+> +	req->queue_time = ktime_get();
+> +}
+> +
+> +int f2fs_issue_checkpoint(struct f2fs_sb_info *sbi)
+> +{
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +	struct ckpt_req req;
+> +	struct cp_control cpc;
+> +
+> +	cpc.reason = __get_cp_reason(sbi);
+> +	if (!test_opt(sbi, MERGE_CHECKPOINT) || cpc.reason != CP_SYNC) {
+> +		int ret;
+> +
+> +		down_write(&sbi->gc_lock);
+> +		ret = f2fs_write_checkpoint(sbi, &cpc);
+> +		up_write(&sbi->gc_lock);
+> +
+> +		return ret;
+> +	}
+> +
+> +	if (!cprc->f2fs_issue_ckpt)
+> +		return __write_checkpoint_sync(sbi);
+> +
+> +	init_ckpt_req(&req);
+> +
+> +	llist_add(&req.llnode, &cprc->issue_list);
+> +	atomic_inc(&cprc->queued_ckpt);
+> +
+> +	/* update issue_list before we wake up issue_checkpoint thread */
+> +	smp_mb();
+> +
+> +	if (waitqueue_active(&cprc->ckpt_wait_queue))
+> +		wake_up(&cprc->ckpt_wait_queue);
+> +
+> +	if (cprc->f2fs_issue_ckpt)
+> +		wait_for_completion(&req.wait);
+> +	else
+> +		flush_remained_ckpt_reqs(sbi, &req);
+> +
+> +	return req.ret;
+> +}
+> +
+> +int f2fs_start_ckpt_thread(struct f2fs_sb_info *sbi)
+> +{
+> +	dev_t dev = sbi->sb->s_bdev->bd_dev;
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +
+> +	if (cprc->f2fs_issue_ckpt)
+> +		return 0;
+> +
+> +	cprc->f2fs_issue_ckpt = kthread_run(issue_checkpoint_thread, sbi,
+> +			"f2fs_ckpt-%u:%u", MAJOR(dev), MINOR(dev));
+> +	if (IS_ERR(cprc->f2fs_issue_ckpt)) {
+> +		cprc->f2fs_issue_ckpt = NULL;
+> +		return PTR_ERR(cprc->f2fs_issue_ckpt);
 
-Test that when the lazytime mount option is enabled, updates to atime,
-mtime, and ctime get persisted in the cases when they should be.
+I fixed like this to address kbuild warning. Please check -dev.
 
-This test currently runs on ext4, f2fs, and xfs, since it's limited to
-filesystems that support the shutdown ioctl.
+		return -ENOMEM;
 
-This test currently passes on ext4 and f2fs.  On xfs, kernel
-commit 1e249cb5b7fc ("fs: fix lazytime expiration handling in
-__writeback_single_inode()") is needed for the test to pass, since xfs
-had a bug where it didn't persist timestamps when it should have.
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
-
-v2: updated comments and commit message, including to add a mention of a
-    related kernel commit.
-
- tests/generic/900     | 239 ++++++++++++++++++++++++++++++++++++++++++
- tests/generic/900.out |  37 +++++++
- tests/generic/group   |   1 +
- 3 files changed, 277 insertions(+)
- create mode 100755 tests/generic/900
- create mode 100644 tests/generic/900.out
-
-diff --git a/tests/generic/900 b/tests/generic/900
-new file mode 100755
-index 00000000..d9756158
---- /dev/null
-+++ b/tests/generic/900
-@@ -0,0 +1,239 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0-only
-+# Copyright 2021 Google LLC
-+#
-+# FS QA Test No. 900
-+#
-+# Test that when the lazytime mount option is enabled, updates to atime, mtime,
-+# and ctime are persisted in (at least) the four cases when they should be:
-+#
-+# - The inode needs to be updated for some change unrelated to file timestamps
-+# - Userspace calls fsync(), syncfs(), or sync()
-+# - The inode is evicted from memory
-+# - More than dirtytime_expire_seconds have elapsed
-+#
-+# This is in part a regression test for kernel commit 1e249cb5b7fc
-+# ("fs: fix lazytime expiration handling in __writeback_single_inode()").
-+# This test failed on XFS without that commit.
-+#
-+seq=`basename $0`
-+seqres=$RESULT_DIR/$seq
-+echo "QA output created by $seq"
-+
-+here=`pwd`
-+tmp=/tmp/$$
-+status=1	# failure is the default!
-+trap "_cleanup; exit \$status" 0 1 2 3 15
-+
-+DIRTY_EXPIRE_CENTISECS_ORIG=$(</proc/sys/vm/dirty_expire_centisecs)
-+DIRTY_WRITEBACK_CENTISECS_ORIG=$(</proc/sys/vm/dirty_writeback_centisecs)
-+DIRTYTIME_EXPIRE_SECONDS_ORIG=$(</proc/sys/vm/dirtytime_expire_seconds)
-+
-+restore_expiration_settings()
-+{
-+	echo "$DIRTY_EXPIRE_CENTISECS_ORIG" > /proc/sys/vm/dirty_expire_centisecs
-+	echo "$DIRTY_WRITEBACK_CENTISECS_ORIG" > /proc/sys/vm/dirty_writeback_centisecs
-+	echo "$DIRTYTIME_EXPIRE_SECONDS_ORIG" > /proc/sys/vm/dirtytime_expire_seconds
-+}
-+
-+# Enable continuous writeback of dirty inodes, so that we don't have to wait
-+# for the typical 30 seconds default.
-+__expire_inodes()
-+{
-+	echo 1 > /proc/sys/vm/dirty_expire_centisecs
-+	echo 1 > /proc/sys/vm/dirty_writeback_centisecs
-+}
-+
-+# Trigger and wait for writeback of any dirty inodes (not dirtytime inodes).
-+expire_inodes()
-+{
-+	__expire_inodes
-+	# Userspace doesn't have direct visibility into when inodes are dirty,
-+	# so the best we can do is sleep for a couple seconds.
-+	sleep 2
-+	restore_expiration_settings
-+}
-+
-+# Trigger and wait for writeback of any dirtytime inodes.
-+expire_timestamps()
-+{
-+	# Enable immediate expiration of lazytime timestamps, so that we don't
-+	# have to wait for the typical 24 hours default.  This should quickly
-+	# turn dirtytime inodes into regular dirty inodes.
-+	echo 1 > /proc/sys/vm/dirtytime_expire_seconds
-+
-+	# Enable continuous writeback of dirty inodes.
-+	__expire_inodes
-+
-+	# Userspace doesn't have direct visibility into when inodes are dirty,
-+	# so the best we can do is sleep for a couple seconds.
-+	sleep 2
-+	restore_expiration_settings
-+}
-+
-+_cleanup()
-+{
-+	restore_expiration_settings
-+	rm -f $tmp.*
-+}
-+
-+. ./common/rc
-+. ./common/filter
-+
-+rm -f $seqres.full
-+
-+_supported_fs generic
-+# This test uses the shutdown command, so it has to use the scratch filesystem
-+# rather than the test filesystem.
-+_require_scratch
-+_require_scratch_shutdown
-+_require_xfs_io_command "pwrite"
-+_require_xfs_io_command "fsync"
-+_require_xfs_io_command "syncfs"
-+# Note that this test doesn't have to check that the filesystem supports
-+# "lazytime", since "lazytime" is a VFS-level option, and at worst it just will
-+# be ignored.  This test will still pass if lazytime is ignored, as it only
-+# tests that timestamp updates are persisted when they should be; it doesn't
-+# test that timestamp updates aren't persisted when they shouldn't be.
-+
-+_scratch_mkfs &>> $seqres.full
-+_scratch_mount
-+
-+# Create the test file for which we'll update and check the timestamps.
-+file=$SCRATCH_MNT/file
-+$XFS_IO_PROG -f $file -c "pwrite 0 100" > /dev/null
-+
-+# Get the specified timestamp of $file in nanoseconds since the epoch.
-+get_timestamp()
-+{
-+	local timestamp_type=$1
-+
-+	local arg
-+	case $timestamp_type in
-+	atime)	arg=X ;;
-+	mtime)	arg=Y ;;
-+	ctime)	arg=Z ;;
-+	*)	_fail "Unhandled timestamp_type: $timestamp_type" ;;
-+	esac
-+	stat -c "%.9${arg}" $file | tr -d '.'
-+}
-+
-+do_test()
-+{
-+	local timestamp_type=$1
-+	local persist_method=$2
-+
-+	echo -e "\n# Testing that lazytime $timestamp_type update is persisted by $persist_method"
-+
-+	# Mount the filesystem with lazytime.  If atime is being tested, then
-+	# also use strictatime, since otherwise the filesystem may default to
-+	# relatime and not do the atime updates.
-+	if [[ $timestamp_type == atime ]]; then
-+		_scratch_cycle_mount lazytime,strictatime
-+	else
-+		_scratch_cycle_mount lazytime
-+	fi
-+
-+	# Update the specified timestamp on the file.
-+	local orig_time=$(get_timestamp $timestamp_type)
-+	sleep 0.1
-+	case $timestamp_type in
-+	atime)
-+		# Read from the file to update its atime.
-+		cat $file > /dev/null
-+		;;
-+	mtime)
-+		# Write to the file to update its mtime.  Make sure to not write
-+		# past the end of the file, as that would change i_size, which
-+		# would be an inode change which would cause the timestamp to
-+		# always be written -- thus making the test not detect bugs
-+		# where the timestamp doesn't get written.
-+		#
-+		# Also do the write twice, since XFS updates i_version the first
-+		# time, which likewise causes mtime to be written.  We want the
-+		# last thing done to just update mtime.
-+		$XFS_IO_PROG -f $file -c "pwrite 0 100" > /dev/null
-+		$XFS_IO_PROG -f $file -c "pwrite 0 100" > /dev/null
-+		;;
-+	ctime)
-+		# It isn't possible to update just ctime, so use 'touch -a'
-+		# to update both atime and ctime.
-+		touch -a $file
-+		;;
-+	esac
-+	local expected_time=$(get_timestamp $timestamp_type)
-+	if (( expected_time <= orig_time )); then
-+		echo "FAIL: $timestamp_type didn't increase after updating it (in-memory)"
-+	fi
-+
-+	# Do something that should cause the timestamp to be persisted.
-+	case $persist_method in
-+	other_inode_change)
-+		# Make a non-timestamp-related change to the inode.
-+		chmod 777 $file
-+		if [[ $timestamp_type == ctime ]]; then
-+			# The inode change will have updated ctime again.
-+			expected_time=$(get_timestamp ctime)
-+		fi
-+		# The inode may have been marked dirty but not actually written
-+		# yet.  Expire it by tweaking the VM settings and waiting.
-+		expire_inodes
-+		;;
-+	sync)
-+		# Execute the sync() system call.
-+		sync
-+		;;
-+	fsync)
-+		# Execute the fsync() system call on the file.
-+		$XFS_IO_PROG -r $file -c fsync
-+		;;
-+	syncfs)
-+		# Execute the syncfs() system call on the filesystem.
-+		$XFS_IO_PROG $SCRATCH_MNT -c syncfs
-+		;;
-+	eviction)
-+		# Evict the inode from memory.  In theory, drop_caches should do
-+		# the trick by itself.  But that actually just dirties the
-+		# inodes that need a lazytime update.  So we still need to wait
-+		# for inode writeback too.
-+		echo 2 > /proc/sys/vm/drop_caches
-+		expire_inodes
-+		;;
-+	expiration)
-+		# Expire the lazy timestamps via dirtytime_expire_seconds.
-+		expire_timestamps
-+		;;
-+	*)
-+		_fail "Unhandled persist_method: $persist_method"
-+	esac
-+
-+	# Use the shutdown ioctl to abort the filesystem.
-+	#
-+	# The timestamp might have just been written to the log and not *fully*
-+	# persisted yet, so use -f to ensure the log gets flushed.
-+	_scratch_shutdown -f
-+
-+	# Now remount the filesystem and verify that the timestamp really got
-+	# updated as expected.
-+	_scratch_cycle_mount
-+	local ondisk_time=$(get_timestamp $timestamp_type)
-+	if (( ondisk_time != expected_time )); then
-+		# Fail the test by printing unexpected output rather than by
-+		# calling _fail(), since we can still run the other test cases.
-+		echo "FAIL: lazytime $timestamp_type wasn't persisted by $persist_method"
-+		echo "ondisk_time ($ondisk_time) != expected_time ($expected_time)"
-+	fi
-+}
-+
-+for timestamp_type in atime mtime ctime; do
-+	do_test $timestamp_type other_inode_change
-+	do_test $timestamp_type sync
-+	do_test $timestamp_type fsync
-+	do_test $timestamp_type syncfs
-+	do_test $timestamp_type eviction
-+	do_test $timestamp_type expiration
-+done
-+
-+# success, all done
-+status=0
-+exit
-diff --git a/tests/generic/900.out b/tests/generic/900.out
-new file mode 100644
-index 00000000..53bd2e29
---- /dev/null
-+++ b/tests/generic/900.out
-@@ -0,0 +1,37 @@
-+QA output created by 900
-+
-+# Testing that lazytime atime update is persisted by other_inode_change
-+
-+# Testing that lazytime atime update is persisted by sync
-+
-+# Testing that lazytime atime update is persisted by fsync
-+
-+# Testing that lazytime atime update is persisted by syncfs
-+
-+# Testing that lazytime atime update is persisted by eviction
-+
-+# Testing that lazytime atime update is persisted by expiration
-+
-+# Testing that lazytime mtime update is persisted by other_inode_change
-+
-+# Testing that lazytime mtime update is persisted by sync
-+
-+# Testing that lazytime mtime update is persisted by fsync
-+
-+# Testing that lazytime mtime update is persisted by syncfs
-+
-+# Testing that lazytime mtime update is persisted by eviction
-+
-+# Testing that lazytime mtime update is persisted by expiration
-+
-+# Testing that lazytime ctime update is persisted by other_inode_change
-+
-+# Testing that lazytime ctime update is persisted by sync
-+
-+# Testing that lazytime ctime update is persisted by fsync
-+
-+# Testing that lazytime ctime update is persisted by syncfs
-+
-+# Testing that lazytime ctime update is persisted by eviction
-+
-+# Testing that lazytime ctime update is persisted by expiration
-diff --git a/tests/generic/group b/tests/generic/group
-index 30a73605..00b75b42 100644
---- a/tests/generic/group
-+++ b/tests/generic/group
-@@ -624,3 +624,4 @@
- 619 auto rw enospc
- 620 auto mount quick
- 621 auto quick encrypt
-+900 auto
--- 
-2.30.0
-
+> +	}
+> +
+> +	set_task_ioprio(cprc->f2fs_issue_ckpt, DEFAULT_CHECKPOINT_IOPRIO);
+> +
+> +	return 0;
+> +}
+> +
+> +void f2fs_stop_ckpt_thread(struct f2fs_sb_info *sbi)
+> +{
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +
+> +	if (cprc->f2fs_issue_ckpt) {
+> +		struct task_struct *ckpt_task = cprc->f2fs_issue_ckpt;
+> +
+> +		cprc->f2fs_issue_ckpt = NULL;
+> +		kthread_stop(ckpt_task);
+> +
+> +		flush_remained_ckpt_reqs(sbi, NULL);
+> +	}
+> +}
+> +
+> +void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi)
+> +{
+> +	struct ckpt_req_control *cprc = &sbi->cprc_info;
+> +
+> +	atomic_set(&cprc->issued_ckpt, 0);
+> +	atomic_set(&cprc->total_ckpt, 0);
+> +	atomic_set(&cprc->queued_ckpt, 0);
+> +	init_waitqueue_head(&cprc->ckpt_wait_queue);
+> +	init_llist_head(&cprc->issue_list);
+> +	spin_lock_init(&cprc->stat_lock);
+> +}
+> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+> index 197c914119da..91855d5721cd 100644
+> --- a/fs/f2fs/debug.c
+> +++ b/fs/f2fs/debug.c
+> @@ -120,6 +120,13 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+>  			atomic_read(&SM_I(sbi)->dcc_info->discard_cmd_cnt);
+>  		si->undiscard_blks = SM_I(sbi)->dcc_info->undiscard_blks;
+>  	}
+> +	si->nr_issued_ckpt = atomic_read(&sbi->cprc_info.issued_ckpt);
+> +	si->nr_total_ckpt = atomic_read(&sbi->cprc_info.total_ckpt);
+> +	si->nr_queued_ckpt = atomic_read(&sbi->cprc_info.queued_ckpt);
+> +	spin_lock(&sbi->cprc_info.stat_lock);
+> +	si->cur_ckpt_time = sbi->cprc_info.cur_time;
+> +	si->peak_ckpt_time = sbi->cprc_info.peak_time;
+> +	spin_unlock(&sbi->cprc_info.stat_lock);
+>  	si->total_count = (int)sbi->user_block_count / sbi->blocks_per_seg;
+>  	si->rsvd_segs = reserved_segments(sbi);
+>  	si->overp_segs = overprovision_segments(sbi);
+> @@ -417,6 +424,11 @@ static int stat_show(struct seq_file *s, void *v)
+>  				si->meta_count[META_NAT]);
+>  		seq_printf(s, "  - ssa blocks : %u\n",
+>  				si->meta_count[META_SSA]);
+> +		seq_printf(s, "CP merge (Queued: %4d, Issued: %4d, Total: %4d, "
+> +				"Cur time: %4d(ms), Peak time: %4d(ms))\n",
+> +				si->nr_queued_ckpt, si->nr_issued_ckpt,
+> +				si->nr_total_ckpt, si->cur_ckpt_time,
+> +				si->peak_ckpt_time);
+>  		seq_printf(s, "GC calls: %d (BG: %d)\n",
+>  			   si->call_count, si->bg_gc);
+>  		seq_printf(s, "  - data segments : %d (%d)\n",
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index bb11759191dc..f2ae075aa723 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -97,6 +97,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+>  #define F2FS_MOUNT_DISABLE_CHECKPOINT	0x02000000
+>  #define F2FS_MOUNT_NORECOVERY		0x04000000
+>  #define F2FS_MOUNT_ATGC			0x08000000
+> +#define F2FS_MOUNT_MERGE_CHECKPOINT	0x10000000
+>  
+>  #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+>  #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
+> @@ -266,6 +267,25 @@ struct fsync_node_entry {
+>  	unsigned int seq_id;	/* sequence id */
+>  };
+>  
+> +struct ckpt_req {
+> +	struct completion wait;		/* completion for checkpoint done */
+> +	struct llist_node llnode;	/* llist_node to be linked in wait queue */
+> +	int ret;			/* return code of checkpoint */
+> +	ktime_t queue_time;		/* request queued time */
+> +};
+> +
+> +struct ckpt_req_control {
+> +	struct task_struct *f2fs_issue_ckpt;	/* checkpoint task */
+> +	wait_queue_head_t ckpt_wait_queue;	/* waiting queue for wake-up */
+> +	atomic_t issued_ckpt;		/* # of actually issued ckpts */
+> +	atomic_t total_ckpt;		/* # of total ckpts */
+> +	atomic_t queued_ckpt;		/* # of queued ckpts */
+> +	struct llist_head issue_list;	/* list for command issue */
+> +	spinlock_t stat_lock;		/* lock for below checkpoint time stats */
+> +	unsigned int cur_time;		/* cur wait time in msec for currently issued checkpoint */
+> +	unsigned int peak_time;		/* peak wait time in msec until now */
+> +};
+> +
+>  /* for the bitmap indicate blocks to be discarded */
+>  struct discard_entry {
+>  	struct list_head list;	/* list head */
+> @@ -1404,6 +1424,7 @@ struct f2fs_sb_info {
+>  	wait_queue_head_t cp_wait;
+>  	unsigned long last_time[MAX_TIME];	/* to store time in jiffies */
+>  	long interval_time[MAX_TIME];		/* to store thresholds */
+> +	struct ckpt_req_control cprc_info;	/* for checkpoint request control */
+>  
+>  	struct inode_management im[MAX_INO_ENTRY];	/* manage inode cache */
+>  
+> @@ -3418,6 +3439,10 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc);
+>  void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi);
+>  int __init f2fs_create_checkpoint_caches(void);
+>  void f2fs_destroy_checkpoint_caches(void);
+> +int f2fs_issue_checkpoint(struct f2fs_sb_info *sbi);
+> +int f2fs_start_ckpt_thread(struct f2fs_sb_info *sbi);
+> +void f2fs_stop_ckpt_thread(struct f2fs_sb_info *sbi);
+> +void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi);
+>  
+>  /*
+>   * data.c
+> @@ -3530,6 +3555,8 @@ struct f2fs_stat_info {
+>  	int nr_discarding, nr_discarded;
+>  	int nr_discard_cmd;
+>  	unsigned int undiscard_blks;
+> +	int nr_issued_ckpt, nr_total_ckpt, nr_queued_ckpt;
+> +	unsigned int cur_ckpt_time, peak_ckpt_time;
+>  	int inline_xattr, inline_inode, inline_dir, append, update, orphans;
+>  	int compr_inode;
+>  	unsigned long long compr_blocks;
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index b4a07fe62d1a..4bf5e889f2f8 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -143,6 +143,7 @@ enum {
+>  	Opt_checkpoint_disable_cap,
+>  	Opt_checkpoint_disable_cap_perc,
+>  	Opt_checkpoint_enable,
+> +	Opt_checkpoint_merge,
+>  	Opt_compress_algorithm,
+>  	Opt_compress_log_size,
+>  	Opt_compress_extension,
+> @@ -213,6 +214,7 @@ static match_table_t f2fs_tokens = {
+>  	{Opt_checkpoint_disable_cap, "checkpoint=disable:%u"},
+>  	{Opt_checkpoint_disable_cap_perc, "checkpoint=disable:%u%%"},
+>  	{Opt_checkpoint_enable, "checkpoint=enable"},
+> +	{Opt_checkpoint_merge, "checkpoint=merge"},
+>  	{Opt_compress_algorithm, "compress_algorithm=%s"},
+>  	{Opt_compress_log_size, "compress_log_size=%u"},
+>  	{Opt_compress_extension, "compress_extension=%s"},
+> @@ -872,6 +874,9 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  		case Opt_checkpoint_enable:
+>  			clear_opt(sbi, DISABLE_CHECKPOINT);
+>  			break;
+> +		case Opt_checkpoint_merge:
+> +			set_opt(sbi, MERGE_CHECKPOINT);
+> +			break;
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+>  		case Opt_compress_algorithm:
+>  			if (!f2fs_sb_has_compression(sbi)) {
+> @@ -1040,6 +1045,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  		return -EINVAL;
+>  	}
+>  
+> +	if (test_opt(sbi, DISABLE_CHECKPOINT) &&
+> +			test_opt(sbi, MERGE_CHECKPOINT)) {
+> +		f2fs_err(sbi, "checkpoint=merge cannot be used with checkpoint=disable\n");
+> +		return -EINVAL;
+> +	}
+> +
+>  	/* Not pass down write hints if the number of active logs is lesser
+>  	 * than NR_CURSEG_PERSIST_TYPE.
+>  	 */
+> @@ -1245,6 +1256,12 @@ static void f2fs_put_super(struct super_block *sb)
+>  	/* prevent remaining shrinker jobs */
+>  	mutex_lock(&sbi->umount_mutex);
+>  
+> +	/*
+> +	 * flush all issued checkpoints and stop checkpoint issue thread.
+> +	 * after then, all checkpoints should be done by each process context.
+> +	 */
+> +	f2fs_stop_ckpt_thread(sbi);
+> +
+>  	/*
+>  	 * We don't need to do checkpoint when superblock is clean.
+>  	 * But, the previous checkpoint was not done by umount, it needs to do
+> @@ -1343,15 +1360,9 @@ int f2fs_sync_fs(struct super_block *sb, int sync)
+>  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+>  		return -EAGAIN;
+>  
+> -	if (sync) {
+> -		struct cp_control cpc;
+> -
+> -		cpc.reason = __get_cp_reason(sbi);
+> +	if (sync)
+> +		err = f2fs_issue_checkpoint(sbi);
+>  
+> -		down_write(&sbi->gc_lock);
+> -		err = f2fs_write_checkpoint(sbi, &cpc);
+> -		up_write(&sbi->gc_lock);
+> -	}
+>  	f2fs_trace_ios(NULL, 1);
+>  
+>  	return err;
+> @@ -1674,6 +1685,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+>  	if (test_opt(sbi, DISABLE_CHECKPOINT))
+>  		seq_printf(seq, ",checkpoint=disable:%u",
+>  				F2FS_OPTION(sbi).unusable_cap);
+> +	if (test_opt(sbi, MERGE_CHECKPOINT))
+> +		seq_puts(seq, ",checkpoint=merge");
+>  	if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_POSIX)
+>  		seq_printf(seq, ",fsync_mode=%s", "posix");
+>  	else if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
+> @@ -1954,6 +1967,18 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+>  		}
+>  	}
+>  
+> +	if (!test_opt(sbi, MERGE_CHECKPOINT)) {
+> +		f2fs_stop_ckpt_thread(sbi);
+> +	} else {
+> +		err = f2fs_start_ckpt_thread(sbi);
+> +		if (err) {
+> +			f2fs_err(sbi,
+> +			    "Failed to start F2FS issue_checkpoint_thread (%d)",
+> +			    err);
+> +			goto restore_gc;
+> +		}
+> +	}
+> +
+>  	/*
+>  	 * We stop issue flush thread if FS is mounted as RO
+>  	 * or if flush_merge is not passed in mount option.
+> @@ -3701,6 +3726,18 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  
+>  	f2fs_init_fsync_node_info(sbi);
+>  
+> +	/* setup checkpoint request control and start checkpoint issue thread */
+> +	f2fs_init_ckpt_req_control(sbi);
+> +	if (test_opt(sbi, MERGE_CHECKPOINT)) {
+> +		err = f2fs_start_ckpt_thread(sbi);
+> +		if (err) {
+> +			f2fs_err(sbi,
+> +			    "Failed to start F2FS issue_checkpoint_thread (%d)",
+> +			    err);
+> +			goto stop_ckpt_thread;
+> +		}
+> +	}
+> +
+>  	/* setup f2fs internal modules */
+>  	err = f2fs_build_segment_manager(sbi);
+>  	if (err) {
+> @@ -3910,6 +3947,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  free_sm:
+>  	f2fs_destroy_segment_manager(sbi);
+>  	f2fs_destroy_post_read_wq(sbi);
+> +stop_ckpt_thread:
+> +	f2fs_stop_ckpt_thread(sbi);
+>  free_devices:
+>  	destroy_device_list(sbi);
+>  	kvfree(sbi->ckpt);
+> -- 
+> 2.30.0.296.g2bfb1c46d8-goog
+> 
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
