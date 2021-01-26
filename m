@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F1FD304184
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:08:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F10430419A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:09:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l4Pwp-0001wJ-0K; Tue, 26 Jan 2021 15:08:03 +0000
+	id 1l4Py0-0007Cm-OR; Tue, 26 Jan 2021 15:09:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+b7a2078c382f6036dc0e+6365+infradead.org+hch@casper.srs.infradead.org>)
- id 1l4Pwo-0001w7-38
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:08:02 +0000
+ id 1l4Pxz-0007Ce-5T
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:09:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KOVL9a1MkJeVtbO5wAEfyylWZoWniZN5JlBdpQ6RLVM=; b=jgfvkaYkKAMpVa1xPausRIkhgI
- J05wK5UY1q/uQpoez6gDv0Og04gI2pxLFTBRouscbtbi9Xs1DLP68AI4OGxjEAzJ6CeKc8yboBreV
- jznqw4Sk5HUgeq3Uwb1e4hjZMVG4DBVivtl1+GxtL5kLt9Vh08we0xZuIm11DXQHXWkA=;
+ bh=Zy1yNACJwx6tY0xAylbc3LmDKE7IpoPxR60kvFb5LRI=; b=lPWx21MsR4dQ/+wqpwzC/ppL4h
+ a1BWclidf6/sGx3NZ/V8KIEInia6wQPxLNGFRCAwhXYx22G3Dbt2Oj6NmfCgfsxEAB5ZLWKtC5yKx
+ YV6u7CTXteC1Y9bUIPQ4xdKUtoxsx4yVQBFszIV7dX8m57qEa18j90lL2l+P6DQidSYk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KOVL9a1MkJeVtbO5wAEfyylWZoWniZN5JlBdpQ6RLVM=; b=Iqk1FQR0xGnTT/J8drP+e7P9WW
- iPO/EvmqGkUVwGQfYB9PeEZOx09nQjJ3sfN2T776He29+LLxltTgA8D+FnJNniCASWO+zXe3XNuGQ
- Z7IlwC8ZrZ34xNwT8vsISzIySRroGY2GXpOLfZJbeJt71XXLnLHpZ/9tvtUCJmUiYgAo=;
+ bh=Zy1yNACJwx6tY0xAylbc3LmDKE7IpoPxR60kvFb5LRI=; b=Yds+bMQhDHK9uGvfTXBU3P3EZL
+ nTzuvBUp1D4s7DyKZP/CI1S9RCdNuCyvlBjkp5d7KFffySxETZtMsHEL9NIH0VCzn95qJXnPgnGPZ
+ VDTazv/bnjbAQEshumbFKeYhq203T8g1Vx+tpolFv6oCvQLFdtunWCPZRvMZeW5Mxi6U=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l4Pwl-00ALfG-8m
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:08:02 +0000
+ id 1l4Pxs-00ALk0-0U
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:09:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=KOVL9a1MkJeVtbO5wAEfyylWZoWniZN5JlBdpQ6RLVM=; b=UXprdS/M6ExT6y8z2YkV6ntwGP
- omDC0ofe3OnxV6Yi9f2pOA923E0+NvR1wQq66SRHdZNqeVD0AQ/Acio/9Gjfz/d10FJCj/4OtjPPq
- 5vLqgkQ6Gw3w0jW1aGI3RDIv1430L0ay0COX8MLA1pUbgCL2jA3OvOmmWJjwcwk2myTY7jXxTdmLj
- Mi4ZHZsF7s1B2FS9/PgBbHuju0uOmuX3pLQJDcXwpWqzfDAQIQJbd7/DZ2lCXEyuoiqh6J3yWSM10
- 2Im25S5t/YszSEhuYaz0/qYB7rknN6NIVA+IhRXWoJioq0M/9ZpeFlFCgmoUfgLlfbp5pszdUTI5J
- oiwn5nvQ==;
+ bh=Zy1yNACJwx6tY0xAylbc3LmDKE7IpoPxR60kvFb5LRI=; b=ocoLOdEDKDs0IuNFSP9sgoTODv
+ 18PH5yYdILklt5Kcbk4RaNOumpH/dPygxlzzOi0F7kge6uR6vZPdKOW23YBL+UfRU3Hg53gGT+sdE
+ L7Y2itAvM/yrtkW1Yulc5ANGTeem5ElQyw2MEJgaPcXb0rn6g2dRNjlXdsW0AdM00QuSgAQRTCF5i
+ sG2hDmNa2gYg0o6VdGGNL4b7gjHoC3baCaLKFSmUBDtBto5EYLtmHVEA+eucEAVTT7YHamKlXI/RV
+ cpzfxttXq3A3lFAC2B/WVmkxfelzhSzKudfS/jGmRwK27WhKvXoxcGP+EjBP96ON1vw/v2NYKF3Kb
+ R3kKKz6w==;
 Received: from [2001:4bb8:191:e347:5918:ac86:61cb:8801] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1l4Ps6-005mzo-8D; Tue, 26 Jan 2021 15:03:27 +0000
+ id 1l4Pt5-005n5W-9A; Tue, 26 Jan 2021 15:04:44 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	Song Liu <song@kernel.org>
-Date: Tue, 26 Jan 2021 15:52:36 +0100
-Message-Id: <20210126145247.1964410-7-hch@lst.de>
+Date: Tue, 26 Jan 2021 15:52:37 +0100
+Message-Id: <20210126145247.1964410-8-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210126145247.1964410-1-hch@lst.de>
 References: <20210126145247.1964410-1-hch@lst.de>
@@ -77,9 +77,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l4Pwl-00ALfG-8m
-Subject: [f2fs-dev] [PATCH 06/17] dm-clone: use blkdev_issue_flush in
- commit_metadata
+X-Headers-End: 1l4Pxs-00ALk0-0U
+Subject: [f2fs-dev] [PATCH 07/17] f2fs: use blkdev_issue_flush in
+ __submit_flush_wait
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,59 +107,64 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use blkdev_issue_flush instead of open coding it.
+Use the blkdev_issue_flush helper instead of duplicating it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/md/dm-clone-target.c | 14 +-------------
- 1 file changed, 1 insertion(+), 13 deletions(-)
+ fs/f2fs/data.c    |  3 ++-
+ fs/f2fs/f2fs.h    |  1 -
+ fs/f2fs/segment.c | 12 +-----------
+ 3 files changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/md/dm-clone-target.c b/drivers/md/dm-clone-target.c
-index bdb255edc20043..a90bdf9b2ca6bd 100644
---- a/drivers/md/dm-clone-target.c
-+++ b/drivers/md/dm-clone-target.c
-@@ -85,12 +85,6 @@ struct clone {
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 8cbf0315975228..0cf0c605992431 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -56,7 +56,8 @@ static inline struct bio *__f2fs_bio_alloc(gfp_t gfp_mask,
+ 	return bio_alloc_bioset(gfp_mask, nr_iovecs, &f2fs_bioset);
+ }
  
- 	struct dm_clone_metadata *cmd;
- 
--	/*
--	 * bio used to flush the destination device, before committing the
--	 * metadata.
--	 */
--	struct bio flush_bio;
+-struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi, int npages, bool noio)
++static struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi, int npages,
++		bool noio)
+ {
+ 	if (noio) {
+ 		/* No failure on bio allocation */
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index bb11759191dcc9..902bd3267c03e1 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3424,7 +3424,6 @@ void f2fs_destroy_checkpoint_caches(void);
+  */
+ int __init f2fs_init_bioset(void);
+ void f2fs_destroy_bioset(void);
+-struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi, int npages, bool noio);
+ int f2fs_init_bio_entry_cache(void);
+ void f2fs_destroy_bio_entry_cache(void);
+ void f2fs_submit_bio(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index deca74cb17dfd8..c495f170ee400b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -566,17 +566,7 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
+ static int __submit_flush_wait(struct f2fs_sb_info *sbi,
+ 				struct block_device *bdev)
+ {
+-	struct bio *bio;
+-	int ret;
 -
- 	/* Region hydration hash table */
- 	struct hash_table_bucket *ht;
- 
-@@ -1155,11 +1149,7 @@ static int commit_metadata(struct clone *clone, bool *dest_dev_flushed)
- 		goto out;
- 	}
- 
--	bio_reset(&clone->flush_bio);
--	bio_set_dev(&clone->flush_bio, clone->dest_dev->bdev);
--	clone->flush_bio.bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
+-	bio = f2fs_bio_alloc(sbi, 0, false);
+-	if (!bio)
+-		return -ENOMEM;
 -
--	r = submit_bio_wait(&clone->flush_bio);
-+	r = blkdev_issue_flush(clone->dest_dev->bdev);
- 	if (unlikely(r)) {
- 		__metadata_operation_failed(clone, "flush destination device", r);
- 		goto out;
-@@ -1886,7 +1876,6 @@ static int clone_ctr(struct dm_target *ti, unsigned int argc, char **argv)
- 	bio_list_init(&clone->deferred_flush_completions);
- 	clone->hydration_offset = 0;
- 	atomic_set(&clone->hydrations_in_flight, 0);
--	bio_init(&clone->flush_bio, NULL, 0);
+-	bio->bi_opf = REQ_OP_WRITE | REQ_SYNC | REQ_PREFLUSH;
+-	bio_set_dev(bio, bdev);
+-	ret = submit_bio_wait(bio);
+-	bio_put(bio);
++	int ret = blkdev_issue_flush(bdev);
  
- 	clone->wq = alloc_workqueue("dm-" DM_MSG_PREFIX, WQ_MEM_RECLAIM, 0);
- 	if (!clone->wq) {
-@@ -1958,7 +1947,6 @@ static void clone_dtr(struct dm_target *ti)
- 	struct clone *clone = ti->private;
- 
- 	mutex_destroy(&clone->commit_lock);
--	bio_uninit(&clone->flush_bio);
- 
- 	for (i = 0; i < clone->nr_ctr_args; i++)
- 		kfree(clone->ctr_args[i]);
+ 	trace_f2fs_issue_flush(bdev, test_opt(sbi, NOBARRIER),
+ 				test_opt(sbi, FLUSH_MERGE), ret);
 -- 
 2.29.2
 
