@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CD393041B7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:11:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 589AD3041CD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:13:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l4Q0I-00028b-Kk; Tue, 26 Jan 2021 15:11:38 +0000
+	id 1l4Q1m-0007Np-GY; Tue, 26 Jan 2021 15:13:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+b7a2078c382f6036dc0e+6365+infradead.org+hch@casper.srs.infradead.org>)
- id 1l4Q0G-00028R-FQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:11:36 +0000
+ id 1l4Q1l-0007Ni-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:13:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=o7VUFbuCs40X37XHTmVmjDE9l+0qzfo+L5D5+3HB/Xs=; b=bJ2D5MBFl4Xd+RX/ORK/Hqgipp
- sy3RkfKXO0GRFzG0lV3DlQl5PTpH1YXzssHc/KD+Gqtn/ClrNBTNRhkgPT7jivP1IRgjKhgkS9g4S
- P3jDugqp+6TLIQkNu1crpLI4bJsYE0Fgk3/QQGS8aRcTWI/ePrEIU9TwtBnid6beZcHo=;
+ bh=HErhv54QBaSjoGpiWf1SZ+x2VawfdyThF54vo2cmZ+0=; b=FZSdcFudBk2FZy3iMquJCyhY3A
+ M6gcwB5QrZNLHkYN4BEGTfCUsSEKoOYPtjduR65f7GnjpP6BdmsLLIUz6UKmVo8ixEgqg6i5hU8Ht
+ GHBd+ZElY3ok5uR56y42Dmqc+Ep+ZivLM3gBe5zfOJJo1UXtFQTSe76IiV0x9tr0ck/I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=o7VUFbuCs40X37XHTmVmjDE9l+0qzfo+L5D5+3HB/Xs=; b=emWYziH8D+W5LwYJO2jlJ1s5vQ
- Z1VtrSB6yvEp42d1k4xWnhehW8+wvnRNSLL1SWBmBE5VCtmLwEg9umE3NHlCm+edGyc5bLQ2sRRoR
- ThafA9WedQYgpDFcMPxYo9mTFM6XWCa9mxtMn0X9Z7bs0pZhpDcVgUQ+0XrbM90NgJ04=;
+ bh=HErhv54QBaSjoGpiWf1SZ+x2VawfdyThF54vo2cmZ+0=; b=bm1ZJntObqfVfbHgICB/sSlGyg
+ zDmqNwJe5L97t+z6JyuiU9QiBhEGkVpOmC+HUE1XW5yDhbJNo+H3rE+LHg8BJWTIPzzOZrWF87G4q
+ 1n7sdjdx3iBn11WShcHt9APMqw2InA705tgYX7qG21k0AVD0QQ+w4TyanZuoriEVWz4M=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l4Q0C-00AM20-0w
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:11:36 +0000
+ id 1l4Q1c-00AM9f-05
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:13:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=o7VUFbuCs40X37XHTmVmjDE9l+0qzfo+L5D5+3HB/Xs=; b=aV79kHDk99zhkL6s5WblnMsXYm
- MUeYdtQAir6ZpBM6WxTX2uHNWa9GoJblM5+y9lvBViksx2RanhFgtOVoykjDrNKUAASUImAhQ2S9S
- kCfJVL4xwzijj26ZqmZV0RNsrXFPbf4N+/Nr6bUnSe70GhYydpXzWfT1u3SDcEBkvvxsPZwC5/Opl
- QrXnJfVNQdYsJMZo5rcHFwaYuDhpw+B9jZZ2qD3QFDvKwydp8nBngTufhjUIOGN8sMm7ejCwV76Ba
- wQKngqSt6P9/gxTf3mYfoWEoeugpEM9qEEobeCMKiVADWZmeomcieNiE/g3oi2zy++X/iQc0gI0gY
- x6aONCMg==;
+ bh=HErhv54QBaSjoGpiWf1SZ+x2VawfdyThF54vo2cmZ+0=; b=psFgtPRZ6D/21BqcKKyxXBT5zV
+ Arh/O5/9ipibQp28daCFwPAkwEfB8+qxTkARKVHVe011bePjLLoCZIAzrYjP3M/HV6EqUx4is00Yk
+ kOABbaz6Etshz/WgzYdyqQE+9HKqaXrdoZVODEsiOGiRPyCkiK74I61FXpT/fV0sHhSRmxgTQ0iBY
+ SFDBTDTQ5plMii25HFVgTG3Wg/BO1lFNS1S2Mmjf3GTuH1SDsGuByg0C1MHlYmglHBfP0gXy8clgd
+ Ld4f4GtTIzjg/E/zIYg1Xr48+Gj7Jvj4OIzkm7oxnKOobS8TWjPxW+tR7kP9DT95SnrWdUOiZj+ok
+ zlSx8+ow==;
 Received: from [2001:4bb8:191:e347:5918:ac86:61cb:8801] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1l4PuS-005nI7-1q; Tue, 26 Jan 2021 15:06:07 +0000
+ id 1l4PwO-005nSC-70; Tue, 26 Jan 2021 15:07:53 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	Song Liu <song@kernel.org>
-Date: Tue, 26 Jan 2021 15:52:38 +0100
-Message-Id: <20210126145247.1964410-9-hch@lst.de>
+Date: Tue, 26 Jan 2021 15:52:39 +0100
+Message-Id: <20210126145247.1964410-10-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210126145247.1964410-1-hch@lst.de>
 References: <20210126145247.1964410-1-hch@lst.de>
@@ -77,8 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l4Q0C-00AM20-0w
-Subject: [f2fs-dev] [PATCH 08/17] f2fs: remove FAULT_ALLOC_BIO
+X-Headers-End: 1l4Q1c-00AM9f-05
+Subject: [f2fs-dev] [PATCH 09/17] drbd: remove bio_alloc_drbd
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,107 +106,81 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Sleeping bio allocations do not fail, which means that injecting an error
-into sleeping bio allocations is a little silly.
+Given that drbd_md_io_bio_set is initialized during module initialization
+and the module fails to load if the initialization fails there is no need
+to fall back to plain bio_alloc.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- Documentation/filesystems/f2fs.rst |  1 -
- fs/f2fs/data.c                     | 29 ++++-------------------------
- fs/f2fs/f2fs.h                     |  1 -
- fs/f2fs/super.c                    |  1 -
- 4 files changed, 4 insertions(+), 28 deletions(-)
+ drivers/block/drbd/drbd_actlog.c |  2 +-
+ drivers/block/drbd/drbd_bitmap.c |  2 +-
+ drivers/block/drbd/drbd_int.h    |  2 --
+ drivers/block/drbd/drbd_main.c   | 13 -------------
+ 4 files changed, 2 insertions(+), 17 deletions(-)
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index dae15c96e659e2..624f5f3ed93e86 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -179,7 +179,6 @@ fault_type=%d		 Support configuring fault injection type, should be
- 			 FAULT_KVMALLOC		  0x000000002
- 			 FAULT_PAGE_ALLOC	  0x000000004
- 			 FAULT_PAGE_GET		  0x000000008
--			 FAULT_ALLOC_BIO	  0x000000010
- 			 FAULT_ALLOC_NID	  0x000000020
- 			 FAULT_ORPHAN		  0x000000040
- 			 FAULT_BLOCK		  0x000000080
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 0cf0c605992431..9fb6be65592b1f 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -50,28 +50,6 @@ void f2fs_destroy_bioset(void)
- 	bioset_exit(&f2fs_bioset);
- }
+diff --git a/drivers/block/drbd/drbd_actlog.c b/drivers/block/drbd/drbd_actlog.c
+index 7227fc7ab8ed1e..72cf7603d51fc7 100644
+--- a/drivers/block/drbd/drbd_actlog.c
++++ b/drivers/block/drbd/drbd_actlog.c
+@@ -138,7 +138,7 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
+ 		op_flags |= REQ_FUA | REQ_PREFLUSH;
+ 	op_flags |= REQ_SYNC;
  
--static inline struct bio *__f2fs_bio_alloc(gfp_t gfp_mask,
--						unsigned int nr_iovecs)
--{
--	return bio_alloc_bioset(gfp_mask, nr_iovecs, &f2fs_bioset);
--}
--
--static struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi, int npages,
--		bool noio)
--{
--	if (noio) {
--		/* No failure on bio allocation */
--		return __f2fs_bio_alloc(GFP_NOIO, npages);
--	}
--
--	if (time_to_inject(sbi, FAULT_ALLOC_BIO)) {
--		f2fs_show_injection_info(sbi, FAULT_ALLOC_BIO);
--		return NULL;
--	}
--
--	return __f2fs_bio_alloc(GFP_KERNEL, npages);
--}
--
- static bool __is_cp_guaranteed(struct page *page)
+-	bio = bio_alloc_drbd(GFP_NOIO);
++	bio = bio_alloc_bioset(GFP_NOIO, 1, &drbd_md_io_bio_set);
+ 	bio_set_dev(bio, bdev->md_bdev);
+ 	bio->bi_iter.bi_sector = sector;
+ 	err = -EIO;
+diff --git a/drivers/block/drbd/drbd_bitmap.c b/drivers/block/drbd/drbd_bitmap.c
+index df53dca5d02c7e..c1f816f896a89a 100644
+--- a/drivers/block/drbd/drbd_bitmap.c
++++ b/drivers/block/drbd/drbd_bitmap.c
+@@ -976,7 +976,7 @@ static void drbd_bm_endio(struct bio *bio)
+ 
+ static void bm_page_io_async(struct drbd_bm_aio_ctx *ctx, int page_nr) __must_hold(local)
  {
- 	struct address_space *mapping = page->mapping;
-@@ -433,7 +411,7 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
- 	struct f2fs_sb_info *sbi = fio->sbi;
- 	struct bio *bio;
+-	struct bio *bio = bio_alloc_drbd(GFP_NOIO);
++	struct bio *bio = bio_alloc_bioset(GFP_NOIO, 1, &drbd_md_io_bio_set);
+ 	struct drbd_device *device = ctx->device;
+ 	struct drbd_bitmap *b = device->bitmap;
+ 	struct page *page;
+diff --git a/drivers/block/drbd/drbd_int.h b/drivers/block/drbd/drbd_int.h
+index b2c93a29c251fd..02db50d7e4c668 100644
+--- a/drivers/block/drbd/drbd_int.h
++++ b/drivers/block/drbd/drbd_int.h
+@@ -1422,8 +1422,6 @@ extern mempool_t drbd_md_io_page_pool;
+ /* We also need to make sure we get a bio
+  * when we need it for housekeeping purposes */
+ extern struct bio_set drbd_md_io_bio_set;
+-/* to allocate from that set */
+-extern struct bio *bio_alloc_drbd(gfp_t gfp_mask);
  
--	bio = f2fs_bio_alloc(sbi, npages, true);
-+	bio = bio_alloc_bioset(GFP_NOIO, npages, &f2fs_bioset);
+ /* And a bio_set for cloning */
+ extern struct bio_set drbd_io_bio_set;
+diff --git a/drivers/block/drbd/drbd_main.c b/drivers/block/drbd/drbd_main.c
+index 1c8c18b2a25f33..788dd97e6026b8 100644
+--- a/drivers/block/drbd/drbd_main.c
++++ b/drivers/block/drbd/drbd_main.c
+@@ -138,19 +138,6 @@ static const struct block_device_operations drbd_ops = {
+ 	.release	= drbd_release,
+ };
  
- 	f2fs_target_device(sbi, fio->new_blkaddr, bio);
- 	if (is_read_io(fio->op)) {
-@@ -1029,8 +1007,9 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 	struct bio_post_read_ctx *ctx;
- 	unsigned int post_read_steps = 0;
- 
--	bio = f2fs_bio_alloc(sbi, min_t(int, nr_pages, BIO_MAX_PAGES),
--								for_write);
-+	bio = bio_alloc_bioset(for_write ? GFP_NOIO : GFP_KERNEL,
-+			       min_t(int, nr_pages, BIO_MAX_PAGES),
-+			       &f2fs_bioset);
- 	if (!bio)
- 		return ERR_PTR(-ENOMEM);
- 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 902bd3267c03e1..6c78365d80ceb5 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -43,7 +43,6 @@ enum {
- 	FAULT_KVMALLOC,
- 	FAULT_PAGE_ALLOC,
- 	FAULT_PAGE_GET,
--	FAULT_ALLOC_BIO,
- 	FAULT_ALLOC_NID,
- 	FAULT_ORPHAN,
- 	FAULT_BLOCK,
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index b4a07fe62d1a58..3a312642907e86 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -45,7 +45,6 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_KVMALLOC]	= "kvmalloc",
- 	[FAULT_PAGE_ALLOC]	= "page alloc",
- 	[FAULT_PAGE_GET]	= "page get",
--	[FAULT_ALLOC_BIO]	= "alloc bio",
- 	[FAULT_ALLOC_NID]	= "alloc nid",
- 	[FAULT_ORPHAN]		= "orphan",
- 	[FAULT_BLOCK]		= "no more block",
+-struct bio *bio_alloc_drbd(gfp_t gfp_mask)
+-{
+-	struct bio *bio;
+-
+-	if (!bioset_initialized(&drbd_md_io_bio_set))
+-		return bio_alloc(gfp_mask, 1);
+-
+-	bio = bio_alloc_bioset(gfp_mask, 1, &drbd_md_io_bio_set);
+-	if (!bio)
+-		return NULL;
+-	return bio;
+-}
+-
+ #ifdef __CHECKER__
+ /* When checking with sparse, and this is an inline function, sparse will
+    give tons of false positives. When this is a real functions sparse works.
 -- 
 2.29.2
 
