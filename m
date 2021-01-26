@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B00B304239
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:21:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F51F30424D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:23:40 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l4Q9w-0007oM-Lw; Tue, 26 Jan 2021 15:21:36 +0000
+	id 1l4QBv-0007vI-2e; Tue, 26 Jan 2021 15:23:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+b7a2078c382f6036dc0e+6365+infradead.org+hch@casper.srs.infradead.org>)
- id 1l4Q9u-0007oE-Qu
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:21:34 +0000
+ id 1l4QBt-0007v4-Ok
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:23:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hT6VVHBE+h6JAvE1DToGRa2iclpKhRp2E4jpRU5fhfg=; b=TEViDHZI0iJI/+KKopENL9IUTk
- 4Bro1j4Yk9rdqnnKGrPENLg+jnCfCk1OvG3n3JH98LyQCK/5v7zBc4P6RS8Zde0nsFNDNCT4lSU9E
- qxcTeTWCWocpu1ddvPSVCCY10j9jX7v2AUfPPFhs8paoS5cnPpMMYROVBu+Q/7fvUbWQ=;
+ bh=f0VB07mdqOWmqrSUWksOrW1/tOJIZooJI1RGwrnSP1g=; b=BIl6aBezP2I1iSyZy7JFwlNAS6
+ TOIkzdiSewRWp7SGJiIT90bphQh5s4kqGRw0ks9gumpIU6JOwZMV1ZUEl1mX9YFtIVTY66vytNhnx
+ YGtpXAkaLVHgvYm3rDV0rnDZ15ehlHN+eLUyP/DGofY0dAVoFnsWgjR+fvsOmgiEweao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hT6VVHBE+h6JAvE1DToGRa2iclpKhRp2E4jpRU5fhfg=; b=eDagN7z1WZF19eVE9eOtHXa/Gq
- jlCxcYDTCivuw0wDeIlQEBKZbKCe7w3lcl1ZtzI4q8MlFcyZOQBghk2m9jTBRA7IygIqfOORBYA0O
- IOjo2vLcJ91WlfdFe70+QRmv5IHlRBLvApxhPt1l72lKaruS1RZC1NEn0DfRIVhH9OYE=;
+ bh=f0VB07mdqOWmqrSUWksOrW1/tOJIZooJI1RGwrnSP1g=; b=YApHEZUFju7XnYMrv2Sp/XU8lK
+ qqXQsNgvJn6Nfofq5eMf+P6Z14w821R0QRoxv32YQ6VJeiHbO5xGkgNQOpItBqn+9A+MWz+G8apDc
+ yuTYbiAloj8ULPJ4BdlxDZhstPg4tTyi2PxblKWkfKUXzgP1I5gEjdu1TN0H1suAnCLE=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l4Q9o-00AMyn-Hf
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:21:34 +0000
+ id 1l4QBk-00ANDY-UK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:23:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=hT6VVHBE+h6JAvE1DToGRa2iclpKhRp2E4jpRU5fhfg=; b=a5C/DS8xF1Qgcw0TbOpCyVosGS
- Zrj/lJFI88P49DOf+/Bv7oVHux9xqSc90dqCb+MgQFhiF1iNvcTKtNotsaqaT9GZ5O2lfHYWPU8f9
- MWSyAVCn+XzTVBXvoQFlhs6Nk75UUNAvCFZY8DGZ+OF3VElW6b7AOCAZODHM1g0BPGh6KHJ7SLPKZ
- ldxaH+8wFBz/F2aTXvOIhpfh3/7iT/Vec2zTOjOdaNV8EKhaGb4msUb18JCH4H9nVObBYh45mZ/t7
- Mt7fD5vi0lda03mpky5eT1QtbuYJV5pgTQU/Q9GheLbpEAbrqXTRFm9yHPYEgOqLWBKQ/o7X2nMXc
- I/Ys90sw==;
+ bh=f0VB07mdqOWmqrSUWksOrW1/tOJIZooJI1RGwrnSP1g=; b=wYGytAGz504DGBR0OQvEpSGo49
+ 2JdJ3gnCfCQl1vwNpmdVhDxHbx+ZmO0AnoppdLH4OS7wuSWjiTRLFcAdIsHiIiaaGhcFJpdnDwdDD
+ Qd1JnCAwW6br1SDLkqBeyRwDqUbw5gNqXxt5KDFpCodoxq6hkP1X4WXCAwl0X208GB/Q8MyX3OGZV
+ w45G0QGuCRcfbcuzk2uK6tgo9j0HRaREGMAvY/f8RxriCxk2j+sxH/hcXgvMowOXL5t+95RBtSIL9
+ 94mzmX/aWv0W4VcAok5uc1g5wTmUXSGYr7X1JCQqdSPgz47uJEitWn/3NozsKFWnQ3tSwLSAt5eXw
+ MVD8d2Hg==;
 Received: from [2001:4bb8:191:e347:5918:ac86:61cb:8801] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1l4Q39-005o7b-JG; Tue, 26 Jan 2021 15:15:32 +0000
+ id 1l4Q5i-005oNB-Sc; Tue, 26 Jan 2021 15:17:53 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	Song Liu <song@kernel.org>
-Date: Tue, 26 Jan 2021 15:52:43 +0100
-Message-Id: <20210126145247.1964410-14-hch@lst.de>
+Date: Tue, 26 Jan 2021 15:52:44 +0100
+Message-Id: <20210126145247.1964410-15-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210126145247.1964410-1-hch@lst.de>
 References: <20210126145247.1964410-1-hch@lst.de>
@@ -77,8 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l4Q9o-00AMyn-Hf
-Subject: [f2fs-dev] [PATCH 13/17] md: remove md_bio_alloc_sync
+X-Headers-End: 1l4QBk-00ANDY-UK
+Subject: [f2fs-dev] [PATCH 14/17] md/raid6: refactor raid5_read_one_chunk
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,43 +106,154 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-md_bio_alloc_sync is never called with a NULL mddev, and ->sync_set is
-initialized in md_run, so it always must be initialized as well.  Just
-open code the remaining call to bio_alloc_bioset.
+Refactor raid5_read_one_chunk so that all simple checks are done
+before allocating the bio.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/md/md.c | 10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+ drivers/md/raid5.c | 108 +++++++++++++++++++--------------------------
+ 1 file changed, 45 insertions(+), 63 deletions(-)
 
-diff --git a/drivers/md/md.c b/drivers/md/md.c
-index 6a27f52007c871..399c81bddc1ae1 100644
---- a/drivers/md/md.c
-+++ b/drivers/md/md.c
-@@ -340,14 +340,6 @@ static int start_readonly;
-  */
- static bool create_on_open = true;
+diff --git a/drivers/md/raid5.c b/drivers/md/raid5.c
+index f411b9e5c332f4..a348b2adf2a9f9 100644
+--- a/drivers/md/raid5.c
++++ b/drivers/md/raid5.c
+@@ -5393,90 +5393,72 @@ static void raid5_align_endio(struct bio *bi)
+ static int raid5_read_one_chunk(struct mddev *mddev, struct bio *raid_bio)
+ {
+ 	struct r5conf *conf = mddev->private;
+-	int dd_idx;
+-	struct bio* align_bi;
++	struct bio *align_bio;
+ 	struct md_rdev *rdev;
+-	sector_t end_sector;
++	sector_t sector, end_sector, first_bad;
++	int bad_sectors, dd_idx;
  
--static struct bio *md_bio_alloc_sync(struct mddev *mddev)
--{
--	if (!mddev || !bioset_initialized(&mddev->sync_set))
--		return bio_alloc(GFP_NOIO, 1);
+ 	if (!in_chunk_boundary(mddev, raid_bio)) {
+ 		pr_debug("%s: non aligned\n", __func__);
+ 		return 0;
+ 	}
+-	/*
+-	 * use bio_clone_fast to make a copy of the bio
+-	 */
+-	align_bi = bio_clone_fast(raid_bio, GFP_NOIO, &mddev->bio_set);
+-	if (!align_bi)
+-		return 0;
+-	/*
+-	 *   set bi_end_io to a new function, and set bi_private to the
+-	 *     original bio.
+-	 */
+-	align_bi->bi_end_io  = raid5_align_endio;
+-	align_bi->bi_private = raid_bio;
+-	/*
+-	 *	compute position
+-	 */
+-	align_bi->bi_iter.bi_sector =
+-		raid5_compute_sector(conf, raid_bio->bi_iter.bi_sector,
+-				     0, &dd_idx, NULL);
+ 
+-	end_sector = bio_end_sector(align_bi);
++	sector = raid5_compute_sector(conf, raid_bio->bi_iter.bi_sector, 0,
++				      &dd_idx, NULL);
++	end_sector = bio_end_sector(raid_bio);
++
+ 	rcu_read_lock();
++	if (r5c_big_stripe_cached(conf, sector))
++		goto out_rcu_unlock;
++
+ 	rdev = rcu_dereference(conf->disks[dd_idx].replacement);
+ 	if (!rdev || test_bit(Faulty, &rdev->flags) ||
+ 	    rdev->recovery_offset < end_sector) {
+ 		rdev = rcu_dereference(conf->disks[dd_idx].rdev);
+-		if (rdev &&
+-		    (test_bit(Faulty, &rdev->flags) ||
++		if (!rdev)
++			goto out_rcu_unlock;
++		if (test_bit(Faulty, &rdev->flags) ||
+ 		    !(test_bit(In_sync, &rdev->flags) ||
+-		      rdev->recovery_offset >= end_sector)))
+-			rdev = NULL;
++		      rdev->recovery_offset >= end_sector))
++			goto out_rcu_unlock;
+ 	}
+ 
+-	if (r5c_big_stripe_cached(conf, align_bi->bi_iter.bi_sector)) {
+-		rcu_read_unlock();
+-		bio_put(align_bi);
++	atomic_inc(&rdev->nr_pending);
++	rcu_read_unlock();
++
++	align_bio = bio_clone_fast(raid_bio, GFP_NOIO, &mddev->bio_set);
++	bio_set_dev(align_bio, rdev->bdev);
++	align_bio->bi_end_io = raid5_align_endio;
++	align_bio->bi_private = raid_bio;
++	align_bio->bi_iter.bi_sector = sector;
++
++	raid_bio->bi_next = (void *)rdev;
++
++	if (is_badblock(rdev, sector, bio_sectors(align_bio), &first_bad,
++			&bad_sectors)) {
++		bio_put(align_bio);
++		rdev_dec_pending(rdev, mddev);
+ 		return 0;
+ 	}
+ 
+-	if (rdev) {
+-		sector_t first_bad;
+-		int bad_sectors;
 -
--	return bio_alloc_bioset(GFP_NOIO, 1, &mddev->sync_set);
--}
+-		atomic_inc(&rdev->nr_pending);
+-		rcu_read_unlock();
+-		raid_bio->bi_next = (void*)rdev;
+-		bio_set_dev(align_bi, rdev->bdev);
 -
- /*
-  * We have a system wide 'event count' that is incremented
-  * on any 'interesting' event, and readers of /proc/mdstat
-@@ -989,7 +981,7 @@ void md_super_write(struct mddev *mddev, struct md_rdev *rdev,
- 	if (test_bit(Faulty, &rdev->flags))
- 		return;
+-		if (is_badblock(rdev, align_bi->bi_iter.bi_sector,
+-				bio_sectors(align_bi),
+-				&first_bad, &bad_sectors)) {
+-			bio_put(align_bi);
+-			rdev_dec_pending(rdev, mddev);
+-			return 0;
+-		}
++	/* No reshape active, so we can trust rdev->data_offset */
++	align_bio->bi_iter.bi_sector += rdev->data_offset;
  
--	bio = md_bio_alloc_sync(mddev);
-+	bio = bio_alloc_bioset(GFP_NOIO, 1, &mddev->sync_set);
+-		/* No reshape active, so we can trust rdev->data_offset */
+-		align_bi->bi_iter.bi_sector += rdev->data_offset;
++	spin_lock_irq(&conf->device_lock);
++	wait_event_lock_irq(conf->wait_for_quiescent, conf->quiesce == 0,
++			    conf->device_lock);
++	atomic_inc(&conf->active_aligned_reads);
++	spin_unlock_irq(&conf->device_lock);
  
- 	atomic_inc(&rdev->nr_pending);
+-		spin_lock_irq(&conf->device_lock);
+-		wait_event_lock_irq(conf->wait_for_quiescent,
+-				    conf->quiesce == 0,
+-				    conf->device_lock);
+-		atomic_inc(&conf->active_aligned_reads);
+-		spin_unlock_irq(&conf->device_lock);
++	if (mddev->gendisk)
++		trace_block_bio_remap(align_bio, disk_devt(mddev->gendisk),
++				      raid_bio->bi_iter.bi_sector);
++	submit_bio_noacct(align_bio);
++	return 1;
  
+-		if (mddev->gendisk)
+-			trace_block_bio_remap(align_bi, disk_devt(mddev->gendisk),
+-					      raid_bio->bi_iter.bi_sector);
+-		submit_bio_noacct(align_bi);
+-		return 1;
+-	} else {
+-		rcu_read_unlock();
+-		bio_put(align_bi);
+-		return 0;
+-	}
++out_rcu_unlock:
++	rcu_read_unlock();
++	return 0;
+ }
+ 
+ static struct bio *chunk_aligned_read(struct mddev *mddev, struct bio *raid_bio)
 -- 
 2.29.2
 
