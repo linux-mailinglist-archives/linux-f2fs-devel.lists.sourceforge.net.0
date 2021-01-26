@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0A6B304256
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:24:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3664B30425F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Jan 2021 16:25:20 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l4QCu-0002ty-Lf; Tue, 26 Jan 2021 15:24:40 +0000
+	id 1l4QDW-0002wf-PV; Tue, 26 Jan 2021 15:25:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+b7a2078c382f6036dc0e+6365+infradead.org+hch@casper.srs.infradead.org>)
- id 1l4QCt-0002tn-RN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:24:39 +0000
+ id 1l4QDV-0002wU-90
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:25:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eRxdbvHrWwCg8ehIKzqaoZWUzsjM/Z9D1y3UwSDV4xY=; b=ckoqPsJySA08u6Yn64oQuVXvsT
- I/Ots8ns7Su5sQkQCTIEscIByoQ5K+f/6eYotbIupv+9xeTRLI7MuSs6aYqJvyAbH+ihddqrLRmoP
- QIiRLGFfEFtj1x8bgquU4L6TduzIBHho6H9yEZOhhnmr6w5RSP2tkdsUh8nF6sO5OoEU=;
+ bh=D/eDIBgr0QhzI/ySPX/2hbyfNquR7e3bfpvNVnt2JfU=; b=ZFj8SZuNzwedaMTgVifKYaP0s3
+ iK8GtAWpxPITh+kDjly7rpTJflURfm+yFRuWyxTKQR8vxhJPWmOlOprBorvVD+PR5lBJGB5+8khx5
+ 4+rqqoWNstfcFobuoe9xHJPX2F8/4qy/0XsqFX6D3BIjZvbczEaY1E5i7EsFgb34R1Co=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eRxdbvHrWwCg8ehIKzqaoZWUzsjM/Z9D1y3UwSDV4xY=; b=nU4oQh72krXMNSP0gT8Ao7J2mY
- cu24BHV/Vy1PLAkpo2WP49aK2QpWoS1zjl0EjCZFGMXDGm7EmoeWzRBs64NH4K7IflQKc4d3waoSC
- GilP02hgtSor2904zvUhCwBrUeBRnVfIkiM77A4CRvu5ljP5NtQtnnDW85qnHhAxyz+A=;
+ bh=D/eDIBgr0QhzI/ySPX/2hbyfNquR7e3bfpvNVnt2JfU=; b=EFVVtjm4QqT91udrP0ZfvvEXo9
+ UVJjB2T0XbwCz0EXAwoRJ/+lcak+Fpr791svWSgXrAmMSgYQHbmnSTepTSl89ZMU2Rm9ClBHcBOwq
+ GyHHZYzFVGqoCCdq8G8A/NFHbXogKWtahq5NM5h7jDkPsDRTz3Xue8/LqCKZ0x0FP4CU=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-3.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l4QCn-00ANGo-Iy
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:24:39 +0000
+ id 1l4QDM-00ANIF-E0
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Jan 2021 15:25:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=eRxdbvHrWwCg8ehIKzqaoZWUzsjM/Z9D1y3UwSDV4xY=; b=J6ds2suhWptTFI0URR1OjWJ7nG
- bFD9DPemPNjvWMkXWcox96rWMxKJ3XW6l1ppx21TRVcFUwpPlv6jvoA7XT9KXgcP6o2uX0j7RoRpv
- +z2mnPOBw/61en4ioO6qQ6wGDJueVg8AaKJWPDmdZAEUaq4i8ltdczsdeLE2HJcafnbJPknGxvdRx
- 6NwXe9EcMss4nABThjLiNd3HAoJX9+5JELtc5RkBTpk8I4lDiozmMUqCwxXwNWPeY3eLQi68Xnwox
- gS5RyvHMHo1HvrS9S/ZtiOeZ/5pCLfhriYZcy0wlYNzlK/z57Bs0TCbgXcPCP6dq83/2TMqyhn6iV
- oe2pPxoQ==;
+ bh=D/eDIBgr0QhzI/ySPX/2hbyfNquR7e3bfpvNVnt2JfU=; b=D0vECFFPgjNDQdJXrlwGlO9SXK
+ bqCpsr0IXEJRRcGpwx6o5eclpUuMr9hHDwI1bvP9dHmDZCFUvdFXs74twhireq6A3R0hjw3E27Nhq
+ gND3stVtzuc7AUN5QzdwSwuYTW+D6ywHC6ueGNxmoNigkTBe53X3elgpHHvEzb3YXnLWpSzS6cRY3
+ b+0bPbazRaqeOhh/6Ib7cYH6Q/rvQJcP32gM5YG6ZgJ9hUwYhUtMGEdDPzgQv3QJ5k9q3J/5gW/oc
+ SobtocU4AJ+ibrvafFyuDHBvtV8jwxST24FpYyK6VNjS7eabZ5oOXO7IlLknAN9gmIoy8gv7yJ8WG
+ rrOnQYxQ==;
 Received: from [2001:4bb8:191:e347:5918:ac86:61cb:8801] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1l4Q7U-005oX0-8C; Tue, 26 Jan 2021 15:19:23 +0000
+ id 1l4Q8n-005ohh-NM; Tue, 26 Jan 2021 15:21:22 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>,
 	Song Liu <song@kernel.org>
-Date: Tue, 26 Jan 2021 15:52:45 +0100
-Message-Id: <20210126145247.1964410-16-hch@lst.de>
+Date: Tue, 26 Jan 2021 15:52:46 +0100
+Message-Id: <20210126145247.1964410-17-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210126145247.1964410-1-hch@lst.de>
 References: <20210126145247.1964410-1-hch@lst.de>
@@ -77,9 +77,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l4QCn-00ANGo-Iy
-Subject: [f2fs-dev] [PATCH 15/17] nfs/blocklayout: remove cruft in
- bl_alloc_init_bio
+X-Headers-End: 1l4QDM-00ANIF-E0
+Subject: [f2fs-dev] [PATCH 16/17] nilfs2: remove cruft in nilfs_alloc_seg_bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,25 +110,24 @@ bio_alloc never returns NULL when it can sleep.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/nfs/blocklayout/blocklayout.c | 5 -----
- 1 file changed, 5 deletions(-)
+ fs/nilfs2/segbuf.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/fs/nfs/blocklayout/blocklayout.c b/fs/nfs/blocklayout/blocklayout.c
-index 3be6836074ae92..1a96ce28efb026 100644
---- a/fs/nfs/blocklayout/blocklayout.c
-+++ b/fs/nfs/blocklayout/blocklayout.c
-@@ -123,11 +123,6 @@ bl_alloc_init_bio(int npg, struct block_device *bdev, sector_t disk_sector,
+diff --git a/fs/nilfs2/segbuf.c b/fs/nilfs2/segbuf.c
+index 1a8729eded8b14..1e75417bfe6e52 100644
+--- a/fs/nilfs2/segbuf.c
++++ b/fs/nilfs2/segbuf.c
+@@ -386,10 +386,6 @@ static struct bio *nilfs_alloc_seg_bio(struct the_nilfs *nilfs, sector_t start,
+ 	struct bio *bio;
  
- 	npg = min(npg, BIO_MAX_PAGES);
- 	bio = bio_alloc(GFP_NOIO, npg);
--	if (!bio && (current->flags & PF_MEMALLOC)) {
--		while (!bio && (npg /= 2))
--			bio = bio_alloc(GFP_NOIO, npg);
+ 	bio = bio_alloc(GFP_NOIO, nr_vecs);
+-	if (bio == NULL) {
+-		while (!bio && (nr_vecs >>= 1))
+-			bio = bio_alloc(GFP_NOIO, nr_vecs);
 -	}
--
- 	if (bio) {
- 		bio->bi_iter.bi_sector = disk_sector;
- 		bio_set_dev(bio, bdev);
+ 	if (likely(bio)) {
+ 		bio_set_dev(bio, nilfs->ns_bdev);
+ 		bio->bi_iter.bi_sector =
 -- 
 2.29.2
 
