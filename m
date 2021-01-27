@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6765305456
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Jan 2021 08:21:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31B9330546A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Jan 2021 08:22:33 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l4f9B-0002Cd-Px; Wed, 27 Jan 2021 07:21:49 +0000
+	id 1l4f9r-0002Fg-Vd; Wed, 27 Jan 2021 07:22:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <song@kernel.org>) id 1l4f99-0002CU-UH
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Jan 2021 07:21:47 +0000
+ (envelope-from <song@kernel.org>) id 1l4f9p-0002FV-1R
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Jan 2021 07:22:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1VK3Qtpbfd08Y0+EHBVjyNuugqRW26buSmbPlvGpwqE=; b=i5TeclMXZeoNSbcyeYCh5+44Ju
- oGye6HSY3VyHfawknLJjKmedPKQB88ltJLJwLl9+2x+YqIBCquOhNuePOaDsJV2kcewak06b/E8BQ
- sS1rJHmuHeGm+aYRqPxY1UxpC8Ekr/f9qE6snDRQVtU2NoKer8//O5qIXS3K5ClHm7vQ=;
+ bh=F7WOzbHYieYbjVRWFhSaBjp7IQ9GHp5JECpzQk1IYxs=; b=fv4RD5NJ6C29z53Yr0L/pf2Ucd
+ fCWQ58umNT3H+dFENfeTiXrbYFBnyhj7yPVrcXVAPYu75weD1VbagA24tLVscTNx97t+b4ioukS73
+ JwnUFbdU/5UJciyXgMfiPfuo14U5ryhVzTLG1mSQJ6KAigeaCCu4YLf7sAz7GwHJWZzY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -29,62 +29,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1VK3Qtpbfd08Y0+EHBVjyNuugqRW26buSmbPlvGpwqE=; b=VUWJlqoem6/MMDkrr+Q3jd+t9k
- QKpG8Q24B8eiaMIVOhv98MU8aDnxO3UQM7Ahm53wETu3RVXeiOMS5vDxHUV8swJ1FTliBTN/vUZ5c
- fesvaGSORJ667nvwi9TPNIcRyPcv3pnxOeu4ZYtTdl911sAzWZ9XDjSYz3wzPytAi+7A=;
+ bh=F7WOzbHYieYbjVRWFhSaBjp7IQ9GHp5JECpzQk1IYxs=; b=aEAO6y06Vi0MYmU1CDv7XizJzZ
+ XFr7H8NQ6WJYdRT3TjWImh6LK4uY8T9U+XWrsJKS8iwb+GFkqD+0BLPkZt1YfIH8gf20QC3w3q0aO
+ fL/r0+dO7NbzI0HXociUen9mzkVBJTRKDsnJJkkEk3nAktH/4nahMM521Gcp8H5stsUo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1l4f8w-00Czeo-Ss
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Jan 2021 07:21:47 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0A0C120756
+ id 1l4f9n-009o0z-HO
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Jan 2021 07:22:28 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7D5E920760
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 27 Jan 2021 07:21:29 +0000 (UTC)
+ Wed, 27 Jan 2021 07:22:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1611732089;
- bh=PHGvgPZS9fmzb8WwHWTDSJ0PUf4j0hQIB49cA17Ux8M=;
+ s=k20201202; t=1611732134;
+ bh=UmXZ4WGct5TD5g2zWBqeUZIY7+IEh1H1mojHQndD4p0=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=aOcLULEJAETe0ZlQOMFoWv+xV+961UgFHoRNBzUMPi/oFzrgBLf6fpFTjN/IS05QO
- zYzdqWHKfbJrw60OF8NQxrmzPpTarFG5BYYhXfdM82s2hq4GFbvrBTg0+/gc9t50It
- YL3Oe/Z9JLGMVM5I+aLWcGsKrktoXC5hMjaVZsxS33HhjLk4OG2Duzg5eJzML2qsTX
- SvIigcKxB7d/BjQsPegVpK8LEUO0LIj3aQP1HkoGMEQsssBIbzs2Nv5jASFVBV6Rrv
- RhIZkevlJdJVxgQR3wvBJsdnYdlgcaGm25mcIExHcY0pbsKd4dATwjIkTayV/aOI2P
- 9V2GznHJHrLLQ==
-Received: by mail-lf1-f46.google.com with SMTP id f1so1266645lfu.3
+ b=oDBiPqUDddARVPP8esIP80QkXjEj9+85T5QDZeh7nu2cYyt+eQZA8QDXikjpMwlat
+ MNfPUAT8hEpYvyQzrx6AP5DR+ANmDLKNYdk+3I1Le4ClABg804A6YrqVAha+HDnXt3
+ aXXje54ZXGe396yLREjvTO7F28tQlsy1EwE9vIS6460xIuuh3AzToqKFH1MkXqxaCP
+ /NJx/3JofqwPazejWSqyqiZGHT+4SBSDqNllnI/Q9rYdu+otPvNjz6i73xOtGWI2Ql
+ 1f8AcHX5BqzHDL4QaB+j75p6mcXxGRjds0fAREsI+L/1LEC6UF0JYg2RbF8i9aAb9k
+ jpAFtWZcqE2ig==
+Received: by mail-lf1-f52.google.com with SMTP id p21so1228990lfu.11
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 26 Jan 2021 23:21:28 -0800 (PST)
-X-Gm-Message-State: AOAM531Cqj51FHMFOwE3nxNP/zOT3ZzVNajrT13VyDB8Pd7KkxUcuYR2
- gMvHyxYoQIkqZKvp5MQvtonI9TeuQCBTQoecgcs=
-X-Google-Smtp-Source: ABdhPJxzU6eEXjGgMsXjIbLicQlntxxKhHAHPBju5x4svSgsvP73GNvKL+gYo0RpjmVTLgHo2j69VOR6hw/D9eon+xA=
-X-Received: by 2002:a05:6512:b1b:: with SMTP id
- w27mr4516614lfu.10.1611732087108; 
- Tue, 26 Jan 2021 23:21:27 -0800 (PST)
+ Tue, 26 Jan 2021 23:22:14 -0800 (PST)
+X-Gm-Message-State: AOAM530b8VtFy99E0YaQKQcYhiwdKfdsssxn4plkX8+w0BSaWPJCLWwj
+ wLYddlzx/5z8mxGLyo6KU5GX2qOHQ6gRHq8ojKk=
+X-Google-Smtp-Source: ABdhPJxflUggj8S5jQsQ3WpKvrE0C44XGXqHsiBc4rX5F3+Z0c1NJpDcJfbjDkFKR5D14faCz9LusUBrixofxv3V23Y=
+X-Received: by 2002:a05:6512:5c6:: with SMTP id
+ o6mr4374679lfo.281.1611732132634; 
+ Tue, 26 Jan 2021 23:22:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20210126145247.1964410-1-hch@lst.de>
- <20210126145247.1964410-12-hch@lst.de>
-In-Reply-To: <20210126145247.1964410-12-hch@lst.de>
+ <20210126145247.1964410-13-hch@lst.de>
+In-Reply-To: <20210126145247.1964410-13-hch@lst.de>
 From: Song Liu <song@kernel.org>
-Date: Tue, 26 Jan 2021 23:21:16 -0800
-X-Gmail-Original-Message-ID: <CAPhsuW4SRXoOjfU5GHoOGfONjb1yMT7HEyHLZb4E4vNARF44jw@mail.gmail.com>
-Message-ID: <CAPhsuW4SRXoOjfU5GHoOGfONjb1yMT7HEyHLZb4E4vNARF44jw@mail.gmail.com>
+Date: Tue, 26 Jan 2021 23:22:01 -0800
+X-Gmail-Original-Message-ID: <CAPhsuW6sVtB-baGn46_o6NVynuxQfy9_FuhC2ZK0cKu5cQHWDg@mail.gmail.com>
+Message-ID: <CAPhsuW6sVtB-baGn46_o6NVynuxQfy9_FuhC2ZK0cKu5cQHWDg@mail.gmail.com>
 To: Christoph Hellwig <hch@lst.de>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: lst.de]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1l4f8w-00Czeo-Ss
-Subject: Re: [f2fs-dev] [PATCH 11/17] md: remove bio_alloc_mddev
+X-Headers-End: 1l4f9n-009o0z-HO
+Subject: Re: [f2fs-dev] [PATCH 12/17] md: simplify sync_page_io
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,92 +114,65 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jan 26, 2021 at 7:12 AM Christoph Hellwig <hch@lst.de> wrote:
+On Tue, Jan 26, 2021 at 7:14 AM Christoph Hellwig <hch@lst.de> wrote:
 >
-> bio_alloc_mddev is never called with a NULL mddev, and ->bio_set is
-> initialized in md_run, so it always must be initialized as well.  Just
-> open code the remaining call to bio_alloc_bioset.
+> Use an on-stack bio and biovec for the single page synchronous I/O.
 >
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
 Acked-by: Song Liu <song@kernel.org>
 
 > ---
->  drivers/md/md.c     | 12 +-----------
->  drivers/md/md.h     |  2 --
->  drivers/md/raid1.c  |  2 +-
->  drivers/md/raid10.c |  2 +-
->  4 files changed, 3 insertions(+), 15 deletions(-)
+>  drivers/md/md.c | 26 +++++++++++++-------------
+>  1 file changed, 13 insertions(+), 13 deletions(-)
 >
 > diff --git a/drivers/md/md.c b/drivers/md/md.c
-> index 7d1bb24add3107..e2b9dbb6e888f6 100644
+> index e2b9dbb6e888f6..6a27f52007c871 100644
 > --- a/drivers/md/md.c
 > +++ b/drivers/md/md.c
-> @@ -340,16 +340,6 @@ static int start_readonly;
->   */
->  static bool create_on_open = true;
->
-> -struct bio *bio_alloc_mddev(gfp_t gfp_mask, int nr_iovecs,
-> -                           struct mddev *mddev)
-> -{
-> -       if (!mddev || !bioset_initialized(&mddev->bio_set))
-> -               return bio_alloc(gfp_mask, nr_iovecs);
-> -
-> -       return bio_alloc_bioset(gfp_mask, nr_iovecs, &mddev->bio_set);
-> -}
-> -EXPORT_SYMBOL_GPL(bio_alloc_mddev);
-> -
->  static struct bio *md_bio_alloc_sync(struct mddev *mddev)
+> @@ -1021,29 +1021,29 @@ int md_super_wait(struct mddev *mddev)
+>  int sync_page_io(struct md_rdev *rdev, sector_t sector, int size,
+>                  struct page *page, int op, int op_flags, bool metadata_op)
 >  {
->         if (!mddev || !bioset_initialized(&mddev->sync_set))
-> @@ -613,7 +603,7 @@ static void submit_flushes(struct work_struct *ws)
->                         atomic_inc(&rdev->nr_pending);
->                         atomic_inc(&rdev->nr_pending);
->                         rcu_read_unlock();
-> -                       bi = bio_alloc_mddev(GFP_NOIO, 0, mddev);
-> +                       bi = bio_alloc_bioset(GFP_NOIO, 0, &mddev->bio_set);
->                         bi->bi_end_io = md_end_flush;
->                         bi->bi_private = rdev;
->                         bio_set_dev(bi, rdev->bdev);
-> diff --git a/drivers/md/md.h b/drivers/md/md.h
-> index f13290ccc1c248..bcbba1b5ec4a71 100644
-> --- a/drivers/md/md.h
-> +++ b/drivers/md/md.h
-> @@ -742,8 +742,6 @@ extern void md_rdev_clear(struct md_rdev *rdev);
->  extern void md_handle_request(struct mddev *mddev, struct bio *bio);
->  extern void mddev_suspend(struct mddev *mddev);
->  extern void mddev_resume(struct mddev *mddev);
-> -extern struct bio *bio_alloc_mddev(gfp_t gfp_mask, int nr_iovecs,
-> -                                  struct mddev *mddev);
+> -       struct bio *bio = md_bio_alloc_sync(rdev->mddev);
+> -       int ret;
+> +       struct bio bio;
+> +       struct bio_vec bvec;
+> +
+> +       bio_init(&bio, &bvec, 1);
 >
->  extern void md_reload_sb(struct mddev *mddev, int raid_disk);
->  extern void md_update_sb(struct mddev *mddev, int force);
-> diff --git a/drivers/md/raid1.c b/drivers/md/raid1.c
-> index 3b19141cdb4bc2..d2378765dc154f 100644
-> --- a/drivers/md/raid1.c
-> +++ b/drivers/md/raid1.c
-> @@ -1104,7 +1104,7 @@ static void alloc_behind_master_bio(struct r1bio *r1_bio,
->         int i = 0;
->         struct bio *behind_bio = NULL;
+>         if (metadata_op && rdev->meta_bdev)
+> -               bio_set_dev(bio, rdev->meta_bdev);
+> +               bio_set_dev(&bio, rdev->meta_bdev);
+>         else
+> -               bio_set_dev(bio, rdev->bdev);
+> -       bio_set_op_attrs(bio, op, op_flags);
+> +               bio_set_dev(&bio, rdev->bdev);
+> +       bio.bi_opf = op | op_flags;
+>         if (metadata_op)
+> -               bio->bi_iter.bi_sector = sector + rdev->sb_start;
+> +               bio.bi_iter.bi_sector = sector + rdev->sb_start;
+>         else if (rdev->mddev->reshape_position != MaxSector &&
+>                  (rdev->mddev->reshape_backwards ==
+>                   (sector >= rdev->mddev->reshape_position)))
+> -               bio->bi_iter.bi_sector = sector + rdev->new_data_offset;
+> +               bio.bi_iter.bi_sector = sector + rdev->new_data_offset;
+>         else
+> -               bio->bi_iter.bi_sector = sector + rdev->data_offset;
+> -       bio_add_page(bio, page, size, 0);
+> +               bio.bi_iter.bi_sector = sector + rdev->data_offset;
+> +       bio_add_page(&bio, page, size, 0);
 >
-> -       behind_bio = bio_alloc_mddev(GFP_NOIO, vcnt, r1_bio->mddev);
-> +       behind_bio = bio_alloc_bioset(GFP_NOIO, vcnt, &r1_bio->mddev->bio_set);
->         if (!behind_bio)
->                 return;
+> -       submit_bio_wait(bio);
+> +       submit_bio_wait(&bio);
 >
-> diff --git a/drivers/md/raid10.c b/drivers/md/raid10.c
-> index be8f14afb6d143..e1eefbec15d444 100644
-> --- a/drivers/md/raid10.c
-> +++ b/drivers/md/raid10.c
-> @@ -4531,7 +4531,7 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr,
->                 return sectors_done;
->         }
+> -       ret = !bio->bi_status;
+> -       bio_put(bio);
+> -       return ret;
+> +       return !bio.bi_status;
+>  }
+>  EXPORT_SYMBOL_GPL(sync_page_io);
 >
-> -       read_bio = bio_alloc_mddev(GFP_KERNEL, RESYNC_PAGES, mddev);
-> +       read_bio = bio_alloc_bioset(GFP_KERNEL, RESYNC_PAGES, &mddev->bio_set);
->
->         bio_set_dev(read_bio, rdev->bdev);
->         read_bio->bi_iter.bi_sector = (r10_bio->devs[r10_bio->read_slot].addr
 > --
 > 2.29.2
 >
