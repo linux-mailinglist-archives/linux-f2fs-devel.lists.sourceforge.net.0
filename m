@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 255513082D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Jan 2021 02:04:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3AA43082D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Jan 2021 02:04:52 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l5IDA-0001uk-As; Fri, 29 Jan 2021 01:04:32 +0000
+	id 1l5IDT-0001xg-E0; Fri, 29 Jan 2021 01:04:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1l5ID8-0001uT-Rh
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jan 2021 01:04:30 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1l5IDR-0001xK-Ur
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jan 2021 01:04:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MOFhdxVwN1frM25Y/F48/QUoEnQnAOz4O6+GkDU3ylg=; b=A1PSVwL/BV+crZT6F/JkK/dHSU
- 4J2eqz2nAe9fszKpcy8u2aRYkjXcQ8IAOY4/Vtnn7vfhykoHWhTKED01OKinUJAvA/4URs6QqAiUy
- z7HCEie+lpGWv1F7VShZgRlyUulxtfdVglICsIcqn59jDkJfu6jkaVXuarLmUS6qpmTI=;
+ bh=ROV6mYn4UcvrSDwduTMP74gdjx4Z+1oL2rm9DnUsNUQ=; b=MmHnOlLvXs99GgR8AkyYTe1nBt
+ PdzDfdEQNJHkOGoeLh1E0vrrHmHath/H7YUdzCknwDxGmaU7IW3B9weUQKgLE7sR1b/Vn5A7KpFv+
+ THre8tAhfVwATfGEtK5c4paDKiMv46cEdsCjOK8B5FM+2LhG4/iLbzRim8cIFdP4q4+g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MOFhdxVwN1frM25Y/F48/QUoEnQnAOz4O6+GkDU3ylg=; b=XkFvSdnws+u7+fnD066lW5bndz
- Y17hoP/Ct1EM+jfB2JPvFC0YCAZ5/mS7F+SGT6PNc5ScIeIMZcyd5pvKOjsS/XWiRwBodMP3hQD0T
- EyOtXe4UV8SJd2GHqvCrBP6IeV6WULiK2nsND0oVqa9Xc5F6TN5q607ycEn3USv2ot/0=;
+ bh=ROV6mYn4UcvrSDwduTMP74gdjx4Z+1oL2rm9DnUsNUQ=; b=ljIeL2fJZGx5urAZiFkTRJpLDy
+ 9PpHc+o0299R+QHUveTFYXXJf9wuVYZrxxg3L7UvnAg0opW3zodwMsyDoM20GXCSIFIpOOi6JRAIH
+ 4FzR6hZld58/JQZ9OMtXXkkMHNzRwvD7drUgGv1QvUmhYcbA5V4LBT6q42vre+vbZvRc=;
 Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1l5ICr-0002Tp-1N
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jan 2021 01:04:30 +0000
-Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DRfFz6BZlz1614j;
- Fri, 29 Jan 2021 09:02:47 +0800 (CST)
+ by sfi-mx-3.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1l5IDA-001xEQ-UN
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jan 2021 01:04:49 +0000
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DRfFy4p1VzlCJD;
+ Fri, 29 Jan 2021 09:02:46 +0800 (CST)
 Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 29 Jan
- 2021 09:03:59 +0800
+ (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 29 Jan
+ 2021 09:04:19 +0800
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>, Song Liu
  <song@kernel.org>
 References: <20210126145247.1964410-1-hch@lst.de>
- <20210126145247.1964410-8-hch@lst.de>
+ <20210126145247.1964410-9-hch@lst.de>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <a36e80ab-20b5-47db-7e20-6ac1c7fc4517@huawei.com>
-Date: Fri, 29 Jan 2021 09:03:57 +0800
+Message-ID: <3301f2da-60c5-79ca-ab3b-0fe3345f0731@huawei.com>
+Date: Fri, 29 Jan 2021 09:04:17 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20210126145247.1964410-8-hch@lst.de>
+In-Reply-To: <20210126145247.1964410-9-hch@lst.de>
 Content-Language: en-US
 X-Originating-IP: [10.136.110.154]
 X-CFilter-Loop: Reflected
@@ -70,9 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1l5ICr-0002Tp-1N
-Subject: Re: [f2fs-dev] [PATCH 07/17] f2fs: use blkdev_issue_flush in
- __submit_flush_wait
+X-Headers-End: 1l5IDA-001xEQ-UN
+Subject: Re: [f2fs-dev] [PATCH 08/17] f2fs: remove FAULT_ALLOC_BIO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,13 +99,15 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2021/1/26 22:52, Christoph Hellwig wrote:
-> Use the blkdev_issue_flush helper instead of duplicating it.
+> Sleeping bio allocations do not fail, which means that injecting an error
+> into sleeping bio allocations is a little silly.
 > 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> Signed-off-by: Christoph Hellwig<hch@lst.de>
 
 Acked-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
+
 
 
 _______________________________________________
