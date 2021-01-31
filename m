@@ -2,79 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACB2E3091C0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 Jan 2021 04:57:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C6B309BF8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Jan 2021 13:26:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=4upwX5qWjn2jkPZBVNpPeFIrmUcjIk1VtP3V6cTwcXo=; b=eCbV/TrWlpN44A6imA6PR0Yfl7
+	BsMWo6nC6c+hzlVSD6iB4rQ6EQy4bFHoeq6d0Y/+fgzCGSRUd+LU6UqcYqJ4XyKmJEnH3KKeeFmLE
+	pKhjfNRYzw1shzjEVWkTMqrrXjZ/84E2MpYjBybP//Gs6FOHAmsr2G3nLxu8W5aTFSHc=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l5hO4-0003KX-68; Sat, 30 Jan 2021 03:57:28 +0000
+	id 1l6BoN-0001mW-Sx; Sun, 31 Jan 2021 12:26:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1l5hO3-0003KR-Oa
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Jan 2021 03:57:27 +0000
+ (envelope-from <fishland@aliyun.com>) id 1l6BoM-0001mP-8v
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Jan 2021 12:26:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DenP85I1Njjb0sm/Pv5awH6u78JiwmjeMN74Dl7XDmA=; b=mdF7og4mgblGRylmCO0fupqgZC
- EbkCBiehINk4iqohmP+sB3PPZI8JTPyv6nkdabxCk674I9ousqD+dHJXPp+0pZaUbHQFUUe6ioMhu
- KYFH+Ia/wNyBJKuaM8H+wb16vn6PHIoY6ye1/oIwaanFLQ8LRd1/zidnO9PMJKQ4iHAM=;
+ bh=aYCA5mvNkaLaDYevFzh7KrbouJ6IxFWv8F+4POS9ScM=; b=GQSBPpTHjDGEEhYIj8LDCw0o6j
+ ZW03J27N2oT+bH7MUJBXpnhc80RqwwX55rDQUVjUIJYj5Q7V0ZLgmxuXzxdWtvLZjW5sWk53HUrc6
+ VK1H971M7VgU0xkt13GoKIKoykcLPT/e7AwCbv2xOgLEjY6J3mFZ4359kH/O1LHaWwqg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=DenP85I1Njjb0sm/Pv5awH6u78JiwmjeMN74Dl7XDmA=; b=eDWvsCD8Tg2ZtZBybdpnxl2yPa
- UUu3tKA7oxVr0BTRcFJwFufZmJKPz9amP7OHTUnY8sJ84LymKjO0Gnkj0NjSxlFPb9B4NlUMq9cwb
- LsLttdBhPcMY5a7SH4Nke46Fi7HuB+NhcWiMXddzF9DRUvmPEK07FKjlt0nj4sjzbIIs=;
-Received: from casper.infradead.org ([90.155.50.34])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=aYCA5mvNkaLaDYevFzh7KrbouJ6IxFWv8F+4POS9ScM=; b=E
+ LvIFr5Unhqp6Dg2SGgHA99IXpKGCXZmb01rFrwUF8HLoCQQDIpZ7qjxnZH7kyvasTh3lEqp98KW4v
+ UYUPTNdCwRsGjj7vBwIh9pU8aQunsQRS8n6ixH9GjcKIPUWkRIeZLJJLT8QfLhuDm9nUJmDTFavMz
+ Ff9x0sYPSl5V0T5s=;
+Received: from out30-28.freemail.mail.aliyun.com ([115.124.30.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1l5hNo-00015E-He
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Jan 2021 03:57:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=DenP85I1Njjb0sm/Pv5awH6u78JiwmjeMN74Dl7XDmA=; b=H8SDl3brId4iyEQMOwW4BfEUQ2
- Xy9mZcqFmFvcWvR6dxLgQ3QUwF+RwC9GNnBM28jr+2J7JQ5Bm8pWtzkJy9Bu5683unOHOgLMv+gFM
- jYIfOM6Ao2NNEjEzqoWU83ro0i2k1QtT++2jpOr8mpPL1+MxGJTvy2GRgyUg+z6xssmGMSAnWY2zd
- lqlVaZEtkQfNNrYTdAkx5Dh4tKL60XSKbWMPsTXg7ShS8Q1MALyQ1L4XvADIPpEa3DQT7A35auYCK
- RYKeUzMDMR7ROqaOWCMHMSpzECR3dkUR8mtXMmO0lgMzXZcgza2tXYiFwaZvQ9UvVr3UoISIOLjsY
- syMo01WQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1l5hNO-00Afhm-T1; Sat, 30 Jan 2021 03:56:47 +0000
-Date: Sat, 30 Jan 2021 03:56:46 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20210130035646.GH308988@casper.infradead.org>
-References: <20210126145247.1964410-1-hch@lst.de>
- <20210126145247.1964410-5-hch@lst.de>
+ id 1l6Bo8-0004YL-Nh
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Jan 2021 12:26:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aliyun.com; s=s1024;
+ t=1612095972; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=aYCA5mvNkaLaDYevFzh7KrbouJ6IxFWv8F+4POS9ScM=;
+ b=ayLBdIorYv8p9A4EaU4OcKuHk2g3GFO5QNIDmJxd0T4Tk/ExOoklAeOlofO5Hmvv+goMrfUSylyt3mPrMtd4Mv5e+1XHvQWmBgltCnCLnaJQPRrEHiXR7psUSSyMAO1slbZXfo2Y0nvLUUhSPcd+Qh9JMaZkTjXJQqR2ViURHr0=
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07644434|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.0119829-0.00071919-0.987298;
+ FP=0|0|0|0|0|-1|-1|-1; HT=alimailimapcm10staff010182156082;
+ MF=fishland@aliyun.com; NM=1; PH=DS; RN=5; RT=5; SR=0;
+ TI=SMTPD_---0UNOc5af_1612095967; 
+Received: from localhost.localdomain(mailfrom:fishland@aliyun.com
+ fp:SMTPD_---0UNOc5af_1612095967) by smtp.aliyun-inc.com(127.0.0.1);
+ Sun, 31 Jan 2021 20:26:12 +0800
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Sun, 31 Jan 2021 20:26:05 +0800
+Message-Id: <20210131122605.3296-1-fishland@aliyun.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210126145247.1964410-5-hch@lst.de>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (fishland[at]aliyun.com)
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ for more information. [URIs: zte.com.cn]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [115.124.30.28 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [115.124.30.28 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l5hNo-00015E-He
-Subject: Re: [f2fs-dev] [PATCH 04/17] block: split bio_kmalloc from
- bio_alloc_bioset
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1l6Bo8-0004YL-Nh
+Subject: [f2fs-dev] [PATCH] f2fs: remove unnecessary initialization in
+ xattr.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,40 +101,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Mike Snitzer <snitzer@redhat.com>, Song Liu <song@kernel.org>,
- dm-devel@redhat.com, drbd-dev@lists.linbit.com,
- Naohiro Aota <naohiro.aota@wdc.com>, linux-nilfs@vger.kernel.org,
- Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
- linux-raid@vger.kernel.org, linux-bcache@vger.kernel.org,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, Jens Axboe <axboe@kernel.dk>,
- linux-block@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
- Philipp Reisner <philipp.reisner@linbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Lars Ellenberg <lars.ellenberg@linbit.com>, linux-nfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
+From: Liu Song via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Liu Song <fishland@aliyun.com>
+Cc: liu.song11@zte.com.cn, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jan 26, 2021 at 03:52:34PM +0100, Christoph Hellwig wrote:
-> bio_kmalloc shares almost no logic with the bio_set based fast path
-> in bio_alloc_bioset.  Split it into an entirely separate implementation.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  block/bio.c         | 167 ++++++++++++++++++++++----------------------
->  include/linux/bio.h |   6 +-
->  2 files changed, 86 insertions(+), 87 deletions(-)
+From: Liu Song <liu.song11@zte.com.cn>
 
-This patch causes current linux-next to OOM for me when running xfstests
-after about ten minutes.  Haven't looked into why yet, this is just the
-results of a git bisect.
+These variables will be explicitly assigned before use,
+so there is no need to initialize.
 
-The qemu command line is:
+Signed-off-by: Liu Song <liu.song11@zte.com.cn>
+---
+ fs/f2fs/xattr.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-qemu-system-x86_64 -nodefaults -nographic -cpu host -machine accel=kvm,nvdimm -m 2G,slots=8,maxmem=1T -smp 6 -kernel /home/willy/kernel/folio/.build_test_kernel-x86_64/kpgk/vmlinuz -append console=hvc0 root=/dev/sda rw log_buf_len=8M ktest.dir=/home/willy/kernel/ktest ktest.env=/tmp/build-test-kernel-nJO6QgxOmo/env quiet systemd.show_status=0 systemd.log-target=journal crashkernel=128M no_console_suspend -device virtio-serial -chardev stdio,id=console -device virtconsole,chardev=console -serial unix:/tmp/build-test-kernel-nJO6QgxOmo/vm-kgdb,server,nowait -monitor unix:/tmp/build-test-kernel-nJO6QgxOmo/vm-mon,server,nowait -gdb unix:/tmp/build-test-kernel-nJO6QgxOmo/vm-gdb,server,nowait -device virtio-rng-pci -virtfs local,path=/,mount_tag=host,security_model=none -device virtio-scsi-pci,id=hba -nic user,model=virtio,hostfwd=tcp:127.0.0.1:24674-:22 -drive if=none,format=raw,id=disk0,file=/var/lib/ktest/root.amd64,snapshot=on -device scsi-hd,bus=hba.0,drive=disk0 -drive if=none,format=raw,id=disk1,file=/tmp/build-test-kernel-nJO6QgxOmo/dev-1,cache=unsafe -device scsi-hd,bus=hba.0,drive=disk1 -drive if=none,format=raw,id=disk2,file=/tmp/build-test-kernel-nJO6QgxOmo/dev-2,cache=unsafe -device scsi-hd,bus=hba.0,drive=disk2 -drive if=none,format=raw,id=disk3,file=/tmp/build-test-kernel-nJO6QgxOmo/dev-3,cache=unsafe -device scsi-hd,bus=hba.0,drive=disk3
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index 65afcc3cc68a..c330a290e5af 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -327,7 +327,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+ 	void *last_addr = NULL;
+ 	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
+ 	unsigned int inline_size = inline_xattr_size(inode);
+-	int err = 0;
++	int err;
+ 
+ 	if (!xnid && !inline_size)
+ 		return -ENODATA;
+@@ -515,7 +515,7 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 		void *buffer, size_t buffer_size, struct page *ipage)
+ {
+ 	struct f2fs_xattr_entry *entry = NULL;
+-	int error = 0;
++	int error;
+ 	unsigned int size, len;
+ 	void *base_addr = NULL;
+ 	int base_size;
+@@ -562,7 +562,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
+ 	struct inode *inode = d_inode(dentry);
+ 	struct f2fs_xattr_entry *entry;
+ 	void *base_addr, *last_base_addr;
+-	int error = 0;
++	int error;
+ 	size_t rest = buffer_size;
+ 
+ 	down_read(&F2FS_I(inode)->i_xattr_sem);
+@@ -632,7 +632,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+ 	int found, newsize;
+ 	size_t len;
+ 	__u32 new_hsize;
+-	int error = 0;
++	int error;
+ 
+ 	if (name == NULL)
+ 		return -EINVAL;
+-- 
+2.20.1
 
 
 
