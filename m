@@ -2,99 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42BC330A85C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Feb 2021 14:11:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DB6530AE22
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Feb 2021 18:41:32 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1l6Yzb-0005k5-Lz; Mon, 01 Feb 2021 13:11:47 +0000
+	id 1l6dCW-0003FP-RX; Mon, 01 Feb 2021 17:41:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1l6Yza-0005jq-Gl
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Feb 2021 13:11:46 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1l6dCV-0003FB-L5
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Feb 2021 17:41:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZBg5DGHXau4A2AR5uVxrHKMoYL9lpKJv6v+HASZfsoI=; b=UPp50rIdXwXkNkpMapn/7c/p26
- fb59uqwggsp1f74VwIcnujivAR1yDEjdvupTMMG8KFM19PolSdYGseOCOl3HzqW8PnayffgUy5tXB
- tofl385oZQ0LJGJbGDvwfyMo0+VVXEs5pxWZXff/Z4G6pZIQyHegremG5VJCWm1FnL6E=;
+ bh=5Hn3DtnS/so6ZJ9/OT4QfdxsQfvLHfUIYDKu1MrsVvM=; b=dK9ze9iC3IWaysPyKfvY6q1+pT
+ yY+NoFzyTyJD09EpkpymvZk7Bv8HnrvOv2mh4+VjnPZRm+PkHnYAxIE6ZffHlw8FPMKS++eXMH0Us
+ aq8uvp1cmglWePbxA7WV+c/l1syiVWwqYC1MnwH3hxzgVoqYLBfQKpPsZHnVPkiUoBYo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZBg5DGHXau4A2AR5uVxrHKMoYL9lpKJv6v+HASZfsoI=; b=dDBnRmGpzew46wzbDtQc9uDeUO
- /w5c5VYp3twFCFfFoR9qiRWgFmLf68WgGhw7HVAn72TePWIFh5Lwi9pOCv5MzvisLGM7X4SWDYDiV
- sk5yGFuEh4xA84E/O+dA8ugmPx4omUgM6i/sM13C19LLkWr5sasIS9jyFLWpuzu5kf44=;
-Received: from mail-lj1-f173.google.com ([209.85.208.173])
+ bh=5Hn3DtnS/so6ZJ9/OT4QfdxsQfvLHfUIYDKu1MrsVvM=; b=nS6LMinZ2unWFPdLt8GLcFwy8A
+ e4mxsPo799A6geGToog8RufUVjoEPqowPFX6O8bZZvqm2M92tRzGY2IH2xCus7J0xCKrGhF2zAwwf
+ stL5qM2rQAD63OoY0dj5HMhXBK3tJVR+HjJRaZFDZy8WN9uODyD5VHYKl2YsUYDE1Nl8=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1l6YzQ-0006ou-F3
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Feb 2021 13:11:46 +0000
-Received: by mail-lj1-f173.google.com with SMTP id f19so19496003ljn.5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 01 Feb 2021 05:11:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=ZBg5DGHXau4A2AR5uVxrHKMoYL9lpKJv6v+HASZfsoI=;
- b=dgVqUWYOmnLGptFmKmn3LgQnDrYUa2N/HlrTFBWCjoXAljYn3K9EeixcbTOFGc+6oj
- XuGGE/YFDzOpyW0q3ooJIRlQPz8MMumDSOjwvNCC4FuZRUudyQUJiiaYBarz1o/Lcs7y
- 3x+StsdVrKB36dgoR4BKqr2THokj8Sj2/HSZ4d5rhtr83clGPj3puoe7E5zhIR1I9TuW
- eSa0VtMB9DAf3WOQnvJAe7pTdfeuW/FZxM3w/0IvuRFSRiYntxFdThcsCr1JT0Wt/zWF
- 118LeJGhUtlBDYqeyyYoXLV/QkfhJopEXpBd9hQ1D8AqiLnkbd5fp4XkXqxPFa8aWxBV
- qT9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=ZBg5DGHXau4A2AR5uVxrHKMoYL9lpKJv6v+HASZfsoI=;
- b=qRpvWZgVSrfSBG9BkqR/cqmVQCDPax+CpksZx8492KxAi81i5RcEm+hF1hn+6nX4Ya
- fuuHz7o/eyYAGopTTeAuO8+JDERlBm6qNWO9yIHpAaADCHQVcxe8og4VIng/Qo8lIaLq
- GZex19TmHktS1yVhbnMgICWbK0A6zeDSDBmC3RLUEaDfE5D8kR9Y5eKFfYKA0r8y1akE
- rYrn+I7oKlTzhwTdgZR/qBbe4PkNYqjqsZw1up7yatqe4y39my1Qg4aUPOmVvdxvc73h
- xyFNz0+PBjZFEiP8HeNNjzKNm5dOrvv8xhZIE0bv6x5Sie4iBuxaBNTs0Oq3JPnrtbOl
- Wcww==
-X-Gm-Message-State: AOAM531uiPSSyPegF+5zXBdiQqN9FgBmj5HnY74HAOmBjf9x+EFVTYte
- g/elthsbrUxr+gpW6SJG2ioCmFOM1jXQcHxofYA=
-X-Google-Smtp-Source: ABdhPJz6gAYFrEmDqDihjtfxmFigHRqoAecV4tJ0gMa4onzo4iLumtU/Yt6+A9HfVbvrv9fSJlWpwhgLgvhunptG3+c=
-X-Received: by 2002:a2e:a366:: with SMTP id i6mr10208319ljn.21.1612185090071; 
- Mon, 01 Feb 2021 05:11:30 -0800 (PST)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1l6dCO-0000G9-2i
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Feb 2021 17:41:23 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 73B0A64E8F;
+ Mon,  1 Feb 2021 17:41:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1612201270;
+ bh=ncqmDsFhj7U/pfLjxTxIC0UUwvGuJWuBwAK+JB++wOQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=H9Bsi5wgOZQMFGgRJhKLUHxOb0pcAzQ7s9jnZXuL345ZMS8cniSig7Lauh3LCV0cF
+ O2I3HtgIEhWb56LrTRFfRodPDh2lMCLHih8Z5QO16zD3Z37ypa3SOR3oS/gfNRTmPr
+ zo0e6UupdR28dgJmse+3H9lUsn7EdsmCzp7OGujNQkBr+m+FBCoao5czgRfIeH09yZ
+ ZK92JoAyAoGgWcVPHR2wXrVPK65JYJ/Kt08gEoN3zROuSQJsY96GJ8kxnJXYoPq6gS
+ Hi70v2fF3PkL63hXeWs0/8KRlUhJ5QkcJKbTS6GMBAK7e2W6dPuXHKhOIbuB5rKePd
+ Wpidxc/Uip2IQ==
+Date: Mon, 1 Feb 2021 09:41:08 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <YBg9ND4pXqmFDE0s@sol.localdomain>
+References: <20210115181819.34732-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-References: <20210201000606.2206740-1-daeho43@gmail.com>
- <7e2f440e-6500-04c8-1115-880754a18efa@kernel.org>
-In-Reply-To: <7e2f440e-6500-04c8-1115-880754a18efa@kernel.org>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Mon, 1 Feb 2021 22:11:18 +0900
-Message-ID: <CACOAw_zW+xnN7pBmTknuJ1=CGiAvVq0sQhe7D6X8sOjgjF_qeg@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20210115181819.34732-1-ebiggers@kernel.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.173 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.173 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1l6YzQ-0006ou-F3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix checkpoint mount option wrong
- combination
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1l6dCO-0000G9-2i
+Subject: Re: [f2fs-dev] [PATCH 0/6] fs-verity: add an ioctl to read verity
+ metadata
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,71 +82,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
+ Victor Hsieh <victorhsieh@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-QWN0dWFsbHksIEkgdGhpbmsgd2UgbmVlZCB0byBzZWxlY3Qgb25lIGFtb25nIHRoZW0sIGRpc2Fi
-bGUsIGVuYWJsZQphbmQgbWVyZ2UuIEkgcmVhbGl6ZWQgbXkgcHJldmlvdXMgdW5kZXJzdGFuZGlu
-ZyBhYm91dCB0aGF0IHdhcyB3cm9uZy4KSW4gdGhhdCBjYXNlIG9mICJjaGVja3BvaW50PW1lcmdl
-LGNoZWNrcG9pbnQ9ZW5hYmxlIiwgdGhlIGxhc3Qgb3B0aW9uCndpbGwgb3ZlcnJpZGUgdGhlIG9u
-ZXMgYmVmb3JlIHRoYXQuClRoaXMgaXMgaG93IHRoZSBvdGhlciBtb3VudCBvcHRpb25zIGxpa2Ug
-ZnN5bmNfbW9kZSwgd2hpbnRfbW9kZSBhbmQgZXRjLgpTbywgdGhlIGFuc3dlciB3aWxsIGJlICJj
-aGVja3BvaW50PWVuYWJsZSIuIFdoYXQgZG8geW91IHRoaW5rPwoKCgoyMDIx64WEIDLsm5QgMeyd
-vCAo7JuUKSDsmKTtm4QgOTo0MCwgQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPuuLmOydtCDsnpHs
-hLE6Cj4KPiBPbiAyMDIxLzIvMSA4OjA2LCBEYWVobyBKZW9uZyB3cm90ZToKPiA+IEZyb206IERh
-ZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4gPgo+ID4gQXMgY2hlY2twb2ludD1t
-ZXJnZSBjb21lcyBpbiwgbW91bnQgb3B0aW9uIHNldHRpbmcgcmVsYXRlZCB0bwo+ID4gY2hlY2tw
-b2ludCBoYWQgYmVlbiBtaXhlZCB1cC4gRml4ZWQgaXQuCj4gPgo+ID4gU2lnbmVkLW9mZi1ieTog
-RGFlaG8gSmVvbmcgPGRhZWhvamVvbmdAZ29vZ2xlLmNvbT4KPiA+IC0tLQo+ID4gICBmcy9mMmZz
-L3N1cGVyLmMgfCAxMSArKysrKy0tLS0tLQo+ID4gICAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRp
-b25zKCspLCA2IGRlbGV0aW9ucygtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9mcy9mMmZzL3N1cGVy
-LmMgYi9mcy9mMmZzL3N1cGVyLmMKPiA+IGluZGV4IDU2Njk2ZjZjZmE4Ni4uODIzMWM4ODhjNzcy
-IDEwMDY0NAo+ID4gLS0tIGEvZnMvZjJmcy9zdXBlci5jCj4gPiArKysgYi9mcy9mMmZzL3N1cGVy
-LmMKPiA+IEBAIC05MzAsMjAgKzkzMCwyNSBAQCBzdGF0aWMgaW50IHBhcnNlX29wdGlvbnMoc3Ry
-dWN0IHN1cGVyX2Jsb2NrICpzYiwgY2hhciAqb3B0aW9ucywgYm9vbCBpc19yZW1vdW50KQo+ID4g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiAgICAgICAg
-ICAgICAgICAgICAgICAgRjJGU19PUFRJT04oc2JpKS51bnVzYWJsZV9jYXBfcGVyYyA9IGFyZzsK
-PiA+ICAgICAgICAgICAgICAgICAgICAgICBzZXRfb3B0KHNiaSwgRElTQUJMRV9DSEVDS1BPSU5U
-KTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICBjbGVhcl9vcHQoc2JpLCBNRVJHRV9DSEVDS1BP
-SU5UKTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICAgICAgICAgICAgICAg
-Y2FzZSBPcHRfY2hlY2twb2ludF9kaXNhYmxlX2NhcDoKPiA+ICAgICAgICAgICAgICAgICAgICAg
-ICBpZiAoYXJncy0+ZnJvbSAmJiBtYXRjaF9pbnQoYXJncywgJmFyZykpCj4gPiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICAgICAgICAgICAgICAgICAg
-ICAgICBGMkZTX09QVElPTihzYmkpLnVudXNhYmxlX2NhcCA9IGFyZzsKPiA+ICAgICAgICAgICAg
-ICAgICAgICAgICBzZXRfb3B0KHNiaSwgRElTQUJMRV9DSEVDS1BPSU5UKTsKPiA+ICsgICAgICAg
-ICAgICAgICAgICAgICBjbGVhcl9vcHQoc2JpLCBNRVJHRV9DSEVDS1BPSU5UKTsKPiA+ICAgICAg
-ICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICAgICAgICAgICAgICAgY2FzZSBPcHRfY2hlY2tw
-b2ludF9kaXNhYmxlOgo+ID4gICAgICAgICAgICAgICAgICAgICAgIHNldF9vcHQoc2JpLCBESVNB
-QkxFX0NIRUNLUE9JTlQpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgIGNsZWFyX29wdChzYmks
-IE1FUkdFX0NIRUNLUE9JTlQpOwo+ID4gICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+ID4g
-ICAgICAgICAgICAgICBjYXNlIE9wdF9jaGVja3BvaW50X2VuYWJsZToKPiA+ICAgICAgICAgICAg
-ICAgICAgICAgICBjbGVhcl9vcHQoc2JpLCBESVNBQkxFX0NIRUNLUE9JTlQpOwo+ID4gKyAgICAg
-ICAgICAgICAgICAgICAgIGNsZWFyX29wdChzYmksIE1FUkdFX0NIRUNLUE9JTlQpOwo+Cj4gV2hh
-dCBpZjogLW8gY2hlY2twb2ludD1tZXJnZSxjaGVja3BvaW50PWVuYWJsZQo+Cj4gQ2FuIHlvdSBw
-bGVhc2UgZXhwbGFpbiB0aGUgcnVsZSBvZiBtZXJnZS9kaXNhYmxlL2VuYWJsZSBjb21iaW5hdGlv
-biBhbmQgdGhlaXIKPiByZXN1bHQ/IGUuZy4KPiBjaGVja3BvaW50PW1lcmdlLGNoZWNrcG9pbnQ9
-ZW5hYmxlCj4gY2hlY2twb2ludD1lbmFibGUsY2hlY2twb2ludD1tZXJnZQo+IGNoZWNrcG9pbnQ9
-bWVyZ2UsY2hlY2twb2ludD1kaXNhYmxlCj4gY2hlY2twb2ludD1kaXNhYmxlLGNoZWNrcG9pbnQ9
-bWVyZ2UKPgo+IElmIHRoZSBydWxlL3Jlc3VsdCBpcyBjbGVhciwgaXQgc2hvdWxkIGJlIGRvY3Vt
-ZW50ZWQuCj4KPiBUaGFua3MsCj4KPgo+ID4gICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+
-ID4gICAgICAgICAgICAgICBjYXNlIE9wdF9jaGVja3BvaW50X21lcmdlOgo+ID4gKyAgICAgICAg
-ICAgICAgICAgICAgIGNsZWFyX29wdChzYmksIERJU0FCTEVfQ0hFQ0tQT0lOVCk7Cj4gPiAgICAg
-ICAgICAgICAgICAgICAgICAgc2V0X29wdChzYmksIE1FUkdFX0NIRUNLUE9JTlQpOwo+ID4gICAg
-ICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gICAjaWZkZWYgQ09ORklHX0YyRlNfRlNfQ09N
-UFJFU1NJT04KPiA+IEBAIC0xMTQyLDEyICsxMTQ3LDYgQEAgc3RhdGljIGludCBwYXJzZV9vcHRp
-b25zKHN0cnVjdCBzdXBlcl9ibG9jayAqc2IsIGNoYXIgKm9wdGlvbnMsIGJvb2wgaXNfcmVtb3Vu
-dCkKPiA+ICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiAgICAgICB9Cj4gPgo+ID4g
-LSAgICAgaWYgKHRlc3Rfb3B0KHNiaSwgRElTQUJMRV9DSEVDS1BPSU5UKSAmJgo+ID4gLSAgICAg
-ICAgICAgICAgICAgICAgIHRlc3Rfb3B0KHNiaSwgTUVSR0VfQ0hFQ0tQT0lOVCkpIHsKPiA+IC0g
-ICAgICAgICAgICAgZjJmc19lcnIoc2JpLCAiY2hlY2twb2ludD1tZXJnZSBjYW5ub3QgYmUgdXNl
-ZCB3aXRoIGNoZWNrcG9pbnQ9ZGlzYWJsZVxuIik7Cj4gPiAtICAgICAgICAgICAgIHJldHVybiAt
-RUlOVkFMOwo+ID4gLSAgICAgfQo+ID4gLQo+ID4gICAgICAgLyogTm90IHBhc3MgZG93biB3cml0
-ZSBoaW50cyBpZiB0aGUgbnVtYmVyIG9mIGFjdGl2ZSBsb2dzIGlzIGxlc3Nlcgo+ID4gICAgICAg
-ICogdGhhbiBOUl9DVVJTRUdfUEVSU0lTVF9UWVBFLgo+ID4gICAgICAgICovCj4gPgoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2
-ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0
-dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2
-ZWwK
+On Fri, Jan 15, 2021 at 10:18:13AM -0800, Eric Biggers wrote:
+> [This patchset applies to v5.11-rc3]
+> 
+> Add an ioctl FS_IOC_READ_VERITY_METADATA which allows reading verity
+> metadata from a file that has fs-verity enabled, including:
+> 
+> - The Merkle tree
+> - The fsverity_descriptor (not including the signature if present)
+> - The built-in signature, if present
+> 
+> This ioctl has similar semantics to pread().  It is passed the type of
+> metadata to read (one of the above three), and a buffer, offset, and
+> size.  It returns the number of bytes read or an error.
+> 
+> This ioctl doesn't make any assumption about where the metadata is
+> stored on-disk.  It does assume the metadata is in a stable format, but
+> that's basically already the case:
+> 
+> - The Merkle tree and fsverity_descriptor are defined by how fs-verity
+>   file digests are computed; see the "File digest computation" section
+>   of Documentation/filesystems/fsverity.rst.  Technically, the way in
+>   which the levels of the tree are ordered relative to each other wasn't
+>   previously specified, but it's logical to put the root level first.
+> 
+> - The built-in signature is the value passed to FS_IOC_ENABLE_VERITY.
+> 
+> This ioctl is useful because it allows writing a server program that
+> takes a verity file and serves it to a client program, such that the
+> client can do its own fs-verity compatible verification of the file.
+> This only makes sense if the client doesn't trust the server and if the
+> server needs to provide the storage for the client.
+> 
+> More concretely, there is interest in using this ability in Android to
+> export APK files (which are protected by fs-verity) to "protected VMs".
+> This would use Protected KVM (https://lwn.net/Articles/836693), which
+> provides an isolated execution environment without having to trust the
+> traditional "host".  A "guest" VM can boot from a signed image and
+> perform specific tasks in a minimum trusted environment using files that
+> have fs-verity enabled on the host, without trusting the host or
+> requiring that the guest has its own trusted storage.
+> 
+> Technically, it would be possible to duplicate the metadata and store it
+> in separate files for serving.  However, that would be less efficient
+> and would require extra care in userspace to maintain file consistency.
+> 
+> In addition to the above, the ability to read the built-in signatures is
+> useful because it allows a system that is using the in-kernel signature
+> verification to migrate to userspace signature verification.
+> 
+> This patchset has been tested by new xfstests which call this new ioctl
+> via a new subcommand for the 'fsverity' program from fsverity-utils.
+> 
+> Eric Biggers (6):
+>   fs-verity: factor out fsverity_get_descriptor()
+>   fs-verity: don't pass whole descriptor to fsverity_verify_signature()
+>   fs-verity: add FS_IOC_READ_VERITY_METADATA ioctl
+>   fs-verity: support reading Merkle tree with ioctl
+>   fs-verity: support reading descriptor with ioctl
+>   fs-verity: support reading signature with ioctl
+> 
+>  Documentation/filesystems/fsverity.rst |  76 ++++++++++
+>  fs/ext4/ioctl.c                        |   7 +
+>  fs/f2fs/file.c                         |  11 ++
+>  fs/verity/Makefile                     |   1 +
+>  fs/verity/fsverity_private.h           |  13 +-
+>  fs/verity/open.c                       | 133 +++++++++++------
+>  fs/verity/read_metadata.c              | 195 +++++++++++++++++++++++++
+>  fs/verity/signature.c                  |  20 +--
+>  include/linux/fsverity.h               |  12 ++
+>  include/uapi/linux/fsverity.h          |  14 ++
+>  10 files changed, 417 insertions(+), 65 deletions(-)
+>  create mode 100644 fs/verity/read_metadata.c
+
+All applied to fscrypt.git#fsverity for 5.12.
+
+- Eric
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
