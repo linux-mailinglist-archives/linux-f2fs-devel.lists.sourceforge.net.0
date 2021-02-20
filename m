@@ -2,54 +2,52 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E59AE3204C2
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 20 Feb 2021 10:39:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A12043204C7
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 20 Feb 2021 10:41:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lDOjG-0006Xf-Mw; Sat, 20 Feb 2021 09:39:10 +0000
+	id 1lDOlJ-0000NQ-96; Sat, 20 Feb 2021 09:41:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lDOjE-0006XF-7B
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 20 Feb 2021 09:39:08 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lDOlI-0000NJ-2g
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 20 Feb 2021 09:41:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/v0cwuG0ILIPLuSAOt1BSoLx/Db5cQkrAQlWGSva2Qs=; b=PD9RiSSrkbTk+Rq48zHDiSpAtI
- ZGFil0dSraWOzw645FGF7brZFN8j4/C+ZfoMZI6oLlBxER1lxKSP4MHpXrpiCWqyDABWTjFKEoSNQ
- GfKag+oZvQTabl4MxBWu09Thea6zfe+MjbaTYeriicwhMiic6SQItYo1x6+mo9k/dCcM=;
+ bh=iSDmxKFK+Y4i7I7pK8PTb4D8JfC2RuMgrGxH5kbaZhQ=; b=K0ygTUuIxTXgBrpNU4uzELJAxC
+ V2uRYxcCRuFEJYNwZ6OZ1dO3Jz3e56w1AfckysS+ot1RLM/Olj8kmXBBYlj+pbX26wUOkQDQFyl9n
+ g9aSE29ck4kSUyp2xCF3INxCbdFa06Zswb1P9aT3jMKBqSHuOE7gKj8DKIiUiAwRXleE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/v0cwuG0ILIPLuSAOt1BSoLx/Db5cQkrAQlWGSva2Qs=; b=INrqAcVUrPsm265cLZ8fRlazZM
- MPJZk+ZAvYC8GWdoCiDmTJ4KXcZ4FEDLYE9CvNkquyiDFNfRPQZ0ogDcnT0us60bBsT0FhYnpXEqe
- iSdOwQeSGHTq5maJnTAE0J/T0dwT7ohpXm3bvZkoVeOc6VEStWY+DBiidzRUtTqwzULo=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lDOj9-00GO9N-NL
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 20 Feb 2021 09:39:08 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DjNdc0V3Dz1695F;
- Sat, 20 Feb 2021 17:37:24 +0800 (CST)
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=iSDmxKFK+Y4i7I7pK8PTb4D8JfC2RuMgrGxH5kbaZhQ=; b=I
+ NX1ieNvjexMFqGW+1DLxcTDQd4QgW//ojtKOrn31EuCeA1YJXsFV66fo1BkFvJqZotnw6VHOuUvQM
+ 5GBmSf7zsSycZ3ici7WPh6eo4uLWqXKUDi4RGSdSC05bSADfC1ZJx1TPg50djnG4pEhbYWqgKbyoS
+ oBvs5XxqIGGwEAdE=;
+Received: from szxga06-in.huawei.com ([45.249.212.32])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lDOlE-0005p2-BS
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 20 Feb 2021 09:41:16 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4DjNhL3bQWzjPMf;
+ Sat, 20 Feb 2021 17:39:46 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
- 14.3.498.0; Sat, 20 Feb 2021 17:38:46 +0800
+ DGGEMS410-HUB.china.huawei.com (10.3.19.210) with Microsoft SMTP Server id
+ 14.3.498.0; Sat, 20 Feb 2021 17:40:53 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Sat, 20 Feb 2021 17:38:43 +0800
-Message-ID: <20210220093843.64379-3-yuchao0@huawei.com>
+Date: Sat, 20 Feb 2021 17:40:52 +0800
+Message-ID: <20210220094052.64905-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210220093843.64379-1-yuchao0@huawei.com>
-References: <20210220093843.64379-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
@@ -61,13 +59,13 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
+ [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lDOj9-00GO9N-NL
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: update comments for explicit memory
- barrier
+X-Headers-End: 1lDOlE-0005p2-BS
+Subject: [f2fs-dev] [PATCH RFC] f2fs: fix to avoid selecting full segment w/
+ {AT, }SSR allocator
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,49 +82,102 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add more detailed comments for explicit memory barrier used by
-f2fs, in order to enhance code readability.
+In cp disabling mode, there could be a condition
+- target segment has 128 ckpt valid blocks
+- GC migrates 128 valid blocks to other segment (segment is still in
+dirty list)
+- GC migrates 384 blocks to target segment (segment has 128 cp_vblocks
+and 384 vblocks)
+- If GC selects target segment via {AT,}SSR allocator, however there is
+no free space in targe segment.
 
+Fixes: 4354994f097d ("f2fs: checkpoint disabling")
+Fixes: 093749e296e2 ("f2fs: support age threshold based garbage collection")
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/checkpoint.c | 6 +++++-
- fs/f2fs/segment.c    | 6 +++++-
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ fs/f2fs/f2fs.h    |  1 +
+ fs/f2fs/gc.c      | 17 +++++++++++++----
+ fs/f2fs/segment.c | 20 ++++++++++++++++++++
+ 3 files changed, 34 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 174a0819ad96..c75866cd72fa 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1818,7 +1818,11 @@ int f2fs_issue_checkpoint(struct f2fs_sb_info *sbi)
- 	llist_add(&req.llnode, &cprc->issue_list);
- 	atomic_inc(&cprc->queued_ckpt);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index ed7807103c8e..9c753eff0814 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3376,6 +3376,7 @@ block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
+ int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
+ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
+ int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
++bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno);
+ void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
+ void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi);
+ void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 86ba8ed0b8a7..a1d8062cdace 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -392,10 +392,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
+ 		if (p->gc_mode == GC_AT &&
+ 			get_valid_blocks(sbi, segno, true) == 0)
+ 			return;
+-
+-		if (p->alloc_mode == AT_SSR &&
+-			get_seg_entry(sbi, segno)->ckpt_valid_blocks == 0)
+-			return;
+ 	}
  
--	/* update issue_list before we wake up issue_checkpoint thread */
-+	/*
-+	 * update issue_list before we wake up issue_checkpoint thread,
-+	 * this smp_mb() pairs with another barrier in ___wait_event(),
-+	 * see more details in comments of waitqueue_active().
-+	 */
- 	smp_mb();
+ 	for (i = 0; i < sbi->segs_per_sec; i++)
+@@ -736,6 +732,19 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+ 		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+ 			goto next;
  
- 	if (waitqueue_active(&cprc->ckpt_wait_queue))
++		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
++			/*
++			 * to avoid selecting candidate which has below valid
++			 * block distribution:
++			 * partial blocks are valid and all left ones are valid
++			 * in previous checkpoint.
++			 */
++			if (p.alloc_mode == SSR || p.alloc_mode == AT_SSR) {
++				if (!segment_has_free_slot(sbi, segno))
++					goto next;
++			}
++		}
++
+ 		if (is_atgc) {
+ 			add_victim_entry(sbi, &p, segno);
+ 			goto next;
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 2190910c68b0..2d5a82c4ca15 100644
+index 2d5a82c4ca15..deaf57e13125 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -663,7 +663,11 @@ int f2fs_issue_flush(struct f2fs_sb_info *sbi, nid_t ino)
+@@ -2650,6 +2650,26 @@ static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
+ 		seg->next_blkoff++;
+ }
  
- 	llist_add(&cmd.llnode, &fcc->issue_list);
- 
--	/* update issue_list before we wake up issue_flush thread */
-+	/*
-+	 * update issue_list before we wake up issue_flush thread, this
-+	 * smp_mb() pairs with another barrier in ___wait_event(), see
-+	 * more details in comments of waitqueue_active().
-+	 */
- 	smp_mb();
- 
- 	if (waitqueue_active(&fcc->flush_wait_queue))
++bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
++{
++	struct sit_info *sit = SIT_I(sbi);
++	struct seg_entry *se = get_seg_entry(sbi, segno);
++	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
++	unsigned long *target_map = SIT_I(sbi)->tmp_map;
++	unsigned long *ckpt_map = (unsigned long *)se->ckpt_valid_map;
++	unsigned long *cur_map = (unsigned long *)se->cur_valid_map;
++	int i, pos;
++
++	down_write(&sit->sentry_lock);
++	for (i = 0; i < entries; i++)
++		target_map[i] = ckpt_map[i] | cur_map[i];
++
++	pos = __find_rev_next_zero_bit(target_map, sbi->blocks_per_seg, 0);
++	up_write(&sit->sentry_lock);
++
++	return pos < sbi->blocks_per_seg;
++}
++
+ /*
+  * This function always allocates a used segment(from dirty seglist) by SSR
+  * manner, so it should recover the existing segment information of valid blocks
 -- 
 2.29.2
 
