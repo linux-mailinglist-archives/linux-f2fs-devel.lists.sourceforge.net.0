@@ -2,100 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F780320F9F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Feb 2021 04:06:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7417732132F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Feb 2021 10:35:24 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lE1Yc-0007F2-0s; Mon, 22 Feb 2021 03:06:46 +0000
+	id 1lE7cb-0000U4-Ea; Mon, 22 Feb 2021 09:35:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yehanxu1@gmail.com>) id 1lE1Ya-0007Ev-HV
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Feb 2021 03:06:44 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lE7ca-0000Tk-1b
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Feb 2021 09:35:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ifwY+K3DGDVE8I0fPuDEawPR/idvz3X1KyWG92YlP7Q=; b=HljOkjcm068oTFUX58dcbVBlhz
- 58v+B+TDJ0dpiMejOU9yPT9cJswcNXJzclH2r5XqBRE5/266FZZvingEHopWY58X7i+m+X8aRI1Q2
- qqEYWVqvBn29+x2hBJpPCNI4VbLIbhGUvyMNkA98xDDWoFIYRREAMCO//AjK2r/ngNPA=;
+ bh=AnXMhb5hiH723H9V/ffz3RMZC49Q3pxikyGOWWu7H70=; b=gydX4wiNgUz7YUaeH5WqcoreIK
+ h7wMbHqZBif3bfOM2oV5rFUbsjM7C56njM5jVUeSGM4a+CJbXuui45ed3EPytTnvAep6U006StCF+
+ wQNw1ljDVLLWXBwkciykipSdeGfn4O67UztS7JAVNhmyh+bwtnA5Ey3Cw3lpHouA1K+c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ifwY+K3DGDVE8I0fPuDEawPR/idvz3X1KyWG92YlP7Q=; b=Tg0XrbgbIMuhqqdfcV2iAT8wwh
- iJ0w6Vn+aecRB4rzkOFRvin0zINYJvt0uk4jZ7OrG93c5ot+PqELv8uCCdI2XDR8vSxnJslkxvdO2
- MPOZiTzQKN3iVdKn+jsZBqfP3vSIywklhM4n1ekrYdr7W1a6EjZtaO4DjnV18EFAGUns=;
-Received: from mail-pg1-f194.google.com ([209.85.215.194])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lE1YU-0002z3-Jg
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Feb 2021 03:06:44 +0000
-Received: by mail-pg1-f194.google.com with SMTP id o7so9376979pgl.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 21 Feb 2021 19:06:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=ifwY+K3DGDVE8I0fPuDEawPR/idvz3X1KyWG92YlP7Q=;
- b=d4hNSdjWAyEB8dGRDngbGNIdJWAR92fB1TqLMDQAqH3vRQ2ATeKOqanW3ThV4FM5xb
- 0l0uT9euAV8i94Jijxbp5cCq+vRVxGYjMgboH38A4lMyOZNiM6lQgUNkranHwupfL+OF
- kmDmf2SIYyhpUNdjfJgU+0kzxCUYjo2INHAVbxXSvDOqSMOjFxchdeeiRbCv+2z3Lsjv
- f+8ovlgVXiLsBZ89/lfCmEGrju4nmDVlTxNCxWe7/6iA7N6CWXMp137EUJ3xV4HXo8CD
- 1fbtMWgrTfn/pKbXMOUJgP1WRU7MvrUn9Yi4TmbPzvBogfvoQPo7A2EfkhInMGP77lRK
- toQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=ifwY+K3DGDVE8I0fPuDEawPR/idvz3X1KyWG92YlP7Q=;
- b=YnICFFjorGFUczZo2CXik4/2qgk9fiUFwq+Q5ZSJG7aB4h9ki9MjVNL5E7PhsJX0/U
- jTraDHxt3OFYjB4AhId8tYkfy8wUNMhqxG2xGHawrdSjxPAVgj68C8zX/rfhTGEKBYxf
- 5QVA8r2fNfU8nF6idy8qOpgtgetLpQj9NSFstDx9AEdvLFTcUomuoOf19j3MxsjuhzvY
- Kj+zYP34QRCS0NQa4gDUOdG3RZca9TgPKFpYtoBGahjGqSX14v9Nkm2apD8OttlyQBQ4
- QhqQ6p9wPRKVY4sHnfZmlecN/sPq5RyFwt5mt1Nx8xCa3vkgWp6i+iXqJhAFSUWxYcr8
- ePOw==
-X-Gm-Message-State: AOAM530KhWQVV6CBtJqIozoIrZddw4POGJ/miNy0fsc/2M5h3EKIQl5r
- lduVsXFVyUylaW0UKgXNe3Q=
-X-Google-Smtp-Source: ABdhPJylE+H5xMZAZU/R9gwSuZmwNyF0hWU0J8hajfvV6cjFdgC3FgIq8U5Rp+wonCB697wPCnUjCw==
-X-Received: by 2002:aa7:98ca:0:b029:1ed:4469:f03c with SMTP id
- e10-20020aa798ca0000b02901ed4469f03cmr12205119pfm.78.1613963193103; 
- Sun, 21 Feb 2021 19:06:33 -0800 (PST)
-Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([209.9.72.215])
- by smtp.gmail.com with ESMTPSA id f2sm18851683pfk.63.2021.02.21.19.06.31
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 21 Feb 2021 19:06:32 -0800 (PST)
-From: Yehan Xu <yehanxu1@gmail.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Mon, 22 Feb 2021 11:04:43 +0800
-Message-Id: <1613963083-29332-1-git-send-email-yehanxu1@gmail.com>
-X-Mailer: git-send-email 2.7.4
-X-Spam-Score: 0.1 (/)
+ bh=AnXMhb5hiH723H9V/ffz3RMZC49Q3pxikyGOWWu7H70=; b=NKqG7OG/h8/tOnctrEYCLryFaw
+ V8zV0F2797YSBKNLFwKSFTJQImvl6EmD93Ed9vNI8uDPduZDCrMENCkfu+CBo2QbEZkJcI/kyIIvu
+ mueAXq4fMdcyVaUBqeddiqd8RmhcNLjA/ffa9R+21XNdvXpC4zc6a8k90/zmxtFDZNi4=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lE7cP-001260-5s
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 22 Feb 2021 09:35:16 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DkcS06Gl3z16BRl;
+ Mon, 22 Feb 2021 17:33:20 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 22 Feb
+ 2021 17:34:52 +0800
+To: Yehan Xu <yehanxu1@gmail.com>, <jaegeuk@kernel.org>, <chao@kernel.org>
+References: <1613963083-29332-1-git-send-email-yehanxu1@gmail.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <7e9adfa1-b72f-7e97-84e9-f5aa9542b690@huawei.com>
+Date: Mon, 22 Feb 2021 17:34:52 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <1613963083-29332-1-git-send-email-yehanxu1@gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (yehanxu1[at]gmail.com)
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.194 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.194 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (yehanxu1[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lE1YU-0002z3-Jg
-Subject: [f2fs-dev] [PATCH] Documentation/ABI/testing: Fix a spelling error
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lE7cP-001260-5s
+Subject: Re: [f2fs-dev] [PATCH] Documentation/ABI/testing: Fix a spelling
+ error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,36 +80,23 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: xuyehan <xuyehan@xiaomi.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: xuyehan <xuyehan@xiaomi.com>
+On 2021/2/22 11:04, Yehan Xu wrote:
+> From: xuyehan <xuyehan@xiaomi.com>
+> 
+> Delete the letter 'e' before 'number'
 
-Delete the letter 'e' before 'number'
+The patch title should be: "f2fs: fix a spelling error"
 
-Signed-off-by: xuyehan <xuyehan@xiaomi.com>
----
- Documentation/ABI/testing/sysfs-fs-f2fs | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> Signed-off-by: xuyehan <xuyehan@xiaomi.com>
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 3dfee94..21d14fa 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -276,7 +276,7 @@ Date		April 2019
- Contact:	"Daniel Rosenberg" <drosen@google.com>
- Description:	If checkpoint=disable, it displays the number of blocks that
- 		are unusable.
--		If checkpoint=enable it displays the enumber of blocks that
-+		If checkpoint=enable it displays the number of blocks that
- 		would be unusable if checkpoint=disable were to be set.
- 
- What:		/sys/fs/f2fs/<disk>/encoding
--- 
-2.7.4
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
+Thanks,
 
 
 _______________________________________________
