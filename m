@@ -2,71 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 134CE323C6B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Feb 2021 13:55:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF4D9323D80
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Feb 2021 14:16:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lEthj-0002Sp-Ml; Wed, 24 Feb 2021 12:55:47 +0000
+	id 1lEu26-0002Tm-H5; Wed, 24 Feb 2021 13:16:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1lEthh-0002Sg-3l
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Feb 2021 12:55:45 +0000
+ (envelope-from <chao@kernel.org>) id 1lEu24-0002TT-QS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Feb 2021 13:16:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jeBm5LlXMSe0jZkbfBeXH54LbkyEROEz0MoEvsoPebI=; b=lUuoAJxvlM+6KHRR1d1hWpJENI
- Vy4CFnn7x9F3IqXOfthSK3Fh7YFjpU1a9ii+sKjplhzASkxZbMygD8YB8QQAHwW4uY9LyF16Xeg8A
- biJYXw+pE8c4uoaFwaZpRoqaXEYbtR5vKxnO0Sc/yfxVkzV/DO1I2QGA3qOHYPP4+agg=;
+ bh=/VQyuN/CKcAvB8jStoYvM2bFaY2y0w3F8cvrw8i7zHE=; b=LqvwaezvEQ+NteEfQyJP3gUfZP
+ BwrzUd/MLLGeAPGcxaX1RCOqlXc6wcSOn42mw80smSq8ISc8lXPhSwK5zQXfPXnwQCYYvoaLa7JzI
+ C1uY6S0SaUI4Y33h6pWeF2lLR5gfbBZHkIIvbdhDKr7dNaLmUmCrm9dQrbkojXUYT9iY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jeBm5LlXMSe0jZkbfBeXH54LbkyEROEz0MoEvsoPebI=; b=OING3GgWOpcRd3vfxGEfnN7roq
- ZHVSaO8htQ7HR6oA0N8gtLmCftHGI0vlT+N6rpBI53DB8tD5xI3Yb1VKoorAhIREuZxYd2ZVhaInJ
- xnBDS8jOmyUsuaSSb65Ggj9ZorshJGCUQPlb6+Uf1IZQL15wlY8cwX+meKrbDKCsTJF4=;
+ bh=/VQyuN/CKcAvB8jStoYvM2bFaY2y0w3F8cvrw8i7zHE=; b=NdHg9OLxwKWkFi5AIaHU1Lj/SV
+ VkZGUHHe3kAGRaWdRxSt148gknbpL0QnwZVhtvLWH9a14QBPaOgMLoluhH8euOBf3p+BMuFXpT5hQ
+ Z164mFOdEK9eZBorkZzoRPQw/BhJZHwiYLwoUKBFd29vuPTQEiSvJSdM0D591jVP64Y8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lEthX-003gaK-SP
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Feb 2021 12:55:45 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9AAE864FAB;
- Wed, 24 Feb 2021 12:55:29 +0000 (UTC)
+ id 1lEu1u-003hpj-Hj
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 24 Feb 2021 13:16:48 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8737664E20;
+ Wed, 24 Feb 2021 13:16:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614171330;
- bh=tTT3vaaLWFWUGeDSfPi7gBR6gJfFg8YTldsjtcflZV4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Xv/tzTloNmYxn0nmmMcyrL6Vp0udMenG866gLt7jaR9SA+AIudcpk20g9RJOZFIOD
- sXA+khe3qigtADTbltXAMpPErSvXygy/BFIRAj+rVSt5En/QrUgxfN0uqHdyA/LiBI
- x58GHPVX65Uzpsz5jYtljk4nCqnPOV5tzmMFbtM5Go1JgF/gYTXdH0dJGY7IgJpvyw
- ZlT2ccdrQUna7rt5QgqZepBrSP06BTuZBJO7pD7ZLWckCr9IgVJljMYJ4q982bbZY7
- rrmrrmO/6ROvOVB7M9BU6Njb9xAAXJPzfJOFIytdhTwsTzhYb/AEeHozgy17+RuuKk
- 3CnOxInF5LmBw==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Wed, 24 Feb 2021 07:55:09 -0500
-Message-Id: <20210224125514.483935-12-sashal@kernel.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210224125514.483935-1-sashal@kernel.org>
-References: <20210224125514.483935-1-sashal@kernel.org>
+ s=k20201202; t=1614172593;
+ bh=ztz5lIKcoB1v+qQmK3hQWLFJAVrolWKXrMQEn7PoHQY=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=gwReZnVvrErIlJPy2NAM9yXMFmtP62ngIWFEIUqUcX6J/MiuU8u5k2uNlkjHNFgo3
+ RTghPn7qe2Izz7mRdX/4cLg/xJyYp6evotzxc/xzrRCfFgs0Qd96WeJbf5pGqsjzFz
+ XwwP50ckMdcrxdo9Q0GJirSyfmmvWMik4JsAVJ9Mo/IynNPQOU/xRgwck4wmDb/MxE
+ VwPgNGykxyByHEED9BX86TCU6p8JeN9mZj43ONP+5ZObBXk/7+OJgYPHzXrMppEvzH
+ UX7IByvXchXAPFV9coslzyXLEG0aA451gu6Qz8SjnPBDpFXfXFwP+sNcq6Fj9FSSOh
+ s1MPBj8Nyv7AQ==
+To: heyunlei <heyunlei@hihonor.com>, jaegeuk@kernel.org
+References: <20210223112425.19180-1-heyunlei@hihonor.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <c1ce1421-2576-5b48-322c-fa682c7510d7@kernel.org>
+Date: Wed, 24 Feb 2021 21:16:24 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
+In-Reply-To: <20210223112425.19180-1-heyunlei@hihonor.com>
+Content-Language: en-US
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -74,10 +69,15 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: hihonor.com]
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lEthX-003gaK-SP
-Subject: [f2fs-dev] [PATCH AUTOSEL 4.14 12/16] f2fs: handle unallocated
- section and zone on pinned/atgc
+X-Headers-End: 1lEu1u-003hpj-Hj
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fsverity: Truncate cache pages if set
+ verity failed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,51 +89,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+Hi Yunlei,
 
-[ Upstream commit 632faca72938f9f63049e48a8c438913828ac7a9 ]
+On 2021/2/23 19:24, heyunlei wrote:
+> If file enable verity failed, should truncate anything wrote
+> past i_size, including cache pages.
 
-If we have large section/zone, unallocated segment makes them corrupted.
++Cc Eric,
 
-E.g.,
+After failure of enabling verity, we will see verity metadata if we truncate 
+file to larger size later?
 
-  - Pinned file:       -1 119304647 119304647
-  - ATGC   data:       -1 119304647 119304647
+Thanks,
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- fs/f2fs/segment.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 0d46e936d54ed..00c415131b069 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -91,11 +91,11 @@
- #define BLKS_PER_SEC(sbi)					\
- 	((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
- #define GET_SEC_FROM_SEG(sbi, segno)				\
--	((segno) / (sbi)->segs_per_sec)
-+	(((segno) == -1) ? -1: (segno) / (sbi)->segs_per_sec)
- #define GET_SEG_FROM_SEC(sbi, secno)				\
- 	((secno) * (sbi)->segs_per_sec)
- #define GET_ZONE_FROM_SEC(sbi, secno)				\
--	((secno) / (sbi)->secs_per_zone)
-+	(((secno) == -1) ? -1: (secno) / (sbi)->secs_per_zone)
- #define GET_ZONE_FROM_SEG(sbi, segno)				\
- 	GET_ZONE_FROM_SEC(sbi, GET_SEC_FROM_SEG(sbi, segno))
- 
--- 
-2.27.0
-
+> 
+> Signed-off-by: heyunlei <heyunlei@hihonor.com>
+> ---
+>   fs/f2fs/verity.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+> index 054ec852b5ea..f1f9b9361a71 100644
+> --- a/fs/f2fs/verity.c
+> +++ b/fs/f2fs/verity.c
+> @@ -170,8 +170,10 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
+>   	}
+>   
+>   	/* If we failed, truncate anything we wrote past i_size. */
+> -	if (desc == NULL || err)
+> +	if (desc == NULL || err) {
+> +		truncate_inode_pages(inode->i_mapping, inode->i_size);
+>   		f2fs_truncate(inode);
+> +	}
+>   
+>   	clear_inode_flag(inode, FI_VERITY_IN_PROGRESS);
+>   
+> 
 
 
 _______________________________________________
