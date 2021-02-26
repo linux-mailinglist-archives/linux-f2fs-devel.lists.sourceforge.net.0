@@ -2,73 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41380325B84
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Feb 2021 03:14:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 031A8325B86
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Feb 2021 03:15:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lFSeL-0000fk-Nm; Fri, 26 Feb 2021 02:14:37 +0000
+	id 1lFSfQ-0002KA-Iv; Fri, 26 Feb 2021 02:15:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lFSeK-0000fd-09
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Feb 2021 02:14:36 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lFSfP-0002Jz-9P
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Feb 2021 02:15:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GuuoejmmAHKXgWprSo5W0XdO3OLbBPSQwwIFvWfIa8A=; b=e1NbDw/Od6p/YupUFhqpIzW1/M
- J046GXBDnI+Dy0D7U+5w/b+la74Qs26oZwe+IkDinDv0eCtNv+wBMj9HWawgzs+Hsk+BwKV6OZ0xg
- qVtJwU0RNwyxDWCOTgR2mrm1QyZySI7j7D7imIyU1fj3UiLy5oKt+/UDGI0gWNdyd2ZI=;
+ bh=WF8VpnyzHdgViMj630oZNB120GiE5wchXl478FybgbU=; b=cnzcrcNosrqiPOry7CxxQdF5Qp
+ 34HII3MVDkAJgaQ5xdmalDAm4xddpZyfTWuZeh8Cp/XloSJCR2h6JYVwIiVtU/XJbuvwCW+HOr+xY
+ NkEPh4FgamFqPGEjB7t7NYJ6HYF9advnjg8fZcla3Tqpq4Icm5UyxH5X2l3cXxWa+zS0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GuuoejmmAHKXgWprSo5W0XdO3OLbBPSQwwIFvWfIa8A=; b=Z4AaYU29t6u++SjGdyZ/+ntsvl
- gHfQmy9TfMCkcuj3ImFJCMbZ94mU75CGAALPh+yYTrTDWLEK3O5rrWhIKjwPhbKX6CXG2VVlHZ7ck
- LH8OGTC/ukOZ31WK/dkD3o54lxNon0PeA9WdKRX3oGznN9ixZ65LrowE8I+1caJSBlDQ=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lFSeD-005jMY-UK
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Feb 2021 02:14:35 +0000
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4DmtTC6kgVzMf1Q;
- Fri, 26 Feb 2021 10:12:15 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 26 Feb
- 2021 10:14:13 +0800
-To: Geert Uytterhoeven <geert@linux-m68k.org>, Masahiro Yamada
- <masahiroy@kernel.org>
-References: <20210222125916.4168804-1-geert@linux-m68k.org>
- <CAK7LNARxO6O7aRwzJ+i9hEGvWBTCukpwGBC6B79c7UdO=f0Ymw@mail.gmail.com>
- <CAMuHMdX-t4Z27RnWn0Sp1AoO3A=+aT8GXkcGC5gSArtm+W9w1Q@mail.gmail.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <f1e9abe1-6c43-cefc-276b-d36fec72e4a4@huawei.com>
-Date: Fri, 26 Feb 2021 10:14:08 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=WF8VpnyzHdgViMj630oZNB120GiE5wchXl478FybgbU=; b=CiVY8bS6SZoxKUkgQkDv9wYBJt
+ ex1pe7zkhPqyx1WLEo5xxC0g2x6gLTSPdFhbkEFB/clpCLREX8K55H7aNW5ZUn5iALFcN//xRugkd
+ dn710gZIAwmmAH7bxtN0jfo9kEKd1gg4VvDnQnytwm8yKa8jg81jIFU1iuu1Yyn/4KZM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lFSfF-0000Qv-M8
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Feb 2021 02:15:43 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C0E8164EF5;
+ Fri, 26 Feb 2021 02:15:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1614305723;
+ bh=+24u6XMY4WfQ/a0wNzIwknMb5GmaXdJ5COacjbeXKHA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GVhjMDf0gr3PW+o1GsVPO7MumHDcb4u8nkiz7jHzvVoNJsSYbRT/OBYO5VVcU624o
+ 5lqY29011//QicZvkpTqdwYRPK/HrCSXTARR1kd+X6sYnw3ak4g4ooONeNmQLbCYGd
+ U+oqAIKMLEesvaQhmy9kiItXQ9UzTBYryTdrT70e8Uoa8UGwl2o9toP1USciy+/edr
+ FxKojG28hwir+1Jq5sS7b+Wwo8kB1iBtQPaoh+qMnHi4bHQ74VbntiWelfHsAd36g9
+ piAAtml8SRgSWwJoc7/XTrGJnwV9QkBG8A9sJEL2HYyfmUOt48ClI7YFE8ShigQegS
+ qRYa0sJhWClvg==
+Date: Thu, 25 Feb 2021 18:15:21 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: heyunlei 00015531 <heyunlei@hihonor.com>
+Message-ID: <YDhZuaF8lEQPtBmp@sol.localdomain>
+References: <20210223112425.19180-1-heyunlei@hihonor.com>
+ <c1ce1421-2576-5b48-322c-fa682c7510d7@kernel.org>
+ <YDbbGSsd6ibKOpzT@sol.localdomain>
+ <YDbdEEcEV5bzgtL6@sol.localdomain>
+ <fae4a2f9-b1c9-e673-cefe-fe024ce6f9ab@hihonor.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMuHMdX-t4Z27RnWn0Sp1AoO3A=+aT8GXkcGC5gSArtm+W9w1Q@mail.gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.4 (/)
+Content-Disposition: inline
+In-Reply-To: <fae4a2f9-b1c9-e673-cefe-fe024ce6f9ab@hihonor.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [45.249.212.191 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: hihonor.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.4 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lFSeD-005jMY-UK
-Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: Allow modular
- (de)compression algorithms
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lFSfF-0000Qv-M8
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fsverity: Truncate cache pages if set
+ verity failed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,64 +90,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: jaegeuk@kernel.org, linux-fscrypt@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Geert,
-
-On 2021/2/23 15:42, Geert Uytterhoeven wrote:
->> I checked the code in menu_finalize(), and this seems to work like this.
->>
->> I discussed the oddity of the select behavior before
->> (https://lore.kernel.org/linux-kbuild/e1a6228d-1341-6264-d97a-e2bd52a65c82@infradead.org/),
->> but I was not confident about what the right direction was.
->>
->>
->> Anyway, the behavior is obscure from the current code.
->>
->> If you want to make this more robust,
->> you can write as follows:
->>
->> config F2FS_FS
->>          tristate "F2FS filesystem support"
->>          depends on BLOCK
->>          select NLS
->>          select CRYPTO
->>          select CRYPTO_CRC32
->>          select F2FS_FS_XATTR if FS_ENCRYPTION
->>          select FS_ENCRYPTION_ALGS if FS_ENCRYPTION
->>          select LZO_COMPRESS if F2FS_FS_LZO
->>          select LZO_DECOMPRESS if F2FS_FS_LZO
->>          select LZ4_COMPRESS if F2FS_FS_LZ4
->>          select LZ4_DECOMPRESS if F2FS_FS_LZ4
->>          select LZ4HC_COMPRESS if F2FS_FS_LZ4HC
->>          select ZSTD_COMPRESS if F2FS_FS_ZSTD
->>          select ZSTD_DECOMPRESS if F2FS_FS_ZSTD
->>
->> The code is a bit clumsy, but it is clear
->> that the module (F2FS_FS) is selecting the
->> compress/decompress libraries.
-> Actually the above is what I tried first ;-)  Works fine.
-> 
-> Then I started to look for similar cases in other file systems (e.g.
-> EROFS_FS_ZIP), and discovered the issue doesn't happen there, which
-> sparked my investigation.  So I settled on the direct dependency,
-> because it keeps all compression-related logic together.
-
-It looks above way is more explicit, how about using your previous implementation?
-
-Thank,
-
-> 
-> Gr{oetje,eeting}s,
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gRnJpLCBGZWIgMjYsIDIwMjEgYXQgMDk6NDI6MzNBTSArMDgwMCwgaGV5dW5sZWkgMDAwMTU1
+MzEgd3JvdGU6Cj4gCj4g5ZyoIDIwMjEvMi8yNSA3OjExLCBFcmljIEJpZ2dlcnMg5YaZ6YGTOgo+
+ID4gT24gV2VkLCBGZWIgMjQsIDIwMjEgYXQgMDM6MDI6NTJQTSAtMDgwMCwgRXJpYyBCaWdnZXJz
+IHdyb3RlOgo+ID4gPiBIaSBZdW5sZWksCj4gPiA+IAo+ID4gPiBPbiBXZWQsIEZlYiAyNCwgMjAy
+MSBhdCAwOToxNjoyNFBNICswODAwLCBDaGFvIFl1IHdyb3RlOgo+ID4gPiA+IEhpIFl1bmxlaSwK
+PiA+ID4gPiAKPiA+ID4gPiBPbiAyMDIxLzIvMjMgMTk6MjQsIGhleXVubGVpIHdyb3RlOgo+ID4g
+PiA+ID4gSWYgZmlsZSBlbmFibGUgdmVyaXR5IGZhaWxlZCwgc2hvdWxkIHRydW5jYXRlIGFueXRo
+aW5nIHdyb3RlCj4gPiA+ID4gPiBwYXN0IGlfc2l6ZSwgaW5jbHVkaW5nIGNhY2hlIHBhZ2VzLgo+
+ID4gPiA+ICtDYyBFcmljLAo+ID4gPiA+IAo+ID4gPiA+IEFmdGVyIGZhaWx1cmUgb2YgZW5hYmxp
+bmcgdmVyaXR5LCB3ZSB3aWxsIHNlZSB2ZXJpdHkgbWV0YWRhdGEgaWYgd2UgdHJ1bmNhdGUKPiA+
+ID4gPiBmaWxlIHRvIGxhcmdlciBzaXplIGxhdGVyPwo+ID4gPiA+IAo+ID4gPiA+IFRoYW5rcywK
+PiBIaSBFcmlj77yMCj4gPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBoZXl1bmxlaSA8aGV5dW5sZWlA
+aGlob25vci5jb20+Cj4gPiA+ID4gPiAtLS0KPiA+ID4gPiA+ICAgIGZzL2YyZnMvdmVyaXR5LmMg
+fCA0ICsrKy0KPiA+ID4gPiA+ICAgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDEg
+ZGVsZXRpb24oLSkKPiA+ID4gPiA+IAo+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvdmVy
+aXR5LmMgYi9mcy9mMmZzL3Zlcml0eS5jCj4gPiA+ID4gPiBpbmRleCAwNTRlYzg1MmI1ZWEuLmYx
+ZjliOTM2MWE3MSAxMDA2NDQKPiA+ID4gPiA+IC0tLSBhL2ZzL2YyZnMvdmVyaXR5LmMKPiA+ID4g
+PiA+ICsrKyBiL2ZzL2YyZnMvdmVyaXR5LmMKPiA+ID4gPiA+IEBAIC0xNzAsOCArMTcwLDEwIEBA
+IHN0YXRpYyBpbnQgZjJmc19lbmRfZW5hYmxlX3Zlcml0eShzdHJ1Y3QgZmlsZSAqZmlscCwgY29u
+c3Qgdm9pZCAqZGVzYywKPiA+ID4gPiA+ICAgIAl9Cj4gPiA+ID4gPiAgICAJLyogSWYgd2UgZmFp
+bGVkLCB0cnVuY2F0ZSBhbnl0aGluZyB3ZSB3cm90ZSBwYXN0IGlfc2l6ZS4gKi8KPiA+ID4gPiA+
+IC0JaWYgKGRlc2MgPT0gTlVMTCB8fCBlcnIpCj4gPiA+ID4gPiArCWlmIChkZXNjID09IE5VTEwg
+fHwgZXJyKSB7Cj4gPiA+ID4gPiArCQl0cnVuY2F0ZV9pbm9kZV9wYWdlcyhpbm9kZS0+aV9tYXBw
+aW5nLCBpbm9kZS0+aV9zaXplKTsKPiA+ID4gPiA+ICAgIAkJZjJmc190cnVuY2F0ZShpbm9kZSk7
+Cj4gPiA+ID4gPiArCX0KPiA+ID4gPiA+ICAgIAljbGVhcl9pbm9kZV9mbGFnKGlub2RlLCBGSV9W
+RVJJVFlfSU5fUFJPR1JFU1MpOwo+ID4gPiA+ID4gCj4gQnkgdGhlIHdhee+8jHNob3VsZMKgIHdl
+IGNvbnNpZGVywqAgc2V0IHhhdHRyIGZhaWxlZD8KPiAKClllcywgdGhhdCBzZWVtcyB0byBiZSBh
+bm90aGVyIG92ZXJzaWdodC4gIFNpbWlsYXJseSBmb3IgZXh0NCwgaWYKZXh0NF9qb3VybmFsX3N0
+YXJ0KCksIGV4dDRfb3JwaGFuX2RlbCgpLCBvciBleHQ0X3Jlc2VydmVfaW5vZGVfd3JpdGUoKSBm
+YWlscy4KCkkgdGhpbmsgdGhlIHJpZ2h0IGZpeCBpcyB0byBtb3ZlIHRoZSB0cnVuY2F0aW9uIHRv
+IHRoZSBlbmQgb2YgdGhlIGZ1bmN0aW9uLgoKLSBFcmljCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QK
+TGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
