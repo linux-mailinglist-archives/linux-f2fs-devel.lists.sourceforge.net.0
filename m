@@ -2,70 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E24C1329702
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 09:50:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C87C329CE7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 12:40:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lH0jD-0000Ij-FX; Tue, 02 Mar 2021 08:50:03 +0000
+	id 1lH3Ns-000058-C7; Tue, 02 Mar 2021 11:40:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lH0jC-0000Hg-4T
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 08:50:02 +0000
+ (envelope-from <heyunlei@hihonor.com>) id 1lH3Np-00004v-19
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 11:40:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vRTB35Hy3X+I0kDOBUlqcrgTLbJGIKnoI4B9Ycr3gY4=; b=YyUw2pWNrbMfVEnpbs/0togC9s
- OmSvoF96o/Q2ToehpFx/5rxz2xGnLYrJr218vRTL1i3X4AsZxjxllbuHrKOXN4ABYXnGeKOgu0KYb
- zd1OHIr8rnj8bxgYX05fZZ0CWsBr+fJ4ehbisNOwSzykGJatv3tQnuX2OzL+F2KjvU5Y=;
+ bh=7GNW4/p9DXQ7MmMInQr0RaBpuTSToLTdGH9PEMnHZdo=; b=HwXKB4h5PF0SU/6onOjZ4wGSnO
+ fV8K28S6qA1ql4RHNSVCMUlHdMtD7mITnz3lxMGsaFSBR3fYr5NKqb2ALP+Br3j7ElowMu8hvp+Dm
+ SLCRsAwiV2r2L3PUl/AWHUEfiJey+VZjKtEDjXB2Qm9ZU1L/OdFbNNeP/QAELlG4Nnxo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vRTB35Hy3X+I0kDOBUlqcrgTLbJGIKnoI4B9Ycr3gY4=; b=TpOOuPLM2LzJWEwkPLc1Sg9JBh
- 5JiblsWKMfKfKw80qg/g6Bv+ekD5LVFVI2UKBcjtrhdkX7D27cCRNYCeRLlVBFaNWBNONxED4x76u
- x2uM6xu3Z2WG19SFjp8MNB0AvQj8S0k4sKQOtyY8MNDJKuTF6DHfOLict9cuKQqspgMc=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lH0iw-0003il-RO
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 08:50:02 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4DqW3y4QwFz7s3j;
- Tue,  2 Mar 2021 16:47:58 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 2 Mar 2021
- 16:49:36 +0800
-To: <jaegeuk@kernel.org>
-References: <20210302084458.15077-1-yuchao0@huawei.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <b7a214b4-5d51-5a47-79a1-1592063552d7@huawei.com>
-Date: Tue, 2 Mar 2021 16:49:36 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20210302084458.15077-1-yuchao0@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
+ bh=7GNW4/p9DXQ7MmMInQr0RaBpuTSToLTdGH9PEMnHZdo=; b=SODo0vG2qKhQ/cojArM9vYVZ0Y
+ fp8uQ8mO9h0N/uqdQC87Svvz2gtrYISB1gFZKP/AsDLf557ehsrabOZVCovTAX9W6IK92zf36iDfe
+ 3Z/NJ/SEpy5xb6sMx6rCpI7bTamgHVyLMDVE0iPHHvBpGC6tUBjSXaeQSXNWjo/Qp2DQ=;
+Received: from zg8tmty1ljiyny4xntqumjca.icoremail.net ([165.227.154.27])
+ by sfi-mx-1.v28.lw.sourceforge.com with smtp (Exim 4.92.2)
+ id 1lH3Nk-00BAyJ-2N
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 11:40:08 +0000
+Received: from pekshcsitd06010.hihonor.com (unknown [198.19.131.39])
+ by front-1 (Coremail) with SMTP id CwGowAAXf07LIz5gcsNOAA--.1848S2;
+ Tue, 02 Mar 2021 19:38:52 +0800 (CST)
+From: Yunlei He <heyunlei@hihonor.com>
+To: chao@kernel.org,
+	jaegeuk@kernel.org,
+	ebiggers@kernel.org
+Date: Tue,  2 Mar 2021 19:38:50 +0800
+Message-Id: <20210302113850.17011-1-heyunlei@hihonor.com>
+X-Mailer: git-send-email 2.17.1
+X-CM-TRANSID: CwGowAAXf07LIz5gcsNOAA--.1848S2
+X-Coremail-Antispam: 1UD129KBjvJXoWrtw47Xr1UCrW5ur4kGF45ZFb_yoW8JF17pF
+ yDGFyUWw1rG3y7Wr1vvF1Uuw1rKFy7KrW2vFyDuw1kW3WkXwnYvayvyFW09a1aqr97Jw40
+ qr4UCa9rCr17Ar7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkE1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AE
+ w4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2
+ IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW0oVCq3wA2z4x0Y4vEx4A2
+ jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52
+ x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWr
+ XwAv7VC2z280aVAFwI0_Cr1j6rxdMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwI
+ xGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK6svPMxAIw28IcxkI7VAKI48JMxAI
+ w28IcVCjz48v1sIEY20_XFWUJr1UMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
+ AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
+ c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
+ AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWU
+ JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUA8n
+ 5UUUUU=
+X-CM-SenderInfo: pkh130hohlqxxlkr003uof0z/1tbiAQIKEV3ki2sD+gABs5
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [165.227.154.27 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: hihonor.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [165.227.154.27 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lH0iw-0003il-RO
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix compile warning
+X-Headers-End: 1lH3Nk-00BAyJ-2N
+Subject: [f2fs-dev] [PATCH] f2fs: fsverity: modify truncation for verity
+ enable failed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,17 +92,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-fscrypt@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMS8zLzIgMTY6NDQsIENoYW8gWXUgd3JvdGU6Cj4gbm9kZS5jOjI3NTA6MTM6IG5vdGU6
-IGluIGV4cGFuc2lvbiBvZiBtYWNybyDigJhtaW7igJkKPiAgICAgbnJwYWdlcyA9IG1pbihsYXN0
-X29mZnNldCAtIGksIEJJT19NQVhfUEFHRVMpOwoKT2gsIGFmdGVyIEkgcmViYXNlIHRvIGxhc3Qg
-ZGV2IGJyYW5jaCwgY29tcGlsZSB3YXJuaW5nIGlzIGdvbmUgYXMKd2UgY2hhbmdlZCB0byB1c2Ug
-YmlvX21heF9zZWdzKCkgcmF0aGVyIHRoYW4gbWluKCkuCgpQbGVhc2UgaWdub3JlIHRoaXMgcGF0
-Y2guCgpUaGFua3MsCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0
-cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlz
-dGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+If file enable verity failed, should truncate anything wrote
+past i_size, including cache pages. Move the truncation to
+the end of function, in case of f2fs set xattr failed.
+
+Fixes: 95ae251fe828 ("f2fs: add fs-verity support")
+Cc: <stable@vger.kernel.org> # v5.4+
+Signed-off-by: Yunlei He <heyunlei@hihonor.com>
+---
+ fs/f2fs/verity.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+index 054ec852b5ea..610f2a9b4928 100644
+--- a/fs/f2fs/verity.c
++++ b/fs/f2fs/verity.c
+@@ -169,10 +169,6 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
+ 			err = filemap_write_and_wait(inode->i_mapping);
+ 	}
+ 
+-	/* If we failed, truncate anything we wrote past i_size. */
+-	if (desc == NULL || err)
+-		f2fs_truncate(inode);
+-
+ 	clear_inode_flag(inode, FI_VERITY_IN_PROGRESS);
+ 
+ 	if (desc != NULL && !err) {
+@@ -185,6 +181,13 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
+ 			f2fs_mark_inode_dirty_sync(inode, true);
+ 		}
+ 	}
++
++	/* If we failed, truncate anything we wrote past i_size. */
++	if (desc == NULL || err) {
++		truncate_inode_pages(inode->i_mapping, inode->i_size);
++		f2fs_truncate(inode);
++	}
++
+ 	return err;
+ }
+ 
+-- 
+2.17.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
