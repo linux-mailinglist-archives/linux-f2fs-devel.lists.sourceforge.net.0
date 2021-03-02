@@ -2,71 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F3F032965E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 07:11:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F3F3296F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 09:36:06 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lGyFl-0001EB-Lo; Tue, 02 Mar 2021 06:11:29 +0000
+	id 1lH0Vb-0007W9-J0; Tue, 02 Mar 2021 08:36:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lGyFk-0001E4-5a
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 06:11:28 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lH0VZ-0007W1-R3
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 08:35:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0sLQemdTtYEVWSXHSCHtY8Xkz+Xu9nQuH7n+gjbWuZo=; b=FMJn7ugpQSjEAxPwhRqWMxRiz4
- P+S1/PB0b4SrfZp7zLo7zwX9EVc+q42uryChp0IoO5s+WTUuhGV8w19sb6Dg7eLupDcCCaSzjHjMN
- ni5njg3AUkVNGb+6CdxapT2EvFMUGhJlu52rIgBVLqM1p7bUNcfKX5X9MivMAd0+en0U=;
+ bh=jzMv3mfYCo8BKFuj23ApMkTHr7SWDpWYNUuPsMbN2UM=; b=cd4zGRjtNsm/bu7m+tuyVh/BRb
+ sgG4H3wmxs6cKf+9rfQ6L7GXV/6I/hFaNajLpA2do+E4SF8wf0YXuVUpaOJ4h1+Z18vh1BBAfAq7e
+ Zb/MubIQI8uzikHYsP16FIGnMMPr8+7rnVeJBbzepzEL1WvW84lIEADL1OPiLcV/x+nk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0sLQemdTtYEVWSXHSCHtY8Xkz+Xu9nQuH7n+gjbWuZo=; b=VVVjY6EoocSoGMZcCQlrZ4J/pE
- LAVEzHhNuY6+EK1I2uamQW5HHSiS/LEypERpQpgtYIz5SLvQ2ErZTiCD8VMkgfnLQ8vTKlfRlr7uf
- 4fwibWY2plSbx6euxfYw0q3TA1IWe9ravVkBK46BQ1T4g26Qh3COL2UMdCF95VBTubIw=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jzMv3mfYCo8BKFuj23ApMkTHr7SWDpWYNUuPsMbN2UM=; b=Q
+ nf5lParHpr5oY5iJG3dq999j4wlniA10wa5KxixJq0nmDSTp/aPhyo6p6Z4sYmLMOOb9T3F768yZx
+ mclCS0HSDv0UmxdqdODeTtCaUB/uQnjeNrFc1zyJoiCWjszhnG1L3KsEALKEgv/UPvN6LJWgdz57J
+ iJxh7zKJ+KDhDihs=;
 Received: from szxga07-in.huawei.com ([45.249.212.35])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lGyFh-0004wB-26
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 06:11:28 +0000
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4DqRY56MKpz7sDF;
- Tue,  2 Mar 2021 14:09:29 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.211) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 2 Mar 2021
- 14:11:07 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <kernel-team@android.com>
-References: <20210302054233.3886681-1-jaegeuk@kernel.org>
+ id 1lH0VU-0002uL-AE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 08:35:57 +0000
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4DqVls14Skz7s37;
+ Tue,  2 Mar 2021 16:34:01 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 2 Mar 2021 16:35:35 +0800
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <920469a9-45d3-68e3-1f8d-a436bdd60cfe@huawei.com>
-Date: Tue, 2 Mar 2021 14:11:07 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+To: <jaegeuk@kernel.org>
+Date: Tue, 2 Mar 2021 16:35:32 +0800
+Message-ID: <20210302083532.11669-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-In-Reply-To: <20210302054233.3886681-1-jaegeuk@kernel.org>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
+X-Originating-IP: [10.120.216.130]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
  [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lGyFh-0004wB-26
-Subject: Re: [f2fs-dev] [PATCH] f2fs: expose # of overprivision segments
+X-Headers-End: 1lH0VU-0002uL-AE
+Subject: [f2fs-dev] [PATCH] f2fs: remove unused file_clear_encrypt()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,54 +76,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/2 13:42, Jaegeuk Kim wrote:
-> This is useful when checking conditions during checkpoint=disable in Android.
+- file_clear_encrypt() was never be used, remove it.
+- In addition, relocating macros for cleanup.
 
-This sysfs entry is readonly, how about putting this at
-/sys/fs/f2fs/<disk>/stat/?
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
+---
+ fs/f2fs/f2fs.h | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/sysfs.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index e38a7f6921dd..254b6fa17406 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -91,6 +91,13 @@ static ssize_t free_segments_show(struct f2fs_attr *a,
->   			(unsigned long long)(free_segments(sbi)));
->   }
->   
-> +static ssize_t ovp_segments_show(struct f2fs_attr *a,
-> +		struct f2fs_sb_info *sbi, char *buf)
-> +{
-> +	return sprintf(buf, "%llu\n",
-> +			(unsigned long long)(overprovision_segments(sbi)));
-> +}
-> +
->   static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
->   		struct f2fs_sb_info *sbi, char *buf)
->   {
-> @@ -629,6 +636,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
->   F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
->   F2FS_GENERAL_RO_ATTR(dirty_segments);
->   F2FS_GENERAL_RO_ATTR(free_segments);
-> +F2FS_GENERAL_RO_ATTR(ovp_segments);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 4fc343aa0a08..ddd54f5cf932 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -637,21 +637,26 @@ enum {
+ #define FADVISE_MODIFIABLE_BITS	(FADVISE_COLD_BIT | FADVISE_HOT_BIT)
+ 
+ #define file_is_cold(inode)	is_file(inode, FADVISE_COLD_BIT)
+-#define file_wrong_pino(inode)	is_file(inode, FADVISE_LOST_PINO_BIT)
+ #define file_set_cold(inode)	set_file(inode, FADVISE_COLD_BIT)
+-#define file_lost_pino(inode)	set_file(inode, FADVISE_LOST_PINO_BIT)
+ #define file_clear_cold(inode)	clear_file(inode, FADVISE_COLD_BIT)
++
++#define file_wrong_pino(inode)	is_file(inode, FADVISE_LOST_PINO_BIT)
++#define file_lost_pino(inode)	set_file(inode, FADVISE_LOST_PINO_BIT)
+ #define file_got_pino(inode)	clear_file(inode, FADVISE_LOST_PINO_BIT)
++
+ #define file_is_encrypt(inode)	is_file(inode, FADVISE_ENCRYPT_BIT)
+ #define file_set_encrypt(inode)	set_file(inode, FADVISE_ENCRYPT_BIT)
+-#define file_clear_encrypt(inode) clear_file(inode, FADVISE_ENCRYPT_BIT)
++
+ #define file_enc_name(inode)	is_file(inode, FADVISE_ENC_NAME_BIT)
+ #define file_set_enc_name(inode) set_file(inode, FADVISE_ENC_NAME_BIT)
++
+ #define file_keep_isize(inode)	is_file(inode, FADVISE_KEEP_SIZE_BIT)
+ #define file_set_keep_isize(inode) set_file(inode, FADVISE_KEEP_SIZE_BIT)
++
+ #define file_is_hot(inode)	is_file(inode, FADVISE_HOT_BIT)
+ #define file_set_hot(inode)	set_file(inode, FADVISE_HOT_BIT)
+ #define file_clear_hot(inode)	clear_file(inode, FADVISE_HOT_BIT)
++
+ #define file_is_verity(inode)	is_file(inode, FADVISE_VERITY_BIT)
+ #define file_set_verity(inode)	set_file(inode, FADVISE_VERITY_BIT)
+ 
+-- 
+2.29.2
 
-Missed to add document entry in Documentation/ABI/testing/sysfs-fs-f2fs?
-
-Thanks,
-
->   F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
->   F2FS_GENERAL_RO_ATTR(features);
->   F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
-> 
 
 
 _______________________________________________
