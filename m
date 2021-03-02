@@ -2,75 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A87A8328C2D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Mar 2021 19:48:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49ABA3295BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 04:22:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lGnal-0005T9-5d; Mon, 01 Mar 2021 18:48:27 +0000
+	id 1lGvc5-0001Yr-0R; Tue, 02 Mar 2021 03:22:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lGnRK-00055R-KG
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Mar 2021 18:38:42 +0000
+ (envelope-from <sunjy516@gmail.com>) id 1lGvc2-0001Yb-SK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 03:22:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t3Bb2V/QRl+D0vNvhiYyjF3vrWv1E+3VCQl1YE0KyV4=; b=VvP/abJZupDFs9k8jRitLVeyay
- 89cle6P95IXrIvA50rjAtXSjtcoUfsQd729EKWWxPZC+mQYHMr+HAjxRBrL8yWZ0lobYxJpCN784I
- x1oxrTMc8gNuJiBp64dfJulKXMMSntVaEyIdM650bKWWZVMiKN9XjYOOD9DQON5U3Oc8=;
+ bh=vq2wfygbCpdz9NZDMGKqtTNVj3V6bNF/kELLZ481Bg0=; b=AiaeeC4nIA8l4gsJ6wognHVCtF
+ Ep1CEze1x3oMqO18jrKy7iJo7koN47dRL2zz5j1QMAJyqhz6HfGD3sm0pLwgWRR//PqwZ6i2zM+mM
+ xOXQBkzbqFHxYnHGJy1kKHpWYW0yREbhwESwRkQbpcULkDJifflVsev0X1FPYIHMvOIo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t3Bb2V/QRl+D0vNvhiYyjF3vrWv1E+3VCQl1YE0KyV4=; b=V5o65uHpgtaa5gDbnt4eGWz3UX
- sM1D8T6FY0l+Ut11uxo2tgQCaF0pa1IivoV9w/GA96yzCgYxxdJEsY3CYtP2uH32XimErr/wU7rqI
- VOfSbb2M9wg005rNzGvWa+mVbTCW+Z8pj/E7qe/T4qwR8HjjVOAzx5Q2Y91J/fjPpaaI=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lGnR6-00080Z-Sz
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Mar 2021 18:38:42 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 34E4F600CD;
- Mon,  1 Mar 2021 18:38:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614623903;
- bh=Usbgf4w4CPwBJdAjaGObAuklNlbhEtgzWAuSXxvNqgU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=obsfa9+0yM6DvT1kTXIRM5rKh8CcWoX43yimFP0IlRq+LyKkYiL9M2JNgTaLjLEVZ
- 18y0rhqlPVg/1DtvJyf7EeKE9rE/saw4DKvNu80w4Cj/waJDGWApp/dWutCttmlgKs
- cdSZzZ/YGQ4EdXE/wz/d8CdZXMaULJOENUaaJop5DpThBiP2W8FZdSXOgzPM6QOlHR
- O5ICtni2GaGBT+1awZKJhx2MNMR1fFkS0fh07vcTPykC8B3pTjqnqiwZqzHNHKxTCm
- j5IUx+9Q6IgQhoEnPghrM2w1fAjKlNpN5uTXUoYWvMW0YfwaiiMsTcGTwkLyQJIXFX
- bf4J9BEDlBTGQ==
-Date: Mon, 1 Mar 2021 10:38:21 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Yunlei He <heyunlei@hihonor.com>
-Message-ID: <YD00nfInJqE/UlxM@gmail.com>
-References: <20210301141506.6410-1-heyunlei@hihonor.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210301141506.6410-1-heyunlei@hihonor.com>
-X-Spam-Score: -0.1 (/)
+ bh=vq2wfygbCpdz9NZDMGKqtTNVj3V6bNF/kELLZ481Bg0=; b=A+iatv2xQupLLuA9kMinaEti9p
+ oBQNpq2Oy9ogAd7R9TROLIzmEl5jnU58VwGTmKVOHqJ7UNZyMywG4ks39/cTN+mPvTB6KcQdFpkdt
+ qdge78Dz9+clGu4yRsl9ssFFepq1PRWU9sdu/N42SDSFHJKZwNBRASq0YMAEPUZoTBjY=;
+Received: from mail-pf1-f176.google.com ([209.85.210.176])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
+ id 1lGvbq-00AhGF-Rl
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 03:22:18 +0000
+Received: by mail-pf1-f176.google.com with SMTP id q20so12913113pfu.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 01 Mar 2021 19:22:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=vq2wfygbCpdz9NZDMGKqtTNVj3V6bNF/kELLZ481Bg0=;
+ b=bTRU20dHNlH3fHiXPT69Hdl8QcnabkGQ3JNMaXxqAaPU15CxbwiabkUNruhWTw13y9
+ 2RIUVi9a1+hRECUGE+8QnNXK+eJzsNuYWsgpqXsPoaKccDm7oWS6eC2+8eVHlIbvmaTU
+ TBc1HwGUoTHRWTu5w0Ph5YUQZCHsRS4JOk7BFNc7EG51grcJb6QMoZT5HHTls/YfF5HU
+ 1kkF96EWeoe+xBX39/MkqFOAPYAGjYDWm5/Ax1gyx79aDwK7QrvH8iS5dbq8X8oxQ+aa
+ X2dJEW1y9oOrDWLmqC+cA0ywKuqdmIdE3BHl008UQHhia2eXMxoyEOHqyfwuMhIGKWQf
+ XIiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=vq2wfygbCpdz9NZDMGKqtTNVj3V6bNF/kELLZ481Bg0=;
+ b=M4f0Le5sbzLJ4Y0+p8gKGqzqcyMdH2lxKd4oN+dmUCEfeh3yEzzrB74eo1yaqHcW10
+ CmqfbFsjNoBkg2ywmo3XDOBnzh6jTfb3qpoyFMIJ2yeXQ/P06kIi4hwDXWWBf7peEyvk
+ A84kYJObUUMjQEYFPBaxpilctq18iCZCGcfyZCzcuFHYNDgVc5bC7R8wW6/d0Lq7Z8gg
+ Ud2RIPTn/aM+gs6BKz+5hkPLvf2eCUQd964wX1yQmRT4DW86VOVe3VPic0Wr8apY+PIL
+ N8o25GV6YE4+4V/f+nnxs1vbJ7FQiSS4os4n29adPUBd3Dims7QvtCKfSWdD3T5xYJnf
+ H/8Q==
+X-Gm-Message-State: AOAM532LoywkgEHcLIL2QTv7o+v0A7rNymNN6O+BWBP4GQdMfhHr6vhw
+ 47EqndNUtQZ0iSOxitHcrVQ9PFkm8+vjQR78
+X-Google-Smtp-Source: ABdhPJyoETk3Hp/AQUUwaxA/4XZ2B1k0ksZrAYVpoo/qgs6XPjRJfW5+01Vc67mn3nkVELdOfEJGEQ==
+X-Received: by 2002:a63:f209:: with SMTP id v9mr9720873pgh.97.1614655321087;
+ Mon, 01 Mar 2021 19:22:01 -0800 (PST)
+Received: from localhost ([43.224.245.180])
+ by smtp.gmail.com with ESMTPSA id i15sm903795pjl.54.2021.03.01.19.22.00
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 01 Mar 2021 19:22:00 -0800 (PST)
+From: Junyong Sun <sunjy516@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue,  2 Mar 2021 11:21:55 +0800
+Message-Id: <1614655315-29067-1-git-send-email-sunjy516@gmail.com>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (sunjy516[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (sunjy516[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lGnR6-00080Z-Sz
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fsverity: Truncate cache pages if
- set verity failed
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.210.176 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.210.176 listed in list.dnswl.org]
+X-Headers-End: 1lGvbq-00AhGF-Rl
+Subject: [f2fs-dev] [PATCH] libf2fs: fix memory leak caused by get_rootdev()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,57 +104,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, jaegeuk@kernel.org
+Cc: sunjunyong@xiaomi.com, Junyong Sun <sunjy516@gmail.com>, jaegeuk@google.com
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Mar 01, 2021 at 10:15:06PM +0800, Yunlei He wrote:
-> If file enable verity failed, should truncate anything wrote
-> past i_size, including cache pages.
+memory which malloc for uevent don't free at get_rootdev(),
+it would cause memory leak, so free it before return.
 
-The commit message and title need to be updated to properly describe the change.
-They were okay for v1, but v2 makes additional changes.
+Signed-off-by: Junyong Sun <sunjy516@gmail.com>
+---
+ lib/libf2fs.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-> 
-> Fixes: 95ae251fe828 ("f2fs: add fs-verity support")
-> Cc: <stable@vger.kernel.org> # v5.4+
-> Signed-off-by: Yunlei He <heyunlei@hihonor.com>
-> ---
->  fs/f2fs/verity.c | 47 +++++++++++++++++++++++++----------------------
->  1 file changed, 25 insertions(+), 22 deletions(-)
-> 
-> diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-> index 054ec852b5ea..3aa851affc46 100644
-> --- a/fs/f2fs/verity.c
-> +++ b/fs/f2fs/verity.c
-> @@ -158,33 +158,36 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
->  		.size = cpu_to_le32(desc_size),
->  		.pos = cpu_to_le64(desc_pos),
->  	};
-> -	int err = 0;
-> +	int err;
->  
-> -	if (desc != NULL) {
-> -		/* Succeeded; write the verity descriptor. */
-> -		err = pagecache_write(inode, desc, desc_size, desc_pos);
-> +	clear_inode_flag(inode, FI_VERITY_IN_PROGRESS);
-> +	if (!desc)
-> +		return 0;
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 55fa391..85107ee 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -637,20 +637,25 @@ char *get_rootdev()
+ 
+ 	ptr = strstr(uevent, "DEVNAME");
+ 	if (!ptr)
+-		return NULL;
++		goto out_free;
+ 
+ 	ret = sscanf(ptr, "DEVNAME=%s\n", buf);
+ 	if (strlen(buf) == 0)
+-		return NULL;
++		goto out_free;
+ 
+ 	ret = strlen(buf) + 5;
+ 	rootdev = malloc(ret + 1);
+ 	if (!rootdev)
+-		return NULL;
++		goto out_free;
+ 	rootdev[ret] = '\0';
+ 
+ 	snprintf(rootdev, ret + 1, "/dev/%s", buf);
++	free(uevent);
+ 	return rootdev;
++
++out_free:
++	free(uevent);
++	return NULL;
+ #endif
+ }
+ 
+-- 
+2.7.4
 
-This isn't correct.  If desc == NULL (indicating that enabling verity failed),
-it's still necessary to truncate the stuff past i_size.
-
->  
-> -		/* Write all pages before clearing FI_VERITY_IN_PROGRESS. */
-> -		if (!err)
-> -			err = filemap_write_and_wait(inode->i_mapping);
-
-As the comment above (which you deleted) says, all pages need to be written
-before clearing FI_VERITY_IN_PROGRESS.
-
-- Eric
 
 
 _______________________________________________
