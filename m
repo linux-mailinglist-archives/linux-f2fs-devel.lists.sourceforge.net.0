@@ -2,62 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B5B332BA35
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Mar 2021 20:28:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A591732BA3F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Mar 2021 20:44:36 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lHXAk-0004ml-Ex; Wed, 03 Mar 2021 19:28:38 +0000
+	id 1lHXQ9-0006YI-RH; Wed, 03 Mar 2021 19:44:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lHXAj-0004ma-9w
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:28:37 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lHXQ8-0006Y6-Dx
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:44:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4p66JKbgaafykou5y4TLlXeDyf+4dJR6mJMc9OFCAsE=; b=DmIHeNTWghUSs9iqcXeXH8BS1z
- 7Vtmqq/QIYMXRsJcDIVkbYdy1SXMcyOUtnNbu09cnB5iyH5oot+hj2QSGC2fuyk1Ig4to1mjiAwyZ
- FMQ0yRurBtfWZHHugeMdxcRSgsViOn/kF/fBi8R5t+qbkxSuYfTEwGM3hR/eb5wNaPQM=;
+ bh=71DyLj2mo/SPRrenwGHRYb5z7tKhIfuc1ypDgqFmxHQ=; b=mZMUJ3SKUOtM3tTOZLYxlvKD7H
+ VvTY4zHMzHqs0R97lpKjBvOusve0j9Fkz3kTsvhOiJEusUI0BJ9HjPm1ghm5vuWI5pvzuSd/g1LL/
+ xwXPS+jbIKZfD030eGBXUl8rR2LlFVEmcVBeE85i+i+Nn/aHCTtKRBfGOSIGMKRw1Dmk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4p66JKbgaafykou5y4TLlXeDyf+4dJR6mJMc9OFCAsE=; b=Oqst7JsUPjJrwVIUdRSJHtn6Ls
- mfjrGLRcc8XlaHnR+4jM4zrHrvTYXKnsUXcOX34dHxm+nqNPfiBoEQXo6nWxXrlg/h/Sitf88ehHq
- KxohXy3GwmJ4G7ijeWDaBsrDgxOKfW/iCYhOKr7bftq+7b42QAESP6Po+zd1GDiVMQBA=;
+ bh=71DyLj2mo/SPRrenwGHRYb5z7tKhIfuc1ypDgqFmxHQ=; b=JaooCw0WaA6x11o6TIY6GXKxMH
+ AOc7zdP/zJGmYkDk8XW/TO8/TESa7RjuTQsXRKDMLWYWEDd3+iJ4+ht36Gv83tJTGx1Z4TeioWvmM
+ V+4HMJl3czOZrVIXGEtOv2tNjkjrwFDNCb0zZha2w2+CErps0X2Q2f20Qv+ahW8yc3oc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lHXAa-0003Zt-1H
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:28:37 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D73E264EF0;
- Wed,  3 Mar 2021 19:28:15 +0000 (UTC)
+ id 1lHXQ5-00046o-DL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:44:32 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BA10D64EEC;
+ Wed,  3 Mar 2021 19:44:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614799696;
- bh=8Ra0AMNh+KuCsZP9ZA7+W5cqVDNHMmMwTZByG6847LQ=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=aCdQ2lhI4R9ZSpnrwjYno/GIfUoYO1enl4eBCq7vBku02IvLiXfv9MSMJUQe5QYqP
- YsWHU5/eYaz8oV6qFTAu5aXuS7pqp672gmBL+LLZYSl8p54wZ5Pm/TyzGmpDZhqtuf
- yoGC1EXWp4h4MMrdlr0nfX8laVYhPAVOEjEt3r5XI7RfHslg2fhvOqHYn1Kf6g/1vA
- 6l03ZXNEfiiFUWLiuTjZ7gGlAxA7/dM/hjyd1W34bLDWcWSn4O1RYT3QUHXH+J05D6
- zL/mp4zek9wWs7DF5tYAMXsoClH/ULKW0G+WsA+M8pYjJ3tnTLZYXhSQfdlx++gBl/
- hq9oYfSu/m9BA==
-Date: Wed, 3 Mar 2021 11:28:14 -0800
+ s=k20201202; t=1614800664;
+ bh=XzLN1itD6PL+bIg6U9jSAC+UFTtsG2NbdA80bYP7AMo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hmRt+HYGG544Fi2+h6mba4JSEU1BiziNRB2SVNBHJm0IDg2n5KjrEFNh+EulXG0Oa
+ Xxh5to+8zCMYv+1NEO/IlAfC3b3aYf59esKN2VtD5X/FHbewG8X4bFzeeIA54xTCpi
+ dJgIh4rWZ38s/zF7khf0XPyGTdfrf9HRti5P6ALJfLjQtWOZaMEf/RwbTMFCzpq6Jw
+ TA3hKCEYf4ahb/8YxPB6HEnRUy/b++MBAInHSeA1UesBc3i9EiKwMOhAfoEjba7eTI
+ YNymMrP8mB2wRzTrkrfxY92VbUhj3Wlo/GS3NsvlpQGxvPwlUfjy5TgmUmIvlSWfkg
+ VAx+fxC0o8Bbg==
+Date: Wed, 3 Mar 2021 11:44:22 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Message-ID: <YD/jTtjVqDklvoof@google.com>
-References: <20210302054233.3886681-1-jaegeuk@kernel.org>
+To: Colin Ian King <colin.king@canonical.com>
+Message-ID: <YD/nFt6Gswnyogfa@google.com>
+References: <9fcca081-9a60-8ae3-5cac-d8aa38c38ff2@canonical.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210302054233.3886681-1-jaegeuk@kernel.org>
+In-Reply-To: <9fcca081-9a60-8ae3-5cac-d8aa38c38ff2@canonical.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,8 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lHXAa-0003Zt-1H
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: expose # of overprivision segments
+X-Headers-End: 1lHXQ5-00046o-DL
+Subject: Re: [f2fs-dev] f2fs_convert_inline_inode causing rebalance based on
+ random uninitialized value in dn.node_changed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,68 +82,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Changman Lee <cm224.lee@samsung.com>, Chao Yu <chao2.yu@samsung.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is useful when checking conditions during checkpoint=disable in Android.
+On 03/02, Colin Ian King wrote:
+> Hi,
+> 
+> Static analysis on linux-next detected a potential uninitialized
+> variable dn.node_changed that does not get set when a call to
+> f2fs_get_node_page() fails.  This uninitialized value gets used in the
+> call to f2fs_balance_fs() that may or not may not balances dirty node
+> and dentry pages depending on the uninitialized state of the variable.
+> 
+> I believe the issue was introduced by commit:
+> 
+> commit 2a3407607028f7c780f1c20faa4e922bf631d340
+> Author: Jaegeuk Kim <jaegeuk@kernel.org>
+> Date:   Tue Dec 22 13:23:35 2015 -0800
+> 
+>     f2fs: call f2fs_balance_fs only when node was changed
+> 
+> 
+> The analysis is a follows:
+> 
+> 184 int f2fs_convert_inline_inode(struct inode *inode)
+> 185 {
+> 186        struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> 
+>    1. var_decl: Declaring variable dn without initializer.
+> 
+> 187        struct dnode_of_data dn;
+> 
+>    NOTE dn is not initialized here.
+> 
+> 188        struct page *ipage, *page;
+> 189        int err = 0;
+> 190
+> 
+>    2. Condition !f2fs_has_inline_data(inode), taking false branch.
+>    3. Condition f2fs_hw_is_readonly(sbi), taking false branch.
+>    4. Condition f2fs_readonly(sbi->sb), taking false branch.
+> 
+> 191        if (!f2fs_has_inline_data(inode) ||
+> 192                        f2fs_hw_is_readonly(sbi) ||
+> f2fs_readonly(sbi->sb))
+> 193                return 0;
+> 194
+> 195        err = dquot_initialize(inode);
+> 
+>    5. Condition err, taking false branch.
+> 
+> 196        if (err)
+> 197                return err;
+> 198
+> 199        page = f2fs_grab_cache_page(inode->i_mapping, 0, false);
+> 
+>    6. Condition !page, taking false branch.
+> 
+> 200        if (!page)
+> 201                return -ENOMEM;
+> 202
+> 203        f2fs_lock_op(sbi);
+> 204
+> 205        ipage = f2fs_get_node_page(sbi, inode->i_ino);
+> 
+>    7. Condition IS_ERR(ipage), taking true branch.
+> 
+> 206        if (IS_ERR(ipage)) {
+> 207                err = PTR_ERR(ipage);
+> 
+>    8. Jumping to label out.
+> 
+> 208                goto out;
+> 209        }
+> 210
+> 
+>    NOTE: set_new_dnode memset's dn so sets the flag to false, but we
+> don't get to this memset if IS_ERR(ipage) above is true.
+> 
+> 211        set_new_dnode(&dn, inode, ipage, ipage, 0);
+> 212
+> 213        if (f2fs_has_inline_data(inode))
+> 214                err = f2fs_convert_inline_page(&dn, page);
+> 215
+> 216        f2fs_put_dnode(&dn);
+> 217 out:
+> 218        f2fs_unlock_op(sbi);
+> 219
+> 220        f2fs_put_page(page, 1);
+> 221
+> 
+> Uninitialized scalar variable:
+> 
+>    9. uninit_use_in_call: Using uninitialized value dn.node_changed when
+> calling f2fs_balance_fs.
+> 
+> 222        f2fs_balance_fs(sbi, dn.node_changed);
+> 223
+> 224        return err;
+> 225 }
+> 
+> I think a suitable fix will be to set dn.node_changed to false on in
+> line 207-208 but I'm concerned if I'm missing something subtle to the
+> rebalancing if I do this.
+> 
+> Comments?
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- Documentation/ABI/testing/sysfs-fs-f2fs | 5 +++++
- fs/f2fs/sysfs.c                         | 9 +++++++++
- 2 files changed, 14 insertions(+)
+Thank you for the report. Yes, it seems that's a right call and we need to
+check the error to decide calling f2fs_balance_fs() in line 222, since
+set_new_dnode() is used to set all the fields in dnode_of_data. So, if you
+don't mind, could you please post a patch?
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 9fa5a528cc23..4aa8f38b52d7 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -409,3 +409,8 @@ Description:	Give a way to change checkpoint merge daemon's io priority.
- 		I/O priority "3". We can select the class between "rt" and "be",
- 		and set the I/O priority within valid range of it. "," delimiter
- 		is necessary in between I/O class and priority number.
-+
-+What:		/sys/fs/f2fs/<disk>/ovp_segments
-+Date:		March 2021
-+Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
-+Description:	Shows the number of overprovision segments.
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index e38a7f6921dd..0c391ab2d8b7 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -91,6 +91,13 @@ static ssize_t free_segments_show(struct f2fs_attr *a,
- 			(unsigned long long)(free_segments(sbi)));
- }
- 
-+static ssize_t ovp_segments_show(struct f2fs_attr *a,
-+		struct f2fs_sb_info *sbi, char *buf)
-+{
-+	return sprintf(buf, "%llu\n",
-+			(unsigned long long)(overprovision_segments(sbi)));
-+}
-+
- static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
- 		struct f2fs_sb_info *sbi, char *buf)
- {
-@@ -629,6 +636,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
- F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
- F2FS_GENERAL_RO_ATTR(dirty_segments);
- F2FS_GENERAL_RO_ATTR(free_segments);
-+F2FS_GENERAL_RO_ATTR(ovp_segments);
- F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
- F2FS_GENERAL_RO_ATTR(features);
- F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
-@@ -715,6 +723,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(ckpt_thread_ioprio),
- 	ATTR_LIST(dirty_segments),
- 	ATTR_LIST(free_segments),
-+	ATTR_LIST(ovp_segments),
- 	ATTR_LIST(unusable),
- 	ATTR_LIST(lifetime_write_kbytes),
- 	ATTR_LIST(features),
--- 
-2.31.0.rc0.254.gbdcc3b1a9d-goog
+Thanks,
 
+> 
+> Colin
+> 
 
 
 _______________________________________________
