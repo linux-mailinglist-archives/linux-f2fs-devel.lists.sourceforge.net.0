@@ -2,68 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DAA132AB16
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Mar 2021 21:10:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B5B332BA35
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Mar 2021 20:28:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lHBLR-00075m-J6; Tue, 02 Mar 2021 20:10:13 +0000
+	id 1lHXAk-0004ml-Ex; Wed, 03 Mar 2021 19:28:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lHBLQ-00075g-Ed
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 20:10:12 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lHXAj-0004ma-9w
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:28:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=N7uA40PVM9zWaaAU/yZPETyzLaS7LTxc9wF/be57ZVg=; b=FYfrRq3laZnwW1sw7mty2cU8Ng
- +/9VPbIWbHqkDp++4KVkalHXdvuqjbR7mI1Srv2MWlOTCqnzfETU684MWaIMu4pm+hJvwyqlDHAJ1
- zg3WWeMPruI9u8C8jQjea4mgu3sAycboKoCBFTsE5xuPE8j9v8lVEG9hb9dlFYrejuGM=;
+ bh=4p66JKbgaafykou5y4TLlXeDyf+4dJR6mJMc9OFCAsE=; b=DmIHeNTWghUSs9iqcXeXH8BS1z
+ 7Vtmqq/QIYMXRsJcDIVkbYdy1SXMcyOUtnNbu09cnB5iyH5oot+hj2QSGC2fuyk1Ig4to1mjiAwyZ
+ FMQ0yRurBtfWZHHugeMdxcRSgsViOn/kF/fBi8R5t+qbkxSuYfTEwGM3hR/eb5wNaPQM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=N7uA40PVM9zWaaAU/yZPETyzLaS7LTxc9wF/be57ZVg=; b=nMdKr9RPFEnyNImpZRIz4n2p3J
- Q5bVaglucbZZKB0V3iJLhrI6b/kj/ALVjxke2318D4lRDHpIvCNFVczpXlYxZq2RxucCrOdyVBuPg
- eV4E93AchRu7CrrGufuwWaFYN1TZX5IFjZg+71B0jKlASUn3laQd+5sChHtaoPtzAuvQ=;
+ bh=4p66JKbgaafykou5y4TLlXeDyf+4dJR6mJMc9OFCAsE=; b=Oqst7JsUPjJrwVIUdRSJHtn6Ls
+ mfjrGLRcc8XlaHnR+4jM4zrHrvTYXKnsUXcOX34dHxm+nqNPfiBoEQXo6nWxXrlg/h/Sitf88ehHq
+ KxohXy3GwmJ4G7ijeWDaBsrDgxOKfW/iCYhOKr7bftq+7b42QAESP6Po+zd1GDiVMQBA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lHBLJ-0005nT-BX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Mar 2021 20:10:12 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 998C564F25;
- Tue,  2 Mar 2021 20:09:59 +0000 (UTC)
+ id 1lHXAa-0003Zt-1H
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 19:28:37 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D73E264EF0;
+ Wed,  3 Mar 2021 19:28:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614715799;
- bh=IMcrxgy4pmTw3Hovh6U4Hmr08wWkOgVJt217xAmKh8Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gZ3pOYDJL32Wn2tUnLNVfnH+JBmp05+FEraOT4R/knoCxY7elpBpThss27KJjnz4q
- 1PtzKuB60Jq/FV+e4AW3ywg3xKYz3vcBAHN6rUV7NEoL1QNPBaewE/0OP4Paytruoc
- zXRNJqNfu/L2px7Cq2dtD2hCGkehFWqU/znNmBAaYBC0y1bIpC6BrvAfccpMvQga4y
- wSHafouruIh7z7ByTm3+V8waH/8XM2ETRY8UcGCUynmmj8JDQ7H7xPdwq/lL0iLVpw
- eMr4KzOSMtrsSZHm2YaHzY4ECNAB2VlBtYiajuX6l0KkBruHchghGGzZaSVa1EyFzX
- CfssgntjIWONw==
-Date: Tue, 2 Mar 2021 12:09:58 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Yunlei He <heyunlei@hihonor.com>
-Message-ID: <YD6bltna2vBFVlgV@sol.localdomain>
-References: <20210302113850.17011-1-heyunlei@hihonor.com>
+ s=k20201202; t=1614799696;
+ bh=8Ra0AMNh+KuCsZP9ZA7+W5cqVDNHMmMwTZByG6847LQ=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=aCdQ2lhI4R9ZSpnrwjYno/GIfUoYO1enl4eBCq7vBku02IvLiXfv9MSMJUQe5QYqP
+ YsWHU5/eYaz8oV6qFTAu5aXuS7pqp672gmBL+LLZYSl8p54wZ5Pm/TyzGmpDZhqtuf
+ yoGC1EXWp4h4MMrdlr0nfX8laVYhPAVOEjEt3r5XI7RfHslg2fhvOqHYn1Kf6g/1vA
+ 6l03ZXNEfiiFUWLiuTjZ7gGlAxA7/dM/hjyd1W34bLDWcWSn4O1RYT3QUHXH+J05D6
+ zL/mp4zek9wWs7DF5tYAMXsoClH/ULKW0G+WsA+M8pYjJ3tnTLZYXhSQfdlx++gBl/
+ hq9oYfSu/m9BA==
+Date: Wed, 3 Mar 2021 11:28:14 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Message-ID: <YD/jTtjVqDklvoof@google.com>
+References: <20210302054233.3886681-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210302113850.17011-1-heyunlei@hihonor.com>
+In-Reply-To: <20210302054233.3886681-1-jaegeuk@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: hihonor.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -72,9 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lHBLJ-0005nT-BX
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fsverity: modify truncation for verity
- enable failed
+X-Headers-End: 1lHXAa-0003Zt-1H
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: expose # of overprivision segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,62 +82,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Yunlei,
+This is useful when checking conditions during checkpoint=disable in Android.
 
-On Tue, Mar 02, 2021 at 07:38:50PM +0800, Yunlei He wrote:
-> If file enable verity failed, should truncate anything wrote
-> past i_size, including cache pages. Move the truncation to
-> the end of function, in case of f2fs set xattr failed.
-> 
-> Fixes: 95ae251fe828 ("f2fs: add fs-verity support")
-> Cc: <stable@vger.kernel.org> # v5.4+
-> Signed-off-by: Yunlei He <heyunlei@hihonor.com>
-> ---
->  fs/f2fs/verity.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-> index 054ec852b5ea..610f2a9b4928 100644
-> --- a/fs/f2fs/verity.c
-> +++ b/fs/f2fs/verity.c
-> @@ -169,10 +169,6 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
->  			err = filemap_write_and_wait(inode->i_mapping);
->  	}
->  
-> -	/* If we failed, truncate anything we wrote past i_size. */
-> -	if (desc == NULL || err)
-> -		f2fs_truncate(inode);
-> -
->  	clear_inode_flag(inode, FI_VERITY_IN_PROGRESS);
->  
->  	if (desc != NULL && !err) {
-> @@ -185,6 +181,13 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
->  			f2fs_mark_inode_dirty_sync(inode, true);
->  		}
->  	}
-> +
-> +	/* If we failed, truncate anything we wrote past i_size. */
-> +	if (desc == NULL || err) {
-> +		truncate_inode_pages(inode->i_mapping, inode->i_size);
-> +		f2fs_truncate(inode);
-> +	}
-> +
->  	return err;
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 5 +++++
+ fs/f2fs/sysfs.c                         | 9 +++++++++
+ 2 files changed, 14 insertions(+)
 
-This is better, but we really should properly separate the success path from the
-error paths in this function; otherwise it's too hard to understand.  Also, the
-same bugs need to be fixed in ext4 too, and the commit message could be better.
-I went ahead and sent out a new patchset which addresses all this
-(https://lkml.kernel.org/linux-f2fs-devel/20210302200420.137977-1-ebiggers@kernel.org/T/#u);
-can you take a look at that instead?  Thanks!
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 9fa5a528cc23..4aa8f38b52d7 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -409,3 +409,8 @@ Description:	Give a way to change checkpoint merge daemon's io priority.
+ 		I/O priority "3". We can select the class between "rt" and "be",
+ 		and set the I/O priority within valid range of it. "," delimiter
+ 		is necessary in between I/O class and priority number.
++
++What:		/sys/fs/f2fs/<disk>/ovp_segments
++Date:		March 2021
++Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
++Description:	Shows the number of overprovision segments.
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index e38a7f6921dd..0c391ab2d8b7 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -91,6 +91,13 @@ static ssize_t free_segments_show(struct f2fs_attr *a,
+ 			(unsigned long long)(free_segments(sbi)));
+ }
+ 
++static ssize_t ovp_segments_show(struct f2fs_attr *a,
++		struct f2fs_sb_info *sbi, char *buf)
++{
++	return sprintf(buf, "%llu\n",
++			(unsigned long long)(overprovision_segments(sbi)));
++}
++
+ static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -629,6 +636,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
+ F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
+ F2FS_GENERAL_RO_ATTR(dirty_segments);
+ F2FS_GENERAL_RO_ATTR(free_segments);
++F2FS_GENERAL_RO_ATTR(ovp_segments);
+ F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+ F2FS_GENERAL_RO_ATTR(features);
+ F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+@@ -715,6 +723,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(ckpt_thread_ioprio),
+ 	ATTR_LIST(dirty_segments),
+ 	ATTR_LIST(free_segments),
++	ATTR_LIST(ovp_segments),
+ 	ATTR_LIST(unusable),
+ 	ATTR_LIST(lifetime_write_kbytes),
+ 	ATTR_LIST(features),
+-- 
+2.31.0.rc0.254.gbdcc3b1a9d-goog
 
-- Eric
 
 
 _______________________________________________
