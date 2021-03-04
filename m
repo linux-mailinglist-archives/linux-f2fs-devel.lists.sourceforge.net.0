@@ -2,77 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 425CA32BF3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Mar 2021 00:46:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EA6E32CDF5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Mar 2021 08:56:00 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lHbCg-0005yF-NW; Wed, 03 Mar 2021 23:46:54 +0000
+	id 1lHips-0002EJ-KF; Thu, 04 Mar 2021 07:55:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lHbCf-0005y5-Q8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 23:46:53 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lHipq-0002EC-Ug
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Mar 2021 07:55:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PvxmhFphVZJe1yFssTjXJe/q8jb/xck1opjNIFc0hqI=; b=NnLrxHDy0K7MuVvFd52boEvIy3
- NHw4lS8ooTjpRuEfrcsRwhM0j7LxLUfVSv89n/tsDWtYGpWOEsXzuH5aWERQNm1Q6zVGugmBvikDp
- q51ifIsfQO223o1S4XVeHIQs9WNgNJD784hpUoHUFVeQooo5WNMtFFehWoalwu8BLxWg=;
+ bh=cFLH+Wgv+YZZCSjdluNi6VpNrkHn6VlfnRqEfMZ7cHQ=; b=Uc6iEG4LPQNNf7L2tJOVjiU/vu
+ oqUyPoX6vFvx8SIGDkFPwW8NUmvbD73ZtzMKikCO/swhQpI4o1ovz4MMDQVPsEKfRJrab0YGzTsad
+ vnQ2CLTTOqrYQ9eYbcBgNfiJbEImZN2BL+fFN6rx+EV3+hv5WyRlIxOS6SngndsI4XlE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PvxmhFphVZJe1yFssTjXJe/q8jb/xck1opjNIFc0hqI=; b=W3tKpXbM4tP1wffO7ilD+VV9rM
- IKkhpryUS7hu2tGcHLDK/TXUj/SyTHCDfuU9hNfKQHimILZONVZfe2zSqEA1mSK9cD5ZCnegRnUGZ
- yA6PNJgiPbbHGKJerGsSOs7xB6enM1hX7wUpeSOD0BbuIRDVIWxynskQjgnX5/ltTldw=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=cFLH+Wgv+YZZCSjdluNi6VpNrkHn6VlfnRqEfMZ7cHQ=; b=ND2CYbim86EdZUtVqUgZ9VSDKY
+ QnIrL3FDAd4mE65EBSFqOqOV6xA8oY5OgkQF07Z/86cucPss753krNfks7bWIUBAQrvinLONLadc5
+ s/K3tAPyXq6UcN56ZU2pxWSy+RyGT33/fHv/A8fEA6qLr6cUz4VV4WAswfrw6gKrYjzU=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lHbCW-00D5wi-AE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Mar 2021 23:46:53 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id BA4CE64F38;
- Wed,  3 Mar 2021 23:46:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614815198;
- bh=XPBSnqYNbLadROWp2s8xZFTZNulMYA/qPBxSSGN7gSs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=pxm5tEXe0Fq4/Ij/3nBx2ovq3fMIvcfFCV+P8r7Yf7xAk3VUkQHyrmZdV/O0TTpNN
- ePPPBxO/bUJCJTf6d+l0ZzadZ65kyX0U70OLJu8hM2Cdp9I9/TDIlQszbfiVIY+Fnr
- FerxXaI9njjVouYYyRThD3bvMb0RTs1yPzlP/8FvMyfrSRLVhkmhKGjFCF77eabvdk
- mNkA51gzIVmreMv2ggWDHcgrc4ziNeaVYyevZfsz77T8vLq+rYAxY0J1kKjtrjGYrk
- RvEvedhvOqar4BtDvJhs5+pKEmyXhmHEt/VwU1h5crLvzlNXAXOlY+hfkBMD56next
- pgH+XhDYlEUlw==
-Date: Wed, 3 Mar 2021 15:46:37 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Colin Ian King <colin.king@canonical.com>
-Message-ID: <YEAf3W6BEUc7L3FL@google.com>
-References: <9fcca081-9a60-8ae3-5cac-d8aa38c38ff2@canonical.com>
- <YD/nFt6Gswnyogfa@google.com>
- <9b586bbb-bb94-6fdf-c9a4-9415dbc6d8d0@canonical.com>
+ id 1lHipl-00DUfL-Bl
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Mar 2021 07:55:50 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Drjmb4h3lz16GGG;
+ Thu,  4 Mar 2021 15:53:51 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.498.0; Thu, 4 Mar 2021
+ 15:55:29 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210302054233.3886681-1-jaegeuk@kernel.org>
+ <920469a9-45d3-68e3-1f8d-a436bdd60cfe@huawei.com>
+ <YD5wQRX+HnltBvEM@google.com> <YD6HjZG7QMS6Z3Tb@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <05b43d3e-d735-ae34-5a4f-3d81a4fc8a9b@huawei.com>
+Date: Thu, 4 Mar 2021 15:55:28 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <9b586bbb-bb94-6fdf-c9a4-9415dbc6d8d0@canonical.com>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <YD6HjZG7QMS6Z3Tb@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lHbCW-00D5wi-AE
-Subject: Re: [f2fs-dev] f2fs_convert_inline_inode causing rebalance based on
- random uninitialized value in dn.node_changed
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lHipl-00DUfL-Bl
+Subject: Re: [f2fs-dev] [PATCH] f2fs: expose # of overprivision segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,144 +79,94 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Changman Lee <cm224.lee@samsung.com>, Chao Yu <chao2.yu@samsung.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/03, Colin Ian King wrote:
-> On 03/03/2021 19:44, Jaegeuk Kim wrote:
-> > On 03/02, Colin Ian King wrote:
-> >> Hi,
-> >>
-> >> Static analysis on linux-next detected a potential uninitialized
-> >> variable dn.node_changed that does not get set when a call to
-> >> f2fs_get_node_page() fails.  This uninitialized value gets used in the
-> >> call to f2fs_balance_fs() that may or not may not balances dirty node
-> >> and dentry pages depending on the uninitialized state of the variable.
-> >>
-> >> I believe the issue was introduced by commit:
-> >>
-> >> commit 2a3407607028f7c780f1c20faa4e922bf631d340
-> >> Author: Jaegeuk Kim <jaegeuk@kernel.org>
-> >> Date:   Tue Dec 22 13:23:35 2015 -0800
-> >>
-> >>     f2fs: call f2fs_balance_fs only when node was changed
-> >>
-> >>
-> >> The analysis is a follows:
-> >>
-> >> 184 int f2fs_convert_inline_inode(struct inode *inode)
-> >> 185 {
-> >> 186        struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> >>
-> >>    1. var_decl: Declaring variable dn without initializer.
-> >>
-> >> 187        struct dnode_of_data dn;
-> >>
-> >>    NOTE dn is not initialized here.
-> >>
-> >> 188        struct page *ipage, *page;
-> >> 189        int err = 0;
-> >> 190
-> >>
-> >>    2. Condition !f2fs_has_inline_data(inode), taking false branch.
-> >>    3. Condition f2fs_hw_is_readonly(sbi), taking false branch.
-> >>    4. Condition f2fs_readonly(sbi->sb), taking false branch.
-> >>
-> >> 191        if (!f2fs_has_inline_data(inode) ||
-> >> 192                        f2fs_hw_is_readonly(sbi) ||
-> >> f2fs_readonly(sbi->sb))
-> >> 193                return 0;
-> >> 194
-> >> 195        err = dquot_initialize(inode);
-> >>
-> >>    5. Condition err, taking false branch.
-> >>
-> >> 196        if (err)
-> >> 197                return err;
-> >> 198
-> >> 199        page = f2fs_grab_cache_page(inode->i_mapping, 0, false);
-> >>
-> >>    6. Condition !page, taking false branch.
-> >>
-> >> 200        if (!page)
-> >> 201                return -ENOMEM;
-> >> 202
-> >> 203        f2fs_lock_op(sbi);
-> >> 204
-> >> 205        ipage = f2fs_get_node_page(sbi, inode->i_ino);
-> >>
-> >>    7. Condition IS_ERR(ipage), taking true branch.
-> >>
-> >> 206        if (IS_ERR(ipage)) {
-> >> 207                err = PTR_ERR(ipage);
-> >>
-> >>    8. Jumping to label out.
-> >>
-> >> 208                goto out;
-> >> 209        }
-> >> 210
-> >>
-> >>    NOTE: set_new_dnode memset's dn so sets the flag to false, but we
-> >> don't get to this memset if IS_ERR(ipage) above is true.
-> >>
-> >> 211        set_new_dnode(&dn, inode, ipage, ipage, 0);
-> >> 212
-> >> 213        if (f2fs_has_inline_data(inode))
-> >> 214                err = f2fs_convert_inline_page(&dn, page);
-> >> 215
-> >> 216        f2fs_put_dnode(&dn);
-> >> 217 out:
-> >> 218        f2fs_unlock_op(sbi);
-> >> 219
-> >> 220        f2fs_put_page(page, 1);
-> >> 221
-> >>
-> >> Uninitialized scalar variable:
-> >>
-> >>    9. uninit_use_in_call: Using uninitialized value dn.node_changed when
-> >> calling f2fs_balance_fs.
-> >>
-> >> 222        f2fs_balance_fs(sbi, dn.node_changed);
-> >> 223
-> >> 224        return err;
-> >> 225 }
-> >>
-> >> I think a suitable fix will be to set dn.node_changed to false on in
-> >> line 207-208 but I'm concerned if I'm missing something subtle to the
-> >> rebalancing if I do this.
-> >>
-> >> Comments?
-> > 
-> > Thank you for the report. Yes, it seems that's a right call and we need to
-> > check the error to decide calling f2fs_balance_fs() in line 222, since
-> > set_new_dnode() is used to set all the fields in dnode_of_data. So, if you
-> > don't mind, could you please post a patch?
-> 
-> Just to clarify, just setting dn.node_changes to false is enough?
-> 
-> I'm not entirely sure what you meant when you wrote "and we need to
-> check the error to decide calling f2fs_balance_fs() in line 222".
+On 2021/3/3 2:44, Jaegeuk Kim wrote:
+> On 03/02, Jaegeuk Kim wrote:
+>> On 03/02, Chao Yu wrote:
+>>> On 2021/3/2 13:42, Jaegeuk Kim wrote:
+>>>> This is useful when checking conditions during checkpoint=disable in Android.
+>>>
+>>> This sysfs entry is readonly, how about putting this at
+>>> /sys/fs/f2fs/<disk>/stat/?
+>>
+>> Urg.. "stat" is a bit confused. I'll take a look a better ones.
 
-I meant:
+Oh, I mean put it into "stat" directory, not "stat" entry, something like this:
 
-222	if (!err)
-223		f2fs_balance_fs(sbi, dn.node_changed);
+/sys/fs/f2fs/<disk>/stat/ovp_segments
+
+> 
+> Taking a look at other entries using in Android, I feel that this one can't be
+> in stat or whatever other location, since I worry about the consistency with
+> similar dirty/free segments. It seems it's not easy to clean up the existing
+> ones anymore.
+
+Well, actually, the entry number are still increasing continuously, the result is
+that it becomes more and more slower and harder for me to find target entry name
+from that directory.
+
+IMO, once new readonly entry was added to "<disk>" directory, there is no chance
+to reloacate it due to interface compatibility. So I think this is the only
+chance to put it to the appropriate place at this time.
 
 Thanks,
 
 > 
-> Colin
+>>
+>>>
+>>>>
+>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>> ---
+>>>>    fs/f2fs/sysfs.c | 8 ++++++++
+>>>>    1 file changed, 8 insertions(+)
+>>>>
+>>>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+>>>> index e38a7f6921dd..254b6fa17406 100644
+>>>> --- a/fs/f2fs/sysfs.c
+>>>> +++ b/fs/f2fs/sysfs.c
+>>>> @@ -91,6 +91,13 @@ static ssize_t free_segments_show(struct f2fs_attr *a,
+>>>>    			(unsigned long long)(free_segments(sbi)));
+>>>>    }
+>>>> +static ssize_t ovp_segments_show(struct f2fs_attr *a,
+>>>> +		struct f2fs_sb_info *sbi, char *buf)
+>>>> +{
+>>>> +	return sprintf(buf, "%llu\n",
+>>>> +			(unsigned long long)(overprovision_segments(sbi)));
+>>>> +}
+>>>> +
+>>>>    static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
+>>>>    		struct f2fs_sb_info *sbi, char *buf)
+>>>>    {
+>>>> @@ -629,6 +636,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
+>>>>    F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
+>>>>    F2FS_GENERAL_RO_ATTR(dirty_segments);
+>>>>    F2FS_GENERAL_RO_ATTR(free_segments);
+>>>> +F2FS_GENERAL_RO_ATTR(ovp_segments);
+>>>
+>>> Missed to add document entry in Documentation/ABI/testing/sysfs-fs-f2fs?
+>>
+>> Yeah, thanks.
+>>
+>>>
+>>> Thanks,
+>>>
+>>>>    F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+>>>>    F2FS_GENERAL_RO_ATTR(features);
+>>>>    F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+>>>>
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
 > 
-> > 
-> > Thanks,
-> > 
-> >>
-> >> Colin
-> >>
 
 
 _______________________________________________
