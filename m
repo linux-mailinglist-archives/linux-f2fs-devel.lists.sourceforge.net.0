@@ -2,73 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4C4E32DFE8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Mar 2021 04:08:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0425632E0E4
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Mar 2021 05:53:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lI0om-0007g6-V3; Fri, 05 Mar 2021 03:07:56 +0000
+	id 1lI2Sa-00016a-PI; Fri, 05 Mar 2021 04:53:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lI0ol-0007fy-1i
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Mar 2021 03:07:55 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lI2SY-00016S-HF
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Mar 2021 04:53:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9IoSglGPl4uxKXg6bqFLKo2ojkeT4YAb8eVB2BWHtuU=; b=grXlLu1Aw8eflE72lvKsTnvYtu
- GfvOHAXCUGHO6qBOCxV5Ytz2ZLjvSV1OXET8ZkFjyLdKrY5DFrDG3NCLUCjyhSYwhtxdvXRsCC43/
- peKrItk2W+RxZwk7i4X91pFyAa0RoR1UFhkBn9Rm9ddjyG2Sy8pLkxOFvK2Cay8XsL4c=;
+ bh=4n8qMtKnFvmXMuQGUev513J8KI8VnSUXq/UAs1qjeBw=; b=VQFcrE0q/Pkq8oulKZyXJgcWXi
+ y7dsOstXjwGIVAxjTEkv3LpbM/uTW+hZ/b3LGy86DRuJencCY9pWaBNkQq2f63uUDGX/g2EOcXTMO
+ rcpRcoCWTv0kyHcHZFJ4wE8eu6wPCICY1lKNwmModE41/yMmEirpiTFbCVjVBimjf6lA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9IoSglGPl4uxKXg6bqFLKo2ojkeT4YAb8eVB2BWHtuU=; b=D+wPO+VA6K5LxhGkKVamD9nuon
- MET8BR3vuk6riYz/Ni2hWznLAIaD6b1iQ2hdDel+ylde2yTH03lhq4hLeAV58ICURpk4Qy2zJS/WV
- 2MuSwUuhwAyMZhWlY+3E2WzU80vsKvrhJ1vS9xqMO9akyiQQe/cR57PLfVSJTpqDVrB8=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lI0oa-00EY72-AT
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Mar 2021 03:07:54 +0000
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DsCKJ1x5yzlT2D;
- Fri,  5 Mar 2021 11:05:24 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.214) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 5 Mar 2021
- 11:07:31 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210202080056.51658-1-yuchao0@huawei.com>
- <46e9924c-0086-cd2a-2e93-7149b92ba27e@huawei.com>
- <YDsleDjeIcpuBXKA@google.com> <YEFBAuP26t0RzVHZ@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <01a0ff76-6fa7-3196-8760-e7f6f163ef64@huawei.com>
-Date: Fri, 5 Mar 2021 11:07:31 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=4n8qMtKnFvmXMuQGUev513J8KI8VnSUXq/UAs1qjeBw=; b=LNzUGMbcAhpt+WMTbWJrA3d+a0
+ w1nqvorWhsI208AFw/ezDoneXWvEH96X104lx2/PGrFWnSDEgDZHx0hBMpeRjj+8NRunW8yyExT8v
+ cQ5Mc4sgNTIrpkO0+Pz85+c6uB40ST775yokrnjuVtObHUxqkN5VD6SOigBmy9BbsN/U=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lI2SO-0006Tp-PV
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 05 Mar 2021 04:53:05 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9660664EF6;
+ Fri,  5 Mar 2021 04:52:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1614919964;
+ bh=zxC/9kcMnACFzH9ITkD6VZhydnGwzCTG1L8sFScG1+g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=NR5s6qZojEz91xa3HAt28QIC7ilr7VJvXJx9/mWCWO4FRBMVzUe4NKKfVaL0yCeJv
+ H7+NaaXIyT2Ms980B/Wzm9QqtpLbdZhnzjfpfJqulai7y3eFrMwSAWCi03EsxMfvmD
+ 7Eas8GztpTBLgG+3KDOYLUDGBxegYRxxhklIrXKonWAlJ+YSU8/yridJ9IpZM+S524
+ czMoWgLwnydRSUwX9c4wiaoNK47w3LU/KCrBswOx+z1aOD23pxzETX35iUvbWdGWeQ
+ rZLHl355CVJweaeNblh+oh1YmOxqtkg4tL62hNaQ2LGCs5SlhEYrtIOt3/y76c9wT0
+ hJhrJJ89om/SA==
+Date: Thu, 4 Mar 2021 20:52:43 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YEG5G5d2YisF8zB0@sol.localdomain>
+References: <20210302200420.137977-1-ebiggers@kernel.org>
+ <20210302200420.137977-3-ebiggers@kernel.org>
+ <9980e263-aa25-cf50-5a94-9f63a5ae667e@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <YEFBAuP26t0RzVHZ@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <9980e263-aa25-cf50-5a94-9f63a5ae667e@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lI0oa-00EY72-AT
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress: add compress_inode to
- cache compressed blockst
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lI2SO-0006Tp-PV
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: fix error handling in
+ f2fs_end_enable_verity()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,61 +84,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/5 4:20, Jaegeuk Kim wrote:
-> On 02/27, Jaegeuk Kim wrote:
->> On 02/04, Chao Yu wrote:
->>> Jaegeuk,
->>>
->>> On 2021/2/2 16:00, Chao Yu wrote:
->>>> -	for (i = 0; i < dic->nr_cpages; i++) {
->>>> +	for (i = 0; i < cc->nr_cpages; i++) {
->>>>    		struct page *page = dic->cpages[i];
->>>
->>> por_fsstress still hang in this line?
->>
->> I'm stuck on testing the patches, since the latest kernel is panicking somehow.
->> Let me update later, once I can test a bit. :(
+On Fri, Mar 05, 2021 at 09:37:26AM +0800, Chao Yu wrote:
+> > +cleanup:
+> > +	/*
+> > +	 * Verity failed to be enabled, so clean up by truncating any verity
+> > +	 * metadata that was written beyond i_size (both from cache and from
+> > +	 * disk) and clearing FI_VERITY_IN_PROGRESS.
+> > +	 */
+> > +	truncate_inode_pages(inode->i_mapping, inode->i_size);
+> > +	f2fs_truncate(inode);
 > 
-> It seems this works without error.
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=4e6e1364dccba80ed44925870b97fbcf989b96c9
-
-Ah, good news.
-
-Thanks for helping to test the patch. :)
-
-Thanks,
-
+> Eric,
 > 
->>
->>>
->>> Thanks,
->>>
->>>>    		block_t blkaddr;
->>>>    		struct bio_post_read_ctx *ctx;
->>>> @@ -2201,6 +2207,14 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->>>>    		blkaddr = data_blkaddr(dn.inode, dn.node_page,
->>>>    						dn.ofs_in_node + i + 1);
->>>> +		f2fs_wait_on_block_writeback(inode, blkaddr);
->>>> +
->>>> +		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
->>>> +			if (atomic_dec_and_test(&dic->remaining_pages))
->>>> +				f2fs_decompress_cluster(dic);
->>>> +			continue;
->>>> +		}
->>>> +
->>
->>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
+> Truncation can fail due to a lot of reasons, if we fail in f2fs_truncate(),
+> do we need to at least print a message here? or it allows to keep those
+> meta/data silently.
+
+I suppose we might as well, although hopefully there will already be a message
+for the underlying failure reason too.  Also, f2fs_file_write_iter() has the
+same issue too, right?
+
+> One other concern is that how do you think of covering truncate_inode_pages &
+> f2fs_truncate with F2FS_I(inode)->i_gc_rwsem[WRITE] lock to avoid racing with
+> GC, so that page cache won't be revalidated after truncate_inode_pages().
+
+Yes, that does seem to be needed, due to the way the f2fs garbage collection
+works.
+
+- Eric
 
 
 _______________________________________________
