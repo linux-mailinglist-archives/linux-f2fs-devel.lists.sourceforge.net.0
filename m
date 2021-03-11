@@ -2,76 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8308E3371AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Mar 2021 12:50:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A5513377F1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Mar 2021 16:37:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lKJpT-0003Os-7H; Thu, 11 Mar 2021 11:50:11 +0000
+	id 1lKNNP-0005Wp-Q5; Thu, 11 Mar 2021 15:37:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lKJpL-0003M7-HE
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Mar 2021 11:50:03 +0000
+ (envelope-from <tytso@mit.edu>) id 1lKNNP-0005Wg-8Y
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Mar 2021 15:37:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EH7MDDX3ob4TQtoFvMWi+0W+D+sHPRtcD/E5z1YEHGk=; b=LNKDJ5jVMV97DLV+3vJIZ6VPGc
- lz5c81MeL64nvK8NiHDLNF/PHDCW6I1PYQ0pjkgImeaC4ii4+8sUn1H6L98izmEg59PcJkgo0khUF
- NApLY+JSSfY5YDykbLaWgi1sKkzRp7NQi2qn6g4EQ5/vJkxWHX+BpXmYSYIYyCk+/RWU=;
+ bh=HS/BGitTAvlUzGrLL1sVuRllUskFBQ+EpoD0+gVpU78=; b=MHAhfzsFMDZ7KKC2+cB+ihkOqu
+ H+etSshuR+RbN2I1+qHIVLSOlbUkyNJDOQmo/KAcqcUQDqRNSz0RprXqGClYA9daX9SrDJJYQHiwz
+ txaowzarJsPqo3AFWUVEalLyW3SqPD31fFKlacxuQnTNvAJWFvlPTHajRKRFD2PogkZw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EH7MDDX3ob4TQtoFvMWi+0W+D+sHPRtcD/E5z1YEHGk=; b=K3GrVwe4IQK6Mb7//5ObaUfJAh
- gqRVPECRBwIfLLOffHlY/I2OQ6WXqk+d2eHhXBWoJxdYzhScPleV179+QtT4GrveT7Owlvm7s6SGe
- 0+9Rcg56LE7iy75Xk6GV6s0049WEyjPD35LJ1RaWNefFKv8l9+HSHmJg0Iqi50C00vrA=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lKJpE-0008VW-4V
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Mar 2021 11:50:03 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Dx6cg50HWzmVyX;
- Thu, 11 Mar 2021 19:47:15 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.202) with Microsoft SMTP Server (TLS) id 14.3.498.0; Thu, 11 Mar
- 2021 19:49:30 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>, Jaegeuk Kim
- <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <1615453148-30443-1-git-send-email-stummala@codeaurora.org>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <7d31f95b-d99f-b56a-8129-f65910f14cdf@huawei.com>
-Date: Thu, 11 Mar 2021 19:49:30 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=HS/BGitTAvlUzGrLL1sVuRllUskFBQ+EpoD0+gVpU78=; b=MYnOuF/NW0H5BY39O3J76S2LOw
+ FCWYQGguJt5X6vHf+/Zw+wZwyd8hFNvbuhZJgtaahZoY+C+6htLkuORDJ65s/ImpHzoMVWfPM+IqZ
+ EdOhd2eSmKA3QGHlinbTuJVPKmzo46Vebg1k4fRZCnVdJlS68wzFzNavfhGsA4jGEXU8=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lKNNK-00H4DN-Eh
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 11 Mar 2021 15:37:27 +0000
+Received: from cwcc.thunk.org (pool-72-74-133-215.bstnma.fios.verizon.net
+ [72.74.133.215]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 12BFaNsx028530
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 11 Mar 2021 10:36:24 -0500
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id D0C9815C3AA0; Thu, 11 Mar 2021 10:36:23 -0500 (EST)
+Date: Thu, 11 Mar 2021 10:36:23 -0500
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <YEo4958DZYm/21b+@mit.edu>
+References: <20210302200420.137977-1-ebiggers@kernel.org>
+ <20210302200420.137977-2-ebiggers@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <1615453148-30443-1-git-send-email-stummala@codeaurora.org>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
+Content-Disposition: inline
+In-Reply-To: <20210302200420.137977-2-ebiggers@kernel.org>
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ for more information. [URIs: hihonor.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [18.9.28.11 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lKJpE-0008VW-4V
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: allow to change discard policy
- based on cached discard cmds
+X-Headers-End: 1lKNNK-00H4DN-Eh
+Subject: Re: [f2fs-dev] [PATCH 1/2] ext4: fix error handling in
+ ext4_end_enable_verity()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,29 +80,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/11 16:59, Sahitya Tummala wrote:
-> With the default DPOLICY_BG discard thread is ioaware, which prevents
-> the discard thread from issuing the discard commands. On low RAM setups,
-> it is observed that these discard commands in the cache are consuming
-> high memory. This patch aims to relax the memory pressure on the system
-> due to f2fs pending discard cmds by changing the policy to DPOLICY_FORCE
-> based on the nm_i->ram_thresh configured.
+On Tue, Mar 02, 2021 at 12:04:19PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
-> ---
-> v2:
-> - by mistake the last else condition was modified, fix it now.
+> ext4 didn't properly clean up if verity failed to be enabled on a file:
+> 
+> - It left verity metadata (pages past EOF) in the page cache, which
+>   would be exposed to userspace if the file was later extended.
+> 
+> - It didn't truncate the verity metadata at all (either from cache or
+>   from disk) if an error occurred while setting the verity bit.
+> 
+> Fix these bugs by adding a call to truncate_inode_pages() and ensuring
+> that we truncate the verity metadata (both from cache and from disk) in
+> all error paths.  Also rework the code to cleanly separate the success
+> path from the error paths, which makes it much easier to understand.
+> 
+> Reported-by: Yunlei He <heyunlei@hihonor.com>
+> Fixes: c93d8f885809 ("ext4: add basic fs-verity support")
+> Cc: <stable@vger.kernel.org> # v5.4+
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-Oh, yes,
+Thanks, LGTM.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+I've applied this to the ext4 with minor adjustment; I eliminated the
+double blank line here:
 
-Thanks,
+> +	ext4_clear_inode_state(inode, EXT4_STATE_VERITY_IN_PROGRESS);
+> +	return 0;
+> +
+> +
+> +stop_and_cleanup:
+> +	ext4_journal_stop(handle);
+     ...
+
+						- Ted
 
 
 _______________________________________________
