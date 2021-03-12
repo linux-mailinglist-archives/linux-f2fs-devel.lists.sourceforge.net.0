@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 340DE33903A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Mar 2021 15:46:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B01833904E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Mar 2021 15:49:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lKj3M-0001JS-Lv; Fri, 12 Mar 2021 14:46:12 +0000
+	id 1lKj6e-0002RL-I4; Fri, 12 Mar 2021 14:49:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <gregkh@linuxfoundation.org>) id 1lKj3L-0001JF-Je
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:46:11 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1lKj6d-0002RD-4u
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:49:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mr1FjbtOo2oaErNudiDkdyq/FC3uXpVrOtNOsRZRzZU=; b=XGA9KioGFVcXX5jeh9HSRVvN0s
- +lCUKRUAzDe8l5bmkbQJF+sAv0kPYYEdYKVBhYEt16Fenmxrj1azATTrjyKqQtqYPeAG53KX6G6Pc
- 1Qeb274JSKqlLvh2PDuV2XvTxykkCLajdzVrNZ2XBOZeQlDHYt9HRMClA62y/ANaCab8=;
+ bh=LM5Fkq27zD/23Wlnsz4rK5ag2A/SI3en23Eg+bzZ2Gg=; b=FmkY74lzDgDzChwB1/zy90Ohfj
+ iSZA4zGD+gcp4Ag6alJwbc7XLA9qcF7SOTYAQXDOeJC/ULT1bciLj12x6a9Wapfbe/7GXeTpTlKnV
+ bj//c42TwzZgocV+KiLUVBxgeJUhYt+Z+WF+US7PZoTZ52CaPXawabXueEpMymJ2sjvc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,45 +29,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Mr1FjbtOo2oaErNudiDkdyq/FC3uXpVrOtNOsRZRzZU=; b=fYq1S80G3nxHTBepXwVYVEa0py
- Lss/xD6vo05jt9pD10SyLmjKz1nAFbAwZtfJ3yq8rh/We6mPCyxfUra9FCt1mvsPzLtJIgvlm9Bcs
- hUIZ5ckRnosncT/YQ8UJIN9cLv73Bd9wHmm436kFuLpqDqx8+fl6L17A66Ied7WAKTmM=;
+ bh=LM5Fkq27zD/23Wlnsz4rK5ag2A/SI3en23Eg+bzZ2Gg=; b=bZI6NcKxiQcs6twxtEfHyPQavb
+ mYVs4F5a3n4N7l4l8Anux4cQb0RSiwBYLpq1nkyvicT2Gfts2VFpHH+rVPWd9Q81nrOkD+P2CdY4t
+ aJC8dhkmFOCMK/ZyqX1PGXvGVDgbcVTNWvK+ddUjk/5g9rT1uGQ1Kq8zAcW4ZnT54Xos=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lKj36-005syX-7W
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:46:11 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4536A64FD6;
- Fri, 12 Mar 2021 14:45:50 +0000 (UTC)
+ id 1lKj6T-005tFj-Uo
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:49:35 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 081A864FB3;
+ Fri, 12 Mar 2021 14:49:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1615560350;
- bh=5OcUS67DMAnxCxpF2YhrDjA4ZH7gotBBF3aF5cp7VAo=;
+ s=korg; t=1615560560;
+ bh=cT289FKV3xsUZY63Dur1xgCbw90X01pELCM4fumbr9g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OGrTW2c5kQMZqDLHOuPubJDXsH5iNNl9G1C8bABPxHyPcm06lamlCYPxjL/7xokSu
- 6xqdQEaz0tP0k8l4U3D3jCYKk3PxisKyYJ9L5pw2AdXmglGrmAxermQHLMydovsQSS
- IA2wUtJS7RrAgy28DpmknVJbOyZw2fAvOZcmmZbs=
-Date: Fri, 12 Mar 2021 15:45:48 +0100
+ b=tyaTRgv+DMJOZFnymtjHoYQMgk2pX6AO8NSQY0vdION0nZOr8cyRC749jvLp05w0x
+ xTABbuDrQBLOgyhsEyu9iKwvDd7D0V+lqMELqd245tPlB7Pp71BOpFp40B3DBHK1Mh
+ fd6EI/z2R348qL8yYtJz51CSlLXj5OVIL8crAgkE=
+Date: Fri, 12 Mar 2021 15:49:18 +0100
 From: Greg KH <gregkh@linuxfoundation.org>
 To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <YEt+nAEOd+YUdln8@kroah.com>
+Message-ID: <YEt/bvY5JEnNIYsR@kroah.com>
 References: <20210312122531.2717093-1-daeho43@gmail.com>
  <YEtg8U7whCVV2tQt@kroah.com>
  <CACOAw_zhZ0OgT-KCBmD_H6_U=CZCNY44D-ojH2AZah2cbAvdAQ@mail.gmail.com>
  <YEt00vJ6oVfoRjSJ@kroah.com>
  <CACOAw_yjyy+58B=RawAaQO98NQB43roZOv4sq5313sFHN1myXQ@mail.gmail.com>
+ <CACOAw_wipL_SHyKp+56SOx99LnBZsrWq2eRmLm7Bz16jEYM8zg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACOAw_yjyy+58B=RawAaQO98NQB43roZOv4sq5313sFHN1myXQ@mail.gmail.com>
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <CACOAw_wipL_SHyKp+56SOx99LnBZsrWq2eRmLm7Bz16jEYM8zg@mail.gmail.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: daringfireball.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1lKj36-005syX-7W
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lKj6T-005tFj-Uo
 Subject: Re: [f2fs-dev] [PATCH v4] f2fs: add sysfs nodes to get runtime
  compression stat
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -87,61 +90,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-A: http://en.wikipedia.org/wiki/Top_post
-Q: Were do I find info about this thing called top-posting?
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
+On Fri, Mar 12, 2021 at 11:42:04PM +0900, Daeho Jeong wrote:
+> So, do you want we protect the values here with spin_lock and just
+> read without spin_lock in sysfs read part?
 
-A: No.
-Q: Should I include quotations after my reply?
-
-http://daringfireball.net/2007/07/on_top
-
-
-On Fri, Mar 12, 2021 at 11:37:29PM +0900, Daeho Jeong wrote:
-> As you can see, if we're doing like the below.
-> 
-> sbi->compr_written_block += blocks;
-> 
-> Let's assume the initial value as 0.
-> 
-> <thread A>                                             <thread B>
-> sbi->compr_written_block = 0;
-> 
-> sbi->compr_written_block = 0;
-> +blocks(3);
->                                                                + blocks(2);
-> sbi->compr_written_block = 3;
-> 
-> sbi->compr_written_block = 2;
-> 
-> Finally, we end up with 2, not 5.
-> 
-> As more threads are participating it, we might miss more counting.
-
-Are you sure?  Isn't adding a number something that should happen in a
-"safe" way?
-
-And if you miss 2 blocks, who cares?  What is so critical about these
-things that you take the cache flush of 2 atomic writes just for a
-debugging statistic?
-
-Why not just take 1 lock for everything if it's so important to get
-these "correct"?
-
-What is the performance throughput degradation of adding 2 atomic writes
-to each time you write a block?
-
-But really, will you ever notice missing a few, even if that could be
-possible on your cpu (and I strongly doubt most modern cpus will miss
-this...)
-
-But this isn't my code, I just hate seeing atomic variables used for
-silly things like debugging stats when they do not seem to be really
-needed.  So if you want to keep them, go ahead, but realize that the
-number you are reading has nothing to do with being "atomic" at all.
+I would not use any lock at all if this were my code.  Remember, this is
+for debugging/information only, right?  And the data is always "stale"
+so what is it going to be used for?
 
 thanks,
 
