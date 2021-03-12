@@ -2,104 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E2DC339035
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Mar 2021 15:42:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 340DE33903A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Mar 2021 15:46:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lKizs-0003XZ-69; Fri, 12 Mar 2021 14:42:36 +0000
+	id 1lKj3M-0001JS-Lv; Fri, 12 Mar 2021 14:46:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1lKizq-0003XR-Hh
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:42:34 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1lKj3L-0001JF-Je
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:46:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/ZgtvRUCOeB2tes232V28vaR4drPg6AkuyiMBwt7N/Q=; b=IK1MdVHDC4yTr+sHktZbzbFK7f
- 1Vjxd4Ad0YUgUSzFcUsNMFFGjjmSbgnRMFOYclpNS/TL/w8xk342vydxvP3FW7N6xAyH2+5q90oyV
- RltJ2mVv2dWU0yThyDVH0BgRRnAIRl/pJ/Jz9yQCaX2Iu3brJeb12BmAGmD4YXR2mTEc=;
+ bh=Mr1FjbtOo2oaErNudiDkdyq/FC3uXpVrOtNOsRZRzZU=; b=XGA9KioGFVcXX5jeh9HSRVvN0s
+ +lCUKRUAzDe8l5bmkbQJF+sAv0kPYYEdYKVBhYEt16Fenmxrj1azATTrjyKqQtqYPeAG53KX6G6Pc
+ 1Qeb274JSKqlLvh2PDuV2XvTxykkCLajdzVrNZ2XBOZeQlDHYt9HRMClA62y/ANaCab8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/ZgtvRUCOeB2tes232V28vaR4drPg6AkuyiMBwt7N/Q=; b=Ub7HpKISh/z/AjA46xqIXy4Xxq
- E3weo2qHJqpU16FCjaZs2cxvIpd5c1ySc2Jms2Fau/HirwZi/OcYOiQn0hgg4PIdd6WSfq+DaTCo6
- ox7qy/DYhamgXTdLjgfqQ5cp8KXpECJ5mXCszSskSnzimU2cG8YHIfkRCymuRkWcVQ8s=;
-Received: from mail-lj1-f177.google.com ([209.85.208.177])
+ bh=Mr1FjbtOo2oaErNudiDkdyq/FC3uXpVrOtNOsRZRzZU=; b=fYq1S80G3nxHTBepXwVYVEa0py
+ Lss/xD6vo05jt9pD10SyLmjKz1nAFbAwZtfJ3yq8rh/We6mPCyxfUra9FCt1mvsPzLtJIgvlm9Bcs
+ hUIZ5ckRnosncT/YQ8UJIN9cLv73Bd9wHmm436kFuLpqDqx8+fl6L17A66Ied7WAKTmM=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lKize-005sUe-Da
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:42:34 +0000
-Received: by mail-lj1-f177.google.com with SMTP id u20so7043624lja.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 12 Mar 2021 06:42:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=/ZgtvRUCOeB2tes232V28vaR4drPg6AkuyiMBwt7N/Q=;
- b=TT4sNAbE++eXFwV/kLG3OLxZb9hyTRXOGfbo6NPgoa2hdLLMENGShbvPYOMDArP8C5
- RKlPk5VVpXNLF5blZeOdwAjGPqVXpFNPgjYYrVb6O7GTSkRB+Fyx4O0pa1l1kOsnNznE
- xFQvIUZJl9uQGXJCjQKizXLGUUTlD0HXVt/Jj+aRfi07o21cJzRKvEb8KZXWulKHg8zG
- cYjle+Zze0D4cKdNB230Q6aco2pQXDIaERXcL6iiXjVMaecRViWLROHlXHGW5L3Y96Iw
- lxE1WH3xyR63B64hekFbsHI2M4laMPJAcwNUXM8c15Kdw4Xwvmqb+4R3WaP2XCRHxlrc
- GyKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=/ZgtvRUCOeB2tes232V28vaR4drPg6AkuyiMBwt7N/Q=;
- b=LLh+CtNQcbG3kc3Fk53tmrUWUETiBNWZ6qBISLu9znu3/7ER+95m1oj7DSKfVpAguh
- o2oUGxiQAlmr8pvIKej0hfX4Uo+J5gjmUn5tO+rVy171mKBnj6EVjRoBRepPUBCYbg6s
- dSRH9utzXtWqT+FEgrkH4CySyay5bNAEb9i9gTeG4LsSK2OAYEWfXeEdSK58PXiVZVZy
- YEv7kjXp2ITnGhEKF4hFaEVqTn91ZZ2D8DEZI85mulUn3PSlLKz4KAYpWrYWwpUnJYDF
- PeM7aRk4fY3hSRqtSOaSqtJLlXhZ6DMQjmdQ/bLZMM8aDbV0qnHXI2EvpweqxjjTAkJd
- UfwQ==
-X-Gm-Message-State: AOAM533qFUnAwmQpj5EIGbx4KM1kIrrJ2Hcis374U7DBoR9FlwZJhvsL
- qIR1LUhjBW0r9R4IbnbctFnkoj5zN7UZsOm/KSs=
-X-Google-Smtp-Source: ABdhPJyYrWIGZUKMt0BSk3MntCjtvxsWjGr/pshTWbxymBr5n5Yeb0oG2eoConQ8JmoQLge5D2qeM72hwKUHisAYu+8=
-X-Received: by 2002:a2e:b606:: with SMTP id r6mr2573928ljn.327.1615560135802; 
- Fri, 12 Mar 2021 06:42:15 -0800 (PST)
-MIME-Version: 1.0
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lKj36-005syX-7W
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Mar 2021 14:46:11 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4536A64FD6;
+ Fri, 12 Mar 2021 14:45:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1615560350;
+ bh=5OcUS67DMAnxCxpF2YhrDjA4ZH7gotBBF3aF5cp7VAo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OGrTW2c5kQMZqDLHOuPubJDXsH5iNNl9G1C8bABPxHyPcm06lamlCYPxjL/7xokSu
+ 6xqdQEaz0tP0k8l4U3D3jCYKk3PxisKyYJ9L5pw2AdXmglGrmAxermQHLMydovsQSS
+ IA2wUtJS7RrAgy28DpmknVJbOyZw2fAvOZcmmZbs=
+Date: Fri, 12 Mar 2021 15:45:48 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <YEt+nAEOd+YUdln8@kroah.com>
 References: <20210312122531.2717093-1-daeho43@gmail.com>
  <YEtg8U7whCVV2tQt@kroah.com>
  <CACOAw_zhZ0OgT-KCBmD_H6_U=CZCNY44D-ojH2AZah2cbAvdAQ@mail.gmail.com>
  <YEt00vJ6oVfoRjSJ@kroah.com>
  <CACOAw_yjyy+58B=RawAaQO98NQB43roZOv4sq5313sFHN1myXQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <CACOAw_yjyy+58B=RawAaQO98NQB43roZOv4sq5313sFHN1myXQ@mail.gmail.com>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Fri, 12 Mar 2021 23:42:04 +0900
-Message-ID: <CACOAw_wipL_SHyKp+56SOx99LnBZsrWq2eRmLm7Bz16jEYM8zg@mail.gmail.com>
-To: Greg KH <gregkh@linuxfoundation.org>
-X-Spam-Score: 0.2 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linuxfoundation.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.177 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.177 listed in wl.mailspike.net]
+ for more information. [URIs: daringfireball.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1lKize-005sUe-Da
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1lKj36-005syX-7W
 Subject: Re: [f2fs-dev] [PATCH v4] f2fs: add sysfs nodes to get runtime
  compression stat
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -115,41 +83,72 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-U28sIGRvIHlvdSB3YW50IHdlIHByb3RlY3QgdGhlIHZhbHVlcyBoZXJlIHdpdGggc3Bpbl9sb2Nr
-IGFuZCBqdXN0CnJlYWQgd2l0aG91dCBzcGluX2xvY2sgaW4gc3lzZnMgcmVhZCBwYXJ0PwoKMjAy
-MeuFhCAz7JuUIDEy7J28ICjquIgpIOyYpO2bhCAxMTozNywgRGFlaG8gSmVvbmcgPGRhZWhvNDNA
-Z21haWwuY29tPuuLmOydtCDsnpHshLE6Cj4KPiBBcyB5b3UgY2FuIHNlZSwgaWYgd2UncmUgZG9p
-bmcgbGlrZSB0aGUgYmVsb3cuCj4KPiBzYmktPmNvbXByX3dyaXR0ZW5fYmxvY2sgKz0gYmxvY2tz
-Owo+Cj4gTGV0J3MgYXNzdW1lIHRoZSBpbml0aWFsIHZhbHVlIGFzIDAuCj4KPiA8dGhyZWFkIEE+
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHRocmVhZCBCPgo+
-IHNiaS0+Y29tcHJfd3JpdHRlbl9ibG9jayA9IDA7Cj4KPiBzYmktPmNvbXByX3dyaXR0ZW5fYmxv
-Y2sgPSAwOwo+ICtibG9ja3MoMyk7Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKyBibG9ja3MoMik7Cj4gc2JpLT5jb21wcl93
-cml0dGVuX2Jsb2NrID0gMzsKPgo+IHNiaS0+Y29tcHJfd3JpdHRlbl9ibG9jayA9IDI7Cj4KPiBG
-aW5hbGx5LCB3ZSBlbmQgdXAgd2l0aCAyLCBub3QgNS4KPgo+IEFzIG1vcmUgdGhyZWFkcyBhcmUg
-cGFydGljaXBhdGluZyBpdCwgd2UgbWlnaHQgbWlzcyBtb3JlIGNvdW50aW5nLgo+Cj4gMjAyMeuF
-hCAz7JuUIDEy7J28ICjquIgpIOyYpO2bhCAxMTowNCwgR3JlZyBLSCA8Z3JlZ2toQGxpbnV4Zm91
-bmRhdGlvbi5vcmc+64uY7J20IOyekeyEsToKPiA+Cj4gPiBPbiBGcmksIE1hciAxMiwgMjAyMSBh
-dCAxMDo1NjoxM1BNICswOTAwLCBEYWVobyBKZW9uZyB3cm90ZToKPiA+ID4gVGhhbmtzIGZvciBz
-dWdnZXN0aW5nIG1lIHN5c2ZzX2VtaXQoKS4KPiA+ID4KPiA+ID4gRm9yIGF0b21pYyB2YWx1ZXMs
-IGFjdHVhbGx5LCB0aG9zZSBhcmUgbmVlZGVkIGZvciB3cml0ZXIgcGFydCwgbm90IHJlYWRlci4K
-PiA+ID4KPiA+ID4gKyNkZWZpbmUgYWRkX2NvbXByX2Jsb2NrX3N0YXQoaW5vZGUsIGJsb2Nrcykg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+ID4gPiArICAgICAgIGRvIHsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gPiA+
-ICsgICAgICAgICAgICAgICBzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0IoaW5v
-ZGUpOyAgICAgICAgICAgIFwKPiA+ID4gKyAgICAgICAgICAgICAgIGludCBkaWZmID0gRjJGU19J
-KGlub2RlKS0+aV9jbHVzdGVyX3NpemUgLSBibG9ja3M7ICAgICAgXAo+ID4gPiArICAgICAgICAg
-ICAgICAgYXRvbWljNjRfYWRkKGJsb2NrcywgJnNiaS0+Y29tcHJfd3JpdHRlbl9ibG9jayk7ICAg
-ICAgICBcCj4gPiA+ICsgICAgICAgICAgICAgICBhdG9taWM2NF9hZGQoZGlmZiwgJnNiaS0+Y29t
-cHJfc2F2ZWRfYmxvY2spOyAgICAgICAgICAgIFwKPiA+ID4gKyAgICAgICB9IHdoaWxlICgwKQo+
-ID4gPgo+ID4gPiBJIG5lZWRlZCBhIHByb3RlY3Rpb24gaGVyZSwgYmVjYXVzZSB0aGV5IG1pZ2h0
-IGJlIHVwZGF0ZWQgaW4gdGhlIHJhY2UgY29uZGl0aW9uLgo+ID4KPiA+IFdoeT8gIFdoYXQgYXJl
-IHlvdSB0cnlpbmcgdG8gcHJvdGVjdCBmcm9tICJyYWNpbmciIGhlcmU/Cj4gPgo+ID4gdGhhbmtz
-LAo+ID4KPiA+IGdyZWcgay1oCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZl
-bEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
-dHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+A: http://en.wikipedia.org/wiki/Top_post
+Q: Were do I find info about this thing called top-posting?
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+A: No.
+Q: Should I include quotations after my reply?
+
+http://daringfireball.net/2007/07/on_top
+
+
+On Fri, Mar 12, 2021 at 11:37:29PM +0900, Daeho Jeong wrote:
+> As you can see, if we're doing like the below.
+> 
+> sbi->compr_written_block += blocks;
+> 
+> Let's assume the initial value as 0.
+> 
+> <thread A>                                             <thread B>
+> sbi->compr_written_block = 0;
+> 
+> sbi->compr_written_block = 0;
+> +blocks(3);
+>                                                                + blocks(2);
+> sbi->compr_written_block = 3;
+> 
+> sbi->compr_written_block = 2;
+> 
+> Finally, we end up with 2, not 5.
+> 
+> As more threads are participating it, we might miss more counting.
+
+Are you sure?  Isn't adding a number something that should happen in a
+"safe" way?
+
+And if you miss 2 blocks, who cares?  What is so critical about these
+things that you take the cache flush of 2 atomic writes just for a
+debugging statistic?
+
+Why not just take 1 lock for everything if it's so important to get
+these "correct"?
+
+What is the performance throughput degradation of adding 2 atomic writes
+to each time you write a block?
+
+But really, will you ever notice missing a few, even if that could be
+possible on your cpu (and I strongly doubt most modern cpus will miss
+this...)
+
+But this isn't my code, I just hate seeing atomic variables used for
+silly things like debugging stats when they do not seem to be really
+needed.  So if you want to keep them, go ahead, but realize that the
+number you are reading has nothing to do with being "atomic" at all.
+
+thanks,
+
+greg k-h
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
