@@ -2,70 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D065A33A982
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Mar 2021 03:02:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDE0033AA99
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Mar 2021 05:57:13 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lLcYQ-00067G-1k; Mon, 15 Mar 2021 02:01:58 +0000
+	id 1lLfHs-0007BC-Qt; Mon, 15 Mar 2021 04:57:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lLcYJ-00066O-8T
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Mar 2021 02:01:51 +0000
+ (envelope-from
+ <bounce+103f7e.be9e4a-linux-f2fs-devel=lists.sourceforge.net@mg.codeaurora.org>)
+ id 1lLfHr-0007B0-QB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Mar 2021 04:57:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vMtIyuRlkAWGZHdss3tzzEtyCHSoEHgRmHUuuIm1n8s=; b=Jh1q9sNzGSskNM2h+MNA4aZMrC
- t3kRm39PCwIh0i7KAO46irkThtkJwO9HDjThWW9fojeAuAle6l6Nd+mdR7R3qYkbUIt50ShGUuXIv
- mZ8ptZuu75m2jdFF3uRmYi78u4yPEhLBYa6GXYF3PDJlTMgie8X1oUqsK7uPlqD0th94=;
+ bh=VPQLi2OI4TfV8yqp40xNH75AHkUMN4RCTBTNwk+/Bsg=; b=mc1txjxdjhtys0MDbRApupNz4b
+ U1NRnLA2898yu48t7cEtlLnPWzWT96KodlJC+6631KT7EU9rrQHxYVlpMVQ0qBe+tebydF9F30A/5
+ 3bf6nRAnXAGLgpT61B7I7FoL9cYyohibN5aPGZ4mT2/BaWZEqgowGwj40e6mAFuasZ04=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vMtIyuRlkAWGZHdss3tzzEtyCHSoEHgRmHUuuIm1n8s=; b=d46hctzhblLBmeQlX7iRgQsbSw
- LYruEcqsmGNrwQkxYKzXY/NHguzPTFjDnScF/Vm9IFNzfMXF3gchS9aDA2Qt8tdNS3xPalQdF+blm
- G54ufeUJjh3AiMBfM51tz3xKB4xUZx1QmSAukpFintc5dOzNHf24aY8XMZWIrmP35i3c=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
+ bh=VPQLi2OI4TfV8yqp40xNH75AHkUMN4RCTBTNwk+/Bsg=; b=Ni9ZUKY8t5zCEu3v+w0nZAKlGp
+ rFC+/gZ71bjYyRV4gVgWfY4CXJj4ysPrX5YvX6pg60HQ53JtszxI8zbF3BZNgW/UKAL6LR93oj7QG
+ +PBv2Vp0NFnFv1xrhebetUejicYAWMVMYiHJMnBOmBytdEbGFZBQ1RWgT4nO+/qGjtaE=;
+Received: from z11.mailgun.us ([104.130.96.11])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lLcY1-0008QZ-N6
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Mar 2021 02:01:44 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4DzKN30Y3XzMh7c;
- Mon, 15 Mar 2021 09:58:59 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 15 Mar
- 2021 10:01:16 +0800
-To: Daniel Abrecht <linux-f2fs-devel@nodmarc.danielabrecht.ch>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <2f3255b625ce528ceb317b702ca7e0c2@abrecht.li>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <d2f37346-ebfd-0641-185e-8a7b0302f1a6@huawei.com>
-Date: Mon, 15 Mar 2021 10:01:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <2f3255b625ce528ceb317b702ca7e0c2@abrecht.li>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lLfHh-0002J2-Pf
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 15 Mar 2021 04:57:03 +0000
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1615784213; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=VPQLi2OI4TfV8yqp40xNH75AHkUMN4RCTBTNwk+/Bsg=;
+ b=pJXQPyqJYoKE2S92Jv0fAJjjWWzcSVSPy8OMaS4gUicsr+u9ejLpAIqdRhggk+7IvPUMCL1G
+ mQpHzsSZ/lh+lOjRW7MBe7/42ixUdT8OMpxsW/Dl6u0NaJA+dfMyYIUwtxjf8r7vuM7l3Tpq
+ jPLUsnwV6PZk9p43oXFHHzjsr9M=
+X-Mailgun-Sending-Ip: 104.130.96.11
+X-Mailgun-Sid: WyI2M2Y4ZiIsICJsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCIsICJiZTllNGEiXQ==
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n04.prod.us-west-2.postgun.com with SMTP id
+ 604ee9053f267701a4026f34 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 15 Mar 2021 04:56:37
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id B2688C43462; Mon, 15 Mar 2021 04:56:36 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED, BAYES_00,
+ SPF_FAIL autolearn=no autolearn_force=no version=3.4.0
+Received: from codeaurora.org (unknown [202.46.22.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: stummala)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 30629C433C6;
+ Mon, 15 Mar 2021 04:56:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 30629C433C6
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=fail smtp.mailfrom=stummala@codeaurora.org
+From: Sahitya Tummala <stummala@codeaurora.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 15 Mar 2021 10:26:26 +0530
+Message-Id: <1615784186-2693-1-git-send-email-stummala@codeaurora.org>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lLcY1-0008QZ-N6
-Subject: Re: [f2fs-dev] [PATCH] Add -P option to preserve file owner
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1lLfHh-0002J2-Pf
+Subject: [f2fs-dev] [PATCH] f2fs: fix the discard thread sleep timeout under
+ high utilization
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,91 +99,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org
+Cc: linux-kernel@vger.kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/15 6:12, Daniel Abrecht wrote:
-> I use user namespaces & debootstrap to bootstrap a system, and then
-> copy that into an image using sload.f2fs. However, without an option to
-> preserve the owner user & group of files, some files end up being owned
-> by the wrong user / group (0:0), which causes all kinds of other issues
-> 
-> This patch adds an option -P to preserve the user and group of files.
-> ---
->    fsck/main.c       | 6 +++++-
->    fsck/sload.c      | 5 +++++
->    include/f2fs_fs.h | 1 +
->    3 files changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fsck/main.c b/fsck/main.c
-> index a538c72..8438b45 100644
-> --- a/fsck/main.c
-> +++ b/fsck/main.c
-> @@ -132,6 +132,7 @@ void sload_usage()
->    	MSG(0, "\nUsage: sload.f2fs [options] device\n");
->    	MSG(0, "[options]:\n");
->    	MSG(0, "  -C fs_config\n");
-> +	MSG(0, "  -P preserve owner user and group\n");
+When f2fs is heavily utilized over 80%, the current discard policy
+sets the max sleep timeout of discard thread as 50ms
+(DEF_MIN_DISCARD_ISSUE_TIME). But this is set even when there are
+no pending discard commands to be issued. This results into
+unnecessary frequent and periodic wake ups of the discard thread.
+This patch adds check for pending  discard commands in addition
+to heavy utilization condition to prevent those wake ups.
 
-preserve owner: user and group
+Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+---
+ fs/f2fs/segment.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-How about adding an entry to describe this new option in manual of sload.f2fs?
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index dced46c..df30220 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1112,6 +1112,8 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+ 				struct discard_policy *dpolicy,
+ 				int discard_type, unsigned int granularity)
+ {
++	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
++
+ 	/* common policy */
+ 	dpolicy->type = discard_type;
+ 	dpolicy->sync = true;
+@@ -1129,7 +1131,8 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+ 		dpolicy->io_aware = true;
+ 		dpolicy->sync = false;
+ 		dpolicy->ordered = true;
+-		if (utilization(sbi) > DEF_DISCARD_URGENT_UTIL) {
++		if (utilization(sbi) > DEF_DISCARD_URGENT_UTIL &&
++				atomic_read(&dcc->discard_cmd_cnt)) {
+ 			dpolicy->granularity = 1;
+ 			dpolicy->max_interval = DEF_MIN_DISCARD_ISSUE_TIME;
+ 		}
+-- 
+Qualcomm India Private Limited, on behalf of Qualcomm Innovation Center, Inc.
+Qualcomm Innovation Center, Inc. is a member of Code Aurora Forum, a Linux Foundation Collaborative Project.
 
-Thanks,
-
->    	MSG(0, "  -f source directory [path of the source directory]\n");
->    	MSG(0, "  -p product out directory\n");
->    	MSG(0, "  -s file_contexts\n");
-> @@ -549,7 +550,7 @@ void f2fs_parse_options(int argc, char *argv[])
->    #endif
->    	} else if (!strcmp("sload.f2fs", prog)) {
->    #ifdef WITH_SLOAD
-> -		const char *option_string = "cL:a:i:x:m:rC:d:f:p:s:St:T:V";
-> +		const char *option_string = "cL:a:i:x:m:rC:d:f:p:s:St:T:VP";
->    #ifdef HAVE_LIBSELINUX
->    		int max_nr_opt = (int)sizeof(c.seopt_file) /
->    			sizeof(c.seopt_file[0]);
-> @@ -685,6 +686,9 @@ void f2fs_parse_options(int argc, char *argv[])
->    			case 'V':
->    				show_version(prog);
->    				exit(0);
-> +			case 'P':
-> +				c.preserve_perms = 1;
-> +				break;
->    			default:
->    				err = EUNKNOWN_OPT;
->    				break;
-> diff --git a/fsck/sload.c b/fsck/sload.c
-> index 4dea78b..6929023 100644
-> --- a/fsck/sload.c
-> +++ b/fsck/sload.c
-> @@ -187,6 +187,11 @@ static void set_inode_metadata(struct dentry *de)
->    	else
->    		de->mtime = c.fixed_time;
-> 
-> +	if (c.preserve_perms) {
-> +		de->uid = stat.st_uid;
-> +		de->gid = stat.st_gid;
-> +	}
-> +
->    	set_perms_and_caps(de);
->    }
-> 
-> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-> index a51a359..cdcce2c 100644
-> --- a/include/f2fs_fs.h
-> +++ b/include/f2fs_fs.h
-> @@ -505,6 +505,7 @@ struct f2fs_configuration {
->    	struct selinux_opt seopt_file[8];
->    	int nr_opt;
->    #endif
-> +	int preserve_perms;
-> 
->    	/* resize parameters */
->    	int safe_resize;
-> 
 
 
 _______________________________________________
