@@ -2,76 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 828C93412D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Mar 2021 03:31:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AEAE3427A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Mar 2021 22:25:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lN4vF-0006SG-GC; Fri, 19 Mar 2021 02:31:33 +0000
+	id 1lNMc7-0005Xc-5R; Fri, 19 Mar 2021 21:24:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lN4vE-0006S9-1q
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Mar 2021 02:31:32 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <me@beroal.in.ua>) id 1lNMc5-0005XU-If
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Mar 2021 21:24:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ui2pAdnAqsyYclIaERD+x2HTFgv2ZqnjFVsMODjECCg=; b=RB0tlgCuCCwv1J3XUzXqttuHkC
- QA2CqEvPeqzrFxhxOX+QASMRPsgeLGe7zw1C/b09r0sVkvZMw9/4LSjQxYBAhs/J9qisoQVhLM4CU
- BQWQrSNkIK79yDRsvo/qYW0JEJU5PxyxmsbsjS+5iTWeCM2KFMcfwIkIVVnMo+UU7N2c=;
+ bh=gZyskNrJUOoHmhydRHg/YDcF4cZ38fWi1EcGIzA8sYc=; b=PbkCMuXlcMZ6hjv/+1Uwl6KFLM
+ 9mH4mj5l0tatQGFB+j2bRhTBcTeL04MTdUKR6/VQFZmoEweUG/WHnrim6FXWss1EnhGVUttYgVS6B
+ FzJk/m0Jaj8qpml5E5/awGypvB6+TNeMY82cLDV1IkDTx6QAcFjFgTzKRD96sHwzSkLE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ui2pAdnAqsyYclIaERD+x2HTFgv2ZqnjFVsMODjECCg=; b=fFqBQrUEHAtxBFuY2Z6gJmv0u4
- /uD/oBGyIFbSNWhs6HRtNW+/sDQq2gIC0hIyDdXCUzPmmauW7VuDbugOzfs+u5BMn3M5rdn6nmNC0
- c+tdsGsKZzPOtwpzgQYZZSRZ1khONyQS+42ocFYCIbxT82Y4JdigBZdbF9cCjYwXqoFQ=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lN4v5-0006qb-N6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Mar 2021 02:31:31 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4F1nsC5n6Cz9195;
- Fri, 19 Mar 2021 10:29:19 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 19 Mar
- 2021 10:31:10 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210220094052.64905-1-yuchao0@huawei.com>
- <YFOLNGo+/8sKQ7si@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <ec5cda53-d3f4-450c-7567-7bfc68e224f9@huawei.com>
-Date: Fri, 19 Mar 2021 10:31:09 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
+ Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=gZyskNrJUOoHmhydRHg/YDcF4cZ38fWi1EcGIzA8sYc=; b=F
+ 9g9qrOmisXFhTOdNak6g8u3qcumXegY/me38iSWAKCEGAs8hsv3SmAK9+SvzfvXqZA2Tcs/dZtHdZ
+ zYUvWEmkN+dPkDD5vFDhYNS/12GhDumWCZIeL/C6dBxeSR/p7TL7Wu0cyRf3NR34Md08m1GJPIy++
+ suvXJpMLoKad+MhU=;
+Received: from smtp-1.1gb.com.ua ([195.234.4.10] helo=u1.1gb.ua)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
+ id 1lNMbq-0006CT-JL
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 19 Mar 2021 21:24:57 +0000
+Received: from Spooler by u1.1gb.ua (Mercury/32 v4.52) ID MO008C62;
+ 19 Mar 2021 23:24:42 +0200
+Received: from spooler by mail-u1-robots.in-solve.hidden (Mercury/32 v4.52);
+ 19 Mar 2021 23:24:29 +0200
+Received: from ul1.1gb.ua (195.234.4.24) by smtp-1.1gb.com.ua (Mercury/32
+ v4.52) with ESMTP ID MG008C60; 19 Mar 2021 23:24:20 +0200
+Received: from [192.162.141.53] ([192.162.141.53]) (authenticated bits=0)
+ by ul1.1gb.ua (8.14.9/8.14.9) with ESMTP id 12JLOHZh014338
+ (version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NO)
+ for <linux-f2fs-devel@lists.sourceforge.net>; Fri, 19 Mar 2021 23:24:17 +0200
+To: linux-f2fs-devel@lists.sourceforge.net
+From: beroal <me@beroal.in.ua>
+Message-ID: <55a201bb-5314-d3c9-cb0c-6420c3aa9f57@beroal.in.ua>
+Date: Fri, 19 Mar 2021 23:24:05 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <YFOLNGo+/8sKQ7si@google.com>
 Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lN4v5-0006qb-N6
-Subject: Re: [f2fs-dev] [PATCH RFC] f2fs: fix to avoid selecting full
- segment w/ {AT, }SSR allocator
+ 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
+X-Headers-End: 1lNMbq-0006CT-JL
+Subject: [f2fs-dev] f2fs.resize makes errors in FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,141 +73,189 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/19 1:17, Jaegeuk Kim wrote:
-> On 02/20, Chao Yu wrote:
->> In cp disabling mode, there could be a condition
->> - target segment has 128 ckpt valid blocks
->> - GC migrates 128 valid blocks to other segment (segment is still in
->> dirty list)
->> - GC migrates 384 blocks to target segment (segment has 128 cp_vblocks
->> and 384 vblocks)
->> - If GC selects target segment via {AT,}SSR allocator, however there is
->> no free space in targe segment.
->>
->> Fixes: 4354994f097d ("f2fs: checkpoint disabling")
->> Fixes: 093749e296e2 ("f2fs: support age threshold based garbage collection")
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>   fs/f2fs/f2fs.h    |  1 +
->>   fs/f2fs/gc.c      | 17 +++++++++++++----
->>   fs/f2fs/segment.c | 20 ++++++++++++++++++++
->>   3 files changed, 34 insertions(+), 4 deletions(-)
->>
->> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->> index ed7807103c8e..9c753eff0814 100644
->> --- a/fs/f2fs/f2fs.h
->> +++ b/fs/f2fs/f2fs.h
->> @@ -3376,6 +3376,7 @@ block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
->>   int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
->>   void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
->>   int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
->> +bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno);
->>   void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
->>   void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi);
->>   void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi);
->> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->> index 86ba8ed0b8a7..a1d8062cdace 100644
->> --- a/fs/f2fs/gc.c
->> +++ b/fs/f2fs/gc.c
->> @@ -392,10 +392,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
->>   		if (p->gc_mode == GC_AT &&
->>   			get_valid_blocks(sbi, segno, true) == 0)
->>   			return;
->> -
->> -		if (p->alloc_mode == AT_SSR &&
->> -			get_seg_entry(sbi, segno)->ckpt_valid_blocks == 0)
->> -			return;
->>   	}
->>   
->>   	for (i = 0; i < sbi->segs_per_sec; i++)
->> @@ -736,6 +732,19 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
->>   		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
->>   			goto next;
->>   
->> +		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
->> +			/*
->> +			 * to avoid selecting candidate which has below valid
->> +			 * block distribution:
->> +			 * partial blocks are valid and all left ones are valid
->> +			 * in previous checkpoint.
->> +			 */
->> +			if (p.alloc_mode == SSR || p.alloc_mode == AT_SSR) {
->> +				if (!segment_has_free_slot(sbi, segno))
->> +					goto next;
-> 
-> Do we need to change this to check free_slot instead of get_ckpt_valid_blocks()?
-
-Jaegeuk,
-
-LFS was assigned only for GC case, in this case we are trying to select source
-section, rather than target segment for SSR/AT_SSR case, so we don't need to
-check free_slot.
-
-- f2fs_gc
-  - __get_victim
-   - get_victim(sbi, victim, gc_type, NO_CHECK_TYPE, LFS, 0);
-
-> 
->   732                 if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
->   733                                         get_ckpt_valid_blocks(sbi, segno) &&
->   734                                         p.alloc_mode == LFS))
-
-BTW, in LFS mode, GC wants to find source section rather than segment, so we
-should change to check valid ckpt blocks in every segment of targe section here?
-
-Thanks,
-
-> 
-> 
->> +			}
->> +		}
->> +
->>   		if (is_atgc) {
->>   			add_victim_entry(sbi, &p, segno);
->>   			goto next;
->> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->> index 2d5a82c4ca15..deaf57e13125 100644
->> --- a/fs/f2fs/segment.c
->> +++ b/fs/f2fs/segment.c
->> @@ -2650,6 +2650,26 @@ static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
->>   		seg->next_blkoff++;
->>   }
->>   
->> +bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
->> +{
->> +	struct sit_info *sit = SIT_I(sbi);
->> +	struct seg_entry *se = get_seg_entry(sbi, segno);
->> +	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
->> +	unsigned long *target_map = SIT_I(sbi)->tmp_map;
->> +	unsigned long *ckpt_map = (unsigned long *)se->ckpt_valid_map;
->> +	unsigned long *cur_map = (unsigned long *)se->cur_valid_map;
->> +	int i, pos;
->> +
->> +	down_write(&sit->sentry_lock);
->> +	for (i = 0; i < entries; i++)
->> +		target_map[i] = ckpt_map[i] | cur_map[i];
->> +
->> +	pos = __find_rev_next_zero_bit(target_map, sbi->blocks_per_seg, 0);
->> +	up_write(&sit->sentry_lock);
->> +
->> +	return pos < sbi->blocks_per_seg;
->> +}
->> +
->>   /*
->>    * This function always allocates a used segment(from dirty seglist) by SSR
->>    * manner, so it should recover the existing segment information of valid blocks
->> -- 
->> 2.29.2
-> .
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkuIEkgYW0gdHJ5aW5nIHRvIHVzZSBhIG5ldyBmdW5jdGlvbiB0byByZWR1Y2UgdGhlIHNpemUg
+b2YgYW4gRjJGUyBmaWxlIApzeXN0ZW0uIEFmdGVyIHJlc2l6aW5nLCBgZnNjay5mMmZzYCBnaXZl
+cyBhIGxvdCBvZiBlcnJvcnMuIEhlcmUgaXMgYSAKc2hlbGwgc2NyaXB0IHRoYXQgY3JlYXRlcyBh
+bmQgcmVzaXplcyBhIGR1bW15IGZpbGUgc3lzdGVtOgoKYGBgCiMhL2Jpbi9zaApzZXQgLWUKRj0v
+dG1wL2ltZwpEPS9kZXYvbG9vcDAKTT0vcm9vdC9tbnQvdGVtcApkZCBicz0xTSBjb3VudD0yNTYg
+aWY9L2Rldi96ZXJvICJvZj0kRiIKbG9zZXR1cCAiJEQiICIkRiIKbWtmcy5mMmZzICIkRCIKZnNj
+ay5mMmZzICIkRCIKbW91bnQgIiREIiAiJE0iCmRkIGJzPTFNIGNvdW50PTY0IAppZj0vbW50L2Rh
+dGEvZXh0ZXJuYWwvbWlzYy9tb3ZpZS9JZGlvY3JhY3kuMjAwNi5XRUItREwuMTA4MHAteWxuaWFu
+Lm1rdiAKb2Y9IiR7TX0vYS5ta3YiCnVtb3VudCAiJE0iCnJlc2l6ZS5mMmZzIC1zIC10IDI2MjE0
+NCAiJEQiCmZzY2suZjJmcyAiJEQiCmxvc2V0dXAgLWQgIiREIgpgYGAKCmBgYAorIHNldCAtZQor
+IEY9L3RtcC9pbWcKKyBEPS9kZXYvbG9vcDAKKyBNPS9yb290L21udC90ZW1wCisgZGQgYnM9MU0g
+Y291bnQ9MjU2IGlmPS9kZXYvemVybyBvZj0vdG1wL2ltZwoyNTYrMCByZWNvcmRzIGluCjI1Nisw
+IHJlY29yZHMgb3V0CjI2ODQzNTQ1NiBieXRlcyAoMjY4IE1CLCAyNTYgTWlCKSBjb3BpZWQsIDAu
+MDg2Nzk1NCBzLCAzLjEgR0IvcworIGxvc2V0dXAgL2Rldi9sb29wMCAvdG1wL2ltZworIG1rZnMu
+ZjJmcyAvZGV2L2xvb3AwCgogwqDCoMKgIEYyRlMtdG9vbHM6IG1rZnMuZjJmcyBWZXI6IDEuMTQu
+MCAoMjAyMC0wOC0yNCkKCkluZm86IERpc2FibGUgaGVhcC1iYXNlZCBwb2xpY3kKSW5mbzogRGVi
+dWcgbGV2ZWwgPSAwCkluZm86IFRyaW0gaXMgZW5hYmxlZApJbmZvOiBTZWdtZW50cyBwZXIgc2Vj
+dGlvbiA9IDEKSW5mbzogU2VjdGlvbnMgcGVyIHpvbmUgPSAxCkluZm86IHNlY3RvciBzaXplID0g
+NTEyCkluZm86IHRvdGFsIHNlY3RvcnMgPSA1MjQyODggKDI1NiBNQikKSW5mbzogem9uZSBhbGln
+bmVkIHNlZ21lbnQwIGJsa2FkZHI6IDUxMgpJbmZvOiBmb3JtYXQgdmVyc2lvbiB3aXRoCiDCoCAi
+TGludXggdmVyc2lvbiA1LjExLjctYXJjaDEtMSAobGludXhAYXJjaGxpbnV4KSAoZ2NjIChHQ0Mp
+IDEwLjIuMCwgCkdOVSBsZCAoR05VIEJpbnV0aWxzKSAyLjM2LjEpICMxIFNNUCBQUkVFTVBUIFdl
+ZCwgMTcgTWFyIDIwMjEgMTY6NTk6NTggCiswMDAwIgpJbmZvOiBbL2Rldi9sb29wMF0gRGlzY2Fy
+ZGluZyBkZXZpY2UKSW5mbzogVGhpcyBkZXZpY2UgZG9lc24ndCBzdXBwb3J0IEJMS1NFQ0RJU0NB
+UkQKSW5mbzogRGlzY2FyZGVkIDI1NiBNQgpJbmZvOiBPdmVycHJvdmlzaW9uIHJhdGlvID0gMTUu
+MDAwJQpJbmZvOiBPdmVycHJvdmlzaW9uIHNlZ21lbnRzID0gMzUgKEdDIHJlc2VydmVkID0gMjEp
+CkluZm86IGZvcm1hdCBzdWNjZXNzZnVsCisgZnNjay5mMmZzIC9kZXYvbG9vcDAKSW5mbzogU2Vn
+bWVudHMgcGVyIHNlY3Rpb24gPSAxCkluZm86IFNlY3Rpb25zIHBlciB6b25lID0gMQpJbmZvOiBz
+ZWN0b3Igc2l6ZSA9IDUxMgpJbmZvOiB0b3RhbCBzZWN0b3JzID0gNTI0Mjg4ICgyNTYgTUIpCklu
+Zm86IE1LRlMgdmVyc2lvbgogwqAgIkxpbnV4IHZlcnNpb24gNS4xMS43LWFyY2gxLTEgKGxpbnV4
+QGFyY2hsaW51eCkgKGdjYyAoR0NDKSAxMC4yLjAsIApHTlUgbGQgKEdOVSBCaW51dGlscykgMi4z
+Ni4xKSAjMSBTTVAgUFJFRU1QVCBXZWQsIDE3IE1hciAyMDIxIDE2OjU5OjU4IAorMDAwMCIKSW5m
+bzogRlNDSyB2ZXJzaW9uCiDCoCBmcm9tICJMaW51eCB2ZXJzaW9uIDUuMTEuNy1hcmNoMS0xIChs
+aW51eEBhcmNobGludXgpIChnY2MgKEdDQykgCjEwLjIuMCwgR05VIGxkIChHTlUgQmludXRpbHMp
+IDIuMzYuMSkgIzEgU01QIFBSRUVNUFQgV2VkLCAxNyBNYXIgMjAyMSAKMTY6NTk6NTggKzAwMDAi
+CiDCoMKgwqAgdG8gIkxpbnV4IHZlcnNpb24gNS4xMS43LWFyY2gxLTEgKGxpbnV4QGFyY2hsaW51
+eCkgKGdjYyAoR0NDKSAKMTAuMi4wLCBHTlUgbGQgKEdOVSBCaW51dGlscykgMi4zNi4xKSAjMSBT
+TVAgUFJFRU1QVCBXZWQsIDE3IE1hciAyMDIxIAoxNjo1OTo1OCArMDAwMCIKSW5mbzogc3VwZXJi
+bG9jayBmZWF0dXJlcyA9IDAgOgpJbmZvOiBzdXBlcmJsb2NrIGVuY3J5cHQgbGV2ZWwgPSAwLCBz
+YWx0ID0gMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKSW5mbzogdG90YWwgRlMgc2Vj
+dG9ycyA9IDUyNDI4OCAoMjU2IE1CKQpJbmZvOiBDS1BUIHZlcnNpb24gPSA4YWEwZDg1CkluZm86
+IENoZWNrZWQgdmFsaWQgbmF0X2JpdHMgaW4gY2hlY2twb2ludApJbmZvOiBjaGVja3BvaW50IHN0
+YXRlID0gMTg1IDrCoCB0cmltbWVkIG5hdF9iaXRzIGNvbXBhY3RlZF9zdW1tYXJ5IHVubW91bnQK
+CltGU0NLXSBVbnJlYWNoYWJsZSBuYXQgZW50cmllc8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dIFsweDBdCltGU0NLXSBTSVQgdmFsaWQgYmxvY2sg
+Yml0bWFwIGNoZWNraW5nwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXQpbRlND
+S10gSGFyZCBsaW5rIGNoZWNraW5nIGZvciByZWd1bGFyIGZpbGXCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIFtPay4uXSBbMHgwXQpbRlNDS10gdmFsaWRfYmxvY2tfY291bnQgbWF0Y2hpbmcgd2l0aCBD
+UMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBbT2suLl0gWzB4Ml0KW0ZTQ0tdIHZhbGlkX25vZGVf
+Y291bnQgbWF0Y2hpbmcgd2l0aCBDUCAoZGUgbG9va3VwKcKgIFtPay4uXSBbMHgxXQpbRlNDS10g
+dmFsaWRfbm9kZV9jb3VudCBtYXRjaGluZyB3aXRoIENQIChuYXQgbG9va3VwKSBbT2suLl0gWzB4
+MV0KW0ZTQ0tdIHZhbGlkX2lub2RlX2NvdW50IG1hdGNoZWQgd2l0aCBDUMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIFtPay4uXSBbMHgxXQpbRlNDS10gZnJlZSBzZWdtZW50X2NvdW50IG1hdGNo
+ZWQgd2l0aCBDUMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBbT2suLl0gWzB4NzJdCltGU0NLXSBu
+ZXh0IGJsb2NrIG9mZnNldCBpcyBmcmVlwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIFtPay4uXQpbRlNDS10gZml4aW5nIFNJVCB0eXBlcwpbRlNDS10gb3RoZXIgY29y
+cnVwdGVkIGJ1Z3PCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIFtPay4uXQoKRG9uZTogMC4wNjg4OTkgc2VjcworIG1vdW50IC9kZXYvbG9vcDAgL3Jv
+b3QvbW50L3RlbXAKKyBkZCBicz0xTSBjb3VudD02NCAKaWY9L21udC9kYXRhL2V4dGVybmFsL21p
+c2MvbW92aWUvSWRpb2NyYWN5LjIwMDYuV0VCLURMLjEwODBwLXlsbmlhbi5ta3YgCm9mPS9yb290
+L21udC90ZW1wL2EubWt2CjY0KzAgcmVjb3JkcyBpbgo2NCswIHJlY29yZHMgb3V0CjY3MTA4ODY0
+IGJ5dGVzICg2NyBNQiwgNjQgTWlCKSBjb3BpZWQsIDAuMDI4NjI2MSBzLCAyLjMgR0IvcworIHVt
+b3VudCAvcm9vdC9tbnQvdGVtcAorIHJlc2l6ZS5mMmZzIC1zIC10IDI2MjE0NCAvZGV2L2xvb3Aw
+CkluZm86IFNlZ21lbnRzIHBlciBzZWN0aW9uID0gMQpJbmZvOiBTZWN0aW9ucyBwZXIgem9uZSA9
+IDEKSW5mbzogc2VjdG9yIHNpemUgPSA1MTIKSW5mbzogdG90YWwgc2VjdG9ycyA9IDUyNDI4OCAo
+MjU2IE1CKQpJbmZvOiBNS0ZTIHZlcnNpb24KIMKgICJMaW51eCB2ZXJzaW9uIDUuMTEuNy1hcmNo
+MS0xIChsaW51eEBhcmNobGludXgpIChnY2MgKEdDQykgMTAuMi4wLCAKR05VIGxkIChHTlUgQmlu
+dXRpbHMpIDIuMzYuMSkgIzEgU01QIFBSRUVNUFQgV2VkLCAxNyBNYXIgMjAyMSAxNjo1OTo1OCAK
+KzAwMDAiCkluZm86IEZTQ0sgdmVyc2lvbgogwqAgZnJvbSAiTGludXggdmVyc2lvbiA1LjExLjct
+YXJjaDEtMSAobGludXhAYXJjaGxpbnV4KSAoZ2NjIChHQ0MpIAoxMC4yLjAsIEdOVSBsZCAoR05V
+IEJpbnV0aWxzKSAyLjM2LjEpICMxIFNNUCBQUkVFTVBUIFdlZCwgMTcgTWFyIDIwMjEgCjE2OjU5
+OjU4ICswMDAwIgogwqDCoMKgIHRvICJMaW51eCB2ZXJzaW9uIDUuMTEuNy1hcmNoMS0xIChsaW51
+eEBhcmNobGludXgpIChnY2MgKEdDQykgCjEwLjIuMCwgR05VIGxkIChHTlUgQmludXRpbHMpIDIu
+MzYuMSkgIzEgU01QIFBSRUVNUFQgV2VkLCAxNyBNYXIgMjAyMSAKMTY6NTk6NTggKzAwMDAiCklu
+Zm86IHN1cGVyYmxvY2sgZmVhdHVyZXMgPSAwIDoKSW5mbzogc3VwZXJibG9jayBlbmNyeXB0IGxl
+dmVsID0gMCwgc2FsdCA9IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCkluZm86IHRv
+dGFsIEZTIHNlY3RvcnMgPSA1MjQyODggKDI1NiBNQikKSW5mbzogQ0tQVCB2ZXJzaW9uID0gOGFh
+MGQ4OQpJbmZvOiBEdXBsaWNhdGUgdmFsaWQgY2hlY2twb2ludCB0byBtaXJyb3IgcG9zaXRpb24g
+NTEyIC0+IDEwMjQKSW5mbzogV3JpdGUgdmFsaWQgbmF0X2JpdHMgaW4gY2hlY2twb2ludApbRklY
+XSAobW92ZV9vbmVfY3Vyc2VnX2luZm86Mjc5OCnCoCAtLT4gTW92ZSBjdXJzZWdbMF0gMyAtPiAz
+NyBhZnRlciA4MDAwCgpbRklYXSAobW92ZV9vbmVfY3Vyc2VnX2luZm86Mjc5OCnCoCAtLT4gTW92
+ZSBjdXJzZWdbMV0gM2IgLT4gMzYgYWZ0ZXIgODAwMAoKW0ZJWF0gKG1vdmVfb25lX2N1cnNlZ19p
+bmZvOjI3OTgpwqAgLS0+IE1vdmUgY3Vyc2VnWzJdIDI0IC0+IDM1IGFmdGVyIDgwMDAKCltGSVhd
+IChtb3ZlX29uZV9jdXJzZWdfaW5mbzoyNzk4KcKgIC0tPiBNb3ZlIGN1cnNlZ1szXSAwIC0+IDM0
+IGFmdGVyIDgwMDAKCltGSVhdIChtb3ZlX29uZV9jdXJzZWdfaW5mbzoyNzk4KcKgIC0tPiBNb3Zl
+IGN1cnNlZ1s0XSAxIC0+IDMzIGFmdGVyIDgwMDAKCltGSVhdIChtb3ZlX29uZV9jdXJzZWdfaW5m
+bzoyNzk4KcKgIC0tPiBNb3ZlIGN1cnNlZ1s1XSAyIC0+IDMyIGFmdGVyIDgwMDAKCkluZm86IFdy
+aXRlIHZhbGlkIG5hdF9iaXRzIGluIGNoZWNrcG9pbnQKVHJ5IHRvIGRvIGRlZnJhZ2VtZW50OiBE
+b25lClt1cGRhdGVfc3VwZXJibG9jazogNjk1XSBJbmZvOiBEb25lIHRvIHVwZGF0ZSBzdXBlcmJs
+b2NrCkluZm86IFdyaXRlIHZhbGlkIG5hdF9iaXRzIGluIGNoZWNrcG9pbnQKW3JlYnVpbGRfY2hl
+Y2twb2ludDogNTg1XSBJbmZvOiBEb25lIHRvIHJlYnVpbGQgY2hlY2twb2ludCBibG9ja3MKCkRv
+bmU6IDAuMDY1NjA0IHNlY3MKKyBmc2NrLmYyZnMgL2Rldi9sb29wMApJbmZvOiBTZWdtZW50cyBw
+ZXIgc2VjdGlvbiA9IDEKSW5mbzogU2VjdGlvbnMgcGVyIHpvbmUgPSAxCkluZm86IHNlY3RvciBz
+aXplID0gNTEyCkluZm86IHRvdGFsIHNlY3RvcnMgPSA1MjQyODggKDI1NiBNQikKSW5mbzogTUtG
+UyB2ZXJzaW9uCiDCoCAiTGludXggdmVyc2lvbiA1LjExLjctYXJjaDEtMSAobGludXhAYXJjaGxp
+bnV4KSAoZ2NjIChHQ0MpIDEwLjIuMCwgCkdOVSBsZCAoR05VIEJpbnV0aWxzKSAyLjM2LjEpICMx
+IFNNUCBQUkVFTVBUIFdlZCwgMTcgTWFyIDIwMjEgMTY6NTk6NTggCiswMDAwIgpJbmZvOiBGU0NL
+IHZlcnNpb24KIMKgIGZyb20gIkxpbnV4IHZlcnNpb24gNS4xMS43LWFyY2gxLTEgKGxpbnV4QGFy
+Y2hsaW51eCkgKGdjYyAoR0NDKSAKMTAuMi4wLCBHTlUgbGQgKEdOVSBCaW51dGlscykgMi4zNi4x
+KSAjMSBTTVAgUFJFRU1QVCBXZWQsIDE3IE1hciAyMDIxIAoxNjo1OTo1OCArMDAwMCIKIMKgwqDC
+oCB0byAiTGludXggdmVyc2lvbiA1LjExLjctYXJjaDEtMSAobGludXhAYXJjaGxpbnV4KSAoZ2Nj
+IChHQ0MpIAoxMC4yLjAsIEdOVSBsZCAoR05VIEJpbnV0aWxzKSAyLjM2LjEpICMxIFNNUCBQUkVF
+TVBUIFdlZCwgMTcgTWFyIDIwMjEgCjE2OjU5OjU4ICswMDAwIgpJbmZvOiBzdXBlcmJsb2NrIGZl
+YXR1cmVzID0gMCA6CkluZm86IHN1cGVyYmxvY2sgZW5jcnlwdCBsZXZlbCA9IDAsIHNhbHQgPSAw
+MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMApJbmZvOiB0b3RhbCBGUyBzZWN0b3JzID0g
+MjYyMTQ0ICgxMjggTUIpCiDCoMKgwqAgSW52YWxpZCBDUCBDUkMgb2Zmc2V0OiAwCkluZm86IENL
+UFQgdmVyc2lvbiA9IDhhYTBkOGEKSW5mbzogQ2hlY2tlZCB2YWxpZCBuYXRfYml0cyBpbiBjaGVj
+a3BvaW50CkluZm86IGNoZWNrcG9pbnQgc3RhdGUgPSAxODEgOsKgIHRyaW1tZWQgbmF0X2JpdHMg
+dW5tb3VudApbQVNTRVJUXSAoZnNja19jaGtfY3Vyc2VnX2luZm86Mjk1OCnCoCAtLT4gSW5jb3Jy
+ZWN0IGN1cnNlZyBbMV06IHNlZ25vIApbMHgzNl0gdHlwZShTSVQpIFswXQpbQVNTRVJUXSAoZnNj
+a19jaGtfY3Vyc2VnX2luZm86Mjk1OCnCoCAtLT4gSW5jb3JyZWN0IGN1cnNlZyBbMl06IHNlZ25v
+IApbMHgzNV0gdHlwZShTSVQpIFswXQpbQVNTRVJUXSAoZnNja19jaGtfY3Vyc2VnX2luZm86Mjk1
+OCnCoCAtLT4gSW5jb3JyZWN0IGN1cnNlZyBbM106IHNlZ25vIApbMHgzNF0gdHlwZShTSVQpIFsw
+XQpbQVNTRVJUXSAoZnNja19jaGtfY3Vyc2VnX2luZm86Mjk1OCnCoCAtLT4gSW5jb3JyZWN0IGN1
+cnNlZyBbNF06IHNlZ25vIApbMHgzM10gdHlwZShTSVQpIFswXQpbQVNTRVJUXSAoZnNja19jaGtf
+Y3Vyc2VnX2luZm86Mjk1OCnCoCAtLT4gSW5jb3JyZWN0IGN1cnNlZyBbNV06IHNlZ25vIApbMHgz
+Ml0gdHlwZShTSVQpIFswXQpbQVNTRVJUXSAoc2FuaXR5X2NoZWNrX25pZDogNDgwKcKgIC0tPiBT
+SVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHgxMDAyXQpbQVNTRVJUXSAoZnNja19jaGtfZGF0
+YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJsa19hZGRyWzB4MTYwMV0KW0FT
+U0VSVF0gKHNhbml0eV9jaGVja19uaWQ6IDQ4MCnCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4MTIxMV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMDBdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTAxXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEwMl0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMDNdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTA0XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEwNV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMDZdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTA3XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEwOF0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMDldCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTBhXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEwYl0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMGNdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTBkXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEwZV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMGZdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTEwXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGExMV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMTJdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTEzXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGExNF0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMTVdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTE2XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGExN10KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMThdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTE5XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGExYV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMWJdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTFjXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGExZF0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMWVdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTFmXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEyMF0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMjFdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTIyXQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEyM10KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMjRdCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTI1XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEyNl0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMjddCltBU1NFUlRdIChmc2NrX2Noa19kYXRh
+X2JsazoxNzE2KcKgIC0tPiBTSVQgYml0bWFwIGlzIDB4MC4gYmxrX2FkZHJbMHg0YTI4XQpbQVNT
+RVJUXSAoZnNja19jaGtfZGF0YV9ibGs6MTcxNinCoCAtLT4gU0lUIGJpdG1hcCBpcyAweDAuIGJs
+a19hZGRyWzB4NGEyOV0KW0FTU0VSVF0gKGZzY2tfY2hrX2RhdGFfYmxrOjE3MTYpwqAgLS0+IFNJ
+VCBiaXRtYXAgaXMgMHgwLiBibGtfYWRkclsweDRhMmFdCnt7e3NraXBwZWR9fX0KYGBgCgpUaGUg
+d2hvbGUgb3V0cHV0IGlzIGh1Z2UuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMt
+ZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0
+L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
