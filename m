@@ -2,79 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84E713467DF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 19:40:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76A8F34688C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 20:09:24 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lOlwe-0007rG-Uw; Tue, 23 Mar 2021 18:40:00 +0000
+	id 1lOmP2-0004wX-VX; Tue, 23 Mar 2021 19:09:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lOlwP-0007nW-FK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:39:45 +0000
+ (envelope-from <krisman@collabora.com>) id 1lOmP1-0004wH-9n
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 19:09:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Oo93yrYbholyPHnSCbhY2bAqDKMeiBa61G2tTjIchWk=; b=FNaY5PEvUaBEcDooWp/yoQdl5y
- 9WY5vpUyKD3VpK0u4bpWmbwp2KQoklkIpr1TPvefSp7U0YYjFR5Yb9ALyTPMZ9dER54tF3G7GxcRi
- kQwsn174528l+uDmi5Va8DDMNbdeZ7BF1YtHDcwYlUPIUPwlaq7NXk0L7Bhoi0WtmYRc=;
+ bh=Y39EoDOm9uJTlWhho5oVXLUurYf33yLQsoySFHmkAEQ=; b=EoIjRhT1fmVLuADQvJggIENozG
+ /vcfKFHpIjGvbq+FDMqNUZYisjeepPo4QUV8zudSgYcTL67Ewr2r0YwLec2hqgd8dAsJnv9qnnrqw
+ Jx0O4uYdmxdCEzOO8rV1fbkmjjkvvHqx3Gs+/2KX612k25NKAfz/YHQmKkDtwfCYXnE8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Oo93yrYbholyPHnSCbhY2bAqDKMeiBa61G2tTjIchWk=; b=BEAbGyB3uxE8Ruh/ut+h1MJ6+F
- agm2l8vf0Zh3muFY1NkNNcn33ObYJBaf98fO3kATcYQG+6fujwDcEmDM3lrcxCvu9glZYnJgrX2EP
- 0twgqqqluhQRkn33xsWoM/4Yuk2gEA6fYHgqbZbhs4BkpF0BVNxBQuq7Dl+IiSXgRs2k=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lOlwN-0007d2-SW
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:39:45 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5A1BC60200;
- Tue, 23 Mar 2021 18:39:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1616524778;
- bh=0kSLNKQSz2QSG9wMkW2lNiXkYaK/wjl031Wzl1gMSKw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=C+LdZ8jkgyoBNkl83dF6ABdg/ZAXCReS5ebQzZcimeguVxw6jp7cQTGb6c0Db7r99
- GZJAEQ7YfS2KrOl4HkBLzCN1DE6vprvuDg9kVKBExKM0gZC+Y0Ijd8bEbBzCWtH5D+
- EonLO53/BAJgRoayhuNDGua77kW4mqUYrp7AaZcIuc0qm9ZJcEQRBZm3+sIB42/aDn
- goZI52amaT7XobuN7JfHmxZPJEedh0Ya9OlUScXW3HXj4UQAE/+NOylE4izexRvI5U
- JtrUjQyjUjjLSxt2j/yVVes+xkcafqTIJ1ixW0cl+sZEks9yFsJV4j4vGIM8otrOaK
- V/u1ywkOeddKw==
-Date: Tue, 23 Mar 2021 11:39:36 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YFo16ADpWJ7OUAvK@google.com>
-References: <20210323064155.12582-1-yuchao0@huawei.com>
+ bh=Y39EoDOm9uJTlWhho5oVXLUurYf33yLQsoySFHmkAEQ=; b=hyDqtxuMe3+DLFkj0Dg4+sN7ud
+ 207srOLtAsF6KlWLGkynpeWhq/2baa/+1ProxiE63A1cu6msCg2boVp1waYwQjkbyylG9deAighMn
+ 18VwzhmjwnnYMrh8OchgGxraM37n2XhubVuxR6yW5oW4aD3J8eeohYEJvg0P1JTsgAbw=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lOmOy-002Bun-Ai
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 19:09:19 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: krisman) with ESMTPSA id 3D4EC1F455B7
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: Shreeya Patel <shreeya.patel@collabora.com>
+Organization: Collabora
+References: <20210323183201.812944-1-shreeya.patel@collabora.com>
+ <20210323183201.812944-2-shreeya.patel@collabora.com>
+Date: Tue, 23 Mar 2021 15:09:05 -0400
+In-Reply-To: <20210323183201.812944-2-shreeya.patel@collabora.com> (Shreeya
+ Patel's message of "Wed, 24 Mar 2021 00:01:57 +0530")
+Message-ID: <87wntxd6we.fsf@collabora.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210323064155.12582-1-yuchao0@huawei.com>
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: intel.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lOlwN-0007d2-SW
-Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: give a warning only for
- readonly partition"
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1lOmOy-002Bun-Ai
+Subject: Re: [f2fs-dev] [PATCH v3 1/5] fs: unicode: Use strscpy() instead of
+ strncpy()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,50 +74,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: tytso@mit.edu, kernel test robot <lkp@intel.com>, drosen@google.com,
+ ebiggers@google.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ kernel@collabora.com, adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org, andre.almeida@collabora.com, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/23, Chao Yu wrote:
-> This reverts commit 938a184265d75ea474f1c6fe1da96a5196163789.
-> 
-> Because that commit fails generic/050 testcase which expect failure
-> during mount a recoverable readonly partition.
+Shreeya Patel <shreeya.patel@collabora.com> writes:
 
-I think we need to change generic/050, since f2fs can recover this partition,
-even though using it as readonly. And, valid checkpoint can allow for user to
-read all the data without problem.
-
-> 
-> Fixes: 938a184265d7 ("f2fs: give a warning only for readonly partition")
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> Following warning was reported by Kernel Test Robot.
+>
+> In function 'utf8_parse_version',
+> inlined from 'utf8_load' at fs/unicode/utf8mod.c:195:7:
+>>> fs/unicode/utf8mod.c:175:2: warning: 'strncpy' specified bound 12 equals
+> destination size [-Wstringop-truncation]
+> 175 |  strncpy(version_string, version, sizeof(version_string));
+>     |  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>
+> The -Wstringop-truncation warning highlights the unintended
+> uses of the strncpy function that truncate the terminating NULL
+> character from the source string.
+> Unlike strncpy(), strscpy() always null-terminates the destination string,
+> hence use strscpy() instead of strncpy().
+>
+> Fixes: 9d53690f0d4e5 (unicode: implement higher level API for string handling)
+> Signed-off-by: Shreeya Patel <shreeya.patel@collabora.com>
+> Reported-by: kernel test robot <lkp@intel.com>
 > ---
->  fs/f2fs/super.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index b48281642e98..2b78ee11f093 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3952,10 +3952,12 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
->  		 * previous checkpoint was not done by clean system shutdown.
->  		 */
->  		if (f2fs_hw_is_readonly(sbi)) {
-> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
-> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
-> +				err = -EROFS;
->  				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
-> -			else
-> -				f2fs_info(sbi, "write access unavailable, skipping recovery");
-> +				goto free_meta;
-> +			}
-> +			f2fs_info(sbi, "write access unavailable, skipping recovery");
->  			goto reset_checkpoint;
->  		}
+>
+> Changes in v3
+>   - Return error if strscpy() returns value < 0
+>
+> Changes in v2
+>   - Resolve warning of -Wstringop-truncation reported by
+>     kernel test robot.
+>
+>  fs/unicode/utf8-core.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+
+Hi Shreeya,
+
+Thanks for fixing this.
+
+> diff --git a/fs/unicode/utf8-core.c b/fs/unicode/utf8-core.c
+> index dc25823bf..706f086bb 100644
+> --- a/fs/unicode/utf8-core.c
+> +++ b/fs/unicode/utf8-core.c
+> @@ -180,7 +180,10 @@ static int utf8_parse_version(const char *version, unsigned int *maj,
+>  		{0, NULL}
+>  	};
 >  
-> -- 
-> 2.29.2
+> -	strncpy(version_string, version, sizeof(version_string));
+> +	int ret = strscpy(version_string, version, sizeof(version_string));
+
+Usually, no spaces between variable declarations
+
+Other than that,
+
+Acked-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+
+> +
+> +	if (ret < 0)
+> +		return ret;
+>  	if (match_token(version_string, token, args) != 1)
+>  		return -EINVAL;
+
+-- 
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
