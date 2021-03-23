@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DFF33467C5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 19:34:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84E713467DF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 19:40:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lOlqw-0003zY-7C; Tue, 23 Mar 2021 18:34:06 +0000
+	id 1lOlwe-0007rG-Uw; Tue, 23 Mar 2021 18:40:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lOlpx-0003wq-Ss
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:33:05 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lOlwP-0007nW-FK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:39:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4ACpTaTaccGZz22NVLefFKJA0kreKzoZN1bibjo5Od0=; b=W48ssWhnnn4XsmW+bymlov2uda
- 2mx8fsmYX1uLKluMF/o01TMwssTfoIXqazyRKIgS5r4xKgsJSk4Gq3j99sKCQ1AY3OzXWKX7oGStR
- 0Ggj5iY2IErDWiegg5+3u7d2QEbFjnxS/Xknbcqj8dD8+GkyKiwm0AmRSbnLodmnZI3E=;
+ bh=Oo93yrYbholyPHnSCbhY2bAqDKMeiBa61G2tTjIchWk=; b=FNaY5PEvUaBEcDooWp/yoQdl5y
+ 9WY5vpUyKD3VpK0u4bpWmbwp2KQoklkIpr1TPvefSp7U0YYjFR5Yb9ALyTPMZ9dER54tF3G7GxcRi
+ kQwsn174528l+uDmi5Va8DDMNbdeZ7BF1YtHDcwYlUPIUPwlaq7NXk0L7Bhoi0WtmYRc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4ACpTaTaccGZz22NVLefFKJA0kreKzoZN1bibjo5Od0=; b=KYPs2vrdKCX8mnKGv+xrAy9Qfu
- 0Urhnce94GGsKPqn/4YOoc4nCBXGyhhFhmokotdycfleUue3KQL4pRRcrpS6vgJt0m8WzbvrbgSW8
- EFCApzD0/CBH1ZBwpVv+3aUjg0Nx56GI9Ad/VC74Whq81cDhkhS/WrdBUVgw7abUO5lg=;
+ bh=Oo93yrYbholyPHnSCbhY2bAqDKMeiBa61G2tTjIchWk=; b=BEAbGyB3uxE8Ruh/ut+h1MJ6+F
+ agm2l8vf0Zh3muFY1NkNNcn33ObYJBaf98fO3kATcYQG+6fujwDcEmDM3lrcxCvu9glZYnJgrX2EP
+ 0twgqqqluhQRkn33xsWoM/4Yuk2gEA6fYHgqbZbhs4BkpF0BVNxBQuq7Dl+IiSXgRs2k=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lOlpt-0007Db-05
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:33:05 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id F2AEB619BB;
- Tue, 23 Mar 2021 18:32:48 +0000 (UTC)
+ id 1lOlwN-0007d2-SW
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:39:45 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5A1BC60200;
+ Tue, 23 Mar 2021 18:39:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1616524369;
- bh=SrXcVBV4nIQgyIM/fSLSVHs7w6pMJ/2dsxCVsXvB8zY=;
+ s=k20201202; t=1616524778;
+ bh=0kSLNKQSz2QSG9wMkW2lNiXkYaK/wjl031Wzl1gMSKw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=rUjxWZ9gdwrdHn6tWK74f9t7uFHKIpK1FRY4C4+u0het+B+AG2OxVB/nx9jgS0UZ4
- FeEa1ualNfMqtREFs8w3W4sm7yjOWOkDAfLCe7cmp1zF9fshivPKLAaE9ixmB0sYH2
- h7pIoYN8jeDMLuja7RyiDJ4RaZ+rc4OzDcIN4OaocgEfAnB0tSypo3qDOidK6xAUW+
- FKfU+nIIJu0GFVoBGQQTZtRqT9AEbm1ZuvpcGLhusOL7GeMzMmsE+of5ydaXRxPUMa
- GI4OJ/q8aY5AeSIiVeGwy513R4nCNr/TwchCu0ZLrTIawt7d1abEKHM01bgbrtP437
- R3wvGVqQYIWwQ==
-Date: Tue, 23 Mar 2021 11:32:47 -0700
+ b=C+LdZ8jkgyoBNkl83dF6ABdg/ZAXCReS5ebQzZcimeguVxw6jp7cQTGb6c0Db7r99
+ GZJAEQ7YfS2KrOl4HkBLzCN1DE6vprvuDg9kVKBExKM0gZC+Y0Ijd8bEbBzCWtH5D+
+ EonLO53/BAJgRoayhuNDGua77kW4mqUYrp7AaZcIuc0qm9ZJcEQRBZm3+sIB42/aDn
+ goZI52amaT7XobuN7JfHmxZPJEedh0Ya9OlUScXW3HXj4UQAE/+NOylE4izexRvI5U
+ JtrUjQyjUjjLSxt2j/yVVes+xkcafqTIJ1ixW0cl+sZEks9yFsJV4j4vGIM8otrOaK
+ V/u1ywkOeddKw==
+Date: Tue, 23 Mar 2021 11:39:36 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YFo0Tz1zl4tw7lUP@google.com>
-References: <20210305095601.96591-1-yuchao0@huawei.com>
- <d9c118eb-45b3-7f35-70bd-cb016957e6e8@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YFo16ADpWJ7OUAvK@google.com>
+References: <20210323064155.12582-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <d9c118eb-45b3-7f35-70bd-cb016957e6e8@kernel.org>
+In-Reply-To: <20210323064155.12582-1-yuchao0@huawei.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -73,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lOlpt-0007Db-05
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to align to section for
- fallocate() on pinned file
+X-Headers-End: 1lOlwN-0007d2-SW
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: give a warning only for
+ readonly partition"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,62 +92,44 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 03/23, Chao Yu wrote:
-> On 2021/3/5 17:56, Chao Yu wrote:
-> > Now, fallocate() on a pinned file only allocates blocks which aligns
-> > to segment rather than section, so GC may try to migrate pinned file's
-> > block, and after several times of failure, pinned file's block could
-> > be migrated to other place, however user won't be aware of such
-> > condition, and then old obsolete block address may be readed/written
-> > incorrectly.
-> > 
-> > To avoid such condition, let's try to allocate pinned file's blocks
-> > with section alignment.
-> > 
-> > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> This reverts commit 938a184265d75ea474f1c6fe1da96a5196163789.
 > 
-> Jaegeuk,
+> Because that commit fails generic/050 testcase which expect failure
+> during mount a recoverable readonly partition.
+
+I think we need to change generic/050, since f2fs can recover this partition,
+even though using it as readonly. And, valid checkpoint can allow for user to
+read all the data without problem.
+
 > 
-> Could you please check and apply below diff into original patch?
-> 
+> Fixes: 938a184265d7 ("f2fs: give a warning only for readonly partition")
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
 > ---
->  fs/f2fs/file.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+>  fs/f2fs/super.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 > 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 236f3f69681a..24fa68fdcaa0 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -1648,13 +1648,13 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
->  		return 0;
-> 
->  	if (f2fs_is_pinned_file(inode)) {
-> -		block_t len = (map.m_len >> sbi->log_blocks_per_seg) <<
-> -					sbi->log_blocks_per_seg;
-> +		block_t sec_blks = BLKS_PER_SEC(sbi);
-> +		block_t len = rounddown(map.m_len, sec_blks);
-
-len is declared above, so let me rephrase this as well.
-
-> 
-> -		if (map.m_len % sbi->blocks_per_seg)
-> -			len += sbi->blocks_per_seg;
-> +		if (map.m_len % sec_blks)
-> +			len += sec_blks;
-
-is this roundup()?
-
-Could you check this?
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=e1175f02291141bbd924fc578299305fcde35855
-
-> 
-> -		map.m_len = sbi->blocks_per_seg;
-> +		map.m_len = sec_blks;
->  next_alloc:
->  		if (has_not_enough_free_secs(sbi, 0,
->  			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index b48281642e98..2b78ee11f093 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -3952,10 +3952,12 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  		 * previous checkpoint was not done by clean system shutdown.
+>  		 */
+>  		if (f2fs_hw_is_readonly(sbi)) {
+> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+> +				err = -EROFS;
+>  				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+> -			else
+> -				f2fs_info(sbi, "write access unavailable, skipping recovery");
+> +				goto free_meta;
+> +			}
+> +			f2fs_info(sbi, "write access unavailable, skipping recovery");
+>  			goto reset_checkpoint;
+>  		}
+>  
 > -- 
-> 2.22.1
-> 
+> 2.29.2
 
 
 _______________________________________________
