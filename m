@@ -2,82 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25879346069
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 14:56:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66E1D3467EC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 19:43:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lOhWQ-0000Mz-R3; Tue, 23 Mar 2021 13:56:38 +0000
+	id 1lOlzc-0002dd-VS; Tue, 23 Mar 2021 18:43:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lOhWP-0000Mj-SG
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 13:56:37 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <shreeya.patel@collabora.com>) id 1lOlpm-00020a-VV
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:32:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rx9kgaZb+bgnOxaSkCx+gVKC93JmPftdrzb7m++xRDY=; b=VCIwgEyZ2GnmRBMnDfT978PcMq
- pafHcjLxqL5mRjkOOZ1OJ9nO/+zGOMvwVC/Kv4TLfTCN7DmGaGZY0RcKHr4SgxEWmSGXKYIZKj0E5
- 1W7P8cXQkkWVU08smxBM9DBlycvgrRb0dhQS0nvIOcGoMPwgUORkl+UmkbHn1CRR8JHg=;
+ bh=EKAmWgEsZOcsdtigUWclob/h+LbxDAohBBASze3/10U=; b=PgU/Kr3cX1IPfvpXhvkuGO3+3F
+ MkTyftpt8m2BDJYG4ylVtJWzVhHrCqzDrDuKaFRF+GPhhgz/OcRar7WKQM0CA/F1LQDvbS5Iqrj54
+ cKUZddsxsuVfcDSyFE8MWBEaX4iwDy8tSMEST6kXwfk1TMA2DelQNPJWtqZMq9AdDWO0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rx9kgaZb+bgnOxaSkCx+gVKC93JmPftdrzb7m++xRDY=; b=LnB6QaQv104HjEUQCPODOwmBHE
- zIdT7+STl67Mj8PEoEyEjeBHxDJoYusBOI+X2rckpCdly85sOqG5r5653Dhadym9czp4unvh7AdZ0
- 13GX/5tp89AtaBI4ghT0iaK+4uUMiOREUJpw5SSr5XPOHlwVvRC+1WYYtGEZYi12Q09U=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lOhWL-001G6X-38
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 13:56:37 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7B19C6199F;
- Tue, 23 Mar 2021 13:56:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1616507787;
- bh=8lKy2kI8+VRpgd7UaH5wsraNigVbnf5gjlgvvdBwnBE=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=ctFllR8M5ADN0PQZGilMeRK2vxtz2PfkIZU/rB+oJPFpyrze0z1jirtPfRojTZe7E
- K01johJh0sVT0XKGOnU64IktnMSgnZxXU6wiax1/38dRhg6j9LaGsV+yG++7q64tUw
- 14WWIO+Jldbd+pHJ1SwnvFwRfEx1aqP6ADIeycO+RrYseD/Nv8OHdh3TwN/IupPFoU
- 6kRJOLAcnAsFBY5rNa4gFBXu70qInd+nqc7T2yaYnRG2tfJyzRgngYsW6zq4D/UxLY
- AWmdUbpOuu3HFsgdh5IOBweu2byr8HoJbL/Yv5vkutu2kCphIuxIcoWwgifginyA+H
- kpnt6hN17p83g==
-To: jaegeuk@kernel.org
-References: <20210305095601.96591-1-yuchao0@huawei.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <d9c118eb-45b3-7f35-70bd-cb016957e6e8@kernel.org>
-Date: Tue, 23 Mar 2021 21:56:22 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EKAmWgEsZOcsdtigUWclob/h+LbxDAohBBASze3/10U=; b=n
+ IgMeM3QPGIA8Rm6qoAJ8dapKubapUM6an0oxPtPM/uOyTFWyO4eL0o6k45f+Wzk2ubRFMhoW2P3dV
+ vX9tI+qsOhEiYlNWd2j4g9Lv9ftecAliUnwdrS8NrDkG3Hax8rstiQqR0wHiB2XnnPY/iKgP6wWSP
+ wHVQFb0aHWhrgsaQ=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lOlpY-0007DE-CZ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 18:32:54 +0000
+Received: from localhost.localdomain (unknown
+ [IPv6:2401:4900:5170:240f:f606:c194:2a1c:c147])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: shreeya)
+ by bhuna.collabora.co.uk (Postfix) with ESMTPSA id 59CC01F44A65;
+ Tue, 23 Mar 2021 18:32:26 +0000 (GMT)
+From: Shreeya Patel <shreeya.patel@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ chao@kernel.org, krisman@collabora.com, ebiggers@google.com,
+ drosen@google.com, ebiggers@kernel.org, yuchao0@huawei.com
+Date: Wed, 24 Mar 2021 00:01:56 +0530
+Message-Id: <20210323183201.812944-1-shreeya.patel@collabora.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-In-Reply-To: <20210305095601.96591-1-yuchao0@huawei.com>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: checkpatch.pl]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lOhWL-001G6X-38
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to align to section for
- fallocate() on pinned file
+X-Headers-End: 1lOlpY-0007DE-CZ
+Subject: [f2fs-dev] [PATCH v3 0/4] Make UTF-8 encoding loadable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,58 +73,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel@collabora.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/3/5 17:56, Chao Yu wrote:
-> Now, fallocate() on a pinned file only allocates blocks which aligns
-> to segment rather than section, so GC may try to migrate pinned file's
-> block, and after several times of failure, pinned file's block could
-> be migrated to other place, however user won't be aware of such
-> condition, and then old obsolete block address may be readed/written
-> incorrectly.
-> 
-> To avoid such condition, let's try to allocate pinned file's blocks
-> with section alignment.
-> 
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+utf8data.h_shipped has a large database table which is an auto-generated
+decodification trie for the unicode normalization functions and it is not
+necessary to carry this large table in the kernel.
+Goal is to make UTF-8 encoding loadable by converting it into a module
+and adding a layer between the filesystems and the utf8 module which will
+load the module whenever any filesystem that needs unicode is mounted.
 
-Jaegeuk,
+1st patch in the series resolves the warning reported by kernel test robot
+and 2nd patch fixes the incorrect use of utf8_unload() in ext4 and
+f2fs filesystems.
 
-Could you please check and apply below diff into original patch?
+Unicode is the subsystem and utf8 is a charachter encoding for the
+subsystem, hence 3rd and 4th patches in the series are renaming functions
+and file name to unicode for better understanding the difference between
+UTF-8 module and unicode layer.
+
+Last patch in the series adds the layer and utf8 module and also uses
+static_call() function introducted for preventing speculative execution
+attacks.
 
 ---
-  fs/f2fs/file.c | 10 +++++-----
-  1 file changed, 5 insertions(+), 5 deletions(-)
+Changes in v3
+  - Add a patch which checks if utf8 is loaded before calling utf8_unload()
+    in ext4 and f2fs filesystems
+  - Return error if strscpy() returns value < 0
+  - Correct the conditions to prevent NULL pointer dereference while
+    accessing functions via utf8_ops variable.
+  - Add spinlock to avoid race conditions.
+  - Use static_call() for preventing speculative execution attacks.
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 236f3f69681a..24fa68fdcaa0 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1648,13 +1648,13 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
-  		return 0;
+Changes in v2
+  - Remove the duplicate file from the last patch.
+  - Make the wrapper functions inline.
+  - Remove msleep and use try_module_get() and module_put()
+    for ensuring that module is loaded correctly and also
+    doesn't get unloaded while in use.
+  - Resolve the warning reported by kernel test robot.
+  - Resolve all the checkpatch.pl warnings.
 
-  	if (f2fs_is_pinned_file(inode)) {
--		block_t len = (map.m_len >> sbi->log_blocks_per_seg) <<
--					sbi->log_blocks_per_seg;
-+		block_t sec_blks = BLKS_PER_SEC(sbi);
-+		block_t len = rounddown(map.m_len, sec_blks);
+Shreeya Patel (4):
+  fs: unicode: Use strscpy() instead of strncpy()
+  fs: Check if utf8 encoding is loaded before calling utf8_unload()
+  fs: unicode: Rename function names from utf8 to unicode
+  fs: unicode: Rename utf8-core file to unicode-core
 
--		if (map.m_len % sbi->blocks_per_seg)
--			len += sbi->blocks_per_seg;
-+		if (map.m_len % sec_blks)
-+			len += sec_blks;
+ fs/ext4/hash.c                             |  2 +-
+ fs/ext4/namei.c                            | 12 ++---
+ fs/ext4/super.c                            |  8 +--
+ fs/f2fs/dir.c                              | 12 ++---
+ fs/f2fs/super.c                            | 11 ++--
+ fs/libfs.c                                 |  6 +--
+ fs/unicode/Makefile                        |  2 +-
+ fs/unicode/{utf8-core.c => unicode-core.c} | 62 +++++++++++-----------
+ fs/unicode/utf8-selftest.c                 |  8 +--
+ include/linux/unicode.h                    | 32 +++++------
+ 10 files changed, 81 insertions(+), 74 deletions(-)
+ rename fs/unicode/{utf8-core.c => unicode-core.c} (72%)
 
--		map.m_len = sbi->blocks_per_seg;
-+		map.m_len = sec_blks;
-  next_alloc:
-  		if (has_not_enough_free_secs(sbi, 0,
-  			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
 -- 
-2.22.1
-
+2.30.1
 
 
 
