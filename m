@@ -2,69 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56909346C03
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Mar 2021 23:18:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id C97BA346DA6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Mar 2021 00:00:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lOpMH-0007mZ-TI; Tue, 23 Mar 2021 22:18:41 +0000
+	id 1lOq0F-0005RM-D7; Tue, 23 Mar 2021 22:59:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <shreeya.patel@collabora.com>) id 1lOpMG-0007mM-IJ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 22:18:40 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1lOq0D-0005RC-HT
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 22:59:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WU9FkwOD6xqDjH9ihaHivF5xS9z4ct5zqnO3SAFTlYc=; b=hPXm3aY0R++CHL1tuTwyvWeYNI
- +6rcsl/LmAfAmi44OcgZO1bO2wd9ojErblnk0qikjL0q/S7IzlWxc0B+Y+VpsRVOsAfMdEGKyiq0X
- +w5gxCbFPnR65xSK/5iIbkJoWggXb3IQSpbKNxiVbKDdDktu47QOn/ln2wWrkswjzOIg=;
+ bh=pwz5Yu3ceHgNAIkNTNd4B9nupMS0YN9Eiq2Dxg3vtz8=; b=aRinWqPBagj1MMWNiPSoJS+oQp
+ wi5VK1MjsJfZbNu0VyUJ71Ovhjr6twIs1jAjfLQyC6xtqjB7XgiWXP2ZzkBn8nUbWjY7AKdO1633P
+ EX6Mp8Kn8VJXWtDVcCnGDm7emg/e1SNcoS5j4pd7EH4YZ6TtpjXiF1Z7L4whOSDANoOw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WU9FkwOD6xqDjH9ihaHivF5xS9z4ct5zqnO3SAFTlYc=; b=c7qvuHqgCYKXaqIax/wte8mWfo
- gAQ4nH9O6m5SzofNaKw5UBN8VY1E9GWYH6Q5EQ38qrCzSYWj7iGEurqnYedcJa/cNRFv9Cxesj4Uw
- 9Y+2KsFSujlzolIWihlx0Bi3VYZgW25RSBYWLP/sATJPw2s8c+lGjg2dfpi5JwV+ZELc=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ bh=pwz5Yu3ceHgNAIkNTNd4B9nupMS0YN9Eiq2Dxg3vtz8=; b=ffz6Fen9F0eLRlgfqDiqdJqYsE
+ 199PEp5X/1l2XQktOxsK3uU0LM83UR+bgLo0funQkQzQ95swZWYtW5/v1DEGm/kVYfI1TR8WpZr91
+ 1ezwvYDP8dRUVBayfRbRlzRGfRwSqaiOiCqGBcdWQIIKhytN+B7B2vloYdIAioYemxV4=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lOpM1-0006nr-Iq
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 22:18:40 +0000
-Received: from [IPv6:2401:4900:5170:240f:f606:c194:2a1c:c147] (unknown
- [IPv6:2401:4900:5170:240f:f606:c194:2a1c:c147])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: shreeya)
- by bhuna.collabora.co.uk (Postfix) with ESMTPSA id 2208F1F454D0;
- Tue, 23 Mar 2021 22:18:14 +0000 (GMT)
-To: Eric Biggers <ebiggers@kernel.org>,
- Gabriel Krisman Bertazi <krisman@collabora.com>
-References: <20210323183201.812944-1-shreeya.patel@collabora.com>
- <20210323183201.812944-6-shreeya.patel@collabora.com>
- <87eeg5d4xb.fsf@collabora.com> <YFpPxCQiMLqctIuS@gmail.com>
-From: Shreeya Patel <shreeya.patel@collabora.com>
-Message-ID: <dd7dae42-6024-8868-3e3e-f6d672274682@collabora.com>
-Date: Wed, 24 Mar 2021 03:48:10 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ id 1lOq08-0008Hy-Vi
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 23 Mar 2021 22:59:57 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9B883619D9;
+ Tue, 23 Mar 2021 22:59:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1616540380;
+ bh=8pvmxfe6Fus9YwEnpI++2Qy2NL6+4k5fZBCD7awngFI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FM5Bg24zzDgHRftBa0WHC+xbB+vNkL+HgWYCuPwW7cMxEmoAsc0tWcPYUeK06UsLe
+ FZ4isI7VYM+Ln1WBQSEUsSGdML8CAGgk5dLWZST/2FR0JUi5NPVvf6qxLmR0/4o/Kl
+ pDjxB/1mGj2vq2XnQuAdMe2Q3YHxbhB5lk791pSzELfSEYTtLvcABDTvX2SOuWRM58
+ Ieefat7N+uWctng3AoSBREDtyVpcZyZ1eghjdgHp/fCeiPqsDzr0nf5Tgan4U0YdMa
+ /HQcZ3Dy6PjmCU5oZ/QV7OZvU7jm4P2xAEq6CfBLWCgRpSylSXl/A8qLdSQeq4xGLA
+ 1AXP5HK67QGCg==
+Date: Tue, 23 Mar 2021 15:59:39 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YFpy26JZRpZASB7R@google.com>
+References: <20210220094052.64905-1-yuchao0@huawei.com>
+ <YFOLNGo+/8sKQ7si@google.com>
+ <ec5cda53-d3f4-450c-7567-7bfc68e224f9@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <YFpPxCQiMLqctIuS@gmail.com>
-Content-Language: en-US
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <ec5cda53-d3f4-450c-7567-7bfc68e224f9@huawei.com>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lOpM1-0006nr-Iq
-Subject: Re: [f2fs-dev] [PATCH v3 5/5] fs: unicode: Add utf8 module and a
- unicode layer
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lOq08-0008Hy-Vi
+Subject: Re: [f2fs-dev] [PATCH RFC] f2fs: fix to avoid selecting full
+ segment w/ {AT, }SSR allocator
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,112 +88,143 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, drosen@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel@collabora.com,
- adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- andre.almeida@collabora.com, linux-ext4@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+On 03/19, Chao Yu wrote:
+> On 2021/3/19 1:17, Jaegeuk Kim wrote:
+> > On 02/20, Chao Yu wrote:
+> > > In cp disabling mode, there could be a condition
+> > > - target segment has 128 ckpt valid blocks
+> > > - GC migrates 128 valid blocks to other segment (segment is still in
+> > > dirty list)
+> > > - GC migrates 384 blocks to target segment (segment has 128 cp_vblocks
+> > > and 384 vblocks)
+> > > - If GC selects target segment via {AT,}SSR allocator, however there is
+> > > no free space in targe segment.
+> > > 
+> > > Fixes: 4354994f097d ("f2fs: checkpoint disabling")
+> > > Fixes: 093749e296e2 ("f2fs: support age threshold based garbage collection")
+> > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > > ---
+> > >   fs/f2fs/f2fs.h    |  1 +
+> > >   fs/f2fs/gc.c      | 17 +++++++++++++----
+> > >   fs/f2fs/segment.c | 20 ++++++++++++++++++++
+> > >   3 files changed, 34 insertions(+), 4 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > index ed7807103c8e..9c753eff0814 100644
+> > > --- a/fs/f2fs/f2fs.h
+> > > +++ b/fs/f2fs/f2fs.h
+> > > @@ -3376,6 +3376,7 @@ block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
+> > >   int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
+> > >   void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
+> > >   int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
+> > > +bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno);
+> > >   void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
+> > >   void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi);
+> > >   void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi);
+> > > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> > > index 86ba8ed0b8a7..a1d8062cdace 100644
+> > > --- a/fs/f2fs/gc.c
+> > > +++ b/fs/f2fs/gc.c
+> > > @@ -392,10 +392,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
+> > >   		if (p->gc_mode == GC_AT &&
+> > >   			get_valid_blocks(sbi, segno, true) == 0)
+> > >   			return;
+> > > -
+> > > -		if (p->alloc_mode == AT_SSR &&
+> > > -			get_seg_entry(sbi, segno)->ckpt_valid_blocks == 0)
+> > > -			return;
+> > >   	}
+> > >   	for (i = 0; i < sbi->segs_per_sec; i++)
+> > > @@ -736,6 +732,19 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+> > >   		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+> > >   			goto next;
+> > > +		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
+> > > +			/*
+> > > +			 * to avoid selecting candidate which has below valid
+> > > +			 * block distribution:
+> > > +			 * partial blocks are valid and all left ones are valid
+> > > +			 * in previous checkpoint.
+> > > +			 */
+> > > +			if (p.alloc_mode == SSR || p.alloc_mode == AT_SSR) {
+> > > +				if (!segment_has_free_slot(sbi, segno))
+> > > +					goto next;
+> > 
+> > Do we need to change this to check free_slot instead of get_ckpt_valid_blocks()?
+> 
+> Jaegeuk,
+> 
+> LFS was assigned only for GC case, in this case we are trying to select source
+> section, rather than target segment for SSR/AT_SSR case, so we don't need to
+> check free_slot.
+> 
+> - f2fs_gc
+>  - __get_victim
+>   - get_victim(sbi, victim, gc_type, NO_CHECK_TYPE, LFS, 0);
+> 
+> > 
+> >   732                 if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
+> >   733                                         get_ckpt_valid_blocks(sbi, segno) &&
+> >   734                                         p.alloc_mode == LFS))
+> 
+> BTW, in LFS mode, GC wants to find source section rather than segment, so we
+> should change to check valid ckpt blocks in every segment of targe section here?
 
-On 24/03/21 1:59 am, Eric Biggers wrote:
-> On Tue, Mar 23, 2021 at 03:51:44PM -0400, Gabriel Krisman Bertazi wrote:
->>> -int unicode_validate(const struct unicode_map *um, const struct qstr *str)
->>> -{
->>> -	const struct utf8data *data = utf8nfdi(um->version);
->>> -
->>> -	if (utf8nlen(data, str->name, str->len) < 0)
->>> -		return -1;
->>> -	return 0;
->>> -}
->>> +struct unicode_ops *utf8_ops;
->>> +EXPORT_SYMBOL(utf8_ops);
->>> +
->>> +int _utf8_validate(const struct unicode_map *um, const struct qstr *str)
->>> +{
->>> +	return 0;
->>> +}
->>> -EXPORT_SYMBOL(unicode_validate);
->> I think that any calls to the default static calls should return errors
->> instead of succeeding without doing anything.
->>
->> In fact, are the default calls really necessary?  If someone gets here,
->> there is a bug elsewhere, so WARN_ON and maybe -EIO.
->>
->> int unicode_validate_default_static_call(...)
->> {
->>     WARN_ON(1);
->>     return -EIO;
->> }
->>
->> Or just have a NULL default, as I mentioned below, if that is possible.
->>
-> [...]
->>> +DEFINE_STATIC_CALL(utf8_validate, _utf8_validate);
->>> +DEFINE_STATIC_CALL(utf8_strncmp, _utf8_strncmp);
->>> +DEFINE_STATIC_CALL(utf8_strncasecmp, _utf8_strncasecmp);
->>> +DEFINE_STATIC_CALL(utf8_strncasecmp_folded, _utf8_strncasecmp_folded);
->>> +DEFINE_STATIC_CALL(utf8_normalize, _utf8_normalize);
->>> +DEFINE_STATIC_CALL(utf8_casefold, _utf8_casefold);
->>> +DEFINE_STATIC_CALL(utf8_casefold_hash, _utf8_casefold_hash);
->>> +DEFINE_STATIC_CALL(utf8_load, _utf8_load);
->>> +DEFINE_STATIC_CALL_NULL(utf8_unload, _utf8_unload);
->>> +EXPORT_STATIC_CALL(utf8_strncmp);
->>> +EXPORT_STATIC_CALL(utf8_strncasecmp);
->>> +EXPORT_STATIC_CALL(utf8_strncasecmp_folded);
->> I'm having a hard time understanding why some use
->> DEFINE_STATIC_CALL_NULL, while other use DEFINE_STATIC_CALL.  This new
->> static call API is new to me :).  None of this can be called if the
->> module is not loaded anyway, so perhaps the default function can just be
->> NULL, per the documentation of include/linux/static_call.h?
->>
->> Anyway, Aren't utf8_{validate,casefold,normalize} missing the
->> equivalent EXPORT_STATIC_CALL?
->>
-> The static_call API is fairly new to me too.  But the intent of this patch seems
-> to be that none of the utf8 functions are called without the utf8 module loaded.
-> If they are called, it's a kernel bug.  So there are two options for what to do
-> if it happens anyway:
->
->    1. call a "null" static call, which does nothing
->
-> *or*
->
->    2. call a default function which does WARN_ON_ONCE() and returns an error if
->       possible.
->
-> (or 3. don't use static calls and instead dereference a NULL utf8_ops like
-> previous versions of this patch did.)
->
-> It shouldn't really matter which of these approaches you take, but please be
-> consistent and use the same one everywhere.
->
->> + void unicode_unregister(void)
->> + {
->> +         spin_lock(&utf8ops_lock);
->> +         utf8_ops = NULL;
->> +         spin_unlock(&utf8ops_lock);
->> + }
->> + EXPORT_SYMBOL(unicode_unregister);
-> This should restore the static calls to their default values (either NULL or the
-> default functions, depending on what you decide).
->
-> Also, it's weird to still have the utf8_ops structure when using static calls.
-> It seems it should be one way or the other: static calls *or* utf8_ops.
->
-> The static calls could be exported, and the module could be responsible for
-> updating them.  That would eliminate the need for utf8_ops.
+Alright. I refactored a bit on this patch with new one. Could you please take a look?
 
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=00152bd7cabd69b4615ebead823ff23887b0e0f7
 
-Hmmm yes, I think we are just using utf8_ops for getting the owner details
-which we can now remove and instead pass it as an argument while 
-registering the module.
-Will make this change in v4. Thanks
+Thanks,
 
-
->
-> - Eric
+> 
+> Thanks,
+> 
+> > 
+> > 
+> > > +			}
+> > > +		}
+> > > +
+> > >   		if (is_atgc) {
+> > >   			add_victim_entry(sbi, &p, segno);
+> > >   			goto next;
+> > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > index 2d5a82c4ca15..deaf57e13125 100644
+> > > --- a/fs/f2fs/segment.c
+> > > +++ b/fs/f2fs/segment.c
+> > > @@ -2650,6 +2650,26 @@ static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
+> > >   		seg->next_blkoff++;
+> > >   }
+> > > +bool segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
+> > > +{
+> > > +	struct sit_info *sit = SIT_I(sbi);
+> > > +	struct seg_entry *se = get_seg_entry(sbi, segno);
+> > > +	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
+> > > +	unsigned long *target_map = SIT_I(sbi)->tmp_map;
+> > > +	unsigned long *ckpt_map = (unsigned long *)se->ckpt_valid_map;
+> > > +	unsigned long *cur_map = (unsigned long *)se->cur_valid_map;
+> > > +	int i, pos;
+> > > +
+> > > +	down_write(&sit->sentry_lock);
+> > > +	for (i = 0; i < entries; i++)
+> > > +		target_map[i] = ckpt_map[i] | cur_map[i];
+> > > +
+> > > +	pos = __find_rev_next_zero_bit(target_map, sbi->blocks_per_seg, 0);
+> > > +	up_write(&sit->sentry_lock);
+> > > +
+> > > +	return pos < sbi->blocks_per_seg;
+> > > +}
+> > > +
+> > >   /*
+> > >    * This function always allocates a used segment(from dirty seglist) by SSR
+> > >    * manner, so it should recover the existing segment information of valid blocks
+> > > -- 
+> > > 2.29.2
+> > .
+> > 
 
 
 _______________________________________________
