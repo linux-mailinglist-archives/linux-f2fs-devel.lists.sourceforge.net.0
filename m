@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F38F349A94
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Mar 2021 20:41:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CDCC349A9F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Mar 2021 20:44:43 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lPVrF-0004I8-FJ; Thu, 25 Mar 2021 19:41:29 +0000
+	id 1lPVuL-0004n4-Um; Thu, 25 Mar 2021 19:44:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lPVqK-0004B9-9o
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 19:40:32 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lPVtK-0004f7-7O
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 19:43:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qhr7dXDdzj51Fepmx7/kzfKY3UuNOKbA8ijLgUfUe+w=; b=mQ4ODrOjgwjSA1MakdwK146TOK
- bUnoLiFX0MrBy7jluVr8rEUbTrPJz6ljoiyoPgMyFyn55MzkvMLmo5b9GqDfV3nSAmkGf5dCeNNNl
- nDxmgyv9mDXHwNnmKk8gHU1z2nzxd+DilDygDOn1HNzfB6PyR2fKkZMZOy5/32PZfiAc=;
+ bh=V//Mv4IG0rWO5ivK6wzM8rWbkmdCWaThS7HF5wRCS24=; b=O+1SEmsAU8wmUPBcOoheorKNOI
+ wnY4MBk4CDXyY5XLg9jXv73NMrf9G8IJrFawRr1GSMPvOaVGjGVjER5OJZ8McZjsGtcN7tLaACaq/
+ uWjBFmrVd6EzzpcBYwNEzLEmO5aWdYkn6eculkyHTGKghE9A5Tb1TjCBKSjLmXvzLRQQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,38 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qhr7dXDdzj51Fepmx7/kzfKY3UuNOKbA8ijLgUfUe+w=; b=U6QO1jM3lVwggr21icEeAw9AqB
- uwF5JplyxcH3JNZB20Uo1fbjt9Z8JRKd6UeyEf4lkMc31/ExU/4NVqulxmt67FNeJHU9qonPFFi3W
- veYCswiWZvtgiZgLYJLsZhTacrp3fJHCVwFeKmpYFIzFChZyDCUiZ1ZeUS9E2gAw9oio=;
+ bh=V//Mv4IG0rWO5ivK6wzM8rWbkmdCWaThS7HF5wRCS24=; b=e/2cd1AO+1ko6UWNk9Ie2LvgtP
+ OHj6MIk2PBsuNI5Vy6FMoMnudV288jtU/S3vrmz6FjzgY+9P/gLrhytwLMB9JK73Vvk32/VqEGa9I
+ jXaUXMCUWmQYMfd3mttKD3wr+/F7L2JGUEdYVzTV0cO+eUmkiexwOaW5kst/MdeqGNZo=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lPVqF-0005oL-Af
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 19:40:31 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6D84361A33;
- Thu, 25 Mar 2021 19:40:18 +0000 (UTC)
+ id 1lPVtB-0005vJ-Gb
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 19:43:38 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id CD9D0619C9;
+ Thu, 25 Mar 2021 19:43:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1616701218;
- bh=t73TCDPbW8CCPOT1gnPyZLIMzYIWH/PeC5jyFO3S+hU=;
+ s=k20201202; t=1616701404;
+ bh=1r+GeFGCMbDDIXeRYKJ4Hm8F51/bPaP4XF8mxybzx2A=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PIo7ZcQ+itFZRv3GceyXjflqxbkDu13DtfYPAWifjUac73uuPiFjWbj9C9nr0ZcUN
- xWAznZsIAk/FOT5bePJvRU1zYETQu+HdvYuGBO3U8Y6vi5XE8q5DDzJ+avczZeM6+2
- g0mxoBg8wEg7tiev7kuEm2nJ30wUR05wxTUCCacXpn2IB5gE0J9LsqzHSyv8Eli/U4
- Sf34dqc2TWQDlcvF0Frfs7aynPXOc8LA9tq90P+TuRYE0KvE3hGRi7bIZT2ZYvIFhH
- K91heJwiLnEj7isnTgbBg/cR8Pwfc8eSG+A6yf8KVr6qKn+Ysvfy29RZbyvQggBblR
- bS2uTt4RC1YlA==
-Date: Thu, 25 Mar 2021 12:40:17 -0700
+ b=JGP1DZMB24r/DF69LXH/qos9xWt+IB2JQD2/pxxusRzuFj7yp8XP9X6ZX11xq7UI3
+ SqgDqD5EeTOq9jkARGuGO2Y0JjS2eKLD1lvQ4i83zw0FkGZLqPEa3b/DEr7vJrFQWM
+ rHRuNJnaf0MP6CSUnAClzOox/qpLeEiVup7Sm+LLExLdFtmcCn/BLnD9OtQ7Oo6VBs
+ d7Fde1+FRBsdZGBPah8hBCy9p2ot8rPBJtccyc2DJhao2COhMdQJ//x2+YRTz5xxdN
+ EXnfAdx8UBx9lXiF0DKxfcGOPjRXFd0HRnsj3Zr8bwt/TO151jqIYDrDv/W5Pcm7br
+ j61kk91T6iVTA==
+Date: Thu, 25 Mar 2021 12:43:22 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Shreeya Patel <shreeya.patel@collabora.com>
-Message-ID: <YFznIVf/F68oEuC6@sol.localdomain>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
+Message-ID: <YFzn2rbN6P0LvdA+@sol.localdomain>
 References: <20210325000811.1379641-1-shreeya.patel@collabora.com>
- <20210325000811.1379641-6-shreeya.patel@collabora.com>
+ <20210325000811.1379641-3-shreeya.patel@collabora.com>
+ <YFziza/VMyzEs4s1@sol.localdomain> <878s6bt4gx.fsf@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210325000811.1379641-6-shreeya.patel@collabora.com>
+In-Reply-To: <878s6bt4gx.fsf@collabora.com>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -69,9 +74,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lPVqF-0005oL-Af
-Subject: Re: [f2fs-dev] [PATCH v4 5/5] fs: unicode: Add utf8 module and a
- unicode layer
+X-Headers-End: 1lPVtB-0005vJ-Gb
+Subject: Re: [f2fs-dev] [PATCH v4 2/5] fs: Check if utf8 encoding is loaded
+ before calling utf8_unload()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,61 +91,63 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: tytso@mit.edu, drosen@google.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, kernel@collabora.com,
  adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- andre.almeida@collabora.com, linux-ext4@vger.kernel.org, krisman@collabora.com
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org,
+ Shreeya Patel <shreeya.patel@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Mar 25, 2021 at 05:38:11AM +0530, Shreeya Patel wrote:
-> Also, indirect calls using function pointers are easily exploitable by
-> speculative execution attacks, hence use static_call() in unicode.h and
-> unicode-core.c files inorder to prevent these attacks by making direct
-> calls and also to improve the performance of function pointers.
+On Thu, Mar 25, 2021 at 03:31:42PM -0400, Gabriel Krisman Bertazi wrote:
+> Eric Biggers <ebiggers@kernel.org> writes:
+> 
+> > On Thu, Mar 25, 2021 at 05:38:08AM +0530, Shreeya Patel wrote:
+> >> utf8_unload is being called if CONFIG_UNICODE is enabled.
+> >> The ifdef block doesn't check if utf8 encoding has been loaded
+> >> or not before calling the utf8_unload() function.
+> >> This is not the expected behavior since it would sometimes lead
+> >> to unloading utf8 even before loading it.
+> >> Hence, add a condition which will check if sb->encoding is NOT NULL
+> >> before calling the utf8_unload().
+> >> 
+> >> Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> >> Signed-off-by: Shreeya Patel <shreeya.patel@collabora.com>
+> >> ---
+> >>  fs/ext4/super.c | 6 ++++--
+> >>  fs/f2fs/super.c | 9 ++++++---
+> >>  2 files changed, 10 insertions(+), 5 deletions(-)
+> >> 
+> >> diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+> >> index ad34a37278cd..e438d14f9a87 100644
+> >> --- a/fs/ext4/super.c
+> >> +++ b/fs/ext4/super.c
+> >> @@ -1259,7 +1259,8 @@ static void ext4_put_super(struct super_block *sb)
+> >>  	fs_put_dax(sbi->s_daxdev);
+> >>  	fscrypt_free_dummy_policy(&sbi->s_dummy_enc_policy);
+> >>  #ifdef CONFIG_UNICODE
+> >> -	utf8_unload(sb->s_encoding);
+> >> +	if (sb->s_encoding)
+> >> +		utf8_unload(sb->s_encoding);
+> >>  #endif
+> >>  	kfree(sbi);
+> >>  }
+> >
+> >
+> > What's the benefit of this change?  utf8_unload is a no-op when passed a NULL
+> > pointer; why not keep it that way?
+> 
+> For the record, it no longer is a no-op after patch 5 of this series.
+> Honestly, I prefer making it explicitly at the caller that we are not
+> entering the function, like the patch does, instead of returning from it
+> immediately.  Makes it more readable, IMO.
+> 
 
-I don't think you need to worry about avoiding indirect calls to prevent
-speculative execution attacks.  That's what the mitigations like Retpoline are
-for.  Instead my concern was just that indirect calls are *slow*, especially
-when those mitigations are enabled.  Some of the casefolding operations are
-called a lot (e.g., repeatedly during path resolution), and it would be
-desirable to avoid adding more overhead there.
+I don't think making all the callers do the NULL check is more readable.  It's
+conventional for free-like functions to accept NULL pointers.  See for example
+every other function in the code snippet above -- fs_put_dax(),
+fscrypt_free_dummy_policy(), and kfree().
 
-> diff --git a/fs/unicode/Kconfig b/fs/unicode/Kconfig
-> index 2c27b9a5cd6c..2961b0206b4d 100644
-> --- a/fs/unicode/Kconfig
-> +++ b/fs/unicode/Kconfig
-> @@ -8,7 +8,16 @@ config UNICODE
->  	  Say Y here to enable UTF-8 NFD normalization and NFD+CF casefolding
->  	  support.
->  
-> +# UTF-8 encoding can be compiled as a module using UNICODE_UTF8 option.
-> +# Having UTF-8 encoding as a module will avoid carrying large
-> +# database table present in utf8data.h_shipped into the kernel
-> +# by being able to load it only when it is required by the filesystem.
-> +config UNICODE_UTF8
-> +	tristate "UTF-8 module"
-> +	depends on UNICODE
-> +	default m
-> +
-
-The help for UNICODE still says that it enables UTF-8 support.  But now there is
-a separate option that people will need to remember to enable.
-
-Please document each of these options properly.
-
-Perhaps EXT4_FS and F2FS_FS just should select UNICODE_UTF8 if UNICODE, so that
-UNICODE_UTF8 doesn't have to be a user-selectable symbol?
-
-> +DEFINE_STATIC_CALL(validate, unicode_validate_static_call);
-> +EXPORT_STATIC_CALL(validate);
-
-Global symbols can't have generic names like "validate".  Please add an
-appropriate prefix like "unicode_".
-
-Also, the thing called "unicode_validate_static_call" isn't actually a static
-call as the name suggests, but rather the default function used by the static
-call.  It should be called something like unicode_validate_default.
-
-Likewise for all the others.
+This seems more like an issue with patch 5; it shouldn't be dropping the NULL
+check from unicode_unload().
 
 - Eric
 
