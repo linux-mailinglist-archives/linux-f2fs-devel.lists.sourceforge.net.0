@@ -2,66 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6B67349B8A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Mar 2021 22:26:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90DBF349E6D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Mar 2021 02:09:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lPXUj-0004Fk-9k; Thu, 25 Mar 2021 21:26:21 +0000
+	id 1lPayC-0004Fn-OI; Fri, 26 Mar 2021 01:09:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <shreeya.patel@collabora.com>) id 1lPXUh-0004FX-UP
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 21:26:19 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <yuchao0@huawei.com>) id 1lPayB-0004Fg-BS
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Mar 2021 01:08:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lTPDHAEx6cg/Nfh48Vv4DDbzGnZKz5wHG/PEr3H5I4M=; b=aQbMdUBAlghyQ8hc2OR487J/p7
- RJ/sKCezjuk4Z6zJrmD8VvMsafIk0JjGgBcCQbDpahIedSCNxr4DP3Xp5fGZGcsEffWydE9aLRBFi
- E+qCz5nvIpb0C/Z/iFOHPAbkGZv7N3BgeVwfP/Pntz7dsgzXBBsW3vZaegNVJKqzLmww=;
+ bh=jceBADgu1qEahnZRNeEYmP6szVos14PQycoDOWeB4Do=; b=RIhCPRSeGBcmIGTPe+MS//jt/T
+ OFI/NNYWlIoR2qpV8xJFHNFGRjTHVklqyOVOQj64jL0AwqHFMX59T51A0ot1WDCAxZnGbMQKq5tG+
+ Jk/6AcNg+c/4F0JLchgQ2eP7WoBp3RgQqrP+SkS5CeBgWj8UR/PgY+Nwri7YBn79KCd0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:References:Cc:To:From:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lTPDHAEx6cg/Nfh48Vv4DDbzGnZKz5wHG/PEr3H5I4M=; b=AXdgM/vdQaW0irWbp0MShmHwvy
- 7U9FD5O4P3SnwwoSQkdokkt+mrpsBWWUvEwgma1aZ3S0a/klv4EMaZk+9FSKoUPakkxagWs0D+mUS
- ES8HnNwBv4yHhpnJkB8Zv7dmgo0qWB+YwtLAO+BVqHbE0HT43potAaVOdNfzvvaMOVtQ=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lPXUf-0002HF-6W
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 25 Mar 2021 21:26:19 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: shreeya) with ESMTPSA id F018A1F46934
-From: Shreeya Patel <shreeya.patel@collabora.com>
-To: Eric Biggers <ebiggers@kernel.org>
-References: <20210325000811.1379641-1-shreeya.patel@collabora.com>
- <20210325000811.1379641-6-shreeya.patel@collabora.com>
- <YFznIVf/F68oEuC6@sol.localdomain>
- <2db48ab8-1297-e044-dcec-6c8b8875fdb0@collabora.com>
-Message-ID: <cb4e2292-51dc-70af-1b5f-b8312f94d82f@collabora.com>
-Date: Fri, 26 Mar 2021 02:56:01 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ bh=jceBADgu1qEahnZRNeEYmP6szVos14PQycoDOWeB4Do=; b=BqpHFZEJuFwl7eUniUFncYLO4a
+ G2IDjtfNUNfW7ql74D5TvJYKqWRNdA6oW5MySFlAUP4QyyZmAeOFZhNsw4uqz8JQ0dp92erk6/d4H
+ WTh99+ba0P7VStIpnAgRAosvpbruBRE6G6d/9Rh8EFpYiphpL7sEXutZFUzLoA3crPa8=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lPay0-00Byzn-1P
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Mar 2021 01:08:59 +0000
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4F63gw15hrznW8d;
+ Fri, 26 Mar 2021 09:06:04 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 26 Mar
+ 2021 09:08:34 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210323064155.12582-1-yuchao0@huawei.com>
+ <YFo16ADpWJ7OUAvK@google.com>
+ <107e671d-68ea-1a74-521e-ab2b6fe36416@huawei.com>
+ <YFq+aQW7eihFuSst@google.com>
+ <c5850f4b-ebe8-bc34-10c6-ab27d562d621@huawei.com>
+ <YFvA6uzDLeD7dRdY@google.com>
+ <8b0b0782-a667-9edc-5ee9-98ac9f67b7b7@huawei.com>
+Message-ID: <c1e48546-f61b-5db9-13b6-6430ce368661@huawei.com>
+Date: Fri, 26 Mar 2021 09:08:33 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <2db48ab8-1297-e044-dcec-6c8b8875fdb0@collabora.com>
+In-Reply-To: <8b0b0782-a667-9edc-5ee9-98ac9f67b7b7@huawei.com>
 Content-Language: en-US
-X-Spam-Score: -0.0 (/)
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lPXUf-0002HF-6W
-Subject: Re: [f2fs-dev] [PATCH v4 5/5] fs: unicode: Add utf8 module and a
- unicode layer
+X-Headers-End: 1lPay0-00Byzn-1P
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: give a warning only for
+ readonly partition"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,66 +88,173 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, drosen@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel@collabora.com,
- adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- andre.almeida@collabora.com, linux-ext4@vger.kernel.org, krisman@collabora.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Ck9uIDI2LzAzLzIxIDE6NTYgYW0sIFNocmVleWEgUGF0ZWwgd3JvdGU6Cj4KPiBPbiAyNi8wMy8y
-MSAxOjEwIGFtLCBFcmljIEJpZ2dlcnMgd3JvdGU6Cj4+IE9uIFRodSwgTWFyIDI1LCAyMDIxIGF0
-IDA1OjM4OjExQU0gKzA1MzAsIFNocmVleWEgUGF0ZWwgd3JvdGU6Cj4+PiBBbHNvLCBpbmRpcmVj
-dCBjYWxscyB1c2luZyBmdW5jdGlvbiBwb2ludGVycyBhcmUgZWFzaWx5IGV4cGxvaXRhYmxlIGJ5
-Cj4+PiBzcGVjdWxhdGl2ZSBleGVjdXRpb24gYXR0YWNrcywgaGVuY2UgdXNlIHN0YXRpY19jYWxs
-KCkgaW4gdW5pY29kZS5oIGFuZAo+Pj4gdW5pY29kZS1jb3JlLmMgZmlsZXMgaW5vcmRlciB0byBw
-cmV2ZW50IHRoZXNlIGF0dGFja3MgYnkgbWFraW5nIGRpcmVjdAo+Pj4gY2FsbHMgYW5kIGFsc28g
-dG8gaW1wcm92ZSB0aGUgcGVyZm9ybWFuY2Ugb2YgZnVuY3Rpb24gcG9pbnRlcnMuCj4+IEkgZG9u
-J3QgdGhpbmsgeW91IG5lZWQgdG8gd29ycnkgYWJvdXQgYXZvaWRpbmcgaW5kaXJlY3QgY2FsbHMg
-dG8gcHJldmVudAo+PiBzcGVjdWxhdGl2ZSBleGVjdXRpb24gYXR0YWNrcy7CoCBUaGF0J3Mgd2hh
-dCB0aGUgbWl0aWdhdGlvbnMgbGlrZSAKPj4gUmV0cG9saW5lIGFyZQo+PiBmb3IuwqAgSW5zdGVh
-ZCBteSBjb25jZXJuIHdhcyBqdXN0IHRoYXQgaW5kaXJlY3QgY2FsbHMgYXJlICpzbG93KiwgCj4+
-IGVzcGVjaWFsbHkKPj4gd2hlbiB0aG9zZSBtaXRpZ2F0aW9ucyBhcmUgZW5hYmxlZC7CoCBTb21l
-IG9mIHRoZSBjYXNlZm9sZGluZyAKPj4gb3BlcmF0aW9ucyBhcmUKPj4gY2FsbGVkIGEgbG90IChl
-LmcuLCByZXBlYXRlZGx5IGR1cmluZyBwYXRoIHJlc29sdXRpb24pLCBhbmQgaXQgd291bGQgYmUK
-Pj4gZGVzaXJhYmxlIHRvIGF2b2lkIGFkZGluZyBtb3JlIG92ZXJoZWFkIHRoZXJlLgo+Pgo+Pj4g
-ZGlmZiAtLWdpdCBhL2ZzL3VuaWNvZGUvS2NvbmZpZyBiL2ZzL3VuaWNvZGUvS2NvbmZpZwo+Pj4g
-aW5kZXggMmMyN2I5YTVjZDZjLi4yOTYxYjAyMDZiNGQgMTAwNjQ0Cj4+PiAtLS0gYS9mcy91bmlj
-b2RlL0tjb25maWcKPj4+ICsrKyBiL2ZzL3VuaWNvZGUvS2NvbmZpZwo+Pj4gQEAgLTgsNyArOCwx
-NiBAQCBjb25maWcgVU5JQ09ERQo+Pj4gwqDCoMKgwqDCoMKgwqAgU2F5IFkgaGVyZSB0byBlbmFi
-bGUgVVRGLTggTkZEIG5vcm1hbGl6YXRpb24gYW5kIE5GRCtDRiAKPj4+IGNhc2Vmb2xkaW5nCj4+
-PiDCoMKgwqDCoMKgwqDCoCBzdXBwb3J0Lgo+Pj4gwqAgKyMgVVRGLTggZW5jb2RpbmcgY2FuIGJl
-IGNvbXBpbGVkIGFzIGEgbW9kdWxlIHVzaW5nIFVOSUNPREVfVVRGOCAKPj4+IG9wdGlvbi4KPj4+
-ICsjIEhhdmluZyBVVEYtOCBlbmNvZGluZyBhcyBhIG1vZHVsZSB3aWxsIGF2b2lkIGNhcnJ5aW5n
-IGxhcmdlCj4+PiArIyBkYXRhYmFzZSB0YWJsZSBwcmVzZW50IGluIHV0ZjhkYXRhLmhfc2hpcHBl
-ZCBpbnRvIHRoZSBrZXJuZWwKPj4+ICsjIGJ5IGJlaW5nIGFibGUgdG8gbG9hZCBpdCBvbmx5IHdo
-ZW4gaXQgaXMgcmVxdWlyZWQgYnkgdGhlIGZpbGVzeXN0ZW0uCj4+PiArY29uZmlnIFVOSUNPREVf
-VVRGOAo+Pj4gK8KgwqDCoCB0cmlzdGF0ZSAiVVRGLTggbW9kdWxlIgo+Pj4gK8KgwqDCoCBkZXBl
-bmRzIG9uIFVOSUNPREUKPj4+ICvCoMKgwqAgZGVmYXVsdCBtCj4+PiArCj4+IFRoZSBoZWxwIGZv
-ciBVTklDT0RFIHN0aWxsIHNheXMgdGhhdCBpdCBlbmFibGVzIFVURi04IHN1cHBvcnQuIEJ1dCAK
-Pj4gbm93IHRoZXJlIGlzCj4+IGEgc2VwYXJhdGUgb3B0aW9uIHRoYXQgcGVvcGxlIHdpbGwgbmVl
-ZCB0byByZW1lbWJlciB0byBlbmFibGUuCj4+Cj4+IFBsZWFzZSBkb2N1bWVudCBlYWNoIG9mIHRo
-ZXNlIG9wdGlvbnMgcHJvcGVybHkuCj4+Cj4+IFBlcmhhcHMgRVhUNF9GUyBhbmQgRjJGU19GUyBq
-dXN0IHNob3VsZCBzZWxlY3QgVU5JQ09ERV9VVEY4IGlmIAo+PiBVTklDT0RFLCBzbyB0aGF0Cj4+
-IFVOSUNPREVfVVRGOCBkb2Vzbid0IGhhdmUgdG8gYmUgYSB1c2VyLXNlbGVjdGFibGUgc3ltYm9s
-Pwo+Cj4KPiBJdCBpcyBub3QgYSB1c2VyLXNlbGVjdGFibGUgc3ltYm9sLiBJdCBkZXBlbmRzIG9u
-IFVOSUNPREUgYW5kIGlmIAo+IHNvbWVvbmUgZW5hYmxlcyBpdCwKPiBieSBkZWZhdWx0IFVOSUNP
-REVfVVRGOCB3aWxsIGJlIGVuYWJsZWQgYXMgYSBtb2R1bGUuCj4KPgoKU29ycnksIEkgdGhpbmsg
-SSBtaXN1bmRlcnN0b29kIHdoZW4geW91IHNhaWQgRVhUNF9GUyBhbmQgRjJGU19GUyBzaG91bGQg
-CnNlbGVjdApVTklDT0RFX1VURjggaWYgVU5JQ09ERSBpcyBlbmFibGVkLiBJIG5vdyBnZXQgaXQg
-dGhhdCB5b3UgZG9uJ3Qgd2FudCAKdGhlbSB0byBiZSBkZXNlbGVjdGFibGUuCkknbGwgbWFrZSB0
-aGlzIGNoYW5nZS4gVGhhbmtzCgoKPj4+ICtERUZJTkVfU1RBVElDX0NBTEwodmFsaWRhdGUsIHVu
-aWNvZGVfdmFsaWRhdGVfc3RhdGljX2NhbGwpOwo+Pj4gK0VYUE9SVF9TVEFUSUNfQ0FMTCh2YWxp
-ZGF0ZSk7Cj4+IEdsb2JhbCBzeW1ib2xzIGNhbid0IGhhdmUgZ2VuZXJpYyBuYW1lcyBsaWtlICJ2
-YWxpZGF0ZSIuwqAgUGxlYXNlIGFkZCBhbgo+PiBhcHByb3ByaWF0ZSBwcmVmaXggbGlrZSAidW5p
-Y29kZV8iLgo+Pgo+PiBBbHNvLCB0aGUgdGhpbmcgY2FsbGVkICJ1bmljb2RlX3ZhbGlkYXRlX3N0
-YXRpY19jYWxsIiBpc24ndCBhY3R1YWxseSAKPj4gYSBzdGF0aWMKPj4gY2FsbCBhcyB0aGUgbmFt
-ZSBzdWdnZXN0cywgYnV0IHJhdGhlciB0aGUgZGVmYXVsdCBmdW5jdGlvbiB1c2VkIGJ5IAo+PiB0
-aGUgc3RhdGljCj4+IGNhbGwuwqAgSXQgc2hvdWxkIGJlIGNhbGxlZCBzb21ldGhpbmcgbGlrZSB1
-bmljb2RlX3ZhbGlkYXRlX2RlZmF1bHQuCj4+Cj4+IExpa2V3aXNlIGZvciBhbGwgdGhlIG90aGVy
-cy4KPgo+Cj4gVGhhbmtzIGZvciB5b3VyIHJldmlld3MsIEknbGwgbWFrZSB0aGUgY2hhbmdlIHN1
-Z2dlc3RlZCBieSB5b3UgaW4gdjUuCj4KPgo+Pgo+PiAtIEVyaWMKPj4KCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxp
-bmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xp
-c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 2021/3/25 9:59, Chao Yu wrote:
+> On 2021/3/25 6:44, Jaegeuk Kim wrote:
+>> On 03/24, Chao Yu wrote:
+>>> On 2021/3/24 12:22, Jaegeuk Kim wrote:
+>>>> On 03/24, Chao Yu wrote:
+>>>>> On 2021/3/24 2:39, Jaegeuk Kim wrote:
+>>>>>> On 03/23, Chao Yu wrote:
+>>>>>>> This reverts commit 938a184265d75ea474f1c6fe1da96a5196163789.
+>>>>>>>
+>>>>>>> Because that commit fails generic/050 testcase which expect failure
+>>>>>>> during mount a recoverable readonly partition.
+>>>>>>
+>>>>>> I think we need to change generic/050, since f2fs can recover this partition,
+>>>>>
+>>>>> Well, not sure we can change that testcase, since it restricts all generic
+>>>>> filesystems behavior. At least, ext4's behavior makes sense to me:
+>>>>>
+>>>>> 	journal_dev_ro = bdev_read_only(journal->j_dev);
+>>>>> 	really_read_only = bdev_read_only(sb->s_bdev) | journal_dev_ro;
+>>>>>
+>>>>> 	if (journal_dev_ro && !sb_rdonly(sb)) {
+>>>>> 		ext4_msg(sb, KERN_ERR,
+>>>>> 			 "journal device read-only, try mounting with '-o ro'");
+>>>>> 		err = -EROFS;
+>>>>> 		goto err_out;
+>>>>> 	}
+>>>>>
+>>>>> 	if (ext4_has_feature_journal_needs_recovery(sb)) {
+>>>>> 		if (sb_rdonly(sb)) {
+>>>>> 			ext4_msg(sb, KERN_INFO, "INFO: recovery "
+>>>>> 					"required on readonly filesystem");
+>>>>> 			if (really_read_only) {
+>>>>> 				ext4_msg(sb, KERN_ERR, "write access "
+>>>>> 					"unavailable, cannot proceed "
+>>>>> 					"(try mounting with noload)");
+>>>>> 				err = -EROFS;
+>>>>> 				goto err_out;
+>>>>> 			}
+>>>>> 			ext4_msg(sb, KERN_INFO, "write access will "
+>>>>> 			       "be enabled during recovery");
+>>>>> 		}
+>>>>> 	}
+>>>>>
+>>>>>> even though using it as readonly. And, valid checkpoint can allow for user to
+>>>>>> read all the data without problem.
+>>>>>
+>>>>>>>      		if (f2fs_hw_is_readonly(sbi)) {
+>>>>>
+>>>>> Since device is readonly now, all write to the device will fail, checkpoint can
+>>>>> not persist recovered data, after page cache is expired, user can see stale data.
+>>>>
+>>>> My point is, after mount with ro, there'll be no data write which preserves the
+>>>> current status. So, in the next time, we can recover fsync'ed data later, if
+>>>> user succeeds to mount as rw. Another point is, with the current checkpoint, we
+>>>> should not have any corrupted metadata. So, why not giving a chance to show what
+>>>> data remained to user? I think this can be doable only with CoW filesystems.
+>>>
+>>> I guess we're talking about the different things...
+>>>
+>>> Let me declare two different readonly status:
+>>>
+>>> 1. filesystem readonly: file system is mount with ro mount option, and
+>>> app from userspace can not modify any thing of filesystem, but filesystem
+>>> itself can modify data on device since device may be writable.
+>>>
+>>> 2. device readonly: device is set to readonly status via 'blockdev --setro'
+>>> command, and then filesystem should never issue any write IO to the device.
+>>>
+>>> So, what I mean is, *when device is readonly*, rather than f2fs mountpoint
+>>> is readonly (f2fs_hw_is_readonly() returns true as below code, instead of
+>>> f2fs_readonly() returns true), in this condition, we should not issue any
+>>> write IO to device anyway, because, AFAIK, write IO will fail due to
+>>> bio_check_ro() check.
+>>
+>> In that case, mount(2) will try readonly, no?
+> 
+> Yes, if device is readonly, mount (2) can not mount/remount device to rw
+> mountpoint.
+
+Any other concern about this patch?
+
+Thanks,
+
+> 
+> Thanks,
+> 
+>>
+>> # blockdev --setro /dev/vdb
+>> # mount -t f2fs /dev/vdb /mnt/test/
+>> mount: /mnt/test: WARNING: source write-protected, mounted read-only.
+>>
+>>>
+>>>    		if (f2fs_hw_is_readonly(sbi)) {
+>>> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+>>> -				err = -EROFS;
+>>> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+>>>    				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+>>> -				goto free_meta;
+>>> -			}
+>>> -			f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>> +			else
+>>> +				f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>    			goto reset_checkpoint;
+>>>    		}
+>>>
+>>> For the case of filesystem is readonly and device is writable, it's fine
+>>> to do recovery in order to let user to see fsynced data.
+>>>
+>>> Thanks,
+>>>
+>>>>
+>>>>>
+>>>>> Am I missing something?
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>>>
+>>>>>>>
+>>>>>>> Fixes: 938a184265d7 ("f2fs: give a warning only for readonly partition")
+>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>>> ---
+>>>>>>>      fs/f2fs/super.c | 8 +++++---
+>>>>>>>      1 file changed, 5 insertions(+), 3 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>>>> index b48281642e98..2b78ee11f093 100644
+>>>>>>> --- a/fs/f2fs/super.c
+>>>>>>> +++ b/fs/f2fs/super.c
+>>>>>>> @@ -3952,10 +3952,12 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>>>>>>>      		 * previous checkpoint was not done by clean system shutdown.
+>>>>>>>      		 */
+>>>>>>>      		if (f2fs_hw_is_readonly(sbi)) {
+>>>>>>> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+>>>>>>> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+>>>>>>> +				err = -EROFS;
+>>>>>>>      				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+>>>>>>> -			else
+>>>>>>> -				f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>> +				goto free_meta;
+>>>>>>> +			}
+>>>>>>> +			f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>>      			goto reset_checkpoint;
+>>>>>>>      		}
+>>>>>>> -- 
+>>>>>>> 2.29.2
+>>>>>> .
+>>>>>>
+>>>> .
+>>>>
+>> .
+>>
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
