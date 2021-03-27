@@ -2,69 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 274D534B5DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Mar 2021 10:58:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE80E34B5EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Mar 2021 11:03:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lQ5iL-0003Gy-8P; Sat, 27 Mar 2021 09:58:41 +0000
+	id 1lQ5nN-0006PX-BR; Sat, 27 Mar 2021 10:03:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lQ5iJ-0003GF-63
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 09:58:39 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lQ5nM-0006PM-OV
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 10:03:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:References:CC:To:From:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NpIA0gdF+g9IwRYzEYfEzGp4HKfR4UwOCk6LXB50iYM=; b=EXji1MpPbjKVNx6Hw17+qcSfiU
- 250+mpKrcvuhRE4cO0LnSS/fDaZ96god9mGZ87sRMkWnruO/DJsiggErXPQuX7zUcbIHEOGOXAhMc
- ngKK6r0GjITYqZ2RsW5wx2SScoOgQnNgfhbR/x2VOM/dGBsxGIdhOwnmUjQPQJwF/Pco=;
+ bh=3m8p1vRhkkAlpU87lam1ofVUxisq424++EJkwpIA8ac=; b=Ps56GaMye2fE4ctHP0YJ68WYAo
+ lmNp9ymwdD/MPWEMDIjtoxCiFwq9AjaMXZDDr3bhzpCkK2y4hF7BAY4v3ZcvswJfrEwPv3M2Nu+81
+ 0AmvSS89JPgnKujRheDGeNP46Fxe6BQzENcwj2JpCeY0CF96BYJKfBaNQwrK1lAbNQcE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NpIA0gdF+g9IwRYzEYfEzGp4HKfR4UwOCk6LXB50iYM=; b=F
- wPIZBXd/eL7E854wLRPRNOuGEWyHDJ2P2V9kegv1qJUsrKK2IIMQf4ck1gj7KDnjrY+6cCP4ouBPn
- NGgPOBExoEM/cUFtYvfTv6xLvYuMdOhVe88WrairjcH8QQlARzdrdas6PEOxatOxN/3L8m5VVU/Hw
- MDACaQ7q9JdcQp10=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lQ5hx-0003bb-NL
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 09:58:38 +0000
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4F6vPQ1Mn6zkgfc;
- Sat, 27 Mar 2021 17:56:26 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS403-HUB.china.huawei.com (10.3.19.203) with Microsoft SMTP Server id
- 14.3.498.0; Sat, 27 Mar 2021 17:57:54 +0800
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:References:CC:To:From:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=3m8p1vRhkkAlpU87lam1ofVUxisq424++EJkwpIA8ac=; b=FTcOFhM31zAjm2gh/yo+pnbex5
+ EBfs6C9N0lcCFrgMv9Wz0zFxTX0LPd4G9uo7UB4/Sx88Y4kEdukqHDDvTuGncxz0c1lnioFLBmgRh
+ wxKgY2uE5XTJaFlWoV/swINF6y36zD/J5u9N9Q94lRZFDYLqck4kxYreIlRv7cgDK2Oo=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lQ5mz-00HSKq-La
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 10:03:52 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4F6vW03P3dz1BHQR;
+ Sat, 27 Mar 2021 18:01:16 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server (TLS) id 14.3.498.0; Sat, 27 Mar
+ 2021 18:03:16 +0800
 From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Sat, 27 Mar 2021 17:57:06 +0800
-Message-ID: <20210327095706.63583-1-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.29.2
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210323064155.12582-1-yuchao0@huawei.com>
+ <YFo16ADpWJ7OUAvK@google.com>
+ <107e671d-68ea-1a74-521e-ab2b6fe36416@huawei.com>
+ <YFq+aQW7eihFuSst@google.com>
+ <c5850f4b-ebe8-bc34-10c6-ab27d562d621@huawei.com>
+ <YFvA6uzDLeD7dRdY@google.com>
+ <8b0b0782-a667-9edc-5ee9-98ac9f67b7b7@huawei.com>
+ <c1e48546-f61b-5db9-13b6-6430ce368661@huawei.com>
+ <YF02sFKa778eomr9@google.com>
+ <84688aac-75da-1226-df4d-47ac97087c51@huawei.com>
+ <YF4aJYVwOVtWsAbH@google.com>
+ <4b64099b-064d-43a8-461d-b54007f2c16c@huawei.com>
+Message-ID: <dad9c2df-02af-5df5-1dd1-9ee1fe91d229@huawei.com>
+Date: Sat, 27 Mar 2021 18:03:16 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
+In-Reply-To: <4b64099b-064d-43a8-461d-b54007f2c16c@huawei.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.32 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1lQ5hx-0003bb-NL
-Subject: [f2fs-dev] [PATCH] f2fs: introduce gc_merge mount option
+X-Headers-End: 1lQ5mz-00HSKq-La
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: give a warning only for
+ readonly partition"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,255 +84,269 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Gao Xiang <xiang@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In this patch, we will add two new mount options: "gc_merge" and
-"nogc_merge", when background_gc is on, "gc_merge" option can be
-set to let background GC thread to handle foreground GC requests,
-it can eliminate the sluggish issue caused by slow foreground GC
-operation when GC is triggered from a process with limited I/O
-and CPU resources.
+On 2021/3/27 9:52, Chao Yu wrote:
+> On 2021/3/27 1:30, Jaegeuk Kim wrote:
+>> On 03/26, Chao Yu wrote:
+>>> On 2021/3/26 9:19, Jaegeuk Kim wrote:
+>>>> On 03/26, Chao Yu wrote:
+>>>>> On 2021/3/25 9:59, Chao Yu wrote:
+>>>>>> On 2021/3/25 6:44, Jaegeuk Kim wrote:
+>>>>>>> On 03/24, Chao Yu wrote:
+>>>>>>>> On 2021/3/24 12:22, Jaegeuk Kim wrote:
+>>>>>>>>> On 03/24, Chao Yu wrote:
+>>>>>>>>>> On 2021/3/24 2:39, Jaegeuk Kim wrote:
+>>>>>>>>>>> On 03/23, Chao Yu wrote:
+>>>>>>>>>>>> This reverts commit 938a184265d75ea474f1c6fe1da96a5196163789.
+>>>>>>>>>>>>
+>>>>>>>>>>>> Because that commit fails generic/050 testcase which expect failure
+>>>>>>>>>>>> during mount a recoverable readonly partition.
+>>>>>>>>>>>
+>>>>>>>>>>> I think we need to change generic/050, since f2fs can recover this partition,
+>>>>>>>>>>
+>>>>>>>>>> Well, not sure we can change that testcase, since it restricts all generic
+>>>>>>>>>> filesystems behavior. At least, ext4's behavior makes sense to me:
+>>>>>>>>>>
+>>>>>>>>>> 	journal_dev_ro = bdev_read_only(journal->j_dev);
+>>>>>>>>>> 	really_read_only = bdev_read_only(sb->s_bdev) | journal_dev_ro;
+>>>>>>>>>>
+>>>>>>>>>> 	if (journal_dev_ro && !sb_rdonly(sb)) {
+>>>>>>>>>> 		ext4_msg(sb, KERN_ERR,
+>>>>>>>>>> 			 "journal device read-only, try mounting with '-o ro'");
+>>>>>>>>>> 		err = -EROFS;
+>>>>>>>>>> 		goto err_out;
+>>>>>>>>>> 	}
+>>>>>>>>>>
+>>>>>>>>>> 	if (ext4_has_feature_journal_needs_recovery(sb)) {
+>>>>>>>>>> 		if (sb_rdonly(sb)) {
+>>>>>>>>>> 			ext4_msg(sb, KERN_INFO, "INFO: recovery "
+>>>>>>>>>> 					"required on readonly filesystem");
+>>>>>>>>>> 			if (really_read_only) {
+>>>>>>>>>> 				ext4_msg(sb, KERN_ERR, "write access "
+>>>>>>>>>> 					"unavailable, cannot proceed "
+>>>>>>>>>> 					"(try mounting with noload)");
+>>>>>>>>>> 				err = -EROFS;
+>>>>>>>>>> 				goto err_out;
+>>>>>>>>>> 			}
+>>>>>>>>>> 			ext4_msg(sb, KERN_INFO, "write access will "
+>>>>>>>>>> 			       "be enabled during recovery");
+>>>>>>>>>> 		}
+>>>>>>>>>> 	}
+>>>>>>>>>>
+>>>>>>>>>>> even though using it as readonly. And, valid checkpoint can allow for user to
+>>>>>>>>>>> read all the data without problem.
+>>>>>>>>>>
+>>>>>>>>>>>>         		if (f2fs_hw_is_readonly(sbi)) {
+>>>>>>>>>>
+>>>>>>>>>> Since device is readonly now, all write to the device will fail, checkpoint can
+>>>>>>>>>> not persist recovered data, after page cache is expired, user can see stale data.
+>>>>>>>>>
+>>>>>>>>> My point is, after mount with ro, there'll be no data write which preserves the
+>>>>>>>>> current status. So, in the next time, we can recover fsync'ed data later, if
+>>>>>>>>> user succeeds to mount as rw. Another point is, with the current checkpoint, we
+>>>>>>>>> should not have any corrupted metadata. So, why not giving a chance to show what
+>>>>>>>>> data remained to user? I think this can be doable only with CoW filesystems.
+>>>>>>>>
+>>>>>>>> I guess we're talking about the different things...
+>>>>>>>>
+>>>>>>>> Let me declare two different readonly status:
+>>>>>>>>
+>>>>>>>> 1. filesystem readonly: file system is mount with ro mount option, and
+>>>>>>>> app from userspace can not modify any thing of filesystem, but filesystem
+>>>>>>>> itself can modify data on device since device may be writable.
+>>>>>>>>
+>>>>>>>> 2. device readonly: device is set to readonly status via 'blockdev --setro'
+>>>>>>>> command, and then filesystem should never issue any write IO to the device.
+>>>>>>>>
+>>>>>>>> So, what I mean is, *when device is readonly*, rather than f2fs mountpoint
+>>>>>>>> is readonly (f2fs_hw_is_readonly() returns true as below code, instead of
+>>>>>>>> f2fs_readonly() returns true), in this condition, we should not issue any
+>>>>>>>> write IO to device anyway, because, AFAIK, write IO will fail due to
+>>>>>>>> bio_check_ro() check.
+>>>>>>>
+>>>>>>> In that case, mount(2) will try readonly, no?
+>>>>>>
+>>>>>> Yes, if device is readonly, mount (2) can not mount/remount device to rw
+>>>>>> mountpoint.
+>>>>>
+>>>>> Any other concern about this patch?
+>>>>
+>>>> Indeed we're talking about different things. :)
+>>>>
+>>>> This case is mount(ro) with device(ro) having some data to recover.
+>>>> My point is why not giving a chance to mount(ro) to show the current data
+>>>> covered by a valid checkpoint. This doesn't change anything in the disk,
+>>> Got your idea.
+>>>
+>>> IMO, it has potential issue in above condition:
+>>>
+>>>>>>>>>> Since device is readonly now, all write to the device will fail, checkpoint can
+>>>>>>>>>> not persist recovered data, after page cache is expired, user can see stale data.
+>>>
+>>> e.g.
+>>>
+>>> Recovery writes one inode and then triggers a checkpoint, all writes fail
+>>
+>> I'm confused. Currently we don't trigger the roll-forward recovery.
+> 
+> Oh, my miss, sorry. :-P
+> 
+> My point is in this condition we can return error and try to notice user to
+> mount with disable_roll_forward or norecovery option, then at least user can
+> know he should not expect last fsynced data in newly mounted image.
+> 
+> Or we can use f2fs_recover_fsync_data() to check whether there is fsynced data,
+> if there is no such data, then let mount() succeed.
 
-Original idea is from Xiang.
+Something like this, maybe:
 
-Signed-off-by: Gao Xiang <xiang@kernel.org>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- Documentation/filesystems/f2fs.rst |  6 ++++++
- fs/f2fs/f2fs.h                     |  1 +
- fs/f2fs/gc.c                       | 26 ++++++++++++++++++++++----
- fs/f2fs/gc.h                       |  6 ++++++
- fs/f2fs/segment.c                  | 15 +++++++++++++--
- fs/f2fs/super.c                    | 19 +++++++++++++++++--
- 6 files changed, 65 insertions(+), 8 deletions(-)
+  fs/f2fs/super.c | 17 +++++++++++++----
+  1 file changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 35ed01a5fbc9..63c0c49b726d 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -110,6 +110,12 @@ background_gc=%s	 Turn on/off cleaning operations, namely garbage
- 			 on synchronous garbage collection running in background.
- 			 Default value for this option is on. So garbage
- 			 collection is on by default.
-+gc_merge		 When background_gc is on, this option can be enabled to
-+			 let background GC thread to handle foreground GC requests,
-+			 it can eliminate the sluggish issue caused by slow foreground
-+			 GC operation when GC is triggered from a process with limited
-+			 I/O and CPU resources.
-+nogc_merge		 Disable GC merge feature.
- disable_roll_forward	 Disable the roll-forward recovery routine
- norecovery		 Disable the roll-forward recovery routine, mounted read-
- 			 only (i.e., -o ro,disable_roll_forward)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index fe380bcf8d4d..87d734f5589d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -97,6 +97,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
- #define F2FS_MOUNT_NORECOVERY		0x04000000
- #define F2FS_MOUNT_ATGC			0x08000000
- #define F2FS_MOUNT_MERGE_CHECKPOINT	0x10000000
-+#define	F2FS_MOUNT_GC_MERGE		0x20000000
- 
- #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
- #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index a2ca483f9855..5c48825fd12d 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -31,19 +31,24 @@ static int gc_thread_func(void *data)
- 	struct f2fs_sb_info *sbi = data;
- 	struct f2fs_gc_kthread *gc_th = sbi->gc_thread;
- 	wait_queue_head_t *wq = &sbi->gc_thread->gc_wait_queue_head;
-+	wait_queue_head_t *fggc_wq = &sbi->gc_thread->fggc_wq;
- 	unsigned int wait_ms;
- 
- 	wait_ms = gc_th->min_sleep_time;
- 
- 	set_freezable();
- 	do {
--		bool sync_mode;
-+		bool sync_mode, foreground = false;
- 
- 		wait_event_interruptible_timeout(*wq,
- 				kthread_should_stop() || freezing(current) ||
-+				waitqueue_active(fggc_wq) ||
- 				gc_th->gc_wake,
- 				msecs_to_jiffies(wait_ms));
- 
-+		if (test_opt(sbi, GC_MERGE) && waitqueue_active(fggc_wq))
-+			foreground = true;
-+
- 		/* give it a try one time */
- 		if (gc_th->gc_wake)
- 			gc_th->gc_wake = 0;
-@@ -90,7 +95,10 @@ static int gc_thread_func(void *data)
- 			goto do_gc;
- 		}
- 
--		if (!down_write_trylock(&sbi->gc_lock)) {
-+		if (foreground) {
-+			down_write(&sbi->gc_lock);
-+			goto do_gc;
-+		} else if (!down_write_trylock(&sbi->gc_lock)) {
- 			stat_other_skip_bggc_count(sbi);
- 			goto next;
- 		}
-@@ -107,14 +115,22 @@ static int gc_thread_func(void *data)
- 		else
- 			increase_sleep_time(gc_th, &wait_ms);
- do_gc:
--		stat_inc_bggc_count(sbi->stat_info);
-+		if (!foreground)
-+			stat_inc_bggc_count(sbi->stat_info);
- 
- 		sync_mode = F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC;
- 
-+		/* foreground GC was been triggered via f2fs_balance_fs() */
-+		if (foreground)
-+			sync_mode = false;
-+
- 		/* if return value is not zero, no victim was selected */
--		if (f2fs_gc(sbi, sync_mode, true, false, NULL_SEGNO))
-+		if (f2fs_gc(sbi, sync_mode, !foreground, false, NULL_SEGNO))
- 			wait_ms = gc_th->no_gc_sleep_time;
- 
-+		if (foreground)
-+			wake_up_all(&gc_th->fggc_wq);
-+
- 		trace_f2fs_background_gc(sbi->sb, wait_ms,
- 				prefree_segments(sbi), free_segments(sbi));
- 
-@@ -148,6 +164,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
- 
- 	sbi->gc_thread = gc_th;
- 	init_waitqueue_head(&sbi->gc_thread->gc_wait_queue_head);
-+	init_waitqueue_head(&sbi->gc_thread->fggc_wq);
- 	sbi->gc_thread->f2fs_gc_task = kthread_run(gc_thread_func, sbi,
- 			"f2fs_gc-%u:%u", MAJOR(dev), MINOR(dev));
- 	if (IS_ERR(gc_th->f2fs_gc_task)) {
-@@ -165,6 +182,7 @@ void f2fs_stop_gc_thread(struct f2fs_sb_info *sbi)
- 	if (!gc_th)
- 		return;
- 	kthread_stop(gc_th->f2fs_gc_task);
-+	wake_up_all(&gc_th->fggc_wq);
- 	kfree(gc_th);
- 	sbi->gc_thread = NULL;
- }
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 0c8dae12dc51..3fe145e8e594 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -42,6 +42,12 @@ struct f2fs_gc_kthread {
- 
- 	/* for changing gc mode */
- 	unsigned int gc_wake;
-+
-+	/* for GC_MERGE mount option */
-+	wait_queue_head_t fggc_wq;		/*
-+						 * caller of f2fs_balance_fs()
-+						 * will wait on this wait queue.
-+						 */
- };
- 
- struct gc_inode_list {
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 24ad45f5e335..31ccea1378fa 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -503,8 +503,19 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
- 	 * dir/node pages without enough free segments.
- 	 */
- 	if (has_not_enough_free_secs(sbi, 0, 0)) {
--		down_write(&sbi->gc_lock);
--		f2fs_gc(sbi, false, false, false, NULL_SEGNO);
-+		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
-+					sbi->gc_thread->f2fs_gc_task) {
-+			DEFINE_WAIT(wait);
-+
-+			prepare_to_wait(&sbi->gc_thread->fggc_wq, &wait,
-+						TASK_UNINTERRUPTIBLE);
-+			wake_up(&sbi->gc_thread->gc_wait_queue_head);
-+			io_schedule();
-+			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
-+		} else {
-+			down_write(&sbi->gc_lock);
-+			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
-+		}
- 	}
- }
- 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index b48281642e98..954b1fe97d67 100644
+index 954b1fe97d67..5e1a1caf412d 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -151,6 +151,8 @@ enum {
- 	Opt_compress_chksum,
- 	Opt_compress_mode,
- 	Opt_atgc,
-+	Opt_gc_merge,
-+	Opt_nogc_merge,
- 	Opt_err,
- };
- 
-@@ -223,6 +225,8 @@ static match_table_t f2fs_tokens = {
- 	{Opt_compress_chksum, "compress_chksum"},
- 	{Opt_compress_mode, "compress_mode=%s"},
- 	{Opt_atgc, "atgc"},
-+	{Opt_gc_merge, "gc_merge"},
-+	{Opt_nogc_merge, "nogc_merge"},
- 	{Opt_err, NULL},
- };
- 
-@@ -1073,6 +1077,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		case Opt_atgc:
- 			set_opt(sbi, ATGC);
- 			break;
-+		case Opt_gc_merge:
-+			set_opt(sbi, GC_MERGE);
-+			break;
-+		case Opt_nogc_merge:
-+			clear_opt(sbi, GC_MERGE);
-+			break;
- 		default:
- 			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
- 				 p);
-@@ -1675,6 +1685,9 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 	else if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF)
- 		seq_printf(seq, ",background_gc=%s", "off");
- 
-+	if (test_opt(sbi, GC_MERGE))
-+		seq_puts(seq, ",gc_merge");
-+
- 	if (test_opt(sbi, DISABLE_ROLL_FORWARD))
- 		seq_puts(seq, ",disable_roll_forward");
- 	if (test_opt(sbi, NORECOVERY))
-@@ -2038,7 +2051,8 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	 * option. Also sync the filesystem.
- 	 */
- 	if ((*flags & SB_RDONLY) ||
--			F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF) {
-+			(F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF &&
-+			!test_opt(sbi, GC_MERGE))) {
- 		if (sbi->gc_thread) {
- 			f2fs_stop_gc_thread(sbi);
- 			need_restart_gc = true;
-@@ -4012,7 +4026,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	 * If filesystem is not mounted as read-only then
- 	 * do start the gc_thread.
- 	 */
--	if (F2FS_OPTION(sbi).bggc_mode != BGGC_MODE_OFF && !f2fs_readonly(sb)) {
-+	if ((F2FS_OPTION(sbi).bggc_mode != BGGC_MODE_OFF ||
-+		test_opt(sbi, GC_MERGE)) && !f2fs_readonly(sb)) {
- 		/* After POR, we can run background GC thread.*/
- 		err = f2fs_start_gc_thread(sbi);
- 		if (err)
+@@ -3966,10 +3966,19 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+  		 * previous checkpoint was not done by clean system shutdown.
+  		 */
+  		if (f2fs_hw_is_readonly(sbi)) {
+-			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+-				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+-			else
+-				f2fs_info(sbi, "write access unavailable, skipping recovery");
++			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
++				err = f2fs_recover_fsync_data(sbi, true);
++				if (!err)
++					goto reset_checkpoint;
++				else if (err < 0)
++					goto free_meta;
++				err = -EROFS;
++				f2fs_err(sbi, "Need to recover fsync data, but "
++					"write access unavailable, please try "
++					"mount w/ disable_roll_forward or norecovery");
++				goto free_meta;
++			}
++			f2fs_info(sbi, "write access unavailable, skipping recovery");
+  			goto reset_checkpoint;
+  		}
+
 -- 
 2.29.2
 
+Thanks,
+
+> 
+> Thanks,
+> 
+>>
+>>> due to device is readonly, once inode cache is reclaimed by vm, user will see
+>>> old inode when reloading it, or even see corrupted fs if partial meta inode's
+>>> cache is expired.
+>>>
+>>> Thoughts?
+>>>
+>>> Thanks,
+>>>
+>>>> and in the next time, it allows mount(rw|ro) with device(rw) to recover
+>>>> the data seamlessly.
+>>>>
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>>>
+>>>>>> Thanks,
+>>>>>>
+>>>>>>>
+>>>>>>> # blockdev --setro /dev/vdb
+>>>>>>> # mount -t f2fs /dev/vdb /mnt/test/
+>>>>>>> mount: /mnt/test: WARNING: source write-protected, mounted read-only.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>       		if (f2fs_hw_is_readonly(sbi)) {
+>>>>>>>> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+>>>>>>>> -				err = -EROFS;
+>>>>>>>> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+>>>>>>>>       				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+>>>>>>>> -				goto free_meta;
+>>>>>>>> -			}
+>>>>>>>> -			f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>>> +			else
+>>>>>>>> +				f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>>>       			goto reset_checkpoint;
+>>>>>>>>       		}
+>>>>>>>>
+>>>>>>>> For the case of filesystem is readonly and device is writable, it's fine
+>>>>>>>> to do recovery in order to let user to see fsynced data.
+>>>>>>>>
+>>>>>>>> Thanks,
+>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> Am I missing something?
+>>>>>>>>>>
+>>>>>>>>>> Thanks,
+>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>> Fixes: 938a184265d7 ("f2fs: give a warning only for readonly partition")
+>>>>>>>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>>>>>>>> ---
+>>>>>>>>>>>>         fs/f2fs/super.c | 8 +++++---
+>>>>>>>>>>>>         1 file changed, 5 insertions(+), 3 deletions(-)
+>>>>>>>>>>>>
+>>>>>>>>>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>>>>>>>>>>> index b48281642e98..2b78ee11f093 100644
+>>>>>>>>>>>> --- a/fs/f2fs/super.c
+>>>>>>>>>>>> +++ b/fs/f2fs/super.c
+>>>>>>>>>>>> @@ -3952,10 +3952,12 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>>>>>>>>>>>>         		 * previous checkpoint was not done by clean system shutdown.
+>>>>>>>>>>>>         		 */
+>>>>>>>>>>>>         		if (f2fs_hw_is_readonly(sbi)) {
+>>>>>>>>>>>> -			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))
+>>>>>>>>>>>> +			if (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+>>>>>>>>>>>> +				err = -EROFS;
+>>>>>>>>>>>>         				f2fs_err(sbi, "Need to recover fsync data, but write access unavailable");
+>>>>>>>>>>>> -			else
+>>>>>>>>>>>> -				f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>>>>>>> +				goto free_meta;
+>>>>>>>>>>>> +			}
+>>>>>>>>>>>> +			f2fs_info(sbi, "write access unavailable, skipping recovery");
+>>>>>>>>>>>>         			goto reset_checkpoint;
+>>>>>>>>>>>>         		}
+>>>>>>>>>>>> -- 
+>>>>>>>>>>>> 2.29.2
+>>>>>>>>>>> .
+>>>>>>>>>>>
+>>>>>>>>> .
+>>>>>>>>>
+>>>>>>> .
+>>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> _______________________________________________
+>>>>>> Linux-f2fs-devel mailing list
+>>>>>> Linux-f2fs-devel@lists.sourceforge.net
+>>>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+>>>>>> .
+>>>>>>
+>>>> .
+>>>>
+>> .
+>>
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> .
+> 
 
 
 _______________________________________________
