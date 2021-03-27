@@ -2,66 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4982934B757
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Mar 2021 14:28:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12DD534B9C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Mar 2021 23:10:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=UA+3JdMxqSfLNkxkh5s1qA4ykj6XoODpIhLAW+IHn9E=; b=bnYIz/eGt5Py/FUNNriEogmQ6
+	swKRydAIwjXgFYbFdDwqPTUPA+5hNQyYccb7SPLquuHXW6ncENyIH/qjPiOVFcavprlhHnq420QjB
+	ck0HdiqBSgRlDn//HhX2nXshYdHIJ3j2HKRr7cPE+soS+JY2IdI8LuYjpJL+4WI2XiNDI=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lQ8z3-0005NZ-R7; Sat, 27 Mar 2021 13:28:09 +0000
+	id 1lQH8E-0006l1-Du; Sat, 27 Mar 2021 22:10:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <me@beroal.in.ua>) id 1lQ8z2-0005NI-Jf
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 13:28:08 +0000
+ (envelope-from <oleksandr@natalenko.name>)
+ id 1lQGnR-0003Z8-0a; Sat, 27 Mar 2021 21:48:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZQzrbz5QDHDsKrVcJy0iw1pqG054gj/Cv/qCpLmPBUs=; b=IFOCPzC5Z5hXcPcc+VToqUROIf
- gc8kZNrNmhaW4VjIaeGaO5nmfWyHhBSMqfHk4PYRT3vM1qKoK6q2Ze966c1SUVI5jQgVYM++elDgg
- AIVq7KaO9JQQ6b8iFt5SSfHUFLSHqaWLb4JLCsQuO/fO0rwmsDD2NGznC9MJ64k8XnBA=;
+ bh=H0SDVFh4IivwpMZhwg29PF9BCGg9OFyVJ9dY0fRESwI=; b=I/Mk6y0xJi+7Y78PrIULIgT+CG
+ +llk54k7G2B36SxdtY3GiqUcBLAwzv2QacsLSiv8gG5ULRcJ3ERqDYPfvDygJ4QplZYtkjIMtA0PS
+ FuTkwn9Ztp+o8u/3lr9fPwcgNordBmfnFIn7mdKLW9ktmRxpys6VgXliUVtqalR5yVbk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZQzrbz5QDHDsKrVcJy0iw1pqG054gj/Cv/qCpLmPBUs=; b=F6y304mXkEanwFod1Zt95MgWDm
- xC1UVDh/chkBgay8dT8k7gsiDCmS1wRZyBcRzJSwvhuhliK3u6OVf/TVoIJxncUmdhk5Ie7efs24q
- xjC/xO/ZnO5S7mt3lAuWx5EDAxdAuUb5qDTQBYx0iAqrbk+91kNbcNbdryA6iPBM4OQM=;
-Received: from smtp-1.1gb.com.ua ([195.234.4.10] helo=u1.1gb.ua)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1lQ8yh-000VUS-KF
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 27 Mar 2021 13:28:07 +0000
-Received: from Spooler by u1.1gb.ua (Mercury/32 v4.52) ID MO0042CF;
- 27 Mar 2021 15:27:46 +0200
-Received: from spooler by mail-u1-robots.in-solve.hidden (Mercury/32 v4.52);
- 27 Mar 2021 15:27:40 +0200
-Received: from ul1.1gb.ua (195.234.4.24) by smtp-1.1gb.com.ua (Mercury/32
- v4.52) with ESMTP ID MG0042CD; 27 Mar 2021 15:27:34 +0200
-Received: from [192.162.141.53] ([192.162.141.53]) (authenticated bits=0)
- by ul1.1gb.ua (8.14.9/8.14.9) with ESMTP id 12RDRXLe005290
- (version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NO)
- for <linux-f2fs-devel@lists.sourceforge.net>; Sat, 27 Mar 2021 15:27:33 +0200
-To: linux-f2fs-devel@lists.sourceforge.net
-References: <739ae455-07b4-7dc4-1789-5b162ed25ede@beroal.in.ua>
-From: beroal <me@beroal.in.ua>
-Message-ID: <bc3759b9-c606-5e77-40f0-c590bbc53bfb@beroal.in.ua>
-Date: Sat, 27 Mar 2021 15:27:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+ bh=H0SDVFh4IivwpMZhwg29PF9BCGg9OFyVJ9dY0fRESwI=; b=fnxGkwbQ3biLF3H/9OOfWK1YkA
+ yhQy9o/gN4TfPC3fZGQb815yrANrrjf47T7AVO11fkd1lgQTtVSaIMtb7mKy4IXt6Vndh9RFzK4U5
+ TDSL4ed7Pf3isx/cSARiHY0temCHQyyqVNT+5Gdj2KKPqOYY2S64CPUE/ShpcNe/ANJ0=;
+Received: from vulcan.natalenko.name ([104.207.131.136])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lQGn9-001rgR-3n; Sat, 27 Mar 2021 21:48:38 +0000
+Received: from localhost (kaktus.kanapka.ml [151.237.229.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ by vulcan.natalenko.name (Postfix) with ESMTPSA id B4B19A0401C;
+ Sat, 27 Mar 2021 22:48:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
+ s=dkim-20170712; t=1616881690;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=H0SDVFh4IivwpMZhwg29PF9BCGg9OFyVJ9dY0fRESwI=;
+ b=BL+GUFCBXmgH15fMcWEI5fZPb3RtVIZpbw7ravQoctDAuyGRUPeBO/3bYVJlwH0iCzWlfE
+ RnFV/7gSbFNp7IOm1fk1imqr3RP7JpwOMZAvooCrFStqhusNUrghw99i00sKgtt5L8jLjY
+ AeUWNsKKkPDhk2r5p1tVwsa7sLk1b4Q=
+Date: Sat, 27 Mar 2021 22:48:10 +0100
+To: kernel test robot <lkp@intel.com>
+Message-ID: <20210327214810.ldijpbr2tnkh2gce@spock.localdomain>
+References: <20210326191859.1542272-2-nickrterrell@gmail.com>
+ <202103271719.VoxPHugN-lkp@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <739ae455-07b4-7dc4-1789-5b162ed25ede@beroal.in.ua>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <202103271719.VoxPHugN-lkp@intel.com>
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1lQ8yh-000VUS-KF
-Subject: Re: [f2fs-dev] `mount` reports an error, but `fsck.f2fs` does not
+X-Headers-End: 1lQGn9-001rgR-3n
+Subject: Re: [f2fs-dev] [PATCH v8 1/3] lib: zstd: Add kernel-specific API
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,59 +86,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: Oleksandr Natalenko via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Oleksandr Natalenko <oleksandr@natalenko.name>
+Cc: squashfs-devel@lists.sourceforge.net,
+ Chris Mason <chris.mason@fusionio.com>, kbuild-all@lists.01.org,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ Nick Terrell <nickrterrell@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
+ linux-crypto@vger.kernel.org, Kernel Team <Kernel-team@fb.com>,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-UGluZy4KCk9uIDIwLjAzLjIxIDAwOjQ2LCBiZXJvYWwgd3JvdGU6Cj4gSGkuIEFmdGVyIEkgZXh0
-ZW5kZWQgYSBwYXJ0aXRpb24gY29udGFpbmluZyBGMkZTIHdpdGggYSByZWNlbnQgdmVyc2lvbiAK
-PiBvZiBHcGFydGVkLCB0aGUgcGFydGl0aW9uIG5vIGxvbmdlciBtb3VudHMuIGBtb3VudGAgcmVw
-b3J0cyBhbiBlcnJvciwgCj4gYnV0IGBmc2NrLmYyZnNgIGRvZXMgbm90IHNlZSBhbnkgcHJvYmxl
-bSAod2VsbCwgZXhjZXB0IGZvciBgSW52YWxpZCBDUCAKPiBDUkMgb2Zmc2V0OiAwYCkgYW5kIGRv
-ZXMgbm90IGZpeCB0aGUgZmlsZSBzeXN0ZW0uCj4KPiBgYGAKPiBsb3NldHVwIC9kZXYvbG9vcDAg
-YXJjaC1vcy5pbWcKPiBtb3VudCAtdCBmMmZzIC1vIHJvIC9kZXYvbG9vcDAgL3Jvb3QvbW50L3Rl
-bXAKPiBgYGAKPgo+IGBgYAo+IFsgNjg5MC42NDc3NDldIEYyRlMtZnMgKGxvb3AwKTogV3Jvbmcg
-dmFsaWRfdXNlcl9ibG9ja3M6IDE2MDQwMDQ4LCAKPiB1c2VyX2Jsb2NrX2NvdW50OiAxMDAxNjc2
-OAo+IFsgNjg5MC42NDc4MDhdIEYyRlMtZnMgKGxvb3AwKTogRmFpbGVkIHRvIGdldCB2YWxpZCBG
-MkZTIGNoZWNrcG9pbnQKPiBgYGAKPgo+IGBgYAo+IGxvc2V0dXAgLWQgL2Rldi9sb29wMAo+IGZz
-Y2suZjJmcyBhcmNoLW9zLmltZwo+IGBgYAo+Cj4gYGBgCj4gSW5mbzogU2VnbWVudHMgcGVyIHNl
-Y3Rpb24gPSAxCj4gSW5mbzogU2VjdGlvbnMgcGVyIHpvbmUgPSAxCj4gSW5mbzogc2VjdG9yIHNp
-emUgPSA1MTIKPiBJbmZvOiB0b3RhbCBzZWN0b3JzID0gMTYyOTE2MzUyICg3OTU0OSBNQikKPiBJ
-bmZvOiBNS0ZTIHZlcnNpb24KPiDCoCAiTGludXggdmVyc2lvbiA0LjQuMS0yLUFSQ0ggKGJ1aWxk
-dXNlckBmb3V0cmVsaXMpIChnY2MgdmVyc2lvbiA1LjMuMCAKPiAoR0NDKSApICMxIFNNUCBQUkVF
-TVBUIFdlZCBGZWIgMyAxMzoxMjozMyBVVEMgMjAxNiIKPiBJbmZvOiBGU0NLIHZlcnNpb24KPiDC
-oCBmcm9tICJMaW51eCB2ZXJzaW9uIDUuNy4xMi1hcmNoMS0xIChsaW51eEBhcmNobGludXgpIChn
-Y2MgdmVyc2lvbiAKPiAxMC4xLjAgKEdDQyksIEdOVSBsZCAoR05VIEJpbnV0aWxzKSAyLjM0LjAp
-ICMxIFNNUCBQUkVFTVBUIEZyaSwgMzEgSnVsIAo+IDIwMjAgMTc6Mzg6MjIgKzAwMDAiCj4gwqDC
-oMKgIHRvICJMaW51eCB2ZXJzaW9uIDUuMTEuNy1hcmNoMS0xIChsaW51eEBhcmNobGludXgpIChn
-Y2MgKEdDQykgCj4gMTAuMi4wLCBHTlUgbGQgKEdOVSBCaW51dGlscykgMi4zNi4xKSAjMSBTTVAg
-UFJFRU1QVCBXZWQsIDE3IE1hciAyMDIxIAo+IDE2OjU5OjU4ICswMDAwIgo+IEluZm86IHN1cGVy
-YmxvY2sgZmVhdHVyZXMgPSAwIDoKPiBJbmZvOiBzdXBlcmJsb2NrIGVuY3J5cHQgbGV2ZWwgPSAw
-LCBzYWx0ID0gCj4gMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKPiBJbmZvOiB0b3Rh
-bCBGUyBzZWN0b3JzID0gMTYyOTE2MzUyICg3OTU0OSBNQikKPiDCoMKgwqAgSW52YWxpZCBDUCBD
-UkMgb2Zmc2V0OiAwCj4gSW5mbzogQ0tQVCB2ZXJzaW9uID0gYTE0ZDRjCj4gSW5mbzogQ2hlY2tl
-ZCB2YWxpZCBuYXRfYml0cyBpbiBjaGVja3BvaW50Cj4gSW5mbzogY2hlY2twb2ludCBzdGF0ZSA9
-IDgxIDrCoCBuYXRfYml0cyB1bm1vdW50Cj4KPiBbRlNDS10gVW5yZWFjaGFibGUgbmF0IGVudHJp
-ZXPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXSBb
-MHgwXQo+IFtGU0NLXSBTSVQgdmFsaWQgYmxvY2sgYml0bWFwIGNoZWNraW5nwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXQo+IFtGU0NLXSBIYXJkIGxpbmsgY2hlY2tpbmcgZm9y
-IHJlZ3VsYXIgZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dIFsweDcxOV0KPiBbRlND
-S10gdmFsaWRfYmxvY2tfY291bnQgbWF0Y2hpbmcgd2l0aCBDUMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCBbT2suLl0gWzB4ZjRjMDcwXQo+IFtGU0NLXSB2YWxpZF9ub2RlX2NvdW50IG1hdGNoaW5n
-IHdpdGggQ1AgKGRlIGxvb2t1cCnCoCBbT2suLl0gWzB4ZTI0MmFdCj4gW0ZTQ0tdIHZhbGlkX25v
-ZGVfY291bnQgbWF0Y2hpbmcgd2l0aCBDUCAobmF0IGxvb2t1cCkgW09rLi5dIFsweGUyNDJhXQo+
-IFtGU0NLXSB2YWxpZF9pbm9kZV9jb3VudCBtYXRjaGVkIHdpdGggQ1DCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBbT2suLl0gWzB4ZTA0NzBdCj4gW0ZTQ0tdIGZyZWUgc2VnbWVudF9jb3VudCBt
-YXRjaGVkIHdpdGggQ1DCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dIFsweDFkNmJdCj4g
-W0ZTQ0tdIG5leHQgYmxvY2sgb2Zmc2V0IGlzIGZyZWXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgW09rLi5dCj4gW0ZTQ0tdIGZpeGluZyBTSVQgdHlwZXMKPiBbRlND
-S10gb3RoZXIgY29ycnVwdGVkIGJ1Z3PCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIFtPay4uXQo+Cj4gRG9uZTogMTQuMTAwMDAwIHNlY3MKPiBgYGAK
-Pgo+IENhbiBJIGZpeCB0aGlzIGZpbGUgc3lzdGVtIGFuZCBob3c/Cj4KPiBmMmZzLXRvb2xzIDEu
-MTQuMAo+Cj4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3Rz
-L2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1m
-MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
-Lm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+Hello.
+
+On Sat, Mar 27, 2021 at 05:48:01PM +0800, kernel test robot wrote:
+> >> ERROR: modpost: "ZSTD_maxCLevel" [fs/f2fs/f2fs.ko] undefined!
+
+Since f2fs can be built as a module, the following correction seems to
+be needed:
+
+```
+diff --git a/lib/zstd/compress/zstd_compress.c b/lib/zstd/compress/zstd_compress.c
+index 9c998052a0e5..584c92c51169 100644
+--- a/lib/zstd/compress/zstd_compress.c
++++ b/lib/zstd/compress/zstd_compress.c
+@@ -4860,6 +4860,7 @@ size_t ZSTD_endStream(ZSTD_CStream* zcs, ZSTD_outBuffer* output)
+ 
+ #define ZSTD_MAX_CLEVEL     22
+ int ZSTD_maxCLevel(void) { return ZSTD_MAX_CLEVEL; }
++EXPORT_SYMBOL(ZSTD_maxCLevel);
+ int ZSTD_minCLevel(void) { return (int)-ZSTD_TARGETLENGTH_MAX; }
+ 
+ static const ZSTD_compressionParameters ZSTD_defaultCParameters[4][ZSTD_MAX_CLEVEL+1] = {
+```
+
+Not sure if the same should be done for `ZSTD_minCLevel()` since I don't
+see it being used anywhere else.
+
+-- 
+  Oleksandr Natalenko (post-factum)
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
