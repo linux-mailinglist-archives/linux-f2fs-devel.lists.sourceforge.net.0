@@ -2,61 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B5D234D980
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Mar 2021 23:20:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47BF234DBF8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Mar 2021 00:39:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lQzJQ-0000dc-Kt; Mon, 29 Mar 2021 21:20:40 +0000
+	id 1lR0XQ-0002SU-Ha; Mon, 29 Mar 2021 22:39:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <krisman@collabora.com>) id 1lQzJO-0000dT-Qj
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Mar 2021 21:20:38 +0000
+ (envelope-from <shreeya.patel@collabora.com>) id 1lR0XP-0002SI-C6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Mar 2021 22:39:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
- Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x4nIiEjXmFrU7GMS+qD1ZuhvLp4bLzCC3UFT6fMbGmQ=; b=cuCUh5+FQPDR6pIqKr3wJ2Hlhw
- IzLciUR90LQBMoQelOXesCsKlaEkp0BnyEBjbamXtXXIY2p+etrSmQ7o3wxqSkL30qT8PcayL3Qro
- uMX/VIgfd9Kn6RnaNIWCaxJ2H0IuAn3ADpuRG5sxgjrPDXwHKutbE0OFtatbMV8pDYvM=;
+ bh=FkyOFudeKZj8Rh87+0cFjzy5ERm39oyQCs9LQLcusMQ=; b=DiibWzVFI0zQhSqnCSiJSpbwsb
+ tfmewsQ9nmGHKydlK+ujwO0FXCltElllZz/oeNiyAwu6gmDhQyptR7SiqE95HZUlvd3InHz6bhq1m
+ uzmoLKwlkO7Tb7NC7x6deaCnHg/PghG0b0QjhmAh9zhbrZ2YMnBwQ3QT633WwUydGDnA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=x4nIiEjXmFrU7GMS+qD1ZuhvLp4bLzCC3UFT6fMbGmQ=; b=R0qP2y1uH631Ca6g2BicmuPxQE
- 9hWxx2GwNKuaUXJ0891W2T1R4ENMV1Oy/cKP9fJnyyLmD5F6c4p3hMwhyd3G437Ska6tHZRPqPIMm
- sCAXKhln4v6WVeaxF3sBK8H83e0gXnIyJmtTemuSbpQjehAcExT5erhslVTP0aXNgp04=;
+ bh=FkyOFudeKZj8Rh87+0cFjzy5ERm39oyQCs9LQLcusMQ=; b=T7YcdypPrNMJvmzMTT31yvkSNP
+ bXEYPyEzK8O4WBam6jhDNDP4XGKpJk70SePjjiEhft6XjqNxS145kaH56INLWZu2C3Y6cfb3JMYpj
+ 3sMHijqyxNH9dtT/Rw9FETR2XtKXmrLbhh/UygRaHVWxd6ZQfHe9rrUV7lHlzGrASVg8=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lQzJF-00006V-1s
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Mar 2021 21:20:38 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lR0X9-00ANo8-4L
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Mar 2021 22:39:11 +0000
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id AED141F458BB
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: Shreeya Patel <shreeya.patel@collabora.com>
-Organization: Collabora
+ (Authenticated sender: shreeya) with ESMTPSA id 99FC41F4174D
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
 References: <20210329204240.359184-1-shreeya.patel@collabora.com>
  <20210329204240.359184-5-shreeya.patel@collabora.com>
-Date: Mon, 29 Mar 2021 17:20:18 -0400
-In-Reply-To: <20210329204240.359184-5-shreeya.patel@collabora.com> (Shreeya
- Patel's message of "Tue, 30 Mar 2021 02:12:40 +0530")
-Message-ID: <87o8f1r71p.fsf@collabora.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
+ <87o8f1r71p.fsf@collabora.com>
+From: Shreeya Patel <shreeya.patel@collabora.com>
+Message-ID: <bf430ae7-16a1-d4ca-3241-6f654524e7f9@collabora.com>
+Date: Tue, 30 Mar 2021 04:08:40 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
+In-Reply-To: <87o8f1r71p.fsf@collabora.com>
+Content-Language: en-US
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1lQzJF-00006V-1s
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lR0X9-00ANo8-4L
 Subject: Re: [f2fs-dev] [PATCH v5 4/4] fs: unicode: Add utf8 module and a
  unicode layer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -75,850 +77,477 @@ Cc: tytso@mit.edu, drosen@google.com, ebiggers@google.com,
  ebiggers@kernel.org, kernel@collabora.com, adilger.kernel@dilger.ca,
  linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, andre.almeida@collabora.com,
  linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Shreeya Patel <shreeya.patel@collabora.com> writes:
-
-> utf8data.h_shipped has a large database table which is an auto-generated
-> decodification trie for the unicode normalization functions.
-> It is not necessary to load this large table in the kernel if no
-> filesystem is using it, hence make UTF-8 encoding loadable by converting
-> it into a module.
-> Modify the file called unicode-core which will act as a layer for
-> unicode subsystem. It will load the UTF-8 module and access it's functions
-> whenever any filesystem that needs unicode is mounted.
-> Also, indirect calls using function pointers are slow, use static calls to
-> avoid overhead caused in case of repeated indirect calls. Static calls
-> improves the performance by directly calling the functions as opposed to
-> indirect calls.
->
-> Signed-off-by: Shreeya Patel <shreeya.patel@collabora.com>
-> ---
-> Changes in v5
->   - Rename global variables and default static call functions for better
->     understanding
->   - Make only config UNICODE_UTF8 visible and config UNICODE to be always
->     enabled provided UNICODE_UTF8 is enabled.  
->   - Improve the documentation for Kconfig
->   - Improve the commit message.
->  
-> Changes in v4
->   - Return error from the static calls instead of doing nothing and
->     succeeding even without loading the module.
->   - Remove the complete usage of utf8_ops and use static calls at all
->     places.
->   - Restore the static calls to default values when module is unloaded.
->   - Decrement the reference of module after calling the unload function.
->   - Remove spinlock as there will be no race conditions after removing
->     utf8_ops.
->
-> Changes in v3
->   - Add a patch which checks if utf8 is loaded before calling utf8_unload()
->     in ext4 and f2fs filesystems
->   - Return error if strscpy() returns value < 0
->   - Correct the conditions to prevent NULL pointer dereference while
->     accessing functions via utf8_ops variable.
->   - Add spinlock to avoid race conditions.
->   - Use static_call() for preventing speculative execution attacks.
->
-> Changes in v2
->   - Remove the duplicate file from the last patch.
->   - Make the wrapper functions inline.
->   - Remove msleep and use try_module_get() and module_put()
->     for ensuring that module is loaded correctly and also
->     doesn't get unloaded while in use.
->   - Resolve the warning reported by kernel test robot.
->   - Resolve all the checkpatch.pl warnings.
->
->
->  fs/unicode/Kconfig        |  17 ++-
->  fs/unicode/Makefile       |   5 +-
->  fs/unicode/unicode-core.c | 241 +++++++----------------------------
->  fs/unicode/unicode-utf8.c | 256 ++++++++++++++++++++++++++++++++++++++
->  include/linux/unicode.h   | 123 +++++++++++++++---
->  5 files changed, 426 insertions(+), 216 deletions(-)
->  create mode 100644 fs/unicode/unicode-utf8.c
->
-> diff --git a/fs/unicode/Kconfig b/fs/unicode/Kconfig
-> index 2c27b9a5cd6c..ad4b837f2eb2 100644
-> --- a/fs/unicode/Kconfig
-> +++ b/fs/unicode/Kconfig
-> @@ -2,13 +2,26 @@
->  #
->  # UTF-8 normalization
->  #
-> +# CONFIG_UNICODE will be automatically enabled if CONFIG_UNICODE_UTF8
-> +# is enabled. This config option adds the unicode subsystem layer which loads
-> +# the UTF-8 module whenever any filesystem needs it.
->  config UNICODE
-> -	bool "UTF-8 normalization and casefolding support"
-> +	bool
-> +
-> +# utf8data.h_shipped has a large database table which is an auto-generated
-> +# decodification trie for the unicode normalization functions and it is not
-> +# necessary to carry this large table in the kernel.
-> +# Enabling UNICODE_UTF8 option will allow UTF-8 encoding to be built as a
-> +# module and this module will be loaded by the unicode subsystem layer only
-> +# when any filesystem needs it.
-> +config UNICODE_UTF8
-> +	tristate "UTF-8 module"
->  	help
->  	  Say Y here to enable UTF-8 NFD normalization and NFD+CF casefolding
->  	  support.
-> +	select UNICODE
->  
->  config UNICODE_NORMALIZATION_SELFTEST
->  	tristate "Test UTF-8 normalization support"
-> -	depends on UNICODE
-> +	depends on UNICODE_UTF8
->  	default n
-> diff --git a/fs/unicode/Makefile b/fs/unicode/Makefile
-> index fbf9a629ed0d..49d50083e6ee 100644
-> --- a/fs/unicode/Makefile
-> +++ b/fs/unicode/Makefile
-> @@ -1,11 +1,14 @@
->  # SPDX-License-Identifier: GPL-2.0
->  
->  obj-$(CONFIG_UNICODE) += unicode.o
-> +obj-$(CONFIG_UNICODE_UTF8) += utf8.o
->  obj-$(CONFIG_UNICODE_NORMALIZATION_SELFTEST) += utf8-selftest.o
->  
-> -unicode-y := utf8-norm.o unicode-core.o
-> +unicode-y := unicode-core.o
-> +utf8-y := unicode-utf8.o utf8-norm.o
->  
->  $(obj)/utf8-norm.o: $(obj)/utf8data.h
-> +$(obj)/unicode-utf8.o: $(obj)/utf8-norm.o
->  
->  # In the normal build, the checked-in utf8data.h is just shipped.
->  #
-> diff --git a/fs/unicode/unicode-core.c b/fs/unicode/unicode-core.c
-> index 730dbaedf593..07d42f471e42 100644
-> --- a/fs/unicode/unicode-core.c
-> +++ b/fs/unicode/unicode-core.c
-> @@ -1,237 +1,80 @@
->  /* SPDX-License-Identifier: GPL-2.0 */
->  #include <linux/module.h>
->  #include <linux/kernel.h>
-> -#include <linux/string.h>
->  #include <linux/slab.h>
-> -#include <linux/parser.h>
->  #include <linux/errno.h>
->  #include <linux/unicode.h>
-> -#include <linux/stringhash.h>
->  
-> -#include "utf8n.h"
-> +static struct module *utf8mod;
->  
-> -int unicode_validate(const struct unicode_map *um, const struct qstr *str)
-> -{
-> -	const struct utf8data *data = utf8nfdi(um->version);
-> +DEFINE_STATIC_CALL(_unicode_validate, unicode_validate_default);
-> +EXPORT_STATIC_CALL(_unicode_validate);
->  
-> -	if (utf8nlen(data, str->name, str->len) < 0)
-> -		return -1;
-> -	return 0;
-> -}
-> -EXPORT_SYMBOL(unicode_validate);
-> +DEFINE_STATIC_CALL(_unicode_strncmp, unicode_strncmp_default);
-> +EXPORT_STATIC_CALL(_unicode_strncmp);
->  
-> -int unicode_strncmp(const struct unicode_map *um,
-> -		    const struct qstr *s1, const struct qstr *s2)
-> -{
-> -	const struct utf8data *data = utf8nfdi(um->version);
-> -	struct utf8cursor cur1, cur2;
-> -	int c1, c2;
-> +DEFINE_STATIC_CALL(_unicode_strncasecmp, unicode_strncasecmp_default);
-> +EXPORT_STATIC_CALL(_unicode_strncasecmp);
-
-Why are these here if the _default functions are defined in the header
-file?  I think the definitions could be in this file. No?
-
-> -	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> -		return -EINVAL;
-> +DEFINE_STATIC_CALL(_unicode_strncasecmp_folded, unicode_strncasecmp_folded_default);
-> +EXPORT_STATIC_CALL(_unicode_strncasecmp_folded);
->  
-> -	if (utf8ncursor(&cur2, data, s2->name, s2->len) < 0)
-> -		return -EINVAL;
-> +DEFINE_STATIC_CALL(_unicode_normalize, unicode_normalize_default);
-> +EXPORT_STATIC_CALL(_unicode_normalize);
->  
-> -	do {
-> -		c1 = utf8byte(&cur1);
-> -		c2 = utf8byte(&cur2);
-> +DEFINE_STATIC_CALL(_unicode_casefold, unicode_casefold_default);
-> +EXPORT_STATIC_CALL(_unicode_casefold);
->  
-> -		if (c1 < 0 || c2 < 0)
-> -			return -EINVAL;
-> -		if (c1 != c2)
-> -			return 1;
-> -	} while (c1);
-> +DEFINE_STATIC_CALL(_unicode_casefold_hash, unicode_casefold_hash_default);
-> +EXPORT_STATIC_CALL(_unicode_casefold_hash);
->  
-> -	return 0;
-> -}
-> -EXPORT_SYMBOL(unicode_strncmp);
-> +DEFINE_STATIC_CALL(_unicode_load, unicode_load_default);
-> +EXPORT_STATIC_CALL(_unicode_load);
->  
-> -int unicode_strncasecmp(const struct unicode_map *um,
-> -			const struct qstr *s1, const struct qstr *s2)
-> +static int unicode_load_module(void)
->  {
-> -	const struct utf8data *data = utf8nfdicf(um->version);
-> -	struct utf8cursor cur1, cur2;
-> -	int c1, c2;
-> -
-> -	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> -		return -EINVAL;
-> -
-> -	if (utf8ncursor(&cur2, data, s2->name, s2->len) < 0)
-> -		return -EINVAL;
-> -
-> -	do {
-> -		c1 = utf8byte(&cur1);
-> -		c2 = utf8byte(&cur2);
-> -
-> -		if (c1 < 0 || c2 < 0)
-> -			return -EINVAL;
-> -		if (c1 != c2)
-> -			return 1;
-> -	} while (c1);
-> -
-> -	return 0;
-> -}
-> -EXPORT_SYMBOL(unicode_strncasecmp);
-> -
-> -/* String cf is expected to be a valid UTF-8 casefolded
-> - * string.
-> - */
-> -int unicode_strncasecmp_folded(const struct unicode_map *um,
-> -			       const struct qstr *cf,
-> -			       const struct qstr *s1)
-> -{
-> -	const struct utf8data *data = utf8nfdicf(um->version);
-> -	struct utf8cursor cur1;
-> -	int c1, c2;
-> -	int i = 0;
-> -
-> -	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> -		return -EINVAL;
-> -
-> -	do {
-> -		c1 = utf8byte(&cur1);
-> -		c2 = cf->name[i++];
-> -		if (c1 < 0)
-> -			return -EINVAL;
-> -		if (c1 != c2)
-> -			return 1;
-> -	} while (c1);
-> -
-> -	return 0;
-> -}
-> -EXPORT_SYMBOL(unicode_strncasecmp_folded);
-> -
-> -int unicode_casefold(const struct unicode_map *um, const struct qstr *str,
-> -		     unsigned char *dest, size_t dlen)
-> -{
-> -	const struct utf8data *data = utf8nfdicf(um->version);
-> -	struct utf8cursor cur;
-> -	size_t nlen = 0;
-> -
-> -	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> -		return -EINVAL;
-> -
-> -	for (nlen = 0; nlen < dlen; nlen++) {
-> -		int c = utf8byte(&cur);
-> -
-> -		dest[nlen] = c;
-> -		if (!c)
-> -			return nlen;
-> -		if (c == -1)
-> -			break;
-> -	}
-> -	return -EINVAL;
-> -}
-> -EXPORT_SYMBOL(unicode_casefold);
-> +	int ret = request_module("utf8");
->  
-> -int unicode_casefold_hash(const struct unicode_map *um, const void *salt,
-> -			  struct qstr *str)
-> -{
-> -	const struct utf8data *data = utf8nfdicf(um->version);
-> -	struct utf8cursor cur;
-> -	int c;
-> -	unsigned long hash = init_name_hash(salt);
-> -
-> -	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> -		return -EINVAL;
-> -
-> -	while ((c = utf8byte(&cur))) {
-> -		if (c < 0)
-> -			return -EINVAL;
-> -		hash = partial_name_hash((unsigned char)c, hash);
-> +	if (ret) {
-> +		pr_err("Failed to load UTF-8 module\n");
-> +		return ret;
->  	}
-> -	str->hash = end_name_hash(hash);
->  	return 0;
->  }
-> -EXPORT_SYMBOL(unicode_casefold_hash);
->  
-> -int unicode_normalize(const struct unicode_map *um, const struct qstr *str,
-> -		      unsigned char *dest, size_t dlen)
-> +struct unicode_map *unicode_load(const char *version)
->  {
-> -	const struct utf8data *data = utf8nfdi(um->version);
-> -	struct utf8cursor cur;
-> -	ssize_t nlen = 0;
-> -
-> -	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> -		return -EINVAL;
-> +	int ret = unicode_load_module();
-
-Splitting this in two functions sound unnecessary, since the other
-function just calls request_module.  By the way, is there any protection
-against calling request_module if the module is already loaded?  Surely
-that's not necessary, perhaps try_then_request_module(utf8mod, "utf8")?
-
-> -	for (nlen = 0; nlen < dlen; nlen++) {
-> -		int c = utf8byte(&cur);
-> +	if (ret)
-> +		return ERR_PTR(ret);
->  
-> -		dest[nlen] = c;
-> -		if (!c)
-> -			return nlen;
-> -		if (c == -1)
-> -			break;
-> -	}
-> -	return -EINVAL;
-> +	if (!try_module_get(utf8mod))
-
-Can't module_unregister be called in between the register_module and
-here, and then you have a bogus utf8mod pointer? true, try_module_get
-checks for NULL, but if you are unlucky module_is_live will it breaks.
-I still think utf8mod needs to be protected while you don't have a
-reference to the module.
-
-> +		return ERR_PTR(-ENODEV);
-> +	else
-> +		return static_call(_unicode_load)(version);
->  }
-> -EXPORT_SYMBOL(unicode_normalize);
-> +EXPORT_SYMBOL(unicode_load);
->  
-> -static int unicode_parse_version(const char *version, unsigned int *maj,
-> -				 unsigned int *min, unsigned int *rev)
-> +void unicode_unload(struct unicode_map *um)
->  {
-> -	substring_t args[3];
-> -	char version_string[12];
-> -	static const struct match_token token[] = {
-> -		{1, "%d.%d.%d"},
-> -		{0, NULL}
-> -	};
-> -	int ret = strscpy(version_string, version, sizeof(version_string));
-> -
-> -	if (ret < 0)
-> -		return ret;
-> -
-> -	if (match_token(version_string, token, args) != 1)
-> -		return -EINVAL;
-> -
-> -	if (match_int(&args[0], maj) || match_int(&args[1], min) ||
-> -	    match_int(&args[2], rev))
-> -		return -EINVAL;
-> +	kfree(um);
->  
-> -	return 0;
-> +	if (utf8mod)
-> +		module_put(utf8mod);
->  }
-> +EXPORT_SYMBOL(unicode_unload);
->  
-> -struct unicode_map *unicode_load(const char *version)
-> +void unicode_register(struct module *owner)
->  {
-> -	struct unicode_map *um = NULL;
-> -	int unicode_version;
-> -
-> -	if (version) {
-> -		unsigned int maj, min, rev;
-> -
-> -		if (unicode_parse_version(version, &maj, &min, &rev) < 0)
-> -			return ERR_PTR(-EINVAL);
-> -
-> -		if (!utf8version_is_supported(maj, min, rev))
-> -			return ERR_PTR(-EINVAL);
-> -
-> -		unicode_version = UNICODE_AGE(maj, min, rev);
-> -	} else {
-> -		unicode_version = utf8version_latest();
-> -		printk(KERN_WARNING"UTF-8 version not specified. "
-> -		       "Assuming latest supported version (%d.%d.%d).",
-> -		       (unicode_version >> 16) & 0xff,
-> -		       (unicode_version >> 8) & 0xff,
-> -		       (unicode_version & 0xff));
-> -	}
-> -
-> -	um = kzalloc(sizeof(struct unicode_map), GFP_KERNEL);
-> -	if (!um)
-> -		return ERR_PTR(-ENOMEM);
-> -
-> -	um->charset = "UTF-8";
-> -	um->version = unicode_version;
-> -
-> -	return um;
-> +	utf8mod = owner;
->  }
-> -EXPORT_SYMBOL(unicode_load);
-> +EXPORT_SYMBOL(unicode_register);
->  
-> -void unicode_unload(struct unicode_map *um)
-> +void unicode_unregister(void)
->  {
-> -	kfree(um);
-> +	utf8mod = NULL;
->  }
-> -EXPORT_SYMBOL(unicode_unload);
-> +EXPORT_SYMBOL(unicode_unregister);
->  
->  MODULE_LICENSE("GPL v2");
-> diff --git a/fs/unicode/unicode-utf8.c b/fs/unicode/unicode-utf8.c
-> new file mode 100644
-> index 000000000000..9c6b58239067
-> --- /dev/null
-> +++ b/fs/unicode/unicode-utf8.c
-> @@ -0,0 +1,256 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +#include <linux/module.h>
-> +#include <linux/kernel.h>
-> +#include <linux/string.h>
-> +#include <linux/slab.h>
-> +#include <linux/parser.h>
-> +#include <linux/errno.h>
-> +#include <linux/unicode.h>
-> +#include <linux/stringhash.h>
-> +#include <linux/static_call.h>
-> +
-> +#include "utf8n.h"
-> +
-> +static int utf8_validate(const struct unicode_map *um, const struct qstr *str)
-> +{
-> +	const struct utf8data *data = utf8nfdi(um->version);
-> +
-> +	if (utf8nlen(data, str->name, str->len) < 0)
-> +		return -1;
-> +	return 0;
-> +}
-> +
-> +static int utf8_strncmp(const struct unicode_map *um,
-> +			const struct qstr *s1, const struct qstr *s2)
-> +{
-> +	const struct utf8data *data = utf8nfdi(um->version);
-> +	struct utf8cursor cur1, cur2;
-> +	int c1, c2;
-> +
-> +	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> +		return -EINVAL;
-> +
-> +	if (utf8ncursor(&cur2, data, s2->name, s2->len) < 0)
-> +		return -EINVAL;
-> +
-> +	do {
-> +		c1 = utf8byte(&cur1);
-> +		c2 = utf8byte(&cur2);
-> +
-> +		if (c1 < 0 || c2 < 0)
-> +			return -EINVAL;
-> +		if (c1 != c2)
-> +			return 1;
-> +	} while (c1);
-> +
-> +	return 0;
-> +}
-> +
-> +static int utf8_strncasecmp(const struct unicode_map *um,
-> +			    const struct qstr *s1, const struct qstr *s2)
-> +{
-> +	const struct utf8data *data = utf8nfdicf(um->version);
-> +	struct utf8cursor cur1, cur2;
-> +	int c1, c2;
-> +
-> +	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> +		return -EINVAL;
-> +
-> +	if (utf8ncursor(&cur2, data, s2->name, s2->len) < 0)
-> +		return -EINVAL;
-> +
-> +	do {
-> +		c1 = utf8byte(&cur1);
-> +		c2 = utf8byte(&cur2);
-> +
-> +		if (c1 < 0 || c2 < 0)
-> +			return -EINVAL;
-> +		if (c1 != c2)
-> +			return 1;
-> +	} while (c1);
-> +
-> +	return 0;
-> +}
-> +
-> +/* String cf is expected to be a valid UTF-8 casefolded
-> + * string.
-> + */
-> +static int utf8_strncasecmp_folded(const struct unicode_map *um,
-> +				   const struct qstr *cf,
-> +				   const struct qstr *s1)
-> +{
-> +	const struct utf8data *data = utf8nfdicf(um->version);
-> +	struct utf8cursor cur1;
-> +	int c1, c2;
-> +	int i = 0;
-> +
-> +	if (utf8ncursor(&cur1, data, s1->name, s1->len) < 0)
-> +		return -EINVAL;
-> +
-> +	do {
-> +		c1 = utf8byte(&cur1);
-> +		c2 = cf->name[i++];
-> +		if (c1 < 0)
-> +			return -EINVAL;
-> +		if (c1 != c2)
-> +			return 1;
-> +	} while (c1);
-> +
-> +	return 0;
-> +}
-> +
-> +static int utf8_casefold(const struct unicode_map *um, const struct qstr *str,
-> +			 unsigned char *dest, size_t dlen)
-> +{
-> +	const struct utf8data *data = utf8nfdicf(um->version);
-> +	struct utf8cursor cur;
-> +	size_t nlen = 0;
-> +
-> +	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> +		return -EINVAL;
-> +
-> +	for (nlen = 0; nlen < dlen; nlen++) {
-> +		int c = utf8byte(&cur);
-> +
-> +		dest[nlen] = c;
-> +		if (!c)
-> +			return nlen;
-> +		if (c == -1)
-> +			break;
-> +	}
-> +	return -EINVAL;
-> +}
-> +
-> +static int utf8_casefold_hash(const struct unicode_map *um, const void *salt,
-> +			      struct qstr *str)
-> +{
-> +	const struct utf8data *data = utf8nfdicf(um->version);
-> +	struct utf8cursor cur;
-> +	int c;
-> +	unsigned long hash = init_name_hash(salt);
-> +
-> +	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> +		return -EINVAL;
-> +
-> +	while ((c = utf8byte(&cur))) {
-> +		if (c < 0)
-> +			return -EINVAL;
-> +		hash = partial_name_hash((unsigned char)c, hash);
-> +	}
-> +	str->hash = end_name_hash(hash);
-> +	return 0;
-> +}
-> +
-> +static int utf8_normalize(const struct unicode_map *um, const struct qstr *str,
-> +			  unsigned char *dest, size_t dlen)
-> +{
-> +	const struct utf8data *data = utf8nfdi(um->version);
-> +	struct utf8cursor cur;
-> +	ssize_t nlen = 0;
-> +
-> +	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
-> +		return -EINVAL;
-> +
-> +	for (nlen = 0; nlen < dlen; nlen++) {
-> +		int c = utf8byte(&cur);
-> +
-> +		dest[nlen] = c;
-> +		if (!c)
-> +			return nlen;
-> +		if (c == -1)
-> +			break;
-> +	}
-> +	return -EINVAL;
-> +}
-> +
-> +static int utf8_parse_version(const char *version, unsigned int *maj,
-> +			      unsigned int *min, unsigned int *rev)
-> +{
-> +	substring_t args[3];
-> +	char version_string[12];
-> +	static const struct match_token token[] = {
-> +		{1, "%d.%d.%d"},
-> +		{0, NULL}
-> +	};
-> +
-> +	int ret = strscpy(version_string, version, sizeof(version_string));
-> +
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	if (match_token(version_string, token, args) != 1)
-> +		return -EINVAL;
-> +
-> +	if (match_int(&args[0], maj) || match_int(&args[1], min) ||
-> +	    match_int(&args[2], rev))
-> +		return -EINVAL;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct unicode_map *utf8_load(const char *version)
-> +{
-> +	struct unicode_map *um = NULL;
-> +	int unicode_version;
-> +
-> +	if (version) {
-> +		unsigned int maj, min, rev;
-> +
-> +		if (utf8_parse_version(version, &maj, &min, &rev) < 0)
-> +			return ERR_PTR(-EINVAL);
-> +
-> +		if (!utf8version_is_supported(maj, min, rev))
-> +			return ERR_PTR(-EINVAL);
-> +
-> +		unicode_version = UNICODE_AGE(maj, min, rev);
-> +	} else {
-> +		unicode_version = utf8version_latest();
-> +		pr_warn("UTF-8 version not specified. Assuming latest supported version (%d.%d.%d).",
-> +			(unicode_version >> 16) & 0xff,
-> +			(unicode_version >> 8) & 0xff,
-> +			(unicode_version & 0xfe));
-> +	}
-> +
-> +	um = kzalloc(sizeof(*um), GFP_KERNEL);
-> +	if (!um)
-> +		return ERR_PTR(-ENOMEM);
-> +
-> +	um->charset = "UTF-8";
-> +	um->version = unicode_version;
-> +
-> +	return um;
-> +}
-> +
-> +static int __init utf8_init(void)
-> +{
-> +	static_call_update(_unicode_validate, utf8_validate);
-> +	static_call_update(_unicode_strncmp, utf8_strncmp);
-> +	static_call_update(_unicode_strncasecmp, utf8_strncasecmp);
-> +	static_call_update(_unicode_strncasecmp_folded, utf8_strncasecmp_folded);
-> +	static_call_update(_unicode_normalize, utf8_normalize);
-> +	static_call_update(_unicode_casefold, utf8_casefold);
-> +	static_call_update(_unicode_casefold_hash, utf8_casefold_hash);
-> +	static_call_update(_unicode_load, utf8_load);
-> +
-> +	unicode_register(THIS_MODULE);
-> +	return 0;
-> +}
-> +
-> +static void __exit utf8_exit(void)
-> +{
-> +	static_call_update(_unicode_validate, unicode_validate_default);
-> +	static_call_update(_unicode_strncmp, unicode_strncmp_default);
-> +	static_call_update(_unicode_strncasecmp, unicode_strncasecmp_default);
-> +	static_call_update(_unicode_strncasecmp_folded, unicode_strncasecmp_folded_default);
-> +	static_call_update(_unicode_normalize, unicode_normalize_default);
-> +	static_call_update(_unicode_casefold, unicode_casefold_default);
-> +	static_call_update(_unicode_casefold_hash, unicode_casefold_hash_default);
-> +	static_call_update(_unicode_load, unicode_load_default);
-> +
-> +	unicode_unregister();
-> +}
-> +
-> +module_init(utf8_init);
-> +module_exit(utf8_exit);
-> +
-> +MODULE_LICENSE("GPL v2");
-> diff --git a/include/linux/unicode.h b/include/linux/unicode.h
-> index de23f9ee720b..18a1d3db9de5 100644
-> --- a/include/linux/unicode.h
-> +++ b/include/linux/unicode.h
-> @@ -4,33 +4,128 @@
->  
->  #include <linux/init.h>
->  #include <linux/dcache.h>
-> +#include <linux/static_call.h>
-> +
->  
->  struct unicode_map {
->  	const char *charset;
->  	int version;
->  };
->  
-> -int unicode_validate(const struct unicode_map *um, const struct qstr *str);
-> +static int unicode_warn_on(void)
-> +{
-> +	WARN_ON(1);
-> +	return -EIO;
-> +}
-
-Creating this extra function adds the same number of lines than if you
-write `WARN_ON(1); return -EIO;` in each of the few handlers below, but
-the later would be more clear, and you already do it for
-unicode_load_default anyway. :)
-> +
-> +static int unicode_validate_default(const struct unicode_map *um,
-> +				    const struct qstr *str)
-> +{
-> +	return unicode_warn_on();
-> +}
-> +
-> +static int unicode_strncmp_default(const struct unicode_map *um,
-> +				   const struct qstr *s1,
-> +				   const struct qstr *s2)
-> +{
-> +	return unicode_warn_on();
-> +}
-> +
-> +static int unicode_strncasecmp_default(const struct unicode_map *um,
-> +				       const struct qstr *s1,
-> +				       const struct qstr *s2)
-> +{
-> +	return unicode_warn_on();
-> +}
-> +
-> +static int unicode_strncasecmp_folded_default(const struct unicode_map *um,
-> +					      const struct qstr *cf,
-> +					      const struct qstr *s1)
-> +{
-> +	return unicode_warn_on();
-> +}
-> +
-> +static int unicode_normalize_default(const struct unicode_map *um,
-> +				     const struct qstr *str,
-> +				     unsigned char *dest, size_t dlen)
-> +{
-> +	return unicode_warn_on();
-> +}
-> +
-> +static int unicode_casefold_default(const struct unicode_map *um,
-> +				    const struct qstr *str,
-> +				    unsigned char *dest, size_t dlen)
-> +{
-> +	return unicode_warn_on();
-> +}
->  
-> -int unicode_strncmp(const struct unicode_map *um,
-> -		    const struct qstr *s1, const struct qstr *s2);
-> +static int unicode_casefold_hash_default(const struct unicode_map *um,
-> +					 const void *salt, struct qstr *str)
-> +{
-> +	return unicode_warn_on();
-> +}
-
-Again, why isn't this in a .c ?  Does it need to be here?
-
->  
-> -int unicode_strncasecmp(const struct unicode_map *um,
-> -			const struct qstr *s1, const struct qstr *s2);
-> -int unicode_strncasecmp_folded(const struct unicode_map *um,
-> -			       const struct qstr *cf,
-> -			       const struct qstr *s1);
-> +static struct unicode_map *unicode_load_default(const char *version)
-> +{
-> +	unicode_warn_on();
-> +	return ERR_PTR(-EIO);
-> +}
->  
-> -int unicode_normalize(const struct unicode_map *um, const struct qstr *str,
-> -		      unsigned char *dest, size_t dlen);
-> +DECLARE_STATIC_CALL(_unicode_validate, unicode_validate_default);
-> +DECLARE_STATIC_CALL(_unicode_strncmp, unicode_strncmp_default);
-> +DECLARE_STATIC_CALL(_unicode_strncasecmp, unicode_strncasecmp_default);
-> +DECLARE_STATIC_CALL(_unicode_strncasecmp_folded, unicode_strncasecmp_folded_default);
-> +DECLARE_STATIC_CALL(_unicode_normalize, unicode_normalize_default);
-> +DECLARE_STATIC_CALL(_unicode_casefold, unicode_casefold_default);
-> +DECLARE_STATIC_CALL(_unicode_casefold_hash, unicode_casefold_hash_default);
-> +DECLARE_STATIC_CALL(_unicode_load, unicode_load_default);
-
-nit: I hate this functions starting with a single  _ .  they are not common in the
-rest of the kernel either.
-
-> -int unicode_casefold(const struct unicode_map *um, const struct qstr *str,
-> -		     unsigned char *dest, size_t dlen);
-> +static inline int unicode_validate(const struct unicode_map *um, const struct qstr *str)
-> +{
-> +	return static_call(_unicode_validate)(um, str);
-> +}
->  
-> -int unicode_casefold_hash(const struct unicode_map *um, const void *salt,
-> -			  struct qstr *str);
-> +static inline int unicode_strncmp(const struct unicode_map *um,
-> +				  const struct qstr *s1, const struct qstr *s2)
-> +{
-> +	return static_call(_unicode_strncmp)(um, s1, s2);
-> +}
-> +
-> +static inline int unicode_strncasecmp(const struct unicode_map *um,
-> +				      const struct qstr *s1, const struct qstr *s2)
-> +{
-> +	return static_call(_unicode_strncasecmp)(um, s1, s2);
-> +}
-> +
-> +static inline int unicode_strncasecmp_folded(const struct unicode_map *um,
-> +					     const struct qstr *cf,
-> +					     const struct qstr *s1)
-> +{
-> +	return static_call(_unicode_strncasecmp_folded)(um, cf, s1);
-> +}
-> +
-> +static inline int unicode_normalize(const struct unicode_map *um, const struct qstr *str,
-> +				    unsigned char *dest, size_t dlen)
-> +{
-> +	return static_call(_unicode_normalize)(um, str, dest, dlen);
-> +}
-> +
-> +static inline int unicode_casefold(const struct unicode_map *um, const struct qstr *str,
-> +				   unsigned char *dest, size_t dlen)
-> +{
-> +	return static_call(_unicode_casefold)(um, str, dest, dlen);
-> +}
-> +
-> +static inline int unicode_casefold_hash(const struct unicode_map *um, const void *salt,
-> +					struct qstr *str)
-> +{
-> +	return static_call(_unicode_casefold_hash)(um, salt, str);
-> +}
->  
->  struct unicode_map *unicode_load(const char *version);
->  void unicode_unload(struct unicode_map *um);
->  
-> +void unicode_register(struct module *owner);
-> +void unicode_unregister(void);
-> +
->  #endif /* _LINUX_UNICODE_H */
-
--- 
-Gabriel Krisman Bertazi
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Ck9uIDMwLzAzLzIxIDI6NTAgYW0sIEdhYnJpZWwgS3Jpc21hbiBCZXJ0YXppIHdyb3RlOgo+IFNo
+cmVleWEgUGF0ZWwgPHNocmVleWEucGF0ZWxAY29sbGFib3JhLmNvbT4gd3JpdGVzOgo+Cj4+IHV0
+ZjhkYXRhLmhfc2hpcHBlZCBoYXMgYSBsYXJnZSBkYXRhYmFzZSB0YWJsZSB3aGljaCBpcyBhbiBh
+dXRvLWdlbmVyYXRlZAo+PiBkZWNvZGlmaWNhdGlvbiB0cmllIGZvciB0aGUgdW5pY29kZSBub3Jt
+YWxpemF0aW9uIGZ1bmN0aW9ucy4KPj4gSXQgaXMgbm90IG5lY2Vzc2FyeSB0byBsb2FkIHRoaXMg
+bGFyZ2UgdGFibGUgaW4gdGhlIGtlcm5lbCBpZiBubwo+PiBmaWxlc3lzdGVtIGlzIHVzaW5nIGl0
+LCBoZW5jZSBtYWtlIFVURi04IGVuY29kaW5nIGxvYWRhYmxlIGJ5IGNvbnZlcnRpbmcKPj4gaXQg
+aW50byBhIG1vZHVsZS4KPj4gTW9kaWZ5IHRoZSBmaWxlIGNhbGxlZCB1bmljb2RlLWNvcmUgd2hp
+Y2ggd2lsbCBhY3QgYXMgYSBsYXllciBmb3IKPj4gdW5pY29kZSBzdWJzeXN0ZW0uIEl0IHdpbGwg
+bG9hZCB0aGUgVVRGLTggbW9kdWxlIGFuZCBhY2Nlc3MgaXQncyBmdW5jdGlvbnMKPj4gd2hlbmV2
+ZXIgYW55IGZpbGVzeXN0ZW0gdGhhdCBuZWVkcyB1bmljb2RlIGlzIG1vdW50ZWQuCj4+IEFsc28s
+IGluZGlyZWN0IGNhbGxzIHVzaW5nIGZ1bmN0aW9uIHBvaW50ZXJzIGFyZSBzbG93LCB1c2Ugc3Rh
+dGljIGNhbGxzIHRvCj4+IGF2b2lkIG92ZXJoZWFkIGNhdXNlZCBpbiBjYXNlIG9mIHJlcGVhdGVk
+IGluZGlyZWN0IGNhbGxzLiBTdGF0aWMgY2FsbHMKPj4gaW1wcm92ZXMgdGhlIHBlcmZvcm1hbmNl
+IGJ5IGRpcmVjdGx5IGNhbGxpbmcgdGhlIGZ1bmN0aW9ucyBhcyBvcHBvc2VkIHRvCj4+IGluZGly
+ZWN0IGNhbGxzLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBTaHJlZXlhIFBhdGVsIDxzaHJlZXlhLnBh
+dGVsQGNvbGxhYm9yYS5jb20+Cj4+IC0tLQo+PiBDaGFuZ2VzIGluIHY1Cj4+ICAgIC0gUmVuYW1l
+IGdsb2JhbCB2YXJpYWJsZXMgYW5kIGRlZmF1bHQgc3RhdGljIGNhbGwgZnVuY3Rpb25zIGZvciBi
+ZXR0ZXIKPj4gICAgICB1bmRlcnN0YW5kaW5nCj4+ICAgIC0gTWFrZSBvbmx5IGNvbmZpZyBVTklD
+T0RFX1VURjggdmlzaWJsZSBhbmQgY29uZmlnIFVOSUNPREUgdG8gYmUgYWx3YXlzCj4+ICAgICAg
+ZW5hYmxlZCBwcm92aWRlZCBVTklDT0RFX1VURjggaXMgZW5hYmxlZC4KPj4gICAgLSBJbXByb3Zl
+IHRoZSBkb2N1bWVudGF0aW9uIGZvciBLY29uZmlnCj4+ICAgIC0gSW1wcm92ZSB0aGUgY29tbWl0
+IG1lc3NhZ2UuCj4+ICAgCj4+IENoYW5nZXMgaW4gdjQKPj4gICAgLSBSZXR1cm4gZXJyb3IgZnJv
+bSB0aGUgc3RhdGljIGNhbGxzIGluc3RlYWQgb2YgZG9pbmcgbm90aGluZyBhbmQKPj4gICAgICBz
+dWNjZWVkaW5nIGV2ZW4gd2l0aG91dCBsb2FkaW5nIHRoZSBtb2R1bGUuCj4+ICAgIC0gUmVtb3Zl
+IHRoZSBjb21wbGV0ZSB1c2FnZSBvZiB1dGY4X29wcyBhbmQgdXNlIHN0YXRpYyBjYWxscyBhdCBh
+bGwKPj4gICAgICBwbGFjZXMuCj4+ICAgIC0gUmVzdG9yZSB0aGUgc3RhdGljIGNhbGxzIHRvIGRl
+ZmF1bHQgdmFsdWVzIHdoZW4gbW9kdWxlIGlzIHVubG9hZGVkLgo+PiAgICAtIERlY3JlbWVudCB0
+aGUgcmVmZXJlbmNlIG9mIG1vZHVsZSBhZnRlciBjYWxsaW5nIHRoZSB1bmxvYWQgZnVuY3Rpb24u
+Cj4+ICAgIC0gUmVtb3ZlIHNwaW5sb2NrIGFzIHRoZXJlIHdpbGwgYmUgbm8gcmFjZSBjb25kaXRp
+b25zIGFmdGVyIHJlbW92aW5nCj4+ICAgICAgdXRmOF9vcHMuCj4+Cj4+IENoYW5nZXMgaW4gdjMK
+Pj4gICAgLSBBZGQgYSBwYXRjaCB3aGljaCBjaGVja3MgaWYgdXRmOCBpcyBsb2FkZWQgYmVmb3Jl
+IGNhbGxpbmcgdXRmOF91bmxvYWQoKQo+PiAgICAgIGluIGV4dDQgYW5kIGYyZnMgZmlsZXN5c3Rl
+bXMKPj4gICAgLSBSZXR1cm4gZXJyb3IgaWYgc3Ryc2NweSgpIHJldHVybnMgdmFsdWUgPCAwCj4+
+ICAgIC0gQ29ycmVjdCB0aGUgY29uZGl0aW9ucyB0byBwcmV2ZW50IE5VTEwgcG9pbnRlciBkZXJl
+ZmVyZW5jZSB3aGlsZQo+PiAgICAgIGFjY2Vzc2luZyBmdW5jdGlvbnMgdmlhIHV0Zjhfb3BzIHZh
+cmlhYmxlLgo+PiAgICAtIEFkZCBzcGlubG9jayB0byBhdm9pZCByYWNlIGNvbmRpdGlvbnMuCj4+
+ICAgIC0gVXNlIHN0YXRpY19jYWxsKCkgZm9yIHByZXZlbnRpbmcgc3BlY3VsYXRpdmUgZXhlY3V0
+aW9uIGF0dGFja3MuCj4+Cj4+IENoYW5nZXMgaW4gdjIKPj4gICAgLSBSZW1vdmUgdGhlIGR1cGxp
+Y2F0ZSBmaWxlIGZyb20gdGhlIGxhc3QgcGF0Y2guCj4+ICAgIC0gTWFrZSB0aGUgd3JhcHBlciBm
+dW5jdGlvbnMgaW5saW5lLgo+PiAgICAtIFJlbW92ZSBtc2xlZXAgYW5kIHVzZSB0cnlfbW9kdWxl
+X2dldCgpIGFuZCBtb2R1bGVfcHV0KCkKPj4gICAgICBmb3IgZW5zdXJpbmcgdGhhdCBtb2R1bGUg
+aXMgbG9hZGVkIGNvcnJlY3RseSBhbmQgYWxzbwo+PiAgICAgIGRvZXNuJ3QgZ2V0IHVubG9hZGVk
+IHdoaWxlIGluIHVzZS4KPj4gICAgLSBSZXNvbHZlIHRoZSB3YXJuaW5nIHJlcG9ydGVkIGJ5IGtl
+cm5lbCB0ZXN0IHJvYm90Lgo+PiAgICAtIFJlc29sdmUgYWxsIHRoZSBjaGVja3BhdGNoLnBsIHdh
+cm5pbmdzLgo+Pgo+Pgo+PiAgIGZzL3VuaWNvZGUvS2NvbmZpZyAgICAgICAgfCAgMTcgKystCj4+
+ICAgZnMvdW5pY29kZS9NYWtlZmlsZSAgICAgICB8ICAgNSArLQo+PiAgIGZzL3VuaWNvZGUvdW5p
+Y29kZS1jb3JlLmMgfCAyNDEgKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4g
+ICBmcy91bmljb2RlL3VuaWNvZGUtdXRmOC5jIHwgMjU2ICsrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrCj4+ICAgaW5jbHVkZS9saW51eC91bmljb2RlLmggICB8IDEyMyArKysr
+KysrKysrKysrKystLS0KPj4gICA1IGZpbGVzIGNoYW5nZWQsIDQyNiBpbnNlcnRpb25zKCspLCAy
+MTYgZGVsZXRpb25zKC0pCj4+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGZzL3VuaWNvZGUvdW5pY29k
+ZS11dGY4LmMKPj4KPj4gZGlmZiAtLWdpdCBhL2ZzL3VuaWNvZGUvS2NvbmZpZyBiL2ZzL3VuaWNv
+ZGUvS2NvbmZpZwo+PiBpbmRleCAyYzI3YjlhNWNkNmMuLmFkNGI4MzdmMmViMiAxMDA2NDQKPj4g
+LS0tIGEvZnMvdW5pY29kZS9LY29uZmlnCj4+ICsrKyBiL2ZzL3VuaWNvZGUvS2NvbmZpZwo+PiBA
+QCAtMiwxMyArMiwyNiBAQAo+PiAgICMKPj4gICAjIFVURi04IG5vcm1hbGl6YXRpb24KPj4gICAj
+Cj4+ICsjIENPTkZJR19VTklDT0RFIHdpbGwgYmUgYXV0b21hdGljYWxseSBlbmFibGVkIGlmIENP
+TkZJR19VTklDT0RFX1VURjgKPj4gKyMgaXMgZW5hYmxlZC4gVGhpcyBjb25maWcgb3B0aW9uIGFk
+ZHMgdGhlIHVuaWNvZGUgc3Vic3lzdGVtIGxheWVyIHdoaWNoIGxvYWRzCj4+ICsjIHRoZSBVVEYt
+OCBtb2R1bGUgd2hlbmV2ZXIgYW55IGZpbGVzeXN0ZW0gbmVlZHMgaXQuCj4+ICAgY29uZmlnIFVO
+SUNPREUKPj4gLQlib29sICJVVEYtOCBub3JtYWxpemF0aW9uIGFuZCBjYXNlZm9sZGluZyBzdXBw
+b3J0Igo+PiArCWJvb2wKPj4gKwo+PiArIyB1dGY4ZGF0YS5oX3NoaXBwZWQgaGFzIGEgbGFyZ2Ug
+ZGF0YWJhc2UgdGFibGUgd2hpY2ggaXMgYW4gYXV0by1nZW5lcmF0ZWQKPj4gKyMgZGVjb2RpZmlj
+YXRpb24gdHJpZSBmb3IgdGhlIHVuaWNvZGUgbm9ybWFsaXphdGlvbiBmdW5jdGlvbnMgYW5kIGl0
+IGlzIG5vdAo+PiArIyBuZWNlc3NhcnkgdG8gY2FycnkgdGhpcyBsYXJnZSB0YWJsZSBpbiB0aGUg
+a2VybmVsLgo+PiArIyBFbmFibGluZyBVTklDT0RFX1VURjggb3B0aW9uIHdpbGwgYWxsb3cgVVRG
+LTggZW5jb2RpbmcgdG8gYmUgYnVpbHQgYXMgYQo+PiArIyBtb2R1bGUgYW5kIHRoaXMgbW9kdWxl
+IHdpbGwgYmUgbG9hZGVkIGJ5IHRoZSB1bmljb2RlIHN1YnN5c3RlbSBsYXllciBvbmx5Cj4+ICsj
+IHdoZW4gYW55IGZpbGVzeXN0ZW0gbmVlZHMgaXQuCj4+ICtjb25maWcgVU5JQ09ERV9VVEY4Cj4+
+ICsJdHJpc3RhdGUgIlVURi04IG1vZHVsZSIKPj4gICAJaGVscAo+PiAgIAkgIFNheSBZIGhlcmUg
+dG8gZW5hYmxlIFVURi04IE5GRCBub3JtYWxpemF0aW9uIGFuZCBORkQrQ0YgY2FzZWZvbGRpbmcK
+Pj4gICAJICBzdXBwb3J0Lgo+PiArCXNlbGVjdCBVTklDT0RFCj4+ICAgCj4+ICAgY29uZmlnIFVO
+SUNPREVfTk9STUFMSVpBVElPTl9TRUxGVEVTVAo+PiAgIAl0cmlzdGF0ZSAiVGVzdCBVVEYtOCBu
+b3JtYWxpemF0aW9uIHN1cHBvcnQiCj4+IC0JZGVwZW5kcyBvbiBVTklDT0RFCj4+ICsJZGVwZW5k
+cyBvbiBVTklDT0RFX1VURjgKPj4gICAJZGVmYXVsdCBuCj4+IGRpZmYgLS1naXQgYS9mcy91bmlj
+b2RlL01ha2VmaWxlIGIvZnMvdW5pY29kZS9NYWtlZmlsZQo+PiBpbmRleCBmYmY5YTYyOWVkMGQu
+LjQ5ZDUwMDgzZTZlZSAxMDA2NDQKPj4gLS0tIGEvZnMvdW5pY29kZS9NYWtlZmlsZQo+PiArKysg
+Yi9mcy91bmljb2RlL01ha2VmaWxlCj4+IEBAIC0xLDExICsxLDE0IEBACj4+ICAgIyBTUERYLUxp
+Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAo+PiAgIAo+PiAgIG9iai0kKENPTkZJR19VTklDT0RF
+KSArPSB1bmljb2RlLm8KPj4gK29iai0kKENPTkZJR19VTklDT0RFX1VURjgpICs9IHV0Zjgubwo+
+PiAgIG9iai0kKENPTkZJR19VTklDT0RFX05PUk1BTElaQVRJT05fU0VMRlRFU1QpICs9IHV0Zjgt
+c2VsZnRlc3Qubwo+PiAgIAo+PiAtdW5pY29kZS15IDo9IHV0Zjgtbm9ybS5vIHVuaWNvZGUtY29y
+ZS5vCj4+ICt1bmljb2RlLXkgOj0gdW5pY29kZS1jb3JlLm8KPj4gK3V0ZjgteSA6PSB1bmljb2Rl
+LXV0ZjgubyB1dGY4LW5vcm0ubwo+PiAgIAo+PiAgICQob2JqKS91dGY4LW5vcm0ubzogJChvYmop
+L3V0ZjhkYXRhLmgKPj4gKyQob2JqKS91bmljb2RlLXV0ZjgubzogJChvYmopL3V0Zjgtbm9ybS5v
+Cj4+ICAgCj4+ICAgIyBJbiB0aGUgbm9ybWFsIGJ1aWxkLCB0aGUgY2hlY2tlZC1pbiB1dGY4ZGF0
+YS5oIGlzIGp1c3Qgc2hpcHBlZC4KPj4gICAjCj4+IGRpZmYgLS1naXQgYS9mcy91bmljb2RlL3Vu
+aWNvZGUtY29yZS5jIGIvZnMvdW5pY29kZS91bmljb2RlLWNvcmUuYwo+PiBpbmRleCA3MzBkYmFl
+ZGY1OTMuLjA3ZDQyZjQ3MWU0MiAxMDA2NDQKPj4gLS0tIGEvZnMvdW5pY29kZS91bmljb2RlLWNv
+cmUuYwo+PiArKysgYi9mcy91bmljb2RlL3VuaWNvZGUtY29yZS5jCj4+IEBAIC0xLDIzNyArMSw4
+MCBAQAo+PiAgIC8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wICovCj4+ICAgI2lu
+Y2x1ZGUgPGxpbnV4L21vZHVsZS5oPgo+PiAgICNpbmNsdWRlIDxsaW51eC9rZXJuZWwuaD4KPj4g
+LSNpbmNsdWRlIDxsaW51eC9zdHJpbmcuaD4KPj4gICAjaW5jbHVkZSA8bGludXgvc2xhYi5oPgo+
+PiAtI2luY2x1ZGUgPGxpbnV4L3BhcnNlci5oPgo+PiAgICNpbmNsdWRlIDxsaW51eC9lcnJuby5o
+Pgo+PiAgICNpbmNsdWRlIDxsaW51eC91bmljb2RlLmg+Cj4+IC0jaW5jbHVkZSA8bGludXgvc3Ry
+aW5naGFzaC5oPgo+PiAgIAo+PiAtI2luY2x1ZGUgInV0ZjhuLmgiCj4+ICtzdGF0aWMgc3RydWN0
+IG1vZHVsZSAqdXRmOG1vZDsKPj4gICAKPj4gLWludCB1bmljb2RlX3ZhbGlkYXRlKGNvbnN0IHN0
+cnVjdCB1bmljb2RlX21hcCAqdW0sIGNvbnN0IHN0cnVjdCBxc3RyICpzdHIpCj4+IC17Cj4+IC0J
+Y29uc3Qgc3RydWN0IHV0ZjhkYXRhICpkYXRhID0gdXRmOG5mZGkodW0tPnZlcnNpb24pOwo+PiAr
+REVGSU5FX1NUQVRJQ19DQUxMKF91bmljb2RlX3ZhbGlkYXRlLCB1bmljb2RlX3ZhbGlkYXRlX2Rl
+ZmF1bHQpOwo+PiArRVhQT1JUX1NUQVRJQ19DQUxMKF91bmljb2RlX3ZhbGlkYXRlKTsKPj4gICAK
+Pj4gLQlpZiAodXRmOG5sZW4oZGF0YSwgc3RyLT5uYW1lLCBzdHItPmxlbikgPCAwKQo+PiAtCQly
+ZXR1cm4gLTE7Cj4+IC0JcmV0dXJuIDA7Cj4+IC19Cj4+IC1FWFBPUlRfU1lNQk9MKHVuaWNvZGVf
+dmFsaWRhdGUpOwo+PiArREVGSU5FX1NUQVRJQ19DQUxMKF91bmljb2RlX3N0cm5jbXAsIHVuaWNv
+ZGVfc3RybmNtcF9kZWZhdWx0KTsKPj4gK0VYUE9SVF9TVEFUSUNfQ0FMTChfdW5pY29kZV9zdHJu
+Y21wKTsKPj4gICAKPj4gLWludCB1bmljb2RlX3N0cm5jbXAoY29uc3Qgc3RydWN0IHVuaWNvZGVf
+bWFwICp1bSwKPj4gLQkJICAgIGNvbnN0IHN0cnVjdCBxc3RyICpzMSwgY29uc3Qgc3RydWN0IHFz
+dHIgKnMyKQo+PiAtewo+PiAtCWNvbnN0IHN0cnVjdCB1dGY4ZGF0YSAqZGF0YSA9IHV0ZjhuZmRp
+KHVtLT52ZXJzaW9uKTsKPj4gLQlzdHJ1Y3QgdXRmOGN1cnNvciBjdXIxLCBjdXIyOwo+PiAtCWlu
+dCBjMSwgYzI7Cj4+ICtERUZJTkVfU1RBVElDX0NBTEwoX3VuaWNvZGVfc3RybmNhc2VjbXAsIHVu
+aWNvZGVfc3RybmNhc2VjbXBfZGVmYXVsdCk7Cj4+ICtFWFBPUlRfU1RBVElDX0NBTEwoX3VuaWNv
+ZGVfc3RybmNhc2VjbXApOwo+IFdoeSBhcmUgdGhlc2UgaGVyZSBpZiB0aGUgX2RlZmF1bHQgZnVu
+Y3Rpb25zIGFyZSBkZWZpbmVkIGluIHRoZSBoZWFkZXIKPiBmaWxlPyAgSSB0aGluayB0aGUgZGVm
+aW5pdGlvbnMgY291bGQgYmUgaW4gdGhpcyBmaWxlLiBObz8KCgpJbmxpbmUgZnVuY3Rpb25zIGRl
+ZmluZWQgaW4gaGVhZGVyIGZpbGUgYXJlIHVzaW5nIHRoZXNlIGZ1bmN0aW9ucyBzbwpjYW5ub3Qg
+ZGVmaW5lIHRoZW0gaGVyZSBpbiAuYyBmaWxlLgoKCj4+IC0JaWYgKHV0ZjhuY3Vyc29yKCZjdXIx
+LCBkYXRhLCBzMS0+bmFtZSwgczEtPmxlbikgPCAwKQo+PiAtCQlyZXR1cm4gLUVJTlZBTDsKPj4g
+K0RFRklORV9TVEFUSUNfQ0FMTChfdW5pY29kZV9zdHJuY2FzZWNtcF9mb2xkZWQsIHVuaWNvZGVf
+c3RybmNhc2VjbXBfZm9sZGVkX2RlZmF1bHQpOwo+PiArRVhQT1JUX1NUQVRJQ19DQUxMKF91bmlj
+b2RlX3N0cm5jYXNlY21wX2ZvbGRlZCk7Cj4+ICAgCj4+IC0JaWYgKHV0ZjhuY3Vyc29yKCZjdXIy
+LCBkYXRhLCBzMi0+bmFtZSwgczItPmxlbikgPCAwKQo+PiAtCQlyZXR1cm4gLUVJTlZBTDsKPj4g
+K0RFRklORV9TVEFUSUNfQ0FMTChfdW5pY29kZV9ub3JtYWxpemUsIHVuaWNvZGVfbm9ybWFsaXpl
+X2RlZmF1bHQpOwo+PiArRVhQT1JUX1NUQVRJQ19DQUxMKF91bmljb2RlX25vcm1hbGl6ZSk7Cj4+
+ICAgCj4+IC0JZG8gewo+PiAtCQljMSA9IHV0ZjhieXRlKCZjdXIxKTsKPj4gLQkJYzIgPSB1dGY4
+Ynl0ZSgmY3VyMik7Cj4+ICtERUZJTkVfU1RBVElDX0NBTEwoX3VuaWNvZGVfY2FzZWZvbGQsIHVu
+aWNvZGVfY2FzZWZvbGRfZGVmYXVsdCk7Cj4+ICtFWFBPUlRfU1RBVElDX0NBTEwoX3VuaWNvZGVf
+Y2FzZWZvbGQpOwo+PiAgIAo+PiAtCQlpZiAoYzEgPCAwIHx8IGMyIDwgMCkKPj4gLQkJCXJldHVy
+biAtRUlOVkFMOwo+PiAtCQlpZiAoYzEgIT0gYzIpCj4+IC0JCQlyZXR1cm4gMTsKPj4gLQl9IHdo
+aWxlIChjMSk7Cj4+ICtERUZJTkVfU1RBVElDX0NBTEwoX3VuaWNvZGVfY2FzZWZvbGRfaGFzaCwg
+dW5pY29kZV9jYXNlZm9sZF9oYXNoX2RlZmF1bHQpOwo+PiArRVhQT1JUX1NUQVRJQ19DQUxMKF91
+bmljb2RlX2Nhc2Vmb2xkX2hhc2gpOwo+PiAgIAo+PiAtCXJldHVybiAwOwo+PiAtfQo+PiAtRVhQ
+T1JUX1NZTUJPTCh1bmljb2RlX3N0cm5jbXApOwo+PiArREVGSU5FX1NUQVRJQ19DQUxMKF91bmlj
+b2RlX2xvYWQsIHVuaWNvZGVfbG9hZF9kZWZhdWx0KTsKPj4gK0VYUE9SVF9TVEFUSUNfQ0FMTChf
+dW5pY29kZV9sb2FkKTsKPj4gICAKPj4gLWludCB1bmljb2RlX3N0cm5jYXNlY21wKGNvbnN0IHN0
+cnVjdCB1bmljb2RlX21hcCAqdW0sCj4+IC0JCQljb25zdCBzdHJ1Y3QgcXN0ciAqczEsIGNvbnN0
+IHN0cnVjdCBxc3RyICpzMikKPj4gK3N0YXRpYyBpbnQgdW5pY29kZV9sb2FkX21vZHVsZSh2b2lk
+KQo+PiAgIHsKPj4gLQljb25zdCBzdHJ1Y3QgdXRmOGRhdGEgKmRhdGEgPSB1dGY4bmZkaWNmKHVt
+LT52ZXJzaW9uKTsKPj4gLQlzdHJ1Y3QgdXRmOGN1cnNvciBjdXIxLCBjdXIyOwo+PiAtCWludCBj
+MSwgYzI7Cj4+IC0KPj4gLQlpZiAodXRmOG5jdXJzb3IoJmN1cjEsIGRhdGEsIHMxLT5uYW1lLCBz
+MS0+bGVuKSA8IDApCj4+IC0JCXJldHVybiAtRUlOVkFMOwo+PiAtCj4+IC0JaWYgKHV0ZjhuY3Vy
+c29yKCZjdXIyLCBkYXRhLCBzMi0+bmFtZSwgczItPmxlbikgPCAwKQo+PiAtCQlyZXR1cm4gLUVJ
+TlZBTDsKPj4gLQo+PiAtCWRvIHsKPj4gLQkJYzEgPSB1dGY4Ynl0ZSgmY3VyMSk7Cj4+IC0JCWMy
+ID0gdXRmOGJ5dGUoJmN1cjIpOwo+PiAtCj4+IC0JCWlmIChjMSA8IDAgfHwgYzIgPCAwKQo+PiAt
+CQkJcmV0dXJuIC1FSU5WQUw7Cj4+IC0JCWlmIChjMSAhPSBjMikKPj4gLQkJCXJldHVybiAxOwo+
+PiAtCX0gd2hpbGUgKGMxKTsKPj4gLQo+PiAtCXJldHVybiAwOwo+PiAtfQo+PiAtRVhQT1JUX1NZ
+TUJPTCh1bmljb2RlX3N0cm5jYXNlY21wKTsKPj4gLQo+PiAtLyogU3RyaW5nIGNmIGlzIGV4cGVj
+dGVkIHRvIGJlIGEgdmFsaWQgVVRGLTggY2FzZWZvbGRlZAo+PiAtICogc3RyaW5nLgo+PiAtICov
+Cj4+IC1pbnQgdW5pY29kZV9zdHJuY2FzZWNtcF9mb2xkZWQoY29uc3Qgc3RydWN0IHVuaWNvZGVf
+bWFwICp1bSwKPj4gLQkJCSAgICAgICBjb25zdCBzdHJ1Y3QgcXN0ciAqY2YsCj4+IC0JCQkgICAg
+ICAgY29uc3Qgc3RydWN0IHFzdHIgKnMxKQo+PiAtewo+PiAtCWNvbnN0IHN0cnVjdCB1dGY4ZGF0
+YSAqZGF0YSA9IHV0ZjhuZmRpY2YodW0tPnZlcnNpb24pOwo+PiAtCXN0cnVjdCB1dGY4Y3Vyc29y
+IGN1cjE7Cj4+IC0JaW50IGMxLCBjMjsKPj4gLQlpbnQgaSA9IDA7Cj4+IC0KPj4gLQlpZiAodXRm
+OG5jdXJzb3IoJmN1cjEsIGRhdGEsIHMxLT5uYW1lLCBzMS0+bGVuKSA8IDApCj4+IC0JCXJldHVy
+biAtRUlOVkFMOwo+PiAtCj4+IC0JZG8gewo+PiAtCQljMSA9IHV0ZjhieXRlKCZjdXIxKTsKPj4g
+LQkJYzIgPSBjZi0+bmFtZVtpKytdOwo+PiAtCQlpZiAoYzEgPCAwKQo+PiAtCQkJcmV0dXJuIC1F
+SU5WQUw7Cj4+IC0JCWlmIChjMSAhPSBjMikKPj4gLQkJCXJldHVybiAxOwo+PiAtCX0gd2hpbGUg
+KGMxKTsKPj4gLQo+PiAtCXJldHVybiAwOwo+PiAtfQo+PiAtRVhQT1JUX1NZTUJPTCh1bmljb2Rl
+X3N0cm5jYXNlY21wX2ZvbGRlZCk7Cj4+IC0KPj4gLWludCB1bmljb2RlX2Nhc2Vmb2xkKGNvbnN0
+IHN0cnVjdCB1bmljb2RlX21hcCAqdW0sIGNvbnN0IHN0cnVjdCBxc3RyICpzdHIsCj4+IC0JCSAg
+ICAgdW5zaWduZWQgY2hhciAqZGVzdCwgc2l6ZV90IGRsZW4pCj4+IC17Cj4+IC0JY29uc3Qgc3Ry
+dWN0IHV0ZjhkYXRhICpkYXRhID0gdXRmOG5mZGljZih1bS0+dmVyc2lvbik7Cj4+IC0Jc3RydWN0
+IHV0ZjhjdXJzb3IgY3VyOwo+PiAtCXNpemVfdCBubGVuID0gMDsKPj4gLQo+PiAtCWlmICh1dGY4
+bmN1cnNvcigmY3VyLCBkYXRhLCBzdHItPm5hbWUsIHN0ci0+bGVuKSA8IDApCj4+IC0JCXJldHVy
+biAtRUlOVkFMOwo+PiAtCj4+IC0JZm9yIChubGVuID0gMDsgbmxlbiA8IGRsZW47IG5sZW4rKykg
+ewo+PiAtCQlpbnQgYyA9IHV0ZjhieXRlKCZjdXIpOwo+PiAtCj4+IC0JCWRlc3Rbbmxlbl0gPSBj
+Owo+PiAtCQlpZiAoIWMpCj4+IC0JCQlyZXR1cm4gbmxlbjsKPj4gLQkJaWYgKGMgPT0gLTEpCj4+
+IC0JCQlicmVhazsKPj4gLQl9Cj4+IC0JcmV0dXJuIC1FSU5WQUw7Cj4+IC19Cj4+IC1FWFBPUlRf
+U1lNQk9MKHVuaWNvZGVfY2FzZWZvbGQpOwo+PiArCWludCByZXQgPSByZXF1ZXN0X21vZHVsZSgi
+dXRmOCIpOwo+PiAgIAo+PiAtaW50IHVuaWNvZGVfY2FzZWZvbGRfaGFzaChjb25zdCBzdHJ1Y3Qg
+dW5pY29kZV9tYXAgKnVtLCBjb25zdCB2b2lkICpzYWx0LAo+PiAtCQkJICBzdHJ1Y3QgcXN0ciAq
+c3RyKQo+PiAtewo+PiAtCWNvbnN0IHN0cnVjdCB1dGY4ZGF0YSAqZGF0YSA9IHV0ZjhuZmRpY2Yo
+dW0tPnZlcnNpb24pOwo+PiAtCXN0cnVjdCB1dGY4Y3Vyc29yIGN1cjsKPj4gLQlpbnQgYzsKPj4g
+LQl1bnNpZ25lZCBsb25nIGhhc2ggPSBpbml0X25hbWVfaGFzaChzYWx0KTsKPj4gLQo+PiAtCWlm
+ICh1dGY4bmN1cnNvcigmY3VyLCBkYXRhLCBzdHItPm5hbWUsIHN0ci0+bGVuKSA8IDApCj4+IC0J
+CXJldHVybiAtRUlOVkFMOwo+PiAtCj4+IC0Jd2hpbGUgKChjID0gdXRmOGJ5dGUoJmN1cikpKSB7
+Cj4+IC0JCWlmIChjIDwgMCkKPj4gLQkJCXJldHVybiAtRUlOVkFMOwo+PiAtCQloYXNoID0gcGFy
+dGlhbF9uYW1lX2hhc2goKHVuc2lnbmVkIGNoYXIpYywgaGFzaCk7Cj4+ICsJaWYgKHJldCkgewo+
+PiArCQlwcl9lcnIoIkZhaWxlZCB0byBsb2FkIFVURi04IG1vZHVsZVxuIik7Cj4+ICsJCXJldHVy
+biByZXQ7Cj4+ICAgCX0KPj4gLQlzdHItPmhhc2ggPSBlbmRfbmFtZV9oYXNoKGhhc2gpOwo+PiAg
+IAlyZXR1cm4gMDsKPj4gICB9Cj4+IC1FWFBPUlRfU1lNQk9MKHVuaWNvZGVfY2FzZWZvbGRfaGFz
+aCk7Cj4+ICAgCj4+IC1pbnQgdW5pY29kZV9ub3JtYWxpemUoY29uc3Qgc3RydWN0IHVuaWNvZGVf
+bWFwICp1bSwgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gLQkJICAgICAgdW5zaWduZWQgY2hh
+ciAqZGVzdCwgc2l6ZV90IGRsZW4pCj4+ICtzdHJ1Y3QgdW5pY29kZV9tYXAgKnVuaWNvZGVfbG9h
+ZChjb25zdCBjaGFyICp2ZXJzaW9uKQo+PiAgIHsKPj4gLQljb25zdCBzdHJ1Y3QgdXRmOGRhdGEg
+KmRhdGEgPSB1dGY4bmZkaSh1bS0+dmVyc2lvbik7Cj4+IC0Jc3RydWN0IHV0ZjhjdXJzb3IgY3Vy
+Owo+PiAtCXNzaXplX3QgbmxlbiA9IDA7Cj4+IC0KPj4gLQlpZiAodXRmOG5jdXJzb3IoJmN1ciwg
+ZGF0YSwgc3RyLT5uYW1lLCBzdHItPmxlbikgPCAwKQo+PiAtCQlyZXR1cm4gLUVJTlZBTDsKPj4g
+KwlpbnQgcmV0ID0gdW5pY29kZV9sb2FkX21vZHVsZSgpOwo+IFNwbGl0dGluZyB0aGlzIGluIHR3
+byBmdW5jdGlvbnMgc291bmQgdW5uZWNlc3NhcnksIHNpbmNlIHRoZSBvdGhlcgo+IGZ1bmN0aW9u
+IGp1c3QgY2FsbHMgcmVxdWVzdF9tb2R1bGUuICBCeSB0aGUgd2F5LCBpcyB0aGVyZSBhbnkgcHJv
+dGVjdGlvbgo+IGFnYWluc3QgY2FsbGluZyByZXF1ZXN0X21vZHVsZSBpZiB0aGUgbW9kdWxlIGlz
+IGFscmVhZHkgbG9hZGVkPyAgU3VyZWx5Cj4gdGhhdCdzIG5vdCBuZWNlc3NhcnksIHBlcmhhcHMg
+dHJ5X3RoZW5fcmVxdWVzdF9tb2R1bGUodXRmOG1vZCwgInV0ZjgiKT8KCgpZZXMsIHRyeV90aGVu
+X3JlcXVlc3RfbW9kdWxlwqAgd291bGQgYmUgYSBiZXR0ZXIgY2hvaWNlLgoKCj4+IC0JZm9yIChu
+bGVuID0gMDsgbmxlbiA8IGRsZW47IG5sZW4rKykgewo+PiAtCQlpbnQgYyA9IHV0ZjhieXRlKCZj
+dXIpOwo+PiArCWlmIChyZXQpCj4+ICsJCXJldHVybiBFUlJfUFRSKHJldCk7Cj4+ICAgCj4+IC0J
+CWRlc3Rbbmxlbl0gPSBjOwo+PiAtCQlpZiAoIWMpCj4+IC0JCQlyZXR1cm4gbmxlbjsKPj4gLQkJ
+aWYgKGMgPT0gLTEpCj4+IC0JCQlicmVhazsKPj4gLQl9Cj4+IC0JcmV0dXJuIC1FSU5WQUw7Cj4+
+ICsJaWYgKCF0cnlfbW9kdWxlX2dldCh1dGY4bW9kKSkKPiBDYW4ndCBtb2R1bGVfdW5yZWdpc3Rl
+ciBiZSBjYWxsZWQgaW4gYmV0d2VlbiB0aGUgcmVnaXN0ZXJfbW9kdWxlIGFuZAo+IGhlcmUsIGFu
+ZCB0aGVuIHlvdSBoYXZlIGEgYm9ndXMgdXRmOG1vZCBwb2ludGVyPyB0cnVlLCB0cnlfbW9kdWxl
+X2dldAo+IGNoZWNrcyBmb3IgTlVMTCwgYnV0IGlmIHlvdSBhcmUgdW5sdWNreSBtb2R1bGVfaXNf
+bGl2ZSB3aWxsIGl0IGJyZWFrcy4KPiBJIHN0aWxsIHRoaW5rIHV0Zjhtb2QgbmVlZHMgdG8gYmUg
+cHJvdGVjdGVkIHdoaWxlIHlvdSBkb24ndCBoYXZlIGEKPiByZWZlcmVuY2UgdG8gdGhlIG1vZHVs
+ZS4KPgo+PiArCQlyZXR1cm4gRVJSX1BUUigtRU5PREVWKTsKPj4gKwllbHNlCj4+ICsJCXJldHVy
+biBzdGF0aWNfY2FsbChfdW5pY29kZV9sb2FkKSh2ZXJzaW9uKTsKPj4gICB9Cj4+IC1FWFBPUlRf
+U1lNQk9MKHVuaWNvZGVfbm9ybWFsaXplKTsKPj4gK0VYUE9SVF9TWU1CT0wodW5pY29kZV9sb2Fk
+KTsKPj4gICAKPj4gLXN0YXRpYyBpbnQgdW5pY29kZV9wYXJzZV92ZXJzaW9uKGNvbnN0IGNoYXIg
+KnZlcnNpb24sIHVuc2lnbmVkIGludCAqbWFqLAo+PiAtCQkJCSB1bnNpZ25lZCBpbnQgKm1pbiwg
+dW5zaWduZWQgaW50ICpyZXYpCj4+ICt2b2lkIHVuaWNvZGVfdW5sb2FkKHN0cnVjdCB1bmljb2Rl
+X21hcCAqdW0pCj4+ICAgewo+PiAtCXN1YnN0cmluZ190IGFyZ3NbM107Cj4+IC0JY2hhciB2ZXJz
+aW9uX3N0cmluZ1sxMl07Cj4+IC0Jc3RhdGljIGNvbnN0IHN0cnVjdCBtYXRjaF90b2tlbiB0b2tl
+bltdID0gewo+PiAtCQl7MSwgIiVkLiVkLiVkIn0sCj4+IC0JCXswLCBOVUxMfQo+PiAtCX07Cj4+
+IC0JaW50IHJldCA9IHN0cnNjcHkodmVyc2lvbl9zdHJpbmcsIHZlcnNpb24sIHNpemVvZih2ZXJz
+aW9uX3N0cmluZykpOwo+PiAtCj4+IC0JaWYgKHJldCA8IDApCj4+IC0JCXJldHVybiByZXQ7Cj4+
+IC0KPj4gLQlpZiAobWF0Y2hfdG9rZW4odmVyc2lvbl9zdHJpbmcsIHRva2VuLCBhcmdzKSAhPSAx
+KQo+PiAtCQlyZXR1cm4gLUVJTlZBTDsKPj4gLQo+PiAtCWlmIChtYXRjaF9pbnQoJmFyZ3NbMF0s
+IG1haikgfHwgbWF0Y2hfaW50KCZhcmdzWzFdLCBtaW4pIHx8Cj4+IC0JICAgIG1hdGNoX2ludCgm
+YXJnc1syXSwgcmV2KSkKPj4gLQkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsJa2ZyZWUodW0pOwo+PiAg
+IAo+PiAtCXJldHVybiAwOwo+PiArCWlmICh1dGY4bW9kKQo+PiArCQltb2R1bGVfcHV0KHV0Zjht
+b2QpOwo+PiAgIH0KPj4gK0VYUE9SVF9TWU1CT0wodW5pY29kZV91bmxvYWQpOwo+PiAgIAo+PiAt
+c3RydWN0IHVuaWNvZGVfbWFwICp1bmljb2RlX2xvYWQoY29uc3QgY2hhciAqdmVyc2lvbikKPj4g
+K3ZvaWQgdW5pY29kZV9yZWdpc3RlcihzdHJ1Y3QgbW9kdWxlICpvd25lcikKPj4gICB7Cj4+IC0J
+c3RydWN0IHVuaWNvZGVfbWFwICp1bSA9IE5VTEw7Cj4+IC0JaW50IHVuaWNvZGVfdmVyc2lvbjsK
+Pj4gLQo+PiAtCWlmICh2ZXJzaW9uKSB7Cj4+IC0JCXVuc2lnbmVkIGludCBtYWosIG1pbiwgcmV2
+Owo+PiAtCj4+IC0JCWlmICh1bmljb2RlX3BhcnNlX3ZlcnNpb24odmVyc2lvbiwgJm1haiwgJm1p
+biwgJnJldikgPCAwKQo+PiAtCQkJcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7Cj4+IC0KPj4gLQkJ
+aWYgKCF1dGY4dmVyc2lvbl9pc19zdXBwb3J0ZWQobWFqLCBtaW4sIHJldikpCj4+IC0JCQlyZXR1
+cm4gRVJSX1BUUigtRUlOVkFMKTsKPj4gLQo+PiAtCQl1bmljb2RlX3ZlcnNpb24gPSBVTklDT0RF
+X0FHRShtYWosIG1pbiwgcmV2KTsKPj4gLQl9IGVsc2Ugewo+PiAtCQl1bmljb2RlX3ZlcnNpb24g
+PSB1dGY4dmVyc2lvbl9sYXRlc3QoKTsKPj4gLQkJcHJpbnRrKEtFUk5fV0FSTklORyJVVEYtOCB2
+ZXJzaW9uIG5vdCBzcGVjaWZpZWQuICIKPj4gLQkJICAgICAgICJBc3N1bWluZyBsYXRlc3Qgc3Vw
+cG9ydGVkIHZlcnNpb24gKCVkLiVkLiVkKS4iLAo+PiAtCQkgICAgICAgKHVuaWNvZGVfdmVyc2lv
+biA+PiAxNikgJiAweGZmLAo+PiAtCQkgICAgICAgKHVuaWNvZGVfdmVyc2lvbiA+PiA4KSAmIDB4
+ZmYsCj4+IC0JCSAgICAgICAodW5pY29kZV92ZXJzaW9uICYgMHhmZikpOwo+PiAtCX0KPj4gLQo+
+PiAtCXVtID0ga3phbGxvYyhzaXplb2Yoc3RydWN0IHVuaWNvZGVfbWFwKSwgR0ZQX0tFUk5FTCk7
+Cj4+IC0JaWYgKCF1bSkKPj4gLQkJcmV0dXJuIEVSUl9QVFIoLUVOT01FTSk7Cj4+IC0KPj4gLQl1
+bS0+Y2hhcnNldCA9ICJVVEYtOCI7Cj4+IC0JdW0tPnZlcnNpb24gPSB1bmljb2RlX3ZlcnNpb247
+Cj4+IC0KPj4gLQlyZXR1cm4gdW07Cj4+ICsJdXRmOG1vZCA9IG93bmVyOwo+PiAgIH0KPj4gLUVY
+UE9SVF9TWU1CT0wodW5pY29kZV9sb2FkKTsKPj4gK0VYUE9SVF9TWU1CT0wodW5pY29kZV9yZWdp
+c3Rlcik7Cj4+ICAgCj4+IC12b2lkIHVuaWNvZGVfdW5sb2FkKHN0cnVjdCB1bmljb2RlX21hcCAq
+dW0pCj4+ICt2b2lkIHVuaWNvZGVfdW5yZWdpc3Rlcih2b2lkKQo+PiAgIHsKPj4gLQlrZnJlZSh1
+bSk7Cj4+ICsJdXRmOG1vZCA9IE5VTEw7Cj4+ICAgfQo+PiAtRVhQT1JUX1NZTUJPTCh1bmljb2Rl
+X3VubG9hZCk7Cj4+ICtFWFBPUlRfU1lNQk9MKHVuaWNvZGVfdW5yZWdpc3Rlcik7Cj4+ICAgCj4+
+ICAgTU9EVUxFX0xJQ0VOU0UoIkdQTCB2MiIpOwo+PiBkaWZmIC0tZ2l0IGEvZnMvdW5pY29kZS91
+bmljb2RlLXV0ZjguYyBiL2ZzL3VuaWNvZGUvdW5pY29kZS11dGY4LmMKPj4gbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQKPj4gaW5kZXggMDAwMDAwMDAwMDAwLi45YzZiNTgyMzkwNjcKPj4gLS0tIC9kZXYv
+bnVsbAo+PiArKysgYi9mcy91bmljb2RlL3VuaWNvZGUtdXRmOC5jCj4+IEBAIC0wLDAgKzEsMjU2
+IEBACj4+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAo+PiArI2luY2x1ZGUg
+PGxpbnV4L21vZHVsZS5oPgo+PiArI2luY2x1ZGUgPGxpbnV4L2tlcm5lbC5oPgo+PiArI2luY2x1
+ZGUgPGxpbnV4L3N0cmluZy5oPgo+PiArI2luY2x1ZGUgPGxpbnV4L3NsYWIuaD4KPj4gKyNpbmNs
+dWRlIDxsaW51eC9wYXJzZXIuaD4KPj4gKyNpbmNsdWRlIDxsaW51eC9lcnJuby5oPgo+PiArI2lu
+Y2x1ZGUgPGxpbnV4L3VuaWNvZGUuaD4KPj4gKyNpbmNsdWRlIDxsaW51eC9zdHJpbmdoYXNoLmg+
+Cj4+ICsjaW5jbHVkZSA8bGludXgvc3RhdGljX2NhbGwuaD4KPj4gKwo+PiArI2luY2x1ZGUgInV0
+ZjhuLmgiCj4+ICsKPj4gK3N0YXRpYyBpbnQgdXRmOF92YWxpZGF0ZShjb25zdCBzdHJ1Y3QgdW5p
+Y29kZV9tYXAgKnVtLCBjb25zdCBzdHJ1Y3QgcXN0ciAqc3RyKQo+PiArewo+PiArCWNvbnN0IHN0
+cnVjdCB1dGY4ZGF0YSAqZGF0YSA9IHV0ZjhuZmRpKHVtLT52ZXJzaW9uKTsKPj4gKwo+PiArCWlm
+ICh1dGY4bmxlbihkYXRhLCBzdHItPm5hbWUsIHN0ci0+bGVuKSA8IDApCj4+ICsJCXJldHVybiAt
+MTsKPj4gKwlyZXR1cm4gMDsKPj4gK30KPj4gKwo+PiArc3RhdGljIGludCB1dGY4X3N0cm5jbXAo
+Y29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwKPj4gKwkJCWNvbnN0IHN0cnVjdCBxc3RyICpz
+MSwgY29uc3Qgc3RydWN0IHFzdHIgKnMyKQo+PiArewo+PiArCWNvbnN0IHN0cnVjdCB1dGY4ZGF0
+YSAqZGF0YSA9IHV0ZjhuZmRpKHVtLT52ZXJzaW9uKTsKPj4gKwlzdHJ1Y3QgdXRmOGN1cnNvciBj
+dXIxLCBjdXIyOwo+PiArCWludCBjMSwgYzI7Cj4+ICsKPj4gKwlpZiAodXRmOG5jdXJzb3IoJmN1
+cjEsIGRhdGEsIHMxLT5uYW1lLCBzMS0+bGVuKSA8IDApCj4+ICsJCXJldHVybiAtRUlOVkFMOwo+
+PiArCj4+ICsJaWYgKHV0ZjhuY3Vyc29yKCZjdXIyLCBkYXRhLCBzMi0+bmFtZSwgczItPmxlbikg
+PCAwKQo+PiArCQlyZXR1cm4gLUVJTlZBTDsKPj4gKwo+PiArCWRvIHsKPj4gKwkJYzEgPSB1dGY4
+Ynl0ZSgmY3VyMSk7Cj4+ICsJCWMyID0gdXRmOGJ5dGUoJmN1cjIpOwo+PiArCj4+ICsJCWlmIChj
+MSA8IDAgfHwgYzIgPCAwKQo+PiArCQkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsJCWlmIChjMSAhPSBj
+MikKPj4gKwkJCXJldHVybiAxOwo+PiArCX0gd2hpbGUgKGMxKTsKPj4gKwo+PiArCXJldHVybiAw
+Owo+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHV0Zjhfc3RybmNhc2VjbXAoY29uc3Qgc3RydWN0
+IHVuaWNvZGVfbWFwICp1bSwKPj4gKwkJCSAgICBjb25zdCBzdHJ1Y3QgcXN0ciAqczEsIGNvbnN0
+IHN0cnVjdCBxc3RyICpzMikKPj4gK3sKPj4gKwljb25zdCBzdHJ1Y3QgdXRmOGRhdGEgKmRhdGEg
+PSB1dGY4bmZkaWNmKHVtLT52ZXJzaW9uKTsKPj4gKwlzdHJ1Y3QgdXRmOGN1cnNvciBjdXIxLCBj
+dXIyOwo+PiArCWludCBjMSwgYzI7Cj4+ICsKPj4gKwlpZiAodXRmOG5jdXJzb3IoJmN1cjEsIGRh
+dGEsIHMxLT5uYW1lLCBzMS0+bGVuKSA8IDApCj4+ICsJCXJldHVybiAtRUlOVkFMOwo+PiArCj4+
+ICsJaWYgKHV0ZjhuY3Vyc29yKCZjdXIyLCBkYXRhLCBzMi0+bmFtZSwgczItPmxlbikgPCAwKQo+
+PiArCQlyZXR1cm4gLUVJTlZBTDsKPj4gKwo+PiArCWRvIHsKPj4gKwkJYzEgPSB1dGY4Ynl0ZSgm
+Y3VyMSk7Cj4+ICsJCWMyID0gdXRmOGJ5dGUoJmN1cjIpOwo+PiArCj4+ICsJCWlmIChjMSA8IDAg
+fHwgYzIgPCAwKQo+PiArCQkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsJCWlmIChjMSAhPSBjMikKPj4g
+KwkJCXJldHVybiAxOwo+PiArCX0gd2hpbGUgKGMxKTsKPj4gKwo+PiArCXJldHVybiAwOwo+PiAr
+fQo+PiArCj4+ICsvKiBTdHJpbmcgY2YgaXMgZXhwZWN0ZWQgdG8gYmUgYSB2YWxpZCBVVEYtOCBj
+YXNlZm9sZGVkCj4+ICsgKiBzdHJpbmcuCj4+ICsgKi8KPj4gK3N0YXRpYyBpbnQgdXRmOF9zdHJu
+Y2FzZWNtcF9mb2xkZWQoY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwKPj4gKwkJCQkgICBj
+b25zdCBzdHJ1Y3QgcXN0ciAqY2YsCj4+ICsJCQkJICAgY29uc3Qgc3RydWN0IHFzdHIgKnMxKQo+
+PiArewo+PiArCWNvbnN0IHN0cnVjdCB1dGY4ZGF0YSAqZGF0YSA9IHV0ZjhuZmRpY2YodW0tPnZl
+cnNpb24pOwo+PiArCXN0cnVjdCB1dGY4Y3Vyc29yIGN1cjE7Cj4+ICsJaW50IGMxLCBjMjsKPj4g
+KwlpbnQgaSA9IDA7Cj4+ICsKPj4gKwlpZiAodXRmOG5jdXJzb3IoJmN1cjEsIGRhdGEsIHMxLT5u
+YW1lLCBzMS0+bGVuKSA8IDApCj4+ICsJCXJldHVybiAtRUlOVkFMOwo+PiArCj4+ICsJZG8gewo+
+PiArCQljMSA9IHV0ZjhieXRlKCZjdXIxKTsKPj4gKwkJYzIgPSBjZi0+bmFtZVtpKytdOwo+PiAr
+CQlpZiAoYzEgPCAwKQo+PiArCQkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsJCWlmIChjMSAhPSBjMikK
+Pj4gKwkJCXJldHVybiAxOwo+PiArCX0gd2hpbGUgKGMxKTsKPj4gKwo+PiArCXJldHVybiAwOwo+
+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHV0ZjhfY2FzZWZvbGQoY29uc3Qgc3RydWN0IHVuaWNv
+ZGVfbWFwICp1bSwgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gKwkJCSB1bnNpZ25lZCBjaGFy
+ICpkZXN0LCBzaXplX3QgZGxlbikKPj4gK3sKPj4gKwljb25zdCBzdHJ1Y3QgdXRmOGRhdGEgKmRh
+dGEgPSB1dGY4bmZkaWNmKHVtLT52ZXJzaW9uKTsKPj4gKwlzdHJ1Y3QgdXRmOGN1cnNvciBjdXI7
+Cj4+ICsJc2l6ZV90IG5sZW4gPSAwOwo+PiArCj4+ICsJaWYgKHV0ZjhuY3Vyc29yKCZjdXIsIGRh
+dGEsIHN0ci0+bmFtZSwgc3RyLT5sZW4pIDwgMCkKPj4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsK
+Pj4gKwlmb3IgKG5sZW4gPSAwOyBubGVuIDwgZGxlbjsgbmxlbisrKSB7Cj4+ICsJCWludCBjID0g
+dXRmOGJ5dGUoJmN1cik7Cj4+ICsKPj4gKwkJZGVzdFtubGVuXSA9IGM7Cj4+ICsJCWlmICghYykK
+Pj4gKwkJCXJldHVybiBubGVuOwo+PiArCQlpZiAoYyA9PSAtMSkKPj4gKwkJCWJyZWFrOwo+PiAr
+CX0KPj4gKwlyZXR1cm4gLUVJTlZBTDsKPj4gK30KPj4gKwo+PiArc3RhdGljIGludCB1dGY4X2Nh
+c2Vmb2xkX2hhc2goY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwgY29uc3Qgdm9pZCAqc2Fs
+dCwKPj4gKwkJCSAgICAgIHN0cnVjdCBxc3RyICpzdHIpCj4+ICt7Cj4+ICsJY29uc3Qgc3RydWN0
+IHV0ZjhkYXRhICpkYXRhID0gdXRmOG5mZGljZih1bS0+dmVyc2lvbik7Cj4+ICsJc3RydWN0IHV0
+ZjhjdXJzb3IgY3VyOwo+PiArCWludCBjOwo+PiArCXVuc2lnbmVkIGxvbmcgaGFzaCA9IGluaXRf
+bmFtZV9oYXNoKHNhbHQpOwo+PiArCj4+ICsJaWYgKHV0ZjhuY3Vyc29yKCZjdXIsIGRhdGEsIHN0
+ci0+bmFtZSwgc3RyLT5sZW4pIDwgMCkKPj4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsKPj4gKwl3
+aGlsZSAoKGMgPSB1dGY4Ynl0ZSgmY3VyKSkpIHsKPj4gKwkJaWYgKGMgPCAwKQo+PiArCQkJcmV0
+dXJuIC1FSU5WQUw7Cj4+ICsJCWhhc2ggPSBwYXJ0aWFsX25hbWVfaGFzaCgodW5zaWduZWQgY2hh
+ciljLCBoYXNoKTsKPj4gKwl9Cj4+ICsJc3RyLT5oYXNoID0gZW5kX25hbWVfaGFzaChoYXNoKTsK
+Pj4gKwlyZXR1cm4gMDsKPj4gK30KPj4gKwo+PiArc3RhdGljIGludCB1dGY4X25vcm1hbGl6ZShj
+b25zdCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVtLCBjb25zdCBzdHJ1Y3QgcXN0ciAqc3RyLAo+PiAr
+CQkJICB1bnNpZ25lZCBjaGFyICpkZXN0LCBzaXplX3QgZGxlbikKPj4gK3sKPj4gKwljb25zdCBz
+dHJ1Y3QgdXRmOGRhdGEgKmRhdGEgPSB1dGY4bmZkaSh1bS0+dmVyc2lvbik7Cj4+ICsJc3RydWN0
+IHV0ZjhjdXJzb3IgY3VyOwo+PiArCXNzaXplX3QgbmxlbiA9IDA7Cj4+ICsKPj4gKwlpZiAodXRm
+OG5jdXJzb3IoJmN1ciwgZGF0YSwgc3RyLT5uYW1lLCBzdHItPmxlbikgPCAwKQo+PiArCQlyZXR1
+cm4gLUVJTlZBTDsKPj4gKwo+PiArCWZvciAobmxlbiA9IDA7IG5sZW4gPCBkbGVuOyBubGVuKysp
+IHsKPj4gKwkJaW50IGMgPSB1dGY4Ynl0ZSgmY3VyKTsKPj4gKwo+PiArCQlkZXN0W25sZW5dID0g
+YzsKPj4gKwkJaWYgKCFjKQo+PiArCQkJcmV0dXJuIG5sZW47Cj4+ICsJCWlmIChjID09IC0xKQo+
+PiArCQkJYnJlYWs7Cj4+ICsJfQo+PiArCXJldHVybiAtRUlOVkFMOwo+PiArfQo+PiArCj4+ICtz
+dGF0aWMgaW50IHV0ZjhfcGFyc2VfdmVyc2lvbihjb25zdCBjaGFyICp2ZXJzaW9uLCB1bnNpZ25l
+ZCBpbnQgKm1haiwKPj4gKwkJCSAgICAgIHVuc2lnbmVkIGludCAqbWluLCB1bnNpZ25lZCBpbnQg
+KnJldikKPj4gK3sKPj4gKwlzdWJzdHJpbmdfdCBhcmdzWzNdOwo+PiArCWNoYXIgdmVyc2lvbl9z
+dHJpbmdbMTJdOwo+PiArCXN0YXRpYyBjb25zdCBzdHJ1Y3QgbWF0Y2hfdG9rZW4gdG9rZW5bXSA9
+IHsKPj4gKwkJezEsICIlZC4lZC4lZCJ9LAo+PiArCQl7MCwgTlVMTH0KPj4gKwl9Owo+PiArCj4+
+ICsJaW50IHJldCA9IHN0cnNjcHkodmVyc2lvbl9zdHJpbmcsIHZlcnNpb24sIHNpemVvZih2ZXJz
+aW9uX3N0cmluZykpOwo+PiArCj4+ICsJaWYgKHJldCA8IDApCj4+ICsJCXJldHVybiByZXQ7Cj4+
+ICsKPj4gKwlpZiAobWF0Y2hfdG9rZW4odmVyc2lvbl9zdHJpbmcsIHRva2VuLCBhcmdzKSAhPSAx
+KQo+PiArCQlyZXR1cm4gLUVJTlZBTDsKPj4gKwo+PiArCWlmIChtYXRjaF9pbnQoJmFyZ3NbMF0s
+IG1haikgfHwgbWF0Y2hfaW50KCZhcmdzWzFdLCBtaW4pIHx8Cj4+ICsJICAgIG1hdGNoX2ludCgm
+YXJnc1syXSwgcmV2KSkKPj4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4+ICsKPj4gKwlyZXR1cm4gMDsK
+Pj4gK30KPj4gKwo+PiArc3RhdGljIHN0cnVjdCB1bmljb2RlX21hcCAqdXRmOF9sb2FkKGNvbnN0
+IGNoYXIgKnZlcnNpb24pCj4+ICt7Cj4+ICsJc3RydWN0IHVuaWNvZGVfbWFwICp1bSA9IE5VTEw7
+Cj4+ICsJaW50IHVuaWNvZGVfdmVyc2lvbjsKPj4gKwo+PiArCWlmICh2ZXJzaW9uKSB7Cj4+ICsJ
+CXVuc2lnbmVkIGludCBtYWosIG1pbiwgcmV2Owo+PiArCj4+ICsJCWlmICh1dGY4X3BhcnNlX3Zl
+cnNpb24odmVyc2lvbiwgJm1haiwgJm1pbiwgJnJldikgPCAwKQo+PiArCQkJcmV0dXJuIEVSUl9Q
+VFIoLUVJTlZBTCk7Cj4+ICsKPj4gKwkJaWYgKCF1dGY4dmVyc2lvbl9pc19zdXBwb3J0ZWQobWFq
+LCBtaW4sIHJldikpCj4+ICsJCQlyZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsKPj4gKwo+PiArCQl1
+bmljb2RlX3ZlcnNpb24gPSBVTklDT0RFX0FHRShtYWosIG1pbiwgcmV2KTsKPj4gKwl9IGVsc2Ug
+ewo+PiArCQl1bmljb2RlX3ZlcnNpb24gPSB1dGY4dmVyc2lvbl9sYXRlc3QoKTsKPj4gKwkJcHJf
+d2FybigiVVRGLTggdmVyc2lvbiBub3Qgc3BlY2lmaWVkLiBBc3N1bWluZyBsYXRlc3Qgc3VwcG9y
+dGVkIHZlcnNpb24gKCVkLiVkLiVkKS4iLAo+PiArCQkJKHVuaWNvZGVfdmVyc2lvbiA+PiAxNikg
+JiAweGZmLAo+PiArCQkJKHVuaWNvZGVfdmVyc2lvbiA+PiA4KSAmIDB4ZmYsCj4+ICsJCQkodW5p
+Y29kZV92ZXJzaW9uICYgMHhmZSkpOwo+PiArCX0KPj4gKwo+PiArCXVtID0ga3phbGxvYyhzaXpl
+b2YoKnVtKSwgR0ZQX0tFUk5FTCk7Cj4+ICsJaWYgKCF1bSkKPj4gKwkJcmV0dXJuIEVSUl9QVFIo
+LUVOT01FTSk7Cj4+ICsKPj4gKwl1bS0+Y2hhcnNldCA9ICJVVEYtOCI7Cj4+ICsJdW0tPnZlcnNp
+b24gPSB1bmljb2RlX3ZlcnNpb247Cj4+ICsKPj4gKwlyZXR1cm4gdW07Cj4+ICt9Cj4+ICsKPj4g
+K3N0YXRpYyBpbnQgX19pbml0IHV0ZjhfaW5pdCh2b2lkKQo+PiArewo+PiArCXN0YXRpY19jYWxs
+X3VwZGF0ZShfdW5pY29kZV92YWxpZGF0ZSwgdXRmOF92YWxpZGF0ZSk7Cj4+ICsJc3RhdGljX2Nh
+bGxfdXBkYXRlKF91bmljb2RlX3N0cm5jbXAsIHV0Zjhfc3RybmNtcCk7Cj4+ICsJc3RhdGljX2Nh
+bGxfdXBkYXRlKF91bmljb2RlX3N0cm5jYXNlY21wLCB1dGY4X3N0cm5jYXNlY21wKTsKPj4gKwlz
+dGF0aWNfY2FsbF91cGRhdGUoX3VuaWNvZGVfc3RybmNhc2VjbXBfZm9sZGVkLCB1dGY4X3N0cm5j
+YXNlY21wX2ZvbGRlZCk7Cj4+ICsJc3RhdGljX2NhbGxfdXBkYXRlKF91bmljb2RlX25vcm1hbGl6
+ZSwgdXRmOF9ub3JtYWxpemUpOwo+PiArCXN0YXRpY19jYWxsX3VwZGF0ZShfdW5pY29kZV9jYXNl
+Zm9sZCwgdXRmOF9jYXNlZm9sZCk7Cj4+ICsJc3RhdGljX2NhbGxfdXBkYXRlKF91bmljb2RlX2Nh
+c2Vmb2xkX2hhc2gsIHV0ZjhfY2FzZWZvbGRfaGFzaCk7Cj4+ICsJc3RhdGljX2NhbGxfdXBkYXRl
+KF91bmljb2RlX2xvYWQsIHV0ZjhfbG9hZCk7Cj4+ICsKPj4gKwl1bmljb2RlX3JlZ2lzdGVyKFRI
+SVNfTU9EVUxFKTsKPj4gKwlyZXR1cm4gMDsKPj4gK30KPj4gKwo+PiArc3RhdGljIHZvaWQgX19l
+eGl0IHV0ZjhfZXhpdCh2b2lkKQo+PiArewo+PiArCXN0YXRpY19jYWxsX3VwZGF0ZShfdW5pY29k
+ZV92YWxpZGF0ZSwgdW5pY29kZV92YWxpZGF0ZV9kZWZhdWx0KTsKPj4gKwlzdGF0aWNfY2FsbF91
+cGRhdGUoX3VuaWNvZGVfc3RybmNtcCwgdW5pY29kZV9zdHJuY21wX2RlZmF1bHQpOwo+PiArCXN0
+YXRpY19jYWxsX3VwZGF0ZShfdW5pY29kZV9zdHJuY2FzZWNtcCwgdW5pY29kZV9zdHJuY2FzZWNt
+cF9kZWZhdWx0KTsKPj4gKwlzdGF0aWNfY2FsbF91cGRhdGUoX3VuaWNvZGVfc3RybmNhc2VjbXBf
+Zm9sZGVkLCB1bmljb2RlX3N0cm5jYXNlY21wX2ZvbGRlZF9kZWZhdWx0KTsKPj4gKwlzdGF0aWNf
+Y2FsbF91cGRhdGUoX3VuaWNvZGVfbm9ybWFsaXplLCB1bmljb2RlX25vcm1hbGl6ZV9kZWZhdWx0
+KTsKPj4gKwlzdGF0aWNfY2FsbF91cGRhdGUoX3VuaWNvZGVfY2FzZWZvbGQsIHVuaWNvZGVfY2Fz
+ZWZvbGRfZGVmYXVsdCk7Cj4+ICsJc3RhdGljX2NhbGxfdXBkYXRlKF91bmljb2RlX2Nhc2Vmb2xk
+X2hhc2gsIHVuaWNvZGVfY2FzZWZvbGRfaGFzaF9kZWZhdWx0KTsKPj4gKwlzdGF0aWNfY2FsbF91
+cGRhdGUoX3VuaWNvZGVfbG9hZCwgdW5pY29kZV9sb2FkX2RlZmF1bHQpOwo+PiArCj4+ICsJdW5p
+Y29kZV91bnJlZ2lzdGVyKCk7Cj4+ICt9Cj4+ICsKPj4gK21vZHVsZV9pbml0KHV0ZjhfaW5pdCk7
+Cj4+ICttb2R1bGVfZXhpdCh1dGY4X2V4aXQpOwo+PiArCj4+ICtNT0RVTEVfTElDRU5TRSgiR1BM
+IHYyIik7Cj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3VuaWNvZGUuaCBiL2luY2x1ZGUv
+bGludXgvdW5pY29kZS5oCj4+IGluZGV4IGRlMjNmOWVlNzIwYi4uMThhMWQzZGI5ZGU1IDEwMDY0
+NAo+PiAtLS0gYS9pbmNsdWRlL2xpbnV4L3VuaWNvZGUuaAo+PiArKysgYi9pbmNsdWRlL2xpbnV4
+L3VuaWNvZGUuaAo+PiBAQCAtNCwzMyArNCwxMjggQEAKPj4gICAKPj4gICAjaW5jbHVkZSA8bGlu
+dXgvaW5pdC5oPgo+PiAgICNpbmNsdWRlIDxsaW51eC9kY2FjaGUuaD4KPj4gKyNpbmNsdWRlIDxs
+aW51eC9zdGF0aWNfY2FsbC5oPgo+PiArCj4+ICAgCj4+ICAgc3RydWN0IHVuaWNvZGVfbWFwIHsK
+Pj4gICAJY29uc3QgY2hhciAqY2hhcnNldDsKPj4gICAJaW50IHZlcnNpb247Cj4+ICAgfTsKPj4g
+ICAKPj4gLWludCB1bmljb2RlX3ZhbGlkYXRlKGNvbnN0IHN0cnVjdCB1bmljb2RlX21hcCAqdW0s
+IGNvbnN0IHN0cnVjdCBxc3RyICpzdHIpOwo+PiArc3RhdGljIGludCB1bmljb2RlX3dhcm5fb24o
+dm9pZCkKPj4gK3sKPj4gKwlXQVJOX09OKDEpOwo+PiArCXJldHVybiAtRUlPOwo+PiArfQo+IENy
+ZWF0aW5nIHRoaXMgZXh0cmEgZnVuY3Rpb24gYWRkcyB0aGUgc2FtZSBudW1iZXIgb2YgbGluZXMg
+dGhhbiBpZiB5b3UKPiB3cml0ZSBgV0FSTl9PTigxKTsgcmV0dXJuIC1FSU87YCBpbiBlYWNoIG9m
+IHRoZSBmZXcgaGFuZGxlcnMgYmVsb3csIGJ1dAo+IHRoZSBsYXRlciB3b3VsZCBiZSBtb3JlIGNs
+ZWFyLCBhbmQgeW91IGFscmVhZHkgZG8gaXQgZm9yCj4gdW5pY29kZV9sb2FkX2RlZmF1bHQgYW55
+d2F5LiA6KQo+PiArCj4+ICtzdGF0aWMgaW50IHVuaWNvZGVfdmFsaWRhdGVfZGVmYXVsdChjb25z
+dCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVtLAo+PiArCQkJCSAgICBjb25zdCBzdHJ1Y3QgcXN0ciAq
+c3RyKQo+PiArewo+PiArCXJldHVybiB1bmljb2RlX3dhcm5fb24oKTsKPj4gK30KPj4gKwo+PiAr
+c3RhdGljIGludCB1bmljb2RlX3N0cm5jbXBfZGVmYXVsdChjb25zdCBzdHJ1Y3QgdW5pY29kZV9t
+YXAgKnVtLAo+PiArCQkJCSAgIGNvbnN0IHN0cnVjdCBxc3RyICpzMSwKPj4gKwkJCQkgICBjb25z
+dCBzdHJ1Y3QgcXN0ciAqczIpCj4+ICt7Cj4+ICsJcmV0dXJuIHVuaWNvZGVfd2Fybl9vbigpOwo+
+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHVuaWNvZGVfc3RybmNhc2VjbXBfZGVmYXVsdChjb25z
+dCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVtLAo+PiArCQkJCSAgICAgICBjb25zdCBzdHJ1Y3QgcXN0
+ciAqczEsCj4+ICsJCQkJICAgICAgIGNvbnN0IHN0cnVjdCBxc3RyICpzMikKPj4gK3sKPj4gKwly
+ZXR1cm4gdW5pY29kZV93YXJuX29uKCk7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBpbnQgdW5pY29k
+ZV9zdHJuY2FzZWNtcF9mb2xkZWRfZGVmYXVsdChjb25zdCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVt
+LAo+PiArCQkJCQkgICAgICBjb25zdCBzdHJ1Y3QgcXN0ciAqY2YsCj4+ICsJCQkJCSAgICAgIGNv
+bnN0IHN0cnVjdCBxc3RyICpzMSkKPj4gK3sKPj4gKwlyZXR1cm4gdW5pY29kZV93YXJuX29uKCk7
+Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBpbnQgdW5pY29kZV9ub3JtYWxpemVfZGVmYXVsdChjb25z
+dCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVtLAo+PiArCQkJCSAgICAgY29uc3Qgc3RydWN0IHFzdHIg
+KnN0ciwKPj4gKwkJCQkgICAgIHVuc2lnbmVkIGNoYXIgKmRlc3QsIHNpemVfdCBkbGVuKQo+PiAr
+ewo+PiArCXJldHVybiB1bmljb2RlX3dhcm5fb24oKTsKPj4gK30KPj4gKwo+PiArc3RhdGljIGlu
+dCB1bmljb2RlX2Nhc2Vmb2xkX2RlZmF1bHQoY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwK
+Pj4gKwkJCQkgICAgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gKwkJCQkgICAgdW5zaWduZWQg
+Y2hhciAqZGVzdCwgc2l6ZV90IGRsZW4pCj4+ICt7Cj4+ICsJcmV0dXJuIHVuaWNvZGVfd2Fybl9v
+bigpOwo+PiArfQo+PiAgIAo+PiAtaW50IHVuaWNvZGVfc3RybmNtcChjb25zdCBzdHJ1Y3QgdW5p
+Y29kZV9tYXAgKnVtLAo+PiAtCQkgICAgY29uc3Qgc3RydWN0IHFzdHIgKnMxLCBjb25zdCBzdHJ1
+Y3QgcXN0ciAqczIpOwo+PiArc3RhdGljIGludCB1bmljb2RlX2Nhc2Vmb2xkX2hhc2hfZGVmYXVs
+dChjb25zdCBzdHJ1Y3QgdW5pY29kZV9tYXAgKnVtLAo+PiArCQkJCQkgY29uc3Qgdm9pZCAqc2Fs
+dCwgc3RydWN0IHFzdHIgKnN0cikKPj4gK3sKPj4gKwlyZXR1cm4gdW5pY29kZV93YXJuX29uKCk7
+Cj4+ICt9Cj4gQWdhaW4sIHdoeSBpc24ndCB0aGlzIGluIGEgLmMgPyAgRG9lcyBpdCBuZWVkIHRv
+IGJlIGhlcmU/Cj4KPj4gICAKPj4gLWludCB1bmljb2RlX3N0cm5jYXNlY21wKGNvbnN0IHN0cnVj
+dCB1bmljb2RlX21hcCAqdW0sCj4+IC0JCQljb25zdCBzdHJ1Y3QgcXN0ciAqczEsIGNvbnN0IHN0
+cnVjdCBxc3RyICpzMik7Cj4+IC1pbnQgdW5pY29kZV9zdHJuY2FzZWNtcF9mb2xkZWQoY29uc3Qg
+c3RydWN0IHVuaWNvZGVfbWFwICp1bSwKPj4gLQkJCSAgICAgICBjb25zdCBzdHJ1Y3QgcXN0ciAq
+Y2YsCj4+IC0JCQkgICAgICAgY29uc3Qgc3RydWN0IHFzdHIgKnMxKTsKPj4gK3N0YXRpYyBzdHJ1
+Y3QgdW5pY29kZV9tYXAgKnVuaWNvZGVfbG9hZF9kZWZhdWx0KGNvbnN0IGNoYXIgKnZlcnNpb24p
+Cj4+ICt7Cj4+ICsJdW5pY29kZV93YXJuX29uKCk7Cj4+ICsJcmV0dXJuIEVSUl9QVFIoLUVJTyk7
+Cj4+ICt9Cj4+ICAgCj4+IC1pbnQgdW5pY29kZV9ub3JtYWxpemUoY29uc3Qgc3RydWN0IHVuaWNv
+ZGVfbWFwICp1bSwgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gLQkJICAgICAgdW5zaWduZWQg
+Y2hhciAqZGVzdCwgc2l6ZV90IGRsZW4pOwo+PiArREVDTEFSRV9TVEFUSUNfQ0FMTChfdW5pY29k
+ZV92YWxpZGF0ZSwgdW5pY29kZV92YWxpZGF0ZV9kZWZhdWx0KTsKPj4gK0RFQ0xBUkVfU1RBVElD
+X0NBTEwoX3VuaWNvZGVfc3RybmNtcCwgdW5pY29kZV9zdHJuY21wX2RlZmF1bHQpOwo+PiArREVD
+TEFSRV9TVEFUSUNfQ0FMTChfdW5pY29kZV9zdHJuY2FzZWNtcCwgdW5pY29kZV9zdHJuY2FzZWNt
+cF9kZWZhdWx0KTsKPj4gK0RFQ0xBUkVfU1RBVElDX0NBTEwoX3VuaWNvZGVfc3RybmNhc2VjbXBf
+Zm9sZGVkLCB1bmljb2RlX3N0cm5jYXNlY21wX2ZvbGRlZF9kZWZhdWx0KTsKPj4gK0RFQ0xBUkVf
+U1RBVElDX0NBTEwoX3VuaWNvZGVfbm9ybWFsaXplLCB1bmljb2RlX25vcm1hbGl6ZV9kZWZhdWx0
+KTsKPj4gK0RFQ0xBUkVfU1RBVElDX0NBTEwoX3VuaWNvZGVfY2FzZWZvbGQsIHVuaWNvZGVfY2Fz
+ZWZvbGRfZGVmYXVsdCk7Cj4+ICtERUNMQVJFX1NUQVRJQ19DQUxMKF91bmljb2RlX2Nhc2Vmb2xk
+X2hhc2gsIHVuaWNvZGVfY2FzZWZvbGRfaGFzaF9kZWZhdWx0KTsKPj4gK0RFQ0xBUkVfU1RBVElD
+X0NBTEwoX3VuaWNvZGVfbG9hZCwgdW5pY29kZV9sb2FkX2RlZmF1bHQpOwo+IG5pdDogSSBoYXRl
+IHRoaXMgZnVuY3Rpb25zIHN0YXJ0aW5nIHdpdGggYSBzaW5nbGUgIF8gLiAgdGhleSBhcmUgbm90
+IGNvbW1vbiBpbiB0aGUKPiByZXN0IG9mIHRoZSBrZXJuZWwgZWl0aGVyLgo+PiAtaW50IHVuaWNv
+ZGVfY2FzZWZvbGQoY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwgY29uc3Qgc3RydWN0IHFz
+dHIgKnN0ciwKPj4gLQkJICAgICB1bnNpZ25lZCBjaGFyICpkZXN0LCBzaXplX3QgZGxlbik7Cj4+
+ICtzdGF0aWMgaW5saW5lIGludCB1bmljb2RlX3ZhbGlkYXRlKGNvbnN0IHN0cnVjdCB1bmljb2Rl
+X21hcCAqdW0sIGNvbnN0IHN0cnVjdCBxc3RyICpzdHIpCj4+ICt7Cj4+ICsJcmV0dXJuIHN0YXRp
+Y19jYWxsKF91bmljb2RlX3ZhbGlkYXRlKSh1bSwgc3RyKTsKPj4gK30KPj4gICAKPj4gLWludCB1
+bmljb2RlX2Nhc2Vmb2xkX2hhc2goY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwgY29uc3Qg
+dm9pZCAqc2FsdCwKPj4gLQkJCSAgc3RydWN0IHFzdHIgKnN0cik7Cj4+ICtzdGF0aWMgaW5saW5l
+IGludCB1bmljb2RlX3N0cm5jbXAoY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwKPj4gKwkJ
+CQkgIGNvbnN0IHN0cnVjdCBxc3RyICpzMSwgY29uc3Qgc3RydWN0IHFzdHIgKnMyKQo+PiArewo+
+PiArCXJldHVybiBzdGF0aWNfY2FsbChfdW5pY29kZV9zdHJuY21wKSh1bSwgczEsIHMyKTsKPj4g
+K30KPj4gKwo+PiArc3RhdGljIGlubGluZSBpbnQgdW5pY29kZV9zdHJuY2FzZWNtcChjb25zdCBz
+dHJ1Y3QgdW5pY29kZV9tYXAgKnVtLAo+PiArCQkJCSAgICAgIGNvbnN0IHN0cnVjdCBxc3RyICpz
+MSwgY29uc3Qgc3RydWN0IHFzdHIgKnMyKQo+PiArewo+PiArCXJldHVybiBzdGF0aWNfY2FsbChf
+dW5pY29kZV9zdHJuY2FzZWNtcCkodW0sIHMxLCBzMik7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBp
+bmxpbmUgaW50IHVuaWNvZGVfc3RybmNhc2VjbXBfZm9sZGVkKGNvbnN0IHN0cnVjdCB1bmljb2Rl
+X21hcCAqdW0sCj4+ICsJCQkJCSAgICAgY29uc3Qgc3RydWN0IHFzdHIgKmNmLAo+PiArCQkJCQkg
+ICAgIGNvbnN0IHN0cnVjdCBxc3RyICpzMSkKPj4gK3sKPj4gKwlyZXR1cm4gc3RhdGljX2NhbGwo
+X3VuaWNvZGVfc3RybmNhc2VjbXBfZm9sZGVkKSh1bSwgY2YsIHMxKTsKPj4gK30KPj4gKwo+PiAr
+c3RhdGljIGlubGluZSBpbnQgdW5pY29kZV9ub3JtYWxpemUoY29uc3Qgc3RydWN0IHVuaWNvZGVf
+bWFwICp1bSwgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gKwkJCQkgICAgdW5zaWduZWQgY2hh
+ciAqZGVzdCwgc2l6ZV90IGRsZW4pCj4+ICt7Cj4+ICsJcmV0dXJuIHN0YXRpY19jYWxsKF91bmlj
+b2RlX25vcm1hbGl6ZSkodW0sIHN0ciwgZGVzdCwgZGxlbik7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRp
+YyBpbmxpbmUgaW50IHVuaWNvZGVfY2FzZWZvbGQoY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1
+bSwgY29uc3Qgc3RydWN0IHFzdHIgKnN0ciwKPj4gKwkJCQkgICB1bnNpZ25lZCBjaGFyICpkZXN0
+LCBzaXplX3QgZGxlbikKPj4gK3sKPj4gKwlyZXR1cm4gc3RhdGljX2NhbGwoX3VuaWNvZGVfY2Fz
+ZWZvbGQpKHVtLCBzdHIsIGRlc3QsIGRsZW4pOwo+PiArfQo+PiArCj4+ICtzdGF0aWMgaW5saW5l
+IGludCB1bmljb2RlX2Nhc2Vmb2xkX2hhc2goY29uc3Qgc3RydWN0IHVuaWNvZGVfbWFwICp1bSwg
+Y29uc3Qgdm9pZCAqc2FsdCwKPj4gKwkJCQkJc3RydWN0IHFzdHIgKnN0cikKPj4gK3sKPj4gKwly
+ZXR1cm4gc3RhdGljX2NhbGwoX3VuaWNvZGVfY2FzZWZvbGRfaGFzaCkodW0sIHNhbHQsIHN0cik7
+Cj4+ICt9Cj4+ICAgCj4+ICAgc3RydWN0IHVuaWNvZGVfbWFwICp1bmljb2RlX2xvYWQoY29uc3Qg
+Y2hhciAqdmVyc2lvbik7Cj4+ICAgdm9pZCB1bmljb2RlX3VubG9hZChzdHJ1Y3QgdW5pY29kZV9t
+YXAgKnVtKTsKPj4gICAKPj4gK3ZvaWQgdW5pY29kZV9yZWdpc3RlcihzdHJ1Y3QgbW9kdWxlICpv
+d25lcik7Cj4+ICt2b2lkIHVuaWNvZGVfdW5yZWdpc3Rlcih2b2lkKTsKPj4gKwo+PiAgICNlbmRp
+ZiAvKiBfTElOVVhfVU5JQ09ERV9IICovCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJm
+cy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
