@@ -2,68 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B83934E7FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Mar 2021 14:54:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8188A34ED09
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Mar 2021 18:02:11 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lRDsz-0004Bv-UV; Tue, 30 Mar 2021 12:54:21 +0000
+	id 1lRGoZ-00082D-0f; Tue, 30 Mar 2021 16:01:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <andrealmeid@collabora.com>) id 1lRDsy-0004Be-Nh
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 12:54:20 +0000
+ (envelope-from <tytso@mit.edu>) id 1lRGoG-0007zr-Td
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 16:01:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=11ux4kf1HOJE1PM70FWR5cHivxrNcC7/rQgBNzJB4vE=; b=JYpAgaY6Js+XvfvDvKuzkYdk8y
- JOHLAmzr0rSClfN6OTfx54wTdbZUjAifrQGp6AJ64RZl5LICqG6PfV1RJzz31mgz3fyRC8Msl2ktV
- jMu4+06qnXKuNUd1n3JkG2s8CVX0B9QP8guzKVPxElxBzLEykJaUn/PqD4MqXY+uKtjY=;
+ bh=EdzCFCLMvvg0RnoP86wisrN9O1agsv+ZeQ7KKgGHrn0=; b=XsCw20Xlb7RzGUdbAkHl1rMEOI
+ 7pc11PHC+ZfsiFrD6zxN5MGS+vRy4sR3BIZ78ulaB0BFFOy60qa3TXthl1EbwMeYJI6/GJg3SiJ4C
+ LHdx/93aYOk0xWIaErd/a1XWW6y0MgBcn98Gp1AOlOBSdOCIdmL0hsPoSeFDdHUPbsko=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=11ux4kf1HOJE1PM70FWR5cHivxrNcC7/rQgBNzJB4vE=; b=UnqvFneu8CnhT/FK2LnwqyzJqi
- 4P29n9DnSIX2qWgsuYFd//2gM/8d/UUNZJQtfMXE0mjTxwz1ihhvpnMJaKC1sPYWsIQdbfOCg11m9
- i3smm379/3BdJtsVfQwgJjJRD4KfNIUq6/GOSqfJerOrujqBJzCcO14j3WRSbtmtRN/o=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ bh=EdzCFCLMvvg0RnoP86wisrN9O1agsv+ZeQ7KKgGHrn0=; b=XbCjAu88TKoNASB0gMN2jRwt6S
+ 1inqpFR9JLTnoFRj4zPF0yAdPGApF02RyBajLv0FV4OcwbdbFTkEJesirvkdE2xjxDEfkfMHavnv6
+ p6DbkGyhoGIUkazd9D5v02W7agVHFwM1HdTX4EN2leXRg67aSjPwtfY64WcFb8TBPPoQ=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lRDsu-0006Vh-JI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 12:54:20 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: tonyk) with ESMTPSA id 8DE8A1F44E69
+ id 1lRGo7-00076B-PZ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 16:01:40 +0000
+Received: from cwcc.thunk.org (pool-72-74-133-215.bstnma.fios.verizon.net
+ [72.74.133.215]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 12UG0nHa013090
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 30 Mar 2021 12:00:49 -0400
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 32C5415C39CD; Tue, 30 Mar 2021 12:00:49 -0400 (EDT)
+Date: Tue, 30 Mar 2021 12:00:49 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
 To: Eric Biggers <ebiggers@kernel.org>
-References: <20210328144356.12866-1-andrealmeid@collabora.com>
- <20210328144356.12866-2-andrealmeid@collabora.com>
- <YGKDfo1vZfFXwG/v@gmail.com>
-From: =?UTF-8?Q?Andr=c3=a9_Almeida?= <andrealmeid@collabora.com>
-Message-ID: <8ea3ba8e-2699-8786-5ca3-33ee3c70961b@collabora.com>
-Date: Tue, 30 Mar 2021 09:54:01 -0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+Message-ID: <YGNLMRmr+tQb8WQ3@mit.edu>
+References: <20210329204240.359184-1-shreeya.patel@collabora.com>
+ <20210329204240.359184-5-shreeya.patel@collabora.com>
+ <YGKGhxaozX3ND6iB@gmail.com> <87v999pequ.fsf@collabora.com>
+ <YGK7iNRXcMr/ahsL@sol.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <YGKDfo1vZfFXwG/v@gmail.com>
-Content-Language: en-US
-X-Spam-Score: -0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <YGK7iNRXcMr/ahsL@sol.localdomain>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: collabora.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lRDsu-0006Vh-JI
-Subject: Re: [f2fs-dev] [PATCH 1/3] fs/dcache: Add d_clear_dir_neg_dentries()
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [18.9.28.11 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lRGo7-00076B-PZ
+Subject: Re: [f2fs-dev] [PATCH v5 4/4] fs: unicode: Add utf8 module and a
+ unicode layer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,78 +78,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-ext4@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- Daniel Rosenberg <drosen@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, kernel@collabora.com, krisman@collabora.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: kernel@collabora.com, drosen@google.com,
+ Gabriel Krisman Bertazi <krisman@collabora.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, andre.almeida@collabora.com,
+ linux-ext4@vger.kernel.org, Shreeya Patel <shreeya.patel@collabora.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkgRXJpYywKCsOAcyAyMjo0OCBkZSAyOS8wMy8yMSwgRXJpYyBCaWdnZXJzIGVzY3JldmV1Ogo+
-IE9uIFN1biwgTWFyIDI4LCAyMDIxIGF0IDExOjQzOjU0QU0gLTAzMDAsIEFuZHLDqSBBbG1laWRh
-IHdyb3RlOgo+PiBGb3IgZGlyZWN0b3JpZXMgd2l0aCBuZWdhdGl2ZSBkZW50cmllcyB0aGF0IGFy
-ZSBiZWNvbWluZyBjYXNlLWluc2Vuc2l0aXZlCj4+IGRpcnMsIHdlIG5lZWQgdG8gcmVtb3ZlIGFs
-bCB0aG9zZSBuZWdhdGl2ZSBkZW50cmllcywgb3RoZXJ3aXNlIHRoZXkgd2lsbAo+PiBiZWNvbWUg
-ZGFuZ2xpbmcgZGVudHJpZXMuIER1cmluZyB0aGUgY3JlYXRpb24gb2YgYSBuZXcgZmlsZSwgaWYg
-YSBkX2hhc2gKPj4gY29sbGlzaW9uIGhhcHBlbnMgYW5kIHRoZSBuYW1lcyBtYXRjaCBpbiBhIGNh
-c2UtaW5zZW5zaXRpdmUgd2F5LCB0aGUgbmFtZQo+PiBvZiB0aGUgZmlsZSB3aWxsIGJlIHRoZSBu
-YW1lIGRlZmluZWQgYXQgdGhlIG5lZ2F0aXZlIGRlbnRyeSwgdGhhdCBtYXkgYmUKPj4gZGlmZmVy
-ZW50IGZyb20gdGhlIHNwZWNpZmllZCBieSB0aGUgdXNlci4gVG8gcHJldmVudCB0aGlzIGZyb20K
-Pj4gaGFwcGVuaW5nLCB3ZSBuZWVkIHRvIHJlbW92ZSBhbGwgZGVudHJpZXMgaW4gYSBkaXJlY3Rv
-cnkuIEdpdmVuIHRoYXQgdGhlCj4+IGRpcmVjdG9yeSBtdXN0IGJlIGVtcHR5IGJlZm9yZSB3ZSBj
-YWxsIHRoaXMgZnVuY3Rpb24gd2UgYXJlIHN1cmUgdGhhdAo+PiBhbGwgZGVudHJpZXMgdGhlcmUg
-d2lsbCBiZSBuZWdhdGl2ZS4KPj4KPj4gQ3JlYXRlIGEgZnVuY3Rpb24gdG8gcmVtb3ZlIGFsbCBu
-ZWdhdGl2ZSBkZW50cmllcyBmcm9tIGEgZGlyZWN0b3J5LCB0bwo+PiBiZSB1c2VkIGFzIGV4cGxh
-aW5lZCBhYm92ZSBieSBmaWxlc3lzdGVtcyB0aGF0IHN1cHBvcnQgY2FzZS1pbnNlbnNpdGl2ZQo+
-PiBsb29rdXBzLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBBbmRyw6kgQWxtZWlkYSA8YW5kcmVhbG1l
-aWRAY29sbGFib3JhLmNvbT4KPj4gLS0tCj4+ICAgZnMvZGNhY2hlLmMgICAgICAgICAgICB8IDI3
-ICsrKysrKysrKysrKysrKysrKysrKysrKysrKwo+PiAgIGluY2x1ZGUvbGludXgvZGNhY2hlLmgg
-fCAgMSArCj4+ICAgMiBmaWxlcyBjaGFuZ2VkLCAyOCBpbnNlcnRpb25zKCspCj4+Cj4+IGRpZmYg
-LS1naXQgYS9mcy9kY2FjaGUuYyBiL2ZzL2RjYWNoZS5jCj4+IGluZGV4IDdkMjRmZjdlYjIwNi4u
-ZmFmYjMwMTZkNmZkIDEwMDY0NAo+PiAtLS0gYS9mcy9kY2FjaGUuYwo+PiArKysgYi9mcy9kY2Fj
-aGUuYwo+PiBAQCAtMTcyMyw2ICsxNzIzLDMzIEBAIHZvaWQgZF9pbnZhbGlkYXRlKHN0cnVjdCBk
-ZW50cnkgKmRlbnRyeSkKPj4gICB9Cj4+ICAgRVhQT1JUX1NZTUJPTChkX2ludmFsaWRhdGUpOwo+
-PiAgIAo+PiArLyoqCj4+ICsgKiBkX2NsZWFyX2Rpcl9uZWdfZGVudHJpZXMgLSBSZW1vdmUgbmVn
-YXRpdmUgZGVudHJpZXMgaW4gYW4gaW5vZGUKPj4gKyAqIEBkaXI6IERpcmVjdG9yeSB0byBjbGVh
-ciBuZWdhdGl2ZSBkZW50cmllcwo+PiArICoKPj4gKyAqIEZvciBkaXJlY3RvcmllcyB3aXRoIG5l
-Z2F0aXZlIGRlbnRyaWVzIHRoYXQgYXJlIGJlY29taW5nIGNhc2UtaW5zZW5zaXRpdmUKPj4gKyAq
-IGRpcnMsIHdlIG5lZWQgdG8gcmVtb3ZlIGFsbCB0aG9zZSBuZWdhdGl2ZSBkZW50cmllcywgb3Ro
-ZXJ3aXNlIHRoZXkgd2lsbAo+PiArICogYmVjb21lIGRhbmdsaW5nIGRlbnRyaWVzLiBEdXJpbmcg
-dGhlIGNyZWF0aW9uIG9mIGEgbmV3IGZpbGUsIGlmIGEgZF9oYXNoCj4+ICsgKiBjb2xsaXNpb24g
-aGFwcGVucyBhbmQgdGhlIG5hbWVzIG1hdGNoIGluIGEgY2FzZS1pbnNlbnNpdGl2ZSwgdGhlIG5h
-bWUgb2YKPj4gKyAqIHRoZSBmaWxlIHdpbGwgYmUgdGhlIG5hbWUgZGVmaW5lZCBhdCB0aGUgbmVn
-YXRpdmUgZGVudHJ5LCB0aGF0IGNhbiBiZQo+PiArICogZGlmZmVyZW50IGZyb20gdGhlIHNwZWNp
-ZmllZCBieSB0aGUgdXNlci4gVG8gcHJldmVudCB0aGlzIGZyb20gaGFwcGVuaW5nLCB3ZQo+PiAr
-ICogbmVlZCB0byByZW1vdmUgYWxsIGRlbnRyaWVzIGluIGEgZGlyZWN0b3J5LiBHaXZlbiB0aGF0
-IHRoZSBkaXJlY3RvcnkgbXVzdCBiZQo+PiArICogZW1wdHkgYmVmb3JlIHdlIGNhbGwgdGhpcyBm
-dW5jdGlvbiB3ZSBhcmUgc3VyZSB0aGF0IGFsbCBkZW50cmllcyB0aGVyZSB3aWxsCj4+ICsgKiBi
-ZSBuZWdhdGl2ZS4KPj4gKyAqLwo+PiArdm9pZCBkX2NsZWFyX2Rpcl9uZWdfZGVudHJpZXMoc3Ry
-dWN0IGlub2RlICpkaXIpCj4+ICt7Cj4+ICsJc3RydWN0IGRlbnRyeSAqYWxpYXMsICpkZW50cnk7
-Cj4+ICsKPj4gKwlobGlzdF9mb3JfZWFjaF9lbnRyeShhbGlhcywgJmRpci0+aV9kZW50cnksIGRf
-dS5kX2FsaWFzKSB7Cj4+ICsJCWxpc3RfZm9yX2VhY2hfZW50cnkoZGVudHJ5LCAmYWxpYXMtPmRf
-c3ViZGlycywgZF9jaGlsZCkgewo+PiArCQkJZF9kcm9wKGRlbnRyeSk7Cj4+ICsJCQlkcHV0KGRl
-bnRyeSk7Cj4+ICsJCX0KPj4gKwl9Cj4+ICt9Cj4+ICtFWFBPUlRfU1lNQk9MKGRfY2xlYXJfZGly
-X25lZ19kZW50cmllcyk7Cj4gCj4gQXMgQWwgYWxyZWFkeSBwb2ludGVkIG91dCwgdGhpcyBkb2Vz
-bid0IHdvcmsgYXMgaW50ZW5kZWQsIGZvciBhIG51bWJlciBvZgo+IGRpZmZlcmVudCByZWFzb25z
-Lgo+IAo+IERpZCB5b3UgY29uc2lkZXIganVzdCB1c2luZyBzaHJpbmtfZGNhY2hlX3BhcmVudCgp
-PyAgVGhhdCBhbHJlYWR5IGRvZXMgd2hhdCB5b3UKPiBhcmUgdHJ5aW5nIHRvIGRvIGhlcmUsIEkg
-dGhpbmsuCgpXaGVuIEkgd3JvdGUgdGhpcyBwYXRjaCwgSSBkaWRuJ3Qga25vdyBpdCwgYnV0IGFm
-dGVyIEFsIFZpcm8gY29tbWVudHMgSSAKZ2V0IGJhY2sgdG8gdGhlIGNvZGUgYW5kIGZvdW5kIGl0
-LCBhbmQgaXQgc2VlbXMgZG8gZG8gd2hhdCBJIGludGVuZCAKaW5kZWVkLCBhbmQgbXkgdGVzdCBp
-cyBoYXBweSBhcyB3ZWxsLgoKPiAKPiBUaGUgaGFyZGVyIHBhcnQgKHdoaWNoIEkgZG9uJ3QgdGhp
-bmsgeW91J3ZlIGNvbnNpZGVyZWQpIGlzIGhvdyB0byBlbnN1cmUgdGhhdAo+IGFsbCBuZWdhdGl2
-ZSBkZW50cmllcyByZWFsbHkgZ2V0IGludmFsaWRhdGVkIGV2ZW4gaWYgdGhlcmUgYXJlIGxvb2t1
-cHMgb2YgdGhlbQo+IGhhcHBlbmluZyBjb25jdXJyZW50bHkuICBDb25jdXJyZW50IGxvb2t1cHMg
-Y2FuIHRha2UgdGVtcG9yYXJ5IHJlZmVyZW5jZXMgdG8gdGhlCj4gbmVnYXRpdmUgZGVudHJpZXMs
-IHByZXZlbnRpbmcgdGhlbSBmcm9tIGJlaW5nIGludmFsaWRhdGVkLgo+IAoKSSBkaWRuJ3QgY29u
-c2lkZXIgdGhhdCwgdGhhbmtzIGZvciB0aGUgZmVlZGJhY2suIFNvIHRoaXMgbWVhbnMgdGhhdCAK
-dGhvc2UgbG9va3VwcyB3aWxsIGluY3JlYXNlIHRoZSByZWZjb3VudCBvZiB0aGUgZGVudHJ5LCBh
-bmQgaXQgd2lsbCBvbmx5IApnZXQgcmVhbGx5IGludmFsaWRhdGVkIHdoZW4gcmVmY291bnQgcmVh
-Y2hlcyAwPyBPciBkbyB3b3VsZCBJIG5lZWQgdG8gCmNhbGwgZF9pbnZhbGlkYXRlKCkgYWdhaW4s
-IHVudGlsIEkgc3VjY2VlZD8KCj4gLSBFcmljCj4gCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGlu
-dXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
-b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On Mon, Mar 29, 2021 at 10:47:52PM -0700, Eric Biggers wrote:
+> > Isn't this a user problem?  If the modules required to boot are on the
+> > filesystem itself, you are in trouble.  But, if that is the case, your
+> > rootfs is case-insensitive and you gotta have utf8 as built-in or have
+> > it in an early userspace.
+> 
+> We could make it the user's problem, but that seems rather unfriendly.
+> Especially because the utf8 module would be needed if the filesystem has the
+> casefold feature at all, regardless of whether any casefolded directories are
+> needed at boot time or not.  (Unless there is a plan to change that?)
+
+I guess I'm not that worried, since the vast majority of desktop
+distribution are using initial ramdisks these days.  And if someone
+did build a monolithic kernel that couldn't mount the root file
+system, they would figure that out pretty quickly.
+
+The biggest problem they would have with trying to enable encryption
+or casefolding on the root file system is that if they are using Grub,
+older versions of Grub would see an unknown incompat feature, and
+immediately have heartburn, and refuse to touch whatever file system
+/boot is located on.  If the distribution has /boot as a stand-alone
+partition, that won't be a problem, but if you have a single file
+system which includes the location of kernels and initrds' are
+located, the moment you try set the encryption or casefold on the file
+system, you're immediately hosed --- and if you do this on a laptop
+while you are on an airplane, without thinking things through, and
+without access to a rescue USB thumb drive, life can
+get... interesting.  (Why, yes, I'm speaking from direct experience;
+why do you ask?  :-)
+
+So in comparison to making such a mistake, building a kernel that was
+missing casefold, and needing to fall back to an older kernel is not
+really that bad of a user experience.  You just have to fall back the
+distro kernel, which most kernel developers who are dogfooding
+bleeding kernels are probably smart enough keep one around.
+
+We *could* teach ext4 to support mounting file systems that have
+casefold, without having the unicode module loaded, which would make
+things a bit better, but I'm not sure it's worth the effort.  We could
+even make the argument that letting the system boot, and then having
+access to some directories return ENOTSUPP would actually be a more
+confusing user experience than a simple hard failure when we try
+mounting the file system.
+
+Cheers,
+
+					- Ted
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
