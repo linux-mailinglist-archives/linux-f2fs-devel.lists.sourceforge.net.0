@@ -2,64 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA4BF34E4B8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Mar 2021 11:49:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ABBB34E4BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Mar 2021 11:50:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lRAzX-0003Rx-8C; Tue, 30 Mar 2021 09:48:55 +0000
+	id 1lRB0g-00089A-SF; Tue, 30 Mar 2021 09:50:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <9sporst9@gmail.com>) id 1lRAzV-0003Rp-S5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 09:48:53 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <shreeya.patel@collabora.com>) id 1lRB0f-000892-C5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 09:50:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Date:Reply-To:Content-Type:To:Subject:From:Sender:
- Message-ID:Cc:MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=81UwN/0HzSbJMO8xGBs4ZXF5eUh4CFA7oXjensEFVCc=; b=XqDY2/IcC2ry3bwfEE+1crE1nT
- aVbi38tACnUUzNeVRRDpSk8WVfAvLjvUIHMKgey7BM/a9BtKb/a/pxXmiDr6Ox/eHo48vDs7WMI2g
- xKl3nV43tNj6Wxk++e4hmDHhELoul/J0KpgdEur8rAK/U1ERrdio9+1nfnjt8cnWEu6A=;
+ bh=fol2B8uhriAUFfDP+lph+V3Oi96wdqD5ohfbwLf40fA=; b=Knri0Wwf82wh3wbZdbtxpgwPXF
+ xAJ2TThnR1M9nShv7TD05mjKWvk9+jOYohU+a3/8fbqLK6r52gAgM5/zCrUXPNI6BbAT3oa7Kuv76
+ lKvX1Qy1hutaKCA5dsiI6/N8jvWoJolcgRIAKhJZBpbD/juC+PUXrXliyWfQPNZ6S7sc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Date:Reply-To:Content-Type:To:Subject:From:Sender:Message-ID:Cc:
- MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=81UwN/0HzSbJMO8xGBs4ZXF5eUh4CFA7oXjensEFVCc=; b=BGOe5f/O987OvjyQ11IASTUqCO
- 3ZcsjiikNqxVh47/BFSseGgiZ7WBpi1XpMhuMWSyaAANDf2xRgHRFhyV2HLahxMGkatbZR0l1fz1B
- 5ectii3eOh7gSVCQKr5grD048G8tu63fxZa9+oBME51QUYLc1o9pWlgEIePd70otiG24=;
-Received: from usa-2.svrip.com ([198.98.62.214] helo=6sdn3b2.com)
- by sfi-mx-1.v28.lw.sourceforge.com with smtp (Exim 4.92.2)
- id 1lRAzJ-00CIoc-1y
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 09:48:53 +0000
-From: "Ms. Kim Chan" <9sporst9@gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 30 Mar 2021 16:48:27 +0700
-X-Priority: 3
-X-Spam-Score: 6.1 (++++++)
+ bh=fol2B8uhriAUFfDP+lph+V3Oi96wdqD5ohfbwLf40fA=; b=jTv1s5mpBRkWxM1D9ZhkVDi4PY
+ g8y7QQy3Ck//Xc4SFpakb3DcWWaqT7iNw40YehrlRtx8DhZpbqcdkQpFEphNATunMzqvS58ubbTYM
+ ErHHDow3HwjYS3N1+QGzA4ahAoWGmzozTjoS8CqTlk3pZ58uVJHcPhng1BqX7LoCgJg4=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lRB0T-00CIui-NN
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 30 Mar 2021 09:50:05 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: shreeya) with ESMTPSA id B13D91F452F3
+To: Eric Biggers <ebiggers@kernel.org>
+References: <20210329204240.359184-1-shreeya.patel@collabora.com>
+ <20210329204240.359184-3-shreeya.patel@collabora.com>
+ <YGKEitULkZmMwk3f@gmail.com>
+From: Shreeya Patel <shreeya.patel@collabora.com>
+Message-ID: <b5e09aaf-ed9a-c363-d188-96ca5bb4932c@collabora.com>
+Date: Tue, 30 Mar 2021 15:19:37 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
+MIME-Version: 1.0
+In-Reply-To: <YGKEitULkZmMwk3f@gmail.com>
+Content-Language: en-US
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (9sporst9[at]gmail.com)
- 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
- CUSTOM_MED
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
- (9sporst9[at]gmail.com)
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (9sporst9[at]gmail.com)
- 1.0 MISSING_MID            Missing Message-Id: header
- 1.2 NML_ADSP_CUSTOM_MED    ADSP custom_med hit, and not from a mailing list
- 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
- 2.0 SPOOFED_FREEMAIL       No description available.
- 0.0 SPOOF_GMAIL_MID        From Gmail but it doesn't seem to be...
-X-Headers-End: 1lRAzJ-00CIoc-1y
-Subject: [f2fs-dev] my future investment ventures in your country
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lRB0T-00CIui-NN
+Subject: Re: [f2fs-dev] [PATCH v5 2/4] fs: unicode: Rename function names
+ from utf8 to unicode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,24 +76,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: "Ms. Kim Chan" <9sporst9@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Cc: tytso@mit.edu, drosen@google.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel@collabora.com,
+ adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org, krisman@collabora.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-Message-Id: <E1lRAzX-0003Rx-8C@sfs-ml-2.v29.lw.sourceforge.com>
 
 
-My name is Ms. Kim Chan Ouk, A Thai citizen in Asian Continent but currently
-residing in abroad, I trust this email meets you in good health, I just got
-your contact today during a research about your country and I will say that
-I foresee success of my future investment ventures in your country. I want
-to invest in your country and I would like you to assist me in my investment
-with moral and physical advises. Please do reply me as soon as possible so
-we can discuss more.
+On 30/03/21 7:23 am, Eric Biggers wrote:
+> On Tue, Mar 30, 2021 at 02:12:38AM +0530, Shreeya Patel wrote:
+>> utf8data.h_shipped has a large database table which is an auto-generated
+>> decodification trie for the unicode normalization functions and it is not
+>> necessary to carry this large table in the kernel.
+>> Goal is to make UTF-8 encoding loadable by converting it into a module
+>> and adding a unicode subsystem layer between the filesystems and the
+>> utf8 module.
+>> This layer will load the module whenever any filesystem that
+>> needs unicode is mounted.
+>> utf8-core will be converted into this layer file in the future patches,
+>> hence rename the function names from utf8 to unicode which will denote the
+>> functions as the unicode subsystem layer functions and this will also be
+>> the first step towards the transformation of utf8-core file into the
+>> unicode subsystem layer file.
+>>
+>> Signed-off-by: Shreeya Patel <shreeya.patel@collabora.com>
+>> ---
+>> Changes in v5
+>>    - Improve the commit message.
+> This didn't really answer my questions about the reason for this renaming.
+> Aren't the functions like unicode_casefold() still tied to UTF-8 (as opposed to
+> e.g. supporting both UTF-8 and UTF-16)?  Is that something you're trying to
+> change?
 
-I look forward to hear from you soon
-9sporst9@gmail.com
+
+Currently, layer's functions are still tied to UTF-8 encoding only. But 
+in future if we will have UTF-16 support then layer file would have to 
+be changed accordingly to support both.
+Unicode subsystem layer is a generic layer which connects the 
+filesystems and UTF8 module ( and/or UTF16 in future )
+
+
+>
+> - Eric
+>
 
 
 _______________________________________________
