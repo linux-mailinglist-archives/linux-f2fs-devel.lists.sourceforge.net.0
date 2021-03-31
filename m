@@ -2,77 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2B7F3503C8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Mar 2021 17:48:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D79C23508C4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Mar 2021 23:08:34 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lRd58-0006n3-87; Wed, 31 Mar 2021 15:48:34 +0000
+	id 1lRi4i-0001SK-Qg; Wed, 31 Mar 2021 21:08:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lRd54-0006md-Rx
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Mar 2021 15:48:30 +0000
+ (envelope-from <shreeya.patel@collabora.com>) id 1lRi4h-0001Rn-DQ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Mar 2021 21:08:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=48eoaQQlOTBFo+s2wDdOjEK+nF9HOURH0wBnq/ZyGWo=; b=N7XrmuhySR04Rm2gUY/E6PdFC1
- /lhx00+dVwtiAzXxZonPg7cdDuo0bnYfjz9dAs+WEt+cEOM1eExTS/CeVQ8WzleN6FRZjaYL3bFXv
- J+J84iwXdWiPWqKkSVs/gW/gPFCOXHVxsEf2cjYm33mNslQb6WldDPiqUi8asLgmWF5o=;
+ bh=KXIGDs6zal6LZG6/HDiY8x8kW/s5eJtbrceFtMt1ip8=; b=afahu4MP2oecAzOtHDWbe41mD1
+ HUXJUqdlTL+OFkcRKwQIrJyzlMee4J1SQ+fQS8zpF0K+PA/JPy5d/CtP+BFIR170LCzV2JDkPjYca
+ 4BOlYaSgv2UZj3cptFH3+9lO7Ukm2Bs1uo7Lc9Yce1pXdt+qm03cfjyde18uZjLR18TU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=48eoaQQlOTBFo+s2wDdOjEK+nF9HOURH0wBnq/ZyGWo=; b=F8vW+Di0RQGRBlGsfrPeZnA+9h
- +rCCyunGfb3Ex5JuTxKPTkXvGq1AjmucBoVhAWRLtWrQESfHYW96mxDF9faPwk04SUsi54U+9Kkue
- C8jbQFK7yYa82sBKJCaxkDi2hElbh/PMMb5f2sGJtsTtWFzp8TB2w7/pfE+FUJKJKdQk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lRd50-00HQqR-D3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Mar 2021 15:48:30 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D6A5260200;
- Wed, 31 Mar 2021 15:48:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1617205700;
- bh=3wjaWDR7E/Le4pPQqny79FqpaQdnsmQsNrmXzfErIyA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=JP6hYn8IZ3z0L6FO5Fa5wdmoStK9tTBBBfXumTu97xw5r9Rn+bGfk4J4khACg9sWY
- NciYXV+xuY52aDg1wqHYtPygIGUMi9ZoMPu1y6hpJbdAM/5yppzudJrh0BfX+dOR8U
- AXsoMphL6nh9iIpocFZ/f40TUkboARYYe0ZmzBHIuRLUbhxyK2XVz32P8dt3t4zus7
- BwWl8DZX4ZNbIAe+HjA1drWfUw7U4ZUnwIYKfBD9JjeDf8TdbwIO7dnGDKVYrtchEY
- bZ4TZ3XoAjGpYU08LJ/lKV5ZCluksmPswK74ehECQF9deC9wXu+xy2gE/fY1NJhF4z
- pdO79LpHVyVMA==
-Date: Wed, 31 Mar 2021 08:48:19 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: beroal <me@beroal.in.ua>
-Message-ID: <YGSZw6Azb8E43gOl@google.com>
-References: <739ae455-07b4-7dc4-1789-5b162ed25ede@beroal.in.ua>
- <bc3759b9-c606-5e77-40f0-c590bbc53bfb@beroal.in.ua>
- <YGPTWqUtHqEyRLMv@google.com>
- <10ac38ce-4e76-4e12-2112-bd4cc10d1ab4@beroal.in.ua>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=KXIGDs6zal6LZG6/HDiY8x8kW/s5eJtbrceFtMt1ip8=; b=h
+ Gm2B4eKCVXnDbbBnAbL5tykJoJHobsmA9ZwR52ZVFgokbCN+ePYwQTp6AxTu1llqVuGPfIch4n1nx
+ c+UU5I0/kBFnzRJxAUVXliQAbU+Wk9evIZq/VaPKZmcdUDYCL60Pqxlskj52pEfUi3bTsZ6sXMOe0
+ Ln3yjnL/s1/bhL/4=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lRi4Y-0003gz-4Z
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 31 Mar 2021 21:08:27 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: shreeya) with ESMTPSA id 626441F461A9
+From: Shreeya Patel <shreeya.patel@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ chao@kernel.org, krisman@collabora.com, ebiggers@google.com,
+ drosen@google.com, ebiggers@kernel.org, yuchao0@huawei.com
+Date: Thu,  1 Apr 2021 02:37:47 +0530
+Message-Id: <20210331210751.281645-1-shreeya.patel@collabora.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <10ac38ce-4e76-4e12-2112-bd4cc10d1ab4@beroal.in.ua>
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: checkpatch.pl]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lRd50-00HQqR-D3
-Subject: Re: [f2fs-dev] `mount` reports an error, but `fsck.f2fs` does not
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1lRi4Y-0003gz-4Z
+Subject: [f2fs-dev] [PATCH v6 0/4] Make UTF-8 encoding loadable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,70 +70,110 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel@collabora.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/31, beroal wrote:
-> On 31.03.21 04:41, Jaegeuk Kim wrote:
-> > Hi,
-> > 
-> > On 03/27, beroal wrote:
-> > > Ping.
-> > > 
-> > > On 20.03.21 00:46, beroal wrote:
-> > > > Hi. After I extended a partition containing F2FS with a recent version
-> > > > of Gparted, the partition no longer mounts. `mount` reports an error,
-> > > > but `fsck.f2fs` does not see any problem (well, except for `Invalid CP
-> > > > CRC offset: 0`) and does not fix the file system.
-> > > > 
-> > > > ```
-> > > > losetup /dev/loop0 arch-os.img
-> > > > mount -t f2fs -o ro /dev/loop0 /root/mnt/temp
-> > > > ```
-> > > > 
-> > > > ```
-> > > > [ 6890.647749] F2FS-fs (loop0): Wrong valid_user_blocks: 16040048,
-> > > > user_block_count: 10016768
-> > > > [ 6890.647808] F2FS-fs (loop0): Failed to get valid F2FS checkpoint
-> > > > ```
-> > > > 
-> > > > ```
-> > > > losetup -d /dev/loop0
-> > > > fsck.f2fs arch-os.img
-> > May I ask run this?
-> > 
-> > # fsck.f2fs -d 3 arch-os.img?
-> The result is a log of size 270 MB. I'll send it privately to
-> jaegeuk@kernel.org if you don't mind. It contains directory and file names.
+utf8data.h_shipped has a large database table which is an auto-generated
+decodification trie for the unicode normalization functions and it is not
+necessary to carry this large table in the kernel.
+Goal is to make UTF-8 encoding loadable by converting it into a module
+and adding a layer between the filesystems and the utf8 module which will
+load the module whenever any filesystem that needs unicode is mounted.
+Currently only UTF-8 encoding is supported but if any other encodings
+are supported in future then the layer file would be responsible for
+loading the desired encoding module.
 
-Thanks.
+1st patch in the series resolves the warning reported by kernel test
+robot by using strscpy instead of strncpy.
 
-segment_count_main                      [0x    9a95 : 39573]
--> 39573 * 2MB = 78GB as user space
+Unicode is the subsystem and utf8 is a charachter encoding for the
+subsystem, hence 2nd and 3rd patches in the series are renaming functions
+and file name to unicode for better understanding the difference between
+UTF-8 module and unicode layer.
 
-overprov_segment_count                  [0x    4e29 : 20009]
--> 20009 * 2MB = 40GB as overprovisioned space which user can't see.
+Last patch in the series adds the layer and utf8 module and also uses
+static calls which gives performance benefit when compared to indirect
+calls using function pointers.
 
-But,
+---
+Changes in v6
+  - Add spinlock to protect utf8mod and avoid NULL pointer
+    dereference.
+  - Change the static call function names for being consistent with
+    kernel coding style.
+  - Merge the unicode_load_module function with unicode_load as it is
+    not really needed to have a separate function.
+  - Use try_then_module_get instead of module_get to avoid loading the
+    module even when it is already loaded.
+  - Improve the commit message.
 
-[FSCK] valid_block_count matching with CP             [Ok..] [0xf4c070]
--> 0xf4c070 = 16040048
+Changes in v5
+  - Remove patch which adds NULL check in ext4/super.c and f2fs/super.c
+    before calling unicode_unload().
+  - Rename global variables and default static call functions for better
+    understanding
+  - Make only config UNICODE_UTF8 visible and config UNICODE to be always
+    enabled provided UNICODE_UTF8 is enabled.  
+  - Improve the documentation for Kconfig
+  - Improve the commit message.
+ 
+Changes in v4
+  - Return error from the static calls instead of doing nothing and
+    succeeding even without loading the module.
+  - Remove the complete usage of utf8_ops and use static calls at all
+    places.
+  - Restore the static calls to default values when module is unloaded.
+  - Decrement the reference of module after calling the unload function.
+  - Remove spinlock as there will be no race conditions after removing
+    utf8_ops.
 
-valid_block_count                       [0x  f4c070 : 16040048]
--> So, this is correct.
+Changes in v3
+  - Add a patch which checks if utf8 is loaded before calling utf8_unload()
+    in ext4 and f2fs filesystems
+  - Return error if strscpy() returns value < 0
+  - Correct the conditions to prevent NULL pointer dereference while
+    accessing functions via utf8_ops variable.
+  - Add spinlock to avoid race conditions.
+  - Use static_call() for preventing speculative execution attacks.
 
-So, I suspect overprovisioned space is wrong and guess resize.f2fs assigned
-a wrong value. May I ask from and to which capacities you resized? I may
-need to reproduce it quickly.
+Changes in v2
+  - Remove the duplicate file from the last patch.
+  - Make the wrapper functions inline.
+  - Remove msleep and use try_module_get() and module_put()
+    for ensuring that module is loaded correctly and also
+    doesn't get unloaded while in use.
+  - Resolve the warning reported by kernel test robot.
+  - Resolve all the checkpatch.pl warnings.
 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Shreeya Patel (4):
+  fs: unicode: Use strscpy() instead of strncpy()
+  fs: unicode: Rename function names from utf8 to unicode
+  fs: unicode: Rename utf8-core file to unicode-core
+  fs: unicode: Add utf8 module and a unicode layer
+
+ fs/ext4/hash.c                             |   2 +-
+ fs/ext4/namei.c                            |  12 +-
+ fs/ext4/super.c                            |   6 +-
+ fs/f2fs/dir.c                              |  12 +-
+ fs/f2fs/super.c                            |   6 +-
+ fs/libfs.c                                 |   6 +-
+ fs/unicode/Kconfig                         |  17 ++-
+ fs/unicode/Makefile                        |   5 +-
+ fs/unicode/unicode-core.c                  | 152 +++++++++++++++++++++
+ fs/unicode/{utf8-core.c => unicode-utf8.c} |  98 ++++++++-----
+ fs/unicode/utf8-selftest.c                 |   8 +-
+ include/linux/unicode.h                    | 100 +++++++++++---
+ 12 files changed, 344 insertions(+), 80 deletions(-)
+ create mode 100644 fs/unicode/unicode-core.c
+ rename fs/unicode/{utf8-core.c => unicode-utf8.c} (57%)
+
+-- 
+2.30.2
+
 
 
 _______________________________________________
