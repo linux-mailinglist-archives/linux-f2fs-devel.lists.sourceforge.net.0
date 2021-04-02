@@ -2,76 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91FE63525B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Apr 2021 05:27:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A60673526DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Apr 2021 09:13:51 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lSASn-00033s-2i; Fri, 02 Apr 2021 03:27:13 +0000
+	id 1lSDzy-0003zK-Op; Fri, 02 Apr 2021 07:13:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1lSASl-00033l-E7
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Apr 2021 03:27:11 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lSDzx-0003z9-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Apr 2021 07:13:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rKKeUgsZ/qPEuARXi98KcF5qzCBB9ZXTNIrYTQ6HZ0E=; b=UiAVKag2mvPtcH4YaG5pkHlxvj
- zJzIaKXj1VsROLrb6b3QeiBWKFNJlcpt7D/Lkx8p1xc0pb8cNRh9QtNTGutn/gCICt7XwZjsFVPm2
- sI0VIlkgdkwXUKEUkw6GYhWGPDLjFWG//r+nENdYzxn1T8AvBX7yWWWCoAYiYz2jsLDA=;
+ bh=4bTbeffMMGkwWpdDsIfbhqJ2nR1AeY0kiQobvMmw0OQ=; b=AvQFKgKcMrVLfdvsQgvOYjjZDp
+ VAP4q9MGwiO9kMGi35ogzUBnuwTM13DE6fAsz8sNp2w3XzdX/8ANysfyXEpq4anjskaztZMJOUdyB
+ X2pHAhqkiog7T54ovusShoTzEjkqhVnq+JKep3aJ6Djn6TjAcC52/AMyDkIAx1knK5XU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rKKeUgsZ/qPEuARXi98KcF5qzCBB9ZXTNIrYTQ6HZ0E=; b=i3FTBBmHU54qHPmHYbZNfytpZg
- dt86pZYFkd49AsoELQLt8s0QBYKzS8Rw63keXdN6+YTisGpL5VNOGwNgNh3zRD7gO5isOS+IXt3bj
- 4QETjAZHWv+GSeJJNR65JTDbFpFyy9YuIoDOJrn0wqm55CClStB+UF1T2sffnEm5Pbjo=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lSASj-0000l9-3b
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Apr 2021 03:27:11 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CA625610CE;
- Fri,  2 Apr 2021 03:26:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1617334018;
- bh=UGjlJgcdvn75kCLUjie54uE8WR3ubcMaA5ftjG8dwO8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=mlbpoPgRJC0fcOh6Q3uGO39nCUt1gS/UuRNBitT+WlRoIwLxBE30kCfvv6rAKSmcF
- +F5AfoyK1v1/UypIGTWcOtVts8sZyYAq37s+aA4qocCrbI1msE03GpeBEhKsGCYIQC
- 8HCcekwPUyJXecS6Ku81YBM50yRitompFUSikfbUTqVXAp5ZyJmV98oTSV+Lx5ARy2
- SuzY6KI29RU8i+vYXe29J3726YW1cTDaXPMsQTq+To5PKbPnLMF9kvuo3U+DoPKSWm
- QgoPRNW6bFPTUxc2rt0BvbCJwPN4sQ/avlYu2QbZPBhxVdJXt0L8QZgkYlg2MY/heP
- m3fnQ1ag/vHYg==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  1 Apr 2021 20:26:42 -0700
-Message-Id: <20210402032642.2537641-2-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.31.0.208.g409f899ff0-goog
-In-Reply-To: <20210402032642.2537641-1-jaegeuk@kernel.org>
-References: <20210402032642.2537641-1-jaegeuk@kernel.org>
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=4bTbeffMMGkwWpdDsIfbhqJ2nR1AeY0kiQobvMmw0OQ=; b=M
+ KMZ9N/K3Yub32PvvJQhEFNAGp+b2fkzC/NpkkOWZ7qXmn9IMnA8PwNMBFsh+jKOW2iXRTtPSGOOWj
+ 2flFuoz616DhgysKlfyDaoGJpW80Z7N3oHyJq7tmucODTMjcByONd3A3LEliFf7rVQJo22Ss31Vna
+ U+4RXWXDtRgHfYc0=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lSDzl-005pZN-9n
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 02 Apr 2021 07:13:41 +0000
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4FBWRG53jNzNsD8;
+ Fri,  2 Apr 2021 15:10:34 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
+ 14.3.498.0; Fri, 2 Apr 2021 15:13:05 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Fri, 2 Apr 2021 15:12:43 +0800
+Message-ID: <20210402071243.101214-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Spam-Score: 0.9 (/)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lSASj-0000l9-3b
-Subject: [f2fs-dev] [PATCH 2/2] resize.f2fs: add force option to rewrite
- broken calculation
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lSDzl-005pZN-9n
+Subject: [f2fs-dev] [PATCH] resize.f2fs: fix wrong sit/nat bitmap during
+ rebuild_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,61 +77,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch adds "-f" for resize.f2fs to fix broken resized f2fs.
+As beroal <me@beroal.in.ua> reported: f2fs image can be corrupted
+after below testcase:
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+1. truncate -s $((256*1024*1024)) img
+2. mkfs.f2fs -f img
+3. mount -t f2fs -o loop img /mnt
+4. xfs_io -f /mnt/file -c "pwrite 0 2M" -c "fsync"
+5. umount /mnt
+6. resize.f2fs -s -t 262144 img
+7. fsck.f2fs img
+
+The root cause is we forgot to copy original sit/nat bitmap to
+new checkpoint during rebuild_checkpoint(), fix it.
+
+Reported-by: beroal <me@beroal.in.ua>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fsck/main.c   | 6 +++++-
- fsck/resize.c | 5 +++--
- 2 files changed, 8 insertions(+), 3 deletions(-)
+ fsck/resize.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/fsck/main.c b/fsck/main.c
-index be30e0073a5e..64efa8789cd4 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -506,7 +506,7 @@ void f2fs_parse_options(int argc, char *argv[])
- #endif
- 	} else if (!strcmp("resize.f2fs", prog)) {
- #ifdef WITH_RESIZE
--		const char *option_string = "d:st:iV";
-+		const char *option_string = "d:fst:iV";
- 
- 		c.func = RESIZE;
- 		while ((option = getopt(argc, argv, option_string)) != EOF) {
-@@ -522,6 +522,10 @@ void f2fs_parse_options(int argc, char *argv[])
- 				MSG(0, "Info: Debug level = %d\n",
- 							c.dbg_lv);
- 				break;
-+			case 'f':
-+				c.force = 1;
-+				MSG(0, "Info: Force to resize\n");
-+				break;
- 			case 's':
- 				c.safe_resize = 1;
- 				break;
 diff --git a/fsck/resize.c b/fsck/resize.c
-index 46b1cfb218cf..0425498b9760 100644
+index 46b1cfb218cf..b3920560974b 100644
 --- a/fsck/resize.c
 +++ b/fsck/resize.c
-@@ -714,8 +714,9 @@ int f2fs_resize(struct f2fs_sb_info *sbi)
- 		} else {
- 			return f2fs_resize_shrink(sbi);
- 		}
--	else if ((c.target_sectors * c.sector_size >>
--			get_sb(log_blocksize)) > get_sb(block_count))
-+	else if (((c.target_sectors * c.sector_size >>
-+			get_sb(log_blocksize)) > get_sb(block_count)) ||
-+			c.force)
- 		return f2fs_resize_grow(sbi);
- 	else {
- 		MSG(0, "Nothing to resize.\n");
+@@ -526,6 +526,11 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+ 
+ 	memcpy(new_cp, cp, (unsigned char *)cp->sit_nat_version_bitmap -
+ 						(unsigned char *)cp);
++	if (c.safe_resize)
++		memcpy((void *)new_cp + CP_BITMAP_OFFSET,
++			(void *)cp + CP_BITMAP_OFFSET,
++			F2FS_BLKSIZE - CP_BITMAP_OFFSET);
++
+ 	new_cp->checkpoint_ver = cpu_to_le64(cp_ver + 1);
+ 
+ 	crc = f2fs_checkpoint_chksum(new_cp);
 -- 
-2.31.0.208.g409f899ff0-goog
+2.29.2
 
 
 
