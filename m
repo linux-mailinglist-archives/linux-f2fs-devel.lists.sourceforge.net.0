@@ -2,105 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2EB3353C77
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  5 Apr 2021 10:44:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8B02354A12
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Apr 2021 03:33:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lTKq4-0003KP-OR; Mon, 05 Apr 2021 08:44:04 +0000
+	id 1lTaaN-0005D8-41; Tue, 06 Apr 2021 01:32:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <qkrwngud825@gmail.com>) id 1lTKq4-0003KH-4R
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Apr 2021 08:44:04 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <yuchao0@huawei.com>) id 1lTaa3-0005B8-Vd
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 01:32:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dbbCARoGXy2MNLuze8kfnNSBr/bgDDxhHvk64Asixl4=; b=biI0iIMMD6/a4xedIg4AKw2rk3
- 2HkM/FFjYu5vPJcO0OcesU1qtvLwX+PYeDTBQWJgHkt9pH7GGXUAFR/RqIeKnTnRgad+COYbu6Fta
- J0QZw/art1GXQQ/UjxL+xTSvWJo30S6I5CXHpfZXNu6RhvdNE54MrX0xtOn4AXwYJs/M=;
+ bh=0UJ90hM7fHb+Q7M4nUrYZXNrM0Ct23G0WFSbv/ZScnw=; b=MKEALfBrmoV1fJNeyQD87p4hvO
+ VJ6qEK5YudmyP7tKYJ6Rwt37M9+lUyIQ+C8S6xVdRd1zswy27XYR6ppQB6VPWRPZx5+cimIWBVQCt
+ 8qwxBw5VlueHKkBkHQE4JyoiiQ1+sZt+fF5Navd6cbxSybYxx+qvD1hkGpfr05KPN2Rk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=dbbCARoGXy2MNLuze8kfnNSBr/bgDDxhHvk64Asixl4=; b=i
- fQukvDxm3krsCPbQK7kCeomFsNX0xF5pDjFacAl67CDDg1T+N3N1QQKdo8Em7moV43d1uEJI0eMaP
- FnydWptkjs2bBiYIAYVbRBNmn5mpVJloq79KPwkgaUIl8gWzPEXcKLiyAVW94v6uEelOG4Abngx7C
- NlJJDMT9xl2oyt+A=;
-Received: from mail-pg1-f180.google.com ([209.85.215.180])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1lTKpr-003dxD-7A
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 05 Apr 2021 08:44:04 +0000
-Received: by mail-pg1-f180.google.com with SMTP id b17so4064470pgh.7
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 05 Apr 2021 01:43:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=dbbCARoGXy2MNLuze8kfnNSBr/bgDDxhHvk64Asixl4=;
- b=Ih3FR3KQfdHHc/iKpS+8YO6iN90iy3JqWVdxG8WlfA/bNbrkdTHsJGA7emgEMjIZsi
- 0Y0Wr57j8xqXo4nlTWB7mcArGYZtdm28RkLagxlSoBjidsRLA0vZ+YtTDtyRVXpi4Lo8
- cnHpPRTbHZ1hCrXOHlILBM8JN2zZh7jWrNwqwX62m5ScuRKFfwITc/CcoyC4yT7nXZic
- n98lpCwiCY5touh3R6qCpa1X54qNtN90posUJgakAEAi59w5kECKcoetYv8a/9bnq4m5
- 3tUU0LzqoNWxtuyrSyo9aWtYHtWDdVvHH+Nod3f1Tlr231ktiw3Dk6bc1xVrDFTuuxMQ
- ie7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=dbbCARoGXy2MNLuze8kfnNSBr/bgDDxhHvk64Asixl4=;
- b=rAJtmk9TwU/eP/C4Bn+4SZ95T/hcjP8HFtVRmfA64+qMTSu3QKNS1N6A2BVXaQRx58
- c4k5xPrc1wBgzNvepjiAXFjgeP/9Ov9mlrpbZZvEaNI1moH+1CE9Pug0AERDRlT/FEq4
- xABpkg/IjWQdP4QKs+DxQCqunKCLJ5agwzGLSj7YrcAgdbDStSuAAfU8oyn//Q35r+La
- ujKc2sUYV7KHPacfzkWHxqiIStgj1kJ9gTvug3Hv4fh4ngo7V7ZqQOTI2DExMNAmUHWH
- Bv+hcIZADnXkDPuVSyenXHCuOCZFldTXQsb+9AOwE6l8XEWAqoT3CDqGZaHr73yoTEA2
- kfrg==
-X-Gm-Message-State: AOAM532O0/9/Dase/Dx7LKqfAja5gyvQSwPs2rWlRHvH57001CB0+1/m
- Yluqrvf0B0xwZQx2B0Tgx3y1hWijLt0B8A==
-X-Google-Smtp-Source: ABdhPJxhg9EtYmCleonLb2ImMQV3FEye2Gq04FZYHG8PtDXJOM1NPXsVVe6tPidcCczS5aDPIjYUJQ==
-X-Received: by 2002:a62:55c6:0:b029:21c:4dfc:d6e2 with SMTP id
- j189-20020a6255c60000b029021c4dfcd6e2mr22419687pfb.60.1617612225316; 
- Mon, 05 Apr 2021 01:43:45 -0700 (PDT)
-Received: from localhost.localdomain ([114.71.101.153])
- by smtp.gmail.com with ESMTPSA id w18sm14671463pjh.19.2021.04.05.01.43.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Apr 2021 01:43:44 -0700 (PDT)
-From: Park Ju Hyung <qkrwngud825@gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  5 Apr 2021 17:43:36 +0900
-Message-Id: <20210405084336.65165-1-qkrwngud825@gmail.com>
-X-Mailer: git-send-email 2.31.1
+ List-Owner:List-Archive; bh=0UJ90hM7fHb+Q7M4nUrYZXNrM0Ct23G0WFSbv/ZScnw=; b=k
+ jKbhS352X95QtLlWt1xiBlrA+z2Q+37ZIdaoGpCO6CLCai6tR4hdoEB580+1BpjzjiT5mtiaRlrsG
+ Ek0Zxr4rAQImR9+O9Rw1BA+BA6k8Fg4S/O9fMnvpmxSnG7mcXUr5Xo/cWr5R9YQnQ7Ag2f7zzJtHx
+ QaepaiTh9bfiUtBI=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lTaZt-0004hT-3v
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 01:32:35 +0000
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FDqhW2vCsz17QPn;
+ Tue,  6 Apr 2021 09:30:03 +0800 (CST)
+Received: from szvp000203569.huawei.com (10.120.216.130) by
+ DGGEMS414-HUB.china.huawei.com (10.3.19.214) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 6 Apr 2021 09:32:06 +0800
+From: Chao Yu <yuchao0@huawei.com>
+To: <jaegeuk@kernel.org>
+Date: Tue, 6 Apr 2021 09:31:38 +0800
+Message-ID: <20210406013138.38378-1-yuchao0@huawei.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Spam-Score: 1.8 (+)
+X-Originating-IP: [10.120.216.130]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 1.0 HK_RANDOM_FROM         From username looks random
- 0.6 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (qkrwngud825[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.180 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.180 listed in wl.mailspike.net]
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (qkrwngud825[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lTKpr-003dxD-7A
-Subject: [f2fs-dev] [PATCH] f2fs: prevent mounting devices with unsupported
- features
+X-Headers-End: 1lTaZt-0004hT-3v
+Subject: [f2fs-dev] [PATCH] resize.f2fs: fix to check free space before
+ shrink
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,86 +73,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Mounting f2fs devices with future options leads to unwanted behaviors
-incurring errors and data destruction.
+Otherwise, after shrink, kernel will report below error message
+when we mount the image:
 
-Implement a long overdue safeguard to prevent mounting devices with
-unsupported features.
+F2FS-fs (loop0): invalid crc_offset: 0
+F2FS-fs (loop0): Wrong valid_user_blocks: 16404, user_block_count: 13312
+F2FS-fs (loop0): Failed to get valid F2FS checkpoint
+mount(2) system call failed: Structure needs cleaning.
 
-This can be further extended to allow read-only mounts on certain
-incompatible features, but that doesn't seem necessary for now with
-how f2fs features has been added.
-
-Cc: stable@vger.kernel.org
-Signed-off-by: Park Ju Hyung <qkrwngud825@gmail.com>
+Reported-by: beroal <me@beroal.in.ua>
+Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/f2fs.h  | 11 +++++++++++
- fs/f2fs/super.c | 10 ++++++++++
- 2 files changed, 21 insertions(+)
+ fsck/resize.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e2d302ae3a46..12d274492d6f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -153,6 +153,9 @@ struct f2fs_mount_info {
- 	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
- };
+diff --git a/fsck/resize.c b/fsck/resize.c
+index a083f68a809f..b043cd984dc6 100644
+--- a/fsck/resize.c
++++ b/fsck/resize.c
+@@ -650,8 +650,11 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
+ 	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+ 	struct f2fs_super_block new_sb_raw;
+ 	struct f2fs_super_block *new_sb = &new_sb_raw;
++	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
+ 	block_t old_end_blkaddr, old_main_blkaddr;
+ 	block_t new_end_blkaddr, new_main_blkaddr, tmp_end_blkaddr;
++	block_t user_block_count;
++	unsigned int overprov_segment_count;
+ 	unsigned int offset;
+ 	int err = -1;
  
-+/*
-+ * All features listed here should be appended to F2FS_SUPPORTED_FEATURES
-+ */
- #define F2FS_FEATURE_ENCRYPT		0x0001
- #define F2FS_FEATURE_BLKZONED		0x0002
- #define F2FS_FEATURE_ATOMIC_WRITE	0x0004
-@@ -168,6 +171,14 @@ struct f2fs_mount_info {
- #define F2FS_FEATURE_CASEFOLD		0x1000
- #define F2FS_FEATURE_COMPRESSION	0x2000
+@@ -662,6 +665,17 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
+ 	if (get_new_sb(new_sb))
+ 		return -1;
  
-+/* Currently supported features by this version of f2fs */
-+#define F2FS_SUPPORTED_FEATURES \
-+	(F2FS_FEATURE_ENCRYPT | F2FS_FEATURE_BLKZONED | F2FS_FEATURE_ATOMIC_WRITE | \
-+	 F2FS_FEATURE_EXTRA_ATTR | F2FS_FEATURE_PRJQUOTA | F2FS_FEATURE_INODE_CHKSUM | \
-+	 F2FS_FEATURE_FLEXIBLE_INLINE_XATTR | F2FS_FEATURE_QUOTA_INO | F2FS_FEATURE_INODE_CRTIME | \
-+	 F2FS_FEATURE_LOST_FOUND | F2FS_FEATURE_VERITY | F2FS_FEATURE_SB_CHKSUM | \
-+	 F2FS_FEATURE_CASEFOLD | F2FS_FEATURE_COMPRESSION)
++	overprov_segment_count = (get_newsb(segment_count_main) -
++			c.new_reserved_segments) *
++			c.new_overprovision / 100;
++	overprov_segment_count += c.new_reserved_segments;
 +
- #define __F2FS_HAS_FEATURE(raw_super, mask)				\
- 	((raw_super->feature & cpu_to_le32(mask)) != 0)
- #define F2FS_HAS_FEATURE(sbi, mask)	__F2FS_HAS_FEATURE(sbi->raw_super, mask)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 82592b19b4e0..4a2fe29b0740 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3610,6 +3610,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	int recovery, i, valid_super_block;
- 	struct curseg_info *seg_i;
- 	int retry_cnt = 1;
-+	__le32 unsupported;
- 
- try_onemore:
- 	err = -EINVAL;
-@@ -3647,6 +3648,15 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	sb->s_fs_info = sbi;
- 	sbi->raw_super = raw_super;
- 
-+	/* check supported features */
-+	unsupported = raw_super->feature & ~F2FS_SUPPORTED_FEATURES;
-+	if (unsupported) {
-+		f2fs_err(sbi, "unsupported features: 0x%x\n", unsupported);
-+		f2fs_err(sbi, "please update your kernel or adjust the mkfs.f2fs option\n");
-+		err = -EOPNOTSUPP;
-+		goto free_sb_buf;
-+	}
++	user_block_count = (get_newsb(segment_count_main) -
++			overprov_segment_count) * c.blks_per_seg;
 +
- 	/* precompute checksum seed for metadata */
- 	if (f2fs_sb_has_inode_chksum(sbi))
- 		sbi->s_chksum_seed = f2fs_chksum(sbi, ~0, raw_super->uuid,
++	if (get_cp(valid_block_count) > user_block_count)
++		return -1;
++
+ 	/* check nat availability */
+ 	if (get_sb(segment_count_nat) > get_newsb(segment_count_nat)) {
+ 		err = shrink_nats(sbi, new_sb);
 -- 
-2.31.1
+2.29.2
 
 
 
