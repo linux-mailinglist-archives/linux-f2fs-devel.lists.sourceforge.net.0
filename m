@@ -2,70 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 888A9354FE7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Apr 2021 11:30:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EC4A354FE9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Apr 2021 11:31:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lTi2D-0007nB-Ss; Tue, 06 Apr 2021 09:30:09 +0000
+	id 1lTi3N-0007Vq-2J; Tue, 06 Apr 2021 09:31:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <yuchao0@huawei.com>) id 1lTi2C-0007n4-Ld
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:08 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <yuchao0@huawei.com>) id 1lTi2f-0007QQ-Ol
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1JQdbiX3V2S6KjGup3X4IdcaUQPxd8uPQRRMIeOHJbs=; b=m1Dw+iA9mXiaVvnW8PEu8LVbVb
- 5OkZq27ziQDvE+rLAeYcBNrs/F4basAgyW6CAGIxtu9UUW0KqZFUbm1TCYHMaskFxSTaBOKCEcz54
- A26iQRwXqfNOXRYtl1aklhMCdm0hoAfFDBs2G8Eefu1A+2Il5gkbep7IT1wjHzJcpc6k=;
+ bh=/kM4Elk4KgyqCryB/2IcLBhm/gN589vMSDLk5i3UCjw=; b=d6FqyGRoVhQ5fgHuaV0tDo2bl8
+ F+QAPqKrmv974w+Q7paLBKTNb+USly83GVNZoashDVvmr5GLmup16SsLJcw8TDQLvTcdAKbo66FhY
+ XvmplAMatAMNnE/uIfHxNgypN8fXwuSrw/awMG0/LjLzSzOwhYa6Lc4RibvkKHzO4CvQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1JQdbiX3V2S6KjGup3X4IdcaUQPxd8uPQRRMIeOHJbs=; b=TerFksSbpA9kJy+jFuo+FY1YYw
- GS2i57qbzWUohDXmCBqnVYst/tdcnvLl/J4VYhDv1AwieBcMt+LDaZ2GRLtya+x0yUVdt7xuZNtbF
- 55dnaLn/TS9HQPwbYDzw/AGwNb9KjzR/kkx+2Xr2kCD77bF9OLK9AklO92usbHmEkynw=;
+ bh=/kM4Elk4KgyqCryB/2IcLBhm/gN589vMSDLk5i3UCjw=; b=knkR0uD0MnMsbq2uR3AoErRok2
+ NiEBnZX0wW8ac1tyhBHfjGwkKZ2iTxaR9tPUo08ZfgpGgwe9O1gzIK34ulnuqBapwjO2HIvwWWR5c
+ soY16hA2cd2GVsQNeDUpTcuSNROvFoXAxn14p7FytoY0J6DcshZHITAoYGbVwLCq5EBQ=;
 Received: from szxga07-in.huawei.com ([45.249.212.35])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lTi20-0002UG-BI
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:08 +0000
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4FF2HY0s17z9wsQ;
- Tue,  6 Apr 2021 17:27:37 +0800 (CST)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lTi2b-009um7-9O
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:37 +0000
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4FF2JD5Wzrz9wsb;
+ Tue,  6 Apr 2021 17:28:12 +0800 (CST)
 Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.208) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 6 Apr 2021
- 17:29:46 +0800
-To: Sahitya Tummala <stummala@codeaurora.org>, Jaegeuk Kim
- <jaegeuk@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20210316093406.GC8562@codeaurora.org>
- <1617700156-19719-1-git-send-email-stummala@codeaurora.org>
+ (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 6 Apr 2021
+ 17:30:12 +0800
+To: Yi Zhuang <zhuangyi1@huawei.com>, <jaegeuk@kernel.org>, <chao@kernel.org>, 
+ <linux-f2fs-devel@lists.sourceforge.net>
+References: <20210406014735.127457-1-zhuangyi1@huawei.com>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <f2197598-510b-dded-ffef-42203a101b1b@huawei.com>
-Date: Tue, 6 Apr 2021 17:29:46 +0800
+Message-ID: <6e60ba49-8e1d-e9db-7b66-d1a67db5cd0f@huawei.com>
+Date: Tue, 6 Apr 2021 17:30:12 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <1617700156-19719-1-git-send-email-stummala@codeaurora.org>
+In-Reply-To: <20210406014735.127457-1-zhuangyi1@huawei.com>
 Content-Language: en-US
 X-Originating-IP: [10.136.110.154]
 X-CFilter-Loop: Reflected
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lTi20-0002UG-BI
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix the periodic wakeups of discard
- thread
+X-Headers-End: 1lTi2b-009um7-9O
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: modify open brace '{' following
+ function definitions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,24 +79,15 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/4/6 17:09, Sahitya Tummala wrote:
-> Fix the unnecessary periodic wakeups of discard thread that happens under
-> below two conditions -
+On 2021/4/6 9:47, Yi Zhuang wrote:
+> Made suggested modifications from checkpatch in reference to ERROR:
+>   open brace '{' following function definitions go on the next line
 > 
-> 1. When f2fs is heavily utilized over 80%, the current discard policy
-> sets the max sleep timeout of discard thread as 50ms
-> (DEF_MIN_DISCARD_ISSUE_TIME). But this is set even when there are
-> no pending discard commands to be issued.
-> 
-> 2. In the issue_discard_thread() path when there are no pending discard
-> commands, it fails to reset the wait_ms to max timeout value.
-> 
-> Signed-off-by: Sahitya Tummala <stummala@codeaurora.org>
+> Signed-off-by: Yi Zhuang <zhuangyi1@huawei.com>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
