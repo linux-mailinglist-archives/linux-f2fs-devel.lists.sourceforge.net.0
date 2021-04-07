@@ -2,72 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EC4A354FE9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Apr 2021 11:31:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 437F6356F2D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Apr 2021 16:49:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lTi3N-0007Vq-2J; Tue, 06 Apr 2021 09:31:21 +0000
+	id 1lU9Uv-0002Kj-EV; Wed, 07 Apr 2021 14:49:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lTi2f-0007QQ-Ol
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:37 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <shreeya.patel@collabora.com>) id 1lU9Uu-0002KW-8n
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Apr 2021 14:49:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/kM4Elk4KgyqCryB/2IcLBhm/gN589vMSDLk5i3UCjw=; b=d6FqyGRoVhQ5fgHuaV0tDo2bl8
- F+QAPqKrmv974w+Q7paLBKTNb+USly83GVNZoashDVvmr5GLmup16SsLJcw8TDQLvTcdAKbo66FhY
- XvmplAMatAMNnE/uIfHxNgypN8fXwuSrw/awMG0/LjLzSzOwhYa6Lc4RibvkKHzO4CvQ=;
+ bh=SW8IH1f/aUuYFp8vCfn6wi+kUlSVH068jldaUYL0L4M=; b=Nv8VM0jQ0tjH2rP78v6+GqCLEU
+ COHyz4K98I7qMSjsT4zQbSDaQVy3kBfjicVzaP8hPMGQo2T86LORCnZm8iIpikjmkk3dCRUCUdlgI
+ zvmuRIVyN5UclIH3Er1dYZS++KF/3zNtw6dK7vbCdmvUap9sptQlXFUZhuCiPnygF83s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/kM4Elk4KgyqCryB/2IcLBhm/gN589vMSDLk5i3UCjw=; b=knkR0uD0MnMsbq2uR3AoErRok2
- NiEBnZX0wW8ac1tyhBHfjGwkKZ2iTxaR9tPUo08ZfgpGgwe9O1gzIK34ulnuqBapwjO2HIvwWWR5c
- soY16hA2cd2GVsQNeDUpTcuSNROvFoXAxn14p7FytoY0J6DcshZHITAoYGbVwLCq5EBQ=;
-Received: from szxga07-in.huawei.com ([45.249.212.35])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lTi2b-009um7-9O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Apr 2021 09:30:37 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4FF2JD5Wzrz9wsb;
- Tue,  6 Apr 2021 17:28:12 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.213) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 6 Apr 2021
- 17:30:12 +0800
-To: Yi Zhuang <zhuangyi1@huawei.com>, <jaegeuk@kernel.org>, <chao@kernel.org>, 
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20210406014735.127457-1-zhuangyi1@huawei.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <6e60ba49-8e1d-e9db-7b66-d1a67db5cd0f@huawei.com>
-Date: Tue, 6 Apr 2021 17:30:12 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SW8IH1f/aUuYFp8vCfn6wi+kUlSVH068jldaUYL0L4M=; b=I
+ n8en9YJETsqRslhX4IHRtzRLJrcERJgpUv2V0mJIeCqin6iaOXQIlzRIG7vk9pvAPualrW9cKhBdu
+ Y5gw9niCcfFbXcbav8lX7If/ssttrC4ErjHylGOEhWpvclAskGNz8u2kUYO2LBdBSoj0oncWHBQ49
+ 7SS45EqHWT0vTt0M=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lU9Uf-0005dL-L3
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Apr 2021 14:49:36 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: shreeya) with ESMTPSA id 6CAFD1F45083
+From: Shreeya Patel <shreeya.patel@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ chao@kernel.org, krisman@collabora.com, ebiggers@google.com,
+ drosen@google.com, ebiggers@kernel.org, yuchao0@huawei.com
+Date: Wed,  7 Apr 2021 20:18:41 +0530
+Message-Id: <20210407144845.53266-1-shreeya.patel@collabora.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-In-Reply-To: <20210406014735.127457-1-zhuangyi1@huawei.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.35 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lTi2b-009um7-9O
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: modify open brace '{' following
- function definitions
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1lU9Uf-0005dL-L3
+Subject: [f2fs-dev] [PATCH v7 0/4] Make UTF-8 encoding loadable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,19 +66,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: kernel@collabora.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/4/6 9:47, Yi Zhuang wrote:
-> Made suggested modifications from checkpatch in reference to ERROR:
->   open brace '{' following function definitions go on the next line
-> 
-> Signed-off-by: Yi Zhuang <zhuangyi1@huawei.com>
+utf8data.h_shipped has a large database table which is an auto-generated
+decodification trie for the unicode normalization functions and it is not
+necessary to carry this large table in the kernel.
+Goal is to make UTF-8 encoding loadable by converting it into a module
+and adding a layer between the filesystems and the utf8 module which will
+load the module whenever any filesystem that needs unicode is mounted.
+Currently only UTF-8 encoding is supported but if any other encodings
+are supported in future then the layer file would be responsible for
+loading the desired encoding module.
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+1st patch in the series resolves the warning reported by kernel test
+robot by using strscpy instead of strncpy.
 
-Thanks,
+Unicode is the subsystem and utf8 is a charachter encoding for the
+subsystem, hence 2nd and 3rd patches in the series are renaming functions
+and file name to unicode for better understanding the difference between
+UTF-8 module and unicode layer.
+
+Last patch in the series adds the layer and utf8 module and also uses
+static calls which gives performance benefit when compared to indirect
+calls using function pointers.
+
+---
+Changes in v7
+  - Update the help text in Kconfig
+  - Handle the unicode_load_static_call function failure by decrementing
+    the reference.
+  - Correct the code for handling built-in utf8 option as well.
+  - Correct the synchronization for accessing utf8mod.
+  - Make changes to unicode_unload() for handling the situation where
+    utf8mod != NULL and um == NULL.
+
+Changes in v6
+  - Add spinlock to protect utf8mod and avoid NULL pointer
+    dereference.
+  - Change the static call function names for being consistent with
+    kernel coding style.
+  - Merge the unicode_load_module function with unicode_load as it is
+    not really needed to have a separate function.
+  - Use try_then_module_get instead of module_get to avoid loading the
+    module even when it is already loaded.
+  - Improve the commit message.
+
+Changes in v5
+  - Remove patch which adds NULL check in ext4/super.c and f2fs/super.c
+    before calling unicode_unload().
+  - Rename global variables and default static call functions for better
+    understanding
+  - Make only config UNICODE_UTF8 visible and config UNICODE to be always
+    enabled provided UNICODE_UTF8 is enabled.  
+  - Improve the documentation for Kconfig
+  - Improve the commit message.
+ 
+Changes in v4
+  - Return error from the static calls instead of doing nothing and
+    succeeding even without loading the module.
+  - Remove the complete usage of utf8_ops and use static calls at all
+    places.
+  - Restore the static calls to default values when module is unloaded.
+  - Decrement the reference of module after calling the unload function.
+  - Remove spinlock as there will be no race conditions after removing
+    utf8_ops.
+
+Changes in v3
+  - Add a patch which checks if utf8 is loaded before calling utf8_unload()
+    in ext4 and f2fs filesystems
+  - Return error if strscpy() returns value < 0
+  - Correct the conditions to prevent NULL pointer dereference while
+    accessing functions via utf8_ops variable.
+  - Add spinlock to avoid race conditions.
+  - Use static_call() for preventing speculative execution attacks.
+
+Changes in v2
+  - Remove the duplicate file from the last patch.
+  - Make the wrapper functions inline.
+  - Remove msleep and use try_module_get() and module_put()
+    for ensuring that module is loaded correctly and also
+    doesn't get unloaded while in use.
+  - Resolve the warning reported by kernel test robot.
+  - Resolve all the checkpatch.pl warnings.
+
+Shreeya Patel (4):
+  fs: unicode: Use strscpy() instead of strncpy()
+  fs: unicode: Rename function names from utf8 to unicode
+  fs: unicode: Rename utf8-core file to unicode-core
+  fs: unicode: Add utf8 module and a unicode layer
+
+ fs/ext4/hash.c                             |   2 +-
+ fs/ext4/namei.c                            |  12 +-
+ fs/ext4/super.c                            |   6 +-
+ fs/f2fs/dir.c                              |  12 +-
+ fs/f2fs/super.c                            |   6 +-
+ fs/libfs.c                                 |   6 +-
+ fs/unicode/Kconfig                         |  26 +++-
+ fs/unicode/Makefile                        |   5 +-
+ fs/unicode/unicode-core.c                  | 162 +++++++++++++++++++++
+ fs/unicode/{utf8-core.c => unicode-utf8.c} |  98 ++++++++-----
+ fs/unicode/utf8-selftest.c                 |   8 +-
+ include/linux/unicode.h                    | 100 +++++++++++--
+ 12 files changed, 361 insertions(+), 82 deletions(-)
+ create mode 100644 fs/unicode/unicode-core.c
+ rename fs/unicode/{utf8-core.c => unicode-utf8.c} (57%)
+
+-- 
+2.30.2
+
 
 
 _______________________________________________
