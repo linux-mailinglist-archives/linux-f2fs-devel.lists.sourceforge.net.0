@@ -2,76 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19B4A357947
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Apr 2021 03:01:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5256357D7C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Apr 2021 09:41:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lUJ3L-00042W-98; Thu, 08 Apr 2021 01:01:47 +0000
+	id 1lUPHZ-0003dS-Vv; Thu, 08 Apr 2021 07:40:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <ebiggers@kernel.org>) id 1lUJ3K-00042Q-LT
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Apr 2021 01:01:46 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <jiayang5@huawei.com>) id 1lUPHQ-0003d7-BR
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Apr 2021 07:40:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HRdOv8XWEN6pduLbv8Z++q7FZaa+QUJ6ozBiD0S8iuY=; b=JTCnl/ndLtJzYYeLuRyveT0rwb
- pc0j7Vas7CQ4CXtMnDw3VRFIfmd8/I5B1lW/NMqpKBoskZVsl9+4tsqXfj7Hvcn3+8kPBjIsl+dus
- QuGJtvhLBAU1QbZwl4dVmggbzZFOg5c54JgkLuCXD5GR8jc4Aeh0Sbxzn67qKiVq/d7Q=;
+ bh=G/MgkrEvdBgnCBeNJM9dYAoPaSe8GngLHzksGsMlh88=; b=ZhXs9cyaR4BZVVJMASwIGBR+uC
+ 4zjFXS5Bc101084/4fLoXywc61NrBC5/t0ddi1ONUvUHH62+hYpPC/lbJQ0EAKC8gaAV8JHj8Bglv
+ Fb6/fNSs6q0Kxr/INCXEsiv7TkwzsIZj9UY35EiKRNnnJq4FgfUmeLijdc5D4mElhdaw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=HRdOv8XWEN6pduLbv8Z++q7FZaa+QUJ6ozBiD0S8iuY=; b=AVz4AdVj2W4cPBtrOwWgkSAsCw
- Vt5LqonL7L1CludQ7PI2jgoXYmyr21G/bEPEOdMT73POZr3+s6xtL9378b0x4sD1auw9PeA949FZf
- 1PcIFiWi0BjbqdAmpPnbx56uaxit0QfejXUzuE4luKBw73tkzSTjtdZxXQa0BciSrsCw=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=G/MgkrEvdBgnCBeNJM9dYAoPaSe8GngLHzksGsMlh88=; b=C
+ IP4mQauf0mNRCw7g99ydFiz5hXQJyetGUJLTS897U2bxEIXEMEKfO//o3aYRL0aMB22i1vfws11QM
+ 0D8bNQRbvUoUBN3YVifhUDu6CMPPIDiL/5VMHo5L3ISHYU9V5P6b+TztcBGcUUy+O36zgWTLWxp0k
+ oTzTB0pG8lnJzKq4=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lUJ3E-001jBH-TN
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Apr 2021 01:01:46 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CDABE6121E;
- Thu,  8 Apr 2021 01:01:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1617843688;
- bh=4u5tOpeCMncpEEQTHvI1+RnAHtrGNOf7zF8rhQ0eQbI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=f1IAmgDh/ajJXxqKR9vXpvbxKyFaWcCycgnCj0Czvr6yiCvIbQQqLEttUcyroC3iz
- +b+B8zQ14heqrSnyfEi5fUdZyyJmW0vIMazvd2wIwAnoCcpMwd0k+tXBmDgOLi/8IJ
- +AsOkm5cNi0GdTcNjikrbtPCvU5K/55cv6csvcuPqAtWDIXFB79v9Du4F4WiuO49Go
- p0wTQekgcBuRylR/AP+Z+ncpt9dg2Ypv9RpIXnG+H3egdTZapV+MDYQLDhZ4ciHjlS
- BdGYyUCH6GZ0C2BlVAP2EUdTP7SwusqsGPZFVNO8Mpg2L54LBtBbN8FCS3M+Rlytg8
- PyJ1mhozAsknA==
-Date: Wed, 7 Apr 2021 18:01:26 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Shreeya Patel <shreeya.patel@collabora.com>
-Message-ID: <YG5V5l2pD3DCiyVA@gmail.com>
-References: <20210407144845.53266-1-shreeya.patel@collabora.com>
- <20210407144845.53266-5-shreeya.patel@collabora.com>
+ id 1lUPHE-003GcS-L9
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Apr 2021 07:40:44 +0000
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FGClf57t6zpVYL;
+ Thu,  8 Apr 2021 15:37:34 +0800 (CST)
+Received: from huawei.com (10.175.124.27) by DGGEMS410-HUB.china.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server id 14.3.498.0; Thu, 8 Apr 2021
+ 15:40:18 +0800
+From: Jia Yang <jiayang5@huawei.com>
+To: <linux-f2fs-devel@lists.sourceforge.net>, <chao@kernel.org>,
+ <jaegeuk@kernel.org>
+Date: Thu, 8 Apr 2021 15:50:14 +0800
+Message-ID: <20210408075014.2362887-1-jiayang5@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210407144845.53266-5-shreeya.patel@collabora.com>
-X-Spam-Score: -0.1 (/)
+X-Originating-IP: [10.175.124.27]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lUJ3E-001jBH-TN
-Subject: Re: [f2fs-dev] [PATCH v7 4/4] fs: unicode: Add utf8 module and a
- unicode layer
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lUPHE-003GcS-L9
+Subject: [f2fs-dev] [PATCH -next] f2fs: Fix inappropriate spaces
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,79 +77,123 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, drosen@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel@collabora.com,
- adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- andre.almeida@collabora.com, linux-ext4@vger.kernel.org, krisman@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 07, 2021 at 08:18:45PM +0530, Shreeya Patel wrote:
-> diff --git a/fs/unicode/Kconfig b/fs/unicode/Kconfig
-> index 2c27b9a5cd6c..0c69800a2a37 100644
-> --- a/fs/unicode/Kconfig
-> +++ b/fs/unicode/Kconfig
-> @@ -2,13 +2,31 @@
->  #
->  # UTF-8 normalization
->  #
-> +# CONFIG_UNICODE will be automatically enabled if CONFIG_UNICODE_UTF8
-> +# is enabled. This config option adds the unicode subsystem layer which loads
-> +# the UTF-8 module whenever any filesystem needs it.
->  config UNICODE
-> -	bool "UTF-8 normalization and casefolding support"
-> +	bool
-> +
-> +config UNICODE_UTF8
-> +	tristate "UTF-8 module"
-> +	select UNICODE
->  	help
-> -	  Say Y here to enable UTF-8 NFD normalization and NFD+CF casefolding
-> -	  support.
-> +	  Say M here to enable UTF-8 NFD normalization and NFD+CF casefolding
-> +	  support as a loadable module or say Y for building it into the kernel.
-> +
-> +	  utf8data.h_shipped has a large database table which is an
-> +	  auto-generated decodification trie for the unicode normalization
-> +	  functions and it is not necessary to carry this large table in the
-> +	  kernel. Hence, enabling UNICODE_UTF8 as M will allow you to avoid
-> +	  carrying this large table into the kernel and module will only be
-> +	  loaded whenever required by any filesystem.
-> +	  Please note, in this case utf8 module will only be available after
-> +	  booting into the compiled kernel. If your filesystem requires it to
-> +	  have utf8 during boot time then you should have it built into the
-> +	  kernel by saying Y here to avoid boot failure.
+Fix checkpatch.pl check:
 
-This help text seems to contradict itself; it says "it is not necessary to carry
-this large table in the kernel", and then later it says that in some cases it is
-in fact necessary.
+ERROR: spaces required around that ':'
+ERROR: spaces required before the open parenthesis '('
+ERROR: spaces prohibited before that ','
 
-It would also be helpful for the help text to mention which filesystems actually
-support this feature.
+Signed-off-by: Jia Yang <jiayang5@huawei.com>
+---
+ fs/f2fs/file.c     | 2 +-
+ fs/f2fs/gc.c       | 2 +-
+ fs/f2fs/node.c     | 4 ++--
+ fs/f2fs/recovery.c | 2 +-
+ fs/f2fs/segment.c  | 2 +-
+ fs/f2fs/super.c    | 4 ++--
+ 6 files changed, 8 insertions(+), 8 deletions(-)
 
-> diff --git a/fs/unicode/unicode-core.c b/fs/unicode/unicode-core.c
-> index 730dbaedf593..d9e9e410893d 100644
-> --- a/fs/unicode/unicode-core.c
-> +++ b/fs/unicode/unicode-core.c
-> @@ -1,228 +1,132 @@
->  /* SPDX-License-Identifier: GPL-2.0 */
->  #include <linux/module.h>
->  #include <linux/kernel.h>
-> -#include <linux/string.h>
->  #include <linux/slab.h>
-> -#include <linux/parser.h>
->  #include <linux/errno.h>
->  #include <linux/unicode.h>
-> -#include <linux/stringhash.h>
-> +#include <linux/spinlock.h>
->  
-> -#include "utf8n.h"
-> +DEFINE_SPINLOCK(utf8mod_lock);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index f3ca63b55843..d697c8900fa7 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2582,7 +2582,7 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ {
+ 	struct inode *inode = file_inode(filp);
+ 	struct f2fs_map_blocks map = { .m_next_extent = NULL,
+-					.m_seg_type = NO_CHECK_TYPE ,
++					.m_seg_type = NO_CHECK_TYPE,
+ 					.m_may_create = false };
+ 	struct extent_info ei = {0, 0, 0};
+ 	pgoff_t pg_start, pg_end, next_pgofs;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 5c48825fd12d..9e6090217bd6 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -160,7 +160,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 	gc_th->max_sleep_time = DEF_GC_THREAD_MAX_SLEEP_TIME;
+ 	gc_th->no_gc_sleep_time = DEF_GC_THREAD_NOGC_SLEEP_TIME;
+ 
+-	gc_th->gc_wake= 0;
++	gc_th->gc_wake = 0;
+ 
+ 	sbi->gc_thread = gc_th;
+ 	init_waitqueue_head(&sbi->gc_thread->gc_wait_queue_head);
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 3eb724bb6594..fa57aee4dca7 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1391,7 +1391,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+ 		goto out_err;
+ 	}
+ page_hit:
+-	if(unlikely(nid != nid_of_node(page))) {
++	if (unlikely(nid != nid_of_node(page))) {
+ 		f2fs_warn(sbi, "inconsistent node block, nid:%lu, node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
+ 			  nid, nid_of_node(page), ino_of_node(page),
+ 			  ofs_of_node(page), cpver_of_node(page),
+@@ -1783,7 +1783,7 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+ out:
+ 	if (nwritten)
+ 		f2fs_submit_merged_write_cond(sbi, NULL, NULL, ino, NODE);
+-	return ret ? -EIO: 0;
++	return ret ? -EIO : 0;
+ }
+ 
+ static int f2fs_match_ino(struct inode *inode, unsigned long ino, void *data)
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index da75d5d52f0a..58f06c167e56 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -875,5 +875,5 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ #endif
+ 	sbi->sb->s_flags = s_flags; /* Restore SB_RDONLY status */
+ 
+-	return ret ? ret: err;
++	return ret ? ret : err;
+ }
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 01d4beb5d14f..c2cea533dfbe 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1787,7 +1787,7 @@ static int issue_discard_thread(void *data)
+ 		if (issued > 0) {
+ 			__wait_all_discard_cmd(sbi, &dpolicy);
+ 			wait_ms = dpolicy.min_interval;
+-		} else if (issued == -1){
++		} else if (issued == -1) {
+ 			wait_ms = f2fs_time_to_wait(sbi, DISCARD_TIME);
+ 			if (!wait_ms)
+ 				wait_ms = dpolicy.mid_interval;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index e673a064f006..2d948cc05997 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1892,7 +1892,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ 	ret = sync_filesystem(sbi->sb);
+ 	if (ret || err) {
+-		err = ret ? ret: err;
++		err = ret ? ret : err;
+ 		goto restore_flag;
+ 	}
+ 
+@@ -3757,7 +3757,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	sbi->iostat_period_ms = DEFAULT_IOSTAT_PERIOD_MS;
+ 
+ 	for (i = 0; i < NR_PAGE_TYPE; i++) {
+-		int n = (i == META) ? 1: NR_TEMP_TYPE;
++		int n = (i == META) ? 1 : NR_TEMP_TYPE;
+ 		int j;
+ 
+ 		sbi->write_io[i] =
+-- 
+2.25.1
 
-This spinlock should be 'static'.
-
-- Eric
 
 
 _______________________________________________
