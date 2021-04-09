@@ -2,73 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9C25359EDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Apr 2021 14:35:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 766E835A86D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Apr 2021 23:40:25 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lUqMK-00007F-Es; Fri, 09 Apr 2021 12:35:36 +0000
+	id 1lUyrQ-0008EL-0d; Fri, 09 Apr 2021 21:40:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lUqMH-00006a-N6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Apr 2021 12:35:34 +0000
+ (envelope-from <nickrterrell@gmail.com>)
+ id 1lUyrO-0008E2-3J; Fri, 09 Apr 2021 21:40:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IO5r/YpNZxf2AxYLwsEVWcXAOXGV8l//uk33xno7t/U=; b=X6kLUuCsjvRBpBBvmvxrakbyaR
- oXABWSR4CXtnu65PZRRrnVlluOwhuCopT6mae+9Ct6INPWZecuqNbKCUhYA9LCDtRP2hyeH9wBlPQ
- hwCbRnwGutwQnpxJxJ221btV6EU5M6bRo2xSwhyFH42TsGcQO365LpyV/AseywrQOwXU=;
+ bh=igC2s9eHHvVc1JNyahprDn2Otoq9m+ryYXPuVsdEl2M=; b=L3TRTbVPyPBb6T5UctqaHGboOg
+ 9mN/p0YAyttAyCYli7Hs7bOi58zbzEnjjOQPa3VspDdbqHhSMfJglUG3mLFAcxShIJkIDspdqnFWL
+ xcrpts1U0L0yDsUAjlpJrfxw2tWcffB4cLpTWWHbSGTZ/FLQ9F1IVUgH106sCc88gyyk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IO5r/YpNZxf2AxYLwsEVWcXAOXGV8l//uk33xno7t/U=; b=kgLUT+ajw25kQ4QncPeCPQCXBM
- m/TWJOLUAlNWW77/8QR22M1FnkbXLg36VjXHuzJbsO69g6TmEMAHTRT/rKSo772l5wXgvPP9ywvTl
- LhqaVmMOm1km9aumYDg0Tzt+KWAERvvF8gXJ4E1r00BrONVXDmObB8zi7sqHrVjKoZWE=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=igC2s9eHHvVc1JNyahprDn2Otoq9m+ryYXPuVsdEl2M=; b=DzduStlYQ2fu4ERpuqWKQ74pEf
+ oXPTLBN9LtpjXwGsB/23H8vxy0KSx1WZxrhCICmbxCQ4L+OnNfPz3Cwnq+ZM/oiAey/LVJoePdQHj
+ gT5EpQ8S89GJzNwAZIasaYn7syVktoyMqth5agDS3Ohr0Vu+tVr88SY3L8d03skS8l3Y=;
+Received: from mail-yb1-f174.google.com ([209.85.219.174])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lUqLq-0004fW-7W
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Apr 2021 12:35:31 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9118561105;
- Fri,  9 Apr 2021 12:35:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1617971700;
- bh=Mc+NSUTF4IqJ/3PxRUgxvqOc2WebweOfuiAvd6kgm6s=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=f38kEuvh0/2rHQuls8Kb7CHI9LAxtQjKXKgndtzweQkMDhapCFHs2/u7Np4s/Q+Ae
- WwqSc22/adEjNK1BG62dUXpLU3OBB/Xqv2IESuFoZoFXcpa1EpecoApQZkuI9XRh8N
- 3LfcSF9eCWFTtF7arUM4s1XhE8XyeTeHu7h8+pvID4dC1hlpaA93/jqO0dlED5y7YT
- N1/ssWVxTMcUZcgFhqmIimlsJEACxbj8IOLB/ag/KMU33wdSr9FVJ9MQZBhnvEdhiI
- d3nK5YRUBDowz18qwQtRQ9OkBA/JtjSI9H8KOfMwFW1OyhZhcNiIi93seX0PyTjXTl
- YqQHFs1vfrWRQ==
-Date: Fri, 9 Apr 2021 05:34:59 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YHBJ85/am9r6MjXm@google.com>
-References: <20210409034033.40937-1-jack.qiu@huawei.com>
- <5f6cd575-00e5-a830-470a-67654f0d2149@huawei.com>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lUyrA-0003VV-5O; Fri, 09 Apr 2021 21:40:13 +0000
+Received: by mail-yb1-f174.google.com with SMTP id k73so1845900ybf.3;
+ Fri, 09 Apr 2021 14:40:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=igC2s9eHHvVc1JNyahprDn2Otoq9m+ryYXPuVsdEl2M=;
+ b=YQmSwcaVOey8WqD3/a1u7CFaLwAXyy4Kii6QYOhxMCqjAIT/aJiDcewpZ5O5yrMP9j
+ 6lsCLfJqxVtdz1jZocgJAyRrwhIPyq4l88jcfXWGbtmaecVYNnmG7ZDsbvtvip8zvXVM
+ FXPHkf+sC5iUNcwsVzuT94UTbpzCQepi2ltQLF/KXz9wlvhRYk6g8a9zOjg3pih0Szx8
+ W0VuzIshXh6Ol1upym67N1x7ELzUXnqtRACAuri5Z185hbqZBcI3gKndM46G0VK5etyT
+ 1rggm961afAEivCEfXsNvoNkKO+9sHIQ7w+12n+wWNCCY77zq8AwWTa2nQkP0E5BrbfL
+ Yi6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=igC2s9eHHvVc1JNyahprDn2Otoq9m+ryYXPuVsdEl2M=;
+ b=YI+nvC+MBYSqEJ5UAX+g77h3spLUbCD6sdV18fPm9nk8Vt0OWK3UsZXsf2sqEJjDVo
+ 46JCbKho4po5jdXlQSdxeemJv1SpaCDsAyRO7OrDrOPki3wRmTiaOLBVu8mAXv4YzZKd
+ AsHFHehfUGQiJ5mgEYrh9C+e6Pg1JOIXT1IxINMgqb8n5oBK6dbWszF5iDKmSX+Odc5j
+ Wd08dypdWvoWDoowh2B6NSaJpjibxDF46A2e0XnEBo9009VH+V/pZHKvOEig4byiTRDc
+ rGZwOAU9nYnUV5cQwQFTNGiWOm9FfqRPUcVrllum/348AvOGFnGO8yfve89rON26QUUB
+ AsaA==
+X-Gm-Message-State: AOAM532mKI4E8yWdnKjEi2xxMhH/RPAf75wPTK9+dzA84iHQO7LsFM1r
+ YCFzTgwaeMYJFe3mx3uWnhIiYpvcpUd/AQLMValoBt0+BgY=
+X-Google-Smtp-Source: ABdhPJztvXQLhHNlqUpKiox+Km9XM6s3dtCoX63jqS/Fas7Mwkzj3mhdpJGI7kNsMWF2cn/PdCNMgD27FGIXcbEBT0U=
+X-Received: by 2002:a25:7109:: with SMTP id m9mr1346366ybc.274.1618004393458; 
+ Fri, 09 Apr 2021 14:39:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5f6cd575-00e5-a830-470a-67654f0d2149@huawei.com>
-X-Spam-Score: 0.0 (/)
+References: <20210330225112.496213-1-nickrterrell@gmail.com>
+In-Reply-To: <20210330225112.496213-1-nickrterrell@gmail.com>
+From: Nick Terrell <nickrterrell@gmail.com>
+Date: Fri, 9 Apr 2021 14:39:42 -0700
+Message-ID: <CANr2DbfL2B5Tx+k1AwVh-5dQZ+fNpucJKu9QVQat7QVvK-5AbQ@mail.gmail.com>
+To: Herbert Xu <herbert@gondor.apana.org.au>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (nickrterrell[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.219.174 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
-X-Headers-End: 1lUqLq-0004fW-7W
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: fix missing a blank line after
- declarations
+ for more information. [URIs: lkml.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.174 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1lUyrA-0003VV-5O
+Subject: Re: [f2fs-dev] [GIT PULL][PATCH v9 0/3] Update to zstd-1.4.10
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,369 +103,329 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: zhuangyi1@huawei.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: squashfs-devel@lists.sourceforge.net, Johannes Weiner <jweiner@fb.com>,
+ Christoph Hellwig <hch@infradead.org>, Yann Collet <cyan@fb.com>,
+ David Sterba <dsterba@suse.cz>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
+ Chris Mason <clm@fb.com>, Nick Terrell <terrelln@fb.com>,
+ linux-crypto@vger.kernel.org, Oleksandr Natalenko <oleksandr@natalenko.name>,
+ Kernel Team <Kernel-team@fb.com>,
+ =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ Niket Agarwal <niketa@fb.com>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hmm, can I combine all three clean-up patches into one? Any objection?
+What can I do to help get this merged?
 
-f2fs: fix missing a blank line after declarations
-f2fs: Fix inappropriate spaces
-f2fs: modify open brace '{' following function definitions
+Cristoph, is this new patch series with the kernel wrapper API satisfactory?
 
-Is there another clean-up in the queue? :(
+Best,
+Nick
 
-Thanks,
-
-On 04/09, Chao Yu wrote:
-> On 2021/4/9 11:40, Jack Qiu wrote:
-> > Made suggested modifications from checkpatch in reference to WARNING:
-> >   Missing a blank line after declarations
-> 
-> It's too trivial, and the old style may reappear again easily...
-> Anyway, I'm not against this if Jaegeuk want to merge it. :)
-> 
-> Thanks,
-> 
-> > 
-> > Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
-> > ---
-> >   fs/f2fs/acl.c        |  1 +
-> >   fs/f2fs/checkpoint.c |  1 +
-> >   fs/f2fs/data.c       |  2 ++
-> >   fs/f2fs/debug.c      |  3 +++
-> >   fs/f2fs/dir.c        |  1 +
-> >   fs/f2fs/gc.c         |  4 ++++
-> >   fs/f2fs/inode.c      |  1 +
-> >   fs/f2fs/namei.c      |  3 +++
-> >   fs/f2fs/node.c       |  4 +++-
-> >   fs/f2fs/recovery.c   |  1 +
-> >   fs/f2fs/segment.c    | 10 ++++++++++
-> >   fs/f2fs/super.c      |  1 +
-> >   fs/f2fs/xattr.c      |  1 +
-> >   13 files changed, 32 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/fs/f2fs/acl.c b/fs/f2fs/acl.c
-> > index 965037a9c205..239ad9453b99 100644
-> > --- a/fs/f2fs/acl.c
-> > +++ b/fs/f2fs/acl.c
-> > @@ -29,6 +29,7 @@ static inline size_t f2fs_acl_size(int count)
-> >   static inline int f2fs_acl_count(size_t size)
-> >   {
-> >   	ssize_t s;
-> > +
-> >   	size -= sizeof(struct f2fs_acl_header);
-> >   	s = size - 4 * sizeof(struct f2fs_acl_entry_short);
-> >   	if (s < 0) {
-> > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > index be5415a0dbbc..25486f2c49ca 100644
-> > --- a/fs/f2fs/checkpoint.c
-> > +++ b/fs/f2fs/checkpoint.c
-> > @@ -719,6 +719,7 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
-> >   		orphan_blk = (struct f2fs_orphan_block *)page_address(page);
-> >   		for (j = 0; j < le32_to_cpu(orphan_blk->entry_count); j++) {
-> >   			nid_t ino = le32_to_cpu(orphan_blk->ino[j]);
-> > +
-> >   			err = recover_orphan_inode(sbi, ino);
-> >   			if (err) {
-> >   				f2fs_put_page(page, 1);
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 3be2d6d8afa9..0854c383ff98 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -1086,6 +1086,7 @@ int f2fs_reserve_new_blocks(struct dnode_of_data *dn, blkcnt_t count)
-> > 
-> >   	for (; count > 0; dn->ofs_in_node++) {
-> >   		block_t blkaddr = f2fs_data_blkaddr(dn);
-> > +
-> >   		if (blkaddr == NULL_ADDR) {
-> >   			dn->data_blkaddr = NEW_ADDR;
-> >   			__set_data_blkaddr(dn);
-> > @@ -3755,6 +3756,7 @@ int f2fs_migrate_page(struct address_space *mapping,
-> > 
-> >   	if (atomic_written) {
-> >   		struct inmem_pages *cur;
-> > +
-> >   		list_for_each_entry(cur, &fi->inmem_pages, list)
-> >   			if (cur->page == page) {
-> >   				cur->page = newpage;
-> > diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-> > index 7007447714ee..4b08c290d4ff 100644
-> > --- a/fs/f2fs/debug.c
-> > +++ b/fs/f2fs/debug.c
-> > @@ -173,6 +173,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
-> >   	si->util_invalid = 50 - si->util_free - si->util_valid;
-> >   	for (i = CURSEG_HOT_DATA; i < NO_CHECK_TYPE; i++) {
-> >   		struct curseg_info *curseg = CURSEG_I(sbi, i);
-> > +
-> >   		si->curseg[i] = curseg->segno;
-> >   		si->cursec[i] = GET_SEC_FROM_SEG(sbi, curseg->segno);
-> >   		si->curzone[i] = GET_ZONE_FROM_SEC(sbi, si->cursec[i]);
-> > @@ -300,10 +301,12 @@ static void update_mem_info(struct f2fs_sb_info *sbi)
-> >   	si->page_mem = 0;
-> >   	if (sbi->node_inode) {
-> >   		unsigned npages = NODE_MAPPING(sbi)->nrpages;
-> > +
-> >   		si->page_mem += (unsigned long long)npages << PAGE_SHIFT;
-> >   	}
-> >   	if (sbi->meta_inode) {
-> >   		unsigned npages = META_MAPPING(sbi)->nrpages;
-> > +
-> >   		si->page_mem += (unsigned long long)npages << PAGE_SHIFT;
-> >   	}
-> >   }
-> > diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-> > index e6270a867be1..ebf65c5fac40 100644
-> > --- a/fs/f2fs/dir.c
-> > +++ b/fs/f2fs/dir.c
-> > @@ -473,6 +473,7 @@ void f2fs_set_link(struct inode *dir, struct f2fs_dir_entry *de,
-> >   		struct page *page, struct inode *inode)
-> >   {
-> >   	enum page_type type = f2fs_has_inline_dentry(dir) ? NODE : DATA;
-> > +
-> >   	lock_page(page);
-> >   	f2fs_wait_on_page_writeback(page, type, true, true);
-> >   	de->ino = cpu_to_le32(inode->i_ino);
-> > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> > index 74b0c3ea9cab..695347789e14 100644
-> > --- a/fs/f2fs/gc.c
-> > +++ b/fs/f2fs/gc.c
-> > @@ -162,6 +162,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
-> >   void f2fs_stop_gc_thread(struct f2fs_sb_info *sbi)
-> >   {
-> >   	struct f2fs_gc_kthread *gc_th = sbi->gc_thread;
-> > +
-> >   	if (!gc_th)
-> >   		return;
-> >   	kthread_stop(gc_th->f2fs_gc_task);
-> > @@ -828,6 +829,7 @@ static void add_gc_inode(struct gc_inode_list *gc_list, struct inode *inode)
-> >   static void put_gc_inode(struct gc_inode_list *gc_list)
-> >   {
-> >   	struct inode_entry *ie, *next_ie;
-> > +
-> >   	list_for_each_entry_safe(ie, next_ie, &gc_list->ilist, list) {
-> >   		radix_tree_delete(&gc_list->iroot, ie->inode->i_ino);
-> >   		iput(ie->inode);
-> > @@ -952,9 +954,11 @@ block_t f2fs_start_bidx_of_node(unsigned int node_ofs, struct inode *inode)
-> >   		bidx = node_ofs - 1;
-> >   	} else if (node_ofs <= indirect_blks) {
-> >   		int dec = (node_ofs - 4) / (NIDS_PER_BLOCK + 1);
-> > +
-> >   		bidx = node_ofs - 2 - dec;
-> >   	} else {
-> >   		int dec = (node_ofs - indirect_blks - 3) / (NIDS_PER_BLOCK + 1);
-> > +
-> >   		bidx = node_ofs - 5 - dec;
-> >   	}
-> >   	return bidx * ADDRS_PER_BLOCK(inode) + ADDRS_PER_INODE(inode);
-> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> > index 349d9cb933ee..a524a9ac2a72 100644
-> > --- a/fs/f2fs/inode.c
-> > +++ b/fs/f2fs/inode.c
-> > @@ -666,6 +666,7 @@ void f2fs_update_inode_page(struct inode *inode)
-> >   	node_page = f2fs_get_node_page(sbi, inode->i_ino);
-> >   	if (IS_ERR(node_page)) {
-> >   		int err = PTR_ERR(node_page);
-> > +
-> >   		if (err == -ENOMEM) {
-> >   			cond_resched();
-> >   			goto retry;
-> > diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> > index 17bd072a5d39..405d85dbf9f1 100644
-> > --- a/fs/f2fs/namei.c
-> > +++ b/fs/f2fs/namei.c
-> > @@ -419,6 +419,7 @@ struct dentry *f2fs_get_parent(struct dentry *child)
-> >   	struct qstr dotdot = QSTR_INIT("..", 2);
-> >   	struct page *page;
-> >   	unsigned long ino = f2fs_inode_by_name(d_inode(child), &dotdot, &page);
-> > +
-> >   	if (!ino) {
-> >   		if (IS_ERR(page))
-> >   			return ERR_CAST(page);
-> > @@ -628,6 +629,7 @@ static const char *f2fs_get_link(struct dentry *dentry,
-> >   				 struct delayed_call *done)
-> >   {
-> >   	const char *link = page_get_link(dentry, inode, done);
-> > +
-> >   	if (!IS_ERR(link) && !*link) {
-> >   		/* this is broken symlink case */
-> >   		do_delayed_call(done);
-> > @@ -766,6 +768,7 @@ static int f2fs_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
-> >   static int f2fs_rmdir(struct inode *dir, struct dentry *dentry)
-> >   {
-> >   	struct inode *inode = d_inode(dentry);
-> > +
-> >   	if (f2fs_empty_dir(inode))
-> >   		return f2fs_unlink(dir, dentry);
-> >   	return -ENOTEMPTY;
-> > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > index fc058060199e..56b326fec3bc 100644
-> > --- a/fs/f2fs/node.c
-> > +++ b/fs/f2fs/node.c
-> > @@ -462,6 +462,7 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
-> >   	/* increment version no as node is removed */
-> >   	if (nat_get_blkaddr(e) != NEW_ADDR && new_blkaddr == NULL_ADDR) {
-> >   		unsigned char version = nat_get_version(e);
-> > +
-> >   		nat_set_version(e, inc_node_version(version));
-> >   	}
-> > 
-> > @@ -2117,8 +2118,8 @@ static int __insert_free_nid(struct f2fs_sb_info *sbi,
-> >   				struct free_nid *i)
-> >   {
-> >   	struct f2fs_nm_info *nm_i = NM_I(sbi);
-> > -
-> >   	int err = radix_tree_insert(&nm_i->free_nid_root, i->nid, i);
-> > +
-> >   	if (err)
-> >   		return err;
-> > 
-> > @@ -2980,6 +2981,7 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
-> >   	while ((found = __gang_lookup_nat_set(nm_i,
-> >   					set_idx, SETVEC_SIZE, setvec))) {
-> >   		unsigned idx;
-> > +
-> >   		set_idx = setvec[found - 1]->set + 1;
-> >   		for (idx = 0; idx < found; idx++)
-> >   			__adjust_nat_entry_set(setvec[idx], &sets,
-> > diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-> > index 58f06c167e56..422146c6d866 100644
-> > --- a/fs/f2fs/recovery.c
-> > +++ b/fs/f2fs/recovery.c
-> > @@ -458,6 +458,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
-> >   	/* Get the previous summary */
-> >   	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
-> >   		struct curseg_info *curseg = CURSEG_I(sbi, i);
-> > +
-> >   		if (curseg->segno == segno) {
-> >   			sum = curseg->sum_blk->entries[blkoff];
-> >   			goto got_it;
-> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> > index c2866561263e..85c1a25d7a83 100644
-> > --- a/fs/f2fs/segment.c
-> > +++ b/fs/f2fs/segment.c
-> > @@ -2142,6 +2142,7 @@ static void __set_sit_entry_type(struct f2fs_sb_info *sbi, int type,
-> >   					unsigned int segno, int modified)
-> >   {
-> >   	struct seg_entry *se = get_seg_entry(sbi, segno);
-> > +
-> >   	se->type = type;
-> >   	if (modified)
-> >   		__mark_sit_entry_dirty(sbi, segno);
-> > @@ -2333,6 +2334,7 @@ static void __add_sum_entry(struct f2fs_sb_info *sbi, int type,
-> >   {
-> >   	struct curseg_info *curseg = CURSEG_I(sbi, type);
-> >   	void *addr = curseg->sum_blk;
-> > +
-> >   	addr += curseg->next_blkoff * sizeof(struct f2fs_summary);
-> >   	memcpy(addr, sum, sizeof(struct f2fs_summary));
-> >   }
-> > @@ -3717,6 +3719,7 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
-> > 
-> >   		for (j = 0; j < blk_off; j++) {
-> >   			struct f2fs_summary *s;
-> > +
-> >   			s = (struct f2fs_summary *)(kaddr + offset);
-> >   			seg_i->sum_blk->entries[j] = *s;
-> >   			offset += SUMMARY_SIZE;
-> > @@ -3779,6 +3782,7 @@ static int read_normal_summaries(struct f2fs_sb_info *sbi, int type)
-> >   		if (__exist_node_summaries(sbi)) {
-> >   			struct f2fs_summary *ns = &sum->entries[0];
-> >   			int i;
-> > +
-> >   			for (i = 0; i < sbi->blocks_per_seg; i++, ns++) {
-> >   				ns->version = 0;
-> >   				ns->ofs_in_node = 0;
-> > @@ -3880,6 +3884,7 @@ static void write_compacted_summaries(struct f2fs_sb_info *sbi, block_t blkaddr)
-> >   	/* Step 3: write summary entries */
-> >   	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
-> >   		unsigned short blkoff;
-> > +
-> >   		seg_i = CURSEG_I(sbi, i);
-> >   		if (sbi->ckpt->alloc_type[i] == SSR)
-> >   			blkoff = sbi->blocks_per_seg;
-> > @@ -3916,6 +3921,7 @@ static void write_normal_summaries(struct f2fs_sb_info *sbi,
-> >   					block_t blkaddr, int type)
-> >   {
-> >   	int i, end;
-> > +
-> >   	if (IS_DATASEG(type))
-> >   		end = type + NR_CURSEG_DATA_TYPE;
-> >   	else
-> > @@ -4499,6 +4505,7 @@ static void init_free_segmap(struct f2fs_sb_info *sbi)
-> >   	/* set use the current segments */
-> >   	for (type = CURSEG_HOT_DATA; type <= CURSEG_COLD_NODE; type++) {
-> >   		struct curseg_info *curseg_t = CURSEG_I(sbi, type);
-> > +
-> >   		__set_test_and_inuse(sbi, curseg_t->segno);
-> >   	}
-> >   }
-> > @@ -4849,6 +4856,7 @@ struct check_zone_write_pointer_args {
-> >   static int check_zone_write_pointer_cb(struct blk_zone *zone, unsigned int idx,
-> >   				      void *data) {
-> >   	struct check_zone_write_pointer_args *args;
-> > +
-> >   	args = (struct check_zone_write_pointer_args *)data;
-> > 
-> >   	return check_zone_write_pointer(args->sbi, args->fdev, zone);
-> > @@ -5127,6 +5135,7 @@ static void discard_dirty_segmap(struct f2fs_sb_info *sbi,
-> >   static void destroy_victim_secmap(struct f2fs_sb_info *sbi)
-> >   {
-> >   	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
-> > +
-> >   	kvfree(dirty_i->victim_secmap);
-> >   }
-> > 
-> > @@ -5171,6 +5180,7 @@ static void destroy_curseg(struct f2fs_sb_info *sbi)
-> >   static void destroy_free_segmap(struct f2fs_sb_info *sbi)
-> >   {
-> >   	struct free_segmap_info *free_i = SM_I(sbi)->free_info;
-> > +
-> >   	if (!free_i)
-> >   		return;
-> >   	SM_I(sbi)->free_info = NULL;
-> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > index 864916fe1d0d..e203b2540128 100644
-> > --- a/fs/f2fs/super.c
-> > +++ b/fs/f2fs/super.c
-> > @@ -555,6 +555,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
-> > 
-> >   	while ((p = strsep(&options, ",")) != NULL) {
-> >   		int token;
-> > +
-> >   		if (!*p)
-> >   			continue;
-> >   		/*
-> > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-> > index 490f843ec3bf..c8f34decbf8e 100644
-> > --- a/fs/f2fs/xattr.c
-> > +++ b/fs/f2fs/xattr.c
-> > @@ -488,6 +488,7 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
-> >   		f2fs_wait_on_page_writeback(xpage, NODE, true, true);
-> >   	} else {
-> >   		struct dnode_of_data dn;
-> > +
-> >   		set_new_dnode(&dn, inode, NULL, NULL, new_nid);
-> >   		xpage = f2fs_new_node_page(&dn, XATTR_NODE_OFFSET);
-> >   		if (IS_ERR(xpage)) {
-> > --
-> > 2.17.1
-> > 
-> > 
-> > 
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > .
-> > 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+On Tue, Mar 30, 2021 at 3:45 PM Nick Terrell <nickrterrell@gmail.com> wrote:
+>
+> From: Nick Terrell <terrelln@fb.com>
+>
+> Please pull from
+>
+>   git@github.com:terrelln/linux.git tags/v9-zstd-1.4.10
+>
+> to get these changes. Alternatively the patchset is included.
+>
+> This patchset upgrades the zstd library to the latest upstream release. The
+> current zstd version in the kernel is a modified version of upstream zstd-1.3.1.
+> At the time it was integrated, zstd wasn't ready to be used in the kernel as-is.
+> But, it is now possible to use upstream zstd directly in the kernel.
+>
+> I have not yet released zstd-1.4.10 upstream. I want the zstd version in the
+> kernel to match up with a known upstream release, so we know exactly what code
+> is running. Whenever this patchset is ready for merge, I will cut a release at
+> the upstream commit that gets merged. This should not be necessary for future
+> releases.
+>
+> The kernel zstd library is automatically generated from upstream zstd. A script
+> makes the necessary changes and imports it into the kernel. The changes are:
+>
+> 1. Replace all libc dependencies with kernel replacements and rewrite includes.
+> 2. Remove unncessary portability macros like: #if defined(_MSC_VER).
+> 3. Use the kernel xxhash instead of bundling it.
+>
+> This automation gets tested every commit by upstream's continuous integration.
+> When we cut a new zstd release, we will submit a patch to the kernel to update
+> the zstd version in the kernel.
+>
+> I've updated zstd to upstream with one big patch because every commit must build,
+> so that precludes partial updates. Since the commit is 100% generated, I hope the
+> review burden is lightened. I considered replaying upstream commits, but that is
+> not possible because there have been ~3500 upstream commits since the last zstd
+> import, and the commits don't all build individually. The bulk update preserves
+> bisectablity because bugs can be bisected to the zstd version update. At that
+> point the update can be reverted, and we can work with upstream to find and fix
+> the bug. After this big switch in how the kernel consumes zstd, future patches
+> will be smaller, because they will only have one upstream release worth of
+> changes each.
+>
+> This patchset adds a new kernel-style wrapper around zstd. This wrapper API is
+> functionally equivalent to the subset of the current zstd API that is currently
+> used. The wrapper API changes to be kernel style so that the symbols don't
+> collide with zstd's symbols. The update to zstd-1.4.6 maintains the same API
+> and preserves the semantics, so that none of the callers need to be updated.
+>
+> This patchset comes in 2 parts:
+> 1. The first 2 patches prepare for the zstd upgrade. The first patch adds the
+>    new kernel style API so zstd can be upgraded without modifying any callers.
+>    The second patch adds an indirection for the lib/decompress_unzstd.c
+>    including of all decompression source files.
+> 2. Import zstd-1.4.10. This patch is completely generated from upstream using
+>    automated tooling.
+>
+> I tested every caller of zstd on x86_64. I tested both after the 1.4.10 upgrade
+> using the compatibility wrapper, and after the final patch in this series.
+>
+> I tested kernel and initramfs decompression in i386 and arm.
+>
+> I ran benchmarks to compare the current zstd in the kernel with zstd-1.4.6.
+> I benchmarked on x86_64 using QEMU with KVM enabled on an Intel i9-9900k.
+> I found:
+> * BtrFS zstd compression at levels 1 and 3 is 5% faster
+> * BtrFS zstd decompression+read is 15% faster
+> * SquashFS zstd decompression+read is 15% faster
+> * F2FS zstd compression+write at level 3 is 8% faster
+> * F2FS zstd decompression+read is 20% faster
+> * ZRAM decompression+read is 30% faster
+> * Kernel zstd decompression is 35% faster
+> * Initramfs zstd decompression+build is 5% faster
+>
+> The latest zstd also offers bug fixes. For example the problem with large kernel
+> decompression has been fixed upstream for over 2 years
+> https://lkml.org/lkml/2020/9/29/27.
+>
+> Please let me know if there is anything that I can do to ease the way for these
+> patches. I think it is important because it gets large performance improvements,
+> contains bug fixes, and is switching to a more maintainable model of consuming
+> upstream zstd directly, making it easy to keep up to date.
+>
+> Best,
+> Nick Terrell
+>
+> v1 -> v2:
+> * Successfully tested F2FS with help from Chao Yu to fix my test.
+> * (1/9) Fix ZSTD_initCStream() wrapper to handle pledged_src_size=0 means unknown.
+>   This fixes F2FS with the zstd-1.4.6 compatibility wrapper, exposed by the test.
+>
+> v2 -> v3:
+> * (3/9) Silence warnings by Kernel Test Robot:
+>   https://github.com/facebook/zstd/pull/2324
+>   Stack size warnings remain, but these aren't new, and the functions it warns on
+>   are either unused or not in the maximum stack path. This patchset reduces zstd
+>   compression stack usage by 1 KB overall. I've gotten the low hanging fruit, and
+>   more stack reduction would require significant changes that have the potential
+>   to introduce new bugs. However, I do hope to continue to reduce zstd stack
+>   usage in future versions.
+>
+> v3 -> v4:
+> * (3/9) Fix errors and warnings reported by Kernel Test Robot:
+>   https://github.com/facebook/zstd/pull/2326
+>   - Replace mem.h with a custom kernel implementation that matches the current
+>     lib/zstd/mem.h in the kernel. This avoids calls to __builtin_bswap*() which
+>     don't work on certain architectures, as exposed by the Kernel Test Robot.
+>   - Remove ASAN/MSAN (un)poisoning code which doesn't work in the kernel, as
+>     exposed by the Kernel Test Robot.
+>   - I've fixed all of the valid cppcheck warnings reported, but there were many
+>     false positives, where cppcheck was incorrectly analyzing the situation,
+>     which I did not fix. I don't believe it is reasonable to expect that upstream
+>     zstd silences all the static analyzer false positives. Upstream zstd uses
+>     clang scan-build for its static analysis. We find that supporting multiple
+>     static analysis tools multiplies the burden of silencing false positives,
+>     without providing enough marginal value over running a single static analysis
+>     tool.
+>
+> v4 -> v5:
+> * Rebase onto v5.10-rc2
+> * (6/9) Merge with other F2FS changes (no functional change in patch).
+>
+> v5 -> v6:
+> * Rebase onto v5.10-rc6.
+> * Switch to using a kernel style wrapper API as suggested by Cristoph.
+>
+> v6 -> v7:
+> * Expose the upstream library header as `include/linux/zstd_lib.h`.
+>   Instead of creating new structs mirroring the upstream zstd structs
+>   use upstream's structs directly with a typedef to get a kernel style name.
+>   This removes the memcpy cruft.
+> * (1/3) Undo ZSTD_WINDOWLOG_MAX and handle_zstd_error changes.
+> * (3/3) Expose zstd_errors.h as `include/linux/zstd_errors.h` because it
+>   is needed by the kernel wrapper API.
+>
+> v7 -> v8:
+> * (1/3) Fix typo in EXPORT_SYMBOL().
+> * (1/3) Fix typo in zstd.h comments.
+> * (3/3) Update to latest zstd release: 1.4.6 -> 1.4.10
+>         This includes ~1KB of stack space reductions.
+>
+> v8 -> v9:
+> * (1/3) Rebase onto v5.12-rc5
+> * (1/3) Add zstd_min_clevel() & zstd_max_clevel() and use in f2fs.
+>         Thanks to Oleksandr Natalenko for spotting it!
+> * (1/3) Move lib/decompress_unzstd.c usage of ZSTD_getErrorCode()
+>         to zstd_get_error_code().
+> * (1/3) Update modified zstd headers to yearless copyright.
+> * (2/3) Add copyright/license header to decompress_sources.h for consistency.
+> * (3/3) Update to yearless copyright for all zstd files. Thanks to
+>         Mike Dolan for spotting it!
+>
+> Nick Terrell (3):
+>   lib: zstd: Add kernel-specific API
+>   lib: zstd: Add decompress_sources.h for decompress_unzstd
+>   lib: zstd: Upgrade to latest upstream zstd version 1.4.10
+>
+>  crypto/zstd.c                                 |   28 +-
+>  fs/btrfs/zstd.c                               |   68 +-
+>  fs/f2fs/compress.c                            |   56 +-
+>  fs/f2fs/super.c                               |    2 +-
+>  fs/pstore/platform.c                          |    2 +-
+>  fs/squashfs/zstd_wrapper.c                    |   16 +-
+>  include/linux/zstd.h                          | 1252 +---
+>  include/linux/zstd_errors.h                   |   77 +
+>  include/linux/zstd_lib.h                      | 2432 ++++++++
+>  lib/decompress_unzstd.c                       |   48 +-
+>  lib/zstd/Makefile                             |   44 +-
+>  lib/zstd/bitstream.h                          |  380 --
+>  lib/zstd/common/bitstream.h                   |  437 ++
+>  lib/zstd/common/compiler.h                    |  151 +
+>  lib/zstd/common/cpu.h                         |  194 +
+>  lib/zstd/common/debug.c                       |   24 +
+>  lib/zstd/common/debug.h                       |  101 +
+>  lib/zstd/common/entropy_common.c              |  357 ++
+>  lib/zstd/common/error_private.c               |   56 +
+>  lib/zstd/common/error_private.h               |   66 +
+>  lib/zstd/common/fse.h                         |  710 +++
+>  lib/zstd/common/fse_decompress.c              |  390 ++
+>  lib/zstd/common/huf.h                         |  356 ++
+>  lib/zstd/common/mem.h                         |  259 +
+>  lib/zstd/common/zstd_common.c                 |   83 +
+>  lib/zstd/common/zstd_deps.h                   |  125 +
+>  lib/zstd/common/zstd_internal.h               |  450 ++
+>  lib/zstd/compress.c                           | 3485 -----------
+>  lib/zstd/compress/fse_compress.c              |  625 ++
+>  lib/zstd/compress/hist.c                      |  165 +
+>  lib/zstd/compress/hist.h                      |   75 +
+>  lib/zstd/compress/huf_compress.c              |  902 +++
+>  lib/zstd/compress/zstd_compress.c             | 5105 +++++++++++++++++
+>  lib/zstd/compress/zstd_compress_internal.h    | 1188 ++++
+>  lib/zstd/compress/zstd_compress_literals.c    |  158 +
+>  lib/zstd/compress/zstd_compress_literals.h    |   29 +
+>  lib/zstd/compress/zstd_compress_sequences.c   |  439 ++
+>  lib/zstd/compress/zstd_compress_sequences.h   |   54 +
+>  lib/zstd/compress/zstd_compress_superblock.c  |  850 +++
+>  lib/zstd/compress/zstd_compress_superblock.h  |   32 +
+>  lib/zstd/compress/zstd_cwksp.h                |  482 ++
+>  lib/zstd/compress/zstd_double_fast.c          |  521 ++
+>  lib/zstd/compress/zstd_double_fast.h          |   32 +
+>  lib/zstd/compress/zstd_fast.c                 |  496 ++
+>  lib/zstd/compress/zstd_fast.h                 |   31 +
+>  lib/zstd/compress/zstd_lazy.c                 | 1412 +++++
+>  lib/zstd/compress/zstd_lazy.h                 |   81 +
+>  lib/zstd/compress/zstd_ldm.c                  |  686 +++
+>  lib/zstd/compress/zstd_ldm.h                  |  110 +
+>  lib/zstd/compress/zstd_ldm_geartab.h          |  103 +
+>  lib/zstd/compress/zstd_opt.c                  | 1345 +++++
+>  lib/zstd/compress/zstd_opt.h                  |   50 +
+>  lib/zstd/decompress.c                         | 2531 --------
+>  lib/zstd/decompress/huf_decompress.c          | 1206 ++++
+>  lib/zstd/decompress/zstd_ddict.c              |  241 +
+>  lib/zstd/decompress/zstd_ddict.h              |   44 +
+>  lib/zstd/decompress/zstd_decompress.c         | 2075 +++++++
+>  lib/zstd/decompress/zstd_decompress_block.c   | 1540 +++++
+>  lib/zstd/decompress/zstd_decompress_block.h   |   62 +
+>  .../decompress/zstd_decompress_internal.h     |  202 +
+>  lib/zstd/decompress_sources.h                 |   28 +
+>  lib/zstd/entropy_common.c                     |  243 -
+>  lib/zstd/error_private.h                      |   53 -
+>  lib/zstd/fse.h                                |  575 --
+>  lib/zstd/fse_compress.c                       |  795 ---
+>  lib/zstd/fse_decompress.c                     |  325 --
+>  lib/zstd/huf.h                                |  212 -
+>  lib/zstd/huf_compress.c                       |  773 ---
+>  lib/zstd/huf_decompress.c                     |  960 ----
+>  lib/zstd/mem.h                                |  151 -
+>  lib/zstd/zstd_common.c                        |   75 -
+>  lib/zstd/zstd_compress_module.c               |  124 +
+>  lib/zstd/zstd_decompress_module.c             |  105 +
+>  lib/zstd/zstd_internal.h                      |  273 -
+>  lib/zstd/zstd_opt.h                           | 1014 ----
+>  75 files changed, 27287 insertions(+), 12940 deletions(-)
+>  create mode 100644 include/linux/zstd_errors.h
+>  create mode 100644 include/linux/zstd_lib.h
+>  delete mode 100644 lib/zstd/bitstream.h
+>  create mode 100644 lib/zstd/common/bitstream.h
+>  create mode 100644 lib/zstd/common/compiler.h
+>  create mode 100644 lib/zstd/common/cpu.h
+>  create mode 100644 lib/zstd/common/debug.c
+>  create mode 100644 lib/zstd/common/debug.h
+>  create mode 100644 lib/zstd/common/entropy_common.c
+>  create mode 100644 lib/zstd/common/error_private.c
+>  create mode 100644 lib/zstd/common/error_private.h
+>  create mode 100644 lib/zstd/common/fse.h
+>  create mode 100644 lib/zstd/common/fse_decompress.c
+>  create mode 100644 lib/zstd/common/huf.h
+>  create mode 100644 lib/zstd/common/mem.h
+>  create mode 100644 lib/zstd/common/zstd_common.c
+>  create mode 100644 lib/zstd/common/zstd_deps.h
+>  create mode 100644 lib/zstd/common/zstd_internal.h
+>  delete mode 100644 lib/zstd/compress.c
+>  create mode 100644 lib/zstd/compress/fse_compress.c
+>  create mode 100644 lib/zstd/compress/hist.c
+>  create mode 100644 lib/zstd/compress/hist.h
+>  create mode 100644 lib/zstd/compress/huf_compress.c
+>  create mode 100644 lib/zstd/compress/zstd_compress.c
+>  create mode 100644 lib/zstd/compress/zstd_compress_internal.h
+>  create mode 100644 lib/zstd/compress/zstd_compress_literals.c
+>  create mode 100644 lib/zstd/compress/zstd_compress_literals.h
+>  create mode 100644 lib/zstd/compress/zstd_compress_sequences.c
+>  create mode 100644 lib/zstd/compress/zstd_compress_sequences.h
+>  create mode 100644 lib/zstd/compress/zstd_compress_superblock.c
+>  create mode 100644 lib/zstd/compress/zstd_compress_superblock.h
+>  create mode 100644 lib/zstd/compress/zstd_cwksp.h
+>  create mode 100644 lib/zstd/compress/zstd_double_fast.c
+>  create mode 100644 lib/zstd/compress/zstd_double_fast.h
+>  create mode 100644 lib/zstd/compress/zstd_fast.c
+>  create mode 100644 lib/zstd/compress/zstd_fast.h
+>  create mode 100644 lib/zstd/compress/zstd_lazy.c
+>  create mode 100644 lib/zstd/compress/zstd_lazy.h
+>  create mode 100644 lib/zstd/compress/zstd_ldm.c
+>  create mode 100644 lib/zstd/compress/zstd_ldm.h
+>  create mode 100644 lib/zstd/compress/zstd_ldm_geartab.h
+>  create mode 100644 lib/zstd/compress/zstd_opt.c
+>  create mode 100644 lib/zstd/compress/zstd_opt.h
+>  delete mode 100644 lib/zstd/decompress.c
+>  create mode 100644 lib/zstd/decompress/huf_decompress.c
+>  create mode 100644 lib/zstd/decompress/zstd_ddict.c
+>  create mode 100644 lib/zstd/decompress/zstd_ddict.h
+>  create mode 100644 lib/zstd/decompress/zstd_decompress.c
+>  create mode 100644 lib/zstd/decompress/zstd_decompress_block.c
+>  create mode 100644 lib/zstd/decompress/zstd_decompress_block.h
+>  create mode 100644 lib/zstd/decompress/zstd_decompress_internal.h
+>  create mode 100644 lib/zstd/decompress_sources.h
+>  delete mode 100644 lib/zstd/entropy_common.c
+>  delete mode 100644 lib/zstd/error_private.h
+>  delete mode 100644 lib/zstd/fse.h
+>  delete mode 100644 lib/zstd/fse_compress.c
+>  delete mode 100644 lib/zstd/fse_decompress.c
+>  delete mode 100644 lib/zstd/huf.h
+>  delete mode 100644 lib/zstd/huf_compress.c
+>  delete mode 100644 lib/zstd/huf_decompress.c
+>  delete mode 100644 lib/zstd/mem.h
+>  delete mode 100644 lib/zstd/zstd_common.c
+>  create mode 100644 lib/zstd/zstd_compress_module.c
+>  create mode 100644 lib/zstd/zstd_decompress_module.c
+>  delete mode 100644 lib/zstd/zstd_internal.h
+>  delete mode 100644 lib/zstd/zstd_opt.h
+>
+> --
+> 2.31.0
+>
 
 
 _______________________________________________
