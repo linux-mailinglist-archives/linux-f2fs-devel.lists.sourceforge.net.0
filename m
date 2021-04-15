@@ -2,74 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43C8735FFA1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Apr 2021 03:32:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BFC235FFBD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Apr 2021 03:56:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lWqrp-0000l0-1V; Thu, 15 Apr 2021 01:32:25 +0000
+	id 1lWrFB-0000a4-8G; Thu, 15 Apr 2021 01:56:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lWqrn-0000kj-Dn
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Apr 2021 01:32:23 +0000
+ (envelope-from <changfengnan@vivo.com>) id 1lWrF9-0000Zx-Qx
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Apr 2021 01:56:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+6rOsBXZAESM5i6bJ0IPP2w3gpfgR8GqZJYJ0pkiReM=; b=jccHkpk7XdJw+kl87vZ/+GFdZS
- hqFeGoUZGqKSJ0dWkYHC6dxQPcmBP1ohFsbjqU/l83GGOhw7aIpemn89esNtAcpHQvfcoLjQyNiKr
- ZrZ+gkOgU7QUqx3kDkX9K7Ujj/tRTp6VYuPjGjwYoGbsx5FMUbKaoTy6GJ7tX8TpRBQs=;
+ bh=ja++wbRWbrFxu+Ls4dEd/fpPNgoyWibGyM0mqdv1vj0=; b=K4XrbCU0pqgCa/oW0Nv5cyGLWt
+ 0zdyZ7hEVTj7zOQZ4P5cVVWXlLqvPEHvM+2ffsFn0ul3B+rh7coJ++C6xJQb4eV/o3S5I65JlVmlL
+ 6VnZ9brNVtjvlC2UdyWURiXLmWGaItczHLjmEBxwN+lmqYa7AUCDKqsP4C9DcuIw+rRA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+6rOsBXZAESM5i6bJ0IPP2w3gpfgR8GqZJYJ0pkiReM=; b=hbd5p1CNqZQTGQKf6cz5NW4dpq
- oXQRb2Nw6Ruq0EV+H5WRo76q1+nBCZ3ESCitq+5um4Dhs1ASQhgtWMtDl0dGz/T61nLC7Z23G5lv3
- QqUt1G++U7igMsB44SR1daa4ReeglZMqiSbD/GX6Hdj2DMNaoQFrhG/5bbY1+TCo8hRk=;
-Received: from szxga05-in.huawei.com ([45.249.212.191])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lWqrd-006e1k-Sc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Apr 2021 01:32:23 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4FLMFK2KYBzPqH5;
- Thu, 15 Apr 2021 09:29:09 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Thu, 15 Apr
- 2021 09:31:57 +0800
-To: Fengnan Chang <changfengnan@vivo.com>
+ bh=ja++wbRWbrFxu+Ls4dEd/fpPNgoyWibGyM0mqdv1vj0=; b=NEE5zB+qeVyf0H/oIiPVajFGX6
+ l5hJuuBBc23+WyBSsgvROHIlNCNpYhdbDCsGxWbBrSscbzdoZpPmYpUzN0g5I9NfjVaEzP8cLi7e3
+ G7qIGFF4esIF+MJbeInNngK5vIrVjZ5MXHDohe9iblY/l8PpizO84GANlkRQ8tedBzOw=;
+Received: from mail-m118208.qiye.163.com ([115.236.118.208])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lWrF1-00006u-Lb
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 15 Apr 2021 01:56:32 +0000
+Received: from SZ11126892 (unknown [58.251.74.232])
+ by mail-m118208.qiye.163.com (Hmail) with ESMTPA id 4B900E0432;
+ Thu, 15 Apr 2021 09:56:15 +0800 (CST)
+From: <changfengnan@vivo.com>
+To: "'Chao Yu'" <yuchao0@huawei.com>
 References: <20210414094716.884-1-changfengnan@vivo.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <1afb380c-b527-3deb-bdc5-e6aa9055d203@huawei.com>
-Date: Thu, 15 Apr 2021 09:31:57 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ <1afb380c-b527-3deb-bdc5-e6aa9055d203@huawei.com>
+In-Reply-To: <1afb380c-b527-3deb-bdc5-e6aa9055d203@huawei.com>
+Date: Thu, 15 Apr 2021 09:56:14 +0800
+Message-ID: <003601d7319a$84e34350$8ea9c9f0$@vivo.com>
 MIME-Version: 1.0
-In-Reply-To: <20210414094716.884-1-changfengnan@vivo.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQHAFgmIE3t6O0ng4400Sms8OfuhjAINbr8iqtKdXRA=
+Content-Language: zh-cn
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+ oVCBIfWUFZGRgfQ1ZLHxpIQ0lPQ0oZQ0tVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
+ 9ISFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PUk6SAw5Iz8TQxMZCT1NGkM3
+ KgwwCkJVSlVKTUpDT05KTExMS0pJVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
+ WU5DVUlOSlVMT1VJSElZV1kIAVlBQ0tNSTcG
+X-HM-Tid: 0a78d33e3fda2c17kusn4b900e0432
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: vivo.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.191 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [115.236.118.208 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lWqrd-006e1k-Sc
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: add no compress extensions support
+ 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
+X-Headers-End: 1lWrF1-00006u-Lb
+Subject: [f2fs-dev] =?gb2312?b?tPC4tDogIFtSRkMgUEFUQ0hdIGYyZnM6IGFkZCBu?=
+	=?gb2312?b?byBjb21wcmVzcyBleHRlbnNpb25zIHN1cHBvcnQ=?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,178 +85,121 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Fengnan,
-
-On 2021/4/14 17:47, Fengnan Chang wrote:
-> When we create a directory with enable compression, all file write into
-> directory will try to compress.But sometimes we may know, new file cannot
-> meet compression ratio requirements.
-> We need a nocompress extension to skip those files to avoid unnecessary
-> compress page test.
-
-Could you please elaborate your detail usage scenario? something like in
-which directory, what kind of specified extension do you want to disable?
-
-It's a bit complicated for below cases:
-compress_extension = "abc" and nocompress_extension = "abc" or
-compress_extension = "*" and nocompress_extension = "abc" or
-compress_extension = "abc" and nocompress_extension = "*"
-
-Thanks,
-
-> 
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-> ---
->   fs/f2fs/f2fs.h  |  2 ++
->   fs/f2fs/namei.c | 12 +++++++++++-
->   fs/f2fs/super.c | 35 +++++++++++++++++++++++++++++++++--
->   3 files changed, 46 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 87d734f5589d..3d5d28a2568f 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -150,8 +150,10 @@ struct f2fs_mount_info {
->   	unsigned char compress_level;		/* compress level */
->   	bool compress_chksum;			/* compressed data chksum */
->   	unsigned char compress_ext_cnt;		/* extension count */
-> +	unsigned char nocompress_ext_cnt;		/* nocompress extension count */
->   	int compress_mode;			/* compression mode */
->   	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
-> +	unsigned char noextensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN]; /* extensions */
->   };
-> 
->   #define F2FS_FEATURE_ENCRYPT		0x0001
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index 405d85dbf9f1..09b76a7f048a 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -280,15 +280,25 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
->   {
->   	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
->   	unsigned char (*ext)[F2FS_EXTENSION_LEN];
-> +	unsigned char (*noext)[F2FS_EXTENSION_LEN];
->   	unsigned int ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
-> +	unsigned int noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
->   	int i, cold_count, hot_count;
-> 
->   	if (!f2fs_sb_has_compression(sbi) ||
-> -			is_inode_flag_set(inode, FI_COMPRESSED_FILE) ||
->   			F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
->   			!f2fs_may_compress(inode))
->   		return;
-> 
-> +	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE)) {
-> +		noext = F2FS_OPTION(sbi).noextensions;
-> +		for (i = 0; i < noext_cnt; i++) {
-> +			if (is_extension_exist(name, noext[i]))
-> +				f2fs_disable_compressed_file(inode);
-> +		}
-> +		return;
-> +	}
-> +
->   	down_read(&sbi->sb_lock);
-> 
->   	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 5020152aa8fc..b5a9ba8ea869 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -153,6 +153,7 @@ enum {
->   	Opt_atgc,
->   	Opt_gc_merge,
->   	Opt_nogc_merge,
-> +	Opt_nocompress_extension,
->   	Opt_err,
->   };
-> 
-> @@ -227,6 +228,7 @@ static match_table_t f2fs_tokens = {
->   	{Opt_atgc, "atgc"},
->   	{Opt_gc_merge, "gc_merge"},
->   	{Opt_nogc_merge, "nogc_merge"},
-> +	{Opt_nocompress_extension, "nocompress_extension=%s"},
->   	{Opt_err, NULL},
->   };
-> 
-> @@ -546,7 +548,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   	substring_t args[MAX_OPT_ARGS];
->   #ifdef CONFIG_F2FS_FS_COMPRESSION
->   	unsigned char (*ext)[F2FS_EXTENSION_LEN];
-> -	int ext_cnt;
-> +	unsigned char (*noext)[F2FS_EXTENSION_LEN];
-> +	int ext_cnt, noext_cnt;
->   #endif
->   	char *p, *name;
->   	int arg = 0;
-> @@ -1049,6 +1052,30 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   			F2FS_OPTION(sbi).compress_ext_cnt++;
->   			kfree(name);
->   			break;
-> +		case Opt_nocompress_extension:
-> +			if (!f2fs_sb_has_compression(sbi)) {
-> +				f2fs_info(sbi, "Image doesn't support compression");
-> +				break;
-> +			}
-> +			name = match_strdup(&args[0]);
-> +			if (!name)
-> +				return -ENOMEM;
-> +
-> +			noext = F2FS_OPTION(sbi).noextensions;
-> +			noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
-> +
-> +			if (strlen(name) >= F2FS_EXTENSION_LEN ||
-> +				noext_cnt >= COMPRESS_EXT_NUM) {
-> +				f2fs_err(sbi,
-> +					"invalid extension length/number");
-> +				kfree(name);
-> +				return -EINVAL;
-> +			}
-> +
-> +			strcpy(noext[noext_cnt], name);
-> +			F2FS_OPTION(sbi).nocompress_ext_cnt++;
-> +			kfree(name);
-> +			break;
->   		case Opt_compress_chksum:
->   			F2FS_OPTION(sbi).compress_chksum = true;
->   			break;
-> @@ -1072,6 +1099,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   		case Opt_compress_extension:
->   		case Opt_compress_chksum:
->   		case Opt_compress_mode:
-> +		case Opt_nocompress_extension:
->   			f2fs_info(sbi, "compression options not supported");
->   			break;
->   #endif
-> @@ -1664,7 +1692,10 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
->   		seq_printf(seq, ",compress_extension=%s",
->   			F2FS_OPTION(sbi).extensions[i]);
->   	}
-> -
-> +	for (i = 0; i < F2FS_OPTION(sbi).nocompress_ext_cnt; i++) {
-> +		seq_printf(seq, ",nocompress_extension=%s",
-> +			F2FS_OPTION(sbi).noextensions[i]);
-> +	}
->   	if (F2FS_OPTION(sbi).compress_chksum)
->   		seq_puts(seq, ",compress_chksum");
-> 
-> --
-> 2.29.0
-> 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> .
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Rm9yIGV4YW1wbGUsIHdoZW4gd2UgZW5hYmxlcyBjb21wcmVzc2lvbiBvZiB0aGUgZW50aXJlIG1v
+dW50ZWQgZGlyZWN0b3J5LAphbmQgdGhlIG1vdW50ZWQgZGlyZWN0b3J5IHVzZWQgYnkgYXBwbGlj
+YXRpb25zLCB0aGUgYXBwbGljYXRpb25zIG1heSB3cml0ZQpzb21lCmZpbGVzIHRoYXQgaGF2ZSBi
+ZWVuIGNvbXByZXNzZWQsIHN1Y2ggYXMgdGFyIGZpbGVzIGFuZCB6aXAgZmlsZXMsIHdlIHdhbnQK
+YXZvaWQgZHVwbGljYXRlIGNvbXByZXNzaW9ucyBmb3IgdGhlc2UuCgpBcyBmb3IgdGhlIGNvbXBs
+ZXgsIGFtYmlndW91cyBjYXNlcyB5b3UgcG9pbnQgb3V0LCB3ZSBtaWdodCBhZGQgc29tZQpsZWdp
+dGltYWN5IGNoZWNrcy4KCi0tLS0t08q8/tStvP4tLS0tLQq3orz+yMs6IENoYW8gWXUgPHl1Y2hh
+bzBAaHVhd2VpLmNvbT4gCreiy83KsbzkOiAyMDIxxOo01MIxNcjVIDk6MzIKytW8/sjLOiBGZW5n
+bmFuIENoYW5nIDxjaGFuZ2ZlbmduYW5Adml2by5jb20+CrOty806IGphZWdldWtAa2VybmVsLm9y
+ZzsgY2hhb0BrZXJuZWwub3JnOwpsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
+dArW98ziOiBSZTogW2YyZnMtZGV2XSBbUkZDIFBBVENIXSBmMmZzOiBhZGQgbm8gY29tcHJlc3Mg
+ZXh0ZW5zaW9ucyBzdXBwb3J0CgpIaSBGZW5nbmFuLAoKT24gMjAyMS80LzE0IDE3OjQ3LCBGZW5n
+bmFuIENoYW5nIHdyb3RlOgo+IFdoZW4gd2UgY3JlYXRlIGEgZGlyZWN0b3J5IHdpdGggZW5hYmxl
+IGNvbXByZXNzaW9uLCBhbGwgZmlsZSB3cml0ZSAKPiBpbnRvIGRpcmVjdG9yeSB3aWxsIHRyeSB0
+byBjb21wcmVzcy5CdXQgc29tZXRpbWVzIHdlIG1heSBrbm93LCBuZXcgCj4gZmlsZSBjYW5ub3Qg
+bWVldCBjb21wcmVzc2lvbiByYXRpbyByZXF1aXJlbWVudHMuCj4gV2UgbmVlZCBhIG5vY29tcHJl
+c3MgZXh0ZW5zaW9uIHRvIHNraXAgdGhvc2UgZmlsZXMgdG8gYXZvaWQgCj4gdW5uZWNlc3Nhcnkg
+Y29tcHJlc3MgcGFnZSB0ZXN0LgoKQ291bGQgeW91IHBsZWFzZSBlbGFib3JhdGUgeW91ciBkZXRh
+aWwgdXNhZ2Ugc2NlbmFyaW8/IHNvbWV0aGluZyBsaWtlIGluCndoaWNoIGRpcmVjdG9yeSwgd2hh
+dCBraW5kIG9mIHNwZWNpZmllZCBleHRlbnNpb24gZG8geW91IHdhbnQgdG8gZGlzYWJsZT8KCkl0
+J3MgYSBiaXQgY29tcGxpY2F0ZWQgZm9yIGJlbG93IGNhc2VzOgpjb21wcmVzc19leHRlbnNpb24g
+PSAiYWJjIiBhbmQgbm9jb21wcmVzc19leHRlbnNpb24gPSAiYWJjIiBvcgpjb21wcmVzc19leHRl
+bnNpb24gPSAiKiIgYW5kIG5vY29tcHJlc3NfZXh0ZW5zaW9uID0gImFiYyIgb3IKY29tcHJlc3Nf
+ZXh0ZW5zaW9uID0gImFiYyIgYW5kIG5vY29tcHJlc3NfZXh0ZW5zaW9uID0gIioiCgpUaGFua3Ms
+Cgo+IAo+IFNpZ25lZC1vZmYtYnk6IEZlbmduYW4gQ2hhbmcgPGNoYW5nZmVuZ25hbkB2aXZvLmNv
+bT4KPiAtLS0KPiAgIGZzL2YyZnMvZjJmcy5oICB8ICAyICsrCj4gICBmcy9mMmZzL25hbWVpLmMg
+fCAxMiArKysrKysrKysrKy0KPiAgIGZzL2YyZnMvc3VwZXIuYyB8IDM1ICsrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKy0tCj4gICAzIGZpbGVzIGNoYW5nZWQsIDQ2IGluc2VydGlvbnMo
+KyksIDMgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZjJmcy5oIGIvZnMv
+ZjJmcy9mMmZzLmggaW5kZXggCj4gODdkNzM0ZjU1ODlkLi4zZDVkMjhhMjU2OGYgMTAwNjQ0Cj4g
+LS0tIGEvZnMvZjJmcy9mMmZzLmgKPiArKysgYi9mcy9mMmZzL2YyZnMuaAo+IEBAIC0xNTAsOCAr
+MTUwLDEwIEBAIHN0cnVjdCBmMmZzX21vdW50X2luZm8gewo+ICAgCXVuc2lnbmVkIGNoYXIgY29t
+cHJlc3NfbGV2ZWw7CQkvKiBjb21wcmVzcyBsZXZlbCAqLwo+ICAgCWJvb2wgY29tcHJlc3NfY2hr
+c3VtOwkJCS8qIGNvbXByZXNzZWQgZGF0YSBjaGtzdW0gKi8KPiAgIAl1bnNpZ25lZCBjaGFyIGNv
+bXByZXNzX2V4dF9jbnQ7CQkvKiBleHRlbnNpb24gY291bnQgKi8KPiArCXVuc2lnbmVkIGNoYXIg
+bm9jb21wcmVzc19leHRfY250OwkJLyogbm9jb21wcmVzcwpleHRlbnNpb24gY291bnQgKi8KPiAg
+IAlpbnQgY29tcHJlc3NfbW9kZTsJCQkvKiBjb21wcmVzc2lvbiBtb2RlICovCj4gICAJdW5zaWdu
+ZWQgY2hhciBleHRlbnNpb25zW0NPTVBSRVNTX0VYVF9OVU1dW0YyRlNfRVhURU5TSU9OX0xFTl07
+CS8qCmV4dGVuc2lvbnMgKi8KPiArCXVuc2lnbmVkIGNoYXIgbm9leHRlbnNpb25zW0NPTVBSRVNT
+X0VYVF9OVU1dW0YyRlNfRVhURU5TSU9OX0xFTl07IC8qCgo+ICtleHRlbnNpb25zICovCj4gICB9
+Owo+IAo+ICAgI2RlZmluZSBGMkZTX0ZFQVRVUkVfRU5DUllQVAkJMHgwMDAxCj4gZGlmZiAtLWdp
+dCBhL2ZzL2YyZnMvbmFtZWkuYyBiL2ZzL2YyZnMvbmFtZWkuYyBpbmRleCAKPiA0MDVkODVkYmY5
+ZjEuLjA5Yjc2YTdmMDQ4YSAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL25hbWVpLmMKPiArKysgYi9m
+cy9mMmZzL25hbWVpLmMKPiBAQCAtMjgwLDE1ICsyODAsMjUgQEAgc3RhdGljIHZvaWQgc2V0X2Nv
+bXByZXNzX2lub2RlKHN0cnVjdCBmMmZzX3NiX2luZm8KKnNiaSwgc3RydWN0IGlub2RlICppbm9k
+ZSwKPiAgIHsKPiAgIAlfX3U4ICgqZXh0bGlzdClbRjJGU19FWFRFTlNJT05fTEVOXSA9CnNiaS0+
+cmF3X3N1cGVyLT5leHRlbnNpb25fbGlzdDsKPiAgIAl1bnNpZ25lZCBjaGFyICgqZXh0KVtGMkZT
+X0VYVEVOU0lPTl9MRU5dOwo+ICsJdW5zaWduZWQgY2hhciAoKm5vZXh0KVtGMkZTX0VYVEVOU0lP
+Tl9MRU5dOwo+ICAgCXVuc2lnbmVkIGludCBleHRfY250ID0gRjJGU19PUFRJT04oc2JpKS5jb21w
+cmVzc19leHRfY250Owo+ICsJdW5zaWduZWQgaW50IG5vZXh0X2NudCA9IEYyRlNfT1BUSU9OKHNi
+aSkubm9jb21wcmVzc19leHRfY250Owo+ICAgCWludCBpLCBjb2xkX2NvdW50LCBob3RfY291bnQ7
+Cj4gCj4gICAJaWYgKCFmMmZzX3NiX2hhc19jb21wcmVzc2lvbihzYmkpIHx8Cj4gLQkJCWlzX2lu
+b2RlX2ZsYWdfc2V0KGlub2RlLCBGSV9DT01QUkVTU0VEX0ZJTEUpIHx8Cj4gICAJCQlGMkZTX0ko
+aW5vZGUpLT5pX2ZsYWdzICYgRjJGU19OT0NPTVBfRkwgfHwKPiAgIAkJCSFmMmZzX21heV9jb21w
+cmVzcyhpbm9kZSkpCj4gICAJCXJldHVybjsKPiAKPiArCWlmIChpc19pbm9kZV9mbGFnX3NldChp
+bm9kZSwgRklfQ09NUFJFU1NFRF9GSUxFKSkgewo+ICsJCW5vZXh0ID0gRjJGU19PUFRJT04oc2Jp
+KS5ub2V4dGVuc2lvbnM7Cj4gKwkJZm9yIChpID0gMDsgaSA8IG5vZXh0X2NudDsgaSsrKSB7Cj4g
+KwkJCWlmIChpc19leHRlbnNpb25fZXhpc3QobmFtZSwgbm9leHRbaV0pKQo+ICsJCQkJZjJmc19k
+aXNhYmxlX2NvbXByZXNzZWRfZmlsZShpbm9kZSk7Cj4gKwkJfQo+ICsJCXJldHVybjsKPiArCX0K
+PiArCj4gICAJZG93bl9yZWFkKCZzYmktPnNiX2xvY2spOwo+IAo+ICAgCWNvbGRfY291bnQgPSBs
+ZTMyX3RvX2NwdShzYmktPnJhd19zdXBlci0+ZXh0ZW5zaW9uX2NvdW50KTsKPiBkaWZmIC0tZ2l0
+IGEvZnMvZjJmcy9zdXBlci5jIGIvZnMvZjJmcy9zdXBlci5jIGluZGV4IAo+IDUwMjAxNTJhYThm
+Yy4uYjVhOWJhOGVhODY5IDEwMDY0NAo+IC0tLSBhL2ZzL2YyZnMvc3VwZXIuYwo+ICsrKyBiL2Zz
+L2YyZnMvc3VwZXIuYwo+IEBAIC0xNTMsNiArMTUzLDcgQEAgZW51bSB7Cj4gICAJT3B0X2F0Z2Ms
+Cj4gICAJT3B0X2djX21lcmdlLAo+ICAgCU9wdF9ub2djX21lcmdlLAo+ICsJT3B0X25vY29tcHJl
+c3NfZXh0ZW5zaW9uLAo+ICAgCU9wdF9lcnIsCj4gICB9Owo+IAo+IEBAIC0yMjcsNiArMjI4LDcg
+QEAgc3RhdGljIG1hdGNoX3RhYmxlX3QgZjJmc190b2tlbnMgPSB7Cj4gICAJe09wdF9hdGdjLCAi
+YXRnYyJ9LAo+ICAgCXtPcHRfZ2NfbWVyZ2UsICJnY19tZXJnZSJ9LAo+ICAgCXtPcHRfbm9nY19t
+ZXJnZSwgIm5vZ2NfbWVyZ2UifSwKPiArCXtPcHRfbm9jb21wcmVzc19leHRlbnNpb24sICJub2Nv
+bXByZXNzX2V4dGVuc2lvbj0lcyJ9LAo+ICAgCXtPcHRfZXJyLCBOVUxMfSwKPiAgIH07Cj4gCj4g
+QEAgLTU0Niw3ICs1NDgsOCBAQCBzdGF0aWMgaW50IHBhcnNlX29wdGlvbnMoc3RydWN0IHN1cGVy
+X2Jsb2NrICpzYiwgY2hhcgoqb3B0aW9ucywgYm9vbCBpc19yZW1vdW50KQo+ICAgCXN1YnN0cmlu
+Z190IGFyZ3NbTUFYX09QVF9BUkdTXTsKPiAgICNpZmRlZiBDT05GSUdfRjJGU19GU19DT01QUkVT
+U0lPTgo+ICAgCXVuc2lnbmVkIGNoYXIgKCpleHQpW0YyRlNfRVhURU5TSU9OX0xFTl07Cj4gLQlp
+bnQgZXh0X2NudDsKPiArCXVuc2lnbmVkIGNoYXIgKCpub2V4dClbRjJGU19FWFRFTlNJT05fTEVO
+XTsKPiArCWludCBleHRfY250LCBub2V4dF9jbnQ7Cj4gICAjZW5kaWYKPiAgIAljaGFyICpwLCAq
+bmFtZTsKPiAgIAlpbnQgYXJnID0gMDsKPiBAQCAtMTA0OSw2ICsxMDUyLDMwIEBAIHN0YXRpYyBp
+bnQgcGFyc2Vfb3B0aW9ucyhzdHJ1Y3Qgc3VwZXJfYmxvY2sgKnNiLApjaGFyICpvcHRpb25zLCBi
+b29sIGlzX3JlbW91bnQpCj4gICAJCQlGMkZTX09QVElPTihzYmkpLmNvbXByZXNzX2V4dF9jbnQr
+KzsKPiAgIAkJCWtmcmVlKG5hbWUpOwo+ICAgCQkJYnJlYWs7Cj4gKwkJY2FzZSBPcHRfbm9jb21w
+cmVzc19leHRlbnNpb246Cj4gKwkJCWlmICghZjJmc19zYl9oYXNfY29tcHJlc3Npb24oc2JpKSkg
+ewo+ICsJCQkJZjJmc19pbmZvKHNiaSwgIkltYWdlIGRvZXNuJ3Qgc3VwcG9ydApjb21wcmVzc2lv
+biIpOwo+ICsJCQkJYnJlYWs7Cj4gKwkJCX0KPiArCQkJbmFtZSA9IG1hdGNoX3N0cmR1cCgmYXJn
+c1swXSk7Cj4gKwkJCWlmICghbmFtZSkKPiArCQkJCXJldHVybiAtRU5PTUVNOwo+ICsKPiArCQkJ
+bm9leHQgPSBGMkZTX09QVElPTihzYmkpLm5vZXh0ZW5zaW9uczsKPiArCQkJbm9leHRfY250ID0g
+RjJGU19PUFRJT04oc2JpKS5ub2NvbXByZXNzX2V4dF9jbnQ7Cj4gKwo+ICsJCQlpZiAoc3RybGVu
+KG5hbWUpID49IEYyRlNfRVhURU5TSU9OX0xFTiB8fAo+ICsJCQkJbm9leHRfY250ID49IENPTVBS
+RVNTX0VYVF9OVU0pIHsKPiArCQkJCWYyZnNfZXJyKHNiaSwKPiArCQkJCQkiaW52YWxpZCBleHRl
+bnNpb24gbGVuZ3RoL251bWJlciIpOwo+ICsJCQkJa2ZyZWUobmFtZSk7Cj4gKwkJCQlyZXR1cm4g
+LUVJTlZBTDsKPiArCQkJfQo+ICsKPiArCQkJc3RyY3B5KG5vZXh0W25vZXh0X2NudF0sIG5hbWUp
+Owo+ICsJCQlGMkZTX09QVElPTihzYmkpLm5vY29tcHJlc3NfZXh0X2NudCsrOwo+ICsJCQlrZnJl
+ZShuYW1lKTsKPiArCQkJYnJlYWs7Cj4gICAJCWNhc2UgT3B0X2NvbXByZXNzX2Noa3N1bToKPiAg
+IAkJCUYyRlNfT1BUSU9OKHNiaSkuY29tcHJlc3NfY2hrc3VtID0gdHJ1ZTsKPiAgIAkJCWJyZWFr
+Owo+IEBAIC0xMDcyLDYgKzEwOTksNyBAQCBzdGF0aWMgaW50IHBhcnNlX29wdGlvbnMoc3RydWN0
+IHN1cGVyX2Jsb2NrICpzYiwKY2hhciAqb3B0aW9ucywgYm9vbCBpc19yZW1vdW50KQo+ICAgCQlj
+YXNlIE9wdF9jb21wcmVzc19leHRlbnNpb246Cj4gICAJCWNhc2UgT3B0X2NvbXByZXNzX2Noa3N1
+bToKPiAgIAkJY2FzZSBPcHRfY29tcHJlc3NfbW9kZToKPiArCQljYXNlIE9wdF9ub2NvbXByZXNz
+X2V4dGVuc2lvbjoKPiAgIAkJCWYyZnNfaW5mbyhzYmksICJjb21wcmVzc2lvbiBvcHRpb25zIG5v
+dCBzdXBwb3J0ZWQiKTsKPiAgIAkJCWJyZWFrOwo+ICAgI2VuZGlmCj4gQEAgLTE2NjQsNyArMTY5
+MiwxMCBAQCBzdGF0aWMgaW5saW5lIHZvaWQKZjJmc19zaG93X2NvbXByZXNzX29wdGlvbnMoc3Ry
+dWN0IHNlcV9maWxlICpzZXEsCj4gICAJCXNlcV9wcmludGYoc2VxLCAiLGNvbXByZXNzX2V4dGVu
+c2lvbj0lcyIsCj4gICAJCQlGMkZTX09QVElPTihzYmkpLmV4dGVuc2lvbnNbaV0pOwo+ICAgCX0K
+PiAtCj4gKwlmb3IgKGkgPSAwOyBpIDwgRjJGU19PUFRJT04oc2JpKS5ub2NvbXByZXNzX2V4dF9j
+bnQ7IGkrKykgewo+ICsJCXNlcV9wcmludGYoc2VxLCAiLG5vY29tcHJlc3NfZXh0ZW5zaW9uPSVz
+IiwKPiArCQkJRjJGU19PUFRJT04oc2JpKS5ub2V4dGVuc2lvbnNbaV0pOwo+ICsJfQo+ICAgCWlm
+IChGMkZTX09QVElPTihzYmkpLmNvbXByZXNzX2Noa3N1bSkKPiAgIAkJc2VxX3B1dHMoc2VxLCAi
+LGNvbXByZXNzX2Noa3N1bSIpOwo+IAo+IC0tCj4gMi4yOS4wCj4gCj4gCj4gCj4gX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBMaW51eC1mMmZzLWRldmVs
+IG1haWxpbmcgbGlzdAo+IExpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cj4g
+aHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1k
+ZXZlbAo+IC4KPiAKCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlz
+dHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xp
+c3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
