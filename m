@@ -2,72 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11E82365004
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Apr 2021 03:53:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAD636501A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Apr 2021 04:08:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lYfZj-0000Tm-3l; Tue, 20 Apr 2021 01:53:15 +0000
+	id 1lYfoJ-0000uA-Cz; Tue, 20 Apr 2021 02:08:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <yuchao0@huawei.com>) id 1lYfZh-0000Ta-3U
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Apr 2021 01:53:13 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <changfengnan@vivo.com>) id 1lYfoI-0000tw-84
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Apr 2021 02:08:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G9KuMT/EmgzVxuxVeZ+kzqUmsWTov+sdO2J/W/Ujme4=; b=KV6D+OQKFBeBbpZiqvIRywtwJI
- ffkTX1vCMDeyrpbQx06VArO7idy4RlUG6aOGs4jbsn77BkMT4gI9F4l/IOcWsf5i1pjThHjmfCSUU
- 0VyVM71p+gNJxs6eYEmb4VW9p0yAao0mMYHpWPoCImogHXtZxjISSG4K6dWgZ6B7v8MA=;
+ bh=+lla1T4osc8xWGzqGM/ejSpSLWJ2hjev6fIcOJtLIx4=; b=bPtfp5d85IvqOys9buITDoMlny
+ NNq+TWlr1dn8MifJvop8eYlP/NI8VFH3OqbETR+1DGs49GZjMhLktxhsIssisJriFkwKwxtzEwGU/
+ JnsUbcuiSYDDD7OdqUTUYe+MiiVUmieGhEe8SRb05WFb22GMYFgMPYBiC5tHFq/6+jJ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G9KuMT/EmgzVxuxVeZ+kzqUmsWTov+sdO2J/W/Ujme4=; b=WY3CnNo7h/JeXTBd9CalwFZTKO
- wYuupHvaMt8amhBwyPs9nd/wk5pEx+Dy0dZN0fGGxk+0kkEBpQEGdQp3wJyXh6oAFKEQz8MR0orSd
- qEp42mEtlV1ToEBAmgg3ycnwvB5AgxDJ4BLSKG9puT61bvlprMkz0RzIv4DdTQZ9ZdyU=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ bh=+lla1T4osc8xWGzqGM/ejSpSLWJ2hjev6fIcOJtLIx4=; b=m+ZLSu/7hgqmSwVcVe0DYQuyXJ
+ p8/eYryTOOJubJ0aAi+d45k5EkyO2bwGWGp6P897RXD5Bbi5wUB9q+gRl1cdjSC0Qfpwu4sLCk60j
+ y+gXqtytB2tcOQ7EAjSn5YkVTF/0x3zNzwGD5BwcsxpuafDsVjr4rqd0C70EStJaOGWk=;
+Received: from mail-m118208.qiye.163.com ([115.236.118.208])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lYfZV-00066R-M2
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Apr 2021 01:53:13 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FPRSy1sJnzmdWg;
- Tue, 20 Apr 2021 09:49:54 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 20 Apr
- 2021 09:52:48 +0800
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210414012134.128066-1-yuchao0@huawei.com>
- <YH22a55sexxwmGCe@google.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <03dc1c69-9215-1b5f-b1cc-c38454f3b90a@huawei.com>
-Date: Tue, 20 Apr 2021 09:52:47 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ id 1lYfoA-0006ME-7i
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Apr 2021 02:08:17 +0000
+Received: from SZ11126892 (unknown [58.251.74.232])
+ by mail-m118208.qiye.163.com (Hmail) with ESMTPA id A7EA3E01EC;
+ Tue, 20 Apr 2021 10:08:00 +0800 (CST)
+From: <changfengnan@vivo.com>
+To: "'Jaegeuk Kim'" <jaegeuk@kernel.org>,
+ "'Fengnan Chang'" <fengnanchang@gmail.com>
+References: <4dc282e0-b41c-caf2-c2ff-a6372e60a906@huawei.com>
+ <20210417070251.42979-1-fengnanchang@gmail.com> <YH2uYPmJBvZFqIz+@google.com>
+In-Reply-To: <YH2uYPmJBvZFqIz+@google.com>
+Date: Tue, 20 Apr 2021 10:08:00 +0800
+Message-ID: <003b01d73589$fd640060$f82c0120$@vivo.com>
 MIME-Version: 1.0
-In-Reply-To: <YH22a55sexxwmGCe@google.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQLjH0k41dOCOrST79xbW2StELcKcACMPZfjAW82A78CmLnKBA==
+Content-Language: zh-cn
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+ oVCBIfWUFZQhoeHlYZTU5NGhgdGk0ZHU1VEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
+ hOSFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NVE6Ijo6FD8OAgsMGEI2FCIJ
+ Mg9PCSNVSlVKTUpDQ0NPT0NKSkxKVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
+ WU5DVUlOSlVMT1VJSElZV1kIAVlBSE5CTjcG
+X-HM-Tid: 0a78ed08cf3e2c17kusna7ea3e01ec
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [115.236.118.208 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lYfZV-00066R-M2
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to cover allocate_segment() with
- lock
+ 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
+X-Headers-End: 1lYfoA-0006ME-7i
+Subject: [f2fs-dev] =?utf-8?b?562U5aSNOiAg562U5aSNOiAgW1JGQyBQQVRDSF0gZjJm?=
+	=?utf-8?q?s=3A_add_no_compress_extensions_support?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,64 +81,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/4/20 0:57, Jaegeuk Kim wrote:
-> On 04/14, Chao Yu wrote:
->> As we did for other cases, in fix_curseg_write_pointer(), let's
->> change as below:
->> - use callback function s_ops->allocate_segment() instead of
->> raw function allocate_segment_by_default();
->> - cover allocate_segment() with curseg_lock and sentry_lock.
->>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>   fs/f2fs/segment.c | 7 ++++++-
->>   1 file changed, 6 insertions(+), 1 deletion(-)
->>
->> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->> index b2ee6b7791b0..daf9531ec58f 100644
->> --- a/fs/f2fs/segment.c
->> +++ b/fs/f2fs/segment.c
->> @@ -4848,7 +4848,12 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
->>   
->>   	f2fs_notice(sbi, "Assign new section to curseg[%d]: "
->>   		    "curseg[0x%x,0x%x]", type, cs->segno, cs->next_blkoff);
->> -	allocate_segment_by_default(sbi, type, true);
->> +
->> +	down_read(&SM_I(sbi)->curseg_lock);
->> +	down_write(&SIT_I(sbi)->sentry_lock);
->> +	SIT_I(sbi)->s_ops->allocate_segment(sbi, type, true);
->> +	up_write(&SIT_I(sbi)->sentry_lock);
->> +	up_read(&SM_I(sbi)->curseg_lock);
-> 
-> Seems f2fs_allocate_new_section()?
-
-f2fs_allocate_new_section() will allocate new section only when current
-section has been initialized and has valid block/ckpt_block.
-
-It looks fix_curseg_write_pointer() wants to force migrating current segment
-to new section whenever write pointer and curseg->next_blkoff is inconsistent.
-
-So how about adding a parameter to force f2fs_allocate_new_section() to
-allocate new section?
-
-Thanks,
-
-> 
->>   
->>   	/* check consistency of the zone curseg pointed to */
->>   	if (check_zone_write_pointer(sbi, zbd, &zone))
->> -- 
->> 2.29.2
-> .
-> 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SXQgc2VlbXMgdGhhdCB3ZSBkb24ndCBuZWVkIHRvIHN1cHBvcnQgKiBmb3Igbm9uLWNvbXByZXNz
+LgoKRm9yIG5vdywgaWYgb25lIGZpbGUgbWF0Y2ggY29tcF9leHRlbnRpb24sIHRoZSBkaXIgZmxh
+ZyBub3Qgd29yaywgYnV0IHdlIGNhbiBzdGlsbCB1c2UgY29tcF9maWxlX2ZsYWcgYW5kIG5vX2Nv
+bXBfZmlsZV9mbGFnLiBTbyB0aGUgcHJpb3JpdHkgaXM6CmRpcl9mbGFnIDwgY29tcF9leHRlbnRp
+b24gPCAgY29tcF9maWxlX2ZsYWcsIG5vX2NvbXBfZmlsZV9mbGFnLgoKYWZ0ZXIgYWRkIG5vX2Nv
+bXBfZXh0ZW50aW9uIGZsYWcsIHRoZSBwcmlvcml0eSBzaG91bGQgYmU6CmRpcl9mbGFnIDwgY29t
+cF9leHRlbnRpb24gPCBub19jb21wX2V4dGVudGlvbiA8ICBjb21wX2ZpbGVfZmxhZywgbm9fY29t
+cF9maWxlX2ZsYWcuCgoKLS0tLS3pgq7ku7bljp/ku7YtLS0tLQrlj5Hku7bkuro6IEphZWdldWsg
+S2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+CuWPkemAgeaXtumXtDogMjAyMeW5tDTmnIgyMOaXpSAw
+OjIzCuaUtuS7tuS6ujogRmVuZ25hbiBDaGFuZyA8ZmVuZ25hbmNoYW5nQGdtYWlsLmNvbT4K5oqE
+6YCBOiB5dWNoYW8wQGh1YXdlaS5jb207IGNoYW5nZmVuZ25hbkB2aXZvLmNvbTsgCmxpbnV4LWYy
+ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0CuS4u+mimDogUmU6IFtmMmZzLWRldl0g562U
+5aSNOiBbUkZDIFBBVENIXSBmMmZzOiBhZGQgbm8gY29tcHJlc3MgZXh0ZW5zaW9ucyAKc3VwcG9y
+dAoKT24gMDQvMTcsIEZlbmduYW4gQ2hhbmcgd3JvdGU6Cj4gSW4gdGhpcyBwYXRjaCwgd2UgY2Fu
+bm90IGhhbmRsZSBmaWxlcyB3aXRob3V0IGV4dGVuc2lvbnMuIEF0IHRoZSBtb21lbnQgCj4gdGhl
+cmUgaXMganVzdCBhIHJvdWdoIGlkZWHvvIx0ZXN0IGEgcG9ydGlvbiBvZiB0aGUgZGF0YSB0byBk
+ZWNpZGUgd2hldGhlciAKPiB0byBjb21wcmVzcyBpdCBiZWZvcmUgcGVyZm9ybWluZyBhIGZ1bGwg
+Y29tcHJlc3Npb24uIEl0IG1heSBuZWVkIG1vcmUgCj4gdGVzdC4gIEFueSBvdGhlciBzdWdnZXN0
+aW9ucz8KPgo+IEluIG15IGNvbnNpZGVyLCB0aGUgbm9uLWNvbXByZXNzICBmbGFnIGhhcyBhIGhp
+Z2hlciBwcmlvcml0eSB0aGFuIHRoZSAKPiBjb21wcmVzc2VkIGZsYWcuCj4gMS4gdGhlIHNhbWUg
+ZXh0ZW5zaW9uIG5hbWUgY2Fubm90IG5vdCBhcHBlYXIgaW4gYm90aCBjb21wcmVzcyBhbmQgCj4g
+bm9uLWNvbXByZXNzIGV4dGVuc2lvbiBhdCB0aGUgc2FtZSB0aW1l77yMIGNoZWNrIHRoaXMgaW4g
+bW91bnQgcHJvY2Vzcy4KPiAyLiBJZiB0aGUgY29tcHJlc3MgZXh0ZW5zaW9uIHNwZWNpZmllcyBh
+bGwgZmlsZXMsIHRoZSB0eXBlcyBzcGVjaWZpZWQgYnkgCj4gdGhlIG5vbi1jb21wcmVzcyBleHRl
+bnNpb24gd2lsbCBiZSB0cmVhdGVkIGFzIHNwZWNpYWwgY2FzZXMgYW5kIHdpbGwgbm90IAo+IGJl
+IGNvbXByZXNzZWQuCj4gMy4gSWYgdGhlIG5vbi1jb21wcmVzcyBleHRlbnNpb24gc3BlY2lmaWVz
+IGFsbCBmaWxlcywgc2hvdWxkIG5vdCBzcGVjaWZpZXMgCj4gYW55IGNvbXByZXNzIGV4dGVuc2lv
+biwgY2hlY2sgaW4gbW91bnQgcHJvY2VzcyB0b28uCgpEbyB3ZSBuZWVkIHRvIHN1cHBvcnQgKiBm
+b3Igbm9uLWNvbXByZXNzPwoKPgo+IEFueSBvdGhlciBzdWdnZXN0aW9ucz8KClNvLCB3aGF0IGNv
+dWxkIHRoZSBwcmlvcml0eSBmb3IgYWxsIHRoZSBiZWxvdyBjb21iaW5hdGlvbnM/CgpFLmcuLCBj
+b21wX2V4dGVudGlvbiwgbm9fY29tcF9leHRlbnRpb24sIGRpcl9mbGFnLCBjb21wX2ZpbGVfZmxh
+ZywgCm5vX2NvbXBfZmlsZV9mbGFnLgoKVGhhbmtzLAoKCgoKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
+dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
+dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
