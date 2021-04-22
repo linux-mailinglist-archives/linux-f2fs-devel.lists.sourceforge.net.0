@@ -2,87 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6B6D36808E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Apr 2021 14:35:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF5233680FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Apr 2021 14:59:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lZYYD-0004NM-7Q; Thu, 22 Apr 2021 12:35:21 +0000
+	id 1lZYve-0003VX-OF; Thu, 22 Apr 2021 12:59:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <heyunlei@hihonor.com>) id 1lZYYC-0004NA-Dy
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 12:35:20 +0000
+ (envelope-from <frank.li@vivo.com>) id 1lZYvc-0003VA-0N
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 12:59:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=soHzUFWBuZr4CFqFn1Y3kUWHljMX8NE8VXj+N/ODlLw=; b=lac+drU/egmH/cwVzY73LEVvFJ
- OIB0YMLq0/QIJchtdlS5A6/LgHynQKnq3mcnxK0SdyRrdUV9l26fbwfLv18iJKStwiElDuGPu2KgK
- G0Blo+7eRLpRJ6LmiW56gvMPHSWSzIz6fRYzLuNadwJwmauXPcZZmqHvmnf2+/Ab330E=;
+ bh=YKCeRG36rNQX1zgUrQeY5UviLe8/LSOimxJQgxtt+Y4=; b=jdZ4E7HY0Qja2dqFvy8sZse4Ql
+ FLTesZp+peoTxNU8al0hVhgmd/G3BrwptQH/VxZNHTh7z1VJ468fBn8+VnHWhRwzxNQ0tE+itGkKs
+ latFi6PwS5yAIkcxyexUNJneHWRleTti3Rspdt4w6BTQpuI4Uey9TdP7ypFjGVWrPSsg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=soHzUFWBuZr4CFqFn1Y3kUWHljMX8NE8VXj+N/ODlLw=; b=UmqRT0Sn96SCtXJJBXxmJ0I0Iw
- ynz8QuNzjeDz4/A0SYgWiYzXcX0cjYwT1w4osgWLgeMlwbWwIOLhUQ48gWVgk4APW1dfu1ExyeeFH
- yqCrbC9Jn4rCQiK5bTfyVqjmSiuNZ1M4uooPlWZXRKrJkrwZiqOYE8An3MLbSvUHQfN8=;
-Received: from zg8tmja2lje4os4yms4ymjma.icoremail.net ([206.189.21.223])
- by sfi-mx-2.v28.lw.sourceforge.com with smtp (Exim 4.92.3)
- id 1lZYY6-0008Ge-Us
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 12:35:20 +0000
-Received: from [10.115.17.59] (unknown [198.19.131.33])
- by front-2 (Coremail) with SMTP id DAGowAB3Ndx5bYFgNDYXAA--.6050S3;
- Thu, 22 Apr 2021 20:35:05 +0800 (CST)
-To: Chao Yu <yuchao0@huawei.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210416095838.29568-1-yuchao0@huawei.com>
- <YID2TOCsgKdi0aLf@google.com>
- <733ba2da-4047-045b-5223-05012b980603@huawei.com>
-From: heyunlei 00015531 <heyunlei@hihonor.com>
-Message-ID: <a58dc4a1-b2b7-8446-d2de-14fffee36852@hihonor.com>
-Date: Thu, 22 Apr 2021 20:35:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=YKCeRG36rNQX1zgUrQeY5UviLe8/LSOimxJQgxtt+Y4=; b=Q
+ fnFXcyHE5C98p/s+KJE99x79M3MtoE4WuMj/Jqhphm5WCd26xSSjVKLt2Eu384dXyR5bdDuVbo+iR
+ yJv9xKM/FVPztWBe/NHVGcoeapDGetmJHD6IBcihMnF9FiAqVIx1nmATU5q3TB5wTNJouj9+1hEH/
+ A0+bTmocUYBsdxx4=;
+Received: from mail-m176233.qiye.163.com ([59.111.176.233])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lZYvU-00ChEt-Mz
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 12:59:32 +0000
+Received: from ubuntu.localdomain (unknown [58.250.176.229])
+ by mail-m176233.qiye.163.com (Hmail) with ESMTPA id 650D58C00A4;
+ Thu, 22 Apr 2021 20:59:15 +0800 (CST)
+From: Yangtao Li <frank.li@vivo.com>
+To: jaegeuk@kernel.org, chao@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Date: Thu, 22 Apr 2021 20:59:10 +0800
+Message-Id: <20210422125910.127871-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <733ba2da-4047-045b-5223-05012b980603@huawei.com>
-X-CM-TRANSID: DAGowAB3Ndx5bYFgNDYXAA--.6050S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxKry7Zr43XFyUtr4UZFy7KFg_yoWxGw1rpr
- n5JFyUGrW5Cr1kWr10qF1UXryUtryUGw1UJr1UJF18Jw47Jr10gr1jqr1q9F1UJr48Jw1U
- Xr1jqry7ZrnxJF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvvb7Iv0xC_tr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
- cIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2
- AK021l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v2
- 6rxl6s0DM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
- xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1q6rW5McIj6I8E87Iv67AKxVW0oVWYowAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07AlzVAYIcxG8wCY02Avz4vE-syl42xK82IY
- c2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VW5ur1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr
- 1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE
- 14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7
- IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E
- 87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73Uj
- IFyTuYvjxU25EfUUUUU
-X-CM-SenderInfo: pkh130hohlqxxlkr003uof0z/1tbiAQMBEV3ki9KwEwABsQ
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+ oVCBIfWUFZGU9MGVYaT0pPGE4eH0IdGUNVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
+ hOSFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRA6KRw4Hz8VSw4cTwkhQhoU
+ Ax5PFEtVSlVKTUpCS0JNSE5OQktJVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZTkNV
+ SU5LVUpMTVVJSUJZV1kIAVlBSU1OSzcG
+X-HM-Tid: 0a78f9a9c2f2d9abkuws650d58c00a4
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [206.189.21.223 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ for more information. [URIs: vivo.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lZYY6-0008Ge-Us
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: reduce expensive checkpoint
- trigger frequency
+X-Headers-End: 1lZYvU-00ChEt-Mz
+Subject: [f2fs-dev] [PATCH] f2fs: set prefree as free segments after clear
+ prefree segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,116 +77,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Yangtao Li <frank.li@vivo.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-CuWcqCAyMDIxLzQvMjIgMTU6MTQsIENoYW8gWXUg5YaZ6YGTOgo+IE9uIDIwMjEvNC8yMiAxMjow
-NiwgSmFlZ2V1ayBLaW0gd3JvdGU6Cj4+IE9uIDA0LzE2LCBDaGFvIFl1IHdyb3RlOgo+Pj4gV2Ug
-bWF5IHRyaWdnZXIgaGlnaCBmcmVxdWVudCBjaGVja3BvaW50IGZvciBiZWxvdyBjYXNlOgo+Pj4g
-MS4gbWtkaXIgL21udC9kaXIxOyBzZXQgZGlyMSBlbmNyeXB0ZWQKPj4+IDIuIHRvdWNoIC9tbnQv
-ZmlsZTE7IGZzeW5jIC9tbnQvZmlsZTEKPj4+IDMuIG1rZGlyIC9tbnQvZGlyMjsgc2V0IGRpcjIg
-ZW5jcnlwdGVkCj4+PiA0LiB0b3VjaCAvbW50L2ZpbGUyOyBmc3luYyAvbW50L2ZpbGUyCj4+PiAu
-Li4KPj4+Cj4+PiBBbHRob3VnaCwgbmV3bHkgY3JlYXRlZCBkaXIgYW5kIGZpbGUgYXJlIG5vdCBy
-ZWxhdGVkLCBkdWUgdG8KPj4+IGNvbW1pdCBiYmYxNTZmN2FmYTcgKCJmMmZzOiBmaXggbG9zdCB4
-YXR0cnMgb2YgZGlyZWN0b3JpZXMiKSwgd2Ugd2lsbAo+Pj4gdHJpZ2dlciBjaGVja3BvaW50IHdo
-ZW5ldmVyIGZzeW5jKCkgY29tZXMgYWZ0ZXIgYSBuZXcgZW5jcnlwdGVkIGRpcgo+Pj4gY3JlYXRl
-ZC4KPj4KPj4gSXQnbGwgaGFwcGVuIG9uY2U/IEhvdyBtdWNoIGltcGFjdCB3aWxsIHdlIGhpdCBk
-dWUgdG8gdGhpcz8KPgo+IFl1bmxlaSByZXBvcnRzIG1lIHRoaXMgaXNzdWUsIHRoZSBwcm9ibGVt
-cyBoZXJlIGluIEhvbmVyIGRldmljZSdzIAo+IHNwZWNpZmllZAo+IGVudmlyb25tZW50LCBtb3N0
-IGZzeW5jKCkgb24gcmVndWxhciBmaWxlIHRyaWdnZXJzIGEgY2hlY2twb2ludCgpIHdoZW4gCj4g
-bWtkaXIoKQo+IGhhcHBlbmVkIGNvbmN1cnJlbnRseSwgcmVzdWx0IGluIGNhdXNpbmcgdGhlIHBl
-cmZvcm1hbmNlIGlzc3VlLgo+Cj4gWXVubGVpIGNvdWxkIGV4cGxhaW4gbW9yZSBhYm91dCBkZXRh
-aWxzIG9mIHRoaXMgaXNzdWUuIEBZdW5sZWkKCkhpIGFsbO+8jAoKIMKgwqDCoCBNYW55IGFwcHMg
-bGF1bmNoIHdpbGwgY3JlYXRlIG5ldyBkaXJlY3Rvcmllc++8jHdoaWNoIHdpbGwgc2V0IG5lZWQg
-CmNoZWNrcG9pbnQgZmxhZyBiZWNhdXNlCgppbmhlcml0ZWTCoCBjcnlwdG8gaW5mbyBmcm9tIHRo
-ZWlyIHBhcmVudC4gRHVyaW5nIHRoaXMgdGltZSzCoCBhbnkgCmZzeW5jZWTCoCB3aWxsIHdyaXRl
-IGEgbmV3IGNwLgoKRm9yIHRoZSB3b3JzdCBjYXNlOgoKIMKgwqDCoCBuZXcgZGlyMQoKIMKgwqDC
-oCDCoMKgwqAgwqDCoMKgIMKgwqDCoCDCoMKgwqAgZnN5bmMgZmlsZSBhwqAgKHdpdGggbm8gcmVs
-YXRpb25zIHdpdGggZGlyMSksIGFuZCAKd3JpdGUgY3DCoCBuCgogwqDCoMKgIG5ldyBkaXIgMgoK
-IMKgwqDCoCDCoMKgwqAgwqDCoMKgIMKgwqDCoCDCoMKgwqAgZnN5bmMgZmlsZSBiICh3aXRoIG5v
-IHJlbGF0aW9ucyB3aXRoIGRpcjIpLCBhbmQgCndyaXRlIGNwIG4gKyAxCgogwqDCoMKgIC4uLiAu
-Li4KCgpUaGFua3MuCgo+Cj4+Cj4+Pgo+Pj4gSW4gb3JkZXIgdG8gYXZvaWQgc3VjaCBjb25kaXRp
-b24sIGxldCdzIHJlY29yZCBhbiBlbnRyeSBpbmNsdWRpbmcKPj4+IGRpcmVjdG9yeSdzIGlubyBp
-bnRvIGdsb2JhbCBjYWNoZSB3aGVuIHdlIGluaXRpYWxpemUgZW5jcnlwdGlvbiBwb2xpY3kKPj4+
-IGluIGEgY2hlY2twb2ludGVkIGRpcmVjdG9yeSwgYW5kIHRoZW4gb25seSB0cmlnZ2VyIGNoZWNr
-cG9pbnQoKSB3aGVuCj4+PiB0YXJnZXQgZmlsZSdzIHBhcmVudCBoYXMgbm9uLXBlcnNpc3RlZCBl
-bmNyeXB0aW9uIHBvbGljeSwgZm9yIHRoZSBjYXNlCj4+PiBpdHMgcGFyZW50IGlzIG5vdCBjaGVj
-a3BvaW50ZWQsIG5lZWRfZG9fY2hlY2twb2ludCgpIGhhcyBjb3ZlciB0aGF0Cj4+PiBieSB2ZXJp
-ZnlpbmcgaXQgd2l0aCBmMmZzX2lzX2NoZWNrcG9pbnRlZF9ub2RlKCkuCj4+Pgo+Pj4gU2lnbmVk
-LW9mZi1ieTogQ2hhbyBZdSA8eXVjaGFvMEBodWF3ZWkuY29tPgo+Pj4gLS0tCj4+PiDCoCBmcy9m
-MmZzL2YyZnMuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMiArKwo+Pj4gwqAgZnMvZjJm
-cy9maWxlLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDMgKysrCj4+PiDCoCBmcy9mMmZz
-L3hhdHRyLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCA2ICsrKystLQo+Pj4gwqAgaW5jbHVk
-ZS90cmFjZS9ldmVudHMvZjJmcy5oIHwgMyArKy0KPj4+IMKgIDQgZmlsZXMgY2hhbmdlZCwgMTEg
-aW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJm
-cy9mMmZzLmggYi9mcy9mMmZzL2YyZnMuaAo+Pj4gaW5kZXggODdkNzM0ZjU1ODlkLi4zNDQ4N2U1
-MjdkMTIgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZzL2YyZnMuaAo+Pj4gKysrIGIvZnMvZjJmcy9m
-MmZzLmgKPj4+IEBAIC0yNDYsNiArMjQ2LDcgQEAgZW51bSB7Cj4+PiDCoMKgwqDCoMKgIEFQUEVO
-RF9JTk8swqDCoMKgwqDCoMKgwqAgLyogZm9yIGFwcGVuZCBpbm8gbGlzdCAqLwo+Pj4gwqDCoMKg
-wqDCoCBVUERBVEVfSU5PLMKgwqDCoMKgwqDCoMKgIC8qIGZvciB1cGRhdGUgaW5vIGxpc3QgKi8K
-Pj4+IMKgwqDCoMKgwqAgVFJBTlNfRElSX0lOTyzCoMKgwqDCoMKgwqDCoCAvKiBmb3IgdHJhc2Fj
-dGlvbnMgZGlyIGlubyBsaXN0ICovCj4+PiArwqDCoMKgIEVOQ19ESVJfSU5PLMKgwqDCoMKgwqDC
-oMKgIC8qIGZvciBlbmNyeXB0ZWQgZGlyIGlubyBsaXN0ICovCj4+PiDCoMKgwqDCoMKgIEZMVVNI
-X0lOTyzCoMKgwqDCoMKgwqDCoCAvKiBmb3IgbXVsdGlwbGUgZGV2aWNlIGZsdXNoaW5nICovCj4+
-PiDCoMKgwqDCoMKgIE1BWF9JTk9fRU5UUlkswqDCoMKgwqDCoMKgwqAgLyogbWF4LiBsaXN0ICov
-Cj4+PiDCoCB9Owo+Pj4gQEAgLTEwOTAsNiArMTA5MSw3IEBAIGVudW0gY3BfcmVhc29uX3R5cGUg
-ewo+Pj4gwqDCoMKgwqDCoCBDUF9GQVNUQk9PVF9NT0RFLAo+Pj4gwqDCoMKgwqDCoCBDUF9TUEVD
-X0xPR19OVU0sCj4+PiDCoMKgwqDCoMKgIENQX1JFQ09WRVJfRElSLAo+Pj4gK8KgwqDCoCBDUF9F
-TkNfRElSLAo+Pj4gwqAgfTsKPj4+IMKgIMKgIGVudW0gaW9zdGF0X3R5cGUgewo+Pj4gZGlmZiAt
-LWdpdCBhL2ZzL2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPj4+IGluZGV4IDYyODRiMmY0
-YTYwYi4uYTZjMzhkOGIxZWMzIDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9maWxlLmMKPj4+ICsr
-KyBiL2ZzL2YyZnMvZmlsZS5jCj4+PiBAQCAtMjE4LDYgKzIxOCw5IEBAIHN0YXRpYyBpbmxpbmUg
-ZW51bSBjcF9yZWFzb25fdHlwZSAKPj4+IG5lZWRfZG9fY2hlY2twb2ludChzdHJ1Y3QgaW5vZGUg
-Kmlub2RlKQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGYyZnNfZXhpc3Rfd3JpdHRlbl9kYXRhKHNi
-aSwgRjJGU19JKGlub2RlKS0+aV9waW5vLAo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBUUkFOU19ESVJfSU5PKSkKPj4+IMKgwqDC
-oMKgwqDCoMKgwqDCoCBjcF9yZWFzb24gPSBDUF9SRUNPVkVSX0RJUjsKPj4+ICvCoMKgwqAgZWxz
-ZSBpZiAoZjJmc19leGlzdF93cml0dGVuX2RhdGEoc2JpLCBGMkZTX0koaW5vZGUpLT5pX3Bpbm8s
-Cj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIEVOQ19ESVJfSU5PKSkKPj4+ICvCoMKgwqDCoMKgwqDCoCBjcF9yZWFzb24gPSBDUF9FTkNf
-RElSOwo+Pj4gwqAgwqDCoMKgwqDCoCByZXR1cm4gY3BfcmVhc29uOwo+Pj4gwqAgfQo+Pj4gZGlm
-ZiAtLWdpdCBhL2ZzL2YyZnMveGF0dHIuYyBiL2ZzL2YyZnMveGF0dHIuYwo+Pj4gaW5kZXggYzhm
-MzRkZWNiZjhlLi4zODc5NmQ0ODhkMTUgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZzL3hhdHRyLmMK
-Pj4+ICsrKyBiL2ZzL2YyZnMveGF0dHIuYwo+Pj4gQEAgLTYzMCw2ICs2MzAsNyBAQCBzdGF0aWMg
-aW50IF9fZjJmc19zZXR4YXR0cihzdHJ1Y3QgaW5vZGUgKmlub2RlLCAKPj4+IGludCBpbmRleCwK
-Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0IGNoYXIgKm5hbWUsIGNvbnN0IHZv
-aWQgKnZhbHVlLCBzaXplX3Qgc2l6ZSwKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0
-cnVjdCBwYWdlICppcGFnZSwgaW50IGZsYWdzKQo+Pj4gwqAgewo+Pj4gK8KgwqDCoCBzdHJ1Y3Qg
-ZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0IoaW5vZGUpOwo+Pj4gwqDCoMKgwqDCoCBzdHJ1
-Y3QgZjJmc194YXR0cl9lbnRyeSAqaGVyZSwgKmxhc3Q7Cj4+PiDCoMKgwqDCoMKgIHZvaWQgKmJh
-c2VfYWRkciwgKmxhc3RfYmFzZV9hZGRyOwo+Pj4gwqDCoMKgwqDCoCBpbnQgZm91bmQsIG5ld3Np
-emU7Cj4+PiBAQCAtNzQ1LDggKzc0Niw5IEBAIHN0YXRpYyBpbnQgX19mMmZzX3NldHhhdHRyKHN0
-cnVjdCBpbm9kZSAqaW5vZGUsIAo+Pj4gaW50IGluZGV4LAo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgIXN0cmNtcChuYW1lLCBGMkZTX1hBVFRSX05BTUVfRU5DUllQVElPTl9DT05URVhU
-KSkKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBmMmZzX3NldF9lbmNyeXB0ZWRfaW5vZGUoaW5vZGUp
-Owo+Pj4gwqDCoMKgwqDCoCBmMmZzX21hcmtfaW5vZGVfZGlydHlfc3luYyhpbm9kZSwgdHJ1ZSk7
-Cj4+PiAtwqDCoMKgIGlmICghZXJyb3IgJiYgU19JU0RJUihpbm9kZS0+aV9tb2RlKSkKPj4+IC3C
-oMKgwqDCoMKgwqDCoCBzZXRfc2JpX2ZsYWcoRjJGU19JX1NCKGlub2RlKSwgU0JJX05FRURfQ1Ap
-Owo+Pj4gK8KgwqDCoCBpZiAoIWVycm9yICYmIFNfSVNESVIoaW5vZGUtPmlfbW9kZSkgJiYKPj4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGYyZnNfaXNfY2hlY2twb2ludGVkX25vZGUoc2JpLCBp
-bm9kZS0+aV9pbm8pKQo+Pj4gK8KgwqDCoMKgwqDCoMKgIGYyZnNfYWRkX2lub19lbnRyeShzYmks
-IGlub2RlLT5pX2lubywgRU5DX0RJUl9JTk8pOwo+Pgo+PiBJcyBpdCByaWdodCB0byBzYXkgRU5D
-X0RJUl9JTk8gaW4gdGhpcyBjYXNlPwo+Cj4gU29ycnksIEkgZGlkbid0IGdldCBpdC4KPgo+IFRo
-YW5rcywKPgo+Pgo+Pj4gwqAgwqAgc2FtZToKPj4+IMKgwqDCoMKgwqAgaWYgKGlzX2lub2RlX2Zs
-YWdfc2V0KGlub2RlLCBGSV9BQ0xfTU9ERSkpIHsKPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL3Ry
-YWNlL2V2ZW50cy9mMmZzLmggYi9pbmNsdWRlL3RyYWNlL2V2ZW50cy9mMmZzLmgKPj4+IGluZGV4
-IDU2YjExM2UzY2Q2YS4uY2EwY2YxMjIyNmU5IDEwMDY0NAo+Pj4gLS0tIGEvaW5jbHVkZS90cmFj
-ZS9ldmVudHMvZjJmcy5oCj4+PiArKysgYi9pbmNsdWRlL3RyYWNlL2V2ZW50cy9mMmZzLmgKPj4+
-IEBAIC0xNDUsNyArMTQ1LDggQEAgVFJBQ0VfREVGSU5FX0VOVU0oQ1BfUkVTSVpFKTsKPj4+IMKg
-wqDCoMKgwqDCoMKgwqDCoCB7IENQX05PREVfTkVFRF9DUCzCoMKgwqAgIm5vZGUgbmVlZHMgY3Ai
-IH0swqDCoMKgwqDCoMKgwqAgXAo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIHsgQ1BfRkFTVEJPT1Rf
-TU9ERSzCoMKgwqAgImZhc3Rib290IG1vZGUiIH0swqDCoMKgwqDCoMKgwqAgXAo+Pj4gwqDCoMKg
-wqDCoMKgwqDCoMKgIHsgQ1BfU1BFQ19MT0dfTlVNLMKgwqDCoCAibG9nIHR5cGUgaXMgMiIgfSzC
-oMKgwqDCoMKgwqDCoCBcCj4+PiAtwqDCoMKgwqDCoMKgwqAgeyBDUF9SRUNPVkVSX0RJUizCoMKg
-wqAgImRpciBuZWVkcyByZWNvdmVyeSIgfSkKPj4+ICvCoMKgwqDCoMKgwqDCoCB7IENQX1JFQ09W
-RVJfRElSLMKgwqDCoCAiZGlyIG5lZWRzIHJlY292ZXJ5IiB9LMKgwqDCoMKgwqDCoMKgIFwKPj4+
-ICvCoMKgwqDCoMKgwqDCoCB7IENQX0VOQ19ESVIswqDCoMKgwqDCoMKgwqAgInBlcnNpc3QgZW5j
-cnlwdGlvbiBwb2xpY3kiIH0pCj4+PiDCoCDCoCAjZGVmaW5lIHNob3dfc2h1dGRvd25fbW9kZSh0
-eXBlKcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4+IMKgwqDCoMKg
-wqAgX19wcmludF9zeW1ib2xpYyh0eXBlLMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgXAo+Pj4gLS0gCj4+PiAyLjI5LjIKPj4gLgo+PgoKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1h
-aWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczov
-L2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+For now, when do_checkpoint fails, the prefree bitmap is not cleared,
+but these segments are already in the free state. If these segments
+are used, the segments in use will be reset to the free state when
+f2fs_clear_prefree_segments is called next time.
+
+So move set_prefree_as_free_segments after clear_prefree_segments.
+
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/segment.c | 17 +----------------
+ 1 file changed, 1 insertion(+), 16 deletions(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index c2866561263e..ea1334e17a0d 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1945,20 +1945,6 @@ void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi)
+ 		release_discard_addr(entry);
+ }
+ 
+-/*
+- * Should call f2fs_clear_prefree_segments after checkpoint is done.
+- */
+-static void set_prefree_as_free_segments(struct f2fs_sb_info *sbi)
+-{
+-	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+-	unsigned int segno;
+-
+-	mutex_lock(&dirty_i->seglist_lock);
+-	for_each_set_bit(segno, dirty_i->dirty_segmap[PRE], MAIN_SEGS(sbi))
+-		__set_test_and_free(sbi, segno, false);
+-	mutex_unlock(&dirty_i->seglist_lock);
+-}
+-
+ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+ 						struct cp_control *cpc)
+ {
+@@ -1993,6 +1979,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+ 		for (i = start; i < end; i++) {
+ 			if (test_and_clear_bit(i, prefree_map))
+ 				dirty_i->nr_dirty[PRE]--;
++			__set_test_and_free(sbi, i, false);
+ 		}
+ 
+ 		if (!f2fs_realtime_discard_enable(sbi))
+@@ -4188,8 +4175,6 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 		cpc->trim_start = trim_start;
+ 	}
+ 	up_write(&sit_i->sentry_lock);
+-
+-	set_prefree_as_free_segments(sbi);
+ }
+ 
+ static int build_sit_info(struct f2fs_sb_info *sbi)
+-- 
+2.25.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
