@@ -2,72 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FA79368434
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Apr 2021 17:50:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2DF36A5B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 25 Apr 2021 10:27:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lZbac-00040m-Eb; Thu, 22 Apr 2021 15:50:02 +0000
+	id 1laa71-0000mi-BK; Sun, 25 Apr 2021 08:27:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lZbab-000407-BU
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 15:50:01 +0000
+ (envelope-from <shreeya.patel@collabora.com>) id 1laa6x-0000lX-6F
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:27:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1VnTNLS9EVdWhlRGs4kWqZzI6Aue2Iuvk9f2hTRdOqc=; b=T+7AEaHIQrOH8JC6uiejX+5W6Y
- s9/NZCWDOXgNFiFVCJWcSFL7sv/tl/V0P80w/dVujXDoKxksO7h76e2yiMBwqhEeau6gGgdPsn1AA
- lb1pjt57XkrZS9pFTaCS71dzMSXss/mMdiAtHAbsps3rsIjt4hjo8hh5t2EmXmDzh2pU=;
+ bh=3HbWpojlomNjsGxsQgSOb8kYauo5cu+Ol/t+mU060fY=; b=BD2g02mNie/OIOFwWYCm5G3HHl
+ XD77jxHKjxxuyheXk+sXgOfmigqEZuRGFbZsIDfaXmJtLEYG7T4qQZ+GMjXcOxNr+EzRn/D0S7q7o
+ MnYlsNg/v3lkIxCw5GWG4j8CNebiCB+TLv0t4F2c+Ql4dOWPtrgshzeYU9AYvHoS0pX4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1VnTNLS9EVdWhlRGs4kWqZzI6Aue2Iuvk9f2hTRdOqc=; b=G
- Cvjt+xrRKYq1hM8dfrXa8a9R8YbBy5TtzSvbOwxAzMt6kY4YlDdl7+jcjtVlMX7NRtBB0emB9E6DM
- /ZkTJBbmKWyUFR9UK1kEyxhQjJK5RbVvYolHe2oGuqoEU6BY0hCFt4IOD+ZAdIADFg25a8gszH4hd
- fy/Fgg/91luYbwSk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lZbaR-00DIYc-Hk
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Apr 2021 15:50:01 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 42571613CC;
- Thu, 22 Apr 2021 15:49:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1619106580;
- bh=owpsSSv2dlZ1J2zznW/th04izdGetBVHrfEY0WIu2Wo=;
- h=From:To:Cc:Subject:Date:From;
- b=lTq4IbtM0JA8IHUv/pcs4hvbnFxhy+Eu0+TDCKFkRjCzclj1CgVggu3zo6LDDGeVl
- Bi7G7urCtsRFXWxNJil1RtEnN6XvB8p63HWVOlNciQTxd613+brHZQraHtYRqmI0RE
- IwFrRbG5o+v6e2Z9bNoyCK0SXkQRnLoVzGNiJnwttI11AJ/G93t8rpT1aI9diN59GU
- J7Bc6WSP29BZM23ZNEODMB2p0Pv61jOYVD2+Yo+TtaKRAGydN40apij3iwtP/kBTmd
- Ztew5Pc/bCstpSGOjjuM2iaY4xjx8KBSC6ObttCwNkBw9vJpIpFwuzF5sY3UFttTut
- tpzm4RxLwwVKw==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 22 Apr 2021 08:49:31 -0700
-Message-Id: <20210422154931.3947668-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.31.1.368.gbe11c130af-goog
+ List-Owner:List-Archive; bh=3HbWpojlomNjsGxsQgSOb8kYauo5cu+Ol/t+mU060fY=; b=N
+ jLJgHjEuL3bPMXDl1sGs3cYDkepA63Q5Nc87vlxuMFwBkMARFlHuIDZOxZWzLDJRvODRTh9iRIx1U
+ hzU/wZ9dZZ6NX6Mla3sJYIYPQbzgwUYGVdoZBnQaKauWK2Zft84gdmEMgAxiVH3Gus1+T7tzcZXvI
+ EMjW28JsHIOhmRbU=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1laa6j-0007yn-D2
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:27:27 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: shreeya) with ESMTPSA id B36B91F41B0E
+From: Shreeya Patel <shreeya.patel@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ chao@kernel.org, krisman@collabora.com, ebiggers@google.com,
+ drosen@google.com, ebiggers@kernel.org, yuchao0@huawei.com
+Date: Sat, 24 Apr 2021 02:21:32 +0530
+Message-Id: <20210423205136.1015456-1-shreeya.patel@collabora.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lZbaR-00DIYc-Hk
-Subject: [f2fs-dev] [PATCH] f2fs_io: Add get file name encryption mode
+ 0.5 DATE_IN_PAST_24_48     Date: is 24 to 48 hours before Received: date
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1laa6j-0007yn-D2
+Subject: [f2fs-dev] [PATCH v8 0/4] Make UTF-8 encoding loadable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,152 +67,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@google.com>
+Cc: kernel@collabora.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ andre.almeida@collabora.com, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Robin Hsu <robinhsu@google.com>
+utf8data.h_shipped has a large database table which is an auto-generated
+decodification trie for the unicode normalization functions and it is not
+necessary to carry this large table in the kernel unless it is required by
+the filesystem during boot time.
 
-This patch add an ioctl to get filename encryption mode.
+Goal is to make UTF-8 encoding loadable by converting it into a module
+and adding a unicode subsystem layer between the filesystems and the
+utf8 module.
+This layer will then load the module whenever any filesystem that
+needs unicode is mounted or utf8 can also be built into the kernel incase
+it is required by the filesystem during boot time.
 
-Signed-off-by: Robin Hsu <robinhsu@google.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
+Currently, only UTF-8 encoding is supported but if any other encodings
+are supported in future then the layer file would be responsible for
+loading the desired encoding module.
+
+1st patch in the series resolves the warning reported by kernel test
+robot by using strscpy instead of strncpy.
+
+Unicode is the subsystem and utf8 is a charachter encoding for the
+subsystem, hence 2nd and 3rd patches in the series are renaming functions
+and file name to unicode for better understanding the difference between
+UTF-8 module and unicode layer.
+
+Last patch in the series adds the layer and utf8 module and also uses
+static calls which gives performance benefit when compared to indirect
+calls using function pointers.
+
 ---
- tools/f2fs_io/f2fs_io.c | 63 +++++++++++++++++++++++++++++++++++++++++
- tools/f2fs_io/f2fs_io.h | 36 +++++++++++++++++++++++
- 2 files changed, 99 insertions(+)
+Changes in v8
+  - Improve the commit message of patch 1 to decribe about how
+    overly-long strings should be handled.
+  - Improve the commit messages in patches 2/3/4 to better understand
+    the use of built-in option.
+  - Improve the help text in Kconfig for avoiding contradictory
+    statements.
+  - Make spinlock definition static.
+  - Use int instead of bool to avoid gcc warning.
+  - Add a comment for decribing why we are using
+    try_then_request_module() instead of request_module()
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 033c256d14d1..fa7d3f5e4b36 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -1096,6 +1096,68 @@ static void do_compress(int argc, char **argv, const struct cmd_desc *cmd)
- 	exit(0);
- }
+Changes in v7
+  - Update the help text in Kconfig
+  - Handle the unicode_load_static_call function failure by decrementing
+    the reference.
+  - Correct the code for handling built-in utf8 option as well.
+  - Correct the synchronization for accessing utf8mod.
+  - Make changes to unicode_unload() for handling the situation where
+    utf8mod != NULL and um == NULL.
+
+Changes in v6
+  - Add spinlock to protect utf8mod and avoid NULL pointer
+    dereference.
+  - Change the static call function names for being consistent with
+    kernel coding style.
+  - Merge the unicode_load_module function with unicode_load as it is
+    not really needed to have a separate function.
+  - Use try_then_module_get instead of module_get to avoid loading the
+    module even when it is already loaded.
+  - Improve the commit message.
+
+Changes in v5
+  - Remove patch which adds NULL check in ext4/super.c and f2fs/super.c
+    before calling unicode_unload().
+  - Rename global variables and default static call functions for better
+    understanding
+  - Make only config UNICODE_UTF8 visible and config UNICODE to be always
+    enabled provided UNICODE_UTF8 is enabled.  
+  - Improve the documentation for Kconfig
+  - Improve the commit message.
  
-+#define get_filename_encrypt_mode_desc "get file name encrypt mode"
-+#define get_filename_encrypt_mode_help					\
-+"f2fs_io filename_encrypt_mode [file or directory path]\n\n"		\
-+"Get the file name encription mode of the given file/directory.\n"	\
-+
-+static void do_get_filename_encrypt_mode (int argc, char **argv,
-+						const struct cmd_desc *cmd)
-+{
-+	static const char *enc_name[] = {
-+		"invalid", /* FS_ENCRYPTION_MODE_INVALID (0) */
-+		"aes-256-xts", /* FS_ENCRYPTION_MODE_AES_256_XTS (1) */
-+		"aes-256-gcm", /* FS_ENCRYPTION_MODE_AES_256_GCM (2) */
-+		"aes-256-cbc", /* FS_ENCRYPTION_MODE_AES_256_CBC (3) */
-+		"aes-256-cts", /* FS_ENCRYPTION_MODE_AES_256_CTS (4) */
-+		"aes-128-cbc", /* FS_ENCRYPTION_MODE_AES_128_CBC (5) */
-+		"aes-128-cts", /* FS_ENCRYPTION_MODE_AES_128_CTS (6) */
-+		"speck128-256-xts", /* FS_ENCRYPTION_MODE_SPECK128_256_XTS (7) */
-+		"speck128-256-cts", /* FS_ENCRYPTION_MODE_SPECK128_256_CTS (8) */
-+		"adiantum", /* FS_ENCRYPTION_MODE_ADIANTUM (9) */
-+	};
-+	int fd, mode, ret;
-+	struct fscrypt_get_policy_ex_arg arg;
-+
-+	if (argc != 2) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	fd = xopen(argv[1], O_RDONLY, 0);
-+	arg.policy_size = sizeof(arg.policy);
-+	ret = ioctl(fd, FS_IOC_GET_ENCRYPTION_POLICY_EX, &arg);
-+	if (ret != 0 && errno == ENOTTY)
-+		ret = ioctl(fd, FS_IOC_GET_ENCRYPTION_POLICY, arg.policy.v1);
-+	close(fd);
-+
-+	if (ret) {
-+		perror("FS_IOC_GET_ENCRYPTION_POLICY|_EX");
-+		exit(1);
-+	}
-+
-+	switch (arg.policy.version) {
-+	case FSCRYPT_POLICY_V1:
-+		mode = arg.policy.v1.filenames_encryption_mode;
-+		break;
-+	case FSCRYPT_POLICY_V2:
-+		mode = arg.policy.v2.filenames_encryption_mode;
-+		break;
-+	default:
-+		printf("Do not support policy version: %d\n",
-+							arg.policy.version);
-+		exit(1);
-+	}
-+
-+	if (mode >= sizeof(enc_name)/sizeof(enc_name[0])) {
-+		printf("Do not support algorithm: %d\n", mode);
-+		exit(1);
-+	}
-+	printf ("%s\n", enc_name[mode]);
-+	exit(0);
-+}
-+
- #define CMD_HIDDEN 	0x0001
- #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
- #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
-@@ -1125,6 +1187,7 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(set_coption),
- 	CMD(decompress),
- 	CMD(compress),
-+	CMD(get_filename_encrypt_mode),
- 	{ NULL, NULL, NULL, NULL, 0 }
- };
- 
-diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-index d53e5765c538..3a0278fd6ddf 100644
---- a/tools/f2fs_io/f2fs_io.h
-+++ b/tools/f2fs_io/f2fs_io.h
-@@ -91,6 +91,42 @@ typedef u32	__be32;
- #define F2FS_IOC_DECOMPRESS_FILE        _IO(F2FS_IOCTL_MAGIC, 23)
- #define F2FS_IOC_COMPRESS_FILE          _IO(F2FS_IOCTL_MAGIC, 24)
- 
-+#ifndef FS_IOC_GET_ENCRYPTION_POLICY
-+#define FSCRYPT_POLICY_V1		0
-+#define FSCRYPT_KEY_DESCRIPTOR_SIZE	8
-+struct fscrypt_policy_v1 {
-+	__u8 version;
-+	__u8 contents_encryption_mode;
-+	__u8 filenames_encryption_mode;
-+	__u8 flags;
-+	__u8 master_key_descriptor[FSCRYPT_KEY_DESCRIPTOR_SIZE];
-+};
-+#define FS_IOC_GET_ENCRYPTION_POLICY		_IOW('f', 21, struct fscrypt_policy_v1)
-+#endif
-+
-+#ifndef FS_IOC_GET_ENCRYPTION_POLICY_EX
-+#define FSCRYPT_POLICY_V2		2
-+#define FSCRYPT_KEY_IDENTIFIER_SIZE	16
-+struct fscrypt_policy_v2 {
-+	__u8 version;
-+	__u8 contents_encryption_mode;
-+	__u8 filenames_encryption_mode;
-+	__u8 flags;
-+	__u8 __reserved[4];
-+	__u8 master_key_identifier[FSCRYPT_KEY_IDENTIFIER_SIZE];
-+};
-+/* Struct passed to FS_IOC_GET_ENCRYPTION_POLICY_EX */
-+struct fscrypt_get_policy_ex_arg {
-+	__u64 policy_size; /* input/output */
-+	union {
-+		__u8 version;
-+		struct fscrypt_policy_v1 v1;
-+		struct fscrypt_policy_v2 v2;
-+	} policy; /* output */
-+};
-+#define FS_IOC_GET_ENCRYPTION_POLICY_EX		_IOWR('f', 22, __u8[9]) /* size + version */
-+#endif
-+
- #define F2FS_IOC_SET_ENCRYPTION_POLICY	FS_IOC_SET_ENCRYPTION_POLICY
- #define F2FS_IOC_GET_ENCRYPTION_POLICY	FS_IOC_GET_ENCRYPTION_POLICY
- #define F2FS_IOC_GET_ENCRYPTION_PWSALT	FS_IOC_GET_ENCRYPTION_PWSALT
+Changes in v4
+  - Return error from the static calls instead of doing nothing and
+    succeeding even without loading the module.
+  - Remove the complete usage of utf8_ops and use static calls at all
+    places.
+  - Restore the static calls to default values when module is unloaded.
+  - Decrement the reference of module after calling the unload function.
+  - Remove spinlock as there will be no race conditions after removing
+    utf8_ops.
+
+Changes in v3
+  - Add a patch which checks if utf8 is loaded before calling utf8_unload()
+    in ext4 and f2fs filesystems
+  - Return error if strscpy() returns value < 0
+  - Correct the conditions to prevent NULL pointer dereference while
+    accessing functions via utf8_ops variable.
+  - Add spinlock to avoid race conditions.
+  - Use static_call() for preventing speculative execution attacks.
+
+Changes in v2
+  - Remove the duplicate file from the last patch.
+  - Make the wrapper functions inline.
+  - Remove msleep and use try_module_get() and module_put()
+    for ensuring that module is loaded correctly and also
+    doesn't get unloaded while in use.
+  - Resolve the warning reported by kernel test robot.
+  - Resolve all the checkpatch.pl warnings.
+
+Shreeya Patel (4):
+  fs: unicode: Use strscpy() instead of strncpy()
+  fs: unicode: Rename function names from utf8 to unicode
+  fs: unicode: Rename utf8-core file to unicode-core
+  fs: unicode: Add utf8 module and a unicode layer
+
+ fs/ext4/hash.c                             |   2 +-
+ fs/ext4/namei.c                            |  12 +-
+ fs/ext4/super.c                            |   6 +-
+ fs/f2fs/dir.c                              |  12 +-
+ fs/f2fs/super.c                            |   6 +-
+ fs/libfs.c                                 |   6 +-
+ fs/unicode/Kconfig                         |  26 ++-
+ fs/unicode/Makefile                        |   5 +-
+ fs/unicode/unicode-core.c                  | 175 +++++++++++++++++++++
+ fs/unicode/{utf8-core.c => unicode-utf8.c} |  98 +++++++-----
+ fs/unicode/utf8-selftest.c                 |   8 +-
+ include/linux/unicode.h                    | 100 ++++++++++--
+ 12 files changed, 374 insertions(+), 82 deletions(-)
+ create mode 100644 fs/unicode/unicode-core.c
+ rename fs/unicode/{utf8-core.c => unicode-utf8.c} (57%)
+
 -- 
-2.31.1.368.gbe11c130af-goog
+2.30.2
 
 
 
