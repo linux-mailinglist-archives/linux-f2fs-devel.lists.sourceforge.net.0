@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88EB936A5A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 25 Apr 2021 10:12:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3ABD936A5C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 25 Apr 2021 10:36:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1laZrp-0005iE-Or; Sun, 25 Apr 2021 08:11:49 +0000
+	id 1laaFz-0002pU-Sd; Sun, 25 Apr 2021 08:36:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1laZro-0005hm-Bz
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:11:48 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1laaFx-0002pB-GP
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:36:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5pawa+SZFixAQNTJM4LuxQhT6hdG+H0NF3QNxIV7/8Q=; b=O0Ckrqz1JmwxzjcGhHFa/fhKly
- dgAFEbdniwP4w5jKufzZm55ekbXdzTjQeE5esMc96ya1qojQbWTAfKXEVy+a81zgI0Atr5ei9KMoC
- p+yHtw9nTbsZU4zSWoxw8cLW8SMqAkk0b2kLM/Qa0iiW5vbZZjmCY8wFKMZZvqut472Q=;
+ bh=ZaQX5Wdp7AVf5dMCRYMu16xdbVTPbjHbFb48z0WIXXg=; b=FF0Xn8DfPgJEMJHcv2KBxwWoVc
+ dWl9sHDbD6fahbx/kfszKMfPk97fi7oKoo8ft2lOWK5IXjegRqLGJoC2UHXx/hdjBjJmGIt4n5tsp
+ KBWgjF3kfSJW5K7FKbs0ZtOmQwol1gYGX9fUAKaDHwUaK2wNXLaxLQldZXltIL35epLA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5pawa+SZFixAQNTJM4LuxQhT6hdG+H0NF3QNxIV7/8Q=; b=h/9uaUztNqR7KTroh2J7hy9Mte
- bXQzXpwWQ0IE5+AVGx+/HuMVkq3cRcmVX685lZ6MpKd03HANVxlw/NUvy1ccfwaGh7zuV+ggqgyAd
- i4azsqkqTJ3sa1VCCRaL1nmsoCQXNRIPwaeY7ktjmYIpRfFfPkVHN/IZZTEU2ke39d7k=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
+ bh=ZaQX5Wdp7AVf5dMCRYMu16xdbVTPbjHbFb48z0WIXXg=; b=loYz2Py3AGGS0G5Si4qwLrC2wr
+ /46FsavhqVqEEpVHCakLNY+vZhUHRfjDviJZisbYNoHFaxZCD+ep9iTobXHVuiOHmV6eKD/8khDLY
+ MZ0HMC6yqhsblgXG1F/WNnVOeMX4rMRXbI5pKp2sx0SPExLhCQe1A8Xqqe0E3mPBTIuQ=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1laZrj-005cdj-U9
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:11:48 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id F2FCF613C4;
- Sun, 25 Apr 2021 00:47:37 +0000 (UTC)
+ id 1laaFp-005nfd-AL
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Apr 2021 08:36:45 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E13E161077;
+ Sun, 25 Apr 2021 00:52:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1619311658;
- bh=mijs84e9TdAULlSFMzEsjGetGLdyir4mZ+ORmJUQPxw=;
+ s=k20201202; t=1619311936;
+ bh=0sswosJp2T+Ha8GIlRrAqjFW2LwIt2yXsBEDotu6Aw0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XkvpZaFuiMXZxiAo7kTJH47fZSBRkvK4MeVbZuQZVnqR3facBiY/7U1yUxzzSmpw6
- H6hN9sTuGUSinznQNiywDO6aIwjvnONqO4pn7AfL5me9xUF7rA99Je7yW4rTWgeEYe
- w8Zde1WJ7tySt5Oc3+DtfOOoKebLD8I6kf1lTHMwmikfQ277dA0NVLLziGeZokRfZN
- AqNbLcMnvEQKNrOzTZ0/71I0tqc9yD3OkB617y9Th5AIL63JgwSidgKJIW74UmCt/s
- zGFAI3V364zr5zNBaFkFJkYBUy0+mCEv5HGMDVxKtRi+WVa5GBluTIihP4miMChqOR
- +D9aZGoWXwSlw==
-Date: Sat, 24 Apr 2021 17:47:36 -0700
+ b=RdLJc3QDG+4o1Br1BkmefK5OSH4qO1GMA42lQjzm61zfZzaYYwxufX3YhEARrDDjl
+ PP34vzqw2XXO8xYKhJPJfEDXCx97G5AJ/OPlH7T3X8BS5EEwwDJUq9B9467bTrsbnL
+ 7Jsrv9QnypGV0y+vFzyjc9OnGOMen7q7Se3Lj9jIae1pccohfR8/7CIE2ml7g/vKfq
+ jrgWMSQnTyEMd1QQP0ORPDUBW51zX4g3turtBKp5CuWBAnjqb8EbRfwC4rJKEs4eNb
+ Yl8+O5JVWwn8ulZttBG8ZtQSxYpqi2/yp7nuznHm722eDdK2Y1stzH8ux5F8bkdC8n
+ d7eBktaCMzC4g==
+Date: Sat, 24 Apr 2021 17:52:14 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YIS8KHf9VPxZl85b@google.com>
-References: <20210421083941.66371-1-yuchao0@huawei.com>
- <YID1sqemJVeBcdqD@google.com>
- <2c6f17e6-ef23-f313-5df2-6bd63d7df2b1@huawei.com>
+Message-ID: <YIS9PtDRSfmpKAJU@google.com>
+References: <20210416095838.29568-1-yuchao0@huawei.com>
+ <YID2TOCsgKdi0aLf@google.com>
+ <733ba2da-4047-045b-5223-05012b980603@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <2c6f17e6-ef23-f313-5df2-6bd63d7df2b1@huawei.com>
-X-Spam-Score: 0.7 (/)
+In-Reply-To: <733ba2da-4047-045b-5223-05012b980603@huawei.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,10 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1laZrj-005cdj-U9
-Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: remove unneed check condition
+X-Headers-End: 1laaFp-005nfd-AL
+Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: reduce expensive checkpoint
+ trigger frequency
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,56 +90,124 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 04/22, Chao Yu wrote:
-> On 2021/4/22 12:04, Jaegeuk Kim wrote:
-> > On 04/21, Chao Yu wrote:
-> > > In only call path of __cluster_may_compress(), __f2fs_write_data_pages()
-> > > has checked SBI_POR_DOING condition, and also cluster_may_compress()
-> > > has checked CP_ERROR_FLAG condition, so remove redundant check condition
-> > > in __cluster_may_compress() for cleanup.
+> On 2021/4/22 12:06, Jaegeuk Kim wrote:
+> > On 04/16, Chao Yu wrote:
+> > > We may trigger high frequent checkpoint for below case:
+> > > 1. mkdir /mnt/dir1; set dir1 encrypted
+> > > 2. touch /mnt/file1; fsync /mnt/file1
+> > > 3. mkdir /mnt/dir2; set dir2 encrypted
+> > > 4. touch /mnt/file2; fsync /mnt/file2
+> > > ...
+> > > 
+> > > Although, newly created dir and file are not related, due to
+> > > commit bbf156f7afa7 ("f2fs: fix lost xattrs of directories"), we will
+> > > trigger checkpoint whenever fsync() comes after a new encrypted dir
+> > > created.
 > > 
-> > I think cp_error can get any time without synchronization. Is it safe to say
-> > it's redundant?
+> > It'll happen once? How much impact will we hit due to this?
 > 
-> Yes,
+> Yunlei reports me this issue, the problems here in Honer device's specified
+> environment, most fsync() on regular file triggers a checkpoint() when mkdir()
+> happened concurrently, result in causing the performance issue.
 > 
-> But no matter how late we check cp_error, cp_error can happen after our
-> check points, it won't cause regression if we remove cp_error check there,
-> because for compress write, it uses OPU, it won't overwrite any existed data
-> in device.
+> Yunlei could explain more about details of this issue. @Yunlei
 > 
-> Seems it will be more appropriate to check cp_error in
-> f2fs_write_compressed_pages() like we did in f2fs_write_single_data_page()
-> rather than in __cluster_may_compress().
+> > 
+> > > 
+> > > In order to avoid such condition, let's record an entry including
+> > > directory's ino into global cache when we initialize encryption policy
+> > > in a checkpointed directory, and then only trigger checkpoint() when
+> > > target file's parent has non-persisted encryption policy, for the case
+> > > its parent is not checkpointed, need_do_checkpoint() has cover that
+> > > by verifying it with f2fs_is_checkpointed_node().
+> > > 
+> > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > > ---
+> > >   fs/f2fs/f2fs.h              | 2 ++
+> > >   fs/f2fs/file.c              | 3 +++
+> > >   fs/f2fs/xattr.c             | 6 ++++--
+> > >   include/trace/events/f2fs.h | 3 ++-
+> > >   4 files changed, 11 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > index 87d734f5589d..34487e527d12 100644
+> > > --- a/fs/f2fs/f2fs.h
+> > > +++ b/fs/f2fs/f2fs.h
+> > > @@ -246,6 +246,7 @@ enum {
+> > >   	APPEND_INO,		/* for append ino list */
+> > >   	UPDATE_INO,		/* for update ino list */
+> > >   	TRANS_DIR_INO,		/* for trasactions dir ino list */
+> > > +	ENC_DIR_INO,		/* for encrypted dir ino list */
+> > >   	FLUSH_INO,		/* for multiple device flushing */
+> > >   	MAX_INO_ENTRY,		/* max. list */
+> > >   };
+> > > @@ -1090,6 +1091,7 @@ enum cp_reason_type {
+> > >   	CP_FASTBOOT_MODE,
+> > >   	CP_SPEC_LOG_NUM,
+> > >   	CP_RECOVER_DIR,
+> > > +	CP_ENC_DIR,
+> > >   };
+> > >   enum iostat_type {
+> > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > index 6284b2f4a60b..a6c38d8b1ec3 100644
+> > > --- a/fs/f2fs/file.c
+> > > +++ b/fs/f2fs/file.c
+> > > @@ -218,6 +218,9 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
+> > >   		f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
+> > >   							TRANS_DIR_INO))
+> > >   		cp_reason = CP_RECOVER_DIR;
+> > > +	else if (f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
+> > > +							ENC_DIR_INO))
+> > > +		cp_reason = CP_ENC_DIR;
+> > >   	return cp_reason;
+> > >   }
+> > > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> > > index c8f34decbf8e..38796d488d15 100644
+> > > --- a/fs/f2fs/xattr.c
+> > > +++ b/fs/f2fs/xattr.c
+> > > @@ -630,6 +630,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+> > >   			const char *name, const void *value, size_t size,
+> > >   			struct page *ipage, int flags)
+> > >   {
+> > > +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> > >   	struct f2fs_xattr_entry *here, *last;
+> > >   	void *base_addr, *last_base_addr;
+> > >   	int found, newsize;
+> > > @@ -745,8 +746,9 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+> > >   			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
+> > >   		f2fs_set_encrypted_inode(inode);
+> > >   	f2fs_mark_inode_dirty_sync(inode, true);
+> > > -	if (!error && S_ISDIR(inode->i_mode))
+> > > -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+> > > +	if (!error && S_ISDIR(inode->i_mode) &&
+> > > +			f2fs_is_checkpointed_node(sbi, inode->i_ino))
+> > > +		f2fs_add_ino_entry(sbi, inode->i_ino, ENC_DIR_INO);
+> > 
+> > Is it right to say ENC_DIR_INO in this case?
 > 
-> BTW, shouldn't we rename __cluster_may_compress() to
-> cluster_beyond_filesize() for better readability?
+> Sorry, I didn't get it.
 
-f2fs_cluster_has_data()?
+I mean, this case includes non-encrypted directory as well.
 
 > 
 > Thanks,
 > 
 > > 
-> > > 
-> > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > > ---
-> > >   fs/f2fs/compress.c | 5 -----
-> > >   1 file changed, 5 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> > > index 3c9d797dbdd6..532c311e3a89 100644
-> > > --- a/fs/f2fs/compress.c
-> > > +++ b/fs/f2fs/compress.c
-> > > @@ -906,11 +906,6 @@ static bool __cluster_may_compress(struct compress_ctx *cc)
-> > >   		f2fs_bug_on(sbi, !page);
-> > > -		if (unlikely(f2fs_cp_error(sbi)))
-> > > -			return false;
-> > > -		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
-> > > -			return false;
-> > > -
-> > >   		/* beyond EOF */
-> > >   		if (page->index >= nr_pages)
-> > >   			return false;
+> > >   same:
+> > >   	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
+> > > diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+> > > index 56b113e3cd6a..ca0cf12226e9 100644
+> > > --- a/include/trace/events/f2fs.h
+> > > +++ b/include/trace/events/f2fs.h
+> > > @@ -145,7 +145,8 @@ TRACE_DEFINE_ENUM(CP_RESIZE);
+> > >   		{ CP_NODE_NEED_CP,	"node needs cp" },		\
+> > >   		{ CP_FASTBOOT_MODE,	"fastboot mode" },		\
+> > >   		{ CP_SPEC_LOG_NUM,	"log type is 2" },		\
+> > > -		{ CP_RECOVER_DIR,	"dir needs recovery" })
+> > > +		{ CP_RECOVER_DIR,	"dir needs recovery" },		\
+> > > +		{ CP_ENC_DIR,		"persist encryption policy" })
+> > >   #define show_shutdown_mode(type)					\
+> > >   	__print_symbolic(type,						\
 > > > -- 
 > > > 2.29.2
 > > .
