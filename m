@@ -2,101 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B5AD36BC2D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Apr 2021 01:42:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3599F36BD59
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Apr 2021 04:33:03 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lbAs6-0006tW-M3; Mon, 26 Apr 2021 23:42:34 +0000
+	id 1lbDWu-0005wu-3F; Tue, 27 Apr 2021 02:32:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <nickrterrell@gmail.com>)
- id 1lbAs3-0006tG-RU; Mon, 26 Apr 2021 23:42:31 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lbDWs-0005wf-CV
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Apr 2021 02:32:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VsQsmCAgJgJxoXWPONlyxJ9BGgILIRFdOhQAUEyo7tY=; b=C4NukIS9Zt/18+aHnCpJSeQW+S
- vNeS4eN8+D8rcdc1ZLc7imEFx+Mz67+HPE6OYw+eA8LMxYyDgI6f5jXgfvggBB1Tfp3UEULDP7e9F
- CZV9t6ErCKC7Qs+uMVYd69FDRP8jwao+9n8Ay6XPTb8wr+6lC2Ox41FRfhzVp3ArqMPQ=;
+ bh=N3rDbe2A5LZ4LqLa/foCu4JyC/xnnguWf7UJZJi3lQ0=; b=O7NUYR9apwIBh2t6kOPzvx4d59
+ fZLvIMa63/6u00tA4nFordA4l31N/6hZVE2zadbDGYo7hIskKsxT4SQPwYwbY02/Hv8I9vlnSW/M9
+ Zv3/4Obu9Ch4oWUFtXdufpxcE+Um+7hAdPB2EXj3zMZlogH9iguzFmjw1hdIbqS5Zxt8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VsQsmCAgJgJxoXWPONlyxJ9BGgILIRFdOhQAUEyo7tY=; b=IIAWtF8wWCAH8FBbwUMp5ECWwk
- nBRBlTyUPF3khqa4nCCPVmG4juatDCHrLHegPekbAc5xXbldLsHF4Ltei+HPkXiJVoC3MIl8oufIa
- LQ8lnxjUZphEZK4mvFQL8xfUiDSXwi6Ak27DsI332zC8GIqA5YWxovtrwRnEY60dpxNo=;
-Received: from mail-pg1-f182.google.com ([209.85.215.182])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lbAry-0006WX-DN; Mon, 26 Apr 2021 23:42:31 +0000
-Received: by mail-pg1-f182.google.com with SMTP id b17so4076775pgh.7;
- Mon, 26 Apr 2021 16:42:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=VsQsmCAgJgJxoXWPONlyxJ9BGgILIRFdOhQAUEyo7tY=;
- b=Xzd+Bu439mdjn8yl2z798jxgjLJIueP7r/oNdhZWpnH7fkdXHfiqEWPC3ud2fhIG3N
- m0pkmEQiW1/MvVuNoZ/x++oXDuSSksOQO7p/hcRVEOJW2jOvXylXl0VkVX9ER5HyDNH5
- vZ2UZS/griXQEZZ07FhXubjld5Y2CYmr7E2LEraJAYw/aAHTe2fbbANUnQhbNKnyZAzR
- MSlYgq7wSLauROJmYGgt3dEQXoKqbQfr/CnqFwNw/SFx4JAOyIX/tPl/Z90pDJkMbKwI
- 1OP+FAnrRZR47uMu3B1J1CqCeL/1He7tP4S7cQOmus4c4Lvf/PlT31RhD6MHy/C4WpW7
- e6pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=VsQsmCAgJgJxoXWPONlyxJ9BGgILIRFdOhQAUEyo7tY=;
- b=Uc7HrrfEPLPrLUr2f/d3DreUEsjvAptklx406YwhCM6LdfXTxFtW8iCqjZL78h+mDW
- 7Js6/J/Kpyz39x72j4AeVLJjZfqnNLSUC2+maMiqV0ScFUtRWHG15670a7ZyyNE/KG4P
- zEU1cMlLtx+1MgclXMKj0UKUWkQnRtTE/NMLkb7WLQN6LslkI/z9XUA0p0KnRExE4NaE
- usIX6V8Lrk7tXWSVqBOIam+g8fKpLLACrE6GEtXp+13JnPUb607puYk+Npd4mXnpNybq
- Dq2WZRfwB4TIl8AWV2RkgRtMipiVv6y5MF95VXfL02DnEsIX/OlrF3UrDN2P+stgh5Zu
- nvlg==
-X-Gm-Message-State: AOAM533lE6qr1vN2hylWlxFBE6PSrFWmQA9uS5Mj+7gnhBBTP6H0xi1d
- 2/rZ0eNV0/Oqr1uuFBM3674=
-X-Google-Smtp-Source: ABdhPJygKGT7O/9kbsuo/ZEUwwEeZWZQv28qIldIprW6wlA3FY+XBIy2K9MxMTsdBqcdBIFAHcpJZQ==
-X-Received: by 2002:a65:43c9:: with SMTP id n9mr19035367pgp.19.1619480541011; 
- Mon, 26 Apr 2021 16:42:21 -0700 (PDT)
-Received: from nickserv.localdomain (c-98-33-101-203.hsd1.ca.comcast.net.
- [98.33.101.203])
- by smtp.gmail.com with ESMTPSA id m7sm640828pfc.218.2021.04.26.16.42.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Apr 2021 16:42:20 -0700 (PDT)
-From: Nick Terrell <nickrterrell@gmail.com>
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Date: Mon, 26 Apr 2021 16:46:21 -0700
-Message-Id: <20210426234621.870684-5-nickrterrell@gmail.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210426234621.870684-1-nickrterrell@gmail.com>
-References: <20210426234621.870684-1-nickrterrell@gmail.com>
+ bh=N3rDbe2A5LZ4LqLa/foCu4JyC/xnnguWf7UJZJi3lQ0=; b=kEhRbG/8jYo1KUrXXeW7lKu9Bp
+ 4b+VkZLx6xUwyXJ4XxzaR5n0YnMMQe9u5Lt0X0TPzKu5K9qrTvCZlreM1M6pr1oUg1QUQnBnomcdP
+ ywCq83S1+TvHp+zyBmyVOzgmnNwZhXGVmn7W6XglHR40VLDPO275zWvSEhpxQov9W4Lw=;
+Received: from szxga07-in.huawei.com ([45.249.212.35])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lbDWo-00EyRW-NY
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Apr 2021 02:32:50 +0000
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4FTm276dwwz7vsT;
+ Tue, 27 Apr 2021 10:30:07 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 27 Apr
+ 2021 10:32:30 +0800
+To: Matthew Wilcox <willy@infradead.org>
+References: <20210426100908.109435-1-yuchao0@huawei.com>
+ <20210426154021.GN235567@casper.infradead.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <498cdef5-a528-1b65-4af8-906ae2ac3cac@huawei.com>
+Date: Tue, 27 Apr 2021 10:32:30 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <20210426154021.GN235567@casper.infradead.org>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (nickrterrell[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.182 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.182 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: bootlin.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lbAry-0006WX-DN
-Subject: [f2fs-dev] [PATCH v10 4/4] MAINTAINERS: Add maintainer entry for
- zstd
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lbDWo-00EyRW-NY
+Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: restructure f2fs page.private
+ layout
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,58 +83,138 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: squashfs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- Johannes Weiner <jweiner@fb.com>, Christoph Hellwig <hch@infradead.org>,
- Nick Terrell <nickrterrell@gmail.com>, Yann Collet <cyan@fb.com>,
- David Sterba <dsterba@suse.cz>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Petr Malat <oss@malat.biz>,
- Chris Mason <clm@fb.com>, Nick Terrell <terrelln@fb.com>,
- linux-crypto@vger.kernel.org, Felix Handte <felixh@fb.com>,
- Oleksandr Natalenko <oleksandr@natalenko.name>,
- Kernel Team <Kernel-team@fb.com>,
- =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
- Niket Agarwal <niketa@fb.com>, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Nick Terrell <terrelln@fb.com>
+On 2021/4/26 23:40, Matthew Wilcox wrote:
+> On Mon, Apr 26, 2021 at 06:09:08PM +0800, Chao Yu wrote:
+>> Restruct f2fs page private layout for below reasons:
+>>
+>> There are some cases that f2fs wants to set a flag in a page to
+>> indicate a specified status of page:
+>> a) page is in transaction list for atomic write
+>> b) page contains dummy data for aligned write
+>> c) page is migrating for GC
+>> d) page contains inline data for inline inode flush
+>> e) page is verified in merkle tree for fsverity
+> 
+> hm, why do you need to record that?  I would have thought that if a file
+> is marked as being protected by the merkle tree then any pages read in
+> would be !uptodate until the merkle tree verification had happened.
 
-Adds a maintainer entry for zstd listing myself as the maintainer for
-all zstd code, pointing to the upstream issues tracker for bugs, and
-listing my linux repo as the tree.
+I should describe more clearly about the page, the page is belong to merkle
+tree, rather than the one contains user data, for more details:
 
-Signed-off-by: Nick Terrell <terrelln@fb.com>
----
- MAINTAINERS | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+https://elixir.bootlin.com/linux/latest/source/fs/verity/verify.c#L69
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fb2a3633b719..eb67c13ec36a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -19890,6 +19890,18 @@ F:	Documentation/vm/zsmalloc.rst
- F:	include/linux/zsmalloc.h
- F:	mm/zsmalloc.c
- 
-+ZSTD
-+M:	Nick Terrell <terrelln@fb.com>
-+S:	Maintained
-+B:	https://github.com/facebook/zstd/issues
-+T:	git git://github.com/terrelln/linux.git
-+F:	include/linux/zstd*
-+F:	lib/zstd/
-+F:	lib/decompress_unzstd.c
-+F:	crypto/zstd.c
-+N:	zstd
-+K:	zstd
-+
- ZSWAP COMPRESSED SWAP CACHING
- M:	Seth Jennings <sjenning@redhat.com>
- M:	Dan Streetman <ddstreet@ieee.org>
--- 
-2.31.1
+> 
+>> f) page is dirty and has filesystem/inode reference count for writeback
+>> g) page is temporary and has decompress io context reference for compression
+>>
+>> There are existed places in page structure we can use to store
+>> f2fs private status/data:
+>> - page.flags: PG_checked, PG_private
+>> - page.private
+>>
+>> However it was a mess when we using them, which may cause potential
+>> confliction:
+>> 		page.private	PG_private	PG_checked
+>> a)		-1		set
+>> b)		-2
 
+Sorry,
+
+b) should have set PG_private.
+
+>> c), d), e)					set
+>> f)		0		set
+>> g)		pointer		set
+>>
+>> The other problem is page.flags has no free slot, if we can avoid set
+>> zero to page.private and set PG_private flag, then we use non-zero value
+>> to indicate PG_private status, so that we may have chance to reclaim
+>> PG_private slot for other usage. [1]
+>>
+>> So in this patch let's restructure f2fs' page.private as below:
+>>
+>> Layout A: lowest bit should be 1
+>> | bit0 = 1 | bit1 | bit2 | ... | bit MAX | private data .... |
+>>   bit 0	PAGE_PRIVATE_NOT_POINTER
+>>   bit 1	PAGE_PRIVATE_ATOMIC_WRITE
+>>   bit 2	PAGE_PRIVATE_DUMMY_WRITE
+>>   bit 3	PAGE_PRIVATE_ONGOING_MIGRATION
+>>   bit 4	PAGE_PRIVATE_INLINE_INODE
+>>   bit 5	PAGE_PRIVATE_REF_RESOURCE
+>>   bit 6-	f2fs private data
+>>
+>> Layout B: lowest bit should be 0
+>>   page.private is a wrapped pointer.
+>>
+>> After the change:
+>> 		page.private	PG_private	PG_checked
+>> a)		11		set
+>> b)		101
+
+ditto,
+
+>> c)		1001
+>> d)		10001
+>> e)						set
+>> f)		100001		set
+>> g)		pointer		set
+> 
+> Mmm ... this isn't enough to let us remove PG_private.  We'd need PG_private
+> to be set for b,c,d as well.
+
+I can try to add PG_private for c) and d).
+
+> 
+>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>> index 817d0bcb5c67..e393a67a023c 100644
+>> --- a/fs/f2fs/checkpoint.c
+>> +++ b/fs/f2fs/checkpoint.c
+>> @@ -444,7 +444,11 @@ static int f2fs_set_meta_page_dirty(struct page *page)
+>>   	if (!PageDirty(page)) {
+>>   		__set_page_dirty_nobuffers(page);
+>>   		inc_page_count(F2FS_P_SB(page), F2FS_DIRTY_META);
+>> -		f2fs_set_page_private(page, 0);
+>> +		set_page_private_reference(page);
+>> +		if (!PagePrivate(page)) {
+>> +			SetPagePrivate(page);
+>> +			get_page(page);
+>> +		}
+> 
+> I'm not a big fan of this pattern (which seems to be repeated quite often)
+> I think it should be buried within set_page_private_reference().  Also,
+
+Let me check how to avoid duplicated codes.
+
+> are the states abcdf all mutually exclusive, or can a page be in states
+> (eg) b and d at the same time?
+
+Not all states are mutually exclusive, e.g a) and f) are mutually exclusive.
+
+> 
+>> -		if (IS_DUMMY_WRITTEN_PAGE(page)) {
+>> -			set_page_private(page, (unsigned long)NULL);
+>> +		if (page_private_dummy(page)) {
+>> +			clear_page_private_dummy(page);
+>>   			ClearPagePrivate(page);
+> 
+> I think the ClearPagePrivate should be buried in the page_private_dummy()
+> macro too ... and shouldn't there be a put_page() for this too?
+
+b) and g) are allocated from mempool, should we add one extra reference
+count for them after set PG_private?
+
+Thanks,
+
+> 
+> .
+> 
 
 
 _______________________________________________
