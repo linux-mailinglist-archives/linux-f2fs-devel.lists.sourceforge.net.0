@@ -2,67 +2,129 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D57D936DF47
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Apr 2021 20:58:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D46736E4C1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Apr 2021 08:20:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lbpOO-0006yR-H6; Wed, 28 Apr 2021 18:58:36 +0000
+	id 1lc02J-0001M1-T2; Thu, 29 Apr 2021 06:20:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <krisman@collabora.com>) id 1lbpOM-0006yJ-9s
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 28 Apr 2021 18:58:34 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <daejun7.park@samsung.com>) id 1lc02G-0001Le-T5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Apr 2021 06:20:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
- Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:To:From:Sender:Reply-To:Subject:Mime-Version:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=33nOoXEl0vpbgOjMOKxhjMHfi2Fg+BLDYHSGppFBFGY=; b=WZsEFNMTpPEwX1fkjHPoCSZwpp
- p7ZXmVJvOtw8Kaz0tC5lq9PuV5YQ2xNavyZ8KmFZH1ZsPN0rhEIHEr38dOAN9h/GlE1as7/dsAKn+
- 8gqvNG136NNYh6t7UDeE82TfLnb+1ZKVhqCRYeCdZo7ZeXWjEFpdlnqHTe3c3OTYwMAM=;
+ bh=evdDv/wF3+Vhn2ZW2v+vhX2J8hbBZ8flU0eoahtAteI=; b=ZY41D1WGvCDikvct7q48NG5mKR
+ L5uEhPPdRJfiKYCzneogZf5ac1MedVdVGeMblNnHDiaDyBIb5ra2ZrSN+E34A2Hb+frkchwFxa5OR
+ qBR2v3/+OeYLHPNHPKj/U51hjRUHXlpNcGa6ygCg+HOYZGWwOMiMRicgegacFjDlGb6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=33nOoXEl0vpbgOjMOKxhjMHfi2Fg+BLDYHSGppFBFGY=; b=d5jP5C82W6+WTrnNKBdJUXvhux
- IxlWGhVWCXI3kep1KWDJX/cn29AhgyBUK8ep5Otr1fI+9qhadOFfcu6kqFZF8ykX4l7ihRkj/Wzu9
- QtrnVMuzqyHe4U0Io8c2+tHYJISbN0jIzATN3E0FzGlsLQXrk7AuWfLHz5qn/B57V+1c=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:To:From
+ :Sender:Reply-To:Subject:Mime-Version:Cc:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=evdDv/wF3+Vhn2ZW2v+vhX2J8hbBZ8flU0eoahtAteI=; b=D
+ 0/oQfotoL9Wy9NK+ghx99E0VXZq6MyHxzlEhB1gDjErhUHY+Df2Ms45UJMIpg9y1vOMEAgr6FO3qm
+ eLRakoxdkXsghCDebCOgBXavoAn9ANFuPJTOdomTU8kWdH/BAObzVevSiulTkNJx2/nn2RjEzJ/fn
+ vLd5gSz9Eojdu+J8=;
+Received: from mailout2.samsung.com ([203.254.224.25])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lbpOI-00019q-7T
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 28 Apr 2021 18:58:34 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 1284E1F415D1
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: "Theodore Ts'o" <tytso@mit.edu>
-Organization: Collabora
-References: <20210423205136.1015456-1-shreeya.patel@collabora.com>
- <20210423205136.1015456-5-shreeya.patel@collabora.com>
- <20210427062907.GA1564326@infradead.org>
- <61d85255-d23e-7016-7fb5-7ab0a6b4b39f@collabora.com>
- <YIgkvjdrJPjeoJH7@mit.edu> <87bl9z937q.fsf@collabora.com>
- <YIlta1Saw7dEBpfs@mit.edu>
-Date: Wed, 28 Apr 2021 14:58:20 -0400
-In-Reply-To: <YIlta1Saw7dEBpfs@mit.edu> (Theodore Ts'o's message of "Wed, 28
- Apr 2021 10:12:59 -0400")
-Message-ID: <87mtti6xtf.fsf@collabora.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
-MIME-Version: 1.0
-X-Spam-Score: -0.0 (/)
+ id 1lc029-0001N1-OT
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Apr 2021 06:20:28 +0000
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20210429062009epoutp02c895a42c0ef46c9627966d4dee40f0cd~6P9c0miTd2300923009epoutp02P
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 29 Apr 2021 06:20:09 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20210429062009epoutp02c895a42c0ef46c9627966d4dee40f0cd~6P9c0miTd2300923009epoutp02P
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1619677209;
+ bh=evdDv/wF3+Vhn2ZW2v+vhX2J8hbBZ8flU0eoahtAteI=;
+ h=Subject:Reply-To:From:To:Date:References:From;
+ b=tofInGT/8w78bG/zq1J+DtoSI3RcU5ewSWgU8sNg51OZGZcuWGyjXmr4PVT93nPPu
+ Dnwq46c+W0zZFTOq2CUuHSFumSScuhJfLYZumlXcnUWRXqcnATUiY/yH6HTCYIrtKZ
+ j1IG2oYQE2lWwsuvgoCyEKvvbUZx3thHoM+8o46A=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20210429062007epcas2p1dfdf264071cdbf9d6285bfff10b56bbb~6P9a5ErBK3259432594epcas2p1g;
+ Thu, 29 Apr 2021 06:20:07 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.40.181]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4FW52Z2Hjjz4x9Pq; Thu, 29 Apr
+ 2021 06:20:06 +0000 (GMT)
+X-AuditID: b6c32a47-f4bff700000024d9-cc-608a501695ac
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 68.4E.09433.6105A806; Thu, 29 Apr 2021 15:20:06 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
+ <chao@kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, Chao Yu <yuchao0@huawei.com>,
+ Daejun Park <daejun7.park@samsung.com>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p3>
+Date: Thu, 29 Apr 2021 15:20:05 +0900
+X-CMS-MailID: 20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+CMS-TYPE: 102P
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpik+LIzCtJLcpLzFFi42LZdljTQlcsoCvB4M0lQYvTU88yWbw8pGmx
+ 6kG4xZP1s5gtLi1yt7i8aw6bxdTHa1kd2D1ajrxl9di0qpPNY/eCz0wefVtWMXp83iQXwBqV
+ Y5ORmpiSWqSQmpecn5KZl26r5B0c7xxvamZgqGtoaWGupJCXmJtqq+TiE6DrlpkDdIOSQlli
+ TilQKCCxuFhJ386mKL+0JFUhI7+4xFYptSAlp8DQsECvODG3uDQvXS85P9fK0MDAyBSoMiEn
+ 4+MJpYJpbBW3pvWyNTA2snYxcnJICJhIXH/+n7GLkYtDSGAHo8TPiQeZuxg5OHgFBCX+7hAG
+ qREWcJTonX2bDcQWElCSWH9xFjtEXE/i1sM1jCA2m4COxPQT99lB5ogIbGKSWLJkMzPEAl6J
+ Ge1PWSBsaYnty7cyQtgaEj+W9ULViErcXP2WHcZ+f2w+VI2IROu9s1A1ghIPfu6GiktKHNv9
+ gQnCrpfYeucX2AMSAj2MEod33oL6TF/iWsdGsMW8Ar4SE1pms4M8xiKgKrGgyR6ixEXiXFs/
+ WAmzgLzE9rdzwH5nFtCUWL9LH8SUEFCWOHKLBeaTho2/2dHZzAJ8Eh2H/8LFd8x7AnWZmsS6
+ n+uZIMbISNyaB3W8h0T37+nMExgVZyHCeRaSE2YhnLCAkXkVo1hqQXFuemqxUYExcsxuYgQn
+ Ri33HYwz3n7QO8TIxMF4iFGCg1lJhPf3us4EId6UxMqq1KL8+KLSnNTiQ4ymQL9PZJYSTc4H
+ pua8knhDUyMzMwNLUwtTMyMLJXHen6l1CUIC6YklqdmpqQWpRTB9TBycUg1McW0CWewWN4/s
+ uv5QzvV248b/Cx+Y7Vt/S1P75rnm3x0H102U+h1q8+nrc+cq9j4f620eU261LS2zn2FiXdu8
+ VN3qmofuism7cy8z/l5df6BvcVDwZhlum6lmkypvt83N3Lhf8VDXgoc9MTrTpJXmr/KTdt0v
+ OUnO5I5709r/r2vf1MWfePhRaa/KpKXxU1Jvn1A4sHWXcb3Nx+J1ge1BAlsX/d7zsG5F9jMV
+ WSXt2lomFjb3I63sSxKWBMjlXPu6Za+mLEvuo/YlmfWaa2x+ZLf4LvZzKrhc0iYgffmlQMCc
+ BNnHm1OXpV98wXv64l9nj4N2zUXBqcKqXif3pnOKBEstk7fMZVy97ohp5dmtSizFGYmGWsxF
+ xYkAx/qomxUEAAA=
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a
+References: <CGME20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p3>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [203.254.224.25 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1lbpOI-00019q-7T
-Subject: Re: [f2fs-dev] [PATCH v8 4/4] fs: unicode: Add utf8 module and a
- unicode layer
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lc029-0001N1-OT
+Subject: [f2fs-dev] [PATCH] f2fs: set file as cold when file defragmentation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,77 +136,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ebiggers@kernel.org, kernel@collabora.com, drosen@google.com,
- ebiggers@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- andre.almeida@collabora.com, linux-ext4@vger.kernel.org,
- Shreeya Patel <shreeya.patel@collabora.com>
+Reply-To: daejun7.park@samsung.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-"Theodore Ts'o" <tytso@mit.edu> writes:
+In file defragmentation by ioctl, all data blocks in the file are
+re-written out-of-place. File defragmentation implies user will not update
+and mostly read the file. So before the defragmentation, we set file
+temperature as cold for better block allocation.
 
-> On Tue, Apr 27, 2021 at 11:06:33AM -0400, Gabriel Krisman Bertazi wrote:
->> > I think the better argument to make is just one of simplicity;
->> > separating the Unicode data table from the kernel adds complexity.  It
->> > also reduces flexibility, since for use cases where it's actually
->> > _preferable_ to have Unicode functionality permanently built-in the
->> > kernel, we now force the use of some kind of initial ramdisk to load a
->> > module before the root file system (which might require Unicode
->> > support) could even be mounted.
->> 
->> FWIW, embedding FW images to the kernel is also well supported.  Making
->> the data trie a firmware doesn't make a ramdisk more of a requirement
->> than the module solution, I think.
->
-> I don't think we support building firmware directly into the kernel
-> any more.  We used to, but IIRC, there was the feeling that 99.99% of
-> the time, firmware modules were not GPL compliant, and so we ripped
-> out that support.
+Signed-off-by: Daejun Park <daejun7.park@samsung.com>
+---
+ fs/f2fs/file.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Support is still there on 5.12. See
-Documentation/driver-api/firmware/built-in-fw.rst.
-
-Personally, I use this feature very often on my development workflow,
-for similar reasons to what you said below. In my case, avoiding the
-complexity of initramfs but still being able to use my crappy
-FW-dependent NIC card to boot from NFS. :)
-
-> compiled as a module, which is convenient for those use cases, such as
-> for example a mobile handset --- where there is no need for modules
-> since the hardware doesn't change, and so modules and an initrd is
-> just unnecessary complexity --- and firmware, which would make an
-> initial ramdisk mandatory if you wanted to use the casefold feature.
->
-> Put another way, the only reason why putting the unicode tables in a
-> module is to make life easier for desktop distros.  For mobile
-> handsets, modules are an anti-feature, which is why there was no call
-> for supporting this initially, given the initial use case for the
-> casefold feature.
-
-What about support for firmware generation from the kernel tree and
-installation to /lib/firmware? With a module, I can just call
-modules_install, and dealing with modules is hardcoded in the mind of
-every kernel developer.  Dealing with firmwares inside the kernel tree
-is not common, and I didn't find an equivalent Makefile rule to build
-and deploy firmwares on a path that firmware_loader knows about.
-
-I think of firmware as code/data for a device, while modules is for the
-kernel domain, even if it is a gross oversimplification.  Are there
-other examples of firmware built from the kernel tree that are meant
-exclusively to be used by the kernel, without hardware involvement?
-
-For mobile devices, it wouldn't really matter whether it is built-in or
-a firmware, right?  On a controlled environment like Android, you know
-what to expect of your filesystem, so you know beforehand if your kernel
-needs the table loaded (apart from sd cards.  Do people use ext4 for
-sdcards in Android or is it all exfat?).  In those scenarios, you gain
-very little by not making it built-in.
-
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index d697c8900fa7..dcac965a05fe 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2669,6 +2669,9 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ 	map.m_len = pg_end - pg_start;
+ 	total = 0;
+ 
++	if (!file_is_cold(inode))
++		file_set_cold(inode);
++
+ 	while (map.m_lblk < pg_end) {
+ 		pgoff_t idx;
+ 		int cnt = 0;
 -- 
-Gabriel Krisman Bertazi
+2.25.1
+
 
 
 _______________________________________________
