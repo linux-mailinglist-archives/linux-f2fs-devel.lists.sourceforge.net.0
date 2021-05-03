@@ -2,86 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78DB037135C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 May 2021 12:07:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEC6E372392
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 May 2021 01:25:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ldVUP-00081A-5W; Mon, 03 May 2021 10:07:45 +0000
+	id 1ldhw8-00023k-F8; Mon, 03 May 2021 23:25:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <3NbOPYAkbAOQYefQGRRKXGVVOJ.MUUMRKaYKXIUTZKTZ.IUS@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1ldVUN-000813-Jl
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 May 2021 10:07:43 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ldhw7-00023d-E7
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 May 2021 23:25:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JxSqYsEPyVAwg9LWuoHQwOWA0MiiD6IIRv39tPiAyn4=; b=eAfakB4S244MgExXDNJOTraIPD
- R5B7Jtu7TIjNa26p6EKcQLiEWuONllzXThMaro8QQa8XeSDAnhOc+r+VuW7Ue/QjsODFJAiVg3211
- rVbjmT78WVbEPHNZ1eglzLuBydtBKLW6B9EMTdzQen7WOyztD9D9eNoowN9ZMXImE0T8=;
+ bh=mVMAG5BKJ9NnFJxSAtX0NztuE6gmbyxdkfYiRcWj1oU=; b=PKsyDXKNIlYCrNSFgwpymnpd3n
+ K3z9K2xK3/vtGo1ZG+NXUbA00JvbAlLA1mN3U5ljKXjYARl20aVrFe9qD4M4gI/+FCp00+Suh70X6
+ 7TEjJUnO7+MdTLe74D8hyGYUfgyNES/irqi531PZM4cdQi0ooe7FlcqXC+cAJCXg7yxQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JxSqYsEPyVAwg9LWuoHQwOWA0MiiD6IIRv39tPiAyn4=; b=l
- HC+/Uhmey5fIGnxBqfRNgidBOjSQvdFGjVJfpHtChlpwWKa7zQ4tA782CZcqhmqtyQvoPqcE/w659
- fwB16tgmp6kIPcBCLm31HsBKm0kCrzpB8s8gTWmRvaHOPK1dIU7wd1DAZHcYVZr7bTljFc2T+Ab6X
- ga56qtEY95/A8i7Y=;
-Received: from mail-qt1-f199.google.com ([209.85.160.199])
+ List-Owner:List-Archive; bh=mVMAG5BKJ9NnFJxSAtX0NztuE6gmbyxdkfYiRcWj1oU=; b=e
+ mHCYJQJtxsqzr7isCIrKKc+PtZ2xbsRt7jPF95BEEL3fUyknj93a+Z1WgI6wlYPVjqAJdq0c+rpXK
+ TacI/uJv70EgOvG+Z/ybgqsmveBReiQRomHV/GmrYQMgEvMudmD1yWx2p1+5O610SUd6J4Ce/GgtG
+ Cb8jijzCzhsQPTVI=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1ldVUM-0002tB-8c
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 May 2021 10:07:44 +0000
-Received: by mail-qt1-f199.google.com with SMTP id
- b8-20020a05622a0208b02901b5b18f4f91so1057901qtx.18
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 03 May 2021 03:07:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
- bh=JxSqYsEPyVAwg9LWuoHQwOWA0MiiD6IIRv39tPiAyn4=;
- b=CPW7mS81AsYDeUpgcsDikUfbLjs0aIxPtDme2SNBaO022AWwRr/VbT+HA4L/hTtYVB
- R0NFw6cjPbIcGkh0/DqG0nNJOt4mL0OQUllnvbZ1ixUjyV/LHEwNdtHVj8P7UFgnCAwC
- ZNvWJTUWSY1XJN5PvoMgxcWWRkFtLVbKyxsU2D22CtXPY2O7weAHaYDLFJIdOPmhbKwV
- R9DYEsAkLDOEDIWQMguczs9JmaexibP0ffiMaos0SRJLTNstl14AUCZowOvLD8D6UuVX
- KPx3hwV2MMYoqSXJVT322cE5dLXlEs/se3qgvo815qTMImhswFzuRcMnHMyvsXIMCioR
- ba8w==
-X-Gm-Message-State: AOAM531phZZsTuRXtIOEfOEh1m2cmB89BHdjWtZRhDbAfOflW1GCKEQt
- jUKdcTRZ/i5wxEWcdrQjoYa601nEqAh7qrZFaoAhJ/mTNFst
-X-Google-Smtp-Source: ABdhPJxRPC8dRH2F8NR0gJ8PHZUfl31/+LirmoRe+yYzlyDdAtCSu3JYsz5s87wcVunLnIv2o2cNzL8l0KtvHwBYcIhuecga+kYC
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1ldhw3-0001iQ-SX
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 03 May 2021 23:25:12 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B0543610A2;
+ Mon,  3 May 2021 23:24:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1620084298;
+ bh=N5zOlncN9R5ag0CV77uw5WYaavEVXPWnViy/gewguUc=;
+ h=Date:From:To:Cc:Subject:From;
+ b=LIvfhx2OV9Ct22PRwwteGn8nMaODzqYVnXQ1R4n08WEghw4bM66kKs2VCABd5Zqq5
+ fa9qYX7JaJvaI0LmBKJGf7F7nkhP8MCaSav0DdrYuIm3mz5KkTYRO9fPKp84ov3kf/
+ qvBnrIKSwPlDcKmrCGxHp9Y3T/tGUd7pJ00GENBA6HYQtcBReqnmvMMU+CvIRZC+xU
+ n5y+6hXQiF2gEz9rb+SKcgh+fiCcjtFp8vjtJlO5UlGOeeLPnb9SjdcjHwgFsbS/mW
+ olnAo0JCu10hpcVLZzXF3A/rTgIOsc1FnMUM+lJVx0OToZNt99SIcJZmvYRv6omJZP
+ 2h1YXrHl0lmgw==
+Date: Mon, 3 May 2021 16:24:57 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <YJCGSeyA7XoNcyZT@google.com>
 MIME-Version: 1.0
-X-Received: by 2002:a02:cca4:: with SMTP id t4mr2659788jap.67.1620030261256;
- Mon, 03 May 2021 01:24:21 -0700 (PDT)
-Date: Mon, 03 May 2021 01:24:21 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000003f654905c168b09d@google.com>
-From: syzbot <syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+Content-Disposition: inline
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.160.199 listed in list.dnswl.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.199 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ldVUM-0002tB-8c
-Subject: [f2fs-dev] [syzbot] KFENCE: use-after-free in kmem_cache_destroy
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ldhw3-0001iQ-SX
+Subject: [f2fs-dev] [GIT PULL] f2fs update for 5.13-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,126 +79,175 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Hi Linus,
 
-syzbot found the following issue on:
+Could you please consider this pull request?
 
-HEAD commit:    d2b6f8a1 Merge tag 'xfs-5.13-merge-3' of git://git.kernel...
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=15f19ca5d00000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=53fdf14defd48c56
-dashboard link: https://syzkaller.appspot.com/bug?extid=9d90dad32dd9727ed084
-compiler:       Debian clang version 11.0.1-2
+Thanks,
 
-Unfortunately, I don't have any reproducer for this issue yet.
+The following changes since commit 344178334b0971a1ad5f36b76d7b739400e46ec6:
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com
+  Merge tag 'sound-5.12-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound (2021-03-12 12:01:26 -0800)
 
-==================================================================
-BUG: KFENCE: use-after-free write in kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:486
+are available in the Git repository at:
 
-Use-after-free write at 0xffff88823bc16040 (in kfence-#10):
- kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:486
- f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
- f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
- mount_bdev+0x26c/0x3a0 fs/super.c:1367
- legacy_get_tree+0xea/0x180 fs/fs_context.c:592
- vfs_get_tree+0x86/0x270 fs/super.c:1497
- do_new_mount fs/namespace.c:2905 [inline]
- path_mount+0x196f/0x2be0 fs/namespace.c:3235
- do_mount fs/namespace.c:3248 [inline]
- __do_sys_mount fs/namespace.c:3456 [inline]
- __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
- do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
- entry_SYSCALL_64_after_hwframe+0x44/0xae
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.13-rc1
 
-kfence-#10 [0xffff88823bc16000-0xffff88823bc160df, size=224, cache=kmem_cache] allocated by task 15453:
- kmem_cache_zalloc include/linux/slab.h:676 [inline]
- create_cache mm/slab_common.c:247 [inline]
- kmem_cache_create_usercopy+0x12a/0x2f0 mm/slab_common.c:350
- kmem_cache_create+0xf/0x20 mm/slab_common.c:405
- f2fs_kmem_cache_create fs/f2fs/f2fs.h:2463 [inline]
- f2fs_recover_fsync_data+0x1f0/0x8380 fs/f2fs/recovery.c:790
- f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
- mount_bdev+0x26c/0x3a0 fs/super.c:1367
- legacy_get_tree+0xea/0x180 fs/fs_context.c:592
- vfs_get_tree+0x86/0x270 fs/super.c:1497
- do_new_mount fs/namespace.c:2905 [inline]
- path_mount+0x196f/0x2be0 fs/namespace.c:3235
- do_mount fs/namespace.c:3248 [inline]
- __do_sys_mount fs/namespace.c:3456 [inline]
- __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
- do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
- entry_SYSCALL_64_after_hwframe+0x44/0xae
+for you to fetch changes up to 9557727876674893d35940fddbd03d3b505e7ed8:
 
-freed by task 15448:
- kobject_cleanup+0x1c9/0x280 lib/kobject.c:705
- shutdown_cache mm/slab_common.c:463 [inline]
- kmem_cache_destroy+0x93/0x120 mm/slab_common.c:492
- f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
- f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
- mount_bdev+0x26c/0x3a0 fs/super.c:1367
- legacy_get_tree+0xea/0x180 fs/fs_context.c:592
- vfs_get_tree+0x86/0x270 fs/super.c:1497
- do_new_mount fs/namespace.c:2905 [inline]
- path_mount+0x196f/0x2be0 fs/namespace.c:3235
- do_mount fs/namespace.c:3248 [inline]
- __do_sys_mount fs/namespace.c:3456 [inline]
- __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
- do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
- entry_SYSCALL_64_after_hwframe+0x44/0xae
+  f2fs: drop inplace IO if fs status is abnormal (2021-04-26 09:50:39 -0700)
 
-CPU: 0 PID: 15453 Comm: syz-executor.0 Not tainted 5.12.0-syzkaller #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-RIP: 0010:kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:488
-Code: 0f 1f 84 00 00 00 00 00 0f 1f 00 48 85 ff 0f 84 09 01 00 00 41 57 41 56 53 48 89 fb 48 c7 c7 b8 07 dc 8c 31 f6 e8 b1 c3 00 08 <ff> 4b 40 0f 85 c0 00 00 00 48 89 df e8 20 a2 14 00 48 89 df e8 18
-RSP: 0018:ffffc900030af320 EFLAGS: 00010286
-RAX: 0000000000000000 RBX: ffff88823bc16000 RCX: 0000000000000001
-RDX: 0000000000000001 RSI: 0000000000000008 RDI: 0000000000000001
-RBP: ffffc900030af870 R08: dffffc0000000000 R09: fffffbfff19b80f8
-R10: fffffbfff19b80f8 R11: 0000000000000000 R12: ffff88808c3a4000
-R13: dffffc0000000000 R14: 0000000000000000 R15: 1ffff92000615eb0
-FS:  00007f60a5228700(0000) GS:ffff8880b9a00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffff88823bc16040 CR3: 000000001ccd8000 CR4: 00000000001526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
- f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
- mount_bdev+0x26c/0x3a0 fs/super.c:1367
- legacy_get_tree+0xea/0x180 fs/fs_context.c:592
- vfs_get_tree+0x86/0x270 fs/super.c:1497
- do_new_mount fs/namespace.c:2905 [inline]
- path_mount+0x196f/0x2be0 fs/namespace.c:3235
- do_mount fs/namespace.c:3248 [inline]
- __do_sys_mount fs/namespace.c:3456 [inline]
- __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
- do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-RIP: 0033:0x467b1a
-Code: 48 c7 c2 bc ff ff ff f7 d8 64 89 02 b8 ff ff ff ff eb d2 e8 b8 04 00 00 0f 1f 84 00 00 00 00 00 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 bc ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f60a5227fa8 EFLAGS: 00000206 ORIG_RAX: 00000000000000a5
-RAX: ffffffffffffffda RBX: 0000000020000200 RCX: 0000000000467b1a
-RDX: 0000000020000000 RSI: 0000000020000100 RDI: 00007f60a5228000
-RBP: 00007f60a5228040 R08: 00007f60a5228040 R09: 0000000020000000
-R10: 0000000000000000 R11: 0000000000000206 R12: 0000000020000000
-R13: 0000000020000100 R14: 00007f60a5228000 R15: 0000000020014b00
-==================================================================
+----------------------------------------------------------------
+f2fs-for-5.13-rc1
 
+In this round, we added a new mount option, "checkpoint_merge", which introduces
+a kernel thread dealing with the f2fs checkpoints. Once we start to manage the
+IO priority along with blk-cgroup, the checkpoint operation can be processed in
+a lower priority under the process context. Since the checkpoint holds all the
+filesystem operations, we give a higher priority to the checkpoint thread all
+the time.
 
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+Enhancement:
+- introduce gc_merge mount option to introduce a checkpoint thread
+- improve to run discard thread efficiently
+- allow modular compression algorithms
+- expose # of overprivision segments to sysfs
+- expose runtime compression stat to sysfs
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+Bug fix:
+- fix OOB memory access by the node id lookup
+- avoid touching checkpointed data in the checkpoint-disabled mode
+- fix the resizing flow to avoid kernel panic and race conditions
+- fix block allocation issues on pinned files
+- address some swapfile issues
+- fix hugtask problem and kernel panic during atomic write operations
+- don't start checkpoint thread in RO
+
+And, we've cleaned up some kernel coding style and build warnings. In addition,
+we fixed some minor race conditions and error handling routines.
+
+----------------------------------------------------------------
+Chao Yu (25):
+      f2fs: fix to allow migrating fully valid segment
+      f2fs: fix panic during f2fs_resize_fs()
+      f2fs: avoid unused f2fs_show_compress_options()
+      f2fs: remove unused FORCE_FG_GC macro
+      f2fs: update comments for explicit memory barrier
+      f2fs: check discard command number before traversing discard pending list
+      f2fs: remove unused file_clear_encrypt()
+      f2fs: fix to align to section for fallocate() on pinned file
+      f2fs: don't start checkpoint thread in readonly mountpoint
+      f2fs: fix to avoid out-of-bounds memory access
+      f2fs: fix error path of f2fs_remount()
+      f2fs: fix to update last i_size if fallocate partially succeeds
+      f2fs: fix to avoid touching checkpointed data in get_victim()
+      f2fs: delete empty compress.h
+      f2fs: fix to cover __allocate_new_section() with curseg_lock
+      f2fs: introduce gc_merge mount option
+      f2fs: fix to restrict mount condition on readonly block device
+      f2fs: fix to avoid GC/mmap race with f2fs_truncate()
+      f2fs: fix to avoid accessing invalid fio in f2fs_allocate_data_block()
+      f2fs: document: add description about compressed space handling
+      f2fs: avoid duplicated codes for cleanup
+      f2fs: avoid using native allocate_segment_by_default()
+      f2fs: clean up left deprecated IO trace codes
+      f2fs: compress: remove unneed check condition
+      f2fs: drop inplace IO if fs status is abnormal
+
+Chengguang Xu (1):
+      f2fs: fix to use per-inode maxbytes in f2fs_fiemap
+
+Colin Ian King (1):
+      f2fs: fix a redundant call to f2fs_balance_fs if an error occurs
+
+Daeho Jeong (1):
+      f2fs: add sysfs nodes to get runtime compression stat
+
+Eric Biggers (1):
+      f2fs: fix error handling in f2fs_end_enable_verity()
+
+Geert Uytterhoeven (1):
+      f2fs: compress: Allow modular (de)compression algorithms
+
+Gustavo A. R. Silva (1):
+      f2fs: Replace one-element array with flexible-array member
+
+Jaegeuk Kim (2):
+      f2fs: expose # of overprivision segments
+      f2fs: set checkpoint_merge by default
+
+Ruiqi Gong (1):
+      f2fs: fix a typo in inode.c
+
+Sahitya Tummala (2):
+      f2fs: allow to change discard policy based on cached discard cmds
+      f2fs: fix the periodic wakeups of discard thread
+
+Wan Jiabing (1):
+      f2fs: remove unnecessary struct declaration
+
+Wang Xiaojun (1):
+      f2fs: fix wrong alloc_type in f2fs_do_replace_block
+
+Weichao Guo (1):
+      f2fs: do not use AT_SSR mode in FG_GC & high urgent BG_GC
+
+Yi Chen (1):
+      f2fs: fix to avoid NULL pointer dereference
+
+Yi Zhuang (2):
+      f2fs: Fix a hungtask problem in atomic write
+      f2fs: clean up build warnings
+
+huangjianan@oppo.com (3):
+      f2fs: remove unnecessary IS_SWAPFILE check
+      f2fs: fix last_lblock check in check_swap_activate_fast
+      f2fs: check if swapfile is section-alligned
+
+jiahao (1):
+      f2fs: fix a spacing coding style
+
+qiulaibin (1):
+      f2fs: fix wrong comment of nat_tree_lock
+
+xuyehan (1):
+      f2fs: fix a spelling error
+
+ Documentation/ABI/testing/sysfs-fs-f2fs |  31 +++++-
+ Documentation/filesystems/f2fs.rst      |  14 +++
+ fs/f2fs/Kconfig                         |  16 ++-
+ fs/f2fs/acl.c                           |   1 +
+ fs/f2fs/checkpoint.c                    |   9 +-
+ fs/f2fs/compress.c                      |  15 +--
+ fs/f2fs/compress.h                      |   0
+ fs/f2fs/data.c                          | 125 ++++++++++++++++++----
+ fs/f2fs/debug.c                         |   3 +
+ fs/f2fs/dir.c                           |   1 +
+ fs/f2fs/f2fs.h                          |  55 ++++++----
+ fs/f2fs/file.c                          |  51 +++++----
+ fs/f2fs/gc.c                            |  95 +++++++++++++----
+ fs/f2fs/gc.h                            |   6 ++
+ fs/f2fs/inline.c                        |   3 +-
+ fs/f2fs/inode.c                         |   3 +-
+ fs/f2fs/namei.c                         |   3 +
+ fs/f2fs/node.c                          |  19 +++-
+ fs/f2fs/node.h                          |   1 +
+ fs/f2fs/recovery.c                      |   3 +-
+ fs/f2fs/segment.c                       | 184 +++++++++++++++++++++++---------
+ fs/f2fs/segment.h                       |  16 ++-
+ fs/f2fs/super.c                         | 102 +++++++++++++-----
+ fs/f2fs/sysfs.c                         |  47 ++++++++
+ fs/f2fs/verity.c                        |  75 +++++++++----
+ fs/f2fs/xattr.c                         |   1 +
+ include/linux/f2fs_fs.h                 |   2 +-
+ 27 files changed, 660 insertions(+), 221 deletions(-)
+ delete mode 100644 fs/f2fs/compress.h
 
 
 _______________________________________________
