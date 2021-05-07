@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD2D8376039
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 May 2021 08:27:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A2CE376068
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 May 2021 08:33:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1letxA-0006mH-CV; Fri, 07 May 2021 06:27:12 +0000
+	id 1leu3Y-0001iO-2Y; Fri, 07 May 2021 06:33:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1letx8-0006m2-D1
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 06:27:10 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1leu3W-0001iA-Kd
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 06:33:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+dimjcHFBtz4aelQdfH++WGMG5WtBXl0RHxFm/3M0vM=; b=ZRzwGPNXF3r9SAI6NcMl2vmgku
- avgmD6QcmRwWJQRv9vjE3NCvCSXIsSYXIsCuswKIaW+gwJtcasAKkdzdQCBmRYuGrbVsHLatQTlmw
- rdU72sKuj3sODRCAcAL163Sh1Qie6tBQeMWfYN0b8BEqZUMNBPVf662P0M+IJtanFiNI=;
+ bh=yhgio/eBb2HNtTdxqYR2YXXTVe7upvPzsVWjxcm3SOA=; b=UCySDZUKQyrfPQBH5sg5a+eqwT
+ hHjlmjQV63SNa6/wi0PlvFH7wPov1czB5pOqSI9whd1nTXIwxdCEwazQWAViXCHcCUZdkZyKI64sq
+ xE185Jv63lelUXUXfxUOEbDQzhtUTE4jMBr6ePUWpGBvLkx8Wxdfs4bpH9LPCXpup/YM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+dimjcHFBtz4aelQdfH++WGMG5WtBXl0RHxFm/3M0vM=; b=DCua5EEkiMsVCIb1BckCDBsbeE
- jfKI8G6UqCLQr46vaV78cPJH/vCaqKY5xHFOgiY/8xDlwUIgqcRI7S3bxNMJuV2E5lTRMKsPowt9j
- QnMMquNQFEMuj1ldgh784GZMolJFbV2f4hK7joyPrKXpHsnlhVa9L1hGlaOMjtTpmQrc=;
+ bh=yhgio/eBb2HNtTdxqYR2YXXTVe7upvPzsVWjxcm3SOA=; b=H1zg+9PBQJCtRyOlmsYzu8G2fk
+ wXXCqNAbUcprzoAbYMhOgwsu6/8BH+ZKrahHyzsX+3JMupJ3v1ZGDW1qAffbZyqsCorJZMTOm30Gt
+ T/IG8k0YaORlue2kSpWwuwE584YlmsppXn+L0nS995bVXWL23YAlV9qOpKVFpK0vtFU8=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1letww-0003jc-8e
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 06:27:11 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1E20C610FA;
- Fri,  7 May 2021 06:26:49 +0000 (UTC)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1leu3N-008mkS-TW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 06:33:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4B98C6112F;
+ Fri,  7 May 2021 06:33:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620368809;
- bh=26lW/SlE/3tJXeTGnqnhmb7qE4S+ECkvLL6V6VcGy/c=;
+ s=k20201202; t=1620369207;
+ bh=BpAPmiejLFpAyTHujOzMNbWbBmKEXC5DKEs1SQmHxIo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QY/O7ugwDFC6NdsFh2BVxwy0nlopRdBeqyFlCL9G4d5FMH1aoe3c5KPUbucOrobZX
- An4KwX3zBs3/9NYI9JlzJ8XF3s4jvqH3x4VBNEVdy1sGO9cH+M0J/p2AYfS3yzJ8mQ
- UE6ocjIkqyiBTw7N3+tIoK5VLMyipFy93ryG6QS3+heoKGeQ9KSV4jatwHFhz3elgm
- 5Ayat9Y0AaHu6aFQn7ctwKXdGnjgLl7Gqlv5burxcyd5/cJrFTFS5yUgsIRauOZYK/
- HJuAwC1cuWCbHpI6D45phnn0k3NQdbY1mTEt98ajudqb88DYelL+RWOzWUxkOkPdG9
- lS14JTBbedlNg==
-Date: Thu, 6 May 2021 23:26:47 -0700
+ b=Ca3dThI7CoAz/6b6jxiTn3EDabPzD3RPFff82F5AJAVgQdK+S9HWXEDWFgdF4R0yE
+ e4FUDEpNcWPsqSd9OBXNPV9BWHNMIoVzGY3WO29tfL1zTS1GFiVL+JGxVoJqJTx+yv
+ qk16Hoc9sRgy5CtFKbmPo7yElKP9Bs52lGanr17GfkSur7LQ6R3VaoMjhLxFLHcCdF
+ yzuei+YcuyYw3R/VSgtq47qeHQ/CKczYCvvAgfTxuWUb2C5XiQggDH3ciGP3WOCwvH
+ 2BbwKygdZm2D2nEQZl8QuuxLBiCaH+w+PZzW4WGdHY4g3q3ZRIxB2MdrDHkxApxbxo
+ SfjZ270CPe95A==
+Date: Thu, 6 May 2021 23:33:25 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YJTdp0Rj170TYm24@sol.localdomain>
-References: <20210506191347.1242802-1-jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YJTfNeYeDT65GslB@sol.localdomain>
+References: <20210425011053.44436-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210506191347.1242802-1-jaegeuk@kernel.org>
+In-Reply-To: <20210425011053.44436-1-yuchao0@huawei.com>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,8 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1letww-0003jc-8e
-Subject: Re: [f2fs-dev] [PATCH] f2fs: return -EPERM given generic mask
+X-Headers-End: 1leu3N-008mkS-TW
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: reduce expensive checkpoint trigger
+ frequency
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,56 +82,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, May 06, 2021 at 12:13:47PM -0700, Jaegeuk Kim wrote:
-> In f2fs_fileattr_set(),
-> 
-> 	if (!fa->flags_valid)
-> 		mask &= FS_COMMON_FL;
-> 
-> In this case, we should not allow to set FS_COMPR_FL, instead of BUG_ON.
-> 
-> /* Flags shared betwen flags/xflags */
-> 	(FS_SYNC_FL | FS_IMMUTABLE_FL | FS_APPEND_FL | \
-> 	 FS_NODUMP_FL |	FS_NOATIME_FL | FS_DAX_FL | \
-> 	 FS_PROJINHERIT_FL)
-> 
-> Fixes: 4c5b47997521 ("vfs: add fileattr ops")
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->  fs/f2fs/file.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index e01ce802cf10..38015ef84893 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -1817,7 +1817,9 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
->  	struct f2fs_inode_info *fi = F2FS_I(inode);
->  	u32 masked_flags = fi->i_flags & mask;
->  
-> -	f2fs_bug_on(F2FS_I_SB(inode), (iflags & ~mask));
-> +	/* mask can be shrunk by flags_valid selector */
-> +	if (iflags & ~mask)
-> +		return -EPERM;
->  
->  	/* Is it quota file? Do not allow user to mess with it */
->  	if (IS_NOQUOTA(inode))
-> -- 
-> 2.31.1.607.g51e8a6a459-goog
+On Sun, Apr 25, 2021 at 09:10:53AM +0800, Chao Yu wrote:
+> +	if (!error && S_ISDIR(inode->i_mode) && f2fs_encrypted_file(inode) &&
+> +			f2fs_is_checkpointed_node(sbi, inode->i_ino))
+> +		f2fs_add_ino_entry(sbi, inode->i_ino, ENC_DIR_INO);
 
-This looks like the wrong fix.  AFAICS, 'mask' is the set of inode flags that
-the specific ioctl (FS_IOC_SETFLAGS or FS_IOC_FSSETXATTR) can potentially
-modify, while 'iflags' is the new set of inode flags among the set that either
-ioctl can potentially modify.  So this change will stop FS_IOC_FSSETXATTR from
-working on files that have already flags set which are only modifiable by
-FS_IOC_SETFLAGS, e.g. the compression flag.
+This will never be true, since S_ISDIR() and f2fs_encrypted_file() are logically
+contradictory (as f2fs_encrypted_file() only returns true when S_ISREG()).
 
-I think the correct fix would be to just do something like 'iflags &= mask'.
+How did you test this change?
 
 - Eric
 
