@@ -2,126 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C32B2376452
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 May 2021 13:09:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1011D376451
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 May 2021 13:09:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1leyMo-0000Bb-0n; Fri, 07 May 2021 11:09:58 +0000
+	id 1leyMk-0002vK-FE; Fri, 07 May 2021 11:09:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <sw0312.kim@samsung.com>) id 1leyMl-0000BQ-RE
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 11:09:55 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <sw0312.kim@samsung.com>) id 1leyMi-0002vC-Fz
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 11:09:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ MIME-Version:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l2PO2O1mNCyWTDvw4ULpOWi9veFuk56983ljENJwuV8=; b=ZxxGoPSJmTssO61lidAmCO9kzh
- BP4ZiMyfWAFTTWojtet/fsLphHbn2Rz5yxOn5/3NkUdbEn+D7ZNmxbRy1GVFFHwgG/ZtbjITfsJZX
- rv3Us/KZRLpLMioOF3kfAdp8ktkj6U957vMoiYap/jpkYg7aTb9rXQ3yIsn0nN11QqrY=;
+ bh=tRpPkArbZBpkXQslb2SD9zz4SzVnlk8bxz+PJZpLwdM=; b=MPJ3I90VV31qdwFqsuwPXjc7Du
+ wIeVA6iYeZZuGhOPrzGguvbHPwjRJwPchEHt5HUVaYeJ4FasSffuJMgkZf2idkIFIwyVr/rlS2H2S
+ zGP4GPxPzBOOVT30FeKwnr/G04p/GI8me74PHY6g+714eK7L9GkdyjWyS5PvvjpfNTcA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
- :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=l2PO2O1mNCyWTDvw4ULpOWi9veFuk56983ljENJwuV8=; b=V
- c/Mk+zZUu0oTI7AzuQS/FtQh0VnqLIqbs9WuhVVnbxu/XCU40b1LwJ2/rHvtVVCgsE1v0QnOvI9MZ
- oO8eHq3oKjEA/NZmRmxBxwnhQpkNd5rsa/qQA83De0NryRRm+cKv2D9kVHW8JleNTkofWRW0nC1c0
- SuDDhEa/bRcw1Ek0=;
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=tRpPkArbZBpkXQslb2SD9zz4SzVnlk8bxz+PJZpLwdM=; b=a+8V5ImvY5lv4ywYG2cFliPXKX
+ 4LuioPnEGdPlXX6RhLV1mp209iDQFc7xS0zbZdhDvUMkVf5iNbVikReKfdkOYzOrVvv775Jsc5zbk
+ 6cWmC0hlesbYA39Xq0LMMxSVStmo5ZQQMIPFB2xC38DMRxXsxgZQ6YPLlZ878P5dvKSQ=;
 Received: from mailout2.samsung.com ([203.254.224.25])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1leyMc-009Ylx-A0
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 11:09:56 +0000
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ id 1leyMc-009Ym4-A0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 07 May 2021 11:09:53 +0000
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
  by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20210507110936epoutp02eb2cac1989cefdbb347363dc999d5664~8xEc4_Aos2295622956epoutp021
+ 20210507110937epoutp02676a9945ad67169d4c303bfb2d36d601~8xEd_Mub82329323293epoutp02t
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  7 May 2021 11:09:36 +0000 (GMT)
+ Fri,  7 May 2021 11:09:37 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20210507110936epoutp02eb2cac1989cefdbb347363dc999d5664~8xEc4_Aos2295622956epoutp021
+ 20210507110937epoutp02676a9945ad67169d4c303bfb2d36d601~8xEd_Mub82329323293epoutp02t
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1620385776;
- bh=l2PO2O1mNCyWTDvw4ULpOWi9veFuk56983ljENJwuV8=;
- h=From:To:Cc:Subject:Date:References:From;
- b=Yx43/NENLsmTLjY1d3rA7md8s6X/5sMG9sugo6+8gMGfRfA1JeQsh1QE4kFf5la4G
- RLc8T0GG2Op3CdtfjTpVVRLbCVwBOAVSzj0KA7ACZG83nKN+xU10daF/gn62BQleNw
- XVp9ayVsuZrCM7UjB8KjGa8gBfZG44qSi3zewgBA=
+ s=mail20170921; t=1620385777;
+ bh=tRpPkArbZBpkXQslb2SD9zz4SzVnlk8bxz+PJZpLwdM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=CSsg7AJsYie9F1Di3lq5e8nSGUBI6P18S2JIT03xKBUvLL+TE6lrN8cLd/GFiHGgZ
+ z4OtkjK/Gp7jgAyNNlcqAjdF60ym83KufDbGVayb0Ao5MvOPRoZ2fvU4lWCHP8H6OA
+ VpoC8Rpa2kXxTzS+NWLsE781OZu/UTVuPjmcHwI0=
 Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
  epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20210507110932epcas1p3f5a6385a9354a179a22147a6ad3a21f9~8xEZDreD00277802778epcas1p3P;
- Fri,  7 May 2021 11:09:32 +0000 (GMT)
-Received: from epsmges1p2.samsung.com (unknown [182.195.40.158]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4Fc74n3tYnz4x9Ps; Fri,  7 May
- 2021 11:09:29 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- B9.AA.09701.9EF15906; Fri,  7 May 2021 20:09:29 +0900 (KST)
+ 20210507110930epcas1p3e031cd2b64bfe9b96f180b0b92b808f1~8xEYETTld0782507825epcas1p3D;
+ Fri,  7 May 2021 11:09:30 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.40.158]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Fc74m30y5z4x9Py; Fri,  7 May
+ 2021 11:09:28 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B4.F9.09824.8EF15906; Fri,  7 May 2021 20:09:28 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20210507110917epcas1p13e027d5e0319629c255524c8c6f6461b~8xELpN04e1582315823epcas1p1E;
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20210507110917epcas1p4a2d7ebd7e2fd8cc630fdf627ad73a003~8xELtmSCw1027110271epcas1p4G;
  Fri,  7 May 2021 11:09:17 +0000 (GMT)
 Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20210507110917epsmtrp1859932ca66496b70432e520acdaef19a~8xELonzHm2530025300epsmtrp1X;
+ 20210507110917epsmtrp1ed73e90da2b3f5b2601f7805e12fb1ab~8xELtBbMk2530025300epsmtrp1Z;
  Fri,  7 May 2021 11:09:17 +0000 (GMT)
-X-AuditID: b6c32a36-647ff700000025e5-13-60951fe979f1
+X-AuditID: b6c32a37-061ff70000002660-ae-60951fe86a1b
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
  epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- D9.DD.08163.DDF15906; Fri,  7 May 2021 20:09:17 +0900 (KST)
+ E9.DD.08163.DDF15906; Fri,  7 May 2021 20:09:17 +0900 (KST)
 Received: from localhost.localdomain (unknown [10.113.221.223]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20210507110917epsmtip2e5d823a447628681de0f92045ff3dd74~8xELatYnb2768827688epsmtip25;
+ 20210507110917epsmtip2699113aa02a776d90d6c2d666c8aacf1~8xELgQ6hL2356423564epsmtip2a;
  Fri,  7 May 2021 11:09:17 +0000 (GMT)
 From: Seung-Woo Kim <sw0312.kim@samsung.com>
 To: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Date: Fri,  7 May 2021 20:12:23 +0900
-Message-Id: <20210507111224.29887-1-sw0312.kim@samsung.com>
+Date: Fri,  7 May 2021 20:12:24 +0900
+Message-Id: <20210507111224.29887-2-sw0312.kim@samsung.com>
 X-Mailer: git-send-email 2.19.2
+In-Reply-To: <20210507111224.29887-1-sw0312.kim@samsung.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrAKsWRmVeSWpSXmKPExsWy7bCmge5L+akJBic6pS1OTz3LZPFk/Sxm
- i0uL3C0u75rDZjFj8ks2B1aPTas62Tx2L/jM5NG3ZRWjx+dNcgEsUdk2GamJKalFCql5yfkp
- mXnptkrewfHO8aZmBoa6hpYW5koKeYm5qbZKLj4Bum6ZOUBrlRTKEnNKgUIBicXFSvp2NkX5
- pSWpChn5xSW2SqkFKTkFlgV6xYm5xaV56XrJ+blWhgYGRqZAhQnZGQf3TmAueMNSseHuB+YG
- xh/MXYycHBICJhIfL69j6WLk4hAS2MEocejdBkYI5xOjxJ/V36Aynxkl9je+ZYVpObf4MRtE
- YhejxPqXR6GcL4wSD759YQOpYhPQkdi/5DdYh4iAncSMC8eA4hwczAKeEgsmRYCEhQWCJW7s
- XcIIYrMIqEq8at/BAmLzClhLtB25CHWfvMSFDbdYIeKCEidnPgGrYQaKN2+dzQyyV0JgE7vE
- lOtPoK5zkZizfTcjhC0s8er4FnYIW0riZX8bO0RDM6PE0iW/WCCcHkaJOYtuQ3UbS+xfOpkJ
- 4lJNifW79CHCihI7f89lhNjMJ/Huaw8rSImEAK9ER5sQRImKxM6jk9ggwlISszYEQ4Q9JP78
- vgH2i5BArMSkH1NZJzDKz0Lyziwk78xC2LuAkXkVo1hqQXFuemqxYYERcqxuYgQnPS2zHYyT
- 3n7QO8TIxMF4iFGCg1lJhPf0oskJQrwpiZVVqUX58UWlOanFhxhNgQE8kVlKNDkfmHbzSuIN
- TY2MjY0tTAzNTA0NlcR5052rE4QE0hNLUrNTUwtSi2D6mDg4pRqYtJ5MXTvz+nz2f7e7he/U
- LF1i4ao70fFQakTdopPSN2dlR+1brr9Q7lBtziJu2UntlYcvVwjyarA8W5/61yZAakPl/nOb
- xEK4Hj5O982tzWw+kFb5b+7qn1ufJ73gPD79fYZHRsOlOcmnBOvC/kTp1nId/xg276GnUtRm
- W02N4oXfw9v13Ze1Tf2WKBS2uXHp8TAGKeFv2zkc2/L1tk64eXPKu9V7Q7Y6CtjsijzYJTBN
- Ztnb7Dj2X2e/t5s+DlMLyzM/4BA99epr5j8W1bkTfl2fW/j7p/LKww9XpAbPE5ducuv9+OLS
- xGN/svVLF9ucVAxbnq9QE3MsycZedl3SmSPTeEv9nv671sRyY6FeqhJLcUaioRZzUXEiAIbF
- cssDBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprDLMWRmVeSWpSXmKPExsWy7bCSvO5d+akJBrtuyFmcnnqWyeLJ+lnM
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNKsWRmVeSWpSXmKPExsWy7bCmnu4L+akJBv8fClmcnnqWyeLJ+lnM
+ FpcWuVtc3jWHzWLG5JdsDqwem1Z1snnsXvCZyaNvyypGj8+b5AJYorJtMlITU1KLFFLzkvNT
+ MvPSbZW8g+Od403NDAx1DS0tzJUU8hJzU22VXHwCdN0yc4DWKimUJeaUAoUCEouLlfTtbIry
+ S0tSFTLyi0tslVILUnIKLAv0ihNzi0vz0vWS83OtDA0MjEyBChOyM/YfvMJYsIWtYva1XawN
+ jGtZuxg5OCQETCQOz6/pYuTiEBLYwSjxpOEbI4TziVHi5+Y57F2MnEDOZ0aJpw+lQWyQhtNH
+ H7FAFO1ilFi66gwThPOFUeL0zyUsIFVsAjoS+5f8ZgWxRQTsJGZcOMYGso5ZwFNiwaQIkLCw
+ QLTEqakn2EBsFgFViZWLpjCC2LwC1hIPLyxih1gmL3Fhwy2wMZwCNhJvNnxkhagRlDg58wnY
+ Kmagmuats5lBbpAQOMcu0TR7NiNEs4vE5KPT2SBsYYlXx7dADZWSeNnfxg7R0Az0wZJfLBBO
+ D6PEnEW3WSGqjCX2L53MBHG1psT6XfoQYUWJnb/nMkJs5pN497UHGo68Eh1tQhAlKhI7j05i
+ gwhLSczaEAwR9pA4dmQuNHT7GSVuHpnGPIFRYRaSf2Yh+WcWwuIFjMyrGMVSC4pz01OLDQuM
+ kSN4EyM4FWqZ72Cc9vaD3iFGJg7GQ4wSHMxKIrynF01OEOJNSaysSi3Kjy8qzUktPsRoCgzt
+ icxSosn5wGScVxJvaGpkbGxsYWJoZmpoqCTOm+5cnSAkkJ5YkpqdmlqQWgTTx8TBKdXAdPPL
+ zGzBb4VMzN9dJ3XrdhZfypzPeXiaRclJnf9dAg6f3hd/tlq8UGMNM6NvrftaP6V3df1vLulV
+ sX6et+57TT6b8UHdxLc2v+bKyT7nVUtj2dzWeNPvwqZJx/x6VrCcVLyvKN6//Plb2/sXclh/
+ ukScXhnwz2XZLf7nfruOZooflrmr1J0lcUTqk438hY76xe+ChA/r+Rv1e3w1m9ktuPvfqtbt
+ Zp38nxcnZzU7z3nWMEnMtYi/5ebZOWxfziwPXbkpQLMrQM+hw5v5eZHMOuFoix9xkuGr0+J8
+ D5arnNvVHTpV08Yws/hhkNzbXULR+VGcjcd97ZjYIg1+1i04JbWmuX1eGvv32J7ZFx8qsRRn
+ JBpqMRcVJwIAXdRYrg4EAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWy7bCSvO5d+akJBifXqFicnnqWyeLJ+lnM
  FpcWuVtc3jWHzWLG5JdsDqwem1Z1snnsXvCZyaNvyypGj8+b5AJYorhsUlJzMstSi/TtErgy
- Du6dwFzwhqViw90PzA2MP5i7GDk5JARMJM4tfswGYgsJ7GCUuDAxAyIuJTH323bGLkYOIFtY
- 4vDhYoiST4wS66YLgdhsAjoS+5f8ZgWxRQQcJFZs28ICYjML+EpMe7oSbKSwQKBE76tpTCA2
- i4CqxKv2HWA1vALWEm1HLkKdIC9xYcMtVoi4oMTJmU+g5shLNG+dzTyBkW8WktQsJKkFjEyr
- GCVTC4pz03OLDQuM8lLL9YoTc4tL89L1kvNzNzGCA1BLawfjnlUf9A4xMnEwHmKU4GBWEuE9
- vWhyghBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHeC10n44UE0hNLUrNTUwtSi2CyTBycUg1MpUe+
- uhx+/Wg907uPzXPn/m8w/8Ax1bLivXgA3xR9/ZarbSLPunP//219xuSx+MQDG67mMzWLNxob
- Cz4PKn4htFiQP/VhZOFypqlf3+qf9eD9KPOZ90zUxgQLywPffiyTmjW7e5PBsv3/HiZ5bFc0
- W99hca/rycYlsosOrZ/luaVxWbVUZIu+/TN1tp2cpV2r6u/xuilE7xZUiOlgjU1nbDxXeMAi
- JnCpYsv17MiVrZFOrXwNmpzruNbb6nBuZF+//WPVj2bDxds6c7/vqt9mVXcwe6ndrQliggtL
- LfQvrtGu75soFJtv3Nbg3vHZpehuanhlfONl2TV/d051VXgvtXbCr787lb+acIvr3pmoxFKc
- kWioxVxUnAgAbX8FrK8CAAA=
-X-CMS-MailID: 20210507110917epcas1p13e027d5e0319629c255524c8c6f6461b
+ 9h+8wliwha1i9rVdrA2Ma1m7GDk5JARMJE4ffcTSxcjFISSwg1Fi/csLjBAJKYm537YD2RxA
+ trDE4cPFEDWfGCVu9P1hB6lhE9CR2L/kN9ggEQEHiRXbtrCA2MwCvhLTnq5kA7GFBSIlGndN
+ B4uzCKhKrFw0BWw+r4C1xMMLi9ghdslLXNhwC2wOp4CNxJsNH8FsIaCaG8t+s0PUC0qcnPkE
+ ar68RPPW2cwTGAVmIUnNQpJawMi0ilEytaA4Nz232LDAKC+1XK84Mbe4NC9dLzk/dxMjOGi1
+ tHYw7ln1Qe8QIxMH4yFGCQ5mJRHe04smJwjxpiRWVqUW5ccXleakFh9ilOZgURLnvdB1Ml5I
+ ID2xJDU7NbUgtQgmy8TBKdXAJP76tN3v04VtGim6V06X+kryz76q01TTUPFTfJq2wwHxwJ9z
+ ph2tYNDpUFqol/ajNS1KlSv38tyoZY+karZNYtHUct6i5rch1uzThZaFl79EW3bNjtgpKO28
+ uo6jvGF3sRKX95xj73sX/6t3q1/o0XMsW7w97djelgVJrccvTDx3Y9vjLp3Lx/tj9uj5Nkge
+ OxfkVte7wmEb99PnoT+fxn356jWT9U35xUp3Pcvc0n9zwpLDZC8ZlL7pzDzqlHWzYkpDZPZM
+ jgfcZ1fKm3y4s9pyx3yGDTEml6e1eAd1uN/7ssrRYBUv+4Gag+0urN7xQRUGZetP3P82/VTW
+ ojl1LU1c/888Cjy28G5HfvIOJZbijERDLeai4kQA9sIXO8kCAAA=
+X-CMS-MailID: 20210507110917epcas1p4a2d7ebd7e2fd8cc630fdf627ad73a003
 X-Msg-Generator: CA
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20210507110917epcas1p13e027d5e0319629c255524c8c6f6461b
-References: <CGME20210507110917epcas1p13e027d5e0319629c255524c8c6f6461b@epcas1p1.samsung.com>
+X-CMS-RootMailID: 20210507110917epcas1p4a2d7ebd7e2fd8cc630fdf627ad73a003
+References: <20210507111224.29887-1-sw0312.kim@samsung.com>
+ <CGME20210507110917epcas1p4a2d7ebd7e2fd8cc630fdf627ad73a003@epcas1p4.samsung.com>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -140,9 +142,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1leyMc-009Ylx-A0
-Subject: [f2fs-dev] [RESEND][PATCH 1/2] resize.f2fs: fix memory leak caused
- by migrate_nat()
+X-Headers-End: 1leyMc-009Ym4-A0
+Subject: [f2fs-dev] [RESEND][PATCH 2/2] mkfs.f2fs: fix memory leak in not
+ enough segments error path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -159,26 +161,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Alloced nat_block doesn't freed from migrate_nat(). Fix to free
-nat_block.
+In not enough segements error path of f2fs_write_check_point_pack(),
+cp_payload is not freed. Fix the error path.
 
 Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
 ---
- fsck/resize.c | 1 +
- 1 file changed, 1 insertion(+)
+ mkfs/f2fs_format.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fsck/resize.c b/fsck/resize.c
-index b043cd984dc6..78d578ec2cc1 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -383,6 +383,7 @@ static void migrate_nat(struct f2fs_sb_info *sbi,
- 		ASSERT(ret >= 0);
- 		DBG(3, "Write NAT: %lx\n", block_addr);
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 3f1fa32a407a..fbecb05b3302 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -723,7 +723,7 @@ static int f2fs_write_check_point_pack(void)
+ 
+ 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
+ 		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
+-		goto free_nat_bits;
++		goto free_cp_payload;
  	}
-+	free(nat_block);
- 	DBG(0, "Info: Done to migrate NAT blocks: nat_blkaddr = 0x%x -> 0x%x\n",
- 			old_nat_blkaddr, new_nat_blkaddr);
- }
+ 	MSG(0, "Info: Overprovision ratio = %.3lf%%\n", c.overprovision);
+ 	MSG(0, "Info: Overprovision segments = %u (GC reserved = %u)\n",
 -- 
 2.19.2
 
