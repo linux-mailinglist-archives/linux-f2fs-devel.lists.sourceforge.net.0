@@ -2,76 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8437A379368
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 18:10:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE57337979F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 21:22:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lg8Tw-0000fz-PC; Mon, 10 May 2021 16:10:08 +0000
+	id 1lgBUH-0000Ec-VX; Mon, 10 May 2021 19:22:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lg8Tv-0000fr-6N
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 16:10:07 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <tytso@mit.edu>)
+ id 1lgBUD-0000E1-TA; Mon, 10 May 2021 19:22:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uQHnJrtktALEqem+hCPibbBCdIujn04Aiu/7JrYjIqQ=; b=PwXDVOxNyrOp9UmrE8l8/WDO5P
- RuhtMnqdxMwydTfnTi8IJKhYl6ysxWCLyehcnJqFzIXYsyqtErpYC7qmIsOjcXcJQBvcArbBwMxqf
- tnFYgrN7tR+jwCIDLzDtquXfweOAMsH8vLiJDSIbfradN3AsGakrllhwOjMhyw4iNjQ4=;
+ bh=im7yptB7Cnn0+/0nEjxp2q806kDi7qdxtBjeZI/94RE=; b=TZBbig48xKUagoQT6OYx+QkYky
+ XdVBi0d5H/1QQUD72onrFsk6/QsLUshi5bi3+mNyMkHQ+HRMwGJEcuZJ3HOHvdY8LmSYKs9HyMSto
+ Wf7NaXKZ4pWbq8j8rok+UmHs14yQiv6o0c0Spcebx3xZsygV7nRZASF7nXUlHJapT3CY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uQHnJrtktALEqem+hCPibbBCdIujn04Aiu/7JrYjIqQ=; b=N0sZHRcsiwa7RCqt9WN/4MGwKy
- Ni6nh4R1Ra1Hgs7nl8NG1DapaaDsEkditKrkK16VtfXbDH4E1UiFXJnLAVx/JDmu+TQSyh+oFphqU
- oAV9Lzg5vg/mlDjokx3fuycViOiuQVOFN0KksowMtZkyGpoyLU9mmS+nkCNJzYXZiyAQ=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lg8Tn-002NuT-1w
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 16:10:08 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 78ED96108B;
- Mon, 10 May 2021 16:09:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620662993;
- bh=OeMcOYr8TZ/o6MhIlP2/j3/CcS6n961yxSdIDXmvodI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=u+0D1TxUJGcewnlne7UdPyqxTkt+b4C6AX9EoG0X22OZvUHeaD3lh84zEHdt1dLkj
- 545rmDbAAeHQCSl8/J/HvuBD54SFgIw+3t5pW1CdbIW3PK0xC+b/peCgTgfCyyh+mo
- N1bXUF1c2x3FEj76lGhK87BIFOWHbWn7a+diyBtz+4J3qzBsXew+OV7gmV2BpNeH/j
- 4oPAQXlWgMszQJ5N2mMSGKUXwk3YX8aSNfhQ3bkVgv/x6GJVGQ6KycfStolZ3isX6O
- HppxZH5bznmqvzZNWhH+tmCZyPlAmV4kDxyqze2prsMT4qa90vViPYxp83dIC7lFlh
- Sc1weUMravF6g==
-Date: Mon, 10 May 2021 09:09:51 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YJlaz20Atq+TUnHu@google.com>
-References: <20210510093032.35466-1-yuchao0@huawei.com>
- <20210510093032.35466-3-yuchao0@huawei.com>
+ bh=im7yptB7Cnn0+/0nEjxp2q806kDi7qdxtBjeZI/94RE=; b=iqk1UCGTePE8qVBFpwN/aQjzBr
+ yVm04PM5bvRc4wYnjqJokP0hi4dBHUjAQsd9wo99Guf6rRdfhzetOmcpEe19soXY6U8BmqND45zP7
+ FGt7oa4zdr+e0vBjMu7NHGZLajmZkpBkq8YUeOCEeiMlA+uj3qk3x4+5zXZUCSI51Cpc=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lgBU8-0005tg-Sp; Mon, 10 May 2021 19:22:37 +0000
+Received: from cwcc.thunk.org (pool-72-74-133-215.bstnma.fios.verizon.net
+ [72.74.133.215]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 14AJM3dI013584
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 May 2021 15:22:05 -0400
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id F267215C3CD9; Mon, 10 May 2021 15:22:02 -0400 (EDT)
+Date: Mon, 10 May 2021 15:22:02 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: David Woodhouse <dwmw2@infradead.org>
+Message-ID: <YJmH2irxoRsyNudb@mit.edu>
+References: <cover.1620641727.git.mchehab+huawei@kernel.org>
+ <2ae366fdff4bd5910a2270823e8da70521c859af.camel@infradead.org>
+ <20210510135518.305cc03d@coco.lan>
+ <de6d1fa5b7934f4afd61370d9c58502bef588466.camel@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210510093032.35466-3-yuchao0@huawei.com>
-X-Spam-Score: -0.8 (/)
+In-Reply-To: <de6d1fa5b7934f4afd61370d9c58502bef588466.camel@infradead.org>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lg8Tn-002NuT-1w
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: compress: fix to assign
- cc.cluster_idx correctly
+X-Headers-End: 1lgBU8-0005tg-Sp
+Subject: Re: [f2fs-dev] [PATCH 00/53] Get rid of UTF-8 chars that can be
+ mapped as ASCII
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,170 +74,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-iio@vger.kernel.org,
+ linux-pci@vger.kernel.org, linux-fpga@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, keyrings@vger.kernel.org,
+ linux-riscv@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, x86@kernel.org,
+ linux-acpi@vger.kernel.org, intel-wired-lan@lists.osuosl.org,
+ linux-input@vger.kernel.org, linux-ext4@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-sgx@vger.kernel.org,
+ coresight@lists.linaro.org, rcu@vger.kernel.org,
+ mjpeg-users@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
+ linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-rdma@vger.kernel.org, linux-integrity@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/10, Chao Yu wrote:
-> In f2fs_destroy_compress_ctx(), after f2fs_destroy_compress_ctx(),
-> cc.cluster_idx will be cleared w/ NULL_CLUSTER, f2fs_cluster_blocks()
-> may check wrong cluster metadata, fix it.
-> 
-> Fixes: 4c8ff7095bef ("f2fs: support data compression")
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/compress.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 340815cd0887..30b003447510 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -1066,6 +1066,8 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
->  			f2fs_put_rpages(cc);
->  			f2fs_unlock_rpages(cc, i + 1);
->  			f2fs_destroy_compress_ctx(cc);
-> +			cc->cluster_idx = index >>
-> +					F2FS_I(cc->inode)->i_log_cluster_size;
-
-I didn't test tho, how about this?
-
-From 904abb77e82ea982f68960148b75d0a12f771c2e Mon Sep 17 00:00:00 2001
-From: Chao Yu <yuchao0@huawei.com>
-Date: Mon, 10 May 2021 17:30:32 +0800
-Subject: [PATCH] f2fs: compress: fix to assign cc.cluster_idx correctly
-
-In f2fs_destroy_compress_ctx(), after f2fs_destroy_compress_ctx(),
-cc.cluster_idx will be cleared w/ NULL_CLUSTER, f2fs_cluster_blocks()
-may check wrong cluster metadata, fix it.
-
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/compress.c | 17 +++++++++--------
- fs/f2fs/data.c     |  6 +++---
- 2 files changed, 12 insertions(+), 11 deletions(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 79348bc56e35..925a5ca3744a 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -145,13 +145,14 @@ int f2fs_init_compress_ctx(struct compress_ctx *cc)
- 	return cc->rpages ? 0 : -ENOMEM;
- }
- 
--void f2fs_destroy_compress_ctx(struct compress_ctx *cc)
-+void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse)
- {
- 	page_array_free(cc->inode, cc->rpages, cc->cluster_size);
- 	cc->rpages = NULL;
- 	cc->nr_rpages = 0;
- 	cc->nr_cpages = 0;
--	cc->cluster_idx = NULL_CLUSTER;
-+	if (!reuse)
-+		cc->cluster_idx = NULL_CLUSTER;
- }
- 
- void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct page *page)
-@@ -1034,7 +1035,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- 		ret = f2fs_read_multi_pages(cc, &bio, cc->cluster_size,
- 					&last_block_in_bio, false, true);
- 		f2fs_put_rpages(cc);
--		f2fs_destroy_compress_ctx(cc);
-+		f2fs_destroy_compress_ctx(cc, true);
- 		if (ret)
- 			goto out;
- 		if (bio)
-@@ -1061,7 +1062,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- release_and_retry:
- 			f2fs_put_rpages(cc);
- 			f2fs_unlock_rpages(cc, i + 1);
--			f2fs_destroy_compress_ctx(cc);
-+			f2fs_destroy_compress_ctx(cc, true);
- 			goto retry;
- 		}
- 	}
-@@ -1094,7 +1095,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- unlock_pages:
- 	f2fs_put_rpages(cc);
- 	f2fs_unlock_rpages(cc, i);
--	f2fs_destroy_compress_ctx(cc);
-+	f2fs_destroy_compress_ctx(cc, true);
- out:
- 	return ret;
- }
-@@ -1130,7 +1131,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
- 		set_cluster_dirty(&cc);
- 
- 	f2fs_put_rpages_wbc(&cc, NULL, false, 1);
--	f2fs_destroy_compress_ctx(&cc);
-+	f2fs_destroy_compress_ctx(&cc, false);
- 
- 	return first_index;
- }
-@@ -1350,7 +1351,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
- 	f2fs_put_rpages(cc);
- 	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
- 	cc->cpages = NULL;
--	f2fs_destroy_compress_ctx(cc);
-+	f2fs_destroy_compress_ctx(cc, false);
- 	return 0;
- 
- out_destroy_crypt:
-@@ -1512,7 +1513,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
- 	err = f2fs_write_raw_pages(cc, submitted, wbc, io_type);
- 	f2fs_put_rpages_wbc(cc, wbc, false, 0);
- destroy_out:
--	f2fs_destroy_compress_ctx(cc);
-+	f2fs_destroy_compress_ctx(cc, false);
- 	return err;
- }
- 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 96f1a354f89f..33e56ae84e35 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2287,7 +2287,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 							max_nr_pages,
- 							&last_block_in_bio,
- 							rac != NULL, false);
--				f2fs_destroy_compress_ctx(&cc);
-+				f2fs_destroy_compress_ctx(&cc, false);
- 				if (ret)
- 					goto set_error_page;
- 			}
-@@ -2332,7 +2332,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 							max_nr_pages,
- 							&last_block_in_bio,
- 							rac != NULL, false);
--				f2fs_destroy_compress_ctx(&cc);
-+				f2fs_destroy_compress_ctx(&cc, false);
- 			}
- 		}
- #endif
-@@ -3033,7 +3033,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
- 		}
- 	}
- 	if (f2fs_compressed_file(inode))
--		f2fs_destroy_compress_ctx(&cc);
-+		f2fs_destroy_compress_ctx(&cc, false);
- #endif
- 	if (retry) {
- 		index = 0;
--- 
-2.31.1.607.g51e8a6a459-goog
-
-
->  			goto retry;
->  		}
->  	}
-> -- 
-> 2.29.2
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gTW9uLCBNYXkgMTAsIDIwMjEgYXQgMDI6NDk6NDRQTSArMDEwMCwgRGF2aWQgV29vZGhvdXNl
+IHdyb3RlOgo+IE9uIE1vbiwgMjAyMS0wNS0xMCBhdCAxMzo1NSArMDIwMCwgTWF1cm8gQ2FydmFs
+aG8gQ2hlaGFiIHdyb3RlOgo+ID4gVGhpcyBwYXRjaCBzZXJpZXMgaXMgZG9pbmcgY29udmVyc2lv
+biBvbmx5IHdoZW4gdXNpbmcgQVNDSUkgbWFrZXMKPiA+IG1vcmUgc2Vuc2UgdGhhbiB1c2luZyBV
+VEYtOC4gCj4gPiAKPiA+IFNlZSwgYSBudW1iZXIgb2YgY29udmVydGVkIGRvY3VtZW50cyBlbmRl
+ZCB3aXRoIHdlaXJkIGNoYXJhY3RlcnMKPiA+IGxpa2UgWkVSTyBXSURUSCBOTy1CUkVBSyBTUEFD
+RSAoVStGRUZGKSBjaGFyYWN0ZXIuIFRoaXMgc3BlY2lmaWMKPiA+IGNoYXJhY3RlciBkb2Vzbid0
+IGRvIGFueSBnb29kLgo+ID4gCj4gPiBPdGhlcnMgdXNlIE5PLUJSRUFLIFNQQUNFIChVK0EwKSBp
+bnN0ZWFkIG9mIDB4MjAuIEhhcm1sZXNzLCB1bnRpbAo+ID4gc29tZW9uZSB0cmllcyB0byB1c2Ug
+Z3JlcFsxXS4KPiAKPiBSZXBsYWNpbmcgdGhvc2UgbWFrZXMgc2Vuc2UuIEJ1dCByZXBsYWNpbmcg
+ZW1kYXNoZXMg4oCUIHdoaWNoIGFyZSBhCj4gZGlzdGluY3QgY2hhcmFjdGVyIHRoYXQgaGFzIG5v
+IGRpcmVjdCByZXBsYWNlbWVudCBpbiBBU0NJSSBhbmQgd2hpY2gKPiBwZW9wbGUgZG8gKmRlbGli
+ZXJhdGVseSogdXNlIGluc3RlYWQgb2YgaHlwaGVuLW1pbnVzIOKAlCBkb2VzIG5vdC4KCkkgcmVn
+dWxhcmx5IHVzZSAtLS0gZm9yIGVtLWRhc2hlcyBhbmQgLS0gZm9yIGVuLWRhc2hlcy4gIE1hcmtk
+b3duIHdpbGwKYXV0b21hdGljYWxseSB0cmFuc2xhdGUgMyBBU0NJSSBoeXBlbnMgdG8gZW0tZGFz
+aGVzLCBhbmQgMiBBU0NJSQpoeXBoZW5zIHRvIGVuLWRhc2hlcy4gIEl0J3MgbXVjaCwgbXVjaCBl
+YXNpZXIgZm9yIG1lIHRvIHR5cGUgMiBvciAzCmh5cGVucyBpbnRvIG15IHRleHQgZWRpdG9yIG9m
+IGNob2ljZSB0aGFuIHRyeWluZyB0byBlbnRlciB0aGUgVVRGLTgKY2hhcmFjdGVycy4gIElmIHdl
+IGNhbiBtYWtlIHNwaGlueCBkbyB0aGlzIHRyYW5zbGF0aW9uLCBtYXliZSB0aGF0J3MKdGhlIGJl
+c3Qgd2F5IG9mIGRlYWxpbmcgd2l0aCB0aGVzZSB0d28gY2hhcmFjdGVycz8KCkNoZWVycywKCgkJ
+CQkJLSBUZWQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNv
+dXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5m
+by9saW51eC1mMmZzLWRldmVsCg==
