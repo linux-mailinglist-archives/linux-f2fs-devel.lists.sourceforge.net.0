@@ -2,74 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBB4D3790B6
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 16:28:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93A0C3790DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 16:34:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lg6tT-0003Vo-1e; Mon, 10 May 2021 14:28:23 +0000
+	id 1lg6yw-0003Dz-MC; Mon, 10 May 2021 14:34:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1lg6tR-0003Vh-Qg
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:28:21 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <ecree.xilinx@gmail.com>)
+ id 1lg6yt-0003D3-PA; Mon, 10 May 2021 14:33:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fq1b+Isl5+gYnWSx7qYVRyoUAr9cXF9uxU922Q4uDU8=; b=dh9Mpk/XhprQvMLyDq2zNg3ffD
- amONjEGb903liig+7cYQv6dRqZyin7IFP1zK07rVQxIvfIaihVo1UF3vEDyVoitWpO58Wy7w3NGsS
- jNKvqvo8pjY5UFqsXbWy0iIVrrsKshpJJXzTkxzYBDtNIbLAuSEmNIGoruUuvPU3SMjg=;
+ bh=iXsxoOt9fS3DXvxCyyFOaJfbPkU6WlTqA1MG4BgEpJA=; b=jdhP96iZQL7dJh6rZDVslng7Ne
+ z4SNlBHOSNUrKHeRsVuqrj9X7SC5vBh/Swgd7lVj9dWdnWB5p1XpnPaFPx1d97sjtoJg4R1GKcmVy
+ ycgrNlPwAUKMOagQJSRQnrBpA/ed883gWhFJD94KmPbMyHexth2jrVOEllZgKK5l0c04=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fq1b+Isl5+gYnWSx7qYVRyoUAr9cXF9uxU922Q4uDU8=; b=N
- CbKb0EhMR0MUZiwhnKenVhNLazDzlvyQdByKuf0lp/OXpOaAuE2umYlVCpRm4W9z1dKkPxTC3be8Y
- v7x15NPdAbOyf6boSG8yNvCYcYcPXCnd8uBrMKzyDMid4sElzQ0NOtqS16CrMYFNs9sv0Tyxvrtg2
- MsVev4JRSK5neanI=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=iXsxoOt9fS3DXvxCyyFOaJfbPkU6WlTqA1MG4BgEpJA=; b=CzHfu/UZPGx0t+yQ45xg904Y3t
+ Lxm8whCBTvG4iKDW44CWLZaQ81kfR3ZUsn+ma5Koy88nI63lV1cxWJIViRUEoNxGTxzaP8yQNDdsr
+ 0lYfnkesHNxvBj1u4+nh+Xl1qSVtL5KFdpWuSRy+k2SuxIvWNvDqvpijhEbeNB9CDlEY=;
+Received: from mail-wr1-f46.google.com ([209.85.221.46])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lg6tL-0003kg-JE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:28:21 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B2091611F0;
- Mon, 10 May 2021 14:28:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620656890;
- bh=5Qx2wMQY09P/jiz+QyXoXliDQV06oKwVi44Sr9uGsVA=;
- h=From:To:Cc:Subject:Date:From;
- b=n7DQ+ePe8MZ/W7CimYXZFPNzOE2FndNoWEPR8x0U22UVREFxJqX/XHbh1VJDAfNkg
- 3DqJom5OmACR5RAparxHCl1akePyOJy5N+T2ywJeG83VMXW6c4KLpe8H3KXCG3DbNP
- NRVLHKM+Vavik1dfRoR5AfBZrZQT/P64EfFpunNiZh4oXoNkfNizJsdI9kbPfAmW9r
- krRxiPrxLc+AYkGspZm9ZjIrRQ1C80XqDOvTD+hsYIpKct/KYFOLvM5+98t1zllQq4
- LcmVGOUCyoXQinz2z2EpF7Be5pbOuizu1JpEoIiYNTYvugS1KgPq13oHI2j5rqSp2l
- DRFddyGFb2SUQ==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 10 May 2021 07:28:04 -0700
-Message-Id: <20210510142804.511265-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.31.1.607.g51e8a6a459-goog
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lg6yp-0004lI-68; Mon, 10 May 2021 14:33:59 +0000
+Received: by mail-wr1-f46.google.com with SMTP id t18so16891380wry.1;
+ Mon, 10 May 2021 07:33:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=iXsxoOt9fS3DXvxCyyFOaJfbPkU6WlTqA1MG4BgEpJA=;
+ b=jIc4OS4UG1e9Htue39hs2SdJXCmPLn+MTostxG/pw06sXYt4cF0beJY8cOPd4XkNvN
+ wMkWqq4rS4nqVWqmlHYwknDCThc4F5oj3a10x6AGXMwZ0Kkxjgx6mU53ky5S6gct5IOF
+ gb8YE/CdqFeQhJSfkuXg75IoXDsEW/QKbfnCDm8DSyF/6zHxA2in236S9Jv233h02Cag
+ nY/zUkluYzDhxrfM75C6Qnf/beBRBG9DBN2uslTW/jB8AmOrnU4strwuRTlIYCmTiED9
+ Adakd2gy/AYmhY6PfiGery2Nb+BVYLJb2xN6RqR96XQSpLkoAkrrTIc1zJH3tzspThUx
+ eDlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=iXsxoOt9fS3DXvxCyyFOaJfbPkU6WlTqA1MG4BgEpJA=;
+ b=V1LAUnd7ZYeOcpjCaG+jU4hXPex1SwxF2y+ywavVkRqXIFxphyoVQJMzjpyw5ccgGR
+ waB+NT7aXmGb6gWk3pP3YwtzkiNCk1Z0i8J3BeU7iCV+8HqsO8gHHTZXKVthzOWEKjvX
+ x5LUjFY0+iku0Z++TFY78XlGYRk63PMBixrSlHdQ1PiHj1yP8v/hgPOdQrsmFoA+b6q1
+ 2WC43DNhXfRkNLeza6psdgusmj7rjKdRMbo+YtOjS89L6aKkbM3ag+30W2KY1K2Km3B2
+ gAMqV58tRo+nlQfbBAom3pXxOdpGXLt4D+UolB+qt6l/U6hp8u7gRlcBuM4LV7uAadXz
+ 2soQ==
+X-Gm-Message-State: AOAM533jP0hokg6eCEz+UzcQmwgkfou6ipHChUBsnm/WC5hE6ze2Vyx+
+ IMxY1CKx4JvQnPtCUgZSbjY=
+X-Google-Smtp-Source: ABdhPJze1q8t3iuv5DjzOv0RveTjqSpEwnprh+IG3St78u9eWCZrU93KSEZYLbobgkyZLBZ/m0bYBQ==
+X-Received: by 2002:adf:e98c:: with SMTP id h12mr30469476wrm.314.1620657229579; 
+ Mon, 10 May 2021 07:33:49 -0700 (PDT)
+Received: from [192.168.1.122]
+ (cpc159425-cmbg20-2-0-cust403.5-4.cable.virginm.net. [86.7.189.148])
+ by smtp.gmail.com with ESMTPSA id h9sm20117820wmb.35.2021.05.10.07.33.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 May 2021 07:33:48 -0700 (PDT)
+To: Matthew Wilcox <willy@infradead.org>
+References: <cover.1620641727.git.mchehab+huawei@kernel.org>
+ <2ae366fdff4bd5910a2270823e8da70521c859af.camel@infradead.org>
+ <20210510135518.305cc03d@coco.lan>
+ <df6b4567-030c-a480-c5a6-fe579830e8c0@gmail.com>
+ <YJk8LMFViV7Z3Uu7@casper.infradead.org>
+From: Edward Cree <ecree.xilinx@gmail.com>
+Message-ID: <ed65025c-1087-9672-7451-6d28e7ab8f92@gmail.com>
+Date: Mon, 10 May 2021 15:33:47 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
+In-Reply-To: <YJk8LMFViV7Z3Uu7@casper.infradead.org>
+Content-Language: en-GB
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (ecree.xilinx[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.221.46 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.46 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lg6tL-0003kg-JE
-Subject: [f2fs-dev] [PATCH] f2fs: avoid null pointer access when handling
- IPU error
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lg6yp-0004lI-68
+Subject: Re: [f2fs-dev] [PATCH 00/53] Get rid of UTF-8 chars that can be
+ mapped as ASCII
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,59 +115,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-iio@vger.kernel.org,
+ linux-pci@vger.kernel.org, linux-fpga@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, keyrings@vger.kernel.org,
+ linux-riscv@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, x86@kernel.org,
+ linux-acpi@vger.kernel.org, intel-wired-lan@lists.osuosl.org,
+ linux-input@vger.kernel.org, linux-ext4@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-sgx@vger.kernel.org,
+ coresight@lists.linaro.org, rcu@vger.kernel.org,
+ mjpeg-users@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
+ linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-rdma@vger.kernel.org, linux-integrity@vger.kernel.org,
+ David Woodhouse <dwmw2@infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
- Unable to handle kernel NULL pointer dereference at virtual address 000000000000001a
- pc : f2fs_inplace_write_data+0x144/0x208
- lr : f2fs_inplace_write_data+0x134/0x208
- Call trace:
-  f2fs_inplace_write_data+0x144/0x208
-  f2fs_do_write_data_page+0x270/0x770
-  f2fs_write_single_data_page+0x47c/0x830
-  __f2fs_write_data_pages+0x444/0x98c
-  f2fs_write_data_pages.llvm.16514453770497736882+0x2c/0x38
-  do_writepages+0x58/0x118
-  __writeback_single_inode+0x44/0x300
-  writeback_sb_inodes+0x4b8/0x9c8
-  wb_writeback+0x148/0x42c
-  wb_do_writeback+0xc8/0x390
-  wb_workfn+0xb0/0x2f4
-  process_one_work+0x1fc/0x444
-  worker_thread+0x268/0x4b4
-  kthread+0x13c/0x158
-  ret_from_fork+0x10/0x18
+On 10/05/2021 14:59, Matthew Wilcox wrote:
+> Most of these
+> UTF-8 characters come from latex conversions and really aren't
+> necessary (and are being used incorrectly).
+I fully agree with fixing those.
+The cover-letter, however, gave the impression that that was not the
+ main purpose of this series; just, perhaps, a happy side-effect.
 
-Fixes: 955772787667 ("f2fs: drop inplace IO if fs status is abnormal")
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/segment.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+> You seem quite knowedgeable about the various differences.  Perhaps
+> you'd be willing to write a document for Documentation/doc-guide/
+> that provides guidance for when to use which kinds of horizontal
+> line?I have Opinions about the proper usage of punctuation, but I also know
+ that other people have differing opinions.  For instance, I place
+ spaces around an em dash, which is nonstandard according to most
+ style guides.  Really this is an individual enough thing that I'm not
+ sure we could have a "kernel style guide" that would be more useful
+ than general-purpose guidance like the page you linked.
+Moreover, such a guide could make non-native speakers needlessly self-
+ conscious about their writing and discourage them from contributing
+ documentation at all.  I'm not advocating here for trying to push
+ kernel developers towards an eats-shoots-and-leaves level of
+ linguistic pedantry; rather, I merely think that existing correct
+ usages should be left intact (and therefore, excising incorrect usage
+ should only be attempted by someone with both the expertise and time
+ to check each case).
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index c605415840b5..ae875557d693 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3577,9 +3577,11 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
- 	if (fio->bio) {
- 		struct bio *bio = *(fio->bio);
- 
--		bio->bi_status = BLK_STS_IOERR;
--		bio_endio(bio);
--		fio->bio = NULL;
-+		if (bio) {
-+			bio->bi_status = BLK_STS_IOERR;
-+			bio_endio(bio);
-+			fio->bio = NULL;
-+		}
- 	}
- 	return err;
- }
--- 
-2.31.1.607.g51e8a6a459-goog
+But if you really want such a doc I wouldn't mind contributing to it.
 
+-ed
 
 
 _______________________________________________
