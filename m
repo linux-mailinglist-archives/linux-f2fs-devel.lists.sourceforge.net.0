@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F14A23790E3
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 16:36:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8480737911E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 16:40:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lg70t-0004iQ-QK; Mon, 10 May 2021 14:36:03 +0000
+	id 1lg74k-0004wR-BM; Mon, 10 May 2021 14:40:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lg70s-0004i8-06
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:36:02 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lg74i-0004w6-SS
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:40:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ADiPu4OjTdAnl0Bus8vmTRrzN86ff2iUIlZ1yrcN3oU=; b=N6CI5pun9w92aboPeyFWlh5MjG
- FyTd3PLxG+UjUTAQwnHxrdA0U4kGk/xUXPoo3mWA0bro4ZI8oepZuJcznwYvkrKZ+Tlt5VcVvIZa+
- a9ApYgT6oTLAPBCkBPJf3YZjrW6byXnUb5ih1E9s3YpZnN3Q5bT6pUHkQUggBgVdkCGQ=;
+ bh=bQ0Yj5B86242/pbEg/VnC4G/UOlQLsp9iEFP9FYFBg0=; b=X7JE1pNxUVonK8Rq5f4u3FDUq1
+ /Tjdq5XxUbcerKNtMO6o93Yob0AewrJSjzvSiaDdFDulf4shXPga5vsom2XdOHy9z0r+zyqgqawon
+ kT0aCR+XAiOgf1Y1VF7D18r9bH9iFg15hGxQYoSzp4QDuH/YOMU7eB7OBQoKa2kC8pGk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ADiPu4OjTdAnl0Bus8vmTRrzN86ff2iUIlZ1yrcN3oU=; b=erf1uTc44tRAC5L0Wc+NMwTD9+
- k1dMbSv0K52n7tkMZencnf2qmI/lHpBdn+U66DGj0MLcBuU1VmIxxEdobt9YNFmC18iZ25fEEQQyH
- y6VakcxQI7b493hcYKmZiTtgU2wAcsrbA2/qOfrFsOhVBKlBvuevCsYmW59NHKAoikhA=;
+ bh=bQ0Yj5B86242/pbEg/VnC4G/UOlQLsp9iEFP9FYFBg0=; b=m2B9cqEQcv5KijxHaiwvVm1zC5
+ ftWkpX2fAXZ77QcfhMuRrDgmyPf6Om9dCoYxnkeoZNT4F0+wmgj9vMvrqJ1uWZl6WQCOzbl45RpiU
+ ORC7qsRijjoZEYnuN6bgBToFoZc5vFMhC0afEYIUzb6JAUydpyOQ4IGHITYsmvnedddo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lg70o-00270P-TX
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:36:03 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 60A5161260;
- Mon, 10 May 2021 14:35:53 +0000 (UTC)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lg74c-0005yE-1P
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 14:40:01 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2EF7C61260;
+ Mon, 10 May 2021 14:39:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620657353;
- bh=7+rmrDDH4A6uYJ58L9mxQLde2wCS0ipr0v/8oSvfwtc=;
+ s=k20201202; t=1620657589;
+ bh=WEU1Fz1WVVlBrDEmLzTut6W259LIfPZaGoCmipxoj9A=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qFxZW0z9w0jusStjICTPl/aKhGOUWUVyJDALZOW+6CG+PRlrWU8tMS8RQAc2fGXLP
- ZtV70ikvOz5Htse0Q8nRb7lRL1wEhB3DhVn8xLFydH2UJ+xcsamc29MyxR9e1C646W
- GGzLZCZ7cnPBoWisLWKQX9Mw/SDTqGHFDbLE9Zczzm5WZwAkSejdIpZm3xNfPSuM7g
- 51FU5FVUufLz/TTftQca3HRTevyP1H48CJE+VtRBrQrDSv8EhUYLFCf8HFUqTdHtkj
- auSs8GTiTrLayQvxTmZfj+nWrinqjn9Hxl5wsEfOHcNtPPX54Ps062Mh3IQ9I1VVjB
- VtPfKzCpxYUlg==
-Date: Mon, 10 May 2021 07:35:51 -0700
+ b=iQLjEKR/Z9hHUOet3dMWHFOy/rKhovLY82BUH+pra2hIL5CJQK+wQRX8/JtMToNqv
+ 7e/GoAo16+7l2oN9X9+TSMSxDYV8zxGIol4UCe43kVIfCXRkROQF7+fexBL2ddEeGl
+ Bn6mbL6A67AQH5ozJRLkW4/Ozzd/xQZveI29S2UGghndLhbbEBBrElzgOiXar+/FZj
+ iqLaaD68an9ncgYuVBgxO+G6+Ow15CAM1X4SWKdKMNeicQSUoqw/KmptSAOysqgaAO
+ AtPFRbLSI2drpriwcyi/zKyefOud7ozRJ+TXF6q3+dhg/XbcPUXNz37qxA2Yw5ihtR
+ Uu0fRFZR0zGlQ==
+Date: Mon, 10 May 2021 07:39:47 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YJlEx27aM9oX8H+C@google.com>
-References: <YDsleDjeIcpuBXKA@google.com> <YEFBAuP26t0RzVHZ@google.com>
- <01a0ff76-6fa7-3196-8760-e7f6f163ef64@huawei.com>
- <YEa66ekikyuPWSyd@google.com>
- <a40929d4-a8de-98ea-8dd8-6c807d8a6adc@huawei.com>
- <YEkxpAp8FQjRUfm6@google.com>
- <157988c7-079f-0c9f-5cf9-e83bc2f835d1@huawei.com>
- <YID0sDPrUxOJLz+A@google.com>
- <6d574f4e-fed2-ded8-c9d5-4d88bff5d584@huawei.com>
- <3f7ebf46-536e-dc80-ebda-71b2034cb4c9@huawei.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <YJlFs5DLGifyBR2G@google.com>
+References: <20210506191347.1242802-1-jaegeuk@kernel.org>
+ <YJTdp0Rj170TYm24@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3f7ebf46-536e-dc80-ebda-71b2034cb4c9@huawei.com>
+In-Reply-To: <YJTdp0Rj170TYm24@sol.localdomain>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -76,9 +69,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lg70o-00270P-TX
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress: add compress_inode to
- cache compressed blockst
+X-Headers-End: 1lg74c-0005yE-1P
+Subject: Re: [f2fs-dev] [PATCH] f2fs: return -EPERM given generic mask
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,93 +87,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/10, Chao Yu wrote:
-> On 2021/4/22 14:07, Chao Yu wrote:
-> > On 2021/4/22 11:59, Jaegeuk Kim wrote:
-> > > On 04/21, Chao Yu wrote:
-> > > > On 2021/3/11 4:52, Jaegeuk Kim wrote:
-> > > > > On 03/09, Chao Yu wrote:
-> > > > > > On 2021/3/9 8:01, Jaegeuk Kim wrote:
-> > > > > > > On 03/05, Chao Yu wrote:
-> > > > > > > > On 2021/3/5 4:20, Jaegeuk Kim wrote:
-> > > > > > > > > On 02/27, Jaegeuk Kim wrote:
-> > > > > > > > > > On 02/04, Chao Yu wrote:
-> > > > > > > > > > > Jaegeuk,
-> > > > > > > > > > > 
-> > > > > > > > > > > On 2021/2/2 16:00, Chao Yu wrote:
-> > > > > > > > > > > > -	for (i = 0; i < dic->nr_cpages; i++) {
-> > > > > > > > > > > > +	for (i = 0; i < cc->nr_cpages; i++) {
-> > > > > > > > > > > >        		struct page *page = dic->cpages[i];
-> > > > > > > > > > > 
-> > > > > > > > > > > por_fsstress still hang in this line?
-> > > > > > > > > > 
-> > > > > > > > > > I'm stuck on testing the patches, since the latest kernel is panicking somehow.
-> > > > > > > > > > Let me update later, once I can test a bit. :(
-> > > > > > > > > 
-> > > > > > > > > It seems this works without error.
-> > > > > > > > > https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=4e6e1364dccba80ed44925870b97fbcf989b96c9
-> > > > > > > > 
-> > > > > > > > Ah, good news.
-> > > > > > > > 
-> > > > > > > > Thanks for helping to test the patch. :)
-> > > > > > > 
-> > > > > > > Hmm, I hit this again. Let me check w/o compress_cache back. :(
-> > > > > > 
-> > > > > > Oops :(
-> > > > > 
-> > > > > Ok, apprantely that panic is caused by compress_cache. The test is running over
-> > > > > 24hours w/o it.
-> > > > 
-> > > > Jaegeuk,
-> > > > 
-> > > > I'm still struggling troubleshooting this issue.
-> > > > 
-> > > > However, I failed again to reproduce this bug, I doubt the reason may be
-> > > > my test script and environment(device type/size) is different from yours.
-> > > > (btw, I used pmem as back-end device, and test w/ all fault injection
-> > > > points and w/o write_io/checkpoint fault injection points)
-> > > > 
-> > > > Could you please share me your run.sh script? and test command?
-> > > > 
-> > > > And I'd like to ask what's your device type and size?
-> > > 
-> > > I'm using qemu with 16GB with this script.
-> > > https://github.com/jaegeuk/xfstests-f2fs/blob/f2fs/run.sh
-> > > 
-> > > ./run.sh por_fsstress
+On 05/06, Eric Biggers wrote:
+> On Thu, May 06, 2021 at 12:13:47PM -0700, Jaegeuk Kim wrote:
+> > In f2fs_fileattr_set(),
 > > 
-> > Thanks, let me check the difference, and try again.
+> > 	if (!fa->flags_valid)
+> > 		mask &= FS_COMMON_FL;
+> > 
+> > In this case, we should not allow to set FS_COMPR_FL, instead of BUG_ON.
+> > 
+> > /* Flags shared betwen flags/xflags */
+> > 	(FS_SYNC_FL | FS_IMMUTABLE_FL | FS_APPEND_FL | \
+> > 	 FS_NODUMP_FL |	FS_NOATIME_FL | FS_DAX_FL | \
+> > 	 FS_PROJINHERIT_FL)
+> > 
+> > Fixes: 4c5b47997521 ("vfs: add fileattr ops")
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > ---
+> >  fs/f2fs/file.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > index e01ce802cf10..38015ef84893 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -1817,7 +1817,9 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+> >  	struct f2fs_inode_info *fi = F2FS_I(inode);
+> >  	u32 masked_flags = fi->i_flags & mask;
+> >  
+> > -	f2fs_bug_on(F2FS_I_SB(inode), (iflags & ~mask));
+> > +	/* mask can be shrunk by flags_valid selector */
+> > +	if (iflags & ~mask)
+> > +		return -EPERM;
+> >  
+> >  	/* Is it quota file? Do not allow user to mess with it */
+> >  	if (IS_NOQUOTA(inode))
+> > -- 
+> > 2.31.1.607.g51e8a6a459-goog
 > 
-> Finally, I can reproduce this bug, and after troubleshooting this
-> issue, I guess the root cause is not related to this patch, could
-> you please test patch "f2fs: compress: fix race condition of overwrite
-> vs truncate" with compress_cache enabled? I've ran por_fsstress case
-> for 6 hours w/o any problems.
+> This looks like the wrong fix.  AFAICS, 'mask' is the set of inode flags that
+> the specific ioctl (FS_IOC_SETFLAGS or FS_IOC_FSSETXATTR) can potentially
+> modify, while 'iflags' is the new set of inode flags among the set that either
+> ioctl can potentially modify.  So this change will stop FS_IOC_FSSETXATTR from
+> working on files that have already flags set which are only modifiable by
+> FS_IOC_SETFLAGS, e.g. the compression flag.
+> 
+> I think the correct fix would be to just do something like 'iflags &= mask'.
 
-Good, sure. :)
+Thanks. Let me send v2.
 
 > 
-> Thanks,
-> 
-> > 
-> > Thanks,
-> > 
-> > > 
-> > > > 
-> > > > Thanks,
-> > > > 
-> > > > > .
-> > > > > 
-> > > .
-> > > 
-> > 
-> > 
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > .
-> > 
+> - Eric
 
 
 _______________________________________________
