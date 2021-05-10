@@ -2,133 +2,155 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23DCE377EC0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 10:54:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6373A377EF4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 May 2021 11:07:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lg1ge-0005wV-63; Mon, 10 May 2021 08:54:48 +0000
+	id 1lg1ss-00058w-C6; Mon, 10 May 2021 09:07:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sw0312.kim@samsung.com>) id 1lg1gc-0005wM-4h
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 08:54:46 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <prvs=7576b64e4=shinichiro.kawasaki@wdc.com>)
+ id 1lg1sq-00058p-ID
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 09:07:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AAbwIBgFEEfh/sqOv6OyskOU8JBhKsZ1g1ZiN2jF3Y0=; b=NbCGCvqRz2SDeprX2WUvj20CBA
- udKiW039PjVxIUd/+KLlC3uJ9KgYTVcyny6wU0eWE9xO/ahYWx1YeB6Ujukgx6Q6+mz5blqMEq2Xv
- 04zouNxt83QplE8LyyiG5RDmok5W7TJByyeu2zl5anYB6b/TR/IlLtov0vaOdzflnDOQ=;
+ bh=Sex0v1gsZvk8XOJyZ/Y/HxarOH0crtpNyYV+RjRYvuc=; b=VZ2s0hao1PegMB6dXR76U+5d5i
+ 3zpnBm4LU8ZnaLnbsAupJGxohJf1jmHh7VmNV/eG7S3jbSlROSr4D/Lon4+2O2rc1TG+4zFz8knR5
+ odtNDxF61kbwLXuvk9Emetr9EWEpuzm1UyR74+8XDsgkyDru3AYSb6J9YMQ3xWgI75bE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AAbwIBgFEEfh/sqOv6OyskOU8JBhKsZ1g1ZiN2jF3Y0=; b=PozZ2jIEoPV8aK1tv4/VWY6gxW
- ogyLQiCgaXUPotT7m8mcz5D8MA/M1k9fNG4yHl5b4kBP7fakHZH90ocL8qrifLJaFg1qq3qbGkXn3
- Fd3/3VcL5QgPj8xelmz8bgZ+IbJMyj4G7s4mp6thUhrTz+OqhOwkJhcpDbq5v6KNqdmI=;
-Received: from mailout4.samsung.com ([203.254.224.34])
+ bh=Sex0v1gsZvk8XOJyZ/Y/HxarOH0crtpNyYV+RjRYvuc=; b=IUS3NsgnJM4qlUalZq6YORyrUp
+ tR8a39nTczzdPrpnxmTnk+Mhqeh5ELw9HX3upy/9FAddgYC1fiVPRtNXDlSoyBIj03IU+VtqlnPpZ
+ /3TpUDARGeTn+1JJcmYQa5e6i1NlWxwCiVihvc/FdfAMQdBLQVj0w9OFYeC1fINj7GK0=;
+Received: from esa2.hgst.iphmx.com ([68.232.143.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lg1gU-00089Y-QD
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 08:54:47 +0000
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20210510085429epoutp04491df2ed090dceb44027c90f2cf32ad2~9qKV1N8I21128311283epoutp043
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 May 2021 08:54:29 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20210510085429epoutp04491df2ed090dceb44027c90f2cf32ad2~9qKV1N8I21128311283epoutp043
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1620636869;
- bh=AAbwIBgFEEfh/sqOv6OyskOU8JBhKsZ1g1ZiN2jF3Y0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=htXlxdl8nCoTKxYoHc5nUhJP2GpAgTjGaFrMep2h39N/NUFn9UaP0yY1lYMQpXD1V
- trUTONLMPtAuObXAV06cAVOR+3OsdIGvXZDUKsPtsw8UGhDDbpLWcLxGVWH5BRipx5
- ZXPLFbmgRO3cCwqKEHL+53nBCJQuXoSWVqVuZ5E4=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20210510085429epcas1p12d74019b0baad7c181b64c86435b993e~9qKVgIWXJ1786517865epcas1p1r;
- Mon, 10 May 2021 08:54:29 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.40.157]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4FdvxY6gXlz4x9Q2; Mon, 10 May
- 2021 08:54:25 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 07.1A.09824.BB4F8906; Mon, 10 May 2021 17:54:19 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20210510085419epcas1p3e72ea9d956bcf811167b14e06fb08149~9qKMPKGp92011620116epcas1p3C;
- Mon, 10 May 2021 08:54:19 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20210510085419epsmtrp1858a1f6a4d3bac50d694727cdfee083b~9qKMOhU4A2318223182epsmtrp1I;
- Mon, 10 May 2021 08:54:19 +0000 (GMT)
-X-AuditID: b6c32a37-061ff70000002660-a6-6098f4bb3e9f
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 68.DA.08637.BB4F8906; Mon, 10 May 2021 17:54:19 +0900 (KST)
-Received: from localhost.localdomain (unknown [10.113.221.223]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20210510085418epsmtip183eaaeb37b3eaf8a503223b56a15da87~9qKL_MZPD3199731997epsmtip1s;
- Mon, 10 May 2021 08:54:18 +0000 (GMT)
-From: Seung-Woo Kim <sw0312.kim@samsung.com>
-To: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 10 May 2021 17:57:26 +0900
-Message-Id: <20210510085726.12663-2-sw0312.kim@samsung.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20210510085726.12663-1-sw0312.kim@samsung.com>
+ id 1lg1sj-0002Sm-Rd
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 10 May 2021 09:07:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1620637639; x=1652173639;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=BpyKod2PmcI92qLRIOlz4w9ZPJpY7CfJ6IHgZOtIDy0=;
+ b=G4Bxe6lTaoIFOkn+i/k7MVSjSSbmDzvegfcQZSp5588c+4hU4x4/qIw2
+ vlaOV56BZfNL+nMOnPjrACSaj2eqqBHwW0eKiECCR+40hyg04LTznXr9g
+ OOvgLeAv1z1OSOO/lj5vMFQ/mlyyIdgVG+qbqFVxVhjQmiZJwx1asOeuR
+ titkGsFnam0d8cOr12Wld4Ob/VAcJoMxhMugvLFA8KAXAliJ4jy+IT2I8
+ vpGPRnUXOdAEqPxPJL8FE6umeN5g6t+xs4w9HzWkSgeEO0qduaWBMylgd
+ BH5MFaB5fJxaeKcrYD1QjZa4VX7UeLaYMoPw0x+CkSj3wBSzpt13MbgYt A==;
+IronPort-SDR: prbvfi7+CaoCIeSYzaxXE9j7Jdm7B9Lq3xLXbu8l6THaXFTHVERy3k7SG3KGkpiAD3YeZrRj2x
+ m2D1j5RLUWCzlQleDXedlqrM7dNVgqWANro4k+5YqTdu8X6FD4I1FFfNCpweDufdXoALqW0WZA
+ ZbADAnE7JDHVACw7PHGREidwcPUo1hQwlcbRwsst9bGsE21UZ9+mWRfmTiGVekVb7NZTJW000n
+ ohQ9XHQAjEQ4guluIQ/4cwaGhzz1Mjs4pLY/7mH6wSvFZVkCnx3mYt1Corn4G4LZW/vUTmccbz
+ dX0=
+X-IronPort-AV: E=Sophos;i="5.82,287,1613404800"; d="scan'208";a="271604266"
+Received: from mail-dm6nam10lp2107.outbound.protection.outlook.com (HELO
+ NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.107])
+ by ob1.hgst.iphmx.com with ESMTP; 10 May 2021 16:46:11 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=b+XujZx0S8zW704O4Qk+lGp4iOltYUoXg7dlETGjE6jSLsVNeH0SUnjh6A/aBpAWM1z81Lq0b7QQwTkRaL46mSCsQw7KEDHAZxQ0kWtGeN94RXQqfisDgf/r4mtf88BihTR++yR4nEhuc3TvY0VLVcdeAyUA/Vd5en7J75vcs7gmPsYPi71yDBSuvIK1ZlZNhDEDKtTohFJppoMP6KZywUsd3H98oj9Rw5LRczpzzcRhtvb16HSMHHgWeRdsms/yQdvZm+z9xGL59e5epnNTapPm2xQnlMYo9vIKuxcMmBto33N7MNqx7YWsrssktIzG9SP+sd+LtrdpBQnUdh4bmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Sex0v1gsZvk8XOJyZ/Y/HxarOH0crtpNyYV+RjRYvuc=;
+ b=EM+YG4Wd54kKnuJEUt88cGCmN3qpi8v8q54IqPv2q/AccBD8l+C8l/rpln/3VvYIQNUDgUfitwfQmiR8W+jY/tmDgvseBwtu2xPZorZF8tJX8RJJHwcyh9QzIUKFhK5oUv1X8r7/evXEjVad6GKMLMtialkZTI7dkZi6Rk1s5noZsOoflxxXOWiXMzCzAwSD7wQP/MninkOwroFLl+TzK6vuzfqoQUlPJZfxFdgIbTsHW0OqJVW2XDa/Svie1qFdlCINFfY0CMqHhcnUzJ9YAOBM0Amcz0pMDT/TlngMNPIHtDY/hbq/2e4FhTqoLA9j24xg/CS4MZPuWwerW8BzQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Sex0v1gsZvk8XOJyZ/Y/HxarOH0crtpNyYV+RjRYvuc=;
+ b=WH4Iuo6R5/Mu7dRfJA7I21zuLQEFlYNQbP3vaPe9wyPy5Da/QX6/4DL0jMuY4EJuEb0QEqAHA5lr5HCV2VyzmnMeYU+dUZqh4DAX5uhzqABOwBBxj48BiLieFUMDI2K5estF8VFkc2sIavBxtgaehH9ORZT358S+xRlWvQOYKrs=
+Received: from BYAPR04MB3800.namprd04.prod.outlook.com (2603:10b6:a02:ad::20)
+ by BYAPR04MB5605.namprd04.prod.outlook.com (2603:10b6:a03:112::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4108.27; Mon, 10 May
+ 2021 08:46:09 +0000
+Received: from BYAPR04MB3800.namprd04.prod.outlook.com
+ ([fe80::6052:9dde:2486:109e]) by BYAPR04MB3800.namprd04.prod.outlook.com
+ ([fe80::6052:9dde:2486:109e%5]) with mapi id 15.20.4108.031; Mon, 10 May 2021
+ 08:46:09 +0000
+From: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+To: Chao Yu <yuchao0@huawei.com>
+Thread-Topic: [f2fs-dev] [PATCH] f2fs: Prevent swap file on zoned block devices
+Thread-Index: AQHXRWdzDMxZE6LdfUmUVNLtlhDALKrcSmOAgAAco4A=
+Date: Mon, 10 May 2021 08:46:08 +0000
+Message-ID: <20210510084607.ayajkbiyccsasl7q@shindev.dhcp.fujisawa.hgst.com>
+References: <20210510064057.729369-1-shinichiro.kawasaki@wdc.com>
+ <726b7f8d-bbad-f940-c06e-056103025a47@huawei.com>
+In-Reply-To: <726b7f8d-bbad-f940-c06e-056103025a47@huawei.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: huawei.com; dkim=none (message not signed)
+ header.d=none;huawei.com; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [129.253.182.60]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 80c8a14e-e17e-4f37-e07b-08d913900ea0
+x-ms-traffictypediagnostic: BYAPR04MB5605:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BYAPR04MB56056F1411699079CAEF66EBED549@BYAPR04MB5605.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: P0ldEfHtnKeO9pvYOUA/cG489N50pHsactJEDnjiZ+9cW2HlCChgvSy+9ws1+9LFXc6EdUXy4AWQfDEJ3q91FLEn6WC3I3Xi+TKUw22iOzPJxklNhx33TQjQthOnjc6dtFRz8SeMV+MzkFvi3SagaeVE7TdgKPD5UqOembnFXQVdtR4UGJxMsyyNEiSTeorZ7aOti3LkBaw4yHnMe8yftl7FwwDTve2D66+b0JyaRS18AXCR2ScqLQmlyujt/tWEwI/1d7ryRiqi5kHbZ9IjwiNM2/X3UOB0nQ++boN6r/Nk4Bg1oYL0SxpetUjqFdKg+wspRsZ7XnBEwJnhQSnEvPnAQKVAPhbRz56M/l4k+oxVWmqMyl54s695Qd5SP8Z0lFDFwGi4/shfKGbphoXrWV97lVCVgP54+3kLTKlGWBa9E4iBQzNFmEJXpgilV7WHrsDwNRZWNaKIfQxrXhJq0OAmyLZZLcLZYU6/+3lX4sjvUMR+fQ3BUjWQlHK6PGUmrIG80W1U4WFXm3eEDiEgCHFx1gl/PvHRzoR3nTQn2kTqvT6+vH61g6Tmx/S6t0nKPa5k8djKP3qhloxCmzT2ww04GDO+oG09k+iMAeMkIHM=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR04MB3800.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(396003)(366004)(376002)(39860400002)(136003)(346002)(316002)(6512007)(8676002)(86362001)(6486002)(26005)(9686003)(83380400001)(122000001)(1076003)(38100700002)(66476007)(64756008)(53546011)(66556008)(186003)(2906002)(66446008)(5660300002)(76116006)(66946007)(8936002)(91956017)(478600001)(71200400001)(54906003)(6916009)(4326008)(6506007)(44832011);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: =?us-ascii?Q?13GlNRFhlwU0ZQn68/sl+rqFcG7Zu49TeAlwC5j8LuOT3aaDd5jFSaxVLRsY?=
+ =?us-ascii?Q?RUrqxjTGuR1l2FpiMuPZzzMtVC4u6HAUdRZnwTkTgDA11oHEqxc/u2zMAZyL?=
+ =?us-ascii?Q?E45O7VPp6XpcWQipD0p6e+3URewMbLYV4xfvJYgfh3ZDaHyW60aR9xIWIIil?=
+ =?us-ascii?Q?ViVL3+dMnsZvC+33mBgh6CTmFZWC3aP9o6ZolNLNCuiiNChCdbWqTMpHdcJ2?=
+ =?us-ascii?Q?dHGbFIgg9B5bWcihqJ/gMyLmaeuy+eupvQz4Z0hQPIobp6MV2CLzXMJ40nkF?=
+ =?us-ascii?Q?jOnC7lGlHTspjIwcSXIDkL9oXJntHhXWTufJ2UwjD/Kzliu5YL9RDJAbjo/6?=
+ =?us-ascii?Q?x3QW0w3n2zbLOBF9pm/1wQ3EeCqec2X121RXjORU34h6G1IzZtRsij2fiOpk?=
+ =?us-ascii?Q?/NZIR1jo6jcI3pStM+D48igydmUWarMCy3Efyv1/MNez5Eg+yx6cWCUJhj4O?=
+ =?us-ascii?Q?eGefa+PXuiNTfV8zUd+xk9SNVhncY52aL0EBiPEwF9Xt7VPznR85PVJ1F/Ci?=
+ =?us-ascii?Q?oTvQBVcoPibcuydZkCdWlfjsglW1/CVbL6u2dtmiyC/veRw/jozMzjjPXAoz?=
+ =?us-ascii?Q?no9Qw84ICOq052hatUvd/EFlTYnpaO8aWDCj2TuvCFzxLa7GNC1vZYUTqHPF?=
+ =?us-ascii?Q?QDnvwEb1L9a8l0T8OSySiG7DN+tC/ZELIU8xnEtqyt2+P24PJ5dchJzDWBG4?=
+ =?us-ascii?Q?ur2snxHcSat+/Yfan0ykYqntpvkfAyKRdozkt0o7T5xdeapgl67M4v4AYhaQ?=
+ =?us-ascii?Q?fAN2stgIoQi2TEzx68ytE4O9o9DgzV3LdKILSoJ3bBDfHj5247sY46gZdArD?=
+ =?us-ascii?Q?B+nb2s+BKRhOMg+Vmzni154tqBQO+eNsJN3JRSuBgM9vkqau5N8XDS9dXrsD?=
+ =?us-ascii?Q?RfE6skVIlVbVdCKDcj32qzMMrGwBVprw4+MNkSCTxd/+EMPQjz89YKOL0dNH?=
+ =?us-ascii?Q?UsDuRq9+n9f+8CD0wVJbaNumShWkMzmKSsCLzcaga8Ye2RoD1elBe5f3AJ37?=
+ =?us-ascii?Q?b3soErEj9rVs3bOpNe+gb0jooDIK5CW/40KfsdLUq9XmX5hZZMzAQBjA4Pz0?=
+ =?us-ascii?Q?hevreDcwcH7LJH00LhPq/7TRDHVuGcEZKUh1hq9YTfwALAJ6QjTa7r3dKY3N?=
+ =?us-ascii?Q?r95QRACbguVmXdpEnYixmGE2WW3oapKjYv80UBll4fQDmJJ6KNlAhASuHOug?=
+ =?us-ascii?Q?oBqDU9GhZoc1x3sxuqlmkCLz/ZfoADuzyIqI2yLD++99O6NOJT/T11CY2bTN?=
+ =?us-ascii?Q?aueZF86/86mYhR27QbPgEL1iYPEMlnk7Wi2lBf1bGRgcWQP9GmDkHZOBLgAU?=
+ =?us-ascii?Q?t2crFhWa+ladLDPHPLkX8wKc3yP5wW6IJqhZOZE+Qhwmyg=3D=3D?=
+Content-ID: <ABF2EA5CCADC174B98124866FFE7F1FE@namprd04.prod.outlook.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNKsWRmVeSWpSXmKPExsWy7bCmge7uLzMSDP60alqcnnqWyeLJ+lnM
- FpcWuVtc3jWHzWLG5JdsDqwem1Z1snnsXvCZyaNvyypGj8+b5AJYorJtMlITU1KLFFLzkvNT
- MvPSbZW8g+Od403NDAx1DS0tzJUU8hJzU22VXHwCdN0yc4DWKimUJeaUAoUCEouLlfTtbIry
- S0tSFTLyi0tslVILUnIKLAv0ihNzi0vz0vWS83OtDA0MjEyBChOyMw4fnsxcMIu14uiWL2wN
- jH+Zuxg5OSQETCTePfjN0sXIxSEksINR4t/SfkYI5xOjxPJ7t6Ey3xgl5q6YxgLTsrj3ABtE
- Yi+jxLRdf1ghnC+MEouWTmIEqWIT0JHYv+Q3K4gtImAnMePCMaAODg5mAU+JBZMiQMLCQObW
- fZeZQMIsAqoSh45Vg4R5Bawlbn1pZ4TYJS9xYcMtVpASTgEbiZe7jSFKBCVOznwCdg4zUEnz
- 1tnMIBdICJxjl7i15zsrRK+LROeaa1BvCku8Or6FHcKWknjZ38YO0dDMKLF0yS8WCKeHUWLO
- ottQ3cYS+5dOZoK4WVNi/S59iLCixM7fcxkhNvNJvPvaA3achACvREebEESJisTOo5PYIMJS
- ErM2BEOEPSQm3F/LBAmpfkaJD/e/ME1gVJiF5J9ZSP6ZhbB4ASPzKkax1ILi3PTUYsMCY+QI
- 3sQIToVa5jsYp739oHeIkYmD8RCjBAezkgivaMe0BCHelMTKqtSi/Pii0pzU4kOMpsCwnsgs
- JZqcD0zGeSXxhqZGxsbGFiaGZqaGhkrivOnO1QlCAumJJanZqakFqUUwfUwcnFINTNdnCSr8
- stzy8e7qT2fNy5bGs8y+etUkoS+h7kHyT7YAvvcai425NYU9q+TUV7PKFUzR69Vee7jFliH3
- rPyBhn+BLaIOYkcnHXqgop67y2f90tQ1c6sf2kz+t/xol8pae5YHjSY9xwQnBrrqTnuro+7a
- w5Po+fRx++yo0+H7r2hMUykuPqm61cmuVuKhFoO93pub216oMZkX/9nTvmGZNU/GbrspUxe9
- MYoLUpSp5VZvt5nKGaurefjzExm12pIzjJc23DtiJ3go9IriS/4DKfN8GlUOHz/DtIuzyvH+
- wcIbihPMTM9ECogd9Zgr9qlkmt7/oyEuS2wnpvxeF7tnzublhbU79L0cnvkGXH2YrsRSnJFo
- qMVcVJwIAMnd00AOBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWy7bCSnO7uLzMSDN4tZrE4PfUsk8WT9bOY
- LS4tcre4vGsOm8WMyS/ZHFg9Nq3qZPPYveAzk0ffllWMHp83yQWwRHHZpKTmZJalFunbJXBl
- HD48mblgFmvF0S1f2BoY/zJ3MXJySAiYSCzuPcDWxcjFISSwm1FiReNsqISUxNxv2xm7GDmA
- bGGJw4eLIWo+MUr86VzJAlLDJqAjsX/Jb1YQW0TAQWLFti1gcWYBX4lpT1eygdjCAp4SW/dd
- ZgKZwyKgKnHoWDVImFfAWuLWl3ZGiFXyEhc23GIFKeEUsJF4udsYJCwEVNLRtJcVolxQ4uTM
- J1DT5SWat85mnsAoMAtJahaS1AJGplWMkqkFxbnpucWGBYZ5qeV6xYm5xaV56XrJ+bmbGMEB
- q6W5g3H7qg96hxiZOBgPMUpwMCuJ8Ip2TEsQ4k1JrKxKLcqPLyrNSS0+xCjNwaIkznuh62S8
- kEB6YklqdmpqQWoRTJaJg1OqgUmxaVYfZ3mtsvqiTaF7z+a1/HjVVnGh0rPzUbD1YyWLUt2c
- pVPeK2jUT/9+N4fpQAGDn5Zr1StxrhMyTu+dHW/puuVWhXDa9N56WWZj9Fm3Z2/l5WXsrb0X
- 0i9HLVuQkWA3gWlh1cXqCXlMs7gUn/TO7WWKFk2bwVR4vtqtY0P+jvknZj1WZpTQP/UwpvC/
- gXaq07OwNVMl7nwr2HVpZ8BxIUf1x1HBpwIVDzPHFx4KvM33sX5v1FzNr+orKqZfFy+t69/E
- 7l+fHN8Yp2XkfD97rvZs//LK7JvcPyLyc69/Pp2ZY/FfXY93idbSutMzlS5tD/nyOKZttZrn
- pmVMH5lZLqlb9kQKFLHsK6pWYinOSDTUYi4qTgQABHEAZscCAAA=
-X-CMS-MailID: 20210510085419epcas1p3e72ea9d956bcf811167b14e06fb08149
-X-Msg-Generator: CA
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20210510085419epcas1p3e72ea9d956bcf811167b14e06fb08149
-References: <20210510085726.12663-1-sw0312.kim@samsung.com>
- <CGME20210510085419epcas1p3e72ea9d956bcf811167b14e06fb08149@epcas1p3.samsung.com>
-X-Spam-Score: -0.8 (/)
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR04MB3800.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80c8a14e-e17e-4f37-e07b-08d913900ea0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 May 2021 08:46:08.8999 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KDlt9FfbWeUXkU6iBKU8zDJt9nH/TzXJXqjwWW2moM9cwyXirBVdsBXfsFKi7G9slgXeDtjNjQGitnROZC5boRprDB48sLEhSll5GiWDNwc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5605
+X-Spam-Score: 0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.34 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -136,11 +158,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lg1gU-00089Y-QD
-Subject: [f2fs-dev] [PATCH 2/2] dump.f2fs: fix memory leak caused by
- dump_node_blk()
+ 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
+X-Headers-End: 1lg1sj-0002Sm-Rd
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Prevent swap file on zoned block
+ devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,43 +173,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: sw0312.kim@samsung.com, linux-kernel@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Damien Le Moal <Damien.LeMoal@wdc.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Fix to free node_blk when nid is 0 from dump_node_blk().
+On May 10, 2021 / 15:03, Chao Yu wrote:
+> On 2021/5/10 14:40, Shin'ichiro Kawasaki wrote:
+> > When f2fs is set up on zoned block devices, swap files on the file-
+> > system causes unaligned write command errors. The kernel writes to the
+> > swap files directly without the assistance of the filesystem then
+> > it can not fulfill sequential write requirements of zoned block devices.
+> > 
+> > To avoid the errors, prevent swap file activation when the filesystem
+> > enables block zoned device support.
+> > 
+> > Fixes: 4969c06a0d83 ("f2fs: support swap file w/ DIO")
+> > Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+> > Cc: stable@vger.kernel.org # v5.4+
+> > ---
+> >   fs/f2fs/data.c | 6 ++++++
+> >   1 file changed, 6 insertions(+)
+> > 
+> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > index 96f1a354f89f..51a832efd8cd 100644
+> > --- a/fs/f2fs/data.c
+> > +++ b/fs/f2fs/data.c
+> > @@ -4050,6 +4050,12 @@ static int f2fs_swap_activate(struct swap_info_struct *sis, struct file *file,
+> >   	if (f2fs_readonly(F2FS_I_SB(inode)->sb))
+> >   		return -EROFS;
+> > +	if (f2fs_sb_has_blkzoned(F2FS_I_SB(inode))) {
+> 
+> Should be f2fs_lfs_mode()? because all LFS mode instances will suffer
+> the same problem?
 
-Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
----
- fsck/dump.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Hi Chao, thanks for the comment.
 
-diff --git a/fsck/dump.c b/fsck/dump.c
-index 055ce09bb1cf..042a2e52edca 100644
---- a/fsck/dump.c
-+++ b/fsck/dump.c
-@@ -278,7 +278,7 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
- 
- 	if (nid == 0) {
- 		*ofs += skip;
--		return;
-+		goto out;
- 	}
- 
- 	for (i = 0; i < idx; i++, (*ofs)++) {
-@@ -297,6 +297,7 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
- 			break;
- 		}
- 	}
-+out:
- 	free(node_blk);
- }
- 
+The problem this patch addresses is the unaligned write command error that
+unique to zoned block devices. Non-zoned, regular block devices do not require
+sequential write and do not report the error, even when kernel does
+non-sequential write to the swap files.
+
+My understanding is that LFS mode instances allow the non-sequential write to
+swap files. At least, I was able to create a swap file with f2fs LFS mode on
+a non-zoned device, and observed the swap file worked as swap without error.
+
+    In this trial, I did not pin the swap file before swapon. Depending on the
+    steps to prepare the swap file, the file map to blocks was unaligned to
+    sections. When the file map was unaligned, swapon failed with message
+    "Swapfile does not align to section". When the map was aligned, swapon
+    succeeded. After that, swap file was in pinned status.
+
+If such swap file usage with LFS mode is not expected, I will modify the patch
+with f2fs_lfs_mode(). It will avoid the unaligned write command error also.
+
 -- 
-2.19.2
-
-
+Best Regards,
+Shin'ichiro Kawasaki
 
 _______________________________________________
 Linux-f2fs-devel mailing list
