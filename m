@@ -2,75 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F6D2379B61
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 02:21:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EFA1379C10
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 03:29:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgG9l-00063a-Ts; Tue, 11 May 2021 00:21:49 +0000
+	id 1lgHDF-0007m3-KB; Tue, 11 May 2021 01:29:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lgG9j-00063S-FW
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 00:21:47 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <yuchao0@huawei.com>) id 1lgHDD-0007lv-VX
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 01:29:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pVD109YQP66zpRyqEqfxdySVgnrFmb0t09GsRTtxVO4=; b=KOUMR/oEZi+Kcn6bwQWdzYIFKh
- FtNwY7UrA3MNKlBu5jSW1Cr64F3o2rmzfCScPfRdcgplIm+VRVw+Z0YOPh6uDP/P+7eLQxmVYjzO8
- LmDoAhxpYtPpnGqPYracEnO1LZ6eO8DG5MbBkRhqRVUJXrljohmUyl77OZAHxvHHkY9Q=;
+ bh=4SNxkZQUNjhEz7k5rD1Zm5mRskXf/rDEPVkHBIq1Gz0=; b=MyymW1k9aC633+2A5ZwPD6ZLua
+ cAlqF63MwUgBuvjhgbWlyXcL5wqKKdxuZx6tICggrSxI3C+FIjEIFpSt429YPKznuy2PVet2lg0lY
+ UxiB5Qt1GPMmMHInsWs5CVykOQsjohKY1k1EyRUlB17AC9/BdJ6CdEEupjUjVzt9nkB8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pVD109YQP66zpRyqEqfxdySVgnrFmb0t09GsRTtxVO4=; b=IQu0EILr/jIQLO/AInUMn98lGh
- a2MOsQ7Z2PomCELbSIPT/+bi1URR5wDnZn3tpKKzMC9A4QSnq50u3b1+gUuIraaN7f7adwdRRioZU
- 9qNwehZLamPntVpY04dzQFX+ywkgsxt6/1oWcGpyGUN3c/w9uPYlJx05RqpxfebjZfTQ=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lgG9c-003CEy-2p
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 00:21:49 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7F28A61076;
- Tue, 11 May 2021 00:21:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620692494;
- bh=D7+FwB6wNN0y7dvFP+IevrpYhvlfmJwLrmX2r+rCwDE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UCXWIZy4TrRnCP1EkRT4CWaXC+/SMGJWlqplUeXY8l1cA9TOUxiP68X7bOE/vDGYR
- o/W+bl9Y+919fZU+OUi+73a4GjLMt6iSwefA6Gi1Ng+k/H5xGRtvLLW/pAHodXnh/p
- 0ZteAzCxRFkdWvT4ECp30MtuT2cAqQv8nX+FN+sHQpoaTjNgByqSmJXrw85MtdzQha
- Pa32btRkDKsWq7ru/sAJXiW0Kb9eWsar9Po7c+y5vDT8gNb+tNwZ9O27xtXJ+JcNw0
- 2HmAj0KklstW+SqSGjyHnp6zw1sgGPfOOywb5k+LUgow8sljxscNyq3qOdexKtlsy5
- yUnmYDzdDw+iw==
-Date: Mon, 10 May 2021 17:21:33 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <YJnODYIke6E5i5TY@google.com>
-References: <20210506191347.1242802-1-jaegeuk@kernel.org>
- <YJlGU+STYD5geyIc@google.com> <YJmznEhGCZTaER0+@gmail.com>
+ bh=4SNxkZQUNjhEz7k5rD1Zm5mRskXf/rDEPVkHBIq1Gz0=; b=X5l0WLAvSmNjuMyT7Aj7qcibcC
+ d2IEdmjdaWEdYiRAxTLesIDI0h7uIhPVJ/QHALfBjcnRKN6p8Qvo/MhBnFusbsNGFJtAET2Lak755
+ 5esvqmK9ww7orgPTv1SUSg1f7GxNyUNSZpwlDwA3Mh7VN3vH9WqIXVrXhEIqiEn8dyRM=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lgHD5-0001cw-DM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 01:29:27 +0000
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FfKyF6NNmz1BHww;
+ Tue, 11 May 2021 09:26:29 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 11 May
+ 2021 09:29:07 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>
+References: <20210510142804.511265-1-jaegeuk@kernel.org>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <9df7d088-3580-122b-60a3-799ea665cfeb@huawei.com>
+Date: Tue, 11 May 2021 09:29:07 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YJmznEhGCZTaER0+@gmail.com>
-X-Spam-Score: -0.8 (/)
+In-Reply-To: <20210510142804.511265-1-jaegeuk@kernel.org>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lgG9c-003CEy-2p
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: support iflag change given the mask
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lgHD5-0001cw-DM
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid null pointer access when
+ handling IPU error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,32 +79,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/10, Eric Biggers wrote:
-> On Mon, May 10, 2021 at 07:42:27AM -0700, Jaegeuk Kim wrote:
-> > In f2fs_fileattr_set(),
-> > 
-> > 	if (!fa->flags_valid)
-> > 		mask &= FS_COMMON_FL;
-> > 
-> > In this case, we can set supported flags by mask only instead of BUG_ON.
-> > 
-> > /* Flags shared betwen flags/xflags */
-> > 	(FS_SYNC_FL | FS_IMMUTABLE_FL | FS_APPEND_FL | \
-> > 	 FS_NODUMP_FL |	FS_NOATIME_FL | FS_DAX_FL | \
-> > 	 FS_PROJINHERIT_FL)
-> > 
-> > Fixes: 4c5b47997521 ("vfs: add fileattr ops")
+On 2021/5/10 22:28, Jaegeuk Kim wrote:
+>   Unable to handle kernel NULL pointer dereference at virtual address 000000000000001a
+>   pc : f2fs_inplace_write_data+0x144/0x208
+>   lr : f2fs_inplace_write_data+0x134/0x208
+>   Call trace:
+>    f2fs_inplace_write_data+0x144/0x208
+>    f2fs_do_write_data_page+0x270/0x770
+>    f2fs_write_single_data_page+0x47c/0x830
+>    __f2fs_write_data_pages+0x444/0x98c
+>    f2fs_write_data_pages.llvm.16514453770497736882+0x2c/0x38
+>    do_writepages+0x58/0x118
+>    __writeback_single_inode+0x44/0x300
+>    writeback_sb_inodes+0x4b8/0x9c8
+>    wb_writeback+0x148/0x42c
+>    wb_do_writeback+0xc8/0x390
+>    wb_workfn+0xb0/0x2f4
+>    process_one_work+0x1fc/0x444
+>    worker_thread+0x268/0x4b4
+>    kthread+0x13c/0x158
+>    ret_from_fork+0x10/0x18
 > 
-> Shouldn't it be:
-> 
-> Fixes: 9b1bb01c8ae7 ("f2fs: convert to fileattr")
+> Fixes: 955772787667 ("f2fs: drop inplace IO if fs status is abnormal")
 
-Heh, thank you. I applied this change in the git. :)
+My bad, thanks for fixing this.
+
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/segment.c | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index c605415840b5..ae875557d693 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3577,9 +3577,11 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+>   	if (fio->bio) {
+>   		struct bio *bio = *(fio->bio);
+>   
+> -		bio->bi_status = BLK_STS_IOERR;
+> -		bio_endio(bio);
+> -		fio->bio = NULL;
+> +		if (bio) {
+> +			bio->bi_status = BLK_STS_IOERR;
+> +			bio_endio(bio);
+> +			fio->bio = NULL;
+
+fio->bio points a bio assigned in writepages(), so it should reset
+that bio to NULL by *(fio->bio) = NULL.
+
+Thanks,
+
+> +		}
+>   	}
+>   	return err;
+>   }
+> 
 
 
 _______________________________________________
