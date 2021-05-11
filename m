@@ -2,68 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 617C637A46F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 12:18:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D81C37A57D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 13:11:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgPSq-0006EZ-2j; Tue, 11 May 2021 10:18:08 +0000
+	id 1lgQIF-00086t-RG; Tue, 11 May 2021 11:11:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lgPSo-0006EK-CE
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 10:18:06 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <changfengnan@vivo.com>) id 1lgQIC-00086h-PM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 11:11:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZEtMzRVFjH9empThNEeW7IPjEAgjXZr2hf9PdPY5zpQ=; b=G9kyaBo5UrBK6vZwNa2gHjNNbN
- 3AqltK8FBEk9GfmHmVhS6P63Uz+f/IhaFg2bwf/De0Z2tB5phXpf8v340+08wMH2daffiK10/ZdJC
- ORWE4h2/+5yYM6E4Ia3iOuv2gv1VpfcwaJUamAd/k0wPjFk/LONvfbjPr3tZ46AieJ9k=;
+ bh=keGaAvJuGa0chGSkADiADQHRPFFZ8eaTTPZHDLMg69M=; b=YzSbpYvRrYewUTRbmZE9J57kq4
+ KEIZ2+Ig+fQO0YPxV6S65CvWNLMilXQD04b0ugHezqopFwDC4NUs95cad8ZeeMn5X9UNxPLjgUWsP
+ DKGbZUAwZ/EKM1Rtx+aA73p8FAPxt3RpgJa96GUdwD3+m+MtakC11RKU18kdZEJOnFFU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:In-Reply-To:References:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZEtMzRVFjH9empThNEeW7IPjEAgjXZr2hf9PdPY5zpQ=; b=JEjZl/QMZQ8ThSHFEgg8ljltv+
- Jws9rtwdgkepddjmvT6by/LHxWMbMNiq8dS+NzQA+ek6Y+WhPIuxVEkNUScJTZgQb3FO7ApWt+gBZ
- H83ylrQedEfwzrtU0ayFfCFGOgKRdyhFo9QtAU3bj9+PWMw/KgqqOtpnEQbzrQf3X7dc=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgPSf-0004vf-6z
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 10:18:06 +0000
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FfYhp4YNSzlcbD;
- Tue, 11 May 2021 18:15:38 +0800 (CST)
-Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS413-HUB.china.huawei.com (10.3.19.213) with Microsoft SMTP Server id
- 14.3.498.0; Tue, 11 May 2021 18:17:43 +0800
-From: Chao Yu <yuchao0@huawei.com>
-To: <jaegeuk@kernel.org>
-Date: Tue, 11 May 2021 18:17:35 +0800
-Message-ID: <20210511101735.15573-2-yuchao0@huawei.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210511101735.15573-1-yuchao0@huawei.com>
-References: <20210511101735.15573-1-yuchao0@huawei.com>
+ bh=keGaAvJuGa0chGSkADiADQHRPFFZ8eaTTPZHDLMg69M=; b=UuVpHSNVGQZY5pusgv0rpJL6Tn
+ V4rr430Nvt21Qx79AMaXcoP5VfCdw7gsBPtW6v5/bq7OZ1hielFRPTh5Vj/jpNc9VLzwZsqi5+fWd
+ 0M/UffhbzWdk0yOLhtaHCkH2oz+tqdxl8PJ1KsGEtcS3YwaP8h0lrvu1V1BjXFSdS70M=;
+Received: from mail-m17657.qiye.163.com ([59.111.176.57])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lgQI6-003jGH-5f
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 11:11:13 +0000
+Received: from SZ11126892 (unknown [58.251.74.232])
+ by mail-m17657.qiye.163.com (Hmail) with ESMTPA id D81702800E3;
+ Tue, 11 May 2021 19:10:57 +0800 (CST)
+From: <changfengnan@vivo.com>
+To: "'Jaegeuk Kim'" <jaegeuk@kernel.org>
+References: <20210507094455.1695-1-changfengnan@vivo.com>
+ <YJlUpHJLONlORWWl@google.com>
+In-Reply-To: <YJlUpHJLONlORWWl@google.com>
+Date: Tue, 11 May 2021 19:10:57 +0800
+Message-ID: <000b01d74656$518e96f0$f4abc4d0$@vivo.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.120.216.130]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: zh-cn
+Thread-Index: AQHMWO6DzzIYy5cyNAl5YIMHDd6ZwQHXl5KvquU7QLA=
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+ oVCBIfWUFZQhlCQ1ZKGEpMSEpLS04dQkxVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
+ 9ISFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OSo6HCo6PT8UCTwDLTBJPQoJ
+ D04KCypVSlVKTUlLTEhKT05DSUJLVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
+ WU5DVUlOSlVMT1VJSElZV1kIAVlBSE1OTzcG
+X-HM-Tid: 0a795b1f71c2da03kuwsd81702800e3
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lgPSf-0004vf-6z
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: atgc: export entries for better
- tunability via sysfs
+ 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
+X-Headers-End: 1lgQI6-003jGH-5f
+Subject: [f2fs-dev] =?gb2312?b?tPC4tDogW1BBVENIIHY0XSBmMmZzOiBjb21wcmVz?=
+	=?gb2312?b?czogYXZvaWQgdW5uZWNlc3NhcnkgY2hlY2sgaW4gZjJmc19wcmVw?=
+	=?gb2312?b?YXJlX2NvbXByZXNzX292ZXJ3cml0ZQ==?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,111 +79,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch export below sysfs entries for better ATGC tunability.
-
-/sys/fs/f2fs/<disk>/atgc_candidate_ratio
-/sys/fs/f2fs/<disk>/atgc_candidate_count
-/sys/fs/f2fs/<disk>/atgc_age_weight
-/sys/fs/f2fs/<disk>/atgc_age_threshold
-
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
- Documentation/ABI/testing/sysfs-fs-f2fs | 28 +++++++++++++++++++++++++
- fs/f2fs/sysfs.c                         | 13 ++++++++++++
- 2 files changed, 41 insertions(+)
-
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 4849b8e84e42..5088281e312e 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -438,3 +438,31 @@ Description:	Show the count of inode newly enabled for compression since mount.
- 		Note that when the compression is disabled for the files, this count
- 		doesn't decrease. If you write "0" here, you can initialize
- 		compr_new_inode to "0".
-+
-+What:		/sys/fs/f2fs/<disk>/atgc_candidate_ratio
-+Date:		May 2021
-+Contact:	"Chao Yu" <yuchao0@huawei.com>
-+Description:	When ATGC is on, it controls candidate ratio in order to limit total
-+		number of potential victim in all candidates, the value should be in
-+		range of [0, 100], by default it was initialized as 20(%).
-+
-+What:		/sys/fs/f2fs/<disk>/atgc_candidate_count
-+Date:		May 2021
-+Contact:	"Chao Yu" <yuchao0@huawei.com>
-+Description:	When ATGC is on, it controls candidate count in order to limit total
-+		number of potential victim in all candidates, by default it was
-+		initialized as 10 (sections).
-+
-+What:		/sys/fs/f2fs/<disk>/atgc_age_weight
-+Date:		May 2021
-+Contact:	"Chao Yu" <yuchao0@huawei.com>
-+Description:	When ATGC is on, it controls age weight to balance weight proportion
-+		in between aging and valid blocks, the value should be in range of
-+		[0, 100], by default it was initialized as 60(%).
-+
-+What:		/sys/fs/f2fs/<disk>/atgc_age_threshold
-+Date:		May 2021
-+Contact:	"Chao Yu" <yuchao0@huawei.com>
-+Description:	When ATGC is on, it controls age threshold to bypass GCing young
-+		candidates whose age is not beyond the threshold, by default it was
-+		initialized as 604800 seconds (equals to 7 days).
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 39b522ec73e7..1efd2f7b8770 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -37,6 +37,7 @@ enum {
- #endif
- 	RESERVED_BLOCKS,	/* struct f2fs_sb_info */
- 	CPRC_INFO,	/* struct ckpt_req_control */
-+	ATGC_INFO,	/* struct atgc_management */
- };
- 
- struct f2fs_attr {
-@@ -75,6 +76,8 @@ static unsigned char *__struct_ptr(struct f2fs_sb_info *sbi, int struct_type)
- #endif
- 	else if (struct_type == CPRC_INFO)
- 		return (unsigned char *)&sbi->cprc_info;
-+	else if (struct_type == ATGC_INFO)
-+		return (unsigned char *)&sbi->am;
- 	return NULL;
- }
- 
-@@ -710,6 +713,11 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_written_block, compr_written_block);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_saved_block, compr_saved_block);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_new_inode, compr_new_inode);
- #endif
-+/* For ATGC */
-+F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_ratio, candidate_ratio);
-+F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_count, max_candidate_count);
-+F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_weight, age_weight);
-+F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
- 
- #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
- static struct attribute *f2fs_attrs[] = {
-@@ -778,6 +786,11 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(compr_saved_block),
- 	ATTR_LIST(compr_new_inode),
- #endif
-+	/* For ATGC */
-+	ATTR_LIST(atgc_candidate_ratio),
-+	ATTR_LIST(atgc_candidate_count),
-+	ATTR_LIST(atgc_age_weight),
-+	ATTR_LIST(atgc_age_threshold),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs);
--- 
-2.29.2
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgSmFlZ2V1azoKCklmIHRoZXJlJ3JlIGV4aXN0aW5nIGNsdXN0ZXJzIGJleW9uZCBpX3NpemUs
+IG1heSBjYXVzZSBkYXRhIGNvcnJ1cHRpb24sIGJ1dAp3aWxsIHRoaXMgaGFwcGVuIGluIG5vcm1h
+bD8gbWF5YmUgc29tZSBlcnJvciBjYW4gY2F1c2UgdGhpcywgaWYgaV9zaXplIGlzCmVycm9yIHRo
+ZSBkYXRhIGJleW9uZCBzaXplIHN0aWxsIGNhbid0IGhhbmRsZSBwcm9wZXJseS4gIElzIHRoZXJl
+IG5vcm1hbApjYXNlIGNhbiBjYXN1ZSBleGlzdGluZyBjbHVzdGVycyBiZXlvbmQgaV9zaXplPwoK
+VGhhbmtzLgoKLS0tLS3Tyrz+1K28/i0tLS0tCreivP7IyzogSmFlZ2V1ayBLaW0gPGphZWdldWtA
+a2VybmVsLm9yZz4gCreiy83KsbzkOiAyMDIxxOo11MIxMMjVIDIzOjQ0CsrVvP7IyzogRmVuZ25h
+biBDaGFuZyA8Y2hhbmdmZW5nbmFuQHZpdm8uY29tPgqzrcvNOiBjaGFvQGtlcm5lbC5vcmc7IGxp
+bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Ctb3zOI6IFJlOiBbUEFUQ0ggdjRd
+IGYyZnM6IGNvbXByZXNzOiBhdm9pZCB1bm5lY2Vzc2FyeSBjaGVjayBpbgpmMmZzX3ByZXBhcmVf
+Y29tcHJlc3Nfb3ZlcndyaXRlCgpPbiAwNS8wNywgRmVuZ25hbiBDaGFuZyB3cm90ZToKPiB3aGVu
+IHdyaXRlIGNvbXByZXNzZWQgZmlsZSB3aXRoIE9fVFJVTkMsIHRoZXJlIHdpbGwgYmUgYSBsb3Qg
+b2YgCj4gdW5uZWNlc3NhcnkgY2hlY2sgdmFsaWQgYmxvY2tzIGluIGYyZnNfcHJlcGFyZV9jb21w
+cmVzc19vdmVyd3JpdGUsIAo+IGVzcGVjaWFsbHkgd2hlbiB3cml0dGVuIGluIHBhZ2Ugc2l6ZSwg
+cmVtb3ZlIGl0Lgo+IAo+IFRoaXMgcGF0Y2ggd2lsbCBub3QgYnJpbmcgc2lnbmlmaWNhbnQgcGVy
+Zm9ybWFuY2UgaW1wcm92ZW1lbnRzLCBJIHRlc3QgCj4gdGhpcyBvbiBtb2JpbGUgcGhvbmUsIHVz
+ZSBhbmRyb2JlbmNoLCB0aGUgc2VxdWVudGlhbCB3cml0ZSB0ZXN0IGNhc2UgCj4gd2FzIG9wZW4g
+ZmlsZSB3aXRoIE9fVFJVTkMsIHNldCB3cml0ZSBzaXplIHRvIDRLQiwgIHBlcmZvcm1hbmNlIAo+
+IGltcHJvdmVkIGFib3V0IDIlLTMlLiBJZiB3cml0ZSBzaXplIHNldCB0byAzMk1CLCBwZXJmb3Jt
+YW5jZSBpbXByb3ZlZAphYm91dCAwLjUlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEZlbmduYW4gQ2hh
+bmcgPGNoYW5nZmVuZ25hbkB2aXZvLmNvbT4KPiAtLS0KPiAgZnMvZjJmcy9kYXRhLmMgfCA4ICsr
+KysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0
+IGEvZnMvZjJmcy9kYXRhLmMgYi9mcy9mMmZzL2RhdGEuYyBpbmRleCAKPiBjZjkzNTQ3NGZmYmEu
+LmI5ZWM3YjE4MmY0NSAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL2RhdGEuYwo+ICsrKyBiL2ZzL2Yy
+ZnMvZGF0YS5jCj4gQEAgLTMzMDMsOSArMzMwMywxNyBAQCBzdGF0aWMgaW50IGYyZnNfd3JpdGVf
+YmVnaW4oc3RydWN0IGZpbGUgKmZpbGUsIAo+IHN0cnVjdCBhZGRyZXNzX3NwYWNlICptYXBwaW5n
+LCAgI2lmZGVmIENPTkZJR19GMkZTX0ZTX0NPTVBSRVNTSU9OCj4gIAlpZiAoZjJmc19jb21wcmVz
+c2VkX2ZpbGUoaW5vZGUpKSB7Cj4gIAkJaW50IHJldDsKPiArCQlwZ29mZl90IGVuZCA9IChpX3Np
+emVfcmVhZChpbm9kZSkgKyBQQUdFX1NJWkUgLSAxKSA+PgpQQUdFX1NISUZUOwo+IAo+ICAJCSpm
+c2RhdGEgPSBOVUxMOwo+IAo+ICsJCS8qCj4gKwkJICogd2hlbiB3cml0ZSBwb3MgaXMgYmlnZ2Vy
+IHRoYW4gaW5vZGUgc2l6ZQosZjJmc19wcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZQo+ICsJCSAq
+IGFsd2F5cyByZXR1cm4gMCwgc28gY2hlY2sgcG9zIGZpcnN0IHRvIGF2b2lkIHRoaXMuCj4gKwkJ
+ICovCj4gKwkJaWYgKGluZGV4ID49IGVuZCkKPiArCQkJZ290byByZXBlYXQ7CgpXaGF0IGlmIHRo
+ZXJlJ3JlIGV4aXN0aW5nIGNsdXN0ZXJzIGJleW9uZCBpX3NpemU/IEdpdmVuIHBlcmZvcm1hbmNl
+IGltcGFjdHMsCmRvIHdlIHJlYWxseSBuZWVkIHRoaXM/Cgo+ICsKPiAgCQlyZXQgPSBmMmZzX3By
+ZXBhcmVfY29tcHJlc3Nfb3ZlcndyaXRlKGlub2RlLCBwYWdlcCwKPiAgCQkJCQkJCWluZGV4LCBm
+c2RhdGEpOwo+ICAJCWlmIChyZXQgPCAwKSB7Cj4gLS0KPiAyLjI5LjAKCgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFp
+bGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8v
+bGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
