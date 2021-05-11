@@ -2,70 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A792E37B0FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 23:47:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F08F37B10B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 23:51:12 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgaE7-0003sK-LX; Tue, 11 May 2021 21:47:39 +0000
+	id 1lgaHW-0004I2-3n; Tue, 11 May 2021 21:51:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lgaE6-0003s6-CV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 21:47:38 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lgaHU-0004Ho-Kk
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 21:51:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wphS/Ppa0NQatcu2LQxO6kv9TxOd7L5oiyfiBtnk5RQ=; b=I7fOPVIL9DQrvYZcEfXTxsZ/S3
- UIFyH/XoFXOyYBt0ms7gFD1HbCaTp3kSg6auggzL+46zHRwkJ7tCOXAkQtGp9ggS9Ags8kY3qrOch
- hbnFcuhMgMiDDtniRl4F58aux9C+4B1gk+Z4EpapEedD77elDz9ZbTiO94EpC3oT1dy4=;
+ bh=tADXxgUNq+uw853BSCcS14tNEj/nmuXAZ0RHmUj2TkA=; b=AVF5oswnLd3Z4Y1CVxOm5A6KdM
+ OjiyFjN/EHmdPTqyfBuDFNvw4NsokIBu1r2ApV1R8h/nxyAAwE/Wvzx2NHMKQnC7oY6nLuBGZhOzc
+ AQcTnCznt/2UbNPD+EfztUzdKKPmVpVClm2aHL8xr1VIBe84Kb85S7L+Z5Vi95XPsGbM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wphS/Ppa0NQatcu2LQxO6kv9TxOd7L5oiyfiBtnk5RQ=; b=gUlj0sR7p1SS/rHyEfZnel8CTp
- 03ZzKCUU2VnyY5ZhNwMNkf2ttx2peOcF8gNJezmH9VXMJ0pE+NGMBrxJm5v9QSWLA9uP6fSErmI3F
- VXVCkbteal9dQxFqPHPMsQ+exOaAXOAKWJdo4k54iTAWXLMGijuLaVYKQcJWhxdEyIJo=;
+ bh=tADXxgUNq+uw853BSCcS14tNEj/nmuXAZ0RHmUj2TkA=; b=XJbO11hmLghzUt/meha+YpPVQf
+ N59tPqIh6VxRskciPQqf+VWuX8j1dM/CrdK9XGfhBvFTh1XDhaF6m7FU8nyC/vpH+VImhhYVGUriD
+ BexN1CE+QURkG3WrY0QxCfwP0kysv2gsOE8FxR2yozjPLty/omPMdWQxUqmvoUC4dOAo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgaDx-0003Bm-Cx
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 21:47:37 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 84F26611F1;
- Tue, 11 May 2021 21:47:24 +0000 (UTC)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lgaHO-004Jx6-83
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 21:51:09 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5821361628;
+ Tue, 11 May 2021 21:50:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620769644;
- bh=ETXRZR/HWxVHGLjQE9b0GOv3YJdjBNysrbBoj0QJ/6o=;
+ s=k20201202; t=1620769856;
+ bh=2pi9Gk3ILIYBRuCdmP8GeTLIqcHAkVvoEeVt4NR6QU0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UmJFotuJwk2WmkbYL5Kt2j3aShJLYIDMBGhT5K4Mocz8QoSUTyFA7Pj1fyITdGoz6
- 4VUdVeXSQnAPgJ04SZwzGktrX+h+zYebkQ3C6CpJDirIp2XQfOz8HnqzfIkBalnUWb
- f9CyuxpSJwBehh4+ttZgOneF+z1IBXhNjDvo0+Ac0WStE1lkJx76nZ0/FoU8ydPnXI
- PGrqgQ/oH00u4r/g8ZDq3yNNOTWpZ7BchBDUd+IZ+wYFC0BWHHrUVNsdVUDNEulTer
- Ce8Ak7VFG8eYqMy8DUhQMDux/tUVs9Mv9oVvppELuFSmdLNQT2WSecSqZNEfJp0/yu
- JUSH7WZLAI5Bg==
-Date: Tue, 11 May 2021 14:47:23 -0700
+ b=QvS5KnCPUXGrtRoHvyvJslty8QyJO4BRFTHEAC3R6bAkmEFxxvtll3/hFZqWBFiD6
+ NIH3/LRijzVwDWzejD3loX2PoD8GTh5TFu8oe82N9Cublxw6ioQfpUnx9JFns97FRl
+ WSBvrCg4Yrh6oi/D2YJbyhTOSZ6eEWvwqli40U1KGdpoFe3Ph4Tghg2+ZN+caKe8Ks
+ zL+be+u2JIuxESfSJb29yqbtB7TZPPwCCu0jsQx/rGgjrosts4XauyR0RwEjS/lzEA
+ k/XSYNzgNf8Y4S0EAwqwnX/TzfJDmOHJVISp6z7gGNaaOb3h1IvSFXeEOQ6qz20fXb
+ 50BozWA0tc3Og==
+Date: Tue, 11 May 2021 14:50:54 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YJr7axIRZcTDrAWE@google.com>
-References: <20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p3>
- <3a0ab201-9546-d523-abc7-79df5f637f14@huawei.com>
- <YJN0nTgadoq8vDaG@google.com>
- <bd0fa15b-01c3-9f70-3eb8-ec2b54a0ee8f@huawei.com>
- <YJlHmP/ej8/IsHL3@google.com>
- <6e95edca-4802-7650-4771-5389067935dc@huawei.com>
- <YJoRcIpW1g/OgHZn@google.com>
- <CGME20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p1>
- <20210511064156epcms2p1351480bea36733f2e00022bd295e829e@epcms2p1>
- <771a05fe-e26f-d635-5f8d-5be72f82345f@huawei.com>
+To: changfengnan@vivo.com
+Message-ID: <YJr8PuZlOBqb+Qv1@google.com>
+References: <20210507094455.1695-1-changfengnan@vivo.com>
+ <YJlUpHJLONlORWWl@google.com>
+ <000b01d74656$518e96f0$f4abc4d0$@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <771a05fe-e26f-d635-5f8d-5be72f82345f@huawei.com>
+In-Reply-To: <000b01d74656$518e96f0$f4abc4d0$@vivo.com>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -77,9 +70,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lgaDx-0003Bm-Cx
-Subject: Re: [f2fs-dev] [PATCH] f2fs: set file as cold when file
- defragmentation
+X-Headers-End: 1lgaHO-004Jx6-83
+Subject: Re: [f2fs-dev] =?utf-8?b?562U5aSNOiBbUEFUQ0ggdjRdIGYyZnM6IGNvbXBy?=
+ =?utf-8?q?ess=3A_avoid_unnecessary_check_in_f2fs=5Fprepare=5Fcompress=5Fo?=
+ =?utf-8?q?verwrite?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,148 +85,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/11, Chao Yu wrote:
-> On 2021/5/11 14:41, Daejun Park wrote:
-> > > On 2021/5/11 13:09, Jaegeuk Kim wrote:
-> > > > On 05/11, Chao Yu wrote:
-> > > > > On 2021/5/10 22:47, Jaegeuk Kim wrote:
-> > > > > > On 05/06, Chao Yu wrote:
-> > > > > > > On 2021/5/6 12:46, Jaegeuk Kim wrote:
-> > > > > > > > On 05/06, Chao Yu wrote:
-> > > > > > > > > On 2021/4/29 14:20, Daejun Park wrote:
-> > > > > > > > > > In file defragmentation by ioctl, all data blocks in the file are
-> > > > > > > > > > re-written out-of-place. File defragmentation implies user will not update
-> > > > > > > > > > and mostly read the file. So before the defragmentation, we set file
-> > > > > > > > > > temperature as cold for better block allocation.
-> > > > > > > > > 
-> > > > > > > > > I don't think all fragmented files are cold, e.g. db file.
-> > > > > > > > 
-> > > > > > > > I have a bit different opinion. I think one example would be users want to
-> > > > > > > > defragment a file, when the they want to get higher read bandwidth for
-> > > > > > > 
-> > > > > > > Multimedia file was already defined as cold file now via default extension
-> > > > > > > list?
-> > > > > > 
-> > > > > > I just gave an example. And default is default.
-> > > > > > 
-> > > > > > > 
-> > > > > > > > usually multimedia files. That's likely to be cold files. Moreover, I don't
-> > > > > > > > think they want to defragment db files which will be fragmented soon?
-> > > > > > > 
-> > > > > > > I guess like db files have less update but more access?
-> > > > > > 
-> > > > > > I think both, and we set it as hot.
-> > > > > 
-> > > > > Then hot and cold bit will set to the same db file after defragmentation?
-> > > > 
-> > > > Do you set cold bit to db files? I mean, generally db is not cold, but hot.
-> > > 
-> > > I never set cold bit to db files, I mean if we defragment db file which
-> > > has less update and more access, db file may have bot hot and cold bit.
-> > > 
-> > > To Daejun, may I ask that is Samsung planning to use this defragment ioctl
-> > > in products? what's the user scenario?
-> > 
-> > It is just my idea for defragmentation, not Samsung.
-> 
-> Alright,
-> 
-> > I think the user will call the defrag ioctl for the files that have been updated.
-> 
-> Sadly, I don't see there is any user of this defragment interface since it was
-> been introduced... so I really don't know the real use scenario of this interface
-> now.
-> 
-> > 
-> > On the other hand, I think FS should be able to support defrag file even
-> > when in-place update is applied. What do you think?
-> 
-> bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
-> {
-> 	if (f2fs_is_pinned_file(inode))
-> 		return true;
-> 
-> 	/* if this is cold file, we should overwrite to avoid fragmentation */
-> 	if (file_is_cold(inode))
-> 		return true;
-> 
-> If cold bit was set, later rewrite in defragment interface can only trigger
-> IPU due to above IPU policy check, so after this interface, file is still
-> fragmented... what's the difference compared to just setting cold bit via
-> setxattr?
-> 
-> And if user know that he will trigger less update and more read in the file,
-> why not just calling setxattr("system.advise", cold_bit) to set the file as
-> cold before it becomes fragmented, e.g. at the time of file creation?
-
-yea, actually user can set it whatever they want after defragment. :P
-
-> 
-> Thanks,
-> 
-> > 
-> > Thanks,
-> > Daejun
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > 
-> > > > > > > 
-> > > > > > > Thanks,
-> > > > > > > 
-> > > > > > > > 
-> > > > > > > > > 
-> > > > > > > > > We have separated interface (via f2fs_xattr_advise_handler, e.g. setfattr -n
-> > > > > > > > > "system.advise" -v value) to indicate this file is a hot/cold file, so my
-> > > > > > > > > suggestion is after file defragmentation, if you think this file is cold, and
-> > > > > > > > > use setxattr() to set it as cold.
-> > > > > > > > > 
-> > > > > > > > > Thanks,
-> > > > > > > > > 
-> > > > > > > > > > 
-> > > > > > > > > > Signed-off-by: Daejun Park <daejun7.park@samsung.com>
-> > > > > > > > > > ---
-> > > > > > > > > >       fs/f2fs/file.c | 3 +++
-> > > > > > > > > >       1 file changed, 3 insertions(+)
-> > > > > > > > > > 
-> > > > > > > > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > > > > > > > > index d697c8900fa7..dcac965a05fe 100644
-> > > > > > > > > > --- a/fs/f2fs/file.c
-> > > > > > > > > > +++ b/fs/f2fs/file.c
-> > > > > > > > > > @@ -2669,6 +2669,9 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
-> > > > > > > > > >               map.m_len = pg_end - pg_start;
-> > > > > > > > > >               total = 0;
-> > > > > > > > > > +        if (!file_is_cold(inode))
-> > > > > > > > > > +                file_set_cold(inode);
-> > > > > > > > > > +
-> > > > > > > > > >               while (map.m_lblk < pg_end) {
-> > > > > > > > > >                       pgoff_t idx;
-> > > > > > > > > >                       int cnt = 0;
-> > > > > > > > > > 
-> > > > > > > > .
-> > > > > > > > 
-> > > > > > .
-> > > > > > 
-> > > > .
-> > > > 
-> > > 
-> > > 
-> > .
-> > 
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMDUvMTEsIGNoYW5nZmVuZ25hbkB2aXZvLmNvbSB3cm90ZToKPiBIaSBKYWVnZXVrOgo+IAo+
+IElmIHRoZXJlJ3JlIGV4aXN0aW5nIGNsdXN0ZXJzIGJleW9uZCBpX3NpemUsIG1heSBjYXVzZSBk
+YXRhIGNvcnJ1cHRpb24sIGJ1dAo+IHdpbGwgdGhpcyBoYXBwZW4gaW4gbm9ybWFsPyBtYXliZSBz
+b21lIGVycm9yIGNhbiBjYXVzZSB0aGlzLCBpZiBpX3NpemUgaXMKPiBlcnJvciB0aGUgZGF0YSBi
+ZXlvbmQgc2l6ZSBzdGlsbCBjYW4ndCBoYW5kbGUgcHJvcGVybHkuICBJcyB0aGVyZSBub3JtYWwK
+PiBjYXNlIGNhbiBjYXN1ZSBleGlzdGluZyBjbHVzdGVycyBiZXlvbmQgaV9zaXplPwoKV2UgZG9u
+J3QgaGF2ZSBhIHJ1bGUgdG8gc3luYyBiZXR3ZWVuIGlfc2l6ZSBhbmQgaV9ibG9ja3MuCgo+IAo+
+IFRoYW5rcy4KPiAKPiAtLS0tLemCruS7tuWOn+S7ti0tLS0tCj4g5Y+R5Lu25Lq6OiBKYWVnZXVr
+IEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPiAKPiDlj5HpgIHml7bpl7Q6IDIwMjHlubQ15pyIMTDm
+l6UgMjM6NDQKPiDmlLbku7bkuro6IEZlbmduYW4gQ2hhbmcgPGNoYW5nZmVuZ25hbkB2aXZvLmNv
+bT4KPiDmioTpgIE6IGNoYW9Aa2VybmVsLm9yZzsgbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQKPiDkuLvpopg6IFJlOiBbUEFUQ0ggdjRdIGYyZnM6IGNvbXByZXNzOiBhdm9p
+ZCB1bm5lY2Vzc2FyeSBjaGVjayBpbgo+IGYyZnNfcHJlcGFyZV9jb21wcmVzc19vdmVyd3JpdGUK
+PiAKPiBPbiAwNS8wNywgRmVuZ25hbiBDaGFuZyB3cm90ZToKPiA+IHdoZW4gd3JpdGUgY29tcHJl
+c3NlZCBmaWxlIHdpdGggT19UUlVOQywgdGhlcmUgd2lsbCBiZSBhIGxvdCBvZiAKPiA+IHVubmVj
+ZXNzYXJ5IGNoZWNrIHZhbGlkIGJsb2NrcyBpbiBmMmZzX3ByZXBhcmVfY29tcHJlc3Nfb3Zlcndy
+aXRlLCAKPiA+IGVzcGVjaWFsbHkgd2hlbiB3cml0dGVuIGluIHBhZ2Ugc2l6ZSwgcmVtb3ZlIGl0
+Lgo+ID4gCj4gPiBUaGlzIHBhdGNoIHdpbGwgbm90IGJyaW5nIHNpZ25pZmljYW50IHBlcmZvcm1h
+bmNlIGltcHJvdmVtZW50cywgSSB0ZXN0IAo+ID4gdGhpcyBvbiBtb2JpbGUgcGhvbmUsIHVzZSBh
+bmRyb2JlbmNoLCB0aGUgc2VxdWVudGlhbCB3cml0ZSB0ZXN0IGNhc2UgCj4gPiB3YXMgb3BlbiBm
+aWxlIHdpdGggT19UUlVOQywgc2V0IHdyaXRlIHNpemUgdG8gNEtCLCAgcGVyZm9ybWFuY2UgCj4g
+PiBpbXByb3ZlZCBhYm91dCAyJS0zJS4gSWYgd3JpdGUgc2l6ZSBzZXQgdG8gMzJNQiwgcGVyZm9y
+bWFuY2UgaW1wcm92ZWQKPiBhYm91dCAwLjUlLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBGZW5n
+bmFuIENoYW5nIDxjaGFuZ2ZlbmduYW5Adml2by5jb20+Cj4gPiAtLS0KPiA+ICBmcy9mMmZzL2Rh
+dGEuYyB8IDggKysrKysrKysKPiA+ICAxIGZpbGUgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspCj4g
+PiAKPiA+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2RhdGEuYyBiL2ZzL2YyZnMvZGF0YS5jIGluZGV4
+IAo+ID4gY2Y5MzU0NzRmZmJhLi5iOWVjN2IxODJmNDUgMTAwNjQ0Cj4gPiAtLS0gYS9mcy9mMmZz
+L2RhdGEuYwo+ID4gKysrIGIvZnMvZjJmcy9kYXRhLmMKPiA+IEBAIC0zMzAzLDkgKzMzMDMsMTcg
+QEAgc3RhdGljIGludCBmMmZzX3dyaXRlX2JlZ2luKHN0cnVjdCBmaWxlICpmaWxlLCAKPiA+IHN0
+cnVjdCBhZGRyZXNzX3NwYWNlICptYXBwaW5nLCAgI2lmZGVmIENPTkZJR19GMkZTX0ZTX0NPTVBS
+RVNTSU9OCj4gPiAgCWlmIChmMmZzX2NvbXByZXNzZWRfZmlsZShpbm9kZSkpIHsKPiA+ICAJCWlu
+dCByZXQ7Cj4gPiArCQlwZ29mZl90IGVuZCA9IChpX3NpemVfcmVhZChpbm9kZSkgKyBQQUdFX1NJ
+WkUgLSAxKSA+Pgo+IFBBR0VfU0hJRlQ7Cj4gPiAKPiA+ICAJCSpmc2RhdGEgPSBOVUxMOwo+ID4g
+Cj4gPiArCQkvKgo+ID4gKwkJICogd2hlbiB3cml0ZSBwb3MgaXMgYmlnZ2VyIHRoYW4gaW5vZGUg
+c2l6ZQo+ICxmMmZzX3ByZXBhcmVfY29tcHJlc3Nfb3ZlcndyaXRlCj4gPiArCQkgKiBhbHdheXMg
+cmV0dXJuIDAsIHNvIGNoZWNrIHBvcyBmaXJzdCB0byBhdm9pZCB0aGlzLgo+ID4gKwkJICovCj4g
+PiArCQlpZiAoaW5kZXggPj0gZW5kKQo+ID4gKwkJCWdvdG8gcmVwZWF0Owo+IAo+IFdoYXQgaWYg
+dGhlcmUncmUgZXhpc3RpbmcgY2x1c3RlcnMgYmV5b25kIGlfc2l6ZT8gR2l2ZW4gcGVyZm9ybWFu
+Y2UgaW1wYWN0cywKPiBkbyB3ZSByZWFsbHkgbmVlZCB0aGlzPwo+IAo+ID4gKwo+ID4gIAkJcmV0
+ID0gZjJmc19wcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZShpbm9kZSwgcGFnZXAsCj4gPiAgCQkJ
+CQkJCWluZGV4LCBmc2RhdGEpOwo+ID4gIAkJaWYgKHJldCA8IDApIHsKPiA+IC0tCj4gPiAyLjI5
+LjAKPiAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
+ZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9s
+aW51eC1mMmZzLWRldmVsCg==
