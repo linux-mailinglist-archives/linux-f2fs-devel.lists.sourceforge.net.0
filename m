@@ -2,81 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E352379F01
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 07:09:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F67A379F7C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 08:03:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgKdx-0006eA-98; Tue, 11 May 2021 05:09:17 +0000
+	id 1lgLUB-0002Vw-1G; Tue, 11 May 2021 06:03:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lgKdv-0006dv-L5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 05:09:15 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <yuchao0@huawei.com>) id 1lgLU8-0002Vk-6Z
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 06:03:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=40TAxam/bhj8coi4NyyONEybvAu++FeB0BuAlvpZ91I=; b=nMLISqxJjgqHX7zpKc3LBWQLjj
- XtLTSUm7RQyG1fjHgesJT6tO7q50UrJzriQ7j8ODYVESgTZFu9sV1JsYjPoaWHgqFhga4hUq9PDlB
- 727WaiLo9vqQHLLraEslN+T0QHpDsIQ0KRsYCVmH5FJOk+eQTLu0Y58uraB7SOo5ETLY=;
+ bh=yQzSbA+cux6cJ+eVTlt7vpMasxCFNtAXKFG1MuuvVnk=; b=QXx5Zy9SRYIxKoamI0/YIs5AvE
+ eko10LqgHT16h1JuNQTke1fgwD+D8AMqApBlesRl0kY4aAYqiIoCgeH5jruQahuqqoArYkhoveXAB
+ 2UVudVOIpaxvG6TV7+u4JJO+UmEZRyiw1WI65BoNgliBXgP8KAdyQ741IGOWbq8f5X7E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=40TAxam/bhj8coi4NyyONEybvAu++FeB0BuAlvpZ91I=; b=Ls4PDZfGvQfAFgOk8SxWjlHO/x
- HnDIRI9wkFAosE/2l+YtVHZ79jOZLZIBsTLLdd+601Sp14k6EPbMEv3UwEP5Ib6httE+Sb/P3P6Ds
- 0OOSVidEFSonh9rY96B/CVSBNnpXhq/8CIHOfMdCrg2lHLOd2p7Hhi45uVeaBPCM5EhE=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=yQzSbA+cux6cJ+eVTlt7vpMasxCFNtAXKFG1MuuvVnk=; b=FoMtw4I6XVldnsPNKt4EE9Bkde
+ s/Pcxs1/SOQgK5UycjoF670TulsSYKT7XoTKHAzzxRsdW/z/1SWQnZtGzVeCHMVFGR29P2pV47Pjl
+ NV0wMC9ZCej52b5YAfThk7OyE9EdMTImrcBRrpPXVWKqpHqTgEHERgs8ergKx1sZIa6k=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgKds-0004Ae-AT
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 05:09:15 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6141A6187E;
- Tue, 11 May 2021 05:09:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620709746;
- bh=uDrTLbqjHBuDV27sGnx7o+4XL3ViZ8fFjVCDhBcvXxY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=X0JIL5Kjhnm/lPR4LxScLrwHwFlTpddi/MLDiSFUaHa7YcnWQXMCM1ZpkqNWeE0HR
- AP6LvUHICb5x6XqGVaQMLg6g30axgSDLU9lioo3BVgldLxn/VFPDyoc5gkSIlDyrF7
- gd/QUhzZamRuPhpcEOibs6b6Bm+Wt4brNMEIxs0dlW3kaKHx7KeHj2JWNtZixqSSb+
- YwIMmwy6cRMrXCl7sdI1b3R+yqDOeovPSu9mIyUuIv/s2e1n/IkiZBNhuhRUnYiESl
- JoZfcE5n1l2bxcNXaiqAHEkO0N+4WfhutdO2FdIC7YT2zLL4uVuh+QSLhw0Ac7QLYO
- PNVmqROVGvqDA==
-Date: Mon, 10 May 2021 22:09:04 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YJoRcIpW1g/OgHZn@google.com>
-References: <CGME20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p3>
- <20210429062005epcms2p352ef77f96ab66cbffe0c0ab6c1b62d8a@epcms2p3>
- <3a0ab201-9546-d523-abc7-79df5f637f14@huawei.com>
- <YJN0nTgadoq8vDaG@google.com>
- <bd0fa15b-01c3-9f70-3eb8-ec2b54a0ee8f@huawei.com>
- <YJlHmP/ej8/IsHL3@google.com>
- <6e95edca-4802-7650-4771-5389067935dc@huawei.com>
+ id 1lgLU2-0006ie-Gi
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 06:03:12 +0000
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4FfS1M0VLwzPwLd;
+ Tue, 11 May 2021 13:59:35 +0800 (CST)
+Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
+ (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 11 May
+ 2021 14:02:54 +0800
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210510142804.511265-1-jaegeuk@kernel.org>
+ <9df7d088-3580-122b-60a3-799ea665cfeb@huawei.com>
+ <YJoRCwwRDgEH49/P@google.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <f26b93fa-ac2d-0fa7-0ef5-5534558b84d7@huawei.com>
+Date: Tue, 11 May 2021 14:02:53 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6e95edca-4802-7650-4771-5389067935dc@huawei.com>
-X-Spam-Score: -0.8 (/)
+In-Reply-To: <YJoRCwwRDgEH49/P@google.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.191 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lgKds-0004Ae-AT
-Subject: Re: [f2fs-dev] [PATCH] f2fs: set file as cold when file
- defragmentation
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1lgLU2-0006ie-Gi
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid null pointer access when
+ handling IPU error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,86 +80,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/11, Chao Yu wrote:
-> On 2021/5/10 22:47, Jaegeuk Kim wrote:
-> > On 05/06, Chao Yu wrote:
-> > > On 2021/5/6 12:46, Jaegeuk Kim wrote:
-> > > > On 05/06, Chao Yu wrote:
-> > > > > On 2021/4/29 14:20, Daejun Park wrote:
-> > > > > > In file defragmentation by ioctl, all data blocks in the file are
-> > > > > > re-written out-of-place. File defragmentation implies user will not update
-> > > > > > and mostly read the file. So before the defragmentation, we set file
-> > > > > > temperature as cold for better block allocation.
-> > > > > 
-> > > > > I don't think all fragmented files are cold, e.g. db file.
-> > > > 
-> > > > I have a bit different opinion. I think one example would be users want to
-> > > > defragment a file, when the they want to get higher read bandwidth for
-> > > 
-> > > Multimedia file was already defined as cold file now via default extension
-> > > list?
-> > 
-> > I just gave an example. And default is default.
-> > 
-> > > 
-> > > > usually multimedia files. That's likely to be cold files. Moreover, I don't
-> > > > think they want to defragment db files which will be fragmented soon?
-> > > 
-> > > I guess like db files have less update but more access?
-> > 
-> > I think both, and we set it as hot.
+On 2021/5/11 13:07, Jaegeuk Kim wrote:
+> On 05/11, Chao Yu wrote:
+>> On 2021/5/10 22:28, Jaegeuk Kim wrote:
+>>>    Unable to handle kernel NULL pointer dereference at virtual address 000000000000001a
+>>>    pc : f2fs_inplace_write_data+0x144/0x208
+>>>    lr : f2fs_inplace_write_data+0x134/0x208
+>>>    Call trace:
+>>>     f2fs_inplace_write_data+0x144/0x208
+>>>     f2fs_do_write_data_page+0x270/0x770
+>>>     f2fs_write_single_data_page+0x47c/0x830
+>>>     __f2fs_write_data_pages+0x444/0x98c
+>>>     f2fs_write_data_pages.llvm.16514453770497736882+0x2c/0x38
+>>>     do_writepages+0x58/0x118
+>>>     __writeback_single_inode+0x44/0x300
+>>>     writeback_sb_inodes+0x4b8/0x9c8
+>>>     wb_writeback+0x148/0x42c
+>>>     wb_do_writeback+0xc8/0x390
+>>>     wb_workfn+0xb0/0x2f4
+>>>     process_one_work+0x1fc/0x444
+>>>     worker_thread+0x268/0x4b4
+>>>     kthread+0x13c/0x158
+>>>     ret_from_fork+0x10/0x18
+>>>
+>>> Fixes: 955772787667 ("f2fs: drop inplace IO if fs status is abnormal")
+>>
+>> My bad, thanks for fixing this.
+>>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>>    fs/f2fs/segment.c | 8 +++++---
+>>>    1 file changed, 5 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>> index c605415840b5..ae875557d693 100644
+>>> --- a/fs/f2fs/segment.c
+>>> +++ b/fs/f2fs/segment.c
+>>> @@ -3577,9 +3577,11 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+>>>    	if (fio->bio) {
+>>>    		struct bio *bio = *(fio->bio);
+>>> -		bio->bi_status = BLK_STS_IOERR;
+>>> -		bio_endio(bio);
+>>> -		fio->bio = NULL;
+>>> +		if (bio) {
+>>> +			bio->bi_status = BLK_STS_IOERR;
+>>> +			bio_endio(bio);
+>>> +			fio->bio = NULL;
+>>
+>> fio->bio points a bio assigned in writepages(), so it should reset
+>> that bio to NULL by *(fio->bio) = NULL.
 > 
-> Then hot and cold bit will set to the same db file after defragmentation?
+> Good timing. I hit other kernel panic, and it seems this is the root cause.
+> Let me give it a try. :)
+> 
+> --- v2 ---
+> 
+>   Unable to handle kernel NULL pointer dereference at virtual address 000000000000001a
+>   pc : f2fs_inplace_write_data+0x144/0x208
+>   lr : f2fs_inplace_write_data+0x134/0x208
+>   Call trace:
+>    f2fs_inplace_write_data+0x144/0x208
+>    f2fs_do_write_data_page+0x270/0x770
+>    f2fs_write_single_data_page+0x47c/0x830
+>    __f2fs_write_data_pages+0x444/0x98c
+>    f2fs_write_data_pages.llvm.16514453770497736882+0x2c/0x38
+>    do_writepages+0x58/0x118
+>    __writeback_single_inode+0x44/0x300
+>    writeback_sb_inodes+0x4b8/0x9c8
+>    wb_writeback+0x148/0x42c
+>    wb_do_writeback+0xc8/0x390
+>    wb_workfn+0xb0/0x2f4
+>    process_one_work+0x1fc/0x444
+>    worker_thread+0x268/0x4b4
+>    kthread+0x13c/0x158
+>    ret_from_fork+0x10/0x18
+> 
+> Fixes: 955772787667 ("f2fs: drop inplace IO if fs status is abnormal")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Do you set cold bit to db files? I mean, generally db is not cold, but hot.
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > 
-> > > > > We have separated interface (via f2fs_xattr_advise_handler, e.g. setfattr -n
-> > > > > "system.advise" -v value) to indicate this file is a hot/cold file, so my
-> > > > > suggestion is after file defragmentation, if you think this file is cold, and
-> > > > > use setxattr() to set it as cold.
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > 
-> > > > > > Signed-off-by: Daejun Park <daejun7.park@samsung.com>
-> > > > > > ---
-> > > > > >     fs/f2fs/file.c | 3 +++
-> > > > > >     1 file changed, 3 insertions(+)
-> > > > > > 
-> > > > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > > > > index d697c8900fa7..dcac965a05fe 100644
-> > > > > > --- a/fs/f2fs/file.c
-> > > > > > +++ b/fs/f2fs/file.c
-> > > > > > @@ -2669,6 +2669,9 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
-> > > > > >     	map.m_len = pg_end - pg_start;
-> > > > > >     	total = 0;
-> > > > > > +	if (!file_is_cold(inode))
-> > > > > > +		file_set_cold(inode);
-> > > > > > +
-> > > > > >     	while (map.m_lblk < pg_end) {
-> > > > > >     		pgoff_t idx;
-> > > > > >     		int cnt = 0;
-> > > > > > 
-> > > > .
-> > > > 
-> > .
-> > 
+Thanks,
 
 
 _______________________________________________
