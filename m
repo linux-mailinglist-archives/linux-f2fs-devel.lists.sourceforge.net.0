@@ -2,74 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6DEF379D93
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 05:19:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AD56379EA4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 May 2021 06:36:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgIve-0007xC-24; Tue, 11 May 2021 03:19:26 +0000
+	id 1lgK8T-0007Fh-Ar; Tue, 11 May 2021 04:36:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lgIvc-0007wz-UV
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 03:19:24 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from
+ <BATV+07fa2649c4d3713ca179+6470+infradead.org+hch@casper.srs.infradead.org>)
+ id 1lgK8R-0007FV-6g
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 04:36:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B8IIi3xOpDKObex4RAs+P7bODF3gbpHNCtPB6rOiKLc=; b=NbwJOs7hYi1r7XejzkyObm3Koc
- DmXV5R5r8hEeuS7CRk4HfsYEZF//ZC7ejEUGM0+4EIdGVlSA2DLoUnZuPpoi8aXafRqFw+O2yoSAq
- kamomATGCUrLgSLNCLaWyypHePCttwflV6lEvbs/h5/LpzTtLOz7N6748U/51NI1TIt8=;
+ bh=+LTUHNeE94R2O+bXANYuERUrQYGZz1p62AmaYL7iaa0=; b=NLJB4Mlz0BogzdNgXa3sxahpJY
+ P6jE9u0Bkw4JnVN8/XAjC9wuVHJ4PIM5bV0RufpdyDyDBBxof5Gx7R7zc67wtAEvh2Q7TsoaCPfQP
+ Gpljt5zqZoHwM5rQboQ0nzI06n3cfpvwFEPmV7oZLLGDlaJmJ9hoSqtuxL7r4CWroLic=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B8IIi3xOpDKObex4RAs+P7bODF3gbpHNCtPB6rOiKLc=; b=Qa+sMo37ev/yjf1ub96naOl70k
- aGfBGiCPbyzuHxbTb5Ah5ekHBzbXVGwHcFlX6B8Apz60KYbb9BUzJk/PPIcPcxpgmGD9iJQbgsOHq
- 8Ws36xeI7qd07iAJwXbNSUClXf5APm+wZ9lilBGJfYrxDZQO7iEiuHBahZbGpGks0sdY=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgIvT-0006xd-98
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 03:19:24 +0000
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FfNPB4Fnrz1BKVD;
- Tue, 11 May 2021 11:16:30 +0800 (CST)
-Received: from [10.136.110.154] (10.136.110.154) by smtp.huawei.com
- (10.3.19.201) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 11 May
- 2021 11:19:04 +0800
-To: Seung-Woo Kim <sw0312.kim@samsung.com>, <jaegeuk@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20210510085726.12663-1-sw0312.kim@samsung.com>
- <CGME20210510085419epcas1p3e72ea9d956bcf811167b14e06fb08149@epcas1p3.samsung.com>
- <20210510085726.12663-2-sw0312.kim@samsung.com>
-From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <d8a9a836-2715-7c8d-c394-f6fbcbf1900d@huawei.com>
-Date: Tue, 11 May 2021 11:19:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ bh=+LTUHNeE94R2O+bXANYuERUrQYGZz1p62AmaYL7iaa0=; b=Pfyo9O9LUB9hkY0Jcht8XJu4EH
+ bTxlNAo9I+PDNE5dtA0zj+sEMnxjQNV7q1jH02YwTqLdh1ok4dBYjypfGom1P1L+qDVhvXdEIW8Dm
+ /N5I2xCB/TIwrRZdcNtoGF6EPIn7dJVCI3oQvleiiBgF1BHArQHNFQpshOC3Bb8tkNAA=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lgK8L-003OYF-OG
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 11 May 2021 04:36:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=+LTUHNeE94R2O+bXANYuERUrQYGZz1p62AmaYL7iaa0=; b=PpezK03OB1C8eJRbNdZYTJmHU2
+ YxbOUgtOt0V/rQha8ZqXlibpnp+YftcHnNgOLUQLAlOi3VeRiXaY0063okKKZvwXPwyJNguaaK1rZ
+ UdSK5B7Kzbl/ITLs7uwYebhy0zBDHIOzE3Fo5BeNq5LwjuMAhZ7b1TT8NzW5xoViWmxIS7QOVoXT5
+ jtWz0+pf6tJJaV4mRLIKZt/09eoLkay840VzOzmzr+B/H6LGqW+isqgpLa+yI3BxFnbAFW/UjgOVh
+ G/uOcpTscOBvaeezfId6QazbqH51Ap/i1ATpWCMA/xK68Fzs3VZ9MLDAMxSngDC8VnnABhoNRnJSe
+ UbtwTE2g==;
+Received: from hch by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
+ Linux)) id 1lgK7b-006uVb-KJ; Tue, 11 May 2021 04:35:54 +0000
+Date: Tue, 11 May 2021 05:35:51 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Shreeya Patel <shreeya.patel@collabora.com>
+Message-ID: <YJoJp1FnHxyQc9/2@infradead.org>
+References: <20210423205136.1015456-1-shreeya.patel@collabora.com>
+ <20210423205136.1015456-5-shreeya.patel@collabora.com>
+ <20210427062907.GA1564326@infradead.org>
+ <61d85255-d23e-7016-7fb5-7ab0a6b4b39f@collabora.com>
+ <YIgkvjdrJPjeoJH7@mit.edu> <87bl9z937q.fsf@collabora.com>
+ <YIlta1Saw7dEBpfs@mit.edu> <87mtti6xtf.fsf@collabora.com>
+ <7caab939-2800-0cc2-7b65-345af3fce73d@collabora.com>
 MIME-Version: 1.0
-In-Reply-To: <20210510085726.12663-2-sw0312.kim@samsung.com>
-Content-Language: en-US
-X-Originating-IP: [10.136.110.154]
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <7caab939-2800-0cc2-7b65-345af3fce73d@collabora.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1lgIvT-0006xd-98
-Subject: Re: [f2fs-dev] [PATCH 2/2] dump.f2fs: fix memory leak caused by
- dump_node_blk()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1lgK8L-003OYF-OG
+Subject: Re: [f2fs-dev] [PATCH v8 4/4] fs: unicode: Add utf8 module and a
+ unicode layer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,19 +91,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
+Cc: ebiggers@kernel.org, Theodore Ts'o <tytso@mit.edu>, drosen@google.com,
+ ebiggers@google.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
+ kernel@collabora.com, adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org, andre.almeida@collabora.com, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/5/10 16:57, Seung-Woo Kim wrote:
-> Fix to free node_blk when nid is 0 from dump_node_blk().
-> 
-> Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
+On Tue, May 11, 2021 at 02:17:00AM +0530, Shreeya Patel wrote:
+> Theodore / Christoph, since we haven't come up with any final decision with
+> this discussion, how do you think we should proceed on this?
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
-
-Thanks,
+I think loading it as a firmware-like table is much preferable to
+a module with all the static call magic papering over that it really is
+just one specific table.
 
 
 _______________________________________________
