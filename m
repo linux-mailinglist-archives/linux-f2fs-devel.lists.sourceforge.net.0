@@ -2,71 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E544237B9B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 11:53:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B74E37BA19
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 12:11:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lglYd-0001I0-Qs; Wed, 12 May 2021 09:53:35 +0000
+	id 1lglpw-00009y-6d; Wed, 12 May 2021 10:11:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yuchao0@huawei.com>) id 1lglYR-0001H2-84
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 09:53:23 +0000
+ (envelope-from <yuchao0@huawei.com>) id 1lglpu-00009M-Ky
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 10:11:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dT2ZQpr2FHjUigwTfeHNC8s/oba2NdnTx2Za7u+bFUw=; b=etLYVeuwIPOxNZEE0G7+/QmQR5
- PHLK6kbNFeqqCYfM3Z/B/clnQY/Evpzb+za/Yob3o8mFXfwN5uIKGa1d5QFKJ3Z4hrf9CATQ78el/
- kifc9PUoi8vVVTjokzfbDOHa6rlhVrGwZ1Df1HK+ywX83pec2pgD9OI6+DI+Pi8lZzRM=;
+ bh=fJGJ29ROC/bXshtjiW53ozcMjg1IgXQULuSBL2ispaY=; b=HTHLubE8+aU1OkuBKE8GWC790V
+ IJYv9Q/JVo2GUwrRy5oGPh6pvIBRvx4wzzYNQZwL0iTq4cNHyU+iRD2dmR9WEnJgFyTsPlsr1hP1k
+ fgNz/KDbqWmiKfwxP9q7MqB60CP5WOkkMi6HuJEERx+qJFFNhD4E4YtHrLXylMSvd1OE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=dT2ZQpr2FHjUigwTfeHNC8s/oba2NdnTx2Za7u+bFUw=; b=Z5b9CHgHlcV/0xqnkePjeOZxTu
- ALEHlvG9hRlz4b+QPl9Reu7RrMvxqAsf+JQ9SgGVIyGt/wWIksKlq6ByiDSBGsQ9SZ74nL0iM2azQ
- x/tiGt6zexVsjxO2EEWNriGUv1OS3cwGOPSo353oStHU5UZWcwireskknUjqO3bj8d3g=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fJGJ29ROC/bXshtjiW53ozcMjg1IgXQULuSBL2ispaY=; b=a
+ XBb/czuGwqWcF/aM3bx6tTAVBGJHyNPhpV1ul/v00l7hC8czArYryWH42vg4WUXhTzNQL5zgLMEdr
+ 8ere6WRaZwJPSY9UOg65t/ydQrBAfJInA8sIk03xZb/TmbbMEQmiq9q8n1xs66GvjgoGhzvb9jQNv
+ UjsaKVApNfVwl/4g=;
+Received: from szxga01-in.huawei.com ([45.249.212.187])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lglYM-0006bl-Vg
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 09:53:24 +0000
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Fg94X6dhbzqTTw;
- Wed, 12 May 2021 17:49:48 +0800 (CST)
+ id 1lglpl-0008Sz-KJ
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 10:11:26 +0000
+Received: from dggemx753-chm.china.huawei.com (unknown [172.30.72.53])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Fg9SH1gl8zWhw6;
+ Wed, 12 May 2021 18:06:55 +0800 (CST)
 Received: from szvp000203569.huawei.com (10.120.216.130) by
- DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
- 14.3.498.0; Wed, 12 May 2021 17:53:04 +0800
+ dggemx753-chm.china.huawei.com (10.0.44.37) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2176.2; Wed, 12 May 2021 18:11:10 +0800
 From: Chao Yu <yuchao0@huawei.com>
 To: <jaegeuk@kernel.org>
-Date: Wed, 12 May 2021 17:52:58 +0800
-Message-ID: <20210512095258.96918-3-yuchao0@huawei.com>
+Date: Wed, 12 May 2021 18:11:00 +0800
+Message-ID: <20210512101100.101424-1-yuchao0@huawei.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210512095258.96918-1-yuchao0@huawei.com>
-References: <20210512095258.96918-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.120.216.130]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggemx753-chm.china.huawei.com (10.0.44.37)
 X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [45.249.212.190 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lglYM-0006bl-Vg
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: compress: remove unneeded preallocation
+X-Headers-End: 1lglpl-0008Sz-KJ
+Subject: [f2fs-dev] [PATCH RFC] f2fs: support migrating swapfile in aligned
+ write mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,95 +82,242 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We will reserve iblocks for compression saved, so during compressed
-cluster overwrite, we don't need to preallocate blocks for later
-write.
-
-In addition, it adds a bug_on to detect wrong reserved iblock number
-in __f2fs_cluster_blocks().
-
 Signed-off-by: Chao Yu <yuchao0@huawei.com>
 ---
- fs/f2fs/compress.c | 26 ++------------------------
- fs/f2fs/file.c     |  4 ----
- 2 files changed, 2 insertions(+), 28 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index b6bd6862eef2..25e785e0d9fc 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -932,6 +932,8 @@ static int __f2fs_cluster_blocks(struct inode *inode,
- 					ret++;
- 			}
- 		}
+*do not merge this patch*, I haven't tested this patch yet, just send this
+out for comments.
+
+ fs/f2fs/data.c    | 117 +++++++++++++++++++++++++++++++++-------------
+ fs/f2fs/f2fs.h    |   1 +
+ fs/f2fs/node.h    |   3 ++
+ fs/f2fs/segment.c |   3 ++
+ 4 files changed, 92 insertions(+), 32 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 258c5d7a3bfa..ea47d301ccb0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2472,6 +2472,10 @@ static inline bool check_inplace_update_policy(struct inode *inode,
+ 
+ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
+ {
++	/* swap file is migrating in algined write mode */
++	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
++		return false;
 +
-+		f2fs_bug_on(F2FS_I_SB(inode), !compr && ret != cluster_size);
- 	}
- fail:
- 	f2fs_put_dnode(&dn);
-@@ -992,21 +994,16 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(cc->inode);
- 	struct address_space *mapping = cc->inode->i_mapping;
- 	struct page *page;
--	struct dnode_of_data dn;
- 	sector_t last_block_in_bio;
- 	unsigned fgp_flag = FGP_LOCK | FGP_WRITE | FGP_CREAT;
- 	pgoff_t start_idx = start_idx_of_cluster(cc);
- 	int i, ret;
--	bool prealloc;
+ 	if (f2fs_is_pinned_file(inode))
+ 		return true;
  
- retry:
- 	ret = f2fs_is_compressed_cluster(cc->inode, start_idx);
- 	if (ret <= 0)
- 		return ret;
+@@ -3832,6 +3836,70 @@ int f2fs_migrate_page(struct address_space *mapping,
+ #endif
  
--	/* compressed case */
--	prealloc = (ret < cc->cluster_size);
--
- 	ret = f2fs_init_compress_ctx(cc);
- 	if (ret)
- 		return ret;
-@@ -1064,25 +1061,6 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- 		}
- 	}
+ #ifdef CONFIG_SWAP
++static int f2fs_migrate_blocks(struct inode *inode)
++{
++	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
++	unsigned int secidx, blkofs;
++	unsigned int blk_per_sec = BLKS_PER_SEC(sbi);
++	unsigned int total_secs = DIV_ROUND_UP(i_size_read(inode),
++					blk_per_sec << F2FS_BLKSIZE_BITS);
++	unsigned int last_blkidx = DIV_ROUND_UP(i_size_read(inode),
++							F2FS_BLKSIZE);
++	int ret = 0;
++
++	down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
++	down_write(&F2FS_I(inode)->i_mmap_sem);
++
++	for (secidx = 0; secidx < total_secs; secidx++) {
++		down_write(&sbi->pin_sem);
++
++		f2fs_lock_op(sbi);
++		f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
++		f2fs_unlock_op(sbi);
++
++		set_inode_flag(inode, FI_DO_DEFRAG);
++
++		for (blkofs = 0; blkofs < blk_per_sec; blkofs++) {
++			struct page *page;
++			unsigned int blkidx = secidx * blk_per_sec + blkofs;
++
++			if (blkidx >= last_blkidx) {
++				up_write(&sbi->pin_sem);
++				goto done;
++			}
++
++			page = f2fs_get_lock_data_page(inode, blkidx, true);
++			if (IS_ERR(page)) {
++				up_write(&sbi->pin_sem);
++				ret = PTR_ERR(page);
++				goto done;
++			}
++
++			set_page_dirty(page);
++			f2fs_put_page(page, 1);
++		}
++
++		clear_inode_flag(inode, FI_DO_DEFRAG);
++
++		set_inode_flag(inode, FI_ALIGNED_WRITE);
++		ret = filemap_fdatawrite(inode->i_mapping);
++		clear_inode_flag(inode, FI_ALIGNED_WRITE);
++
++		up_write(&sbi->pin_sem);
++
++		if (ret)
++			break;
++	}
++
++done:
++	clear_inode_flag(inode, FI_DO_DEFRAG);
++
++	up_write(&F2FS_I(inode)->i_mmap_sem);
++	up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
++
++	return ret;
++}
++
+ static int f2fs_is_file_aligned(struct inode *inode)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+@@ -3841,7 +3909,6 @@ static int f2fs_is_file_aligned(struct inode *inode)
+ 	block_t pblock;
+ 	unsigned long nr_pblocks;
+ 	unsigned int blocks_per_sec = BLKS_PER_SEC(sbi);
+-	unsigned int not_aligned = 0;
+ 	int ret = 0;
  
--	if (prealloc) {
--		f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
--
--		set_new_dnode(&dn, cc->inode, NULL, NULL, 0);
--
--		for (i = cc->cluster_size - 1; i > 0; i--) {
--			ret = f2fs_get_block(&dn, start_idx + i);
--			if (ret) {
--				i = cc->cluster_size;
--				break;
+ 	cur_lblock = 0;
+@@ -3874,20 +3941,12 @@ static int f2fs_is_file_aligned(struct inode *inode)
+ 
+ 		if ((pblock - main_blkaddr) & (blocks_per_sec - 1) ||
+ 			nr_pblocks & (blocks_per_sec - 1)) {
+-			if (f2fs_is_pinned_file(inode)) {
+-				f2fs_err(sbi, "Swapfile does not align to section");
+-				ret = -EINVAL;
+-				goto out;
 -			}
--
--			if (dn.data_blkaddr != NEW_ADDR)
--				break;
+-			not_aligned++;
++			ret = FILE_NOT_ALIGNED;
++			goto out;
+ 		}
+ 
+ 		cur_lblock += nr_pblocks;
+ 	}
+-	if (not_aligned)
+-		f2fs_warn(sbi, "Swapfile (%u) is not align to section: \n"
+-			"\t1) creat(), 2) ioctl(F2FS_IOC_SET_PIN_FILE), 3) fallocate()",
+-			not_aligned);
+ out:
+ 	return ret;
+ }
+@@ -3905,8 +3964,6 @@ static int check_swap_activate_fast(struct swap_info_struct *sis,
+ 	sector_t highest_pblock = 0;
+ 	int nr_extents = 0;
+ 	unsigned long nr_pblocks;
+-	unsigned int blocks_per_sec = BLKS_PER_SEC(sbi);
+-	unsigned int not_aligned = 0;
+ 	int ret = 0;
+ 
+ 	/*
+@@ -3943,16 +4000,6 @@ static int check_swap_activate_fast(struct swap_info_struct *sis,
+ 		pblock = map.m_pblk;
+ 		nr_pblocks = map.m_len;
+ 
+-		if ((pblock - SM_I(sbi)->main_blkaddr) & (blocks_per_sec - 1) ||
+-				nr_pblocks & (blocks_per_sec - 1)) {
+-			if (f2fs_is_pinned_file(inode)) {
+-				f2fs_err(sbi, "Swapfile does not align to section");
+-				ret = -EINVAL;
+-				goto out;
+-			}
+-			not_aligned++;
 -		}
 -
--		f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
--	}
+ 		if (cur_lblock + nr_pblocks >= sis->max)
+ 			nr_pblocks = sis->max - cur_lblock;
+ 
+@@ -3979,11 +4026,6 @@ static int check_swap_activate_fast(struct swap_info_struct *sis,
+ 	sis->max = cur_lblock;
+ 	sis->pages = cur_lblock - 1;
+ 	sis->highest_bit = cur_lblock - 1;
 -
- 	if (likely(!ret)) {
- 		*fsdata = cc->rpages;
- 		*pagep = cc->rpages[offset_in_cluster(cc, index)];
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9241e8e3ffff..1dd69c88be36 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -85,10 +85,6 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 			err = ret;
- 			goto err;
- 		} else if (ret) {
--			if (ret < F2FS_I(inode)->i_cluster_size) {
--				err = -EAGAIN;
--				goto err;
--			}
- 			need_alloc = false;
- 		}
- 	}
+-	if (not_aligned)
+-		f2fs_warn(sbi, "Swapfile (%u) is not align to section: \n"
+-			"\t1) creat(), 2) ioctl(F2FS_IOC_SET_PIN_FILE), 3) fallocate()",
+-			not_aligned);
+ out:
+ 	return ret;
+ }
+@@ -4003,13 +4045,24 @@ static int check_swap_activate(struct swap_info_struct *sis,
+ 	sector_t highest_block = 0;
+ 	int nr_extents = 0;
+ 	int ret = 0;
++	bool migrated = false;
+ 
+-	if (PAGE_SIZE == F2FS_BLKSIZE)
+-		return check_swap_activate_fast(sis, swap_file, span);
+-
++recheck:
+ 	ret = f2fs_is_file_aligned(inode);
+-	if (ret)
++	if (ret < 0)
+ 		goto out;
++	else if (ret == FILE_NOT_ALIGNED) {
++		if (migrated)
++			return -EINVAL;
++		ret = f2fs_migrate_blocks(inode);
++		if (ret)
++			return ret;
++		migrated = true;
++		goto recheck;
++	}
++
++	if (PAGE_SIZE == F2FS_BLKSIZE)
++		return check_swap_activate_fast(sis, swap_file, span);
+ 
+ 	blocks_per_page = bytes_to_blks(inode, PAGE_SIZE);
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 70c0bd563732..570ffdf068ee 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -707,6 +707,7 @@ enum {
+ 	FI_COMPRESS_CORRUPT,	/* indicate compressed cluster is corrupted */
+ 	FI_MMAP_FILE,		/* indicate file was mmapped */
+ 	FI_ENABLE_COMPRESS,	/* enable compression in "user" compression mode */
++	FI_ALIGNED_WRITE,	/* enable aligned write */
+ 	FI_MAX,			/* max flag, never be used */
+ };
+ 
+diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
+index d85e8659cfda..e5235dfe4670 100644
+--- a/fs/f2fs/node.h
++++ b/fs/f2fs/node.h
+@@ -38,6 +38,9 @@
+ /* return value for read_node_page */
+ #define LOCKED_PAGE	1
+ 
++/* check pinned file's alignment status of physical blocks */
++#define FILE_NOT_ALIGNED	1
++
+ /* For flag in struct node_info */
+ enum {
+ 	IS_CHECKPOINTED,	/* is it checkpointed before? */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 72c75694c9c5..edc3a28970a4 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3292,6 +3292,9 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+ 	if (fio->type == DATA) {
+ 		struct inode *inode = fio->page->mapping->host;
+ 
++		if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
++			return CURSEG_COLD_DATA_PINNED;
++
+ 		if (page_private_gcing(fio->page)) {
+ 			if (fio->sbi->am.atgc_enabled &&
+ 				(fio->io_type == FS_DATA_IO) &&
 -- 
 2.29.2
 
