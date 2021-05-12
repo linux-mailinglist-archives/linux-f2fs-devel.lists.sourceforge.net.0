@@ -2,70 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E541737BEC1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 15:47:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F7F37BF9C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 16:15:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgpCX-0003Sk-1m; Wed, 12 May 2021 13:47:01 +0000
+	id 1lgpe0-0000KF-0H; Wed, 12 May 2021 14:15:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jack@suse.cz>) id 1lgpCU-0003S6-3J
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 13:46:58 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <tytso@mit.edu>)
+ id 1lgpdy-0000Jy-G8; Wed, 12 May 2021 14:15:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jZlfk4vwF2p32yW05HQcA1IZqYim5+F109uIplXVw+8=; b=UykTaFdOfH2kQLNL5EkZubQo73
- GOy+gnmKhEITG85Ajz4Imx99yCX+g/G7tsfDUYZtagCgs3ko5d59wdGGVL3lKqNJtH3t7o1cNeaTH
- gIbPumrx925FQJL4MsS/6XUStrwBG7c41iP59J4rKIACCKecUOYe1I6G1RjG8Q4YV26A=;
+ bh=o97F3Fr9+SNazjGuRfxB4iVRudNPfSsu2VSdVvH974s=; b=YFGtagoSmerXWdAB/DzcTJuN5T
+ ghDYOUjJe6Nbt1Seaaskyjgot1Ip+bbu0xvAdSA6Ye7IAhjPZ4/9kPpTEFJIOfFns/ryb7ny7Gp8D
+ RxB1v0sxKwu4rqeIMyURjJgfEvoG/n+zsQGyoYKFUp0hQjjn/4ImBZPAqvyTuoBcSprY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jZlfk4vwF2p32yW05HQcA1IZqYim5+F109uIplXVw+8=; b=g6iaHB2DpXc2TprgkdzaKNhwgd
- TRoTk+/shq8FPpbJVFm6jlBniXS6xa+AAqajbVoKr3nVwxr/s4QAb1Hgqd66NXvQTWxD7oRlKCvHx
- j1KwCgXgC20OQBH10VPgji54eDTvIGY3wkQ1FRFrQTp9BuS6WN6MoY/culVx42uIKAp0=;
-Received: from mx2.suse.de ([195.135.220.15])
+ bh=o97F3Fr9+SNazjGuRfxB4iVRudNPfSsu2VSdVvH974s=; b=hR8dLSOyo5wQxk7g/PmAI/LzbF
+ E4CQQl2CXFr04ScvQO/qDfxASyB1XOx0EmJlXnkIiVxhDfzQr8HROUVxYXQdmqVPTgoL8xi+9kF8O
+ iSD9t+QzVPMyOSZMo2NVQT1E2AxnmJ64rNx1exaVSD9iRgb4V0omQcQHeyBKUl9zL+ZY=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgpCP-000219-Ml
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 13:46:57 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C9D1FB1B8;
- Wed, 12 May 2021 13:46:32 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id 0CBAD1F2B78; Wed, 12 May 2021 15:46:32 +0200 (CEST)
-From: Jan Kara <jack@suse.cz>
-To: <linux-fsdevel@vger.kernel.org>
-Date: Wed, 12 May 2021 15:46:19 +0200
-Message-Id: <20210512134631.4053-11-jack@suse.cz>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210512101639.22278-1-jack@suse.cz>
-References: <20210512101639.22278-1-jack@suse.cz>
+ id 1lgpdo-0003z0-BL; Wed, 12 May 2021 14:15:22 +0000
+Received: from cwcc.thunk.org (pool-72-74-133-215.bstnma.fios.verizon.net
+ [72.74.133.215]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 14CEEiap031112
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 12 May 2021 10:14:45 -0400
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 448C815C39C2; Wed, 12 May 2021 10:14:44 -0400 (EDT)
+Date: Wed, 12 May 2021 10:14:44 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Message-ID: <YJvi1L2ss5Tfi+My@mit.edu>
+References: <cover.1620823573.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <cover.1620823573.git.mchehab+huawei@kernel.org>
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.cz]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lgpCP-000219-Ml
-Subject: [f2fs-dev] [PATCH 11/11] cifs: Fix race between hole punch and page
- fault
+X-Headers-End: 1lgpdo-0003z0-BL
+Subject: Re: [f2fs-dev] [PATCH v2 00/40] Use ASCII subset instead of UTF-8
+ alternate symbols
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,64 +71,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
- Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
- Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
- Miklos Szeredi <miklos@szeredi.hu>, Jan Kara <jack@suse.cz>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
+Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-iio@vger.kernel.org,
+ linux-pci@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ keyrings@vger.kernel.org, linux-sgx@vger.kernel.org,
+ Jonathan Corbet <corbet@lwn.net>, linux-rdma@vger.kernel.org,
+ linux-acpi@vger.kernel.org, Mali DP Maintainers <malidp@foss.arm.com>,
+ linux-input@vger.kernel.org, intel-wired-lan@lists.osuosl.org,
+ linux-ext4@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-media@vger.kernel.org, linux-pm@vger.kernel.org,
+ coresight@lists.linaro.org, rcu@vger.kernel.org,
+ mjpeg-users@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
+ linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-integrity@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Cifs has a following race between hole punching and page fault:
+On Wed, May 12, 2021 at 02:50:04PM +0200, Mauro Carvalho Chehab wrote:
+> v2:
+> - removed EM/EN DASH conversion from this patchset;
 
-CPU1                                            CPU2
-smb3_fallocate()
-  smb3_punch_hole()
-    truncate_pagecache_range()
-                                                filemap_fault()
-                                                  - loads old data into the
-                                                    page cache
-    SMB2_ioctl(..., FSCTL_SET_ZERO_DATA, ...)
+Are you still thinking about doing the
 
-And now we have stale data in the page cache. Fix the problem by locking
-out faults (as well as reads) using mapping->invalidate_lock while hole
-punch is running.
+EN DASH --> "--"
+EM DASH --> "---"
 
-CC: Steve French <sfrench@samba.org>
-CC: linux-cifs@vger.kernel.org
-Signed-off-by: Jan Kara <jack@suse.cz>
----
- fs/cifs/smb2ops.c | 2 ++
- 1 file changed, 2 insertions(+)
+conversion?  That's not going to change what the documentation will
+look like in the HTML and PDF output forms, and I think it would make
+life easier for people are reading and editing the Documentation/*
+files in text form.
 
-diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-index dd0eb665b680..b0a0f8b34add 100644
---- a/fs/cifs/smb2ops.c
-+++ b/fs/cifs/smb2ops.c
-@@ -3579,6 +3579,7 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
- 		return rc;
- 	}
- 
-+	down_write(&inode->i_mapping->invalidate_lock);
- 	/*
- 	 * We implement the punch hole through ioctl, so we need remove the page
- 	 * caches first, otherwise the data may be inconsistent with the server.
-@@ -3596,6 +3597,7 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
- 			sizeof(struct file_zero_data_information),
- 			CIFSMaxBufSize, NULL, NULL);
- 	free_xid(xid);
-+	up_write(&inode->i_mapping->invalidate_lock);
- 	return rc;
- }
- 
--- 
-2.26.2
-
+				- Ted
 
 
 _______________________________________________
