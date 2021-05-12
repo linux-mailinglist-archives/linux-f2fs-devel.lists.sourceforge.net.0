@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36CD337D1C2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 20:04:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5584237D1CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 May 2021 20:05:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lgtDi-00072T-Uf; Wed, 12 May 2021 18:04:30 +0000
+	id 1lgtEV-00075q-42; Wed, 12 May 2021 18:05:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1lgtDh-00072F-G8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 18:04:29 +0000
+ (envelope-from <sashal@kernel.org>) id 1lgtEI-00075G-Bd
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 18:05:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DRijmHzWvFv0ynkYwc/wNF8hvLP/BfmyjpJ9EEph7XM=; b=XBAKAAw6TU84OFiO41ZXeZVLvV
- nm/6IFElgJq49yS5mHrRkbRDvCHcSjrMQMrvF0ByyvjTaomxNo4ZavR76q268TRcryMUV7nuCz5zP
- ICyZiQ3iEBzoOyVcxGf81KB/8dHTZsjxfaqLkSR1uoxFEMUHJl8mZ81Bim9+XDhIvZVw=;
+ bh=WyArBDRwyFudFU6B7cygZvx9Q0HOh97mZvgSnhqzZBE=; b=hU4gtzz6UsJqqr5CiHQRMmdcv7
+ abmgxcmVzP89cXXkiX3j7ZyzWrF63HkPqB4R98yE++4LPFpgwhYUZ0ACDbuMixUWmYjuWoD7WcZz5
+ YJeGGJlkVIINIOGhw5/QUI7Llor2W2QoEowAhfxzZXci8J2FK3T8JlFx6yJOm4bDeWCE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,34 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DRijmHzWvFv0ynkYwc/wNF8hvLP/BfmyjpJ9EEph7XM=; b=ZzpLeaI5TtmQLkx1159mPnQd6g
- eGnzbeRtli7Rsg03epNFSa/NIi1eeWHRGDx/Wgfnk7Gy4HygxsLf1PXQuAU9xPqp7lN/wJuXcfiqu
- bv+wZzENpwH8V6Ef29YJnoo5YM3NxJmwhlgMnqNfMKXBdf0oDU7+p3ntmIcGyLiDsPW0=;
+ bh=WyArBDRwyFudFU6B7cygZvx9Q0HOh97mZvgSnhqzZBE=; b=AMZyV4TCEKxfFfOeL7hx6/+XPh
+ wlJMZjiUsGgTB1P2ogeM1aQhZBrow3kY/Z3AvMqE4dE6h3Z0M9Kq8YWvk9xSXjLoiomP04gkpDtJr
+ 0Yv8YP0IJW1nke9SzFD8MNp7xBw19LHYLhb4hX9BpFDuqum1MD1VGZZudecJau7WvMEk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lgtDb-00040S-1s
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 18:04:30 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2034361490;
- Wed, 12 May 2021 18:04:17 +0000 (UTC)
+ id 1lgtEE-00042z-QF
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 12 May 2021 18:05:07 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D5F3261447;
+ Wed, 12 May 2021 18:04:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620842658;
- bh=Bg+6dIUx//h7geCD2cSfIJMbe1ElwW1o1GS/uoJ7qtk=;
+ s=k20201202; t=1620842697;
+ bh=iyGI1xaaTjmQoglGchyr9CKLVM3atq60dBSUj6ny9uY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VgV2Q4nU3/Cz0KE2fZ08jzvgQj+MMqKfKxNUc7A9mJsAEvTng7vKbtJHP2rX9jxCg
- sobv5NVB/0kQ2HORPbmDm3EXJruRV2ti+mjWI4QcHi5tagA3a0oNnrTs8Totn5yFfi
- OE92D8zVsIKvn3zIBgFfHhWY8GPzlKFEabfPDHCXASnZwSDQkFbrj2j7fQGqCJnuEd
- AchtaTYDYE+0wtjU8cGdJsVlA9TkeJx2h+nbSFxwio0bETYHnAE5bIKGeGwo4QaRog
- hHT+SSk3T8CL+Z9V6ei03upqQb9CDuphsJj2yyHeT+UFrW66i3uYJOCMNapg/r/p7/
- 0NnhTF+gJ8gIA==
+ b=lNFxzc0PVMtTQjO75k3imYuulh/2uBg4kQnlOKvhMVfc7aVYonCn3K4w3DuGvEwh2
+ 6NzB0zFV9L2ofBypFk1UhGFxwS0jcN62VBF3jTz/9x5Gb1TTSIkZumztimA/6RcLkq
+ CKclRUUXWsvvbKf/pHATgFFMN5pMOVnMHdYgg7btjhZfJB0AKDSwvbni3T3MthElY6
+ V3mGeyIznqWhowiXreZutdBb1uPDVkMHviYQtYxkgp4wehRlt5S0tsD9s4OMsfEVkr
+ xF4Ydfl+2mInMzYnPVW/usKcpQUQijQ1nI3y/cFjjZX4JZRwC5NjZACvRJL3dclXjz
+ 95Ime4iS/+Tbw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 12 May 2021 14:03:49 -0400
-Message-Id: <20210512180408.665338-5-sashal@kernel.org>
+Date: Wed, 12 May 2021 14:04:35 -0400
+Message-Id: <20210512180450.665586-4-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210512180408.665338-1-sashal@kernel.org>
-References: <20210512180408.665338-1-sashal@kernel.org>
+In-Reply-To: <20210512180450.665586-1-sashal@kernel.org>
+References: <20210512180450.665586-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lgtDb-00040S-1s
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 05/23] f2fs: fix to avoid
+X-Headers-End: 1lgtEE-00042z-QF
+Subject: [f2fs-dev] [PATCH AUTOSEL 4.19 04/18] f2fs: fix to avoid
  out-of-bounds memory access
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -137,10 +137,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 7ce33698ae38..48bb5d3c709d 100644
+index 1934dc6ad1cc..ff3f97ba1a55 100644
 --- a/fs/f2fs/node.c
 +++ b/fs/f2fs/node.c
-@@ -2718,6 +2718,9 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
+@@ -2654,6 +2654,9 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
  		struct f2fs_nat_entry raw_ne;
  		nid_t nid = le32_to_cpu(nid_in_journal(journal, i));
  
