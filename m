@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E20D537FE5A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 May 2021 21:40:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4589B37FFB8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 May 2021 23:18:15 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lhHC7-0007Y4-Pk; Thu, 13 May 2021 19:40:27 +0000
+	id 1lhIic-0003LN-M8; Thu, 13 May 2021 21:18:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <willy@infradead.org>) id 1lhHC5-0007Xw-RN
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 13 May 2021 19:40:25 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lhIib-0003LG-IF
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 13 May 2021 21:18:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O8VUCTzxVSvxa3wVLPh12tovGUEtpcQQ1uxw15XLCZg=; b=Pd7IH2h+3C+0myH6gkQFNKpLdt
- rSyGPBCOaISAA2cCvyOOMAoqCldgsKvGVz8qeLZYW1PTMOkizWk2rGJzIqTozSCevyOKQ+1cQEHTH
- EC9JbNZTNzSneUfeb4eORSsB3y8LSQ2/9Wv1cyOaXXKKgSXLUxsHl1AL0ret1sMsi4jc=;
+ bh=Qpwb4OjVudAPFCttI4yVcnXGtIfVuFbrGNUH/fmq+C8=; b=azUjcgojSTHnQHptqppKupfJO+
+ zx2fzfDDRyZgh8MNIUwurvWDtLvaLeEj5hjEE6IS+3zpM5iVcNFQaump6JgpzqOv/HO8ziibXcHjp
+ 5FA6QrSkiOJCAPv2OG6Z7XUNBgLs0ixNU0artCaHGOUD2A5jqiIv5WdI6rFNxuFNp/Vw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,50 +29,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=O8VUCTzxVSvxa3wVLPh12tovGUEtpcQQ1uxw15XLCZg=; b=cDl2E/k8gKMRQthu2TjF2EcWXp
- WemwGpxPCqh4jA2XcvF/ISlj1rjn7CSwk2cc/MNhVEZscMy+/b35FB/MTelEpq3W1cYLV+LJHeZTi
- CKdCObd7RHD3VJJeAVU1Q5GsxkukAlYX3NxhiLWJSeszpAqPaWpqR8GiS4IgIro5V7eA=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lhHC1-0005Ka-OH
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 13 May 2021 19:40:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=O8VUCTzxVSvxa3wVLPh12tovGUEtpcQQ1uxw15XLCZg=; b=S6oimQ+wSggkHbM04qw7qRcCif
- KxJ6s1XOGzoOpDq2Ik3+iRiwQfDzyBbe0DuWvzC9OR6jXy0kTrw+5iOA+LaoPKGquDRsAkhwtB1fn
- RAzftQHw1WIHsSHGyasEKCqK6uNc5md/QTdqO/gAX92LY/xjc3aThySb167Hsk1QbFODw0SI99hZD
- FJ7grq8hsbbFuQNaq3roe74z070sMG/wQF5s2VcKbYsspDgU3/f5jnSJCnX9ybUtPMZoBzeRLnZAR
- rt44B26yeOFUgC3PP1bOEdl/6GZRpu188I1tXE0mY9mkIB2XhLxPk/VtnEIL19/rPQgwFkGk1TQkJ
- GlbkDIiw==;
-Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1lhHAV-009iZc-F6; Thu, 13 May 2021 19:39:06 +0000
-Date: Thu, 13 May 2021 20:38:47 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <YJ2AR0IURFzz+52G@casper.infradead.org>
-References: <20210512101639.22278-1-jack@suse.cz>
- <20210512134631.4053-3-jack@suse.cz>
- <YJvo1bGG1tG+gtgC@casper.infradead.org>
- <20210513190114.GJ2734@quack2.suse.cz>
+ bh=Qpwb4OjVudAPFCttI4yVcnXGtIfVuFbrGNUH/fmq+C8=; b=JJL9O8dYNIdt79QC4XCdWvw0xA
+ +rdNym48XFuDD9EF3D2BkJTvqMzL1wtcY6CqLMxABGEiUYf6c9S2LqTkFR7VDF0bH5o9QmsJgUAPY
+ smAyi/WTkNSqJI0vWntP2SaSRNQjvlhgvfif9kqMhVa0aazki9LX0zA5tKDMV4MIsiZM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1lhIiT-007I7T-Ui
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 13 May 2021 21:18:07 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 271E56109F;
+ Thu, 13 May 2021 21:17:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1620940672;
+ bh=C/vA6v0EUiCQEQIel2pyxQ4EYG6c84hz1Bjk8UaVs2g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=YPLbE6T2z2pugvFxK+LgtNSR4RdcZH+tRQRDAJwnA/YbICh1cGKmYzBRhvr07s/rR
+ fKhYzjMFI7MhAlMmjljXSROoHuberojf7753ftqueyoYL1/6sxrXnTKLIta1P4W+Pe
+ tG+cu68CLou4xz0eHy9RUpIg0BwpKtZdwN9JRDy1COqUxn3U+1tT2b7AlITGBFc/QI
+ 7oZEk1FATzEZNXrPo8QLx+W/9Ut9MiXnhDRkIeo5qQ1AcPrW2mR07Ki1zspEDJhpKZ
+ Dj5CvzH0Jo6yn3NQbX6gvmTl0OIZ9QpqL+M69nrZWezUw6yev4zyuekSbzBiNqElbt
+ UL62kMwJBOtYg==
+Date: Thu, 13 May 2021 14:17:50 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YJ2Xflx6eF2P89Km@gmail.com>
+References: <20210507094455.1695-1-changfengnan@vivo.com>
+ <YJlUpHJLONlORWWl@google.com>
+ <000b01d74656$518e96f0$f4abc4d0$@vivo.com>
+ <YJr8PuZlOBqb+Qv1@google.com>
+ <15efccda-b8e3-80bc-13b7-b2d62a1cac15@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210513190114.GJ2734@quack2.suse.cz>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <15efccda-b8e3-80bc-13b7-b2d62a1cac15@huawei.com>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: vivo.com]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1lhHC1-0005Ka-OH
-Subject: Re: [f2fs-dev] [PATCH 03/11] mm: Protect operations adding pages to
- page cache with invalidate_lock
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lhIiT-007I7T-Ui
+Subject: Re: [f2fs-dev] =?utf-8?b?562U5aSNOiBbUEFUQ0ggdjRdIGYyZnM6IGNvbXBy?=
+ =?utf-8?q?ess=3A_avoid_unnecessary_check_in_f2fs=5Fprepare=5Fcompress=5Fo?=
+ =?utf-8?q?verwrite?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,75 +91,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
- Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, Miklos Szeredi <miklos@szeredi.hu>,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Johannes Thumshirn <jth@kernel.org>,
- linux-xfs@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, changfengnan@vivo.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, May 13, 2021 at 09:01:14PM +0200, Jan Kara wrote:
-> On Wed 12-05-21 15:40:21, Matthew Wilcox wrote:
-> > Remind me (or, rather, add to the documentation) why we have to hold the
-> > invalidate_lock during the call to readpage / readahead, and we don't just
-> > hold it around the call to add_to_page_cache / add_to_page_cache_locked
-> > / add_to_page_cache_lru ?  I appreciate that ->readpages is still going
-> > to suck, but we're down to just three implementations of ->readpages now
-> > (9p, cifs & nfs).
-> 
-> There's a comment in filemap_create_page() trying to explain this. We need
-> to protect against cases like: Filesystem with 1k blocksize, file F has
-> page at index 0 with uptodate buffer at 0-1k, rest not uptodate. All blocks
-> underlying page are allocated. Now let read at offset 1k race with hole
-> punch at offset 1k, length 1k.
-> 
-> read()					hole punch
-> ...
->   filemap_read()
->     filemap_get_pages()
->       - page found in the page cache but !Uptodate
->       filemap_update_page()
-> 					  locks everything
-> 					  truncate_inode_pages_range()
-> 					    lock_page(page)
-> 					    do_invalidatepage()
-> 					    unlock_page(page)
->         locks page
->           filemap_read_page()
-
-Ah, this is the partial_start case, which means that page->mapping
-is still valid.  But that means that do_invalidatepage() was called
-with (offset 1024, length 1024), immediately after we called
-zero_user_segment().  So isn't this a bug in the fs do_invalidatepage()?
-The range from 1k-2k _is_ uptodate.  It's been zeroed in memory,
-and if we were to run after the "free block" below, we'd get that
-memory zeroed again.
-
->             ->readpage()
->               block underlying offset 1k
-> 	      still allocated -> map buffer
-> 					  free block under offset 1k
-> 	      submit IO -> corrupted data
-> 
-> If you think I should expand it to explain more details, please tell.
-> Or maybe I can put more detailed discussion like above into the changelog?
-
-> > Why not:
+On Wed, May 12, 2021 at 09:52:19AM +0800, Chao Yu wrote:
+> On 2021/5/12 5:50, Jaegeuk Kim wrote:
+> > On 05/11, changfengnan@vivo.com wrote:
+> > > Hi Jaegeuk:
+> > > 
+> > > If there're existing clusters beyond i_size, may cause data corruption, but
+> > > will this happen in normal? maybe some error can cause this, if i_size is
+> > > error the data beyond size still can't handle properly.  Is there normal
+> > > case can casue existing clusters beyond i_size?
 > > 
-> > 	__init_rwsem(&mapping->invalidate_lock, "mapping.invalidate_lock",
-> > 			&sb->s_type->invalidate_lock_key);
+> > We don't have a rule to sync between i_size and i_blocks.
 > 
-> I replicated what we do for i_rwsem but you're right, this is better.
-> Updated.
+> I can't image a case that compressed cluster may cross filesize, it looks it's
+> a bug if that happened, but I'm not sure I have considered all cases. So, I
+> prefer to add a check condition as below, then testing w/ xfstest/por_fsstress
+> for a while.
+> 
+> Subject: [PATCH] f2fs: compress: compressed cluster should not cross i_size
+> 
+> ---
+>  fs/f2fs/data.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 06d1e58d3882..9acca358d578 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -3325,6 +3325,8 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
+>  			err = ret;
+>  			goto fail;
+>  		} else if (ret) {
+> +			f2fs_bug_on(sbi, index >=
+> +				DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE));
+>  			return 0;
+>  		}
+>  	}
 
-Hmm, there's a few places we should use __init_rwsem() ... something
-for my "when bored" pile of work.
+If a file has both fs-verity and compression enabled, it can have compressed
+clusters past i_size.
+
+- Eric
 
 
 _______________________________________________
