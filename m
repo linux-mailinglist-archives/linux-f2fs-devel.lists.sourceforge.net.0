@@ -2,72 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 478873806FD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 May 2021 12:14:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DAEC380815
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 May 2021 13:07:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lhUpr-0003yO-Ts; Fri, 14 May 2021 10:14:23 +0000
+	id 1lhVf3-0003IS-Az; Fri, 14 May 2021 11:07:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1lhUpq-0003yH-Vl
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 May 2021 10:14:22 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <jack@suse.cz>) id 1lhVf1-0003IB-TK
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 May 2021 11:07:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZuiRjkIVdBJ4qLiM2q+xHdgLXq0/CwiXT2qH5mIM1QI=; b=Q7jRMgS26iprQbjA8zRkc/wNUa
- Ydddu/QDRBRmyvKo20nz0maKIb0058XZcqcXk6zeTqm+UUUViLJDt9BbezJ7R2+IrNcS/pPNopxEa
- JTrRyJqb/sDLFSn6dwFQSPzMZfq3Zm3JI2QwqtTZrqKCyXb9s7jFbgDttEBDxMhLxSpU=;
+ bh=J7fqKdpg80TWgM1fzlC0KEIDrxDrwZ5e9fXWHt3GVjg=; b=koqp88GMkeH6Gg0kXmauaUdgIO
+ hiEEaQXxoPHPmhiTYWwI76my91+8Qb6MjkOyZjntClesHlstrnk7OzqmYVms5FB5WrVddRNWOtivy
+ Hm5iFI7k97TU7qVWnzcB/wQlueOFOkuLPfmaI8cHwGvZBeQQilpfbwLDLBrgee72NI/M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ZuiRjkIVdBJ4qLiM2q+xHdgLXq0/CwiXT2qH5mIM1QI=; b=B
- Hnkw7ioDAvb8ZMdBoD4DQZsCuSBdGnA924kIN2vLlFEsYV6+8Vjx5ZLe7ne1+GDUEXlrNghuyrgEv
- +TdMwOxOh8/kUVDUE6/1CDE0VyChDolS44PdMduVVjl8gVHJ1bwvNSuAG3PPWqUbQU0/U/JGmpN24
- Q8xHSgRiZedKcrug=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=J7fqKdpg80TWgM1fzlC0KEIDrxDrwZ5e9fXWHt3GVjg=; b=WkN2/IZWlEQQYrk/4HViw3+enO
+ XDdMp/OETONrr1szpV88rbgQEKVG/NW/nv/d/pBDdnir6PdHtoFREGznJAhfup4CF1X55yy/Ew4VS
+ p0rrKlAgFAFDGqawHs8CgTSNpRqk/VGTLvjRAj/Xt1GOhL5Y62ddHpydEOsECN8PKPDo=;
+Received: from mx2.suse.de ([195.135.220.15])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lhUpm-0000Z2-ME
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 May 2021 10:14:22 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C0FB3613AA;
- Fri, 14 May 2021 10:14:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620987253;
- bh=ti35DWvjjXET7XuI9BAF+V+AMh3UIKweXBk2BcOMOiM=;
- h=Date:From:To:Cc:Subject:From;
- b=IUBAohzO/B15+HaPGczZmguSUWEh3Jkk2WSFR3FB+qQqtyr+SKM5YNNiwobai2OxC
- /tgLcC/DM8QTsY+Xc1YsQP/ypkKpKKhthqc7KQnnvrn5pMfZ3P8Y5WVSk2V7Kwa1wD
- tK1DdgFfxauri6q8QeRngySBM56+7TFCD28hQmP+xvhNqn11xCA/plbOFUZxqyv/N8
- 52bfa6PWMfA9S5QM5AW+gAwMiUTzSrd4d/UFJiW4rbBhXHwPaHWuIKJkW8eeT4iDYt
- rr4Nm11kAGYWL2YJIKb3ezHT4AtF28oOi9gyW1hLGfk2VpG+O1JW9GhSkrOcEvZ49K
- z6pZM5FwA+RxQ==
-Date: Fri, 14 May 2021 03:14:12 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <YJ5NdFzVb1f9aVqG@google.com>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lhVew-0003cl-US
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 14 May 2021 11:07:15 +0000
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 724A5AF11;
+ Fri, 14 May 2021 11:07:02 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id AB2D71F2B4A; Fri, 14 May 2021 13:07:00 +0200 (CEST)
+Date: Fri, 14 May 2021 13:07:00 +0200
+From: Jan Kara <jack@suse.cz>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20210514110700.GA27655@quack2.suse.cz>
+References: <20210512101639.22278-1-jack@suse.cz>
+ <20210512134631.4053-3-jack@suse.cz>
+ <YJvo1bGG1tG+gtgC@casper.infradead.org>
+ <20210513190114.GJ2734@quack2.suse.cz>
+ <YJ2AR0IURFzz+52G@casper.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-X-Spam-Score: -0.8 (/)
+In-Reply-To: <YJ2AR0IURFzz+52G@casper.infradead.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: suse.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [195.135.220.15 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lhUpm-0000Z2-ME
-Subject: [f2fs-dev] [GIT PULL] f2fs fix for 5.13-rc1
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lhVew-0003cl-US
+Subject: Re: [f2fs-dev] [PATCH 03/11] mm: Protect operations adding pages to
+ page cache with invalidate_lock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,55 +82,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
+ linux-ext4@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
+ Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
+ linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
+ linux-mm@kvack.org, Miklos Szeredi <miklos@szeredi.hu>,
+ Ted Tso <tytso@mit.edu>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+On Thu 13-05-21 20:38:47, Matthew Wilcox wrote:
+> On Thu, May 13, 2021 at 09:01:14PM +0200, Jan Kara wrote:
+> > On Wed 12-05-21 15:40:21, Matthew Wilcox wrote:
+> > > Remind me (or, rather, add to the documentation) why we have to hold the
+> > > invalidate_lock during the call to readpage / readahead, and we don't just
+> > > hold it around the call to add_to_page_cache / add_to_page_cache_locked
+> > > / add_to_page_cache_lru ?  I appreciate that ->readpages is still going
+> > > to suck, but we're down to just three implementations of ->readpages now
+> > > (9p, cifs & nfs).
+> > 
+> > There's a comment in filemap_create_page() trying to explain this. We need
+> > to protect against cases like: Filesystem with 1k blocksize, file F has
+> > page at index 0 with uptodate buffer at 0-1k, rest not uptodate. All blocks
+> > underlying page are allocated. Now let read at offset 1k race with hole
+> > punch at offset 1k, length 1k.
+> > 
+> > read()					hole punch
+> > ...
+> >   filemap_read()
+> >     filemap_get_pages()
+> >       - page found in the page cache but !Uptodate
+> >       filemap_update_page()
+> > 					  locks everything
+> > 					  truncate_inode_pages_range()
+> > 					    lock_page(page)
+> > 					    do_invalidatepage()
+> > 					    unlock_page(page)
+> >         locks page
+> >           filemap_read_page()
+> 
+> Ah, this is the partial_start case, which means that page->mapping
+> is still valid.  But that means that do_invalidatepage() was called
+> with (offset 1024, length 1024), immediately after we called
+> zero_user_segment().  So isn't this a bug in the fs do_invalidatepage()?
+> The range from 1k-2k _is_ uptodate.  It's been zeroed in memory,
+> and if we were to run after the "free block" below, we'd get that
+> memory zeroed again.
 
-Could you please consider this pull request?
+Well, yes, do_invalidatepage() could mark zeroed region as uptodate. But I
+don't think we want to rely on 'uptodate' not getting spuriously cleared
+(which would reopen the problem). Generally the assumption is that there's
+no problem clearing (or not setting) uptodate flag of a clean buffer
+because the fs can always provide the data again. Similarly, fs is free to
+refetch data into clean & uptodate page, if it thinks it's worth it. Now
+all these would become correctness issues. So IMHO the fragility is not
+worth the shorter lock hold times. That's why I went for the rule that
+read-IO submission is still protected by invalidate_lock to make things
+simple.
 
-Thanks,
-
-The following changes since commit 6efb943b8616ec53a5e444193dccf1af9ad627b5:
-
-  Linux 5.13-rc1 (2021-05-09 14:17:44 -0700)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-5.13-rc1-fix
-
-for you to fetch changes up to f395183f9544ba2f56b25938d6ea7042bd873521:
-
-  f2fs: return EINVAL for hole cases in swap file (2021-05-12 07:38:00 -0700)
-
-----------------------------------------------------------------
-f2fs-5.13-rc1-fix
-
-This series of patches fix some critical bugs such as memory leak in compression
-flows, kernel panic when handling errors, and swapon failure due to newly added
-condition check.
-
-----------------------------------------------------------------
-Chao Yu (3):
-      f2fs: compress: fix to free compress page correctly
-      f2fs: compress: fix race condition of overwrite vs truncate
-      f2fs: compress: fix to assign cc.cluster_idx correctly
-
-Jaegeuk Kim (4):
-      f2fs: avoid null pointer access when handling IPU error
-      f2fs: support iflag change given the mask
-      f2fs: avoid swapon failure by giving a warning first
-      f2fs: return EINVAL for hole cases in swap file
-
- fs/f2fs/compress.c | 55 +++++++++++++++++++++++-------------------------------
- fs/f2fs/data.c     | 39 +++++++++++++++++++++++++++-----------
- fs/f2fs/f2fs.h     |  2 +-
- fs/f2fs/file.c     |  3 ++-
- fs/f2fs/segment.c  |  4 ++--
- 5 files changed, 56 insertions(+), 47 deletions(-)
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
