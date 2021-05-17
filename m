@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 002B1383B42
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 May 2021 19:28:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1F6F386C1D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 May 2021 23:19:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lih2D-0007tt-MW; Mon, 17 May 2021 17:28:05 +0000
+	id 1likdZ-0000n6-Ug; Mon, 17 May 2021 21:18:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lih2C-0007tg-Bj
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 May 2021 17:28:04 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <ebiggers@kernel.org>) id 1likdY-0000mz-Hh
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 May 2021 21:18:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3TgoThrxtnCqmUNI7tWvMvw6065+CrdYkBjEGLPUtEg=; b=ZUW/2+HT9w4M55f2JsmHlAPZgf
- PzrJDpgqUO2NFIzL92STWFd16fP5ulmqkRHjTbx+bVQFRwOXGJPuZVLxu+nXzEhD4azH/dPWzuHn0
- imzVEnhpMdOUjwoUyCdO3kKDS6bds2TA/eFh4R20mVOhwQDjZSpP9tl80O5cYp9/EBA8=;
+ bh=km1Y85x5gTx/B32ydzOzrSuUsdfzsl4DLtv+d7wqBUU=; b=T3SXfx+gz3V06NWCWCutyk3V2h
+ 2n6x8RnKBT4CXS0zXPXySPkCkurtgAMd94XaD+B0CWAXFErQgIjgkKeqsE2fRSaepH8eLZDkcfzwL
+ /0iDM3KEjMP3ZYdDwSl6wsYpU3uyHHmq4T4FGhWjkT98rsQzbkaSEs2DZxrcUDUDshyQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3TgoThrxtnCqmUNI7tWvMvw6065+CrdYkBjEGLPUtEg=; b=EVA+CRLujC1ktKAHMKHuGXfTNv
- E6OIW0qMGYo7FTSN2uKlU6RCyHYPo/QCyNy9nx+Jd8GU9+TP4BiAA2y/D9Y2Z87gtjDaV9OyfW7GU
- 06j5Bt9ZdSuPr9XYxczZGoxe68/CBI0KLt71Qlk9lLAg9N4i058X+eW80JUsPX2/upsg=;
+ bh=km1Y85x5gTx/B32ydzOzrSuUsdfzsl4DLtv+d7wqBUU=; b=AUfLjFWcwMqpPM6zIJdeK7L8Wo
+ seSKvmEc0WpLztRj6YFUZ/TG/GmBYI2sJY2MuUDyQha/fO8xrND3vx84/RtXKv/bJrG3Ragd6HW7+
+ e36I4beyL5shOZs/eDkZrvcQyy6HLyPre/T6iN7spYhUVP/d7K/AFsbfjTpqjwcPibEo=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lih20-00Bhtv-E7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 May 2021 17:28:06 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D6E1860FDB;
- Mon, 17 May 2021 17:27:46 +0000 (UTC)
+ id 1likdP-00BtrK-3l
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 17 May 2021 21:18:53 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 73D2160FF3;
+ Mon, 17 May 2021 21:18:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1621272467;
- bh=XEjLvdy0CWJOwACIZyypbKf5Baefw5IgizZM3DSDsOE=;
+ s=k20201202; t=1621286317;
+ bh=cmzlezJXdjoNUrS+2SMZYPVzmK28Eak6fBQFREiwFUY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aKkUoCkRwjSqbF2vpGLse+53r6EzeCWPt7SVerxnnYnOzfdwZ61CLDFfYDXCfycFi
- dspssmA7VWLGheh5gLMKLZeKe07whbcZfwknycQgwGybq2ZPH3dcwkDjgqg8HxMrs5
- z2BtP4yXrCQ4OdUMou1LAHFhNoiEqlFqB1jbMxepbpa9hIpkckL+FpmHPmZSTGLErN
- eIs1/BuQeXZ67BPsHVo2MJsxVJMR33IZt/4aMJ9hjgc0DkXT7UoaPovQA0M1vQ928T
- J8/IMVmFBs7oGVelUzb7wHMRl1GOr1vwiga2MKYsjhLv4UJyh98n2GPpnhZr6BQnqX
- cWkp1nQQUK+Tg==
-Date: Mon, 17 May 2021 10:27:45 -0700
+ b=t+hQ40v5CIHrNoldcMPt6/SqZNvPqWHm2j3PRKoTBhD4yewkzptsruEypxwX9ypwG
+ BFRZVIItEW9AOjShZ8BA4wujqE88k6iGZLs9uTjWbaojNhJtEzaiAZAXDJfvgLEbQ3
+ QfK8clpr8mDDl1Um6cthoAWlhrSCpDQIV6wDIt+q6AHV9d16fiHCHLjNPsIc4VhlOF
+ VoUWOSgrqdtLJZ5Dv8eTJJiTo/DmfcamUeMOaXADyyyQ9KvIa+PFEAlcMQM2xsCIAB
+ hPVvuHQc2WU2da2L7c8KbBOxoohieham/udvayU379SWuKzraoHG/igcjZTFwQIZDd
+ 4h+vPClyHRlUg==
+Date: Mon, 17 May 2021 14:18:36 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Chao Yu <yuchao0@huawei.com>
-Message-ID: <YKKnkSag35cDXh0Z@gmail.com>
-References: <20210517011557.21722-1-yuchao0@huawei.com>
+Message-ID: <YKLdrGV9utVHDuE/@gmail.com>
+References: <20210507094455.1695-1-changfengnan@vivo.com>
+ <YJlUpHJLONlORWWl@google.com>
+ <000b01d74656$518e96f0$f4abc4d0$@vivo.com>
+ <YJr8PuZlOBqb+Qv1@google.com>
+ <15efccda-b8e3-80bc-13b7-b2d62a1cac15@huawei.com>
+ <YJ2Xflx6eF2P89Km@gmail.com>
+ <7f6b707c-dd45-21fe-e1f7-624fafcda3d3@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210517011557.21722-1-yuchao0@huawei.com>
+In-Reply-To: <7f6b707c-dd45-21fe-e1f7-624fafcda3d3@huawei.com>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,9 +74,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lih20-00Bhtv-E7
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add MODULE_SOFTDEP to ensure crc32c is
- included in the initramfs
+X-Headers-End: 1likdP-00BtrK-3l
+Subject: Re: [f2fs-dev] =?utf-8?b?562U5aSNOiBbUEFUQ0ggdjRdIGYyZnM6IGNvbXBy?=
+ =?utf-8?q?ess=3A_avoid_unnecessary_check_in_f2fs=5Fprepare=5Fcompress=5Fo?=
+ =?utf-8?q?verwrite?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,43 +89,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, marcosfrm <marcosfrm@gmail.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, changfengnan@vivo.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, May 17, 2021 at 09:15:57AM +0800, Chao Yu wrote:
-> As marcosfrm reported in bugzilla:
+On Fri, May 14, 2021 at 09:15:54AM +0800, Chao Yu wrote:
+> On 2021/5/14 5:17, Eric Biggers wrote:
+> > On Wed, May 12, 2021 at 09:52:19AM +0800, Chao Yu wrote:
+> > > On 2021/5/12 5:50, Jaegeuk Kim wrote:
+> > > > On 05/11, changfengnan@vivo.com wrote:
+> > > > > Hi Jaegeuk:
+> > > > > 
+> > > > > If there're existing clusters beyond i_size, may cause data corruption, but
+> > > > > will this happen in normal? maybe some error can cause this, if i_size is
+> > > > > error the data beyond size still can't handle properly.  Is there normal
+> > > > > case can casue existing clusters beyond i_size?
+> > > > 
+> > > > We don't have a rule to sync between i_size and i_blocks.
+> > > 
+> > > I can't image a case that compressed cluster may cross filesize, it looks it's
+> > > a bug if that happened, but I'm not sure I have considered all cases. So, I
+> > > prefer to add a check condition as below, then testing w/ xfstest/por_fsstress
+> > > for a while.
+> > > 
+> > > Subject: [PATCH] f2fs: compress: compressed cluster should not cross i_size
+> > > 
+> > > ---
+> > >   fs/f2fs/data.c | 2 ++
+> > >   1 file changed, 2 insertions(+)
+> > > 
+> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > index 06d1e58d3882..9acca358d578 100644
+> > > --- a/fs/f2fs/data.c
+> > > +++ b/fs/f2fs/data.c
+> > > @@ -3325,6 +3325,8 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
+> > >   			err = ret;
+> > >   			goto fail;
+> > >   		} else if (ret) {
+> > > +			f2fs_bug_on(sbi, index >=
+> > > +				DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE));
+> > >   			return 0;
+> > >   		}
+> > >   	}
+> > 
+> > If a file has both fs-verity and compression enabled, it can have compressed
+> > clusters past i_size.
 > 
-> https://bugzilla.kernel.org/show_bug.cgi?id=213089
+> Correct, any other case we missed for a writable file? let us know.
 > 
-> Initramfs generators rely on "pre" softdeps (and "depends") to include
-> additional required modules.
+> Thanks,
 > 
-> F2FS does not declare "pre: crc32" softdep. Then every generator (dracut,
-> mkinitcpio...) has to maintain a hardcoded list for this purpose.
-> 
-> Hence let's use MODULE_SOFTDEP("pre: crc32") in f2fs code.
-> 
-> Fixes: 43b6573bac95 ("f2fs: use cryptoapi crc32 functions")
-> Reported-by: marcosfrm <marcosfrm@gmail.com>
-> Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> ---
->  fs/f2fs/super.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 3f8a7a6c250c..fa0ce6301c16 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -4431,4 +4431,5 @@ module_exit(exit_f2fs_fs)
->  MODULE_AUTHOR("Samsung Electronics's Praesto Team");
->  MODULE_DESCRIPTION("Flash Friendly File System");
->  MODULE_LICENSE("GPL");
-> +MODULE_SOFTDEP("pre: crc32c");
 
-Shouldn't it be crc32, not crc32c?
+Well, files become read-only once fs-verity is enabled on them, but that happens
+after the blocks past i_size are written in the first place.  That part still
+uses ->write_begin(), ->write_end(), ->writepages(), etc.
 
 - Eric
 
