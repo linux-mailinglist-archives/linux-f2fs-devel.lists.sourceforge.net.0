@@ -2,107 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1F4C3877E7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 May 2021 13:41:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=mF3pK06kHKvLJ4x9w6aY+cjpEyNV9SfADWAWrvXTeuo=; b=DTQoL9WkC6rF3fUEoC0GrXgsjW
-	6ig56pOk8g8zcMIOr/b6pSJucXb40yV+M1I4L5DSMsJqOLPp+wrN33D6NVai7vj1VvM7T7orEwuJ5
-	zCMmJ9cbyZilCoUJMoS/P3sizrh2bjqhOc4rutuIYIgrp+DQUJ72tR6Oa5jT3gB4lweg=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9ADD387876
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 May 2021 14:08:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1liy6D-0005Ue-6e; Tue, 18 May 2021 11:41:21 +0000
+	id 1liyW1-0002fD-SN; Tue, 18 May 2021 12:08:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <elver@google.com>) id 1liy6C-0005UX-34
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 11:41:20 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <changfengnan@vivo.com>) id 1liyW0-0002ec-7O
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 12:08:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3l5AmtYJFouEOrROsksDvqmgsMFvmJSBOV3f2n2y+r4=; b=hKaHAfVIf9lKKxh8f7zYmGLsFV
- JjDhiIRhsWak9gKqKJCiJHid+xeqXgPMB3rD509RRxiRLKrXUVn6ER84CKgPtkRk9A9gOJ0MU9LEe
- eVZMno4E5Aj8Wc6p3gQYg5dxD62iDeJ/diw8mAvRW6HetsJBu3/aNCYOiSDWJHioHFVU=;
+ bh=+TyGFia/gnBosC1HpAaB3a2/DZ1XDBWFUThaSqMZndU=; b=ObeHTG5yZjbNXWiD0Tg/x4FBSy
+ tFXtJ2iDKSvol05aIAEfmclC0KCW1WHeuzQdFTRmbpePCkix+Sl5T5s2BdJwf4C2xSoVZz+FVemp5
+ 4pG/8YevaV2tjlJDtgH2duO305mPXUWdFgi7kmZcbYhbDStUlVEI32x1JbWgoU2YYDvY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=3l5AmtYJFouEOrROsksDvqmgsMFvmJSBOV3f2n2y+r4=; b=XPVzplsPfh4dLyIpvOutxfxW/G
- EvNpgzkqBf9usW1w06PJEWwAhukw6LboNhdjXBifpn1aKLzL6pOzrIDT0oIDVWCeichEGstL/XKnZ
- 9L0alLFEev8ajXAx7yCJn1ufANsEQm5qQILG2ayYU4op+EEqXQVr0fDEfyExvMyF5IUo=;
-Received: from mail-ot1-f49.google.com ([209.85.210.49])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1liy68-00Cd6m-91
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 11:41:20 +0000
-Received: by mail-ot1-f49.google.com with SMTP id
- s5-20020a05683004c5b029032307304915so1069098otd.7
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 May 2021 04:41:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3l5AmtYJFouEOrROsksDvqmgsMFvmJSBOV3f2n2y+r4=;
- b=RHf2VD7CxJUA2F58CECqALmtMBY3ePkCR0V/j72HtQQ0McvfJI1PZXI02P7EjYlrTW
- 0LLobL3P0xeoRfCz3r0h1Lj4m8lHOOzhw/kqC+P1y1HzgyNWpWbGT734UL8VbXSj0oGt
- VH651b+13D3lj1tM9SJNUZfUhZ3Fui35fFGhy+yQMVESWtyLnSlI2hf3KMnD7EPBF9P4
- 3IHNSPTwYwqlmkzZt95oJqM4e/na6LgAKkTPYRvDMJQ9bg1+jr9PwAhVcejuEXG/PU9S
- BI4CJX7FXGnIL8oGqiHD4KylzvfR8hmUhPDyG7A4tJWGLIQqqoMtHfD3omBvZhxYCh6/
- bRjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3l5AmtYJFouEOrROsksDvqmgsMFvmJSBOV3f2n2y+r4=;
- b=cWBoWTMZEhtYPDeEHtV327MrTHBwM88bq5u7+Z9FYL4haUgDdRFfBSrt4tdoFK8qiv
- Sp5/1lXq4s2VYMF/zQtK0TfoohMXIU9M5MNB5hSEEiZ0fLcJHkrTtmum2DHl/BUMMb1a
- zL3p5nWSYRkZb6svYJH0R1dii4KaEtturUrb0GufIgJxe10xtviHRII9CupvReDAXqo5
- pMebr0cRlPabfqpwYv7yWVzFRfhBEGQxQ4QUb5RP5pYaLfHJ101B66kikuVbA7XeD5b5
- doHCBjDqNcyEUl+6N96U4LmomSDIpRYNUQ5GGVbp9U3INpsEzKOv4mC+sCk623wIcSgF
- gnBA==
-X-Gm-Message-State: AOAM530DRm/j6YjgKBGTDrnb5hypz+GobI9/k3fihq2kIshRFuTJeUlT
- WB11zlpchkj+Pl2TTXYYd2mtltHCkcWOAUjqJboiEaepw2D7Fg==
-X-Google-Smtp-Source: ABdhPJx8nQtgKXOmUHdflA+GlRGVKYijFSpFjNL4BNjNyT/DnTtoFCi2MaUFhvBL80Y/OBwllfLIefpfEefwIEj8CzQ=
-X-Received: by 2002:a9d:7a54:: with SMTP id z20mr3787493otm.17.1621336489337; 
- Tue, 18 May 2021 04:14:49 -0700 (PDT)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=+TyGFia/gnBosC1HpAaB3a2/DZ1XDBWFUThaSqMZndU=; b=e
+ syc6/39IeZK6POHiuu+ZQsloHNsbJYGrcB7fosHoQ4fL8KC6jFkeuKQHJ+fU/A/Mzfu87d1oLu+K2
+ vTzKnCv9OwtxfxEDTUpEBbThMufYpVa+ZARk3E5QlF6SJ1NIPzwi0Lmlc19ugFYuOYNMCbACx6aWT
+ bgjndIdGRAhuWQrU=;
+Received: from mail-m17635.qiye.163.com ([59.111.176.35])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1liyVr-0007w5-Ef
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 12:07:59 +0000
+Received: from SZ-11126892.vivo.xyz (unknown [58.251.74.232])
+ by mail-m17635.qiye.163.com (Hmail) with ESMTPA id 2AD40401185;
+ Tue, 18 May 2021 20:07:44 +0800 (CST)
+From: Fengnan Chang <changfengnan@vivo.com>
+To: jaegeuk@kernel.org, chao@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 18 May 2021 20:07:38 +0800
+Message-Id: <20210518120738.677-1-changfengnan@vivo.com>
+X-Mailer: git-send-email 2.29.2.windows.2
 MIME-Version: 1.0
-References: <0000000000003f654905c168b09d@google.com>
- <CACT4Y+Zi_femntmu0qtUz1q1gbxs-0VNrLUULzY1bd+hrBngHA@mail.gmail.com>
-In-Reply-To: <CACT4Y+Zi_femntmu0qtUz1q1gbxs-0VNrLUULzY1bd+hrBngHA@mail.gmail.com>
-Date: Tue, 18 May 2021 13:14:38 +0200
-Message-ID: <CANpmjNPAKrwrqnsJHMmZTFZwZoTCPEj_DHZ1ecgMci3Pd8JjEg@mail.gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -15.6 (---------------)
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+ oVCBIfWUFZGhgYQ1YfTU5KSE4fSU1DTU5VEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
+ 9ISFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDY6DBw6PD8OHSs5Dj9WHk8#
+ KiEKFBBVSlVKTUlKSEhCTU1PTElPVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
+ WU5DVUlOSlVMT1VJSElZV1kIAVlBSktMSEI3Bg++
+X-HM-Tid: 0a797f5fefb8d991kuws2ad40401185
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.49 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.49 listed in wl.mailspike.net]
+ trust [59.111.176.35 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [59.111.176.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF white-list
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL Match
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1liy68-00Cd6m-91
-Subject: Re: [f2fs-dev] [syzbot] KFENCE: use-after-free in kmem_cache_destroy
+X-Headers-End: 1liyVr-0007w5-Ef
+Subject: [f2fs-dev] [PATCH v4] f2fs: compress: add nocompress extensions
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,150 +77,266 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Marco Elver via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Marco Elver <elver@google.com>
-Cc: syzbot <syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com>,
- syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
- LKML <linux-kernel@vger.kernel.org>, zhuangyi1@huawei.com, jaegeuk@kernel.org,
- Dmitry Vyukov <dvyukov@google.com>
+Cc: Fengnan Chang <changfengnan@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-+Cc more people who recently touched f2fs
+When we create a directory with enable compression, all file write into
+directory will try to compress.But sometimes we may know, new file
+cannot meet compression ratio requirements.
+We need a nocompress extension to skip those files to avoid unnecessary
+compress page test.
 
-On Mon, 3 May 2021 at 10:27, 'Dmitry Vyukov' via syzkaller-bugs
-<syzkaller-bugs@googlegroups.com> wrote:
-> On Mon, May 3, 2021 at 10:24 AM syzbot <syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com> wrote:
-> >
-> > Hello,
-> >
-> > syzbot found the following issue on:
-> >
-> > HEAD commit:    d2b6f8a1 Merge tag 'xfs-5.13-merge-3' of git://git.kernel...
-> > git tree:       upstream
-> > console output: https://syzkaller.appspot.com/x/log.txt?x=15f19ca5d00000
-> > kernel config:  https://syzkaller.appspot.com/x/.config?x=53fdf14defd48c56
-> > dashboard link: https://syzkaller.appspot.com/bug?extid=9d90dad32dd9727ed084
-> > compiler:       Debian clang version 11.0.1-2
-> >
-> > Unfortunately, I don't have any reproducer for this issue yet.
-> >
-> > IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> > Reported-by: syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com
->
-> This looks like a bug in F2FS.
-> Interestingly this was detected by ARM MTE before but was
-> mis-root-caused I think:
-> https://lore.kernel.org/lkml/0000000000008d396205b9e4adee@google.com/
-> This can't be detected by KASAN directly because it doesn't instrument
-> mm/slab*. This can only be detected by MTE/KFENCE.
->
-> > ==================================================================
-> > BUG: KFENCE: use-after-free write in kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:486
-> >
-> > Use-after-free write at 0xffff88823bc16040 (in kfence-#10):
-> >  kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:486
-> >  f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
+After add nocompress_extension, the priority should be:
+dir_flag < comp_extention,nocompress_extension < comp_file_flag,
+no_comp_file_flag.
 
-This looks like a double-kmem_cache_destroy of fsync_entry_slab in the
-f2fs code. But looking at this code briefly, I couldn't say what the
-fix would be.
+For example:
+1.If dir is set compress, the default file and compress_extension
+specified file will compress, and nocompress_extension specified file
+will nocompress.
+2.If dir is set not compress, the default file and nocompress_extension
+specified file will not compress, but compress_extension specified file
+will compress.
+3.We can change compress attribute regardless of the file in which type
+of dir and  specified or not.
 
-> >  f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
-> >  mount_bdev+0x26c/0x3a0 fs/super.c:1367
-> >  legacy_get_tree+0xea/0x180 fs/fs_context.c:592
-> >  vfs_get_tree+0x86/0x270 fs/super.c:1497
-> >  do_new_mount fs/namespace.c:2905 [inline]
-> >  path_mount+0x196f/0x2be0 fs/namespace.c:3235
-> >  do_mount fs/namespace.c:3248 [inline]
-> >  __do_sys_mount fs/namespace.c:3456 [inline]
-> >  __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
-> >  do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
-> >  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> >
-> > kfence-#10 [0xffff88823bc16000-0xffff88823bc160df, size=224, cache=kmem_cache] allocated by task 15453:
-> >  kmem_cache_zalloc include/linux/slab.h:676 [inline]
-> >  create_cache mm/slab_common.c:247 [inline]
-> >  kmem_cache_create_usercopy+0x12a/0x2f0 mm/slab_common.c:350
-> >  kmem_cache_create+0xf/0x20 mm/slab_common.c:405
-> >  f2fs_kmem_cache_create fs/f2fs/f2fs.h:2463 [inline]
-> >  f2fs_recover_fsync_data+0x1f0/0x8380 fs/f2fs/recovery.c:790
-> >  f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
-> >  mount_bdev+0x26c/0x3a0 fs/super.c:1367
-> >  legacy_get_tree+0xea/0x180 fs/fs_context.c:592
-> >  vfs_get_tree+0x86/0x270 fs/super.c:1497
-> >  do_new_mount fs/namespace.c:2905 [inline]
-> >  path_mount+0x196f/0x2be0 fs/namespace.c:3235
-> >  do_mount fs/namespace.c:3248 [inline]
-> >  __do_sys_mount fs/namespace.c:3456 [inline]
-> >  __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
-> >  do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
-> >  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> >
-> > freed by task 15448:
-> >  kobject_cleanup+0x1c9/0x280 lib/kobject.c:705
-> >  shutdown_cache mm/slab_common.c:463 [inline]
-> >  kmem_cache_destroy+0x93/0x120 mm/slab_common.c:492
-> >  f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
-> >  f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
-> >  mount_bdev+0x26c/0x3a0 fs/super.c:1367
-> >  legacy_get_tree+0xea/0x180 fs/fs_context.c:592
-> >  vfs_get_tree+0x86/0x270 fs/super.c:1497
-> >  do_new_mount fs/namespace.c:2905 [inline]
-> >  path_mount+0x196f/0x2be0 fs/namespace.c:3235
-> >  do_mount fs/namespace.c:3248 [inline]
-> >  __do_sys_mount fs/namespace.c:3456 [inline]
-> >  __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
-> >  do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
-> >  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> >
-> > CPU: 0 PID: 15453 Comm: syz-executor.0 Not tainted 5.12.0-syzkaller #0
-> > Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-> > RIP: 0010:kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:488
-> > Code: 0f 1f 84 00 00 00 00 00 0f 1f 00 48 85 ff 0f 84 09 01 00 00 41 57 41 56 53 48 89 fb 48 c7 c7 b8 07 dc 8c 31 f6 e8 b1 c3 00 08 <ff> 4b 40 0f 85 c0 00 00 00 48 89 df e8 20 a2 14 00 48 89 df e8 18
-> > RSP: 0018:ffffc900030af320 EFLAGS: 00010286
-> > RAX: 0000000000000000 RBX: ffff88823bc16000 RCX: 0000000000000001
-> > RDX: 0000000000000001 RSI: 0000000000000008 RDI: 0000000000000001
-> > RBP: ffffc900030af870 R08: dffffc0000000000 R09: fffffbfff19b80f8
-> > R10: fffffbfff19b80f8 R11: 0000000000000000 R12: ffff88808c3a4000
-> > R13: dffffc0000000000 R14: 0000000000000000 R15: 1ffff92000615eb0
-> > FS:  00007f60a5228700(0000) GS:ffff8880b9a00000(0000) knlGS:0000000000000000
-> > CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > CR2: ffff88823bc16040 CR3: 000000001ccd8000 CR4: 00000000001526f0
-> > DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> > DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> > Call Trace:
-> >  f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
-> >  f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
-> >  mount_bdev+0x26c/0x3a0 fs/super.c:1367
-> >  legacy_get_tree+0xea/0x180 fs/fs_context.c:592
-> >  vfs_get_tree+0x86/0x270 fs/super.c:1497
-> >  do_new_mount fs/namespace.c:2905 [inline]
-> >  path_mount+0x196f/0x2be0 fs/namespace.c:3235
-> >  do_mount fs/namespace.c:3248 [inline]
-> >  __do_sys_mount fs/namespace.c:3456 [inline]
-> >  __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
-> >  do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
-> >  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> > RIP: 0033:0x467b1a
-> > Code: 48 c7 c2 bc ff ff ff f7 d8 64 89 02 b8 ff ff ff ff eb d2 e8 b8 04 00 00 0f 1f 84 00 00 00 00 00 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 bc ff ff ff f7 d8 64 89 01 48
-> > RSP: 002b:00007f60a5227fa8 EFLAGS: 00000206 ORIG_RAX: 00000000000000a5
-> > RAX: ffffffffffffffda RBX: 0000000020000200 RCX: 0000000000467b1a
-> > RDX: 0000000020000000 RSI: 0000000020000100 RDI: 00007f60a5228000
-> > RBP: 00007f60a5228040 R08: 00007f60a5228040 R09: 0000000020000000
-> > R10: 0000000000000000 R11: 0000000000000206 R12: 0000000020000000
-> > R13: 0000000020000100 R14: 00007f60a5228000 R15: 0000000020014b00
-> > ==================================================================
-> >
-> >
-> > ---
-> > This report is generated by a bot. It may contain errors.
-> > See https://goo.gl/tpsmEJ for more information about syzbot.
-> > syzbot engineers can be reached at syzkaller@googlegroups.com.
-> >
-> > syzbot will keep track of this issue. See:
-> > https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+---
+ Documentation/filesystems/f2fs.rst | 18 +++++++
+ fs/f2fs/f2fs.h                     |  2 +
+ fs/f2fs/namei.c                    | 18 +++++--
+ fs/f2fs/super.c                    | 79 +++++++++++++++++++++++++++++-
+ 4 files changed, 113 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index 992bf91eeec8..cf162409fc01 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -281,6 +281,24 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+ 			 For other files, we can still enable compression via ioctl.
+ 			 Note that, there is one reserved special extension '*', it
+ 			 can be set to enable compression for all files.
++nocompress_extension=%s	   Support adding specified extension, so that f2fs can disable
++			 compression on those corresponding files, just contrary to compression extension.
++			 If you know exactly which files cannot be compressed, you can use this.
++			 The same extension name can't appear in both compress and nocompress
++			 extension at the same time.
++			 If the compress extension specifies all files, the types specified by the
++			 nocompress extension will be treated as special cases and will not be compressed.
++			 Don't allow use '*' to specifie all file in nocompress extension.
++			 After add nocompress_extension, the priority should be:
++			 dir_flag < comp_extention,nocompress_extension < comp_file_flag,no_comp_file_flag.
++			 For example:
++			 1.If dir is set compress, the default file and compress_extension specified file
++			 will compress, and nocompress_extension specified file will nocompress.
++			 2.If dir is set not compress, the default file and nocompress_extension specified
++			 file will not compress, but compress_extension specified file will compress.
++			 3.We can change compress attribute regardless of the file in which type of dir
++			 and specified or not.
++
+ compress_chksum		 Support verifying chksum of raw data in compressed cluster.
+ compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
+ 			 modes. In "fs" mode (default), f2fs does automatic compression
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index c83d90125ebd..1c1215f06f68 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -150,8 +150,10 @@ struct f2fs_mount_info {
+ 	unsigned char compress_level;		/* compress level */
+ 	bool compress_chksum;			/* compressed data chksum */
+ 	unsigned char compress_ext_cnt;		/* extension count */
++	unsigned char nocompress_ext_cnt;		/* nocompress extension count */
+ 	int compress_mode;			/* compression mode */
+ 	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
++	unsigned char noextensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN]; /* extensions */
+ };
+ 
+ #define F2FS_FEATURE_ENCRYPT		0x0001
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index a9cd9cf97229..b57b41d7799e 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -279,14 +279,16 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+ 						const unsigned char *name)
+ {
+ 	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
++	unsigned char (*noext)[F2FS_EXTENSION_LEN] = F2FS_OPTION(sbi).noextensions;
+ 	unsigned char (*ext)[F2FS_EXTENSION_LEN];
+-	unsigned int ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
++	unsigned char ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
++	unsigned char noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+ 	int i, cold_count, hot_count;
+ 
+ 	if (!f2fs_sb_has_compression(sbi) ||
+-			is_inode_flag_set(inode, FI_COMPRESSED_FILE) ||
+ 			F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
+-			!f2fs_may_compress(inode))
++			!f2fs_may_compress(inode) ||
++			(!ext_cnt && !noext_cnt))
+ 		return;
+ 
+ 	down_read(&sbi->sb_lock);
+@@ -303,6 +305,16 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+ 
+ 	up_read(&sbi->sb_lock);
+ 
++	for (i = 0; i < noext_cnt; i++) {
++		if (is_extension_exist(name, noext[i])) {
++			f2fs_disable_compressed_file(inode);
++			return;
++		}
++	}
++
++	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE))
++		return;
++
+ 	ext = F2FS_OPTION(sbi).extensions;
+ 
+ 	for (i = 0; i < ext_cnt; i++) {
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 7d325bfaf65a..d38e2e4d7da3 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -148,6 +148,7 @@ enum {
+ 	Opt_compress_algorithm,
+ 	Opt_compress_log_size,
+ 	Opt_compress_extension,
++	Opt_nocompress_extension,
+ 	Opt_compress_chksum,
+ 	Opt_compress_mode,
+ 	Opt_atgc,
+@@ -222,6 +223,7 @@ static match_table_t f2fs_tokens = {
+ 	{Opt_compress_algorithm, "compress_algorithm=%s"},
+ 	{Opt_compress_log_size, "compress_log_size=%u"},
+ 	{Opt_compress_extension, "compress_extension=%s"},
++	{Opt_nocompress_extension, "nocompress_extension=%s"},
+ 	{Opt_compress_chksum, "compress_chksum"},
+ 	{Opt_compress_mode, "compress_mode=%s"},
+ 	{Opt_atgc, "atgc"},
+@@ -473,6 +475,43 @@ static int f2fs_set_test_dummy_encryption(struct super_block *sb,
+ }
+ 
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
++/*
++ * 1. The same extension name cannot not appear in both compress and non-compress extension
++ * at the same time.
++ * 2. If the compress extension specifies all files, the types specified by the non-compress
++ * extension will be treated as special cases and will not be compressed.
++ * 3. Don't allow the non-compress extension specifies all files.
++ */
++static int f2fs_test_compress_extension(struct f2fs_sb_info *sbi)
++{
++	unsigned char (*ext)[F2FS_EXTENSION_LEN];
++	unsigned char (*noext)[F2FS_EXTENSION_LEN];
++	int ext_cnt, noext_cnt, index = 0, no_index = 0;
++
++	ext = F2FS_OPTION(sbi).extensions;
++	ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
++	noext = F2FS_OPTION(sbi).noextensions;
++	noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
++
++	if (!ext_cnt || !noext_cnt)
++		return 0;
++
++	for (no_index = 0; no_index < noext_cnt; no_index++) {
++		if (!strcasecmp("*", noext[no_index])) {
++			f2fs_info(sbi, "Don't allow the non-compress extension specifies all files");
++			return -EINVAL;
++		}
++		for (index = 0; index < ext_cnt; index++) {
++			if (!strcasecmp(ext[index], noext[no_index])) {
++				f2fs_info(sbi, "Don't allow the same extension %s appear in both compress and non-compress extension",
++						ext[index]);
++				return -EINVAL;
++			}
++		}
++	}
++	return 0;
++}
++
+ #ifdef CONFIG_F2FS_FS_LZ4
+ static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
+ {
+@@ -546,7 +585,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 	substring_t args[MAX_OPT_ARGS];
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	unsigned char (*ext)[F2FS_EXTENSION_LEN];
+-	int ext_cnt;
++	unsigned char (*noext)[F2FS_EXTENSION_LEN];
++	int ext_cnt, noext_cnt;
+ #endif
+ 	char *p, *name;
+ 	int arg = 0;
+@@ -1049,6 +1089,30 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			F2FS_OPTION(sbi).compress_ext_cnt++;
+ 			kfree(name);
+ 			break;
++		case Opt_nocompress_extension:
++			if (!f2fs_sb_has_compression(sbi)) {
++				f2fs_info(sbi, "Image doesn't support compression");
++				break;
++			}
++			name = match_strdup(&args[0]);
++			if (!name)
++				return -ENOMEM;
++
++			noext = F2FS_OPTION(sbi).noextensions;
++			noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
++
++			if (strlen(name) >= F2FS_EXTENSION_LEN ||
++				noext_cnt >= COMPRESS_EXT_NUM) {
++				f2fs_err(sbi,
++					"invalid extension length/number");
++				kfree(name);
++				return -EINVAL;
++			}
++
++			strcpy(noext[noext_cnt], name);
++			F2FS_OPTION(sbi).nocompress_ext_cnt++;
++			kfree(name);
++			break;
+ 		case Opt_compress_chksum:
+ 			F2FS_OPTION(sbi).compress_chksum = true;
+ 			break;
+@@ -1070,6 +1134,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		case Opt_compress_algorithm:
+ 		case Opt_compress_log_size:
+ 		case Opt_compress_extension:
++		case Opt_nocompress_extension:
+ 		case Opt_compress_chksum:
+ 		case Opt_compress_mode:
+ 			f2fs_info(sbi, "compression options not supported");
+@@ -1122,6 +1187,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 	}
+ #endif
+ 
++#ifdef CONFIG_F2FS_FS_COMPRESSION
++	if (f2fs_test_compress_extension(sbi)) {
++		f2fs_err(sbi, "invalid compress or nocompress extension");
++		return -EINVAL;
++	}
++#endif
++
+ 	if (F2FS_IO_SIZE_BITS(sbi) && !f2fs_lfs_mode(sbi)) {
+ 		f2fs_err(sbi, "Should set mode=lfs with %uKB-sized IO",
+ 			 F2FS_IO_SIZE_KB(sbi));
+@@ -1665,6 +1737,11 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+ 			F2FS_OPTION(sbi).extensions[i]);
+ 	}
+ 
++	for (i = 0; i < F2FS_OPTION(sbi).nocompress_ext_cnt; i++) {
++		seq_printf(seq, ",nocompress_extension=%s",
++			F2FS_OPTION(sbi).noextensions[i]);
++	}
++
+ 	if (F2FS_OPTION(sbi).compress_chksum)
+ 		seq_puts(seq, ",compress_chksum");
+ 
+-- 
+2.29.0
+
 
 
 _______________________________________________
