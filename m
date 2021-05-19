@@ -2,74 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD7AC3882CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 May 2021 00:37:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAA873887EF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 May 2021 09:01:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lj8Kg-0002pm-Sd; Tue, 18 May 2021 22:36:58 +0000
+	id 1ljGCN-0007wz-Dq; Wed, 19 May 2021 07:00:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1lj8Ke-0002pd-Vr
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 22:36:56 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <yuchao0@huawei.com>) id 1ljGCM-0007ws-At
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 May 2021 07:00:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/hQwveg6bLRySfc1YGnRyoLdTuI6wCqCC2tHijqffzI=; b=ZkUZoHADBugQ5ivP2+a9rTAa6q
- 76qUDFchIbTS3kViuORuKHrFfdtkPgSASX9H5oYF4T3FrmQ7MD6D4s0gjmv+vGug/2tpjdH8q8VGz
- /0AM+dfUvppEYRZ5EZc5gm/QDbH+E3kRqNumO6mbfIk/Xzh3M1l5Kdp9vLp6ht/MoN4E=;
+ bh=4tZ0Nfby+lkBFhqlzw7w7eIpAi5XEaABqFWjOf0ekpY=; b=llNuaS3YUqSf+1s8oUEE1sEfTd
+ XrQ9KosBxY8P3cr+lZ0iVj+D4sHW++WThR3Urk499DVmPjXid5JLE6ZDLupb+UQDLIbcC69/aIsN2
+ UrSCyUC3hJ7K2FFgeUreFpXKF67LpXNyxHEPjkLzja1bI5wHLD6jEbM5HC5XWwhH8B60=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/hQwveg6bLRySfc1YGnRyoLdTuI6wCqCC2tHijqffzI=; b=YN7pcCh39KWBgv4GzSBaU20dUI
- DgTFWNxiq21KyHgUT/2YW7mpPbhdITkS83xksJ7oW9YvkJdiH6QCe+PNTPsPos9OlLsv/tz42MpZ2
- AB7PSQrjfsS4vcMIJNJ6TZTDHny6xTBRwOMrPEwPKY1qAmWbaSTCE+ceuvqHfTZd9dN8=;
-Received: from mail110.syd.optusnet.com.au ([211.29.132.97])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1lj8Kb-0001qU-1I
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 18 May 2021 22:36:58 +0000
-Received: from dread.disaster.area (pa49-195-118-180.pa.nsw.optusnet.com.au
- [49.195.118.180])
- by mail110.syd.optusnet.com.au (Postfix) with ESMTPS id 363BA108858;
- Wed, 19 May 2021 08:36:38 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1lj8KL-002Ymb-Nc; Wed, 19 May 2021 08:36:37 +1000
-Date: Wed, 19 May 2021 08:36:37 +1000
-From: Dave Chinner <david@fromorbit.com>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <20210518223637.GJ2893@dread.disaster.area>
-References: <20210512101639.22278-1-jack@suse.cz>
- <20210512134631.4053-3-jack@suse.cz>
- <20210512152345.GE8606@magnolia>
- <20210513174459.GH2734@quack2.suse.cz>
- <20210513185252.GB9675@magnolia>
- <20210513231945.GD2893@dread.disaster.area>
- <20210514161730.GL9675@magnolia>
+ bh=4tZ0Nfby+lkBFhqlzw7w7eIpAi5XEaABqFWjOf0ekpY=; b=XwksqXfH4NunKsEUAK/4LguRS8
+ e7NtXuIuR6au4xSCQpye/m7JnFD/m+QUQOdnnO1wgGVQ4knf5PyHAH4P9FLhj3U4Mg0Re5qD9rcX9
+ M6K3E9OckSaNTd8SVblQGkoiieIf/tc8/Hs7948OvrbNUVvhuqwR10PFfUMN/sZ4oo6U=;
+Received: from szxga04-in.huawei.com ([45.249.212.190])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1ljGCD-0001Pu-8r
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 May 2021 07:00:54 +0000
+Received: from dggems706-chm.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FlNw30MYRzpfM8;
+ Wed, 19 May 2021 14:57:07 +0800 (CST)
+Received: from dggemx753-chm.china.huawei.com (10.0.44.37) by
+ dggems706-chm.china.huawei.com (10.3.19.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2176.2; Wed, 19 May 2021 15:00:36 +0800
+Received: from [10.136.110.154] (10.136.110.154) by
+ dggemx753-chm.china.huawei.com (10.0.44.37) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2176.2; Wed, 19 May 2021 15:00:35 +0800
+To: Fengnan Chang <changfengnan@vivo.com>, <jaegeuk@kernel.org>,
+ <chao@kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20210518120738.677-1-changfengnan@vivo.com>
+From: Chao Yu <yuchao0@huawei.com>
+Message-ID: <b7b36ec3-a1bf-7473-ae92-4c137bc8248e@huawei.com>
+Date: Wed, 19 May 2021 15:00:35 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210514161730.GL9675@magnolia>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=YKPhNiOx c=1 sm=1 tr=0
- a=xcwBwyABtj18PbVNKPPJDQ==:117 a=xcwBwyABtj18PbVNKPPJDQ==:17
- a=kj9zAlcOel0A:10 a=5FLXtPjwQuUA:10 a=7-415B0cAAAA:8
- a=cLZU_rh0lbdFaG61GT8A:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
+In-Reply-To: <20210518120738.677-1-changfengnan@vivo.com>
+Content-Language: en-US
+X-Originating-IP: [10.136.110.154]
+X-ClientProxiedBy: dggemx704-chm.china.huawei.com (10.1.199.51) To
+ dggemx753-chm.china.huawei.com (10.0.44.37)
+X-CFilter-Loop: Reflected
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1lj8Kb-0001qU-1I
-Subject: Re: [f2fs-dev] [PATCH 03/11] mm: Protect operations adding pages to
- page cache with invalidate_lock
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: vivo.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [45.249.212.190 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1ljGCD-0001Pu-8r
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress: add nocompress extensions
+ support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,113 +90,269 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-ext4@vger.kernel.org, Jan Kara <jack@suse.cz>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Steve French <sfrench@samba.org>,
- Jeff Layton <jlayton@kernel.org>, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, Miklos Szeredi <miklos@szeredi.hu>,
- Ted Tso <tytso@mit.edu>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, May 14, 2021 at 09:17:30AM -0700, Darrick J. Wong wrote:
-> On Fri, May 14, 2021 at 09:19:45AM +1000, Dave Chinner wrote:
-> > On Thu, May 13, 2021 at 11:52:52AM -0700, Darrick J. Wong wrote:
-> > > On Thu, May 13, 2021 at 07:44:59PM +0200, Jan Kara wrote:
-> > > > On Wed 12-05-21 08:23:45, Darrick J. Wong wrote:
-> > > > > On Wed, May 12, 2021 at 03:46:11PM +0200, Jan Kara wrote:
-> > > > > > +->fallocate implementation must be really careful to maintain page cache
-> > > > > > +consistency when punching holes or performing other operations that invalidate
-> > > > > > +page cache contents. Usually the filesystem needs to call
-> > > > > > +truncate_inode_pages_range() to invalidate relevant range of the page cache.
-> > > > > > +However the filesystem usually also needs to update its internal (and on disk)
-> > > > > > +view of file offset -> disk block mapping. Until this update is finished, the
-> > > > > > +filesystem needs to block page faults and reads from reloading now-stale page
-> > > > > > +cache contents from the disk. VFS provides mapping->invalidate_lock for this
-> > > > > > +and acquires it in shared mode in paths loading pages from disk
-> > > > > > +(filemap_fault(), filemap_read(), readahead paths). The filesystem is
-> > > > > > +responsible for taking this lock in its fallocate implementation and generally
-> > > > > > +whenever the page cache contents needs to be invalidated because a block is
-> > > > > > +moving from under a page.
-> > > > > > +
-> > > > > > +->copy_file_range and ->remap_file_range implementations need to serialize
-> > > > > > +against modifications of file data while the operation is running. For blocking
-> > > > > > +changes through write(2) and similar operations inode->i_rwsem can be used. For
-> > > > > > +blocking changes through memory mapping, the filesystem can use
-> > > > > > +mapping->invalidate_lock provided it also acquires it in its ->page_mkwrite
-> > > > > > +implementation.
-> > > > > 
-> > > > > Question: What is the locking order when acquiring the invalidate_lock
-> > > > > of two different files?  Is it the same as i_rwsem (increasing order of
-> > > > > the struct inode pointer) or is it the same as the XFS MMAPLOCK that is
-> > > > > being hoisted here (increasing order of i_ino)?
-> > > > > 
-> > > > > The reason I ask is that remap_file_range has to do that, but I don't
-> > > > > see any conversions for the xfs_lock_two_inodes(..., MMAPLOCK_EXCL)
-> > > > > calls in xfs_ilock2_io_mmap in this series.
-> > > > 
-> > > > Good question. Technically, I don't think there's real need to establish a
-> > > > single ordering because locks among different filesystems are never going
-> > > > to be acquired together (effectively each lock type is local per sb and we
-> > > > are free to define an ordering for each lock type differently). But to
-> > > > maintain some sanity I guess having the same locking order for doublelock
-> > > > of i_rwsem and invalidate_lock makes sense. Is there a reason why XFS uses
-> > > > by-ino ordering? So that we don't have to consider two different orders in
-> > > > xfs_lock_two_inodes()...
-> > > 
-> > > I imagine Dave will chime in on this, but I suspect the reason is
-> > > hysterical raisins^Wreasons.
-> > 
-> > It's the locking rules that XFS has used pretty much forever.
-> > Locking by inode number always guarantees the same locking order of
-> > two inodes in the same filesystem, regardless of the specific
-> > in-memory instances of the two inodes.
-> > 
-> > e.g. if we lock based on the inode structure address, in one
-> > instancex, we could get A -> B, then B gets recycled and
-> > reallocated, then we get B -> A as the locking order for the same
-> > two inodes.
-> > 
-> > That, IMNSHO, is utterly crazy because with non-deterministic inode
-> > lock ordered like this you can't make consistent locking rules for
-> > locking the physical inode cluster buffers underlying the inodes in
-> > the situation where they also need to be locked.
+On 2021/5/18 20:07, Fengnan Chang wrote:
+> When we create a directory with enable compression, all file write into
+> directory will try to compress.But sometimes we may know, new file
+> cannot meet compression ratio requirements.
+> We need a nocompress extension to skip those files to avoid unnecessary
+> compress page test.
 > 
-> <nod> That's protected by the ILOCK, correct?
+> After add nocompress_extension, the priority should be:
+> dir_flag < comp_extention,nocompress_extension < comp_file_flag,
+> no_comp_file_flag.
 > 
-> > We've been down this path before more than a decade ago when the
-> > powers that be decreed that inode locking order is to be "by
-> > structure address" rather than inode number, because "inode number
-> > is not unique across multiple superblocks".
-> > 
-> > I'm not sure that there is anywhere that locks multiple inodes
-> > across different superblocks, but here we are again....
+> For example:
+> 1.If dir is set compress, the default file and compress_extension
+> specified file will compress, and nocompress_extension specified file
+> will nocompress.
+> 2.If dir is set not compress, the default file and nocompress_extension
+> specified file will not compress, but compress_extension specified file
+> will compress.
+> 3.We can change compress attribute regardless of the file in which type
+> of dir and  specified or not.
 > 
-> Hm.  Are there situations where one would want to lock multiple
-> /mappings/ across different superblocks?  The remapping code doesn't
-> allow cross-super operations, so ... pipes and splice, maybe?  I don't
-> remember that code well enough to say for sure.
+> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+> ---
+>   Documentation/filesystems/f2fs.rst | 18 +++++++
+>   fs/f2fs/f2fs.h                     |  2 +
+>   fs/f2fs/namei.c                    | 18 +++++--
+>   fs/f2fs/super.c                    | 79 +++++++++++++++++++++++++++++-
+>   4 files changed, 113 insertions(+), 4 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 992bf91eeec8..cf162409fc01 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -281,6 +281,24 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
+>   			 For other files, we can still enable compression via ioctl.
+>   			 Note that, there is one reserved special extension '*', it
+>   			 can be set to enable compression for all files.
+> +nocompress_extension=%s	   Support adding specified extension, so that f2fs can disable
+> +			 compression on those corresponding files, just contrary to compression extension.
+> +			 If you know exactly which files cannot be compressed, you can use this.
+> +			 The same extension name can't appear in both compress and nocompress
+> +			 extension at the same time.
+> +			 If the compress extension specifies all files, the types specified by the
+> +			 nocompress extension will be treated as special cases and will not be compressed.
+> +			 Don't allow use '*' to specifie all file in nocompress extension.
 
-Hmmmm. Doing read IO into a buffer that is mmap()d from another
-file, and we take a page fault on it inside the read IO path? We're
-copying from a page in one mapping and taking a fault in another
-mapping and hence taking the invalidate_lock to populate the page
-cache for the second mapping...
+IIUC, it seems the code doesn't cover this case?
 
-I haven't looked closely enough at where the invalidate_lock is held
-in the read path to determine if this is an issue, but if it is then
-it is also a potential deadlock scenario...
+Thanks,
 
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+> +			 After add nocompress_extension, the priority should be:
+> +			 dir_flag < comp_extention,nocompress_extension < comp_file_flag,no_comp_file_flag.
+> +			 For example:
+> +			 1.If dir is set compress, the default file and compress_extension specified file
+> +			 will compress, and nocompress_extension specified file will nocompress.
+> +			 2.If dir is set not compress, the default file and nocompress_extension specified
+> +			 file will not compress, but compress_extension specified file will compress.
+> +			 3.We can change compress attribute regardless of the file in which type of dir
+> +			 and specified or not.
+> +
+>   compress_chksum		 Support verifying chksum of raw data in compressed cluster.
+>   compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
+>   			 modes. In "fs" mode (default), f2fs does automatic compression
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index c83d90125ebd..1c1215f06f68 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -150,8 +150,10 @@ struct f2fs_mount_info {
+>   	unsigned char compress_level;		/* compress level */
+>   	bool compress_chksum;			/* compressed data chksum */
+>   	unsigned char compress_ext_cnt;		/* extension count */
+> +	unsigned char nocompress_ext_cnt;		/* nocompress extension count */
+>   	int compress_mode;			/* compression mode */
+>   	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
+> +	unsigned char noextensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN]; /* extensions */
+>   };
+>   
+>   #define F2FS_FEATURE_ENCRYPT		0x0001
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index a9cd9cf97229..b57b41d7799e 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -279,14 +279,16 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+>   						const unsigned char *name)
+>   {
+>   	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> +	unsigned char (*noext)[F2FS_EXTENSION_LEN] = F2FS_OPTION(sbi).noextensions;
+>   	unsigned char (*ext)[F2FS_EXTENSION_LEN];
+> -	unsigned int ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
+> +	unsigned char ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
+> +	unsigned char noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+>   	int i, cold_count, hot_count;
+>   
+>   	if (!f2fs_sb_has_compression(sbi) ||
+> -			is_inode_flag_set(inode, FI_COMPRESSED_FILE) ||
+>   			F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
+> -			!f2fs_may_compress(inode))
+> +			!f2fs_may_compress(inode) ||
+> +			(!ext_cnt && !noext_cnt))
+>   		return;
+>   
+>   	down_read(&sbi->sb_lock);
+> @@ -303,6 +305,16 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+>   
+>   	up_read(&sbi->sb_lock);
+>   
+> +	for (i = 0; i < noext_cnt; i++) {
+> +		if (is_extension_exist(name, noext[i])) {
+> +			f2fs_disable_compressed_file(inode);
+> +			return;
+> +		}
+> +	}
+> +
+> +	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE))
+> +		return;
+> +
+>   	ext = F2FS_OPTION(sbi).extensions;
+>   
+>   	for (i = 0; i < ext_cnt; i++) {
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 7d325bfaf65a..d38e2e4d7da3 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -148,6 +148,7 @@ enum {
+>   	Opt_compress_algorithm,
+>   	Opt_compress_log_size,
+>   	Opt_compress_extension,
+> +	Opt_nocompress_extension,
+>   	Opt_compress_chksum,
+>   	Opt_compress_mode,
+>   	Opt_atgc,
+> @@ -222,6 +223,7 @@ static match_table_t f2fs_tokens = {
+>   	{Opt_compress_algorithm, "compress_algorithm=%s"},
+>   	{Opt_compress_log_size, "compress_log_size=%u"},
+>   	{Opt_compress_extension, "compress_extension=%s"},
+> +	{Opt_nocompress_extension, "nocompress_extension=%s"},
+>   	{Opt_compress_chksum, "compress_chksum"},
+>   	{Opt_compress_mode, "compress_mode=%s"},
+>   	{Opt_atgc, "atgc"},
+> @@ -473,6 +475,43 @@ static int f2fs_set_test_dummy_encryption(struct super_block *sb,
+>   }
+>   
+>   #ifdef CONFIG_F2FS_FS_COMPRESSION
+> +/*
+> + * 1. The same extension name cannot not appear in both compress and non-compress extension
+> + * at the same time.
+> + * 2. If the compress extension specifies all files, the types specified by the non-compress
+> + * extension will be treated as special cases and will not be compressed.
+> + * 3. Don't allow the non-compress extension specifies all files.
+> + */
+> +static int f2fs_test_compress_extension(struct f2fs_sb_info *sbi)
+> +{
+> +	unsigned char (*ext)[F2FS_EXTENSION_LEN];
+> +	unsigned char (*noext)[F2FS_EXTENSION_LEN];
+> +	int ext_cnt, noext_cnt, index = 0, no_index = 0;
+> +
+> +	ext = F2FS_OPTION(sbi).extensions;
+> +	ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
+> +	noext = F2FS_OPTION(sbi).noextensions;
+> +	noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+> +
+> +	if (!ext_cnt || !noext_cnt)
+> +		return 0;
+> +
+> +	for (no_index = 0; no_index < noext_cnt; no_index++) {
+> +		if (!strcasecmp("*", noext[no_index])) {
+> +			f2fs_info(sbi, "Don't allow the non-compress extension specifies all files");
+> +			return -EINVAL;
+> +		}
+> +		for (index = 0; index < ext_cnt; index++) {
+> +			if (!strcasecmp(ext[index], noext[no_index])) {
+> +				f2fs_info(sbi, "Don't allow the same extension %s appear in both compress and non-compress extension",
+> +						ext[index]);
+> +				return -EINVAL;
+> +			}
+> +		}
+> +	}
+> +	return 0;
+> +}
+> +
+>   #ifdef CONFIG_F2FS_FS_LZ4
+>   static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
+>   {
+> @@ -546,7 +585,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   	substring_t args[MAX_OPT_ARGS];
+>   #ifdef CONFIG_F2FS_FS_COMPRESSION
+>   	unsigned char (*ext)[F2FS_EXTENSION_LEN];
+> -	int ext_cnt;
+> +	unsigned char (*noext)[F2FS_EXTENSION_LEN];
+> +	int ext_cnt, noext_cnt;
+>   #endif
+>   	char *p, *name;
+>   	int arg = 0;
+> @@ -1049,6 +1089,30 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   			F2FS_OPTION(sbi).compress_ext_cnt++;
+>   			kfree(name);
+>   			break;
+> +		case Opt_nocompress_extension:
+> +			if (!f2fs_sb_has_compression(sbi)) {
+> +				f2fs_info(sbi, "Image doesn't support compression");
+> +				break;
+> +			}
+> +			name = match_strdup(&args[0]);
+> +			if (!name)
+> +				return -ENOMEM;
+> +
+> +			noext = F2FS_OPTION(sbi).noextensions;
+> +			noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+> +
+> +			if (strlen(name) >= F2FS_EXTENSION_LEN ||
+> +				noext_cnt >= COMPRESS_EXT_NUM) {
+> +				f2fs_err(sbi,
+> +					"invalid extension length/number");
+> +				kfree(name);
+> +				return -EINVAL;
+> +			}
+> +
+> +			strcpy(noext[noext_cnt], name);
+> +			F2FS_OPTION(sbi).nocompress_ext_cnt++;
+> +			kfree(name);
+> +			break;
+>   		case Opt_compress_chksum:
+>   			F2FS_OPTION(sbi).compress_chksum = true;
+>   			break;
+> @@ -1070,6 +1134,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   		case Opt_compress_algorithm:
+>   		case Opt_compress_log_size:
+>   		case Opt_compress_extension:
+> +		case Opt_nocompress_extension:
+>   		case Opt_compress_chksum:
+>   		case Opt_compress_mode:
+>   			f2fs_info(sbi, "compression options not supported");
+> @@ -1122,6 +1187,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   	}
+>   #endif
+>   
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	if (f2fs_test_compress_extension(sbi)) {
+> +		f2fs_err(sbi, "invalid compress or nocompress extension");
+> +		return -EINVAL;
+> +	}
+> +#endif
+> +
+>   	if (F2FS_IO_SIZE_BITS(sbi) && !f2fs_lfs_mode(sbi)) {
+>   		f2fs_err(sbi, "Should set mode=lfs with %uKB-sized IO",
+>   			 F2FS_IO_SIZE_KB(sbi));
+> @@ -1665,6 +1737,11 @@ static inline void f2fs_show_compress_options(struct seq_file *seq,
+>   			F2FS_OPTION(sbi).extensions[i]);
+>   	}
+>   
+> +	for (i = 0; i < F2FS_OPTION(sbi).nocompress_ext_cnt; i++) {
+> +		seq_printf(seq, ",nocompress_extension=%s",
+> +			F2FS_OPTION(sbi).noextensions[i]);
+> +	}
+> +
+>   	if (F2FS_OPTION(sbi).compress_chksum)
+>   		seq_puts(seq, ",compress_chksum");
+>   
+> 
 
 
 _______________________________________________
