@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E91E388C33
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 May 2021 12:57:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83D37389B4B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 May 2021 04:21:54 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ljJtT-0002MS-Ss; Wed, 19 May 2021 10:57:39 +0000
+	id 1ljYJk-0002xW-Tc; Thu, 20 May 2021 02:21:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jack@suse.cz>) id 1ljJtR-0002MK-VE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 May 2021 10:57:37 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ljYJj-0002xH-3K
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 May 2021 02:21:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5RwXlNTFTROAhTUuGmyqEqzhTd2dRi4xl3I2fjWbu/U=; b=D5jRw9YTrGTnOUWeMi0bB0wYGw
- mMqLnL5hAOiBIUVqmRnRBbT09Iu3HpMxzp6/mtHKI8yOnl4c4km02VMXrJu7AeWMrrrXwSNZEkuMo
- llparccimEdwmc/4qDICIWDYwRHPhys5eq+yVySizas7uDLWUlynrJjpaqvIv5YfIJCU=;
+ bh=sa1ihMlfMwOU+aHeQoLkMEb31y1zhWJrjRNbQbmVaAo=; b=fhuO2MoF4zXnUCK1uBvsN/XvOw
+ bRMGud0w+KyTWngai6fijpjG7WMuwkrgkx7T0aLWgwJCamRHsFPUN/wKf+rNL5nYT/Mls/HCanikq
+ 0jJIaBzHAzyfJp8zLfhfR6R3UtsibZspIqK0EP+XVIY9JbM1McHAKllyCPLHGFINPW80=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,51 +29,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5RwXlNTFTROAhTUuGmyqEqzhTd2dRi4xl3I2fjWbu/U=; b=byu6HwEMqCGnlZJ6v/Lwnt2xe6
- Qkibwm+ldWIiEbjpjDwY0Xrg4HeSiOXgNQBbqJCEBBJt9Iod/CZIFvL+k8Vq5aC4iTfmkZ6PNwnsg
- eZLfvBd41mPOxHuTigk7AkoVfkeDn1YhYiOOixMe9nUi/DduvuLHi6w4y1bZ3MAwycaU=;
-Received: from mx2.suse.de ([195.135.220.15])
+ bh=sa1ihMlfMwOU+aHeQoLkMEb31y1zhWJrjRNbQbmVaAo=; b=MKl7qQnkX7xIl9KEL92hOVCugb
+ sqe3BCcUB/OBgWdX0Mt3wFoHPRcs4fSDrGfRiiCWdtZrSzzwHeAzRW7UWtJNdv5a8JUPS2Oz5DF8Z
+ fGHPub4O1l3pSNLBi+mIvbQLTQGmw3jjlPRr+PP8bn8s+5tBoByGrCEaeafO+YJnWNoM=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.2)
- id 1ljJtF-00Ewes-HG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 19 May 2021 10:57:38 +0000
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B6396AC4B;
- Wed, 19 May 2021 10:57:15 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id 086AA1F2C9C; Wed, 19 May 2021 12:57:14 +0200 (CEST)
-Date: Wed, 19 May 2021 12:57:14 +0200
-From: Jan Kara <jack@suse.cz>
-To: Dave Chinner <david@fromorbit.com>
-Message-ID: <20210519105713.GA26250@quack2.suse.cz>
-References: <20210512101639.22278-1-jack@suse.cz>
- <20210512134631.4053-3-jack@suse.cz>
- <20210512152345.GE8606@magnolia>
- <20210513174459.GH2734@quack2.suse.cz>
- <20210513185252.GB9675@magnolia>
- <20210513231945.GD2893@dread.disaster.area>
- <20210514161730.GL9675@magnolia>
- <20210518223637.GJ2893@dread.disaster.area>
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
+ id 1ljYJb-00Fxh4-6e
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 May 2021 02:21:43 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A4EA1600D4;
+ Thu, 20 May 2021 02:21:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1621477284;
+ bh=X3koKCLC+avhcUq5LIhuIMwo5prbUOSv/lL4soFLiqg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=JyDCftab3Al1BDq/C7BFslb3ybYS1rwz8HgS8gPkFrNg4j4al4QNBnl9eh+b1h6Zf
+ jDkZ18BWkYNp8/YmpuiLmtYtFfWweF4W1L65xPxkwH3MtLuUJS6AXO/mu17Yx0y85L
+ SEKmGhq3O+s1R8rM23dI03qVNVC+F+TR+pM7fgieQsdwwhfToa531Is9aH0GUaf/Jz
+ GUiRu7D+CQjSugQxxk3x07Sfu7fhh2UFqxUB/V3S+xZd/nRBSIoSirwyiD3cEm8cMA
+ dCGIA7D6azUN2hEkliyQQzD0g5YUMx7xLv/EI9wLkPTsy1KY+8QHnLNOH+AcoSgZJZ
+ p1UTLZMgJRnew==
+Date: Wed, 19 May 2021 19:21:23 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YKXHo0LAdE5fa77J@google.com>
+References: <20210518095458.99728-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210518223637.GJ2893@dread.disaster.area>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20210518095458.99728-1-yuchao0@huawei.com>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [195.135.220.15 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ljJtF-00Ewes-HG
-Subject: Re: [f2fs-dev] [PATCH 03/11] mm: Protect operations adding pages to
- page cache with invalidate_lock
+ for more information. [URIs: huawei.com]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ljYJb-00Fxh4-6e
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: compress: fix to disallow wildcard
+ extension for hot/cold file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,118 +86,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-ext4@vger.kernel.org, Jan Kara <jack@suse.cz>,
- "Darrick J. Wong" <darrick.wong@oracle.com>,
- "Darrick J. Wong" <djwong@kernel.org>, Steve French <sfrench@samba.org>,
- Jeff Layton <jlayton@kernel.org>, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, Miklos Szeredi <miklos@szeredi.hu>,
- Ted Tso <tytso@mit.edu>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed 19-05-21 08:36:37, Dave Chinner wrote:
-> On Fri, May 14, 2021 at 09:17:30AM -0700, Darrick J. Wong wrote:
-> > On Fri, May 14, 2021 at 09:19:45AM +1000, Dave Chinner wrote:
-> > > On Thu, May 13, 2021 at 11:52:52AM -0700, Darrick J. Wong wrote:
-> > > > On Thu, May 13, 2021 at 07:44:59PM +0200, Jan Kara wrote:
-> > > > > On Wed 12-05-21 08:23:45, Darrick J. Wong wrote:
-> > > > > > On Wed, May 12, 2021 at 03:46:11PM +0200, Jan Kara wrote:
-> > > > > > > +->fallocate implementation must be really careful to maintain page cache
-> > > > > > > +consistency when punching holes or performing other operations that invalidate
-> > > > > > > +page cache contents. Usually the filesystem needs to call
-> > > > > > > +truncate_inode_pages_range() to invalidate relevant range of the page cache.
-> > > > > > > +However the filesystem usually also needs to update its internal (and on disk)
-> > > > > > > +view of file offset -> disk block mapping. Until this update is finished, the
-> > > > > > > +filesystem needs to block page faults and reads from reloading now-stale page
-> > > > > > > +cache contents from the disk. VFS provides mapping->invalidate_lock for this
-> > > > > > > +and acquires it in shared mode in paths loading pages from disk
-> > > > > > > +(filemap_fault(), filemap_read(), readahead paths). The filesystem is
-> > > > > > > +responsible for taking this lock in its fallocate implementation and generally
-> > > > > > > +whenever the page cache contents needs to be invalidated because a block is
-> > > > > > > +moving from under a page.
-> > > > > > > +
-> > > > > > > +->copy_file_range and ->remap_file_range implementations need to serialize
-> > > > > > > +against modifications of file data while the operation is running. For blocking
-> > > > > > > +changes through write(2) and similar operations inode->i_rwsem can be used. For
-> > > > > > > +blocking changes through memory mapping, the filesystem can use
-> > > > > > > +mapping->invalidate_lock provided it also acquires it in its ->page_mkwrite
-> > > > > > > +implementation.
-> > > > > > 
-> > > > > > Question: What is the locking order when acquiring the invalidate_lock
-> > > > > > of two different files?  Is it the same as i_rwsem (increasing order of
-> > > > > > the struct inode pointer) or is it the same as the XFS MMAPLOCK that is
-> > > > > > being hoisted here (increasing order of i_ino)?
-> > > > > > 
-> > > > > > The reason I ask is that remap_file_range has to do that, but I don't
-> > > > > > see any conversions for the xfs_lock_two_inodes(..., MMAPLOCK_EXCL)
-> > > > > > calls in xfs_ilock2_io_mmap in this series.
-> > > > > 
-> > > > > Good question. Technically, I don't think there's real need to establish a
-> > > > > single ordering because locks among different filesystems are never going
-> > > > > to be acquired together (effectively each lock type is local per sb and we
-> > > > > are free to define an ordering for each lock type differently). But to
-> > > > > maintain some sanity I guess having the same locking order for doublelock
-> > > > > of i_rwsem and invalidate_lock makes sense. Is there a reason why XFS uses
-> > > > > by-ino ordering? So that we don't have to consider two different orders in
-> > > > > xfs_lock_two_inodes()...
-> > > > 
-> > > > I imagine Dave will chime in on this, but I suspect the reason is
-> > > > hysterical raisins^Wreasons.
-> > > 
-> > > It's the locking rules that XFS has used pretty much forever.
-> > > Locking by inode number always guarantees the same locking order of
-> > > two inodes in the same filesystem, regardless of the specific
-> > > in-memory instances of the two inodes.
-> > > 
-> > > e.g. if we lock based on the inode structure address, in one
-> > > instancex, we could get A -> B, then B gets recycled and
-> > > reallocated, then we get B -> A as the locking order for the same
-> > > two inodes.
-> > > 
-> > > That, IMNSHO, is utterly crazy because with non-deterministic inode
-> > > lock ordered like this you can't make consistent locking rules for
-> > > locking the physical inode cluster buffers underlying the inodes in
-> > > the situation where they also need to be locked.
-> > 
-> > <nod> That's protected by the ILOCK, correct?
-> > 
-> > > We've been down this path before more than a decade ago when the
-> > > powers that be decreed that inode locking order is to be "by
-> > > structure address" rather than inode number, because "inode number
-> > > is not unique across multiple superblocks".
-> > > 
-> > > I'm not sure that there is anywhere that locks multiple inodes
-> > > across different superblocks, but here we are again....
-> > 
-> > Hm.  Are there situations where one would want to lock multiple
-> > /mappings/ across different superblocks?  The remapping code doesn't
-> > allow cross-super operations, so ... pipes and splice, maybe?  I don't
-> > remember that code well enough to say for sure.
-> 
-> Hmmmm. Doing read IO into a buffer that is mmap()d from another
-> file, and we take a page fault on it inside the read IO path? We're
-> copying from a page in one mapping and taking a fault in another
-> mapping and hence taking the invalidate_lock to populate the page
-> cache for the second mapping...
-> 
-> I haven't looked closely enough at where the invalidate_lock is held
-> in the read path to determine if this is an issue, but if it is then
-> it is also a potential deadlock scenario...
+On 05/18, Chao Yu wrote:
+> If all files are hot or cold, hot/cold separation is not needed anymore,
+> so let's disallow configure wildcard extension.
 
-I was careful enough to avoid this problem - we first bring pages into
-pages cache (under invalidate_lock), then drop invalidate lock, just
-keep page refs, and copy page cache content into the buffer (which may grab
-invalidate_lock from another mapping as you say).
+We need to be able to set hot/cold on the fly?
 
-								Honza
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+> 
+> Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+>  fs/f2fs/f2fs.h  |  1 +
+>  fs/f2fs/namei.c | 12 ++++++++----
+>  fs/f2fs/sysfs.c |  3 +++
+>  3 files changed, 12 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index b753cc88c77e..ecb13c3b458d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3322,6 +3322,7 @@ void f2fs_handle_failed_inode(struct inode *inode);
+>  /*
+>   * namei.c
+>   */
+> +bool f2fs_is_wildcard_char(const char *ext);
+>  int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+>  							bool hot, bool set);
+>  struct dentry *f2fs_get_parent(struct dentry *child);
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index a9cd9cf97229..8d78b96a8b3b 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -153,15 +153,17 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
+>  	return ERR_PTR(err);
+>  }
+>  
+> +bool f2fs_is_wildcard_char(const char *ext)
+> +{
+> +	return *ext == '*' && strlen(ext) == 1;
+> +}
+> +
+>  static inline int is_extension_exist(const unsigned char *s, const char *sub)
+>  {
+>  	size_t slen = strlen(s);
+>  	size_t sublen = strlen(sub);
+>  	int i;
+>  
+> -	if (sublen == 1 && *sub == '*')
+> -		return 1;
+> -
+>  	/*
+>  	 * filename format of multimedia file should be defined as:
+>  	 * "filename + '.' + extension + (optional: '.' + temp extension)".
+> @@ -306,9 +308,11 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+>  	ext = F2FS_OPTION(sbi).extensions;
+>  
+>  	for (i = 0; i < ext_cnt; i++) {
+> +		if (f2fs_is_wildcard_char(ext[i]))
+> +			goto set_compress;
+>  		if (!is_extension_exist(name, ext[i]))
+>  			continue;
+> -
+> +set_compress:
+>  		set_compress_context(inode);
+>  		return;
+>  	}
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index dc71bc968c72..ff5acb4de1b6 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -343,6 +343,9 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>  		if (strlen(name) >= F2FS_EXTENSION_LEN)
+>  			return -EINVAL;
+>  
+> +		if (f2fs_is_wildcard_char(name))
+> +			return -EINVAL;
+> +
+>  		down_write(&sbi->sb_lock);
+>  
+>  		ret = f2fs_update_extension_list(sbi, name, hot, set);
+> -- 
+> 2.29.2
 
 
 _______________________________________________
