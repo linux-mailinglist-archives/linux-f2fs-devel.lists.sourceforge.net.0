@@ -2,59 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52ACE38CDD8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 May 2021 21:02:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67F4E38CDD9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 May 2021 21:02:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lkAQ0-0006KU-D5; Fri, 21 May 2021 19:02:44 +0000
+	id 1lkAQ9-0003OC-9T; Fri, 21 May 2021 19:02:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lkAPz-0006KL-17
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 19:02:43 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1lkAQ7-0003O5-St
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 19:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+n895/c/46BH4yndA70M3g8EXU06Bxj196JGwXNPNPA=; b=Je1UbklOFLn6t0wdHG6St9lkC+
- mPfIWYgBsqM6iW5j6K01bBJJWxmtbC+QCvrHe2/zO2+u0pWTHV/W8eQvz5bDRTrJ7DSTz+8dFTaiS
- wQBctk2mnFbU9Da84eyGeWxtQrrFpNqrowwaBaMudhBSN9r6uiDvrgijLRknODDUtG5A=;
+ bh=G144qf9Ro9/94i+CjMqScI6v4Ok+4gIxxZ4KuL/yVGk=; b=FBW0DR7D8RMnS7g4g+HMx4iyvA
+ HFCgEjLtZTP1++8tdiSfT6sfPI9Xur39RqPALRzWjCxsDNb3ydiYJVtg9qavnQ2MOJrB6mzfBkCVy
+ wqjwu2GcI+wJICZkhzoF58W5kYF7hoPUraE39LjKb1UbnRriivyBFnvjM0fKZatThzuQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=+n895/c/46BH4yndA70M3g8EXU06Bxj196JGwXNPNPA=; b=e
- f/S/mXgqQST2hqhrTAIySL30W8gNcbmeSYQsJ2EHeSLyYKMNGfd94JCFCtEwqVYSC8FR2qAH4gr7F
- LsejR43TUzPWcdqBVrM4TOmXaC3BRFWmp8UdaLLTYjDEr9b1fgRII28F/ju3IApL5ai4/QaMw5nZv
- vIlOBRv4dHKe9VY4=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=G144qf9Ro9/94i+CjMqScI6v4Ok+4gIxxZ4KuL/yVGk=; b=NG3/mlvwYcUpXcyogv3BEfx1Go
+ vBjDxjFO0osfWJB8ieA6PgYebq3QE1N1LldSFITx59pmqqBoa5TQs7nhCbU2viGKNvEzJz++gQOqB
+ 6Qe8V3ckstUdmca0X8v93byUcul1wzxTfu0TXgQzKoiHmOi895HOeb7bavOGp40eBJ14=;
 Received: from [198.145.29.99] (helo=mail.kernel.org)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lkAPt-0006KH-R1
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 19:02:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5D98D613AD;
- Fri, 21 May 2021 19:02:23 +0000 (UTC)
+ id 1lkAPt-0006KO-R1
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 19:02:51 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id ED6FE613AE;
+ Fri, 21 May 2021 19:02:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1621623743;
- bh=PwYVEBdAYioTg9dJDanRYBbNY1d6VzNe8pGxwNgHwts=;
- h=From:To:Cc:Subject:Date:From;
- b=Z6pBlx9PqRwpvhLSpS84t22o70Jagai7OtGqHdaPV+fIYO5XMz1N/8T7Y09nXFFpg
- 9Xe5GPyKesQTFirhUtEyFp9Npa+tHN0GMPSt7EenGDbQQHnqdziXFuFisgd6Y80mPd
- B4je9HWSH56F2nC/Y0A26eeB/lnq93i2W13D55snJP0FdJkX5L+32CcFJlNm2HvDn8
- iDlr191ukjmJm70oPL+tERx5bJdf+WHDklvTUbY6ur8+zYQ5ISdjaLfeTQUOncryiN
- Zb+yuh9HETAuuTca0yIUZS8OoJvCMQ4r3awG/SqYztbThqjVNubiKub4axbdq4xH3C
- ZNNCtxofktY3Q==
+ s=k20201202; t=1621623745;
+ bh=9dAAYfGKlNm1d/kBz0TkpkWwC4KouaitkPn8vJ/1a6Q=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Xt5vcR/DDiR1T1LcTgnw5qeu+MizIbc/PNjevzEC6oIny+YrIjO4cJvD7fNr7tr8W
+ wIPRURguKitlWE2VUmV2gl3XnVjAUEzrataJSmrraPhoI64QOKf2yCuvP8cK/EZNxR
+ dt0JPWjLns7EikxKTL7/NNf9cExiEDpZjdlcYdLUXKrajRNmfPowt+AkcM1a4ULb19
+ KG3DSRRyt5hhlJjwdtHDWPhEGhYxE+I4I2Oi2VzoZ/UGRO9E2LHWYRZrYkILfi2SW2
+ ykEsPO+/e0SsJ+/LWaLQSm4TjEqNUk+jqQuW+uGhEKZ1Qt97RLAG91F/UShxLBefFt
+ r8+LC3UQOfQjw==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 21 May 2021 12:02:16 -0700
-Message-Id: <20210521190217.2484099-1-jaegeuk@kernel.org>
+Date: Fri, 21 May 2021 12:02:17 -0700
+Message-Id: <20210521190217.2484099-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.31.1.818.g46aad6cb9e-goog
+In-Reply-To: <20210521190217.2484099-1-jaegeuk@kernel.org>
+References: <20210521190217.2484099-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -68,9 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lkAPt-0006KH-R1
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: immutable file can have null address
- in compressed chunk
+X-Headers-End: 1lkAPt-0006KO-R1
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: support RO feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,28 +88,150 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If we released compressed blocks having an immutable bit, we can see less
-number of compressed block addresses. Let's fix wrong BUG_ON.
+Given RO feature in superblock, we don't need to check provisioning/reserve
+spaces and SSA area.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/compress.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ fs/f2fs/f2fs.h    |  2 ++
+ fs/f2fs/segment.c |  3 +++
+ fs/f2fs/super.c   | 35 +++++++++++++++++++++++++++++++----
+ 3 files changed, 36 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index d4f7371fb0d8..1189740aa141 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -927,7 +927,8 @@ static int __f2fs_cluster_blocks(struct inode *inode,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index c0bead0df66a..2c6913261586 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -168,6 +168,7 @@ struct f2fs_mount_info {
+ #define F2FS_FEATURE_SB_CHKSUM		0x0800
+ #define F2FS_FEATURE_CASEFOLD		0x1000
+ #define F2FS_FEATURE_COMPRESSION	0x2000
++#define F2FS_FEATURE_RO			0x4000
+ 
+ #define __F2FS_HAS_FEATURE(raw_super, mask)				\
+ 	((raw_super->feature & cpu_to_le32(mask)) != 0)
+@@ -939,6 +940,7 @@ static inline void set_new_dnode(struct dnode_of_data *dn, struct inode *inode,
+ #define	NR_CURSEG_DATA_TYPE	(3)
+ #define NR_CURSEG_NODE_TYPE	(3)
+ #define NR_CURSEG_INMEM_TYPE	(2)
++#define NR_CURSEG_RO_TYPE	(2)
+ #define NR_CURSEG_PERSIST_TYPE	(NR_CURSEG_DATA_TYPE + NR_CURSEG_NODE_TYPE)
+ #define NR_CURSEG_TYPE		(NR_CURSEG_INMEM_TYPE + NR_CURSEG_PERSIST_TYPE)
+ 
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 8668df7870d0..67cec8f858a2 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4674,6 +4674,9 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+ {
+ 	int i;
+ 
++	if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO))
++		return 0;
++
+ 	/*
+ 	 * In LFS/SSR curseg, .next_blkoff should point to an unused blkaddr;
+ 	 * In LFS curseg, all blkaddr after .next_blkoff should be unused.
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b29de80ab60e..312bfab54693 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1819,7 +1819,11 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ static void default_options(struct f2fs_sb_info *sbi)
+ {
+ 	/* init some FS parameters */
+-	F2FS_OPTION(sbi).active_logs = NR_CURSEG_PERSIST_TYPE;
++	if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO))
++		F2FS_OPTION(sbi).active_logs = NR_CURSEG_RO_TYPE;
++	else
++		F2FS_OPTION(sbi).active_logs = NR_CURSEG_PERSIST_TYPE;
++
+ 	F2FS_OPTION(sbi).inline_xattr_size = DEFAULT_INLINE_XATTR_ADDRS;
+ 	F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
+ 	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
+@@ -1994,6 +1998,11 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 	err = parse_options(sb, data, true);
+ 	if (err)
+ 		goto restore_opts;
++
++	if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO) &&
++					!(*flags & SB_RDONLY))
++		goto restore_opts;
++
+ 	checkpoint_changed =
+ 			disable_checkpoint != test_opt(sbi, DISABLE_CHECKPOINT);
+ 
+@@ -3137,16 +3146,18 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
+ 	ovp_segments = le32_to_cpu(ckpt->overprov_segment_count);
+ 	reserved_segments = le32_to_cpu(ckpt->rsvd_segment_count);
+ 
++	if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO))
++		goto no_reserved;
+ 	if (unlikely(fsmeta < F2FS_MIN_META_SEGMENTS ||
+ 			ovp_segments == 0 || reserved_segments == 0)) {
+ 		f2fs_err(sbi, "Wrong layout: check mkfs.f2fs version");
+ 		return 1;
+ 	}
+-
++no_reserved:
+ 	user_block_count = le64_to_cpu(ckpt->user_block_count);
+ 	segment_count_main = le32_to_cpu(raw_super->segment_count_main);
+ 	log_blocks_per_seg = le32_to_cpu(raw_super->log_blocks_per_seg);
+-	if (!user_block_count || user_block_count >=
++	if (!user_block_count || user_block_count >
+ 			segment_count_main << log_blocks_per_seg) {
+ 		f2fs_err(sbi, "Wrong user_block_count: %u",
+ 			 user_block_count);
+@@ -3175,6 +3186,10 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
+ 		if (le32_to_cpu(ckpt->cur_node_segno[i]) >= main_segs ||
+ 			le16_to_cpu(ckpt->cur_node_blkoff[i]) >= blocks_per_seg)
+ 			return 1;
++
++		if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO))
++			goto check_data;
++
+ 		for (j = i + 1; j < NR_CURSEG_NODE_TYPE; j++) {
+ 			if (le32_to_cpu(ckpt->cur_node_segno[i]) ==
+ 				le32_to_cpu(ckpt->cur_node_segno[j])) {
+@@ -3185,10 +3200,15 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
  			}
  		}
- 
--		f2fs_bug_on(F2FS_I_SB(inode), !compr && ret != cluster_size);
-+		f2fs_bug_on(F2FS_I_SB(inode),
-+			!compr && ret != cluster_size && !IS_IMMUTABLE(inode));
  	}
- fail:
- 	f2fs_put_dnode(&dn);
++check_data:
+ 	for (i = 0; i < NR_CURSEG_DATA_TYPE; i++) {
+ 		if (le32_to_cpu(ckpt->cur_data_segno[i]) >= main_segs ||
+ 			le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg)
+ 			return 1;
++
++		if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO))
++			goto skip_cross;
++
+ 		for (j = i + 1; j < NR_CURSEG_DATA_TYPE; j++) {
+ 			if (le32_to_cpu(ckpt->cur_data_segno[i]) ==
+ 				le32_to_cpu(ckpt->cur_data_segno[j])) {
+@@ -3210,7 +3230,7 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
+ 			}
+ 		}
+ 	}
+-
++skip_cross:
+ 	sit_bitmap_size = le32_to_cpu(ckpt->sit_ver_bitmap_bytesize);
+ 	nat_bitmap_size = le32_to_cpu(ckpt->nat_ver_bitmap_bytesize);
+ 
+@@ -3703,6 +3723,13 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	if (err)
+ 		goto free_options;
+ 
++	if (__F2FS_HAS_FEATURE(sbi->raw_super, F2FS_FEATURE_RO) &&
++					!f2fs_readonly(sbi->sb)) {
++		f2fs_info(sbi, "Allow to mount readonly mode only");
++		err = -EINVAL;
++		goto free_options;
++	}
++
+ 	sb->s_maxbytes = max_file_blocks(NULL) <<
+ 				le32_to_cpu(raw_super->log_blocksize);
+ 	sb->s_max_links = F2FS_LINK_MAX;
 -- 
 2.31.1.818.g46aad6cb9e-goog
 
