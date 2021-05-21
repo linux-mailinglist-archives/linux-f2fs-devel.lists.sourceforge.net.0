@@ -2,81 +2,144 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E1E438C215
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 May 2021 10:38:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6F8E38C4FF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 May 2021 12:33:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lk0g0-00037S-Hw; Fri, 21 May 2021 08:38:36 +0000
+	id 1lk2Sp-0005Tx-7d; Fri, 21 May 2021 10:33:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <changfengnan@vivo.com>) id 1lk0fy-00037L-Uv
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 08:38:34 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <dwoo08.lee@samsung.com>) id 1lk2Sn-0005Tm-Q5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 10:33:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:In-Reply-To:References:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G1BeVSmIgDF1aIB9aUwMMeyUt8pX5A4Tx4xhIzHE85Y=; b=IQgtWoFF5Mqn17PRL4omCNztSw
- 3MMqeNK9RPYzH7IpNYdE4j6BGwd7YG7LGlmfBmIQm4uH0w36SZeRg22Iw6m8UVP+oB9yStJ5JSvRI
- iqxayn3b9A4bZIl+ZTXzFjoQS2uPcq/X4GRUjox9l7zYhRwUJLUGi+c5JKsw5Gl15WeE=;
+ bh=43IvwOJnsL9N/6Fzsbz03An+SSdsuDcZ+kUxhZaEFwY=; b=C5tpClOt3Tfpt4oIZvQIIaSqIb
+ 0gIPJ0FI0noGDWJYag1vSI53FpV6WSJM9ScDMdlIlI1tXI0nDK06OvY95o5P3w60IiOuPXFPZKXg2
+ 1qcldmnwrAlcAeddwiP7Le+8tDKNR/5imoUFht0v9k4WFD8Bpwuf3qEjEoFPsT/3ICeQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:In-Reply-To:References:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=G1BeVSmIgDF1aIB9aUwMMeyUt8pX5A4Tx4xhIzHE85Y=; b=mnFZUNC+WWjzIDm4LEcZtNmRc1
- sOd5xgHNkNsbeZmMZ1+8vsH3Mi3MmWCEHxBeaq1OrWmPkEdgfOahlB5xO7T9auHAz+//yogONY7TI
- k4ufq88CBbrmoS8q+lElnRGbOIWG5Et/zeu+ijTEY3mCDSavgrhGCSeQgbdlpfz1v5b8=;
-Received: from mail-m17635.qiye.163.com ([59.111.176.35])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lk0fw-0001vs-CJ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 08:38:37 +0000
-Received: from SZ11126892 (unknown [58.251.74.232])
- by mail-m17635.qiye.163.com (Hmail) with ESMTPA id AE4E64001C6;
- Fri, 21 May 2021 16:38:21 +0800 (CST)
-From: <changfengnan@vivo.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20210518125113.1712-1-changfengnan@vivo.com>
-In-Reply-To: <20210518125113.1712-1-changfengnan@vivo.com>
-Date: Fri, 21 May 2021 16:38:20 +0800
-Message-ID: <002c01d74e1c$a832c7b0$f8985710$@vivo.com>
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
+ :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=43IvwOJnsL9N/6Fzsbz03An+SSdsuDcZ+kUxhZaEFwY=; b=g
+ h2Zr/ZAv+XI2ozJSQJ52HU4hid/KE0CGZtzpK54y/38WEm9m3ud/gq9JTjYiNwcrVokyahGtpNDX7
+ aUffw1wcq9vkaXz+nE2hFZvk9rXXX773597yPxXvMYRQKSZUfm+t07UB7z20J3lcZJui2A/4oFJjt
+ +k0UipeIlq5ygDv4=;
+Received: from mailout2.samsung.com ([203.254.224.25])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lk2Sc-0000cy-To
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 May 2021 10:33:05 +0000
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20210521103249epoutp0290936561ddad65afc33a58f3a9d06fc8~BDmVS2QAG1310313103epoutp02N
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 21 May 2021 10:32:49 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20210521103249epoutp0290936561ddad65afc33a58f3a9d06fc8~BDmVS2QAG1310313103epoutp02N
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1621593169;
+ bh=43IvwOJnsL9N/6Fzsbz03An+SSdsuDcZ+kUxhZaEFwY=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=poUwAy9ggqOKwN4rajclUhfKKjUaE/aaOobVm9zSXLKyOrAk7Ve4LeY0Gfszy7qYQ
+ KOKBv16PntdGXZQFbuQ3+k4eIerRqDixsmHLI39n3r3Y3NsIg3bKNEUMq5eI6rzld4
+ g3vntzsTB826Yw1JIIDOm4biJL1mgQHCYxYOVgIk=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20210521103248epcas1p4e78a9daaf3686c3a7243c5e9aa429848~BDmU3TCu90457204572epcas1p4e;
+ Fri, 21 May 2021 10:32:48 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.40.155]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Fmjby45XYz4x9Ps; Fri, 21 May
+ 2021 10:32:46 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 0A.AE.09578.C4C87A06; Fri, 21 May 2021 19:32:44 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20210521103244epcas1p3ca430731d1ea20559aef4e3e68e49870~BDmQjRywa0927909279epcas1p36;
+ Fri, 21 May 2021 10:32:44 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20210521103244epsmtrp17a6a62f22ec762c0d17343320dd7de7f~BDmQip4711929419294epsmtrp1f;
+ Fri, 21 May 2021 10:32:44 +0000 (GMT)
+X-AuditID: b6c32a35-fcfff7000000256a-e6-60a78c4c0c23
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 40.3D.08637.B4C87A06; Fri, 21 May 2021 19:32:43 +0900 (KST)
+Received: from localhost.localdomain (unknown [10.113.221.208]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20210521103243epsmtip15c3f1ac6d31a439d7403c80d38042b85~BDmQWj_Z20717907179epsmtip1u;
+ Fri, 21 May 2021 10:32:43 +0000 (GMT)
+From: Dongwoo Lee <dwoo08.lee@samsung.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 21 May 2021 19:32:38 +0900
+Message-Id: <20210521103238.261204-1-dwoo08.lee@samsung.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: zh-cn
-Thread-Index: AQHOlVE4bDv6QAxu/j4of1dMYsvDF6r++djQ
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
- oVCBIfWUFZQx1OHVYdTB0aQh5DQkpNTEhVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
- hKTFVLWQY+
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nwg6LBw*Qz8ITi4NMQgVPB40
- OQEKCzxVSlVKTUlKTkNNSEtJSU5JVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
- WU5DVUlOSlVMT1VJSElZV1kIAVlBTUtKTjcG
-X-HM-Tid: 0a798e135385d991kuwsae4e64001c6
-X-Spam-Score: 1.0 (+)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGKsWRmVeSWpSXmKPExsWy7bCmnq5Pz/IEg18HRSxaDtxgtri0yN2B
+ yWP3gs9MHn1bVjEGMEVl22SkJqakFimk5iXnp2TmpdsqeQfHO8ebmhkY6hpaWpgrKeQl5qba
+ Krn4BOi6ZeYAjVdSKEvMKQUKBSQWFyvp29kU5ZeWpCpk5BeX2CqlFqTkFFgW6BUn5haX5qXr
+ JefnWhkaGBiZAhUmZGf8fGJUMEmnYun12SwNjBOVuxg5OSQETCQ2/JnO0sXIxSEksINR4tKf
+ l4wQzidGif6ZPawQzjdGiVVvnrLBtHw4tIgJIrGXUWLbgYfMEM4XRol3HVuBhnFwsAloSez/
+ VQzSIAJkTmz4ywhiMwtoSNw4+RZskLCAnsTRGQdYQGwWAVWJfwuOMIHYvAI2Epc2/2SFWCYv
+ MfPSd3aIuKDEyZlPWCDmyEs0b50NtldCYDK7xLXl6xkhGlwkWg7sgLpUWOLV8S3sELaUxMv+
+ Nii7WqL/wn5WiOYWRom3HddYIBLGEvuXTmYCeYBZQFNi/S59iLCixM7fc6Ee4JN49xUULBxA
+ cV6JjjYhCFNFovkjM8ymde//QQ30kPjw7ixYXEggVuLjzhOsExjlZyH5ZhaSb2Yh7F3AyLyK
+ USy1oDg3PbXYsMAQOU43MYITmJbpDsaJbz/oHWJk4mA8xCjBwawkwsvtuDxBiDclsbIqtSg/
+ vqg0J7X4EKMpMHwnMkuJJucDU2heSbyhqZGxsbGFiaGZqaGhkjhvunN1gpBAemJJanZqakFq
+ EUwfEwenVAOT2NQEn827GZJ313ib7TuxoybV6vhP7u1VhmfTq091hPfumGWYyvy4x+rEhcnv
+ Y/V+eUm9eSfRKfxr7Re3qvelUU9FBGxVLZkall2SyKxnet6ko50fwWnyNzd5Rvj/jw9+LLcs
+ mzfBq2rSjNldWvdrG9g1zuawFS94nl45a++OJJdMoWcnfvw+r5shPD1CQFfS2DI/blrKNf1N
+ s9nTX881eKRnNM9R22Ub2+PwuY8n9LldE19Q6XDx/qMJtwp3G71b2bfiWE/Elwlhn4v33P94
+ 9qGMbOH1T7q6jadWPfsmnL99nYmYXfdRNqfq8tXcp42u3pEuKr3auXxx+bm9ySU1pZf7fe/w
+ +O+f6lmgvqNAiaU4I9FQi7moOBEAClsXXOkDAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpmluLIzCtJLcpLzFFi42LZdlhJTte7Z3mCwbYJVhYtB24wW1xa5O7A
+ 5LF7wWcmj74tqxgDmKK4bFJSczLLUov07RK4Mn4+MSqYpFOx9PpslgbGicpdjJwcEgImEh8O
+ LWLqYuTiEBLYzSjxZOFeti5GDqCElMS/NwIQprDE4cPFECWfGCWOrPrBDhJnE9CS2P+rGGSM
+ CJA5seEvI4jNLKAhcePkWzYQW1hAT+LojAMsIDaLgKrEvwVHmEBsXgEbiUubf7JCnCAvMfPS
+ d3aIuKDEyZlPWCDmyEs0b53NPIGRbxaS1CwkqQWMTKsYJVMLinPTc4sNCwzzUsv1ihNzi0vz
+ 0vWS83M3MYLDSUtzB+P2VR/0DjEycTAeYpTgYFYS4eV2XJ4gxJuSWFmVWpQfX1Sak1p8iFGa
+ g0VJnPdC18l4IYH0xJLU7NTUgtQimCwTB6dUA9P0+MKMyZUVH7tWd7t4dRQsUC6atb/7hVDJ
+ vb6zLEUvVD2+8AtvX8mQdP5nlIVi+i8n06S+cN2UTZn6Et/nnE7sfSkWG7srY+Nk/8ry22bH
+ fn28MHOO4SoPefYZCxNX25Q/XfM/NZG91yh/he7+0PVzVj2ZqRCU/P66yt1GVcbFZteE1i/j
+ 3/U24c3fxZ8Ej7ra/Tw8oyhZcefcTT0B50WzUo+kPDBmd14uLiz7tFVb4J/ttbK4Pw9OtG5e
+ t/KuuBNnkPG5LjWOR/HhTPzT+nQ+bW237VKw+Xh8zaXNnHw8P5ddqPq29fgyz12M26Yq6/pP
+ vtil+8hkpcykmeJCm2aZ6dWx/nvy6vn2srxfl4yVWIozEg21mIuKEwECS2MwlgIAAA==
+X-CMS-MailID: 20210521103244epcas1p3ca430731d1ea20559aef4e3e68e49870
+X-Msg-Generator: CA
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20210521103244epcas1p3ca430731d1ea20559aef4e3e68e49870
+References: <CGME20210521103244epcas1p3ca430731d1ea20559aef4e3e68e49870@epcas1p3.samsung.com>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: vivo.com]
+ for more information. [URIs: makefile.am]
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [59.111.176.35 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [59.111.176.35 listed in list.dnswl.org]
+ [203.254.224.25 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
-X-Headers-End: 1lk0fw-0001vs-CJ
-Subject: [f2fs-dev] =?gb2312?b?tPC4tDogW1JGQyBQQVRDSF0gZjJmczogY29tcHJl?=
-	=?gb2312?b?c3M6IHJlbW92ZSB1bm5lZWRlZCByZWFkIHdoZW4gcmV3cml0ZSB3?=
-	=?gb2312?b?aG9sZSBjbHVzdGVy?=
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lk2Sc-0000cy-To
+Subject: [f2fs-dev] [PATCH v3] tools: Introduce f2fslabel
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,89 +151,235 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGk6CiBBbnkgY29tbWVudHMgZm9yIHRoaXM/CgkKVGhhbmtzLgoKLS0tLS3Tyrz+1K28/i0tLS0t
-CreivP7IyzogRmVuZ25hbiBDaGFuZyA8Y2hhbmdmZW5nbmFuQHZpdm8uY29tPiAKt6LLzcqxvOQ6
-IDIwMjHE6jXUwjE4yNUgMjA6NTEKytW8/sjLOiBqYWVnZXVrQGtlcm5lbC5vcmc7IGNoYW9Aa2Vy
-bmVsLm9yZzsKbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKs63LzTogRmVu
-Z25hbiBDaGFuZyA8Y2hhbmdmZW5nbmFuQHZpdm8uY29tPgrW98ziOiBbUkZDIFBBVENIXSBmMmZz
-OiBjb21wcmVzczogcmVtb3ZlIHVubmVlZGVkIHJlYWQgd2hlbiByZXdyaXRlIHdob2xlCmNsdXN0
-ZXIKCkZvciBub3csd2hlbiBvdmVyd3JpdGUgY29tcHJlc3NlZCBmaWxlLCB3ZSBuZWVkIHJlYWQg
-b2xkIGRhdGEgdG8gcGFnZSBjYWNoZQpmaXJzdCBhbmQgdXBkYXRlIHBhZ2VzLgpCdXQgd2hlbiB3
-ZSBuZWVkIG92ZXJ3cml0ZSB3aG9sZSBjbHVzdGVyLCB3ZSBkb24ndCBuZWVkIG9sZCBkYXRhIGFu
-eW1vcmUuClNvLCBJIHRoaW5rIHdlIGNhbiByZW1vdmUgcmVhZCBkYXRhICBwcm9jZXNzIGluIHRo
-aXMgY2FzZSwgSSBoYXZlIG1hZGUgc29tZQpzaW1wbGUgY2hhbmdlcyB0byB0ZXN0LCB0ZXN0cyBo
-YXZlIHNob3duIHRoYXQgdGhpcyBjYW4gbGVhZCB0byBzaWduaWZpY2FudApwZXJmb3JtYW5jZSBp
-bXByb3ZlbWVudHMsIHRoZSBzcGVlZCBvZiBzZXF1ZW50aWFsIHdyaXRlIHVwIHRvIDJ4LgoKSSBo
-YXZlbid0IGZpZ3VyZWQgb3V0IHRoZSB3aG9sZSBwcm9jZXNzIHlldCxzbyB0aGUgZm9sbG93aW5n
-IG1vZGlmaWNhdGlvbiBpcwphIHNpbXBsZSBhbmQgY3J1ZGUsIGFueSBzdWdnZXN0aW9ucyBhcmUg
-d2VsY29tZS4KSSB3YW50IHRvIGtub3cgaWYgdGhpcyBpZGVhIGlzIHdvcmthYmxlLGlmIHNvLCBJ
-IHdpbGwgY29udGludWUgdG8gaW1wcm92ZQp0aGlzIHBhdGNoLgpUaGFua3MuCgpTaWduZWQtb2Zm
-LWJ5OiBGZW5nbmFuIENoYW5nIDxjaGFuZ2ZlbmduYW5Adml2by5jb20+Ci0tLQogZnMvZjJmcy9j
-b21wcmVzcy5jIHwgMTIgKysrKysrLS0tLS0tCiBmcy9mMmZzL2RhdGEuYyAgICAgfCAgNCArKy0t
-CiBmcy9mMmZzL2YyZnMuaCAgICAgfCAgMiArLQogMyBmaWxlcyBjaGFuZ2VkLCA5IGluc2VydGlv
-bnMoKyksIDkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvZjJmcy9jb21wcmVzcy5jIGIv
-ZnMvZjJmcy9jb21wcmVzcy5jIGluZGV4CjkyNWE1Y2EzNzQ0YS4uNzA1NmMwMDllZTlhIDEwMDY0
-NAotLS0gYS9mcy9mMmZzL2NvbXByZXNzLmMKKysrIGIvZnMvZjJmcy9jb21wcmVzcy5jCkBAIC05
-OTAsNyArOTkwLDcgQEAgc3RhdGljIHZvaWQgc2V0X2NsdXN0ZXJfZGlydHkoc3RydWN0IGNvbXBy
-ZXNzX2N0eCAqY2MpCn0KIAogc3RhdGljIGludCBwcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZShz
-dHJ1Y3QgY29tcHJlc3NfY3R4ICpjYywKLQkJc3RydWN0IHBhZ2UgKipwYWdlcCwgcGdvZmZfdCBp
-bmRleCwgdm9pZCAqKmZzZGF0YSkKKwkJc3RydWN0IHBhZ2UgKipwYWdlcCwgcGdvZmZfdCBpbmRl
-eCwgdm9pZCAqKmZzZGF0YSwgaW50IGxlbikKIHsKIAlzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkg
-PSBGMkZTX0lfU0IoY2MtPmlub2RlKTsKIAlzdHJ1Y3QgYWRkcmVzc19zcGFjZSAqbWFwcGluZyA9
-IGNjLT5pbm9kZS0+aV9tYXBwaW5nOyBAQCAtMTAwNyw2CisxMDA3LDggQEAgc3RhdGljIGludCBw
-cmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZShzdHJ1Y3QgY29tcHJlc3NfY3R4ICpjYywKIAlpZiAo
-cmV0IDw9IDApCiAJCXJldHVybiByZXQ7CiAKKwlpZiAobGVuID09IFBBR0VfU0laRSkKKwkJcmV0
-dXJuIDA7CiAJLyogY29tcHJlc3NlZCBjYXNlICovCiAJcHJlYWxsb2MgPSAocmV0IDwgY2MtPmNs
-dXN0ZXJfc2l6ZSk7CiAKQEAgLTEwNDUsNyArMTA0Nyw2IEBAIHN0YXRpYyBpbnQgcHJlcGFyZV9j
-b21wcmVzc19vdmVyd3JpdGUoc3RydWN0CmNvbXByZXNzX2N0eCAqY2MsCiAJCWlmIChyZXQpCiAJ
-CQlnb3RvIG91dDsKIAl9Ci0KIAlmb3IgKGkgPSAwOyBpIDwgY2MtPmNsdXN0ZXJfc2l6ZTsgaSsr
-KSB7CiAJCWYyZnNfYnVnX29uKHNiaSwgY2MtPnJwYWdlc1tpXSk7CiAKQEAgLTExMDEsNyArMTEw
-Miw3IEBAIHN0YXRpYyBpbnQgcHJlcGFyZV9jb21wcmVzc19vdmVyd3JpdGUoc3RydWN0CmNvbXBy
-ZXNzX2N0eCAqY2MsICB9CiAKIGludCBmMmZzX3ByZXBhcmVfY29tcHJlc3Nfb3ZlcndyaXRlKHN0
-cnVjdCBpbm9kZSAqaW5vZGUsCi0JCXN0cnVjdCBwYWdlICoqcGFnZXAsIHBnb2ZmX3QgaW5kZXgs
-IHZvaWQgKipmc2RhdGEpCisJCXN0cnVjdCBwYWdlICoqcGFnZXAsIHBnb2ZmX3QgaW5kZXgsIHZv
-aWQgKipmc2RhdGEsIGludCBsZW4pCiB7CiAJc3RydWN0IGNvbXByZXNzX2N0eCBjYyA9IHsKIAkJ
-Lmlub2RlID0gaW5vZGUsCkBAIC0xMTExLDggKzExMTIsNyBAQCBpbnQgZjJmc19wcmVwYXJlX2Nv
-bXByZXNzX292ZXJ3cml0ZShzdHJ1Y3QgaW5vZGUKKmlub2RlLAogCQkucnBhZ2VzID0gTlVMTCwK
-IAkJLm5yX3JwYWdlcyA9IDAsCiAJfTsKLQotCXJldHVybiBwcmVwYXJlX2NvbXByZXNzX292ZXJ3
-cml0ZSgmY2MsIHBhZ2VwLCBpbmRleCwgZnNkYXRhKTsKKwlyZXR1cm4gcHJlcGFyZV9jb21wcmVz
-c19vdmVyd3JpdGUoJmNjLCBwYWdlcCwgaW5kZXgsIGZzZGF0YSwgbGVuKTsKIH0KIAogYm9vbCBm
-MmZzX2NvbXByZXNzX3dyaXRlX2VuZChzdHJ1Y3QgaW5vZGUgKmlub2RlLCB2b2lkICpmc2RhdGEs
-IEBAIC0xMTU1LDcKKzExNTUsNyBAQCBpbnQgZjJmc190cnVuY2F0ZV9wYXJ0aWFsX2NsdXN0ZXIo
-c3RydWN0IGlub2RlICppbm9kZSwgdTY0IGZyb20sCmJvb2wgbG9jaykKIAogCS8qIHRydW5jYXRl
-IGNvbXByZXNzZWQgY2x1c3RlciAqLwogCWVyciA9IGYyZnNfcHJlcGFyZV9jb21wcmVzc19vdmVy
-d3JpdGUoaW5vZGUsICZwYWdlcCwKLQkJCQkJCXN0YXJ0X2lkeCwgJmZzZGF0YSk7CisJCQkJCQlz
-dGFydF9pZHgsICZmc2RhdGEsIDApOwogCiAJLyogc2hvdWxkIG5vdCBiZSBhIG5vcm1hbCBjbHVz
-dGVyICovCiAJZjJmc19idWdfb24oRjJGU19JX1NCKGlub2RlKSwgZXJyID09IDApOyBkaWZmIC0t
-Z2l0IGEvZnMvZjJmcy9kYXRhLmMKYi9mcy9mMmZzL2RhdGEuYyBpbmRleCAwMDlhMDlmYjlkODgu
-LjlhNmI4MmQ4ZjI3OCAxMDA2NDQKLS0tIGEvZnMvZjJmcy9kYXRhLmMKKysrIGIvZnMvZjJmcy9k
-YXRhLmMKQEAgLTI5MTYsNyArMjkxNiw3IEBAIHN0YXRpYyBpbnQgZjJmc193cml0ZV9jYWNoZV9w
-YWdlcyhzdHJ1Y3QgYWRkcmVzc19zcGFjZQoqbWFwcGluZywKIAogCQkJCQlyZXQyID0KZjJmc19w
-cmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZSgKIAkJCQkJCQlpbm9kZSwgJnBhZ2VwLAotCQkJCQkJ
-CXBhZ2UtPmluZGV4LAomZnNkYXRhKTsKKwkJCQkJCQlwYWdlLT5pbmRleCwKJmZzZGF0YSwgMCk7
-CiAJCQkJCWlmIChyZXQyIDwgMCkgewogCQkJCQkJcmV0ID0gcmV0MjsKIAkJCQkJCWRvbmUgPSAx
-OwpAQCAtMzMwNyw3ICszMzA3LDcgQEAgc3RhdGljIGludCBmMmZzX3dyaXRlX2JlZ2luKHN0cnVj
-dCBmaWxlICpmaWxlLCBzdHJ1Y3QKYWRkcmVzc19zcGFjZSAqbWFwcGluZywKIAkJKmZzZGF0YSA9
-IE5VTEw7CiAKIAkJcmV0ID0gZjJmc19wcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZShpbm9kZSwg
-cGFnZXAsCi0JCQkJCQkJaW5kZXgsIGZzZGF0YSk7CisJCQkJCQkJaW5kZXgsIGZzZGF0YSwgbGVu
-KTsKIAkJaWYgKHJldCA8IDApIHsKIAkJCWVyciA9IHJldDsKIAkJCWdvdG8gZmFpbDsKZGlmZiAt
-LWdpdCBhL2ZzL2YyZnMvZjJmcy5oIGIvZnMvZjJmcy9mMmZzLmggaW5kZXgKYzgzZDkwMTI1ZWJk
-Li44ZDRmZWRmMDI5MWIgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMvZjJmcy5oCisrKyBiL2ZzL2YyZnMv
-ZjJmcy5oCkBAIC0zOTMyLDcgKzM5MzIsNyBAQCBzdGF0aWMgaW5saW5lIGJvb2wgZjJmc19wb3N0
-X3JlYWRfcmVxdWlyZWQoc3RydWN0Cmlub2RlICppbm9kZSkgIGJvb2wgZjJmc19pc19jb21wcmVz
-c2VkX3BhZ2Uoc3RydWN0IHBhZ2UgKnBhZ2UpOyAgc3RydWN0IHBhZ2UKKmYyZnNfY29tcHJlc3Nf
-Y29udHJvbF9wYWdlKHN0cnVjdCBwYWdlICpwYWdlKTsgIGludApmMmZzX3ByZXBhcmVfY29tcHJl
-c3Nfb3ZlcndyaXRlKHN0cnVjdCBpbm9kZSAqaW5vZGUsCi0JCQlzdHJ1Y3QgcGFnZSAqKnBhZ2Vw
-LCBwZ29mZl90IGluZGV4LCB2b2lkICoqZnNkYXRhKTsKKwkJCXN0cnVjdCBwYWdlICoqcGFnZXAs
-IHBnb2ZmX3QgaW5kZXgsIHZvaWQgKipmc2RhdGEsCmludCBsZW4pOwogYm9vbCBmMmZzX2NvbXBy
-ZXNzX3dyaXRlX2VuZChzdHJ1Y3QgaW5vZGUgKmlub2RlLCB2b2lkICpmc2RhdGEsCiAJCQkJCXBn
-b2ZmX3QgaW5kZXgsIHVuc2lnbmVkIGNvcGllZCk7CiBpbnQgZjJmc190cnVuY2F0ZV9wYXJ0aWFs
-X2NsdXN0ZXIoc3RydWN0IGlub2RlICppbm9kZSwgdTY0IGZyb20sIGJvb2wKbG9jayk7Ci0tCjIu
-MjkuMAoKCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291
-cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
-L2xpbnV4LWYyZnMtZGV2ZWwK
+Although many other filesystems provide a tool for changing volume
+label, e.g. e2label for ext filesystem, but f2fs has no way to change
+volume label except set it while formatting with mkfs.f2fs.
+
+This introduces f2fslabel, simple tool for changing label of f2fs
+volume.
+
+Signed-off-by: Dongwoo Lee <dwoo08.lee@samsung.com>
+---
+
+Changes in v3:
+- Use volume label parameter directly rather duplicating it
+
+Changes in v2:
+- Integrated into fsck/main.c instead of individual tool
+
+ fsck/Makefile.am  |  1 +
+ fsck/main.c       | 79 +++++++++++++++++++++++++++++++++++++++++++++++
+ include/f2fs_fs.h |  2 ++
+ man/Makefile.am   |  2 +-
+ man/f2fslabel.8   | 33 ++++++++++++++++++++
+ 5 files changed, 116 insertions(+), 1 deletion(-)
+ create mode 100644 man/f2fslabel.8
+
+diff --git a/fsck/Makefile.am b/fsck/Makefile.am
+index e7d599c..e31d416 100644
+--- a/fsck/Makefile.am
++++ b/fsck/Makefile.am
+@@ -18,3 +18,4 @@ install-data-hook:
+ 	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/defrag.f2fs
+ 	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/resize.f2fs
+ 	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/sload.f2fs
++	ln -sf fsck.f2fs $(DESTDIR)/$(sbindir)/f2fslabel
+diff --git a/fsck/main.c b/fsck/main.c
+index 64efa87..f42ab0c 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -155,6 +155,14 @@ void sload_usage()
+ 	exit(1);
+ }
+ 
++void label_usage()
++{
++	MSG(0, "\nUsage: f2fslabel [options] device [volume-label]\n");
++	MSG(0, "[options]:\n");
++	MSG(0, "  -V print the version number and exit\n");
++	exit(1);
++}
++
+ static int is_digits(char *optarg)
+ {
+ 	unsigned int i;
+@@ -177,6 +185,8 @@ static void error_out(char *prog)
+ 		resize_usage();
+ 	else if (!strcmp("sload.f2fs", prog))
+ 		sload_usage();
++	else if (!strcmp("f2fslabel", prog))
++		label_usage();
+ 	else
+ 		MSG(0, "\nWrong program.\n");
+ }
+@@ -722,6 +732,39 @@ void f2fs_parse_options(int argc, char *argv[])
+ 			}
+ 		}
+ #endif /* WITH_SLOAD */
++	} else if (!strcmp("f2fslabel", prog)) {
++#ifdef WITH_LABEL
++		const char *option_string = "V";
++
++		c.func = LABEL;
++		while ((option = getopt(argc, argv, option_string)) != EOF) {
++			switch (option) {
++			case 'V':
++				show_version(prog);
++				exit(0);
++			default:
++				err = EUNKNOWN_OPT;
++				break;
++			}
++			if (err != NOERROR)
++				break;
++		}
++
++		if (argc > (optind + 2)) { /* unknown argument(s) is(are) passed */
++			optind += 2;
++			err = EUNKNOWN_ARG;
++		} else if (argc == (optind + 2)) { /* change label */
++			c.vol_label = argv[optind + 1];
++			argc--;
++		} else { /* print label */
++			/*
++			 * Since vol_label was initialized as "", in order to
++			 * distinguish between clear label and print, set
++			 * vol_label as NULL for print case
++			 */
++			c.vol_label = NULL;
++		}
++#endif /* WITH_LABEL */
+ 	}
+ 
+ 	if (err == NOERROR) {
+@@ -971,6 +1014,36 @@ static int do_sload(struct f2fs_sb_info *sbi)
+ }
+ #endif
+ 
++#ifdef WITH_LABEL
++static int do_label(struct f2fs_sb_info *sbi)
++{
++	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
++
++	if (!c.vol_label) {
++		char label[MAX_VOLUME_NAME];
++
++		utf16_to_utf8(label, sb->volume_name,
++			      MAX_VOLUME_NAME, MAX_VOLUME_NAME);
++		MSG(0, "Info: volume label = %s\n", label);
++		return 0;
++	}
++
++	if (strlen(c.vol_label) > MAX_VOLUME_NAME) {
++		ERR_MSG("Label should not exceed %d characters\n", MAX_VOLUME_NAME);
++		return -1;
++	}
++
++	utf8_to_utf16(sb->volume_name, (const char *)c.vol_label,
++		      MAX_VOLUME_NAME, strlen(c.vol_label));
++
++	update_superblock(sb, SB_MASK_ALL);
++
++	MSG(0, "Info: volume label is changed to %s\n", c.vol_label);
++
++	return 0;
++}
++#endif
++
+ #if defined(__APPLE__)
+ static u64 get_boottime_ns()
+ {
+@@ -1084,6 +1157,12 @@ fsck_again:
+ 		c.func = FSCK;
+ 		c.fix_on = 1;
+ 		goto fsck_again;
++#endif
++#ifdef WITH_LABEL
++	case LABEL:
++		if (do_label(sbi))
++			goto out_err;
++		break;
+ #endif
+ 	default:
+ 		ERR_MSG("Wrong program name\n");
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index cdcce2c..5d49ed1 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -35,6 +35,7 @@
+ #define WITH_DEFRAG
+ #define WITH_RESIZE
+ #define WITH_SLOAD
++#define WITH_LABEL
+ #endif
+ 
+ #include <inttypes.h>
+@@ -343,6 +344,7 @@ enum f2fs_config_func {
+ 	DEFRAG,
+ 	RESIZE,
+ 	SLOAD,
++	LABEL,
+ };
+ 
+ enum default_set {
+diff --git a/man/Makefile.am b/man/Makefile.am
+index 1d16c6f..9363b82 100644
+--- a/man/Makefile.am
++++ b/man/Makefile.am
+@@ -1,3 +1,3 @@
+ ## Makefile.am
+ 
+-dist_man_MANS = mkfs.f2fs.8 fsck.f2fs.8 dump.f2fs.8 defrag.f2fs.8 resize.f2fs.8 sload.f2fs.8 f2fs_io.8
++dist_man_MANS = mkfs.f2fs.8 fsck.f2fs.8 dump.f2fs.8 defrag.f2fs.8 resize.f2fs.8 sload.f2fs.8 f2fs_io.8 f2fslabel.8
+diff --git a/man/f2fslabel.8 b/man/f2fslabel.8
+new file mode 100644
+index 0000000..848ed3b
+--- /dev/null
++++ b/man/f2fslabel.8
+@@ -0,0 +1,33 @@
++.\" Copyright (c) 2021 Samsung Electronics Co., Ltd.
++.\"
++.TH F2FSLABEL 8
++.SH NAME
++f2fslabel \- Change the label on an f2fs volume
++.SH SYNOPSIS
++.B f2fslabel
++.I device
++[
++.I volume-label
++]
++.SH DESCRIPTION
++.B f2fslabel
++will display or change the volume label on the f2fs located on
++.I device.
++.PP
++If the optional argument
++.I volume-label
++is present, then
++.B f2fslabel
++will set the volume label to be
++.IR volume-label .
++.PP
++Otherwise,
++.B f2fslabel
++will simply show the current label.
++.PP
++.SH AUTHOR
++.B f2fslabel
++was written by Dongwoo Lee (dwoo08.lee@samsung.com).
++.SH AVAILABILITY
++.B f2fslabel
++is available from git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git.
+-- 
+2.25.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
