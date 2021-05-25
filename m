@@ -2,62 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E5A5390AAB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 22:48:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 577B4390ABB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 22:50:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lldyJ-00008h-6Q; Tue, 25 May 2021 20:48:15 +0000
+	id 1lle0J-0000PU-RL; Tue, 25 May 2021 20:50:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <djwong@kernel.org>) id 1lldyH-00008N-F5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 20:48:13 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1lle09-0000O9-Tm
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 20:50:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BlXQBmnqpIQgWpK/kS58Jsfa1gYArpdcs60T2Ho4gv8=; b=mLxniJmRRsAcBiFBeFJHncdmyi
- 1viWzLyEFVhte+swqmwoGpkZgjf8TjI3s3CuROgAJS5oVwj3geDPM/nKDC0bJj64hvh76i2zt5COz
- IZivu7LnSU0I2538YxlWKLvw8S7Q2Ln8MHlLIgmLMsSRYfVUpeYQZRdZgRLe52e4IR0k=;
+ bh=vK16TajSWSWt8KZai0G6GLFprkniDqQQUNF3YiQCuSI=; b=RQPNz9A2oseUsPlt2FHWHzfcHs
+ TT6uVCC8YmcxhsQnOVwXc2Xy5DeOq1SRdWLT8GV/7DeZIlewxid0loK7u8+90lDuAIxnRR1B6bJPX
+ o59YI6miqNns4CQumJ1Mhi4fJ0TumnttGIke7ql/3YSWUvZoLG3kIePmVZILF13IDSsg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BlXQBmnqpIQgWpK/kS58Jsfa1gYArpdcs60T2Ho4gv8=; b=OFB+P1ifTZcsupi5FamNYHTUw4
- xNYRx5ezLoJs2HezZ2j1ThZjNZId8K8VACnFKrPQy0M6AO/2/mQ52RjL2WnsNgW0vEB0xCAsaWfQR
- cNeqbmoLuhqKDj7yN96IN4sxViU2PFDVsazdXjF3rKa4KgB3zEYXEdftuUU46P/o04xY=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=vK16TajSWSWt8KZai0G6GLFprkniDqQQUNF3YiQCuSI=; b=F
+ ejFUN3ev0pknsB8Pnmd+Ss7TmBi7tS+dFSNMRTEhTycnVAXZkrQ0840cQfFYfFfQlrQT4AKjdqBVT
+ Yq1DlprG/L2B4o61i8+NTglUC5EwntMTANq4LQPp/uov07bFmID2f46DzhiOnuubMyA+Q/USvNoqQ
+ EoXD0mznmlNGOLsQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1lldyF-005mx7-Jk
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 20:48:14 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 279AC6140B;
- Tue, 25 May 2021 20:48:06 +0000 (UTC)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lle03-00035I-8R
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 20:50:09 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C5FAF6140B;
+ Tue, 25 May 2021 20:49:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1621975686;
- bh=6LI8nXD4++dr3yyc1ORbVc5YQQSxmuG/HaJJYKgTcFA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hH52FUkACUHkbGllGWKwrxKsRdd7iP1mxfk+a1siOZdVEI6kqEuJbPHskAt+ZHwN4
- ozrQSEp5tw5Gb6MwaHJvlGX7okhpBVC7kaKOPG0yeWWuiByjPqBcZ+iSdBNjfDr9dx
- jnXRndLPBuoUupxSSQVFzcb2TZSUXQLudpuvhwr5jjDe1vLlsryU6GO2yrRmtUkbU8
- CRQ0V0KAi8mlSP4V9Tho0unqQs0vlIvGF1Jx8i50zax3nIdKRsitXTY9wkG21d1Vep
- cyf5F4e0akiKk/6Jo4hg5uCCpY1XHtPn8Xiz1gtFWFGdIJ7JZPkbz23+Y+4M9fkHQh
- 0hhvZ6suqaANQ==
-Date: Tue, 25 May 2021 13:48:05 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20210525204805.GM202121@locust>
-References: <20210525125652.20457-1-jack@suse.cz>
- <20210525135100.11221-4-jack@suse.cz>
+ s=k20201202; t=1621975798;
+ bh=geFDm1hfESSrv4FhIDHlYbHKdE/pWgZd003DvoGhi84=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EzTDQ3bin0jBFm0kogkX3AOwC4klpfJI9abSvGhy3mQntOCmug8Pr5WGB6TjFRLhE
+ m745FlJkrhmKcYOlokMzRj0y8dpRZvo0IOdfmsN9mJZufVHeiPTqeMd/DPzL+eVVsW
+ WSNFbenV3sR9BoyXCN/78tFNQp01Lo4WQTc3TpYm9lCPeLcpX4jdB2mocBOc+bG/lk
+ M3AB1gwisdJs6KBlIyoc/SLpLCfsqyxnkXEKEYmeCNB6xUScNDwEm8FhmiDfIwU6iH
+ QqxDfmHe181alL7nQRBpv4Unoy1LbT4xE8fdkK9CcEUagMalJk0Sh6OUKlEvoxSzkz
+ HeY6Kc4ZoseWw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 25 May 2021 13:49:54 -0700
+Message-Id: <20210525204955.2512409-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.32.0.rc0.204.g9fa02ecfa5-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210525135100.11221-4-jack@suse.cz>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,9 +67,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lldyF-005mx7-Jk
-Subject: Re: [f2fs-dev] [PATCH 04/13] mm: Add functions to lock
- invalidate_lock for two mappings
+X-Headers-End: 1lle03-00035I-8R
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: let's allow compression for mmap files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,113 +80,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
- Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
- Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
- Miklos Szeredi <miklos@szeredi.hu>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, May 25, 2021 at 03:50:41PM +0200, Jan Kara wrote:
-> Some operations such as reflinking blocks among files will need to lock
-> invalidate_lock for two mappings. Add helper functions to do that.
-> 
-> Signed-off-by: Jan Kara <jack@suse.cz>
-> ---
->  include/linux/fs.h |  6 ++++++
->  mm/filemap.c       | 38 ++++++++++++++++++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
-> 
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index 897238d9f1e0..e6f7447505f5 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -822,6 +822,12 @@ static inline void inode_lock_shared_nested(struct inode *inode, unsigned subcla
->  void lock_two_nondirectories(struct inode *, struct inode*);
->  void unlock_two_nondirectories(struct inode *, struct inode*);
->  
-> +void filemap_invalidate_down_write_two(struct address_space *mapping1,
-> +				       struct address_space *mapping2);
-> +void filemap_invalidate_up_write_two(struct address_space *mapping1,
+This patch allows to compress mmap files. E.g., for so files.
 
-TBH I find myself wishing that the invalidate_lock used the same
-lock/unlock style wrappers that we use for i_rwsem.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/compress.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-filemap_invalidate_lock(inode1->mapping);
-filemap_invalidate_lock_two(inode1->i_mapping, inode2->i_mapping);
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 1189740aa141..bec92ff5ee7d 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -955,8 +955,6 @@ static bool cluster_may_compress(struct compress_ctx *cc)
+ 		return false;
+ 	if (f2fs_is_atomic_file(cc->inode))
+ 		return false;
+-	if (f2fs_is_mmap_file(cc->inode))
+-		return false;
+ 	if (!f2fs_cluster_is_full(cc))
+ 		return false;
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(cc->inode))))
+-- 
+2.32.0.rc0.204.g9fa02ecfa5-goog
 
-To be fair, I've never been able to keep straight that down means lock
-and up means unlock.  Ah well, at least you didn't use "p" and "v".
-
-Mechanically, the changes look ok to me.
-Acked-by: Darrick J. Wong <djwong@kernel.org>
-
---D
-
-> +				     struct address_space *mapping2);
-> +
-> +
->  /*
->   * NOTE: in a 32bit arch with a preemptable kernel and
->   * an UP compile the i_size_read/write must be atomic
-> diff --git a/mm/filemap.c b/mm/filemap.c
-> index 4d9ec4c6cc34..d3801a9739aa 100644
-> --- a/mm/filemap.c
-> +++ b/mm/filemap.c
-> @@ -1009,6 +1009,44 @@ struct page *__page_cache_alloc(gfp_t gfp)
->  EXPORT_SYMBOL(__page_cache_alloc);
->  #endif
->  
-> +/*
-> + * filemap_invalidate_down_write_two - lock invalidate_lock for two mappings
-> + *
-> + * Lock exclusively invalidate_lock of any passed mapping that is not NULL.
-> + *
-> + * @mapping1: the first mapping to lock
-> + * @mapping2: the second mapping to lock
-> + */
-> +void filemap_invalidate_down_write_two(struct address_space *mapping1,
-> +				       struct address_space *mapping2)
-> +{
-> +	if (mapping1 > mapping2)
-> +		swap(mapping1, mapping2);
-> +	if (mapping1)
-> +		down_write(&mapping1->invalidate_lock);
-> +	if (mapping2 && mapping1 != mapping2)
-> +		down_write_nested(&mapping2->invalidate_lock, 1);
-> +}
-> +EXPORT_SYMBOL(filemap_invalidate_down_write_two);
-> +
-> +/*
-> + * filemap_invalidate_up_write_two - unlock invalidate_lock for two mappings
-> + *
-> + * Unlock exclusive invalidate_lock of any passed mapping that is not NULL.
-> + *
-> + * @mapping1: the first mapping to unlock
-> + * @mapping2: the second mapping to unlock
-> + */
-> +void filemap_invalidate_up_write_two(struct address_space *mapping1,
-> +				     struct address_space *mapping2)
-> +{
-> +	if (mapping1)
-> +		up_write(&mapping1->invalidate_lock);
-> +	if (mapping2 && mapping1 != mapping2)
-> +		up_write(&mapping2->invalidate_lock);
-> +}
-> +EXPORT_SYMBOL(filemap_invalidate_up_write_two);
-> +
->  /*
->   * In order to wait for pages to become available there must be
->   * waitqueues associated with pages. By using a hash table of
-> -- 
-> 2.26.2
-> 
 
 
 _______________________________________________
