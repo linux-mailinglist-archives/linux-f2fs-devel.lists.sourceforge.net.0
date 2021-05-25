@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19C70390BB2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 23:41:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D7CF390BBA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 23:41:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1llenM-0007oX-OP; Tue, 25 May 2021 21:41:00 +0000
+	id 1lleo4-0001wP-Mo; Tue, 25 May 2021 21:41:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1llenL-0007oJ-5N
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 21:40:59 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <djwong@kernel.org>) id 1lleo3-0001wI-G8
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 21:41:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bbjCz45W5uvuNQEtbLzlCktXAhycsJoQ4pu29jG3UdA=; b=fgN7MeAUS7CsGynFG+RFpoFjXE
- oZ2dlu7yl6LeJo18/QYmz/KU2KfQKXCtWiDsRr+2Wr6UpNS2lr34atjUP3067/MAylqyolhFO/VwL
- IPtJT6i9p17+x4EpvuYU+pomCpHVsGfhlpUDb9Zqq1XOPjRb5SQwatYyQ+bg6kze/qe4=;
+ bh=n8mmJErlK1/R0AjpnjEWfYoV3Zlq3ariIqAZo6Hblb4=; b=Ane27OUIw0pklMfKITJlUy+2/V
+ vrB4BhVwmsmbfemUScD2RKp7qE+JmbndeOtcCsH7/dD/4jec4Mi7IGooHMtbnZGogpw35qguW0HIV
+ AL2ORerGTQzO9t5be8jE+yGluSxcDJKNA1CmHrEfPK7I9Eumid9Hpzd0F8QQI3A9E6kY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bbjCz45W5uvuNQEtbLzlCktXAhycsJoQ4pu29jG3UdA=; b=L6RmMMGeW4xWTXFiT8HUTKyA/h
- z+0974ITI+cWUz6GdGj5c8naolOaaXhhO8KFxX/zdM7bAbZU+IqPSBptoS8VrkxzLG8PB6QUct0Wu
- 1jSxO9DGVhi0bovAjXrzHn+KKfXPDLClD7iu9VkTcW70Lx8hjGhNMhP8T8RmUhbPopZI=;
-Received: from mail109.syd.optusnet.com.au ([211.29.132.80])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.2)
- id 1llenH-005pXr-8A
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 21:40:59 +0000
-Received: from dread.disaster.area (pa49-180-230-185.pa.nsw.optusnet.com.au
- [49.180.230.185])
- by mail109.syd.optusnet.com.au (Postfix) with ESMTPS id F04E9671F3;
- Wed, 26 May 2021 07:40:43 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1llen3-005CSi-MJ; Wed, 26 May 2021 07:40:41 +1000
-Date: Wed, 26 May 2021 07:40:41 +1000
-From: Dave Chinner <david@fromorbit.com>
+ bh=n8mmJErlK1/R0AjpnjEWfYoV3Zlq3ariIqAZo6Hblb4=; b=d/jSo9zqP2+zC2sHggKE/ir8dO
+ pKuRWrjMbdmOq7jDDwpTp5FYHds7y7+3EPo5l1Dwv217sGi1MpFFaX3+uAJAyx4wVelK7W04z4uGS
+ WlTb1AlrRgX0qmSG+7r41mDVQSNNjDaSR8mUwEqOLG+mUiI4tThq/fj1oNrZQhSgmxd0=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1llenv-0005fq-Ht
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 21:41:43 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2E649613D5;
+ Tue, 25 May 2021 21:41:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1621978891;
+ bh=Ff90q5Kz0o+BMBRcQ7Rxn+PAVevoQMBbngm/RLK1s+8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=S7WwcUxQKZjNrqh4HMAxGnxr7VCwquen6SJALt7e7iV5i4bX++9K8LxIOp1kIRs5O
+ 9fLtSBpQdakVBftuhgpL4oFWpbo2sKjHVDMeZOcc+U/LPb3YEm1cZdPkvOb0fKwTph
+ M7CkrFhzVExeTD7ns32hjrV6zpJlDrxFTt9gbb60Izc+41it5zfmeLQz6mn6Gmtyky
+ Z7dqmDRkehTVa27itdEh+TeMb8S9UMmgOs0+FuntutheBG+gJkAyxxmHiwhTkWY0Cc
+ EBpA5J63DL/mPwj7geODr3bz9PnyoVwd/6rImPFri9U0i1awZLAnS97c2mKicyRopd
+ oJevdxgpT8cog==
+Date: Tue, 25 May 2021 14:41:30 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
 To: Jan Kara <jack@suse.cz>
-Message-ID: <20210525214041.GJ664593@dread.disaster.area>
+Message-ID: <20210525214130.GP202121@locust>
 References: <20210525125652.20457-1-jack@suse.cz>
- <20210525135100.11221-7-jack@suse.cz>
+ <20210525135100.11221-8-jack@suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210525135100.11221-7-jack@suse.cz>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=Tu+Yewfh c=1 sm=1 tr=0
- a=dUIOjvib2kB+GiIc1vUx8g==:117 a=dUIOjvib2kB+GiIc1vUx8g==:17
- a=kj9zAlcOel0A:10 a=5FLXtPjwQuUA:10 a=VwQbUJbxAAAA:8 a=yPCof4ZbAAAA:8
- a=7-415B0cAAAA:8 a=YRNIVghP3Sa-aXUPf-oA:9 a=CjuIK1q_8ugA:10
- a=AjGcO6oz07-iQ99wixmX:22 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20210525135100.11221-8-jack@suse.cz>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1llenH-005pXr-8A
-Subject: Re: [f2fs-dev] [PATCH 07/13] xfs: Convert to use invalidate_lock
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1llenv-0005fq-Ht
+Subject: Re: [f2fs-dev] [PATCH 08/13] xfs: Convert double locking of
+ MMAPLOCK to use VFS helpers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,125 +85,157 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
  linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Steve French <sfrench@samba.org>,
- Jeff Layton <jlayton@kernel.org>, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, Miklos Szeredi <miklos@szeredi.hu>,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Johannes Thumshirn <jth@kernel.org>,
- Christoph Hellwig <hch@lst.de>, linux-xfs@vger.kernel.org
+ "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
+ Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
+ Miklos Szeredi <miklos@szeredi.hu>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Johannes Thumshirn <jth@kernel.org>, linux-xfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, May 25, 2021 at 03:50:44PM +0200, Jan Kara wrote:
-> Use invalidate_lock instead of XFS internal i_mmap_lock. The intended
-> purpose of invalidate_lock is exactly the same. Note that the locking in
-> __xfs_filemap_fault() slightly changes as filemap_fault() already takes
-> invalidate_lock.
+On Tue, May 25, 2021 at 03:50:45PM +0200, Jan Kara wrote:
+> Convert places in XFS that take MMAPLOCK for two inodes to use helper
+> VFS provides for it (filemap_invalidate_down_write_two()). Note that
+> this changes lock ordering for MMAPLOCK from inode number based ordering
+> to pointer based ordering VFS generally uses.
 > 
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
-> CC: <linux-xfs@vger.kernel.org>
-> CC: "Darrick J. Wong" <darrick.wong@oracle.com>
 > Signed-off-by: Jan Kara <jack@suse.cz>
+
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+
+--D
+
 > ---
->  fs/xfs/xfs_file.c  | 12 ++++++-----
->  fs/xfs/xfs_inode.c | 52 ++++++++++++++++++++++++++--------------------
->  fs/xfs/xfs_inode.h |  1 -
->  fs/xfs/xfs_super.c |  2 --
->  4 files changed, 36 insertions(+), 31 deletions(-)
+>  fs/xfs/xfs_bmap_util.c | 15 ++++++++-------
+>  fs/xfs/xfs_inode.c     | 37 +++++++++++--------------------------
+>  2 files changed, 19 insertions(+), 33 deletions(-)
 > 
-> diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
-> index 396ef36dcd0a..dc9cb5c20549 100644
-> --- a/fs/xfs/xfs_file.c
-> +++ b/fs/xfs/xfs_file.c
-> @@ -1282,7 +1282,7 @@ xfs_file_llseek(
->   *
->   * mmap_lock (MM)
->   *   sb_start_pagefault(vfs, freeze)
-> - *     i_mmaplock (XFS - truncate serialisation)
-> + *     invalidate_lock (vfs/XFS_MMAPLOCK - truncate serialisation)
->   *       page_lock (MM)
->   *         i_lock (XFS - extent map serialisation)
+> diff --git a/fs/xfs/xfs_bmap_util.c b/fs/xfs/xfs_bmap_util.c
+> index a5e9d7d34023..8a5cede59f3f 100644
+> --- a/fs/xfs/xfs_bmap_util.c
+> +++ b/fs/xfs/xfs_bmap_util.c
+> @@ -1582,7 +1582,6 @@ xfs_swap_extents(
+>  	struct xfs_bstat	*sbp = &sxp->sx_stat;
+>  	int			src_log_flags, target_log_flags;
+>  	int			error = 0;
+> -	int			lock_flags;
+>  	uint64_t		f;
+>  	int			resblks = 0;
+>  	unsigned int		flags = 0;
+> @@ -1594,8 +1593,8 @@ xfs_swap_extents(
+>  	 * do the rest of the checks.
+>  	 */
+>  	lock_two_nondirectories(VFS_I(ip), VFS_I(tip));
+> -	lock_flags = XFS_MMAPLOCK_EXCL;
+> -	xfs_lock_two_inodes(ip, XFS_MMAPLOCK_EXCL, tip, XFS_MMAPLOCK_EXCL);
+> +	filemap_invalidate_down_write_two(VFS_I(ip)->i_mapping,
+> +					  VFS_I(tip)->i_mapping);
+>  
+>  	/* Verify that both files have the same format */
+>  	if ((VFS_I(ip)->i_mode & S_IFMT) != (VFS_I(tip)->i_mode & S_IFMT)) {
+> @@ -1667,7 +1666,6 @@ xfs_swap_extents(
+>  	 * or cancel will unlock the inodes from this point onwards.
+>  	 */
+>  	xfs_lock_two_inodes(ip, XFS_ILOCK_EXCL, tip, XFS_ILOCK_EXCL);
+> -	lock_flags |= XFS_ILOCK_EXCL;
+>  	xfs_trans_ijoin(tp, ip, 0);
+>  	xfs_trans_ijoin(tp, tip, 0);
+>  
+> @@ -1786,13 +1784,16 @@ xfs_swap_extents(
+>  	trace_xfs_swap_extent_after(ip, 0);
+>  	trace_xfs_swap_extent_after(tip, 1);
+>  
+> +out_unlock_ilock:
+> +	xfs_iunlock(ip, XFS_ILOCK_EXCL);
+> +	xfs_iunlock(tip, XFS_ILOCK_EXCL);
+>  out_unlock:
+> -	xfs_iunlock(ip, lock_flags);
+> -	xfs_iunlock(tip, lock_flags);
+> +	filemap_invalidate_up_write_two(VFS_I(ip)->i_mapping,
+> +					VFS_I(tip)->i_mapping);
+>  	unlock_two_nondirectories(VFS_I(ip), VFS_I(tip));
+>  	return error;
+>  
+>  out_trans_cancel:
+>  	xfs_trans_cancel(tp);
+> -	goto out_unlock;
+> +	goto out_unlock_ilock;
+>  }
+> diff --git a/fs/xfs/xfs_inode.c b/fs/xfs/xfs_inode.c
+> index 53bb5fc33621..11616c9b37f8 100644
+> --- a/fs/xfs/xfs_inode.c
+> +++ b/fs/xfs/xfs_inode.c
+> @@ -537,12 +537,10 @@ xfs_lock_inodes(
+>  }
+>  
+>  /*
+> - * xfs_lock_two_inodes() can only be used to lock one type of lock at a time -
+> - * the mmaplock or the ilock, but not more than one type at a time. If we lock
+> - * more than one at a time, lockdep will report false positives saying we have
+> - * violated locking orders.  The iolock must be double-locked separately since
+> - * we use i_rwsem for that.  We now support taking one lock EXCL and the other
+> - * SHARED.
+> + * xfs_lock_two_inodes() can only be used to lock ilock. The iolock and
+> + * mmaplock must be double-locked separately since we use i_rwsem and
+> + * invalidate_lock for that. We now support taking one lock EXCL and the
+> + * other SHARED.
 >   */
-> @@ -1303,24 +1303,26 @@ __xfs_filemap_fault(
->  		file_update_time(vmf->vma->vm_file);
->  	}
+>  void
+>  xfs_lock_two_inodes(
+> @@ -560,15 +558,8 @@ xfs_lock_two_inodes(
+>  	ASSERT(hweight32(ip1_mode) == 1);
+>  	ASSERT(!(ip0_mode & (XFS_IOLOCK_SHARED|XFS_IOLOCK_EXCL)));
+>  	ASSERT(!(ip1_mode & (XFS_IOLOCK_SHARED|XFS_IOLOCK_EXCL)));
+> -	ASSERT(!(ip0_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)) ||
+> -	       !(ip0_mode & (XFS_ILOCK_SHARED|XFS_ILOCK_EXCL)));
+> -	ASSERT(!(ip1_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)) ||
+> -	       !(ip1_mode & (XFS_ILOCK_SHARED|XFS_ILOCK_EXCL)));
+> -	ASSERT(!(ip1_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)) ||
+> -	       !(ip0_mode & (XFS_ILOCK_SHARED|XFS_ILOCK_EXCL)));
+> -	ASSERT(!(ip0_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)) ||
+> -	       !(ip1_mode & (XFS_ILOCK_SHARED|XFS_ILOCK_EXCL)));
+> -
+> +	ASSERT(!(ip0_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)));
+> +	ASSERT(!(ip1_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)));
+>  	ASSERT(ip0->i_ino != ip1->i_ino);
 >  
-> -	xfs_ilock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
->  	if (IS_DAX(inode)) {
->  		pfn_t pfn;
+>  	if (ip0->i_ino > ip1->i_ino) {
+> @@ -3731,11 +3722,8 @@ xfs_ilock2_io_mmap(
+>  	ret = xfs_iolock_two_inodes_and_break_layout(VFS_I(ip1), VFS_I(ip2));
+>  	if (ret)
+>  		return ret;
+> -	if (ip1 == ip2)
+> -		xfs_ilock(ip1, XFS_MMAPLOCK_EXCL);
+> -	else
+> -		xfs_lock_two_inodes(ip1, XFS_MMAPLOCK_EXCL,
+> -				    ip2, XFS_MMAPLOCK_EXCL);
+> +	filemap_invalidate_down_write_two(VFS_I(ip1)->i_mapping,
+> +					  VFS_I(ip2)->i_mapping);
+>  	return 0;
+>  }
 >  
-> +		xfs_ilock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
->  		ret = dax_iomap_fault(vmf, pe_size, &pfn, NULL,
->  				(write_fault && !vmf->cow_page) ?
->  				 &xfs_direct_write_iomap_ops :
->  				 &xfs_read_iomap_ops);
->  		if (ret & VM_FAULT_NEEDDSYNC)
->  			ret = dax_finish_sync_fault(vmf, pe_size, pfn);
-> +		xfs_iunlock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
->  	} else {
-> -		if (write_fault)
-> +		if (write_fault) {
-> +			xfs_ilock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
->  			ret = iomap_page_mkwrite(vmf,
->  					&xfs_buffered_write_iomap_ops);
-> -		else
-> +			xfs_iunlock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
-> +		} else
->  			ret = filemap_fault(vmf);
->  	}
-> -	xfs_iunlock(XFS_I(inode), XFS_MMAPLOCK_SHARED);
-
-This seems kinda messy. filemap_fault() basically takes the
-invalidate lock around the entire operation, it runs, so maybe it
-would be cleaner to implement it as:
-
-filemap_fault_locked(vmf)
-{
-	/* does the filemap fault work */
-}
-
-filemap_fault(vmf)
-{
-	filemap_invalidate_down_read(...)
-	ret = filemap_fault_locked(vmf)
-	filemap_invalidate_up_read(...)
-	return ret;
-}
-
-And that means XFS could just call filemap_fault_locked() and not 
-have to do all this messy locking just to avoid holding the lock
-that filemap_fault has now internalised.
-
-> @@ -355,8 +358,11 @@ xfs_isilocked(
->  
->  	if (lock_flags & (XFS_MMAPLOCK_EXCL|XFS_MMAPLOCK_SHARED)) {
->  		if (!(lock_flags & XFS_MMAPLOCK_SHARED))
-> -			return !!ip->i_mmaplock.mr_writer;
-> -		return rwsem_is_locked(&ip->i_mmaplock.mr_lock);
-> +			return !debug_locks ||
-> +				lockdep_is_held_type(
-> +					&VFS_I(ip)->i_mapping->invalidate_lock,
-> +					0);
-> +		return rwsem_is_locked(&VFS_I(ip)->i_mapping->invalidate_lock);
->  	}
-
-<sigh>
-
-And so here we are again, losing more of our read vs write debug
-checks on debug kernels when lockdep is not enabled....
-
-Can we please add rwsem_is_locked_read() and rwsem_is_locked_write()
-wrappers that just look at the rwsem counter value to determine how
-the lock is held? Then the mrlock_t can go away entirely....
-
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+> @@ -3745,12 +3733,9 @@ xfs_iunlock2_io_mmap(
+>  	struct xfs_inode	*ip1,
+>  	struct xfs_inode	*ip2)
+>  {
+> -	bool			same_inode = (ip1 == ip2);
+> -
+> -	xfs_iunlock(ip2, XFS_MMAPLOCK_EXCL);
+> -	if (!same_inode)
+> -		xfs_iunlock(ip1, XFS_MMAPLOCK_EXCL);
+> +	filemap_invalidate_up_write_two(VFS_I(ip1)->i_mapping,
+> +					VFS_I(ip2)->i_mapping);
+>  	inode_unlock(VFS_I(ip2));
+> -	if (!same_inode)
+> +	if (ip1 != ip2)
+>  		inode_unlock(VFS_I(ip1));
+>  }
+> -- 
+> 2.26.2
+> 
 
 
 _______________________________________________
