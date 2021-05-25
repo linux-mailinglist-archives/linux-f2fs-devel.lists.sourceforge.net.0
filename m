@@ -2,78 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B111B390092
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 14:06:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4408F3900F3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 May 2021 14:26:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1llVoq-0000i8-RZ; Tue, 25 May 2021 12:05:56 +0000
+	id 1llW8e-0004Pa-LG; Tue, 25 May 2021 12:26:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <changfengnan@vivo.com>) id 1llVop-0000he-2W
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 12:05:55 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1llW8c-0004PB-3v
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 12:26:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:In-Reply-To:References:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iGOQtsxGaWe2hCI/mUDsa5cX+pQDlKYx0o/dMJJTdiQ=; b=HlTEdJnPoSVRdbSDWjRSOb5qFh
- Og/92J/Q04HpBxUIPQuaCYf3NtnRiz81RA4vIwLjGDX+YuA9bFbUGCqHFlzm9LDlYQD9QozO91Cui
- K7GcoyxKJU8CgOwo19fDbdszbp2Fev74Rlu9b0wE+7bPvhpXOoiSsWrwmJHFdy4NyP/c=;
+ bh=G8StVrWd5hXEDvabr6vIueWLToNkJJzP5uyiTI7r9Ms=; b=Z5koJzaJvQ8DvDuAad/YGtENwZ
+ bpLyk/b7ETvy3Rtb1NllrQ+/I+7eEyqXAa/e6DdBGsMwq+RoRJsf4/ijNy71YtAmaC5zHhKnk1uAa
+ 3xcpd4yM6tigtkU28pP6wEUmLKhrC5Kq29/1dvysjmaGYmXnSu449loBNunqiRBtWXwk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:In-Reply-To:References:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iGOQtsxGaWe2hCI/mUDsa5cX+pQDlKYx0o/dMJJTdiQ=; b=XQrW1lsB52xaSYB5RyKTuL1yn4
- MNGtV8FvDkb7QLXEohIOjY1soli9ItrD80lhRGPu+EUaQi/uLhRHrihls5jrhn1HAXu/Cu7RQyPzs
- fys4jKIdK6xCP1Dslb81oJ5xZtSooIqEH5/4QdGg/Gk7Y98bjlgrOYjPc90x3daCszBs=;
-Received: from mail-m17635.qiye.163.com ([59.111.176.35])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1llVoe-005Hyr-CL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 12:05:55 +0000
-Received: from SZ11126892 (unknown [58.250.176.229])
- by mail-m17635.qiye.163.com (Hmail) with ESMTPA id 76FF740015D;
- Tue, 25 May 2021 20:05:36 +0800 (CST)
-From: <changfengnan@vivo.com>
-To: "'Chao Yu'" <yuchao0@huawei.com>, <jaegeuk@kernel.org>, <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <20210518125113.1712-1-changfengnan@vivo.com>
- <7ad8bae8-6e38-5ff7-add8-fe1023569f43@huawei.com>
-In-Reply-To: <7ad8bae8-6e38-5ff7-add8-fe1023569f43@huawei.com>
-Date: Tue, 25 May 2021 20:05:33 +0800
-Message-ID: <000001d7515e$458f3db0$d0adb910$@vivo.com>
+ bh=G8StVrWd5hXEDvabr6vIueWLToNkJJzP5uyiTI7r9Ms=; b=YX6ZLSGcQMzESmm7JNXkd6NJP6
+ 9x10aa34rvvlELmaH8Jiu4HN268ZFUNJhgnYHpi+U4h8RbYGx9wULvXvH2IWjaTqPtqAgumpmZVee
+ EgaDoioNZ1uBPlVjTjpV36V1sXjQ1cVKb7hQnsSS+jWTR9Th8IIdRfRRVKN2mGwHe0/M=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1llW8R-0007gW-Je
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 May 2021 12:26:21 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 280FD613F5;
+ Tue, 25 May 2021 12:26:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1621945567;
+ bh=EtIFUMHmD3veRiC7K2Y+/790eFrQYN42I/c+VbXM3IA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oRii/JRdixaYK3XunQGlbcCvmInWA/L0Ultgkk/FcxhZ973x/vMozlr5n087UAxzi
+ vPV799WYkWuZT+PnuCUFVsZc4qVnVkpn80XGUiPoupPqLIvTSY4apSC0kfyMeJXzMu
+ 0dH/csW93PiDVVRQv7vGUfgnSzMciCPICxUb1RK6rqBZLzXeA2pvo4OfELRm5dPS7r
+ /Hova4G8bE5o9AF7OwvE5KfsZYg+QXw2cfHlcRDwgXcpcLfbHPQ8Cafi97AeJnT7IS
+ FHZi5l6Nc9JXozP0OSNembwUo3fXBJXgeyMZTN9rbgaNmLz6EsC5B+7zGR7fJ0cJGe
+ S03DJ15HJhHtQ==
+Date: Tue, 25 May 2021 05:26:05 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <yuchao0@huawei.com>
+Message-ID: <YKzs3anQwxEjs0tk@google.com>
+References: <20210518095458.99728-1-yuchao0@huawei.com>
+ <YKXHo0LAdE5fa77J@google.com>
+ <96cc500d-18df-e9b5-98aa-066a2acfacc9@huawei.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: zh-cn
-Thread-Index: AQHOlVE4bDv6QAxu/j4of1dMYsvDFwGvWIFYqvgWuzA=
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
- oVCBIfWUFZQk8fQ1YaTUwZHh8YTx4dGElVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWUFZT0tIVUpKS0
- 9ISFVLWQY+
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pwg6Kgw5HD8LMxoQOSs8CSEZ
- ARpPFFZVSlVKTUlKQk9PSEhNQklMVTMWGhIXVRgTGhUcHR4VHBUaFTsNEg0UVRgUFkVZV1kSC1lB
- WU5DVUlOS1VKTE1VSUlCWVdZCAFZQUlDS0w3Bg++
-X-HM-Tid: 0a79a36a80e4d991kuws76ff740015d
-X-Spam-Score: 1.0 (+)
+Content-Disposition: inline
+In-Reply-To: <96cc500d-18df-e9b5-98aa-066a2acfacc9@huawei.com>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [59.111.176.35 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [59.111.176.35 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
-X-Headers-End: 1llVoe-005Hyr-CL
-Subject: [f2fs-dev] =?gb2312?b?tPC4tDogIFtSRkMgUEFUQ0hdIGYyZnM6IGNvbXBy?=
-	=?gb2312?b?ZXNzOiByZW1vdmUgdW5uZWVkZWQgcmVhZCB3aGVuIHJld3JpdGUg?=
-	=?gb2312?b?d2hvbGUgY2x1c3Rlcg==?=
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1llW8R-0007gW-Je
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: compress: fix to disallow wildcard
+ extension for hot/cold file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,31 +84,103 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-eWVzLCBJIGp1c3QgY2hlY2sgd2hlYXRoZXIgdGhlIHdob2xlIHBhZ2Ugd2FzIGRpcnR5LCBiZWNh
-dXNlIG9mIHdoZW4gd3JpdGUKY2FjaGUgZjJmc19wcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZSB3
-aWxsIGJlIGNhbGxlZCBhZ2FpbiwgCndoZW4gdXBkYXRlIHdob2xlIGNsdXN0ZXIsICBjYyBpbiBw
-cmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZSB3aWxsIGJlIGVtcHR5LApzbyB3aWxsIG5vdCBzdWJt
-aXQgYmlvLgp3aGVuIG9ubHkgdXBkYXRlIG9uZSBwYWdlIGluIGNsdXN0ZXIsICBjYyBpbiBwcmVw
-YXJlX2NvbXByZXNzX292ZXJ3cml0ZSB3aWxsCm5vdCBiZSBlbXB0eSwgc28gd2lsbCBzdWJtaXQg
-YmlvLgpUaGlzIGlzIG15IHRoaW5raW5nLCBub3Qgc3VyZSBpZiBJJ3ZlIG1pc3NlZCBhbnl0aGlu
-ZwoKCi0tLS0t08q8/tStvP4tLS0tLQq3orz+yMs6IENoYW8gWXUgPHl1Y2hhbzBAaHVhd2VpLmNv
-bT4gCreiy83KsbzkOiAyMDIxxOo11MIyNMjVIDE5OjM5CsrVvP7IyzogRmVuZ25hbiBDaGFuZyA8
-Y2hhbmdmZW5nbmFuQHZpdm8uY29tPjsgamFlZ2V1a0BrZXJuZWwub3JnOwpjaGFvQGtlcm5lbC5v
-cmc7IGxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Ctb3zOI6IFJlOiBbZjJm
-cy1kZXZdIFtSRkMgUEFUQ0hdIGYyZnM6IGNvbXByZXNzOiByZW1vdmUgdW5uZWVkZWQgcmVhZCB3
-aGVuCnJld3JpdGUgd2hvbGUgY2x1c3RlcgoKT24gMjAyMS81LzE4IDIwOjUxLCBGZW5nbmFuIENo
-YW5nIHdyb3RlOgo+IEZvciBub3csd2hlbiBvdmVyd3JpdGUgY29tcHJlc3NlZCBmaWxlLCB3ZSBu
-ZWVkIHJlYWQgb2xkIGRhdGEgdG8gcGFnZSAKPiBjYWNoZSBmaXJzdCBhbmQgdXBkYXRlIHBhZ2Vz
-Lgo+IEJ1dCB3aGVuIHdlIG5lZWQgb3ZlcndyaXRlIHdob2xlIGNsdXN0ZXIsIHdlIGRvbid0IG5l
-ZWQgb2xkIGRhdGEgCj4gYW55bW9yZS4KCkkgb25seSBzZWUgeW91IGp1c3QgY2hlY2sgdGhlIHdo
-b2xlIHBhZ2Ugd2FzIGRpcnR5IGFzIGJlbG93IHJhdGhlciB0aGFuIHRoZQp3aG9sZSBjbHVzdGVy
-IGlzIGRpcnR5IGR1cmluZyB3cml0ZSgpLgoKVGhhbmtzLAoKPiArCWlmIChsZW4gPT0gUEFHRV9T
-SVpFKQo+ICsJCXJldHVybiAwOwo+ICAgCS8qIGNvbXByZXNzZWQgY2FzZSAqLwo+ICAgCXByZWFs
-bG9jID0gKHJldCA8IGNjLT5jbHVzdGVyX3NpemUpOwo+ICAgCgoKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcg
-bGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3Rz
-LnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 05/20, Chao Yu wrote:
+> On 2021/5/20 10:21, Jaegeuk Kim wrote:
+> > On 05/18, Chao Yu wrote:
+> > > If all files are hot or cold, hot/cold separation is not needed anymore,
+> > > so let's disallow configure wildcard extension.
+> > 
+> > We need to be able to set hot/cold on the fly?
+> 
+> I got your concern, so do you prefer to keep "*" extension configuration
+> for hot/cold file?
+
+I'm fine with "*".
+
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > > ---
+> > >   fs/f2fs/f2fs.h  |  1 +
+> > >   fs/f2fs/namei.c | 12 ++++++++----
+> > >   fs/f2fs/sysfs.c |  3 +++
+> > >   3 files changed, 12 insertions(+), 4 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > index b753cc88c77e..ecb13c3b458d 100644
+> > > --- a/fs/f2fs/f2fs.h
+> > > +++ b/fs/f2fs/f2fs.h
+> > > @@ -3322,6 +3322,7 @@ void f2fs_handle_failed_inode(struct inode *inode);
+> > >   /*
+> > >    * namei.c
+> > >    */
+> > > +bool f2fs_is_wildcard_char(const char *ext);
+> > >   int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+> > >   							bool hot, bool set);
+> > >   struct dentry *f2fs_get_parent(struct dentry *child);
+> > > diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> > > index a9cd9cf97229..8d78b96a8b3b 100644
+> > > --- a/fs/f2fs/namei.c
+> > > +++ b/fs/f2fs/namei.c
+> > > @@ -153,15 +153,17 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
+> > >   	return ERR_PTR(err);
+> > >   }
+> > > +bool f2fs_is_wildcard_char(const char *ext)
+> > > +{
+> > > +	return *ext == '*' && strlen(ext) == 1;
+> > > +}
+> > > +
+> > >   static inline int is_extension_exist(const unsigned char *s, const char *sub)
+> > >   {
+> > >   	size_t slen = strlen(s);
+> > >   	size_t sublen = strlen(sub);
+> > >   	int i;
+> > > -	if (sublen == 1 && *sub == '*')
+> > > -		return 1;
+> > > -
+> > >   	/*
+> > >   	 * filename format of multimedia file should be defined as:
+> > >   	 * "filename + '.' + extension + (optional: '.' + temp extension)".
+> > > @@ -306,9 +308,11 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+> > >   	ext = F2FS_OPTION(sbi).extensions;
+> > >   	for (i = 0; i < ext_cnt; i++) {
+> > > +		if (f2fs_is_wildcard_char(ext[i]))
+> > > +			goto set_compress;
+> > >   		if (!is_extension_exist(name, ext[i]))
+> > >   			continue;
+> > > -
+> > > +set_compress:
+> > >   		set_compress_context(inode);
+> > >   		return;
+> > >   	}
+> > > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > > index dc71bc968c72..ff5acb4de1b6 100644
+> > > --- a/fs/f2fs/sysfs.c
+> > > +++ b/fs/f2fs/sysfs.c
+> > > @@ -343,6 +343,9 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+> > >   		if (strlen(name) >= F2FS_EXTENSION_LEN)
+> > >   			return -EINVAL;
+> > > +		if (f2fs_is_wildcard_char(name))
+> > > +			return -EINVAL;
+> > > +
+> > >   		down_write(&sbi->sb_lock);
+> > >   		ret = f2fs_update_extension_list(sbi, name, hot, set);
+> > > -- 
+> > > 2.29.2
+> > .
+> > 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
