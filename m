@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23C6339A58C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Jun 2021 18:14:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB3F839A921
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Jun 2021 19:26:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lopz4-0000Y8-Ge; Thu, 03 Jun 2021 16:14:14 +0000
+	id 1lor6x-0002XQ-3o; Thu, 03 Jun 2021 17:26:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lopz3-0000Xu-IL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 16:14:13 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1lor6v-0002XF-Ui
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:26:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VdhFa9boMMDhjxYUC+4aqMcFom/Bo4vPV/52Bq4YAUY=; b=WNoOkgcfWmz/Iy830p2toh+aGs
- poQC/peqfhXqrHyRj4oN3olc75ZROe9xbZGIGSyP/9K8L+3LTtBwW257uC6edn34y49+wkuMUuoUH
- /dV4jGx68xoWy/Yu+hnCgrPPd92i2deV+61/cKAbcVHCm+oFwh8kB8LcXUUGYbsQh85c=;
+ bh=8TLEnkc36RLGpGoMPYEMUm7yAuqbZbembW6RNKv+1Pg=; b=bXUXGm4U710GY7dzsXyfHI+owe
+ PT6gQ+abi+thC5n5Z5v7U7dU0M0AXfc1y3XZGrqNvY1VXUmlmevS8vtUNiNXnK9v1qdA4ouDkq+Ue
+ /A5ieQFG3kyJ94G1QcLrLo2vdBJLp1Ycdgg8zar+YAJvEotFXczTTMjJu2wX8SphwiSU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VdhFa9boMMDhjxYUC+4aqMcFom/Bo4vPV/52Bq4YAUY=; b=HtVdlraFa3hCuynR5L+SjdS+Nf
- baxIeapI4Fg9rMI1inXVFrCRCskN/JmSSG+9Ii7fOXYfxSWy0MzM6oFCfipk5QXf3rdoQ54TwwXhA
- mvT9xa5WqbN4l1cyffDK9T68ACF6wTj5kwHZugf1lQRQLpaSSv2dJXjJEMHwfPV08pZM=;
+ bh=8TLEnkc36RLGpGoMPYEMUm7yAuqbZbembW6RNKv+1Pg=; b=L/mRcOagDQPDBa2SCdooCiQa23
+ Zv/m+OJkSOeMjlPlMnsmYQoaswL9TnqSe02U/XW/FYWKKNIadgQix0p4xq2Xf/XCWY75AC+xbhQXl
+ fZgMj90OK4seN8HRxyMYnIXBM7W4NL16pHk7GVqnnicXqY+WUT59umyeLzCMscvmpL0I=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lopyp-0007ro-VH
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 16:14:13 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2CBA66135D;
- Thu,  3 Jun 2021 16:13:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1622736835;
- bh=oy5ydTPfTDR/G+eayzloFwE8KarET66/fooyad/r0Bk=;
+ id 1lor6q-009Ely-Vb
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:26:26 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 34B9B61242;
+ Thu,  3 Jun 2021 17:26:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1622741174;
+ bh=SvjLmqQosOVfAfa0jINxvAceg4v8NligAbCfI+ROPwI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aDjtSKf8Cb4W8yoI2XuWwrxNuaQ4ONoW2FCxFQSXyXlTD2C5nLj8QlLrSt/jI8xkS
- Cu6AoXvceAhkY1nO3PrwZLKgpKAu+pB6tDsuKIFnXVUCeFurzaRULQxS3yAzD0nO7c
- R2uZdDqAopmGGq6p9lgQUCsBhg3G5MoL2uhz9tZtqavoO1TxbotibiZNlPDhtrYEY8
- JTdaU/LmPhJ85QVm4CdG9qxoIvTChtQpWr+0c1Xl6jJRq5jD7Q4W78mUl7+xLMaBon
- JWy+a08agfrAllB/iNZUDooko+StGEU3UyA3nCxr3aKw64OtFZ7NOZio9X53jXxaC7
- //00yhaf4coSw==
-Date: Thu, 3 Jun 2021 09:13:53 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YLj/wWEFj793rgLY@google.com>
-References: <2c4db877-b5e6-1139-98b5-be2d9e7872be@kernel.org>
- <YK0DVi4aTNdXDN3L@google.com>
- <dda2400f-4a06-0ef6-b4f5-8aafe86bd81d@huawei.com>
- <YK5Mewfb3gMg1yGM@google.com>
- <5140516c-e4c6-fd6a-69b2-7566c903cb53@kernel.org>
- <YLZc0y0S3sGkU6f4@google.com> <YLZt+rFClf7xEzOa@google.com>
- <09fa74d3-a9df-028f-3ebc-2b845e5cd609@kernel.org>
- <YLek7U+BaFvHhz58@google.com>
- <eb52cab7-d9b3-c84b-1c7b-8fee463b06c5@kernel.org>
+ b=CILVnncXctECCmNZ1x+u+kCqw+UPk0PoA1+DRWaLXHqa5KlqBJBrEHpGr1Y1ctiyS
+ jVFYtzmryIRp8Hz7x2jgQQP6wEQ/ZqyeVlIXWiO3UAV+iQ2xtQ538yUSXdB9KAF/Xq
+ 2uelirCdM+K8mUPEd3rqQYopHWF3y5zomHAVu3hI=
+Date: Thu, 3 Jun 2021 19:26:12 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <YLkQtDZFG1xKoqE5@kroah.com>
+References: <20210603095038.314949-1-drosen@google.com>
+ <20210603095038.314949-3-drosen@google.com>
+ <YLipSQxNaUDy9Ff1@kroah.com> <YLj36Fmz3dSHmkSG@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <eb52cab7-d9b3-c84b-1c7b-8fee463b06c5@kernel.org>
+In-Reply-To: <YLj36Fmz3dSHmkSG@google.com>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -76,9 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lopyp-0007ro-VH
-Subject: Re: [f2fs-dev] [PATCH v6] f2fs: compress: add compress_inode to
- cache compressed blocks
+X-Headers-End: 1lor6q-009Ely-Vb
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: Advertise encrypted casefolding
+ in sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,188 +81,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daniel Rosenberg <drosen@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/03, Chao Yu wrote:
-> On 2021/6/2 23:34, Jaegeuk Kim wrote:
-> > On 06/02, Chao Yu wrote:
-> > > On 2021/6/2 1:27, Jaegeuk Kim wrote:
-> > > > On 06/01, Jaegeuk Kim wrote:
-> > > > > On 05/26, Chao Yu wrote:
-> > > > > > On 2021/5/26 21:26, Jaegeuk Kim wrote:
-> > > > > > > On 05/26, Chao Yu wrote:
-> > > > > > > > On 2021/5/25 22:01, Jaegeuk Kim wrote:
-> > > > > > > > > On 05/25, Chao Yu wrote:
-> > > > > > > > > > On 2021/5/25 21:02, Jaegeuk Kim wrote:
-> > > > > > > > > > > On 05/25, Jaegeuk Kim wrote:
-> > > > > > > > > > > > On 05/25, Chao Yu wrote:
-> > > > > > > > > > > > > Also, and queue this?
-> > > > > > > > > > > > 
-> > > > > > > > > > > > Easy to get this?
-> > > > > > > > > > > 
-> > > > > > > > > > > need GFP_NOFS?
-> > > > > > > > > > 
-> > > > > > > > > > Not sure, I use __GFP_IO intentionally here to avoid __GFP_RECLAIM from
-> > > > > > > > > > GFP_NOFS, because in low memory case, I don't want to instead page cache
-> > > > > > > > > > of normal file with page cache of sbi->compress_inode.
-> > > > > > > > > > 
-> > > > > > > > > > What is memory size in your vm?
-> > > > > > > > > 
-> > > > > > > > > 4GB. If I set GFP_NOFS, I don't see the error anymore, at least.
-> > > > > > > > 
-> > > > > > > > I applied below patch and don't see the warning message anymore.
-> > > > > > > > 
-> > > > > > > > ---
-> > > > > > > >     fs/f2fs/compress.c | 2 +-
-> > > > > > > >     1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > > > 
-> > > > > > > > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> > > > > > > > index 701dd0f6f4ec..ed5b7fabc604 100644
-> > > > > > > > --- a/fs/f2fs/compress.c
-> > > > > > > > +++ b/fs/f2fs/compress.c
-> > > > > > > > @@ -1703,7 +1703,7 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
-> > > > > > > >     	avail_ram = si.totalram - si.totalhigh;
-> > > > > > > > 
-> > > > > > > >     	/* free memory is lower than watermark, deny caching compress page */
-> > > > > > > > -	if (free_ram <= sbi->compress_watermark / 100 * avail_ram)
-> > > > > > 
-> > > > > > This is buggy, because sbi->compress_watermark equals to 20, so that
-> > > > > > sbi->compress_watermark / 100 * avail_ram always be zero...
-> > > > > > 
-> > > > > > After this change, if free ram is lower, we may just skip caching
-> > > > > > compressed blocks here.
-> > > > > 
-> > > > > Can we move this in f2fs_available_free_memory()?
+On Thu, Jun 03, 2021 at 08:40:24AM -0700, Jaegeuk Kim wrote:
+> On 06/03, Greg KH wrote:
+> > On Thu, Jun 03, 2021 at 09:50:38AM +0000, Daniel Rosenberg wrote:
+> > > Older kernels don't support encryption with casefolding. This adds
+> > > the sysfs entry encrypted_casefold to show support for those combined
+> > > features. Support for this feature was originally added by
+> > > commit 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
 > > > 
-> > > More clean.
+> > > Fixes: 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+> > > Cc: stable@vger.kernel.org # v5.11+
+> > > Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> > > ---
+> > >  fs/f2fs/sysfs.c | 15 +++++++++++++--
+> > >  1 file changed, 13 insertions(+), 2 deletions(-)
 > > > 
-> > > One comment below:
-> > > 
-> > > > 
-> > > > Testing this.
-> > > > 
-> > > > ---
-> > > >    fs/f2fs/compress.c | 14 +-------------
-> > > >    fs/f2fs/node.c     | 11 ++++++++++-
-> > > >    fs/f2fs/node.h     |  1 +
-> > > >    3 files changed, 12 insertions(+), 14 deletions(-)
-> > > > 
-> > > > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> > > > index 9fd62a0a646b..455561826c7d 100644
-> > > > --- a/fs/f2fs/compress.c
-> > > > +++ b/fs/f2fs/compress.c
-> > > > @@ -1688,8 +1688,6 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
-> > > >    {
-> > > >    	struct page *cpage;
-> > > >    	int ret;
-> > > > -	struct sysinfo si;
-> > > > -	unsigned long free_ram, avail_ram;
-> > > >    	if (!test_opt(sbi, COMPRESS_CACHE))
-> > > >    		return;
-> > > > @@ -1697,17 +1695,7 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
-> > > >    	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE_READ))
-> > > >    		return;
-> > > > -	si_meminfo(&si);
-> > > > -	free_ram = si.freeram;
-> > > > -	avail_ram = si.totalram - si.totalhigh;
-> > > > -
-> > > > -	/* free memory is lower than watermark, deny caching compress page */
-> > > > -	if (free_ram <= sbi->compress_watermark / 100 * avail_ram)
-> > > > -		return;
-> > > > -
-> > > > -	/* cached page count exceed threshold, deny caching compress page */
-> > > > -	if (COMPRESS_MAPPING(sbi)->nrpages >=
-> > > 
-> > > Need to cover COMPRESS_MAPPING() with CONFIG_F2FS_FS_COMPRESSION.
+> > > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > > index 09e3f258eb52..6604291a3cdf 100644
+> > > --- a/fs/f2fs/sysfs.c
+> > > +++ b/fs/f2fs/sysfs.c
+> > > @@ -161,6 +161,9 @@ static ssize_t features_show(struct f2fs_attr *a,
+> > >  	if (f2fs_sb_has_compression(sbi))
+> > >  		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > >  				len ? ", " : "", "compression");
+> > > +	if (f2fs_sb_has_casefold(sbi) && f2fs_sb_has_encrypt(sbi))
+> > > +		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > > +				len ? ", " : "", "encrypted_casefold");
+> > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > >  				len ? ", " : "", "pin_file");
+> > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "\n");
 > > 
-> > Added like this.
-> > 
-> > --- a/fs/f2fs/node.c
-> > +++ b/fs/f2fs/node.c
-> > @@ -99,6 +99,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> >                                  sizeof(struct discard_cmd)) >> PAGE_SHIFT;
-> >                  res = mem_size < (avail_ram * nm_i->ram_thresh / 100);
-> >          } else if (type == COMPRESS_PAGE) {
-> > +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> > This is a HUGE abuse of sysfs and should not be encouraged and added to.
 > 
-> How about adding free_ram definition and assigment here?
-> 
-> unsigned long free_ram = val.freeram;
+> This feature entry was originally added in 2017. Let me try to clean this up
+> after merging this.
 
-Done.
+Thank you.
 
-> 
-> Thanks,
-> 
-> >                  /*
-> >                   * free memory is lower than watermark or cached page count
-> >                   * exceed threshold, deny caching compress page.
-> > @@ -106,6 +107,9 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> >                  res = (free_ram > avail_ram * sbi->compress_watermark / 100) &&
-> >                          (COMPRESS_MAPPING(sbi)->nrpages <
-> >                           free_ram * sbi->compress_percent / 100);
-> > +#else
-> > +               res = false;
-> > +#endif
-> >          } else {
-> >                  if (!sbi->sb->s_bdi->wb.dirty_exceeded)
-> >                          return true;
+> > Please make these "one value per file" and do not keep growing a single
+> > file that has to be parsed otherwise you will break userspace tools.
 > > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > -			free_ram / 100 * sbi->compress_percent)
-> > > > +	if (!f2fs_available_free_memory(sbi, COMPRESS_PAGE))
-> > > >    		return;
-> > > >    	cpage = find_get_page(COMPRESS_MAPPING(sbi), blkaddr);
-> > > > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > > > index 3a8f7afa5059..67093416ce9c 100644
-> > > > --- a/fs/f2fs/node.c
-> > > > +++ b/fs/f2fs/node.c
-> > > > @@ -45,7 +45,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> > > >    	struct f2fs_nm_info *nm_i = NM_I(sbi);
-> > > >    	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-> > > >    	struct sysinfo val;
-> > > > -	unsigned long avail_ram;
-> > > > +	unsigned long avail_ram, free_ram;
-> > > >    	unsigned long mem_size = 0;
-> > > >    	bool res = false;
-> > > > @@ -56,6 +56,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> > > >    	/* only uses low memory */
-> > > >    	avail_ram = val.totalram - val.totalhigh;
-> > > > +	free_ram = val.freeram;
-> > > >    	/*
-> > > >    	 * give 25%, 25%, 50%, 50%, 50% memory for each components respectively
-> > > > @@ -97,6 +98,14 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> > > >    		mem_size = (atomic_read(&dcc->discard_cmd_cnt) *
-> > > >    				sizeof(struct discard_cmd)) >> PAGE_SHIFT;
-> > > >    		res = mem_size < (avail_ram * nm_i->ram_thresh / 100);
-> > > > +	} else if (type == COMPRESS_PAGE) {
-> > > > +		/*
-> > > > +		 * free memory is lower than watermark or cached page count
-> > > > +		 * exceed threshold, deny caching compress page.
-> > > > +		 */
-> > > > +		res = (free_ram > avail_ram * sbi->compress_watermark / 100) &&
-> > > > +			(COMPRESS_MAPPING(sbi)->nrpages <
-> > > > +			 free_ram * sbi->compress_percent / 100);
-> > > >    	} else {
-> > > >    		if (!sbi->sb->s_bdi->wb.dirty_exceeded)
-> > > >    			return true;
-> > > > diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-> > > > index d85e8659cfda..84d45385d1f2 100644
-> > > > --- a/fs/f2fs/node.h
-> > > > +++ b/fs/f2fs/node.h
-> > > > @@ -148,6 +148,7 @@ enum mem_type {
-> > > >    	EXTENT_CACHE,	/* indicates extent cache */
-> > > >    	INMEM_PAGES,	/* indicates inmemory pages */
-> > > >    	DISCARD_CACHE,	/* indicates memory of cached discard cmds */
-> > > > +	COMPRESS_PAGE,	/* indicates memory of cached compressed pages */
-> > > >    	BASE_CHECK,	/* check kernel status */
-> > > >    };
-> > > > 
+> > And I don't see a Documentation/ABI/ entry for this either :(
+> 
+> There is in Documentation/ABI/testing/sysfs-fs-f2fs.
+
+So this new item was documented in the file before the kernel change was
+made?
+
+greg k-h
 
 
 _______________________________________________
