@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB3F839A921
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Jun 2021 19:26:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D55B39A997
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Jun 2021 19:53:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lor6x-0002XQ-3o; Thu, 03 Jun 2021 17:26:27 +0000
+	id 1lorXO-00065r-J1; Thu, 03 Jun 2021 17:53:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <gregkh@linuxfoundation.org>) id 1lor6v-0002XF-Ui
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:26:25 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1lorXM-00065k-TZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:53:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8TLEnkc36RLGpGoMPYEMUm7yAuqbZbembW6RNKv+1Pg=; b=bXUXGm4U710GY7dzsXyfHI+owe
- PT6gQ+abi+thC5n5Z5v7U7dU0M0AXfc1y3XZGrqNvY1VXUmlmevS8vtUNiNXnK9v1qdA4ouDkq+Ue
- /A5ieQFG3kyJ94G1QcLrLo2vdBJLp1Ycdgg8zar+YAJvEotFXczTTMjJu2wX8SphwiSU=;
+ bh=Rg3T03pa46b62x8gGhFAHBi9/9WRd6dDsioK9MbaH0M=; b=PElOzVKd0jPOw9rgGqwAukaTQ3
+ 7uxpopureVO9cRwd+zlq0V8uyfOC3w5YG6pw6bvdIOPJxSHyr8AyPeU5jSRX7jCCJ0monW/WH5aC6
+ Qu+9I5dTqJihMxN6JBx6zmLwbvDUahNEbPvI1AE82ejqJLu3yL2YkeeEz4aQjvi9LPT4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,33 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8TLEnkc36RLGpGoMPYEMUm7yAuqbZbembW6RNKv+1Pg=; b=L/mRcOagDQPDBa2SCdooCiQa23
- Zv/m+OJkSOeMjlPlMnsmYQoaswL9TnqSe02U/XW/FYWKKNIadgQix0p4xq2Xf/XCWY75AC+xbhQXl
- fZgMj90OK4seN8HRxyMYnIXBM7W4NL16pHk7GVqnnicXqY+WUT59umyeLzCMscvmpL0I=;
+ bh=Rg3T03pa46b62x8gGhFAHBi9/9WRd6dDsioK9MbaH0M=; b=Hvm88be3op04KSlDIvJynqaZJx
+ 6h2rC/nBl8Ln4ifWOl+hXJcANmU05VTEV9friBB8P18becLml9Js2g3wMGSVtUy3c/50n88Bd5a+5
+ Qm/I8ubX44PADnsYeXXwG46ddGs5+UjptbFHm4aQFe2n7LVc0Ljofb6182lo1EGlMJm4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lor6q-009Ely-Vb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:26:26 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 34B9B61242;
- Thu,  3 Jun 2021 17:26:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1622741174;
- bh=SvjLmqQosOVfAfa0jINxvAceg4v8NligAbCfI+ROPwI=;
+ id 1lorXF-0005Jl-44
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Jun 2021 17:53:45 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2D15B61361;
+ Thu,  3 Jun 2021 17:53:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1622742808;
+ bh=pDpZsiO18U3DpgGBUoBUjRv/wLt0NlND3MIarXRGoV8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CILVnncXctECCmNZ1x+u+kCqw+UPk0PoA1+DRWaLXHqa5KlqBJBrEHpGr1Y1ctiyS
- jVFYtzmryIRp8Hz7x2jgQQP6wEQ/ZqyeVlIXWiO3UAV+iQ2xtQ538yUSXdB9KAF/Xq
- 2uelirCdM+K8mUPEd3rqQYopHWF3y5zomHAVu3hI=
-Date: Thu, 3 Jun 2021 19:26:12 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YLkQtDZFG1xKoqE5@kroah.com>
+ b=Nwq9nSiBoW/Ze1Swd6Tze6bxP2LUM0bNiB/4j4SsGplCWyCz0W07OoZxwumPGWpmj
+ a/5GEzYZlV1zEcE9SNyZM7R2phDc3sJr8ot1yiMrH5itbqzcCKMxO2nwxbvniRpd+a
+ hPhTNUWTFCMx1j6PouGjKjegEdhy0FhFqXbLrDj4x5Btx/vc9Fa0VtcGIt1ab8E1wT
+ 6yJPd6knHT/lU0r03vKdBq8MwU5neM1v9paHSM8Yw2A1kwNsHLajxDWIvOXiEh8deQ
+ 7lPSbN5EVpr8S/jnQdyRhKF/+IRyXdDwba/EjroEcrfGU5+k7I8WewYIg3yfxacIWW
+ 5g0qh3/z0pyMQ==
+Date: Thu, 3 Jun 2021 10:53:26 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Greg KH <gregkh@linuxfoundation.org>
+Message-ID: <YLkXFu4ep8tP3jsh@google.com>
 References: <20210603095038.314949-1-drosen@google.com>
  <20210603095038.314949-3-drosen@google.com>
  <YLipSQxNaUDy9Ff1@kroah.com> <YLj36Fmz3dSHmkSG@google.com>
+ <YLkQtDZFG1xKoqE5@kroah.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YLj36Fmz3dSHmkSG@google.com>
+In-Reply-To: <YLkQtDZFG1xKoqE5@kroah.com>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -67,7 +71,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lor6q-009Ely-Vb
+X-Headers-End: 1lorXF-0005Jl-44
 Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: Advertise encrypted casefolding
  in sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -89,54 +93,63 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 03, 2021 at 08:40:24AM -0700, Jaegeuk Kim wrote:
-> On 06/03, Greg KH wrote:
-> > On Thu, Jun 03, 2021 at 09:50:38AM +0000, Daniel Rosenberg wrote:
-> > > Older kernels don't support encryption with casefolding. This adds
-> > > the sysfs entry encrypted_casefold to show support for those combined
-> > > features. Support for this feature was originally added by
-> > > commit 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+On 06/03, Greg KH wrote:
+> On Thu, Jun 03, 2021 at 08:40:24AM -0700, Jaegeuk Kim wrote:
+> > On 06/03, Greg KH wrote:
+> > > On Thu, Jun 03, 2021 at 09:50:38AM +0000, Daniel Rosenberg wrote:
+> > > > Older kernels don't support encryption with casefolding. This adds
+> > > > the sysfs entry encrypted_casefold to show support for those combined
+> > > > features. Support for this feature was originally added by
+> > > > commit 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+> > > > 
+> > > > Fixes: 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+> > > > Cc: stable@vger.kernel.org # v5.11+
+> > > > Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> > > > ---
+> > > >  fs/f2fs/sysfs.c | 15 +++++++++++++--
+> > > >  1 file changed, 13 insertions(+), 2 deletions(-)
+> > > > 
+> > > > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > > > index 09e3f258eb52..6604291a3cdf 100644
+> > > > --- a/fs/f2fs/sysfs.c
+> > > > +++ b/fs/f2fs/sysfs.c
+> > > > @@ -161,6 +161,9 @@ static ssize_t features_show(struct f2fs_attr *a,
+> > > >  	if (f2fs_sb_has_compression(sbi))
+> > > >  		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > > >  				len ? ", " : "", "compression");
+> > > > +	if (f2fs_sb_has_casefold(sbi) && f2fs_sb_has_encrypt(sbi))
+> > > > +		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > > > +				len ? ", " : "", "encrypted_casefold");
+> > > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
+> > > >  				len ? ", " : "", "pin_file");
+> > > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "\n");
 > > > 
-> > > Fixes: 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
-> > > Cc: stable@vger.kernel.org # v5.11+
-> > > Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> > > ---
-> > >  fs/f2fs/sysfs.c | 15 +++++++++++++--
-> > >  1 file changed, 13 insertions(+), 2 deletions(-)
+> > > This is a HUGE abuse of sysfs and should not be encouraged and added to.
+> > 
+> > This feature entry was originally added in 2017. Let me try to clean this up
+> > after merging this.
+> 
+> Thank you.
+> 
+> > > Please make these "one value per file" and do not keep growing a single
+> > > file that has to be parsed otherwise you will break userspace tools.
 > > > 
-> > > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> > > index 09e3f258eb52..6604291a3cdf 100644
-> > > --- a/fs/f2fs/sysfs.c
-> > > +++ b/fs/f2fs/sysfs.c
-> > > @@ -161,6 +161,9 @@ static ssize_t features_show(struct f2fs_attr *a,
-> > >  	if (f2fs_sb_has_compression(sbi))
-> > >  		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
-> > >  				len ? ", " : "", "compression");
-> > > +	if (f2fs_sb_has_casefold(sbi) && f2fs_sb_has_encrypt(sbi))
-> > > +		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
-> > > +				len ? ", " : "", "encrypted_casefold");
-> > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
-> > >  				len ? ", " : "", "pin_file");
-> > >  	len += scnprintf(buf + len, PAGE_SIZE - len, "\n");
+> > > And I don't see a Documentation/ABI/ entry for this either :(
 > > 
-> > This is a HUGE abuse of sysfs and should not be encouraged and added to.
+> > There is in Documentation/ABI/testing/sysfs-fs-f2fs.
 > 
-> This feature entry was originally added in 2017. Let me try to clean this up
-> after merging this.
+> So this new item was documented in the file before the kernel change was
+> made?
 
-Thank you.
+Do we need to describe all the strings in this entry?
 
-> > Please make these "one value per file" and do not keep growing a single
-> > file that has to be parsed otherwise you will break userspace tools.
-> > 
-> > And I don't see a Documentation/ABI/ entry for this either :(
+203 What:           /sys/fs/f2fs/<disk>/features
+204 Date:           July 2017
+205 Contact:        "Jaegeuk Kim" <jaegeuk@kernel.org>
+206 Description:    Shows all enabled features in current device.
+
 > 
-> There is in Documentation/ABI/testing/sysfs-fs-f2fs.
-
-So this new item was documented in the file before the kernel change was
-made?
-
-greg k-h
+> greg k-h
 
 
 _______________________________________________
