@@ -2,63 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8899E39D2AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 03:41:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58B4439D2CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 04:01:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lq4Gy-0003bF-4c; Mon, 07 Jun 2021 01:41:48 +0000
+	id 1lq4aK-0001S7-Db; Mon, 07 Jun 2021 02:01:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lq4Gv-0003ax-VC
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 01:41:45 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lq4aI-0001Rr-Hm
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 02:01:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wxS1f8EhkoJeukCMkLB8cQo9jOSFKVRJH/P0VYubRF0=; b=blO1GRACX4OHbtQGAK3QpIvNsj
- zAE/krVgL4DgFaX49Mdgm+d0nlZQy02gY0qLwNpJTdpRMD4MGInnDNkagrImZDgFpBQBDoLY60uEA
- ehuu2lQ8LxZtveF65nCKa6Lbid4h2MSdoOBNDjXEt+WyMNuoveG1w/dFD/R0tVeMo7Qw=;
+ bh=ndSn5YK7iSAunB//PEjmP5iAG3RsYXvcwmLXfWwhmwU=; b=VJvgcd0VGHZSj3IA4JM+nyBOjJ
+ kVZho0pUvE1BGy53vUBIBkCHi2dxFXGFt4WHXTKwYtRwzjGOrmwm6LYXbbZm5t4s9ntIInz50oPZO
+ Av6VdhnJ6jeNHj7qGr8uk1HpQJsMg7XJH2opR2Xs0YNmoYSAiYJKsV8gAj8k0FoPDty4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wxS1f8EhkoJeukCMkLB8cQo9jOSFKVRJH/P0VYubRF0=; b=fnx5drn4pqnO9i8VxcEC+Wgvpe
- 3/5TT5jARdsj7GJcLTeLHbFhGLKvHAFUeewwzNcxWbAC5+SLSImLF0s8FB3otYyYQDpzqwijgxxA7
- cYReEflVBDl+KOPGwvyJGoeQzXo1qpihwudrhTQeAIRVyAdxP51DWL8hfNUCTCct/5n8=;
+ bh=ndSn5YK7iSAunB//PEjmP5iAG3RsYXvcwmLXfWwhmwU=; b=UQKzvLGK4t4Kba/ymSp7vp5tv4
+ mX6QHTFsbP8AqRCL2xtcozaAc71NIXSJFeFEMKQEjxzpW0Y3bd7/5sD4UjLXcrahm641ysD/AtYng
+ r64PavlBAILEAaTvM21i6c3HuMpgszNP87++f1vB8wqo7iL64FauHFeXaa3LiT03uWc0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lq4Go-00BgVY-K7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 01:41:46 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 38A4C613F3;
- Sun,  6 Jun 2021 13:54:31 +0000 (UTC)
+ id 1lq4a9-000653-KF
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 02:01:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8B9D9613BF;
+ Sat,  5 Jun 2021 02:02:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1622987671;
- bh=SFH/ZCMR4TXuRhQ7dpyXWBOyuppcon3cXoh5Kx6b3Oc=;
- h=Subject:To:References:From:Date:In-Reply-To:From;
- b=d1Ybjgd/DV9ghgZHX7S4bxA/XA4Vfo4k3/3C5NQ1UHyDZcQ5fY/CJIJXataAYs2tW
- ldPH2z59Wfvh6xEhfnSQl5g7FAmN2xL4wPYa/xKKMfS0lZARx5XsAAYhtte5GmW5qn
- 7i2Vlo85f/Myu+62AoPhy5TlZ85y7WEUWrH8o8ojKYRtaME7DfJs70Cz1+Gs9wXPOq
- 9w/tKuPxCnRukFhI02QTOyPLS0ZdWkcxB7pkbNqyDUrDqjyqSeDrdtlv8qdz5NJctN
- jMY5sLb6BZ9aqzGBcoo3ved7r3eGDnswwAw7b5pasJpf03obeUnfSZco0QYV5BOhtv
- ZO2KC5k84E0KA==
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20210525205138.2512855-1-jaegeuk@kernel.org>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <17318ac1-19e7-dfed-35f8-65a8e325fc61@kernel.org>
-Date: Sun, 6 Jun 2021 21:54:29 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ s=k20201202; t=1622858577;
+ bh=r4EcPxMJSzOnJumoMVDFIEmBiosX3pqnj+rFFKZBTdE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FjKa4X0QV01OweMLfCz0TTewqTcl6egVJWc2mp0IcCUaSoGJzARjsVyOla9pxZjj3
+ rdJtQjz0dLc+E5jqGH47SDe++quTm5n7wfLb08ol+TZFXf0HE23Bu/dux2JEZ84etk
+ Cz9Oj4vqYJylSd0aBVQ5M9czWqSagDxF2lYOmLJNJc3DeZlh//33XjqwpDT5TJLbMw
+ +nrUrrfFyLoopuNTObNYavgzY8CgeuY4uW2aLxSogc9IJ9q1GP6WdKoEqtk+Qo2LdA
+ ne5HzTjF9IubV9BiSlks7yn4OsShh8tMKKOLBoWtHyoa7Y1+FH41CEu82VztDTt6ij
+ jiLd5oX4Tk+CA==
+Date: Fri, 4 Jun 2021 19:02:56 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <YLrbUHfOa3zfwmNs@gmail.com>
+References: <20210605003210.856458-1-jaegeuk@kernel.org>
+ <20210605003210.856458-3-jaegeuk@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20210525205138.2512855-1-jaegeuk@kernel.org>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20210605003210.856458-3-jaegeuk@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -69,11 +68,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lq4Go-00BgVY-K7
-Subject: Re: [f2fs-dev] [PATCH] sload.f2fs: use F2FS_COMPRESS_RELEASED
- instead of IMMUTABLE bit
+X-Headers-End: 1lq4a9-000653-KF
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: clean up
+ /sys/fs/f2fs/<disk>/features
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,18 +83,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/5/26 4:51, Jaegeuk Kim wrote:
-> Let's use F2FS_COMPRESS_RELEASED to disallow writes only.
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+On Fri, Jun 04, 2021 at 05:32:10PM -0700, Jaegeuk Kim wrote:
+> +What:		/sys/fs/f2fs/feature/
 
-Reviewed-by: Chao Yu <yuchao0@huawei.com>
+features/, not feature/.
 
-Thanks,
+> +/*
+> + * Note that there are three feature list entries:
+> + * 1) /sys/fs/f2fs/features
+> + *   : shows runtime features supported by in-kernel f2fs along with Kconfig
+> + *     - ref. F2FS_FEATURE_RO_ATTR()
+> + *
+> + * 2) /sys/fs/f2fs/$s_id/features <deprecated>
+> + *   : shows on-disk features enabled by mkfs.f2fs, used for old kernels
+> + *
+> + * 3) /sys/fs/f2fs/$s_id/feature_list
+> + *   : shows on-disk features enabled by mkfs.f2fs per instance.
+> + *     this list covers old feature list provided by 2) and beyond
+> + *     - ref. F2FS_SB_FEATURE_RO_ATTR()
+> + */
+
+It would be helpful to make it clear which of these use the one-feature-per-file
+convention and which use the comma-separated features convention.  And also
+whether future features will be listed in both (2) and (3), or just in (3).
+
+Otherwise this patch looks good -- thanks!
+
+- Eric
 
 
 _______________________________________________
