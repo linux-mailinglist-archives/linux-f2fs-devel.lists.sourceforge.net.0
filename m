@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAC0739DE2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 15:58:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8B3439DE3F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 16:00:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lqFlS-0008Mh-WB; Mon, 07 Jun 2021 13:58:03 +0000
+	id 1lqFoE-0006Im-8w; Mon, 07 Jun 2021 14:00:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1lqFlR-0008MR-KY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 13:58:01 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1lqFoD-0006IV-7V
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 14:00:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YF9im155pTWoPHQ2T0vYFfmcC5l0oA+f+mUdvcpXwf4=; b=jsbttAeXpSq9gKMJKl8qRxPCvV
- 64oov3k0kTDihduryWEluEBNsvuEvT4f1JYkwOi4x+MNWx/2pjYIgG+s/LHvyneYvekLEVZ9XJ6In
- Ji3o68kxUIYrue7j2iE8SntgySOsNlAyELDPmj31o9yEgwbZ4ScDRGZh49HBTIe0XkAM=;
+ bh=TMcIcP+MOy+YAdOlAn0TCP7g+PlnGiY0ULuWixXAfaE=; b=S8gyGnoq5Mqst5Odgo1ETUidKe
+ VWm8iRR1fc+hQUrTaQLNzTszlbNFVdyh57svhV830NG4RcGmUjj0/Sq1zs8Y9w4Te3Df1jj8DzopO
+ /RXRoct+iUBdPHY2oAjuxdWhmRWwg6udlvwdcbK47jnMgNNwRqOoHZOJD5leSbxE74fk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YF9im155pTWoPHQ2T0vYFfmcC5l0oA+f+mUdvcpXwf4=; b=bHpUdviChw/OXJZlzi6tQqYZoy
- j1UV9JClyNEXv/oX/hETe9jDZJmlylSwkCiT/5PQgsAtrBpw4IVe0uT6ZKIIrPqnYxXNpQOC4rz5n
- zf3neBBhzjh8O8DvOZWVghCz81WWIlPR4pfBuR18xiJxALjFF3VoTcyEpvv05c81xl/I=;
+ bh=TMcIcP+MOy+YAdOlAn0TCP7g+PlnGiY0ULuWixXAfaE=; b=EpLxrvZBnWbMA+bSkkqRmOCGfQ
+ fRVMVyvzWabQduiUfuqR9+mgaLWn+wwqfSEIKPDHFZVeivnUzYTq76kNrgmJeH1vzGeXN74gxiDZz
+ PlNxgj9eQm3lMU3EXzOZO6X29PnvlEZV4kTgqJmFYfsQ5+LsF3ZFK0Nb8RdkiL9b87+w=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lqFlP-00065u-6z
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 13:58:02 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1DC8A60FF0;
- Mon,  7 Jun 2021 13:57:53 +0000 (UTC)
+ id 1lqFo5-00EldZ-O8
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 14:00:54 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A838061107;
+ Mon,  7 Jun 2021 14:00:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1623074274;
- bh=PpzF3zWAl8Xl1TXx6+EAS7kLqch5FlBePP3ou+vk7Ug=;
+ s=k20201202; t=1623074440;
+ bh=fb1SGOtDSePU0nH/toqqH2I5mjcpc4qNNrsdyTT80+0=;
  h=Subject:To:References:From:Date:In-Reply-To:From;
- b=rXjQyMsxFA7O5vsEx2sM/b/mez3iFLAqAsIDt7RDs2kPS3WrJUbu+eiJSItSOYhfE
- JVT+e54LgAesk4Rs7PHPMOMbalbhoYT4+WYvfXjQSQBAZhhygswFBKD9zz9Nkwss1J
- Y3Fb78kOTyeT0Zi3IYobvC7QmDJN/z7vu1nPBeSsdXXaJowHwGcUb5UQIggeb9Ln0G
- 0R6t3S1tO0lMpE/RvMzo+qhm61NOFLxdPgKLXef1dil9ahti3bREfbZNCosYdZc9Qj
- tgFvn6fITewnr61IBhcU6VpefoMnwCVJIk0+7PiKRAqAH0mvh8Nd1Kfb1dl4MAi1sK
- ZtjiPpI1PQMyw==
+ b=gvG2vaVFv5OmgyWZ2YGypIotKmv6VX/GBD8KoBAwJd+yODAZ5xi5+FCPHQ7NFLwLs
+ GktYBgTvYgT16rfQaiHKZHryWNcZRFjQ/dNfQOigRsFLFE9XJIY+bNIJp8/VJLsLxe
+ KTDZ0Yj11kr7w/V8H1fcpCUKaak7TKCMs/Z59aJHR5ZiL76HtLeA14c9u9QDXRfEGA
+ oxV1BFjt8PhyLFLvt6p+Cs45bCy0zoVeyc53d2f/D4GDKIMCrGdaxlSdYqcDMHAE2+
+ v8PgD9o6KphOJEGWWdnUWHMfaLxXG73ANTCv13FGILeywDjnPLtNkNHwjJYzXwMN7v
+ IXkJQZndkeIMQ==
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20210605003210.856458-1-jaegeuk@kernel.org>
- <20210605003210.856458-2-jaegeuk@kernel.org>
+ <20210605003210.856458-3-jaegeuk@kernel.org> <YLxeynwR0v23c3sV@google.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <b6c48972-7135-cec7-60d0-e6c067505052@kernel.org>
-Date: Mon, 7 Jun 2021 21:57:52 +0800
+Message-ID: <f8edad10-dfad-d12e-9c60-e007d132fbda@kernel.org>
+Date: Mon, 7 Jun 2021 22:00:37 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210605003210.856458-2-jaegeuk@kernel.org>
+In-Reply-To: <YLxeynwR0v23c3sV@google.com>
 Content-Language: en-US
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -73,8 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lqFlP-00065u-6z
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: add pin_file in feature list
+X-Headers-End: 1lqFo5-00EldZ-O8
+Subject: Re: [f2fs-dev] [PATCH 3/3 v2] f2fs: clean up
+ /sys/fs/f2fs/<disk>/features
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,13 +91,39 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/6/5 8:32, Jaegeuk Kim wrote:
-> This patch adds missing pin_file feature supported by kernel.
+On 2021/6/6 13:36, Jaegeuk Kim wrote:
+> Let's create /sys/fs/f2fs/<disk>/feature_list/ to meet sysfs rule.
 > 
-> Fixes: f5a53edcf01e ("f2fs: support aligned pinned file")
+> Note that there are three feature list entries:
+> 1) /sys/fs/f2fs/features
+>    : shows runtime features supported by in-kernel f2fs along with Kconfig.
+>      - ref. F2FS_FEATURE_RO_ATTR()
+> 
+> 2) /sys/fs/f2fs/$s_id/features <deprecated>
+>    : shows on-disk features enabled by mkfs.f2fs, used for old kernels. This
+>      won't add new feature anymore, and thus, users should check entries in 3)
+>      instead of this 2).
+> 
+> 3) /sys/fs/f2fs/$s_id/feature_list
+>    : shows on-disk features enabled by mkfs.f2fs per instance, which follows
+>      sysfs entry rule where each entry should expose single value.
+>      This list covers old feature list provided by 2) and beyond. Therefore,
+>      please add new on-disk feature in this list only.
+>      - ref. F2FS_SB_FEATURE_RO_ATTR()
+> 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <yuchao0@huawei.com>
+
+> +static struct kobj_type f2fs_feature_list_ktype = {
+> +	.default_groups = f2fs_sb_feat_groups,
+> +	.sysfs_ops	= &f2fs_feature_list_attr_ops,
+> +	.release	= f2fs_feature_list_kobj_release,
+> +};
+> +
+> +
+
+Nitpick, one redundant blank line.
 
 Thanks,
 
