@@ -2,62 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B4439D2CA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 04:01:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAC0739DE2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jun 2021 15:58:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lq4aK-0001S7-Db; Mon, 07 Jun 2021 02:01:48 +0000
+	id 1lqFlS-0008Mh-WB; Mon, 07 Jun 2021 13:58:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lq4aI-0001Rr-Hm
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 02:01:46 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1lqFlR-0008MR-KY
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 13:58:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ndSn5YK7iSAunB//PEjmP5iAG3RsYXvcwmLXfWwhmwU=; b=VJvgcd0VGHZSj3IA4JM+nyBOjJ
- kVZho0pUvE1BGy53vUBIBkCHi2dxFXGFt4WHXTKwYtRwzjGOrmwm6LYXbbZm5t4s9ntIInz50oPZO
- Av6VdhnJ6jeNHj7qGr8uk1HpQJsMg7XJH2opR2Xs0YNmoYSAiYJKsV8gAj8k0FoPDty4=;
+ bh=YF9im155pTWoPHQ2T0vYFfmcC5l0oA+f+mUdvcpXwf4=; b=jsbttAeXpSq9gKMJKl8qRxPCvV
+ 64oov3k0kTDihduryWEluEBNsvuEvT4f1JYkwOi4x+MNWx/2pjYIgG+s/LHvyneYvekLEVZ9XJ6In
+ Ji3o68kxUIYrue7j2iE8SntgySOsNlAyELDPmj31o9yEgwbZ4ScDRGZh49HBTIe0XkAM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ndSn5YK7iSAunB//PEjmP5iAG3RsYXvcwmLXfWwhmwU=; b=UQKzvLGK4t4Kba/ymSp7vp5tv4
- mX6QHTFsbP8AqRCL2xtcozaAc71NIXSJFeFEMKQEjxzpW0Y3bd7/5sD4UjLXcrahm641ysD/AtYng
- r64PavlBAILEAaTvM21i6c3HuMpgszNP87++f1vB8wqo7iL64FauHFeXaa3LiT03uWc0=;
+ bh=YF9im155pTWoPHQ2T0vYFfmcC5l0oA+f+mUdvcpXwf4=; b=bHpUdviChw/OXJZlzi6tQqYZoy
+ j1UV9JClyNEXv/oX/hETe9jDZJmlylSwkCiT/5PQgsAtrBpw4IVe0uT6ZKIIrPqnYxXNpQOC4rz5n
+ zf3neBBhzjh8O8DvOZWVghCz81WWIlPR4pfBuR18xiJxALjFF3VoTcyEpvv05c81xl/I=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lq4a9-000653-KF
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 02:01:46 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8B9D9613BF;
- Sat,  5 Jun 2021 02:02:57 +0000 (UTC)
+ id 1lqFlP-00065u-6z
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 07 Jun 2021 13:58:02 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 1DC8A60FF0;
+ Mon,  7 Jun 2021 13:57:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1622858577;
- bh=r4EcPxMJSzOnJumoMVDFIEmBiosX3pqnj+rFFKZBTdE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=FjKa4X0QV01OweMLfCz0TTewqTcl6egVJWc2mp0IcCUaSoGJzARjsVyOla9pxZjj3
- rdJtQjz0dLc+E5jqGH47SDe++quTm5n7wfLb08ol+TZFXf0HE23Bu/dux2JEZ84etk
- Cz9Oj4vqYJylSd0aBVQ5M9czWqSagDxF2lYOmLJNJc3DeZlh//33XjqwpDT5TJLbMw
- +nrUrrfFyLoopuNTObNYavgzY8CgeuY4uW2aLxSogc9IJ9q1GP6WdKoEqtk+Qo2LdA
- ne5HzTjF9IubV9BiSlks7yn4OsShh8tMKKOLBoWtHyoa7Y1+FH41CEu82VztDTt6ij
- jiLd5oX4Tk+CA==
-Date: Fri, 4 Jun 2021 19:02:56 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YLrbUHfOa3zfwmNs@gmail.com>
+ s=k20201202; t=1623074274;
+ bh=PpzF3zWAl8Xl1TXx6+EAS7kLqch5FlBePP3ou+vk7Ug=;
+ h=Subject:To:References:From:Date:In-Reply-To:From;
+ b=rXjQyMsxFA7O5vsEx2sM/b/mez3iFLAqAsIDt7RDs2kPS3WrJUbu+eiJSItSOYhfE
+ JVT+e54LgAesk4Rs7PHPMOMbalbhoYT4+WYvfXjQSQBAZhhygswFBKD9zz9Nkwss1J
+ Y3Fb78kOTyeT0Zi3IYobvC7QmDJN/z7vu1nPBeSsdXXaJowHwGcUb5UQIggeb9Ln0G
+ 0R6t3S1tO0lMpE/RvMzo+qhm61NOFLxdPgKLXef1dil9ahti3bREfbZNCosYdZc9Qj
+ tgFvn6fITewnr61IBhcU6VpefoMnwCVJIk0+7PiKRAqAH0mvh8Nd1Kfb1dl4MAi1sK
+ ZtjiPpI1PQMyw==
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 References: <20210605003210.856458-1-jaegeuk@kernel.org>
- <20210605003210.856458-3-jaegeuk@kernel.org>
+ <20210605003210.856458-2-jaegeuk@kernel.org>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <b6c48972-7135-cec7-60d0-e6c067505052@kernel.org>
+Date: Mon, 7 Jun 2021 21:57:52 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210605003210.856458-3-jaegeuk@kernel.org>
+In-Reply-To: <20210605003210.856458-2-jaegeuk@kernel.org>
+Content-Language: en-US
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -68,10 +71,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lq4a9-000653-KF
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: clean up
- /sys/fs/f2fs/<disk>/features
+X-Headers-End: 1lqFlP-00065u-6z
+Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: add pin_file in feature list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,38 +86,19 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 04, 2021 at 05:32:10PM -0700, Jaegeuk Kim wrote:
-> +What:		/sys/fs/f2fs/feature/
+On 2021/6/5 8:32, Jaegeuk Kim wrote:
+> This patch adds missing pin_file feature supported by kernel.
+> 
+> Fixes: f5a53edcf01e ("f2fs: support aligned pinned file")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-features/, not feature/.
+Reviewed-by: Chao Yu <yuchao0@huawei.com>
 
-> +/*
-> + * Note that there are three feature list entries:
-> + * 1) /sys/fs/f2fs/features
-> + *   : shows runtime features supported by in-kernel f2fs along with Kconfig
-> + *     - ref. F2FS_FEATURE_RO_ATTR()
-> + *
-> + * 2) /sys/fs/f2fs/$s_id/features <deprecated>
-> + *   : shows on-disk features enabled by mkfs.f2fs, used for old kernels
-> + *
-> + * 3) /sys/fs/f2fs/$s_id/feature_list
-> + *   : shows on-disk features enabled by mkfs.f2fs per instance.
-> + *     this list covers old feature list provided by 2) and beyond
-> + *     - ref. F2FS_SB_FEATURE_RO_ATTR()
-> + */
-
-It would be helpful to make it clear which of these use the one-feature-per-file
-convention and which use the comma-separated features convention.  And also
-whether future features will be listed in both (2) and (3), or just in (3).
-
-Otherwise this patch looks good -- thanks!
-
-- Eric
+Thanks,
 
 
 _______________________________________________
