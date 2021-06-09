@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6E243A06B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jun 2021 00:18:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CEAC3A0A31
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jun 2021 04:46:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lqk3U-0007wM-6s; Tue, 08 Jun 2021 22:18:40 +0000
+	id 1lqoEL-0000aP-2O; Wed, 09 Jun 2021 02:46:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <david@fromorbit.com>) id 1lqk3S-0007w8-Rd
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Jun 2021 22:18:38 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <satyaprateek2357@gmail.com>) id 1lqoEK-0000aI-5q
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Jun 2021 02:46:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+VIRpBztYnAXts1rrmomfPLpQ0zvs6yHM3q1X+TRblk=; b=M0YbxXNruMOWVPMa3idZXn1Ywx
- Fg15kD05PjK2Ks070fK36z97ufK9nOSKlCQ0hrZDZizTziKCb1TdnAZ9YRKvY7FytetsYl3ccZs8/
- maTuYy9S+HtVdIBCgjpVkUMJ52xjO0n9fa0cEVv75EYtMsFoECldpLuJnNOTBOLIAgQc=;
+ bh=szkL7ncrfM2hy/BvMWM0s5Huh4IFZhuvbwx23L8o1dE=; b=aY8OT7E8d+Z/6G9OxhNZbD3Ya3
+ 0fQZYo+zRx9++GP2qykkT3sf5qoWwZBlCpADxhkG+QXrvVsOug+hJ67BqGmhFwcNUI2lSang1XwIW
+ KW3BkqhIRq0zJXwo9bCIrCLQKSy0eJxWMy+Ih80mrm77p68NKrxB/84bu40ETgGLirX8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,46 +29,79 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+VIRpBztYnAXts1rrmomfPLpQ0zvs6yHM3q1X+TRblk=; b=ET+OdA5XoomLI9PfagLlzKvVY8
- YKyZn0msNbO9QtfmE/I7+/b6f8cLvSKfTVoZVHLep/FOwI2a32KEd6+FakxhEV/F923YJcM7ScwUm
- SiO/47aRqTZGPf1dwTcWZGwT6NJdMDQp3KReQOmUmGnqA5iLftGWDjOIlSZ5PZ9GR34k=;
-Received: from mail110.syd.optusnet.com.au ([211.29.132.97])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1lqk3J-0000FD-Tw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Jun 2021 22:18:38 +0000
-Received: from dread.disaster.area (pa49-179-138-183.pa.nsw.optusnet.com.au
- [49.179.138.183])
- by mail110.syd.optusnet.com.au (Postfix) with ESMTPS id 31D2F10625F;
- Wed,  9 Jun 2021 08:18:16 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1lqk35-00AXg4-VK; Wed, 09 Jun 2021 08:18:15 +1000
-Date: Wed, 9 Jun 2021 08:18:15 +1000
-From: Dave Chinner <david@fromorbit.com>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20210608221815.GM664593@dread.disaster.area>
-References: <20210607144631.8717-1-jack@suse.cz>
- <20210607145236.31852-7-jack@suse.cz>
+ bh=szkL7ncrfM2hy/BvMWM0s5Huh4IFZhuvbwx23L8o1dE=; b=awTdWo4jShyMH/+8quNxXICh3S
+ q73aPbS8k+9u6/DgUNL5+dLQXecofJR9RwWSPT6aPfqpfdasGs1cCCMkzB0KfKlmWg/uA76RSa6gG
+ OIEj/AUuEVOrBl5D1iQNb7VB7Z/+EQOsvOaKmkgzcxD9bqysyOVO8ZPfdwIgAmV1VE3s=;
+Received: from mail-oi1-f171.google.com ([209.85.167.171])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lqoEH-001bIY-2p
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Jun 2021 02:46:09 +0000
+Received: by mail-oi1-f171.google.com with SMTP id a21so23729763oiw.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 08 Jun 2021 19:46:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=szkL7ncrfM2hy/BvMWM0s5Huh4IFZhuvbwx23L8o1dE=;
+ b=kRNocKu1gPoPbfo4iolUj+fUN0EREEirmiGidoFnX3OlcUGENGem6uJtuermuHDLWl
+ 6NTwsp+KT6DHNDCsSdJIcjSB2O3cYDLvKnx7AjE8sFF4f1TPUY83x51r4OB1Iv+CelCy
+ REVQJkeVw8tUSiE2z/fkU4vtmyD/SdARACmZusH5g6vo3dKMJE9v7ybhtX1wBtzkXzlI
+ ChJVBvgn3wklKGiXtJglbRGRQ48pfXa6RDTfcqZetBdcx2dXTrFfnvJqssiamvm+Da55
+ R0dgapnLGDX/4EoCRPOZ5CcVkixn0ZJbf8wKGM+o0TrgUfzpX/WgytOvdxlIqmnNqqr5
+ 9ZKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=szkL7ncrfM2hy/BvMWM0s5Huh4IFZhuvbwx23L8o1dE=;
+ b=XmHOYNkf566/YW0TvJF61XyE2+w1PPBTL8JkCqJsSVHnVHjyZ7pviHwbjIe+hW+gKY
+ yL970O5YMMGNN6gOxtP4Rg2bVhY2KLaTLHb00YsxsA3J2Ooy+mL9pPqqpIQxMrwPFFx/
+ ZGOt23Pdey/NHjf+iAF84K15c15kqzX66Y0Fj4segiGa1M+3V8db6IExqSLHgv7vPuT3
+ 8H0v4jXNl8cmcVfYCeBYlv5GP/VK4HdVhM6cbXAAf7NnuEVt7OxjPnuQOhqaD6WEo3Xs
+ I+On0sxjO1S2A3U/YmVOtVOgX0BPuxD91e300S9P7mUSuPGK5MWTlMN0XEPWrbthRUfy
+ lxuA==
+X-Gm-Message-State: AOAM531wm3HwdNDGE3qoZSD/6JAcemZnZmslULkRYsgVyR6wf/zSsGxS
+ akxccbmyPsUmCFuvDfFGneQ=
+X-Google-Smtp-Source: ABdhPJwZLlD+UF6khW8UPly7po2FnFZ1ZDLO7TRTFA1MvABfjVFHSawElsb+ga6K3tgio2dxAtVyTg==
+X-Received: by 2002:a05:6808:14d0:: with SMTP id
+ f16mr4819978oiw.156.1623206759340; 
+ Tue, 08 Jun 2021 19:45:59 -0700 (PDT)
+Received: from fractal ([2600:1700:1151:2380:53e3:3a03:bcf3:da13])
+ by smtp.gmail.com with ESMTPSA id d136sm444959oib.4.2021.06.08.19.45.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jun 2021 19:45:58 -0700 (PDT)
+Date: Tue, 8 Jun 2021 19:45:56 -0700
+From: Satya Tangirala <satyaprateek2357@gmail.com>
+To: Lee Jones <lee.jones@linaro.org>
+Message-ID: <20210609024556.GA11153@fractal>
+References: <20210121230336.1373726-1-satyat@google.com>
+ <CAF2Aj3jbEnnG1-bHARSt6xF12VKttg7Bt52gV=bEQUkaspDC9w@mail.gmail.com>
+ <YK09eG0xm9dphL/1@google.com> <20210526080224.GI4005783@dell>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210607145236.31852-7-jack@suse.cz>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=YKPhNiOx c=1 sm=1 tr=0
- a=MnllW2CieawZLw/OcHE/Ng==:117 a=MnllW2CieawZLw/OcHE/Ng==:17
- a=kj9zAlcOel0A:10 a=r6YtysWOX24A:10 a=20KFwNOVAAAA:8 a=yPCof4ZbAAAA:8
- a=7-415B0cAAAA:8 a=wL01ZgEgnFvSBV24lgMA:9 a=CjuIK1q_8ugA:10
- a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20210526080224.GI4005783@dell>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: lst.de]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1lqk3J-0000FD-Tw
-Subject: Re: [f2fs-dev] [PATCH 07/14] xfs: Refactor xfs_isilocked()
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (satyaprateek2357[at]gmail.com)
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.171 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.167.171 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (satyaprateek2357[at]gmail.com)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1lqoEH-001bIY-2p
+Subject: Re: [f2fs-dev] [PATCH v8 0/8] add support for direct I/O with
+ fscrypt using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,173 +113,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-mm@kvack.org, Christoph Hellwig <hch@lst.de>,
- linux-cifs@vger.kernel.org, "Darrick J. Wong" <darrick.wong@oracle.com>,
- Matthew Wilcox <willy@infradead.org>, Christoph Hellwig <hch@infradead.org>,
- linux-ext4@vger.kernel.org, Eric Sandeen <sandeen@redhat.com>,
- Dave Chinner <dchinner@redhat.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, linux-xfs@vger.kernel.org,
- Damien Le Moal <damien.lemoal@wdc.com>, Ted Tso <tytso@mit.edu>,
- Miklos Szeredi <miklos@szeredi.hu>, Jeff Layton <jlayton@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
- linux-fsdevel@vger.kernel.org, Pavel Reichl <preichl@redhat.com>,
- Johannes Thumshirn <jth@kernel.org>
+Cc: Jens Axboe <axboe@kernel.dk>, linux-xfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, "Theodore Y . Ts'o" <tytso@mit.edu>,
+ "Darrick J . Wong" <darrick.wong@oracle.com>,
+ open list <linux-kernel@vger.kernel.org>, Satya Tangirala <satyat@google.com>,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-block@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 07, 2021 at 04:52:17PM +0200, Jan Kara wrote:
-> From: Pavel Reichl <preichl@redhat.com>
+On Wed, May 26, 2021 at 09:02:24AM +0100, Lee Jones wrote:
+> On Tue, 25 May 2021, Satya Tangirala wrote:
+> 65;6200;1c
+> > On Tue, May 25, 2021 at 01:57:28PM +0100, Lee Jones wrote:
+> > > On Thu, 21 Jan 2021 at 23:06, Satya Tangirala <satyat@google.com> wrote:
+> > > 
+> > > > This patch series adds support for direct I/O with fscrypt using
+> > > > blk-crypto.
+> > > >
+> > > 
+> > > Is there an update on this set please?
+> > > 
+> > > I can't seem to find any reviews or follow-up since v8 was posted back in
+> > > January.
+> > > 
+> > This patchset relies on the block layer fixes patchset here
+> > https://lore.kernel.org/linux-block/20210325212609.492188-1-satyat@google.com/
+> > That said, I haven't been able to actively work on both the patchsets
+> > for a while, but I'll send out updates for both patchsets over the
+> > next week or so.
 > 
-> Refactor xfs_isilocked() to use newly introduced __xfs_rwsem_islocked().
-> __xfs_rwsem_islocked() is a helper function which encapsulates checking
-> state of rw_semaphores hold by inode.
-> 
-> Signed-off-by: Pavel Reichl <preichl@redhat.com>
-> Suggested-by: Dave Chinner <dchinner@redhat.com>
-> Suggested-by: Eric Sandeen <sandeen@redhat.com>
-> Suggested-by: Darrick J. Wong <darrick.wong@oracle.com>
-> Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
-> Signed-off-by: Jan Kara <jack@suse.cz>
-> ---
->  fs/xfs/xfs_inode.c | 39 +++++++++++++++++++++++++++++++--------
->  fs/xfs/xfs_inode.h | 21 ++++++++++++++-------
->  2 files changed, 45 insertions(+), 15 deletions(-)
-
-As a standalone patch, this is overly elaborate and way more complex
-than it needs to be. It's not really just a refactor, either,
-because of the unnecessary shifting games it adds.
-
-> diff --git a/fs/xfs/xfs_inode.c b/fs/xfs/xfs_inode.c
-> index 0369eb22c1bb..6247977870bd 100644
-> --- a/fs/xfs/xfs_inode.c
-> +++ b/fs/xfs/xfs_inode.c
-> @@ -342,9 +342,34 @@ xfs_ilock_demote(
->  }
->  
->  #if defined(DEBUG) || defined(XFS_WARN)
-> -int
-> +static inline bool
-> +__xfs_rwsem_islocked(
-> +	struct rw_semaphore	*rwsem,
-> +	int			lock_flags,
-> +	int			shift)
-> +{
-> +	lock_flags >>= shift;
-> +
-> +	if (!debug_locks)
-> +		return rwsem_is_locked(rwsem);
-> +	/*
-> +	 * If the shared flag is not set, pass 0 to explicitly check for
-> +	 * exclusive access to the lock. If the shared flag is set, we typically
-> +	 * want to make sure the lock is at least held in shared mode
-> +	 * (i.e., shared | excl) but we don't necessarily care that it might
-> +	 * actually be held exclusive. Therefore, pass -1 to check whether the
-> +	 * lock is held in any mode rather than one of the explicit shared mode
-> +	 * values (1 or 2)."
-> +	 */
-> +	if (lock_flags & (1 << XFS_SHARED_LOCK_SHIFT)) {
-> +		return lockdep_is_held_type(rwsem, -1);
-> +	}
-> +	return lockdep_is_held_type(rwsem, 0);
-> +}
-
-Pass in a boolean value for shared/exclusive and
-you can get rid of passing in the lock flags as well.
-
-static bool
-__xfs_rwsem_islocked(
-	struct rw_semaphore	*rwsem,
-	bool			shared)
-{
-	if (!debug_locks)
-		return rwsem_is_locked(rwsem);
-
-	if (!shared)
-		return lockdep_is_held_type(rwsem, 0);
-
-	/*
-	 * We are checking that the lock is held at least in shared
-	 * mode but don't care that it might be held exclusively
-	 * (i.e. shared | excl). Hence we check if the lock is held
-	 * in any mode rather than an explicit shared mode.
-	 */
-	return lockdep_is_held_type(rwsem, -1);
-}
-
-> +
-> +bool
->  xfs_isilocked(
-> -	xfs_inode_t		*ip,
-> +	struct xfs_inode	*ip,
->  	uint			lock_flags)
->  {
->  	if (lock_flags & (XFS_ILOCK_EXCL|XFS_ILOCK_SHARED)) {
-> @@ -359,15 +384,13 @@ xfs_isilocked(
->  		return rwsem_is_locked(&ip->i_mmaplock.mr_lock);
->  	}
->  
-> -	if (lock_flags & (XFS_IOLOCK_EXCL|XFS_IOLOCK_SHARED)) {
-> -		if (!(lock_flags & XFS_IOLOCK_SHARED))
-> -			return !debug_locks ||
-> -				lockdep_is_held_type(&VFS_I(ip)->i_rwsem, 0);
-> -		return rwsem_is_locked(&VFS_I(ip)->i_rwsem);
-> +	if (lock_flags & (XFS_IOLOCK_EXCL | XFS_IOLOCK_SHARED)) {
-> +		return __xfs_rwsem_islocked(&VFS_I(ip)->i_rwsem, lock_flags,
-> +				XFS_IOLOCK_FLAG_SHIFT);
-
-Then this is simply:
-
-		return __xfs_rwsem_islocked(&VFS_I(ip)->i_rwsem,
-				(lock_flags & XFS_IOLOCK_SHARED));
-
-And the conversion for the MMAPLOCK in the next patch is equally
-simple.
-
-
-> diff --git a/fs/xfs/xfs_inode.h b/fs/xfs/xfs_inode.h
-> index ca826cfba91c..1c0e15c480bc 100644
-> --- a/fs/xfs/xfs_inode.h
-> +++ b/fs/xfs/xfs_inode.h
-> @@ -262,12 +262,19 @@ static inline bool xfs_inode_has_bigtime(struct xfs_inode *ip)
->   * Bit ranges:	1<<1  - 1<<16-1 -- iolock/ilock modes (bitfield)
->   *		1<<16 - 1<<32-1 -- lockdep annotation (integers)
->   */
-> -#define	XFS_IOLOCK_EXCL		(1<<0)
-> -#define	XFS_IOLOCK_SHARED	(1<<1)
-> -#define	XFS_ILOCK_EXCL		(1<<2)
-> -#define	XFS_ILOCK_SHARED	(1<<3)
-> -#define	XFS_MMAPLOCK_EXCL	(1<<4)
-> -#define	XFS_MMAPLOCK_SHARED	(1<<5)
-> +
-> +#define XFS_IOLOCK_FLAG_SHIFT	0
-> +#define XFS_ILOCK_FLAG_SHIFT	2
-> +#define XFS_MMAPLOCK_FLAG_SHIFT	4
-> +
-> +#define XFS_SHARED_LOCK_SHIFT	1
-> +
-> +#define XFS_IOLOCK_EXCL		(1 << XFS_IOLOCK_FLAG_SHIFT)
-> +#define XFS_IOLOCK_SHARED	(XFS_IOLOCK_EXCL << XFS_SHARED_LOCK_SHIFT)
-> +#define XFS_ILOCK_EXCL		(1 << XFS_ILOCK_FLAG_SHIFT)
-> +#define XFS_ILOCK_SHARED	(XFS_ILOCK_EXCL << XFS_SHARED_LOCK_SHIFT)
-> +#define XFS_MMAPLOCK_EXCL	(1 << XFS_MMAPLOCK_FLAG_SHIFT)
-> +#define XFS_MMAPLOCK_SHARED	(XFS_MMAPLOCK_EXCL << XFS_SHARED_LOCK_SHIFT)
->  
->  #define XFS_LOCK_MASK		(XFS_IOLOCK_EXCL | XFS_IOLOCK_SHARED \
->  				| XFS_ILOCK_EXCL | XFS_ILOCK_SHARED \
-
-And all this shifting goes away and the change is much, much
-simpler. If/when other changes are made to this code that require
-shifting like this, then we can make these modifications. But in
-this patch for this usage they don't really make much sense at all..
-
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+> Thanks Satya, I'd appreciate that.
+FYI I sent out an updated patch series last week at
+https://lore.kernel.org/linux-fscrypt/20210604210908.2105870-1-satyat@google.com/
 
 
 _______________________________________________
