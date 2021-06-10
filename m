@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5388B3A315F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Jun 2021 18:51:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4D493A3774
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jun 2021 00:57:57 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lrNth-000070-VK; Thu, 10 Jun 2021 16:51:13 +0000
+	id 1lrTcP-0004hQ-Gb; Thu, 10 Jun 2021 22:57:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1lrNtg-00006t-GV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 16:51:12 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lrTcN-0004hJ-Tq
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 22:57:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=o/Pa4xwqS3dFPQ6N2i4k2RmNkKm0bDjjLkOOi2EsC3g=; b=O3xBvW4oCQt7iQuRbPc12tDQAi
- uLWEcZxKUBQYr8AoW2Js3WdvoZ6+SMCTEa8URyaDprbiVzwY9Re0IOs5DBSllj2N4UM+U6RwtfOeC
- vV8ZP677dDHZySTi8NBVPtbHxjyBay6Caei9hq43FIFJwJzriXwpLqZfXR/bn1aMCs7Y=;
+ bh=GcyB3ZAoJTR6u5KARIiAeEFmH9OCUx8sDi6gyfwhhaQ=; b=d8aJ+h1Rp+xP4HKNSftKT6BRdP
+ 1Va3wZlT9F0D2XRcAeGF87OyMJPxy1waV01ORSYuBlpieN/2CU2Xysu7u7gO61PF5WMrx5RdOlSP/
+ f8OpAYDcNH2G9v2qU/uj8mHsC0O0+9Gvfsv7ZXJ8ZksFq1mj3A8tmKOMJ1PiVnKxp8VU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,39 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=o/Pa4xwqS3dFPQ6N2i4k2RmNkKm0bDjjLkOOi2EsC3g=; b=Nesc+YeuLxDgoKyI1ZZ1nzFubS
- 6TtQkRTcMgQNNTj5RQ6zWmJSDeAzv9mLac6iIBpKiPzLaQ+G39ZFw3vEAMwJU4gonpj6RQSuaBHNL
- z9Sb2Ac8zyGac77eKW3qDOsDqL4P+fEjASFwxZX05ZMPvtfQC5RslxGf960q/gYMcQ6g=;
+ bh=GcyB3ZAoJTR6u5KARIiAeEFmH9OCUx8sDi6gyfwhhaQ=; b=ZPbz+07W1TY3tQCZiAlAUHtlCR
+ R9c9vJlBPQyZVydY/Ymoi5BCfTwetVXUYqm5tv/nk4SonY/oR1i3BtQIA7lerN0tK+YAV7IThBo6K
+ U0U2tlgygO04WVSByoA4rSpP6sBALVHVJW7NreJgsMLFtjDXxMfD+hNghBwYQ0Hvbs9k=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lrNta-00084T-9F
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 16:51:14 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CD86C613E7;
- Thu, 10 Jun 2021 16:51:01 +0000 (UTC)
+ id 1lrTcG-00045p-Na
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 22:57:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E79A6613E1;
+ Thu, 10 Jun 2021 22:57:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1623343861;
- bh=QM7SmhxztbSicY9WukzngYcAzWe6eXIb8R7ckl+q2JM=;
+ s=k20201202; t=1623365849;
+ bh=2qdiKDsyqPFhDYPrvVgVTKvPw/sEvqf7zh726VLz6oY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Kt4XhSYQ2tpcSvWo2wbLRt6fRwwJHJMWkUEcyCG6PeIRMWBk4A3Oka5I77acH0Scz
- 4W2vM8yeIoeYY9Ii1sUuY8FFULQ1Oi+FfNe/nVHLpLyQjjyObfj9W6TGUm8xS7ubJH
- vSeTK2YsA0SZDnf0DacDEEGg5px6Sr8hvjtRkQ7A8HzFI7hADvE32eWrGpUKkrpbkO
- anqTOLVxTkjngCvNhVrnKU4HiM9s6NeKR5eBl462xf/i7TsdrHNCw86eGhgs53WLqd
- QrsBdUOuIvLInY7cswJaQSQcfF8H5DmIQrV+DB59KsJonWi7N2PpDPMET5hhaPTu4h
- 1+phXAC4pHLYQ==
-Date: Thu, 10 Jun 2021 09:51:00 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+ b=p4QOnH+iB2+HQX/xjqiXTm6GkBuwf0HXl0tubPc4tqIchX5M/JPj+0aXJc4H1dRc6
+ iHWYY3W8LfE5UR7maDeWIoS6+BDG9TL7DGJJg6qkreFBER7x77XoctmWwnojk2UFTn
+ CWszSxnOAGk9zOy+uPvvMeBKFVAwEhMD0Bmf3K7ZGcRSSN2XGBZ2lBo68IqOYOGt5N
+ aJWUBo+VrJ+mMlsxJ1pGQviVSJ7lgBZJORUm/c+fp+1rm+Z4Zf0oNPPW9fNKeplWxP
+ OlDA9s+Uw9M/4C3csHao6xW3id36sDPefwShQ0sD4KNpbO1xMCcc1pXBa7RxF8EQN3
+ HTXjdy0o2gCeg==
+Date: Thu, 10 Jun 2021 15:57:27 -0700
+From: Eric Biggers <ebiggers@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YMJC9CY2nCG/6mp5@google.com>
-References: <20210525205138.2512855-1-jaegeuk@kernel.org>
- <17318ac1-19e7-dfed-35f8-65a8e325fc61@kernel.org>
- <YL5Oth8oKnV7h8Pm@google.com>
- <53531f1e-7232-df4d-3a43-43db0e8581f1@kernel.org>
- <YMELoAH7T5b5HLhm@google.com>
- <fec816fb-a4c9-0e65-5f09-8c9fdae73c87@kernel.org>
+Message-ID: <YMKY11PC5y/EfZYf@gmail.com>
+References: <20210608000022.5509-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <fec816fb-a4c9-0e65-5f09-8c9fdae73c87@kernel.org>
+In-Reply-To: <20210608000022.5509-1-chao@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -77,9 +72,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lrNta-00084T-9F
-Subject: Re: [f2fs-dev] [PATCH] sload.f2fs: use F2FS_COMPRESS_RELEASED
- instead of IMMUTABLE bit
+X-Headers-End: 1lrTcG-00045p-Na
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce f2fs_casefold_name slab
+ cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,47 +86,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/10, Chao Yu wrote:
-> On 2021/6/10 2:42, Jaegeuk Kim wrote:
-> > On 06/08, Chao Yu wrote:
-> > > On 2021/6/8 0:52, Jaegeuk Kim wrote:
-> > > > On 06/06, Chao Yu wrote:
-> > > > > On 2021/5/26 4:51, Jaegeuk Kim wrote:
-> > > > > > Let's use F2FS_COMPRESS_RELEASED to disallow writes only.
-> > > > > > 
-> > > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > > 
-> > > > > Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> > > > 
-> > > > Too late, as I published it in master.
-> > > 
-> > > Oops, sorry for the delay.
-> > > 
-> > > So does the patch "f2fs-tools: support small RO partition"?
-> > 
-> > sload.f2fs: use F2FS_COMPRESS_RELEASED instead of IMMUTABLE bit
+On Tue, Jun 08, 2021 at 08:00:22AM +0800, Chao Yu wrote:
+> From: Chao Yu <yuchao0@huawei.com>
 > 
-> Oh, I mean does patch "f2fs-tools: support small RO partition" be
-> pushed as well? if so, seems I don't need to reply with the
-> reviewed-by flag.
+> Add a slab cache: "f2fs_casefold_name" for memory allocation
+> of casefold name.
 
-Yes, it was merged in aosp.
+Commit message should say "f2fs_casefolded_name", not "f2fs_casefold_name".
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > 
-> > > > > Thanks,
+> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> ---
+> v2:
+> - change slab cache name to "f2fs_casefolded_name"
+> - add a "f2fs_" prefix for slab cache variable name
+>  fs/f2fs/dir.c      | 17 +++++++++++------
+>  fs/f2fs/recovery.c |  6 +++++-
+>  fs/f2fs/super.c    | 24 ++++++++++++++++++++++++
+
+Otherwise this looks good.
+
+Reviewed-by: Eric Biggers <ebiggers@google.com>
+
+- Eric
 
 
 _______________________________________________
