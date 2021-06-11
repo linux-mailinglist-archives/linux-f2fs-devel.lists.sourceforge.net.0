@@ -2,77 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61F433A3814
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jun 2021 01:47:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32E943A39B2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jun 2021 04:25:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lrUO3-0004yS-0q; Thu, 10 Jun 2021 23:46:59 +0000
+	id 1lrWrT-0002qf-0z; Fri, 11 Jun 2021 02:25:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lrUO1-0004yA-2M
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 23:46:57 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lrWrQ-0002qW-Ri
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 02:25:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i8yL02ElboLrkUWrYiIXJK51tcOgyYY2ZN4MCJ8XnCI=; b=XOxCT7+/fP02yLGrlKQ8rw1aeL
- nBgXHZ561eqRgK0hG7SuyEhArlij0RWXiuzn8egl0vKnwOZsiQhzMgcyTRDGAcvp3AxrYJgJmv4N4
- juhRiRJSa/CGDItrRqrIJxABkgZOWuNUPlVvWaj6zqfOx8P9z/OGhe4XXQQ3mRSeKvmM=;
+ bh=6SmDDmcHsiLQXQNTrX0A9KnFe0+5NlAMJUDIsFOyPjs=; b=b6rbNoNu8Y6XnakM9qt/sQANYg
+ jUtRjB5D8pfid3Ik92vaUKfeE6mIMsF9hboNAbFZfbROXQn6MTSvZvB/5zNfSNkg9YI6USMIjhG/7
+ yFcVmTL8YKGBpNQAupajMJ9xgjMjHZtwh4B+3+TzlRFurUrKYhoHcfgAn39nviiVFMyI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=i8yL02ElboLrkUWrYiIXJK51tcOgyYY2ZN4MCJ8XnCI=; b=V
- AWGyGQM6zfT8LvVnWS+yLpNChHyZRBymdHMf264T5n+iuAwZwrdmvs6IHkuKzPkuAR7z8jhdpOk2b
- iy93fAchuZUZl3IV5RRBx+JK24dIeb2PAKCb9XNRGtp32kBaXTMG/o8I314alByeX1RpLzT/r0tx4
- QOsFPWPgvL27oTSc=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6SmDDmcHsiLQXQNTrX0A9KnFe0+5NlAMJUDIsFOyPjs=; b=gsZ4rSES8HeDhbwBX5KU+xAwty
+ wWzDhf1rgKRUTKC9EJVu7kiQctmSd4a0+i+A6Gtg6Wx5BDHQszyB7dD6vnsV32rnfhznl8DE5gjYE
+ 1aljvZmRgaSV5g0HiXl4sRwXRE9FS8oTf1TpAiLk8GOqxEXoHIhYilfTnkX9WrtdE3+8=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lrUNr-004ClM-HP
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Jun 2021 23:46:58 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 10D7B60231;
- Thu, 10 Jun 2021 23:46:35 +0000 (UTC)
+ id 1lrWrR-004Lyk-H5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 02:25:32 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 253BC6124C;
+ Fri, 11 Jun 2021 02:25:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1623368797;
- bh=ZJ0RHYLkh6UegiE0t65eO7zajpctipDunke543nlPuc=;
- h=From:To:Cc:Subject:Date:From;
- b=p5D37oIFouRX//tRsyazUMasAQnjHuwr7MmG/5QEasA6COmSWF9X81oR2NxTDMNO+
- O3S5Xpna46Agu2FhTCmZvTh/dwsG9Hqq1BBIM8YCbXA8XT2CzaKS0JvgHC3LvH3O6Z
- 2zMvTY7M1p63xnDdRw0XrSZWL754KyzC+/IBe0DPIfmR7wpCwlbU0AC9224puWcf4m
- oemZZtGT513mdsYrENLXZ/2ufSWrOX2VceC7kTOX76fYu67kvCHB5Jo1wX7GTbJxfK
- 7qsPoRckDV0f03Qeml01NcLSE0Tw/DuuKizbJDHfSHGRZgVwgFcDafu3IGGBzHAskX
- qdlD9JlXjpB4A==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri, 11 Jun 2021 07:46:30 +0800
-Message-Id: <20210610234630.3046-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.1
+ s=k20201202; t=1623378319;
+ bh=j3FDr9xnJcCgR07zql+OK4VkeLxdJj8Zl8SGv4olxds=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=V4msDiLz9LmE5aELx0LYd9HBwB8gSJ1pfSUBRfhmsPE9KQ2VrI0Uo5x7cCMwraUHJ
+ 9Y2xxRkPxwjrVLLakCttfFnNm4yKxj8GDTcfVk6f+gFb8B+EADbCNsyntlOJ5/oi/Y
+ uXmzvZmi2MnPhuv/n0jgg1NhC+hO8HOdXJEyc0tSd4rwzEeW0v3knLq9S7qaZcV5um
+ Q4ZqJGlKsoy1gMy/v07LBIIhG58rtWVl0YTxazLLHZOJbVnfxaIWxpCaeWsawnViAZ
+ 5alMaKoRg70mfjdFbWtRDcHDWhYvlKiGHQXE5aT/NS1Pgbe57kpajo9NF2s31eLTTO
+ jovtxVxNjtAGg==
+Date: Thu, 10 Jun 2021 19:25:17 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <YMLJjT97wHh4XJiZ@sol.localdomain>
+References: <20210605075033.54424-1-ebiggers@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210605075033.54424-1-ebiggers@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: cf_name.name]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lrUNr-004ClM-HP
-Subject: [f2fs-dev] [PATCH v3] f2fs: introduce f2fs_casefolded_name slab
- cache
+X-Headers-End: 1lrWrR-004Lyk-H5
+Subject: Re: [f2fs-dev] [PATCH v2] fscrypt: fix derivation of SipHash keys
+ on big endian CPUs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,156 +82,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-ext4@vger.kernel.org, stable@vger.kernel.org,
+ Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+On Sat, Jun 05, 2021 at 12:50:33AM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> Typically, the cryptographic APIs that fscrypt uses take keys as byte
+> arrays, which avoids endianness issues.  However, siphash_key_t is an
+> exception.  It is defined as 'u64 key[2];', i.e. the 128-bit key is
+> expected to be given directly as two 64-bit words in CPU endianness.
+> 
+> fscrypt_derive_dirhash_key() and fscrypt_setup_iv_ino_lblk_32_key()
+> forgot to take this into account.  Therefore, the SipHash keys used to
+> index encrypted+casefolded directories differ on big endian vs. little
+> endian platforms, as do the SipHash keys used to hash inode numbers for
+> IV_INO_LBLK_32-encrypted directories.  This makes such directories
+> non-portable between these platforms.
+> 
+> Fix this by always using the little endian order.  This is a breaking
+> change for big endian platforms, but this should be fine in practice
+> since these features (encrypt+casefold support, and the IV_INO_LBLK_32
+> flag) aren't known to actually be used on any big endian platforms yet.
+> 
+> Fixes: aa408f835d02 ("fscrypt: derive dirhash key for casefolded directories")
+> Fixes: e3b1078bedd3 ("fscrypt: add support for IV_INO_LBLK_32 policies")
+> Cc: <stable@vger.kernel.org> # v5.6+
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+> 
+> v2: Fixed fscrypt_setup_iv_ino_lblk_32_key() too, not just
+>     fscrypt_derive_dirhash_key().
+> 
+>  fs/crypto/keysetup.c | 40 ++++++++++++++++++++++++++++++++--------
+>  1 file changed, 32 insertions(+), 8 deletions(-)
+> 
 
-Add a slab cache: "f2fs_casefolded_name" for memory allocation
-of casefold name.
+Applied to fscrypt.git#master for 5.14.
 
-Reviewed-by: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
----
-v3:
-- change "f2fs_casefold_name" to "f2fs_casefolded_name" in commit
-title and message.
- fs/f2fs/dir.c      | 17 +++++++++++------
- fs/f2fs/recovery.c |  6 +++++-
- fs/f2fs/super.c    | 24 ++++++++++++++++++++++++
- 3 files changed, 40 insertions(+), 7 deletions(-)
-
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 96dcc4aca639..456651682daf 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -16,6 +16,10 @@
- #include "xattr.h"
- #include <trace/events/f2fs.h>
- 
-+#ifdef CONFIG_UNICODE
-+extern struct kmem_cache *f2fs_cf_name_slab;
-+#endif
-+
- static unsigned long dir_blocks(struct inode *inode)
- {
- 	return ((unsigned long long) (i_size_read(inode) + PAGE_SIZE - 1))
-@@ -77,11 +81,10 @@ int f2fs_init_casefolded_name(const struct inode *dir,
- {
- #ifdef CONFIG_UNICODE
- 	struct super_block *sb = dir->i_sb;
--	struct f2fs_sb_info *sbi = F2FS_SB(sb);
- 
- 	if (IS_CASEFOLDED(dir)) {
--		fname->cf_name.name = f2fs_kmalloc(sbi, F2FS_NAME_LEN,
--						   GFP_NOFS);
-+		fname->cf_name.name = kmem_cache_alloc(f2fs_cf_name_slab,
-+								GFP_NOFS);
- 		if (!fname->cf_name.name)
- 			return -ENOMEM;
- 		fname->cf_name.len = utf8_casefold(sb->s_encoding,
-@@ -89,7 +92,7 @@ int f2fs_init_casefolded_name(const struct inode *dir,
- 						   fname->cf_name.name,
- 						   F2FS_NAME_LEN);
- 		if ((int)fname->cf_name.len <= 0) {
--			kfree(fname->cf_name.name);
-+			kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
- 			fname->cf_name.name = NULL;
- 			if (sb_has_strict_encoding(sb))
- 				return -EINVAL;
-@@ -172,8 +175,10 @@ void f2fs_free_filename(struct f2fs_filename *fname)
- 	fname->crypto_buf.name = NULL;
- #endif
- #ifdef CONFIG_UNICODE
--	kfree(fname->cf_name.name);
--	fname->cf_name.name = NULL;
-+	if (fname->cf_name.name) {
-+		kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
-+		fname->cf_name.name = NULL;
-+	}
- #endif
- }
- 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 4cfe36fa41be..76e62771433c 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -45,6 +45,10 @@
- 
- static struct kmem_cache *fsync_entry_slab;
- 
-+#ifdef CONFIG_UNICODE
-+extern struct kmem_cache *f2fs_cf_name_slab;
-+#endif
-+
- bool f2fs_space_for_roll_forward(struct f2fs_sb_info *sbi)
- {
- 	s64 nalloc = percpu_counter_sum_positive(&sbi->alloc_valid_block_count);
-@@ -145,7 +149,7 @@ static int init_recovered_filename(const struct inode *dir,
- 		f2fs_hash_filename(dir, fname);
- #ifdef CONFIG_UNICODE
- 		/* Case-sensitive match is fine for recovery */
--		kfree(fname->cf_name.name);
-+		kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
- 		fname->cf_name.name = NULL;
- #endif
- 	} else {
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9089303f7f8c..999fbe3a8d8f 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -277,6 +277,24 @@ static int f2fs_sb_read_encoding(const struct f2fs_super_block *sb,
- 
- 	return 0;
- }
-+
-+struct kmem_cache *f2fs_cf_name_slab;
-+static int __init f2fs_create_casefold_cache(void)
-+{
-+	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
-+							F2FS_NAME_LEN);
-+	if (!f2fs_cf_name_slab)
-+		return -ENOMEM;
-+	return 0;
-+}
-+
-+static void f2fs_destroy_casefold_cache(void)
-+{
-+	kmem_cache_destroy(f2fs_cf_name_slab);
-+}
-+#else
-+static int __init f2fs_create_casefold_cache(void) { return 0; }
-+static void f2fs_destroy_casefold_cache(void) { }
- #endif
- 
- static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
-@@ -4316,7 +4334,12 @@ static int __init init_f2fs_fs(void)
- 	err = f2fs_init_compress_cache();
- 	if (err)
- 		goto free_compress_mempool;
-+	err = f2fs_create_casefold_cache();
-+	if (err)
-+		goto free_compress_cache;
- 	return 0;
-+free_compress_cache:
-+	f2fs_destroy_compress_cache();
- free_compress_mempool:
- 	f2fs_destroy_compress_mempool();
- free_bioset:
-@@ -4352,6 +4375,7 @@ static int __init init_f2fs_fs(void)
- 
- static void __exit exit_f2fs_fs(void)
- {
-+	f2fs_destroy_casefold_cache();
- 	f2fs_destroy_compress_cache();
- 	f2fs_destroy_compress_mempool();
- 	f2fs_destroy_bioset();
--- 
-2.22.1
-
+- Eric
 
 
 _______________________________________________
