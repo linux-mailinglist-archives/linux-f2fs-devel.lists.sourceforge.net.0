@@ -2,75 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E943A39B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jun 2021 04:25:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 830133A3D2C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jun 2021 09:33:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lrWrT-0002qf-0z; Fri, 11 Jun 2021 02:25:31 +0000
+	id 1lrbfF-00009C-Ig; Fri, 11 Jun 2021 07:33:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1lrWrQ-0002qW-Ri
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 02:25:28 +0000
+ (envelope-from <robinh3123@gmail.com>) id 1lrbfE-000092-RJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 07:33:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6SmDDmcHsiLQXQNTrX0A9KnFe0+5NlAMJUDIsFOyPjs=; b=b6rbNoNu8Y6XnakM9qt/sQANYg
- jUtRjB5D8pfid3Ik92vaUKfeE6mIMsF9hboNAbFZfbROXQn6MTSvZvB/5zNfSNkg9YI6USMIjhG/7
- yFcVmTL8YKGBpNQAupajMJ9xgjMjHZtwh4B+3+TzlRFurUrKYhoHcfgAn39nviiVFMyI=;
+ bh=BPCqp2eGjYWyxk+FWTzcqZLzws1GFwCcPnBYqRgaGjY=; b=SbOffgB56wwh9feXqv97KlRq3x
+ S4mXQLrQp3hd5ZVX3SGOKRjx/OYHCmn+PAzxHwGGzll+eeVrF+qMmOc8SzFAuWPNHIdevgE4Fr7Bn
+ UZ3jeyOXXRTkxT1btdnNcwvoQoHsefF1WoLI1SGen+2y7JirVJhRmrn+OIElpT1QUBwI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6SmDDmcHsiLQXQNTrX0A9KnFe0+5NlAMJUDIsFOyPjs=; b=gsZ4rSES8HeDhbwBX5KU+xAwty
- wWzDhf1rgKRUTKC9EJVu7kiQctmSd4a0+i+A6Gtg6Wx5BDHQszyB7dD6vnsV32rnfhznl8DE5gjYE
- 1aljvZmRgaSV5g0HiXl4sRwXRE9FS8oTf1TpAiLk8GOqxEXoHIhYilfTnkX9WrtdE3+8=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BPCqp2eGjYWyxk+FWTzcqZLzws1GFwCcPnBYqRgaGjY=; b=A
+ ltVAiC7p/hXUYEvlyWdySK4xllDxnCcvEbUChi1pAqiGCtr/vhhUUJtciUuhJ21S3Pek2qmAGTV8g
+ 1ABKS8JrqCwjYzqEIfkzSMTabpDUDNO02bCFqzCwH/YREeCagr2pCMQf4vIBzf+5UiJF3B76GcX9W
+ BHd7AB3zLKGBsCII=;
+Received: from mail-pj1-f54.google.com ([209.85.216.54])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lrWrR-004Lyk-H5
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 02:25:32 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 253BC6124C;
- Fri, 11 Jun 2021 02:25:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1623378319;
- bh=j3FDr9xnJcCgR07zql+OK4VkeLxdJj8Zl8SGv4olxds=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=V4msDiLz9LmE5aELx0LYd9HBwB8gSJ1pfSUBRfhmsPE9KQ2VrI0Uo5x7cCMwraUHJ
- 9Y2xxRkPxwjrVLLakCttfFnNm4yKxj8GDTcfVk6f+gFb8B+EADbCNsyntlOJ5/oi/Y
- uXmzvZmi2MnPhuv/n0jgg1NhC+hO8HOdXJEyc0tSd4rwzEeW0v3knLq9S7qaZcV5um
- Q4ZqJGlKsoy1gMy/v07LBIIhG58rtWVl0YTxazLLHZOJbVnfxaIWxpCaeWsawnViAZ
- 5alMaKoRg70mfjdFbWtRDcHDWhYvlKiGHQXE5aT/NS1Pgbe57kpajo9NF2s31eLTTO
- jovtxVxNjtAGg==
-Date: Thu, 10 Jun 2021 19:25:17 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Message-ID: <YMLJjT97wHh4XJiZ@sol.localdomain>
-References: <20210605075033.54424-1-ebiggers@kernel.org>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lrbf6-004ff3-AA
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Jun 2021 07:33:13 +0000
+Received: by mail-pj1-f54.google.com with SMTP id
+ x21-20020a17090aa395b029016e25313bfcso5500519pjp.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jun 2021 00:33:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=BPCqp2eGjYWyxk+FWTzcqZLzws1GFwCcPnBYqRgaGjY=;
+ b=WI0HmFD9udfNt6puGF2sPP3vr5UJEht56zRSnQcExkBlGzwBAezgwnnWotmwlm6f08
+ p6rmo5obbgiylTjTBW+WtQPzAYv0s14AHtjUYE51ouc3GAIRcJYWcT29rrhmJesZJ3g5
+ gXohqG1pQ/5LXp5Z8CHNT+x8EGtA/aNTwq24HUEv7iGNr/dlbgu+3TdneVw74uJyH7VW
+ WxQzdMRt8Va7YoA7eoCIvns+w1Nrs7CnYkKUFkd0pOSBlGaF19IMb45emSU/1y6XCoHa
+ c3Z8ZmdkQWFO4nwYfwNKyJ7RppKFA+9W+hZXgphIthGzj4uhFv19kvOzjTT8X3mwVYMD
+ kv3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=BPCqp2eGjYWyxk+FWTzcqZLzws1GFwCcPnBYqRgaGjY=;
+ b=tbFz09sEiZhINrqen+XZmj1KEPtd/Aro3GryvvSQdZzySLGzuGTjy10tdUBpNzVQ3X
+ md5yoU1v2xCGnCsMl6UZyJjdYqfNbWXXc7C6dHNxIU4Ljlac1rQQA62vUxe0ooCO/Xr8
+ nD0G056rpvzoWOkTUJWWZwwSXQ7tdqCRQbmhM7xdxjfuoB2nnzzRtqypT4dwG3/vQAw8
+ cyt9gbUncKxELo2e7iI7gMjxKAr+vP2Vw7kUTGPX/uF/YBCkduX7Tc6Tm85sfOym+dNr
+ XVJGva8rk38mioeY/aS2pz5nZihB0EZoSZo2rhUPfIM215D2x6OpM5u6leh6iTa/UbGg
+ TnIA==
+X-Gm-Message-State: AOAM532BnIsc74vgqRG3VHCutws2MKZpNy/XeGxBgAgg5GR9LX2YX0Yn
+ tyTp7Ia4SggL6NKTHXPPyQo0pCCs5Gc=
+X-Google-Smtp-Source: ABdhPJwhvFF2k1N/OAp9yt8Sw7TqpWkKrs0Z7otIcTPVCOll/eq4RmBn9ZYJ59yPFv6NsL6sex78qA==
+X-Received: by 2002:a17:90a:c20b:: with SMTP id
+ e11mr7794271pjt.67.1623396778482; 
+ Fri, 11 Jun 2021 00:32:58 -0700 (PDT)
+Received: from robinhsu-p520.ntc.corp.google.com
+ ([2401:fa00:fc:202:8113:90ef:a3f7:4502])
+ by smtp.gmail.com with ESMTPSA id i14sm3988085pjv.15.2021.06.11.00.32.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Jun 2021 00:32:57 -0700 (PDT)
+From: Robin Hsu <robinh3123@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, chao@kernel.org
+Date: Fri, 11 Jun 2021 15:31:11 +0800
+Message-Id: <20210611073111.947552-1-robinh3123@gmail.com>
+X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210605075033.54424-1-ebiggers@kernel.org>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (robinh3123[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.54 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.54 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (robinh3123[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lrWrR-004Lyk-H5
-Subject: Re: [f2fs-dev] [PATCH v2] fscrypt: fix derivation of SipHash keys
- on big endian CPUs
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1lrbf6-004ff3-AA
+Subject: [f2fs-dev] [PATCH] sload.f2fs: Reword "IMMUTABLE" in
+ strings/comments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,48 +112,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-ext4@vger.kernel.org, stable@vger.kernel.org,
- Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Jun 05, 2021 at 12:50:33AM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Typically, the cryptographic APIs that fscrypt uses take keys as byte
-> arrays, which avoids endianness issues.  However, siphash_key_t is an
-> exception.  It is defined as 'u64 key[2];', i.e. the 128-bit key is
-> expected to be given directly as two 64-bit words in CPU endianness.
-> 
-> fscrypt_derive_dirhash_key() and fscrypt_setup_iv_ino_lblk_32_key()
-> forgot to take this into account.  Therefore, the SipHash keys used to
-> index encrypted+casefolded directories differ on big endian vs. little
-> endian platforms, as do the SipHash keys used to hash inode numbers for
-> IV_INO_LBLK_32-encrypted directories.  This makes such directories
-> non-portable between these platforms.
-> 
-> Fix this by always using the little endian order.  This is a breaking
-> change for big endian platforms, but this should be fine in practice
-> since these features (encrypt+casefold support, and the IV_INO_LBLK_32
-> flag) aren't known to actually be used on any big endian platforms yet.
-> 
-> Fixes: aa408f835d02 ("fscrypt: derive dirhash key for casefolded directories")
-> Fixes: e3b1078bedd3 ("fscrypt: add support for IV_INO_LBLK_32 policies")
-> Cc: <stable@vger.kernel.org> # v5.6+
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
-> 
-> v2: Fixed fscrypt_setup_iv_ino_lblk_32_key() too, not just
->     fscrypt_derive_dirhash_key().
-> 
->  fs/crypto/keysetup.c | 40 ++++++++++++++++++++++++++++++++--------
->  1 file changed, 32 insertions(+), 8 deletions(-)
-> 
+From: Robin Hsu <robinhsu@google.com>
 
-Applied to fscrypt.git#master for 5.14.
+Since the IMMUTABLE flag for compression is now changed
+to F2FS_COMPRESS_RELEASED, some 'IMMUTABLE' words should be changed too:
+	1. sload help page
+	2. inline comments
 
-- Eric
+Signed-off-by: Robin Hsu <robinhsu@google.com>
+---
+ fsck/main.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/fsck/main.c b/fsck/main.c
+index c07be1e..c0b871b 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -149,7 +149,8 @@ void sload_usage()
+ 	MSG(0, "    * -i or -x: use it many times for multiple extensions.\n");
+ 	MSG(0, "    * -i and -x cannot be used together..\n");
+ 	MSG(0, "    -m <num> min compressed blocks per cluster\n");
+-	MSG(0, "    -r readonly (IMMUTABLE) for compressed files\n");
++	MSG(0, "    -r read only (to release unused blocks) for compressed "
++			"files\n");
+ 	MSG(0, "    ------------------------------------------------------\n");
+ 	MSG(0, "  -d debug level [default:0]\n");
+ 	MSG(0, "  -V print the version number and exit\n");
+@@ -650,7 +651,7 @@ void f2fs_parse_options(int argc, char *argv[])
+ 				}
+ 				c.compress.min_blocks = val;
+ 				break;
+-			case 'r': /* compress file to set IMMUTABLE */
++			case 'r': /* for setting F2FS_COMOPRESS_RELEASE */
+ 				c.compress.required = true;
+ 				c.compress.readonly = true;
+ 				break;
+-- 
+2.32.0.272.g935e593368-goog
+
 
 
 _______________________________________________
