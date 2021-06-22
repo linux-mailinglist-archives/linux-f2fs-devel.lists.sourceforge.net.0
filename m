@@ -2,167 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 236A63AFB40
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Jun 2021 05:05:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 266733B00D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Jun 2021 11:54:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lvWiu-00015B-8c; Tue, 22 Jun 2021 03:05:12 +0000
+	id 1lvd6w-0006D2-68; Tue, 22 Jun 2021 09:54:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <prvs=8000ad4dc=Aravind.Ramesh@wdc.com>)
- id 1lvWin-00014v-Rb
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Jun 2021 03:05:07 +0000
+ (envelope-from <jack@suse.cz>) id 1lvd6v-0006Cv-Ab
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Jun 2021 09:54:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R03xLRZQasT0xKgUdIeFTbDriXrXlf8BCbzTMZziVSY=; b=VDUD4E66aPsUdKFfwGaEtT3pXf
- oimMTAQ5PphxFMlp6hUF/nYtkm3go1TwtBIZ5Bc5nXdvB4dpZ3uiWtGzYBvAY+F0WcAGIQTWGm0Oe
- I14MZji1gRj0NW77jNwyHHN9rIRGsUrTS1I1pOZoZf+jilCGOqUCtus/AyhyT/dXZYI4=;
+ bh=98oHbO3xbIWGY6iWjq4cc/TM2Gd76Sa3sYzYIdOT4wU=; b=GPrqIf2kPRCUVN9tcucwOJ0We8
+ wfRtfipqQBu+8tC+AaHQsLSirA7sGzmKqHpWHpW0byWar0O6TnCyOez/+6/napbT50stxVRzIOgE/
+ LmX4bjySw1p5hl2N2XbhzJfI+p8BLauo+fMSYCcV4C08RAvFEo1i+gDJnIGNOPG4a+5k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=R03xLRZQasT0xKgUdIeFTbDriXrXlf8BCbzTMZziVSY=; b=KXZ8h7nTNkAqVebeDMUZ2wv5wf
- GYp/Nc0IeU7Ge1ad9J2nxZ/THPggcB4w85ZpJdKuScK17n2cZNPcrvwT9Rgo4DI0n17q+sg+YuEm9
- x4GIGVtgSYgzPSMDVrPy2dj62TOJT0AO1Ymcm3jA+DdwLMTje11a77sGvNjvC8joDFi8=;
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lvWiX-000893-LA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Jun 2021 03:05:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1624331090; x=1655867090;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=R03xLRZQasT0xKgUdIeFTbDriXrXlf8BCbzTMZziVSY=;
- b=gKtnjQ/7w2ujZiAf+k1jypKYnR+dVNcZhQh1Rlqhf3CZBXCfYQiryL5g
- ySU5i1VE7/Ei1O90K80i+NON7UCdy21DIbMt71KT1eX6Xel5MKb6joDQO
- IeHwQcKTFs9WcsIrz/S/2steHyGXTjKdy4NRMreNPhepoo5jruDWToVCi
- 3wzZExt7w3Acv20MNk36QCh4eJ41p9eNt4KiE/bZsEhYGXvH4JS4sD8PH
- 8Oq3EGjIQdV0GIC+t/p1X1DTGz0leIRoPtlLkKMGBwmvTduiswlDBN5Xg
- ySV74agfpqdpERWF5f3OmpsLSDbS2fDlXNahG+6hTlYisz8lIn3pSn3kc g==;
-IronPort-SDR: pmmNQ6k+hquW+MY51wKse84Z7XNcuWLO0u3+AfPzRgL2pfVepbVdEtM9yTAwFn1naW34OH1LkB
- RaRIXxIGYjWjgtDuRxlHgL2OoTG9N2l4i1Yum8QamwPR3GvuJy5XWc1ZliTdrVW/8VTWOn15s7
- QwJMhtdvZdInPfUBUNvnti03LwV6q/wXpf6108zowLXbuVcHGTCuDfsp4TS92BgDoI5UpW7RuQ
- 0X4echtoepubwm0tc+paPwjeXPAi6pCN2JWVr7Bmyt5cLWKxxuwh/PaLES1lXUxu+aUH8bgVfG
- 6k4=
-X-IronPort-AV: E=Sophos;i="5.83,291,1616428800"; d="scan'208";a="172543291"
-Received: from mail-bn8nam11lp2173.outbound.protection.outlook.com (HELO
- NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.173])
- by ob1.hgst.iphmx.com with ESMTP; 22 Jun 2021 10:49:12 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Tvn3NWmX2ofPbHctvWbAOx/bGc4vlVKBeNOg2vP42N7mNAy70slHjJ+JYFC30T+EVA2FLfqr51MVfo2HBLAlvJt1kpkH8fwJOyuj0/yFSZTYm2bwLKgubFo7zqP+I+jAJpg/lEDsibTVy7Bo3fh9boE51zVUhITGRa2ZR976+yVSeQjsmQSEWjkKYTJfMPBrWr1ewipwGgE2ykCby/MFslNZTlAO+yD4qwmo+4mWDjmjJOteD1prC/QyjVBMxckYPw5P9CTPw/jJ1hmGkgbG7IJkVKObmZDgSVFkP6Z1Upw4dxSvMhjsb2phKEbY9pOQ3R+KvvwBTUleYdxuJ0jmhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R03xLRZQasT0xKgUdIeFTbDriXrXlf8BCbzTMZziVSY=;
- b=P9Iwj5Fmr8AsfLyfU5d/n5YIoIqAfY0i0qzJTIOmWWx/kQFUriic/nz91hqrNEhpHn38Z1r5eznpVlzaPkN57xAnxfoC9EFYu4hhw1rTsv/c1aGNeADZ2oRNcYbuqtGrQJd45b9kfjBqKkeo4sTMxLM311Pp1Pn8NZbQXuViQUYzux822T0IS7ijXYUTDZ20pgxkpFThkvngdpQvEa8uRN4tVQYaJywqZdQ/UjeJ8wRPOtMk76500wNkK3ueST0F5JSQntUkFLYwMJd5BgF4oOrpv7lcmr9fDqtVJ9r8as8Ijb0pgxZsAwtDzdf8XmBJquesfSzDFsdnnX2EZW+55w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R03xLRZQasT0xKgUdIeFTbDriXrXlf8BCbzTMZziVSY=;
- b=XNqR+qgd7QY46v16CdJgIivObfjM+V+0L3b8YLzN2LlRhyjnMTXBkGIESgzmtchrOpNAkTELzdhrXxfi1AQ2UyQi1Hr8d1P+GT3pSF3R7Xzgmu5KccjwoEwpyafsGXb3UBKwFqju0R/Vqa/gLHDdDHndZP6gVIgpmHxaHdAR4wA=
-Received: from BYAPR04MB4056.namprd04.prod.outlook.com (2603:10b6:a02:b4::22)
- by BYAPR04MB5559.namprd04.prod.outlook.com (2603:10b6:a03:ed::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.21; Tue, 22 Jun
- 2021 02:49:11 +0000
-Received: from BYAPR04MB4056.namprd04.prod.outlook.com
- ([fe80::fc71:bcb6:e18d:6973]) by BYAPR04MB4056.namprd04.prod.outlook.com
- ([fe80::fc71:bcb6:e18d:6973%5]) with mapi id 15.20.4242.023; Tue, 22 Jun 2021
- 02:49:11 +0000
-From: Aravind Ramesh <Aravind.Ramesh@wdc.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Thread-Topic: [f2fs-dev] [PATCH] f2fs-tools: fix metadata region overlap with
- zoned block device zones
-Thread-Index: AQHXYuWEBwnGsNzOBUCqy1RKV/gfXKsewbwwgAB384CAACI8sA==
-Date: Tue, 22 Jun 2021 02:49:11 +0000
-Message-ID: <BYAPR04MB4056D1DDEA9E79ECA3A2568D8C099@BYAPR04MB4056.namprd04.prod.outlook.com>
-References: <20210616192558.1655258-1-aravind.ramesh@wdc.com>
- <BYAPR04MB405637307829953851645A098C0A9@BYAPR04MB4056.namprd04.prod.outlook.com>
- <YNEyZcqB69Tkuu5Q@google.com>
-In-Reply-To: <YNEyZcqB69Tkuu5Q@google.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=wdc.com;
-x-originating-ip: [129.253.184.147]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 4f3018a0-4450-4305-a5e9-08d935285068
-x-ms-traffictypediagnostic: BYAPR04MB5559:
-x-microsoft-antispam-prvs: <BYAPR04MB555991F7D22D330C0A8D66488C099@BYAPR04MB5559.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:525;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: vnQBW53PXjrH0dRu62luu0LJcbo5Rn0abD9A76yZtMDtqCFowrcx3+52ivvfU8Xl5+d1Y1Ic/BVeUeW0wj/EFM81IXUQP7aIVRn8GazGHd7/GMPlL2M1ZaJCoqgF2cigtMrBc4AXsGHpuqhTD36ypnnFxEvQq6vhBMALiGpaHbC2EO+4trpaN1SQ94H4p4m5VYIJsfNabFMMMrTZyHyqwvHLzHZUs4w8t5S/cDXtP4HUdACL4jSrvnLHXYh8vdCru/v31slTVIeyq9YTZYlR3CyT+lUBpDypK2K99QATUFu7S1vw5879iU0EpAKgpWIlrEBmDAAatz29jjEpYixu0PTeoIYkZjai9zqiubJwMvsJSZ6vXsNYSdHkPstUCYSWPLhucvyhFHJrxVo7pYncpvgHhws3xi6PdUTRxo72AajdHfIDxkh9efis3Yp55vhNBtUohbeyPZmbllLREHKlFX5hcwzqwJ/JEr/HW4H8H3wPqB+Nmw7JXPg4x79SHeVX7dWqTpXgz4gmwmlipeOjULo5v39DdiDZ9D1/fLr3eiNTbVLaFlQHjFLctqOxHMSlIV1ygPtYxWuRFbyRujYaQ3olf6vT6eJPpHmRfEhpP5iRcys2iCeb8Co2ujGCaaOVGYH6YIzd/KnBT6MlBhhuxRXRCViLlGMC/s2ke/XQxvwUhF19r7wrIVKdLuprgRToAmXSUp0ij90Um/sbUmxEcw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR04MB4056.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(396003)(136003)(366004)(376002)(39860400002)(4326008)(76116006)(26005)(52536014)(2906002)(7696005)(6506007)(316002)(54906003)(966005)(478600001)(558084003)(33656002)(5660300002)(122000001)(6916009)(66946007)(38100700002)(8936002)(55016002)(186003)(9686003)(71200400001)(8676002)(66446008)(64756008)(66556008)(66476007)(86362001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?jGcNrNZQdONBGvKcQpOu5PWQH6loQreE6BEwWsz6T/r2T+HnCaiDB4vPiJXn?=
- =?us-ascii?Q?ku4YRvZMqKBaokBldvOgFb/ae6Bwo8OzBQ8VTdCwdQ7cvDa+XfmZUnA0jyz3?=
- =?us-ascii?Q?gzJOW82oeR9A27OGm2Z3SSiLb5YuLdOLjW7djiA94fcEyDU7Uv+OFGb8vjqM?=
- =?us-ascii?Q?K5nsLf26pkgFZD6OJfYMy9J1TVI1g4NeRpljh2syz0+hgFXhVXd2oC1cQ6Ew?=
- =?us-ascii?Q?Fi7JtE+SOZPFyiBzrrL8/cwB3XCwUpNAF1dnfCYiy6rFjaGUKJO3xUGCQISx?=
- =?us-ascii?Q?SjwkdI4/kDBWznrask8LJgGdF4wh5t92/ioJ8e1WnBzVKcrK1dTTUVBJHFX2?=
- =?us-ascii?Q?vryzpX6mFIkuetkPG0WMH2L+8LeK8pHUrIphPYBLQuJAPS1vVvI6kQ4CyNwh?=
- =?us-ascii?Q?8sj5AIHnmsvmzKIqyveEIoQPiov+Y6BBmFVw1+kCBBHbBTmp4ZYP/eeNaex1?=
- =?us-ascii?Q?HTSH5oKx0iSMrKSg1gS6LpbVZAC9Xr0XEkP5VBJ5VtqIBEiC0WU1KdfjDmRy?=
- =?us-ascii?Q?YozRHtlqB1LzCudyhUIY4rELVMLZD7sQIMOMx0mKsQA39/0UMBcxQrvDDY5H?=
- =?us-ascii?Q?1Jsmt9UhNqqpTlQzjWJPE7egbQJve3t/cacoPx4+BcyigOM7PuKw5IiZnJAF?=
- =?us-ascii?Q?9Iox9HJrnwET5K0et4Eo4ETMFlyiMZuqHDRytCHK3v3La1/tLD39QvVOobnR?=
- =?us-ascii?Q?lqUaNTqJmnx6/SYzerY3CyGqb3tzH8Q0Yg2w3qHxaCw0zT6HcwtplRwVkzTM?=
- =?us-ascii?Q?8C8VfmSW/OnUjLg8qDSGY7wTlp8XZmuB5qQ+WKiFaWtd0bAHmPvPwHdeNtTI?=
- =?us-ascii?Q?TN7iTvPh9eTkTa86bjTheixg9xY6MzlX4kAbBgur5xji0SLymCmKHb7Um7lH?=
- =?us-ascii?Q?eX/BQoPDpVUgUkkQo0PySZOvWtevFzJIe5iuzq9VRWHlyq3yayJyx8faEI9V?=
- =?us-ascii?Q?I/4g+GmDH9ItgV6yFxJ5HESZg04N5Hx4bvnuE4RGf/m5jjikk4GUosGYpUZ0?=
- =?us-ascii?Q?qZseQj6lMNzUyEftiHO0oG23gATjPID2ZMZVfvE8oaOpQTo3i6elcWk6DgRX?=
- =?us-ascii?Q?mOeulbEo+A6V95fA1ewUMUthFDh+NGQIBhg1fbGuP/SkHgF7K0OZLJTDHwcX?=
- =?us-ascii?Q?TVQnst5ujAUz1FLyMW1rY+Rk/3FoHQWqY7AQyX1mrcfDjl6RlAJqbyvbAFBW?=
- =?us-ascii?Q?STixn9uHtyhrbhR9wYtI7yV1DX6Vwja73RQdPFLXuQLmtOZ6RAWc4gf4KZgh?=
- =?us-ascii?Q?xBhS9hc786sjTecQmI8leHubG7zDriKiB39qIx7xjx7CPU5Ge5Hzme24KLJg?=
- =?us-ascii?Q?rO1gVPdgMCK+m9Lev+DITNSm?=
-x-ms-exchange-transport-forked: True
+ bh=98oHbO3xbIWGY6iWjq4cc/TM2Gd76Sa3sYzYIdOT4wU=; b=MIZyEJy+2zTF2E2pYMN8zKBoz6
+ JdVmLsvIgfDFwoooaX5l4Hk5BoFxbpNu4wp+YRLkiTACNymJ5DyHo414NaJaCo5ptZkTg+2QDnZES
+ 2gxmTiZcggQOR+TLOfEPckJT/tVW4sNppVP6c7oiWqSjxLEyKdFxleoOD9qJ9/GkKCX8=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1lvd6p-006wXV-HE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Jun 2021 09:54:29 +0000
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out1.suse.de (Postfix) with ESMTP id 4FC7B21971;
+ Tue, 22 Jun 2021 09:54:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1624355653; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=98oHbO3xbIWGY6iWjq4cc/TM2Gd76Sa3sYzYIdOT4wU=;
+ b=L4lQ6YLfL63yCa/e3tbt/jq8R1xqWm+v2o/DH7dIcIJYJv6pCcTVNq3enDeN65HvGZjSBS
+ BtjIZcn4cYdBzXcmTSl4lB59pDTG0HaxAngEQ4SytbdshJK92vht4zKX5UBRWZwllnfhYE
+ H6m2edrKvIOA+whkfYvQ0EKzIdIeHgQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1624355653;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=98oHbO3xbIWGY6iWjq4cc/TM2Gd76Sa3sYzYIdOT4wU=;
+ b=85ksBjtuJLcIg5Iuw2jFfRQxornaqU4uad+4RWAz20kuSJZGqvqhFEv9Fc7gdmAFR/hcHz
+ DG7BqAJf3K/1ieAg==
+Received: from quack2.suse.cz (unknown [10.100.224.230])
+ by relay2.suse.de (Postfix) with ESMTP id EB580A3B85;
+ Tue, 22 Jun 2021 09:54:12 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id B717F1E1515; Tue, 22 Jun 2021 11:54:12 +0200 (CEST)
+Date: Tue, 22 Jun 2021 11:54:12 +0200
+From: Jan Kara <jack@suse.cz>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Message-ID: <20210622095412.GD14261@quack2.suse.cz>
+References: <20210615090844.6045-1-jack@suse.cz>
+ <20210615091814.28626-5-jack@suse.cz>
+ <20210617162240.GP158209@locust>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR04MB4056.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f3018a0-4450-4305-a5e9-08d935285068
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jun 2021 02:49:11.1306 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fbMSFmSOQOkwUq6fP20w85FAGSe85mbDJAe8gffXYxE1doWWnbZ3hg3BfeQeZ9lENEhrpHZexL3pjlIxCwkrqg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5559
-X-Spam-Score: 0.9 (/)
+Content-Disposition: inline
+In-Reply-To: <20210617162240.GP158209@locust>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: suse.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 PDS_BAD_THREAD_QP_64   Bad thread header - short QP
-X-Headers-End: 1lvWiX-000893-LA
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fix metadata region overlap with
- zoned block device zones
+X-Headers-End: 1lvd6p-006wXV-HE
+Subject: Re: [f2fs-dev] [PATCH 05/14] ext4: Convert to use
+ mapping->invalidate_lock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -174,24 +100,492 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-cifs@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
+ linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
+ Steve French <sfrench@samba.org>, Dave Chinner <david@fromorbit.com>,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
+ Miklos Szeredi <miklos@szeredi.hu>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ ceph-devel@vger.kernel.org, Johannes Thumshirn <jth@kernel.org>,
+ linux-xfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+On Thu 17-06-21 09:22:40, Darrick J. Wong wrote:
+> On Tue, Jun 15, 2021 at 11:17:55AM +0200, Jan Kara wrote:
+> > Convert ext4 to use mapping->invalidate_lock instead of its private
+> > EXT4_I(inode)->i_mmap_sem. This is mostly search-and-replace. By this
+> > conversion we fix a long standing race between hole punching and read(2)
+> > / readahead(2) paths that can lead to stale page cache contents.
+> > 
+> > CC: <linux-ext4@vger.kernel.org>
+> > CC: Ted Tso <tytso@mit.edu>
 > 
-> I queued this in -dev which will go into -master later.
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-
-> tools.git/commit/?h=dev&id=b750268dafec5a59716b9aec606dc18a9cbdae70
-> 
+> Hmm, still no ACK from Ted?
 
-Thank you.
-Aravind
+On ext4 call he mentioned he's fine with the patches and testing has passed
+for him but he has not given an official tag...
 
-> Thanks,
+> This looks like a pretty straightforward i_mmap_sem conversion, though
+> in general I'd like /some/ kind of response from anyone in the ext4
+> community who has been writing code more recently than me...
 > 
+> Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+
+Yeah, this was basically search-and-replace. Thanks for review!
+
+								Honza
+
+
+> 
+> --D
+> 
+> > Signed-off-by: Jan Kara <jack@suse.cz>
+> > ---
+> >  fs/ext4/ext4.h     | 10 ----------
+> >  fs/ext4/extents.c  | 25 +++++++++++++-----------
+> >  fs/ext4/file.c     | 13 +++++++------
+> >  fs/ext4/inode.c    | 47 +++++++++++++++++-----------------------------
+> >  fs/ext4/ioctl.c    |  4 ++--
+> >  fs/ext4/super.c    | 13 +++++--------
+> >  fs/ext4/truncate.h |  8 +++++---
+> >  7 files changed, 50 insertions(+), 70 deletions(-)
+> > 
+> > diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
+> > index 37002663d521..ed64b4b217a1 100644
+> > --- a/fs/ext4/ext4.h
+> > +++ b/fs/ext4/ext4.h
+> > @@ -1077,15 +1077,6 @@ struct ext4_inode_info {
+> >  	 * by other means, so we have i_data_sem.
+> >  	 */
+> >  	struct rw_semaphore i_data_sem;
+> > -	/*
+> > -	 * i_mmap_sem is for serializing page faults with truncate / punch hole
+> > -	 * operations. We have to make sure that new page cannot be faulted in
+> > -	 * a section of the inode that is being punched. We cannot easily use
+> > -	 * i_data_sem for this since we need protection for the whole punch
+> > -	 * operation and i_data_sem ranks below transaction start so we have
+> > -	 * to occasionally drop it.
+> > -	 */
+> > -	struct rw_semaphore i_mmap_sem;
+> >  	struct inode vfs_inode;
+> >  	struct jbd2_inode *jinode;
+> >  
+> > @@ -2962,7 +2953,6 @@ extern int ext4_chunk_trans_blocks(struct inode *, int nrblocks);
+> >  extern int ext4_zero_partial_blocks(handle_t *handle, struct inode *inode,
+> >  			     loff_t lstart, loff_t lend);
+> >  extern vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf);
+> > -extern vm_fault_t ext4_filemap_fault(struct vm_fault *vmf);
+> >  extern qsize_t *ext4_get_reserved_space(struct inode *inode);
+> >  extern int ext4_get_projid(struct inode *inode, kprojid_t *projid);
+> >  extern void ext4_da_release_space(struct inode *inode, int to_free);
+> > diff --git a/fs/ext4/extents.c b/fs/ext4/extents.c
+> > index cbf37b2cf871..db5d38af9ba8 100644
+> > --- a/fs/ext4/extents.c
+> > +++ b/fs/ext4/extents.c
+> > @@ -4470,6 +4470,7 @@ static long ext4_zero_range(struct file *file, loff_t offset,
+> >  			    loff_t len, int mode)
+> >  {
+> >  	struct inode *inode = file_inode(file);
+> > +	struct address_space *mapping = file->f_mapping;
+> >  	handle_t *handle = NULL;
+> >  	unsigned int max_blocks;
+> >  	loff_t new_size = 0;
+> > @@ -4556,17 +4557,17 @@ static long ext4_zero_range(struct file *file, loff_t offset,
+> >  		 * Prevent page faults from reinstantiating pages we have
+> >  		 * released from page cache.
+> >  		 */
+> > -		down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock(mapping);
+> >  
+> >  		ret = ext4_break_layouts(inode);
+> >  		if (ret) {
+> > -			up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +			filemap_invalidate_unlock(mapping);
+> >  			goto out_mutex;
+> >  		}
+> >  
+> >  		ret = ext4_update_disksize_before_punch(inode, offset, len);
+> >  		if (ret) {
+> > -			up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +			filemap_invalidate_unlock(mapping);
+> >  			goto out_mutex;
+> >  		}
+> >  		/* Now release the pages and zero block aligned part of pages */
+> > @@ -4575,7 +4576,7 @@ static long ext4_zero_range(struct file *file, loff_t offset,
+> >  
+> >  		ret = ext4_alloc_file_blocks(file, lblk, max_blocks, new_size,
+> >  					     flags);
+> > -		up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock(mapping);
+> >  		if (ret)
+> >  			goto out_mutex;
+> >  	}
+> > @@ -5217,6 +5218,7 @@ ext4_ext_shift_extents(struct inode *inode, handle_t *handle,
+> >  static int ext4_collapse_range(struct inode *inode, loff_t offset, loff_t len)
+> >  {
+> >  	struct super_block *sb = inode->i_sb;
+> > +	struct address_space *mapping = inode->i_mapping;
+> >  	ext4_lblk_t punch_start, punch_stop;
+> >  	handle_t *handle;
+> >  	unsigned int credits;
+> > @@ -5270,7 +5272,7 @@ static int ext4_collapse_range(struct inode *inode, loff_t offset, loff_t len)
+> >  	 * Prevent page faults from reinstantiating pages we have released from
+> >  	 * page cache.
+> >  	 */
+> > -	down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_lock(mapping);
+> >  
+> >  	ret = ext4_break_layouts(inode);
+> >  	if (ret)
+> > @@ -5285,15 +5287,15 @@ static int ext4_collapse_range(struct inode *inode, loff_t offset, loff_t len)
+> >  	 * Write tail of the last page before removed range since it will get
+> >  	 * removed from the page cache below.
+> >  	 */
+> > -	ret = filemap_write_and_wait_range(inode->i_mapping, ioffset, offset);
+> > +	ret = filemap_write_and_wait_range(mapping, ioffset, offset);
+> >  	if (ret)
+> >  		goto out_mmap;
+> >  	/*
+> >  	 * Write data that will be shifted to preserve them when discarding
+> >  	 * page cache below. We are also protected from pages becoming dirty
+> > -	 * by i_mmap_sem.
+> > +	 * by i_rwsem and invalidate_lock.
+> >  	 */
+> > -	ret = filemap_write_and_wait_range(inode->i_mapping, offset + len,
+> > +	ret = filemap_write_and_wait_range(mapping, offset + len,
+> >  					   LLONG_MAX);
+> >  	if (ret)
+> >  		goto out_mmap;
+> > @@ -5346,7 +5348,7 @@ static int ext4_collapse_range(struct inode *inode, loff_t offset, loff_t len)
+> >  	ext4_journal_stop(handle);
+> >  	ext4_fc_stop_ineligible(sb);
+> >  out_mmap:
+> > -	up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock(mapping);
+> >  out_mutex:
+> >  	inode_unlock(inode);
+> >  	return ret;
+> > @@ -5363,6 +5365,7 @@ static int ext4_collapse_range(struct inode *inode, loff_t offset, loff_t len)
+> >  static int ext4_insert_range(struct inode *inode, loff_t offset, loff_t len)
+> >  {
+> >  	struct super_block *sb = inode->i_sb;
+> > +	struct address_space *mapping = inode->i_mapping;
+> >  	handle_t *handle;
+> >  	struct ext4_ext_path *path;
+> >  	struct ext4_extent *extent;
+> > @@ -5421,7 +5424,7 @@ static int ext4_insert_range(struct inode *inode, loff_t offset, loff_t len)
+> >  	 * Prevent page faults from reinstantiating pages we have released from
+> >  	 * page cache.
+> >  	 */
+> > -	down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_lock(mapping);
+> >  
+> >  	ret = ext4_break_layouts(inode);
+> >  	if (ret)
+> > @@ -5522,7 +5525,7 @@ static int ext4_insert_range(struct inode *inode, loff_t offset, loff_t len)
+> >  	ext4_journal_stop(handle);
+> >  	ext4_fc_stop_ineligible(sb);
+> >  out_mmap:
+> > -	up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock(mapping);
+> >  out_mutex:
+> >  	inode_unlock(inode);
+> >  	return ret;
+> > diff --git a/fs/ext4/file.c b/fs/ext4/file.c
+> > index 816dedcbd541..d3b4ed91aa68 100644
+> > --- a/fs/ext4/file.c
+> > +++ b/fs/ext4/file.c
+> > @@ -704,22 +704,23 @@ static vm_fault_t ext4_dax_huge_fault(struct vm_fault *vmf,
+> >  	 */
+> >  	bool write = (vmf->flags & FAULT_FLAG_WRITE) &&
+> >  		(vmf->vma->vm_flags & VM_SHARED);
+> > +	struct address_space *mapping = vmf->vma->vm_file->f_mapping;
+> >  	pfn_t pfn;
+> >  
+> >  	if (write) {
+> >  		sb_start_pagefault(sb);
+> >  		file_update_time(vmf->vma->vm_file);
+> > -		down_read(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock_shared(mapping);
+> >  retry:
+> >  		handle = ext4_journal_start_sb(sb, EXT4_HT_WRITE_PAGE,
+> >  					       EXT4_DATA_TRANS_BLOCKS(sb));
+> >  		if (IS_ERR(handle)) {
+> > -			up_read(&EXT4_I(inode)->i_mmap_sem);
+> > +			filemap_invalidate_unlock_shared(mapping);
+> >  			sb_end_pagefault(sb);
+> >  			return VM_FAULT_SIGBUS;
+> >  		}
+> >  	} else {
+> > -		down_read(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock_shared(mapping);
+> >  	}
+> >  	result = dax_iomap_fault(vmf, pe_size, &pfn, &error, &ext4_iomap_ops);
+> >  	if (write) {
+> > @@ -731,10 +732,10 @@ static vm_fault_t ext4_dax_huge_fault(struct vm_fault *vmf,
+> >  		/* Handling synchronous page fault? */
+> >  		if (result & VM_FAULT_NEEDDSYNC)
+> >  			result = dax_finish_sync_fault(vmf, pe_size, pfn);
+> > -		up_read(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock_shared(mapping);
+> >  		sb_end_pagefault(sb);
+> >  	} else {
+> > -		up_read(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock_shared(mapping);
+> >  	}
+> >  
+> >  	return result;
+> > @@ -756,7 +757,7 @@ static const struct vm_operations_struct ext4_dax_vm_ops = {
+> >  #endif
+> >  
+> >  static const struct vm_operations_struct ext4_file_vm_ops = {
+> > -	.fault		= ext4_filemap_fault,
+> > +	.fault		= filemap_fault,
+> >  	.map_pages	= filemap_map_pages,
+> >  	.page_mkwrite   = ext4_page_mkwrite,
+> >  };
+> > diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+> > index fe6045a46599..ee6e69d6f949 100644
+> > --- a/fs/ext4/inode.c
+> > +++ b/fs/ext4/inode.c
+> > @@ -3950,20 +3950,19 @@ int ext4_update_disksize_before_punch(struct inode *inode, loff_t offset,
+> >  	return ret;
+> >  }
+> >  
+> > -static void ext4_wait_dax_page(struct ext4_inode_info *ei)
+> > +static void ext4_wait_dax_page(struct inode *inode)
+> >  {
+> > -	up_write(&ei->i_mmap_sem);
+> > +	filemap_invalidate_unlock(inode->i_mapping);
+> >  	schedule();
+> > -	down_write(&ei->i_mmap_sem);
+> > +	filemap_invalidate_lock(inode->i_mapping);
+> >  }
+> >  
+> >  int ext4_break_layouts(struct inode *inode)
+> >  {
+> > -	struct ext4_inode_info *ei = EXT4_I(inode);
+> >  	struct page *page;
+> >  	int error;
+> >  
+> > -	if (WARN_ON_ONCE(!rwsem_is_locked(&ei->i_mmap_sem)))
+> > +	if (WARN_ON_ONCE(!rwsem_is_locked(&inode->i_mapping->invalidate_lock)))
+> >  		return -EINVAL;
+> >  
+> >  	do {
+> > @@ -3974,7 +3973,7 @@ int ext4_break_layouts(struct inode *inode)
+> >  		error = ___wait_var_event(&page->_refcount,
+> >  				atomic_read(&page->_refcount) == 1,
+> >  				TASK_INTERRUPTIBLE, 0, 0,
+> > -				ext4_wait_dax_page(ei));
+> > +				ext4_wait_dax_page(inode));
+> >  	} while (error == 0);
+> >  
+> >  	return error;
+> > @@ -4005,9 +4004,9 @@ int ext4_punch_hole(struct inode *inode, loff_t offset, loff_t length)
+> >  
+> >  	ext4_clear_inode_state(inode, EXT4_STATE_MAY_INLINE_DATA);
+> >  	if (ext4_has_inline_data(inode)) {
+> > -		down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock(mapping);
+> >  		ret = ext4_convert_inline_data(inode);
+> > -		up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock(mapping);
+> >  		if (ret)
+> >  			return ret;
+> >  	}
+> > @@ -4058,7 +4057,7 @@ int ext4_punch_hole(struct inode *inode, loff_t offset, loff_t length)
+> >  	 * Prevent page faults from reinstantiating pages we have released from
+> >  	 * page cache.
+> >  	 */
+> > -	down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_lock(mapping);
+> >  
+> >  	ret = ext4_break_layouts(inode);
+> >  	if (ret)
+> > @@ -4131,7 +4130,7 @@ int ext4_punch_hole(struct inode *inode, loff_t offset, loff_t length)
+> >  out_stop:
+> >  	ext4_journal_stop(handle);
+> >  out_dio:
+> > -	up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock(mapping);
+> >  out_mutex:
+> >  	inode_unlock(inode);
+> >  	return ret;
+> > @@ -5426,11 +5425,11 @@ int ext4_setattr(struct user_namespace *mnt_userns, struct dentry *dentry,
+> >  			inode_dio_wait(inode);
+> >  		}
+> >  
+> > -		down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock(inode->i_mapping);
+> >  
+> >  		rc = ext4_break_layouts(inode);
+> >  		if (rc) {
+> > -			up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +			filemap_invalidate_unlock(inode->i_mapping);
+> >  			goto err_out;
+> >  		}
+> >  
+> > @@ -5506,7 +5505,7 @@ int ext4_setattr(struct user_namespace *mnt_userns, struct dentry *dentry,
+> >  				error = rc;
+> >  		}
+> >  out_mmap_sem:
+> > -		up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock(inode->i_mapping);
+> >  	}
+> >  
+> >  	if (!error) {
+> > @@ -5983,10 +5982,10 @@ int ext4_change_inode_journal_flag(struct inode *inode, int val)
+> >  	 * data (and journalled aops don't know how to handle these cases).
+> >  	 */
+> >  	if (val) {
+> > -		down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_lock(inode->i_mapping);
+> >  		err = filemap_write_and_wait(inode->i_mapping);
+> >  		if (err < 0) {
+> > -			up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +			filemap_invalidate_unlock(inode->i_mapping);
+> >  			return err;
+> >  		}
+> >  	}
+> > @@ -6019,7 +6018,7 @@ int ext4_change_inode_journal_flag(struct inode *inode, int val)
+> >  	percpu_up_write(&sbi->s_writepages_rwsem);
+> >  
+> >  	if (val)
+> > -		up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +		filemap_invalidate_unlock(inode->i_mapping);
+> >  
+> >  	/* Finally we can mark the inode as dirty. */
+> >  
+> > @@ -6063,7 +6062,7 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+> >  	sb_start_pagefault(inode->i_sb);
+> >  	file_update_time(vma->vm_file);
+> >  
+> > -	down_read(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_lock_shared(mapping);
+> >  
+> >  	err = ext4_convert_inline_data(inode);
+> >  	if (err)
+> > @@ -6176,7 +6175,7 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+> >  out_ret:
+> >  	ret = block_page_mkwrite_return(err);
+> >  out:
+> > -	up_read(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock_shared(mapping);
+> >  	sb_end_pagefault(inode->i_sb);
+> >  	return ret;
+> >  out_error:
+> > @@ -6184,15 +6183,3 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+> >  	ext4_journal_stop(handle);
+> >  	goto out;
+> >  }
+> > -
+> > -vm_fault_t ext4_filemap_fault(struct vm_fault *vmf)
+> > -{
+> > -	struct inode *inode = file_inode(vmf->vma->vm_file);
+> > -	vm_fault_t ret;
+> > -
+> > -	down_read(&EXT4_I(inode)->i_mmap_sem);
+> > -	ret = filemap_fault(vmf);
+> > -	up_read(&EXT4_I(inode)->i_mmap_sem);
+> > -
+> > -	return ret;
+> > -}
+> > diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
+> > index 31627f7dc5cd..c5ed562b4185 100644
+> > --- a/fs/ext4/ioctl.c
+> > +++ b/fs/ext4/ioctl.c
+> > @@ -148,7 +148,7 @@ static long swap_inode_boot_loader(struct super_block *sb,
+> >  		goto journal_err_out;
+> >  	}
+> >  
+> > -	down_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_lock(inode->i_mapping);
+> >  	err = filemap_write_and_wait(inode->i_mapping);
+> >  	if (err)
+> >  		goto err_out;
+> > @@ -256,7 +256,7 @@ static long swap_inode_boot_loader(struct super_block *sb,
+> >  	ext4_double_up_write_data_sem(inode, inode_bl);
+> >  
+> >  err_out:
+> > -	up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock(inode->i_mapping);
+> >  journal_err_out:
+> >  	unlock_two_nondirectories(inode, inode_bl);
+> >  	iput(inode_bl);
+> > diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+> > index d29f6aa7d96e..c3c3cd8b0966 100644
+> > --- a/fs/ext4/super.c
+> > +++ b/fs/ext4/super.c
+> > @@ -90,12 +90,9 @@ static struct inode *ext4_get_journal_inode(struct super_block *sb,
+> >  /*
+> >   * Lock ordering
+> >   *
+> > - * Note the difference between i_mmap_sem (EXT4_I(inode)->i_mmap_sem) and
+> > - * i_mmap_rwsem (inode->i_mmap_rwsem)!
+> > - *
+> >   * page fault path:
+> > - * mmap_lock -> sb_start_pagefault -> i_mmap_sem (r) -> transaction start ->
+> > - *   page lock -> i_data_sem (rw)
+> > + * mmap_lock -> sb_start_pagefault -> invalidate_lock (r) -> transaction start
+> > + *   -> page lock -> i_data_sem (rw)
+> >   *
+> >   * buffered write path:
+> >   * sb_start_write -> i_mutex -> mmap_lock
+> > @@ -103,8 +100,9 @@ static struct inode *ext4_get_journal_inode(struct super_block *sb,
+> >   *   i_data_sem (rw)
+> >   *
+> >   * truncate:
+> > - * sb_start_write -> i_mutex -> i_mmap_sem (w) -> i_mmap_rwsem (w) -> page lock
+> > - * sb_start_write -> i_mutex -> i_mmap_sem (w) -> transaction start ->
+> > + * sb_start_write -> i_mutex -> invalidate_lock (w) -> i_mmap_rwsem (w) ->
+> > + *   page lock
+> > + * sb_start_write -> i_mutex -> invalidate_lock (w) -> transaction start ->
+> >   *   i_data_sem (rw)
+> >   *
+> >   * direct IO:
+> > @@ -1350,7 +1348,6 @@ static void init_once(void *foo)
+> >  	INIT_LIST_HEAD(&ei->i_orphan);
+> >  	init_rwsem(&ei->xattr_sem);
+> >  	init_rwsem(&ei->i_data_sem);
+> > -	init_rwsem(&ei->i_mmap_sem);
+> >  	inode_init_once(&ei->vfs_inode);
+> >  	ext4_fc_init_inode(&ei->vfs_inode);
+> >  }
+> > diff --git a/fs/ext4/truncate.h b/fs/ext4/truncate.h
+> > index bcbe3668c1d4..ce84aa2786c7 100644
+> > --- a/fs/ext4/truncate.h
+> > +++ b/fs/ext4/truncate.h
+> > @@ -11,14 +11,16 @@
+> >   */
+> >  static inline void ext4_truncate_failed_write(struct inode *inode)
+> >  {
+> > +	struct address_space *mapping = inode->i_mapping;
+> > +
+> >  	/*
+> >  	 * We don't need to call ext4_break_layouts() because the blocks we
+> >  	 * are truncating were never visible to userspace.
+> >  	 */
+> > -	down_write(&EXT4_I(inode)->i_mmap_sem);
+> > -	truncate_inode_pages(inode->i_mapping, inode->i_size);
+> > +	filemap_invalidate_lock(mapping);
+> > +	truncate_inode_pages(mapping, inode->i_size);
+> >  	ext4_truncate(inode);
+> > -	up_write(&EXT4_I(inode)->i_mmap_sem);
+> > +	filemap_invalidate_unlock(mapping);
+> >  }
+> >  
+> >  /*
+> > -- 
+> > 2.26.2
+> > 
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
