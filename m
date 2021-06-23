@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEAE33B1DDB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Jun 2021 17:50:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDB373B1E41
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Jun 2021 18:03:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lw58T-00051y-Ju; Wed, 23 Jun 2021 15:49:53 +0000
+	id 1lw5LS-0001xs-UX; Wed, 23 Jun 2021 16:03:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1lw58S-00051r-Cc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Jun 2021 15:49:52 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <jaegeuk@kernel.org>) id 1lw5LS-0001xl-7j
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Jun 2021 16:03:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=12FBJElVUWfKIdKkc6a7ZY89mYpA6CafEpVX2UI8scU=; b=KxnZ3eennRlIVjcqEK/snD8dri
- Lm0uZcEr4dggimYcrJrlADAJ7msktKfkXhgGP6qvKlS1+FVIBsoPeRGST+UzheaDQqIlv2AsmQ5Eo
- GUG0CChZDCpl+SBGRqFRDkpOCgZ4FnydwTeH9IAFwc2d+zOuerSuKx0F2A/NPla+oYTo=;
+ bh=O/Ae5zJ11jXtDD9dBG8z2njZY4DFOtdZHJkvbV3kLTg=; b=RqVm/eRwURYet4QktCkgv2v5o0
+ 8jAM3XXZSmH5AKNP0VFgOQ8BSUi6SAtfQPjwb1WKOhwkpwKWPSOsVD/dOkO82YkhRTo9z+VZCwfOW
+ 4dEcVEWUUoBL0dnEaLiBwDatVi1mgPvR82zgLTPJ2amoPat6+zqI1uJFzLJLXV5N1AuY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,43 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=12FBJElVUWfKIdKkc6a7ZY89mYpA6CafEpVX2UI8scU=; b=lIlfthBzD7Z0iLidMbf6GUKcRT
- 3uu4gIGeVK5tnPoPvYt0++tB1uhEbSXLNbWXZxM1ZRi6fz80YAtWtmFxYCDOcr8f2fyVlkioKD6g5
- KrF1/Gg9SeePPtl/oeYOZFAuVpFkzd3ue8URcpZNkQmmyYtDqtAZYWlQ3GvLg5Fz4mbQ=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
+ bh=O/Ae5zJ11jXtDD9dBG8z2njZY4DFOtdZHJkvbV3kLTg=; b=IKzd3rvRoKMkPRdAZh3zq4AhZ7
+ jUtgOnPLsy+P2V3WRX1j4+aB6JD3aDgY9ZJawUVkzPJGHeT36HJYWCYXSwZBFBjbHiTDCU3E86JbD
+ JOeVhtN9qKbCUDLhehz30NPXeRPS3aSUYgcBbNgvAS4FtIzbvYfcJqK7+M5wCl7lW8S8=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lw58P-009Py8-CV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Jun 2021 15:49:54 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D187A60FEA;
- Wed, 23 Jun 2021 15:49:38 +0000 (UTC)
+ id 1lw5LV-009RTn-1n
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Jun 2021 16:03:22 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8C68B611CB;
+ Wed, 23 Jun 2021 16:03:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1624463379;
- bh=dheBXah4lN1PML3sqwDz3TUbMTqBx7HVJb+gLYt7N3I=;
+ s=k20201202; t=1624464195;
+ bh=ak+k9oFHELaPJY9NjXIJUBQnes7eeRhOoN81+x+Jz9o=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Dl3AV3lCFCJa14hE7EkPx2AuxjC5e4sfV6A53N8yGaW7lKBuoF0ij+psP4ZXA2tIA
- egXDeJ3Uu+l2j14M8i4x0f3BvKXYnX0FwcgzuOryKYxXj78cEUtIFkztKK1dtBxHao
- ow5t2eK0z1GoExxp+t09qHs9uYTgvTnmAWdMZ590jrEVnWgCh+BAF6zsUyuyDfNVDS
- eNhURpAzcLc5nAGF45PRejMeDSxtfSHxGaEiCkZa4dKRX+lpqBLWPxk2iRjX4s06uL
- 4NyOXaisQ7Trw5pKWKEU4Trv9FhNVZqXNmUJpGaouvRhKqrS5JymT+di+Ql5CY3XjC
- y6G2uJw4Trq1w==
-Date: Wed, 23 Jun 2021 08:49:37 -0700
+ b=Jl36BWlOeP2ywyE3JXKnypAHZAXk1K1HQoE3niJ5lYE/njrE03TiFdwBP5hKWVIST
+ GrGrqc6NAIa5ISeYLzvcToUbcco1cMA9hq5hNCJLRce5AO+sgaKtqtZyu8U1H9jt/5
+ aJV+gqICzHXLCWP6n6jR1Hx5k5Q0kenpCZ1gQFt5DutoLZX9wPkbsrv+K8BVKcbTIE
+ XQbeydNnxB+3Uoacxr0obi1g2cZ2ZvXi1vYPWERGlrOicB2MEBtjyAu9cc2a2feYwF
+ 3hrlg261hGZKN/O4zMNWRyRl5TB6Bkx1hCi3076xGKlZT0JZOeGynZAMkyp8ZqUI3D
+ yNED7S5Fxi6Hg==
+Date: Wed, 23 Jun 2021 09:03:14 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YNNYEUumK506fxPK@google.com>
-References: <20210525113909.113486-1-yuchao0@huawei.com>
- <YNLsKSSxS5xLJcnB@google.com>
- <bd548ff5-4143-31f9-0d84-abc8a53b597d@kernel.org>
+Message-ID: <YNNbQrkiwyimBd8+@google.com>
+References: <20210621023939.1510591-1-jaegeuk@kernel.org>
+ <20210621023939.1510591-3-jaegeuk@kernel.org>
+ <e94edf00-e8bb-9bbf-fc01-d4caea138249@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <bd548ff5-4143-31f9-0d84-abc8a53b597d@kernel.org>
-X-Spam-Score: 0.5 (/)
+In-Reply-To: <e94edf00-e8bb-9bbf-fc01-d4caea138249@kernel.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.cz]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -73,11 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lw58P-009Py8-CV
-Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid attaching SB_ACTIVE flag during
- mount/remount
+X-Headers-End: 1lw5LV-009RTn-1n
+Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs-tools: fix wrong file offset
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,144 +87,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Zhang Yi <yi.zhang@huawei.com>, Jan Kara <jack@suse.cz>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 06/23, Chao Yu wrote:
-> Hi Jaegeuk,
+> On 2021/6/21 10:39, Jaegeuk Kim wrote:
+> > This fixes wrong file offset updates.
 > 
-> On 2021/6/23 16:09, Jaegeuk Kim wrote:
-> > Hi Chao,
+> Better to describe why the file offset is wrong in original
+> code...
+
+Added.
+
+> 
 > > 
-> > I'll remove this patch, since it breaks checkpoint=disable and recovery
-> > flow that check SB_ACTIVE.
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 > 
-> Oh, sorry, is it due to changes in f2fs_disable_checkpoint()?
-> 
-> So how about testing with changes f2fs_recover_orphan_inodes() and
-> f2fs_recover_fsync_data()?
-
-I'm now nervous whether the test can miss corner cases. So, I don't think
-we need to pour our time for this nice-to-have patch.
-
+> Reviewed-by: Chao Yu <yuchao0@huawei.com>
 > 
 > Thanks,
-> 
-> > 
-> > Thanks,
-> > 
-> > On 05/25, Chao Yu wrote:
-> > > Quoted from [1]
-> > > 
-> > > "I do remember that I've added this code back then because otherwise
-> > > orphan cleanup was losing updates to quota files. But you're right
-> > > that now I don't see how that could be happening and it would be nice
-> > > if we could get rid of this hack"
-> > > 
-> > > [1] https://lore.kernel.org/linux-ext4/99cce8ca-e4a0-7301-840f-2ace67c551f3@huawei.com/T/#m04990cfbc4f44592421736b504afcc346b2a7c00
-> > > 
-> > > Related fix in ext4 by
-> > > commit 72ffb49a7b62 ("ext4: do not set SB_ACTIVE in ext4_orphan_cleanup()").
-> > > 
-> > > f2fs has the same hack implementation in
-> > > - f2fs_recover_orphan_inodes()
-> > > - f2fs_recover_fsync_data()
-> > > - f2fs_disable_checkpoint()
-> > > 
-> > > Let's get rid of this hack as well in f2fs.
-> > > 
-> > > Cc: Zhang Yi <yi.zhang@huawei.com>
-> > > Cc: Jan Kara <jack@suse.cz>
-> > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
-> > > ---
-> > >   fs/f2fs/checkpoint.c |  3 ---
-> > >   fs/f2fs/recovery.c   |  8 ++------
-> > >   fs/f2fs/super.c      | 11 ++++-------
-> > >   3 files changed, 6 insertions(+), 16 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > > index 6c208108d69c..a578c7d13d81 100644
-> > > --- a/fs/f2fs/checkpoint.c
-> > > +++ b/fs/f2fs/checkpoint.c
-> > > @@ -691,9 +691,6 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
-> > >   	}
-> > >   #ifdef CONFIG_QUOTA
-> > > -	/* Needed for iput() to work correctly and not trash data */
-> > > -	sbi->sb->s_flags |= SB_ACTIVE;
-> > > -
-> > >   	/*
-> > >   	 * Turn on quotas which were not enabled for read-only mounts if
-> > >   	 * filesystem has quota feature, so that they are updated correctly.
-> > > diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-> > > index 4b2f7d1d5bf4..4cfe36fa41be 100644
-> > > --- a/fs/f2fs/recovery.c
-> > > +++ b/fs/f2fs/recovery.c
-> > > @@ -782,8 +782,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
-> > >   	}
-> > >   #ifdef CONFIG_QUOTA
-> > > -	/* Needed for iput() to work correctly and not trash data */
-> > > -	sbi->sb->s_flags |= SB_ACTIVE;
-> > >   	/* Turn on quotas so that they are updated correctly */
-> > >   	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
-> > >   #endif
-> > > @@ -811,10 +809,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
-> > >   	err = recover_data(sbi, &inode_list, &tmp_inode_list, &dir_list);
-> > >   	if (!err)
-> > >   		f2fs_bug_on(sbi, !list_empty(&inode_list));
-> > > -	else {
-> > > -		/* restore s_flags to let iput() trash data */
-> > > -		sbi->sb->s_flags = s_flags;
-> > > -	}
-> > > +	else
-> > > +		f2fs_bug_on(sbi, sbi->sb->s_flags & SB_ACTIVE);
-> > >   skip:
-> > >   	fix_curseg_write_pointer = !check_only || list_empty(&inode_list);
-> > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > > index 0a77808ebb8f..e7bd983fbddc 100644
-> > > --- a/fs/f2fs/super.c
-> > > +++ b/fs/f2fs/super.c
-> > > @@ -1881,17 +1881,15 @@ static int f2fs_enable_quotas(struct super_block *sb);
-> > >   static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
-> > >   {
-> > > -	unsigned int s_flags = sbi->sb->s_flags;
-> > >   	struct cp_control cpc;
-> > >   	int err = 0;
-> > >   	int ret;
-> > >   	block_t unusable;
-> > > -	if (s_flags & SB_RDONLY) {
-> > > +	if (sbi->sb->s_flags & SB_RDONLY) {
-> > >   		f2fs_err(sbi, "checkpoint=disable on readonly fs");
-> > >   		return -EINVAL;
-> > >   	}
-> > > -	sbi->sb->s_flags |= SB_ACTIVE;
-> > >   	f2fs_update_time(sbi, DISABLE_TIME);
-> > > @@ -1909,13 +1907,13 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
-> > >   	ret = sync_filesystem(sbi->sb);
-> > >   	if (ret || err) {
-> > >   		err = ret ? ret : err;
-> > > -		goto restore_flag;
-> > > +		goto out;
-> > >   	}
-> > >   	unusable = f2fs_get_unusable_blocks(sbi);
-> > >   	if (f2fs_disable_cp_again(sbi, unusable)) {
-> > >   		err = -EAGAIN;
-> > > -		goto restore_flag;
-> > > +		goto out;
-> > >   	}
-> > >   	down_write(&sbi->gc_lock);
-> > > @@ -1931,8 +1929,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
-> > >   out_unlock:
-> > >   	up_write(&sbi->gc_lock);
-> > > -restore_flag:
-> > > -	sbi->sb->s_flags = s_flags;	/* Restore SB_RDONLY status */
-> > > +out:
-> > >   	return err;
-> > >   }
-> > > -- 
-> > > 2.29.2
 
 
 _______________________________________________
