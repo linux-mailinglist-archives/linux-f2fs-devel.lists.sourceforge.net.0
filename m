@@ -2,105 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B21163B439D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Jun 2021 14:50:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9486D3B5372
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Jun 2021 15:30:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lwlIG-0005Yc-Ln; Fri, 25 Jun 2021 12:50:48 +0000
+	id 1lxUrX-0001pR-2s; Sun, 27 Jun 2021 13:30:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <wangshilong1991@gmail.com>) id 1lwlIE-0005YU-MM
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Jun 2021 12:50:46 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1lxUrV-0001pF-5L
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 27 Jun 2021 13:30:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZUq608a0CdvBqwD7yCvfHQWOXGkaGQdKVIBwrXyYDCI=; b=LCyxeBmCi3h0gtEaRi9yR8omOc
- znUfTSqIJhj+25lSzAveKwPs/xtENpvHUHQp4PSRn3GJ417jS7S5dBb5on8PE+pgnHCxD2TvYpumS
- 3kBdmkiHLoJNDBPb1SXbEvNrt+G5c5d9rVTO7NM/e6nVtCUjrAhr+KRvWEIOkZm1FwIY=;
+ bh=qj7ede5ybWJX+n67R/yDJS5SoJdIHmqOHMoutzaJDfI=; b=ejPtEoQwqCdOOWZVh2ucwZ+8r2
+ 78LBhSX9w8b2+Z9tWKnM2Gd4DcGNToQU8t44o2CDSoNlLIWkXuoqynY3zoZDosHktQlqtEOtGhZ0P
+ Ovbj+13+6Ax2TfhxPIAxIbEiV/LMHMnXrHtDkj1xf+TpizxPVf4pN5qDWhV+M4bZYEoI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ZUq608a0CdvBqwD7yCvfHQWOXGkaGQdKVIBwrXyYDCI=; b=N
- 3HON8MJf4xpVX71EPrqKwFOjoUngQaBTkEKmmpExTMaOO3dDpPYzX8aizmFdOEpEN0cXDwnBcRlzw
- YVNfzDDsemB0vQ+LfNn/Klraqq6N4NkWdZO1FHaHhu9oYmdtUxlRMiCHmNZjZzrLAmBsB0Wb5WVtO
- GmvMyDWFjEC8vlHE=;
-Received: from mail-pf1-f173.google.com ([209.85.210.173])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lwlI9-00DwHC-VF
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Jun 2021 12:50:48 +0000
-Received: by mail-pf1-f173.google.com with SMTP id d12so266720pfj.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 25 Jun 2021 05:50:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ZUq608a0CdvBqwD7yCvfHQWOXGkaGQdKVIBwrXyYDCI=;
- b=mmS8qNWYNafL9agaCqylHH9RjOARKlq3nflhDINhZ4ypk9BIbp9+OvmSNsvS2vLQpA
- nYS8rWEDKe9B/MzNvZnUvp5FJxLrAVrrCYiRiZ6Gkzow8ad3bj0ZGBMXesWQfvL739xa
- Ym1R6Rl73YI24n84sWVcnetggSaEsk5+q7xivstuYjHo8uOo5NrCpGp4Ur+xBJ6vcaNu
- c/UYN6C3KacoLe3cz4k5eXQfH04HOWCUbVIZb+7eZRvn36pSkj13DOmJS9wI5JSuEx7t
- 39GBxj2X0cod/rGkzUeKhNrjHuheXGSEt4bbcwQ035gvQgP7EgAygrIsvgHrCKSwZ5+E
- EEQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ZUq608a0CdvBqwD7yCvfHQWOXGkaGQdKVIBwrXyYDCI=;
- b=BolGiJJ/yZu+fdAJG0cNwRU+DNa+4Fzw7oufrYp4bcQInkoy6AKQPzuJcdCSjTsUZg
- wYLZ3AgIjXQcPnk+XklVeeKhTmKjleVMvJw0Re262rWHEm39gt2FlGG4z2fV7zlcLCrF
- fDuBxpHTFhCKG3LshtuLA9m+9VPcrnZ8Xps5RWCbZQf85q6VnJ5c/GeVqS/gp9MhcSTt
- /Kh2ij/T4OD3ZjqXv/OBBntMURWOmQwzeOtwMHU+MJJI6EY6I0mAexB6+HbjhO/e3C8D
- RzrlK0Tv0PR6E8QjzGbBfwjJ9DkhQVf3GDkGs+l6wQYBvkK3cRoc2tlNG3Bx15kf14ff
- ZFeA==
-X-Gm-Message-State: AOAM53345ZDgMkGHVdpVEcVZbHEr+djiTLqSrMaVvF1etRvn9+xZK99X
- dveGriMyATLoyPliCUoeXIRPgNwHhDAw8g==
-X-Google-Smtp-Source: ABdhPJwJtGYXi681HFZtuwFPrRW5VZtsWP+jjc6VTFWGtmHHwNPrNi2UZ4k5vtOQd4VLaPRHvEomTw==
-X-Received: by 2002:a63:cc:: with SMTP id 195mr6561964pga.249.1624625435859;
- Fri, 25 Jun 2021 05:50:35 -0700 (PDT)
-Received: from localhost.localdomain ([36.62.197.104])
- by smtp.gmail.com with ESMTPSA id t14sm5995853pgm.9.2021.06.25.05.50.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jun 2021 05:50:35 -0700 (PDT)
-From: Wang Shilong <wangshilong1991@gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 25 Jun 2021 08:50:26 -0400
-Message-Id: <20210625125026.5796-1-wangshilong1991@gmail.com>
-X-Mailer: git-send-email 2.27.0
+ List-Owner:List-Archive; bh=qj7ede5ybWJX+n67R/yDJS5SoJdIHmqOHMoutzaJDfI=; b=F
+ VeuNcFUuA9H/o3CERv70N84GrtPYVBCib5r4rDgeL1Tznsx3NtbFPIibdVoTwlVrxo+3si4Pv1YB0
+ M5NwSRFCwnJ0dUvTFO9bIx4sc2hahNVN+aKiqvDuf6pjc4KAaENl3D6/krWkHC5xDLOIKEDp0wUPH
+ pCUHPkLr5ArrN/6U=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1lxUrQ-0007Wy-Oo
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 27 Jun 2021 13:30:15 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EEC176144E;
+ Sun, 27 Jun 2021 13:29:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1624800599;
+ bh=2uC2toy+ka1uze6VAxg44Fq+lJlePnzUG0woD9XSRg4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PNVPMXMoUnW+DEZBbSb3wju7VDxdr6yVpRaDihJbGu4jR4+ab3QfoNTWd2eJ9V2ZZ
+ rwa7H2UJeA9oB47TRQ6tWW/KonDVlD/vZtz8+fD0vLz3ep+R6KOts7J6XeUPMk5jOR
+ gVVZxzjJq58ih5J9NZ0lIWVRC9UXAGBEgZAS+W3niPxTgb8KcAma7eWwpNYsSLp2h+
+ 4pLXCrGtlRbFNMgqvRFcZaQLYvtjGQ4UgfplcMCPdZquKgOXAbOTbA/MaF4zN9s2eo
+ 2iNrqumiFIoF0OAU5Gzxu9LStVl6/I/daaNBueNl8yG88mTzDJzB+MumrZsfRzBubA
+ hpVw7KUdr0j8A==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Sun, 27 Jun 2021 21:29:18 +0800
+Message-Id: <20210627132918.7956-1-chao@kernel.org>
+X-Mailer: git-send-email 2.22.1
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (wangshilong1991[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.210.173 listed in list.dnswl.org]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: ddn.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.173 listed in wl.mailspike.net]
+ for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (wangshilong1991[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lwlI9-00DwHC-VF
-Subject: [f2fs-dev] [PATCH] f2fs: forbid U32_MAX project ID
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1lxUrQ-0007Wy-Oo
+Subject: [f2fs-dev] [PATCH] MAINTAINERS: f2fs: update my email address
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,39 +83,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wangshilong1991@gmail.com, Wang Shilong <wshilong@ddn.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Wang Shilong <wshilong@ddn.com>
+Old email address will be invalid after a few days, update it
+to kernel.org one.
 
-U32_MAX is reserved for special purpose,
-qid_has_mapping() will return false if projid is
-4294967295, dqget() will return NULL for it.
-
-So U32_MAX is unsupported Project ID, fix to forbid it.
-
-Signed-off-by: Wang Shilong <wshilong@ddn.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/file.c | 2 ++
- 1 file changed, 2 insertions(+)
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index ceb575f99048..861edf3c01d5 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3066,6 +3066,8 @@ int f2fs_fileattr_set(struct user_namespace *mnt_userns,
- 	u32 iflags;
- 	int err;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7fa367400f7d..d19d825be1de 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6903,7 +6903,7 @@ F:	drivers/iommu/exynos-iommu.c
  
-+	if (fa->fsx_projid >= U32_MAX)
-+		return -EINVAL;
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
- 		return -EIO;
- 	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
+ F2FS FILE SYSTEM
+ M:	Jaegeuk Kim <jaegeuk@kernel.org>
+-M:	Chao Yu <yuchao0@huawei.com>
++M:	Chao Yu <chao@kernel.org>
+ L:	linux-f2fs-devel@lists.sourceforge.net
+ S:	Maintained
+ W:	https://f2fs.wiki.kernel.org/
 -- 
-2.27.0
+2.22.1
 
 
 
