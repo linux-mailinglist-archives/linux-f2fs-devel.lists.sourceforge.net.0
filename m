@@ -2,103 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C9733B5E26
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jun 2021 14:38:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29E273B5E2F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jun 2021 14:41:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lxqWw-0005du-W7; Mon, 28 Jun 2021 12:38:27 +0000
+	id 1lxqZk-0007U9-Dh; Mon, 28 Jun 2021 12:41:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <wangshilong1991@gmail.com>) id 1lxqWv-0005dl-L6
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 12:38:25 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <wangshilong1991@gmail.com>) id 1lxqZi-0007U1-13
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 12:41:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WT6v9uHvNGHnkrWHqw+IXv7PjvRxi0xOsDaWugRiQFY=; b=Z1NiZURf5NGZrg+lWUAhKe/XTy
- pYG58XpG45CuNX4cOS3Jq/F77Ky1xTAUbIo9dKN/c4BoIZXLKht1p/0OGGJiHvwNyFkqoU+NnmUeO
- v1lQYG5cWwjh7txrqDT14JTrUb79a5LMm+b/+hScdVnsxZ3J/0vX+wOZVQNvbcqnSQwE=;
+ bh=s5/zTfNR70aTjv1xZrZ4pWS2DjzkypAd9rzw9Aphd6w=; b=G2xtYug2yeiwnDnTNw3wIsoJxn
+ gCzx9T/XS3HFgN45X+eD3TsoL/6kWO6j1YrtaY20v1pb0bYYZAS+u699gQdzyiYqQQVvtbmZ5t+Zg
+ Xy3lxSplJGPwSdUF6O6ANPwPcfeQUr8okT4iAzrd++KD6eiG+mcB37g0mILOYOTNSaCA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=WT6v9uHvNGHnkrWHqw+IXv7PjvRxi0xOsDaWugRiQFY=; b=Q
- SXywS2OoXf9D3NvNzBSBUPacMOcQAPdA8TNnpKude3InNUlfFAWJ5icQBGBeVYgfQ+wn0gCafC/GF
- zK+fSRozP1fF5PEIsWrXPGZbcPuvPpbv46k1LZm6tp/fXO8mWROxfj1QKQtboxJm6Lmoi5kvxSyYi
- UvOYQrN37fqMe3DM=;
-Received: from mail-pj1-f44.google.com ([209.85.216.44])
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=s5/zTfNR70aTjv1xZrZ4pWS2DjzkypAd9rzw9Aphd6w=; b=dheVTyzUaFtI+5M+Vbch7vJEK6
+ hPg/Z5a/yVuROJlm9310P0fUBzyYHl3PjJhPyf19fZKePlGPgnNeo+yZYVnFpw/Nx/oYbTm3B8LZ3
+ VzE0OXYqWilhDfxNDT6o8eO31FtaZMzPKETVGbvLpK9N1p07eUpqc9/dhzXeo66eYhDc=;
+Received: from mail-wr1-f52.google.com ([209.85.221.52])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1lxqWm-001r1p-AO
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 12:38:30 +0000
-Received: by mail-pj1-f44.google.com with SMTP id
- mn20-20020a17090b1894b02901707fc074e8so1529523pjb.0
+ id 1lxqZY-001r8y-Ue
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 12:41:20 +0000
+Received: by mail-wr1-f52.google.com with SMTP id g7so16495672wri.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Jun 2021 05:38:16 -0700 (PDT)
+ Mon, 28 Jun 2021 05:41:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=WT6v9uHvNGHnkrWHqw+IXv7PjvRxi0xOsDaWugRiQFY=;
- b=QBNZk2FzsKVZFkEr2ZWCddj45xygaewHlKrtuogtrs9agXtqPkt9I87Pg8ePtRsK86
- 4KEp6j8xcsOlWbj+fRie+VbcwEsfUlSm8Vsgl2GVEpbNYZ3XrfE8Q6a0TGPq5Yp6wmqt
- sp8FLOKmtRdqhCAdsdoRPhOzrf8mdLp3v+AG//g5HC9SKt6/KQQtnw9OCXOna1cHHdfm
- wahn2cLq5XCPwGdTgPwa5L/lzgSbnJq7Fs2dZUKPgxuN6DhvqHaWDS6t2UMfwFVkxEDy
- o31Lfac7whjlPs3ig1RDDBaBtd2O36KPpwfRPRrFIuS+enwfsX8ut6XBEwlQi1x3ZgMI
- XYkQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=s5/zTfNR70aTjv1xZrZ4pWS2DjzkypAd9rzw9Aphd6w=;
+ b=J5C0U2TwFeyCBDnIXoh3fP4g+kemM+leAvGcZn3foDep/O4eEbLPEHD8c25RsxPbL6
+ eLFJSDTvy0lQYFSyIPj2imVd6MYmx9mRVdn8ntbJZ6B9u1AwL8FAlbil4duTRBhmmOBc
+ 4r8zqxSccb5W7KIUsF+GwWXpH/h2ezdeg7GRZ8qg/8dIt8nORbww+6mLfY32NDkeyejI
+ tE9JdcVzfnjcuTn48V5VmyRvQj9D3rAzFqB8Hf3TAcDNcBERorlvqrNmHzLkunKFAw6p
+ nkkhJE3M9BZLS/CBHm3OnV5yECJQiniRE30MvuSGstI1Eatl5BjqZ2aOZBqhQ3BFkxu4
+ rdPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=WT6v9uHvNGHnkrWHqw+IXv7PjvRxi0xOsDaWugRiQFY=;
- b=sxnXiFNj+kY/WFJlZGMwaZBpXHMcxkOMumkKV7JFFLEena0Q/0th42EoEUx2fGSshc
- 1yUlK+menssK28G53pL3PQSsjFR/vzfzr+wMwxtv5IJfBVQvgzLRlfBdYFQ4UFviAa/X
- q1CPikSlavqfGbmWBSfF61szVbL1sNGhQ2YibHvFkuev3k0PA5MrWP9sGrFUB07K+fQp
- iDPYfMOeCwdPCyA9Hu8BZdWmRb4LyMxFHNQ516LFUno9Aif3PxyMVdYYp1bcI3Wb/k2x
- rDKQvWGAl1z2a3uC9nSiAGwvvHJ6SA7ufMkWAXdvbzs6++KsCBeo95ejaF+TFwTneFyg
- k32Q==
-X-Gm-Message-State: AOAM530wMoheNwGq8qwn8V0UfP5rNBqhRCfpXIOU3hAkmeGngf/Pfei6
- sakBG19VAukXofVWBznHEyQ=
-X-Google-Smtp-Source: ABdhPJzdkVuvbX+deaYXYvXccVsMs9GcFLfmgAKhU2DOdgfJq1F9YYoem/FHmnOSftHIvwN94oL18A==
-X-Received: by 2002:a17:90a:fd11:: with SMTP id
- cv17mr5786896pjb.8.1624883890837; 
- Mon, 28 Jun 2021 05:38:10 -0700 (PDT)
-Received: from localhost.localdomain ([36.62.198.29])
- by smtp.gmail.com with ESMTPSA id gl17sm2822835pjb.13.2021.06.28.05.38.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jun 2021 05:38:10 -0700 (PDT)
-From: Wang Shilong <wangshilong1991@gmail.com>
-To: linux-fsdevel@vger.kernel.org
-Date: Mon, 28 Jun 2021 08:38:01 -0400
-Message-Id: <20210628123801.3511-1-wangshilong1991@gmail.com>
-X-Mailer: git-send-email 2.27.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=s5/zTfNR70aTjv1xZrZ4pWS2DjzkypAd9rzw9Aphd6w=;
+ b=agvhoHnua30RppStAgMD/fwzi0CTVsoxqTi2DYyx0f8UEmYYLMNv/JadMdwFh5KNjl
+ EsVisYRJPukxvxvckhpOAfdZDHSt9SEU0zjoTHL28FvLDzQb20cklHaKxH54fLAGX7aF
+ wG3v2P56TNgbP+iDpin3qSs+/6xkTB5ApfOnLnhcilR/7s2T5kTX8WEsAFfpUHqaqR1q
+ 7odd6CtDXDG5zH0hnMahSQfOoVDL2X00vu0JdJ6iVdFWIzNJBr1+cg17dxGI+cNcoN3H
+ 28LKgEb+vEmaJ6AIhqHJgahA4hGKNyhAorSELkZCMy1mCUfA2THRbDep8vsmCl8F7VKY
+ sP8g==
+X-Gm-Message-State: AOAM530aOLfe7KgRghnGftLBsQ3LRqITBEllZZ6FFi91inNEmJRsLLkM
+ wsqORnmkkfa3ZvXaSShFCG0huT8+slCRV+2xLHk=
+X-Google-Smtp-Source: ABdhPJyHhX/JQxTm87Pus/NqKviVZfAbV9vG8LFegKu2AjKeS8GhZeo8uVu0UQM1AFUbp+TR2jkxwAO+9jx3YKl+fK8=
+X-Received: by 2002:a5d:6291:: with SMTP id k17mr27150390wru.225.1624884062719; 
+ Mon, 28 Jun 2021 05:41:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+References: <20210625125026.5796-1-wangshilong1991@gmail.com>
+ <9f6d607a-6b43-a3e2-7002-426f58513f9c@kernel.org>
+In-Reply-To: <9f6d607a-6b43-a3e2-7002-426f58513f9c@kernel.org>
+From: Wang Shilong <wangshilong1991@gmail.com>
+Date: Mon, 28 Jun 2021 20:40:51 +0800
+Message-ID: <CAP9B-Qn+eV5LSCtfbLAeXZpOJ3UDMzb7a9i6vJwfDN_zfKjHYA@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  (wangshilong1991[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.221.52 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit (wangshilong1991[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.44 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.44 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lxqWm-001r1p-AO
-Subject: [f2fs-dev] [PATCH v2] fs: forbid invalid project ID
+X-Headers-End: 1lxqZY-001r8y-Ue
+Subject: Re: [f2fs-dev] [PATCH] f2fs: forbid U32_MAX project ID
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,40 +104,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- wangshilong1991@gmail.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: Wang Shilong <wshilong@ddn.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-fileattr_set_prepare() should check if project ID
-is valid, otherwise dqget() will return NULL for
-such project ID quota.
+Hi Chao,
 
-Signed-off-by: Wang Shilong <wshilong@ddn.com>
----
-v1->v2: try to fix in the VFS
----
- fs/ioctl.c | 3 +++
- 1 file changed, 3 insertions(+)
+On Mon, Jun 28, 2021 at 8:32 PM Chao Yu <chao@kernel.org> wrote:
+>
+> On 2021/6/25 20:50, Wang Shilong wrote:
+> > From: Wang Shilong <wshilong@ddn.com>
+> >
+> > U32_MAX is reserved for special purpose,
+> > qid_has_mapping() will return false if projid is
+> > 4294967295, dqget() will return NULL for it.
+> >
+> > So U32_MAX is unsupported Project ID, fix to forbid it.
+> >
+> > Signed-off-by: Wang Shilong <wshilong@ddn.com>
+> > ---
+> >   fs/f2fs/file.c | 2 ++
+> >   1 file changed, 2 insertions(+)
+> >
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > index ceb575f99048..861edf3c01d5 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -3066,6 +3066,8 @@ int f2fs_fileattr_set(struct user_namespace *mnt_userns,
+> >       u32 iflags;
+> >       int err;
+> >
+> > +     if (fa->fsx_projid >= U32_MAX)
+>
+> unlikely()? if this is really a corner case.
+>
+> > +             return -EINVAL;
+> >       if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+> >               return -EIO;
+> >       if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
+>
+> I prefer to check fsx_projid here to keep line with check order in other
+> f2fs interfaces.
 
-diff --git a/fs/ioctl.c b/fs/ioctl.c
-index 1e2204fa9963..5db5b218637b 100644
---- a/fs/ioctl.c
-+++ b/fs/ioctl.c
-@@ -845,6 +845,9 @@ static int fileattr_set_prepare(struct inode *inode,
- 	if (fa->fsx_cowextsize == 0)
- 		fa->fsx_xflags &= ~FS_XFLAG_COWEXTSIZE;
- 
-+	if (!projid_valid(KPROJIDT_INIT(fa->fsx_projid)))
-+		return -EINVAL;
-+
- 	return 0;
- }
- 
--- 
-2.27.0
+Just sent a v2 which tried to fix the problem in the VFS.
 
+>
+> Thoughts, Shilong?
+>
+> Thanks,
+>
+> >
 
 
 _______________________________________________
