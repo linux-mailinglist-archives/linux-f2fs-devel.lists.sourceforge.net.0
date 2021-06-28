@@ -2,65 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0AB43B65FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jun 2021 17:44:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED2CF3B6725
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jun 2021 18:57:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lxtR0-0006Ms-FC; Mon, 28 Jun 2021 15:44:30 +0000
+	id 1lxuZE-0001pj-Mx; Mon, 28 Jun 2021 16:57:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lxtQz-0006Me-0O
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 15:44:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1lxuZD-0001pO-Ep
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 16:57:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lY1wnZEDs4yl/jchBSmtjwBXHcgP9IReJQ4lpvifbLs=; b=Uud0hJBhNyEYlNw4O7PN0jYJQv
- NyU7S4C+QuDpsWKj5bEg2lVqyOi6OuLydXgHk9+lITig/rXtY08kA/At+MCYzFEJFyda/jWgLgCQt
- AmAh5P7ZXghXw7XLz6nC5HuFIY4nEe/rGSGqZ2+Fh3wSbfykuEmruyTXbr6JpDwdLWNg=;
+ bh=ueIJM3YgVL/SZXJKX37sFUKqr+ar8/+GQi8J2MaeKT8=; b=Jyb+sJmHJyNnLOpoXuvSNOm43b
+ DFSNSU9JkOHLvVv1nVvW4HtAM/766sWbWVM3tmVfmNQvvcFTCYP+5Qw1Fs97xSwFlzxDBZD6RScf9
+ BVX+SQ2r3NUEwh99XHjK0hyZuZDXnVlwaPXKU3mEUDODtWb5PveAtCRdHIF1mDKEDjV4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=lY1wnZEDs4yl/jchBSmtjwBXHcgP9IReJQ4lpvifbLs=; b=fAWqI/oYFGCbWzFraEmQT514ZA
- GT88OLa4HWVtA5uJxpypfiF4DE98SE+Hl/FE6iB/XYWsr+W7kyezCNZhxO76XxyDNSuWIZeHqd8Dj
- FKluuk9ZKymjd1+g4EjH9b28sdxk7eOJ4oaLKZaq2bHRnrOQBBAar7J8XZp+liF6bK4E=;
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ueIJM3YgVL/SZXJKX37sFUKqr+ar8/+GQi8J2MaeKT8=; b=g
+ O/wzUvCrMUZmFUp7nrpFoZVuvQUKjLYjbNb1EnQowAsYW1rEVR6j2JbGFFKQEDTp/O+9tZVDFP8Es
+ rGzIsproOnvqEAwMohsEqG1ZwuLbA1haNOl6AF8uPHmxl4z4eqUvYBEX/jmxnnjR/2KGjjrtsO5Ma
+ iejkTbd8r+b3EsVg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lxtQq-00048G-Ci
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 15:44:29 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1C0AA6197F;
- Mon, 28 Jun 2021 15:44:15 +0000 (UTC)
+ id 1lxuZ6-0028Bi-BJ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Jun 2021 16:57:05 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id DB87B61988;
+ Mon, 28 Jun 2021 16:56:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1624895056;
- bh=Nc3RW4c4m0ZLIXjyzWfSq3lrPFLR/+B7zK7FDQahSAw=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=lqQu7Pj+l/3+GXkuIpEUuIogvkatxylDG2nAUoAfpakTUIYD2ziZGmr6SXZXy+vJk
- QlGLI0PQHvN7ImEb+MonFR/7itSTtOMJEa9PgoFlPK47cfupAxq7nsWB+5hMMefVzs
- UEl6kNS73LSFj089UAqFQ6giMCN/BVNuBOGAmGmXIa6B09pe+bccDfE79sgSZUnGJc
- HIj4pNpxEsQFexqP6tE8rspApFN6qdGFpkA5ztsxgo21ZDsfO1qLGZeXET7dPMLWij
- UMvIpHR7FTFJMXvccZwoC6d9GreAloJJ7XBabzLUIcI1xTWo+j+wyxWDQh9fYneMPy
- tQ/bCHXGKdLvw==
-To: Wang Shilong <wangshilong1991@gmail.com>
-References: <20210625125026.5796-1-wangshilong1991@gmail.com>
- <9f6d607a-6b43-a3e2-7002-426f58513f9c@kernel.org>
- <CAP9B-Qn+eV5LSCtfbLAeXZpOJ3UDMzb7a9i6vJwfDN_zfKjHYA@mail.gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <c3b7dd84-7c26-78b7-2bac-84cdccc51ee8@kernel.org>
-Date: Mon, 28 Jun 2021 23:44:14 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ s=k20201202; t=1624899406;
+ bh=JEH9YvkX1tuS2gUabFZ9JaX5r+EudDtnu4dkjX3MpYc=;
+ h=Date:From:To:Cc:Subject:From;
+ b=vNj8RwCa5/BCXX2jdMugsk8BK+T6K04e/v9FzgdrgzJaJ9GUpOdsfeYfV0SOb63iX
+ KL7IPMD4GPZmublCVb4UFA6hyl43mf6EeUErmU0R5DSBZP8BpQQ3r/bi8FSTh4e2gi
+ NczpLPJDkY4I7g5pwR5imkna4VDn+nml2cM8AI54Eaw7VJd9H1CzYcZtqiaY8yuuv4
+ 9YSKJ1bXlhjcDEYskWqkVZVg3TCMvoZ2G7Yk1FXZEZsYG9/wJi1HK81jf3n6hopI8B
+ h1HzZaMto30+F+Mb6UVEy/e+wEUaIXQHnMrDpal9oWPMhdeUAJdxfKafRcZMG20Dq6
+ zNbaGKfd6Ai1Q==
+Date: Mon, 28 Jun 2021 09:56:44 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <YNn/TL5lW44yAx3o@sol.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <CAP9B-Qn+eV5LSCtfbLAeXZpOJ3UDMzb7a9i6vJwfDN_zfKjHYA@mail.gmail.com>
-Content-Language: en-US
+Content-Disposition: inline
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -71,10 +65,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lxtQq-00048G-Ci
-Subject: Re: [f2fs-dev] [PATCH] f2fs: forbid U32_MAX project ID
+X-Headers-End: 1lxuZ6-0028Bi-BJ
+Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 5.14
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,65 +79,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wang Shilong <wshilong@ddn.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/6/28 20:40, Wang Shilong wrote:
-> Hi Chao,
-> 
-> On Mon, Jun 28, 2021 at 8:32 PM Chao Yu <chao@kernel.org> wrote:
->>
->> On 2021/6/25 20:50, Wang Shilong wrote:
->>> From: Wang Shilong <wshilong@ddn.com>
->>>
->>> U32_MAX is reserved for special purpose,
->>> qid_has_mapping() will return false if projid is
->>> 4294967295, dqget() will return NULL for it.
->>>
->>> So U32_MAX is unsupported Project ID, fix to forbid it.
->>>
->>> Signed-off-by: Wang Shilong <wshilong@ddn.com>
->>> ---
->>>    fs/f2fs/file.c | 2 ++
->>>    1 file changed, 2 insertions(+)
->>>
->>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>> index ceb575f99048..861edf3c01d5 100644
->>> --- a/fs/f2fs/file.c
->>> +++ b/fs/f2fs/file.c
->>> @@ -3066,6 +3066,8 @@ int f2fs_fileattr_set(struct user_namespace *mnt_userns,
->>>        u32 iflags;
->>>        int err;
->>>
->>> +     if (fa->fsx_projid >= U32_MAX)
->>
->> unlikely()? if this is really a corner case.
->>
->>> +             return -EINVAL;
->>>        if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
->>>                return -EIO;
->>>        if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
->>
->> I prefer to check fsx_projid here to keep line with check order in other
->> f2fs interfaces.
-> 
-> Just sent a v2 which tried to fix the problem in the VFS.
+The following changes since commit c4681547bcce777daf576925a966ffa824edd09d:
 
-Shilong,
+  Linux 5.13-rc3 (2021-05-23 11:42:48 -1000)
 
-Agreed, and better.
+are available in the Git repository at:
 
-Thanks,
+  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
 
-> 
->>
->> Thoughts, Shilong?
->>
->> Thanks,
->>
->>>
+for you to fetch changes up to 2fc2b430f559fdf32d5d1dd5ceaa40e12fb77bdf:
+
+  fscrypt: fix derivation of SipHash keys on big endian CPUs (2021-06-05 00:52:52 -0700)
+
+----------------------------------------------------------------
+
+A couple bug fixes for fs/crypto/:
+
+- Fix handling of major dirhash values that happen to be 0.
+
+- Fix cases where keys were derived differently on big endian systems
+  than on little endian systems (affecting some newer features only).
+
+----------------------------------------------------------------
+Eric Biggers (2):
+      fscrypt: don't ignore minor_hash when hash is 0
+      fscrypt: fix derivation of SipHash keys on big endian CPUs
+
+ fs/crypto/fname.c    | 10 +++-------
+ fs/crypto/keysetup.c | 40 ++++++++++++++++++++++++++++++++--------
+ 2 files changed, 35 insertions(+), 15 deletions(-)
 
 
 _______________________________________________
