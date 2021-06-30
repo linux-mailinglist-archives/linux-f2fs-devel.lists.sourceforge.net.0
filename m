@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9D443B8157
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Jun 2021 13:32:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAE333B8159
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Jun 2021 13:32:10 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lyYRn-0001mt-4f; Wed, 30 Jun 2021 11:32:03 +0000
+	id 1lyYRq-0001nL-AK; Wed, 30 Jun 2021 11:32:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sunke32@huawei.com>) id 1lyYRk-0001md-Uj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Jun 2021 11:32:00 +0000
+ (envelope-from <sunke32@huawei.com>) id 1lyYRn-0001n5-W4
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Jun 2021 11:32:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2DJFSWIUwXCGUMVElcqRY0Q+DWkixSEFPZ0FvbC2ZQM=; b=HKInuBjrvvzvIQYma6Etj9IwJV
- mBYpDWfKBbF3VbwDySTZgVZ58mVLXQ/n+QxxJw4oRmIwjwTn2Y4wz8/oC7GTxwJub5ujpJyEiCGOk
- K1ZP4lGFUoL2Z7IcbW0tbpzunp4540czxAL4+NoW52/n02CQ8Z/gltU+srnnNpF+hZsE=;
+ bh=QvM5a4H6Onzj7JlDbtPucwJdbCHQ5SB8QvE0JjooTk8=; b=Nw6CIm7oTfySKsKbRDdMu+fu9/
+ 8SVc9UN3IYLNdfwjiAR80AfMDw0qacuLf+vp69lEn+8O1ZBXd/xw+xasmy4hCBhCm748aWu+l+c5M
+ A8xy3ZyfFwlETcC/PoHq8XOOUxYOjZyUJBD+razx4nDPgMJn2dx6mZ2pFXVLv4IMDt4o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -29,19 +29,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2DJFSWIUwXCGUMVElcqRY0Q+DWkixSEFPZ0FvbC2ZQM=; b=XvVt9OysOxHD8n7d+aE9HJxupi
- M0RNGXxbedO6u3OxLheZz23+Iq9unxKOGrkgU8UouspD7YVX9PrQnqohtHX/5uMEagthJly+ZCUuw
- CFAEI9qK/d0RP7/NXwq3aM72eYWYZECo/PSyQHwz7C2ypDXvmzk3iitIbnJ4QofCTYR4=;
+ bh=QvM5a4H6Onzj7JlDbtPucwJdbCHQ5SB8QvE0JjooTk8=; b=X8rtd5D20ivmlNbxkha0tLIJmc
+ Ld1z+X3Vfoepi3BCKx/JhVmhQ9tEGdocV0HXhm0DT4o0H8DawX4bJjXzLXTrsNtWWano6sSFet5k1
+ 2jMcj/55nX5ibIRKsuAvIf3wtvH6QvZHckz2flhqRW2zQ047zqpnyD988Fgn2nvjk7wg=;
 Received: from szxga02-in.huawei.com ([45.249.212.188])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lyYRg-004dVY-HA
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Jun 2021 11:32:00 +0000
-Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.57])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4GFJy13ZfRzZpDQ;
- Wed, 30 Jun 2021 19:28:41 +0800 (CST)
+ id 1lyYRg-004dVb-HS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Jun 2021 11:32:03 +0000
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.55])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4GFJy32dDlzZpCM;
+ Wed, 30 Jun 2021 19:28:43 +0800 (CST)
 Received: from dggema759-chm.china.huawei.com (10.1.198.201) by
- dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
  15.1.2176.2; Wed, 30 Jun 2021 19:31:48 +0800
 Received: from huawei.com (10.175.101.6) by dggema759-chm.china.huawei.com
@@ -51,8 +51,8 @@ Received: from huawei.com (10.175.101.6) by dggema759-chm.china.huawei.com
 From: Sun Ke <sunke32@huawei.com>
 To: <fstests@vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>,
  <guan@eryu.me>, <chao@kernel.org>
-Date: Wed, 30 Jun 2021 19:37:35 +0800
-Message-ID: <20210630113736.551843-3-sunke32@huawei.com>
+Date: Wed, 30 Jun 2021 19:37:36 +0800
+Message-ID: <20210630113736.551843-4-sunke32@huawei.com>
 X-Mailer: git-send-email 2.25.4
 In-Reply-To: <20210630113736.551843-1-sunke32@huawei.com>
 References: <20210630113736.551843-1-sunke32@huawei.com>
@@ -73,9 +73,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1lyYRg-004dVY-HA
-Subject: [f2fs-dev] [PATCH v3 2/3] generic/103: special left calculation for
- f2fs
+X-Headers-End: 1lyYRg-004dVb-HS
+Subject: [f2fs-dev] [PATCH v3 3/3] generic/260: f2fs is also special
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,45 +91,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It failed on f2fs:
-      QA output created by 103
-     +fallocate: No space left on device
-      Silence is golden.
-     ...
+It fail on f2fs:
 
-f2fs uses index(radix) tree as mapping metadata, its space overhead
-is about one thousandth of the data.
+ [+] Default length with start set (should succeed)
+ [+] Length beyond the end of fs (should succeed)
+ [+] Length beyond the end of fs with start set (should succeed)
++After the full fs discard 0 bytes were discarded however the file system is 12882804736 bytes long.
++It seems that fs logic handling len argument overflows
+
+The root cause is f2fs can tag a special flag TRIMMED_FLAG to indicate
+the whole filesystem is trimmed, so after mkfs/fstrim(), following
+fstrim() won't trim any block.
 
 Suggested-by: Chao Yu <yuchao0@huawei.com>
 Signed-off-by: Sun Ke <sunke32@huawei.com>
 ---
- tests/generic/103 | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ tests/generic/260 | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/tests/generic/103 b/tests/generic/103
-index 795f851dc6c8..4efa1dc366f9 100755
---- a/tests/generic/103
-+++ b/tests/generic/103
-@@ -27,10 +27,18 @@ _require_xfs_io_command "falloc"
- _consume_freesp()
- {
- 	file=$1
-+	left=512
- 
- 	# consume nearly all available space (leave ~512kB)
- 	avail=`_get_available_space $SCRATCH_MNT`
--	filesizekb=$((avail / 1024 - 512))
-+
-+	# f2fs uses index(radix) tree as mapping metadata, its space overhead
-+	# is about one thousandth of the data
-+	if [ $FSTYP == "f2fs" ]; then
-+		left=$((left + avail / 1024000))
-+	fi
-+
-+	filesizekb=$((avail / 1024 - $left))
- 	$XFS_IO_PROG -fc "falloc 0 ${filesizekb}k" $file
- }
- 
+diff --git a/tests/generic/260 b/tests/generic/260
+index 8d6d6c79a5c1..b15b4e570bd1 100755
+--- a/tests/generic/260
++++ b/tests/generic/260
+@@ -95,7 +95,10 @@ fi
+ # It is because btrfs does not have not-yet-used parts of the device
+ # mapped and since we got here right after the mkfs, there is not
+ # enough free extents in the root tree.
+-if [ $bytes -le $(_math "$fssize*512") ] && [ $FSTYP != "btrfs" ]; then
++# F2fs is also special. F2fs can tag a special flag TRIMMED_FLAG to
++# indicate the whole filesystem is trimmed, so after mkfs/fstrim(),
++# following fstrim() won't trim any block.
++if [ $bytes -le $(_math "$fssize*512") ] && [ $FSTYP != "btrfs" ] && [ $FSTYP != "f2fs" ]; then
+ 	status=1
+ 	echo "After the full fs discard $bytes bytes were discarded"\
+ 	     "however the file system is $(_math "$fssize*1024") bytes long."
+@@ -154,8 +157,11 @@ _scratch_mount
+ # It is because btrfs does not have not-yet-used parts of the device
+ # mapped and since we got here right after the mkfs, there is not
+ # enough free extents in the root tree.
++# F2fs is also special. F2fs can tag a special flag TRIMMED_FLAG to
++# indicate the whole filesystem is trimmed, so after mkfs/fstrim(),
++# following fstrim() won't trim any block.
+ bytes=$($FSTRIM_PROG -v -l$len $SCRATCH_MNT | _filter_fstrim)
+-if [ $bytes -le $(_math "$fssize*512") ] && [ $FSTYP != "btrfs" ]; then
++if [ $bytes -le $(_math "$fssize*512") ] && [ $FSTYP != "btrfs" ] && [ $FSTYP != "f2fs" ]; then
+ 	status=1
+ 	echo "It seems that fs logic handling len argument overflows"
+ fi
 -- 
 2.25.4
 
