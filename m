@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 628653B98B1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jul 2021 00:52:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1BA63B98D2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jul 2021 01:04:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lz5Xe-00014W-BS; Thu, 01 Jul 2021 22:52:18 +0000
+	id 1lz5jU-0000ck-9h; Thu, 01 Jul 2021 23:04:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lz5Xc-000141-6f
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 22:52:16 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1lz5jS-0000cc-UH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 23:04:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yxu04MJappAHeh8Mf8jouf5zPAI1RPYsr1ZAl/E8j9M=; b=E8kA0GMnC7pAK1bzV6Pr9kWJGA
- 8umYOuUFUYlIJxWxUbawCnzJUpTVXPPdMABqusaF4t5PqCTQe3B+ZI1rtx5gE1Of0AH1D95EGJmNQ
- ECcwYMPmJxVvPbPhcSoSx3+hf56jo3Dpig2PWNMh475H4uq7m8/it5CZh98sOcugD67U=;
+ bh=Z0/ypX7ChEZh902+dIeB8AqGVWO7s8eM3biezXZVMbo=; b=Yo8gupscnBqWamffE9z0szGPOe
+ 18d9YZRLSKRcIQlf2fQHuBksElEK0+P1PSdar4GkYYAPMMhP8W/z0KU9OwgKCZm6lvD5M6AmT/Bx8
+ cTx9rlgO0KL1rUoF+vFfW4vSp+etQJN9b+ETLv2lY212DW6c8OEv37u8HqjvaVSAD+cg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Yxu04MJappAHeh8Mf8jouf5zPAI1RPYsr1ZAl/E8j9M=; b=VCSSsuQfxFSwsA4YMSY96vDmMZ
- yGC5ri5nt1vChNi7wWaAdCLl5F+R8s4U9SPBl1DD0wGrTmvVw6nP1Pv3m4EKWW2Bd/S1xLE4lUE9X
- n/yynnczs0m9g6unwKbAheWMtvGiT0XwL8NiArstjdsaOW+SyV4+EQy9Uo0hAK6kZb/0=;
+ bh=Z0/ypX7ChEZh902+dIeB8AqGVWO7s8eM3biezXZVMbo=; b=JHCIU2L+dveO1pi7SkCYgitNP2
+ eFe1TM8D3TBEE8HAMpbUiDZhQYXLVo+Nk+U/NXCDMlUz3XrDhrix+GGrLdfWvzf6S0PSJF+kldLr3
+ u0xqtxtwz6wWEVAA+dZ8S8z8I4Cc159/C+f3rN1cjFKHOpYQOsMLl2Kdh5VlgigDE8eE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lz5XT-006chj-42
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 22:52:16 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 124E661154;
- Thu,  1 Jul 2021 22:52:00 +0000 (UTC)
+ id 1lz5jG-006dRg-Ve
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 23:04:30 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A3DC1613DC;
+ Thu,  1 Jul 2021 23:04:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625179921;
- bh=AjeYj4JYmSsMFnV4khsdyiCBTTGKkmrJEyE7/OYhHWo=;
+ s=k20201202; t=1625180653;
+ bh=+HiBm4y2G/OI/CCrGo4hwCm699FrUDzFzL1HhjQ1s2A=;
  h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=IiR9H+tq1o+OtLsgmN3V/9nnJOYFgT0Dvpr2DKvy26u3D00EY7oOQ1n1rZJ8DCU6L
- ZcfEi8sHmUZjKlEv4LixyCiP2Sb6/WKGzA94KgHg9zqyOttK+mglV4Gxef9Jb3SMxN
- T/Hq5dn/suClpfBBfr9V1lUQ802ZTQqlM2HS382WCRkxINd5ahvfl4OQkbXKoFzTIg
- 0rAPCiydLRmCT5WnuMTCC7UuwlXWZ3g5BNsuJC9dAfyMw7oO76frmAYw8BprLpnCxB
- mdm2pW4c2cifTo4aG+5F5DybBZ6vf5UVmxoPExv7spLyYBJjJhk1hmeC2+Q8htDwW1
- 81fY5g3biyHdQ==
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Fengnan Chang <changfengnan@vivo.com>
-References: <20210628130550.39696-1-changfengnan@vivo.com>
- <YN31AyWCu4QhSCaa@google.com>
+ b=YO86vBw446qb7l/fbFDkIStu00xNLetn6+c2vfY1/FQgoSaG/8o988/hOB/fD1eGG
+ GmSD/s9Du7L9qzcSI0PY9EpLbZ2pRP5+0U4+cJwQ1W4Z41PqNoa8SBTLWlJdAvN6ng
+ ZHeEvFoxx3k11PeJkfZh5s1kMHol5+BkIG7M6frKDmw+6WoxCIru51HLl7d2eI8SGG
+ FKtstFrCLRsjIi/bCtYZZVNpgaww61ii2RMSVBKghrAj/RBgLsqfqPPSjJ0nj7FPdu
+ o88gMK0y0dkR5e6Rn+8qC7HUe0qUwAc2hxDQj0h6DxFxEM9UTjqqq1nGfD2aukek8j
+ 3f2UKK0kJ7ZKQ==
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210601101024.119356-1-yuchao0@huawei.com>
+ <YN32/NsjqJONbvz7@google.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <47b9737f-b0e0-8483-773e-646a8cf3e2ec@kernel.org>
-Date: Fri, 2 Jul 2021 06:52:00 +0800
+Message-ID: <648a96f7-2c83-e9ed-0cbd-4ee8e4797724@kernel.org>
+Date: Fri, 2 Jul 2021 07:04:12 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <YN31AyWCu4QhSCaa@google.com>
+In-Reply-To: <YN32/NsjqJONbvz7@google.com>
 Content-Language: en-US
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -66,7 +66,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: vivo.com]
+ for more information. [URIs: mail-archive.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -76,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lz5XT-006chj-42
-Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: allow write compress
- released file after truncate to zero
+X-Headers-End: 1lz5jG-006dRg-Ve
+Subject: Re: [f2fs-dev] [PATCH v2 RFC] f2fs: fix to force keeping write
+ barrier for strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,49 +90,90 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/7/2 1:01, Jaegeuk Kim wrote:
-> On 06/28, Fengnan Chang wrote:
->> We should allow write compress released file after truncate to zero.
+On 2021/7/2 1:10, Jaegeuk Kim wrote:
+> On 06/01, Chao Yu wrote:
+>> [1] https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
 >>
->> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
->> ---
->>   fs/f2fs/file.c | 6 +++++-
->>   1 file changed, 5 insertions(+), 1 deletion(-)
+>> As [1] reported, if lower device doesn't support write barrier, in below
+>> case:
 >>
->> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->> index 6afd4562335f..b91ae8f751c5 100644
->> --- a/fs/f2fs/file.c
->> +++ b/fs/f2fs/file.c
->> @@ -730,9 +730,13 @@ int f2fs_truncate_blocks(struct inode *inode, u64 from, bool lock)
->>   	 * for compressed file, only support cluster size
->>   	 * aligned truncation.
->>   	 */
->> -	if (f2fs_compressed_file(inode))
->> +	if (f2fs_compressed_file(inode)) {
->>   		free_from = round_up(from,
->>   				F2FS_I(inode)->i_cluster_size << PAGE_SHIFT);
->> +		if (!free_from)
->> +			clear_inode_flag(inode, FI_COMPRESS_RELEASED);
+>> - write page #0; persist
+>> - overwrite page #0
+>> - fsync
+>>   - write data page #0 OPU into device's cache
+>>   - write inode page into device's cache
+>>   - issue flush
 > 
-> We can do after truncating all the blocks successfully?
+> Well, we have preflush for node writes, so I don't think this is the case.
+> 
+>   fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
 
-Agreed, but please document this behavior as well.
+This is only used for atomic write case, right?
+
+I mean the common case which is called from f2fs_issue_flush() in
+f2fs_do_sync_file().
+
+And please see do_checkpoint(), we call f2fs_flush_device_cache() and
+commit_checkpoint() separately to keep persistence order of CP datas.
+
+See commit 46706d5917f4 ("f2fs: flush cp pack except cp pack 2 page at first")
+for details.
 
 Thanks,
 
 > 
->> +	}
->> +
->>   #endif
->>   
->>   	err = f2fs_do_truncate_blocks(inode, free_from, lock);
+>>
+>> If SPO is triggered during flush command, inode page can be persisted
+>> before data page #0, so that after recovery, inode page can be recovered
+>> with new physical block address of data page #0, however there may
+>> contains dummy data in new physical block address.
+>>
+>> Then what user will see is: after overwrite & fsync + SPO, old data in
+>> file was corrupted, if any user do care about such case, we can suggest
+>> user to use STRICT fsync mode, in this mode, we will force to trigger
+>> preflush command to persist data in device cache in prior to node
+>> writeback, it avoids potential data corruption during fsync().
+>>
+>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>> ---
+>> v2:
+>> - fix this by adding additional preflush command rather than using
+>> atomic write flow.
+>>   fs/f2fs/file.c | 14 ++++++++++++++
+>>   1 file changed, 14 insertions(+)
+>>
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 7d5311d54f63..238ca2a733ac 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -301,6 +301,20 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+>>   				f2fs_exist_written_data(sbi, ino, UPDATE_INO))
+>>   			goto flush_out;
+>>   		goto out;
+>> +	} else {
+>> +		/*
+>> +		 * for OPU case, during fsync(), node can be persisted before
+>> +		 * data when lower device doesn't support write barrier, result
+>> +		 * in data corruption after SPO.
+>> +		 * So for strict fsync mode, force to trigger preflush to keep
+>> +		 * data/node write order to avoid potential data corruption.
+>> +		 */
+>> +		if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT &&
+>> +								!atomic) {
+>> +			ret = f2fs_issue_flush(sbi, inode->i_ino);
+>> +			if (ret)
+>> +				goto out;
+>> +		}
+>>   	}
+>>   go_write:
+>>   	/*
 >> -- 
->> 2.29.0
+>> 2.29.2
 
 
 _______________________________________________
