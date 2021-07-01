@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E27A73B937B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jul 2021 16:40:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D1E23B937C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jul 2021 16:41:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1lyxrD-0005Gt-RL; Thu, 01 Jul 2021 14:39:59 +0000
+	id 1lyxsW-0006qO-Dl; Thu, 01 Jul 2021 14:41:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1lyxrC-0005GN-65
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 14:39:58 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1lyxsU-0006qB-Pz
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 14:41:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:Cc:References:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ijKNUARGwGYE1TtGCNO+cYoM+Se2Y2aWi4mkV2o/hIU=; b=Mw6DUxovCPY89FqSwfRAELOaGn
- YK6TwG8KQt+JevXU1L/D4FxjwJIteKy0C/KGoZgUOq3Czj/KzDL4QyeA1nJddLVlKWqU9ESBRiyel
- MSn4b5OOtlQh7sUDAxOjRMQVHebofrGe/Wq4EaHX4H8XdIY3J5s3037ct70B64/kr/qM=;
+ bh=0tPCTN0NSpB9Fn5vIfv6Yop2TjEBva60c5sFIEvk0E0=; b=XX60HiXw4DdbJKZwLlE2WAlnnH
+ 6EyLn5VB6/uqIu23RoMINBDzjp/5Bs2h+IqYTnGjlxRd/wUGA4MzF/ET5O4Z7acgb78XBSk9jXBfG
+ 9KIadabrfpJFCDbPrVZ3qDHe6KPRQfMDKN+LdSFU7ofB3cCdbqGJiQmgBaZdsl1O20Fo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ijKNUARGwGYE1TtGCNO+cYoM+Se2Y2aWi4mkV2o/hIU=; b=imtngSvqVc91/89jkaNc4dCcXX
- awwJVptaUhY4E9NqpNdblrRq7uDvE0gCL0Hr1giLxeo8clG3D8HDM2Yeoc/AE1x1KdWB0FMd5EG9M
- HKef/bST4JBrmoiiv3IWlLmok3pmK5v3qwTsWa69H8eDxOAZpUC3YnSSjlzoZNEnENAk=;
+ bh=0tPCTN0NSpB9Fn5vIfv6Yop2TjEBva60c5sFIEvk0E0=; b=YCsACZV5nPeZqx7+OWIJlSumgb
+ omjDwKXkGrcq5pZ40RGWg6tUGD8CmEwyCQiUqGWQWadw5qEBGVT5DEg0GPDl+e/QpMsJJXKx8lFs1
+ 6YqsGf40JupP+GY66jtgIG3RaS8q2pkqKqlTKIreWMhUZ9t4SOv5BcJsqQ/fPUzqBExk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1lyxr2-0005wi-6P
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 14:39:57 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A5BFD6140C;
- Thu,  1 Jul 2021 14:39:36 +0000 (UTC)
+ id 1lyxsJ-0067LI-NB
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 01 Jul 2021 14:41:18 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8885B6140C;
+ Thu,  1 Jul 2021 14:40:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625150377;
- bh=nKVMnaaPD8SdRCAlhgi0KbgzL39fEBTKEHKnd+egGNI=;
+ s=k20201202; t=1625150451;
+ bh=qRA6jix9tJ9GFuDWO6ZTcbnyF4vlIVI6z2/rj74g4BY=;
  h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
- b=cJu5tc1uL5WNXBHDU0dreaWZTbWudVad+Nc4iLPYkj5RkMDUghT1GvfgxBxpmfGlt
- YSYMNA3/+jh2B/7npFOE8fzOEKJRoyETNuNIAxHWOlnrdFvM/Ur1dTUrHwuc59e+Jj
- pD/ekv/KC/hGm8z2nrmdsoSRnpG/PdbVe5Iehfmam6gMvg2EsskRBs3sp9h99I2lZc
- 9E8xfnwnRNbxcfRHqsgTlQ7TRX8EbH02fw0O8qkoE4aLYaD/lSSFj2nshe/iDCw0R9
- ADabY/wJ2oYni17s6yJezLL/JjGuzg2iZ0apAdo0GRcVFntaoBwRfMY0R7crN2DCpE
- 3GFDBrDVV3NDw==
+ b=QNDj4qPVAmQzw7Kb5gvI5wgLPcwoNWfwmk+4LOIFlgi/Pp1YeV7GuM7suSnUqUTD4
+ MaRQyN6hI9Rpfi0SllaxZ8hSbuzHQ4hvQ68QeEPIySmW0z/yK32S/9LElZCXiOYmZl
+ XYADxpQ5xrkrsApJ9BkB4bS3naeyxIMru9QGgShGJvIYdlA7fAZdT+PZ27tUHrP0sm
+ 8dBAkqNNfe5EzDV2s97jqk6HBT+uaDY8r3zDGqha8sVnBth19BL/wbbTIhfqqTdM/2
+ rcy8TqLSbI/D5nyk5JdMWFYwAIVlLsMlkwnUjiEqlChzQQtLu8HKDBFanVFpa0MQGN
+ IJcob9zbEcz5Q==
 To: Sun Ke <sunke32@huawei.com>, fstests@vger.kernel.org
 References: <20210630113736.551843-1-sunke32@huawei.com>
- <20210630113736.551843-2-sunke32@huawei.com>
+ <20210630113736.551843-3-sunke32@huawei.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <cc9344d8-9bb7-d876-71b1-56937b16338c@kernel.org>
-Date: Thu, 1 Jul 2021 22:39:34 +0800
+Message-ID: <e7122925-de26-65ae-6f13-91d6d66d4355@kernel.org>
+Date: Thu, 1 Jul 2021 22:40:49 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210630113736.551843-2-sunke32@huawei.com>
+In-Reply-To: <20210630113736.551843-3-sunke32@huawei.com>
 Content-Language: en-US
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -76,9 +76,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1lyxr2-0005wi-6P
-Subject: Re: [f2fs-dev] [PATCH v3 1/3] generic/042: make a bigger img for
- f2fs
+X-Headers-End: 1lyxsJ-0067LI-NB
+Subject: Re: [f2fs-dev] [PATCH v3 2/3] generic/103: special left calculation
+ for f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,9 +96,14 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2021/6/30 19:37, Sun Ke wrote:
-> f2fs-utils 1.9.0 needs at least 38 MB space for f2fs image. However,
-> f2fs-utils 1.14.0 needs at least 52 MB. Not sure if it will change again.
-> So, just set it to 128M.
+> It failed on f2fs:
+>        QA output created by 103
+>       +fallocate: No space left on device
+>        Silence is golden.
+>       ...
+> 
+> f2fs uses index(radix) tree as mapping metadata, its space overhead
+> is about one thousandth of the data.
 > 
 > Suggested-by: Chao Yu <yuchao0@huawei.com>
 > Signed-off-by: Sun Ke <sunke32@huawei.com>
