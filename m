@@ -2,84 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B4553BC466
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jul 2021 02:34:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF6593BC4A4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jul 2021 03:40:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m0Z2e-0001Sb-Ph; Tue, 06 Jul 2021 00:34:24 +0000
+	id 1m0a4c-0001M8-4i; Tue, 06 Jul 2021 01:40:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1m0YlT-00086N-Iu
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Jul 2021 00:16:39 +0000
+ (envelope-from <LifePointsPaneL@outlook.com>) id 1m0a4Q-0001Kn-J4
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Jul 2021 01:40:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-ID:Content-Transfer-Encoding:Content-Type:
+ Subject:Date:To:From:MIME-Version:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/smN0w1INxk9pv/0As8keZJ+96h8KhmxqWKljh+DixM=; b=OZ6Cwqlsj1wvFFJVtYzOjof3p6
- dIC5W3QhTsXif+EnQWG7qCRkmJMjc+J9yb36NUaKjmBoafvFyXjqsV9RWYlUEeRdsmtv4FNWzNtTU
- GK2f5rI39CegEMe3acbwANAVNAB64Xx7HfQgLS9uUHHk0WTgYWu0ahzKqRGZWs4E6Z2Y=;
+ bh=Lka8purfgQLLprLga3YfSsVAaqKnx2V3rPJ+s2sK8i4=; b=SaD2YVqr8OKDHEc571CIYU2eEB
+ 0qxFqo7YrK5rxH7/ugzPzZt26+rgsGE51xa86psCAd7XMKd+K9Nta7WcCyK8b+q0nxX9T++jCnKXL
+ qYKaoKIBGs/FcU1sOfx0UQAqNM28WXthmDuUTrFs1XSIELp+MSuVJToHLNLtLzvaG6gk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/smN0w1INxk9pv/0As8keZJ+96h8KhmxqWKljh+DixM=; b=lDhTu7wAPV+3woXzQbbIurSJq7
- V0CiCxOF0MkZzlJOlSf4KUBxkEhsAAsIfKHfe7S+4zw2x0Ul3sirSOV8q17XsZgj16u8FvmFze/Hm
- odINYGD+8Rabht7u6YmT61bUntv/XFj12TXrldS7N4RhiIs02MqONqoitkJy5qbChtuI=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Message-ID:Content-Transfer-Encoding:Content-Type:Subject:Date:To:From:
+ MIME-Version:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Lka8purfgQLLprLga3YfSsVAaqKnx2V3rPJ+s2sK8i4=; b=k
+ JkRbFB5rBnjqE/MtKS/YL/H885Jsg1AgcaF5M+q9P5R4UAqpM9qzsUQxzKbT1nsBWScxFcmsrnlaR
+ 0xGuG8xSdSeLkBa/3BUGarDnmQLSNMJQv24X9juWjzax6f5oNC6jbHIbpIJURvag6W8AV1kexgXy2
+ WTpkz2F+jV7hqp0E=;
+Received: from mail.unimax.com ([50.220.81.186] helo=remote.unimax.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m0YlC-0000t4-NQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Jul 2021 00:16:39 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4C8C261369;
- Tue,  6 Jul 2021 00:16:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625530572;
- bh=fqgzG4+YdYoZurlm67YVOrIFeRf44ClBBF+6X3iuwcQ=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=eCJQMY5HKRT2+u6RtUoTlB8PcxLAr5pgMWFH7Ao/crZh0YbROxhfTm0UnfEkl+0qO
- ix9MDz60WwZxOEQnMAgupiPgeEeuj0BbrFroqE6cpIKmu7bO6x4e/NtSQIQJebixsQ
- z9y558GVFtIHaTA/f1QST5mopjTvr1/DE/7G4NcgEaVrYE9r4/CXmjERSXpeL8I7i1
- W/SvbYuBie6NFVs7uo//DhBxVDm60QNzaQrlzDKmWo92MsqWEx3LC9d0JXkJJJImn4
- hPHuU7jbz5BZFhv51PImowmsY90oo+5i10ps0+Q4jLbgxWw3EQplCBJf5uO3287COe
- r0YfW4QzuCrtg==
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210705052216.831989-1-jaegeuk@kernel.org>
- <c32642d6-6de2-eb2d-5771-c7cefa62fab5@kernel.org>
- <YOLJW0IgCagMk2tF@google.com>
- <e2fdf628-f25c-7495-cfd1-952899f7ff9a@kernel.org>
- <YOLxZAnaKSwBIlK9@casper.infradead.org>
- <5ab8d01a-8fac-60b2-9c2c-a32c5a81b394@kernel.org>
- <YONKKOBwPUdORO59@google.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <5700f9ec-20e9-7de9-7f8e-c11ec7279c20@kernel.org>
-Date: Tue, 6 Jul 2021 08:16:11 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92.3)
+ id 1m0a4F-0004tW-MD
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 06 Jul 2021 01:40:18 +0000
 MIME-Version: 1.0
-In-Reply-To: <YONKKOBwPUdORO59@google.com>
-Content-Language: en-US
-X-Spam-Score: -1.5 (-)
+From: LifePoints Research LLC <LifePointsPaneL@outlook.com>
+To: <linux-f2fs-devel@lists.sourceforge.net>
+X-Priority: 1
+Priority: urgent
+Importance: high
+Date: Tue, 6 Jul 2021 01:39:51 +0000
+Message-ID: <4e826f65-5cf2-4826-b319-89b96f00d2f8@EXCHANGE1.unimax.local>
+X-Spam-Score: 3.6 (+++)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 1.2 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in bl.spamcop.net
+ [Blocked - see <https://www.spamcop.net/bl.shtml?50.220.81.186>]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (lifepointspanel[at]outlook.com)
+ 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m0YlC-0000t4-NQ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: initialize page->private when using
- for our internal use
+ 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
+ 0.0 FILL_THIS_FORM         Fill in a form with personal information
+ 0.0 T_FILL_THIS_FORM_LONG  Fill in a form with personal information
+ 1.0 FORM_FRAUD             Fill a form and a fraud phrase
+X-Headers-End: 1m0a4F-0004tW-MD
+Subject: [f2fs-dev] [Alert]: PROJECT STUDY
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,73 +71,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/7/6 2:06, Jaegeuk Kim wrote:
-> On 07/06, Chao Yu wrote:
->> On 2021/7/5 19:47, Matthew Wilcox wrote:
->>> On Mon, Jul 05, 2021 at 07:33:35PM +0800, Chao Yu wrote:
->>>> On 2021/7/5 16:56, Jaegeuk Kim wrote:
->>>>> On 07/05, Chao Yu wrote:
->>>>>> On 2021/7/5 13:22, Jaegeuk Kim wrote:
->>>>>>> We need to guarantee it's initially zero. Otherwise, it'll hurt entire flag
->>>>>>> operations.
->>>>>>
->>>>>> Oops, I didn't get the point, shouldn't .private be zero after page was
->>>>>> just allocated by filesystem? What's the case we will encounter stall
->>>>>> private data left in page?
->>>>>
->>>>> I'm seeing f2fs_migrate_page() has the newpage with some value without Private
->>>>> flag. That causes a kernel panic later due to wrong private flag used in f2fs.
->>>>
->>>> I'm not familiar with that part of codes, so Cc mm mailing list for help.
->>>>
->>>> My question is newpage in .migrate_page() may contain non-zero value in .private
->>>> field but w/o setting PagePrivate flag, is it a normal case?
->>>
->>> I think freshly allocated pages have a page->private of 0.  ie this
->>> code in mm/page_alloc.c:
->>>
->>>                   page = rmqueue(ac->preferred_zoneref->zone, zone, order,
->>>                                   gfp_mask, alloc_flags, ac->migratetype);
->>>                   if (page) {
->>>                           prep_new_page(page, order, gfp_mask, alloc_flags);
->>>
->>> where prep_new_page() calls post_alloc_hook() which contains:
->>>           set_page_private(page, 0);
->>>
->>> Now, I do see in __buffer_migrate_page() (mm/migrate.c):
->>>
->>>           attach_page_private(newpage, detach_page_private(page));
->>>
->>> but as far as I can tell, f2fs doesn't call any of the
->>> buffer_migrate_page() paths.  So I'm not sure why you're seeing
->>> a non-zero page->private.
->>
->> Well, that's strange.
->>
->> Jaegeuk, let's add a BUGON in f2fs to track the call path where newpage
->> has non-zero private value? if this issue is reproducible.
-> 
-> We can debug anything tho, this issue is blocking the production, and I'd
-> like to get this in this merge windows. Could you please check the patch
-> has any holes?
+Dear Prospective Panelist,
 
-The code looks good to me,
+You have been selected as a Quality Service Evaluator to participate in our short 5-10 minutes Paid Research Evaluation survey on select Walgreens/Walmart/CVS stores within your area.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+COMPENSATION: 
+You will earn $500.00 for every completed evaluation survey assignment.
 
-Thanks,
+SURVEY [#53779-1001] DIRECTIVES: 
+LifePoints Research will issue your first survey packet alongside a check for $1400.00 meant to cover the expense and compensation for your evaluation survey via USPS within the next 1-2 business days.
 
-> 
->>
->> Thanks,
->>
->>>
+You will conduct your evaluation survey by visiting the nearest Walgreens/Walmart/CVS store within your area to utilize their store services for customer satisfaction standards, associate skills, facility management and product testing.
+
+As a survey panelist, you are to act as a potential customer at the assigned Walgreens/Walmart/CVS store and conduct your evaluation survey on the quality of efficiency of associates, customer service and standards in order to submit a fair and unbiased rating in your survey reports.
+
+APPLY:
+____________________________
+Complete Your Survey Profile >
+*********************************
+*Full Name: 
+*Mailing Address: 
+*Zip Code: 
+*Phone Number (cell): 
+*Age: 
+*Alternate Email Address: 
+*Work Related Experience: 
+*********************************
+
+
+Sincerely,
+
+LifePoints Research LLC
+685 US Highway 202/206 Ste 204
+Bridgewater ?, NJ 08807-1775
+Attn: Richard Scott (Operations Manager)
+[ P: (585) 532-6525 ]
+
 
 
 _______________________________________________
