@@ -2,59 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 998933BE0B6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jul 2021 03:59:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ACFD3BE2A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jul 2021 07:33:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m0wq5-0001u2-Lf; Wed, 07 Jul 2021 01:59:01 +0000
+	id 1m10Bp-0007mM-R5; Wed, 07 Jul 2021 05:33:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1m0wpn-0001tf-Vk
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Jul 2021 01:58:43 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1m10Bp-0007mC-E4
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Jul 2021 05:33:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C+f+QHDSTZF8AY36UuZ7J4um3EnYAb34byMx5qlFt/4=; b=LTLRdEg+Bf0Qt3G3GnDwjT9Kbr
- K2yUCX1RMkSdXmJAqzkupoEmRxOCDPSsjrQS5dm/cwmNV9/Z+wejqHYZrfzWJidOVkkxf4vIiwktZ
- TqcVQL8Cp9MB8yr0iY3u+gzU3RtUZGbdoGtkKuUrjAdcYi0tjEHXI2jCFHccS75onQGA=;
+ bh=42GHIlhI2+kOM9/rOuPewsjDoZw0u7ySAH1pOdikXfs=; b=S1Jk4KeEbnhI2+ZmkdDjpGeOKO
+ uyJ/OV7lHPHPRQ46HL4jBPShKLytZZRHUPsjo91GeO2KjxHCs1mB/q9tk8YlKEM/w3De1YIlG52oq
+ zu7FkUMg9MLDFW0CuJUxcwsEJZkuPIdQYqDCTv5hzvEAUjYpU0ulS/tcF+evVbBuFn1U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=C+f+QHDSTZF8AY36UuZ7J4um3EnYAb34byMx5qlFt/4=; b=A
- XC2XWEz0WdAZb9WVdOJwVW7kALyLJATNlNovE5h3A0NYZvfntEWGX4yghDbazMSfbCPeMFrzR6Rl0
- KkqGBLO7us4GVcp2XQ+YLUXOom0uOUU5vWjX+N8jUe5bGym+VO2C+gDQsJMiAKefhrQShE49ltI7v
- nhFsByhYZtMTvgBQ=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=42GHIlhI2+kOM9/rOuPewsjDoZw0u7ySAH1pOdikXfs=; b=ZcwPIBIPYMEid/87JC68DXSC6c
+ GgibYAlHPnf4RR26c7lIpMJHRKqB5QwXcFp5yZv2vcikAWFC7L0M3fHpAU9H5uvMRTq98a+3TN2O1
+ q3gNKzKdtlHolmLC9LV2p4VbbbGxR1HW89jskpDSqOjzHvUqMfzoKSYXnWszdfEpFO8o=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m0wph-00D9yT-LT
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Jul 2021 01:58:43 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3420F61CB7;
- Wed,  7 Jul 2021 01:58:21 +0000 (UTC)
+ id 1m10Bh-0003Z6-QU
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 07 Jul 2021 05:33:41 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 993AA61CB2;
+ Wed,  7 Jul 2021 05:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625623102;
- bh=xWwQY9H35b2XWLRLVHJ8H5rP0hzgv3eIefnXObo37zQ=;
- h=From:To:Cc:Subject:Date:From;
- b=hzydGVsN6A6Wv++6ge6L7KkuNWFFv185UJ6W9+XtljWKDtu2u0Hpj8iEhPK7STvba
- 46PDx3wRFhEdSOB6aKzohmIujuAOlCeyNF+3obTFt6Q+oWO5PmOgg9bj4uIPED+zmZ
- YwjmAxMOr3H9FI/7INAQomVQ+HLTiIndlWDZHHEcKDxQi+wVcz4aMmMqLxe7m+4vGU
- oEjEO+rLwSBGqFotUZTz6012I3caB5dnMbIuBoDYlTw6J12TWFXraBI3QOZkI/adiC
- hyGNFtNQrKkuIv+t+jaA1gcy7xfe0nZ28vLzgk9E3IpYfy6pNsrJevcs/ScLhzG/Os
- yOZrWcd0KIbLA==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Wed,  7 Jul 2021 09:58:15 +0800
-Message-Id: <20210707015815.1978-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.1
+ s=k20201202; t=1625636002;
+ bh=KFF9XhfYMcQdezNbI8jrfO+gkJEQeYaMCo1RJKgwsnA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=uTNJH2+/iXm43q2Fi3l8eOsrnqV/F2/4QMKZ5AlDP41fK1Rub9G7wASZ5wRtTHH1x
+ lehtHJs31E3tkeJV7vXiOlwI2peIt93vzLXHODf4n2STR2B87w43Pdswhc2kBFjr1M
+ rqcJgXw9Uwv5O2XgJy/vRiII3+nFUSel7Kc1WPe4lI/1Ejh0W5L0kXywXtsYHJR92L
+ A2KVjHC+7UWxPiwneMNIQas6fJzuGs3vjZwBls2IroY7GRE9bD+ARtY9FaqVx1lt8Q
+ o32WaFZgGcYwCv/7W1fJl+Mp1NkXBPPS76ZzJKFqGrjZHaKVcKv5qqi40l4QvfAAD0
+ qvRfquUuYRk9Q==
+Date: Tue, 6 Jul 2021 22:33:21 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <YOU8ofmEpCcQcmmY@google.com>
+References: <20210702214458.3876398-1-daeho43@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210702214458.3876398-1-daeho43@gmail.com>
 X-Spam-Score: -1.5 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -66,9 +68,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m0wph-00D9yT-LT
-Subject: [f2fs-dev] [RFC NO MERGE] f2fs: extent cache: support unaligned
- extent
+X-Headers-End: 1m10Bh-0003Z6-QU
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add sysfs nodes to get GC info for
+ each GC urgent mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,468 +82,198 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Compressed inode may suffer read performance issue due to it can not
-use extent cache, so I propose to add this unaligned extent support
-to improve it.
+On 07/02, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Added gc_urgent_dirty_segs and gc_urgent_dirty_segs_mode sysfs nodes.
+> 1) "gc_urgent_dirty_segs" shows how many dirty segments have been
+> reclaimed by GC during a specific GC urgent mode.
+> 2) "gc_urgent_dirty_segs_mode" is used to control for which gc urgent
+> mode the "gc_urgent_dirty_segs" node shows.
+> (1: GC urgent high, 2: GC urgent low)
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> ---
+>  Documentation/ABI/testing/sysfs-fs-f2fs | 14 ++++++++
+>  fs/f2fs/f2fs.h                          |  5 +++
+>  fs/f2fs/gc.c                            |  4 +++
+>  fs/f2fs/sysfs.c                         | 46 +++++++++++++++++++++++++
+>  4 files changed, 69 insertions(+)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index 95155e4ec7fe..9851c3f2efad 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -493,3 +493,17 @@ Contact:	"Chao Yu" <yuchao0@huawei.com>
+>  Description:	When ATGC is on, it controls age threshold to bypass GCing young
+>  		candidates whose age is not beyond the threshold, by default it was
+>  		initialized as 604800 seconds (equals to 7 days).
+> +
+> +What:		/sys/fs/f2fs/<disk>/gc_urgent_dirty_segs
+> +Date:		July 2021
+> +Contact:	"Daeho Jeong" <daehojeong@google.com>
+> +Description:	Show how many dirty segments have been reclaimed by GC during
+> +		a specific GC urgent mode (1: GC urgent high, 2: GC urgent low)
+> +		You can re-initialize this value to "0".
+> +
+> +What:		/sys/fs/f2fs/<disk>/gc_urgent_dirty_segs_mode
+> +Date:		July 2021
+> +Contact:	"Daeho Jeong" <daehojeong@google.com>
+> +Description:	You can control for which gc urgent mode the "gc_urgent_dirty_segs"
+> +		node shows (1: GC urgent high, 2: GC urgent low). You can set the
+> +		value to "0" when you want not to select one of them.
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 16ce1ade9fa6..d838c373f188 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1728,6 +1728,11 @@ struct f2fs_sb_info {
+>  	struct kmem_cache *inline_xattr_slab;	/* inline xattr entry */
+>  	unsigned int inline_xattr_slab_size;	/* default inline xattr slab size */
+>  
+> +	/* For reclaimed dirty segs statistics per each GC urgent mode */
+> +	unsigned int gc_dirty_segs_mode;	/* GC state for reclaimed dirty segments */
+> +	u64 gc_urgent_high_dirty_segs;		/* Reclaimed dirty segs in GC_URGENT_HIGH */
+> +	u64 gc_urgent_low_dirty_segs;		/* Reclaimed dirty segs in GC_URGENT_LOW */
 
-Currently, it only works in readonly format f2fs image.
+How about modifying like this? And, can we add this in debug/f2fs/status?
 
-Unaligned extent: in one compressed cluster, physical block number
-will be less than logical block number, so we add an extra physical
-block length in extent info in order to indicate such extent status.
+enum {
+	GC_NORMAL,
+	GC_URGENT_HIGH,
+	GC_URGENT_LOW,
+	GC_IDLE_CB,
+	GC_IDLE_GREEDY,
+	GC_IDLE_AT,
+};
 
-The idea is if one whole cluster blocks are contiguous physically,
-once its mapping info was readed at first time, we will cache an
-unaligned (or aligned) extent info entry in extent cache, it expects
-that the mapping info will be hitted when rereading cluster.
+#define GC_URGENT_MAX	(GC_URGENT_LOW + 1)
+unsigned int reclaimed_segs[GC_URGENT_MAX];
 
-Merge policy:
-- Aligned extents can be merged.
-- Aligned extent and unaligned extent can not be merged.
+> +
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+>  	struct kmem_cache *page_array_slab;	/* page array entry */
+>  	unsigned int page_array_slab_size;	/* default page array slab size */
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index da5947b30142..233e2a500379 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1648,6 +1648,10 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>  							force_migrate);
+>  
+>  		stat_inc_seg_count(sbi, type, gc_type);
+> +		if (sbi->gc_dirty_segs_mode == GC_URGENT_HIGH)
 
-Signed-off-by: Chao Yu <chao@kernel.org>
----
+		if (sbi->gc_mode < GC_URGENT_MAX)
+			sbi->gc_reclaimed_segs[sbi->gc_mode]++;
 
-I just post this for comments, it passes compiling, w/o any test.
+> +			sbi->gc_urgent_high_dirty_segs++;
+> +		else if (sbi->gc_dirty_segs_mode == GC_URGENT_LOW)
+> +			sbi->gc_urgent_low_dirty_segs++;
+>  		migrated++;
+>  
+>  freed:
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 6642246206bd..9ede97fe12cf 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -307,6 +307,25 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+>  		return sysfs_emit(buf, "%u\n", sbi->compr_new_inode);
+>  #endif
+>  
+> +	if (!strcmp(a->attr.name, "gc_urgent_dirty_segs_mode")) {
+> +		if (sbi->gc_dirty_segs_mode == GC_NORMAL)
+> +			return sysfs_emit(buf, "0\n");
 
- fs/f2fs/compress.c     | 25 ++++++++++++
- fs/f2fs/data.c         | 38 +++++++++++++-----
- fs/f2fs/extent_cache.c | 90 +++++++++++++++++++++++++++++++++++++-----
- fs/f2fs/f2fs.h         | 33 +++++++++++++---
- fs/f2fs/node.c         | 20 ++++++++++
- 5 files changed, 181 insertions(+), 25 deletions(-)
+						"0:gc_normal"?
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 455561826c7d..f072ac33eba5 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1666,6 +1666,31 @@ void f2fs_put_page_dic(struct page *page)
- 	f2fs_put_dic(dic);
- }
- 
-+/*
-+ * check whether cluster blocks are contiguous, and add extent cache entry
-+ * only if cluster blocks are logically and physically contiguous.
-+ */
-+int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn)
-+{
-+	bool compressed = f2fs_data_blkaddr(dn) == COMPRESS_ADDR;
-+	int i = compressed ? 1 : 0;
-+	block_t first_blkaddr = data_blkaddr(dn->inode, dn->node_page,
-+						dn->ofs_in_node + i);
-+
-+	for (i += 1; i < F2FS_I(dn->inode)->i_cluster_size; i++) {
-+		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
-+						dn->ofs_in_node + i);
-+
-+		if (!__is_valid_data_blkaddr(blkaddr))
-+			break;
-+		if (first_blkaddr + i - 1 != blkaddr)
-+			return 0;
-+	}
-+
-+	return compressed ? i - 1 : i;
-+}
-+
-+
- const struct address_space_operations f2fs_compress_aops = {
- 	.releasepage = f2fs_release_page,
- 	.invalidatepage = f2fs_invalidate_page,
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index d2cf48c5a2e4..9572d78da4d7 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2115,6 +2115,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	sector_t last_block_in_file;
- 	const unsigned blocksize = blks_to_bytes(inode, 1);
- 	struct decompress_io_ctx *dic = NULL;
-+	struct extent_info_unaligned eiu;
-+	bool extent_cache = false;
- 	int i;
- 	int ret = 0;
- 
-@@ -2145,18 +2147,26 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	if (f2fs_cluster_is_empty(cc))
- 		goto out;
- 
--	set_new_dnode(&dn, inode, NULL, NULL, 0);
--	ret = f2fs_get_dnode_of_data(&dn, start_idx, LOOKUP_NODE);
--	if (ret)
--		goto out;
-+	if (f2fs_lookup_extent_cache_unaligned(inode, start_idx, &eiu))
-+		extent_cache = true;
- 
--	f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
-+	if (!extent_cache) {
-+		set_new_dnode(&dn, inode, NULL, NULL, 0);
-+		ret = f2fs_get_dnode_of_data(&dn, start_idx, LOOKUP_NODE);
-+		if (ret)
-+			goto out;
-+
-+		f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
-+	}
- 
- 	for (i = 1; i < cc->cluster_size; i++) {
- 		block_t blkaddr;
- 
--		blkaddr = data_blkaddr(dn.inode, dn.node_page,
--						dn.ofs_in_node + i);
-+		if (extent_cache)
-+			blkaddr = eiu.ei.blk + i;
-+		else
-+			blkaddr = data_blkaddr(dn.inode, dn.node_page,
-+							dn.ofs_in_node + i);
- 
- 		if (!__is_valid_data_blkaddr(blkaddr))
- 			break;
-@@ -2166,6 +2176,9 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 			goto out_put_dnode;
- 		}
- 		cc->nr_cpages++;
-+
-+		if (extent_cache && i >= eiu.plen)
-+			break;
- 	}
- 
- 	/* nothing to decompress */
-@@ -2185,7 +2198,10 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 		block_t blkaddr;
- 		struct bio_post_read_ctx *ctx;
- 
--		blkaddr = data_blkaddr(dn.inode, dn.node_page,
-+		if (extent_cache)
-+			blkaddr = eiu.plen + i + 1;
-+		else
-+			blkaddr = data_blkaddr(dn.inode, dn.node_page,
- 						dn.ofs_in_node + i + 1);
- 
- 		f2fs_wait_on_block_writeback(inode, blkaddr);
-@@ -2231,13 +2247,15 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 		*last_block_in_bio = blkaddr;
- 	}
- 
--	f2fs_put_dnode(&dn);
-+	if (!extent_cache)
-+		f2fs_put_dnode(&dn);
- 
- 	*bio_ret = bio;
- 	return 0;
- 
- out_put_dnode:
--	f2fs_put_dnode(&dn);
-+	if (!extent_cache)
-+		f2fs_put_dnode(&dn);
- out:
- 	for (i = 0; i < cc->cluster_size; i++) {
- 		if (cc->rpages[i]) {
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 3ebf976a682d..db9de95f90dc 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -235,7 +235,7 @@ static struct kmem_cache *extent_node_slab;
- static struct extent_node *__attach_extent_node(struct f2fs_sb_info *sbi,
- 				struct extent_tree *et, struct extent_info *ei,
- 				struct rb_node *parent, struct rb_node **p,
--				bool leftmost)
-+				bool leftmost, bool unaligned)
- {
- 	struct extent_node *en;
- 
-@@ -247,6 +247,11 @@ static struct extent_node *__attach_extent_node(struct f2fs_sb_info *sbi,
- 	INIT_LIST_HEAD(&en->list);
- 	en->et = et;
- 
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+	if (unaligned)
-+		en->plen = ((struct extent_info_unaligned *)ei)->plen;
-+#endif
-+
- 	rb_link_node(&en->rb_node, parent, p);
- 	rb_insert_color_cached(&en->rb_node, &et->root, leftmost);
- 	atomic_inc(&et->node_cnt);
-@@ -320,7 +325,7 @@ static struct extent_node *__init_extent_tree(struct f2fs_sb_info *sbi,
- 	struct rb_node **p = &et->root.rb_root.rb_node;
- 	struct extent_node *en;
- 
--	en = __attach_extent_node(sbi, et, ei, NULL, p, true);
-+	en = __attach_extent_node(sbi, et, ei, NULL, p, true, false);
- 	if (!en)
- 		return NULL;
- 
-@@ -439,6 +444,17 @@ static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
- 		stat_inc_rbtree_node_hit(sbi);
- 
- 	*ei = en->ei;
-+
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE) &&
-+				!f2fs_sb_has_readonly(sbi)) {
-+		struct extent_info_unaligned *eiu =
-+				(struct extent_info_unaligned *)ei;
-+
-+		eiu->plen = en->plen;
-+	}
-+#endif
-+
- 	spin_lock(&sbi->extent_lock);
- 	if (!list_empty(&en->list)) {
- 		list_move_tail(&en->list, &sbi->extent_list);
-@@ -457,17 +473,18 @@ static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
- static struct extent_node *__try_merge_extent_node(struct f2fs_sb_info *sbi,
- 				struct extent_tree *et, struct extent_info *ei,
- 				struct extent_node *prev_ex,
--				struct extent_node *next_ex)
-+				struct extent_node *next_ex,
-+				bool unaligned)
- {
- 	struct extent_node *en = NULL;
- 
--	if (prev_ex && __is_back_mergeable(ei, &prev_ex->ei)) {
-+	if (prev_ex && __is_back_mergeable(ei, &prev_ex->ei, unaligned)) {
- 		prev_ex->ei.len += ei->len;
- 		ei = &prev_ex->ei;
- 		en = prev_ex;
- 	}
- 
--	if (next_ex && __is_front_mergeable(ei, &next_ex->ei)) {
-+	if (next_ex && __is_front_mergeable(ei, &next_ex->ei, unaligned)) {
- 		next_ex->ei.fofs = ei->fofs;
- 		next_ex->ei.blk = ei->blk;
- 		next_ex->ei.len += ei->len;
-@@ -495,7 +512,7 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
- 				struct extent_tree *et, struct extent_info *ei,
- 				struct rb_node **insert_p,
- 				struct rb_node *insert_parent,
--				bool leftmost)
-+				bool leftmost, bool unaligned)
- {
- 	struct rb_node **p;
- 	struct rb_node *parent = NULL;
-@@ -512,7 +529,7 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
- 	p = f2fs_lookup_rb_tree_for_insert(sbi, &et->root, &parent,
- 						ei->fofs, &leftmost);
- do_insert:
--	en = __attach_extent_node(sbi, et, ei, parent, p, leftmost);
-+	en = __attach_extent_node(sbi, et, ei, parent, p, leftmost, unaligned);
- 	if (!en)
- 		return NULL;
- 
-@@ -594,7 +611,7 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
- 						end - dei.fofs + dei.blk,
- 						org_end - end);
- 				en1 = __insert_extent_tree(sbi, et, &ei,
--							NULL, NULL, true);
-+						NULL, NULL, true, false);
- 				next_en = en1;
- 			} else {
- 				en->ei.fofs = end;
-@@ -633,9 +650,10 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
- 	if (blkaddr) {
- 
- 		set_extent_info(&ei, fofs, blkaddr, len);
--		if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
-+		if (!__try_merge_extent_node(sbi, et, &ei,
-+					prev_en, next_en, false))
- 			__insert_extent_tree(sbi, et, &ei,
--					insert_p, insert_parent, leftmost);
-+				insert_p, insert_parent, leftmost, false);
- 
- 		/* give up extent_cache, if split and small updates happen */
- 		if (dei.len >= 1 &&
-@@ -661,6 +679,47 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
- 		f2fs_mark_inode_dirty_sync(inode, true);
- }
- 
-+void f2fs_update_extent_tree_range_unaligned(struct inode *inode,
-+				pgoff_t fofs, block_t blkaddr, unsigned int llen,
-+				unsigned int plen)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct extent_tree *et = F2FS_I(inode)->extent_tree;
-+	struct extent_node *en = NULL;
-+	struct extent_node *prev_en = NULL, *next_en = NULL;
-+	struct extent_info_unaligned eiu;
-+	struct rb_node **insert_p = NULL, *insert_parent = NULL;
-+	bool leftmost = false;
-+
-+	trace_f2fs_update_extent_tree_range(inode, fofs, blkaddr, llen);
-+
-+	write_lock(&et->lock);
-+
-+	if (is_inode_flag_set(inode, FI_NO_EXTENT)) {
-+		write_unlock(&et->lock);
-+		return;
-+	}
-+
-+	en = (struct extent_node *)f2fs_lookup_rb_tree_ret(&et->root,
-+				(struct rb_entry *)et->cached_en, fofs,
-+				(struct rb_entry **)&prev_en,
-+				(struct rb_entry **)&next_en,
-+				&insert_p, &insert_parent, false,
-+				&leftmost);
-+	f2fs_bug_on(sbi, en);
-+
-+	set_extent_info(&eiu.ei, fofs, blkaddr, llen);
-+	eiu.plen = plen;
-+
-+	if (!__try_merge_extent_node(sbi, et, (struct extent_info *)&eiu,
-+				prev_en, next_en, true))
-+		__insert_extent_tree(sbi, et, (struct extent_info *)&eiu,
-+				insert_p, insert_parent, leftmost, true);
-+
-+	write_unlock(&et->lock);
-+}
-+
-+
- unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
- {
- 	struct extent_tree *et, *next;
-@@ -818,6 +877,17 @@ bool f2fs_lookup_extent_cache(struct inode *inode, pgoff_t pgofs,
- 	return f2fs_lookup_extent_tree(inode, pgofs, ei);
- }
- 
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+bool f2fs_lookup_extent_cache_unaligned(struct inode *inode, pgoff_t pgofs,
-+					struct extent_info_unaligned *eiu)
-+{
-+	if (!f2fs_may_extent_tree(inode))
-+		return false;
-+
-+	return f2fs_lookup_extent_tree(inode, pgofs, (struct extent_info *)eiu);
-+}
-+#endif
-+
- void f2fs_update_extent_cache(struct dnode_of_data *dn)
- {
- 	pgoff_t fofs;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0fe239dd50f4..3a02642a26d4 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -578,11 +578,21 @@ struct extent_info {
- 	u32 blk;			/* start block address of the extent */
- };
- 
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+struct extent_info_unaligned {
-+	struct extent_info ei;		/* extent info */
-+	unsigned int plen;		/* physical extent length of compressed blocks */
-+};
-+#endif
-+
- struct extent_node {
- 	struct rb_node rb_node;		/* rb node located in rb-tree */
- 	struct extent_info ei;		/* extent info */
- 	struct list_head list;		/* node in global extent list of sbi */
- 	struct extent_tree *et;		/* extent tree pointer */
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+	unsigned int plen;		/* physical extent length of compressed blocks */
-+#endif
- };
- 
- struct extent_tree {
-@@ -817,22 +827,29 @@ static inline bool __is_discard_front_mergeable(struct discard_info *cur,
- }
- 
- static inline bool __is_extent_mergeable(struct extent_info *back,
--						struct extent_info *front)
-+				struct extent_info *front, bool unaligned)
- {
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+	struct extent_info_unaligned *be = (struct extent_info_unaligned *)back;
-+	struct extent_info_unaligned *fe = (struct extent_info_unaligned *)front;
-+
-+	if (!unaligned || be->ei.len != be->plen || fe->ei.len != fe->plen)
-+		return false;
-+#endif
- 	return (back->fofs + back->len == front->fofs &&
- 			back->blk + back->len == front->blk);
- }
- 
- static inline bool __is_back_mergeable(struct extent_info *cur,
--						struct extent_info *back)
-+				struct extent_info *back, bool unaligned)
- {
--	return __is_extent_mergeable(back, cur);
-+	return __is_extent_mergeable(back, cur, unaligned);
- }
- 
- static inline bool __is_front_mergeable(struct extent_info *cur,
--						struct extent_info *front)
-+				struct extent_info *front, bool unaligned)
- {
--	return __is_extent_mergeable(cur, front);
-+	return __is_extent_mergeable(cur, front, unaligned);
- }
- 
- extern void f2fs_mark_inode_dirty_sync(struct inode *inode, bool sync);
-@@ -3972,6 +3989,9 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
- 		bool force, bool *leftmost);
- bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
- 				struct rb_root_cached *root, bool check_key);
-+void f2fs_update_extent_tree_range_unaligned(struct inode *inode,
-+				pgoff_t fofs, block_t blkaddr, unsigned int llen,
-+				unsigned int plen);
- unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink);
- void f2fs_init_extent_tree(struct inode *inode, struct page *ipage);
- void f2fs_drop_extent_tree(struct inode *inode);
-@@ -3979,6 +3999,8 @@ unsigned int f2fs_destroy_extent_node(struct inode *inode);
- void f2fs_destroy_extent_tree(struct inode *inode);
- bool f2fs_lookup_extent_cache(struct inode *inode, pgoff_t pgofs,
- 			struct extent_info *ei);
-+bool f2fs_lookup_extent_cache_unaligned(struct inode *inode, pgoff_t pgofs,
-+					struct extent_info_unaligned *eiu);
- void f2fs_update_extent_cache(struct dnode_of_data *dn);
- void f2fs_update_extent_cache_range(struct dnode_of_data *dn,
- 			pgoff_t fofs, block_t blkaddr, unsigned int len);
-@@ -4055,6 +4077,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc);
- void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed);
- void f2fs_put_page_dic(struct page *page);
-+int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn);
- int f2fs_init_compress_ctx(struct compress_ctx *cc);
- void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse);
- void f2fs_init_compress_info(struct f2fs_sb_info *sbi);
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index dd611efa8aa4..7be2b01caa2a 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -832,6 +832,26 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
- 	dn->ofs_in_node = offset[level];
- 	dn->node_page = npage[level];
- 	dn->data_blkaddr = f2fs_data_blkaddr(dn);
-+
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+	if (is_inode_flag_set(dn->inode, FI_COMPRESSED_FILE) &&
-+			!f2fs_sb_has_readonly(sbi)) {
-+		int blknum = f2fs_cluster_blocks_are_contiguous(dn);
-+
-+		if (blknum) {
-+			block_t blkaddr = f2fs_data_blkaddr(dn);
-+
-+			if (blkaddr == COMPRESS_ADDR)
-+				blkaddr = data_blkaddr(dn->inode, dn->node_page,
-+							dn->ofs_in_node + 1);
-+
-+			f2fs_update_extent_tree_range_unaligned(dn->inode,
-+					index, blkaddr,
-+					F2FS_I(dn->inode)->i_cluster_size,
-+					blknum);
-+		}
-+	}
-+#endif
- 	return 0;
- 
- release_pages:
--- 
-2.22.1
+> +		else if (sbi->gc_dirty_segs_mode == GC_URGENT_HIGH)
+> +			return sysfs_emit(buf, "1\n");
 
+						"1:gc_urgent_high"?
+
+> +		else if (sbi->gc_dirty_segs_mode == GC_URGENT_LOW)
+> +			return sysfs_emit(buf, "2\n");
+
+						"2:gc_urgent_low"?
+
+> +	}
+> +
+> +	if (!strcmp(a->attr.name, "gc_urgent_dirty_segs")) {
+> +		if (sbi->gc_dirty_segs_mode == GC_URGENT_HIGH)
+> +			return sysfs_emit(buf, "%llu\n",
+> +					sbi->gc_urgent_high_dirty_segs);
+> +		if (sbi->gc_dirty_segs_mode == GC_URGENT_LOW)
+> +			return sysfs_emit(buf, "%llu\n",
+> +					sbi->gc_urgent_low_dirty_segs);
+> +		return sysfs_emit(buf, "0\n");
+> +	}
+> +
+>  	ui = (unsigned int *)(ptr + a->offset);
+>  
+>  	return sprintf(buf, "%u\n", *ui);
+> @@ -515,6 +534,28 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>  		return count;
+>  	}
+>  
+> +	if (!strcmp(a->attr.name, "gc_urgent_dirty_segs_mode")) {
+> +		if (t == 0)
+> +			sbi->gc_dirty_segs_mode = GC_NORMAL;
+> +		else if (t == 1)
+> +			sbi->gc_dirty_segs_mode = GC_URGENT_HIGH;
+> +		else if (t == 2)
+> +			sbi->gc_dirty_segs_mode = GC_URGENT_LOW;
+> +		else
+> +			return -EINVAL;
+> +		return count;
+> +	}
+> +
+> +	if (!strcmp(a->attr.name, "gc_urgent_dirty_segs")) {
+> +		if (t != 0 || sbi->gc_dirty_segs_mode == GC_NORMAL)
+> +			return -EINVAL;
+> +		if (sbi->gc_dirty_segs_mode == GC_URGENT_HIGH)
+> +			sbi->gc_urgent_high_dirty_segs = 0;
+> +		else if (sbi->gc_dirty_segs_mode == GC_URGENT_LOW)
+> +			sbi->gc_urgent_low_dirty_segs = 0;
+> +		return count;
+> +	}
+> +
+>  	*ui = (unsigned int)t;
+>  
+>  	return count;
+> @@ -740,6 +781,9 @@ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_count, max_candidate_cou
+>  F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_weight, age_weight);
+>  F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
+>  
+> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_dirty_segs_mode, gc_dirty_segs_mode);
+> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_dirty_segs, gc_urgent_high_dirty_segs);
+> +
+>  #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+>  static struct attribute *f2fs_attrs[] = {
+>  	ATTR_LIST(gc_urgent_sleep_time),
+> @@ -812,6 +856,8 @@ static struct attribute *f2fs_attrs[] = {
+>  	ATTR_LIST(atgc_candidate_count),
+>  	ATTR_LIST(atgc_age_weight),
+>  	ATTR_LIST(atgc_age_threshold),
+> +	ATTR_LIST(gc_urgent_dirty_segs_mode),
+> +	ATTR_LIST(gc_urgent_dirty_segs),
+>  	NULL,
+>  };
+>  ATTRIBUTE_GROUPS(f2fs);
+> -- 
+> 2.32.0.93.g670b81a890-goog
+> 
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
