@@ -2,105 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38EE23C281D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Jul 2021 19:11:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBD693C289E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Jul 2021 19:42:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m1u2S-00047x-OL; Fri, 09 Jul 2021 17:11:44 +0000
+	id 1m1uVm-0004Z1-SU; Fri, 09 Jul 2021 17:42:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <5kft@5kft.org>) id 1m1u2R-00047k-2i
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 17:11:43 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1m1uVl-0004Yc-Op
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 17:42:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Subject:To:From:Date:Message-Id:
- Mime-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=avLZt23tkRh2Roidi+GfAthMTQR2RBupcVB2ZA26s18=; b=hjMb2iFkAwemfonUJXqE30/mc8
- /ZIAYyvGkPK9BfdjRubdgP/kBN0S64O3TGRXYybMV+jRRp3aO1+K46zfsbWBNk3VtvOtS72PLDQ22
- zickPvGCy94O3XNfdFH9m9/VV/nu5IjJL7lfYrqvwDU8Q4EsuinX7D7LvmJCtUScBc+M=;
+ bh=SOR1kX0qi3ECZAAHHoeWwKyf9wNBCeGcuo5FaQOl2OM=; b=NjXNWHPMAoGHEpQ6jkOs2BgDI6
+ UJWUPNEDOf6cFNY6wGWuSSqcf9Hs1nKdnSt8coWETLUEhMj3G6cj7izL5c03p1X1lqGQeHUZqpnMe
+ rJHqEHmFnxRPrdKfoHI2e1ti54uJETsrXeIKt+zLnWAfXE75/H2A2Z3/2JqmafRghj1s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Subject:To:From:Date:Message-Id:Mime-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=avLZt23tkRh2Roidi+GfAthMTQR2RBupcVB2ZA26s18=; b=H
- f4BUtzXS0dQY/1usTRg8mcdCmCaW5qcFaPfOgYdlURQfd34l11prDVLc5hbbHsBwM8f3KYUvcaatI
- E0+ZZAyrnhAJWEJ3wjyIPjeaMSBjmtVaFNzkQR5Yu/p2CVn2wLi4ZtZJNFTEPrnbnfwj1uSgPRU8O
- iGwuSSUALcZXrTdw=;
-Received: from wout4-smtp.messagingengine.com ([64.147.123.20])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SOR1kX0qi3ECZAAHHoeWwKyf9wNBCeGcuo5FaQOl2OM=; b=YBIRvXiadGcN90hOCr1stLg/Lw
+ GXxYgheykJ928RnBEcir74QtAnh+sNGzzvC1KyW61F65jiZ+oUasNrRrxCCsK3QeQKuYEcrA53AB2
+ b9hbtebpZiV17dnjG+dgv/tmWtFav+D05nNLpKKSA0wygUe+2WGoNpUJeEBnhmEFOdMM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m1u2D-0002zI-I0
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 17:11:43 +0000
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id 85C623200922
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  9 Jul 2021 12:52:40 -0400 (EDT)
-Received: from imap37 ([10.202.2.87])
- by compute3.internal (MEProxy); Fri, 09 Jul 2021 12:52:40 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=5kft.org; h=
- mime-version:message-id:date:from:to:subject:content-type; s=
- fm3; bh=avLZt23tkRh2Roidi+GfAthMTQR2RBupcVB2ZA26s18=; b=QrDadsns
- V3iODgWvmGQLdjkkKyaTE8/jP1SpldmPNFw6aKUw+5z52e2wgm0xODZdabFCfiO7
- 6rmTB2WHXngiATzrbE/zui+zOpGo7cP8u89hCk7TU0p5BgTdLE4TyhXjSNFB3eK7
- +Wfy7Jajj/vD+FCdFYf1hIKqk9BRnXCvdSJ0vfcG46O6XNCHZO0V6plEI/V3ZmTI
- jCkfNIiu5MMRsRXj8ljrf1UjXJFloYvB60tlzc74hiIOI1kAE9fndcAiRxg5kE3a
- qUNRsyX6OPVNEPPAjs/19ysbSo3/q1+SU9IkLMgOTYazdVDYWKH5SoMlWKrIl64P
- 0L0UDWuq3kGmFA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=content-type:date:from:message-id
- :mime-version:subject:to:x-me-proxy:x-me-proxy:x-me-sender
- :x-me-sender:x-sasl-enc; s=fm3; bh=avLZt23tkRh2Roidi+GfAthMTQR2R
- BupcVB2ZA26s18=; b=s8sxTiHOKrtGm2vqPFhR/MAP6UMgTZZykiemh9fMqT2yi
- guZoNpUW+d/hdjDKoS8Oa368JHBeI0CAPo8cgBZZds4Boy/cwild6JqHV1sYw0GK
- HPsWSXv+tu3WNjXC/zxFjTT1xK4Ui32vppcvg8ZW2NguRBHTZbDwZoc7ZFfRDlxG
- 7+BRc9fU53KXJr99aTTQQqR5sQK9oAvfM0vQkTMumT4eU38UOQxGqNPzqqMeEjcW
- Z7lwTL6dw27Y9tOZqtMOTYr1NHr6tI5eSDVZ6mbWVH9JQHtKRJknOPg9l8gmq9ef
- 2ZY5npuRckQiYjD3TqbkJTaeNrnlHa8kouw4HKXuA==
-X-ME-Sender: <xms:2H7oYF35u-J00Q4-ghRP7Y39KCh-AJGzEOnQvxZfJGHSKIQe3SvXUA>
- <xme:2H7oYMHWxDtLx_uVrbi281INJrnT9w-S-phjBeyrmhApRR_R-JgUyelKmhNYM364p
- Fly_nKF1R3nhw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrtdeigddutddvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfffhffvufgtsehttdertd
- erredtnecuhfhrohhmpeehkhhfthcuoeehkhhftheshehkfhhtrdhorhhgqeenucggtffr
- rghtthgvrhhnpefhfeevfefgveefleethfevffejteelheelheekueeutdehteegudfhtd
- eutefgjeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihii
- vgeptdenucfrrghrrghmpehmrghilhhfrhhomhephehkfhhtseehkhhfthdrohhrgh
-X-ME-Proxy: <xmx:2H7oYF4uDZvPlVvgrm7YNpre0yZiloL3le1DIcP3_bRFQjYPy17j7Q>
- <xmx:2H7oYC2e0GPjlR6lqTdYbih9lY7d2IOFYvli6ipOYA8-IHiMW2X9lw>
- <xmx:2H7oYIGLrwHrOcww8KBGYCUFGP1W_rirUps7sziiKhCzGShD_unlaQ>
- <xmx:2H7oYMRS3VNHEPXlfcB5K5R4CKnXnAoPkTHZGKNtZYNJ20W1RGR4NA>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id E05DB6B4006A; Fri,  9 Jul 2021 12:52:39 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-531-g1160beca77-fm-20210705.001-g1160beca
-Mime-Version: 1.0
-Message-Id: <8e29f52b-6b0d-45ec-9520-e63eb254287a@www.fastmail.com>
-Date: Fri, 09 Jul 2021 09:52:19 -0700
-From: 5kft <5kft@5kft.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -0.1 (/)
+ id 1m1uVd-002G9E-MT
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 17:42:01 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id 11625613CA;
+ Fri,  9 Jul 2021 17:41:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1625852500;
+ bh=HMjoup3QJmViBUshHyxqOCKugInk17QcT2upaR2x/MU=;
+ h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+ b=gZa8kT0Xu/nP89WVzw+cUSyeEpJERqauPt4H9oNWoVaIj8Ibq3jwkxa7w+dnl3yj7
+ +sLTgnGn4bu2yo3EvsUCze02blDiXwTiI4LQjZSBfQWPvWxB3yPLwTCH3uuBD317ws
+ C+TjIGZaujK+5jgwRg4AkhgBl2UKZIr+5+OZYyyzEfWgNlqjjUVe1CdriRkhyhS3af
+ emwQ4jQLNgg3PcbGbShcCb2eaCjX8wIzAD00/l3xcLkq51Z0d6I4BQMorT4ckxJyJA
+ 6wLE/G384MQ9K18wI5xPjVgNgWZ6F3OFQf6dhgt0ulzcFL3G9IXg5CqZEqhjawKunw
+ 13kf1f81oFciw==
+Received: from pdx-korg-docbuild-2.ci.codeaurora.org (localhost.localdomain
+ [127.0.0.1])
+ by pdx-korg-docbuild-2.ci.codeaurora.org (Postfix) with ESMTP id 0B4CA609F6;
+ Fri,  9 Jul 2021 17:41:40 +0000 (UTC)
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <YOYHejl3CgABOnhP@google.com>
+References: <YOYHejl3CgABOnhP@google.com>
+X-PR-Tracked-List-Id: <linux-f2fs-devel.lists.sourceforge.net>
+X-PR-Tracked-Message-Id: <YOYHejl3CgABOnhP@google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.14-rc1
+X-PR-Tracked-Commit-Id: 28607bf3aa6f9762b32dc7f1ed0488823c0651b8
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 227c4d507c71acb7bece298a98d83e5b44433f62
+Message-Id: <162585250004.25269.13552956569503185512.pr-tracker-bot@kernel.org>
+Date: Fri, 09 Jul 2021 17:41:40 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [64.147.123.20 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1m1u2D-0002zI-I0
-Subject: [f2fs-dev] f2fs compression level not actually set when using zstd
- compression?
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1m1uVd-002G9E-MT
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.14-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,19 +91,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It appears that the logic in "set_compress_context" (in https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/tree/fs/f2fs/f2fs.h, line 4021) does not actually set the compression level in the inode for zstd compression - it only sets it for lz4:
+The pull request you sent on Wed, 7 Jul 2021 12:58:50 -0700:
 
-    if (F2FS_I(inode)->i_compress_algorithm == COMPRESS_LZ4 &&
-             F2FS_OPTION(sbi).compress_level)
-         F2FS_I(inode)->i_compress_flag |=
-                  F2FS_OPTION(sbi).compress_level <<
-                  COMPRESS_LEVEL_OFFSET;
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.14-rc1
 
-Shouldn't this condition include "F2FS_I(inode)->i_compress_algorithm == COMPRESS_ZSTD" as part of the condition as well?
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/227c4d507c71acb7bece298a98d83e5b44433f62
+
+Thank you!
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
 
 _______________________________________________
