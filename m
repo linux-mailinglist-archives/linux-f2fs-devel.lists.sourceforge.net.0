@@ -2,88 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F4973C14A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jul 2021 15:48:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C58F3C1D3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Jul 2021 04:00:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m1UOB-0004Lo-7o; Thu, 08 Jul 2021 13:48:27 +0000
+	id 1m1foS-0002s4-D8; Fri, 09 Jul 2021 02:00:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <mabeljohnson@citromail.hu>) id 1m1UO8-0004Lh-Tr
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Jul 2021 13:48:24 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <wangxiaojun11@huawei.com>) id 1m1foR-0002rs-3r
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 02:00:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Subject:Content-Type:MIME-Version:Message-ID:
- Reply-To:From:Date:To:Sender:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3OHMJYX74KmGOm1vWBk99SEK+F/MmrnsSZHY7CGdVFg=; b=L0mgFEANZu7MT63Y9uuew5n2Ds
- RtrPAWa9Sks5VnqvoxbzWozn9EXOi4j6l3HZeIAjlMI/1DykOOnE2LurdYOmwR95eIdccjgR0fLXC
- qvOuscAkFFkMkZrx6aeoRVgPn+LPTzlxsvITa20AK+osRp33FsabqRPRdIvt11Iv2KaM=;
+ bh=yldrAxgCyNLcLRTgZq3OErvolJEUuqCHSL5onlV9C6g=; b=lG75ZfMG3CwiHEkvkLbrI309HC
+ BZ1tkoulkt6PLTtZf7KAdAG7zsywSqeIoATGm6wUfpSFTpiO/jtRnlTEAmUMTGlThmT59pvi6Bifk
+ MXKjdC9LVX985QQA28Xvw5xVvK6voxg5GhQcdkOcgaMznOucvz4NAslA3ALCgNmhz2fg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Subject:Content-Type:MIME-Version:Message-ID:Reply-To:From:Date:To:Sender
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=3OHMJYX74KmGOm1vWBk99SEK+F/MmrnsSZHY7CGdVFg=; b=P
- Ja/lgEQvyXbEnTmGN6N9/RK99hoxFC9sCPr2ctIUYSFAsrl+omlxMgx2hvOi1iVEQK6bEy6kFot5R
- 7ymWN9rM11oc0pJS/HMQVo9asAYPNrn6a8+Xi2CfUrhX8X9vz4EQNmXEWNKBaHXR3UzElp7w+0r4L
- OLGdkTHzhUpZ5Ya8=;
-Received: from mx-n04.wc2.phx1.stabletransit.com ([207.246.242.250])
- by sfi-mx-1.v28.lw.sourceforge.com with smtp (Exim 4.92.3)
- id 1m1UNu-00FvwW-PW
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 08 Jul 2021 13:48:24 +0000
-Received: by mx-n04.wc2.phx1.stabletransit.com (Postfix, from userid 114)
- id AC7AB18296F; Thu,  8 Jul 2021 08:32:30 -0500 (CDT)
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on
- mx-n04.wc2.phx1.stabletransit.com
-X-Spam-Level: **
-X-Spam-Status: No, score=2.6 required=6.0 tests=BAYES_50,FREEMAIL_FROM,
- FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,SUBJ_ALL_CAPS,
- T_FILL_THIS_FORM_SHORT,UNPARSEABLE_RELAY autolearn=no
- autolearn_force=no version=3.4.2
-X-Spam-Virus: No
-Received: from php-v027.wc2.phx1.stabletransit.com (unknown [10.40.206.156])
- by mx-n04.wc2.phx1.stabletransit.com (Postfix) with ESMTP id 071B1182972
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 Jul 2021 08:32:30 -0500 (CDT)
-Received: from digilu (uid 2914979) (envelope-from mabeljohnson@citromail.hu)
- id 20156
- by php-v027.wc2.phx1.stabletransit.com (DragonFly Mail Agent v0.11);
- Thu, 08 Jul 2021 08:32:30 -0500
-To: linux-f2fs-devel@lists.sourceforge.net
-X-PHP-Originating-Script: 2914979:class.engine.php(12) : runtime-created
- function
-Date: Thu, 8 Jul 2021 08:32:30 -0500
-From: MARY JOHNSON <mabeljohnson@citromail.hu>
-Message-ID: <b69a1d7ff288d9a7eb8e09c4a1f11e07@jackieleestudio.com>
+ List-Owner:List-Archive; bh=yldrAxgCyNLcLRTgZq3OErvolJEUuqCHSL5onlV9C6g=; b=O
+ WOUmxWrTYfHPA6o2OU5eJwQx/QHge2a4YvJ/g/pzEEQ1HfFcFKi/nm+inJvqk2uNrsIg4Gx0N7IsK
+ 4RqYyg5Owd2NgF2YFE/v15+SUrPYwJxUbD/a7vZPxtIB7rf+fiRAxJ2JI56SnJxo4dVOGa3x5IrcC
+ uKjD3RxEL9JHez+k=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1m1foO-0001qq-Jq
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 09 Jul 2021 02:00:19 +0000
+Received: from dggeml756-chm.china.huawei.com (unknown [172.30.72.56])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4GLbr46cRLzcbLY;
+ Fri,  9 Jul 2021 09:56:52 +0800 (CST)
+Received: from huawei.com (10.175.101.6) by dggeml756-chm.china.huawei.com
+ (10.1.199.158) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Fri, 9 Jul
+ 2021 10:00:05 +0800
+From: Wang Xiaojun <wangxiaojun11@huawei.com>
+To: <chao@kernel.org>, <jaegeuk@kernel.org>
+Date: Fri, 9 Jul 2021 10:05:59 +0800
+Message-ID: <20210709020559.3885430-1-wangxiaojun11@huawei.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-Spam-Score: 8.6 (++++++++)
+X-Originating-IP: [10.175.101.6]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggeml756-chm.china.huawei.com (10.1.199.158)
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (mabeljohnson[at]citromail.hu)
- 1.3 RCVD_IN_VALIDITY_RPBL  RBL: Relay in Validity RPBL,
- https://senderscore.org/blocklistlookup/
- [207.246.242.250 listed in bl.score.senderscore.com]
- 0.7 SPF_NEUTRAL            SPF: sender does not match SPF record (neutral)
- 0.5 SUBJ_ALL_CAPS          Subject is all capitals
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.188 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
- (mj224294[at]gmail.com)
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
- 1.0 FREEMAIL_REPLYTO       Reply-To/From or Reply-To/body contain different
- freemails 1.5 SPOOFED_FREEMAIL       No description available.
- 0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal information
- 2.5 SPOOFED_FREEM_REPTO    Forged freemail sender with freemail reply-to
- 0.9 FORM_FRAUD             Fill a form and a fraud phrase
-X-VA-Spam-Flag: YES
-X-Spam-Flag: YES
-X-Headers-End: 1m1UNu-00FvwW-PW
-Subject: [f2fs-dev] [SPAM] WORK OF GOD.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1m1foO-0001qq-Jq
+Subject: [f2fs-dev] [PATCH] f2fs: avoid to create an empty string as the
+ extension_list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,12 +80,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: mj224294@gmail.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I am Mrs. Mary Johnson,78years,an aging widow suffering from cancer, I am on admission at a hospital.I would like to willfully entrust the rest of my monetary assets to you, Kindly reply back with your full Name, cellphone, address, to enable me to send you a letter of authorization to contact my bank first inland bank nigeria plc so that they can transfer my funds to your account for the purpose of helping the poor as indicated on my WILL.
+When creating a file, we need to set the temperature based on
+extension_list. If the empty string is a valid extension_list,
+the is_extension_exist will always returns true,
+which affects the separation of hot and cold.
+
+Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
+---
+ fs/f2fs/namei.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index a9cd9cf97229..34341d3edb8d 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -219,6 +219,8 @@ int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+ 	int start, count;
+ 	int i;
+ 
++	if (!strlen(name))
++		return -EINVAL;
+ 	if (set) {
+ 		if (total_count == F2FS_MAX_EXTENSION)
+ 			return -EINVAL;
+-- 
+2.25.4
 
 
 
