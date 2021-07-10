@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B4683C3778
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Jul 2021 01:49:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1E743C37C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Jul 2021 01:50:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m2Mj2-0003wI-88; Sat, 10 Jul 2021 23:49:36 +0000
+	id 1m2Mjy-0000Ph-94; Sat, 10 Jul 2021 23:50:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <sashal@kernel.org>) id 1m2Mj1-0003w9-0Z
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:49:35 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <sashal@kernel.org>) id 1m2Mjw-0000Pb-DQ
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:50:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WKPy7FhFTmNS0IQjHB7vrJDPtxUozBL8RCBBpoGR7n0=; b=BL1rENUZ5uA74Elwv68IisDOY9
- k3A+sgZpc3CKySWHFWxN30CmIeolOXojB8e30Fww87yDQBXT2gTAB42yXvXLlJIvAgZ69oetvK0+t
- 30Yrh9AKQnNdeA6ER+bFwE8U4qRhI0sF1g2jLTYHOciQnJMhP/RK2agAKJTLJ5iZVPYo=;
+ bh=hoscpfkRWCEeYHphywM34lgUo8UpICkk8rOU+1Uy1k4=; b=VZtGOeaSOm4ninCrrh2dPTWP8N
+ IAShyMj/C3DpbHT3b70dSo71Lrjt+T1gRtSYHHvc8kE1cPxFr3SOLJQjrOAVqFRppS/ZKVOyvQChs
+ gPjGcfmVFFGc1010C4bNj330Mkii5KI8tBiF8d9KTSe4I6HCTPPnL0ew/Ca6l5F83oxM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,34 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WKPy7FhFTmNS0IQjHB7vrJDPtxUozBL8RCBBpoGR7n0=; b=mCoz0t6dF9fqMvvpRQFMIbO3XI
- /wn9rfsS1zoElnkoQPVNCvwh9wJgWVhOalkGPr+oJ5uVV730pOneWDYaByQoIYZtSXNS8nDXbvocD
- EntWWTOZz9zg8LcXY7sK0JLKGFDr4m6SZQt0F33hvWS+segdTooIXoraCfCOaDp116aE=;
+ bh=hoscpfkRWCEeYHphywM34lgUo8UpICkk8rOU+1Uy1k4=; b=Xa98xJY4083cRheZWI4RyzwX2k
+ KjlbH5dy2ymJzCBimtg7jzxbHCotCoAZ0B9vUEEQqJB2kZB+zGsu/18NPLq8mPkAagKIfEc1+8WHU
+ uLeBkDJlkq7CsLF/Z0eOVG3n+2fxPfIeEHcNaMIoHAcU28Wd27Wq2iwn3gJ6kKzmh5+k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m2Mix-0006iS-Qq
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:49:34 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7E15E6135E;
- Sat, 10 Jul 2021 23:49:20 +0000 (UTC)
+ id 1m2Mjq-003lnD-9y
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:50:32 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id DA57E613F9;
+ Sat, 10 Jul 2021 23:50:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625960961;
- bh=sjqpwY73C92VDCDjMUL/DRn6gBYIIH+bFVYETNWMmt4=;
+ s=k20201202; t=1625961020;
+ bh=brPi9ZNAsnfciD5VKPFOWcuP6vEyfnVQNS+Ed8kUhfg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Qu4j7/Dv3dcJtTlYL52PMpSFdBL61iaFxncKG1olRT8zoVnz13qDNuFqYCSKfrawq
- XgbLXxODfd+Xo6o9Lilwhu/lLoZyqc053LNPxJ+yAB8Ou7t+kA/g7QZdNbGsHXoZxr
- Zjd2jOe3JFTxIKJeicSyOhzq8+FZ7ZZZf/YnlXKeSYQe2DGiG55KQDdg9E9x/M8bqI
- 9dRj1e/h5nG8AYk2jjHoXRR7cPEITnblehLa1v2QEDTsPb5oHgPdPHycXaEvObqQJG
- rXpFsWOIBOhzm2SXlMAWj7DuNvdv36cGWrIbynSJi4+PqoYtwR2PoQ4B7TupAwjTIf
- fIyh8p0QdYbag==
+ b=lFaTmH+hsMPiF/COIm5ndcXKujPkoXBhZOgY0iSKUut8m5M2/EAe2vBpHq3I96IJa
+ rXKSmTBnqqk8gWjJvIvrFVBouaIJE1mx0N29mJdn7fHT0ntVd6ct7ubdv+AqojOguy
+ GfGoLoIUSeR3b8Vv9fxWoS08b+1R1+iX/0CtvaUyE92Z/+iqqqvCirr9kkQ+5x5lFC
+ KCOBw+0prwvGnHzmRJnD3jMrZUPZma5+1mUwaZqIlmjkd//fTWWfrsvP7OiBpftmzD
+ s0mpKqeS7p06lBpYdjxFJ3KkTn9L/QsYzv8TLnZfZcwyXE74/5iuiNxaR8ERFpMJus
+ C4r7o+zrvx03Q==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat, 10 Jul 2021 19:48:35 -0400
-Message-Id: <20210710234915.3220342-3-sashal@kernel.org>
+Date: Sat, 10 Jul 2021 19:49:41 -0400
+Message-Id: <20210710235016.3221124-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210710234915.3220342-1-sashal@kernel.org>
-References: <20210710234915.3220342-1-sashal@kernel.org>
+In-Reply-To: <20210710235016.3221124-1-sashal@kernel.org>
+References: <20210710235016.3221124-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -75,8 +75,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m2Mix-0006iS-Qq
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.12 03/43] f2fs: fix to avoid racing on
+X-Headers-End: 1m2Mjq-003lnD-9y
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.10 03/37] f2fs: fix to avoid racing on
  fsync_entry_slab by multi filesystem instances
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -134,10 +134,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  3 files changed, 23 insertions(+), 10 deletions(-)
 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f3fabb1edfe9..148fc1ce52d7 100644
+index 69a390c6064c..2d7799bd30b1 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -3560,6 +3560,8 @@ void f2fs_destroy_garbage_collection_cache(void);
+@@ -3462,6 +3462,8 @@ void f2fs_destroy_garbage_collection_cache(void);
   */
  int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only);
  bool f2fs_space_for_roll_forward(struct f2fs_sb_info *sbi);
@@ -147,10 +147,10 @@ index f3fabb1edfe9..148fc1ce52d7 100644
  /*
   * debug.c
 diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index da75d5d52f0a..4ae055f39e21 100644
+index 4f12ade6410a..72ce13111679 100644
 --- a/fs/f2fs/recovery.c
 +++ b/fs/f2fs/recovery.c
-@@ -787,13 +787,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+@@ -777,13 +777,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
  	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
  #endif
  
@@ -164,7 +164,7 @@ index da75d5d52f0a..4ae055f39e21 100644
  	INIT_LIST_HEAD(&inode_list);
  	INIT_LIST_HEAD(&tmp_inode_list);
  	INIT_LIST_HEAD(&dir_list);
-@@ -866,8 +859,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+@@ -856,8 +849,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
  		}
  	}
  
@@ -173,7 +173,7 @@ index da75d5d52f0a..4ae055f39e21 100644
  #ifdef CONFIG_QUOTA
  	/* Turn quotas off */
  	if (quota_enabled)
-@@ -877,3 +868,17 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+@@ -867,3 +858,17 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
  
  	return ret ? ret: err;
  }
@@ -192,10 +192,10 @@ index da75d5d52f0a..4ae055f39e21 100644
 +	kmem_cache_destroy(fsync_entry_slab);
 +}
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index d852d96773a3..1f7bc4b3f6ae 100644
+index abc469dd9aea..4af02719bb14 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -4187,9 +4187,12 @@ static int __init init_f2fs_fs(void)
+@@ -4027,9 +4027,12 @@ static int __init init_f2fs_fs(void)
  	err = f2fs_create_checkpoint_caches();
  	if (err)
  		goto free_segment_manager_caches;
@@ -209,7 +209,7 @@ index d852d96773a3..1f7bc4b3f6ae 100644
  	err = f2fs_create_garbage_collection_cache();
  	if (err)
  		goto free_extent_cache;
-@@ -4238,6 +4241,8 @@ static int __init init_f2fs_fs(void)
+@@ -4078,6 +4081,8 @@ static int __init init_f2fs_fs(void)
  	f2fs_destroy_garbage_collection_cache();
  free_extent_cache:
  	f2fs_destroy_extent_cache();
@@ -218,7 +218,7 @@ index d852d96773a3..1f7bc4b3f6ae 100644
  free_checkpoint_caches:
  	f2fs_destroy_checkpoint_caches();
  free_segment_manager_caches:
-@@ -4263,6 +4268,7 @@ static void __exit exit_f2fs_fs(void)
+@@ -4103,6 +4108,7 @@ static void __exit exit_f2fs_fs(void)
  	f2fs_exit_sysfs();
  	f2fs_destroy_garbage_collection_cache();
  	f2fs_destroy_extent_cache();
