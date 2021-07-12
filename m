@@ -2,71 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1E743C37C3
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Jul 2021 01:50:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB0E53C45B5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jul 2021 08:53:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=6FUN4iUug8acMD3KAaCddXdo0LasP9K/pvtwh40E7Ew=; b=FwvnUaItmNirmd9lIL/kUfwrt
+	qTVsHqtTWMrkXhaxBo3TzTFuFDQS5rbZPXvGPJ5L9su35VzhxdG58ncyrKF8i+Kk8ciSqHRHgdoLb
+	JuUs3FR1Bfjgv4XA2qGcvZGBDIfTz/mSUb1imK0VgflbHQrz66lrMnEQbday25MhON4ns=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m2Mjy-0000Ph-94; Sat, 10 Jul 2021 23:50:34 +0000
+	id 1m2poy-0000ej-BI; Mon, 12 Jul 2021 06:53:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1m2Mjw-0000Pb-DQ
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:50:32 +0000
+ (envelope-from <mhocko@suse.com>) id 1m2pox-0000eY-0n
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Jul 2021 06:53:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hoscpfkRWCEeYHphywM34lgUo8UpICkk8rOU+1Uy1k4=; b=VZtGOeaSOm4ninCrrh2dPTWP8N
- IAShyMj/C3DpbHT3b70dSo71Lrjt+T1gRtSYHHvc8kE1cPxFr3SOLJQjrOAVqFRppS/ZKVOyvQChs
- gPjGcfmVFFGc1010C4bNj330Mkii5KI8tBiF8d9KTSe4I6HCTPPnL0ew/Ca6l5F83oxM=;
+ bh=FNwOMLlKi66VGmHIEbOBTG2Q2a8j2sNDoQXhXFwpAR4=; b=ksLPP/1HQ85eFkDVyDdHSSFgPc
+ eHttlnJITptHMMpvdZLCqNDh+xv+EY4XTusP/BPwljXWi2eP+s5phI8nfdAQ7U1ybJpktXgJi3A3o
+ EYyhuUIcwP1p0Ngl4RDlHTOXzQN1h8NglefSgH36kTpz3l/yKn3jrlEFTKEI9voAu4pI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hoscpfkRWCEeYHphywM34lgUo8UpICkk8rOU+1Uy1k4=; b=Xa98xJY4083cRheZWI4RyzwX2k
- KjlbH5dy2ymJzCBimtg7jzxbHCotCoAZ0B9vUEEQqJB2kZB+zGsu/18NPLq8mPkAagKIfEc1+8WHU
- uLeBkDJlkq7CsLF/Z0eOVG3n+2fxPfIeEHcNaMIoHAcU28Wd27Wq2iwn3gJ6kKzmh5+k=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=FNwOMLlKi66VGmHIEbOBTG2Q2a8j2sNDoQXhXFwpAR4=; b=J1VymNSpTGBpzzJds+8JEM7vwx
+ UOHopIPJw+30e4slCDVctugGTXn0vk/97WaRck6AoacKYJmEYzUrfK9BDWD0yi1Fw6w0yxn1ppTNO
+ PKg6o+2dAIO3Cjo8TJOEQME5CYzFGGcLHcrN7H7prwjFDQtpVpDZ10gHYENaO2dRWeUU=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m2Mjq-003lnD-9y
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 10 Jul 2021 23:50:32 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id DA57E613F9;
- Sat, 10 Jul 2021 23:50:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625961020;
- bh=brPi9ZNAsnfciD5VKPFOWcuP6vEyfnVQNS+Ed8kUhfg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lFaTmH+hsMPiF/COIm5ndcXKujPkoXBhZOgY0iSKUut8m5M2/EAe2vBpHq3I96IJa
- rXKSmTBnqqk8gWjJvIvrFVBouaIJE1mx0N29mJdn7fHT0ntVd6ct7ubdv+AqojOguy
- GfGoLoIUSeR3b8Vv9fxWoS08b+1R1+iX/0CtvaUyE92Z/+iqqqvCirr9kkQ+5x5lFC
- KCOBw+0prwvGnHzmRJnD3jMrZUPZma5+1mUwaZqIlmjkd//fTWWfrsvP7OiBpftmzD
- s0mpKqeS7p06lBpYdjxFJ3KkTn9L/QsYzv8TLnZfZcwyXE74/5iuiNxaR8ERFpMJus
- C4r7o+zrvx03Q==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Sat, 10 Jul 2021 19:49:41 -0400
-Message-Id: <20210710235016.3221124-3-sashal@kernel.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210710235016.3221124-1-sashal@kernel.org>
-References: <20210710235016.3221124-1-sashal@kernel.org>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1m2pog-005NdX-4U
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 12 Jul 2021 06:53:38 +0000
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 30F8E1FD58;
+ Mon, 12 Jul 2021 06:53:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1626072794; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=FNwOMLlKi66VGmHIEbOBTG2Q2a8j2sNDoQXhXFwpAR4=;
+ b=IXDNvguctsJNRlVZYB5/iqcdnyk4ksoJh4wgcYvvL38b8rwNbkaY4dKfOL5OnDhQfvOoGQ
+ 5yvc4yGRQrtqcLYd07XqgUI3n0eoIdPpe090BX+65Bgwo8Hd8ecuhgY1S4aAT3YL7DJGGe
+ aaLWCt+/xHFLyzo26PEr6ZdyUAtGMyM=
+Received: from suse.cz (unknown [10.100.201.86])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by relay2.suse.de (Postfix) with ESMTPS id D6BF5A4E93;
+ Mon, 12 Jul 2021 06:53:13 +0000 (UTC)
+Date: Mon, 12 Jul 2021 08:53:13 +0200
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YOvm2faBUjKmZI7Q@dhcp22.suse.cz>
+References: <c32642d6-6de2-eb2d-5771-c7cefa62fab5@kernel.org>
+ <YOLJW0IgCagMk2tF@google.com>
+ <e2fdf628-f25c-7495-cfd1-952899f7ff9a@kernel.org>
+ <YOLxZAnaKSwBIlK9@casper.infradead.org>
+ <YONJpQapR7BRnW/J@google.com>
+ <YONTRlrJugeVq6Fj@casper.infradead.org>
+ <20210706091211.GR3840@techsingularity.net>
+ <85bb893b-0dc4-5f57-23ec-3f84814b7072@kernel.org>
+ <20210707095706.GT3840@techsingularity.net>
+ <fc0de0c2-a3b6-df91-5b90-524768a85d82@kernel.org>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Spam-Score: -0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <fc0de0c2-a3b6-df91-5b90-524768a85d82@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -74,10 +88,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m2Mjq-003lnD-9y
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.10 03/37] f2fs: fix to avoid racing on
- fsync_entry_slab by multi filesystem instances
+X-Headers-End: 1m2pog-005NdX-4U
+Subject: Re: [f2fs-dev] [PATCH] f2fs: initialize page->private when using
+ for our internal use
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,146 +102,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <yuchao0@huawei.com>,
- syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com,
- linux-f2fs-devel@lists.sourceforge.net
+From: Michal Hocko via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Michal Hocko <mhocko@suse.com>
+Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Mel Gorman <mgorman@techsingularity.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <yuchao0@huawei.com>
+On Sat 10-07-21 16:11:38, Chao Yu wrote:
+> On 2021/7/7 17:57, Mel Gorman wrote:
+> > I think it would work but it would be preferable to find out why the
+> > tail page has an order set in the first place. I've looked over
+> 
+> Agreed.
+> 
+> > mm/page_alloc.c and mm/compaction.c a few times and did not spot where
+> > set_private_page(page, 0) is missed when it should be covered by
+> > clear_page_guard or del_page_from_free_list :(
+> 
+> I didn't enable CONFIG_DEBUG_PAGEALLOC, so we will expect page private
+> should be cleared by del_page_from_free_list(), but I guess it only clears
+> the buddy's private field rather than original page's, so I added below
+> diff and check the dmesg, it looks stall private value in original page
+> will be left commonly... Let me know if I missed something?
 
-[ Upstream commit cad83c968c2ebe97905f900326988ed37146c347 ]
+Page private should be cleared when the page is freed to the allocator.
+Have a look at PAGE_FLAGS_CHECK_AT_FREE.
 
-As syzbot reported, there is an use-after-free issue during f2fs recovery:
+> ---
+>  mm/page_alloc.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index a06bcfe6f786..1e7031ff548e 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -1029,6 +1029,7 @@ static inline void __free_one_page(struct page *page,
+>  	unsigned long combined_pfn;
+>  	unsigned int max_order;
+>  	struct page *buddy;
+> +	struct page *orig_page = page;
+>  	bool to_tail;
+> 
+>  	max_order = min_t(unsigned int, MAX_ORDER - 1, pageblock_order);
+> @@ -1097,6 +1098,10 @@ static inline void __free_one_page(struct page *page,
+> 
+>  done_merging:
+>  	set_buddy_order(page, order);
+> +	if (orig_page != page) {
+> +		if (WARN_ON_ONCE(orig_page->private))
+> +			pr_info("2order:%x, origpage.private:%x", order, orig_page->private);
+> +	}
 
-Use-after-free write at 0xffff88823bc16040 (in kfence-#10):
- kmem_cache_destroy+0x1f/0x120 mm/slab_common.c:486
- f2fs_recover_fsync_data+0x75b0/0x8380 fs/f2fs/recovery.c:869
- f2fs_fill_super+0x9393/0xa420 fs/f2fs/super.c:3945
- mount_bdev+0x26c/0x3a0 fs/super.c:1367
- legacy_get_tree+0xea/0x180 fs/fs_context.c:592
- vfs_get_tree+0x86/0x270 fs/super.c:1497
- do_new_mount fs/namespace.c:2905 [inline]
- path_mount+0x196f/0x2be0 fs/namespace.c:3235
- do_mount fs/namespace.c:3248 [inline]
- __do_sys_mount fs/namespace.c:3456 [inline]
- __se_sys_mount+0x2f9/0x3b0 fs/namespace.c:3433
- do_syscall_64+0x3f/0xb0 arch/x86/entry/common.c:47
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-
-The root cause is multi f2fs filesystem instances can race on accessing
-global fsync_entry_slab pointer, result in use-after-free issue of slab
-cache, fixes to init/destroy this slab cache only once during module
-init/destroy procedure to avoid this issue.
-
-Reported-by: syzbot+9d90dad32dd9727ed084@syzkaller.appspotmail.com
-Signed-off-by: Chao Yu <yuchao0@huawei.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- fs/f2fs/f2fs.h     |  2 ++
- fs/f2fs/recovery.c | 23 ++++++++++++++---------
- fs/f2fs/super.c    |  8 +++++++-
- 3 files changed, 23 insertions(+), 10 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 69a390c6064c..2d7799bd30b1 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3462,6 +3462,8 @@ void f2fs_destroy_garbage_collection_cache(void);
-  */
- int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only);
- bool f2fs_space_for_roll_forward(struct f2fs_sb_info *sbi);
-+int __init f2fs_create_recovery_cache(void);
-+void f2fs_destroy_recovery_cache(void);
- 
- /*
-  * debug.c
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 4f12ade6410a..72ce13111679 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -777,13 +777,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
- #endif
- 
--	fsync_entry_slab = f2fs_kmem_cache_create("f2fs_fsync_inode_entry",
--			sizeof(struct fsync_inode_entry));
--	if (!fsync_entry_slab) {
--		err = -ENOMEM;
--		goto out;
--	}
--
- 	INIT_LIST_HEAD(&inode_list);
- 	INIT_LIST_HEAD(&tmp_inode_list);
- 	INIT_LIST_HEAD(&dir_list);
-@@ -856,8 +849,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 		}
- 	}
- 
--	kmem_cache_destroy(fsync_entry_slab);
--out:
- #ifdef CONFIG_QUOTA
- 	/* Turn quotas off */
- 	if (quota_enabled)
-@@ -867,3 +858,17 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 
- 	return ret ? ret: err;
- }
-+
-+int __init f2fs_create_recovery_cache(void)
-+{
-+	fsync_entry_slab = f2fs_kmem_cache_create("f2fs_fsync_inode_entry",
-+					sizeof(struct fsync_inode_entry));
-+	if (!fsync_entry_slab)
-+		return -ENOMEM;
-+	return 0;
-+}
-+
-+void f2fs_destroy_recovery_cache(void)
-+{
-+	kmem_cache_destroy(fsync_entry_slab);
-+}
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index abc469dd9aea..4af02719bb14 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4027,9 +4027,12 @@ static int __init init_f2fs_fs(void)
- 	err = f2fs_create_checkpoint_caches();
- 	if (err)
- 		goto free_segment_manager_caches;
--	err = f2fs_create_extent_cache();
-+	err = f2fs_create_recovery_cache();
- 	if (err)
- 		goto free_checkpoint_caches;
-+	err = f2fs_create_extent_cache();
-+	if (err)
-+		goto free_recovery_cache;
- 	err = f2fs_create_garbage_collection_cache();
- 	if (err)
- 		goto free_extent_cache;
-@@ -4078,6 +4081,8 @@ static int __init init_f2fs_fs(void)
- 	f2fs_destroy_garbage_collection_cache();
- free_extent_cache:
- 	f2fs_destroy_extent_cache();
-+free_recovery_cache:
-+	f2fs_destroy_recovery_cache();
- free_checkpoint_caches:
- 	f2fs_destroy_checkpoint_caches();
- free_segment_manager_caches:
-@@ -4103,6 +4108,7 @@ static void __exit exit_f2fs_fs(void)
- 	f2fs_exit_sysfs();
- 	f2fs_destroy_garbage_collection_cache();
- 	f2fs_destroy_extent_cache();
-+	f2fs_destroy_recovery_cache();
- 	f2fs_destroy_checkpoint_caches();
- 	f2fs_destroy_segment_manager_caches();
- 	f2fs_destroy_node_manager_caches();
+Why is this expected? Buddy allocator uses page private to store order.
+Whether we are merging to the freed page or coalesce it to a different
+page is not all that important.
 -- 
-2.30.2
-
+Michal Hocko
+SUSE Labs
 
 
 _______________________________________________
