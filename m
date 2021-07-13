@@ -2,79 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CE643C6A70
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jul 2021 08:26:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 092B73C6D3D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jul 2021 11:23:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m3Bs3-0001jU-DE; Tue, 13 Jul 2021 06:26:19 +0000
+	id 1m3Edo-0007uo-Sn; Tue, 13 Jul 2021 09:23:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+5ed7718f52b0c846131f+6533+infradead.org+hch@casper.srs.infradead.org>)
- id 1m3Bs1-0001jH-V7
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 06:26:17 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1m3Edn-0007ud-1Q
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 09:23:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5NJ/GobYssN7on3zOlsbOWTmiBv2EzLNZy86W7YdGXg=; b=SfJtsrZbv0bNEj3qkdn5asggoH
- BQX6WucXt6zUl6R8agPVSwI6FHB9dIrT5rYdqHDOko3sGCXd7y/vfQqwRp3X4stOL7dUWJIhGkp5z
- C8UrhjzfCTwcP3cDIc4kGFvJBJzotosuXH8ojMWl1jm05KX9+4bAkEW64hf/CbYilENU=;
+ bh=xHO5e8556qnHRTZgxdzPjJ641jSpigkepunLJfTQ2wM=; b=LbNXVafeV/dKfqg29yZ/pxU9Bz
+ aY55RnbIp26OqcNGpVc0q3SVgyjUDiBfYTbhZtaQbl6OuTMmJ28eTPpY0v1EQPlXLLcTpzXlLoLkZ
+ /I852Ue/80hgA+t1HmOHgz0pLEa++fk4qhE0p7Whrfp5CwtZPdX6s+COmUtSzJl4TG7o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5NJ/GobYssN7on3zOlsbOWTmiBv2EzLNZy86W7YdGXg=; b=Uq+lZlPGQxXlZteWeJ+uvFXmCO
- aE5lB6X0jAES7W4PSxsjV6W7jmoIo35cDwBLDA2pB0yXNVcTLFye2EzRVL50j9j3mL0S7j5sfTPQh
- Ra3jVYfauxyxfOvXeHMedJoYyJ2kS1fpoXuV22RZMMaV695rmhj25s6UWdQ2gY/3CVMQ=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=xHO5e8556qnHRTZgxdzPjJ641jSpigkepunLJfTQ2wM=; b=dbnMmMz6TzfTjqVV8CRyK7RIdo
+ uASNzuc6z2x7Fvfjjykz0Tc7pr2j79+tgYd0RlNjufkp36vkhYyYAmK3UAjk2AC1vMZLd86I58hJ6
+ mBT4/iKuNnwIuww38tLn9l4l6YQoxUsJ0Im5LjIh3sIvRMeQtw2GdadW69AMVPBtahL8=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m3Brz-0007Oz-AP
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 06:26:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=5NJ/GobYssN7on3zOlsbOWTmiBv2EzLNZy86W7YdGXg=; b=fbsmLbOQszWOm3dv8Pr5kj2E7C
- 2oH8QijCtEXZ3EozE81NW39ttgW8OJljVf+LGGn1grSH4J/TUVDG0j2e/NTp+MRk4wJ9nnd3+guTz
- +uiAyPZWdlJAz/ObZcfnq4duRgc9SCYl6elA/kg4FjqqjxRWiSyctVBKCNGsl9KYTYO892oJYWZI5
- TrvEbdC7HmPZPoevV1PUKcLJ6czjAami4Jbi7sr+F0PnKOI41Qf+ldIkfRpOlaioGlDjqxR3FtMJ3
- yq3YPlebvzDtb55VjfVt14OhvN5M9EDIMhIcPqpI3SwMoNGZzFinwEFn0SbUkZR/uo311WDKHFLwQ
- 3JuzSKBg==;
-Received: from hch by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat
- Linux)) id 1m3Bqr-000oBA-3D; Tue, 13 Jul 2021 06:25:10 +0000
-Date: Tue, 13 Jul 2021 07:25:05 +0100
-From: Christoph Hellwig <hch@infradead.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <YO0xwY+q7d8rQE3f@infradead.org>
-References: <20210712163901.29514-1-jack@suse.cz>
- <20210712165609.13215-3-jack@suse.cz>
+ id 1m3Edl-006lOP-Gf
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 09:23:47 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A4142600D1;
+ Tue, 13 Jul 2021 09:23:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1626168215;
+ bh=p6qo3HQ0SqxP6PWdKWsMC3NKbvO928431ScHS8VOYJ0=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=Ddt3yDkYY3spoxhgXUQm3yswJpIu859ZBYzp1O6faxARk3Hs8PfywxiUebWwFD/3m
+ hWUqX2TqftP0BHhRH2ZkgnTDEdp+kykEgtsfsT0j6Lktskte303okQuja0Up6ddC4H
+ D2AgB1BSArWKNdf9QHDIs//ubf6pPIafpV9mWoT9fdbrL7U67Dsp9uLMlLBmHLgd0Q
+ STSMLinJ3IOoDvgDHMkUVvkRtUNNEl32jqMMR9EDSnXFdjIv82OHL16mOaR5w1E0h8
+ xVeAR14PHN2JVqlUTVR2kDlq+8Y/ML8q9wxbShyjQB+aQDek6bUPTOOuZlLj5/x3iP
+ drvm0ZE2ZmXNg==
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210601101024.119356-1-yuchao0@huawei.com>
+ <YN32/NsjqJONbvz7@google.com>
+ <648a96f7-2c83-e9ed-0cbd-4ee8e4797724@kernel.org>
+ <YN5srPRZaPN9gpZ0@google.com>
+ <b828fc22-f15a-8be4-631a-ed4ecb631386@kernel.org>
+ <YOXo3CT5sBvj6p0J@google.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <55e069f7-662d-630c-1201-d0163b38bc17@kernel.org>
+Date: Tue, 13 Jul 2021 17:23:32 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210712165609.13215-3-jack@suse.cz>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <YOXo3CT5sBvj6p0J@google.com>
+Content-Language: en-US
+X-Spam-Score: -1.2 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: mail-archive.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1m3Brz-0007Oz-AP
-Subject: Re: [f2fs-dev] [PATCH 03/14] mm: Protect operations adding pages to
- page cache with invalidate_lock
+ -0.4 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1m3Edl-006lOP-Gf
+Subject: Re: [f2fs-dev] [PATCH v2 RFC] f2fs: fix to force keeping write
+ barrier for strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,66 +94,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-cifs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
- Dave Chinner <david@fromorbit.com>, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
- linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Still looks good.  That being said the additional conditional locking in
-filemap_fault makes it fall over the readbility cliff for me.  Something
-like this on top of your series would help:
+On 2021/7/8 1:48, Jaegeuk Kim wrote:
+> On 07/02, Chao Yu wrote:
+>> On 2021/7/2 9:32, Jaegeuk Kim wrote:
+>>> On 07/02, Chao Yu wrote:
+>>>> On 2021/7/2 1:10, Jaegeuk Kim wrote:
+>>>>> On 06/01, Chao Yu wrote:
+>>>>>> [1] https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
+>>>>>>
+>>>>>> As [1] reported, if lower device doesn't support write barrier, in below
+>>>>>> case:
+>>>>>>
+>>>>>> - write page #0; persist
+>>>>>> - overwrite page #0
+>>>>>> - fsync
+>>>>>>     - write data page #0 OPU into device's cache
+>>>>>>     - write inode page into device's cache
+>>>>>>     - issue flush
+>>>>>
+>>>>> Well, we have preflush for node writes, so I don't think this is the case.
+>>>>>
+>>>>>     fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
+>>>>
+>>>> This is only used for atomic write case, right?
+>>>>
+>>>> I mean the common case which is called from f2fs_issue_flush() in
+>>>> f2fs_do_sync_file().
+>>>
+>>> How about adding PREFLUSH when writing node blocks aligned to the above set?
+>>
+>> You mean implementation like v1 as below?
+>>
+>> https://lore.kernel.org/linux-f2fs-devel/20200120100045.70210-1-yuchao0@huawei.com/
+> 
+> Yea, I think so. :P
 
-diff --git a/mm/filemap.c b/mm/filemap.c
-index fd3f94d36c49..0fad08331cf4 100644
---- a/mm/filemap.c
-+++ b/mm/filemap.c
-@@ -3040,21 +3040,23 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
- 	 * Do we have something in the page cache already?
- 	 */
- 	page = find_get_page(mapping, offset);
--	if (likely(page) && !(vmf->flags & FAULT_FLAG_TRIED)) {
-+	if (likely(page)) {
- 		/*
--		 * We found the page, so try async readahead before
--		 * waiting for the lock.
-+		 * We found the page, so try async readahead before waiting for
-+		 * the lock.
- 		 */
--		fpin = do_async_mmap_readahead(vmf, page);
--	} else if (!page) {
-+		if (!(vmf->flags & FAULT_FLAG_TRIED))
-+			fpin = do_async_mmap_readahead(vmf, page);
-+		if (unlikely(!PageUptodate(page))) {
-+			filemap_invalidate_lock_shared(mapping);
-+			mapping_locked = true;
-+		}
-+	} else {
- 		/* No page in the page cache at all */
- 		count_vm_event(PGMAJFAULT);
- 		count_memcg_event_mm(vmf->vma->vm_mm, PGMAJFAULT);
- 		ret = VM_FAULT_MAJOR;
- 		fpin = do_sync_mmap_readahead(vmf);
--	}
--
--	if (!page) {
- retry_find:
- 		/*
- 		 * See comment in filemap_create_page() why we need
-@@ -3073,9 +3075,6 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
- 			filemap_invalidate_unlock_shared(mapping);
- 			return VM_FAULT_OOM;
- 		}
--	} else if (unlikely(!PageUptodate(page))) {
--		filemap_invalidate_lock_shared(mapping);
--		mapping_locked = true;
- 	}
- 
- 	if (!lock_page_maybe_drop_mmap(vmf, page, &fpin))
+I prefer v2, we may have several schemes to improve performance with v2, e.g.
+- use inplace IO to avoid newly added preflush
+- use flush_merge option to avoid redundant preflush
+- if lower device supports barrier IO, we can avoid newly added preflush
+
+Thanks,
+
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> And please see do_checkpoint(), we call f2fs_flush_device_cache() and
+>>>> commit_checkpoint() separately to keep persistence order of CP datas.
+>>>>
+>>>> See commit 46706d5917f4 ("f2fs: flush cp pack except cp pack 2 page at first")
+>>>> for details.
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>>>
+>>>>>> If SPO is triggered during flush command, inode page can be persisted
+>>>>>> before data page #0, so that after recovery, inode page can be recovered
+>>>>>> with new physical block address of data page #0, however there may
+>>>>>> contains dummy data in new physical block address.
+>>>>>>
+>>>>>> Then what user will see is: after overwrite & fsync + SPO, old data in
+>>>>>> file was corrupted, if any user do care about such case, we can suggest
+>>>>>> user to use STRICT fsync mode, in this mode, we will force to trigger
+>>>>>> preflush command to persist data in device cache in prior to node
+>>>>>> writeback, it avoids potential data corruption during fsync().
+>>>>>>
+>>>>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
+>>>>>> ---
+>>>>>> v2:
+>>>>>> - fix this by adding additional preflush command rather than using
+>>>>>> atomic write flow.
+>>>>>>     fs/f2fs/file.c | 14 ++++++++++++++
+>>>>>>     1 file changed, 14 insertions(+)
+>>>>>>
+>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>>>>>> index 7d5311d54f63..238ca2a733ac 100644
+>>>>>> --- a/fs/f2fs/file.c
+>>>>>> +++ b/fs/f2fs/file.c
+>>>>>> @@ -301,6 +301,20 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+>>>>>>     				f2fs_exist_written_data(sbi, ino, UPDATE_INO))
+>>>>>>     			goto flush_out;
+>>>>>>     		goto out;
+>>>>>> +	} else {
+>>>>>> +		/*
+>>>>>> +		 * for OPU case, during fsync(), node can be persisted before
+>>>>>> +		 * data when lower device doesn't support write barrier, result
+>>>>>> +		 * in data corruption after SPO.
+>>>>>> +		 * So for strict fsync mode, force to trigger preflush to keep
+>>>>>> +		 * data/node write order to avoid potential data corruption.
+>>>>>> +		 */
+>>>>>> +		if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT &&
+>>>>>> +								!atomic) {
+>>>>>> +			ret = f2fs_issue_flush(sbi, inode->i_ino);
+>>>>>> +			if (ret)
+>>>>>> +				goto out;
+>>>>>> +		}
+>>>>>>     	}
+>>>>>>     go_write:
+>>>>>>     	/*
+>>>>>> -- 
+>>>>>> 2.29.2
 
 
 _______________________________________________
