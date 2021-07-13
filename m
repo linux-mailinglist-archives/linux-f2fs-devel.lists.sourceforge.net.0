@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9323E3C7A3E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 01:39:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C9CC3C7A46
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 01:44:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m3RzP-0001WS-E5; Tue, 13 Jul 2021 23:38:59 +0000
+	id 1m3S4s-0007Ta-92; Tue, 13 Jul 2021 23:44:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1m3RzO-0001WM-LH
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 23:38:58 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1m3S4q-0007TN-V5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 23:44:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m3RvV-007Suq-2O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 23:38:58 +0000
+ id 1m3S4p-007THe-Hg
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 13 Jul 2021 23:44:36 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 9232A60C3E;
  Tue, 13 Jul 2021 23:34:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -63,7 +63,23 @@ References: <20210601101024.119356-1-yuchao0@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <55e069f7-662d-630c-1201-d0163b38bc17@kernel.org>
-X-Headers-End: 1m3RvV-007Suq-2O
+X-Spam-Score: -0.8 (/)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: huawei.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m3S4p-007THe-Hg
 Subject: Re: [f2fs-dev] [PATCH v2 RFC] f2fs: fix to force keeping write
  barrier for strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
