@@ -2,73 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD8E73C7B2F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 03:54:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF9A13C7BA8
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 04:19:53 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m3U6q-0007Ry-8r; Wed, 14 Jul 2021 01:54:48 +0000
+	id 1m3UUx-0008K0-Us; Wed, 14 Jul 2021 02:19:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <wangxiaojun11@huawei.com>) id 1m3U6n-0007Rq-Ra
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 01:54:46 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1m3UUw-0008Jt-18
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 02:19:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9A8O7kSwzWgkQDp/51H7LNw8BxQpwTn3sqx9Anw6psQ=; b=Ga3qOjZuoQYcihp3lzRAi+dXkP
- 6FfXRYZt9TZ5QIHdOA7l+BIjY4D6KVnwd5CKqOEyrvQQgzHefXXg9/nLum0dymCuXPgtadT/BoTPa
- B6zUnlyz/z91zIi63t2CaLsu4Ipt7h+6aNa5mMULzGrhr7q7y0gcUT1enhkbWKLDfIb8=;
+ bh=MWPFoCESdbNR0+Ut517GtMhTb4OgChoH1sdDnc4GiVE=; b=PImHMXgcMx5buefjhsVHiVL2r0
+ fvBdA+Ypr1VabqSDFSF7j5hG1dLgzVoA2CW16B6FoMo6Ov+P3x8jE06UmOUJvmBXC/ld+7tBApUDV
+ j/B16pkqFlwaP/BX5Mn6MdK4bz8P7YviH3pdn1fOijR/NRr0O1dD87RfuMh4GJ/naegI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9A8O7kSwzWgkQDp/51H7LNw8BxQpwTn3sqx9Anw6psQ=; b=R
- YUFT/ULm7617yb+u++KvDTwRkXJLifyOoVTLxl4DVNuo7KodqaQHN5bEl3BD8jpQb9dn3tUS8BtRv
- fGE/+BhaVvvY1JAtLRXMjyKV0FJoYJGR30FOD6WPy6A4l4QMRmANfNUi5z7VKRUm+VTYaFE/htk1q
- wJN+7kOGFQ9E6PrE=;
-Received: from szxga03-in.huawei.com ([45.249.212.189])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=MWPFoCESdbNR0+Ut517GtMhTb4OgChoH1sdDnc4GiVE=; b=G792RRbjsaR+tIkDfISZU/3SGU
+ Ochzl5wlyXJ+gBksqv+iZ0G5526CeTsSPdYsOzrzro4/Df7+E2xcUXBmfZS+IVYVEPQ+kSTj0ZYv6
+ 3cgJLagjoBl3RUCgHCXUDMzwTiMXNeuThDJCgurge4BYM7hAL/Xp4z+FDj+OL6SCdHYU=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m3U6i-007Xze-QU
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 01:54:45 +0000
-Received: from dggeml756-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4GPgRt4zfGz8sd0;
- Wed, 14 Jul 2021 09:50:02 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by dggeml756-chm.china.huawei.com
- (10.1.199.158) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Wed, 14
- Jul 2021 09:54:30 +0800
-From: Wang Xiaojun <wangxiaojun11@huawei.com>
-To: <chao@kernel.org>, <jaegeuk@kernel.org>
-Date: Wed, 14 Jul 2021 10:00:20 +0800
-Message-ID: <20210714020020.208502-1-wangxiaojun11@huawei.com>
-X-Mailer: git-send-email 2.25.4
+ id 1m3UUk-007Yrh-DU
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 02:19:41 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EC2BA61361;
+ Wed, 14 Jul 2021 02:19:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1626229160;
+ bh=i4eEglXPWeRoBvQUL6FzZPjJYWoDlvaJfAAc3qlwTWU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=LgkqHbJZAzEn6uKw0qpFx6ln7UosMGIId1eejH4/UBWbHINvip8cSTIArsl1gVFhh
+ tlhrrl+SjMzc4ePvztBw/IChvH/H3+dU9Gfwu9i9IJ2XZniDXKToweGJ+n8pBo1E62
+ zWk7bfneeE946gfv4GRMDkj8NrR+yFZK45AisyWQ2tjACrl4uQ1Vj/x4HDlIS/+OXY
+ Axia7uulEB8J7vyeRmTm5uc0VrIaxpz91cKku2IrkGspoXTIZyFL0+8gKNpW5P0SGw
+ GWe7xqorm1QA0VQ6HF6r+vQbR5V9IoQ8IvAxoQYkXwMUGz0fQwhaAkd4sHhEZIko9C
+ iO5IclZLFUOUQ==
+Date: Tue, 13 Jul 2021 19:19:18 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YO5JptcNuT28JJtX@google.com>
+References: <20210601101024.119356-1-yuchao0@huawei.com>
+ <YN32/NsjqJONbvz7@google.com>
+ <648a96f7-2c83-e9ed-0cbd-4ee8e4797724@kernel.org>
+ <YN5srPRZaPN9gpZ0@google.com>
+ <b828fc22-f15a-8be4-631a-ed4ecb631386@kernel.org>
+ <YOXo3CT5sBvj6p0J@google.com>
+ <55e069f7-662d-630c-1201-d0163b38bc17@kernel.org>
+ <YO4jGkKLQWZKrgny@google.com>
+ <8f8d5645-9860-3e16-a09d-1a988ca6be72@kernel.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.101.6]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggeml756-chm.china.huawei.com (10.1.199.158)
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <8f8d5645-9860-3e16-a09d-1a988ca6be72@kernel.org>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.189 listed in wl.mailspike.net]
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: huawei.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1m3U6i-007Xze-QU
-Subject: [f2fs-dev] [PATCH] f2fs-tools: rebuild the quota inode if it is
- corrupted
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1m3UUk-007Yrh-DU
+Subject: Re: [f2fs-dev] [PATCH v2 RFC] f2fs: fix to force keeping write
+ barrier for strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,229 +94,148 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the following process returns an error,
-the quota inode, not the quota file, is damaged.
-(fsck_chk_quota_node-->fsck_chk_node_blk-->sanity_check_nid)
-The fsck does not have a process to rebuild the quota inode.
+On 07/14, Chao Yu wrote:
+> On 2021/7/14 7:34, Jaegeuk Kim wrote:
+> > On 07/13, Chao Yu wrote:
+> > > On 2021/7/8 1:48, Jaegeuk Kim wrote:
+> > > > On 07/02, Chao Yu wrote:
+> > > > > On 2021/7/2 9:32, Jaegeuk Kim wrote:
+> > > > > > On 07/02, Chao Yu wrote:
+> > > > > > > On 2021/7/2 1:10, Jaegeuk Kim wrote:
+> > > > > > > > On 06/01, Chao Yu wrote:
+> > > > > > > > > [1] https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
+> > > > > > > > > 
+> > > > > > > > > As [1] reported, if lower device doesn't support write barrier, in below
+> > > > > > > > > case:
+> > > > > > > > > 
+> > > > > > > > > - write page #0; persist
+> > > > > > > > > - overwrite page #0
+> > > > > > > > > - fsync
+> > > > > > > > >      - write data page #0 OPU into device's cache
+> > > > > > > > >      - write inode page into device's cache
+> > > > > > > > >      - issue flush
+> > > > > > > > 
+> > > > > > > > Well, we have preflush for node writes, so I don't think this is the case.
+> > > > > > > > 
+> > > > > > > >      fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
+> > > > > > > 
+> > > > > > > This is only used for atomic write case, right?
+> > > > > > > 
+> > > > > > > I mean the common case which is called from f2fs_issue_flush() in
+> > > > > > > f2fs_do_sync_file().
+> > > > > > 
+> > > > > > How about adding PREFLUSH when writing node blocks aligned to the above set?
+> > > > > 
+> > > > > You mean implementation like v1 as below?
+> > > > > 
+> > > > > https://lore.kernel.org/linux-f2fs-devel/20200120100045.70210-1-yuchao0@huawei.com/
+> > > > 
+> > > > Yea, I think so. :P
+> > > 
+> > > I prefer v2, we may have several schemes to improve performance with v2, e.g.
+> > > - use inplace IO to avoid newly added preflush
+> > > - use flush_merge option to avoid redundant preflush
+> > > - if lower device supports barrier IO, we can avoid newly added preflush
+> > 
+> > Doesn't v2 give one more flush than v1? Why do you want to take worse one and
+> 
+> FUA implies an extra preflush command or similar mechanism in lower device to keep data
+> in bio being persistent before this command's completion.
+> 
+> Also if lower device doesn't support FUA natively, block layer turns it into an empty
+> PREFLUSH command.
+> 
+> So, it's hard to say which one will win the benchmark game, maybe we need some
+> performance data before making the choice, but you know, it depends on device's
+> character.
 
-Because sanity_check_nid is not passed, fsck->nat_area_bitmap
-can not be cleared, and then the NAT of quota will be nullify
-during fix_nat_entries.
+I was looking at # of bios.
 
-During the next fsck check, the quota inode check fails
-because the address of the quota inode changes to 0.
-In addition, in fsck_chk_quota_files-->f2fs_filesize_update,
-data is written to address 0.
+> 
+> > try to improve back? Not clear the benefit on v2.
+> 
+> Well, if user suffer and complain performance regression with v1, any plan to improve it?
+> 
+> I just thought about plan B/C/D for no matter v1 or v2.
 
-Therefore, when the quota inode is corrupted, we need to rebuild it.
+I assumed you wanted v2 since it might be used for B/C/D improvements. But, it
+seems it wasn't. My point is to save one bio, but piggyback the flag to the
+device driver.
 
-Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
----
- fsck/fsck.c        |  2 ++
- fsck/fsck.h        |  1 +
- fsck/node.c        | 38 ++++++++++++++++++++++++++++++++++++++
- include/f2fs_fs.h  | 40 ++++++++++++++++++++++++++++++++++++++++
- mkfs/f2fs_format.c | 31 +------------------------------
- 5 files changed, 82 insertions(+), 30 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 6ca85f0..af6d332 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1899,6 +1899,8 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
- 			ASSERT_MSG("wrong quota inode, qtype [%d] ino [0x%x]",
- 								qtype, ino);
- 			qf_szchk_type[qtype] = QF_SZCHK_ERR;
-+			if (c.fix_on)
-+				f2fs_rebuild_qf_inode(sbi, qtype);
- 		}
- 	}
- 	cur_qtype = -1;
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index d79afef..67390f0 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -286,6 +286,7 @@ void f2fs_alloc_nid(struct f2fs_sb_info *, nid_t *);
- void set_data_blkaddr(struct dnode_of_data *);
- block_t new_node_block(struct f2fs_sb_info *,
- 					struct dnode_of_data *, unsigned int);
-+int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype);
- 
- /* segment.c */
- struct quota_file;
-diff --git a/fsck/node.c b/fsck/node.c
-index c7988cb..d8d01db 100644
---- a/fsck/node.c
-+++ b/fsck/node.c
-@@ -40,6 +40,44 @@ void f2fs_release_nid(struct f2fs_sb_info *sbi, nid_t nid)
- 	f2fs_clear_bit(nid, nm_i->nid_bitmap);
- }
- 
-+int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
-+{
-+	struct f2fs_node *raw_node = NULL;
-+	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
-+	struct f2fs_summary sum;
-+	struct node_info ni;
-+	nid_t ino = QUOTA_INO(sb, qtype);
-+	block_t blkaddr = NULL_ADDR;
-+	int ret = 0;
-+
-+	raw_node = calloc(F2FS_BLKSIZE, 1);
-+	if (raw_node == NULL) {
-+		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
-+		return -ENOMEM;
-+	}
-+	f2fs_init_qf_inode(sb, raw_node, qtype);
-+	raw_node->footer.cp_ver = F2FS_CKPT(sbi)->checkpoint_ver;
-+
-+	get_node_info(sbi, ino, &ni);
-+	set_summary(&sum, ino, 0, ni.version);
-+	ret = reserve_new_block(sbi, &blkaddr, &sum, CURSEG_HOT_NODE, 1);
-+	if (ret)
-+		goto err_out;
-+
-+	ret = write_inode(raw_node, blkaddr);
-+	if (ret < 0) {
-+		MSG(1, "\tError: While rebuilding the quota inode to disk!\n");
-+		goto err_out;
-+	}
-+	update_nat_blkaddr(sbi, ino, ino, blkaddr);
-+
-+	f2fs_clear_bit(ino, F2FS_FSCK(sbi)->nat_area_bitmap);
-+	f2fs_set_bit(ino, NM_I(sbi)->nid_bitmap);
-+err_out:
-+	free(raw_node);
-+	return ret;
-+}
-+
- void set_data_blkaddr(struct dnode_of_data *dn)
- {
- 	__le32 *addr_array;
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 45f7257..87bbd3c 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -20,6 +20,7 @@
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-+#include <time.h>
- #ifdef HAVE_CONFIG_H
- #include <config.h>
- #endif
-@@ -1554,6 +1555,45 @@ static inline void show_version(const char *prog)
- #endif
- }
- 
-+static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
-+		struct f2fs_node *raw_node, int qtype)
-+{
-+	raw_node->footer.nid = sb->qf_ino[qtype];
-+	raw_node->footer.ino = sb->qf_ino[qtype];
-+	raw_node->footer.cp_ver = cpu_to_le64(1);
-+	raw_node->i.i_mode = cpu_to_le16(0x8180);
-+	raw_node->i.i_links = cpu_to_le32(1);
-+	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
-+	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
-+
-+	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
-+	raw_node->i.i_blocks = cpu_to_le64(1);
-+
-+	raw_node->i.i_atime = cpu_to_le32(time(NULL));
-+	raw_node->i.i_atime_nsec = 0;
-+	raw_node->i.i_ctime = cpu_to_le32(time(NULL));
-+	raw_node->i.i_ctime_nsec = 0;
-+	raw_node->i.i_mtime = cpu_to_le32(time(NULL));
-+	raw_node->i.i_mtime_nsec = 0;
-+	raw_node->i.i_generation = 0;
-+	raw_node->i.i_xattr_nid = 0;
-+	raw_node->i.i_flags = FS_IMMUTABLE_FL;
-+	raw_node->i.i_current_depth = cpu_to_le32(0);
-+	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
-+
-+	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
-+		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
-+		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
-+	}
-+
-+	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
-+		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
-+
-+	raw_node->i.i_ext.fofs = 0;
-+	raw_node->i.i_ext.blk_addr = 0;
-+	raw_node->i.i_ext.len = 0;
-+}
-+
- struct feature {
- 	char *name;
- 	u32  mask;
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 2132852..f8d0bce 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -1373,42 +1373,16 @@ static int f2fs_write_qf_inode(int qtype)
- 		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
- 		return -1;
- 	}
-+	f2fs_init_qf_inode(sb, raw_node, qtype);
- 
--	raw_node->footer.nid = sb->qf_ino[qtype];
--	raw_node->footer.ino = sb->qf_ino[qtype];
--	raw_node->footer.cp_ver = cpu_to_le64(1);
- 	raw_node->footer.next_blkaddr = cpu_to_le32(
- 			get_sb(main_blkaddr) +
- 			c.cur_seg[CURSEG_HOT_NODE] *
- 			c.blks_per_seg + 1 + qtype + 1);
--
--	raw_node->i.i_mode = cpu_to_le16(0x8180);
--	raw_node->i.i_links = cpu_to_le32(1);
--	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
--	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
--
--	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
- 	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
--
- 	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_atime_nsec = 0;
- 	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_ctime_nsec = 0;
- 	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_mtime_nsec = 0;
--	raw_node->i.i_generation = 0;
--	raw_node->i.i_xattr_nid = 0;
--	raw_node->i.i_flags = FS_IMMUTABLE_FL;
--	raw_node->i.i_current_depth = cpu_to_le32(0);
--	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
--
--	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
--		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
--		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
--	}
--
--	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
--		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
- 
- 	data_blk_nor = get_sb(main_blkaddr) +
- 		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1;
-@@ -1434,9 +1408,6 @@ static int f2fs_write_qf_inode(int qtype)
- 	for (i = 0; i < QUOTA_DATA(qtype); i++)
- 		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
- 					cpu_to_le32(data_blk_nor + i);
--	raw_node->i.i_ext.fofs = 0;
--	raw_node->i.i_ext.blk_addr = 0;
--	raw_node->i.i_ext.len = 0;
- 
- 	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
- 	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
--- 
-2.25.4
-
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > > 
+> > > > > Thanks,
+> > > > > 
+> > > > > > 
+> > > > > > > 
+> > > > > > > And please see do_checkpoint(), we call f2fs_flush_device_cache() and
+> > > > > > > commit_checkpoint() separately to keep persistence order of CP datas.
+> > > > > > > 
+> > > > > > > See commit 46706d5917f4 ("f2fs: flush cp pack except cp pack 2 page at first")
+> > > > > > > for details.
+> > > > > > > 
+> > > > > > > Thanks,
+> > > > > > > 
+> > > > > > > > 
+> > > > > > > > > 
+> > > > > > > > > If SPO is triggered during flush command, inode page can be persisted
+> > > > > > > > > before data page #0, so that after recovery, inode page can be recovered
+> > > > > > > > > with new physical block address of data page #0, however there may
+> > > > > > > > > contains dummy data in new physical block address.
+> > > > > > > > > 
+> > > > > > > > > Then what user will see is: after overwrite & fsync + SPO, old data in
+> > > > > > > > > file was corrupted, if any user do care about such case, we can suggest
+> > > > > > > > > user to use STRICT fsync mode, in this mode, we will force to trigger
+> > > > > > > > > preflush command to persist data in device cache in prior to node
+> > > > > > > > > writeback, it avoids potential data corruption during fsync().
+> > > > > > > > > 
+> > > > > > > > > Signed-off-by: Chao Yu <yuchao0@huawei.com>
+> > > > > > > > > ---
+> > > > > > > > > v2:
+> > > > > > > > > - fix this by adding additional preflush command rather than using
+> > > > > > > > > atomic write flow.
+> > > > > > > > >      fs/f2fs/file.c | 14 ++++++++++++++
+> > > > > > > > >      1 file changed, 14 insertions(+)
+> > > > > > > > > 
+> > > > > > > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > > > > > > > index 7d5311d54f63..238ca2a733ac 100644
+> > > > > > > > > --- a/fs/f2fs/file.c
+> > > > > > > > > +++ b/fs/f2fs/file.c
+> > > > > > > > > @@ -301,6 +301,20 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+> > > > > > > > >      				f2fs_exist_written_data(sbi, ino, UPDATE_INO))
+> > > > > > > > >      			goto flush_out;
+> > > > > > > > >      		goto out;
+> > > > > > > > > +	} else {
+> > > > > > > > > +		/*
+> > > > > > > > > +		 * for OPU case, during fsync(), node can be persisted before
+> > > > > > > > > +		 * data when lower device doesn't support write barrier, result
+> > > > > > > > > +		 * in data corruption after SPO.
+> > > > > > > > > +		 * So for strict fsync mode, force to trigger preflush to keep
+> > > > > > > > > +		 * data/node write order to avoid potential data corruption.
+> > > > > > > > > +		 */
+> > > > > > > > > +		if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT &&
+> > > > > > > > > +								!atomic) {
+> > > > > > > > > +			ret = f2fs_issue_flush(sbi, inode->i_ino);
+> > > > > > > > > +			if (ret)
+> > > > > > > > > +				goto out;
+> > > > > > > > > +		}
+> > > > > > > > >      	}
+> > > > > > > > >      go_write:
+> > > > > > > > >      	/*
+> > > > > > > > > -- 
+> > > > > > > > > 2.29.2
 
 
 _______________________________________________
