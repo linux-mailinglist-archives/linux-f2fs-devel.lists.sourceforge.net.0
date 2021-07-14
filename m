@@ -2,78 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 809753C7DCE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 07:05:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 080B13C7F71
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jul 2021 09:35:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m3X4o-00050V-OZ; Wed, 14 Jul 2021 05:04:54 +0000
+	id 1m3ZQh-0003qp-Fr; Wed, 14 Jul 2021 07:35:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <djwong@kernel.org>) id 1m3X4n-00050N-3z
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 05:04:53 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <jiayang5@huawei.com>) id 1m3ZQY-0003pz-R3
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 07:35:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ep25NXGaKy7iLmv/hLzAs5+NAintJ3fq7jB/7+yc6ZY=; b=I1d14qKQTCIxIM3JIU3TfssOUd
- +CdavaU/B/NE5gwRzdbUEPXjsVzcZWWpF0NrpaxwTcrPAmk9jIQInFvRYymP6Y/UgTG7X0pFmcWJU
- /ax25kJ2FdOo0JvU4MF/l5rBhLrYWrMtnYNuWtZlQmXUbwSOwxnCZMK68OVnMWVs1wow=;
+ bh=24LnHraVnnvTvdAVl3oWEDzOEGuTYXO3NHz4Vl/vJn4=; b=DyH+wV3M2IPgLBW94kxsYqJo5S
+ gQs/vK+GZV68Uqt/ZWVf8LIAV5wKqKhZZJgX7QaCLNxkiGoY7MoRTJDG/j8KCEOWm8c2JxetTih4d
+ TAeGjwwGuw+YVyg2KGA037RKWcav/aGtMz2JnI0av70bOAJYPtDZNU+Ks3AwNNuIc8/M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ep25NXGaKy7iLmv/hLzAs5+NAintJ3fq7jB/7+yc6ZY=; b=GfYzfao2pWbo9hGd0BFYm+nGG9
- ftJ5/ITVU83DszQMka+kOyasKNindq+c3l2h15tgTMOJjuLCeiLZDY5+mP8//fbVGRFPbvFAvPGwB
- dj5ykw6jeySXqg50PKNEmVSsaEx35QZUh24iITI0CvVFoMO1azLwzMdeDWRlnPe8XYKc=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=24LnHraVnnvTvdAVl3oWEDzOEGuTYXO3NHz4Vl/vJn4=; b=l
+ 2BPVuWO1K/iHa9A0RkqwjhSkMvUADtrc1NWMhTuNn6CF9FJnmXUcr0i02Jtsp9lk2pT/D4aMjC+U4
+ 3BG2Pj68pa+JAEZcJKMBXjOi3UCyor/6x0GHk6ueXk2N/W1EEqTwmNPt0iUGsEzSJyNapc0kjb2ie
+ leVkJaO6oEeYQwvU=;
+Received: from szxga01-in.huawei.com ([45.249.212.187])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m3X4h-007fFM-AD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 05:04:53 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 016B960FD8;
- Wed, 14 Jul 2021 05:04:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626239077;
- bh=Jc1sNtDQLolCUqZGQica4040YhI273wmJsvNWUazVMU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UWnd/YzekvcZgciRPDO2VDGc5jefYAa1w8p3Vjj4SV7C/lPk0nz0bWt6/xjz0r+LN
- /vsMehsZND0VXQBUpUt+yqOmVnh0nJnnv+5jeOHtFoErWyN5uO26GhuWQGXnZYFNtx
- rZxXFverfex9HCcHFguzDqBLrC7mc41WwHaKY51njN+ELp1nH80BNjSPGnY7xW1Wh8
- WXJ/XCZ0IShzVBu2YPhe/z0Ytdvm3PViCRMF7DWftS9pUMgBxyyzamzDc1wq5GelGt
- I8To5FlidFdvSjJH5ie48P6mPDmR8ggS4bVkzvnSXWnzw4y1TT5TD1a3/A5cRrodnt
- 8Gl0faYQvuXbQ==
-Date: Tue, 13 Jul 2021 22:04:36 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Wang Shilong <wangshilong1991@gmail.com>
-Message-ID: <20210714050436.GH22402@magnolia>
-References: <20210710143959.58077-1-wangshilong1991@gmail.com>
+ id 1m3ZQR-007liw-HV
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 14 Jul 2021 07:35:30 +0000
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4GPpzg2HjSzXsvt;
+ Wed, 14 Jul 2021 15:29:35 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Wed, 14 Jul 2021 15:35:13 +0800
+Received: from huawei.com (10.175.124.27) by dggpemm500007.china.huawei.com
+ (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Wed, 14 Jul
+ 2021 15:35:12 +0800
+From: Jia Yang <jiayang5@huawei.com>
+To: <linux-f2fs-devel@lists.sourceforge.net>
+Date: Wed, 14 Jul 2021 15:46:06 +0800
+Message-ID: <20210714074606.3858442-1-jiayang5@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210710143959.58077-1-wangshilong1991@gmail.com>
-X-Spam-Score: -0.8 (/)
+X-Originating-IP: [10.175.124.27]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: ddn.com]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m3X4h-007fFM-AD
-Subject: Re: [f2fs-dev] [PATCH v4] fs: forbid invalid project ID
+ for more information. [URIs: huawei.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.187 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1m3ZQR-007liw-HV
+Subject: [f2fs-dev] [PATCH -next] f2fs: Revert "f2fs: Fix indefinite loop in
+ f2fs_gc() v1"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,65 +84,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, Wang Shilong <wshilong@ddn.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Jul 10, 2021 at 10:39:59PM +0800, Wang Shilong wrote:
-> From: Wang Shilong <wshilong@ddn.com>
-> 
-> fileattr_set_prepare() should check if project ID
-> is valid, otherwise dqget() will return NULL for
-> such project ID quota.
-> 
-> Signed-off-by: Wang Shilong <wshilong@ddn.com>
-> ---
-> v3->v3:
-> only check project Id if caller is allowed
-> to change and being changed.
-> 
-> v2->v3: move check before @fsx_projid is accessed
-> and use make_kprojid() helper.
-> 
-> v1->v2: try to fix in the VFS
->  fs/ioctl.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/fs/ioctl.c b/fs/ioctl.c
-> index 1e2204fa9963..d4fabb5421cd 100644
-> --- a/fs/ioctl.c
-> +++ b/fs/ioctl.c
-> @@ -817,6 +817,14 @@ static int fileattr_set_prepare(struct inode *inode,
->  		if ((old_ma->fsx_xflags ^ fa->fsx_xflags) &
->  				FS_XFLAG_PROJINHERIT)
->  			return -EINVAL;
-> +	} else {
-> +		/*
-> +		 * Caller is allowed to change the project ID. If it is being
-> +		 * changed, make sure that the new value is valid.
-> +		 */
-> +		if (old_ma->fsx_projid != fa->fsx_projid &&
-> +		    !projid_valid(make_kprojid(&init_user_ns, fa->fsx_projid)))
-> +			return -EINVAL;
+This reverts commit 957fa47823dfe449c5a15a944e4e7a299a6601db.
 
-Hmm, for XFS this is sort of a userspace-breaking change in the sense
-that (technically) we've never rejected -1 before.  xfs_quota won't have
-anything to do with that, and (assuming I read the helper/macro
-gooeyness correctly) the vfs quota code won't either, so
+The patch "f2fs: Fix indefinite loop in f2fs_gc()" v1 and v4 are all
+merged. Patch v4 is test info for patch v1. Patch v1 doesn't work and
+may cause that sbi->cur_victim_sec can't be resetted to NULL_SEGNO,
+which makes SSR unable to get segment of sbi->cur_victim_sec.
+So it should be reverted.
 
-Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+The mails record:
+[1] https://lore.kernel.org/linux-f2fs-devel/7288dcd4-b168-7656-d1af-7e2cafa4f720@huawei.com/T/
+[2] https://lore.kernel.org/linux-f2fs-devel/20190809153653.GD93481@jaegeuk-macbookpro.roam.corp.google.com/T/
 
---D
+Signed-off-by: Jia Yang <jiayang5@huawei.com>
+---
+ fs/f2fs/gc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->  	}
->  
->  	/* Check extent size hints. */
-> -- 
-> 2.27.0
-> 
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 0e42ee5f7770..396b6f55ec24 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1747,7 +1747,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+ 		round++;
+ 	}
+ 
+-	if (gc_type == FG_GC && seg_freed)
++	if (gc_type == FG_GC)
+ 		sbi->cur_victim_sec = NULL_SEGNO;
+ 
+ 	if (sync)
+-- 
+2.25.1
+
 
 
 _______________________________________________
