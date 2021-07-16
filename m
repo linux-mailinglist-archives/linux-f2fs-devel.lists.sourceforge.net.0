@@ -2,59 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 848023CB8E9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jul 2021 16:41:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id A22C03CB8E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jul 2021 16:41:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m4P1L-0002em-RA; Fri, 16 Jul 2021 14:40:55 +0000
+	id 1m4P1R-0004uh-DM; Fri, 16 Jul 2021 14:41:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <ebiggers@kernel.org>) id 1m4P1K-0002ef-7p
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Jul 2021 14:40:54 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <ebiggers@kernel.org>) id 1m4P1P-0004u2-8k
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Jul 2021 14:40:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QTASHhvGc6vVu+JzCK6Z7g31D7AQVeOUVsaDS5m5zGs=; b=TXjn25SXxPxnrW4/8YmNIA9ihM
- irCbRVwMg7AGy04NPwv5YmJcAHxyvc7ZwHHxQn3/k9qam6K8sezeI/6X0E5HhZ+TXB5/E35emje3r
- lbDs8stFZTpEG0+gZ0lWk5zecujVZ4aIURakA6fMir4zo/Qj0rpnBDp474bMQ5rjQr/U=;
+ bh=svk8U969b5FypaB8jOWdYM8DxzQzM02tdanstTGrqD8=; b=ak4ugS7as55FpJQ4BHSd4j7v1Z
+ wyTqCy7F+lDQA5u66lKPdUMB4A5w6qe9rmY2EA8dQ5ERt2Q5f0RYs+K4NhRQAo9pAbARqvSoUtC78
+ 3vnc1yS49jD1B6/QeNNhXngoySXs7EMqSAmKAAEDU5ORdlO039qrq4EBpCbasWR+QUqE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=QTASHhvGc6vVu+JzCK6Z7g31D7AQVeOUVsaDS5m5zGs=; b=m
- 9anyo3HA7sW7CPJa4AUf45gp56Qt2XUOoGv039oXiaqHqbE/cv294/6GxwwSWX0V1jqEM0qui5VTz
- KWQF0Y3onAfUlfN9aM5ViJI/ZPaI41RRSJwWokCiIhcNtWDTFYVDBGU/yKjbds6rE0+9pBjgorIOK
- 1V81SZegO2eU/0jY=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=svk8U969b5FypaB8jOWdYM8DxzQzM02tdanstTGrqD8=; b=aKgvhtzEmpA2VXV2MLzO/wZteY
+ imeE10xdeG1bPkq/CVb7xhXjNVMOgP7ec0npjKVUmz795zxkSsgM9kovW24272rLwieJRury6dpF4
+ ZWjvzC3/n2LfF93VKUYkbn5bOAZ3R4RQvfcsuQfbwNVIWiRKvBeXhDaNssdw/7Vj4i3A=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m4P1I-0004dx-Tz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Jul 2021 14:40:54 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id DE4D3613AF;
- Fri, 16 Jul 2021 14:40:41 +0000 (UTC)
+ id 1m4P1I-0004dz-U0
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 16 Jul 2021 14:40:59 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BC271613F5;
+ Fri, 16 Jul 2021 14:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626446442;
- bh=7TQ2wZS0o8rjARGf+YyE3LnEc8JXm7RWnWlgvVpHFQg=;
- h=From:To:Cc:Subject:Date:From;
- b=k0VWFJo3KwWNfUem7TO3aDtwyb9j6dkN+3TTCvFk7rKAri7TjWyW6iHXIneGPXQaC
- MBJFcqLytNz4Dsp//LiCCz9ULWPcKbd/qLWH3YKn/EGQV7sweVjBWLJor6w/3gGWg2
- +/b4dZrcIsGCd0L67vYfg3RnUZvZV82d3zU7AB6Kv80xG01WOtPH2idOsUNYmC57ir
- M4OFWToanQQ1UaB+t6BdYLUSG1qHfMxEkFFDmINkNoJ+h7ISXQ3nW6Sfn33BLjE/Sq
- DU9HEJ77uKQcyJ49jeQjlATWQ2iODCq7TX3NkwrFleGe1reU5lcLpgrTDSk15tTY9p
- g1R6yoPQmwmZw==
+ s=k20201202; t=1626446443;
+ bh=88spGNyluutPzDN0JI8idu1yC06Iuwa4Jxi/++a9CYk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=C8doAhLjAan/i8YFRaUfyiowMTh/rN3RihH5HgMt25tD4ewCuPx0CuABVSX22g4VJ
+ xH1aGdrzb7tpAC71QjMxpUiC9Z0G6SOihgzj4tX/F+EOMZTdGTOXRf1grUNEJEgfIj
+ 7dSRGWHqC/qELlDVN9pxOynwhqQCMgVZtaihiF/5b/6BbbGfjz2571fBIUbp70yH8N
+ 1LKcSJt4RB7Y9wioN85kJZ8tAgMKHTgFRf9byyKCLcnlpp3S3q245wplxyJGAQR5Lq
+ qKIcgfBOHQs7pRiQe6HCVw8dp2Hg+JnwxuDNbEzM2hPHDbwgxOIMhpgcTGZGdnwTPg
+ 5vGFchRbPDU+w==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <chao@kernel.org>
-Date: Fri, 16 Jul 2021 09:39:10 -0500
-Message-Id: <20210716143919.44373-1-ebiggers@kernel.org>
+Date: Fri, 16 Jul 2021 09:39:11 -0500
+Message-Id: <20210716143919.44373-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210716143919.44373-1-ebiggers@kernel.org>
+References: <20210716143919.44373-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -67,8 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m4P1I-0004dx-Tz
-Subject: [f2fs-dev] [PATCH 0/9] f2fs: use iomap for direct I/O
+X-Headers-End: 1m4P1I-0004dz-U0
+Subject: [f2fs-dev] [PATCH 1/9] f2fs: make f2fs_write_failed() take struct
+ inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,53 +91,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This series makes f2fs implement direct I/O using iomap_dio_rw() instead
-of __blockdev_direct_IO().  In order to do this, it adds f2fs_iomap_ops,
-since this is the first use of iomap in f2fs.
+From: Eric Biggers <ebiggers@google.com>
 
-The iomap direct I/O implementation is more efficient than the
-fs/direct-io.c implementation.  Switching to iomap also avoids the need
-to add new features and optimizations to the old implementation.  E.g.,
-see https://lore.kernel.org/r/20200710053406.GA25530@infradead.org and
-https://lore.kernel.org/r/YKJBWClI7sUeABDs@infradead.org.
+Make f2fs_write_failed() take a 'struct inode' directly rather than a
+'struct address_space', as this simplifies it slightly.
 
-In general, this series preserves existing f2fs behavior (such as the
-conditions for falling back to buffered I/O) and is only an
-implementation change.
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/data.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-Patches 1-5 contain cleanups and fixes for f2fs_file_write_iter().
-Patch 6 adds f2fs_iomap_ops, patch 7 and 8 switch direct I/O reads and
-writes to iomap, and patch 9 removes obsoleted code.
-
-Careful review is appreciated, as I'm not an expert in all areas here.
-
-This series has been tested with xfstests by running 'gce-xfstests -c
-f2fs -g auto -X generic/017' with and without this series; no
-regressions were seen.  (Some tests fail both before and after.
-generic/017 hangs both before and after, so it had to be excluded.)
-
-This series applies to v5.14-rc1.
-
-Eric Biggers (9):
-  f2fs: make f2fs_write_failed() take struct inode
-  f2fs: remove allow_outplace_dio()
-  f2fs: rework write preallocations
-  f2fs: reduce indentation in f2fs_file_write_iter()
-  f2fs: fix the f2fs_file_write_iter tracepoint
-  f2fs: implement iomap operations
-  f2fs: use iomap for direct I/O reads
-  f2fs: use iomap for direct I/O writes
-  f2fs: remove f2fs_direct_IO()
-
- fs/f2fs/Kconfig             |   1 +
- fs/f2fs/data.c              | 286 +++++++------------------
- fs/f2fs/f2fs.h              |  29 +--
- fs/f2fs/file.c              | 416 +++++++++++++++++++++++++++++-------
- include/trace/events/f2fs.h |  12 +-
- 5 files changed, 421 insertions(+), 323 deletions(-)
-
-
-base-commit: e73f0f0ee7541171d89f2e2491130c7771ba58d3
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index d2cf48c5a2e4..c478964a5695 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3176,9 +3176,8 @@ static int f2fs_write_data_pages(struct address_space *mapping,
+ 			FS_CP_DATA_IO : FS_DATA_IO);
+ }
+ 
+-static void f2fs_write_failed(struct address_space *mapping, loff_t to)
++static void f2fs_write_failed(struct inode *inode, loff_t to)
+ {
+-	struct inode *inode = mapping->host;
+ 	loff_t i_size = i_size_read(inode);
+ 
+ 	if (IS_NOQUOTA(inode))
+@@ -3410,7 +3409,7 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
+ 
+ fail:
+ 	f2fs_put_page(page, 1);
+-	f2fs_write_failed(mapping, pos + len);
++	f2fs_write_failed(inode, pos + len);
+ 	if (drop_atomic)
+ 		f2fs_drop_inmem_pages_all(sbi, false);
+ 	return err;
+@@ -3600,7 +3599,7 @@ static ssize_t f2fs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
+ 			f2fs_update_iostat(F2FS_I_SB(inode), APP_DIRECT_IO,
+ 						count - iov_iter_count(iter));
+ 		} else if (err < 0) {
+-			f2fs_write_failed(mapping, offset + count);
++			f2fs_write_failed(inode, offset + count);
+ 		}
+ 	} else {
+ 		if (err > 0)
 -- 
 2.32.0
 
