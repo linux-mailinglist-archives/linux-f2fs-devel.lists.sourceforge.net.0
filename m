@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 154593CEAF9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jul 2021 20:28:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EDC03CEB09
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jul 2021 20:36:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m5Xzz-0007r2-S6; Mon, 19 Jul 2021 18:28:15 +0000
+	id 1m5Y87-0005HF-Iw; Mon, 19 Jul 2021 18:36:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1m5Xzy-0007qw-Te
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 18:28:14 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1m5Y85-0005Gv-NB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 18:36:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=o+CFPIqLCLPad/vUJbkWWBaI0/gUHFgn7UugsChIPlg=; b=dG5RBHweVGT6arqg/UGTX6VKF3
- 62A86rTfZJdL4N9Is7wTILCjvCS8TUVUzQhBPcnlpYnGT2/4WCVKtgY3FOvyO4mHVn+SdKMwbI7Pt
- 1n0OCywTJVcPiZ9gIiSAY2KWVdI80gJjT657mpypBqRPWhuhOChQ1olhGOmLtHlLrRlQ=;
+ bh=Nx0FXOxfonTc/TLpSWhMmRoQvgeM5SMnbdUWBfl4DZY=; b=MlmxZh5VN1ZyTvri86Zr9LO0pG
+ vFFAiBQMvVkfacm/Hr9ApULt1q+OHXY8T6Wst4DJ/YRLeqB+e66Ra1JDzWiRO3b/U9RYyLAMWynDX
+ iDiTTP5dsLrHmfejpoB0yOM7nLBT0xNGmSPyE96z9VI6oNdeSue7Q8+WgdntHf8gRdYY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,35 +29,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=o+CFPIqLCLPad/vUJbkWWBaI0/gUHFgn7UugsChIPlg=; b=fUN3X2tEmo6KWkDP8YqH/4E01a
- IVpAU+cfy7g/rI8T2oCwkks+4EGVK1w0VnfuKnkDYymOV+JxOIRbG/f6ehKpGsd2EnXPl0gDzyi4X
- PpPWbcxp+JimK5fAOqFMn+9QhfphkOjXZ9OCHLYZl8gs0pjHchDo5dhMMroey+JPIzkM=;
+ bh=Nx0FXOxfonTc/TLpSWhMmRoQvgeM5SMnbdUWBfl4DZY=; b=W4wOTscdf2pgzxPamBlm6VcMy5
+ K2zAQI/IZIVuxgmsu3Fo4brGI/5TFmDosCyTVN/JydhYZCfueEHRSY5Ei9rN6pCWST8oOucVGznGK
+ xxCKC6gkLlhoFe/AgpjvzXfMGRkWD8PEv/2Tvvk3tQ72zZmh5H2J2/QpKmy310+sYZmQ=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m5Xzs-00DtTJ-AE
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 18:28:14 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B121C610FB;
- Mon, 19 Jul 2021 18:28:02 +0000 (UTC)
+ id 1m5Y83-00Dtiu-4i
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 18:36:37 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9322161003;
+ Mon, 19 Jul 2021 18:36:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626719282;
- bh=0sxDTKuzMH5LRU9yn81JSKxB0IFa5jilKBjNi76HKGI=;
+ s=k20201202; t=1626719789;
+ bh=y4AfL6TIrX1EhPt8S66NNQQyYaRaoJ6rWyELkXF5yYI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Pb74NKvHOWrZ+tcjy3xo6ajtnQ3h8TfKH0NM2pwMApiV9m7PYeyqAb8OelS78/V3k
- MegyK15fdxqbWpotdLfZuXhExc/dB7csYzj7JOdxRXk8Wp9Ktu4G3igxLFXsJGrCyk
- K62abEorRM5Og365O4p0726I5ou3Kw7mETE8CloK+KuKrcxW7+pMAPdeLxjUeX6rQh
- Dj1ttfQ7F+hisLFVJKvfhq7B+KjwWeR38KC2WueMVXnem98tgmx+shIY/FOTxAWvlE
- QAD4GAte8wBzo/bk6zf9zpa5steQeoTvAzb8xUjrilFlP+B2GdT6nIKgrjMZ++xFIi
- ujTsIEk1s1bxw==
-Date: Mon, 19 Jul 2021 11:28:01 -0700
+ b=N0RPd/Hgi3fjjiaTdo057H/lykPpzcUqv3uMPJNLQC8+iv06A+tKG3b1gfDwy5I9/
+ 2E5iqXO/Yzdmgvj39RI+GkkK8EYgdwcctAVE0WMmDmeQtwRaI13bseQh9cqbmMtlgT
+ ObrUlebXdg1Iyb1d/hTGnFvzh0f18a2KXDg0xDrwxE8d8EMTA6B+W4a06ur9g+HHyi
+ 8+JF6yDI/OoLknnckcd8KtwZctDDuBVu+BlwllDlwidmiXRIYAYLmuIYESE6mEDRcM
+ 0hoieGmWjOz9glZzPPAfuO2xCF5d8IwujsmO4cwoYU7qmTqNJFFF/jcXCHCD91O9QT
+ o41un9qCrkwvA==
+Date: Mon, 19 Jul 2021 11:36:28 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YPXEMU8nQdv8n4Dg@google.com>
-References: <20210719084729.26117-1-chao@kernel.org>
+Message-ID: <YPXGLOhWyiXk74Ka@google.com>
+References: <20210707015815.1978-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210719084729.26117-1-chao@kernel.org>
-X-Spam-Score: -1.2 (-)
+In-Reply-To: <20210707015815.1978-1-chao@kernel.org>
+X-Spam-Score: -1.3 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -69,8 +69,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
  0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m5Xzs-00DtTJ-AE
-Subject: Re: [f2fs-dev] [PATCH] f2fs: multidevice: support direct IO
+X-Headers-End: 1m5Y83-00Dtiu-4i
+Subject: Re: [f2fs-dev] [RFC NO MERGE] f2fs: extent cache: support unaligned
+ extent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -88,310 +89,464 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/19, Chao Yu wrote:
-> Commit 3c62be17d4f5 ("f2fs: support multiple devices") missed
-> to support direct IO for multiple device feature, this patch
-> adds to support the missing part of multidevice feature.
+On 07/07, Chao Yu wrote:
+> Compressed inode may suffer read performance issue due to it can not
+> use extent cache, so I propose to add this unaligned extent support
+> to improve it.
 > 
-> In addition, for multiple device image, we should be aware of
-> any issued direct write IO rather than just buffered write IO,
-> so that fsync and syncfs can issue a preflush command to the
-> device where direct write IO goes, to persist user data for
-> posix compliant.
+> Currently, it only works in readonly format f2fs image.
+> 
+> Unaligned extent: in one compressed cluster, physical block number
+> will be less than logical block number, so we add an extra physical
+> block length in extent info in order to indicate such extent status.
+> 
+> The idea is if one whole cluster blocks are contiguous physically,
+> once its mapping info was readed at first time, we will cache an
+> unaligned (or aligned) extent info entry in extent cache, it expects
+> that the mapping info will be hitted when rereading cluster.
 
-Is this aligned to Eric's iomap work?
+How about just modifying to handle COMPRESS_ADDR when modifying the extent_cache
+like RO case?
 
+> 
+> Merge policy:
+> - Aligned extents can be merged.
+> - Aligned extent and unaligned extent can not be merged.
 > 
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/data.c    | 52 +++++++++++++++++++++++++++++++++++++++++++++--
->  fs/f2fs/f2fs.h    | 24 +++++++++++++++++++---
->  fs/f2fs/segment.c | 29 +++++++++++++-------------
->  fs/f2fs/super.c   |  7 +++++++
->  4 files changed, 93 insertions(+), 19 deletions(-)
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 095350ccf80d..be65dca0de40 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1451,10 +1451,16 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->  	struct extent_info ei = {0,0,0};
->  	block_t blkaddr;
->  	unsigned int start_pgofs;
-> +	int bidx = 0;
-> +	bool multidevice_dio;
+> I just post this for comments, it passes compiling, w/o any test.
+> 
+>  fs/f2fs/compress.c     | 25 ++++++++++++
+>  fs/f2fs/data.c         | 38 +++++++++++++-----
+>  fs/f2fs/extent_cache.c | 90 +++++++++++++++++++++++++++++++++++++-----
+>  fs/f2fs/f2fs.h         | 33 +++++++++++++---
+>  fs/f2fs/node.c         | 20 ++++++++++
+>  5 files changed, 181 insertions(+), 25 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 455561826c7d..f072ac33eba5 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1666,6 +1666,31 @@ void f2fs_put_page_dic(struct page *page)
+>  	f2fs_put_dic(dic);
+>  }
 >  
->  	if (!maxblocks)
->  		return 0;
->  
-> +	multidevice_dio = f2fs_allow_multi_device_dio(sbi, flag);
-> +	if (multidevice_dio)
-> +		map->m_bdev = sbi->sb->s_bdev;
+> +/*
+> + * check whether cluster blocks are contiguous, and add extent cache entry
+> + * only if cluster blocks are logically and physically contiguous.
+> + */
+> +int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn)
+> +{
+> +	bool compressed = f2fs_data_blkaddr(dn) == COMPRESS_ADDR;
+> +	int i = compressed ? 1 : 0;
+> +	block_t first_blkaddr = data_blkaddr(dn->inode, dn->node_page,
+> +						dn->ofs_in_node + i);
 > +
->  	map->m_len = 0;
->  	map->m_flags = 0;
->  
-> @@ -1477,6 +1483,16 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->  		if (flag == F2FS_GET_BLOCK_DIO)
->  			f2fs_wait_on_block_writeback_range(inode,
->  						map->m_pblk, map->m_len);
+> +	for (i += 1; i < F2FS_I(dn->inode)->i_cluster_size; i++) {
+> +		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
+> +						dn->ofs_in_node + i);
 > +
-> +		if (multidevice_dio) {
-> +			bidx = f2fs_target_device_index(sbi, map->m_pblk);
-> +			if (bidx) {
-> +				map->m_bdev = FDEV(bidx).bdev;
-> +				map->m_pblk -= FDEV(bidx).start_blk;
-> +				map->m_len = min(map->m_len,
-> +					FDEV(bidx).end_blk + 1 - map->m_pblk);
-> +			}
-> +		}
->  		goto out;
->  	}
->  
-> @@ -1574,6 +1590,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->  	if (flag == F2FS_GET_BLOCK_PRE_AIO)
->  		goto skip;
->  
-> +	if (multidevice_dio)
-> +		bidx = f2fs_target_device_index(sbi, blkaddr);
-> +
->  	if (map->m_len == 0) {
->  		/* preallocated unwritten block should be mapped for fiemap. */
->  		if (blkaddr == NEW_ADDR)
-> @@ -1582,10 +1601,15 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->  
->  		map->m_pblk = blkaddr;
->  		map->m_len = 1;
-> +
-> +		if (multidevice_dio && map->m_bdev != FDEV(bidx).bdev)
-> +			map->m_bdev = FDEV(bidx).bdev;
->  	} else if ((map->m_pblk != NEW_ADDR &&
->  			blkaddr == (map->m_pblk + ofs)) ||
->  			(map->m_pblk == NEW_ADDR && blkaddr == NEW_ADDR) ||
->  			flag == F2FS_GET_BLOCK_PRE_DIO) {
-> +		if (multidevice_dio && map->m_bdev != FDEV(bidx).bdev)
-> +			goto sync_out;
->  		ofs++;
->  		map->m_len++;
->  	} else {
-> @@ -1638,11 +1662,27 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->  
->  sync_out:
->  
-> -	/* for hardware encryption, but to avoid potential issue in future */
-> -	if (flag == F2FS_GET_BLOCK_DIO && map->m_flags & F2FS_MAP_MAPPED)
-> +	if (flag == F2FS_GET_BLOCK_DIO && map->m_flags & F2FS_MAP_MAPPED) {
-> +		/*
-> +		 * for hardware encryption, but to avoid potential issue
-> +		 * in future
-> +		 */
->  		f2fs_wait_on_block_writeback_range(inode,
->  						map->m_pblk, map->m_len);
->  
-> +		if (multidevice_dio) {
-> +			bidx = f2fs_target_device_index(sbi, map->m_pblk);
-> +			if (bidx) {
-> +				map->m_bdev = FDEV(bidx).bdev;
-> +				map->m_pblk -= FDEV(bidx).start_blk;
-> +				f2fs_bug_on(sbi,
-> +					map->m_bdev != FDEV(bidx).bdev ||
-> +					map->m_pblk + map->m_len >
-> +						FDEV(bidx).end_blk + 1);
-> +			}
-> +		}
+> +		if (!__is_valid_data_blkaddr(blkaddr))
+> +			break;
+> +		if (first_blkaddr + i - 1 != blkaddr)
+> +			return 0;
 > +	}
 > +
->  	if (flag == F2FS_GET_BLOCK_PRECACHE) {
->  		if (map->m_flags & F2FS_MAP_MAPPED) {
->  			unsigned int ofs = start_pgofs - map->m_lblk;
-> @@ -1720,6 +1760,9 @@ static int __get_data_block(struct inode *inode, sector_t iblock,
->  		map_bh(bh, inode->i_sb, map.m_pblk);
->  		bh->b_state = (bh->b_state & ~F2FS_MAP_FLAGS) | map.m_flags;
->  		bh->b_size = blks_to_bytes(inode, map.m_len);
-> +
-> +		if (f2fs_allow_multi_device_dio(F2FS_I_SB(inode), flag))
-> +			bh->b_bdev = map.m_bdev;
->  	}
->  	return err;
->  }
-> @@ -3511,6 +3554,7 @@ static void f2fs_dio_submit_bio(struct bio *bio, struct inode *inode,
->  {
->  	struct f2fs_private_dio *dio;
->  	bool write = (bio_op(bio) == REQ_OP_WRITE);
-> +	block_t blkaddr = SECTOR_TO_BLOCK(bio->bi_iter.bi_sector);
->  	unsigned int blkcnt = bio_sectors(bio) >> F2FS_LOG_SECTORS_PER_BLOCK;
->  
->  	dio = f2fs_kzalloc(F2FS_I_SB(inode),
-> @@ -3527,6 +3571,10 @@ static void f2fs_dio_submit_bio(struct bio *bio, struct inode *inode,
->  	bio->bi_end_io = f2fs_dio_end_io;
->  	bio->bi_private = dio;
->  
-> +	if (write)
-> +		f2fs_update_device_state(F2FS_I_SB(inode), inode->i_ino,
-> +							blkaddr, blkcnt);
-> +
->  	inc_page_counts(F2FS_I_SB(inode),
->  			write ? F2FS_DIO_WRITE : F2FS_DIO_READ, dio->blkcnt);
->  
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 7369f8087f64..f3ac3cbad2e3 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -607,6 +607,7 @@ struct extent_tree {
->  				F2FS_MAP_UNWRITTEN)
->  
->  struct f2fs_map_blocks {
-> +	struct block_device *m_bdev;	/* for multi-device */
->  	block_t m_pblk;
->  	block_t m_lblk;
->  	unsigned int m_len;
-> @@ -1712,12 +1713,15 @@ struct f2fs_sb_info {
->  
->  	/* For shrinker support */
->  	struct list_head s_list;
-> +	struct mutex umount_mutex;
-> +	unsigned int shrinker_run_no;
-> +
-> +	/* For multi devices */
->  	int s_ndevs;				/* number of devices */
->  	struct f2fs_dev_info *devs;		/* for device list */
->  	unsigned int dirty_device;		/* for checkpoint data flush */
->  	spinlock_t dev_lock;			/* protect dirty_device */
-> -	struct mutex umount_mutex;
-> -	unsigned int shrinker_run_no;
-> +	bool aligned_blksize;			/* all devices has the same logical blksize */
->  
->  	/* For write statistics */
->  	u64 sectors_written_start;
-> @@ -3527,6 +3531,8 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->  			block_t old_blkaddr, block_t *new_blkaddr,
->  			struct f2fs_summary *sum, int type,
->  			struct f2fs_io_info *fio);
-> +void f2fs_update_device_state(struct f2fs_sb_info *sbi, nid_t ino,
-> +					block_t blkaddr, unsigned int blkcnt);
->  void f2fs_wait_on_page_writeback(struct page *page,
->  			enum page_type type, bool ordered, bool locked);
->  void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
-> @@ -4334,6 +4340,16 @@ static inline int allow_outplace_dio(struct inode *inode,
->  				!block_unaligned_IO(inode, iocb, iter));
->  }
->  
-> +static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
-> +								int flag)
-> +{
-> +	if (!f2fs_is_multi_device(sbi))
-> +		return false;
-> +	if (flag != F2FS_GET_BLOCK_DIO)
-> +		return false;
-> +	return sbi->aligned_blksize;
+> +	return compressed ? i - 1 : i;
 > +}
 > +
->  static inline bool f2fs_force_buffered_io(struct inode *inode,
->  				struct kiocb *iocb, struct iov_iter *iter)
->  {
-> @@ -4342,7 +4358,9 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
->  
->  	if (f2fs_post_read_required(inode))
->  		return true;
-> -	if (f2fs_is_multi_device(sbi))
 > +
-> +	/* disallow direct IO if any of devices has unaligned blksize */
-> +	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
->  		return true;
->  	/*
->  	 * for blkzoned device, fallback direct IO to buffered IO, so
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 15cc89eef28d..6fcfd234108a 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3442,24 +3442,24 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
->  	up_read(&SM_I(sbi)->curseg_lock);
->  }
->  
-> -static void update_device_state(struct f2fs_io_info *fio)
-> +void f2fs_update_device_state(struct f2fs_sb_info *sbi, nid_t ino,
-> +					block_t blkaddr, unsigned int blkcnt)
->  {
-> -	struct f2fs_sb_info *sbi = fio->sbi;
-> -	unsigned int devidx;
-> -
->  	if (!f2fs_is_multi_device(sbi))
->  		return;
->  
-> -	devidx = f2fs_target_device_index(sbi, fio->new_blkaddr);
-> +	for (; blkcnt > 0; blkcnt--, blkaddr++) {
-> +		unsigned int devidx = f2fs_target_device_index(sbi, blkaddr);
->  
-> -	/* update device state for fsync */
-> -	f2fs_set_dirty_device(sbi, fio->ino, devidx, FLUSH_INO);
-> +		/* update device state for fsync */
-> +		f2fs_set_dirty_device(sbi, ino, devidx, FLUSH_INO);
->  
-> -	/* update device state for checkpoint */
-> -	if (!f2fs_test_bit(devidx, (char *)&sbi->dirty_device)) {
-> -		spin_lock(&sbi->dev_lock);
-> -		f2fs_set_bit(devidx, (char *)&sbi->dirty_device);
-> -		spin_unlock(&sbi->dev_lock);
-> +		/* update device state for checkpoint */
-> +		if (!f2fs_test_bit(devidx, (char *)&sbi->dirty_device)) {
-> +			spin_lock(&sbi->dev_lock);
-> +			f2fs_set_bit(devidx, (char *)&sbi->dirty_device);
-> +			spin_unlock(&sbi->dev_lock);
-> +		}
->  	}
->  }
->  
-> @@ -3486,7 +3486,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
->  		goto reallocate;
->  	}
->  
-> -	update_device_state(fio);
-> +	f2fs_update_device_state(fio->sbi, fio->ino, fio->new_blkaddr, 1);
->  
->  	if (keep_order)
->  		up_read(&fio->sbi->io_order_lock);
-> @@ -3575,7 +3575,8 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
->  	else
->  		err = f2fs_submit_page_bio(fio);
->  	if (!err) {
-> -		update_device_state(fio);
-> +		f2fs_update_device_state(fio->sbi, fio->ino,
-> +						fio->new_blkaddr, 1);
->  		f2fs_update_iostat(fio->sbi, fio->io_type, F2FS_BLKSIZE);
->  	}
->  
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 72eb9d70969f..dced7778d530 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3646,6 +3646,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  {
->  	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
->  	unsigned int max_devices = MAX_DEVICES;
-> +	unsigned int logical_blksize;
+>  const struct address_space_operations f2fs_compress_aops = {
+>  	.releasepage = f2fs_release_page,
+>  	.invalidatepage = f2fs_invalidate_page,
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index d2cf48c5a2e4..9572d78da4d7 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2115,6 +2115,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  	sector_t last_block_in_file;
+>  	const unsigned blocksize = blks_to_bytes(inode, 1);
+>  	struct decompress_io_ctx *dic = NULL;
+> +	struct extent_info_unaligned eiu;
+> +	bool extent_cache = false;
 >  	int i;
+>  	int ret = 0;
 >  
->  	/* Initialize single device information */
-> @@ -3666,6 +3667,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  	if (!sbi->devs)
->  		return -ENOMEM;
+> @@ -2145,18 +2147,26 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  	if (f2fs_cluster_is_empty(cc))
+>  		goto out;
 >  
-> +	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
-> +	sbi->aligned_blksize = true;
+> -	set_new_dnode(&dn, inode, NULL, NULL, 0);
+> -	ret = f2fs_get_dnode_of_data(&dn, start_idx, LOOKUP_NODE);
+> -	if (ret)
+> -		goto out;
+> +	if (f2fs_lookup_extent_cache_unaligned(inode, start_idx, &eiu))
+> +		extent_cache = true;
+>  
+> -	f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
+> +	if (!extent_cache) {
+> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
+> +		ret = f2fs_get_dnode_of_data(&dn, start_idx, LOOKUP_NODE);
+> +		if (ret)
+> +			goto out;
 > +
->  	for (i = 0; i < max_devices; i++) {
+> +		f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
+> +	}
 >  
->  		if (i > 0 && !RDEV(i).path[0])
-> @@ -3702,6 +3706,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  		/* to release errored devices */
->  		sbi->s_ndevs = i + 1;
+>  	for (i = 1; i < cc->cluster_size; i++) {
+>  		block_t blkaddr;
 >  
-> +		if (logical_blksize != bdev_logical_block_size(FDEV(i).bdev))
-> +			sbi->aligned_blksize = false;
+> -		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+> -						dn.ofs_in_node + i);
+> +		if (extent_cache)
+> +			blkaddr = eiu.ei.blk + i;
+> +		else
+> +			blkaddr = data_blkaddr(dn.inode, dn.node_page,
+> +							dn.ofs_in_node + i);
+>  
+>  		if (!__is_valid_data_blkaddr(blkaddr))
+>  			break;
+> @@ -2166,6 +2176,9 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  			goto out_put_dnode;
+>  		}
+>  		cc->nr_cpages++;
 > +
->  #ifdef CONFIG_BLK_DEV_ZONED
->  		if (bdev_zoned_model(FDEV(i).bdev) == BLK_ZONED_HM &&
->  				!f2fs_sb_has_blkzoned(sbi)) {
+> +		if (extent_cache && i >= eiu.plen)
+> +			break;
+>  	}
+>  
+>  	/* nothing to decompress */
+> @@ -2185,7 +2198,10 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  		block_t blkaddr;
+>  		struct bio_post_read_ctx *ctx;
+>  
+> -		blkaddr = data_blkaddr(dn.inode, dn.node_page,
+> +		if (extent_cache)
+> +			blkaddr = eiu.plen + i + 1;
+> +		else
+> +			blkaddr = data_blkaddr(dn.inode, dn.node_page,
+>  						dn.ofs_in_node + i + 1);
+>  
+>  		f2fs_wait_on_block_writeback(inode, blkaddr);
+> @@ -2231,13 +2247,15 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  		*last_block_in_bio = blkaddr;
+>  	}
+>  
+> -	f2fs_put_dnode(&dn);
+> +	if (!extent_cache)
+> +		f2fs_put_dnode(&dn);
+>  
+>  	*bio_ret = bio;
+>  	return 0;
+>  
+>  out_put_dnode:
+> -	f2fs_put_dnode(&dn);
+> +	if (!extent_cache)
+> +		f2fs_put_dnode(&dn);
+>  out:
+>  	for (i = 0; i < cc->cluster_size; i++) {
+>  		if (cc->rpages[i]) {
+> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+> index 3ebf976a682d..db9de95f90dc 100644
+> --- a/fs/f2fs/extent_cache.c
+> +++ b/fs/f2fs/extent_cache.c
+> @@ -235,7 +235,7 @@ static struct kmem_cache *extent_node_slab;
+>  static struct extent_node *__attach_extent_node(struct f2fs_sb_info *sbi,
+>  				struct extent_tree *et, struct extent_info *ei,
+>  				struct rb_node *parent, struct rb_node **p,
+> -				bool leftmost)
+> +				bool leftmost, bool unaligned)
+>  {
+>  	struct extent_node *en;
+>  
+> @@ -247,6 +247,11 @@ static struct extent_node *__attach_extent_node(struct f2fs_sb_info *sbi,
+>  	INIT_LIST_HEAD(&en->list);
+>  	en->et = et;
+>  
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	if (unaligned)
+> +		en->plen = ((struct extent_info_unaligned *)ei)->plen;
+> +#endif
+> +
+>  	rb_link_node(&en->rb_node, parent, p);
+>  	rb_insert_color_cached(&en->rb_node, &et->root, leftmost);
+>  	atomic_inc(&et->node_cnt);
+> @@ -320,7 +325,7 @@ static struct extent_node *__init_extent_tree(struct f2fs_sb_info *sbi,
+>  	struct rb_node **p = &et->root.rb_root.rb_node;
+>  	struct extent_node *en;
+>  
+> -	en = __attach_extent_node(sbi, et, ei, NULL, p, true);
+> +	en = __attach_extent_node(sbi, et, ei, NULL, p, true, false);
+>  	if (!en)
+>  		return NULL;
+>  
+> @@ -439,6 +444,17 @@ static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
+>  		stat_inc_rbtree_node_hit(sbi);
+>  
+>  	*ei = en->ei;
+> +
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE) &&
+> +				!f2fs_sb_has_readonly(sbi)) {
+> +		struct extent_info_unaligned *eiu =
+> +				(struct extent_info_unaligned *)ei;
+> +
+> +		eiu->plen = en->plen;
+> +	}
+> +#endif
+> +
+>  	spin_lock(&sbi->extent_lock);
+>  	if (!list_empty(&en->list)) {
+>  		list_move_tail(&en->list, &sbi->extent_list);
+> @@ -457,17 +473,18 @@ static bool f2fs_lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
+>  static struct extent_node *__try_merge_extent_node(struct f2fs_sb_info *sbi,
+>  				struct extent_tree *et, struct extent_info *ei,
+>  				struct extent_node *prev_ex,
+> -				struct extent_node *next_ex)
+> +				struct extent_node *next_ex,
+> +				bool unaligned)
+>  {
+>  	struct extent_node *en = NULL;
+>  
+> -	if (prev_ex && __is_back_mergeable(ei, &prev_ex->ei)) {
+> +	if (prev_ex && __is_back_mergeable(ei, &prev_ex->ei, unaligned)) {
+>  		prev_ex->ei.len += ei->len;
+>  		ei = &prev_ex->ei;
+>  		en = prev_ex;
+>  	}
+>  
+> -	if (next_ex && __is_front_mergeable(ei, &next_ex->ei)) {
+> +	if (next_ex && __is_front_mergeable(ei, &next_ex->ei, unaligned)) {
+>  		next_ex->ei.fofs = ei->fofs;
+>  		next_ex->ei.blk = ei->blk;
+>  		next_ex->ei.len += ei->len;
+> @@ -495,7 +512,7 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
+>  				struct extent_tree *et, struct extent_info *ei,
+>  				struct rb_node **insert_p,
+>  				struct rb_node *insert_parent,
+> -				bool leftmost)
+> +				bool leftmost, bool unaligned)
+>  {
+>  	struct rb_node **p;
+>  	struct rb_node *parent = NULL;
+> @@ -512,7 +529,7 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
+>  	p = f2fs_lookup_rb_tree_for_insert(sbi, &et->root, &parent,
+>  						ei->fofs, &leftmost);
+>  do_insert:
+> -	en = __attach_extent_node(sbi, et, ei, parent, p, leftmost);
+> +	en = __attach_extent_node(sbi, et, ei, parent, p, leftmost, unaligned);
+>  	if (!en)
+>  		return NULL;
+>  
+> @@ -594,7 +611,7 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
+>  						end - dei.fofs + dei.blk,
+>  						org_end - end);
+>  				en1 = __insert_extent_tree(sbi, et, &ei,
+> -							NULL, NULL, true);
+> +						NULL, NULL, true, false);
+>  				next_en = en1;
+>  			} else {
+>  				en->ei.fofs = end;
+> @@ -633,9 +650,10 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
+>  	if (blkaddr) {
+>  
+>  		set_extent_info(&ei, fofs, blkaddr, len);
+> -		if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
+> +		if (!__try_merge_extent_node(sbi, et, &ei,
+> +					prev_en, next_en, false))
+>  			__insert_extent_tree(sbi, et, &ei,
+> -					insert_p, insert_parent, leftmost);
+> +				insert_p, insert_parent, leftmost, false);
+>  
+>  		/* give up extent_cache, if split and small updates happen */
+>  		if (dei.len >= 1 &&
+> @@ -661,6 +679,47 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
+>  		f2fs_mark_inode_dirty_sync(inode, true);
+>  }
+>  
+> +void f2fs_update_extent_tree_range_unaligned(struct inode *inode,
+> +				pgoff_t fofs, block_t blkaddr, unsigned int llen,
+> +				unsigned int plen)
+> +{
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	struct extent_tree *et = F2FS_I(inode)->extent_tree;
+> +	struct extent_node *en = NULL;
+> +	struct extent_node *prev_en = NULL, *next_en = NULL;
+> +	struct extent_info_unaligned eiu;
+> +	struct rb_node **insert_p = NULL, *insert_parent = NULL;
+> +	bool leftmost = false;
+> +
+> +	trace_f2fs_update_extent_tree_range(inode, fofs, blkaddr, llen);
+> +
+> +	write_lock(&et->lock);
+> +
+> +	if (is_inode_flag_set(inode, FI_NO_EXTENT)) {
+> +		write_unlock(&et->lock);
+> +		return;
+> +	}
+> +
+> +	en = (struct extent_node *)f2fs_lookup_rb_tree_ret(&et->root,
+> +				(struct rb_entry *)et->cached_en, fofs,
+> +				(struct rb_entry **)&prev_en,
+> +				(struct rb_entry **)&next_en,
+> +				&insert_p, &insert_parent, false,
+> +				&leftmost);
+> +	f2fs_bug_on(sbi, en);
+> +
+> +	set_extent_info(&eiu.ei, fofs, blkaddr, llen);
+> +	eiu.plen = plen;
+> +
+> +	if (!__try_merge_extent_node(sbi, et, (struct extent_info *)&eiu,
+> +				prev_en, next_en, true))
+> +		__insert_extent_tree(sbi, et, (struct extent_info *)&eiu,
+> +				insert_p, insert_parent, leftmost, true);
+> +
+> +	write_unlock(&et->lock);
+> +}
+> +
+> +
+>  unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+>  {
+>  	struct extent_tree *et, *next;
+> @@ -818,6 +877,17 @@ bool f2fs_lookup_extent_cache(struct inode *inode, pgoff_t pgofs,
+>  	return f2fs_lookup_extent_tree(inode, pgofs, ei);
+>  }
+>  
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +bool f2fs_lookup_extent_cache_unaligned(struct inode *inode, pgoff_t pgofs,
+> +					struct extent_info_unaligned *eiu)
+> +{
+> +	if (!f2fs_may_extent_tree(inode))
+> +		return false;
+> +
+> +	return f2fs_lookup_extent_tree(inode, pgofs, (struct extent_info *)eiu);
+> +}
+> +#endif
+> +
+>  void f2fs_update_extent_cache(struct dnode_of_data *dn)
+>  {
+>  	pgoff_t fofs;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 0fe239dd50f4..3a02642a26d4 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -578,11 +578,21 @@ struct extent_info {
+>  	u32 blk;			/* start block address of the extent */
+>  };
+>  
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +struct extent_info_unaligned {
+> +	struct extent_info ei;		/* extent info */
+> +	unsigned int plen;		/* physical extent length of compressed blocks */
+> +};
+> +#endif
+> +
+>  struct extent_node {
+>  	struct rb_node rb_node;		/* rb node located in rb-tree */
+>  	struct extent_info ei;		/* extent info */
+>  	struct list_head list;		/* node in global extent list of sbi */
+>  	struct extent_tree *et;		/* extent tree pointer */
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	unsigned int plen;		/* physical extent length of compressed blocks */
+> +#endif
+>  };
+>  
+>  struct extent_tree {
+> @@ -817,22 +827,29 @@ static inline bool __is_discard_front_mergeable(struct discard_info *cur,
+>  }
+>  
+>  static inline bool __is_extent_mergeable(struct extent_info *back,
+> -						struct extent_info *front)
+> +				struct extent_info *front, bool unaligned)
+>  {
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	struct extent_info_unaligned *be = (struct extent_info_unaligned *)back;
+> +	struct extent_info_unaligned *fe = (struct extent_info_unaligned *)front;
+> +
+> +	if (!unaligned || be->ei.len != be->plen || fe->ei.len != fe->plen)
+> +		return false;
+> +#endif
+>  	return (back->fofs + back->len == front->fofs &&
+>  			back->blk + back->len == front->blk);
+>  }
+>  
+>  static inline bool __is_back_mergeable(struct extent_info *cur,
+> -						struct extent_info *back)
+> +				struct extent_info *back, bool unaligned)
+>  {
+> -	return __is_extent_mergeable(back, cur);
+> +	return __is_extent_mergeable(back, cur, unaligned);
+>  }
+>  
+>  static inline bool __is_front_mergeable(struct extent_info *cur,
+> -						struct extent_info *front)
+> +				struct extent_info *front, bool unaligned)
+>  {
+> -	return __is_extent_mergeable(cur, front);
+> +	return __is_extent_mergeable(cur, front, unaligned);
+>  }
+>  
+>  extern void f2fs_mark_inode_dirty_sync(struct inode *inode, bool sync);
+> @@ -3972,6 +3989,9 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
+>  		bool force, bool *leftmost);
+>  bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+>  				struct rb_root_cached *root, bool check_key);
+> +void f2fs_update_extent_tree_range_unaligned(struct inode *inode,
+> +				pgoff_t fofs, block_t blkaddr, unsigned int llen,
+> +				unsigned int plen);
+>  unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink);
+>  void f2fs_init_extent_tree(struct inode *inode, struct page *ipage);
+>  void f2fs_drop_extent_tree(struct inode *inode);
+> @@ -3979,6 +3999,8 @@ unsigned int f2fs_destroy_extent_node(struct inode *inode);
+>  void f2fs_destroy_extent_tree(struct inode *inode);
+>  bool f2fs_lookup_extent_cache(struct inode *inode, pgoff_t pgofs,
+>  			struct extent_info *ei);
+> +bool f2fs_lookup_extent_cache_unaligned(struct inode *inode, pgoff_t pgofs,
+> +					struct extent_info_unaligned *eiu);
+>  void f2fs_update_extent_cache(struct dnode_of_data *dn);
+>  void f2fs_update_extent_cache_range(struct dnode_of_data *dn,
+>  			pgoff_t fofs, block_t blkaddr, unsigned int len);
+> @@ -4055,6 +4077,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc);
+>  void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed);
+>  void f2fs_put_page_dic(struct page *page);
+> +int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn);
+>  int f2fs_init_compress_ctx(struct compress_ctx *cc);
+>  void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse);
+>  void f2fs_init_compress_info(struct f2fs_sb_info *sbi);
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index dd611efa8aa4..7be2b01caa2a 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -832,6 +832,26 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+>  	dn->ofs_in_node = offset[level];
+>  	dn->node_page = npage[level];
+>  	dn->data_blkaddr = f2fs_data_blkaddr(dn);
+> +
+> +#ifdef CONFIG_F2FS_FS_COMPRESSION
+> +	if (is_inode_flag_set(dn->inode, FI_COMPRESSED_FILE) &&
+> +			!f2fs_sb_has_readonly(sbi)) {
+> +		int blknum = f2fs_cluster_blocks_are_contiguous(dn);
+> +
+> +		if (blknum) {
+> +			block_t blkaddr = f2fs_data_blkaddr(dn);
+> +
+> +			if (blkaddr == COMPRESS_ADDR)
+> +				blkaddr = data_blkaddr(dn->inode, dn->node_page,
+> +							dn->ofs_in_node + 1);
+> +
+> +			f2fs_update_extent_tree_range_unaligned(dn->inode,
+> +					index, blkaddr,
+> +					F2FS_I(dn->inode)->i_cluster_size,
+> +					blknum);
+> +		}
+> +	}
+> +#endif
+>  	return 0;
+>  
+>  release_pages:
 > -- 
 > 2.22.1
 
