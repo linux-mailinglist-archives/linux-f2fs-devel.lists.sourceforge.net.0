@@ -2,73 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72E473CCF71
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jul 2021 10:47:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id F24CB3CCF6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jul 2021 10:45:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m5OwG-0005hU-77; Mon, 19 Jul 2021 08:47:48 +0000
+	id 1m5OuG-0002Lj-AJ; Mon, 19 Jul 2021 08:45:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1m5OwE-0005hK-OA
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 08:47:46 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <wangxiaojun11@huawei.com>) id 1m5OuF-0002L5-2S
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 08:45:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mBjq/SbqhP2+l7NFdW4jwEgSmXTGpzwTyh9Lq8m/ZH8=; b=hlaSIiCsa8sEP+ar//UuFqWiEH
- CFZJy9Dq7iu6zP1fUp6jKfymb087CyFs1boAogST0ByFpfLoPOxUAzCZnQhZb2i8e4LNQ+6aJXNoo
- CP8ACAKAt153cOmiJnnnwRGBXOXMi+wNPT1Y5psreIeNWjjOtqiUVDDP8TScUGRRcItE=;
+ bh=juhCzcXLoRq50iZRgwX4b5jTZOUsm14Eim43JPBzCKQ=; b=LZWYgjPGFBLguyKQYfP+2PMDuw
+ ycmNbsFuf2eIgMBCHJHPjW0MImDvx8HhRBjzB/VyjzFINeZ6zm8zd4H5L/rfn3/K8aNSFEzkHC9mu
+ ItdhtpPmV1piaJcXH3M76qSIn/6rkAM5B9l6HHR7wtwDEw6P1qbaUZu0OSAGjNHuqhj4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=mBjq/SbqhP2+l7NFdW4jwEgSmXTGpzwTyh9Lq8m/ZH8=; b=X
- fk7DD0qYJzHK2Ozi9eCNpNvB9udX3S3Pl0idtW4FqTw6iLJdkFlqSpBkNs6O4PcpzWdv+yNRFATi5
- 6M38paWIk4thLn/UVdXBdAHRoC1KFONYXfdYbsJN5FOd6Za4iz7xuZ1iIEUHnYzw2HSzCAs7taBXl
- eF9uuuDGZGS/gRfI=;
-Received: from mail.kernel.org ([198.145.29.99])
+ List-Owner:List-Archive; bh=juhCzcXLoRq50iZRgwX4b5jTZOUsm14Eim43JPBzCKQ=; b=Q
+ 50MOBq4jtYquw5Iw7HX+BLTDD9v/Cv+AHpePRuJSkJZWsbFwBdUuRIO7aj2dPD3Ubp57qe+vSfmZI
+ 35idIQjQ/bFTo01vCCfOk19o3/ZJGa5NwZBmVGuV+dv8xi1+8YT7Nahpyj+tahhyrP78pA7GMkUXI
+ bdL7mP3PPFypVHoM=;
+Received: from szxga01-in.huawei.com ([45.249.212.187])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m5Ow8-0004Hg-AP
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 08:47:46 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A189661009;
- Mon, 19 Jul 2021 08:47:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626684454;
- bh=Z8QxgJGFP3p/nfg2SDMpVEKedbs0kk0rI6anNltZnjo=;
- h=From:To:Cc:Subject:Date:From;
- b=R1unZ01KJujtGTmo/J9J6hR8G0lo1mUHWxkHcROjETXmAY3mOFr8wU7azwnyqvsrA
- bnwio/yvyJf8bAIW7xjuExhrcY709L88xKdffd72aVGMQzNXOq8ucpviRTUzFkh89G
- rhh9XHEulz76ULCMS6hNKcuJ88eBERIljROHIz0LSpLferHS2XwUFPrdMsaM0Wfkbk
- MDOQfY894w4x644N+tZcem2Aeb+76QQyNBS2PoZVKsbA2CeuwvIYE57vUHjJGkkneZ
- WtCwbZsy1OzIB6i8ArNvEPp1nhZL8HQRmut1kULhCxYma7tCwvE9M/IWRizH8VSvHy
- OcRM8B7H5Yy7Q==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Mon, 19 Jul 2021 16:47:29 +0800
-Message-Id: <20210719084729.26117-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.1
+ id 1m5Ou2-00048B-Of
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 19 Jul 2021 08:45:42 +0000
+Received: from dggeml756-chm.china.huawei.com (unknown [172.30.72.54])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4GSwLx4VW3zZqq7;
+ Mon, 19 Jul 2021 16:42:01 +0800 (CST)
+Received: from huawei.com (10.175.101.6) by dggeml756-chm.china.huawei.com
+ (10.1.199.158) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Mon, 19
+ Jul 2021 16:45:22 +0800
+From: Wang Xiaojun <wangxiaojun11@huawei.com>
+To: <chao@kernel.org>, <jaegeuk@kernel.org>
+Date: Mon, 19 Jul 2021 16:52:27 +0800
+Message-ID: <20210719085227.172254-1-wangxiaojun11@huawei.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-Spam-Score: -1.3 (-)
+X-Originating-IP: [10.175.101.6]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggeml756-chm.china.huawei.com (10.1.199.158)
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.187 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m5Ow8-0004Hg-AP
-Subject: [f2fs-dev] [PATCH] f2fs: multidevice: support direct IO
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m5Ou2-00048B-Of
+Subject: [f2fs-dev] [PATCH v2] f2fs-tools: rebuild the quota inode if it is
+ corrupted
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,314 +77,241 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Commit 3c62be17d4f5 ("f2fs: support multiple devices") missed
-to support direct IO for multiple device feature, this patch
-adds to support the missing part of multidevice feature.
+If the following process returns an error,
+the quota inode, not the quota file, is damaged.
+(fsck_chk_quota_node-->fsck_chk_node_blk-->sanity_check_nid)
+The fsck does not have a process to rebuild the quota inode.
 
-In addition, for multiple device image, we should be aware of
-any issued direct write IO rather than just buffered write IO,
-so that fsync and syncfs can issue a preflush command to the
-device where direct write IO goes, to persist user data for
-posix compliant.
+Because sanity_check_nid is not passed, fsck->nat_area_bitmap
+can not be cleared, and then the NAT of quota will be nullify
+during fix_nat_entries.
 
-Signed-off-by: Chao Yu <chao@kernel.org>
+During the next fsck check, the quota inode check fails
+because the address of the quota inode changes to 0.
+In addition, in fsck_chk_quota_files-->f2fs_filesize_update,
+data is written to address 0.
+
+Therefore, when the quota inode is corrupted, we need to rebuild it.
+
+Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
 ---
- fs/f2fs/data.c    | 52 +++++++++++++++++++++++++++++++++++++++++++++--
- fs/f2fs/f2fs.h    | 24 +++++++++++++++++++---
- fs/f2fs/segment.c | 29 +++++++++++++-------------
- fs/f2fs/super.c   |  7 +++++++
- 4 files changed, 93 insertions(+), 19 deletions(-)
+v1->v2:
+-Update footer.cp_ver based on CP_CRC_RECOVERY_FLAG.
+-Add debug message in f2fs_rebuild_qf_inode.
+-Add time_t parameter to the f2fs_init_qf_inode.
+---
+ fsck/fsck.c        |  2 ++
+ fsck/fsck.h        |  1 +
+ fsck/node.c        | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ include/f2fs_fs.h  | 40 ++++++++++++++++++++++++++++++++++++++++
+ mkfs/f2fs_format.c | 34 +---------------------------------
+ 5 files changed, 89 insertions(+), 33 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 095350ccf80d..be65dca0de40 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1451,10 +1451,16 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 	struct extent_info ei = {0,0,0};
- 	block_t blkaddr;
- 	unsigned int start_pgofs;
-+	int bidx = 0;
-+	bool multidevice_dio;
- 
- 	if (!maxblocks)
- 		return 0;
- 
-+	multidevice_dio = f2fs_allow_multi_device_dio(sbi, flag);
-+	if (multidevice_dio)
-+		map->m_bdev = sbi->sb->s_bdev;
-+
- 	map->m_len = 0;
- 	map->m_flags = 0;
- 
-@@ -1477,6 +1483,16 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 		if (flag == F2FS_GET_BLOCK_DIO)
- 			f2fs_wait_on_block_writeback_range(inode,
- 						map->m_pblk, map->m_len);
-+
-+		if (multidevice_dio) {
-+			bidx = f2fs_target_device_index(sbi, map->m_pblk);
-+			if (bidx) {
-+				map->m_bdev = FDEV(bidx).bdev;
-+				map->m_pblk -= FDEV(bidx).start_blk;
-+				map->m_len = min(map->m_len,
-+					FDEV(bidx).end_blk + 1 - map->m_pblk);
-+			}
-+		}
- 		goto out;
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 6ca85f0..af6d332 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -1899,6 +1899,8 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
+ 			ASSERT_MSG("wrong quota inode, qtype [%d] ino [0x%x]",
+ 								qtype, ino);
+ 			qf_szchk_type[qtype] = QF_SZCHK_ERR;
++			if (c.fix_on)
++				f2fs_rebuild_qf_inode(sbi, qtype);
+ 		}
  	}
+ 	cur_qtype = -1;
+diff --git a/fsck/fsck.h b/fsck/fsck.h
+index d79afef..67390f0 100644
+--- a/fsck/fsck.h
++++ b/fsck/fsck.h
+@@ -286,6 +286,7 @@ void f2fs_alloc_nid(struct f2fs_sb_info *, nid_t *);
+ void set_data_blkaddr(struct dnode_of_data *);
+ block_t new_node_block(struct f2fs_sb_info *,
+ 					struct dnode_of_data *, unsigned int);
++int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype);
  
-@@ -1574,6 +1590,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 	if (flag == F2FS_GET_BLOCK_PRE_AIO)
- 		goto skip;
- 
-+	if (multidevice_dio)
-+		bidx = f2fs_target_device_index(sbi, blkaddr);
-+
- 	if (map->m_len == 0) {
- 		/* preallocated unwritten block should be mapped for fiemap. */
- 		if (blkaddr == NEW_ADDR)
-@@ -1582,10 +1601,15 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 
- 		map->m_pblk = blkaddr;
- 		map->m_len = 1;
-+
-+		if (multidevice_dio && map->m_bdev != FDEV(bidx).bdev)
-+			map->m_bdev = FDEV(bidx).bdev;
- 	} else if ((map->m_pblk != NEW_ADDR &&
- 			blkaddr == (map->m_pblk + ofs)) ||
- 			(map->m_pblk == NEW_ADDR && blkaddr == NEW_ADDR) ||
- 			flag == F2FS_GET_BLOCK_PRE_DIO) {
-+		if (multidevice_dio && map->m_bdev != FDEV(bidx).bdev)
-+			goto sync_out;
- 		ofs++;
- 		map->m_len++;
- 	} else {
-@@ -1638,11 +1662,27 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 
- sync_out:
- 
--	/* for hardware encryption, but to avoid potential issue in future */
--	if (flag == F2FS_GET_BLOCK_DIO && map->m_flags & F2FS_MAP_MAPPED)
-+	if (flag == F2FS_GET_BLOCK_DIO && map->m_flags & F2FS_MAP_MAPPED) {
-+		/*
-+		 * for hardware encryption, but to avoid potential issue
-+		 * in future
-+		 */
- 		f2fs_wait_on_block_writeback_range(inode,
- 						map->m_pblk, map->m_len);
- 
-+		if (multidevice_dio) {
-+			bidx = f2fs_target_device_index(sbi, map->m_pblk);
-+			if (bidx) {
-+				map->m_bdev = FDEV(bidx).bdev;
-+				map->m_pblk -= FDEV(bidx).start_blk;
-+				f2fs_bug_on(sbi,
-+					map->m_bdev != FDEV(bidx).bdev ||
-+					map->m_pblk + map->m_len >
-+						FDEV(bidx).end_blk + 1);
-+			}
-+		}
-+	}
-+
- 	if (flag == F2FS_GET_BLOCK_PRECACHE) {
- 		if (map->m_flags & F2FS_MAP_MAPPED) {
- 			unsigned int ofs = start_pgofs - map->m_lblk;
-@@ -1720,6 +1760,9 @@ static int __get_data_block(struct inode *inode, sector_t iblock,
- 		map_bh(bh, inode->i_sb, map.m_pblk);
- 		bh->b_state = (bh->b_state & ~F2FS_MAP_FLAGS) | map.m_flags;
- 		bh->b_size = blks_to_bytes(inode, map.m_len);
-+
-+		if (f2fs_allow_multi_device_dio(F2FS_I_SB(inode), flag))
-+			bh->b_bdev = map.m_bdev;
- 	}
- 	return err;
- }
-@@ -3511,6 +3554,7 @@ static void f2fs_dio_submit_bio(struct bio *bio, struct inode *inode,
- {
- 	struct f2fs_private_dio *dio;
- 	bool write = (bio_op(bio) == REQ_OP_WRITE);
-+	block_t blkaddr = SECTOR_TO_BLOCK(bio->bi_iter.bi_sector);
- 	unsigned int blkcnt = bio_sectors(bio) >> F2FS_LOG_SECTORS_PER_BLOCK;
- 
- 	dio = f2fs_kzalloc(F2FS_I_SB(inode),
-@@ -3527,6 +3571,10 @@ static void f2fs_dio_submit_bio(struct bio *bio, struct inode *inode,
- 	bio->bi_end_io = f2fs_dio_end_io;
- 	bio->bi_private = dio;
- 
-+	if (write)
-+		f2fs_update_device_state(F2FS_I_SB(inode), inode->i_ino,
-+							blkaddr, blkcnt);
-+
- 	inc_page_counts(F2FS_I_SB(inode),
- 			write ? F2FS_DIO_WRITE : F2FS_DIO_READ, dio->blkcnt);
- 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 7369f8087f64..f3ac3cbad2e3 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -607,6 +607,7 @@ struct extent_tree {
- 				F2FS_MAP_UNWRITTEN)
- 
- struct f2fs_map_blocks {
-+	struct block_device *m_bdev;	/* for multi-device */
- 	block_t m_pblk;
- 	block_t m_lblk;
- 	unsigned int m_len;
-@@ -1712,12 +1713,15 @@ struct f2fs_sb_info {
- 
- 	/* For shrinker support */
- 	struct list_head s_list;
-+	struct mutex umount_mutex;
-+	unsigned int shrinker_run_no;
-+
-+	/* For multi devices */
- 	int s_ndevs;				/* number of devices */
- 	struct f2fs_dev_info *devs;		/* for device list */
- 	unsigned int dirty_device;		/* for checkpoint data flush */
- 	spinlock_t dev_lock;			/* protect dirty_device */
--	struct mutex umount_mutex;
--	unsigned int shrinker_run_no;
-+	bool aligned_blksize;			/* all devices has the same logical blksize */
- 
- 	/* For write statistics */
- 	u64 sectors_written_start;
-@@ -3527,6 +3531,8 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 			block_t old_blkaddr, block_t *new_blkaddr,
- 			struct f2fs_summary *sum, int type,
- 			struct f2fs_io_info *fio);
-+void f2fs_update_device_state(struct f2fs_sb_info *sbi, nid_t ino,
-+					block_t blkaddr, unsigned int blkcnt);
- void f2fs_wait_on_page_writeback(struct page *page,
- 			enum page_type type, bool ordered, bool locked);
- void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
-@@ -4334,6 +4340,16 @@ static inline int allow_outplace_dio(struct inode *inode,
- 				!block_unaligned_IO(inode, iocb, iter));
+ /* segment.c */
+ struct quota_file;
+diff --git a/fsck/node.c b/fsck/node.c
+index c7988cb..e11f222 100644
+--- a/fsck/node.c
++++ b/fsck/node.c
+@@ -40,6 +40,51 @@ void f2fs_release_nid(struct f2fs_sb_info *sbi, nid_t nid)
+ 	f2fs_clear_bit(nid, nm_i->nid_bitmap);
  }
  
-+static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
-+								int flag)
++int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
 +{
-+	if (!f2fs_is_multi_device(sbi))
-+		return false;
-+	if (flag != F2FS_GET_BLOCK_DIO)
-+		return false;
-+	return sbi->aligned_blksize;
++	struct f2fs_node *raw_node = NULL;
++	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
++	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
++	struct f2fs_summary sum;
++	struct node_info ni;
++	nid_t ino = QUOTA_INO(sb, qtype);
++	block_t blkaddr = NULL_ADDR;
++	__u64 cp_ver = cur_cp_version(ckpt);
++	int ret = 0;
++
++	raw_node = calloc(F2FS_BLKSIZE, 1);
++	if (raw_node == NULL) {
++		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
++		return -ENOMEM;
++	}
++	f2fs_init_qf_inode(sb, raw_node, qtype, time(NULL));
++
++	if (is_set_ckpt_flags(ckpt, CP_CRC_RECOVERY_FLAG))
++		cp_ver |= (cur_cp_crc(ckpt) << 32);
++	raw_node->footer.cp_ver = cpu_to_le64(cp_ver);
++
++	get_node_info(sbi, ino, &ni);
++	set_summary(&sum, ino, 0, ni.version);
++	ret = reserve_new_block(sbi, &blkaddr, &sum, CURSEG_HOT_NODE, 1);
++	if (ret)
++		goto err_out;
++
++	ret = write_inode(raw_node, blkaddr);
++	if (ret < 0) {
++		MSG(1, "\tError: While rebuilding the quota inode to disk!\n");
++		goto err_out;
++	}
++	update_nat_blkaddr(sbi, ino, ino, blkaddr);
++
++	f2fs_clear_bit(ino, F2FS_FSCK(sbi)->nat_area_bitmap);
++	f2fs_set_bit(ino, NM_I(sbi)->nid_bitmap);
++	DBG(1, "Rebuild quota inode ([%3d] ino [0x%x]) at offset:0x%x\n",
++						qtype, ino, blkaddr);
++err_out:
++	free(raw_node);
++	return ret;
 +}
 +
- static inline bool f2fs_force_buffered_io(struct inode *inode,
- 				struct kiocb *iocb, struct iov_iter *iter)
+ void set_data_blkaddr(struct dnode_of_data *dn)
  {
-@@ -4342,7 +4358,9 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
- 
- 	if (f2fs_post_read_required(inode))
- 		return true;
--	if (f2fs_is_multi_device(sbi))
-+
-+	/* disallow direct IO if any of devices has unaligned blksize */
-+	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
- 		return true;
- 	/*
- 	 * for blkzoned device, fallback direct IO to buffered IO, so
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 15cc89eef28d..6fcfd234108a 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3442,24 +3442,24 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 	up_read(&SM_I(sbi)->curseg_lock);
+ 	__le32 *addr_array;
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 45f7257..69a4bf8 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -20,6 +20,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <time.h>
+ #ifdef HAVE_CONFIG_H
+ #include <config.h>
+ #endif
+@@ -1554,6 +1555,45 @@ static inline void show_version(const char *prog)
+ #endif
  }
  
--static void update_device_state(struct f2fs_io_info *fio)
-+void f2fs_update_device_state(struct f2fs_sb_info *sbi, nid_t ino,
-+					block_t blkaddr, unsigned int blkcnt)
- {
--	struct f2fs_sb_info *sbi = fio->sbi;
--	unsigned int devidx;
++static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
++		struct f2fs_node *raw_node, int qtype, time_t mtime)
++{
++	raw_node->footer.nid = sb->qf_ino[qtype];
++	raw_node->footer.ino = sb->qf_ino[qtype];
++	raw_node->footer.cp_ver = cpu_to_le64(1);
++	raw_node->i.i_mode = cpu_to_le16(0x8180);
++	raw_node->i.i_links = cpu_to_le32(1);
++	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
++	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
++
++	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
++	raw_node->i.i_blocks = cpu_to_le64(1);
++
++	raw_node->i.i_atime = cpu_to_le32(mtime);
++	raw_node->i.i_atime_nsec = 0;
++	raw_node->i.i_ctime = cpu_to_le32(mtime);
++	raw_node->i.i_ctime_nsec = 0;
++	raw_node->i.i_mtime = cpu_to_le32(mtime);
++	raw_node->i.i_mtime_nsec = 0;
++	raw_node->i.i_generation = 0;
++	raw_node->i.i_xattr_nid = 0;
++	raw_node->i.i_flags = FS_IMMUTABLE_FL;
++	raw_node->i.i_current_depth = cpu_to_le32(0);
++	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
++
++	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
++		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
++		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
++	}
++
++	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
++		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
++
++	raw_node->i.i_ext.fofs = 0;
++	raw_node->i.i_ext.blk_addr = 0;
++	raw_node->i.i_ext.len = 0;
++}
++
+ struct feature {
+ 	char *name;
+ 	u32  mask;
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 2132852..d6a92f8 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -1373,43 +1373,14 @@ static int f2fs_write_qf_inode(int qtype)
+ 		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
+ 		return -1;
+ 	}
++	f2fs_init_qf_inode(sb, raw_node, qtype, mkfs_time);
+ 
+-	raw_node->footer.nid = sb->qf_ino[qtype];
+-	raw_node->footer.ino = sb->qf_ino[qtype];
+-	raw_node->footer.cp_ver = cpu_to_le64(1);
+ 	raw_node->footer.next_blkaddr = cpu_to_le32(
+ 			get_sb(main_blkaddr) +
+ 			c.cur_seg[CURSEG_HOT_NODE] *
+ 			c.blks_per_seg + 1 + qtype + 1);
 -
- 	if (!f2fs_is_multi_device(sbi))
- 		return;
+-	raw_node->i.i_mode = cpu_to_le16(0x8180);
+-	raw_node->i.i_links = cpu_to_le32(1);
+-	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
+-	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
+-
+-	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
+ 	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
  
--	devidx = f2fs_target_device_index(sbi, fio->new_blkaddr);
-+	for (; blkcnt > 0; blkcnt--, blkaddr++) {
-+		unsigned int devidx = f2fs_target_device_index(sbi, blkaddr);
+-	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
+-	raw_node->i.i_atime_nsec = 0;
+-	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
+-	raw_node->i.i_ctime_nsec = 0;
+-	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
+-	raw_node->i.i_mtime_nsec = 0;
+-	raw_node->i.i_generation = 0;
+-	raw_node->i.i_xattr_nid = 0;
+-	raw_node->i.i_flags = FS_IMMUTABLE_FL;
+-	raw_node->i.i_current_depth = cpu_to_le32(0);
+-	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
+-
+-	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
+-		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
+-		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
+-	}
+-
+-	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
+-		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
+-
+ 	data_blk_nor = get_sb(main_blkaddr) +
+ 		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1;
  
--	/* update device state for fsync */
--	f2fs_set_dirty_device(sbi, fio->ino, devidx, FLUSH_INO);
-+		/* update device state for fsync */
-+		f2fs_set_dirty_device(sbi, ino, devidx, FLUSH_INO);
+@@ -1434,9 +1405,6 @@ static int f2fs_write_qf_inode(int qtype)
+ 	for (i = 0; i < QUOTA_DATA(qtype); i++)
+ 		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
+ 					cpu_to_le32(data_blk_nor + i);
+-	raw_node->i.i_ext.fofs = 0;
+-	raw_node->i.i_ext.blk_addr = 0;
+-	raw_node->i.i_ext.len = 0;
  
--	/* update device state for checkpoint */
--	if (!f2fs_test_bit(devidx, (char *)&sbi->dirty_device)) {
--		spin_lock(&sbi->dev_lock);
--		f2fs_set_bit(devidx, (char *)&sbi->dirty_device);
--		spin_unlock(&sbi->dev_lock);
-+		/* update device state for checkpoint */
-+		if (!f2fs_test_bit(devidx, (char *)&sbi->dirty_device)) {
-+			spin_lock(&sbi->dev_lock);
-+			f2fs_set_bit(devidx, (char *)&sbi->dirty_device);
-+			spin_unlock(&sbi->dev_lock);
-+		}
- 	}
- }
- 
-@@ -3486,7 +3486,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
- 		goto reallocate;
- 	}
- 
--	update_device_state(fio);
-+	f2fs_update_device_state(fio->sbi, fio->ino, fio->new_blkaddr, 1);
- 
- 	if (keep_order)
- 		up_read(&fio->sbi->io_order_lock);
-@@ -3575,7 +3575,8 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
- 	else
- 		err = f2fs_submit_page_bio(fio);
- 	if (!err) {
--		update_device_state(fio);
-+		f2fs_update_device_state(fio->sbi, fio->ino,
-+						fio->new_blkaddr, 1);
- 		f2fs_update_iostat(fio->sbi, fio->io_type, F2FS_BLKSIZE);
- 	}
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 72eb9d70969f..dced7778d530 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3646,6 +3646,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
- 	unsigned int max_devices = MAX_DEVICES;
-+	unsigned int logical_blksize;
- 	int i;
- 
- 	/* Initialize single device information */
-@@ -3666,6 +3667,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 	if (!sbi->devs)
- 		return -ENOMEM;
- 
-+	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
-+	sbi->aligned_blksize = true;
-+
- 	for (i = 0; i < max_devices; i++) {
- 
- 		if (i > 0 && !RDEV(i).path[0])
-@@ -3702,6 +3706,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 		/* to release errored devices */
- 		sbi->s_ndevs = i + 1;
- 
-+		if (logical_blksize != bdev_logical_block_size(FDEV(i).bdev))
-+			sbi->aligned_blksize = false;
-+
- #ifdef CONFIG_BLK_DEV_ZONED
- 		if (bdev_zoned_model(FDEV(i).bdev) == BLK_ZONED_HM &&
- 				!f2fs_sb_has_blkzoned(sbi)) {
+ 	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
+ 	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
 -- 
-2.22.1
+2.25.4
 
 
 
