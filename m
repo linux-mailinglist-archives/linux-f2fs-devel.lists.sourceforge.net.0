@@ -2,69 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6AA83CF491
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jul 2021 08:34:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56A1B3CF509
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jul 2021 09:07:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m5jKv-0008La-05; Tue, 20 Jul 2021 06:34:37 +0000
+	id 1m5jq8-0005tT-UW; Tue, 20 Jul 2021 07:06:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <wangxiaojun11@huawei.com>) id 1m5jKp-0008LQ-V7
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Jul 2021 06:34:31 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <frank.li@vivo.com>) id 1m5jq7-0005tL-BR
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Jul 2021 07:06:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y5Zsczs+hl9U41dFa/9prCz4qOioWZ1MFHsja1arSik=; b=Bjkfyvv0285MFwWrgW5Ojy2iya
- ZnpJy5lTUhCGbKeAcidRYu4eU5Xo0PMMfXOlcsJrWM5mSDEHs2/dMIwNSm+6z3aqEi1EEoiGewUyG
- sAvxnPYa8mjqqpG064wxdve+X0Vgg28uxpozLW65m/v9WmMB+SL822EuC9vXyxlus9hk=;
+ bh=f1vmAu0s1F9vmTd0naLxnBOlEP55Q2WrUDNUN8op8Mk=; b=Z+xccTkBDzfHC5dYdqtOX84y31
+ ATqUK7ACNCkfCsuFGSrwYgd9/us9ikAkToLdTFla23Azjq6Yi5BZBCA+1xaOf9lJ5WXf1spKImHXN
+ c7kc/Btpy1arJs7cR1HY2hI2f5xbt2CYrYfa0gXf8nH6a1pNahSw9Nos4W7GI9wEfikM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=y5Zsczs+hl9U41dFa/9prCz4qOioWZ1MFHsja1arSik=; b=A
- tQByc3K32obXf9/r07sP8T/1gD9HX4+bYCL0ChG9TZw3sImfO7VsOuH6tOyZe39w+2J31hEEY51/F
- /3O8zphyEn29F/2RAUqCyHHWeIW4RDFPV0rIZylN/HtDuxe52rwpurQu6dtuSNbETOYlfzpCEkkcF
- VFUh31jk+yYvEikM=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ List-Owner:List-Archive; bh=f1vmAu0s1F9vmTd0naLxnBOlEP55Q2WrUDNUN8op8Mk=; b=a
+ +21NUtosknh8IG2xb0eho+hmqOZzL3VHY0l14PdUehWlUNX5nHYgt/We1mb3TUeHdgzUhJ8YfRWSR
+ ijQOYg1ODIGsVS5GAYGQhs9/Je0WHFg96wayGnW76sEWgn1JO21uCI+CCOr0LES3pXBMs2WGkGiJL
+ H1DNX4FuJAl7SQwo=;
+Received: from mail-m121143.qiye.163.com ([115.236.121.143])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m5jKi-00EKPt-6S
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Jul 2021 06:34:31 +0000
-Received: from dggeml756-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4GTTP909WNzZjtv;
- Tue, 20 Jul 2021 14:30:53 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by dggeml756-chm.china.huawei.com
- (10.1.199.158) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2176.2; Tue, 20
- Jul 2021 14:34:14 +0800
-From: Wang Xiaojun <wangxiaojun11@huawei.com>
-To: <chao@kernel.org>, <jaegeuk@kernel.org>
-Date: Tue, 20 Jul 2021 14:41:18 +0800
-Message-ID: <20210720064118.623216-1-wangxiaojun11@huawei.com>
-X-Mailer: git-send-email 2.25.4
+ id 1m5jpz-00ELJn-6O
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 20 Jul 2021 07:06:51 +0000
+DKIM-Signature: a=rsa-sha256;
+ b=FNMwmMawkwxayW6YhuowXD+fpoj9IJswUCXh8yU7R3j3h2rRYB7hhqNHb6DDnCb16ba115cw7fRpCRsYSeIjVk5HJHtbvQQr2/t21pp022o8cdjyPgv72sNjemIcUdK9DW6W0pH9VZRXwTGLPRDns6GwIa276oehOtDEGgQliGU=;
+ s=default; c=relaxed/relaxed; d=vivo.com; v=1;
+ bh=f1vmAu0s1F9vmTd0naLxnBOlEP55Q2WrUDNUN8op8Mk=;
+ h=date:mime-version:subject:message-id:from;
+Received: from comdg01144022.vivo.xyz (unknown [218.104.188.165])
+ by mail-m121143.qiye.163.com (Hmail) with ESMTPA id 1F6695403EA;
+ Tue, 20 Jul 2021 15:06:35 +0800 (CST)
+From: Yangtao Li <frank.li@vivo.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Tue, 20 Jul 2021 15:06:33 +0800
+Message-Id: <20210720070633.337851-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Originating-IP: [10.175.101.6]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggeml756-chm.china.huawei.com (10.1.199.158)
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZCBgUCR5ZQVlLVUtZV1
+ kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWRoZShpWTR8ZH0oYHUpCTE
+ 0fVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KzY6FSo*Kz9CMgIjNwgCKxcd
+ KQ4wCjpVSlVKTUlNTE1PTEJOTEtCVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
+ VUpLT1VKQ0NVSk1OWVdZCAFZQUhOQ0s3Bg++
+X-HM-Tid: 0a7ac2bcddf0b038kuuu1f6695403ea
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [45.249.212.187 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [115.236.121.143 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [115.236.121.143 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1m5jKi-00EKPt-6S
-Subject: [f2fs-dev] [PATCH v3] f2fs-tools: rebuild the quota inode if it is
- corrupted
+ 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
+X-Headers-End: 1m5jpz-00ELJn-6O
+Subject: [f2fs-dev] [PATCH v3] f2fs: Reduce the scope of setting fsck tag
+ when de->name_len is zero
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,247 +86,103 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the following process returns an error,
-the quota inode, not the quota file, is damaged.
-(fsck_chk_quota_node-->fsck_chk_node_blk-->sanity_check_nid)
-The fsck does not have a process to rebuild the quota inode.
+I recently found a case where de->name_len is 0 in f2fs_fill_dentries() easily reproduced,
+and finally set the fsck flag.
 
-Because sanity_check_nid is not passed, fsck->nat_area_bitmap
-can not be cleared, and then the NAT of quota will be nullify
-during fix_nat_entries.
+Thread A					Thread B
 
-During the next fsck check, the quota inode check fails
-because the address of the quota inode changes to 0.
-In addition, in fsck_chk_quota_files-->f2fs_filesize_update,
-data is written to address 0.
+f2fs_readdir
+	f2fs_read_inline_dir
+		ctx->pos = d.max
+						f2fs_add_dentry
+							f2fs_add_inline_entry
+								do_convert_inline_dir
+							f2fs_add_regular_entry
+f2fs_readdir
+	f2fs_fill_dentries
+		set_sbi_flag(sbi, SBI_NEED_FSCK)
 
-Therefore, when the quota inode is corrupted, we need to rebuild it.
+Process A opens the folder, and has been reading without closing it. During this period,
+Process B created a file under the folder (occupying multiple f2fs_dir_entry, exceeding
+the d.max of the inline dir). After creation, process A uses the d.max of inline dir to
+read it again, and it will read that de->name_len is 0.
 
-Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
+And Chao pointed out that w/o inline conversion, the race condition still can happen as below
+
+dir_entry1: A
+dir_entry2: B
+dir_entry3: C
+free slot: _
+ctx->pos: ^
+
+Before:
+AAAABBBB___
+	 ^
+Thread B delete dir_entry2, and create dir_entry3.
+
+After:
+AAAACCCCC__
+	 ^
+
+In these scenarios, the file system is not damaged, and it's hard to avoid it. But we can bypass
+tagging FSCK flag if:
+a) bit_pos (:= ctx->pos % d->max) is non-zero & b) before bit_pos moves to first
+valid dir_entry.
+
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
-v2->v3:
--Add error message when reserve new block fails.
+ fs/f2fs/dir.c | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-v1->v2:
--Update footer.cp_ver based on CP_CRC_RECOVERY_FLAG.
--Add debug message in f2fs_rebuild_qf_inode.
--Add time_t parameter to the f2fs_init_qf_inode.
----
- fsck/fsck.c        |  2 ++
- fsck/fsck.h        |  1 +
- fsck/node.c        | 47 ++++++++++++++++++++++++++++++++++++++++++++++
- include/f2fs_fs.h  | 40 +++++++++++++++++++++++++++++++++++++++
- mkfs/f2fs_format.c | 34 +--------------------------------
- 5 files changed, 91 insertions(+), 33 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 6ca85f0..af6d332 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1899,6 +1899,8 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
- 			ASSERT_MSG("wrong quota inode, qtype [%d] ino [0x%x]",
- 								qtype, ino);
- 			qf_szchk_type[qtype] = QF_SZCHK_ERR;
-+			if (c.fix_on)
-+				f2fs_rebuild_qf_inode(sbi, qtype);
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 456651682daf..bfe942733b5e 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -1000,6 +1000,7 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(d->inode);
+ 	struct blk_plug plug;
+ 	bool readdir_ra = sbi->readdir_ra == 1;
++	bool found_valid_dirent  = false;
+ 	int err = 0;
+ 
+ 	bit_pos = ((unsigned long)ctx->pos % d->max);
+@@ -1014,13 +1015,15 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
+ 
+ 		de = &d->dentry[bit_pos];
+ 		if (de->name_len == 0) {
++			if (found_valid_dirent || !bit_pos) {
++				printk_ratelimited(
++					"%sF2FS-fs (%s): invalid namelen(0), ino:%u, run fsck to fix.",
++					KERN_WARNING, sbi->sb->s_id,
++					le32_to_cpu(de->ino));
++				set_sbi_flag(sbi, SBI_NEED_FSCK);
++			}
+ 			bit_pos++;
+ 			ctx->pos = start_pos + bit_pos;
+-			printk_ratelimited(
+-				"%sF2FS-fs (%s): invalid namelen(0), ino:%u, run fsck to fix.",
+-				KERN_WARNING, sbi->sb->s_id,
+-				le32_to_cpu(de->ino));
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			continue;
  		}
+ 
+@@ -1063,6 +1066,7 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
+ 			f2fs_ra_node_page(sbi, le32_to_cpu(de->ino));
+ 
+ 		ctx->pos = start_pos + bit_pos;
++		found_valid_dirent = true;
  	}
- 	cur_qtype = -1;
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index d79afef..67390f0 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -286,6 +286,7 @@ void f2fs_alloc_nid(struct f2fs_sb_info *, nid_t *);
- void set_data_blkaddr(struct dnode_of_data *);
- block_t new_node_block(struct f2fs_sb_info *,
- 					struct dnode_of_data *, unsigned int);
-+int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype);
- 
- /* segment.c */
- struct quota_file;
-diff --git a/fsck/node.c b/fsck/node.c
-index c7988cb..c3e383b 100644
---- a/fsck/node.c
-+++ b/fsck/node.c
-@@ -40,6 +40,53 @@ void f2fs_release_nid(struct f2fs_sb_info *sbi, nid_t nid)
- 	f2fs_clear_bit(nid, nm_i->nid_bitmap);
- }
- 
-+int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
-+{
-+	struct f2fs_node *raw_node = NULL;
-+	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
-+	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
-+	struct f2fs_summary sum;
-+	struct node_info ni;
-+	nid_t ino = QUOTA_INO(sb, qtype);
-+	block_t blkaddr = NULL_ADDR;
-+	__u64 cp_ver = cur_cp_version(ckpt);
-+	int ret = 0;
-+
-+	raw_node = calloc(F2FS_BLKSIZE, 1);
-+	if (raw_node == NULL) {
-+		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
-+		return -ENOMEM;
-+	}
-+	f2fs_init_qf_inode(sb, raw_node, qtype, time(NULL));
-+
-+	if (is_set_ckpt_flags(ckpt, CP_CRC_RECOVERY_FLAG))
-+		cp_ver |= (cur_cp_crc(ckpt) << 32);
-+	raw_node->footer.cp_ver = cpu_to_le64(cp_ver);
-+
-+	get_node_info(sbi, ino, &ni);
-+	set_summary(&sum, ino, 0, ni.version);
-+	ret = reserve_new_block(sbi, &blkaddr, &sum, CURSEG_HOT_NODE, 1);
-+	if (ret) {
-+		MSG(1, "\tError: Failed to reserve new block!\n");
-+		goto err_out;
-+	}
-+
-+	ret = write_inode(raw_node, blkaddr);
-+	if (ret < 0) {
-+		MSG(1, "\tError: While rebuilding the quota inode to disk!\n");
-+		goto err_out;
-+	}
-+	update_nat_blkaddr(sbi, ino, ino, blkaddr);
-+
-+	f2fs_clear_bit(ino, F2FS_FSCK(sbi)->nat_area_bitmap);
-+	f2fs_set_bit(ino, NM_I(sbi)->nid_bitmap);
-+	DBG(1, "Rebuild quota inode ([%3d] ino [0x%x]) at offset:0x%x\n",
-+						qtype, ino, blkaddr);
-+err_out:
-+	free(raw_node);
-+	return ret;
-+}
-+
- void set_data_blkaddr(struct dnode_of_data *dn)
- {
- 	__le32 *addr_array;
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 45f7257..69a4bf8 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -20,6 +20,7 @@
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-+#include <time.h>
- #ifdef HAVE_CONFIG_H
- #include <config.h>
- #endif
-@@ -1554,6 +1555,45 @@ static inline void show_version(const char *prog)
- #endif
- }
- 
-+static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
-+		struct f2fs_node *raw_node, int qtype, time_t mtime)
-+{
-+	raw_node->footer.nid = sb->qf_ino[qtype];
-+	raw_node->footer.ino = sb->qf_ino[qtype];
-+	raw_node->footer.cp_ver = cpu_to_le64(1);
-+	raw_node->i.i_mode = cpu_to_le16(0x8180);
-+	raw_node->i.i_links = cpu_to_le32(1);
-+	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
-+	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
-+
-+	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
-+	raw_node->i.i_blocks = cpu_to_le64(1);
-+
-+	raw_node->i.i_atime = cpu_to_le32(mtime);
-+	raw_node->i.i_atime_nsec = 0;
-+	raw_node->i.i_ctime = cpu_to_le32(mtime);
-+	raw_node->i.i_ctime_nsec = 0;
-+	raw_node->i.i_mtime = cpu_to_le32(mtime);
-+	raw_node->i.i_mtime_nsec = 0;
-+	raw_node->i.i_generation = 0;
-+	raw_node->i.i_xattr_nid = 0;
-+	raw_node->i.i_flags = FS_IMMUTABLE_FL;
-+	raw_node->i.i_current_depth = cpu_to_le32(0);
-+	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
-+
-+	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
-+		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
-+		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
-+	}
-+
-+	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
-+		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
-+
-+	raw_node->i.i_ext.fofs = 0;
-+	raw_node->i.i_ext.blk_addr = 0;
-+	raw_node->i.i_ext.len = 0;
-+}
-+
- struct feature {
- 	char *name;
- 	u32  mask;
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 2132852..d6a92f8 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -1373,43 +1373,14 @@ static int f2fs_write_qf_inode(int qtype)
- 		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
- 		return -1;
- 	}
-+	f2fs_init_qf_inode(sb, raw_node, qtype, mkfs_time);
- 
--	raw_node->footer.nid = sb->qf_ino[qtype];
--	raw_node->footer.ino = sb->qf_ino[qtype];
--	raw_node->footer.cp_ver = cpu_to_le64(1);
- 	raw_node->footer.next_blkaddr = cpu_to_le32(
- 			get_sb(main_blkaddr) +
- 			c.cur_seg[CURSEG_HOT_NODE] *
- 			c.blks_per_seg + 1 + qtype + 1);
--
--	raw_node->i.i_mode = cpu_to_le16(0x8180);
--	raw_node->i.i_links = cpu_to_le32(1);
--	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
--	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
--
--	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
- 	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
- 
--	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_atime_nsec = 0;
--	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_ctime_nsec = 0;
--	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
--	raw_node->i.i_mtime_nsec = 0;
--	raw_node->i.i_generation = 0;
--	raw_node->i.i_xattr_nid = 0;
--	raw_node->i.i_flags = FS_IMMUTABLE_FL;
--	raw_node->i.i_current_depth = cpu_to_le32(0);
--	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
--
--	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
--		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
--		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
--	}
--
--	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
--		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
--
- 	data_blk_nor = get_sb(main_blkaddr) +
- 		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1;
- 
-@@ -1434,9 +1405,6 @@ static int f2fs_write_qf_inode(int qtype)
- 	for (i = 0; i < QUOTA_DATA(qtype); i++)
- 		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
- 					cpu_to_le32(data_blk_nor + i);
--	raw_node->i.i_ext.fofs = 0;
--	raw_node->i.i_ext.blk_addr = 0;
--	raw_node->i.i_ext.len = 0;
- 
- 	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
- 	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
+ out:
+ 	if (readdir_ra)
 -- 
-2.25.4
+2.32.0
 
 
 
