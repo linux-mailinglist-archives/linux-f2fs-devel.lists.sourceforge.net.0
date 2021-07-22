@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B40FA3D257B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 16:16:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EB033D25DC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 16:34:50 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m6ZUr-0005Fr-95; Thu, 22 Jul 2021 14:16:21 +0000
+	id 1m6Zmf-0000qz-7J; Thu, 22 Jul 2021 14:34:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <greg@kroah.com>) id 1m6ZUp-0005FX-RC
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 14:16:19 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1m6Zme-0000qm-6p
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 14:34:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=prWACrJFXo8y1jrEMMR+3UsGDvFjhhPhic6EAg8Shu8=; b=lJjP/Hg83zZUUvPheBGtUHcGVn
- DJZUEMzUJNuumtQ01ITwEiEWtZgjoYX8sntiK0Odm49gxMqD927jNxUHDO+2ZwHAxjCT0y0Slz1J0
- h/8X54lurEQdOAE2YH7VSNOeDYkljDOcRx9xnHNyh2xe5QXe5B3k/XDwmD8TAbeF8MvI=;
+ bh=tv45sBO/foO6ao431cDULoIZ+j/o7IBfd3d1m9BYu8c=; b=jci5ypheX1QrbftBsW3pGrpuW0
+ 31y69ZCLm4cRPR/v1i4YihvSnoDxCheVvGdOTQ7EmcveFIXio+wDWB9HLU0OPKhAu+x9A88U5Zd+b
+ dT645fo5bmlkZsV8BYG3/QgII1GJmbT8CgEbKoMZUDaiP8oFZRxowX8REpWhKY45oadc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,82 +29,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=prWACrJFXo8y1jrEMMR+3UsGDvFjhhPhic6EAg8Shu8=; b=IQGxQorSfvjtof44XkZ1A23FXO
- T43Qh4Awh1g0616dbD9QU7WLxVdDB/G5DEp4Y8Pb+hRU4zchbF8sEFQ70CraotXuQHubbwJJMI7r8
- OQlxnXFwmf8VFcq0prMLy3wmqfBNZA1cM+5H3lzEsQ61SnOdi6W3ZwVs16zUpGqDxpbI=;
-Received: from wnew3-smtp.messagingengine.com ([64.147.123.17])
+ bh=tv45sBO/foO6ao431cDULoIZ+j/o7IBfd3d1m9BYu8c=; b=fjxT0bvKTZLy6WjOoDfsS5zkkG
+ RpzhwJPs/R00JBC7eLcVJ906BLbmLFTPHRQAcc6BFp21fS9BPDVq0dPXeo1YFJclirAQhGyCDLzlP
+ ryv+abnnNFhKaZp7Iyp7U1rOgmB8VWraRq3OYFv7f2wNO3Bc7ua4PMZXWmNA9RkvtfNE=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m6ZUb-0002lB-LY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 14:16:19 +0000
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.west.internal (Postfix) with ESMTP id 414BF2B011FE;
- Thu, 22 Jul 2021 10:07:03 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Thu, 22 Jul 2021 10:07:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm1; bh=prWACrJFXo8y1jrEMMR+3UsGDvF
- jhhPhic6EAg8Shu8=; b=Aovg0XThHHqMgm5dfHwW8LWv/TBQCp732ZkT7NbUDqM
- vZFy5tM/TQ6gAkqK9TjecDrsFtA+qg5bdsvCO5esupgoJpMlC8UQMJEf4+D709jU
- BC64Z/qwUmOmMQ9HmAA/sEkqT+v0hlkkM4wemYGNGsXskLd0HNps3QpxE3331OS6
- Dayh0YpFWywsIa2BBtR5USXj/W5QzgxBwiV22OsZIExoVg0OrMPgHRgo/oBmOcIr
- 92LdmWpQE7RhXcGGHybreEKMyh2Tqm51BVD9ws4YI1sNhCqlQd+9tD4Ly3MBJdn/
- OMah87GFIavl3JI2cwN1m9MVhlUL6xQUFQQPbXFhWjg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=prWACr
- JFXo8y1jrEMMR+3UsGDvFjhhPhic6EAg8Shu8=; b=IXn7WMQOI/JBPvPwCdFYdY
- OEmfUIWXOngyh/3b2yMQNNWkJgqsTupy3T01T82FclshPj66S2WqX9A3MmGj9arP
- FkO0xZZBFDMoWWU7kMal7B/QbWVcsN8Q26PUd0VbhTk5TJSs+K/FBSgkj0Z2WEnP
- NqhvDD+Km/cy0HorPsDa4lx1EalPJwtnNYelbqqjjG1jN9ea+sxYghnv+TPCLG8N
- kS9Em7A+SjE9sQv0pxr8oFCjRjyMcAJAicQ9CZwzS1k5qnaPc39hisZbAQDCPU64
- UVJwNswtau/srA+JW6YK0bpAbfs9OOpjotcRSmrj9NEz7KHt24u/TPRONxtmCESA
- ==
-X-ME-Sender: <xms:hXv5YPr8ejODVQfwyTP1Q0ZvV-msDwaAMvtQzOiUHETQREI_gGgCMQ>
- <xme:hXv5YJpuFLUiZactFUJeoPEb8XUUmxtqmHRVdZRrIG7pDv4GeXaoXBTUqQ4aL-6DN
- PM3HpjNFavTdA>
-X-ME-Received: <xmr:hXv5YMPLae4ylaJK7pHe7LtGHTzMkTxNDOXzSwwgoXJyYSWbWFcCDrdwOSoBy2dD8zr9d-OYrq-w_IFKmZQzgWVuVurZsJ6x>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrfeeigdeilecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepifhrvghgucfm
- jfcuoehgrhgvgheskhhrohgrhhdrtghomheqnecuggftrfgrthhtvghrnhepveeuheejgf
- ffgfeivddukedvkedtleelleeghfeljeeiueeggeevueduudekvdetnecuvehluhhsthgv
- rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvghgsehkrhhorghhrd
- gtohhm
-X-ME-Proxy: <xmx:hXv5YC5gxMai7SJx2LLToP0et-M-MNfz5bsMd2Qi5qc2KGt_ohbThA>
- <xmx:hXv5YO4LstqeDol9Z3otPxNxuBznrHzf4tAYhcsjZrUdRvhmyFZB-Q>
- <xmx:hXv5YKiE1fi-Rj3AMB91OFr5c5nyiBg6bfhQs5TJrzFb9T2gckUKvg>
- <xmx:hnv5YLx1iyMOtKHIErRZzh5topAIJWMtT0rLyOCJYJx6td_buemKpriqX9o>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 22 Jul 2021 10:07:01 -0400 (EDT)
-Date: Thu, 22 Jul 2021 16:06:59 +0200
-From: Greg KH <greg@kroah.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <YPl7g2Gpec2Lh3a6@kroah.com>
-References: <20210720161709.1919109-1-ebiggers@kernel.org>
+ id 1m6ZmX-0003v2-4D
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 14:34:44 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AF1CB61278;
+ Thu, 22 Jul 2021 14:34:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1626964466;
+ bh=FyzEDuShYdTBcPoVOrG7XO8lDFhKAPGhDQ3uXgSzkqo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MEERSfAOVPeJNNnpEuUgxtjmw0V38i1npkRJ1eP+NQgDyitWv45AmPEu/rcXJcygD
+ 99lAONdZ/zM1OX4+OUo9Df7PYkrvWgrB19bId0d5D5jyAfCTyvemdZdt33eHU4fI+V
+ vfNemLvvjOsmz+x8D9SqtqZNQy+8+aN5QGYgz562UchTAr7fI2wg1lSzUgdjmoxcv5
+ Zs1NNJqXvHl6C4yrjReKeySyAfaRuVk4DI4nZ8PH3IHdpMas4Tcbhu7GyAgcgwgIzl
+ yDQZtMqxxyMTBYkOcNJFEUXGenK9SAct1xQGWoSfCSKDgQWXm0Az9rjnT/4Strlqx8
+ 5ox1aR0T39lsQ==
+Date: Thu, 22 Jul 2021 07:34:25 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <YPmB8etJZ+vN0fDT@gmail.com>
+References: <20210721072048.3035928-1-daeho43@gmail.com>
+ <YPiTLwB3d8BWSKje@gmail.com>
+ <CACOAw_xq3_ccqzh8dnomFXBOK_iN9LOTsOBYSBzDJHSSDrRxVw@mail.gmail.com>
+ <YPi4rRg2ZPFBWaTZ@sol.localdomain>
+ <CACOAw_xeTSa8J_9=+6thXvFT75u734D5asNRogUxt+DC-tPhxg@mail.gmail.com>
+ <YPjGsSEdsoSsCJlB@sol.localdomain>
+ <CACOAw_yWAUNiziiQuZgRDaVrOxceuEpO8QtoYGmhxxJV2s7wWQ@mail.gmail.com>
+ <YPjQQTjJ6rO2sx/o@sol.localdomain>
+ <CACOAw_yfG494AK=XH_xzeTDWn-a1mYF+537=VTT6oX6RgLGxnw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210720161709.1919109-1-ebiggers@kernel.org>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <CACOAw_yfG494AK=XH_xzeTDWn-a1mYF+537=VTT6oX6RgLGxnw@mail.gmail.com>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1m6ZUb-0002lB-LY
-Subject: Re: [f2fs-dev] [PATCH 5.4] f2fs: Show casefolding support only when
- supported
+ -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m6ZmX-0003v2-4D
+Subject: Re: [f2fs-dev] [PATCH] f2fs: change fiemap way in printing
+ compression chunk
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,37 +91,108 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
- Daniel Rosenberg <drosen@google.com>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jul 20, 2021 at 09:17:09AM -0700, Eric Biggers wrote:
-> From: Daniel Rosenberg <drosen@google.com>
+On Thu, Jul 22, 2021 at 01:42:05AM -0700, Daeho Jeong wrote:
+> On Wed, Jul 21, 2021 at 6:56 PM Eric Biggers <ebiggers@kernel.org> wrote:
+> >
+> > On Wed, Jul 21, 2021 at 06:40:00PM -0700, Daeho Jeong wrote:
+> > > On Wed, Jul 21, 2021 at 6:15 PM Eric Biggers <ebiggers@kernel.org> wrote:
+> > > >
+> > > > On Wed, Jul 21, 2021 at 06:04:22PM -0700, Daeho Jeong wrote:
+> > > > > >
+> > > > > > How f2fs stores the mapping information doesn't matter.  That's an
+> > > > > > implementation detail that shouldn't be exposed to userspace.  The only thing
+> > > > > > that should be exposed is the actual mapping, and for that it seems natural to
+> > > > > > report the physical blocks first.
+> > > > > >
+> > > > > > There is no perfect solution for how to handle the remaining logical blocks,
+> > > > > > given that the fiemap API was not designed for compressed files, but I think we
+> > > > > > should just go with extending the length of the last compressed extent in the
+> > > > > > cluster to cover the remaining logical blocks, i.e.:
+> > > > > >
+> > > > > >   [0..31]: 2683128..2683159 flag(0x1009) -> merged, encoded, last_extent
+> > > > > >
+> > > > > > That's what btrfs does on compressed files.
+> > > > > >
+> > > > > > - Eric
+> > > > >
+> > > > > I also agree that that's an implementation detail that shouldn't be
+> > > > > exposed to userspace.
+> > > > >
+> > > > > I want to make it more clear for better appearance.
+> > > > >
+> > > > > Do you think we have to remove "unwritten" information below? I also
+> > > > > think it might be unnecessary information for the user.
+> > > > > [0..31]: 2683128..2683159 flag(0x1009) -> merged, encoded, last_extent
+> > > > > (unwritten?)
+> > > >
+> > > > FIEMAP_EXTENT_UNWRITTEN already has a specific meaning; see
+> > > > Documentation/filesystems/fiemap.rst.  It means that the data is all zeroes, and
+> > > > the disk space is preallocated but the data hasn't been written to disk yet.
+> > > >
+> > > > In this case, the data is *not* necessarily all zeroes.  So I think
+> > > > FIEMAP_EXTENT_UNWRITTEN shouldn't be used here.
+> > > >
+> > > > > Do you want f2fs to print out the info on a cluster basis, even when
+> > > > > the user asks for one block information?
+> > > > > Like
+> > > > > If the user asks for the info of [8..15], f2fs will return the info of [0..31]?
+> > > >
+> > > > Yes, since that's how FS_IOC_FIEMAP is supposed to work; see
+> > > > Documentation/filesystems/fiemap.rst:
+> > > >
+> > > >         All offsets and lengths are in bytes and mirror those on disk.  It is
+> > > >         valid for an extents logical offset to start before the request or its
+> > > >         logical length to extend past the request.
+> > > >
+> > > > (That being said, the f2fs compression+encryption tests I've written don't
+> > > > exercise this case; they only map the whole file at once.)
+> > > >
+> > > > - Eric
+> > >
+> > > My last question is.
+> > > How about a discontinuous cluster like [0..31] maps to discontinuous
+> > > three blocks like physical address 0x4, 0x14 and 0x24.
+> > > I think we have to return three extents for the one logical region
+> > > like the below. What do you think?
+> > > [0..31] -> 0x4 (merged, encoded)
+> > > [0..31] -> 0x14 (merged, encoded)
+> > > [0..31] -> 0x24 (merged, encoded, last_extent)
+> >
+> > No, please don't do that.  struct fiemap_extent only has a single length field,
+> > not separate lengths for fe_logical and fe_physical, so with your proposal there
+> > would be no way to know how many physical blocks to take from each extent.  It
+> > would be reporting the same part of the file in contradictory ways.
+> >
+> > Like I suggested originally, I think this case should be reported like:
+> >
+> >        fe_logical=0    fe_physical=16384  length=4096
+> >        fe_logical=4096 fe_physical=81920  length=4096
+> >        fe_logical=8192 fe_physical=147456 length=8192
+> >
 > 
-> commit 39307f8ee3539478c28e71b4909b5b028cce14b1 upstream.
-> [Please apply to 5.4-stable.]
+> Hi Eric,
 > 
-> The casefolding feature is only supported when CONFIG_UNICODE is set.
-> This modifies the feature list f2fs presents under sysfs accordingly.
+> I think we need to separate one more extent in the example to figure
+> out that the 4 block cluster turned into 3 compressed blocks.
 > 
-> Fixes: 5aba54302a46 ("f2fs: include charset encoding information in the superblock")
-> Cc: stable@vger.kernel.org # v5.4+
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> Reviewed-by: Eric Biggers <ebiggers@google.com>
-> Reviewed-by: Chao Yu <yuchao0@huawei.com>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  fs/f2fs/sysfs.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>        fe_logical=0    fe_physical=16384  length=4096
+>        fe_logical=4096 fe_physical=81920  length=4096
+>        fe_logical=8192 fe_physical=147456 length=4096
+>        fe_logical=12288 fe_physical=0 length=4096
+> 
+> What do you think?
 > 
 
-Now queued up, thanks.
+[+linux-f2fs-devel, not sure why the list was dropped...]
 
-greg k-h
+I think that would work too, but what flags would you use in the last entry?
+
+- Eric
 
 
 _______________________________________________
