@@ -2,77 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E1043D2E72
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 22:55:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C53B3D2F03
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 23:19:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m6fie-0003Mx-Mz; Thu, 22 Jul 2021 20:55:00 +0000
+	id 1m6g6W-0007TY-FQ; Thu, 22 Jul 2021 21:19:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1m6fid-0003Mk-Dh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:54:59 +0000
+ (envelope-from <daeho43@gmail.com>) id 1m6g6V-0007TS-0V
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 21:19:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x4BnUp9UEW5LWmdFtZgpvqc+v0qWgkew5012XidWEvY=; b=GOmbewoQCl4Nqv8747hUi8zdFX
- 4H560b3iOrmq6yj0LKvG1CgodMwIySoiP1Sn7PrOqhTHgpSVSNGOmFkyyBd/WMoxTO1WQUld2DdRU
- D6Scj1ENo6Qu/NDlq6gmVNRLgFss14pOgQbfeHkH1tZaluj0ZYsevwL8kMSqQc8rPqTc=;
+ bh=MtB0Pe+HpTTnpOXUl0i7ZYxuksvA1VGHCZTzux/Ivfg=; b=GMYXXQQlwGZQA2bjGzAULmEJoH
+ eNXUgrufmLhU1Y7aGxhf5JodJ0111rv8bYbzPOn8PPjqZoB3e2Uiy0gC/TjtH6YBdVw4Qka1OVz3R
+ +HoU5NEPSsJMBeSBU1krErjORnWud+LjrjdFjmiJn59UjIadKW3GOl8OSojxZe6XZNso=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=x4BnUp9UEW5LWmdFtZgpvqc+v0qWgkew5012XidWEvY=; b=TKGGipl+lAMgErX466n81b0s7Z
- LoKYfuBh7cdTRsBjLisUJ968Ldz2yImTrlYxg1peEZAs16Uvupet1JnmFHOqC/RRXAtpU95Fka52L
- AXjExug6ekHYzzW4ShhzjtGVmJQX1wuMb1/tAf8yPt4tTMGSbzMTaKKBXPCLPMxCUiUk=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m6fiS-0002yN-8p
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:54:59 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9163160EBE;
- Thu, 22 Jul 2021 20:54:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626987282;
- bh=5EuMpFl6Z+3vzvXgXMhAL/OynlzEKbafSFSDnWtb5XI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YU3KgggHhObzmH7NxwmsMvZMaahYqcNSFzdij3+M12WFlbIE61BUFBb03luwzZ8IP
- e7bjCkFn/rYn2hH/aGkg4WlQkld69KIBxoQXBeavZN60Ja9HzBZ4TmRCfhro9pJKki
- szl9E3vi31VhvUr1JtY8hhNsStDVxV3Hs2AsTSbsx7W+Cd/DeYaorN87RFcS50HHqD
- hBOHBWDVN//MKdXaWq/sooa1+iR+qto7QADxf7/5CqSdgTU7yxkd7pQvCSXsfWCVYd
- ahxmkk7Q6ecLhiYskxNtm4HDt/NopKN7aOsFsHp03ZzrO3CgOEsA201qDKtQNpr1Pl
- E7VA/ky2AixWQ==
-Date: Thu, 22 Jul 2021 13:54:41 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YPnbEdVxClWwatKz@gmail.com>
-References: <20210716143919.44373-1-ebiggers@kernel.org>
- <20210716143919.44373-7-ebiggers@kernel.org>
- <YPU+3inGclUtcSpJ@infradead.org> <YPnZa5dFVP7vtB9q@google.com>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=MtB0Pe+HpTTnpOXUl0i7ZYxuksvA1VGHCZTzux/Ivfg=; b=k
+ MBchdtfOZkOCUAThYzoOzvUhoov2Uc3Rjq7k3RXjBuXows/nV0IXY0zYqGQemK+d1qse+l1nrMu5B
+ 3yE/2L3ugfA3vKoCIi9qkRMoJCHJvgBeUqrcHVR47sOkbL70qkluDQHZ1DMjKhbeb1EPgWRjQsxxs
+ vL+WNYWMbDTQHScI=;
+Received: from mail-pl1-f182.google.com ([209.85.214.182])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1m6g6O-00HC9l-IT
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 21:19:38 +0000
+Received: by mail-pl1-f182.google.com with SMTP id e5so813297pla.6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 22 Jul 2021 14:19:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=MtB0Pe+HpTTnpOXUl0i7ZYxuksvA1VGHCZTzux/Ivfg=;
+ b=UXwwYtj2Rm1+R18AqC/evMp6rEzaA+7UNZLMn8pdAlQg6NKkkO9xURhifbhi0FWXa7
+ gSh85TvDKY2CYR+TvliJTFSaXJDPdQzYvL0YbsRfYs2RpaQ/7tNh/XLHM8wRNipWiyEf
+ mm7F+RKjnDRebiWp6mLW7NB9K0nZNHQX6R6gH1HnZT5BotoNxFmkUjIRmmaT9RoA+uwJ
+ LVqXne2rLT8QrJz+pO3d1cmawMpmT3FWnyLfVupx5CU7BdpsckAJg0UInDwPlnd1AHlr
+ U2kALZunJcGPXX1rtvMAlCfit5+CjTUZBNaTXVA9tqvoVwVpVPT0dzGBbGB2vVLagvGY
+ U7BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=MtB0Pe+HpTTnpOXUl0i7ZYxuksvA1VGHCZTzux/Ivfg=;
+ b=ptCk4gKROpe5+9TGfGd8XElIoLgiF/WuHffQx1WlDFJyiqJSNW8FVy89WRgkJpqUNO
+ kxe3Bki7OUUiLWg/nTszpIdsz1wq13467C+l6Yffwpn+/hPoiSxJqHz++ywXzvJ8Drxy
+ lM5tFGmie/9XrsLNGj8Afy4dOsitUaRRfAYDfbU56B52GmQrGLsGZ4SPnYKQr+D9cYZs
+ mEOpilDqHLg44VzUthgZrYdVE3PYQ9c1Gy0pj/tTVF5okhR1OY3bEJdGgM2m316mfl1A
+ M47Z4KylQZbtAbACLeFpuoBGQtXAM8TxoN/Gm/s1G6zCfVQbsTpg1pX2Hl+3eJNsrmBs
+ iQmg==
+X-Gm-Message-State: AOAM530OBPF9RdW1kinjTZg8bVZE9cxA6J0ni8nrxkAEL0dbqulhrM2M
+ Lsd58gA5fu9Fm1iT/y/e5CI=
+X-Google-Smtp-Source: ABdhPJwsvXCwP/KZNqFOpPbQyGno5OlH3c/2TTMgc96WP5XWHCEjoicbXCSpFWIVhS7A6S01L/ch7w==
+X-Received: by 2002:a05:6a00:1307:b029:308:1e2b:a24b with SMTP id
+ j7-20020a056a001307b02903081e2ba24bmr1601407pfu.57.1626988766870; 
+ Thu, 22 Jul 2021 14:19:26 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:4610:babe:3aeb:2b63])
+ by smtp.gmail.com with ESMTPSA id s21sm6984489pfw.69.2021.07.22.14.19.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jul 2021 14:19:26 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Thu, 22 Jul 2021 14:19:21 -0700
+Message-Id: <20210722211921.3791312-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.32.0.432.gabb21c7263-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YPnZa5dFVP7vtB9q@google.com>
-X-Spam-Score: -1.6 (-)
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.214.182 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.182 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m6fiS-0002yN-8p
-Subject: Re: [f2fs-dev] [PATCH 6/9] f2fs: implement iomap operations
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1m6g6O-00HC9l-IT
+Subject: [f2fs-dev] [PATCH v2] f2fs: change fiemap way in printing
+ compression chunk
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,67 +112,160 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyaprateek2357@gmail.com>, linux-xfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- Matthew Bobrowski <mbobrowski@mbobrowski.org>,
- Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 22, 2021 at 01:47:39PM -0700, Jaegeuk Kim wrote:
-> On 07/19, Christoph Hellwig wrote:
-> > On Fri, Jul 16, 2021 at 09:39:16AM -0500, Eric Biggers wrote:
-> > > +static blk_qc_t f2fs_dio_submit_bio(struct inode *inode, struct iomap *iomap,
-> > > +				    struct bio *bio, loff_t file_offset)
-> > > +{
-> > > +	struct f2fs_private_dio *dio;
-> > > +	bool write = (bio_op(bio) == REQ_OP_WRITE);
-> > > +
-> > > +	dio = f2fs_kzalloc(F2FS_I_SB(inode),
-> > > +			sizeof(struct f2fs_private_dio), GFP_NOFS);
-> > > +	if (!dio)
-> > > +		goto out;
-> > > +
-> > > +	dio->inode = inode;
-> > > +	dio->orig_end_io = bio->bi_end_io;
-> > > +	dio->orig_private = bio->bi_private;
-> > > +	dio->write = write;
-> > > +
-> > > +	bio->bi_end_io = f2fs_dio_end_io;
-> > > +	bio->bi_private = dio;
-> > > +
-> > > +	inc_page_count(F2FS_I_SB(inode),
-> > > +			write ? F2FS_DIO_WRITE : F2FS_DIO_READ);
-> > > +
-> > > +	return submit_bio(bio);
-> > 
-> > I don't think there is any need for this mess.  The F2FS_DIO_WRITE /
-> > F2FS_DIO_READ counts are only used to check if there is any inflight
-> > I/O at all.  So instead we can increment them once before calling
-> > iomap_dio_rw, and decrement them in ->end_io or for a failure/noop
-> > exit from iomap_dio_rw.  Untested patch below.  Note that all this
-> > would be much simpler to review if the last three patches were folded
-> > into a single one.
-> 
-> Eric, wdyt?
-> 
-> I've merged v1 to v5, including Christoph's comment in v2.
-> 
+From: Daeho Jeong <daehojeong@google.com>
 
-I am planning to do this, but I got caught up by the patch
-"f2fs: fix wrong inflight page stats for directIO" that was recently added to
-f2fs.git#dev, which makes this suggestion no longer viable.  Hence my review
-comment on that patch
-(https://lkml.kernel.org/r/YPjNGoFzQojO5Amr@sol.localdomain)
-and Chao's new version of that patch
-(https://lkml.kernel.org/r/20210722131617.749204-1-chao@kernel.org),
-although the new version has some issues too as I commented.
+When we print out a discontinuous compression chunk, it shows like a
+continuous chunk now. To show it more correctly, I've changed the way of
+printing fiemap info like below. Plus, eliminated NEW_ADDR(-1) in fiemap
+info, since it is not in fiemap user api manual.
 
-If you could just revert "f2fs: fix wrong inflight page stats for directIO"
-for now, that would be helpful, as I don't think we want it.
+   Logical          Physical         Length           Flags
+0: 0000000000000000 0000000fdf692000 0000000000004000 1008
+1: 0000000000004000 0000000fdf693000 0000000000004000 1008
+2: 0000000000008000 0000000fdf694000 0000000000004000 1008
+3: 000000000000c000 0000000fdf695000 0000000000004000 1008
+4: 0000000000010000 0000000fdf696000 000000000000c000 1000
+5: 000000000001c000 0000000f8c60d000 0000000000010000 1000
+6: 000000000002c000 0000000f8c61d000 0000000000004000 1008
+7: 0000000000030000 0000000f8c620000 0000000000004000 1008
+8: 0000000000034000 0000000f8c623000 0000000000001000 1008
+9: 0000000000035000 0000000fc7af4000 0000000000003000 1008
 
-- Eric
+Flags
+0x1000 => FIEMAP_EXTENT_MERGED
+0x0008 => FIEMAP_EXTENT_ENCODED
+
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+
+---
+v2: changed the print format
+---
+ fs/f2fs/data.c | 76 ++++++++++++++++++++++++++++----------------------
+ 1 file changed, 42 insertions(+), 34 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 3a01a1b50104..058dc751e3a6 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1843,8 +1843,9 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	u64 logical = 0, phys = 0, size = 0;
+ 	u32 flags = 0;
+ 	int ret = 0;
+-	bool compr_cluster = false;
++	bool compr_cluster = false, compr_appended;
+ 	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
++	unsigned int count_in_cluster;
+ 	loff_t maxbytes;
+ 
+ 	if (fieinfo->fi_flags & FIEMAP_FLAG_CACHE) {
+@@ -1892,8 +1893,10 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	map.m_next_pgofs = &next_pgofs;
+ 	map.m_seg_type = NO_CHECK_TYPE;
+ 
+-	if (compr_cluster)
+-		map.m_len = cluster_size - 1;
++	if (compr_cluster) {
++		map.m_lblk += 1;
++		map.m_len = cluster_size - count_in_cluster;
++	}
+ 
+ 	ret = f2fs_map_blocks(inode, &map, 0, F2FS_GET_BLOCK_FIEMAP);
+ 	if (ret)
+@@ -1903,11 +1906,23 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	if (!(map.m_flags & F2FS_MAP_FLAGS)) {
+ 		start_blk = next_pgofs;
+ 
+-		if (blks_to_bytes(inode, start_blk) < blks_to_bytes(inode,
++		if (blks_to_bytes(inode, start_blk) >= blks_to_bytes(inode,
+ 						max_inode_blocks(inode)))
++			flags |= FIEMAP_EXTENT_LAST;
++		else if (!compr_cluster)
+ 			goto prep_next;
++	}
++
++	compr_appended = false;
++	/* In a case of compressed cluster, append this to the last extent */
++	if (compr_cluster && ((map.m_flags & F2FS_MAP_UNWRITTEN) ||
++			!(map.m_flags & F2FS_MAP_FLAGS))) {
++		unsigned int appended_blks = cluster_size - count_in_cluster + 1;
+ 
+-		flags |= FIEMAP_EXTENT_LAST;
++		size += blks_to_bytes(inode, appended_blks);
++		if (map.m_flags & F2FS_MAP_UNWRITTEN)
++			start_blk += appended_blks;
++		compr_appended = true;
+ 	}
+ 
+ 	if (size) {
+@@ -1926,38 +1941,31 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	if (start_blk > last_blk)
+ 		goto out;
+ 
+-	if (compr_cluster) {
+-		compr_cluster = false;
+-
+-
+-		logical = blks_to_bytes(inode, start_blk - 1);
+-		phys = blks_to_bytes(inode, map.m_pblk);
+-		size = blks_to_bytes(inode, cluster_size);
+-
+-		flags |= FIEMAP_EXTENT_ENCODED;
+-
+-		start_blk += cluster_size - 1;
+-
+-		if (start_blk > last_blk)
+-			goto out;
+-
+-		goto prep_next;
+-	}
+-
+ 	if (map.m_pblk == COMPRESS_ADDR) {
+ 		compr_cluster = true;
+-		start_blk++;
+-		goto prep_next;
+-	}
+-
+-	logical = blks_to_bytes(inode, start_blk);
+-	phys = blks_to_bytes(inode, map.m_pblk);
+-	size = blks_to_bytes(inode, map.m_len);
+-	flags = 0;
+-	if (map.m_flags & F2FS_MAP_UNWRITTEN)
+-		flags = FIEMAP_EXTENT_UNWRITTEN;
++		count_in_cluster = 1;
++	} else if (compr_appended) {
++		compr_cluster = false;
++	} else {
++		logical = blks_to_bytes(inode, start_blk);
++		phys = __is_valid_data_blkaddr(map.m_pblk) ?
++			blks_to_bytes(inode, map.m_pblk) : 0;
++		size = blks_to_bytes(inode, map.m_len);
++		flags = 0;
++
++		if (compr_cluster) {
++			flags = FIEMAP_EXTENT_ENCODED;
++			count_in_cluster += map.m_len;
++			if (count_in_cluster == cluster_size) {
++				compr_cluster = false;
++				size += blks_to_bytes(inode, 1);
++			}
++		} else if (map.m_flags & F2FS_MAP_UNWRITTEN) {
++			flags = FIEMAP_EXTENT_UNWRITTEN;
++		}
+ 
+-	start_blk += bytes_to_blks(inode, size);
++		start_blk += bytes_to_blks(inode, size);
++	}
+ 
+ prep_next:
+ 	cond_resched();
+-- 
+2.32.0.432.gabb21c7263-goog
+
 
 
 _______________________________________________
