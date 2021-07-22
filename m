@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4B8A3D2DED
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 22:50:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E1043D2E72
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jul 2021 22:55:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m6fdu-0000gT-Bk; Thu, 22 Jul 2021 20:50:06 +0000
+	id 1m6fie-0003Mx-Mz; Thu, 22 Jul 2021 20:55:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1m6fdt-0000gL-Ca
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:50:05 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <ebiggers@kernel.org>) id 1m6fid-0003Mk-Dh
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:54:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Nqoppo2F0Qh3Cf0/Ix1b6LrxwHqG4GSLBZ4Is5kV7uE=; b=KogXN7as2EFZJEEHZsDfnF7z0T
- nDVNpICQo1Ru7E30Km9XMvFl0tadHVNLQzXpU7wqr5WlBjQzuA07FebeiYZqDa6y6TSO3ZwN/lh2Z
- k/JHlhX3iE/nXsjvg9733CjyCc45xBe7esPCXhf3BoQWnionih2BzASxF44jSOCjNicE=;
+ bh=x4BnUp9UEW5LWmdFtZgpvqc+v0qWgkew5012XidWEvY=; b=GOmbewoQCl4Nqv8747hUi8zdFX
+ 4H560b3iOrmq6yj0LKvG1CgodMwIySoiP1Sn7PrOqhTHgpSVSNGOmFkyyBd/WMoxTO1WQUld2DdRU
+ D6Scj1ENo6Qu/NDlq6gmVNRLgFss14pOgQbfeHkH1tZaluj0ZYsevwL8kMSqQc8rPqTc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Nqoppo2F0Qh3Cf0/Ix1b6LrxwHqG4GSLBZ4Is5kV7uE=; b=jZ39p7MgT8bIJh/BUpDjEcaQmy
- MnwktOmj/XJ2fiocNoeHfE9+Cf01ZoKsd1MxOTz0oGSy4w22PgJhy1qWBx0l47ruMjwa6IsPx8UQD
- WrIR+oIcwfDMisYqyaPt/IuSCfXThT/rzBWgAz/QZFHBOLj/xffkp/2wCxbA5mnx+dBQ=;
+ bh=x4BnUp9UEW5LWmdFtZgpvqc+v0qWgkew5012XidWEvY=; b=TKGGipl+lAMgErX466n81b0s7Z
+ LoKYfuBh7cdTRsBjLisUJ968Ldz2yImTrlYxg1peEZAs16Uvupet1JnmFHOqC/RRXAtpU95Fka52L
+ AXjExug6ekHYzzW4ShhzjtGVmJQX1wuMb1/tAf8yPt4tTMGSbzMTaKKBXPCLPMxCUiUk=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m6fdo-0002nT-Hx
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:50:05 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 40BE260EB1;
- Thu, 22 Jul 2021 20:49:53 +0000 (UTC)
+ id 1m6fiS-0002yN-8p
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 22 Jul 2021 20:54:59 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9163160EBE;
+ Thu, 22 Jul 2021 20:54:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1626986993;
- bh=JD9ih+TCuhxKKcony2MYPcqZ1IBkGPn6/3WXMlbxRBc=;
+ s=k20201202; t=1626987282;
+ bh=5EuMpFl6Z+3vzvXgXMhAL/OynlzEKbafSFSDnWtb5XI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=AkQKrFdcE56yfDvrH/1o+OQSoYKpQl7HLZO+ot6FH2Btzl847KQwP4vMOq3NSzllw
- PgxGdgxw4LuDULid4Vif4hO28fXWVvKFu4uXUrhucJZZFQeb/h5VfLLmuyPtXm6hMx
- JuAeu3ycb2ZO8rpzssUKbw7YJ/V2I3lJDod2pPDy79qSdXstcJw/mPXWN1+t4M6594
- zidSptwt8Lb1Zw0UNFedXc9Ju7/vIsaphY6yg/tl4pJQ+2FUoZbZIVu1qZgwFthgKN
- ypGMgVFpMS2KOTGUgKR0mAC2hjLo3s0d7nZLpOl7+ifdT9eMpaFKyse2afSjx0flU8
- KDq4xhT7AQ1TQ==
-Date: Thu, 22 Jul 2021 13:49:51 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <YPnZ7wS3pireCbHI@google.com>
+ b=YU3KgggHhObzmH7NxwmsMvZMaahYqcNSFzdij3+M12WFlbIE61BUFBb03luwzZ8IP
+ e7bjCkFn/rYn2hH/aGkg4WlQkld69KIBxoQXBeavZN60Ja9HzBZ4TmRCfhro9pJKki
+ szl9E3vi31VhvUr1JtY8hhNsStDVxV3Hs2AsTSbsx7W+Cd/DeYaorN87RFcS50HHqD
+ hBOHBWDVN//MKdXaWq/sooa1+iR+qto7QADxf7/5CqSdgTU7yxkd7pQvCSXsfWCVYd
+ ahxmkk7Q6ecLhiYskxNtm4HDt/NopKN7aOsFsHp03ZzrO3CgOEsA201qDKtQNpr1Pl
+ E7VA/ky2AixWQ==
+Date: Thu, 22 Jul 2021 13:54:41 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <YPnbEdVxClWwatKz@gmail.com>
 References: <20210716143919.44373-1-ebiggers@kernel.org>
  <20210716143919.44373-7-ebiggers@kernel.org>
  <YPU+3inGclUtcSpJ@infradead.org> <YPnZa5dFVP7vtB9q@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <YPnZa5dFVP7vtB9q@google.com>
-X-Spam-Score: -1.5 (-)
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,8 +70,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m6fdo-0002nT-Hx
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m6fiS-0002yN-8p
 Subject: Re: [f2fs-dev] [PATCH 6/9] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -85,14 +85,14 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Satya Tangirala <satyaprateek2357@gmail.com>, linux-xfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
  Matthew Bobrowski <mbobrowski@mbobrowski.org>,
  Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/22, Jaegeuk Kim wrote:
+On Thu, Jul 22, 2021 at 01:47:39PM -0700, Jaegeuk Kim wrote:
 > On 07/19, Christoph Hellwig wrote:
 > > On Fri, Jul 16, 2021 at 09:39:16AM -0500, Eric Biggers wrote:
 > > > +static blk_qc_t f2fs_dio_submit_bio(struct inode *inode, struct iomap *iomap,
@@ -130,144 +130,21 @@ On 07/22, Jaegeuk Kim wrote:
 > Eric, wdyt?
 > 
 > I've merged v1 to v5, including Christoph's comment in v2.
-
-Sorry, I mean patch #1 to #5. You can find them in:
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev
-
 > 
-> > 
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 4fbf28f5aaab..9f9cc49fbe94 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -3369,50 +3369,6 @@ static int f2fs_write_end(struct file *file,
-> >  	return copied;
-> >  }
-> >  
-> > -static void f2fs_dio_end_io(struct bio *bio)
-> > -{
-> > -	struct f2fs_private_dio *dio = bio->bi_private;
-> > -
-> > -	dec_page_count(F2FS_I_SB(dio->inode),
-> > -			dio->write ? F2FS_DIO_WRITE : F2FS_DIO_READ);
-> > -
-> > -	bio->bi_private = dio->orig_private;
-> > -	bio->bi_end_io = dio->orig_end_io;
-> > -
-> > -	kfree(dio);
-> > -
-> > -	bio_endio(bio);
-> > -}
-> > -
-> > -static blk_qc_t f2fs_dio_submit_bio(struct inode *inode, struct iomap *iomap,
-> > -				    struct bio *bio, loff_t file_offset)
-> > -{
-> > -	struct f2fs_private_dio *dio;
-> > -	bool write = (bio_op(bio) == REQ_OP_WRITE);
-> > -
-> > -	dio = f2fs_kzalloc(F2FS_I_SB(inode),
-> > -			sizeof(struct f2fs_private_dio), GFP_NOFS);
-> > -	if (!dio)
-> > -		goto out;
-> > -
-> > -	dio->inode = inode;
-> > -	dio->orig_end_io = bio->bi_end_io;
-> > -	dio->orig_private = bio->bi_private;
-> > -	dio->write = write;
-> > -
-> > -	bio->bi_end_io = f2fs_dio_end_io;
-> > -	bio->bi_private = dio;
-> > -
-> > -	inc_page_count(F2FS_I_SB(inode),
-> > -			write ? F2FS_DIO_WRITE : F2FS_DIO_READ);
-> > -
-> > -	return submit_bio(bio);
-> > -out:
-> > -	bio->bi_status = BLK_STS_IOERR;
-> > -	bio_endio(bio);
-> > -	return BLK_QC_T_NONE;
-> > -}
-> > -
-> >  void f2fs_invalidate_page(struct page *page, unsigned int offset,
-> >  							unsigned int length)
-> >  {
-> > @@ -4006,6 +3962,18 @@ const struct iomap_ops f2fs_iomap_ops = {
-> >  	.iomap_begin	= f2fs_iomap_begin,
-> >  };
-> >  
-> > +static int f2fs_dio_end_io(struct kiocb *iocb, ssize_t size, int error,
-> > +		unsigned flags)
-> > +{
-> > +	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(iocb->ki_filp));
-> > +
-> > +	if (iocb->ki_flags & IOCB_WRITE)
-> > +		dec_page_count(sbi, F2FS_DIO_WRITE);
-> > +	else
-> > +		dec_page_count(sbi, F2FS_DIO_READ);
-> > +	return 0;
-> > +}
-> > +
-> >  const struct iomap_dio_ops f2fs_iomap_dio_ops = {
-> > -	.submit_io	= f2fs_dio_submit_bio,
-> > +	.end_io		= f2fs_dio_end_io,
-> >  };
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index 6dbbac05a15c..abd521dc504a 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -1750,13 +1750,6 @@ struct f2fs_sb_info {
-> >  #endif
-> >  };
-> >  
-> > -struct f2fs_private_dio {
-> > -	struct inode *inode;
-> > -	void *orig_private;
-> > -	bio_end_io_t *orig_end_io;
-> > -	bool write;
-> > -};
-> > -
-> >  #ifdef CONFIG_F2FS_FAULT_INJECTION
-> >  #define f2fs_show_injection_info(sbi, type)					\
-> >  	printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",	\
-> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > index 6b8eac6b25d4..4fed90cc1462 100644
-> > --- a/fs/f2fs/file.c
-> > +++ b/fs/f2fs/file.c
-> > @@ -4259,6 +4259,7 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
-> >  		down_read(&fi->i_gc_rwsem[READ]);
-> >  	}
-> >  
-> > +	inc_page_count(F2FS_I_SB(inode), F2FS_DIO_READ);
-> >  	ret = iomap_dio_rw(iocb, to, &f2fs_iomap_ops, &f2fs_iomap_dio_ops, 0);
-> >  
-> >  	up_read(&fi->i_gc_rwsem[READ]);
-> > @@ -4270,6 +4271,8 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
-> >  	else if (ret == -EIOCBQUEUED)
-> >  		f2fs_update_iostat(F2FS_I_SB(inode), APP_DIRECT_READ_IO,
-> >  				   count - iov_iter_count(to));
-> > +	else
-> > +		dec_page_count(F2FS_I_SB(inode), F2FS_DIO_READ);
-> >  out:
-> >  	trace_f2fs_direct_IO_exit(inode, pos, count, READ, ret);
-> >  	return ret;
-> > @@ -4446,6 +4449,7 @@ static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
-> >  
-> >  	if (pos + count > inode->i_size)
-> >  		dio_flags |= IOMAP_DIO_FORCE_WAIT;
-> > +	inc_page_count(F2FS_I_SB(inode), F2FS_DIO_WRITE);
-> >  	ret = iomap_dio_rw(iocb, from, &f2fs_iomap_ops, &f2fs_iomap_dio_ops,
-> >  			   dio_flags);
-> >  	if (ret == -ENOTBLK)
-> > @@ -4459,6 +4463,9 @@ static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
-> >  
-> >  	up_read(&fi->i_gc_rwsem[WRITE]);
-> >  
-> > +	if (ret <= 0 && ret != -EIOCBQUEUED)
-> > +		dec_page_count(F2FS_I_SB(inode), F2FS_DIO_WRITE);
-> > +
-> >  	if (ret < 0) {
-> >  		if (ret == -EIOCBQUEUED)
-> >  			f2fs_update_iostat(sbi, APP_DIRECT_IO,
+
+I am planning to do this, but I got caught up by the patch
+"f2fs: fix wrong inflight page stats for directIO" that was recently added to
+f2fs.git#dev, which makes this suggestion no longer viable.  Hence my review
+comment on that patch
+(https://lkml.kernel.org/r/YPjNGoFzQojO5Amr@sol.localdomain)
+and Chao's new version of that patch
+(https://lkml.kernel.org/r/20210722131617.749204-1-chao@kernel.org),
+although the new version has some issues too as I commented.
+
+If you could just revert "f2fs: fix wrong inflight page stats for directIO"
+for now, that would be helpful, as I don't think we want it.
+
+- Eric
 
 
 _______________________________________________
