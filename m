@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CD933D4D08
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 25 Jul 2021 12:01:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A58A3D4D2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 25 Jul 2021 12:51:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m7awH-0002zK-1C; Sun, 25 Jul 2021 10:00:53 +0000
+	id 1m7bix-0004jA-AS; Sun, 25 Jul 2021 10:51:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1m7awE-0002zB-BH
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Jul 2021 10:00:50 +0000
+ (envelope-from <chao@kernel.org>) id 1m7biw-0004j4-GD
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Jul 2021 10:51:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c/JJja6M/4eW6LRc7LnQAQHdYv1wmipAzy6Fc7gEwfQ=; b=AdHEfYY5obqSU6goD/lJpKjno2
- IsZqPw+wOj7SMMrJy89k4pkPv+zL+U1teyQfdOkQ8FWsa3QHTyv6g0iscw1dY9221ubs7ZI7rx91v
- bMHGEs+bYAt/sC2wE1WO3nQUjXSVt536NIhmilyCNXqRkWDiTjkciiykhY5hQa0aV6UU=;
+ bh=OV5Ba5LMV+6i6zFX3oSWaoYj75pw0AA1iPldqqmgNK0=; b=KPlZ4Qp6NopCHmc3swloun0eMQ
+ 8BwY/bXdiSHMj+N8/cbyJm3xEe9UgI/xlmS6u4bYxEVcYhoNdfufd/kyS2HstZHCxNYEhjGi3RWjd
+ gtQvEsNPSTAFQ748qFC3v09VyC3VQ+ax6e0qqTuib1NJP2KCGOuF2plUmcrqNXhkCsqQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,51 +29,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c/JJja6M/4eW6LRc7LnQAQHdYv1wmipAzy6Fc7gEwfQ=; b=LqQHfGPGEJUNhxNX+hp/tbAM5i
- WqwXjWWljuVnGLsOTXeXJ0ROwN9fn2YZFWsTKFve/wkAZrcKEKt4RxHLQqadhPJcfkaQ2gyLZULOB
- /XWsnaJfYzE38mDnfc31WR52yppZ4GyOwFgMopLoA85Nb3avyD7WiWO7m06UoAo3u7SU=;
+ bh=OV5Ba5LMV+6i6zFX3oSWaoYj75pw0AA1iPldqqmgNK0=; b=FVCwyRPvt5Sr7PzbFYFL9ZlJp2
+ LKxl9uVaXhdbq6cjBmkMzhlmNH5kQiQR2cFv9tTzFfijM86vH0uaFZ8k31LlMTxibBvxM05UL7Cg6
+ qqMJAHET8FhywU7fTcGhm9eWQwLwxeCeFQ/tuzD7uB7snsWRvUiPPRLJHkZ3lmUPG1OY=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m7avv-00225J-2Y
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Jul 2021 10:00:50 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 39F4560C51;
- Sun, 25 Jul 2021 10:00:24 +0000 (UTC)
+ id 1m7bil-00020K-NF
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 25 Jul 2021 10:51:10 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B169260E09;
+ Sun, 25 Jul 2021 10:50:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627207225;
- bh=x7k4bz7Y7uiJ9HuwIGC00aa9QqIdMDVb+kj05Oe8caQ=;
+ s=k20201202; t=1627210254;
+ bh=yQbrkcDM1yJmK+PftQjYegtYQ1gnnfPgYmC1lw0cjwo=;
  h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=K9xh3UjE9h8p4mNba4tJb72qMolVr5FH3ck2XHfJC3Nq04ce2eNk/tWZvYXz09Xa4
- +iI6mJ90H2NO+S//WQjEpIA7XrQYfP831fQ0DmDfswAZvUdfBVU3UVjkxpgYhxTvi5
- lZhDdEBVy61QSDHoJGEAc1B2kXpVIzulRFjasgiCNcKoGPiYDkI1fgZsMQjI8YgeDl
- TtQPELL26wKbWqPPLasBDRNXpx4fiZPjnA2J3xmL4mlkQpsuerCiCsRR6l4Y9MmGya
- rogIhPCQ1fgY+drq8dJVV4V/uBQH8/2i/YE78Ibc15+7mq+hGPP8xBm5m+vyyIGoa0
- ZW9XoygA98WSw==
+ b=pN7HlkVX4xMxq6PYGr86ouHgYPN4BM2tSJa5oUD15kkgc1b+9w8Y2sEy6SEHKzr81
+ +uZkRPeeqTE8Z+QH7n9Ty/zswhUrPB46PhIpL0nA+bczwBPF+m62Z9bj+oAscjeUGd
+ KY7YQfzXlPBozAkQh6fhM/IP7HhTUJDEpADa3XbKr1hxLdG5cOmimsafF7eQYe+YqY
+ VHxvo3u5L0SOsrJjdG0ozEX3uQtxqFG5bAUtHHzgBvCPmXZw7vd2RDUQDfbJYcXtHu
+ TzhkWQv8pNLZvbj+xmyFcvqAqMt+eicbMHJPPeFqL+CqOxodBVe7E5MWtRXiJP7HML
+ 0+9q4Z73B0gWg==
 To: Eric Biggers <ebiggers@kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20210716143919.44373-1-ebiggers@kernel.org>
- <20210716143919.44373-2-ebiggers@kernel.org>
+ <20210716143919.44373-4-ebiggers@kernel.org>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <7bc676f9-dbaf-5c8d-2b6e-67c75383d02d@kernel.org>
-Date: Sun, 25 Jul 2021 18:00:23 +0800
+Message-ID: <14782036-f6a5-878a-d21f-e7dd7008a285@kernel.org>
+Date: Sun, 25 Jul 2021 18:50:51 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <20210716143919.44373-2-ebiggers@kernel.org>
+In-Reply-To: <20210716143919.44373-4-ebiggers@kernel.org>
 Content-Language: en-US
-X-Spam-Score: -1.2 (-)
+X-Spam-Score: -1.7 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
  -1.1 NICE_REPLY_A           Looks like a legit reply (A)
- -0.3 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m7avv-00225J-2Y
-Subject: Re: [f2fs-dev] [PATCH 1/9] f2fs: make f2fs_write_failed() take
- struct inode
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+ 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m7bil-00020K-NF
+Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: rework write preallocations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,12 +98,39 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 2021/7/16 22:39, Eric Biggers wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Make f2fs_write_failed() take a 'struct inode' directly rather than a
-> 'struct address_space', as this simplifies it slightly.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> f2fs_write_begin() assumes that all blocks were preallocated by
+> default unless FI_NO_PREALLOC is explicitly set.  This invites data
+> corruption, as there are cases in which not all blocks are preallocated.
+> Commit 47501f87c61a ("f2fs: preallocate DIO blocks when forcing
+> buffered_io") fixed one case, but there are others remaining.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Could you please explain which cases we missed to handle previously?
+then I can check those related logic before and after the rework.
+
+> -			/*
+> -			 * If force_buffere_io() is true, we have to allocate
+> -			 * blocks all the time, since f2fs_direct_IO will fall
+> -			 * back to buffered IO.
+> -			 */
+> -			if (!f2fs_force_buffered_io(inode, iocb, from) &&
+> -					f2fs_lfs_mode(F2FS_I_SB(inode)))
+
+We should keep this OPU DIO logic, otherwise, in lfs mode, write dio
+will always allocate two block addresses for each 4k append IO.
+
+I jsut test based on codes of last f2fs dev-test branch.
+
+rm /mnt/f2fs/dio
+dd if=/dev/zero  of=/mnt/f2fs/dio bs=4k count=4 oflag=direct
+
+           <...>-763176  [001] ...1 177258.793370: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 0, start blkaddr = 0xe1a2e, len = 0x1, flags = 48,seg_type = 1, may_create = 1, err = 0
+            <...>-763176  [001] ...1 177258.793462: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 0, start blkaddr = 0xe1a2f, len = 0x1, flags = 16,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793575: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 1, start blkaddr = 0xe1a30, len = 0x1, flags = 48,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793599: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 1, start blkaddr = 0xe1a31, len = 0x1, flags = 16,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793735: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 2, start blkaddr = 0xe1a32, len = 0x1, flags = 48,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793769: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 2, start blkaddr = 0xe1a33, len = 0x1, flags = 16,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793859: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 3, start blkaddr = 0xe1a34, len = 0x1, flags = 48,seg_type = 1, may_create = 1, err = 0
+               dd-763176  [001] ...1 177258.793885: f2fs_map_blocks: dev = (259,1), ino = 6, file offset = 3, start blkaddr = 0xe1a35, len = 0x1, flags = 16,seg_type = 1, may_create = 1, err = 0
 
 Thanks,
 
