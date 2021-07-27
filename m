@@ -2,65 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60CB93D72F4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 12:19:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id A115D3D79DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 17:34:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m8KBO-0004r4-Uf; Tue, 27 Jul 2021 10:19:30 +0000
+	id 1m8P5l-00065l-Ed; Tue, 27 Jul 2021 15:34:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1m8KBN-0004qx-Gx
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 10:19:29 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <djwong@kernel.org>) id 1m8P5i-00060j-Ph
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 15:33:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vDz/OCj8JQvffbs3vocEkjaYhz6pH7MAbgQ67Up0yDc=; b=EfryCQ6f3F2yrDlS/kWmdpFtrm
- p/fsu+BXlnIZ2kD54wNsG1iAGrLxp1VqV0t21pt38nggHrXC/JEgAusdmfxQsD+hUxBo2AqxzjHvK
- hRof5e2PSIbeiq3WIZwlAsG5/0ZLCE+Gre52J7onf2HiXuzRV+/DdhxwM1ZRMTpLTLtc=;
+ bh=3BqbVFxx32zjKdv3Wx39WMlXk/fz/M+3Nd/MCA4VRbM=; b=ISg6ahgMkODFnBLtplFQKij7Yo
+ i+CxBOKe+97dkUmYH1jbrijWeaWdMalQkeQ/vzBxw9vFAXqCMmopDqhY6v4w5Fnk+YBs5ZJnJ/djd
+ EtiWvclDVlbyX/QRAM5aEog/qkpRifCKzA6lYdiNrbwDdcyECw6/tKOBvL99zVLSRroM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vDz/OCj8JQvffbs3vocEkjaYhz6pH7MAbgQ67Up0yDc=; b=AUqjMfgMqoUXkE5LWO6Hquem5F
- KPEYKk95h6Rj3z5voAohW7YwyoPNLEmH324pwKq4k7Zr8nMeST8SAJkYJ0H6I4NqU8ZVXpn4tW8gj
- 0g7IslS5O+C9H/o5kd5q4+hKomxlC+2jSzGccx4bjcpWf7/lE5xbO+vnXt0QcTXa6qX4=;
+ bh=3BqbVFxx32zjKdv3Wx39WMlXk/fz/M+3Nd/MCA4VRbM=; b=C46WezmNZjWmPM/F8avQ55xRic
+ slZhWBKVDYc+jbrH/rfkzyuYGxzhxWb5Q0Qrw2MWxImVql74TxG2x9P9pjwYhG2FN6NsVuriea6Zw
+ FRAfqI1n2dlisi3MoqqQs65OKsPKDUwxRZcsLaMCeo5KLmgcxYiN/MC1c4nfVcB68ThI=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m8KBC-0004fr-9K
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 10:19:29 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4C3D161529;
- Tue, 27 Jul 2021 10:19:11 +0000 (UTC)
+ id 1m8P5X-0004gB-Lh
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 15:33:58 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 1F65161B30;
+ Tue, 27 Jul 2021 15:33:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627381152;
- bh=Fdsa4sSlTEdolf4YyPr9QUc/UAI4GX3r8iZ7QTaseiY=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=OuCNkzhPt9jE3hPOfZNBGQ2Gm7IHWHh3VO9r7aGmZA2a6B6Dvl6qKG9Y+y69ryBbw
- 4AL5iA9/ukNifR4jcaXWCa3Q6JU1YCI3EnpRpq2R1LlXJWSZh0kFujHswcqgyrIai2
- zio1sOzGpiVFp8dnxWx91qug65KSzCnq/F4lm8PhLe7ZthKKOak/lrNB6na7z4M3wB
- 0mrD1wtRs+9h89hlXm/TPYH7IllGZj1bZkXk7Dqf3DehHiasMoRLpXSWHQ5Gm4HuqF
- kqdvYyQBUi80eWyBeOo/Xp9mFfVCIHRgQ7QmX/3mpJw5nSb5qUZkuOBVWXOYAkTdQ9
- A0lcIVgb/FNMA==
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20210726041819.2059593-1-daeho43@gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <f9555521-8878-2d46-36f1-3032bb8bbc0a@kernel.org>
-Date: Tue, 27 Jul 2021 18:19:08 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ s=k20201202; t=1627400016;
+ bh=4PZARTzEx+NyszsOAu6lbi7w9h8FOGeHdmwe6pE+9NE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=jMfiwaUj6xWzdeDehxp1Kzifwu3wYRSTIGzv9URGKhVGQ7a5oKrqU5xwTPvM8rNx8
+ pL33hpdBVSGbU0eDKRD5kdDDGpSsg07OudM+eVRisgp4MLTvCbY68gt6AFwrlEaWeL
+ aopLejmyoFelH+9R0wF/F8FIhMojSeOMTZFJVWxqpP5Rgqa4t4zjqH2VX+AdH5XtWu
+ uSZlHgfJSee0K/66CiOCohm2St51HvN8o1LX6E39pR4NUcaFuF7YLB9uTQuObrvHCe
+ 87yYD/bifuFjreteUYJGN6RMd5ynEbjBdzoY0CxjBKru8RyTZKG4/VRSpIqcus1Gg1
+ 6rq0L0f6sjiKQ==
+Date: Tue, 27 Jul 2021 08:33:35 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20210727153335.GE559212@magnolia>
+References: <20210716143919.44373-1-ebiggers@kernel.org>
+ <20210716143919.44373-4-ebiggers@kernel.org>
+ <14782036-f6a5-878a-d21f-e7dd7008a285@kernel.org>
+ <YP2l+1umf9ct/4Sp@sol.localdomain> <YP9oou9sx4oJF1sc@google.com>
+ <70f16fec-02f6-cb19-c407-856101cacc23@kernel.org>
+ <YP+38QzXS6kpLGn0@sol.localdomain>
+ <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20210726041819.2059593-1-daeho43@gmail.com>
-Content-Language: en-US
-X-Spam-Score: -1.3 (-)
+Content-Disposition: inline
+In-Reply-To: <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,11 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.4 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m8KBC-0004fr-9K
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: change fiemap way in printing
- compression chunk
+X-Headers-End: 1m8P5X-0004gB-Lh
+Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: rework write preallocations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,179 +87,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, Eric Biggers <ebiggers@google.com>
+Cc: Satya Tangirala <satyaprateek2357@gmail.com>, linux-xfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ Matthew Bobrowski <mbobrowski@mbobrowski.org>,
+ Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/7/26 12:18, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Tue, Jul 27, 2021 at 04:30:16PM +0800, Chao Yu wrote:
+> On 2021/7/27 15:38, Eric Biggers wrote:
+> > That's somewhat helpful, but I've been doing some more investigation and now I'm
+> > even more confused.  How can f2fs support non-overwrite DIO writes at all
+> > (meaning DIO writes in LFS mode as well as DIO writes to holes in non-LFS mode),
+> > given that it has no support for unwritten extents?  AFAICS, as-is users can
 > 
-> When we print out a discontinuous compression chunk, it shows like a
-> continuous chunk now. To show it more correctly, I've changed the way of
-> printing fiemap info like below. Plus, eliminated NEW_ADDR(-1) in fiemap
-> info, since it is not in fiemap user api manual.
-> 
-> Let's assume 16KB compression cluster.
-> 
-> <before>
->     Logical          Physical         Length           Flags
-> 0:  0000000000000000 00000002c091f000 0000000000004000 1008
-> 1:  0000000000004000 00000002c0920000 0000000000004000 1008
->    ...
-> 9:  0000000000034000 0000000f8c623000 0000000000004000 1008
-> 10: 0000000000038000 000000101a6eb000 0000000000004000 1008
-> 
-> <after>
-> 0:  0000000000000000 00000002c091f000 0000000000004000 1008
-> 1:  0000000000004000 00000002c0920000 0000000000004000 1008
->    ...
-> 9:  0000000000034000 0000000f8c623000 0000000000001000 1008
-> 10: 0000000000035000 000000101a6ea000 0000000000003000 1008
-> 11: 0000000000038000 000000101a6eb000 0000000000002000 1008
-> 12: 000000000003a000 00000002c3544000 0000000000002000 1008
-> 
-> Flags
-> 0x1000 => FIEMAP_EXTENT_MERGED
-> 0x0008 => FIEMAP_EXTENT_ENCODED
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> Tested-by: Eric Biggers <ebiggers@google.com>
-> 
-> ---
-> v4: initialized count_in_cluster
-> v3: fix the missing last extent flag issue
-> v2: changed the print format
-> ---
->   fs/f2fs/data.c | 75 ++++++++++++++++++++++++++++----------------------
->   1 file changed, 42 insertions(+), 33 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 3a01a1b50104..1a716c3b5457 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1843,8 +1843,9 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
->   	u64 logical = 0, phys = 0, size = 0;
->   	u32 flags = 0;
->   	int ret = 0;
-> -	bool compr_cluster = false;
-> +	bool compr_cluster = false, compr_appended;
->   	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
-> +	unsigned int count_in_cluster = 0;
->   	loff_t maxbytes;
->   
->   	if (fieinfo->fi_flags & FIEMAP_FLAG_CACHE) {
-> @@ -1892,15 +1893,17 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
->   	map.m_next_pgofs = &next_pgofs;
->   	map.m_seg_type = NO_CHECK_TYPE;
->   
-> -	if (compr_cluster)
-> -		map.m_len = cluster_size - 1;
-> +	if (compr_cluster) {
-> +		map.m_lblk += 1;
-> +		map.m_len = cluster_size - count_in_cluster;
-> +	}
->   
->   	ret = f2fs_map_blocks(inode, &map, 0, F2FS_GET_BLOCK_FIEMAP);
->   	if (ret)
->   		goto out;
->   
->   	/* HOLE */
-> -	if (!(map.m_flags & F2FS_MAP_FLAGS)) {
-> +	if (!compr_cluster && !(map.m_flags & F2FS_MAP_FLAGS)) {
->   		start_blk = next_pgofs;
->   
->   		if (blks_to_bytes(inode, start_blk) < blks_to_bytes(inode,
-> @@ -1910,6 +1913,14 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
->   		flags |= FIEMAP_EXTENT_LAST;
->   	}
->   
-> +	compr_appended = false;
-> +	/* In a case of compressed cluster, append this to the last extent */
-> +	if (compr_cluster && ((map.m_flags & F2FS_MAP_UNWRITTEN) ||
-> +			!(map.m_flags & F2FS_MAP_FLAGS))) {
-> +		compr_appended = true;
-> +		goto skip_fill;
-> +	}
-> +
->   	if (size) {
->   		flags |= FIEMAP_EXTENT_MERGED;
->   		if (IS_ENCRYPTED(inode))
-> @@ -1926,38 +1937,36 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
->   	if (start_blk > last_blk)
->   		goto out;
->   
-> -	if (compr_cluster) {
-> -		compr_cluster = false;
-> -
-> -
-> -		logical = blks_to_bytes(inode, start_blk - 1);
-> -		phys = blks_to_bytes(inode, map.m_pblk);
-> -		size = blks_to_bytes(inode, cluster_size);
-> -
-> -		flags |= FIEMAP_EXTENT_ENCODED;
-> -
-> -		start_blk += cluster_size - 1;
-> -
-> -		if (start_blk > last_blk)
-> -			goto out;
-> -
-> -		goto prep_next;
-> -	}
-> -
-> +skip_fill:
->   	if (map.m_pblk == COMPRESS_ADDR) {
+> I'm trying to pick up DAX support patch created by Qiuyang from huawei, and it
+> looks it faces the same issue, so it tries to fix this by calling sb_issue_zeroout()
+> in f2fs_map_blocks() before it returns.
 
-Looks good, but one more thing I concern is how about detecting and
-returning -EFSCORRUPTED for below corrupted metadata cases:
-- [COMPRESS_ADDR, blkaddr, COMPRESS_ADDR, NEW_ADDR]
-- [blkaddr, COMPRESS_ADDR, NULL_ADDR, NULL_ADDR]
+I really hope you don't, because zeroing the region before memcpy'ing it
+is absurd.  I don't know if f2fs can do that (xfs can't really) without
+pinning resources during a potentially lengthy memcpy operation, but you
+/could/ allocate the space in ->iomap_begin, attach some record of that
+to iomap->private, and only commit the mapping update in ->iomap_end.
 
-Thanks,
+--D
 
->   		compr_cluster = true;
-> -		start_blk++;
-> -		goto prep_next;
-> -	}
-> -
-> -	logical = blks_to_bytes(inode, start_blk);
-> -	phys = blks_to_bytes(inode, map.m_pblk);
-> -	size = blks_to_bytes(inode, map.m_len);
-> -	flags = 0;
-> -	if (map.m_flags & F2FS_MAP_UNWRITTEN)
-> -		flags = FIEMAP_EXTENT_UNWRITTEN;
-> +		count_in_cluster = 1;
-> +	} else if (compr_appended) {
-> +		unsigned int appended_blks = cluster_size -
-> +						count_in_cluster + 1;
-> +		size += blks_to_bytes(inode, appended_blks);
-> +		start_blk += appended_blks;
-> +		compr_cluster = false;
-> +	} else {
-> +		logical = blks_to_bytes(inode, start_blk);
-> +		phys = __is_valid_data_blkaddr(map.m_pblk) ?
-> +			blks_to_bytes(inode, map.m_pblk) : 0;
-> +		size = blks_to_bytes(inode, map.m_len);
-> +		flags = 0;
-> +
-> +		if (compr_cluster) {
-> +			flags = FIEMAP_EXTENT_ENCODED;
-> +			count_in_cluster += map.m_len;
-> +			if (count_in_cluster == cluster_size) {
-> +				compr_cluster = false;
-> +				size += blks_to_bytes(inode, 1);
-> +			}
-> +		} else if (map.m_flags & F2FS_MAP_UNWRITTEN) {
-> +			flags = FIEMAP_EXTENT_UNWRITTEN;
-> +		}
->   
-> -	start_blk += bytes_to_blks(inode, size);
-> +		start_blk += bytes_to_blks(inode, size);
-> +	}
->   
->   prep_next:
->   	cond_resched();
+> > easily leak uninitialized disk contents on f2fs by issuing a DIO write that
+> > won't complete fully (or might not complete fully), then reading back the blocks
+> > that got allocated but not written to.
+> > 
+> > I think that f2fs will have to take the ext2 approach of not allowing
+> > non-overwrite DIO writes at all...
+> Yes,
 > 
+> Another option is to enhance f2fs metadata's scalability which needs to update layout
+> of dnode block or SSA block, after that we can record the status of unwritten data block
+> there... it's a big change though...
+> 
+> Thanks,
+> 
+> > 
+> > - Eric
+> > 
 
 
 _______________________________________________
