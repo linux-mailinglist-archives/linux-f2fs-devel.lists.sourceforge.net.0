@@ -2,82 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58F383D7133
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 10:30:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1E8C3D7297
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 12:07:57 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m8ITu-0000Zu-JN; Tue, 27 Jul 2021 08:30:30 +0000
+	id 1m8K05-0004If-KI; Tue, 27 Jul 2021 10:07:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1m8ITr-0000Zk-3P
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 08:30:27 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1m8K03-0004IW-3f
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 10:07:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KJcTIAOlqbT7wHvBBXGTPibjLrTiFTvgqrm4ldu2htI=; b=BQcPeGJdl7dzmdN2m7u/b1cMy1
- bSLxWD3QJGmKO2AZaBAtlhZtwZpHRJLqz54ynisH1tj3FLwjOf354xJyIHS/wxuwV8A5iNpqXnyQ3
- c5BLkjTmWHZRUddAe1OV/NkufCG7kX4lNCwYI0o/LJOafqH4/ZIsgR4ZmEzVMbmI5Rco=;
+ bh=C3kDcBtMmljubQMknqnN3Q50TKGBAcKno7zsvBEr1kc=; b=Y3gJ1J6sSnBMRRFF0OzD0lxxuD
+ /d/DvVkt6WRGrm4xEB8djJ55Xr/PQ2Y/bNSkIGcRNhwlYM3JM2tA1mkqwZHu7bDrYrUTZzO6auZh/
+ wqAOIEF5QglDNvKHEu7zaT2ZeQ9uNypm+f63BPPBsz82iJzHtbEO5iYw62zer8wADIOk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=KJcTIAOlqbT7wHvBBXGTPibjLrTiFTvgqrm4ldu2htI=; b=Lek/Eczr+OmhN+e/TnHb6LonLf
- bRwsHlBd8/OmbIYpx30VLyuahvxgpxnWay5ANU0J7UMu4WmjavI/rQVl1GmcYUi/gklI9yWY2t4Wl
- uvc+7MJ4L1jBJ37XH34/zFG5TEZctKZDOXUzNDrD5HKhwTRSK6NWNgYVRys7AUjHisAA=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=C3kDcBtMmljubQMknqnN3Q50TKGBAcKno7zsvBEr1kc=; b=c
+ mxwOGXKUpROfPH7Tp+JYbZ2Em/Z4cYLk6dPKmHWfNHTlawQYxGspselF5myCLWNHf0NyU0IPWpLw/
+ ihlyXS2W1K6ErBKVSa7aHznI8HrFfiSr7khVo2NQaoibQDa2Nv7QX6BR9+RHh1Xdp8Ez9z4rurQlf
+ MPob4NqHfJMBIC9M=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m8ITo-003zaN-Sx
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 08:30:26 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id EF0E9611AD;
- Tue, 27 Jul 2021 08:30:17 +0000 (UTC)
+ id 1m8Jzv-00042s-R6
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 10:07:47 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id 84A8A61406
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 27 Jul 2021 10:07:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627374619;
- bh=RC6Acl2iuH0vikxc0De/SVQbosapIi4KuvPx7aSVX/E=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=ENHoxaf1pjgjGoribd/AIOnp0lb7C0kwIJD0P/oAJmBBP1u0cuZ97ejG/GYq2pqUn
- g+GrK0qh/mqMcRKcDsebAnEjcsUZTGy9H2ZtnPKYjlG1Fzif/TCbXjTCSyZ0Tkm5wm
- xkMaZhzARG/O3vaMe3ImgzJDqjVPmSaBvWGZev5pod/VdQQ6tyENezrmgtDJXlbhSu
- JcMCgBWzuOmWQo86CRS4gcaD1KjLTxqZZwM7ZJHwPz1JphFZ7Kt1gwycsv7QD66d3g
- QU9blu8qpG2RN9Yi7Zpr6VHd9y16Co5w9YvkHtIHn9+LdmsCproxP0Q99CMlVM6BhD
- 3+dGTikJOeLIw==
-To: Eric Biggers <ebiggers@kernel.org>
-References: <20210716143919.44373-1-ebiggers@kernel.org>
- <20210716143919.44373-4-ebiggers@kernel.org>
- <14782036-f6a5-878a-d21f-e7dd7008a285@kernel.org>
- <YP2l+1umf9ct/4Sp@sol.localdomain> <YP9oou9sx4oJF1sc@google.com>
- <70f16fec-02f6-cb19-c407-856101cacc23@kernel.org>
- <YP+38QzXS6kpLGn0@sol.localdomain>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
-Date: Tue, 27 Jul 2021 16:30:16 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ s=k20201202; t=1627380449;
+ bh=iOA0oFBG452J2uDOdeki+xaUUPAu74yUZItlK04qkhc=;
+ h=From:To:Subject:Date:From;
+ b=ej4PfeGaVbdeO4mw36p0++XTAVmM1Y90sW8OcWd7KR1UchzOvytxNg+7ls0vcYuFH
+ 9i0iZqKlFVU2pC0b+3JLt+thnoWOL9PGhowQBs60Q9fBGA2s0ZRdBtBf7L4Gp/qy2Q
+ /J169AotIPRzksTpZTm3SArpivWWzRBNurnKr3cSCGCAs4gbEkkNFdMYkdX3+VlyRq
+ RbMl8ss79q8DZuvqFEGOAx7ELlQvdkEyGW2gz1Oz1fViEEAps4XdZCc6jEHRb9wE+s
+ QH/rEvovJYF6E3w/opTUlYghP5F3q6mKtmCK8W27F7xsMzLjjCxv9LRDL1QW1U+LeE
+ fAwcU59DBnBlg==
+Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
+ id 7304960EB7; Tue, 27 Jul 2021 10:07:29 +0000 (UTC)
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 27 Jul 2021 10:07:29 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: leftzheng@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression
+Message-ID: <bug-213877-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <YP+38QzXS6kpLGn0@sol.localdomain>
-Content-Language: en-US
-X-Spam-Score: -1.3 (-)
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.4 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m8ITo-003zaN-Sx
-Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: rework write preallocations
+X-Headers-End: 1m8Jzv-00042s-R6
+Subject: [f2fs-dev] [Bug 213877] New: Mount multiple SMR block devices
+ exceed certain number cause system non-response
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,43 +100,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyaprateek2357@gmail.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Matthew Bobrowski <mbobrowski@mbobrowski.org>,
- Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/7/27 15:38, Eric Biggers wrote:
-> That's somewhat helpful, but I've been doing some more investigation and now I'm
-> even more confused.  How can f2fs support non-overwrite DIO writes at all
-> (meaning DIO writes in LFS mode as well as DIO writes to holes in non-LFS mode),
-> given that it has no support for unwritten extents?  AFAICS, as-is users can
+https://bugzilla.kernel.org/show_bug.cgi?id=213877
 
-I'm trying to pick up DAX support patch created by Qiuyang from huawei, and it
-looks it faces the same issue, so it tries to fix this by calling sb_issue_zeroout()
-in f2fs_map_blocks() before it returns.
+            Bug ID: 213877
+           Summary: Mount multiple SMR block devices exceed certain number
+                    cause system non-response
+           Product: File System
+           Version: 2.5
+    Kernel Version: Linux DT1 5.13.4-200.fc34.x86_64 #1 SMP Tue Jul 20
+                    20:27:29 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+          Hardware: Intel
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: normal
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: leftzheng@gmail.com
+        Regression: No
 
-> easily leak uninitialized disk contents on f2fs by issuing a DIO write that
-> won't complete fully (or might not complete fully), then reading back the blocks
-> that got allocated but not written to.
-> 
-> I think that f2fs will have to take the ext2 approach of not allowing
-> non-overwrite DIO writes at all...
-Yes,
+[1.] One-line summary of the problem:
+Mount multiple SMR block devices exceed certain number cause system
+non-response
 
-Another option is to enhance f2fs metadata's scalability which needs to update layout
-of dnode block or SSA block, after that we can record the status of unwritten data block
-there... it's a big change though...
+[2.] Full description of the problem/report:
+Created some F2FS on SMR devices (mkfs.f2fs -m), then mounted in sequence. Each
+device is the same Model: HGST HSH721414AL (Size 14TB).
+Empirically, found that when the amount of SMR device * 1.5Gb > System RAM, the
+system ran out of memory and hung. No dmesg output. For example, 24 SMR Disk
+need 24*1.5GB = 36GB. A system with 32G RAM can only mount 21 devices, the 22nd
+device will be a reproducible cause of system hang.
+The number of SMR devices with other FS mounted on this system does not
+interfere with the result above.
 
-Thanks,
+[3.] Keywords (i.e., modules, networking, kernel):
+F2FS, SMR, Memory
 
-> 
-> - Eric
-> 
+[4.] Kernel information
+[4.1.] Kernel version (uname -a):
+Linux 5.13.4-200.fc34.x86_64 #1 SMP Tue Jul 20 20:27:29 UTC 2021 x86_64 x86_64
+x86_64 GNU/Linux
 
+[4.2.] Kernel .config file:
+Default Fedora 34 with f2fs-tools-1.14.0-2.fc34.x86_64
+
+[5.] Most recent kernel version which did not have the bug:
+None
+
+[6.] Output of Oops.. message (if applicable) with symbolic information
+     resolved (see Documentation/admin-guide/oops-tracing.rst)
+None
+
+[7.] A small shell script or example program which triggers the
+     problem (if possible)
+mount /dev/sdX /mnt/0X
+
+[8.] Memory consumption 
+
+With 24 * 14T SMR Block device with F2FS
+free -g
+              total        used        free      shared  buff/cache   available
+Mem:             46          36           0           0          10          10
+Swap:             0           0           0
+
+
+With 3 * 14T SMR Block device with F2FS
+free -g
+               total        used        free      shared  buff/cache  
+available
+Mem:               7           5           0           0           1          
+1
+Swap:              7           0           7
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
