@@ -2,80 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A115D3D79DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 17:34:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9E943D7AD5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Jul 2021 18:22:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m8P5l-00065l-Ed; Tue, 27 Jul 2021 15:34:01 +0000
+	id 1m8Pqd-0006uK-RF; Tue, 27 Jul 2021 16:22:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <djwong@kernel.org>) id 1m8P5i-00060j-Ph
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 15:33:58 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1m8Pqc-0006uE-Gy
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 16:22:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3BqbVFxx32zjKdv3Wx39WMlXk/fz/M+3Nd/MCA4VRbM=; b=ISg6ahgMkODFnBLtplFQKij7Yo
- i+CxBOKe+97dkUmYH1jbrijWeaWdMalQkeQ/vzBxw9vFAXqCMmopDqhY6v4w5Fnk+YBs5ZJnJ/djd
- EtiWvclDVlbyX/QRAM5aEog/qkpRifCKzA6lYdiNrbwDdcyECw6/tKOBvL99zVLSRroM=;
+ bh=fS+MskyOHRCLf0R0oFYZaL6+w10V833hKF5obZAnuEo=; b=hRKUg5x66G6RfKEDNIRHIxkfAk
+ SkgV/ErBILe2j14r6qMJuOle0sBgV3tx83NSyYcPW+OF1XlTnGQRArlku7/KzHO3TcjHTcN/kG/1J
+ Z/HD4WTq3tcBMobUzCnXGfvfyrSJsTnv4olxN6XIOraQQ2x9IL6PBcY3ASB5ui0p3CaI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3BqbVFxx32zjKdv3Wx39WMlXk/fz/M+3Nd/MCA4VRbM=; b=C46WezmNZjWmPM/F8avQ55xRic
- slZhWBKVDYc+jbrH/rfkzyuYGxzhxWb5Q0Qrw2MWxImVql74TxG2x9P9pjwYhG2FN6NsVuriea6Zw
- FRAfqI1n2dlisi3MoqqQs65OKsPKDUwxRZcsLaMCeo5KLmgcxYiN/MC1c4nfVcB68ThI=;
+ bh=fS+MskyOHRCLf0R0oFYZaL6+w10V833hKF5obZAnuEo=; b=IMbRbEBNol6vPatQopqbyoKfy0
+ nldrI0ErXewP1M42tVOoNX4txY65rGJs9OhgfF1d+6iC53ck0mj1o3LmgEE6kX8Y/BwtfI6z1HzUa
+ ls/myavYmwOlyzbt+rbAo8vYeFoKvCmkfiA3NhedGy4nCEKK5mKfZVhBi9G01OBhuXS4=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m8P5X-0004gB-Lh
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 15:33:58 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1F65161B30;
- Tue, 27 Jul 2021 15:33:36 +0000 (UTC)
+ id 1m8PqW-004OQa-7g
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 27 Jul 2021 16:22:26 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id E0C4B61B93
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 27 Jul 2021 16:22:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627400016;
- bh=4PZARTzEx+NyszsOAu6lbi7w9h8FOGeHdmwe6pE+9NE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jMfiwaUj6xWzdeDehxp1Kzifwu3wYRSTIGzv9URGKhVGQ7a5oKrqU5xwTPvM8rNx8
- pL33hpdBVSGbU0eDKRD5kdDDGpSsg07OudM+eVRisgp4MLTvCbY68gt6AFwrlEaWeL
- aopLejmyoFelH+9R0wF/F8FIhMojSeOMTZFJVWxqpP5Rgqa4t4zjqH2VX+AdH5XtWu
- uSZlHgfJSee0K/66CiOCohm2St51HvN8o1LX6E39pR4NUcaFuF7YLB9uTQuObrvHCe
- 87yYD/bifuFjreteUYJGN6RMd5ynEbjBdzoY0CxjBKru8RyTZKG4/VRSpIqcus1Gg1
- 6rq0L0f6sjiKQ==
-Date: Tue, 27 Jul 2021 08:33:35 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20210727153335.GE559212@magnolia>
-References: <20210716143919.44373-1-ebiggers@kernel.org>
- <20210716143919.44373-4-ebiggers@kernel.org>
- <14782036-f6a5-878a-d21f-e7dd7008a285@kernel.org>
- <YP2l+1umf9ct/4Sp@sol.localdomain> <YP9oou9sx4oJF1sc@google.com>
- <70f16fec-02f6-cb19-c407-856101cacc23@kernel.org>
- <YP+38QzXS6kpLGn0@sol.localdomain>
- <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
+ s=k20201202; t=1627402929;
+ bh=l90EQHjjmdNm8AFUf4uBb9TxdhAE/KK5Wmo4nKsJaks=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=TP+J5hPjLd4dOZ3/GVPQ+ebUKKHA/cAPESyVO2YtY8EOtBbxunw4Lso8cFX/srv2R
+ sV7Pzn2IKioHUzWh4NwDN46r2YiAzFfU0ymvAkxMlxXxVvSs4R6y7XAt+S/4V/h/PA
+ n1wW/CHtnRyfNzwM6b8L3V70xvNyPOPkN9pGJgoR8th+fQpxza/K4OSTB+uP7+90cF
+ CJ2U911rlL69DJLzqZKTfAFFVY8wgtY3sDOenhYSWui0A6LfmQhp1Pg5rGx/T6qVy8
+ ZWOrjRnnsjmV8FOZUHELLzDRkw/Oo6vINfKhCq2KHLuFU3GY0Nx5sCNzF6bZ8eU8bJ
+ YEM1/5Tll/68w==
+Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
+ id CF01360EB7; Tue, 27 Jul 2021 16:22:09 +0000 (UTC)
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 27 Jul 2021 16:22:09 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: trivial
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status cc
+Message-ID: <bug-213877-202145-UNoU7WE4rD@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-213877-202145@https.bugzilla.kernel.org/>
+References: <bug-213877-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
-X-Spam-Score: -0.8 (/)
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1m8P5X-0004gB-Lh
-Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: rework write preallocations
+X-Headers-End: 1m8PqW-004OQa-7g
+Subject: [f2fs-dev] [Bug 213877] Mount multiple SMR block devices exceed
+ certain number cause system non-response
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,52 +100,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyaprateek2357@gmail.com>, linux-xfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- Matthew Bobrowski <mbobrowski@mbobrowski.org>,
- Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jul 27, 2021 at 04:30:16PM +0800, Chao Yu wrote:
-> On 2021/7/27 15:38, Eric Biggers wrote:
-> > That's somewhat helpful, but I've been doing some more investigation and now I'm
-> > even more confused.  How can f2fs support non-overwrite DIO writes at all
-> > (meaning DIO writes in LFS mode as well as DIO writes to holes in non-LFS mode),
-> > given that it has no support for unwritten extents?  AFAICS, as-is users can
-> 
-> I'm trying to pick up DAX support patch created by Qiuyang from huawei, and it
-> looks it faces the same issue, so it tries to fix this by calling sb_issue_zeroout()
-> in f2fs_map_blocks() before it returns.
+https://bugzilla.kernel.org/show_bug.cgi?id=213877
 
-I really hope you don't, because zeroing the region before memcpy'ing it
-is absurd.  I don't know if f2fs can do that (xfs can't really) without
-pinning resources during a potentially lengthy memcpy operation, but you
-/could/ allocate the space in ->iomap_begin, attach some record of that
-to iomap->private, and only commit the mapping update in ->iomap_end.
+Chao Yu (chao@kernel.org) changed:
 
---D
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |ASSIGNED
+                 CC|                            |chao@kernel.org
 
-> > easily leak uninitialized disk contents on f2fs by issuing a DIO write that
-> > won't complete fully (or might not complete fully), then reading back the blocks
-> > that got allocated but not written to.
-> > 
-> > I think that f2fs will have to take the ext2 approach of not allowing
-> > non-overwrite DIO writes at all...
-> Yes,
-> 
-> Another option is to enhance f2fs metadata's scalability which needs to update layout
-> of dnode block or SSA block, after that we can record the status of unwritten data block
-> there... it's a big change though...
-> 
-> Thanks,
-> 
-> > 
-> > - Eric
-> > 
+--- Comment #1 from Chao Yu (chao@kernel.org) ---
+Could you please apply below patch, and try nosmall_discard option during
+mount(), it expects that memory cost will decrease.
 
+*Please note that*, I haven't do any test w/ this patch now, so please backup
+your data before your test.
+
+https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=misc&id=5dba79cc25c3c902942c2f68a6e2546586c65f96
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
