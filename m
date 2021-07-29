@@ -2,111 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B9223D961D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Jul 2021 21:38:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66A593D9A14
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Jul 2021 02:27:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m8pNr-0006KM-27; Wed, 28 Jul 2021 19:38:27 +0000
+	id 1m8tsy-0003A9-Gk; Thu, 29 Jul 2021 00:26:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1m8pNq-0006KG-36
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 28 Jul 2021 19:38:26 +0000
+ (envelope-from <chao@kernel.org>) id 1m8tss-00039W-8R
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 00:26:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qfmiBSUy0m89ACHPYq151CEHSd3AdxvV9MPMF5qQK0M=; b=O7e/EYj9ReoSJqoBnWREftnRSx
- o4Wy9ykRyNFo4Jt83scuOc8qh0qOMgLhN8WsyBuSc4NK3986ROCdJLfUc4FgEmzdFHnmcfFPUJM3c
- OATFPuuLiYt3nd8TK3VdrVylcaQaNbNY/A68p1SEp2enoNGqFBaQncVFTN8ems+X9DIk=;
+ bh=FhTrtOLf2R1pBA8SrRggsAaWhJJrdGcXhn8gpDz3Tlc=; b=O2r4sR8BHTr6slMgx9IMSHjrPw
+ eYUnQk73vKCQT9iS2jAwtLFf8XspKX0wXf0fBL2LNhTQs5b2lUr3a9Fn7ceVmYFbU6Gk9IAnynz75
+ BdN9OLVV1TGHER9U40wW2a7IvYa9+E98+pmWe5bDoAH8sOaDX+SSwcAYaq2IsUuEA/aE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qfmiBSUy0m89ACHPYq151CEHSd3AdxvV9MPMF5qQK0M=; b=j
- I19ANGZhu90TtklZ5MrfqLgAQ7pn/ZheOZoot51PXUfxTem0Zld08QGFj979a96KZnRTS6Anh8HnB
- L2dTJDnUg+rxwTTwqAPqzbuZ47lvIGUdwhemumFNm/keURb14V+4rrn7LX35ty6tCq2fcZBrSx6PF
- HIJrJQFJxZFGMfnk=;
-Received: from mail-pj1-f43.google.com ([209.85.216.43])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=FhTrtOLf2R1pBA8SrRggsAaWhJJrdGcXhn8gpDz3Tlc=; b=VHaoW/Is4/jn9wlKhDdYBBp54Y
+ YSKmquky28i1QqKfT7qbshc1oooux+RZMSCAOFFiwN6jN1p/0+AcUeRXG52rLuIBobFbGpb++Q/zJ
+ vGAupGFW80xCRa6bXaOVqgFlMcNgHXKiqG9VPJbcQWxJ1xj9FklyyJgzwTw6vSMj1ybA=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1m8pNl-005kAi-Ty
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 28 Jul 2021 19:38:25 +0000
-Received: by mail-pj1-f43.google.com with SMTP id
- k4-20020a17090a5144b02901731c776526so11719578pjm.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 28 Jul 2021 12:38:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=qfmiBSUy0m89ACHPYq151CEHSd3AdxvV9MPMF5qQK0M=;
- b=CrSdY90uBzF24xeu3OTgmcLWve+jUYrMlNJ4pwYP60/pqYnSZlLCjbZy4fJ436pel7
- 1eeArlZinJDCKmvV2pLG9KfR35XAvwTKKlO8jKBURucrFRQsgAbVor+FGIZqDWvfxmFn
- zc3079U073CAKhYx7tWqaCRN8ZoK9/q7k8E0wsgGNlb2RoOPb3pwJCXmTYEIQbUb2tYa
- IJS7PlbpuK4QjjNf4OsvtjjniphEMQWZbAkqmpHP3CyjUdg1cgNVW0Q99/g98kyV9nmE
- E9AhaEt02gWF0kPRrmCiZY3FKu3LFv/6N3YWXjqr+oPHLEmabIk6ssOftnj4cl0DWXCn
- HC0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=qfmiBSUy0m89ACHPYq151CEHSd3AdxvV9MPMF5qQK0M=;
- b=GG5vxxUHLmb1HDHjvGTS9yLmwmBxENgFDvR36QOnX21s1jcSqAhw96Byji7sPFYLqe
- 76Ipt9Qfg+YQiRecredFtiyU6E92U/FwC64AIZRifJtVUHpwTCn3rMcxx0rzuVuAjxo7
- e7aLIGkWPgkcLRGNBSYIFw8cec6/uI2TwF2DzHdRzz2eRbtlk3FGcWp449F890FnJBV+
- 6XnWj1nrFBwufK5CDMsv+824Ay3e775q9EYX+U6isYYw8hZWSOlnIskbMXzjWS66FdeG
- XkRq1IvsOGc0BmhRmYxqFmKLkDJkCaKgqOC6lMvvrZ0/OTJ9yAEBHOnx3CWu6GBKEfYu
- OoXA==
-X-Gm-Message-State: AOAM533C85hOB4RvF2fx9l+RWBfYU8bSCukvVL90TDMTPbqtLganpnSp
- aKvoMo+bZRyGb4/pueG3YzI=
-X-Google-Smtp-Source: ABdhPJzcK0bRqvyQAbSL+jz9O1uSmP/wYuUfB/OvZ5Nckb6iT9r8Ad8dFxdTwltQ7k9N56yA3R2lng==
-X-Received: by 2002:a62:c501:0:b029:32a:dfe9:8648 with SMTP id
- j1-20020a62c5010000b029032adfe98648mr1440975pfg.28.1627501096217; 
- Wed, 28 Jul 2021 12:38:16 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2620:15c:211:201:6456:ee63:e147:5ea])
- by smtp.gmail.com with ESMTPSA id n56sm820113pfv.65.2021.07.28.12.38.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jul 2021 12:38:15 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed, 28 Jul 2021 12:38:11 -0700
-Message-Id: <20210728193811.2519412-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.32.0.432.gabb21c7263-goog
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1m8tso-005vrD-BS
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 00:26:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2465E60F59;
+ Thu, 29 Jul 2021 00:26:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1627518384;
+ bh=uludeyf3+zGf2YO7V7UPfU6EFXH4cySzsy2ac4vsqZg=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=uc+72srOYR120uKGl7ZxsAJO2p0AMdqnnbO8mDXLYzC3n8ZaPT0qkoi/GV9IVP1l4
+ ZrAfzKwfU3hfAOrONYnqYPgHd/TnafG4/K9DAwHy3hO8MXHsRDFDB7pFClWg+3M/7Z
+ BNTpulDwWjsDj9yXPrafyLei5OXfAXPV2yg+brRzltg7lyONSFwSlS0k9Rtt7h2sVj
+ Ci/rZW1yQR/LSdLe1jRlUY4nsk9b3YXPAMeu9h94UPw15RdQjzOwEiGnYrpoCSOibp
+ NzqUm9sTByxPYnLI1sSwefdqgKAfpdajK78xOVOUxykWCO6pPP+BHgnjYelPo75Qw8
+ ofqXEcTdeS8yA==
+To: "Darrick J. Wong" <djwong@kernel.org>
+References: <20210716143919.44373-1-ebiggers@kernel.org>
+ <20210716143919.44373-4-ebiggers@kernel.org>
+ <14782036-f6a5-878a-d21f-e7dd7008a285@kernel.org>
+ <YP2l+1umf9ct/4Sp@sol.localdomain> <YP9oou9sx4oJF1sc@google.com>
+ <70f16fec-02f6-cb19-c407-856101cacc23@kernel.org>
+ <YP+38QzXS6kpLGn0@sol.localdomain>
+ <70d9c954-d7f0-bbe2-f078-62273229342f@kernel.org>
+ <20210727153335.GE559212@magnolia>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <e237ab66-82dd-254d-7be2-aee8cb2b1c85@kernel.org>
+Date: Thu, 29 Jul 2021 08:26:18 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20210727153335.GE559212@magnolia>
+Content-Language: en-US
+X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.43 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.43 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m8pNl-005kAi-Ty
-Subject: [f2fs-dev] [PATCH v2] f2fs: turn back remapped address in
- compressed page endio
+ -0.3 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m8tso-005vrD-BS
+Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: rework write preallocations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,60 +92,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Satya Tangirala <satyaprateek2357@gmail.com>, linux-xfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ Matthew Bobrowski <mbobrowski@mbobrowski.org>,
+ Changheun Lee <nanich.lee@samsung.com>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On 2021/7/27 23:33, Darrick J. Wong wrote:
+> On Tue, Jul 27, 2021 at 04:30:16PM +0800, Chao Yu wrote:
+>> On 2021/7/27 15:38, Eric Biggers wrote:
+>>> That's somewhat helpful, but I've been doing some more investigation and now I'm
+>>> even more confused.  How can f2fs support non-overwrite DIO writes at all
+>>> (meaning DIO writes in LFS mode as well as DIO writes to holes in non-LFS mode),
+>>> given that it has no support for unwritten extents?  AFAICS, as-is users can
+>>
+>> I'm trying to pick up DAX support patch created by Qiuyang from huawei, and it
+>> looks it faces the same issue, so it tries to fix this by calling sb_issue_zeroout()
+>> in f2fs_map_blocks() before it returns.
+> 
+> I really hope you don't, because zeroing the region before memcpy'ing it
+> is absurd.  I don't know if f2fs can do that (xfs can't really) without
+> pinning resources during a potentially lengthy memcpy operation, but you
+> /could/ allocate the space in ->iomap_begin, attach some record of that
+> to iomap->private, and only commit the mapping update in ->iomap_end.
 
-Turned back the remmaped sector address to the address in the partition,
-when ending io, for compress cache to work properly.
+Thanks for the suggestion, let me check this a little bit later, since now I
+just try to stabilize the codes...
 
-Fixes: 6ce19aff0b8c ("f2fs: compress: add compress_inode to cache
-compressed blocks")
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Youngjin Gil <youngjin.gil@samsung.com>
-Signed-off-by: Hyeong Jun Kim <hj514.kim@samsung.com>
+Thanks,
 
----
-v2: avoid knowing too much about lower structures
----
- fs/f2fs/data.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 1a716c3b5457..0ec5950949fb 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -116,6 +116,7 @@ struct bio_post_read_ctx {
- 	struct f2fs_sb_info *sbi;
- 	struct work_struct work;
- 	unsigned int enabled_steps;
-+	block_t fs_blkaddr;
- };
- 
- static void f2fs_finish_read_bio(struct bio *bio)
-@@ -228,7 +229,7 @@ static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx)
- 	struct bio_vec *bv;
- 	struct bvec_iter_all iter_all;
- 	bool all_compressed = true;
--	block_t blkaddr = SECTOR_TO_BLOCK(ctx->bio->bi_iter.bi_sector);
-+	block_t blkaddr = ctx->fs_blkaddr;
- 
- 	bio_for_each_segment_all(bv, ctx->bio, iter_all) {
- 		struct page *page = bv->bv_page;
-@@ -1003,6 +1004,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 		ctx->bio = bio;
- 		ctx->sbi = sbi;
- 		ctx->enabled_steps = post_read_steps;
-+		ctx->fs_blkaddr = blkaddr;
- 		bio->bi_private = ctx;
- 	}
- 
--- 
-2.32.0.432.gabb21c7263-goog
-
+> 
+> --D
+> 
+>>> easily leak uninitialized disk contents on f2fs by issuing a DIO write that
+>>> won't complete fully (or might not complete fully), then reading back the blocks
+>>> that got allocated but not written to.
+>>>
+>>> I think that f2fs will have to take the ext2 approach of not allowing
+>>> non-overwrite DIO writes at all...
+>> Yes,
+>>
+>> Another option is to enhance f2fs metadata's scalability which needs to update layout
+>> of dnode block or SSA block, after that we can record the status of unwritten data block
+>> there... it's a big change though...
+>>
+>> Thanks,
+>>
+>>>
+>>> - Eric
+>>>
 
 
 _______________________________________________
