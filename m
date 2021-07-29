@@ -2,60 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FDE63D9B07
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Jul 2021 03:22:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07FD53D9B0B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Jul 2021 03:24:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m8ulD-00013y-3L; Thu, 29 Jul 2021 01:22:55 +0000
+	id 1m8un2-0007RI-MO; Thu, 29 Jul 2021 01:24:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1m8ulB-00013m-PQ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 01:22:53 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1m8un1-0007RA-I6
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 01:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kmplko0SoGr4Md/4wR0T5J7xYk5dwkmFK2pl19ghwnQ=; b=aX6jdkbUjLZG00BuFAaUBCpGAp
- wtnwqJgMEnOM1zRg4S50yQtHc+Jdhhk7QoCbkYj1l6qJ5NuwAvYcfKPIqvHOycyoQNf9qmUFYau2+
- 0eHb2sAyNm5MMLDjEmkQnLprE+kt4WWHjxxmqD25deV2s1yZJBLuZ6VRaezBK+jJEDnc=;
+ bh=G4T/5cXN2gE8sWc8LKYuJ+ZF84Ee+3515AVQDi+teQk=; b=ajDZkHQ6RvIb7Zyd/LtdPep3MY
+ 56DTDYbwnZAULrubdDvHHUkjHmt5133mNzxZ6zQA2skZhdVbGVj7wnTB6XsOqt5+2zVEertrgBwD3
+ +qqGPfJuEQYHTqklDs2xDZrAyUkU53FaS8T/+2SlE5gZZ5ZjyJJh62olSZvLSu/+jb/k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kmplko0SoGr4Md/4wR0T5J7xYk5dwkmFK2pl19ghwnQ=; b=A
- 5xglXI7iWQ1JhdAMpcNswQJm5rl/VPe0iwGrYxMpiM1T7UTRs2r/c+nZcpT2q3md5/xux5Fwz++Cz
- Rb3lxvD6uwEEWlFlqSu/SdeaKOJZVn0iA8nkwWTOCWvvqx9rTkqQ4qWTvaskmUrU6CE9M/HeJeYj2
- kfyn4Jft15pd7k70=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=G4T/5cXN2gE8sWc8LKYuJ+ZF84Ee+3515AVQDi+teQk=; b=f63jGRqs8F4km3gJXeknwoWs2E
+ G+9f7YmsDSbI/vcNlW2Czof9yBLNIZ3Nvyg/Y4CtWPDd0pvWHfWcJ4XbsDg2NWr9IKj2xe0WDhd/u
+ +IxqTKwbXUeNzMo0UzjZ3guUAsmNkdSyQbtBPsy8XVCq2u5qxaZ3Q0Qx+R1Fh+qkVblk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m8ulA-005xtv-NE
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 01:22:53 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4127E608FB;
- Thu, 29 Jul 2021 01:22:46 +0000 (UTC)
+ id 1m8umv-0000ki-9n
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 29 Jul 2021 01:24:47 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D5F5A6103A;
+ Thu, 29 Jul 2021 01:24:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627521767;
- bh=d0zv6RtbSmg5wdXW/LCxn3s+mk2wN2t8jhgBEjbtGcc=;
- h=From:To:Cc:Subject:Date:From;
- b=i6G5Yx3LUfltP2gYE3dSAYTM95ux/dp35zDFndVUcM+TfanOFNDYYHIcLykSo6+j9
- YUUgXI05NgJKg5EYRAjF1BqMu53YGvSs5kiOCVudslok1nJadGH3lotbzM1zjAxCIB
- qmpQ5F/yzhIf8oBontwcdfvcyY6EUzUK1Yq4MI64anGhz/vXe+zJNAm+0+9ARfs3tl
- 77bmbHBEJXiY9jh/eFNZIdDqv31qH/W9WuHkQf7cAlzHGUGovTu30eOQiRwsxFb33a
- VaeiYmAlyOkLEDcCQYOakvmzs1jHGBZiH2lhfpJttzFsKzge8wl4sUfZeQNGoYGDIx
- AfgarM/OLsTgg==
+ s=k20201202; t=1627521875;
+ bh=zsscGp2pw3XigcjWcGqfP+E4pheV41KtdZi8NPO57rI=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=kaSgNl7lu5P6hqO+euR6hUW6g9kk2GX5sOF8VTP4zHFcNsxZANC1hH2Oqk+dBzv5k
+ Hjsm8a2jIajLPs0b80dJWz5laDhD/bodv2mPiT7iY8zv+uNKcjoADD0oEwZqH/Y6dW
+ tE310XTb8iuPD88i3W3/EJTWWZqKiJK5u8+CKJWs2OWXerJ89Kfm57yVyXnGIcYbMZ
+ YKYCV79Kys/dic9Ca4NtMwOkalgnIIqumYjTSeebtGEhKtS3HHFc4m3Tgy+cGgCT0f
+ BPRSKeMpMPspPTG05Yavsz+7LbP2pIyJ2qhisN5vi94VrrbMqCdrffqjthvkN+arIy
+ vqAWwyry3uuYw==
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20210728193811.2519412-1-daeho43@gmail.com>
 From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Thu, 29 Jul 2021 09:22:17 +0800
-Message-Id: <20210729012217.788321-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.1
+Message-ID: <56598a72-92d8-b571-550a-26830d7f5b2f@kernel.org>
+Date: Thu, 29 Jul 2021 09:24:34 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
+In-Reply-To: <20210728193811.2519412-1-daeho43@gmail.com>
+Content-Language: en-US
+X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -65,11 +70,16 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
+ -0.3 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m8ulA-005xtv-NE
-Subject: [f2fs-dev] [PATCH RESEND] f2fs: fix wrong checkpoint_changed value
- in f2fs_remount()
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1m8umv-0000ki-9n
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: turn back remapped address in
+ compressed page endio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,60 +91,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In f2fs_remount(), return value of test_opt() is an unsigned int type
-variable, however when we compare it to a bool type variable, it cause
-wrong result, fix it.
+On 2021/7/29 3:38, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Turned back the remmaped sector address to the address in the partition,
+> when ending io, for compress cache to work properly.
+> 
+> Fixes: 6ce19aff0b8c ("f2fs: compress: add compress_inode to cache
+> compressed blocks")
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Youngjin Gil <youngjin.gil@samsung.com>
+> Signed-off-by: Hyeong Jun Kim <hj514.kim@samsung.com>
 
-Fixes: 4354994f097d ("f2fs: checkpoint disabling")
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/super.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 41765e90caa2..18c1ffb8710e 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2062,11 +2062,10 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	bool need_restart_ckpt = false, need_stop_ckpt = false;
- 	bool need_restart_flush = false, need_stop_flush = false;
- 	bool no_extent_cache = !test_opt(sbi, EXTENT_CACHE);
--	bool disable_checkpoint = test_opt(sbi, DISABLE_CHECKPOINT);
-+	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
- 	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
- 	bool no_atgc = !test_opt(sbi, ATGC);
- 	bool no_compress_cache = !test_opt(sbi, COMPRESS_CACHE);
--	bool checkpoint_changed;
- #ifdef CONFIG_QUOTA
- 	int i, j;
- #endif
-@@ -2111,8 +2110,6 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	err = parse_options(sb, data, true);
- 	if (err)
- 		goto restore_opts;
--	checkpoint_changed =
--			disable_checkpoint != test_opt(sbi, DISABLE_CHECKPOINT);
- 
- 	/*
- 	 * Previous and new state of filesystem is RO,
-@@ -2234,7 +2231,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 		need_stop_flush = true;
- 	}
- 
--	if (checkpoint_changed) {
-+	if (enable_checkpoint == !!test_opt(sbi, DISABLE_CHECKPOINT)) {
- 		if (test_opt(sbi, DISABLE_CHECKPOINT)) {
- 			err = f2fs_disable_checkpoint(sbi);
- 			if (err)
--- 
-2.22.1
-
+Thanks,
 
 
 _______________________________________________
