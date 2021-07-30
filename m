@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC38E3DB1EF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Jul 2021 05:26:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D4BF3DB6C8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Jul 2021 12:04:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1m9JAc-00022J-D8; Fri, 30 Jul 2021 03:26:46 +0000
+	id 1m9PNZ-000253-5Q; Fri, 30 Jul 2021 10:04:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1m9JAa-00022D-NU
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Jul 2021 03:26:44 +0000
+ id 1m9PNQ-00023t-Uo
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Jul 2021 10:04:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mU/jWC0ZnF90dlrNb1OIM44YA+I74d8gtxwTjzOgVUg=; b=BRtcNxbQ0eQw6iP2pf4LZ6HyLx
- p5A4EDO8uxyeqNDaf9E9go+Q60z/vUdl4S5zwEb1YS5MqTP0eePsqZKMUHORRU9optbsPMRZedT/z
- GSCZZiRCT2GDWo3cQK8KBb7sWVRL877kqwb9+XZxe5lOfhmLQc+raDbxcdfypCjRuEME=;
+ bh=4xwAMamUyQqlRk8QkM/q3JDu1NiLXU/leLmRi2t6Qug=; b=Vg53lL9R2dJvpPEfKA4LcEsaNY
+ /4pSKmUKdDfRGVTKic3x4cLKtDbgemxJ0K/qOBj7f5NyCLBckku+vlqnqFgaHRpq3X24mSrjRK5mb
+ 69NipXVekYLjRtJ3tA55BkbLIl60tFhic4CoHPSLBxwe/0diNQHZUsHe5zrHEjTWs16k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mU/jWC0ZnF90dlrNb1OIM44YA+I74d8gtxwTjzOgVUg=; b=ESOhjYF9gUrZjQmsg2Wgg7zL9/
- /r7q8eRAe0SAn4vMveBTqWMeowYYcmriSou8sTO7onX/AXFdEp+agyKiR7VrP5YMsE5Q/OSdl0t6V
- KEYxu2HdacshL85oD5HLd95/uK5Th9OObZvrtvzRqGlhGM6P556HcCEEpprHbE6B3FSA=;
+ bh=4xwAMamUyQqlRk8QkM/q3JDu1NiLXU/leLmRi2t6Qug=; b=PAjWIrY/mg4lWamLbwU853SKHF
+ DZyy6OOFAba34eargcCsJIpQfni0QN5OlXcJssSl9N80fb5oATTJlc7L7FnYYtLlBvG4glJtOVugo
+ 6wTfpxWSW/QQslvZvBLkQBHBa4C0RWDuwpB2ufo/p9XZwMJy6DscIs57zmyk6OKoByEg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1m9JAO-007GNf-9v
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Jul 2021 03:26:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPS id DE4ED60F0F
+ id 1m9PNK-0003Vl-Gj
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 30 Jul 2021 10:04:24 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id 3A67960F12
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 30 Jul 2021 03:26:26 +0000 (UTC)
+ Fri, 30 Jul 2021 10:04:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627615586;
- bh=mU/jWC0ZnF90dlrNb1OIM44YA+I74d8gtxwTjzOgVUg=;
+ s=k20201202; t=1627639448;
+ bh=4xwAMamUyQqlRk8QkM/q3JDu1NiLXU/leLmRi2t6Qug=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=T+X6SF5/5uCTo+rlQbUDWY8heIQLtIZgCTMOOo1nMb9gwYfdSkg6gsSN6uHv2aFS7
- 7BxLvMlcq4LdpWGYPgnk/W2Wcwp+4ra8PF77rUcK+0EYxfwewnJYRLlqeDf65Lo2o0
- d+Vb4L3mGTT+q+nZYDsa2ZKjLEtI7pHgg4hAezVLll1DLb21QjIf0H2/3uSfnzQVHV
- eu7ZGLb2Ta/QFEdYBcIzaV/LB4XU/4D0Dm0kWm8OW99dwdE98hqtCeNoTMusyhGmzO
- UrALwhUgH8VlCQtniO866/uyGfwOOx26AAROkW+JAEVWca7UDH59QBeLtj4OFO3xfQ
- RtvGvKajo677Q==
+ b=CUAKXSrJAiv1olXMhmqlDfQZN8pKjfwrQrsF01kEmC9vnEYSFNKeLBQ7/mjST7NRh
+ J5/Bg4wLhU3Zn+/UBj3x4c6sTGzIGQrL4RJoLzMxspfplWjwxm6jh8RcK87Ds2E+Ie
+ gk3G3DrV2uX7LRn1gGgStaAgdV8EyOdJkioV2QMWkHTvS737V2TmM8nPNBfFTf8nsu
+ C4v4wktVz+N1hAzvwIi1WeDWzD0m8n/bVDDMRAXZRi5+cPwXw/KfMvAsMYvBMMyz1C
+ yo1otDU5n4lxN/dYC4R1aPMfrJjIuLsPMkvyAqpreE8P0LfHsWCgvvpSh3hELUKqu7
+ Jod7kKuBdfVXA==
 Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
- id C9A6660EE0; Fri, 30 Jul 2021 03:26:26 +0000 (UTC)
+ id 2749860EE2; Fri, 30 Jul 2021 10:04:08 +0000 (UTC)
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 30 Jul 2021 03:26:26 +0000
+Date: Fri, 30 Jul 2021 10:04:07 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -64,14 +64,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: trivial
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: leftzheng@gmail.com
+X-Bugzilla-Who: chao@kernel.org
 X-Bugzilla-Status: ASSIGNED
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-213877-202145-4krQTPKF2u@https.bugzilla.kernel.org/>
+Message-ID: <bug-213877-202145-UBScg6te6o@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-213877-202145@https.bugzilla.kernel.org/>
 References: <bug-213877-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -87,7 +87,7 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1m9JAO-007GNf-9v
+X-Headers-End: 1m9PNK-0003Vl-Gj
 Subject: [f2fs-dev] [Bug 213877] Mount multiple SMR block devices exceed
  certain number cause system non-response
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -107,8 +107,10 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=213877
 
---- Comment #3 from James Z (leftzheng@gmail.com) ---
-However, on a near-full disk, *write* operations cause panic.
+--- Comment #4 from Chao Yu (chao@kernel.org) ---
+Sorry, I've fixed that case:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=misc&id=527a7d6a3e0307ad1b4bcc7811cc2920b2af45c5
 
 -- 
 You may reply to this email to add a comment.
