@@ -2,63 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15E6F3DE369
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Aug 2021 02:11:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 786023DD27C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Aug 2021 11:00:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mAi1U-0004TI-W9; Tue, 03 Aug 2021 00:11:09 +0000
+	id 1mAToN-0003CC-1P; Mon, 02 Aug 2021 09:00:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mAi1T-0004TB-IT
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 00:11:07 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1mAToL-0003BP-6j
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Aug 2021 09:00:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kEhzOhCT/9qjiDjj6s+HOIB0dTiD1butXLwz3J7I9fM=; b=A+o976SJH30vLizRkmhbxIL2Kz
- m3TlyZkUZeWw1EKEYMZx1Hd3BEBtTWm4JKL0K5z+NE6ePWRvQ6R0LL/CAOJcVDm29I0c8PTx9vUzs
- 5BO05GLqRFxPD69sqzRPqKQoq8wRFn/HuT0xpnRVgLQ3/UHdH6zXA2wM6h44Q8nQDY8I=;
+ bh=J3FBLLb4BbWbdc2wnMLOgBCam6BTXPUvTyz8DrBg4Uo=; b=Jpm5LMop0bmZP+QkHEFfe0G3Q/
+ R39tsCk491Y2HF+ONB3QP4JDzOkOejbgaJ9vDoOOowABFJeRyCodCKoH6dSa0lrU7X93XPYrqv5vc
+ AfJsxN2YPmzXnT1YHEQXHWlu78UgvaQ/bCJxMnQWclK6DonJZ/FyzHm42Zxhp7kg6kbg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kEhzOhCT/9qjiDjj6s+HOIB0dTiD1butXLwz3J7I9fM=; b=P
- Y5UIbaQFkCPqcdMamvmB24FDWuEUcC2hKEPKlTZh6Cw8xTZ3YoyksAsbrEciC6/dXyeD7IA0xgBca
- 1jXPwaYDSvVtDYxemZJghQIqd+of9I10ykrocHsE5MneLvul+tTprM+j+yPWHkmHuiBohKjm2bVyW
- ND+v4N6hUJloTAoo=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=J3FBLLb4BbWbdc2wnMLOgBCam6BTXPUvTyz8DrBg4Uo=; b=fv1gr/E76aW4Jl6wRDKsTFVp+e
+ ylaivPPdl+6z9OlJuL8ETdahfIeg0AFizyVVosscU+OGIKAR1R/LuYXW8ooYqpEuom0aI6k8qYs/8
+ ElZ+KJ59uo85/pxvmJDgW0Iy0jQlxjEtX5Wmz/9+VL0yBSbznGAI1Pz0clB+Vtf+rFGg=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mAi1C-0000I7-Tm
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 00:11:07 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7C30260F36;
- Tue,  3 Aug 2021 00:10:39 +0000 (UTC)
+ id 1mAToC-0003ag-JW
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 02 Aug 2021 09:00:36 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6832860EBD;
+ Mon,  2 Aug 2021 09:00:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627949440;
- bh=q6qSM18puB8vZ6pq4c02WSxS4e/JIBKYdy9Cc143Uy4=;
- h=From:To:Cc:Subject:Date:From;
- b=W5Pb4hyZ+Q65X23svpCib4+b0/87o07RkVXJf3/GZ0mLK3DycfbUGTBMX7nOs0F+k
- P/s73JugyXWQVV+UmE8sDZxUk+fesnGoz8cQRONjnwdvZFd3wP3l0KfFBEW+Jybi9h
- zJXZTdQRjPOjSpLnGlwwc7y0cjPihMJqZ15ywLCygcfvbL2DL66yYPT5z1Ir7+a2m5
- EqK6oqQvkbmmUKaHHy1nCMwW9JXaQWii7SoYYsmuI4quyB+68onRS0RHAO+kMBdMsk
- fRP3xNAHCcc5adFnbQY27YQky0gsUc0W87q24873C1Qih0abql1zlRxroKu1nZ75CM
- E0WwnzWd4B3HQ==
+ s=k20201202; t=1627894817;
+ bh=NpGYxMxPtr0QSqg+p3P23qf5aNI0HOKU5NMbrglC06Y=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=RdoQGF598VsHZscJC5HMR3we486QnR63NlWZ5ruA3kXqcyZu1Xq5eGtri+xlTiPFZ
+ z+Pzx3D4O+YR5+qVkKcRl9Lp7NtBn4jBuNi2KOmY5qq3fzArDmV432u2NUXjwtpPDB
+ vX/7/MQbJnNmRXLtumUOdf5EHFZHfKUr96PqD1Yn5PclZQvXQYNketFumi4dcgsI0k
+ X7RImEgtiF1tVMlS0ImsrsZ37cnFyq/Aoh533Cjzq/3VH2BABrTQAe4ZoQeEke4/rW
+ I6YZb1I5/DL/NEarggj7M4msoiSivQpXYNOVBih4zMEloTJF2bhwC2SSRvDJA9srnB
+ q8sIRtOirdNMw==
+To: Eric Biggers <ebiggers@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>
+References: <20210728015154.171507-1-ebiggers@kernel.org>
+ <YQRQRh1zUHSIzcC/@gmail.com> <YQS5eBljtztWwOFE@mit.edu>
+ <YQd3Hbid/mFm0o24@sol.localdomain>
 From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Mon,  2 Aug 2021 16:48:52 +0800
-Message-Id: <20210802084852.22688-1-chao@kernel.org>
-X-Mailer: git-send-email 2.22.1
+Message-ID: <a3cdd7cb-50a7-1b37-fe58-dced586712a2@kernel.org>
+Date: Mon, 2 Aug 2021 17:00:15 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <YQd3Hbid/mFm0o24@sol.localdomain>
+Content-Language: en-US
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.8 DATE_IN_PAST_12_24     Date: is 12 to 24 hours before Received: date
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -66,9 +72,12 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mAi1C-0000I7-Tm
-Subject: [f2fs-dev] [PATCH v2] f2fs: introduce discard_unit mount option
+ -0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mAToC-0003ag-JW
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove broken support for allocating
+ DIO writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,482 +89,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+Cc: linux-fsdevel@vger.kernel.org, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As James Z reported in bugzilla:
+On 2021/8/2 12:39, Eric Biggers wrote:
+> On Fri, Jul 30, 2021 at 10:46:16PM -0400, Theodore Ts'o wrote:
+>> On Fri, Jul 30, 2021 at 12:17:26PM -0700, Eric Biggers wrote:
+>>>> Currently, non-overwrite DIO writes are fundamentally unsafe on f2fs as
+>>>> they require preallocating blocks, but f2fs doesn't support unwritten
+>>>> blocks and therefore has to preallocate the blocks as regular blocks.
+>>>> f2fs has no way to reliably roll back such preallocations, so as a
+>>>> result, f2fs will leak uninitialized blocks to users if a DIO write
+>>>> doesn't fully complete.
+>>
+>> There's another way of solving this problem which doesn't require
+>> supporting unwritten blocks.  What a file system *could* do is to
+>> allocate the blocks, but *not* update the on-disk data structures ---
+>> so the allocation happens in memory only, so you know that the
+>> physical blocks won't get used for another files, and then issue the
+>> data block writes.  On the block I/O completion, trigger a workqueue
+>> function which updates the on-disk metadata to assign physical blocks
+>> to the inode.
+>>
+>> That way if you crash before the data I/O has a chance to complete,
+>> the on-disk logical block -> physical block map hasn't been updated
+>> yet, and so you don't need to worry about leaking uninitialized blocks.
 
-https://bugzilla.kernel.org/show_bug.cgi?id=213877
+Thanks for your suggestion, I think it makes sense.
 
-[1.] One-line summary of the problem:
-Mount multiple SMR block devices exceed certain number cause system non-response
+>>
+>> Cheers,
+>>
+>> 					- Ted
+> 
+> Jaegeuk and Chao, any idea how feasible it would be for f2fs to do this?
 
-[2.] Full description of the problem/report:
-Created some F2FS on SMR devices (mkfs.f2fs -m), then mounted in sequence. Each device is the same Model: HGST HSH721414AL (Size 14TB).
-Empirically, found that when the amount of SMR device * 1.5Gb > System RAM, the system ran out of memory and hung. No dmesg output. For example, 24 SMR Disk need 24*1.5GB = 36GB. A system with 32G RAM can only mount 21 devices, the 22nd device will be a reproducible cause of system hang.
-The number of SMR devices with other FS mounted on this system does not interfere with the result above.
+Firstly, let's notice that below metadata will be touched during DIO
+preallocation flow:
+- log header
+- sit bitmap/count
+- free seg/sec bitmap/count
+- dirty seg/sec bitmap/count
 
-[3.] Keywords (i.e., modules, networking, kernel):
-F2FS, SMR, Memory
+And there is one case we need to concern about is: checkpoint() can be
+triggered randomly in between dio_preallocate() and dio_end_io(), we should
+not persist any DIO preallocation related metadata during checkpoint(),
+otherwise, sudden power-cut after the checkpoint will corrupt filesytem.
 
-[4.] Kernel information
-[4.1.] Kernel version (uname -a):
-Linux 5.13.4-200.fc34.x86_64 #1 SMP Tue Jul 20 20:27:29 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+So it needs to well separate two kinds of metadata update:
+a) belong to dio preallocation
+b) the left one
 
-[4.2.] Kernel .config file:
-Default Fedora 34 with f2fs-tools-1.14.0-2.fc34.x86_64
+After that, it will simply checkpoint() flow to just flush metadata b), for
+other flow, like GC, data/node allocation, it needs to query/update metadata
+after we combine metadata a) and b).
 
-[5.] Most recent kernel version which did not have the bug:
-None
+In addition, there is an existing in-memory log header framework in f2fs,
+based on this fwk, it's very easy for us to add a new in-memory log header
+for DIO preallocation.
 
-[6.] Output of Oops.. message (if applicable) with symbolic information
-     resolved (see Documentation/admin-guide/oops-tracing.rst)
-None
+So it seems feasible for me until now...
 
-[7.] A small shell script or example program which triggers the
-     problem (if possible)
-mount /dev/sdX /mnt/0X
+Jaegeuk, any other concerns about the implementation details?
 
-[8.] Memory consumption
+Thanks,
 
-With 24 * 14T SMR Block device with F2FS
-free -g
-              total        used        free      shared  buff/cache   available
-Mem:             46          36           0           0          10          10
-Swap:             0           0           0
-
-With 3 * 14T SMR Block device with F2FS
-free -g
-               total        used        free      shared  buff/cache   available
-Mem:               7           5           0           0           1           1
-Swap:              7           0           7
-
-The root cause is, there are three bitmaps:
-- cur_valid_map
-- ckpt_valid_map
-- discard_map
-and each of them will cost ~500MB memory, {cur, ckpt}_valid_map are
-necessary, but discard_map is optional, since this bitmap will only be
-useful in mountpoint that small discard is enabled.
-
-For a blkzoned device such as SMR or ZNS devices, f2fs will only issue
-discard for a section(zone) when all blocks of that section are invalid,
-so, for such device, we don't need small discard functionality at all.
-
-This patch introduces a new mountoption "discard_unit=block|segment|
-section" to support issuing discard with different basic unit which is
-aligned to block, segment or section, so that user can specify
-"discard_unit=segment" or "discard_unit=section" to disable small
-discard functionality.
-
-Note that this mount option can not be changed by remount() due to
-related metadata need to be initialized during mount().
-
-In order to save memory, let's use "discard_unit=section" for blkzoned
-device by default.
-
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- Documentation/filesystems/f2fs.rst |  8 +++
- fs/f2fs/f2fs.h                     | 16 ++++++
- fs/f2fs/segment.c                  | 82 +++++++++++++++++++-----------
- fs/f2fs/super.c                    | 54 ++++++++++++++++++--
- fs/f2fs/sysfs.c                    |  2 +
- 5 files changed, 130 insertions(+), 32 deletions(-)
-
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index ff9e7cc97c65..8f251a662542 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -312,6 +312,14 @@ inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
- 			 Documentation/block/inline-encryption.rst.
- atgc			 Enable age-threshold garbage collection, it provides high
- 			 effectiveness and efficiency on background GC.
-+discard_unit=%s		 Control discard unit, the argument can be "block", "segment"
-+			 and "section", issued discard command's offset/size will be
-+			 aligned to the unit, by default, "discard_unit=block" is set,
-+			 so that small discard functionality is enabled.
-+			 For blkzoned device, "discard_unit=section" will be set by
-+			 default, it is helpful for large sized SMR or ZNS devices to
-+			 reduce memory cost by getting rid of fs metadata supports small
-+			 discard.
- ======================== ============================================================
- 
- Debugfs Entries
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 8f35fa22dc49..1feef4cb78b6 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -139,6 +139,11 @@ struct f2fs_mount_info {
- 	int fsync_mode;			/* fsync policy */
- 	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
- 	int bggc_mode;			/* bggc mode: off, on or sync */
-+	int discard_unit;		/*
-+					 * discard command's offset/size should
-+					 * be aligned to this unit: block,
-+					 * segment or section
-+					 */
- 	struct fscrypt_dummy_policy dummy_enc_policy; /* test dummy encryption */
- 	block_t unusable_cap_perc;	/* percentage for cap */
- 	block_t unusable_cap;		/* Amount of space allowed to be
-@@ -1299,6 +1304,12 @@ enum {
- 				 */
- };
- 
-+enum {
-+	DISCARD_UNIT_BLOCK,	/* basic discard unit is block */
-+	DISCARD_UNIT_SEGMENT,	/* basic discard unit is segment */
-+	DISCARD_UNIT_SECTION,	/* basic discard unit is section */
-+};
-+
- static inline int f2fs_test_bit(unsigned int nr, char *addr);
- static inline void f2fs_set_bit(unsigned int nr, char *addr);
- static inline void f2fs_clear_bit(unsigned int nr, char *addr);
-@@ -4366,6 +4377,11 @@ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
- 	return false;
- }
- 
-+static inline bool f2fs_block_unit_discard(struct f2fs_sb_info *sbi)
-+{
-+	return F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK;
-+}
-+
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index f9b7fb785e1d..56e76cc86221 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -1893,7 +1893,8 @@ static int f2fs_issue_discard(struct f2fs_sb_info *sbi,
- 		se = get_seg_entry(sbi, GET_SEGNO(sbi, i));
- 		offset = GET_BLKOFF_FROM_SEG0(sbi, i);
- 
--		if (!f2fs_test_and_set_bit(offset, se->discard_map))
-+		if (f2fs_block_unit_discard(sbi) &&
-+				!f2fs_test_and_set_bit(offset, se->discard_map))
- 			sbi->discard_blks--;
- 	}
- 
-@@ -1918,7 +1919,8 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
- 	struct list_head *head = &SM_I(sbi)->dcc_info->entry_list;
- 	int i;
- 
--	if (se->valid_blocks == max_blocks || !f2fs_hw_support_discard(sbi))
-+	if (se->valid_blocks == max_blocks || !f2fs_hw_support_discard(sbi) ||
-+			!f2fs_block_unit_discard(sbi))
- 		return false;
- 
- 	if (!force) {
-@@ -2003,14 +2005,18 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 	unsigned int start = 0, end = -1;
- 	unsigned int secno, start_segno;
- 	bool force = (cpc->reason & CP_DISCARD);
--	bool need_align = f2fs_lfs_mode(sbi) && __is_large_section(sbi);
-+	bool section_alignment = F2FS_OPTION(sbi).discard_unit ==
-+						DISCARD_UNIT_SECTION;
-+
-+	if (f2fs_lfs_mode(sbi) && __is_large_section(sbi))
-+		section_alignment = true;
- 
- 	mutex_lock(&dirty_i->seglist_lock);
- 
- 	while (1) {
- 		int i;
- 
--		if (need_align && end != -1)
-+		if (section_alignment && end != -1)
- 			end--;
- 		start = find_next_bit(prefree_map, MAIN_SEGS(sbi), end + 1);
- 		if (start >= MAIN_SEGS(sbi))
-@@ -2018,7 +2024,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 		end = find_next_zero_bit(prefree_map, MAIN_SEGS(sbi),
- 								start + 1);
- 
--		if (need_align) {
-+		if (section_alignment) {
- 			start = rounddown(start, sbi->segs_per_sec);
- 			end = roundup(end, sbi->segs_per_sec);
- 		}
-@@ -2056,6 +2062,9 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 	}
- 	mutex_unlock(&dirty_i->seglist_lock);
- 
-+	if (!f2fs_block_unit_discard(sbi))
-+		goto wakeup;
-+
- 	/* send small discards */
- 	list_for_each_entry_safe(entry, this, head, list) {
- 		unsigned int cur_pos = 0, next_pos, len, total_len = 0;
-@@ -2089,6 +2098,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 		dcc->nr_discards -= total_len;
- 	}
- 
-+wakeup:
- 	wake_up_discard_thread(sbi, false);
- }
- 
-@@ -2108,6 +2118,11 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
- 		return -ENOMEM;
- 
- 	dcc->discard_granularity = DEFAULT_DISCARD_GRANULARITY;
-+	if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
-+		dcc->discard_granularity = sbi->blocks_per_seg;
-+	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
-+		dcc->discard_granularity = BLKS_PER_SEC(sbi);
-+
- 	INIT_LIST_HEAD(&dcc->entry_list);
- 	for (i = 0; i < MAX_PLIST_NUM; i++)
- 		INIT_LIST_HEAD(&dcc->pend_list[i]);
-@@ -2255,7 +2270,8 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
- 			del = 0;
- 		}
- 
--		if (!f2fs_test_and_set_bit(offset, se->discard_map))
-+		if (f2fs_block_unit_discard(sbi) &&
-+				!f2fs_test_and_set_bit(offset, se->discard_map))
- 			sbi->discard_blks--;
- 
- 		/*
-@@ -2297,7 +2313,8 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
- 			}
- 		}
- 
--		if (f2fs_test_and_clear_bit(offset, se->discard_map))
-+		if (f2fs_block_unit_discard(sbi) &&
-+			f2fs_test_and_clear_bit(offset, se->discard_map))
- 			sbi->discard_blks++;
- 	}
- 	if (!f2fs_test_bit(offset, se->ckpt_valid_map))
-@@ -4282,6 +4299,7 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
- 	unsigned int sit_segs, start;
- 	char *src_bitmap, *bitmap;
- 	unsigned int bitmap_size, main_bitmap_size, sit_bitmap_size;
-+	unsigned int discard_map = f2fs_block_unit_discard(sbi) ? 1 : 0;
- 
- 	/* allocate memory for SIT information */
- 	sit_i = f2fs_kzalloc(sbi, sizeof(struct sit_info), GFP_KERNEL);
-@@ -4304,9 +4322,9 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
- 		return -ENOMEM;
- 
- #ifdef CONFIG_F2FS_CHECK_FS
--	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * 4;
-+	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * (3 + discard_map);
- #else
--	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * 3;
-+	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * (2 + discard_map);
- #endif
- 	sit_i->bitmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
- 	if (!sit_i->bitmap)
-@@ -4326,8 +4344,10 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
- 		bitmap += SIT_VBLOCK_MAP_SIZE;
- #endif
- 
--		sit_i->sentries[start].discard_map = bitmap;
--		bitmap += SIT_VBLOCK_MAP_SIZE;
-+		if (discard_map) {
-+			sit_i->sentries[start].discard_map = bitmap;
-+			bitmap += SIT_VBLOCK_MAP_SIZE;
-+		}
- 	}
- 
- 	sit_i->tmp_map = f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
-@@ -4489,17 +4509,19 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 			if (IS_NODESEG(se->type))
- 				total_node_blocks += se->valid_blocks;
- 
--			/* build discard map only one time */
--			if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG)) {
--				memset(se->discard_map, 0xff,
--					SIT_VBLOCK_MAP_SIZE);
--			} else {
--				memcpy(se->discard_map,
--					se->cur_valid_map,
--					SIT_VBLOCK_MAP_SIZE);
--				sbi->discard_blks +=
--					sbi->blocks_per_seg -
--					se->valid_blocks;
-+			if (f2fs_block_unit_discard(sbi)) {
-+				/* build discard map only one time */
-+				if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG)) {
-+					memset(se->discard_map, 0xff,
-+						SIT_VBLOCK_MAP_SIZE);
-+				} else {
-+					memcpy(se->discard_map,
-+						se->cur_valid_map,
-+						SIT_VBLOCK_MAP_SIZE);
-+					sbi->discard_blks +=
-+						sbi->blocks_per_seg -
-+						se->valid_blocks;
-+				}
- 			}
- 
- 			if (__is_large_section(sbi))
-@@ -4535,13 +4557,15 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 		if (IS_NODESEG(se->type))
- 			total_node_blocks += se->valid_blocks;
- 
--		if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG)) {
--			memset(se->discard_map, 0xff, SIT_VBLOCK_MAP_SIZE);
--		} else {
--			memcpy(se->discard_map, se->cur_valid_map,
--						SIT_VBLOCK_MAP_SIZE);
--			sbi->discard_blks += old_valid_blocks;
--			sbi->discard_blks -= se->valid_blocks;
-+		if (f2fs_block_unit_discard(sbi)) {
-+			if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG)) {
-+				memset(se->discard_map, 0xff, SIT_VBLOCK_MAP_SIZE);
-+			} else {
-+				memcpy(se->discard_map, se->cur_valid_map,
-+							SIT_VBLOCK_MAP_SIZE);
-+				sbi->discard_blks += old_valid_blocks;
-+				sbi->discard_blks -= se->valid_blocks;
-+			}
- 		}
- 
- 		if (__is_large_section(sbi)) {
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 18c1ffb8710e..321eaac6cdf5 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -155,6 +155,7 @@ enum {
- 	Opt_atgc,
- 	Opt_gc_merge,
- 	Opt_nogc_merge,
-+	Opt_discard_unit,
- 	Opt_err,
- };
- 
-@@ -231,6 +232,7 @@ static match_table_t f2fs_tokens = {
- 	{Opt_atgc, "atgc"},
- 	{Opt_gc_merge, "gc_merge"},
- 	{Opt_nogc_merge, "nogc_merge"},
-+	{Opt_discard_unit, "discard_unit=%s"},
- 	{Opt_err, NULL},
- };
- 
-@@ -1173,6 +1175,25 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		case Opt_nogc_merge:
- 			clear_opt(sbi, GC_MERGE);
- 			break;
-+		case Opt_discard_unit:
-+			name = match_strdup(&args[0]);
-+			if (!name)
-+				return -ENOMEM;
-+			if (!strcmp(name, "block")) {
-+				F2FS_OPTION(sbi).discard_unit =
-+						DISCARD_UNIT_BLOCK;
-+			} else if (!strcmp(name, "segment")) {
-+				F2FS_OPTION(sbi).discard_unit =
-+						DISCARD_UNIT_SEGMENT;
-+			} else if (!strcmp(name, "section")) {
-+				F2FS_OPTION(sbi).discard_unit =
-+						DISCARD_UNIT_SECTION;
-+			} else {
-+				kfree(name);
-+				return -EINVAL;
-+			}
-+			kfree(name);
-+			break;
- 		default:
- 			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
- 				 p);
-@@ -1211,6 +1232,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- #endif
-+	if (f2fs_sb_has_blkzoned(sbi)) {
-+		if (F2FS_OPTION(sbi).discard_unit !=
-+						DISCARD_UNIT_SECTION) {
-+			f2fs_info(sbi, "Zoned block device doesn't need small discard, set discard_unit=section by default");
-+			F2FS_OPTION(sbi).discard_unit =
-+					DISCARD_UNIT_SECTION;
-+		}
-+	}
- 
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- 	if (f2fs_test_compress_extension(sbi)) {
-@@ -1925,6 +1954,14 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 
- 	if (test_opt(sbi, ATGC))
- 		seq_puts(seq, ",atgc");
-+
-+	if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK)
-+		seq_printf(seq, ",discard_unit=%s", "block");
-+	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
-+		seq_printf(seq, ",discard_unit=%s", "segment");
-+	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
-+		seq_printf(seq, ",discard_unit=%s", "section");
-+
- 	return 0;
- }
- 
-@@ -1961,10 +1998,13 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	sbi->sb->s_flags |= SB_LAZYTIME;
- 	set_opt(sbi, FLUSH_MERGE);
- 	set_opt(sbi, DISCARD);
--	if (f2fs_sb_has_blkzoned(sbi))
-+	if (f2fs_sb_has_blkzoned(sbi)) {
- 		F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
--	else
-+		F2FS_OPTION(sbi).discard_unit = DISCARD_UNIT_SECTION;
-+	} else {
- 		F2FS_OPTION(sbi).fs_mode = FS_MODE_ADAPTIVE;
-+		F2FS_OPTION(sbi).discard_unit = DISCARD_UNIT_BLOCK;
-+	}
- 
- #ifdef CONFIG_F2FS_FS_XATTR
- 	set_opt(sbi, XATTR_USER);
-@@ -2066,6 +2106,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
- 	bool no_atgc = !test_opt(sbi, ATGC);
- 	bool no_compress_cache = !test_opt(sbi, COMPRESS_CACHE);
-+	bool block_unit_discard = f2fs_block_unit_discard(sbi);
- #ifdef CONFIG_QUOTA
- 	int i, j;
- #endif
-@@ -2166,6 +2207,12 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 		goto restore_opts;
- 	}
- 
-+	if (block_unit_discard != f2fs_block_unit_discard(sbi)) {
-+		err = -EINVAL;
-+		f2fs_warn(sbi, "switch discard_unit option is not allowed");
-+		goto restore_opts;
-+	}
-+
- 	if ((*flags & SB_RDONLY) && test_opt(sbi, DISABLE_CHECKPOINT)) {
- 		err = -EINVAL;
- 		f2fs_warn(sbi, "disabling checkpoint not compatible with read-only");
-@@ -3779,7 +3826,8 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
- 	/* adjust parameters according to the volume size */
- 	if (sm_i->main_segments <= SMALL_VOLUME_SEGMENTS) {
- 		F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_REUSE;
--		sm_i->dcc_info->discard_granularity = 1;
-+		if (f2fs_block_unit_discard(sbi))
-+			sm_i->dcc_info->discard_granularity = 1;
- 		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE;
- 	}
- 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 20bd6f09da09..327c86221236 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -428,6 +428,8 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 	if (!strcmp(a->attr.name, "discard_granularity")) {
- 		if (t == 0 || t > MAX_PLIST_NUM)
- 			return -EINVAL;
-+		if (!f2fs_block_unit_discard(sbi))
-+			return -EINVAL;
- 		if (t == *ui)
- 			return count;
- 		*ui = t;
--- 
-2.22.1
-
+> 
+> - Eric
+> 
 
 
 _______________________________________________
