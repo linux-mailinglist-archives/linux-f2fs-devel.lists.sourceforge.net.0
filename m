@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4ABD53DE47F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Aug 2021 04:42:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11AFE3DE48F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Aug 2021 04:57:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mAkNr-000192-DF; Tue, 03 Aug 2021 02:42:23 +0000
+	id 1mAkcW-0005O9-77; Tue, 03 Aug 2021 02:57:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mAkNq-00018v-1G
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 02:42:22 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1mAkcU-0005Nv-MO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 02:57:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nWBZszKpKOQ1BibD20aN4NIRn4cRsMyz86+bE0oRkwk=; b=b7UA4wvk1w2ehrGHEvX0JoTBkp
- XvSCiBH+n0TQJF62Nf6y2ShASTaQIgX4pqDbsJ8ViZ9Jpu4erUqPmiYbHLkxFLA/STGUUpnDeIHHd
- JICGr+mpXkA70fpgT+J5AqChWjkbIwvw8yDKjNjxa+Ps8J6zkA2ScWdNgsevJr29rFT8=;
+ bh=T2MRza0NfRUZSms8irGq/5InOdL9RwssS9iThGje65s=; b=KZBhcakVGXQYml/KPnDdQrlx/u
+ 0PjskfLcq1M44EQ0+NuqTc1TGT7EXVcN7r8eUsVlbc3CrmcqXNDikDvdOzj5l6Kvkt++LBKpXXHld
+ K3qRXk/cgFWqNw+XH21EpY9CfcV+Ys9XRePqBYpKJ7lCPopJJl3obLWJn91e7bzyOdzE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,36 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nWBZszKpKOQ1BibD20aN4NIRn4cRsMyz86+bE0oRkwk=; b=aflbVDOxQ+RQ5NCfxtKXB6u9tN
- 73QcFq27sSASaXNLRbINaXGAdxPJHu4TbEO4PjnwANUhQ0buGettGtmvc5rsVDLjzxdrV5ubowdql
- 8GBCis1MbW9YE5zKp4ApOqrE5lhN+STmOheb8nrSKx8aQZ9XWeD3wnTT2iKvVlEL7paY=;
+ bh=T2MRza0NfRUZSms8irGq/5InOdL9RwssS9iThGje65s=; b=UzvBmccL+6V+j47VKaCB066wTX
+ J7ZC5BsiD0VBTldn4dzVt3lOvYV/MLTN8kQSNljFqY/movsNoHtAXuQK+D0l4YjFhJzA6+lTk3rJN
+ PChP3PLC02o5sLmkm4a3QMfA0M/sk4Trj0OmbD2tr80TDlRs3OTwkYkzAkTjZ4lblt3w=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mAkNk-00AjXd-8X
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 02:42:21 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id BD80660EE8;
- Tue,  3 Aug 2021 02:42:09 +0000 (UTC)
+ id 1mAkcS-00Ajqp-HT
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 02:57:30 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 248B860E09;
+ Tue,  3 Aug 2021 02:57:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627958530;
- bh=xXMRW/WDePCFaDeizqziaVM0jOmidKkj8W5d5Jyazwo=;
+ s=k20201202; t=1627959439;
+ bh=Y7JS2RKVmLZCbQYjykePluXtJFgoKFda+j0S7/shrSY=;
  h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=EDQpDTrYyA6wHEV6hLIhGqF3bmlG2ajVIzj9NvGtdXiN3fAKhm+aN2X3zHGEptMtV
- dCAH8AmLckZONV3Rw8KMZlram3ql5hRXOY5w6HOPj1qDosVJowbRXpIZrZ/Nfs9QV0
- 7djtGEf4iVtQUueHfxN5E5gwDCiSvPs/oLOT19+wbp11L9uin3FNgNPL5UoS9ji4rX
- nxiWJeXHz6t4VMAIejoEbJQ+FHxJ7zk6f3BX1bSFGrjRfQ0RYf9V1SkvUk1w+lVv5z
- 7231aUbSuqY73FLi8f2ueaZgpiH8T35rxFqwP3KHQkVh6sfzGdSEpfGXveQ9KMyZQL
- YSMX8CR/W0GxQ==
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20210802175703.895964-1-daeho43@gmail.com>
+ b=M9QEmlrHOU8jGbXL8DEGa+EsYxjYZKKY1pyO0UX8pZpX+XlsUTb2s2ko5067wlucn
+ YpkWon1Ea22pDSnc3zZHt1nHjnBqscWtldV4hg+B9BCz42HTeOCkV5v+dQFzKEzcAC
+ 7wgmaZb+JObj2XnnZhPTKI7qs4yS9hWdYmZfBEoxms8+Fd/smfUs/CgW7XOVTKnBlr
+ shvrkNb0VF4LsiVSZsGq0AFPrXGhEQjzlwshLHKkETYbXgi41t8vl9U5lVAP+mZxjB
+ gw6P5sCV89RpN43zNTteIJA/jG5D4brhGPqEBrE/gqsdoXJq1COm9ZUX3lqVcB3XF+
+ 5sL7gM6153Ilg==
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210427082106.2755-1-frank.li@vivo.com>
+ <12ae52df-bc5e-82c3-4f78-1eafe7723f93@huawei.com>
+ <5f37995c-2390-e8ca-d002-3639ad39e0d3@kernel.org>
+ <YPXDtEyBg5W2ToD/@google.com>
+ <8d2e3a63-72f9-bcb2-24e5-dddd84136001@kernel.org>
+ <YQR60QUh0Pim8vSf@google.com>
+ <355ac2ff-f1f1-b9ea-bd8c-139cb24a03fb@kernel.org>
+ <YQgydetYHOkgY9+B@google.com>
+ <3d3ef5c9-fbb6-df85-26f7-e493da594b22@kernel.org>
+ <YQifkGIYCHfaQ/AJ@google.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <448ec877-7486-c02b-e6ba-3c32aafff9bf@kernel.org>
-Date: Tue, 3 Aug 2021 10:42:08 +0800
+Message-ID: <a37e3ec3-365d-6eb6-85e6-1d7610b93784@kernel.org>
+Date: Tue, 3 Aug 2021 10:57:17 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <20210802175703.895964-1-daeho43@gmail.com>
+In-Reply-To: <YQifkGIYCHfaQ/AJ@google.com>
 Content-Language: en-US
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -72,10 +80,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mAkNk-00AjXd-8X
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add sysfs node to control ra_pages
- for fadvise seq file
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mAkcS-00Ajqp-HT
+Subject: Re: [f2fs-dev] [PATCH] f2fs: reset free segment to prefree status
+ when do_checkpoint() fail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,181 +95,197 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/8/3 1:57, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On 2021/8/3 9:44, Jaegeuk Kim wrote:
+> On 08/03, Chao Yu wrote:
+>> On 2021/8/3 1:59, Jaegeuk Kim wrote:
+>>> On 08/01, Chao Yu wrote:
+>>>> On 2021/7/31 6:18, Jaegeuk Kim wrote:
+>>>>> On 07/20, Chao Yu wrote:
+>>>>>> On 2021/7/20 2:25, Jaegeuk Kim wrote:
+>>>>>>> On 07/19, Chao Yu wrote:
+>>>>>>>> On 2021/4/27 20:37, Chao Yu wrote:
+>>>>>>>>> I think just reverting dirty/free bitmap is not enough if checkpoint fails,
+>>>>>>>>> due to we have updated sbi->cur_cp_pack and nat/sit bitmap, next CP tries
+>>>>>>>>> to overwrite last valid meta/node/data, then filesystem will be corrupted.
+>>>>>>>>>
+>>>>>>>>> So I suggest to set cp_error if do_checkpoint() fails until we can handle
+>>>>>>>>> all cases, which is not so easy.
+>>>>>>>>>
+>>>>>>>>> How do you think?
+>>>>>>>>
+>>>>>>>> Let's add below patch first before you figure out the patch which covers all
+>>>>>>>> things.
+>>>>>>>>
+>>>>>>>>     From 3af957c98e9e04259f8bb93ca0b74ba164f3f27e Mon Sep 17 00:00:00 2001
+>>>>>>>> From: Chao Yu <chao@kernel.org>
+>>>>>>>> Date: Mon, 19 Jul 2021 16:37:44 +0800
+>>>>>>>> Subject: [PATCH] f2fs: fix to stop filesystem update once CP failed
+>>>>>>>>
+>>>>>>>> During f2fs_write_checkpoint(), once we failed in
+>>>>>>>> f2fs_flush_nat_entries() or do_checkpoint(), metadata of filesystem
+>>>>>>>> such as prefree bitmap, nat/sit version bitmap won't be recovered,
+>>>>>>>> it may cause f2fs image to be inconsistent, let's just set CP error
+>>>>>>>> flag to avoid further updates until we figure out a scheme to rollback
+>>>>>>>> all metadatas in such condition.
+>>>>>>>>
+>>>>>>>> Reported-by: Yangtao Li <frank.li@vivo.com>
+>>>>>>>> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+>>>>>>>> Signed-off-by: Chao Yu <chao@kernel.org>
+>>>>>>>> ---
+>>>>>>>>      fs/f2fs/checkpoint.c | 10 +++++++---
+>>>>>>>>      1 file changed, 7 insertions(+), 3 deletions(-)
+>>>>>>>>
+>>>>>>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>>>>>>>> index 6c208108d69c..096c85022f62 100644
+>>>>>>>> --- a/fs/f2fs/checkpoint.c
+>>>>>>>> +++ b/fs/f2fs/checkpoint.c
+>>>>>>>> @@ -1639,8 +1639,10 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>>>>>>>>
+>>>>>>>>      	/* write cached NAT/SIT entries to NAT/SIT area */
+>>>>>>>>      	err = f2fs_flush_nat_entries(sbi, cpc);
+>>>>>>>> -	if (err)
+>>>>>>>> +	if (err) {
+>>>>>>>> +		f2fs_stop_checkpoint(sbi, false);
+>>>>>>>
+>>>>>>> I think we should abuse this, since we can get any known ENOMEM as well.
+>>>>>>
+>>>>>> Yup, but one critical issue here is it can break A/B update of NAT area,
+>>>>>> so, in order to fix this hole, how about using NOFAIL memory allocation
+>>>>>> in f2fs_flush_nat_entries() first until we figure out the finial scheme?
+>>>>>
+>>>>> NOFAIL is risky, so how about adding a retry logic on ENOMEM with a message
+>>>>> and then giving up if we can't get the memory? BTW, what about EIO or other
+>>>>> family?
+>>>>
+>>>> How about this?
+>>>
+>>> Hmm, it seems we won't get ENOMEM.
+>>>
+>>> __flush_nat_entry_set
+>>>    -> get_next_nat_page
+>>>      -> ...
+>>>       -> __get_meta_page
+>>>         -> repeat on ENOMEM, but stop_checkpoint on EIO
+>>
+>> Correct, I missed to check __get_meta_page() and f2fs_get_meta_page_retry().
+>>
+>>>
+>>> If we have an error here, we should have stopped checkpoint. Have you seen other
+>>> issue?
+>>
+>> Still we should fix the case from below path?
+>>
+>> - f2fs_write_checkpoint
+>>   - do_checkpoint
+>>    - f2fs_flush_device_cache failed
 > 
-> fadvise() allows the user to expand the readahead window to double with
-> POSIX_FADV_SEQUENTIAL, now. But, in some use cases, it is not that
-> sufficient and we need to meet the need in a restricted way. We can
-> control the multiplier value of bdi device readahead between 2 (default)
-> and 256 for POSIX_FADV_SEQUENTIAL advise option.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> 
-> ---
-> v2: fix minor style issues
-> ---
->   Documentation/ABI/testing/sysfs-fs-f2fs |  6 +++++
->   fs/f2fs/f2fs.h                          |  2 ++
->   fs/f2fs/file.c                          | 30 +++++++++++++++++++++++++
->   fs/f2fs/super.c                         |  1 +
->   fs/f2fs/sysfs.c                         | 13 +++++++++++
->   5 files changed, 52 insertions(+)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index 845c4be535b0..73211f77d11e 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -507,3 +507,9 @@ Date:		July 2021
->   Contact:	"Daeho Jeong" <daehojeong@google.com>
->   Description:	You can control for which gc mode the "gc_reclaimed_segments" node shows.
->   		Refer to the description of the modes in "gc_reclaimed_segments".
-> +
-> +What:		/sys/fs/f2fs/<disk>/seq_file_ra_mul
-> +Date:		July 2021
-> +Contact:	"Daeho Jeong" <daehojeong@google.com>
-> +Description:	You can	control the multiplier value of	bdi device readahead window size
-> +		between 2 (default) and 256 for POSIX_FADV_SEQUENTIAL advise option.
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 8459b6d5a2f8..5d16486feb8f 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1738,6 +1738,8 @@ struct f2fs_sb_info {
->   	unsigned int gc_segment_mode;		/* GC state for reclaimed segments */
->   	unsigned int gc_reclaimed_segs[MAX_GC_MODE];	/* Reclaimed segs for each mode */
->   
-> +	unsigned long seq_file_ra_mul;		/* multiplier for ra_pages of seq. files in fadvise */
-> +
->   #ifdef CONFIG_F2FS_FS_COMPRESSION
->   	struct kmem_cache *page_array_slab;	/* page array entry */
->   	unsigned int page_array_slab_size;	/* default page array slab size */
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index b1cb5b50faac..1a631e6d3e9b 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -23,6 +23,7 @@
->   #include <linux/nls.h>
->   #include <linux/sched/signal.h>
->   #include <linux/fileattr.h>
-> +#include <linux/fadvise.h>
->   
->   #include "f2fs.h"
->   #include "node.h"
-> @@ -4332,6 +4333,34 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
->   	return ret;
->   }
->   
-> +static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
-> +		int advice)
-> +{
-> +	struct inode *inode;
-> +	struct address_space *mapping;
-> +	struct backing_dev_info *bdi;
-> +
-> +	if (advice == POSIX_FADV_SEQUENTIAL) {
-> +		inode = file_inode(filp);
-> +		if (S_ISFIFO(inode->i_mode))
-> +			return -ESPIPE;
-> +
-> +		mapping = filp->f_mapping;
-> +		if (!mapping || len < 0)
-> +			return -EINVAL;
-> +
-> +		bdi = inode_to_bdi(mapping->host);
-> +		filp->f_ra.ra_pages = bdi->ra_pages *
-> +			F2FS_I_SB(inode)->seq_file_ra_mul;
-> +		spin_lock(&filp->f_lock);
-> +		filp->f_mode &= ~FMODE_RANDOM;
-> +		spin_unlock(&filp->f_lock);
-> +		return 0;
-> +	}
-> +
-> +	return generic_fadvise(filp, offset, len, advice);
-> +}
-> +
->   #ifdef CONFIG_COMPAT
->   struct compat_f2fs_gc_range {
->   	u32 sync;
-> @@ -4460,4 +4489,5 @@ const struct file_operations f2fs_file_operations = {
->   #endif
->   	.splice_read	= generic_file_splice_read,
->   	.splice_write	= iter_file_splice_write,
-> +	.fadvise	= f2fs_file_fadvise,
->   };
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 72eb9d70969f..41765e90caa2 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3422,6 +3422,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
->   	sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
->   	sbi->max_victim_search = DEF_MAX_VICTIM_SEARCH;
->   	sbi->migration_granularity = sbi->segs_per_sec;
-> +	sbi->seq_file_ra_mul = 2;
+> What about adding a retry logic to deal with EIO in __submit_flush_wait()?
+> We probably need to retry submitting FLUSH commands, and then give up
+> with f2fs_stop_checkpoint(). And, then how about adding f2fs_bug_on() if
+> f2fs_flush_nat_entries() returns error without f2fs_cp_error()?
 
-sbi->seq_file_ra_mul = MIN_RA_MUL;
+Agreed, how about this?
 
-Otherwise, it looks good to me.
+ From 357da99968f6a31375ea47423b691400c5f66547 Mon Sep 17 00:00:00 2001
+From: Chao Yu <chao@kernel.org>
+Date: Mon, 19 Jul 2021 16:37:44 +0800
+Subject: [PATCH v3] f2fs: fix to stop filesystem update once CP failed
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+During f2fs_write_checkpoint(), once we failed in
+f2fs_flush_nat_entries() or do_checkpoint(), metadata of filesystem
+such as prefree bitmap, nat/sit version bitmap won't be recovered,
+it may cause f2fs image to be inconsistent, let's just set CP error
+flag to avoid further updates until we figure out a scheme to rollback
+all metadatas in such condition.
 
-Thanks,
+Reported-by: Yangtao Li <frank.li@vivo.com>
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v3:
+- add f2fs_bug_on in error path of f2fs_flush_nat_entries()
+- add retry logic in f2fs_flush_device_cache()
+  fs/f2fs/checkpoint.c | 12 +++++++++---
+  fs/f2fs/f2fs.h       |  1 +
+  fs/f2fs/segment.c    |  8 +++++++-
+  3 files changed, 17 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 6c208108d69c..1d5a2a867282 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1639,8 +1639,11 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+
+  	/* write cached NAT/SIT entries to NAT/SIT area */
+  	err = f2fs_flush_nat_entries(sbi, cpc);
+-	if (err)
++	if (err) {
++		f2fs_err(sbi, "f2fs_flush_nat_entries failed err:%d, stop checkpoint", err);
++		f2fs_bug_on(sbi, !f2fs_cp_error(sbi));
+  		goto stop;
++	}
+
+  	f2fs_flush_sit_entries(sbi, cpc);
+
+@@ -1648,10 +1651,13 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+  	f2fs_save_inmem_curseg(sbi);
+
+  	err = do_checkpoint(sbi, cpc);
+-	if (err)
++	if (err) {
++		f2fs_err(sbi, "do_checkpoint failed err:%d, stop checkpoint", err);
++		f2fs_stop_checkpoint(sbi, false);
+  		f2fs_release_discard_addrs(sbi);
+-	else
++	} else {
+  		f2fs_clear_prefree_segments(sbi, cpc);
++	}
+
+  	f2fs_restore_inmem_curseg(sbi);
+  stop:
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 1feef4cb78b6..97eae0e066ee 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -548,6 +548,7 @@ enum {
+  };
+
+  #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO count */
++#define DEFAULT_RETRY_FLUSH_COUNT	3	/* maximum retry flush count */
+
+  /* congestion wait timeout value, default: 20ms */
+  #define	DEFAULT_IO_TIMEOUT	(msecs_to_jiffies(20))
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 80f26158e304..37c7a05659fe 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -776,9 +776,15 @@ int f2fs_flush_device_cache(struct f2fs_sb_info *sbi)
+  		return 0;
+
+  	for (i = 1; i < sbi->s_ndevs; i++) {
++		int count = DEFAULT_RETRY_FLUSH_COUNT;
++
+  		if (!f2fs_test_bit(i, (char *)&sbi->dirty_device))
+  			continue;
+-		ret = __submit_flush_wait(sbi, FDEV(i).bdev);
++
++		do {
++			ret = __submit_flush_wait(sbi, FDEV(i).bdev);
++		} while (ret && --count);
++
+  		if (ret)
+  			break;
+
+-- 
+2.22.1
 
 
->   
->   	sbi->dir_level = DEF_DIR_LEVEL;
->   	sbi->interval_time[CP_TIME] = DEF_CP_INTERVAL;
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index b1725620c07d..44b086e5b607 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -50,6 +50,9 @@ struct f2fs_attr {
->   	int id;
->   };
->   
-> +#define MIN_RA_MUL	2
-> +#define MAX_RA_MUL	256
-> +
->   static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
->   			     struct f2fs_sb_info *sbi, char *buf);
->   
-> @@ -538,6 +541,14 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->   		return count;
->   	}
->   
-> +	if (!strcmp(a->attr.name, "seq_file_ra_mul")) {
-> +		if (t >= MIN_RA_MUL && t <= MAX_RA_MUL)
-> +			sbi->seq_file_ra_mul = t;
-> +		else
-> +			return -EINVAL;
-> +		return count;
-> +	}
-> +
->   	*ui = (unsigned int)t;
->   
->   	return count;
-> @@ -763,6 +774,7 @@ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_count, max_candidate_cou
->   F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_weight, age_weight);
->   F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
->   
-> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, seq_file_ra_mul, seq_file_ra_mul);
->   F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_segment_mode, gc_segment_mode);
->   F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_reclaimed_segments, gc_reclaimed_segs);
->   
-> @@ -838,6 +850,7 @@ static struct attribute *f2fs_attrs[] = {
->   	ATTR_LIST(atgc_candidate_count),
->   	ATTR_LIST(atgc_age_weight),
->   	ATTR_LIST(atgc_age_threshold),
-> +	ATTR_LIST(seq_file_ra_mul),
->   	ATTR_LIST(gc_segment_mode),
->   	ATTR_LIST(gc_reclaimed_segments),
->   	NULL,
-> 
 
 
 _______________________________________________
