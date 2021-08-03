@@ -2,69 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D3573DE404
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Aug 2021 03:32:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CE8A3DE40B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Aug 2021 03:35:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mAjHi-00030k-Ij; Tue, 03 Aug 2021 01:31:58 +0000
+	id 1mAjKc-0002wK-Q4; Tue, 03 Aug 2021 01:34:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mAjHh-00030Z-NP
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 01:31:57 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mAjKb-0002wE-Ow
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 01:34:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hLeNsabUmVWfYIJl8Vi8jOIisznuISe7XSQaEmMUgQo=; b=OAMudjRkIQy/JkjRTZnguTOhJd
- 6OLTAwIzczr7thGuYwxQeNZz/5Seb9Zb9zE+SDmrtzmaNDocn8sskcaS/uJUp5aZrUlgGLO1Fib9p
- KNY0gdDcJOp8asoozKE2qMJ1bYhIOJuHsL8TxpLcBsDQZU6ruaER6xAg2HS7fne6B4S0=;
+ bh=UCIEEI9xeNj7CuW+8boHUUKyhEr5iyMtPTIlbrWDHKs=; b=SJ+WJSRVE/wTNCT/wOBudRoa2F
+ fqk5oYZqEmhNrsMuaLw2HD47mY3Gco6V+zuFdIuYTDBgdF9VqDVm8NRWIvblfr8s4nqtfcKrJj4/C
+ 7j/gryTFvFiUWI6+ivG/CWxIQflHy4zKP0DrnI9WFaTFEedkQ1P0RbCBMGBEZY4Ezmao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hLeNsabUmVWfYIJl8Vi8jOIisznuISe7XSQaEmMUgQo=; b=TYtkEdU8+q/eNhmsw8snQ/Itgr
- 4XIu4QDpjK2jw+CyD3kQNOz9Nlq6Bu47QwXeYtGnfGIUa4qZrRxSXu3Lu0NGLAAvz2S2t6jtorWfB
- o/0Qn+/bnq6wjlEmDqNBHPKztA/89+LjqTOJau12jvYbwRym27AqCf4Idrmfb0pFqwCA=;
+ bh=UCIEEI9xeNj7CuW+8boHUUKyhEr5iyMtPTIlbrWDHKs=; b=nTGy+s0RmXXt0wbxTmXf2pqgMh
+ egtSFuKs9GOwThIaXVVTJUXjMJ2957jquySsV6Ob0nDUKNI376GBI2fDNsjtD85KRfJ0QV5hcwwsV
+ SJ6XBX1KUUNN+9cVFg+XMMCE0mPj/FswZFCel2pW+gxUUmzZw4p77B2GMfW5qFFLh46E=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mAjHg-00AhQt-MD
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 01:31:57 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id AAC3160F48;
- Tue,  3 Aug 2021 01:31:49 +0000 (UTC)
+ id 1mAjKZ-00AhYY-Qz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 03 Aug 2021 01:34:57 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 455F560FA0;
+ Tue,  3 Aug 2021 01:34:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627954310;
- bh=axpOchdr5vlkrhvkDUEdjCDRs8DN3pSH05qYR6dKJOA=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=SUBfynMUq3I+JJ7il44iw4gcmWdwVhArW47qDaJKzcUVB/Banti8XtS1E9+6Gdb6e
- f+gKajdTxapUVsRl3fIryZ5+WHrLHvkmaQyKEj8MQtjssupponON/Ib9d1M+b1xVPN
- Uo31/RGqzDw3m/7Wt7uc/z4z54yvxTnm3UJqfaRbpzEY0q3Zukr073Qa4vHK+Yjnz9
- cFZE3zOnBjSzgFZWunEvqA0J7Nna8evSruh5iOZ8oOpVYAZC0jJn8FC1yzxcG4w+NS
- 8FKzfdPdYJHEfC3dOf9Vqg1EF+g5KFoAowJ/z/ITyordquqc1XokOsOaSe6fJkFZyV
- q0rwh2lXVhhEw==
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210707015815.1978-1-chao@kernel.org>
- <YQRQ4kHvdRTBnb10@google.com>
- <51565c85-a475-bcb8-bbb2-e3125c5223a3@kernel.org>
- <YQgziuikMr0fvlT7@google.com>
- <3256dc39-2a82-cb60-038b-69e262c32d18@kernel.org>
- <YQia9FBvQIRgr6cm@google.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <88858001-d5e0-257f-0b8f-97906ddfc43f@kernel.org>
-Date: Tue, 3 Aug 2021 09:31:50 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ s=k20201202; t=1627954490;
+ bh=XRzA3NrzzEUgpsOEuNtbvyLKsenWMKiE5wFIrQcFx2Q=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=tgaDKnP+hbvLQZXYzSVAUGYqbB3FuLq4omTfeTO1Pz2y32jDuHV8nhRUAqcWqs/U8
+ l9fxboTiygfUKWrPbdU2gPVKZ5EiE0dmufn9LUwj5TeVckseuoOpXlnFPFxCqpSWXw
+ NrIqvKK42kChEo+AYluJ0WNaV7fEM6L0H42L2jz05c6ng5C/bTf8V9yXAW4GK1k1k9
+ va2C/Tf/5t5TcblLTTwde6RrRCTQHgkLbApoz36qVbG6ARjcaEspeo7DUr6OIVyAKP
+ XRU9hp2Es1zy/7Grmi+ZlG6sfEfajF7w97x601rGidAkJi4oSY/WxOkzqU/qEH2bqC
+ hhImbvyDtRTQA==
+Date: Mon, 2 Aug 2021 18:34:48 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YQidOD/zNB17fd9v@google.com>
+References: <20210728015154.171507-1-ebiggers@kernel.org>
+ <YQRQRh1zUHSIzcC/@gmail.com> <YQS5eBljtztWwOFE@mit.edu>
+ <YQd3Hbid/mFm0o24@sol.localdomain>
+ <a3cdd7cb-50a7-1b37-fe58-dced586712a2@kernel.org>
+ <YQg4Lukc2dXX3aJc@google.com>
+ <b88328b4-db3e-0097-d8cc-f250ee678e5b@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <YQia9FBvQIRgr6cm@google.com>
-Content-Language: en-US
-X-Spam-Score: -0.7 (/)
+Content-Disposition: inline
+In-Reply-To: <b88328b4-db3e-0097-d8cc-f250ee678e5b@kernel.org>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -74,12 +72,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mAjHg-00AhQt-MD
-Subject: Re: [f2fs-dev] [RFC NO MERGE] f2fs: extent cache: support unaligned
- extent
+X-Headers-End: 1mAjKZ-00AhYY-Qz
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove broken support for allocating
+ DIO writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,19 +87,97 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/8/3 9:25, Jaegeuk Kim wrote:>> Please check description in patch message, now it was designed only for
->                                                   --
->                                                   what do you refer "it"?
+On 08/03, Chao Yu wrote:
+> On 2021/8/3 2:23, Jaegeuk Kim wrote:
+> > On 08/02, Chao Yu wrote:
+> > > On 2021/8/2 12:39, Eric Biggers wrote:
+> > > > On Fri, Jul 30, 2021 at 10:46:16PM -0400, Theodore Ts'o wrote:
+> > > > > On Fri, Jul 30, 2021 at 12:17:26PM -0700, Eric Biggers wrote:
+> > > > > > > Currently, non-overwrite DIO writes are fundamentally unsafe on f2fs as
+> > > > > > > they require preallocating blocks, but f2fs doesn't support unwritten
+> > > > > > > blocks and therefore has to preallocate the blocks as regular blocks.
+> > > > > > > f2fs has no way to reliably roll back such preallocations, so as a
+> > > > > > > result, f2fs will leak uninitialized blocks to users if a DIO write
+> > > > > > > doesn't fully complete.
+> > > > > 
+> > > > > There's another way of solving this problem which doesn't require
+> > > > > supporting unwritten blocks.  What a file system *could* do is to
+> > > > > allocate the blocks, but *not* update the on-disk data structures ---
+> > > > > so the allocation happens in memory only, so you know that the
+> > > > > physical blocks won't get used for another files, and then issue the
+> > > > > data block writes.  On the block I/O completion, trigger a workqueue
+> > > > > function which updates the on-disk metadata to assign physical blocks
+> > > > > to the inode.
+> > > > > 
+> > > > > That way if you crash before the data I/O has a chance to complete,
+> > > > > the on-disk logical block -> physical block map hasn't been updated
+> > > > > yet, and so you don't need to worry about leaking uninitialized blocks.
+> > > 
+> > > Thanks for your suggestion, I think it makes sense.
+> > > 
+> > > > > 
+> > > > > Cheers,
+> > > > > 
+> > > > > 					- Ted
+> > > > 
+> > > > Jaegeuk and Chao, any idea how feasible it would be for f2fs to do this?
+> > > 
+> > > Firstly, let's notice that below metadata will be touched during DIO
+> > > preallocation flow:
+> > > - log header
+> > > - sit bitmap/count
+> > > - free seg/sec bitmap/count
+> > > - dirty seg/sec bitmap/count
+> > > 
+> > > And there is one case we need to concern about is: checkpoint() can be
+> > > triggered randomly in between dio_preallocate() and dio_end_io(), we should
+> > > not persist any DIO preallocation related metadata during checkpoint(),
+> > > otherwise, sudden power-cut after the checkpoint will corrupt filesytem.
+> > > 
+> > > So it needs to well separate two kinds of metadata update:
+> > > a) belong to dio preallocation
+> > > b) the left one
+> > > 
+> > > After that, it will simply checkpoint() flow to just flush metadata b), for
+> > > other flow, like GC, data/node allocation, it needs to query/update metadata
+> > > after we combine metadata a) and b).
+> > > 
+> > > In addition, there is an existing in-memory log header framework in f2fs,
+> > > based on this fwk, it's very easy for us to add a new in-memory log header
+> > > for DIO preallocation.
+> > > 
+> > > So it seems feasible for me until now...
+> > > 
+> > > Jaegeuk, any other concerns about the implementation details?
+> > 
+> > Hmm, I'm still trying to deal with this as a corner case where the writes
+> > haven't completed due to an error. How about keeping the preallocated block
+> > offsets and releasing them if we get an error? Do we need to handle EIO right?
+> 
+> What about the case that CP + SPO following DIO preallocation? User will
+> encounter uninitialized block after recovery.
 
-Oh...I mean this feature I proposed: unaligned extent support.
+I think buffered writes as a workaround can expose the last unwritten block as
+well, if SPO happens right after block allocation. We may need to compromise
+at certain level?
 
-Thanks,
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > - Eric
+> > > > 
 
 
 _______________________________________________
