@@ -2,78 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 075733E15FD
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Aug 2021 15:48:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFFEF3E15D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Aug 2021 15:36:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mBdjK-0001fL-9U; Thu, 05 Aug 2021 13:48:14 +0000
+	id 1mBdXj-0002dA-T7; Thu, 05 Aug 2021 13:36:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <yangtiezhu@loongson.cn>) id 1mBdjI-0001fF-Uj
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Aug 2021 13:48:12 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1mBdXi-0002cy-4D
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Aug 2021 13:36:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jjOidPbeRf5oG3FWIlWKEUmnnU1d3Zp4oG74E9lVON8=; b=brso2yGrKVuXPnYuQxXblGYWPA
- b4QFl0/VoZNkBCnxOCLQiy9DC/1K/iW8vx2l7HhZN7dE9c8J3mr391qbgEoO6iVGXa0UMjws7hMyN
- yTQfjZQz4NHspa0IAWGNGEVzWFLM3VBo36JSiaK+FmbGP0T3jwmdoGGwb44CmZq7+txU=;
+ bh=2PLX9hAyvYrYWFY0IkRnLLPAM1HZm4d7Ta0uk9qlYP8=; b=Z5QmXvV8IWS6ee5/0DLlKFSGM8
+ rAMDnqDq9lLfrqjZu7BaPAllN7WZvP6O9HohFqi8KyKk8kbQxEMFYCM5g2xcTlzB2ZwODPkMXQZ0o
+ GC+65432B0+q3zrEk1u1NL5nZ9TZyeny1DpQSDA1vdCDmb1DCbtcGB2CSR6atdtj32Sk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jjOidPbeRf5oG3FWIlWKEUmnnU1d3Zp4oG74E9lVON8=; b=Re4TqNtB0Mz6EqLjsWYGD30Tfi
- ULP9Rjs7WkaTBNPfbWN68t7AzfA7aKOW+7LfD+jBQLamJqc4EMcXiV9Cm/ttF6uFBjC6kDL9mN0f6
- 0T3rci3lAI1hhAWYyNrLSORak23lfkATAymnpBgduXuJLIEPlpBPAYhTYbM3Slx2ijYI=;
-Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mBdjA-00DMZ6-EP
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Aug 2021 13:48:12 +0000
-Received: from linux.localdomain (unknown [113.200.148.30])
- by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxL0Dw5wthzHIrAA--.32320S2; 
- Thu, 05 Aug 2021 21:30:25 +0800 (CST)
-From: Tiezhu Yang <yangtiezhu@loongson.cn>
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Thu,  5 Aug 2021 21:30:24 +0800
-Message-Id: <1628170224-13239-1-git-send-email-yangtiezhu@loongson.cn>
-X-Mailer: git-send-email 2.1.0
-X-CM-TRANSID: AQAAf9DxL0Dw5wthzHIrAA--.32320S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7uryrAFW5XF4UKFyxJr1fWFg_yoW8ZFyrpw
- sYgry8GrZ3WF15KanYgrn8Kr47JryFga1UJr43Jw1UArWrGrn7WF95tFs5ZayUZFZxXFZ8
- uws0grW5Wr4avFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUk2b7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
- 8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
- 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJw
- Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc2xSY4AK67AK6ry8MxAIw28I
- cxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2
- IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI
- 42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42
- IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2
- z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUsUUUUUUUU
-X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
-X-Spam-Score: -0.0 (/)
+ bh=2PLX9hAyvYrYWFY0IkRnLLPAM1HZm4d7Ta0uk9qlYP8=; b=nK30Qjup9ygjIguZXFpIeYpghE
+ YKSx2i3cK43QX3REKLBy8Z7sWRjaJ65+QbOSAbBORqRezPxaPTDQNWy6atGb536yllyDZaMKimaBX
+ XGYXVzI+YSW8Bso1wpaqRhLQXtlxk5SmpMTt5aqG8kgiN1Ejfl/llMd65hkd5qpB7/7g=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mBdXa-000505-Pg
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 Aug 2021 13:36:14 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 24A5F61004;
+ Thu,  5 Aug 2021 13:35:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1628170556;
+ bh=CpATmNokx74QwJ4qfUqqYxtBNb1Sl8uIz0anyAYPWmM=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=iB4gZBTic5a1gzXrmJgYu21Kb5v4jv7mMq9LlpK1yO0Ac/LwQl19c055lAVIEm7Vg
+ zKcbynoJX7FBoYGk+EGSVYo8Z1nbfH1wW2/AgLktPT7WgUrHRAB4TrG/2U8Z3hKPg7
+ YlPIG5S25At90kZsaN/wUGor/11oNHH/j+XpjXtE5crEOFUgnxSHDpVsICJQymlcov
+ aq8/AkxfzzOvTK/S09E27IgB4V3nFYroAW2lRJkpGw5+SMdJn3lI5JAdg7l1hN6j1Q
+ mxyNfjQwGB3nVwajqMojBU8k5D8BZRfPlL4glxyo7F2y7lZqaNwwEu4ZBRL4lqNnrs
+ GGxu62KP2MRsQ==
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210804022348.1414543-1-chao@kernel.org>
+ <YQsIj0wKk6YbN/FJ@google.com> <YQsmfm3ibU6bhvZr@google.com>
+From: Chao Yu <chao@kernel.org>
+Message-ID: <bb635f86-b29b-384b-cfe0-c8b78e3c9ec5@kernel.org>
+Date: Thu, 5 Aug 2021 21:35:46 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
+MIME-Version: 1.0
+In-Reply-To: <YQsmfm3ibU6bhvZr@google.com>
+Content-Language: en-US
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: loongson.cn]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1mBdjA-00DMZ6-EP
-Subject: [f2fs-dev] [PATCH] f2fs: Kconfig: clean up config options about
- compression
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+ 0.1 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mBdXa-000505-Pg
+Subject: Re: [f2fs-dev] [RFC v3] f2fs: extent cache: support unaligned extent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,86 +86,87 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Chao Yu <chao.yu@linux.dev>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In fs/f2fs/Kconfig, F2FS_FS_LZ4HC depends on F2FS_FS_LZ4 and F2FS_FS_LZ4
-depends on F2FS_FS_COMPRESSION, so no need to make F2FS_FS_LZ4HC depends
-on F2FS_FS_COMPRESSION explicitly, remove the redudant "depends on", do
-the similar thing for F2FS_FS_LZORLE.
+On 2021/8/5 7:45, Jaegeuk Kim wrote:
+> Chao,
+> 
+> How about this?
+> https://github.com/jaegeuk/f2fs/commit/d6bbe121bc24dfabfedc07ba7cb6e921fb70ece0
+> 
+> I'm digging one bug in __insert_extent_tree w/ the patch tho.
+> 
+> On 08/04, Jaegeuk Kim wrote:
+>> On 08/04, Chao Yu wrote:
+>>> Compressed inode may suffer read performance issue due to it can not
+>>> use extent cache, so I propose to add this unaligned extent support
+>>> to improve it.
+>>>
+>>> Currently, it only works in readonly format f2fs image.
+>>>
+>>> Unaligned extent: in one compressed cluster, physical block number
+>>> will be less than logical block number, so we add an extra physical
+>>> block length in extent info in order to indicate such extent status.
+>>>
+>>> The idea is if one whole cluster blocks are contiguous physically,
+>>> once its mapping info was readed at first time, we will cache an
+>>> unaligned (or aligned) extent info entry in extent cache, it expects
+>>> that the mapping info will be hitted when rereading cluster.
+>>>
+>>> Merge policy:
+>>> - Aligned extents can be merged.
+>>> - Aligned extent and unaligned extent can not be merged.
+>>>
+>>> Signed-off-by: Chao Yu <chao@kernel.org>
+>>> ---
+>>> v3:
+>>> - avoid CONFIG_F2FS_FS_COMPRESSION as much as possible
+>>> - clean up codes
+>>>   fs/f2fs/compress.c     | 24 ++++++++++++
+>>>   fs/f2fs/data.c         | 28 +++++++++++---
+>>>   fs/f2fs/extent_cache.c | 88 +++++++++++++++++++++++++++++++++++++-----
+>>>   fs/f2fs/f2fs.h         | 42 +++++++++++++++++---
+>>>   fs/f2fs/node.c         | 18 +++++++++
+>>>   5 files changed, 179 insertions(+), 21 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+>>> index 4aa166d3d9bf..296ff37d4b08 100644
+>>> --- a/fs/f2fs/compress.c
+>>> +++ b/fs/f2fs/compress.c
+>>> @@ -1719,6 +1719,30 @@ void f2fs_put_page_dic(struct page *page)
+>>>   	f2fs_put_dic(dic);
+>>>   }
+>>>   
+>>> +/*
+>>> + * check whether cluster blocks are contiguous, and add extent cache entry
+>>> + * only if cluster blocks are logically and physically contiguous.
+>>> + */
+>>> +int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn)
+>>> +{
+>>> +	bool compressed = f2fs_data_blkaddr(dn) == COMPRESS_ADDR;
+>>> +	int i = compressed ? 1 : 0;
+>>> +	block_t first_blkaddr = data_blkaddr(dn->inode, dn->node_page,
+>>> +						dn->ofs_in_node + i);
+>>> +
+>>> +	for (i += 1; i < F2FS_I(dn->inode)->i_cluster_size; i++) {
+>>> +		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
+>>> +						dn->ofs_in_node + i);
+>>> +
+>>> +		if (!__is_valid_data_blkaddr(blkaddr))
+>>> +			break;
+>>> +		if (first_blkaddr + i - 1 != blkaddr)
+>>> +			return 0;
 
-At the same time, it is better to move F2FS_FS_LZORLE next to F2FS_FS_LZO,
-it looks like a little more clear when make menuconfig, the location of
-"LZO-RLE compression support" is under "LZO compression support" instead
-of "F2FS compression feature".
+The merge condition looks wrong, shouldn't be:
 
-Without this patch:
+if (first_blkaddr + i - compressed ? 1 : 0 != blkaddr)
+	return 0;
 
-F2FS compression feature
-  LZO compression support
-  LZ4 compression support
-    LZ4HC compression support
-  ZSTD compression support
-  LZO-RLE compression support
-
-With this patch:
-
-F2FS compression feature
-  LZO compression support
-    LZO-RLE compression support
-  LZ4 compression support
-    LZ4HC compression support
-  ZSTD compression support
-
-Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
----
- fs/f2fs/Kconfig | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
-
-diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
-index 7669de7..2ac026f 100644
---- a/fs/f2fs/Kconfig
-+++ b/fs/f2fs/Kconfig
-@@ -105,6 +105,13 @@ config F2FS_FS_LZO
- 	help
- 	  Support LZO compress algorithm, if unsure, say Y.
- 
-+config F2FS_FS_LZORLE
-+	bool "LZO-RLE compression support"
-+	depends on F2FS_FS_LZO
-+	default y
-+	help
-+	  Support LZO-RLE compress algorithm, if unsure, say Y.
-+
- config F2FS_FS_LZ4
- 	bool "LZ4 compression support"
- 	depends on F2FS_FS_COMPRESSION
-@@ -114,7 +121,6 @@ config F2FS_FS_LZ4
- 
- config F2FS_FS_LZ4HC
- 	bool "LZ4HC compression support"
--	depends on F2FS_FS_COMPRESSION
- 	depends on F2FS_FS_LZ4
- 	default y
- 	help
-@@ -127,11 +133,3 @@ config F2FS_FS_ZSTD
- 	default y
- 	help
- 	  Support ZSTD compress algorithm, if unsure, say Y.
--
--config F2FS_FS_LZORLE
--	bool "LZO-RLE compression support"
--	depends on F2FS_FS_COMPRESSION
--	depends on F2FS_FS_LZO
--	default y
--	help
--	  Support LZO-RLE compress algorithm, if unsure, say Y.
--- 
-2.1.0
-
+Thanks,
 
 
 _______________________________________________
