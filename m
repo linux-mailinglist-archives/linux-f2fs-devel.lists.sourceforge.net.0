@@ -2,57 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 739163E1FA8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Aug 2021 02:05:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38D713E1FAA
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Aug 2021 02:06:12 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mBnMB-0007T4-Gr; Fri, 06 Aug 2021 00:04:59 +0000
+	id 1mBnNK-0007WY-P9; Fri, 06 Aug 2021 00:06:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mBnMA-0007Sx-Jq
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Aug 2021 00:04:58 +0000
+ (envelope-from <chao@kernel.org>) id 1mBnNJ-0007WR-61
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Aug 2021 00:06:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vUyw4xxuuSio5WbPBEiqy9ufbMP7/NUXryxiD0dsuGk=; b=Q9UgAZnilmYNp/8rGUindxNvtS
- D1ZsNw7jJt/DhZPU5QZz8TeOIB4P6E07N2tC+7AKVNCyZqfd/cqVDV3hs9KvCUevzHAkXUWxxAtEF
- hoTqPVfm8Y61hJ7edihtlRmK29QFZgcR6zjjlcryGKDP8mfG5CPM/hEFvkr1sB6KA9BI=;
+ bh=kwlykOWW6u6idA8VuWPWFgA7z2toMvomR4R1i9geCK8=; b=IZFyA2DBV32V36Z/psvtI+KP6K
+ wxbVsmt7uAMQt3jKJ+gMlG545hI1R1Y7MFwzC/v7rKsp1Sd/QlcxLJ/97LHuY/Do/WrReXiGcK11V
+ B31VWx3vcPa3QPr8bTkIBF4ORG85d9tjorE7x9b6VYnJVrLngEzfcTj3ADty8Gwa5wb0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=vUyw4xxuuSio5WbPBEiqy9ufbMP7/NUXryxiD0dsuGk=; b=C
- eruiH55Q9zELGrOSYLmaxBJG89/OhikhYMrvEPMZlbr+t6U5P/6NsuKICx3WgRLx7jcqDfvctKP0C
- 1wpMr+vnzemLXwSXoBlKjE1rBGG6JBlX2D//lvk+Z2tE/rI1V+VA7VFVapv4BnjhiXx2JkUzYOn8Y
- bu0CWhBvx6eZ+thw=;
+ List-Owner:List-Archive; bh=kwlykOWW6u6idA8VuWPWFgA7z2toMvomR4R1i9geCK8=; b=d
+ ayxyEwfj8rsye3RxqL6gFqW6dWmx6Kgv4SAerCwlpbaIUboJU+2BR5KfLZzQE9CDXQ1n7jXkDjy6K
+ TRCKfnQekJe/4Jlf77PodaPc5mQP7snkJO3Xtm7FGr8EhXxa3VKcdhzMLkpTIWk56N9U5CzSmrlHT
+ bKkrSbUZg63WKkGo=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mBnM4-00027Q-EB
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Aug 2021 00:04:58 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id ABE7A61052;
- Fri,  6 Aug 2021 00:04:45 +0000 (UTC)
+ id 1mBnNH-00Dwgg-Si
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 06 Aug 2021 00:06:09 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 388B3606A5;
+ Fri,  6 Aug 2021 00:06:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1628208287;
- bh=QykvfTGAsHjcJkODsRfvQvK4CqPrbWy32hloEXfurhA=;
+ s=k20201202; t=1628208362;
+ bh=ennyVryFxjJ44CHKwDR045QMMnx30QntbMpU60qL0wc=;
  h=From:To:Cc:Subject:Date:From;
- b=Y6qZbVIX80Alj2b+SBYn7CXmak3lj4TsKPuetxF5dGtOz1p9mv7w6SibFxSdYky4A
- Vonx9jUmNt/EFzErXVflU3lwlkfx+SmniN5KjyN9ncs+xn4XuHOYVAVLMpPqbZxtx0
- fbHbp3GgpGSq6WsGRvWk9JpdXgFe6kkTO/xRX6jPASuFFyZT8aQLwCirfkzZ4fPKag
- MKaDDRMc+GW2RGGCK1MXm7KDSO63vS9E2e2xbs3ooaGmEDfyNFmD+X7+ailEOYDgoa
- aZVSf7l7vlscBMFN20mVNUUBvjlGSdJATKNZ2spC40XI6Y3Vc9kg1AXzVQHirE7a9U
- LNI4j5UfwXSTg==
+ b=eJQRv5uf01Kz2UteAygihx3H8LSB615aI3AXXG1wGne8JUpQIanSXgVObEBfUzxrn
+ ilb3QNB4o9c5OxshzVPi+BnjtSPrz8v2IzYvOOjv4qzRnYml/exn+koKm9lgdILQgC
+ 9TPKI2SZTNqEDdT3WKhrx9wuCnrx3Hiv4p6cJn395v8qJpECrSS1CGzzIN9BLdQeUu
+ MS8y0f744fPo4uk7vopU80zrwTP7qfy1IPsDRGTkNNCUgO5VGE5ac74epDCxnNsnOq
+ bG9bVxcNwq/MCIZNNgrIZKaRHr9R+MPe4KYpuwfrZ43LljzqMEQ1M6NWc7DHDTSmpS
+ 4kyv0MNZIsK+A==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Fri,  6 Aug 2021 08:04:37 +0800
-Message-Id: <20210806000437.39917-1-chao@kernel.org>
+Date: Fri,  6 Aug 2021 08:05:58 +0800
+Message-Id: <20210806000558.40784-1-chao@kernel.org>
 X-Mailer: git-send-email 2.22.1
 MIME-Version: 1.0
 X-Spam-Score: -0.8 (/)
@@ -67,9 +67,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
  -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mBnM4-00027Q-EB
-Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check for sb/cp fields
- correctly
+X-Headers-End: 1mBnNH-00Dwgg-Si
+Subject: [f2fs-dev] [PATCH] f2fs: avoid unneeded memory allocation in
+ __add_ino_entry()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,71 +81,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@kernel.org, Chao Yu <chao.yu@linux.dev>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch fixes below problems of sb/cp sanity check:
-- in sanity_check_raw_superi(), it missed to consider log header
-blocks while cp_payload check.
-- in f2fs_sanity_check_ckpt(), it missed to check nat_bits_blocks.
+__add_ino_entry() will allocate slab cache even if we have already
+cached ino entry in radix tree, e.g. for case of multiple devices.
 
-Cc: <stable@kernel.org>
+Let's check radix tree first under protection of rcu lock to see
+whether we need to do slab allocation, it will mitigate memory
+pressure from "f2fs_ino_entry" slab cache.
+
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/super.c | 22 ++++++++++++++++++----
- 1 file changed, 18 insertions(+), 4 deletions(-)
+ fs/f2fs/checkpoint.c | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 84cd085020cd..9e0e3c998142 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3264,11 +3264,13 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 		return -EFSCORRUPTED;
- 	}
- 
--	if (le32_to_cpu(raw_super->cp_payload) >
--				(blocks_per_seg - F2FS_CP_PACKS)) {
--		f2fs_info(sbi, "Insane cp_payload (%u > %u)",
-+	if (le32_to_cpu(raw_super->cp_payload) >=
-+				(blocks_per_seg - F2FS_CP_PACKS -
-+				NR_CURSEG_PERSIST_TYPE)) {
-+		f2fs_info(sbi, "Insane cp_payload (%u >= %u)",
- 			  le32_to_cpu(raw_super->cp_payload),
--			  blocks_per_seg - F2FS_CP_PACKS);
-+			  blocks_per_seg - F2FS_CP_PACKS -
-+			  NR_CURSEG_PERSIST_TYPE);
- 		return -EFSCORRUPTED;
- 	}
- 
-@@ -3304,6 +3306,7 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
- 	unsigned int cp_pack_start_sum, cp_payload;
- 	block_t user_block_count, valid_user_blocks;
- 	block_t avail_node_count, valid_node_count;
-+	unsigned int nat_blocks, nat_bits_bytes, nat_bits_blocks;
- 	int i, j;
- 
- 	total = le32_to_cpu(raw_super->segment_count);
-@@ -3434,6 +3437,17 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
- 		return 1;
- 	}
- 
-+	nat_blocks = nat_segs << log_blocks_per_seg;
-+	nat_bits_bytes = nat_blocks / BITS_PER_BYTE;
-+	nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
-+	if (__is_set_ckpt_flags(ckpt, CP_NAT_BITS_FLAG) &&
-+		(cp_payload + F2FS_CP_PACKS +
-+		NR_CURSEG_PERSIST_TYPE + nat_bits_blocks >= blocks_per_seg)) {
-+		f2fs_warn(sbi, "Insane cp_payload: %u, nat_bits_blocks: %u)",
-+			  cp_payload, nat_bits_blocks);
-+		return -EFSCORRUPTED;
-+	}
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 7f6745f4630e..5b6ddeae1107 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -465,16 +465,28 @@ static void __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
+ 						unsigned int devidx, int type)
+ {
+ 	struct inode_management *im = &sbi->im[type];
+-	struct ino_entry *e, *tmp;
++	struct ino_entry *e = NULL, *new = NULL;
 +
- 	if (unlikely(f2fs_cp_error(sbi))) {
- 		f2fs_err(sbi, "A bug case: need to run fsck");
- 		return 1;
++	if (type == FLUSH_INO) {
++		rcu_read_lock();
++		e = radix_tree_lookup(&im->ino_root, ino);
++		rcu_read_unlock();
++	}
+ 
+-	tmp = f2fs_kmem_cache_alloc(ino_entry_slab, GFP_NOFS);
++retry:
++	if (!e)
++		new = f2fs_kmem_cache_alloc(ino_entry_slab, GFP_NOFS);
+ 
+ 	radix_tree_preload(GFP_NOFS | __GFP_NOFAIL);
+ 
+ 	spin_lock(&im->ino_lock);
+ 	e = radix_tree_lookup(&im->ino_root, ino);
+ 	if (!e) {
+-		e = tmp;
++		if (!new) {
++			spin_unlock(&im->ino_lock);
++			goto retry;
++		}
++		e = new;
+ 		if (unlikely(radix_tree_insert(&im->ino_root, ino, e)))
+ 			f2fs_bug_on(sbi, 1);
+ 
+@@ -492,8 +504,8 @@ static void __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
+ 	spin_unlock(&im->ino_lock);
+ 	radix_tree_preload_end();
+ 
+-	if (e != tmp)
+-		kmem_cache_free(ino_entry_slab, tmp);
++	if (new && e != new)
++		kmem_cache_free(ino_entry_slab, new);
+ }
+ 
+ static void __remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
 -- 
 2.22.1
 
