@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A5713E3659
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Aug 2021 18:48:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A52E63E3657
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Aug 2021 18:44:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mCPUX-00033J-AB; Sat, 07 Aug 2021 16:48:09 +0000
+	id 1mCPQs-0002BN-LJ; Sat, 07 Aug 2021 16:44:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <axboe@kernel.dk>) id 1mCPUW-000331-4m
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Aug 2021 16:48:08 +0000
+ (envelope-from <axboe@kernel.dk>) id 1mCPQr-0002B6-Go
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Aug 2021 16:44:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hSiQWcxOeb6H8lVeRKmlUrfbadCZCq/IN0zGwt6aOMU=; b=d5gJYbFnvR6zoda5zso0Aq2vRp
- VQNO/B+NBiz0VDUjw4eXeScSgh7UALAdCYIJznA035JlrQYyVrWi5OO4xbJ+msGYmPj/8M7NUt80F
- DMgunFIDlGckvGnAiPUCvSeSmeICQRTXhRyjXTtQ/xhZetbRvd+OI551cqvfFk6WReKY=;
+ bh=jyBzebSSlchrLQAMP8lLKMmyfmojiYtazje9CNMSlKg=; b=UZkpYgS1Vy1YkMzZggQIuOJeSy
+ cNYHHTq7kG4urj/8XJWq71alChas+UZhwDjCjHbLul6c5RGBveh2Vp3ThuqmsaBCUTu2L9R474FyE
+ jic+1yAi0TCHLAzxs8TOrnGbZkjLuHVKmpLahyrLKotoTgIiwXX7gtMubDYOugW5UwR4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,72 +29,72 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hSiQWcxOeb6H8lVeRKmlUrfbadCZCq/IN0zGwt6aOMU=; b=UTquvd0OEKLDUBiZIblMzch2Ug
- q1R3oR7sgrYuHwh+97mGz8cZ59HJqaRK7Y6ol3Sr8C5F8jzAi8agk1xf6yjdsa5siXfTj6gNPfirk
- STrOrDS3ZvrF/WzB3AhIOBuL7ndpXfmd2ePa4bYSZ29E+Nng+11hJiyrGioDGDs57KKg=;
-Received: from mail-pj1-f51.google.com ([209.85.216.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=jyBzebSSlchrLQAMP8lLKMmyfmojiYtazje9CNMSlKg=; b=JNzLb9haDykyvWUG3GfyYFx+g4
+ eMsJNrcNKWU9F7iq7DWEz4FgZVRwlEU7f1FsujsrtTQ3/WLjB4Ptz8vVMkKKxf2HLrv9U+G/wRa9z
+ wq07kQIY1e5/fADUiOA/zyWtJp1bY/CXvICqjbX8onCxsJzTeOEszyTWtINt0en6Dy1k=;
+Received: from mail-pj1-f43.google.com ([209.85.216.43])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mCPUR-00G2wo-Jx
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Aug 2021 16:48:08 +0000
-Received: by mail-pj1-f51.google.com with SMTP id
- u5-20020a17090ae005b029017842fe8f82so13595485pjy.0
+ id 1mCPQe-0006Zw-Sj
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 07 Aug 2021 16:44:21 +0000
+Received: by mail-pj1-f43.google.com with SMTP id
+ o44-20020a17090a0a2fb0290176ca3e5a2fso22847631pjo.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 07 Aug 2021 09:48:03 -0700 (PDT)
+ Sat, 07 Aug 2021 09:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kernel-dk.20150623.gappssmtp.com; s=20150623;
  h=subject:to:references:from:message-id:date:user-agent:mime-version
  :in-reply-to:content-language:content-transfer-encoding;
- bh=hSiQWcxOeb6H8lVeRKmlUrfbadCZCq/IN0zGwt6aOMU=;
- b=h+IjOjM/QHRahEtxOtPJ0luI2z0uupCF+/HWgHixl7GEsjmqkgXiYb0lVuGjoGHmSn
- A6GBt7YlD5bXTnNAqOwjdCBMYGDzIDpfLeju7oarB224Dr5mjaVT1kHrXRbHYZ4oVTNu
- VIj380LDnV1DJop+wNJSa3SgL8w3rdGPLgsoFGxQAzO3ynf6XsVRGYCo2Z70HNe+85MH
- PC2ejeJKOh9b2b0IA1NBN36IujdtaEr3VO/Pwt8f0reYNIaPe5XtbhPz3IuRYptEIOxc
- OhUduZI8FQzGAoKvhqgm7jinPuehwTGTcVc4NdyjU1HYLYIVDnOyYzmJEoBr15D6+RH7
- reHg==
+ bh=jyBzebSSlchrLQAMP8lLKMmyfmojiYtazje9CNMSlKg=;
+ b=MaxxVks2IMBzQ2F9jCxLj/nSiEgTZ5pyDfrDxNCKpZWXarGCZq7vMZRx2Y9Es+aS+Q
+ DvYaJvydaaTMlRNk4Dibcc4Na6xlqh3lSo2Rgh/y/+DSsddD9I7N2ujGneS4EtoybCwA
+ jQIC3q0tys063u3jkCm8RnL3PTsWJeAOwcdw3AJ9TBKCpKZIae1rohekMUQox60hacb6
+ tLQeJoBBbb3ZbH6i4NnnPeBZwHjUuimWAbpYsJIgu3T3jr306+6xr9lNhNQ9lG/Ysnbn
+ gJ+3iLP9WJo9xMwJqbyOzTSeVwUc7r4WiOx8sTFmDh4w1srveOS0XcwsCljsysw8vYTT
+ Ug4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=hSiQWcxOeb6H8lVeRKmlUrfbadCZCq/IN0zGwt6aOMU=;
- b=BI8trhHO+1fQKlTD3BWESLALVgf7ZtyVq1sA9FeEFdKMU7iY50ZNfgIY7npHm5qU5U
- i4TNIgfcNknSK2qAGpD5mCkk5EQILGLChODy24Ict7iyeec/X92A5Bmi9ZTWl3xI91kx
- HKr4ReHS1FKfVnzpYZsWkWSSIzXlJQ8QAVnsM2NOypzBK8E+iQIwZ7wFPVjzAFXJXNka
- xpQla8qlS9Ssy8d19GOsYKtttbiDZRGaYlfJrR4k93QRyYKJ+cRtI8Z4r6kt6m5eh4gP
- 1TXsSBXHt5fwDK43SJ8pxeHvXn7gtsgzESvg4ICpQliJb9TJfNXumjh5TJF0wlrmdIgA
- vk8g==
-X-Gm-Message-State: AOAM530QdAR7rk3jjaX4mQ7CJSjDTAaID8vBaklSf5dEcG4kYsvFOjbo
- 3t6bLI5KJI5TDxZGABcITnX2hf3nJpZ8woQ8
-X-Google-Smtp-Source: ABdhPJyAiu0tJuRJYapivcu+TujecpU4eiJWcmiXFrpgW71PZtm6W1SstJsz9a57oqvzz880JnqWVg==
-X-Received: by 2002:a17:902:a406:b029:12b:c50a:4289 with SMTP id
- p6-20020a170902a406b029012bc50a4289mr13472963plq.56.1628353001915; 
- Sat, 07 Aug 2021 09:16:41 -0700 (PDT)
+ bh=jyBzebSSlchrLQAMP8lLKMmyfmojiYtazje9CNMSlKg=;
+ b=eZ5LLFWuhnBeKEN0BVcTVqGFUvs3fF26lA+IhhUM/sTQNPgPLZz2hBOI8rPoJMjZDo
+ 8s9fz10brHn0jwjB1lNyLnFUjXFIuVJhpEciIyFvPULdIZJr/iC7jNzhGef8qcI4++JY
+ qg8gpGOLf64vKIB88UqTuMfKJ6NSBPg8j3tJlrI3LUo7+0sNY3BcoOf5WMdTYuczCbvi
+ SRlt1b4h2euTXtNdsqzWObl9NoGxCUWWWGAX6nEz1swg1necVG3ZLQqwo7sGeO5Uq4xw
+ 534YTcE2GNELN0jekXWmBj1yf6Mdjh6t4L5Q6XKFUdv9WRCUk2ryRFkyfNbFQu02bjEp
+ kF6g==
+X-Gm-Message-State: AOAM5311QMBs9AupStxVClqT5r5eauD+XJ7iRSGOzmsXaXHJjQghK+wJ
+ /6HRa+icRhR9k/No2U5D4yCXA/pAstwXZ3bB
+X-Google-Smtp-Source: ABdhPJws9/JRHOcGdCKqQKGagRxgYns1/oS3OmZs0ZbHu68UHrNfNgca07uWSHK3QGqEEDJyDfYAkw==
+X-Received: by 2002:a05:6a00:2a9:b029:3c4:cb96:5b with SMTP id
+ q9-20020a056a0002a9b02903c4cb96005bmr10204096pfs.36.1628353140364; 
+ Sat, 07 Aug 2021 09:19:00 -0700 (PDT)
 Received: from [192.168.1.116] ([198.8.77.61])
- by smtp.gmail.com with ESMTPSA id c23sm14578792pfn.140.2021.08.07.09.16.40
+ by smtp.gmail.com with ESMTPSA id s7sm14313588pfk.12.2021.08.07.09.18.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 07 Aug 2021 09:16:41 -0700 (PDT)
+ Sat, 07 Aug 2021 09:19:00 -0700 (PDT)
 To: Damien Le Moal <damien.lemoal@wdc.com>, linux-block@vger.kernel.org,
  Paolo Valente <paolo.valente@linaro.org>,
  linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <yuchao0@huawei.com>
 References: <20210806111857.488705-1-damien.lemoal@wdc.com>
- <20210806111857.488705-4-damien.lemoal@wdc.com>
+ <20210806111857.488705-3-damien.lemoal@wdc.com>
 From: Jens Axboe <axboe@kernel.dk>
-Message-ID: <5f2640c5-0712-b822-9ac7-3daa974c0c30@kernel.dk>
-Date: Sat, 7 Aug 2021 10:16:39 -0600
+Message-ID: <0141fb21-c0dc-d743-6af9-c2b26d34c4ba@kernel.dk>
+Date: Sat, 7 Aug 2021 10:18:58 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210806111857.488705-4-damien.lemoal@wdc.com>
+In-Reply-To: <20210806111857.488705-3-damien.lemoal@wdc.com>
 Content-Language: en-US
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.216.51 listed in list.dnswl.org]
+ trust [209.85.216.43 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.51 listed in wl.mailspike.net]
+ [209.85.216.43 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -102,8 +102,8 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1mCPUR-00G2wo-Jx
-Subject: Re: [f2fs-dev] [PATCH v3 3/4] block: rename IOPRIO_BE_NR
+X-Headers-End: 1mCPQe-0006Zw-Sj
+Subject: Re: [f2fs-dev] [PATCH v3 2/4] block: fix ioprio interface
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,22 +120,13 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 8/6/21 5:18 AM, Damien Le Moal wrote:
-> diff --git a/include/uapi/linux/ioprio.h b/include/uapi/linux/ioprio.h
-> index abc40965aa96..99d37d4807b8 100644
-> --- a/include/uapi/linux/ioprio.h
-> +++ b/include/uapi/linux/ioprio.h
-> @@ -31,9 +31,9 @@ enum {
->  };
->  
->  /*
-> - * 8 best effort priority levels are supported
-> + * The RT and BE priority classes both support up to 8 priority levels.
->   */
-> -#define IOPRIO_BE_NR	8
-> +#define IOPRIO_NR_LEVELS	8
+> An iocb aio_reqprio field is 16-bits (u16) but often handled as an int
+> in the block layer. E.g. ioprio_check_cap() takes an int as argument.
 
-That might not be a good idea, if an application already uses
-IOPRIO_BE_NR...
+I'd just reference kiocb->ki_ioprio, that's transport agnostic.
+
+Apart from that, this one looks fine to me. A better commit title
+would do wonders too, though, it's very non-descript.
 
 -- 
 Jens Axboe
