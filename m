@@ -2,140 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EBA03E3938
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  8 Aug 2021 08:47:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:Date:Message-ID:
-	References:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	 bh=9emZfh7OlR5WJ8fKl9Bxss/ZFWBNZxnxOeuBEFI2tfQ=; b=WQ5eHJ3oC5QcQdArnhA32dLTQ
-	7T/a1+8w9rPB6lJd8I2vUM7I4v04rco9aSL9VvPkxFoVX5dWcG6yZquUoxG2fcdZEt5ECzEk0vJx3
-	JiLFxeqdESSxT04jMv1yTzSFQ9FuNft9EW5jUDBb/JzfusYlqvf55LKUZbnx0Bzajekl4=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F5E03E3CEB
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  8 Aug 2021 23:52:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mCcb6-00043T-Kp; Sun, 08 Aug 2021 06:47:48 +0000
+	id 1mCqis-0008TQ-DO; Sun, 08 Aug 2021 21:52:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <prvs=8470769c3=damien.lemoal@opensource.wdc.com>)
- id 1mCcb4-00043H-Jq
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Aug 2021 06:47:46 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <daeho43@gmail.com>) id 1mCqir-0008TF-He
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Aug 2021 21:52:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PmD8Jhn5G+z6OasJTzyh7gNJEt1oCKBOeor3u0zGxWU=; b=jEztRSsRtQmn8jiVEYZDPlKNO2
- HD2Q9egmrwZ26Y9eTTGoTx3QD0Tw5fGFXfwakm9fWcPP6jIxjnWkQJ4rQ0DRYST7xOg+TwQ3vr2G+
- IchiUnuQRPUpiQttg+ovHMErG6g8AuItLn93O7iSMf2md8lMDVNq02MUrLwVJpIXKRYA=;
+ bh=ZBisvwrIQ7iEb0ZHHGpaTqr2PuP/8UAbapg7LIgk4LI=; b=Tf2V5VG96x7RapggO7bhTz7+gl
+ Fwu6yISuV+hLEmY4Uut1KDL102a1BmVwMKRuRb+9svHxW/V05s9Uwbb95SROvNT23dbfD4oQJJ7HR
+ jG+mOkYmMK9K3Us9ioqs8AVhjXo39mI991Xy/Dh68yTcPBsev7zP2ysx5fux8RjQYPwU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=PmD8Jhn5G+z6OasJTzyh7gNJEt1oCKBOeor3u0zGxWU=; b=TkLgYWooZhhm+YQ0UDVp6UYnNA
- qdkRmxW23NgdH8o2aowyI+x44y89WUbTOvN/SJEbd+vE/190rYhYX8zboTvSMJHcXbM3KzD+1y4HB
- Gb5BMiH9+xFedPJ7Bs7jq9gY2jWHmgoM2M7cOM74DSEnrj6x982wgpXZHM9achgmq6Xc=;
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ZBisvwrIQ7iEb0ZHHGpaTqr2PuP/8UAbapg7LIgk4LI=; b=N
+ PktqOgxijATT/BOe5+Y7dm9AxpA3LnvFUEY0o/Lefw/+MueifGmb9rHbf3nwzs+xvpiInjBBzvCB7
+ JVwusF/756u6mFMK7n+Fb1j1xMQxFBykNgR7WD6MPiaYa///LEc3IpoTJ7ZhIHmXP1oMg+4Iy7CJf
+ H0Uv5C8steLgd8NQ=;
+Received: from mail-pj1-f46.google.com ([209.85.216.46])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mCcax-0007i0-CW
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Aug 2021 06:47:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1628405260; x=1659941260;
- h=subject:to:references:from:message-id:date:mime-version:
- in-reply-to:content-transfer-encoding;
- bh=ZUKKExjkwoKwlQDbiX2Ci8kvte+LdrWVT0+BHiCgXTM=;
- b=B1h9K75mXIlYH5x1REtq6CbWJKOEHKQPU1j8CfXWBY58VVIRzWUwzVx1
- imTKaC0HIrLQ/EHR5Tj08X/HzDp0OzIPkbRRo1hQ2zGeq3xNk8OKU6RIV
- mEkD1AKmTyp4ETOkN4MC78kJvrrPGqByNJ9MiCfWWYOMEhn9Jhg3z/dCD
- T01ZqtBdAHHU4jEGgR8ntJaQjRz256GGUfiNMfk5aPG+sKRFx2hu5c4VI
- RmDLXXe6UKn4wZDmTyrROp9YUz11BqMkZ07ujD4TFcDPOvMehqvKf2sYu
- Q9TXHUUsGNyEOa6ftpO0voG+WdjV/4FgIfsNyOmtXLa1O5Kx1SWiAV2bw A==;
-X-IronPort-AV: E=Sophos;i="5.84,304,1620662400"; d="scan'208";a="177161170"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 Aug 2021 14:32:05 +0800
-IronPort-SDR: tGbsIeMdB4BlmKNofqi8xxiaQnk+Szgj9ph9Nnu67QTQpzDvrxYwtA4vC++paUvZcHUlpxJaiK
- A9imR53w6AwwFfo6tuA8PDFTv7V2Nv/c+0ZlL6PzUtJ9d+Hg7mEnCNq66elaIisBzzCLmF5R7F
- LkaVWqA9dU6CHV0j6K+6Xp/dlV9TcXkb9S167wMSINC6QYTH32QzhngAXdPPQmoFGxpn6RrjdQ
- mOzLwlVb9FjzkCQdFGQ37c6pXQkebrDANtjr1xKggygDQixpvN+PHLtoX9DwPOgP4blfDO10xq
- K7mvtPAufllqYkh88hXExYhs
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Aug 2021 23:09:29 -0700
-IronPort-SDR: W3koUfVI4ZImD1uNcdwk7fADAJBKgRp1DLb+OH8b51+WPJuA+Gjb+3b9xWR9T5+XrtydjBM1s0
- bzmQfcLhUD97Db+6bFmNJzjVj0NxInn1RCZGI9GfKt53yep00VanKMMgPGMzvWjw7kWLt59XJ0
- c+kUDhmnCY2NwVgerwVKbbeS61pgJ/XFnVG6RUHYrvr1xNpLAzURVB5Qj+6iNPr+KBVjynd/k0
- FaANy5HO8Bq723a60HuMhn9kEng25GCAvYL+OM4mcPo/VgWbLhIaNNYN/I8KWuIm7faPZkgjVe
- y6s=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Aug 2021 23:32:04 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4Gj8Wl5J3Lz1RvlP
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1mCqip-00027v-HB
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 08 Aug 2021 21:52:45 +0000
+Received: by mail-pj1-f46.google.com with SMTP id oa17so9564pjb.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat,  7 Aug 2021 23:32:03 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:content-language
- :content-type:in-reply-to:mime-version:user-agent:date
- :message-id:organization:from:references:to:subject; s=dkim; t=
- 1628404321; x=1630996322; bh=ZUKKExjkwoKwlQDbiX2Ci8kvte+LdrWVT0+
- BHiCgXTM=; b=FMNNgEcxsAPBkYxmdxbCuemvjg6wlfEqjXJ01vI7wY5foawbmtH
- 1iAM5ueQWX9vYmyoDaSIyLcuHQPxtCOIHvn+oBT0Ig6vftNUc+/eQHe7fB3QbRmg
- AI9gaDxVoXU0VMUARuhQyO9OUXO5p9EGOhKoNhvGhpO5YE83hSl+RyDXYMsv/alT
- 7zROsS+G6r0CUDnQYjjywqliiKY3JZkE+V5Lz4drYvlmsiCNGK6fQsXwDjrjUOqF
- gl+3FAX/Dzb5hAvgqCuBRtKUG/PtV56RVLSvzwt+NfCkqsfsYvDFvA5nbEINdGmz
- pxHBFZJHVPtYkax/+G9HedE4AoFKTkOZsiA==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id tIdWOVQf7uUt
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat,  7 Aug 2021 23:32:01 -0700 (PDT)
-Received: from [10.225.48.54] (unknown [10.225.48.54])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4Gj8Wh4zh4z1RvlC;
- Sat,  7 Aug 2021 23:32:00 -0700 (PDT)
-To: Jens Axboe <axboe@kernel.dk>, Damien Le Moal <damien.lemoal@wdc.com>,
- linux-block@vger.kernel.org, Paolo Valente <paolo.valente@linaro.org>,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <yuchao0@huawei.com>
-References: <20210806111857.488705-1-damien.lemoal@wdc.com>
- <20210806111857.488705-5-damien.lemoal@wdc.com>
- <4bfdceb3-36a7-c224-c1cc-ab273ab15589@kernel.dk>
-Organization: Western Digital
-Message-ID: <2eb8cf57-952c-7485-e7b9-8c982b379975@opensource.wdc.com>
-Date: Sun, 8 Aug 2021 15:31:59 +0900
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.12.0
+ Sun, 08 Aug 2021 14:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ZBisvwrIQ7iEb0ZHHGpaTqr2PuP/8UAbapg7LIgk4LI=;
+ b=ZYrBruw90MxhenNP5nSUlZ7lVFgEVfBoBAGLjXQcW3Xln3BInDaDrA/ThNjX/Arw38
+ NvaL4QhoMEhEISmhK+7011NbHShaXVTRTV81c02eYSVTqaVJSaOPVuOhxWyxCZVHK26/
+ QXLbuvQv4Rb4UQlRwV9zTcbf11Rh8pYgDL1YfwDl3BWdt6CkZFkhfVB70PoVubBitWmP
+ iR/u5IARvpJRadGXg/2NHpDSYUB/IYuA4EKggm9aIS0ATV7SER8MXfPCY0z7jEOlxCFJ
+ nNQMgbBVXCsyOk0ZH+r3PRox4SHpTLstaTszVtyBYlJRM/vbcYAg4rDxjHBsAKW5C1DI
+ b04Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ZBisvwrIQ7iEb0ZHHGpaTqr2PuP/8UAbapg7LIgk4LI=;
+ b=a+ZpfEaKImbMh2XIs+dnuz2F563Zvm2R6EqHj8Cz9iNaH31115O3SSK2nEruxB9Yl7
+ sG7NJ+NF1WNUO2sTcN9iVwevNfReuuXV8dFO8p2bB1Phqs80iYzgrdNKS+rt++0J3hB8
+ KEmWEQTgUH4NafOCiB5+of7P13aoEJF7RMwXQcXWfigzxtpgBE5i25SNdxxC294si/HK
+ LKx1JkXGSvhIad2xdqHjG3QuHijViFQhEScn1jHVC2lx4pS9VnOzw44Nutcyuwj6yVnT
+ zhFa3afH4VGrt8B7aSXo/VOiiZXQ60d92LoG8JMV4ZJ+FqolB8jMyLtsXAscyE6fgJvc
+ s20Q==
+X-Gm-Message-State: AOAM530FiJsmT4FN1ib71KSKxGg5Xh6q9PdY8EBt83kqbYcIXZAsorsJ
+ 4LVwWxDc3QLfnYaZNeviDNc=
+X-Google-Smtp-Source: ABdhPJwSR4vBkyzWqC2fCEK7SqwJ5+3XQFoc+BgyNBy1Eu9dvKa+2s9azqsRBVxmCLw6PjUKzob0OQ==
+X-Received: by 2002:a62:d404:0:b029:3a1:8a54:728 with SMTP id
+ a4-20020a62d4040000b02903a18a540728mr15210415pfh.37.1628459557831; 
+ Sun, 08 Aug 2021 14:52:37 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:82f:f0c4:8925:ebc2])
+ by smtp.gmail.com with ESMTPSA id r13sm20265080pgi.78.2021.08.08.14.52.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Aug 2021 14:52:37 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Sun,  8 Aug 2021 14:52:33 -0700
+Message-Id: <20210808215234.1939266-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.32.0.605.g8dce9f2422-goog
 MIME-Version: 1.0
-In-Reply-To: <4bfdceb3-36a7-c224-c1cc-ab273ab15589@kernel.dk>
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.46 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.46 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1mCcax-0007i0-CW
-Subject: Re: [f2fs-dev] [PATCH v3 4/4] block: fix default IO priority
- handling
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mCqip-00027v-HB
+Subject: [f2fs-dev] [PATCH] f2fs-tools: change fiemap print out format
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,42 +112,109 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Damien Le Moal via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Damien Le Moal <damien.lemoal@opensource.wdc.com>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/08/08 1:19, Jens Axboe wrote:
-> On 8/6/21 5:18 AM, Damien Le Moal wrote:
->> diff --git a/include/uapi/linux/ioprio.h b/include/uapi/linux/ioprio.h
->> index 99d37d4807b8..5b4a39c2f623 100644
->> --- a/include/uapi/linux/ioprio.h
->> +++ b/include/uapi/linux/ioprio.h
->> @@ -42,8 +42,8 @@ enum {
->>  };
->>  
->>  /*
->> - * Fallback BE priority
->> + * Fallback BE priority level.
->>   */
->> -#define IOPRIO_NORM	4
->> +#define IOPRIO_BE_NORM	4
-> 
-> This again seems like a very poor idea.
+From: Daeho Jeong <daehojeong@google.com>
 
-OK. Will remove that. Or we could do:
+Given fiemap way to print out extents in the kernel, we can correctly
+print the layout of each file in a unit of extent, not block. So, I
+changed fiemap print out way like below.
 
-#define IOPRIO_NORM	4
-#define IOPRIO_BE_NORM	IOPRIO_NORM
+Fiemap: offset = 0 len = 60
+	logical addr.    physical addr.   length           flags
+0	0000000000000000 00000020032df000 0000000000004000 00001008
+1	0000000000004000 00000020032e0000 0000000000004000 00001008
+2	0000000000008000 00000020032e1000 0000000000004000 00001008
+3	000000000000c000 00000020032e2000 0000000000004000 00001008
 
-In case other classes want to set a different default... Though, that is not
-critical I think.
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ tools/f2fs_io/f2fs_io.c | 53 ++++++++++++++++++++++++++---------------
+ 1 file changed, 34 insertions(+), 19 deletions(-)
 
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 42dbd60..0d2948e 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -731,11 +731,11 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+ #if defined(HAVE_LINUX_FIEMAP_H) && defined(HAVE_LINUX_FS_H)
+ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ {
+-	unsigned count, i;
+-	int fd;
+-	__u64 phy_addr;
+-	struct fiemap *fm = xmalloc(sizeof(struct fiemap) +
+-			sizeof(struct fiemap_extent));
++	unsigned int i;
++	int fd, extents_mem_size;
++	u64 start, length;
++	u32 mapped_extents;
++	struct fiemap *fm = xmalloc(sizeof(struct fiemap));
+ 
+ 	if (argc != 4) {
+ 		fputs("Excess arguments\n\n", stderr);
+@@ -743,26 +743,41 @@ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ 		exit(1);
+ 	}
+ 
+-	fm->fm_start = atoi(argv[1]) * F2FS_BLKSIZE;
+-	fm->fm_length = F2FS_BLKSIZE;
+-	fm->fm_extent_count = 1;
+-	count = atoi(argv[2]);
++	memset(fm, 0, sizeof(struct fiemap));
++	start = atoi(argv[1]) * F2FS_BLKSIZE;
++	length = atoi(argv[2]) * F2FS_BLKSIZE;
++	fm->fm_start = start;
++	fm->fm_length = length;
+ 
+ 	fd = xopen(argv[3], O_RDONLY | O_LARGEFILE, 0);
+ 
+-	printf("Fiemap: offset = %08"PRIx64" len = %d\n",
+-				(u64)fm->fm_start / F2FS_BLKSIZE, count);
+-	for (i = 0; i < count; i++) {
+-		if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
+-			die_errno("FIEMAP failed");
++	printf("Fiemap: offset = %"PRIu64" len = %"PRIu64"\n",
++				start / F2FS_BLKSIZE, length / F2FS_BLKSIZE);
++	if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
++		die_errno("FIEMAP failed");
++
++	mapped_extents = fm->fm_mapped_extents;
++	extents_mem_size = sizeof(struct fiemap_extent) * mapped_extents;
++	free(fm);
++	fm = xmalloc(sizeof(struct fiemap) + extents_mem_size);
+ 
+-		phy_addr = fm->fm_extents[0].fe_physical / F2FS_BLKSIZE;
+-		printf("%llu: %llu\n", fm->fm_start / F2FS_BLKSIZE, phy_addr);
++	memset(fm, 0, sizeof(struct fiemap));
++	memset(fm->fm_extents, 0, extents_mem_size);
++	fm->fm_start = start;
++	fm->fm_length = length;
++	fm->fm_extent_count = mapped_extents;
+ 
+-		if (fm->fm_extents[0].fe_flags & FIEMAP_EXTENT_LAST)
+-			break;
++	if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
++		die_errno("FIEMAP failed");
+ 
+-		fm->fm_start += F2FS_BLKSIZE;
++	printf("\t%-17s%-17s%-17s%s\n", "logical addr.", "physical addr.", "length", "flags");
++	for (i = 0; i < fm->fm_mapped_extents; i++) {
++		printf("%d\t%.16llx %.16llx %.16llx %.8x\n", i,
++		    fm->fm_extents[i].fe_logical, fm->fm_extents[i].fe_physical,
++		    fm->fm_extents[i].fe_length, fm->fm_extents[i].fe_flags);
++
++		if (fm->fm_extents[i].fe_flags & FIEMAP_EXTENT_LAST)
++			break;
+ 	}
+ 	printf("\n");
+ 	free(fm);
 -- 
-Damien Le Moal
-Western Digital Research
+2.32.0.605.g8dce9f2422-goog
+
 
 
 _______________________________________________
