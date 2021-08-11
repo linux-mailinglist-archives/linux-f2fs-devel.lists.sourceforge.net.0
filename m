@@ -2,95 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 283783E88F9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Aug 2021 05:47:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE5BF3E88E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Aug 2021 05:37:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mDfCo-0003wm-9b; Wed, 11 Aug 2021 03:47:02 +0000
+	id 1mDf3X-0005tb-Fk; Wed, 11 Aug 2021 03:37:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from <prvs=850e59ff9=damien.lemoal@wdc.com>)
- id 1mDf3Q-0003g2-QW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Aug 2021 03:37:20 +0000
+ id 1mDf3V-0005tJ-38
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Aug 2021 03:37:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iO2KLmW0AKdZBbf0VK15dXKGD5RQUMXf+w2bYuc++yU=; b=KN+D2CnN3tpQlbS49PYJKJJapy
- ltpNjZ/jrAkTaB7VDqP/hYAjcM1v8eE8972J9Nq84WMNeVG3MEl8jKolVURoov0mV16I3/7oP4NzM
- ikwSUBZSEV3p8+L8htzvw1iFmKp0mKFzMHQEchKEawNlm5bf/ongxzGmAQ80AMvywWB4=;
+ bh=yC7bB7BpUSHJNPnn9f86hpeEGfs6W8RAQZin4kvixzA=; b=bPGr0L+RrdRbg7twArdHNKzor9
+ jqJM/1ExlNYW2pkJwg9kuGNKa3dKY/r9IcojCQp90s0UxAxWEuoLrjlzuYXTeVWSZBupEXBgKoYLx
+ cKMSF4Gh0HPXPZV8DVPtOiPwvhfTQONzdi2I7Ha37xoIEjj1uNmMA+2ZPW007wtazLh4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
- Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iO2KLmW0AKdZBbf0VK15dXKGD5RQUMXf+w2bYuc++yU=; b=n
- QfOuUughzlGKSlRoeTShHuYz3Yge47QqFqEdC5GqMnu04KO0Pgk2fJqIfQeNEqRoI1Z1L8ZFEd5Vu
- s+3cpUpYsQGMnAX9aXLEz089UsrYY0nzgIktkaxN9CuDJEUTmQ8W3x7faikop8h0umeRvKwLHjpCB
- +u0BYMs++uuTQtAs=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yC7bB7BpUSHJNPnn9f86hpeEGfs6W8RAQZin4kvixzA=; b=E3X0zgIuw4S8233cDjOnqqi6vv
+ CO1QvNDBPHKZXb5mNXLWxJh3cVi7n76bD8hI04BDPR2Yv26M+eHs4G0U8w7uw7iJXfOWylV9pxr19
+ tEh+5ZEZasdFnQmImjePzqYzz9htZNBzcCYWH4lkt+wR9T0x2Jy25XeRq9Q+1+UjyNjw=;
 Received: from esa5.hgst.iphmx.com ([216.71.153.144])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mDf3L-0002eF-T8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Aug 2021 03:37:20 +0000
+ id 1mDf3Q-0002eF-Qd
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 Aug 2021 03:37:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1628653035; x=1660189035;
- h=from:to:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=TWCAljC1dx1YD2EZP0iY2/a0tIzDQsxuj/cNzvYBxDk=;
- b=Q4SNC+DKYNUfwr+L8IncY36zn8OHk6DACJRyumWMPIl0V3P1MHGJE61K
- tElznKhrbWi5+AaBJ0LPHvvFVtIh03RznJF9ze5hIciYwOKgrX/Ss5HtV
- zmuDZoysoO9TZL6C2FhuNLMhITJ9iXhL5/d5JqxQSl7eZ/1B4L0OjWhw7
- yUZ4Hucw3Y1bM1yYw+Z5o/fuA3JpWYta30FQ6Hq2gluwBcYaxYRcHjqYK
- 1a2bBns6pVAbkwUTaibcZXShkxI8JJ4ZtsnzP4C3dM1I9uNf+NbNDKvJw
- PoRvqnnnMYl/Or9b8bbHaAQbU2lVYPVnOc0kVCOZREq0C3U09qkO+pUgr w==;
-X-IronPort-AV: E=Sophos;i="5.84,311,1620662400"; d="scan'208";a="176890892"
+ t=1628653040; x=1660189040;
+ h=from:to:subject:date:message-id:in-reply-to:references:
+ mime-version:content-transfer-encoding;
+ bh=RGO3k7Im0/zmf/Hv3HDGjqGVpHrOQ5t3E9jTrtJYPo4=;
+ b=O+0nszcFgXa7cnu6Ne59QVp7R/li99XpbubKISDk67anFDVQxI8l451t
+ Ob/ZNTNY2thwIu5JsFMMzezUCOuDFPrr6NXbMYuokixy0MpnwBp1EJrRi
+ SUAehpiRh5ftZP2ubAU5NT9v1AgO7TOIGAqwf+5KjBA0aRTEuD8MJOo81
+ uboElpICrIa1NA3ryleb+eBGchHjSx3LAIvZ5GENGAbGX13RfeNPpzbfa
+ LzQxURdXxS7uGLitwRszoma9d51QjSQJVMx2xctpRYgpKubz16tVrGlL9
+ Gv2jT4Mgq3dUV2CzUfys7tp2/riH+wTJV9bJwP2a349vqZAbr7m6BXmgz A==;
+X-IronPort-AV: E=Sophos;i="5.84,311,1620662400"; d="scan'208";a="176890894"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 11 Aug 2021 11:37:04 +0800
-IronPort-SDR: iGssvDEPwreAIeQa9I3lPvQeSV2ZX40gIy7cbX4+Lpv+jD1IV1xKxUP4fObaJ53n6HZhEAztEY
- 3uweGcetr3bBGhgA4vKmwD7WA/pRb6AuaTdjPRlTpZQxW2lhCF9wQtyk8sRHrAV+uv+atGujWL
- yCpovRXFRlDQOeSk8w/k9ff64xnN8pdnlHF6sF7ZVANmlGRqsziFjwPT06Jwi7rO4PGrD5tux2
- 2Er1SEOBe4/ZwrWdUf2dNsdFMtfzkMitl7ZKmVLD7CuInsYrjkQV8GTm8E7o9mibI8U1/+i40U
- Ry+R4YVWweq0NukW+v42VeEO
+ by ob1.hgst.iphmx.com with ESMTP; 11 Aug 2021 11:37:05 +0800
+IronPort-SDR: G8up3OxKegNSuHk34l54xQGNqlWs7U2BdPITeFT7JhoAAOxtnABgh2y07OR+D6gPvOYggeSAHd
+ 7BbiotCuhamL2A2bNo7onDI/LyW6qPOK9yiq5LfA5tntLXt2/YMzQCWk8qb2phf8pggMcp/8gU
+ 9H/aERpD2hLgI1Huh/h7CfSyQnz6SWzsrkCRLpQZKzqc9Qfkk6uEPPvzCzw2+brwYd7m8sJZ4J
+ J0viUx+h32dl01W2CSIoeTQLJEZRndcdnm4lyxD1SIz+BjX6PLRd01t6gUGWFSRLc/9Twzi9jH
+ +xbMeNRfpfGv74gP9mz56VFi
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Aug 2021 20:12:35 -0700
-IronPort-SDR: qWpNUjsACDhWC0msNjVZw2DqXZyL+GyC++rO9ZylPLgNjE1KBjvCC62fAc32e19T3FsN+ZCZsu
- Pr48HgqwZDP4ZYVne5Nuca5zS16ItAZ8fqKM65JdcrAVTi4H7KV0BtsNDaBU7w6ZyS+r/WWbvZ
- LrycWVM9okuAhx5b33/B8rggnCgOpoD0xT20orIZGlCyA9aNFx8u80j82BvqIrfLZzlr1ayPPu
- S+W6WGje+933Bu4FDeEhV7q+VxkfS5do7VnmhFjTdnnDF5TduzOjvQmPuSGqrDcAklhwJcdFPK
- vzY=
+ 10 Aug 2021 20:12:36 -0700
+IronPort-SDR: trfAXxLIff8ymscFRb/l6NN/HkytkwfYfAw417EtaTEXyemhSBWjvjNC8ki0XCnK4sIwPxfn7k
+ Abmk4qG4Py4oSPrzhMTJ8hjxLYp18VB//UY4PolxdCzCaNGkpt5x1ayHXZak3TPz+dMw3tQ3zh
+ 0xPwojW92rU0BS4DXETNoZJT7r4e2GQmj6Pn+06g8VMiSUCVNotZJjyXMX+kOZZUKPFr0OOVL2
+ /e+b2/phSfkkHuzahvspJ7SV5uk+P9t3GLtkD3uT6gwqMLwRGrveyJuwzidx1JUrm6q3UVWdAU
+ QwQ=
 WDCIronportException: Internal
 Received: from washi.fujisawa.hgst.com ([10.149.53.254])
- by uls-op-cesaip02.wdc.com with ESMTP; 10 Aug 2021 20:37:03 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 10 Aug 2021 20:37:05 -0700
 From: Damien Le Moal <damien.lemoal@wdc.com>
 To: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
  Paolo Valente <paolo.valente@linaro.org>,
  linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <yuchao0@huawei.com>
-Date: Wed, 11 Aug 2021 12:36:56 +0900
-Message-Id: <20210811033702.368488-1-damien.lemoal@wdc.com>
+Date: Wed, 11 Aug 2021 12:36:57 +0900
+Message-Id: <20210811033702.368488-2-damien.lemoal@wdc.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210811033702.368488-1-damien.lemoal@wdc.com>
+References: <20210811033702.368488-1-damien.lemoal@wdc.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: wdc.com]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1mDf3L-0002eF-T8
-Subject: [f2fs-dev] [PATCH v4 0/6] IO priority fixes and improvements
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mDf3Q-0002eF-Qd
+Subject: [f2fs-dev] [PATCH v4 1/6] block: bfq: fix bfq_set_next_ioprio_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,45 +113,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This series fixes problems with IO priority values handling and cleans
-up several macro names and code for clarity.
+For a request that has a priority level equal to or larger than
+IOPRIO_BE_NR, bfq_set_next_ioprio_data() prints a critical warning but
+defaults to setting the request new_ioprio field to IOPRIO_BE_NR. This
+is not consistent with the warning and the allowed values for priority
+levels. Fix this by setting the request new_ioprio field to
+IOPRIO_BE_NR - 1, the lowest priority level allowed.
 
-Changes from v3:
-* Split former patch 2 into patches 2, 3 and 4 to facilitate review and
-  have more descriptive commit titles.
-* In patch 5, keep IOPRIO_BE_NR as an alias for the new IOPRIO_NR_LEVELS
-  macro. Change this patch title and commit message accordingly.
-* In patch 6, define IOPRIO_BE_NORM as an alias of IOPRIO_NORM.
+Cc: <stable@vger.kernel.org>
+Fixes: aee69d78dec0 ("block, bfq: introduce the BFQ-v0 I/O scheduler as an extra scheduler")
+Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+---
+ block/bfq-iosched.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes from v2:
-* Fixed typo in a comment in patch 3
-* Added reviewed-by tags
-
-Changes from v1:
-* Added patch 4 to unify the default priority value used in various
-  places.
-* Fixed patch 2 as suggested by Bart: remove extra parenthesis and move
-  ioprio_valid() from the uapi header to the kernel header.
-* In patch 2, add priority value masking.
-
-Damien Le Moal (6):
-  block: bfq: fix bfq_set_next_ioprio_data()
-  block: improve ioprio class description comment
-  block: change ioprio_valid() to an inline function
-  block: fix IOPRIO_PRIO_CLASS() and IOPRIO_PRIO_VALUE() macros
-  block: Introduce IOPRIO_NR_LEVELS
-  block: fix default IO priority handling
-
- block/bfq-iosched.c          | 10 +++++-----
- block/bfq-iosched.h          |  4 ++--
- block/bfq-wf2q.c             |  6 +++---
- block/ioprio.c               |  9 ++++-----
- drivers/nvme/host/lightnvm.c |  2 +-
- fs/f2fs/sysfs.c              |  2 +-
- include/linux/ioprio.h       | 17 ++++++++++++++++-
- include/uapi/linux/ioprio.h  | 34 ++++++++++++++++++++--------------
- 8 files changed, 52 insertions(+), 32 deletions(-)
-
+diff --git a/block/bfq-iosched.c b/block/bfq-iosched.c
+index e4a61eda2d0f..e546a5f4bff9 100644
+--- a/block/bfq-iosched.c
++++ b/block/bfq-iosched.c
+@@ -5296,7 +5296,7 @@ bfq_set_next_ioprio_data(struct bfq_queue *bfqq, struct bfq_io_cq *bic)
+ 	if (bfqq->new_ioprio >= IOPRIO_BE_NR) {
+ 		pr_crit("bfq_set_next_ioprio_data: new_ioprio %d\n",
+ 			bfqq->new_ioprio);
+-		bfqq->new_ioprio = IOPRIO_BE_NR;
++		bfqq->new_ioprio = IOPRIO_BE_NR - 1;
+ 	}
+ 
+ 	bfqq->entity.new_weight = bfq_ioprio_to_weight(bfqq->new_ioprio);
 -- 
 2.31.1
 
