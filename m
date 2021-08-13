@@ -2,83 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B2603EB628
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Aug 2021 15:42:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51A2F3EB67A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Aug 2021 16:01:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mEXSM-0002Cx-7u; Fri, 13 Aug 2021 13:42:42 +0000
+	id 1mEXkp-0005dg-MA; Fri, 13 Aug 2021 14:01:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mEXSK-0002Cq-LQ
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Aug 2021 13:42:40 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <frank.li@vivo.com>) id 1mEXkn-0005dJ-W2
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Aug 2021 14:01:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6VlkyTSGxqV3VpZ7GtRkAq4wcvxzXKSEIRafuKkZsB0=; b=fHOa+iEMHTZWqSZ68+Rc0q4lVU
- iLf9gMWa/nj9HC5WYrq6CglcVSZkt6xWss6HnY2pJQOfvMzwXQIjJ26SxXEkCMur9ENXwPEvllzy/
- 3iow3DFcd3MiVfTxExiJcKwa1KQq+Rf58BrCNTFIKXizOCLMT5DQGva/gTgWwAnPfPzk=;
+ bh=rai46VDcOwYBST9530ak8ZdyUN0PIyEfIrbbX43CID0=; b=LS67UKEv4rHZ1Qy9hVPcN50VMs
+ cNxkEyf2y9WUT55HbyUX2gQSl5yX5Rh1cRKn+x7AbSt+gLcYP3eJzpmql37DDvecCumbcYG47frIJ
+ A8LS2NrDzC+DBJnKL9lk2ZePFe80CxFpUy0SNHRdlujWThu7XSoNkCo4PGKxPbrjzwdI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6VlkyTSGxqV3VpZ7GtRkAq4wcvxzXKSEIRafuKkZsB0=; b=FKMReJkRAY0zLQqRU1dhg05dp8
- 2hY/pGZy8qhsCLGDQ3SF0AWBc6NopaXVdSz7V0MOTTguD67mmztpjMesEJCq7f6Vmmt7o5b0fvkvV
- P4Wrd41a3Y6lWZZmDu0C4BaYD85EETcQTorJXYC7HGv+DFjyzxizi9YF/pKMKVWKz+qA=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=rai46VDcOwYBST9530ak8ZdyUN0PIyEfIrbbX43CID0=; b=l
+ RWQ7YrmNkgWHkNnx8oLUOD1pvkyJhrpWdHvbE1Zm3ZjTL6vysAA+IguiAeL/1JlrphUWg4TZepU3b
+ aQnHqw/Om0L9EbUQhOdepVJyUVU72B9a8D8rc5VYbNxUA+jILr3LgSCvjF6n5G6v1KYhS1LiyqISU
+ B+ptFh/hTnqf7Bow=;
+Received: from mail-m17636.qiye.163.com ([59.111.176.36])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mEXSB-005DVx-S6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Aug 2021 13:42:40 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id EDE3960F11;
- Fri, 13 Aug 2021 13:42:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1628862141;
- bh=Radl4pPmym29zKnvSluX6pjnKXnMALkTFS4XBhELDe0=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=Ovxa1ucL3c7DZ6Dbvwem0ix7QmgczSXzEQeDcG/qdzEEkDZvcKJQQolAhTTOjkBk5
- ngR+o65v4bb8E/DMkLU6CtUKa5GZTCe2bq75AFw/LagEpAewVlrYayLF6u6Dais0lk
- k1yGDwlOzEbaOREoNaDx4zPTkCGld3MC/ZErM9lmhy/eIpgQnL1OJljKiIAthCRmtp
- GjWcdosb1ciYUaYMfiIChgmK9g9huWfPUGbr+BhuHt15rWCUA6C+rw8azZOsLbNZUh
- yWlH3QZVklvo/cFWcPEcDnLZNSu6YtMvTJ8yorMWCBv3jGLtG6lG9/hFrKZGAm96bb
- GfQAPHGFfryUg==
-To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20210813101132.441389-1-frank.li@vivo.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <746edfbc-ae29-b84b-f83f-4093a398804b@kernel.org>
-Date: Fri, 13 Aug 2021 21:42:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ id 1mEXkX-005EQ5-Pa
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 13 Aug 2021 14:01:45 +0000
+Received: from comdg01144022.vivo.xyz (unknown [218.104.188.165])
+ by mail-m17636.qiye.163.com (Hmail) with ESMTPA id 6E8D4C40129;
+ Fri, 13 Aug 2021 22:01:20 +0800 (CST)
+From: Yangtao Li <frank.li@vivo.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri, 13 Aug 2021 22:01:19 +0800
+Message-Id: <20210813140119.130321-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <20210813101132.441389-1-frank.li@vivo.com>
-Content-Language: en-US
-X-Spam-Score: -0.8 (/)
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZCBgUCR5ZQVlLVUtZV1
+ kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWRpNT0xWHRhDH04ZTk1DTB
+ kYVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBg6Kjo5GD9KNRgUCxA*Kgox
+ DBMwCS9VSlVKTUlDQ01ISUNKS0lNVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
+ VUpLT1VKQ0NVSk1OWVdZCAFZQU1ISE43Bg++
+X-HM-Tid: 0a7b3fd135d6d996kuws6e8d4c40129
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: vivo.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [59.111.176.36 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mEXSB-005DVx-S6
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Don't create discard thread when
- device not support realtime discard
+ 0.0 TIME_LIMIT_EXCEEDED    Exceeded time limit / deadline
+X-Headers-End: 1mEXkX-005EQ5-Pa
+Subject: [f2fs-dev] [PATCH] f2fs: convert /sys/fs/f2fs/<disk>/stat/sb_status
+ to use string
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,194 +80,161 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Fengnan Chang <changfengnan@vivo.com>,
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/8/13 18:11, Yangtao Li wrote:
-> From: Fengnan Chang <changfengnan@vivo.com>
-> 
-> Don't create discard thread when device not support realtime discard.
-> 
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
-> ---
->   fs/f2fs/f2fs.h    |  1 +
->   fs/f2fs/segment.c | 29 +++++++++++++++++++++--------
->   fs/f2fs/super.c   | 34 ++++++++++++++++++++++++++++++++--
->   3 files changed, 54 insertions(+), 10 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index d24fd5045712..60a408af53a3 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3483,6 +3483,7 @@ int f2fs_flush_device_cache(struct f2fs_sb_info *sbi);
->   void f2fs_destroy_flush_cmd_control(struct f2fs_sb_info *sbi, bool free);
->   void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr);
->   bool f2fs_is_checkpointed_data(struct f2fs_sb_info *sbi, block_t blkaddr);
-> +int f2fs_start_discard_thread(struct f2fs_sb_info *sbi);
->   void f2fs_drop_discard_cmd(struct f2fs_sb_info *sbi);
->   void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi);
->   bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi);
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index ca9876a6d396..b83a4a1e5023 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2112,7 +2112,27 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
->   wakeup:
->   	wake_up_discard_thread(sbi, false);
->   }
+Do not use numbers but strings to improve readability when flag is set.
 
-Need a blank line here.
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+This patch is based on [v2] f2fs: improve sbi status info in debugfs/f2fs/status
 
-> +int f2fs_start_discard_thread(struct f2fs_sb_info *sbi)
-> +{
-> +	dev_t dev = sbi->sb->s_bdev->bd_dev;
-> +	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-> +	int err = 0;
->   
-> +	if (!dcc)
-> +		return -EINVAL;
-> +	if (!f2fs_realtime_discard_enable(sbi))
-> +		return 0;
-> +
-> +	dcc->f2fs_issue_discard = kthread_run(issue_discard_thread, sbi,
-> +				"f2fs_discard-%u:%u", MAJOR(dev), MINOR(dev));
-> +	if (IS_ERR(dcc->f2fs_issue_discard)) {
-> +		err = PTR_ERR(dcc->f2fs_issue_discard);
-> +		kfree(dcc);
-> +		SM_I(sbi)->dcc_info = NULL;
-> +		return err;
-> +	}
-> +	return err;
-> +}
+ Documentation/ABI/testing/sysfs-fs-f2fs | 34 ++++++++++++-------------
+ fs/f2fs/debug.c                         | 19 +-------------
+ fs/f2fs/f2fs.h                          |  1 +
+ fs/f2fs/sysfs.c                         | 26 ++++++++++++++++++-
+ 4 files changed, 44 insertions(+), 36 deletions(-)
 
-Ditto,
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 73211f77d11e..b07eb1e27c97 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -410,23 +410,23 @@ Date:		December 2020
+ Contact:	"Chao Yu" <yuchao0@huawei.com>
+ Description:	Show status of f2fs superblock in real time.
+ 
+-		====== ===================== =================================
+-		value  sb status macro       description
+-		0x1    SBI_IS_DIRTY          dirty flag for checkpoint
+-		0x2    SBI_IS_CLOSE          specify unmounting
+-		0x4    SBI_NEED_FSCK         need fsck.f2fs to fix
+-		0x8    SBI_POR_DOING         recovery is doing or not
+-		0x10   SBI_NEED_SB_WRITE     need to recover superblock
+-		0x20   SBI_NEED_CP           need to checkpoint
+-		0x40   SBI_IS_SHUTDOWN       shutdown by ioctl
+-		0x80   SBI_IS_RECOVERED      recovered orphan/data
+-		0x100  SBI_CP_DISABLED       CP was disabled last mount
+-		0x200  SBI_CP_DISABLED_QUICK CP was disabled quickly
+-		0x400  SBI_QUOTA_NEED_FLUSH  need to flush quota info in CP
+-		0x800  SBI_QUOTA_SKIP_FLUSH  skip flushing quota in current CP
+-		0x1000 SBI_QUOTA_NEED_REPAIR quota file may be corrupted
+-		0x2000 SBI_IS_RESIZEFS       resizefs is in process
+-		====== ===================== =================================
++		=====================	=================================
++		sb status		description
++		fs_dirty		dirty flag for checkpoint
++		closing			specify unmounting
++		need_fsck		need fsck.f2fs to fix
++		recovering		recovery is doing or not
++		sb_dirty		need to recover superblock
++		need_cp			need to checkpoint
++		shutdown		shutdown by ioctl
++		recovered		recovered orphan/data
++		cp_disabled		CP was disabled last mount
++		cp_disabled_quick	CP was disabled quickly
++		quota_need_flush	need to flush quota info in CP
++		quota_skip_flush	skip flushing quota in current CP
++		quota_need_repair	quota file may be corrupted
++		resizefs		resizefs is in process
++		=====================	=================================
+ 
+ What:		/sys/fs/f2fs/<disk>/ckpt_thread_ioprio
+ Date:		January 2021
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index d8c09346545d..298bf41a13b6 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -323,23 +323,6 @@ static void update_mem_info(struct f2fs_sb_info *sbi)
+ #endif
+ }
+ 
+-static char *s_flag[] = {
+-	[SBI_IS_DIRTY]		= " fs_dirty",
+-	[SBI_IS_CLOSE]		= " closing",
+-	[SBI_NEED_FSCK]		= " need_fsck",
+-	[SBI_POR_DOING]		= " recovering",
+-	[SBI_NEED_SB_WRITE]	= " sb_dirty",
+-	[SBI_NEED_CP]		= " need_cp",
+-	[SBI_IS_SHUTDOWN]	= " shutdown",
+-	[SBI_IS_RECOVERED]	= " recovered",
+-	[SBI_CP_DISABLED]	= " cp_disabled",
+-	[SBI_CP_DISABLED_QUICK]	= " cp_disabled_quick",
+-	[SBI_QUOTA_NEED_FLUSH]	= " quota_need_flush",
+-	[SBI_QUOTA_SKIP_FLUSH]	= " quota_skip_flush",
+-	[SBI_QUOTA_NEED_REPAIR]	= " quota_need_repair",
+-	[SBI_IS_RESIZEFS]	= " resizefs",
+-};
+-
+ static int stat_show(struct seq_file *s, void *v)
+ {
+ 	struct f2fs_stat_info *si;
+@@ -357,7 +340,7 @@ static int stat_show(struct seq_file *s, void *v)
+ 		if (si->sbi->s_flag) {
+ 			seq_puts(s, "[SBI:");
+ 			for_each_set_bit(j, &si->sbi->s_flag, 32)
+-				seq_puts(s, s_flag[j]);
++				seq_printf(s, " %s", s_flag[j]);
+ 			seq_puts(s, "]\n");
+ 		}
+ 		seq_printf(s, "[SB: 1] [CP: 2] [SIT: %d] [NAT: %d] ",
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 67faa43cc141..772dd3352c64 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1257,6 +1257,7 @@ enum {
+ 	SBI_QUOTA_NEED_REPAIR,			/* quota file may be corrupted */
+ 	SBI_IS_RESIZEFS,			/* resizefs is in process */
+ };
++extern char *s_flag[];
+ 
+ enum {
+ 	CP_TIME,
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 0954761341d7..e6f87e3d8f2e 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -111,10 +111,34 @@ static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
+ 				sbi->sectors_written_start) >> 1)));
+ }
+ 
++char *s_flag[] = {
++	[SBI_IS_DIRTY]		= "fs_dirty",
++	[SBI_IS_CLOSE]		= "closing",
++	[SBI_NEED_FSCK]		= "need_fsck",
++	[SBI_POR_DOING]		= "recovering",
++	[SBI_NEED_SB_WRITE]	= "sb_dirty",
++	[SBI_NEED_CP]		= "need_cp",
++	[SBI_IS_SHUTDOWN]	= "shutdown",
++	[SBI_IS_RECOVERED]	= "recovered",
++	[SBI_CP_DISABLED]	= "cp_disabled",
++	[SBI_CP_DISABLED_QUICK]	= "cp_disabled_quick",
++	[SBI_QUOTA_NEED_FLUSH]	= "quota_need_flush",
++	[SBI_QUOTA_SKIP_FLUSH]	= "quota_skip_flush",
++	[SBI_QUOTA_NEED_REPAIR]	= "quota_need_repair",
++	[SBI_IS_RESIZEFS]	= "resizefs",
++};
++
+ static ssize_t sb_status_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+-	return sprintf(buf, "%lx\n", sbi->s_flag);
++	int len = 0, i = 0;
++
++	for_each_set_bit(i, &sbi->s_flag, 32)
++		len += scnprintf(buf + len, PAGE_SIZE - len, "%s%s",
++				 len ? ", " : "", s_flag[i]);
++	len += scnprintf(buf + len, PAGE_SIZE - len, "\n");
++
++	return len;
+ }
+ 
+ static ssize_t features_show(struct f2fs_attr *a,
+-- 
+2.32.0
 
->   static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
->   {
->   	dev_t dev = sbi->sb->s_bdev->bd_dev;
-
-Need to remove unused dev.
-
-> @@ -2153,14 +2173,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
->   	init_waitqueue_head(&dcc->discard_wait_queue);
->   	SM_I(sbi)->dcc_info = dcc;
->   init_thread:
-> -	dcc->f2fs_issue_discard = kthread_run(issue_discard_thread, sbi,
-> -				"f2fs_discard-%u:%u", MAJOR(dev), MINOR(dev));
-> -	if (IS_ERR(dcc->f2fs_issue_discard)) {
-> -		err = PTR_ERR(dcc->f2fs_issue_discard);
-> -		kfree(dcc);
-> -		SM_I(sbi)->dcc_info = NULL;
-> -		return err;
-> -	}
-> +	err = f2fs_start_discard_thread(sbi);
->   
->   	return err;
-
-return f2fs_start_discard_thread(sbi);
-
-err becomes unused.
-
->   }
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 84cd085020cd..ff19c30cd6a1 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -2101,12 +2101,15 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   	bool need_restart_gc = false, need_stop_gc = false;
->   	bool need_restart_ckpt = false, need_stop_ckpt = false;
->   	bool need_restart_flush = false, need_stop_flush = false;
-> +	bool need_enable_ckpt = false, need_disable_ckpt = false;
->   	bool no_extent_cache = !test_opt(sbi, EXTENT_CACHE);
->   	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
->   	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
->   	bool no_atgc = !test_opt(sbi, ATGC);
-> +	bool no_discard = !test_opt(sbi, DISCARD);
->   	bool no_compress_cache = !test_opt(sbi, COMPRESS_CACHE);
->   	bool block_unit_discard = f2fs_block_unit_discard(sbi);
-> +	struct discard_cmd_control *dcc;
->   #ifdef CONFIG_QUOTA
->   	int i, j;
->   #endif
-> @@ -2274,7 +2277,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   	} else {
->   		err = f2fs_create_flush_cmd_control(sbi);
->   		if (err)
-> -			goto restore_ckpt;
-> +			goto restore_ckpt_thread;
->   		need_stop_flush = true;
->   	}
->   
-> @@ -2283,8 +2286,28 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   			err = f2fs_disable_checkpoint(sbi);
->   			if (err)
->   				goto restore_flush;
-> +			need_enable_ckpt = true;
->   		} else {
->   			f2fs_enable_checkpoint(sbi);
-> +			need_disable_ckpt = true;
-> +		}
-> +	}
-> +
-> +	if (no_discard == !!test_opt(sbi, DISCARD)) {
-> +		if (test_opt(sbi, DISCARD)) {
-> +			err = f2fs_start_discard_thread(sbi);
-> +			if (err)
-> +				goto restore_ckpt;
-> +
-
-Unneeded blank line.
-
-> +		} else {
-> +			dcc = SM_I(sbi)->dcc_info;
-> +			if (!dcc) {
-> +				err = -EINVAL;
-> +				goto restore_ckpt;
-> +			}
-> +			f2fs_stop_discard_thread(sbi);
-> +			if (unlikely(atomic_read(&dcc->discard_cmd_cnt)))
-
-I don't think this is an unlikely case.
-
-> +				f2fs_issue_discard_timeout(sbi);
-
-How about starting/stopping discard thread after flush thread status update,
-leaving complicated checkpoint disabling status change in the last stage of
-remount().
-
-Thanks,
-
->   		}
->   	}
->   
-> @@ -2302,6 +2325,13 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   	adjust_unusable_cap_perc(sbi);
->   	*flags = (*flags & ~SB_LAZYTIME) | (sb->s_flags & SB_LAZYTIME);
->   	return 0;
-> +restore_ckpt:
-> +	if (need_enable_ckpt) {
-> +		f2fs_enable_checkpoint(sbi);
-> +	} else if (need_disable_ckpt) {
-> +		if (f2fs_disable_checkpoint(sbi))
-> +			f2fs_warn(sbi, "checkpoint has been enable");
-> +	}
->   restore_flush:
->   	if (need_restart_flush) {
->   		if (f2fs_create_flush_cmd_control(sbi))
-> @@ -2310,7 +2340,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   		clear_opt(sbi, FLUSH_MERGE);
->   		f2fs_destroy_flush_cmd_control(sbi, false);
->   	}
-> -restore_ckpt:
-> +restore_ckpt_thread:
->   	if (need_restart_ckpt) {
->   		if (f2fs_start_ckpt_thread(sbi))
->   			f2fs_warn(sbi, "background ckpt thread has stopped");
-> 
 
 
 _______________________________________________
