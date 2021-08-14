@@ -2,72 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3D1A3EC451
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Aug 2021 19:59:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F76E3EC450
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Aug 2021 19:59:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mExvw-0001YX-5a; Sat, 14 Aug 2021 17:59:00 +0000
+	id 1mExvr-00010G-PI; Sat, 14 Aug 2021 17:58:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <frank.li@vivo.com>) id 1mExvt-0001YA-4b
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Aug 2021 17:58:57 +0000
+ (envelope-from <frank.li@vivo.com>) id 1mExvr-00010A-7C
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Aug 2021 17:58:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ab79RtEGmh6/60BcNJNb+Y7z+eBEGTQ6jL64mpP43iw=; b=iXIDFfpcEJp6R69MGdUawpzaMK
- aA9fGU2eQAX3SLwA6JMYHTUgXpm8GHYeBykTjXIRMmHDJhvPdvdKezC5zlI2mcplb6iTAlKUZQ3Dj
- e4O8li3vhXGy3RKKA6vKvzZ6vnRrjlrPnALfY9ByHspJ85gtYQer3HBhG9P6xyEwcxls=;
+ bh=x3jtRuyEgQv9SqEviDew0/kG28jtnwqtsG8Vj3N0txQ=; b=bcbDxe8qGYGRnhd83n5OT0qBa7
+ xUhVlrEdPFeBLro/l1PRNsztxYgaqnq/0nSu6iQ1EwtYHa/JBFRWp5aGnz/7lVozuNpGrn0XP2dTE
+ PW2bFktKdJz2Hm/ishDqwvQGuo7ypZf0KRQpgpbo0VWICiWEGdnBbC57miLPM/gu7YDQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Ab79RtEGmh6/60BcNJNb+Y7z+eBEGTQ6jL64mpP43iw=; b=M
- hOx/rpe26KfitPVHa1eXqH0WsV/Px1Ch4DN8op2d3Uou82DWvOjMSg1JeI8YhDPKlTSPEQmWUzN1S
- Aan3nC46sP6jgdF0RqHh6IFKP3sP130DlIzzbkg0W+0QR359m3yI3JmDZ48AZolY2kArYnxjsohqs
- 8mlcMSfEcC90eAnA=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=x3jtRuyEgQv9SqEviDew0/kG28jtnwqtsG8Vj3N0txQ=; b=XmlBjAQENMLb11cxLwC5vaFUa7
+ pkc3xO0BAogMJaow7SBqtX9FrED9PBM7YYCCespc8yzezOvLqryivFpdsm9Fuio0OaIq+m+CLsR47
+ EbhWEu6HA85rj/XDaXkRoXn1T6JCZRcSeTVxPpCL+k1KGTjAYL5w3Nkbr3fRMdw9NdNE=;
 Received: from mail-m17636.qiye.163.com ([59.111.176.36])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mExvm-006TwH-CX
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Aug 2021 17:58:57 +0000
+ id 1mExvn-006TwI-66
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 Aug 2021 17:58:55 +0000
 Received: from comdg01144022.vivo.xyz (unknown [218.104.188.165])
- by mail-m17636.qiye.163.com (Hmail) with ESMTPA id A7591C400B0;
- Sun, 15 Aug 2021 01:58:42 +0800 (CST)
+ by mail-m17636.qiye.163.com (Hmail) with ESMTPA id 04E8CC400F1;
+ Sun, 15 Aug 2021 01:58:43 +0800 (CST)
 From: Yangtao Li <frank.li@vivo.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Sun, 15 Aug 2021 01:58:39 +0800
-Message-Id: <20210814175840.115938-1-frank.li@vivo.com>
+Date: Sun, 15 Aug 2021 01:58:40 +0800
+Message-Id: <20210814175840.115938-2-frank.li@vivo.com>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210814175840.115938-1-frank.li@vivo.com>
+References: <20210814175840.115938-1-frank.li@vivo.com>
 MIME-Version: 1.0
 X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZCBgUCR5ZQVlLVUtZV1
- kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWRlKGBlWTklCQxkdHUIYSk
- JCVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkxVS1kG
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ky46HBw4LT9ITB8QKzYZDw4R
- FS4aFClVSlVKTUlDQk1IQklISUlMVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
- VUpLT1VKQ0NVSk1OWVdZCAFZQU9CTk43Bg++
-X-HM-Tid: 0a7b45d0e38fd996kuwsa7591c400b0
+ kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWRkaGU9WSx8aHk0eQkMZSU
+ 8YVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kxw6Ezo*Pz9DAx8#KzQzDxBK
+ CzoKCwpVSlVKTUlDQk1IQklPTk1KVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
+ VUpLT1VKQ0NVSk1OWVdZCAFZQUpDT0s3Bg++
+X-HM-Tid: 0a7b45d0e8c3d996kuws04e8cc400f1
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: huawei.com]
+ for more information. [URIs: vivo.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
  trust [59.111.176.36 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1mExvm-006TwH-CX
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: add sysfs nodes to get discard
- information
+X-Headers-End: 1mExvn-006TwI-66
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix description about main_blkaddr node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,118 +86,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I've added new sysfs nodes to show discard stat since mount, which
-will help us analyze whether the performance problem is related to
-discard.
-
-issued_discard  - Shows the number of issued discard
-queued_discard  - Shows the number of cached discard cmd count
-discard_cmd_cnt - Shows the number of cached discard cmd count
-undiscard_blks  - Shows the number of undiscard blocks
+Don't leave a blank line, to keep the style consistent
+with other node descriptions.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 20 +++++++++++
- fs/f2fs/sysfs.c                         | 44 +++++++++++++++++++++++++
- 2 files changed, 64 insertions(+)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index ef4b9218ae1e..32df6d16d74f 100644
+index 32df6d16d74f..ff5a8fdadbfc 100644
 --- a/Documentation/ABI/testing/sysfs-fs-f2fs
 +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -493,3 +493,23 @@ Contact:	"Chao Yu" <yuchao0@huawei.com>
- Description:	When ATGC is on, it controls age threshold to bypass GCing young
- 		candidates whose age is not beyond the threshold, by default it was
- 		initialized as 604800 seconds (equals to 7 days).
-+
-+What:		/sys/fs/f2fs/<disk>/issued_discard
-+Date:		August 2021
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	Shows the number of issued discard.
-+
-+What:		/sys/fs/f2fs/<disk>/queued_discard
-+Date:		August 2021
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	Shows the number of queued discard.
-+
-+What:		/sys/fs/f2fs/<disk>/discard_cmd_cnt
-+Date:		August 2021
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	Shows the number of cached discard cmd count.
-+
-+What:		/sys/fs/f2fs/<disk>/undiscard_blks
-+Date:		August 2021
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	Shows the number of undiscard blocks.
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 6642246206bd..b7d6c1adc7f8 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -248,6 +248,42 @@ static ssize_t main_blkaddr_show(struct f2fs_attr *a,
- 			(unsigned long long)MAIN_BLKADDR(sbi));
- }
+@@ -41,8 +41,7 @@ Description:	This parameter controls the number of prefree segments to be
+ What:		/sys/fs/f2fs/<disk>/main_blkaddr
+ Date:		November 2019
+ Contact:	"Ramon Pantin" <pantin@google.com>
+-Description:
+-		 Shows first block address of MAIN area.
++Description:	Shows first block address of MAIN area.
  
-+static ssize_t issued_discard_show(struct f2fs_attr *a,
-+				struct f2fs_sb_info *sbi, char *buf)
-+{
-+	struct discard_cmd_control *dcc_info = SM_I(sbi)->dcc_info;
-+
-+	return snprintf(buf, PAGE_SIZE, "%llu\n",
-+			(unsigned long long)atomic_read(&dcc_info->issued_discard));
-+}
-+
-+static ssize_t queued_discard_show(struct f2fs_attr *a,
-+				struct f2fs_sb_info *sbi, char *buf)
-+{
-+	struct discard_cmd_control *dcc_info = SM_I(sbi)->dcc_info;
-+
-+	return snprintf(buf, PAGE_SIZE, "%llu\n",
-+			(unsigned long long)atomic_read(&dcc_info->queued_discard));
-+}
-+
-+static ssize_t discard_cmd_cnt_show(struct f2fs_attr *a,
-+				struct f2fs_sb_info *sbi, char *buf)
-+{
-+	struct discard_cmd_control *dcc_info = SM_I(sbi)->dcc_info;
-+
-+	return snprintf(buf, PAGE_SIZE, "%llu\n",
-+			(unsigned long long)atomic_read(&dcc_info->discard_cmd_cnt));
-+}
-+
-+static ssize_t undiscard_blks_show(struct f2fs_attr *a,
-+				struct f2fs_sb_info *sbi, char *buf)
-+{
-+	struct discard_cmd_control *dcc_info = SM_I(sbi)->dcc_info;
-+
-+	return snprintf(buf, PAGE_SIZE, "%llu\n",
-+			(unsigned long long)dcc_info->undiscard_blks);
-+}
-+
- static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 			struct f2fs_sb_info *sbi, char *buf)
- {
-@@ -690,6 +726,10 @@ F2FS_GENERAL_RO_ATTR(unusable);
- F2FS_GENERAL_RO_ATTR(encoding);
- F2FS_GENERAL_RO_ATTR(mounted_time_sec);
- F2FS_GENERAL_RO_ATTR(main_blkaddr);
-+F2FS_GENERAL_RO_ATTR(issued_discard);
-+F2FS_GENERAL_RO_ATTR(queued_discard);
-+F2FS_GENERAL_RO_ATTR(discard_cmd_cnt);
-+F2FS_GENERAL_RO_ATTR(undiscard_blks);
- #ifdef CONFIG_F2FS_STAT_FS
- F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
- F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
-@@ -750,6 +790,10 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(gc_urgent),
- 	ATTR_LIST(reclaim_segments),
- 	ATTR_LIST(main_blkaddr),
-+	ATTR_LIST(issued_discard),
-+	ATTR_LIST(queued_discard),
-+	ATTR_LIST(discard_cmd_cnt),
-+	ATTR_LIST(undiscard_blks),
- 	ATTR_LIST(max_small_discards),
- 	ATTR_LIST(discard_granularity),
- 	ATTR_LIST(batched_trim_sections),
+ What:		/sys/fs/f2fs/<disk>/ipu_policy
+ Date:		November 2013
 -- 
 2.32.0
 
