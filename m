@@ -2,85 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AC5A3ECF9B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Aug 2021 09:43:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2D8F3ED1DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Aug 2021 12:22:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mFXHh-0008Tc-0u; Mon, 16 Aug 2021 07:43:49 +0000
+	id 1mFZlG-0003kB-Tp; Mon, 16 Aug 2021 10:22:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mFXHf-0008TR-1E
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 07:43:47 +0000
+ (envelope-from <frank.li@vivo.com>) id 1mFZl6-0003jz-B3
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 10:22:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s+63QJ05dtCVukhGva5F/UPrKhdv+C6Z4TSULz1aydM=; b=NKdGDHr2mBxMyMlXtUOmW3tf8g
- HOtU5uT3sd2m29MlKDbN9PGuBVGISknJhut15hni6RmyZnCnIHpKG1SE8rECGbbq86Y3WXXaGJrPK
- rVf5lUrxBau1uTv/AYDdtau6WJfxJcl4H27T2/s42Mc5Nis9qprqt7GSU2C7Fa0/IeoQ=;
+ bh=hgHtiO3yOYnBZBvWhl9HwXa/4x5CNiFcW5T2EBgRPZo=; b=BzMLo1yvaVn8+ezg+8pez7jX9p
+ naPi8UUsoVTbPsm8wFQb6WEKXyhFSbsG5gVxaXRnfH9yeIC+BuNiusVdC6y7w0h1COoYe0YY4bAq7
+ KOibTOflcsnjd7ewFX24U0l71aebRJoqHpbNXxfepTOJ/pBfJtZQ5cubIL1G2EHkTvkQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=s+63QJ05dtCVukhGva5F/UPrKhdv+C6Z4TSULz1aydM=; b=JDp5cHFMtWC9j6Yu/IyKyLYjml
- t+9Uf6bA6C5q6QmneOCqZy39vK67SJ4wU6+/1mk3I61iksLW+93b04up3c9CF6/UK69f2MT0dRXPQ
- NFNW3fyiSHrOuD+42P+IAFHSrZdNbqGQjmjnhK3hmtgecoVRR7PcqIOh/4XeAbsIJaZA=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=hgHtiO3yOYnBZBvWhl9HwXa/4x5CNiFcW5T2EBgRPZo=; b=A
+ Q+oplk/zzNDMExOhbWw9mmzwrLtj1S6rAQXdfgjrYlda1NnhAOTjw/6egyQZM4Dzk1gI62ZFd4p2b
+ WEma4niIbV82R9yRT/4dgkkmXMoettAtd2rhkqby83n3Im0JAurd7QrSaWZexoifcOGstDT+krfkh
+ 164YDfL0nlU9qmZk=;
+Received: from mail-m17636.qiye.163.com ([59.111.176.36])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mFXHd-0003A8-7A
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 07:43:46 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id BA1C761ACF;
- Mon, 16 Aug 2021 07:43:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629099819;
- bh=U/7WQDfo/Qzy9+DjcIIAqHhrpYiE7FohGVxSzIJvDVo=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=h8CnmTOXZnIpGStqbefpN8NqUfXS02jg7aHR4K+eppyHbzr+9JN/t2BYf/EykzQQe
- zvQr0wbG/MTqFl3mXTzk5Z4ofW7x010aZFcYRoOfJvWWztgAm6e5Z2gAhoDOInhA/6
- 8SF6A9eA5QMGMs3QBPWL+MeRocZu4bX6UOR62fx/EUK/zvEa/MiXHa0rL3xUPzM+Nm
- o4419Beq4E4sVz7YDZ0CpAE4o0Y/OaD3Ij0Yf7ByapyFK3KkjjTFZDcST9skepALrR
- yc1T3dhg8CMVanxf/smyUOMzTMvD77u40/gK8mCQBKf7w64AfOwDT/0KsgwoFzHrLK
- 2KP3sM1FUyK+g==
-To: Daeho Jeong <daeho43@gmail.com>
-References: <20210809185449.2565768-1-daeho43@gmail.com>
- <425daf77-8020-26ce-dc9f-019d9a881b78@kernel.org>
- <CACOAw_xTh_HZizaVzDNjnVswu_OQwOjzEWRNxouGtM9E5qj6Pg@mail.gmail.com>
- <071534dd-cf10-38d3-b83b-c833f9c0a70a@kernel.org>
- <CACOAw_ye4y-njHbewXsvVr3gTT4URsw7VH4HM_D_g=zntwjtdA@mail.gmail.com>
- <dc21e445-126d-ef74-3d09-c5a71782ed2a@kernel.org>
- <CACOAw_x1F6Uu3p9RA8S7XBXnEYsnjPFY0JSG_VqBLrUjqAGeCA@mail.gmail.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <50bfbeee-e165-5bcf-1c47-a45ef8b36ebf@kernel.org>
-Date: Mon, 16 Aug 2021 15:43:36 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ id 1mFZl2-008BGe-4y
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 10:22:20 +0000
+Received: from comdg01144022.vivo.xyz (unknown [218.104.188.165])
+ by mail-m17636.qiye.163.com (Hmail) with ESMTPA id 729A0C40059;
+ Mon, 16 Aug 2021 18:22:08 +0800 (CST)
+From: Yangtao Li <frank.li@vivo.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Mon, 16 Aug 2021 18:22:07 +0800
+Message-Id: <20210816102207.277804-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <CACOAw_x1F6Uu3p9RA8S7XBXnEYsnjPFY0JSG_VqBLrUjqAGeCA@mail.gmail.com>
-Content-Language: en-US
-X-Spam-Score: -3.0 (---)
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZCBgUCR5ZQVlLVUtZV1
+ kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWUIZHUpWS08dSkNIGR5LGE
+ 5KVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NUk6Kww4MT9NFxwJAjU5IQIp
+ LioaCT1VSlVKTUlCSktCSElCS0NMVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
+ VUpLT1VKQ0NVSk1OWVdZCAFZQU5MQk83Bg++
+X-HM-Tid: 0a7b4e7b9aecd996kuws729a0c40059
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [59.111.176.36 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -3.7 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 1.5 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mFXHd-0003A8-7A
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce blk_alloc_mode mount
- option
+X-Headers-End: 1mFZl2-008BGe-4y
+Subject: [f2fs-dev] [PATCH] f2fs: Use f2fs_bug_on instead of if condition
+ followed by f2fs_bug_on
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,28 +75,151 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/8/16 15:11, Daeho Jeong wrote:
-> I agree with you. But still I think "fragment" mode should work even
-> in low free space conditions.
-> Otherwise, it will be seeking the free blocks again and again like a busy loop.
-> Or we can change the block allocation way into adaptive mode under low
-> free space even staying in "fragment" mode.
+Similar:
+    WARNING: Use BUG_ON instead of if condition followed by BUG.
 
-I think fallbacking to adaptive mode sounds good to me, so the condition
-of fallback may be there is no more free segments?
+Let's replace if (cond) f2fs_bug_on() with f2fs_bug_on().
 
-Thanks,
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/checkpoint.c |  6 ++----
+ fs/f2fs/compress.c   |  3 +--
+ fs/f2fs/data.c       |  6 ++----
+ fs/f2fs/node.h       |  4 +---
+ fs/f2fs/segment.c    |  5 ++---
+ fs/f2fs/segment.h    | 10 ++++------
+ 6 files changed, 12 insertions(+), 22 deletions(-)
 
-> 
-> If we can handle this, we might use "fragment" mode for both
-> simulating after fragmentation and making the filesystem fragmented.
-> 
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 6c208108d69c..eebe5a80b842 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -475,8 +475,7 @@ static void __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
+ 	e = radix_tree_lookup(&im->ino_root, ino);
+ 	if (!e) {
+ 		e = tmp;
+-		if (unlikely(radix_tree_insert(&im->ino_root, ino, e)))
+-			f2fs_bug_on(sbi, 1);
++		f2fs_bug_on(sbi, radix_tree_insert(&im->ino_root, ino, e));
+ 
+ 		memset(e, 0, sizeof(struct ino_entry));
+ 		e->ino = ino;
+@@ -1369,8 +1368,7 @@ static void commit_checkpoint(struct f2fs_sb_info *sbi,
+ 	memcpy(page_address(page), src, PAGE_SIZE);
+ 
+ 	set_page_dirty(page);
+-	if (unlikely(!clear_page_dirty_for_io(page)))
+-		f2fs_bug_on(sbi, 1);
++	f2fs_bug_on(sbi, !clear_page_dirty_for_io(page));
+ 
+ 	/* writeout cp pack 2 page */
+ 	err = __f2fs_write_meta_page(page, &wbc, FS_CP_META_IO);
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 455561826c7d..43362f43c3d2 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -160,8 +160,7 @@ void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct page *page)
+ {
+ 	unsigned int cluster_ofs;
+ 
+-	if (!f2fs_cluster_can_merge_page(cc, page->index))
+-		f2fs_bug_on(F2FS_I_SB(cc->inode), 1);
++	f2fs_bug_on(F2FS_I_SB(cc->inode), !f2fs_cluster_can_merge_page(cc, page->index));
+ 
+ 	cluster_ofs = offset_in_cluster(cc, page->index);
+ 	cc->rpages[cluster_ofs] = page;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index d2cf48c5a2e4..4e85d5bcf1bc 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -464,8 +464,7 @@ static inline void __submit_bio(struct f2fs_sb_info *sbi,
+ 			zero_user_segment(page, 0, PAGE_SIZE);
+ 			set_page_private_dummy(page);
+ 
+-			if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
+-				f2fs_bug_on(sbi, 1);
++			f2fs_bug_on(sbi, bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE);
+ 		}
+ 		/*
+ 		 * In the NODE case, we lose next block address chain. So, we
+@@ -727,8 +726,7 @@ static void add_bio_entry(struct f2fs_sb_info *sbi, struct bio *bio,
+ 	be->bio = bio;
+ 	bio_get(bio);
+ 
+-	if (bio_add_page(bio, page, PAGE_SIZE, 0) != PAGE_SIZE)
+-		f2fs_bug_on(sbi, 1);
++	f2fs_bug_on(sbi, bio_add_page(bio, page, PAGE_SIZE, 0) != PAGE_SIZE);
+ 
+ 	down_write(&io->bio_list_lock);
+ 	list_add_tail(&be->list, &io->bio_list);
+diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
+index ff14a6e5ac1c..4acf365771f4 100644
+--- a/fs/f2fs/node.h
++++ b/fs/f2fs/node.h
+@@ -191,9 +191,7 @@ static inline void get_nat_bitmap(struct f2fs_sb_info *sbi, void *addr)
+ 	struct f2fs_nm_info *nm_i = NM_I(sbi);
+ 
+ #ifdef CONFIG_F2FS_CHECK_FS
+-	if (memcmp(nm_i->nat_bitmap, nm_i->nat_bitmap_mir,
+-						nm_i->bitmap_size))
+-		f2fs_bug_on(sbi, 1);
++	f2fs_bug_on(sbi, memcmp(nm_i->nat_bitmap, nm_i->nat_bitmap_mir, nm_i->bitmap_size));
+ #endif
+ 	memcpy(addr, nm_i->nat_bitmap, nm_i->bitmap_size);
+ }
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 15cc89eef28d..12f2a9bc15d7 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4216,9 +4216,8 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 			se = get_seg_entry(sbi, segno);
+ #ifdef CONFIG_F2FS_CHECK_FS
+-			if (memcmp(se->cur_valid_map, se->cur_valid_map_mir,
+-						SIT_VBLOCK_MAP_SIZE))
+-				f2fs_bug_on(sbi, 1);
++			f2fs_bug_on(sbi, memcmp(se->cur_valid_map,
++				    se->cur_valid_map_mir, SIT_VBLOCK_MAP_SIZE));
+ #endif
+ 
+ 			/* add discard candidates */
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 050230c70a53..c985b889572a 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -518,9 +518,8 @@ static inline void get_sit_bitmap(struct f2fs_sb_info *sbi,
+ 	struct sit_info *sit_i = SIT_I(sbi);
+ 
+ #ifdef CONFIG_F2FS_CHECK_FS
+-	if (memcmp(sit_i->sit_bitmap, sit_i->sit_bitmap_mir,
+-						sit_i->bitmap_size))
+-		f2fs_bug_on(sbi, 1);
++	f2fs_bug_on(sbi, memcmp(sit_i->sit_bitmap, sit_i->sit_bitmap_mir,
++				sit_i->bitmap_size));
+ #endif
+ 	memcpy(dst_addr, sit_i->sit_bitmap, sit_i->bitmap_size);
+ }
+@@ -762,9 +761,8 @@ static inline pgoff_t current_sit_addr(struct f2fs_sb_info *sbi,
+ 	check_seg_range(sbi, start);
+ 
+ #ifdef CONFIG_F2FS_CHECK_FS
+-	if (f2fs_test_bit(offset, sit_i->sit_bitmap) !=
+-			f2fs_test_bit(offset, sit_i->sit_bitmap_mir))
+-		f2fs_bug_on(sbi, 1);
++	f2fs_bug_on(sbi, f2fs_test_bit(offset, sit_i->sit_bitmap) !=
++		    f2fs_test_bit(offset, sit_i->sit_bitmap_mir));
+ #endif
+ 
+ 	/* calculate sit block address */
+-- 
+2.32.0
+
 
 
 _______________________________________________
