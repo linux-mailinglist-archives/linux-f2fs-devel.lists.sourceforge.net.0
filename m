@@ -2,58 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D4063ED3F1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Aug 2021 14:28:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F32B3ED68C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Aug 2021 15:23:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mFbj7-0006He-F7; Mon, 16 Aug 2021 12:28:25 +0000
+	id 1mFcZx-0007Kr-3B; Mon, 16 Aug 2021 13:23:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <frank.li@vivo.com>) id 1mFbj5-0006HY-08
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 12:28:23 +0000
+ (envelope-from <frank.li@vivo.com>) id 1mFcZw-0007Kg-1k
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 13:23:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xQfbWbL4NOuPXUbBW7ftbBoEl5JD3poMqMz/5TbQrzU=; b=FKkFdVG5Ra7kmFamjDFU24J0k1
- 0AInOGqYl9EpSy4kvJPunp5MfZx32shGh3Cx6XBOJd/xDww6MU2DaK3n/rF+Qnsw6uUSk5OpgOC02
- B/hAkB9i6WxowcaGwwX3xxjyoxOSGSL1Z8Foj0ZWlaOBn4P9nLUmIsohFW9q2ap9a+Yo=;
+ bh=q14BlxwR4PhLL3juB3nbMUh9WWDQeHUCfmsNv0T5chE=; b=kipdy8s4RRE4oxmjCvCD89Qu+a
+ x1zK4LWjjvdPPX95qlTRfuh/hyWjZlpMe5uZtNenfUTbS/GStlkTnAeE4qc57tmOUBky7EarJQaKY
+ AyAp2JrAG3lwKTCDxmyXiGW/Qhwk+A2rBnZ3ZFlC+YZ3Eyyv9ZLdqErKsJWUVbVg8pmw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=xQfbWbL4NOuPXUbBW7ftbBoEl5JD3poMqMz/5TbQrzU=; b=E
- kK2B/wJgdVXu4LeawMJxXgTpXlW8sMALOaodi1Aq5IkYfQB6iFlzIbHiYCh7cxEOK+HtfvQU62u/F
- 6rkPlxH5Fi6Chs/kg3gt9nfClzXTElqw3zp3ED5z3hpJYM72z0iirygv+zRxQeHXXZ+pExHUot8Cx
- o8aypZE3+0ljm+LU=;
+ List-Owner:List-Archive; bh=q14BlxwR4PhLL3juB3nbMUh9WWDQeHUCfmsNv0T5chE=; b=J
+ V2NO/UgmxBmDfv5QFF41uQkyfkpGrWYEXGfWvX7Vt1It4rTKK/C6zVfksNbYApewuGBt1GhwK+Gzd
+ S3q/jFoVU0uG8gSUzklNyDuyQ85lWEEAxXGbJD8GjJ0skMEoyklHtcw4c3UaKDnDw7ygSnKhd30ma
+ i7SGhyzqYkD6a9xM=;
 Received: from mail-m17636.qiye.163.com ([59.111.176.36])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mFbiy-008GWB-Qk
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 12:28:21 +0000
+ id 1mFcZs-0004kc-QX
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 Aug 2021 13:22:59 +0000
 Received: from comdg01144022.vivo.xyz (unknown [218.104.188.165])
- by mail-m17636.qiye.163.com (Hmail) with ESMTPA id 936B6C400B1;
- Mon, 16 Aug 2021 20:28:08 +0800 (CST)
+ by mail-m17636.qiye.163.com (Hmail) with ESMTPA id 491E5C40261;
+ Mon, 16 Aug 2021 21:22:49 +0800 (CST)
 From: Yangtao Li <frank.li@vivo.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Mon, 16 Aug 2021 20:28:07 +0800
-Message-Id: <20210816122807.71400-1-frank.li@vivo.com>
+Date: Mon, 16 Aug 2021 21:22:48 +0800
+Message-Id: <20210816132248.276865-1-frank.li@vivo.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZCBgUCR5ZQVlLVUtZV1
- kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWUNPS0xWHU0ZTB4fHkxCQx
- hMVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NEk6Pyo4ET8CTBwMPBk0HTUB
- EyMwFBdVSlVKTUlCSkpNQ0NCSUxNVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
- VUpLT1VKQ0NVSk1OWVdZCAFZQUlOS083Bg++
-X-HM-Tid: 0a7b4eeef6b0d996kuws936b6c400b1
+ kWDxoPAgseWUFZKDYvK1lXWShZQUhPN1dZLVlBSVdZDwkaFQgSH1lBWUJKGkNWHU9NGE0ZGElKSE
+ geVRMBExYaEhckFA4PWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjY6PSo6Mz9JNRwzLBkSF08N
+ SRMaCypVSlVKTUlCSklLSk1CQ05PVTMWGhIXVR0JGhUQVRcSOw0SDRRVGBQWRVlXWRILWUFZSUpD
+ VUpLT1VKQ0NVSk1OWVdZCAFZQUpNQ0k3Bg++
+X-HM-Tid: 0a7b4f2105efd996kuws491e5c40261
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -61,8 +61,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  trust [59.111.176.36 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1mFbiy-008GWB-Qk
-Subject: [f2fs-dev] [PATCH] f2fs: change value of recovery to bool
+X-Headers-End: 1mFcZs-0004kc-QX
+Subject: [f2fs-dev] [PATCH] f2fs: always call f2fs_issue_checkpoint() in
+ f2fs_sync_fs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,63 +81,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Recovery has only two values, 0 and 1, let's change it to bool type.
+Sync is always 1, so delete the check of the value.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- fs/f2fs/super.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ fs/f2fs/super.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 8fecd3050ccd..98727e04d271 100644
+index 98727e04d271..b823c7e3f303 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -3541,7 +3541,7 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
-  */
- static int read_raw_super_block(struct f2fs_sb_info *sbi,
- 			struct f2fs_super_block **raw_super,
--			int *valid_super_block, int *recovery)
-+			int *valid_super_block, bool *recovery)
+@@ -1553,7 +1553,6 @@ static void f2fs_put_super(struct super_block *sb)
+ int f2fs_sync_fs(struct super_block *sb, int sync)
  {
- 	struct super_block *sb = sbi->sb;
- 	int block;
-@@ -3559,7 +3559,7 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
- 			f2fs_err(sbi, "Unable to read %dth superblock",
- 				 block + 1);
- 			err = -EIO;
--			*recovery = 1;
-+			*recovery = true;
- 			continue;
- 		}
+ 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+-	int err = 0;
  
-@@ -3569,7 +3569,7 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
- 			f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
- 				 block + 1);
- 			brelse(bh);
--			*recovery = 1;
-+			*recovery = true;
- 			continue;
- 		}
+ 	if (unlikely(f2fs_cp_error(sbi)))
+ 		return 0;
+@@ -1565,10 +1564,7 @@ int f2fs_sync_fs(struct super_block *sb, int sync)
+ 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+ 		return -EAGAIN;
  
-@@ -3784,15 +3784,16 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	int err;
- 	bool skip_recovery = false, need_fsck = false;
- 	char *options = NULL;
--	int recovery, i, valid_super_block;
-+	int i, valid_super_block;
- 	struct curseg_info *seg_i;
- 	int retry_cnt = 1;
-+	bool recovery;
+-	if (sync)
+-		err = f2fs_issue_checkpoint(sbi);
+-
+-	return err;
++	return f2fs_issue_checkpoint(sbi);
+ }
  
- try_onemore:
- 	err = -EINVAL;
- 	raw_super = NULL;
- 	valid_super_block = -1;
--	recovery = 0;
-+	recovery = false;
- 
- 	/* allocate memory for f2fs-specific super block info */
- 	sbi = kzalloc(sizeof(struct f2fs_sb_info), GFP_KERNEL);
+ static int f2fs_freeze(struct super_block *sb)
 -- 
 2.32.0
 
