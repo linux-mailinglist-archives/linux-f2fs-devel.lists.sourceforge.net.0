@@ -2,65 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBD443EE0FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 02:34:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81BDE3EE422
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 04:03:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mFn3t-0003kG-5K; Tue, 17 Aug 2021 00:34:37 +0000
+	id 1mFoS0-0002bM-UC; Tue, 17 Aug 2021 02:03:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <nathan@kernel.org>) id 1mFn3s-0003k6-6f
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 00:34:36 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1mFoRz-0002b0-91
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 02:03:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iTBaXC+dS5RHYNAWlGzl6+PLmpUl/w21Dec4wRKejtk=; b=TPsATTtE8BtKpwCZoqXNLT40ke
- UgHGGxu3y6Kn5a+7CJHXnV/EiLPjmd8gZKReYwPvw0cbZlk8PgYY7Kw+vERbKwCabSP3o5fqMyj1v
- OElWrZb0klB5j+OfVPB855tgLVEikszpspZna4xPtKJZKNv7iLJeU38wpcC+xUcZjF8k=;
+ bh=AHrRqnZ+SnUHChQJmCz5ETv8w5JTM0+1adfZRu2Hf/4=; b=VjVHCXUuoVyGiCKT/vBaEILKH2
+ i4VTh2LiZELmj1xJOZv4xwCCxcLdsrr1jfvb8y+iTIyDoXMjQGjM4Aor8SxFdyfWZnQ6gzjTP7ZxQ
+ 3YXuD9grzAsWH4icHInbQ8Od3JtfY+87xJYJEkTYYYYDXJwLOZK+iR/mB8hb1lScRwRY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iTBaXC+dS5RHYNAWlGzl6+PLmpUl/w21Dec4wRKejtk=; b=VaR3g4ER0eBp2l0PyVwZLC3yda
- w7Ul550pRsR1bN75eWIRhEqKh0m+K9STaslJKkaWabPPEr/gbXhz3TykUKdQopIWjGJy1mkUsq4fJ
- /tbQe0yfVQJVpPK+LzRdcB1paJWAcUXIB5KQjSO26MONfkmJfvhDIAOGaVVQRNso7PuI=;
+ bh=AHrRqnZ+SnUHChQJmCz5ETv8w5JTM0+1adfZRu2Hf/4=; b=b1tlf2MWXO/TdZmmA3skDzxFrt
+ AUbuWKzyn5eqXn/bKNFIe1t6BY4bsdnkhf0KeVW342BZmYwWNSzYtlhhxaMN31slFbucQZlXTf32o
+ aXIqyBx03K0HE+nVL4rxot0LTD+oP65gHMhl86TvTFLHYoTukLeK7xToytxYyzslu1vE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mFn3s-0006Od-Kw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 00:34:37 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 680E160F39;
- Tue, 17 Aug 2021 00:34:29 +0000 (UTC)
+ id 1mFoRx-000210-QZ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 02:03:35 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5B1DD60F4B;
+ Tue, 17 Aug 2021 02:03:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629160469;
- bh=E0NfnEyiTSyWDge60fnhZNw6CHy7zGw8qtpGLglIxc0=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=Yn/zSxFl5u93MbNSH3rfMndlBIiIsqXQn6RgnRyNVWPvbj7WycdsB4UDE3+zgjJZe
- qG1aMjWShRPQT2+F3K1t2xsksGrVMg0u/MmhoSr6/l3jayu09+HS+Gep5n0dArY5iL
- MeWcuNRcJBd84wG679xJ9fS/UGiJK0m3dlUkdnY83z35LbAnIlLN+fq2cuZ0AjdkVm
- e+FeI8NFAMQSzcEEkcxQRABTMTj9jVqq56LLX03pMoBQHZ7Imbb4cHk7TD/1wbAcCE
- 0t9GfGtDTgJY0OmZtuxE6p1rFxWHl3wlhNMicXPMXQvj61lWwDJhx+hCImEgmwIuYN
- 2y4DEi21A3RGw==
+ s=k20201202; t=1629165803;
+ bh=M4kPfTtv/YCNqqegGw5hhYfKzsIq9j0CDrkKB3eJQAA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=YHjQK8GsIwY+/8QKey2Ozcxv8CMsI7psHLUN/o2JVcJ3PCv+cyCLwnOKadOX5TwdR
+ cZFxmFPTvirzcDCotfnIicTVoJsyOW6eVYJHBzid0TGlKjJZULVTLOHL1gmIbIwxGj
+ lXHyAnfHDvY+8u5u07Qp4QCuhIVTUYyBCip+DSZiU1v216RhN+mlkTcG39yNtmLzSe
+ /xavcGH4T0ABqmoE2MhSeuclyZ0AwumqhdK1kW/KIlAYLicwZ+4a92koP2uvsxy2Q5
+ 0CYD9vdnmZahKzFrYyUmV3f5fkrarm1i1WsbDrRwhETQ+c46eez/gA1j1W9AANQNv7
+ 9MPUo7vBMjuvg==
+Date: Mon, 16 Aug 2021 19:03:21 -0700
+From: Eric Biggers <ebiggers@kernel.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210816234247.139528-1-nathan@kernel.org>
- <YRsD6P4x9v38oDWl@google.com>
-From: Nathan Chancellor <nathan@kernel.org>
-Message-ID: <1f2eff07-f003-03c8-b3c8-0e06f9bf9684@kernel.org>
-Date: Mon, 16 Aug 2021 17:34:28 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Message-ID: <YRsY6dyHyaChkQ6n@gmail.com>
+References: <20210728015154.171507-1-ebiggers@kernel.org>
+ <YQRQRh1zUHSIzcC/@gmail.com> <YQS5eBljtztWwOFE@mit.edu>
+ <YQd3Hbid/mFm0o24@sol.localdomain>
+ <a3cdd7cb-50a7-1b37-fe58-dced586712a2@kernel.org>
+ <YQg4Lukc2dXX3aJc@google.com>
+ <b88328b4-db3e-0097-d8cc-f250ee678e5b@kernel.org>
+ <YQidOD/zNB17fd9v@google.com>
 MIME-Version: 1.0
-In-Reply-To: <YRsD6P4x9v38oDWl@google.com>
-Content-Language: en-US
-X-Spam-Score: -2.7 (--)
+Content-Disposition: inline
+In-Reply-To: <YQidOD/zNB17fd9v@google.com>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -70,12 +73,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -3.7 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 1.9 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mFn3s-0006Od-Kw
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Add missing inline to
- f2fs_sanity_check_cluster() stub
+X-Headers-End: 1mFoRx-000210-QZ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove broken support for allocating
+ DIO writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,33 +88,103 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/16/2021 5:33 PM, Jaegeuk Kim wrote:
-> Hi Nathan,
+On Mon, Aug 02, 2021 at 06:34:48PM -0700, Jaegeuk Kim wrote:
+> On 08/03, Chao Yu wrote:
+> > On 2021/8/3 2:23, Jaegeuk Kim wrote:
+> > > On 08/02, Chao Yu wrote:
+> > > > On 2021/8/2 12:39, Eric Biggers wrote:
+> > > > > On Fri, Jul 30, 2021 at 10:46:16PM -0400, Theodore Ts'o wrote:
+> > > > > > On Fri, Jul 30, 2021 at 12:17:26PM -0700, Eric Biggers wrote:
+> > > > > > > > Currently, non-overwrite DIO writes are fundamentally unsafe on f2fs as
+> > > > > > > > they require preallocating blocks, but f2fs doesn't support unwritten
+> > > > > > > > blocks and therefore has to preallocate the blocks as regular blocks.
+> > > > > > > > f2fs has no way to reliably roll back such preallocations, so as a
+> > > > > > > > result, f2fs will leak uninitialized blocks to users if a DIO write
+> > > > > > > > doesn't fully complete.
+> > > > > > 
+> > > > > > There's another way of solving this problem which doesn't require
+> > > > > > supporting unwritten blocks.  What a file system *could* do is to
+> > > > > > allocate the blocks, but *not* update the on-disk data structures ---
+> > > > > > so the allocation happens in memory only, so you know that the
+> > > > > > physical blocks won't get used for another files, and then issue the
+> > > > > > data block writes.  On the block I/O completion, trigger a workqueue
+> > > > > > function which updates the on-disk metadata to assign physical blocks
+> > > > > > to the inode.
+> > > > > > 
+> > > > > > That way if you crash before the data I/O has a chance to complete,
+> > > > > > the on-disk logical block -> physical block map hasn't been updated
+> > > > > > yet, and so you don't need to worry about leaking uninitialized blocks.
+> > > > 
+> > > > Thanks for your suggestion, I think it makes sense.
+> > > > 
+> > > > > > 
+> > > > > > Cheers,
+> > > > > > 
+> > > > > > 					- Ted
+> > > > > 
+> > > > > Jaegeuk and Chao, any idea how feasible it would be for f2fs to do this?
+> > > > 
+> > > > Firstly, let's notice that below metadata will be touched during DIO
+> > > > preallocation flow:
+> > > > - log header
+> > > > - sit bitmap/count
+> > > > - free seg/sec bitmap/count
+> > > > - dirty seg/sec bitmap/count
+> > > > 
+> > > > And there is one case we need to concern about is: checkpoint() can be
+> > > > triggered randomly in between dio_preallocate() and dio_end_io(), we should
+> > > > not persist any DIO preallocation related metadata during checkpoint(),
+> > > > otherwise, sudden power-cut after the checkpoint will corrupt filesytem.
+> > > > 
+> > > > So it needs to well separate two kinds of metadata update:
+> > > > a) belong to dio preallocation
+> > > > b) the left one
+> > > > 
+> > > > After that, it will simply checkpoint() flow to just flush metadata b), for
+> > > > other flow, like GC, data/node allocation, it needs to query/update metadata
+> > > > after we combine metadata a) and b).
+> > > > 
+> > > > In addition, there is an existing in-memory log header framework in f2fs,
+> > > > based on this fwk, it's very easy for us to add a new in-memory log header
+> > > > for DIO preallocation.
+> > > > 
+> > > > So it seems feasible for me until now...
+> > > > 
+> > > > Jaegeuk, any other concerns about the implementation details?
+> > > 
+> > > Hmm, I'm still trying to deal with this as a corner case where the writes
+> > > haven't completed due to an error. How about keeping the preallocated block
+> > > offsets and releasing them if we get an error? Do we need to handle EIO right?
+> > 
+> > What about the case that CP + SPO following DIO preallocation? User will
+> > encounter uninitialized block after recovery.
 > 
-> On 08/16, Nathan Chancellor wrote:
->> Without this, there is a warning in nearly every fs/f2fs/ file when
->> F2FS_FS_COMPRESSION is not set:
->>
->> In file included from fs/f2fs/super.c:31:
->> fs/f2fs/f2fs.h:4251:13: warning: unused function 'f2fs_sanity_check_cluster' [-Wunused-function]
->> static bool f2fs_sanity_check_cluster(struct dnode_of_data *dn) { return false; }
->>              ^
->> 1 warning generated.
->>
->> Fixes: 1495870233e7 ("f2fs: compress: do sanity check on cluster")
+> I think buffered writes as a workaround can expose the last unwritten block as
+> well, if SPO happens right after block allocation. We may need to compromise
+> at certain level?
 > 
-> This has not been merged yet, so if you don't mind, can I integrate your fix in
-> the original patch?
 
-Sure thing!
+Freeing preallocated blocks on error would be better than nothing, although note
+that the preallocated blocks may have filled an arbitrary sequence of holes --
+so simply truncating past EOF would *not* be sufficient.
 
-Cheers,
-Nathan
+But really filesystems need to be designed to never expose uninitialized data,
+even if I/O errors or a sudden power failure occurs.  It is unfortunate that
+f2fs apparently wasn't designed with that goal in mind.
+
+In any case, I don't think we can proceed with any other f2fs direct I/O
+improvements until this data leakage bug can be solved one way or another.  If
+my patch to remove support for allocating writes isn't acceptable and the
+desired solution is going to require some more invasive f2fs surgery, are you or
+Chao going to work on it?  I'm not sure there's much I can do here.
+
+- Eric
 
 
 _______________________________________________
