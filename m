@@ -2,97 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C9243EE551
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 06:10:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9E73EE653
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 07:43:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mFqQQ-0007Nv-CC; Tue, 17 Aug 2021 04:10:06 +0000
+	id 1mFrsW-0003st-CD; Tue, 17 Aug 2021 05:43:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <daeho43@gmail.com>) id 1mFqQP-0007Nk-5O
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 04:10:05 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from
+ <BATV+5498ba94aa5fdb349355+6568+infradead.org+hch@casper.srs.infradead.org>)
+ id 1mFrsU-0003sc-Aw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 05:43:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=e/+AlGAMlx4yUW9nHI050qxp1g/aooqfczJ22EUYudU=; b=A54agluU6QbMdanhLLb/jUv3Fh
- QmPeIdBsuYqK2dCS6gF17SvoN1uXOEJg3KUu7E2+bSlEF/hDIgx89qZKwHeeQwaOQifdy0aGmvEKN
- 7LIMVcClDSFs5DtA0oVD9jjLqikaRBwzWJc2cbx9kij/E1ZTGY47FaBveFFJkBGU7uAU=;
+ bh=VeKnM02wWuhrHmIkGzHEjGcNpMFRvvPghHJFGQ1kIg0=; b=W37PU1XcagDgs+2oqQUkB81+HX
+ 7P/oVRZUO9D7XMBI6BvWiSHAl/3GotAK8YeNEuUXSN8ITwP2emMyaWJsTkJuoRRTeMyNNli5SWh9p
+ WCySGsF3lQXdEwuFrahTtNfnVfPzoLpS/0QHDcsNm7eLMNwfP8rkF8ilnlqPOV8O5lzE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=e/+AlGAMlx4yUW9nHI050qxp1g/aooqfczJ22EUYudU=; b=TcuSEzogz+p8ye+znXcAppnb3G
- tkoJgr/HYvL/iG+xwNWrKmMWnoKEkhf0lM/wv1ekoBD06Z8sF7M41+1AE9pBh11NDVQlrmAPRgH4F
- nfbCO1f4j6A7BiEDgUNZzEAISxKANzI4cUbjRzH+TrVjEYRC/2cnsbDRk2QLtI4ZDirE=;
-Received: from mail-lj1-f176.google.com ([209.85.208.176])
+ bh=VeKnM02wWuhrHmIkGzHEjGcNpMFRvvPghHJFGQ1kIg0=; b=iQPrmAMkqGq3WNodOfjbRw4sy9
+ XJY4CteoP4crcM1DLTqJPUv9SNn1BrZ8tOhdWAbLKyKlq49wuz6XpGRXQKaw5WeYfbTENfYmy3Rrw
+ mKLXHNVNd6XqrIwOCKu0rDw1ecZC99TTtwagL4s6ZbJjYWvUIElSgRLIi2rWSh4zWtuc=;
+Received: from [90.155.50.34] (helo=casper.infradead.org)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mFqQN-00070A-74
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 04:10:05 +0000
-Received: by mail-lj1-f176.google.com with SMTP id h17so30660044ljh.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 16 Aug 2021 21:10:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=e/+AlGAMlx4yUW9nHI050qxp1g/aooqfczJ22EUYudU=;
- b=opPuvYz+g6e8XhiS67aK3j5UAd879moOO4x4BCCtjoOEAjcI1CAIz6Kk7KvKu0Fkl0
- /dn3qgtxhFVpwhsHoXSLAKmX9TGrM0iyW25Eh41vIsYyoSF+3aGSveSR0QrTdhac3Qs0
- Dgawcb8/r2lznqWnrrbdEWftwRU/0kbdmf/++JBeasZ3sP8ZCtbzYkZBmE03YayHR1C2
- Njt5Jub2wemzDPU7Gm/aTE719FXQxIoQprJW9PRyNg2tKGZWJKHTIzXKfHzKa4Wl2MOt
- q2SC9Gni1BSOPtD4YCv+kfp6dryKhGmuW1sFraWhgzQumpLXIvrvZhjF4ZoUJQ3K0lgH
- MiSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=e/+AlGAMlx4yUW9nHI050qxp1g/aooqfczJ22EUYudU=;
- b=o65FIOEpnW8xyW0BcVLqGfpZ/Il+aXfPL4AxF2xfSxoe5YhFPQtZAvqOBC5S5x+19X
- eh3qED0FHBPjIzMh1lKRDeun5/02yFD417VlZtn9K9nTMkC2xBwoNZMz8i6Nc9H1WCiI
- evtrtxuqXEYUe6sGS8CHKgLfUYWF1YZHc9mM7J/tf1qQuU/7N9VSkXN610m7TRI9sqeY
- qcttcVcXfR8c95IoN9esROEQq5zOb/X8XMjhWPl3gadany8+Y9fAZ/bYQb8fO4b3orF4
- uP05r1ibClcGmLQEOhG/g+s+fBxpzY19737dTdvZFEWITaOXFvLFQQ4U88w4WAfHYzzp
- YETA==
-X-Gm-Message-State: AOAM531K/pIy2gW93Q4y0qSK4NkC4KoWp+UO+6U9erIyTM8JroXAu/T3
- BH48x4scwvjtD1RH1o3BMjBo0F60PbmZ+lsGrAw=
-X-Google-Smtp-Source: ABdhPJz6sl3lYo1fxmbsmZ1YfokwBgHDYsYZ+desNNfBCTBbkwUw4xr6k9o1BQGFs7pAz71ceu0WGPEsVTUzws5xoQU=
-X-Received: by 2002:a2e:9b14:: with SMTP id u20mr1349419lji.21.1629173396648; 
- Mon, 16 Aug 2021 21:09:56 -0700 (PDT)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mFrsQ-0002Ub-CG
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 05:43:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=VeKnM02wWuhrHmIkGzHEjGcNpMFRvvPghHJFGQ1kIg0=; b=wIXvWYPSodcx5cY+IU7NfDLX0S
+ bkLtJBaE1CLafopA81uy6O0zlaIKaqhDtuJObSaeQpeWEevZdas4nzAxNF6ZN/fbJ6FpqWACAfsem
+ Adzo0NqKx5Mq94NFjy/s4zYD8Nc5N2PkFB4FkxxLp3XHrVSSgt2/FNAtFVstq6tv3zmaI0J6Xbc8+
+ Z242N+Ct8KmBPBG+h+heoSCM5FMhaosHwm1gSFVNegbrtusRkIcGffnGWL41lbtGjYsPoTxzL5ur6
+ 0su9nPU0ZOvguaWVj63XaEAdOKGk8nk43WYgFu2Y5R+yAEudCdm4EJHuV8ItaUGzW1RBuDgetNAUF
+ fbJNmtdQ==;
+Received: from hch by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat
+ Linux)) id 1mFrre-002BMB-98; Tue, 17 Aug 2021 05:42:23 +0000
+Date: Tue, 17 Aug 2021 06:42:18 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <YRtMOqzZU4c1Vjje@infradead.org>
+References: <20210728015154.171507-1-ebiggers@kernel.org>
+ <YQRQRh1zUHSIzcC/@gmail.com> <YQS5eBljtztWwOFE@mit.edu>
+ <YQd3Hbid/mFm0o24@sol.localdomain>
+ <a3cdd7cb-50a7-1b37-fe58-dced586712a2@kernel.org>
+ <YQg4Lukc2dXX3aJc@google.com>
+ <b88328b4-db3e-0097-d8cc-f250ee678e5b@kernel.org>
+ <YQidOD/zNB17fd9v@google.com> <YRsY6dyHyaChkQ6n@gmail.com>
 MIME-Version: 1.0
-References: <20210816073559.GA12039@kili>
-In-Reply-To: <20210816073559.GA12039@kili>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Mon, 16 Aug 2021 21:09:45 -0700
-Message-ID: <CACOAw_w3TC8ZM9AKE7frPHnMRcXTE8n1aQChEJR7L3tsJ-K0_w@mail.gmail.com>
-To: Dan Carpenter <dan.carpenter@oracle.com>
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <YRsY6dyHyaChkQ6n@gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: 0.9 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.208.176 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.176 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1mFqQN-00070A-74
-Subject: Re: [f2fs-dev] [bug report] f2fs: introduce periodic iostat io
- latency traces
+ 1.0 RDNS_NONE Delivered to internal network by a host with no rDNS
+X-Headers-End: 1mFrsQ-0002Ub-CG
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove broken support for allocating
+ DIO writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,80 +92,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Dan,
+On Mon, Aug 16, 2021 at 07:03:21PM -0700, Eric Biggers wrote:
+> Freeing preallocated blocks on error would be better than nothing, although note
+> that the preallocated blocks may have filled an arbitrary sequence of holes --
+> so simply truncating past EOF would *not* be sufficient.
+> 
+> But really filesystems need to be designed to never expose uninitialized data,
+> even if I/O errors or a sudden power failure occurs.  It is unfortunate that
+> f2fs apparently wasn't designed with that goal in mind.
+> 
+> In any case, I don't think we can proceed with any other f2fs direct I/O
+> improvements until this data leakage bug can be solved one way or another.  If
+> my patch to remove support for allocating writes isn't acceptable and the
+> desired solution is going to require some more invasive f2fs surgery, are you or
+> Chao going to work on it?  I'm not sure there's much I can do here.
 
-We don't use NR_PAGE_TYPE for the index.
-
-Thank you,
-
-On Mon, Aug 16, 2021 at 12:37 AM Dan Carpenter <dan.carpenter@oracle.com> wrote:
->
-> Hello Daeho Jeong,
->
-> The patch f4b05791dda9: "f2fs: introduce periodic iostat io latency
-> traces" from Aug 3, 2021, leads to the following
-> Smatch static checker warnings:
->
-> fs/f2fs/f2fs.h:3365 __update_iostat_latency() error: buffer overflow 'sbi->rd_sum_lat' 3 <= 3
-> fs/f2fs/f2fs.h:3366 __update_iostat_latency() error: buffer overflow 'sbi->rd_bio_cnt' 3 <= 3
-> fs/f2fs/f2fs.h:3367 __update_iostat_latency() error: buffer overflow 'sbi->rd_peak_lat' 3 <= 3
-> fs/f2fs/f2fs.h:3368 __update_iostat_latency() error: buffer overflow 'sbi->rd_peak_lat' 3 <= 3
-> fs/f2fs/f2fs.h:3370 __update_iostat_latency() error: buffer overflow 'sbi->wr_sum_lat[sync]' 3 <= 3
-> fs/f2fs/f2fs.h:3371 __update_iostat_latency() error: buffer overflow 'sbi->wr_bio_cnt[sync]' 3 <= 3
-> fs/f2fs/f2fs.h:3372 __update_iostat_latency() error: buffer overflow 'sbi->wr_peak_lat[sync]' 3 <= 3
-> fs/f2fs/f2fs.h:3373 __update_iostat_latency() error: buffer overflow 'sbi->wr_peak_lat[sync]' 3 <= 3
->
-> fs/f2fs/f2fs.h
->     3348 static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
->     3349                                int rw, int sync)
->     3350 {
->     3351        unsigned long ts_diff;
->     3352        unsigned int iotype = iostat_ctx->type;
->     3353        unsigned long flags;
->     3354        struct f2fs_sb_info *sbi = iostat_ctx->sbi;
->     3355
->     3356        if (!sbi->iostat_enable)
->     3357                return;
->     3358
->     3359        ts_diff = jiffies - iostat_ctx->submit_ts;
->     3360        if (iotype >= META_FLUSH)
->                     ^^^^^^^^^^^^^^^^^^^^
-> This means the highest value of "iotype" is NR_PAGE_TYPE.
->
->     3361                iotype = META;
->     3362
->     3363        spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
->     3364        if (rw == 0) {
-> --> 3365                sbi->rd_sum_lat[iotype] += ts_diff;
->                         ^^^^^^^^^^^^^^^^^^^^^^^
->     3366                sbi->rd_bio_cnt[iotype]++;
->                         ^^^^^^^^^^^^^^^^^^^^^^
-> These arrays have NR_PAGE_TYPE elements so it's off by one.
->
->     3367                if (ts_diff > sbi->rd_peak_lat[iotype])
->     3368                        sbi->rd_peak_lat[iotype] = ts_diff;
->     3369        } else {
->     3370                sbi->wr_sum_lat[sync][iotype] += ts_diff;
->     3371                sbi->wr_bio_cnt[sync][iotype]++;
->     3372                if (ts_diff > sbi->wr_peak_lat[sync][iotype])
->     3373                        sbi->wr_peak_lat[sync][iotype] = ts_diff;
->     3374        }
->     3375        spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
->     3376 }
->
-> regards,
-> dan carpenter
->
->
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Btw, this is generally a problem for buffered I/O as well, although the
+window for exposing uninitialized blocks on a crash tends to be smaller.
 
 
 _______________________________________________
