@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9079B3EF25A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 20:58:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 588773EF25C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Aug 2021 20:58:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mG4Hj-0001AG-38; Tue, 17 Aug 2021 18:58:03 +0000
+	id 1mG4IB-00083G-45; Tue, 17 Aug 2021 18:58:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1mG4Hh-0001A0-Si
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 18:58:01 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mG4I9-00082p-Vz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 18:58:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SKXZEtFnmmQKtLbidAJL3GzrUo+mK7sR5VhVr/WptyQ=; b=Hp53KmlA3ZLYubRayEIL2QpkiK
- ocTs4cplr6Tn0LTEc8rwQ7ru4zWdL7pZrSMG22HkA/0cG0GXMh/LgDISFhfXuhXIilR0Vdavu5V+u
- QvhRtsoN46V2AcPHC2yDnw0jGOvCWR9PubYM5Lpl5QxiEbOw/f53aIcPXN60y64aX1Ko=;
+ bh=DVgNcP4DW59ZFm2UfKXZMQqjoRegf7SSq51IkB9Pcz0=; b=XNHqkq8YRUpxvFrldMDVKenins
+ 5uv4doOCb5TodJa2pEwqmtbRrtJeCn0rpuvWMPZyVNnER3aHp+BGJC25FGPk2wox3pHEe5lWlXmab
+ fAVBO5L6eQB1+1HrjXHp6GPx2IWxE8bkKm9UxsEwzWwt8Bnce65ui/bB+biJbRmXIGZM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,41 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SKXZEtFnmmQKtLbidAJL3GzrUo+mK7sR5VhVr/WptyQ=; b=FB/kM3kGPErUEfFQGJOV80N0Yh
- Qquw/IBAv+okVlFWaxcaZgVagLgXNcwi/pVX9Xk/iGndGqT0YNeKI+duhID8+/ADqlMyBxW1BVVBC
- IfGfjXsrlLqDYbnRL2e4i86gq331SSEi4AN8Bqw+obcPl/yCZp9eT6BDRfBPozctKjxw=;
+ bh=DVgNcP4DW59ZFm2UfKXZMQqjoRegf7SSq51IkB9Pcz0=; b=ZwgBV6FWJCo8RQvA9JgyrWaOB2
+ z04aLE3Y04/EEVDOnFsrhrQUhzEETvzG/JZdjso0zsClNDUPoDtrLq07YUzvLf5PaDVAKhLvUEJ8d
+ ubeDPGi0+c1D9s4KE7QuGo5RAWhwFqN8UigUXv2KNmU3qwqp8n5KE6LRNW50AmLHpiro=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mG4Hd-0005Ep-Tl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 18:57:59 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6D6EE60F58;
- Tue, 17 Aug 2021 18:57:47 +0000 (UTC)
+ id 1mG4I6-0005GE-Ax
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 Aug 2021 18:58:27 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8DE7760F58;
+ Tue, 17 Aug 2021 18:58:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629226667;
- bh=2XcXNJckxVKqAUkQr3OnLHOMlEXeXg+rMqgZHIzsIwQ=;
+ s=k20201202; t=1629226700;
+ bh=ybaZbjhb4qySD5Pozoo9NhCNuXsZVugnMPJsjSKrOCY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZM19eiaP830Jjnq7WpgBd757cueDeUTKGXydS3fRcMzp35BHWeA1kbaTfHQntpUKg
- aBJBvPvUYSoLD7drxmoiyEqyQAUlakf/ToVSnsJLrO+XBdkzVmBZQdCEZYYZK/2dpl
- ITkP1rQYvN+ddd5YSddzCS4hHinnnovMXQGVQe9/C+VPzsdbYBFfrXixrd+qkGA/wS
- hQ4yxQTfmnpI9MO6e1AmDv7dwk34YBa1uxj3S3I+WmUWHOgWA6sjb1mhPGK4Mgj7or
- Vf6M2m1tkPuW5Jgsy4ClIceTF4N6Xjq+Qvqt1fSUnEWqEM7Kac8PNg3IgLHQvTl/GU
- hOjJWx0rbekdA==
-Date: Tue, 17 Aug 2021 11:57:46 -0700
+ b=m0P3cKpuhO9EctIoSSNch6haKgcVwZt4U5J7EXvYDjh1v8s01YX/GyvJTlEHRkZrS
+ aVAh7Louv167R4nOckHL0xgW4rxxGYwl8kwe6blRCTzl7BJuQmFZBIk9YjkRLjz31s
+ hFXpkRxyjmWfbXnP232R6aiFkDWaghm544XLUl2cCBkkz/HnVAXX2/NGjka1BvSL1T
+ W1lQGqn5qVIU0XTcjWD13027xeGTAqE9Kp9IiGz4VUIyCABLbykBg1vflsP4A6wg8h
+ MJNKuvgYgBaKYL6vsKpjIA8GlN0rYlJDncWPxgjwAWF2FlglMzm7P9XGJZiE5gxb4f
+ aUVi8j7kqyj9Q==
+Date: Tue, 17 Aug 2021 11:58:19 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <YRwGqsLgyKqdbkGX@google.com>
-References: <20210728015154.171507-1-ebiggers@kernel.org>
- <YQRQRh1zUHSIzcC/@gmail.com> <YQS5eBljtztWwOFE@mit.edu>
- <YQd3Hbid/mFm0o24@sol.localdomain>
- <a3cdd7cb-50a7-1b37-fe58-dced586712a2@kernel.org>
- <YQg4Lukc2dXX3aJc@google.com>
- <b88328b4-db3e-0097-d8cc-f250ee678e5b@kernel.org>
- <YQidOD/zNB17fd9v@google.com> <YRsY6dyHyaChkQ6n@gmail.com>
- <YRtMOqzZU4c1Vjje@infradead.org>
+To: Nathan Chancellor <nathan@kernel.org>
+Message-ID: <YRwGyzZn+vxRoXTO@google.com>
+References: <20210816234247.139528-1-nathan@kernel.org>
+ <YRsD6P4x9v38oDWl@google.com>
+ <1f2eff07-f003-03c8-b3c8-0e06f9bf9684@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YRtMOqzZU4c1Vjje@infradead.org>
+In-Reply-To: <1f2eff07-f003-03c8-b3c8-0e06f9bf9684@kernel.org>
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
@@ -76,9 +71,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
  0.1 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mG4Hd-0005Ep-Tl
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove broken support for allocating
- DIO writes
+X-Headers-End: 1mG4I6-0005GE-Ax
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Add missing inline to
+ f2fs_sanity_check_cluster() stub
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,36 +85,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- linux-fsdevel@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/17, Christoph Hellwig wrote:
-> On Mon, Aug 16, 2021 at 07:03:21PM -0700, Eric Biggers wrote:
-> > Freeing preallocated blocks on error would be better than nothing, although note
-> > that the preallocated blocks may have filled an arbitrary sequence of holes --
-> > so simply truncating past EOF would *not* be sufficient.
+On 08/16, Nathan Chancellor wrote:
+> On 8/16/2021 5:33 PM, Jaegeuk Kim wrote:
+> > Hi Nathan,
 > > 
-> > But really filesystems need to be designed to never expose uninitialized data,
-> > even if I/O errors or a sudden power failure occurs.  It is unfortunate that
-> > f2fs apparently wasn't designed with that goal in mind.
+> > On 08/16, Nathan Chancellor wrote:
+> > > Without this, there is a warning in nearly every fs/f2fs/ file when
+> > > F2FS_FS_COMPRESSION is not set:
+> > > 
+> > > In file included from fs/f2fs/super.c:31:
+> > > fs/f2fs/f2fs.h:4251:13: warning: unused function 'f2fs_sanity_check_cluster' [-Wunused-function]
+> > > static bool f2fs_sanity_check_cluster(struct dnode_of_data *dn) { return false; }
+> > >              ^
+> > > 1 warning generated.
+> > > 
+> > > Fixes: 1495870233e7 ("f2fs: compress: do sanity check on cluster")
 > > 
-> > In any case, I don't think we can proceed with any other f2fs direct I/O
-> > improvements until this data leakage bug can be solved one way or another.  If
-> > my patch to remove support for allocating writes isn't acceptable and the
-> > desired solution is going to require some more invasive f2fs surgery, are you or
-> > Chao going to work on it?  I'm not sure there's much I can do here.
+> > This has not been merged yet, so if you don't mind, can I integrate your fix in
+> > the original patch?
 > 
-> Btw, this is generally a problem for buffered I/O as well, although the
-> window for exposing uninitialized blocks on a crash tends to be smaller.
+> Sure thing!
 
-How about adding a warning message when we meet an error with preallocated
-unwritten blocks? In the meantime, can we get the Eric's patches for iomap
-support? I feel that we only need to modify the preallocation and error
-handling parts?
+Thanks~ :)
+
+> 
+> Cheers,
+> Nathan
 
 
 _______________________________________________
