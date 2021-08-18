@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84A113F05EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Aug 2021 16:12:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id E93123F0600
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Aug 2021 16:14:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mGMIu-0006IZ-5C; Wed, 18 Aug 2021 14:12:28 +0000
+	id 1mGMKR-0006ZY-BK; Wed, 18 Aug 2021 14:14:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
  (envelope-from
  <BATV+c26a8f31a710de91e748+6569+infradead.org+hch@casper.srs.infradead.org>)
- id 1mGMIs-0006IG-JZ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:12:26 +0000
+ id 1mGMKP-0006ZG-7Q
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:14:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=W/CqL+1UTR7dYoG9/tA55jo9OSLvjLN7QCowW5Mp68U=; b=NK7nKNwh1/+UuzeE0Go5f5gBuo
- 19L5Hhz3K5umzQfdZ9oQ73Ix6k00x88FPBaCz4KXh2RYkEZrkHq1XQtiVg7CTXBKWcqGRawJYQvSW
- a1c8cv4Z1pnmSqxj6KN16zta40X7c6+9pT3ADdsCzXLRVZVKqEGS6QmewDSCho/xlOzM=;
+ bh=z4MCNHhCspLoQHSiqkbpMAHembWOXPJmB4CL3aOqh6g=; b=hR4qJr0cXUmha+u4QQ03Ur9TxO
+ TFI3WHMW4teHqJGvwBkiUSNQxdqB4ojGAImnurkA/s8u09KNgDpUmhGK2DTegli5hSlHaKxguoWfU
+ 28D8fT87M3rgbVdUNWBtW7hw2AAqm3ztvHX27+aKcnHEHfbN80hkokuNmwvEKoC60Z6I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=W/CqL+1UTR7dYoG9/tA55jo9OSLvjLN7QCowW5Mp68U=; b=fIyPy8U5JfeOoGCeIdnmHpe4UH
- i/8UYU0gLku7zRsk0UEZGH9p2tV1RvZPptxo5Spp3TEI8tLXbDU7FAgca5L5WW+vSvyRMznfpPa6q
- kGZNE9cBvZ4vemIiUYIFU93ZsJuwHRjKPq4FQuJJXvq0+a+qwvJQfVRP6K6kOAz7GD00=;
+ bh=z4MCNHhCspLoQHSiqkbpMAHembWOXPJmB4CL3aOqh6g=; b=IoQoEuXXYOlz5c2EeUZdQXDdKa
+ W251fjOgWt4DLS5U5iUqd9M/6MDnkU4zYMJ98uwSIVU91eiW3eC6Q1JOZZnJoZiiyRtkJWsP5Z8AZ
+ 7keMov+eP+b4HxH5nD9pew32a0ksUFFmedvDxX/vvZhl/CKVjGkGcXoK9eK4hnzhxqWc=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mGMIq-00AXUA-SG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:12:26 +0000
+ id 1mGMKO-00AXZf-2D
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:14:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=W/CqL+1UTR7dYoG9/tA55jo9OSLvjLN7QCowW5Mp68U=; b=Ob7acBy/jQh0420cin743NdF+s
- UWZ1A9nQSG04dgymqMMAv+PEvVUwZSQkWsEiEZlHToY7VsbpEiPphSrmj8xK2ikXME/M/EmM1r6my
- pCKz4ad/Gh2bEQYXoOqR31skqwjgyfizT4+VatB5LbN++nNw9KuIJaVT2XgQsHmEfcyCWpoCtAXdY
- YpyvpxP1pTkR0QDadcDp/29hIqmgaQJvD3lphDl0dZPH5FsPNuoeniI10yvofWcGET5AkYcLMiesT
- cuxYLsBdGDfJTizYUHTUMigkijH4+m+O+4GwwYUJtb8R5MyU/JdOcycglLhCvYy25/klgsWiWNYre
- ar/bBM8A==;
+ bh=z4MCNHhCspLoQHSiqkbpMAHembWOXPJmB4CL3aOqh6g=; b=COcvMN76XdyCfAhgJuQ6dMLnms
+ g2IC3e0WnV44+jc6XPYsI2NMnGfT7OMvlRZWG4Cb99F62uWbMbl1iUGWNqX0UH4RYk0nbaWDFzCq6
+ mOB2nUeAmCS07Vir/rd8JTwGFshFfRRHQ44JW6pWbwPgCcMzspHj/JZYZ6XFJRuI6AVyZEV6m8aAG
+ SgeTDqVXx9vg8onhQra9ltQA8brZFPxwYyoRILGm0keb3gtJeZ/pGx0oNu+5Im7s1sSQBhURkBUZ3
+ EeeLqXbCKT4rzRIYDlKZXnB1D1ElKy433b2PcBXyH8WgVx6fJ+JR93nORvhtY9uUCpT3nXQ5G6L+g
+ rQ7wDHwQ==;
 Received: from [2001:4bb8:188:1b1:5a9e:9f39:5a86:b20c] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mGMH5-003uVF-4y; Wed, 18 Aug 2021 14:11:14 +0000
+ id 1mGMIE-003uZE-Pc; Wed, 18 Aug 2021 14:12:18 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Gabriel Krisman Bertazi <krisman@collabora.com>
-Date: Wed, 18 Aug 2021 16:06:43 +0200
-Message-Id: <20210818140651.17181-4-hch@lst.de>
+Date: Wed, 18 Aug 2021 16:06:44 +0200
+Message-Id: <20210818140651.17181-5-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210818140651.17181-1-hch@lst.de>
 References: <20210818140651.17181-1-hch@lst.de>
@@ -69,12 +69,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  It is hardcoded and only used for a f2fs sysfs file where
- it can be hardcoded just as easily. Signed-off-by: Christoph Hellwig
- <hch@lst.de>
- --- fs/f2fs/sysfs.c | 3 +-- fs/unicode/utf8-core.c | 3 ---
- include/linux/unicode.h
- | 1 - 3 files changed, 1 insertion(+), 6 deletions(-) 
+ Content preview: unicode version tripplets are always unsigned. Signed-off-by:
+ Christoph Hellwig <hch@lst.de> --- include/linux/unicode.h | 2 +- 1 file
+ changed, 1 insertion(+), 1 deletion(-) diff --git a/include/linux/unicode.h
+ b/include/linux/unicode.h index 6a392cd9f076..0744f81c4b5f 100644 ---
+ a/include/linux/unicode.h
+ +++ b/include/linux/unicode.h @@ -6,7 +6,7 @@ #include <linux/dcach [...]
  Content analysis details:   (0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +91,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1mGMIq-00AXUA-SG
-Subject: [f2fs-dev] [PATCH 03/11] unicode: remove the charset field from
- struct unicode_map
+X-Headers-End: 1mGMKO-00AXZf-2D
+Subject: [f2fs-dev] [PATCH 04/11] unicode: mark the version field in struct
+ unicode_map unsigned
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,57 +112,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It is hardcoded and only used for a f2fs sysfs file where it can be
-hardcoded just as easily.
+unicode version tripplets are always unsigned.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/sysfs.c         | 3 +--
- fs/unicode/utf8-core.c  | 3 ---
- include/linux/unicode.h | 1 -
- 3 files changed, 1 insertion(+), 6 deletions(-)
+ include/linux/unicode.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 6642246206bd..d9ecf75e445d 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -195,8 +195,7 @@ static ssize_t encoding_show(struct f2fs_attr *a,
- 	struct super_block *sb = sbi->sb;
- 
- 	if (f2fs_sb_has_casefold(sbi))
--		return snprintf(buf, PAGE_SIZE, "%s (%d.%d.%d)\n",
--			sb->s_encoding->charset,
-+		return snprintf(buf, PAGE_SIZE, "UTF-8 (%d.%d.%d)\n",
- 			(sb->s_encoding->version >> 16) & 0xff,
- 			(sb->s_encoding->version >> 8) & 0xff,
- 			sb->s_encoding->version & 0xff);
-diff --git a/fs/unicode/utf8-core.c b/fs/unicode/utf8-core.c
-index dc25823bfed9..86f42a078d99 100644
---- a/fs/unicode/utf8-core.c
-+++ b/fs/unicode/utf8-core.c
-@@ -219,10 +219,7 @@ struct unicode_map *utf8_load(const char *version)
- 	um = kzalloc(sizeof(struct unicode_map), GFP_KERNEL);
- 	if (!um)
- 		return ERR_PTR(-ENOMEM);
--
--	um->charset = "UTF-8";
- 	um->version = unicode_version;
--
- 	return um;
- }
- EXPORT_SYMBOL(utf8_load);
 diff --git a/include/linux/unicode.h b/include/linux/unicode.h
-index 74484d44c755..6a392cd9f076 100644
+index 6a392cd9f076..0744f81c4b5f 100644
 --- a/include/linux/unicode.h
 +++ b/include/linux/unicode.h
-@@ -6,7 +6,6 @@
+@@ -6,7 +6,7 @@
  #include <linux/dcache.h>
  
  struct unicode_map {
--	const char *charset;
- 	int version;
+-	int version;
++	unsigned int version;
  };
  
+ int utf8_validate(const struct unicode_map *um, const struct qstr *str);
 -- 
 2.30.2
 
