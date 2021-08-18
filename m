@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0D0F3F0740
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Aug 2021 16:58:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EC3B3F0743
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Aug 2021 16:58:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mGN16-0001Qd-Hf; Wed, 18 Aug 2021 14:58:08 +0000
+	id 1mGN1O-0007YK-Vo; Wed, 18 Aug 2021 14:58:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <willy@infradead.org>) id 1mGN14-0001QR-Bn
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:58:06 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <hch@lst.de>) id 1mGN1N-0007YE-FW
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:58:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2g9pHgPWd8S7JZggCdeaLifcdNQhzjXv9Us4Fn7c/eI=; b=Yw1HlkHnrwIwUYZWV7mSpd73Cz
- r/SeAqioy/mkXSpoAxUg+lRHee4d2E6/KNrxP1p4y2iAYTKzpp4u+ydS1TZkuAZ/BVNmpnlswcj6n
- OKyKh6ueY7n2oiWwsrmztVZeiK1OUTx9oym7s1EAS3u3z+j3EWNmatQ5iUd9vHDyDUWk=;
+ bh=AdDChgYKFP5pDXKjILxzg9xwSt+lGrgGqLpKDvBxBd0=; b=QJBljwcsRASBdUAqloxCUke6VL
+ w+Dfrqr3umaoHjLCmWb5BzToXOJDiR/E5n+IJvfuZDtslNQG1cjTMG0vOZFHvjwuE5P0j3yT8Q/1B
+ RbJ14qRvsgBwUTHX0SW3CdCy4G1KMBtNQ6KfZFwyB5Y/E0XgPrMRCKK98SE41aD9F1+I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,46 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2g9pHgPWd8S7JZggCdeaLifcdNQhzjXv9Us4Fn7c/eI=; b=m6t/cClWgFCOa11CYM5aSEfOCY
- 0hELcDIRsfFttk1sI9BMTJ1+H2YFA8N0Gjh/VE9nvKGSjmwM4k3T5gVEgA44CBtwp+XkksUnzGemB
- Djke12g6HPzJzAL9RbpMRr/hjl/DbOVUT02sdZG9CTTKnDW4Ven2i7XiLUvhUEFmJjx0=;
-Received: from casper.infradead.org ([90.155.50.34])
+ bh=AdDChgYKFP5pDXKjILxzg9xwSt+lGrgGqLpKDvBxBd0=; b=SQWzyc33ziMhu1Zb1Z5oSb5BeM
+ JAoZcTBskVSIjDGJBBi1Onz8Pz/xuLTHQ8jOfF1LTnScfAzDsW8KVKAC+7yFTFONY7F1Wlgy6oX26
+ FKCYx8PC8DJSLnvUv3T0M75tW6DbJ544IyeEQIo8QafeNNKM2LyoUjgphcgGfrU2P3oM=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mGN12-000271-VQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:58:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=2g9pHgPWd8S7JZggCdeaLifcdNQhzjXv9Us4Fn7c/eI=; b=N8qRgySgPaN8uFwsK80Yh+8FUX
- VR3QrfrKBDWlRNxVfoy9ZZH7x4PzD/Rq9q7K3Vsq+YSfsxbfK8mYMQf8gQhKILSXrkva9jhbPHmwt
- 1epA5C+rpKIVUWfFLqSiEv34+yfGAeHpn0xDEacnhYKKdNG5rRurcqZGU8EqLTW+zIxJ3a/5wg2mq
- dR6pbhupiIJ/Mx6b7er3EtvyWEyzZ7JJn74hIKTJAcOpWkz6LiKTGiysweRIs3APr6/wBZAMAfAMk
- CFPtXiU94BMz6MAOVwCPFqoPvSsbkPuDsURTCJzG/g1if/amVJWLIofqClORmA2pEiStrDVmNAWsX
- fNUatxHw==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1mGMzz-003xBU-UN; Wed, 18 Aug 2021 14:57:08 +0000
-Date: Wed, 18 Aug 2021 15:56:59 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <YR0fuyqe7NS+mCf9@casper.infradead.org>
+ id 1mGN1L-00027w-NB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 Aug 2021 14:58:25 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 1787E67373; Wed, 18 Aug 2021 16:58:14 +0200 (CEST)
+Date: Wed, 18 Aug 2021 16:58:13 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20210818145813.GA13343@lst.de>
 References: <20210818140651.17181-1-hch@lst.de>
- <20210818140651.17181-12-hch@lst.de>
+ <20210818140651.17181-12-hch@lst.de> <YR0fuyqe7NS+mCf9@casper.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210818140651.17181-12-hch@lst.de>
-X-Spam-Score: -0.1 (/)
+In-Reply-To: <YR0fuyqe7NS+mCf9@casper.infradead.org>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1mGN12-000271-VQ
+X-Headers-End: 1mGN1L-00027w-NB
 Subject: Re: [f2fs-dev] [PATCH 11/11] unicode: only export internal symbols
  for the selftests
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -82,20 +68,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Shreeya Patel <shreeya.patel@collabora.com>,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Gabriel Krisman Bertazi <krisman@collabora.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, Shreeya Patel <shreeya.patel@collabora.com>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Aug 18, 2021 at 04:06:51PM +0200, Christoph Hellwig wrote:
-> The exported symbols in utf8-norm.c are not needed for normal
-> file system consumers, so move them to conditional _GPL exports
-> just for the selftest.
+On Wed, Aug 18, 2021 at 03:56:59PM +0100, Matthew Wilcox wrote:
+> On Wed, Aug 18, 2021 at 04:06:51PM +0200, Christoph Hellwig wrote:
+> > The exported symbols in utf8-norm.c are not needed for normal
+> > file system consumers, so move them to conditional _GPL exports
+> > just for the selftest.
+> 
+> Would it be better to use EXPORT_SYMBOL_NS_GPL()?
 
-Would it be better to use EXPORT_SYMBOL_NS_GPL()?
-
+Maybe.  Even better would be the EXPORT_SYMBOL_FOR I've been prototyping
+for a while but which is still not ready.
 
 
 _______________________________________________
