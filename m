@@ -2,107 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3176E3F2F32
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 17:23:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAFAC3F2F8C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 17:36:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mH6N8-0006bO-Ve; Fri, 20 Aug 2021 15:23:54 +0000
+	id 1mH6ZK-0001Gg-Ch; Fri, 20 Aug 2021 15:36:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1mH6N7-0006b6-La
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:23:53 +0000
+ (envelope-from <daeho43@gmail.com>) id 1mH6ZJ-0001GQ-9G
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:36:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LmlIpUuRl+AQl6NHORx2uksaHk6e1Bkml3gkzzdbETU=; b=c8o275CUAp+5kCIdaHg7pWpHTs
- ZEkAYHnXzxPjl0hXa7AKi/KmdNeISOvsFAPHbraVnNxkPoT1Uotag02JhfPoLU5EfnSGxo5UlAurZ
- hbr+p0nfzvBbcHp1lE3xD0IBkTWXBrCpTHDNBhWcUnxNEwt7QIp7cBmeE5yhGDXEAeMo=;
+ bh=EVaM21zboKi9bHEQ0ttFpVnASIsPfjTlp97ppLGTj1U=; b=VwxMmf3FawE7Si76LwAW0im2ec
+ yRuSVA89pZ27ATd2Wp8uPK9xn13irIqVMAm+C1+04Jo+6L6LF/ajRUPYpAtnETYjYN2RnN3J4tx1+
+ 0X/dYMS2PC06OImbvVJEJ48bWZSehg18841ISRzfTCKaYJFs7nj0p2gyYQKPhfFOrotM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LmlIpUuRl+AQl6NHORx2uksaHk6e1Bkml3gkzzdbETU=; b=eaAP8eUzDsEvlo+qPEsaWjPzKr
- GGWUyCdcNe+INIU0ljMw3n1I5C2zgjYTJulJiUyJo84mb5CFH2LOs42LHJAQzUy1pelFT5XV7Ts3M
- r5wC40CFvz8YGGvR9P7WWZVumSyg2crA+HXudyXzmW3AIlmEVx3WNyrUjb2V96jfXUWw=;
-Received: from mail-lf1-f51.google.com ([209.85.167.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EVaM21zboKi9bHEQ0ttFpVnASIsPfjTlp97ppLGTj1U=; b=k
+ Lf7TjN26Bdjq4DxyVOKs38ntc3PGdaV3Hc+qsONE7UeFxsVi/aF6kis9il0NwJwDwa+231MH1u1HX
+ P6X83kVvgtty9ps6C/xQxGeo9M+mm9LNnkKiYVhni4iYuxtbVYhE6UrAEQg+lgYxW1mJOdzEJm6Gp
+ NZ7QVgxyata2DZyk=;
+Received: from mail-pg1-f181.google.com ([209.85.215.181])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mH6Me-00Csry-3Q
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:23:53 +0000
-Received: by mail-lf1-f51.google.com with SMTP id i9so21314891lfg.10
+ id 1mH6ZE-0005aS-RH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:36:29 +0000
+Received: by mail-pg1-f181.google.com with SMTP id k14so9544154pga.13
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 Aug 2021 08:23:24 -0700 (PDT)
+ Fri, 20 Aug 2021 08:36:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LmlIpUuRl+AQl6NHORx2uksaHk6e1Bkml3gkzzdbETU=;
- b=lfsgunIBPvh1N2HMfHLuTu6bb4D3MC64EfdWNwsp5/I6e9+sfnYHnIciUn9iZmjfE0
- RpMGbkMBlb41YT2k/VuMPHP5HH0vI1ft3AxZAqjXqSV2D48lo2PyvBqf1WE8groFrbSz
- piCHKr+s5jQ3BOWinXhcxtVn97Y2iAAcvrQ+yyehKq2a2l3LGlvs/TU3UNUT3xIayr0A
- upenWwnnUkAajCqzvvSGk9T7fSjgoGzVxrO0LYkz2bj/FByEg0EKheI4pi9b07cRPfpH
- SnvrUc9FNOeQ6o8yxGKnMLHduaRcnUfRnEr9uicYa2qgy2arR6dkRInN0Y84ycx9HbD7
- Hczg==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EVaM21zboKi9bHEQ0ttFpVnASIsPfjTlp97ppLGTj1U=;
+ b=Sojg/FHkKWx5wUVjCacavd+y6ZfzcktO5t3SV5aDArCmtppXNu/zhRNw43x79Vb/dL
+ BAxy4fkdbNL1WJcQ+PN+/md+CQbQJh3QC9TuCKFtG0SAZN+pVKuzBIV4ZID/TfpCL9co
+ +DulgMA2PlokWE3+Q2VOE8jbQ+3nazlsB7+HlPuGRSkc0cjdtrTYlubveGVGvlS54zmR
+ QdFrCukummdFJN0jWJM/t/GvJ70rJh0iNCaCzIkWXLfwMnEHPVD9MFtyKfXsOnpy7I5/
+ K0OOmTufWPY+OfWKjLbPBOVMUvm0Mk66HfL4sAhCKLIyfAAUJgvQ4kZWdS0nFH3tLzYS
+ 59ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LmlIpUuRl+AQl6NHORx2uksaHk6e1Bkml3gkzzdbETU=;
- b=dZboNhB2XkGpUwlSNGsZ2L4Wyu+L5Kmeqf0x5RsGnxzWIbqw+SMot3RC0y1Za/9CS0
- 15G/euzu4ba6HXz4CL8+EcBdochXpAQiViz+AM6IWGQ7+8M0pwxncKdHb5++9lZr4BD3
- W0yLPzU6Wv80TkWPcNebldXN0vJxJ802timqsqnw1wWkgM03dqUyIsqXkuf+63W5xVXc
- un4vc4qB7Qa29GODGHFERmW6JxOvoQmAWgy4Rw4hiy4h/PNo4VakSHcGqr4iK28lVXOL
- gFDJ5h9EBiWl+UTAVNHY3+VrAzxHnUAo1eNRULVFYXZncqlzG4UrwlMn3qa6P8HfOQX1
- ydZw==
-X-Gm-Message-State: AOAM532287MhXPAavqrbhKtxFwTQg2gWbo0AbObz2EcsUY3iHv8nb3gi
- yoqBn3aMPsPKGrbuVX3nG1RNc6E7mLfEwACZv48=
-X-Google-Smtp-Source: ABdhPJyw8/e5A74C67qJGcTsZiZKzpB1smdk0k5v/GkqQliEF2YXs0kwLwrudgjmcfMsEXbeJCSQEaghgLDo4wm0808=
-X-Received: by 2002:ac2:4573:: with SMTP id k19mr14978867lfm.622.1629472996150; 
- Fri, 20 Aug 2021 08:23:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210820035229.216975-1-daeho43@gmail.com>
- <20210820035229.216975-2-daeho43@gmail.com>
- <48725f58-1a48-73f3-80cf-a0c5efc3b470@kernel.org>
-In-Reply-To: <48725f58-1a48-73f3-80cf-a0c5efc3b470@kernel.org>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EVaM21zboKi9bHEQ0ttFpVnASIsPfjTlp97ppLGTj1U=;
+ b=ubGQYHaVl/I+onh6rY9WojwJTbH938BFlPO4FcPPlkODiwSZs6fb7YFokaHxoCEcnO
+ U6zuoNmXoV1wxICPRk0k3jI5FiD3GXubS1K6le4oH2KhmSTQ+gDpSwGF1hWg0sKVLL36
+ CX2e1q4YEPYJ/oP4jNNLQHVlPk4BsBqnlSUE2/EZ/BBZSw9t+vo1R22qU5k7iulvyf2I
+ mY//yQfCx5tPq7PUIc0E0k4UPHBSy8aC6w+C2u33nHaJVCPwqaJggxHfrYo1SN5xsuYC
+ yrxRuWb+bsCg9JTi3X71+cEA0p+7Uw6c9gW1kQfsFUFcEj7Nc+FysJ5GATO2GrjvrSOl
+ vAag==
+X-Gm-Message-State: AOAM532u34NCPXrut4YVm7S9kwMXqbdW1FvVovX4NVSUPRQEonzAuyzD
+ eS9S7f4xKTR1TOW6iN2pgMc=
+X-Google-Smtp-Source: ABdhPJwcdA24G6Cd01HsD0eemjnvTy4qFsaRW6JSBJ3Zhbi7SEB0630kvaIfGiynoPsRWd5pIP9biw==
+X-Received: by 2002:a63:5f88:: with SMTP id t130mr19367782pgb.6.1629473779239; 
+ Fri, 20 Aug 2021 08:36:19 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:ab38:89b9:1824:6a27])
+ by smtp.gmail.com with ESMTPSA id h24sm6684821pjv.3.2021.08.20.08.36.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Aug 2021 08:36:18 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
-Date: Fri, 20 Aug 2021 08:23:05 -0700
-Message-ID: <CACOAw_xcwZN_H7_zi7iMJh9HpzXnPd67fNAcxhu5UUSmJk7c1Q@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: 0.5 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On Fri, Aug 20,
- 2021 at 3:50 AM Chao Yu wrote: > > On 2021/8/20
- 11:52, Daeho Jeong wrote: > > +void iostat_update_and_unbind_ctx(struct bio
- *bio, int rw) > > +{ > > + struct bio_iostat_ctx *iostat_c [...] 
- Content analysis details:   (0.5 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.51 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.51 listed in wl.mailspike.net]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- 0.0 T_SPF_HELO_TEMPERROR   SPF: test of HELO record failed (temperror)
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1mH6Me-00Csry-3Q
-Subject: Re: [f2fs-dev] [PATCH v4 2/2] f2fs: introduce periodic iostat io
- latency traces
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 20 Aug 2021 08:36:14 -0700
+Message-Id: <20210820153615.275030-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.33.0.rc2.250.ged5fa647cd-goog
+MIME-Version: 1.0
+X-Spam-Score: 0.2 (/)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ (daeho43[at]gmail.com)
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit (daeho43[at]gmail.com)
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.181 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.215.181 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1mH6ZE-0005aS-RH
+Subject: [f2fs-dev] [PATCH v2] f2fs-tools: change fiemap print out format
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,49 +110,111 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 20, 2021 at 3:50 AM Chao Yu <chao@kernel.org> wrote:
->
-> On 2021/8/20 11:52, Daeho Jeong wrote:
-> > +void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
-> > +{
-> > +     struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
-> > +     int sync_type = bio->bi_opf & REQ_SYNC ? 0 : 1;
->
-> int sync_type = bio->bi_opf & REQ_SYNC ? 1 : 0;
->
-> Right?
+From: Daeho Jeong <daehojeong@google.com>
 
-This means just type, not boolean number. So, I set type 0 is sync and
-type 1 is async.
+Given fiemap way to print out extents in the kernel, we can correctly
+print the layout of each file in a unit of extent, not block. So, I
+changed fiemap print out way like below.
 
->
-> >   int f2fs_init_iostat(struct f2fs_sb_info *sbi)
-> >   {
-> >       /* init iostat info */
-> >       spin_lock_init(&sbi->iostat_lock);
-> > +     spin_lock_init(&sbi->iostat_lat_lock);
-> >       sbi->iostat_enable = false;
-> >       sbi->iostat_period_ms = DEFAULT_IOSTAT_PERIOD_MS;
-> > +     sbi->iostat_io_lat = f2fs_kzalloc(sbi, sizeof(struct iostat_lat_info),
-> > +                                     GFP_KERNEL);
-> > +     if (!sbi->iostat_io_lat)
-> > +             return -ENOMEM;
->
-> What do you think of just embedding iostat_io_lat structure into f2fs_sb_info
-> structure? it's minor thing though.
->
+Fiemap: offset = 0 len = 60
+	logical addr.    physical addr.   length           flags
+0	0000000000000000 00000020032df000 0000000000004000 00001008
+1	0000000000004000 00000020032e0000 0000000000004000 00001008
+2	0000000000008000 00000020032e1000 0000000000004000 00001008
+3	000000000000c000 00000020032e2000 0000000000004000 00001008
 
-I also wanted to do that, but if we embed this type, we need to define
-that structure in f2fs.h file.
-Is it okay with you?
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-> Thanks,
+---
+v2: merged two separate memset into one
+---
+ tools/f2fs_io/f2fs_io.c | 52 ++++++++++++++++++++++++++---------------
+ 1 file changed, 33 insertions(+), 19 deletions(-)
+
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 42dbd60..ae4d405 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -731,11 +731,11 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+ #if defined(HAVE_LINUX_FIEMAP_H) && defined(HAVE_LINUX_FS_H)
+ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ {
+-	unsigned count, i;
+-	int fd;
+-	__u64 phy_addr;
+-	struct fiemap *fm = xmalloc(sizeof(struct fiemap) +
+-			sizeof(struct fiemap_extent));
++	unsigned int i;
++	int fd, extents_mem_size;
++	u64 start, length;
++	u32 mapped_extents;
++	struct fiemap *fm = xmalloc(sizeof(struct fiemap));
+ 
+ 	if (argc != 4) {
+ 		fputs("Excess arguments\n\n", stderr);
+@@ -743,26 +743,40 @@ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+ 		exit(1);
+ 	}
+ 
+-	fm->fm_start = atoi(argv[1]) * F2FS_BLKSIZE;
+-	fm->fm_length = F2FS_BLKSIZE;
+-	fm->fm_extent_count = 1;
+-	count = atoi(argv[2]);
++	memset(fm, 0, sizeof(struct fiemap));
++	start = atoi(argv[1]) * F2FS_BLKSIZE;
++	length = atoi(argv[2]) * F2FS_BLKSIZE;
++	fm->fm_start = start;
++	fm->fm_length = length;
+ 
+ 	fd = xopen(argv[3], O_RDONLY | O_LARGEFILE, 0);
+ 
+-	printf("Fiemap: offset = %08"PRIx64" len = %d\n",
+-				(u64)fm->fm_start / F2FS_BLKSIZE, count);
+-	for (i = 0; i < count; i++) {
+-		if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
+-			die_errno("FIEMAP failed");
++	printf("Fiemap: offset = %"PRIu64" len = %"PRIu64"\n",
++				start / F2FS_BLKSIZE, length / F2FS_BLKSIZE);
++	if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
++		die_errno("FIEMAP failed");
++
++	mapped_extents = fm->fm_mapped_extents;
++	extents_mem_size = sizeof(struct fiemap_extent) * mapped_extents;
++	free(fm);
++	fm = xmalloc(sizeof(struct fiemap) + extents_mem_size);
+ 
+-		phy_addr = fm->fm_extents[0].fe_physical / F2FS_BLKSIZE;
+-		printf("%llu: %llu\n", fm->fm_start / F2FS_BLKSIZE, phy_addr);
++	memset(fm, 0, sizeof(struct fiemap) + extents_mem_size);
++	fm->fm_start = start;
++	fm->fm_length = length;
++	fm->fm_extent_count = mapped_extents;
+ 
+-		if (fm->fm_extents[0].fe_flags & FIEMAP_EXTENT_LAST)
+-			break;
++	if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
++		die_errno("FIEMAP failed");
+ 
+-		fm->fm_start += F2FS_BLKSIZE;
++	printf("\t%-17s%-17s%-17s%s\n", "logical addr.", "physical addr.", "length", "flags");
++	for (i = 0; i < fm->fm_mapped_extents; i++) {
++		printf("%d\t%.16llx %.16llx %.16llx %.8x\n", i,
++		    fm->fm_extents[i].fe_logical, fm->fm_extents[i].fe_physical,
++		    fm->fm_extents[i].fe_length, fm->fm_extents[i].fe_flags);
++
++		if (fm->fm_extents[i].fe_flags & FIEMAP_EXTENT_LAST)
++			break;
+ 	}
+ 	printf("\n");
+ 	free(fm);
+-- 
+2.33.0.rc2.250.ged5fa647cd-goog
+
 
 
 _______________________________________________
