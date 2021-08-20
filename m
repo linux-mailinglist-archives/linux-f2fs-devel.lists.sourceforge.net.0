@@ -2,94 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D30EC3F2A4F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 12:51:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E21383F2A56
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 12:53:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mH27B-00061h-Uy; Fri, 20 Aug 2021 10:51:09 +0000
+	id 1mH29i-0006dX-Hn; Fri, 20 Aug 2021 10:53:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mH277-00060W-Sg
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:51:05 +0000
+ (envelope-from <chao@kernel.org>) id 1mH29g-0006dF-VE
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:53:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pRHMrWt5baWFODehcO5qugxcRRewSOE85WunY4TY7tg=; b=UBvVc9k1TKDiqxNhJ81S2pGuiv
- v58GbhLW7gy2HxysKag2fMyJrVK5U/1YW/f4s2IRO06T8vfQiGfSZ5G9ds/izOa5XEQXRjkU9N6Nh
- NQRIO/wZWM+Z6rGyBwA6r5AOL7vaVu3D2PUgRbzmg+tot+aE6am0JPcwsCFBzrKToofI=;
+ bh=EsgW3LjjnP2JtziuExU4D244ugffHqUoiADxkMxck5Q=; b=jTDUzKKTZ0XGoR5e3soFpIY5lO
+ pwtJszQkgHBPScARQHgHc5ieeuLZ93ON+FvdQUlfPGSu/3wB2D36akUSC2Yxd19KGy5W2WoT6uXet
+ myGTlr9N17VFpSgmYzgEx2vvAYjCyYny29/peBe1RLJp3sDqoXBfYR5G2+mwLav0PC/c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pRHMrWt5baWFODehcO5qugxcRRewSOE85WunY4TY7tg=; b=MzjugY4NGCK8u62UCjcbS3T/4q
- m/e7WAsvt+0CqcJC1d8YMm9/395RRTqva1PywE12T8Fw2PqpifYnGFc5Su86DMOpjYoeBPp4nCWpd
- 95wkAhTEs3nlU45cMnTr+NGZl9I+A9YUMZuS5yAq/d0gEqvm7QOcqC2DbzKILfo91340=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EsgW3LjjnP2JtziuExU4D244ugffHqUoiADxkMxck5Q=; b=T
+ vMCX1QRSngNEf/bioZKjbHQKoOS73S4+sTNXkF16o/0qvyUFEayKGasoB5Hm+XRWjaeBodojsLXs+
+ +8XfvcQae70YvqmXe081XPIoW+AMV9Ox+94KZIAl/aPK9ERvPXdhnyJSqppehry/vx7K3IMXygU4u
+ RriQ8CpAPi8RxQsQ=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mH273-00Ccc2-LM
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:51:05 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3C00B60FDA;
- Fri, 20 Aug 2021 10:50:55 +0000 (UTC)
+ id 1mH29f-0004ey-TU
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:53:44 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A39F260C3E;
+ Fri, 20 Aug 2021 10:53:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629456656;
- bh=q8gLSnrTAf3x+Wghr7BlfshsmKBhWmCOudXqUTpNQXk=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=L7lb99ewy3BYP6mgeycwTX79zyznsksvDG7mQHW/mjHQy1MiO9O6wLT9G6A0qJ/tv
- CHKdyHe1KBGGtno1+jq8yN0f0YUd9q9U8Wxs1mYfa6D2xbqRIuxNqh3vmrRC52GdgU
- C/TWLHkTBczm78vSlcx6ogH9OVLpZaJkYI5pkGYW3WBmq9rYmU/8QpCZN5o2hDUA3L
- HwO757h9VJlZjl8Z2on1nEBvMMVhbXlZ8PZFChf+34fSgvp+ypTx0gttNuBB22y5PE
- Hbgs6PDnft4a2ZMo90CW+QuD/zJqu+bfxZEMn2qzS06vTlmH5eIpIyfIOabkYinoGA
- 5bDlJdeybYyuQ==
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20210820035229.216975-1-daeho43@gmail.com>
- <20210820035229.216975-2-daeho43@gmail.com>
+ s=k20201202; t=1629456813;
+ bh=VlCFJfF9lFTl1dJuE2e2uzICbbzwsCfyLaRHpi2W6t8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=gvp5NIvIFYC2SgsUYcZNqtZTxTaEyKvRmu0ajo8wMC0m8WN9i5Tb6uj1/56KHNqqE
+ ijWpxW2ag+TjgaB7odO+jfkzh/qGdrQicsf/Mdsw1i2TGToRA7iw+z0KXnwr1sxgkL
+ 05nJvsqnPJheC7AT2FzJX9lkwJgeRvULo3tjlLIJtFndvpKBhExtaks2rRFpb4dtjv
+ 76VCvqvCgx+EAN8ZUV0DtTRqvN0sSGArbVnhBHBtJAQtNqgVcnQBGRCIs139eoeGhH
+ JtYbgBrXFk6uiPDzNAtHXM7HmmbsDaWLRd/XcfNM1Lej0xRkCG6Wbx6sURiWQgutAM
+ r7IrDPP5OT+QA==
 From: Chao Yu <chao@kernel.org>
-Message-ID: <48725f58-1a48-73f3-80cf-a0c5efc3b470@kernel.org>
-Date: Fri, 20 Aug 2021 18:50:54 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+To: jaegeuk@kernel.org
+Date: Fri, 20 Aug 2021 18:53:26 +0800
+Message-Id: <20210820105326.26922-1-chao@kernel.org>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <20210820035229.216975-2-daeho43@gmail.com>
-Content-Language: en-US
-X-Spam-Score: -7.9 (-------)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On 2021/8/20 11:52,
- Daeho Jeong wrote: > +void iostat_update_and_unbind_ctx(struct
- bio *bio, int rw) > +{ > + struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
- > + int sync_type = bio->bi_opf & REQ [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
+X-Spam-Score: -1.5 (-)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mH273-00Ccc2-LM
-Subject: Re: [f2fs-dev] [PATCH v4 2/2] f2fs: introduce periodic iostat io
- latency traces
+ -0.7 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mH29f-0004ey-TU
+Subject: [f2fs-dev] [PATCH] f2fs: enable realtime discard iff device
+ supports discard
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,37 +81,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/8/20 11:52, Daeho Jeong wrote:
-> +void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
-> +{
-> +	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
-> +	int sync_type = bio->bi_opf & REQ_SYNC ? 0 : 1;
+Let's only enable realtime discard if and only if device supports
+discard functionality.
 
-int sync_type = bio->bi_opf & REQ_SYNC ? 1 : 0;
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/super.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-Right?
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index f92c582f8008..597e5dbc2f6d 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -660,10 +660,14 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 				return -EINVAL;
+ 			break;
+ 		case Opt_discard:
++			if (!f2fs_hw_support_discard(sbi)) {
++				f2fs_warn(sbi, "device does not support discard");
++				return -EINVAL;
++			}
+ 			set_opt(sbi, DISCARD);
+ 			break;
+ 		case Opt_nodiscard:
+-			if (f2fs_sb_has_blkzoned(sbi)) {
++			if (f2fs_hw_should_discard(sbi)) {
+ 				f2fs_warn(sbi, "discard is required for zoned block devices");
+ 				return -EINVAL;
+ 			}
+@@ -1999,7 +2003,8 @@ static void default_options(struct f2fs_sb_info *sbi)
+ 	F2FS_OPTION(sbi).unusable_cap = 0;
+ 	sbi->sb->s_flags |= SB_LAZYTIME;
+ 	set_opt(sbi, FLUSH_MERGE);
+-	set_opt(sbi, DISCARD);
++	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
++		set_opt(sbi, DISCARD);
+ 	if (f2fs_sb_has_blkzoned(sbi)) {
+ 		F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
+ 		F2FS_OPTION(sbi).discard_unit = DISCARD_UNIT_SECTION;
+-- 
+2.32.0
 
->   int f2fs_init_iostat(struct f2fs_sb_info *sbi)
->   {
->   	/* init iostat info */
->   	spin_lock_init(&sbi->iostat_lock);
-> +	spin_lock_init(&sbi->iostat_lat_lock);
->   	sbi->iostat_enable = false;
->   	sbi->iostat_period_ms = DEFAULT_IOSTAT_PERIOD_MS;
-> +	sbi->iostat_io_lat = f2fs_kzalloc(sbi, sizeof(struct iostat_lat_info),
-> +					GFP_KERNEL);
-> +	if (!sbi->iostat_io_lat)
-> +		return -ENOMEM;
-
-What do you think of just embedding iostat_io_lat structure into f2fs_sb_info
-structure? it's minor thing though.
-
-Thanks,
 
 
 _______________________________________________
