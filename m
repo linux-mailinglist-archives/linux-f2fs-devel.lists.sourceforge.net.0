@@ -2,88 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1555A3F2A6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 12:57:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77AB23F2ECE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Aug 2021 17:21:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mH2DA-0007JE-VK; Fri, 20 Aug 2021 10:57:20 +0000
+	id 1mH6KJ-0008Bj-Iq; Fri, 20 Aug 2021 15:20:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mH2DA-0007J3-Hx
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:57:20 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <daeho43@gmail.com>) id 1mH6KI-0008Bc-Df
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:20:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8EtT7WFA0rBXKs1CdYwdy59TsDiMO25z7GO5ZEL9Yzw=; b=ZAyHp7aG/WTD639t12wunQVJWv
- Fa3l81BMvSyECAj1Hfbo/Xw7UvmSQ7a3EEAuZzoIfoFOFg3oT+XJ0mefncl0yKbzgFZnCUoYGj+7f
- PiF9XOEpXpE0/zlUnggL1b/JPW7QoLwptvPZQjh+/RyKvdKe7Mg8gJI+/TExWIND37Gc=;
+ bh=+3Z4SJ92yMv1cU71E0Fc+Pt/WE6+UKZ4tmdm2fUYN4I=; b=MfrOYM+Dd3GqSWrpNuaUMgWgE1
+ egkrIeRQ3/uDKEy3EsqthaTAKPghkPk7v/Vkh2QzJroQtAlBZ8YQpzEuCw6j48muSlYbBlejeyV+K
+ v6+IfC0z2hJQsnIeFsvjAlmhq4XdrLFAXgYO25953hs+ZO9+FDmSgjGPa4GW9c5DgO8o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8EtT7WFA0rBXKs1CdYwdy59TsDiMO25z7GO5ZEL9Yzw=; b=L7iJThiuofdxouxHnWklvAg3+i
- /45OgFbRmvlozoumnnhzCIX3pcI4zAfD4mJ6sSAnqtcpX+EX2hi3Zh4Imd/j3bPak7q5kO0wnEWZ7
- x5KolXp0tlF8h/Vatx+N1Zr8mxHouZQMFZK3a2fp/ItD/tASXSxNg6o2fRGsL9gSKj9E=;
-Received: from mail.kernel.org ([198.145.29.99])
+ bh=+3Z4SJ92yMv1cU71E0Fc+Pt/WE6+UKZ4tmdm2fUYN4I=; b=LjapAWQyHwwL3j3DQdtui7+wEz
+ bTtrsSX4NOrLenf2GKXVT6fvA8nzI9iMNLQqwsTHG9WSvZzD6mnjpB0+teTfE61fpGq1pY9rPmlqy
+ L9TGOUWCPQH8opoGJjbLqjQSfABP8NsCKTRLBXdHmlD3sKMpnSdG0YznWU7FoZouQHFg=;
+Received: from mail-lf1-f47.google.com ([209.85.167.47])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mH2Co-00Cd6O-HX
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 10:57:20 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8159760FE8;
- Fri, 20 Aug 2021 10:56:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629457013;
- bh=tnUmwMltPe76cnpXJs1vDwlS3q+06ae8aUx6mQce/hM=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=pQZzy2u3CwuIRLosI8sJkJL3l1HKpF4kyLfHTeG/RnIA4T27G/j+mEXGnkm0Ww4vf
- 4KL5w3WYLP9iz7LrHNaTM1yCBc0aY/f9+bdkRDVWLs/bJ+k7+HwmWAQbxkHYM/3VxB
- hK2HG/9LLG+7xagzozQbpUtXsxAV/IguYRimcyKs4K9DKu/W8L/fcK48OYPhZ7907r
- awYRJoUUzUh8+h2Au+hu40bVWGAV+a3m3zujJx2dqwJUeNbL7c9atfd2je0xPYC3Uy
- SqYz44zHJjnJY7Twell8qC5c/+iprQxQsIeeOLsPiwzZbN3Wj/n9tUeOZM9/BJYSgw
- RDvki3hD2NgtA==
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20190216222645.18341-1-chao@kernel.org>
- <4c826d7c-0bd3-a63f-23f6-f15f8767719d@huawei.com>
- <20190301175502.GA8246@jaegeuk-macbookpro.roam.corp.google.com>
- <5421e7f9-1d56-dccb-3d97-cf3b570bc441@huawei.com>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <ed1fd5ad-76e5-727c-eca8-09c7916732f7@kernel.org>
-Date: Fri, 20 Aug 2021 18:56:51 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1mH6KH-00Csk4-MW
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 15:20:58 +0000
+Received: by mail-lf1-f47.google.com with SMTP id o1so3099014lft.9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 20 Aug 2021 08:20:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+3Z4SJ92yMv1cU71E0Fc+Pt/WE6+UKZ4tmdm2fUYN4I=;
+ b=fGtrdnFpPtcwTxnxcEqd4hXGv5m/IwXMu6zHgsjkRMyBail4gdmQ/puuHj/QWaCVCq
+ B2+s+lrSUego0C1JxtiO6EjLCGAn/8Ck/cQE1W63CW1z2crAi+dg3BUldWvoeIg9jSu2
+ Fvmiu9DV0v9BJGeAeuge0DCOYk2uKDPdFAq3Noc5iZ2x1NFtcGPHyzds0c4H3NNOprhj
+ 4wpO9zq2tB5rTwrwrld2vmyKyjFpURdVstDegxPmx9/2j8+oDmc1yas3l1RDJG8IE3NC
+ ryOzksZoKWzIW0A23CgHMu8d9BZvtMw6+B2AmKdorepfZulAzBJHoIq6XjkQ+RZE91f6
+ tbmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+3Z4SJ92yMv1cU71E0Fc+Pt/WE6+UKZ4tmdm2fUYN4I=;
+ b=IwkH3jRiw1vLMKrK4tord0/mnAvWw6KzfaK1aGFlk3fQCOvr+OkeTXTkZ3RbmWlF8r
+ be/rw+iEKy8dtIwky3kJxoZJrvUdvSqSDTNsfaRKk+lxFGvUSiiDfdtJLjHWJA8oQFaW
+ F7AX994tsWhanG8APzLZ3v3FA4tB08v8A7R7RbwElTwpV3Uc96iVioL57QZ4+p+912gA
+ u0T9zYV5IP2TTptFP9+zd0KHSRZI+AZKkAijebdhRxgU4EB7RmDs7L2HNNrjzWhF9yeh
+ 2IT2TbVjnhVi4MYw1WISYihctfapx7/OeD668Bk60MmuN4QUusD6/iYsGz1ebucZTY/g
+ DHVQ==
+X-Gm-Message-State: AOAM532TXOg0Eyb9PygQLCdYEbGQE1uMMAqk4XEwU7ckSeJnVI8uyZ4S
+ v0S/n//mTwW2k2XOLFJmnO/R3uKuVB6JD3qANFU=
+X-Google-Smtp-Source: ABdhPJwhgWUpB24B5xOZbrVx5H/6RcYKALsAPmKxUwkQH/ZVyccnhTyVnPNEs0g+SZBhNeYKkeBze0gjCredrfZxJ28=
+X-Received: by 2002:a05:6512:c08:: with SMTP id
+ z8mr15321526lfu.533.1629472851101; 
+ Fri, 20 Aug 2021 08:20:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <5421e7f9-1d56-dccb-3d97-cf3b570bc441@huawei.com>
-Content-Language: en-US
-X-Spam-Score: -6.8 (------)
+References: <20210808215234.1939266-1-daeho43@gmail.com>
+ <5cce41d6-d59a-0596-6d14-e313aa91c78b@kernel.org>
+In-Reply-To: <5cce41d6-d59a-0596-6d14-e313aa91c78b@kernel.org>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Fri, 20 Aug 2021 08:20:39 -0700
+Message-ID: <CACOAw_zdL+3TPxJfsrZ0+nMHBbzU+uHNcp4vych1QCMMpvUnug@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2019/3/4 14:27, Chao Yu wrote: > On 2019/3/2 1:55, Jaegeuk
- Kim wrote: >> On 02/28, Chao Yu wrote: >>> Ping, >>> >>> Could you please
- try this new version? >> >> It's in the queue, and I'll test thi [...] 
- Content analysis details:   (-6.8 points, 6.0 required)
+ Content preview:  On Fri, Aug 20,
+ 2021 at 3:15 AM Chao Yu wrote: > > On 2021/8/9
+ 5:52, Daeho Jeong wrote: > > From: Daeho Jeong > > > > Given fiemap way to
+ print out extents in the kernel, we can correctly > > prin [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.167.47 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.47 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1mH2Co-00Cd6O-HX
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: rebuild nat_bits during umount
+X-Headers-End: 1mH6KH-00Csk4-MW
+Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: change fiemap print out format
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,306 +118,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2019/3/4 14:27, Chao Yu wrote:
-> On 2019/3/2 1:55, Jaegeuk Kim wrote:
->> On 02/28, Chao Yu wrote:
->>> Ping,
->>>
->>> Could you please try this new version?
->>
->> It's in the queue, and I'll test this after the next pull request.
-> 
-> Okay. :)
+On Fri, Aug 20, 2021 at 3:15 AM Chao Yu <chao@kernel.org> wrote:
+>
+> On 2021/8/9 5:52, Daeho Jeong wrote:
+> > From: Daeho Jeong <daehojeong@google.com>
+> >
+> > Given fiemap way to print out extents in the kernel, we can correctly
+> > print the layout of each file in a unit of extent, not block. So, I
+> > changed fiemap print out way like below.
+> >
+> > Fiemap: offset = 0 len = 60
+> >       logical addr.    physical addr.   length           flags
+> > 0     0000000000000000 00000020032df000 0000000000004000 00001008
+> > 1     0000000000004000 00000020032e0000 0000000000004000 00001008
+> > 2     0000000000008000 00000020032e1000 0000000000004000 00001008
+> > 3     000000000000c000 00000020032e2000 0000000000004000 00001008
+> >
+> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> > ---
+> >   tools/f2fs_io/f2fs_io.c | 53 ++++++++++++++++++++++++++---------------
+> >   1 file changed, 34 insertions(+), 19 deletions(-)
+> >
+> > diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> > index 42dbd60..0d2948e 100644
+> > --- a/tools/f2fs_io/f2fs_io.c
+> > +++ b/tools/f2fs_io/f2fs_io.c
+> > @@ -731,11 +731,11 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+> >   #if defined(HAVE_LINUX_FIEMAP_H) && defined(HAVE_LINUX_FS_H)
+> >   static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+> >   {
+> > -     unsigned count, i;
+> > -     int fd;
+> > -     __u64 phy_addr;
+> > -     struct fiemap *fm = xmalloc(sizeof(struct fiemap) +
+> > -                     sizeof(struct fiemap_extent));
+> > +     unsigned int i;
+> > +     int fd, extents_mem_size;
+> > +     u64 start, length;
+> > +     u32 mapped_extents;
+> > +     struct fiemap *fm = xmalloc(sizeof(struct fiemap));
+> >
+> >       if (argc != 4) {
+> >               fputs("Excess arguments\n\n", stderr);
+> > @@ -743,26 +743,41 @@ static void do_fiemap(int argc, char **argv, const struct cmd_desc *cmd)
+> >               exit(1);
+> >       }
+> >
+> > -     fm->fm_start = atoi(argv[1]) * F2FS_BLKSIZE;
+> > -     fm->fm_length = F2FS_BLKSIZE;
+> > -     fm->fm_extent_count = 1;
+> > -     count = atoi(argv[2]);
+> > +     memset(fm, 0, sizeof(struct fiemap));
+> > +     start = atoi(argv[1]) * F2FS_BLKSIZE;
+> > +     length = atoi(argv[2]) * F2FS_BLKSIZE;
+> > +     fm->fm_start = start;
+> > +     fm->fm_length = length;
+> >
+> >       fd = xopen(argv[3], O_RDONLY | O_LARGEFILE, 0);
+> >
+> > -     printf("Fiemap: offset = %08"PRIx64" len = %d\n",
+> > -                             (u64)fm->fm_start / F2FS_BLKSIZE, count);
+> > -     for (i = 0; i < count; i++) {
+> > -             if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
+> > -                     die_errno("FIEMAP failed");
+> > +     printf("Fiemap: offset = %"PRIu64" len = %"PRIu64"\n",
+> > +                             start / F2FS_BLKSIZE, length / F2FS_BLKSIZE);
+> > +     if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
+> > +             die_errno("FIEMAP failed");
+> > +
+> > +     mapped_extents = fm->fm_mapped_extents;
+> > +     extents_mem_size = sizeof(struct fiemap_extent) * mapped_extents;
+> > +     free(fm);
+> > +     fm = xmalloc(sizeof(struct fiemap) + extents_mem_size);
+> >
+> > -             phy_addr = fm->fm_extents[0].fe_physical / F2FS_BLKSIZE;
+> > -             printf("%llu: %llu\n", fm->fm_start / F2FS_BLKSIZE, phy_addr);
+> > +     memset(fm, 0, sizeof(struct fiemap));
+> > +     memset(fm->fm_extents, 0, extents_mem_size);
+>
+> Is that equals to memset(fm, 0, sizeof(struct fiemap) + extents_mem_size);?
+>
 
-I picked up this ancient patch from forgotten corner of my dev tree. :)
+Oh, you're right~
 
-Thanks,
-
-> 
-> Thanks,
-> 
->>
->>>
->>> On 2019/2/17 6:26, Chao Yu wrote:
->>>> From: Chao Yu <yuchao0@huawei.com>
->>>>
->>>> If all free_nat_bitmap are available, we can rebuild nat_bits from
->>>> free_nat_bitmap entirely during umount, let's make another chance
->>>> to reenable nat_bits for image.
->>>>
->>>> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->>>> ---
->>>> v3:
->>>> - fix to remove nat journal during umount.
->>>>   fs/f2fs/checkpoint.c | 23 +++++++++----
->>>>   fs/f2fs/f2fs.h       | 29 ++--------------
->>>>   fs/f2fs/node.c       | 82 +++++++++++++++++++++++++++++++++++++-------
->>>>   3 files changed, 89 insertions(+), 45 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>>> index 10a3ada28715..b4c9de4e6eb0 100644
->>>> --- a/fs/f2fs/checkpoint.c
->>>> +++ b/fs/f2fs/checkpoint.c
->>>> @@ -1225,12 +1225,22 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
->>>>   	unsigned long flags;
->>>>   
->>>> -	spin_lock_irqsave(&sbi->cp_lock, flags);
->>>> +	if (cpc->reason & CP_UMOUNT) {
->>>> +		if (le32_to_cpu(ckpt->cp_pack_total_block_count) >
->>>> +			sbi->blocks_per_seg - NM_I(sbi)->nat_bits_blocks) {
->>>> +			clear_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> +			f2fs_msg(sbi->sb, KERN_NOTICE,
->>>> +				"Disable nat_bits due to no space");
->>>> +		} else if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG) &&
->>>> +						f2fs_nat_bitmap_enabled(sbi)) {
->>>> +			f2fs_enable_nat_bits(sbi);
->>>> +			set_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> +			f2fs_msg(sbi->sb, KERN_NOTICE,
->>>> +				"Rebuild and enable nat_bits");
->>>> +		}
->>>> +	}
->>>>   
->>>> -	if ((cpc->reason & CP_UMOUNT) &&
->>>> -			le32_to_cpu(ckpt->cp_pack_total_block_count) >
->>>> -			sbi->blocks_per_seg - NM_I(sbi)->nat_bits_blocks)
->>>> -		disable_nat_bits(sbi, false);
->>>> +	spin_lock_irqsave(&sbi->cp_lock, flags);
->>>>   
->>>>   	if (cpc->reason & CP_TRIMMED)
->>>>   		__set_ckpt_flags(ckpt, CP_TRIMMED_FLAG);
->>>> @@ -1395,7 +1405,8 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	start_blk = __start_cp_next_addr(sbi);
->>>>   
->>>>   	/* write nat bits */
->>>> -	if (enabled_nat_bits(sbi, cpc)) {
->>>> +	if ((cpc->reason & CP_UMOUNT) &&
->>>> +			is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG)) {
->>>>   		__u64 cp_ver = cur_cp_version(ckpt);
->>>>   		block_t blk;
->>>>   
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index c0d30810ef8a..a543354fc6bf 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -1615,33 +1615,6 @@ static inline void clear_ckpt_flags(struct f2fs_sb_info *sbi, unsigned int f)
->>>>   	spin_unlock_irqrestore(&sbi->cp_lock, flags);
->>>>   }
->>>>   
->>>> -static inline void disable_nat_bits(struct f2fs_sb_info *sbi, bool lock)
->>>> -{
->>>> -	unsigned long flags;
->>>> -
->>>> -	/*
->>>> -	 * In order to re-enable nat_bits we need to call fsck.f2fs by
->>>> -	 * set_sbi_flag(sbi, SBI_NEED_FSCK). But it may give huge cost,
->>>> -	 * so let's rely on regular fsck or unclean shutdown.
->>>> -	 */
->>>> -
->>>> -	if (lock)
->>>> -		spin_lock_irqsave(&sbi->cp_lock, flags);
->>>> -	__clear_ckpt_flags(F2FS_CKPT(sbi), CP_NAT_BITS_FLAG);
->>>> -	kvfree(NM_I(sbi)->nat_bits);
->>>> -	NM_I(sbi)->nat_bits = NULL;
->>>> -	if (lock)
->>>> -		spin_unlock_irqrestore(&sbi->cp_lock, flags);
->>>> -}
->>>> -
->>>> -static inline bool enabled_nat_bits(struct f2fs_sb_info *sbi,
->>>> -					struct cp_control *cpc)
->>>> -{
->>>> -	bool set = is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> -
->>>> -	return (cpc) ? (cpc->reason & CP_UMOUNT) && set : set;
->>>> -}
->>>> -
->>>>   static inline void f2fs_lock_op(struct f2fs_sb_info *sbi)
->>>>   {
->>>>   	down_read(&sbi->cp_rwsem);
->>>> @@ -2970,6 +2943,7 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from);
->>>>   int f2fs_truncate_xattr_node(struct inode *inode);
->>>>   int f2fs_wait_on_node_pages_writeback(struct f2fs_sb_info *sbi,
->>>>   					unsigned int seq_id);
->>>> +bool f2fs_nat_bitmap_enabled(struct f2fs_sb_info *sbi);
->>>>   int f2fs_remove_inode_page(struct inode *inode);
->>>>   struct page *f2fs_new_inode_page(struct inode *inode);
->>>>   struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs);
->>>> @@ -2993,6 +2967,7 @@ int f2fs_recover_xattr_data(struct inode *inode, struct page *page);
->>>>   int f2fs_recover_inode_page(struct f2fs_sb_info *sbi, struct page *page);
->>>>   int f2fs_restore_node_summary(struct f2fs_sb_info *sbi,
->>>>   			unsigned int segno, struct f2fs_summary_block *sum);
->>>> +void f2fs_enable_nat_bits(struct f2fs_sb_info *sbi);
->>>>   int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
->>>>   int f2fs_build_node_manager(struct f2fs_sb_info *sbi);
->>>>   void f2fs_destroy_node_manager(struct f2fs_sb_info *sbi);
->>>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
->>>> index f6ff84e29749..e364c6a84f3c 100644
->>>> --- a/fs/f2fs/node.c
->>>> +++ b/fs/f2fs/node.c
->>>> @@ -2038,6 +2038,24 @@ static void __move_free_nid(struct f2fs_sb_info *sbi, struct free_nid *i,
->>>>   	}
->>>>   }
->>>>   
->>>> +bool f2fs_nat_bitmap_enabled(struct f2fs_sb_info *sbi)
->>>> +{
->>>> +	struct f2fs_nm_info *nm_i = NM_I(sbi);
->>>> +	unsigned int i;
->>>> +	bool ret = true;
->>>> +
->>>> +	down_read(&nm_i->nat_tree_lock);
->>>> +	for (i = 0; i < nm_i->nat_blocks; i++) {
->>>> +		if (!test_bit_le(i, nm_i->nat_block_bitmap)) {
->>>> +			ret = false;
->>>> +			break;
->>>> +		}
->>>> +	}
->>>> +	up_read(&nm_i->nat_tree_lock);
->>>> +
->>>> +	return ret;
->>>> +}
->>>> +
->>>>   static void update_free_nid_bitmap(struct f2fs_sb_info *sbi, nid_t nid,
->>>>   							bool set, bool build)
->>>>   {
->>>> @@ -2698,7 +2716,7 @@ static void __update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>>   	int valid = 0;
->>>>   	int i = 0;
->>>>   
->>>> -	if (!enabled_nat_bits(sbi, NULL))
->>>> +	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>>   		return;
->>>>   
->>>>   	if (nat_index == 0) {
->>>> @@ -2722,6 +2740,43 @@ static void __update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>>   		__clear_bit_le(nat_index, nm_i->full_nat_bits);
->>>>   }
->>>>   
->>>> +void f2fs_enable_nat_bits(struct f2fs_sb_info *sbi)
->>>> +{
->>>> +	struct f2fs_nm_info *nm_i = NM_I(sbi);
->>>> +	int nat_ofs;
->>>> +
->>>> +	down_read(&nm_i->nat_tree_lock);
->>>> +
->>>> +	for (nat_ofs = 0; nat_ofs < nm_i->nat_blocks; nat_ofs++) {
->>>> +		int valid = 0, nid_ofs = 0;
->>>> +
->>>> +		if (nat_ofs == 0) {
->>>> +			valid = 1;
->>>> +			nid_ofs = 1;
->>>> +		}
->>>> +
->>>> +		for (; nid_ofs < NAT_ENTRY_PER_BLOCK; nid_ofs++) {
->>>> +			if (!test_bit_le(nid_ofs,
->>>> +					nm_i->free_nid_bitmap[nat_ofs]))
->>>> +				valid++;
->>>> +		}
->>>> +
->>>> +		if (valid == 0) {
->>>> +			__set_bit_le(nat_ofs, nm_i->empty_nat_bits);
->>>> +			__clear_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> +			continue;
->>>> +		}
->>>> +
->>>> +		__clear_bit_le(nat_ofs, nm_i->empty_nat_bits);
->>>> +		if (valid == NAT_ENTRY_PER_BLOCK)
->>>> +			__set_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> +		else
->>>> +			__clear_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> +	}
->>>> +
->>>> +	up_read(&nm_i->nat_tree_lock);
->>>> +}
->>>> +
->>>>   static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->>>>   		struct nat_entry_set *set, struct cp_control *cpc)
->>>>   {
->>>> @@ -2738,7 +2793,7 @@ static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->>>>   	 * #1, flush nat entries to journal in current hot data summary block.
->>>>   	 * #2, flush nat entries to nat page.
->>>>   	 */
->>>> -	if (enabled_nat_bits(sbi, cpc) ||
->>>> +	if ((cpc->reason & CP_UMOUNT) ||
->>>>   		!__has_cursum_space(journal, set->entry_cnt, NAT_JOURNAL))
->>>>   		to_journal = false;
->>>>   
->>>> @@ -2813,7 +2868,7 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	int err = 0;
->>>>   
->>>>   	/* during unmount, let's flush nat_bits before checking dirty_nat_cnt */
->>>> -	if (enabled_nat_bits(sbi, cpc)) {
->>>> +	if (cpc->reason & CP_UMOUNT) {
->>>>   		down_write(&nm_i->nat_tree_lock);
->>>>   		remove_nats_in_journal(sbi);
->>>>   		up_write(&nm_i->nat_tree_lock);
->>>> @@ -2829,7 +2884,7 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	 * entries, remove all entries from journal and merge them
->>>>   	 * into nat entry set.
->>>>   	 */
->>>> -	if (enabled_nat_bits(sbi, cpc) ||
->>>> +	if ((cpc->reason & CP_UMOUNT) ||
->>>>   		!__has_cursum_space(journal, nm_i->dirty_nat_cnt, NAT_JOURNAL))
->>>>   		remove_nats_in_journal(sbi);
->>>>   
->>>> @@ -2864,15 +2919,18 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
->>>>   	__u64 cp_ver = cur_cp_version(ckpt);
->>>>   	block_t nat_bits_addr;
->>>>   
->>>> -	if (!enabled_nat_bits(sbi, NULL))
->>>> -		return 0;
->>>> -
->>>>   	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
->>>>   	nm_i->nat_bits = f2fs_kzalloc(sbi,
->>>>   			nm_i->nat_bits_blocks << F2FS_BLKSIZE_BITS, GFP_KERNEL);
->>>>   	if (!nm_i->nat_bits)
->>>>   		return -ENOMEM;
->>>>   
->>>> +	nm_i->full_nat_bits = nm_i->nat_bits + 8;
->>>> +	nm_i->empty_nat_bits = nm_i->full_nat_bits + nat_bits_bytes;
->>>> +
->>>> +	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>> +		return 0;
->>>> +
->>>>   	nat_bits_addr = __start_cp_addr(sbi) + sbi->blocks_per_seg -
->>>>   						nm_i->nat_bits_blocks;
->>>>   	for (i = 0; i < nm_i->nat_bits_blocks; i++) {
->>>> @@ -2889,13 +2947,13 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
->>>>   
->>>>   	cp_ver |= (cur_cp_crc(ckpt) << 32);
->>>>   	if (cpu_to_le64(cp_ver) != *(__le64 *)nm_i->nat_bits) {
->>>> -		disable_nat_bits(sbi, true);
->>>> +		clear_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> +		f2fs_msg(sbi->sb, KERN_NOTICE,
->>>> +			"Disable nat_bits due to incorrect cp_ver (%llu, %llu)",
->>>> +			cp_ver, le64_to_cpu(*(__le64 *)nm_i->nat_bits));
->>>>   		return 0;
->>>>   	}
->>>>   
->>>> -	nm_i->full_nat_bits = nm_i->nat_bits + 8;
->>>> -	nm_i->empty_nat_bits = nm_i->full_nat_bits + nat_bits_bytes;
->>>> -
->>>>   	f2fs_msg(sbi->sb, KERN_NOTICE, "Found nat_bits in checkpoint");
->>>>   	return 0;
->>>>   }
->>>> @@ -2906,7 +2964,7 @@ static inline void load_free_nid_bitmap(struct f2fs_sb_info *sbi)
->>>>   	unsigned int i = 0;
->>>>   	nid_t nid, last_nid;
->>>>   
->>>> -	if (!enabled_nat_bits(sbi, NULL))
->>>> +	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>>   		return;
->>>>   
->>>>   	for (i = 0; i < nm_i->nat_blocks; i++) {
->>>>
->>
->> .
->>
-> 
+> > +     fm->fm_start = start;
+> > +     fm->fm_length = length;
+> > +     fm->fm_extent_count = mapped_extents;
+> >
+> > -             if (fm->fm_extents[0].fe_flags & FIEMAP_EXTENT_LAST)
+> > -                     break;
+> > +     if (ioctl(fd, FS_IOC_FIEMAP, fm) < 0)
+> > +             die_errno("FIEMAP failed");
+> >
+> > -             fm->fm_start += F2FS_BLKSIZE;
+> > +     printf("\t%-17s%-17s%-17s%s\n", "logical addr.", "physical addr.", "length", "flags");
+> > +     for (i = 0; i < fm->fm_mapped_extents; i++) {
+> > +             printf("%d\t%.16llx %.16llx %.16llx %.8x\n", i,
+> > +                 fm->fm_extents[i].fe_logical, fm->fm_extents[i].fe_physical,
+> > +                 fm->fm_extents[i].fe_length, fm->fm_extents[i].fe_flags);
+> > +
+> > +             if (fm->fm_extents[i].fe_flags & FIEMAP_EXTENT_LAST)
+> > +                     break;
+> >       }
+> >       printf("\n");
+> >       free(fm);
+> >
 
 
 _______________________________________________
